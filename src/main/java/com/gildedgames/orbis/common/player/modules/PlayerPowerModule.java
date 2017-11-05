@@ -27,6 +27,8 @@ public class PlayerPowerModule extends PlayerAetherModule
 
 	private final GodPowerSelect selectPower;
 
+	private final GodPowerSpectator spectatorPower;
+
 	private int currentPowerIndex;
 
 	public PlayerPowerModule(final PlayerAether playerAether)
@@ -39,6 +41,7 @@ public class PlayerPowerModule extends PlayerAetherModule
 		this.replacePower = new GodPowerReplace(this.getWorld());
 		this.blueprintPower = new GodPowerBlueprint(this.getWorld());
 		this.selectPower = new GodPowerSelect(this.getWorld());
+		this.spectatorPower = new GodPowerSpectator(this.getWorld());
 
 		final Collection<IGodPower> powers = new ArrayList<>();
 
@@ -48,8 +51,14 @@ public class PlayerPowerModule extends PlayerAetherModule
 		powers.add(this.replacePower);
 		powers.add(this.blueprintPower);
 		powers.add(this.selectPower);
+		powers.add(this.spectatorPower);
 
 		this.powers = powers.toArray(new IGodPower[powers.size()]);
+	}
+
+	public GodPowerSpectator getSpectatorPower()
+	{
+		return this.spectatorPower;
 	}
 
 	public GodPowerReplace getReplacePower()
@@ -84,11 +93,6 @@ public class PlayerPowerModule extends PlayerAetherModule
 		return this.powers[this.currentPowerIndex];
 	}
 
-	public void setCurrentPower(int powerIndex)
-	{
-		this.currentPowerIndex = powerIndex;
-	}
-
 	public void setCurrentPower(final Class<? extends IGodPower> clazz)
 	{
 		int foundIndex = -1;
@@ -113,6 +117,11 @@ public class PlayerPowerModule extends PlayerAetherModule
 				NetworkingAether.sendPacketToServer(new PacketChangePower(this.currentPowerIndex));
 			}
 		}
+	}
+
+	public void setCurrentPower(int powerIndex)
+	{
+		this.currentPowerIndex = powerIndex;
 	}
 
 	public int getCurrentPowerIndex()

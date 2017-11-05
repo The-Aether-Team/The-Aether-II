@@ -26,7 +26,7 @@ public class GodModeOverlay implements IOverlay
 	@Override
 	public boolean isEnabled()
 	{
-		return mc.world != null && PlayerOrbisModule.get(mc.player).inDeveloperMode();
+		return mc.world != null && PlayerOrbisModule.get(mc.player).inDeveloperMode() && mc.player.isCreative();
 	}
 
 	@Override
