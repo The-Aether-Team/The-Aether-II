@@ -194,19 +194,31 @@ public class OrbisProject implements IProject
 			 * Otherwise, uses URI and accesses from MC server resource
 			 * so it works when stored in a mod jar.
 			 */
-			final URI resources = MinecraftServer.class.getResource("/resources").toURI();
+			final String rawPath = this.getClass().getResource("").toURI().toString();
+			URI resources = URI.create(rawPath);
 
 			final Path myPath;
 			FileSystem fileSystem = null;
 
+			final boolean usesJar;
+
+			/** INSIDE JAR **/
 			if (resources.getScheme().equals("jar"))
 			{
+				resources = URI.create(rawPath.replace("/com/gildedgames/aether/api/orbis_core/data/management/impl/", "/"));
+
 				fileSystem = FileSystems.newFileSystem(resources, Collections.<String, Object>emptyMap());
-				myPath = fileSystem.getPath("/assets");
+				myPath = fileSystem.getPath("/");
+
+				usesJar = true;
 			}
-			else
+			else /** DEVELOPMENT WORKSPACE **/
 			{
+				resources = URI.create(rawPath.replace("/AetherII_api/com/gildedgames/aether/api/orbis_core/data/management/impl/", "/AetherII_main/assets/"));
+
 				myPath = Paths.get(resources);
+
+				usesJar = false;
 			}
 
 			try (Stream<Path> paths = Files.walk(myPath))
@@ -214,14 +226,15 @@ public class OrbisProject implements IProject
 				paths.forEach(p ->
 				{
 					final URI uri = p.toUri();
+					final String path = uri.toString().contains("!") ? uri.toString().split("!")[1] : uri.toString();
 
 					/** Prevents the path walking from including the project's jarLocation **/
-					if (uri.getPath().equals(this.locationFile != null ? this.locationFile.getPath() : this.jarLocation.getPath()))
+					if (path == null || path.equals(this.locationFile != null ? this.locationFile.getPath() : this.jarLocation.getPath()))
 					{
 						return;
 					}
 
-					final String extension = FilenameUtils.getExtension(uri.getPath());
+					final String extension = FilenameUtils.getExtension(path);
 
 					/** Prevents the path walking from including the project data itself (hidden file) **/
 					if (extension.equals("project"))
@@ -234,10 +247,16 @@ public class OrbisProject implements IProject
 					{
 						try
 						{
-							final File file = new File(uri);
-							final String loc = file.exists() ? file.getCanonicalPath() : uri.getPath();
+							File file = null;
 
-							try (InputStream in = !file.exists() ? MinecraftServer.class.getResourceAsStream(loc) : new FileInputStream(file))
+							if (!usesJar)
+							{
+								file = new File(uri);
+							}
+
+							final String loc = !usesJar ? file.getCanonicalPath() : path;
+
+							try (InputStream in = usesJar ? MinecraftServer.class.getResourceAsStream(loc) : new FileInputStream(file))
 							{
 								final NBTTagCompound tag = CompressedStreamTools.readCompressed(in);
 
