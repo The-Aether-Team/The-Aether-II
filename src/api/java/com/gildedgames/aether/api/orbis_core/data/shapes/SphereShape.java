@@ -115,9 +115,9 @@ public class SphereShape extends AbstractShape
 
 			final BlockPos point = center.add(-x, -y, -z);
 
-			final int radiusX = 1 + (this.getBoundingBox().getWidth() / 2);
-			final int radiusY = 1 + (this.getBoundingBox().getHeight() / 2);
-			final int radiusZ = 1 + (this.getBoundingBox().getLength() / 2);
+			final int radiusX = (this.getBoundingBox().getWidth() / 2);
+			final int radiusY = (this.getBoundingBox().getHeight() / 2);
+			final int radiusZ = (this.getBoundingBox().getLength() / 2);
 
 			final double squareX = point.getX() * (1.0D / radiusX);
 			final double squareY = point.getY() * (1.0D / radiusY);
