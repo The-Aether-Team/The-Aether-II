@@ -112,7 +112,7 @@ public class CuboidShape extends AbstractShape
 			final int xDif = Math.abs(x - this.start.getX());
 			final int zDif = Math.abs(z - this.start.getZ());
 
-			return RegionHelp.contains(this.getBoundingBox(), x, y, z) && xDif <= minSize && zDif <= minSize;
+			return RegionHelp.contains(this.getBoundingBox(), x, y, z) && xDif < minSize && zDif < minSize;
 		}
 	}
 
