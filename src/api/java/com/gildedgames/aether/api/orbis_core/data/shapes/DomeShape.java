@@ -141,13 +141,13 @@ public class DomeShape extends AbstractShape
 
 			final BlockPos point = center.add(-x, -y, -z);
 
-			final int radiusX = (size / 2);
-			final int radiusY = this.getBoundingBox().getHeight();
-			final int radiusZ = (size / 2);
+			final int radius = (size / 2);
 
-			final double squareX = point.getX() * (1.0D / radiusX);
+			final int radiusY = this.getBoundingBox().getHeight();
+
+			final double squareX = point.getX() * (1.0D / radius);
 			final double squareY = point.getY() * (1.0D / radiusY);
-			final double squareZ = point.getZ() * (1.0D / radiusZ);
+			final double squareZ = point.getZ() * (1.0D / radius);
 
 			final double dist = Math.sqrt(new BlockPos(0, 0, 0).distanceSq(squareX, squareY, squareZ));
 

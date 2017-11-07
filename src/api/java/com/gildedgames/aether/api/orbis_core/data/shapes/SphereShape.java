@@ -109,7 +109,7 @@ public class SphereShape extends AbstractShape
 
 			return distSq < radiusSq;
 		}
-		else //if (!this.isUniform())
+		else if (!this.isUniform())
 		{
 			final BlockPos center = RegionHelp.getCenter(this.getBoundingBox());
 
@@ -127,37 +127,31 @@ public class SphereShape extends AbstractShape
 
 			return dist < 1;
 		}
-		// TODO: Uniform spheres
-		/*else
+		else
 		{
-			final int width = this.getBoundingBox().getWidth();
-			final int height = this.getBoundingBox().getHeight();
-			final int length = this.getBoundingBox().getLength();
+			final int size = Math.min(this.getBoundingBox().getWidth(), this.getBoundingBox().getLength());
 
-			final boolean useWidth = width < length && width < height;
-			final boolean useHeight = height < length && height < width;
-			final boolean useLength = length < height && length < width;
+			final int xDif = this.start.getX() + (this.start.getX() <= this.end.getX() ? size : -size);
+			final int zDif = this.start.getZ() + (this.start.getZ() <= this.end.getZ() ? size : -size);
 
-			final int dif = Math.abs(width - length);
+			final BlockPos newEnd = new BlockPos(xDif, Math.max(this.end.getY(), this.start.getY()), zDif);
 
-			final int xDif = useHeight ? Math.abs(height - width) : dif;
-			final int zDif = useHeight ? Math.abs(height - length) : dif;
+			final BlockPos center = RegionHelp.getCenter(new Region(this.start, newEnd));
 
-			final int yDif = Math.abs(height - (useWidth ? width : length));
+			final BlockPos point = center.add(-x, -y, -z);
 
-			final int xMod = this.end.getX() < this.start.getX() ? 1 : -1;
-			final int zMod = this.end.getZ() < this.start.getZ() ? 1 : -1;
+			final int radius = (size / 2);
 
-			final BlockPos newEnd = this.end.add(useWidth ? 0 : xDif * xMod, useHeight ? 0 : -yDif, useLength ? 0 : zDif * zMod);
+			final int radiusY = (this.getBoundingBox().getHeight() / 2);
 
-			final BlockPos center = RegionHelp.getCenter(new Region(this.start.add(-xMod, 1, -zMod), newEnd.add(0, -1, 0)));
+			final double squareX = point.getX() * (1.0D / radius);
+			final double squareY = point.getY() * (1.0D / radiusY);
+			final double squareZ = point.getZ() * (1.0D / radius);
 
-			final int radiusSq = (int) center.distanceSq(newEnd);
+			final double dist = Math.sqrt(new BlockPos(0, 0, 0).distanceSq(squareX, squareY, squareZ));
 
-			final double distSq = center.distanceSq(x, y, z);
-
-			return distSq < radiusSq;
-		}*/
+			return dist < 1;
+		}
 	}
 
 	@Override
