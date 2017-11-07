@@ -20,6 +20,11 @@ public interface IData extends NBT
 	void preSaveToDisk(IWorldObject object);
 
 	/**
+	 * @return A clone of this data.
+	 */
+	IData clone();
+
+	/**
 	 * The file extension for this data.
 	 * @return
 	 */
@@ -33,10 +38,5 @@ public interface IData extends NBT
 	 * @return
 	 */
 	IDataMetadata getMetadata();
-
-	/**
-	 * @return A clone of this data.
-	 */
-	IData clone();
 
 }

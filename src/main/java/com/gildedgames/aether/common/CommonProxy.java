@@ -1,34 +1,17 @@
 package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.IAetherServices;
-import com.gildedgames.aether.api.io.Instantiator;
 import com.gildedgames.aether.api.orbis_core.OrbisCore;
-import com.gildedgames.aether.api.orbis_core.api.CreationData;
-import com.gildedgames.aether.api.orbis_core.block.*;
-import com.gildedgames.aether.api.orbis_core.data.BlueprintData;
-import com.gildedgames.aether.api.orbis_core.data.DataCondition;
-import com.gildedgames.aether.api.orbis_core.data.management.impl.*;
-import com.gildedgames.aether.api.orbis_core.data.region.Region;
-import com.gildedgames.aether.api.orbis_core.data.shapes.*;
 import com.gildedgames.aether.api.registry.IContentRegistry;
-import com.gildedgames.aether.api.util.IClassSerializer;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherHooks;
-import com.gildedgames.aether.common.capabilities.world.WorldObjectGroup;
 import com.gildedgames.aether.common.entities.util.MountEventHandler;
 import com.gildedgames.aether.common.entities.util.QuicksoilProcessor;
 import com.gildedgames.aether.common.items.tools.ItemToolHandler;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
 import com.gildedgames.aether.common.registry.ContentRegistry;
 import com.gildedgames.aether.common.world.SectorEventHandler;
-import com.gildedgames.orbis.client.gui.data.Text;
-import com.gildedgames.orbis.client.renderers.RenderShape;
+import com.gildedgames.orbis.common.Orbis;
 import com.gildedgames.orbis.common.OrbisDeveloperModeEvents;
-import com.gildedgames.orbis.common.player.godmode.selection_types.SelectionTypeCuboid;
-import com.gildedgames.orbis.common.player.godmode.selection_types.SelectionTypeLine;
-import com.gildedgames.orbis.common.player.godmode.selection_types.SelectionTypeSphere;
-import com.gildedgames.orbis.common.world_objects.Blueprint;
-import com.gildedgames.orbis.common.world_objects.WorldRegion;
-import com.gildedgames.orbis.common.world_objects.WorldShape;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumParticleTypes;
@@ -58,39 +41,8 @@ public class CommonProxy implements IAetherServices
 
 		this.contentRegistry.preInit();
 
-		final IClassSerializer s = OrbisCore.io().getSerializer();
-
-		s.register(0, Region.class, new Instantiator<>(Region.class));
-		s.register(1, BlueprintData.class, new Instantiator<>(BlueprintData.class));
-		s.register(2, RenderShape.class, new Instantiator<>(RenderShape.class));
-		s.register(3, WorldRegion.class, new Instantiator<>(WorldRegion.class));
-		s.register(4, WorldObjectGroup.class, new Instantiator<>(WorldObjectGroup.class));
-		s.register(6, Blueprint.class, new Instantiator<>(Blueprint.class));
-		s.register(7, BlockDataContainer.class, new Instantiator<>(BlockDataContainer.class));
-		s.register(8, SelectionTypeCuboid.class, new Instantiator<>(SelectionTypeCuboid.class));
-		s.register(9, SelectionTypeSphere.class, new Instantiator<>(SelectionTypeSphere.class));
-		s.register(11, SelectionTypeLine.class, new Instantiator<>(SelectionTypeLine.class));
-		s.register(12, SphereShape.class, new Instantiator<>(SphereShape.class));
-		s.register(14, LineShape.class, new Instantiator<>(LineShape.class));
-		s.register(15, BlockFilter.class, new Instantiator<>(BlockFilter.class));
-		s.register(16, BlockFilterLayer.class, new Instantiator<>(BlockFilterLayer.class));
-		s.register(17, BlockDataWithConditions.class, new Instantiator<>(BlockDataWithConditions.class));
-		s.register(18, DataCondition.class, new Instantiator<>(DataCondition.class));
-		s.register(19, Text.class, new Instantiator<>(Text.class));
-		s.register(20, DataMetadata.class, new Instantiator<>(DataMetadata.class));
-		s.register(21, ProjectIdentifier.class, new Instantiator<>(ProjectIdentifier.class));
-		s.register(22, OrbisProject.class, new Instantiator<>(OrbisProject.class));
-		s.register(23, DataIdentifier.class, new Instantiator<>(DataIdentifier.class));
-		s.register(24, OrbisProjectCache.class, new Instantiator<>(OrbisProjectCache.class));
-		s.register(25, ProjectMetadata.class, new Instantiator<>(ProjectMetadata.class));
-		s.register(26, WorldShape.class, new Instantiator<>(WorldShape.class));
-		s.register(27, BlockDataContainerDefaultVoid.class, new Instantiator<>(BlockDataContainerDefaultVoid.class));
-		s.register(28, CreationData.class, new Instantiator<>(CreationData.class));
-		s.register(29, PyramidShape.class, new Instantiator<>(PyramidShape.class));
-		s.register(30, ConeShape.class, new Instantiator<>(ConeShape.class));
-		s.register(31, CylinderShape.class, new Instantiator<>(CylinderShape.class));
-		s.register(32, DomeShape.class, new Instantiator<>(DomeShape.class));
-		s.register(33, CuboidShape.class, new Instantiator<>(CuboidShape.class));
+		OrbisCore.preInit();
+		Orbis.preInit();
 	}
 
 	public void init(final FMLInitializationEvent event)

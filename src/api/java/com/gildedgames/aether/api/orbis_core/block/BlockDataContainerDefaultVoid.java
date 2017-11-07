@@ -1,15 +1,14 @@
 package com.gildedgames.aether.api.orbis_core.block;
 
 import net.minecraft.init.Blocks;
-import net.minecraft.world.World;
 
 public class BlockDataContainerDefaultVoid extends BlockDataContainer
 {
 	private static final BlockData _void = new BlockData(Blocks.STRUCTURE_VOID);
 
-	private BlockDataContainerDefaultVoid(final World world)
+	private BlockDataContainerDefaultVoid()
 	{
-		super(world);
+		super();
 	}
 
 	public BlockDataContainerDefaultVoid(final int width, final int height, final int length)

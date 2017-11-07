@@ -1,7 +1,6 @@
 package com.gildedgames.orbis.client.gui;
 
 import com.gildedgames.aether.api.orbis.IShape;
-import com.gildedgames.aether.api.orbis_core.block.BlockDataContainer;
 import com.gildedgames.aether.api.orbis_core.block.BlockFilter;
 import com.gildedgames.aether.api.orbis_core.util.BlockFilterHelper;
 import com.gildedgames.aether.api.world_object.IWorldObject;
@@ -9,10 +8,9 @@ import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.orbis.client.gui.data.DropdownElement;
 import com.gildedgames.orbis.client.gui.util.GuiDropdownList;
-import com.gildedgames.orbis.common.items.ItemBlockDataContainer;
 import com.gildedgames.orbis.common.items.ItemsOrbis;
 import com.gildedgames.orbis.common.network.packets.PacketFilterShape;
-import com.gildedgames.orbis.common.network.packets.PacketSetItemStackInHand;
+import com.gildedgames.orbis.common.network.packets.PacketSetBlockDataContainerInHand;
 import com.gildedgames.orbis.common.network.packets.PacketWorldObjectRemove;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -34,20 +32,18 @@ public class GuiRightClickElements
 		};
 	}
 
-	public static DropdownElement copy(final IShape region)
+	public static DropdownElement copy(final IShape shape)
 	{
 		return new DropdownElement(new TextComponentString("Copy"))
 		{
 			@Override
 			public void onClick(final GuiDropdownList list, final EntityPlayer player)
 			{
-				final BlockDataContainer container = BlockDataContainer.fromShape(player.world, region);
 				final ItemStack item = new ItemStack(ItemsOrbis.blockdata);
-				ItemBlockDataContainer.setDatacontainer(item, container);
 
 				final Minecraft mc = Minecraft.getMinecraft();
 
-				NetworkingAether.sendPacketToServer(new PacketSetItemStackInHand(item));
+				NetworkingAether.sendPacketToServer(new PacketSetBlockDataContainerInHand(item, shape));
 				mc.player.inventory.setInventorySlotContents(mc.player.inventory.currentItem, item);
 			}
 		};

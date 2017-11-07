@@ -92,7 +92,7 @@ public class DataIdentifier implements IDataIdentifier
 	@Override
 	public String toString()
 	{
-		return this.dataId + ":" + this.projectIdentifier.toString();
+		return this.dataId + (this.projectIdentifier != null ? ":" + this.projectIdentifier.toString() : "");
 	}
 
 }

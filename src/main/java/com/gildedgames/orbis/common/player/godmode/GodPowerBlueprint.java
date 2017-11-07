@@ -81,6 +81,7 @@ public class GodPowerBlueprint implements IGodPower
 		if (this.previousStack != stack)
 		{
 			this.previousStack = stack;
+
 			if (stack.getItem() instanceof ItemBlueprint)
 			{
 				this.placingBlueprint = null;
@@ -97,12 +98,28 @@ public class GodPowerBlueprint implements IGodPower
 			}
 			else if (stack.getItem() instanceof ItemBlockDataContainer)
 			{
-				final BlockDataContainer container = ItemBlockDataContainer.getDatacontainer(player.world, stack);
-				this.placingBlueprint = new BlueprintData(container);
+				final BlockDataContainer container = ItemBlockDataContainer.getDataContainer(stack);
+
+				if (container != null)
+				{
+					this.placingBlueprint = new BlueprintData(container);
+				}
 			}
 			else
 			{
 				this.placingBlueprint = null;
+			}
+		}
+		else if (this.placingBlueprint == null)
+		{
+			if (stack.getItem() instanceof ItemBlockDataContainer)
+			{
+				final BlockDataContainer container = ItemBlockDataContainer.getDataContainer(stack);
+
+				if (container != null)
+				{
+					this.placingBlueprint = new BlueprintData(container);
+				}
 			}
 		}
 	}

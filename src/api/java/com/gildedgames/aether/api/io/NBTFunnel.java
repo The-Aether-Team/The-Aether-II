@@ -119,6 +119,52 @@ public class NBTFunnel
 		return readObjects;
 	}
 
+	private <T extends NBT> Map<String, T> getStringMapInner(final World world, final String key)
+	{
+		final Map<String, T> readObjects = Maps.newHashMap();
+
+		final NBTTagList keys = this.tag.getTagList(key + "_keys", 8);
+		final NBTTagList objects = this.tag.getTagList(key + "_obj", 10);
+
+		for (int i = 0; i < keys.tagCount(); i++)
+		{
+			final String stringKey = keys.getStringTagAt(i);
+			final NBTTagCompound data = objects.getCompoundTagAt(i);
+
+			readObjects.put(stringKey, world == null ? NBTHelper.read(this.serializer, data) : NBTHelper.read(world, this.serializer, data));
+		}
+
+		return readObjects;
+	}
+
+	public <T extends NBT> Map<String, T> getStringMap(final String key)
+	{
+		return this.getStringMapInner(null, key);
+	}
+
+	public <T extends NBT> Map<String, T> getStringMap(final World world, final String key)
+	{
+		return this.getStringMapInner(world, key);
+	}
+
+	public void setStringMap(final String key, final Map<String, ? extends NBT> nbtMap)
+	{
+		final NBTTagList writtenKeys = new NBTTagList();
+		final NBTTagList writtenObjects = new NBTTagList();
+
+		for (final Map.Entry<String, ? extends NBT> entrySet : nbtMap.entrySet())
+		{
+			final String stringKey = entrySet.getKey();
+			final NBT nbt = entrySet.getValue();
+
+			writtenKeys.appendTag(new NBTTagString(stringKey));
+			writtenObjects.appendTag(NBTHelper.write(this.serializer, nbt));
+		}
+
+		this.tag.setTag(key + "_keys", writtenKeys);
+		this.tag.setTag(key + "_obj", writtenObjects);
+	}
+
 	public void setIntMap(final String key, final Map<Integer, ? extends NBT> nbtMap)
 	{
 		final NBTTagList writtenKeys = new NBTTagList();

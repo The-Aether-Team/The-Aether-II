@@ -1,7 +1,6 @@
 package com.gildedgames.orbis.client;
 
 import com.gildedgames.aether.api.orbis.IShape;
-import com.gildedgames.aether.api.orbis_core.block.BlockDataContainer;
 import com.gildedgames.aether.api.orbis_core.block.BlockFilter;
 import com.gildedgames.aether.api.orbis_core.util.BlockFilterHelper;
 import com.gildedgames.aether.api.orbis_core.util.RotationHelp;
@@ -14,7 +13,6 @@ import com.gildedgames.orbis.client.gui.GuiChoiceMenuPowers;
 import com.gildedgames.orbis.client.gui.GuiChoiceMenuSelectionTypes;
 import com.gildedgames.orbis.client.renderers.AirSelectionRenderer;
 import com.gildedgames.orbis.common.Orbis;
-import com.gildedgames.orbis.common.items.ItemBlockDataContainer;
 import com.gildedgames.orbis.common.items.ItemsOrbis;
 import com.gildedgames.orbis.common.network.packets.*;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
@@ -132,11 +130,9 @@ public class OrbisDeveloperEventsClient
 				if (select.getSelectedRegion() != null && (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL))
 						&& OrbisKeyBindings.keyBindCopy.isPressed())
 				{
-					final BlockDataContainer container = BlockDataContainer.fromShape(mc.player.world, select.getSelectedRegion());
 					final ItemStack item = new ItemStack(ItemsOrbis.blockdata);
-					ItemBlockDataContainer.setDatacontainer(item, container);
 
-					NetworkingAether.sendPacketToServer(new PacketSetItemStackInHand(item));
+					NetworkingAether.sendPacketToServer(new PacketSetBlockDataContainerInHand(item, select.getSelectedRegion()));
 					mc.player.inventory.setInventorySlotContents(mc.player.inventory.currentItem, item);
 				}
 
@@ -205,6 +201,7 @@ public class OrbisDeveloperEventsClient
 		else
 		{
 			Orbis.stopProjectManager();
+			Orbis.stopDataCache();
 		}
 	}
 

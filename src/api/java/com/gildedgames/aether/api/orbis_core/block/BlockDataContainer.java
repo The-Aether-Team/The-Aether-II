@@ -1,13 +1,18 @@
 package com.gildedgames.aether.api.orbis_core.block;
 
+import com.gildedgames.aether.api.io.NBTFunnel;
 import com.gildedgames.aether.api.orbis.IDimensions;
 import com.gildedgames.aether.api.orbis.IRegion;
 import com.gildedgames.aether.api.orbis.IShape;
 import com.gildedgames.aether.api.orbis_core.OrbisCore;
 import com.gildedgames.aether.api.orbis_core.api.exceptions.OrbisMissingModsException;
+import com.gildedgames.aether.api.orbis_core.data.management.IData;
+import com.gildedgames.aether.api.orbis_core.data.management.IDataMetadata;
+import com.gildedgames.aether.api.orbis_core.data.management.impl.DataMetadata;
 import com.gildedgames.aether.api.orbis_core.util.BlockDataIterator;
 import com.gildedgames.aether.api.util.BlockUtil;
 import com.gildedgames.aether.api.util.NBT;
+import com.gildedgames.aether.api.world_object.IWorldObject;
 import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -21,7 +26,7 @@ import net.minecraft.world.World;
 
 import java.util.*;
 
-public class BlockDataContainer implements NBT, IDimensions, Iterable<BlockData>
+public class BlockDataContainer implements NBT, IDimensions, Iterable<BlockData>, IData
 {
 
 	private final static BlockData _air = new BlockData(Blocks.AIR.getDefaultState());
@@ -30,14 +35,11 @@ public class BlockDataContainer implements NBT, IDimensions, Iterable<BlockData>
 
 	private int width, height, length;
 
-	private BlockDataContainer()
+	private IDataMetadata metadata;
+
+	public BlockDataContainer()
 	{
-
-	}
-
-	protected BlockDataContainer(final World world)
-	{
-
+		this.metadata = new DataMetadata();
 	}
 
 	private BlockDataContainer(final NBTTagCompound tag)
@@ -52,6 +54,8 @@ public class BlockDataContainer implements NBT, IDimensions, Iterable<BlockData>
 	 */
 	public BlockDataContainer(final int width, final int height, final int length)
 	{
+		this();
+
 		this.width = width;
 		this.height = Math.min(256, height);
 		this.length = length;
@@ -192,6 +196,8 @@ public class BlockDataContainer implements NBT, IDimensions, Iterable<BlockData>
 	@Override
 	public void write(final NBTTagCompound tag)
 	{
+		final NBTFunnel funnel = OrbisCore.io().createFunnel(tag);
+
 		tag.setInteger("width", this.getWidth());
 		tag.setInteger("height", this.getHeight());
 		tag.setInteger("length", this.getLength());
@@ -314,11 +320,15 @@ public class BlockDataContainer implements NBT, IDimensions, Iterable<BlockData>
 		{
 			tag.setByteArray("addBlocks", addBlocks);
 		}
+
+		funnel.set("actual_metadata", this.metadata);
 	}
 
 	@Override
 	public void read(final NBTTagCompound tag)
 	{
+		final NBTFunnel funnel = OrbisCore.io().createFunnel(tag);
+
 		this.width = tag.getInteger("width");
 		this.height = tag.getInteger("height");
 		this.length = tag.getInteger("length");
@@ -417,6 +427,14 @@ public class BlockDataContainer implements NBT, IDimensions, Iterable<BlockData>
 			final IBlockState blockState = OrbisCore.getRegistrar().getStateFromMeta(block, metadata[i]);
 			this.data[i] = new BlockData(blockState, tileEntities.get(i));
 		}
+
+		this.metadata = funnel.get("actual_metadata");
+	}
+
+	@Override
+	public void preSaveToDisk(final IWorldObject object)
+	{
+
 	}
 
 	@Override
@@ -431,6 +449,18 @@ public class BlockDataContainer implements NBT, IDimensions, Iterable<BlockData>
 		data.read(tag);
 
 		return data;
+	}
+
+	@Override
+	public String getFileExtension()
+	{
+		return "nbt";
+	}
+
+	@Override
+	public IDataMetadata getMetadata()
+	{
+		return this.metadata;
 	}
 
 	@Override

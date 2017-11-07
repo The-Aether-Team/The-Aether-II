@@ -1,13 +1,15 @@
 package com.gildedgames.orbis.common.items;
 
-import com.gildedgames.aether.api.io.NBTFunnel;
 import com.gildedgames.aether.api.orbis.IRegion;
-import com.gildedgames.aether.api.orbis_core.OrbisCore;
 import com.gildedgames.aether.api.orbis_core.api.CreationData;
 import com.gildedgames.aether.api.orbis_core.block.BlockDataContainer;
+import com.gildedgames.aether.api.orbis_core.data.management.IDataCache;
 import com.gildedgames.aether.api.orbis_core.processing.DataPrimer;
 import com.gildedgames.aether.api.orbis_core.util.RotationHelp;
 import com.gildedgames.aether.api.util.BlockAccessExtendedWrapper;
+import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.orbis.common.Orbis;
+import com.gildedgames.orbis.common.network.packets.PacketSendDataToCache;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -29,29 +31,38 @@ public class ItemBlockDataContainer extends Item
 		this.setHasSubtypes(true);
 	}
 
-	public static void setDatacontainer(final ItemStack stack, final BlockDataContainer container)
+	public static void setDataContainer(final EntityPlayer player, final ItemStack stack, final BlockDataContainer container)
 	{
 		if (stack.getTagCompound() == null)
 		{
 			stack.setTagCompound(new NBTTagCompound());
 		}
 
-		final NBTFunnel data = OrbisCore.io().createFunnel(stack.getTagCompound());
+		final IDataCache cache = Orbis.getDataCache().findCache(Orbis.BLOCK_DATA_CONTAINERS_CACHE);
 
-		data.set("data", container);
+		final boolean shouldSend = container.getMetadata().getIdentifier() == null;
+		final int id = cache.addData(container);
+
+		stack.getTagCompound().setInteger("dataId", id);
+
+		if (!player.world.isRemote && player.getServer() != null && player.getServer().isDedicatedServer() && shouldSend)
+		{
+			NetworkingAether.sendPacketToAllPlayers(new PacketSendDataToCache(Orbis.BLOCK_DATA_CONTAINERS_CACHE, container));
+		}
 	}
 
-	public static BlockDataContainer getDatacontainer(final World world, final ItemStack stack)
+	public static BlockDataContainer getDataContainer(final ItemStack stack)
 	{
-		if (stack.getTagCompound() == null || !stack.getTagCompound().hasKey("data"))
+		if (stack.getTagCompound() == null || !stack.getTagCompound().hasKey("dataId"))
 		{
 			return null;
 		}
 
 		final NBTTagCompound tag = stack.getTagCompound();
-		final NBTFunnel data = OrbisCore.io().createFunnel(tag);
 
-		return data.get(world, "data");
+		final IDataCache cache = Orbis.getDataCache().findCache(Orbis.BLOCK_DATA_CONTAINERS_CACHE);
+
+		return cache.getData(tag.getInteger("dataId"));
 	}
 
 	@Override
@@ -65,7 +76,7 @@ public class ItemBlockDataContainer extends Item
 		{
 			if (!world.isRemote)
 			{
-				final BlockDataContainer container = getDatacontainer(world, stack);
+				final BlockDataContainer container = getDataContainer(stack);
 
 				final BlockPos selection = module.raytraceNoSnapping();
 
