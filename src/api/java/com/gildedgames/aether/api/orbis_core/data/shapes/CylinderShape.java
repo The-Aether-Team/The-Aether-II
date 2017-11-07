@@ -38,11 +38,11 @@ public class CylinderShape extends AbstractShape
 
 		this.setBoundingBox(centered ?
 				new Region(new BlockPos(-radius, -radius, -radius).add(this.start), new BlockPos(radius, radius, radius).add(this.start)) :
-				new Region(start, new BlockPos(end.getX(), Math.max(end.getY(), start.getY()), end.getZ())));
+				new Region(start, new BlockPos(end.getX(), end.getY(), end.getZ())));
 
 		this.centered = centered;
 
-		this.renderMin = new BlockPos(this.getBoundingBox().getMin().getX(), this.start.getY(), this.getBoundingBox().getMin().getZ());
+		this.renderMin = this.getBoundingBox().getMin();
 		this.renderMax = this.getBoundingBox().getMax();
 	}
 
@@ -107,7 +107,7 @@ public class CylinderShape extends AbstractShape
 
 			final double dist = this.start.add(0, y - this.start.getY(), 0).distanceSq(x, y, z);
 
-			return dist < radiusSq && y >= this.start.getY();
+			return dist < radiusSq;
 		}
 		else if (!this.isUniform())
 		{
@@ -123,7 +123,7 @@ public class CylinderShape extends AbstractShape
 
 			final double dist = Math.sqrt(new BlockPos(0, 0, 0).distanceSq(squareX, 0, squareZ));
 
-			return dist < 1 && y >= this.start.getY();
+			return dist < 1;
 		}
 		else
 		{
@@ -132,7 +132,9 @@ public class CylinderShape extends AbstractShape
 			final int xDif = this.start.getX() + (this.start.getX() <= this.end.getX() ? size : -size);
 			final int zDif = this.start.getZ() + (this.start.getZ() <= this.end.getZ() ? size : -size);
 
-			final BlockPos center = RegionHelp.getCenter(new Region(this.start, new BlockPos(xDif, this.end.getY(), zDif)));
+			final BlockPos newEnd = new BlockPos(xDif, this.end.getY(), zDif);
+
+			final BlockPos center = RegionHelp.getCenter(new Region(this.start, newEnd));
 
 			final BlockPos point = center.add(-x, -y, -z);
 
@@ -144,7 +146,7 @@ public class CylinderShape extends AbstractShape
 
 			final double dist = Math.sqrt(new BlockPos(0, 0, 0).distanceSq(squareX, 0, squareZ));
 
-			return dist < 1 && y >= this.start.getY();
+			return dist < 1;
 		}
 	}
 
