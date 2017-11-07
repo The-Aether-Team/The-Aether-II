@@ -4,8 +4,8 @@ import com.gildedgames.aether.api.io.NBTFunnel;
 import com.gildedgames.aether.api.orbis.IRegion;
 import com.gildedgames.aether.api.orbis.IShape;
 import com.gildedgames.aether.api.orbis_core.OrbisCore;
-import com.gildedgames.aether.api.orbis_core.data.region.IMutableRegion;
 import com.gildedgames.aether.api.orbis_core.data.region.Region;
+import com.gildedgames.aether.api.orbis_core.util.RegionHelp;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
@@ -14,9 +14,11 @@ import net.minecraft.world.World;
 public class ConeShape extends AbstractShape
 {
 
-	private BlockPos center;
+	private BlockPos start;
 
-	private int radiusSq;
+	private BlockPos end;
+
+	private boolean centered;
 
 	private Iterable<BlockPos.MutableBlockPos> data;
 
@@ -27,14 +29,20 @@ public class ConeShape extends AbstractShape
 		super(world);
 	}
 
-	public ConeShape(final BlockPos center, final int radius)
+	public ConeShape(final BlockPos start, final BlockPos end, final boolean centered)
 	{
-		super((IMutableRegion) new Region(new BlockPos(-radius, 0, -radius), new BlockPos(radius, radius, radius)).translate(center));
-		this.center = center;
+		this.start = start;
+		this.end = end;
 
-		this.radiusSq = radius * radius;
+		final int radius = (int) Math.sqrt(this.start.distanceSq(this.end));
 
-		this.renderMin = new BlockPos(this.getBoundingBox().getMin().getX(), this.center.getY(), this.getBoundingBox().getMin().getZ());
+		this.setBoundingBox(centered ?
+				new Region(new BlockPos(-radius, -radius, -radius).add(this.start), new BlockPos(radius, radius, radius).add(this.start)) :
+				new Region(start, new BlockPos(end.getX(), Math.max(end.getY(), start.getY()), end.getZ())));
+
+		this.centered = centered;
+
+		this.renderMin = new BlockPos(this.getBoundingBox().getMin().getX(), this.start.getY(), this.getBoundingBox().getMin().getZ());
 		this.renderMax = this.getBoundingBox().getMax();
 	}
 
@@ -43,8 +51,10 @@ public class ConeShape extends AbstractShape
 	{
 		final NBTFunnel funnel = OrbisCore.io().createFunnel(tag);
 
-		tag.setInteger("radiusSq", this.radiusSq);
-		funnel.setPos("center", this.center);
+		funnel.setPos("start", this.start);
+		funnel.setPos("end", this.end);
+
+		tag.setBoolean("centered", this.centered);
 	}
 
 	@Override
@@ -52,8 +62,10 @@ public class ConeShape extends AbstractShape
 	{
 		final NBTFunnel funnel = OrbisCore.io().createFunnel(tag);
 
-		this.radiusSq = tag.getInteger("radiusSq");
-		this.center = funnel.getPos("center");
+		this.start = funnel.getPos("start");
+		this.end = funnel.getPos("end");
+
+		this.centered = tag.getBoolean("centered");
 	}
 
 	@Override
@@ -77,7 +89,7 @@ public class ConeShape extends AbstractShape
 	@Override
 	public IShape translate(final int x, final int y, final int z)
 	{
-		return new ConeShape(this.center.add(x, y, z), (int) Math.sqrt(this.radiusSq));
+		return new ConeShape(this.start.add(x, y, z), this.end.add(x, y, z), this.centered);
 	}
 
 	@Override
@@ -89,13 +101,66 @@ public class ConeShape extends AbstractShape
 	@Override
 	public boolean contains(final int x, final int y, final int z)
 	{
-		final int radius = (int) Math.sqrt(this.radiusSq) - (y - this.center.getY());
+		if (this.createFromCenter())
+		{
+			final int radius = (int) Math.sqrt(this.start.distanceSq(this.end));
 
-		final int radiusClimb = radius * radius;
+			final int radiusDif = 1 + radius - (y - this.start.getY());
 
-		final double dist = this.center.add(0, y - this.center.getY(), 0).distanceSq(x, y, z);
+			final int radiusClimb = radiusDif * radiusDif;
 
-		return dist < radiusClimb && y >= this.center.getY();
+			final double dist = this.start.add(0, y - this.start.getY(), 0).distanceSq(x, y, z);
+
+			return dist < radiusClimb && y >= this.start.getY();
+		}
+		else if (!this.isUniform())
+		{
+			final BlockPos center = RegionHelp.getCenter(this.getBoundingBox());
+
+			final BlockPos point = center.add(-x, -y, -z);
+
+			final int yDif = y - this.start.getY();
+
+			final float percentDif = ((float) this.getBoundingBox().getHeight() - (float) yDif) / (float) this.getBoundingBox().getHeight();
+			final float percent = 1.0F - percentDif;
+
+			final int radiusX = 1 + (this.getBoundingBox().getWidth() / 2) - (int) (percent * this.getBoundingBox().getWidth() / 2.0F);
+			final int radiusZ = 1 + (this.getBoundingBox().getLength() / 2) - (int) (percent * this.getBoundingBox().getLength() / 2.0F);
+
+			final double squareX = point.getX() * (1.0D / radiusX);
+			final double squareZ = point.getZ() * (1.0D / radiusZ);
+
+			final double dist = Math.sqrt(new BlockPos(0, 0, 0).distanceSq(squareX, 0, squareZ));
+
+			return dist < 1 && y >= this.start.getY();
+		}
+		else
+		{
+			final int size = Math.min(this.getBoundingBox().getWidth(), this.getBoundingBox().getLength());
+
+			final int xDif = this.start.getX() + (this.start.getX() <= this.end.getX() ? size : -size);
+			final int zDif = this.start.getZ() + (this.start.getZ() <= this.end.getZ() ? size : -size);
+
+			final BlockPos newEnd = new BlockPos(xDif, this.end.getY(), zDif);
+
+			final BlockPos center = RegionHelp.getCenter(new Region(this.start, newEnd));
+
+			final BlockPos point = center.add(-x, -y, -z);
+
+			final int yDif = y - this.start.getY();
+
+			final float percentDif = ((float) this.getBoundingBox().getHeight() - (float) yDif) / (float) this.getBoundingBox().getHeight();
+			final float percent = 1.0F - percentDif;
+
+			final int radius = 1 + (size / 2) - (int) (percent * size / 2.0F);
+
+			final double squareX = point.getX() * (1.0D / radius);
+			final double squareZ = point.getZ() * (1.0D / radius);
+
+			final double dist = Math.sqrt(new BlockPos(0, 0, 0).distanceSq(squareX, 0, squareZ));
+
+			return dist < 1 && y >= this.start.getY();
+		}
 	}
 
 	@Override
