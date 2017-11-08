@@ -83,7 +83,7 @@ public class BlockData implements NBT
 
 	public IBlockState getRotatedBlockState(final Rotation rotation)
 	{
-		return this.blockState.withRotation(rotation);
+		return this.getBlockState().withRotation(rotation);
 	}
 
 	@Override
@@ -130,12 +130,12 @@ public class BlockData implements NBT
 
 	public boolean isVoid()
 	{
-		return this.blockState.getBlock() == Blocks.STRUCTURE_VOID;
+		return this.getBlockState().getBlock() == Blocks.STRUCTURE_VOID;
 	}
 
 	public boolean isAir()
 	{
-		return this.blockState.getBlock().getMaterial(this.blockState) == Material.AIR;
+		return this.getBlockState().getBlock().getMaterial(this.getBlockState()) == Material.AIR;
 	}
 
 	@Override
