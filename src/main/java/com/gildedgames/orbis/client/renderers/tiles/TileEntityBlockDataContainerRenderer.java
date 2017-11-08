@@ -161,6 +161,8 @@ public class TileEntityBlockDataContainerRenderer extends TileEntitySpecialRende
 			{
 				this.setLightmapDisabled(false);
 			}
+
+			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		}
 		catch (final ExecutionException e)
 		{

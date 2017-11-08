@@ -259,6 +259,7 @@ public abstract class GuiFrame extends GuiContainer implements IGuiFrame
 		final float x = this.dim().x();
 		final float y = this.dim().y();
 
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		GlStateManager.pushMatrix();
 
 		GlStateManager.disableLighting();

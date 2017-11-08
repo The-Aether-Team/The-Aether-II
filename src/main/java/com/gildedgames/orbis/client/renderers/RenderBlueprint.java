@@ -22,6 +22,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
@@ -127,8 +128,6 @@ public class RenderBlueprint implements IWorldRenderer
 		this.glIndex = GLAllocation.generateDisplayLists(1);
 		GlStateManager.glNewList(this.glIndex, GL11.GL_COMPILE);
 
-		GlStateManager.disableLighting();
-
 		final TextureManager textureManager = Minecraft.getMinecraft().renderEngine;
 		textureManager.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 
@@ -200,23 +199,6 @@ public class RenderBlueprint implements IWorldRenderer
 		}
 	}
 
-	private void renderPosBrightness(final BlockPos renderPos, final BlockPos containerPos, final float partialTicks)
-	{
-		if (!this.renderBlocks)
-		{
-			return;
-		}
-
-		final IBlockState state = this.cache.getBlockState(containerPos);
-
-		if (state != null && !BlockUtil.isAir(state) && !BlockUtil.isVoid(state) && state.getRenderType() != EnumBlockRenderType.INVISIBLE
-				&& state.getRenderType() != EnumBlockRenderType.ENTITYBLOCK_ANIMATED)
-		{
-			final BlockRendererDispatcher blockrendererdispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
-			blockrendererdispatcher.renderBlockBrightness(state, 0.0F);
-		}
-	}
-
 	private void renderPos(final BlockPos renderPos, final BlockPos containerPos, final float partialTicks)
 	{
 		if (!this.renderBlocks)
@@ -233,7 +215,8 @@ public class RenderBlueprint implements IWorldRenderer
 			final IBakedModel modelBaked = this.blockRenderer.getModelForState(state);
 
 			final BlockRendererDispatcher blockrendererdispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
-			blockrendererdispatcher.getBlockModelRenderer().renderModel(this.cache, modelBaked, state, renderPos, buffer, true);
+			blockrendererdispatcher.getBlockModelRenderer()
+					.renderModelFlat(this.cache, modelBaked, state, renderPos, buffer, true, MathHelper.getPositionRandom(renderPos));
 		}
 	}
 
@@ -355,11 +338,13 @@ public class RenderBlueprint implements IWorldRenderer
 			GlStateManager.translate(-offsetPlayerX, -offsetPlayerY, -offsetPlayerZ);
 		}
 
-		//GlStateManager.disableLighting();
+		GlStateManager.disableLighting();
 		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GlStateManager.enableCull();
 
 		GlStateManager.callList(this.glIndex);
+
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
 		if (this.useCamera)
 		{
