@@ -4,9 +4,9 @@ import com.gildedgames.aether.api.orbis.IRegion;
 import com.gildedgames.aether.api.orbis.IWorldRenderer;
 import com.gildedgames.aether.api.orbis_core.util.OrbisTuple;
 import com.gildedgames.aether.api.orbis_core.util.RotationHelp;
-import com.gildedgames.orbis.common.world_objects.Blueprint;
 import com.gildedgames.aether.api.util.BlockUtil;
 import com.gildedgames.orbis.client.renderers.blueprint.BlueprintRenderCache;
+import com.gildedgames.orbis.common.world_objects.Blueprint;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -78,8 +78,6 @@ public class RenderBlueprint implements IWorldRenderer
 
 	private BlockPos lastMin;
 
-	private float rotval = 0.0f;
-
 	private int glIndex = -1;
 
 	private Iterable<BlockPos.MutableBlockPos> shapeData;
@@ -117,7 +115,7 @@ public class RenderBlueprint implements IWorldRenderer
 		return this.blueprint;
 	}
 
-	private void renderFully(final World world, final float partialTicks)
+	public void renderFully(final World world, final float partialTicks)
 	{
 		if (!this.renderBlocks)
 		{
@@ -129,7 +127,7 @@ public class RenderBlueprint implements IWorldRenderer
 		this.glIndex = GLAllocation.generateDisplayLists(1);
 		GlStateManager.glNewList(this.glIndex, GL11.GL_COMPILE);
 
-		GlStateManager.color(1, 1, 1, 1);
+		GlStateManager.disableLighting();
 
 		final TextureManager textureManager = Minecraft.getMinecraft().renderEngine;
 		textureManager.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
@@ -202,6 +200,23 @@ public class RenderBlueprint implements IWorldRenderer
 		}
 	}
 
+	private void renderPosBrightness(final BlockPos renderPos, final BlockPos containerPos, final float partialTicks)
+	{
+		if (!this.renderBlocks)
+		{
+			return;
+		}
+
+		final IBlockState state = this.cache.getBlockState(containerPos);
+
+		if (state != null && !BlockUtil.isAir(state) && !BlockUtil.isVoid(state) && state.getRenderType() != EnumBlockRenderType.INVISIBLE
+				&& state.getRenderType() != EnumBlockRenderType.ENTITYBLOCK_ANIMATED)
+		{
+			final BlockRendererDispatcher blockrendererdispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
+			blockrendererdispatcher.renderBlockBrightness(state, 0.0F);
+		}
+	}
+
 	private void renderPos(final BlockPos renderPos, final BlockPos containerPos, final float partialTicks)
 	{
 		if (!this.renderBlocks)
@@ -256,6 +271,41 @@ public class RenderBlueprint implements IWorldRenderer
 
 	}
 
+	public void transformForWorld()
+	{
+		int maxval = Math.max(this.blueprint.getWidth(), this.blueprint.getHeight());
+		maxval = Math.max(this.blueprint.getLength(), maxval);
+
+		final float scalefactor = Math.min(1, (this.scale / maxval));
+
+		GlStateManager.translate(0.5F, 0.65F, 0.5F);
+
+		GlStateManager.scale(0.6F, 0.6F, 0.6F);
+		GlStateManager.scale(scalefactor, scalefactor, scalefactor);
+
+		GlStateManager.rotate(45.0F, 0.0F, 1.0F, 0.0F);
+
+		GlStateManager.translate(-this.blueprint.getWidth() / 2.f, -this.blueprint.getHeight() / 2.f, -this.blueprint.getLength() / 2.f);
+	}
+
+	public void transformForGui()
+	{
+		int maxval = Math.max(this.blueprint.getWidth(), this.blueprint.getHeight());
+		maxval = Math.max(this.blueprint.getLength(), maxval);
+
+		final float scalefactor = Math.min(1, (this.scale / maxval));
+
+		GlStateManager.translate(0.5F, 0.5F, 0.5F);
+
+		GlStateManager.scale(0.6F, 0.6F, 0.6F);
+		GlStateManager.scale(scalefactor, scalefactor, scalefactor);
+
+		GlStateManager.rotate(45.0F, 0.0F, 1.0F, 0.0F);
+		GlStateManager.rotate(25.0F, 1.0F, 0.0F, 1.0F);
+
+		GlStateManager.translate(-this.blueprint.getWidth() / 2.f, -this.blueprint.getHeight() / 2.f, -this.blueprint.getLength() / 2.f);
+	}
+
 	@Override
 	public void doGlobalRendering(final World world, final float partialTicks)
 	{
@@ -304,43 +354,12 @@ public class RenderBlueprint implements IWorldRenderer
 
 			GlStateManager.translate(-offsetPlayerX, -offsetPlayerY, -offsetPlayerZ);
 		}
-		else
-		{
-			this.rotval += partialTicks * 1;
-			GlStateManager.translate(0.0D, 0.0D, 0.0D);
-			int maxval = Math.max(this.blueprint.getWidth(), this.blueprint.getHeight());
-			maxval = Math.max(this.blueprint.getLength(), maxval);
-			final float scalefactor = Math.min(1, this.scale / maxval);
 
-			GlStateManager.translate(47.5, 100, 100.0D);//TODO: Customize spot where you render the preview box here
-			GlStateManager.scale(this.scale, this.scale, this.scale);
-			GlStateManager.scale(scalefactor, scalefactor, scalefactor);
-			//GL11.glTranslated(maxval/2, 0, 0);
-
-			GlStateManager.rotate(-225.0F, 1.0F, 0.0F, 0.0F);
-			GlStateManager.rotate(45.0F, 0.0F, 1.0F, 0.0F);
-			GlStateManager.rotate(25.0F, 1.0F, 0.0F, 1.0F);
-
-			GlStateManager.rotate(135.0F, 0.0F, 1.0F, 0.0F);
-			RenderHelper.enableStandardItemLighting();
-			GlStateManager.rotate(-135.0F, 0.0F, 1.0F, 0.0F);
-			GlStateManager.enableDepth();
-			GlStateManager.depthMask(true);
-			//GL11.glDepthRange(1, 0); // what am i even doing
-
-			GlStateManager.disableCull();
-			GlStateManager.rotate(-this.rotval, 0, 1, 0); // translate to center!
-			GlStateManager.translate(-this.blueprint.getWidth() / 2.f, 0, -this.blueprint.getLength() / 2.f); //not centered at y
-		}
-
-		GlStateManager.disableLighting();
+		//GlStateManager.disableLighting();
 		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GlStateManager.enableCull();
 
 		GlStateManager.callList(this.glIndex);
-
-		GlStateManager.enableLighting();
-		//GlStateManager.enableCull();
 
 		if (this.useCamera)
 		{

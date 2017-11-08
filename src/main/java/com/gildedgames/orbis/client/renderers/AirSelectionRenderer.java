@@ -56,6 +56,8 @@ public class AirSelectionRenderer
 	@SubscribeEvent
 	public static void onRenderWorldLast(final RenderWorldLastEvent event)
 	{
+		PARTIAL_TICKS = event.getPartialTicks();
+
 		final PlayerAether playerAether = PlayerAether.getPlayer(mc.player);
 
 		if (!playerAether.getOrbisModule().inDeveloperMode())
@@ -188,8 +190,6 @@ public class AirSelectionRenderer
 		renderRegion.box = false;
 		renderRegion.xyz_box =
 				renderRegion.boxAlpha > 0 && OrbisKeyBindings.keyBindControl.isKeyDown() && playerAether.getSelectionModule().getActiveSelection() == null;
-
-		PARTIAL_TICKS = event.getPartialTicks();
 
 		renderRegion.renderFully(mc.world, PARTIAL_TICKS);
 		renderRegion.onRemoved();

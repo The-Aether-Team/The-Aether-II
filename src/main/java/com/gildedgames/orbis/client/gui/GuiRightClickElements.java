@@ -39,7 +39,7 @@ public class GuiRightClickElements
 			@Override
 			public void onClick(final GuiDropdownList list, final EntityPlayer player)
 			{
-				final ItemStack item = new ItemStack(ItemsOrbis.blockdata);
+				final ItemStack item = new ItemStack(ItemsOrbis.block_chunk);
 
 				final Minecraft mc = Minecraft.getMinecraft();
 

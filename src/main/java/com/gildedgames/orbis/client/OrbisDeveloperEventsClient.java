@@ -130,7 +130,7 @@ public class OrbisDeveloperEventsClient
 				if (select.getSelectedRegion() != null && (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL))
 						&& OrbisKeyBindings.keyBindCopy.isPressed())
 				{
-					final ItemStack item = new ItemStack(ItemsOrbis.blockdata);
+					final ItemStack item = new ItemStack(ItemsOrbis.block_chunk);
 
 					NetworkingAether.sendPacketToServer(new PacketSetBlockDataContainerInHand(item, select.getSelectedRegion()));
 					mc.player.inventory.setInventorySlotContents(mc.player.inventory.currentItem, item);

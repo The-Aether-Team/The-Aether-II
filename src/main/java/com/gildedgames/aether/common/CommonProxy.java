@@ -58,9 +58,8 @@ public class CommonProxy implements IAetherServices
 		MinecraftForge.EVENT_BUS.register(ItemSkyrootSword.class);
 		MinecraftForge.EVENT_BUS.register(QuicksoilProcessor.class);
 
-		MinecraftForge.EVENT_BUS.register(SectorEventHandler.class);
-
 		MinecraftForge.EVENT_BUS.register(OrbisDeveloperModeEvents.class);
+		MinecraftForge.EVENT_BUS.register(SectorEventHandler.class);
 		MinecraftForge.EVENT_BUS.register(OrbisCore.class);
 	}
 

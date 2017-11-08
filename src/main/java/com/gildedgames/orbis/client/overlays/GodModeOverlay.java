@@ -40,6 +40,7 @@ public class GodModeOverlay implements IOverlay
 	@Override
 	public void draw()
 	{
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		GlStateManager.pushMatrix();
 
 		GlStateManager.enableBlend();

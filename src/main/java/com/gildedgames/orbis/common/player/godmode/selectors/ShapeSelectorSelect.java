@@ -36,7 +36,7 @@ public class ShapeSelectorSelect implements IShapeSelector
 	{
 		final ItemStack held = module.getEntity().getHeldItemMainhand();
 
-		return held == ItemStack.EMPTY || !(held.getItem() == ItemsOrbis.blockdata || held.getItem() == ItemsOrbis.blueprint);
+		return held == ItemStack.EMPTY || !(held.getItem() == ItemsOrbis.block_chunk || held.getItem() == ItemsOrbis.blueprint);
 	}
 
 	@Override

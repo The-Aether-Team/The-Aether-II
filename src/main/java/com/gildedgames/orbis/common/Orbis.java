@@ -23,6 +23,7 @@ import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.selection_types.SelectionTypeCuboid;
 import com.gildedgames.orbis.common.player.godmode.selection_types.SelectionTypeLine;
 import com.gildedgames.orbis.common.player.godmode.selection_types.SelectionTypeSphere;
+import com.gildedgames.orbis.common.tiles.OrbisTileEntities;
 import com.gildedgames.orbis.common.world_objects.Blueprint;
 import com.gildedgames.orbis.common.world_objects.WorldRegion;
 import com.gildedgames.orbis.common.world_objects.WorldShape;
@@ -234,6 +235,8 @@ public class Orbis
 
 	public static void preInit()
 	{
+		OrbisTileEntities.preInit();
+
 		final IClassSerializer s = OrbisCore.io().getSerializer();
 
 		s.register(2, RenderShape.class, new Instantiator<>(RenderShape.class));
