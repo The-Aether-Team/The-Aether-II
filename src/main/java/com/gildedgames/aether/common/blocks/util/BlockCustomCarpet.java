@@ -18,7 +18,7 @@ public class BlockCustomCarpet extends Block
 
 	public BlockCustomCarpet()
 	{
-		super(Material.CLOTH);
+		super(Material.CARPET);
 
 		this.setHardness(0.1F);
 		this.setSoundType(SoundType.CLOTH);
