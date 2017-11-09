@@ -498,6 +498,15 @@ public class BlocksAether
 		Blocks.FIRE.setFireInfo(skyroot_bookshelf, 5, 20);
 		Blocks.FIRE.setFireInfo(skyroot_beam, 5, 20);
 		Blocks.FIRE.setFireInfo(skyroot_stairs, 5, 20);
+		Blocks.FIRE.setFireInfo(skyroot_decorative, 5, 20);
+
+		Blocks.FIRE.setFireInfo(light_skyroot_log, 5, 5);
+		Blocks.FIRE.setFireInfo(light_skyroot_planks, 5, 20);
+		Blocks.FIRE.setFireInfo(light_skyroot_decorative, 5, 20);
+		Blocks.FIRE.setFireInfo(light_skyroot_beam, 5, 20);
+
+		Blocks.FIRE.setFireInfo(dark_skyroot_log, 5, 5);
+		Blocks.FIRE.setFireInfo(dark_skyroot_planks, 5, 20);;
 
 		Blocks.FIRE.setFireInfo(skyroot_door, 5, 20);
 		Blocks.FIRE.setFireInfo(secret_skyroot_door, 5, 20);
