@@ -90,8 +90,7 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.aether_flower, new ItemModelBuilder("flowers/")
 				.add(BlockAetherFlower.WHITE_ROSE.getMeta(), "white_rose")
 				.add(BlockAetherFlower.PURPLE_FLOWER.getMeta(), "purple_flower")
-				.add(BlockAetherFlower.BURSTBLOSSOM.getMeta(), "burstblossom")
-				.add(BlockAetherFlower.MOONLIT_BLOOM.getMeta(), "moonlit_bloom"));
+				.add(BlockAetherFlower.BURSTBLOSSOM.getMeta(), "burstblossom"));
 
 		registerItemModels(BlocksAether.aether_sapling, new ItemModelBuilder("saplings/")
 				.add(BlockAetherSapling.BLUE_SKYROOT.getMeta(), "blue_skyroot_sapling")
