@@ -34,7 +34,7 @@ public class OpenGLHelper
 		// Load matrix from buf into the Matrix4f.
 		mat.load(buf);
 
-		return mat.m30 < 1.0;
+		return mat.m30 > 2.0;
 	}
 
 }

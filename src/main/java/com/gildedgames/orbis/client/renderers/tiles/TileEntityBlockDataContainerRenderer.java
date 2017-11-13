@@ -138,7 +138,7 @@ public class TileEntityBlockDataContainerRenderer extends TileEntitySpecialRende
 				return;
 			}
 
-			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+			GlStateManager.pushMatrix();
 
 			if (this.itemRenderer == null)
 			{
@@ -147,25 +147,26 @@ public class TileEntityBlockDataContainerRenderer extends TileEntitySpecialRende
 
 			final boolean inGuiContext = OpenGLHelper.isInGuiContext();
 
-			if (inGuiContext)
+			if (!inGuiContext)
 			{
 				blueprint.transformForWorld();
+				this.setLightmapDisabled(true);
 			}
 			else
 			{
 				blueprint.transformForGui();
 			}
 
-			this.setLightmapDisabled(true);
-
 			blueprint.doGlobalRendering(mc.world, AirSelectionRenderer.PARTIAL_TICKS);
 
-			if (inGuiContext)
+			if (!inGuiContext)
 			{
 				this.setLightmapDisabled(false);
 			}
 
-			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+			GlStateManager.resetColor();
+
+			GlStateManager.popMatrix();
 		}
 		catch (final ExecutionException e)
 		{
