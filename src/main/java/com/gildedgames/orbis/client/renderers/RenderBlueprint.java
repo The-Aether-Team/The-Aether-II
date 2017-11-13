@@ -214,9 +214,18 @@ public class RenderBlueprint implements IWorldRenderer
 			//Thank you Ivorius for the rendering of blocks code <3333
 			final IBakedModel modelBaked = this.blockRenderer.getModelForState(state);
 
+			if (Minecraft.isAmbientOcclusionEnabled())
+			{
+				GlStateManager.shadeModel(7425);
+			}
+			else
+			{
+				GlStateManager.shadeModel(7424);
+			}
+
 			final BlockRendererDispatcher blockrendererdispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
 			blockrendererdispatcher.getBlockModelRenderer()
-					.renderModelFlat(this.cache, modelBaked, state, renderPos, buffer, true, MathHelper.getPositionRandom(renderPos));
+					.renderModel(this.cache, modelBaked, state, renderPos, buffer, true, MathHelper.getPositionRandom(renderPos));
 		}
 	}
 
