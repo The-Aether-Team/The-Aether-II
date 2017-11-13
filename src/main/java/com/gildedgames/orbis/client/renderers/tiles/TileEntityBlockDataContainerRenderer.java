@@ -8,6 +8,7 @@ import com.gildedgames.orbis.client.renderers.AirSelectionRenderer;
 import com.gildedgames.orbis.client.renderers.RenderBlueprint;
 import com.gildedgames.orbis.common.items.ItemBlockDataContainer;
 import com.gildedgames.orbis.common.tiles.TileEntityBlockDataContainer;
+import com.gildedgames.orbis.common.util.OpenGLHelper;
 import com.gildedgames.orbis.common.world_objects.Blueprint;
 import com.google.common.base.Optional;
 import com.google.common.cache.*;
@@ -144,7 +145,9 @@ public class TileEntityBlockDataContainerRenderer extends TileEntitySpecialRende
 				this.itemRenderer = Minecraft.getMinecraft().getRenderItem();
 			}
 
-			if (!this.hasItemStack(this.stack))
+			final boolean inGuiContext = OpenGLHelper.isInGuiContext();
+
+			if (inGuiContext)
 			{
 				blueprint.transformForWorld();
 			}
@@ -157,7 +160,7 @@ public class TileEntityBlockDataContainerRenderer extends TileEntitySpecialRende
 
 			blueprint.doGlobalRendering(mc.world, AirSelectionRenderer.PARTIAL_TICKS);
 
-			if (!this.hasItemStack(this.stack))
+			if (inGuiContext)
 			{
 				this.setLightmapDisabled(false);
 			}
