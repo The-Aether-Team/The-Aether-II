@@ -292,8 +292,8 @@ public class RenderBlueprint implements IWorldRenderer
 		GlStateManager.scale(0.6F, 0.6F, 0.6F);
 		GlStateManager.scale(scalefactor, scalefactor, scalefactor);
 
-		GlStateManager.rotate(45.0F, 0.0F, 1.0F, 0.0F);
-		GlStateManager.rotate(25.0F, 1.0F, 0.0F, 1.0F);
+		GlStateManager.rotate(45.0F, 0.0F, -1.0F, 0.0F);
+		GlStateManager.rotate(30.0F, 1.0F, 0.0F, -1.0F);
 
 		GlStateManager.translate(-this.blueprint.getWidth() / 2.f, -this.blueprint.getHeight() / 2.f, -this.blueprint.getLength() / 2.f);
 	}
