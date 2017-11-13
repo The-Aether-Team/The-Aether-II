@@ -43,7 +43,7 @@ public class GuiFillMenu extends GuiFrameCreative
 	static
 	{
 		// TODO: Add obfuscated entry
-		ADD_SLOT_TO_CONTAINER = ReflectionAether.getMethod(Container.class, new Class<?>[] { Slot.class }, "addSlotToContainer");
+		ADD_SLOT_TO_CONTAINER = ReflectionAether.getMethod(Container.class, new Class<?>[] { Slot.class }, "addSlotToContainer", "func_75146_a");
 	}
 
 	private final SlotForge[] slots;
