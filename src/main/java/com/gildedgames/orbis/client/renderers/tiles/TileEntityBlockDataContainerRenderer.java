@@ -27,7 +27,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -35,7 +34,6 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.lang.reflect.Field;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -82,42 +80,6 @@ public class TileEntityBlockDataContainerRenderer extends TileEntitySpecialRende
 	public TileEntityBlockDataContainerRenderer()
 	{
 
-	}
-
-	public boolean hasItemStack(final ItemStack itemStackIn)
-	{
-		if (mc.player.inventory.getItemStack() == itemStackIn)
-		{
-			return true;
-		}
-
-		final List<NonNullList<ItemStack>> lists = (List<NonNullList<ItemStack>>) ReflectionAether.getValue(ALL_INVENTORIES_FIELD, mc.player.inventory);
-
-		label19:
-
-		for (final List<ItemStack> list : lists)
-		{
-			final Iterator iterator = list.iterator();
-
-			while (true)
-			{
-				if (!iterator.hasNext())
-				{
-					continue label19;
-				}
-
-				final ItemStack itemstack = (ItemStack) iterator.next();
-
-				if (!itemstack.isEmpty() && ItemStack.areItemStacksEqual(itemstack, itemStackIn))
-				{
-					break;
-				}
-			}
-
-			return true;
-		}
-
-		return false;
 	}
 
 	@Override

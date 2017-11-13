@@ -18,18 +18,18 @@ public class BlockDataWithConditions extends BlockData
 		super();
 	}
 
-	public BlockDataWithConditions(final Block block, final float placementChance)
+	public BlockDataWithConditions(final Block block, final float weight)
 	{
 		super(block);
 
-		this.replaceCondition.setPlacementChance(placementChance);
+		this.replaceCondition.setWeight(weight);
 	}
 
-	public BlockDataWithConditions(final IBlockState state, final float placementChance)
+	public BlockDataWithConditions(final IBlockState state, final float weight)
 	{
 		super(state);
 
-		this.replaceCondition.setPlacementChance(placementChance);
+		this.replaceCondition.setWeight(weight);
 	}
 
 	public DataCondition getReplaceCondition()
@@ -54,7 +54,7 @@ public class BlockDataWithConditions extends BlockData
 
 	public void setReplacementChance(final float chance)
 	{
-		this.replaceCondition.setPlacementChance(chance);
+		this.replaceCondition.setWeight(chance);
 	}
 
 	@Override
@@ -86,8 +86,6 @@ public class BlockDataWithConditions extends BlockData
 		{
 			return false;
 		}
-
-		final BlockDataWithConditions filter = (BlockDataWithConditions) obj;
 
 		return super.equals(obj);
 	}

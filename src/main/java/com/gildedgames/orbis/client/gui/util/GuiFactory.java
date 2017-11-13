@@ -40,6 +40,14 @@ public class GuiFactory
 
 	public static final ResourceLocation RIGHT_ARROW_ICON_HOVERED = AetherCore.getResource("orbis/navigator/right_arrow_hovered.png");
 
+	public static final ResourceLocation FORGE_BUTTON = AetherCore.getResource("orbis/filter_gui/forge_button.png");
+
+	public static final ResourceLocation FORGE_BUTTON_CLICKED = AetherCore.getResource("orbis/filter_gui/forge_button_clicked.png");
+
+	public static final ResourceLocation FORGE_BUTTON_DISABLED = AetherCore.getResource("orbis/filter_gui/forge_button_disabled.png");
+
+	public static final ResourceLocation FORGE_BUTTON_HOVERED = AetherCore.getResource("orbis/filter_gui/forge_button_hovered.png");
+
 	private GuiFactory()
 	{
 
@@ -79,6 +87,20 @@ public class GuiFactory
 				navigator.refresh();
 			}
 		};
+	}
+
+	public static GuiAbstractButton createForgeButton()
+	{
+		final Rect rect = Dim2D.build().width(22).height(22).flush();
+
+		final GuiTexture defaultState = new GuiTexture(rect, FORGE_BUTTON);
+		final GuiTexture hoveredState = new GuiTexture(rect, FORGE_BUTTON_HOVERED);
+		final GuiTexture clickedState = new GuiTexture(rect, FORGE_BUTTON_CLICKED);
+		final GuiTexture disabledState = new GuiTexture(rect, FORGE_BUTTON_DISABLED);
+
+		final GuiAbstractButton button = new GuiAbstractButton(rect, defaultState, hoveredState, clickedState, disabledState);
+
+		return button;
 	}
 
 	public static GuiAbstractButton createRefreshButton()

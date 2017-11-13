@@ -515,6 +515,7 @@ item.aether.brettl_cane.name=Brettl Cane
 item.aether.brettl_grass.name=Brettl Grass
 
 item.aether.block_chunk.name=Block Chunk
+item.aether.forged_block.name=Forged Block
 
 cloudParachute.ability.rightClick=§3Use:§r Right-Click
 cloudParachute.ability=§9Ability: 

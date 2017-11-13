@@ -5,6 +5,7 @@ import com.gildedgames.aether.api.orbis_core.block.BlockFilter;
 import com.gildedgames.aether.api.orbis_core.block.BlockFilterLayer;
 import com.gildedgames.aether.api.orbis_core.block.BlockFilterType;
 import com.gildedgames.aether.api.util.BlockUtil;
+import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -13,6 +14,8 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.IShearable;
+
+import java.util.List;
 
 public class BlockFilterHelper
 {
@@ -87,9 +90,68 @@ public class BlockFilterHelper
 		return layer;
 	}
 
+	public static BlockFilterLayer getNewFillLayer()
+	{
+		final BlockFilterLayer layer = new BlockFilterLayer();
+
+		layer.setFilterType(BlockFilterType.ALL);
+		layer.getRequiredBlocks().add(new BlockDataWithConditions(Blocks.AIR.getDefaultState(), 1.0f));
+		layer.getReplacementBlocks().add(new BlockDataWithConditions(Blocks.STONE.getDefaultState(), 1.0f));
+
+		return layer;
+	}
+
+	public static BlockFilterLayer createFillLayer(final List<ItemStack> stacks)
+	{
+		final BlockFilterLayer filterLayer = BlockFilterHelper.getNewFillLayer();
+
+		filterLayer.chooseBlockPerBlock = true;
+
+		final List<BlockDataWithConditions> blocks = Lists.newArrayList();
+
+		for (final ItemStack stack : stacks)
+		{
+			final IBlockState state = BlockUtil.getBlockState(stack);
+
+			final BlockDataWithConditions block = new BlockDataWithConditions(state, stack.getCount());
+
+			if (blocks.contains(block))
+			{
+				for (final BlockDataWithConditions b : blocks)
+				{
+					if (block.equals(b))
+					{
+						b.getReplaceCondition().setWeight(b.getReplaceCondition().getWeight() + stack.getCount());
+						break;
+					}
+				}
+			}
+			else
+			{
+				block.getReplaceCondition().setWeight(stack.getCount());
+
+				blocks.add(block);
+			}
+		}
+
+		filterLayer.setReplacementBlocks(blocks);
+
+		return filterLayer;
+	}
+
+	public static BlockFilterLayer createFill(final List<BlockDataWithConditions> blocks)
+	{
+		final BlockFilterLayer filterLayer = BlockFilterHelper.getNewFillLayer();
+
+		filterLayer.setReplacementBlocks(blocks);
+
+		return filterLayer;
+	}
+
 	/**
 	 * @return The default fill layer
 	 */
+
 	public static BlockFilterLayer getNewFillLayer(final ItemStack stack)
 	{
 		if (!(stack.getItem() instanceof ItemBlock) && !(stack.getItem() instanceof ItemBucket))

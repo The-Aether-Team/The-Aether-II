@@ -16,6 +16,8 @@ public class ItemsOrbis
 
 	public static final ItemBlockDataContainer block_chunk = new ItemBlockDataContainer();
 
+	public static final ItemForgedBlock forged_block = new ItemForgedBlock();
+
 	@SubscribeEvent
 	public static void onRegisterItems(final RegistryEvent.Register<Item> event)
 	{
@@ -23,6 +25,7 @@ public class ItemsOrbis
 
 		items.register("blueprint", blueprint.setCreativeTab(null));
 		items.register("block_chunk", block_chunk.setCreativeTab(null));
+		items.register("forged_block", forged_block.setCreativeTab(null));
 	}
 
 	private static class ItemRegistryHelper

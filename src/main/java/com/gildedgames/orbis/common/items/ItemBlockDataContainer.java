@@ -27,7 +27,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.event.ModelBakeEvent;
-import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -81,18 +80,6 @@ public class ItemBlockDataContainer extends Item implements ModelRegisterCallbac
 		final IDataCache cache = Orbis.getDataCache().findCache(Orbis.BLOCK_DATA_CONTAINERS_CACHE);
 
 		return cache.getData(tag.getInteger("dataId"));
-	}
-
-	@SubscribeEvent()
-	public static void onModelRegistryReady(final ModelRegistryEvent event)
-	{
-		for (final Item i : Item.REGISTRY)
-		{
-			if (i instanceof ModelRegisterCallback)
-			{
-				((ModelRegisterCallback) i).registerModel();
-			}
-		}
 	}
 
 	@SideOnly(Side.CLIENT)

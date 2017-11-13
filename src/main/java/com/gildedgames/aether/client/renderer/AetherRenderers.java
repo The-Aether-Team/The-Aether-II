@@ -27,7 +27,9 @@ import com.gildedgames.aether.common.entities.tiles.*;
 import com.gildedgames.aether.common.entities.tiles.builder.TileEntityStructureBuilder;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.orbis.client.renderers.tiles.TileEntityBlockDataContainerRenderer;
+import com.gildedgames.orbis.client.renderers.tiles.TileEntityForgedBlockRenderer;
 import com.gildedgames.orbis.common.tiles.TileEntityBlockDataContainer;
+import com.gildedgames.orbis.common.tiles.TileEntityForgedBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -88,6 +90,7 @@ public class AetherRenderers
 	private static void registerTESRs()
 	{
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlockDataContainer.class, new TileEntityBlockDataContainerRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityForgedBlock.class, new TileEntityForgedBlockRenderer());
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAltar.class, new TileEntityAltarRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySkyrootChest.class, new TileEntitySkyrootChestRenderer());

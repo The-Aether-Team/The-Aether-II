@@ -9,6 +9,7 @@ import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.orbis.common.network.packets.PacketDeveloperMode;
 import com.gildedgames.orbis.common.network.packets.PacketDeveloperReach;
 import com.gildedgames.orbis.common.player.godmode.IGodPower;
+import com.gildedgames.orbis.common.player.modules.PlayerForgeModule;
 import com.gildedgames.orbis.common.player.modules.PlayerPowerModule;
 import com.gildedgames.orbis.common.player.modules.PlayerProjectModule;
 import com.gildedgames.orbis.common.player.modules.PlayerSelectionTypesModule;
@@ -32,6 +33,8 @@ public class PlayerOrbisModule extends PlayerAetherModule
 
 	private final PlayerProjectModule projectModule;
 
+	private final PlayerForgeModule forgeModule;
+
 	private final List<PlayerAetherModule> modules = Lists.newArrayList();
 
 	private double developerReach = 5.0D;
@@ -47,10 +50,12 @@ public class PlayerOrbisModule extends PlayerAetherModule
 		this.godPowerModule = new PlayerPowerModule(playerAether);
 		this.selectionTypeModule = new PlayerSelectionTypesModule(playerAether);
 		this.projectModule = new PlayerProjectModule(playerAether);
+		this.forgeModule = new PlayerForgeModule(playerAether);
 
 		this.modules.add(this.godPowerModule);
 		this.modules.add(this.selectionTypeModule);
 		this.modules.add(this.projectModule);
+		this.modules.add(this.forgeModule);
 	}
 
 	public static PlayerOrbisModule get(final Entity player)
@@ -58,6 +63,11 @@ public class PlayerOrbisModule extends PlayerAetherModule
 		final PlayerAether playerAether = PlayerAether.getPlayer(player);
 
 		return playerAether.getOrbisModule();
+	}
+
+	public PlayerForgeModule forge()
+	{
+		return this.forgeModule;
 	}
 
 	public PlayerProjectModule projects()

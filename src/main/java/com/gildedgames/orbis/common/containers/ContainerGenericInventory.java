@@ -136,7 +136,6 @@ public class ContainerGenericInventory extends ContainerPlayer
 		if (slotNumber == this.binSlot.slotNumber && this.aePlayer.getEntity().capabilities.isCreativeMode)
 		{
 			this.aePlayer.getEntity().inventory.clear();
-			this.aePlayer.getEquipmentModule().getInventory().clear();
 		}
 
 		return super.transferStackInSlot(player, slotNumber);

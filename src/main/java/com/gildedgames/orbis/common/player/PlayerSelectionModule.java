@@ -9,6 +9,7 @@ import com.gildedgames.orbis.common.network.packets.PacketActiveSelection;
 import com.gildedgames.orbis.common.player.godmode.IGodPower;
 import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
 import com.gildedgames.orbis.common.util.RaytraceHelp;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 
@@ -142,10 +143,17 @@ public class PlayerSelectionModule extends PlayerAetherModule
 		final PlayerOrbisModule module = PlayerOrbisModule.get(this.getEntity());
 		final IGodPower power = module.powers().getCurrentPower();
 
-		final IShapeSelector selector = power.getShapeSelector();
+		IShapeSelector selector = power.getShapeSelector();
 
 		if (this.activeSelection != null)
 		{
+			final ItemStack held = module.getEntity().getHeldItemMainhand();
+
+			if (held.getItem() instanceof IShapeSelector)
+			{
+				selector = (IShapeSelector) held.getItem();
+			}
+
 			if (selector.canSelectShape(module, this.activeSelection, this.getWorld()))
 			{
 				this.selectPos = pos;
@@ -154,8 +162,6 @@ public class PlayerSelectionModule extends PlayerAetherModule
 				{
 					NetworkingAether.sendPacketToServer(new PacketActiveSelection(this.activeSelection));
 				}
-
-				selector.onSelect(module, this.activeSelection, this.getWorld());
 
 				this.activeSelection = null;
 				this.selectPos = null;

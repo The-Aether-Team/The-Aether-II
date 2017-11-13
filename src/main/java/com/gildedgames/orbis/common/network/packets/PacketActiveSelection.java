@@ -8,6 +8,7 @@ import com.gildedgames.aether.common.network.MessageHandlerServer;
 import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -63,7 +64,14 @@ public class PacketActiveSelection implements IMessage
 
 			playerAether.getSelectionModule().setActiveSelection(shape);
 
-			final IShapeSelector selector = playerAether.getOrbisModule().powers().getCurrentPower().getShapeSelector();
+			IShapeSelector selector = playerAether.getOrbisModule().powers().getCurrentPower().getShapeSelector();
+
+			final ItemStack held = player.getHeldItemMainhand();
+
+			if (held.getItem() instanceof IShapeSelector)
+			{
+				selector = (IShapeSelector) held.getItem();
+			}
 
 			selector.onSelect(playerAether.getOrbisModule(), shape, player.world);
 

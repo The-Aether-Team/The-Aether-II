@@ -9,7 +9,7 @@ import java.util.Random;
 public class DataCondition implements NBT
 {
 
-	private float placementChance = 1.0F;
+	private float weight = 1.0F;
 
 	public DataCondition()
 	{
@@ -18,34 +18,34 @@ public class DataCondition implements NBT
 
 	public boolean isMet(final Random random, final World world)
 	{
-		return random.nextFloat() <= this.placementChance;
+		return random.nextFloat() <= this.weight;
 	}
 
 	public boolean isMet(final float randomValue, final float chanceSum, final Random random, final World world)
 	{
-		return randomValue <= this.placementChance + chanceSum;
+		return randomValue <= this.weight + chanceSum;
 	}
 
-	public float getPlacementChance()
+	public float getWeight()
 	{
-		return this.placementChance;
+		return this.weight;
 	}
 
-	public void setPlacementChance(final float placementChance)
+	public void setWeight(final float weight)
 	{
-		this.placementChance = Math.min(1.0F, placementChance);
+		this.weight = weight;
 	}
 
 	@Override
 	public void write(final NBTTagCompound tag)
 	{
-		tag.setFloat("placementChance", this.placementChance);
+		tag.setFloat("weight", this.weight);
 	}
 
 	@Override
 	public void read(final NBTTagCompound tag)
 	{
-		this.placementChance = tag.getFloat("placementChance");
+		this.weight = tag.getFloat("weight");
 	}
 
 }

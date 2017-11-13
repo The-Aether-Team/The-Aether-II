@@ -11,7 +11,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 
 import java.util.Arrays;
 import java.util.List;
@@ -56,17 +55,17 @@ public class BlockFilterLayer implements NBT
 	/**
 	 * Sets the list of blocks that trigger the filter
 	 */
-	public void setRequiredBlocks(BlockDataWithConditions... requiredBlocks)
+	public void setRequiredBlocks(List<BlockDataWithConditions> requiredBlocks)
 	{
-		this.requiredBlocks = Lists.newArrayList(Arrays.asList(requiredBlocks));
+		this.requiredBlocks = Lists.newArrayList(requiredBlocks);
 	}
 
 	/**
 	 * Sets the list of blocks that trigger the filter
 	 */
-	public void setRequiredBlocks(List<BlockDataWithConditions> requiredBlocks)
+	public void setRequiredBlocks(BlockDataWithConditions... requiredBlocks)
 	{
-		this.requiredBlocks = Lists.newArrayList(requiredBlocks);
+		this.requiredBlocks = Lists.newArrayList(Arrays.asList(requiredBlocks));
 	}
 
 	public List<BlockDataWithConditions> getReplacementBlocks()
@@ -74,14 +73,14 @@ public class BlockFilterLayer implements NBT
 		return this.replacementBlocks;
 	}
 
-	public void setReplacementBlocks(BlockDataWithConditions... newBlocks)
-	{
-		this.replacementBlocks = Lists.newArrayList(Arrays.asList(newBlocks));
-	}
-
 	public void setReplacementBlocks(List<BlockDataWithConditions> newBlocks)
 	{
 		this.replacementBlocks = newBlocks;
+	}
+
+	public void setReplacementBlocks(BlockDataWithConditions... newBlocks)
+	{
+		this.replacementBlocks = Lists.newArrayList(Arrays.asList(newBlocks));
 	}
 
 	public BlockFilterType getFilterType()
@@ -98,14 +97,17 @@ public class BlockFilterLayer implements NBT
 	{
 		final float randomValue = random.nextFloat() * this.totalBlockChance();
 		float chanceSum = 0.0f;
+
 		for (final BlockDataWithConditions block : this.replacementBlocks)
 		{
 			if (block.getReplaceCondition().isMet(randomValue, chanceSum, random, world))
 			{
 				return block;
 			}
-			chanceSum += block.getReplaceCondition().getPlacementChance();
+
+			chanceSum += block.getReplaceCondition().getWeight();
 		}
+
 		return null;
 	}
 
@@ -163,7 +165,7 @@ public class BlockFilterLayer implements NBT
 		float total = 0f;
 		for (final BlockDataWithConditions BlockDataFilter : this.replacementBlocks)
 		{
-			total += BlockDataFilter.getReplaceCondition().getPlacementChance();
+			total += BlockDataFilter.getReplaceCondition().getWeight();
 		}
 		return total;
 	}
@@ -185,7 +187,7 @@ public class BlockFilterLayer implements NBT
 
 		tag.setString("filterName", this.getFilterType().name());
 
-		tag.setBoolean("chosenBlockPerBlock", this.chooseBlockPerBlock);
+		tag.setBoolean("chooseBlockPerBlock", this.chooseBlockPerBlock);
 
 		NBTFunnel funnel = OrbisCore.io().createFunnel(tag);
 
@@ -214,12 +216,12 @@ public class BlockFilterLayer implements NBT
 
 	public float getSpawnChance()
 	{
-		return this.condition.getPlacementChance();
+		return this.condition.getWeight();
 	}
 
 	public void setSpawnChance(float chance)
 	{
-		this.condition.setPlacementChance(chance);
+		this.condition.setWeight(chance);
 	}
 
 	@Override

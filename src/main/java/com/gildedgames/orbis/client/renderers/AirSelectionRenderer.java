@@ -5,6 +5,7 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.orbis.client.OrbisKeyBindings;
 import com.gildedgames.orbis.client.player.godmode.IGodPowerClient;
 import com.gildedgames.orbis.common.player.godmode.GodPowerCreative;
+import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
 import com.gildedgames.orbis.common.util.RaytraceHelp;
 import com.gildedgames.orbis.common.world_objects.WorldRegion;
 import net.minecraft.block.state.IBlockState;
@@ -14,8 +15,11 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
 
+@Mod.EventBusSubscriber(Side.CLIENT)
 public class AirSelectionRenderer
 {
 
@@ -87,7 +91,8 @@ public class AirSelectionRenderer
 
 		final IGodPowerClient powerClient = playerAether.getOrbisModule().powers().getCurrentPower().getClientHandler();
 
-		final boolean has3DCursor = powerClient.has3DCursor(playerAether.getOrbisModule());
+		final boolean has3DCursor =
+				powerClient.has3DCursor(playerAether.getOrbisModule()) || playerAether.getEntity().getHeldItemMainhand().getItem() instanceof IShapeSelector;
 
 		if (!has3DCursor)
 		{

@@ -26,16 +26,21 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiIngameMenu;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraftforge.client.event.GuiOpenEvent;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.event.MouseEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.relauncher.Side;
 import org.lwjgl.input.Keyboard;
 
+@Mod.EventBusSubscriber(Side.CLIENT)
 public class OrbisDeveloperEventsClient
 {
 
@@ -46,6 +51,18 @@ public class OrbisDeveloperEventsClient
 	private static IShape prevShape;
 
 	private static GuiChoiceMenuHolder choiceMenuHolder;
+
+	@SubscribeEvent()
+	public static void onModelRegistryReady(final ModelRegistryEvent event)
+	{
+		for (final Item i : Item.REGISTRY)
+		{
+			if (i instanceof ModelRegisterCallback)
+			{
+				((ModelRegisterCallback) i).registerModel();
+			}
+		}
+	}
 
 	@SubscribeEvent
 	public static void onGuiOpen(final GuiOpenEvent event)

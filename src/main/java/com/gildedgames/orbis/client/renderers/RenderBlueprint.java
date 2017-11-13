@@ -20,6 +20,7 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -31,8 +32,6 @@ import java.util.List;
 
 public class RenderBlueprint implements IWorldRenderer
 {
-	private final static VertexBuffer buffer = Tessellator.getInstance().getBuffer();//Magic number, see Tessellator
-
 	private final Minecraft mc = Minecraft.getMinecraft();
 
 	//Setup the next parameters to vary the use of the renderer.
@@ -45,8 +44,6 @@ public class RenderBlueprint implements IWorldRenderer
 	private final Blueprint blueprint;
 
 	private final BlueprintRenderCache cache;
-
-	private final TileEntityRendererDispatcher tileEntityRenderer;
 
 	//----------------------------------------------------------------------
 
@@ -92,7 +89,6 @@ public class RenderBlueprint implements IWorldRenderer
 		this.blockRenderer = this.mc.getBlockRendererDispatcher();
 		this.blueprint = blueprint;
 		this.cache = new BlueprintRenderCache(blueprint, world);
-		this.tileEntityRenderer = TileEntityRendererDispatcher.instance;
 
 		this.worldIn = world;
 	}
@@ -107,6 +103,16 @@ public class RenderBlueprint implements IWorldRenderer
 	public void read(final NBTTagCompound tag)
 	{
 
+	}
+
+	protected void bindTexture(final ResourceLocation location)
+	{
+		final TextureManager texturemanager = TileEntityRendererDispatcher.instance.renderEngine;
+
+		if (texturemanager != null)
+		{
+			texturemanager.bindTexture(location);
+		}
 	}
 
 	@Nullable
@@ -128,10 +134,25 @@ public class RenderBlueprint implements IWorldRenderer
 		this.glIndex = GLAllocation.generateDisplayLists(1);
 		GlStateManager.glNewList(this.glIndex, GL11.GL_COMPILE);
 
-		final TextureManager textureManager = Minecraft.getMinecraft().renderEngine;
-		textureManager.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+		final Tessellator tessellator = Tessellator.getInstance();
+		final VertexBuffer buffer = tessellator.getBuffer();
 
-		buffer.begin(7, DefaultVertexFormats.BLOCK);
+		this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+		RenderHelper.disableStandardItemLighting();
+		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		//GlStateManager.enableBlend();
+		GlStateManager.disableCull();
+
+		if (Minecraft.isAmbientOcclusionEnabled())
+		{
+			GlStateManager.shadeModel(GL11.GL_SMOOTH);
+		}
+		else
+		{
+			GlStateManager.shadeModel(GL11.GL_FLAT);
+		}
+
+		buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.BLOCK);
 
 		if (this.rotatedData != null)
 		{
@@ -140,18 +161,22 @@ public class RenderBlueprint implements IWorldRenderer
 				final BlockPos beforeRot = tuple.getFirst();
 				final BlockPos rotated = tuple.getSecond();
 
-				this.renderPos(rotated, beforeRot, partialTicks);
+				this.renderPos(rotated, beforeRot, buffer);
 			}
 		}
 		else
 		{
 			for (final BlockPos pos : this.shapeData)
 			{
-				this.renderPos(pos, pos, partialTicks);
+				this.renderPos(pos, pos, buffer);
 			}
 		}
 
-		Tessellator.getInstance().draw();
+		buffer.setTranslation(0, 0, 0);
+
+		tessellator.draw();
+
+		RenderHelper.enableStandardItemLighting();
 
 		/** TODO: Temp disabled te rendering because of strange bug when holding a blueprint and loading a world first time**/
 		/*final int pass = net.minecraftforge.client.MinecraftForgeClient.getRenderPass();
@@ -199,7 +224,7 @@ public class RenderBlueprint implements IWorldRenderer
 		}
 	}
 
-	private void renderPos(final BlockPos renderPos, final BlockPos containerPos, final float partialTicks)
+	private void renderPos(final BlockPos renderPos, final BlockPos containerPos, final VertexBuffer buffer)
 	{
 		if (!this.renderBlocks)
 		{
@@ -208,20 +233,10 @@ public class RenderBlueprint implements IWorldRenderer
 
 		final IBlockState state = this.cache.getBlockState(containerPos);
 
-		if (state != null && !BlockUtil.isAir(state) && !BlockUtil.isVoid(state) && state.getRenderType() != EnumBlockRenderType.INVISIBLE
-				&& state.getRenderType() != EnumBlockRenderType.ENTITYBLOCK_ANIMATED)
+		if (state != null && !BlockUtil.isAir(state) && !BlockUtil.isVoid(state) && state.getRenderType() != EnumBlockRenderType.INVISIBLE)
 		{
 			//Thank you Ivorius for the rendering of blocks code <3333
 			final IBakedModel modelBaked = this.blockRenderer.getModelForState(state);
-
-			if (Minecraft.isAmbientOcclusionEnabled())
-			{
-				GlStateManager.shadeModel(7425);
-			}
-			else
-			{
-				GlStateManager.shadeModel(7424);
-			}
 
 			final BlockRendererDispatcher blockrendererdispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
 			blockrendererdispatcher.getBlockModelRenderer()
@@ -346,10 +361,6 @@ public class RenderBlueprint implements IWorldRenderer
 
 			GlStateManager.translate(-offsetPlayerX, -offsetPlayerY, -offsetPlayerZ);
 		}
-
-		GlStateManager.disableLighting();
-		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GlStateManager.enableCull();
 
 		GlStateManager.callList(this.glIndex);
 
