@@ -45,7 +45,7 @@ public class TileEntityForgedBlockRenderer extends TileEntitySpecialRenderer<Til
 	public final BakedModel baked = new BakedModel();
 
 	private final LoadingCache<BlockFilterLayer, Optional<RenderBlueprint>> blueprintCache = CacheBuilder.newBuilder()
-			.maximumSize(1000)
+			.maximumSize(200)
 			.expireAfterWrite(10, TimeUnit.MINUTES)
 			.removalListener(this)
 			.build(

@@ -6,6 +6,7 @@ import com.gildedgames.aether.api.orbis_core.data.DataCondition;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class BlockDataWithConditions extends BlockData
 {
@@ -77,6 +78,18 @@ public class BlockDataWithConditions extends BlockData
 
 		this.replaceCondition = funnel.get("replaceCondition");
 		this.requiredCondition = funnel.get("requiredCondition");
+	}
+
+	@Override
+	public int hashCode()
+	{
+		final HashCodeBuilder builder = new HashCodeBuilder();
+
+		builder.append(super.hashCode());
+		builder.append(this.replaceCondition);
+		builder.append(this.requiredCondition);
+
+		return builder.toHashCode();
 	}
 
 	@Override

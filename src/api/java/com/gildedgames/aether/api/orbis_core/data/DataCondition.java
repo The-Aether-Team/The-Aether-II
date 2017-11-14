@@ -3,6 +3,7 @@ package com.gildedgames.aether.api.orbis_core.data;
 import com.gildedgames.aether.api.util.NBT;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.util.Random;
 
@@ -46,6 +47,16 @@ public class DataCondition implements NBT
 	public void read(final NBTTagCompound tag)
 	{
 		this.weight = tag.getFloat("weight");
+	}
+
+	@Override
+	public int hashCode()
+	{
+		final HashCodeBuilder builder = new HashCodeBuilder();
+
+		builder.append(this.weight);
+
+		return builder.toHashCode();
 	}
 
 }

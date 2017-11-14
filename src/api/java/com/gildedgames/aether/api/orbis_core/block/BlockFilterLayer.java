@@ -11,6 +11,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.util.Arrays;
 import java.util.List;
@@ -216,14 +217,16 @@ public class BlockFilterLayer implements NBT
 		this.replacementBlocks = funnel.getList("replacementBlocks");
 	}
 
-	public float getSpawnChance()
+	@Override
+	public int hashCode()
 	{
-		return this.condition.getWeight();
-	}
+		final HashCodeBuilder builder = new HashCodeBuilder();
 
-	public void setSpawnChance(float chance)
-	{
-		this.condition.setWeight(chance);
+		builder.append(this.getReplacementBlocks());
+		builder.append(this.getRequiredBlocks());
+		builder.append(this.getFilterType());
+
+		return builder.toHashCode();
 	}
 
 	@Override

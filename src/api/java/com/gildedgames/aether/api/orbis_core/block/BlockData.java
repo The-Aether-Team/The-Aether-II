@@ -11,6 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.annotation.Nullable;
 
@@ -136,6 +137,16 @@ public class BlockData implements NBT
 	public boolean isAir()
 	{
 		return this.getBlockState().getBlock().getMaterial(this.getBlockState()) == Material.AIR;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		final HashCodeBuilder builder = new HashCodeBuilder();
+
+		builder.append(OrbisCore.getRegistrar().getStateId(this.getBlockState()));
+
+		return builder.toHashCode();
 	}
 
 	@Override
