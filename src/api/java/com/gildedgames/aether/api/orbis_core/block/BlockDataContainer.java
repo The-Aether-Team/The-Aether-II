@@ -23,6 +23,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.util.*;
 
@@ -169,6 +170,19 @@ public class BlockDataContainer implements NBT, IDimensions, Iterable<BlockData>
 	public int getLength()
 	{
 		return this.length;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		final HashCodeBuilder builder = new HashCodeBuilder();
+
+		builder.append(this.width);
+		builder.append(this.height);
+		builder.append(this.length);
+		builder.append(Arrays.hashCode(this.data));
+
+		return builder.toHashCode();
 	}
 
 	@Override

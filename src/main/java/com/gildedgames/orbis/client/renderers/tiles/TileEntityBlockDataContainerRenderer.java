@@ -36,30 +36,23 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 public class TileEntityBlockDataContainerRenderer extends TileEntitySpecialRenderer<TileEntityBlockDataContainer>
-		implements RemovalListener<ItemStack, Optional<RenderBlueprint>>
+		implements RemovalListener<BlockDataContainer, Optional<RenderBlueprint>>
 {
 
 	private static final Minecraft mc = Minecraft.getMinecraft();
 
 	public final BakedModel baked = new BakedModel();
 
-	private final LoadingCache<ItemStack, Optional<RenderBlueprint>> blueprintCache = CacheBuilder.newBuilder()
+	private final LoadingCache<BlockDataContainer, Optional<RenderBlueprint>> blueprintCache = CacheBuilder.newBuilder()
 			.maximumSize(1000)
 			.expireAfterWrite(10, TimeUnit.MINUTES)
 			.removalListener(this)
 			.build(
-					new CacheLoader<ItemStack, Optional<RenderBlueprint>>()
+					new CacheLoader<BlockDataContainer, Optional<RenderBlueprint>>()
 					{
 						@Override
-						public Optional<RenderBlueprint> load(final ItemStack key)
+						public Optional<RenderBlueprint> load(final BlockDataContainer container)
 						{
-							final BlockDataContainer container = ItemBlockDataContainer.getDataContainer(key);
-
-							if (container == null)
-							{
-								return Optional.absent();
-							}
-
 							final RenderBlueprint blueprint = new RenderBlueprint(new Blueprint(mc.world, BlockPos.ORIGIN, new BlueprintData(container)),
 									mc.world);
 							blueprint.useCamera = false;
@@ -88,7 +81,14 @@ public class TileEntityBlockDataContainerRenderer extends TileEntitySpecialRende
 				return;
 			}
 
-			final RenderBlueprint blueprint = this.blueprintCache.get(this.stack).orNull();
+			final BlockDataContainer container = ItemBlockDataContainer.getDataContainer(this.stack);
+
+			if (container == null)
+			{
+				return;
+			}
+
+			final RenderBlueprint blueprint = this.blueprintCache.get(container).orNull();
 
 			if (blueprint == null)
 			{
@@ -132,7 +132,7 @@ public class TileEntityBlockDataContainerRenderer extends TileEntitySpecialRende
 	}
 
 	@Override
-	public void onRemoval(final RemovalNotification<ItemStack, Optional<RenderBlueprint>> notification)
+	public void onRemoval(final RemovalNotification<BlockDataContainer, Optional<RenderBlueprint>> notification)
 	{
 		final Optional<RenderBlueprint> opt = notification.getValue();
 
