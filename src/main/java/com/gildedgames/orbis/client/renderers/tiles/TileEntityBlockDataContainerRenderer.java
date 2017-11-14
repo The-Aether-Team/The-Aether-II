@@ -3,7 +3,6 @@ package com.gildedgames.orbis.client.renderers.tiles;
 import com.gildedgames.aether.api.orbis_core.OrbisCore;
 import com.gildedgames.aether.api.orbis_core.block.BlockDataContainer;
 import com.gildedgames.aether.api.orbis_core.data.BlueprintData;
-import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.orbis.client.renderers.AirSelectionRenderer;
 import com.gildedgames.orbis.client.renderers.RenderBlueprint;
 import com.gildedgames.orbis.common.items.ItemBlockDataContainer;
@@ -24,7 +23,6 @@ import net.minecraft.client.renderer.block.model.ItemOverrideList;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -32,7 +30,6 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.lang.reflect.Field;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -41,8 +38,6 @@ import java.util.concurrent.TimeUnit;
 public class TileEntityBlockDataContainerRenderer extends TileEntitySpecialRenderer<TileEntityBlockDataContainer>
 		implements RemovalListener<ItemStack, Optional<RenderBlueprint>>
 {
-
-	private static final Field ALL_INVENTORIES_FIELD = ReflectionAether.getField(InventoryPlayer.class, "allInventories", "field_184440_g");
 
 	private static final Minecraft mc = Minecraft.getMinecraft();
 

@@ -22,7 +22,7 @@ public class ItemModelsOrbis
 	{
 		registerItemModels(ItemsOrbis.blueprint, "orbis/blueprint");
 		registerItemModels(ItemsOrbis.block_chunk, "orbis/block_chunk");
-		registerItemModels(ItemsOrbis.forged_block, "orbis/forged_block");
+		registerItemModels(ItemsOrbis.block_palette, "orbis/block_palette");
 	}
 
 	private static void registerItemModels(final Block block, final String path)

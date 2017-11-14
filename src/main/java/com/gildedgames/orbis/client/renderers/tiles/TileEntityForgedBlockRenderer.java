@@ -1,11 +1,18 @@
 package com.gildedgames.orbis.client.renderers.tiles;
 
+import com.gildedgames.aether.api.orbis_core.OrbisCore;
+import com.gildedgames.aether.api.orbis_core.block.BlockDataContainer;
 import com.gildedgames.aether.api.orbis_core.block.BlockDataWithConditions;
 import com.gildedgames.aether.api.orbis_core.block.BlockFilterLayer;
-import com.gildedgames.aether.common.ReflectionAether;
-import com.gildedgames.orbis.common.items.ItemForgedBlock;
+import com.gildedgames.aether.api.orbis_core.data.BlueprintData;
+import com.gildedgames.orbis.client.renderers.AirSelectionRenderer;
+import com.gildedgames.orbis.client.renderers.RenderBlueprint;
+import com.gildedgames.orbis.common.items.ItemBlockPalette;
 import com.gildedgames.orbis.common.tiles.TileEntityForgedBlock;
 import com.gildedgames.orbis.common.util.OpenGLHelper;
+import com.gildedgames.orbis.common.world_objects.Blueprint;
+import com.google.common.base.Optional;
+import com.google.common.cache.*;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -19,7 +26,6 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -28,18 +34,73 @@ import org.lwjgl.opengl.GL11;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.lang.reflect.Field;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 public class TileEntityForgedBlockRenderer extends TileEntitySpecialRenderer<TileEntityForgedBlock>
+		implements RemovalListener<ItemStack, Optional<RenderBlueprint>>
 {
-
-	private static final Field ALL_INVENTORIES_FIELD = ReflectionAether.getField(InventoryPlayer.class, "allInventories", "field_184440_g");
 
 	private static final Minecraft mc = Minecraft.getMinecraft();
 
 	public final BakedModel baked = new BakedModel();
+
+	private final LoadingCache<ItemStack, Optional<RenderBlueprint>> blueprintCache = CacheBuilder.newBuilder()
+			.maximumSize(1000)
+			.expireAfterWrite(10, TimeUnit.MINUTES)
+			.removalListener(this)
+			.build(
+					new CacheLoader<ItemStack, Optional<RenderBlueprint>>()
+					{
+						@Override
+						public Optional<RenderBlueprint> load(final ItemStack key)
+						{
+							final BlockFilterLayer layer = ItemBlockPalette.getFilterLayer(key);
+
+							if (layer == null)
+							{
+								return Optional.absent();
+							}
+
+							int sizeX = Math.max(2, layer.getReplacementBlocks().size() / 2);
+
+							while (layer.getReplacementBlocks().size() <= (sizeX - 1) * (sizeX - 1))
+							{
+								sizeX--;
+							}
+
+							final int sizeDoubled = (sizeX * 2);
+
+							final int remainder =
+									layer.getReplacementBlocks().size() > sizeDoubled && (layer.getReplacementBlocks().size() % sizeDoubled) > 0 ? 1 : 0;
+
+							final int sizeY = sizeX + remainder;
+
+							final BlockDataContainer container = new BlockDataContainer(sizeX, sizeY, 1);
+
+							final int minSize = Math.min(sizeX, sizeY);
+
+							int i = 0;
+
+							for (final BlockDataWithConditions block : layer.getReplacementBlocks())
+							{
+								final int x = i % minSize;
+								final int y = i / minSize;
+
+								container.set(block, x, y, 0);
+
+								i++;
+							}
+
+							final RenderBlueprint blueprint = new RenderBlueprint(new Blueprint(mc.world, BlockPos.ORIGIN, new BlueprintData(container)),
+									mc.world);
+							blueprint.useCamera = false;
+
+							return Optional.of(blueprint);
+						}
+					});
 
 	private BlockRendererDispatcher blockRenderer;
 
@@ -59,24 +120,43 @@ public class TileEntityForgedBlockRenderer extends TileEntitySpecialRenderer<Til
 			return;
 		}
 
-		if (this.blockRenderer == null)
+		try
 		{
-			this.blockRenderer = mc.getBlockRendererDispatcher();
-		}
+			final RenderBlueprint blueprint = this.blueprintCache.get(this.stack).orNull();
 
-		final BlockFilterLayer layer = ItemForgedBlock.getFilterLayer(this.stack);
+			if (blueprint == null)
+			{
+				return;
+			}
 
-		if (layer != null)
-		{
 			GlStateManager.pushMatrix();
 
-			final List<BlockDataWithConditions> blocks = layer.getReplacementBlocks();
+			final boolean inGuiContext = OpenGLHelper.isInGuiContext();
 
-			final IBlockState state = blocks.get((int) ((System.currentTimeMillis() / 1000) % blocks.size())).getBlockState();
+			if (!inGuiContext)
+			{
+				blueprint.transformForWorld();
+				this.setLightmapDisabled(true);
+			}
+			else
+			{
+				blueprint.transformForGui();
+			}
 
-			this.renderBlock(state);
+			blueprint.doGlobalRendering(mc.world, AirSelectionRenderer.PARTIAL_TICKS);
+
+			if (!inGuiContext)
+			{
+				this.setLightmapDisabled(false);
+			}
+
+			GlStateManager.resetColor();
 
 			GlStateManager.popMatrix();
+		}
+		catch (final ExecutionException e)
+		{
+			OrbisCore.LOGGER.error(e);
 		}
 	}
 
@@ -140,9 +220,22 @@ public class TileEntityForgedBlockRenderer extends TileEntitySpecialRenderer<Til
 		GlStateManager.resetColor();
 	}
 
-	public void transformForWorld()
+	@Override
+	public void onRemoval(final RemovalNotification<ItemStack, Optional<RenderBlueprint>> notification)
 	{
+		final Optional<RenderBlueprint> opt = notification.getValue();
 
+		if (opt == null)
+		{
+			return;
+		}
+
+		final RenderBlueprint blueprint = opt.orNull();
+
+		if (blueprint != null)
+		{
+			blueprint.onRemoved();
+		}
 	}
 
 	public void transformForGui()

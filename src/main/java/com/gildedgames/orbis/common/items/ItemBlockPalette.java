@@ -30,13 +30,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @Mod.EventBusSubscriber(Side.CLIENT)
-public class ItemForgedBlock extends Item implements ModelRegisterCallback, IShapeSelector
+public class ItemBlockPalette extends Item implements ModelRegisterCallback, IShapeSelector
 {
 
 	@SideOnly(Side.CLIENT)
 	private static TileEntityForgedBlockRenderer.BakedModel dummyModel;
 
-	public ItemForgedBlock()
+	public ItemBlockPalette()
 	{
 		super();
 
@@ -71,14 +71,14 @@ public class ItemForgedBlock extends Item implements ModelRegisterCallback, ISha
 	@SubscribeEvent
 	public static void onModelBake(final ModelBakeEvent event)
 	{
-		event.getModelRegistry().putObject(new ModelResourceLocation(AetherCore.MOD_ID + ":orbis/forged_block", "inventory"), dummyModel);
+		event.getModelRegistry().putObject(new ModelResourceLocation(AetherCore.MOD_ID + ":orbis/block_palette", "inventory"), dummyModel);
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerModel()
 	{
-		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(AetherCore.MOD_ID + ":orbis/forged_block", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(AetherCore.MOD_ID + ":orbis/block_palette", "inventory"));
 
 		final TileEntityForgedBlockRenderer tesr = new TileEntityForgedBlockRenderer();
 
@@ -107,7 +107,7 @@ public class ItemForgedBlock extends Item implements ModelRegisterCallback, ISha
 
 		final ICreationData creationData = new CreationData(world, module.getEntity());
 
-		final BlockFilterLayer layer = ItemForgedBlock.getFilterLayer(held);
+		final BlockFilterLayer layer = ItemBlockPalette.getFilterLayer(held);
 
 		if (module.powers().getCurrentPower() == module.powers().getReplacePower())
 		{

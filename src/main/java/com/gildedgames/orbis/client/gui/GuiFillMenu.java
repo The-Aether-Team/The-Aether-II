@@ -12,7 +12,7 @@ import com.gildedgames.orbis.client.gui.util.vanilla.GuiFrameCreative;
 import com.gildedgames.orbis.client.util.rect.Dim2D;
 import com.gildedgames.orbis.client.util.rect.Pos2D;
 import com.gildedgames.orbis.common.containers.slots.SlotForge;
-import com.gildedgames.orbis.common.items.ItemForgedBlock;
+import com.gildedgames.orbis.common.items.ItemBlockPalette;
 import com.gildedgames.orbis.common.items.ItemsOrbis;
 import com.gildedgames.orbis.common.util.InputHelper;
 import com.google.common.collect.Lists;
@@ -100,9 +100,9 @@ public class GuiFillMenu extends GuiFrameCreative
 
 		if (InputHelper.isHovered(this.forgeButton) && mouseButton == 0)
 		{
-			final ItemStack stack = new ItemStack(ItemsOrbis.forged_block);
+			final ItemStack stack = new ItemStack(ItemsOrbis.block_palette);
 
-			ItemForgedBlock.setFilterLayer(stack, BlockFilterHelper.createFillLayer(this.getItemStacksInForge()));
+			ItemBlockPalette.setFilterLayer(stack, BlockFilterHelper.createFillLayer(this.getItemStacksInForge()));
 
 			Minecraft.getMinecraft().player.inventory.setItemStack(stack);
 		}
