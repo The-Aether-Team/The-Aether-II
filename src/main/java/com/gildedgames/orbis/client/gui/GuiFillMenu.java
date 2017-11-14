@@ -17,6 +17,7 @@ import com.gildedgames.orbis.common.items.ItemsOrbis;
 import com.gildedgames.orbis.common.util.InputHelper;
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -35,6 +36,10 @@ public class GuiFillMenu extends GuiFrameCreative
 	private final ContainerFillMenu container;
 
 	private GuiAbstractButton forgeButton;
+
+	private GuiTexture matrix, flow;
+
+	private GuiText combineTitle;
 
 	public GuiFillMenu(final EntityPlayer player, final IInventory forgeInventory)
 	{
@@ -74,15 +79,15 @@ public class GuiFillMenu extends GuiFrameCreative
 
 		this.forgeButton.dim().mod().pos(center).center(true).addY(72 - 15).addX(60).flush();
 
-		final GuiTexture matrix = new GuiTexture(Dim2D.build().width(85).height(87).center(true).pos(center).addX(60).addY(-15).flush(), MATRIX_ICON);
-		final GuiTexture flow = new GuiTexture(Dim2D.build().width(8).height(14).center(true).pos(center).addX(60).addY(52 - 15).flush(), FLOW_ICON);
+		this.matrix = new GuiTexture(Dim2D.build().width(85).height(87).center(true).pos(center).addX(60).addY(-15).flush(), MATRIX_ICON);
+		this.flow = new GuiTexture(Dim2D.build().width(8).height(14).center(true).pos(center).addX(60).addY(52 - 15).flush(), FLOW_ICON);
 
-		final GuiText combineTitle = new GuiText(Dim2D.build().pos(center).centerX(true).addX(60).addY(-49).flush(),
+		this.combineTitle = new GuiText(Dim2D.build().pos(center).centerX(true).addX(60).addY(-49).flush(),
 				new Text(new TextComponentString("Combine"), 1.0F));
 
-		this.addChild(matrix);
-		this.addChild(flow);
-		this.addChild(combineTitle);
+		this.addChild(this.matrix);
+		this.addChild(this.flow);
+		this.addChild(this.combineTitle);
 
 		this.addChild(this.forgeButton);
 	}
@@ -91,6 +96,11 @@ public class GuiFillMenu extends GuiFrameCreative
 	public void draw()
 	{
 		this.forgeButton.setEnabled(this.getItemStacksInForge().size() >= 2);
+
+		this.forgeButton.setVisible(this.getSelectedTabIndex() != CreativeTabs.INVENTORY.getTabIndex());
+		this.matrix.setVisible(this.getSelectedTabIndex() != CreativeTabs.INVENTORY.getTabIndex());
+		this.flow.setVisible(this.getSelectedTabIndex() != CreativeTabs.INVENTORY.getTabIndex());
+		this.combineTitle.setVisible(this.getSelectedTabIndex() != CreativeTabs.INVENTORY.getTabIndex());
 	}
 
 	@Override
