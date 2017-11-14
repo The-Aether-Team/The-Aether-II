@@ -24,7 +24,7 @@ public class SlotForge extends Slot
 	@Override
 	public boolean isHere(final IInventory inv, final int slotIn)
 	{
-		return inv == this.inventory && slotIn == this.getSlotIndex() - this.indexOffset;
+		return inv == this.inventory && slotIn == this.getSlotIndex();
 	}
 
 	@Override

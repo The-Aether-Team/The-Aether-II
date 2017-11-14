@@ -2,12 +2,12 @@ package com.gildedgames.orbis.client.gui;
 
 import com.gildedgames.aether.api.orbis_core.util.BlockFilterHelper;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.orbis.client.gui.data.Text;
 import com.gildedgames.orbis.client.gui.util.GuiAbstractButton;
 import com.gildedgames.orbis.client.gui.util.GuiFactory;
 import com.gildedgames.orbis.client.gui.util.GuiText;
 import com.gildedgames.orbis.client.gui.util.GuiTexture;
+import com.gildedgames.orbis.client.gui.util.vanilla.GuiContainerCreativePublic;
 import com.gildedgames.orbis.client.gui.util.vanilla.GuiFrameCreative;
 import com.gildedgames.orbis.client.util.rect.Dim2D;
 import com.gildedgames.orbis.client.util.rect.Pos2D;
@@ -17,19 +17,13 @@ import com.gildedgames.orbis.common.items.ItemsOrbis;
 import com.gildedgames.orbis.common.util.InputHelper;
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.util.List;
 
 public class GuiFillMenu extends GuiFrameCreative
@@ -38,15 +32,7 @@ public class GuiFillMenu extends GuiFrameCreative
 
 	private static final ResourceLocation FLOW_ICON = AetherCore.getResource("orbis/filter_gui/flow_icon.png");
 
-	private static final Method ADD_SLOT_TO_CONTAINER;
-
-	static
-	{
-		// TODO: Add obfuscated entry
-		ADD_SLOT_TO_CONTAINER = ReflectionAether.getMethod(Container.class, new Class<?>[] { Slot.class }, "addSlotToContainer", "func_75146_a");
-	}
-
-	private final SlotForge[] slots;
+	private final ContainerFillMenu container;
 
 	private GuiAbstractButton forgeButton;
 
@@ -54,50 +40,21 @@ public class GuiFillMenu extends GuiFrameCreative
 	{
 		super(player);
 
-		this.inventorySlots.inventorySlots.clear();
+		this.container = new ContainerFillMenu(player, forgeInventory, this);
 
-		final int indexOffset = 55;
+		this.inventorySlots = this.container;
+		player.openContainer = this.inventorySlots;
 
-		this.slots = new SlotForge[3 * 4];
-
-		for (int i = 0; i < 3; ++i)
-		{
-			for (int j = 0; j < 4; ++j)
-			{
-				final SlotForge slot = new SlotForge(forgeInventory, indexOffset, indexOffset + (i * 4 + j), 222 + j * 18, 36 + i * 18);
-
-				ReflectionAether.invokeMethod(ADD_SLOT_TO_CONTAINER, this.inventorySlots, slot);
-
-				this.slots[i * 4 + j] = slot;
-			}
-		}
-
-		final IInventory basicInventory = ObfuscationReflectionHelper.getPrivateValue(GuiContainerCreative.class,
-				(GuiContainerCreative) Minecraft.getMinecraft().currentScreen, 1);
-
-		final InventoryPlayer inventoryplayer = player.inventory;
-
-		for (int i = 0; i < 5; ++i)
-		{
-			for (int j = 0; j < 9; ++j)
-			{
-				ReflectionAether.invokeMethod(ADD_SLOT_TO_CONTAINER, this.inventorySlots, new Slot(basicInventory, i * 9 + j, 9 + j * 18, 18 + i * 18));
-			}
-		}
-
-		for (int k = 0; k < 9; ++k)
-		{
-			ReflectionAether.invokeMethod(ADD_SLOT_TO_CONTAINER, this.inventorySlots, new Slot(inventoryplayer, k, 9 + k * 18, 112));
-		}
+		this.setExtraSlots(12);
 	}
 
 	private List<ItemStack> getItemStacksInForge()
 	{
 		final List<ItemStack> stacks = Lists.newArrayList();
 
-		for (int i = 0; i < this.slots.length; i++)
+		for (int i = 0; i < this.container.slots.length; i++)
 		{
-			final SlotForge slot = this.slots[i];
+			final SlotForge slot = this.container.slots[i];
 
 			if (slot.getStack() != null && !slot.getStack().isEmpty())
 			{
@@ -149,5 +106,33 @@ public class GuiFillMenu extends GuiFrameCreative
 
 			Minecraft.getMinecraft().player.inventory.setItemStack(stack);
 		}
+	}
+
+	public static class ContainerFillMenu extends ContainerCreativePublic
+	{
+
+		public SlotForge[] slots;
+
+		public ContainerFillMenu(final EntityPlayer player, final IInventory forgeInventory, final GuiContainerCreativePublic gui)
+		{
+			super(player, gui);
+
+			this.slots = new SlotForge[3 * 4];
+
+			final int indexOffset = 55;
+
+			for (int i = 0; i < 3; ++i)
+			{
+				for (int j = 0; j < 4; ++j)
+				{
+					final SlotForge slot = new SlotForge(forgeInventory, indexOffset, indexOffset + (i * 4 + j), 222 + j * 18, 36 + i * 18);
+
+					this.addSlotToContainer(slot);
+
+					this.slots[i * 4 + j] = slot;
+				}
+			}
+		}
+
 	}
 }

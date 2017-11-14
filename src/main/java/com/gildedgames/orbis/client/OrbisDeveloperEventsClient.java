@@ -228,7 +228,14 @@ public class OrbisDeveloperEventsClient
 		final PlayerAether player = PlayerAether.getPlayer(Minecraft.getMinecraft().player);
 		final PlayerOrbisModule module = player.getOrbisModule();
 
-		final IShapeSelector selector = module.powers().getCurrentPower().getShapeSelector();
+		IShapeSelector selector = module.powers().getCurrentPower().getShapeSelector();
+
+		final ItemStack held = module.getEntity().getHeldItemMainhand();
+
+		if (held.getItem() instanceof IShapeSelector)
+		{
+			selector = (IShapeSelector) held.getItem();
+		}
 
 		if (event.getButton() == 0 || event.getButton() == 1)
 		{

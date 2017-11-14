@@ -114,7 +114,14 @@ public class PlayerSelectionModule extends PlayerAetherModule
 		final PlayerOrbisModule module = PlayerOrbisModule.get(this.getEntity());
 		final IGodPower power = module.powers().getCurrentPower();
 
-		final IShapeSelector selector = power.getShapeSelector();
+		IShapeSelector selector = power.getShapeSelector();
+
+		final ItemStack held = module.getEntity().getHeldItemMainhand();
+
+		if (held.getItem() instanceof IShapeSelector)
+		{
+			selector = (IShapeSelector) held.getItem();
+		}
 
 		if (this.activeSelection instanceof AbstractShape)
 		{
@@ -145,15 +152,15 @@ public class PlayerSelectionModule extends PlayerAetherModule
 
 		IShapeSelector selector = power.getShapeSelector();
 
+		final ItemStack held = module.getEntity().getHeldItemMainhand();
+
+		if (held.getItem() instanceof IShapeSelector)
+		{
+			selector = (IShapeSelector) held.getItem();
+		}
+
 		if (this.activeSelection != null)
 		{
-			final ItemStack held = module.getEntity().getHeldItemMainhand();
-
-			if (held.getItem() instanceof IShapeSelector)
-			{
-				selector = (IShapeSelector) held.getItem();
-			}
-
 			if (selector.canSelectShape(module, this.activeSelection, this.getWorld()))
 			{
 				this.selectPos = pos;

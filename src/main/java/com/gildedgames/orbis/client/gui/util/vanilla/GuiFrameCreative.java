@@ -9,7 +9,6 @@ import com.gildedgames.orbis.common.util.InputHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ClickType;
@@ -21,7 +20,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class GuiFrameCreative extends GuiContainerCreative implements IGuiFrame
+public class GuiFrameCreative extends GuiContainerCreativePublic implements IGuiFrame
 {
 
 	private final List<IGuiFrame> children = new CopyOnWriteArrayList<>();
@@ -345,7 +344,7 @@ public class GuiFrameCreative extends GuiContainerCreative implements IGuiFrame
 
 		for (final IGuiFrame frame : this.children)
 		{
-			//frame.publicMouseClicked(mouseX, mouseY, mouseButton);
+			frame.publicMouseClicked(mouseX, mouseY, mouseButton);
 		}
 	}
 
