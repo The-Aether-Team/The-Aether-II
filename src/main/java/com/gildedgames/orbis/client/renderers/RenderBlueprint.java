@@ -140,8 +140,7 @@ public class RenderBlueprint implements IWorldRenderer
 		this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 		RenderHelper.disableStandardItemLighting();
 		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		//GlStateManager.enableBlend();
-		GlStateManager.disableCull();
+		GlStateManager.enableBlend();
 
 		if (Minecraft.isAmbientOcclusionEnabled())
 		{
@@ -193,6 +192,8 @@ public class RenderBlueprint implements IWorldRenderer
 		TileEntityRendererDispatcher.instance.drawBatch(pass);*/
 
 		GlStateManager.glEndList();
+
+		RenderHelper.enableStandardItemLighting();
 
 		GlStateManager.popMatrix();
 
