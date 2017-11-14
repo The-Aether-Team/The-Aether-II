@@ -77,12 +77,12 @@ public class GuiFillMenu extends GuiFrameCreative
 
 		this.forgeButton = GuiFactory.createForgeButton();
 
-		this.forgeButton.dim().mod().pos(center).center(true).addY(72 - 15).addX(60).flush();
+		this.forgeButton.dim().mod().pos(center).center(true).addY(72 - 6).addX(60).flush();
 
-		this.matrix = new GuiTexture(Dim2D.build().width(85).height(87).center(true).pos(center).addX(60).addY(-15).flush(), MATRIX_ICON);
-		this.flow = new GuiTexture(Dim2D.build().width(8).height(14).center(true).pos(center).addX(60).addY(52 - 15).flush(), FLOW_ICON);
+		this.matrix = new GuiTexture(Dim2D.build().width(85).height(105).center(true).pos(center).addX(60).addY(-15).flush(), MATRIX_ICON);
+		this.flow = new GuiTexture(Dim2D.build().width(8).height(14).center(true).pos(center).addX(60).addY(52 - 6).flush(), FLOW_ICON);
 
-		this.combineTitle = new GuiText(Dim2D.build().pos(center).centerX(true).addX(60).addY(-49).flush(),
+		this.combineTitle = new GuiText(Dim2D.build().pos(center).centerX(true).addX(60).addY(-49 - 9).flush(),
 				new Text(new TextComponentString("Combine"), 1.0F));
 
 		this.addChild(this.matrix);
@@ -127,15 +127,15 @@ public class GuiFillMenu extends GuiFrameCreative
 		{
 			super(player, gui);
 
-			this.slots = new SlotForge[3 * 4];
+			this.slots = new SlotForge[4 * 4];
 
 			final int indexOffset = 55;
 
-			for (int i = 0; i < 3; ++i)
+			for (int i = 0; i < 4; ++i)
 			{
 				for (int j = 0; j < 4; ++j)
 				{
-					final SlotForge slot = new SlotForge(forgeInventory, indexOffset, indexOffset + (i * 4 + j), 222 + j * 18, 36 + i * 18);
+					final SlotForge slot = new SlotForge(forgeInventory, indexOffset, indexOffset + (i * 4 + j), 222 + j * 18, 27 + i * 18);
 
 					this.addSlotToContainer(slot);
 
