@@ -1,12 +1,16 @@
 package com.gildedgames.orbis.client.renderers.tiles;
 
 import com.gildedgames.aether.api.orbis_core.OrbisCore;
-import com.gildedgames.aether.api.orbis_core.block.BlockDataContainer;
+import com.gildedgames.aether.api.orbis_core.api.exceptions.OrbisMissingDataException;
+import com.gildedgames.aether.api.orbis_core.api.exceptions.OrbisMissingProjectException;
 import com.gildedgames.aether.api.orbis_core.data.BlueprintData;
+import com.gildedgames.aether.api.orbis_core.data.management.IDataIdentifier;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis.client.renderers.AirSelectionRenderer;
 import com.gildedgames.orbis.client.renderers.RenderBlueprint;
-import com.gildedgames.orbis.common.items.ItemBlockDataContainer;
-import com.gildedgames.orbis.common.tiles.TileEntityBlockDataContainer;
+import com.gildedgames.orbis.common.Orbis;
+import com.gildedgames.orbis.common.items.ItemBlueprint;
+import com.gildedgames.orbis.common.tiles.TileEntityBlueprint;
 import com.gildedgames.orbis.common.util.OpenGLHelper;
 import com.gildedgames.orbis.common.world_objects.Blueprint;
 import com.google.common.base.Optional;
@@ -34,41 +38,51 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
-public class TileEntityBlockDataContainerRenderer extends TileEntitySpecialRenderer<TileEntityBlockDataContainer>
-		implements RemovalListener<BlockDataContainer, Optional<RenderBlueprint>>
+public class TileEntityBlueprintRenderer extends TileEntitySpecialRenderer<TileEntityBlueprint>
+		implements RemovalListener<IDataIdentifier, Optional<RenderBlueprint>>
 {
 
 	private static final Minecraft mc = Minecraft.getMinecraft();
 
 	public final BakedModel baked = new BakedModel();
 
-	private final LoadingCache<BlockDataContainer, Optional<RenderBlueprint>> blueprintCache = CacheBuilder.newBuilder()
+	private final LoadingCache<IDataIdentifier, Optional<RenderBlueprint>> blueprintCache = CacheBuilder.newBuilder()
 			.maximumSize(1000)
 			.expireAfterWrite(10, TimeUnit.MINUTES)
 			.removalListener(this)
 			.build(
-					new CacheLoader<BlockDataContainer, Optional<RenderBlueprint>>()
+					new CacheLoader<IDataIdentifier, Optional<RenderBlueprint>>()
 					{
 						@Override
-						public Optional<RenderBlueprint> load(final BlockDataContainer container)
+						public Optional<RenderBlueprint> load(final IDataIdentifier id)
 						{
-							final RenderBlueprint blueprint = new RenderBlueprint(new Blueprint(mc.world, BlockPos.ORIGIN, new BlueprintData(container)),
-									mc.world);
-							blueprint.useCamera = false;
+							try
+							{
+								final BlueprintData blueprint = Orbis.getProjectManager().findData(id);
 
-							return Optional.of(blueprint);
+								final RenderBlueprint render = new RenderBlueprint(new Blueprint(mc.world, BlockPos.ORIGIN, blueprint), mc.world);
+								render.useCamera = false;
+
+								return Optional.of(render);
+							}
+							catch (final OrbisMissingDataException | OrbisMissingProjectException e)
+							{
+								AetherCore.LOGGER.error(e);
+							}
+
+							return Optional.absent();
 						}
 					});
 
 	private ItemStack stack;
 
-	public TileEntityBlockDataContainerRenderer()
+	public TileEntityBlueprintRenderer()
 	{
 
 	}
 
 	@Override
-	public void renderTileEntityAt(final TileEntityBlockDataContainer te, final double x, final double y, final double z, final float partialTicks,
+	public void renderTileEntityAt(final TileEntityBlueprint te, final double x, final double y, final double z, final float partialTicks,
 			final int destroyStage)
 	{
 		try
@@ -78,14 +92,14 @@ public class TileEntityBlockDataContainerRenderer extends TileEntitySpecialRende
 				return;
 			}
 
-			final BlockDataContainer container = ItemBlockDataContainer.getDataContainer(this.stack);
+			final IDataIdentifier id = ItemBlueprint.getBlueprintId(this.stack);
 
-			if (container == null)
+			if (id == null)
 			{
 				return;
 			}
 
-			final RenderBlueprint blueprint = this.blueprintCache.get(container).orNull();
+			final RenderBlueprint blueprint = this.blueprintCache.get(id).orNull();
 
 			if (blueprint == null)
 			{
@@ -124,7 +138,7 @@ public class TileEntityBlockDataContainerRenderer extends TileEntitySpecialRende
 	}
 
 	@Override
-	public void onRemoval(final RemovalNotification<BlockDataContainer, Optional<RenderBlueprint>> notification)
+	public void onRemoval(final RemovalNotification<IDataIdentifier, Optional<RenderBlueprint>> notification)
 	{
 		final Optional<RenderBlueprint> opt = notification.getValue();
 
@@ -141,7 +155,7 @@ public class TileEntityBlockDataContainerRenderer extends TileEntitySpecialRende
 		}
 	}
 
-	public static class DummyTile extends TileEntityBlockDataContainer
+	public static class DummyTile extends TileEntityBlueprint
 	{
 	}
 
@@ -201,7 +215,7 @@ public class TileEntityBlockDataContainerRenderer extends TileEntitySpecialRende
 			@Override
 			public IBakedModel handleItemState(final IBakedModel originalModel, final ItemStack stack, final World world, final EntityLivingBase entity)
 			{
-				TileEntityBlockDataContainerRenderer.this.stack = stack;
+				TileEntityBlueprintRenderer.this.stack = stack;
 				return BakedModel.this;
 			}
 		}

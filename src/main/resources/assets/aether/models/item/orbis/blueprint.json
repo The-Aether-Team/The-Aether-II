@@ -1,6 +1,3 @@
 {
-	"parent": "item/generated",
-	"textures": {
-		"layer0": "aether:orbis/items/blueprint"
-	}
+	"parent": "item/generated"
 }

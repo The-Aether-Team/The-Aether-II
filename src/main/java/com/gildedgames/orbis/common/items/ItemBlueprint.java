@@ -13,8 +13,11 @@ import com.gildedgames.aether.api.orbis_core.processing.DataPrimer;
 import com.gildedgames.aether.api.orbis_core.util.RotationHelp;
 import com.gildedgames.aether.api.util.BlockAccessExtendedWrapper;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.orbis.client.ModelRegisterCallback;
+import com.gildedgames.orbis.client.renderers.tiles.TileEntityBlueprintRenderer;
 import com.gildedgames.orbis.common.Orbis;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -26,16 +29,35 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.client.ForgeHooksClient;
+import net.minecraftforge.client.event.ModelBakeEvent;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class ItemBlueprint extends Item
+@Mod.EventBusSubscriber(Side.CLIENT)
+public class ItemBlueprint extends Item implements ModelRegisterCallback
 {
+	@SideOnly(Side.CLIENT)
+	private static TileEntityBlueprintRenderer.BakedModel dummyModel;
+
 	public ItemBlueprint()
 	{
 		super();
 
 		this.setHasSubtypes(true);
+	}
+
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent
+	public static void onModelBake(final ModelBakeEvent event)
+	{
+		event.getModelRegistry().putObject(new ModelResourceLocation(AetherCore.MOD_ID + ":orbis/blueprint", "inventory"), dummyModel);
 	}
 
 	public static void setBlueprint(final ItemStack stack, final IDataIdentifier id)
@@ -62,6 +84,20 @@ public class ItemBlueprint extends Item
 		final IDataIdentifier id = funnel.get("blueprint_id");
 
 		return id;
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void registerModel()
+	{
+		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(AetherCore.MOD_ID + ":orbis/blueprint", "inventory"));
+
+		final TileEntityBlueprintRenderer tesr = new TileEntityBlueprintRenderer();
+
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlueprintRenderer.DummyTile.class, tesr);
+		dummyModel = tesr.baked;
+
+		ForgeHooksClient.registerTESRItemStack(this, 0, TileEntityBlueprintRenderer.DummyTile.class);
 	}
 
 	@Override

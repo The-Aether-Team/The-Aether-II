@@ -8,7 +8,7 @@ import com.gildedgames.aether.api.orbis_core.data.BlueprintData;
 import com.gildedgames.orbis.client.renderers.AirSelectionRenderer;
 import com.gildedgames.orbis.client.renderers.RenderBlueprint;
 import com.gildedgames.orbis.common.items.ItemBlockPalette;
-import com.gildedgames.orbis.common.tiles.TileEntityForgedBlock;
+import com.gildedgames.orbis.common.tiles.TileEntityBlockPalette;
 import com.gildedgames.orbis.common.util.OpenGLHelper;
 import com.gildedgames.orbis.common.world_objects.Blueprint;
 import com.google.common.base.Optional;
@@ -36,7 +36,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
-public class TileEntityForgedBlockRenderer extends TileEntitySpecialRenderer<TileEntityForgedBlock>
+public class TileEntityBlockPaletteRenderer extends TileEntitySpecialRenderer<TileEntityBlockPalette>
 		implements RemovalListener<BlockFilterLayer, Optional<RenderBlueprint>>
 {
 
@@ -94,13 +94,13 @@ public class TileEntityForgedBlockRenderer extends TileEntitySpecialRenderer<Til
 
 	private ItemStack stack;
 
-	public TileEntityForgedBlockRenderer()
+	public TileEntityBlockPaletteRenderer()
 	{
 
 	}
 
 	@Override
-	public void renderTileEntityAt(final TileEntityForgedBlock te, final double x, final double y, final double z, final float partialTicks,
+	public void renderTileEntityAt(final TileEntityBlockPalette te, final double x, final double y, final double z, final float partialTicks,
 			final int destroyStage)
 	{
 		if (this.stack == null)
@@ -173,7 +173,7 @@ public class TileEntityForgedBlockRenderer extends TileEntitySpecialRenderer<Til
 		}
 	}
 
-	public static class DummyTile extends TileEntityForgedBlock
+	public static class DummyTile extends TileEntityBlockPalette
 	{
 	}
 
@@ -233,7 +233,7 @@ public class TileEntityForgedBlockRenderer extends TileEntitySpecialRenderer<Til
 			@Override
 			public IBakedModel handleItemState(final IBakedModel originalModel, final ItemStack stack, final World world, final EntityLivingBase entity)
 			{
-				TileEntityForgedBlockRenderer.this.stack = stack;
+				TileEntityBlockPaletteRenderer.this.stack = stack;
 				return BakedModel.this;
 			}
 		}

@@ -11,7 +11,7 @@ import com.gildedgames.aether.api.orbis_core.block.BlockFilterLayer;
 import com.gildedgames.aether.api.orbis_core.block.BlockFilterType;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis.client.ModelRegisterCallback;
-import com.gildedgames.orbis.client.renderers.tiles.TileEntityForgedBlockRenderer;
+import com.gildedgames.orbis.client.renderers.tiles.TileEntityBlockPaletteRenderer;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -34,7 +34,7 @@ public class ItemBlockPalette extends Item implements ModelRegisterCallback, ISh
 {
 
 	@SideOnly(Side.CLIENT)
-	private static TileEntityForgedBlockRenderer.BakedModel dummyModel;
+	private static TileEntityBlockPaletteRenderer.BakedModel dummyModel;
 
 	public ItemBlockPalette()
 	{
@@ -80,12 +80,12 @@ public class ItemBlockPalette extends Item implements ModelRegisterCallback, ISh
 	{
 		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(AetherCore.MOD_ID + ":orbis/block_palette", "inventory"));
 
-		final TileEntityForgedBlockRenderer tesr = new TileEntityForgedBlockRenderer();
+		final TileEntityBlockPaletteRenderer tesr = new TileEntityBlockPaletteRenderer();
 
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityForgedBlockRenderer.DummyTile.class, tesr);
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlockPaletteRenderer.DummyTile.class, tesr);
 		dummyModel = tesr.baked;
 
-		ForgeHooksClient.registerTESRItemStack(this, 0, TileEntityForgedBlockRenderer.DummyTile.class);
+		ForgeHooksClient.registerTESRItemStack(this, 0, TileEntityBlockPaletteRenderer.DummyTile.class);
 	}
 
 	@Override
