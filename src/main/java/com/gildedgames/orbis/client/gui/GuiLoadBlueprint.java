@@ -204,7 +204,11 @@ public class GuiLoadBlueprint extends GuiFrame implements IDirectoryNavigatorLis
 					else
 					{
 						final BlueprintData data = Orbis.getProjectManager().findData(id);
-						palette.add(data, new DataCondition());
+						final DataCondition condition = new DataCondition();
+
+						condition.setWeight(s.getCount());
+						
+						palette.add(data, condition);
 					}
 				}
 				catch (final OrbisMissingDataException | OrbisMissingProjectException e)
