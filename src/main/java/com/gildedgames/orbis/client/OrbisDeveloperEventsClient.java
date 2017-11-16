@@ -107,6 +107,8 @@ public class OrbisDeveloperEventsClient
 			if (module.powers().getCurrentPower().hasCustomGui())
 			{
 				module.powers().getCurrentPower().onOpenGui(mc.player);
+				module.powers().getCurrentPower().getClientHandler().onOpenGui(mc.player);
+
 				NetworkingAether.sendPacketToServer(new PacketOpenGui());
 
 				event.setCanceled(true);
