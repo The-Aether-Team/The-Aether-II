@@ -159,6 +159,8 @@ public class GuiLoadBlueprint extends GuiFrame implements IDirectoryNavigatorLis
 	@Override
 	public void drawScreen(final int mouseX, final int mouseY, final float partialTicks)
 	{
+		this.forgeButton.setEnabled(this.getItemStacksInForge().size() >= 2);
+
 		this.drawWorldBackground(0);
 
 		this.mc.renderEngine.bindTexture(BLUEPRINT_INVENTORY);
@@ -207,7 +209,7 @@ public class GuiLoadBlueprint extends GuiFrame implements IDirectoryNavigatorLis
 						final DataCondition condition = new DataCondition();
 
 						condition.setWeight(s.getCount());
-						
+
 						palette.add(data, condition);
 					}
 				}
