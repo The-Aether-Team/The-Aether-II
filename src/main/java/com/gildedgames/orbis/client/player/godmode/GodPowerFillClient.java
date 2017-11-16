@@ -3,10 +3,13 @@ package com.gildedgames.orbis.client.player.godmode;
 import com.gildedgames.aether.api.orbis.IShape;
 import com.gildedgames.aether.api.orbis.IWorldRenderer;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.orbis.client.gui.GuiFillMenu;
 import com.gildedgames.orbis.client.gui.util.GuiTexture;
 import com.gildedgames.orbis.client.util.rect.Dim2D;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.GodPowerFill;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -31,6 +34,12 @@ public class GodPowerFillClient implements IGodPowerClient
 		this.server = server;
 
 		this.icon = new GuiTexture(Dim2D.build().width(14).height(14).flush(), TEXTURE);
+	}
+
+	@Override
+	public void onOpenGui(final EntityPlayer player)
+	{
+		Minecraft.getMinecraft().displayGuiScreen(new GuiFillMenu(player, this.server.getForgeInventory()));
 	}
 
 	@Override

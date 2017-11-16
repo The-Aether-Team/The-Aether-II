@@ -47,6 +47,12 @@ public class GodPowerSelectClient implements IGodPowerClient
 	}
 
 	@Override
+	public void onOpenGui(final EntityPlayer player)
+	{
+
+	}
+
+	@Override
 	public String displayName()
 	{
 		return "Select";

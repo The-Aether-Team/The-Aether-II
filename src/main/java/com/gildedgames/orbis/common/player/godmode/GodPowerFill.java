@@ -75,10 +75,7 @@ public class GodPowerFill implements IGodPower
 	@Override
 	public void onOpenGui(final EntityPlayer player)
 	{
-		if (player.world.isRemote)
-		{
-			Minecraft.getMinecraft().displayGuiScreen(new GuiFillMenu(player, this.getForgeInventory()));
-		}
+		
 	}
 
 	@Override

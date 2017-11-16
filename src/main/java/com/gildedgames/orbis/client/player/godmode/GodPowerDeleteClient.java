@@ -7,6 +7,7 @@ import com.gildedgames.orbis.client.gui.util.GuiTexture;
 import com.gildedgames.orbis.client.util.rect.Dim2D;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.GodPowerDelete;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.MouseEvent;
@@ -29,6 +30,12 @@ public class GodPowerDeleteClient implements IGodPowerClient
 		this.server = server;
 
 		this.icon = new GuiTexture(Dim2D.build().width(14).height(14).flush(), TEXTURE);
+	}
+
+	@Override
+	public void onOpenGui(final EntityPlayer player)
+	{
+
 	}
 
 	@Override
