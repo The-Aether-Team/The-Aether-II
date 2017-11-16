@@ -1,43 +1,23 @@
-package com.gildedgames.orbis.common;
+package com.gildedgames.orbis.client;
 
-import com.gildedgames.aether.api.io.NBTFunnel;
-import com.gildedgames.aether.api.orbis_core.OrbisCore;
 import com.gildedgames.aether.api.orbis_core.api.exceptions.OrbisMissingDataException;
 import com.gildedgames.aether.api.orbis_core.data.BlueprintData;
 import com.gildedgames.aether.api.orbis_core.data.management.IDataIdentifier;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis.client.renderers.RenderBlueprint;
-import com.gildedgames.orbis.common.data.BlueprintPalette;
+import com.gildedgames.orbis.common.Orbis;
 import com.gildedgames.orbis.common.world_objects.Blueprint;
 import com.google.common.base.Optional;
 import com.google.common.cache.*;
 import net.minecraft.client.Minecraft;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.concurrent.TimeUnit;
 
-public class OrbisCaches
+public class OrbisClientCaches
 {
-
-	private static final LoadingCache<NBTTagCompound, Optional<BlueprintPalette>> blueprintPaletteCache = CacheBuilder.newBuilder()
-			.maximumSize(1000)
-			.expireAfterWrite(10, TimeUnit.MINUTES)
-			.build(
-					new CacheLoader<NBTTagCompound, Optional<BlueprintPalette>>()
-					{
-						@Override
-						public Optional<BlueprintPalette> load(final NBTTagCompound tag)
-						{
-							final NBTFunnel funnel = OrbisCore.io().createFunnel(tag);
-
-							final BlueprintPalette palette = funnel.get("palette");
-
-							return Optional.of(palette);
-						}
-					});
 
 	@SideOnly(Side.CLIENT)
 	private static final LoadingCache<IDataIdentifier, Optional<RenderBlueprint>> blueprintRenderCache = CacheBuilder.newBuilder()
@@ -68,11 +48,6 @@ public class OrbisCaches
 							return Optional.absent();
 						}
 					});
-
-	public static LoadingCache<NBTTagCompound, Optional<BlueprintPalette>> getBlueprintPalettes()
-	{
-		return blueprintPaletteCache;
-	}
 
 	@SideOnly(Side.CLIENT)
 	public static LoadingCache<IDataIdentifier, Optional<RenderBlueprint>> getBlueprintRenders()

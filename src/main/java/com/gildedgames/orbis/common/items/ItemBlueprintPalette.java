@@ -11,7 +11,7 @@ import com.gildedgames.aether.api.util.BlockAccessExtendedWrapper;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis.client.ModelRegisterCallback;
 import com.gildedgames.orbis.client.renderers.tiles.TileEntityBlueprintPaletteRenderer;
-import com.gildedgames.orbis.common.OrbisCaches;
+import com.gildedgames.orbis.common.OrbisServerCaches;
 import com.gildedgames.orbis.common.data.BlueprintPalette;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -78,7 +78,7 @@ public class ItemBlueprintPalette extends Item implements ModelRegisterCallback
 
 		try
 		{
-			return OrbisCaches.getBlueprintPalettes().get(stack.getTagCompound()).orNull();
+			return OrbisServerCaches.getBlueprintPalettes().get(stack.getTagCompound()).orNull();
 		}
 		catch (final ExecutionException e)
 		{

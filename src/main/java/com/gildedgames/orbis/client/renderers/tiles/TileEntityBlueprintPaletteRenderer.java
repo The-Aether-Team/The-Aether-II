@@ -2,9 +2,9 @@ package com.gildedgames.orbis.client.renderers.tiles;
 
 import com.gildedgames.aether.api.orbis_core.OrbisCore;
 import com.gildedgames.aether.api.orbis_core.data.management.IDataIdentifier;
+import com.gildedgames.orbis.client.OrbisClientCaches;
 import com.gildedgames.orbis.client.renderers.AirSelectionRenderer;
 import com.gildedgames.orbis.client.renderers.RenderBlueprint;
-import com.gildedgames.orbis.common.OrbisCaches;
 import com.gildedgames.orbis.common.data.BlueprintPalette;
 import com.gildedgames.orbis.common.items.ItemBlueprintPalette;
 import com.gildedgames.orbis.common.tiles.TileEntityBlueprintPalette;
@@ -78,7 +78,7 @@ public class TileEntityBlueprintPaletteRenderer extends TileEntitySpecialRendere
 				i++;
 			}
 
-			final Optional<RenderBlueprint> opt = OrbisCaches.getBlueprintRenders().get(id);
+			final Optional<RenderBlueprint> opt = OrbisClientCaches.getBlueprintRenders().get(id);
 
 			if (!opt.isPresent())
 			{
