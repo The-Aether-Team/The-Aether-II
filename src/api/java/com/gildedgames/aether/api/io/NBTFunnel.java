@@ -175,7 +175,7 @@ public class NBTFunnel
 
 		for (int i = 0; i < keys.tagCount(); i++)
 		{
-			final NBTTagCompound keyData = objects.getCompoundTagAt(i);
+			final NBTTagCompound keyData = keys.getCompoundTagAt(i);
 			final NBTTagCompound valueData = objects.getCompoundTagAt(i);
 
 			readObjects.put(world == null ? NBTHelper.read(this.serializer, keyData) : NBTHelper.read(world, this.serializer, keyData),
