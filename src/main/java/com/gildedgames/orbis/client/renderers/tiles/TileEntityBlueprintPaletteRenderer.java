@@ -58,7 +58,7 @@ public class TileEntityBlueprintPaletteRenderer extends TileEntitySpecialRendere
 
 			final BlueprintPalette palette = ItemBlueprintPalette.getBlueprintPalette(this.stack);
 
-			if (palette == null)
+			if (palette == null || palette.getIDs().size() <= 0)
 			{
 				return;
 			}
