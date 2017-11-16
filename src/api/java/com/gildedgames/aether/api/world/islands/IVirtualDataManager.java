@@ -1,8 +1,8 @@
 package com.gildedgames.aether.api.world.islands;
 
 import com.gildedgames.aether.api.orbis_core.api.BlueprintDefinition;
-import com.gildedgames.aether.api.orbis_core.api.BlueprintInstance;
 import com.gildedgames.aether.api.orbis_core.api.ICreationData;
+import com.gildedgames.aether.api.orbis_core.api.PlacedBlueprint;
 import com.gildedgames.aether.api.util.NBT;
 import com.gildedgames.aether.api.world.TemplateInstance;
 import com.gildedgames.aether.api.world.generation.IBlockAccessExtended;
@@ -24,11 +24,11 @@ public interface IVirtualDataManager extends IBlockAccessExtended, NBT
 
 	void placeBlueprint(BlueprintDefinition def, ICreationData data);
 
-	boolean dropBlueprint(BlueprintInstance instance);
+	boolean dropBlueprint(PlacedBlueprint instance);
 
-	List<BlueprintInstance> getPlacedBlueprints();
+	List<PlacedBlueprint> getPlacedBlueprints();
 
-	void setPlacedBlueprints(List<BlueprintInstance> instances);
+	void setPlacedBlueprints(List<PlacedBlueprint> instances);
 
 	List<TemplateInstance> getPlacedTemplates();
 

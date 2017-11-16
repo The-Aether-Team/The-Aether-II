@@ -17,7 +17,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.util.Arrays;
 
-public class BlueprintInstance implements NBT
+public class PlacedBlueprint implements NBT
 {
 	private final World world;
 
@@ -33,7 +33,7 @@ public class BlueprintInstance implements NBT
 
 	private boolean hasGeneratedAChunk;
 
-	public BlueprintInstance(final World world, final BlueprintDefinition def, final ICreationData data)
+	public PlacedBlueprint(final World world, final BlueprintDefinition def, final ICreationData data)
 	{
 		this.world = world;
 		this.def = def;
@@ -46,7 +46,7 @@ public class BlueprintInstance implements NBT
 		this.bakeChunks();
 	}
 
-	public BlueprintInstance(final World world, final NBTTagCompound tag)
+	public PlacedBlueprint(final World world, final NBTTagCompound tag)
 	{
 		this.world = world;
 
@@ -152,9 +152,9 @@ public class BlueprintInstance implements NBT
 		{
 			flag = true;
 		}
-		else if (obj instanceof BlueprintInstance)
+		else if (obj instanceof PlacedBlueprint)
 		{
-			final BlueprintInstance o = (BlueprintInstance) obj;
+			final PlacedBlueprint o = (PlacedBlueprint) obj;
 			final EqualsBuilder builder = new EqualsBuilder();
 
 			builder.append(this.definitionID, o.definitionID);
@@ -205,9 +205,9 @@ public class BlueprintInstance implements NBT
 	}
 
 	@Override
-	public BlueprintInstance clone()
+	public PlacedBlueprint clone()
 	{
-		final BlueprintInstance clone = new BlueprintInstance(this.world, this.def, this.data.clone());
+		final PlacedBlueprint clone = new PlacedBlueprint(this.world, this.def, this.data.clone());
 
 		clone.chunks = Arrays.copyOf(this.chunks, this.chunks.length);
 		clone.hasGeneratedAChunk = this.hasGeneratedAChunk;

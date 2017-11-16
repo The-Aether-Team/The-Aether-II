@@ -2,6 +2,7 @@ package com.gildedgames.orbis.common.network.packets;
 
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
+import com.gildedgames.orbis.common.containers.util.StagedInventory;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,34 +15,37 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PacketForgeInventoryChanged implements IMessage
+public class PacketStagedInventoryChanged implements IMessage
 {
 	private final List<Pair<Integer, ItemStack>> changes = new ArrayList<>();
 
+	private String locatorId;
+
 	private int entityId;
 
-	public PacketForgeInventoryChanged()
+	public PacketStagedInventoryChanged()
 	{
 
 	}
 
-	public PacketForgeInventoryChanged(final PlayerAether aePlayer)
+	public PacketStagedInventoryChanged(final PlayerAether aePlayer, final StagedInventory inventory)
 	{
 		this.entityId = aePlayer.getEntity().getEntityId();
 
-		final IInventory inventory = aePlayer.getOrbisModule().forge().getForgeInventory();
-
-		for (int i = 0; i < inventory.getSizeInventory(); i++)
+		for (int i = 0; i < inventory.get().getSizeInventory(); i++)
 		{
-			this.changes.add(Pair.of(i, inventory.getStackInSlot(i)));
+			this.changes.add(Pair.of(i, inventory.get().getStackInSlot(i)));
 		}
+
+		this.locatorId = inventory.getLocatorId();
 	}
 
-	public PacketForgeInventoryChanged(final Entity entity, final List<Pair<Integer, ItemStack>> changes)
+	public PacketStagedInventoryChanged(final Entity entity, final List<Pair<Integer, ItemStack>> changes, final String locatorId)
 	{
 		this.entityId = entity.getEntityId();
 
 		this.changes.addAll(changes);
+		this.locatorId = locatorId;
 	}
 
 	@Override
@@ -59,6 +63,8 @@ public class PacketForgeInventoryChanged implements IMessage
 
 			this.changes.add(Pair.of(slot, stack));
 		}
+
+		this.locatorId = ByteBufUtils.readUTF8String(buf);
 	}
 
 	@Override
@@ -73,12 +79,14 @@ public class PacketForgeInventoryChanged implements IMessage
 
 			ByteBufUtils.writeItemStack(buf, pair.getValue());
 		}
+
+		ByteBufUtils.writeUTF8String(buf, this.locatorId);
 	}
 
-	public static class HandlerClient extends MessageHandlerClient<PacketForgeInventoryChanged, IMessage>
+	public static class HandlerClient extends MessageHandlerClient<PacketStagedInventoryChanged, IMessage>
 	{
 		@Override
-		public IMessage onMessage(final PacketForgeInventoryChanged message, final EntityPlayer player)
+		public IMessage onMessage(final PacketStagedInventoryChanged message, final EntityPlayer player)
 		{
 			if (player == null || player.world == null)
 			{
@@ -91,7 +99,7 @@ public class PacketForgeInventoryChanged implements IMessage
 			{
 				final PlayerAether aePlayer = PlayerAether.getPlayer(player);
 
-				final IInventory inventory = aePlayer.getOrbisModule().forge().getForgeInventory();
+				final IInventory inventory = StagedInventory.getLocator(message.locatorId).locate(aePlayer.getOrbisModule()).get();
 
 				for (final Pair<Integer, ItemStack> pair : message.changes)
 				{

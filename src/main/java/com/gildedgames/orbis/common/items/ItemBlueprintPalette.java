@@ -4,18 +4,15 @@ import com.gildedgames.aether.api.io.NBTFunnel;
 import com.gildedgames.aether.api.orbis.IRegion;
 import com.gildedgames.aether.api.orbis_core.OrbisCore;
 import com.gildedgames.aether.api.orbis_core.api.CreationData;
-import com.gildedgames.aether.api.orbis_core.api.exceptions.OrbisMissingDataException;
-import com.gildedgames.aether.api.orbis_core.api.exceptions.OrbisMissingProjectException;
 import com.gildedgames.aether.api.orbis_core.data.BlueprintData;
-import com.gildedgames.aether.api.orbis_core.data.management.IDataIdentifier;
-import com.gildedgames.aether.api.orbis_core.data.management.IDataMetadata;
 import com.gildedgames.aether.api.orbis_core.processing.DataPrimer;
 import com.gildedgames.aether.api.orbis_core.util.RotationHelp;
 import com.gildedgames.aether.api.util.BlockAccessExtendedWrapper;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis.client.ModelRegisterCallback;
-import com.gildedgames.orbis.client.renderers.tiles.TileEntityBlueprintRenderer;
-import com.gildedgames.orbis.common.Orbis;
+import com.gildedgames.orbis.client.renderers.tiles.TileEntityBlueprintPaletteRenderer;
+import com.gildedgames.orbis.common.OrbisCaches;
+import com.gildedgames.orbis.common.data.BlueprintPalette;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
@@ -38,14 +35,15 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @Mod.EventBusSubscriber(Side.CLIENT)
-public class ItemBlueprint extends Item implements ModelRegisterCallback
+public class ItemBlueprintPalette extends Item implements ModelRegisterCallback
 {
 	@SideOnly(Side.CLIENT)
-	private static TileEntityBlueprintRenderer.BakedModel dummyModel;
+	private static TileEntityBlueprintPaletteRenderer.BakedModel dummyModel;
 
-	public ItemBlueprint()
+	public ItemBlueprintPalette()
 	{
 		super();
 
@@ -56,10 +54,10 @@ public class ItemBlueprint extends Item implements ModelRegisterCallback
 	@SubscribeEvent
 	public static void onModelBake(final ModelBakeEvent event)
 	{
-		event.getModelRegistry().putObject(new ModelResourceLocation(AetherCore.MOD_ID + ":orbis/blueprint", "inventory"), dummyModel);
+		event.getModelRegistry().putObject(new ModelResourceLocation(AetherCore.MOD_ID + ":orbis/blueprint_palette", "inventory"), dummyModel);
 	}
 
-	public static void setBlueprint(final ItemStack stack, final IDataIdentifier id)
+	public static void setBlueprintPalette(final ItemStack stack, final BlueprintPalette palette)
 	{
 		if (stack.getTagCompound() == null)
 		{
@@ -68,35 +66,40 @@ public class ItemBlueprint extends Item implements ModelRegisterCallback
 
 		final NBTFunnel funnel = OrbisCore.io().createFunnel(stack.getTagCompound());
 
-		funnel.set("blueprint_id", id);
+		funnel.set("palette", palette);
 	}
 
-	public static IDataIdentifier getBlueprintId(final ItemStack stack)
+	public static BlueprintPalette getBlueprintPalette(final ItemStack stack)
 	{
-		if (stack.getTagCompound() == null || !stack.getTagCompound().hasKey("blueprint_id"))
+		if (stack.getTagCompound() == null || !stack.getTagCompound().hasKey("palette"))
 		{
 			return null;
 		}
 
-		final NBTFunnel funnel = OrbisCore.io().createFunnel(stack.getTagCompound());
+		try
+		{
+			return OrbisCaches.getBlueprintPalettes().get(stack.getTagCompound()).orNull();
+		}
+		catch (final ExecutionException e)
+		{
+			OrbisCore.LOGGER.error(e);
+		}
 
-		final IDataIdentifier id = funnel.get("blueprint_id");
-
-		return id;
+		return null;
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerModel()
 	{
-		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(AetherCore.MOD_ID + ":orbis/blueprint", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(AetherCore.MOD_ID + ":orbis/blueprint_palette", "inventory"));
 
-		final TileEntityBlueprintRenderer tesr = new TileEntityBlueprintRenderer();
+		final TileEntityBlueprintPaletteRenderer tesr = new TileEntityBlueprintPaletteRenderer();
 
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlueprintRenderer.DummyTile.class, tesr);
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlueprintPaletteRenderer.DummyTile.class, tesr);
 		dummyModel = tesr.baked;
 
-		ForgeHooksClient.registerTESRItemStack(this, 0, TileEntityBlueprintRenderer.DummyTile.class);
+		ForgeHooksClient.registerTESRItemStack(this, 0, TileEntityBlueprintPaletteRenderer.DummyTile.class);
 	}
 
 	@Override
@@ -104,13 +107,13 @@ public class ItemBlueprint extends Item implements ModelRegisterCallback
 	{
 		final PlayerOrbisModule module = PlayerOrbisModule.get(player);
 
-		if (module.powers().getBlueprintPower().getPlacingBlueprint() != null)
+		if (module.powers().getBlueprintPower().getPlacingPalette() != null)
 		{
 			if (!world.isRemote)
 			{
 				final BlockPos selection = module.raytraceNoSnapping();
 
-				final BlueprintData data = module.powers().getBlueprintPower().getPlacingBlueprint();
+				final BlueprintData data = module.powers().getBlueprintPower().getPlacingPalette().fetchRandom(world, world.rand);
 
 				final Rotation rotation = module.powers().getBlueprintPower().getPlacingRotation();
 
@@ -131,28 +134,6 @@ public class ItemBlueprint extends Item implements ModelRegisterCallback
 	public void addInformation(final ItemStack stack, final EntityPlayer par2EntityPlayer, final List<String> creativeList, final boolean par4)
 	{
 
-	}
-
-	@Override
-	public String getItemStackDisplayName(final ItemStack stack)
-	{
-		final IDataIdentifier id = ItemBlueprint.getBlueprintId(stack);
-
-		if (id != null)
-		{
-			try
-			{
-				final IDataMetadata data = Orbis.getProjectManager().findMetadata(id);
-
-				return data.getName();
-			}
-			catch (OrbisMissingDataException | OrbisMissingProjectException e)
-			{
-				AetherCore.LOGGER.error(e);
-			}
-		}
-
-		return super.getItemStackDisplayName(stack);
 	}
 
 	@Override

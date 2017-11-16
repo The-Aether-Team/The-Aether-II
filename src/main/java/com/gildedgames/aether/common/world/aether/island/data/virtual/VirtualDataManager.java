@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.world.aether.island.data.virtual;
 
 import com.gildedgames.aether.api.orbis_core.api.BlueprintDefinition;
-import com.gildedgames.aether.api.orbis_core.api.BlueprintInstance;
 import com.gildedgames.aether.api.orbis_core.api.ICreationData;
+import com.gildedgames.aether.api.orbis_core.api.PlacedBlueprint;
 import com.gildedgames.aether.api.world.TemplateInstance;
 import com.gildedgames.aether.api.world.generation.TemplateDefinition;
 import com.gildedgames.aether.api.world.generation.TemplateLoc;
@@ -35,7 +35,7 @@ public class VirtualDataManager implements IVirtualDataManager
 
 	private List<TemplateInstance> templateInstances = Lists.newArrayList();
 
-	private List<BlueprintInstance> blueprintInstances = Lists.newArrayList();
+	private List<PlacedBlueprint> blueprintInstances = Lists.newArrayList();
 
 	private IVirtualChunk[] chunks;
 
@@ -109,25 +109,25 @@ public class VirtualDataManager implements IVirtualDataManager
 	@Override
 	public void placeBlueprint(final BlueprintDefinition def, final ICreationData data)
 	{
-		final BlueprintInstance instance = new BlueprintInstance(data.getWorld(), def, data);
+		final PlacedBlueprint instance = new PlacedBlueprint(data.getWorld(), def, data);
 
 		this.blueprintInstances.add(instance);
 	}
 
 	@Override
-	public boolean dropBlueprint(final BlueprintInstance instance)
+	public boolean dropBlueprint(final PlacedBlueprint instance)
 	{
 		return this.blueprintInstances.remove(instance);
 	}
 
 	@Override
-	public List<BlueprintInstance> getPlacedBlueprints()
+	public List<PlacedBlueprint> getPlacedBlueprints()
 	{
 		return this.blueprintInstances;
 	}
 
 	@Override
-	public void setPlacedBlueprints(final List<BlueprintInstance> instances)
+	public void setPlacedBlueprints(final List<PlacedBlueprint> instances)
 	{
 		this.blueprintInstances = instances;
 	}
@@ -257,13 +257,13 @@ public class VirtualDataManager implements IVirtualDataManager
 		final IVirtualChunk chunk = this.getChunkFromBlockPos(x, z);
 
 		// TODO: Might need this later if we don't save chunk data to disk
-		/*for (final BlueprintInstance instance : this.getPlacedBlueprints())
+		/*for (final PlacedBlueprint instance : this.getPlacedBlueprints())
 		{
 			for (final ChunkPos pos : instance.getChunksOccupied())
 			{
 				if (pos.chunkXPos == chunk.getX() && pos.chunkZPos == chunk.getZ())
 				{
-					final BlockDataContainer blocks = instance.getDef().getData().getBlockDataContainer();
+					final BlockDataContainer blocks = instance.getDef().getBlueprintConditionPairs().getBlockDataContainer();
 
 					final BlockPos min = instance.getCreationData().getPos();
 					final BlockPos max = new BlockPos(min.getX() + blocks.getWidth() - 1, min.getY() + blocks.getHeight() - 1,
@@ -389,7 +389,7 @@ public class VirtualDataManager implements IVirtualDataManager
 		clone.templateInstances = Lists.newArrayList(this.templateInstances);
 		clone.blueprintInstances = Lists.newArrayList();
 
-		for (final BlueprintInstance instance : this.blueprintInstances)
+		for (final PlacedBlueprint instance : this.blueprintInstances)
 		{
 			clone.blueprintInstances.add(instance.clone());
 		}
@@ -422,7 +422,7 @@ public class VirtualDataManager implements IVirtualDataManager
 
 		final NBTTagList blueprintInstances = new NBTTagList();
 
-		for (final BlueprintInstance instance : this.blueprintInstances)
+		for (final PlacedBlueprint instance : this.blueprintInstances)
 		{
 			final NBTTagCompound data = new NBTTagCompound();
 
@@ -461,7 +461,7 @@ public class VirtualDataManager implements IVirtualDataManager
 			{
 				final NBTTagCompound data = blueprintInstances.getCompoundTagAt(i);
 
-				this.blueprintInstances.add(new BlueprintInstance(this.world, data));
+				this.blueprintInstances.add(new PlacedBlueprint(this.world, data));
 			}
 		}
 	}

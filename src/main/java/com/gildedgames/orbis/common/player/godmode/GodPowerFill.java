@@ -5,10 +5,13 @@ import com.gildedgames.aether.api.orbis_core.util.BlockFilterHelper;
 import com.gildedgames.orbis.client.gui.GuiFillMenu;
 import com.gildedgames.orbis.client.player.godmode.GodPowerFillClient;
 import com.gildedgames.orbis.client.player.godmode.IGodPowerClient;
+import com.gildedgames.orbis.common.containers.inventory.InventoryBlockForge;
+import com.gildedgames.orbis.common.containers.util.StagedInventory;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.selectors.ShapeSelectorFilter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
@@ -19,9 +22,11 @@ public class GodPowerFill implements IGodPower
 
 	private final ShapeSelectorFilter shapeSelector;
 
+	private final StagedInventory<InventoryBlockForge> stagedInventory;
+
 	private GodPowerFillClient clientHandler = null;
 
-	public GodPowerFill(final World world)
+	public GodPowerFill(final PlayerOrbisModule module, final World world)
 	{
 		if (world.isRemote)
 		{
@@ -29,6 +34,18 @@ public class GodPowerFill implements IGodPower
 		}
 
 		this.shapeSelector = new ShapeSelectorFilter(p -> new BlockFilter(BlockFilterHelper.getNewFillLayer(p.getHeldItemMainhand())), false);
+		this.stagedInventory = new StagedInventory<>(module, () -> new InventoryBlockForge(module.getEntity()),
+				m -> m.powers().getFillPower().getStagedInventory(), "blockForge");
+	}
+
+	public StagedInventory<InventoryBlockForge> getStagedInventory()
+	{
+		return this.stagedInventory;
+	}
+
+	public IInventory getForgeInventory()
+	{
+		return this.stagedInventory.get();
 	}
 
 	@Override
@@ -60,8 +77,7 @@ public class GodPowerFill implements IGodPower
 	{
 		if (player.world.isRemote)
 		{
-			Minecraft.getMinecraft().displayGuiScreen(new GuiFillMenu(player, PlayerOrbisModule.get(player).forge().getForgeInventory()));
-			//Minecraft.getMinecraft().displayGuiScreen(new GuiFrameCreative(player));
+			Minecraft.getMinecraft().displayGuiScreen(new GuiFillMenu(player, this.getForgeInventory()));
 		}
 	}
 

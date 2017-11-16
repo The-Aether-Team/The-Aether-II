@@ -10,11 +10,16 @@ import com.gildedgames.aether.common.network.AetherGuiHandler;
 import com.gildedgames.orbis.client.player.godmode.GodPowerBlueprintClient;
 import com.gildedgames.orbis.client.player.godmode.IGodPowerClient;
 import com.gildedgames.orbis.common.Orbis;
+import com.gildedgames.orbis.common.containers.inventory.InventoryBlueprintForge;
+import com.gildedgames.orbis.common.containers.util.StagedInventory;
+import com.gildedgames.orbis.common.data.BlueprintPalette;
 import com.gildedgames.orbis.common.items.ItemBlockDataContainer;
 import com.gildedgames.orbis.common.items.ItemBlueprint;
+import com.gildedgames.orbis.common.items.ItemBlueprintPalette;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.selectors.ShapeSelectorBlueprint;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Rotation;
@@ -28,15 +33,19 @@ public class GodPowerBlueprint implements IGodPower
 
 	private final ShapeSelectorBlueprint shapeSelector;
 
+	private final StagedInventory<InventoryBlueprintForge> stagedInventory;
+
 	private Rotation placingRotation = Rotation.NONE;
 
 	private GodPowerBlueprintClient clientHandler;
 
 	private BlueprintData placingBlueprint;
 
+	private BlueprintPalette placingPalette;
+
 	private ItemStack previousStack;
 
-	public GodPowerBlueprint(final World world)
+	public GodPowerBlueprint(final PlayerOrbisModule module, final World world)
 	{
 		if (world.isRemote)
 		{
@@ -44,6 +53,13 @@ public class GodPowerBlueprint implements IGodPower
 		}
 
 		this.shapeSelector = new ShapeSelectorBlueprint(this);
+		this.stagedInventory = new StagedInventory<>(module, () -> new InventoryBlueprintForge(module.getEntity()),
+				m -> m.powers().getBlueprintPower().getStagedInventory(), "blueprintForge");
+	}
+
+	public StagedInventory<InventoryBlueprintForge> getStagedInventory()
+	{
+		return this.stagedInventory;
 	}
 
 	public Rotation getPlacingRotation()
@@ -56,9 +72,19 @@ public class GodPowerBlueprint implements IGodPower
 		this.placingRotation = rotation;
 	}
 
+	public BlueprintPalette getPlacingPalette()
+	{
+		return this.placingPalette;
+	}
+
 	public BlueprintData getPlacingBlueprint()
 	{
 		return this.placingBlueprint;
+	}
+
+	public IInventory getForgeInventory()
+	{
+		return this.stagedInventory.get();
 	}
 
 	@Override
@@ -82,9 +108,17 @@ public class GodPowerBlueprint implements IGodPower
 		{
 			this.previousStack = stack;
 
-			if (stack.getItem() instanceof ItemBlueprint)
+			if (stack.getItem() instanceof ItemBlueprintPalette)
 			{
 				this.placingBlueprint = null;
+
+				this.placingPalette = ItemBlueprintPalette.getBlueprintPalette(stack);
+			}
+			else if (stack.getItem() instanceof ItemBlueprint)
+			{
+				this.placingPalette = null;
+				this.placingBlueprint = null;
+
 				try
 				{
 					final IDataIdentifier id = ItemBlueprint.getBlueprintId(stack);
@@ -98,6 +132,7 @@ public class GodPowerBlueprint implements IGodPower
 			}
 			else if (stack.getItem() instanceof ItemBlockDataContainer)
 			{
+				this.placingPalette = null;
 				final BlockDataContainer container = ItemBlockDataContainer.getDataContainer(stack);
 
 				if (container != null)
@@ -107,19 +142,25 @@ public class GodPowerBlueprint implements IGodPower
 			}
 			else
 			{
+				this.placingPalette = null;
 				this.placingBlueprint = null;
 			}
 		}
-		else if (this.placingBlueprint == null)
+		else if (stack.getItem() instanceof ItemBlueprintPalette && this.placingPalette == null)
 		{
-			if (stack.getItem() instanceof ItemBlockDataContainer)
-			{
-				final BlockDataContainer container = ItemBlockDataContainer.getDataContainer(stack);
+			this.placingBlueprint = null;
 
-				if (container != null)
-				{
-					this.placingBlueprint = new BlueprintData(container);
-				}
+			this.placingPalette = ItemBlueprintPalette.getBlueprintPalette(stack);
+		}
+		else if (stack.getItem() instanceof ItemBlockDataContainer && this.placingBlueprint == null)
+		{
+			this.placingPalette = null;
+
+			final BlockDataContainer container = ItemBlockDataContainer.getDataContainer(stack);
+
+			if (container != null)
+			{
+				this.placingBlueprint = new BlueprintData(container);
 			}
 		}
 	}

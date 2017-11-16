@@ -35,7 +35,6 @@ public class BlueprintRegionAccess implements IBlockAccess
 	@Override
 	public int getCombinedLight(final BlockPos p_175626_1_, final int p_175626_2_)
 	{
-		// TODO Auto-generated method stub. Check out ChunkCache or sth
 		return 0;
 	}
 

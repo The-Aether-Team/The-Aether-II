@@ -57,6 +57,8 @@ public class RenderShape implements IWorldRenderer
 
 	private BlockPos lastMin, lastMax;
 
+	private boolean disabled;
+
 	public RenderShape(final World world)
 	{
 		this.world = world;
@@ -70,6 +72,11 @@ public class RenderShape implements IWorldRenderer
 
 	public void setShape(final IShape shape)
 	{
+		if (shape != this.shape)
+		{
+			this.refresh();
+		}
+
 		this.shape = shape;
 		this.object = shape;
 	}
@@ -81,8 +88,7 @@ public class RenderShape implements IWorldRenderer
 
 	public void renderFully(final World world, final float partialTicks)
 	{
-		if (this.shouldRefresh || this.lastMin == null || !this.lastMin.equals(this.shape.getBoundingBox().getMin()) || !this.lastMax
-				.equals(this.shape.getBoundingBox().getMax()))
+		if (this.shouldRefresh || this.lastMin == null)
 		{
 			this.lastMin = this.shape.getBoundingBox().getMin();
 			this.lastMax = this.shape.getBoundingBox().getMax();
@@ -286,6 +292,18 @@ public class RenderShape implements IWorldRenderer
 	}
 
 	@Override
+	public boolean isDisabled()
+	{
+		return this.disabled;
+	}
+
+	@Override
+	public void setDisabled(final boolean disabled)
+	{
+		this.disabled = disabled;
+	}
+
+	@Override
 	public Object getRenderedObject()
 	{
 		return this.object;
@@ -322,13 +340,12 @@ public class RenderShape implements IWorldRenderer
 	@Override
 	public void doGlobalRendering(final World world, final float partialTicks)
 	{
-		if (this.shape == null)
+		if (this.shape == null || this.isDisabled())
 		{
 			return;
 		}
 
-		if (this.shouldRefresh || this.lastMin == null || !this.lastMin.equals(this.shape.getBoundingBox().getMin()) || !this.lastMax
-				.equals(this.shape.getBoundingBox().getMax()))
+		if (this.shouldRefresh || this.lastMin == null)
 		{
 			if (this.lastMin != null)
 			{
@@ -399,13 +416,6 @@ public class RenderShape implements IWorldRenderer
 		GlStateManager.popMatrix();
 
 		GlStateManager.pushMatrix();
-
-		if (!this.lastMin.equals(this.shape.getBoundingBox().getMin()))
-		{
-			GlStateManager.translate(this.shape.getBoundingBox().getMin().getX() - this.lastMin.getX(),
-					this.shape.getBoundingBox().getMin().getY() - this.lastMin.getY(),
-					this.shape.getBoundingBox().getMin().getZ() - this.lastMin.getZ());
-		}
 
 		GlStateManager.translate(-offsetPlayerX, -offsetPlayerY, -offsetPlayerZ);
 

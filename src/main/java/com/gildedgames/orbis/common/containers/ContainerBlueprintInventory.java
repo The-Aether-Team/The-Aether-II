@@ -1,29 +1,29 @@
 package com.gildedgames.orbis.common.containers;
 
 import com.gildedgames.aether.api.player.IPlayerAether;
+import com.gildedgames.orbis.common.containers.slots.SlotForge;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ClickType;
-import net.minecraft.inventory.ContainerPlayer;
-import net.minecraft.inventory.InventoryBasic;
-import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;
 
-public class ContainerGenericInventory extends ContainerPlayer
+public class ContainerBlueprintInventory extends ContainerPlayer
 {
 	/** See {@link net.minecraft.client.gui.inventory.GuiContainerCreative#basicInventory} **/
 	private static final InventoryBasic dumbInventory = new InventoryBasic("tmp", true, 52);
 
 	private final IPlayerAether aePlayer;
 
+	public SlotForge[] slots;
+
 	private Slot binSlot;
 
-	public ContainerGenericInventory(final IPlayerAether aePlayer)
+	public ContainerBlueprintInventory(final IPlayerAether aePlayer, final IInventory forgeInventory)
 	{
 		super(aePlayer.getEntity().inventory, false, aePlayer.getEntity());
 
 		this.aePlayer = aePlayer;
 
-		this.createSlots();
+		this.createSlots(forgeInventory);
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class ContainerGenericInventory extends ContainerPlayer
 		}
 	}
 
-	private void createSlots()
+	private void createSlots(final IInventory forgeInventory)
 	{
 		final int widthOffset = 180;
 		final int heightOffset = -10;
@@ -59,20 +59,11 @@ public class ContainerGenericInventory extends ContainerPlayer
 		final Slot boots = this.inventorySlots.get(8);
 		final Slot shield = this.inventorySlots.get(45);
 
-		helmet.xPos = -2000;
-		helmet.yPos = -2000;
-
-		chestplate.xPos = -2000;
-		chestplate.yPos = -2000;
-
-		leggings.xPos = -2000;
-		leggings.yPos = -2000;
-
-		boots.xPos = -2000;
-		boots.yPos = -2000;
-
-		shield.xPos = -2000;
-		shield.yPos = -2000;
+		helmet.xPos = helmet.yPos = -2000;
+		chestplate.xPos = chestplate.yPos = -2000;
+		leggings.xPos = leggings.yPos = -2000;
+		boots.xPos = boots.yPos = -2000;
+		shield.xPos = shield.yPos = -2000;
 
 		final Slot craftResult = this.inventorySlots.get(0);
 
@@ -81,41 +72,31 @@ public class ContainerGenericInventory extends ContainerPlayer
 		final Slot craft3 = this.inventorySlots.get(3);
 		final Slot craft4 = this.inventorySlots.get(4);
 
-		this.binSlot = new Slot(ContainerGenericInventory.dumbInventory, this.inventorySlots.size(), 213, 26);
+		craft1.xPos = craft1.yPos = -2000;
+		craft2.xPos = craft2.yPos = -2000;
+		craft3.xPos = craft3.yPos = -2000;
+		craft4.xPos = craft4.yPos = -2000;
 
-		if (this.aePlayer.getEntity().capabilities.isCreativeMode)
+		craftResult.xPos = craftResult.yPos = -2000;
+
+		this.binSlot = new Slot(ContainerBlueprintInventory.dumbInventory, this.inventorySlots.size(), 213, 26);
+
+		this.binSlot.xPos = this.binSlot.yPos = -2000;
+
+		this.slots = new SlotForge[4 * 4];
+
+		final int indexOffset = this.inventorySlots.size();
+
+		for (int i = 0; i < 4; ++i)
 		{
-			this.addSlotToContainer(this.binSlot);
+			for (int j = 0; j < 4; ++j)
+			{
+				final SlotForge slot = new SlotForge(forgeInventory, indexOffset, indexOffset + (i * 4 + j), 187 + 15 + j * 18, -20 + i * 18);
 
-			craftResult.xPos -= 27;
+				this.addSlotToContainer(slot);
 
-			craft1.xPos -= 27;
-			craft2.xPos -= 27;
-			craft3.xPos -= 27;
-			craft4.xPos -= 27;
-
-			craftResult.yPos += 8;
-
-			craft1.yPos += 8;
-			craft2.yPos += 8;
-			craft3.yPos += 8;
-			craft4.yPos += 8;
-		}
-		else
-		{
-			craftResult.xPos -= 46;
-
-			craft1.xPos -= 46;
-			craft2.xPos -= 46;
-			craft3.xPos -= 46;
-			craft4.xPos -= 46;
-
-			craftResult.yPos += 8;
-
-			craft1.yPos += 8;
-			craft2.yPos += 8;
-			craft3.yPos += 8;
-			craft4.yPos += 8;
+				this.slots[i * 4 + j] = slot;
+			}
 		}
 	}
 

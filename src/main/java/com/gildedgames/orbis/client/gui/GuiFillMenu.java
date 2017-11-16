@@ -45,12 +45,12 @@ public class GuiFillMenu extends GuiFrameCreative
 	{
 		super(player);
 
+		this.setExtraSlots(16);
+
 		this.container = new ContainerFillMenu(player, forgeInventory, this);
 
 		this.inventorySlots = this.container;
 		player.openContainer = this.inventorySlots;
-
-		this.setExtraSlots(12);
 	}
 
 	private List<ItemStack> getItemStacksInForge()

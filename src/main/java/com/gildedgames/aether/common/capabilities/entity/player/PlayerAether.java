@@ -12,7 +12,7 @@ import com.gildedgames.aether.common.network.packets.PacketMarkPlayerDeath;
 import com.gildedgames.orbis.common.network.packets.PacketChangePower;
 import com.gildedgames.orbis.common.network.packets.PacketDeveloperMode;
 import com.gildedgames.orbis.common.network.packets.PacketDeveloperReach;
-import com.gildedgames.orbis.common.network.packets.PacketForgeInventoryChanged;
+import com.gildedgames.orbis.common.network.packets.PacketStagedInventoryChanged;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.PlayerSelectionModule;
 import com.google.common.collect.Lists;
@@ -220,7 +220,11 @@ public class PlayerAether implements IPlayerAether
 	public void onPlayerBeginWatching(final IPlayerAether other)
 	{
 		NetworkingAether.sendPacketToPlayer(new PacketEquipment(this), (EntityPlayerMP) other.getEntity());
-		NetworkingAether.sendPacketToPlayer(new PacketForgeInventoryChanged(this), (EntityPlayerMP) other.getEntity());
+		
+		NetworkingAether.sendPacketToPlayer(new PacketStagedInventoryChanged(this, getOrbisModule().powers().getBlueprintPower().getStagedInventory()),
+				(EntityPlayerMP) other.getEntity());
+		NetworkingAether.sendPacketToPlayer(new PacketStagedInventoryChanged(this, getOrbisModule().powers().getFillPower().getStagedInventory()),
+				(EntityPlayerMP) other.getEntity());
 	}
 
 	@Override

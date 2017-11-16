@@ -11,6 +11,7 @@ import com.gildedgames.orbis.client.gui.util.GuiTexture;
 import com.gildedgames.orbis.client.renderers.RenderBlueprint;
 import com.gildedgames.orbis.client.renderers.RenderShape;
 import com.gildedgames.orbis.client.util.rect.Dim2D;
+import com.gildedgames.orbis.common.data.BlueprintPalette;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.GodPowerBlueprint;
 import com.gildedgames.orbis.common.util.RaytraceHelp;
@@ -38,6 +39,10 @@ public class GodPowerBlueprintClient implements IGodPowerClient
 
 	private final GuiTexture icon;
 
+	private final List<IWorldRenderer> paletteRenderers = Lists.newArrayList();
+
+	private final List<Blueprint> paletteBlueprints = Lists.newArrayList();
+
 	private Blueprint blueprint;
 
 	private IWorldRenderer renderer;
@@ -45,6 +50,8 @@ public class GodPowerBlueprintClient implements IGodPowerClient
 	private RenderShape renderShape;
 
 	private BlueprintData prevBlueprintData;
+
+	private BlueprintPalette prevPalette;
 
 	private Rotation prevRotation;
 
@@ -95,8 +102,71 @@ public class GodPowerBlueprintClient implements IGodPowerClient
 		if (this.prevBlueprintData != this.server.getPlacingBlueprint() || this.prevRotation != this.server.getPlacingRotation())
 		{
 			this.renderer = null;
+
 			this.prevBlueprintData = this.server.getPlacingBlueprint();
 			this.prevRotation = this.server.getPlacingRotation();
+		}
+
+		if (this.prevPalette != this.server.getPlacingPalette() || this.prevRotation != this.server.getPlacingRotation())
+		{
+			this.paletteRenderers.clear();
+			this.paletteBlueprints.clear();
+
+			this.prevPalette = this.server.getPlacingPalette();
+			this.prevRotation = this.server.getPlacingRotation();
+		}
+
+		if (this.server.getPlacingPalette() != null)
+		{
+			final BlockPos pos = RaytraceHelp.doOrbisRaytrace(module.getPlayer(), module.raytraceWithRegionSnapping());
+
+			final Blueprint blueprint;
+
+			if (this.paletteRenderers.isEmpty() && this.paletteBlueprints.isEmpty())
+			{
+				for (final BlueprintData data : this.server.getPlacingPalette().getData())
+				{
+					final IRegion region = RotationHelp.regionFromCenter(pos, data, this.server.getPlacingRotation());
+
+					final Blueprint b = new Blueprint(world, region.getMin(), this.server.getPlacingRotation(), data);
+
+					final IWorldRenderer r = new RenderBlueprint(b, world);
+
+					this.paletteBlueprints.add(b);
+					this.paletteRenderers.add(r);
+				}
+
+				blueprint = this.paletteBlueprints.get((int) ((System.currentTimeMillis() / 1000) % this.paletteBlueprints.size()));
+
+				this.renderShape = new RenderShape(blueprint);
+
+				this.renderShape.useCustomColors = true;
+
+				this.renderShape.colorBorder = SHAPE_COLOR;
+				this.renderShape.colorGrid = SHAPE_COLOR;
+
+				this.renderShape.boxAlpha = 0.1F;
+			}
+			else
+			{
+				blueprint = this.paletteBlueprints.get((int) ((System.currentTimeMillis() / 1000) % this.paletteBlueprints.size()));
+
+				final IRegion renderRegion = RotationHelp
+						.regionFromCenter(pos, blueprint.getData(), this.server.getPlacingRotation());
+
+				blueprint.setPos(renderRegion.getMin());
+
+				this.renderShape.setShape(blueprint);
+			}
+
+			this.paletteRenderers.forEach(r -> r.setDisabled(true));
+
+			final IWorldRenderer rendered = this.paletteRenderers.get((int) ((System.currentTimeMillis() / 1000) % this.paletteBlueprints.size()));
+
+			rendered.setDisabled(false);
+
+			renderers.addAll(this.paletteRenderers);
+			renderers.add(this.renderShape);
 		}
 
 		if (this.server.getPlacingBlueprint() != null)

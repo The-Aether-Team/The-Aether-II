@@ -18,6 +18,8 @@ public class ItemsOrbis
 
 	public static final ItemBlockPalette block_palette = new ItemBlockPalette();
 
+	public static final ItemBlueprintPalette blueprint_palette = new ItemBlueprintPalette();
+
 	@SubscribeEvent
 	public static void onRegisterItems(final RegistryEvent.Register<Item> event)
 	{
@@ -26,6 +28,7 @@ public class ItemsOrbis
 		items.register("blueprint", blueprint.setCreativeTab(null));
 		items.register("block_chunk", block_chunk.setCreativeTab(null));
 		items.register("block_palette", block_palette.setCreativeTab(null));
+		items.register("blueprint_palette", blueprint_palette.setCreativeTab(null));
 	}
 
 	private static class ItemRegistryHelper

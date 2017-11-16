@@ -14,6 +14,7 @@ import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.orbis.client.gui.data.Text;
 import com.gildedgames.orbis.client.renderers.RenderShape;
+import com.gildedgames.orbis.common.data.BlueprintPalette;
 import com.gildedgames.orbis.common.network.packets.PacketClearSelectedRegion;
 import com.gildedgames.orbis.common.network.packets.PacketSendDataCachePool;
 import com.gildedgames.orbis.common.network.packets.PacketWorldObjectManager;
@@ -251,6 +252,7 @@ public class Orbis
 		s.register(19, Text.class, new Instantiator<>(Text.class));
 
 		s.register(26, WorldShape.class, new Instantiator<>(WorldShape.class));
+		s.register(35, BlueprintPalette.class, new Instantiator<>(BlueprintPalette.class));
 	}
 
 }

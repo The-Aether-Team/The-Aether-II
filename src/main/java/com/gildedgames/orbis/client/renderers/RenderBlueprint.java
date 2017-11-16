@@ -74,6 +74,8 @@ public class RenderBlueprint implements IWorldRenderer
 	 */
 	public int color = 0x0000FF;
 
+	private boolean disabled;
+
 	private BlockPos lastMin;
 
 	private int glIndex = -1;
@@ -91,6 +93,18 @@ public class RenderBlueprint implements IWorldRenderer
 		this.cache = new BlueprintRenderCache(blueprint, world);
 
 		this.worldIn = world;
+	}
+
+	@Override
+	public boolean isDisabled()
+	{
+		return this.disabled;
+	}
+
+	@Override
+	public void setDisabled(final boolean disabled)
+	{
+		this.disabled = disabled;
 	}
 
 	@Override
@@ -317,10 +331,9 @@ public class RenderBlueprint implements IWorldRenderer
 	@Override
 	public void doGlobalRendering(final World world, final float partialTicks)
 	{
-		if (this.lastMin == null)
+		if (this.isDisabled())
 		{
-			this.lastMin = this.blueprint.getMin();
-			this.shapeData = this.blueprint.createShapeData();
+			return;
 		}
 
 		if (this.lastRotation != this.blueprint.getRotation())
@@ -337,6 +350,12 @@ public class RenderBlueprint implements IWorldRenderer
 			{
 				this.rotatedData = null;
 			}
+		}
+
+		if (this.lastMin == null || this.glIndex == -1)
+		{
+			this.lastMin = this.blueprint.getMin();
+			this.shapeData = this.blueprint.createShapeData();
 		}
 
 		if (this.glIndex == -1)
@@ -371,6 +390,8 @@ public class RenderBlueprint implements IWorldRenderer
 		{
 			GlStateManager.translate(0, 0, 0);
 		}
+
+		GlStateManager.resetColor();
 
 		GlStateManager.popMatrix();
 	}

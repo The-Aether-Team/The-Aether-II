@@ -93,7 +93,7 @@ public class NetworkingAether
 		instance.registerMessage(PacketSetSelectedRegion.HandlerClient.class, PacketSetSelectedRegion.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketSendDataCachePool.HandlerClient.class, PacketSendDataCachePool.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketSendDataToCache.HandlerClient.class, PacketSendDataToCache.class, discriminant++, Side.CLIENT);
-		instance.registerMessage(PacketForgeInventoryChanged.HandlerClient.class, PacketForgeInventoryChanged.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketStagedInventoryChanged.HandlerClient.class, PacketStagedInventoryChanged.class, discriminant++, Side.CLIENT);
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(AetherCore.INSTANCE, new AetherGuiHandler());
 	}

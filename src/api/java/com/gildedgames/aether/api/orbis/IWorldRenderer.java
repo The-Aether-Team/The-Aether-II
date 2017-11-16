@@ -9,6 +9,20 @@ import java.util.List;
 public interface IWorldRenderer extends NBT
 {
 
+	/**
+	 * Should not render this object if it's disabled.
+	 * @return Whether or not this world renderer is
+	 * disabled.
+	 */
+	boolean isDisabled();
+
+	/**
+	 * Should not render this object if it's disabled.
+	 * @param disabled Whether or not this world renderer is
+	 * disabled.
+	 */
+	void setDisabled(boolean disabled);
+
 	@Nullable
 	Object getRenderedObject();
 

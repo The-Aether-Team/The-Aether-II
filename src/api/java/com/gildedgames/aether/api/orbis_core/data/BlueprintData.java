@@ -17,6 +17,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class BlueprintData implements IDimensions, NBT, IData
 {
@@ -62,6 +64,37 @@ public class BlueprintData implements IDimensions, NBT, IData
 	public int getLength()
 	{
 		return this.dataContainer.getLength();
+	}
+
+	@Override
+	public int hashCode()
+	{
+		final HashCodeBuilder builder = new HashCodeBuilder();
+
+		builder.append(this.metadata.getIdentifier());
+
+		return builder.toHashCode();
+	}
+
+	@Override
+	public boolean equals(final Object obj)
+	{
+		if (obj == this)
+		{
+			return true;
+		}
+		else if (obj instanceof BlueprintData)
+		{
+			final BlueprintData o = (BlueprintData) obj;
+
+			final EqualsBuilder builder = new EqualsBuilder();
+
+			builder.append(this.metadata.getIdentifier(), o.metadata.getIdentifier());
+
+			return builder.isEquals();
+		}
+
+		return false;
 	}
 
 	@Override

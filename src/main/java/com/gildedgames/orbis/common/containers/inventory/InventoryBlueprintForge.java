@@ -1,10 +1,10 @@
 package com.gildedgames.orbis.common.containers.inventory;
 
 import com.gildedgames.aether.api.util.NBT;
+import com.gildedgames.orbis.common.items.ItemBlueprint;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -14,14 +14,14 @@ import net.minecraft.util.text.TextComponentTranslation;
 
 import javax.annotation.Nonnull;
 
-public class InventoryForge implements IInventory, NBT
+public class InventoryBlueprintForge implements IInventory, NBT
 {
 
 	private final EntityPlayer player;
 
-	private final NonNullList<ItemStack> inventory = NonNullList.withSize(12, ItemStack.EMPTY);
+	private final NonNullList<ItemStack> inventory = NonNullList.withSize(16, ItemStack.EMPTY);
 
-	public InventoryForge(final EntityPlayer player)
+	public InventoryBlueprintForge(final EntityPlayer player)
 	{
 		this.player = player;
 	}
@@ -113,7 +113,7 @@ public class InventoryForge implements IInventory, NBT
 	@Override
 	public boolean isItemValidForSlot(final int index, @Nonnull final ItemStack stack)
 	{
-		return stack.getItem() instanceof ItemBlock;
+		return stack.getItem() instanceof ItemBlueprint;
 	}
 
 	@Override

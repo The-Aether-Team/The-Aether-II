@@ -516,6 +516,8 @@ item.aether.brettl_grass.name=Brettl Grass
 
 item.aether.block_chunk.name=Block Chunk
 item.aether.block_palette.name=Block Palette
+item.aether.blueprint.name=Blueprint
+item.aether.blueprint_palette.name=Blueprint Palette
 
 cloudParachute.ability.rightClick=§3Use:§r Right-Click
 cloudParachute.ability=§9Ability: 

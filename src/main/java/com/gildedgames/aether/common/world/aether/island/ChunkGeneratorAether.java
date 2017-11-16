@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.world.aether.island;
 
 import com.gildedgames.aether.api.orbis_core.api.BlockDataChunk;
-import com.gildedgames.aether.api.orbis_core.api.BlueprintInstance;
 import com.gildedgames.aether.api.orbis_core.api.ICreationData;
+import com.gildedgames.aether.api.orbis_core.api.PlacedBlueprint;
 import com.gildedgames.aether.api.orbis_core.api.PostPlacement;
 import com.gildedgames.aether.api.orbis_core.processing.DataPrimer;
 import com.gildedgames.aether.api.util.BlockAccessChunkPrimer;
@@ -86,7 +86,7 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		final DataPrimer dataPrimer = new DataPrimer(new BlockAccessChunkPrimer(this.world, primer));
 
 		// Prime placed templates
-		for (final BlueprintInstance instance : island.getVirtualDataManager().getPlacedBlueprints())
+		for (final PlacedBlueprint instance : island.getVirtualDataManager().getPlacedBlueprints())
 		{
 			for (final BlockDataChunk dataChunk : instance.getDataChunks())
 			{
@@ -170,7 +170,7 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		final DataPrimer primer = new DataPrimer(new BlockAccessExtendedWrapper(this.world));
 
 		// Populate placed blueprints
-		for (final BlueprintInstance instance : island.getVirtualDataManager().getPlacedBlueprints())
+		for (final PlacedBlueprint instance : island.getVirtualDataManager().getPlacedBlueprints())
 		{
 			for (final BlockDataChunk dataChunk : instance.getDataChunks())
 			{

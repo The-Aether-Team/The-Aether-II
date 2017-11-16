@@ -10,7 +10,8 @@ import com.gildedgames.aether.common.containers.ContainerSkyrootWorkbench;
 import com.gildedgames.aether.common.containers.tiles.ContainerIcestoneCooler;
 import com.gildedgames.aether.common.containers.tiles.ContainerIncubator;
 import com.gildedgames.orbis.client.gui.GuiLoadBlueprint;
-import com.gildedgames.orbis.common.containers.ContainerGenericInventory;
+import com.gildedgames.orbis.common.containers.ContainerBlueprintInventory;
+import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -54,7 +55,8 @@ public class AetherGuiHandler implements IGuiHandler
 			//			case MASONRY_BENCH_ID:
 			//				return new ContainerMasonryBench(player, new BlockPos(x, y, z));
 			case ORBIS_BLUEPRINT_LOAD:
-				return new ContainerGenericInventory(PlayerAether.getPlayer(player));
+				return new ContainerBlueprintInventory(PlayerAether.getPlayer(player),
+						PlayerOrbisModule.get(player).powers().getBlueprintPower().getForgeInventory());
 			default:
 				return null;
 		}
