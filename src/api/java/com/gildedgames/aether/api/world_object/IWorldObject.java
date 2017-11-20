@@ -1,5 +1,6 @@
 package com.gildedgames.aether.api.world_object;
 
+import com.gildedgames.aether.api.orbis.IShape;
 import com.gildedgames.aether.api.orbis.IWorldRenderer;
 import com.gildedgames.aether.api.orbis_core.data.management.IData;
 import com.gildedgames.aether.api.util.NBT;
@@ -20,6 +21,8 @@ public interface IWorldObject extends NBT
 	BlockPos getPos();
 
 	void setPos(BlockPos pos);
+
+	IShape getShape();
 
 	@SideOnly(Side.CLIENT)
 	IWorldRenderer getRenderer();

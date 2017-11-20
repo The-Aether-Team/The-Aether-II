@@ -4,8 +4,9 @@ import com.gildedgames.aether.api.orbis_core.data.region.IMutableRegion;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.orbis.client.OrbisKeyBindings;
 import com.gildedgames.orbis.client.player.godmode.IGodPowerClient;
+import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.GodPowerCreative;
-import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
+import com.gildedgames.orbis.common.player.godmode.selectors.IShapeSelector;
 import com.gildedgames.orbis.common.util.RaytraceHelp;
 import com.gildedgames.orbis.common.world_objects.WorldRegion;
 import net.minecraft.block.state.IBlockState;
@@ -192,9 +193,12 @@ public class AirSelectionRenderer
 		renderRegion.colorGrid = color;
 		renderRegion.colorBorder = color;
 
+		final PlayerOrbisModule module = PlayerOrbisModule.get(mc.player);
+
 		renderRegion.box = false;
 		renderRegion.xyz_box =
-				renderRegion.boxAlpha > 0 && OrbisKeyBindings.keyBindControl.isKeyDown() && playerAether.getSelectionModule().getActiveSelection() == null;
+				renderRegion.boxAlpha > 0 && OrbisKeyBindings.keyBindControl.isKeyDown()
+						&& module.selectionInputs().getCurrentSelectionInput().getActiveSelection() == null;
 
 		renderRegion.renderFully(mc.world, PARTIAL_TICKS);
 		renderRegion.onRemoved();

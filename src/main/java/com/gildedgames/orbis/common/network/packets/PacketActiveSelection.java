@@ -3,9 +3,11 @@ package com.gildedgames.orbis.common.network.packets;
 import com.gildedgames.aether.api.io.NBTFunnel;
 import com.gildedgames.aether.api.orbis.IShape;
 import com.gildedgames.aether.api.orbis_core.OrbisCore;
-import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
-import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
+import com.gildedgames.orbis.common.player.PlayerOrbisModule;
+import com.gildedgames.orbis.common.player.godmode.selection_input.ISelectionInput;
+import com.gildedgames.orbis.common.player.godmode.selectors.IShapeSelector;
+import com.gildedgames.orbis.common.world_objects.WorldShape;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -60,11 +62,12 @@ public class PacketActiveSelection implements IMessage
 
 			final IShape shape = message.funnel.get(player.world, "shape");
 
-			final PlayerAether playerAether = PlayerAether.getPlayer(player);
+			final PlayerOrbisModule module = PlayerOrbisModule.get(player);
+			final ISelectionInput selectionInput = module.selectionInputs().getCurrentSelectionInput();
 
-			playerAether.getSelectionModule().setActiveSelection(shape);
+			selectionInput.setActiveSelection(new WorldShape(shape, player.getEntityWorld()));
 
-			IShapeSelector selector = playerAether.getOrbisModule().powers().getCurrentPower().getShapeSelector();
+			IShapeSelector selector = module.powers().getCurrentPower().getShapeSelector();
 
 			final ItemStack held = player.getHeldItemMainhand();
 
@@ -73,7 +76,7 @@ public class PacketActiveSelection implements IMessage
 				selector = (IShapeSelector) held.getItem();
 			}
 
-			selector.onSelect(playerAether.getOrbisModule(), shape, player.world);
+			selector.onSelect(module, shape, player.world);
 
 			return null;
 		}

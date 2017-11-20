@@ -5,6 +5,7 @@ import com.gildedgames.aether.api.orbis_core.util.BlockFilterHelper;
 import com.gildedgames.orbis.client.player.godmode.GodPowerReplaceClient;
 import com.gildedgames.orbis.client.player.godmode.IGodPowerClient;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
+import com.gildedgames.orbis.common.player.godmode.selectors.IShapeSelector;
 import com.gildedgames.orbis.common.player.godmode.selectors.ShapeSelectorFilter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;

@@ -14,7 +14,6 @@ import com.gildedgames.orbis.common.network.packets.PacketDeveloperMode;
 import com.gildedgames.orbis.common.network.packets.PacketDeveloperReach;
 import com.gildedgames.orbis.common.network.packets.PacketStagedInventoryChanged;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
-import com.gildedgames.orbis.common.player.PlayerSelectionModule;
 import com.google.common.collect.Lists;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -65,8 +64,6 @@ public class PlayerAether implements IPlayerAether
 
 	private final PlayerOrbisModule orbisModule;
 
-	private final PlayerSelectionModule selectionModule;
-
 	private final List<PlayerAetherObserver> observers = Lists.newArrayList();
 
 	private boolean hasDiedInAetherBefore;
@@ -83,7 +80,6 @@ public class PlayerAether implements IPlayerAether
 		this.dialogModule = new PlayerDialogModule(this);
 		this.swetTracker = new PlayerSwetTracker(this);
 		this.orbisModule = new PlayerOrbisModule(this);
-		this.selectionModule = new PlayerSelectionModule(this);
 
 		final Collection<PlayerAetherModule> modules = new ArrayList<>();
 
@@ -95,7 +91,6 @@ public class PlayerAether implements IPlayerAether
 		modules.add(this.dialogModule);
 		modules.add(this.swetTracker);
 		modules.add(this.orbisModule);
-		modules.add(this.selectionModule);
 
 		this.modules = modules.toArray(new PlayerAetherModule[modules.size()]);
 	}
@@ -220,7 +215,7 @@ public class PlayerAether implements IPlayerAether
 	public void onPlayerBeginWatching(final IPlayerAether other)
 	{
 		NetworkingAether.sendPacketToPlayer(new PacketEquipment(this), (EntityPlayerMP) other.getEntity());
-		
+
 		NetworkingAether.sendPacketToPlayer(new PacketStagedInventoryChanged(this, getOrbisModule().powers().getBlueprintPower().getStagedInventory()),
 				(EntityPlayerMP) other.getEntity());
 		NetworkingAether.sendPacketToPlayer(new PacketStagedInventoryChanged(this, getOrbisModule().powers().getFillPower().getStagedInventory()),
@@ -267,7 +262,7 @@ public class PlayerAether implements IPlayerAether
 	{
 		final NBTTagList modules = tag.getTagList("Modules", 10);
 
-		for (int i = 0; i < modules.tagCount(); i++)
+		for (int i = 0; i < this.modules.length; i++)
 		{
 			final PlayerAetherModule module = this.modules[i];
 
@@ -311,11 +306,6 @@ public class PlayerAether implements IPlayerAether
 	public PlayerOrbisModule getOrbisModule()
 	{
 		return this.orbisModule;
-	}
-
-	public PlayerSelectionModule getSelectionModule()
-	{
-		return this.selectionModule;
 	}
 
 	@Override

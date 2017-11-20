@@ -14,7 +14,6 @@ import com.gildedgames.orbis.common.network.packets.PacketWorldObjectAdd;
 import com.gildedgames.orbis.common.network.packets.PacketWorldObjectRemove;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.GodPowerSelect;
-import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
 import com.gildedgames.orbis.common.world_objects.WorldShape;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemBlock;

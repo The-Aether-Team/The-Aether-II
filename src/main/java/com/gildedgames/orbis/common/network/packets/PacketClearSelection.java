@@ -1,7 +1,7 @@
 package com.gildedgames.orbis.common.network.packets;
 
-import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
+import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -36,9 +36,12 @@ public class PacketClearSelection implements IMessage
 				return null;
 			}
 
-			final PlayerAether playerAether = PlayerAether.getPlayer(player);
+			final PlayerOrbisModule module = PlayerOrbisModule.get(player);
 
-			playerAether.getSelectionModule().clearSelection();
+			if (module.inDeveloperMode())
+			{
+				module.selectionInputs().getCurrentSelectionInput().clearSelection();
+			}
 
 			return null;
 		}

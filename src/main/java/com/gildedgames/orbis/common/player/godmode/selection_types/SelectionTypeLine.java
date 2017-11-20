@@ -8,7 +8,6 @@ import com.gildedgames.orbis.client.player.godmode.selection_types.SelectionType
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
 public class SelectionTypeLine implements ISelectionType
 {
@@ -38,7 +37,7 @@ public class SelectionTypeLine implements ISelectionType
 	}
 
 	@Override
-	public IShape createShape(final BlockPos start, final BlockPos end, final PlayerOrbisModule module, final World world)
+	public IShape createShape(final BlockPos start, final BlockPos end, final PlayerOrbisModule module, final boolean centered)
 	{
 		return new LineShape(start, end, 1);
 	}

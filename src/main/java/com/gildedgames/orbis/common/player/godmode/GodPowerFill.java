@@ -2,14 +2,13 @@ package com.gildedgames.orbis.common.player.godmode;
 
 import com.gildedgames.aether.api.orbis_core.block.BlockFilter;
 import com.gildedgames.aether.api.orbis_core.util.BlockFilterHelper;
-import com.gildedgames.orbis.client.gui.GuiFillMenu;
 import com.gildedgames.orbis.client.player.godmode.GodPowerFillClient;
 import com.gildedgames.orbis.client.player.godmode.IGodPowerClient;
 import com.gildedgames.orbis.common.containers.inventory.InventoryBlockForge;
 import com.gildedgames.orbis.common.containers.util.StagedInventory;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
+import com.gildedgames.orbis.common.player.godmode.selectors.IShapeSelector;
 import com.gildedgames.orbis.common.player.godmode.selectors.ShapeSelectorFilter;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.nbt.NBTTagCompound;

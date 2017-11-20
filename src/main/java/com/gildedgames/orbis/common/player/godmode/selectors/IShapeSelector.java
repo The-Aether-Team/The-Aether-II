@@ -1,4 +1,4 @@
-package com.gildedgames.orbis.common.player.godmode;
+package com.gildedgames.orbis.common.player.godmode.selectors;
 
 import com.gildedgames.aether.api.orbis.IShape;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;

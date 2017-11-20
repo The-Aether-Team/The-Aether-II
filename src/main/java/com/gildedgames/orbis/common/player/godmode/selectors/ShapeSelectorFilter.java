@@ -5,7 +5,6 @@ import com.gildedgames.aether.api.orbis_core.api.CreationData;
 import com.gildedgames.aether.api.orbis_core.api.ICreationData;
 import com.gildedgames.aether.api.orbis_core.block.BlockFilter;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
-import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemBucket;

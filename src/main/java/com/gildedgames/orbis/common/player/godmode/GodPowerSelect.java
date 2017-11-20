@@ -5,6 +5,7 @@ import com.gildedgames.orbis.client.player.godmode.IGodPowerClient;
 import com.gildedgames.orbis.common.items.ItemBlockDataContainer;
 import com.gildedgames.orbis.common.items.ItemBlueprint;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
+import com.gildedgames.orbis.common.player.godmode.selectors.IShapeSelector;
 import com.gildedgames.orbis.common.player.godmode.selectors.ShapeSelectorSelect;
 import com.gildedgames.orbis.common.world_objects.WorldShape;
 import net.minecraft.entity.player.EntityPlayer;

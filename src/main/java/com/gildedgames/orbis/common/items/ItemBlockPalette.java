@@ -13,7 +13,7 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis.client.ModelRegisterCallback;
 import com.gildedgames.orbis.client.renderers.tiles.TileEntityBlockPaletteRenderer;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
-import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
+import com.gildedgames.orbis.common.player.godmode.selectors.IShapeSelector;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;

@@ -40,15 +40,22 @@ public class WorldShape implements IShape, IWorldObject, IColored
 	@Override
 	public World getWorld()
 	{
-		return world;
+		return this.world;
 	}
 
 	@Override
 	public BlockPos getPos()
 	{
-		return shape.getBoundingBox().getMin();
+		return this.shape.getBoundingBox().getMin();
 	}
 
+	/** TODO: Fix this dumb shit where we're recreating shapes just to translate them.
+	 * To be honest, shapes shouldn't even contain position data. They should just be defining the
+	 * actual.. well.. shape of the contained data between two points. That's it.
+	 *
+	 * All this position shit is horrible and should be moved to IWorldObject.
+	 * @param pos
+	 */
 	@Override
 	public void setPos(final BlockPos pos)
 	{
@@ -56,7 +63,13 @@ public class WorldShape implements IShape, IWorldObject, IColored
 		final int dx = pos.getX() - current.getX();
 		final int dy = pos.getY() - current.getY();
 		final int dz = pos.getZ() - current.getZ();
-		this.shape = shape.translate(dx, dy, dz);
+		this.shape = this.shape.translate(dx, dy, dz);
+	}
+
+	@Override
+	public IShape getShape()
+	{
+		return this;
 	}
 
 	@Override

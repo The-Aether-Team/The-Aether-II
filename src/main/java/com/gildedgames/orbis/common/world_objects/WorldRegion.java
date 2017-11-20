@@ -1,6 +1,7 @@
 package com.gildedgames.orbis.common.world_objects;
 
 import com.gildedgames.aether.api.orbis.IRegion;
+import com.gildedgames.aether.api.orbis.IShape;
 import com.gildedgames.aether.api.orbis.IWorldRenderer;
 import com.gildedgames.aether.api.orbis_core.data.management.IData;
 import com.gildedgames.aether.api.orbis_core.data.region.Region;
@@ -78,6 +79,12 @@ public class WorldRegion extends Region implements IWorldObject, IColored
 	public void setPos(final BlockPos pos)
 	{
 		this.translate(pos);
+	}
+
+	@Override
+	public IShape getShape()
+	{
+		return this;
 	}
 
 	@Override

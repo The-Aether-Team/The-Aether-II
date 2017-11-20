@@ -2,7 +2,6 @@ package com.gildedgames.orbis.common.player.godmode.selectors;
 
 import com.gildedgames.aether.api.orbis.IShape;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
-import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
 import net.minecraft.world.World;
 
 public class ShapeSelectorInvalid implements IShapeSelector

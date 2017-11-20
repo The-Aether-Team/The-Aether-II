@@ -2,6 +2,7 @@ package com.gildedgames.orbis.common.world_objects;
 
 import com.gildedgames.aether.api.io.NBTFunnel;
 import com.gildedgames.aether.api.orbis.IRegion;
+import com.gildedgames.aether.api.orbis.IShape;
 import com.gildedgames.aether.api.orbis.IWorldRenderer;
 import com.gildedgames.aether.api.orbis_core.OrbisCore;
 import com.gildedgames.aether.api.orbis_core.block.BlockData;
@@ -155,6 +156,12 @@ public class Blueprint extends AbstractRegion implements IWorldObject, IMutableR
 		this.max = RegionHelp.getMax(this.min, this.getWidth(), this.getHeight(), this.getLength());
 
 		this.notifyDataChange();
+	}
+
+	@Override
+	public IShape getShape()
+	{
+		return this;
 	}
 
 	@Override

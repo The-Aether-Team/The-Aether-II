@@ -102,7 +102,7 @@ public class GuiChoiceMenuHolder extends GuiFrame
 
 			this.addChild(menu);
 
-			final GuiTexture choiceTab = new GuiTexture(Dim2D.build().pos(center).addY(-77).addX(-22).addX(i * 22).width(22).height(19).flush(),
+			final GuiTexture choiceTab = new GuiTexture(Dim2D.build().pos(center).addY(-77).addX(-33).addX(i * 22).width(22).height(19).flush(),
 					CHOICE_TAB_UNPRESSED);
 
 			final GuiText number = new GuiText(Dim2D.build().pos(8, 7).flush(), new Text(new TextComponentString(String.valueOf(i + 1)), 1.0F));
@@ -121,7 +121,7 @@ public class GuiChoiceMenuHolder extends GuiFrame
 
 		this.getCurrentTab().setResourceLocation(CHOICE_TAB);
 
-		final GuiTexture choiceBar = new GuiTexture(Dim2D.build().pos(center).addY(-58).width(52).height(6).centerX(true).flush(), CHOICE_BAR);
+		final GuiTexture choiceBar = new GuiTexture(Dim2D.build().pos(center).addY(-58).width(74).height(6).centerX(true).flush(), CHOICE_BAR);
 
 		this.addChild(choiceBar);
 	}

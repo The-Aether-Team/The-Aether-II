@@ -7,7 +7,6 @@ import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.orbis.common.network.packets.PacketWorldObjectAdd;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.GodPowerBlueprint;
-import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
 import com.gildedgames.orbis.common.world_objects.Blueprint;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;

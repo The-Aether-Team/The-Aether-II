@@ -39,8 +39,6 @@ public class ChunkRendererManager implements PlayerAetherObserver, IWorldObjectG
 	 */
 	private final List<IWorldRenderer> playerRenderers = Lists.newArrayList();
 
-	private RenderShape activeSelectionRender;
-
 	public static IChunkRendererCapability getChunkRenderer(final World world, final int chunkX, final int chunkZ)
 	{
 		final IChunkRendererCapability data = ChunkAttachment.get(world).getAttachment(new ChunkPos(chunkX, chunkZ), AetherCapabilities.CHUNK_RENDERER);
@@ -50,7 +48,6 @@ public class ChunkRendererManager implements PlayerAetherObserver, IWorldObjectG
 
 	public void unload()
 	{
-		this.activeSelectionRender = null;
 		this.allRenders.clear();
 		this.playerRenderers.clear();
 	}
@@ -185,42 +182,13 @@ public class ChunkRendererManager implements PlayerAetherObserver, IWorldObjectG
 	public void onUpdate(final PlayerAether playerAether)
 	{
 		final PlayerOrbisModule module = playerAether.getOrbisModule();
-		final IShape activeSelection = playerAether.getSelectionModule().getActiveSelection();
 
-		if (this.activeSelectionRender == null)
-		{
-			this.activeSelectionRender = new RenderShape(activeSelection);
-
-			this.activeSelectionRender.useCustomColors = true;
-
-			this.addPlayerRenderer(playerAether.getEntity().world, this.activeSelectionRender);
-		}
-		else if (activeSelection != null)
-		{
-			this.activeSelectionRender.colorBorder = module.powers().getCurrentPower().getClientHandler().getShapeColor(module);
-			this.activeSelectionRender.colorGrid = module.powers().getCurrentPower().getClientHandler().getShapeColor(module);
-
-			this.activeSelectionRender.useCustomColors = true;
-
-			this.activeSelectionRender.setShape(activeSelection);
-
-			if (playerAether.getSelectionModule().hasChanged())
-			{
-				this.activeSelectionRender.refresh();
-				playerAether.getSelectionModule().setHasChanged(false);
-			}
-		}
-		else
-		{
-			this.activeSelectionRender.setShape(null);
-		}
-
-		final List<IWorldRenderer> activeRenderers = playerAether.getOrbisModule().getActiveRenderers();
+		final List<IWorldRenderer> activeRenderers = module.getActiveRenderers();
 		final List<IWorldRenderer> renderersToRemove = Lists.newArrayList();
 
 		for (final IWorldRenderer playerRenderer : this.playerRenderers)
 		{
-			if (!activeRenderers.contains(playerRenderer) && playerRenderer != this.activeSelectionRender)
+			if (!activeRenderers.contains(playerRenderer))
 			{
 				renderersToRemove.add(playerRenderer);
 			}
@@ -248,15 +216,6 @@ public class ChunkRendererManager implements PlayerAetherObserver, IWorldObjectG
 	{
 		this.playerRenderers.add(renderer);
 		this.addRenderer(world, renderer);
-	}
-
-	private void addShapeRenderer(final World world, final IShape shape)
-	{
-		final RenderShape renderRegion = new RenderShape(shape);
-
-		renderRegion.useCustomColors = true;
-
-		this.addPlayerRenderer(world, renderRegion);
 	}
 
 	@Override

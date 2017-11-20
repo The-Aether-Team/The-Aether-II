@@ -1,26 +1,26 @@
 package com.gildedgames.orbis.client;
 
-import com.gildedgames.aether.api.orbis.IShape;
 import com.gildedgames.aether.api.orbis_core.block.BlockFilter;
 import com.gildedgames.aether.api.orbis_core.util.BlockFilterHelper;
 import com.gildedgames.aether.api.orbis_core.util.RotationHelp;
+import com.gildedgames.aether.api.world_object.IWorldObject;
 import com.gildedgames.aether.api.world_object.IWorldObjectGroup;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.orbis.client.gui.GuiChoiceMenuHolder;
 import com.gildedgames.orbis.client.gui.GuiChoiceMenuPowers;
+import com.gildedgames.orbis.client.gui.GuiChoiceMenuSelectionInputs;
 import com.gildedgames.orbis.client.gui.GuiChoiceMenuSelectionTypes;
 import com.gildedgames.orbis.client.renderers.AirSelectionRenderer;
 import com.gildedgames.orbis.common.Orbis;
 import com.gildedgames.orbis.common.items.ItemsOrbis;
 import com.gildedgames.orbis.common.network.packets.*;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
-import com.gildedgames.orbis.common.player.PlayerSelectionModule;
 import com.gildedgames.orbis.common.player.godmode.GodPowerBlueprint;
 import com.gildedgames.orbis.common.player.godmode.GodPowerSelect;
-import com.gildedgames.orbis.common.player.godmode.IShapeSelector;
-import com.gildedgames.orbis.common.util.OrbisRaytraceHelp;
+import com.gildedgames.orbis.common.player.godmode.selection_input.ISelectionInput;
+import com.gildedgames.orbis.common.player.godmode.selectors.IShapeSelector;
 import com.gildedgames.orbis.common.util.RaytraceHelp;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiIngameMenu;
@@ -28,7 +28,6 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraftforge.client.event.GuiOpenEvent;
@@ -48,7 +47,7 @@ public class OrbisDeveloperEventsClient
 
 	private static double prevReach;
 
-	private static IShape prevShape;
+	private static IWorldObject prevSelection;
 
 	private static GuiChoiceMenuHolder choiceMenuHolder;
 
@@ -69,14 +68,14 @@ public class OrbisDeveloperEventsClient
 	{
 		if (event.getGui() instanceof GuiIngameMenu)
 		{
-			final PlayerSelectionModule selectionModule = PlayerAether.getPlayer(mc.player).getSelectionModule();
 			final PlayerOrbisModule module = PlayerOrbisModule.get(mc.player);
+			final ISelectionInput selectionInput = module.selectionInputs().getCurrentSelectionInput();
 
 			if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE))
 			{
-				if (selectionModule.getActiveSelection() != null)
+				if (selectionInput.getActiveSelection() != null && selectionInput.shouldClearSelectionOnEscape())
 				{
-					selectionModule.clearSelection();
+					selectionInput.clearSelection();
 
 					NetworkingAether.sendPacketToServer(new PacketClearSelection());
 
@@ -124,6 +123,8 @@ public class OrbisDeveloperEventsClient
 			final PlayerOrbisModule module = PlayerOrbisModule.get(mc.player);
 			final GodPowerSelect select = module.powers().getSelectPower();
 
+			final ISelectionInput selectionInput = module.selectionInputs().getCurrentSelectionInput();
+
 			if (module.inDeveloperMode())
 			{
 				final Minecraft mc = Minecraft.getMinecraft();
@@ -155,14 +156,6 @@ public class OrbisDeveloperEventsClient
 					mc.player.inventory.setInventorySlotContents(mc.player.inventory.currentItem, item);
 				}
 
-				if (OrbisKeyBindings.keyBindChangeSelectionMode.isPressed())
-				{
-					player.getSelectionModule().nextSelectionMode();
-					NetworkingAether.sendPacketToServer(new PacketNextSelectionMode());
-				}
-
-				player.getSelectionModule().processSelectionMode();
-
 				if (OrbisKeyBindings.keyBindDelete.isPressed())
 				{
 					if (select.getSelectedRegion() != null)
@@ -189,7 +182,7 @@ public class OrbisDeveloperEventsClient
 					if (current == null)
 					{
 						final GuiChoiceMenuHolder choiceMenuHolder = new GuiChoiceMenuHolder(new GuiChoiceMenuPowers(module),
-								new GuiChoiceMenuSelectionTypes(module));
+								new GuiChoiceMenuSelectionTypes(module), new GuiChoiceMenuSelectionInputs(module));
 
 						Minecraft.getMinecraft().displayGuiScreen(choiceMenuHolder);
 					}
@@ -209,9 +202,9 @@ public class OrbisDeveloperEventsClient
 
 			final PlayerAether player = PlayerAether.getPlayer(mc.player);
 
-			if (player.getSelectionModule().getActiveSelection() == null && prevShape != null && prevReach != 0.0D)
+			if (selectionInput.getActiveSelection() == null && prevSelection != null && prevReach != 0.0D)
 			{
-				prevShape = null;
+				prevSelection = null;
 				player.getOrbisModule().setDeveloperReach(prevReach);
 
 				NetworkingAether.sendPacketToServer(new PacketDeveloperReach(prevReach));
@@ -231,6 +224,7 @@ public class OrbisDeveloperEventsClient
 		final PlayerOrbisModule module = player.getOrbisModule();
 
 		IShapeSelector selector = module.powers().getCurrentPower().getShapeSelector();
+		final ISelectionInput selectionInput = module.selectionInputs().getCurrentSelectionInput();
 
 		final ItemStack held = module.getEntity().getHeldItemMainhand();
 
@@ -239,37 +233,19 @@ public class OrbisDeveloperEventsClient
 			selector = (IShapeSelector) held.getItem();
 		}
 
-		if (event.getButton() == 0 || event.getButton() == 1)
+		if (module.inDeveloperMode())
 		{
-			if (module.inDeveloperMode() && selector.isSelectorActive(module, mc.world))
-			{
-				event.setCanceled(true);
-
-				final IShape selectedShape = player.getOrbisModule().getSelectedRegion();
-
-				if (selectedShape == null ||
-						module.powers().getCurrentPower().getClientHandler().onRightClickShape(module, selectedShape, event))
-				{
-					final PlayerSelectionModule selectionModule = module.getPlayer().getSelectionModule();
-
-					if (!event.isButtonstate() && selectionModule.getActiveSelection() != null
-							|| event.isButtonstate() && selectionModule.getActiveSelection() == null)
-					{
-						final BlockPos pos = OrbisRaytraceHelp.raytraceNoSnapping(module.getEntity());
-						selectionModule.setActiveSelectionCorner(pos);
-					}
-				}
-			}
+			selectionInput.onMouseEvent(event, selector, module);
 		}
 
-		final IShape activeRegion = player.getSelectionModule().getActiveSelection();
+		final IWorldObject activeRegion = selectionInput.getActiveSelection();
 
 		//Change reach
 		if (OrbisKeyBindings.keyBindControl.isKeyDown() || activeRegion != null)
 		{
-			if (activeRegion != null && prevShape == null)
+			if (activeRegion != null && prevSelection == null)
 			{
-				prevShape = activeRegion;
+				prevSelection = activeRegion;
 
 				prevReach = player.getOrbisModule().getDeveloperReach();
 			}

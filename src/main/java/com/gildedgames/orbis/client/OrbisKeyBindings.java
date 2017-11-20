@@ -23,8 +23,6 @@ public class OrbisKeyBindings
 
 	public static KeyBinding keyBindDecreaseReach = new KeyBinding("keybindings.decreaseReach", Keyboard.KEY_SUBTRACT, "key.categories.misc");
 
-	public static KeyBinding keyBindChangeSelectionMode = new KeyBinding("keybindings.changeSelectionMode", Keyboard.KEY_LMENU, "key.categories.misc");
-
 	public static void init()
 	{
 		ClientRegistry.registerKeyBinding(keyBindControl);
@@ -34,7 +32,6 @@ public class OrbisKeyBindings
 		ClientRegistry.registerKeyBinding(keyBindCopy);
 		ClientRegistry.registerKeyBinding(keyBindIncreaseReach);
 		ClientRegistry.registerKeyBinding(keyBindDecreaseReach);
-		ClientRegistry.registerKeyBinding(keyBindChangeSelectionMode);
 	}
 
 }

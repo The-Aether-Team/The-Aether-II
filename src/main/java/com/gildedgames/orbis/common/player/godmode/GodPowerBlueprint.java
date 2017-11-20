@@ -17,6 +17,7 @@ import com.gildedgames.orbis.common.items.ItemBlockDataContainer;
 import com.gildedgames.orbis.common.items.ItemBlueprint;
 import com.gildedgames.orbis.common.items.ItemBlueprintPalette;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
+import com.gildedgames.orbis.common.player.godmode.selectors.IShapeSelector;
 import com.gildedgames.orbis.common.player.godmode.selectors.ShapeSelectorBlueprint;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;

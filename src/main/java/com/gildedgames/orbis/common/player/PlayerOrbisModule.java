@@ -9,8 +9,10 @@ import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.orbis.common.network.packets.PacketDeveloperMode;
 import com.gildedgames.orbis.common.network.packets.PacketDeveloperReach;
 import com.gildedgames.orbis.common.player.godmode.IGodPower;
+import com.gildedgames.orbis.common.player.godmode.selection_input.ISelectionInput;
 import com.gildedgames.orbis.common.player.modules.PlayerPowerModule;
 import com.gildedgames.orbis.common.player.modules.PlayerProjectModule;
+import com.gildedgames.orbis.common.player.modules.PlayerSelectionInputModule;
 import com.gildedgames.orbis.common.player.modules.PlayerSelectionTypesModule;
 import com.gildedgames.orbis.common.util.OrbisRaytraceHelp;
 import com.google.common.collect.Lists;
@@ -32,6 +34,8 @@ public class PlayerOrbisModule extends PlayerAetherModule
 
 	private final PlayerProjectModule projectModule;
 
+	private final PlayerSelectionInputModule selectionInputModule;
+
 	private final List<PlayerAetherModule> modules = Lists.newArrayList();
 
 	private double developerReach = 5.0D;
@@ -47,10 +51,12 @@ public class PlayerOrbisModule extends PlayerAetherModule
 		this.godPowerModule = new PlayerPowerModule(this, playerAether);
 		this.selectionTypeModule = new PlayerSelectionTypesModule(playerAether);
 		this.projectModule = new PlayerProjectModule(playerAether);
+		this.selectionInputModule = new PlayerSelectionInputModule(this);
 
 		this.modules.add(this.godPowerModule);
 		this.modules.add(this.selectionTypeModule);
 		this.modules.add(this.projectModule);
+		this.modules.add(this.selectionInputModule);
 	}
 
 	public static PlayerOrbisModule get(final Entity player)
@@ -58,6 +64,11 @@ public class PlayerOrbisModule extends PlayerAetherModule
 		final PlayerAether playerAether = PlayerAether.getPlayer(player);
 
 		return playerAether.getOrbisModule();
+	}
+
+	public PlayerSelectionInputModule selectionInputs()
+	{
+		return this.selectionInputModule;
 	}
 
 	public PlayerProjectModule projects()
@@ -88,6 +99,14 @@ public class PlayerOrbisModule extends PlayerAetherModule
 		for (final IGodPower power : module.powers().array())
 		{
 			renderers.addAll(power.getClientHandler().getActiveRenderers(this, this.getWorld()));
+		}
+
+		for (final ISelectionInput input : module.selectionInputs().array())
+		{
+			if (input == this.selectionInputs().getCurrentSelectionInput())
+			{
+				renderers.addAll(input.getClient().getActiveRenderers(input, this, this.getWorld()));
+			}
 		}
 
 		return renderers;
@@ -162,6 +181,7 @@ public class PlayerOrbisModule extends PlayerAetherModule
 	public void onUpdate()
 	{
 		this.godPowerModule.onUpdate();
+		this.selectionInputModule.onUpdate();
 	}
 
 	@Override

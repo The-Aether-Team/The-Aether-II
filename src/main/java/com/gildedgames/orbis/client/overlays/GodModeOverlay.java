@@ -2,11 +2,10 @@ package com.gildedgames.orbis.client.overlays;
 
 import com.gildedgames.aether.client.gui.overlays.IOverlay;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.orbis.client.player.godmode.IGodPowerClient;
+import com.gildedgames.orbis.client.player.godmode.selection_inputs.ISelectionInputClient;
 import com.gildedgames.orbis.client.player.godmode.selection_types.ISelectionTypeClient;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
-import com.gildedgames.orbis.common.player.PlayerSelectionModule;
 import com.gildedgames.orbis.common.util.InputHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -86,25 +85,16 @@ public class GodModeOverlay implements IOverlay
 		GlStateManager.enableBlend();
 		GlStateManager.disableAlpha();
 
-		final int mode = PlayerAether.getPlayer(mc.player).getSelectionModule().currentSelectionMode();
+		final ISelectionInputClient selectionInput = module.selectionInputs().getCurrentSelectionInput().getClient();
 
-		switch (mode)
-		{
-			case (PlayerSelectionModule.UNIFORM):
-				mc.getTextureManager().bindTexture(UNIFORM);
-				break;
-			case (PlayerSelectionModule.CENTERED):
-				mc.getTextureManager().bindTexture(CENTERED);
-				break;
-			case (PlayerSelectionModule.NON_UNIFORM):
-				mc.getTextureManager().bindTexture(NON_UNIFORM);
-				break;
-		}
+		mc.getTextureManager().bindTexture(selectionInput.getIcon().getResourceLocation());
 
-		width = 5;
-		height = 5;
+		width = (int) selectionInput.getIcon().dim().originalState().width();
+		height = (int) selectionInput.getIcon().dim().originalState().height();
 
-		GlStateManager.translate(centerX + 35, centerZ + 14, 0);
+		GlStateManager.translate(centerX + 34.0F, centerZ + 13.5F, 0);
+
+		GlStateManager.scale(0.5F, 0.5F, 0.0F);
 
 		Gui.drawModalRectWithCustomSizedTexture(0, 0, 0, 0, width, height, width, height);
 

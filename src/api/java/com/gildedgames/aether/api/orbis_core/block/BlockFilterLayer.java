@@ -38,7 +38,7 @@ public class BlockFilterLayer implements NBT
 		this.condition = new DataCondition();
 	}
 
-	public BlockFilterLayer(List<BlockDataWithConditions> requiredBlocks, List<BlockDataWithConditions> newBlocks)
+	public BlockFilterLayer(final List<BlockDataWithConditions> requiredBlocks, final List<BlockDataWithConditions> newBlocks)
 	{
 		this();
 		this.requiredBlocks = Lists.newArrayList(requiredBlocks);
@@ -56,7 +56,7 @@ public class BlockFilterLayer implements NBT
 	/**
 	 * Sets the list of blocks that trigger the filter
 	 */
-	public void setRequiredBlocks(BlockDataWithConditions... requiredBlocks)
+	public void setRequiredBlocks(final BlockDataWithConditions... requiredBlocks)
 	{
 		this.requiredBlocks = Lists.newArrayList(Arrays.asList(requiredBlocks));
 	}
@@ -64,7 +64,7 @@ public class BlockFilterLayer implements NBT
 	/**
 	 * Sets the list of blocks that trigger the filter
 	 */
-	public void setRequiredBlocks(List<BlockDataWithConditions> requiredBlocks)
+	public void setRequiredBlocks(final List<BlockDataWithConditions> requiredBlocks)
 	{
 		this.requiredBlocks = Lists.newArrayList(requiredBlocks);
 	}
@@ -74,12 +74,12 @@ public class BlockFilterLayer implements NBT
 		return this.replacementBlocks;
 	}
 
-	public void setReplacementBlocks(BlockDataWithConditions... newBlocks)
+	public void setReplacementBlocks(final BlockDataWithConditions... newBlocks)
 	{
 		this.replacementBlocks = Lists.newArrayList(Arrays.asList(newBlocks));
 	}
 
-	public void setReplacementBlocks(List<BlockDataWithConditions> newBlocks)
+	public void setReplacementBlocks(final List<BlockDataWithConditions> newBlocks)
 	{
 		this.replacementBlocks = newBlocks;
 	}
@@ -89,12 +89,12 @@ public class BlockFilterLayer implements NBT
 		return this.blockFilterType;
 	}
 
-	public void setFilterType(BlockFilterType blockFilterType)
+	public void setFilterType(final BlockFilterType blockFilterType)
 	{
 		this.blockFilterType = blockFilterType;
 	}
 
-	private BlockDataWithConditions getRandom(Random random, World world)
+	private BlockDataWithConditions getRandom(final Random random, final World world)
 	{
 		final float randomValue = random.nextFloat() * this.totalBlockChance();
 		float chanceSum = 0.0f;
@@ -115,7 +115,7 @@ public class BlockFilterLayer implements NBT
 	/**
 	 * Applies this layer to a shape
 	 */
-	public void apply(IShape shape, World world, ICreationData options)
+	public void apply(final IShape shape, final World world, final ICreationData options)
 	{
 		if (this.condition == null)
 		{
@@ -153,7 +153,7 @@ public class BlockFilterLayer implements NBT
 				continue;
 			}
 
-			world.setBlockState(pos.toImmutable(), replacementBlock.getBlockState(), 3);//TODO: Test for weird interactions
+			world.setBlockState(pos.toImmutable(), replacementBlock.getBlockState(), 2);//TODO: Test for weird interactions
 
 			// TODO: Re-enable event
 			/*final ChangeBlockEvent blockEvent = new ChangeBlockEvent(world, pos, options.getCreator());
@@ -178,13 +178,13 @@ public class BlockFilterLayer implements NBT
 		return this.name;
 	}
 
-	public void setName(String name)
+	public void setName(final String name)
 	{
 		this.name = name;
 	}
 
 	@Override
-	public void write(NBTTagCompound tag)
+	public void write(final NBTTagCompound tag)
 	{
 		tag.setString("name", this.name);
 
@@ -192,7 +192,7 @@ public class BlockFilterLayer implements NBT
 
 		tag.setBoolean("chooseBlockPerBlock", this.chooseBlockPerBlock);
 
-		NBTFunnel funnel = OrbisCore.io().createFunnel(tag);
+		final NBTFunnel funnel = OrbisCore.io().createFunnel(tag);
 
 		funnel.set("condition", this.condition);
 
@@ -201,7 +201,7 @@ public class BlockFilterLayer implements NBT
 	}
 
 	@Override
-	public void read(NBTTagCompound tag)
+	public void read(final NBTTagCompound tag)
 	{
 		this.name = tag.getString("name");
 
@@ -209,7 +209,7 @@ public class BlockFilterLayer implements NBT
 
 		this.chooseBlockPerBlock = tag.getBoolean("chooseBlockPerBlock");
 
-		NBTFunnel funnel = OrbisCore.io().createFunnel(tag);
+		final NBTFunnel funnel = OrbisCore.io().createFunnel(tag);
 
 		this.condition = funnel.get("condition");
 
@@ -230,7 +230,7 @@ public class BlockFilterLayer implements NBT
 	}
 
 	@Override
-	public boolean equals(Object obj)
+	public boolean equals(final Object obj)
 	{
 		if (!(obj instanceof BlockFilterLayer))
 		{
@@ -239,7 +239,8 @@ public class BlockFilterLayer implements NBT
 
 		final BlockFilterLayer layer = (BlockFilterLayer) obj;
 
-		return this.getReplacementBlocks().equals(layer.getReplacementBlocks()) && this.getRequiredBlocks().equals(layer.getRequiredBlocks()) && this.getFilterType().equals(layer.getFilterType());
+		return this.getReplacementBlocks().equals(layer.getReplacementBlocks()) && this.getRequiredBlocks().equals(layer.getRequiredBlocks()) && this
+				.getFilterType().equals(layer.getFilterType());
 	}
 
 }
