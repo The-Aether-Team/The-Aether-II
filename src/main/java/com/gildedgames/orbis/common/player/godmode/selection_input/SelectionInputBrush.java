@@ -93,6 +93,19 @@ public class SelectionInputBrush implements ISelectionInput
 				shape.setCreateFromCenter(true);
 				shape.setUniform(true);
 			}
+
+			if (Mouse.isButtonDown(0) && !pos.equals(this.prevPlacingPos))
+			{
+				this.prevPlacingPos = pos;
+
+				if (this.activeSelection != null && selector.canSelectShape(module, this.activeSelection.getShape(), module.getWorld()))
+				{
+					if (module.getWorld().isRemote)
+					{
+						NetworkingAether.sendPacketToServer(new PacketActiveSelection(this.activeSelection.getShape()));
+					}
+				}
+			}
 		}
 		else
 		{
@@ -132,19 +145,6 @@ public class SelectionInputBrush implements ISelectionInput
 			else if (Mouse.isButtonDown(0))
 			{
 				event.setCanceled(true);
-
-				if (!pos.equals(this.prevPlacingPos))
-				{
-					this.prevPlacingPos = pos;
-
-					if (this.activeSelection != null && selector.canSelectShape(module, this.activeSelection.getShape(), module.getWorld()))
-					{
-						if (module.getWorld().isRemote)
-						{
-							NetworkingAether.sendPacketToServer(new PacketActiveSelection(this.activeSelection.getShape()));
-						}
-					}
-				}
 			}
 		}
 	}
