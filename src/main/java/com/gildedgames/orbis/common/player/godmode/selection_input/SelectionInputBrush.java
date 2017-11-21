@@ -67,6 +67,13 @@ public class SelectionInputBrush implements ISelectionInput
 
 			final BlockPos pos = RaytraceHelp.doOrbisRaytrace(this.module.getPlayer(), this.module.raytraceWithRegionSnapping());
 
+			if (!pos.equals(this.changingSizePos) && this.changingSize)
+			{
+				this.changingSizePos = pos;
+
+				this.changed = true;
+			}
+
 			if (this.activeSelection == null || this.changed)
 			{
 				final IShape newSelection = this.module.selectionTypes().getCurrentSelectionType()
@@ -98,9 +105,9 @@ public class SelectionInputBrush implements ISelectionInput
 			{
 				this.prevPlacingPos = pos;
 
-				if (this.activeSelection != null && selector.canSelectShape(module, this.activeSelection.getShape(), module.getWorld()))
+				if (this.activeSelection != null && selector.canSelectShape(this.module, this.activeSelection.getShape(), this.module.getWorld()))
 				{
-					if (module.getWorld().isRemote)
+					if (this.module.getWorld().isRemote)
 					{
 						NetworkingAether.sendPacketToServer(new PacketActiveSelection(this.activeSelection.getShape()));
 					}
@@ -118,22 +125,13 @@ public class SelectionInputBrush implements ISelectionInput
 	{
 		if (module.inDeveloperMode() && selector.isSelectorActive(module, module.getWorld()))
 		{
-			final BlockPos pos = RaytraceHelp.doOrbisRaytrace(this.module.getPlayer(), this.module.raytraceWithRegionSnapping());
-
-			if (!pos.equals(this.changingSizePos) && this.changingSize)
-			{
-				this.changingSizePos = pos;
-
-				this.changed = true;
-			}
-
 			if (event.getButton() == 1)
 			{
 				event.setCanceled(true);
 
 				if (event.isButtonstate())
 				{
-					this.changingSizeOrigin = pos;
+					this.changingSizeOrigin = RaytraceHelp.doOrbisRaytrace(this.module.getPlayer(), this.module.raytraceWithRegionSnapping());
 
 					this.changingSize = true;
 				}
