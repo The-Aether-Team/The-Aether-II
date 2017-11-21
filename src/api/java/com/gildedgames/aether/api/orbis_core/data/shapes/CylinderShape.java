@@ -107,7 +107,7 @@ public class CylinderShape extends AbstractShape
 
 			final double dist = this.start.add(0, y - this.start.getY(), 0).distanceSq(x, y, z);
 
-			return dist < radiusSq;
+			return dist < radiusSq + 2;
 		}
 		else if (!this.isUniform())
 		{

@@ -107,7 +107,7 @@ public class DomeShape extends AbstractShape
 
 			final double distSq = this.start.distanceSq(x, y, z);
 
-			return distSq < radiusSq && y >= this.start.getY();
+			return distSq < radiusSq + 1 && y >= this.start.getY();
 		}
 		else if (!this.isUniform())
 		{

@@ -107,7 +107,7 @@ public class SphereShape extends AbstractShape
 
 			final double distSq = this.start.distanceSq(x, y, z);
 
-			return distSq < radiusSq;
+			return distSq < radiusSq + 1;
 		}
 		else if (!this.isUniform())
 		{

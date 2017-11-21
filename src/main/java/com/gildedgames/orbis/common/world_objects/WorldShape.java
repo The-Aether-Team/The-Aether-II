@@ -69,7 +69,7 @@ public class WorldShape implements IShape, IWorldObject, IColored
 	@Override
 	public IShape getShape()
 	{
-		return this;
+		return this.shape;
 	}
 
 	@Override
