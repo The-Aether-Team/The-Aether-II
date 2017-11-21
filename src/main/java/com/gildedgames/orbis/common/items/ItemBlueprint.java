@@ -139,14 +139,13 @@ public class ItemBlueprint extends Item implements ModelRegisterCallback, ItemSt
 			return;
 		}
 
-		final BlockPos pos = RaytraceHelp.doOrbisRaytrace(module.getPlayer(), module.raytraceWithRegionSnapping());
-
-		if (!pos.equals(module.powers().getBlueprintPower().getPrevPlacingPos()))
+		if ((Mouse.isButtonDown(0) || Mouse.isButtonDown(1)) && module.powers().getBlueprintPower().getPlacingBlueprint() != null)
 		{
-			module.powers().getBlueprintPower().setPrevPlacingPos(pos);
+			final BlockPos pos = RaytraceHelp.doOrbisRaytrace(module.getPlayer(), module.raytraceWithRegionSnapping());
 
-			if ((Mouse.isButtonDown(0) || Mouse.isButtonDown(1)) && module.powers().getBlueprintPower().getPlacingBlueprint() != null)
+			if (!pos.equals(module.powers().getBlueprintPower().getPrevPlacingPos()))
 			{
+				module.powers().getBlueprintPower().setPrevPlacingPos(pos);
 				final BlockPos createPos = module.raytraceNoSnapping();
 
 				NetworkingAether.sendPacketToServer(new PacketCreatePlacingBlueprint(createPos));
@@ -157,6 +156,9 @@ public class ItemBlueprint extends Item implements ModelRegisterCallback, ItemSt
 	@Override
 	public void onMouseEvent(final MouseEvent event, final PlayerOrbisModule module)
 	{
-		event.setCanceled(true);
+		if (event.getButton() == 0 || event.getButton() == 1)
+		{
+			event.setCanceled(true);
+		}
 	}
 }

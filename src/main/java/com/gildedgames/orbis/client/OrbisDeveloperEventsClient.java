@@ -249,7 +249,7 @@ public class OrbisDeveloperEventsClient
 		final IWorldObject activeRegion = selectionInput.getActiveSelection();
 
 		//Change reach
-		if (OrbisKeyBindings.keyBindControl.isKeyDown() || activeRegion != null)
+		if (OrbisKeyBindings.keyBindControl.isKeyDown() || (activeRegion != null && selectionInput.shouldClearSelectionOnEscape()))
 		{
 			if (activeRegion != null && prevSelection == null)
 			{

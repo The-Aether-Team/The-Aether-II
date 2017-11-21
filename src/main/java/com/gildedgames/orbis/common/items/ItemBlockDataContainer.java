@@ -95,14 +95,13 @@ public class ItemBlockDataContainer extends Item implements ModelRegisterCallbac
 			return;
 		}
 
-		final BlockPos pos = RaytraceHelp.doOrbisRaytrace(module.getPlayer(), module.raytraceWithRegionSnapping());
-
-		if (!pos.equals(module.powers().getBlueprintPower().getPrevPlacingPos()))
+		if ((Mouse.isButtonDown(0) || Mouse.isButtonDown(1)) && module.powers().getBlueprintPower().getPlacingBlueprint() != null)
 		{
-			module.powers().getBlueprintPower().setPrevPlacingPos(pos);
+			final BlockPos pos = RaytraceHelp.doOrbisRaytrace(module.getPlayer(), module.raytraceWithRegionSnapping());
 
-			if ((Mouse.isButtonDown(0) || Mouse.isButtonDown(1)) && module.powers().getBlueprintPower().getPlacingBlueprint() != null)
+			if (!pos.equals(module.powers().getBlueprintPower().getPrevPlacingPos()))
 			{
+				module.powers().getBlueprintPower().setPrevPlacingPos(pos);
 				final BlockPos createPos = module.raytraceNoSnapping();
 
 				NetworkingAether.sendPacketToServer(new PacketCreateItemBlockDataContainer(module.getEntity().getHeldItemMainhand(), createPos));
@@ -113,7 +112,10 @@ public class ItemBlockDataContainer extends Item implements ModelRegisterCallbac
 	@Override
 	public void onMouseEvent(final MouseEvent event, final PlayerOrbisModule module)
 	{
-		event.setCanceled(true);
+		if (event.getButton() == 0 || event.getButton() == 1)
+		{
+			event.setCanceled(true);
+		}
 	}
 
 	@SideOnly(Side.CLIENT)
