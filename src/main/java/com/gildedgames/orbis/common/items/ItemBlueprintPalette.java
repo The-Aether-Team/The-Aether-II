@@ -12,6 +12,7 @@ import com.gildedgames.orbis.common.items.util.ItemStackInput;
 import com.gildedgames.orbis.common.network.packets.PacketCreatePlacingBlueprintPalette;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.util.RaytraceHelp;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -116,6 +117,11 @@ public class ItemBlueprintPalette extends Item implements ModelRegisterCallback,
 		final World world = module.getWorld();
 
 		if (!world.isRemote)
+		{
+			return;
+		}
+
+		if (Minecraft.getMinecraft().currentScreen != null)
 		{
 			return;
 		}

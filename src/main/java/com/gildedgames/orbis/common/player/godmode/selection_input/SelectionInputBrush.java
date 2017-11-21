@@ -14,6 +14,7 @@ import com.gildedgames.orbis.common.player.godmode.IGodPower;
 import com.gildedgames.orbis.common.player.godmode.selectors.IShapeSelector;
 import com.gildedgames.orbis.common.util.RaytraceHelp;
 import com.gildedgames.orbis.common.world_objects.WorldShape;
+import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
@@ -105,7 +106,7 @@ public class SelectionInputBrush implements ISelectionInput
 
 			if (world.isRemote)
 			{
-				if (Mouse.isButtonDown(0))
+				if (Mouse.isButtonDown(0) && Minecraft.getMinecraft().currentScreen == null)
 				{
 					if (!pos.equals(this.prevPlacingPos))
 					{

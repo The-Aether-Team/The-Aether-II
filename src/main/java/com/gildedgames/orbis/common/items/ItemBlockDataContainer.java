@@ -12,6 +12,7 @@ import com.gildedgames.orbis.common.network.packets.PacketCreateItemBlockDataCon
 import com.gildedgames.orbis.common.network.packets.PacketSendDataToCache;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.util.RaytraceHelp;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -91,6 +92,11 @@ public class ItemBlockDataContainer extends Item implements ModelRegisterCallbac
 		final World world = module.getWorld();
 
 		if (!world.isRemote)
+		{
+			return;
+		}
+
+		if (Minecraft.getMinecraft().currentScreen != null)
 		{
 			return;
 		}
