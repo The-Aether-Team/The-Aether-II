@@ -3,9 +3,11 @@ package com.gildedgames.orbis.common.player.modules;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.orbis.common.items.util.ItemStackInput;
 import com.gildedgames.orbis.common.network.packets.PacketChangePower;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.*;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.ArrayList;
@@ -29,11 +31,15 @@ public class PlayerPowerModule extends PlayerAetherModule
 
 	private final GodPowerSpectator spectatorPower;
 
+	private final PlayerOrbisModule module;
+
 	private int currentPowerIndex;
 
-	public PlayerPowerModule(PlayerOrbisModule module, final PlayerAether playerAether)
+	public PlayerPowerModule(final PlayerOrbisModule module, final PlayerAether playerAether)
 	{
 		super(playerAether);
+
+		this.module = module;
 
 		this.creativePower = new GodPowerCreative(this.getWorld());
 		this.fillPower = new GodPowerFill(module, this.getWorld());
@@ -86,16 +92,14 @@ public class PlayerPowerModule extends PlayerAetherModule
 		return this.blueprintPower;
 	}
 
-	public GodPowerSelect getSelectPower() { return this.selectPower;}
+	public GodPowerSelect getSelectPower()
+	{
+		return this.selectPower;
+	}
 
 	public IGodPower getCurrentPower()
 	{
 		return this.powers[this.currentPowerIndex];
-	}
-
-	public void setCurrentPower(int powerIndex)
-	{
-		this.currentPowerIndex = powerIndex;
 	}
 
 	public void setCurrentPower(final Class<? extends IGodPower> clazz)
@@ -122,6 +126,11 @@ public class PlayerPowerModule extends PlayerAetherModule
 				NetworkingAether.sendPacketToServer(new PacketChangePower(this.currentPowerIndex));
 			}
 		}
+	}
+
+	public void setCurrentPower(final int powerIndex)
+	{
+		this.currentPowerIndex = powerIndex;
 	}
 
 	public int getCurrentPowerIndex()
@@ -160,11 +169,20 @@ public class PlayerPowerModule extends PlayerAetherModule
 	@Override
 	public void onUpdate()
 	{
-		PlayerOrbisModule module = PlayerOrbisModule.get(this.getEntity());
+		final PlayerOrbisModule module = PlayerOrbisModule.get(this.getEntity());
 
-		for (IGodPower power : this.powers)
+		for (final IGodPower power : this.powers)
 		{
 			power.onUpdate(this.getEntity(), module, this.isCurrentPower(power));
+		}
+
+		final ItemStack stack = this.getEntity().getHeldItemMainhand();
+
+		if (stack.getItem() instanceof ItemStackInput)
+		{
+			final ItemStackInput input = (ItemStackInput) stack.getItem();
+
+			input.onUpdateInHand(this.module);
 		}
 	}
 
@@ -194,6 +212,5 @@ public class PlayerPowerModule extends PlayerAetherModule
 
 		this.currentPowerIndex = tag.getInteger("currentPowerIndex");
 	}
-
 
 }

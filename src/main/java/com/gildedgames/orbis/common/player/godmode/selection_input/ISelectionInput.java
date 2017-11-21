@@ -12,6 +12,14 @@ public interface ISelectionInput extends NBT
 
 	boolean shouldClearSelectionOnEscape();
 
+	void clearSelection();
+
+	IWorldObject getActiveSelection();
+
+	void setActiveSelection(IWorldObject activeSelection);
+
+	ISelectionInputClient getClient();
+
 	/**
 	 * @param isActive Whether or not this selection input
 	 *                 implementation is the actively used
@@ -20,13 +28,5 @@ public interface ISelectionInput extends NBT
 	void onUpdate(boolean isActive, IShapeSelector selector);
 
 	void onMouseEvent(MouseEvent event, IShapeSelector selector, PlayerOrbisModule module);
-
-	void clearSelection();
-
-	IWorldObject getActiveSelection();
-
-	void setActiveSelection(IWorldObject activeSelection);
-
-	ISelectionInputClient getClient();
 
 }

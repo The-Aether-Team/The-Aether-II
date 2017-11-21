@@ -22,6 +22,8 @@ public interface ICreationData extends NBT
 
 	ICreationData set(EntityPlayer creator);
 
+	ICreationData set(boolean placeAir);
+
 	/**
 	 * Should return the centered position if
 	 * this creation data returns true on isCentered()
@@ -37,6 +39,8 @@ public interface ICreationData extends NBT
 
 	@Nullable
 	EntityPlayer getCreator();
+
+	boolean placeAir();
 
 	ICreationData clone();
 

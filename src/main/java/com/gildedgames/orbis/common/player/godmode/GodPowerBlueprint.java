@@ -36,6 +36,8 @@ public class GodPowerBlueprint implements IGodPower
 
 	private final StagedInventory<InventoryBlueprintForge> stagedInventory;
 
+	private final PlayerOrbisModule module;
+
 	private Rotation placingRotation = Rotation.NONE;
 
 	private GodPowerBlueprintClient clientHandler;
@@ -46,8 +48,12 @@ public class GodPowerBlueprint implements IGodPower
 
 	private ItemStack previousStack;
 
+	private BlockPos prevPlacingPos;
+
 	public GodPowerBlueprint(final PlayerOrbisModule module, final World world)
 	{
+		this.module = module;
+
 		if (world.isRemote)
 		{
 			this.clientHandler = new GodPowerBlueprintClient(this);
@@ -56,6 +62,16 @@ public class GodPowerBlueprint implements IGodPower
 		this.shapeSelector = new ShapeSelectorBlueprint(this);
 		this.stagedInventory = new StagedInventory<>(module, () -> new InventoryBlueprintForge(module.getEntity()),
 				m -> m.powers().getBlueprintPower().getStagedInventory(), "blueprintForge");
+	}
+
+	public BlockPos getPrevPlacingPos()
+	{
+		return this.prevPlacingPos;
+	}
+
+	public void setPrevPlacingPos(final BlockPos pos)
+	{
+		this.prevPlacingPos = pos;
 	}
 
 	public StagedInventory<InventoryBlueprintForge> getStagedInventory()

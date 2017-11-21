@@ -220,6 +220,11 @@ public class DataPrimer
 
 	public void create(final BlockData blockData, final BlockPos pos, final ICreationData creationData)
 	{
+		if (blockData.isAir() && !creationData.placeAir())
+		{
+			return;
+		}
+
 		if (!blockData.isVoid())
 		{
 			final IBlockState rotated = blockData.getRotatedBlockState(creationData.getRotation());

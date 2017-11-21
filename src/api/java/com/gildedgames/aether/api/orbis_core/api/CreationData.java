@@ -22,6 +22,8 @@ public class CreationData implements ICreationData
 
 	private Rotation rotation;
 
+	private boolean placeAir = true;
+
 	public CreationData(final World world)
 	{
 		this.world = world;
@@ -82,6 +84,14 @@ public class CreationData implements ICreationData
 	}
 
 	@Override
+	public ICreationData set(final boolean placeAir)
+	{
+		this.placeAir = placeAir;
+
+		return this;
+	}
+
+	@Override
 	public BlockPos getPos()
 	{
 		return this.pos;
@@ -112,9 +122,15 @@ public class CreationData implements ICreationData
 	}
 
 	@Override
+	public boolean placeAir()
+	{
+		return this.placeAir;
+	}
+
+	@Override
 	public ICreationData clone()
 	{
-		return new CreationData(this.world).set(new BlockPos(this.pos)).set(this.rand).set(this.rotation).set(this.creator);
+		return new CreationData(this.world).set(new BlockPos(this.pos)).set(this.rand).set(this.rotation).set(this.creator).set(this.placeAir);
 	}
 
 	@Override
@@ -122,6 +138,7 @@ public class CreationData implements ICreationData
 	{
 		tag.setTag("pos", NBTHelper.writeBlockPos(this.pos));
 		tag.setString("rotation", this.rotation.name());
+		tag.setBoolean("placeAir", this.placeAir);
 	}
 
 	@Override
@@ -129,5 +146,6 @@ public class CreationData implements ICreationData
 	{
 		this.pos = NBTHelper.readBlockPos(tag.getCompoundTag("pos"));
 		this.rotation = Rotation.valueOf(tag.getString("rotation"));
+		this.placeAir = tag.getBoolean("placeAir");
 	}
 }

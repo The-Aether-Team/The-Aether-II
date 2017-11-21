@@ -56,6 +56,8 @@ public class SelectionInputBrush implements ISelectionInput
 	@Override
 	public void onUpdate(final boolean isActive, final IShapeSelector selector)
 	{
+		final World world = this.module.getWorld();
+
 		if (isActive && selector.isSelectorActive(this.module, this.module.getWorld()))
 		{
 			if (this.prevPower != this.module.powers().getCurrentPower())
@@ -101,15 +103,18 @@ public class SelectionInputBrush implements ISelectionInput
 				shape.setUniform(true);
 			}
 
-			if (Mouse.isButtonDown(0) && !pos.equals(this.prevPlacingPos))
+			if (world.isRemote && !pos.equals(this.prevPlacingPos))
 			{
 				this.prevPlacingPos = pos;
 
-				if (this.activeSelection != null && selector.canSelectShape(this.module, this.activeSelection.getShape(), this.module.getWorld()))
+				if (Mouse.isButtonDown(0))
 				{
-					if (this.module.getWorld().isRemote)
+					if (this.activeSelection != null && selector.canSelectShape(this.module, this.activeSelection.getShape(), this.module.getWorld()))
 					{
-						NetworkingAether.sendPacketToServer(new PacketActiveSelection(this.activeSelection.getShape()));
+						if (this.module.getWorld().isRemote)
+						{
+							NetworkingAether.sendPacketToServer(new PacketActiveSelection(this.activeSelection.getShape()));
+						}
 					}
 				}
 			}

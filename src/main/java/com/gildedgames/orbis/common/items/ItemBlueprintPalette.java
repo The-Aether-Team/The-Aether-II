@@ -1,44 +1,40 @@
 package com.gildedgames.orbis.common.items;
 
 import com.gildedgames.aether.api.io.NBTFunnel;
-import com.gildedgames.aether.api.orbis.IRegion;
 import com.gildedgames.aether.api.orbis_core.OrbisCore;
-import com.gildedgames.aether.api.orbis_core.api.CreationData;
-import com.gildedgames.aether.api.orbis_core.data.BlueprintData;
-import com.gildedgames.aether.api.orbis_core.processing.DataPrimer;
-import com.gildedgames.aether.api.orbis_core.util.RotationHelp;
-import com.gildedgames.aether.api.util.BlockAccessExtendedWrapper;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.orbis.client.ModelRegisterCallback;
 import com.gildedgames.orbis.client.renderers.tiles.TileEntityBlueprintPaletteRenderer;
 import com.gildedgames.orbis.common.OrbisServerCaches;
 import com.gildedgames.orbis.common.data.BlueprintPalette;
+import com.gildedgames.orbis.common.items.util.ItemStackInput;
+import com.gildedgames.orbis.common.network.packets.PacketCreatePlacingBlueprintPalette;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
+import com.gildedgames.orbis.common.util.RaytraceHelp;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.event.ModelBakeEvent;
+import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.input.Mouse;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @Mod.EventBusSubscriber(Side.CLIENT)
-public class ItemBlueprintPalette extends Item implements ModelRegisterCallback
+public class ItemBlueprintPalette extends Item implements ModelRegisterCallback, ItemStackInput
 {
 	@SideOnly(Side.CLIENT)
 	private static TileEntityBlueprintPaletteRenderer.BakedModel dummyModel;
@@ -103,34 +99,6 @@ public class ItemBlueprintPalette extends Item implements ModelRegisterCallback
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(final World world, final EntityPlayer player, final EnumHand handIn)
-	{
-		final PlayerOrbisModule module = PlayerOrbisModule.get(player);
-
-		if (module.powers().getBlueprintPower().getPlacingPalette() != null)
-		{
-			if (!world.isRemote)
-			{
-				final BlockPos selection = module.raytraceNoSnapping();
-
-				final BlueprintData data = module.powers().getBlueprintPower().getPlacingPalette().fetchRandom(world, world.rand);
-
-				final Rotation rotation = module.powers().getBlueprintPower().getPlacingRotation();
-
-				final IRegion region = RotationHelp.regionFromCenter(selection, data, rotation);
-
-				final DataPrimer primer = new DataPrimer(new BlockAccessExtendedWrapper(world));
-
-				primer.create(data.getBlockDataContainer(), new CreationData(world, player).set(region.getMin()).set(rotation));
-			}
-
-			return new ActionResult(EnumActionResult.SUCCESS, player.getHeldItem(handIn));
-		}
-
-		return new ActionResult(EnumActionResult.PASS, player.getHeldItem(handIn));
-	}
-
-	@Override
 	public void addInformation(final ItemStack stack, final EntityPlayer par2EntityPlayer, final List<String> creativeList, final boolean par4)
 	{
 
@@ -142,4 +110,34 @@ public class ItemBlueprintPalette extends Item implements ModelRegisterCallback
 		return true;
 	}
 
+	@Override
+	public void onUpdateInHand(final PlayerOrbisModule module)
+	{
+		final World world = module.getWorld();
+
+		if (!world.isRemote)
+		{
+			return;
+		}
+
+		final BlockPos pos = RaytraceHelp.doOrbisRaytrace(module.getPlayer(), module.raytraceWithRegionSnapping());
+
+		if (!pos.equals(module.powers().getBlueprintPower().getPrevPlacingPos()))
+		{
+			module.powers().getBlueprintPower().setPrevPlacingPos(pos);
+
+			if ((Mouse.isButtonDown(0) || Mouse.isButtonDown(1)) && module.powers().getBlueprintPower().getPlacingBlueprint() != null)
+			{
+				final BlockPos createPos = module.raytraceNoSnapping();
+
+				NetworkingAether.sendPacketToServer(new PacketCreatePlacingBlueprintPalette(createPos));
+			}
+		}
+	}
+
+	@Override
+	public void onMouseEvent(final MouseEvent event, final PlayerOrbisModule module)
+	{
+
+	}
 }

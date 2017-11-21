@@ -70,6 +70,10 @@ public class NetworkingAether
 		instance.registerMessage(PacketSetItemStackInHand.HandlerServer.class, PacketSetItemStackInHand.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketSetBlockDataContainerInHand.HandlerServer.class, PacketSetBlockDataContainerInHand.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketChangeSelectionInput.HandlerServer.class, PacketChangeSelectionInput.class, discriminant++, Side.SERVER);
+		instance.registerMessage(PacketCreatePlacingBlueprint.HandlerServer.class, PacketCreatePlacingBlueprint.class, discriminant++, Side.SERVER);
+		instance.registerMessage(PacketCreateItemBlockDataContainer.HandlerServer.class, PacketCreateItemBlockDataContainer.class, discriminant++, Side.SERVER);
+		instance.registerMessage(PacketCreatePlacingBlueprintPalette.HandlerServer.class, PacketCreatePlacingBlueprintPalette.class, discriminant++,
+				Side.SERVER);
 
 		// C L I E N T
 		instance.registerMessage(PacketEquipment.HandlerClient.class, PacketEquipment.class, discriminant++, Side.CLIENT);
