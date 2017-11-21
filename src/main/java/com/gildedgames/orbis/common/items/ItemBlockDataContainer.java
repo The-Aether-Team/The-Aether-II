@@ -113,7 +113,7 @@ public class ItemBlockDataContainer extends Item implements ModelRegisterCallbac
 	@Override
 	public void onMouseEvent(final MouseEvent event, final PlayerOrbisModule module)
 	{
-
+		event.setCanceled(true);
 	}
 
 	@SideOnly(Side.CLIENT)

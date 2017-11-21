@@ -15,6 +15,7 @@ import com.gildedgames.orbis.client.gui.GuiChoiceMenuSelectionTypes;
 import com.gildedgames.orbis.client.renderers.AirSelectionRenderer;
 import com.gildedgames.orbis.common.Orbis;
 import com.gildedgames.orbis.common.items.ItemsOrbis;
+import com.gildedgames.orbis.common.items.util.ItemStackInput;
 import com.gildedgames.orbis.common.network.packets.*;
 import com.gildedgames.orbis.common.player.PlayerOrbisModule;
 import com.gildedgames.orbis.common.player.godmode.GodPowerBlueprint;
@@ -231,6 +232,13 @@ public class OrbisDeveloperEventsClient
 		if (held.getItem() instanceof IShapeSelector)
 		{
 			selector = (IShapeSelector) held.getItem();
+		}
+
+		if (held.getItem() instanceof ItemStackInput)
+		{
+			final ItemStackInput input = (ItemStackInput) held.getItem();
+
+			input.onMouseEvent(event, module);
 		}
 
 		if (module.inDeveloperMode())

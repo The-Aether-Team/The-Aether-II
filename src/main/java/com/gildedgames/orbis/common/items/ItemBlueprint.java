@@ -157,6 +157,6 @@ public class ItemBlueprint extends Item implements ModelRegisterCallback, ItemSt
 	@Override
 	public void onMouseEvent(final MouseEvent event, final PlayerOrbisModule module)
 	{
-
+		event.setCanceled(true);
 	}
 }
