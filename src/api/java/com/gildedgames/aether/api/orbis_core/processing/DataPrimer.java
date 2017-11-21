@@ -229,7 +229,7 @@ public class DataPrimer
 		{
 			final IBlockState rotated = blockData.getRotatedBlockState(creationData.getRotation());
 
-			this.access.setBlockState(pos, rotated);
+			this.access.setBlockState(pos, rotated, 2);
 
 			if (blockData.getTileEntity() != null && this.access.getWorld() != null)
 			{
