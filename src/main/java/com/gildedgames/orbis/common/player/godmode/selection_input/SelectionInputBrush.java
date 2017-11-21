@@ -19,6 +19,7 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.MouseEvent;
+import org.lwjgl.input.Mouse;
 
 public class SelectionInputBrush implements ISelectionInput
 {
@@ -29,6 +30,8 @@ public class SelectionInputBrush implements ISelectionInput
 	private IWorldObject activeSelection;
 
 	private BlockPos changingSizeOrigin, changingSizePos;
+
+	private BlockPos prevPlacingPos;
 
 	private boolean changed, changingSize;
 
@@ -126,12 +129,14 @@ public class SelectionInputBrush implements ISelectionInput
 					this.changingSize = false;
 				}
 			}
-			else if (event.getButton() == 0)
+			else if (Mouse.isButtonDown(0))
 			{
 				event.setCanceled(true);
 
-				if (event.isButtonstate())
+				if (!pos.equals(this.prevPlacingPos))
 				{
+					this.prevPlacingPos = pos;
+
 					if (this.activeSelection != null && selector.canSelectShape(module, this.activeSelection.getShape(), module.getWorld()))
 					{
 						if (module.getWorld().isRemote)
