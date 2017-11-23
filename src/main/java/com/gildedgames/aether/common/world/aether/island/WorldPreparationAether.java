@@ -104,6 +104,8 @@ public class WorldPreparationAether
 			{
 				final IVirtualChunk chunk = island.getVirtualDataManager().getChunk(chunkX, chunkZ);
 
+				this.rand.setSeed((long) chunkX * 341873128712L + (long) chunkZ * 132897987541L);
+
 				chunk.prepareThisAndNearbyChunks(this.world, island, this.rand);
 			}
 		}
