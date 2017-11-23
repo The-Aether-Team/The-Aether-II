@@ -352,9 +352,9 @@ public class GenerationAether
 						PlacementConditions.replaceable(true, Material.ROCK, Material.GROUND, Material.GRASS, Material.AIR),
 						PlacementConditions.ignoreBlock(9, BlocksAether.quicksoil.getDefaultState()));
 		WELL_1B = new BlueprintDefinition(BlueprintsAether.WELL_1B).setRegistry(registry)
-				.setConditions(PlacementConditions.onSpecificBlock(9, BlocksAether.aether_grass, BlocksAether.aether_dirt, BlocksAether.holystone),
+				.setConditions(PlacementConditions.onSpecificBlock(10, BlocksAether.aether_grass, BlocksAether.aether_dirt, BlocksAether.holystone),
 						PlacementConditions.replaceable(true, Material.ROCK, Material.GROUND, Material.GRASS, Material.AIR),
-						PlacementConditions.ignoreBlock(9, BlocksAether.quicksoil.getDefaultState()));
+						PlacementConditions.ignoreBlock(10, BlocksAether.quicksoil.getDefaultState()));
 
 		ABAND_ANGEL_STOREROOM = new BlueprintDefinitionPool(ABAND_ANGEL_STOREROOM_1A);
 		ABAND_ANGEL_WATCHTOWER = new BlueprintDefinitionPool(ABAND_ANGEL_WATCHTOWER_1A);
