@@ -137,6 +137,13 @@ public class SelectionInputBrush implements ISelectionInput
 			if (event.getButton() == 1 || event.getButton() == 0)
 			{
 				event.setCanceled(true);
+
+				final IShape selectedShape = module.getSelectedRegion();
+
+				if (selectedShape != null && !module.powers().getCurrentPower().getClientHandler().onRightClickShape(module, selectedShape, event))
+				{
+					return;
+				}
 			}
 
 			if (event.getButton() == 1)
