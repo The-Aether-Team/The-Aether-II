@@ -212,11 +212,17 @@ public class OrbisProject implements IProject
 
 				usesJar = true;
 			}
-			else /** DEVELOPMENT WORKSPACE **/
+			else if (this.jarLocation != null) /** DEVELOPMENT WORKSPACE, JAR **/
 			{
 				resources = URI.create(rawPath.replace("/AetherII_api/com/gildedgames/aether/api/orbis_core/data/management/impl/", "/AetherII_main/assets/"));
 
 				myPath = Paths.get(resources);
+
+				usesJar = false;
+			}
+			else
+			{
+				myPath = Paths.get(this.locationFile.getPath());
 
 				usesJar = false;
 			}
