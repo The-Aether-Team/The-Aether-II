@@ -46,6 +46,11 @@ public class GuiChoiceMenuHolder extends GuiFrame
 
 	private void setCurrentPage(final int choicePageIndex)
 	{
+		if (choicePageIndex >= this.menus.length)
+		{
+			return;
+		}
+
 		this.choicePageIndex = choicePageIndex;
 
 		if (this.choicePageIndex >= this.menus.length)
@@ -159,6 +164,27 @@ public class GuiChoiceMenuHolder extends GuiFrame
 				break;
 			case Keyboard.KEY_2:
 				this.setCurrentPage(1);
+				break;
+			case Keyboard.KEY_3:
+				this.setCurrentPage(2);
+				break;
+			case Keyboard.KEY_4:
+				this.setCurrentPage(3);
+				break;
+			case Keyboard.KEY_5:
+				this.setCurrentPage(4);
+				break;
+			case Keyboard.KEY_6:
+				this.setCurrentPage(5);
+				break;
+			case Keyboard.KEY_7:
+				this.setCurrentPage(6);
+				break;
+			case Keyboard.KEY_8:
+				this.setCurrentPage(7);
+				break;
+			case Keyboard.KEY_9:
+				this.setCurrentPage(8);
 				break;
 		}
 
