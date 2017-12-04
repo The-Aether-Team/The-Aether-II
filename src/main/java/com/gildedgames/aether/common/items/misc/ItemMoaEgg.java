@@ -39,6 +39,8 @@ public class ItemMoaEgg extends Item
 
 		this.setHasSubtypes(true);
 
+		this.maxStackSize = 1;
+
 		this.addPropertyOverride(new ResourceLocation("circles"), new ModelProperty("circles"));
 		this.addPropertyOverride(new ResourceLocation("curves"), new ModelProperty("curves"));
 		this.addPropertyOverride(new ResourceLocation("ladder"), new ModelProperty("ladder"));
