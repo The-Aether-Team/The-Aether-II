@@ -15,10 +15,7 @@ public class RenderPinkBabySwet extends RenderCompanion<EntityPinkBabySwet>
 
 	public RenderPinkBabySwet(final RenderManager renderManager)
 	{
-		super(renderManager, new ModelSlime(2), 0.75f, 2.5f);
-
-		this.addLayer(new LayerSwetJelly(this));
-
+		super(renderManager, new ModelSlime(2), 0.5f, 2f);
 	}
 
 	@Override
