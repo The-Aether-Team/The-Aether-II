@@ -7,9 +7,11 @@ import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.living.companions.EntityCompanion;
+import com.gildedgames.aether.common.entities.living.companions.EntityEtherealWisp;
 import com.gildedgames.aether.common.items.companions.ItemCompanion;
 import com.gildedgames.aether.common.world.spawning.SpawnHandler;
 import net.minecraft.entity.EntityList;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -131,6 +133,11 @@ public class CompanionEffectFactory implements IEffectFactory<CompanionEffectFac
 				companion.setOwner(null);
 				companion.setDespawned(true);
 				companion.setDead();
+
+				if (companion instanceof EntityEtherealWisp) {
+					EntityPlayer p = player.getEntity();
+					p.setInvisible(false);
+				}
 			}
 
 			this.entities.clear();

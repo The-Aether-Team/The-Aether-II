@@ -33,6 +33,7 @@ public class EquipmentContent
 		AetherAPI.content().effects().registerEffect(new StatEffectFactory());
 		AetherAPI.content().effects().registerEffect(new PotionEffectFactory());
 		AetherAPI.content().effects().registerEffect(new CompanionEffectFactory());
+		AetherAPI.content().effects().registerEffect(new InvisiblityEffectFactory());
 	}
 
 	private static void registerItems()
@@ -41,8 +42,7 @@ public class EquipmentContent
 		createCompanionItem(ItemsAether.frostpine_totem, ItemEquipmentSlot.COMPANION, ItemRarity.RARE, EntityFrostpineTotem.class,
 				new PotionEffectProvider(MobEffects.NIGHT_VISION, 0));
 
-		createCompanionItem(ItemsAether.ethereal_stone, ItemEquipmentSlot.COMPANION, ItemRarity.RARE, EntityEtherealWisp.class,
-				new PotionEffectProvider(MobEffects.INVISIBILITY, 0));
+		createCompanionItem(ItemsAether.ethereal_stone, ItemEquipmentSlot.COMPANION, ItemRarity.RARE, EntityEtherealWisp.class, new InvisiblityEffectFactory.Provider());
 
 		createCompanionItem(ItemsAether.fleeting_stone, ItemEquipmentSlot.COMPANION, ItemRarity.RARE, EntityFleetingWisp.class);
 
