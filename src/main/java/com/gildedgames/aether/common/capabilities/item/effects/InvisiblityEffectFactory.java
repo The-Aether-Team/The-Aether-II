@@ -55,7 +55,7 @@ public class InvisiblityEffectFactory implements IEffectFactory<InvisiblityEffec
 		@Override
 		public void addInformation(Collection<String> label)
 		{
-			label.add(TextFormatting.GRAY.toString() + TextFormatting.ITALIC.toString() + "Invisibility");
+			label.add(TextFormatting.BLUE.toString() + TextFormatting.ITALIC.toString() + "Invisibility");
 		}
 	}
 }
