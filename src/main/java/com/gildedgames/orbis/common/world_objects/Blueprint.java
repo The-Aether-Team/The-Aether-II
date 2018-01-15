@@ -28,9 +28,9 @@ public class Blueprint extends AbstractRegion implements IWorldObject, IMutableR
 
 	private IWorldRenderer renderer;
 
-	private BlueprintData data;
+	protected BlueprintData data;
 
-	private BlockPos min = BlockPos.ORIGIN, max = BlockPos.ORIGIN;
+	protected BlockPos min = BlockPos.ORIGIN, max = BlockPos.ORIGIN;
 
 	private Blueprint(final World world)
 	{
