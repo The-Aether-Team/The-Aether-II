@@ -12,15 +12,15 @@ import java.util.List;
 public class GuiTextBox extends GuiElement
 {
 
-	private ITextComponent text;
-
-	private List<ITextComponent> cachedSplitText = Lists.newArrayList();
-
 	public boolean showBackdrop = false;
 
 	public boolean bottomToTop = false;
 
-	public GuiTextBox(int elementId, int x, int z, int width, int height)
+	private ITextComponent text;
+
+	private List<ITextComponent> cachedSplitText = Lists.newArrayList();
+
+	public GuiTextBox(final int elementId, final int x, final int z, final int width, final int height)
 	{
 		super(elementId, x, z);
 
@@ -33,14 +33,14 @@ public class GuiTextBox extends GuiElement
 		return this.text;
 	}
 
-	public void setText(ITextComponent text)
+	public void setText(final ITextComponent text)
 	{
 		this.text = text;
 
 		this.markForReInit();
 	}
 
-	public int getTextHeight(FontRenderer fontRenderer)
+	public int getTextHeight(final FontRenderer fontRenderer)
 	{
 		if (!this.hasInit)
 		{
@@ -48,13 +48,13 @@ public class GuiTextBox extends GuiElement
 			this.hasInit = true;
 		}
 
-		int splitCount = Math.min((this.width + 12 - 5) / fontRenderer.FONT_HEIGHT, this.cachedSplitText.size());
+		final int splitCount = Math.min((this.width + 12 - 5) / fontRenderer.FONT_HEIGHT, this.cachedSplitText.size());
 
 		return splitCount * fontRenderer.FONT_HEIGHT;
 	}
 
 	@Override
-	public void init(FontRenderer fontRenderer)
+	public void init(final FontRenderer fontRenderer)
 	{
 		if (this.text != null)
 		{
@@ -63,39 +63,39 @@ public class GuiTextBox extends GuiElement
 	}
 
 	@Override
-	public void playPressSound(SoundHandler soundHandlerIn)
+	public void playPressSound(final SoundHandler soundHandlerIn)
 	{
 		// NO-OP
 	}
 
 	@Override
-	public void draw(FontRenderer fontRenderer)
+	public void draw(final FontRenderer fontRenderer)
 	{
 		if (this.text != null)
 		{
-			int splitCount = Math.min((this.width + 12 - 5) / fontRenderer.FONT_HEIGHT, this.cachedSplitText.size());
+			final int splitCount = Math.min((this.width + 12 - 5) / fontRenderer.FONT_HEIGHT, this.cachedSplitText.size());
 
 			if (this.showBackdrop)
 			{
 				if (this.bottomToTop)
 				{
-					Gui.drawRect(this.xPosition,
-							this.yPosition + this.height - (splitCount * fontRenderer.FONT_HEIGHT) - 10,
-							this.xPosition + this.width, this.yPosition + this.height, Integer.MIN_VALUE);
+					Gui.drawRect(this.x,
+							this.y + this.height - (splitCount * fontRenderer.FONT_HEIGHT) - 10,
+							this.x + this.width, this.y + this.height, Integer.MIN_VALUE);
 				}
 				else
 				{
-					Gui.drawRect(this.xPosition, this.yPosition,
-							this.xPosition + this.width, this.yPosition + this.height, Integer.MIN_VALUE);
+					Gui.drawRect(this.x, this.y,
+							this.x + this.width, this.y + this.height, Integer.MIN_VALUE);
 				}
 			}
 
 			for (int index = 0; index < splitCount; ++index)
 			{
-				ITextComponent text = this.cachedSplitText.get(index);
+				final ITextComponent text = this.cachedSplitText.get(index);
 				fontRenderer.drawStringWithShadow(text.getUnformattedText(),
-						this.xPosition + 5,
-						this.yPosition + (this.bottomToTop ? this.height - 5 : 5) + index * fontRenderer.FONT_HEIGHT - (this.bottomToTop ?
+						this.x + 5,
+						this.y + (this.bottomToTop ? this.height - 5 : 5) + index * fontRenderer.FONT_HEIGHT - (this.bottomToTop ?
 								(splitCount * fontRenderer.FONT_HEIGHT) : 0), 0xFFFFFF);
 			}
 		}

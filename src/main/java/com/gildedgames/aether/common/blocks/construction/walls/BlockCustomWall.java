@@ -5,7 +5,6 @@ import net.minecraft.block.BlockWall;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
@@ -17,22 +16,23 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockCustomWall extends BlockWall
 {
 
-	public BlockCustomWall(IBlockState state, float hardness, float resistance)
+	public BlockCustomWall(final IBlockState state, final float hardness, final float resistance)
 	{
 		super(state.getBlock());
 
-		Block block = state.getBlock();
+		final Block block = state.getBlock();
 
 		this.setHarvestLevel(block.getHarvestTool(state), block.getHarvestLevel(state));
 
-		this.setDefaultState(this.blockState.getBaseState().withProperty(UP, Boolean.FALSE).withProperty(NORTH, Boolean.FALSE).withProperty(EAST, Boolean.FALSE).withProperty(SOUTH, Boolean.FALSE).withProperty(WEST, Boolean.FALSE));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(UP, Boolean.FALSE).withProperty(NORTH, Boolean.FALSE).withProperty(EAST, Boolean.FALSE)
+				.withProperty(SOUTH, Boolean.FALSE).withProperty(WEST, Boolean.FALSE));
 		this.setResistance(resistance / 3.0f);
 		this.setHardness(hardness);
 		this.setSoundType(state.getBlock().getSoundType());
 
 	}
 
-	public BlockCustomWall setGlows(boolean glows)
+	public BlockCustomWall setGlows(final boolean glows)
 	{
 		this.setLightLevel(glows ? 0.75f : 0.0f);
 
@@ -47,19 +47,19 @@ public class BlockCustomWall extends BlockWall
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks(final CreativeTabs tab, final NonNullList<ItemStack> list)
 	{
-		list.add(new ItemStack(itemIn, 1, 0));
+		list.add(new ItemStack(this, 1, 0));
 	}
 
 	@Override
-	public IBlockState getStateFromMeta(int meta)
+	public IBlockState getStateFromMeta(final int meta)
 	{
 		return this.getDefaultState();
 	}
 
 	@Override
-	public int getMetaFromState(IBlockState state)
+	public int getMetaFromState(final IBlockState state)
 	{
 		return 0;
 	}
@@ -67,11 +67,12 @@ public class BlockCustomWall extends BlockWall
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, BlockCustomWall.UP, BlockCustomWall.NORTH, BlockCustomWall.EAST, BlockCustomWall.WEST, BlockCustomWall.SOUTH, BlockWall.VARIANT);
+		return new BlockStateContainer(this, BlockCustomWall.UP, BlockCustomWall.NORTH, BlockCustomWall.EAST, BlockCustomWall.WEST, BlockCustomWall.SOUTH,
+				BlockWall.VARIANT);
 	}
 
 	@Override
-	public boolean canPlaceTorchOnTop(IBlockState state, IBlockAccess world, BlockPos pos)
+	public boolean canPlaceTorchOnTop(final IBlockState state, final IBlockAccess world, final BlockPos pos)
 	{
 		return true;
 	}

@@ -15,7 +15,7 @@ public abstract class RenderCompanion<T extends EntityCompanion> extends RenderL
 
 	private final double distanceLimit;
 
-	public RenderCompanion(RenderManager renderManager, ModelBase model, float shadowSize, double distanceLimit)
+	public RenderCompanion(final RenderManager renderManager, final ModelBase model, final float shadowSize, final double distanceLimit)
 	{
 		super(renderManager, model, shadowSize);
 
@@ -23,11 +23,12 @@ public abstract class RenderCompanion<T extends EntityCompanion> extends RenderL
 	}
 
 	@Override
-	protected void renderModel(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch,
-			float scaleFactor)
+	protected void renderModel(final T entity, final float limbSwing, final float limbSwingAmount, final float ageInTicks, final float netHeadYaw,
+			final float headPitch,
+			final float scaleFactor)
 	{
-		boolean renderOutlines = !entity.isInvisible() || this.renderOutlines;
-		boolean isInvisible = !renderOutlines && !entity.isInvisibleToPlayer(Minecraft.getMinecraft().player);
+		final boolean renderOutlines = !entity.isInvisible() || this.renderOutlines;
+		final boolean isInvisible = !renderOutlines && !entity.isInvisibleToPlayer(Minecraft.getMinecraft().player);
 
 		if (renderOutlines || isInvisible)
 		{
@@ -41,13 +42,13 @@ public abstract class RenderCompanion<T extends EntityCompanion> extends RenderL
 				GlStateManager.enableBlendProfile(GlStateManager.Profile.TRANSPARENT_MODEL);
 			}
 
-			EntityPlayer owner = entity.getOwner();
+			final EntityPlayer owner = entity.getOwner();
 
 			float opacity = 1.0f;
 
 			if (owner != null && RenderCompanion.RENDER_FADE_ON_NEAR)
 			{
-				double distance = entity.getDistanceSqToEntity(owner);
+				final double distance = entity.getDistanceSq(owner);
 
 				opacity = (float) Math.min(0.1f + (1.0f * (distance / this.distanceLimit)), 1.0f);
 			}
@@ -82,8 +83,9 @@ public abstract class RenderCompanion<T extends EntityCompanion> extends RenderL
 		}
 	}
 
-	protected void renderExtra(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch,
-			float scaleFactor, float opacity)
+	protected void renderExtra(final T entity, final float limbSwing, final float limbSwingAmount, final float ageInTicks, final float netHeadYaw,
+			final float headPitch,
+			final float scaleFactor, final float opacity)
 	{
 
 	}

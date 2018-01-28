@@ -17,6 +17,7 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
@@ -30,7 +31,7 @@ public class EntityCockatrice extends EntityAetherMob
 
 	private static final DataParameter<Boolean> IS_ATTACKING = new DataParameter<>(18, DataSerializers.BOOLEAN);
 
-	public EntityCockatrice(World world)
+	public EntityCockatrice(final World world)
 	{
 		super(world);
 
@@ -76,19 +77,19 @@ public class EntityCockatrice extends EntityAetherMob
 	}
 
 	@Override
-	public boolean isPotionApplicable(PotionEffect potionEffect)
+	public boolean isPotionApplicable(final PotionEffect potionEffect)
 	{
 		return potionEffect.getPotion() != MobEffects.POISON && super.isPotionApplicable(potionEffect);
 	}
 
 	@Override
-	public boolean attackEntityAsMob(Entity entity)
+	public boolean attackEntityAsMob(final Entity entity)
 	{
-		boolean flag = super.attackEntityAsMob(entity);
+		final boolean flag = super.attackEntityAsMob(entity);
 
 		if (flag && entity instanceof EntityLivingBase)
 		{
-			EntityLivingBase living = (EntityLivingBase) entity;
+			final EntityLivingBase living = (EntityLivingBase) entity;
 
 			if (!living.isActiveItemStackBlocking())
 			{
@@ -114,7 +115,7 @@ public class EntityCockatrice extends EntityAetherMob
 	}
 
 	@Override
-	protected SoundEvent getHurtSound()
+	protected SoundEvent getHurtSound(final DamageSource damageSourceIn)
 	{
 		return SoundsAether.cockatrice_hurt;
 	}
@@ -130,7 +131,7 @@ public class EntityCockatrice extends EntityAetherMob
 		return this.dataManager.get(EntityCockatrice.IS_HIDING);
 	}
 
-	public void setHiding(boolean isHiding)
+	public void setHiding(final boolean isHiding)
 	{
 		this.dataManager.set(EntityCockatrice.IS_HIDING, isHiding);
 	}
@@ -140,7 +141,7 @@ public class EntityCockatrice extends EntityAetherMob
 		return this.dataManager.get(EntityCockatrice.IS_HIDDEN);
 	}
 
-	public void setHidden(boolean isHidden)
+	public void setHidden(final boolean isHidden)
 	{
 		this.dataManager.set(EntityCockatrice.IS_HIDDEN, isHidden);
 	}
@@ -150,7 +151,7 @@ public class EntityCockatrice extends EntityAetherMob
 		return this.dataManager.get(EntityCockatrice.IS_ATTACKING);
 	}
 
-	public void setAttacking(boolean isAttacking)
+	public void setAttacking(final boolean isAttacking)
 	{
 		this.dataManager.set(EntityCockatrice.IS_ATTACKING, isAttacking);
 	}
@@ -164,7 +165,7 @@ public class EntityCockatrice extends EntityAetherMob
 	public static class JumpHelperDisable extends EntityJumpHelper
 	{
 
-		public JumpHelperDisable(EntityLiving entityIn)
+		public JumpHelperDisable(final EntityLiving entityIn)
 		{
 			super(entityIn);
 		}

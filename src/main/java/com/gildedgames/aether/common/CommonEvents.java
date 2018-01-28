@@ -99,7 +99,7 @@ public class CommonEvents
 		{
 			final MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
 
-			final WorldServer worldServer = server.worldServerForDimension(0);
+			final WorldServer worldServer = server.getWorld(0);
 
 			if (world.getGameRules().getBoolean("doDaylightCycle") && event.getEntityPlayer().isPlayerFullyAsleep())
 			{
@@ -466,7 +466,7 @@ public class CommonEvents
 				final Vec3d look = player.getLook(1.0F);
 
 				Vec3d reverse = vec3d.subtractReverse(new Vec3d(player.posX, player.posY, player.posZ)).normalize();
-				reverse = new Vec3d(reverse.xCoord, 0.0D, reverse.zCoord);
+				reverse = new Vec3d(reverse.x, 0.0D, reverse.z);
 
 				if (reverse.dotProduct(look) < 0.0D)
 				{

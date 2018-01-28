@@ -2,7 +2,6 @@ package com.gildedgames.aether.common.entities.blocks;
 
 import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
-import com.gildedgames.aether.common.capabilities.world.chunk.ChunkAttachment;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -13,8 +12,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -36,7 +35,7 @@ public class EntityMovingBlock extends Entity
 
 	private int ticksStuck = 0, ticksFalling = 0;
 
-	public EntityMovingBlock(World world)
+	public EntityMovingBlock(final World world)
 	{
 		super(world);
 
@@ -47,7 +46,7 @@ public class EntityMovingBlock extends Entity
 		this.motionZ = 0.0D;
 	}
 
-	public EntityMovingBlock(World world, double x, double y, double z, IBlockState state)
+	public EntityMovingBlock(final World world, final double x, final double y, final double z, final IBlockState state)
 	{
 		this(world);
 
@@ -88,15 +87,19 @@ public class EntityMovingBlock extends Entity
 
 		if (!this.world.isRemote && !this.hasActivated)
 		{
-			BlockPos pos = new BlockPos(this);
+			final BlockPos pos = new BlockPos(this);
 
 			if (this.world.getBlockState(pos).getBlock() == this.getBlockState().getBlock())
 			{
-				IPlacementFlagCapability data = ChunkAttachment.get(this.world).getAttachment(new ChunkPos(pos), AetherCapabilities.CHUNK_PLACEMENT_FLAG);
+				final IPlacementFlagCapability data = this.world.getChunkFromBlockCoords(pos)
+						.getCapability(AetherCapabilities.CHUNK_PLACEMENT_FLAG, EnumFacing.UP);
 
-				this.allowDoubleDrops = !data.isModified(pos);
+				if (data != null)
+				{
+					this.allowDoubleDrops = !data.isModified(pos);
 
-				this.world.setBlockToAir(pos);
+					this.world.setBlockToAir(pos);
+				}
 			}
 			else
 			{
@@ -122,7 +125,7 @@ public class EntityMovingBlock extends Entity
 					this.setHoldingPlayer(null);
 				}
 
-				if (this.isCollided)
+				if (this.collided)
 				{
 					this.ticksStuck++;
 				}
@@ -136,7 +139,7 @@ public class EntityMovingBlock extends Entity
 		}
 	}
 
-	public void setHoldingPlayer(EntityPlayer player)
+	public void setHoldingPlayer(final EntityPlayer player)
 	{
 		this.holdingPlayer = player;
 	}
@@ -147,7 +150,7 @@ public class EntityMovingBlock extends Entity
 		{
 			this.ticksFalling++;
 
-			BlockPos pos = new BlockPos(this);
+			final BlockPos pos = new BlockPos(this);
 
 			if (this.ticksFalling >= 160)
 			{
@@ -164,7 +167,7 @@ public class EntityMovingBlock extends Entity
 				this.motionX += (pos.getX() - this.posX + 0.45D) * 0.15D;
 				this.motionZ += (pos.getZ() - this.posZ + 0.45D) * 0.15D;
 
-				IBlockState state = this.world.getBlockState(pos);
+				final IBlockState state = this.world.getBlockState(pos);
 
 				// We won't be able to land, reject and try to throw ourselves somewhere!
 				if (state.getBlock() != Blocks.AIR && !state.isNormalCube() && !state.getBlock().isReplaceable(this.world, pos))
@@ -174,14 +177,14 @@ public class EntityMovingBlock extends Entity
 					this.motionZ = -0.15D + (this.rand.nextDouble() * 0.3D);
 				}
 
-				double distanceFromCenter = pos.distanceSq(this.posX + 0.45D, this.posY, this.posZ + 0.45D);
+				final double distanceFromCenter = pos.distanceSq(this.posX + 0.45D, this.posY, this.posZ + 0.45D);
 
 				if ((this.motionY + this.motionX + this.motionZ) <= 0.04D && distanceFromCenter <= 2.0D)
 				{
 					// We've stopped moving
 					if (!this.world.isRemote)
 					{
-						IBlockState replacingState = this.world.getBlockState(pos);
+						final IBlockState replacingState = this.world.getBlockState(pos);
 
 						if (!replacingState.getBlock().isReplaceable(this.world, pos))
 						{
@@ -197,9 +200,13 @@ public class EntityMovingBlock extends Entity
 
 						if (!this.allowDoubleDrops)
 						{
-							IPlacementFlagCapability data = ChunkAttachment.get(this.world).getAttachment(new ChunkPos(pos), AetherCapabilities.CHUNK_PLACEMENT_FLAG);
+							final IPlacementFlagCapability data = this.world.getChunkFromBlockCoords(pos)
+									.getCapability(AetherCapabilities.CHUNK_PLACEMENT_FLAG, EnumFacing.UP);
 
-							data.markModified(pos);
+							if (data != null)
+							{
+								data.markModified(pos);
+							}
 						}
 
 						this.setDead();
@@ -224,14 +231,14 @@ public class EntityMovingBlock extends Entity
 			this.ticksFalling = 0;
 
 			// Get where the player is looking at
-			Vec3d look = this.holdingPlayer.getLookVec();
+			final Vec3d look = this.holdingPlayer.getLookVec();
 
-			float distance = 2.5f;
+			final float distance = 2.5f;
 
 			// Calculate the block's destination in front of the player
-			double toX = this.holdingPlayer.posX + (look.xCoord * distance);
-			double toY = this.holdingPlayer.posY + (look.yCoord * distance) + 1f;
-			double toZ = this.holdingPlayer.posZ + (look.zCoord * distance);
+			final double toX = this.holdingPlayer.posX + (look.x * distance);
+			final double toY = this.holdingPlayer.posY + (look.y * distance) + 1f;
+			final double toZ = this.holdingPlayer.posZ + (look.z * distance);
 
 			// Slow down our block's movement to simulate weight
 			this.motionX *= 0.8D;
@@ -249,13 +256,13 @@ public class EntityMovingBlock extends Entity
 	{
 		this.setDead();
 
-		BlockPos pos = new BlockPos(this);
+		final BlockPos pos = new BlockPos(this);
 
-		IBlockState state = this.getBlockState();
+		final IBlockState state = this.getBlockState();
 
-		List<ItemStack> drops = state.getBlock().getDrops(this.world, pos, state, 0);
+		final List<ItemStack> drops = state.getBlock().getDrops(this.world, pos, state, 0);
 
-		for (ItemStack stack : drops)
+		for (final ItemStack stack : drops)
 		{
 			Block.spawnAsEntity(this.world, pos, stack);
 		}
@@ -286,9 +293,9 @@ public class EntityMovingBlock extends Entity
 	}
 
 	@Override
-	protected void readEntityFromNBT(NBTTagCompound compound)
+	protected void readEntityFromNBT(final NBTTagCompound compound)
 	{
-		Block block = Block.getBlockById(compound.getInteger("Block"));
+		final Block block = Block.getBlockById(compound.getInteger("Block"));
 
 		this.setBlockState(block.getStateFromMeta(compound.getByte("BlockMeta")));
 		this.ticksFalling = compound.getInteger("TicksFalling");
@@ -298,11 +305,11 @@ public class EntityMovingBlock extends Entity
 	}
 
 	@Override
-	protected void writeEntityToNBT(NBTTagCompound compound)
+	protected void writeEntityToNBT(final NBTTagCompound compound)
 	{
-		IBlockState state = this.getBlockState();
+		final IBlockState state = this.getBlockState();
 
-		Block block = state.getBlock();
+		final Block block = state.getBlock();
 
 		compound.setInteger("Block", Block.REGISTRY.getIDForObject(block));
 		compound.setByte("BlockMeta", (byte) block.getMetaFromState(state));
@@ -312,16 +319,16 @@ public class EntityMovingBlock extends Entity
 
 	public IBlockState getBlockState()
 	{
-		Block block = Block.getBlockById(this.dataManager.get(BLOCK_NAME));
+		final Block block = Block.getBlockById(this.dataManager.get(BLOCK_NAME));
 
-		int meta = (int) this.dataManager.get(BLOCK_METADATA);
+		final int meta = (int) this.dataManager.get(BLOCK_METADATA);
 
 		return block.getStateFromMeta(meta);
 	}
 
-	public void setBlockState(IBlockState state)
+	public void setBlockState(final IBlockState state)
 	{
-		Block block = state.getBlock();
+		final Block block = state.getBlock();
 
 		this.dataManager.set(BLOCK_NAME, Block.REGISTRY.getIDForObject(block));
 		this.dataManager.set(BLOCK_METADATA, (byte) block.getMetaFromState(state));

@@ -9,9 +9,9 @@ import net.minecraft.client.gui.GuiButton;
 public class GuiDialogButton extends GuiButton
 {
 
-	private IDialogButton buttonData;
+	private final IDialogButton buttonData;
 
-	public GuiDialogButton(int buttonId, int x, int y, IDialogButton buttonData)
+	public GuiDialogButton(final int buttonId, final int x, final int y, final IDialogButton buttonData)
 	{
 		super(buttonId, x, y, 0, 15, "");
 
@@ -24,26 +24,26 @@ public class GuiDialogButton extends GuiButton
 	}
 
 	@Override
-	public void drawButton(Minecraft mc, int mouseX, int mouseY)
+	public void drawButton(final Minecraft mc, final int mouseX, final int mouseY, final float partialTicks)
 	{
 		if (this.visible)
 		{
-			this.hovered = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width
-					&& mouseY < this.yPosition + this.height;
+			this.hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width
+					&& mouseY < this.y + this.height;
 
-			Gui.drawRect(this.xPosition, this.yPosition,
-					this.xPosition + this.width, this.yPosition + this.height, this.hovered ? Integer.MAX_VALUE : Integer.MIN_VALUE);
+			Gui.drawRect(this.x, this.y,
+					this.x + this.width, this.y + this.height, this.hovered ? Integer.MAX_VALUE : Integer.MIN_VALUE);
 
-			this.hovered = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width
-					&& mouseY < this.yPosition + this.height;
+			this.hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width
+					&& mouseY < this.y + this.height;
 
-			FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
+			final FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
 
-			String label = this.buttonData.getLocalizedLabel().getFormattedText();
+			final String label = this.buttonData.getLocalizedLabel().getFormattedText();
 
 			this.width = fontRenderer.getStringWidth(label) + 5;
 
-			this.drawString(fontRenderer, label, this.xPosition + 3, this.yPosition + 3, 0xFFFFFF);
+			this.drawString(fontRenderer, label, this.x + 3, this.y + 3, 0xFFFFFF);
 		}
 	}
 

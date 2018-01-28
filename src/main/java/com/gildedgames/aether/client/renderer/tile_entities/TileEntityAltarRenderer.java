@@ -2,8 +2,8 @@ package com.gildedgames.aether.client.renderer.tile_entities;
 
 import com.gildedgames.aether.client.models.entities.tile.ModelAltar;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.entities.tiles.TileEntityAltar;
+import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderItem;
@@ -16,14 +16,17 @@ import net.minecraft.util.ResourceLocation;
 
 public class TileEntityAltarRenderer extends TileEntitySpecialRenderer<TileEntityAltar>
 {
-	private double radius = 0.5D, theta = 5.0D;
-
 	private final ModelAltar model = new ModelAltar();
 
 	private final ResourceLocation texture = AetherCore.getResource("textures/tile_entities/altar.png");
 
+	private final double radius = 0.5D;
+
+	private final double theta = 5.0D;
+
 	@Override
-	public void renderTileEntityAt(TileEntityAltar altar, double x, double y, double z, float partialTicks, int destroyStage)
+	public void render(
+			final TileEntityAltar altar, final double x, final double y, final double z, final float partialTicks, final int destroyStage, final float alpha)
 	{
 		GlStateManager.pushMatrix();
 		GlStateManager.enableRescaleNormal();
@@ -35,18 +38,18 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer<TileEntit
 		{
 			switch (altar.getFacing())
 			{
-			case NORTH:
-				GlStateManager.rotate(270.0f, 0.0f, 1.0f, 0.0f);
-				break;
-			case WEST:
-				GlStateManager.rotate(0.0f, 0.0f, 1.0f, 0.0f);
-				break;
-			case SOUTH:
-				GlStateManager.rotate(90.0f, 0.0f, 1.0f, 0.0f);
-				break;
-			case EAST:
-				GlStateManager.rotate(180.0f, 0.0f, 1.0f, 0.0f);
-				break;
+				case NORTH:
+					GlStateManager.rotate(270.0f, 0.0f, 1.0f, 0.0f);
+					break;
+				case WEST:
+					GlStateManager.rotate(0.0f, 0.0f, 1.0f, 0.0f);
+					break;
+				case SOUTH:
+					GlStateManager.rotate(90.0f, 0.0f, 1.0f, 0.0f);
+					break;
+				case EAST:
+					GlStateManager.rotate(180.0f, 0.0f, 1.0f, 0.0f);
+					break;
 			}
 		}
 
@@ -56,7 +59,7 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer<TileEntit
 
 		if (altar != null)
 		{
-			ItemStack stack = altar.getStackOnAltar();
+			final ItemStack stack = altar.getStackOnAltar();
 
 			GlStateManager.rotate(180f, 1f, 0f, 1f);
 
@@ -98,7 +101,7 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer<TileEntit
 		GlStateManager.popMatrix();
 	}
 
-	private void renderItem(ItemStack stack)
+	private void renderItem(final ItemStack stack)
 	{
 		GlStateManager.pushMatrix();
 
@@ -111,26 +114,26 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer<TileEntit
 				GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
 			}
 
-			IBakedModel model = itemRenderer.getItemModelMesher().getItemModel(stack);
+			final IBakedModel model = itemRenderer.getItemModelMesher().getItemModel(stack);
 			itemRenderer.renderItem(stack, model);
 		}
 
 		GlStateManager.popMatrix();
 	}
 
-	private void renderOrbitingItems(int amount, double ticks)
+	private void renderOrbitingItems(final int amount, final double ticks)
 	{
 		for (int i = 0; i < amount; i++)
 		{
 			GlStateManager.pushMatrix();
 
-			double alpha = ticks / (12.0D * (10.0D / (double) amount));
+			final double alpha = ticks / (12.0D * (10.0D / (double) amount));
 
-			double dist = (Math.PI * i) / amount * 2;
-			double x = this.radius * Math.cos(this.theta + dist);
-			double z = this.radius * Math.sin(this.theta + dist);
-			double deltaX = z * Math.cos(alpha) - x * Math.sin(alpha);
-			double deltaZ = x * Math.cos(alpha) + z * Math.sin(alpha);
+			final double dist = (Math.PI * i) / amount * 2;
+			final double x = this.radius * Math.cos(this.theta + dist);
+			final double z = this.radius * Math.sin(this.theta + dist);
+			final double deltaX = z * Math.cos(alpha) - x * Math.sin(alpha);
+			final double deltaZ = x * Math.cos(alpha) + z * Math.sin(alpha);
 
 			GlStateManager.translate(deltaX, 0, deltaZ);
 

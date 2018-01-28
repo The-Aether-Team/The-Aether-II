@@ -15,7 +15,7 @@ public class AIStayNearNest extends EntityAIBase
 
 	public int nestX, nestY, nestZ, stayCloseDist;
 
-	public AIStayNearNest(EntityMoa moa, int stayCloseDist, float moveSpeed)
+	public AIStayNearNest(final EntityMoa moa, final int stayCloseDist, final float moveSpeed)
 	{
 		this.world = moa.world;
 		this.moveSpeed = moveSpeed;
@@ -61,7 +61,7 @@ public class AIStayNearNest extends EntityAIBase
 	}
 
 	@Override
-	public boolean continueExecuting()
+	public boolean shouldContinueExecuting()
 	{
 		return this.shouldExecute();
 	}

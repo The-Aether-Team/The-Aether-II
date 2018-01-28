@@ -5,6 +5,7 @@ import com.gildedgames.aether.common.entities.tiles.TileEntityOutpostCampfire;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -15,7 +16,7 @@ public class BlockOutpostCampfire extends BlockMultiController
 
 	protected static final AxisAlignedBB AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
 
-	public BlockOutpostCampfire(Material materialIn)
+	public BlockOutpostCampfire(final Material materialIn)
 	{
 		super(materialIn);
 
@@ -24,46 +25,46 @@ public class BlockOutpostCampfire extends BlockMultiController
 	}
 
 	@Override
-	public Iterable<BlockPos.MutableBlockPos> getMultiblockVolumeIterator(BlockPos pos, World world)
+	public Iterable<BlockPos.MutableBlockPos> getMultiblockVolumeIterator(final BlockPos pos, final World world)
 	{
-		Iterable<BlockPos.MutableBlockPos> positions = BlockPos.getAllInBoxMutable(pos, pos.south().east());
+		final Iterable<BlockPos.MutableBlockPos> positions = BlockPos.getAllInBoxMutable(pos, pos.south().east());
 
 		return positions;
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World worldIn, int meta)
+	public TileEntity createNewTileEntity(final World worldIn, final int meta)
 	{
 		return new TileEntityOutpostCampfire();
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	public AxisAlignedBB getBoundingBox(final IBlockState state, final IBlockAccess source, final BlockPos pos)
 	{
 		return AABB;
 	}
 
 	@Override
 	@Deprecated
-	public boolean isFullBlock(IBlockState state)
+	public boolean isFullBlock(final IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState state)
+	public boolean isFullCube(final IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(final IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullyOpaque(IBlockState state)
+	public boolean doesSideBlockRendering(final IBlockState state, final IBlockAccess world, final BlockPos pos, final EnumFacing face)
 	{
 		return false;
 	}

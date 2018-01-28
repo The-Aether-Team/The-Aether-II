@@ -9,9 +9,9 @@ public class ItemMoaEggColorHandler implements IItemColor
 {
 
 	@Override
-	public int getColorFromItemstack(ItemStack stack, int tintIndex)
+	public int colorMultiplier(final ItemStack stack, final int tintIndex)
 	{
-		MoaGenePool genePool = ItemMoaEgg.getGenePool(stack);
+		final MoaGenePool genePool = ItemMoaEgg.getGenePool(stack);
 
 		if (genePool != null && genePool.getFeathers() != null)
 		{

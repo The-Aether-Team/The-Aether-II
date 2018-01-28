@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.capabilities.entity.player;
 
-import com.gildedgames.aether.api.util.NBT;
+import com.gildedgames.orbis.api.util.mc.NBT;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 

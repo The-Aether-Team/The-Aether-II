@@ -8,6 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
@@ -15,7 +16,7 @@ import net.minecraft.world.World;
 public class EntityTempest extends EntityFlyingMob
 {
 
-	public EntityTempest(World world)
+	public EntityTempest(final World world)
 	{
 		super(world);
 
@@ -27,7 +28,7 @@ public class EntityTempest extends EntityFlyingMob
 	@Override
 	protected void handleClientAttack()
 	{
-		Entity target = this.world.getNearestPlayerNotCreative(this, 20D);
+		final Entity target = this.world.getNearestPlayerNotCreative(this, 20D);
 
 		if (target == null)
 		{
@@ -75,7 +76,7 @@ public class EntityTempest extends EntityFlyingMob
 	}
 
 	@Override
-	protected SoundEvent getHurtSound()
+	protected SoundEvent getHurtSound(final DamageSource damageSourceIn)
 	{
 		return SoundsAether.tempest_hurt;
 	}

@@ -7,13 +7,13 @@ import net.minecraft.entity.ai.EntityAITarget;
 public class EntityAICompanionTargetEnemy extends EntityAITarget
 {
 
-	private EntityLivingBase target;
-
 	private final EntityCompanion entity;
+
+	private EntityLivingBase target;
 
 	private int timestamp;
 
-	public EntityAICompanionTargetEnemy(EntityCompanion entity)
+	public EntityAICompanionTargetEnemy(final EntityCompanion entity)
 	{
 		super(entity, false);
 
@@ -23,7 +23,7 @@ public class EntityAICompanionTargetEnemy extends EntityAITarget
 	@Override
 	public boolean shouldExecute()
 	{
-		EntityLivingBase owner = this.entity.getOwner();
+		final EntityLivingBase owner = this.entity.getOwner();
 
 		if (owner == null)
 		{
@@ -31,8 +31,8 @@ public class EntityAICompanionTargetEnemy extends EntityAITarget
 		}
 		else
 		{
-			this.target = owner.getLastAttacker();
-			int i = owner.getLastAttackerTime();
+			this.target = owner.getLastAttackedEntity();
+			final int i = owner.getLastAttackedEntityTime();
 			return i != this.timestamp && this.isSuitableTarget(this.target, false) && this.target != owner;
 		}
 	}
@@ -46,11 +46,11 @@ public class EntityAICompanionTargetEnemy extends EntityAITarget
 		}
 
 		this.taskOwner.setAttackTarget(this.target);
-		EntityLivingBase owner = this.entity.getOwner();
+		final EntityLivingBase owner = this.entity.getOwner();
 
 		if (owner != null)
 		{
-			this.timestamp = owner.getLastAttackerTime();
+			this.timestamp = owner.getLastAttackedEntityTime();
 		}
 
 		super.startExecuting();

@@ -5,6 +5,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -28,44 +29,44 @@ public class BlockMultiDummyHalf extends BlockMultiBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public EnumBlockRenderType getRenderType(IBlockState state)
+	public EnumBlockRenderType getRenderType(final IBlockState state)
 	{
 		return EnumBlockRenderType.INVISIBLE;
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World worldIn, int meta)
+	public TileEntity createNewTileEntity(final World worldIn, final int meta)
 	{
 		return new TileEntityMultiblockDummy();
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	public AxisAlignedBB getBoundingBox(final IBlockState state, final IBlockAccess source, final BlockPos pos)
 	{
 		return AABB;
 	}
 
 	@Override
 	@Deprecated
-	public boolean isFullBlock(IBlockState state)
+	public boolean isFullBlock(final IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState state)
+	public boolean isFullCube(final IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(final IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullyOpaque(IBlockState state)
+	public boolean doesSideBlockRendering(final IBlockState state, final IBlockAccess world, final BlockPos pos, final EnumFacing face)
 	{
 		return false;
 	}

@@ -23,7 +23,7 @@ public class PlayerParachuteModule extends PlayerAetherModule
 
 	private boolean prevAllowFlying;
 
-	public PlayerParachuteModule(PlayerAether playerAether)
+	public PlayerParachuteModule(final PlayerAether playerAether)
 	{
 		super(playerAether);
 	}
@@ -33,11 +33,11 @@ public class PlayerParachuteModule extends PlayerAetherModule
 	{
 		if (this.isParachuting)
 		{
-			int x = MathHelper.floor(this.getEntity().posX);
-			int y = MathHelper.floor(this.getEntity().posY);
-			int z = MathHelper.floor(this.getEntity().posZ);
+			final int x = MathHelper.floor(this.getEntity().posX);
+			final int y = MathHelper.floor(this.getEntity().posY);
+			final int z = MathHelper.floor(this.getEntity().posZ);
 
-			Vec3d vec3 = this.getEntity().getLookVec();
+			final Vec3d vec3 = this.getEntity().getLookVec();
 
 			if (this.getParachuteType() == EntityParachute.Type.BLUE)
 			{
@@ -53,7 +53,7 @@ public class PlayerParachuteModule extends PlayerAetherModule
 			{
 				this.hitAmnt = 0;
 			}
-			else if (this.getEntity().swingProgressInt >= 4 && this.isParachuting && vec3.yCoord >= 1 && !this.getEntity().onGround)
+			else if (this.getEntity().swingProgressInt >= 4 && this.isParachuting && vec3.y >= 1 && !this.getEntity().onGround)
 			{
 				this.hitAmnt++;
 			}
@@ -66,7 +66,7 @@ public class PlayerParachuteModule extends PlayerAetherModule
 		}
 	}
 
-	public void setParachuting(boolean isParachuting, EntityParachute.Type type)
+	public void setParachuting(final boolean isParachuting, final EntityParachute.Type type)
 	{
 		this.isParachuting = isParachuting;
 		this.type = type;
@@ -81,7 +81,8 @@ public class PlayerParachuteModule extends PlayerAetherModule
 		{
 			if (!this.getEntity().getEntityWorld().isRemote)
 			{
-				EntityItem block = new EntityItem(this.getEntity().getEntityWorld(), this.getEntity().posX, this.getEntity().posY, this.getEntity().posZ, new ItemStack(ItemsAether.cloud_parachute, 1, type.ordinal()));
+				final EntityItem block = new EntityItem(this.getEntity().getEntityWorld(), this.getEntity().posX, this.getEntity().posY, this.getEntity().posZ,
+						new ItemStack(ItemsAether.cloud_parachute, 1, type.ordinal()));
 
 				this.getEntity().getEntityWorld().spawnEntity(block);
 			}
@@ -90,11 +91,11 @@ public class PlayerParachuteModule extends PlayerAetherModule
 		}
 	}
 
-	private boolean isUnderABlock(int y)
+	private boolean isUnderABlock(final int y)
 	{
-		AxisAlignedBB boundingBox = this.getEntity().getEntityBoundingBox();
+		final AxisAlignedBB boundingBox = this.getEntity().getEntityBoundingBox();
 
-		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
+		final BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
 
 		for (int x1 = (int) Math.floor(boundingBox.minX); x1 <= (int) Math.ceil(boundingBox.maxX); x1++)
 		{
@@ -121,9 +122,9 @@ public class PlayerParachuteModule extends PlayerAetherModule
 	}
 
 	@Override
-	public void write(NBTTagCompound output)
+	public void write(final NBTTagCompound output)
 	{
-		NBTTagCompound root = new NBTTagCompound();
+		final NBTTagCompound root = new NBTTagCompound();
 		output.setTag("Parachute", root);
 
 		root.setBoolean("parachuting", this.isParachuting);
@@ -132,9 +133,9 @@ public class PlayerParachuteModule extends PlayerAetherModule
 	}
 
 	@Override
-	public void read(NBTTagCompound input)
+	public void read(final NBTTagCompound input)
 	{
-		NBTTagCompound root = input.getCompoundTag("Parachute");
+		final NBTTagCompound root = input.getCompoundTag("Parachute");
 
 		this.isParachuting = input.getBoolean("parachuting");
 		this.type = EntityParachute.Type.fromOrdinal(input.getInteger("type"));

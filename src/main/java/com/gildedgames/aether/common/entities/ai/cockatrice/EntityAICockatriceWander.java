@@ -8,7 +8,7 @@ public class EntityAICockatriceWander extends EntityAIWander
 
 	EntityCockatrice cockatrice;
 
-	public EntityAICockatriceWander(EntityCockatrice cockatrice, double wanderSpeed)
+	public EntityAICockatriceWander(final EntityCockatrice cockatrice, final double wanderSpeed)
 	{
 		super(cockatrice, wanderSpeed);
 
@@ -27,14 +27,14 @@ public class EntityAICockatriceWander extends EntityAIWander
 	}
 
 	@Override
-	public boolean continueExecuting()
+	public boolean shouldContinueExecuting()
 	{
 		if (this.cockatrice.isHiding() || this.cockatrice.isAttacking())
 		{
 			return false;
 		}
 
-		return super.continueExecuting();
+		return super.shouldContinueExecuting();
 	}
 
 }

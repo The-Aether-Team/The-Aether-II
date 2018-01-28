@@ -7,7 +7,7 @@ buildscript {
 		}
 	}
 	dependencies {
-		classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+		classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
 		classpath 'org.ajoberstar:gradle-git:1.4.2'
 	}
 }
@@ -110,4 +110,17 @@ task apiJar(type: Jar) {
 artifacts {
 	archives jar
 	archives apiJar
+}
+
+apply plugin: 'maven-publish'
+
+repositories {
+	maven {
+		name = "maven-storage"
+		url "https://git.gildedgames.com/GildedGames/maven-storage/raw/master/"
+	}
+}
+
+dependencies {
+	compile 'com.gildedgames:orbis:1.12.2-1.0.0'
 }

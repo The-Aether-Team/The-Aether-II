@@ -13,10 +13,12 @@ public class TileEntityMasonryBenchRenderer extends TileEntitySpecialRenderer<Ti
 
 	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/tile_entities/masonry_bench.png");
 
-	private ModelMasonryBench model = new ModelMasonryBench();
+	private final ModelMasonryBench model = new ModelMasonryBench();
 
 	@Override
-	public void renderTileEntityAt(TileEntityMasonryBench te, double x, double y, double z, float partialTicks, int destroyStage)
+	public void render(
+			final TileEntityMasonryBench te, final double x, final double y, final double z, final float partialTicks, final int destroyStage,
+			final float alpha)
 	{
 		GlStateManager.pushMatrix();
 		GlStateManager.enableRescaleNormal();
@@ -28,18 +30,18 @@ public class TileEntityMasonryBenchRenderer extends TileEntitySpecialRenderer<Ti
 		{
 			switch (te.getFacing())
 			{
-			case NORTH:
-				GlStateManager.rotate(270.0f, 0.0f, 1.0f, 0.0f);
-				break;
-			case WEST:
-				GlStateManager.rotate(180.0f, 0.0f, 1.0f, 0.0f);
-				break;
-			case SOUTH:
-				GlStateManager.rotate(90.0f, 0.0f, 1.0f, 0.0f);
-				break;
-			case EAST:
-				GlStateManager.rotate(0.0f, 0.0f, 1.0f, 0.0f);
-				break;
+				case NORTH:
+					GlStateManager.rotate(270.0f, 0.0f, 1.0f, 0.0f);
+					break;
+				case WEST:
+					GlStateManager.rotate(180.0f, 0.0f, 1.0f, 0.0f);
+					break;
+				case SOUTH:
+					GlStateManager.rotate(90.0f, 0.0f, 1.0f, 0.0f);
+					break;
+				case EAST:
+					GlStateManager.rotate(0.0f, 0.0f, 1.0f, 0.0f);
+					break;
 			}
 		}
 		else

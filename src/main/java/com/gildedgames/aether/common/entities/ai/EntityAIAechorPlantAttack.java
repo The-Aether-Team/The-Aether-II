@@ -11,7 +11,7 @@ public class EntityAIAechorPlantAttack extends EntityAITarget
 {
 	private int ticksUntilAttack = 3;
 
-	public EntityAIAechorPlantAttack(EntityCreature creature)
+	public EntityAIAechorPlantAttack(final EntityCreature creature)
 	{
 		super(creature, true);
 	}
@@ -23,9 +23,9 @@ public class EntityAIAechorPlantAttack extends EntityAITarget
 	}
 
 	@Override
-	public boolean continueExecuting()
+	public boolean shouldContinueExecuting()
 	{
-		EntityLivingBase target = this.taskOwner.getAttackTarget();
+		final EntityLivingBase target = this.taskOwner.getAttackTarget();
 
 		if (target == null || !target.isEntityAlive())
 		{
@@ -44,27 +44,27 @@ public class EntityAIAechorPlantAttack extends EntityAITarget
 		{
 			this.ticksUntilAttack = 45;
 
-			EntityLivingBase prey = this.taskOwner.getAttackTarget();
+			final EntityLivingBase prey = this.taskOwner.getAttackTarget();
 
 			if (prey == null)
 			{
 				return;
 			}
 
-			EntityCreature predator = this.taskOwner;
+			final EntityCreature predator = this.taskOwner;
 
 			if (!predator.world.isRemote)
 			{
-				EntityDart dart = new EntityDart(predator.world, predator);
-				dart.setThrowableHeading(prey.posX, prey.posY, prey.posZ, 0.6F, 1.0F);
+				final EntityDart dart = new EntityDart(predator.world, predator);
+				dart.shoot(prey.posX, prey.posY, prey.posZ, 0.6F, 1.0F);
 
-				double motionX = prey.posX - predator.posX;
-				double motionY = prey.getEntityBoundingBox().minY + (double) (prey.height / 3.0F) - dart.posY;
-				double motionZ = prey.posZ - predator.posZ;
+				final double motionX = prey.posX - predator.posX;
+				final double motionY = prey.getEntityBoundingBox().minY + (double) (prey.height / 3.0F) - dart.posY;
+				final double motionZ = prey.posZ - predator.posZ;
 
-				double accel = (double) MathHelper.sqrt(motionX * motionX + motionZ * motionZ);
+				final double accel = (double) MathHelper.sqrt(motionX * motionX + motionZ * motionZ);
 
-				dart.setThrowableHeading(motionX, motionY + accel * 0.2D, motionZ, 1.6F, 0.5f);
+				dart.shoot(motionX, motionY + accel * 0.2D, motionZ, 1.6F, 0.5f);
 				dart.setDamage(0.5f);
 
 				dart.setDartType(ItemDartType.POISON);
@@ -78,11 +78,11 @@ public class EntityAIAechorPlantAttack extends EntityAITarget
 
 	public boolean hasTarget()
 	{
-		EntityCreature predator = this.taskOwner;
+		final EntityCreature predator = this.taskOwner;
 
-		double maxDistance = this.getTargetDistance();
+		final double maxDistance = this.getTargetDistance();
 
 		return predator.getAttackTarget() != null && predator.isEntityAlive()
-				&& predator.getDistanceSqToEntity(predator.getAttackTarget()) < (maxDistance * maxDistance);
+				&& predator.getDistanceSq(predator.getAttackTarget()) < (maxDistance * maxDistance);
 	}
 }

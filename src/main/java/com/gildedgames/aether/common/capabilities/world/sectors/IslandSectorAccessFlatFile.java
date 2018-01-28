@@ -33,6 +33,12 @@ public class IslandSectorAccessFlatFile implements ISectorAccess
 
 	private final Queue<ISector> dirty = new ArrayDeque<>();
 
+	public IslandSectorAccessFlatFile()
+	{
+		this.world = null;
+		this.folder = null;
+	}
+
 	public IslandSectorAccessFlatFile(final World world, final File folder)
 	{
 		this.world = world;

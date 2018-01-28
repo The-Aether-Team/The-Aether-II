@@ -15,7 +15,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -29,8 +28,6 @@ import java.util.Random;
 
 public class BlockAercloud extends Block implements IBlockMultiName
 {
-	private static final AxisAlignedBB AERCLOUD_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.3D, 1.0D);
-
 	public static final BlockVariant
 			COLD_AERCLOUD = new BlockVariant(0, "cold"),
 			BLUE_AERCLOUD = new BlockVariant(1, "blue"),
@@ -39,9 +36,12 @@ public class BlockAercloud extends Block implements IBlockMultiName
 			STORM_AERCLOUD = new BlockVariant(4, "storm"),
 			PURPLE_AERCLOUD = new BlockVariant(5, "purple");
 
-	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", COLD_AERCLOUD, BLUE_AERCLOUD, GREEN_AERCLOUD, GOLDEN_AERCLOUD, STORM_AERCLOUD, PURPLE_AERCLOUD);
+	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant
+			.create("variant", COLD_AERCLOUD, BLUE_AERCLOUD, GREEN_AERCLOUD, GOLDEN_AERCLOUD, STORM_AERCLOUD, PURPLE_AERCLOUD);
 
 	public static final PropertyEnum<EnumFacing> PROPERTY_FACING = PropertyEnum.create("facing", EnumFacing.class);
+
+	private static final AxisAlignedBB AERCLOUD_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.3D, 1.0D);
 
 	public BlockAercloud()
 	{
@@ -57,11 +57,11 @@ public class BlockAercloud extends Block implements IBlockMultiName
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks(final CreativeTabs tab, final NonNullList<ItemStack> list)
 	{
-		for (BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
+		for (final BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
 		{
-			list.add(new ItemStack(item, 1, variant.getMeta()));
+			list.add(new ItemStack(this, 1, variant.getMeta()));
 		}
 	}
 
@@ -74,11 +74,11 @@ public class BlockAercloud extends Block implements IBlockMultiName
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side)
+	public boolean shouldSideBeRendered(final IBlockState state, final IBlockAccess world, final BlockPos pos, final EnumFacing side)
 	{
-		IBlockState offsetState = world.getBlockState(pos.offset(side));
+		final IBlockState offsetState = world.getBlockState(pos.offset(side));
 
-		Block block = offsetState.getBlock();
+		final Block block = offsetState.getBlock();
 
 		if (block == this)
 		{
@@ -92,19 +92,19 @@ public class BlockAercloud extends Block implements IBlockMultiName
 	}
 
 	@Override
-	public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance)
+	public void onFallenUpon(final World worldIn, final BlockPos pos, final Entity entityIn, final float fallDistance)
 	{
 		entityIn.fallDistance = 0;
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity)
+	public void onEntityCollidedWithBlock(final World world, final BlockPos pos, final IBlockState state, final Entity entity)
 	{
 		entity.fallDistance = 0;
 
-		boolean canCollide = !entity.isSneaking() && !(entity instanceof EntityPlayer && ((EntityPlayer) entity).capabilities.isFlying);
+		final boolean canCollide = !entity.isSneaking() && !(entity instanceof EntityPlayer && ((EntityPlayer) entity).capabilities.isFlying);
 
-		BlockVariant variant = state.getValue(PROPERTY_VARIANT);
+		final BlockVariant variant = state.getValue(PROPERTY_VARIANT);
 
 		if (!canCollide || variant == COLD_AERCLOUD || variant == STORM_AERCLOUD)
 		{
@@ -122,9 +122,9 @@ public class BlockAercloud extends Block implements IBlockMultiName
 
 				for (int i = 0; i < 50; i++)
 				{
-					double x = pos.getX() + world.rand.nextDouble();
-					double y = pos.getY() + 1.0D;
-					double z = pos.getZ() + world.rand.nextDouble();
+					final double x = pos.getX() + world.rand.nextDouble();
+					final double y = pos.getY() + 1.0D;
+					final double z = pos.getZ() + world.rand.nextDouble();
 
 					world.spawnParticle(EnumParticleTypes.WATER_SPLASH, x, y, z, 0.0D, 0.0D, 0.0D);
 				}
@@ -134,7 +134,7 @@ public class BlockAercloud extends Block implements IBlockMultiName
 		}
 		else if (variant == GREEN_AERCLOUD || variant == PURPLE_AERCLOUD)
 		{
-			EnumFacing facing = variant == GREEN_AERCLOUD ? EnumFacing.random(world.rand) : state.getValue(PROPERTY_FACING);
+			final EnumFacing facing = variant == GREEN_AERCLOUD ? EnumFacing.random(world.rand) : state.getValue(PROPERTY_FACING);
 
 			entity.motionX = facing.getFrontOffsetX() * 2.5D;
 			entity.motionZ = facing.getFrontOffsetZ() * 2.5D;
@@ -147,51 +147,51 @@ public class BlockAercloud extends Block implements IBlockMultiName
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand)
+	public void randomDisplayTick(final IBlockState state, final World world, final BlockPos pos, final Random rand)
 	{
 		if (state.getValue(PROPERTY_VARIANT) == PURPLE_AERCLOUD)
 		{
-			float x = pos.getX() + (rand.nextFloat() * 0.7f) + 0.15f;
-			float y = pos.getY() + (rand.nextFloat() * 0.7f) + 0.15f;
-			float z = pos.getZ() + (rand.nextFloat() * 0.7f) + 0.15f;
+			final float x = pos.getX() + (rand.nextFloat() * 0.7f) + 0.15f;
+			final float y = pos.getY() + (rand.nextFloat() * 0.7f) + 0.15f;
+			final float z = pos.getZ() + (rand.nextFloat() * 0.7f) + 0.15f;
 
-			EnumFacing facing = state.getValue(PROPERTY_FACING);
+			final EnumFacing facing = state.getValue(PROPERTY_FACING);
 
-			float motionX = facing.getFrontOffsetX() * ((rand.nextFloat() * 0.01f) + 0.05f);
-			float motionZ = facing.getFrontOffsetZ() * ((rand.nextFloat() * 0.01f) + 0.05f);
+			final float motionX = facing.getFrontOffsetX() * ((rand.nextFloat() * 0.01f) + 0.05f);
+			final float motionZ = facing.getFrontOffsetZ() * ((rand.nextFloat() * 0.01f) + 0.05f);
 
 			world.spawnParticle(EnumParticleTypes.CLOUD, x, y, z, motionX, 0, motionZ);
 		}
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(final IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState state)
+	public boolean isFullCube(final IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullBlock(IBlockState state)
+	public boolean isFullBlock(final IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isPassable(IBlockAccess world, BlockPos pos)
+	public boolean isPassable(final IBlockAccess world, final BlockPos pos)
 	{
 		return true;
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos)
+	public AxisAlignedBB getCollisionBoundingBox(final IBlockState state, final IBlockAccess world, final BlockPos pos)
 	{
-		BlockVariant variant = state.getValue(PROPERTY_VARIANT);
+		final BlockVariant variant = state.getValue(PROPERTY_VARIANT);
 
 		if (variant == BlockAercloud.COLD_AERCLOUD || variant == BlockAercloud.STORM_AERCLOUD)
 		{
@@ -202,7 +202,7 @@ public class BlockAercloud extends Block implements IBlockMultiName
 	}
 
 	@Override
-	public IBlockState getStateFromMeta(int meta)
+	public IBlockState getStateFromMeta(final int meta)
 	{
 		if (meta >= PURPLE_AERCLOUD.getMeta())
 		{
@@ -214,7 +214,7 @@ public class BlockAercloud extends Block implements IBlockMultiName
 	}
 
 	@Override
-	public int getMetaFromState(IBlockState state)
+	public int getMetaFromState(final IBlockState state)
 	{
 		if (state.getValue(PROPERTY_VARIANT) == PURPLE_AERCLOUD)
 		{
@@ -225,7 +225,7 @@ public class BlockAercloud extends Block implements IBlockMultiName
 	}
 
 	@Override
-	public int damageDropped(IBlockState state)
+	public int damageDropped(final IBlockState state)
 	{
 		return state.getValue(PROPERTY_VARIANT).getMeta();
 	}
@@ -237,20 +237,21 @@ public class BlockAercloud extends Block implements IBlockMultiName
 	}
 
 	@Override
-	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-			EntityLivingBase placer)
+	public IBlockState getStateForPlacement(final World world, final BlockPos pos, final EnumFacing facing, final float hitX, final float hitY,
+			final float hitZ, final int meta,
+			final EntityLivingBase placer)
 	{
 		return this.getStateFromMeta(meta).withProperty(PROPERTY_FACING, placer.getHorizontalFacing().getOpposite());
 
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack)
+	public String getUnlocalizedName(final ItemStack stack)
 	{
 		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
 	}
 
-	public IBlockState getAercloudState(BlockVariant variant)
+	public IBlockState getAercloudState(final BlockVariant variant)
 	{
 		return BlocksAether.aercloud.getDefaultState().withProperty(BlockAercloud.PROPERTY_VARIANT, variant);
 	}

@@ -1,7 +1,7 @@
 package com.gildedgames.aether.api.player.inventory;
 
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
-import com.gildedgames.aether.api.util.NBT;
+import com.gildedgames.orbis.api.util.mc.NBT;
 import net.minecraft.inventory.IInventory;
 
 public interface IInventoryEquipment extends IInventory, NBT

@@ -8,8 +8,8 @@ import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.entities.util.AnimalGender;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -23,6 +23,10 @@ import java.awt.*;
 
 public class RenderMoa extends RenderLiving<EntityMoa>
 {
+
+	public static final ResourceLocation AECHOR_PETAL_TEXTURE = new ResourceLocation("aether", "textures/items/consumables/aechor_petal.png");
+
+	public static final SpriteGeneric SPRITE = new SpriteGeneric("aechor_petal.png", 16, 16);
 
 	public static ResourceLocation FEATHERS = AetherCore.getResource("textures/entities/moa/feathers.png");
 
@@ -40,32 +44,28 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 
 	public static ResourceLocation SADDLE = AetherCore.getResource("textures/entities/moa/saddle.png");
 
-	public static final ResourceLocation AECHOR_PETAL_TEXTURE = new ResourceLocation("aether", "textures/items/consumables/aechor_petal.png");
-
-	public static final SpriteGeneric SPRITE = new SpriteGeneric("aechor_petal.png", 16, 16);
-
-	public RenderMoa(RenderManager manager)
+	public RenderMoa(final RenderManager manager)
 	{
 		super(manager, new ModelMoa(), 0.5F);
 
 		SPRITE.initSprite(16, 16, 0, 0, false);
 	}
 
-	protected float getWingRotation(EntityMoa moa, float f)
+	protected float getWingRotation(final EntityMoa moa, final float f)
 	{
-		float f1 = moa.prevWingRotation + (moa.wingRotation - moa.prevWingRotation) * f;
-		float f2 = moa.prevDestPos + (moa.destPos - moa.prevDestPos) * f;
+		final float f1 = moa.prevWingRotation + (moa.wingRotation - moa.prevWingRotation) * f;
+		final float f2 = moa.prevDestPos + (moa.destPos - moa.prevDestPos) * f;
 
 		return (MathHelper.sin(f1) + 1.0F) * f2;
 	}
 
 	@Override
-	protected float handleRotationFloat(EntityMoa entityliving, float f)
+	protected float handleRotationFloat(final EntityMoa entityliving, final float f)
 	{
 		return this.getWingRotation(entityliving, f);
 	}
 
-	protected void scaleMoa(EntityMoa entityMoa)
+	protected void scaleMoa(final EntityMoa entityMoa)
 	{
 		float moaScale = entityMoa.isChild() ? 0.5f : 0.85f;
 
@@ -75,35 +75,36 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 	}
 
 	@Override
-	protected void preRenderCallback(EntityMoa entityliving, float f)
+	protected void preRenderCallback(final EntityMoa entityliving, final float f)
 	{
 		this.scaleMoa(entityliving);
 	}
 
-	public void renderMoa(int color, ResourceLocation texture, EntityLivingBase entity, float par7, ModelRenderer... models)
+	public void renderMoa(final int color, final ResourceLocation texture, final EntityLivingBase entity, final float par7, final ModelRenderer... models)
 	{
-		float red = ((color >> 16) & 0xff) / 255F;
-		float green = ((color >> 8) & 0xff) / 255F;
-		float blue = (color & 0xff) / 255F;
+		final float red = ((color >> 16) & 0xff) / 255F;
+		final float green = ((color >> 8) & 0xff) / 255F;
+		final float blue = (color & 0xff) / 255F;
 
 		GL11.glColor3f(red, green, blue);
 
 		this.renderManager.renderEngine.bindTexture(texture);
 
-		for (ModelRenderer model : models)
+		for (final ModelRenderer model : models)
 		{
 			model.render(par7);
 		}
 	}
 
-	public void renderMoa(int color, ResourceLocation texture, EntityLivingBase entity, float par2, float par3, float par4, float par5,
-			float par6, float par7)
+	public void renderMoa(final int color, final ResourceLocation texture, final EntityLivingBase entity, final float par2, final float par3, final float par4,
+			final float par5,
+			final float par6, final float par7)
 	{
-		ModelMoa model = ((ModelMoa) this.mainModel);
+		final ModelMoa model = ((ModelMoa) this.mainModel);
 
-		float red = ((color >> 16) & 0xff) / 255F;
-		float green = ((color >> 8) & 0xff) / 255F;
-		float blue = (color & 0xff) / 255F;
+		final float red = ((color >> 16) & 0xff) / 255F;
+		final float green = ((color >> 8) & 0xff) / 255F;
+		final float blue = (color & 0xff) / 255F;
 		GL11.glColor3f(red, green, blue);
 
 		this.renderManager.renderEngine.bindTexture(texture);
@@ -119,13 +120,13 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 		model.RightLeg2.isHidden = false;
 	}
 
-	public Color darker(Color c, float factor)
+	public Color darker(final Color c, final float factor)
 	{
 		return new Color(Math.max((int) (c.getRed() * factor), 0), Math.max((int) (c.getGreen() * factor), 0), Math.max((int) (c.getBlue()
 				* factor), 0), c.getAlpha());
 	}
 
-	private Color blend(Color c1, Color c2, float ratio)
+	private Color blend(final Color c1, final Color c2, float ratio)
 	{
 		if (ratio > 1f)
 		{
@@ -135,34 +136,35 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 		{
 			ratio = 0f;
 		}
-		float iRatio = 1.0f - ratio;
+		final float iRatio = 1.0f - ratio;
 
-		int i1 = c1.getRGB();
-		int i2 = c2.getRGB();
+		final int i1 = c1.getRGB();
+		final int i2 = c2.getRGB();
 
-		int a1 = (i1 >> 24 & 0xff);
-		int r1 = ((i1 & 0xff0000) >> 16);
-		int g1 = ((i1 & 0xff00) >> 8);
-		int b1 = (i1 & 0xff);
+		final int a1 = (i1 >> 24 & 0xff);
+		final int r1 = ((i1 & 0xff0000) >> 16);
+		final int g1 = ((i1 & 0xff00) >> 8);
+		final int b1 = (i1 & 0xff);
 
-		int a2 = (i2 >> 24 & 0xff);
-		int r2 = ((i2 & 0xff0000) >> 16);
-		int g2 = ((i2 & 0xff00) >> 8);
-		int b2 = (i2 & 0xff);
+		final int a2 = (i2 >> 24 & 0xff);
+		final int r2 = ((i2 & 0xff0000) >> 16);
+		final int g2 = ((i2 & 0xff00) >> 8);
+		final int b2 = (i2 & 0xff);
 
-		int a = (int) ((a1 * iRatio) + (a2 * ratio));
-		int r = (int) ((r1 * iRatio) + (r2 * ratio));
-		int g = (int) ((g1 * iRatio) + (g2 * ratio));
-		int b = (int) ((b1 * iRatio) + (b2 * ratio));
+		final int a = (int) ((a1 * iRatio) + (a2 * ratio));
+		final int r = (int) ((r1 * iRatio) + (r2 * ratio));
+		final int g = (int) ((g1 * iRatio) + (g2 * ratio));
+		final int b = (int) ((b1 * iRatio) + (b2 * ratio));
 
 		return new Color(a << 24 | r << 16 | g << 8 | b);
 	}
 
-	protected void renderMoa(EntityLivingBase entity, float par2, float par3, float par4, float par5, float par6, float par7)
+	protected void renderMoa(
+			final EntityLivingBase entity, final float par2, final float par3, final float par4, final float par5, final float par6, final float par7)
 	{
-		EntityMoa moa = ((EntityMoa) entity);
-		MoaGenePool genePool = moa.getGenePool();
-		ModelMoa model = ((ModelMoa) this.mainModel);
+		final EntityMoa moa = ((EntityMoa) entity);
+		final MoaGenePool genePool = moa.getGenePool();
+		final ModelMoa model = ((ModelMoa) this.mainModel);
 
 		if (genePool == null || genePool.getFeathers() == null)
 		{
@@ -175,7 +177,8 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 
 		this.renderMoa(genePool.getFeathers().gene().data().getRGB(), BODY, entity, par2, par3, par4, par5, par6, par7);
 
-		this.renderMoa(genePool.getKeratin().gene().data().getRGB(), LEGS, entity, par7, model.LeftLeg1, model.RightLeg1, model.LeftLeg2, model.RightLeg2, model.FootLeft, model.FootRight, model.Toe1Left, model.Toe1Right, model.Toe2Left, model.Toe2Right);
+		this.renderMoa(genePool.getKeratin().gene().data().getRGB(), LEGS, entity, par7, model.LeftLeg1, model.RightLeg1, model.LeftLeg2, model.RightLeg2,
+				model.FootLeft, model.FootRight, model.Toe1Left, model.Toe1Right, model.Toe2Left, model.Toe2Right);
 
 		this.renderMoa(genePool.getKeratin().gene().data().getRGB(), BEAK, entity, par7, model.Jaw, model.Head);
 		this.renderMoa(genePool.getEyes().gene().data().getRGB(), EYES, entity, par7, model.Head);
@@ -183,7 +186,7 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 		GL11.glScalef(1.001f, 1.001f, 1.001f);
 		GL11.glTranslatef(0.0f, -0.001f, 0.001f);
 
-		Color patternColor = genePool.getFeathers().gene().data().darker();
+		final Color patternColor = genePool.getFeathers().gene().data().darker();
 
 		this.renderMoa(patternColor.getRGB(), genePool.getMarks().gene().getHead(), entity, par7, model.Head);
 
@@ -224,7 +227,8 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 
 		if (moa.getGender() == AnimalGender.MALE)
 		{
-			this.renderMoa(genePool.getFeathers().gene().data().getRGB(), FEATHERS, entity, par7, model.feather1, model.feather2, model.feather3, model.feather4);
+			this.renderMoa(genePool.getFeathers().gene().data().getRGB(), FEATHERS, entity, par7, model.feather1, model.feather2, model.feather3,
+					model.feather4);
 		}
 
 		GL11.glColor3f(1.0f, 1.0f, 1.0f);
@@ -237,10 +241,11 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 	}
 
 	@Override
-	protected void renderModel(EntityMoa entity, float par2, float par3, float par4, float par5, float par6, float par7)
+	protected void renderModel(final EntityMoa entity, final float par2, final float par3, final float par4, final float par5, final float par6,
+			final float par7)
 	{
-		boolean flag = !entity.isInvisible() || this.renderOutlines;
-		boolean flag1 = !flag && !entity.isInvisibleToPlayer(Minecraft.getMinecraft().player);
+		final boolean flag = !entity.isInvisible() || this.renderOutlines;
+		final boolean flag1 = !flag && !entity.isInvisibleToPlayer(Minecraft.getMinecraft().player);
 
 		if (flag || flag1)
 		{
@@ -249,7 +254,7 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 	}
 
 	@Override
-	public void doRender(EntityMoa entity, double d, double d1, double d2, float f, float f1)
+	public void doRender(final EntityMoa entity, final double d, final double d1, final double d2, final float f, final float f1)
 	{
 		if (entity.isHungry())
 		{
@@ -261,16 +266,16 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(EntityMoa entity)
+	protected ResourceLocation getEntityTexture(final EntityMoa entity)
 	{
 		return null;
 	}
 
-	public void drawAechorPetal(double x, double y, double z, double scale)
+	public void drawAechorPetal(final double x, final double y, final double z, final double scale)
 	{
 		GL11.glPushMatrix();
 
-		Tessellator tesselator = Tessellator.getInstance();
+		final Tessellator tesselator = Tessellator.getInstance();
 
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glTranslatef((float) x, (float) y, (float) z);
@@ -284,12 +289,12 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 		GL11.glPopMatrix();
 	}
 
-	private void renderEntity(VertexBuffer renderer, TextureAtlasSprite icon)
+	private void renderEntity(final BufferBuilder renderer, final TextureAtlasSprite icon)
 	{
-		float f = icon.getMinU();
-		float f1 = icon.getMaxU();
-		float f2 = icon.getMinV();
-		float f3 = icon.getMaxV();
+		final float f = icon.getMinU();
+		final float f1 = icon.getMaxU();
+		final float f2 = icon.getMinV();
+		final float f3 = icon.getMaxV();
 
 		GL11.glRotatef(180f + Minecraft.getMinecraft().getRenderManager().playerViewY, 0.0F, -1.0F, 0.0F);
 

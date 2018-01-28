@@ -9,16 +9,17 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.NonNullList;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class BlockStructureHint extends Block implements IBlockWithItem
@@ -46,11 +47,11 @@ public class BlockStructureHint extends Block implements IBlockWithItem
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks(final CreativeTabs itemIn, final NonNullList<ItemStack> items)
 	{
-		for (BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
+		for (final BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
 		{
-			list.add(new ItemStack(item, 1, variant.getMeta()));
+			items.add(new ItemStack(this, 1, variant.getMeta()));
 		}
 	}
 
@@ -62,25 +63,25 @@ public class BlockStructureHint extends Block implements IBlockWithItem
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(final IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState state)
+	public boolean isFullCube(final IBlockState state)
 	{
 		return true;
 	}
 
 	@Override
-	public IBlockState getStateFromMeta(int meta)
+	public IBlockState getStateFromMeta(final int meta)
 	{
 		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta));
 	}
 
 	@Override
-	public int getMetaFromState(IBlockState state)
+	public int getMetaFromState(final IBlockState state)
 	{
 		return state.getValue(PROPERTY_VARIANT).getMeta();
 	}
@@ -98,16 +99,16 @@ public class BlockStructureHint extends Block implements IBlockWithItem
 	}
 
 	@Override
-	public int damageDropped(IBlockState state)
+	public int damageDropped(final IBlockState state)
 	{
 		return state.getValue(PROPERTY_VARIANT).getMeta();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
+	public void addInformation(final ItemStack stack, @Nullable final World player, final List<String> tooltip, final ITooltipFlag advanced)
 	{
-		IBlockState state = this.getStateFromMeta(stack.getMetadata());
+		final IBlockState state = this.getStateFromMeta(stack.getMetadata());
 
 		tooltip.add(I18n.format(this.getUnlocalizedName() + "." + state.getValue(PROPERTY_VARIANT).getName() + ".name"));
 	}

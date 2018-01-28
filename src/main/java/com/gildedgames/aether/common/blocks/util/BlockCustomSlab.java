@@ -21,13 +21,13 @@ import java.util.Random;
 
 public class BlockCustomSlab extends Block implements IBlockWithItem
 {
+	public static final PropertyEnum<EnumSlabPart> PROPERTY_SLAB_STATE = PropertyEnum.create("state", EnumSlabPart.class);
+
 	private static final AxisAlignedBB AABB_BOTTOM_HALF = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
 
 	private static final AxisAlignedBB AABB_TOP_HALF = new AxisAlignedBB(0.0D, 0.5D, 0.0D, 1.0D, 1.0D, 1.0D);
 
-	public static final PropertyEnum<EnumSlabPart> PROPERTY_SLAB_STATE = PropertyEnum.create("state", EnumSlabPart.class);
-
-	public BlockCustomSlab(Material material)
+	public BlockCustomSlab(final Material material)
 	{
 		super(material);
 
@@ -37,7 +37,7 @@ public class BlockCustomSlab extends Block implements IBlockWithItem
 	}
 
 	@Override
-	public BlockCustomSlab setSoundType(SoundType type)
+	public BlockCustomSlab setSoundType(final SoundType type)
 	{
 		super.setSoundType(type);
 
@@ -45,70 +45,64 @@ public class BlockCustomSlab extends Block implements IBlockWithItem
 	}
 
 	@Override
-	public int getLightOpacity(IBlockState state)
+	public int getLightOpacity(final IBlockState state)
 	{
 		return state.getValue(PROPERTY_SLAB_STATE) == EnumSlabPart.FULL_BLOCK ? 255 : 0;
 	}
 
 	@Override
-	public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face)
+	public boolean doesSideBlockRendering(final IBlockState state, final IBlockAccess world, final BlockPos pos, final EnumFacing face)
 	{
 		if (state.isOpaqueCube())
 		{
 			return true;
 		}
 
-		EnumSlabPart slabState = state.getValue(PROPERTY_SLAB_STATE);
+		final EnumSlabPart slabState = state.getValue(PROPERTY_SLAB_STATE);
 
 		return (slabState == EnumSlabPart.TOP_HALF && face == EnumFacing.UP) || (slabState == EnumSlabPart.BOTTOM_HALF
 				&& face == EnumFacing.DOWN);
 	}
 
 	@Override
-	public IBlockState getStateFromMeta(int meta)
+	public IBlockState getStateFromMeta(final int meta)
 	{
 		return this.getDefaultState().withProperty(PROPERTY_SLAB_STATE, EnumSlabPart.VALUES[meta]);
 	}
 
 	@Override
-	public int getMetaFromState(IBlockState state)
+	public int getMetaFromState(final IBlockState state)
 	{
 		return state.getValue(PROPERTY_SLAB_STATE).ordinal();
 	}
 
 	@Override
 	@Deprecated
-	public boolean isFullBlock(IBlockState state)
+	public boolean isFullBlock(final IBlockState state)
 	{
 		return state.getValue(PROPERTY_SLAB_STATE) == EnumSlabPart.FULL_BLOCK;
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState state)
+	public boolean isFullCube(final IBlockState state)
 	{
 		return state.getValue(PROPERTY_SLAB_STATE) == EnumSlabPart.FULL_BLOCK;
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(final IBlockState state)
 	{
 		return state.getValue(PROPERTY_SLAB_STATE) == EnumSlabPart.FULL_BLOCK;
 	}
 
 	@Override
-	public boolean isFullyOpaque(IBlockState state)
-	{
-		return state.getValue(PROPERTY_SLAB_STATE) == EnumSlabPart.FULL_BLOCK;
-	}
-
-	@Override
-	public int quantityDropped(IBlockState state, int fortune, Random random)
+	public int quantityDropped(final IBlockState state, final int fortune, final Random random)
 	{
 		return state.getValue(PROPERTY_SLAB_STATE) == EnumSlabPart.FULL_BLOCK ? 2 : 1;
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	public AxisAlignedBB getBoundingBox(final IBlockState state, final IBlockAccess source, final BlockPos pos)
 	{
 		switch (state.getValue(PROPERTY_SLAB_STATE))
 		{
@@ -122,10 +116,11 @@ public class BlockCustomSlab extends Block implements IBlockWithItem
 	}
 
 	@Override
-	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-			EntityLivingBase placer)
+	public IBlockState getStateForPlacement(final World world, final BlockPos pos, final EnumFacing facing, final float hitX, final float hitY,
+			final float hitZ, final int meta,
+			final EntityLivingBase placer)
 	{
-		IBlockState state = this.getDefaultState().withProperty(PROPERTY_SLAB_STATE, EnumSlabPart.BOTTOM_HALF);
+		final IBlockState state = this.getDefaultState().withProperty(PROPERTY_SLAB_STATE, EnumSlabPart.BOTTOM_HALF);
 
 		if (state.getValue(PROPERTY_SLAB_STATE) == EnumSlabPart.FULL_BLOCK)
 		{
@@ -166,7 +161,7 @@ public class BlockCustomSlab extends Block implements IBlockWithItem
 
 		private final String name;
 
-		EnumSlabPart(String name)
+		EnumSlabPart(final String name)
 		{
 			this.name = name;
 		}

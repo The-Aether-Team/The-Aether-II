@@ -1,9 +1,8 @@
 package com.gildedgames.aether.common.containers.inventory;
 
 import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.api.player.IPlayerAether;
-import com.gildedgames.aether.api.items.IItemProperties;
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
+import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ItemStackHelper;
@@ -38,9 +37,9 @@ public class InventoryEquipment implements IInventoryEquipment
 
 	private final IPlayerAether aePlayer;
 
-	private NonNullList<ItemStack> inventory = NonNullList.withSize(14, ItemStack.EMPTY);
+	private final NonNullList<ItemStack> inventory = NonNullList.withSize(14, ItemStack.EMPTY);
 
-	public InventoryEquipment(IPlayerAether aePlayer)
+	public InventoryEquipment(final IPlayerAether aePlayer)
 	{
 		this.aePlayer = aePlayer;
 	}
@@ -54,7 +53,7 @@ public class InventoryEquipment implements IInventoryEquipment
 	@Override
 	public boolean isEmpty()
 	{
-		for (ItemStack itemstack : this.inventory)
+		for (final ItemStack itemstack : this.inventory)
 		{
 			if (!itemstack.isEmpty())
 			{
@@ -66,21 +65,21 @@ public class InventoryEquipment implements IInventoryEquipment
 	}
 
 	@Override
-	public ItemStack getStackInSlot(int index)
+	public ItemStack getStackInSlot(final int index)
 	{
 		return index >= 0 && index < this.inventory.size() ? this.inventory.get(index) : ItemStack.EMPTY;
 	}
 
 	@Override
-	public ItemStack decrStackSize(int index, int count)
+	public ItemStack decrStackSize(final int index, final int count)
 	{
 		return ItemStackHelper.getAndRemove(this.inventory, index);
 	}
 
 	@Override
-	public ItemStack removeStackFromSlot(int index)
+	public ItemStack removeStackFromSlot(final int index)
 	{
-		ItemStack itemstack = this.inventory.get(index);
+		final ItemStack itemstack = this.inventory.get(index);
 
 		if (itemstack.isEmpty())
 		{
@@ -95,7 +94,7 @@ public class InventoryEquipment implements IInventoryEquipment
 	}
 
 	@Override
-	public void setInventorySlotContents(int index, ItemStack stack)
+	public void setInventorySlotContents(final int index, final ItemStack stack)
 	{
 		this.inventory.set(index, stack);
 
@@ -103,7 +102,7 @@ public class InventoryEquipment implements IInventoryEquipment
 	}
 
 	@Override
-	public int getNextEmptySlotForType(ItemEquipmentSlot type)
+	public int getNextEmptySlotForType(final ItemEquipmentSlot type)
 	{
 		for (int i = 0; i < this.inventory.size(); i++)
 		{
@@ -128,37 +127,37 @@ public class InventoryEquipment implements IInventoryEquipment
 	}
 
 	@Override
-	public boolean isUsableByPlayer(EntityPlayer player)
+	public boolean isUsableByPlayer(final EntityPlayer player)
 	{
-		return !this.aePlayer.getEntity().isDead && player.getDistanceSqToEntity(this.aePlayer.getEntity()) <= 64.0D;
+		return !this.aePlayer.getEntity().isDead && player.getDistanceSq(this.aePlayer.getEntity()) <= 64.0D;
 	}
 
 	@Override
-	public void openInventory(EntityPlayer player)
-	{
-	}
-
-	@Override
-	public void closeInventory(@Nonnull EntityPlayer player)
+	public void openInventory(final EntityPlayer player)
 	{
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int index, @Nonnull ItemStack stack)
+	public void closeInventory(@Nonnull final EntityPlayer player)
 	{
-		ItemEquipmentSlot slot = AetherAPI.content().items().getProperties(stack.getItem()).getEquipmentSlot();
+	}
+
+	@Override
+	public boolean isItemValidForSlot(final int index, @Nonnull final ItemStack stack)
+	{
+		final ItemEquipmentSlot slot = AetherAPI.content().items().getProperties(stack.getItem()).getEquipmentSlot();
 
 		return slot == SLOT_TYPES[index];
 	}
 
 	@Override
-	public int getField(int id)
+	public int getField(final int id)
 	{
 		return 0;
 	}
 
 	@Override
-	public void setField(int id, int value)
+	public void setField(final int id, final int value)
 	{
 	}
 
@@ -193,17 +192,17 @@ public class InventoryEquipment implements IInventoryEquipment
 	}
 
 	@Override
-	public void write(NBTTagCompound output)
+	public void write(final NBTTagCompound output)
 	{
-		NBTTagList list = new NBTTagList();
+		final NBTTagList list = new NBTTagList();
 
 		for (int i = 0; i < this.inventory.size(); ++i)
 		{
-			ItemStack stack = this.inventory.get(i);
+			final ItemStack stack = this.inventory.get(i);
 
 			if (!stack.isEmpty())
 			{
-				NBTTagCompound stackCompound = new NBTTagCompound();
+				final NBTTagCompound stackCompound = new NBTTagCompound();
 				stackCompound.setByte("Slot", (byte) i);
 
 				stack.writeToNBT(stackCompound);
@@ -216,15 +215,15 @@ public class InventoryEquipment implements IInventoryEquipment
 	}
 
 	@Override
-	public void read(NBTTagCompound input)
+	public void read(final NBTTagCompound input)
 	{
-		NBTTagList list = input.getTagList("Items", 10);
+		final NBTTagList list = input.getTagList("Items", 10);
 
 		for (int i = 0; i < list.tagCount(); i++)
 		{
-			NBTTagCompound compound = list.getCompoundTagAt(i);
+			final NBTTagCompound compound = list.getCompoundTagAt(i);
 
-			int slot = compound.getByte("Slot") & 255;
+			final int slot = compound.getByte("Slot") & 255;
 
 			this.inventory.set(slot, new ItemStack(compound));
 		}

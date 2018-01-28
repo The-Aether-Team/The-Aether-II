@@ -1,10 +1,6 @@
 package com.gildedgames.aether.common.capabilities;
 
-import com.gildedgames.aether.api.AetherCapabilities;
-import com.gildedgames.aether.api.chunk.IChunkAttachment;
-import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.api.entity.spawning.ISpawningInfo;
-import com.gildedgames.aether.api.orbis.IChunkRendererCapability;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.world.ISectorAccess;
 import com.gildedgames.aether.common.AetherCore;
@@ -12,19 +8,18 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherProvider;
 import com.gildedgames.aether.common.capabilities.entity.spawning.EntitySpawningInfo;
 import com.gildedgames.aether.common.capabilities.entity.spawning.EntitySpawningInfoProvider;
-import com.gildedgames.aether.common.capabilities.world.chunk.*;
+import com.gildedgames.aether.common.capabilities.world.chunk.PlacementFlagCapability;
+import com.gildedgames.aether.common.capabilities.world.chunk.PlacementFlagProvider;
 import com.gildedgames.aether.common.capabilities.world.sectors.IslandSectorAccessFlatFile;
 import com.gildedgames.aether.common.capabilities.world.sectors.SectorStorageProvider;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.world.ChunkDataEvent;
-import net.minecraftforge.event.world.ChunkEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class CapabilityManagerAether
@@ -34,15 +29,10 @@ public class CapabilityManagerAether
 		MinecraftForge.EVENT_BUS.register(CapabilityManagerAether.class);
 
 		// Register capability implementations
-		CapabilityManager.INSTANCE.register(ISectorAccess.class, new IslandSectorAccessFlatFile.Storage(), IslandSectorAccessFlatFile.class);
+		CapabilityManager.INSTANCE.register(ISectorAccess.class, new IslandSectorAccessFlatFile.Storage(), IslandSectorAccessFlatFile::new);
 
-		CapabilityManager.INSTANCE.register(IChunkAttachment.class, new ChunkAttachment.Storage(), ChunkAttachment.class);
-		CapabilityManager.INSTANCE.register(IPlacementFlagCapability.class, new PlacementFlagCapability.Storage(), PlacementFlagCapability.class);
-
-		CapabilityManager.INSTANCE.register(IChunkRendererCapability.class, new ChunkRenderer.Storage(), ChunkRenderer.class);
-
-		CapabilityManager.INSTANCE.register(IPlayerAether.class, new PlayerAether.Storage(), PlayerAether.class);
-		CapabilityManager.INSTANCE.register(ISpawningInfo.class, new EntitySpawningInfo.Storage(), EntitySpawningInfo.class);
+		CapabilityManager.INSTANCE.register(IPlayerAether.class, new PlayerAether.Storage(), PlayerAether::new);
+		CapabilityManager.INSTANCE.register(ISpawningInfo.class, new EntitySpawningInfo.Storage(), EntitySpawningInfo::new);
 	}
 
 	@SubscribeEvent
@@ -66,8 +56,6 @@ public class CapabilityManagerAether
 	{
 		final World world = event.getObject();
 
-		event.addCapability(AetherCore.getResource("AetherHooks"), new ChunkAttachmentProvider(new ChunkAttachment()));
-
 		// Attach only to worlds of the Aether dimension on the server
 		if (!world.isRemote && world.provider.getDimensionType() == DimensionsAether.AETHER)
 		{
@@ -76,60 +64,17 @@ public class CapabilityManagerAether
 	}
 
 	@SubscribeEvent
-	public static void onChunkCapabilityAttach(final AttachCapabilitiesEvent<IChunkAttachment> event)
+	public static void attachChunk(final AttachCapabilitiesEvent<Chunk> event)
 	{
-		final IChunkAttachment attachment = event.getObject();
-
-		final int chunkX = attachment.getChunkX();
-		final int chunkZ = attachment.getChunkZ();
-
-		event.addCapability(AetherCore.getResource("PlacementFlags"), new PlacementFlagProvider(new PlacementFlagCapability()));
-	}
-
-	@SubscribeEvent
-	public static void onChunkLoad(final ChunkEvent.Load event)
-	{
-		if (event.getWorld().hasCapability(AetherCapabilities.CHUNK_ATTACHMENTS, null))
+		if (event.getObject() == null)
 		{
-			final IChunkAttachment pool = event.getWorld().getCapability(AetherCapabilities.CHUNK_ATTACHMENTS, null);
-			pool.init(event);
+			return;
 		}
-	}
 
-	@SubscribeEvent
-	public static void onChunkUnload(final ChunkEvent.Unload event)
-	{
-		if (event.getWorld().hasCapability(AetherCapabilities.CHUNK_ATTACHMENTS, null))
+		if (event.getObject() instanceof Chunk)
 		{
-			final IChunkAttachment pool = event.getWorld().getCapability(AetherCapabilities.CHUNK_ATTACHMENTS, null);
-			pool.destroy(event);
+			event.addCapability(AetherCore.getResource("PlacementFlags"), new PlacementFlagProvider(new PlacementFlagCapability()));
 		}
-	}
-
-	@SubscribeEvent
-	public static void onChunkDataLoaded(final ChunkDataEvent.Load event)
-	{
-		if (event.getWorld().hasCapability(AetherCapabilities.CHUNK_ATTACHMENTS, null))
-		{
-			final IChunkAttachment pool = event.getWorld().getCapability(AetherCapabilities.CHUNK_ATTACHMENTS, null);
-			pool.load(event);
-		}
-	}
-
-	@SubscribeEvent
-	public static void onChunkDataUnloaded(final ChunkDataEvent.Save event)
-	{
-		if (event.getWorld().hasCapability(AetherCapabilities.CHUNK_ATTACHMENTS, null))
-		{
-			final IChunkAttachment pool = event.getWorld().getCapability(AetherCapabilities.CHUNK_ATTACHMENTS, null);
-			pool.save(event);
-		}
-	}
-
-	@SubscribeEvent
-	public static void onPlayerClone(final PlayerEvent.Clone event)
-	{
-
 	}
 
 }

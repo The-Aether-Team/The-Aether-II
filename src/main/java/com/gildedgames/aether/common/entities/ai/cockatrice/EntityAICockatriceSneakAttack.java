@@ -11,7 +11,7 @@ import java.util.List;
 public class EntityAICockatriceSneakAttack extends EntityAIBase
 {
 
-	private EntityCockatrice entity;
+	private final EntityCockatrice entity;
 
 	protected EntityLivingBase attack;
 
@@ -19,7 +19,7 @@ public class EntityAICockatriceSneakAttack extends EntityAIBase
 
 	Class<? extends EntityLivingBase> attackClass;
 
-	public EntityAICockatriceSneakAttack(EntityCockatrice entity, Class<? extends EntityLivingBase> clazz)
+	public EntityAICockatriceSneakAttack(final EntityCockatrice entity, final Class<? extends EntityLivingBase> clazz)
 	{
 		this.entity = entity;
 		this.attackClass = clazz;
@@ -30,7 +30,7 @@ public class EntityAICockatriceSneakAttack extends EntityAIBase
 	{
 		if (!this.entity.isAttacking() && this.entity.isHidden())
 		{
-			List entities = this.entity.world.getEntitiesWithinAABB(this.attackClass, this.entity.getEntityBoundingBox().expand(16.0D, 16.0D, 16.0D));
+			final List entities = this.entity.world.getEntitiesWithinAABB(this.attackClass, this.entity.getEntityBoundingBox().expand(16.0D, 16.0D, 16.0D));
 
 			if (entities.isEmpty())
 			{
@@ -39,7 +39,7 @@ public class EntityAICockatriceSneakAttack extends EntityAIBase
 
 			EntityLivingBase attack = null;
 
-			for (Object o : entities)
+			for (final Object o : entities)
 			{
 				if (o instanceof EntityLivingBase)
 				{
@@ -56,7 +56,7 @@ public class EntityAICockatriceSneakAttack extends EntityAIBase
 
 			if (this.attack instanceof EntityPlayer)
 			{
-				EntityPlayer player = (EntityPlayer) this.attack;
+				final EntityPlayer player = (EntityPlayer) this.attack;
 
 				if (player.isCreative())
 				{
@@ -71,7 +71,7 @@ public class EntityAICockatriceSneakAttack extends EntityAIBase
 	}
 
 	@Override
-	public boolean continueExecuting()
+	public boolean shouldContinueExecuting()
 	{
 		return this.entity.isAttacking() && this.attack.isEntityAlive();
 	}
@@ -95,7 +95,7 @@ public class EntityAICockatriceSneakAttack extends EntityAIBase
 	public void updateTask()
 	{
 		this.entity.getLookHelper().setLookPositionWithEntity(this.attack, 30.0F, 30.0F);
-		double distanceBetweenTarget = this.entity.getDistanceSq(this.attack.posX, this.attack.getEntityBoundingBox().minY, this.attack.posZ);
+		final double distanceBetweenTarget = this.entity.getDistanceSq(this.attack.posX, this.attack.getEntityBoundingBox().minY, this.attack.posZ);
 
 		this.entity.getNavigator().tryMoveToEntityLiving(this.attack, 1.2D);
 
@@ -111,7 +111,7 @@ public class EntityAICockatriceSneakAttack extends EntityAIBase
 		}
 	}
 
-	protected double getAttackReachSqr(EntityLivingBase attackTarget)
+	protected double getAttackReachSqr(final EntityLivingBase attackTarget)
 	{
 		return (double) (this.entity.width * 2.0F * this.entity.width * 2.0F + attackTarget.width);
 	}

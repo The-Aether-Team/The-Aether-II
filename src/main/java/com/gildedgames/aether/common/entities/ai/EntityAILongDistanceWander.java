@@ -10,13 +10,13 @@ public class EntityAILongDistanceWander extends EntityAIBase
 
 	private final EntityCreature entity;
 
+	private final double speed;
+
 	private double xPosition;
 
 	private double yPosition;
 
 	private double zPosition;
-
-	private final double speed;
 
 	private int executionChance;
 
@@ -24,12 +24,12 @@ public class EntityAILongDistanceWander extends EntityAIBase
 
 	private Vec3d longDistanceTarget;
 
-	public EntityAILongDistanceWander(EntityCreature creatureIn, double speedIn)
+	public EntityAILongDistanceWander(final EntityCreature creatureIn, final double speedIn)
 	{
 		this(creatureIn, speedIn, 120);
 	}
 
-	public EntityAILongDistanceWander(EntityCreature creatureIn, double speedIn, int chance)
+	public EntityAILongDistanceWander(final EntityCreature creatureIn, final double speedIn, final int chance)
 	{
 		this.entity = creatureIn;
 		this.speed = speedIn;
@@ -44,13 +44,13 @@ public class EntityAILongDistanceWander extends EntityAIBase
 		{
 			this.longDistanceTarget = RandomPositionGenerator.findRandomTarget(this.entity, 100, 7);
 		}
-		else if (this.entity.getDistanceSq(this.longDistanceTarget.xCoord, this.longDistanceTarget.yCoord, this.longDistanceTarget.zCoord)
+		else if (this.entity.getDistanceSq(this.longDistanceTarget.x, this.longDistanceTarget.y, this.longDistanceTarget.z)
 				< 10.0D * 10.0D)
 		{
 			this.longDistanceTarget = RandomPositionGenerator.findRandomTarget(this.entity, 100, 7);
 		}
 
-		Vec3d vec3d = RandomPositionGenerator.findRandomTargetBlockTowards(this.entity, 10, 2, this.longDistanceTarget);
+		final Vec3d vec3d = RandomPositionGenerator.findRandomTargetBlockTowards(this.entity, 10, 2, this.longDistanceTarget);
 
 		if (vec3d == null)
 		{
@@ -58,9 +58,9 @@ public class EntityAILongDistanceWander extends EntityAIBase
 		}
 		else
 		{
-			this.xPosition = vec3d.xCoord;
-			this.yPosition = vec3d.yCoord;
-			this.zPosition = vec3d.zCoord;
+			this.xPosition = vec3d.x;
+			this.yPosition = vec3d.y;
+			this.zPosition = vec3d.z;
 			this.mustUpdate = false;
 			return true;
 		}
@@ -70,7 +70,7 @@ public class EntityAILongDistanceWander extends EntityAIBase
 	 * Returns whether an in-progress EntityAIBase should continue executing
 	 */
 	@Override
-	public boolean continueExecuting()
+	public boolean shouldContinueExecuting()
 	{
 		return !this.entity.getNavigator().noPath();
 	}
@@ -95,7 +95,7 @@ public class EntityAILongDistanceWander extends EntityAIBase
 	/**
 	 * Changes task random possibility for execution
 	 */
-	public void setExecutionChance(int newchance)
+	public void setExecutionChance(final int newchance)
 	{
 		this.executionChance = newchance;
 	}

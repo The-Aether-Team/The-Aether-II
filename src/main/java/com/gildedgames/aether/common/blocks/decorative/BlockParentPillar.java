@@ -4,17 +4,19 @@ import com.gildedgames.aether.common.blocks.util.BlockRotatable;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class BlockParentPillar extends BlockRotatable
 {
 	private final Block parentBlock;
 
-	public BlockParentPillar(Material material, Block parentBlock)
+	public BlockParentPillar(final Material material, final Block parentBlock)
 	{
 		super(material);
 
@@ -22,7 +24,7 @@ public class BlockParentPillar extends BlockRotatable
 	}
 
 	@Override
-	public BlockParentPillar setSoundType(SoundType type)
+	public BlockParentPillar setSoundType(final SoundType type)
 	{
 		super.setSoundType(type);
 
@@ -36,7 +38,7 @@ public class BlockParentPillar extends BlockRotatable
 	}
 
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
+	public void addInformation(final ItemStack stack, @Nullable final World player, final List<String> tooltip, final ITooltipFlag advanced)
 	{
 		tooltip.add(TextFormatting.GRAY + "Pillar");
 	}

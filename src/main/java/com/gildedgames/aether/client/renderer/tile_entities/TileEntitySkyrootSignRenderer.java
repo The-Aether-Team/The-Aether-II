@@ -22,17 +22,18 @@ public class TileEntitySkyrootSignRenderer extends TileEntitySpecialRenderer<Til
 	private final ModelSign model = new ModelSign();
 
 	@Override
-	public void renderTileEntityAt(TileEntitySkyrootSign te, double x, double y, double z, float partialTicks, int destroyStage)
+	public void render(
+			final TileEntitySkyrootSign te, final double x, final double y, final double z, final float partialTicks, final int destroyStage, final float alpha)
 	{
-		Block block = te.getBlockType();
+		final Block block = te.getBlockType();
 
 		GlStateManager.pushMatrix();
 
-		float modelScale = 0.6666667F;
+		final float modelScale = 0.6666667F;
 
 		if (block == BlocksAether.standing_skyroot_sign)
 		{
-			float direction = (te.getBlockMetadata() * 360) / 16.0F;
+			final float direction = (te.getBlockMetadata() * 360) / 16.0F;
 
 			GlStateManager.translate(x + 0.5F, y + 0.75F * modelScale, z + 0.5F);
 			GlStateManager.rotate(-direction, 0.0F, 1.0F, 0.0F);
@@ -41,7 +42,7 @@ public class TileEntitySkyrootSignRenderer extends TileEntitySpecialRenderer<Til
 		}
 		else
 		{
-			int direction = te.getBlockMetadata();
+			final int direction = te.getBlockMetadata();
 
 			float angle = 0.0F;
 
@@ -90,14 +91,14 @@ public class TileEntitySkyrootSignRenderer extends TileEntitySpecialRenderer<Til
 
 		GlStateManager.popMatrix();
 
-		FontRenderer fontrenderer = this.getFontRenderer();
+		final FontRenderer fontrenderer = this.getFontRenderer();
 
-		float textScale = 0.015625F * modelScale;
+		final float textScale = 0.015625F * modelScale;
 		GlStateManager.translate(0.0F, 0.5F * modelScale, 0.07F * modelScale);
 		GlStateManager.scale(textScale, -textScale, textScale);
 		GL11.glNormal3f(0.0F, 0.0F, -1.0F * textScale);
 		GlStateManager.depthMask(false);
-		int fontColor = 0xFFFFFFFF;
+		final int fontColor = 0xFFFFFFFF;
 
 		if (destroyStage < 0)
 		{
@@ -107,9 +108,9 @@ public class TileEntitySkyrootSignRenderer extends TileEntitySpecialRenderer<Til
 			{
 				if (te.signText[i] != null)
 				{
-					ITextComponent text = te.signText[i];
+					final ITextComponent text = te.signText[i];
 
-					List<ITextComponent> list = GuiUtilRenderComponents.splitText(text, 90, fontrenderer, false, true);
+					final List<ITextComponent> list = GuiUtilRenderComponents.splitText(text, 90, fontrenderer, false, true);
 
 					String line = list.size() > 0 ? list.get(0).getFormattedText() : "";
 

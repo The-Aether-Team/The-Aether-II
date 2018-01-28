@@ -9,15 +9,15 @@ public abstract class GuiElement extends GuiButton
 
 	protected boolean hasInit;
 
-	public GuiElement(int elementId, int x, int y)
+	public GuiElement(final int elementId, final int x, final int y)
 	{
 		super(elementId, x, y, "");
 	}
 
 	@Override
-	public final void drawButton(Minecraft mc, int mouseX, int mouseY)
+	public final void drawButton(final Minecraft mc, final int mouseX, final int mouseY, final float partialTicks)
 	{
-		FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
+		final FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
 
 		if (!this.hasInit)
 		{

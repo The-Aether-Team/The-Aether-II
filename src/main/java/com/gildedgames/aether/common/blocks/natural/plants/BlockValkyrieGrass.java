@@ -15,7 +15,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
@@ -34,12 +33,6 @@ import java.util.Random;
 
 public class BlockValkyrieGrass extends BlockAetherPlant implements IBlockMultiName, IGrowable
 {
-	private static final AxisAlignedBB GRASS_SHORT_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.3D, 0.9D);
-	private static final AxisAlignedBB GRASS_NORMAL_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.6D, 0.9D);
-	private static final AxisAlignedBB GRASS_LONG_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.9D, 0.9D);
-
-	private static final int VALKYRIE_GRASS_SPROUT = 0, VALKYRIE_GRASS_MID = 1, VALKYRIE_GRASS_FULL = 2;
-
 	public static final BlockVariant SPROUT = new BlockVariant(0, "sprout"),
 			MID = new BlockVariant(1, "mid"),
 			FULL = new BlockVariant(2, "full");
@@ -47,6 +40,14 @@ public class BlockValkyrieGrass extends BlockAetherPlant implements IBlockMultiN
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", SPROUT, MID, FULL);
 
 	public static final PropertyBool PROPERTY_HARVESTABLE = PropertyBool.create("harvestable");
+
+	private static final AxisAlignedBB GRASS_SHORT_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.3D, 0.9D);
+
+	private static final AxisAlignedBB GRASS_NORMAL_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.6D, 0.9D);
+
+	private static final AxisAlignedBB GRASS_LONG_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.9D, 0.9D);
+
+	private static final int VALKYRIE_GRASS_SPROUT = 0, VALKYRIE_GRASS_MID = 1, VALKYRIE_GRASS_FULL = 2;
 
 	public BlockValkyrieGrass()
 	{
@@ -65,46 +66,48 @@ public class BlockValkyrieGrass extends BlockAetherPlant implements IBlockMultiN
 	}
 
 	@Override
-	public int getMetaFromState(IBlockState state)
+	public int getMetaFromState(final IBlockState state)
 	{
 		return state.getValue(PROPERTY_VARIANT).getMeta();
 	}
 
 	@Override
-	public IBlockState getStateFromMeta(int meta)
+	public IBlockState getStateFromMeta(final int meta)
 	{
 		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta));
 	}
 
 	@Override
-	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+	public IBlockState getStateForPlacement(final World worldIn, final BlockPos pos, final EnumFacing facing, final float hitX, final float hitY,
+			final float hitZ, final int meta, final EntityLivingBase placer)
 	{
-		if (placer.getHeldItemMainhand().getMetadata() == VALKYRIE_GRASS_FULL) {
+		if (placer.getHeldItemMainhand().getMetadata() == VALKYRIE_GRASS_FULL)
+		{
 			return this.getStateFromMeta(meta).withProperty(PROPERTY_HARVESTABLE, true).withProperty(PROPERTY_VARIANT, FULL);
 		}
 		return this.getStateFromMeta(meta).withProperty(PROPERTY_HARVESTABLE, false).withProperty(PROPERTY_VARIANT, SPROUT);
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack)
+	public String getUnlocalizedName(final ItemStack stack)
 	{
 		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
 	}
 
 	@Override
-	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient)
+	public boolean canGrow(final World worldIn, final BlockPos pos, final IBlockState state, final boolean isClient)
 	{
 		return !state.getValue(PROPERTY_HARVESTABLE);
 	}
 
 	@Override
-	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state)
+	public boolean canUseBonemeal(final World worldIn, final Random rand, final BlockPos pos, final IBlockState state)
 	{
 		return !state.getValue(PROPERTY_HARVESTABLE);
 	}
 
 	@Override
-	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
+	public void updateTick(final World world, final BlockPos pos, final IBlockState state, final Random rand)
 	{
 		if (!state.getValue(PROPERTY_HARVESTABLE))
 		{
@@ -120,7 +123,7 @@ public class BlockValkyrieGrass extends BlockAetherPlant implements IBlockMultiN
 
 	// called when the plant grows.
 	@Override
-	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state)
+	public void grow(final World worldIn, final Random rand, final BlockPos pos, final IBlockState state)
 	{
 		// if kirrid grass is anything but fully grown.
 		if (!state.getValue(PROPERTY_HARVESTABLE))
@@ -139,13 +142,13 @@ public class BlockValkyrieGrass extends BlockAetherPlant implements IBlockMultiN
 	}
 
 	@Override
-	public int damageDropped(IBlockState state)
+	public int damageDropped(final IBlockState state)
 	{
 		return VALKYRIE_GRASS_SPROUT;
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	public AxisAlignedBB getBoundingBox(final IBlockState state, final IBlockAccess source, final BlockPos pos)
 	{
 		if (state.getValue(PROPERTY_VARIANT) == SPROUT)
 		{
@@ -164,7 +167,7 @@ public class BlockValkyrieGrass extends BlockAetherPlant implements IBlockMultiN
 	}
 
 	@Override
-	public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest)
+	public boolean removedByPlayer(final IBlockState state, final World world, final BlockPos pos, final EntityPlayer player, final boolean willHarvest)
 	{
 		if (state.getValue(PROPERTY_HARVESTABLE))
 		{
@@ -177,7 +180,7 @@ public class BlockValkyrieGrass extends BlockAetherPlant implements IBlockMultiN
 
 			if (!world.isRemote)
 			{
-				Random random = new Random();
+				final Random random = new Random();
 				Block.spawnAsEntity(world, pos, new ItemStack(ItemsAether.valkyrie_wings));
 
 				// randomly spawn a kirrid grass sprout
@@ -198,14 +201,14 @@ public class BlockValkyrieGrass extends BlockAetherPlant implements IBlockMultiN
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks(final CreativeTabs tab, final NonNullList<ItemStack> list)
 	{
-		for (BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
+		for (final BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
 		{
 			// No reason to have the mid variant (as an option) in creative inventory.
 			if (variant != MID)
 			{
-				list.add(new ItemStack(item, 1, variant.getMeta()));
+				list.add(new ItemStack(this, 1, variant.getMeta()));
 			}
 		}
 	}

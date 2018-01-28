@@ -11,7 +11,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
@@ -42,7 +41,7 @@ public class BlockHolystone extends Block implements IBlockMultiName
 	}
 
 	@Override
-	public boolean isReplaceableOreGen(IBlockState state, IBlockAccess world, BlockPos pos, Predicate<IBlockState> target)
+	public boolean isReplaceableOreGen(final IBlockState state, final IBlockAccess world, final BlockPos pos, final Predicate<IBlockState> target)
 	{
 		if (target.apply(BlocksAether.holystone.getDefaultState()))
 		{
@@ -57,33 +56,33 @@ public class BlockHolystone extends Block implements IBlockMultiName
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks(final CreativeTabs tab, final NonNullList<ItemStack> list)
 	{
-		for (BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
+		for (final BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
 		{
 			if (variant != BLOOD_MOSS_HOLYSTONE)
 			{
-				list.add(new ItemStack(itemIn, 1, variant.getMeta()));
+				list.add(new ItemStack(this, 1, variant.getMeta()));
 			}
 		}
 	}
 
 	@Override
-	public float getBlockHardness(IBlockState blockState, World world, BlockPos pos)
+	public float getBlockHardness(final IBlockState blockState, final World world, final BlockPos pos)
 	{
-		IBlockState state = world.getBlockState(pos);
+		final IBlockState state = world.getBlockState(pos);
 
 		return state.getBlock() == this && state.getValue(PROPERTY_VARIANT) == BLOOD_MOSS_HOLYSTONE ? -1.0f : this.blockHardness;
 	}
 
 	@Override
-	public IBlockState getStateFromMeta(int meta)
+	public IBlockState getStateFromMeta(final int meta)
 	{
 		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta & 7));
 	}
 
 	@Override
-	public int getMetaFromState(IBlockState state)
+	public int getMetaFromState(final IBlockState state)
 	{
 		return state.getValue(PROPERTY_VARIANT).getMeta();
 	}
@@ -95,13 +94,13 @@ public class BlockHolystone extends Block implements IBlockMultiName
 	}
 
 	@Override
-	public int damageDropped(IBlockState state)
+	public int damageDropped(final IBlockState state)
 	{
 		return state.getValue(PROPERTY_VARIANT).getMeta();
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack)
+	public String getUnlocalizedName(final ItemStack stack)
 	{
 		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
 	}

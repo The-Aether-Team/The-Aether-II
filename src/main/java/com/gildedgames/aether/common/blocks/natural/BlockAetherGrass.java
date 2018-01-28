@@ -19,7 +19,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -53,11 +52,11 @@ public class BlockAetherGrass extends BlockGrass implements IBlockMultiName
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(final Item item, final CreativeTabs tab, final NonNullList<ItemStack> list)
+	public void getSubBlocks(final CreativeTabs tab, final NonNullList<ItemStack> list)
 	{
 		for (final BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
 		{
-			list.add(new ItemStack(item, 1, variant.getMeta()));
+			list.add(new ItemStack(this, 1, variant.getMeta()));
 		}
 	}
 
@@ -241,11 +240,14 @@ public class BlockAetherGrass extends BlockGrass implements IBlockMultiName
 		}
 		else if (playerIn.getHeldItemOffhand().getItem() == ItemsAether.swet_jelly)
 		{
-			if (!worldIn.isRemote && hand == EnumHand.OFF_HAND) {
-				if (!canGrow(worldIn, pos, state, true)) {
+			if (!worldIn.isRemote && hand == EnumHand.OFF_HAND)
+			{
+				if (!canGrow(worldIn, pos, state, true))
+				{
 					return false;
 				}
-				if (!playerIn.isCreative()) {
+				if (!playerIn.isCreative())
+				{
 					playerIn.getHeldItemOffhand().shrink(1);
 				}
 				this.grow(worldIn, new Random(), pos, state);

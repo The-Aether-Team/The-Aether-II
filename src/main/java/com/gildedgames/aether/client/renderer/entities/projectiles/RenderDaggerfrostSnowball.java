@@ -2,9 +2,9 @@ package com.gildedgames.aether.client.renderer.entities.projectiles;
 
 import com.gildedgames.aether.client.util.SpriteGeneric;
 import com.gildedgames.aether.common.entities.projectiles.EntityDaggerfrostSnowball;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -21,7 +21,7 @@ public class RenderDaggerfrostSnowball extends Render<EntityDaggerfrostSnowball>
 
 	public static final SpriteGeneric SPRITE = new SpriteGeneric("daggerfrost_snowball.png", 16, 16);
 
-	public RenderDaggerfrostSnowball(RenderManager renderManager)
+	public RenderDaggerfrostSnowball(final RenderManager renderManager)
 	{
 		super(renderManager);
 
@@ -29,7 +29,8 @@ public class RenderDaggerfrostSnowball extends Render<EntityDaggerfrostSnowball>
 	}
 
 	@Override
-	public void doRender(EntityDaggerfrostSnowball entity, double posX, double posY, double posZ, float entityYaw, float partialTicks)
+	public void doRender(final EntityDaggerfrostSnowball entity, final double posX, final double posY, final double posZ, final float entityYaw,
+			final float partialTicks)
 	{
 		GlStateManager.pushMatrix();
 		this.bindEntityTexture(entity);
@@ -42,8 +43,8 @@ public class RenderDaggerfrostSnowball extends Render<EntityDaggerfrostSnowball>
 
 		this.bindEntityTexture(entity);
 
-		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer renderer = tessellator.getBuffer();
+		final Tessellator tessellator = Tessellator.getInstance();
+		final BufferBuilder renderer = tessellator.getBuffer();
 
 		this.renderEntity(renderer, SPRITE);
 
@@ -55,12 +56,12 @@ public class RenderDaggerfrostSnowball extends Render<EntityDaggerfrostSnowball>
 		super.doRender(entity, posX, posY, posZ, entityYaw, partialTicks);
 	}
 
-	private void renderEntity(VertexBuffer renderer, TextureAtlasSprite icon)
+	private void renderEntity(final BufferBuilder renderer, final TextureAtlasSprite icon)
 	{
-		float f = icon.getMinU();
-		float f1 = icon.getMaxU();
-		float f2 = icon.getMinV();
-		float f3 = icon.getMaxV();
+		final float f = icon.getMinU();
+		final float f1 = icon.getMaxU();
+		final float f2 = icon.getMinV();
+		final float f3 = icon.getMaxV();
 
 		GlStateManager.rotate(180.0F - this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
 		GlStateManager.rotate(-this.renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
@@ -74,7 +75,7 @@ public class RenderDaggerfrostSnowball extends Render<EntityDaggerfrostSnowball>
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(EntityDaggerfrostSnowball entity)
+	protected ResourceLocation getEntityTexture(final EntityDaggerfrostSnowball entity)
 	{
 		return TEXTURE;
 	}

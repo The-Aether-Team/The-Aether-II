@@ -3,9 +3,9 @@ package com.gildedgames.aether.client.renderer.entities.projectiles;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.projectiles.EntityDart;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -27,13 +27,13 @@ public class RenderDart extends Render<EntityDart>
 		dartTextures.put(ItemDartType.PHOENIX, AetherCore.getResource("textures/entities/darts/golden_dart.png"));
 	}
 
-	public RenderDart(RenderManager renderManager)
+	public RenderDart(final RenderManager renderManager)
 	{
 		super(renderManager);
 	}
 
 	@Override
-	public void doRender(EntityDart dart, double posX, double posY, double posZ, float entityYaw, float partialTicks)
+	public void doRender(final EntityDart dart, final double posX, final double posY, final double posZ, final float entityYaw, final float partialTicks)
 	{
 		this.bindEntityTexture(dart);
 
@@ -44,26 +44,26 @@ public class RenderDart extends Render<EntityDart>
 		GlStateManager.rotate(dart.prevRotationYaw + (dart.rotationYaw - dart.prevRotationYaw) * partialTicks - 90.0F, 0.0F, 1.0F, 0.0F);
 		GlStateManager.rotate(dart.prevRotationPitch + (dart.rotationPitch - dart.prevRotationPitch) * partialTicks, 0.0F, 0.0F, 1.0F);
 
-		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer renderer = tessellator.getBuffer();
+		final Tessellator tessellator = Tessellator.getInstance();
+		final BufferBuilder renderer = tessellator.getBuffer();
 
-		int i = 0;
-		float f = 0.0F;
-		float f1 = 0.5F;
-		float f2 = (float) (i * 10) / 32.0F;
-		float f3 = (float) (5 + i * 10) / 32.0F;
-		float f4 = 0.0F;
-		float f5 = 0.15625F;
-		float f6 = (float) (5 + i * 10) / 32.0F;
-		float f7 = (float) (10 + i * 10) / 32.0F;
-		float f8 = 0.05625F;
-		float f9 = (float) dart.arrowShake - partialTicks;
+		final int i = 0;
+		final float f = 0.0F;
+		final float f1 = 0.5F;
+		final float f2 = (float) (i * 10) / 32.0F;
+		final float f3 = (float) (5 + i * 10) / 32.0F;
+		final float f4 = 0.0F;
+		final float f5 = 0.15625F;
+		final float f6 = (float) (5 + i * 10) / 32.0F;
+		final float f7 = (float) (10 + i * 10) / 32.0F;
+		final float f8 = 0.05625F;
+		final float f9 = (float) dart.arrowShake - partialTicks;
 
 		GlStateManager.enableRescaleNormal();
 
 		if (f9 > 0.0F)
 		{
-			float f10 = -MathHelper.sin(f9 * 3.0F) * f9;
+			final float f10 = -MathHelper.sin(f9 * 3.0F) * f9;
 
 			GlStateManager.rotate(f10, 0.0F, 0.0F, 1.0F);
 		}
@@ -110,7 +110,7 @@ public class RenderDart extends Render<EntityDart>
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(EntityDart dart)
+	protected ResourceLocation getEntityTexture(final EntityDart dart)
 	{
 		return dartTextures.get(dart.getDartType());
 	}

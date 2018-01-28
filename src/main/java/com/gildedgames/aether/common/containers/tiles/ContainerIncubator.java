@@ -125,12 +125,12 @@ public class ContainerIncubator extends Container
 			final IContainerListener iContainerListener = (IContainerListener) this.listeners.get(i);
 			if (this.currentHeatingProgress != this.tile.getField(0))
 			{
-				iContainerListener.sendProgressBarUpdate(this, 0, this.tile.getField(0));
+				iContainerListener.sendWindowProperty(this, 0, this.tile.getField(0));
 			}
 
 			if (this.eggTimer != this.tile.getField(1))
 			{
-				iContainerListener.sendProgressBarUpdate(this, 1, this.tile.getField(1));
+				iContainerListener.sendWindowProperty(this, 1, this.tile.getField(1));
 			}
 		}
 

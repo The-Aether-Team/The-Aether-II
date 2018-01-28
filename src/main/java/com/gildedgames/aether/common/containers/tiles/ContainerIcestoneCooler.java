@@ -18,12 +18,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ContainerIcestoneCooler extends Container
 {
 	private final IInventory tileCooler;
+
 	private int coolTime;
+
 	private int totalCoolTime;
+
 	private int coolerCoolTime;
+
 	private int currentItemCoolTime;
 
-	public ContainerIcestoneCooler(InventoryPlayer playerInventory, IInventory coolerInventory)
+	public ContainerIcestoneCooler(final InventoryPlayer playerInventory, final IInventory coolerInventory)
 	{
 		this.tileCooler = coolerInventory;
 		this.addSlotToContainer(new SlotIrradiatedItem(coolerInventory, 0, 56, 17));
@@ -45,7 +49,7 @@ public class ContainerIcestoneCooler extends Container
 	}
 
 	@Override
-	public void addListener(IContainerListener listener)
+	public void addListener(final IContainerListener listener)
 	{
 		super.addListener(listener);
 		listener.sendAllWindowProperties(this, this.tileCooler);
@@ -57,26 +61,26 @@ public class ContainerIcestoneCooler extends Container
 		super.detectAndSendChanges();
 		for (int i = 0; i < this.listeners.size(); ++i)
 		{
-			IContainerListener iContainerListener = (IContainerListener)this.listeners.get(i);
+			final IContainerListener iContainerListener = (IContainerListener) this.listeners.get(i);
 
 			if (this.coolerCoolTime != this.tileCooler.getField(0))
 			{
-				iContainerListener.sendProgressBarUpdate(this, 0, this.tileCooler.getField(0));
+				iContainerListener.sendWindowProperty(this, 0, this.tileCooler.getField(0));
 			}
 
 			if (this.currentItemCoolTime != this.tileCooler.getField(1))
 			{
-				iContainerListener.sendProgressBarUpdate(this, 1, this.tileCooler.getField(1));
+				iContainerListener.sendWindowProperty(this, 1, this.tileCooler.getField(1));
 			}
 
 			if (this.coolTime != this.tileCooler.getField(2))
 			{
-				iContainerListener.sendProgressBarUpdate(this, 2, this.tileCooler.getField(2));
+				iContainerListener.sendWindowProperty(this, 2, this.tileCooler.getField(2));
 			}
 
 			if (this.totalCoolTime != this.tileCooler.getField(3))
 			{
-				iContainerListener.sendProgressBarUpdate(this, 3, this.tileCooler.getField(3));
+				iContainerListener.sendWindowProperty(this, 3, this.tileCooler.getField(3));
 			}
 
 			this.coolerCoolTime = this.tileCooler.getField(0);
@@ -87,27 +91,28 @@ public class ContainerIcestoneCooler extends Container
 		}
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
-	public void updateProgressBar(int id, int data)
+	public void updateProgressBar(final int id, final int data)
 	{
 		this.tileCooler.setField(id, data);
 	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer playerIn)
+	public boolean canInteractWith(final EntityPlayer playerIn)
 	{
 		return this.tileCooler.isUsableByPlayer(playerIn);
 	}
 
-
-	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
+	@Override
+	public ItemStack transferStackInSlot(final EntityPlayer playerIn, final int index)
 	{
 		ItemStack itemstack = ItemStack.EMPTY;
-		Slot slot = (Slot)this.inventorySlots.get(index);
+		final Slot slot = (Slot) this.inventorySlots.get(index);
 
 		if (slot != null && slot.getHasStack())
 		{
-			ItemStack itemstack1 = slot.getStack();
+			final ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
 			if (index == 2)

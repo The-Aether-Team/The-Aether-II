@@ -21,10 +21,13 @@ public class TileEntitySkyrootChestRenderer extends TileEntitySpecialRenderer<Ti
 	// This is a stupid hack. See TileEntityItemStackRenderer.
 	private static final TileEntitySkyrootChest nullChest = new TileEntitySkyrootChest();
 
-	private ModelChest simpleChest = new ModelChest(), largeChest = new ModelLargeChest();
+	private final ModelChest simpleChest = new ModelChest();
+
+	private final ModelChest largeChest = new ModelLargeChest();
 
 	@Override
-	public void renderTileEntityAt(TileEntitySkyrootChest chest, double x, double y, double z, float partialTicks, int destroyStage)
+	public void render(TileEntitySkyrootChest chest, final double x, final double y, final double z, final float partialTicks, final int destroyStage,
+			final float alpha)
 	{
 		int metadata;
 
@@ -39,7 +42,7 @@ public class TileEntitySkyrootChestRenderer extends TileEntitySpecialRenderer<Ti
 		}
 		else
 		{
-			Block block = chest.getBlockType();
+			final Block block = chest.getBlockType();
 			metadata = chest.getBlockMetadata();
 
 			if (block instanceof BlockSkyrootChest && metadata == 0)
@@ -54,7 +57,7 @@ public class TileEntitySkyrootChestRenderer extends TileEntitySpecialRenderer<Ti
 
 		if (chest.adjacentChestZNeg == null && chest.adjacentChestXNeg == null)
 		{
-			ModelChest modelchest;
+			final ModelChest modelchest;
 
 			if (chest.adjacentChestXPos == null && chest.adjacentChestZPos == null)
 			{
@@ -112,18 +115,18 @@ public class TileEntitySkyrootChestRenderer extends TileEntitySpecialRenderer<Ti
 
 			switch (metadata)
 			{
-			case 2:
-				angle = 180;
-				break;
-			case 3:
-				angle = 0;
-				break;
-			case 4:
-				angle = 90;
-				break;
-			case 5:
-				angle = -90;
-				break;
+				case 2:
+					angle = 180;
+					break;
+				case 3:
+					angle = 0;
+					break;
+				case 4:
+					angle = 90;
+					break;
+				case 5:
+					angle = -90;
+					break;
 			}
 
 			if (metadata == 2 && chest.adjacentChestXPos != null)

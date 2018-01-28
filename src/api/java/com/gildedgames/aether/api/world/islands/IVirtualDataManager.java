@@ -1,13 +1,13 @@
 package com.gildedgames.aether.api.world.islands;
 
-import com.gildedgames.aether.api.orbis_core.api.BlueprintDefinition;
-import com.gildedgames.aether.api.orbis_core.api.ICreationData;
-import com.gildedgames.aether.api.orbis_core.api.PlacedBlueprint;
-import com.gildedgames.aether.api.util.NBT;
 import com.gildedgames.aether.api.world.TemplateInstance;
-import com.gildedgames.aether.api.world.generation.IBlockAccessExtended;
 import com.gildedgames.aether.api.world.generation.TemplateDefinition;
 import com.gildedgames.aether.api.world.generation.TemplateLoc;
+import com.gildedgames.orbis.api.core.BlueprintDefinition;
+import com.gildedgames.orbis.api.core.ICreationData;
+import com.gildedgames.orbis.api.core.PlacedBlueprint;
+import com.gildedgames.orbis.api.processing.IBlockAccessExtended;
+import com.gildedgames.orbis.api.util.mc.NBT;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;

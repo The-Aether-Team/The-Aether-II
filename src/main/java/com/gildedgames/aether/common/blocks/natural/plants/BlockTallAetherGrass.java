@@ -25,15 +25,17 @@ import java.util.Random;
 
 public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable, IBlockMultiName
 {
-	private static final AxisAlignedBB GRASS_SHORT_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.3D, 0.9D);
-	private static final AxisAlignedBB GRASS_NORMAL_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.6D, 0.9D);
-	private static final AxisAlignedBB GRASS_LONG_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.9D, 0.9D);
-
 	public static final BlockVariant SHORT = new BlockVariant(0, "short"),
 			NORMAL = new BlockVariant(1, "normal"),
 			LONG = new BlockVariant(2, "long");
 
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", SHORT, NORMAL, LONG);
+
+	private static final AxisAlignedBB GRASS_SHORT_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.3D, 0.9D);
+
+	private static final AxisAlignedBB GRASS_NORMAL_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.6D, 0.9D);
+
+	private static final AxisAlignedBB GRASS_LONG_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.9D, 0.9D);
 
 	public BlockTallAetherGrass()
 	{
@@ -46,30 +48,30 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks(final CreativeTabs tab, final NonNullList<ItemStack> list)
 	{
-		for (BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
+		for (final BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
 		{
-			list.add(new ItemStack(item, 1, variant.getMeta()));
+			list.add(new ItemStack(this, 1, variant.getMeta()));
 		}
 	}
 
 	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
+	public Item getItemDropped(final IBlockState state, final Random rand, final int fortune)
 	{
 		return null;
 	}
 
 	@Override
-	public boolean isShearable(ItemStack item, IBlockAccess world, BlockPos pos)
+	public boolean isShearable(final ItemStack item, final IBlockAccess world, final BlockPos pos)
 	{
 		return true;
 	}
 
 	@Override
-	public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune)
+	public List<ItemStack> onSheared(final ItemStack item, final IBlockAccess world, final BlockPos pos, final int fortune)
 	{
-		List<ItemStack> drops = new ArrayList<>();
+		final List<ItemStack> drops = new ArrayList<>();
 		drops.add(new ItemStack(this, 1, this.getMetaFromState(world.getBlockState(pos))));
 
 		return drops;
@@ -83,7 +85,7 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	public AxisAlignedBB getBoundingBox(final IBlockState state, final IBlockAccess source, final BlockPos pos)
 	{
 		if (state.getValue(PROPERTY_VARIANT) == SHORT)
 		{
@@ -102,21 +104,21 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 	}
 
 	@Override
-	public IBlockState getStateFromMeta(int meta)
+	public IBlockState getStateFromMeta(final int meta)
 	{
-		BlockVariant variant = PROPERTY_VARIANT.fromMeta(meta);
+		final BlockVariant variant = PROPERTY_VARIANT.fromMeta(meta);
 
 		return this.getDefaultState().withProperty(PROPERTY_VARIANT, variant);
 	}
 
 	@Override
-	public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos)
+	public boolean isReplaceable(final IBlockAccess worldIn, final BlockPos pos)
 	{
 		return true;
 	}
 
 	@Override
-	public int getMetaFromState(IBlockState state)
+	public int getMetaFromState(final IBlockState state)
 	{
 		return state.getValue(PROPERTY_VARIANT).getMeta();
 	}
@@ -128,13 +130,13 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack)
+	public String getUnlocalizedName(final ItemStack stack)
 	{
 		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
 	}
 
 	@Override
-	public int damageDropped(IBlockState state)
+	public int damageDropped(final IBlockState state)
 	{
 		return state.getValue(PROPERTY_VARIANT).getMeta();
 	}

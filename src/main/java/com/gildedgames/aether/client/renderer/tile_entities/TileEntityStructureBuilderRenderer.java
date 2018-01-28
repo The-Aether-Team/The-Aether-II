@@ -1,9 +1,9 @@
 package com.gildedgames.aether.client.renderer.tile_entities;
 
 import com.gildedgames.aether.common.entities.tiles.builder.TileEntityStructureBuilder;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.math.BlockPos;
@@ -11,21 +11,24 @@ import net.minecraft.util.math.BlockPos;
 public class TileEntityStructureBuilderRenderer extends TileEntitySpecialRenderer<TileEntityStructureBuilder>
 {
 	@Override
-	public void renderTileEntityAt(TileEntityStructureBuilder te, double x, double y, double z, float partialTicks, int destroyStage)
+	public void render(final TileEntityStructureBuilder te, final double x, final double y, final double z, final float partialTicks,
+			final int destroyStage, final float alpha)
 	{
-		super.renderTileEntityAt(te, x, y, z, partialTicks, destroyStage);
+		super.render(te, x, y, z, partialTicks, destroyStage, alpha);
 
-		BlockPos fromBB = te.getStructureData().offset;
-		BlockPos toBB = fromBB.add(te.getStructureData().size).add(1, 1, 1);
+		final BlockPos fromBB = te.getStructureData().offset;
+		final BlockPos toBB = fromBB.add(te.getStructureData().size).add(1, 1, 1);
 
-		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer buffer = tessellator.getBuffer();
+		final Tessellator tessellator = Tessellator.getInstance();
+		final BufferBuilder buffer = tessellator.getBuffer();
 
 		GlStateManager.disableFog();
 		GlStateManager.disableLighting();
 		GlStateManager.disableTexture2D();
 		GlStateManager.enableBlend();
-		GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+		GlStateManager
+				.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE,
+						GlStateManager.DestFactor.ZERO);
 		GlStateManager.glLineWidth(2.0F);
 
 		this.setLightmapDisabled(true);
@@ -44,7 +47,9 @@ public class TileEntityStructureBuilderRenderer extends TileEntitySpecialRendere
 		GlStateManager.enableFog();
 	}
 
-	private void renderBox(Tessellator tessellator, VertexBuffer buffer, double x1, double y1, double z1, double x2, double y2, double z2, int color1, int color2, int color3)
+	private void renderBox(
+			final Tessellator tessellator, final BufferBuilder buffer, final double x1, final double y1, final double z1, final double x2, final double y2,
+			final double z2, final int color1, final int color2, final int color3)
 	{
 		buffer.begin(3, DefaultVertexFormats.POSITION_COLOR);
 		buffer.pos(x1, y1, z1).color(color2, color2, color2, 0.0F).endVertex();
@@ -70,7 +75,7 @@ public class TileEntityStructureBuilderRenderer extends TileEntitySpecialRendere
 	}
 
 	@Override
-	public boolean isGlobalRenderer(TileEntityStructureBuilder te)
+	public boolean isGlobalRenderer(final TileEntityStructureBuilder te)
 	{
 		return true;
 	}

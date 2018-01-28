@@ -17,20 +17,21 @@ public class LayerGlowing<T extends EntityLiving> implements LayerRenderer<T>
 
 	private final RenderLiving<T> renderer;
 
-	public LayerGlowing(RenderLiving<T> renderer, final ResourceLocation glowingLayer)
+	public LayerGlowing(final RenderLiving<T> renderer, final ResourceLocation glowingLayer)
 	{
 		this(renderer, () -> glowingLayer);
 	}
 
-	public LayerGlowing(RenderLiving<T> renderer, Supplier<ResourceLocation> glowingLayer)
+	public LayerGlowing(final RenderLiving<T> renderer, final Supplier<ResourceLocation> glowingLayer)
 	{
 		this.renderer = renderer;
 		this.glowingLayer = glowingLayer;
 	}
 
 	@Override
-	public void doRenderLayer(T entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw,
-			float headPitch, float scale)
+	public void doRenderLayer(final T entity, final float limbSwing, final float limbSwingAmount, final float partialTicks, final float ageInTicks,
+			final float netHeadYaw,
+			final float headPitch, final float scale)
 	{
 		if (this.glowingLayer.get() == null)
 		{
@@ -58,12 +59,12 @@ public class LayerGlowing<T extends EntityLiving> implements LayerRenderer<T>
 
 		this.renderer.getMainModel().render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
-		i = entity.getBrightnessForRender(partialTicks);
+		i = entity.getBrightnessForRender();
 		j = i % 65536;
 		k = i / 65536;
 
 		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) j, (float) k);
-		this.renderer.setLightmap(entity, partialTicks);
+		this.renderer.setLightmap(entity);
 
 		GlStateManager.enableLighting();
 		GlStateManager.disableBlend();

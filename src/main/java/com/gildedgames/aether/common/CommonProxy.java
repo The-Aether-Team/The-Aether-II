@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.IAetherServices;
-import com.gildedgames.aether.api.orbis_core.OrbisCore;
 import com.gildedgames.aether.api.registry.IContentRegistry;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherHooks;
 import com.gildedgames.aether.common.entities.util.MountEventHandler;
@@ -10,8 +9,6 @@ import com.gildedgames.aether.common.items.tools.ItemToolHandler;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
 import com.gildedgames.aether.common.registry.ContentRegistry;
 import com.gildedgames.aether.common.world.SectorEventHandler;
-import com.gildedgames.orbis.common.Orbis;
-import com.gildedgames.orbis.common.OrbisDeveloperModeEvents;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumParticleTypes;
@@ -40,9 +37,6 @@ public class CommonProxy implements IAetherServices
 		}
 
 		this.contentRegistry.preInit();
-
-		OrbisCore.preInit();
-		Orbis.preInit();
 	}
 
 	public void init(final FMLInitializationEvent event)
@@ -57,10 +51,7 @@ public class CommonProxy implements IAetherServices
 		MinecraftForge.EVENT_BUS.register(ItemToolHandler.class);
 		MinecraftForge.EVENT_BUS.register(ItemSkyrootSword.class);
 		MinecraftForge.EVENT_BUS.register(QuicksoilProcessor.class);
-
-		MinecraftForge.EVENT_BUS.register(OrbisDeveloperModeEvents.class);
 		MinecraftForge.EVENT_BUS.register(SectorEventHandler.class);
-		MinecraftForge.EVENT_BUS.register(OrbisCore.class);
 	}
 
 	public void spawnJumpParticles(final World world, final double x, final double y, final double z, final double radius, final int quantity)

@@ -1,8 +1,8 @@
 package com.gildedgames.aether.client.renderer.tile_entities;
 
 import com.gildedgames.aether.client.models.entities.tile.ModelPresent;
-import com.gildedgames.aether.common.items.blocks.ItemBlockPresent;
 import com.gildedgames.aether.common.entities.tiles.TileEntityPresent;
+import com.gildedgames.aether.common.items.blocks.ItemBlockPresent;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
@@ -33,7 +33,9 @@ public class TileEntityPresentRenderer extends TileEntitySpecialRenderer<TileEnt
 	private final Random random = new Random();
 
 	@Override
-	public void renderTileEntityAt(TileEntityPresent present, double x, double y, double z, float partialTicks, int destroyStage)
+	public void render(
+			final TileEntityPresent present, final double x, final double y, final double z, final float partialTicks, final int destroyStage,
+			final float alpha)
 	{
 		GlStateManager.pushMatrix();
 
@@ -59,9 +61,9 @@ public class TileEntityPresentRenderer extends TileEntitySpecialRenderer<TileEnt
 		{
 			this.random.setSeed((long) (present.getPos().getX() + present.getPos().getY() + present.getPos().getZ()) * 5L);
 
-			float offset = this.random.nextFloat() * 0.1f;
-			float scale = 1f + ((this.random.nextFloat() * 0.1f) - 0.1f);
-			float rotate = this.random.nextFloat() * 180f;
+			final float offset = this.random.nextFloat() * 0.1f;
+			final float scale = 1f + ((this.random.nextFloat() * 0.1f) - 0.1f);
+			final float rotate = this.random.nextFloat() * 180f;
 
 			GlStateManager.translate(offset, 0, offset);
 			GlStateManager.rotate(180f, 1f, 0f, 1f);

@@ -3,26 +3,25 @@ package com.gildedgames.aether.common.capabilities.entity.player;
 import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.api.player.IPlayerAether;
-import com.gildedgames.aether.api.util.BlockUtil;
 import com.gildedgames.aether.api.world.ISector;
 import com.gildedgames.aether.api.world.IslandSectorHelper;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.CommonEvents;
-import com.gildedgames.aether.common.capabilities.world.chunk.ChunkAttachment;
 import com.gildedgames.aether.common.entities.util.shared.SharedAetherAttributes;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketMarkPlayerDeath;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.world.util.TeleporterGeneric;
+import com.gildedgames.orbis.api.util.mc.BlockUtil;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTBase;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
@@ -143,8 +142,8 @@ public class PlayerAetherHooks
 	@SubscribeEvent
 	public static void onPlaceBlockEvent(final BlockEvent.PlaceEvent event)
 	{
-		final IPlacementFlagCapability data = ChunkAttachment.get(event.getWorld())
-				.getAttachment(new ChunkPos(event.getPos()), AetherCapabilities.CHUNK_PLACEMENT_FLAG);
+		final IPlacementFlagCapability data = event.getWorld().getChunkFromBlockCoords(event.getPos())
+				.getCapability(AetherCapabilities.CHUNK_PLACEMENT_FLAG, EnumFacing.UP);
 
 		if (data != null)
 		{

@@ -1,19 +1,19 @@
 package com.gildedgames.aether.api.entity.genes;
 
-import com.gildedgames.aether.api.util.NBT;
+import com.gildedgames.orbis.api.util.mc.NBT;
 
 public interface IGeneStorage extends NBT
 {
 
 	int getSeed();
 
-	int getFatherSeed();
-
-	int getMotherSeed();
-
 	void setSeed(int seed);
 
+	int getFatherSeed();
+
 	void setFatherSeed(int seed);
+
+	int getMotherSeed();
 
 	void setMotherSeed(int seed);
 

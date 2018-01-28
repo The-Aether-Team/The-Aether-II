@@ -8,13 +8,13 @@ import net.minecraft.entity.player.EntityPlayer;
 public class AIHopFollowAttackTarget extends EntityAI<EntityLiving>
 {
 
-	private HoppingMoveHelper hoppingMoveHelper;
+	private final HoppingMoveHelper hoppingMoveHelper;
+
+	private final double speed;
 
 	private int growTieredTimer;
 
-	private double speed;
-
-	public AIHopFollowAttackTarget(EntityLiving entity, HoppingMoveHelper hoppingMoveHelper, double speed)
+	public AIHopFollowAttackTarget(final EntityLiving entity, final HoppingMoveHelper hoppingMoveHelper, final double speed)
 	{
 		super(entity);
 
@@ -30,7 +30,7 @@ public class AIHopFollowAttackTarget extends EntityAI<EntityLiving>
 	@Override
 	public boolean shouldExecute()
 	{
-		EntityLivingBase entitylivingbase = this.entity().getAttackTarget();
+		final EntityLivingBase entitylivingbase = this.entity().getAttackTarget();
 		return entitylivingbase != null && (entitylivingbase.isEntityAlive() && (!(entitylivingbase instanceof EntityPlayer)
 				|| !((EntityPlayer) entitylivingbase).capabilities.disableDamage));
 	}
@@ -49,9 +49,9 @@ public class AIHopFollowAttackTarget extends EntityAI<EntityLiving>
 	 * Returns whether an in-progress EntityAIBase should continue executing
 	 */
 	@Override
-	public boolean continueExecuting()
+	public boolean shouldContinueExecuting()
 	{
-		EntityLivingBase entitylivingbase = this.entity().getAttackTarget();
+		final EntityLivingBase entitylivingbase = this.entity().getAttackTarget();
 		return entitylivingbase != null && (entitylivingbase.isEntityAlive() && (
 				!(entitylivingbase instanceof EntityPlayer && ((EntityPlayer) entitylivingbase).capabilities.disableDamage)
 						&& --this.growTieredTimer > 0));

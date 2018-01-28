@@ -121,14 +121,14 @@ public class GuiDialogViewer extends GuiContainer implements IDialogChangeListen
 			if (this.controller.isNodeFinished() && this.controller.getCurrentNode().getButtons().size() > 0)
 			{
 				Gui.drawModalRectWithCustomSizedTexture(
-						this.topTextBox.xPosition + this.topTextBox.width + 5,
-						this.topTextBox.yPosition + this.topTextBox.height - 20, 0, 0, 13, 12, 13, 12);
+						this.topTextBox.x + this.topTextBox.width + 5,
+						this.topTextBox.y + this.topTextBox.height - 20, 0, 0, 13, 12, 13, 12);
 			}
 			else
 			{
 				Gui.drawModalRectWithCustomSizedTexture(
-						this.bottomTextBox.xPosition + this.bottomTextBox.width,
-						this.bottomTextBox.yPosition + this.bottomTextBox.height - 20, 0, 0, 13, 12, 13, 12);
+						this.bottomTextBox.x + this.bottomTextBox.width,
+						this.bottomTextBox.y + this.bottomTextBox.height - 20, 0, 0, 13, 12, 13, 12);
 			}
 
 			GlStateManager.popMatrix();

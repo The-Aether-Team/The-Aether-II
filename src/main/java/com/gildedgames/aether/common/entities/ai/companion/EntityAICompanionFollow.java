@@ -20,7 +20,7 @@ public class EntityAICompanionFollow extends EntityAIBase
 
 	private int timeToRecalcPath;
 
-	public EntityAICompanionFollow(EntityCompanion entity)
+	public EntityAICompanionFollow(final EntityCompanion entity)
 	{
 		this.entity = entity;
 
@@ -30,18 +30,18 @@ public class EntityAICompanionFollow extends EntityAIBase
 	@Override
 	public boolean shouldExecute()
 	{
-		return this.entity.getOwner() != null && this.entity.getDistanceSqToEntity(this.entity.getOwner()) > 12.0D;
+		return this.entity.getOwner() != null && this.entity.getDistanceSq(this.entity.getOwner()) > 12.0D;
 	}
 
 	@Override
-	public boolean continueExecuting()
+	public boolean shouldContinueExecuting()
 	{
 		if (this.entity.getOwner() == null)
 		{
 			return false;
 		}
 
-		double distance = this.entity.getDistanceSqToEntity(this.entity.getOwner());
+		final double distance = this.entity.getDistanceSq(this.entity.getOwner());
 
 		return !this.navigator.noPath() && this.entity.hurtTime <= 0 && distance > 5.0D;
 	}
@@ -61,12 +61,12 @@ public class EntityAICompanionFollow extends EntityAIBase
 	{
 		this.entity.setPathPriority(PathNodeType.WATER, this.oldWaterCost);
 
-		this.navigator.clearPathEntity();
+		this.navigator.clearPath();
 	}
 
-	private boolean isEmptyBlock(BlockPos pos)
+	private boolean isEmptyBlock(final BlockPos pos)
 	{
-		IBlockState state = this.entity.world.getBlockState(pos);
+		final IBlockState state = this.entity.world.getBlockState(pos);
 
 		return state.getMaterial() == Material.AIR || !state.isFullCube();
 	}
@@ -74,7 +74,7 @@ public class EntityAICompanionFollow extends EntityAIBase
 	@Override
 	public void updateTask()
 	{
-		EntityPlayer owner = this.entity.getOwner();
+		final EntityPlayer owner = this.entity.getOwner();
 
 		if (owner == null)
 		{
@@ -87,24 +87,24 @@ public class EntityAICompanionFollow extends EntityAIBase
 		{
 			this.timeToRecalcPath = 10;
 
-			if (this.entity.getDistanceSqToEntity(this.entity.getOwner()) > 144.0D)
+			if (this.entity.getDistanceSq(this.entity.getOwner()) > 144.0D)
 			{
-				int i = MathHelper.floor(owner.posX) - 2;
-				int j = MathHelper.floor(owner.posZ) - 2;
-				int k = MathHelper.floor(owner.getEntityBoundingBox().minY);
+				final int i = MathHelper.floor(owner.posX) - 2;
+				final int j = MathHelper.floor(owner.posZ) - 2;
+				final int k = MathHelper.floor(owner.getEntityBoundingBox().minY);
 
 				for (int l = 0; l <= 4; ++l)
 				{
 					for (int i1 = 0; i1 <= 4; ++i1)
 					{
 						if ((l < 1 || i1 < 1 || l > 3 || i1 > 3) && this.entity.world.getBlockState(new BlockPos(
-								i + l, k - 1, j + i1)).isFullyOpaque() && this.isEmptyBlock(new BlockPos(i + l, k, j + i1))
+								i + l, k - 1, j + i1)).getMaterial().isSolid() && this.isEmptyBlock(new BlockPos(i + l, k, j + i1))
 								&& this.isEmptyBlock(new BlockPos(i + l, k + 1, j + i1)))
 						{
 							this.entity.setLocationAndAngles((double) ((float) (i + l) + 0.5F), (double) k, (double) ((float) (j + i1)
 									+ 0.5F), this.entity.rotationYaw, this.entity.rotationPitch);
 
-							this.navigator.clearPathEntity();
+							this.navigator.clearPath();
 
 							return;
 						}

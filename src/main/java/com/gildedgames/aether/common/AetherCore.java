@@ -5,12 +5,12 @@ import com.gildedgames.aether.common.analytics.GAReporter;
 import com.gildedgames.aether.common.registry.SpawnRegistry;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.world.aether.TeleporterAether;
-import com.gildedgames.orbis.common.Orbis;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -22,7 +22,8 @@ import org.apache.logging.log4j.Logger;
 import java.io.File;
 
 @Mod(name = AetherCore.MOD_NAME, modid = AetherCore.MOD_ID, version = AetherCore.MOD_VERSION,
-		certificateFingerprint = AetherCore.MOD_FINGERPRINT, guiFactory = AetherCore.MOD_GUI_FACTORY)
+		certificateFingerprint = AetherCore.MOD_FINGERPRINT, guiFactory = AetherCore.MOD_GUI_FACTORY,
+		dependencies = AetherCore.MOD_DEPENDENCIES)
 public class AetherCore
 {
 
@@ -30,7 +31,9 @@ public class AetherCore
 
 	public static final String MOD_ID = "aether";
 
-	public static final String MOD_VERSION = "1.11.2-1.1.1";
+	public static final String MOD_VERSION = "1.12.2-1.0.0";
+
+	public static final String MOD_DEPENDENCIES = "required-after:orbis";
 
 	public static final Logger LOGGER = LogManager.getLogger("AetherII");
 
@@ -100,6 +103,8 @@ public class AetherCore
 	@EventHandler
 	public void onFMLInit(final FMLInitializationEvent event)
 	{
+		System.out.println("Orbis is installed: " + Loader.isModLoaded("orbis"));
+
 		AetherCore.PROXY.init(event);
 
 		MinecraftForge.EVENT_BUS.register(SPAWN_REGISTRY);
@@ -111,16 +116,12 @@ public class AetherCore
 		DimensionsAether.onServerStopping(event);
 
 		AetherCore.SPAWN_REGISTRY.write();
-
-		Orbis.onServerStopping(event);
 	}
 
 	@EventHandler
 	public void serverStarted(final FMLServerStartedEvent event)
 	{
 		AetherCore.SPAWN_REGISTRY.read();
-
-		Orbis.onServerStarted(event);
 	}
 
 	@EventHandler

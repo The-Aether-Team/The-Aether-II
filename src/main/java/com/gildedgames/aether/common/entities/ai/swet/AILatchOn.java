@@ -35,12 +35,12 @@ public class AILatchOn extends EntityAI<EntitySwet>
 	{
 		return this.entity().getAttackTarget() instanceof EntityPlayer && this.entity().getAttackTarget() != null && this.entity()
 				.canEntityBeSeen(this.entity().getAttackTarget())
-				&& this.entity().getDistanceToEntity(this.entity().getAttackTarget()) <= 1.5D && EntitySwet
+				&& this.entity().getDistance(this.entity().getAttackTarget()) <= 1.5D && EntitySwet
 				.canLatch(this.entity(), (EntityPlayer) this.entity().getAttackTarget());
 	}
 
 	@Override
-	public boolean continueExecuting()
+	public boolean shouldContinueExecuting()
 	{
 		return !this.entity().isDead && this.entity().getHealth() > 0 && this.shouldExecute();
 	}

@@ -19,17 +19,18 @@ public class TileEntityMoaEggRenderer extends TileEntitySpecialRenderer<TileEnti
 	public ModelMoaEgg model = new ModelMoaEgg();
 
 	@Override
-	public void renderTileEntityAt(TileEntityMoaEgg egg, double x, double y, double z, float partialTicks, int destroyStage)
+	public void render(final TileEntityMoaEgg egg, final double x, final double y, final double z, final float partialTicks, final int destroyStage,
+			final float alpha)
 	{
-		MoaGenePool genePool = egg.getGenePool();
+		final MoaGenePool genePool = egg.getGenePool();
 
 		if (genePool == null || genePool.getFeathers() == null)
 		{
 			return;
 		}
 
-		ResourceLocation BACK_MARKING = genePool.getMarks().gene().getEggBack();
-		ResourceLocation HEAD_MARKING = genePool.getMarks().gene().getEggHead();
+		final ResourceLocation BACK_MARKING = genePool.getMarks().gene().getEggBack();
+		final ResourceLocation HEAD_MARKING = genePool.getMarks().gene().getEggHead();
 
 		GL11.glPushMatrix();
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
@@ -64,11 +65,11 @@ public class TileEntityMoaEggRenderer extends TileEntitySpecialRenderer<TileEnti
 		GL11.glColor3f(1.0F, 1.0F, 1.0F);
 	}
 
-	public void renderColor(int color)
+	public void renderColor(final int color)
 	{
-		float red = ((color >> 16) & 0xff) / 255F;
-		float green = ((color >> 8) & 0xff) / 255F;
-		float blue = (color & 0xff) / 255F;
+		final float red = ((color >> 16) & 0xff) / 255F;
+		final float green = ((color >> 8) & 0xff) / 255F;
+		final float blue = (color & 0xff) / 255F;
 
 		GL11.glColor3f(red, green, blue);
 	}

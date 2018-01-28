@@ -7,13 +7,13 @@ import net.minecraft.entity.ai.EntityAITarget;
 public class EntityAICompanionOwnerHurt extends EntityAITarget
 {
 
-	private EntityLivingBase target;
-
 	private final EntityCompanion entity;
+
+	private EntityLivingBase target;
 
 	private int timestamp;
 
-	public EntityAICompanionOwnerHurt(EntityCompanion entity)
+	public EntityAICompanionOwnerHurt(final EntityCompanion entity)
 	{
 		super(entity, false);
 
@@ -25,7 +25,7 @@ public class EntityAICompanionOwnerHurt extends EntityAITarget
 	@Override
 	public boolean shouldExecute()
 	{
-		EntityLivingBase owner = this.entity.getOwner();
+		final EntityLivingBase owner = this.entity.getOwner();
 
 		if (owner == null)
 		{
@@ -33,8 +33,8 @@ public class EntityAICompanionOwnerHurt extends EntityAITarget
 		}
 		else
 		{
-			this.target = owner.getAITarget();
-			int i = owner.getRevengeTimer();
+			this.target = owner.getRevengeTarget();
+			final int i = owner.getRevengeTimer();
 			return i != this.timestamp && this.isSuitableTarget(this.target, false) && this.target != owner;
 		}
 	}
@@ -48,7 +48,7 @@ public class EntityAICompanionOwnerHurt extends EntityAITarget
 		}
 
 		this.taskOwner.setAttackTarget(this.target);
-		EntityLivingBase owner = this.entity.getOwner();
+		final EntityLivingBase owner = this.entity.getOwner();
 
 		if (owner != null)
 		{

@@ -8,7 +8,7 @@ public class MoaFeatherColorHandler implements IItemColor
 {
 
 	@Override
-	public int getColorFromItemstack(ItemStack stack, int tintIndex)
+	public int colorMultiplier(final ItemStack stack, final int tintIndex)
 	{
 		if (stack.getItem() instanceof ItemMoaFeather)
 		{

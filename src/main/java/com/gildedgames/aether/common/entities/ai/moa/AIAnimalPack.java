@@ -20,7 +20,7 @@ public class AIAnimalPack extends EntityAIBase
 
 	public float moveSpeed;
 
-	public AIAnimalPack(EntityLiving animal, float moveSpeed)
+	public AIAnimalPack(final EntityLiving animal, final float moveSpeed)
 	{
 		this.world = animal.world;
 		this.moveSpeed = moveSpeed;
@@ -39,22 +39,22 @@ public class AIAnimalPack extends EntityAIBase
 			return false;
 		}
 
-		List list = this.animal.world.getEntitiesWithinAABB(this.animal.getClass(), this.animal.getEntityBoundingBox().expand(12.0D, 4.0D, 12.0D));
+		final List list = this.animal.world.getEntitiesWithinAABB(this.animal.getClass(), this.animal.getEntityBoundingBox().expand(12.0D, 4.0D, 12.0D));
 		EntityAnimal potentialLeader = null;
 		double d0 = Double.MAX_VALUE;
 
-		for (Object aList : list)
+		for (final Object aList : list)
 		{
-			EntityAnimal animal = (EntityAnimal) aList;
+			final EntityAnimal animal = (EntityAnimal) aList;
 
 			if (animal instanceof EntityGroupMember)
 			{
-				EntityGroupMember packAnimal = (EntityGroupMember) animal;
-				EntityGroupMember ourPackAnimal = (EntityGroupMember) this.animal;
+				final EntityGroupMember packAnimal = (EntityGroupMember) animal;
+				final EntityGroupMember ourPackAnimal = (EntityGroupMember) this.animal;
 
 				if (packAnimal.isGroupLeader() && !ourPackAnimal.isGroupLeader() && packAnimal.getGroup() == ourPackAnimal.getGroup())
 				{
-					double d1 = this.animal.getDistanceToEntity(animal);//Find the male closest to this animal from the same pack
+					final double d1 = this.animal.getDistance(animal);//Find the male closest to this animal from the same pack
 
 					if (d1 <= d0)
 					{
@@ -85,15 +85,15 @@ public class AIAnimalPack extends EntityAIBase
 	{
 		super.updateTask();
 
-		Path path = this.animal.getNavigator().getPathToXYZ(this.packLeader.posX, this.packLeader.posY, this.packLeader.posZ);
+		final Path path = this.animal.getNavigator().getPathToXYZ(this.packLeader.posX, this.packLeader.posY, this.packLeader.posZ);
 
-		if (this.animal.getDistanceToEntity(this.packLeader) > 6)
+		if (this.animal.getDistance(this.packLeader) > 6)
 		{
 			this.animal.getNavigator().setPath(path, this.moveSpeed);
 		}
 		else if (this.animal.getNavigator().getPath() == path)
 		{
-			this.animal.getNavigator().clearPathEntity();
+			this.animal.getNavigator().clearPath();
 		}
 	}
 

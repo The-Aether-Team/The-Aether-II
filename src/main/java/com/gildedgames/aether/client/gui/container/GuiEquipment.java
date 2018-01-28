@@ -24,7 +24,8 @@ public class GuiEquipment extends GuiContainer
 
 	private static final ResourceLocation textureAccessories = new ResourceLocation("aether", "textures/gui/inventory/accessories/equipment.png");
 
-	private static final ResourceLocation textureAccessoriesPattern = new ResourceLocation("aether", "textures/gui/inventory/accessories/equipment_pattern.png");
+	private static final ResourceLocation textureAccessoriesPattern = new ResourceLocation("aether",
+			"textures/gui/inventory/accessories/equipment_pattern.png");
 
 	private static final ResourceLocation textureBackpack = new ResourceLocation("aether", "textures/gui/inventory/accessories/backpack.png");
 
@@ -32,13 +33,14 @@ public class GuiEquipment extends GuiContainer
 
 	private static final ResourceLocation textureBackpackPattern = new ResourceLocation("aether", "textures/gui/inventory/accessories/backpack_pattern.png");
 
-	private static final ResourceLocation textureBackpackCreativePattern = new ResourceLocation("aether", "textures/gui/inventory/accessories/backpack_creative_pattern.png");
+	private static final ResourceLocation textureBackpackCreativePattern = new ResourceLocation("aether",
+			"textures/gui/inventory/accessories/backpack_creative_pattern.png");
 
 	//	private static final ResourceLocation TEXTURE_COINBAR = newsystem ResourceLocation("aether", "textures/gui/coinbar.png");
 
 	private final PlayerAether aePlayer;
 
-	public GuiEquipment(PlayerAether aePlayer)
+	public GuiEquipment(final PlayerAether aePlayer)
 	{
 		super(new ContainerEquipment(aePlayer));
 
@@ -59,7 +61,7 @@ public class GuiEquipment extends GuiContainer
 	}
 
 	@Override
-	public void drawScreen(int mouseX, int mouseY, float partialTick)
+	public void drawScreen(final int mouseX, final int mouseY, final float partialTick)
 	{
 		this.drawWorldBackground(0);
 
@@ -107,7 +109,7 @@ public class GuiEquipment extends GuiContainer
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
+	protected void drawGuiContainerBackgroundLayer(final float partialTicks, final int mouseX, final int mouseY)
 	{
 	}
 
@@ -116,24 +118,24 @@ public class GuiEquipment extends GuiContainer
 	{
 	}
 
-	private boolean isMouseOverSlot(Slot slot, int mouseX, int mouseY)
+	private boolean isMouseOverSlot(final Slot slot, final int mouseX, final int mouseY)
 	{
 		return this.isPointInRegion(slot.xPos, slot.yPos, 16, 16, mouseX, mouseY);
 	}
 
-	private void drawSlotName(int mouseX, int mouseY)
+	private void drawSlotName(final int mouseX, final int mouseY)
 	{
 		String unlocalizedTooltip = null;
 
-		for (Slot slot : this.inventorySlots.inventorySlots)
+		for (final Slot slot : this.inventorySlots.inventorySlots)
 		{
-			if (slot.canBeHovered() && !slot.getHasStack())
+			if (slot.isEnabled() && !slot.getHasStack())
 			{
 				if (this.isMouseOverSlot(slot, mouseX, mouseY))
 				{
 					if (slot instanceof SlotEquipment)
 					{
-						ItemEquipmentSlot type = ((SlotEquipment) slot).getEquipmentType();
+						final ItemEquipmentSlot type = ((SlotEquipment) slot).getEquipmentType();
 
 						unlocalizedTooltip = type.getUnlocalizedName();
 					}
@@ -176,7 +178,7 @@ public class GuiEquipment extends GuiContainer
 		}
 	}
 
-	private void drawPlayer(int mouseX, int mouseY)
+	private void drawPlayer(final int mouseX, final int mouseY)
 	{
 		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 
@@ -187,12 +189,12 @@ public class GuiEquipment extends GuiContainer
 
 	private void drawEquipmentEffects()
 	{
-		ArrayList<String> label = new ArrayList<>();
+		final ArrayList<String> label = new ArrayList<>();
 
-		PlayerEquipmentModule equipment = this.aePlayer.getEquipmentModule();
+		final PlayerEquipmentModule equipment = this.aePlayer.getEquipmentModule();
 		equipment.getActivePools().forEach((pool) -> pool.getInstance().ifPresent(instance -> instance.addInformation(label)));
 
-		String compiled = StringUtils.join(label, TextFormatting.RESET + ", ");
+		final String compiled = StringUtils.join(label, TextFormatting.RESET + ", ");
 
 		this.mc.fontRenderer.drawString(compiled, this.guiLeft, this.guiTop + 160, 0xFFFFFF, true);
 	}

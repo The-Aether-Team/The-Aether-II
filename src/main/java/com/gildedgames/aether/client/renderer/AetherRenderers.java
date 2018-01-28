@@ -26,14 +26,6 @@ import com.gildedgames.aether.common.entities.projectiles.EntityDart;
 import com.gildedgames.aether.common.entities.tiles.*;
 import com.gildedgames.aether.common.entities.tiles.builder.TileEntityStructureBuilder;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.orbis.client.renderers.tiles.TileEntityBlockDataContainerRenderer;
-import com.gildedgames.orbis.client.renderers.tiles.TileEntityBlockPaletteRenderer;
-import com.gildedgames.orbis.client.renderers.tiles.TileEntityBlueprintPaletteRenderer;
-import com.gildedgames.orbis.client.renderers.tiles.TileEntityBlueprintRenderer;
-import com.gildedgames.orbis.common.tiles.TileEntityBlockDataContainer;
-import com.gildedgames.orbis.common.tiles.TileEntityBlockPalette;
-import com.gildedgames.orbis.common.tiles.TileEntityBlueprint;
-import com.gildedgames.orbis.common.tiles.TileEntityBlueprintPalette;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -93,11 +85,6 @@ public class AetherRenderers
 
 	private static void registerTESRs()
 	{
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlockDataContainer.class, new TileEntityBlockDataContainerRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlockPalette.class, new TileEntityBlockPaletteRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlueprint.class, new TileEntityBlueprintRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlueprintPalette.class, new TileEntityBlueprintPaletteRenderer());
-
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAltar.class, new TileEntityAltarRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySkyrootChest.class, new TileEntitySkyrootChestRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySkyrootSign.class, new TileEntitySkyrootSignRenderer());

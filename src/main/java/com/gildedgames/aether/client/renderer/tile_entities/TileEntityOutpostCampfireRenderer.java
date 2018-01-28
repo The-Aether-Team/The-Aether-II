@@ -16,7 +16,8 @@ public class TileEntityOutpostCampfireRenderer extends TileEntitySpecialRenderer
 	private final ModelOutpostCampfire model = new ModelOutpostCampfire();
 
 	@Override
-	public void renderTileEntityAt(TileEntityOutpostCampfire te, double x, double y, double z, float partialTicks, int destroyStage)
+	public void render(final TileEntityOutpostCampfire te, final double x, final double y, final double z, final float partialTicks, final int destroyStage,
+			final float alpha)
 	{
 		GlStateManager.pushMatrix();
 		GlStateManager.enableRescaleNormal();

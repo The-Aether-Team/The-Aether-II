@@ -13,12 +13,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
+import java.util.Objects;
+
 public class PlayerBlockLevitateModule extends PlayerAetherModule
 {
 
 	private EntityMovingBlock heldBlock;
 
-	public PlayerBlockLevitateModule(PlayerAether playerAether)
+	public PlayerBlockLevitateModule(final PlayerAether playerAether)
 	{
 		super(playerAether);
 	}
@@ -39,17 +41,17 @@ public class PlayerBlockLevitateModule extends PlayerAetherModule
 			}
 			else
 			{
-				ItemStack stack = this.getEntity().getItemStackFromSlot(EntityEquipmentSlot.MAINHAND);
+				final ItemStack stack = this.getEntity().getItemStackFromSlot(EntityEquipmentSlot.MAINHAND);
 
 				if (!stack.isEmpty() && stack.getItem() instanceof ItemTool
-						&& ((ItemTool) stack.getItem()).getToolMaterial() == MaterialsAether.GRAVITITE_TOOL)
+						&& Objects.equals(((ItemTool) stack.getItem()).getToolMaterialName(), MaterialsAether.GRAVITITE_TOOL.name()))
 				{
 					if (this.heldBlock.ticksExisted % 20 == 0)
 					{
 						// Does damage 2 damage/sec, increasing the amount of damage by 1 every 3 seconds,
 						// for a maximum of 8 damage/sec
 
-						int extra = (int) Math.floor(Math.min(6, this.heldBlock.ticksExisted / 60));
+						final int extra = (int) Math.floor(Math.min(6, this.heldBlock.ticksExisted / 60));
 
 						stack.damageItem(2 + extra, this.getEntity());
 					}
@@ -63,31 +65,31 @@ public class PlayerBlockLevitateModule extends PlayerAetherModule
 	}
 
 	@Override
-	public void write(NBTTagCompound compound)
+	public void write(final NBTTagCompound compound)
 	{
 
 	}
 
 	@Override
-	public void read(NBTTagCompound compound)
+	public void read(final NBTTagCompound compound)
 	{
 
 	}
 
-	public void onDeath(LivingDeathEvent event)
+	public void onDeath(final LivingDeathEvent event)
 	{
 		this.dropHeldBlock();
 	}
 
-	public boolean pickupBlock(BlockPos pos, World world)
+	public boolean pickupBlock(final BlockPos pos, final World world)
 	{
 		if (this.heldBlock == null)
 		{
 			if (world.isBlockModifiable(this.getEntity(), pos))
 			{
-				IBlockState state = world.getBlockState(pos);
+				final IBlockState state = world.getBlockState(pos);
 
-				EntityMovingBlock movingBlock = new EntityMovingBlock(world, pos.getX() + 0.5D, pos.getY() + 0.1D, pos.getZ() + 0.5D, state);
+				final EntityMovingBlock movingBlock = new EntityMovingBlock(world, pos.getX() + 0.5D, pos.getY() + 0.1D, pos.getZ() + 0.5D, state);
 				world.spawnEntity(movingBlock);
 
 				this.holdBlock(movingBlock);
@@ -99,7 +101,7 @@ public class PlayerBlockLevitateModule extends PlayerAetherModule
 		return false;
 	}
 
-	private void holdBlock(EntityMovingBlock entity)
+	private void holdBlock(final EntityMovingBlock entity)
 	{
 		this.dropHeldBlock();
 

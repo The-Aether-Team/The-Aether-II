@@ -3,9 +3,9 @@ package com.gildedgames.aether.client.renderer.entities.projectiles;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -29,13 +29,13 @@ public class RenderBolt extends Render<EntityBolt>
 		boltTextures.put(ItemBoltType.GRAVITITE, AetherCore.getResource("textures/entities/bolts/gravitite_bolt.png"));
 	}
 
-	public RenderBolt(RenderManager renderManager)
+	public RenderBolt(final RenderManager renderManager)
 	{
 		super(renderManager);
 	}
 
 	@Override
-	public void doRender(EntityBolt bolt, double posX, double posY, double posZ, float entityYaw, float partialTicks)
+	public void doRender(final EntityBolt bolt, final double posX, final double posY, final double posZ, final float entityYaw, final float partialTicks)
 	{
 		this.bindTexture(boltTextures.get(bolt.getBoltType()));
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -46,26 +46,26 @@ public class RenderBolt extends Render<EntityBolt>
 		GlStateManager.rotate(bolt.prevRotationYaw + (bolt.rotationYaw - bolt.prevRotationYaw) * partialTicks - 90.0F, 0.0F, 1.0F, 0.0F);
 		GlStateManager.rotate(bolt.prevRotationPitch + (bolt.rotationPitch - bolt.prevRotationPitch) * partialTicks, 0.0F, 0.0F, 1.0F);
 
-		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer renderer = tessellator.getBuffer();
+		final Tessellator tessellator = Tessellator.getInstance();
+		final BufferBuilder renderer = tessellator.getBuffer();
 
-		int i = 0;
-		float f = 0.0F;
-		float f1 = 0.5F;
-		float f2 = (float) (i * 10) / 32.0F;
-		float f3 = (float) (5 + i * 10) / 32.0F;
-		float f4 = 0.0F;
-		float f5 = 0.15625F;
-		float f6 = (float) (5 + i * 10) / 32.0F;
-		float f7 = (float) (10 + i * 10) / 32.0F;
-		float f8 = 0.05625F;
-		float f9 = (float) bolt.arrowShake - partialTicks;
+		final int i = 0;
+		final float f = 0.0F;
+		final float f1 = 0.5F;
+		final float f2 = (float) (i * 10) / 32.0F;
+		final float f3 = (float) (5 + i * 10) / 32.0F;
+		final float f4 = 0.0F;
+		final float f5 = 0.15625F;
+		final float f6 = (float) (5 + i * 10) / 32.0F;
+		final float f7 = (float) (10 + i * 10) / 32.0F;
+		final float f8 = 0.05625F;
+		final float f9 = (float) bolt.arrowShake - partialTicks;
 
 		GlStateManager.enableRescaleNormal();
 
 		if (f9 > 0.0F)
 		{
-			float f10 = -MathHelper.sin(f9 * 3.0F) * f9;
+			final float f10 = -MathHelper.sin(f9 * 3.0F) * f9;
 
 			GlStateManager.rotate(f10, 0.0F, 0.0F, 1.0F);
 		}
@@ -125,7 +125,7 @@ public class RenderBolt extends Render<EntityBolt>
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(EntityBolt bolt)
+	protected ResourceLocation getEntityTexture(final EntityBolt bolt)
 	{
 		return boltTextures.get(bolt.getBoltType());
 	}

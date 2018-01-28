@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 
 public class RenderMovingBlock extends Render<EntityMovingBlock>
 {
-	public RenderMovingBlock(RenderManager renderManager)
+	public RenderMovingBlock(final RenderManager renderManager)
 	{
 		super(renderManager);
 
@@ -25,18 +25,18 @@ public class RenderMovingBlock extends Render<EntityMovingBlock>
 	}
 
 	@Override
-	public void doRender(EntityMovingBlock entity, double x, double y, double z, float entityYaw, float partialTicks)
+	public void doRender(final EntityMovingBlock entity, final double x, final double y, final double z, final float entityYaw, final float partialTicks)
 	{
 		if (entity.getBlockState() != null)
 		{
 			this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 
-			IBlockState state = entity.getBlockState();
-			Block block = state.getBlock();
+			final IBlockState state = entity.getBlockState();
+			final Block block = state.getBlock();
 
-			BlockPos pos = new BlockPos(0, 256, 0);
+			final BlockPos pos = new BlockPos(0, 256, 0);
 
-			World world = entity.getEntityWorld();
+			final World world = entity.getEntityWorld();
 
 			if (state != world.getBlockState(pos))
 			{
@@ -48,12 +48,12 @@ public class RenderMovingBlock extends Render<EntityMovingBlock>
 
 					GlStateManager.translate(x, y, z);
 
-					float scale = 0.9f;
+					final float scale = 0.9f;
 
 					GlStateManager.scale(scale, scale, scale);
 
-					float f1 = entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * partialTicks;
-					float f2 = entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * partialTicks;
+					final float f1 = entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * partialTicks;
+					final float f2 = entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * partialTicks;
 
 					GlStateManager.rotate(f1, 0.0f, 0.0f, 1.0f);
 					GlStateManager.rotate(f2, 1.0f, 0.0f, 0.0f);
@@ -69,19 +69,19 @@ public class RenderMovingBlock extends Render<EntityMovingBlock>
 						GlStateManager.shadeModel(7424);
 					}
 
-					Tessellator tessellator = Tessellator.getInstance();
+					final Tessellator tessellator = Tessellator.getInstance();
 
-					VertexBuffer worldRenderer = tessellator.getBuffer();
+					final BufferBuilder worldRenderer = tessellator.getBuffer();
 					worldRenderer.begin(7, DefaultVertexFormats.BLOCK);
-					int i = pos.getX();
-					int j = pos.getY();
-					int k = pos.getZ();
+					final int i = pos.getX();
+					final int j = pos.getY();
+					final int k = pos.getZ();
 
 					worldRenderer.setTranslation(((float) -i) - 0.5F, -j, ((float) -k) - 0.5F);
 
-					BlockRendererDispatcher blockRendererDispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
+					final BlockRendererDispatcher blockRendererDispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
 
-					IBakedModel model = blockRendererDispatcher.getModelForState(state);
+					final IBakedModel model = blockRendererDispatcher.getModelForState(state);
 
 					blockRendererDispatcher.getBlockModelRenderer().renderModel(world, model, state, pos, worldRenderer, false);
 
@@ -101,7 +101,7 @@ public class RenderMovingBlock extends Render<EntityMovingBlock>
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(EntityMovingBlock entity)
+	protected ResourceLocation getEntityTexture(final EntityMovingBlock entity)
 	{
 		return TextureMap.LOCATION_BLOCKS_TEXTURE;
 	}

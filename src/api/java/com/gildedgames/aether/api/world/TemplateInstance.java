@@ -1,11 +1,11 @@
 package com.gildedgames.aether.api.world;
 
 import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.api.util.NBT;
-import com.gildedgames.aether.api.util.NBTHelper;
 import com.gildedgames.aether.api.util.TemplateUtil;
 import com.gildedgames.aether.api.world.generation.TemplateDefinition;
 import com.gildedgames.aether.api.world.generation.TemplateLoc;
+import com.gildedgames.orbis.api.util.mc.NBT;
+import com.gildedgames.orbis.api.util.mc.NBTHelper;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.ChunkPos;
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -104,7 +104,7 @@ public class TemplateInstance implements NBT
 	public void write(final NBTTagCompound tag)
 	{
 		tag.setInteger("id", this.templateID);
-		tag.setTag("loc", NBTHelper.write(this.loc));
+		tag.setTag("loc", NBTHelper.writeRaw(this.loc));
 		tag.setBoolean("hasGeneratedAChunk", this.hasGeneratedAChunk);
 	}
 

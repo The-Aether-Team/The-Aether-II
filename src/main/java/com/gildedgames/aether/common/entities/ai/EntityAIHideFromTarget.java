@@ -16,19 +16,19 @@ import java.util.Random;
 public class EntityAIHideFromTarget extends EntityAIBase
 {
 
+	static final int maxDist = 12, minDist = 4;
+
+	private final double movementSpeed;
+
+	protected EntityLivingBase hideFrom;
+
 	EntityCreature entity;
 
 	Class<? extends EntityLivingBase> hideFromClass;
 
-	static final int maxDist = 12, minDist = 4;
-
-	protected EntityLivingBase hideFrom;
-
 	private BlockPos hidingPos;
 
-	private final double movementSpeed;
-
-	public EntityAIHideFromTarget(EntityCreature entity, Class<? extends EntityLivingBase> clazz, double movementSpeed)
+	public EntityAIHideFromTarget(final EntityCreature entity, final Class<? extends EntityLivingBase> clazz, final double movementSpeed)
 	{
 		this.entity = entity;
 		this.hideFromClass = clazz;
@@ -43,7 +43,7 @@ public class EntityAIHideFromTarget extends EntityAIBase
 			return true;
 		}
 
-		List entities = this.entity.world.getEntitiesWithinAABB(this.hideFromClass, this.entity.getEntityBoundingBox().expand(maxDist, maxDist, maxDist));
+		final List entities = this.entity.world.getEntitiesWithinAABB(this.hideFromClass, this.entity.getEntityBoundingBox().expand(maxDist, maxDist, maxDist));
 
 		if (entities.isEmpty())
 		{
@@ -52,11 +52,11 @@ public class EntityAIHideFromTarget extends EntityAIBase
 
 		EntityLivingBase toHideFrom = null;
 
-		for (Object o : entities)
+		for (final Object o : entities)
 		{
 			if (o instanceof EntityLivingBase)
 			{
-				EntityLivingBase entity = (EntityLivingBase) o;
+				final EntityLivingBase entity = (EntityLivingBase) o;
 
 				toHideFrom = entity;
 			}
@@ -74,21 +74,21 @@ public class EntityAIHideFromTarget extends EntityAIBase
 				return false;
 			}
 
-			Vec3d spot = this.findHidingSpot();
+			final Vec3d spot = this.findHidingSpot();
 
 			if (spot == null)
 			{
 				return false;
 			}
 
-			this.hidingPos = new BlockPos(spot.xCoord, spot.yCoord, spot.zCoord);
+			this.hidingPos = new BlockPos(spot.x, spot.y, spot.z);
 
 			return true;
 		}
 	}
 
 	@Override
-	public boolean continueExecuting()
+	public boolean shouldContinueExecuting()
 	{
 		return this.hidingPos != null;
 	}
@@ -96,7 +96,7 @@ public class EntityAIHideFromTarget extends EntityAIBase
 	@Override
 	public void startExecuting()
 	{
-		Path path = this.entity.getNavigator().getPathToPos(this.hidingPos);
+		final Path path = this.entity.getNavigator().getPathToPos(this.hidingPos);
 
 		this.entity.getNavigator().setPath(path, this.movementSpeed);
 	}
@@ -112,16 +112,16 @@ public class EntityAIHideFromTarget extends EntityAIBase
 
 	protected Vec3d findHidingSpot()
 	{
-		Random random = this.entity.getRNG();
-		World world = this.entity.world;
+		final Random random = this.entity.getRNG();
+		final World world = this.entity.world;
 
 		for (int i = 0; i < 13; ++i)
 		{
-			int j = MathHelper.floor(this.entity.posX + random.nextInt(20) - 10.0D);
-			int k = MathHelper.floor(this.entity.getEntityBoundingBox().minY + random.nextInt(6) - 3.0D);
-			int l = MathHelper.floor(this.entity.posZ + random.nextInt(20) - 10.0D);
+			final int j = MathHelper.floor(this.entity.posX + random.nextInt(20) - 10.0D);
+			final int k = MathHelper.floor(this.entity.getEntityBoundingBox().minY + random.nextInt(6) - 3.0D);
+			final int l = MathHelper.floor(this.entity.posZ + random.nextInt(20) - 10.0D);
 
-			RayTraceResult raytrace = world.rayTraceBlocks(new Vec3d(j, k + this.entity.getEyeHeight(), l), new Vec3d(this.hideFrom.posX,
+			final RayTraceResult raytrace = world.rayTraceBlocks(new Vec3d(j, k + this.entity.getEyeHeight(), l), new Vec3d(this.hideFrom.posX,
 					this.hideFrom.posY + this.hideFrom.getEyeHeight(), this.hideFrom.posZ));
 
 			if (raytrace != null && raytrace.typeOfHit != null)

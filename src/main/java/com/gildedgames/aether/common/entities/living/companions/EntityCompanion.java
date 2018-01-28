@@ -26,17 +26,17 @@ public abstract class EntityCompanion extends EntityCreature
 {
 	private static final DataParameter<Optional<UUID>> OWNER_UUID = new DataParameter<>(20, DataSerializers.OPTIONAL_UNIQUE_ID);
 
-	private boolean wasDespawned = false;
-
 	protected boolean isFlying = false;
 
-	public EntityCompanion(World worldIn)
+	private boolean wasDespawned = false;
+
+	public EntityCompanion(final World worldIn)
 	{
 		super(worldIn);
 	}
 
 	@Override
-	public void setAttackTarget(@Nullable EntityLivingBase target)
+	public void setAttackTarget(@Nullable final EntityLivingBase target)
 	{
 		if (target == this.getOwner())
 		{
@@ -49,7 +49,7 @@ public abstract class EntityCompanion extends EntityCreature
 	@Override
 	protected void initEntityAI()
 	{
-		EntityAIBase follow = new EntityAICompanionFollow(this);
+		final EntityAIBase follow = new EntityAICompanionFollow(this);
 
 		follow.setMutexBits(1);
 
@@ -76,7 +76,7 @@ public abstract class EntityCompanion extends EntityCreature
 	}
 
 	@Override
-	protected void playStepSound(BlockPos pos, Block blockIn)
+	protected void playStepSound(final BlockPos pos, final Block blockIn)
 	{
 		if (!this.isFlying)
 		{
@@ -112,9 +112,9 @@ public abstract class EntityCompanion extends EntityCreature
 	}
 
 	@Override
-	public boolean attackEntityFrom(DamageSource source, float amount)
+	public boolean attackEntityFrom(final DamageSource source, final float amount)
 	{
-		Entity attacker = source.getEntity();
+		final Entity attacker = source.getTrueSource();
 
 		if (attacker != null && attacker == this.getOwner())
 		{
@@ -125,7 +125,7 @@ public abstract class EntityCompanion extends EntityCreature
 	}
 
 	@Override
-	protected void collideWithEntity(Entity entity)
+	protected void collideWithEntity(final Entity entity)
 	{
 		if (entity != this.getOwner())
 		{
@@ -134,26 +134,21 @@ public abstract class EntityCompanion extends EntityCreature
 	}
 
 	@Override
-	public boolean writeToNBTOptional(NBTTagCompound compound)
+	public boolean writeToNBTOptional(final NBTTagCompound compound)
 	{
 		// Never save Companions to disk...
 		return false;
 	}
 
 	@Override
-	public void setPortal(BlockPos pos)
+	public void setPortal(final BlockPos pos)
 	{
 		// Never teleport the companion...
 	}
 
-	public void setOwner(EntityPlayer owner)
-	{
-		this.dataManager.set(OWNER_UUID, owner == null ? Optional.absent() : Optional.of(owner.getUniqueID()));
-	}
-
 	public EntityPlayer getOwner()
 	{
-		Optional<UUID> uuid = this.dataManager.get(OWNER_UUID);
+		final Optional<UUID> uuid = this.dataManager.get(OWNER_UUID);
 
 		if (!uuid.isPresent())
 		{
@@ -163,12 +158,17 @@ public abstract class EntityCompanion extends EntityCreature
 		return this.world.getPlayerEntityByUUID(uuid.get());
 	}
 
+	public void setOwner(final EntityPlayer owner)
+	{
+		this.dataManager.set(OWNER_UUID, owner == null ? Optional.absent() : Optional.of(owner.getUniqueID()));
+	}
+
 	public boolean wasDespawned()
 	{
 		return this.wasDespawned;
 	}
 
-	public void setDespawned(boolean despawned)
+	public void setDespawned(final boolean despawned)
 	{
 		this.wasDespawned = despawned;
 	}

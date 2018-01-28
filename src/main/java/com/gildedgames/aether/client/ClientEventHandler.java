@@ -11,10 +11,8 @@ import com.gildedgames.aether.api.items.equipment.effects.IEffectFactory;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectPool;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 import com.gildedgames.aether.client.gui.PerformanceIngame;
-import com.gildedgames.aether.client.renderer.ChunkRendererManager;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
-import com.gildedgames.aether.common.capabilities.world.WorldObjectManager;
 import com.gildedgames.aether.common.containers.slots.SlotAmbrosium;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
 import com.gildedgames.aether.common.containers.slots.SlotFlintAndSteel;
@@ -23,7 +21,6 @@ import com.gildedgames.aether.common.entities.util.mounts.FlyingMount;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketSpecialMovement;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
-import com.gildedgames.orbis.common.Orbis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.ScaledResolution;
@@ -32,7 +29,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.client.FMLClientHandler;
@@ -47,8 +43,6 @@ import java.util.Optional;
 
 public class ClientEventHandler
 {
-	public static final ChunkRendererManager CHUNK_RENDERER_MANAGER = new ChunkRendererManager();
-
 	private final PerformanceIngame performanceLogger = new PerformanceIngame();
 
 	private boolean prevJumpBindState;
@@ -87,8 +81,6 @@ public class ClientEventHandler
 	@SuppressWarnings("unchecked")
 	public void onTooltipConstruction(final ItemTooltipEvent event)
 	{
-		final PlayerAether aePlayer = PlayerAether.getPlayer(event.getEntityPlayer());
-
 		final IItemProperties properties = AetherAPI.content().items().getProperties(event.getItemStack().getItem());
 
 		// Equipment Properties
@@ -131,32 +123,12 @@ public class ClientEventHandler
 
 		final EntityPlayerSP player = FMLClientHandler.instance().getClientPlayerEntity();
 
-		if (player != null && player.world != null)
-		{
-			final WorldObjectManager manager = WorldObjectManager.get(player.world);
-
-			if (!manager.containsObserver(CHUNK_RENDERER_MANAGER))
-			{
-				manager.addObserver(CHUNK_RENDERER_MANAGER);
-			}
-		}
-		else
-		{
-			Orbis.stopProjectManager();
-			CHUNK_RENDERER_MANAGER.unload();
-		}
-
 		if (world != null && player != null)
 		{
 			final PlayerAether aePlayer = PlayerAether.getPlayer(player);
 
 			if (aePlayer != null)
 			{
-				if (!aePlayer.containsObserver(CHUNK_RENDERER_MANAGER))
-				{
-					aePlayer.addObserver(CHUNK_RENDERER_MANAGER);
-				}
-
 				if (aePlayer.getAbilitiesModule().getMidAirJumpsAllowed() > 0)
 				{
 					if (mc.gameSettings.keyBindJump.isKeyDown() && !this.prevJumpBindState)
@@ -189,14 +161,6 @@ public class ClientEventHandler
 		SlotAmbrosium.registerIcons(event);
 		SlotMoaEgg.registerIcons(event);
 		SlotFlintAndSteel.registerIcons(event);
-	}
-
-	@SubscribeEvent
-	public void onRenderWorldLast(final RenderWorldLastEvent event)
-	{
-		final World world = Minecraft.getMinecraft().world;
-
-		CHUNK_RENDERER_MANAGER.render(world, event.getPartialTicks());
 	}
 
 	private class EffectPoolTemporary<T extends IEffectProvider> implements IEffectPool<T>

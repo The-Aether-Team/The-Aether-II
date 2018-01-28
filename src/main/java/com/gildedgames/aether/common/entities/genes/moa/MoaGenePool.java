@@ -2,11 +2,11 @@ package com.gildedgames.aether.common.entities.genes.moa;
 
 import com.gildedgames.aether.api.entity.genes.GeneRegion;
 import com.gildedgames.aether.api.entity.genes.IGeneStorage;
-import com.gildedgames.aether.api.util.NBT;
 import com.gildedgames.aether.common.entities.genes.util.DataGene;
 import com.gildedgames.aether.common.entities.genes.util.GenePool;
 import com.gildedgames.aether.common.entities.genes.util.GeneUtil;
 import com.gildedgames.aether.common.entities.genes.util.SimpleGeneStorage;
+import com.gildedgames.orbis.api.util.mc.NBT;
 import com.google.common.collect.Lists;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -28,19 +28,19 @@ public class MoaGenePool extends GenePool implements NBT
 		this(new SimpleGeneStorage());
 	}
 
-	public MoaGenePool(IGeneStorage storage)
+	public MoaGenePool(final IGeneStorage storage)
 	{
 		super(storage);
 	}
 
 	@Override
-	public void transformFromSeed(int seed)
+	public void transformFromSeed(final int seed)
 	{
 		this.getStorage().setSeed(seed);
 		this.getStorage().setFatherSeed(seed);
 		this.getStorage().setMotherSeed(seed);
 
-		Random r = new Random(this.getStorage().getSeed());
+		final Random r = new Random(this.getStorage().getSeed());
 
 		this.keratin = new GeneRegion<>("moaBiology.keratin", MoaGenePoolDataSet.KERATIN.pickRandom(r));
 		this.feathers = new GeneRegion<>("moaBiology.feathers", MoaGenePoolDataSet.FEATHERS.pickRandom(r));
@@ -53,19 +53,19 @@ public class MoaGenePool extends GenePool implements NBT
 	}
 
 	@Override
-	public void transformFromParents(int seed, int fatherSeed, int motherSeed)
+	public void transformFromParents(final int seed, final int fatherSeed, final int motherSeed)
 	{
 		this.getStorage().setSeed(seed);
 		this.getStorage().setFatherSeed(fatherSeed);
 		this.getStorage().setMotherSeed(motherSeed);
 
-		MoaGenePool father = new MoaGenePool(new SimpleGeneStorage());
-		MoaGenePool mother = new MoaGenePool(new SimpleGeneStorage());
+		final MoaGenePool father = new MoaGenePool(new SimpleGeneStorage());
+		final MoaGenePool mother = new MoaGenePool(new SimpleGeneStorage());
 
 		father.transformFromSeed(this.getStorage().getFatherSeed());
 		mother.transformFromSeed(this.getStorage().getMotherSeed());
 
-		Random r = new Random(this.getStorage().getSeed());
+		final Random r = new Random(this.getStorage().getSeed());
 
 		this.keratin = new GeneRegion<>("moaBiology.keratin", GeneUtil.evaluateInheritedGene(r, father.keratin, mother.keratin));
 		this.feathers = new GeneRegion<>("moaBiology.feathers", GeneUtil.evaluateInheritedGene(r, father.feathers, mother.feathers));
@@ -80,7 +80,7 @@ public class MoaGenePool extends GenePool implements NBT
 	@Override
 	public List<GeneRegion> createGeneRegions()
 	{
-		List<GeneRegion> gr = Lists.newArrayList();
+		final List<GeneRegion> gr = Lists.newArrayList();
 
 		gr.add(this.keratin);
 		gr.add(this.feathers);
@@ -117,13 +117,13 @@ public class MoaGenePool extends GenePool implements NBT
 	}
 
 	@Override
-	public void write(NBTTagCompound output)
+	public void write(final NBTTagCompound output)
 	{
 		this.getStorage().write(output);
 	}
 
 	@Override
-	public void read(NBTTagCompound input)
+	public void read(final NBTTagCompound input)
 	{
 		this.getStorage().read(input);
 

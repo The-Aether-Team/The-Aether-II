@@ -9,11 +9,11 @@ public class WrappingPaperColorHandler implements IItemColor
 {
 
 	@Override
-	public int getColorFromItemstack(ItemStack stack, int tintIndex)
+	public int colorMultiplier(final ItemStack stack, final int tintIndex)
 	{
 		if (stack.getItem() instanceof ItemWrappingPaper)
 		{
-			ItemWrappingPaper.PresentDyeData data = ItemWrappingPaper.getDyeData(stack);
+			final ItemWrappingPaper.PresentDyeData data = ItemWrappingPaper.getDyeData(stack);
 
 			if (tintIndex == 0)
 			{

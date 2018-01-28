@@ -13,10 +13,11 @@ public class TileEntityIcestoneCoolerRenderer extends TileEntitySpecialRenderer<
 
 	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/tile_entities/icestone_cooler.png");
 
-	private ModelIcestoneCooler model = new ModelIcestoneCooler();
+	private final ModelIcestoneCooler model = new ModelIcestoneCooler();
 
 	@Override
-	public void renderTileEntityAt(TileEntityIcestoneCooler te, double x, double y, double z, float partialTicks, int destroyStage)
+	public void render(final TileEntityIcestoneCooler te, final double x, final double y, final double z, final float partialTicks, final int destroyStage,
+			final float alpha)
 	{
 		GlStateManager.pushMatrix();
 		GlStateManager.enableRescaleNormal();
@@ -28,18 +29,18 @@ public class TileEntityIcestoneCoolerRenderer extends TileEntitySpecialRenderer<
 		{
 			switch (te.getFacing())
 			{
-			case NORTH:
-				GlStateManager.rotate(270.0f, 0.0f, 1.0f, 0.0f);
-				break;
-			case WEST:
-				GlStateManager.rotate(180.0f, 0.0f, 1.0f, 0.0f);
-				break;
-			case SOUTH:
-				GlStateManager.rotate(90.0f, 0.0f, 1.0f, 0.0f);
-				break;
-			case EAST:
-				GlStateManager.rotate(0.0f, 0.0f, 1.0f, 0.0f);
-				break;
+				case NORTH:
+					GlStateManager.rotate(270.0f, 0.0f, 1.0f, 0.0f);
+					break;
+				case WEST:
+					GlStateManager.rotate(180.0f, 0.0f, 1.0f, 0.0f);
+					break;
+				case SOUTH:
+					GlStateManager.rotate(90.0f, 0.0f, 1.0f, 0.0f);
+					break;
+				case EAST:
+					GlStateManager.rotate(0.0f, 0.0f, 1.0f, 0.0f);
+					break;
 			}
 		}
 		else

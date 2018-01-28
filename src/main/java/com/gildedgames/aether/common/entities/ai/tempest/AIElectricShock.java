@@ -16,7 +16,7 @@ public class AIElectricShock extends EntityAI<EntityTempest>
 
 	private int cooldownTimer;
 
-	public AIElectricShock(EntityTempest entity)
+	public AIElectricShock(final EntityTempest entity)
 	{
 		super(entity);
 	}
@@ -24,7 +24,7 @@ public class AIElectricShock extends EntityAI<EntityTempest>
 	@Override
 	public void startExecuting()
 	{
-		IAttributeInstance movementSpeed = this.entity().getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
+		final IAttributeInstance movementSpeed = this.entity().getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
 
 		this.entity().getNavigator().tryMoveToEntityLiving(this.entity().getAttackTarget(),
 				movementSpeed != null ? movementSpeed.getAttributeValue() : 1.0D);
@@ -52,9 +52,9 @@ public class AIElectricShock extends EntityAI<EntityTempest>
 	@Override
 	public void updateTask()
 	{
-		EntityLivingBase prey = this.entity().getAttackTarget();
+		final EntityLivingBase prey = this.entity().getAttackTarget();
 
-		double distanceToAttackTarget = this.entity().getDistanceToEntity(prey);
+		final double distanceToAttackTarget = this.entity().getDistance(prey);
 
 		this.cooldownTimer++;
 
@@ -70,7 +70,7 @@ public class AIElectricShock extends EntityAI<EntityTempest>
 
 				this.attackTimer++;
 
-				this.entity().getNavigator().clearPathEntity();
+				this.entity().getNavigator().clearPath();
 
 				if (this.attackTimer >= 40)
 				{

@@ -17,42 +17,18 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class EntityParachute extends Entity
 {
 
-	public enum Type
-	{
-		COLD("cold"), GOLDEN("golden"), PURPLE("purple"), GREEN("green"), BLUE("blue");
-
-		public final String name, desc;
-
-		public final ResourceLocation texture;
-
-		Type(String name)
-		{
-			this.name = name;
-			this.desc = "cloudParachute.ability." + this.name;
-
-			this.texture = new ResourceLocation("aether", "textures/entities/parachute/parachute_" + this.name + ".png");
-		}
-
-		public static Type fromOrdinal(int ordinal)
-		{
-			Type[] type = values();
-
-			return type[ordinal > type.length || ordinal < 0 ? 0 : ordinal];
-		}
-	}
-
 	private static final DataParameter<Integer> TYPE = EntityDataManager.createKey(EntityParachute.class, DataSerializers.VARINT);
 
 	private EntityPlayer parachutingPlayer;
 
-	public EntityParachute(World world)
+	public EntityParachute(final World world)
 	{
 		super(world);
 
 		this.setDead();
 	}
 
-	public EntityParachute(World world, EntityPlayer player, Type type)
+	public EntityParachute(final World world, final EntityPlayer player, final Type type)
 	{
 		super(world);
 
@@ -80,8 +56,8 @@ public class EntityParachute extends Entity
 
 		if (this.getRidingEntity() instanceof EntityPlayer)
 		{
-			EntityPlayer player = (EntityPlayer) this.getRidingEntity();
-			Vec3d vec3 = player.getLookVec();
+			final EntityPlayer player = (EntityPlayer) this.getRidingEntity();
+			final Vec3d vec3 = player.getLookVec();
 
 			if (this.getType() == Type.COLD)
 			{
@@ -99,9 +75,9 @@ public class EntityParachute extends Entity
 
 			if (this.getType() == Type.PURPLE)
 			{
-				player.motionX = vec3.xCoord * 0.18f;
+				player.motionX = vec3.x * 0.18f;
 				player.motionY = -0.08f;
-				player.motionZ = vec3.zCoord * 0.18f;
+				player.motionZ = vec3.z * 0.18f;
 			}
 
 			if (this.getType() == Type.GREEN)
@@ -118,7 +94,7 @@ public class EntityParachute extends Entity
 
 			player.isAirBorne = true;
 
-			PlayerAether playerAether = PlayerAether.getPlayer(player);
+			final PlayerAether playerAether = PlayerAether.getPlayer(player);
 
 			if (!playerAether.getParachuteModule().isParachuting())
 			{
@@ -145,7 +121,7 @@ public class EntityParachute extends Entity
 		return Type.fromOrdinal(this.dataManager.get(EntityParachute.TYPE));
 	}
 
-	public void setType(Type type)
+	public void setType(final Type type)
 	{
 		this.dataManager.set(EntityParachute.TYPE, type.ordinal());
 	}
@@ -156,27 +132,51 @@ public class EntityParachute extends Entity
 	}
 
 	@Override
-	public void readEntityFromNBT(NBTTagCompound tag)
+	public void readEntityFromNBT(final NBTTagCompound tag)
 	{
 		this.setType(Type.fromOrdinal(tag.getInteger("type")));
 	}
 
 	@Override
-	public void writeEntityToNBT(NBTTagCompound tag)
+	public void writeEntityToNBT(final NBTTagCompound tag)
 	{
 		tag.setInteger("type", this.getType().ordinal());
 	}
 
 	@Override
-	public boolean attackEntityFrom(DamageSource source, float damage)
+	public boolean attackEntityFrom(final DamageSource source, final float damage)
 	{
-		if (source.getEntity() != this.getRidingEntity())
+		if (source.getTrueSource() != this.getRidingEntity())
 		{
 			return true;
 		}
 		else
 		{
 			return false;
+		}
+	}
+
+	public enum Type
+	{
+		COLD("cold"), GOLDEN("golden"), PURPLE("purple"), GREEN("green"), BLUE("blue");
+
+		public final String name, desc;
+
+		public final ResourceLocation texture;
+
+		Type(final String name)
+		{
+			this.name = name;
+			this.desc = "cloudParachute.ability." + this.name;
+
+			this.texture = new ResourceLocation("aether", "textures/entities/parachute/parachute_" + this.name + ".png");
+		}
+
+		public static Type fromOrdinal(final int ordinal)
+		{
+			final Type[] type = values();
+
+			return type[ordinal > type.length || ordinal < 0 ? 0 : ordinal];
 		}
 	}
 

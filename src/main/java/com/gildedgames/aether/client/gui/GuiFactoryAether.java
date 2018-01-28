@@ -10,15 +10,22 @@ public class GuiFactoryAether implements IModGuiFactory
 {
 
 	@Override
-	public void initialize(Minecraft minecraftInstance)
+	public void initialize(final Minecraft minecraftInstance)
 	{
 
 	}
 
 	@Override
-	public Class<? extends GuiScreen> mainConfigGuiClass()
+	public boolean hasConfigGui()
 	{
-		return GuiConfigAether.class;
+		return false;
+	}
+
+	@Override
+	public GuiScreen createConfigGui(final GuiScreen parentScreen)
+	{
+		//TODO: Create gui screen for config?
+		return null;
 	}
 
 	@Override
@@ -27,9 +34,4 @@ public class GuiFactoryAether implements IModGuiFactory
 		return null;
 	}
 
-	@Override
-	public RuntimeOptionGuiHandler getHandlerFor(RuntimeOptionCategoryElement element)
-	{
-		return null;
-	}
 }

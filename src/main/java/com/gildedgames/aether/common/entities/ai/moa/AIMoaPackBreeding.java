@@ -4,8 +4,8 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockWovenSticks;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
-import com.gildedgames.aether.common.entities.util.AnimalGender;
 import com.gildedgames.aether.common.entities.tiles.TileEntityMoaEgg;
+import com.gildedgames.aether.common.entities.util.AnimalGender;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.init.SoundEvents;
@@ -28,7 +28,7 @@ public class AIMoaPackBreeding extends EntityAIBase
 
 	public int timeUntilLay;
 
-	public AIMoaPackBreeding(EntityMoa moa, float moveSpeed)
+	public AIMoaPackBreeding(final EntityMoa moa, final float moveSpeed)
 	{
 		this.world = moa.world;
 		this.moveSpeed = moveSpeed;
@@ -95,9 +95,9 @@ public class AIMoaPackBreeding extends EntityAIBase
 	{
 		super.updateTask();
 
-		Path path = this.moa.getNavigator().getPath();
+		final Path path = this.moa.getNavigator().getPath();
 
-		boolean isNearEgg = this.moa.getDistanceSq(this.eggPos.getX() - 1, this.eggPos.getY(), this.eggPos.getZ() - 1) <= 4.0D;
+		final boolean isNearEgg = this.moa.getDistanceSq(this.eggPos.getX() - 1, this.eggPos.getY(), this.eggPos.getZ() - 1) <= 4.0D;
 
 		if ((path == null || path.isFinished()) && !isNearEgg)
 		{
@@ -110,14 +110,15 @@ public class AIMoaPackBreeding extends EntityAIBase
 		{
 			this.world.setBlockState(this.eggPos, BlocksAether.moa_egg.getDefaultState());
 
-			TileEntityMoaEgg egg = (TileEntityMoaEgg) this.world.getTileEntity(this.eggPos);
+			final TileEntityMoaEgg egg = (TileEntityMoaEgg) this.world.getTileEntity(this.eggPos);
 
 			if (egg != null)
 			{
-				MoaGenePool teGenes = egg.getGenePool();
-				MoaGenePool entityGenes = this.moa.getGenePool();
+				final MoaGenePool teGenes = egg.getGenePool();
+				final MoaGenePool entityGenes = this.moa.getGenePool();
 
-				teGenes.transformFromParents(entityGenes.getStorage().getSeed(), entityGenes.getStorage().getFatherSeed(), entityGenes.getStorage().getMotherSeed());
+				teGenes.transformFromParents(entityGenes.getStorage().getSeed(), entityGenes.getStorage().getFatherSeed(),
+						entityGenes.getStorage().getMotherSeed());
 
 				egg.setFamilyNest(this.moa.getFamilyNest());
 
@@ -135,7 +136,7 @@ public class AIMoaPackBreeding extends EntityAIBase
 	}
 
 	@Override
-	public boolean continueExecuting()
+	public boolean shouldContinueExecuting()
 	{
 		return this.shouldExecute();
 	}

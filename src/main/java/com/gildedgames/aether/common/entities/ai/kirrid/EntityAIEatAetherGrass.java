@@ -19,7 +19,7 @@ public class EntityAIEatAetherGrass extends EntityAIBase
 	/** Number of ticks since the entity started to eat grass */
 	int timer;
 
-	public EntityAIEatAetherGrass(EntityLiving grassEaterEntityIn)
+	public EntityAIEatAetherGrass(final EntityLiving grassEaterEntityIn)
 	{
 		this.entity = grassEaterEntityIn;
 		this.world = grassEaterEntityIn.world;
@@ -38,8 +38,9 @@ public class EntityAIEatAetherGrass extends EntityAIBase
 		}
 		else
 		{
-			BlockPos blockpos = new BlockPos(this.entity.posX, this.entity.posY, this.entity.posZ);
-			return this.world.getBlockState(blockpos).getBlock() == BlocksAether.tall_aether_grass && this.world.getBlockState(blockpos.down()).getBlock() == BlocksAether.aether_grass;
+			final BlockPos blockpos = new BlockPos(this.entity.posX, this.entity.posY, this.entity.posZ);
+			return this.world.getBlockState(blockpos).getBlock() == BlocksAether.tall_aether_grass
+					&& this.world.getBlockState(blockpos.down()).getBlock() == BlocksAether.aether_grass;
 		}
 	}
 
@@ -51,7 +52,7 @@ public class EntityAIEatAetherGrass extends EntityAIBase
 	{
 		this.timer = 40;
 		this.world.setEntityState(this.entity, (byte) 10);
-		this.entity.getNavigator().clearPathEntity();
+		this.entity.getNavigator().clearPath();
 	}
 
 	/**
@@ -67,7 +68,7 @@ public class EntityAIEatAetherGrass extends EntityAIBase
 	 * Returns whether an in-progress EntityAIBase should continue executing
 	 */
 	@Override
-	public boolean continueExecuting()
+	public boolean shouldContinueExecuting()
 	{
 		return this.timer > 0;
 	}
@@ -90,7 +91,7 @@ public class EntityAIEatAetherGrass extends EntityAIBase
 
 		if (this.timer == 4)
 		{
-			BlockPos blockpos = new BlockPos(this.entity.posX, this.entity.posY, this.entity.posZ);
+			final BlockPos blockpos = new BlockPos(this.entity.posX, this.entity.posY, this.entity.posZ);
 
 			if (this.world.getBlockState(blockpos).getBlock() == BlocksAether.tall_aether_grass)
 			{
@@ -103,7 +104,7 @@ public class EntityAIEatAetherGrass extends EntityAIBase
 			}
 			else
 			{
-				BlockPos blockpos1 = blockpos.down();
+				final BlockPos blockpos1 = blockpos.down();
 
 				if (this.world.getBlockState(blockpos1).getBlock() == Blocks.GRASS)
 				{

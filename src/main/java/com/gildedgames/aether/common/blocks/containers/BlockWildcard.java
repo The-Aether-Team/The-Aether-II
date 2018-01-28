@@ -1,14 +1,15 @@
 package com.gildedgames.aether.common.blocks.containers;
 
-import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.entities.tiles.TileEntitySchematicBlock;
 import com.gildedgames.aether.common.entities.tiles.TileEntityWildcard;
+import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.registry.content.SoundsAether;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -19,6 +20,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class BlockWildcard extends BlockContainer
@@ -34,19 +36,19 @@ public class BlockWildcard extends BlockContainer
 	}
 
 	@Override
-	public EnumBlockRenderType getRenderType(IBlockState state)
+	public EnumBlockRenderType getRenderType(final IBlockState state)
 	{
 		return EnumBlockRenderType.MODEL;
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(final IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState state)
+	public boolean isFullCube(final IBlockState state)
 	{
 		return true;
 	}
@@ -59,27 +61,28 @@ public class BlockWildcard extends BlockContainer
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World worldIn, int meta)
+	public TileEntity createNewTileEntity(final World worldIn, final int meta)
 	{
 		return new TileEntityWildcard();
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side,
-			float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(
+			final World world, final BlockPos pos, final IBlockState state, final EntityPlayer player, final EnumHand hand, final EnumFacing side,
+			final float hitX, final float hitY, final float hitZ)
 	{
 		if (world.isRemote)
 		{
 			return true;
 		}
 
-		TileEntity te = world.getTileEntity(pos);
+		final TileEntity te = world.getTileEntity(pos);
 
 		if (te instanceof TileEntitySchematicBlock)
 		{
-			TileEntitySchematicBlock schematic = (TileEntitySchematicBlock) te;
+			final TileEntitySchematicBlock schematic = (TileEntitySchematicBlock) te;
 
-			ItemStack heldItem = player.getHeldItem(hand);
+			final ItemStack heldItem = player.getHeldItem(hand);
 
 			if (heldItem.getItem() == ItemsAether.aether_developer_wand)
 			{
@@ -109,7 +112,7 @@ public class BlockWildcard extends BlockContainer
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
+	public void addInformation(final ItemStack stack, @Nullable final World player, final List<String> tooltip, final ITooltipFlag advanced)
 	{
 		tooltip.add(I18n.format("aether.warning.deprecated_item"));
 	}

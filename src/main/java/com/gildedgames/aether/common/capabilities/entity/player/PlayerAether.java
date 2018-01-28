@@ -3,17 +3,12 @@ package com.gildedgames.aether.common.capabilities.entity.player;
 import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.dialog.IDialogController;
 import com.gildedgames.aether.api.player.IPlayerAether;
-import com.gildedgames.aether.api.util.NBTHelper;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.*;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketEquipment;
 import com.gildedgames.aether.common.network.packets.PacketMarkPlayerDeath;
-import com.gildedgames.orbis.common.network.packets.PacketChangePower;
-import com.gildedgames.orbis.common.network.packets.PacketDeveloperMode;
-import com.gildedgames.orbis.common.network.packets.PacketDeveloperReach;
-import com.gildedgames.orbis.common.network.packets.PacketStagedInventoryChanged;
-import com.gildedgames.orbis.common.player.PlayerOrbisModule;
+import com.gildedgames.orbis.api.util.mc.NBTHelper;
 import com.google.common.collect.Lists;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -62,11 +57,22 @@ public class PlayerAether implements IPlayerAether
 
 	private final PlayerSwetTracker swetTracker;
 
-	private final PlayerOrbisModule orbisModule;
-
 	private final List<PlayerAetherObserver> observers = Lists.newArrayList();
 
 	private boolean hasDiedInAetherBefore;
+
+	public PlayerAether()
+	{
+		this.modules = new PlayerAetherModule[0];
+		this.entity = null;
+		this.abilitiesModule = null;
+		this.gravititeAbilityModule = null;
+		this.teleportingModule = null;
+		this.parachuteModule = null;
+		this.equipmentModule = null;
+		this.dialogModule = null;
+		this.swetTracker = null;
+	}
 
 	public PlayerAether(final EntityPlayer entity)
 	{
@@ -79,7 +85,6 @@ public class PlayerAether implements IPlayerAether
 		this.equipmentModule = new PlayerEquipmentModule(this);
 		this.dialogModule = new PlayerDialogModule(this);
 		this.swetTracker = new PlayerSwetTracker(this);
-		this.orbisModule = new PlayerOrbisModule(this);
 
 		final Collection<PlayerAetherModule> modules = new ArrayList<>();
 
@@ -90,16 +95,8 @@ public class PlayerAether implements IPlayerAether
 		modules.add(this.equipmentModule);
 		modules.add(this.dialogModule);
 		modules.add(this.swetTracker);
-		modules.add(this.orbisModule);
 
 		this.modules = modules.toArray(new PlayerAetherModule[modules.size()]);
-	}
-
-	public static PlayerOrbisModule getOrbisModule(final Entity player)
-	{
-		final PlayerAether playerAether = PlayerAether.getPlayer(player);
-
-		return playerAether.getOrbisModule();
 	}
 
 	public static PlayerAether getPlayer(final Entity player)
@@ -133,11 +130,6 @@ public class PlayerAether implements IPlayerAether
 	public void sendFullUpdate()
 	{
 		NetworkingAether.sendPacketToPlayer(new PacketMarkPlayerDeath(this.hasDiedInAetherBefore()), (EntityPlayerMP) this.getEntity());
-		NetworkingAether.sendPacketToPlayer(new PacketDeveloperMode(this.getOrbisModule().inDeveloperMode()), (EntityPlayerMP) this.getEntity());
-		NetworkingAether.sendPacketToPlayer(new PacketDeveloperReach(this.getOrbisModule().getDeveloperReach()), (EntityPlayerMP) this.getEntity());
-		NetworkingAether
-				.sendPacketToPlayer(new PacketChangePower(this.getOrbisModule().powers().getCurrentPowerIndex()), (EntityPlayerMP) this.getEntity());
-		//NetworkingAether.sendPacketToPlayer(new PacketWorldObjectAdd(this.getSelectionModule().get), (EntityPlayerMP) this.getEntity());
 	}
 
 	public void onUpdate(final LivingUpdateEvent event)
@@ -215,11 +207,6 @@ public class PlayerAether implements IPlayerAether
 	public void onPlayerBeginWatching(final IPlayerAether other)
 	{
 		NetworkingAether.sendPacketToPlayer(new PacketEquipment(this), (EntityPlayerMP) other.getEntity());
-
-		NetworkingAether.sendPacketToPlayer(new PacketStagedInventoryChanged(this, getOrbisModule().powers().getBlueprintPower().getStagedInventory()),
-				(EntityPlayerMP) other.getEntity());
-		NetworkingAether.sendPacketToPlayer(new PacketStagedInventoryChanged(this, getOrbisModule().powers().getFillPower().getStagedInventory()),
-				(EntityPlayerMP) other.getEntity());
 	}
 
 	@Override
@@ -250,7 +237,7 @@ public class PlayerAether implements IPlayerAether
 
 		for (final PlayerAetherModule module : this.modules)
 		{
-			modules.appendTag(NBTHelper.write(module));
+			modules.appendTag(NBTHelper.writeRaw(module));
 		}
 
 		tag.setTag("Modules", modules);
@@ -301,11 +288,6 @@ public class PlayerAether implements IPlayerAether
 	public PlayerSwetTracker getSwetTracker()
 	{
 		return this.swetTracker;
-	}
-
-	public PlayerOrbisModule getOrbisModule()
-	{
-		return this.orbisModule;
 	}
 
 	@Override
