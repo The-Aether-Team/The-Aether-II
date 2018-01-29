@@ -2,13 +2,14 @@ package com.gildedgames.aether.common.entities.living.passive;
 
 import com.gildedgames.aether.common.entities.util.flying.EntityFlying;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
 public class EntityAerwhale extends EntityFlying
 {
 
-	public EntityAerwhale(World world)
+	public EntityAerwhale(final World world)
 	{
 		super(world);
 
@@ -40,7 +41,7 @@ public class EntityAerwhale extends EntityFlying
 	}
 
 	@Override
-	protected SoundEvent getHurtSound()
+	protected SoundEvent getHurtSound(final DamageSource src)
 	{
 		return SoundsAether.aerwhale_ambient;
 	}

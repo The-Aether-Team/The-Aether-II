@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world.aether.island.population;
 
-import com.gildedgames.aether.api.world.generation.IBlockAccessExtended;
-import com.gildedgames.aether.api.world.generation.IWorldGen;
+import com.gildedgames.orbis.api.processing.IBlockAccessExtended;
+import com.gildedgames.orbis.api.world.IWorldGen;
 import net.minecraft.util.math.BlockPos;
 
 import java.util.Random;

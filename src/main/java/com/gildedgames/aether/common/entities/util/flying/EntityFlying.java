@@ -24,13 +24,13 @@ public class EntityFlying extends EntityCreature
 
 	private static final DataParameter<Boolean> IS_MOVING = EntityDataManager.createKey(EntityFlying.class, DataSerializers.BOOLEAN);
 
+	private final float clientSideTailAnimationO;
+
 	private float clientSideTailAnimationSpeed;
 
 	private float clientSideTailAnimation;
 
-	private float clientSideTailAnimationO;
-
-	public EntityFlying(World world)
+	public EntityFlying(final World world)
 	{
 		super(world);
 
@@ -44,8 +44,8 @@ public class EntityFlying extends EntityCreature
 	@Override
 	protected void initEntityAI()
 	{
-		EntityAIMoveTowardsRestriction moveTowardsRestriction = new EntityAIMoveTowardsRestriction(this, 0.4D);
-		EntityAIWander wander = new EntityAIForcedWander(this, 0.4D, 3);
+		final EntityAIMoveTowardsRestriction moveTowardsRestriction = new EntityAIMoveTowardsRestriction(this, 0.4D);
+		final EntityAIWander wander = new EntityAIForcedWander(this, 0.4D, 3);
 
 		wander.setMutexBits(3);
 		moveTowardsRestriction.setMutexBits(3);
@@ -61,7 +61,7 @@ public class EntityFlying extends EntityCreature
 	}
 
 	@SideOnly(Side.CLIENT)
-	public float getTailAnimation(float deltaTime)
+	public float getTailAnimation(final float deltaTime)
 	{
 		return this.clientSideTailAnimationO + (this.clientSideTailAnimation - this.clientSideTailAnimationO) * deltaTime;
 	}
@@ -73,7 +73,7 @@ public class EntityFlying extends EntityCreature
 	}
 
 	@Override
-	public float getBlockPathWeight(BlockPos pos)
+	public float getBlockPathWeight(final BlockPos pos)
 	{
 		return this.world.getBlockState(pos.down()).getBlock() == Blocks.AIR ? 10.0F : this.world.getLightBrightness(pos) - 0.5F;
 	}
@@ -81,14 +81,14 @@ public class EntityFlying extends EntityCreature
 	@Override
 	public boolean getCanSpawnHere()
 	{
-		IBlockState state = this.world.getBlockState((new BlockPos(this)).down());
+		final IBlockState state = this.world.getBlockState((new BlockPos(this)).down());
 
 		return state.canEntitySpawn(this)
 				&& this.getBlockPathWeight(new BlockPos(this.posX, this.getEntityBoundingBox().minY, this.posZ)) >= 0.0F;
 	}
 
 	@Override
-	protected void playStepSound(BlockPos pos, Block blockIn)
+	protected void playStepSound(final BlockPos pos, final Block blockIn)
 	{
 
 	}
@@ -100,13 +100,13 @@ public class EntityFlying extends EntityCreature
 	}
 
 	@Override
-	public void fall(float distance, float damageMultiplier)
+	public void fall(final float distance, final float damageMultiplier)
 	{
 
 	}
 
 	@Override
-	protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos)
+	protected void updateFallState(final double y, final boolean onGroundIn, final IBlockState state, final BlockPos pos)
 	{
 
 	}
@@ -144,7 +144,7 @@ public class EntityFlying extends EntityCreature
 			this.isAirBorne = true;
 		}
 
-		if (this.isCollidedHorizontally || this.isCollidedVertically || !this.isNotColliding())
+		if (this.collidedHorizontally || this.collidedVertically || !this.isNotColliding())
 		{
 			this.motionX += (this.rand.nextBoolean() ? 1.0F : -1.0F) * (double) ((this.rand.nextFloat() * 2.0F - 1.0F) * 0.2F);
 			this.motionZ += (this.rand.nextBoolean() ? 1.0F : -1.0F) * (double) ((this.rand.nextFloat() * 2.0F - 1.0F) * 0.2F);
@@ -173,7 +173,7 @@ public class EntityFlying extends EntityCreature
 	}
 
 	@Override
-	protected PathNavigate createNavigator(World worldIn)
+	protected PathNavigate createNavigator(final World worldIn)
 	{
 		return new PathNavigateFlyer(this, worldIn);
 	}
@@ -183,7 +183,7 @@ public class EntityFlying extends EntityCreature
 		return this.dataManager.get(EntityFlying.IS_MOVING);
 	}
 
-	protected void setMoving(boolean moving)
+	protected void setMoving(final boolean moving)
 	{
 		this.dataManager.set(EntityFlying.IS_MOVING, moving);
 	}
@@ -214,11 +214,11 @@ public class EntityFlying extends EntityCreature
 	}
 
 	@Override
-	public void moveEntityWithHeading(float strafe, float forward)
+	public void moveRelative(final float strafe, final float up, final float forward, final float resistance)
 	{
 		if (this.isServerWorld())
 		{
-			this.moveRelative(strafe, forward, 0.1F);
+			this.moveRelative(strafe, up, forward, 0.1F);
 			this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
 			this.motionX *= 0.8999999761581421D;
 			this.motionY *= 0.8999999761581421D;
@@ -226,7 +226,7 @@ public class EntityFlying extends EntityCreature
 		}
 		else
 		{
-			super.moveEntityWithHeading(strafe, forward);
+			super.moveRelative(strafe, up, forward, resistance);
 		}
 	}
 

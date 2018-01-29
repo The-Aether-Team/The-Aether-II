@@ -3,10 +3,10 @@ package com.gildedgames.aether.common.world.spawning;
 import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.entity.spawning.EntitySpawn;
 import com.gildedgames.aether.api.entity.spawning.ISpawningInfo;
-import com.gildedgames.aether.api.util.NBT;
-import com.gildedgames.aether.api.util.NBTHelper;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.util.ChunkMap;
+import com.gildedgames.orbis.api.util.mc.NBT;
+import com.gildedgames.orbis.api.util.mc.NBTHelper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import net.minecraft.entity.Entity;
@@ -315,8 +315,8 @@ public class SpawnHandler implements NBT
 					break;
 				}
 
-				final int minX = (area.getMinChunkPos().chunkXPos) * 16;
-				final int minZ = (area.getMinChunkPos().chunkZPos) * 16;
+				final int minX = (area.getMinChunkPos().x) * 16;
+				final int minZ = (area.getMinChunkPos().z) * 16;
 
 				final int groupPosX = minX + world.rand.nextInt(areaInBlocks);
 				final int groupPosZ = minZ + world.rand.nextInt(areaInBlocks);

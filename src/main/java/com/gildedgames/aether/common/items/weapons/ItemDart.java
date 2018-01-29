@@ -19,16 +19,21 @@ public class ItemDart extends Item
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item item, CreativeTabs tab, NonNullList<ItemStack> subItems)
+	public void getSubItems(final CreativeTabs tab, final NonNullList<ItemStack> subItems)
 	{
-		for (ItemDartType type : ITEM_VARIANTS)
+		if (!this.isInCreativeTab(tab))
 		{
-			subItems.add(new ItemStack(item, 1, type.ordinal()));
+			return;
+		}
+
+		for (final ItemDartType type : ITEM_VARIANTS)
+		{
+			subItems.add(new ItemStack(this, 1, type.ordinal()));
 		}
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack)
+	public String getUnlocalizedName(final ItemStack stack)
 	{
 		return super.getUnlocalizedName(stack) + "." + ItemDartType.fromOrdinal(stack.getMetadata()).getID();
 	}

@@ -11,17 +11,18 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
+//TODO COMPLETELY WRONG, NOW USES INGREDIENT OBJECTS
 public class ShapelessRecipeWrapper implements IIndexableRecipe
 {
 	private final ShapelessOreRecipe recipe;
 
 	private final HashSet<ItemMetaPair> unique = new HashSet<>();
 
-	public ShapelessRecipeWrapper(ShapelessOreRecipe recipe)
+	public ShapelessRecipeWrapper(final ShapelessOreRecipe recipe)
 	{
 		this.recipe = recipe;
 
-		for (Object obj : recipe.getInput())
+		for (final Object obj : recipe.getIngredients())
 		{
 			if (obj instanceof ItemStack)
 			{
@@ -29,7 +30,7 @@ public class ShapelessRecipeWrapper implements IIndexableRecipe
 			}
 			else if (obj instanceof NonNullList)
 			{
-				Collection<ItemStack> collection = (Collection<ItemStack>) obj;
+				final Collection<ItemStack> collection = (Collection<ItemStack>) obj;
 				collection.stream().map(ItemMetaPair::new).forEach(this.unique::add);
 			}
 		}
@@ -38,7 +39,7 @@ public class ShapelessRecipeWrapper implements IIndexableRecipe
 	@Override
 	public List<Object> getCraftingMatrix()
 	{
-		return Collections.unmodifiableList(this.recipe.getInput());
+		return Collections.unmodifiableList(this.recipe.getIngredients());
 	}
 
 	@Override
@@ -50,13 +51,13 @@ public class ShapelessRecipeWrapper implements IIndexableRecipe
 	@Override
 	public int getRecipeWidth()
 	{
-		return this.recipe.getRecipeSize() % 3;
+		return this.recipe.getIngredients().size() % 3;
 	}
 
 	@Override
 	public int getRecipeHeight()
 	{
-		return this.recipe.getRecipeSize() / 3;
+		return this.recipe.getIngredients().size() / 3;
 	}
 
 	@Override

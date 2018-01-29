@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.world.aether.features;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.google.common.base.Objects;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -10,6 +9,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.MapGenBase;
+import org.apache.commons.lang3.ObjectUtils;
 
 import java.util.Random;
 
@@ -179,7 +179,7 @@ public class WorldGenAetherCaves extends MapGenBase
 										if (d9 > -0.7D && d10 * d10 + d9 * d9 + d8 * d8 < 1.0D)
 										{
 											final IBlockState state = primer.getBlockState(x2, y2, z2);
-											final IBlockState above = Objects.firstNonNull(primer.getBlockState(x2, y2 + 1, z2), BLK_AIR);
+											final IBlockState above = ObjectUtils.firstNonNull(primer.getBlockState(x2, y2 + 1, z2), BLK_AIR);
 
 											if (this.isTopBlock(primer, x2, y2, z2, chunkX, chunkZ))
 											{

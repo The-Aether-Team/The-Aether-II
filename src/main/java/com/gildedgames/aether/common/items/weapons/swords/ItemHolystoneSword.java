@@ -14,22 +14,22 @@ public class ItemHolystoneSword extends ItemAetherSword
 		super(ToolMaterial.STONE, ItemAbilityType.PASSIVE);
 	}
 
+	public static void trySpawnAmbrosium(final ItemStack stack, final Entity target, final EntityLivingBase attacker)
+	{
+		if (!target.world.isRemote && target.world.rand.nextInt(100) <= 3)
+		{
+			final EntityItem entityItem = new EntityItem(target.world, target.posX, target.posY, target.posZ);
+			entityItem.setItem(new ItemStack(ItemsAether.ambrosium_shard, 1));
+
+			target.world.spawnEntity(entityItem);
+		}
+	}
+
 	@Override
-	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
+	public boolean hitEntity(final ItemStack stack, final EntityLivingBase target, final EntityLivingBase attacker)
 	{
 		ItemHolystoneSword.trySpawnAmbrosium(stack, target, attacker);
 
 		return super.hitEntity(stack, target, attacker);
-	}
-
-	public static void trySpawnAmbrosium(ItemStack stack, Entity target, EntityLivingBase attacker)
-	{
-		if (!target.world.isRemote && target.world.rand.nextInt(100) <= 3)
-		{
-			EntityItem entityItem = new EntityItem(target.world, target.posX, target.posY, target.posZ);
-			entityItem.setEntityItemStack(new ItemStack(ItemsAether.ambrosium_shard, 1));
-
-			target.world.spawnEntity(entityItem);
-		}
 	}
 }

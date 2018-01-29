@@ -3,20 +3,15 @@ package com.gildedgames.aether.common.items.armor;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.List;
 
 public class ItemAetherArmor extends ItemArmor
 {
 	private final String name;
 
-	public ItemAetherArmor(ArmorMaterial material, String name, EntityEquipmentSlot armorType)
+	public ItemAetherArmor(final ArmorMaterial material, final String name, final EntityEquipmentSlot armorType)
 	{
 		super(material, 0, armorType);
 
@@ -26,7 +21,7 @@ public class ItemAetherArmor extends ItemArmor
 	}
 
 	@Override
-	public boolean getIsRepairable(ItemStack target, ItemStack stack)
+	public boolean getIsRepairable(final ItemStack target, final ItemStack stack)
 	{
 		return false;
 	}
@@ -36,21 +31,14 @@ public class ItemAetherArmor extends ItemArmor
 		return true;
 	}
 
-	public float getExtraDamageReduction(ItemStack stack)
+	public float getExtraDamageReduction(final ItemStack stack)
 	{
 		return 0.0f;
 	}
 
 	@Override
-	public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type)
+	public String getArmorTexture(final ItemStack stack, final Entity entity, final EntityEquipmentSlot slot, final String type)
 	{
 		return AetherCore.getResourcePath("textures/armor/" + this.name + "_layer_" + (slot == EntityEquipmentSlot.LEGS ? 2 : 1) + ".png");
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
-	{
-
 	}
 }

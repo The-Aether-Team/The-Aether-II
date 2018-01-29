@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 
 public class ItemAetherPickaxe extends ItemPickaxe
 {
-	public ItemAetherPickaxe(ToolMaterial material)
+	public ItemAetherPickaxe(final ToolMaterial material)
 	{
 		super(material);
 
@@ -17,10 +17,10 @@ public class ItemAetherPickaxe extends ItemPickaxe
 	}
 
 	@Override
-	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
+	public boolean hitEntity(final ItemStack stack, final EntityLivingBase target, final EntityLivingBase attacker)
 	{
 		super.hitEntity(stack, target, attacker);
 
-		return ItemToolHandler.onEntityHit(stack, this.getToolMaterial(), target, attacker);
+		return ItemToolHandler.onEntityHit(stack, this.toolMaterial, target, attacker);
 	}
 }

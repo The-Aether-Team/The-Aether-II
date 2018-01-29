@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.network;
 
-import com.gildedgames.aether.common.network.util.IMessageMultipleParts;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -41,13 +40,6 @@ public abstract class MessageHandlerClient<REQ extends IMessage, RES extends IMe
 			return null;
 		}
 
-		if (message instanceof IMessageMultipleParts)
-		{
-			final IMessageMultipleParts messageParts = (IMessageMultipleParts) message;
-
-			return this.processPart(message, messageParts, mc.player);
-		}
-
 		return this.onMessage(message, mc.player);
 	}
 
@@ -78,16 +70,7 @@ public abstract class MessageHandlerClient<REQ extends IMessage, RES extends IMe
 		@Override
 		public void run()
 		{
-			if (this.message instanceof IMessageMultipleParts)
-			{
-				final IMessageMultipleParts messageParts = (IMessageMultipleParts) this.message;
-
-				this.handler.processPart(this.message, messageParts, Minecraft.getMinecraft().player);
-			}
-			else
-			{
-				this.handler.onMessage(this.message, Minecraft.getMinecraft().player);
-			}
+			this.handler.onMessage(this.message, Minecraft.getMinecraft().player);
 		}
 	}
 }

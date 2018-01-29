@@ -1,10 +1,11 @@
 package com.gildedgames.aether.common.items.misc;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -13,6 +14,26 @@ import java.util.List;
 public class ItemWrappingPaper extends Item
 {
 
+	public static PresentDyeData getDyeData(final ItemStack stack)
+	{
+		return PresentDyeData.readFromNBT(stack.getTagCompound());
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(final ItemStack stack, final World world, final List<String> tooltip, final ITooltipFlag flag)
+	{
+		final PresentDyeData data = ItemWrappingPaper.getDyeData(stack);
+
+		if (data == null)
+		{
+			return;
+		}
+
+		tooltip.add(TextFormatting.YELLOW + data.getBowColorName() + " Bow, " + data.getBoxColorName() + " Box");
+		tooltip.add(TextFormatting.GRAY + "Craft with items!");
+	}
+
 	public static class PresentDyeData
 	{
 		public static final String[] dyeNames = new String[] { "Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "Silver", "Gray",
@@ -20,9 +41,9 @@ public class ItemWrappingPaper extends Item
 
 		private byte bowColor = 1, boxColor = 15;
 
-		public static PresentDyeData readFromNBT(NBTTagCompound compound)
+		public static PresentDyeData readFromNBT(final NBTTagCompound compound)
 		{
-			PresentDyeData data = new PresentDyeData();
+			final PresentDyeData data = new PresentDyeData();
 
 			if (compound == null)
 			{
@@ -35,7 +56,7 @@ public class ItemWrappingPaper extends Item
 			return data;
 		}
 
-		public NBTTagCompound writeToNBT(NBTTagCompound compound)
+		public NBTTagCompound writeToNBT(final NBTTagCompound compound)
 		{
 			compound.setByte("boxColor", this.getBoxColor());
 			compound.setByte("bowColor", this.getBowColor());
@@ -58,7 +79,7 @@ public class ItemWrappingPaper extends Item
 			return this.bowColor;
 		}
 
-		public void setBowColor(byte bowColor)
+		public void setBowColor(final byte bowColor)
 		{
 			this.bowColor = bowColor;
 		}
@@ -68,30 +89,10 @@ public class ItemWrappingPaper extends Item
 			return this.boxColor;
 		}
 
-		public void setBoxColor(byte boxColor)
+		public void setBoxColor(final byte boxColor)
 		{
 			this.boxColor = boxColor;
 		}
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean adv)
-	{
-		PresentDyeData data = ItemWrappingPaper.getDyeData(stack);
-
-		if (data == null)
-		{
-			return;
-		}
-
-		tooltip.add(TextFormatting.YELLOW + data.getBowColorName() + " Bow, " + data.getBoxColorName() + " Box");
-		tooltip.add(TextFormatting.GRAY + "Craft with items!");
-	}
-
-	public static PresentDyeData getDyeData(ItemStack stack)
-	{
-		return PresentDyeData.readFromNBT(stack.getTagCompound());
 	}
 
 /*	@SideOnly(Side.CLIENT)

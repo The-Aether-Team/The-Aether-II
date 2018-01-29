@@ -19,7 +19,7 @@ import net.minecraft.item.Item;
 
 public class EquipmentContent
 {
-	public static void preInit()
+	public static void init()
 	{
 		registerProcessors();
 		registerItems();
@@ -42,7 +42,8 @@ public class EquipmentContent
 		createCompanionItem(ItemsAether.frostpine_totem, ItemEquipmentSlot.COMPANION, ItemRarity.RARE, EntityFrostpineTotem.class,
 				new PotionEffectProvider(MobEffects.NIGHT_VISION, 0));
 
-		createCompanionItem(ItemsAether.ethereal_stone, ItemEquipmentSlot.COMPANION, ItemRarity.RARE, EntityEtherealWisp.class, new InvisiblityEffectFactory.Provider());
+		createCompanionItem(ItemsAether.ethereal_stone, ItemEquipmentSlot.COMPANION, ItemRarity.RARE, EntityEtherealWisp.class,
+				new InvisiblityEffectFactory.Provider());
 
 		createCompanionItem(ItemsAether.fleeting_stone, ItemEquipmentSlot.COMPANION, ItemRarity.RARE, EntityFleetingWisp.class);
 
@@ -78,7 +79,6 @@ public class EquipmentContent
 		createEquipmentItem(ItemsAether.charm_arm_03, ItemEquipmentSlot.CHARM, ItemRarity.MYTHIC,
 				new StatProvider(SharedMonsterAttributes.ARMOR, 1.2D, StatProvider.OP_ADD));
 
-
 		createEquipmentItem(ItemsAether.charm_arm_tgh_01, ItemEquipmentSlot.CHARM, ItemRarity.RARE,
 				new StatProvider(SharedMonsterAttributes.ARMOR_TOUGHNESS, 0.1D, StatProvider.OP_ADD));
 
@@ -87,7 +87,6 @@ public class EquipmentContent
 
 		createEquipmentItem(ItemsAether.charm_arm_tgh_03, ItemEquipmentSlot.CHARM, ItemRarity.MYTHIC,
 				new StatProvider(SharedMonsterAttributes.ARMOR_TOUGHNESS, 0.7D, StatProvider.OP_ADD));
-
 
 		createEquipmentItem(ItemsAether.charm_atk_dmg_01, ItemEquipmentSlot.CHARM, ItemRarity.RARE,
 				new StatProvider(SharedMonsterAttributes.ATTACK_DAMAGE, 0.5D, StatProvider.OP_ADD));
@@ -98,7 +97,6 @@ public class EquipmentContent
 		createEquipmentItem(ItemsAether.charm_atk_dmg_03, ItemEquipmentSlot.CHARM, ItemRarity.MYTHIC,
 				new StatProvider(SharedMonsterAttributes.ATTACK_DAMAGE, 1.5D, StatProvider.OP_ADD));
 
-
 		createEquipmentItem(ItemsAether.charm_atk_spd_01, ItemEquipmentSlot.CHARM, ItemRarity.RARE,
 				new StatProvider(SharedMonsterAttributes.ATTACK_SPEED, 0.03D, StatProvider.OP_MULTIPLY));
 
@@ -107,7 +105,6 @@ public class EquipmentContent
 
 		createEquipmentItem(ItemsAether.charm_atk_spd_03, ItemEquipmentSlot.CHARM, ItemRarity.MYTHIC,
 				new StatProvider(SharedMonsterAttributes.ATTACK_SPEED, 0.12D, StatProvider.OP_MULTIPLY));
-
 
 		createEquipmentItem(ItemsAether.charm_kbk_res_01, ItemEquipmentSlot.CHARM, ItemRarity.RARE,
 				new StatProvider(SharedMonsterAttributes.KNOCKBACK_RESISTANCE, 0.1D, StatProvider.OP_ADD));
@@ -118,7 +115,6 @@ public class EquipmentContent
 		createEquipmentItem(ItemsAether.charm_kbk_res_03, ItemEquipmentSlot.CHARM, ItemRarity.MYTHIC,
 				new StatProvider(SharedMonsterAttributes.KNOCKBACK_RESISTANCE, 0.3D, StatProvider.OP_ADD));
 
-
 		createEquipmentItem(ItemsAether.charm_lck_01, ItemEquipmentSlot.CHARM, ItemRarity.RARE,
 				new StatProvider(SharedMonsterAttributes.LUCK, 0.1D, StatProvider.OP_ADD));
 
@@ -128,7 +124,6 @@ public class EquipmentContent
 		createEquipmentItem(ItemsAether.charm_lck_03, ItemEquipmentSlot.CHARM, ItemRarity.MYTHIC,
 				new StatProvider(SharedMonsterAttributes.LUCK, 0.7D, StatProvider.OP_ADD));
 
-
 		createEquipmentItem(ItemsAether.charm_max_hlt_01, ItemEquipmentSlot.CHARM, ItemRarity.RARE,
 				new StatProvider(SharedMonsterAttributes.MAX_HEALTH, 0.5D, StatProvider.OP_ADD));
 
@@ -137,7 +132,6 @@ public class EquipmentContent
 
 		createEquipmentItem(ItemsAether.charm_max_hlt_03, ItemEquipmentSlot.CHARM, ItemRarity.MYTHIC,
 				new StatProvider(SharedMonsterAttributes.MAX_HEALTH, 2.0D, StatProvider.OP_ADD));
-
 
 		createEquipmentItem(ItemsAether.charm_mve_spd_01, ItemEquipmentSlot.CHARM, ItemRarity.RARE,
 				new StatProvider(SharedMonsterAttributes.MOVEMENT_SPEED, 0.05D, StatProvider.OP_MULTIPLY));
@@ -149,13 +143,13 @@ public class EquipmentContent
 				new StatProvider(SharedMonsterAttributes.MOVEMENT_SPEED, 0.15D, StatProvider.OP_MULTIPLY));
 	}
 
-	private static void createEquipmentItem(Item item, ItemEquipmentSlot slot, ItemRarity rarity, IEffectProvider... providers)
+	private static void createEquipmentItem(final Item item, final ItemEquipmentSlot slot, final ItemRarity rarity, final IEffectProvider... providers)
 	{
-		ItemPropertiesBuilder builder = new ItemPropertiesBuilder();
+		final ItemPropertiesBuilder builder = new ItemPropertiesBuilder();
 		builder.withSlot(slot);
 		builder.withRarity(rarity);
 
-		for (IEffectProvider provider : providers)
+		for (final IEffectProvider provider : providers)
 		{
 			builder.withEffect(provider);
 		}
@@ -163,17 +157,17 @@ public class EquipmentContent
 		AetherAPI.content().items().registerItem(item, builder.build());
 	}
 
-	private static void createCompanionItem(Item item, ItemEquipmentSlot slot, ItemRarity rarity,
-			Class<? extends EntityCompanion> companion, IEffectProvider... providers)
+	private static void createCompanionItem(final Item item, final ItemEquipmentSlot slot, final ItemRarity rarity,
+			final Class<? extends EntityCompanion> companion, final IEffectProvider... providers)
 	{
-		ItemPropertiesBuilder builder = new ItemPropertiesBuilder();
+		final ItemPropertiesBuilder builder = new ItemPropertiesBuilder();
 		builder.withSlot(slot);
 		builder.withRarity(rarity);
 		builder.withEffect(new CompanionEffectProvider(companion));
 		builder.withPrecondition((player, stack) ->
-				!(stack.getItem() instanceof ItemCompanion) ||ItemCompanion.getTicksUntilRespawn(stack, player.getEntity().getEntityWorld()) <= 0);
+				!(stack.getItem() instanceof ItemCompanion) || ItemCompanion.getTicksUntilRespawn(stack, player.getEntity().getEntityWorld()) <= 0);
 
-		for (IEffectProvider provider : providers)
+		for (final IEffectProvider provider : providers)
 		{
 			builder.withEffect(provider);
 		}

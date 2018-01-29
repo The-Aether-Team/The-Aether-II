@@ -1,9 +1,5 @@
 package com.gildedgames.aether.common.world.aether;
 
-import com.gildedgames.aether.api.util.BlockAccessExtendedWrapper;
-import com.gildedgames.aether.api.util.BlockUtil;
-import com.gildedgames.aether.api.util.NBT;
-import com.gildedgames.aether.api.util.NBTHelper;
 import com.gildedgames.aether.api.world.generation.TemplateLoc;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
@@ -12,6 +8,10 @@ import com.gildedgames.aether.common.registry.content.GenerationAether;
 import com.gildedgames.aether.common.util.WorldPos;
 import com.gildedgames.aether.common.world.templates.TemplatePlacer;
 import com.gildedgames.aether.common.world.templates.TemplatePrimer;
+import com.gildedgames.orbis.api.processing.BlockAccessExtendedWrapper;
+import com.gildedgames.orbis.api.util.mc.BlockUtil;
+import com.gildedgames.orbis.api.util.mc.NBT;
+import com.gildedgames.orbis.api.util.mc.NBTHelper;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import net.minecraft.block.BlockFlower;
@@ -76,7 +76,7 @@ public class TeleporterAether extends Teleporter implements NBT
 
 		if (entity.dimension != this.worldServerInstance.provider.getDimension())
 		{
-			this.worldServerInstance = FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(entity.dimension);
+			this.worldServerInstance = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(entity.dimension);
 
 			boolean teleporterRegistered = false;
 
@@ -150,7 +150,7 @@ public class TeleporterAether extends Teleporter implements NBT
 	@SubscribeEvent
 	public void onChunkUnload(final ChunkEvent.Unload event)
 	{
-		final ChunkPos chunkPosition = new ChunkPos(event.getChunk().xPosition, event.getChunk().zPosition);
+		final ChunkPos chunkPosition = new ChunkPos(event.getChunk().x, event.getChunk().z);
 
 		chunksMarkedForPortal.remove(chunkPosition);
 	}
@@ -198,7 +198,7 @@ public class TeleporterAether extends Teleporter implements NBT
 			if (entity instanceof EntityPlayerMP)
 			{
 				final EntityPlayerMP player = (EntityPlayerMP) entity;
-				final World world = FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(linkedPortal.getDimension());
+				final World world = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(linkedPortal.getDimension());
 				player.setPositionAndUpdate(linkedPortal.getX() + 1.5D, linkedPortal.getY(), linkedPortal.getZ() + 1.5D);
 
 				//this.worldServerInstance.updateEntityWithOptionalForce(player, true);
@@ -242,8 +242,8 @@ public class TeleporterAether extends Teleporter implements NBT
 		{
 			final EnumFacing outerPosFacing = world.rand.nextBoolean() ? outerDirection.rotateY() : outerDirection;
 
-			chunkX = outerPosition.chunkXPos + outerPosFacing.getFrontOffsetX();
-			chunkZ = outerPosition.chunkZPos + outerPosFacing.getFrontOffsetZ();
+			chunkX = outerPosition.x + outerPosFacing.getFrontOffsetX();
+			chunkZ = outerPosition.z + outerPosFacing.getFrontOffsetZ();
 
 			outerPosition = new ChunkPos(chunkX, chunkZ);
 

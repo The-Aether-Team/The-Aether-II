@@ -13,7 +13,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProviderSurface;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.chunk.IChunkGenerator;
+import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -25,8 +25,6 @@ public class WorldProviderAether extends WorldProviderSurface
 
 	public WorldProviderAether()
 	{
-		this.hasNoSky = false;
-
 		if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
 		{
 			this.setupClientRenderer();
@@ -130,18 +128,6 @@ public class WorldProviderAether extends WorldProviderSurface
 	public String getSaveFolder()
 	{
 		return "AETHER";
-	}
-
-	@Override
-	public String getWelcomeMessage()
-	{
-		return "Ascending to the Aether";
-	}
-
-	@Override
-	public String getDepartMessage()
-	{
-		return "Descending from the Aether";
 	}
 
 	@Override

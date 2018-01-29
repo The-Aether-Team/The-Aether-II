@@ -21,14 +21,14 @@ public class MountEventHandler
 {
 
 	@SubscribeEvent
-	public static void onPlayerInteract(PlayerInteractEvent.EntityInteractSpecific event)
+	public static void onPlayerInteract(final PlayerInteractEvent.EntityInteractSpecific event)
 	{
-		Entity target = event.getTarget();
+		final Entity target = event.getTarget();
 
 		if (target instanceof IMount)
 		{
-			IMount mount = (IMount) target;
-			IMountProcessor processor = mount.getMountProcessor();
+			final IMount mount = (IMount) target;
+			final IMountProcessor processor = mount.getMountProcessor();
 
 			if (processor.canBeMounted(target) && !event.getEntityPlayer().isRiding()
 					&& processor.canProcessMountInteraction(event.getTarget(), event.getEntityPlayer()))
@@ -55,20 +55,20 @@ public class MountEventHandler
 	}
 
 	@SubscribeEvent
-	public static void onLivingEntityUpdate(LivingEvent.LivingUpdateEvent event)
+	public static void onLivingEntityUpdate(final LivingEvent.LivingUpdateEvent event)
 	{
 		if (event.getEntity() instanceof EntityPlayer)
 		{
-			EntityPlayer player = (EntityPlayer) event.getEntity();
+			final EntityPlayer player = (EntityPlayer) event.getEntity();
 
-			Entity riding = player.getRidingEntity();
+			final Entity riding = player.getRidingEntity();
 
 			if (riding instanceof IMount && riding instanceof EntityLivingBase)
 			{
-				IMount mount = (IMount) riding;
-				IMountProcessor processor = mount.getMountProcessor();
+				final IMount mount = (IMount) riding;
+				final IMountProcessor processor = mount.getMountProcessor();
 
-				EntityLivingBase livingMount = (EntityLivingBase) riding;
+				final EntityLivingBase livingMount = (EntityLivingBase) riding;
 
 				livingMount.renderYawOffset = player.renderYawOffset;
 				livingMount.setJumping(false);
@@ -85,13 +85,13 @@ public class MountEventHandler
 	}
 
 	@SubscribeEvent
-	public static void onEntityAttacked(LivingAttackEvent event)
+	public static void onEntityAttacked(final LivingAttackEvent event)
 	{
 		if (event.getEntity() instanceof IMount && !event.getEntity().getPassengers().isEmpty())
 		{
-			Entity riding = event.getEntity().getPassengers().get(0);
+			final Entity riding = event.getEntity().getPassengers().get(0);
 
-			if (event.getSource().getSourceOfDamage() == riding)
+			if (event.getSource().getTrueSource() == riding)
 			{
 				event.setResult(Event.Result.DENY);
 			}
@@ -99,7 +99,7 @@ public class MountEventHandler
 	}
 
 	@SubscribeEvent
-	public static void onMountEvent(EntityMountEvent event)
+	public static void onMountEvent(final EntityMountEvent event)
 	{
 		if (event.isDismounting() && event.getEntityBeingMounted() instanceof IMount)
 		{
@@ -110,13 +110,13 @@ public class MountEventHandler
 		}
 	}
 
-	private static void processSteering(IMount mountImpl, EntityLivingBase mount, EntityPlayer rider)
+	private static void processSteering(final IMount mountImpl, final EntityLivingBase mount, final EntityPlayer rider)
 	{
-		IMountProcessor processor = mountImpl.getMountProcessor();
+		final IMountProcessor processor = mountImpl.getMountProcessor();
 
 		if (mount instanceof EntityCreature)
 		{
-			((EntityCreature) mount).getNavigator().clearPathEntity();
+			((EntityCreature) mount).getNavigator().clearPath();
 		}
 
 		mount.rotationYaw = rider.rotationYaw;
@@ -137,7 +137,7 @@ public class MountEventHandler
 			forward *= 0.25F;
 		}
 
-		boolean riderIsJumping = ObfuscationReflectionHelper.getPrivateValue(EntityLivingBase.class, rider, ReflectionAether.IS_JUMPING.getMappings());
+		final boolean riderIsJumping = ObfuscationReflectionHelper.getPrivateValue(EntityLivingBase.class, rider, ReflectionAether.IS_JUMPING.getMappings());
 
 		if (riderIsJumping)
 		{
@@ -150,13 +150,13 @@ public class MountEventHandler
 
 		mount.setAIMoveSpeed((float) mount.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
 
-		double oldMotionY = mount.motionY;
+		final double oldMotionY = mount.motionY;
 
 		mount.motionY = 0.0F;
 
-		float oldLimbSwingAmount = mount.limbSwingAmount;
-		float oldPrevLimbSwingAmount = mount.prevLimbSwingAmount;
-		float oldLimbSwing = mount.limbSwing;
+		final float oldLimbSwingAmount = mount.limbSwingAmount;
+		final float oldPrevLimbSwingAmount = mount.prevLimbSwingAmount;
+		final float oldLimbSwing = mount.limbSwing;
 
 		mount.limbSwing = 0.0F;
 		mount.limbSwingAmount = 0.0F;
@@ -168,7 +168,7 @@ public class MountEventHandler
 			forward *= 0.5F;
 		}
 
-		mount.moveEntityWithHeading(strafe, forward);
+		mount.moveRelative(strafe, 0.0F, forward, 0.1F);
 
 		mount.limbSwingAmount = oldLimbSwingAmount;
 		mount.prevLimbSwingAmount = oldPrevLimbSwingAmount;

@@ -39,11 +39,16 @@ public class ItemSwetGel extends Item
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(final Item item, final CreativeTabs tab, final NonNullList<ItemStack> subItems)
+	public void getSubItems(final CreativeTabs tab, final NonNullList<ItemStack> subItems)
 	{
+		if (!this.isInCreativeTab(tab))
+		{
+			return;
+		}
+
 		for (final EntitySwet.Type types : EntitySwet.Type.values())
 		{
-			subItems.add(new ItemStack(item, 1, types.ordinal()));
+			subItems.add(new ItemStack(this, 1, types.ordinal()));
 		}
 	}
 
@@ -74,7 +79,7 @@ public class ItemSwetGel extends Item
 
 			return EnumActionResult.SUCCESS;
 		}
-		
+
 		return EnumActionResult.FAIL;
 	}
 

@@ -13,14 +13,47 @@ import net.minecraft.util.DamageSource;
 
 public class ItemElementalSword extends ItemAetherSword
 {
+	private final SwordElement element;
+
+	public ItemElementalSword(final SwordElement element)
+	{
+		super(MaterialsAether.LEGENDARY_TOOL, ItemAbilityType.PASSIVE);
+
+		this.element = element;
+
+		this.setMaxDamage(500);
+
+		this.setCreativeTab(CreativeTabsAether.WEAPONS);
+	}
+
+	@Override
+	public boolean hitEntity(final ItemStack stack, final EntityLivingBase target, final EntityLivingBase attacker)
+	{
+		this.element.onEntityAttacked(stack, target, attacker);
+
+		return super.hitEntity(stack, target, attacker);
+	}
+
+	@Override
+	public float getAttackDamage()
+	{
+		if (this.element == SwordElement.HOLY)
+		{
+			// We apply our own DamageSource in SwordElement.HOLY.hitEntity(stack, target, attacker).
+			return 0.0F;
+		}
+
+		return super.getAttackDamage();
+	}
+
 	public enum SwordElement
 	{
 		FIRE
 				{
 					@Override
-					public void onEntityAttacked(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
+					public void onEntityAttacked(final ItemStack stack, final EntityLivingBase target, final EntityLivingBase attacker)
 					{
-						int fireMultiplier = EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByLocation("fire_aspect"), stack);
+						final int fireMultiplier = EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByLocation("fire_aspect"), stack);
 
 						target.setFire(6 + (fireMultiplier * 4));
 					}
@@ -28,7 +61,7 @@ public class ItemElementalSword extends ItemAetherSword
 		LIGHTNING
 				{
 					@Override
-					public void onEntityAttacked(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
+					public void onEntityAttacked(final ItemStack stack, final EntityLivingBase target, final EntityLivingBase attacker)
 					{
 						if (!target.world.isRemote)
 						{
@@ -39,9 +72,9 @@ public class ItemElementalSword extends ItemAetherSword
 		HOLY
 				{
 					@Override
-					public void onEntityAttacked(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
+					public void onEntityAttacked(final ItemStack stack, final EntityLivingBase target, final EntityLivingBase attacker)
 					{
-						float damage = target.isEntityUndead() ? 12.0f : MaterialsAether.LEGENDARY_TOOL.getDamageVsEntity();
+						final float damage = target.isEntityUndead() ? 12.0f : MaterialsAether.LEGENDARY_TOOL.getAttackDamage();
 
 						if (attacker instanceof EntityPlayer)
 						{
@@ -55,38 +88,5 @@ public class ItemElementalSword extends ItemAetherSword
 				};
 
 		public abstract void onEntityAttacked(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker);
-	}
-
-	private final SwordElement element;
-
-	public ItemElementalSword(SwordElement element)
-	{
-		super(MaterialsAether.LEGENDARY_TOOL, ItemAbilityType.PASSIVE);
-
-		this.element = element;
-
-		this.setMaxDamage(500);
-
-		this.setCreativeTab(CreativeTabsAether.WEAPONS);
-	}
-
-	@Override
-	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
-	{
-		this.element.onEntityAttacked(stack, target, attacker);
-
-		return super.hitEntity(stack, target, attacker);
-	}
-
-	@Override
-	public float getDamageVsEntity()
-	{
-		if (this.element == SwordElement.HOLY)
-		{
-			// We apply our own DamageSource in SwordElement.HOLY.hitEntity(stack, target, attacker).
-			return 0.0F;
-		}
-
-		return super.getDamageVsEntity();
 	}
 }

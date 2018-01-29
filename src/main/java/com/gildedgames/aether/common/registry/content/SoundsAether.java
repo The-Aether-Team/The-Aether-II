@@ -2,8 +2,12 @@ package com.gildedgames.aether.common.registry.content;
 
 import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.util.SoundEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.registries.IForgeRegistry;
 
+@Mod.EventBusSubscriber()
 public class SoundsAether
 {
 	public static final SoundEvent glowstone_portal_hum = new SoundEvent(AetherCore.getResource("portal.glowstone.hum"));
@@ -70,11 +74,11 @@ public class SoundsAether
 
 	public static final SoundEvent generic_wing_flap = new SoundEvent(AetherCore.getResource("mob.generic.wings.flap"));
 
-    public static final SoundEvent kirrid_ambient = new SoundEvent(AetherCore.getResource("mob.kirrid.ambient"));
+	public static final SoundEvent kirrid_ambient = new SoundEvent(AetherCore.getResource("mob.kirrid.ambient"));
 
-    public static final SoundEvent kirrid_hurt = new SoundEvent(AetherCore.getResource("mob.kirrid.hurt"));
+	public static final SoundEvent kirrid_hurt = new SoundEvent(AetherCore.getResource("mob.kirrid.hurt"));
 
-    public static final SoundEvent kirrid_death = new SoundEvent(AetherCore.getResource("mob.kirrid.death"));
+	public static final SoundEvent kirrid_death = new SoundEvent(AetherCore.getResource("mob.kirrid.death"));
 
 	public static final SoundEvent taegore_ambient = new SoundEvent(AetherCore.getResource("mob.taegore.ambient"));
 
@@ -92,70 +96,85 @@ public class SoundsAether
 
 	public static final SoundEvent burrukai_attack = new SoundEvent(AetherCore.getResource("mob.burrukai.attack"));
 
-	public static void preInit()
+	@SubscribeEvent
+	public static void onRegisterSounds(final RegistryEvent.Register<SoundEvent> event)
 	{
-		registerSound("portal.glowstone.hum", glowstone_portal_hum);
-		registerSound("portal.glowstone.trigger", glowstone_portal_trigger);
-		registerSound("portal.glowstone.travel", glowstone_portal_travel);
+		final SoundRegistryHelper r = new SoundRegistryHelper(event.getRegistry());
 
-		registerSound("portal.labyrinth_totem.drone", labyrinth_totem_drone);
+		r.register("portal.glowstone.hum", glowstone_portal_hum);
+		r.register("portal.glowstone.trigger", glowstone_portal_trigger);
+		r.register("portal.glowstone.travel", glowstone_portal_travel);
 
-		registerSound("block.aercloud.bounce", aercloud_bounce);
+		r.register("portal.labyrinth_totem.drone", labyrinth_totem_drone);
 
-		registerSound("mob.aerbunny.ambient", aerbunny_ambient);
-		registerSound("mob.aerbunny.hurt", aerbunny_hurt);
-		registerSound("mob.aerbunny.death", aerbunny_death);
-		registerSound("mob.aerbunny.lift", aerbunny_lift);
+		r.register("block.aercloud.bounce", aercloud_bounce);
 
-		registerSound("mob.aerwhale.ambient", aerwhale_ambient);
-		registerSound("mob.aerwhale.death", aerwhale_death);
+		r.register("mob.aerbunny.ambient", aerbunny_ambient);
+		r.register("mob.aerbunny.hurt", aerbunny_hurt);
+		r.register("mob.aerbunny.death", aerbunny_death);
+		r.register("mob.aerbunny.lift", aerbunny_lift);
 
-		registerSound("mob.cockatrice.ambient", cockatrice_ambient);
-		registerSound("mob.cockatrice.hurt", cockatrice_hurt);
-		registerSound("mob.cockatrice.death", cockatrice_death);
+		r.register("mob.aerwhale.ambient", aerwhale_ambient);
+		r.register("mob.aerwhale.death", aerwhale_death);
 
-		registerSound("mob.tempest.ambient", tempest_ambient);
-		registerSound("mob.tempest.hurt", tempest_hurt);
-		registerSound("mob.tempest.death", tempest_death);
-		registerSound("mob.tempest.angry", tempest_angry);
-		registerSound("mob.tempest.electric_shock", tempest_electric_shock);
+		r.register("mob.cockatrice.ambient", cockatrice_ambient);
+		r.register("mob.cockatrice.hurt", cockatrice_hurt);
+		r.register("mob.cockatrice.death", cockatrice_death);
 
-		registerSound("mob.zephyr.ambient", zephyr_ambient);
-		registerSound("mob.zephyr.puff", zephyr_puff);
+		r.register("mob.tempest.ambient", tempest_ambient);
+		r.register("mob.tempest.hurt", tempest_hurt);
+		r.register("mob.tempest.death", tempest_death);
+		r.register("mob.tempest.angry", tempest_angry);
+		r.register("mob.tempest.electric_shock", tempest_electric_shock);
 
-		registerSound("record.aerwhale", record_aerwhale);
-		registerSound("record.labyrinth", record_labyrinth);
-		registerSound("record.moa", record_moa);
-		registerSound("record.recording_892", record_recording_892);
-		registerSound("record.valkyrie", record_valkyrie);
+		r.register("mob.zephyr.ambient", zephyr_ambient);
+		r.register("mob.zephyr.puff", zephyr_puff);
 
-		registerSound("random.dart_shooter.fire", dart_shooter_fire);
+		r.register("record.aerwhale", record_aerwhale);
+		r.register("record.labyrinth", record_labyrinth);
+		r.register("record.moa", record_moa);
+		r.register("record.recording_892", record_recording_892);
+		r.register("record.valkyrie", record_valkyrie);
 
-		registerSound("mob.moa.ambient", moa_ambient);
-		registerSound("mob.moa.hurt", moa_hurt);
+		r.register("random.dart_shooter.fire", dart_shooter_fire);
 
-		registerSound("random.present_unwrap", present_unwrap);
-		registerSound("random.dungeon.container.smash", break_labyrinth_container);
+		r.register("mob.moa.ambient", moa_ambient);
+		r.register("mob.moa.hurt", moa_hurt);
 
-		registerSound("mob.generic.wings.flap", generic_wing_flap);
+		r.register("random.present_unwrap", present_unwrap);
+		r.register("random.dungeon.container.smash", break_labyrinth_container);
 
-        registerSound("mob.kirrid.ambient", kirrid_ambient);
-        registerSound("mob.kirrid.hurt", kirrid_hurt);
-        registerSound("mob.kirrid.death", kirrid_death);
+		r.register("mob.generic.wings.flap", generic_wing_flap);
 
-		registerSound("mob.taegore.ambient", taegore_ambient);
-		registerSound("mob.taegore.hurt", taegore_hurt);
-		registerSound("mob.taegore.death", taegore_death);
-		registerSound("mob.taegore.attack", taegore_attack);
+		r.register("mob.kirrid.ambient", kirrid_ambient);
+		r.register("mob.kirrid.hurt", kirrid_hurt);
+		r.register("mob.kirrid.death", kirrid_death);
 
-		registerSound("mob.burrukai.ambient", burrukai_ambient);
-		registerSound("mob.burrukai.hurt", burrukai_hurt);
-		registerSound("mob.burrukai.death", burrukai_death);
-		registerSound("mob.burrukai.attack", burrukai_attack);
+		r.register("mob.taegore.ambient", taegore_ambient);
+		r.register("mob.taegore.hurt", taegore_hurt);
+		r.register("mob.taegore.death", taegore_death);
+		r.register("mob.taegore.attack", taegore_attack);
+
+		r.register("mob.burrukai.ambient", burrukai_ambient);
+		r.register("mob.burrukai.hurt", burrukai_hurt);
+		r.register("mob.burrukai.death", burrukai_death);
+		r.register("mob.burrukai.attack", burrukai_attack);
 	}
 
-	private static void registerSound(String resource, SoundEvent event)
+	private static class SoundRegistryHelper
 	{
-		GameRegistry.register(event, AetherCore.getResource(resource));
+		private final IForgeRegistry<SoundEvent> registry;
+
+		SoundRegistryHelper(final IForgeRegistry<SoundEvent> registry)
+		{
+			this.registry = registry;
+		}
+
+		private void register(final String registryName, final SoundEvent soundEvent)
+		{
+			soundEvent.setRegistryName(AetherCore.MOD_ID, registryName);
+			this.registry.register(soundEvent);
+		}
 	}
+
 }

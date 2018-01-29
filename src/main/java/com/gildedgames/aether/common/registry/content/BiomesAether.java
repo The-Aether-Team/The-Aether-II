@@ -6,17 +6,13 @@ import com.gildedgames.aether.common.world.aether.biomes.highlands.BiomeHighland
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
+@GameRegistry.ObjectHolder(AetherCore.MOD_ID)
 public class BiomesAether
 {
-
+	@GameRegistry.ObjectHolder("highlands")
 	public static final Biome HIGHLANDS = new BiomeHighlands(
 			new Biome.BiomeProperties("Highlands").setRainDisabled().setTemperature(0.5f).setWaterColor(0x70DB70), AetherCore.getResource("aether_highlands"));
 
+	@GameRegistry.ObjectHolder("void")
 	public static final Biome VOID = new BiomeVoid();
-
-	public static void preInit()
-	{
-		GameRegistry.register(HIGHLANDS);
-		GameRegistry.register(VOID);
-	}
 }

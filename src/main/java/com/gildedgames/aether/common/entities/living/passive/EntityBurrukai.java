@@ -1,23 +1,17 @@
 package com.gildedgames.aether.common.entities.living.passive;
 
-import java.util.Set;
-
-import javax.annotation.Nullable;
-
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.google.common.collect.Sets;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -27,10 +21,14 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+import java.util.Set;
+
 public class EntityBurrukai extends EntityAetherAnimal
 {
 
 	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(ItemsAether.brettl_grass);
+
 	private final EntityAIAttackMelee AIAttackMelee = new EntityAIAttackMelee(this, 1.2D, false);
 
 	public EntityBurrukai(final World world)
@@ -88,7 +86,7 @@ public class EntityBurrukai extends EntityAetherAnimal
 	}
 
 	@Override
-	protected SoundEvent getHurtSound()
+	protected SoundEvent getHurtSound(final DamageSource src)
 	{
 		return SoundsAether.burrukai_hurt;
 	}
@@ -126,7 +124,7 @@ public class EntityBurrukai extends EntityAetherAnimal
 		{
 			if (this.getAttackingEntity() instanceof EntityPlayer)
 			{
-				PlayerAether player = PlayerAether.getPlayer((EntityPlayer) this.getAttackingEntity());
+				final PlayerAether player = PlayerAether.getPlayer((EntityPlayer) this.getAttackingEntity());
 				if (player.getEntity().isCreative())
 				{
 					return;
@@ -136,22 +134,20 @@ public class EntityBurrukai extends EntityAetherAnimal
 			this.tasks.addTask(3, this.AIAttackMelee);
 			this.updateAITasks();
 
-			if (this.getDistanceToEntity(this.getAttackingEntity()) > this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).getAttributeValue())
+			if (this.getDistance(this.getAttackingEntity()) > this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).getAttributeValue())
 			{
 				this.tasks.removeTask(this.AIAttackMelee);
 				this.updateAITasks();
 			}
 		}
 
-
-
 		this.setAttackTarget(this.getAttackingEntity());
 	}
 
 	@Override
-	public boolean attackEntityAsMob(Entity entityIn)
+	public boolean attackEntityAsMob(final Entity entityIn)
 	{
-		EntityPlayer player = (EntityPlayer) entityIn;
+		final EntityPlayer player = (EntityPlayer) entityIn;
 		player.attackEntityFrom(DamageSource.causeMobDamage(this), 5.0F);
 		this.playSound(SoundsAether.burrukai_attack, 0.5F, 1.0F);
 		player.knockBack(this, 1.0F, 0.2D, 0.2D);

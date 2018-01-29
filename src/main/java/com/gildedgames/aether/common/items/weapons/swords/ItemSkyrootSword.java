@@ -2,8 +2,6 @@ package com.gildedgames.aether.common.items.weapons.swords;
 
 import com.gildedgames.aether.common.items.ItemAbilityType;
 import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.tools.ItemToolHandler;
-import com.gildedgames.aether.common.items.tools.handlers.IToolEventHandler;
 import com.gildedgames.aether.common.registry.content.MaterialsAether;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,10 +14,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class ItemSkyrootSword extends ItemAetherSword
 {
@@ -39,13 +34,13 @@ public class ItemSkyrootSword extends ItemAetherSword
 	}
 
 	@SubscribeEvent
-	public static void dropLoot(LivingDropsEvent event)
+	public static void dropLoot(final LivingDropsEvent event)
 	{
-		if (event.getSource().getSourceOfDamage() instanceof EntityPlayer)
+		if (event.getSource().getTrueSource() instanceof EntityPlayer)
 		{
-			EntityPlayer player = (EntityPlayer) event.getSource().getSourceOfDamage();
+			final EntityPlayer player = (EntityPlayer) event.getSource().getTrueSource();
 
-			ItemStack held = player.getHeldItem(EnumHand.MAIN_HAND);
+			final ItemStack held = player.getHeldItem(EnumHand.MAIN_HAND);
 
 			boolean providesDrops = false;
 
@@ -55,23 +50,23 @@ public class ItemSkyrootSword extends ItemAetherSword
 			}
 			else if (held.getItem() instanceof ItemTool)
 			{
-				ToolMaterial material = ((ItemTool) held.getItem()).getToolMaterial();
+				final String material = ((ItemTool) held.getItem()).getToolMaterialName();
 
-				providesDrops = material == MaterialsAether.SKYROOT_TOOL;
+				providesDrops = Objects.equals(material, MaterialsAether.SKYROOT_TOOL.name());
 			}
 
 			if (providesDrops)
 			{
-				List<ItemStack> stacks = new ArrayList<>();
+				final List<ItemStack> stacks = new ArrayList<>();
 
-				for (EntityItem item : event.getDrops())
+				for (final EntityItem item : event.getDrops())
 				{
-					stacks.add(item.getEntityItem());
+					stacks.add(item.getItem());
 				}
 
-				for (ItemStack stack : stacks)
+				for (final ItemStack stack : stacks)
 				{
-					EntityItem item = new EntityItem(player.getEntityWorld(), player.posX, player.posY, player.posZ, stack);
+					final EntityItem item = new EntityItem(player.getEntityWorld(), player.posX, player.posY, player.posZ, stack);
 
 					player.getEntityWorld().spawnEntity(item);
 				}

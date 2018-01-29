@@ -12,9 +12,7 @@ import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -31,10 +29,12 @@ public class EntityTaegore extends EntityAetherAnimal
 {
 
 	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(ItemsAether.wyndberry);
+
 	private final EntityAIAttackMelee AIAttackMelee = new EntityAIAttackMelee(this, 2.0D, true);
+
 	private final EntityAIPanic AIPanic = new EntityAIPanic(this, 2.0D);
 
-	public EntityTaegore(World world)
+	public EntityTaegore(final World world)
 	{
 		super(world);
 
@@ -69,19 +69,19 @@ public class EntityTaegore extends EntityAetherAnimal
 	}
 
 	@Override
-	public void setAttackTarget(@Nullable EntityLivingBase entitylivingbaseIn)
+	public void setAttackTarget(@Nullable final EntityLivingBase entitylivingbaseIn)
 	{
 		super.setAttackTarget(entitylivingbaseIn);
 	}
 
 	@Override
-	public EntityTaegore createChild(EntityAgeable ageable)
+	public EntityTaegore createChild(final EntityAgeable ageable)
 	{
 		return new EntityTaegore(this.world);
 	}
 
 	@Override
-	public boolean isBreedingItem(@Nullable ItemStack stack)
+	public boolean isBreedingItem(@Nullable final ItemStack stack)
 	{
 		return stack != null && TEMPTATION_ITEMS.contains(stack.getItem());
 	}
@@ -93,7 +93,7 @@ public class EntityTaegore extends EntityAetherAnimal
 	}
 
 	@Override
-	protected SoundEvent getHurtSound()
+	protected SoundEvent getHurtSound(final DamageSource src)
 	{
 		return SoundsAether.taegore_hurt;
 	}
@@ -109,6 +109,7 @@ public class EntityTaegore extends EntityAetherAnimal
 	{
 		this.playSound(SoundEvents.ENTITY_PIG_STEP, 0.15F, 1.0F);
 	}
+
 	@Override
 	protected ResourceLocation getLootTable()
 	{
@@ -124,7 +125,7 @@ public class EntityTaegore extends EntityAetherAnimal
 		{
 			if (this.getAttackingEntity() instanceof EntityPlayer)
 			{
-				PlayerAether player = PlayerAether.getPlayer((EntityPlayer) this.getAttackingEntity());
+				final PlayerAether player = PlayerAether.getPlayer((EntityPlayer) this.getAttackingEntity());
 				if (player.getEntity().isCreative())
 				{
 					return;
@@ -145,7 +146,7 @@ public class EntityTaegore extends EntityAetherAnimal
 	}
 
 	@Override
-	public boolean attackEntityAsMob(Entity entityIn)
+	public boolean attackEntityAsMob(final Entity entityIn)
 	{
 		entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 2.0F);
 		this.playSound(SoundsAether.taegore_attack, 0.5F, 1.0F);

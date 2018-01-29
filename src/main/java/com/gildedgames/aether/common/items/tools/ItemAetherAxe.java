@@ -7,13 +7,13 @@ import net.minecraft.item.ItemStack;
 
 public class ItemAetherAxe extends ItemAxe
 {
-	public ItemAetherAxe(ToolMaterial material)
+	public ItemAetherAxe(final ToolMaterial material)
 	{
 		// The parent constructor will crash trying to set parameters, we need to do it here
 		this(material, 6.0F, -3.2F);
 	}
 
-	public ItemAetherAxe(ToolMaterial material, float damageVsEntity, float attackSpeed)
+	public ItemAetherAxe(final ToolMaterial material, final float damageVsEntity, final float attackSpeed)
 	{
 		super(material, damageVsEntity, attackSpeed);
 
@@ -23,10 +23,10 @@ public class ItemAetherAxe extends ItemAxe
 	}
 
 	@Override
-	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
+	public boolean hitEntity(final ItemStack stack, final EntityLivingBase target, final EntityLivingBase attacker)
 	{
 		super.hitEntity(stack, target, attacker);
 
-		return ItemToolHandler.onEntityHit(stack, this.getToolMaterial(), target, attacker);
+		return ItemToolHandler.onEntityHit(stack, this.toolMaterial, target, attacker);
 	}
 }

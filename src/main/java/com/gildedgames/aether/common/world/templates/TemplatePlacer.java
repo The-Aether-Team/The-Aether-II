@@ -1,11 +1,11 @@
 package com.gildedgames.aether.common.world.templates;
 
-import com.gildedgames.aether.api.util.BlockAccessExtendedWrapper;
 import com.gildedgames.aether.api.util.TemplateUtil;
-import com.gildedgames.aether.api.world.generation.IBlockAccessExtended;
 import com.gildedgames.aether.api.world.generation.PostPlacementTemplate;
 import com.gildedgames.aether.api.world.generation.TemplateDefinition;
 import com.gildedgames.aether.api.world.generation.TemplateLoc;
+import com.gildedgames.orbis.api.processing.BlockAccessExtendedWrapper;
+import com.gildedgames.orbis.api.processing.IBlockAccessExtended;
 import com.google.common.collect.Lists;
 import net.minecraft.util.Rotation;
 import net.minecraft.world.World;

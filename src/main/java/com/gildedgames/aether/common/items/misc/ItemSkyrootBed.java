@@ -24,7 +24,8 @@ public class ItemSkyrootBed extends Item
 	}
 
 	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(final EntityPlayer player, final World world, BlockPos pos, final EnumHand hand, final EnumFacing facing,
+			final float hitX, final float hitY, final float hitZ)
 	{
 		if (world.isRemote)
 		{
@@ -36,36 +37,36 @@ public class ItemSkyrootBed extends Item
 		}
 		else
 		{
-			IBlockState state = world.getBlockState(pos);
+			final IBlockState state = world.getBlockState(pos);
 
-			Block block = state.getBlock();
+			final Block block = state.getBlock();
 
-			boolean canReplace = block.isReplaceable(world, pos);
+			final boolean canReplace = block.isReplaceable(world, pos);
 
 			if (!canReplace)
 			{
 				pos = pos.up();
 			}
 
-			int look = MathHelper.floor((double) (player.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+			final int look = MathHelper.floor((double) (player.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
-			EnumFacing enumfacing = EnumFacing.getHorizontal(look);
+			final EnumFacing enumfacing = EnumFacing.getHorizontal(look);
 
-			BlockPos adjPos = pos.offset(enumfacing);
+			final BlockPos adjPos = pos.offset(enumfacing);
 
-			ItemStack heldStack = player.getHeldItem(hand);
+			final ItemStack heldStack = player.getHeldItem(hand);
 
 			if (player.canPlayerEdit(pos, facing, heldStack) && player.canPlayerEdit(adjPos, facing, heldStack))
 			{
-				IBlockState adjBlock = world.getBlockState(adjPos);
+				final IBlockState adjBlock = world.getBlockState(adjPos);
 
-				boolean flag1 = adjBlock.getBlock().isReplaceable(world, adjPos);
-				boolean flag2 = canReplace || world.isAirBlock(pos);
-				boolean flag3 = flag1 || world.isAirBlock(adjPos);
+				final boolean flag1 = adjBlock.getBlock().isReplaceable(world, adjPos);
+				final boolean flag2 = canReplace || world.isAirBlock(pos);
+				final boolean flag3 = flag1 || world.isAirBlock(adjPos);
 
-				if (flag2 && flag3 && world.getBlockState(pos.down()).isFullyOpaque() && world.getBlockState(adjPos.down()).isFullyOpaque())
+				if (flag2 && flag3 && world.getBlockState(pos.down()).isTopSolid() && world.getBlockState(adjPos.down()).isTopSolid())
 				{
-					IBlockState otherBed = BlocksAether.skyroot_bed.getDefaultState().withProperty(BlockBed.OCCUPIED, Boolean.FALSE)
+					final IBlockState otherBed = BlocksAether.skyroot_bed.getDefaultState().withProperty(BlockBed.OCCUPIED, Boolean.FALSE)
 							.withProperty(BlockBed.FACING, enumfacing).withProperty(BlockBed.PART, BlockBed.EnumPartType.FOOT);
 
 					world.setBlockState(pos, otherBed, 10);
@@ -74,7 +75,7 @@ public class ItemSkyrootBed extends Item
 					world.notifyNeighborsRespectDebug(pos, block, false);
 					world.notifyNeighborsRespectDebug(adjPos, adjBlock.getBlock(), false);
 
-					SoundType sound = otherBed.getBlock().getSoundType(otherBed, world, pos, player);
+					final SoundType sound = otherBed.getBlock().getSoundType(otherBed, world, pos, player);
 					world.playSound(null, pos, sound.getPlaceSound(), SoundCategory.BLOCKS, (sound.getVolume() + 1.0F) / 2.0F, sound.getPitch() * 0.8F);
 
 					heldStack.shrink(1);

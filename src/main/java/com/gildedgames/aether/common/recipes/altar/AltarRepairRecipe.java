@@ -11,14 +11,14 @@ import net.minecraft.item.ItemTool;
 public class AltarRepairRecipe implements IAltarRecipe
 {
 	@Override
-	public boolean matchesRecipe(ItemStack stack)
+	public boolean matchesRecipe(final ItemStack stack)
 	{
 		return (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemTool || stack.getItem() instanceof ItemArmor)
 				&& stack.isItemDamaged();
 	}
 
 	@Override
-	public int getAmbrosiumCost(ItemStack stack)
+	public int getAmbrosiumCost(final ItemStack stack)
 	{
 		if (stack.getItem() instanceof ItemAetherSword)
 		{
@@ -26,37 +26,37 @@ public class AltarRepairRecipe implements IAltarRecipe
 		}
 		else if (stack.getItem() instanceof ItemTool)
 		{
-			ItemTool tool = (ItemTool) stack.getItem();
+			final ItemTool tool = (ItemTool) stack.getItem();
 
-			switch (tool.getToolMaterial())
+			switch (tool.getToolMaterialName())
 			{
-			case WOOD:
-				return 2;
-			case STONE:
-				return 3;
-			case IRON:
-				return 4;
-			case DIAMOND:
-				return 5;
-			case GOLD:
-				return 3;
+				case "WOOD":
+					return 2;
+				case "STONE":
+					return 3;
+				case "IRON":
+					return 4;
+				case "DIAMOND":
+					return 5;
+				case "GOLD":
+					return 3;
 			}
 		}
 		else if (stack.getItem() instanceof ItemArmor)
 		{
-			ItemArmor armor = (ItemArmor) stack.getItem();
+			final ItemArmor armor = (ItemArmor) stack.getItem();
 
 			switch (armor.getArmorMaterial())
 			{
-			case LEATHER:
-				return 2;
-			case IRON:
-				return 3;
-			case GOLD:
-			case CHAIN:
-				return 3;
-			case DIAMOND:
-				return 5;
+				case LEATHER:
+					return 2;
+				case IRON:
+					return 3;
+				case GOLD:
+				case CHAIN:
+					return 3;
+				case DIAMOND:
+					return 5;
 			}
 
 			if (armor.getArmorMaterial() == MaterialsAether.LEGENDARY_ARMOR || armor.getArmorMaterial() == MaterialsAether.VALKYRIE_ARMOR)
@@ -69,7 +69,7 @@ public class AltarRepairRecipe implements IAltarRecipe
 	}
 
 	@Override
-	public ItemStack getOutput(ItemStack stack)
+	public ItemStack getOutput(final ItemStack stack)
 	{
 		stack.setItemDamage(0);
 

@@ -41,7 +41,9 @@ import java.util.Set;
 public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements EntityGroupMember, IMount, IFlyingMountData
 {
 
-	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.WHEAT, ItemsAether.blueberries, ItemsAether.orange, ItemsAether.enchanted_blueberry, ItemsAether.enchanted_wyndberry, ItemsAether.wyndberry);
+	private static final Set<Item> TEMPTATION_ITEMS = Sets
+			.newHashSet(Items.WHEAT, ItemsAether.blueberries, ItemsAether.orange, ItemsAether.enchanted_blueberry, ItemsAether.enchanted_wyndberry,
+					ItemsAether.wyndberry);
 
 	private static final DataParameter<Integer> REMAINING_JUMPS = EntityDataManager.createKey(EntityMoa.class, DataSerializers.VARINT);
 
@@ -61,7 +63,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 
 	private static final DataParameter<Boolean> IS_HUNGRY = EntityDataManager.createKey(EntityMoa.class, DataSerializers.BOOLEAN);
 
-	private IMountProcessor mountProcessor = new FlyingMount(this);
+	private final IMountProcessor mountProcessor = new FlyingMount(this);
 
 	public float wingRotation, destPos, prevDestPos, prevWingRotation;
 
@@ -75,7 +77,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 
 	private MoaNest familyNest;
 
-	public EntityMoa(World world)
+	public EntityMoa(final World world)
 	{
 		super(world);
 
@@ -87,14 +89,14 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		this.stepHeight = 1.0F;
 	}
 
-	public EntityMoa(World world, int geneticSeed)
+	public EntityMoa(final World world, final int geneticSeed)
 	{
 		this(world);
 
 		this.getGenePool().transformFromSeed(geneticSeed);
 	}
 
-	public EntityMoa(World world, MoaNest familyNest)
+	public EntityMoa(final World world, final MoaNest familyNest)
 	{
 		this(world, familyNest.familyGeneticSeed);
 
@@ -102,7 +104,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		this.initAI();
 	}
 
-	public EntityMoa(World world, MoaNest familyNest, int fatherSeed, int motherSeed)
+	public EntityMoa(final World world, final MoaNest familyNest, final int fatherSeed, final int motherSeed)
 	{
 		this(world, familyNest);
 
@@ -165,7 +167,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	}
 
 	@Override
-	public boolean processInteract(EntityPlayer player, EnumHand hand)
+	public boolean processInteract(final EntityPlayer player, final EnumHand hand)
 	{
 		if (super.processInteract(player, hand))
 		{
@@ -177,7 +179,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 			return false;
 		}
 
-		ItemStack stack = player.getHeldItem(hand);
+		final ItemStack stack = player.getHeldItem(hand);
 
 		if (this.isChild())
 		{
@@ -250,8 +252,9 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 				{
 					this.timeUntilDropFeather = 0;
 
-					ItemStack feather = new ItemStack(ItemsAether.moa_feather);
-					ItemMoaFeather.setColor(feather, this.getGenePool().getFeathers().gene().unlocalizedName(), this.getGenePool().getFeathers().gene().data().getRGB());
+					final ItemStack feather = new ItemStack(ItemsAether.moa_feather);
+					ItemMoaFeather.setColor(feather, this.getGenePool().getFeathers().gene().unlocalizedName(),
+							this.getGenePool().getFeathers().gene().data().getRGB());
 
 					Block.spawnAsEntity(this.world, this.getPosition(), feather);
 					this.dropFeatherTimer = 0;
@@ -292,7 +295,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	{
 		this.fallDistance = 0;
 
-		boolean riderSneaking =
+		final boolean riderSneaking =
 				!this.getPassengers().isEmpty() && this.getPassengers().get(0) != null && this.getPassengers().get(0).isSneaking();
 
 		if (!this.onGround && this.motionY < 0.0D && !riderSneaking)
@@ -333,11 +336,11 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	}
 
 	@Override
-	public boolean attackEntityAsMob(Entity entity)
+	public boolean attackEntityAsMob(final Entity entity)
 	{
 		if (entity instanceof EntityPlayer)
 		{
-			EntityPlayer player = (EntityPlayer) entity;
+			final EntityPlayer player = (EntityPlayer) entity;
 
 			if (player.capabilities.isCreativeMode)
 			{
@@ -346,8 +349,8 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		}
 
 		entity.motionY = 0.8F;
-		entity.motionZ = this.getLookVec().zCoord;
-		entity.motionX = this.getLookVec().xCoord;
+		entity.motionZ = this.getLookVec().z;
+		entity.motionX = this.getLookVec().x;
 		entity.velocityChanged = true;
 
 		entity.attackEntityFrom(DamageSource.causeMobDamage(this), this.isGroupLeader() ? 3 : 2);
@@ -356,7 +359,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	}
 
 	@Override
-	public void writeEntityToNBT(NBTTagCompound nbt)
+	public void writeEntityToNBT(final NBTTagCompound nbt)
 	{
 		super.writeEntityToNBT(nbt);
 
@@ -383,7 +386,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	}
 
 	@Override
-	public void readEntityFromNBT(NBTTagCompound nbt)
+	public void readEntityFromNBT(final NBTTagCompound nbt)
 	{
 		super.readEntityFromNBT(nbt);
 
@@ -410,11 +413,11 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	}
 
 	@Override
-	protected void dropFewItems(boolean p_70628_1_, int looting)
+	protected void dropFewItems(final boolean p_70628_1_, final int looting)
 	{
 		super.dropFewItems(p_70628_1_, looting);
 
-		ItemStack feather = new ItemStack(ItemsAether.moa_feather, this.getRNG().nextInt(3));
+		final ItemStack feather = new ItemStack(ItemsAether.moa_feather, this.getRNG().nextInt(3));
 		ItemMoaFeather.setColor(feather, this.getGenePool().getFeathers().gene().unlocalizedName(), this.getGenePool().getFeathers().gene().data().getRGB());
 
 		Block.spawnAsEntity(this.world, this.getPosition(), feather);
@@ -448,7 +451,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		return this.dataManager.get(EntityMoa.EGG_STOLEN);
 	}
 
-	public void setEggStolen(boolean flag)
+	public void setEggStolen(final boolean flag)
 	{
 		this.dataManager.set(EntityMoa.EGG_STOLEN, flag);
 	}
@@ -458,7 +461,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		return this.dataManager.get(EntityMoa.RAISED_BY_PLAYER);
 	}
 
-	public void setRaisedByPlayer(boolean flag)
+	public void setRaisedByPlayer(final boolean flag)
 	{
 		this.dataManager.set(EntityMoa.RAISED_BY_PLAYER, flag);
 	}
@@ -468,7 +471,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		return this.dataManager.get(EntityMoa.GENDER) ? AnimalGender.MALE : AnimalGender.FEMALE;
 	}
 
-	public void setGender(AnimalGender gender)
+	public void setGender(final AnimalGender gender)
 	{
 		this.dataManager.set(EntityMoa.GENDER, gender == AnimalGender.MALE);
 	}
@@ -478,7 +481,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		return this.dataManager.get(EntityMoa.REMAINING_JUMPS);
 	}
 
-	private void setRemainingJumps(int jumps)
+	private void setRemainingJumps(final int jumps)
 	{
 		this.dataManager.set(EntityMoa.REMAINING_JUMPS, jumps);
 	}
@@ -488,7 +491,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		return this.dataManager.get(EntityMoa.FOOD_EATEN);
 	}
 
-	public void setFoodEaten(int foodEaten)
+	public void setFoodEaten(final int foodEaten)
 	{
 		this.dataManager.set(EntityMoa.FOOD_EATEN, foodEaten);
 	}
@@ -498,7 +501,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		return this.dataManager.get(EntityMoa.FOOD_REQUIRED);
 	}
 
-	public void setFoodRequired(int foodRequired)
+	public void setFoodRequired(final int foodRequired)
 	{
 		this.dataManager.set(EntityMoa.FOOD_REQUIRED, foodRequired);
 	}
@@ -508,7 +511,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		return this.dataManager.get(EntityMoa.IS_HUNGRY);
 	}
 
-	public void setIsHungry(boolean flag)
+	public void setIsHungry(final boolean flag)
 	{
 		if (this.dataManager.get(EntityMoa.IS_HUNGRY) != flag)
 		{
@@ -528,14 +531,14 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		return this.pack;
 	}
 
-	public void setAnimalPack(EntityGroup pack)
+	public void setAnimalPack(final EntityGroup pack)
 	{
 		this.pack = pack;
 		this.pack.onAnimalJoin(this);
 	}
 
 	@Override
-	public void onDeath(DamageSource damageSource)
+	public void onDeath(final DamageSource damageSource)
 	{
 		if (this.pack != null)
 		{
@@ -546,7 +549,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	}
 
 	@Override
-	public void setRevengeTarget(EntityLivingBase entity)
+	public void setRevengeTarget(final EntityLivingBase entity)
 	{
 		super.setRevengeTarget(entity);
 
@@ -562,19 +565,20 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	}
 
 	@Override
-	public EntityAgeable createChild(EntityAgeable matingAnimal)
+	public EntityAgeable createChild(final EntityAgeable matingAnimal)
 	{
 		return new EntityMoa(this.world);
 	}
 
 	@Override
-	public ItemStack getPickedResult(RayTraceResult target)
+	public ItemStack getPickedResult(final RayTraceResult target)
 	{
-		ItemStack moaEgg = new ItemStack(ItemsAether.moa_egg);
+		final ItemStack moaEgg = new ItemStack(ItemsAether.moa_egg);
 
-		MoaGenePool stackGenes = ItemMoaEgg.getGenePool(moaEgg);
+		final MoaGenePool stackGenes = ItemMoaEgg.getGenePool(moaEgg);
 
-		stackGenes.transformFromParents(this.getGenePool().getStorage().getSeed(), this.getGenePool().getStorage().getFatherSeed(), this.getGenePool().getStorage().getMotherSeed());
+		stackGenes.transformFromParents(this.getGenePool().getStorage().getSeed(), this.getGenePool().getStorage().getFatherSeed(),
+				this.getGenePool().getStorage().getMotherSeed());
 
 		ItemMoaEgg.setGenePool(moaEgg, stackGenes);
 
@@ -588,7 +592,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	}
 
 	@Override
-	protected SoundEvent getHurtSound()
+	protected SoundEvent getHurtSound(final DamageSource src)
 	{
 		return SoundsAether.moa_hurt;
 	}
@@ -604,7 +608,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		return this.dataManager.get(SADDLED);
 	}
 
-	public void setIsSaddled(boolean isSaddled)
+	public void setIsSaddled(final boolean isSaddled)
 	{
 		this.dataManager.set(SADDLED, isSaddled);
 	}
@@ -628,13 +632,13 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	}
 
 	@Override
-	public void setRemainingAirborneTime(float set)
+	public void setRemainingAirborneTime(final float set)
 	{
 		this.dataManager.set(EntityMoa.AIRBORNE_TIME, set);
 	}
 
 	@Override
-	public void addRemainingAirborneTime(float add)
+	public void addRemainingAirborneTime(final float add)
 	{
 		this.setRemainingAirborneTime(this.getRemainingAirborneTime() + add);
 	}
@@ -646,7 +650,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	}
 
 	@Override
-	public boolean canProcessMountInteraction(EntityPlayer rider, ItemStack stack)
+	public boolean canProcessMountInteraction(final EntityPlayer rider, final ItemStack stack)
 	{
 		return !this.isBreedingItem(stack) && (stack == null || stack.getItem() != Items.LEAD);
 	}
@@ -663,7 +667,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	}
 
 	@Override
-	public boolean isBreedingItem(@Nullable ItemStack stack)
+	public boolean isBreedingItem(@Nullable final ItemStack stack)
 	{
 		return stack != null && TEMPTATION_ITEMS.contains(stack.getItem());
 	}

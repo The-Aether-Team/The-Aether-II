@@ -11,13 +11,11 @@ import com.gildedgames.aether.api.structure.IStructureLoader;
 import com.gildedgames.aether.api.world.generation.ITemplateRegistry;
 import com.gildedgames.aether.client.gui.tab.TabBugReport;
 import com.gildedgames.aether.client.gui.tab.TabEquipment;
-import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.CapabilityManagerAether;
 import com.gildedgames.aether.common.capabilities.item.EffectRegistry;
 import com.gildedgames.aether.common.containers.tab.TabRegistry;
 import com.gildedgames.aether.common.dialog.DialogManager;
 import com.gildedgames.aether.common.entities.EntitiesAether;
-import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.recipes.simple.RecipeIndexRegistry;
 import com.gildedgames.aether.common.recipes.simple.ShapedRecipeWrapper;
@@ -56,19 +54,14 @@ public class ContentRegistry implements IContentRegistry
 	{
 		Validate.isTrue(!this.hasPreInit, "Already pre-initialized");
 
-		PerfHelper.measure("Pre-initialize blocks", BlocksAether::preInit);
-		PerfHelper.measure("Pre-initialize aether items", ItemsAether::preInit);
 		PerfHelper.measure("Pre-initialize tiles", TileEntitiesAether::preInit);
 
 		PerfHelper.measure("Pre-initialize dimensions", DimensionsAether::preInit);
-		PerfHelper.measure("Pre-initialize biomes", BiomesAether::preInit);
 
 		PerfHelper.measure("Pre-initialize loot tables", LootTablesAether::preInit);
 		PerfHelper.measure("Pre-initialize entities", EntitiesAether::preInit);
 
-		PerfHelper.measure("Pre-initialize equipment", EquipmentContent::preInit);
 		PerfHelper.measure("Pre-initialize recipes", RecipesAether::preInit);
-		PerfHelper.measure("Pre-initialize sounds", SoundsAether::preInit);
 
 		PerfHelper.measure("Pre-initialize networking", NetworkingAether::preInit);
 
@@ -82,6 +75,7 @@ public class ContentRegistry implements IContentRegistry
 	{
 		Validate.isTrue(!this.hasInit, "Already initialized");
 
+		PerfHelper.measure("Initialize equipment", EquipmentContent::init);
 		PerfHelper.measure("Initialize capabilities", CapabilityManagerAether::init);
 		PerfHelper.measure("Initialize templates", TemplatesAether::init);
 		PerfHelper.measure("Initialize blueprints", BlueprintsAether::init);

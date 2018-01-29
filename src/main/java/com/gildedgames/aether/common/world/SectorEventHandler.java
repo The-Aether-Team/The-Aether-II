@@ -10,39 +10,39 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class SectorEventHandler
 {
 	@SubscribeEvent
-	public static void onChunkLoaded(ChunkEvent.Load event)
+	public static void onChunkLoaded(final ChunkEvent.Load event)
 	{
-		World world = event.getWorld();
+		final World world = event.getWorld();
 
 		if (world.hasCapability(AetherCapabilities.SECTOR_ACCESS, null))
 		{
-			ISectorAccess access = world.getCapability(AetherCapabilities.SECTOR_ACCESS, null);
+			final ISectorAccess access = world.getCapability(AetherCapabilities.SECTOR_ACCESS, null);
 
-			access.onChunkLoaded(event.getChunk().xPosition, event.getChunk().zPosition);
+			access.onChunkLoaded(event.getChunk().x, event.getChunk().z);
 		}
 	}
 
 	@SubscribeEvent
-	public static void onChunkUnloaded(ChunkEvent.Unload event)
+	public static void onChunkUnloaded(final ChunkEvent.Unload event)
 	{
-		World world = event.getWorld();
+		final World world = event.getWorld();
 
 		if (world.hasCapability(AetherCapabilities.SECTOR_ACCESS, null))
 		{
-			ISectorAccess access = world.getCapability(AetherCapabilities.SECTOR_ACCESS, null);
+			final ISectorAccess access = world.getCapability(AetherCapabilities.SECTOR_ACCESS, null);
 
-			access.onChunkUnloaded(event.getChunk().xPosition, event.getChunk().zPosition);
+			access.onChunkUnloaded(event.getChunk().x, event.getChunk().z);
 		}
 	}
 
 	@SubscribeEvent
-	public static void onWorldSaved(WorldEvent.Save event)
+	public static void onWorldSaved(final WorldEvent.Save event)
 	{
-		World world = event.getWorld();
+		final World world = event.getWorld();
 
 		if (world.hasCapability(AetherCapabilities.SECTOR_ACCESS, null))
 		{
-			ISectorAccess access = world.getCapability(AetherCapabilities.SECTOR_ACCESS, null);
+			final ISectorAccess access = world.getCapability(AetherCapabilities.SECTOR_ACCESS, null);
 
 			access.flush();
 		}

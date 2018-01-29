@@ -1,12 +1,5 @@
 package com.gildedgames.aether.common.world.aether.island;
 
-import com.gildedgames.aether.api.orbis_core.api.BlockDataChunk;
-import com.gildedgames.aether.api.orbis_core.api.ICreationData;
-import com.gildedgames.aether.api.orbis_core.api.PlacedBlueprint;
-import com.gildedgames.aether.api.orbis_core.api.PostPlacement;
-import com.gildedgames.aether.api.orbis_core.processing.DataPrimer;
-import com.gildedgames.aether.api.util.BlockAccessChunkPrimer;
-import com.gildedgames.aether.api.util.BlockAccessExtendedWrapper;
 import com.gildedgames.aether.api.world.ISector;
 import com.gildedgames.aether.api.world.ISectorAccess;
 import com.gildedgames.aether.api.world.IslandSectorHelper;
@@ -14,6 +7,13 @@ import com.gildedgames.aether.api.world.TemplateInstance;
 import com.gildedgames.aether.api.world.generation.PostPlacementTemplate;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.common.world.templates.TemplatePrimer;
+import com.gildedgames.orbis.api.core.BlockDataChunk;
+import com.gildedgames.orbis.api.core.ICreationData;
+import com.gildedgames.orbis.api.core.PlacedBlueprint;
+import com.gildedgames.orbis.api.core.PostPlacement;
+import com.gildedgames.orbis.api.processing.BlockAccessChunkPrimer;
+import com.gildedgames.orbis.api.processing.BlockAccessExtendedWrapper;
+import com.gildedgames.orbis.api.processing.DataPrimer;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -21,7 +21,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.chunk.IChunkGenerator;
+import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 
@@ -52,7 +52,7 @@ public class ChunkGeneratorAether implements IChunkGenerator
 	}
 
 	@Override
-	public Chunk provideChunk(final int chunkX, final int chunkZ)
+	public Chunk generateChunk(final int chunkX, final int chunkZ)
 	{
 		this.rand.setSeed((long) chunkX * 341873128712L + (long) chunkZ * 132897987541L);
 
@@ -76,7 +76,7 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		{
 			for (final ChunkPos chunkPos : instance.getChunksOccupied())
 			{
-				if (chunkPos.chunkXPos == chunkX && chunkPos.chunkZPos == chunkZ)
+				if (chunkPos.x == chunkX && chunkPos.z == chunkZ)
 				{
 					TemplatePrimer.primeTemplateSingleChunk(chunkPos, this.world, primer, instance.getDef(), instance.getLoc());
 				}
@@ -95,12 +95,12 @@ public class ChunkGeneratorAether implements IChunkGenerator
 					continue;
 				}
 
-				if (dataChunk.getPos().chunkXPos == chunkX && dataChunk.getPos().chunkZPos == chunkZ)
+				if (dataChunk.getPos().x == chunkX && dataChunk.getPos().z == chunkZ)
 				{
 					final ICreationData data = instance.getCreationData();
 
 					dataPrimer.create(dataChunk.getContainer(),
-							data.clone().set(new BlockPos(dataChunk.getPos().getXStart(), data.getPos().getY(), dataChunk.getPos().getZStart())));
+							data.clone().pos(new BlockPos(dataChunk.getPos().getXStart(), data.getPos().getY(), dataChunk.getPos().getZStart())));
 				}
 			}
 		}
@@ -150,7 +150,7 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		{
 			for (final ChunkPos chunkPos : instance.getChunksOccupied())
 			{
-				if (chunkPos.chunkXPos == chunkX && chunkPos.chunkZPos == chunkZ)
+				if (chunkPos.x == chunkX && chunkPos.z == chunkZ)
 				{
 					TemplatePrimer.generateTemplateSingleChunk(chunkPos, this.world, blockAccess, instance.getDef(), instance.getLoc());
 
@@ -179,12 +179,12 @@ public class ChunkGeneratorAether implements IChunkGenerator
 					continue;
 				}
 
-				if (dataChunk.getPos().chunkXPos == chunkX && dataChunk.getPos().chunkZPos == chunkZ)
+				if (dataChunk.getPos().x == chunkX && dataChunk.getPos().z == chunkZ)
 				{
 					final ICreationData data = instance.getCreationData();
 
 					primer.create(dataChunk.getContainer(),
-							data.clone().set(new BlockPos(dataChunk.getPos().getXStart(), data.getPos().getY(), dataChunk.getPos().getZStart())));
+							data.clone().pos(new BlockPos(dataChunk.getPos().getXStart(), data.getPos().getY(), dataChunk.getPos().getZStart())));
 
 					if (!instance.hasGeneratedAChunk())
 					{
@@ -215,6 +215,12 @@ public class ChunkGeneratorAether implements IChunkGenerator
 	}
 
 	@Override
+	public boolean isInsideStructure(final World worldIn, final String structureName, final BlockPos pos)
+	{
+		return false;
+	}
+
+	@Override
 	public List<Biome.SpawnListEntry> getPossibleCreatures(final EnumCreatureType creatureType, final BlockPos pos)
 	{
 		final Biome biomegenbase = this.world.getBiome(pos);
@@ -231,7 +237,7 @@ public class ChunkGeneratorAether implements IChunkGenerator
 
 	@Nullable
 	@Override
-	public BlockPos getStrongholdGen(final World worldIn, final String structureName, final BlockPos position, final boolean p_180513_4_)
+	public BlockPos getNearestStructurePos(final World worldIn, final String structureName, final BlockPos position, final boolean findUnexplored)
 	{
 		return null;
 	}

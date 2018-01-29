@@ -17,10 +17,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.pathfinding.PathNavigateGround;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -32,7 +29,9 @@ import java.util.Set;
 
 public class EntityAerbunny extends EntityAetherAnimal
 {
-	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.CARROT, Items.POTATO, Items.BEETROOT, ItemsAether.blueberries, ItemsAether.orange, ItemsAether.enchanted_blueberry, ItemsAether.enchanted_wyndberry, ItemsAether.wyndberry);
+	private static final Set<Item> TEMPTATION_ITEMS = Sets
+			.newHashSet(Items.CARROT, Items.POTATO, Items.BEETROOT, ItemsAether.blueberries, ItemsAether.orange, ItemsAether.enchanted_blueberry,
+					ItemsAether.enchanted_wyndberry, ItemsAether.wyndberry);
 
 	@SideOnly(Side.CLIENT)
 	private double prevMotionY;
@@ -131,9 +130,9 @@ public class EntityAerbunny extends EntityAetherAnimal
 	}
 
 	@Override
-	public boolean processInteract(EntityPlayer player, EnumHand hand)
+	public boolean processInteract(final EntityPlayer player, final EnumHand hand)
 	{
-		ItemStack stack = player.getHeldItem(hand);
+		final ItemStack stack = player.getHeldItem(hand);
 
 		if (!super.processInteract(player, hand) && !this.isBreedingItem(stack))
 		{
@@ -175,7 +174,7 @@ public class EntityAerbunny extends EntityAetherAnimal
 	}
 
 	@Override
-	protected SoundEvent getHurtSound()
+	protected SoundEvent getHurtSound(final DamageSource src)
 	{
 		return SoundsAether.aerbunny_hurt;
 	}
@@ -187,7 +186,7 @@ public class EntityAerbunny extends EntityAetherAnimal
 	}
 
 	@Override
-	protected PathNavigate createNavigator(World worldIn)
+	protected PathNavigate createNavigator(final World worldIn)
 	{
 		return new AerbunnyNavigator(this, worldIn);
 	}
@@ -196,44 +195,6 @@ public class EntityAerbunny extends EntityAetherAnimal
 	public EntityAgeable createChild(final EntityAgeable ageable)
 	{
 		return new EntityAerbunny(this.world);
-	}
-
-	private class AerbunnyJumpHelper extends EntityJumpHelper
-	{
-		private final EntityLiving entity;
-
-		public AerbunnyJumpHelper(final EntityAerbunny entity)
-		{
-			super(entity);
-
-			this.entity = entity;
-		}
-
-		@Override
-		public void doJump()
-		{
-			this.entity.setJumping(true);
-
-			if (this.entity.motionX == 0 && this.entity.motionZ == 0)
-			{
-				this.isJumping = false;
-				this.entity.setJumping(false);
-			}
-		}
-	}
-
-	private class AerbunnyNavigator extends PathNavigateGround
-	{
-		public AerbunnyNavigator(final EntityLiving entity, final World world)
-		{
-			super(entity, world);
-		}
-
-		@Override
-		protected boolean canNavigate()
-		{
-			return !this.theEntity.isRiding();
-		}
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -271,7 +232,7 @@ public class EntityAerbunny extends EntityAetherAnimal
 	}
 
 	@Override
-	public boolean isBreedingItem(@Nullable ItemStack stack)
+	public boolean isBreedingItem(@Nullable final ItemStack stack)
 	{
 		return stack != null && TEMPTATION_ITEMS.contains(stack.getItem());
 	}
@@ -280,6 +241,44 @@ public class EntityAerbunny extends EntityAetherAnimal
 	public boolean isEntityInsideOpaqueBlock()
 	{
 		return !this.isRiding() && super.isEntityInsideOpaqueBlock();
+	}
+
+	private class AerbunnyJumpHelper extends EntityJumpHelper
+	{
+		private final EntityLiving entity;
+
+		public AerbunnyJumpHelper(final EntityAerbunny entity)
+		{
+			super(entity);
+
+			this.entity = entity;
+		}
+
+		@Override
+		public void doJump()
+		{
+			this.entity.setJumping(true);
+
+			if (this.entity.motionX == 0 && this.entity.motionZ == 0)
+			{
+				this.isJumping = false;
+				this.entity.setJumping(false);
+			}
+		}
+	}
+
+	private class AerbunnyNavigator extends PathNavigateGround
+	{
+		public AerbunnyNavigator(final EntityLiving entity, final World world)
+		{
+			super(entity, world);
+		}
+
+		@Override
+		protected boolean canNavigate()
+		{
+			return !this.entity.isRiding();
+		}
 	}
 
 }

@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.world.aether.features.aerclouds;
 
-import com.gildedgames.aether.api.util.BlockAccessExtendedWrapper;
-import com.gildedgames.aether.api.world.generation.IBlockAccessExtended;
-import com.gildedgames.aether.api.world.generation.IWorldGen;
+import com.gildedgames.orbis.api.processing.BlockAccessExtendedWrapper;
+import com.gildedgames.orbis.api.processing.IBlockAccessExtended;
+import com.gildedgames.orbis.api.world.IWorldGen;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

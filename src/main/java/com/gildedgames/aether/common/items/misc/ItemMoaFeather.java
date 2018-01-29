@@ -1,13 +1,14 @@
 package com.gildedgames.aether.common.items.misc;
 
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -22,24 +23,14 @@ public class ItemMoaFeather extends Item
 		this.setHasSubtypes(true);
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> subItems)
-	{
-		ItemStack feather = new ItemStack(itemIn);
-		ItemMoaFeather.setColor(feather, "moa.feathers.dawn", new Color(0x83c4e2).getRGB());
-
-		subItems.add(feather);
-	}
-
-	public static void setColor(ItemStack stack, String colorName, int color)
+	public static void setColor(final ItemStack stack, final String colorName, final int color)
 	{
 		if (stack.getTagCompound() == null)
 		{
 			stack.setTagCompound(new NBTTagCompound());
 		}
 
-		NBTTagCompound tag = new NBTTagCompound();
+		final NBTTagCompound tag = new NBTTagCompound();
 
 		tag.setString("colorName", colorName);
 		tag.setInteger("color", color);
@@ -47,36 +38,51 @@ public class ItemMoaFeather extends Item
 		stack.getTagCompound().setTag("featherColor", tag);
 	}
 
-	public static int getColor(ItemStack stack)
+	public static int getColor(final ItemStack stack)
 	{
 		if (stack.getTagCompound() == null)
 		{
 			ItemMoaFeather.setColor(stack, "", 0xFFFFFF);
 		}
 
-		NBTTagCompound tag = stack.getTagCompound().getCompoundTag("featherColor");
+		final NBTTagCompound tag = stack.getTagCompound().getCompoundTag("featherColor");
 
 		return tag.getInteger("color");
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static String getColorName(ItemStack stack)
+	public static String getColorName(final ItemStack stack)
 	{
 		if (stack.getTagCompound() == null)
 		{
 			ItemMoaFeather.setColor(stack, "", 0xFFFFFF);
 		}
 
-		NBTTagCompound tag = stack.getTagCompound().getCompoundTag("featherColor");
+		final NBTTagCompound tag = stack.getTagCompound().getCompoundTag("featherColor");
 
 		return tag.getString("colorName");
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
+	public void getSubItems(final CreativeTabs tab, final NonNullList<ItemStack> subItems)
 	{
-		String colorName = ItemMoaFeather.getColorName(stack);
+		if (!this.isInCreativeTab(tab))
+		{
+			return;
+		}
+
+		final ItemStack feather = new ItemStack(this);
+		ItemMoaFeather.setColor(feather, "moa.feathers.dawn", new Color(0x83c4e2).getRGB());
+
+		subItems.add(feather);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(final ItemStack stack, final World world, final List<String> tooltip, final ITooltipFlag flag)
+	{
+		final String colorName = ItemMoaFeather.getColorName(stack);
 
 		if (!colorName.isEmpty())
 		{

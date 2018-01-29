@@ -14,7 +14,7 @@ public class ItemZaniteSword extends ItemAetherSword
 	}
 
 	@Override
-	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
+	public boolean hitEntity(final ItemStack stack, final EntityLivingBase target, final EntityLivingBase attacker)
 	{
 		/**************************
 		 |*	It appears that stack.getItemDamage() / stack.getItem().getMaxDamage() never returns anything >= 1. So it adds small decimals to the health decrese
@@ -25,7 +25,7 @@ public class ItemZaniteSword extends ItemAetherSword
 		 |* point. 
 		 |* Also, this item breaks when item damage is 250. Just in case someone wanted to add an added effect or extra damage on that last hit.
 		 */
-		float damage = 6f + ((float) (stack.getItemDamage() * 4)
+		final float damage = 6f + ((float) (stack.getItemDamage() * 4)
 				/ stack.getItem().getMaxDamage()); // on last hit, sword will deal 10 damage (5 hearts)
 
 		if (target instanceof EntityPlayer)
@@ -43,7 +43,7 @@ public class ItemZaniteSword extends ItemAetherSword
 	}
 
 	@Override
-	public float getDamageVsEntity()
+	public float getAttackDamage()
 	{
 		// We apply our own DamageSource in hitEntity(stack, target, attacker).
 		return 0.0f;

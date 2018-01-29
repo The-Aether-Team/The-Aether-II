@@ -2,13 +2,14 @@ package com.gildedgames.aether.common.entities.living.mobs;
 
 import com.gildedgames.aether.common.entities.util.flying.EntityFlyingDayMob;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
 public class EntityZephyr extends EntityFlyingDayMob
 {
 
-	public EntityZephyr(World world)
+	public EntityZephyr(final World world)
 	{
 		super(world);
 
@@ -24,7 +25,7 @@ public class EntityZephyr extends EntityFlyingDayMob
 	}
 
 	@Override
-	protected SoundEvent getHurtSound()
+	protected SoundEvent getHurtSound(final DamageSource src)
 	{
 		return SoundsAether.zephyr_ambient;
 	}

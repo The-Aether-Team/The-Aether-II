@@ -10,14 +10,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
+import javax.annotation.Nullable;
+
+//TODO:
 public class RecipePresentCrafting implements IRecipe
 {
 
 	@Override
-	public boolean matches(InventoryCrafting inventory, World world)
+	public boolean matches(final InventoryCrafting inventory, final World world)
 	{
 		ItemWrappingPaper.PresentDyeData masterDye = null;
 
@@ -28,14 +32,14 @@ public class RecipePresentCrafting implements IRecipe
 				continue;
 			}
 
-			ItemStack stack = inventory.getStackInSlot(i);
+			final ItemStack stack = inventory.getStackInSlot(i);
 
 			if (stack.getItem() != ItemsAether.wrapping_paper)
 			{
 				return false;
 			}
 
-			ItemWrappingPaper.PresentDyeData dye = ItemWrappingPaper.PresentDyeData.readFromNBT(stack.getTagCompound());
+			final ItemWrappingPaper.PresentDyeData dye = ItemWrappingPaper.PresentDyeData.readFromNBT(stack.getTagCompound());
 
 			if (masterDye != null)
 			{
@@ -48,33 +52,33 @@ public class RecipePresentCrafting implements IRecipe
 			masterDye = dye;
 		}
 
-		ItemStack centerItem = inventory.getStackInSlot(4);
+		final ItemStack centerItem = inventory.getStackInSlot(4);
 
 		return centerItem.getItem() != Item.getItemFromBlock(BlocksAether.present);
 	}
 
 	@Override
-	public ItemStack getCraftingResult(InventoryCrafting inventory)
+	public ItemStack getCraftingResult(final InventoryCrafting inventory)
 	{
-		ItemStack stack = inventory.getStackInSlot(4).copy();
+		final ItemStack stack = inventory.getStackInSlot(4).copy();
 		stack.setCount(1);
 
-		ItemWrappingPaper.PresentDyeData dye = ItemWrappingPaper.getDyeData(inventory.getStackInSlot(0));
+		final ItemWrappingPaper.PresentDyeData dye = ItemWrappingPaper.getDyeData(inventory.getStackInSlot(0));
 
-		ItemBlockPresent.PresentData data = new ItemBlockPresent.PresentData();
+		final ItemBlockPresent.PresentData data = new ItemBlockPresent.PresentData();
 		data.setStack(stack);
 		data.setDye(dye);
 
-		ItemStack present = new ItemStack(BlocksAether.present);
+		final ItemStack present = new ItemStack(BlocksAether.present);
 		present.setTagCompound(data.writeToNBT(new NBTTagCompound()));
 
 		return present;
 	}
 
 	@Override
-	public int getRecipeSize()
+	public boolean canFit(final int width, final int height)
 	{
-		return 9;
+		return false;
 	}
 
 	@Override
@@ -84,17 +88,36 @@ public class RecipePresentCrafting implements IRecipe
 	}
 
 	@Override
-	public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv)
+	public NonNullList<ItemStack> getRemainingItems(final InventoryCrafting inv)
 	{
-		NonNullList<ItemStack> stacks = NonNullList.withSize(inv.getSizeInventory(), ItemStack.EMPTY);
+		final NonNullList<ItemStack> stacks = NonNullList.withSize(inv.getSizeInventory(), ItemStack.EMPTY);
 
 		for (int i = 0; i < stacks.size(); ++i)
 		{
-			ItemStack stack = inv.getStackInSlot(i);
+			final ItemStack stack = inv.getStackInSlot(i);
 
 			stacks.set(i, ForgeHooks.getContainerItem(stack));
 		}
 
 		return stacks;
+	}
+
+	@Override
+	public IRecipe setRegistryName(final ResourceLocation name)
+	{
+		return null;
+	}
+
+	@Nullable
+	@Override
+	public ResourceLocation getRegistryName()
+	{
+		return null;
+	}
+
+	@Override
+	public Class<IRecipe> getRegistryType()
+	{
+		return null;
 	}
 }

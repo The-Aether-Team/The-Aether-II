@@ -1,12 +1,13 @@
 package com.gildedgames.aether.common.items.weapons.crossbow;
 
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -30,11 +31,11 @@ public class ItemBolt extends Item
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean adv)
+	public void addInformation(final ItemStack stack, final World world, final List<String> tooltip, final ITooltipFlag flag)
 	{
-		ItemBoltType type = ITEM_VARIANTS[stack.getItemDamage()];
+		final ItemBoltType type = ITEM_VARIANTS[stack.getItemDamage()];
 
-		float damage = type.getDamage() * 2.0F;
+		final float damage = type.getDamage() * 2.0F;
 
 		if (damage == Math.floor(damage))
 		{
@@ -48,16 +49,21 @@ public class ItemBolt extends Item
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item item, CreativeTabs tab, NonNullList<ItemStack> subItems)
+	public void getSubItems(final CreativeTabs tab, final NonNullList<ItemStack> subItems)
 	{
-		for (ItemBoltType type : ITEM_VARIANTS)
+		if (!this.isInCreativeTab(tab))
 		{
-			subItems.add(new ItemStack(item, 1, type.ordinal()));
+			return;
+		}
+
+		for (final ItemBoltType type : ITEM_VARIANTS)
+		{
+			subItems.add(new ItemStack(this, 1, type.ordinal()));
 		}
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack)
+	public String getUnlocalizedName(final ItemStack stack)
 	{
 		return super.getUnlocalizedName(stack) + "." + ItemBoltType.fromOrdinal(stack.getMetadata()).getID();
 	}

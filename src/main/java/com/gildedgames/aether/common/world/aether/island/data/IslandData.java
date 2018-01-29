@@ -1,10 +1,10 @@
 package com.gildedgames.aether.common.world.aether.island.data;
 
-import com.gildedgames.aether.api.util.NBTHelper;
 import com.gildedgames.aether.api.world.islands.IIslandBounds;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IVirtualDataManager;
 import com.gildedgames.aether.common.world.aether.island.data.virtual.VirtualDataManager;
+import com.gildedgames.orbis.api.util.mc.NBTHelper;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -87,7 +87,7 @@ public class IslandData implements IIslandData
 		tag.setLong("Seed", this.seed);
 
 		tag.setTag("RespawnPoint", NBTHelper.writeBlockPos(this.respawnPoint));
-		tag.setTag("VirtualManager", NBTHelper.write(this.chunkManager));
+		tag.setTag("VirtualManager", NBTHelper.writeRaw(this.chunkManager));
 	}
 
 	@Override

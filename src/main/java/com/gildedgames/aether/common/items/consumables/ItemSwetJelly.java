@@ -4,13 +4,11 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherDirt;
 import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
 import com.gildedgames.aether.common.items.misc.ItemAetherFood;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -30,7 +28,8 @@ public class ItemSwetJelly extends ItemAetherFood
 	static
 	{
 		ItemSwetJelly.growables.put(Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT), Blocks.GRASS.getDefaultState());
-		ItemSwetJelly.growables.put(BlocksAether.aether_dirt.getDefaultState().withProperty(BlockAetherDirt.PROPERTY_VARIANT, BlockAetherDirt.DIRT), BlocksAether.aether_grass.getDefaultState());
+		ItemSwetJelly.growables.put(BlocksAether.aether_dirt.getDefaultState().withProperty(BlockAetherDirt.PROPERTY_VARIANT, BlockAetherDirt.DIRT),
+				BlocksAether.aether_grass.getDefaultState());
 	}
 
 	public ItemSwetJelly()
@@ -42,31 +41,36 @@ public class ItemSwetJelly extends ItemAetherFood
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item item, CreativeTabs tab, NonNullList<ItemStack> subItems)
+	public void getSubItems(final CreativeTabs tab, final NonNullList<ItemStack> subItems)
 	{
-		for (EntitySwet.Type types : EntitySwet.Type.values())
+		if (!this.isInCreativeTab(tab))
 		{
-			subItems.add(new ItemStack(item, 1, types.ordinal()));
+			return;
+		}
+
+		for (final EntitySwet.Type types : EntitySwet.Type.values())
+		{
+			subItems.add(new ItemStack(this, 1, types.ordinal()));
 		}
 	}
 
 	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing,
-			float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(final EntityPlayer player, final World world, final BlockPos pos, final EnumHand hand, final EnumFacing facing,
+			final float hitX, final float hitY, final float hitZ)
 	{
-		IBlockState state = world.getBlockState(pos);
+		final IBlockState state = world.getBlockState(pos);
 
 		if (ItemSwetJelly.growables.containsKey(state))
 		{
-			IBlockState nState = ItemSwetJelly.growables.get(state);
+			final IBlockState nState = ItemSwetJelly.growables.get(state);
 
-			int radius = 1;
+			final int radius = 1;
 
 			for (int x = pos.getX() - radius; x <= pos.getX() + radius; x++)
 			{
 				for (int z = pos.getZ() - radius; z <= pos.getZ() + radius; z++)
 				{
-					BlockPos nPos = new BlockPos(x, pos.getY(), z);
+					final BlockPos nPos = new BlockPos(x, pos.getY(), z);
 
 					if (world.getBlockState(nPos) == state && !world.getBlockState(nPos.up()).isNormalCube())
 					{
@@ -82,7 +86,7 @@ public class ItemSwetJelly extends ItemAetherFood
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack)
+	public String getUnlocalizedName(final ItemStack stack)
 	{
 		return "item.aether.swet_jelly." + EntitySwet.Type.fromOrdinal(stack.getMetadata()).name;
 	}

@@ -19,25 +19,25 @@ import java.util.Map;
 
 public class ItemToolHandler
 {
-	private static Map<Item.ToolMaterial, IToolEventHandler> handlers = new HashMap<>();
+	private static final Map<String, IToolEventHandler> handlers = new HashMap<>();
 
 	static
 	{
-		handlers.put(MaterialsAether.SKYROOT_TOOL, new ItemSkyrootToolHandler());
-		handlers.put(MaterialsAether.HOLYSTONE_TOOL, new ItemHolystoneToolHandler());
-		handlers.put(MaterialsAether.ARKENIUM_TOOL, new ItemArkeniumToolHandler());
-		handlers.put(MaterialsAether.ZANITE_TOOL, new ItemZaniteToolHandler());
-		handlers.put(MaterialsAether.GRAVITITE_TOOL, new ItemGravititeToolHandler());
+		handlers.put(MaterialsAether.SKYROOT_TOOL.name(), new ItemSkyrootToolHandler());
+		handlers.put(MaterialsAether.HOLYSTONE_TOOL.name(), new ItemHolystoneToolHandler());
+		handlers.put(MaterialsAether.ARKENIUM_TOOL.name(), new ItemArkeniumToolHandler());
+		handlers.put(MaterialsAether.ZANITE_TOOL.name(), new ItemZaniteToolHandler());
+		handlers.put(MaterialsAether.GRAVITITE_TOOL.name(), new ItemGravititeToolHandler());
 	}
 
 	@SubscribeEvent
-	public static void onTooltip(ItemTooltipEvent event)
+	public static void onTooltip(final ItemTooltipEvent event)
 	{
 		if (event.getItemStack().getItem() instanceof ItemTool)
 		{
-			Item.ToolMaterial material = ((ItemTool) event.getItemStack().getItem()).getToolMaterial();
+			final String material = ((ItemTool) event.getItemStack().getItem()).getToolMaterialName();
 
-			IToolEventHandler handler = handlers.get(material);
+			final IToolEventHandler handler = handlers.get(material);
 
 			if (handler == null)
 			{
@@ -49,13 +49,13 @@ public class ItemToolHandler
 	}
 
 	@SubscribeEvent
-	public static void onBlockActivated(PlayerInteractEvent.RightClickItem event)
+	public static void onBlockActivated(final PlayerInteractEvent.RightClickItem event)
 	{
 		if (event.getItemStack().getItem() instanceof ItemTool)
 		{
-			Item.ToolMaterial material = ((ItemTool) event.getItemStack().getItem()).getToolMaterial();
+			final String material = ((ItemTool) event.getItemStack().getItem()).getToolMaterialName();
 
-			IToolEventHandler handler = handlers.get(material);
+			final IToolEventHandler handler = handlers.get(material);
 
 			if (handler == null)
 			{
@@ -67,13 +67,13 @@ public class ItemToolHandler
 	}
 
 	@SubscribeEvent
-	public static void onBlockActivated(PlayerInteractEvent.RightClickBlock event)
+	public static void onBlockActivated(final PlayerInteractEvent.RightClickBlock event)
 	{
 		if (event.getItemStack().getItem() instanceof ItemTool)
 		{
-			Item.ToolMaterial material = ((ItemTool) event.getItemStack().getItem()).getToolMaterial();
+			final String material = ((ItemTool) event.getItemStack().getItem()).getToolMaterialName();
 
-			IToolEventHandler handler = handlers.get(material);
+			final IToolEventHandler handler = handlers.get(material);
 
 			if (handler == null)
 			{
@@ -85,20 +85,20 @@ public class ItemToolHandler
 	}
 
 	@SubscribeEvent
-	public static void onBlockHarvested(BlockEvent.HarvestDropsEvent event)
+	public static void onBlockHarvested(final BlockEvent.HarvestDropsEvent event)
 	{
 		if (event.getHarvester() == null)
 		{
 			return;
 		}
 
-		ItemStack stack = event.getHarvester().getHeldItem(EnumHand.MAIN_HAND);
+		final ItemStack stack = event.getHarvester().getHeldItem(EnumHand.MAIN_HAND);
 
 		if (stack.getItem() instanceof ItemTool)
 		{
-			Item.ToolMaterial material = ((ItemTool) stack.getItem()).getToolMaterial();
+			final String material = ((ItemTool) stack.getItem()).getToolMaterialName();
 
-			IToolEventHandler handler = handlers.get(material);
+			final IToolEventHandler handler = handlers.get(material);
 
 			if (handler == null)
 			{
@@ -110,35 +110,36 @@ public class ItemToolHandler
 	}
 
 	@SubscribeEvent
-	public static void onCalculateBreakSpeed(PlayerEvent.BreakSpeed event)
+	public static void onCalculateBreakSpeed(final PlayerEvent.BreakSpeed event)
 	{
-		ItemStack stack = event.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND);
+		final ItemStack stack = event.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND);
 
 		if (stack.getItem() instanceof ItemTool)
 		{
-			Item.ToolMaterial material = ((ItemTool) stack.getItem()).getToolMaterial();
+			final String material = ((ItemTool) stack.getItem()).getToolMaterialName();
 
-			IToolEventHandler handler = handlers.get(material);
+			final IToolEventHandler handler = handlers.get(material);
 
 			if (handler == null)
 			{
 				return;
 			}
 
-			event.setNewSpeed(handler.getBreakSpeed(stack, event.getEntityPlayer().getEntityWorld(), event.getState(), event.getPos(), event.getEntityPlayer(), event.getOriginalSpeed()));
+			event.setNewSpeed(handler.getBreakSpeed(stack, event.getEntityPlayer().getEntityWorld(), event.getState(), event.getPos(), event.getEntityPlayer(),
+					event.getOriginalSpeed()));
 		}
 	}
 
 	@SubscribeEvent
-	public static void onEntityHit(AttackEntityEvent event)
+	public static void onEntityHit(final AttackEntityEvent event)
 	{
-		ItemStack stack = event.getEntityLiving().getHeldItem(EnumHand.MAIN_HAND);
+		final ItemStack stack = event.getEntityLiving().getHeldItem(EnumHand.MAIN_HAND);
 
 		if (stack.getItem() instanceof ItemTool)
 		{
-			Item.ToolMaterial material = ((ItemTool) stack.getItem()).getToolMaterial();
+			final String material = ((ItemTool) stack.getItem()).getToolMaterialName();
 
-			IToolEventHandler handler = handlers.get(material);
+			final IToolEventHandler handler = handlers.get(material);
 
 			if (handler == null)
 			{
@@ -149,9 +150,9 @@ public class ItemToolHandler
 		}
 	}
 
-	public static boolean onEntityHit(ItemStack stack, Item.ToolMaterial material, EntityLivingBase target, EntityLivingBase attacker)
+	public static boolean onEntityHit(final ItemStack stack, final Item.ToolMaterial material, final EntityLivingBase target, final EntityLivingBase attacker)
 	{
-		IToolEventHandler handler = handlers.get(material);
+		final IToolEventHandler handler = handlers.get(material);
 
 		if (handler != null)
 		{

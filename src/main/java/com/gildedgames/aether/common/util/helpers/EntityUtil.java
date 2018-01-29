@@ -10,8 +10,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.relauncher.Side;
 
 import java.lang.reflect.Method;
 import java.util.UUID;
@@ -19,10 +17,11 @@ import java.util.UUID;
 public class EntityUtil
 {
 
-	private static Method COPY_DATA_FROM_OLD;
+	private static final Method COPY_DATA_FROM_OLD;
 
 	static
 	{
+		//TODO: NEW OBF NAMES
 		COPY_DATA_FROM_OLD = ReflectionAether.getMethod(Entity.class, new Class<?>[] { Entity.class }, "copyDataFromOld", "func_180432_n");
 	}
 
@@ -51,9 +50,9 @@ public class EntityUtil
 				final Vec3d look = player.getLook(1.0F);
 
 				Vec3d reverse = vec3d.subtractReverse(new Vec3d(player.posX, player.posY, player.posZ)).normalize();
-				reverse = new Vec3d(reverse.xCoord, 0.0D, reverse.zCoord);
+				reverse = new Vec3d(reverse.x, 0.0D, reverse.z);
 
-				if (reverse.dotProduct(look) < 0.0D && player.getDistanceToEntity(entity) < 64.0D)
+				if (reverse.dotProduct(look) < 0.0D && player.getDistance(entity) < 64.0D)
 				{
 					canSee = true;
 					break;

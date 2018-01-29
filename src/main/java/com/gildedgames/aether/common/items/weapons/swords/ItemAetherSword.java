@@ -3,10 +3,11 @@ package com.gildedgames.aether.common.items.weapons.swords;
 import com.gildedgames.aether.common.items.ItemAbilityType;
 import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -16,7 +17,7 @@ public class ItemAetherSword extends ItemSword
 {
 	private final ItemAbilityType abilityType;
 
-	public ItemAetherSword(ToolMaterial material, ItemAbilityType abilityType)
+	public ItemAetherSword(final ToolMaterial material, final ItemAbilityType abilityType)
 	{
 		super(material);
 
@@ -27,7 +28,7 @@ public class ItemAetherSword extends ItemSword
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
+	public void addInformation(final ItemStack stack, final World world, final List<String> tooltip, final ITooltipFlag flag)
 	{
 		if (this.abilityType != ItemAbilityType.NONE)
 		{

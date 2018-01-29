@@ -1,7 +1,5 @@
 package com.gildedgames.aether.common.world.templates;
 
-import com.gildedgames.aether.api.util.BlockAccessChunkPrimer;
-import com.gildedgames.aether.api.util.BlockAccessExtendedWrapper;
 import com.gildedgames.aether.api.util.TemplateUtil;
 import com.gildedgames.aether.api.world.generation.*;
 import com.gildedgames.aether.common.ReflectionAether;
@@ -10,6 +8,9 @@ import com.gildedgames.aether.common.blocks.multiblock.BlockMultiDummy;
 import com.gildedgames.aether.common.blocks.multiblock.BlockMultiDummyHalf;
 import com.gildedgames.aether.common.entities.tiles.TileEntityWildcard;
 import com.gildedgames.aether.common.entities.tiles.multiblock.TileEntityMultiblockController;
+import com.gildedgames.orbis.api.processing.BlockAccessChunkPrimer;
+import com.gildedgames.orbis.api.processing.BlockAccessExtendedWrapper;
+import com.gildedgames.orbis.api.processing.IBlockAccessExtended;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -372,9 +373,9 @@ public class TemplatePrimer
 		{
 			final Block block = settings.getReplacedBlock();
 
-			final int minX = chunk.chunkXPos * 16;
+			final int minX = chunk.x * 16;
 			final int minY = 0;
-			final int minZ = chunk.chunkZPos * 16;
+			final int minZ = chunk.z * 16;
 
 			final int maxX = minX + 15;
 			final int maxY = world.getActualHeight();
@@ -450,9 +451,9 @@ public class TemplatePrimer
 		{
 			final Block block = settings.getReplacedBlock();
 
-			final int minX = chunk.chunkXPos * 16;
+			final int minX = chunk.x * 16;
 			final int minY = 0;
-			final int minZ = chunk.chunkZPos * 16;
+			final int minZ = chunk.z * 16;
 
 			final int maxX = minX + 15;
 			final int maxY = world.getActualHeight();
@@ -592,9 +593,9 @@ public class TemplatePrimer
 				final Vec3d vec3d = transformedVec3d(template$entityinfo.pos, mirrorIn, rotationIn);
 				final Vec3d vec3d1 = vec3d.addVector((double) pos.getX(), (double) pos.getY(), (double) pos.getZ());
 				final NBTTagList nbttaglist = new NBTTagList();
-				nbttaglist.appendTag(new NBTTagDouble(vec3d1.xCoord));
-				nbttaglist.appendTag(new NBTTagDouble(vec3d1.yCoord));
-				nbttaglist.appendTag(new NBTTagDouble(vec3d1.zCoord));
+				nbttaglist.appendTag(new NBTTagDouble(vec3d1.x));
+				nbttaglist.appendTag(new NBTTagDouble(vec3d1.y));
+				nbttaglist.appendTag(new NBTTagDouble(vec3d1.z));
 				nbttagcompound.setTag("Pos", nbttaglist);
 				nbttagcompound.setUniqueId("UUID", UUID.randomUUID());
 				Entity entity;
@@ -612,7 +613,7 @@ public class TemplatePrimer
 				{
 					float f = entity.getMirroredYaw(mirrorIn);
 					f = f + (entity.rotationYaw - entity.getRotatedYaw(rotationIn));
-					entity.setLocationAndAngles(vec3d1.xCoord, vec3d1.yCoord, vec3d1.zCoord, f, entity.rotationPitch);
+					entity.setLocationAndAngles(vec3d1.x, vec3d1.y, vec3d1.z, f, entity.rotationPitch);
 					worldIn.spawnEntity(entity);
 				}
 			}
@@ -653,9 +654,9 @@ public class TemplatePrimer
 
 	private static Vec3d transformedVec3d(final Vec3d vec, final Mirror mirrorIn, final Rotation rotationIn)
 	{
-		double d0 = vec.xCoord;
-		final double d1 = vec.yCoord;
-		double d2 = vec.zCoord;
+		double d0 = vec.x;
+		final double d1 = vec.y;
+		double d2 = vec.z;
 		boolean flag = true;
 
 		switch (mirrorIn)

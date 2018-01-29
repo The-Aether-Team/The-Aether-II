@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world.spawning.util;
 
-import com.gildedgames.aether.api.util.BlockUtil;
 import com.gildedgames.aether.common.world.spawning.PositionSelector;
+import com.gildedgames.orbis.api.util.mc.BlockUtil;
 import net.minecraft.world.World;
 
 public class GroundPositionSelector implements PositionSelector

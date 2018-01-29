@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.entities.projectiles;
 
-import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
 import net.minecraft.entity.EntityLivingBase;
@@ -11,7 +10,6 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -21,17 +19,12 @@ public class EntityBolt extends EntityArrow
 
 	private static final DataParameter<Byte> ABILITY = new DataParameter<>(21, DataSerializers.BYTE);
 
-	public enum BoltAbility
-	{
-		NORMAL
-	}
-
-	public EntityBolt(World worldIn)
+	public EntityBolt(final World worldIn)
 	{
 		super(worldIn);
 	}
 
-	public EntityBolt(World worldIn, EntityLivingBase shooter)
+	public EntityBolt(final World worldIn, final EntityLivingBase shooter)
 	{
 		super(worldIn, shooter);
 	}
@@ -43,7 +36,7 @@ public class EntityBolt extends EntityArrow
 	}
 
 	@Override
-	protected void arrowHit(EntityLivingBase living)
+	protected void arrowHit(final EntityLivingBase living)
 	{
 	}
 
@@ -58,9 +51,9 @@ public class EntityBolt extends EntityArrow
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public int getBrightnessForRender(float partialTicks)
+	public int getBrightnessForRender()
 	{
-		BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos(MathHelper.floor(this.posX), 0, MathHelper.floor(this.posZ));
+		final BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos(MathHelper.floor(this.posX), 0, MathHelper.floor(this.posZ));
 
 		if (this.world.isBlockLoaded(blockpos$mutableblockpos))
 		{
@@ -73,24 +66,29 @@ public class EntityBolt extends EntityArrow
 		}
 	}
 
-	public void setBoltAbility(BoltAbility ability)
-	{
-		this.dataManager.set(ABILITY, (byte) ability.ordinal());
-	}
-
 	public BoltAbility getBoltAbility()
 	{
 		return BoltAbility.values()[this.dataManager.get(ABILITY)];
 	}
 
-	public void setBoltType(ItemBoltType type)
+	public void setBoltAbility(final BoltAbility ability)
 	{
-		this.dataManager.set(TYPE, (byte) type.ordinal());
-		this.setDamage(type.getDamage());
+		this.dataManager.set(ABILITY, (byte) ability.ordinal());
 	}
 
 	public ItemBoltType getBoltType()
 	{
 		return ItemBoltType.values()[this.dataManager.get(TYPE)];
+	}
+
+	public void setBoltType(final ItemBoltType type)
+	{
+		this.dataManager.set(TYPE, (byte) type.ordinal());
+		this.setDamage(type.getDamage());
+	}
+
+	public enum BoltAbility
+	{
+		NORMAL
 	}
 }

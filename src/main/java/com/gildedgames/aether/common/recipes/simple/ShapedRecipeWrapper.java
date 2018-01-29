@@ -17,21 +17,21 @@ public class ShapedRecipeWrapper implements IIndexableRecipe
 
 	private final Set<ItemMetaPair> unique;
 
-	public ShapedRecipeWrapper(ShapedOreRecipe recipe)
+	public ShapedRecipeWrapper(final ShapedOreRecipe recipe)
 	{
 		Validate.notNull(recipe.getRecipeOutput(), "Recipe is missing output stack");
-		Validate.notEmpty(recipe.getInput(), "Recipe is missing inputs");
+		Validate.notEmpty(recipe.getIngredients(), "Recipe is missing inputs");
 
 		this.recipe = recipe;
 
-		this.matrix = Arrays.asList(recipe.getInput());
+		this.matrix = Arrays.asList(recipe.getIngredients());
 		this.unique = new HashSet<>();
 
-		for (Object matrixItem : this.matrix)
+		for (final Object matrixItem : this.matrix)
 		{
 			if (matrixItem instanceof ItemStack)
 			{
-				ItemStack stack = (ItemStack) matrixItem;
+				final ItemStack stack = (ItemStack) matrixItem;
 
 				if (!stack.isEmpty())
 				{
@@ -40,13 +40,13 @@ public class ShapedRecipeWrapper implements IIndexableRecipe
 			}
 			else if (matrixItem instanceof NonNullList)
 			{
-				NonNullList list = (NonNullList) matrixItem;
+				final NonNullList list = (NonNullList) matrixItem;
 
-				for (Object obj : list)
+				for (final Object obj : list)
 				{
 					if (obj instanceof ItemStack)
 					{
-						ItemStack stack = (ItemStack) obj;
+						final ItemStack stack = (ItemStack) obj;
 
 						if (!stack.isEmpty())
 						{

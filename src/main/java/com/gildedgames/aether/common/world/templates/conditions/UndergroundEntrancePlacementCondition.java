@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.world.templates.conditions;
 
 import com.gildedgames.aether.api.util.TemplateUtil;
-import com.gildedgames.aether.api.world.generation.IBlockAccessExtended;
 import com.gildedgames.aether.api.world.generation.PlacementConditionTemplate;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.orbis.api.processing.IBlockAccessExtended;
 import com.google.common.collect.Lists;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;

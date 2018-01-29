@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.items.misc;
 
-import com.gildedgames.aether.api.util.BlockAccessExtendedWrapper;
 import com.gildedgames.aether.api.world.generation.TemplateDefinition;
 import com.gildedgames.aether.api.world.generation.TemplateLoc;
 import com.gildedgames.aether.common.world.templates.TemplatePrimer;
+import com.gildedgames.orbis.api.processing.BlockAccessExtendedWrapper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;

@@ -4,11 +4,12 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.genes.util.GeneUtil;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
-import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.entities.tiles.TileEntityMoaEgg;
+import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,9 +30,9 @@ import java.util.List;
 public class ItemMoaEgg extends Item
 {
 
-	private boolean creativeEgg;
+	private final boolean creativeEgg;
 
-	public ItemMoaEgg(boolean creativeEgg)
+	public ItemMoaEgg(final boolean creativeEgg)
 	{
 		super();
 
@@ -48,30 +49,30 @@ public class ItemMoaEgg extends Item
 		this.addPropertyOverride(new ResourceLocation("spots"), new ModelProperty("spots"));
 	}
 
-	public static void setGenePool(ItemStack stack, MoaGenePool pool)
+	public static void setGenePool(final ItemStack stack, final MoaGenePool pool)
 	{
 		if (stack.getTagCompound() == null)
 		{
 			stack.setTagCompound(new NBTTagCompound());
 		}
 
-		NBTTagCompound poolTag = new NBTTagCompound();
+		final NBTTagCompound poolTag = new NBTTagCompound();
 
 		pool.write(poolTag);
 
 		stack.getTagCompound().setTag("pool", poolTag);
 	}
 
-	public static MoaGenePool getGenePool(ItemStack stack)
+	public static MoaGenePool getGenePool(final ItemStack stack)
 	{
 		if (stack.getTagCompound() == null)
 		{
 			ItemMoaEgg.setGenePool(stack, new MoaGenePool());
 		}
 
-		NBTTagCompound poolTag = stack.getTagCompound().getCompoundTag("pool");
+		final NBTTagCompound poolTag = stack.getTagCompound().getCompoundTag("pool");
 
-		MoaGenePool pool = new MoaGenePool();
+		final MoaGenePool pool = new MoaGenePool();
 
 		pool.read(poolTag);
 
@@ -79,9 +80,9 @@ public class ItemMoaEgg extends Item
 	}
 
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer par2EntityPlayer, List<String> creativeList, boolean par4)
+	public void addInformation(final ItemStack stack, final World world, final List<String> creativeList, final ITooltipFlag flag)
 	{
-		MoaGenePool genePool = ItemMoaEgg.getGenePool(stack);
+		final MoaGenePool genePool = ItemMoaEgg.getGenePool(stack);
 
 		if (genePool.getFeathers() != null && stack.getItem() != ItemsAether.rainbow_moa_egg)
 		{
@@ -97,16 +98,16 @@ public class ItemMoaEgg extends Item
 	}
 
 	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing,
-			float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(final EntityPlayer player, final World world, final BlockPos pos, final EnumHand hand, final EnumFacing facing,
+			final float hitX, final float hitY, final float hitZ)
 	{
-		ItemStack stack = player.getHeldItem(hand);
+		final ItemStack stack = player.getHeldItem(hand);
 
-		IBlockState state = world.getBlockState(pos);
+		final IBlockState state = world.getBlockState(pos);
 
-		boolean replaceable = state.getBlock().isReplaceable(world, pos);
+		final boolean replaceable = state.getBlock().isReplaceable(world, pos);
 
-		int yOffset = replaceable ? 0 : 1;
+		final int yOffset = replaceable ? 0 : 1;
 
 		if (stack.getCount() == 0)
 		{
@@ -123,16 +124,16 @@ public class ItemMoaEgg extends Item
 			{
 				if (!world.isRemote)
 				{
-					EntityMoa moa = new EntityMoa(world, GeneUtil.getRandomSeed(world));
+					final EntityMoa moa = new EntityMoa(world, GeneUtil.getRandomSeed(world));
 					moa.setPosition(pos.getX() + 0.5F, pos.getY() + (moa.height / 2), pos.getZ() + 0.5F);
 
-					MoaGenePool stackGenePool = ItemMoaEgg.getGenePool(stack);
+					final MoaGenePool stackGenePool = ItemMoaEgg.getGenePool(stack);
 
 					moa.setRaisedByPlayer(true);
 
 					world.spawnEntity(moa);
 
-					MoaGenePool genePool = moa.getGenePool();
+					final MoaGenePool genePool = moa.getGenePool();
 
 					if (this.creativeEgg)
 					{
@@ -140,7 +141,8 @@ public class ItemMoaEgg extends Item
 					}
 					else
 					{
-						genePool.transformFromParents(stackGenePool.getStorage().getSeed(), stackGenePool.getStorage().getFatherSeed(), stackGenePool.getStorage().getMotherSeed());
+						genePool.transformFromParents(stackGenePool.getStorage().getSeed(), stackGenePool.getStorage().getFatherSeed(),
+								stackGenePool.getStorage().getMotherSeed());
 					}
 				}
 
@@ -149,21 +151,23 @@ public class ItemMoaEgg extends Item
 				return EnumActionResult.SUCCESS;
 			}
 			else if (
-					world.checkNoEntityCollision(BlocksAether.moa_egg.getCollisionBoundingBox(world.getBlockState(pos.add(0, yOffset, 0)), world, pos.add(0, yOffset, 0)))
+					world.checkNoEntityCollision(
+							BlocksAether.moa_egg.getCollisionBoundingBox(world.getBlockState(pos.add(0, yOffset, 0)), world, pos.add(0, yOffset, 0)))
 							&& world.setBlockState(pos.add(0, yOffset, 0), BlocksAether.moa_egg.getDefaultState()))
 			{
-				SoundType soundtype = world.getBlockState(pos).getBlock().getSoundType(world.getBlockState(pos), world, pos, player);
+				final SoundType soundtype = world.getBlockState(pos).getBlock().getSoundType(world.getBlockState(pos), world, pos, player);
 				world.playSound(player, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS,
 						(soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
 
-				TileEntityMoaEgg egg = (TileEntityMoaEgg) world.getTileEntity(pos.add(0, yOffset, 0));
+				final TileEntityMoaEgg egg = (TileEntityMoaEgg) world.getTileEntity(pos.add(0, yOffset, 0));
 
 				if (egg != null)
 				{
-					MoaGenePool stackGenes = ItemMoaEgg.getGenePool(stack);
-					MoaGenePool teGenes = egg.getGenePool();
+					final MoaGenePool stackGenes = ItemMoaEgg.getGenePool(stack);
+					final MoaGenePool teGenes = egg.getGenePool();
 
-					teGenes.transformFromParents(stackGenes.getStorage().getSeed(), stackGenes.getStorage().getFatherSeed(), stackGenes.getStorage().getMotherSeed());
+					teGenes.transformFromParents(stackGenes.getStorage().getSeed(), stackGenes.getStorage().getFatherSeed(),
+							stackGenes.getStorage().getMotherSeed());
 
 					egg.setPlayerPlaced();
 				}
@@ -178,7 +182,7 @@ public class ItemMoaEgg extends Item
 	}
 
 	@Override
-	public String getItemStackDisplayName(ItemStack stack)
+	public String getItemStackDisplayName(final ItemStack stack)
 	{
 		return this.creativeEgg ? super.getItemStackDisplayName(stack) : super.getItemStackDisplayName(stack);
 	}
@@ -190,7 +194,7 @@ public class ItemMoaEgg extends Item
 	}
 
 	@Override
-	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
+	public void onUpdate(final ItemStack stack, final World worldIn, final Entity entityIn, final int itemSlot, final boolean isSelected)
 	{
 
 	}
@@ -198,22 +202,22 @@ public class ItemMoaEgg extends Item
 	private static class ModelProperty implements IItemPropertyGetter
 	{
 
-		private String propertyName;
+		private final String propertyName;
 
-		public ModelProperty(String propertyName)
+		public ModelProperty(final String propertyName)
 		{
 			this.propertyName = propertyName;
 		}
 
 		@Override
 		@SideOnly(Side.CLIENT)
-		public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
+		public float apply(final ItemStack stack, @Nullable final World worldIn, @Nullable final EntityLivingBase entityIn)
 		{
-			MoaGenePool genePool = ItemMoaEgg.getGenePool(stack);
+			final MoaGenePool genePool = ItemMoaEgg.getGenePool(stack);
 
 			if (genePool.getMarks() != null)
 			{
-				String mark = genePool.getMarks().gene().getResourceName();
+				final String mark = genePool.getMarks().gene().getResourceName();
 
 				if (mark.equals(this.propertyName))
 				{

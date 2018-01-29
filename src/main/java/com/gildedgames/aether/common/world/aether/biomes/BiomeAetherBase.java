@@ -56,7 +56,7 @@ public abstract class BiomeAetherBase extends Biome
 	}
 
 	@Override
-	public final WorldGenAbstractTree genBigTreeChance(final Random random)
+	public final WorldGenAbstractTree getRandomTreeFeature(final Random random)
 	{
 		return null;
 	}
@@ -83,7 +83,7 @@ public abstract class BiomeAetherBase extends Biome
 		return this.defaultSubBiome;
 	}
 
-	public final void setDefaultSubBiome(SubBiome defaultSubBiome)
+	public final void setDefaultSubBiome(final SubBiome defaultSubBiome)
 	{
 		this.defaultSubBiome = defaultSubBiome;
 	}

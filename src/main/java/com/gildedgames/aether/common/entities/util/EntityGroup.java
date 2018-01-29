@@ -8,9 +8,13 @@ import java.util.*;
 public class EntityGroup
 {
 
+	private static final Map<Integer, EntityGroup> packs = new HashMap<>();
+
 	private static int nextPackID = Integer.MIN_VALUE;
 
-	private static Map<Integer, EntityGroup> packs = new HashMap<>();
+	List<EntityGroupAggressor> agressors = new ArrayList<>();
+
+	int tickCounter = 0;
 
 	private int size;
 
@@ -18,15 +22,11 @@ public class EntityGroup
 
 	private boolean hasLeader;
 
-	List<EntityGroupAggressor> agressors = new ArrayList<>();
-
-	int tickCounter = 0;
-
 	public EntityGroup()
 	{
 	}
 
-	public EntityGroup(int id)
+	public EntityGroup(final int id)
 	{
 		this.id = id;
 	}
@@ -38,7 +38,7 @@ public class EntityGroup
 
 	public static void onUpdate()
 	{
-		for (EntityGroup pack : packs.values())
+		for (final EntityGroup pack : packs.values())
 		{
 			++pack.tickCounter;
 			pack.removeDeadAndOldAgressors();
@@ -55,21 +55,21 @@ public class EntityGroup
 		return this.size;
 	}
 
+	public void setSize(final int size)
+	{
+		this.size = size;
+
+		this.refresh();
+	}
+
 	public int getOptimalSize()
 	{
 		return this.optimalSize;
 	}
 
-	public void setOptimalSize(int size)
+	public void setOptimalSize(final int size)
 	{
 		this.optimalSize = size;
-		this.refresh();
-	}
-
-	public void setSize(int size)
-	{
-		this.size = size;
-
 		this.refresh();
 	}
 
@@ -78,7 +78,7 @@ public class EntityGroup
 		return this.hasLeader;
 	}
 
-	public void onAnimalDeath(EntityGroupMember groupEntity)
+	public void onAnimalDeath(final EntityGroupMember groupEntity)
 	{
 		if (groupEntity.isGroupLeader())
 		{
@@ -90,7 +90,7 @@ public class EntityGroup
 		this.refresh();
 	}
 
-	public void onAnimalJoin(EntityGroupMember groupEntity)
+	public void onAnimalJoin(final EntityGroupMember groupEntity)
 	{
 		if (groupEntity.isGroupLeader())
 		{
@@ -102,9 +102,9 @@ public class EntityGroup
 		this.refresh();
 	}
 
-	public void addOrRenewAggressor(EntityLivingBase entity)
+	public void addOrRenewAggressor(final EntityLivingBase entity)
 	{
-		Iterator iterator = this.agressors.iterator();
+		final Iterator iterator = this.agressors.iterator();
 		EntityGroupAggressor agressor;
 
 		do
@@ -122,14 +122,14 @@ public class EntityGroup
 		agressor.time = this.tickCounter;
 	}
 
-	public EntityLivingBase findNearestAggressor(EntityLivingBase entity)
+	public EntityLivingBase findNearestAggressor(final EntityLivingBase entity)
 	{
 		double d0 = Double.MAX_VALUE;
 		EntityGroupAggressor agressor = null;
 
-		for (EntityGroupAggressor agressor1 : this.agressors)
+		for (final EntityGroupAggressor agressor1 : this.agressors)
 		{
-			double d1 = agressor1.agressor.getDistanceSqToEntity(entity);
+			final double d1 = agressor1.agressor.getDistanceSq(entity);
 
 			if (d1 <= d0)
 			{
@@ -143,11 +143,11 @@ public class EntityGroup
 
 	private void removeDeadAndOldAgressors()
 	{
-		Iterator iterator = this.agressors.iterator();
+		final Iterator iterator = this.agressors.iterator();
 
 		while (iterator.hasNext())
 		{
-			EntityGroupAggressor agressor = (EntityGroupAggressor) iterator.next();
+			final EntityGroupAggressor agressor = (EntityGroupAggressor) iterator.next();
 
 			if (!agressor.agressor.isEntityAlive() || (this.tickCounter - agressor.time) > 2200)
 			{
@@ -162,19 +162,19 @@ public class EntityGroup
 	}
 
 	@Override
-	public boolean equals(Object object)
+	public boolean equals(final Object object)
 	{
 		if (!(object instanceof EntityGroup))
 		{
 			return false;
 		}
 
-		EntityGroup pack = (EntityGroup) object;
+		final EntityGroup pack = (EntityGroup) object;
 
 		return pack.getID() == this.getID();
 	}
 
-	public void writeToNBT(NBTTagCompound nbt)
+	public void writeToNBT(final NBTTagCompound nbt)
 	{
 		nbt.setInteger("packID", this.id);
 		nbt.setInteger("optimalPackSize", this.optimalSize);
@@ -184,7 +184,7 @@ public class EntityGroup
 		nbt.setBoolean("hasLeader", this.hasLeader);
 	}
 
-	public void readFromNBT(NBTTagCompound nbt)
+	public void readFromNBT(final NBTTagCompound nbt)
 	{
 		this.id = nbt.getInteger("packID");
 		this.optimalSize = nbt.getInteger("optimalPackSize");

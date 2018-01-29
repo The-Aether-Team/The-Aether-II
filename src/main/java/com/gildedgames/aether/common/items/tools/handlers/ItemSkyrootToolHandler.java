@@ -2,7 +2,6 @@ package com.gildedgames.aether.common.items.tools.handlers;
 
 import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
-import com.gildedgames.aether.common.capabilities.world.chunk.ChunkAttachment;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -15,7 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
@@ -25,7 +23,8 @@ import java.util.List;
 public class ItemSkyrootToolHandler implements IToolEventHandler
 {
 	@Override
-	public void onHarvestBlock(ItemStack stack, World world, IBlockState state, BlockPos pos, EntityPlayer entity, List<ItemStack> drops)
+	public void onHarvestBlock(final ItemStack stack, final World world, final IBlockState state, final BlockPos pos, final EntityPlayer entity,
+			final List<ItemStack> drops)
 	{
 		if (!world.isRemote)
 		{
@@ -34,7 +33,7 @@ public class ItemSkyrootToolHandler implements IToolEventHandler
 				return;
 			}
 
-			IPlacementFlagCapability data = ChunkAttachment.get(world).getAttachment(new ChunkPos(pos), AetherCapabilities.CHUNK_PLACEMENT_FLAG);
+			final IPlacementFlagCapability data = world.getChunkFromBlockCoords(pos).getCapability(AetherCapabilities.CHUNK_PLACEMENT_FLAG, EnumFacing.UP);
 
 			if (data.isModified(pos))
 			{
@@ -43,9 +42,9 @@ public class ItemSkyrootToolHandler implements IToolEventHandler
 
 			if (state.getBlock().canHarvestBlock(world, pos, entity))
 			{
-				int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack);
+				final int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack);
 
-				List<ItemStack> copy = new ArrayList<>(drops);
+				final List<ItemStack> copy = new ArrayList<>(drops);
 
 				for (int i = 0; i < fortune + 1; i++)
 				{
@@ -56,19 +55,19 @@ public class ItemSkyrootToolHandler implements IToolEventHandler
 	}
 
 	@Override
-	public void onRightClickBlock(World world, BlockPos pos, EntityPlayer player, EnumHand hand, EnumFacing facing)
+	public void onRightClickBlock(final World world, final BlockPos pos, final EntityPlayer player, final EnumHand hand, final EnumFacing facing)
 	{
 
 	}
 
 	@Override
-	public void onRightClickItem(EntityPlayer player, EnumHand hand)
+	public void onRightClickItem(final EntityPlayer player, final EnumHand hand)
 	{
 
 	}
 
 	@Override
-	public void addInformation(ItemStack stack, List<String> tooltip)
+	public void addInformation(final ItemStack stack, final List<String> tooltip)
 	{
 		tooltip.add(1, String.format("%s: %s",
 				TextFormatting.BLUE + I18n.format("item.aether.tooltip.ability"),
@@ -76,13 +75,14 @@ public class ItemSkyrootToolHandler implements IToolEventHandler
 	}
 
 	@Override
-	public void onEntityHit(ItemStack stack, Entity target, EntityLivingBase attacker)
+	public void onEntityHit(final ItemStack stack, final Entity target, final EntityLivingBase attacker)
 	{
 
 	}
 
 	@Override
-	public float getBreakSpeed(ItemStack stack, World world, IBlockState state, BlockPos pos, EntityPlayer player, float original)
+	public float getBreakSpeed(final ItemStack stack, final World world, final IBlockState state, final BlockPos pos, final EntityPlayer player,
+			final float original)
 	{
 		return original;
 	}

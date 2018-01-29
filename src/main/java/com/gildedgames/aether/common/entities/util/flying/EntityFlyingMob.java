@@ -24,7 +24,7 @@ public class EntityFlyingMob extends EntityFlying implements IMob
 
 	private static final DataParameter<Boolean> ATTACKED = EntityDataManager.createKey(EntityFlyingMob.class, DataSerializers.BOOLEAN);
 
-	public EntityFlyingMob(World world)
+	public EntityFlyingMob(final World world)
 	{
 		super(world);
 	}
@@ -60,7 +60,7 @@ public class EntityFlyingMob extends EntityFlying implements IMob
 		this.dataManager.register(EntityFlyingMob.ATTACKED, Boolean.FALSE);
 	}
 
-	public void setAttacked(boolean flag)
+	public void setAttacked(final boolean flag)
 	{
 		this.dataManager.set(EntityFlyingMob.ATTACKED, flag);
 	}
@@ -80,7 +80,7 @@ public class EntityFlyingMob extends EntityFlying implements IMob
 	}
 
 	@Override
-	public boolean attackEntityAsMob(Entity entityIn)
+	public boolean attackEntityAsMob(final Entity entityIn)
 	{
 		this.setAttacked(true);
 
@@ -93,7 +93,7 @@ public class EntityFlyingMob extends EntityFlying implements IMob
 			i += EnchantmentHelper.getKnockbackModifier(this);
 		}
 
-		boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), f);
+		final boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), f);
 
 		if (flag)
 		{
@@ -106,7 +106,7 @@ public class EntityFlyingMob extends EntityFlying implements IMob
 				this.motionZ *= 0.6D;
 			}
 
-			int j = EnchantmentHelper.getFireAspectModifier(this);
+			final int j = EnchantmentHelper.getFireAspectModifier(this);
 
 			if (j > 0)
 			{
@@ -115,13 +115,13 @@ public class EntityFlyingMob extends EntityFlying implements IMob
 
 			if (entityIn instanceof EntityPlayer)
 			{
-				EntityPlayer entityplayer = (EntityPlayer) entityIn;
-				ItemStack itemstack = this.getHeldItemMainhand();
-				ItemStack itemstack1 = entityplayer.isHandActive() ? entityplayer.getActiveItemStack() : ItemStack.EMPTY;
+				final EntityPlayer entityplayer = (EntityPlayer) entityIn;
+				final ItemStack itemstack = this.getHeldItemMainhand();
+				final ItemStack itemstack1 = entityplayer.isHandActive() ? entityplayer.getActiveItemStack() : ItemStack.EMPTY;
 
 				if (itemstack.getItem() instanceof ItemAxe && itemstack1.getItem() == Items.SHIELD)
 				{
-					float f1 = 0.25F + (float) EnchantmentHelper.getEfficiencyModifier(this) * 0.05F;
+					final float f1 = 0.25F + (float) EnchantmentHelper.getEfficiencyModifier(this) * 0.05F;
 
 					if (this.rand.nextFloat() < f1)
 					{
@@ -146,11 +146,11 @@ public class EntityFlyingMob extends EntityFlying implements IMob
 
 	protected void ageInSunlight()
 	{
-		float f = this.getBrightness(1.0F);
+		final float f = this.getBrightness();
 
 		if (f > 0.5F)
 		{
-			this.entityAge += 2;
+			this.idleTime += 2;
 		}
 	}
 
@@ -162,7 +162,7 @@ public class EntityFlyingMob extends EntityFlying implements IMob
 
 	protected boolean isValidLightLevel()
 	{
-		BlockPos blockpos = new BlockPos(this.posX, this.getEntityBoundingBox().minY, this.posZ);
+		final BlockPos blockpos = new BlockPos(this.posX, this.getEntityBoundingBox().minY, this.posZ);
 
 		if (this.world.getLightFor(EnumSkyBlock.SKY, blockpos) > this.rand.nextInt(32))
 		{
@@ -174,7 +174,7 @@ public class EntityFlyingMob extends EntityFlying implements IMob
 
 			if (this.world.isThundering())
 			{
-				int j = this.world.getSkylightSubtracted();
+				final int j = this.world.getSkylightSubtracted();
 				this.world.setSkylightSubtracted(10);
 				i = this.world.getLightFromNeighbors(blockpos);
 				this.world.setSkylightSubtracted(j);

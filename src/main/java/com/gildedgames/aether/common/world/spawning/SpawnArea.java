@@ -7,26 +7,25 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 public class SpawnArea
 {
 
-	private ChunkPos min, max;
+	private final ChunkPos min;
 
-	private int areaX, areaZ;
+	private final ChunkPos max;
+
+	private final int areaX;
+
+	private final int areaZ;
 
 	private int entityCount;
 
 	private boolean hasPlayerInside;
 
-	public SpawnArea(int chunkArea, int areaX, int areaZ)
+	public SpawnArea(final int chunkArea, final int areaX, final int areaZ)
 	{
 		this.min = new ChunkPos(areaX * chunkArea, areaZ * chunkArea);
-		this.max = new ChunkPos(this.min.chunkXPos + chunkArea, this.min.chunkZPos + chunkArea);
+		this.max = new ChunkPos(this.min.x + chunkArea, this.min.z + chunkArea);
 
 		this.areaX = areaX;
 		this.areaZ = areaZ;
-	}
-
-	public void setEntityCount(int entityCount)
-	{
-		this.entityCount = entityCount;
 	}
 
 	public ChunkPos getMinChunkPos()
@@ -49,13 +48,14 @@ public class SpawnArea
 		return this.areaZ;
 	}
 
-	public void addToEntityCount(int count)
+	public void addToEntityCount(final int count)
 	{
 		this.entityCount += count;
 
 		if (this.entityCount < 0)
 		{
-			AetherCore.LOGGER.warn("Something has gone horribly wrong! The entity count in a SpawnArea object has become negative. Please warn the devs so they can fix this bug.");
+			AetherCore.LOGGER
+					.warn("Something has gone horribly wrong! The entity count in a SpawnArea object has become negative. Please warn the devs so they can fix this bug.");
 		}
 
 		this.entityCount = Math.max(0, this.entityCount);
@@ -66,22 +66,27 @@ public class SpawnArea
 		return this.entityCount;
 	}
 
+	public void setEntityCount(final int entityCount)
+	{
+		this.entityCount = entityCount;
+	}
+
 	public boolean hasPlayerInside()
 	{
 		return this.hasPlayerInside;
 	}
 
-	public void setInPlayersRenderDistance(boolean flag)
+	public void setInPlayersRenderDistance(final boolean flag)
 	{
 		this.hasPlayerInside = flag;
 	}
 
 	@Override
-	public boolean equals(Object obj)
+	public boolean equals(final Object obj)
 	{
 		if (obj instanceof SpawnArea)
 		{
-			SpawnArea area = (SpawnArea) obj;
+			final SpawnArea area = (SpawnArea) obj;
 
 			if (area.min.equals(this.min) && area.max.equals(this.max))
 			{
@@ -95,7 +100,7 @@ public class SpawnArea
 	@Override
 	public int hashCode()
 	{
-		HashCodeBuilder builder = new HashCodeBuilder();
+		final HashCodeBuilder builder = new HashCodeBuilder();
 
 		builder.append(this.min);
 		builder.append(this.max);

@@ -1,11 +1,11 @@
 package com.gildedgames.aether.common.world.aether.biomes.highlands;
 
-import com.gildedgames.aether.api.world.generation.IBlockAccessExtended;
 import com.gildedgames.aether.common.registry.content.GenerationAether;
 import com.gildedgames.aether.common.world.aether.island.population.SubBiome;
 import com.gildedgames.aether.common.world.aether.island.population.WorldDecoration;
 import com.gildedgames.aether.common.world.aether.island.population.WorldDecorationSimple;
 import com.gildedgames.aether.common.world.templates.TemplateWorldGen;
+import com.gildedgames.orbis.api.processing.IBlockAccessExtended;
 import com.google.common.collect.Lists;
 import net.minecraft.util.math.BlockPos;
 

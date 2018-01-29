@@ -27,22 +27,22 @@ public class FlyNodeProcessor extends NodeProcessor
 	 * Returns PathPoint for given coordinates
 	 */
 	@Override
-	public PathPoint getPathPointToCoords(double x, double y, double z)
+	public PathPoint getPathPointToCoords(final double x, final double y, final double z)
 	{
 		return this.openPoint(MathHelper.floor(x - (double) (this.entity.width / 2.0F)), MathHelper.floor(
 				y + 0.5D), MathHelper.floor(z - (double) (this.entity.width / 2.0F)));
 	}
 
 	@Override
-	public int findPathOptions(PathPoint[] pathOptions, PathPoint currentPoint, PathPoint targetPoint, float maxDistance)
+	public int findPathOptions(final PathPoint[] pathOptions, final PathPoint currentPoint, final PathPoint targetPoint, final float maxDistance)
 	{
 		int i = 0;
 
-		for (EnumFacing enumfacing : EnumFacing.values())
+		for (final EnumFacing enumfacing : EnumFacing.values())
 		{
-			PathPoint pathpoint = this.getWaterNode(
-					currentPoint.xCoord + enumfacing.getFrontOffsetX(),
-					currentPoint.yCoord + enumfacing.getFrontOffsetY(), currentPoint.zCoord + enumfacing.getFrontOffsetZ());
+			final PathPoint pathpoint = this.getWaterNode(
+					currentPoint.x + enumfacing.getFrontOffsetX(),
+					currentPoint.y + enumfacing.getFrontOffsetY(), currentPoint.z + enumfacing.getFrontOffsetZ());
 
 			if (pathpoint != null && !pathpoint.visited && pathpoint.distanceTo(targetPoint) < maxDistance)
 			{
@@ -54,28 +54,29 @@ public class FlyNodeProcessor extends NodeProcessor
 	}
 
 	@Override
-	public PathNodeType getPathNodeType(IBlockAccess blockaccessIn, int x, int y, int z, EntityLiving entitylivingIn, int xSize, int ySize,
-			int zSize, boolean canBreakDoorsIn, boolean canEnterDoorsIn)
+	public PathNodeType getPathNodeType(final IBlockAccess blockaccessIn, final int x, final int y, final int z, final EntityLiving entitylivingIn,
+			final int xSize, final int ySize,
+			final int zSize, final boolean canBreakDoorsIn, final boolean canEnterDoorsIn)
 	{
 		return PathNodeType.OPEN;
 	}
 
 	@Override
-	public PathNodeType getPathNodeType(IBlockAccess x, int y, int z, int p_186330_4_)
+	public PathNodeType getPathNodeType(final IBlockAccess x, final int y, final int z, final int p_186330_4_)
 	{
 		return PathNodeType.OPEN;
 	}
 
 	@Nullable
-	private PathPoint getWaterNode(int p_186328_1_, int p_186328_2_, int p_186328_3_)
+	private PathPoint getWaterNode(final int p_186328_1_, final int p_186328_2_, final int p_186328_3_)
 	{
-		PathNodeType pathnodetype = this.isFree(p_186328_1_, p_186328_2_, p_186328_3_);
+		final PathNodeType pathnodetype = this.isFree(p_186328_1_, p_186328_2_, p_186328_3_);
 		return pathnodetype == PathNodeType.OPEN ? this.openPoint(p_186328_1_, p_186328_2_, p_186328_3_) : null;
 	}
 
-	private PathNodeType isFree(int p_186327_1_, int p_186327_2_, int p_186327_3_)
+	private PathNodeType isFree(final int p_186327_1_, final int p_186327_2_, final int p_186327_3_)
 	{
-		BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+		final BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
 
 		for (int i = p_186327_1_; i < p_186327_1_ + this.entitySizeX; ++i)
 		{
@@ -83,7 +84,7 @@ public class FlyNodeProcessor extends NodeProcessor
 			{
 				for (int k = p_186327_3_; k < p_186327_3_ + this.entitySizeZ; ++k)
 				{
-					IBlockState iblockstate = this.blockaccess.getBlockState(blockpos$mutableblockpos.setPos(i, j, k));
+					final IBlockState iblockstate = this.blockaccess.getBlockState(blockpos$mutableblockpos.setPos(i, j, k));
 
 					if (iblockstate.getMaterial() != Material.AIR)
 					{
