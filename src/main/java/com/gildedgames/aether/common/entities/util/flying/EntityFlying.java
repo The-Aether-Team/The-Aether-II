@@ -218,7 +218,7 @@ public class EntityFlying extends EntityCreature
 	{
 		if (this.isServerWorld())
 		{
-			this.moveRelative(strafe, up, forward, 0.1F);
+			super.moveRelative(strafe, up, forward, 0.1F);
 			this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
 			this.motionX *= 0.8999999761581421D;
 			this.motionY *= 0.8999999761581421D;
