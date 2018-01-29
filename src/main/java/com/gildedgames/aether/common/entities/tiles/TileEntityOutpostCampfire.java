@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.entities.tiles;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.multiblock.BlockMultiController;
 import com.gildedgames.aether.common.entities.tiles.multiblock.TileEntityMultiblockController;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,17 +15,17 @@ public class TileEntityOutpostCampfire extends TileEntityMultiblockController im
 
 	public TileEntityOutpostCampfire()
 	{
-		super(BlocksAether.outpost_campfire, BlocksAether.multiblock_dummy_half);
+		super((BlockMultiController) BlocksAether.outpost_campfire, BlocksAether.multiblock_dummy_half);
 	}
 
 	@Override
-	public void onInteract(EntityPlayer player)
+	public void onInteract(final EntityPlayer player)
 	{
 
 	}
 
 	@Override
-	public ItemStack getPickedStack(World world, BlockPos pos, IBlockState state)
+	public ItemStack getPickedStack(final World world, final BlockPos pos, final IBlockState state)
 	{
 		return new ItemStack(BlocksAether.outpost_campfire);
 	}

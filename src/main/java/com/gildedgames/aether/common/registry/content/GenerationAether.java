@@ -245,9 +245,9 @@ public class GenerationAether
 
 		holystone_rocks.setStatesToPlaceOn(BlocksAether.holystone.getDefaultState());
 
-		green_aercloud = new WorldGenAercloud(BlocksAether.aercloud.getAercloudState(BlockAercloud.GREEN_AERCLOUD), 4, false);
-		golden_aercloud = new WorldGenAercloud(BlocksAether.aercloud.getAercloudState(BlockAercloud.GOLDEN_AERCLOUD), 4, false);
-		storm_aercloud = new WorldGenAercloud(BlocksAether.aercloud.getAercloudState(BlockAercloud.STORM_AERCLOUD), 16, false);
+		green_aercloud = new WorldGenAercloud(BlockAercloud.getAercloudState(BlockAercloud.GREEN_AERCLOUD), 4, false);
+		golden_aercloud = new WorldGenAercloud(BlockAercloud.getAercloudState(BlockAercloud.GOLDEN_AERCLOUD), 4, false);
+		storm_aercloud = new WorldGenAercloud(BlockAercloud.getAercloudState(BlockAercloud.STORM_AERCLOUD), 16, false);
 
 		reg(0, blue_skyroot_tree_1);
 		reg(1, blue_skyroot_tree_2);

@@ -55,6 +55,11 @@ public class BlockAercloud extends Block implements IBlockMultiName
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, COLD_AERCLOUD).withProperty(PROPERTY_FACING, EnumFacing.NORTH));
 	}
 
+	public static IBlockState getAercloudState(final BlockVariant variant)
+	{
+		return BlocksAether.aercloud.getDefaultState().withProperty(BlockAercloud.PROPERTY_VARIANT, variant);
+	}
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(final CreativeTabs tab, final NonNullList<ItemStack> list)
@@ -249,11 +254,6 @@ public class BlockAercloud extends Block implements IBlockMultiName
 	public String getUnlocalizedName(final ItemStack stack)
 	{
 		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
-	}
-
-	public IBlockState getAercloudState(final BlockVariant variant)
-	{
-		return BlocksAether.aercloud.getDefaultState().withProperty(BlockAercloud.PROPERTY_VARIANT, variant);
 	}
 
 }

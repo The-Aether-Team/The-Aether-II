@@ -4,8 +4,6 @@ import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.client.gui.tab.TabBugReport;
 import com.gildedgames.aether.client.gui.tab.TabClientEvents;
 import com.gildedgames.aether.client.gui.tab.TabEquipment;
-import com.gildedgames.aether.client.models.blocks.AetherBlockModels;
-import com.gildedgames.aether.client.models.items.ItemModelsAether;
 import com.gildedgames.aether.client.renderer.AetherRenderers;
 import com.gildedgames.aether.client.renderer.ClientRenderHandler;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
@@ -31,8 +29,6 @@ public class ClientProxy extends CommonProxy
 	{
 		super.preInit(event);
 
-		PerfHelper.measure("Pre-initialize block models", AetherBlockModels::preInit);
-		PerfHelper.measure("Pre-initialize aether item models", ItemModelsAether::preInit);
 		PerfHelper.measure("Pre-initialize special renders", AetherRenderers::preInit);
 
 		CreativeTabsAether.registerTabIcons();

@@ -18,28 +18,32 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
-import javax.annotation.OverridingMethodsMustInvokeSuper;
 import java.util.Random;
 
 public class BlockAetherPlant extends Block implements IGrowable
 {
 	protected static final AxisAlignedBB PLANT_AABB = new AxisAlignedBB(0.3D, 0.0D, 0.3D, 0.7D, 0.6D, 0.7D);
 
-	public BlockAetherPlant(Material material)
+	public BlockAetherPlant(final Material material)
 	{
 		super(material);
 	}
 
-	@Override
-	public boolean canPlaceBlockAt(World world, BlockPos pos)
+	public boolean isSuitableSoilBlock(final IBlockState state)
 	{
-		IBlockState soilBlock = world.getBlockState(pos.down());
+		return state.getBlock() == BlocksAether.aether_grass || state.getBlock() == BlocksAether.aether_dirt;
+	}
+
+	@Override
+	public boolean canPlaceBlockAt(final World world, final BlockPos pos)
+	{
+		final IBlockState soilBlock = world.getBlockState(pos.down());
 
 		return this.isSuitableSoilBlock(soilBlock);
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos)
+	public void neighborChanged(final IBlockState state, final World world, final BlockPos pos, final Block block, final BlockPos fromPos)
 	{
 		if (!this.validatePosition(world, pos, state))
 		{
@@ -47,12 +51,12 @@ public class BlockAetherPlant extends Block implements IGrowable
 		}
 	}
 
-	public boolean validatePosition(World world, BlockPos pos, IBlockState state)
+	public boolean validatePosition(final World world, final BlockPos pos, final IBlockState state)
 	{
 		return this.canPlaceBlockAt(world, pos);
 	}
 
-	protected void invalidateBlock(World world, BlockPos pos, IBlockState state)
+	protected void invalidateBlock(final World world, final BlockPos pos, final IBlockState state)
 	{
 		this.dropBlockAsItem(world, pos, state, 0);
 
@@ -60,39 +64,34 @@ public class BlockAetherPlant extends Block implements IGrowable
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	public AxisAlignedBB getBoundingBox(final IBlockState state, final IBlockAccess source, final BlockPos pos)
 	{
 		return PLANT_AABB;
 	}
 
 	@Override
 	@Nullable
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
+	public AxisAlignedBB getCollisionBoundingBox(final IBlockState blockState, final IBlockAccess worldIn, final BlockPos pos)
 	{
 		return NULL_AABB;
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(final IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState state)
+	public boolean isFullCube(final IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullBlock(IBlockState state)
+	public boolean isFullBlock(final IBlockState state)
 	{
 		return false;
-	}
-
-	public boolean isSuitableSoilBlock(IBlockState state)
-	{
-		return state.getBlock() == BlocksAether.aether_grass || state.getBlock() == BlocksAether.aether_dirt;
 	}
 
 	@Override
@@ -103,25 +102,27 @@ public class BlockAetherPlant extends Block implements IGrowable
 	}
 
 	@Override
-	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient)
+	public boolean canGrow(final World worldIn, final BlockPos pos, final IBlockState state, final boolean isClient)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state)
+	public boolean canUseBonemeal(final World worldIn, final Random rand, final BlockPos pos, final IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state)
+	public void grow(final World worldIn, final Random rand, final BlockPos pos, final IBlockState state)
 	{
 
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(
+			final World worldIn, final BlockPos pos, final IBlockState state, final EntityPlayer playerIn, final EnumHand hand, final EnumFacing facing,
+			final float hitX, final float hitY, final float hitZ)
 	{
 		if (playerIn.getHeldItemMainhand().getItem() == ItemsAether.swet_jelly)
 		{

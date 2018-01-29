@@ -22,13 +22,18 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.ForgeHooksClient;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.Map;
 
+@Mod.EventBusSubscriber()
 public class ItemModelsAether
 {
-	public static void preInit()
+	@SubscribeEvent()
+	public static void onModelRegistryReady(final ModelRegistryEvent event)
 	{
 		registerModels();
 

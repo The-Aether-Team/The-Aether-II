@@ -1,18 +1,18 @@
 package com.gildedgames.aether.client.models.blocks;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.containers.BlockAltar;
 import com.gildedgames.aether.common.blocks.construction.signs.BlockStandingSkyrootSign;
 import com.gildedgames.aether.common.blocks.construction.signs.BlockWallSkyrootSign;
 import com.gildedgames.aether.common.blocks.construction.walls.BlockSkyrootWall;
+import com.gildedgames.aether.common.blocks.containers.BlockAltar;
 import com.gildedgames.aether.common.blocks.containers.BlockIcestoneCooler;
 import com.gildedgames.aether.common.blocks.containers.BlockMasonryBench;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLeaves;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherSapling;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBrettlPlant;
-import com.gildedgames.aether.common.blocks.natural.plants.BlockValkyrieGrass;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockOrangeTree;
+import com.gildedgames.aether.common.blocks.natural.plants.BlockValkyrieGrass;
 import com.gildedgames.aether.common.blocks.util.BlockCustomDoor;
 import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
@@ -25,20 +25,25 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.LinkedHashMap;
 
+@Mod.EventBusSubscriber()
 public class AetherBlockModels
 {
-	public static void preInit()
+	@SubscribeEvent()
+	public static void onModelRegistryReady(final ModelRegistryEvent event)
 	{
 		registerStateMappers();
 	}
 
 	private static void registerStateMappers()
 	{
-		StateMap leavesMapper = new StateMap.Builder().ignore(BlockAetherLeaves.PROPERTY_CHECK_DECAY, BlockAetherLeaves.PROPERTY_DECAYABLE).build();
+		final StateMap leavesMapper = new StateMap.Builder().ignore(BlockAetherLeaves.PROPERTY_CHECK_DECAY, BlockAetherLeaves.PROPERTY_DECAYABLE).build();
 
 		ModelLoader.setCustomStateMapper(BlocksAether.blue_skyroot_leaves, leavesMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.green_skyroot_leaves, leavesMapper);
@@ -66,16 +71,16 @@ public class AetherBlockModels
 		ModelLoader.setCustomStateMapper(BlocksAether.aercloud, new StateMapperBase()
 		{
 			@Override
-			protected ModelResourceLocation getModelResourceLocation(IBlockState state)
+			protected ModelResourceLocation getModelResourceLocation(final IBlockState state)
 			{
-				LinkedHashMap<IProperty<?>, Comparable<?>> mappings = Maps.newLinkedHashMap(state.getProperties());
+				final LinkedHashMap<IProperty<?>, Comparable<?>> mappings = Maps.newLinkedHashMap(state.getProperties());
 
 				if (state.getValue(BlockAercloud.PROPERTY_VARIANT) != BlockAercloud.PURPLE_AERCLOUD)
 				{
 					mappings.remove(BlockAercloud.PROPERTY_FACING);
 				}
 
-				ResourceLocation resource = Block.REGISTRY.getNameForObject(state.getBlock());
+				final ResourceLocation resource = Block.REGISTRY.getNameForObject(state.getBlock());
 
 				return new ModelResourceLocation(resource, this.getPropertyString(mappings));
 			}
@@ -84,9 +89,9 @@ public class AetherBlockModels
 		ModelLoader.setCustomStateMapper(BlocksAether.orange_tree, new StateMapperBase()
 		{
 			@Override
-			protected ModelResourceLocation getModelResourceLocation(IBlockState state)
+			protected ModelResourceLocation getModelResourceLocation(final IBlockState state)
 			{
-				LinkedHashMap<IProperty<?>, Comparable<?>> mappings = Maps.newLinkedHashMap(state.getProperties());
+				final LinkedHashMap<IProperty<?>, Comparable<?>> mappings = Maps.newLinkedHashMap(state.getProperties());
 
 				if (state.getValue(BlockOrangeTree.PROPERTY_IS_TOP_BLOCK))
 				{
@@ -97,14 +102,15 @@ public class AetherBlockModels
 					}
 				}
 
-				ResourceLocation resourceLocation = Block.REGISTRY.getNameForObject(state.getBlock());
+				final ResourceLocation resourceLocation = Block.REGISTRY.getNameForObject(state.getBlock());
 
 				return new ModelResourceLocation(resourceLocation, this.getPropertyString(mappings));
 			}
 		});
 
 		ModelLoader.setCustomStateMapper(BlocksAether.valkyrie_grass, new StateMap.Builder().ignore(BlockValkyrieGrass.PROPERTY_HARVESTABLE).build());
-		ModelLoader.setCustomStateMapper(BlocksAether.brettl_plant, new StateMap.Builder().ignore(BlockBrettlPlant.PROPERTY_HARVESTABLE).ignore(BlockBrettlPlant.PROPERTY_AGE).build());
+		ModelLoader.setCustomStateMapper(BlocksAether.brettl_plant,
+				new StateMap.Builder().ignore(BlockBrettlPlant.PROPERTY_HARVESTABLE).ignore(BlockBrettlPlant.PROPERTY_AGE).build());
 
 		ModelLoader.setCustomStateMapper(BlocksAether.altar, new StateMap.Builder().ignore(BlockAltar.PROPERTY_FACING).build());
 		ModelLoader.setCustomStateMapper(BlocksAether.icestone_cooler, new StateMap.Builder().ignore(BlockIcestoneCooler.PROPERTY_FACING).build());

@@ -105,11 +105,11 @@ public class BiomeAetherDecorator
 
 		this.genBrettlPlant = new WorldGenBrettlPlant();
 
-		this.genColdFlatAercloud = new WorldGenAercloud(BlocksAether.aercloud.getAercloudState(BlockAercloud.COLD_AERCLOUD), 64, true);
-		this.genColdColumbusAercloud = new WorldGenAercloud(BlocksAether.aercloud.getAercloudState(BlockAercloud.COLD_AERCLOUD), 16, false);
-		this.genBlueAercloud = new WorldGenAercloud(BlocksAether.aercloud.getAercloudState(BlockAercloud.BLUE_AERCLOUD), 8, false);
+		this.genColdFlatAercloud = new WorldGenAercloud(BlockAercloud.getAercloudState(BlockAercloud.COLD_AERCLOUD), 64, true);
+		this.genColdColumbusAercloud = new WorldGenAercloud(BlockAercloud.getAercloudState(BlockAercloud.COLD_AERCLOUD), 16, false);
+		this.genBlueAercloud = new WorldGenAercloud(BlockAercloud.getAercloudState(BlockAercloud.BLUE_AERCLOUD), 8, false);
 
-		this.genPurpleAercloud = new WorldGenPurpleAercloud(BlocksAether.aercloud.getAercloudState(BlockAercloud.PURPLE_AERCLOUD), 4, false);
+		this.genPurpleAercloud = new WorldGenPurpleAercloud(BlockAercloud.getAercloudState(BlockAercloud.PURPLE_AERCLOUD), 4, false);
 	}
 
 	public void prepareDecorationsWholeIsland(final World world, final IIslandData island, final Random random)

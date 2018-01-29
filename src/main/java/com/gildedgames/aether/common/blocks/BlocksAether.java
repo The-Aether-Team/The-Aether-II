@@ -22,26 +22,29 @@ import com.gildedgames.aether.common.blocks.natural.ores.*;
 import com.gildedgames.aether.common.blocks.natural.plants.*;
 import com.gildedgames.aether.common.blocks.util.*;
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.items.blocks.ItemBlockMultiName;
 import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
+import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.BlockButtonStone;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Mod.EventBusSubscriber()
 public class BlocksAether
 {
+	public static final Set<ItemBlock> ITEM_BLOCKS = Sets.newLinkedHashSet();
+
 	public static final Block aether_dirt = new BlockAetherDirt();
 
 	public static final BlockAetherGrass aether_grass = new BlockAetherGrass();
@@ -545,6 +548,15 @@ public class BlocksAether
 		registerHarvestLevels();
 	}
 
+	@SubscribeEvent
+	public static void onRegisterItems(final RegistryEvent.Register<Item> event)
+	{
+		for (final ItemBlock itemBlock : ITEM_BLOCKS)
+		{
+			event.getRegistry().register(itemBlock);
+		}
+	}
+
 	private static void registerHarvestLevels()
 	{
 		aether_dirt.setHarvestLevel("shovel", 0);
@@ -622,19 +634,24 @@ public class BlocksAether
 			block.setRegistryName(AetherCore.MOD_ID, registryName);
 			this.registry.register(block);
 
-			// TODO: REIMPLEMENT FOR 1.12.2
-			/*if (block instanceof IBlockWithItem)
+			final ItemBlock item;
+
+			if (block instanceof IBlockWithItem)
 			{
-				ItemsAether.registerItem(name, ((IBlockWithItem) block).createItemBlock());
+				item = ((IBlockWithItem) block).createItemBlock();
 			}
 			else if (block instanceof IBlockMultiName)
 			{
-				ItemsAether.registerItem(name, new ItemBlockMultiName(block));
+				item = new ItemBlockMultiName(block);
 			}
 			else
 			{
-				ItemsAether.registerItem(name, new ItemBlock(block));
-			}*/
+				item = new ItemBlock(block);
+			}
+
+			item.setRegistryName(AetherCore.MOD_ID, registryName).setUnlocalizedName(AetherCore.MOD_ID + "." + registryName);
+
+			ITEM_BLOCKS.add(item);
 		}
 	}
 }
