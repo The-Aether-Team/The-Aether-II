@@ -10,7 +10,6 @@ import com.gildedgames.aether.client.sound.AetherMusicManager;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.CommonProxy;
 import com.gildedgames.aether.common.analytics.GameAnalytics;
-import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import com.gildedgames.aether.common.util.helpers.PerfHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
@@ -30,8 +29,6 @@ public class ClientProxy extends CommonProxy
 		super.preInit(event);
 
 		PerfHelper.measure("Pre-initialize special renders", AetherRenderers::preInit);
-
-		CreativeTabsAether.registerTabIcons();
 	}
 
 	@Override
