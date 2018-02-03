@@ -4,10 +4,12 @@ import com.gildedgames.aether.client.gui.container.GuiEquipment;
 import com.gildedgames.aether.client.gui.container.GuiIcestoneCooler;
 import com.gildedgames.aether.client.gui.container.GuiIncubator;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.containers.ContainerCustomWorkbench;
 import com.gildedgames.aether.common.containers.ContainerEquipment;
 import com.gildedgames.aether.common.containers.tiles.ContainerIcestoneCooler;
 import com.gildedgames.aether.common.containers.tiles.ContainerIncubator;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.gui.inventory.GuiCrafting;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
@@ -19,6 +21,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class AetherGuiHandler implements IGuiHandler
 {
+
+	public static final int CUSTOM_WORKBENCH_ID = 1;
 
 	public static final int INVENTORY_EQUIPMENT_ID = 2;
 
@@ -35,6 +39,8 @@ public class AetherGuiHandler implements IGuiHandler
 
 		switch (id)
 		{
+			case CUSTOM_WORKBENCH_ID:
+				return new ContainerCustomWorkbench(player.inventory, world, pos);
 			case INVENTORY_EQUIPMENT_ID:
 				return new ContainerEquipment(PlayerAether.getPlayer(player));
 			case FROSTPINE_COOLER_ID:
@@ -56,6 +62,8 @@ public class AetherGuiHandler implements IGuiHandler
 
 		switch (id)
 		{
+			case CUSTOM_WORKBENCH_ID:
+				return new GuiCrafting(player.inventory, world, pos);
 			case INVENTORY_EQUIPMENT_ID:
 				return new GuiEquipment(PlayerAether.getPlayer(player));
 			case FROSTPINE_COOLER_ID:

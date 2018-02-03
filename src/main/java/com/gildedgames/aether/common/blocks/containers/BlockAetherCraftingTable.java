@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.blocks.containers;
 
-import net.minecraft.block.Block;
+import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.network.AetherGuiHandler;
 import net.minecraft.block.BlockWorkbench;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.stats.StatList;
@@ -12,28 +12,30 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockAetherCraftingTable extends Block
+public class BlockAetherCraftingTable extends BlockWorkbench
 {
 	public BlockAetherCraftingTable()
 	{
-		super(Material.WOOD);
+		super();
 
 		this.setHardness(2.5f);
-
 		this.setSoundType(SoundType.WOOD);
 	}
 
 	@Override
 	public boolean onBlockActivated(
-			final World world, final BlockPos pos, final IBlockState state, final EntityPlayer player, final EnumHand hand, final EnumFacing side,
+			final World worldIn, final BlockPos pos, final IBlockState state, final EntityPlayer playerIn, final EnumHand hand, final EnumFacing facing,
 			final float hitX, final float hitY, final float hitZ)
 	{
-		if (!world.isRemote)
+		if (worldIn.isRemote)
 		{
-			player.displayGui(new BlockWorkbench.InterfaceCraftingTable(world, pos));
-			player.addStat(StatList.CRAFTING_TABLE_INTERACTION);
+			return true;
 		}
-
-		return true;
+		else
+		{
+			playerIn.openGui(AetherCore.INSTANCE, AetherGuiHandler.CUSTOM_WORKBENCH_ID, worldIn, pos.getX(), pos.getY(), pos.getZ());
+			playerIn.addStat(StatList.CRAFTING_TABLE_INTERACTION);
+			return true;
+		}
 	}
 }
