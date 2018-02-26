@@ -647,24 +647,24 @@ entity.aether.edison.name=Edison
 entity.aether.burrukai.name=Burrukai
 
 # Creative Tabs
-itemGroup.aether.blocks=Aether Blocks
-itemGroup.aether.materials=Aether Materials
-itemGroup.aether.tools=Aether Tools
-itemGroup.aether.weapons=Aether Weapons
-itemGroup.aether.armor=Aether Armor
-itemGroup.aether.consumables=Aether Consumables
-itemGroup.aether.companions=Aether Companions
-itemGroup.aether.miscellaneous=Aether Miscellaneous
-itemGroup.aether.rings=Aether Rings
-itemGroup.aether.neckwear=Aether Neckwear
-itemGroup.aether.relics=Aether Relics
-itemGroup.aether.charms=Aether Charms
-itemGroup.aether.artifacts=Aether Artifacts
-itemGroup.aether.visual_variants=Aether Decorative Blocks
-itemGroup.aether.natural_blocks=Aether Natural Blocks
-itemGroup.aether.construction=Aether Construction Blocks
-itemGroup.aether.utility_blocks=Aether Utility Blocks
-itemGroup.aether.dungeon_blocks=Aether Dungeon Blocks
+itemGroup.aether.blocks=Aether II Blocks
+itemGroup.aether.materials=Aether II Materials
+itemGroup.aether.tools=Aether II Tools
+itemGroup.aether.weapons=Aether II Weapons
+itemGroup.aether.armor=Aether II Armor
+itemGroup.aether.consumables=Aether II Consumables
+itemGroup.aether.companions=Aether II Companions
+itemGroup.aether.miscellaneous=Aether II Miscellaneous
+itemGroup.aether.rings=Aether II Rings
+itemGroup.aether.neckwear=Aether II Neckwear
+itemGroup.aether.relics=Aether II Relics
+itemGroup.aether.charms=Aether II Charms
+itemGroup.aether.artifacts=Aether II Artifacts
+itemGroup.aether.visual_variants=Aether II Decorative Blocks
+itemGroup.aether.natural_blocks=Aether II Natural Blocks
+itemGroup.aether.construction=Aether II Construction Blocks
+itemGroup.aether.utility_blocks=Aether II Utility Blocks
+itemGroup.aether.dungeon_blocks=Aether II Dungeon Blocks
 
 # Containers
 # TODO: Prefix with aether.
