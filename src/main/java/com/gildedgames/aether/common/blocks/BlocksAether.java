@@ -45,6 +45,14 @@ public class BlocksAether
 {
 	public static final Set<ItemBlock> ITEM_BLOCKS = Sets.newLinkedHashSet();
 
+	public static final Block therastone_brick = new BlockBuilder(Material.ROCK)
+			.setSoundType(SoundType.STONE).setHardness(2.0f);
+
+	public static final BlockTherastoneDecorative therastone_brick_decorative = new BlockTherastoneDecorative();
+
+	public static final Block therastone_pillar = new BlockParentPillar(Material.ROCK, therastone_brick)
+			.setSoundType(SoundType.STONE).setHardness(2.0f);
+
 	public static final Block aether_dirt = new BlockAetherDirt();
 
 	public static final BlockAetherGrass aether_grass = new BlockAetherGrass();
@@ -291,6 +299,10 @@ public class BlocksAether
 	public static void onRegisterBlocks(final RegistryEvent.Register<Block> event)
 	{
 		final BlockRegistryHelper r = new BlockRegistryHelper(event.getRegistry());
+
+		r.register("therastone_brick", therastone_brick.setCreativeTab(CreativeTabsAether.THERA));
+		r.register("therastone_brick_decorative", therastone_brick_decorative.setCreativeTab(CreativeTabsAether.THERA));
+		r.register("therastone_pillar", therastone_pillar.setCreativeTab(CreativeTabsAether.THERA));
 
 		r.register("aether_dirt", aether_dirt.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 		r.register("aether_grass", aether_grass.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));

@@ -1,0 +1,14 @@
+{
+	"variants": {
+		"axis=y": {
+			"model": "aether:therastone_bricks/pillar"
+		},
+		"axis=z": {
+			"model": "aether:therastone_bricks/pillar_side"
+		},
+		"axis=x": {
+			"model": "aether:therastone_bricks/pillar_side",
+			"y": 90
+		}
+	}
+}

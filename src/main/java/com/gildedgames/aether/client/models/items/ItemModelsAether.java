@@ -47,6 +47,19 @@ public class ItemModelsAether
 
 	private static void registerModels()
 	{
+		registerItemModels(BlocksAether.therastone_brick_decorative, new ItemModelBuilder("therastone_bricks/")
+				.add(BlockTherastoneDecorative.BASE_BRICKS.getMeta(), "base_bricks")
+				.add(BlockTherastoneDecorative.BASE_PILLAR.getMeta(), "base_pillar")
+				.add(BlockTherastoneDecorative.CAPSTONE_BRICKS.getMeta(), "capstone_bricks")
+				.add(BlockTherastoneDecorative.CAPSTONE_PILLAR.getMeta(), "capstone_pillar")
+				.add(BlockTherastoneDecorative.FLAGSTONES.getMeta(), "flagstones")
+				.add(BlockTherastoneDecorative.HEADSTONE.getMeta(), "headstone")
+				.add(BlockTherastoneDecorative.KEYSTONE.getMeta(), "keystone"));
+
+		registerItemModels(BlocksAether.therastone_brick, "therastone_bricks/normal");
+
+		registerItemModels(BlocksAether.therastone_pillar, "therastone_bricks/pillar");
+
 		registerItemModels(BlocksAether.aether_dirt, new ItemModelBuilder("aether_dirt/")
 				.add(BlockAetherDirt.DIRT.getMeta(), "dirt")
 				.add(BlockAetherDirt.COARSE_DIRT.getMeta(), "coarse_dirt"));

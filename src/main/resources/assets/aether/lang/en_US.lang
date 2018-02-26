@@ -153,10 +153,10 @@ tile.aether.unstable_labyrinth_capstone.name=Unstable Labyrinth Capstone
 tile.aether.wildcard.name=Wildcard
 tile.aether.masonry_bench.name=Masonry Bench
 tile.aether.holystone_brick.name=Holystone Brick
-tile.aether.holystone_brick.base_bricks.name=Base
+tile.aether.holystone_brick.base_bricks.name=Base Bricks
 tile.aether.holystone_brick.base_pillar.name=Base Pillar
 tile.aether.holystone_brick.keystone.name=Keystone
-tile.aether.holystone_brick.capstone_bricks.name=Capstone
+tile.aether.holystone_brick.capstone_bricks.name=Capstone Bricks
 tile.aether.holystone_brick.capstone_pillar.name=Capstone Pillar
 tile.aether.holystone_brick.flagstones.name=Flagstones
 tile.aether.holystone_brick.headstone.name=Headstone
@@ -170,6 +170,15 @@ tile.aether.faded_holystone_brick.capstone_pillar.name=Capstone Pillar
 tile.aether.faded_holystone_brick.flagstones.name=Flagstones
 tile.aether.faded_holystone_brick.headstone.name=Headstone
 tile.aether.faded_holystone_brick.pillar.name=Pillar
+tile.aether.therastone_brick.name=Therastone Brick
+tile.aether.therastone_brick.base_bricks.name=Base Bricks
+tile.aether.therastone_brick.base_pillar.name=Base Pillar
+tile.aether.therastone_brick.keystone.name=Keystone
+tile.aether.therastone_brick.capstone_bricks.name=Capstone Bricks
+tile.aether.therastone_brick.capstone_pillar.name=Capstone Pillar
+tile.aether.therastone_brick.flagstones.name=Flagstones
+tile.aether.therastone_brick.headstone.name=Headstone
+tile.aether.therastone_brick.pillar.name=Pillar
 tile.aether.agiosite.name=Agiosite
 tile.aether.agiosite_brick.name=Agiosite Brick
 tile.aether.agiosite_brick.base_bricks.name=Base Bricks
@@ -665,6 +674,7 @@ itemGroup.aether.natural_blocks=Aether II Natural Blocks
 itemGroup.aether.construction=Aether II Construction Blocks
 itemGroup.aether.utility_blocks=Aether II Utility Blocks
 itemGroup.aether.dungeon_blocks=Aether II Dungeon Blocks
+itemGroup.aether.thera=Aether II Theran Blocks
 
 # Containers
 # TODO: Prefix with aether.

@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.registry.content;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.decorative.BlockSkyrootDecorative;
+import com.gildedgames.aether.common.blocks.decorative.BlockTherastoneDecorative;
 import com.gildedgames.aether.common.entities.EntitiesAether;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.creativetab.CreativeTabs;
@@ -150,6 +151,16 @@ public class CreativeTabsAether
 			return new ItemStack(ItemsAether.charm_mve_spd_03);
 		}
 	};
+
+	public static final CreativeTabs THERA = new CreativeTabs("aether.thera")
+	{
+		@Override
+		public ItemStack getTabIconItem()
+		{
+			return new ItemStack(BlocksAether.therastone_brick_decorative, 1, BlockTherastoneDecorative.KEYSTONE.getMeta());
+		}
+	};
+
 
 	private static abstract class CreativeTabsMisc extends CreativeTabs
 	{
