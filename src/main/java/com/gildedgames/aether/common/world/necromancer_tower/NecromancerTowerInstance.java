@@ -10,9 +10,11 @@ import com.gildedgames.orbis.api.data.schedules.ScheduleRegion;
 import com.gildedgames.orbis.api.util.mc.NBTHelper;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.GameType;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
@@ -42,7 +44,7 @@ public class NecromancerTowerInstance implements IInstance
 
 		this.dimIdInside = id;
 		final World world = server.getWorld(this.dimIdInside);
-		
+
 		this.tower = new PlacedBlueprint(world, GenerationAether.NECROMANCER_TOWER, new CreationData(world).pos(BlockPos.ORIGIN));
 
 		final List<ScheduleRegion> regions = ObfuscationReflectionHelper.getPrivateValue(PlacedBlueprint.class, this.tower, "scheduleRegions");
@@ -111,12 +113,32 @@ public class NecromancerTowerInstance implements IInstance
 	public void onJoin(final EntityPlayer player)
 	{
 		this.players.add(player);
+
+		if (player instanceof EntityPlayerMP)
+		{
+			final EntityPlayerMP playerMP = (EntityPlayerMP) player;
+
+			if (playerMP.interactionManager.getGameType() == GameType.SURVIVAL)
+			{
+				player.setGameType(GameType.ADVENTURE);
+			}
+		}
 	}
 
 	@Override
 	public void onLeave(final EntityPlayer player)
 	{
 		this.players.remove(player);
+
+		if (player instanceof EntityPlayerMP)
+		{
+			final EntityPlayerMP playerMP = (EntityPlayerMP) player;
+
+			if (playerMP.interactionManager.getGameType() == GameType.ADVENTURE)
+			{
+				player.setGameType(GameType.SURVIVAL);
+			}
+		}
 	}
 
 	@Override

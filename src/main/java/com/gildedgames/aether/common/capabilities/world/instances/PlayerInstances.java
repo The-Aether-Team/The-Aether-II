@@ -37,6 +37,11 @@ public class PlayerInstances implements IPlayerInstances
 	@Override
 	public void setInstance(final IInstance instance)
 	{
+		if (this.getInstance() != null)
+		{
+			this.getInstance().onLeave(this.player);
+		}
+
 		this.activeInstance = instance;
 
 		if (!this.player.world.isRemote)

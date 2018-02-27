@@ -55,6 +55,13 @@ public class BlockAetherTeleporter extends Block
 
 			if (playerAether.getTeleportingModule().getAetherPos() != null)
 			{
+				if (hook.getInstance() != null)
+				{
+					final IInstance instance = hook.getInstance();
+
+					instance.onLeave(player);
+				}
+
 				final EntityPlayerMP playerMP = (EntityPlayerMP) player;
 				final BlockPosDimension p = playerAether.getTeleportingModule().getAetherPos();
 
