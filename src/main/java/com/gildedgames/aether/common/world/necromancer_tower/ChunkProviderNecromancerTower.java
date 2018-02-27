@@ -1,13 +1,17 @@
 package com.gildedgames.aether.common.world.necromancer_tower;
 
-import com.gildedgames.aether.common.registry.content.GenerationAether;
-import com.gildedgames.orbis.api.core.*;
+import com.gildedgames.aether.common.registry.content.InstancesAether;
+import com.gildedgames.orbis.api.core.BlockDataChunk;
+import com.gildedgames.orbis.api.core.ICreationData;
+import com.gildedgames.orbis.api.core.PlacedEntity;
+import com.gildedgames.orbis.api.core.PostPlacement;
 import com.gildedgames.orbis.api.processing.BlockAccessChunkPrimer;
 import com.gildedgames.orbis.api.processing.BlockAccessExtendedWrapper;
 import com.gildedgames.orbis.api.processing.DataPrimer;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
@@ -25,8 +29,6 @@ public class ChunkProviderNecromancerTower implements IChunkGenerator
 
 	private final Random random;
 
-	private final PlacedBlueprint tower;
-
 	public ChunkProviderNecromancerTower(final World world, final long seed)
 	{
 		this.world = world;
@@ -37,16 +39,18 @@ public class ChunkProviderNecromancerTower implements IChunkGenerator
 		}
 
 		this.random = new Random(seed);
-
-		this.tower = new PlacedBlueprint(world, GenerationAether.NECROMANCER_TOWER, new CreationData(world).pos(BlockPos.ORIGIN));
 	}
 
 	@Override
 	public void populate(final int chunkX, final int chunkZ)
 	{
+		final ChunkPos p = new ChunkPos(chunkX, chunkZ);
+
+		final NecromancerTowerInstance inst = InstancesAether.NECROMANCER_TOWER_HANDLER.getFromDimId(this.world.provider.getDimension());
+
 		final DataPrimer primer = new DataPrimer(new BlockAccessExtendedWrapper(this.world));
 
-		for (final BlockDataChunk dataChunk : this.tower.getDataChunks())
+		for (final BlockDataChunk dataChunk : inst.getTower().getDataChunks())
 		{
 			if (dataChunk == null)
 			{
@@ -55,20 +59,29 @@ public class ChunkProviderNecromancerTower implements IChunkGenerator
 
 			if (dataChunk.getPos().x == chunkX && dataChunk.getPos().z == chunkZ)
 			{
-				final ICreationData data = this.tower.getCreationData();
+				final ICreationData data = inst.getTower().getCreationData();
 
 				primer.create(dataChunk.getContainer(),
 						data.clone().pos(new BlockPos(dataChunk.getPos().getXStart(), data.getPos().getY(), dataChunk.getPos().getZStart())));
 
-				if (!this.tower.hasGeneratedAChunk())
+				if (!inst.getTower().hasGeneratedAChunk())
 				{
-					this.tower.markGeneratedAChunk();
+					inst.getTower().markGeneratedAChunk();
 
-					for (final PostPlacement post : this.tower.getDef().getPostPlacements())
+					for (final PostPlacement post : inst.getTower().getDef().getPostPlacements())
 					{
-						post.postGenerate(this.world, this.random, this.tower.getCreationData(), this.tower.getDef().getData().getBlockDataContainer());
+						post.postGenerate(this.world, this.random, inst.getTower().getCreationData(),
+								inst.getTower().getDef().getData().getBlockDataContainer());
 					}
 				}
+			}
+		}
+
+		if (inst.getTower().getPlacedEntities().containsKey(p))
+		{
+			for (final PlacedEntity e : inst.getTower().getPlacedEntities().get(p))
+			{
+				e.spawn(primer);
 			}
 		}
 	}
@@ -99,6 +112,8 @@ public class ChunkProviderNecromancerTower implements IChunkGenerator
 	@Override
 	public Chunk generateChunk(final int chunkX, final int chunkZ)
 	{
+		final NecromancerTowerInstance inst = InstancesAether.NECROMANCER_TOWER_HANDLER.getFromDimId(this.world.provider.getDimension());
+
 		this.random.setSeed(chunkX * 0x4f9939f508L + chunkZ * 0x1ef1565bd5L);
 
 		final ChunkPrimer primer = new ChunkPrimer();
@@ -107,7 +122,7 @@ public class ChunkProviderNecromancerTower implements IChunkGenerator
 
 		final DataPrimer dataPrimer = new DataPrimer(new BlockAccessChunkPrimer(this.world, primer));
 
-		for (final BlockDataChunk dataChunk : this.tower.getDataChunks())
+		for (final BlockDataChunk dataChunk : inst.getTower().getDataChunks())
 		{
 			if (dataChunk == null)
 			{
@@ -116,7 +131,7 @@ public class ChunkProviderNecromancerTower implements IChunkGenerator
 
 			if (dataChunk.getPos().x == chunkX && dataChunk.getPos().z == chunkZ)
 			{
-				final ICreationData data = this.tower.getCreationData();
+				final ICreationData data = inst.getTower().getCreationData();
 
 				dataPrimer.create(dataChunk.getContainer(),
 						data.clone().pos(new BlockPos(dataChunk.getPos().getXStart(), data.getPos().getY(), dataChunk.getPos().getZStart())));

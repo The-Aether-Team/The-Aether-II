@@ -3,10 +3,19 @@ package com.gildedgames.aether.common.world.necromancer_tower;
 import com.gildedgames.aether.api.util.BlockPosDimension;
 import com.gildedgames.aether.api.world.instances.IInstance;
 import com.gildedgames.aether.api.world.instances.IInstanceHandler;
+import com.gildedgames.aether.common.registry.content.GenerationAether;
+import com.gildedgames.orbis.api.core.CreationData;
+import com.gildedgames.orbis.api.core.PlacedBlueprint;
+import com.gildedgames.orbis.api.data.schedules.ScheduleRegion;
 import com.gildedgames.orbis.api.util.mc.NBTHelper;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 import java.util.List;
 
@@ -19,6 +28,8 @@ public class NecromancerTowerInstance implements IInstance
 
 	private int dimIdInside;
 
+	private PlacedBlueprint tower;
+
 	@SuppressWarnings("unused")
 	private NecromancerTowerInstance()
 	{
@@ -27,8 +38,30 @@ public class NecromancerTowerInstance implements IInstance
 
 	public NecromancerTowerInstance(final int id, final IInstanceHandler instanceHandler)
 	{
+		final MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
+
 		this.dimIdInside = id;
-		this.insideEntrance = new BlockPosDimension(0, 0, 0, id);
+		final World world = server.getWorld(this.dimIdInside);
+		
+		this.tower = new PlacedBlueprint(world, GenerationAether.NECROMANCER_TOWER, new CreationData(world).pos(BlockPos.ORIGIN));
+
+		final List<ScheduleRegion> regions = ObfuscationReflectionHelper.getPrivateValue(PlacedBlueprint.class, this.tower, "scheduleRegions");
+
+		BlockPos spawn = null;
+
+		for (final ScheduleRegion s : regions)
+		{
+			if (s.getTriggerID().equals("spawn"))
+			{
+				spawn = s.getBounds().getMin();
+				break;
+			}
+		}
+
+		if (spawn != null)
+		{
+			this.insideEntrance = new BlockPosDimension(spawn.getX(), spawn.getY(), spawn.getZ(), id);
+		}
 	}
 
 	public BlockPosDimension getOutsideEntrance()
@@ -49,6 +82,11 @@ public class NecromancerTowerInstance implements IInstance
 	public void setInsideEntrance(final BlockPosDimension entrance)
 	{
 		this.insideEntrance = entrance;
+	}
+
+	public PlacedBlueprint getTower()
+	{
+		return this.tower;
 	}
 
 	@Override

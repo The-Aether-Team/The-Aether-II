@@ -19,7 +19,6 @@ import com.gildedgames.orbis.api.core.PlacementCondition;
 import com.gildedgames.orbis.api.core.registry.IOrbisDefinitionRegistry;
 import com.gildedgames.orbis.api.core.registry.OrbisDefinitionRegistry;
 import com.gildedgames.orbis.api.core.util.PlacementConditions;
-import com.gildedgames.orbis.api.core.util.PostPlacements;
 import com.gildedgames.orbis.api.processing.CenterOffsetProcessor;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
@@ -275,10 +274,10 @@ public class GenerationAether
 				};
 
 		OUTPOST = new BlueprintDefinition(BlueprintsAether.OUTPOST).setRegistry(registry).setConditions(structureConditions)
-				.setRandomRotation(false).setPostPlacements(PostPlacements.spawnEntity(EntityEdison::new, edisonPos));
+				.setRandomRotation(false);
 
 		NECROMANCER_TOWER = new BlueprintDefinition(BlueprintsAether.NECROMANCER_TOWER).setRegistry(registry)
-				.setRandomRotation(false).setPostPlacements(PostPlacements.spawnEntity(EntityEdison::new, edisonPos));
+				.setRandomRotation(false);
 
 		registry.register(0, OUTPOST);
 		registry.register(1, NECROMANCER_TOWER);

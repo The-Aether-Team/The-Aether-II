@@ -7,10 +7,7 @@ import com.gildedgames.aether.api.world.TemplateInstance;
 import com.gildedgames.aether.api.world.generation.PostPlacementTemplate;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.common.world.templates.TemplatePrimer;
-import com.gildedgames.orbis.api.core.BlockDataChunk;
-import com.gildedgames.orbis.api.core.ICreationData;
-import com.gildedgames.orbis.api.core.PlacedBlueprint;
-import com.gildedgames.orbis.api.core.PostPlacement;
+import com.gildedgames.orbis.api.core.*;
 import com.gildedgames.orbis.api.processing.BlockAccessChunkPrimer;
 import com.gildedgames.orbis.api.processing.BlockAccessExtendedWrapper;
 import com.gildedgames.orbis.api.processing.DataPrimer;
@@ -125,6 +122,8 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		final int x = chunkX * 16;
 		final int z = chunkZ * 16;
 
+		final ChunkPos p = new ChunkPos(chunkX, chunkZ);
+
 		final BlockPos pos = new BlockPos(x, 0, z);
 
 		final Biome biome = this.world.getBiome(pos.add(16, 0, 16));
@@ -200,6 +199,14 @@ public class ChunkGeneratorAether implements IChunkGenerator
 							post.postGenerate(this.world, this.rand, instance.getCreationData(), instance.getDef().getData().getBlockDataContainer());
 						}
 					}
+				}
+			}
+
+			if (instance.getPlacedEntities().containsKey(p))
+			{
+				for (final PlacedEntity e : instance.getPlacedEntities().get(p))
+				{
+					e.spawn(primer);
 				}
 			}
 		}
