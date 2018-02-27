@@ -122,5 +122,5 @@ repositories {
 }
 
 dependencies {
-	compile files('libs/Orbis-1.12.2-1.0.3')
+	compile 'com.gildedgames:orbis:1.12.2-1.0.4'
 }
