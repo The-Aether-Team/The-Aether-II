@@ -9,11 +9,11 @@ import java.io.File;
 
 public class ConfigAether
 {
-	private final Configuration configuration;
-
 	public final ConfigCategory general, biomes, dimensions;
 
-	private int aetherDimID;
+	private final Configuration configuration;
+
+	private int aetherDimID, necromancerDimId;
 
 	private int aetherBiomeID;
 
@@ -23,7 +23,7 @@ public class ConfigAether
 
 	private boolean displayPerformanceIndicator;
 
-	public ConfigAether(File file)
+	public ConfigAether(final File file)
 	{
 		this.configuration = new Configuration(file, true);
 
@@ -40,6 +40,7 @@ public class ConfigAether
 	private void loadAndSync()
 	{
 		this.aetherDimID = this.getInt(this.dimensions, "Aether Dimension ID", 3);
+		this.necromancerDimId = this.getInt(this.dimensions, "Necromancer Tower Dimension ID", 4);
 		this.aetherBiomeID = this.getInt(this.biomes, "Aether Biome ID", 237);
 
 		this.analyticsEnabled = this.getBoolean(this.general, "Enable Analytics (client-side only)", true);
@@ -54,7 +55,7 @@ public class ConfigAether
 	}
 
 	@SubscribeEvent
-	public void onConfigChanged(OnConfigChangedEvent event)
+	public void onConfigChanged(final OnConfigChangedEvent event)
 	{
 		if (event.getModID().equals(AetherCore.MOD_ID))
 		{
@@ -62,12 +63,12 @@ public class ConfigAether
 		}
 	}
 
-	private int getInt(ConfigCategory category, String name, int defaultValue)
+	private int getInt(final ConfigCategory category, final String name, final int defaultValue)
 	{
 		return this.configuration.get(category.getName(), name, defaultValue).getInt();
 	}
 
-	private boolean getBoolean(ConfigCategory category, String name, boolean defaultValue)
+	private boolean getBoolean(final ConfigCategory category, final String name, final boolean defaultValue)
 	{
 		return this.configuration.get(category.getName(), name, defaultValue).getBoolean();
 	}
@@ -75,6 +76,11 @@ public class ConfigAether
 	public int getAetherDimID()
 	{
 		return this.aetherDimID;
+	}
+
+	public int getNecromancerDimID()
+	{
+		return this.necromancerDimId;
 	}
 
 	public int getAetherBiomeID()

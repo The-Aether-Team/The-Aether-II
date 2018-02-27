@@ -1,6 +1,7 @@
 package com.gildedgames.aether.api;
 
 import com.gildedgames.aether.api.registry.IContentRegistry;
+import com.gildedgames.aether.api.world.instances.IInstanceRegistry;
 
 public class AetherAPI
 {
@@ -11,7 +12,12 @@ public class AetherAPI
 		return AetherAPI.services().content();
 	}
 
-	public static void registerProvider(IAetherServices services)
+	public static IInstanceRegistry instances()
+	{
+		return AetherAPI.services().instances();
+	}
+
+	public static void registerProvider(final IAetherServices services)
 	{
 		if (AetherAPI.services != null)
 		{

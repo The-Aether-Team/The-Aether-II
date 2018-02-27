@@ -1,24 +1,36 @@
 package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
+import com.gildedgames.aether.api.util.BlockPosDimension;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.CommonEvents;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
+import com.gildedgames.aether.common.util.helpers.IslandHelper;
+import com.gildedgames.aether.common.world.aether.island.ChunkGeneratorAether;
+import com.gildedgames.aether.common.world.util.TeleporterGeneric;
+import com.gildedgames.orbis.api.util.io.NBTFunnel;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldServer;
+import net.minecraft.world.gen.IChunkGenerator;
 
-public class PlayerPortalModule extends PlayerAetherModule
+import java.util.function.Supplier;
+
+public class PlayerTeleportingModule extends PlayerAetherModule
 {
 
 	private float prevTimeInPortal, timeInPortal, timeCharged;
 
 	private boolean teleported, teleporting;
 
-	public PlayerPortalModule(PlayerAether playerAether)
+	private BlockPosDimension nonAetherPos, aetherPos;
+
+	public PlayerTeleportingModule(final PlayerAether playerAether)
 	{
 		super(playerAether);
 	}
@@ -31,6 +43,26 @@ public class PlayerPortalModule extends PlayerAetherModule
 	public float getTimeInPortal()
 	{
 		return this.timeInPortal;
+	}
+
+	public BlockPosDimension getNonAetherPos()
+	{
+		return this.nonAetherPos;
+	}
+
+	public void setNonAetherPos(final BlockPosDimension pos)
+	{
+		this.nonAetherPos = pos;
+	}
+
+	public BlockPosDimension getAetherPos()
+	{
+		return this.aetherPos;
+	}
+
+	public void setAetherPos(final BlockPosDimension pos)
+	{
+		this.aetherPos = pos;
 	}
 
 	@Override
@@ -117,31 +149,66 @@ public class PlayerPortalModule extends PlayerAetherModule
 
 		if (this.getEntity().world instanceof WorldServer)
 		{
-			WorldServer worldServer = (WorldServer) this.getEntity().world;
+			final WorldServer worldServer = (WorldServer) this.getEntity().world;
 
-			final int transferToID = this.getEntity().world.provider.getDimensionType() == DimensionsAether.AETHER ? 0 :
-					AetherCore.CONFIG.getAetherDimID();
+			final EntityPlayer player = this.getEntity();
 
-			CommonEvents.teleportEntity(this.getEntity(), worldServer, AetherCore.TELEPORTER, transferToID);
+			final boolean inAether = this.getEntity().world.provider.getDimensionType() == DimensionsAether.AETHER;
+
+			final int transferToID = inAether ? 0 : AetherCore.CONFIG.getAetherDimID();
+
+			CommonEvents
+					.teleportEntity(this.getEntity(), worldServer, new TeleporterGeneric(worldServer), transferToID, !inAether ? (Supplier<BlockPos>) () -> {
+						final PlayerAether playerAether = PlayerAether.getPlayer(player);
+
+						if (playerAether.getTeleportingModule().getAetherPos() == null)
+						{
+							final BlockPos pos = new BlockPos(100, 0, 100);
+							final IChunkGenerator generator = worldServer.getChunkProvider().chunkGenerator;
+
+							if (generator instanceof ChunkGeneratorAether)
+							{
+								final ChunkGeneratorAether aetherGen = (ChunkGeneratorAether) generator;
+
+								aetherGen.getPreparation().checkAndPrepareIfAvailable(pos.getX() >> 4, pos.getZ() >> 4);
+							}
+
+							final BlockPos respawn = IslandHelper.getRespawnPoint(player.world, pos);
+
+							playerAether.getTeleportingModule()
+									.setAetherPos(new BlockPosDimension(respawn.getX(), respawn.getY(), respawn.getZ(), AetherCore.CONFIG.getAetherDimID()));
+						}
+
+						return playerAether.getTeleportingModule().getAetherPos();
+					} : null);
 		}
 
 		this.timeInPortal = 0.0F;
 	}
 
 	@Override
-	public void write(NBTTagCompound output)
+	public void write(final NBTTagCompound output)
 	{
-		NBTTagCompound root = new NBTTagCompound();
-		output.setTag("Teleport", root);
+		final NBTFunnel funnel = new NBTFunnel(output);
 
+		final NBTTagCompound root = new NBTTagCompound();
+
+		output.setTag("Teleport", root);
 		root.setFloat("timeCharged", this.timeCharged);
+
+		funnel.set("nonAetherPos", this.nonAetherPos);
+		funnel.set("aetherPos", this.aetherPos);
 	}
 
 	@Override
-	public void read(NBTTagCompound input)
+	public void read(final NBTTagCompound input)
 	{
-		NBTTagCompound root = input.getCompoundTag("Teleport");
+		final NBTFunnel funnel = new NBTFunnel(input);
 
+		final NBTTagCompound root = input.getCompoundTag("Teleport");
 		this.timeCharged = root.getFloat("timeCharged");
+
+		this.nonAetherPos = funnel.get("nonAetherPos");
+		this.aetherPos = funnel.get("aetherPos");
 	}
 }

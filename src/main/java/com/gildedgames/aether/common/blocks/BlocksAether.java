@@ -295,6 +295,8 @@ public class BlocksAether
 
 	public static Block structure_builder = new BlockStructureBuilder();
 
+	public static Block aether_teleporter = new BlockAetherTeleporter();
+
 	@SubscribeEvent
 	public static void onRegisterBlocks(final RegistryEvent.Register<Block> event)
 	{
@@ -499,6 +501,8 @@ public class BlocksAether
 
 		r.register("structure_hint", structure_hint.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
 		r.register("structure_builder", structure_builder.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
+
+		r.register("aether_teleporter", aether_teleporter.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
 
 		Blocks.FIRE.setFireInfo(skyroot_twigs, 60, 100);
 		Blocks.FIRE.setFireInfo(tall_aether_grass, 60, 100);

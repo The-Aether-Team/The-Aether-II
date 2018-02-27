@@ -21,7 +21,6 @@ public class EntityUtil
 
 	static
 	{
-		//TODO: NEW OBF NAMES
 		COPY_DATA_FROM_OLD = ReflectionAether.getMethod(Entity.class, new Class<?>[] { Entity.class }, "copyDataFromOld", "func_180432_n");
 	}
 

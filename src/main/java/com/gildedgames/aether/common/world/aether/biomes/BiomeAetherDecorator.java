@@ -6,6 +6,7 @@ import com.gildedgames.aether.api.world.IslandSectorHelper;
 import com.gildedgames.aether.api.world.generation.TemplateLoc;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IVirtualDataManager;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherDirt;
@@ -19,6 +20,7 @@ import com.gildedgames.aether.common.world.aether.features.aerclouds.WorldGenAer
 import com.gildedgames.aether.common.world.aether.features.aerclouds.WorldGenPurpleAercloud;
 import com.gildedgames.aether.common.world.aether.features.trees.WorldGenOrangeTree;
 import com.gildedgames.aether.common.world.templates.TemplatePlacer;
+import com.gildedgames.aether.common.world.util.GenUtil;
 import com.gildedgames.orbis.api.core.BlueprintDefinition;
 import com.gildedgames.orbis.api.core.BlueprintDefinitionPool;
 import com.gildedgames.orbis.api.core.CreationData;
@@ -124,11 +126,11 @@ public class BiomeAetherDecorator
 		final BlockPos pos = new BlockPos(startX, 0, startZ);
 
 		//TODO: REIMPLEMENT 1.12.2
-		/*boolean generated = false;
+		boolean generated = false;
 
 		for (int i = 0; i < 5000; i++)
 		{
-			final BlueprintDefinition outpost = GenerationAether.OUTPOST_HIGHLANDS.getRandomDefinition(random);
+			final BlueprintDefinition outpost = GenerationAether.OUTPOST;
 
 			final int x = random.nextInt(island.getBounds().getWidth());
 			final int z = random.nextInt(island.getBounds().getLength());
@@ -139,7 +141,7 @@ public class BiomeAetherDecorator
 
 				if (pos2.getY() >= 0)
 				{
-					final ICreationData data = new CreationData(world).set(pos2);
+					final ICreationData data = new CreationData(world).pos(pos2);
 
 					generated = BlueprintPlacer.findPlace(primer, outpost, data, random);
 
@@ -148,7 +150,7 @@ public class BiomeAetherDecorator
 						BlueprintPlacer.placeForced(primer, outpost, data, random);
 						manager.placeBlueprint(outpost, data);
 
-						//island.setRespawnPoint(GenUtil.rotate(data.getPos(), data.getPos().add(-0.5, 2, 1.0), data.getRotation()));
+						island.setRespawnPoint(GenUtil.rotate(data.getPos(), data.getPos().add(-0.5, 2, 1.0), data.getRotation()));
 
 						break;
 					}
@@ -158,10 +160,10 @@ public class BiomeAetherDecorator
 
 		if (!generated)
 		{
-			System.out.println("WARNING: OUTPOST NOT GENERATED ON AN ISLAND!");
+			AetherCore.LOGGER.info("WARNING: OUTPOST NOT GENERATED ON AN ISLAND!");
 		}
 
-		this.generate(GenerationAether.ABAND_ANGEL_STOREROOM, 20, random.nextInt(2), -1, pos, island, manager, primer, world, random);
+		/*this.generate(GenerationAether.ABAND_ANGEL_STOREROOM, 20, random.nextInt(2), -1, pos, island, manager, primer, world, random);
 		this.generate(GenerationAether.ABAND_ANGEL_WATCHTOWER, 20, random.nextInt(2), -1, pos, island, manager, primer, world, random);
 		this.generate(GenerationAether.ABAND_CAMPSITE_1A, 200, random.nextInt(3), 0, pos, island, manager, primer, world, random);
 		this.generate(GenerationAether.ABAND_HUMAN_HOUSE_1A, 20, random.nextInt(3), -1, pos, island, manager, primer, world, random);

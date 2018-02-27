@@ -51,6 +51,11 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		this.preparation = new WorldPreparationAether(this.world, this.rand);
 	}
 
+	public WorldPreparationAether getPreparation()
+	{
+		return this.preparation;
+	}
+
 	@Override
 	public Chunk generateChunk(final int chunkX, final int chunkZ)
 	{

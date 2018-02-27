@@ -6,7 +6,6 @@ import java.lang.reflect.Method;
 
 public class ReflectionAether
 {
-	//TODO: NEW OBFUSCATED NAMES FOR 1.12.2
 	public static final ReflectionEntry EQUIPPED_PROGRESS_MAIN_HAND = new ReflectionEntry("field_187469_f", "equippedProgressMainHand");
 
 	public static final ReflectionEntry ACTIVE_ITEMSTACK_USE_COUNT = new ReflectionEntry("field_184628_bn", "activeItemStackUseCount");

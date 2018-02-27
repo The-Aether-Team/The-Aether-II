@@ -228,6 +228,7 @@ tile.aether.structure_hint.generator_loot.name=Loot Generator
 tile.aether.structure_builder.name=Structure Builder
 tile.aether.valkyrie_grass.sprout.name=Valkyrie Grass Sprout
 tile.aether.valkyrie_grass.full.name=Valkyrie Grass
+tile.aether.aether_teleporter.name=Aether Teleporter
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick
@@ -838,13 +839,6 @@ ability.levitateAttackers.desc2=%s%% Chance
 ability.setAttackersOnFire.desc1=§9Burns Attackers
 ability.setAttackersOnFire.desc2=%s%% Chance
 ability.attackSpeedMod.desc=%s Attack Speed
-
-# Commands
-gameMode.developer=Developer Mode
-
-# Key Bindings
-keybindings.control=Control
-keybindings.findPower=Switch Power
 
 # Tabs
 tab.equipment=Equipment

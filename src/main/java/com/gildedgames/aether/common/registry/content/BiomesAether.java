@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.registry.content;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeVoid;
 import com.gildedgames.aether.common.world.aether.biomes.highlands.BiomeHighlands;
+import com.gildedgames.aether.common.world.util.BiomeInstancedZone;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -20,9 +21,12 @@ public class BiomesAether
 	@GameRegistry.ObjectHolder("aether_void")
 	public static final Biome VOID = new BiomeVoid();
 
+	@GameRegistry.ObjectHolder("instanced_zone")
+	public static final Biome INSTANCED_ZONE = new BiomeInstancedZone();
+
 	@SubscribeEvent
 	public static void registerBiome(final RegistryEvent.Register<Biome> event)
 	{
-		event.getRegistry().registerAll(HIGHLANDS, VOID);
+		event.getRegistry().registerAll(HIGHLANDS, VOID, INSTANCED_ZONE);
 	}
 }

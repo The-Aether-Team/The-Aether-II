@@ -1,0 +1,38 @@
+package com.gildedgames.aether.common.world.necromancer_tower;
+
+import com.gildedgames.aether.api.world.instances.IInstanceFactory;
+import com.gildedgames.aether.api.world.instances.IInstanceHandler;
+import com.gildedgames.aether.common.world.util.TeleporterGeneric;
+import net.minecraft.world.DimensionType;
+import net.minecraft.world.Teleporter;
+import net.minecraft.world.WorldServer;
+
+public class NecromancerTowerInstanceFactory implements IInstanceFactory<NecromancerTowerInstance>
+{
+
+	private final DimensionType dimensionType;
+
+	public NecromancerTowerInstanceFactory(final DimensionType dimensionType)
+	{
+		this.dimensionType = dimensionType;
+	}
+
+	@Override
+	public NecromancerTowerInstance createInstance(final int dimId, final IInstanceHandler instanceHandler)
+	{
+		return new NecromancerTowerInstance(dimId, instanceHandler);
+	}
+
+	@Override
+	public DimensionType dimensionType()
+	{
+		return this.dimensionType;
+	}
+
+	@Override
+	public Teleporter getTeleporter(final WorldServer worldIn)
+	{
+		return new TeleporterGeneric(worldIn);
+	}
+
+}

@@ -2,13 +2,21 @@ package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.IAetherServices;
 import com.gildedgames.aether.api.registry.IContentRegistry;
+import com.gildedgames.aether.api.util.BlockPosDimension;
+import com.gildedgames.aether.api.world.instances.IInstanceRegistry;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherHooks;
+import com.gildedgames.aether.common.capabilities.world.instances.InstanceRegistryImpl;
 import com.gildedgames.aether.common.entities.util.MountEventHandler;
 import com.gildedgames.aether.common.entities.util.QuicksoilProcessor;
 import com.gildedgames.aether.common.items.tools.ItemToolHandler;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
 import com.gildedgames.aether.common.registry.ContentRegistry;
 import com.gildedgames.aether.common.world.SectorEventHandler;
+import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstance;
+import com.gildedgames.orbis.api.OrbisAPI;
+import com.gildedgames.orbis.api.util.io.IClassSerializer;
+import com.gildedgames.orbis.api.util.io.Instantiator;
+import com.gildedgames.orbis.api.util.io.SimpleSerializer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumParticleTypes;
@@ -25,6 +33,8 @@ public class CommonProxy implements IAetherServices
 {
 	private final ContentRegistry contentRegistry = new ContentRegistry();
 
+	private final IInstanceRegistry instanceRegistry = new InstanceRegistryImpl();
+
 	private File configDir;
 
 	public void preInit(final FMLPreInitializationEvent event)
@@ -35,6 +45,13 @@ public class CommonProxy implements IAetherServices
 		{
 			throw new RuntimeException("Couldn't createTE configuration directory");
 		}
+
+		final IClassSerializer s = new SimpleSerializer("aether");
+
+		s.register(0, NecromancerTowerInstance.class, new Instantiator<>(NecromancerTowerInstance.class));
+		s.register(1, BlockPosDimension.class, new Instantiator<>(BlockPosDimension.class));
+
+		OrbisAPI.services().io().register(s);
 
 		this.contentRegistry.preInit();
 	}
@@ -93,6 +110,12 @@ public class CommonProxy implements IAetherServices
 	public IContentRegistry content()
 	{
 		return this.contentRegistry;
+	}
+
+	@Override
+	public IInstanceRegistry instances()
+	{
+		return this.instanceRegistry;
 	}
 
 }

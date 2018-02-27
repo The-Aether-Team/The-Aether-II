@@ -2,7 +2,7 @@ package com.gildedgames.aether.client.gui.overlays;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
-import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerPortalModule;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTeleportingModule;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -38,7 +38,7 @@ public class PortalOverlay implements IOverlay
 		if (!this.mc.player.isPotionActive(MobEffects.NAUSEA))
 		{
 			final PlayerAether playerAether = PlayerAether.getPlayer(this.mc.player);
-			final PlayerPortalModule teleporter = playerAether.getTeleportingModule();
+			final PlayerTeleportingModule teleporter = playerAether.getTeleportingModule();
 
 			float timeInPortal =
 					teleporter.getPrevTimeInPortal() + (teleporter.getTimeInPortal() - teleporter.getPrevTimeInPortal()) * this.timer.renderPartialTicks;

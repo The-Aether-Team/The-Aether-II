@@ -3,15 +3,13 @@ package com.gildedgames.aether.common.capabilities.entity.player;
 import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.api.player.IPlayerAether;
-import com.gildedgames.aether.api.world.ISector;
-import com.gildedgames.aether.api.world.IslandSectorHelper;
-import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.CommonEvents;
 import com.gildedgames.aether.common.entities.util.shared.SharedAetherAttributes;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketMarkPlayerDeath;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
+import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import com.gildedgames.aether.common.world.util.TeleporterGeneric;
 import com.gildedgames.orbis.api.util.mc.BlockUtil;
 import net.minecraft.entity.EntityLivingBase;
@@ -38,8 +36,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
-
-import java.util.Collection;
 
 public class PlayerAetherHooks
 {
@@ -201,40 +197,20 @@ public class PlayerAetherHooks
 			final EntityPlayerMP mp = (EntityPlayerMP) event.player;
 			final WorldServer toWorld = DimensionManager.getWorld(0);
 
-			if (bedPos != null)
-			{
-				bedPos = EntityPlayer.getBedSpawnLocation(mp.getServerWorld(), bedPos, mp.isSpawnForced(mp.dimension));
-			}
+			bedPos = EntityPlayer.getBedSpawnLocation(mp.getServerWorld(), bedPos, mp.isSpawnForced(mp.dimension));
 
 			if (bedPos == null)
 			{
-				final ISector loadedSector = IslandSectorHelper.getAccess(mp.world)
-						.getLoadedSector(aePlayer.getEntity().chunkCoordX, aePlayer.getEntity().chunkCoordZ)
-						.orElseThrow(() -> new IllegalArgumentException("Couldn't find island sector:"));
-				final Collection<IIslandData> islands = loadedSector
-						.getIslandsForRegion(aePlayer.getEntity().getPosition().getX(), 0, aePlayer.getEntity().getPosition().getZ(), 1, 255, 1);
-
-				boolean shouldSpawnAtRespawnPoint = false;
+				final BlockPos respawnPoint = IslandHelper.getRespawnPoint(mp.world, aePlayer.getEntity().getPosition());
 				boolean obstructed = false;
-				IIslandData island = null;
 
-				for (final IIslandData data : islands)
+				if (respawnPoint != null)
 				{
-					if (data != null && data.getRespawnPoint() != null)
-					{
-						shouldSpawnAtRespawnPoint = true;
-						island = data;
-						break;
-					}
-				}
+					BlockPos pos = mp.world.getTopSolidOrLiquidBlock(respawnPoint);
 
-				if (shouldSpawnAtRespawnPoint && island.getRespawnPoint() != null)
-				{
-					BlockPos pos = mp.world.getTopSolidOrLiquidBlock(island.getRespawnPoint());
-
-					if (pos.getY() > island.getRespawnPoint().getY())
+					if (pos.getY() > respawnPoint.getY())
 					{
-						pos = island.getRespawnPoint();
+						pos = respawnPoint;
 					}
 
 					final BlockPos down = pos.down();

@@ -13,12 +13,21 @@ import com.gildedgames.aether.common.world.templates.conditions.TemplateConditio
 import com.gildedgames.aether.common.world.templates.post.PostPlacementMoaFamily;
 import com.gildedgames.aether.common.world.templates.post.PostPlacementSetBlock;
 import com.gildedgames.aether.common.world.templates.post.PostPlacementSpawnEntity;
+import com.gildedgames.orbis.api.OrbisAPI;
+import com.gildedgames.orbis.api.core.BlueprintDefinition;
+import com.gildedgames.orbis.api.core.PlacementCondition;
+import com.gildedgames.orbis.api.core.registry.IOrbisDefinitionRegistry;
+import com.gildedgames.orbis.api.core.registry.OrbisDefinitionRegistry;
+import com.gildedgames.orbis.api.core.util.PlacementConditions;
+import com.gildedgames.orbis.api.core.util.PostPlacements;
 import com.gildedgames.orbis.api.processing.CenterOffsetProcessor;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 
 public class GenerationAether
 {
+
+	public static IOrbisDefinitionRegistry registry = new OrbisDefinitionRegistry(AetherCore.MOD_ID);
 
 	public static TemplateDefinition blue_skyroot_tree_1, blue_skyroot_tree_2, blue_skyroot_tree_3;
 
@@ -57,6 +66,10 @@ public class GenerationAether
 	public static WorldGenFloorPlacer short_aether_grass, aether_grass, long_aether_grass, skyroot_twigs, holystone_rocks;
 
 	public static WorldGenAercloud green_aercloud, golden_aercloud, storm_aercloud;
+
+	public static BlueprintDefinition OUTPOST;
+
+	public static BlueprintDefinition NECROMANCER_TOWER;
 
 	private GenerationAether()
 	{
@@ -248,6 +261,27 @@ public class GenerationAether
 		green_aercloud = new WorldGenAercloud(BlockAercloud.getAercloudState(BlockAercloud.GREEN_AERCLOUD), 4, false);
 		golden_aercloud = new WorldGenAercloud(BlockAercloud.getAercloudState(BlockAercloud.GOLDEN_AERCLOUD), 4, false);
 		storm_aercloud = new WorldGenAercloud(BlockAercloud.getAercloudState(BlockAercloud.STORM_AERCLOUD), 16, false);
+
+		OrbisAPI.services().register(registry);
+
+		final PlacementCondition replace = PlacementConditions.replaceableGround();
+		final PlacementCondition no_quicksoil = PlacementConditions.ignoreBlock(0, BlocksAether.quicksoil.getDefaultState());
+
+		final PlacementCondition[] structureConditions = new PlacementCondition[]
+				{
+						PlacementConditions.onSpecificBlock(0, BlocksAether.aether_grass, BlocksAether.aether_dirt),
+						replace,
+						no_quicksoil
+				};
+
+		OUTPOST = new BlueprintDefinition(BlueprintsAether.OUTPOST).setRegistry(registry).setConditions(structureConditions)
+				.setRandomRotation(false).setPostPlacements(PostPlacements.spawnEntity(EntityEdison::new, edisonPos));
+
+		NECROMANCER_TOWER = new BlueprintDefinition(BlueprintsAether.NECROMANCER_TOWER).setRegistry(registry)
+				.setRandomRotation(false).setPostPlacements(PostPlacements.spawnEntity(EntityEdison::new, edisonPos));
+
+		registry.register(0, OUTPOST);
+		registry.register(1, NECROMANCER_TOWER);
 
 		reg(0, blue_skyroot_tree_1);
 		reg(1, blue_skyroot_tree_2);

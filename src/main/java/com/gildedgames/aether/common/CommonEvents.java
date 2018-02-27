@@ -56,7 +56,9 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import javax.annotation.Nullable;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class CommonEvents
 {
@@ -294,13 +296,19 @@ public class CommonEvents
 		}
 	}
 
+	public static Entity teleportEntity(final Entity entity, final WorldServer toWorld, final Teleporter teleporter, final int dimension)
+	{
+		return teleportEntity(entity, toWorld, teleporter, dimension, null);
+	}
+
 	/**
 	 * Teleports any entity by duplicating it and . the old one. If {@param entity} is a player,
 	 * the entity will be transferred instead of duplicated.
 	 *
 	 * @return A newsystem entity if {@param entity} wasn't a player, or the same entity if it was a player
 	 */
-	public static Entity teleportEntity(final Entity entity, final WorldServer toWorld, final Teleporter teleporter, final int dimension)
+	public static Entity teleportEntity(final Entity entity, final WorldServer toWorld, final Teleporter teleporter, final int dimension,
+			@Nullable final Supplier<BlockPos> optionalLoc)
 	{
 		if (entity == null)
 		{
@@ -318,7 +326,17 @@ public class CommonEvents
 				final EntityPlayerMP player = (EntityPlayerMP) entity;
 
 				playerList.transferPlayerToDimension((EntityPlayerMP) entity, dimension, teleporter);
-				player.connection.setPlayerLocation(player.posX, player.posY, player.posZ, 0, 0);
+
+				if (optionalLoc == null)
+				{
+					player.connection.setPlayerLocation(player.posX, player.posY, player.posZ, 0, 0);
+				}
+				else
+				{
+					final BlockPos loc = optionalLoc.get();
+
+					player.connection.setPlayerLocation(loc.getX(), loc.getY(), loc.getZ(), 0, 0);
+				}
 
 				/** Strange flag that needs to be set to prevent the NetHandlerPlayServer instances from resetting your position **/
 				ObfuscationReflectionHelper.setPrivateValue(EntityPlayerMP.class, player, true, ReflectionAether.INVULNERABLE_DIMENSION_CHANGE.getMappings());

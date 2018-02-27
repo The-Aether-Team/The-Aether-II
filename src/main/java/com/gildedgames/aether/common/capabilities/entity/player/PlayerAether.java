@@ -47,7 +47,7 @@ public class PlayerAether implements IPlayerAether
 
 	private final PlayerBlockLevitateModule gravititeAbilityModule;
 
-	private final PlayerPortalModule teleportingModule;
+	private final PlayerTeleportingModule teleportingModule;
 
 	private final PlayerParachuteModule parachuteModule;
 
@@ -80,7 +80,7 @@ public class PlayerAether implements IPlayerAether
 
 		this.abilitiesModule = new PlayerAbilitiesModule(this);
 		this.gravititeAbilityModule = new PlayerBlockLevitateModule(this);
-		this.teleportingModule = new PlayerPortalModule(this);
+		this.teleportingModule = new PlayerTeleportingModule(this);
 		this.parachuteModule = new PlayerParachuteModule(this);
 		this.equipmentModule = new PlayerEquipmentModule(this);
 		this.dialogModule = new PlayerDialogModule(this);
@@ -270,7 +270,7 @@ public class PlayerAether implements IPlayerAether
 		return this.gravititeAbilityModule;
 	}
 
-	public PlayerPortalModule getTeleportingModule()
+	public PlayerTeleportingModule getTeleportingModule()
 	{
 		return this.teleportingModule;
 	}
