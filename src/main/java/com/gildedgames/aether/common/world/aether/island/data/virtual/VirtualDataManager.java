@@ -11,6 +11,7 @@ import com.gildedgames.orbis.api.core.ICreationData;
 import com.gildedgames.orbis.api.core.PlacedBlueprint;
 import com.google.common.collect.Lists;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -543,5 +544,11 @@ public class VirtualDataManager implements IVirtualDataManager
 	public void setTileEntity(final BlockPos pos, final TileEntity tileEntity)
 	{
 
+	}
+
+	@Override
+	public void spawnEntity(final Entity entity)
+	{
+		
 	}
 }
