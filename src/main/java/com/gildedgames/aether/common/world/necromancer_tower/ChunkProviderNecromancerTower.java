@@ -9,7 +9,6 @@ import com.gildedgames.orbis.api.processing.BlockAccessChunkPrimer;
 import com.gildedgames.orbis.api.processing.BlockAccessExtendedWrapper;
 import com.gildedgames.orbis.api.processing.DataPrimer;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
@@ -49,6 +48,11 @@ public class ChunkProviderNecromancerTower implements IChunkGenerator
 		final NecromancerTowerInstance inst = InstancesAether.NECROMANCER_TOWER_HANDLER.getFromDimId(this.world.provider.getDimension());
 
 		final DataPrimer primer = new DataPrimer(new BlockAccessExtendedWrapper(this.world));
+
+		if (inst.getTower() == null)
+		{
+			return;
+		}
 
 		for (final BlockDataChunk dataChunk : inst.getTower().getDataChunks())
 		{
@@ -92,23 +96,6 @@ public class ChunkProviderNecromancerTower implements IChunkGenerator
 		return false;
 	}
 
-	public void generateBedrock(final ChunkPrimer primer, final int chunkX, final int chunkZ)
-	{
-		for (int x = 0; x < 16; ++x)
-		{
-			for (int z = 0; z < 16; ++z)
-			{
-				for (int y = 255; y >= 0; --y)
-				{
-					if (!(y < 255 - this.random.nextInt(5) && y > this.random.nextInt(5)))
-					{
-						primer.setBlockState(x, y, z, Blocks.BEDROCK.getDefaultState());
-					}
-				}
-			}
-		}
-	}
-
 	@Override
 	public Chunk generateChunk(final int chunkX, final int chunkZ)
 	{
@@ -118,21 +105,24 @@ public class ChunkProviderNecromancerTower implements IChunkGenerator
 
 		final ChunkPrimer primer = new ChunkPrimer();
 
-		final DataPrimer dataPrimer = new DataPrimer(new BlockAccessChunkPrimer(this.world, primer));
-
-		for (final BlockDataChunk dataChunk : inst.getTower().getDataChunks())
+		if (inst.getTower() != null)
 		{
-			if (dataChunk == null)
-			{
-				continue;
-			}
+			final DataPrimer dataPrimer = new DataPrimer(new BlockAccessChunkPrimer(this.world, primer));
 
-			if (dataChunk.getPos().x == chunkX && dataChunk.getPos().z == chunkZ)
+			for (final BlockDataChunk dataChunk : inst.getTower().getDataChunks())
 			{
-				final ICreationData data = inst.getTower().getCreationData();
+				if (dataChunk == null)
+				{
+					continue;
+				}
 
-				dataPrimer.create(dataChunk.getContainer(),
-						data.clone().pos(new BlockPos(dataChunk.getPos().getXStart(), data.getPos().getY(), dataChunk.getPos().getZStart())));
+				if (dataChunk.getPos().x == chunkX && dataChunk.getPos().z == chunkZ)
+				{
+					final ICreationData data = inst.getTower().getCreationData();
+
+					dataPrimer.create(dataChunk.getContainer(),
+							data.clone().pos(new BlockPos(dataChunk.getPos().getXStart(), data.getPos().getY(), dataChunk.getPos().getZStart())));
+				}
 			}
 		}
 

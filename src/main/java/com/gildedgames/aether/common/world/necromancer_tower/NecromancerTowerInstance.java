@@ -38,10 +38,19 @@ public class NecromancerTowerInstance implements IInstance
 
 	public NecromancerTowerInstance(final int id, final IInstanceHandler instanceHandler)
 	{
+		this.dimIdInside = id;
+	}
+
+	private boolean initTower()
+	{
 		final MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
 
-		this.dimIdInside = id;
 		final World world = server.getWorld(this.dimIdInside);
+
+		if (world == null)
+		{
+			return false;
+		}
 
 		this.tower = new PlacedBlueprint(world, GenerationAether.NECROMANCER_TOWER, new CreationData(world).pos(BlockPos.ORIGIN));
 
@@ -49,8 +58,10 @@ public class NecromancerTowerInstance implements IInstance
 
 		if (spawn != null)
 		{
-			this.insideEntrance = new BlockPosDimension(spawn.getX(), spawn.getY(), spawn.getZ(), id);
+			this.insideEntrance = new BlockPosDimension(spawn.getX(), spawn.getY(), spawn.getZ(), this.dimIdInside);
 		}
+
+		return true;
 	}
 
 	public BlockPosDimension getOutsideEntrance()
@@ -75,6 +86,11 @@ public class NecromancerTowerInstance implements IInstance
 
 	public PlacedBlueprint getTower()
 	{
+		if (this.tower == null)
+		{
+			this.initTower();
+		}
+
 		return this.tower;
 	}
 

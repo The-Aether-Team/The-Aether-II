@@ -108,11 +108,13 @@ public class VirtualDataManager implements IVirtualDataManager
 	}
 
 	@Override
-	public void placeBlueprint(final BlueprintDefinition def, final ICreationData data)
+	public PlacedBlueprint placeBlueprint(final BlueprintDefinition def, final ICreationData data)
 	{
 		final PlacedBlueprint instance = new PlacedBlueprint(data.getWorld(), def, data);
 
 		this.blueprintInstances.add(instance);
+
+		return instance;
 	}
 
 	@Override
@@ -549,6 +551,6 @@ public class VirtualDataManager implements IVirtualDataManager
 	@Override
 	public void spawnEntity(final Entity entity)
 	{
-		
+
 	}
 }

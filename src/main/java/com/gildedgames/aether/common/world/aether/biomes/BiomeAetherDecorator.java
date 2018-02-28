@@ -20,12 +20,9 @@ import com.gildedgames.aether.common.world.aether.features.aerclouds.WorldGenAer
 import com.gildedgames.aether.common.world.aether.features.aerclouds.WorldGenPurpleAercloud;
 import com.gildedgames.aether.common.world.aether.features.trees.WorldGenOrangeTree;
 import com.gildedgames.aether.common.world.templates.TemplatePlacer;
-import com.gildedgames.aether.common.world.util.GenUtil;
-import com.gildedgames.orbis.api.core.BlueprintDefinition;
-import com.gildedgames.orbis.api.core.BlueprintDefinitionPool;
-import com.gildedgames.orbis.api.core.CreationData;
-import com.gildedgames.orbis.api.core.ICreationData;
+import com.gildedgames.orbis.api.core.*;
 import com.gildedgames.orbis.api.core.util.BlueprintPlacer;
+import com.gildedgames.orbis.api.data.schedules.ScheduleRegion;
 import com.gildedgames.orbis.api.processing.DataPrimer;
 import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.init.Blocks;
@@ -148,9 +145,14 @@ public class BiomeAetherDecorator
 					if (generated)
 					{
 						BlueprintPlacer.placeForced(primer, outpost, data, random);
-						manager.placeBlueprint(outpost, data);
+						final PlacedBlueprint placed = manager.placeBlueprint(outpost, data);
 
-						island.setRespawnPoint(GenUtil.rotate(data.getPos(), data.getPos().add(-0.5, 2, 1.0), data.getRotation()));
+						final ScheduleRegion trigger = placed.getScheduleFromTriggerID("spawn");
+
+						if (trigger != null)
+						{
+							island.setRespawnPoint(trigger.getBounds().getMin());
+						}
 
 						break;
 					}

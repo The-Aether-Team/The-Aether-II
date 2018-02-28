@@ -22,7 +22,7 @@ public interface IVirtualDataManager extends IBlockAccessExtended, NBT
 
 	boolean dropTemplate(TemplateInstance templateInstance);
 
-	void placeBlueprint(BlueprintDefinition def, ICreationData data);
+	PlacedBlueprint placeBlueprint(BlueprintDefinition def, ICreationData data);
 
 	boolean dropBlueprint(PlacedBlueprint instance);
 
