@@ -6,7 +6,6 @@ import com.gildedgames.aether.api.world.instances.IInstanceHandler;
 import com.gildedgames.aether.common.registry.content.GenerationAether;
 import com.gildedgames.orbis.api.core.CreationData;
 import com.gildedgames.orbis.api.core.PlacedBlueprint;
-import com.gildedgames.orbis.api.data.schedules.ScheduleRegion;
 import com.gildedgames.orbis.api.util.mc.NBTHelper;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,7 +16,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameType;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 import java.util.List;
 
@@ -47,18 +45,7 @@ public class NecromancerTowerInstance implements IInstance
 
 		this.tower = new PlacedBlueprint(world, GenerationAether.NECROMANCER_TOWER, new CreationData(world).pos(BlockPos.ORIGIN));
 
-		final List<ScheduleRegion> regions = ObfuscationReflectionHelper.getPrivateValue(PlacedBlueprint.class, this.tower, "scheduleRegions");
-
-		BlockPos spawn = null;
-
-		for (final ScheduleRegion s : regions)
-		{
-			if (s.getTriggerID().equals("spawn"))
-			{
-				spawn = s.getBounds().getMin();
-				break;
-			}
-		}
+		final BlockPos spawn = this.tower.getScheduleFromTriggerID("spawn").getBounds().getMin();
 
 		if (spawn != null)
 		{
