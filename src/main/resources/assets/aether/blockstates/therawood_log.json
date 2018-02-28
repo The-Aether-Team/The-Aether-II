@@ -1,0 +1,18 @@
+{
+	"variants": {
+		"axis=y": {
+			"model": "aether:logs/therawood_log"
+		},
+		"axis=z": {
+			"model": "aether:logs/therawood_log",
+			"x": 90
+		},
+		"axis=x": {
+			"model": "aether:logs/therawood_log",
+			"x": 90, "y": 90
+		},
+		"axis=none": {
+			"model": "aether:logs/therawood_log_bark"
+		}
+	}
+}

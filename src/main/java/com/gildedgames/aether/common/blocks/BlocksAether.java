@@ -53,6 +53,17 @@ public class BlocksAether
 	public static final Block therastone_pillar = new BlockParentPillar(Material.ROCK, therastone_brick)
 			.setSoundType(SoundType.STONE).setHardness(2.0f);
 
+	public static final BlockAetherLog therawood_log = new BlockAetherLog();
+
+	public static final BlockAetherLeaves therawood_leaves = new BlockAetherLeaves(BlockAetherSapling.BLUE_SKYROOT.getMeta());
+
+	public static final BlockTherawoodPlanks therawood_planks = new BlockTherawoodPlanks();
+
+	public static Block therawood_decorative = new BlockTherawoodDecorative();
+
+	public static final Block therawood_beam = new BlockParentPillar(Material.WOOD, therawood_planks)
+			.setSoundType(SoundType.WOOD).setHardness(2.0f);
+
 	public static final Block aether_dirt = new BlockAetherDirt();
 
 	public static final BlockAetherGrass aether_grass = new BlockAetherGrass();
@@ -305,6 +316,11 @@ public class BlocksAether
 		r.register("therastone_brick", therastone_brick.setCreativeTab(CreativeTabsAether.THERA));
 		r.register("therastone_brick_decorative", therastone_brick_decorative.setCreativeTab(CreativeTabsAether.THERA));
 		r.register("therastone_pillar", therastone_pillar.setCreativeTab(CreativeTabsAether.THERA));
+		r.register("therawood_log", therawood_log.setCreativeTab(CreativeTabsAether.THERA));
+		r.register("therawood_leaves", therawood_leaves.setCreativeTab(CreativeTabsAether.THERA));
+		r.register("therawood_planks", therawood_planks.setCreativeTab(CreativeTabsAether.THERA));
+		r.register("therawood_decorative", therawood_decorative.setCreativeTab(CreativeTabsAether.THERA));
+		r.register("therawood_beam", therawood_beam.setCreativeTab(CreativeTabsAether.THERA));
 
 		r.register("aether_dirt", aether_dirt.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 		r.register("aether_grass", aether_grass.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));

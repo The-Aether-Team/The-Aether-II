@@ -29,6 +29,9 @@
 		},
 		"variant=golden_oak": {
 			"model": "aether:aether_leaves/golden_oak_leaves"
+		},
+		"variant=therawood": {
+			"model": "aether:aether_leaves/therawood_leaves"
 		}
 	}
 }

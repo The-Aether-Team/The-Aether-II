@@ -1,0 +1,6 @@
+{
+	"parent": "block/cube_all",
+	"textures": {
+		"all": "aether:blocks/therawood_planks/therawood_base_top"
+	}
+}

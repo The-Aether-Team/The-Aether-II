@@ -60,6 +60,22 @@ public class ItemModelsAether
 
 		registerItemModels(BlocksAether.therastone_pillar, "therastone_bricks/pillar");
 
+		registerItemModels(BlocksAether.therawood_log, "logs/therawood_log");
+
+		registerItemModels(BlocksAether.therawood_leaves, "leaves/therawood_leaves");
+
+		registerItemModels(BlocksAether.therawood_planks, "therawood_planks/normal");
+
+		registerItemModels(BlocksAether.therawood_decorative, new ItemModelBuilder("therawood_planks/")
+				.add(BlockTherawoodDecorative.BASE_PLANKS.getMeta(), "base_planks")
+				.add(BlockTherawoodDecorative.BASE_BEAM.getMeta(), "base_beam")
+				.add(BlockTherawoodDecorative.TOP_PLANKS.getMeta(), "top_planks")
+				.add(BlockTherawoodDecorative.TOP_BEAM.getMeta(), "top_beam")
+				.add(BlockTherawoodDecorative.FLOORBOARDS.getMeta(), "floorboards")
+				.add(BlockTherawoodDecorative.HIGHLIGHT.getMeta(), "highlight"));
+
+		registerItemModels(BlocksAether.therawood_beam, "therawood_planks/beam");
+
 		registerItemModels(BlocksAether.aether_dirt, new ItemModelBuilder("aether_dirt/")
 				.add(BlockAetherDirt.DIRT.getMeta(), "dirt")
 				.add(BlockAetherDirt.COARSE_DIRT.getMeta(), "coarse_dirt"));

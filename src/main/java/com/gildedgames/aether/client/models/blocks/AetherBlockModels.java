@@ -45,6 +45,7 @@ public class AetherBlockModels
 	{
 		final StateMap leavesMapper = new StateMap.Builder().ignore(BlockAetherLeaves.PROPERTY_CHECK_DECAY, BlockAetherLeaves.PROPERTY_DECAYABLE).build();
 
+		ModelLoader.setCustomStateMapper(BlocksAether.therawood_leaves, leavesMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.blue_skyroot_leaves, leavesMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.green_skyroot_leaves, leavesMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.dark_blue_skyroot_leaves, leavesMapper);
