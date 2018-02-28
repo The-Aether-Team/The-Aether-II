@@ -335,7 +335,7 @@ public class CommonEvents
 				{
 					final BlockPos loc = optionalLoc.get();
 
-					player.connection.setPlayerLocation(loc.getX(), loc.getY(), loc.getZ(), 0, 0);
+					player.connection.setPlayerLocation(loc.getX(), loc.getY(), loc.getZ(), 225, 0);
 				}
 
 				/** Strange flag that needs to be set to prevent the NetHandlerPlayServer instances from resetting your position **/

@@ -34,7 +34,7 @@ public class BlockAetherTeleporter extends Block
 		super(Material.ROCK);
 
 		this.setHardness(2.5f);
-		this.setSoundType(SoundType.WOOD);
+		this.setSoundType(SoundType.STONE);
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public class BlockAetherTeleporter extends Block
 				playerList.transferPlayerToDimension(playerMP, p.getDim(), teleporter);
 				player.timeUntilPortal = player.getPortalCooldown();
 
-				playerMP.connection.setPlayerLocation(p.getX(), p.getY(), p.getZ(), 0, 0);
+				playerMP.connection.setPlayerLocation(p.getX(), p.getY(), p.getZ(),225, 0);
 			}
 			else if (hook.getInstance() != null)
 			{
