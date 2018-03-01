@@ -9,7 +9,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Mouse;
@@ -119,7 +119,7 @@ public class RenderTabGroup extends Gui
 
 		if (hoveredTab != null)
 		{
-			this.drawHoveringText(I18n.translateToLocal(hoveredTab.getUnlocalizedName()),
+			this.drawHoveringText(new TextComponentTranslation(hoveredTab.getUnlocalizedName()).getFormattedText(),
 					Mouse.getX() * scaledresolution.getScaledWidth() / mc.displayWidth,
 					scaledresolution.getScaledHeight() - (Mouse.getY() - 42) * scaledresolution.getScaledHeight() / mc.displayHeight
 							- 1, mc.fontRenderer);
