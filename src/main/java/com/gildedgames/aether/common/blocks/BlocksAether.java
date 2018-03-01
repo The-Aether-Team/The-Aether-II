@@ -55,11 +55,9 @@ public class BlocksAether
 
 	public static final BlockAetherLog therawood_log = new BlockAetherLog();
 
-	public static final BlockAetherLeaves therawood_leaves = new BlockAetherLeaves(BlockAetherSapling.BLUE_SKYROOT.getMeta());
+	public static final BlockAetherLeaves therawood_leaves = new BlockAetherLeaves();
 
 	public static final BlockTherawoodPlanks therawood_planks = new BlockTherawoodPlanks();
-
-	public static Block therawood_decorative = new BlockTherawoodDecorative();
 
 	public static final Block therawood_beam = new BlockParentPillar(Material.WOOD, therawood_planks)
 			.setSoundType(SoundType.WOOD).setHardness(2.0f);
@@ -289,6 +287,8 @@ public class BlocksAether
 	public static final Block holystone_rock = new BlockFloorObject(Material.ROCK);
 
 	private static final List<Block> registeredBlocks = new ArrayList<>();
+
+	public static Block therawood_decorative = new BlockTherawoodDecorative();
 
 	public static BlockCustomCarpet cloudwool_carpet = new BlockCustomCarpet();
 
@@ -573,6 +573,7 @@ public class BlocksAether
 		Blocks.FIRE.setFireInfo(blue_light_skyroot_leaves, 30, 60);
 		Blocks.FIRE.setFireInfo(dark_blue_light_skyroot_leaves, 30, 60);
 		Blocks.FIRE.setFireInfo(green_light_skyroot_leaves, 30, 60);
+		Blocks.FIRE.setFireInfo(therawood_leaves, 30, 60);
 
 		Blocks.FIRE.setFireInfo(cloudwool_block, 30, 60);
 		Blocks.FIRE.setFireInfo(cloudwool_carpet, 30, 60);
