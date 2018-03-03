@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.world.necromancer_tower;
 
-import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.api.util.BlockPosDimension;
-import com.gildedgames.aether.api.world.instances.IInstanceHandler;
-import com.gildedgames.aether.api.world.instances.IPlayerInstances;
+import com.gildedgames.orbis.api.OrbisAPI;
+import com.gildedgames.orbis.api.util.mc.BlockPosDimension;
+import com.gildedgames.orbis.api.world.instances.IInstanceHandler;
+import com.gildedgames.orbis.api.world.instances.IPlayerInstances;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 
@@ -49,7 +49,7 @@ public class NecromancerTowerInstanceHandler
 
 	public void teleportBack(final EntityPlayerMP player)
 	{
-		final IPlayerInstances hook = AetherAPI.instances().getPlayer(player);
+		final IPlayerInstances hook = OrbisAPI.instances().getPlayer(player);
 
 		if (hook.getInstance() != null)
 		{

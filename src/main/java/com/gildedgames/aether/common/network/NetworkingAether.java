@@ -4,9 +4,6 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.packets.*;
 import com.gildedgames.aether.common.network.packets.dialog.PacketCloseDialog;
 import com.gildedgames.aether.common.network.packets.dialog.PacketOpenDialog;
-import com.gildedgames.aether.common.network.packets.instances.PacketRegisterDimension;
-import com.gildedgames.aether.common.network.packets.instances.PacketRegisterInstance;
-import com.gildedgames.aether.common.network.packets.instances.PacketUnregisterDimension;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityTracker;
 import net.minecraft.entity.player.EntityPlayer;
@@ -45,9 +42,6 @@ public class NetworkingAether
 		instance.registerMessage(PacketUpdateStructure.HandlerClient.class, PacketUpdateStructure.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketLatchSwet.HandlerClient.class, PacketLatchSwet.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketDetachSwet.HandlerClient.class, PacketDetachSwet.class, discriminant++, Side.CLIENT);
-		instance.registerMessage(PacketRegisterDimension.Handler.class, PacketRegisterDimension.class, discriminant++, Side.CLIENT);
-		instance.registerMessage(PacketUnregisterDimension.Handler.class, PacketUnregisterDimension.class, discriminant++, Side.CLIENT);
-		instance.registerMessage(PacketRegisterInstance.Handler.class, PacketRegisterInstance.class, discriminant++, Side.CLIENT);
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(AetherCore.INSTANCE, new AetherGuiHandler());
 	}

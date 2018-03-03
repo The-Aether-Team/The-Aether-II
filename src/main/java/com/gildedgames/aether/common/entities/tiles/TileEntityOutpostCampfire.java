@@ -1,11 +1,11 @@
 package com.gildedgames.aether.common.entities.tiles;
 
-import com.gildedgames.aether.api.util.BlockPosDimension;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.multiblock.BlockMultiController;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.entities.tiles.multiblock.TileEntityMultiblockController;
-import com.gildedgames.aether.common.world.util.TeleporterGeneric;
+import com.gildedgames.orbis.api.util.TeleporterGeneric;
+import com.gildedgames.orbis.api.util.mc.BlockPosDimension;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;

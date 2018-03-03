@@ -2,7 +2,6 @@ package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.common.analytics.GAReporter;
-import com.gildedgames.aether.common.capabilities.world.instances.InstanceEvents;
 import com.gildedgames.aether.common.registry.SpawnRegistry;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.world.aether.TeleporterAether;
@@ -117,22 +116,12 @@ public class AetherCore
 		DimensionsAether.onServerStopping(event);
 
 		AetherCore.SPAWN_REGISTRY.write();
-
-		InstanceEvents.saveAllInstancesToDisk();
-	}
-
-	@EventHandler
-	public void onServerStopped(final FMLServerStoppedEvent event)
-	{
-		InstanceEvents.unregisterAllInstances();
 	}
 
 	@EventHandler
 	public void serverStarted(final FMLServerStartedEvent event)
 	{
 		AetherCore.SPAWN_REGISTRY.read();
-
-		InstanceEvents.loadAllInstancesFromDisk();
 	}
 
 	@EventHandler

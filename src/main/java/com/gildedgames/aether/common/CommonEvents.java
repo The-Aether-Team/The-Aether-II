@@ -15,7 +15,7 @@ import com.gildedgames.aether.common.items.armor.ItemAetherShield;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.util.helpers.PlayerUtil;
 import com.gildedgames.aether.common.world.aether.TeleporterAether;
-import com.gildedgames.aether.common.world.util.TeleporterGeneric;
+import com.gildedgames.orbis.api.util.TeleporterGeneric;
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -234,8 +234,6 @@ public class CommonEvents
 
 	private static void onFallenFromAether(final Entity entity)
 	{
-		final MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
-
 		final WorldServer toWorld = DimensionManager.getWorld(0);
 
 		final Teleporter teleporter = new TeleporterGeneric(toWorld);

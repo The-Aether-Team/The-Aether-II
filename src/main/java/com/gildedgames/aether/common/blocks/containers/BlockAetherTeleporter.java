@@ -1,17 +1,17 @@
 package com.gildedgames.aether.common.blocks.containers;
 
-import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.api.util.BlockPosDimension;
-import com.gildedgames.aether.api.world.instances.IInstance;
-import com.gildedgames.aether.api.world.instances.IPlayerInstances;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.network.packets.instances.PacketRegisterDimension;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.registry.content.InstancesAether;
 import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstance;
 import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstanceHandler;
-import com.gildedgames.aether.common.world.util.TeleporterGeneric;
+import com.gildedgames.orbis.api.OrbisAPI;
+import com.gildedgames.orbis.api.packets.instances.PacketRegisterDimension;
+import com.gildedgames.orbis.api.util.TeleporterGeneric;
+import com.gildedgames.orbis.api.util.mc.BlockPosDimension;
+import com.gildedgames.orbis.api.world.instances.IInstance;
+import com.gildedgames.orbis.api.world.instances.IPlayerInstances;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -51,7 +51,7 @@ public class BlockAetherTeleporter extends Block
 			final NecromancerTowerInstanceHandler handler = InstancesAether.NECROMANCER_TOWER_HANDLER;
 
 			final PlayerAether playerAether = PlayerAether.getPlayer(player);
-			final IPlayerInstances hook = AetherAPI.instances().getPlayer(player);
+			final IPlayerInstances hook = OrbisAPI.instances().getPlayer(player);
 
 			if (playerAether.getTeleportingModule().getAetherPos() != null)
 			{
@@ -72,7 +72,7 @@ public class BlockAetherTeleporter extends Block
 				playerList.transferPlayerToDimension(playerMP, p.getDim(), teleporter);
 				player.timeUntilPortal = player.getPortalCooldown();
 
-				playerMP.connection.setPlayerLocation(p.getX(), p.getY(), p.getZ(),225, 0);
+				playerMP.connection.setPlayerLocation(p.getX(), p.getY(), p.getZ(), 225, 0);
 			}
 			else if (hook.getInstance() != null)
 			{

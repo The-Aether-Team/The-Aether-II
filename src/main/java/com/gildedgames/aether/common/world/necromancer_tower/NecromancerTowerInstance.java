@@ -1,12 +1,12 @@
 package com.gildedgames.aether.common.world.necromancer_tower;
 
-import com.gildedgames.aether.api.util.BlockPosDimension;
-import com.gildedgames.aether.api.world.instances.IInstance;
-import com.gildedgames.aether.api.world.instances.IInstanceHandler;
 import com.gildedgames.aether.common.registry.content.GenerationAether;
 import com.gildedgames.orbis.api.core.CreationData;
 import com.gildedgames.orbis.api.core.PlacedBlueprint;
+import com.gildedgames.orbis.api.util.mc.BlockPosDimension;
 import com.gildedgames.orbis.api.util.mc.NBTHelper;
+import com.gildedgames.orbis.api.world.instances.IInstance;
+import com.gildedgames.orbis.api.world.instances.IInstanceHandler;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -154,6 +154,12 @@ public class NecromancerTowerInstance implements IInstance
 	public int getDimIdInside()
 	{
 		return this.dimIdInside;
+	}
+
+	@Override
+	public void setDimIdInside(final int dimIdInside)
+	{
+		this.dimIdInside = dimIdInside;
 	}
 
 }

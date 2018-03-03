@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.world.necromancer_tower;
 
-import com.gildedgames.aether.api.world.instances.IInstanceFactory;
-import com.gildedgames.aether.api.world.instances.IInstanceHandler;
-import com.gildedgames.aether.common.world.util.TeleporterGeneric;
+import com.gildedgames.orbis.api.util.TeleporterGeneric;
+import com.gildedgames.orbis.api.world.instances.IInstanceFactory;
+import com.gildedgames.orbis.api.world.instances.IInstanceHandler;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;

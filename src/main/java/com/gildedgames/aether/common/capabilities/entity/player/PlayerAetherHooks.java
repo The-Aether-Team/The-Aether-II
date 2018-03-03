@@ -10,7 +10,7 @@ import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketMarkPlayerDeath;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.util.helpers.IslandHelper;
-import com.gildedgames.aether.common.world.util.TeleporterGeneric;
+import com.gildedgames.orbis.api.util.TeleporterGeneric;
 import com.gildedgames.orbis.api.util.mc.BlockUtil;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
