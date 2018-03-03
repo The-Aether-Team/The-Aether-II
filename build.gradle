@@ -23,7 +23,7 @@ allprojects {
     repositories {
         maven {
             name = "maven-storage"
-            url "https://git.gildedgames.com/GildedGames/maven-storage/raw/master/"
+            url = "https://git.gildedgames.com/GildedGames/maven-storage/raw/master/"
         }
     }
 
