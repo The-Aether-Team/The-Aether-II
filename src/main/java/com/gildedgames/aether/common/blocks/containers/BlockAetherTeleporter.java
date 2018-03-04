@@ -1,13 +1,10 @@
 package com.gildedgames.aether.common.blocks.containers;
 
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
-import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.registry.content.InstancesAether;
 import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstance;
 import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstanceHandler;
 import com.gildedgames.orbis.api.OrbisAPI;
-import com.gildedgames.orbis.api.packets.instances.PacketRegisterDimension;
 import com.gildedgames.orbis.api.util.TeleporterGeneric;
 import com.gildedgames.orbis.api.util.mc.BlockPosDimension;
 import com.gildedgames.orbis.api.world.instances.IInstance;
@@ -78,7 +75,7 @@ public class BlockAetherTeleporter extends Block
 			{
 				final IInstance instance = hook.getInstance();
 
-				if (player.dimension == instance.getDimIdInside())
+				if (player.dimension == instance.getDimensionId())
 				{
 					handler.teleportBack((EntityPlayerMP) player);
 
@@ -88,24 +85,12 @@ public class BlockAetherTeleporter extends Block
 				{
 					final NecromancerTowerInstance inst = handler.get(new BlockPosDimension(pos, world.provider.getDimension()));
 
-					if (player instanceof EntityPlayerMP)
-					{
-						NetworkingAether.sendPacketToPlayer(new PacketRegisterDimension(DimensionsAether.NECROMANCER_TOWER, inst.getDimIdInside()),
-								(EntityPlayerMP) player);
-					}
-
 					handler.teleportToInst((EntityPlayerMP) player, inst);
 				}
 			}
 			else
 			{
 				final NecromancerTowerInstance inst = handler.get(new BlockPosDimension(pos, world.provider.getDimension()));
-
-				if (player instanceof EntityPlayerMP)
-				{
-					NetworkingAether.sendPacketToPlayer(new PacketRegisterDimension(DimensionsAether.NECROMANCER_TOWER, inst.getDimIdInside()),
-							(EntityPlayerMP) player);
-				}
 
 				playerAether.getTeleportingModule()
 						.setNonAetherPos(new BlockPosDimension((int) player.posX, (int) player.posY, (int) player.posZ, player.dimension));

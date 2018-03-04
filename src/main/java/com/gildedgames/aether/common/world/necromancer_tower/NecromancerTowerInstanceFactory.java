@@ -20,7 +20,7 @@ public class NecromancerTowerInstanceFactory implements IInstanceFactory<Necroma
 	@Override
 	public NecromancerTowerInstance createInstance(final int dimId, final IInstanceHandler instanceHandler)
 	{
-		return new NecromancerTowerInstance(dimId, instanceHandler);
+		return new NecromancerTowerInstance(dimId);
 	}
 
 	@Override
