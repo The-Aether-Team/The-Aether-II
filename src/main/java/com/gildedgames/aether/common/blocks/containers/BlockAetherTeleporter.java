@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.blocks.containers;
 
 import com.gildedgames.aether.client.ClientEventHandler;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.registry.content.InstancesAether;
 import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstance;
 import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstanceHandler;
@@ -40,6 +41,11 @@ public class BlockAetherTeleporter extends Block
 			final World world, final BlockPos pos, final IBlockState state, final EntityPlayer player, final EnumHand hand, final EnumFacing facing,
 			final float hitX, final float hitY, final float hitZ)
 	{
+		if (player.world.provider.getDimensionType() == DimensionsAether.AETHER)
+		{
+			return false;
+		}
+
 		if (world.isRemote)
 		{
 			final PlayerAether playerAether = PlayerAether.getPlayer(player);
