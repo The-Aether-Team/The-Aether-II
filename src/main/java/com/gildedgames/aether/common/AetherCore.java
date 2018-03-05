@@ -1,10 +1,12 @@
 package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.AetherAPI;
+import com.gildedgames.aether.client.gui.misc.BlackScreenRenderer;
 import com.gildedgames.aether.common.analytics.GAReporter;
 import com.gildedgames.aether.common.registry.SpawnRegistry;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.world.aether.TeleporterAether;
+import net.minecraft.client.Minecraft;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.DimensionManager;
@@ -94,6 +96,8 @@ public class AetherCore
 	@EventHandler
 	public void onFMLPreInit(final FMLPreInitializationEvent event)
 	{
+		Minecraft.getMinecraft().loadingScreen = new BlackScreenRenderer(Minecraft.getMinecraft(), Minecraft.getMinecraft().loadingScreen);
+
 		AetherCore.CONFIG = new ConfigAether(event.getSuggestedConfigurationFile());
 		AetherCore.PROXY.preInit(event);
 

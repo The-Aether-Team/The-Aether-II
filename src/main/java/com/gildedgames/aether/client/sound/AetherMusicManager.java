@@ -33,18 +33,18 @@ public class AetherMusicManager
 		this.addGenerator(new AetherMusicGenerator());
 	}
 
-	public void addGenerator(IMusicGenerator generator)
+	public void addGenerator(final IMusicGenerator generator)
 	{
 		this.generators.add(generator);
 	}
 
-	public void update(IPlayerAether aePlayer)
+	public void update(final IPlayerAether aePlayer)
 	{
 		if (this.canPlayMusic() && !this.isPlayingMusic())
 		{
 			if (this.quietPeriod <= 0)
 			{
-				IMusicGenerator generator = this.getNextPlayableSong(aePlayer);
+				final IMusicGenerator generator = this.getNextPlayableSong(aePlayer);
 
 				if (generator == null)
 				{
@@ -53,7 +53,7 @@ public class AetherMusicManager
 				}
 				else
 				{
-					SoundEvent event = generator.getMusicResource(aePlayer);
+					final SoundEvent event = generator.getMusicResource(aePlayer);
 
 					if (event == null)
 					{
@@ -72,9 +72,9 @@ public class AetherMusicManager
 		}
 	}
 
-	private IMusicGenerator getNextPlayableSong(IPlayerAether aePlayer)
+	private IMusicGenerator getNextPlayableSong(final IPlayerAether aePlayer)
 	{
-		for (IMusicGenerator generator : this.generators)
+		for (final IMusicGenerator generator : this.generators)
 		{
 			if (generator.isPlayable(aePlayer))
 			{
@@ -85,7 +85,7 @@ public class AetherMusicManager
 		return null;
 	}
 
-	private void playMusic(SoundEvent event)
+	public void playMusic(final SoundEvent event)
 	{
 		if (this.isPlayingMusic())
 		{
@@ -97,7 +97,7 @@ public class AetherMusicManager
 		this.getSoundHandler().playSound(this.currentSong);
 	}
 
-	private void stopMusic()
+	public void stopMusic()
 	{
 		if (this.currentSong != null)
 		{
@@ -107,7 +107,7 @@ public class AetherMusicManager
 		}
 	}
 
-	public void onRecordPlayed(ISound sound)
+	public void onRecordPlayed(final ISound sound)
 	{
 		this.currentRecord = sound;
 
@@ -135,15 +135,16 @@ public class AetherMusicManager
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	// Lowest priority is important, so we can ensure the sound will actually be played
-	public void onPlaySound(PlaySoundEvent event)
+	public void onPlaySound(final PlaySoundEvent event)
 	{
 		if (event.getSound().getCategory() == SoundCategory.MUSIC)
 		{
 			if (!event.getSound().getSoundLocation().getResourceDomain().equals(AetherCore.MOD_ID))
 			{
-				EntityPlayer player = Minecraft.getMinecraft().player;
+				final EntityPlayer player = Minecraft.getMinecraft().player;
 
-				if (player != null && player.world.provider.getDimensionType() == DimensionsAether.AETHER)
+				if (player != null && (player.world.provider.getDimensionType() == DimensionsAether.AETHER
+						|| player.world.provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER))
 				{
 					event.setResultSound(null);
 				}

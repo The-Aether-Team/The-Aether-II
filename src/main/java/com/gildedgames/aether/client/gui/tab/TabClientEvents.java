@@ -9,7 +9,6 @@ import com.gildedgames.aether.common.network.packets.PacketOpenTab;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -24,15 +23,15 @@ public class TabClientEvents
 	private final static RenderTabGroup tabGroupRenderer = new RenderTabGroup();
 
 	@SubscribeEvent
-	public static void onGuiOpen(GuiOpenEvent event)
+	public static void onGuiOpen(final GuiOpenEvent event)
 	{
-		GuiScreen gui = event.getGui();
+		final GuiScreen gui = event.getGui();
 
-		ITabGroupHandler groupHandler = AetherAPI.content().tabs().getActiveGroup();
+		final ITabGroupHandler groupHandler = AetherAPI.content().tabs().getActiveGroup();
 
 		if (groupHandler != null)
 		{
-			ITabClient selectedTab = groupHandler.getClientGroup().getSelectedTab();
+			final ITabClient selectedTab = groupHandler.getClientGroup().getSelectedTab();
 
 			if (gui != null && selectedTab.isTabValid(gui))
 			{
@@ -42,11 +41,11 @@ public class TabClientEvents
 			AetherAPI.content().tabs().setActiveGroup(null);
 		}
 
-		for (ITabGroupHandler tabGroupHandler : AetherAPI.content().tabs().getRegisteredTabGroups().values())
+		for (final ITabGroupHandler tabGroupHandler : AetherAPI.content().tabs().getRegisteredTabGroups().values())
 		{
-			ITabGroup<ITabClient> tabGroup = tabGroupHandler.getClientGroup();
+			final ITabGroup<ITabClient> tabGroup = tabGroupHandler.getClientGroup();
 
-			for (ITabClient tab : tabGroup.getTabs())
+			for (final ITabClient tab : tabGroup.getTabs())
 			{
 				if (event.getGui() != null && tab.isTabValid(gui))
 				{
@@ -76,24 +75,24 @@ public class TabClientEvents
 	}
 
 	@SubscribeEvent
-	public static void onGuiMouseEvent(GuiScreenEvent.MouseInputEvent.Pre event)
+	public static void onGuiMouseEvent(final GuiScreenEvent.MouseInputEvent.Pre event)
 	{
-		EntityPlayer player = Minecraft.getMinecraft().player;
+		final EntityPlayer player = Minecraft.getMinecraft().player;
 
 		if (player == null || !player.inventory.getItemStack().isEmpty())
 		{
 			return;
 		}
 
-		ITabGroupHandler groupHandler = AetherAPI.content().tabs().getActiveGroup();
+		final ITabGroupHandler groupHandler = AetherAPI.content().tabs().getActiveGroup();
 
 		if (groupHandler != null)
 		{
-			ITabGroup<ITabClient> activeGroup = groupHandler.getClientGroup();
+			final ITabGroup<ITabClient> activeGroup = groupHandler.getClientGroup();
 
 			if (activeGroup != null)
 			{
-				ITabClient hoveredTab;
+				final ITabClient hoveredTab;
 
 				hoveredTab = tabGroupRenderer.getHoveredTab(activeGroup);
 
@@ -125,22 +124,22 @@ public class TabClientEvents
 	}
 
 	@SubscribeEvent
-	public static void tickEnd(TickEvent.RenderTickEvent event)
+	public static void tickEnd(final TickEvent.RenderTickEvent event)
 	{
 		if (event.phase == TickEvent.Phase.END)
 		{
-			EntityPlayer player = Minecraft.getMinecraft().player;
+			final EntityPlayer player = Minecraft.getMinecraft().player;
 
 			if (player == null || !player.inventory.getItemStack().isEmpty())
 			{
 				return;
 			}
 
-			ITabGroupHandler groupHandler = AetherAPI.content().tabs().getActiveGroup();
+			final ITabGroupHandler groupHandler = AetherAPI.content().tabs().getActiveGroup();
 
 			if (groupHandler != null)
 			{
-				ITabGroup<ITabClient> activeGroup = groupHandler.getClientGroup();
+				final ITabGroup<ITabClient> activeGroup = groupHandler.getClientGroup();
 
 				if (activeGroup != null)
 				{

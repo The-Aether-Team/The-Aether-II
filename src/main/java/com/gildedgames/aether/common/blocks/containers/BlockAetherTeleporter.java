@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.blocks.containers;
 
+import com.gildedgames.aether.client.ClientEventHandler;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.registry.content.InstancesAether;
 import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstance;
@@ -41,6 +42,8 @@ public class BlockAetherTeleporter extends Block
 	{
 		if (world.isRemote)
 		{
+			ClientEventHandler.DRAW_BLACK_SCREEN = true;
+
 			return true;
 		}
 		else
@@ -78,14 +81,6 @@ public class BlockAetherTeleporter extends Block
 				if (player.dimension == instance.getDimensionId())
 				{
 					handler.teleportBack((EntityPlayerMP) player);
-
-					hook.setInstance(null);
-				}
-				else
-				{
-					final NecromancerTowerInstance inst = handler.get(new BlockPosDimension(pos, world.provider.getDimension()));
-
-					handler.teleportToInst((EntityPlayerMP) player, inst);
 				}
 			}
 			else

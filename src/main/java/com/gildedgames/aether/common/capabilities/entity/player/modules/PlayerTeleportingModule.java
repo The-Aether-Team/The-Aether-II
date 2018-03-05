@@ -1,5 +1,7 @@
 package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
+import com.gildedgames.aether.client.ClientEventHandler;
+import com.gildedgames.aether.client.gui.misc.GuiIntro;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.CommonEvents;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
@@ -29,6 +31,8 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 	private boolean teleported, teleporting;
 
 	private BlockPosDimension nonAetherPos, aetherPos;
+
+	private boolean playedIntro;
 
 	public PlayerTeleportingModule(final PlayerAether playerAether)
 	{
@@ -68,6 +72,18 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 	@Override
 	public void onUpdate()
 	{
+		if (this.getWorld().isRemote && this.getWorld().provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER)
+		{
+			if (Minecraft.getMinecraft().currentScreen == null && !this.playedIntro)
+			{
+				Minecraft.getMinecraft().displayGuiScreen(new GuiIntro());
+
+				this.playedIntro = true;
+
+				ClientEventHandler.DRAW_BLACK_SCREEN = false;
+			}
+		}
+
 		this.prevTimeInPortal = this.timeInPortal;
 
 		if (this.teleporting)
@@ -198,6 +214,8 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 
 		funnel.set("nonAetherPos", this.nonAetherPos);
 		funnel.set("aetherPos", this.aetherPos);
+
+		output.setBoolean("playedIntro", this.playedIntro);
 	}
 
 	@Override
@@ -210,5 +228,7 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 
 		this.nonAetherPos = funnel.get("nonAetherPos");
 		this.aetherPos = funnel.get("aetherPos");
+
+		this.playedIntro = input.getBoolean("playedIntro");
 	}
 }

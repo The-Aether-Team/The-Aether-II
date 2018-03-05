@@ -34,6 +34,15 @@
 		],
 		"subtitle": "subtitles.aether.portal.labyrinth_totem.woosh"
 	},
+	"music.intro": {
+		"category": "music",
+		"sounds": [
+			{
+				"name": "aether:music/intro",
+				"stream": true
+			}
+		]
+	},
 	"music.day": {
 		"category": "music",
 		"sounds": [

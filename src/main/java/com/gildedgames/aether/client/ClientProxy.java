@@ -57,7 +57,6 @@ public class ClientProxy extends CommonProxy
 
 		MinecraftForge.EVENT_BUS.register(AetherMusicManager.INSTANCE);
 
-		MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
 		MinecraftForge.EVENT_BUS.register(new ClientRenderHandler());
 
 		MinecraftForge.EVENT_BUS.register(new SessionEventHandler());
