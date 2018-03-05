@@ -24,6 +24,7 @@ import com.gildedgames.aether.common.entities.util.mounts.FlyingMount;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketSpecialMovement;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
+import com.gildedgames.orbis.client.gui.util.GuiFrameUtils;
 import com.gildedgames.orbis.common.util.InputHelper;
 import net.minecraft.client.LoadingScreenRenderer;
 import net.minecraft.client.Minecraft;
@@ -53,11 +54,20 @@ import java.util.Optional;
 @Mod.EventBusSubscriber(Side.CLIENT)
 public class ClientEventHandler
 {
-	private static final PerformanceIngame performanceLogger = new PerformanceIngame();
+	private static final PerformanceIngame PERFORMANCE_LOGGER = new PerformanceIngame();
 
 	public static boolean DRAW_BLACK_SCREEN = false;
 
-	private static boolean prevJumpBindState;
+	private static boolean DRAWING_BLACK_FADE = false;
+
+	private static double TIME_STARTED_FADE = -1;
+
+	private static boolean PREV_JUMP_BIND_STATE;
+
+	public static void drawBlackFade()
+	{
+		DRAWING_BLACK_FADE = true;
+	}
 
 	@SubscribeEvent
 	public static void onOpenGui(final GuiOpenEvent event)
@@ -68,12 +78,40 @@ public class ClientEventHandler
 		}
 	}
 
+	private static double getSecondsSinceStart()
+	{
+		return (System.currentTimeMillis() - TIME_STARTED_FADE) / 1000.0D;
+	}
+
 	@SubscribeEvent
 	public static void onRenderTick(final TickEvent.RenderTickEvent event)
 	{
-		if (DRAW_BLACK_SCREEN && event.phase == TickEvent.Phase.END)
+		if (event.phase == TickEvent.Phase.END)
 		{
-			GuiUtils.drawGradientRect(0, 0, (int) InputHelper.getScreenWidth(), (int) InputHelper.getScreenHeight(), 0xFF000000, 0xFF000000);
+			if (DRAW_BLACK_SCREEN)
+			{
+				GuiUtils.drawGradientRect(0, 0, (int) InputHelper.getScreenWidth(), (int) InputHelper.getScreenHeight(), 0xFF000000, 0xFF000000);
+			}
+
+			if (DRAWING_BLACK_FADE)
+			{
+				if (TIME_STARTED_FADE == -1)
+				{
+					TIME_STARTED_FADE = System.currentTimeMillis();
+				}
+
+				final float bgAlpha = Math.max(0.0F, 1.0F - (float) (getSecondsSinceStart() / 10.0D));
+
+				final int bg = GuiFrameUtils.changeAlpha(0xFF000000, (int) (bgAlpha * 255));
+
+				GuiUtils.drawGradientRect(0, 0, (int) InputHelper.getScreenWidth(), (int) InputHelper.getScreenHeight(), bg, bg);
+
+				if (getSecondsSinceStart() >= 10.0D)
+				{
+					DRAWING_BLACK_FADE = false;
+					TIME_STARTED_FADE = -1;
+				}
+			}
 		}
 	}
 
@@ -115,7 +153,7 @@ public class ClientEventHandler
 				}
 			}
 
-			performanceLogger.renderIcon();
+			PERFORMANCE_LOGGER.renderIcon();
 		}
 	}
 
@@ -173,7 +211,7 @@ public class ClientEventHandler
 			{
 				if (aePlayer.getAbilitiesModule().getMidAirJumpsAllowed() > 0)
 				{
-					if (mc.gameSettings.keyBindJump.isKeyDown() && !prevJumpBindState)
+					if (mc.gameSettings.keyBindJump.isKeyDown() && !PREV_JUMP_BIND_STATE)
 					{
 						if (!player.isInWater() && aePlayer.getAbilitiesModule().getTicksAirborne() > 2
 								&& !player.capabilities.isCreativeMode)
@@ -189,7 +227,7 @@ public class ClientEventHandler
 					}
 				}
 
-				prevJumpBindState = mc.gameSettings.keyBindJump.isKeyDown();
+				PREV_JUMP_BIND_STATE = mc.gameSettings.keyBindJump.isKeyDown();
 
 				AetherMusicManager.INSTANCE.update(aePlayer);
 			}
