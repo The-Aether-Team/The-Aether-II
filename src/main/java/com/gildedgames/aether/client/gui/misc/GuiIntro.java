@@ -41,7 +41,7 @@ public class GuiIntro extends GuiFrame
 
 	private long timeStarted;
 
-	private boolean playedMusic;
+	private boolean playedMusic, startIntro;
 
 	public GuiIntro()
 	{
@@ -97,6 +97,8 @@ public class GuiIntro extends GuiFrame
 						"Let the journey begin…"),
 						1.0F));
 
+		this.ggLogo.setVisible(false);
+
 		this.nextArrow = new GuiNextArrow();
 
 		this.nextArrow.dim().mod().center(true).pos(center).addY(-7).addX(-170).flush();
@@ -113,8 +115,6 @@ public class GuiIntro extends GuiFrame
 		this.tip3.setVisible(false);
 
 		this.addChildren(this.ggLogo, this.proudlyPresents, this.highlands, this.prologue, this.tip1, this.tip2, this.tip3, this.nextArrow);
-
-		this.timeStarted = System.currentTimeMillis();
 	}
 
 	@Override
@@ -124,11 +124,23 @@ public class GuiIntro extends GuiFrame
 
 		this.drawGradientRect(0, 0, this.width, this.height, bg, bg);
 
+		if (!this.startIntro)
+		{
+			this.tip1.setVisible(this.tipIndex == 0);
+			this.tip2.setVisible(this.tipIndex == 1);
+			this.tip3.setVisible(this.tipIndex == 2);
+
+			this.nextArrow.setVisible(true);
+
+			return;
+		}
+
 		if (this.getSecondsSinceStart() <= 15)
 		{
 			final float fade = Math.min(1.0F, (float) ((this.getSecondsSinceStart()) / 15.0D));
 
 			this.ggLogo.setAlpha(fade);
+			this.ggLogo.setVisible(true);
 
 			if (this.getSecondsSinceStart() >= 10)
 			{
@@ -208,11 +220,8 @@ public class GuiIntro extends GuiFrame
 
 		if (this.getSecondsSinceStart() >= 60)
 		{
-			this.tip1.setVisible(this.tipIndex == 0);
-			this.tip2.setVisible(this.tipIndex == 1);
-			this.tip3.setVisible(this.tipIndex == 2);
-
-			this.nextArrow.setVisible(true);
+			ClientEventHandler.drawBlackFade();
+			Minecraft.getMinecraft().displayGuiScreen(null);
 		}
 
 		if (!this.playedMusic)
@@ -228,12 +237,16 @@ public class GuiIntro extends GuiFrame
 	{
 		super.mouseClicked(mouseX, mouseY, mouseButton);
 
-		if (this.getSecondsSinceStart() >= 60)
+		if (!this.startIntro)
 		{
 			if (this.tipIndex >= 2)
 			{
-				ClientEventHandler.drawBlackFade();
-				Minecraft.getMinecraft().displayGuiScreen(null);
+				this.nextArrow.setVisible(false);
+				this.tip3.setVisible(false);
+
+				this.startIntro = true;
+
+				this.timeStarted = System.currentTimeMillis();
 			}
 
 			this.tipIndex++;
