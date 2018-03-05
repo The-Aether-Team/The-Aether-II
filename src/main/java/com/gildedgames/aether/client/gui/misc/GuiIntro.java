@@ -172,7 +172,7 @@ public class GuiIntro extends GuiFrame
 			GlStateManager.pushMatrix();
 
 			float alpha = Math.min(1.0F, (float) ((this.getSecondsSinceStart() - 30D) / 10.0D));
-			float pAlpha = Math.min(1.0F, (float) ((this.getSecondsSinceStart() - 32.5D) / 10.0D));
+			float pAlpha = Math.min(1.0F, (float) ((this.getSecondsSinceStart() - 34D) / 8.5D));
 
 			if (this.getSecondsSinceStart() >= 42.5D)
 			{
