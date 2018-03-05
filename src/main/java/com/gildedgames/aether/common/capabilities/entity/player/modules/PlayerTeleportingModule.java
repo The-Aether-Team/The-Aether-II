@@ -69,6 +69,11 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 		this.aetherPos = pos;
 	}
 
+	public boolean hasPlayedIntro()
+	{
+		return this.playedIntro;
+	}
+
 	@Override
 	public void onUpdate()
 	{

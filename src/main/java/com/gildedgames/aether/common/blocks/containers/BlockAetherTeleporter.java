@@ -42,7 +42,12 @@ public class BlockAetherTeleporter extends Block
 	{
 		if (world.isRemote)
 		{
-			ClientEventHandler.DRAW_BLACK_SCREEN = true;
+			final PlayerAether playerAether = PlayerAether.getPlayer(player);
+
+			if (!playerAether.getTeleportingModule().hasPlayedIntro())
+			{
+				ClientEventHandler.DRAW_BLACK_SCREEN = true;
+			}
 
 			return true;
 		}
