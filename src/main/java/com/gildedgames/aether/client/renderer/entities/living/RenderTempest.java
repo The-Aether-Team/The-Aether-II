@@ -3,7 +3,6 @@ package com.gildedgames.aether.client.renderer.entities.living;
 import com.gildedgames.aether.client.models.entities.living.ModelTempest;
 import com.gildedgames.aether.client.renderer.entities.living.layers.LayerGlowing;
 import com.gildedgames.aether.common.AetherCore;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLiving;

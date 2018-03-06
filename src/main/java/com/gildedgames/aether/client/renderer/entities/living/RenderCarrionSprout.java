@@ -1,13 +1,11 @@
 package com.gildedgames.aether.client.renderer.entities.living;
 
-import org.lwjgl.opengl.GL11;
-
 import com.gildedgames.aether.client.models.entities.living.ModelCarrionSprout;
 import com.gildedgames.aether.common.entities.living.passive.EntityCarrionSprout;
-
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
 public class RenderCarrionSprout extends RenderLiving<EntityCarrionSprout>
 {

@@ -3,7 +3,6 @@ package com.gildedgames.aether.common.capabilities.item.effects;
 import com.gildedgames.aether.api.items.equipment.effects.*;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.AetherCore;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 

@@ -4,7 +4,6 @@ import com.gildedgames.aether.api.dialog.IDialogAction;
 import com.gildedgames.aether.common.dialog.data.actions.DialogActionExit;
 import com.gildedgames.aether.common.dialog.data.actions.DialogActionNavigate;
 import com.google.gson.*;
-import jdk.nashorn.internal.parser.JSONParser;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;

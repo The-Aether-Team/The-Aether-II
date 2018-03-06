@@ -1,7 +1,5 @@
 package com.gildedgames.aether.api.dialog;
 
-import net.minecraft.client.renderer.texture.TextureManager;
-
 /**
  * Used to render the data provided by a {@link IDialogSlide} object.
  */

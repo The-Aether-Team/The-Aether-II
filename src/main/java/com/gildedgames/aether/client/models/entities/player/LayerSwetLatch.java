@@ -1,18 +1,15 @@
 package com.gildedgames.aether.client.models.entities.player;
 
+import com.gildedgames.aether.client.models.entities.living.ModelSwetHead;
+import com.gildedgames.aether.client.models.entities.living.ModelSwetJelly;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
-import com.gildedgames.aether.common.items.armor.ItemAetherGloves;
-import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
-import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemStack;
+
 import java.util.List;
-import com.gildedgames.aether.client.models.entities.living.ModelSwetHead;
-import com.gildedgames.aether.client.models.entities.living.ModelSwetJelly;
 
 public class LayerSwetLatch extends LayerBipedArmor
 {

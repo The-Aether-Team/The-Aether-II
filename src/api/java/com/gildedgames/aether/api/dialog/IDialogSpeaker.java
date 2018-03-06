@@ -1,9 +1,6 @@
 package com.gildedgames.aether.api.dialog;
 
-import net.minecraft.util.ResourceLocation;
-
 import javax.annotation.Nonnull;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 

@@ -7,7 +7,6 @@ import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 
 import java.util.Collection;
 import java.util.HashSet;

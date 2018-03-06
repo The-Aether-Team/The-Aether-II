@@ -3,7 +3,6 @@ package com.gildedgames.aether.common.items.blocks;
 import com.gildedgames.aether.common.blocks.util.BlockCustomSlab;
 import com.gildedgames.aether.common.blocks.util.BlockCustomSlab.EnumSlabPart;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

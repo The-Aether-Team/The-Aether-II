@@ -2,7 +2,6 @@ package com.gildedgames.aether.client.renderer.entities.living;
 
 import com.gildedgames.aether.client.models.entities.living.ModelSwetHead;
 import com.gildedgames.aether.client.renderer.entities.living.layers.LayerSwetJelly;
-import com.gildedgames.aether.common.entities.ai.hopping.HoppingMoveHelper;
 import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;

@@ -2,7 +2,6 @@ package com.gildedgames.aether.common.dialog.data.slide_renderers;
 
 import com.gildedgames.aether.api.dialog.IDialogSlide;
 import com.gildedgames.aether.api.dialog.IDialogSlideRenderer;
-import com.gildedgames.aether.common.dialog.data.actions.DialogActionNavigate;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -14,7 +13,6 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.ResourceLocation;
 
 import java.lang.reflect.Type;
-import java.util.List;
 import java.util.Map;
 
 /**
