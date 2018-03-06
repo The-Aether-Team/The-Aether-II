@@ -45,7 +45,7 @@ public class GuiIntro extends GuiFrame
 
 	public GuiIntro()
 	{
-		preventInnerTyping = true;
+
 	}
 
 	private double getSecondsSinceStart()
@@ -59,6 +59,7 @@ public class GuiIntro extends GuiFrame
 		super.onGuiClosed();
 
 		AetherMusicManager.INSTANCE.stopMusic();
+		preventInnerTyping = true;
 	}
 
 	@Override
@@ -70,6 +71,8 @@ public class GuiIntro extends GuiFrame
 	@Override
 	public void init()
 	{
+		preventInnerTyping = true;
+
 		final Pos2D center = InputHelper.getCenter();
 
 		this.ggLogo = new GuiTexture(Dim2D.build().scale(0.5F).width(256).height(242).center(true).pos(center).flush(), GILDED_GAMES);
