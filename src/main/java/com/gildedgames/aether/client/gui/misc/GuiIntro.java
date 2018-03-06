@@ -35,17 +35,27 @@ public class GuiIntro extends GuiFrame
 
 	private GuiNextArrow nextArrow;
 
-	private GuiText proudlyPresents;
+	private GuiText proudlyPresents, holdToSkip;
 
 	private GuiTextBox prologue, tip1, tip2, tip3;
 
-	private long timeStarted;
+	private long timeStarted, timeSinceHoldSkip, timeSinceStopSkip;
 
-	private boolean playedMusic, startIntro;
+	private boolean playedMusic, startIntro, holding;
 
 	public GuiIntro()
 	{
 
+	}
+
+	private double getSecondsSinceStopSkip()
+	{
+		return (System.currentTimeMillis() - this.timeSinceStopSkip) / 1000.0D;
+	}
+
+	private double getSecondsSinceHoldSkip()
+	{
+		return (System.currentTimeMillis() - this.timeSinceHoldSkip) / 1000.0D;
 	}
 
 	private double getSecondsSinceStart()
@@ -80,6 +90,12 @@ public class GuiIntro extends GuiFrame
 
 		this.proudlyPresents = new GuiText(Dim2D.build().center(true).pos(center).addY(70).flush(),
 				new Text(new TextComponentString("Proudly Presents..."), 1.0F));
+
+		this.holdToSkip = new GuiText(Dim2D.build().pos(this.width - 65, this.height - 17).flush(),
+				new Text(new TextComponentString("Hold To Skip"), 1.0F));
+
+		this.holdToSkip.setVisible(false);
+
 		this.prologue = new GuiTextBox(Dim2D.build().center(true).pos(center).width(300).addY(30).flush(), false,
 				new Text(new TextComponentString(
 						"200 years after a lone adventurer defeated the tyrannical Sun Spirit, Karthuul, a new traveller is about to enter the Aether…"),
@@ -117,7 +133,7 @@ public class GuiIntro extends GuiFrame
 		this.tip2.setVisible(false);
 		this.tip3.setVisible(false);
 
-		this.addChildren(this.ggLogo, this.proudlyPresents, this.highlands, this.prologue, this.tip1, this.tip2, this.tip3, this.nextArrow);
+		this.addChildren(this.ggLogo, this.proudlyPresents, this.highlands, this.prologue, this.tip1, this.tip2, this.tip3, this.nextArrow, this.holdToSkip);
 	}
 
 	@Override
@@ -136,6 +152,34 @@ public class GuiIntro extends GuiFrame
 			this.nextArrow.setVisible(true);
 
 			return;
+		}
+
+		if (this.getSecondsSinceStart() >= 1)
+		{
+			final float alpha = (float) Math.min(1.0F, this.getSecondsSinceHoldSkip());
+
+			if (this.holding)
+			{
+				this.holdToSkip.setAlpha(alpha);
+			}
+			else
+			{
+				final float combined = (float) Math.max(0.0F, alpha - this.getSecondsSinceStopSkip());
+
+				this.holdToSkip.setAlpha(combined);
+			}
+
+			this.holdToSkip.setVisible(true);
+
+			if (this.holding && this.getSecondsSinceHoldSkip() >= 2.5)
+			{
+				ClientEventHandler.drawBlackFade();
+				Minecraft.getMinecraft().displayGuiScreen(null);
+
+				Minecraft.getMinecraft().getSoundHandler().stopSounds();
+
+				return;
+			}
 		}
 
 		if (this.getSecondsSinceStart() <= 15)
@@ -254,7 +298,24 @@ public class GuiIntro extends GuiFrame
 
 			this.tipIndex++;
 		}
+		else
+		{
+			this.timeSinceHoldSkip = System.currentTimeMillis();
+			this.holding = true;
+		}
 
+	}
+
+	@Override
+	protected void mouseReleased(final int mouseX, final int mouseY, final int state)
+	{
+		super.mouseReleased(mouseX, mouseY, state);
+
+		if (this.startIntro)
+		{
+			this.timeSinceStopSkip = System.currentTimeMillis();
+			this.holding = false;
+		}
 	}
 
 	@Override
