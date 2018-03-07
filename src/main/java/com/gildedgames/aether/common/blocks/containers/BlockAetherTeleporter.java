@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.blocks.containers;
 
-import com.gildedgames.aether.client.ClientEventHandler;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.registry.content.InstancesAether;
@@ -52,7 +51,7 @@ public class BlockAetherTeleporter extends Block
 
 			if (!playerAether.getTeleportingModule().hasPlayedIntro())
 			{
-				ClientEventHandler.DRAW_BLACK_SCREEN = true;
+				//ClientEventHandler.DRAW_BLACK_SCREEN = true;
 			}
 
 			return true;

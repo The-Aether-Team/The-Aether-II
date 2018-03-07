@@ -29,7 +29,7 @@ allprojects {
 
     dependencies {
     	//compile files('libs/Orbis-1.12.2-1.0.10')
-        compile 'com.gildedgames:orbis:1.12.2-1.0.12'
+        compile 'com.gildedgames:orbis:1.12.2-1.0.13'
     }
 }
 
