@@ -239,6 +239,8 @@ tile.aether.structure_builder.name=Structure Builder
 tile.aether.valkyrie_grass.sprout.name=Valkyrie Grass Sprout
 tile.aether.valkyrie_grass.full.name=Valkyrie Grass
 tile.aether.aether_teleporter.name=Aether Teleporter
+tile.aether.thera_dirt.dirt.name=Thera Dirt
+tile.aether.thera_grass.normal.name=Thera Grass
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick

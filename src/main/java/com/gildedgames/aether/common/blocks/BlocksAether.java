@@ -66,6 +66,10 @@ public class BlocksAether
 
 	public static final BlockAetherGrass aether_grass = new BlockAetherGrass();
 
+	public static final BlockTheraGrass thera_grass = new BlockTheraGrass();
+
+	public static final BlockTheraDirt thera_dirt = new BlockTheraDirt();
+
 	public static final BlockHolystone holystone = new BlockHolystone();
 
 	public static final Block holystone_brick = new BlockBuilder(Material.ROCK)
@@ -321,6 +325,8 @@ public class BlocksAether
 		r.register("therawood_planks", therawood_planks.setCreativeTab(CreativeTabsAether.THERA));
 		r.register("therawood_decorative", therawood_decorative.setCreativeTab(CreativeTabsAether.THERA));
 		r.register("therawood_beam", therawood_beam.setCreativeTab(CreativeTabsAether.THERA));
+		r.register("thera_grass", thera_grass.setCreativeTab(CreativeTabsAether.THERA));
+		r.register("thera_dirt", thera_dirt.setCreativeTab(CreativeTabsAether.THERA));
 
 		r.register("aether_dirt", aether_dirt.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 		r.register("aether_grass", aether_grass.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));

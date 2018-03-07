@@ -7,10 +7,7 @@ import com.gildedgames.aether.common.blocks.builder.BlockStructureHint;
 import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
 import com.gildedgames.aether.common.blocks.containers.BlockIncubator;
 import com.gildedgames.aether.common.blocks.decorative.*;
-import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
-import com.gildedgames.aether.common.blocks.natural.BlockAetherDirt;
-import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
-import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
+import com.gildedgames.aether.common.blocks.natural.*;
 import com.gildedgames.aether.common.blocks.natural.plants.*;
 import com.gildedgames.aether.common.entities.blocks.EntityParachute;
 import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
@@ -83,6 +80,12 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.aether_grass, new ItemModelBuilder("grass/")
 				.add(BlockAetherGrass.AETHER.getMeta(), "aether_grass")
 				.add(BlockAetherGrass.ENCHANTED.getMeta(), "enchanted_aether_grass"));
+
+		registerItemModels(BlocksAether.thera_dirt, new ItemModelBuilder("thera_dirt/")
+				.add(BlockTheraDirt.DIRT.getMeta(), "thera_dirt"));
+
+		registerItemModels(BlocksAether.thera_grass, new ItemModelBuilder("thera_grass/")
+				.add(BlockTheraGrass.NORMAL.getMeta(), "thera_grass"));
 
 		registerItemModels(BlocksAether.holystone, new ItemModelBuilder("holystone/")
 				.add(BlockHolystone.NORMAL_HOLYSTONE.getMeta(), "holystone")

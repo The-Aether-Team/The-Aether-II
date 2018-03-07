@@ -1,0 +1,10 @@
+{
+	"variants": {
+		"variant=dirt": [
+			{ "model": "aether:thera_dirt/thera_dirt" },
+			{ "model": "aether:thera_dirt/thera_dirt", "y": 90 },
+			{ "model": "aether:thera_dirt/thera_dirt", "y": 180 },
+			{ "model": "aether:thera_dirt/thera_dirt", "y": 270 }
+		]
+	}
+}
