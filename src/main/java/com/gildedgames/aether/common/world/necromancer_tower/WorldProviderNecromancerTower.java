@@ -24,7 +24,7 @@ public class WorldProviderNecromancerTower extends WorldProviderSurface
 	@Override
 	protected void init()
 	{
-		this.hasSkyLight = false;
+		this.hasSkyLight = true;
 		this.biomeProvider = new BiomeProviderSingle(BiomesAether.INSTANCED_ZONE);
 	}
 
@@ -55,7 +55,7 @@ public class WorldProviderNecromancerTower extends WorldProviderSurface
 	@Override
 	public boolean isSurfaceWorld()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
@@ -91,7 +91,7 @@ public class WorldProviderNecromancerTower extends WorldProviderSurface
 	@Override
 	public boolean isSkyColored()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
@@ -132,9 +132,21 @@ public class WorldProviderNecromancerTower extends WorldProviderSurface
 	}
 
 	@Override
+	public int getMoonPhase(final long worldTime)
+	{
+		return 1;
+	}
+
+	@Override
 	public float calculateCelestialAngle(final long worldTime, final float partialTicks)
 	{
-		return 0.5F;
+		return 0.375F;
+	}
+
+	@Override
+	public boolean canDoRainSnowIce(final net.minecraft.world.chunk.Chunk chunk)
+	{
+		return false;
 	}
 
 }
