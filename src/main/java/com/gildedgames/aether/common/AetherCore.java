@@ -18,6 +18,8 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -93,16 +95,21 @@ public class AetherCore
 		AetherAPI.registerProvider(AetherCore.PROXY);
 	}
 
-	@EventHandler
-	public void onFMLPreInit(final FMLPreInitializationEvent event)
-	{
-		Minecraft.getMinecraft().loadingScreen = new BlackScreenRenderer(Minecraft.getMinecraft(), Minecraft.getMinecraft().loadingScreen);
+    @EventHandler
+    public void onFMLPreInit(final FMLPreInitializationEvent event)
+    {
+        AetherCore.CONFIG = new ConfigAether(event.getSuggestedConfigurationFile());
+        AetherCore.PROXY.preInit(event);
 
-		AetherCore.CONFIG = new ConfigAether(event.getSuggestedConfigurationFile());
-		AetherCore.PROXY.preInit(event);
+        AetherCore.SPAWN_REGISTRY.registerAetherSpawnHandlers();
+    }
 
-		AetherCore.SPAWN_REGISTRY.registerAetherSpawnHandlers();
-	}
+    @EventHandler
+    @SideOnly(Side.CLIENT)
+    public void onFMLPreInitClient(final FMLPreInitializationEvent event)
+    {
+        Minecraft.getMinecraft().loadingScreen = new BlackScreenRenderer(Minecraft.getMinecraft(), Minecraft.getMinecraft().loadingScreen);
+    }
 
 	@EventHandler
 	public void onFMLInit(final FMLInitializationEvent event)
