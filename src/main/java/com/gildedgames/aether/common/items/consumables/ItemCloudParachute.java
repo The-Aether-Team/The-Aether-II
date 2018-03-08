@@ -41,6 +41,7 @@ public class ItemCloudParachute extends Item
 	}
 
 	@Override
+    @SideOnly(Side.CLIENT)
 	public void addInformation(final ItemStack stack, @Nullable final World worldIn, final List<String> tooltip, final ITooltipFlag flagIn)
 	{
 		tooltip.add(I18n.format("cloudParachute.ability") + "\247r" + I18n.format(

@@ -23,6 +23,7 @@ import com.gildedgames.aether.common.registry.content.GenerationAether;
 import com.gildedgames.aether.common.registry.content.MaterialsAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.util.selectors.RandomItemSelector;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -31,11 +32,14 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 @Mod.EventBusSubscriber()
 public class ItemsAether
@@ -216,17 +220,24 @@ public class ItemsAether
 			soaring_stone = new ItemCompanion();
 
 	public static final ItemCompanion frostpine_totem = new ItemCompanion(),
-			kraisith_capsule = new ItemCompanion((stack, tooltip, advanced) ->
-			{
-				tooltip.add(TextFormatting.RED + "\u2022 " + "10 Health");
-				tooltip.add(TextFormatting.BLUE + "\u2022 " + "0.5 Attack Damage");
-				tooltip.add(TextFormatting.BLUE + "\u2022 " + "Slows Enemies");
+			kraisith_capsule = new ItemCompanion(new InformationProvider() {
+				@Override
+				@SideOnly(Side.CLIENT)
+				public void addInformation(ItemStack stack, List<String> tooltip, ITooltipFlag flag) {
+					tooltip.add(TextFormatting.RED + "\u2022 " + "10 Health");
+					tooltip.add(TextFormatting.BLUE + "\u2022 " + "0.5 Attack Damage");
+					tooltip.add(TextFormatting.BLUE + "\u2022 " + "Slows Enemies");
+				}
 			}),
 			orb_of_arkenzus = new ItemCompanion(),
-			fangrin_capsule = new ItemCompanion((stack, tooltip, advanced) ->
-			{
-				tooltip.add(TextFormatting.RED + "\u2022 " + "10 Health");
-				tooltip.add(TextFormatting.BLUE + "\u2022 " + "1.5 Attack Damage");
+			fangrin_capsule = new ItemCompanion(new InformationProvider() {
+				@Override
+				@SideOnly(Side.CLIENT)
+				public void addInformation(ItemStack stack, List<String> tooltip, ITooltipFlag flag) {
+					tooltip.add(TextFormatting.RED + "\u2022 " + "10 Health");
+					tooltip.add(TextFormatting.BLUE + "\u2022 " + "1.5 Attack Damage");
+
+				}
 			}),
 			death_seal = new ItemDeathSeal();
 
