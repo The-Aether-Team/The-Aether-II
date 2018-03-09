@@ -78,6 +78,11 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 		return this.playedIntro;
 	}
 
+	public void setPlayedIntro(final boolean playedIntro)
+	{
+		this.playedIntro = playedIntro;
+	}
+
 	@SideOnly(Side.CLIENT)
 	private void onUpdateClient()
 	{
@@ -89,7 +94,6 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 			NetworkingAether.sendPacketToServer(new PacketSetPlayedIntro(true));
 
 			ClientEventHandler.DRAW_BLACK_SCREEN = false;
-
 		}
 	}
 
