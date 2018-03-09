@@ -18,6 +18,10 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements TileE
 	@Override
 	public void onInteract(final EntityPlayer player)
 	{
+		if (!hasLinkedController())
+		{
+			return;
+		}
 		final TileEntity entity = this.world.getTileEntity(this.controllerPos);
 
 		if (entity instanceof TileEntityMultiblockController)
@@ -34,6 +38,10 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements TileE
 	@Override
 	public void onDestroyed()
 	{
+		if (!hasLinkedController())
+		{
+			return;
+		}
 		final TileEntity entity = this.world.getTileEntity(this.controllerPos);
 
 		if (entity instanceof TileEntityMultiblockInterface)
@@ -50,6 +58,10 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements TileE
 	@Override
 	public ItemStack getPickedStack(final World world, final BlockPos pos, final IBlockState state)
 	{
+		if (!hasLinkedController())
+		{
+			return ItemStack.EMPTY;
+		}
 		final TileEntity entity = this.world.getTileEntity(this.controllerPos);
 
 		if (entity instanceof TileEntityMultiblockInterface)
@@ -62,7 +74,7 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements TileE
 					+ this.controllerPos.toString());
 		}
 
-		return null;
+		return ItemStack.EMPTY;
 	}
 
 	public void linkController(final BlockPos controllerPos)
@@ -74,6 +86,8 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements TileE
 	{
 		return this.controllerPos;
 	}
+
+	public boolean hasLinkedController() { return this.controllerPos != null; }
 
 	@Override
 	public void readFromNBT(final NBTTagCompound compound)

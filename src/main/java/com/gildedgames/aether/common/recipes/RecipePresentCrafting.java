@@ -4,21 +4,28 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.blocks.ItemBlockPresent;
 import com.gildedgames.aether.common.items.misc.ItemWrappingPaper;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import javax.annotation.Nullable;
+import java.util.Collection;
 
 //TODO:
-public class RecipePresentCrafting implements IRecipe
+public class RecipePresentCrafting extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe
 {
+	private static final NonNullList<Ingredient> ingredients = CraftingHelper.parseShaped("PPP", "P P", "PPP", 'P', new ItemStack(ItemsAether.wrapping_paper)).input;
 
 	@Override
 	public boolean matches(final InventoryCrafting inventory, final World world)
@@ -78,13 +85,19 @@ public class RecipePresentCrafting implements IRecipe
 	@Override
 	public boolean canFit(final int width, final int height)
 	{
-		return false;
+		return width >= 3 && height >= 3;
 	}
 
 	@Override
 	public ItemStack getRecipeOutput()
 	{
-		return ItemStack.EMPTY;
+		return new ItemStack(BlocksAether.present);
+	}
+
+	@Override
+	public NonNullList<Ingredient> getIngredients()
+	{
+		return ingredients;
 	}
 
 	@Override
@@ -100,24 +113,5 @@ public class RecipePresentCrafting implements IRecipe
 		}
 
 		return stacks;
-	}
-
-	@Override
-	public IRecipe setRegistryName(final ResourceLocation name)
-	{
-		return null;
-	}
-
-	@Nullable
-	@Override
-	public ResourceLocation getRegistryName()
-	{
-		return null;
-	}
-
-	@Override
-	public Class<IRecipe> getRegistryType()
-	{
-		return null;
 	}
 }
