@@ -5,7 +5,7 @@ import com.gildedgames.aether.client.gui.dialog.GuiNextArrow;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis.client.gui.data.Text;
-import com.gildedgames.orbis.client.gui.util.GuiFrame;
+import com.gildedgames.orbis.client.gui.util.GuiFrameNoContainer;
 import com.gildedgames.orbis.client.gui.util.GuiText;
 import com.gildedgames.orbis.client.gui.util.GuiTextBox;
 import com.gildedgames.orbis.client.gui.util.GuiTexture;
@@ -21,7 +21,7 @@ import org.lwjgl.opengl.GL11;
 
 import java.io.IOException;
 
-public class GuiIntro extends GuiFrame
+public class GuiIntro extends GuiFrameNoContainer
 {
 	private static final ResourceLocation GILDED_GAMES = AetherCore.getResource("textures/gui/intro/gg_logo.png");
 
@@ -318,9 +318,4 @@ public class GuiIntro extends GuiFrame
 		}
 	}
 
-	@Override
-	protected void drawGuiContainerBackgroundLayer(final float partialTicks, final int mouseX, final int mouseY)
-	{
-
-	}
 }

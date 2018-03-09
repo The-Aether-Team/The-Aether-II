@@ -1,9 +1,9 @@
 package com.gildedgames.aether.client.gui.misc;
 
-import com.gildedgames.orbis.client.gui.util.GuiFrame;
+import com.gildedgames.orbis.client.gui.util.GuiFrameNoContainer;
 import net.minecraft.client.renderer.GlStateManager;
 
-public class GuiBlackScreen extends GuiFrame
+public class GuiBlackScreen extends GuiFrameNoContainer
 {
 	@Override
 	public void init()
@@ -25,9 +25,4 @@ public class GuiBlackScreen extends GuiFrame
 		GlStateManager.popMatrix();
 	}
 
-	@Override
-	protected void drawGuiContainerBackgroundLayer(final float partialTicks, final int mouseX, final int mouseY)
-	{
-
-	}
 }

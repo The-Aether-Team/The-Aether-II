@@ -31,6 +31,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.GuiDownloadTerrain;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
@@ -90,7 +91,15 @@ public class ClientEventHandler
 		{
 			if (DRAW_BLACK_SCREEN)
 			{
+				GlStateManager.pushMatrix();
+
+				GlStateManager.disableDepth();
+
 				GuiUtils.drawGradientRect(0, 0, (int) InputHelper.getScreenWidth(), (int) InputHelper.getScreenHeight(), 0xFF000000, 0xFF000000);
+
+				GlStateManager.enableDepth();
+
+				GlStateManager.popMatrix();
 			}
 
 			if (DRAWING_BLACK_FADE)
@@ -104,7 +113,15 @@ public class ClientEventHandler
 
 				final int bg = GuiFrameUtils.changeAlpha(0xFF000000, (int) (bgAlpha * 255));
 
+				GlStateManager.pushMatrix();
+
+				GlStateManager.disableDepth();
+
 				GuiUtils.drawGradientRect(0, 0, (int) InputHelper.getScreenWidth(), (int) InputHelper.getScreenHeight(), bg, bg);
+
+				GlStateManager.enableDepth();
+
+				GlStateManager.popMatrix();
 
 				if (getSecondsSinceStart() >= 10.0D)
 				{

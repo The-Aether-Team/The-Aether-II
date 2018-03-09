@@ -8,6 +8,7 @@ import com.gildedgames.aether.common.capabilities.entity.player.modules.*;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketEquipment;
 import com.gildedgames.aether.common.network.packets.PacketMarkPlayerDeath;
+import com.gildedgames.aether.common.network.packets.PacketSetPlayedIntro;
 import com.gildedgames.orbis.api.util.mc.NBTHelper;
 import com.google.common.collect.Lists;
 import net.minecraft.block.material.Material;
@@ -130,6 +131,7 @@ public class PlayerAether implements IPlayerAether
 	public void sendFullUpdate()
 	{
 		NetworkingAether.sendPacketToPlayer(new PacketMarkPlayerDeath(this.hasDiedInAetherBefore()), (EntityPlayerMP) this.getEntity());
+		NetworkingAether.sendPacketToPlayer(new PacketSetPlayedIntro(this.getTeleportingModule().hasPlayedIntro()), (EntityPlayerMP) this.getEntity());
 	}
 
 	public void onUpdate(final LivingUpdateEvent event)
