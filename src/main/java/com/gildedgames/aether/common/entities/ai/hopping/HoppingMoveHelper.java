@@ -5,7 +5,6 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityMoveHelper;
 import net.minecraft.util.SoundEvent;
 
-import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public class HoppingMoveHelper extends EntityMoveHelper

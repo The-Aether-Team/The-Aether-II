@@ -11,7 +11,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 
 public class PerformanceIngame extends Gui
 {

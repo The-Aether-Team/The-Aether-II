@@ -2,7 +2,6 @@ package com.gildedgames.aether.common.entities.living.passive;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;

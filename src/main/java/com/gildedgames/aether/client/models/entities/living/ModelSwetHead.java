@@ -1,6 +1,5 @@
 package com.gildedgames.aether.client.models.entities.living;
 
-import com.gildedgames.aether.common.entities.ai.hopping.HoppingMoveHelper;
 import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;

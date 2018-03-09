@@ -98,12 +98,12 @@ public class GuiIntro extends GuiFrame
 
 		this.prologue = new GuiTextBox(Dim2D.build().center(true).pos(center).width(300).addY(30).flush(), false,
 				new Text(new TextComponentString(
-						"200 years after a lone adventurer defeated the tyrannical Sun Spirit, Karthuul, a new traveller is about to enter the Aether…"),
+						"200 years after a lone adventurer defeated the tyrannical Sun Spirit, Karthuul, a new traveller is about to enter the Aether..."),
 						1.0F));
 
 		this.tip1 = new GuiTextBox(Dim2D.build().center(true).pos(center).width(300).flush(), false,
 				new Text(new TextComponentString(
-						"The world you’re about to enter is completely separate from Minecraft, in both lore, time and space."),
+						"The world you're about to enter is completely separate from Minecraft, in both lore, time and space."),
 						1.0F));
 
 		this.tip2 = new GuiTextBox(Dim2D.build().center(true).pos(center).width(300).flush(), false,
@@ -113,7 +113,7 @@ public class GuiIntro extends GuiFrame
 
 		this.tip3 = new GuiTextBox(Dim2D.build().center(true).pos(center).width(300).flush(), false,
 				new Text(new TextComponentString(
-						"Let the journey begin…"),
+						"Let the journey begin..."),
 						1.0F));
 
 		this.ggLogo.setVisible(false);

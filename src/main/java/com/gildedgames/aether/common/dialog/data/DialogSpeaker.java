@@ -3,10 +3,8 @@ package com.gildedgames.aether.common.dialog.data;
 import com.gildedgames.aether.api.dialog.IDialogSlide;
 import com.gildedgames.aether.api.dialog.IDialogSpeaker;
 import com.google.gson.annotations.SerializedName;
-import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 

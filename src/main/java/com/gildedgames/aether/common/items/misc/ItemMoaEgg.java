@@ -80,6 +80,7 @@ public class ItemMoaEgg extends Item
 	}
 
 	@Override
+    @SideOnly(Side.CLIENT)
 	public void addInformation(final ItemStack stack, final World world, final List<String> creativeList, final ITooltipFlag flag)
 	{
 		final MoaGenePool genePool = ItemMoaEgg.getGenePool(stack);

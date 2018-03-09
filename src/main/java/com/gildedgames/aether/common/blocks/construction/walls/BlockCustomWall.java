@@ -8,7 +8,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -42,7 +42,7 @@ public class BlockCustomWall extends BlockWall
 	@Override
 	public String getLocalizedName()
 	{
-		return I18n.translateToLocal(this.getUnlocalizedName() + ".name");
+		return new TextComponentTranslation(this.getUnlocalizedName() + ".name").getFormattedText();
 	}
 
 	@Override

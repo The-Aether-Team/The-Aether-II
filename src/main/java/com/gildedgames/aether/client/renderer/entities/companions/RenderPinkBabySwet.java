@@ -1,6 +1,5 @@
 package com.gildedgames.aether.client.renderer.entities.companions;
 
-import com.gildedgames.aether.client.renderer.entities.living.layers.LayerSwetJelly;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.living.companions.EntityPinkBabySwet;
 import net.minecraft.client.model.ModelSlime;
