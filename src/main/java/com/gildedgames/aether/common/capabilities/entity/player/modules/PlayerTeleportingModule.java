@@ -22,6 +22,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.function.Supplier;
 
@@ -76,10 +78,19 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 		return this.playedIntro;
 	}
 
-	public void setPlayedIntro(final boolean playedIntro)
-	{
-		this.playedIntro = playedIntro;
-	}
+    @SideOnly(Side.CLIENT)
+    private void onUpdateClient() {
+        if (Minecraft.getMinecraft().currentScreen == null && !this.playedIntro)
+        {
+            Minecraft.getMinecraft().displayGuiScreen(new GuiIntro());
+
+            this.playedIntro = true;
+            NetworkingAether.sendPacketToServer(new PacketSetPlayedIntro(true));
+            
+            ClientEventHandler.DRAW_BLACK_SCREEN = false;
+
+        }
+    }
 
 	@Override
 	public void onUpdate()
@@ -88,13 +99,7 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 		{
 			if (Minecraft.getMinecraft().currentScreen == null && !this.playedIntro)
 			{
-				Minecraft.getMinecraft().displayGuiScreen(new GuiIntro());
-
-				this.playedIntro = true;
-				NetworkingAether.sendPacketToServer(new PacketSetPlayedIntro(true));
-
-				ClientEventHandler.DRAW_BLACK_SCREEN = false;
-			}
+                onUpdateClient();
 		}
 
 		this.prevTimeInPortal = this.timeInPortal;

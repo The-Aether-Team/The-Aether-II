@@ -1,8 +1,6 @@
 package com.gildedgames.aether.common.dialog.data;
 
-import com.gildedgames.aether.api.dialog.IDialogAction;
 import com.gildedgames.aether.api.dialog.IDialogSlideRenderer;
-import com.gildedgames.aether.common.dialog.data.actions.DialogActionExit;
 import com.gildedgames.aether.common.dialog.data.slide_renderers.DialogSlideRendererStatic;
 import com.google.gson.*;
 

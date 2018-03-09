@@ -3,7 +3,6 @@ package com.gildedgames.aether.common.dialog.data;
 import com.gildedgames.aether.api.dialog.IDialogSlide;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
