@@ -78,19 +78,20 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 		return this.playedIntro;
 	}
 
-    @SideOnly(Side.CLIENT)
-    private void onUpdateClient() {
-        if (Minecraft.getMinecraft().currentScreen == null && !this.playedIntro)
-        {
-            Minecraft.getMinecraft().displayGuiScreen(new GuiIntro());
+	@SideOnly(Side.CLIENT)
+	private void onUpdateClient()
+	{
+		if (Minecraft.getMinecraft().currentScreen == null && !this.playedIntro)
+		{
+			Minecraft.getMinecraft().displayGuiScreen(new GuiIntro());
 
-            this.playedIntro = true;
-            NetworkingAether.sendPacketToServer(new PacketSetPlayedIntro(true));
-            
-            ClientEventHandler.DRAW_BLACK_SCREEN = false;
+			this.playedIntro = true;
+			NetworkingAether.sendPacketToServer(new PacketSetPlayedIntro(true));
 
-        }
-    }
+			ClientEventHandler.DRAW_BLACK_SCREEN = false;
+
+		}
+	}
 
 	@Override
 	public void onUpdate()
@@ -99,7 +100,8 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 		{
 			if (Minecraft.getMinecraft().currentScreen == null && !this.playedIntro)
 			{
-                onUpdateClient();
+				onUpdateClient();
+			}
 		}
 
 		this.prevTimeInPortal = this.timeInPortal;
