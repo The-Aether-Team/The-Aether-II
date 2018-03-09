@@ -68,6 +68,8 @@ public class GuiDialogViewer extends GuiContainer implements IDialogChangeListen
 
 		GlStateManager.pushMatrix();
 
+        GlStateManager.disableDepth();
+
 		GlStateManager.translate(0, 0, 100F);
 		GlStateManager.color(1.0F, 1.0F, 1.0F);
 
@@ -82,11 +84,15 @@ public class GuiDialogViewer extends GuiContainer implements IDialogChangeListen
 
 		super.drawScreen(mouseX, mouseY, partialTicks);
 
+        GlStateManager.enableDepth();
+
 		GlStateManager.popMatrix();
 
 		if (!this.controller.isNodeFinished() || (this.controller.isNodeFinished() && this.node.getButtons().isEmpty()))
 		{
 			GlStateManager.pushMatrix();
+
+            GlStateManager.disableDepth();
 
 			final double time = (Sys.getTime() * 1000) / Sys.getTimerResolution();
 			final double timePassed = time - this.prevTime;
@@ -130,6 +136,8 @@ public class GuiDialogViewer extends GuiContainer implements IDialogChangeListen
 						this.bottomTextBox.x + this.bottomTextBox.width,
 						this.bottomTextBox.y + this.bottomTextBox.height - 20, 0, 0, 13, 12, 13, 12);
 			}
+
+			GlStateManager.enableDepth();
 
 			GlStateManager.popMatrix();
 		}
