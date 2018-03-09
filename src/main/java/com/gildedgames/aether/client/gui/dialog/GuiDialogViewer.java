@@ -6,10 +6,10 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.containers.ContainerDialogController;
 import com.gildedgames.aether.common.entities.living.npc.EntityEdison;
 import com.gildedgames.aether.common.entities.living.npc.EntityNPC;
+import com.gildedgames.orbis.client.gui.util.GuiFrameNoContainer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 
-public class GuiDialogViewer extends GuiContainer implements IDialogChangeListener {
+public class GuiDialogViewer extends GuiFrameNoContainer implements IDialogChangeListener {
 
     private static final ResourceLocation NEXT_ARROW = AetherCore.getResource("textures/gui/conversation/next_arrow.png");
 
@@ -130,11 +130,6 @@ public class GuiDialogViewer extends GuiContainer implements IDialogChangeListen
 
     @Override
     public void drawDefaultBackground() {
-
-    }
-
-    @Override
-    protected void drawGuiContainerBackgroundLayer(final float partialTicks, final int mouseX, final int mouseY) {
 
     }
 
@@ -296,5 +291,10 @@ public class GuiDialogViewer extends GuiContainer implements IDialogChangeListen
     @Override
     public void onSceneClosed() {
         Minecraft.getMinecraft().displayGuiScreen(null);
+    }
+
+    @Override
+    public void init() {
+
     }
 }

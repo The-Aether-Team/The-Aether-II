@@ -4,7 +4,6 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.blocks.ItemBlockPresent;
 import com.gildedgames.aether.common.items.misc.ItemWrappingPaper;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -15,12 +14,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.crafting.CraftingHelper;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-
-import java.util.Collection;
 
 //TODO:
 public class RecipePresentCrafting extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe

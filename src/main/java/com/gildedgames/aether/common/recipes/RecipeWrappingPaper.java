@@ -10,15 +10,11 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-
-import javax.annotation.Nullable;
-import java.util.Arrays;
 
 //TODO: COMPLETELY WRONG, RECIPE SYSTEM CHANGED
 public class RecipeWrappingPaper extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe
