@@ -7,19 +7,27 @@ import net.minecraft.util.text.TextComponentString;
 import org.apache.commons.lang3.Validate;
 
 import javax.annotation.Nonnull;
+import java.util.Collection;
 
 public class DialogButton implements IDialogButton
 {
 	private final String label;
 
-	private final IDialogAction action;
+	private final Collection<IDialogAction> actions;
 
-	public DialogButton(String label, IDialogAction action)
+	public DialogButton(final String label, final Collection<IDialogAction> actions)
 	{
-		Validate.notNull(action, "Action is null");
+		Validate.notNull(actions, "Action is null");
 
 		this.label = label;
-		this.action = action;
+		this.actions = actions;
+	}
+
+	@Nonnull
+	@Override
+	public String getLabel()
+	{
+		return this.label;
 	}
 
 	@Nonnull
@@ -31,8 +39,8 @@ public class DialogButton implements IDialogButton
 
 	@Nonnull
 	@Override
-	public IDialogAction getAction()
+	public Collection<IDialogAction> getActions()
 	{
-		return this.action;
+		return this.actions;
 	}
 }

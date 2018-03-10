@@ -1,14 +1,21 @@
 package com.gildedgames.aether.api.dialog;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Controls the progression and displaying of a scene to the player.
  */
 public interface IDialogController
 {
+	@Nullable
+	Entity getTalkingEntity();
+
+	void setTalkingEntity(Entity entity);
+
 	/**
 	 * Adds a {@link IDialogChangeListener} to this controller. All listeners are removed
 	 * when the scene is changed.

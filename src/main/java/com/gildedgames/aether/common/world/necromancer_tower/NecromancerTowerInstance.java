@@ -4,6 +4,7 @@ import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.registry.content.GenerationAether;
 import com.gildedgames.orbis.api.core.CreationData;
 import com.gildedgames.orbis.api.core.PlacedBlueprint;
+import com.gildedgames.orbis.api.util.io.NBTFunnel;
 import com.gildedgames.orbis.api.util.mc.BlockPosDimension;
 import com.gildedgames.orbis.api.util.mc.NBTHelper;
 import com.gildedgames.orbis.api.world.instances.IInstance;
@@ -30,6 +31,8 @@ public class NecromancerTowerInstance implements IInstance
 	private int dimensionId;
 
 	private PlacedBlueprint tower;
+
+	private World world;
 
 	@SuppressWarnings("unused")
 	private NecromancerTowerInstance()
@@ -98,19 +101,27 @@ public class NecromancerTowerInstance implements IInstance
 	@Override
 	public void write(final NBTTagCompound output)
 	{
+		final NBTFunnel funnel = new NBTFunnel(output);
+
 		output.setTag("outsideEntrance", NBTHelper.write(this.outsideEntrance));
 		output.setTag("insideEntrance", NBTHelper.write(this.insideEntrance));
 
 		output.setInteger("dimensionId", this.dimensionId);
+
+		funnel.set("tower", this.tower);
 	}
 
 	@Override
 	public void read(final NBTTagCompound input)
 	{
+		final NBTFunnel funnel = new NBTFunnel(input);
+
 		this.outsideEntrance = NBTHelper.read(input.getCompoundTag("outsideEntrance"));
 		this.insideEntrance = NBTHelper.read(input.getCompoundTag("insideEntrance"));
 
 		this.dimensionId = input.getInteger("dimensionId");
+
+		this.tower = funnel.get("tower");
 	}
 
 	@Override

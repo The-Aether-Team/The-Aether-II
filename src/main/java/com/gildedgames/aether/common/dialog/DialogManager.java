@@ -5,6 +5,7 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.dialog.data.*;
 import com.gildedgames.aether.common.dialog.data.actions.DialogActionExit;
 import com.gildedgames.aether.common.dialog.data.actions.DialogActionNavigate;
+import com.gildedgames.aether.common.dialog.data.actions.DialogActionNecromancerGoUpTower;
 import com.gildedgames.aether.common.dialog.data.slide_renderers.DialogSlideRendererStatic;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -37,7 +38,7 @@ public class DialogManager implements IDialogManager
 
 	private final Gson gson;
 
-	private boolean allowCaching;
+	private final boolean allowCaching;
 
 	public DialogManager()
 	{
@@ -48,7 +49,7 @@ public class DialogManager implements IDialogManager
 	 * Creates an instance of this dialog manager with caching enabled or disabled
 	 * @param allowCaching Controls whether or not caching is enabled. Useful for debugging.
 	 */
-	public DialogManager(boolean allowCaching)
+	public DialogManager(final boolean allowCaching)
 	{
 		this.allowCaching = allowCaching;
 
@@ -72,6 +73,7 @@ public class DialogManager implements IDialogManager
 
 		builder.registerTypeAdapter(DialogActionExit.class, new DialogActionExit.Deserializer());
 		builder.registerTypeAdapter(DialogActionNavigate.class, new DialogActionNavigate.Deserializer());
+		builder.registerTypeAdapter(DialogActionNecromancerGoUpTower.class, new DialogActionNecromancerGoUpTower.Deserializer());
 
 		builder.registerTypeAdapter(IDialogSlideRenderer.class, new DialogSlideRendererDeserializer());
 
@@ -88,7 +90,7 @@ public class DialogManager implements IDialogManager
 	}
 
 	@Override
-	public Optional<IDialogSpeaker> getSpeaker(ResourceLocation resource)
+	public Optional<IDialogSpeaker> getSpeaker(final ResourceLocation resource)
 	{
 		if (this.allowCaching && this.cachedSpeakers.containsKey(resource))
 		{
@@ -106,7 +108,7 @@ public class DialogManager implements IDialogManager
 				this.cachedSpeakers.put(resource, speaker);
 			}
 		}
-		catch (IOException e)
+		catch (final IOException e)
 		{
 			AetherCore.LOGGER.error("Failed to load dialog speaker: {}", resource, e);
 
@@ -117,7 +119,7 @@ public class DialogManager implements IDialogManager
 	}
 
 	@Override
-	public Optional<IDialogScene> getScene(ResourceLocation resource)
+	public Optional<IDialogScene> getScene(final ResourceLocation resource)
 	{
 		if (this.allowCaching && this.cachedScenes.containsKey(resource))
 		{
@@ -135,7 +137,7 @@ public class DialogManager implements IDialogManager
 				this.cachedScenes.put(resource, scene);
 			}
 		}
-		catch (IOException e)
+		catch (final IOException e)
 		{
 			AetherCore.LOGGER.error("Failed to load dialog scene: {}", resource, e);
 
@@ -146,7 +148,7 @@ public class DialogManager implements IDialogManager
 	}
 
 	@Override
-	public Optional<IDialogSlide> findSlide(String slideAddress, IDialogSpeaker speaker)
+	public Optional<IDialogSlide> findSlide(final String slideAddress, final IDialogSpeaker speaker)
 	{
 		if (speaker == null || slideAddress == null || !speaker.getSlides().isPresent() || !speaker.getSlides().get().containsKey(slideAddress))
 		{
@@ -157,7 +159,7 @@ public class DialogManager implements IDialogManager
 	}
 
 	@Override
-	public Optional<IDialogSlideRenderer> findRenderer(String type)
+	public Optional<IDialogSlideRenderer> findRenderer(final String type)
 	{
 		if (type == null || !this.registeredRenders.containsKey(type))
 		{
@@ -167,9 +169,9 @@ public class DialogManager implements IDialogManager
 		return Optional.of(this.registeredRenders.get(type));
 	}
 
-	private IDialogScene loadScene(ResourceLocation resource) throws IOException
+	private IDialogScene loadScene(final ResourceLocation resource) throws IOException
 	{
-		String path = "/assets/" + resource.getResourceDomain() + "/dialog/" + resource.getResourcePath() + ".json";
+		final String path = "/assets/" + resource.getResourceDomain() + "/dialog/" + resource.getResourcePath() + ".json";
 
 		AetherCore.LOGGER.info("Loading dialog scene from file {}", path);
 
@@ -182,9 +184,9 @@ public class DialogManager implements IDialogManager
 		}
 	}
 
-	private IDialogSpeaker loadSpeaker(ResourceLocation resource) throws IOException
+	private IDialogSpeaker loadSpeaker(final ResourceLocation resource) throws IOException
 	{
-		String path = resource.getResourcePath();
+		final String path = resource.getResourcePath();
 		String pathWithoutSlide = path;
 
 		if (path.contains("#"))
@@ -192,7 +194,7 @@ public class DialogManager implements IDialogManager
 			pathWithoutSlide = path.replace(path.substring(path.indexOf("#"), path.length()), "");
 		}
 
-		String speakerPath = "/assets/" + resource.getResourceDomain() + "/dialog/speakers/" + pathWithoutSlide + ".json";
+		final String speakerPath = "/assets/" + resource.getResourceDomain() + "/dialog/speakers/" + pathWithoutSlide + ".json";
 
 		AetherCore.LOGGER.info("Loading dialog speaker from file {}", speakerPath);
 
@@ -208,7 +210,7 @@ public class DialogManager implements IDialogManager
 	@SideOnly(Side.CLIENT)
 	public void attachReloadListener()
 	{
-		IResourceManager resManager = Minecraft.getMinecraft().getResourceManager();
+		final IResourceManager resManager = Minecraft.getMinecraft().getResourceManager();
 
 		if (resManager instanceof IReloadableResourceManager)
 		{
@@ -221,13 +223,13 @@ public class DialogManager implements IDialogManager
 	{
 		private final DialogManager manager;
 
-		public ReloadListener(DialogManager manager)
+		public ReloadListener(final DialogManager manager)
 		{
 			this.manager = manager;
 		}
 
 		@Override
-		public void onResourceManagerReload(IResourceManager resourceManager)
+		public void onResourceManagerReload(final IResourceManager resourceManager)
 		{
 			this.manager.cachedScenes.clear();
 		}

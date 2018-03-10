@@ -6,7 +6,7 @@
 				{ "speaker": "aether:edison", "text": "edison.them.busy" }
 			],
 			"buttons": [
-				{ "label": "edison.us.goodbye", "action": { "type": "exit" } }
+				{ "label": "edison.us.goodbye", "actions": [ { "type": "exit" } ] }
 			]
 		}
 	]

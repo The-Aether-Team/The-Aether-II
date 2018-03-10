@@ -28,8 +28,8 @@ allprojects {
     }
 
     dependencies {
-    	//compile files('libs/Orbis-1.12.2-1.0.19')
-        compile 'com.gildedgames:orbis:1.12.2-1.0.19'
+    	//compile files('libs/Orbis-1.12.2-1.0.20')
+        compile 'com.gildedgames:orbis:1.12.2-1.0.20'
     }
 }
 

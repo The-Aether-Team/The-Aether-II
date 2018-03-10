@@ -6,9 +6,11 @@ import com.gildedgames.aether.client.gui.dialog.GuiDialogViewer;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.network.packets.dialog.PacketActivateButton;
 import com.gildedgames.aether.common.network.packets.dialog.PacketCloseDialog;
 import com.gildedgames.aether.common.network.packets.dialog.PacketOpenDialog;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
@@ -16,6 +18,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.Validate;
 
+import javax.annotation.Nullable;
 import java.util.*;
 
 public class PlayerDialogModule extends PlayerAetherModule implements IDialogController
@@ -23,6 +26,8 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 	private final Set<IDialogChangeListener> listeners = new HashSet<>();
 
 	private SceneInstance sceneInstance;
+
+	private Entity talkingEntity;
 
 	public PlayerDialogModule(final PlayerAether playerAether)
 	{
@@ -41,6 +46,19 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 		{
 			listener.onDialogChanged();
 		}
+	}
+
+	@Nullable
+	@Override
+	public Entity getTalkingEntity()
+	{
+		return this.talkingEntity;
+	}
+
+	@Override
+	public void setTalkingEntity(final Entity entity)
+	{
+		this.talkingEntity = entity;
 	}
 
 	@Override
@@ -110,8 +128,17 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 		// Make sure this node actually contains the button
 		Validate.isTrue(this.sceneInstance.getNode().getButtons().contains(button));
 
-		final IDialogAction action = button.getAction();
-		action.performAction(this);
+		if (this.getWorld().isRemote)
+		{
+			NetworkingAether.sendPacketToServer(new PacketActivateButton(button.getLabel()));
+		}
+
+		final Collection<IDialogAction> actions = button.getActions();
+
+		for (final IDialogAction action : actions)
+		{
+			action.performAction(this);
+		}
 	}
 
 	@Override

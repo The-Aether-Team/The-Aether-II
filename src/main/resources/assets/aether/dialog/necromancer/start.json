@@ -7,7 +7,10 @@
 				{ "speaker": "aether:necromancer", "text": "necromancer.them.start2" }
 			],
 			"buttons": [
-				{ "label": "necromancer.us.leadtheway", "action": { "type": "exit" } }
+				{ "label": "necromancer.us.leadtheway", "actions": [
+					{ "type": "exit" },
+					{ "type": "go_up_tower" }
+				] }
 			]
 		}
 	]

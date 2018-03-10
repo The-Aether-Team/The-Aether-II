@@ -18,9 +18,9 @@ public class DialogSchema implements IDialogScene
 	private Collection<DialogNodeSchema> nodes;
 
 	@Override
-	public Optional<IDialogNode> getNode(String id)
+	public Optional<IDialogNode> getNode(final String id)
 	{
-		for (DialogNodeSchema node : this.nodes)
+		for (final DialogNodeSchema node : this.nodes)
 		{
 			if (id.equals(node.getIdentifier()))
 			{
@@ -41,17 +41,17 @@ public class DialogSchema implements IDialogScene
 
 	private class DialogNodeSchema implements IDialogNode
 	{
+		@SerializedName("buttons")
+		private final Collection<DialogButtonSchema> buttons = null;
+
+		@SerializedName("end_actions")
+		private final Collection<IDialogAction> actions = null;
+
 		@SerializedName("name")
 		private String name;
 
 		@SerializedName("lines")
 		private List<DialogLineSchema> lines;
-
-		@SerializedName("buttons")
-		private Collection<DialogButtonSchema> buttons = null;
-
-		@SerializedName("end_actions")
-		private Collection<IDialogAction> actions = null;
 
 		@Nonnull
 		@Override
@@ -87,8 +87,15 @@ public class DialogSchema implements IDialogScene
 		@SerializedName("label")
 		private String label;
 
-		@SerializedName("action")
-		private IDialogAction action;
+		@SerializedName("actions")
+		private Collection<IDialogAction> actions;
+
+		@Nonnull
+		@Override
+		public String getLabel()
+		{
+			return this.label;
+		}
 
 		@Nonnull
 		@Override
@@ -99,16 +106,16 @@ public class DialogSchema implements IDialogScene
 
 		@Nonnull
 		@Override
-		public IDialogAction getAction()
+		public Collection<IDialogAction> getActions()
 		{
-			return this.action;
+			return this.actions;
 		}
 	}
 
 	private class DialogLineSchema implements IDialogLine
 	{
 		@SerializedName("speaker")
-		private String speaker = null;
+		private final String speaker = null;
 
 		@SerializedName("text")
 		private String text;

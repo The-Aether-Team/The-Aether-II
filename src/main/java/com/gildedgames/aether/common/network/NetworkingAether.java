@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.network;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.packets.*;
+import com.gildedgames.aether.common.network.packets.dialog.PacketActivateButton;
 import com.gildedgames.aether.common.network.packets.dialog.PacketCloseDialog;
 import com.gildedgames.aether.common.network.packets.dialog.PacketOpenDialog;
 import net.minecraft.entity.EntityLivingBase;
@@ -34,6 +35,7 @@ public class NetworkingAether
 		instance.registerMessage(PacketUpdateStructure.HandlerServer.class, PacketUpdateStructure.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketSaveStructure.HandlerServer.class, PacketSaveStructure.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketSetPlayedIntro.HandlerServer.class, PacketSetPlayedIntro.class, discriminant++, Side.SERVER);
+		instance.registerMessage(PacketActivateButton.HandlerServer.class, PacketActivateButton.class, discriminant++, Side.SERVER);
 
 		// C L I E N T
 		instance.registerMessage(PacketEquipment.HandlerClient.class, PacketEquipment.class, discriminant++, Side.CLIENT);

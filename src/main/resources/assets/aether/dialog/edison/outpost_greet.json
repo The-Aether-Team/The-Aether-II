@@ -6,10 +6,10 @@
 				{ "speaker": "aether:edison#idle", "text": "edison.them.outpost_start" }
 			],
 			"buttons": [
-				{ "label": "edison.us.who_are_you", "action": { "type": "navigate", "target": "what.edison" } },
-				{ "label": "edison.us.what_is_this_place", "action": { "type": "navigate", "target": "what.this_place" } },
-				{ "label": "edison.us.why_am_i_here", "action": { "type": "navigate", "target": "why.me" } },
-				{ "label": "edison.us.goodbye", "action": { "type": "exit" } }
+				{ "label": "edison.us.who_are_you", "actions": [ { "type": "navigate", "target": "what.edison" } ] },
+				{ "label": "edison.us.what_is_this_place", "actions": [ { "type": "navigate", "target": "what.this_place" } ] },
+				{ "label": "edison.us.why_am_i_here", "actions": [ { "type": "navigate", "target": "why.me" } ] },
+				{ "label": "edison.us.goodbye", "actions": [ { "type": "exit" } ] }
 			]
 		},
 		{
@@ -18,8 +18,8 @@
 				{ "speaker": "aether:edison#grin", "text": "edison.them.who_are_you" }
 			],
             "buttons": [
-                { "label": "edison.us.can_i_buy_something", "action": { "type": "navigate", "target": "can.buy" } },
-                { "label": "generic.us.okay", "action": { "type": "navigate", "target": "#start"} }
+                { "label": "edison.us.can_i_buy_something", "actions": [ { "type": "navigate", "target": "can.buy" } ] },
+                { "label": "generic.us.okay", "actions": [ { "type": "navigate", "target": "#start"} ] }
             ]
 		},
         {
@@ -35,8 +35,8 @@
 				{ "speaker": "aether:edison#idle", "text": "edison.them.what_is_this_place" }
 			],
 			"buttons": [
-				{ "label": "edison.us.the_world_were_in", "action": { "type": "navigate", "target": "what.the_world" } },
-				{ "label": "edison.us.this_outpost", "action": { "type": "navigate", "target": "what.the_outpost" } }
+				{ "label": "edison.us.the_world_were_in", "actions": [ { "type": "navigate", "target": "what.the_world" } ] },
+				{ "label": "edison.us.this_outpost", "actions": [ { "type": "navigate", "target": "what.the_outpost" } ] }
 			]
 		},
 		{
@@ -46,8 +46,8 @@
 				{ "speaker": "aether:edison#idle", "text": "edison.them.the_world_were_in.2" }
 			],
             "buttons": [
-                { "label": "edison.us.valkyries", "action": { "type": "navigate", "target": "what.valkyries" } },
-                { "label": "generic.us.okay", "action": { "type": "navigate", "target": "#start" } }
+                { "label": "edison.us.valkyries", "actions": [ { "type": "navigate", "target": "what.valkyries" } ] },
+                { "label": "generic.us.okay", "actions": [ { "type": "navigate", "target": "#start" } ] }
             ]
 		},
 		{
@@ -57,8 +57,8 @@
 				{ "speaker": "aether:edison#grin", "text": "edison.them.this_outpost.2" }
 			],
 			"buttons": [
-				{ "label": "edison.us.valkyries", "action": { "type": "navigate", "target": "what.valkyries" } },
-				{ "label": "generic.us.okay", "action": { "type": "navigate", "target": "#start" } }
+				{ "label": "edison.us.valkyries", "actions": [ { "type": "navigate", "target": "what.valkyries" } ] },
+				{ "label": "generic.us.okay", "actions": [ { "type": "navigate", "target": "#start" } ] }
 			]
 		},
 		{
