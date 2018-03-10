@@ -176,6 +176,8 @@ public class GuiDialogViewer extends GuiFrame implements IDialogChangeListener
 	@Override
 	public void initGui()
 	{
+		super.initGui();
+
 		this.buildGui(this.controller.getCurrentNode());
 	}
 
