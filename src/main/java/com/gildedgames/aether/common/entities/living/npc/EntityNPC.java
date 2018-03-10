@@ -20,7 +20,7 @@ public abstract class EntityNPC extends EntityCreature
 	@Override
 	public boolean isEntityInvulnerable(final DamageSource source)
 	{
-		return super.isEntityInvulnerable(source);
+		return source != DamageSource.OUT_OF_WORLD || super.isEntityInvulnerable(source);
 	}
 
 	@Override
