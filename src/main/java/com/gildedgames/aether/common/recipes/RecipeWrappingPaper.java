@@ -7,17 +7,23 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
-
-import javax.annotation.Nullable;
+import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 
 //TODO: COMPLETELY WRONG, RECIPE SYSTEM CHANGED
-public class RecipeWrappingPaper implements IRecipe
+public class RecipeWrappingPaper extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe
 {
+	private static final NonNullList<Ingredient> ingredients = CraftingHelper.parseShaped(" 1 ", " P ", " 2 ",
+			'1', new ItemStack(Items.DYE, 1, OreDictionary.WILDCARD_VALUE),
+			'2', new ItemStack(Items.DYE, 1, OreDictionary.WILDCARD_VALUE),
+			'P', new ItemStack(Items.PAPER)).input;
+
 	@Override
 	public boolean matches(final InventoryCrafting inventory, final World world)
 	{
@@ -37,7 +43,6 @@ public class RecipeWrappingPaper implements IRecipe
 				paperLoc = i;
 			}
 		}
-
 		if (paperLoc < 0 || paperLoc > 8)
 		{
 			return false;
@@ -95,15 +100,21 @@ public class RecipeWrappingPaper implements IRecipe
 	}
 
 	@Override
+	public NonNullList<Ingredient> getIngredients()
+	{
+		return ingredients;
+	}
+
+	@Override
 	public boolean canFit(final int width, final int height)
 	{
-		return false;
+		return width >= 1 && height >= 3;
 	}
 
 	@Override
 	public ItemStack getRecipeOutput()
 	{
-		return ItemStack.EMPTY;
+		return new ItemStack(ItemsAether.wrapping_paper, 8);
 	}
 
 	@Override
@@ -114,29 +125,9 @@ public class RecipeWrappingPaper implements IRecipe
 		for (int i = 0; i < stacks.size(); ++i)
 		{
 			final ItemStack stack = inv.getStackInSlot(i);
-
-			stacks.add(i, ForgeHooks.getContainerItem(stack));
+			stacks.set(i, ForgeHooks.getContainerItem(stack));
 		}
 
 		return stacks;
-	}
-
-	@Override
-	public IRecipe setRegistryName(final ResourceLocation name)
-	{
-		return null;
-	}
-
-	@Nullable
-	@Override
-	public ResourceLocation getRegistryName()
-	{
-		return null;
-	}
-
-	@Override
-	public Class<IRecipe> getRegistryType()
-	{
-		return null;
 	}
 }

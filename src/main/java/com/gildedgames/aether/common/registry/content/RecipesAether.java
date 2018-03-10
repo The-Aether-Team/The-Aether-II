@@ -1,27 +1,37 @@
 package com.gildedgames.aether.common.registry.content;
 
 import com.gildedgames.aether.api.AetherAPI;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
+import com.gildedgames.aether.common.recipes.RecipePresentCrafting;
+import com.gildedgames.aether.common.recipes.RecipeWrappingPaper;
 import com.gildedgames.aether.common.recipes.altar.AltarEnchantRecipe;
 import com.gildedgames.aether.common.recipes.altar.AltarRepairRecipe;
 import com.gildedgames.aether.common.registry.minecraft.AetherFuelHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+@Mod.EventBusSubscriber
 public class RecipesAether
 {
 	private static final Set<IRecipe> CRAFTABLE_RECIPES = new HashSet<>();
 
-	public static void preInit()
+	public static void preInit() { }
+
+	public static void registerOreDictionary()
 	{
 		OreDictionary.registerOre("skyrootplanks", BlocksAether.skyroot_planks);
 		OreDictionary.registerOre("skyrootplanks", BlocksAether.dark_skyroot_planks);
@@ -35,10 +45,9 @@ public class RecipesAether
 
 	public static void init()
 	{
+		registerOreDictionary();
 		registerFurnaceRecipes();
-		registerCraftingRecipes();
 		registerAltarRecipes();
-
 		GameRegistry.registerFuelHandler(new AetherFuelHandler());
 	}
 
@@ -56,8 +65,13 @@ public class RecipesAether
 		registerSmeltingRecipe(new ItemStack(ItemsAether.kirrid_loin), new ItemStack(ItemsAether.kirrid_cutlet), 0.4f);
 	}
 
-	private static void registerCraftingRecipes()
+	@SubscribeEvent
+	public static void registerCraftingRecipes(RegistryEvent.Register<IRecipe> event)
 	{
+		IForgeRegistry<IRecipe> r = event.getRegistry();
+		r.register(new RecipeWrappingPaper().setRegistryName(AetherCore.getResource("wrapping_paper")));
+		r.register(new RecipePresentCrafting().setRegistryName(AetherCore.getResource("present_crafting")));
+
 		//TODO:
 		//RecipeSorter.register("aether:wrappingPaper", RecipeWrappingPaper.class, RecipeSorter.Category.SHAPED, "after:minecraft:shaped");
 		//RecipeSorter.register("aether:presentCrafting", RecipePresentCrafting.class, RecipeSorter.Category.SHAPED, "after:minecraft:shaped");

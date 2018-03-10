@@ -197,7 +197,8 @@ public class PlayerAetherHooks
 			final EntityPlayerMP mp = (EntityPlayerMP) event.player;
 			final WorldServer toWorld = DimensionManager.getWorld(0);
 
-			bedPos = EntityPlayer.getBedSpawnLocation(mp.getServerWorld(), bedPos, mp.isSpawnForced(mp.dimension));
+			if (bedPos != null)
+				bedPos = EntityPlayer.getBedSpawnLocation(mp.getServerWorld(), bedPos, mp.isSpawnForced(mp.dimension));
 
 			if (bedPos == null)
 			{
