@@ -30,7 +30,7 @@ public class EntityNecromancer extends EntityNPC
 	protected void initEntityAI()
 	{
 		this.tasks.addTask(1, new EntityAILookIdle(this));
-		this.tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 10.0F));
+		this.tasks.addTask(0, new EntityAIWatchClosest(this, EntityPlayer.class, 50.0F, 1.0F));
 	}
 
 	@Override
