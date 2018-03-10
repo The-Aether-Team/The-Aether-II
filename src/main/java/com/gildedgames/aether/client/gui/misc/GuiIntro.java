@@ -81,6 +81,8 @@ public class GuiIntro extends GuiFrameNoContainer
 	@Override
 	public void init()
 	{
+		this.dim().mod().width(this.width).height(this.height).flush();
+
 		preventInnerTyping = true;
 
 		final Pos2D center = InputHelper.getCenter();

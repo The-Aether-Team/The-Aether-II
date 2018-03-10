@@ -176,12 +176,6 @@ public class GuiDialogViewer extends GuiFrame implements IDialogChangeListener
 	@Override
 	public void initGui()
 	{
-		this.guiLeft = 0;
-		this.guiTop = 0;
-
-		this.xSize = this.width;
-		this.ySize = this.height;
-
 		this.buildGui(this.controller.getCurrentNode());
 	}
 
@@ -351,6 +345,6 @@ public class GuiDialogViewer extends GuiFrame implements IDialogChangeListener
 	@Override
 	public void init()
 	{
-
+		this.dim().mod().width(this.width).height(this.height).flush();
 	}
 }
