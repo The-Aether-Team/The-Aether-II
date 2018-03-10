@@ -8,6 +8,7 @@ import com.gildedgames.aether.common.entities.living.companions.*;
 import com.gildedgames.aether.common.entities.living.mobs.*;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.entities.living.npc.EntityEdison;
+import com.gildedgames.aether.common.entities.living.npc.EntityNecromancer;
 import com.gildedgames.aether.common.entities.living.passive.*;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
 import com.gildedgames.aether.common.entities.projectiles.EntityDaggerfrostSnowball;
@@ -44,6 +45,7 @@ public class EntitiesAether
 		registerLivingEntityWithEgg(EntityGlitterwing.class, "glitterwing", 0x5368a9, 0x1a2341);
 		registerLivingEntityWithEgg(EntityEdison.class, "edison", 0xedc5b1, 0x788b7e);
 		registerLivingEntityWithEgg(EntityBurrukai.class, "burrukai", 0x435258, 0x548193);
+		registerLivingEntityWithEgg(EntityNecromancer.class, "necromancer", 0x4b4b6a, 0x8a8a9e);
 
 		registerLivingEntity(EntityFrostpineTotem.class, "frostpine_totem");
 		registerLivingEntity(EntityKraisith.class, "kraisith");
@@ -65,25 +67,30 @@ public class EntitiesAether
 		registerEntity(EntityMoa.class, "moa", 80, 1, true);
 	}
 
-	private static void registerLivingEntityWithEgg(Class<? extends Entity> entity, String name, int eggPrimaryColor, int eggSecondaryColor)
+	private static void registerLivingEntityWithEgg(final Class<? extends Entity> entity, final String name, final int eggPrimaryColor,
+			final int eggSecondaryColor)
 	{
-		ResourceLocation id = AetherCore.getResource(name);
+		final ResourceLocation id = AetherCore.getResource(name);
 
-		EntityRegistry.registerModEntity(id, entity, EntitiesAether.getEntityName(name), NEXT_ID++, AetherCore.INSTANCE, 80, 3, true, eggPrimaryColor, eggSecondaryColor);
+		EntityRegistry.registerModEntity(id, entity, EntitiesAether.getEntityName(name), NEXT_ID++, AetherCore.INSTANCE, 80, 3, true, eggPrimaryColor,
+				eggSecondaryColor);
 		registeredEggs.add(id);
 	}
 
-	private static void registerLivingEntity(Class<? extends Entity> entity, String name)
+	private static void registerLivingEntity(final Class<? extends Entity> entity, final String name)
 	{
 		EntityRegistry.registerModEntity(AetherCore.getResource(name), entity, EntitiesAether.getEntityName(name), NEXT_ID++, AetherCore.INSTANCE, 80, 3, true);
 	}
 
-	private static void registerEntity(Class<? extends Entity> entity, String name, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates)
+	private static void registerEntity(
+			final Class<? extends Entity> entity, final String name, final int trackingRange, final int updateFrequency, final boolean sendsVelocityUpdates)
 	{
-		EntityRegistry.registerModEntity(AetherCore.getResource(name), entity, EntitiesAether.getEntityName(name), NEXT_ID++, AetherCore.INSTANCE, trackingRange, updateFrequency, sendsVelocityUpdates);
+		EntityRegistry
+				.registerModEntity(AetherCore.getResource(name), entity, EntitiesAether.getEntityName(name), NEXT_ID++, AetherCore.INSTANCE, trackingRange,
+						updateFrequency, sendsVelocityUpdates);
 	}
 
-	private static String getEntityName(String name)
+	private static String getEntityName(final String name)
 	{
 		return AetherCore.MOD_ID + "." + name;
 	}

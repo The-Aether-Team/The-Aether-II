@@ -356,7 +356,7 @@ public class ModelCockatrice extends ModelBase
 	}
 
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+	public void render(final Entity entity, final float f, final float f1, final float f2, final float f3, final float f4, final float f5)
 	{
 		super.render(entity, f, f1, f2, f3, f4, f5);
 
@@ -404,7 +404,7 @@ public class ModelCockatrice extends ModelBase
 		this.Dart6.render(f5);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
+	private void setRotation(final ModelRenderer model, final float x, final float y, final float z)
 	{
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
@@ -412,22 +412,22 @@ public class ModelCockatrice extends ModelBase
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch,
-			float scaleFactor, Entity entity)
+	public void setRotationAngles(final float limbSwing, final float limbSwingAmount, final float ageInTicks, final float netHeadYaw, final float headPitch,
+			final float scaleFactor, final Entity entity)
 	{
 		//super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		EntityCockatrice cockatrice = (EntityCockatrice) entity;
+		final EntityCockatrice cockatrice = (EntityCockatrice) entity;
 
-		float f6 = 3.141593F;
+		final float f6 = 3.141593F;
 
 		this.Head.rotateAngleX = headPitch / 57.29578F;
 		this.Head.rotateAngleY = netHeadYaw / 57.29578F;
 
-		float rightLegRotation;
-		float leftLegRotation;
+		final float rightLegRotation;
+		final float leftLegRotation;
 
-		float legSwingSpeed = 0.7F;
-		float legSwingLength = 0.8F;
+		final float legSwingSpeed = 0.7F;
+		final float legSwingLength = 0.8F;
 
 		rightLegRotation = MathHelper.cos(limbSwing * legSwingSpeed) * legSwingLength * limbSwingAmount;
 		leftLegRotation = MathHelper.cos(limbSwing * legSwingSpeed + 3.141593F) * legSwingLength * limbSwingAmount;

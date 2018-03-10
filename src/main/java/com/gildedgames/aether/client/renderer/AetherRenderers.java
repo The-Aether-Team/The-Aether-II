@@ -19,6 +19,7 @@ import com.gildedgames.aether.common.entities.living.companions.*;
 import com.gildedgames.aether.common.entities.living.mobs.*;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.entities.living.npc.EntityEdison;
+import com.gildedgames.aether.common.entities.living.npc.EntityNecromancer;
 import com.gildedgames.aether.common.entities.living.passive.*;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
 import com.gildedgames.aether.common.entities.projectiles.EntityDaggerfrostSnowball;
@@ -81,6 +82,8 @@ public class AetherRenderers
 		RenderingRegistry.registerEntityRenderingHandler(EntityEdison.class, RenderEdisonSitting::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityTaegore.class, RenderTaegore::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityBurrukai.class, RenderBurrukai::new);
+
+		RenderingRegistry.registerEntityRenderingHandler(EntityNecromancer.class, RenderNecromancer::new);
 	}
 
 	private static void registerTESRs()

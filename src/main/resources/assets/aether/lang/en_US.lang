@@ -667,6 +667,7 @@ entity.aether.pink_baby_swet.name=Pink Baby Swet
 entity.aether.glitterwing.name=Glitterwing
 entity.aether.edison.name=Edison
 entity.aether.burrukai.name=Burrukai
+entity.aether.necromancer.name=Necromancer
 
 # Creative Tabs
 itemGroup.aether.blocks=Aether II Blocks
@@ -918,6 +919,13 @@ edison.them.why_am_i_here.3=They'll also contact me and I'll come running to che
 edison.them.why_am_i_here.4=That said I can't guarantee the fellas who find you won't try to line their pockets themselves. Not that they don't deserve it, but they might decide it's worth not telling ya about it is all.
 
 edison.them.busy=I'm working on something at the moment, friend. Come back in a bit.
+
+necromancer.name=Necromancer
+
+necromancer.them.start1=I see you made it here safely. I appreciate that you may have many questions but I fear we are short on time.
+necromancer.them.start2=If you would follow me I will answer all questions in due time.
+
+necromancer.us.leadtheway=Lead the way.
 
 aether.warning.deprecated_item=§cDeprecated! Will be removed!
 aether.warning.operator_item=Requires Operator privileges

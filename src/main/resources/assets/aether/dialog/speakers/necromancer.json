@@ -1,0 +1,6 @@
+{
+	"name": "entity.aether.necromancer.name",
+	"slides": {
+		"default": { "render": "static", "data": { "resource": "aether:textures/dialog/necromancer/necromancer_neutral.png", "scale": "1.6" } }
+	}
+}

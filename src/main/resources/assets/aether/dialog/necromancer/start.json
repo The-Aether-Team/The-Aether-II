@@ -1,0 +1,14 @@
+{
+	"nodes": [
+		{
+			"name": "#start",
+			"lines": [
+				{ "speaker": "aether:necromancer", "text": "necromancer.them.start1" },
+				{ "speaker": "aether:necromancer", "text": "necromancer.them.start2" }
+			],
+			"buttons": [
+				{ "label": "necromancer.us.leadtheway", "action": { "type": "exit" } }
+			]
+		}
+	]
+}

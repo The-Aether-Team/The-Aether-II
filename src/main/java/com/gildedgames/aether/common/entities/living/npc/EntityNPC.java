@@ -10,7 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public abstract class EntityNPC extends EntityCreature
 {
 
-	public EntityNPC(World worldIn)
+	public EntityNPC(final World worldIn)
 	{
 		super(worldIn);
 
@@ -18,9 +18,9 @@ public abstract class EntityNPC extends EntityCreature
 	}
 
 	@Override
-	public boolean isEntityInvulnerable(DamageSource source)
+	public boolean isEntityInvulnerable(final DamageSource source)
 	{
-		return source != DamageSource.OUT_OF_WORLD || super.isEntityInvulnerable(source);
+		return super.isEntityInvulnerable(source);
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public abstract class EntityNPC extends EntityCreature
 	}
 
 	@Override
-	public boolean canBeLeashedTo(EntityPlayer player)
+	public boolean canBeLeashedTo(final EntityPlayer player)
 	{
 		return false;
 	}
