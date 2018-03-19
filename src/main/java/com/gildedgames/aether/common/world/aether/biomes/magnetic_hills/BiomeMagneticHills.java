@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.world.aether.biomes.highlands;
+package com.gildedgames.aether.common.world.aether.biomes.magnetic_hills;
 
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.common.blocks.BlocksAether;
@@ -6,44 +6,48 @@ import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.island.gen.IIslandGenerator;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandGenerators;
 import com.gildedgames.orbis.api.util.mc.NBT;
+import com.google.common.collect.Lists;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.biome.Biome;
+import net.minecraft.util.math.BlockPos;
 
 import java.util.Collection;
-import java.util.Collections;
+import java.util.List;
 
-public class BiomeHighlands extends BiomeAetherBase
+public class BiomeMagneticHills extends BiomeAetherBase
 {
 
-	public BiomeHighlands(final Biome.BiomeProperties properties, final ResourceLocation registryName)
+	public BiomeMagneticHills(final BiomeProperties properties, final ResourceLocation registryName)
 	{
 		super(properties, registryName);
 
-		this.setDefaultSubBiome(new SubBiomeHighlands());
-
-		this.registerSubBiome(new SubBiomeHighlandJungle());
-		this.registerSubBiome(new SubBiomeHighlandPlains());
-		this.registerSubBiome(new SubBiomeHighlandForest());
-		this.registerSubBiome(new SubBiomeCrystalHighlands());
+		this.setDefaultSubBiome(new SubBiomeMagneticHills());
 	}
 
 	@Override
 	public IBlockState getCoastalBlock()
 	{
-		return BlocksAether.quicksoil.getDefaultState();
+		return BlocksAether.crude_scatterglass.getDefaultState();
 	}
 
 	@Override
 	public IIslandGenerator getIslandGenerator()
 	{
-		return IslandGenerators.HIGHLANDS;
+		return IslandGenerators.MAGNETIC_HILLS;
 	}
 
 	@Override
 	public Collection<NBT> createIslandComponents(final IIslandData islandData)
 	{
-		return Collections.emptyList();
+		final List<NBT> components = Lists.newArrayList();
+
+		final BlockPos center = new BlockPos(islandData.getBounds().getCenterX(), 0, islandData.getBounds().getCenterZ());
+
+		components
+				.add(new MagneticHillsData(center, islandData.getSeed(), 200,
+						300));
+
+		return components;
 	}
 
 	@Override

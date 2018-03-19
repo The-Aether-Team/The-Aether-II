@@ -4,6 +4,7 @@ import net.minecraft.nbt.NBTBase;
 
 public interface IIslandBounds
 {
+
 	/**
 	 * Tests if this bounding box intersects the specified bounding box
 	 *

@@ -1,8 +1,11 @@
 package com.gildedgames.aether.common.registry.content;
 
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeVoid;
 import com.gildedgames.aether.common.world.aether.biomes.highlands.BiomeHighlands;
+import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.BiomeMagneticHills;
+import com.gildedgames.aether.common.world.aether.island.data.IslandSectorFactory;
 import com.gildedgames.aether.common.world.util.BiomeInstancedZone;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.event.RegistryEvent;
@@ -15,8 +18,13 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class BiomesAether
 {
 	@GameRegistry.ObjectHolder("aether_highlands")
-	public static final Biome HIGHLANDS = new BiomeHighlands(
+	public static final BiomeAetherBase HIGHLANDS = new BiomeHighlands(
 			new Biome.BiomeProperties("Highlands").setRainDisabled().setTemperature(0.5f).setWaterColor(0x70DB70), AetherCore.getResource("aether_highlands"));
+
+	@GameRegistry.ObjectHolder("aether_magnetic_hills")
+	public static final BiomeAetherBase MAGNETIC_HILLS = new BiomeMagneticHills(
+			new Biome.BiomeProperties("Magnetic Hills").setRainDisabled().setTemperature(0.5f).setWaterColor(0x70DB70),
+			AetherCore.getResource("aether_magnetic_hills"));
 
 	@GameRegistry.ObjectHolder("aether_void")
 	public static final Biome VOID = new BiomeVoid();
@@ -27,6 +35,8 @@ public class BiomesAether
 	@SubscribeEvent
 	public static void registerBiome(final RegistryEvent.Register<Biome> event)
 	{
-		event.getRegistry().registerAll(HIGHLANDS, VOID, INSTANCED_ZONE);
+		event.getRegistry().registerAll(HIGHLANDS, MAGNETIC_HILLS, VOID, INSTANCED_ZONE);
+
+		IslandSectorFactory.registerPossibleBiome(HIGHLANDS, MAGNETIC_HILLS);
 	}
 }

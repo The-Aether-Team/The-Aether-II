@@ -1,9 +1,15 @@
 package com.gildedgames.aether.common.world.aether.biomes;
 
+import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.world.aether.island.gen.IIslandGenerator;
+import com.gildedgames.orbis.api.util.mc.NBT;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.world.biome.Biome;
+
+import java.util.Collection;
+import java.util.Collections;
 
 public class BiomeVoid extends BiomeAetherBase
 {
@@ -17,6 +23,24 @@ public class BiomeVoid extends BiomeAetherBase
 	public IBlockState getCoastalBlock()
 	{
 		return BlocksAether.quicksoil.getDefaultState();
+	}
+
+	@Override
+	public IIslandGenerator getIslandGenerator()
+	{
+		return null;
+	}
+
+	@Override
+	public Collection<NBT> createIslandComponents(final IIslandData islandData)
+	{
+		return Collections.emptyList();
+	}
+
+	@Override
+	public float getRarityWeight()
+	{
+		return 0.0F;
 	}
 
 }

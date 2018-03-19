@@ -21,7 +21,7 @@ import java.util.Random;
 public class BiomeProviderAether extends BiomeProvider
 {
 
-	public static ArrayList<Biome> allowedBiomes = Lists.newArrayList(BiomesAether.VOID, BiomesAether.HIGHLANDS);
+	public static ArrayList<Biome> allowedBiomes = Lists.newArrayList(BiomesAether.VOID, BiomesAether.HIGHLANDS, BiomesAether.MAGNETIC_HILLS);
 
 	private final BiomeCache cache;
 

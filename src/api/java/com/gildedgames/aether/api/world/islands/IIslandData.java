@@ -6,9 +6,23 @@ import net.minecraft.world.biome.Biome;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Collection;
 
 public interface IIslandData extends NBT
 {
+	/**
+	 * The contained components have specialised data, usually
+	 * based on the biome that this island uses.
+	 */
+	<T extends NBT> void addComponents(Collection<T> components);
+
+	/**
+	 * The contained components have specialised data, usually
+	 * based on the biome that this island uses.
+	 * @return The components for this Island
+	 */
+	Collection<NBT> getComponents();
+
 	/**
 	 * Returns the bounding box of the island. These coordinates are normalized
 	 * to the sector's region.

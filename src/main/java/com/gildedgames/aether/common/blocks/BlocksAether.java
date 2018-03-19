@@ -72,6 +72,8 @@ public class BlocksAether
 
 	public static final BlockHolystone holystone = new BlockHolystone();
 
+	public static final BlockMagneticClay magnetic_clay = new BlockMagneticClay();
+
 	public static final Block holystone_brick = new BlockBuilder(Material.ROCK)
 			.setSoundType(SoundType.STONE).setHardness(2.0f);
 
@@ -331,6 +333,7 @@ public class BlocksAether
 		r.register("aether_dirt", aether_dirt.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 		r.register("aether_grass", aether_grass.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 		r.register("holystone", holystone.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		r.register("magnetic_clay", magnetic_clay.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
 		r.register("skyroot_bed", skyroot_bed);
 

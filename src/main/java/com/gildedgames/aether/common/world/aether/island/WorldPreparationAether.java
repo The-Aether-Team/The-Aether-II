@@ -9,7 +9,7 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.features.WorldGenAetherCaves;
 import com.gildedgames.aether.common.world.aether.island.data.virtual.VirtualChunkFunnel;
-import com.gildedgames.aether.common.world.aether.island.gen.IslandGenerator;
+import com.gildedgames.aether.common.world.aether.island.gen.IIslandGenerator;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
@@ -32,8 +32,6 @@ public class WorldPreparationAether
 
 	private final Random rand;
 
-	private final IslandGenerator islandGenerator;
-
 	private final WorldGenAetherCaves caveGenerator;
 
 	private final NoiseGeneratorPerlin surfaceNoise;
@@ -47,7 +45,6 @@ public class WorldPreparationAether
 
 		this.surfaceNoise = new NoiseGeneratorPerlin(this.rand, 4);
 
-		this.islandGenerator = new IslandGenerator(world);
 		this.caveGenerator = new WorldGenAetherCaves();
 	}
 
@@ -55,7 +52,24 @@ public class WorldPreparationAether
 	{
 		final Biome[] biomes = this.world.getBiomeProvider().getBiomesForGeneration(null, chunkX * 16, chunkZ * 16, 16, 16);
 
-		this.islandGenerator.genIslandForChunk(primer, island, chunkX, chunkZ);
+		IIslandGenerator generator = null;
+
+		for (final Biome b : biomes)
+		{
+			if (b instanceof BiomeAetherBase)
+			{
+				final BiomeAetherBase aetherBiome = (BiomeAetherBase) b;
+
+				generator = aetherBiome.getIslandGenerator();
+				break;
+			}
+		}
+
+		if (generator != null)
+		{
+			generator.genIslandForChunk(this.world, primer, island, chunkX, chunkZ);
+		}
+
 		this.replaceBiomeBlocks(island, primer, chunkX, chunkZ, biomes);
 
 		this.caveGenerator.generate(this.world, chunkX, chunkZ, primer);
@@ -179,7 +193,7 @@ public class WorldPreparationAether
 				{
 					final IBlockState state = primer.getBlockState(x, y, z);
 
-					if (state.getBlock() == BlocksAether.holystone)
+					if (state.getBlock() == BlocksAether.holystone || state.getBlock() == BlocksAether.magnetic_clay)
 					{
 						primer.setBlockState(x, y, z, pentration < 1 ? biome.topBlock : biome.fillerBlock);
 					}

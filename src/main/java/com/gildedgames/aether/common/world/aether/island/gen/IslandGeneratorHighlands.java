@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 
-public class IslandGenerator
+public class IslandGeneratorHighlands implements IIslandGenerator
 {
 	// Resolution of the noise for a chunk. Should be a power of 2.
 	private static final int NOISE_XZ_SCALE = 4;
@@ -18,19 +18,17 @@ public class IslandGenerator
 	// Number of samples done per chunk.
 	private static final int NOISE_SAMPLES = NOISE_XZ_SCALE + 1;
 
-	private final World world;
+	private OpenSimplexNoise simplex;
 
-	private final OpenSimplexNoise simplex;
-
-	public IslandGenerator(final World world)
+	@Override
+	public void genIslandForChunk(final World world, final ChunkPrimer primer, final IIslandData island, final int chunkX, final int chunkZ)
 	{
-		this.world = world;
-		this.simplex = new OpenSimplexNoise(world.getSeed());
-	}
+		if (this.simplex == null)
+		{
+			this.simplex = new OpenSimplexNoise(world.getSeed());
+		}
 
-	public void genIslandForChunk(final ChunkPrimer primer, final IIslandData island, final int chunkX, final int chunkZ)
-	{
-		final Biome biome = this.world.getBiome(new BlockPos(chunkX * 16, 0, chunkZ * 16));
+		final Biome biome = world.getBiome(new BlockPos(chunkX * 16, 0, chunkZ * 16));
 
 		final IBlockState coastBlock = ((BiomeAetherBase) biome).getCoastalBlock();
 

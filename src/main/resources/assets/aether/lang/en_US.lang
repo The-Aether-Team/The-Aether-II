@@ -241,6 +241,7 @@ tile.aether.valkyrie_grass.full.name=Valkyrie Grass
 tile.aether.aether_teleporter.name=Aether Teleporter
 tile.aether.thera_dirt.dirt.name=Thera Dirt
 tile.aether.thera_grass.normal.name=Thera Grass
+tile.aether.magnetic_clay.name=Magnetic Clay
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick
