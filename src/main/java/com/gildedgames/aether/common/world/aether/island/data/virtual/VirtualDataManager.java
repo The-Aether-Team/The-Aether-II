@@ -226,6 +226,12 @@ public class VirtualDataManager implements IVirtualDataManager
 	}
 
 	@Override
+	public boolean canAccess(final int minX, final int minY, final int minZ, final int maxX, final int maxY, final int maxZ)
+	{
+		return this.parent.getBounds().intersects(minX, minY, minZ, maxX, maxY, maxZ);
+	}
+
+	@Override
 	public BlockPos getTopPos(final BlockPos pos)
 	{
 		return new BlockPos(pos.getX(), this.getTopY(pos.getX(), pos.getZ()), pos.getZ());
@@ -252,9 +258,14 @@ public class VirtualDataManager implements IVirtualDataManager
 	@Override
 	public IBlockState getBlock(final int x, final int y, final int z)
 	{
-		if (y > VirtualChunk.HEIGHT || !this.canAccess(x, z))
+		if (y > VirtualChunk.HEIGHT)
 		{
 			throw new ArrayIndexOutOfBoundsException("Tried to access block outside of this island's bounds");
+		}
+
+		if (!this.canAccess(x, z))
+		{
+			throw new RuntimeException("Can't access the following chunk: " + String.valueOf(x >> 4) + ", " + String.valueOf(z >> 4));
 		}
 
 		final IVirtualChunk chunk = this.getChunkFromBlockPos(x, z);
@@ -345,9 +356,14 @@ public class VirtualDataManager implements IVirtualDataManager
 	@Override
 	public boolean setBlock(final int x, final int y, final int z, final IBlockState state)
 	{
-		if (y > VirtualChunk.HEIGHT || !this.canAccess(x, z))
+		if (y > VirtualChunk.HEIGHT)
 		{
-			throw new ArrayIndexOutOfBoundsException("Tried to set block outside of the world height");
+			throw new ArrayIndexOutOfBoundsException("Tried to access block outside of this island's bounds");
+		}
+
+		if (!this.canAccess(x, z))
+		{
+			throw new RuntimeException("Can't access the following chunk: " + String.valueOf(x >> 4) + ", " + String.valueOf(z >> 4));
 		}
 
 		final IVirtualChunk chunk = this.getChunkFromBlockPos(x, z);

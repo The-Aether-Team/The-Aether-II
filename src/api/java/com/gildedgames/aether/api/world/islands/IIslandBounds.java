@@ -7,15 +7,15 @@ public interface IIslandBounds
 	/**
 	 * Tests if this bounding box intersects the specified bounding box
 	 *
-	 * @param x The x-coordinate of the box
-	 * @param y The y-coordinate of the box
-	 * @param z The z-coordinate of the box
-	 * @param width The width of the box
-	 * @param height The height of the box
-	 * @param length The length of the box
+	 * @param minX The minimum X value of the box
+	 * @param minY The minimum Y value of the boz
+	 * @param minZ The minimum Z value of the box
+	 * @param maxX The maximum X value of the box
+	 * @param maxY The maximum Y value of the box
+	 * @param maxZ The maximum Z value of the box
 	 * @return True if the boxes intersect
 	 */
-	boolean intersects(int x, int y, int z, int width, int height, int length);
+	boolean intersects(int minX, int minY, int minZ, int maxX, int maxY, int maxZ);
 
 	/**
 	 * Tests if this bounding box contains the point.

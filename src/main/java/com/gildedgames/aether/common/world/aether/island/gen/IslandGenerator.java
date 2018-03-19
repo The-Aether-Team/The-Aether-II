@@ -109,14 +109,11 @@ public class IslandGenerator
 		final double posX = chunkX * 16;
 		final double posZ = chunkZ * 16;
 
-		final double width = (double) island.getBounds().getWidth();
-		final double length = (double) island.getBounds().getHeight();
-
 		final double minX = island.getBounds().getMinX();
-		final double minZ = island.getBounds().getMinY();
+		final double minZ = island.getBounds().getMinZ();
 
-		final double centerX = island.getBounds().getMinX() + (width / 2);
-		final double centerZ = island.getBounds().getMinY() + (length / 2);
+		final double centerX = island.getBounds().getCenterX();
+		final double centerZ = island.getBounds().getCenterZ();
 
 		final double[] data = new double[NOISE_SAMPLES * NOISE_SAMPLES];
 
