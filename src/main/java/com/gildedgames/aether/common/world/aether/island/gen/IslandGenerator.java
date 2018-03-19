@@ -12,17 +12,20 @@ import net.minecraft.world.chunk.ChunkPrimer;
 
 public class IslandGenerator
 {
-	// Resolution = x^2
-	private static final int NOISE_RESOLUTION = 9;
+	// Resolution of the noise for a chunk. Should be a power of 2.
+	private static final int NOISE_XZ_SCALE = 4;
 
-	private static final double NOISE_SCALE = 16.0D / NOISE_RESOLUTION,
-			NOISE_INVERSE = (16.0D / (NOISE_RESOLUTION - 1));
+	// Number of samples done per chunk.
+	private static final int NOISE_SAMPLES = NOISE_XZ_SCALE + 1;
 
 	private final World world;
+
+	private final OpenSimplexNoise simplex;
 
 	public IslandGenerator(final World world)
 	{
 		this.world = world;
+		this.simplex = new OpenSimplexNoise(world.getSeed());
 	}
 
 	public void genIslandForChunk(final ChunkPrimer primer, final IIslandData island, final int chunkX, final int chunkZ)
@@ -81,62 +84,53 @@ public class IslandGenerator
 		}
 	}
 
-	private double interpolate(final double[] heightMap, final int x, final int z)
+	private double interpolate(final double[] data, final int x, final int z)
 	{
-		final double x0 = (x / NOISE_INVERSE);
-		final double z0 = (z / NOISE_INVERSE);
+		final double x0 = (double) x / NOISE_XZ_SCALE;
+		final double z0 = (double) z / NOISE_XZ_SCALE;
 
-		final double x1 = Math.floor(x0);
-		final double x2 = Math.ceil(x0) + 0.5D;
+		final int integerX = (int) Math.floor(x0);
+		final double fractionX = x0 - integerX;
 
-		final double z1 = Math.floor(z0);
-		final double z2 = Math.ceil(z0) + 0.5D;
+		final int integerZ = (int) Math.floor(z0);
+		final double fractionZ = z0 - integerZ;
 
-		final double q11 = this.valueAt(heightMap, (int) x1, (int) z1);
-		final double q12 = this.valueAt(heightMap, (int) x1, (int) z2);
-		final double q21 = this.valueAt(heightMap, (int) x2, (int) z1);
-		final double q22 = this.valueAt(heightMap, (int) x2, (int) z2);
+		final double a = data[integerX + (integerZ * NOISE_SAMPLES)];
+		final double b = data[integerX + ((integerZ + 1) * NOISE_SAMPLES)];
+		final double c = data[integerX + 1 + (integerZ * NOISE_SAMPLES)];
+		final double d = data[integerX + 1 + ((integerZ + 1) * NOISE_SAMPLES)];
 
-		final double a1 = (x2 - x0) / (x2 - x1);
-		final double a2 = (x0 - x1) / (x2 - x1);
-
-		final double r1 = a1 * q11 + a2 * q21;
-		final double r2 = a1 * q12 + a2 * q22;
-
-		return ((z2 - z0) / (z2 - z1)) * r1 + ((z0 - z1) / (z2 - z1)) * r2;
-	}
-
-	private double valueAt(final double[] heightMap, final int x, final int z)
-	{
-		return heightMap[x + (z * NOISE_RESOLUTION)];
+		return (1.0 - fractionX) * ((1.0 - fractionZ) * a + fractionZ * b) +
+				fractionX * ((1.0 - fractionZ) * c + fractionZ * d);
 	}
 
 	private double[] generateNoise(final IIslandData island, final int chunkX, final int chunkZ)
 	{
-		final OpenSimplexNoise simplex = new OpenSimplexNoise(island.getSeed());
-
 		final double posX = chunkX * 16;
 		final double posZ = chunkZ * 16;
 
+		final double width = (double) island.getBounds().getWidth();
+		final double length = (double) island.getBounds().getHeight();
+
 		final double minX = island.getBounds().getMinX();
-		final double minZ = island.getBounds().getMinZ();
+		final double minZ = island.getBounds().getMinY();
 
-		final double centerX = island.getBounds().getCenterX();
-		final double centerZ = island.getBounds().getCenterZ();
+		final double centerX = island.getBounds().getMinX() + (width / 2);
+		final double centerZ = island.getBounds().getMinY() + (length / 2);
 
-		final double[] data = new double[NOISE_RESOLUTION * NOISE_RESOLUTION];
+		final double[] data = new double[NOISE_SAMPLES * NOISE_SAMPLES];
 
 		// Generate half-resolution noise
-		for (int x = 0; x < NOISE_RESOLUTION; x++)
+		for (int x = 0; x < NOISE_SAMPLES; x++)
 		{
 			// Creates world coordinate and normalized noise coordinate
-			final double worldX = posX + (x * NOISE_SCALE);
+			final double worldX = posX + (x * (16.0D / NOISE_SAMPLES));
 			final double nx = (worldX + minX) / 300.0D;
 
-			for (int z = 0; z < NOISE_RESOLUTION; z++)
+			for (int z = 0; z < NOISE_SAMPLES; z++)
 			{
 				// Creates world coordinate and normalized noise coordinate
-				final double worldZ = posZ + (z * NOISE_SCALE);
+				final double worldZ = posZ + (z * (16.0D / NOISE_SAMPLES));
 				final double nz = (worldZ + minZ) / 300.0D;
 
 				final double distX = Math.abs(centerX - worldX);
@@ -146,10 +140,10 @@ public class IslandGenerator
 				final double dist = (distX + distZ) / 450.0D;
 
 				// Generate noise for X/Z coordinate
-				final double noise1 = simplex.eval(nx, nz);
-				final double noise2 = 0.5D * simplex.eval(nx * 8D, nz * 8D);
-				final double noise3 = 0.25D * simplex.eval(nx * 16D, nz * 16D);
-				final double noise4 = 0.1D * simplex.eval(nx * 32D, nz * 32D);
+				final double noise1 = this.simplex.eval(nx, nz);
+				final double noise2 = 0.5D * this.simplex.eval(nx * 8D, nz * 8D);
+				final double noise3 = 0.25D * this.simplex.eval(nx * 16D, nz * 16D);
+				final double noise4 = 0.1D * this.simplex.eval(nx * 32D, nz * 32D);
 
 				// Averages noise samples linearly
 				final double sample = (noise1 + noise2 + noise3 + noise4) / 4.0D;
@@ -157,7 +151,7 @@ public class IslandGenerator
 				// Apply formula to shape noise into island, noise decreases in value the further the coord is from the center
 				final double height = sample - (0.7D * Math.pow(dist, 2));
 
-				data[x + (z * NOISE_RESOLUTION)] = height;
+				data[x + (z * NOISE_SAMPLES)] = height;
 			}
 		}
 

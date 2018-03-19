@@ -8,6 +8,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class WorldGenAercloud extends WorldGenerator implements IWorldGen
@@ -50,6 +51,8 @@ public class WorldGenAercloud extends WorldGenerator implements IWorldGen
 		final int xTendency = rand.nextInt(3) - 1;
 		final int zTendency = rand.nextInt(3) - 1;
 
+		final ArrayList<BlockPos> transaction = new ArrayList<>(this.numberOfBlocks);
+
 		for (int n = 0; n < this.numberOfBlocks; n++)
 		{
 			x += (rand.nextInt(3) - 1 + xTendency);
@@ -69,7 +72,7 @@ public class WorldGenAercloud extends WorldGenerator implements IWorldGen
 					{
 						pos.setPos(x1, y1, z1);
 
-						if (!blockAccess.canAccess(pos))
+						if (!world.isAreaLoaded(pos, 2))
 						{
 							return false;
 						}
@@ -77,11 +80,16 @@ public class WorldGenAercloud extends WorldGenerator implements IWorldGen
 						if (blockAccess.getBlockState(pos).getBlock().isReplaceable(blockAccess, pos) &&
 								Math.abs(x1 - x) + Math.abs(y1 - y) + Math.abs(z1 - z) < 4 * (this.isFlat ? 3 : 1) + rand.nextInt(2))
 						{
-							blockAccess.setBlockState(pos, state, 3);
+							transaction.add(pos.toImmutable());
 						}
 					}
 				}
 			}
+		}
+
+		for (final BlockPos block : transaction)
+		{
+			world.setBlockState(block, state, 3);
 		}
 
 		return true;
