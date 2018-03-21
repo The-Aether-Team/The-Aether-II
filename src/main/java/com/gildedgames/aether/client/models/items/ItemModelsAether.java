@@ -43,6 +43,7 @@ public class ItemModelsAether
 		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.icestone_cooler), 0, TileEntityIcestoneCooler.class);
 		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.masonry_bench), 0, TileEntityMasonryBench.class);
 		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.outpost_campfire), 0, TileEntityOutpostCampfire.class);
+		ForgeHooksClient.registerTESRItemStack(getItem(BlocksAether.aether_teleporter), 0, TileEntityTeleporter.class);
 	}
 
 	private static void registerModels()
@@ -482,6 +483,7 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.icestone_cooler, "tesr");
 		registerItemModels(BlocksAether.masonry_bench, "tesr");
 		registerItemModels(BlocksAether.outpost_campfire, "tesr");
+		registerItemModels(BlocksAether.aether_teleporter, "tesr");
 
 		registerItemModels(ItemsAether.taegore_hide_gloves, "accessories/taegore_hide_gloves");
 		registerItemModels(ItemsAether.zanite_gloves, "accessories/zanite_gloves");

@@ -119,6 +119,7 @@ public class AetherBlockModels
 		ModelLoader.setCustomStateMapper(BlocksAether.altar, new StateMap.Builder().ignore(BlockAltar.PROPERTY_FACING).build());
 		ModelLoader.setCustomStateMapper(BlocksAether.icestone_cooler, new StateMap.Builder().ignore(BlockIcestoneCooler.PROPERTY_FACING).build());
 		ModelLoader.setCustomStateMapper(BlocksAether.masonry_bench, new StateMap.Builder().ignore(BlockMasonryBench.PROPERTY_FACING).build());
+		ModelLoader.setCustomStateMapper(BlocksAether.aether_teleporter, new StateMap.Builder().ignore(BlockAltar.PROPERTY_FACING).build());
 
 		ModelLoader.setCustomStateMapper(BlocksAether.standing_skyroot_sign, new StateMap.Builder().ignore(BlockStandingSkyrootSign.ROTATION).build());
 		ModelLoader.setCustomStateMapper(BlocksAether.wall_skyroot_sign, new StateMap.Builder().ignore(BlockWallSkyrootSign.FACING).build());
