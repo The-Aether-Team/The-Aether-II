@@ -83,7 +83,7 @@ public class WorldProviderAether extends WorldProviderSurface
 	@Override
 	public boolean canSnowAt(final BlockPos pos, final boolean checkLight)
 	{
-		return false;
+		return super.canSnowAt(pos, checkLight);
 	}
 
 	@Override

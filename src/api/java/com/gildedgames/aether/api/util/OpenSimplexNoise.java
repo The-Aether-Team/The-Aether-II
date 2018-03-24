@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.world.util;
+package com.gildedgames.aether.api.util;
 
 /*
  * OpenSimplex Noise in Java.
@@ -33,16 +33,40 @@ public class OpenSimplexNoise
 
 	private static final long DEFAULT_SEED = 0;
 
-	private short[] perm;
+	//Gradients for 2D. They approximate the directions to the
+	//vertices of an octagon from the center.
+	private static final byte[] gradients2D = new byte[] {
+			5, 2, 2, 5,
+			-5, 2, -2, 5,
+			5, -2, 2, -5,
+			-5, -2, -2, -5,
+	};
 
-	private short[] permGradIndex3D;
+	//Gradients for 3D. They approximate the directions to the
+	//vertices of a rhombicuboctahedron from the center, skewed so
+	//that the triangular and square facets can be inscribed inside
+	//circles of the same radius.
+	private static final byte[] gradients3D = new byte[] {
+			-11, 4, 4, -4, 11, 4, -4, 4, 11,
+			11, 4, 4, 4, 11, 4, 4, 4, 11,
+			-11, -4, 4, -4, -11, 4, -4, -4, 11,
+			11, -4, 4, 4, -11, 4, 4, -4, 11,
+			-11, 4, -4, -4, 11, -4, -4, 4, -11,
+			11, 4, -4, 4, 11, -4, 4, 4, -11,
+			-11, -4, -4, -4, -11, -4, -4, -4, -11,
+			11, -4, -4, 4, -11, -4, 4, -4, -11,
+	};
+
+	private final short[] perm;
+
+	private final short[] permGradIndex3D;
 
 	public OpenSimplexNoise()
 	{
 		this(DEFAULT_SEED);
 	}
 
-	public OpenSimplexNoise(short[] perm)
+	public OpenSimplexNoise(final short[] perm)
 	{
 		this.perm = perm;
 		this.permGradIndex3D = new short[256];
@@ -61,7 +85,7 @@ public class OpenSimplexNoise
 	{
 		this.perm = new short[256];
 		this.permGradIndex3D = new short[256];
-		short[] source = new short[256];
+		final short[] source = new short[256];
 		for (short i = 0; i < 256; i++)
 		{
 			source[i] = i;
@@ -83,44 +107,52 @@ public class OpenSimplexNoise
 		}
 	}
 
+	private static int fastFloor(final double x)
+	{
+		final int xi = (int) x;
+		return x < xi ? xi - 1 : xi;
+	}
+
 	//2D OpenSimplex Noise.
-	public double eval(double x, double y)
+	public double eval(final double x, final double y)
 	{
 
 		//Place input coordinates onto grid.
-		double stretchOffset = (x + y) * STRETCH_CONSTANT_2D;
-		double xs = x + stretchOffset;
-		double ys = y + stretchOffset;
+		final double stretchOffset = (x + y) * STRETCH_CONSTANT_2D;
+		final double xs = x + stretchOffset;
+		final double ys = y + stretchOffset;
 
 		//Floor to get grid coordinates of rhombus (stretched square) super-cell origin.
 		int xsb = fastFloor(xs);
 		int ysb = fastFloor(ys);
 
 		//Skew out to get actual coordinates of rhombus origin. We'll need these later.
-		double squishOffset = (xsb + ysb) * SQUISH_CONSTANT_2D;
-		double xb = xsb + squishOffset;
-		double yb = ysb + squishOffset;
+		final double squishOffset = (xsb + ysb) * SQUISH_CONSTANT_2D;
+		final double xb = xsb + squishOffset;
+		final double yb = ysb + squishOffset;
 
 		//Compute grid coordinates relative to rhombus origin.
-		double xins = xs - xsb;
-		double yins = ys - ysb;
+		final double xins = xs - xsb;
+		final double yins = ys - ysb;
 
 		//Sum those together to get a value that determines which region we're in.
-		double inSum = xins + yins;
+		final double inSum = xins + yins;
 
 		//Positions relative to origin point.
 		double dx0 = x - xb;
 		double dy0 = y - yb;
 
 		//We'll be defining these inside the next block and using them afterwards.
-		double dx_ext, dy_ext;
-		int xsv_ext, ysv_ext;
+		final double dx_ext;
+		final double dy_ext;
+		final int xsv_ext;
+		final int ysv_ext;
 
 		double value = 0;
 
 		//Contribution (1,0)
-		double dx1 = dx0 - 1 - SQUISH_CONSTANT_2D;
-		double dy1 = dy0 - 0 - SQUISH_CONSTANT_2D;
+		final double dx1 = dx0 - 1 - SQUISH_CONSTANT_2D;
+		final double dy1 = dy0 - 0 - SQUISH_CONSTANT_2D;
 		double attn1 = 2 - dx1 * dx1 - dy1 * dy1;
 		if (attn1 > 0)
 		{
@@ -129,8 +161,8 @@ public class OpenSimplexNoise
 		}
 
 		//Contribution (0,1)
-		double dx2 = dx0 - 0 - SQUISH_CONSTANT_2D;
-		double dy2 = dy0 - 1 - SQUISH_CONSTANT_2D;
+		final double dx2 = dx0 - 0 - SQUISH_CONSTANT_2D;
+		final double dy2 = dy0 - 1 - SQUISH_CONSTANT_2D;
 		double attn2 = 2 - dx2 * dx2 - dy2 * dy2;
 		if (attn2 > 0)
 		{
@@ -140,7 +172,7 @@ public class OpenSimplexNoise
 
 		if (inSum <= 1)
 		{ //We're inside the triangle (2-Simplex) at (0,0)
-			double zins = 1 - inSum;
+			final double zins = 1 - inSum;
 			if (zins > xins || zins > yins)
 			{ //(0,0) is one of the closest two triangular vertices
 				if (xins > yins)
@@ -168,7 +200,7 @@ public class OpenSimplexNoise
 		}
 		else
 		{ //We're inside the triangle (2-Simplex) at (1,1)
-			double zins = 2 - inSum;
+			final double zins = 2 - inSum;
 			if (zins < xins || zins < yins)
 			{ //(0,0) is one of the closest two triangular vertices
 				if (xins > yins)
@@ -219,33 +251,33 @@ public class OpenSimplexNoise
 	}
 
 	//3D OpenSimplex Noise.
-	public double eval(double x, double y, double z)
+	public double eval(final double x, final double y, final double z)
 	{
 
 		//Place input coordinates on simplectic honeycomb.
-		double stretchOffset = (x + y + z) * STRETCH_CONSTANT_3D;
-		double xs = x + stretchOffset;
-		double ys = y + stretchOffset;
-		double zs = z + stretchOffset;
+		final double stretchOffset = (x + y + z) * STRETCH_CONSTANT_3D;
+		final double xs = x + stretchOffset;
+		final double ys = y + stretchOffset;
+		final double zs = z + stretchOffset;
 
 		//Floor to get simplectic honeycomb coordinates of rhombohedron (stretched cube) super-cell origin.
-		int xsb = fastFloor(xs);
-		int ysb = fastFloor(ys);
-		int zsb = fastFloor(zs);
+		final int xsb = fastFloor(xs);
+		final int ysb = fastFloor(ys);
+		final int zsb = fastFloor(zs);
 
 		//Skew out to get actual coordinates of rhombohedron origin. We'll need these later.
-		double squishOffset = (xsb + ysb + zsb) * SQUISH_CONSTANT_3D;
-		double xb = xsb + squishOffset;
-		double yb = ysb + squishOffset;
-		double zb = zsb + squishOffset;
+		final double squishOffset = (xsb + ysb + zsb) * SQUISH_CONSTANT_3D;
+		final double xb = xsb + squishOffset;
+		final double yb = ysb + squishOffset;
+		final double zb = zsb + squishOffset;
 
 		//Compute simplectic honeycomb coordinates relative to rhombohedral origin.
-		double xins = xs - xsb;
-		double yins = ys - ysb;
-		double zins = zs - zsb;
+		final double xins = xs - xsb;
+		final double yins = ys - ysb;
+		final double zins = zs - zsb;
 
 		//Sum those together to get a value that determines which region we're in.
-		double inSum = xins + yins + zins;
+		final double inSum = xins + yins + zins;
 
 		//Positions relative to origin point.
 		double dx0 = x - xb;
@@ -253,9 +285,13 @@ public class OpenSimplexNoise
 		double dz0 = z - zb;
 
 		//We'll be defining these inside the next block and using them afterwards.
-		double dx_ext0, dy_ext0, dz_ext0;
+		final double dx_ext0;
+		double dy_ext0;
+		final double dz_ext0;
 		double dx_ext1, dy_ext1, dz_ext1;
-		int xsv_ext0, ysv_ext0, zsv_ext0;
+		final int xsv_ext0;
+		int ysv_ext0;
+		final int zsv_ext0;
 		int xsv_ext1, ysv_ext1, zsv_ext1;
 
 		double value = 0;
@@ -280,10 +316,10 @@ public class OpenSimplexNoise
 
 			//Now we determine the two lattice points not part of the tetrahedron that may contribute.
 			//This depends on the closest two tetrahedral vertices, including (0,0,0)
-			double wins = 1 - inSum;
+			final double wins = 1 - inSum;
 			if (wins > aScore || wins > bScore)
 			{ //(0,0,0) is one of the closest two tetrahedral vertices.
-				byte c = (bScore > aScore ? bPoint : aPoint); //Our other closest vertex is the closest out of a and b.
+				final byte c = (bScore > aScore ? bPoint : aPoint); //Our other closest vertex is the closest out of a and b.
 
 				if ((c & 0x01) == 0)
 				{
@@ -334,7 +370,7 @@ public class OpenSimplexNoise
 			}
 			else
 			{ //(0,0,0) is not one of the closest two tetrahedral vertices.
-				byte c = (byte) (aPoint | bPoint); //Our two extra vertices are determined by the closest two.
+				final byte c = (byte) (aPoint | bPoint); //Our two extra vertices are determined by the closest two.
 
 				if ((c & 0x01) == 0)
 				{
@@ -388,9 +424,9 @@ public class OpenSimplexNoise
 			}
 
 			//Contribution (1,0,0)
-			double dx1 = dx0 - 1 - SQUISH_CONSTANT_3D;
-			double dy1 = dy0 - 0 - SQUISH_CONSTANT_3D;
-			double dz1 = dz0 - 0 - SQUISH_CONSTANT_3D;
+			final double dx1 = dx0 - 1 - SQUISH_CONSTANT_3D;
+			final double dy1 = dy0 - 0 - SQUISH_CONSTANT_3D;
+			final double dz1 = dz0 - 0 - SQUISH_CONSTANT_3D;
 			double attn1 = 2 - dx1 * dx1 - dy1 * dy1 - dz1 * dz1;
 			if (attn1 > 0)
 			{
@@ -399,9 +435,9 @@ public class OpenSimplexNoise
 			}
 
 			//Contribution (0,1,0)
-			double dx2 = dx0 - 0 - SQUISH_CONSTANT_3D;
-			double dy2 = dy0 - 1 - SQUISH_CONSTANT_3D;
-			double dz2 = dz1;
+			final double dx2 = dx0 - 0 - SQUISH_CONSTANT_3D;
+			final double dy2 = dy0 - 1 - SQUISH_CONSTANT_3D;
+			final double dz2 = dz1;
 			double attn2 = 2 - dx2 * dx2 - dy2 * dy2 - dz2 * dz2;
 			if (attn2 > 0)
 			{
@@ -410,9 +446,9 @@ public class OpenSimplexNoise
 			}
 
 			//Contribution (0,0,1)
-			double dx3 = dx2;
-			double dy3 = dy1;
-			double dz3 = dz0 - 1 - SQUISH_CONSTANT_3D;
+			final double dx3 = dx2;
+			final double dy3 = dy1;
+			final double dz3 = dz0 - 1 - SQUISH_CONSTANT_3D;
 			double attn3 = 2 - dx3 * dx3 - dy3 * dy3 - dz3 * dz3;
 			if (attn3 > 0)
 			{
@@ -441,10 +477,10 @@ public class OpenSimplexNoise
 
 			//Now we determine the two lattice points not part of the tetrahedron that may contribute.
 			//This depends on the closest two tetrahedral vertices, including (1,1,1)
-			double wins = 3 - inSum;
+			final double wins = 3 - inSum;
 			if (wins < aScore || wins < bScore)
 			{ //(1,1,1) is one of the closest two tetrahedral vertices.
-				byte c = (bScore < aScore ? bPoint : aPoint); //Our other closest vertex is the closest out of a and b.
+				final byte c = (bScore < aScore ? bPoint : aPoint); //Our other closest vertex is the closest out of a and b.
 
 				if ((c & 0x01) != 0)
 				{
@@ -495,7 +531,7 @@ public class OpenSimplexNoise
 			}
 			else
 			{ //(1,1,1) is not one of the closest two tetrahedral vertices.
-				byte c = (byte) (aPoint & bPoint); //Our two extra vertices are determined by the closest two.
+				final byte c = (byte) (aPoint & bPoint); //Our two extra vertices are determined by the closest two.
 
 				if ((c & 0x01) != 0)
 				{
@@ -541,9 +577,9 @@ public class OpenSimplexNoise
 			}
 
 			//Contribution (1,1,0)
-			double dx3 = dx0 - 1 - 2 * SQUISH_CONSTANT_3D;
-			double dy3 = dy0 - 1 - 2 * SQUISH_CONSTANT_3D;
-			double dz3 = dz0 - 0 - 2 * SQUISH_CONSTANT_3D;
+			final double dx3 = dx0 - 1 - 2 * SQUISH_CONSTANT_3D;
+			final double dy3 = dy0 - 1 - 2 * SQUISH_CONSTANT_3D;
+			final double dz3 = dz0 - 0 - 2 * SQUISH_CONSTANT_3D;
 			double attn3 = 2 - dx3 * dx3 - dy3 * dy3 - dz3 * dz3;
 			if (attn3 > 0)
 			{
@@ -552,9 +588,9 @@ public class OpenSimplexNoise
 			}
 
 			//Contribution (1,0,1)
-			double dx2 = dx3;
-			double dy2 = dy0 - 0 - 2 * SQUISH_CONSTANT_3D;
-			double dz2 = dz0 - 1 - 2 * SQUISH_CONSTANT_3D;
+			final double dx2 = dx3;
+			final double dy2 = dy0 - 0 - 2 * SQUISH_CONSTANT_3D;
+			final double dz2 = dz0 - 1 - 2 * SQUISH_CONSTANT_3D;
 			double attn2 = 2 - dx2 * dx2 - dy2 * dy2 - dz2 * dz2;
 			if (attn2 > 0)
 			{
@@ -563,9 +599,9 @@ public class OpenSimplexNoise
 			}
 
 			//Contribution (0,1,1)
-			double dx1 = dx0 - 0 - 2 * SQUISH_CONSTANT_3D;
-			double dy1 = dy3;
-			double dz1 = dz2;
+			final double dx1 = dx0 - 0 - 2 * SQUISH_CONSTANT_3D;
+			final double dy1 = dy3;
+			final double dz1 = dz2;
 			double attn1 = 2 - dx1 * dx1 - dy1 * dy1 - dz1 * dz1;
 			if (attn1 > 0)
 			{
@@ -594,7 +630,7 @@ public class OpenSimplexNoise
 			boolean bIsFurtherSide;
 
 			//Decide between point (0,0,1) and (1,1,0) as closest
-			double p1 = xins + yins;
+			final double p1 = xins + yins;
 			if (p1 > 1)
 			{
 				aScore = p1 - 1;
@@ -609,7 +645,7 @@ public class OpenSimplexNoise
 			}
 
 			//Decide between point (0,1,0) and (1,0,1) as closest
-			double p2 = xins + zins;
+			final double p2 = xins + zins;
 			if (p2 > 1)
 			{
 				bScore = p2 - 1;
@@ -624,10 +660,10 @@ public class OpenSimplexNoise
 			}
 
 			//The closest out of the two (1,0,0) and (0,1,1) will replace the furthest out of the two decided above, if closer.
-			double p3 = yins + zins;
+			final double p3 = yins + zins;
 			if (p3 > 1)
 			{
-				double score = p3 - 1;
+				final double score = p3 - 1;
 				if (aScore <= bScore && aScore < score)
 				{
 					aScore = score;
@@ -643,7 +679,7 @@ public class OpenSimplexNoise
 			}
 			else
 			{
-				double score = 1 - p3;
+				final double score = 1 - p3;
 				if (aScore <= bScore && aScore < score)
 				{
 					aScore = score;
@@ -673,7 +709,7 @@ public class OpenSimplexNoise
 					zsv_ext0 = zsb + 1;
 
 					//Other extra point is based on the shared axis.
-					byte c = (byte) (aPoint & bPoint);
+					final byte c = (byte) (aPoint & bPoint);
 					if ((c & 0x01) != 0)
 					{
 						dx_ext1 = dx0 - 2 - 2 * SQUISH_CONSTANT_3D;
@@ -714,7 +750,7 @@ public class OpenSimplexNoise
 					zsv_ext0 = zsb;
 
 					//Other extra point is based on the omitted axis.
-					byte c = (byte) (aPoint | bPoint);
+					final byte c = (byte) (aPoint | bPoint);
 					if ((c & 0x01) == 0)
 					{
 						dx_ext1 = dx0 + 1 - SQUISH_CONSTANT_3D;
@@ -746,7 +782,8 @@ public class OpenSimplexNoise
 			}
 			else
 			{ //One point on (0,0,0) side, one point on (1,1,1) side
-				byte c1, c2;
+				final byte c1;
+				final byte c2;
 				if (aIsFurtherSide)
 				{
 					c1 = aPoint;
@@ -812,9 +849,9 @@ public class OpenSimplexNoise
 			}
 
 			//Contribution (1,0,0)
-			double dx1 = dx0 - 1 - SQUISH_CONSTANT_3D;
-			double dy1 = dy0 - 0 - SQUISH_CONSTANT_3D;
-			double dz1 = dz0 - 0 - SQUISH_CONSTANT_3D;
+			final double dx1 = dx0 - 1 - SQUISH_CONSTANT_3D;
+			final double dy1 = dy0 - 0 - SQUISH_CONSTANT_3D;
+			final double dz1 = dz0 - 0 - SQUISH_CONSTANT_3D;
 			double attn1 = 2 - dx1 * dx1 - dy1 * dy1 - dz1 * dz1;
 			if (attn1 > 0)
 			{
@@ -823,9 +860,9 @@ public class OpenSimplexNoise
 			}
 
 			//Contribution (0,1,0)
-			double dx2 = dx0 - 0 - SQUISH_CONSTANT_3D;
-			double dy2 = dy0 - 1 - SQUISH_CONSTANT_3D;
-			double dz2 = dz1;
+			final double dx2 = dx0 - 0 - SQUISH_CONSTANT_3D;
+			final double dy2 = dy0 - 1 - SQUISH_CONSTANT_3D;
+			final double dz2 = dz1;
 			double attn2 = 2 - dx2 * dx2 - dy2 * dy2 - dz2 * dz2;
 			if (attn2 > 0)
 			{
@@ -834,9 +871,9 @@ public class OpenSimplexNoise
 			}
 
 			//Contribution (0,0,1)
-			double dx3 = dx2;
-			double dy3 = dy1;
-			double dz3 = dz0 - 1 - SQUISH_CONSTANT_3D;
+			final double dx3 = dx2;
+			final double dy3 = dy1;
+			final double dz3 = dz0 - 1 - SQUISH_CONSTANT_3D;
 			double attn3 = 2 - dx3 * dx3 - dy3 * dy3 - dz3 * dz3;
 			if (attn3 > 0)
 			{
@@ -845,9 +882,9 @@ public class OpenSimplexNoise
 			}
 
 			//Contribution (1,1,0)
-			double dx4 = dx0 - 1 - 2 * SQUISH_CONSTANT_3D;
-			double dy4 = dy0 - 1 - 2 * SQUISH_CONSTANT_3D;
-			double dz4 = dz0 - 0 - 2 * SQUISH_CONSTANT_3D;
+			final double dx4 = dx0 - 1 - 2 * SQUISH_CONSTANT_3D;
+			final double dy4 = dy0 - 1 - 2 * SQUISH_CONSTANT_3D;
+			final double dz4 = dz0 - 0 - 2 * SQUISH_CONSTANT_3D;
 			double attn4 = 2 - dx4 * dx4 - dy4 * dy4 - dz4 * dz4;
 			if (attn4 > 0)
 			{
@@ -856,9 +893,9 @@ public class OpenSimplexNoise
 			}
 
 			//Contribution (1,0,1)
-			double dx5 = dx4;
-			double dy5 = dy0 - 0 - 2 * SQUISH_CONSTANT_3D;
-			double dz5 = dz0 - 1 - 2 * SQUISH_CONSTANT_3D;
+			final double dx5 = dx4;
+			final double dy5 = dy0 - 0 - 2 * SQUISH_CONSTANT_3D;
+			final double dz5 = dz0 - 1 - 2 * SQUISH_CONSTANT_3D;
 			double attn5 = 2 - dx5 * dx5 - dy5 * dy5 - dz5 * dz5;
 			if (attn5 > 0)
 			{
@@ -867,9 +904,9 @@ public class OpenSimplexNoise
 			}
 
 			//Contribution (0,1,1)
-			double dx6 = dx0 - 0 - 2 * SQUISH_CONSTANT_3D;
-			double dy6 = dy4;
-			double dz6 = dz5;
+			final double dx6 = dx0 - 0 - 2 * SQUISH_CONSTANT_3D;
+			final double dy6 = dy4;
+			final double dz6 = dz5;
 			double attn6 = 2 - dx6 * dx6 - dy6 * dy6 - dz6 * dz6;
 			if (attn6 > 0)
 			{
@@ -897,49 +934,19 @@ public class OpenSimplexNoise
 		return value / NORM_CONSTANT_3D;
 	}
 
-	private double extrapolate(int xsb, int ysb, double dx, double dy)
+	private double extrapolate(final int xsb, final int ysb, final double dx, final double dy)
 	{
-		int index = this.perm[(this.perm[xsb & 0xFF] + ysb) & 0xFF] & 0x0E;
+		final int index = this.perm[(this.perm[xsb & 0xFF] + ysb) & 0xFF] & 0x0E;
 		return gradients2D[index] * dx
 				+ gradients2D[index + 1] * dy;
 	}
 
-	private double extrapolate(int xsb, int ysb, int zsb, double dx, double dy, double dz)
+	private double extrapolate(final int xsb, final int ysb, final int zsb, final double dx, final double dy, final double dz)
 	{
-		int index = this.permGradIndex3D[(this.perm[(this.perm[xsb & 0xFF] + ysb) & 0xFF] + zsb) & 0xFF];
+		final int index = this.permGradIndex3D[(this.perm[(this.perm[xsb & 0xFF] + ysb) & 0xFF] + zsb) & 0xFF];
 		return gradients3D[index] * dx
 				+ gradients3D[index + 1] * dy
 				+ gradients3D[index + 2] * dz;
 	}
-
-	private static int fastFloor(double x)
-	{
-		int xi = (int) x;
-		return x < xi ? xi - 1 : xi;
-	}
-
-	//Gradients for 2D. They approximate the directions to the
-	//vertices of an octagon from the center.
-	private static byte[] gradients2D = new byte[] {
-			5, 2, 2, 5,
-			-5, 2, -2, 5,
-			5, -2, 2, -5,
-			-5, -2, -2, -5,
-	};
-
-	//Gradients for 3D. They approximate the directions to the
-	//vertices of a rhombicuboctahedron from the center, skewed so
-	//that the triangular and square facets can be inscribed inside
-	//circles of the same radius.
-	private static byte[] gradients3D = new byte[] {
-			-11, 4, 4, -4, 11, 4, -4, 4, 11,
-			11, 4, 4, 4, 11, 4, 4, 4, 11,
-			-11, -4, 4, -4, -11, 4, -4, -4, 11,
-			11, -4, 4, 4, -11, 4, 4, -4, 11,
-			-11, 4, -4, -4, 11, -4, -4, 4, -11,
-			11, 4, -4, 4, 11, -4, 4, 4, -11,
-			-11, -4, -4, -4, -11, -4, -4, -4, -11,
-			11, -4, -4, 4, -11, -4, 4, -4, -11,
-	};
 
 }

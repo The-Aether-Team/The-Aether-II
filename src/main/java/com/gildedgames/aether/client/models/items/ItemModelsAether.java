@@ -82,7 +82,9 @@ public class ItemModelsAether
 
 		registerItemModels(BlocksAether.aether_grass, new ItemModelBuilder("grass/")
 				.add(BlockAetherGrass.AETHER.getMeta(), "aether_grass")
-				.add(BlockAetherGrass.ENCHANTED.getMeta(), "enchanted_aether_grass"));
+				.add(BlockAetherGrass.ENCHANTED.getMeta(), "enchanted_aether_grass")
+				.add(BlockAetherGrass.ARCTIC.getMeta(), "arctic_grass")
+				.add(BlockAetherGrass.MAGNETIC.getMeta(), "magnetic_grass"));
 
 		registerItemModels(BlocksAether.thera_dirt, new ItemModelBuilder("thera_dirt/")
 				.add(BlockTheraDirt.DIRT.getMeta(), "thera_dirt"));

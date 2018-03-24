@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.world.aether.biomes;
 
 import com.gildedgames.aether.api.world.islands.IIslandData;
+import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.world.aether.island.gen.IIslandGenerator;
 import com.gildedgames.aether.common.world.aether.island.population.SubBiome;
 import com.gildedgames.orbis.api.util.mc.NBT;
 import com.google.common.collect.Lists;
@@ -102,5 +102,7 @@ public abstract class BiomeAetherBase extends Biome
 	public abstract Collection<NBT> createIslandComponents(IIslandData islandData);
 
 	public abstract float getRarityWeight();
+
+	public abstract void postDecorate(World world, Random rand, BlockPos pos);
 
 }

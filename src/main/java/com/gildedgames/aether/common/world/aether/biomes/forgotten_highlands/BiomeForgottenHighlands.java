@@ -1,8 +1,9 @@
-package com.gildedgames.aether.common.world.aether.biomes.highlands;
+package com.gildedgames.aether.common.world.aether.biomes.forgotten_highlands;
 
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandGenerators;
 import com.gildedgames.orbis.api.util.mc.NBT;
@@ -10,25 +11,21 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Random;
 
-public class BiomeHighlands extends BiomeAetherBase
+public class BiomeForgottenHighlands extends BiomeAetherBase
 {
 
-	public BiomeHighlands(final Biome.BiomeProperties properties, final ResourceLocation registryName)
+	public BiomeForgottenHighlands(final BiomeProperties properties, final ResourceLocation registryName)
 	{
 		super(properties, registryName);
 
-		this.setDefaultSubBiome(new SubBiomeHighlands());
+		this.topBlock = BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.AETHER);
 
-		this.registerSubBiome(new SubBiomeHighlandJungle());
-		this.registerSubBiome(new SubBiomeHighlandPlains());
-		this.registerSubBiome(new SubBiomeHighlandForest());
-		this.registerSubBiome(new SubBiomeCrystalHighlands());
+		this.setDefaultSubBiome(new SubBiomeForgotten());
 	}
 
 	@Override
@@ -52,7 +49,7 @@ public class BiomeHighlands extends BiomeAetherBase
 	@Override
 	public float getRarityWeight()
 	{
-		return 1.0F;
+		return 0.75F;
 	}
 
 	@Override

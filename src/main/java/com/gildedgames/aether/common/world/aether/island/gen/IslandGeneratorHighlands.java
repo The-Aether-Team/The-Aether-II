@@ -1,12 +1,13 @@
 package com.gildedgames.aether.common.world.aether.island.gen;
 
+import com.gildedgames.aether.api.util.OpenSimplexNoise;
 import com.gildedgames.aether.api.world.islands.IIslandData;
+import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
-import com.gildedgames.aether.common.world.util.OpenSimplexNoise;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 
@@ -18,23 +19,17 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 	// Number of samples done per chunk.
 	private static final int NOISE_SAMPLES = NOISE_XZ_SCALE + 1;
 
-	private OpenSimplexNoise simplex;
-
 	@Override
-	public void genIslandForChunk(final World world, final ChunkPrimer primer, final IIslandData island, final int chunkX, final int chunkZ)
+	public void genIslandForChunk(final OpenSimplexNoise noise, final IBlockAccess access, final ChunkPrimer primer, final IIslandData island, final int chunkX,
+			final int chunkZ)
 	{
-		if (this.simplex == null)
-		{
-			this.simplex = new OpenSimplexNoise(world.getSeed());
-		}
+		final double[] heightMap = this.generateNoise(noise, island, chunkX, chunkZ);
 
-		final Biome biome = world.getBiome(new BlockPos(chunkX * 16, 0, chunkZ * 16));
+		final Biome biome = access.getBiome(new BlockPos(chunkX * 16, 0, chunkZ * 16));
 
 		final IBlockState coastBlock = ((BiomeAetherBase) biome).getCoastalBlock();
 
 		final double height = island.getBounds().getHeight();
-
-		final double[] heightMap = this.generateNoise(island, chunkX, chunkZ);
 
 		for (int x = 0; x < 16; x++)
 		{
@@ -102,7 +97,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 				fractionX * ((1.0 - fractionZ) * c + fractionZ * d);
 	}
 
-	private double[] generateNoise(final IIslandData island, final int chunkX, final int chunkZ)
+	private double[] generateNoise(final OpenSimplexNoise noise, final IIslandData island, final int chunkX, final int chunkZ)
 	{
 		final double posX = chunkX * 16;
 		final double posZ = chunkZ * 16;
@@ -132,19 +127,19 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 				final double distZ = Math.abs(centerZ - worldZ);
 
 				// Get distance from center of Island
-				final double dist = (distX + distZ) / 450.0D;
+				final double dist = Math.hypot(distX / island.getBounds().getWidth(), distZ / island.getBounds().getLength());
 
 				// Generate noise for X/Z coordinate
-				final double noise1 = this.simplex.eval(nx, nz);
-				final double noise2 = 0.5D * this.simplex.eval(nx * 8D, nz * 8D);
-				final double noise3 = 0.25D * this.simplex.eval(nx * 16D, nz * 16D);
-				final double noise4 = 0.1D * this.simplex.eval(nx * 32D, nz * 32D);
+				final double noise1 = noise.eval(nx, nz);
+				final double noise2 = 0.5D * noise.eval(nx * 8D, nz * 8D);
+				final double noise3 = 0.25D * noise.eval(nx * 16D, nz * 16D);
+				final double noise4 = 0.1D * noise.eval(nx * 32D, nz * 32D);
 
 				// Averages noise samples linearly
 				final double sample = (noise1 + noise2 + noise3 + noise4) / 4.0D;
 
 				// Apply formula to shape noise into island, noise decreases in value the further the coord is from the center
-				final double height = sample - (0.7D * Math.pow(dist, 2));
+				final double height = sample - (dist);
 
 				data[x + (z * NOISE_SAMPLES)] = height;
 			}

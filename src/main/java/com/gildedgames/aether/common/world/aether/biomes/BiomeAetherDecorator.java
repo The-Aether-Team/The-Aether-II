@@ -414,6 +414,14 @@ public class BiomeAetherDecorator
 
 			this.genAetherLakes.generate(world, random, pos.add(x, y, z));
 		}
+
+		//
+		if (genBase instanceof BiomeAetherBase)
+		{
+			final BiomeAetherBase aetherBiome = (BiomeAetherBase) genBase;
+
+			aetherBiome.postDecorate(world, random, pos);
+		}
 	}
 
 	private void generateMineable(final WorldGenAetherMinable minable, final World world, final Random random, final BlockPos pos, final int minY,

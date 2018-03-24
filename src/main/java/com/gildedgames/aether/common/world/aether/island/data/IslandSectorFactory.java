@@ -39,7 +39,7 @@ public class IslandSectorFactory
 
 		for (final BiomeAetherBase b : POSSIBLE_BIOMES)
 		{
-			if (randomValue <= b.getRarityWeight() + chanceSum)
+			if (b.getRarityWeight() + chanceSum >= randomValue)
 			{
 				return b;
 			}

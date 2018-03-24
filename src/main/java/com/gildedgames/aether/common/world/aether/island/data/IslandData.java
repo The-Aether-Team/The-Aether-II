@@ -2,7 +2,9 @@ package com.gildedgames.aether.common.world.aether.island.data;
 
 import com.gildedgames.aether.api.world.islands.IIslandBounds;
 import com.gildedgames.aether.api.world.islands.IIslandData;
+import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.api.world.islands.IVirtualDataManager;
+import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.island.data.virtual.VirtualDataManager;
 import com.gildedgames.orbis.api.util.io.NBTFunnel;
 import com.gildedgames.orbis.api.util.mc.NBT;
@@ -14,6 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
+import javax.annotation.Nonnull;
 import java.util.Collection;
 import java.util.List;
 
@@ -25,7 +28,7 @@ public class IslandData implements IIslandData
 
 	private IVirtualDataManager chunkManager;
 
-	private Biome biome;
+	private BiomeAetherBase biome;
 
 	private BlockPos respawnPoint;
 
@@ -33,11 +36,14 @@ public class IslandData implements IIslandData
 
 	private List<NBT> components = Lists.newArrayList();
 
-	public IslandData(final World world, final IIslandBounds bounds, final Biome biome, final long seed)
+	private IIslandGenerator generator;
+
+	public IslandData(final World world, final IIslandBounds bounds, final BiomeAetherBase biome, final long seed)
 	{
 		this.world = world;
 		this.bounds = bounds;
 		this.biome = biome;
+		this.generator = biome.getIslandGenerator();
 
 		this.seed = seed;
 
@@ -72,6 +78,13 @@ public class IslandData implements IIslandData
 	public Biome getBiome()
 	{
 		return this.biome;
+	}
+
+	@Nonnull
+	@Override
+	public IIslandGenerator getGenerator()
+	{
+		return this.generator;
 	}
 
 	@Override
@@ -121,7 +134,10 @@ public class IslandData implements IIslandData
 
 		this.bounds = new IslandBounds(tag.getCompoundTag("Bounds"));
 
-		this.biome = Biome.REGISTRY.getObject(new ResourceLocation(tag.getString("BiomeID")));
+		this.biome = (BiomeAetherBase) Biome.REGISTRY.getObject(new ResourceLocation(tag.getString("BiomeID")));
+
+		this.generator = this.biome.getIslandGenerator();
+
 		this.seed = tag.getLong("Seed");
 
 		if (tag.hasKey("RespawnPoint"))

@@ -1,15 +1,16 @@
 package com.gildedgames.aether.common.world.aether.island;
 
+import com.gildedgames.aether.api.util.OpenSimplexNoise;
 import com.gildedgames.aether.api.world.ISector;
 import com.gildedgames.aether.api.world.ISectorAccess;
 import com.gildedgames.aether.api.world.IslandSectorHelper;
 import com.gildedgames.aether.api.world.islands.IIslandData;
+import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.api.world.islands.IVirtualChunk;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.features.WorldGenAetherCaves;
 import com.gildedgames.aether.common.world.aether.island.data.virtual.VirtualChunkFunnel;
-import com.gildedgames.aether.common.world.aether.island.gen.IIslandGenerator;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
@@ -36,12 +37,16 @@ public class WorldPreparationAether
 
 	private final NoiseGeneratorPerlin surfaceNoise;
 
+	private final OpenSimplexNoise noise;
+
 	private double[] depthBuffer;
 
 	public WorldPreparationAether(final World world, final Random rand)
 	{
 		this.world = world;
 		this.rand = rand;
+
+		this.noise = new OpenSimplexNoise(world.getSeed());
 
 		this.surfaceNoise = new NoiseGeneratorPerlin(this.rand, 4);
 
@@ -52,23 +57,9 @@ public class WorldPreparationAether
 	{
 		final Biome[] biomes = this.world.getBiomeProvider().getBiomesForGeneration(null, chunkX * 16, chunkZ * 16, 16, 16);
 
-		IIslandGenerator generator = null;
+		final IIslandGenerator generator = island.getGenerator();
 
-		for (final Biome b : biomes)
-		{
-			if (b instanceof BiomeAetherBase)
-			{
-				final BiomeAetherBase aetherBiome = (BiomeAetherBase) b;
-
-				generator = aetherBiome.getIslandGenerator();
-				break;
-			}
-		}
-
-		if (generator != null)
-		{
-			generator.genIslandForChunk(this.world, primer, island, chunkX, chunkZ);
-		}
+		generator.genIslandForChunk(this.noise, this.world, primer, island, chunkX, chunkZ);
 
 		this.replaceBiomeBlocks(island, primer, chunkX, chunkZ, biomes);
 

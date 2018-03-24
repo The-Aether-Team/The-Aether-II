@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.world.util;
 
+import com.gildedgames.aether.api.util.OpenSimplexNoise;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 

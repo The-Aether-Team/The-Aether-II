@@ -32,9 +32,9 @@ import java.util.Random;
 public class BlockAetherGrass extends BlockGrass implements IBlockMultiName
 {
 	public static final BlockVariant AETHER = new BlockVariant(0, "normal"),
-			ENCHANTED = new BlockVariant(1, "enchanted");
+			ENCHANTED = new BlockVariant(1, "enchanted"), ARCTIC = new BlockVariant(2, "arctic"), MAGNETIC = new BlockVariant(3, "magnetic");
 
-	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", AETHER, ENCHANTED);
+	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", AETHER, ENCHANTED, ARCTIC, MAGNETIC);
 
 	public static final PropertyBool SNOWY = PropertyBool.create("snowy");
 
@@ -71,7 +71,7 @@ public class BlockAetherGrass extends BlockGrass implements IBlockMultiName
 	@Override
 	public void updateTick(final World world, final BlockPos pos, final IBlockState state, final Random rand)
 	{
-		if (!world.isRemote && state.getValue(PROPERTY_VARIANT) == AETHER)
+		if (!world.isRemote && state.getValue(PROPERTY_VARIANT) != ENCHANTED)
 		{
 			if (world.getLightFromNeighbors(pos.up()) < 4 && world.getBlockState(pos.up()).getLightOpacity(world, pos.up()) > 2)
 			{
@@ -98,7 +98,7 @@ public class BlockAetherGrass extends BlockGrass implements IBlockMultiName
 								world.getLightFromNeighbors(randomNeighbor.up()) >= 4
 								&& aboveState.getLightOpacity(world, randomNeighbor.up()) <= 2)
 						{
-							final IBlockState grassState = this.getDefaultState().withProperty(PROPERTY_VARIANT, AETHER);
+							final IBlockState grassState = this.getDefaultState().withProperty(PROPERTY_VARIANT, state.getValue(PROPERTY_VARIANT));
 
 							world.setBlockState(randomNeighbor, grassState);
 						}

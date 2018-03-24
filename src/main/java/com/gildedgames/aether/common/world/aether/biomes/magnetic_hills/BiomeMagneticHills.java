@@ -1,18 +1,21 @@
 package com.gildedgames.aether.common.world.aether.biomes.magnetic_hills;
 
 import com.gildedgames.aether.api.world.islands.IIslandData;
+import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
-import com.gildedgames.aether.common.world.aether.island.gen.IIslandGenerator;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandGenerators;
 import com.gildedgames.orbis.api.util.mc.NBT;
 import com.google.common.collect.Lists;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 
 public class BiomeMagneticHills extends BiomeAetherBase
 {
@@ -20,6 +23,8 @@ public class BiomeMagneticHills extends BiomeAetherBase
 	public BiomeMagneticHills(final BiomeProperties properties, final ResourceLocation registryName)
 	{
 		super(properties, registryName);
+
+		this.topBlock = BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.MAGNETIC);
 
 		this.setDefaultSubBiome(new SubBiomeMagneticHills());
 	}
@@ -54,6 +59,12 @@ public class BiomeMagneticHills extends BiomeAetherBase
 	public float getRarityWeight()
 	{
 		return 1.0F;
+	}
+
+	@Override
+	public void postDecorate(final World world, final Random rand, final BlockPos pos)
+	{
+
 	}
 
 }

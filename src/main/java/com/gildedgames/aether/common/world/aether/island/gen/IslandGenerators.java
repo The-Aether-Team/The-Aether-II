@@ -1,5 +1,7 @@
 package com.gildedgames.aether.common.world.aether.island.gen;
 
+import com.gildedgames.aether.api.world.islands.IIslandGenerator;
+
 public class IslandGenerators
 {
 

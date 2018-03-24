@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.world.aether.biomes;
 
+import com.gildedgames.aether.api.util.OpenSimplexNoise;
 import com.gildedgames.aether.common.world.aether.island.population.SubBiome;
 import com.gildedgames.aether.common.world.aether.island.population.WorldDecoration;
 import com.gildedgames.aether.common.world.util.GenUtil;
-import com.gildedgames.aether.common.world.util.OpenSimplexNoise;
 import com.gildedgames.orbis.api.processing.BlockAccessExtendedWrapper;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

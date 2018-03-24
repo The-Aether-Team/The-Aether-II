@@ -67,6 +67,74 @@
 				"model": "aether:grass/enchanted_aether_grass",
 				"y": 270
 			}
+		],
+		"snowy=true,variant=arctic": [
+			{
+				"model": "aether:grass/aether_grass_snowed"
+			},
+			{
+				"model": "aether:grass/aether_grass_snowed",
+				"y": 90
+			},
+			{
+				"model": "aether:grass/aether_grass_snowed",
+				"y": 180
+			},
+			{
+				"model": "aether:grass/aether_grass_snowed",
+				"y": 270
+			}
+		],
+		"snowy=false,variant=arctic": [
+			{
+				"model": "aether:grass/arctic_grass"
+			},
+			{
+				"model": "aether:grass/arctic_grass",
+				"y": 90
+			},
+			{
+				"model": "aether:grass/arctic_grass",
+				"y": 180
+			},
+			{
+				"model": "aether:grass/arctic_grass",
+				"y": 270
+			}
+		],
+		"snowy=true,variant=magnetic": [
+			{
+				"model": "aether:grass/aether_grass_snowed"
+			},
+			{
+				"model": "aether:grass/aether_grass_snowed",
+				"y": 90
+			},
+			{
+				"model": "aether:grass/aether_grass_snowed",
+				"y": 180
+			},
+			{
+				"model": "aether:grass/aether_grass_snowed",
+				"y": 270
+			}
+		],
+		"snowy=false,variant=magnetic": [
+			{
+				"model": "aether:grass/magnetic_grass"
+			},
+			{
+				"model": "aether:grass/magnetic_grass",
+				"y": 90
+			},
+			{
+				"model": "aether:grass/magnetic_grass",
+				"y": 180
+			},
+			{
+				"model": "aether:grass/magnetic_grass",
+				"y": 270
+			}
 		]
 	}
 }

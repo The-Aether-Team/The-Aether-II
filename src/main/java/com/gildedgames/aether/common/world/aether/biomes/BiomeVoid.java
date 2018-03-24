@@ -1,15 +1,18 @@
 package com.gildedgames.aether.common.world.aether.biomes;
 
 import com.gildedgames.aether.api.world.islands.IIslandData;
+import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.world.aether.island.gen.IIslandGenerator;
 import com.gildedgames.orbis.api.util.mc.NBT;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Random;
 
 public class BiomeVoid extends BiomeAetherBase
 {
@@ -41,6 +44,12 @@ public class BiomeVoid extends BiomeAetherBase
 	public float getRarityWeight()
 	{
 		return 0.0F;
+	}
+
+	@Override
+	public void postDecorate(final World world, final Random rand, final BlockPos pos)
+	{
+
 	}
 
 }

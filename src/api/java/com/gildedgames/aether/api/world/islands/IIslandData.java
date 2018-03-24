@@ -38,6 +38,9 @@ public interface IIslandData extends NBT
 	@Nonnull
 	Biome getBiome();
 
+	@Nonnull
+	IIslandGenerator getGenerator();
+
 	/**
 	 * Returns the respawn point of this island.
 	 *
