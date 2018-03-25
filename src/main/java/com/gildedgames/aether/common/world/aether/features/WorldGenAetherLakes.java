@@ -89,14 +89,21 @@ public class WorldGenAetherLakes extends WorldGenerator
 
 					if (flag)
 					{
-						final Material material = world.getBlockState(pos.add(x, y, z)).getMaterial();
+						final IBlockState state = world.getBlockState(pos.add(x, y, z));
+
+						final Material material = state.getMaterial();
 
 						if (y >= 4 && material.isLiquid())
 						{
 							return false;
 						}
 
-						if (y < 4 && !material.isSolid() && world.getBlockState(pos.add(x, y, z)).getBlock() != this.liquid)
+						if (state.getBlock() == BlocksAether.aercloud)
+						{
+							return false;
+						}
+
+						if (y < 4 && !material.isSolid() && state.getBlock() != this.liquid)
 						{
 							return false;
 						}
