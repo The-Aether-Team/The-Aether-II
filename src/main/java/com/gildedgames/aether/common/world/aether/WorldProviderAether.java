@@ -172,6 +172,13 @@ public class WorldProviderAether extends WorldProviderSurface
 
 	@Override
 	@SideOnly(Side.CLIENT)
+	public boolean doesXZShowFog(final int x, final int z)
+	{
+		return false;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
 	public float[] calcSunriseSunsetColors(final float angle, final float partialTicks)
 	{
 		final float f2 = 0.4F;

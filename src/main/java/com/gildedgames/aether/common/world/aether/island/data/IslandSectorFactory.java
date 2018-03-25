@@ -60,12 +60,12 @@ public class IslandSectorFactory
 		{
 			final int sectorArea = IslandSector.CHUNK_SIZE * 16;
 
-			final int width = 640;
-			final int height = 240;
-			final int length = 640;
+			final int width = 1280;
+			final int height = 255;
+			final int length = 1280;
 
 			final int x = (sectorArea * sectorX);
-			final int y = 10 /*+ (i * 60)*/;
+			final int y = 0;
 			final int z = (sectorArea * sectorY);
 
 			final IIslandBounds bounds = new IslandBounds(x, y, z, x + width, y + height, z + length);
