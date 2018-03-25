@@ -4,14 +4,14 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
-public class BlockMagneticClay extends Block
+public class BlockFerrositeSand extends Block
 {
-	public BlockMagneticClay()
+	public BlockFerrositeSand()
 	{
-		super(Material.ROCK);
+		super(Material.SAND);
 
 		this.setHardness(1.5f);
 
-		this.setSoundType(SoundType.STONE);
+		this.setSoundType(SoundType.SAND);
 	}
 }

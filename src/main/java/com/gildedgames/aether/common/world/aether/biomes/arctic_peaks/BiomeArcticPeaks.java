@@ -43,7 +43,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase
 	@Override
 	public IBlockState getCoastalBlock()
 	{
-		return BlocksAether.aether_dirt.getDefaultState().withProperty(BlockAetherDirt.PROPERTY_VARIANT, BlockAetherDirt.COARSE_DIRT);
+		return Blocks.PACKED_ICE.getDefaultState();
 	}
 
 	@Override

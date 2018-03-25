@@ -32,7 +32,7 @@ public class BiomeMagneticHills extends BiomeAetherBase
 	@Override
 	public IBlockState getCoastalBlock()
 	{
-		return BlocksAether.crude_scatterglass.getDefaultState();
+		return BlocksAether.ferrosite_sand.getDefaultState();
 	}
 
 	@Override

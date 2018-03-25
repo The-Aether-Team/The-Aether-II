@@ -1,6 +1,6 @@
 {
 	"parent": "block/cube_all",
 	"textures": {
-		"all": "aether:blocks/magnetic_clay"
+		"all": "aether:blocks/ferrosite_sand"
 	}
 }

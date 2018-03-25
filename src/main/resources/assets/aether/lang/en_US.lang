@@ -34,10 +34,11 @@ tile.aether.green_light_skyroot_leaves.name=Green Wisproot Leaves
 tile.aether.dark_blue_light_skyroot_leaves.name=Dark Blue Wisproot Leaves
 tile.aether.golden_oak_leaves.name=Amberoot Leaves
 tile.aether.aether_portal.name=Aether Portal
-tile.aether.tall_aether_grass.short.name=Short Aether Grass
-tile.aether.tall_aether_grass.normal.name=Aether Grass
-tile.aether.tall_aether_grass.long.name=Long Aether Grass
+tile.aether.tall_aether_grass.short.name=Short Highlands Grass
+tile.aether.tall_aether_grass.normal.name=Highlands Grass
+tile.aether.tall_aether_grass.long.name=Long Highlands Grass
 tile.aether.quicksoil.name=Quicksoil
+tile.aether.ferrosite_sand.name=Ferrosite Sand
 tile.aether.aether_crafting_table.name=Skyroot Crafting Table
 tile.aether.skyroot_trapdoor.name=Skyroot Trapdoor
 tile.aether.secret_skyroot_trapdoor.name=Secret Skyroot Trapdoor
@@ -243,7 +244,8 @@ tile.aether.valkyrie_grass.full.name=Valkyrie Grass
 tile.aether.aether_teleporter.name=Aether Teleporter
 tile.aether.thera_dirt.dirt.name=Thera Dirt
 tile.aether.thera_grass.normal.name=Thera Grass
-tile.aether.magnetic_clay.name=Magnetic Clay
+tile.aether.ferrosite.name=Ferrosite
+tile.aether.rusted_ferrosite.name=Rusted Ferrosite
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick

@@ -107,7 +107,8 @@ public class ItemModelsAether
 
 		registerItemModels(BlocksAether.cloudwool_block, "cloudwool_block");
 
-		registerItemModels(BlocksAether.magnetic_clay, "magnetic_clay");
+		registerItemModels(BlocksAether.ferrosite, "ferrosite");
+		registerItemModels(BlocksAether.rusted_ferrosite, "rusted_ferrosite");
 
 		registerItemModels(BlocksAether.skyroot_log, "logs/skyroot_log");
 		registerItemModels(BlocksAether.dark_skyroot_log, "logs/dark_skyroot_log");
@@ -156,6 +157,7 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.arkenium_ore, "ores/arkenium_ore");
 
 		registerItemModels(BlocksAether.quicksoil, "quicksoil");
+		registerItemModels(BlocksAether.ferrosite_sand, "ferrosite_sand");
 		registerItemModels(BlocksAether.icestone_ore, "icestone_ore");
 		registerItemModels(BlocksAether.icestone_bricks, "icestone_bricks");
 

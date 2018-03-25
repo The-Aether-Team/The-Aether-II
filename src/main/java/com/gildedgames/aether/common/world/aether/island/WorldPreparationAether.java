@@ -78,7 +78,7 @@ public class WorldPreparationAether
 
 				if (val > 0.0)
 				{
-					for (int y = 60; y < 60 + (val * 10); y++)
+					for (int y = 70; y < 70 + (val * 10); y++)
 					{
 						primer.setBlockState(x, y, z, BlocksAether.aercloud.getDefaultState());
 					}
@@ -213,7 +213,7 @@ public class WorldPreparationAether
 				{
 					final IBlockState state = primer.getBlockState(x, y, z);
 
-					if (state.getBlock() == BlocksAether.holystone || state.getBlock() == BlocksAether.magnetic_clay)
+					if (state.getBlock() == BlocksAether.holystone || state.getBlock() == BlocksAether.ferrosite)
 					{
 						primer.setBlockState(x, y, z, pentration < 1 ? biome.topBlock : biome.fillerBlock);
 					}
