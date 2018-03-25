@@ -7,12 +7,13 @@ import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 
-public class IslandGeneratorHighlands implements IIslandGenerator
+public class IslandGeneratorArcticPeaks implements IIslandGenerator
 {
 	// Resolution of the evalNormalised for a chunk. Should be a power of 2.
 	private static final int NOISE_XZ_SCALE = 4;
@@ -119,6 +120,8 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 
 				double bottomHeightMod = Math.pow(normal, 0.2);
 
+				final double newHeightSample = Math.min(1.1, Math.pow(heightSample, 4.0) * 0.55);
+
 				final double bottomHeight = 100;
 
 				if (heightSample > cutoffPoint)
@@ -145,17 +148,24 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 						}
 					}
 
-					final double maxY = bottomMaxY + (heightSample * topHeight);
+					final double maxY = bottomMaxY + (newHeightSample * topHeight);
 
 					for (int y = (int) bottomMaxY; y < maxY; y++)
 					{
-						if (coastBlock != null && (heightSample < cutoffPoint + 0.05 && y == 100))
+						if (coastBlock != null && (newHeightSample < cutoffPoint + 0.05 && y == 100))
 						{
 							primer.setBlockState(x, y, z, coastBlock);
 						}
 						else
 						{
-							primer.setBlockState(x, y, z, stoneBlock);
+							if (newHeightSample > 0.7 && y > maxY - 8)
+							{
+								primer.setBlockState(x, y, z, Blocks.SNOW.getDefaultState());
+							}
+							else
+							{
+								primer.setBlockState(x, y, z, stoneBlock);
+							}
 						}
 					}
 				}

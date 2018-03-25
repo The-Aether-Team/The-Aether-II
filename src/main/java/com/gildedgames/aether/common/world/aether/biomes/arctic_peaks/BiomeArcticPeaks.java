@@ -1,12 +1,17 @@
 package com.gildedgames.aether.common.world.aether.biomes.arctic_peaks;
 
+import com.gildedgames.aether.api.util.OpenSimplexNoise;
+import com.gildedgames.aether.api.world.ISector;
+import com.gildedgames.aether.api.world.ISectorAccess;
+import com.gildedgames.aether.api.world.IslandSectorHelper;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherDirt;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
-import com.gildedgames.aether.common.world.aether.biomes.highlands.SubBiomeCrystalHighlands;
+import com.gildedgames.aether.common.world.aether.island.ChunkGeneratorAether;
+import com.gildedgames.aether.common.world.aether.island.gen.IslandGeneratorHighlands;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandGenerators;
 import com.gildedgames.orbis.api.util.mc.NBT;
 import net.minecraft.block.state.IBlockState;
@@ -14,6 +19,10 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -28,7 +37,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase
 
 		this.topBlock = BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.ARCTIC);
 
-		this.setDefaultSubBiome(new SubBiomeCrystalHighlands());
+		this.setDefaultSubBiome(new SubBiomeArctic());
 	}
 
 	@Override
@@ -40,7 +49,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase
 	@Override
 	public IIslandGenerator getIslandGenerator()
 	{
-		return IslandGenerators.HIGHLANDS;
+		return IslandGenerators.ARCTIC_PEAKS;
 	}
 
 	@Override
@@ -58,32 +67,72 @@ public class BiomeArcticPeaks extends BiomeAetherBase
 	@Override
 	public void postDecorate(final World world, final Random rand, final BlockPos pos)
 	{
-		final int posX = pos.getX() + 8;
-		final int posZ = pos.getZ() + 8;
+		final int chunkX = pos.getX() >> 4;
+		final int chunkZ = pos.getZ() >> 4;
 
-		for (int x = 0; x < 16; x++)
+		final ISectorAccess access = IslandSectorHelper.getAccess(world);
+		final ISector sector = access.provideSector(chunkX, chunkZ);
+
+		// TODO: support multiple islands in same chunk
+		final IIslandData island = sector.getIslandsForRegion(pos.getX(), 0, pos.getZ(), 16, 255, 16)
+				.stream().findFirst().orElse(null);
+
+		if (island == null)
 		{
-			for (int z = 0; z < 16; z++)
+			return;
+		}
+
+		final IChunkGenerator generator = ((WorldServer) world).getChunkProvider().chunkGenerator;
+
+		if (generator instanceof ChunkGeneratorAether)
+		{
+			final ChunkGeneratorAether aetherGen = (ChunkGeneratorAether) generator;
+
+			final OpenSimplexNoise noise = aetherGen.getPreparation().getNoise();
+
+			final double[] heightMap = IslandGeneratorHighlands.generateNoise(noise, island, chunkX, chunkZ);
+
+			final int posX = pos.getX() + 8;
+			final int posZ = pos.getZ() + 8;
+
+			for (int x = 0; x < 16; x++)
 			{
-				final BlockPos p = new BlockPos(posX + x, 0, posZ + z);
-
-				if (world.isBlockLoaded(p))
+				for (int z = 0; z < 16; z++)
 				{
-					final BlockPos blockpos1 = p.add(0, world.getHeight(posX + x, posZ + z), 0);
-					final BlockPos blockpos2 = blockpos1.down();
+					final BlockPos p = new BlockPos(posX + x, 0, posZ + z);
 
-					if (world.canBlockFreezeWater(blockpos2))
+					if (world.isBlockLoaded(p))
 					{
-						world.setBlockState(blockpos2, Blocks.ICE.getDefaultState(), 2);
-					}
+						final double sample = IslandGeneratorHighlands.interpolate(heightMap, x, z);
+						final double heightSample = sample + 1.0;
 
-					if (world.canSnowAt(blockpos1, true))
-					{
-						world.setBlockState(blockpos1, Blocks.SNOW_LAYER.getDefaultState(), 2);
+						final BlockPos blockpos1 = p.add(0, world.getHeight(posX + x, posZ + z), 0);
+						final BlockPos blockpos2 = blockpos1.down();
+
+						if (world.canBlockFreezeWater(blockpos2))
+						{
+							world.setBlockState(blockpos2, Blocks.ICE.getDefaultState(), 2);
+						}
+
+						if (heightSample > 0.5)
+						{
+							if (world.canSnowAt(blockpos1, true))
+							{
+								world.setBlockState(blockpos1, Blocks.SNOW_LAYER.getDefaultState(), 2);
+							}
+						}
 					}
 				}
 			}
 		}
+
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getSkyColorByTemp(final float currentTemperature)
+	{
+		return 0xcbe4eb;
 	}
 
 }
