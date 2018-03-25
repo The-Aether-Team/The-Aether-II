@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.world.aether.island;
 
+import com.gildedgames.aether.api.util.NoiseUtil;
 import com.gildedgames.aether.api.util.OpenSimplexNoise;
 import com.gildedgames.aether.api.world.ISector;
 import com.gildedgames.aether.api.world.ISectorAccess;
@@ -53,9 +54,37 @@ public class WorldPreparationAether
 		this.caveGenerator = new WorldGenAetherCaves();
 	}
 
+	public OpenSimplexNoise getNoise()
+	{
+		return this.noise;
+	}
+
 	public void generateBaseTerrain(final ChunkPrimer primer, final IIslandData island, final int chunkX, final int chunkZ)
 	{
 		final Biome[] biomes = this.world.getBiomeProvider().getBiomesForGeneration(null, chunkX * 16, chunkZ * 16, 16, 16);
+
+		final int worldX = chunkX * 16;
+		final int worldZ = chunkZ * 16;
+
+		for (int x = 0; x < 16; x++)
+		{
+			final double nx = (worldX + x) / 70D;
+
+			for (int z = 0; z < 16; z++)
+			{
+				final double nz = (worldZ + z) / 70D;
+
+				final double val = NoiseUtil.normalise(NoiseUtil.something(this.noise, nx, nz));
+
+				if (val > 0.0)
+				{
+					for (int y = 60; y < 60 + (val * 10); y++)
+					{
+						primer.setBlockState(x, y, z, BlocksAether.aercloud.getDefaultState());
+					}
+				}
+			}
+		}
 
 		final IIslandGenerator generator = island.getGenerator();
 
@@ -150,7 +179,7 @@ public class WorldPreparationAether
 	// Calculate max penetration depth
 	public void replaceBiomeBlocks(final IIslandData island, final ChunkPrimer primer, final int chunkX, final int chunkZ, final Biome[] biomes)
 	{
-		// Penetration depth noise generation
+		// Penetration depth evalNormalised generation
 		this.depthBuffer = this.surfaceNoise.getRegion(this.depthBuffer,
 				(double) (chunkX * 16), (double) (chunkZ * 16), 16, 16, 0.0625D, 0.0625D, 1.0D);
 
