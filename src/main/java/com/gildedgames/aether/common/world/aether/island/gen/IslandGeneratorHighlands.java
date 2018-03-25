@@ -110,7 +110,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 
 				final double bottomMaxY = 100;
 
-				final double topHeight = 146;
+				final double topHeight = 80;
 
 				final double cutoffPoint = 0.325;
 
@@ -145,7 +145,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 						}
 					}
 
-					final double maxY = bottomMaxY + (heightSample * topHeight);
+					final double maxY = bottomMaxY + ((heightSample - cutoffPoint) * topHeight);
 
 					for (int y = (int) bottomMaxY; y < maxY; y++)
 					{
