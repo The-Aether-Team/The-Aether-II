@@ -1,7 +1,7 @@
 {
 	"variants": {
 		"normal": {
-			"model": "aether:magnetic_clay"
+			"model": "aether:ferrosite"
 		}
 	}
 }

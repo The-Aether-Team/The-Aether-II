@@ -72,7 +72,9 @@ public class BlocksAether
 
 	public static final BlockHolystone holystone = new BlockHolystone();
 
-	public static final BlockMagneticClay magnetic_clay = new BlockMagneticClay();
+	public static final BlockFerrosite ferrosite = new BlockFerrosite();
+
+	public static final BlockRustedFerrosite rusted_ferrosite = new BlockRustedFerrosite();
 
 	public static final Block holystone_brick = new BlockBuilder(Material.ROCK)
 			.setSoundType(SoundType.STONE).setHardness(2.0f);
@@ -158,6 +160,8 @@ public class BlocksAether
 	public static final BlockTallAetherGrass tall_aether_grass = new BlockTallAetherGrass();
 
 	public static final BlockQuicksoil quicksoil = new BlockQuicksoil();
+
+	public static final BlockFerrositeSand ferrosite_sand = new BlockFerrositeSand();
 
 	public static final BlockAetherCraftingTable aether_crafting_table = new BlockAetherCraftingTable();
 
@@ -333,7 +337,8 @@ public class BlocksAether
 		r.register("aether_dirt", aether_dirt.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 		r.register("aether_grass", aether_grass.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 		r.register("holystone", holystone.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
-		r.register("magnetic_clay", magnetic_clay.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		r.register("ferrosite", ferrosite.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		r.register("rusted_ferrosite", rusted_ferrosite.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
 		r.register("skyroot_bed", skyroot_bed);
 
@@ -348,6 +353,7 @@ public class BlocksAether
 		r.register("icestone_ore", icestone_ore.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
 		r.register("quicksoil", quicksoil.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		r.register("ferrosite_sand", ferrosite_sand.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
 		r.register("aether_crafting_table", aether_crafting_table.setCreativeTab(CreativeTabsAether.UTILITY));
 

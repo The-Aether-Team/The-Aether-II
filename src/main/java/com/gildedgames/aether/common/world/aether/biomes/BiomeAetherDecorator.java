@@ -63,11 +63,11 @@ public class BiomeAetherDecorator
 	{
 		final BlockMatcher holystoneMatcher = BlockMatcher.forBlock(BlocksAether.holystone);
 
-		this.genAmbrosium = new WorldGenAetherMinable(BlocksAether.ambrosium_ore.getDefaultState(), 16, holystoneMatcher);
-		this.genZanite = new WorldGenAetherMinable(BlocksAether.zanite_ore.getDefaultState(), 8, holystoneMatcher);
-		this.genGravitite = new WorldGenAetherMinable(BlocksAether.gravitite_ore.getDefaultState(), 5, holystoneMatcher);
-		this.genIcestone = new WorldGenAetherMinable(BlocksAether.icestone_ore.getDefaultState(), 12, holystoneMatcher);
-		this.genArkenium = new WorldGenAetherMinable(BlocksAether.arkenium_ore.getDefaultState(), 6, holystoneMatcher);
+		this.genAmbrosium = new WorldGenAetherMinable(BlocksAether.ambrosium_ore.getDefaultState(), 14, holystoneMatcher);
+		this.genZanite = new WorldGenAetherMinable(BlocksAether.zanite_ore.getDefaultState(), 5, holystoneMatcher);
+		this.genGravitite = new WorldGenAetherMinable(BlocksAether.gravitite_ore.getDefaultState(), 3, holystoneMatcher);
+		this.genIcestone = new WorldGenAetherMinable(BlocksAether.icestone_ore.getDefaultState(), 10, holystoneMatcher);
+		this.genArkenium = new WorldGenAetherMinable(BlocksAether.arkenium_ore.getDefaultState(), 5, holystoneMatcher);
 
 		final BlockMatcher dirtMatcher = BlockMatcher.forBlock(BlocksAether.aether_dirt);
 
@@ -458,17 +458,17 @@ public class BiomeAetherDecorator
 
 	protected void generateOres(final World world, final Random random, final BlockPos pos)
 	{
-		this.generateMineable(this.genAmbrosium, world, random, pos, 0, 128, 20);
-		this.generateMineable(this.genZanite, world, random, pos, 0, 128, 15);
-		this.generateMineable(this.genGravitite, world, random, pos, 0, 128, 10);
-		this.generateMineable(this.genIcestone, world, random, pos, 0, 128, 20);
-		this.generateMineable(this.genArkenium, world, random, pos, 0, 128, 13);
+		this.generateMineable(this.genAmbrosium, world, random, pos, 0, 256, 20);
+		this.generateMineable(this.genZanite, world, random, pos, 0, 256, 15);
+		this.generateMineable(this.genGravitite, world, random, pos, 0, 50, 10);
+		this.generateMineable(this.genIcestone, world, random, pos, 0, 256, 15);
+		this.generateMineable(this.genArkenium, world, random, pos, 0, 70, 10);
 
 		this.generateMineable(this.genCoarseAetherDirtOnDirt, world, random, pos, 0, 128, 10);
-		this.generateMineable(this.genCoarseAetherDirtOnHolystone, world, random, pos, 0, 128, 20);
+		this.generateMineable(this.genCoarseAetherDirtOnHolystone, world, random, pos, 0, 100, 10);
 		this.generateMineable(this.genQuicksoilOnGrass, world, random, pos, 0, 128, 10);
 
-		this.generateMineable(this.genMossyHolystone, world, random, pos, 0, 90, 45);
+		this.generateMineable(this.genMossyHolystone, world, random, pos, 0, 100, 25);
 		this.generateMineable(this.genCrudeScatterglass, world, random, pos, 0, 110, 25);
 	}
 

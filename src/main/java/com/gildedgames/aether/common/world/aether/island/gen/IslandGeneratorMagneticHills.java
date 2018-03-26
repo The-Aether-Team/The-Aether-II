@@ -97,7 +97,7 @@ public class IslandGeneratorMagneticHills implements IIslandGenerator
 						}
 						else
 						{
-							primer.setBlockState(x, y, z, magnetic ? BlocksAether.magnetic_clay.getDefaultState() : BlocksAether.holystone.getDefaultState());
+							primer.setBlockState(x, y, z, magnetic ? BlocksAether.ferrosite.getDefaultState() : BlocksAether.holystone.getDefaultState());
 						}
 					}
 
@@ -109,7 +109,7 @@ public class IslandGeneratorMagneticHills implements IIslandGenerator
 						}
 						else
 						{
-							primer.setBlockState(x, y, z, magnetic ? BlocksAether.magnetic_clay.getDefaultState() : BlocksAether.holystone.getDefaultState());
+							primer.setBlockState(x, y, z, magnetic ? BlocksAether.ferrosite.getDefaultState() : BlocksAether.holystone.getDefaultState());
 						}
 					}
 				}

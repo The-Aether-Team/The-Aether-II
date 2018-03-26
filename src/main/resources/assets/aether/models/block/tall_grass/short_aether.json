@@ -1,6 +1,6 @@
 {
 	"parent": "block/tinted_cross",
 	"textures": {
-		"cross": "aether:blocks/tall_grass/short_aether"
+		"cross": "aether:blocks/tall_grass/short_highlands"
 	}
 }

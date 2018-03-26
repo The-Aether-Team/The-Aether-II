@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "aether:blocks/tall_grass/short_aether"
+		"layer0": "aether:blocks/tall_grass/short_highlands"
 	}
 }
