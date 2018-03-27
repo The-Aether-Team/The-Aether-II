@@ -1,7 +1,13 @@
 {
 	"variants": {
-        "variant=short": { "model": "aether:tall_grass/short_aether" },
-        "variant=normal": { "model": "aether:tall_grass/normal_aether" },
-        "variant=long": { "model": "aether:tall_grass/long_aether" }
+        "type=highlands,variant=short": { "model": "aether:tall_grass/short_aether" },
+        "type=highlands,variant=normal": { "model": "aether:tall_grass/normal_aether" },
+        "type=highlands,variant=long": { "model": "aether:tall_grass/long_aether" },
+        "type=arctic,variant=short": { "model": "aether:tall_grass/short_arctic" },
+        "type=arctic,variant=normal": { "model": "aether:tall_grass/normal_arctic" },
+        "type=arctic,variant=long": { "model": "aether:tall_grass/long_arctic" },
+        "type=magnetic,variant=short": { "model": "aether:tall_grass/short_magnetic" },
+        "type=magnetic,variant=normal": { "model": "aether:tall_grass/normal_magnetic" },
+        "type=magnetic,variant=long": { "model": "aether:tall_grass/long_magnetic" }
     }
 }

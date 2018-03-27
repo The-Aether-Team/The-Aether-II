@@ -1,16 +1,20 @@
 package com.gildedgames.aether.common.blocks.natural.plants;
 
+import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.IBlockMultiName;
+import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -31,11 +35,20 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", SHORT, NORMAL, LONG);
 
+	public static final PropertyEnum<BlockTallAetherGrass.Type> TYPE = PropertyEnum
+			.create("type", BlockTallAetherGrass.Type.class, Type.HIGHLANDS, Type.ARCTIC, Type.MAGNETIC);
+
 	private static final AxisAlignedBB GRASS_SHORT_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.3D, 0.9D);
 
 	private static final AxisAlignedBB GRASS_NORMAL_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.6D, 0.9D);
 
 	private static final AxisAlignedBB GRASS_LONG_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.9D, 0.9D);
+
+	private static final IBlockState ARCTIC_GRASS = BlocksAether.aether_grass.getDefaultState()
+			.withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.ARCTIC);
+
+	private static final IBlockState MAGNETIC_GRASS = BlocksAether.aether_grass.getDefaultState()
+			.withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.MAGNETIC);
 
 	public BlockTallAetherGrass()
 	{
@@ -43,7 +56,30 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 
 		this.setSoundType(SoundType.PLANT);
 
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, SHORT));
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, SHORT).withProperty(TYPE, Type.HIGHLANDS));
+	}
+
+	@Override
+	public IBlockState getActualState(final IBlockState state, final IBlockAccess worldIn, final BlockPos pos)
+	{
+		final IBlockState downState = worldIn.getBlockState(pos.down());
+
+		final Type type;
+
+		if (downState == ARCTIC_GRASS)
+		{
+			type = Type.ARCTIC;
+		}
+		else if (downState == MAGNETIC_GRASS)
+		{
+			type = Type.MAGNETIC;
+		}
+		else
+		{
+			type = Type.HIGHLANDS;
+		}
+
+		return state.withProperty(TYPE, type);
 	}
 
 	@Override
@@ -126,7 +162,7 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, PROPERTY_VARIANT);
+		return new BlockStateContainer(this, TYPE, PROPERTY_VARIANT);
 	}
 
 	@Override
@@ -139,6 +175,24 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 	public int damageDropped(final IBlockState state)
 	{
 		return state.getValue(PROPERTY_VARIANT).getMeta();
+	}
+
+	public enum Type implements IStringSerializable
+	{
+		HIGHLANDS("highlands"), ARCTIC("arctic"), MAGNETIC("magnetic");
+
+		private final String name;
+
+		Type(final String name)
+		{
+			this.name = name;
+		}
+
+		@Override
+		public String getName()
+		{
+			return this.name;
+		}
 	}
 
 }
