@@ -42,14 +42,33 @@ public class IslandGeneratorMagneticHills implements IIslandGenerator
 
 		final MagneticHillsData magneticHillsData = ObjectFilter.getFirstFrom(island.getComponents(), MagneticHillsData.class);
 
+		final int posX = chunkX * 16;
+		final int posZ = chunkZ * 16;
+
+		final double centerX = island.getBounds().getCenterX();
+		final double centerZ = island.getBounds().getCenterZ();
+
+		final double radiusX = island.getBounds().getWidth() / 2.0;
+		final double radiusZ = island.getBounds().getLength() / 2.0;
+
 		for (int x = 0; x < 16; x++)
 		{
 			for (int z = 0; z < 16; z++)
 			{
 				this.magneticShaftsRand.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
 
-				final double sample = this.interpolate(heightMap, x, z, NOISE_XZ_SCALE);
-				final double heightSample = sample + 1.0D;
+				final int worldX = posX + x;
+				final int worldZ = posZ + z;
+
+				final double sample = this.interpolate(heightMap, x, z);
+
+				final double distX = Math.abs((centerX - worldX) * (1.0 / radiusX));
+				final double distZ = Math.abs((centerZ - worldZ) * (1.0 / radiusZ));
+
+				// Get distance from center of Island
+				final double dist = Math.sqrt(distX * distX + distZ * distZ);
+
+				final double heightSample = sample + 1.0D - dist;
 
 				double magneticSample = heightSample;
 
@@ -153,10 +172,10 @@ public class IslandGeneratorMagneticHills implements IIslandGenerator
 		return magneticSample - (closestDist / this.currentPillar.getRadius());
 	}
 
-	private double interpolate(final double[] data, final int x, final int z, final int noiseXZScale)
+	private double interpolate(final double[] data, final int x, final int z)
 	{
-		final double x0 = (double) x / noiseXZScale;
-		final double z0 = (double) z / noiseXZScale;
+		final double x0 = (double) x / NOISE_XZ_SCALE;
+		final double z0 = (double) z / NOISE_XZ_SCALE;
 
 		final int integerX = (int) Math.floor(x0);
 		final double fractionX = x0 - integerX;
@@ -181,9 +200,6 @@ public class IslandGeneratorMagneticHills implements IIslandGenerator
 		final double minX = island.getBounds().getMinX();
 		final double minZ = island.getBounds().getMinZ();
 
-		final double centerX = island.getBounds().getCenterX();
-		final double centerZ = island.getBounds().getCenterZ();
-
 		final double[] data = new double[NOISE_SAMPLES * NOISE_SAMPLES];
 
 		// Generate half-resolution noise
@@ -199,25 +215,13 @@ public class IslandGeneratorMagneticHills implements IIslandGenerator
 				final double worldZ = posZ - (z == 0 ? NOISE_XZ_SCALE - 1 : 0) + (z * (16.0D / NOISE_SAMPLES));
 				final double nz = (worldZ + minZ) / scale;
 
-				final double distX = Math.abs(centerX - worldX);
-				final double distZ = Math.abs(centerZ - worldZ);
-
-				// Get distance from center of Island
-				final double dist = (distX + distZ) / 450.0D;
-
 				// Generate noise for X/Z coordinate
 				final double noise1 = noise.eval(nx, nz);
 				final double noise2 = 0.5D * noise.eval(nx * 8D, nz * 8D);
 				final double noise3 = 0.25D * noise.eval(nx * 16D, nz * 16D);
 				final double noise4 = 0.125D * noise.eval(nx * 32D, nz * 32D);
 
-				// Averages noise samples linearly
-				final double sample = (noise1 + noise2 + noise3 + noise4) / 4.0D;
-
-				// Apply formula to shape noise into island, noise decreases in value the further the coord is from the center
-				final double height = sample - (0.7D * Math.pow(dist, 2));
-
-				data[x + (z * NOISE_SAMPLES)] = height;
+				data[x + (z * NOISE_SAMPLES)] = (noise1 + noise2 + noise3 + noise4) / 4.0D;
 			}
 		}
 

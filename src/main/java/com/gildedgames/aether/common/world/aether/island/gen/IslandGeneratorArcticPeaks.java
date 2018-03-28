@@ -49,9 +49,6 @@ public class IslandGeneratorArcticPeaks implements IIslandGenerator
 		final double minX = island.getBounds().getMinX();
 		final double minZ = island.getBounds().getMinZ();
 
-		final double centerX = island.getBounds().getCenterX();
-		final double centerZ = island.getBounds().getCenterZ();
-
 		final double[] data = new double[NOISE_SAMPLES * NOISE_SAMPLES];
 
 		// Generate half-resolution evalNormalised
@@ -67,24 +64,7 @@ public class IslandGeneratorArcticPeaks implements IIslandGenerator
 				final double worldZ = posZ - (z == 0 ? NOISE_XZ_SCALE - 1 : 0) + (z * (16.0D / NOISE_SAMPLES));
 				final double nz = (worldZ + minZ) / 300.0D;
 
-				final double radiusX = island.getBounds().getWidth() / 2.0;
-				final double radiusZ = island.getBounds().getLength() / 2.0;
-
-				final double distX = Math.abs((centerX - worldX) * (1.0 / radiusX));
-				final double distZ = Math.abs((centerZ - worldZ) * (1.0 / radiusZ));
-
-				// Get distance from center of Island
-				final double dist = Math.sqrt(distX * distX + distZ * distZ);
-
-				final double sample1 = NoiseUtil.genNoise(noise, nx, nz);
-				//final double sample2 = this.genNoise(noise2, nx, nz);
-
-				final double dSquared = sample1;
-
-				// Apply formula to shape evalNormalised into island, evalNormalised decreases in value the further the coord is from the center
-				final double height = dSquared - dist;
-
-				data[x + (z * NOISE_SAMPLES)] = height;
+				data[x + (z * NOISE_SAMPLES)] = NoiseUtil.genNoise(noise, nx, nz);
 			}
 		}
 
@@ -102,12 +82,31 @@ public class IslandGeneratorArcticPeaks implements IIslandGenerator
 		final IBlockState coastBlock = ((BiomeAetherBase) biome).getCoastalBlock();
 		final IBlockState stoneBlock = BlocksAether.holystone.getDefaultState();
 
+		final int posX = chunkX * 16;
+		final int posZ = chunkZ * 16;
+
+		final double centerX = island.getBounds().getCenterX();
+		final double centerZ = island.getBounds().getCenterZ();
+
+		final double radiusX = island.getBounds().getWidth() / 2.0;
+		final double radiusZ = island.getBounds().getLength() / 2.0;
+
 		for (int x = 0; x < 16; x++)
 		{
 			for (int z = 0; z < 16; z++)
 			{
+				final int worldX = posX + x;
+				final int worldZ = posZ + z;
+
 				final double sample = interpolate(heightMap, x, z);
-				final double heightSample = sample + 1.0;
+
+				final double distX = Math.abs((centerX - worldX) * (1.0 / radiusX));
+				final double distZ = Math.abs((centerZ - worldZ) * (1.0 / radiusZ));
+
+				// Get distance from center of Island
+				final double dist = Math.sqrt(distX * distX + distZ * distZ);
+
+				final double heightSample = sample + 1.0 - dist;
 
 				final double bottomMaxY = 100;
 

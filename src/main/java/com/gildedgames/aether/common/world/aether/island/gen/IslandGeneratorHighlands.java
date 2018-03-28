@@ -41,16 +41,13 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 	}
 
 	public static double[] generateNoise(final OpenSimplexNoise noise, final IIslandData island, final int chunkX, final int chunkZ, final int offset,
-			final double scale, final boolean centerGradient)
+			final double scale)
 	{
 		final double posX = chunkX * 16;
 		final double posZ = chunkZ * 16;
 
 		final double minX = island.getBounds().getMinX();
 		final double minZ = island.getBounds().getMinZ();
-
-		final double centerX = island.getBounds().getCenterX();
-		final double centerZ = island.getBounds().getCenterZ();
 
 		final double[] data = new double[NOISE_SAMPLES * NOISE_SAMPLES];
 
@@ -67,19 +64,8 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 				final double worldZ = posZ - (z == 0 ? NOISE_XZ_SCALE - 1 : 0) + (z * (16.0D / NOISE_SAMPLES));
 				final double nz = (worldZ + minZ + offset) / scale;
 
-				final double radiusX = island.getBounds().getWidth() / 2.0;
-				final double radiusZ = island.getBounds().getLength() / 2.0;
-
-				final double distX = Math.abs((centerX - worldX) * (1.0 / radiusX));
-				final double distZ = Math.abs((centerZ - worldZ) * (1.0 / radiusZ));
-
-				// Get distance from center of Island
-				final double dist = Math.sqrt(distX * distX + distZ * distZ);
-
-				final double sample = NoiseUtil.genNoise(noise, nx, nz);
-
 				// Apply formula to shape evalNormalised into island, evalNormalised decreases in value the further the coord is from the center
-				final double height = sample - (centerGradient ? dist : 0);
+				final double height = NoiseUtil.genNoise(noise, nx, nz);
 
 				data[x + (z * NOISE_SAMPLES)] = height;
 			}
@@ -92,20 +78,39 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 	public void genIslandForChunk(final OpenSimplexNoise noise, final IBlockAccess access, final ChunkPrimer primer, final IIslandData island, final int chunkX,
 			final int chunkZ)
 	{
-		final double[] heightMap = generateNoise(noise, island, chunkX, chunkZ, 0, 300.0D, true);
-		final double[] terraceMap = generateNoise(noise, island, chunkX, chunkZ, 1000, 300.0D, false);
+		final double[] heightMap = generateNoise(noise, island, chunkX, chunkZ, 0, 300.0D);
+		final double[] terraceMap = generateNoise(noise, island, chunkX, chunkZ, 1000, 300.0D);
 
 		final Biome biome = access.getBiome(new BlockPos(chunkX * 16, 0, chunkZ * 16));
 
 		final IBlockState coastBlock = ((BiomeAetherBase) biome).getCoastalBlock();
 		final IBlockState stoneBlock = BlocksAether.holystone.getDefaultState();
 
+		final int posX = chunkX * 16;
+		final int posZ = chunkZ * 16;
+
+		final double centerX = island.getBounds().getCenterX();
+		final double centerZ = island.getBounds().getCenterZ();
+
+		final double radiusX = island.getBounds().getWidth() / 2.0;
+		final double radiusZ = island.getBounds().getLength() / 2.0;
+
 		for (int x = 0; x < 16; x++)
 		{
 			for (int z = 0; z < 16; z++)
 			{
+				final int worldX = posX + x;
+				final int worldZ = posZ + z;
+
 				final double sample = interpolate(heightMap, x, z);
-				final double heightSample = sample + 1.0;
+
+				final double distX = Math.abs((centerX - worldX) * (1.0 / radiusX));
+				final double distZ = Math.abs((centerZ - worldZ) * (1.0 / radiusZ));
+
+				// Get distance from center of Island
+				final double dist = Math.sqrt(distX * distX + distZ * distZ);
+
+				final double heightSample = sample + 1.0 - dist;
 
 				final double bottomMaxY = 100;
 
