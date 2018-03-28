@@ -7,6 +7,8 @@ public class IslandGenerators
 
 	public static IIslandGenerator HIGHLANDS = new IslandGeneratorHighlands();
 
+	public static IIslandGenerator HIGHLAND_MEGACOAST = new IslandGeneratorHighlandMegacoast();
+
 	public static IIslandGenerator ARCTIC_PEAKS = new IslandGeneratorArcticPeaks();
 
 	public static IIslandGenerator MAGNETIC_HILLS = new IslandGeneratorMagneticHills();

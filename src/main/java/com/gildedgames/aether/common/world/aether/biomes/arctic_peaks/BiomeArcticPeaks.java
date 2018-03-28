@@ -10,6 +10,7 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.island.ChunkGeneratorAether;
+import com.gildedgames.aether.common.world.aether.island.gen.IslandGeneratorArcticPeaks;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandGeneratorHighlands;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandGenerators;
 import com.gildedgames.orbis.api.util.mc.NBT;
@@ -89,7 +90,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase
 
 			final OpenSimplexNoise noise = aetherGen.getPreparation().getNoise();
 
-			final double[] heightMap = IslandGeneratorHighlands.generateNoise(noise, island, chunkX, chunkZ);
+			final double[] heightMap = IslandGeneratorArcticPeaks.generateNoise(noise, island, chunkX, chunkZ);
 
 			final int posX = pos.getX() + 8;
 			final int posZ = pos.getZ() + 8;

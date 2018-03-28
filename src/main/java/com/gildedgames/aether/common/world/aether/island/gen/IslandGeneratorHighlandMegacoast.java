@@ -12,7 +12,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 
-public class IslandGeneratorHighlands implements IIslandGenerator
+public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 {
 	// Resolution of the evalNormalised for a chunk. Should be a power of 2.
 	private static final int NOISE_XZ_SCALE = 4;
@@ -40,8 +40,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 				fractionX * ((1.0 - fractionZ) * c + fractionZ * d);
 	}
 
-	public static double[] generateNoise(final OpenSimplexNoise noise, final IIslandData island, final int chunkX, final int chunkZ, final int offset,
-			final double scale, final boolean centerGradient)
+	public static double[] generateNoise(final OpenSimplexNoise noise, final IIslandData island, final int chunkX, final int chunkZ)
 	{
 		final double posX = chunkX * 16;
 		final double posZ = chunkZ * 16;
@@ -59,13 +58,13 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 		{
 			// Creates world coordinate and normalized evalNormalised coordinate
 			final double worldX = posX - (x == 0 ? NOISE_XZ_SCALE - 1 : 0) + (x * (16D / NOISE_SAMPLES));
-			final double nx = (worldX + minX + offset) / scale;
+			final double nx = (worldX + minX) / 300.0D;
 
 			for (int z = 0; z < NOISE_SAMPLES; z++)
 			{
 				// Creates world coordinate and normalized evalNormalised coordinate
 				final double worldZ = posZ - (z == 0 ? NOISE_XZ_SCALE - 1 : 0) + (z * (16.0D / NOISE_SAMPLES));
-				final double nz = (worldZ + minZ + offset) / scale;
+				final double nz = (worldZ + minZ) / 300.0D;
 
 				final double radiusX = island.getBounds().getWidth() / 2.0;
 				final double radiusZ = island.getBounds().getLength() / 2.0;
@@ -76,10 +75,13 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 				// Get distance from center of Island
 				final double dist = Math.sqrt(distX * distX + distZ * distZ);
 
-				final double sample = NoiseUtil.genNoise(noise, nx, nz);
+				final double sample1 = NoiseUtil.genNoise(noise, nx, nz);
+				//final double sample2 = this.genNoise(noise2, nx, nz);
+
+				final double dSquared = sample1;
 
 				// Apply formula to shape evalNormalised into island, evalNormalised decreases in value the further the coord is from the center
-				final double height = sample - (centerGradient ? dist : 0);
+				final double height = dSquared - dist;
 
 				data[x + (z * NOISE_SAMPLES)] = height;
 			}
@@ -92,8 +94,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 	public void genIslandForChunk(final OpenSimplexNoise noise, final IBlockAccess access, final ChunkPrimer primer, final IIslandData island, final int chunkX,
 			final int chunkZ)
 	{
-		final double[] heightMap = generateNoise(noise, island, chunkX, chunkZ, 0, 300.0D, true);
-		final double[] terraceMap = generateNoise(noise, island, chunkX, chunkZ, 1000, 300.0D, false);
+		final double[] heightMap = generateNoise(noise, island, chunkX, chunkZ);
 
 		final Biome biome = access.getBiome(new BlockPos(chunkX * 16, 0, chunkZ * 16));
 
@@ -115,15 +116,22 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 
 				final double normal = NoiseUtil.normalise(sample);
 				final double cutoffPointDist = Math.abs(cutoffPoint - heightSample);
-				final double diff = Math.max(0.0, cutoffPoint - cutoffPointDist) * 8.0;
 
 				double bottomHeightMod = Math.pow(normal, 0.2);
 
 				final double bottomHeight = 100;
 
-				final double terraceSample = interpolate(terraceMap, x, z) + 1.0;
+				final double terraceWidth = 0.15;
 
-				final double topSample = NoiseUtil.lerp(heightSample, terraceSample - diff > 0.7 ? terraceSample - diff : heightSample, 0.7);
+				final double k = Math.floor(heightSample / terraceWidth);
+
+				final double f = (heightSample - k * terraceWidth) / 0.05;
+
+				final double s = Math.min(2 * f, 1.0);
+
+				final double terrace = (k + s) * terraceWidth;
+
+				final double topSample = Math.pow(terrace, 2.5) + (heightSample / 2.0);
 
 				if (heightSample > cutoffPoint)
 				{

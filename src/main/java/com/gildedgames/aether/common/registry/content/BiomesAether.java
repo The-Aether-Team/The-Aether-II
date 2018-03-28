@@ -5,6 +5,7 @@ import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeVoid;
 import com.gildedgames.aether.common.world.aether.biomes.arctic_peaks.BiomeArcticPeaks;
 import com.gildedgames.aether.common.world.aether.biomes.forgotten_highlands.BiomeForgottenHighlands;
+import com.gildedgames.aether.common.world.aether.biomes.highlands.BiomeHighlandMegacoast;
 import com.gildedgames.aether.common.world.aether.biomes.highlands.BiomeHighlands;
 import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.BiomeIrradiatedForests;
 import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.BiomeMagneticHills;
@@ -23,6 +24,11 @@ public class BiomesAether
 	@GameRegistry.ObjectHolder("aether_highlands")
 	public static final BiomeAetherBase HIGHLANDS = new BiomeHighlands(
 			new Biome.BiomeProperties("Highlands").setRainDisabled().setTemperature(0.5f).setWaterColor(0x70DB70), AetherCore.getResource("aether_highlands"));
+
+	@GameRegistry.ObjectHolder("aether_highland_megacoast")
+	public static final BiomeAetherBase HIGHLAND_MEGACOAST = new BiomeHighlandMegacoast(
+			new Biome.BiomeProperties("Highland Megacoast").setRainDisabled().setTemperature(0.5f).setWaterColor(0x70DB70),
+			AetherCore.getResource("aether_highland_megacoast"));
 
 	@GameRegistry.ObjectHolder("aether_magnetic_hills")
 	public static final BiomeAetherBase MAGNETIC_HILLS = new BiomeMagneticHills(
@@ -53,8 +59,9 @@ public class BiomesAether
 	@SubscribeEvent
 	public static void registerBiome(final RegistryEvent.Register<Biome> event)
 	{
-		event.getRegistry().registerAll(HIGHLANDS, MAGNETIC_HILLS, ARCTIC_PEAKS, FORGOTTEN_HIGHLANDS, IRRADIATED_FORESTS, VOID, INSTANCED_ZONE);
+		event.getRegistry()
+				.registerAll(HIGHLANDS, HIGHLAND_MEGACOAST, MAGNETIC_HILLS, ARCTIC_PEAKS, FORGOTTEN_HIGHLANDS, IRRADIATED_FORESTS, VOID, INSTANCED_ZONE);
 
-		IslandSectorFactory.registerPossibleBiome(HIGHLANDS, MAGNETIC_HILLS, ARCTIC_PEAKS, FORGOTTEN_HIGHLANDS, IRRADIATED_FORESTS);
+		IslandSectorFactory.registerPossibleBiome(HIGHLANDS, HIGHLAND_MEGACOAST, MAGNETIC_HILLS, ARCTIC_PEAKS, FORGOTTEN_HIGHLANDS, IRRADIATED_FORESTS);
 	}
 }

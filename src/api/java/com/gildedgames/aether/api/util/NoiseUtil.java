@@ -3,6 +3,11 @@ package com.gildedgames.aether.api.util;
 public class NoiseUtil
 {
 
+	public static double lerp(final double a, final double b, final double f)
+	{
+		return (a * (1.0 - f)) + (b * f);
+	}
+
 	public static double genNoise(final OpenSimplexNoise noise, final double nx, final double nz)
 	{
 		// Generate evalNormalised for X/Z coordinate
