@@ -2,7 +2,6 @@ package com.gildedgames.aether.common.world.aether.island.data;
 
 import com.gildedgames.aether.api.world.islands.IIslandBounds;
 import com.gildedgames.aether.api.world.islands.IIslandData;
-import com.gildedgames.aether.common.registry.content.BiomesAether;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.google.common.collect.Lists;
 import net.minecraft.world.World;
@@ -75,7 +74,7 @@ public class IslandSectorFactory
 
 			final Random rand = new Random(islandSeed);
 
-			final BiomeAetherBase chosen = BiomesAether.HIGHLANDS;//fetchRandomBiome(rand);
+			final BiomeAetherBase chosen = fetchRandomBiome(rand);
 
 			final IslandData island = new IslandData(world, bounds, chosen,
 					islandSeed);
