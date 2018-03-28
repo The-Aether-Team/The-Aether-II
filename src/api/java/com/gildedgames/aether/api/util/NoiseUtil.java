@@ -22,6 +22,20 @@ public class NoiseUtil
 		return sample;
 	}
 
+	public static double genNoise(final OpenSimplexNoise noise, final double nx, final double ny, final double nz)
+	{
+		// Generate evalNormalised for X/Z coordinate
+		final double noise1 = noise.eval(nx, ny, nz);
+		final double noise2 = 0.5D * noise.eval(nx * 8D, ny * 8D, nz * 8D);
+		final double noise3 = 0.25D * noise.eval(nx * 16D, ny * 16D, nz * 16D);
+		final double noise4 = 0.1D * noise.eval(nx * 32D, ny * 32D, nz * 32D);
+
+		// Averages evalNormalised samples linearly
+		final double sample = (noise1 + noise2 + noise3 + noise4) / 4.0D;
+
+		return sample;
+	}
+
 	public static double normalise(final double value)
 	{
 		if (value >= 0)

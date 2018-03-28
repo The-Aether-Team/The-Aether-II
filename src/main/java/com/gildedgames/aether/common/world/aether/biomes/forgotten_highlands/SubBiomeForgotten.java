@@ -48,6 +48,10 @@ public class SubBiomeForgotten implements SubBiome
 		{
 			this.decorations = Lists.newArrayList();
 
+			this.decorations
+					.add(new WorldDecorationSimple(6, GenerationAether.short_aether_grass, GenerationAether.aether_grass, GenerationAether.long_aether_grass));
+			this.decorations.add(new WorldDecorationSimple(1, 0.2F, GenerationAether.skyroot_twigs));
+
 			this.decorations.add(new WorldDecorationSimple(3, new TemplateWorldGen(GenerationAether.green_skyroot_tree)));
 			this.decorations.add(new WorldDecorationSimple(1, new TemplateWorldGen(GenerationAether.golden_oak)));
 

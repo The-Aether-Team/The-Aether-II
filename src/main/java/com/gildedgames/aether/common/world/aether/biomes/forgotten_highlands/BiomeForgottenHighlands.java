@@ -37,7 +37,7 @@ public class BiomeForgottenHighlands extends BiomeAetherBase
 	@Override
 	public IIslandGenerator getIslandGenerator()
 	{
-		return IslandGenerators.HIGHLANDS;
+		return IslandGenerators.FORGOTTEN_HIGHLANDS;
 	}
 
 	@Override
