@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.world.aether;
 
-import com.gildedgames.aether.client.util.NOOPRenderHandler;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeProviderAether;
@@ -34,7 +33,7 @@ public class WorldProviderAether extends WorldProviderSurface
 	@SideOnly(Side.CLIENT)
 	private void setupClientRenderer()
 	{
-		this.setCloudRenderer(new NOOPRenderHandler());
+
 	}
 
 	@Override
@@ -215,7 +214,7 @@ public class WorldProviderAether extends WorldProviderSurface
 	@SideOnly(Side.CLIENT)
 	public float getCloudHeight()
 	{
-		return -128;
+		return 200;
 	}
 
 	@Override
