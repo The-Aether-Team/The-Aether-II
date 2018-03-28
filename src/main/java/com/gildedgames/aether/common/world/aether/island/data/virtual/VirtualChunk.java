@@ -79,7 +79,8 @@ public class VirtualChunk implements IVirtualChunk
 			return index;
 		}
 
-		throw new ArrayIndexOutOfBoundsException("Tried to access position that's not in this VirtualChunk");
+		return -1;
+		//throw new ArrayIndexOutOfBoundsException("Tried to access position that's not in this VirtualChunk");
 	}
 
 	/**
@@ -106,7 +107,12 @@ public class VirtualChunk implements IVirtualChunk
 	@Override
 	public void setState(final int x, final int y, final int z, final IBlockState state)
 	{
-		this.data[this.getIndexFrom(x, y, z)] = (char) Block.BLOCK_STATE_IDS.get(state);
+		final int index = this.getIndexFrom(x, y, z);
+
+		if (index != -1)
+		{
+			this.data[index] = (char) Block.BLOCK_STATE_IDS.get(state);
+		}
 	}
 
 	/**
