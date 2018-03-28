@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.world.aether.features;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.google.common.base.MoreObjects;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -9,7 +10,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.MapGenBase;
-import org.apache.commons.lang3.ObjectUtils;
 
 import java.util.Random;
 
@@ -17,102 +17,100 @@ public class WorldGenAetherCaves extends MapGenBase
 {
 	protected static final IBlockState BLK_AIR = Blocks.AIR.getDefaultState();
 
-	protected void addRoom(final long seed, final int chunkX, final int chunkY, final ChunkPrimer primer, final double p_180703_6_, final double p_180703_8_,
-			final double p_180703_10_)
+	protected void addRoom(
+			final long p_180705_1_, final int p_180705_3_, final int p_180705_4_, final ChunkPrimer p_180705_5_, final double p_180705_6_,
+			final double p_180705_8_, final double p_180705_10_)
 	{
-		this.addTunnel(seed, chunkX, chunkY, primer, p_180703_6_, p_180703_8_, p_180703_10_,
-				1.0F + this.rand.nextFloat() * 6.0F, 0.0F, 0.0F, -1, -1, 0.5D);
+		this.addTunnel(p_180705_1_, p_180705_3_, p_180705_4_, p_180705_5_, p_180705_6_, p_180705_8_, p_180705_10_, 1.0F + this.rand.nextFloat() * 6.0F, 0.0F,
+				0.0F, -1, -1, 0.5D);
 	}
 
-	protected void addTunnel(final long seed, final int chunkX, final int chunkZ, final ChunkPrimer primer, double p_180702_6_, double p_180702_8_,
-			double p_180702_10_, final float p_180702_12_, float p_180702_13_, float p_180702_14_, int p_180702_15_, int p_180702_16_,
-			final double p_180702_17_)
+	protected void addTunnel(final long p_180704_1_, final int p_180704_3_, final int p_180704_4_, final ChunkPrimer p_180704_5_, double p_180704_6_,
+			double p_180704_8_, double p_180704_10_, final float p_180704_12_, float p_180704_13_, float p_180704_14_, int p_180704_15_, int p_180704_16_,
+			final double p_180704_17_)
 	{
-		final double d0 = (double) (chunkX * 16 + 8);
-		final double d1 = (double) (chunkZ * 16 + 8);
+		final double d0 = (double) (p_180704_3_ * 16 + 8);
+		final double d1 = (double) (p_180704_4_ * 16 + 8);
 		float f = 0.0F;
 		float f1 = 0.0F;
+		final Random random = new Random(p_180704_1_);
 
-		final Random random = new Random(seed);
-
-		if (p_180702_16_ <= 0)
+		if (p_180704_16_ <= 0)
 		{
 			final int i = this.range * 16 - 16;
-			p_180702_16_ = i - random.nextInt(i / 4);
+			p_180704_16_ = i - random.nextInt(i / 4);
 		}
 
-		boolean flag2 = false;
+		boolean flag1 = false;
 
-		if (p_180702_15_ == -1)
+		if (p_180704_15_ == -1)
 		{
-			p_180702_15_ = p_180702_16_ / 2;
-			flag2 = true;
+			p_180704_15_ = p_180704_16_ / 2;
+			flag1 = true;
 		}
 
-		final int j = random.nextInt(p_180702_16_ / 2) + p_180702_16_ / 4;
+		final int j = random.nextInt(p_180704_16_ / 2) + p_180704_16_ / 4;
 
-		for (final boolean flag = random.nextInt(6) == 0; p_180702_15_ < p_180702_16_; ++p_180702_15_)
+		for (final boolean flag = random.nextInt(6) == 0; p_180704_15_ < p_180704_16_; ++p_180704_15_)
 		{
-			final double d2 = 1.5D + (double) (MathHelper.sin((float) p_180702_15_ * (float) Math.PI / (float) p_180702_16_) * p_180702_12_);
-			final double d3 = d2 * p_180702_17_;
-			final float f2 = MathHelper.cos(p_180702_14_);
-			final float f3 = MathHelper.sin(p_180702_14_);
-			p_180702_6_ += (double) (MathHelper.cos(p_180702_13_) * f2);
-			p_180702_8_ += (double) f3;
-			p_180702_10_ += (double) (MathHelper.sin(p_180702_13_) * f2);
+			final double d2 = 1.5D + (double) (MathHelper.sin((float) p_180704_15_ * (float) Math.PI / (float) p_180704_16_) * p_180704_12_);
+			final double d3 = d2 * p_180704_17_;
+			final float f2 = MathHelper.cos(p_180704_14_);
+			final float f3 = MathHelper.sin(p_180704_14_);
+			p_180704_6_ += (double) (MathHelper.cos(p_180704_13_) * f2);
+			p_180704_8_ += (double) f3;
+			p_180704_10_ += (double) (MathHelper.sin(p_180704_13_) * f2);
 
 			if (flag)
 			{
-				p_180702_14_ = p_180702_14_ * 0.92F;
+				p_180704_14_ = p_180704_14_ * 0.92F;
 			}
 			else
 			{
-				p_180702_14_ = p_180702_14_ * 0.7F;
+				p_180704_14_ = p_180704_14_ * 0.7F;
 			}
 
-			p_180702_14_ = p_180702_14_ + f1 * 0.1F;
-			p_180702_13_ += f * 0.1F;
+			p_180704_14_ = p_180704_14_ + f1 * 0.1F;
+			p_180704_13_ += f * 0.1F;
 			f1 = f1 * 0.9F;
 			f = f * 0.75F;
 			f1 = f1 + (random.nextFloat() - random.nextFloat()) * random.nextFloat() * 2.0F;
 			f = f + (random.nextFloat() - random.nextFloat()) * random.nextFloat() * 4.0F;
 
-			if (!flag2 && p_180702_15_ == j && p_180702_12_ > 1.0F && p_180702_16_ > 0)
+			if (!flag1 && p_180704_15_ == j && p_180704_12_ > 1.0F)
 			{
-				this.addTunnel(random.nextLong(), chunkX, chunkZ, primer, p_180702_6_, p_180702_8_, p_180702_10_,
-						random.nextFloat() * 0.5F + 0.5F,
-						p_180702_13_ - ((float) Math.PI / 2F), p_180702_14_ / 3.0F, p_180702_15_, p_180702_16_, 1.0D);
-				this.addTunnel(random.nextLong(), chunkX, chunkZ, primer, p_180702_6_, p_180702_8_, p_180702_10_,
-						random.nextFloat() * 0.5F + 0.5F,
-						p_180702_13_ + ((float) Math.PI / 2F), p_180702_14_ / 3.0F, p_180702_15_, p_180702_16_, 1.0D);
+				this.addTunnel(random.nextLong(), p_180704_3_, p_180704_4_, p_180704_5_, p_180704_6_, p_180704_8_, p_180704_10_,
+						random.nextFloat() * 0.5F + 0.5F, p_180704_13_ - ((float) Math.PI / 2F), p_180704_14_ / 3.0F, p_180704_15_, p_180704_16_, 1.0D);
+				this.addTunnel(random.nextLong(), p_180704_3_, p_180704_4_, p_180704_5_, p_180704_6_, p_180704_8_, p_180704_10_,
+						random.nextFloat() * 0.5F + 0.5F, p_180704_13_ + ((float) Math.PI / 2F), p_180704_14_ / 3.0F, p_180704_15_, p_180704_16_, 1.0D);
 				return;
 			}
 
-			if (flag2 || random.nextInt(4) != 0)
+			if (flag1 || random.nextInt(4) != 0)
 			{
-				final double d4 = p_180702_6_ - d0;
-				final double d5 = p_180702_10_ - d1;
-				final double d6 = (double) (p_180702_16_ - p_180702_15_);
-				final double d7 = (double) (p_180702_12_ + 2.0F + 16.0F);
+				final double d4 = p_180704_6_ - d0;
+				final double d5 = p_180704_10_ - d1;
+				final double d6 = (double) (p_180704_16_ - p_180704_15_);
+				final double d7 = (double) (p_180704_12_ + 2.0F + 16.0F);
 
 				if (d4 * d4 + d5 * d5 - d6 * d6 > d7 * d7)
 				{
 					return;
 				}
 
-				if (p_180702_6_ >= d0 - 16.0D - d2 * 2.0D && p_180702_10_ >= d1 - 16.0D - d2 * 2.0D && p_180702_6_ <= d0 + 16.0D + d2 * 2.0D
-						&& p_180702_10_ <= d1 + 16.0D + d2 * 2.0D)
+				if (p_180704_6_ >= d0 - 16.0D - d2 * 2.0D && p_180704_10_ >= d1 - 16.0D - d2 * 2.0D && p_180704_6_ <= d0 + 16.0D + d2 * 2.0D
+						&& p_180704_10_ <= d1 + 16.0D + d2 * 2.0D)
 				{
-					int k2 = MathHelper.floor(p_180702_6_ - d2) - chunkX * 16 - 1;
-					int k = MathHelper.floor(p_180702_6_ + d2) - chunkX * 16 + 1;
-					int l2 = MathHelper.floor(p_180702_8_ - d3) - 1;
-					int l = MathHelper.floor(p_180702_8_ + d3) + 1;
-					int i3 = MathHelper.floor(p_180702_10_ - d2) - chunkZ * 16 - 1;
-					int i1 = MathHelper.floor(p_180702_10_ + d2) - chunkZ * 16 + 1;
+					int j2 = MathHelper.floor(p_180704_6_ - d2) - p_180704_3_ * 16 - 1;
+					int k = MathHelper.floor(p_180704_6_ + d2) - p_180704_3_ * 16 + 1;
+					int k2 = MathHelper.floor(p_180704_8_ - d3) - 1;
+					int l = MathHelper.floor(p_180704_8_ + d3) + 1;
+					int l2 = MathHelper.floor(p_180704_10_ - d2) - p_180704_4_ * 16 - 1;
+					int i1 = MathHelper.floor(p_180704_10_ + d2) - p_180704_4_ * 16 + 1;
 
-					if (k2 < 0)
+					if (j2 < 0)
 					{
-						k2 = 0;
+						j2 = 0;
 					}
 
 					if (k > 16)
@@ -120,19 +118,19 @@ public class WorldGenAetherCaves extends MapGenBase
 						k = 16;
 					}
 
-					if (l2 < 1)
+					if (k2 < 1)
 					{
-						l2 = 1;
+						k2 = 1;
 					}
 
-					if (l > 248)
+					if (l > 200)
 					{
-						l = 248;
+						l = 200;
 					}
 
-					if (i3 < 0)
+					if (l2 < 0)
 					{
-						i3 = 0;
+						l2 = 0;
 					}
 
 					if (i1 > 16)
@@ -140,62 +138,31 @@ public class WorldGenAetherCaves extends MapGenBase
 						i1 = 16;
 					}
 
-					final boolean flag3 = false;
-
-					for (int j1 = k2; !flag3 && j1 < k; ++j1)
+					for (int i3 = j2; i3 < k; ++i3)
 					{
-						for (int k1 = i3; !flag3 && k1 < i1; ++k1)
+						final double d10 = ((double) (i3 + p_180704_3_ * 16) + 0.5D - p_180704_6_) / d2;
+
+						for (int j3 = l2; j3 < i1; ++j3)
 						{
-							for (int l1 = l + 1; !flag3 && l1 >= l2 - 1; --l1)
+							final double d8 = ((double) (j3 + p_180704_4_ * 16) + 0.5D - p_180704_10_) / d2;
+
+							for (int i2 = l; i2 > k2; --i2)
 							{
-								if (l1 >= 0 && l1 < 256)
+								final double d9 = ((double) (i2 - 1) + 0.5D - p_180704_8_) / d3;
+
+								if (d9 > -0.7D && d10 * d10 + d9 * d9 + d8 * d8 < 1.0D)
 								{
-									if (l1 != l2 - 1 && j1 != k2 && j1 != k - 1 && k1 != i3 && k1 != i1 - 1)
+									final IBlockState iblockstate1 = p_180704_5_.getBlockState(i3, i2, j3);
+									final IBlockState iblockstate2 = (IBlockState) MoreObjects.firstNonNull(p_180704_5_.getBlockState(i3, i2 + 1, j3), BLK_AIR);
+
+									if (this.isTopBlock(p_180704_5_, i3, i2, j3, p_180704_3_, p_180704_4_))
 									{
-										l1 = l2;
+										flag1 = true;
 									}
+
+									this.digBlock(p_180704_5_, i3, i2, j3, p_180704_3_, p_180704_4_, flag1, iblockstate1, iblockstate2);
 								}
 							}
-						}
-					}
-
-					if (!flag3)
-					{
-						for (int x2 = k2; x2 < k; ++x2)
-						{
-							final double d10 = ((double) (x2 + chunkX * 16) + 0.5D - p_180702_6_) / d2;
-
-							for (int z2 = i3; z2 < i1; ++z2)
-							{
-								final double d8 = ((double) (z2 + chunkZ * 16) + 0.5D - p_180702_10_) / d2;
-								boolean foundTop = false;
-
-								if (d10 * d10 + d8 * d8 < 1.0D)
-								{
-									for (int y2 = l; y2 > l2; --y2)
-									{
-										final double d9 = ((double) (y2 - 1) + 0.5D - p_180702_8_) / d3;
-
-										if (d9 > -0.7D && d10 * d10 + d9 * d9 + d8 * d8 < 1.0D)
-										{
-											final IBlockState state = primer.getBlockState(x2, y2, z2);
-											final IBlockState above = ObjectUtils.firstNonNull(primer.getBlockState(x2, y2 + 1, z2), BLK_AIR);
-
-											if (this.isTopBlock(primer, x2, y2, z2, chunkX, chunkZ))
-											{
-												foundTop = true;
-											}
-
-											this.digBlock(primer, x2, y2, z2, chunkX, chunkZ, foundTop, state, above);
-										}
-									}
-								}
-							}
-						}
-
-						if (flag2)
-						{
-							break;
 						}
 					}
 				}
@@ -205,6 +172,19 @@ public class WorldGenAetherCaves extends MapGenBase
 
 	protected boolean canReplaceBlock(final IBlockState state, final IBlockState above)
 	{
+		if (state.getBlock() == Blocks.SNOW_LAYER)
+		{
+			return true;
+		}
+		else if (state.getBlock() == Blocks.PACKED_ICE)
+		{
+			return true;
+		}
+		else if (state.getBlock() == Blocks.ICE)
+		{
+			return true;
+		}
+
 		return state.getBlock() == BlocksAether.holystone || state.getBlock() == BlocksAether.quicksoil;
 	}
 
@@ -215,40 +195,32 @@ public class WorldGenAetherCaves extends MapGenBase
 	protected void recursiveGenerate(final World worldIn, final int chunkX, final int chunkZ, final int originalX, final int originalZ,
 			final ChunkPrimer primer)
 	{
-		int i = this.rand.nextInt(this.rand.nextInt(this.rand.nextInt(15) + 1) + 1);
+		int i = this.rand.nextInt(this.rand.nextInt(this.rand.nextInt(10) + 1) + 1);
 
-		if (this.rand.nextInt(7) != 0)
+		if (this.rand.nextInt(2) != 0)
 		{
 			i = 0;
 		}
 
 		for (int j = 0; j < i; ++j)
 		{
-			final double x = (double) (chunkX * 16 + this.rand.nextInt(16));
-			final double y = (double) this.rand.nextInt(this.rand.nextInt(240) + 8);
-			final double z = (double) (chunkZ * 16 + this.rand.nextInt(16));
-
-			int tunnels = 1;
+			final double d0 = (double) (chunkX * 16 + this.rand.nextInt(16));
+			final double d1 = (double) this.rand.nextInt(128);
+			final double d2 = (double) (chunkZ * 16 + this.rand.nextInt(16));
+			int k = 1;
 
 			if (this.rand.nextInt(4) == 0)
 			{
-				this.addRoom(this.rand.nextLong(), originalX, originalZ, primer, x, y, z);
-
-				tunnels += this.rand.nextInt(4);
+				this.addRoom(this.rand.nextLong(), originalX, originalZ, primer, d0, d1, d2);
+				k += this.rand.nextInt(4);
 			}
 
-			for (int l = 0; l < tunnels; ++l)
+			for (int l = 0; l < k; ++l)
 			{
 				final float f = this.rand.nextFloat() * ((float) Math.PI * 2F);
 				final float f1 = (this.rand.nextFloat() - 0.5F) * 2.0F / 8.0F;
-				float f2 = this.rand.nextFloat() * 2.0F + this.rand.nextFloat();
-
-				if (this.rand.nextInt(10) == 0)
-				{
-					f2 *= this.rand.nextFloat() * this.rand.nextFloat() * 3.0F + 1.0F;
-				}
-
-				this.addTunnel(this.rand.nextLong(), originalX, originalZ, primer, x, y, z, f2, f, f1, 0, 0, 1.0D);
+				final float f2 = this.rand.nextFloat() * 2.0F + this.rand.nextFloat();
+				this.addTunnel(this.rand.nextLong(), originalX, originalZ, primer, d0, d1, d2, f2 * 2.0F, f, f1, 0, 0, 0.5D);
 			}
 		}
 	}
