@@ -57,13 +57,13 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 		for (int x = 0; x < NOISE_SAMPLES; x++)
 		{
 			// Creates world coordinate and normalized evalNormalised coordinate
-			final double worldX = posX + (x * (16D / NOISE_SAMPLES));
+			final double worldX = posX - (x == 0 ? NOISE_XZ_SCALE - 1 : 0) + (x * (16D / NOISE_SAMPLES));
 			final double nx = (worldX + minX) / 300.0D;
 
 			for (int z = 0; z < NOISE_SAMPLES; z++)
 			{
 				// Creates world coordinate and normalized evalNormalised coordinate
-				final double worldZ = posZ + (z * (16.0D / NOISE_SAMPLES));
+				final double worldZ = posZ - (z == 0 ? NOISE_XZ_SCALE - 1 : 0) + (z * (16.0D / NOISE_SAMPLES));
 				final double nz = (worldZ + minZ) / 300.0D;
 
 				final double radiusX = island.getBounds().getWidth() / 2.0;
