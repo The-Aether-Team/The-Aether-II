@@ -93,7 +93,14 @@ public class VirtualChunk implements IVirtualChunk
 	@Override
 	public IBlockState getState(final int x, final int y, final int z)
 	{
-		final IBlockState iblockstate = Block.BLOCK_STATE_IDS.getByValue(this.data[this.getIndexFrom(x, y, z)]);
+		final int index = this.getIndexFrom(x, y, z);
+
+		if (index == -1)
+		{
+			return DEFAULT_STATE;
+		}
+
+		final IBlockState iblockstate = Block.BLOCK_STATE_IDS.getByValue(this.data[index]);
 		return iblockstate == null ? DEFAULT_STATE : iblockstate;
 	}
 
