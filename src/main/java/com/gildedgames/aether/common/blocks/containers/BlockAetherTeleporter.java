@@ -49,36 +49,36 @@ public class BlockAetherTeleporter extends Block implements ITileEntityProvider
 	}
 
 	@Override
-	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-			EntityLivingBase placer)
+	public IBlockState getStateForPlacement(final World world, final BlockPos pos, final EnumFacing facing, final float hitX, final float hitY,
+			final float hitZ, final int meta,
+			final EntityLivingBase placer)
 	{
 		return this.getDefaultState().withProperty(PROPERTY_FACING, placer.getHorizontalFacing());
 	}
 
 	@Override
-	public IBlockState getStateFromMeta(int meta)
+	public IBlockState getStateFromMeta(final int meta)
 	{
 		return this.getDefaultState().withProperty(PROPERTY_FACING, EnumFacing.getHorizontal(meta));
 	}
 
 	@Override
-	public int getMetaFromState(IBlockState state)
+	public int getMetaFromState(final IBlockState state)
 	{
 		return state.getValue(PROPERTY_FACING).getIndex();
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState state)
+	public boolean isFullCube(final IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState p_isOpaqueCube_1_)
+	public boolean isOpaqueCube(final IBlockState p_isOpaqueCube_1_)
 	{
 		return false;
 	}
-
 
 	@Override
 	public boolean onBlockActivated(
@@ -137,6 +137,17 @@ public class BlockAetherTeleporter extends Block implements ITileEntityProvider
 				{
 					handler.teleportBack((EntityPlayerMP) player);
 				}
+				else
+				{
+					hook.setInstance(null);
+
+					final NecromancerTowerInstance inst = handler.get(new BlockPosDimension(pos, world.provider.getDimension()));
+
+					playerAether.getTeleportingModule()
+							.setNonAetherPos(new BlockPosDimension((int) player.posX, (int) player.posY, (int) player.posZ, player.dimension));
+
+					handler.teleportToInst((EntityPlayerMP) player, inst);
+				}
 			}
 			else
 			{
@@ -154,7 +165,7 @@ public class BlockAetherTeleporter extends Block implements ITileEntityProvider
 
 	@Nullable
 	@Override
-	public TileEntity createNewTileEntity(World world, int i)
+	public TileEntity createNewTileEntity(final World world, final int i)
 	{
 		return new TileEntityTeleporter();
 	}

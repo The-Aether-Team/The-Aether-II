@@ -86,26 +86,29 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 	@SideOnly(Side.CLIENT)
 	private void onUpdateClient()
 	{
-		if (Minecraft.getMinecraft().currentScreen == null && !this.playedIntro)
+		if (this.getWorld().provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER)
 		{
-			Minecraft.getMinecraft().displayGuiScreen(new GuiIntro());
+			if (Minecraft.getMinecraft().currentScreen == null)
+			{
+				ClientEventHandler.DRAW_BLACK_SCREEN = false;
 
-			this.playedIntro = true;
-			NetworkingAether.sendPacketToServer(new PacketSetPlayedIntro(true));
+				if (!this.playedIntro)
+				{
+					Minecraft.getMinecraft().displayGuiScreen(new GuiIntro());
 
-			ClientEventHandler.DRAW_BLACK_SCREEN = false;
+					this.playedIntro = true;
+					NetworkingAether.sendPacketToServer(new PacketSetPlayedIntro(true));
+				}
+			}
 		}
 	}
 
 	@Override
 	public void onUpdate()
 	{
-		if (this.getWorld().isRemote && this.getWorld().provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER)
+		if (this.getWorld().isRemote)
 		{
-			if (Minecraft.getMinecraft().currentScreen == null && !this.playedIntro)
-			{
-				onUpdateClient();
-			}
+			this.onUpdateClient();
 		}
 
 		this.prevTimeInPortal = this.timeInPortal;
