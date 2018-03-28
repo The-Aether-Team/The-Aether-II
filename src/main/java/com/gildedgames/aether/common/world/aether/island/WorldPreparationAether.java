@@ -66,6 +66,7 @@ public class WorldPreparationAether
 		final int worldX = chunkX * 16;
 		final int worldZ = chunkZ * 16;
 
+		//TODO: Interpolate this! Can increase performance a lot
 		for (int x = 0; x < 16; x++)
 		{
 			final double nx = (worldX + x) / 70D;
@@ -195,30 +196,43 @@ public class WorldPreparationAether
 				final int depth = (int) (val / 3.0D + 3.0D + this.rand.nextDouble() * 0.25D);
 
 				int pentration = 0;
-				int top = 0;
+				int top;
+
+				boolean searchingSolid = true;
 
 				// Find top-most block
 				for (int y = island.getBounds().getMaxY(); y > island.getBounds().getMinY(); y--)
 				{
+					if (!searchingSolid)
+					{
+						if (primer.getBlockState(x, y, z).getBlock() == Blocks.AIR)
+						{
+							searchingSolid = true;
+						}
+
+						continue;
+					}
+
 					if (primer.getBlockState(x, y, z).getBlock() != Blocks.AIR)
 					{
 						top = y;
 
-						break;
+						// Penetrate ground and set biome blocks
+						for (int y1 = top; pentration <= depth & y1 > 0; y1--)
+						{
+							final IBlockState state = primer.getBlockState(x, y1, z);
+
+							if (state.getBlock() == BlocksAether.holystone || state.getBlock() == BlocksAether.ferrosite)
+							{
+								primer.setBlockState(x, y1, z, pentration < 1 ? biome.topBlock : biome.fillerBlock);
+							}
+
+							pentration++;
+						}
+
+						searchingSolid = false;
+						pentration = 0;
 					}
-				}
-
-				// Penetrate ground and set biome blocks
-				for (int y = top; pentration <= depth & y > 0; y--)
-				{
-					final IBlockState state = primer.getBlockState(x, y, z);
-
-					if (state.getBlock() == BlocksAether.holystone || state.getBlock() == BlocksAether.ferrosite)
-					{
-						primer.setBlockState(x, y, z, pentration < 1 ? biome.topBlock : biome.fillerBlock);
-					}
-
-					pentration++;
 				}
 			}
 		}
