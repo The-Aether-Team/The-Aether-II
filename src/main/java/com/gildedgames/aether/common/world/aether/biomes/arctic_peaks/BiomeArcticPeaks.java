@@ -95,6 +95,12 @@ public class BiomeArcticPeaks extends BiomeAetherBase
 			final int posX = pos.getX() + 8;
 			final int posZ = pos.getZ() + 8;
 
+			final double centerX = island.getBounds().getCenterX();
+			final double centerZ = island.getBounds().getCenterZ();
+
+			final double radiusX = island.getBounds().getWidth() / 2.0;
+			final double radiusZ = island.getBounds().getLength() / 2.0;
+
 			for (int x = 0; x < 16; x++)
 			{
 				for (int z = 0; z < 16; z++)
@@ -103,8 +109,17 @@ public class BiomeArcticPeaks extends BiomeAetherBase
 
 					if (world.isBlockLoaded(p))
 					{
+						final int worldX = posX + x;
+						final int worldZ = posZ + z;
+
+						final double distX = Math.abs((centerX - worldX) * (1.0 / radiusX));
+						final double distZ = Math.abs((centerZ - worldZ) * (1.0 / radiusZ));
+
+						// Get distance from center of Island
+						final double dist = Math.sqrt(distX * distX + distZ * distZ) / 1.1D;
+
 						final double sample = IslandGeneratorHighlands.interpolate(heightMap, x, z);
-						final double heightSample = sample + 1.0;
+						final double heightSample = sample + 1.0 - dist;
 
 						final BlockPos blockpos1 = p.add(0, world.getHeight(posX + x, posZ + z), 0);
 						final BlockPos blockpos2 = blockpos1.down();

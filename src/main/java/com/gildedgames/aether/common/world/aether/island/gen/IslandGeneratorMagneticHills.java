@@ -66,7 +66,7 @@ public class IslandGeneratorMagneticHills implements IIslandGenerator
 				final double distZ = Math.abs((centerZ - worldZ) * (1.0 / radiusZ));
 
 				// Get distance from center of Island
-				final double dist = Math.sqrt(distX * distX + distZ * distZ);
+				final double dist = Math.sqrt(distX * distX + distZ * distZ) / 2.5D;
 
 				final double heightSample = sample + 1.0D - dist;
 

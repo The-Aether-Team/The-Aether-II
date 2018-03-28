@@ -16,7 +16,7 @@ import java.util.HashSet;
 
 public class IslandSector implements ISector
 {
-	public static final int CHUNK_SIZE = 80;
+	public static final int CHUNK_SIZE = 60;
 
 	private final World world;
 
