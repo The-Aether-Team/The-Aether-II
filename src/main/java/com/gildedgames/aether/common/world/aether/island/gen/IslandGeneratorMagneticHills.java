@@ -91,6 +91,11 @@ public class IslandGeneratorMagneticHills implements IIslandGenerator
 				{
 					for (int y = (int) bottomMaxY; y > bottomMaxY - (bottomHeight * bottomHeightMod); y--)
 					{
+						if (y > 255 || y < 0)
+						{
+							continue;
+						}
+
 						if (!magnetic && coastBlock != null && sampleToUse < cutoffPoint + 0.05 && y == bottomMaxY - 1)
 						{
 							primer.setBlockState(x, y, z, coastBlock);
@@ -103,6 +108,11 @@ public class IslandGeneratorMagneticHills implements IIslandGenerator
 
 					for (int y = (int) bottomMaxY; y < bottomMaxY + ((heightSample - cutoffPoint) * topHeight); y++)
 					{
+						if (y > 255 || y < 0)
+						{
+							continue;
+						}
+
 						if (!magnetic && coastBlock != null && (heightSample < cutoffPoint + 0.05 && y < bottomMaxY + 1))
 						{
 							primer.setBlockState(x, y, z, coastBlock);
