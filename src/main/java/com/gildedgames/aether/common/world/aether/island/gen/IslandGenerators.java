@@ -15,4 +15,6 @@ public class IslandGenerators
 
 	public static IIslandGenerator MAGNETIC_HILLS = new IslandGeneratorMagneticHills();
 
+	public static IIslandGenerator IRRADIATED_FORESTS = new IslandGeneratorIrradiatedForests();
+
 }

@@ -1,15 +1,49 @@
 package com.gildedgames.aether.common.world.aether.island.voronoi;
 
 import com.gildedgames.aether.common.world.aether.island.nodename.as3delaunay.Point;
+import com.gildedgames.aether.common.world.aether.island.nodename.as3delaunay.Voronoi;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Vector;
 
 public class VoronoiGraphUtils
 {
 	private static final Color RIVER = new Color(0x3D51B3);
+
+	public static Voronoi lloydRelax(Voronoi v, final int numLloydRelaxations)
+	{
+		for (int i = 0; i < numLloydRelaxations; i++)
+		{
+			final ArrayList<Point> points = v.siteCoords();
+
+			for (final Point p : points)
+			{
+				final ArrayList<Point> region = v.region(p);
+
+				double x = 0;
+				double y = 0;
+
+				for (final Point c : region)
+				{
+					x += c.x;
+					y += c.y;
+				}
+
+				x /= region.size();
+				y /= region.size();
+
+				p.x = x;
+				p.y = y;
+			}
+
+			v = new Voronoi(points, null, v.get_plotBounds());
+		}
+
+		return v;
+	}
 
 	private static void drawTriangle(final Graphics2D g, final Corner c1, final Corner c2, final Center center)
 	{

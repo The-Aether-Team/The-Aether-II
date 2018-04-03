@@ -9,6 +9,7 @@ import com.gildedgames.aether.common.items.tools.ItemToolHandler;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
 import com.gildedgames.aether.common.registry.ContentRegistry;
 import com.gildedgames.aether.common.world.SectorEventHandler;
+import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.IrradiatedForestsData;
 import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.MagneticHillPillar;
 import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.MagneticHillsData;
 import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstance;
@@ -48,6 +49,7 @@ public class CommonProxy implements IAetherServices
 		s.register(0, NecromancerTowerInstance.class, new Instantiator<>(NecromancerTowerInstance.class));
 		s.register(1, MagneticHillsData.class, new Instantiator<>(MagneticHillsData.class));
 		s.register(2, MagneticHillPillar.class, new Instantiator<>(MagneticHillPillar.class));
+		s.register(3, IrradiatedForestsData.class, new Instantiator<>(IrradiatedForestsData.class));
 
 		OrbisAPI.services().io().register(s);
 

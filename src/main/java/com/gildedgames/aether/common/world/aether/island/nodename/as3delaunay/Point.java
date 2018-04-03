@@ -31,9 +31,33 @@ public class Point
 		return point1 + alpha * (point2 - point1);
 	}
 
+	public static Point centroid(final Point... points)
+	{
+		double centroidX = 0, centroidY = 0;
+
+		for (final Point knot : points)
+		{
+			centroidX += knot.x;
+			centroidY += knot.y;
+		}
+
+		return new Point(centroidX / points.length, centroidY / points.length);
+	}
+
 	public static Point subtract(final Point p1, final Point p2)
 	{
 		return new Point(p1.x - p2.x, p1.y - p2.y);
+	}
+
+	/** Compare two doubles within a given epsilon */
+	public static boolean equals(final double a, final double b, final double eps)
+	{
+		if (a == b)
+		{
+			return true;
+		}
+		// If the difference is less than epsilon, treat as equal.
+		return Math.abs(a - b) < eps;
 	}
 
 	@Override
@@ -50,5 +74,29 @@ public class Point
 	public double length()
 	{
 		return Math.sqrt(x * x + y * y);
+	}
+
+	@Override
+	public boolean equals(final Object obj)
+	{
+		if (obj == this)
+		{
+			return true;
+		}
+
+		if (obj instanceof Point)
+		{
+			final Point p = (Point) obj;
+
+			return equals(p.x, this.x, 0.000001) && equals(p.y, this.y, 0.000001);
+		}
+
+		return false;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return super.hashCode();
 	}
 }

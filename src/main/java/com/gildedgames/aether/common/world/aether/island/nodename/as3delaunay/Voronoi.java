@@ -68,6 +68,17 @@ public final class Voronoi
 		fortunesAlgorithm();
 	}
 
+	public Voronoi(final int numSites, final Random r, final Rectangle _plotBounds)
+	{
+		final ArrayList<Point> points = new ArrayList();
+		for (int i = 0; i < numSites; i++)
+		{
+			points.add(new Point(_plotBounds.x + (r.nextDouble() * _plotBounds.width), _plotBounds.y + (r.nextDouble() * _plotBounds.height)));
+		}
+		init(points, null, _plotBounds);
+		fortunesAlgorithm();
+	}
+
 	public Voronoi(final int numSites, final double maxWidth, final double maxHeight, final Random r, final ArrayList<Color> colors)
 	{
 		final ArrayList<Point> points = new ArrayList();

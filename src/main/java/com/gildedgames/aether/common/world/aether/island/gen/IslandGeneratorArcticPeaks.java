@@ -71,6 +71,11 @@ public class IslandGeneratorArcticPeaks implements IIslandGenerator
 		return data;
 	}
 
+	public static double ridgeNoise(final OpenSimplexNoise noise, final double nx, final double ny)
+	{
+		return 2 * (0.5 - Math.abs(0.5 - noise.eval(nx, ny)));
+	}
+
 	@Override
 	public void genIslandForChunk(final OpenSimplexNoise noise, final IBlockAccess access, final ChunkPrimer primer, final IIslandData island, final int chunkX,
 			final int chunkZ)
@@ -104,7 +109,7 @@ public class IslandGeneratorArcticPeaks implements IIslandGenerator
 				final double distZ = Math.abs((centerZ - worldZ) * (1.0 / radiusZ));
 
 				// Get distance from center of Island
-				final double dist = Math.sqrt(distX * distX + distZ * distZ) / 1.1D;
+				final double dist = Math.sqrt(distX * distX + distZ * distZ) / 1.0D;
 
 				final double heightSample = sample + 1.0 - dist;
 

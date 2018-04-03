@@ -5,10 +5,12 @@ import com.gildedgames.aether.api.world.islands.IIslandBounds;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.common.registry.content.BiomesAether;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
+import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.IrradiatedForestsData;
 import com.gildedgames.aether.common.world.aether.island.data.IslandBounds;
 import com.gildedgames.aether.common.world.aether.island.data.IslandData;
-import com.gildedgames.aether.common.world.aether.island.voronoi.VoronoiGraph;
-import com.gildedgames.aether.common.world.aether.island.voronoi.VoronoiGraphUtils;
+import com.gildedgames.aether.common.world.aether.island.nodename.as3delaunay.LineSegment;
+import com.gildedgames.aether.common.world.aether.island.nodename.as3delaunay.Voronoi;
+import com.gildedgames.orbis.api.util.mc.NBT;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Bootstrap;
 import org.lwjgl.BufferUtils;
@@ -34,11 +36,9 @@ public class IslandGenPreview
 
 	private OpenSimplexNoise noise;
 
-	private BufferedImage bufferedImage;
+	private BufferedImage islandImage, voronoiImage;
 
-	private int textureID;
-
-	private VoronoiGraph<Color> voronoi;
+	private int islandTexId, voronoiTexId;
 
 	public IslandGenPreview()
 	{
@@ -84,31 +84,31 @@ public class IslandGenPreview
 
 		this.noise = new OpenSimplexNoise(seed);
 
-		final int width = 1280;
+		final int width = 960;
 		final int height = 255;
-		final int length = 1280;
+		final int length = 960;
 
-		final int x = 0;
+		final int x = 16 * 400;
 		final int y = 10;
-		final int z = 0;
+		final int z = 16 * 400;
 
 		final IIslandBounds bounds = new IslandBounds(x, y, z, x + width, y + height, z + length);
 
-		final BiomeAetherBase chosen = BiomesAether.HIGHLANDS;
+		final BiomeAetherBase chosen = BiomesAether.IRRADIATED_FORESTS;
 
 		this.island = new IslandData(null, bounds, chosen, seed);
 
 		this.island.addComponents(chosen.createIslandComponents(this.island));
 	}
 
-	private void renderImage(final BufferedImage image)
+	private int renderImage(final BufferedImage image)
 	{
 		final int[] pixels = new int[image.getWidth() * image.getHeight()];
 		image.getRGB(0, 0, image.getWidth(), image.getHeight(), pixels, 0, image.getWidth());
 
 		final ByteBuffer buffer = BufferUtils.createByteBuffer(image.getWidth() * image.getHeight() * 4); //4 for RGBA, 3 for RGB
 
-		this.textureID = GL11.glGenTextures();
+		final int id = GL11.glGenTextures();
 
 		for (int y = 0; y < image.getHeight(); y++)
 		{
@@ -127,8 +127,10 @@ public class IslandGenPreview
 		// You now have a ByteBuffer filled with the color data of each pixel.
 		// Now just create a texture ID and bind it. Then you can load it using
 		// whatever OpenGL method you want, for example:
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.textureID);
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, id);
 		GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGBA8, image.getWidth(), image.getHeight(), 0, GL11.GL_RGBA, GL11.GL_UNSIGNED_BYTE, buffer);
+
+		return id;
 	}
 
 	public BufferedImage paintIsland()
@@ -136,13 +138,16 @@ public class IslandGenPreview
 		final BufferedImage bufferedImage = new BufferedImage(this.island.getBounds().getWidth(), this.island.getBounds().getLength(),
 				BufferedImage.TYPE_INT_ARGB);
 
-		final int chunkMaxX = this.island.getBounds().getWidth() >> 4;
-		final int chunkMaxZ = this.island.getBounds().getLength() >> 4;
+		final int chunkMaxX = this.island.getBounds().getMaxX() >> 4;
+		final int chunkMaxZ = this.island.getBounds().getMaxZ() >> 4;
 
-		for (int chunkX = 0; chunkX < chunkMaxX; chunkX++)
+		for (int chunkX = this.island.getBounds().getMinX() >> 4; chunkX < chunkMaxX; chunkX++)
 		{
-			for (int chunkZ = 0; chunkZ < chunkMaxZ; chunkZ++)
+			for (int chunkZ = this.island.getBounds().getMinZ() >> 4; chunkZ < chunkMaxZ; chunkZ++)
 			{
+				final int innerChunkX = (chunkX - (this.island.getBounds().getMinX() >> 4));
+				final int innerChunkZ = (chunkZ - (this.island.getBounds().getMinZ() >> 4));
+
 				final ChunkPrimerIsland primer = new ChunkPrimerIsland();
 
 				this.island.getGenerator().genIslandForChunk(this.noise, new BlockAccessIsland(), primer, this.island, chunkX, chunkZ);
@@ -158,19 +163,21 @@ public class IslandGenPreview
 
 						if (state != null)
 						{
-							final int color = 0xFFFFFFFF;
+							final int color = state.getMaterial().getMaterialMapColor().colorValue;
 
 							final float r = (color >> 16 & 0xff) / 255F;
 							final float g = (color >> 8 & 0xff) / 255F;
 							final float b = (color & 0xff) / 255F;
 
-							bufferedImage.setRGB(x + (chunkX * 15), z + (chunkZ * 15), new Color(r, g, b, 1).getRGB());
+							bufferedImage
+									.setRGB(x + (innerChunkX * 15), z + (innerChunkZ * 15),
+											new Color((r + value) / 2, (g + value) / 2, (b + value) / 2, 1).getRGB());
 						}
 						else
 						{
 							final int color = 0xFF262626;
 
-							bufferedImage.setRGB(x + (chunkX * 15), z + (chunkZ * 15), color);
+							bufferedImage.setRGB(x + (innerChunkX * 15), z + (innerChunkZ * 15), color);
 						}
 					}
 				}
@@ -184,16 +191,18 @@ public class IslandGenPreview
 	{
 		this.generateIsland();
 
-		this.bufferedImage = this.paintIsland();
+		this.islandImage = this.paintIsland();
+		this.voronoiImage = this.paintVoronoi();
 
-		this.renderImage(this.bufferedImage);
+		this.islandTexId = this.renderImage(this.islandImage);
+		this.voronoiTexId = this.renderImage(this.voronoiImage);
 	}
 
 	public void update()
 	{
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
-		if (this.bufferedImage == null)
+		if (this.islandImage == null)
 		{
 			this.makeIsland();
 		}
@@ -204,9 +213,31 @@ public class IslandGenPreview
 
 	private BufferedImage paintVoronoi()
 	{
-		final BufferedImage bufferedImage = new BufferedImage((int) this.voronoi.bounds.width, (int) this.voronoi.bounds.height, BufferedImage.TYPE_4BYTE_ABGR);
+		Voronoi voronoi = null;
 
-		VoronoiGraphUtils.paint(this.voronoi, bufferedImage.createGraphics(), true, true, false, false, false);
+		for (final NBT nbt : this.island.getComponents())
+		{
+			if (nbt instanceof IrradiatedForestsData)
+			{
+				final IrradiatedForestsData data = (IrradiatedForestsData) nbt;
+
+				voronoi = data.getVoronoi();
+			}
+		}
+
+		assert voronoi != null;
+
+		final BufferedImage bufferedImage = new BufferedImage(this.island.getBounds().getWidth(), this.island.getBounds().getLength(),
+				BufferedImage.TYPE_INT_ARGB);
+
+		final Graphics2D graphics2D = (Graphics2D) bufferedImage.getGraphics();
+
+		graphics2D.setStroke(new BasicStroke(3));
+
+		for (final LineSegment line : voronoi.voronoiDiagram())
+		{
+			graphics2D.drawLine((int) line.p0.x, (int) line.p0.y, (int) line.p1.x, (int) line.p1.y);
+		}
 
 		return bufferedImage;
 	}
@@ -267,6 +298,12 @@ public class IslandGenPreview
 
 	public void draw()
 	{
+		this.drawTexture(this.islandTexId);
+		//this.drawTexture(this.voronoiTexId);
+	}
+
+	private void drawTexture(final int textureId)
+	{
 		GL11.glPushMatrix();
 
 		GL11.glMatrixMode(GL11.GL_PROJECTION);
@@ -282,7 +319,7 @@ public class IslandGenPreview
 		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST);
 		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST);
 
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.textureID);
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureId);
 		GL11.glBegin(GL11.GL_QUADS);
 		GL11.glTexCoord2f(0, 0);
 		GL11.glVertex2i(0, 0);

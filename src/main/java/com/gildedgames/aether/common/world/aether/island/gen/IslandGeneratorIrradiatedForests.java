@@ -6,13 +6,16 @@ import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
+import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.CrackChunk;
+import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.CrackPos;
+import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.IrradiatedForestsData;
+import com.gildedgames.orbis.api.util.ObjectFilter;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 
-public class IslandGeneratorHighlands implements IIslandGenerator
+public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 {
 	// Resolution of the evalNormalised for a chunk. Should be a power of 2.
 	private static final int NOISE_XZ_SCALE = 4;
@@ -20,7 +23,9 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 	// Number of samples done per chunk.
 	private static final int NOISE_SAMPLES = NOISE_XZ_SCALE + 1;
 
-	public static double interpolate(final double[] data, final int x, final int z)
+	private IrradiatedForestsData data;
+
+	public double interpolate(final double[] data, final int x, final int z)
 	{
 		final double x0 = (double) x / NOISE_XZ_SCALE;
 		final double z0 = (double) z / NOISE_XZ_SCALE;
@@ -40,7 +45,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 				fractionX * ((1.0 - fractionZ) * c + fractionZ * d);
 	}
 
-	public static double[] generateNoise(final OpenSimplexNoise noise, final IIslandData island, final int chunkX, final int chunkZ, final int offset,
+	public double[] generateNoise(final OpenSimplexNoise noise, final IIslandData island, final int chunkX, final int chunkZ, final int offset,
 			final double scale)
 	{
 		final double posX = chunkX * 16;
@@ -78,13 +83,18 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 	public void genIslandForChunk(final OpenSimplexNoise noise, final IBlockAccess access, final ChunkPrimer primer, final IIslandData island, final int chunkX,
 			final int chunkZ)
 	{
+		this.data = ObjectFilter.getFirstFrom(island.getComponents(), IrradiatedForestsData.class);
+
 		final double[] heightMap = generateNoise(noise, island, chunkX, chunkZ, 0, 300.0D);
 		final double[] terraceMap = generateNoise(noise, island, chunkX, chunkZ, 1000, 300.0D);
 
-		final Biome biome = access.getBiome(new BlockPos(chunkX * 16, 0, chunkZ * 16));
+		final BiomeAetherBase biome = (BiomeAetherBase) access.getBiome(new BlockPos(chunkX * 16, 0, chunkZ * 16));
 
-		final IBlockState coastBlock = ((BiomeAetherBase) biome).getCoastalBlock();
+		final IBlockState coastBlock = biome.getCoastalBlock();
 		final IBlockState stoneBlock = BlocksAether.holystone.getDefaultState();
+
+		/*coastBlock = Blocks.SAND.getDefaultState();
+		stoneBlock = Blocks.STONE.getDefaultState();*/
 
 		final int posX = chunkX * 16;
 		final int posZ = chunkZ * 16;
@@ -118,6 +128,45 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 
 				final double cutoffPoint = 0.325;
 
+				boolean cracked = false;
+
+				final int radius = Math.max(2, (int) (16.0 * (1.0 - dist)));
+
+				double closestDist = Double.POSITIVE_INFINITY;
+
+				for (int x1 = -radius; x1 < radius; x1++)
+				{
+					for (int z1 = -radius; z1 < radius; z1++)
+					{
+						final int crackX = worldX + x1;
+						final int crackZ = worldZ + z1;
+
+						final CrackChunk crackChunk = this.data.getCracks(crackX >> 4, crackZ >> 4);
+
+						if (crackChunk != null)
+						{
+							final CrackPos crack = crackChunk.get(crackX % 16, crackZ % 16);
+
+							if (crack != null)
+							{
+								final double crackDistX = Math.abs(x1 * (1.0 / radius));
+								final double crackDistZ = Math.abs(z1 * (1.0 / radius));
+
+								final double crackDist = Math.hypot(crackDistX, crackDistZ);
+
+								if (closestDist > crackDist)
+								{
+									closestDist = crackDist;
+								}
+
+								cracked = true;
+							}
+						}
+					}
+				}
+
+				closestDist = Math.min(1.0, closestDist);
+
 				final double normal = NoiseUtil.normalise(sample);
 				final double cutoffPointDist = Math.abs(cutoffPoint - heightSample);
 				final double diff = Math.max(0.0, cutoffPoint - cutoffPointDist) * 8.0;
@@ -132,37 +181,49 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 
 				if (heightSample > cutoffPoint)
 				{
-					if (heightSample < cutoffPoint + 0.1)
+					if (!cracked)
 					{
-						bottomHeightMod = cutoffPointDist * heightSample * 16.0;
+						if (heightSample < cutoffPoint + 0.1)
+						{
+							bottomHeightMod = cutoffPointDist * heightSample * 16.0;
+						}
+
+						for (int y = (int) bottomMaxY; y > bottomMaxY - (bottomHeight * bottomHeightMod); y--)
+						{
+							if (y < 0)
+							{
+								continue;
+							}
+
+							if (coastBlock != null && heightSample < cutoffPoint + 0.10 && y == 100)
+							{
+								primer.setBlockState(x, y, z, coastBlock);
+							}
+							else
+							{
+								primer.setBlockState(x, y, z, stoneBlock);
+							}
+						}
+
+						final double maxY = bottomMaxY + ((topSample - cutoffPoint) * topHeight);
+
+						for (int y = (int) bottomMaxY; y < maxY; y++)
+						{
+							if (coastBlock != null && (topSample < cutoffPoint + 0.10 && y == 100))
+							{
+								primer.setBlockState(x, y, z, coastBlock);
+							}
+							else
+							{
+								primer.setBlockState(x, y, z, stoneBlock);
+							}
+						}
 					}
-
-					for (int y = (int) bottomMaxY; y > bottomMaxY - (bottomHeight * bottomHeightMod); y--)
+					else
 					{
-						if (y < 0)
-						{
-							continue;
-						}
+						final double maxY = bottomMaxY + ((closestDist * (topSample - cutoffPoint)) * topHeight);
 
-						if (coastBlock != null && heightSample < cutoffPoint + 0.10 && y == 100)
-						{
-							primer.setBlockState(x, y, z, coastBlock);
-						}
-						else
-						{
-							primer.setBlockState(x, y, z, stoneBlock);
-						}
-					}
-
-					final double maxY = bottomMaxY + ((topSample - cutoffPoint) * topHeight);
-
-					for (int y = (int) bottomMaxY; y < maxY; y++)
-					{
-						if (coastBlock != null && (topSample < cutoffPoint + 0.10 && y == 100))
-						{
-							primer.setBlockState(x, y, z, coastBlock);
-						}
-						else
+						for (int y = (int) bottomMaxY; y < maxY; y++)
 						{
 							primer.setBlockState(x, y, z, stoneBlock);
 						}
