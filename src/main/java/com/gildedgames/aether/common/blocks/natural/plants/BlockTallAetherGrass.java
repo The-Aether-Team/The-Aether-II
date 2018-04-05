@@ -148,7 +148,7 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 	public IBlockState getStateFromMeta(final int meta)
 	{
 		final boolean snowy = meta >= PROPERTY_VARIANT.getAllowedValues().size();
-		final BlockVariant variant = PROPERTY_VARIANT.fromMeta(meta);
+		final BlockVariant variant = PROPERTY_VARIANT.fromMeta(meta - (snowy ? PROPERTY_VARIANT.getAllowedValues().size() : 0));
 
 		return this.getDefaultState().withProperty(PROPERTY_VARIANT, variant).withProperty(PROPERTY_SNOWY, snowy);
 	}

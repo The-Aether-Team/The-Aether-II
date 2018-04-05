@@ -71,7 +71,8 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 	{
 		final boolean snowy = meta >= PROPERTY_VARIANT.getAllowedValues().size();
 
-		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta)).withProperty(PROPERTY_SNOWY, snowy);
+		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta - (snowy ? PROPERTY_VARIANT.getAllowedValues().size() : 0)))
+				.withProperty(PROPERTY_SNOWY, snowy);
 	}
 
 	@Override

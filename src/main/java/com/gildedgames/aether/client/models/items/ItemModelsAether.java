@@ -136,7 +136,10 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.aether_flower, new ItemModelBuilder("flowers/")
 				.add(BlockAetherFlower.WHITE_ROSE.getMeta(), "white_rose")
 				.add(BlockAetherFlower.PURPLE_FLOWER.getMeta(), "purple_flower")
-				.add(BlockAetherFlower.BURSTBLOSSOM.getMeta(), "burstblossom"));
+				.add(BlockAetherFlower.BURSTBLOSSOM.getMeta(), "burstblossom")
+				.add(BlockAetherFlower.WHITE_ROSE.getMeta() + BlockAetherFlower.PROPERTY_VARIANT.getAllowedValues().size(), "white_rose_snowy")
+				.add(BlockAetherFlower.PURPLE_FLOWER.getMeta() + BlockAetherFlower.PROPERTY_VARIANT.getAllowedValues().size(), "purple_flower_snowy")
+				.add(BlockAetherFlower.BURSTBLOSSOM.getMeta() + BlockAetherFlower.PROPERTY_VARIANT.getAllowedValues().size(), "burstblossom_snowy"));
 
 		registerItemModels(BlocksAether.aether_sapling, new ItemModelBuilder("saplings/")
 				.add(BlockAetherSapling.BLUE_SKYROOT.getMeta(), "blue_skyroot_sapling")
@@ -213,7 +216,10 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.tall_aether_grass, new ItemModelBuilder("tall_grass/")
 				.add(BlockTallAetherGrass.SHORT.getMeta(), "short_aether")
 				.add(BlockTallAetherGrass.NORMAL.getMeta(), "normal_aether")
-				.add(BlockTallAetherGrass.LONG.getMeta(), "long_aether"));
+				.add(BlockTallAetherGrass.LONG.getMeta(), "long_aether")
+				.add(BlockTallAetherGrass.SHORT.getMeta() + BlockTallAetherGrass.PROPERTY_VARIANT.getAllowedValues().size(), "short_aether_snowy")
+				.add(BlockTallAetherGrass.NORMAL.getMeta() + BlockTallAetherGrass.PROPERTY_VARIANT.getAllowedValues().size(), "normal_aether_snowy")
+				.add(BlockTallAetherGrass.LONG.getMeta() + BlockTallAetherGrass.PROPERTY_VARIANT.getAllowedValues().size(), "long_aether_snowy"));
 
 		registerItemModels(BlocksAether.valkyrie_grass, new ItemModelBuilder("valkyrie_grass/")
 				.add(BlockValkyrieGrass.SPROUT.getMeta(), "valkyrie_grass_sprout")
