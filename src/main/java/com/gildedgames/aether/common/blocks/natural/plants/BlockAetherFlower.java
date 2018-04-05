@@ -10,6 +10,10 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -18,9 +22,15 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 	public static final BlockVariant
 			WHITE_ROSE = new BlockVariant(0, "white_rose"),
 			PURPLE_FLOWER = new BlockVariant(1, "purple_flower"),
-			BURSTBLOSSOM = new BlockVariant(2, "burstblossom");
+			BURSTBLOSSOM = new BlockVariant(2, "burstblossom"),
+			WHITE_ROSE_SNOWY = new BlockVariant(3, "white_rose_snowy"),
+			PURPLE_FLOWER_SNOWY  = new BlockVariant(4, "purple_flower_snowy"),
+			BURSTBLOSSOM_SNOWY  = new BlockVariant(5, "burstblossom_snowy");
 
-	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", WHITE_ROSE, PURPLE_FLOWER, BURSTBLOSSOM);
+	public static final int SNOW_START = WHITE_ROSE_SNOWY.getMeta();
+
+	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", WHITE_ROSE, PURPLE_FLOWER, BURSTBLOSSOM,
+			WHITE_ROSE_SNOWY, PURPLE_FLOWER_SNOWY, BURSTBLOSSOM_SNOWY);
 
 	public BlockAetherFlower()
 	{
@@ -29,6 +39,12 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 		this.setSoundType(SoundType.PLANT);
 
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, WHITE_ROSE));
+	}
+
+	@Override
+	public boolean canPlaceBlockAt(World world, BlockPos pos)
+	{
+		return super.canPlaceBlockAt(world, pos);
 	}
 
 	@Override
@@ -75,6 +91,17 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 	public EnumOffsetType getOffsetType()
 	{
 		return EnumOffsetType.XZ;
+	}
+
+	@Override
+	public Vec3d getOffset(IBlockState state, IBlockAccess access, BlockPos pos)
+	{
+		if (getMetaFromState(state) >= SNOW_START)
+		{
+			return Vec3d.ZERO;
+		}
+
+		return super.getOffset(state, access, pos);
 	}
 
 	@Override

@@ -11,6 +11,15 @@
 		},
 		"variant=moonlit_bloom": {
 			"model": "aether:flowers/moonlit_bloom"
+		},
+		"variant=white_rose_snowy": {
+			"model": "aether:flowers/white_rose_snowy"
+		},
+		"variant=purple_flower_snowy": {
+			"model": "aether:flowers/purple_flower_snowy"
+		},
+		"variant=burstblossom_snowy": {
+			"model": "aether:flowers/burstblossom_snowy"
 		}
 	}
 }
