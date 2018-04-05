@@ -124,7 +124,7 @@ public class IrradiatedForestsData implements NBT
 						final Point div2 = divided.get(index2);
 
 						final Iterable<BlockPos.MutableBlockPos> line = LineHelp
-								.createLinePositions(1, new BlockPos(div1.x, 0, div1.y),
+								.createLinePositions(2, new BlockPos(div1.x, 0, div1.y),
 										new BlockPos(div2.x, 0, div2.y));
 
 						for (final BlockPos.MutableBlockPos p : line)
