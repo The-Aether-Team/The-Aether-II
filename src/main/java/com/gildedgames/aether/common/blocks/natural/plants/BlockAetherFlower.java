@@ -39,7 +39,7 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World world, BlockPos pos)
+	public boolean canPlaceBlockAt(final World world, final BlockPos pos)
 	{
 		return super.canPlaceBlockAt(world, pos);
 	}
@@ -69,13 +69,15 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 	@Override
 	public IBlockState getStateFromMeta(final int meta)
 	{
-		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta));
+		final boolean snowy = meta >= PROPERTY_VARIANT.getAllowedValues().size();
+
+		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta)).withProperty(PROPERTY_SNOWY, snowy);
 	}
 
 	@Override
 	public int getMetaFromState(final IBlockState state)
 	{
-		return state.getValue(PROPERTY_VARIANT).getMeta();
+		return state.getValue(PROPERTY_VARIANT).getMeta() + (state.getValue(PROPERTY_SNOWY) ? PROPERTY_VARIANT.getAllowedValues().size() : 0);
 	}
 
 	@Override
@@ -91,7 +93,7 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 	}
 
 	@Override
-	public Vec3d getOffset(IBlockState state, IBlockAccess access, BlockPos pos)
+	public Vec3d getOffset(final IBlockState state, final IBlockAccess access, final BlockPos pos)
 	{
 		if (state.getProperties().get(PROPERTY_SNOWY).equals(true))
 		{

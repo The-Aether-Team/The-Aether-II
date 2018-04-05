@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.blocks.natural;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.IBlockMultiName;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
+import com.gildedgames.aether.common.blocks.natural.plants.BlockTallAetherGrass;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
 import com.gildedgames.aether.common.items.ItemsAether;
@@ -63,9 +64,12 @@ public class BlockAetherGrass extends BlockGrass implements IBlockMultiName
 	@Override
 	public IBlockState getActualState(final IBlockState state, final IBlockAccess worldIn, final BlockPos pos)
 	{
-		final Block block = worldIn.getBlockState(pos.up()).getBlock();
+		final IBlockState up = worldIn.getBlockState(pos.up());
+		final Block block = up.getBlock();
 
-		return state.withProperty(SNOWY, block == Blocks.SNOW || block == Blocks.SNOW_LAYER);
+		return state.withProperty(SNOWY,
+				block == Blocks.SNOW || block == Blocks.SNOW_LAYER || up.getProperties().get(BlockTallAetherGrass.PROPERTY_SNOWY).equals(true) || up
+						.getProperties().get(BlockAetherFlower.PROPERTY_SNOWY).equals(true));
 	}
 
 	@Override

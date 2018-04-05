@@ -9,14 +9,14 @@
         "snowy=false,type=magnetic,variant=short": { "model": "aether:tall_grass/short_magnetic" },
         "snowy=false,type=magnetic,variant=normal": { "model": "aether:tall_grass/normal_magnetic" },
         "snowy=false,type=magnetic,variant=long": { "model": "aether:tall_grass/long_magnetic" },
-		"snowy=true,type=highlands,variant=short": { "model": "aether:tall_grass/short_aether_snowy" },
-        "snowy=true,type=highlands,variant=normal": { "model": "aether:tall_grass/normal_aether_snowy" },
-        "snowy=true,type=highlands,variant=long": { "model": "aether:tall_grass/long_aether_snowy" },
-        "snowy=true,type=arctic,variant=short": { "model": "aether:tall_grass/short_arctic_snowy" },
-        "snowy=true,type=arctic,variant=normal": { "model": "aether:tall_grass/normal_arctic_snowy" },
-        "snowy=true,type=arctic,variant=long": { "model": "aether:tall_grass/long_arctic_snowy" },
-        "snowy=true,type=magnetic,variant=short": { "model": "aether:tall_grass/short_magnetic_snowy" },
-        "snowy=true,type=magnetic,variant=normal": { "model": "aether:tall_grass/normal_magnetic_snowy" },
-        "snowy=true,type=magnetic,variant=long": { "model": "aether:tall_grass/long_magnetic_snowy" }
+		"snowy=true,type=highlands,variant=short": { "model": "aether:tall_grass/short_snowy" },
+        "snowy=true,type=highlands,variant=normal": { "model": "aether:tall_grass/normal_snowy" },
+        "snowy=true,type=highlands,variant=long": { "model": "aether:tall_grass/long_snowy" },
+        "snowy=true,type=arctic,variant=short": { "model": "aether:tall_grass/short_snowy" },
+        "snowy=true,type=arctic,variant=normal": { "model": "aether:tall_grass/normal_snowy" },
+        "snowy=true,type=arctic,variant=long": { "model": "aether:tall_grass/long_snowy" },
+        "snowy=true,type=magnetic,variant=short": { "model": "aether:tall_grass/short_snowy" },
+        "snowy=true,type=magnetic,variant=normal": { "model": "aether:tall_grass/normal_snowy" },
+        "snowy=true,type=magnetic,variant=long": { "model": "aether:tall_grass/long_snowy" }
     }
 }

@@ -60,7 +60,8 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 
 		this.setSoundType(SoundType.PLANT);
 
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, SHORT).withProperty(TYPE, Type.HIGHLANDS).withProperty(PROPERTY_SNOWY, Boolean.FALSE));
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, SHORT).withProperty(TYPE, Type.HIGHLANDS)
+				.withProperty(PROPERTY_SNOWY, Boolean.FALSE));
 	}
 
 	@Override
@@ -146,9 +147,10 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 	@Override
 	public IBlockState getStateFromMeta(final int meta)
 	{
+		final boolean snowy = meta >= PROPERTY_VARIANT.getAllowedValues().size();
 		final BlockVariant variant = PROPERTY_VARIANT.fromMeta(meta);
 
-		return this.getDefaultState().withProperty(PROPERTY_VARIANT, variant);
+		return this.getDefaultState().withProperty(PROPERTY_VARIANT, variant).withProperty(PROPERTY_SNOWY, snowy);
 	}
 
 	@Override
@@ -160,13 +162,13 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 	@Override
 	public int getMetaFromState(final IBlockState state)
 	{
-		return state.getValue(PROPERTY_VARIANT).getMeta();
+		return state.getValue(PROPERTY_VARIANT).getMeta() + (state.getValue(PROPERTY_SNOWY) ? PROPERTY_VARIANT.getAllowedValues().size() : 0);
 	}
 
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, TYPE, PROPERTY_VARIANT, PROPERTY_SNOWY );
+		return new BlockStateContainer(this, TYPE, PROPERTY_VARIANT, PROPERTY_SNOWY);
 	}
 
 	@Override
@@ -176,7 +178,7 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 	}
 
 	@Override
-	public Vec3d getOffset(IBlockState state, IBlockAccess access, BlockPos pos)
+	public Vec3d getOffset(final IBlockState state, final IBlockAccess access, final BlockPos pos)
 	{
 		if (state.getProperties().get(PROPERTY_SNOWY).equals(true))
 		{
