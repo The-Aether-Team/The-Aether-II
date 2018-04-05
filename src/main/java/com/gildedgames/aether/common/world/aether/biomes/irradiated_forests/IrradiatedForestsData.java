@@ -87,7 +87,7 @@ public class IrradiatedForestsData implements NBT
 				Point site = centerSite;
 
 				loop:
-				for (int i = 0; i < 10; i++)
+				for (int i = 0; i < 20; i++)
 				{
 					final List<Point> sites = this.voronoi.neighborSitesForSite(site);
 
