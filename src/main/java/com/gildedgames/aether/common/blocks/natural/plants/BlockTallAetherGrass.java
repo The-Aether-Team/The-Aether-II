@@ -8,6 +8,7 @@ import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -18,6 +19,7 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.IShearable;
 import net.minecraftforge.fml.relauncher.Side;
@@ -38,6 +40,8 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 	public static final PropertyEnum<BlockTallAetherGrass.Type> TYPE = PropertyEnum
 			.create("type", BlockTallAetherGrass.Type.class, Type.HIGHLANDS, Type.ARCTIC, Type.MAGNETIC);
 
+	public static final PropertyBool PROPERTY_SNOWY = PropertyBool.create("snowy");
+
 	private static final AxisAlignedBB GRASS_SHORT_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.3D, 0.9D);
 
 	private static final AxisAlignedBB GRASS_NORMAL_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.6D, 0.9D);
@@ -56,7 +60,7 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 
 		this.setSoundType(SoundType.PLANT);
 
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, SHORT).withProperty(TYPE, Type.HIGHLANDS));
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, SHORT).withProperty(TYPE, Type.HIGHLANDS).withProperty(PROPERTY_SNOWY, Boolean.FALSE));
 	}
 
 	@Override
@@ -162,13 +166,24 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, TYPE, PROPERTY_VARIANT);
+		return new BlockStateContainer(this, TYPE, PROPERTY_VARIANT, PROPERTY_SNOWY );
 	}
 
 	@Override
 	public String getUnlocalizedName(final ItemStack stack)
 	{
 		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
+	}
+
+	@Override
+	public Vec3d getOffset(IBlockState state, IBlockAccess access, BlockPos pos)
+	{
+		if (state.getProperties().get(PROPERTY_SNOWY).equals(true))
+		{
+			return Vec3d.ZERO;
+		}
+
+		return super.getOffset(state, access, pos);
 	}
 
 	@Override

@@ -1,24 +1,24 @@
 {
 	"variants": {
-		"variant=white_rose": {
+		"snowy=false,variant=white_rose": {
 			"model": "aether:flowers/white_rose"
 		},
-		"variant=purple_flower": {
+		"snowy=false,variant=purple_flower": {
 			"model": "aether:flowers/purple_flower"
 		},
-		"variant=burstblossom": {
+		"snowy=false,variant=burstblossom": {
 			"model": "aether:flowers/burstblossom"
 		},
-		"variant=moonlit_bloom": {
+		"snowy=false,variant=moonlit": {
 			"model": "aether:flowers/moonlit_bloom"
 		},
-		"variant=white_rose_snowy": {
+		"snowy=true,variant=white_rose": {
 			"model": "aether:flowers/white_rose_snowy"
 		},
-		"variant=purple_flower_snowy": {
+		"snowy=true,variant=purple_flower": {
 			"model": "aether:flowers/purple_flower_snowy"
 		},
-		"variant=burstblossom_snowy": {
+		"snowy=true,variant=burstblossom": {
 			"model": "aether:flowers/burstblossom_snowy"
 		}
 	}

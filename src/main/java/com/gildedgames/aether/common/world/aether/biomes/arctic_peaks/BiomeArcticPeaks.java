@@ -9,12 +9,17 @@ import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
+import com.gildedgames.aether.common.blocks.natural.plants.BlockTallAetherGrass;
+import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.island.ChunkGeneratorAether;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandGeneratorArcticPeaks;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandGeneratorHighlands;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandGenerators;
 import com.gildedgames.orbis.api.util.mc.NBT;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockGrass;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
@@ -132,19 +137,28 @@ public class BiomeArcticPeaks extends BiomeAetherBase
 
 						if (heightSample > 0.5)
 						{
+							Block block = world.getBlockState(blockpos1).getBlock();
+							IBlockState state = world.getBlockState(blockpos1);
+
 							if (world.canSnowAt(blockpos1, true))
 							{
 								world.setBlockState(blockpos1, Blocks.SNOW_LAYER.getDefaultState(), 2);
 							}
-							else if (world.getBlockState(blockpos1).getBlock() instanceof BlockAetherFlower)
+							else if (block instanceof BlockAetherFlower)
 							{
-								IBlockState state = world.getBlockState(blockpos1);
-								int id = state.getBlock().getMetaFromState(state);
-
-								if (id < BlockAetherFlower.SNOW_START)
-								{
-									world.setBlockState(blockpos1, state.withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.PROPERTY_VARIANT.fromMeta(id + BlockAetherFlower.SNOW_START)), 0);
-								}
+								BlockVariant v = BlockAetherFlower.PROPERTY_VARIANT.fromMeta(block.getMetaFromState(state));
+								world.setBlockState(blockpos1, BlockGrass.getBlockFromName("grass").getDefaultState().withProperty(BlockGrass.SNOWY, true));
+//								IBlockState newState = BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, ).withProperty(BlockAetherFlower.PROPERTY_SNOWY, Boolean.TRUE);
+//
+//								System.out.println(newState.getProperties().get(BlockAetherFlower.PROPERTY_SNOWY) + "-" + blockpos1);
+//
+//								world.setBlockState(blockpos1, newState, 2);
+//
+//								System.out.println(world.getBlockState(blockpos1).getProperties().get(BlockAetherFlower.PROPERTY_SNOWY) + "-" + blockpos1);
+							}
+							else if (world.getBlockState(blockpos1).getBlock() instanceof BlockTallAetherGrass)
+							{
+								world.setBlockState(blockpos1, world.getBlockState(blockpos1).withProperty(BlockTallAetherGrass.PROPERTY_SNOWY, Boolean.TRUE), 2);
 							}
 						}
 					}

@@ -36,8 +36,7 @@ public class WorldGenAetherFlowers extends WorldGenerator
 				continue;
 			}
 
-			if (world.isAirBlock(randomPos) && (randomPos.getY() < world.getActualHeight())
-					&& this.state.getBlock().canPlaceBlockAt(world, randomPos))
+			if (world.isAirBlock(randomPos) && (randomPos.getY() < world.getActualHeight()) && this.state.getBlock().canPlaceBlockAt(world, randomPos))
 			{
 				world.setBlockState(randomPos, this.state, 2);
 			}

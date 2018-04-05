@@ -1,13 +1,22 @@
 {
 	"variants": {
-        "type=highlands,variant=short": { "model": "aether:tall_grass/short_aether" },
-        "type=highlands,variant=normal": { "model": "aether:tall_grass/normal_aether" },
-        "type=highlands,variant=long": { "model": "aether:tall_grass/long_aether" },
-        "type=arctic,variant=short": { "model": "aether:tall_grass/short_arctic" },
-        "type=arctic,variant=normal": { "model": "aether:tall_grass/normal_arctic" },
-        "type=arctic,variant=long": { "model": "aether:tall_grass/long_arctic" },
-        "type=magnetic,variant=short": { "model": "aether:tall_grass/short_magnetic" },
-        "type=magnetic,variant=normal": { "model": "aether:tall_grass/normal_magnetic" },
-        "type=magnetic,variant=long": { "model": "aether:tall_grass/long_magnetic" }
+        "snowy=false,type=highlands,variant=short": { "model": "aether:tall_grass/short_aether" },
+        "snowy=false,type=highlands,variant=normal": { "model": "aether:tall_grass/normal_aether" },
+        "snowy=false,type=highlands,variant=long": { "model": "aether:tall_grass/long_aether" },
+        "snowy=false,type=arctic,variant=short": { "model": "aether:tall_grass/short_arctic" },
+        "snowy=false,type=arctic,variant=normal": { "model": "aether:tall_grass/normal_arctic" },
+        "snowy=false,type=arctic,variant=long": { "model": "aether:tall_grass/long_arctic" },
+        "snowy=false,type=magnetic,variant=short": { "model": "aether:tall_grass/short_magnetic" },
+        "snowy=false,type=magnetic,variant=normal": { "model": "aether:tall_grass/normal_magnetic" },
+        "snowy=false,type=magnetic,variant=long": { "model": "aether:tall_grass/long_magnetic" },
+		"snowy=true,type=highlands,variant=short": { "model": "aether:tall_grass/short_aether_snowy" },
+        "snowy=true,type=highlands,variant=normal": { "model": "aether:tall_grass/normal_aether_snowy" },
+        "snowy=true,type=highlands,variant=long": { "model": "aether:tall_grass/long_aether_snowy" },
+        "snowy=true,type=arctic,variant=short": { "model": "aether:tall_grass/short_arctic_snowy" },
+        "snowy=true,type=arctic,variant=normal": { "model": "aether:tall_grass/normal_arctic_snowy" },
+        "snowy=true,type=arctic,variant=long": { "model": "aether:tall_grass/long_arctic_snowy" },
+        "snowy=true,type=magnetic,variant=short": { "model": "aether:tall_grass/short_magnetic_snowy" },
+        "snowy=true,type=magnetic,variant=normal": { "model": "aether:tall_grass/normal_magnetic_snowy" },
+        "snowy=true,type=magnetic,variant=long": { "model": "aether:tall_grass/long_magnetic_snowy" }
     }
 }
