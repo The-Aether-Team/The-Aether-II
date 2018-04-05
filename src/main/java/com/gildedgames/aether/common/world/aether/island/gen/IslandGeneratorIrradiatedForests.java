@@ -181,13 +181,13 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 
 				if (heightSample > cutoffPoint)
 				{
+					if (heightSample < cutoffPoint + 0.1)
+					{
+						bottomHeightMod = cutoffPointDist * heightSample * 16.0;
+					}
+
 					if (!cracked)
 					{
-						if (heightSample < cutoffPoint + 0.1)
-						{
-							bottomHeightMod = cutoffPointDist * heightSample * 16.0;
-						}
-
 						for (int y = (int) bottomMaxY; y > bottomMaxY - (bottomHeight * bottomHeightMod); y--)
 						{
 							if (y < 0)
@@ -221,9 +221,12 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 					}
 					else
 					{
-						final double maxY = bottomMaxY + ((closestDist * (topSample - cutoffPoint)) * topHeight);
+						final double bottomMinY = bottomMaxY - (bottomHeight * bottomHeightMod);
+						final double expectedTopY = bottomMaxY + ((topSample - cutoffPoint) * topHeight);
 
-						for (int y = (int) bottomMaxY; y < maxY; y++)
+						final double maxY = (expectedTopY * closestDist);
+
+						for (int y = (int) bottomMinY; y < maxY; y++)
 						{
 							primer.setBlockState(x, y, z, stoneBlock);
 						}
