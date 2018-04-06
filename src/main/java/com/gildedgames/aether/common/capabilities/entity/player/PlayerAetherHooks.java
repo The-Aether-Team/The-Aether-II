@@ -5,6 +5,9 @@ import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.CommonEvents;
+import com.gildedgames.aether.common.blocks.IBlockSnowy;
+import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
+import com.gildedgames.aether.common.blocks.natural.plants.BlockTallAetherGrass;
 import com.gildedgames.aether.common.entities.util.shared.SharedAetherAttributes;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketMarkPlayerDeath;
@@ -12,6 +15,10 @@ import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import com.gildedgames.orbis.api.util.TeleporterGeneric;
 import com.gildedgames.orbis.api.util.mc.BlockUtil;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockSnow;
+import net.minecraft.block.BlockSnowBlock;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,6 +39,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
@@ -147,6 +155,27 @@ public class PlayerAetherHooks
 		}
 
 		final PlayerAether aePlayer = PlayerAether.getPlayer(event.getPlayer());
+
+		IBlockState replaced = event.getBlockSnapshot().getReplacedBlock(),  placed = event.getPlacedBlock();
+		Block block = placed.getBlock();
+
+		if (replaced.getBlock() instanceof BlockSnow && replaced.getValue(BlockSnow.LAYERS).intValue() == 1 && block instanceof IBlockSnowy)
+		{
+			event.getWorld().setBlockState(event.getPos(), placed.withProperty(IBlockSnowy.PROPERTY_SNOWY, Boolean.valueOf(true)), 2);
+		}
+		else if (replaced.getBlock() instanceof IBlockSnowy)
+		{
+			boolean snowy = replaced.getValue(IBlockSnowy.PROPERTY_SNOWY);
+
+			if (block instanceof IBlockSnowy && snowy)
+			{
+				event.getWorld().setBlockState(event.getPos(), placed.withProperty(IBlockSnowy.PROPERTY_SNOWY, true), 2);
+			}
+			else if (block instanceof BlockSnow)
+			{
+				event.getWorld().setBlockState(event.getPos(), replaced.withProperty(IBlockSnowy.PROPERTY_SNOWY, Boolean.valueOf(true)), 2);
+			}
+		}
 
 		if (aePlayer != null)
 		{
