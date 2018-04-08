@@ -15,6 +15,7 @@
 /out
 /classes
 /libs
+/logs
 
 # Gradle
 .gradle
