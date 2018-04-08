@@ -53,18 +53,18 @@
 		],
 		"snowy=false,variant=enchanted": [
 			{
-				"model": "aether:grass/enchanted_aether_grass"
+				"model": "aether:grass/enchanted_grass"
 			},
 			{
-				"model": "aether:grass/enchanted_aether_grass",
+				"model": "aether:grass/enchanted_grass",
 				"y": 90
 			},
 			{
-				"model": "aether:grass/enchanted_aether_grass",
+				"model": "aether:grass/enchanted_grass",
 				"y": 180
 			},
 			{
-				"model": "aether:grass/enchanted_aether_grass",
+				"model": "aether:grass/enchanted_grass",
 				"y": 270
 			}
 		],
@@ -133,6 +133,40 @@
 			},
 			{
 				"model": "aether:grass/magnetic_grass",
+				"y": 270
+			}
+		],
+		"snowy=true,variant=irradiated": [
+			{
+				"model": "aether:grass/aether_grass_snowed"
+			},
+			{
+				"model": "aether:grass/aether_grass_snowed",
+				"y": 90
+			},
+			{
+				"model": "aether:grass/aether_grass_snowed",
+				"y": 180
+			},
+			{
+				"model": "aether:grass/aether_grass_snowed",
+				"y": 270
+			}
+		],
+		"snowy=false,variant=irradiated": [
+			{
+				"model": "aether:grass/irradiated_grass"
+			},
+			{
+				"model": "aether:grass/irradiated_grass",
+				"y": 90
+			},
+			{
+				"model": "aether:grass/irradiated_grass",
+				"y": 180
+			},
+			{
+				"model": "aether:grass/irradiated_grass",
 				"y": 270
 			}
 		]

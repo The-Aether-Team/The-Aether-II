@@ -33,9 +33,10 @@ import java.util.Random;
 public class BlockAetherGrass extends BlockGrass implements IBlockMultiName
 {
 	public static final BlockVariant AETHER = new BlockVariant(0, "normal"),
-			ENCHANTED = new BlockVariant(1, "enchanted"), ARCTIC = new BlockVariant(2, "arctic"), MAGNETIC = new BlockVariant(3, "magnetic");
+			ENCHANTED = new BlockVariant(1, "enchanted"), ARCTIC = new BlockVariant(2, "arctic"), MAGNETIC = new BlockVariant(3,
+			"magnetic"), IRRADIATED = new BlockVariant(4, "irradiated");
 
-	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", AETHER, ENCHANTED, ARCTIC, MAGNETIC);
+	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", AETHER, ENCHANTED, ARCTIC, MAGNETIC, IRRADIATED);
 
 	public static final PropertyBool SNOWY = PropertyBool.create("snowy");
 
@@ -67,12 +68,13 @@ public class BlockAetherGrass extends BlockGrass implements IBlockMultiName
 		final IBlockState up = worldIn.getBlockState(pos.up());
 		final Block block = up.getBlock();
 
-		final Comparable<?> snowGrass = up.getProperties().get(BlockTallAetherGrass.PROPERTY_SNOWY);
+		final Comparable<?> snowGrass = up.getProperties().get(BlockTallAetherGrass.TYPE);
 		final Comparable<?> snowFlower = up.getProperties().get(BlockAetherFlower.PROPERTY_SNOWY);
 
 		return state.withProperty(SNOWY,
-				block == Blocks.SNOW || block == Blocks.SNOW_LAYER || (snowGrass != null && snowGrass.equals(true)) || (snowFlower != null && snowFlower
-						.equals(true)));
+				block == Blocks.SNOW || block == Blocks.SNOW_LAYER || (snowGrass != null && snowGrass.equals(BlockTallAetherGrass.Type.SNOWY)) || (
+						snowFlower != null && snowFlower
+								.equals(true)));
 	}
 
 	@Override
@@ -233,7 +235,7 @@ public class BlockAetherGrass extends BlockGrass implements IBlockMultiName
 		{
 			if (!worldIn.isRemote && hand == EnumHand.MAIN_HAND)
 			{
-				if (!canGrow(worldIn, pos, state, true))
+				if (!this.canGrow(worldIn, pos, state, true))
 				{
 					return false;
 				}
@@ -249,7 +251,7 @@ public class BlockAetherGrass extends BlockGrass implements IBlockMultiName
 		{
 			if (!worldIn.isRemote && hand == EnumHand.OFF_HAND)
 			{
-				if (!canGrow(worldIn, pos, state, true))
+				if (!this.canGrow(worldIn, pos, state, true))
 				{
 					return false;
 				}

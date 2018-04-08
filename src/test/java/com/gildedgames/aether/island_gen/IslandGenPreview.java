@@ -88,9 +88,9 @@ public class IslandGenPreview
 		final int height = 255;
 		final int length = 960;
 
-		final int x = 16 * 400;
+		final int x = -16 * 400;
 		final int y = 10;
-		final int z = 16 * 400;
+		final int z = -16 * 400;
 
 		final IIslandBounds bounds = new IslandBounds(x, y, z, x + width, y + height, z + length);
 
@@ -299,7 +299,7 @@ public class IslandGenPreview
 	public void draw()
 	{
 		this.drawTexture(this.islandTexId);
-		//this.drawTexture(this.voronoiTexId);
+		this.drawTexture(this.voronoiTexId);
 	}
 
 	private void drawTexture(final int textureId)

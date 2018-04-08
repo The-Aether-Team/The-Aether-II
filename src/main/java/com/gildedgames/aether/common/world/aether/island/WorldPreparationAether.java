@@ -222,7 +222,7 @@ public class WorldPreparationAether
 						{
 							final IBlockState state = primer.getBlockState(x, y1, z);
 
-							if (state.getBlock() == BlocksAether.holystone || state.getBlock() == BlocksAether.ferrosite)
+							if (state == BlocksAether.holystone.getDefaultState() || state.getBlock() == BlocksAether.ferrosite)
 							{
 								primer.setBlockState(x, y1, z, pentration < 1 ? biome.topBlock : biome.fillerBlock);
 							}

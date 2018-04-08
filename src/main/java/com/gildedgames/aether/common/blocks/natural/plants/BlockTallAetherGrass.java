@@ -38,7 +38,7 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", SHORT, NORMAL, LONG);
 
 	public static final PropertyEnum<BlockTallAetherGrass.Type> TYPE = PropertyEnum
-			.create("type", BlockTallAetherGrass.Type.class, Type.HIGHLANDS, Type.ARCTIC, Type.MAGNETIC);
+			.create("type", BlockTallAetherGrass.Type.class, Type.HIGHLANDS, Type.ENCHANTED, Type.ARCTIC, Type.MAGNETIC, Type.IRRADIATED);
 
 	public static final PropertyBool PROPERTY_SNOWY = PropertyBool.create("snowy");
 
@@ -53,6 +53,12 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 
 	private static final IBlockState MAGNETIC_GRASS = BlocksAether.aether_grass.getDefaultState()
 			.withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.MAGNETIC);
+
+	private static final IBlockState ENCHANTED_GRASS = BlocksAether.aether_grass.getDefaultState()
+			.withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.ENCHANTED);
+
+	private static final IBlockState IRRADIATED_GRASS = BlocksAether.aether_grass.getDefaultState()
+			.withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.IRRADIATED);
 
 	public BlockTallAetherGrass()
 	{
@@ -78,6 +84,14 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 		else if (downState == MAGNETIC_GRASS)
 		{
 			type = Type.MAGNETIC;
+		}
+		else if (downState == ENCHANTED_GRASS)
+		{
+			type = Type.ENCHANTED;
+		}
+		else if (downState == IRRADIATED_GRASS)
+		{
+			type = Type.IRRADIATED;
 		}
 		else
 		{
@@ -196,7 +210,7 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 
 	public enum Type implements IStringSerializable
 	{
-		HIGHLANDS("highlands"), ARCTIC("arctic"), MAGNETIC("magnetic");
+		HIGHLANDS("highlands"), ENCHANTED("enchanted"), ARCTIC("arctic"), MAGNETIC("magnetic"), IRRADIATED("irradiated"), SNOWY("snowy");
 
 		private final String name;
 

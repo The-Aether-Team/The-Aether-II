@@ -5,6 +5,7 @@ import com.gildedgames.aether.api.util.OpenSimplexNoise;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.CrackChunk;
 import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.CrackPos;
@@ -85,8 +86,8 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 	{
 		this.data = ObjectFilter.getFirstFrom(island.getComponents(), IrradiatedForestsData.class);
 
-		final double[] heightMap = generateNoise(noise, island, chunkX, chunkZ, 0, 300.0D);
-		final double[] terraceMap = generateNoise(noise, island, chunkX, chunkZ, 1000, 300.0D);
+		final double[] heightMap = this.generateNoise(noise, island, chunkX, chunkZ, 0, 300.0D);
+		final double[] terraceMap = this.generateNoise(noise, island, chunkX, chunkZ, 1000, 300.0D);
 
 		final BiomeAetherBase biome = (BiomeAetherBase) access.getBiome(new BlockPos(chunkX * 16, 0, chunkZ * 16));
 
@@ -112,7 +113,7 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 				final int worldX = posX + x;
 				final int worldZ = posZ + z;
 
-				final double sample = interpolate(heightMap, x, z);
+				final double sample = this.interpolate(heightMap, x, z);
 
 				final double distX = Math.abs((centerX - worldX) * (1.0 / radiusX));
 				final double distZ = Math.abs((centerZ - worldZ) * (1.0 / radiusZ));
@@ -175,7 +176,7 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 
 				final double bottomHeight = 100;
 
-				final double terraceSample = interpolate(terraceMap, x, z) + 1.0;
+				final double terraceSample = this.interpolate(terraceMap, x, z) + 1.0;
 
 				final double topSample = NoiseUtil.lerp(heightSample, terraceSample - diff > 0.7 ? terraceSample - diff : heightSample, 0.7);
 
@@ -228,7 +229,8 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 
 						for (int y = (int) bottomMinY; y < maxY; y++)
 						{
-							primer.setBlockState(x, y, z, stoneBlock);
+							primer.setBlockState(x, y, z, closestDist < 0.95 ? BlocksAether.holystone.getDefaultState().withProperty(
+									BlockHolystone.PROPERTY_VARIANT, BlockHolystone.MOSSY_HOLYSTONE) : stoneBlock);
 						}
 					}
 				}
