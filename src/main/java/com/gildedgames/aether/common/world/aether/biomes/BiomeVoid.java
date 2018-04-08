@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.world.aether.biomes;
 
+import com.gildedgames.aether.api.world.generation.WorldDecoration;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.common.AetherCore;
@@ -12,6 +13,7 @@ import net.minecraft.world.biome.Biome;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 public class BiomeVoid extends BiomeAetherBase
@@ -29,7 +31,7 @@ public class BiomeVoid extends BiomeAetherBase
 	}
 
 	@Override
-	public IIslandGenerator getIslandGenerator()
+	public IIslandGenerator createIslandGenerator(Random rand)
 	{
 		return null;
 	}
@@ -50,6 +52,30 @@ public class BiomeVoid extends BiomeAetherBase
 	public void postDecorate(final World world, final Random rand, final BlockPos pos)
 	{
 
+	}
+
+	@Override
+	public List<WorldDecoration> createBasicDecorations(Random rand)
+	{
+		return Collections.emptyList();
+	}
+
+	@Override
+	public List<WorldDecoration> createTreeDecorations(Random rand)
+	{
+		return Collections.emptyList();
+	}
+
+	@Override
+	public float createForestTreeCountModifier(Random rand)
+	{
+		return 0;
+	}
+
+	@Override
+	public float createOpenAreaDecorationGenChance(Random rand)
+	{
+		return 0;
 	}
 
 }

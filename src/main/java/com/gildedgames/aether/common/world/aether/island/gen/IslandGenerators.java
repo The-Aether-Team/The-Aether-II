@@ -1,15 +1,19 @@
 package com.gildedgames.aether.common.world.aether.island.gen;
 
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
+import com.gildedgames.aether.common.world.aether.island.gen.highlands.IslandGeneratorHighlandMegacoast;
+import com.gildedgames.aether.common.world.aether.island.gen.highlands.IslandGeneratorHighlands;
 
 public class IslandGenerators
 {
 
-	public static IIslandGenerator HIGHLANDS = new IslandGeneratorHighlands();
-
-	public static IIslandGenerator FORGOTTEN_HIGHLANDS = new IslandGeneratorForgottenHighlands();
+	public static IIslandGenerator HIGHLANDS = new IslandGeneratorHighlands().terraces(true).maxTerrainHeight(80);
 
 	public static IIslandGenerator HIGHLAND_MEGACOAST = new IslandGeneratorHighlandMegacoast();
+
+	public static IIslandGenerator HIGHLAND_PLAINS = new IslandGeneratorHighlands().terraces(false).maxTerrainHeight(30);
+
+	public static IIslandGenerator FORGOTTEN_HIGHLANDS = new IslandGeneratorForgottenHighlands();
 
 	public static IIslandGenerator ARCTIC_PEAKS = new IslandGeneratorArcticPeaks();
 

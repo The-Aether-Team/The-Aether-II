@@ -1,11 +1,10 @@
 package com.gildedgames.aether.common.world.aether.biomes;
 
+import com.gildedgames.aether.api.world.generation.WorldDecoration;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.world.aether.island.population.SubBiome;
 import com.gildedgames.orbis.api.util.mc.NBT;
-import com.google.common.collect.Lists;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -14,20 +13,13 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
 public abstract class BiomeAetherBase extends Biome
 {
 
-	private final SubBiomeDecorator subBiomeDecorator = new SubBiomeDecorator();
-
 	private final BiomeAetherDecorator biomeDecorator = new BiomeAetherDecorator();
-
-	private final List<SubBiome> subBiomes = Collections.synchronizedList(Lists.<SubBiome>newArrayList());
-
-	private SubBiome defaultSubBiome;
 
 	public BiomeAetherBase(final BiomeProperties properties, final ResourceLocation registryName)
 	{
@@ -51,14 +43,6 @@ public abstract class BiomeAetherBase extends Biome
 
 	public abstract IBlockState getCoastalBlock();
 
-	public void registerSubBiome(final SubBiome subBiome)
-	{
-		if (!this.subBiomes.contains(subBiome))
-		{
-			this.subBiomes.add(subBiome);
-		}
-	}
-
 	@Override
 	public final WorldGenAbstractTree getRandomTreeFeature(final Random random)
 	{
@@ -77,32 +61,20 @@ public abstract class BiomeAetherBase extends Biome
 		this.biomeDecorator.genDecorations(world, random, pos, this);
 	}
 
-	public final SubBiomeDecorator getSubBiomeDecorator()
-	{
-		return this.subBiomeDecorator;
-	}
-
-	public final SubBiome getDefaultSubBiome()
-	{
-		return this.defaultSubBiome;
-	}
-
-	public final void setDefaultSubBiome(final SubBiome defaultSubBiome)
-	{
-		this.defaultSubBiome = defaultSubBiome;
-	}
-
-	public List<SubBiome> getSubBiomes()
-	{
-		return this.subBiomes;
-	}
-
-	public abstract IIslandGenerator getIslandGenerator();
+	public abstract IIslandGenerator createIslandGenerator(Random rand);
 
 	public abstract Collection<NBT> createIslandComponents(IIslandData islandData);
 
 	public abstract float getRarityWeight();
 
 	public abstract void postDecorate(World world, Random rand, BlockPos pos);
+
+	public abstract List<WorldDecoration> createBasicDecorations(Random rand);
+
+	public abstract List<WorldDecoration> createTreeDecorations(Random rand);
+
+	public abstract float createForestTreeCountModifier(Random rand);
+
+	public abstract float createOpenAreaDecorationGenChance(Random rand);
 
 }

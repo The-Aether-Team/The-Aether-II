@@ -1,5 +1,6 @@
 package com.gildedgames.aether.api.world.islands;
 
+import com.gildedgames.aether.api.world.generation.WorldDecoration;
 import com.gildedgames.orbis.api.util.mc.NBT;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
@@ -7,6 +8,7 @@ import net.minecraft.world.biome.Biome;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Collection;
+import java.util.List;
 
 public interface IIslandData extends NBT
 {
@@ -22,6 +24,14 @@ public interface IIslandData extends NBT
 	 * @return The components for this Island
 	 */
 	Collection<NBT> getComponents();
+
+	List<WorldDecoration> getBasicDecorations();
+
+	List<WorldDecoration> getTreeDecorations();
+
+	float getForestTreeCountModifier();
+
+	float getOpenAreaDecorationGenChance();
 
 	/**
 	 * Returns the bounding box of the island. These coordinates are normalized

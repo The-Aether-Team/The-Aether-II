@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.world.aether.island.population;
+package com.gildedgames.aether.api.world.generation;
 
 import com.gildedgames.orbis.api.processing.IBlockAccessExtended;
 import com.gildedgames.orbis.api.world.IWorldGen;

@@ -217,10 +217,7 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.tall_aether_grass, new ItemModelBuilder("tall_grass/")
 				.add(BlockTallAetherGrass.SHORT.getMeta(), "short_aether")
 				.add(BlockTallAetherGrass.NORMAL.getMeta(), "normal_aether")
-				.add(BlockTallAetherGrass.LONG.getMeta(), "long_aether")
-				.add(BlockTallAetherGrass.SHORT.getMeta() + BlockTallAetherGrass.PROPERTY_VARIANT.getAllowedValues().size(), "short_aether_snowy")
-				.add(BlockTallAetherGrass.NORMAL.getMeta() + BlockTallAetherGrass.PROPERTY_VARIANT.getAllowedValues().size(), "normal_aether_snowy")
-				.add(BlockTallAetherGrass.LONG.getMeta() + BlockTallAetherGrass.PROPERTY_VARIANT.getAllowedValues().size(), "long_aether_snowy"));
+				.add(BlockTallAetherGrass.LONG.getMeta(), "long_aether"));
 
 		registerItemModels(BlocksAether.valkyrie_grass, new ItemModelBuilder("valkyrie_grass/")
 				.add(BlockValkyrieGrass.SPROUT.getMeta(), "valkyrie_grass_sprout")

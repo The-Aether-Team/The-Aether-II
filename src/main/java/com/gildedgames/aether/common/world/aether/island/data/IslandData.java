@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.world.aether.island.data;
 
+import com.gildedgames.aether.api.world.generation.WorldDecoration;
 import com.gildedgames.aether.api.world.islands.IIslandBounds;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
@@ -19,6 +20,7 @@ import net.minecraft.world.biome.Biome;
 import javax.annotation.Nonnull;
 import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 
 public class IslandData implements IIslandData
 {
@@ -38,12 +40,21 @@ public class IslandData implements IIslandData
 
 	private IIslandGenerator generator;
 
+	private List<WorldDecoration> basicDecorations;
+
+	private List<WorldDecoration> treeDecorations;
+
+	private float forestTreeCountModifier, openAreaDecorationGenChance;
+
 	public IslandData(final World world, final IIslandBounds bounds, final BiomeAetherBase biome, final long seed)
 	{
 		this.world = world;
 		this.bounds = bounds;
 		this.biome = biome;
-		this.generator = biome.getIslandGenerator();
+
+		final Random rand = new Random(seed);
+
+		this.initProperties(rand);
 
 		this.seed = seed;
 
@@ -56,6 +67,15 @@ public class IslandData implements IIslandData
 		this.read(tag);
 	}
 
+	private void initProperties(Random rand)
+	{
+		this.generator = this.biome.createIslandGenerator(rand);
+		this.basicDecorations = this.biome.createBasicDecorations(rand);
+		this.treeDecorations = this.biome.createTreeDecorations(rand);
+		this.forestTreeCountModifier = this.biome.createForestTreeCountModifier(rand);
+		this.openAreaDecorationGenChance = this.biome.createOpenAreaDecorationGenChance(rand);
+	}
+
 	@Override
 	public <T extends NBT> void addComponents(final Collection<T> components)
 	{
@@ -66,6 +86,30 @@ public class IslandData implements IIslandData
 	public Collection<NBT> getComponents()
 	{
 		return this.components;
+	}
+
+	@Override
+	public List<WorldDecoration> getBasicDecorations()
+	{
+		return this.basicDecorations;
+	}
+
+	@Override
+	public List<WorldDecoration> getTreeDecorations()
+	{
+		return this.treeDecorations;
+	}
+
+	@Override
+	public float getForestTreeCountModifier()
+	{
+		return this.forestTreeCountModifier;
+	}
+
+	@Override
+	public float getOpenAreaDecorationGenChance()
+	{
+		return this.openAreaDecorationGenChance;
 	}
 
 	@Override
@@ -136,8 +180,6 @@ public class IslandData implements IIslandData
 
 		this.biome = (BiomeAetherBase) Biome.REGISTRY.getObject(new ResourceLocation(tag.getString("BiomeID")));
 
-		this.generator = this.biome.getIslandGenerator();
-
 		this.seed = tag.getLong("Seed");
 
 		if (tag.hasKey("RespawnPoint"))
@@ -149,5 +191,9 @@ public class IslandData implements IIslandData
 		this.chunkManager.read(tag.getCompoundTag("VirtualManager"));
 
 		this.components = funnel.getList("Components");
+
+		final Random rand = new Random(this.seed);
+
+		this.initProperties(rand);
 	}
 }
