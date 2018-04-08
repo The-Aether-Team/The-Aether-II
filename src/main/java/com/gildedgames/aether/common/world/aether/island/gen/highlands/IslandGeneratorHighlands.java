@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.world.aether.island.gen;
+package com.gildedgames.aether.common.world.aether.island.gen.highlands;
 
 import com.gildedgames.aether.api.util.NoiseUtil;
 import com.gildedgames.aether.api.util.OpenSimplexNoise;
@@ -19,6 +19,15 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 
 	// Number of samples done per chunk.
 	private static final int NOISE_SAMPLES = NOISE_XZ_SCALE + 1;
+
+	private boolean terraces = true;
+
+	private int maxTerrainHeight = 80;
+
+	public IslandGeneratorHighlands()
+	{
+
+	}
 
 	public static double interpolate(final double[] data, final int x, final int z)
 	{
@@ -74,12 +83,26 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 		return data;
 	}
 
+	public IslandGeneratorHighlands terraces(boolean flag)
+	{
+		this.terraces = flag;
+
+		return this;
+	}
+
+	public IslandGeneratorHighlands maxTerrainHeight(int maxTerrainHeight)
+	{
+		this.maxTerrainHeight = maxTerrainHeight;
+
+		return this;
+	}
+
 	@Override
 	public void genIslandForChunk(final OpenSimplexNoise noise, final IBlockAccess access, final ChunkPrimer primer, final IIslandData island, final int chunkX,
 			final int chunkZ)
 	{
 		final double[] heightMap = generateNoise(noise, island, chunkX, chunkZ, 0, 300.0D);
-		final double[] terraceMap = generateNoise(noise, island, chunkX, chunkZ, 1000, 300.0D);
+		final double[] terraceMap = this.terraces ? generateNoise(noise, island, chunkX, chunkZ, 1000, 300.0D) : null;
 
 		final Biome biome = access.getBiome(new BlockPos(chunkX * 16, 0, chunkZ * 16));
 
@@ -114,21 +137,26 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 
 				final double bottomMaxY = 100;
 
-				final double topHeight = 80;
+				final double topHeight = this.maxTerrainHeight;
 
 				final double cutoffPoint = 0.325;
 
 				final double normal = NoiseUtil.normalise(sample);
 				final double cutoffPointDist = Math.abs(cutoffPoint - heightSample);
-				final double diff = Math.max(0.0, cutoffPoint - cutoffPointDist) * 8.0;
+				final double diff = this.terraces ? Math.max(0.0, cutoffPoint - cutoffPointDist) * 8.0 : 0.0;
 
 				double bottomHeightMod = Math.pow(normal, 0.2);
 
 				final double bottomHeight = 100;
 
-				final double terraceSample = interpolate(terraceMap, x, z) + 1.0;
+				double topSample = heightSample;
 
-				final double topSample = NoiseUtil.lerp(heightSample, terraceSample - diff > 0.7 ? terraceSample - diff : heightSample, 0.7);
+				if (this.terraces)
+				{
+					final double terraceSample = interpolate(terraceMap, x, z) + 1.0;
+
+					topSample = NoiseUtil.lerp(heightSample, terraceSample - diff > 0.7 ? terraceSample - diff : heightSample, 0.7);
+				}
 
 				if (heightSample > cutoffPoint)
 				{

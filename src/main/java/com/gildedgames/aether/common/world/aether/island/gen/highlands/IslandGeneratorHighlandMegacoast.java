@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.world.aether.island.gen;
+package com.gildedgames.aether.common.world.aether.island.gen.highlands;
 
 import com.gildedgames.aether.api.util.NoiseUtil;
 import com.gildedgames.aether.api.util.OpenSimplexNoise;
