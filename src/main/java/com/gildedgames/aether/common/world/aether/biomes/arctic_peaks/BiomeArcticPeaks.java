@@ -7,6 +7,7 @@ import com.gildedgames.aether.api.world.IslandSectorHelper;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.IBlockSnowy;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockTallAetherGrass;
@@ -141,16 +142,11 @@ public class BiomeArcticPeaks extends BiomeAetherBase
 							{
 								world.setBlockState(blockpos1, Blocks.SNOW_LAYER.getDefaultState(), 2);
 							}
-							else if (block instanceof BlockAetherFlower)
+							else if (block instanceof IBlockSnowy)
 							{
-								final IBlockState newState = state.withProperty(BlockAetherFlower.PROPERTY_SNOWY, Boolean.TRUE);
+								final IBlockState newState = state.withProperty(IBlockSnowy.PROPERTY_SNOWY, Boolean.TRUE);
 
 								world.setBlockState(blockpos1, newState, 2);
-							}
-							else if (block instanceof BlockTallAetherGrass)
-							{
-								world.setBlockState(blockpos1, state.withProperty(BlockTallAetherGrass.PROPERTY_SNOWY, Boolean.TRUE),
-										2);
 							}
 						}
 					}

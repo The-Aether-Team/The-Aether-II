@@ -1,15 +1,21 @@
 package com.gildedgames.aether.common.blocks.natural.plants;
 
 import com.gildedgames.aether.common.blocks.IBlockMultiName;
+import com.gildedgames.aether.common.blocks.IBlockSnowy;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
+import net.minecraft.block.BlockSnow;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -18,7 +24,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiName
+public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiName, IBlockSnowy
 {
 	public static final BlockVariant
 			WHITE_ROSE = new BlockVariant(0, "white_rose"),
@@ -26,8 +32,6 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 			BURSTBLOSSOM = new BlockVariant(2, "burstblossom");
 
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", WHITE_ROSE, PURPLE_FLOWER, BURSTBLOSSOM);
-
-	public static final PropertyBool PROPERTY_SNOWY = PropertyBool.create("snowy");
 
 	public BlockAetherFlower()
 	{
@@ -48,6 +52,51 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 	public int getLightValue(final IBlockState state)
 	{
 		return this.lightValue;
+	}
+
+	@Override
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	{
+		ItemStack main = playerIn.getHeldItemMainhand();
+		ItemStack offhand = playerIn.getHeldItemOffhand();
+
+		boolean addSnow = false;
+
+		if (!state.getValue(PROPERTY_SNOWY))
+		{
+			if (main != null && main.getItem() instanceof ItemBlock)
+			{
+				if (((ItemBlock) main.getItem()).getBlock() instanceof BlockSnow)
+				{
+					addSnow = true;
+					main.shrink(1);
+				}
+			}
+			else if (offhand != null && offhand.getItem() instanceof ItemBlock && ((ItemBlock) offhand.getItem()).getBlock() instanceof BlockSnow)
+			{
+				addSnow = true;
+				offhand.shrink(1);
+			}
+		}
+
+		if (addSnow)
+		{
+			worldIn.setBlockState(pos, state.withProperty(PROPERTY_SNOWY, Boolean.valueOf(true)), 2);
+		}
+
+		return addSnow;
+	}
+
+	@Override
+	public void breakBlock(World world, BlockPos pos, IBlockState state)
+	{
+		super.breakBlock(world, pos, state);
+
+		if (state.getValue(PROPERTY_SNOWY))
+		{
+			dropBlockAsItem(world, pos, state, 1);
+			world.setBlockState(pos, Blocks.SNOW_LAYER.getDefaultState().withProperty(BlockSnow.LAYERS, 1), 2);
+		}
 	}
 
 	@Override
@@ -96,7 +145,7 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 	@Override
 	public Vec3d getOffset(final IBlockState state, final IBlockAccess access, final BlockPos pos)
 	{
-		if (state.getProperties().get(PROPERTY_SNOWY).equals(true))
+		if (state.getValue(PROPERTY_SNOWY))
 		{
 			return Vec3d.ZERO;
 		}
