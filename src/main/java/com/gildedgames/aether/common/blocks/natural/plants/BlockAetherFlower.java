@@ -55,7 +55,8 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX,
+			float hitY, float hitZ)
 	{
 		ItemStack main = playerIn.getHeldItemMainhand();
 		ItemStack offhand = playerIn.getHeldItemOffhand();
@@ -88,14 +89,11 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 	}
 
 	@Override
-	public void breakBlock(World world, BlockPos pos, IBlockState state)
+	public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state)
 	{
-		super.breakBlock(world, pos, state);
-
 		if (state.getValue(PROPERTY_SNOWY))
 		{
-			dropBlockAsItem(world, pos, state, 1);
-			world.setBlockState(pos, Blocks.SNOW_LAYER.getDefaultState().withProperty(BlockSnow.LAYERS, 1), 2);
+			worldIn.setBlockState(pos, Blocks.SNOW_LAYER.getDefaultState().withProperty(BlockSnow.LAYERS, 1), 2);
 		}
 	}
 
