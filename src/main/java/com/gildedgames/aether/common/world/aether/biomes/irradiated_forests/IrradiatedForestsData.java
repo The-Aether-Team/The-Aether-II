@@ -52,7 +52,7 @@ public class IrradiatedForestsData implements NBT
 			final Random rand = new Random(this.seed);
 
 			this.voronoi = VoronoiGraphUtils
-					.lloydRelax(new Voronoi(this.crackPoints, rand, new Rectangle(this.min.getX(), this.min.getZ(), this.islandWidth, this.islandLength)),
+					.lloydRelax(new Voronoi(this.crackPoints, rand, new Rectangle(0, 0, this.islandWidth, this.islandLength)),
 							NUM_LLOYD_RELAXATIONS);
 
 			final List<Point> pointsUsed = Lists.newArrayList();
@@ -62,15 +62,12 @@ public class IrradiatedForestsData implements NBT
 			final double radiusX = (this.islandWidth / 2.0);
 			final double radiusZ = (this.islandLength / 2.0);
 
-			final double centerX = this.min.getX() + radiusX;
-			final double centerZ = this.min.getZ() + radiusZ;
-
 			double oldDist = Integer.MAX_VALUE;
 
 			for (final Point s : this.voronoi.siteCoords())
 			{
-				final double newDistX = Math.abs((centerX - s.x) * (1.0 / radiusX));
-				final double newDistZ = Math.abs((centerZ - s.y) * (1.0 / radiusZ));
+				final double newDistX = Math.abs((radiusX - s.x) * (1.0 / radiusX));
+				final double newDistZ = Math.abs((radiusZ - s.y) * (1.0 / radiusZ));
 
 				final double newDist = Math.sqrt(newDistX * newDistX + newDistZ * newDistZ);
 
@@ -124,8 +121,8 @@ public class IrradiatedForestsData implements NBT
 						final Point div2 = divided.get(index2);
 
 						final Iterable<BlockPos.MutableBlockPos> line = LineHelp
-								.createLinePositions(2, new BlockPos(div1.x, 0, div1.y),
-										new BlockPos(div2.x, 0, div2.y));
+								.createLinePositions(2, new BlockPos(div1.x + this.min.getX(), 0, div1.y + this.min.getZ()),
+										new BlockPos(div2.x + this.min.getX(), 0, div2.y + this.min.getZ()));
 
 						for (final BlockPos.MutableBlockPos p : line)
 						{
@@ -210,7 +207,7 @@ public class IrradiatedForestsData implements NBT
 			this.cracks.put(index, chunk);
 		}
 
-		return chunk.get(x % 16, z % 16);
+		return chunk.get(Math.abs(x % 16), Math.abs(z % 16));
 	}
 
 	private void setCrackPos(final CrackPos pos, final int x, final int z)
@@ -226,14 +223,7 @@ public class IrradiatedForestsData implements NBT
 			this.cracks.put(index, chunk);
 		}
 
-		chunk.set(pos, x % 16, z % 16);
-	}
-
-	public boolean hasCrackChunk(final int chunkX, final int chunkZ)
-	{
-		this.checkInit();
-
-		return this.cracks.containsKey(ChunkPos.asLong(chunkX, chunkZ));
+		chunk.set(pos, Math.abs(x % 16), Math.abs(z % 16));
 	}
 
 	public CrackChunk getCracks(final int chunkX, final int chunkZ)

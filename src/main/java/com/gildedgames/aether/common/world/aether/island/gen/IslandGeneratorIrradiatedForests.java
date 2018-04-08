@@ -91,8 +91,8 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 
 		final BiomeAetherBase biome = (BiomeAetherBase) access.getBiome(new BlockPos(chunkX * 16, 0, chunkZ * 16));
 
-		final IBlockState coastBlock = biome.getCoastalBlock();
-		final IBlockState stoneBlock = BlocksAether.holystone.getDefaultState();
+		IBlockState coastBlock = biome.getCoastalBlock();
+		IBlockState stoneBlock = BlocksAether.holystone.getDefaultState();
 
 		/*coastBlock = Blocks.SAND.getDefaultState();
 		stoneBlock = Blocks.STONE.getDefaultState();*/
@@ -146,7 +146,7 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 
 						if (crackChunk != null)
 						{
-							final CrackPos crack = crackChunk.get(crackX % 16, crackZ % 16);
+							final CrackPos crack = crackChunk.get(Math.abs(crackX % 16), Math.abs(crackZ % 16));
 
 							if (crack != null)
 							{
