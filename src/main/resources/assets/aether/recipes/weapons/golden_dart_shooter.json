@@ -1,0 +1,28 @@
+{
+	"type": "forge:ore_shaped",
+	"group": "construction",
+	"pattern":
+	[
+		"X",
+		"X",
+		"Y"
+	],
+	"key":
+	{
+		"X":
+		{
+			"type": "forge:ore_dict",
+			"ore": "skyrootplanks"
+		},
+		"Y":
+		{
+			"item": "aether:golden_amber"
+		}
+	},
+	"result":
+	{
+		"item": "aether:dart_shooter",
+		"count": 1,
+		"data": 0
+	}
+}

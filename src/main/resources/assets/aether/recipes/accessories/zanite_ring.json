@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "accessories",
+  "pattern": [
+    " Z ",
+    "Z Z",
+    " Z "
+  ],
+  "key": {
+    "Z": {
+      "item": "aether:zanite_gemstone"
+    }
+  },
+  "result": {
+    "item": "aether:zanite_ring"
+  }
+}

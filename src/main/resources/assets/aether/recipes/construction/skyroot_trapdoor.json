@@ -1,0 +1,22 @@
+{
+	"type": "forge:ore_shaped",
+	"group": "construction",
+	"pattern":
+	[
+		"XXX",
+		"XXX"
+	],
+	"key":
+	{
+		"X":
+		{
+			"type": "forge:ore_dict",
+			"ore": "skyrootplanks"
+		}
+	},
+	"result":
+	{
+		"item": "aether:skyroot_trapdoor",
+		"count": 2
+	}
+}

@@ -1,0 +1,34 @@
+{
+	"type": "forge:ore_shaped",
+	"group": "utility",
+	"pattern":
+	[
+		"AAA",
+		"HIH",
+		"SSS"
+	],
+	"key":
+	{
+		"H":
+		{
+			"item": "aether:holystone"
+		},
+		"A":
+		{
+			"item": "aether:arkenium"
+		},
+		"S":
+		{
+			"type": "forge:ore_dict",
+			"ore": "skyrootplanks"
+		},
+		"I":
+		{
+			"item": "aether:icestone"
+		}
+	},
+	"result":
+	{
+		"item": "aether:icestone_cooler"
+	}
+}

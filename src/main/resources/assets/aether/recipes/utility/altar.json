@@ -1,0 +1,29 @@
+{
+	"type": "forge:ore_shaped",
+	"group": "utility",
+	"pattern":
+	[
+		"YZY",
+		" X ",
+		"XXX"
+	],
+	"key":
+	{
+		"X":
+		{
+			"item": "aether:holystone"
+		},
+		"Y":
+		{
+			"item": "aether:arkenium"
+		},
+		"Z":
+		{
+			"item": "aether:zanite_gemstone"
+		}
+	},
+	"result":
+	{
+		"item": "aether:altar"
+	}
+}

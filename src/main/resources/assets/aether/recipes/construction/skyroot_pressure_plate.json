@@ -1,0 +1,21 @@
+{
+	"type": "forge:ore_shaped",
+	"group": "construction",
+	"pattern":
+	[
+		"XX "
+	],
+	"key":
+	{
+		"X":
+		{
+			"type": "forge:ore_dict",
+			"ore": "skyrootplanks"
+		}
+	},
+	"result":
+	{
+		"item": "aether:skyroot_pressure_plate",
+		"count": 1
+	}
+}

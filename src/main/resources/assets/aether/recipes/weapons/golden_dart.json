@@ -1,0 +1,26 @@
+{
+	"type": "forge:ore_shaped",
+	"group": "construction",
+	"pattern":
+	[
+		"X ",
+		" Y"
+	],
+	"key":
+	{
+		"Y":
+		{
+			"item": "aether:skyroot_stick"
+		},
+		"X":
+		{
+			"item": "aether:golden_amber"
+		}
+	},
+	"result":
+	{
+		"item": "aether:dart",
+		"count": 8,
+		"data": 0
+	}
+}

@@ -1,0 +1,28 @@
+{
+	"type": "forge:ore_shaped",
+	"group": "construction",
+	"pattern":
+	[
+		"XXX",
+		"XYX",
+		"XXX"
+	],
+	"key":
+	{
+		"Y":
+		{
+			"item": "aether:skyroot_poison_bucket"
+		},
+		"X":
+		{
+			"item": "aether:dart",
+			"data": 0
+		}
+	},
+	"result":
+	{
+		"item": "aether:dart",
+		"count": 8,
+		"data": 2
+	}
+}

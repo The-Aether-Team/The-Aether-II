@@ -1,0 +1,21 @@
+{
+	"type": "forge:ore_shaped",
+	"group": "construction",
+	"pattern":
+	[
+		"X"
+	],
+	"key":
+	{
+		"X":
+		{
+			"type": "forge:ore_dict",
+			"ore": "skyrootplanks"
+		}
+	},
+	"result":
+	{
+		"item": "aether:skyroot_button",
+		"count": 1
+	}
+}

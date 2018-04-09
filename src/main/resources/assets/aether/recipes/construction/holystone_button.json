@@ -1,0 +1,20 @@
+{
+	"type": "forge:ore_shaped",
+	"group": "construction",
+	"pattern":
+	[
+		"X"
+	],
+	"key":
+	{
+		"X":
+		{
+			"item": "aether:holystone"
+		}
+	},
+	"result":
+	{
+		"item": "aether:holystone_button",
+		"count": 1
+	}
+}

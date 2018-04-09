@@ -1,0 +1,20 @@
+{
+	"type": "forge:ore_shaped",
+	"group": "construction",
+	"pattern":
+	[
+		"XX "
+	],
+	"key":
+	{
+		"X":
+		{
+			"item": "aether:holystone"
+		}
+	},
+	"result":
+	{
+		"item": "aether:holystone_pressure_plate",
+		"count": 1
+	}
+}
