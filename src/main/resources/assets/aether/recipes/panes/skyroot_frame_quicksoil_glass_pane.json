@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "panes",
+	"pattern":
+	[
+		"XXX",
+		"XXX"
+	],
+	"key":
+	{
+		"X":
+		{
+			"item": "aether:quicksoil_glass_decorative",
+			"data": 0
+		}
+	},
+	"result":
+	{
+		"item": "aether:quicksoil_glass_pane_decorative",
+		"data": 0,
+		"count": 16
+	}
+}
