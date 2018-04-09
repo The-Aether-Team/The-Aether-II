@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "forge:ore_shaped",
   "group": "construction",
   "pattern": [
     "#W#",
@@ -10,7 +10,8 @@
       "item": "aether:skyroot_stick"
     },
     "W": {
-      "item": "aether:skyroot_planks"
+      "type": "forge:ore_dict",
+      "ore": "skyrootplanks"
     }
   },
   "result": {

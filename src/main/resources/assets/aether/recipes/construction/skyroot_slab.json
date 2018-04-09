@@ -1,12 +1,13 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "forge:ore_shaped",
   "group": "construction",
   "pattern": [
     "###"
   ],
   "key": {
     "#": {
-      "item": "aether:skyroot_planks"
+      "type": "forge:ore_dict",
+      "ore": "skyrootplanks"
     }
   },
   "result": {
