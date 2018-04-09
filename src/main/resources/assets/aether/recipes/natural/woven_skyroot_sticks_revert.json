@@ -1,0 +1,20 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "natural",
+	"pattern":
+	[
+		"X"
+	],
+	"key":
+	{
+		"X":
+		{
+			"item": "aether:woven_sticks"
+		}
+	},
+	"result":
+	{
+		"item": "aether:skyroot_stick",
+		"count": 4
+	}
+}

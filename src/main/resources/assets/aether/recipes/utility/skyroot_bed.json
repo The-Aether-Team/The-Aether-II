@@ -1,0 +1,25 @@
+{
+	"type": "forge:ore_shaped",
+	"group": "utility",
+	"pattern":
+	[
+		"XXX",
+		"YYY"
+	],
+	"key":
+	{
+		"X":
+		{
+			"item": "cloudwool_block"
+		},
+		"Y":
+		{
+			"type": "forge:ore_dict",
+			"ore": "skyrootplanks"
+		}
+	},
+	"result":
+	{
+		"item": "aether:skyroot_bed"
+	}
+}

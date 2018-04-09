@@ -1,0 +1,21 @@
+{
+	"type": "forge:ore_shaped",
+	"group": "utility",
+	"pattern":
+	[
+		"XX",
+		"XX"
+	],
+	"key":
+	{
+		"X":
+		{
+			"type": "forge:ore_dict",
+			"ore": "skyrootplanks"
+		}
+	},
+	"result":
+	{
+		"item": "aether:skyroot_crafting_table"
+	}
+}
