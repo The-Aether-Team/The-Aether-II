@@ -123,7 +123,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase
 						final double distZ = Math.abs((centerZ - worldZ) * (1.0 / radiusZ));
 
 						// Get distance from center of Island
-						final double dist = Math.sqrt(distX * distX + distZ * distZ) / 1.1D;
+						final double dist = Math.sqrt(distX * distX + distZ * distZ) / 1.0D;
 
 						final double sample = IslandGeneratorHighlands.interpolate(heightMap, x, z);
 						final double heightSample = sample + 1.0 - dist;
