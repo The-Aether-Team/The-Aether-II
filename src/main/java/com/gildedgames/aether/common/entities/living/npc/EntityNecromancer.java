@@ -33,7 +33,7 @@ public class EntityNecromancer extends EntityNPC
 
 		this.rotationYaw = 0.3F;
 
-		if (this.world.provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER)
+		if (!this.world.isRemote && this.world.provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER)
 		{
 			final NecromancerTowerInstance instance = InstancesAether.NECROMANCER_TOWER_HANDLER.getFromDimId(worldIn.provider.getDimension());
 
