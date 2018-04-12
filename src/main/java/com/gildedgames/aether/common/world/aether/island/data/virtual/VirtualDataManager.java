@@ -94,6 +94,12 @@ public class VirtualDataManager implements IVirtualDataManager
 	}
 
 	@Override
+	public Biome getServerBiome(BlockPos pos)
+	{
+		return this.world.getBiome(pos);
+	}
+
+	@Override
 	public void placeTemplate(final TemplateDefinition def, final TemplateLoc loc)
 	{
 		final TemplateInstance instance = new TemplateInstance(def, loc);

@@ -12,6 +12,8 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.features.WorldGenAetherCaves;
 import com.gildedgames.aether.common.world.aether.island.data.virtual.VirtualChunkFunnel;
+import com.gildedgames.orbis.api.processing.BlockAccessExtendedWrapper;
+import com.gildedgames.orbis.api.processing.IBlockAccessExtended;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
@@ -32,6 +34,8 @@ public class WorldPreparationAether
 
 	private final World world;
 
+	private final IBlockAccessExtended access;
+
 	private final Random rand;
 
 	private final WorldGenAetherCaves caveGenerator;
@@ -46,6 +50,8 @@ public class WorldPreparationAether
 	{
 		this.world = world;
 		this.rand = rand;
+
+		this.access = new BlockAccessExtendedWrapper(this.world);
 
 		this.noise = new OpenSimplexNoise(world.getSeed());
 
@@ -94,7 +100,7 @@ public class WorldPreparationAether
 
 		final IIslandGenerator generator = island.getGenerator();
 
-		generator.genIslandForChunk(this.noise, this.world, primer, island, chunkX, chunkZ);
+		generator.genIslandForChunk(this.noise, this.access, primer, island, chunkX, chunkZ);
 
 		this.replaceBiomeBlocks(island, primer, chunkX, chunkZ, biomes);
 

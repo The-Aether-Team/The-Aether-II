@@ -6,9 +6,9 @@ import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
+import com.gildedgames.orbis.api.processing.IBlockAccessExtended;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 
@@ -71,12 +71,13 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 	}
 
 	@Override
-	public void genIslandForChunk(final OpenSimplexNoise noise, final World access, final ChunkPrimer primer, final IIslandData island, final int chunkX,
+	public void genIslandForChunk(final OpenSimplexNoise noise, final IBlockAccessExtended access, final ChunkPrimer primer, final IIslandData island,
+			final int chunkX,
 			final int chunkZ)
 	{
 		final double[] heightMap = generateNoise(noise, island, chunkX, chunkZ);
 
-		final Biome biome = access.getBiome(new BlockPos(chunkX * 16, 0, chunkZ * 16));
+		final Biome biome = access.getServerBiome(new BlockPos(chunkX * 16, 0, chunkZ * 16));
 
 		final IBlockState coastBlock = ((BiomeAetherBase) biome).getCoastalBlock();
 		final IBlockState stoneBlock = BlocksAether.holystone.getDefaultState();

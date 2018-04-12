@@ -10,10 +10,10 @@ import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.CrackChunk;
 import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.CrackPos;
 import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.IrradiatedForestsData;
+import com.gildedgames.orbis.api.processing.IBlockAccessExtended;
 import com.gildedgames.orbis.api.util.ObjectFilter;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPrimer;
 
 public class IslandGeneratorIrradiatedForests implements IIslandGenerator
@@ -81,7 +81,8 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 	}
 
 	@Override
-	public void genIslandForChunk(final OpenSimplexNoise noise, final World access, final ChunkPrimer primer, final IIslandData island, final int chunkX,
+	public void genIslandForChunk(final OpenSimplexNoise noise, final IBlockAccessExtended access, final ChunkPrimer primer, final IIslandData island,
+			final int chunkX,
 			final int chunkZ)
 	{
 		this.data = ObjectFilter.getFirstFrom(island.getComponents(), IrradiatedForestsData.class);
@@ -89,7 +90,7 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 		final double[] heightMap = this.generateNoise(noise, island, chunkX, chunkZ, 0, 300.0D);
 		final double[] terraceMap = this.generateNoise(noise, island, chunkX, chunkZ, 1000, 300.0D);
 
-		final BiomeAetherBase biome = (BiomeAetherBase) access.getBiome(new BlockPos(chunkX * 16, 0, chunkZ * 16));
+		final BiomeAetherBase biome = (BiomeAetherBase) access.getServerBiome(new BlockPos(chunkX * 16, 0, chunkZ * 16));
 
 		IBlockState coastBlock = biome.getCoastalBlock();
 		IBlockState stoneBlock = BlocksAether.holystone.getDefaultState();
