@@ -1,5 +1,5 @@
 {
-    "type": "crafting_shaped",
+    "type": "minecraft:crafting_shaped",
     "group": "construction",
     "pattern": [
         "###",
@@ -7,12 +7,12 @@
     ],
     "key": {
         "#": {
-       "item": "aether:crude_scatterglass_decorative",
+       "item": "aether:quicksoil_glass_decorative",
       "data": 1
     }
     },
     "result": {
-        "item": "aether:crude_scatterglass_pane_decorative",
+        "item": "aether:quicksoil_glass_pane_decorative",
       "data": 1,
     "count": 16
     }

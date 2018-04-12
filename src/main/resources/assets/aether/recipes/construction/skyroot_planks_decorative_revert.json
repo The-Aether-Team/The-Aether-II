@@ -1,5 +1,5 @@
 {
-	"type": "minecraft:crafting_shaped",
+	"type": "forge:ore_shaped",
 	"group": "construction",
 	"pattern":
 	[
@@ -9,7 +9,8 @@
 	{
 		"X":
 		{
-			"item": "aether:skyroot_decorative"
+			"type": "forge:ore_dict",
+			"ore": "skyroot_decorative"
 		}
 	},
 	"result":

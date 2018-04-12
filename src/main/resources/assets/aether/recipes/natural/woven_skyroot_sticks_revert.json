@@ -9,7 +9,8 @@
 	{
 		"X":
 		{
-			"item": "aether:woven_sticks"
+			"item": "aether:woven_sticks",
+			"data": 0
 		}
 	},
 	"result":

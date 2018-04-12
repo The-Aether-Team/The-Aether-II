@@ -15,7 +15,8 @@
 		},
 		"Y":
 		{
-			"item:" "aether:holystone"
+			"type": "forge:ore_dict",
+            "ore": "holystone"
 		},
 		"Z":
 		{

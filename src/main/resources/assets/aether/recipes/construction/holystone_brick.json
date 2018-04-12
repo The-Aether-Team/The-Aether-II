@@ -1,5 +1,5 @@
 {
-    "type": "crafting_shaped",
+    "type": "forge:ore_shaped",
     "group": "construction",
     "pattern": [
         "##",
@@ -7,7 +7,8 @@
     ],
     "key": {
         "#": {
-            "item": "aether:holystone"
+           "type": "forge:ore_dict",
+            "ore": "holystone"
         }
     },
     "result": {

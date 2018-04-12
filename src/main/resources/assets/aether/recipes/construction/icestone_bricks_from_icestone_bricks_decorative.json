@@ -1,12 +1,13 @@
 {
-    "type": "crafting_shaped",
+    "type": "forge:ore_shaped",
     "group": "construction",
     "pattern": [
         "#"
     ],
     "key": {
         "#": {
-            "item": "aether:icestone_bricks_decorative"
+            "type": "forge:ore_dict",
+            "ore": "icestone_bricks_decorative"
         }
     },
     "result": {

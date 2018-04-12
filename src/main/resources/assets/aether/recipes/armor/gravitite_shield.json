@@ -1,5 +1,5 @@
 {
-    "type": "crafting_shaped",
+    "type": "minecraft:crafting_shaped",
     "group": "armor",
     "pattern": [
         "#J#",
@@ -11,7 +11,7 @@
             "item": "aether:gravitite_plate"
         },
         "J": {
-            "aether:skyroot_stick"
+            "item": "aether:skyroot_stick"
         }
     },
     "result": {

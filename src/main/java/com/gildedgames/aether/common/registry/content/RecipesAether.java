@@ -33,6 +33,20 @@ public class RecipesAether
 	{
 	}
 
+	private static void registerFurnaceRecipes()
+	{
+		registerSmeltingRecipe(new ItemStack(BlocksAether.holystone), new ItemStack(BlocksAether.agiosite), 0.1f);
+		registerSmeltingRecipe(new ItemStack(BlocksAether.arkenium_ore), new ItemStack(ItemsAether.arkenium), 0.85f);
+		registerSmeltingRecipe(new ItemStack(BlocksAether.gravitite_ore), new ItemStack(ItemsAether.gravitite_plate), 1.0f);
+		registerSmeltingRecipe(new ItemStack(BlocksAether.quicksoil), new ItemStack(BlocksAether.quicksoil_glass), 0.1f);
+		registerSmeltingRecipe(new ItemStack(ItemsAether.moa_egg), new ItemStack(ItemsAether.fried_moa_egg), 0.4f);
+		registerSmeltingRecipe(new ItemStack(ItemsAether.rainbow_moa_egg), new ItemStack(ItemsAether.fried_moa_egg), 0.4f);
+		registerSmeltingRecipe(new ItemStack(BlocksAether.crude_scatterglass), new ItemStack(BlocksAether.scatterglass), 0.1f);
+		registerSmeltingRecipe(new ItemStack(ItemsAether.raw_taegore_meat), new ItemStack(ItemsAether.taegore_steak), 0.4f);
+		registerSmeltingRecipe(new ItemStack(ItemsAether.burrukai_rib_cut), new ItemStack(ItemsAether.burrukai_ribs), 0.4f);
+		registerSmeltingRecipe(new ItemStack(ItemsAether.kirrid_loin), new ItemStack(ItemsAether.kirrid_cutlet), 0.4f);
+	}
+
 	public static void registerOreDictionary()
 	{
 		OreDictionary.registerOre("skyrootplanks", BlocksAether.skyroot_planks);
@@ -43,11 +57,18 @@ public class RecipesAether
 		OreDictionary.registerOre("aerleather", ItemsAether.taegore_hide);
 		OreDictionary.registerOre("aerleather", ItemsAether.burrukai_pelt);
 		OreDictionary.registerOre("sugar", ItemsAether.swet_sugar);
+
+		OreDictionary.registerOre("holystone", BlocksAether.holystone);
+		OreDictionary.registerOre("skyroot_decorative", BlocksAether.skyroot_decorative);
+		OreDictionary.registerOre("icestone_bricks_decorative", BlocksAether.icestone_bricks_decorative);
+		OreDictionary.registerOre("holystone_brick_decorative", BlocksAether.holystone_brick_decorative);
+		OreDictionary.registerOre("faded_holystone_brick_decorative", BlocksAether.faded_holystone_brick_decorative);
 	}
 
 	public static void init()
 	{
 		registerOreDictionary();
+		registerFurnaceRecipes();
 		registerAltarRecipes();
 		GameRegistry.registerFuelHandler(new AetherFuelHandler());
 	}
@@ -91,6 +112,11 @@ public class RecipesAether
 		// Healing Stone
 		AetherAPI.content().altar().registerAltarRecipe(new AltarEnchantRecipe(5, new ItemStack(ItemsAether.healing_stone_depleted),
 				new ItemStack(ItemsAether.healing_stone)));
+	}
+
+	private static void registerSmeltingRecipe(final ItemStack input, final ItemStack output, final float xp)
+	{
+		GameRegistry.addSmelting(input, output, xp);
 	}
 
 	public static Collection<IRecipe> getCraftableRecipes()

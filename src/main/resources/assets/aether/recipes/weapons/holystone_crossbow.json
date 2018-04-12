@@ -1,5 +1,5 @@
 {
-    "type": "crafting_shaped",
+    "type": "forge:ore_shaped",
     "group": "weapons",
     "pattern": [
         "##J",
@@ -11,7 +11,8 @@
             "item": "aether:arkenium_strip"
         },
         "J": {
-            "item": "aether:holystone"
+            "type": "forge:ore_dict",
+            "ore": "holystone"
         },
         "D": {
             "item": "aether:cloudtwine"

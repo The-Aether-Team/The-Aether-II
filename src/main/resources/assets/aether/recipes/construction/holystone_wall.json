@@ -7,7 +7,8 @@
   ],
   "key": {
     "#": {
-      "item": "aether:holystone"
+      "item": "aether:holystone",
+      "data": 0
     }
   },
   "result": {

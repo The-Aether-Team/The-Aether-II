@@ -8,10 +8,10 @@
   ],
   "key": {
     "#": {
-      "item": "aether:gravitite plate"
+      "item": "aether:gravitite_plate"
     }
   },
   "result": {
-    "item": "aether:graitite_block"
+    "item": "aether:gravitite_block"
   }
 }

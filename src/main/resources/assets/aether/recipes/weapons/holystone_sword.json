@@ -11,7 +11,8 @@
       "item": "aether:skyroot_stick"
     },
     "X": {
-      "item": "aether:holystone"
+      "item": "aether:holystone",
+      "data": 0
     }
   },
   "result": {

@@ -1,12 +1,13 @@
 {
-    "type": "crafting_shaped",
+    "type": "minecraft:crafting_shaped",
     "group": "construction",
     "pattern": [
         "##"
     ],
     "key": {
         "#": {
-            "item": "aether:holystone"
+            "item": "aether:holystone",
+            "data": 0
         }
     },
     "result": {
