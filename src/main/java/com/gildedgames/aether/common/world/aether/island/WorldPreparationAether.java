@@ -81,7 +81,10 @@ public class WorldPreparationAether
 				{
 					for (int y = 70; y < 70 + (val * 10); y++)
 					{
-						primer.setBlockState(x, y, z, BlocksAether.aercloud.getDefaultState());
+						if (y > 72)
+						{
+							primer.setBlockState(x, y, z, BlocksAether.aercloud.getDefaultState());
+						}
 					}
 				}
 			}
