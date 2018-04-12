@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "armor",
+  "pattern": [
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "aether:taegore_hide"
+    }
+  },
+  "result": {
+    "item": "aether:taegore_hide_gloves"
+  }
+}

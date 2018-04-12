@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "armor",
+  "pattern": [
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "aether:gravitite_plate"
+    }
+  },
+  "result": {
+    "item": "aether:gravitite_gloves"
+  }
+}

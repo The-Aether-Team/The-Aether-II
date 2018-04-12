@@ -3,20 +3,18 @@
 	"group": "materials",
 	"pattern":
 	[
-		"X",
 		"X"
 	],
 	"key":
 	{
 		"X":
 		{
-			"type": "forge:ore_dict",
-			"ore": "skyrootplanks"
+			"item": "aether:ambrosium_chunk"
 		}
 	},
 	"result":
 	{
-		"item": "aether:skyroot_stick",
+		"item": "aether:ambrosium_shard",
 		"count": 4
 	}
 }

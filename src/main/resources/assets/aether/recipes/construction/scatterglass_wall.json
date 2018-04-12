@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "construction",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "aether:scatterglass"
+    }
+  },
+  "result": {
+    "item": "aether:scatterglass_wall",
+    "count": 6
+  }
+}

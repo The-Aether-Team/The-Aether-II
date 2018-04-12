@@ -1,0 +1,10 @@
+{
+    "type": "smelting",
+    "group": "consumables",
+    "ingredient": {
+        "item": "aether:kirrid_loin"
+    },
+    "result": "aether:kirrid_cutlet",
+    "experience": 0.4,
+    "cookingtime": 200
+}

@@ -1,16 +1,21 @@
 {
     "type": "crafting_shaped",
-    "group": "construction",
+    "group": "armor",
     "pattern": [
-        "##"
+        "#J#",
+        "###",
+        " # "
     ],
     "key": {
         "#": {
             "item": "aether:holystone"
+        },
+        "J": {
+            "aether:skyroot_stick"
         }
     },
     "result": {
-        "item": "aether:holystone_pressure_plate",
+        "item": "aether:holystone_shield",
         "count": 1
     }
 }

@@ -1,0 +1,21 @@
+{
+    "type": "crafting_shaped",
+    "group": "armor",
+    "pattern": [
+        "#J#",
+        "###",
+        " # "
+    ],
+    "key": {
+        "#": {
+            "item": "aether:arkenium"
+        },
+        "J": {
+            "aether:skyroot_stick"
+        }
+    },
+    "result": {
+        "item": "aether:arkenium_shield",
+        "count": 1
+    }
+}

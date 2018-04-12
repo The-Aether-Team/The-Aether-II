@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "construction",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "aether:gravitite_block"
+    }
+  },
+  "result": {
+    "item": "aether:gravitite_plate",
+    "count": 9
+  }
+}

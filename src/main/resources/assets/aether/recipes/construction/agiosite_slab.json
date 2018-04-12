@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "construction",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "aether:agiosite_holystone"
+    }
+  },
+  "result": {
+    "item": "aether:agiosite_slab",
+    "data": 0,
+    "count": 6
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "construction",
+  "pattern": [
+    "###",
+    "XXX",
+    "###"
+  ],
+  "key": {
+    "#": [
+      {
+        "item": "aether:holystone_brick"
+      }
+    ],
+    "X": {
+      "item": "minecraft:book"
+    }
+  },
+  "result": {
+    "item": "aether:holystone_bookshelf"
+  }
+}

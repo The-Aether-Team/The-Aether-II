@@ -2,15 +2,16 @@
     "type": "crafting_shaped",
     "group": "construction",
     "pattern": [
-        "##"
+        "###",
+        "###"
     ],
     "key": {
         "#": {
-            "item": "aether:holystone"
+            "item": "aether:scatterglass"
         }
     },
     "result": {
-        "item": "aether:holystone_pressure_plate",
-        "count": 1
+        "item": "aether:scatterglass_pane",
+        "count": 16
     }
 }

@@ -1,0 +1,30 @@
+{
+	"type": "forge:ore_shaped",
+	"group": "utility",
+	"pattern":
+	[
+		"XXX",
+		"XYX",
+		"ZZZ"
+	],
+	"key":
+	{
+		"Z":
+		{
+			"type": "forge:ore_dict",
+			"ore": "skyrootplanks"
+		},
+		"X":
+		{
+			"item": "aether:holystone"
+		},
+		"Y":
+		{
+			"item": "aether:ambrosium_chunk"
+		}
+	},
+	"result":
+	{
+		"item": "aether:incubator"
+	}
+}

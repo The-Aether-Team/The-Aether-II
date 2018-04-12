@@ -29,7 +29,9 @@ public class RecipesAether
 {
 	private static final Set<IRecipe> CRAFTABLE_RECIPES = new HashSet<>();
 
-	public static void preInit() { }
+	public static void preInit()
+	{
+	}
 
 	public static void registerOreDictionary()
 	{
@@ -46,23 +48,8 @@ public class RecipesAether
 	public static void init()
 	{
 		registerOreDictionary();
-		registerFurnaceRecipes();
 		registerAltarRecipes();
 		GameRegistry.registerFuelHandler(new AetherFuelHandler());
-	}
-
-	private static void registerFurnaceRecipes()
-	{
-		registerSmeltingRecipe(new ItemStack(BlocksAether.holystone), new ItemStack(BlocksAether.agiosite), 0.1f);
-		registerSmeltingRecipe(new ItemStack(BlocksAether.arkenium_ore), new ItemStack(ItemsAether.arkenium), 0.85f);
-		registerSmeltingRecipe(new ItemStack(BlocksAether.gravitite_ore), new ItemStack(ItemsAether.gravitite_plate), 1.0f);
-		registerSmeltingRecipe(new ItemStack(BlocksAether.quicksoil), new ItemStack(BlocksAether.quicksoil_glass), 0.1f);
-		registerSmeltingRecipe(new ItemStack(ItemsAether.moa_egg), new ItemStack(ItemsAether.fried_moa_egg), 0.4f);
-		registerSmeltingRecipe(new ItemStack(ItemsAether.rainbow_moa_egg), new ItemStack(ItemsAether.fried_moa_egg), 0.4f);
-		registerSmeltingRecipe(new ItemStack(BlocksAether.crude_scatterglass), new ItemStack(BlocksAether.scatterglass), 0.1f);
-		registerSmeltingRecipe(new ItemStack(ItemsAether.raw_taegore_meat), new ItemStack(ItemsAether.taegore_steak), 0.4f);
-		registerSmeltingRecipe(new ItemStack(ItemsAether.burrukai_rib_cut), new ItemStack(ItemsAether.burrukai_ribs), 0.4f);
-		registerSmeltingRecipe(new ItemStack(ItemsAether.kirrid_loin), new ItemStack(ItemsAether.kirrid_cutlet), 0.4f);
 	}
 
 	@SubscribeEvent
@@ -104,11 +91,6 @@ public class RecipesAether
 		// Healing Stone
 		AetherAPI.content().altar().registerAltarRecipe(new AltarEnchantRecipe(5, new ItemStack(ItemsAether.healing_stone_depleted),
 				new ItemStack(ItemsAether.healing_stone)));
-	}
-
-	private static void registerSmeltingRecipe(final ItemStack input, final ItemStack output, final float xp)
-	{
-		GameRegistry.addSmelting(input, output, xp);
 	}
 
 	public static Collection<IRecipe> getCraftableRecipes()

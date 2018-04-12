@@ -1,0 +1,27 @@
+{
+    "type": "crafting_shaped",
+    "group": "weapons",
+    "pattern": [
+        "##J",
+        "DJ#",
+        "PD#"
+    ],
+    "key": {
+        "#": {
+            "item": "aether:arkenium_strip"
+        },
+        "J": {
+            "item": "aether:arkenium"
+        },
+        "D": {
+            "item": "aether:cloudtwine"
+        },
+        "P": {
+            "item": "aether:skyroot_stick"
+        }
+    },
+    "result": {
+        "item": "aether:arkenium_crossbow",
+        "count": 1
+    }
+}

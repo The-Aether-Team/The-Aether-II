@@ -1,0 +1,21 @@
+{
+    "type": "crafting_shaped",
+    "group": "armor",
+    "pattern": [
+        "#J#",
+        "###",
+        " # "
+    ],
+    "key": {
+        "#": {
+            "item": "aether:skyroot_planks"
+        },
+        "J": {
+            "aether:skyroot_stick"
+        }
+    },
+    "result": {
+        "item": "aether:skyroot_shield",
+        "count": 1
+    }
+}

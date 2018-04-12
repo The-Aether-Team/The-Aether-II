@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "tools",
+  "pattern": [
+    "X ",
+    " X"
+  ],
+  "key": {
+    "X": {
+      "item": "aether:arkenium_strip"
+    }
+  },
+  "result": {
+    "item": "aether:arkenium_shears"
+  }
+}

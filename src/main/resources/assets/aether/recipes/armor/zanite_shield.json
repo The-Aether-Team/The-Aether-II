@@ -1,0 +1,21 @@
+{
+    "type": "crafting_shaped",
+    "group": "armor",
+    "pattern": [
+        "#J#",
+        "###",
+        " # "
+    ],
+    "key": {
+        "#": {
+            "item": "aether:zanite_gemstone"
+        },
+        "J": {
+            "aether:skyroot_stick"
+        }
+    },
+    "result": {
+        "item": "aether:zanite_shield",
+        "count": 1
+    }
+}

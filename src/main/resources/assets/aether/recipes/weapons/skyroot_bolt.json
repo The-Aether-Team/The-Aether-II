@@ -1,0 +1,33 @@
+{
+	"type": "forge:ore_shaped",
+	"group": "construction",
+	"pattern":
+	[
+		"  Z",
+		" X ",
+		"Y  "
+	],
+	"key":
+	{
+		"X":
+		{
+			"item": "aether:skyroot_stick"
+		},
+		"Y":
+		{
+			"type": "forge:ore_dict",
+			"ore": "skyrootplanks"
+		},
+		"Z":
+		{
+			"type": "forge:ore_dict",
+			"ore": "feather"
+		}
+	},
+	"result":
+	{
+		"item": "aether:bolt",
+		"count": 4,
+		"data": 0
+	}
+}

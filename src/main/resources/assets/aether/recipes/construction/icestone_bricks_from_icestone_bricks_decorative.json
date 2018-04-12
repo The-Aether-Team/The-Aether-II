@@ -2,15 +2,15 @@
     "type": "crafting_shaped",
     "group": "construction",
     "pattern": [
-        "##"
+        "#"
     ],
     "key": {
         "#": {
-            "item": "aether:holystone"
+            "item": "aether:icestone_bricks_decorative"
         }
     },
     "result": {
-        "item": "aether:holystone_pressure_plate",
+        "item": "aether:icestone_bricks",
         "count": 1
     }
 }

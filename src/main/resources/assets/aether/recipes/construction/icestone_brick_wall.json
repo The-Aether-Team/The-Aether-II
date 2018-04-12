@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "construction",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "aether:icestone_bricks"
+    }
+  },
+  "result": {
+    "item": "aether:icestone_wall",
+    "count": 6
+  }
+}

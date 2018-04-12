@@ -1,0 +1,10 @@
+{
+    "type": "smelting",
+    "group": "materials",
+    "ingredient": {
+        "item": "aether:gravitite_ore"
+    },
+    "result": "aether:gravitite_plate",
+    "experience": 1.0,
+    "cookingtime": 200
+}

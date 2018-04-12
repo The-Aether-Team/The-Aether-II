@@ -1,0 +1,21 @@
+{
+    "type": "crafting_shaped",
+    "group": "armor",
+    "pattern": [
+        "#J#",
+        "###",
+        " # "
+    ],
+    "key": {
+        "#": {
+            "item": "aether:gravitite_plate"
+        },
+        "J": {
+            "aether:skyroot_stick"
+        }
+    },
+    "result": {
+        "item": "aether:gravitite_shield",
+        "count": 1
+    }
+}

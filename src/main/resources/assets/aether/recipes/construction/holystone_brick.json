@@ -2,6 +2,7 @@
     "type": "crafting_shaped",
     "group": "construction",
     "pattern": [
+        "##",
         "##"
     ],
     "key": {
@@ -10,7 +11,7 @@
         }
     },
     "result": {
-        "item": "aether:holystone_pressure_plate",
-        "count": 1
+        "item": "aether:holystone_brick",
+        "count": 4
     }
 }
