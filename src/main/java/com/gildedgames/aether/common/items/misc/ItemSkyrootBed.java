@@ -66,9 +66,8 @@ public class ItemSkyrootBed extends Item
 
 				if (flag2 && flag3 && world.getBlockState(pos.down()).isTopSolid() && world.getBlockState(adjPos.down()).isTopSolid())
 				{
-					final IBlockState otherBed = BlocksAether.skyroot_bed.getDefaultState().withProperty(BlockBed.OCCUPIED, Boolean.FALSE)
+					IBlockState otherBed = BlocksAether.skyroot_bed.getDefaultState().withProperty(BlockBed.OCCUPIED, Boolean.valueOf(false))
 							.withProperty(BlockBed.FACING, enumfacing).withProperty(BlockBed.PART, BlockBed.EnumPartType.FOOT);
-
 					world.setBlockState(pos, otherBed, 10);
 					world.setBlockState(adjPos, otherBed.withProperty(BlockBed.PART, BlockBed.EnumPartType.HEAD), 10);
 

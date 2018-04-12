@@ -22,7 +22,8 @@ public class TileEntitiesAether
 			MASONRY_BENCH_ID = "aether.masonry_bench",
 			OUTPOST_CAMPFIRE_ID = "aether.outpost_campfire",
 			STRUCTURE_BUILDER_ID = "aether.structure_builder",
-			TELEPORTER_ID = "aether.aether_teleporter";
+			TELEPORTER_ID = "aether.aether_teleporter",
+			SKYROOT_BED_ID = "aether.skyroot_bed";
 
 	public static void preInit()
 	{
@@ -40,6 +41,7 @@ public class TileEntitiesAether
 		GameRegistry.registerTileEntity(TileEntityOutpostCampfire.class, OUTPOST_CAMPFIRE_ID);
 		GameRegistry.registerTileEntity(TileEntityStructureBuilder.class, STRUCTURE_BUILDER_ID);
 		GameRegistry.registerTileEntity(TileEntityTeleporter.class, TELEPORTER_ID);
+		GameRegistry.registerTileEntity(TileEntitySkyrootBed.class, SKYROOT_BED_ID);
 	}
 
 }
