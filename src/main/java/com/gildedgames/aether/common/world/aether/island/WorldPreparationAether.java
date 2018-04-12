@@ -77,14 +77,16 @@ public class WorldPreparationAether
 
 				final double val = NoiseUtil.normalise(NoiseUtil.something(this.noise, nx, nz));
 
-				if (val > 0.0)
+				if (val > 0.3)
 				{
-					for (int y = 70; y < 70 + (val * 10); y++)
+					for (int y = 70; y < 70 + ((val - 0.3) * 10); y++)
 					{
-						if (y > 72)
-						{
-							primer.setBlockState(x, y, z, BlocksAether.aercloud.getDefaultState());
-						}
+						primer.setBlockState(x, y, z, BlocksAether.aercloud.getDefaultState());
+					}
+
+					for (int y = 70; y > 70 - ((val - 0.3) * 10); y--)
+					{
+						primer.setBlockState(x, y, z, BlocksAether.aercloud.getDefaultState());
 					}
 				}
 			}
