@@ -3,6 +3,11 @@ package com.gildedgames.aether.common.registry.content;
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.decorative.BlockFadedHolystoneDecorative;
+import com.gildedgames.aether.common.blocks.decorative.BlockHolystoneDecorative;
+import com.gildedgames.aether.common.blocks.decorative.BlockIcestoneBricksDecorative;
+import com.gildedgames.aether.common.blocks.decorative.BlockSkyrootDecorative;
+import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import com.gildedgames.aether.common.recipes.RecipePresentCrafting;
@@ -58,11 +63,60 @@ public class RecipesAether
 		OreDictionary.registerOre("aerleather", ItemsAether.burrukai_pelt);
 		OreDictionary.registerOre("sugar", ItemsAether.swet_sugar);
 
-		OreDictionary.registerOre("holystone", BlocksAether.holystone);
-		OreDictionary.registerOre("skyroot_decorative", BlocksAether.skyroot_decorative);
-		OreDictionary.registerOre("icestone_bricks_decorative", BlocksAether.icestone_bricks_decorative);
-		OreDictionary.registerOre("holystone_brick_decorative", BlocksAether.holystone_brick_decorative);
-		OreDictionary.registerOre("faded_holystone_brick_decorative", BlocksAether.faded_holystone_brick_decorative);
+		OreDictionary.registerOre("holystone", new ItemStack(BlocksAether.holystone, 1, BlockHolystone.NORMAL_HOLYSTONE.getMeta()));
+		OreDictionary.registerOre("holystone", new ItemStack(BlocksAether.holystone, 1, BlockHolystone.MOSSY_HOLYSTONE.getMeta()));
+
+		OreDictionary.registerOre("skyroot_decorative", new ItemStack(BlocksAether.skyroot_decorative, 1, BlockSkyrootDecorative.HIGHLIGHT.getMeta()));
+		OreDictionary.registerOre("skyroot_decorative", new ItemStack(BlocksAether.skyroot_decorative, 1, BlockSkyrootDecorative.BASE_BEAM.getMeta()));
+		OreDictionary.registerOre("skyroot_decorative", new ItemStack(BlocksAether.skyroot_decorative, 1, BlockSkyrootDecorative.BASE_PLANKS.getMeta()));
+		OreDictionary.registerOre("skyroot_decorative", new ItemStack(BlocksAether.skyroot_decorative, 1, BlockSkyrootDecorative.FLOORBOARDS.getMeta()));
+		OreDictionary.registerOre("skyroot_decorative", new ItemStack(BlocksAether.skyroot_decorative, 1, BlockSkyrootDecorative.TILES.getMeta()));
+		OreDictionary.registerOre("skyroot_decorative", new ItemStack(BlocksAether.skyroot_decorative, 1, BlockSkyrootDecorative.TILES_SMALL.getMeta()));
+		OreDictionary.registerOre("skyroot_decorative", new ItemStack(BlocksAether.skyroot_decorative, 1, BlockSkyrootDecorative.TOP_BEAM.getMeta()));
+		OreDictionary.registerOre("skyroot_decorative", new ItemStack(BlocksAether.skyroot_decorative, 1, BlockSkyrootDecorative.TOP_PLANKS.getMeta()));
+
+		OreDictionary.registerOre("icestone_bricks_decorative",
+				new ItemStack(BlocksAether.icestone_bricks_decorative, 1, BlockIcestoneBricksDecorative.BASE_BRICKS.getMeta()));
+		OreDictionary.registerOre("icestone_bricks_decorative",
+				new ItemStack(BlocksAether.icestone_bricks_decorative, 1, BlockIcestoneBricksDecorative.BASE_PILLAR.getMeta()));
+		OreDictionary.registerOre("icestone_bricks_decorative",
+				new ItemStack(BlocksAether.icestone_bricks_decorative, 1, BlockIcestoneBricksDecorative.CAPSTONE_BRICKS.getMeta()));
+		OreDictionary.registerOre("icestone_bricks_decorative",
+				new ItemStack(BlocksAether.icestone_bricks_decorative, 1, BlockIcestoneBricksDecorative.CAPSTONE_PILLAR.getMeta()));
+		OreDictionary.registerOre("icestone_bricks_decorative",
+				new ItemStack(BlocksAether.icestone_bricks_decorative, 1, BlockIcestoneBricksDecorative.FLAGSTONES.getMeta()));
+		OreDictionary.registerOre("icestone_bricks_decorative",
+				new ItemStack(BlocksAether.icestone_bricks_decorative, 1, BlockIcestoneBricksDecorative.KEYSTONE.getMeta()));
+
+		OreDictionary.registerOre("holystone_brick_decorative",
+				new ItemStack(BlocksAether.holystone_brick_decorative, 1, BlockHolystoneDecorative.BASE_BRICKS.getMeta()));
+		OreDictionary.registerOre("holystone_brick_decorative",
+				new ItemStack(BlocksAether.holystone_brick_decorative, 1, BlockHolystoneDecorative.BASE_PILLAR.getMeta()));
+		OreDictionary.registerOre("holystone_brick_decorative",
+				new ItemStack(BlocksAether.holystone_brick_decorative, 1, BlockHolystoneDecorative.CAPSTONE_BRICKS.getMeta()));
+		OreDictionary.registerOre("holystone_brick_decorative",
+				new ItemStack(BlocksAether.holystone_brick_decorative, 1, BlockHolystoneDecorative.CAPSTONE_PILLAR.getMeta()));
+		OreDictionary.registerOre("holystone_brick_decorative",
+				new ItemStack(BlocksAether.holystone_brick_decorative, 1, BlockHolystoneDecorative.FLAGSTONES.getMeta()));
+		OreDictionary.registerOre("holystone_brick_decorative",
+				new ItemStack(BlocksAether.holystone_brick_decorative, 1, BlockHolystoneDecorative.HEADSTONE.getMeta()));
+		OreDictionary.registerOre("holystone_brick_decorative",
+				new ItemStack(BlocksAether.holystone_brick_decorative, 1, BlockHolystoneDecorative.KEYSTONE.getMeta()));
+
+		OreDictionary.registerOre("faded_holystone_brick_decorative",
+				new ItemStack(BlocksAether.faded_holystone_brick_decorative, 1, BlockFadedHolystoneDecorative.BASE_BRICKS.getMeta()));
+		OreDictionary.registerOre("faded_holystone_brick_decorative",
+				new ItemStack(BlocksAether.faded_holystone_brick_decorative, 1, BlockFadedHolystoneDecorative.BASE_PILLAR.getMeta()));
+		OreDictionary.registerOre("faded_holystone_brick_decorative",
+				new ItemStack(BlocksAether.faded_holystone_brick_decorative, 1, BlockFadedHolystoneDecorative.CAPSTONE_BRICKS.getMeta()));
+		OreDictionary.registerOre("faded_holystone_brick_decorative",
+				new ItemStack(BlocksAether.faded_holystone_brick_decorative, 1, BlockFadedHolystoneDecorative.CAPSTONE_PILLAR.getMeta()));
+		OreDictionary.registerOre("faded_holystone_brick_decorative",
+				new ItemStack(BlocksAether.faded_holystone_brick_decorative, 1, BlockFadedHolystoneDecorative.FLAGSTONES.getMeta()));
+		OreDictionary.registerOre("faded_holystone_brick_decorative",
+				new ItemStack(BlocksAether.faded_holystone_brick_decorative, 1, BlockFadedHolystoneDecorative.HEADSTONE.getMeta()));
+		OreDictionary.registerOre("faded_holystone_brick_decorative",
+				new ItemStack(BlocksAether.faded_holystone_brick_decorative, 1, BlockFadedHolystoneDecorative.KEYSTONE.getMeta()));
 	}
 
 	public static void init()
