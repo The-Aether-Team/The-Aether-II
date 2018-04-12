@@ -196,7 +196,7 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 								continue;
 							}
 
-							if (coastBlock != null && heightSample < cutoffPoint + 0.10 && y == 100)
+							if (coastBlock != null && heightSample < cutoffPoint + 0.025 && y == 100)
 							{
 								primer.setBlockState(x, y, z, coastBlock);
 							}
@@ -210,7 +210,7 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 
 						for (int y = (int) bottomMaxY; y < maxY; y++)
 						{
-							if (coastBlock != null && (topSample < cutoffPoint + 0.10 && y == 100))
+							if (coastBlock != null && (topSample < cutoffPoint + 0.025 && y == 100))
 							{
 								primer.setBlockState(x, y, z, coastBlock);
 							}

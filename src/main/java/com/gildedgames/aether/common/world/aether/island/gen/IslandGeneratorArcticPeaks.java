@@ -142,7 +142,7 @@ public class IslandGeneratorArcticPeaks implements IIslandGenerator
 							continue;
 						}
 
-						if (coastBlock != null && heightSample < cutoffPoint + 0.05 && y == 100)
+						if (coastBlock != null && heightSample < cutoffPoint + 0.025 && y == 100)
 						{
 							primer.setBlockState(x, y, z, coastBlock);
 						}
@@ -156,7 +156,7 @@ public class IslandGeneratorArcticPeaks implements IIslandGenerator
 
 					for (int y = (int) bottomMaxY; y < maxY; y++)
 					{
-						if (coastBlock != null && (newHeightSample < cutoffPoint + 0.05 && y == 100))
+						if (coastBlock != null && (newHeightSample < cutoffPoint + 0.025 && y == 100))
 						{
 							primer.setBlockState(x, y, z, coastBlock);
 						}
