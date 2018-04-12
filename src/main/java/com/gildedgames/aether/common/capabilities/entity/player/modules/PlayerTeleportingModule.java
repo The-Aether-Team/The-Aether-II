@@ -88,18 +88,18 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 	{
 		if (this.getWorld().provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER)
 		{
-			if (Minecraft.getMinecraft().currentScreen == null)
+			if (!this.playedIntro)
 			{
-				ClientEventHandler.DRAW_BLACK_SCREEN = false;
+				Minecraft.getMinecraft().displayGuiScreen(new GuiIntro());
 
-				if (!this.playedIntro)
-				{
-					Minecraft.getMinecraft().displayGuiScreen(new GuiIntro());
-
-					this.playedIntro = true;
-					NetworkingAether.sendPacketToServer(new PacketSetPlayedIntro(true));
-				}
+				this.playedIntro = true;
+				NetworkingAether.sendPacketToServer(new PacketSetPlayedIntro(true));
 			}
+		}
+
+		if (this.playedIntro)
+		{
+			ClientEventHandler.DRAW_BLACK_SCREEN = false;
 		}
 	}
 

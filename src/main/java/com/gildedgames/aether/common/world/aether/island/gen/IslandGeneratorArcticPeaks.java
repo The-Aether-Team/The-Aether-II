@@ -9,7 +9,7 @@ import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 
@@ -77,7 +77,7 @@ public class IslandGeneratorArcticPeaks implements IIslandGenerator
 	}
 
 	@Override
-	public void genIslandForChunk(final OpenSimplexNoise noise, final IBlockAccess access, final ChunkPrimer primer, final IIslandData island, final int chunkX,
+	public void genIslandForChunk(final OpenSimplexNoise noise, final World access, final ChunkPrimer primer, final IIslandData island, final int chunkX,
 			final int chunkZ)
 	{
 		final double[] heightMap = generateNoise(noise, island, chunkX, chunkZ);
