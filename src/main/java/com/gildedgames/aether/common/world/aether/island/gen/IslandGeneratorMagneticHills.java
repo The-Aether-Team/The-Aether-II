@@ -132,7 +132,7 @@ public class IslandGeneratorMagneticHills implements IIslandGenerator
 							continue;
 						}
 
-						if (!magnetic && coastBlock != null && (heightSample < cutoffPoint + 0.025 && y < bottomMaxY + 1))
+						if (!magnetic && coastBlock != null && (heightSample < cutoffPoint + 0.025 && y == bottomMaxY - 1))
 						{
 							primer.setBlockState(x, y, z, coastBlock);
 						}
