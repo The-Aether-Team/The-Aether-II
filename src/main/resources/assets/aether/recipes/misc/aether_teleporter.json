@@ -1,0 +1,27 @@
+{
+	"type": "forge:ore_shaped",
+	"group": "misc",
+	"pattern":
+	[
+		"XYX",
+		"Y Y",
+		"XYX"
+	],
+	"key":
+	{
+		"X":
+		{
+          "item": "minecraft:stone",
+          "data": 0
+		},
+
+        "Y":
+        {
+             "item": "minecraft:iron_ingot"
+        }
+	},
+	"result":
+	{
+		"item": "aether:aether_teleporter"
+	}
+}
