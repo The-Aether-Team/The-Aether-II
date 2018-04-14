@@ -323,6 +323,11 @@ public class CommonEvents
 			{
 				final EntityPlayerMP player = (EntityPlayerMP) entity;
 
+				if (!net.minecraftforge.common.ForgeHooks.onTravelToDimension(player, dimension))
+				{
+					return player;
+				}
+
 				playerList.transferPlayerToDimension((EntityPlayerMP) entity, dimension, teleporter);
 
 				if (optionalLoc == null)

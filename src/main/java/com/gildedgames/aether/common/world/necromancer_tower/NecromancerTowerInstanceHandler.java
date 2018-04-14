@@ -40,6 +40,11 @@ public class NecromancerTowerInstanceHandler
 
 	public void teleportToInst(final EntityPlayerMP player, final NecromancerTowerInstance inst)
 	{
+		if (!net.minecraftforge.common.ForgeHooks.onTravelToDimension(player, inst.getDimensionId()))
+		{
+			return;
+		}
+
 		final World world = this.handler.teleportPlayerToDimension(inst, player);
 
 		player.connection.setPlayerLocation(inst.getInsideEntrance().getX(), inst.getInsideEntrance().getY(), inst.getInsideEntrance().getZ(), 270, 0);
