@@ -190,7 +190,8 @@ public class GenerationAether
 						TemplateConditions.REPLACEABLE);
 
 		skyroot_moa_nest_tree_1 = new TemplateDefinition(TemplatesAether.skyroot_moa_nest_tree_1).setConditions(TemplateConditions.FLAT_GROUND,
-				TemplateConditions.IGNORE_QUICKSOIL, TemplateConditions.REPLACEABLE).setPostPlacements(new PostPlacementMoaFamily(new BlockPos(4, 5, 4)));
+				TemplateConditions.IGNORE_QUICKSOIL, TemplateConditions.REPLACEABLE, TemplateConditions.ON_SOIL)
+				.setPostPlacements(new PostPlacementMoaFamily(new BlockPos(4, 5, 4)));
 
 		skyroot_moa_nest_1 = new TemplateDefinition(TemplatesAether.skyroot_moa_nest_1).setConditions(TemplateConditions.INSIDE_GROUND,
 				TemplateConditions.REPLACEABLE_GROUND).setPostPlacements(new PostPlacementMoaFamily(new BlockPos(2, 0, 2)));
