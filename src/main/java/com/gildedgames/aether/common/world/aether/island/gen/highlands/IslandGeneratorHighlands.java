@@ -8,7 +8,9 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.orbis.api.processing.IBlockAccessExtended;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 
@@ -104,11 +106,15 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 	{
 		final double[] heightMap = generateNoise(noise, island, chunkX, chunkZ, 0, 300.0D);
 		final double[] terraceMap = this.terraces ? generateNoise(noise, island, chunkX, chunkZ, 1000, 300.0D) : null;
+		//final double[] quicksoilMap = NoiseUtil.something(noise, island, chunkX, chunkZ, 2000, 200D);
 
 		final Biome biome = access.getServerBiome(new BlockPos(chunkX * 16, 0, chunkZ * 16));
 
-		final IBlockState coastBlock = ((BiomeAetherBase) biome).getCoastalBlock();
-		final IBlockState stoneBlock = BlocksAether.holystone.getDefaultState();
+		IBlockState coastBlock = ((BiomeAetherBase) biome).getCoastalBlock();
+		IBlockState stoneBlock = BlocksAether.holystone.getDefaultState();
+
+		//coastBlock = Blocks.SAND.getDefaultState();
+		//stoneBlock = Blocks.STONE.getDefaultState();
 
 		final int posX = chunkX * 16;
 		final int posZ = chunkZ * 16;
@@ -144,7 +150,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 
 				final double normal = NoiseUtil.normalise(sample);
 				final double cutoffPointDist = Math.abs(cutoffPoint - heightSample);
-				final double diff = this.terraces ? Math.max(0.0, cutoffPoint - cutoffPointDist) * 8.0 : 0.0;
+				final double diff = Math.max(0.0, cutoffPoint - cutoffPointDist) * 8.0;
 
 				double bottomHeightMod = Math.pow(normal, 0.2);
 
@@ -157,6 +163,32 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 					final double terraceSample = interpolate(terraceMap, x, z) + 1.0;
 
 					topSample = NoiseUtil.lerp(heightSample, terraceSample - diff > 0.7 ? terraceSample - diff : heightSample, 0.7);
+				}
+
+				final double nx = (worldX) / 65D;
+				final double nz = (worldZ) / 65D;
+
+				double sampleQuicksoil = NoiseUtil.something(noise, nx, nz);
+
+				double dif = MathHelper.clamp(Math.abs(cutoffPoint - heightSample) * 10.0, 0.0, 1.0);
+
+				double quicksoil = sampleQuicksoil * dif;
+				double waterBottomValue = cutoffPoint;
+
+				boolean water = false;
+
+				if (quicksoil > 0.2)
+				{
+					if (quicksoil < 0.7)
+					{
+						double blend = (quicksoil - 0.2) * 2.0;
+
+						topSample = NoiseUtil.lerp(topSample, waterBottomValue, blend);
+					}
+					else
+					{
+						water = true;
+					}
 				}
 
 				if (heightSample > cutoffPoint)
@@ -183,7 +215,13 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 						}
 					}
 
-					final double maxY = bottomMaxY + ((topSample - cutoffPoint) * topHeight);
+					double maxY = bottomMaxY + ((topSample - cutoffPoint) * topHeight);
+					double waterHeight = bottomMaxY + ((waterBottomValue - cutoffPoint) * topHeight);
+
+					if (water)
+					{
+						maxY = bottomMaxY + ((waterBottomValue - cutoffPoint) * topHeight);
+					}
 
 					for (int y = (int) bottomMaxY; y < maxY; y++)
 					{
@@ -194,6 +232,31 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 						else
 						{
 							primer.setBlockState(x, y, z, stoneBlock);
+						}
+
+						if (quicksoil >= 0.2)
+						{
+							if (y >= waterHeight && y < waterHeight + 2)
+							{
+								primer.setBlockState(x, y, z, coastBlock);
+							}
+						}
+					}
+
+					if (quicksoil >= 0.2 && water)
+					{
+						double minY = maxY - ((Math.max(0.0, quicksoil - 0.7)) * 25);
+
+						for (int y = (int) maxY; y > minY - 1; y--)
+						{
+							if (y <= minY)
+							{
+								primer.setBlockState(x, y, z, coastBlock);
+							}
+							else
+							{
+								primer.setBlockState(x, y, z, Blocks.WATER.getDefaultState());
+							}
 						}
 					}
 				}

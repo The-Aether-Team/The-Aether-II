@@ -79,7 +79,7 @@ public class IslandGenPreview
 
 	private void generateIsland()
 	{
-		final Random rand = new Random();
+		final Random rand = new Random(12500L);
 		final long seed = rand.nextLong();
 
 		this.noise = new OpenSimplexNoise(seed);
@@ -94,7 +94,7 @@ public class IslandGenPreview
 
 		final IIslandBounds bounds = new IslandBounds(x, y, z, x + width, y + height, z + length);
 
-		final BiomeAetherBase chosen = BiomesAether.IRRADIATED_FORESTS;
+		final BiomeAetherBase chosen = BiomesAether.HIGHLANDS;
 
 		this.island = new IslandData(null, bounds, chosen, seed);
 
@@ -192,10 +192,10 @@ public class IslandGenPreview
 		this.generateIsland();
 
 		this.islandImage = this.paintIsland();
-		this.voronoiImage = this.paintVoronoi();
+		//this.voronoiImage = this.paintVoronoi();
 
 		this.islandTexId = this.renderImage(this.islandImage);
-		this.voronoiTexId = this.renderImage(this.voronoiImage);
+		//this.voronoiTexId = this.renderImage(this.voronoiImage);
 	}
 
 	public void update()
@@ -299,7 +299,7 @@ public class IslandGenPreview
 	public void draw()
 	{
 		this.drawTexture(this.islandTexId);
-		this.drawTexture(this.voronoiTexId);
+		//this.drawTexture(this.voronoiTexId);
 	}
 
 	private void drawTexture(final int textureId)
