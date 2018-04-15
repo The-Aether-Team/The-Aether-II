@@ -12,6 +12,7 @@ import com.gildedgames.aether.common.world.SectorEventHandler;
 import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.IrradiatedForestsData;
 import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.MagneticHillPillar;
 import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.MagneticHillsData;
+import com.gildedgames.aether.common.world.aether.island.gen.IslandVariables;
 import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstance;
 import com.gildedgames.orbis.api.OrbisAPI;
 import com.gildedgames.orbis.api.util.io.IClassSerializer;
@@ -50,6 +51,7 @@ public class CommonProxy implements IAetherServices
 		s.register(1, MagneticHillsData.class, new Instantiator<>(MagneticHillsData.class));
 		s.register(2, MagneticHillPillar.class, new Instantiator<>(MagneticHillPillar.class));
 		s.register(3, IrradiatedForestsData.class, new Instantiator<>(IrradiatedForestsData.class));
+		s.register(4, IslandVariables.class, new Instantiator<>(IslandVariables.class));
 
 		OrbisAPI.services().io().register(s);
 

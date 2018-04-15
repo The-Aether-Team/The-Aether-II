@@ -8,7 +8,8 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.registry.content.GenerationAether;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
-import com.gildedgames.aether.common.world.aether.island.gen.IslandGenerators;
+import com.gildedgames.aether.common.world.aether.island.gen.IslandVariables;
+import com.gildedgames.aether.common.world.aether.island.gen.highlands.IslandGeneratorHighlands;
 import com.gildedgames.aether.common.world.templates.TemplateWorldGen;
 import com.gildedgames.orbis.api.processing.IBlockAccessExtended;
 import com.gildedgames.orbis.api.util.mc.NBT;
@@ -41,7 +42,25 @@ public class BiomeMagneticHills extends BiomeAetherBase
 	@Override
 	public IIslandGenerator createIslandGenerator(Random rand)
 	{
-		return IslandGenerators.MAGNETIC_HILLS;
+		int coastHeight = rand.nextInt(3);
+		double coastSpread = rand.nextDouble() * 0.6;
+
+		if (coastHeight == 0)
+		{
+			coastSpread = 0.0;
+		}
+
+		return new IslandGeneratorHighlands(IslandVariables.build()
+				.coastHeight(coastHeight)
+				.coastSpread(coastSpread)
+				.lakeBlendRange(0.05 + (rand.nextDouble() * 0.5))
+				.lakeDepth(rand.nextInt(40) + 5)
+				.lakeScale(40.0D + (rand.nextDouble() * 30.0D))
+				.lakeThreshold(rand.nextDouble() * 0.3)
+				.maxTerrainHeight(10 + rand.nextInt(50))
+				.terraces(rand.nextInt(20) == 0)
+				.lakeConcentrationModifier(0.5 + (rand.nextDouble() * -2.5))
+				.magneticPillars(true));
 	}
 
 	@Override
@@ -52,8 +71,8 @@ public class BiomeMagneticHills extends BiomeAetherBase
 		final BlockPos center = new BlockPos(islandData.getBounds().getCenterX(), 0, islandData.getBounds().getCenterZ());
 
 		components
-				.add(new MagneticHillsData(center, islandData.getSeed(), 200,
-						300));
+				.add(new MagneticHillsData(center, islandData.getSeed(), 300,
+						600));
 
 		return components;
 	}

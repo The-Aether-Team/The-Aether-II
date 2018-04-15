@@ -15,7 +15,7 @@ import com.gildedgames.aether.common.registry.content.GenerationAether;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.island.ChunkGeneratorAether;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandGeneratorArcticPeaks;
-import com.gildedgames.aether.common.world.aether.island.gen.IslandGenerators;
+import com.gildedgames.aether.common.world.aether.island.gen.IslandVariables;
 import com.gildedgames.aether.common.world.aether.island.gen.highlands.IslandGeneratorHighlands;
 import com.gildedgames.aether.common.world.templates.TemplateWorldGen;
 import com.gildedgames.orbis.api.processing.IBlockAccessExtended;
@@ -56,7 +56,30 @@ public class BiomeArcticPeaks extends BiomeAetherBase
 	@Override
 	public IIslandGenerator createIslandGenerator(Random rand)
 	{
-		return IslandGenerators.ARCTIC_PEAKS;
+		int coastHeight = rand.nextInt(3);
+		double coastSpread = rand.nextDouble() * 0.6;
+
+		if (coastHeight == 0)
+		{
+			coastSpread = 0.0;
+		}
+
+		double mountainAmplitude = 2.0 + (rand.nextDouble() * 2.0);
+
+		boolean hasTerraces = rand.nextInt(30) == 0;
+
+		return new IslandGeneratorHighlands(IslandVariables.build()
+				.coastHeight(coastHeight)
+				.coastSpread(coastSpread)
+				.lakeBlendRange(0.05 + (rand.nextDouble() * 0.5))
+				.lakeDepth(rand.nextInt(40) + 5)
+				.lakeScale(40.0D + (rand.nextDouble() * 30.0D))
+				.lakeThreshold(rand.nextDouble() * 0.3)
+				.maxTerrainHeight(80 + rand.nextInt(60))
+				.terraces(hasTerraces)
+				.lakeConcentrationModifier(0.5 + (rand.nextDouble() * -2.5))
+				.heightSampleFilter((heightSample) -> Math.min(1.1, Math.pow(heightSample, mountainAmplitude) * 0.55))
+				.snowCaps(!hasTerraces));
 	}
 
 	@Override
@@ -125,7 +148,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase
 						// Get distance from center of Island
 						final double dist = Math.sqrt(distX * distX + distZ * distZ) / 1.0D;
 
-						final double sample = IslandGeneratorHighlands.interpolate(heightMap, x, z);
+						final double sample = IslandGeneratorArcticPeaks.interpolate(heightMap, x, z);
 						final double heightSample = sample + 1.0 - dist;
 
 						final BlockPos blockpos1 = p.add(0, world.getHeight(posX + x, posZ + z), 0);

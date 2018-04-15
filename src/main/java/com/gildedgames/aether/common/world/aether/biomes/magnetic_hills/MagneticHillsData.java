@@ -46,12 +46,13 @@ public class MagneticHillsData implements NBT
 				final boolean negPillar = rand.nextInt(4) == 0;
 
 				final BlockPos pos = this.center
-						.add(rand.nextInt(this.spawnRadius) * (rand.nextBoolean() ? -1 : 1), rand.nextInt(30) * (negPillar ? -1 : 1) + (negPillar ? -50 : 10),
+						.add(rand.nextInt(this.spawnRadius) * (rand.nextBoolean() ? -1 : 1),
+								(negPillar ? -rand.nextInt(30) : rand.nextInt(30)) + (negPillar ? -50 : 10),
 								rand.nextInt(this.spawnRadius) * (rand.nextBoolean() ? -1 : 1));
 
 				final float elongationMod = (rand.nextFloat() * 0.5F) + 0.25F;
 				final int topHeight = rand.nextInt(10) + 30;
-				final double radius = (rand.nextDouble() * 20.0D) + 5D;
+				final double radius = (rand.nextDouble() * 20.0D) + 15D;
 
 				final MagneticHillPillar pillar = new MagneticHillPillar(elongationMod, topHeight, pos, radius);
 

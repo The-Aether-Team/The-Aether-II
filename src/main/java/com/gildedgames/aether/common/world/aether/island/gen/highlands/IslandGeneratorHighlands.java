@@ -6,13 +6,19 @@ import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
+import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.MagneticHillPillar;
+import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.MagneticHillsData;
+import com.gildedgames.aether.common.world.aether.island.gen.IslandVariables;
 import com.gildedgames.orbis.api.processing.IBlockAccessExtended;
+import com.gildedgames.orbis.api.util.ObjectFilter;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
+
+import java.util.Random;
 
 public class IslandGeneratorHighlands implements IIslandGenerator
 {
@@ -22,13 +28,15 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 	// Number of samples done per chunk.
 	private static final int NOISE_SAMPLES = NOISE_XZ_SCALE + 1;
 
-	private boolean terraces = true;
+	private final Random magneticShaftsRand = new Random();
 
-	private int maxTerrainHeight = 80;
+	private IslandVariables v;
 
-	public IslandGeneratorHighlands()
+	private MagneticHillPillar currentPillar;
+
+	public IslandGeneratorHighlands(IslandVariables variables)
 	{
-
+		this.v = variables;
 	}
 
 	public static double interpolate(final double[] data, final int x, final int z)
@@ -85,30 +93,18 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 		return data;
 	}
 
-	public IslandGeneratorHighlands terraces(boolean flag)
-	{
-		this.terraces = flag;
-
-		return this;
-	}
-
-	public IslandGeneratorHighlands maxTerrainHeight(int maxTerrainHeight)
-	{
-		this.maxTerrainHeight = maxTerrainHeight;
-
-		return this;
-	}
-
 	@Override
 	public void genIslandForChunk(final OpenSimplexNoise noise, final IBlockAccessExtended access, final ChunkPrimer primer, final IIslandData island,
 			final int chunkX,
 			final int chunkZ)
 	{
 		final double[] heightMap = generateNoise(noise, island, chunkX, chunkZ, 0, 300.0D);
-		final double[] terraceMap = this.terraces ? generateNoise(noise, island, chunkX, chunkZ, 1000, 300.0D) : null;
+		final double[] terraceMap = this.v.hasTerraces() ? generateNoise(noise, island, chunkX, chunkZ, 1000, 300.0D) : null;
 		//final double[] quicksoilMap = NoiseUtil.something(noise, island, chunkX, chunkZ, 2000, 200D);
 
 		final Biome biome = access.getServerBiome(new BlockPos(chunkX * 16, 0, chunkZ * 16));
+
+		final MagneticHillsData magneticHillsData = ObjectFilter.getFirstFrom(island.getComponents(), MagneticHillsData.class);
 
 		IBlockState coastBlock = ((BiomeAetherBase) biome).getCoastalBlock();
 		IBlockState stoneBlock = BlocksAether.holystone.getDefaultState();
@@ -129,6 +125,8 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 		{
 			for (int z = 0; z < 16; z++)
 			{
+				this.magneticShaftsRand.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
+
 				final int worldX = posX + x;
 				final int worldZ = posZ + z;
 
@@ -142,9 +140,11 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 
 				final double heightSample = sample + 1.0 - dist;
 
-				final double bottomMaxY = 100;
+				boolean magnetic = false;
 
-				final double topHeight = this.maxTerrainHeight;
+				double bottomMaxY = 100;
+
+				final double topHeight = magnetic ? this.currentPillar.getTopHeight() : this.v.getMaxTerrainHeight();
 
 				final double cutoffPoint = 0.325;
 
@@ -154,36 +154,38 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 
 				double bottomHeightMod = Math.pow(normal, 0.2);
 
-				final double bottomHeight = 100;
+				double bottomHeight = 100;
 
-				double topSample = heightSample;
+				double filteredSample = this.v.getHeightSampleFilter().apply(heightSample);
 
-				if (this.terraces)
+				if (this.v.hasTerraces())
 				{
 					final double terraceSample = interpolate(terraceMap, x, z) + 1.0;
 
-					topSample = NoiseUtil.lerp(heightSample, terraceSample - diff > 0.7 ? terraceSample - diff : heightSample, 0.7);
+					filteredSample = NoiseUtil.lerp(heightSample, terraceSample - diff > 0.7 ? terraceSample - diff : heightSample, 0.7);
+
+					filteredSample = Math.pow(filteredSample, 1.0 + (this.v.getCoastSpread() * 0.25));
 				}
 
-				final double nx = (worldX) / 65D;
-				final double nz = (worldZ) / 65D;
+				final double nx = (worldX) / this.v.getLakeScale();
+				final double nz = (worldZ) / this.v.getLakeScale();
 
 				double sampleQuicksoil = NoiseUtil.something(noise, nx, nz);
 
 				double dif = MathHelper.clamp(Math.abs(cutoffPoint - heightSample) * 10.0, 0.0, 1.0);
 
-				double quicksoil = sampleQuicksoil * dif;
+				double quicksoil = (sampleQuicksoil + this.v.getLakeConcentrationModifier()) * dif;
 				double waterBottomValue = cutoffPoint;
 
 				boolean water = false;
 
-				if (quicksoil > 0.2)
+				if (quicksoil > this.v.getLakeThreshold())
 				{
-					if (quicksoil < 0.7)
+					if (quicksoil < this.v.getLakeThreshold() + this.v.getLakeBlendRange())
 					{
-						double blend = (quicksoil - 0.2) * 2.0;
+						double blend = (quicksoil - this.v.getLakeThreshold()) * (1.0 / this.v.getLakeBlendRange());
 
-						topSample = NoiseUtil.lerp(topSample, waterBottomValue, blend);
+						filteredSample = NoiseUtil.lerp(filteredSample, waterBottomValue, blend);
 					}
 					else
 					{
@@ -191,11 +193,40 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 					}
 				}
 
+				double magneticSample = filteredSample;
+
+				if (this.v.hasMagneticPillars())
+				{
+					if (magneticHillsData != null)
+					{
+						magneticSample = this.shapeMagneticShafts(magneticHillsData, magneticSample, x, z, chunkX, chunkZ);
+					}
+
+					if (magneticSample > 0.5)
+					{
+						magnetic = true;
+					}
+				}
+
+				if (magnetic)
+				{
+					bottomMaxY += this.currentPillar.getPos().getY();
+					bottomHeight = 55;
+				}
+
+				double sampleToUse = magnetic ? magneticSample : filteredSample;
+
 				if (heightSample > cutoffPoint)
 				{
 					if (heightSample < cutoffPoint + 0.1)
 					{
-						bottomHeightMod = cutoffPointDist * heightSample * 16.0;
+						bottomHeightMod = cutoffPointDist * sampleToUse * 16.0;
+					}
+
+					if (magnetic)
+					{
+						bottomHeightMod = Math.min(1.0, (sampleToUse - cutoffPoint) * 1.4);
+						bottomHeightMod = Math.min(bottomHeightMod, bottomHeightMod * this.currentPillar.getElongationMod());
 					}
 
 					for (int y = (int) bottomMaxY; y > bottomMaxY - (bottomHeight * bottomHeightMod); y--)
@@ -205,47 +236,39 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 							continue;
 						}
 
-						if (coastBlock != null && heightSample < cutoffPoint + 0.025 && y == 100)
-						{
-							primer.setBlockState(x, y, z, coastBlock);
-						}
-						else
-						{
-							primer.setBlockState(x, y, z, stoneBlock);
-						}
+						primer.setBlockState(x, y, z, magnetic ? BlocksAether.ferrosite.getDefaultState() : stoneBlock);
 					}
 
-					double maxY = bottomMaxY + ((topSample - cutoffPoint) * topHeight);
-					double waterHeight = bottomMaxY + ((waterBottomValue - cutoffPoint) * topHeight);
+					double maxY = bottomMaxY + ((filteredSample - cutoffPoint) * topHeight);
 
-					if (water)
+					if (water && !magnetic)
 					{
 						maxY = bottomMaxY + ((waterBottomValue - cutoffPoint) * topHeight);
 					}
 
 					for (int y = (int) bottomMaxY; y < maxY; y++)
 					{
-						if (coastBlock != null && (topSample < cutoffPoint + 0.025 && y == 100))
+						if (this.v.hasSnowCaps() && filteredSample > 0.7 && y > maxY - 8)
 						{
-							primer.setBlockState(x, y, z, coastBlock);
+							primer.setBlockState(x, y, z, Blocks.SNOW.getDefaultState());
 						}
 						else
 						{
-							primer.setBlockState(x, y, z, stoneBlock);
+							primer.setBlockState(x, y, z, magnetic ? BlocksAether.ferrosite.getDefaultState() : stoneBlock);
 						}
 
-						if (quicksoil >= 0.2)
+						if (quicksoil >= this.v.getLakeThreshold())
 						{
-							if (y >= waterHeight && y < waterHeight + 2)
+							if (y >= 100 && y <= 100 + this.v.getCoastHeight() - 1)
 							{
 								primer.setBlockState(x, y, z, coastBlock);
 							}
 						}
 					}
 
-					if (quicksoil >= 0.2 && water)
+					if (water && !magnetic)
 					{
-						double minY = maxY - ((Math.max(0.0, quicksoil - 0.7)) * 25);
+						double minY = maxY - ((Math.max(0.0, quicksoil - (this.v.getLakeThreshold() + this.v.getLakeBlendRange()))) * this.v.getLakeDepth());
 
 						for (int y = (int) maxY; y > minY - 1; y--)
 						{
@@ -259,9 +282,53 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 							}
 						}
 					}
+
+					if (this.v.getCoastHeight() > 0)
+					{
+						for (int y = 255; y > 0; y--)
+						{
+							IBlockState found = primer.getBlockState(x, y, z);
+
+							if (found == stoneBlock)
+							{
+								if (y >= 100 && y <= 100 + this.v.getCoastHeight() - 1)
+								{
+									primer.setBlockState(x, y, z, coastBlock);
+								}
+
+								break;
+							}
+						}
+					}
 				}
 			}
 		}
+	}
+
+	private double shapeMagneticShafts(final MagneticHillsData data, final double magneticSample, final int x, final int z, final int chunkX, final int chunkZ)
+	{
+		final int worldX = (chunkX * 16) + x;
+		final int worldZ = (chunkZ * 16) + z;
+
+		double closestDistX = Double.MAX_VALUE;
+		double closestDistZ = Double.MAX_VALUE;
+
+		for (final MagneticHillPillar p : data.getMagneticPillars())
+		{
+			final double distX = Math.abs((p.getPos().getX() - worldX) * (1.0 / p.getRadius()));
+			final double distZ = Math.abs((p.getPos().getZ() - worldZ) * (1.0 / p.getRadius()));
+
+			if (distX + distZ < closestDistX + closestDistZ)
+			{
+				closestDistX = distX;
+				closestDistZ = distZ;
+				this.currentPillar = p;
+			}
+		}
+
+		final double closestDist = Math.sqrt(closestDistX * closestDistX + closestDistZ * closestDistZ);
+
+		return magneticSample - closestDist;
 	}
 
 }
