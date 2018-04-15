@@ -43,7 +43,7 @@ public class BiomeHighlands extends BiomeAetherBase
 	{
 		int range = rand.nextInt(20);
 
-		if (range < 5)
+		if (range < 3)
 		{
 			return IslandGenerators.HIGHLAND_MEGACOAST;
 		}
