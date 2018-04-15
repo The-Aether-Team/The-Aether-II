@@ -78,6 +78,20 @@ public class IslandVariables implements NBT
 	 */
 	private boolean magneticPillars;
 
+	/**
+	 * A max y filter which allows the variables to change the maxY as they see fit.
+	 *
+	 * Default filter returns the filter sample multiplied by the top height of the island, negating the cutoff point.
+	 */
+	private MaxYFilter maxYFilter = (bottomMaxY, filteredSample, cutoffPoint, topHeight) -> bottomMaxY + ((filteredSample - cutoffPoint) * topHeight);
+
+	/**
+	 * A filter which allows the variables to change the bottom value of the water/lakes.
+	 *
+	 * Default filter returns original value.
+	 */
+	private Function<Double, Double> lakeBottomValueFilter = (lakeBottomValue) -> lakeBottomValue;
+
 	private IslandVariables()
 	{
 
@@ -86,6 +100,16 @@ public class IslandVariables implements NBT
 	public static IslandVariables build()
 	{
 		return new IslandVariables();
+	}
+
+	public Function<Double, Double> getLakeBottomValueFilter()
+	{
+		return this.lakeBottomValueFilter;
+	}
+
+	public MaxYFilter getMaxYFilter()
+	{
+		return this.maxYFilter;
 	}
 
 	public boolean hasSnowCaps()
@@ -232,6 +256,20 @@ public class IslandVariables implements NBT
 		return this;
 	}
 
+	public IslandVariables maxYFilter(MaxYFilter maxYFilter)
+	{
+		this.maxYFilter = maxYFilter;
+
+		return this;
+	}
+
+	public IslandVariables lakeBottomValueFilter(Function<Double, Double> lakeBottomValueFilter)
+	{
+		this.lakeBottomValueFilter = lakeBottomValueFilter;
+
+		return this;
+	}
+
 	@Override
 	public void write(NBTTagCompound tag)
 	{
@@ -256,5 +294,10 @@ public class IslandVariables implements NBT
 		this.maxTerrainHeight = tag.getInteger("maxTerrainHeight");
 		this.terraces = tag.getBoolean("terraces");
 		this.lakeDepth = tag.getInteger("lakeDepth");
+	}
+
+	public interface MaxYFilter
+	{
+		double maxY(double bottomMaxY, double filteredSample, double cutoffPoint, double topHeight);
 	}
 }

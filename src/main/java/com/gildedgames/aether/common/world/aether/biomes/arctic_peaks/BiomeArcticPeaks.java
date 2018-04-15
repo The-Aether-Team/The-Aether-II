@@ -64,7 +64,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase
 			coastSpread = 0.0;
 		}
 
-		double mountainAmplitude = 2.0 + (rand.nextDouble() * 2.0);
+		double mountainAmplitude = 4.0;
 
 		boolean hasTerraces = rand.nextInt(30) == 0;
 
@@ -75,11 +75,14 @@ public class BiomeArcticPeaks extends BiomeAetherBase
 				.lakeDepth(rand.nextInt(40) + 5)
 				.lakeScale(40.0D + (rand.nextDouble() * 30.0D))
 				.lakeThreshold(rand.nextDouble() * 0.3)
-				.maxTerrainHeight(80 + rand.nextInt(60))
+				.maxTerrainHeight(80 + rand.nextInt(70))
 				.terraces(hasTerraces)
 				.lakeConcentrationModifier(0.5 + (rand.nextDouble() * -2.5))
 				.heightSampleFilter((heightSample) -> Math.min(1.1, Math.pow(heightSample, mountainAmplitude) * 0.55))
-				.snowCaps(!hasTerraces));
+				.snowCaps(!hasTerraces)
+				.maxYFilter((bottomMaxY, filteredSample, cutoffPoint, topHeight) -> bottomMaxY + ((filteredSample - (hasTerraces ? cutoffPoint : 0.0))
+						* topHeight))
+				.lakeBottomValueFilter((lakeBottomValue) -> 0.0));
 	}
 
 	@Override

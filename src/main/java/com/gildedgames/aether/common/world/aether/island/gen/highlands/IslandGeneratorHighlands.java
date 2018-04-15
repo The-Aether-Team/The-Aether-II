@@ -144,8 +144,6 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 
 				double bottomMaxY = 100;
 
-				final double topHeight = magnetic ? this.currentPillar.getTopHeight() : this.v.getMaxTerrainHeight();
-
 				final double cutoffPoint = 0.325;
 
 				final double normal = NoiseUtil.normalise(sample);
@@ -163,29 +161,29 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 					final double terraceSample = interpolate(terraceMap, x, z) + 1.0;
 
 					filteredSample = NoiseUtil.lerp(heightSample, terraceSample - diff > 0.7 ? terraceSample - diff : heightSample, 0.7);
-
-					filteredSample = Math.pow(filteredSample, 1.0 + (this.v.getCoastSpread() * 0.25));
 				}
 
-				final double nx = (worldX) / this.v.getLakeScale();
-				final double nz = (worldZ) / this.v.getLakeScale();
+				filteredSample = Math.pow(filteredSample, 1.0 + (this.v.getCoastSpread() * 0.25));
 
-				double sampleQuicksoil = NoiseUtil.something(noise, nx, nz);
+				final double lakeX = (worldX) / this.v.getLakeScale();
+				final double lakeZ = (worldZ) / this.v.getLakeScale();
+
+				double lakeSample = NoiseUtil.something(noise, lakeX, lakeZ);
 
 				double dif = MathHelper.clamp(Math.abs(cutoffPoint - heightSample) * 10.0, 0.0, 1.0);
 
-				double quicksoil = (sampleQuicksoil + this.v.getLakeConcentrationModifier()) * dif;
-				double waterBottomValue = cutoffPoint;
+				double lakeNoise = (lakeSample + this.v.getLakeConcentrationModifier()) * dif;
+				double lakeBottomValue = this.v.getLakeBottomValueFilter().apply(cutoffPoint);
 
 				boolean water = false;
 
-				if (quicksoil > this.v.getLakeThreshold())
+				if (lakeNoise > this.v.getLakeThreshold())
 				{
-					if (quicksoil < this.v.getLakeThreshold() + this.v.getLakeBlendRange())
+					if (lakeNoise < this.v.getLakeThreshold() + this.v.getLakeBlendRange())
 					{
-						double blend = (quicksoil - this.v.getLakeThreshold()) * (1.0 / this.v.getLakeBlendRange());
+						double blend = (lakeNoise - this.v.getLakeThreshold()) * (1.0 / this.v.getLakeBlendRange());
 
-						filteredSample = NoiseUtil.lerp(filteredSample, waterBottomValue, blend);
+						filteredSample = NoiseUtil.lerp(filteredSample, lakeBottomValue, blend);
 					}
 					else
 					{
@@ -214,7 +212,9 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 					bottomHeight = 55;
 				}
 
-				double sampleToUse = magnetic ? magneticSample : filteredSample;
+				double sampleToUse = magnetic ? magneticSample : heightSample;
+
+				final double topHeight = magnetic ? this.currentPillar.getTopHeight() : this.v.getMaxTerrainHeight();
 
 				if (heightSample > cutoffPoint)
 				{
@@ -239,11 +239,11 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 						primer.setBlockState(x, y, z, magnetic ? BlocksAether.ferrosite.getDefaultState() : stoneBlock);
 					}
 
-					double maxY = bottomMaxY + ((filteredSample - cutoffPoint) * topHeight);
+					double maxY = this.v.getMaxYFilter().maxY(bottomMaxY, filteredSample, cutoffPoint, topHeight);
 
 					if (water && !magnetic)
 					{
-						maxY = bottomMaxY + ((waterBottomValue - cutoffPoint) * topHeight);
+						maxY = bottomMaxY;
 					}
 
 					for (int y = (int) bottomMaxY; y < maxY; y++)
@@ -257,7 +257,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 							primer.setBlockState(x, y, z, magnetic ? BlocksAether.ferrosite.getDefaultState() : stoneBlock);
 						}
 
-						if (quicksoil >= this.v.getLakeThreshold())
+						if (lakeNoise >= this.v.getLakeThreshold())
 						{
 							if (y >= 100 && y <= 100 + this.v.getCoastHeight() - 1)
 							{
@@ -268,7 +268,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 
 					if (water && !magnetic)
 					{
-						double minY = maxY - ((Math.max(0.0, quicksoil - (this.v.getLakeThreshold() + this.v.getLakeBlendRange()))) * this.v.getLakeDepth());
+						double minY = maxY - ((Math.max(0.0, lakeNoise - (this.v.getLakeThreshold() + this.v.getLakeBlendRange()))) * this.v.getLakeDepth());
 
 						for (int y = (int) maxY; y > minY - 1; y--)
 						{
