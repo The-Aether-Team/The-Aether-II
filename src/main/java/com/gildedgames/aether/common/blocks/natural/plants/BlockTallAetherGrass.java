@@ -1,16 +1,17 @@
 package com.gildedgames.aether.common.blocks.natural.plants;
 
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.IBlockMultiName;
 import com.gildedgames.aether.common.blocks.IBlockSnowy;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
+import com.gildedgames.aether.common.registry.content.BiomesAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSnow;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -25,6 +26,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.IShearable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -76,14 +78,17 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 	public IBlockState getActualState(final IBlockState state, final IBlockAccess worldIn, final BlockPos pos)
 	{
 		final IBlockState downState = worldIn.getBlockState(pos.down());
+		boolean emptyDown = downState.getBlock() != BlocksAether.aether_grass;
 
 		final Type type;
 
-		if (downState == ARCTIC_GRASS)
+		Biome biome = AetherCore.isClient() ? worldIn.getBiome(pos) : null;
+
+		if (downState == ARCTIC_GRASS || (emptyDown && biome == BiomesAether.ARCTIC_PEAKS))
 		{
 			type = Type.ARCTIC;
 		}
-		else if (downState == MAGNETIC_GRASS)
+		else if (downState == MAGNETIC_GRASS || (emptyDown && biome == BiomesAether.MAGNETIC_HILLS))
 		{
 			type = Type.MAGNETIC;
 		}
@@ -91,7 +96,7 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 		{
 			type = Type.ENCHANTED;
 		}
-		else if (downState == IRRADIATED_GRASS)
+		else if (downState == IRRADIATED_GRASS || (emptyDown && biome == BiomesAether.IRRADIATED_FORESTS))
 		{
 			type = Type.IRRADIATED;
 		}
@@ -143,10 +148,12 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 
 		if (state.getValue(PROPERTY_SNOWY))
 		{
-			world.setBlockState(pos, Blocks.SNOW_LAYER.getDefaultState().withProperty(BlockSnow.LAYERS, 1), 2);
+			if (world.getBlockState(pos.down()) != Blocks.AIR.getDefaultState())
+			{
+				world.setBlockState(pos, Blocks.SNOW_LAYER.getDefaultState().withProperty(BlockSnow.LAYERS, 1), 2);
+			}
 		}
 	}
-
 
 	@Override
 	@SideOnly(Side.CLIENT)

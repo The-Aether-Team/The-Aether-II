@@ -57,7 +57,7 @@ public class CapabilityManagerAether
 		final World world = event.getObject();
 
 		// Attach only to worlds of the Aether dimension on the server
-		if (!world.isRemote && world.provider.getDimensionType() == DimensionsAether.AETHER)
+		if (world.provider.getDimensionType() == DimensionsAether.AETHER)
 		{
 			event.addCapability(AetherCore.getResource("SectorAccess"), new SectorStorageProvider(world));
 		}

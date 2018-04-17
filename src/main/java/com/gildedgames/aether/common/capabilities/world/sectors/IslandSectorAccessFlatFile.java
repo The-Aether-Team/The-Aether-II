@@ -6,6 +6,7 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.util.ChunkMap;
 import com.gildedgames.aether.common.world.aether.island.data.IslandSector;
 import com.gildedgames.aether.common.world.aether.island.data.IslandSectorFactory;
+import com.gildedgames.orbis.api.world.WorldObjectManager;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
@@ -275,7 +276,8 @@ public class IslandSectorAccessFlatFile implements ISectorAccess
 	@Nonnull
 	private ISector generateSector(final int sectorX, final int sectorZ)
 	{
-		final long seed = this.world.getSeed() ^ ((long) sectorX * 341873128712L + (long) sectorZ * 132897987541L);
+		final long seed =
+				WorldObjectManager.getWorldSeed(this.world.provider.getDimension()) ^ ((long) sectorX * 341873128712L + (long) sectorZ * 132897987541L);
 
 		final ISector sector = IslandSectorFactory.create(this.world, sectorX, sectorZ, seed);
 		sector.markDirty();

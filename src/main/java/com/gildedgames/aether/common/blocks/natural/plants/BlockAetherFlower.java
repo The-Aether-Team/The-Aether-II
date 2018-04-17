@@ -93,7 +93,10 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 	{
 		if (state.getValue(PROPERTY_SNOWY))
 		{
-			worldIn.setBlockState(pos, Blocks.SNOW_LAYER.getDefaultState().withProperty(BlockSnow.LAYERS, 1), 2);
+			if (worldIn.getBlockState(pos.down()) != Blocks.AIR.getDefaultState())
+			{
+				worldIn.setBlockState(pos, Blocks.SNOW_LAYER.getDefaultState().withProperty(BlockSnow.LAYERS, 1), 2);
+			}
 		}
 	}
 
