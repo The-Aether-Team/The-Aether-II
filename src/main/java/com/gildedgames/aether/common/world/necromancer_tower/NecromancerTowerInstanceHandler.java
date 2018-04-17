@@ -47,7 +47,7 @@ public class NecromancerTowerInstanceHandler
 
 		final World world = this.handler.teleportPlayerToDimension(inst, player);
 
-		player.connection.setPlayerLocation(inst.getInsideEntrance().getX(), inst.getInsideEntrance().getY(), inst.getInsideEntrance().getZ(), 270, 0);
+		player.connection.setPlayerLocation(inst.getInsideEntrance().getX(), inst.getInsideEntrance().getY(), inst.getInsideEntrance().getZ(), 215, 0);
 
 		inst.onJoin(player);
 	}
