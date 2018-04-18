@@ -144,7 +144,10 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 	@Override
 	public void advance()
 	{
-		this.sceneInstance.forwards();
+		if (this.sceneInstance != null)
+		{
+			this.sceneInstance.forwards();
+		}
 	}
 
 	@Override
