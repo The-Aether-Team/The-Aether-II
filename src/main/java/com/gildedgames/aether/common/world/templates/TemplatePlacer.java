@@ -56,16 +56,18 @@ public class TemplatePlacer
 
 		loc.getSettings().setRotation(rotation);
 
+		TemplateLoc before = loc.clone();
+
 		if (loc.isCentered())
 		{
 			loc.set(TemplateUtil.getCenteredPos(def, loc));
 		}
 
-		final boolean result = TemplatePrimer.canGenerate(placeWith, def, loc);
+		final boolean result = TemplatePrimer.canGenerate(placeWith, def, before);
 
 		if (result)
 		{
-			TemplatePrimer.generateTemplate(placeWith, def, loc);
+			TemplatePrimer.generateTemplate(placeWith, def, before);
 
 			if (placeWith.getWorld() != null)
 			{
