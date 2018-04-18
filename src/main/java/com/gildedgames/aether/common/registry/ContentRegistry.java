@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.registry;
 
 import com.gildedgames.aether.api.dialog.IDialogManager;
 import com.gildedgames.aether.api.recipes.altar.IAltarRecipeRegistry;
+import com.gildedgames.aether.api.recipes.simple.ISimpleCraftingRegistry;
 import com.gildedgames.aether.api.registry.IContentRegistry;
 import com.gildedgames.aether.api.registry.IEffectRegistry;
 import com.gildedgames.aether.api.registry.IItemPropertiesRegistry;
@@ -48,6 +49,8 @@ public class ContentRegistry implements IContentRegistry
 
 	private final RecipeIndexRegistry craftableItemsIndex = new RecipeIndexRegistry();
 
+	private final SimpleCraftingRegistry simpleCraftingRegistry = new SimpleCraftingRegistry();
+
 	private boolean hasPreInit = false, hasInit = false;
 
 	public void preInit()
@@ -83,6 +86,7 @@ public class ContentRegistry implements IContentRegistry
 		PerfHelper.measure("Initialize recipes", RecipesAether::init);
 		PerfHelper.measure("Initialize instances", InstancesAether::init);
 		PerfHelper.measure("Initialize recipe indexes", this::rebuildIndexes);
+		PerfHelper.measure("Initialize simple recipes", SimpleRecipesAether::postInit);
 
 		this.hasInit = true;
 	}
@@ -150,5 +154,11 @@ public class ContentRegistry implements IContentRegistry
 	public IStructureLoader structures()
 	{
 		return this.structureLoader;
+	}
+
+	@Override
+	public ISimpleCraftingRegistry masonry()
+	{
+		return this.simpleCraftingRegistry;
 	}
 }

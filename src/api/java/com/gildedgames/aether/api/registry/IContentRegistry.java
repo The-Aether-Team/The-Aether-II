@@ -2,6 +2,7 @@ package com.gildedgames.aether.api.registry;
 
 import com.gildedgames.aether.api.dialog.IDialogManager;
 import com.gildedgames.aether.api.recipes.altar.IAltarRecipeRegistry;
+import com.gildedgames.aether.api.recipes.simple.ISimpleCraftingRegistry;
 import com.gildedgames.aether.api.registry.recipes.IRecipeIndexRegistry;
 import com.gildedgames.aether.api.registry.tab.ITabRegistry;
 import com.gildedgames.aether.api.structure.IStructureLoader;
@@ -52,4 +53,6 @@ public interface IContentRegistry
 	 * @return The {@link IStructureLoader} provider for the Aether.
 	 */
 	IStructureLoader structures();
+
+	ISimpleCraftingRegistry masonry();
 }

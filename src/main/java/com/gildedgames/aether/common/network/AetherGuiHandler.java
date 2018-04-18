@@ -3,11 +3,13 @@ package com.gildedgames.aether.common.network;
 import com.gildedgames.aether.client.gui.container.GuiEquipment;
 import com.gildedgames.aether.client.gui.container.GuiIcestoneCooler;
 import com.gildedgames.aether.client.gui.container.GuiIncubator;
+import com.gildedgames.aether.client.gui.container.simple_crafting.GuiMasonryBench;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.containers.ContainerCustomWorkbench;
 import com.gildedgames.aether.common.containers.ContainerEquipment;
 import com.gildedgames.aether.common.containers.tiles.ContainerIcestoneCooler;
 import com.gildedgames.aether.common.containers.tiles.ContainerIncubator;
+import com.gildedgames.aether.common.containers.tiles.ContainerMasonryBench;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiCrafting;
 import net.minecraft.entity.player.EntityPlayer;
@@ -47,8 +49,8 @@ public class AetherGuiHandler implements IGuiHandler
 				return new ContainerIcestoneCooler(player.inventory, (IInventory) world.getTileEntity(pos));
 			case INCUBATOR_ID:
 				return new ContainerIncubator(player.inventory, (IInventory) world.getTileEntity(pos));
-			//			case MASONRY_BENCH_ID:
-			//				return new ContainerMasonryBench(player, new BlockPos(x, y, z));
+			case MASONRY_BENCH_ID:
+				return new ContainerMasonryBench(player, new BlockPos(x, y, z));
 			default:
 				return null;
 		}
@@ -70,8 +72,8 @@ public class AetherGuiHandler implements IGuiHandler
 				return new GuiIcestoneCooler(player.inventory, (IInventory) world.getTileEntity(pos));
 			case INCUBATOR_ID:
 				return new GuiIncubator(player.inventory, (IInventory) world.getTileEntity(pos), pos);
-			//			case MASONRY_BENCH_ID:
-			//				return new GuiMasonryBench(player, new BlockPos(x, y, z));
+			case MASONRY_BENCH_ID:
+				return new GuiMasonryBench(player, new BlockPos(x, y, z));
 			default:
 				return null;
 		}

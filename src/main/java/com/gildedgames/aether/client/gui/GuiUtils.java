@@ -1,14 +1,20 @@
 package com.gildedgames.aether.client.gui;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import org.lwjgl.opengl.GL11;
+
+import java.util.List;
 
 public class GuiUtils
 {
 
-	public static void drawGradientRect(final int left, final int top, final int right, final int bottom, final int startColor, final int endColor)
+	public static void drawGradientRect(final float left, final float top, final float right, final float bottom, final int startColor, final int endColor)
 	{
 		final float f = (float) (startColor >> 24 & 255) / 255.0F;
 		final float f1 = (float) (startColor >> 16 & 255) / 255.0F;
@@ -37,6 +43,41 @@ public class GuiUtils
 		GlStateManager.disableBlend();
 		GlStateManager.enableAlpha();
 		GlStateManager.enableTexture2D();
+	}
+
+	public static void drawHoveringText(List<String> textLines, int x, int y, FontRenderer font)
+	{
+		GuiScreen gui = Minecraft.getMinecraft().currentScreen;
+
+		if (gui == null)
+		{
+			return;
+		}
+
+		net.minecraftforge.fml.client.config.GuiUtils.drawHoveringText(textLines, x, y, gui.width, gui.height, -1, font);
+	}
+
+	public static void drawDescriptionBackground(float x, float y, float width, float height)
+	{
+		GL11.glPushMatrix();
+		GuiUtils.drawTextBackground(x, y, width, height);
+		GL11.glPopMatrix();
+	}
+
+	private static void drawTextBackground(float cornerX, float cornerY, float width, float height)
+	{
+		final int l1 = -267386864;
+		GuiUtils.drawGradientRect(cornerX - 3, cornerY - 4, cornerX + width + 3, cornerY - 3, l1, l1);
+		GuiUtils.drawGradientRect(cornerX - 3, cornerY + height + 3, cornerX + width + 3, cornerY + height + 4, l1, l1);
+		GuiUtils.drawGradientRect(cornerX - 3, cornerY - 3, cornerX + width + 3, cornerY + height + 3, l1, l1);
+		GuiUtils.drawGradientRect(cornerX - 4, cornerY - 3, cornerX - 3, cornerY + height + 3, l1, l1);
+		GuiUtils.drawGradientRect(cornerX + width + 3, cornerY - 3, cornerX + width + 4, cornerY + height + 3, l1, l1);
+		final int i2 = 1347420415;
+		final int j2 = (i2 & 16711422) >> 1 | i2 & -16777216;
+		GuiUtils.drawGradientRect(cornerX - 3, cornerY - 3 + 1, cornerX - 3 + 1, cornerY + height + 3 - 1, i2, j2);
+		GuiUtils.drawGradientRect(cornerX + width + 2, cornerY - 3 + 1, cornerX + width + 3, cornerY + height + 3 - 1, i2, j2);
+		GuiUtils.drawGradientRect(cornerX - 3, cornerY - 3, cornerX + width + 3, cornerY - 3 + 1, i2, i2);
+		GuiUtils.drawGradientRect(cornerX - 3, cornerY + height + 2, cornerX + width + 3, cornerY + height + 3, j2, j2);
 	}
 
 }
