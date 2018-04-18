@@ -100,7 +100,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 	{
 		final double[] heightMap = generateNoise(noise, island, chunkX, chunkZ, 0, 300.0D);
 		final double[] terraceMap = this.v.hasTerraces() ? generateNoise(noise, island, chunkX, chunkZ, 1000, 300.0D) : null;
-		//final double[] quicksoilMap = NoiseUtil.something(noise, island, chunkX, chunkZ, 2000, 200D);
+		//final double[] quicksoilMap = generateNoise(noise, island, chunkX, chunkZ, 2000, 200D);
 
 		final Biome biome = access.getServerBiome(new BlockPos(chunkX * 16, 0, chunkZ * 16));
 
@@ -125,7 +125,10 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 		{
 			for (int z = 0; z < 16; z++)
 			{
-				this.magneticShaftsRand.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
+				if (this.v.hasMagneticPillars())
+				{
+					this.magneticShaftsRand.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
+				}
 
 				final int worldX = posX + x;
 				final int worldZ = posZ + z;
@@ -204,12 +207,12 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 					{
 						magnetic = true;
 					}
-				}
 
-				if (magnetic)
-				{
-					bottomMaxY += this.currentPillar.getPos().getY();
-					bottomHeight = 55;
+					if (magnetic)
+					{
+						bottomMaxY += this.currentPillar.getPos().getY();
+						bottomHeight = 55;
+					}
 				}
 
 				double sampleToUse = magnetic ? magneticSample : heightSample;
@@ -285,12 +288,19 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 
 					if (this.v.getCoastHeight() > 0)
 					{
-						for (int y = 255; y > 0; y--)
+						for (int y = 100 + this.v.getCoastHeight() - 1; y >= 100; y--)
 						{
 							IBlockState found = primer.getBlockState(x, y, z);
 
 							if (found == stoneBlock)
 							{
+								IBlockState up = primer.getBlockState(x, y + 1, z);
+
+								if (up != Blocks.AIR.getDefaultState())
+								{
+									break;
+								}
+
 								if (y >= 100 && y <= 100 + this.v.getCoastHeight() - 1)
 								{
 									primer.setBlockState(x, y, z, coastBlock);

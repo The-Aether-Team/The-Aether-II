@@ -66,11 +66,6 @@ public class BiomeProviderAether extends BiomeProvider
 	{
 		Arrays.fill(biomes, BiomesAether.VOID);
 
-		if (this.world.isRemote)
-		{
-			//return biomes;
-		}
-
 		final ISectorAccess access = IslandSectorHelper.getAccess(this.world);
 
 		ISector cachedSector = null;
@@ -91,7 +86,7 @@ public class BiomeProviderAether extends BiomeProvider
 
 				if (chunkX != prevChunkX || chunkY != prevChunkY || cachedSector == null)
 				{
-					cachedSector = access.provideSector(chunkX, chunkY);
+					cachedSector = this.world.isRemote ? access.provideSector(chunkX, chunkY) : access.getLoadedSector(chunkX, chunkY).orElse(null);
 
 					prevChunkX = chunkX;
 					prevChunkY = chunkY;
