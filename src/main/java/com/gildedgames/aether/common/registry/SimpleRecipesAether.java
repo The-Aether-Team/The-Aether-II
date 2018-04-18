@@ -18,70 +18,70 @@ public class SimpleRecipesAether
 
 	private static void registerMasonryRecipes()
 	{
-		addMasonry(new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneDecorative.BASE_BRICKS.getMeta()),
+		addMasonry(new ItemStack(BlocksAether.holystone_brick_decorative, 1, BlockHolystoneDecorative.BASE_BRICKS.getMeta()),
 				new ItemStack(BlocksAether.holystone_brick));
-		addMasonry(new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneDecorative.BASE_PILLAR.getMeta()),
+		addMasonry(new ItemStack(BlocksAether.holystone_brick_decorative, 1, BlockHolystoneDecorative.BASE_PILLAR.getMeta()),
 				new ItemStack(BlocksAether.holystone_brick));
-		addMasonry(new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneDecorative.CAPSTONE_BRICKS.getMeta()),
+		addMasonry(new ItemStack(BlocksAether.holystone_brick_decorative, 1, BlockHolystoneDecorative.CAPSTONE_BRICKS.getMeta()),
 				new ItemStack(BlocksAether.holystone_brick));
-		addMasonry(new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneDecorative.CAPSTONE_PILLAR.getMeta()),
+		addMasonry(new ItemStack(BlocksAether.holystone_brick_decorative, 1, BlockHolystoneDecorative.CAPSTONE_PILLAR.getMeta()),
 				new ItemStack(BlocksAether.holystone_brick));
-		addMasonry(new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneDecorative.FLAGSTONES.getMeta()),
+		addMasonry(new ItemStack(BlocksAether.holystone_brick_decorative, 1, BlockHolystoneDecorative.FLAGSTONES.getMeta()),
 				new ItemStack(BlocksAether.holystone_brick));
-		addMasonry(new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneDecorative.HEADSTONE.getMeta()),
+		addMasonry(new ItemStack(BlocksAether.holystone_brick_decorative, 1, BlockHolystoneDecorative.HEADSTONE.getMeta()),
 				new ItemStack(BlocksAether.holystone_brick));
-		addMasonry(new ItemStack(BlocksAether.holystone_brick, 1, BlockHolystoneDecorative.KEYSTONE.getMeta()),
+		addMasonry(new ItemStack(BlocksAether.holystone_brick_decorative, 1, BlockHolystoneDecorative.KEYSTONE.getMeta()),
 				new ItemStack(BlocksAether.holystone_brick));
 		addMasonry(new ItemStack(BlocksAether.holystone_pillar), new ItemStack(BlocksAether.holystone_brick));
 
 		addMasonry(new ItemStack(BlocksAether.faded_holystone_brick),
 				new ItemStack(BlocksAether.holystone_brick));
-		addMasonry(new ItemStack(BlocksAether.faded_holystone_brick, 1, BlockFadedHolystoneDecorative.BASE_BRICKS.getMeta()),
+		addMasonry(new ItemStack(BlocksAether.faded_holystone_brick_decorative, 1, BlockFadedHolystoneDecorative.BASE_BRICKS.getMeta()),
 				new ItemStack(BlocksAether.holystone_brick));
-		addMasonry(new ItemStack(BlocksAether.faded_holystone_brick, 1, BlockFadedHolystoneDecorative.BASE_PILLAR.getMeta()),
+		addMasonry(new ItemStack(BlocksAether.faded_holystone_brick_decorative, 1, BlockFadedHolystoneDecorative.BASE_PILLAR.getMeta()),
 				new ItemStack(BlocksAether.holystone_brick));
-		addMasonry(new ItemStack(BlocksAether.faded_holystone_brick, 1, BlockFadedHolystoneDecorative.CAPSTONE_BRICKS.getMeta()),
+		addMasonry(new ItemStack(BlocksAether.faded_holystone_brick_decorative, 1, BlockFadedHolystoneDecorative.CAPSTONE_BRICKS.getMeta()),
 				new ItemStack(BlocksAether.holystone_brick));
-		addMasonry(new ItemStack(BlocksAether.faded_holystone_brick, 1, BlockFadedHolystoneDecorative.CAPSTONE_PILLAR.getMeta()),
+		addMasonry(new ItemStack(BlocksAether.faded_holystone_brick_decorative, 1, BlockFadedHolystoneDecorative.CAPSTONE_PILLAR.getMeta()),
 				new ItemStack(BlocksAether.holystone_brick));
-		addMasonry(new ItemStack(BlocksAether.faded_holystone_brick, 1, BlockFadedHolystoneDecorative.FLAGSTONES.getMeta()),
+		addMasonry(new ItemStack(BlocksAether.faded_holystone_brick_decorative, 1, BlockFadedHolystoneDecorative.FLAGSTONES.getMeta()),
 				new ItemStack(BlocksAether.holystone_brick));
-		addMasonry(new ItemStack(BlocksAether.faded_holystone_brick, 1, BlockFadedHolystoneDecorative.HEADSTONE.getMeta()),
+		addMasonry(new ItemStack(BlocksAether.faded_holystone_brick_decorative, 1, BlockFadedHolystoneDecorative.HEADSTONE.getMeta()),
 				new ItemStack(BlocksAether.holystone_brick));
-		addMasonry(new ItemStack(BlocksAether.faded_holystone_brick, 1, BlockFadedHolystoneDecorative.KEYSTONE.getMeta()),
+		addMasonry(new ItemStack(BlocksAether.faded_holystone_brick_decorative, 1, BlockFadedHolystoneDecorative.KEYSTONE.getMeta()),
 				new ItemStack(BlocksAether.holystone_brick));
 		addMasonry(new ItemStack(BlocksAether.faded_holystone_pillar),
 				new ItemStack(BlocksAether.holystone_brick));
 
-		addMasonry(new ItemStack(BlocksAether.agiosite_brick, 1, BlockAgiositeDecorative.BASE_BRICKS.getMeta()),
+		addMasonry(new ItemStack(BlocksAether.agiosite_brick_decorative, 1, BlockAgiositeDecorative.BASE_BRICKS.getMeta()),
 				new ItemStack(BlocksAether.agiosite_brick));
-		addMasonry(new ItemStack(BlocksAether.agiosite_brick, 1, BlockAgiositeDecorative.BASE_PILLAR.getMeta()),
+		addMasonry(new ItemStack(BlocksAether.agiosite_brick_decorative, 1, BlockAgiositeDecorative.BASE_PILLAR.getMeta()),
 				new ItemStack(BlocksAether.agiosite_brick));
-		addMasonry(new ItemStack(BlocksAether.agiosite_brick, 1, BlockAgiositeDecorative.CAPSTONE_BRICKS.getMeta()),
+		addMasonry(new ItemStack(BlocksAether.agiosite_brick_decorative, 1, BlockAgiositeDecorative.CAPSTONE_BRICKS.getMeta()),
 				new ItemStack(BlocksAether.agiosite_brick));
-		addMasonry(new ItemStack(BlocksAether.agiosite_brick, 1, BlockAgiositeDecorative.CAPSTONE_PILLAR.getMeta()),
+		addMasonry(new ItemStack(BlocksAether.agiosite_brick_decorative, 1, BlockAgiositeDecorative.CAPSTONE_PILLAR.getMeta()),
 				new ItemStack(BlocksAether.agiosite_brick));
-		addMasonry(new ItemStack(BlocksAether.agiosite_brick, 1, BlockAgiositeDecorative.FLAGSTONES.getMeta()),
+		addMasonry(new ItemStack(BlocksAether.agiosite_brick_decorative, 1, BlockAgiositeDecorative.FLAGSTONES.getMeta()),
 				new ItemStack(BlocksAether.agiosite_brick));
-		addMasonry(new ItemStack(BlocksAether.agiosite_brick, 1, BlockAgiositeDecorative.KEYSTONE.getMeta()),
+		addMasonry(new ItemStack(BlocksAether.agiosite_brick_decorative, 1, BlockAgiositeDecorative.KEYSTONE.getMeta()),
 				new ItemStack(BlocksAether.agiosite_brick));
 		addMasonry(new ItemStack(BlocksAether.agiosite_pillar), new ItemStack(BlocksAether.agiosite_brick));
 
-		addMasonry(new ItemStack(BlocksAether.skyroot_planks, 1, BlockSkyrootDecorative.BASE_PLANKS.getMeta()),
+		addMasonry(new ItemStack(BlocksAether.skyroot_decorative, 1, BlockSkyrootDecorative.BASE_PLANKS.getMeta()),
 				new ItemStack(BlocksAether.skyroot_planks));
-		addMasonry(new ItemStack(BlocksAether.skyroot_planks, 1, BlockSkyrootDecorative.BASE_BEAM.getMeta()),
+		addMasonry(new ItemStack(BlocksAether.skyroot_decorative, 1, BlockSkyrootDecorative.BASE_BEAM.getMeta()),
 				new ItemStack(BlocksAether.skyroot_planks));
-		addMasonry(new ItemStack(BlocksAether.skyroot_planks, 1, BlockSkyrootDecorative.TOP_PLANKS.getMeta()),
+		addMasonry(new ItemStack(BlocksAether.skyroot_decorative, 1, BlockSkyrootDecorative.TOP_PLANKS.getMeta()),
 				new ItemStack(BlocksAether.skyroot_planks));
-		addMasonry(new ItemStack(BlocksAether.skyroot_planks, 1, BlockSkyrootDecorative.TOP_BEAM.getMeta()),
+		addMasonry(new ItemStack(BlocksAether.skyroot_decorative, 1, BlockSkyrootDecorative.TOP_BEAM.getMeta()),
 				new ItemStack(BlocksAether.skyroot_planks));
-		addMasonry(new ItemStack(BlocksAether.skyroot_planks, 1, BlockSkyrootDecorative.FLOORBOARDS.getMeta()),
+		addMasonry(new ItemStack(BlocksAether.skyroot_decorative, 1, BlockSkyrootDecorative.FLOORBOARDS.getMeta()),
 				new ItemStack(BlocksAether.skyroot_planks));
-		addMasonry(new ItemStack(BlocksAether.skyroot_planks, 1, BlockSkyrootDecorative.HIGHLIGHT.getMeta()),
+		addMasonry(new ItemStack(BlocksAether.skyroot_decorative, 1, BlockSkyrootDecorative.HIGHLIGHT.getMeta()),
 				new ItemStack(BlocksAether.skyroot_planks));
-		addMasonry(new ItemStack(BlocksAether.skyroot_planks, 1, BlockSkyrootDecorative.TILES.getMeta()),
+		addMasonry(new ItemStack(BlocksAether.skyroot_decorative, 1, BlockSkyrootDecorative.TILES.getMeta()),
 				new ItemStack(BlocksAether.skyroot_planks));
-		addMasonry(new ItemStack(BlocksAether.skyroot_planks, 1, BlockSkyrootDecorative.TILES_SMALL.getMeta()),
+		addMasonry(new ItemStack(BlocksAether.skyroot_decorative, 1, BlockSkyrootDecorative.TILES_SMALL.getMeta()),
 				new ItemStack(BlocksAether.skyroot_planks));
 		addMasonry(new ItemStack(BlocksAether.skyroot_beam), new ItemStack(BlocksAether.skyroot_planks));
 
