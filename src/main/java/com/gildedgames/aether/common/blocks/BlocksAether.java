@@ -302,9 +302,9 @@ public class BlocksAether
 
 	public static BlockCustomCarpet cloudwool_carpet = new BlockCustomCarpet();
 
-	public static Block skyroot_bookshelf = new BlockCustomBookshelf(Material.WOOD);
+	public static Block skyroot_bookshelf = new BlockCustomBookshelf(Material.WOOD, SoundType.WOOD);
 
-	public static Block holystone_bookshelf = new BlockCustomBookshelf(Material.ROCK);
+	public static Block holystone_bookshelf = new BlockCustomBookshelf(Material.ROCK, SoundType.STONE);
 
 	public static BlockOutpostCampfire outpost_campfire = new BlockOutpostCampfire(Material.IRON);
 
@@ -562,7 +562,6 @@ public class BlocksAether
 
 		Blocks.FIRE.setFireInfo(dark_skyroot_log, 5, 5);
 		Blocks.FIRE.setFireInfo(dark_skyroot_planks, 5, 20);
-		;
 
 		Blocks.FIRE.setFireInfo(skyroot_door, 5, 20);
 		Blocks.FIRE.setFireInfo(secret_skyroot_door, 5, 20);
