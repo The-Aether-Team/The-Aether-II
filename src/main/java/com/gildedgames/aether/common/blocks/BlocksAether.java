@@ -292,9 +292,9 @@ public class BlocksAether
 			scatterglass_pane_decorative = new BlockRockGlassPaneDecorative(scatterglass),
 			crude_scatterglass_pane_decorative = new BlockRockGlassPaneDecorative(crude_scatterglass);
 
-	public static final Block skyroot_twigs = new BlockFloorObject(Material.PLANTS);
+	public static final Block skyroot_twigs = new BlockFloorObject(Material.PLANTS, SoundType.WOOD);
 
-	public static final Block holystone_rock = new BlockFloorObject(Material.ROCK);
+	public static final Block holystone_rock = new BlockFloorObject(Material.ROCK, SoundType.STONE);
 
 	private static final List<Block> registeredBlocks = new ArrayList<>();
 

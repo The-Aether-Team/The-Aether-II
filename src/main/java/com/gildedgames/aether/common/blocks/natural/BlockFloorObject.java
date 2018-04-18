@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.blocks.natural;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.util.BlockBuilder;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,9 +23,11 @@ public class BlockFloorObject extends BlockBuilder
 
 	private static final AxisAlignedBB AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.3D, 0.9D);
 
-	public BlockFloorObject(Material material)
+	public BlockFloorObject(Material material, SoundType soundType)
 	{
 		super(material);
+
+		this.setSoundType(soundType);
 	}
 
 	@Override
