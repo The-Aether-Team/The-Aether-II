@@ -25,16 +25,38 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class TileEntityIcestoneCooler extends TileEntityLockable implements ITickable, IInventory
 {
 
-	private NonNullList<ItemStack> coolerItemStacks = NonNullList.<ItemStack>withSize(3, ItemStack.EMPTY);
-
 	private final int totalCoolTime = 800;
+
 	private final int itemCoolTime = 1600;
 
+	private NonNullList<ItemStack> coolerItemStacks = NonNullList.<ItemStack>withSize(3, ItemStack.EMPTY);
+
 	private int coolerCoolTime;
+
 	private int currentItemCoolTime;
+
 	private int coolTime;
 
 	private String coolerCustomeName;
+
+	@SideOnly(Side.CLIENT)
+	public static boolean isCooling(IInventory inventory)
+	{
+		return inventory.getField(0) > 0;
+	}
+
+	public static boolean isItemCooling(ItemStack stack)
+	{
+		return stack.getItem() == ItemsAether.icestone;
+	}
+
+	public static boolean isItemIrradiated(ItemStack stack)
+	{
+		Item item = stack.getItem();
+		return item == ItemsAether.irradiated_chunk || item == ItemsAether.irradiated_armor || item == ItemsAether.irradiated_charm
+				|| item == ItemsAether.irradiated_neckwear
+				|| item == ItemsAether.irradiated_ring || item == ItemsAether.irradiated_sword || item == ItemsAether.irradiated_tool;
+	}
 
 	@Override
 	public int getSizeInventory()
@@ -71,7 +93,7 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 	@Override
 	public ItemStack getStackInSlot(int index)
 	{
-		return (ItemStack)this.coolerItemStacks.get(index);
+		return (ItemStack) this.coolerItemStacks.get(index);
 	}
 
 	@Override
@@ -89,7 +111,7 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 	@Override
 	public void setInventorySlotContents(int index, ItemStack stack)
 	{
-		ItemStack itemstack = (ItemStack)this.coolerItemStacks.get(index);
+		ItemStack itemstack = (ItemStack) this.coolerItemStacks.get(index);
 		boolean flag = !stack.isEmpty() && stack.isItemEqual(itemstack) && ItemStack.areItemStackTagsEqual(stack, itemstack);
 		this.coolerItemStacks.set(index, stack);
 
@@ -114,7 +136,9 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 	@Override
 	public boolean isUsableByPlayer(EntityPlayer player)
 	{
-		return this.world.getTileEntity(this.pos) != this ? false : player.getDistanceSq((double)this.pos.getX() + 0.5D, (double)this.pos.getY() + 0.5D, (double)this.pos.getZ() + 0.5D) <= 64.0D;
+		return this.world.getTileEntity(this.pos) != this ?
+				false :
+				player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override
@@ -155,34 +179,34 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 	@Override
 	public int getField(int id)
 	{
-		switch(id)
+		switch (id)
 		{
-		case 0:
-			return this.coolerCoolTime;
-		case 1:
-			return this.currentItemCoolTime;
-		case 2:
-			return this.coolTime;
-		case 3:
-			return this.totalCoolTime;
-		default:
-			return 0;
+			case 0:
+				return this.coolerCoolTime;
+			case 1:
+				return this.currentItemCoolTime;
+			case 2:
+				return this.coolTime;
+			case 3:
+				return this.totalCoolTime;
+			default:
+				return 0;
 		}
 	}
 
 	@Override
 	public void setField(int id, int value)
 	{
-		switch(id)
+		switch (id)
 		{
-		case 0:
-			this.coolerCoolTime = value;
-			break;
-		case 1:
-			this.currentItemCoolTime = value;
-			break;
-		case 2:
-			this.coolTime = value;
+			case 0:
+				this.coolerCoolTime = value;
+				break;
+			case 1:
+				this.currentItemCoolTime = value;
+				break;
+			case 2:
+				this.coolTime = value;
 		}
 	}
 
@@ -214,7 +238,7 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 			--this.coolerCoolTime;
 		}
 
-		if(!this.world.isRemote)
+		if (!this.world.isRemote)
 		{
 			ItemStack itemstack = (ItemStack) this.coolerItemStacks.get(1);
 
@@ -319,8 +343,8 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 	public NBTTagCompound writeToNBT(NBTTagCompound compound)
 	{
 		super.writeToNBT(compound);
-		compound.setInteger("coolerCoolTime", (short)this.coolerCoolTime);
-		compound.setInteger("coolTime", (short)this.coolTime);
+		compound.setInteger("coolerCoolTime", (short) this.coolerCoolTime);
+		compound.setInteger("coolTime", (short) this.coolTime);
 		ItemStackHelper.saveAllItems(compound, this.coolerItemStacks);
 
 		if (this.hasCustomName())
@@ -336,21 +360,15 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 		return this.coolerCoolTime > 0;
 	}
 
-	@SideOnly(Side.CLIENT)
-	public static boolean isCooling(IInventory inventory)
-	{
-		return inventory.getField(0) > 0;
-	}
-
 	private boolean canCool()
 	{
-		if (((ItemStack)this.coolerItemStacks.get(0)).isEmpty())
+		if (((ItemStack) this.coolerItemStacks.get(0)).isEmpty())
 		{
 			return false;
 		}
 		else
 		{
-			ItemStack itemstack = CoolerRecipes.instance().getCoolingResult((ItemStack)this.coolerItemStacks.get(0));
+			ItemStack itemstack = CoolerRecipes.instance().getCoolingResult((ItemStack) this.coolerItemStacks.get(0));
 
 			if (itemstack.isEmpty())
 			{
@@ -358,7 +376,7 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 			}
 			else
 			{
-				ItemStack itemstack1 = (ItemStack)this.coolerItemStacks.get(2);
+				ItemStack itemstack1 = (ItemStack) this.coolerItemStacks.get(2);
 
 				if (itemstack1.isEmpty())
 				{
@@ -369,7 +387,7 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 					return false;
 				}
 				int result = itemstack1.getCount() + itemstack.getCount();
-				return result <= getInventoryStackLimit() && result <= itemstack1.getMaxStackSize();
+				return result <= this.getInventoryStackLimit() && result <= itemstack1.getMaxStackSize();
 			}
 		}
 	}
@@ -383,9 +401,9 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 	{
 		if (this.canCool())
 		{
-			ItemStack itemstack = (ItemStack)this.coolerItemStacks.get(0);
+			ItemStack itemstack = (ItemStack) this.coolerItemStacks.get(0);
 			ItemStack itemstack1 = CoolerRecipes.instance().getCoolingResult(itemstack);
-			ItemStack itemStack2 = (ItemStack)this.coolerItemStacks.get(2);
+			ItemStack itemStack2 = (ItemStack) this.coolerItemStacks.get(2);
 
 			if (itemStack2.isEmpty())
 			{
@@ -398,17 +416,5 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 
 			itemstack.shrink(1);
 		}
-	}
-
-	public static boolean isItemCooling(ItemStack stack)
-	{
-		return stack.getItem() == ItemsAether.icestone;
-	}
-
-	public static boolean isItemIrradiated(ItemStack stack)
-	{
-		Item item = stack.getItem();
-		return item == ItemsAether.irradiated_armor || item == ItemsAether.irradiated_charm || item == ItemsAether.irradiated_neckwear
-				|| item == ItemsAether.irradiated_ring || item == ItemsAether.irradiated_sword || item == ItemsAether.irradiated_tool;
 	}
 }

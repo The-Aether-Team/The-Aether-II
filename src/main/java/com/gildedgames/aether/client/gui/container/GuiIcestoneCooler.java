@@ -1,8 +1,9 @@
 package com.gildedgames.aether.client.gui.container;
 
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.containers.tiles.ContainerIcestoneCooler;
 import com.gildedgames.aether.common.entities.tiles.TileEntityIcestoneCooler;
-import net.minecraft.client.gui.inventory.GuiFurnace;
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
@@ -11,17 +12,44 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class GuiIcestoneCooler extends GuiFurnace
+public class GuiIcestoneCooler extends GuiContainer
 {
 	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/gui/inventory/icestone_cooler.png");
+
 	private final IInventory tileCooler;
+
+	private final InventoryPlayer playerInventory;
 
 	public GuiIcestoneCooler(InventoryPlayer playerInv, IInventory coolerInv)
 	{
-		super(playerInv, coolerInv);
+		super(new ContainerIcestoneCooler(playerInv, coolerInv));
 		this.tileCooler = coolerInv;
+		this.playerInventory = playerInv;
 	}
 
+	/**
+	 * Draws the screen and all the components in it.
+	 */
+	@Override
+	public void drawScreen(int mouseX, int mouseY, float partialTicks)
+	{
+		this.drawDefaultBackground();
+		super.drawScreen(mouseX, mouseY, partialTicks);
+		this.renderHoveredToolTip(mouseX, mouseY);
+	}
+
+	/**
+	 * Draw the foreground layer for the GuiContainer (everything in front of the items)
+	 */
+	@Override
+	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
+	{
+		String s = this.tileCooler.getDisplayName().getUnformattedText();
+		this.fontRenderer.drawString(s, this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6, 4210752);
+		this.fontRenderer.drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
+	}
+
+	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
 	{
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);

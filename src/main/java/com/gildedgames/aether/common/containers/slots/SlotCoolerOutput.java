@@ -1,19 +1,16 @@
 package com.gildedgames.aether.common.containers.slots;
 
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class SlotCoolerOutput extends Slot
+public class SlotCoolerOutput extends SlotOffset
 {
 	private int removeCount;
 
-	public SlotCoolerOutput(IInventory inventoryIn, int index, int xPosition, int yPosition)
+	public SlotCoolerOutput(IInventory inventoryIn, int index, int xPosition, int yPosition, int trueIndex)
 	{
-		super(inventoryIn, index, xPosition, yPosition);
+		super(inventoryIn, index, xPosition, yPosition, trueIndex);
 	}
-
-
 
 	@Override
 	public boolean isItemValid(ItemStack stack)

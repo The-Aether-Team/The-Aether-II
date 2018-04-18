@@ -2,20 +2,19 @@ package com.gildedgames.aether.common.containers.slots;
 
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class SlotCoolingItem extends Slot
+public class SlotCoolingItem extends SlotOffset
 {
-	public SlotCoolingItem(IInventory inventoryIn, int index, int xPosition, int yPosition)
+	public SlotCoolingItem(IInventory inventoryIn, int index, int xPosition, int yPosition, int trueIndex)
 	{
-		super(inventoryIn, index, xPosition, yPosition);
+		super(inventoryIn, index, xPosition, yPosition, trueIndex);
 	}
 
 	@Override
 	public boolean isItemValid(ItemStack stack)
 	{
-		return stack.getItem() == ItemsAether.icestone;
+		return super.isItemValid(stack) && stack.getItem() == ItemsAether.icestone;
 	}
 
 	@Override

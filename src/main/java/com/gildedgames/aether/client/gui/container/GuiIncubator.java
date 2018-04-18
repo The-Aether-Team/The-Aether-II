@@ -21,6 +21,7 @@ public class GuiIncubator extends GuiContainer
 
 	/** The player inventory bound to this GUI. */
 	private final InventoryPlayer playerInventory;
+
 	private final IInventory tileIncubator;
 
 	private final BlockPos incubatorPos;
@@ -28,6 +29,7 @@ public class GuiIncubator extends GuiContainer
 	public GuiIncubator(InventoryPlayer playerInv, IInventory incubatorInv, BlockPos incubatorPos)
 	{
 		super(new ContainerIncubator(playerInv, incubatorInv));
+
 		this.playerInventory = playerInv;
 		this.incubatorPos = incubatorPos;
 		this.tileIncubator = incubatorInv;
@@ -118,7 +120,7 @@ public class GuiIncubator extends GuiContainer
 		{
 			TileEntityIncubator te = (TileEntityIncubator) tile;
 			int k = this.getHeatingScaled(13);
-			this.drawTexturedModalRect(i+78, j+36 +12 -k, 176, 12 - k, 20, k);
+			this.drawTexturedModalRect(i + 78, j + 36 + 12 - k, 176, 12 - k, 20, k);
 		}
 	}
 
@@ -130,6 +132,7 @@ public class GuiIncubator extends GuiContainer
 		return j != 0 && i != 0 ? i * pixels / j : 0;
 	}
 
+	@Override
 	public void updateScreen()
 	{
 		super.updateScreen();

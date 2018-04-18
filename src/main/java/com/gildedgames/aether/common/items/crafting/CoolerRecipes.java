@@ -16,11 +16,6 @@ public class CoolerRecipes
 	private final Map<ItemStack, ItemStack[]> coolingList = Maps.<ItemStack, ItemStack[]>newHashMap();
 	private Random rand = new Random();
 
-	public static CoolerRecipes instance()
-	{
-		return COOLING_BASE;
-	}
-
 	private CoolerRecipes()
 	{
 		this.addCoolingFromItem(ItemsAether.irradiated_armor,
@@ -63,14 +58,18 @@ public class CoolerRecipes
 				new ItemStack(ItemsAether.skyroot_axe),
 				new ItemStack(ItemsAether.skyroot_pickaxe),
 				new ItemStack(ItemsAether.skyroot_shovel));
-
-
+		
 		//TODO: Add the rest of charms, neckwear, and rings.
 		this.addCoolingFromItem(ItemsAether.irradiated_charm, new ItemStack(ItemsAether.charm_atk_dmg_01));
 
 		this.addCoolingFromItem(ItemsAether.irradiated_neckwear, new ItemStack(ItemsAether.winged_necklace) );
 
 		this.addCoolingFromItem(ItemsAether.irradiated_ring, new ItemStack(ItemsAether.ring_of_strength));
+	}
+
+	public static CoolerRecipes instance()
+	{
+		return COOLING_BASE;
 	}
 
 	public void addCoolingFromItem(Item input, ItemStack... stackList)
