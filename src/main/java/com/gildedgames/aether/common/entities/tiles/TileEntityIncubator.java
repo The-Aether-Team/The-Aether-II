@@ -29,24 +29,33 @@ import java.util.Random;
 public class TileEntityIncubator extends TileEntityLockable implements ITickable, IInventory
 {
 
+	public static final int REQ_TEMPERATURE_THRESHOLD = 5000;
+
 	private static final int INVENTORY_SIZE = 2;
+
 	private static final int AMBRO_CHUNK_INDEX = 0;
+
 	private static final int MOA_EGG_INDEX = 1;
 
-	private NonNullList<ItemStack> inventory = NonNullList.withSize(INVENTORY_SIZE, ItemStack.EMPTY);
-
-	public static final int REQ_TEMPERATURE_THRESHOLD = 5000;
 	private final int ambroDestroy = 1250; // # of ticks before an ambrosium chunk is destroyed.
 
 	// increment and decrement values that can be adjusted to balance how fast or slow the incubator: heats, incubates, and cools.
 	private final float coolingDecrement = 1.0F;
+
 	private final float heatingIncrement = 2.0F;
+
 	private final int eggTimerIncrement = 1;
+
 	private final int eggtimerDecrement = 1;
+
 	private final float ambroTimerIncrement = 2.0F; // this should remain the same as heating increment.
 
+	private NonNullList<ItemStack> inventory = NonNullList.withSize(INVENTORY_SIZE, ItemStack.EMPTY);
+
 	private float currentHeatingProgress;
+
 	private int ambroTimer;
+
 	private int eggTimer;
 
 	@Override
@@ -59,7 +68,7 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 
 		final IBlockState state = this.world.getBlockState(this.pos);
 
-		if (!isHeating() && this.currentHeatingProgress > 0)
+		if (!this.isHeating() && this.currentHeatingProgress > 0)
 		{
 			this.currentHeatingProgress -= this.coolingDecrement;
 		}
@@ -74,23 +83,25 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 			this.world.setTileEntity(this.pos, this);
 		}
 
-
 		ItemStack fuelstack = this.inventory.get(AMBRO_CHUNK_INDEX);
 		ItemStack eggstack = this.getMoaEgg();
+
 		if (state.getBlock() instanceof BlockIncubator && state.getValue(BlockIncubator.PROPERTY_IS_LIT))
 		{
 			this.ambroTimer += this.ambroTimerIncrement;
+
 			if (this.currentHeatingProgress < REQ_TEMPERATURE_THRESHOLD)
 			{
 				this.currentHeatingProgress += this.heatingIncrement;
 			}
 
-			if (this.ambroTimer >= this.ambroDestroy) {
+			if (this.ambroTimer >= this.ambroDestroy)
+			{
 				this.ambroTimer = 0;
 				fuelstack.shrink(1);
 			}
 		}
-		if (hasStartedHeating())
+		if (this.hasStartedHeating())
 		{
 			if (this.canEggIncubate())
 			{
@@ -98,12 +109,13 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 			}
 			else
 			{
-				if (this.eggTimer > 0) {
+				if (this.eggTimer > 0)
+				{
 					this.eggTimer -= this.eggtimerDecrement;
 				}
 			}
 
-			if (eggTimer >= (REQ_TEMPERATURE_THRESHOLD / 2))
+			if (this.eggTimer >= (REQ_TEMPERATURE_THRESHOLD / 600))
 			{
 				Random rand = new Random();
 				MoaGenePool stackGenes = ItemMoaEgg.getGenePool(eggstack);
@@ -112,6 +124,7 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 
 				moa.setRaisedByPlayer(true);
 				moa.setGrowingAge(-24000);
+				moa.setFoodRequired(3);
 				moa.setPosition(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ());
 				moa.setGender(rand.nextBoolean() ? AnimalGender.FEMALE : AnimalGender.MALE);
 				moa.setAnimalPack(familyNest.getAnimalPack());
@@ -248,18 +261,17 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 		return stack.getItem() == ItemsAether.ambrosium_chunk || stack.getItem() == ItemsAether.rainbow_moa_egg;
 	}
 
-
 	@Override
 	public int getField(int id)
 	{
 		switch (id)
 		{
-		case 0:
-			return (int)this.currentHeatingProgress;
-		case 1:
-			return this.eggTimer;
-		default:
-			return 0;
+			case 0:
+				return (int) this.currentHeatingProgress;
+			case 1:
+				return this.eggTimer;
+			default:
+				return 0;
 		}
 	}
 
@@ -268,10 +280,10 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 	{
 		switch (id)
 		{
-		case 0:
-			this.currentHeatingProgress = value;
-		case 1:
-			this.eggTimer = value;
+			case 0:
+				this.currentHeatingProgress = value;
+			case 1:
+				this.eggTimer = value;
 		}
 	}
 
@@ -280,7 +292,6 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 	{
 		return 2;
 	}
-
 
 	@Override
 	public void clear()

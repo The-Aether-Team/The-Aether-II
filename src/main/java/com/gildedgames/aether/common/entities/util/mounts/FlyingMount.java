@@ -2,6 +2,8 @@ package com.gildedgames.aether.common.entities.util.mounts;
 
 import com.gildedgames.aether.api.entity.IMountProcessor;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
@@ -74,13 +76,19 @@ public class FlyingMount implements IMountProcessor
 	@Override
 	public void onMountedBy(Entity mount, Entity rider)
 	{
-
+		if (mount instanceof EntityLivingBase)
+		{
+			((EntityLivingBase) mount).getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.6D);
+		}
 	}
 
 	@Override
 	public void onDismountedBy(Entity mount, Entity rider)
 	{
-
+		if (mount instanceof EntityLivingBase)
+		{
+			((EntityLivingBase) mount).getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
+		}
 	}
 
 }

@@ -4,11 +4,13 @@ import com.gildedgames.aether.api.entity.IMount;
 import com.gildedgames.aether.api.entity.IMountProcessor;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.ReflectionAether;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.entity.EntityMountEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -119,6 +121,8 @@ public class MountEventHandler
 			((EntityCreature) mount).getNavigator().clearPath();
 		}
 
+		mount.setAIMoveSpeed((float) mount.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
+
 		mount.rotationYaw = rider.rotationYaw;
 		mount.prevRotationYaw = mount.rotationYaw;
 		mount.rotationPitch = rider.rotationPitch * 0.5F;
@@ -148,8 +152,6 @@ public class MountEventHandler
 
 		mount.jumpMovementFactor = mount.getAIMoveSpeed() * 0.1F;
 
-		mount.setAIMoveSpeed((float) mount.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
-
 		final double oldMotionY = mount.motionY;
 
 		mount.motionY = 0.0F;
@@ -168,7 +170,29 @@ public class MountEventHandler
 			forward *= 0.5F;
 		}
 
-		mount.moveRelative(strafe, 0.0F, forward, 0.1F);
+		float f6 = 0.91F;
+		BlockPos.PooledMutableBlockPos blockpos$pooledmutableblockpos = BlockPos.PooledMutableBlockPos
+				.retain(mount.posX, mount.getEntityBoundingBox().minY - 1.0D, mount.posZ);
+
+		if (mount.onGround)
+		{
+			IBlockState underState = mount.world.getBlockState(blockpos$pooledmutableblockpos);
+			f6 = underState.getBlock().getSlipperiness(underState, mount.world, blockpos$pooledmutableblockpos, mount) * 0.91F;
+		}
+
+		float f7 = 0.16277136F / (f6 * f6 * f6);
+		float friction;
+
+		if (mount.onGround)
+		{
+			friction = mount.getAIMoveSpeed() * f7;
+		}
+		else
+		{
+			friction = mount.jumpMovementFactor;
+		}
+
+		mount.moveRelative(strafe, 0.0F, forward, friction);
 
 		mount.limbSwingAmount = oldLimbSwingAmount;
 		mount.prevLimbSwingAmount = oldPrevLimbSwingAmount;

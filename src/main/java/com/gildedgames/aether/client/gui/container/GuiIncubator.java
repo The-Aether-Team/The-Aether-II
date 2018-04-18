@@ -57,48 +57,48 @@ public class GuiIncubator extends GuiContainer
 				{
 					this.fontRenderer.drawString("Incubating", 126 - (this.fontRenderer.getStringWidth("Incubating") / 2), this.ySize - 126, 15435844);
 				}
+
+				if (!te.hasStartedHeating())
+				{
+					return;
+				}
+
+				float percent = 0.0F;
+
+				if (te.getField(1) > 0)
+				{
+					// the percentage will represent the how long till the egg is finished incubation.
+					// currently the egg needs to incubate from 0 to half of the requiredTemperatureThreshold(5000/2 = 2500).
+					float eggMath = ((float) te.getEggTimer() / (float) (te.getRequiredTemperatureThreshold() / 2));
+
+					percent = eggMath * 100.0F;
+				}
+
+				String valueString = percent == (int) Math.floor(percent) ? String.valueOf((int) Math.floor(percent)) : String.valueOf(percent);
+
+				if (percent != (int) Math.floor(percent))
+				{
+					double floor = Math.floor(percent);
+					double dif = percent - floor;
+
+					if (dif < 0.1F)
+					{
+						valueString = String.valueOf((int) Math.floor(percent));
+					}
+					else
+					{
+						valueString = String.format("%.1f", Float.valueOf(valueString));
+					}
+				}
+
+				valueString += "%";
+
+				this.fontRenderer.drawString(valueString, 113 - (this.fontRenderer.getStringWidth(valueString) / 2), this.ySize - 145 + 2, 4210752);
 			}
 			else if (te.areFuelSlotsFilled() && te.getField(0) < 2500)
 			{
 				this.fontRenderer.drawString("Heating", 60 - (this.fontRenderer.getStringWidth("Heating") / 2), this.ySize - 126, 11743532);
 			}
-
-			if (!te.hasStartedHeating())
-			{
-				return;
-			}
-
-			float percent = 0.0F;
-
-			if (te.getField(1) > 0)
-			{
-				// the percentage will represent the how long till the egg is finished incubation.
-				// currently the egg needs to incubate from 0 to half of the requiredTemperatureThreshold(5000/2 = 2500).
-				float eggMath = ((float) te.getEggTimer() / (float) (te.getRequiredTemperatureThreshold() / 2));
-
-				percent = eggMath * 100.0F;
-			}
-
-			String valueString = percent == (int) Math.floor(percent) ? String.valueOf((int) Math.floor(percent)) : String.valueOf(percent);
-
-			if (percent != (int) Math.floor(percent))
-			{
-				double floor = Math.floor(percent);
-				double dif = percent - floor;
-
-				if (dif < 0.1F)
-				{
-					valueString = String.valueOf((int) Math.floor(percent));
-				}
-				else
-				{
-					valueString = String.format("%.1f", Float.valueOf(valueString));
-				}
-			}
-
-			valueString += "%";
-
-			this.fontRenderer.drawString(valueString, 113 - (this.fontRenderer.getStringWidth(valueString) / 2), this.ySize - 145 + 2, 4210752);
 		}
 	}
 
@@ -138,5 +138,16 @@ public class GuiIncubator extends GuiContainer
 		super.updateScreen();
 
 		this.drawGuiContainerForegroundLayer(0, 0);
+	}
+
+	/**
+	 * Draws the screen and all the components in it.
+	 */
+	@Override
+	public void drawScreen(int mouseX, int mouseY, float partialTicks)
+	{
+		this.drawDefaultBackground();
+		super.drawScreen(mouseX, mouseY, partialTicks);
+		this.renderHoveredToolTip(mouseX, mouseY);
 	}
 }
