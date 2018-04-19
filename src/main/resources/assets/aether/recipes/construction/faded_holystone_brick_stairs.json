@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "construction",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "aether:faded_holystone_brick",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "aether:faded_holystone_brick_stairs",
+    "count": 4
+  }
+}
