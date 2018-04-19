@@ -12,7 +12,6 @@ import net.minecraftforge.common.ForgeHooks;
 
 public class SlotSimpleCrafting extends SlotCrafting
 {
-	private final EntityPlayer thePlayer;
 
 	private ISimpleRecipe recipe;
 
@@ -21,8 +20,6 @@ public class SlotSimpleCrafting extends SlotCrafting
 	public SlotSimpleCrafting(EntityPlayer player, InventoryCrafting craftingInventory, IInventory inventoryIn, int slotIndex, int xPosition, int yPosition)
 	{
 		super(player, craftingInventory, inventoryIn, slotIndex, xPosition, yPosition);
-
-		this.thePlayer = player;
 	}
 
 	public boolean isSimpleCrafting()
@@ -53,9 +50,9 @@ public class SlotSimpleCrafting extends SlotCrafting
 			return super.canTakeStack(player);
 		}
 
-		if (this.recipe == null || !RecipeUtil.canCraft(player, this.recipe))
+		if (!RecipeUtil.canCraft(player, this.recipe))
 		{
-			this.putStack(null);
+			this.putStack(ItemStack.EMPTY);
 
 			return false;
 		}
