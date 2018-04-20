@@ -39,7 +39,7 @@ public class RecipeUtil
 
 	public static boolean areEqual(Object obj, ItemStack stack)
 	{
-		if (stack == null || obj == null)
+		if (stack == ItemStack.EMPTY || obj == ItemStack.EMPTY || stack.isEmpty() || (obj instanceof ItemStack && ((ItemStack) obj).isEmpty()))
 		{
 			return false;
 		}

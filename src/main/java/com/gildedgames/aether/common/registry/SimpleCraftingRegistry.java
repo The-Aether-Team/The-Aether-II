@@ -11,6 +11,7 @@ import com.google.common.collect.Maps;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
+import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.Collection;
 import java.util.List;
@@ -157,7 +158,9 @@ public class SimpleCraftingRegistry implements ISimpleCraftingRegistry
 
 				if (groups.size() > 0)
 				{
-					return groups.toArray(new ISimpleRecipeGroup[groups.size()]);
+					int hash = this.getHashForItemStack(stack);
+
+					return ArrayUtils.addAll(groups.toArray(new ISimpleRecipeGroup[0]), this.stackLookup.get(hash));
 				}
 			}
 
