@@ -11,6 +11,7 @@ import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.MasonryRecipeChangedPacket;
 import com.gildedgames.aether.common.recipes.simple.OreDictionaryRequirement;
 import com.gildedgames.aether.common.util.helpers.RecipeUtil;
+import com.gildedgames.orbis.common.util.InputHelper;
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -48,6 +49,10 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 
 	private static final ResourceLocation DARK_CRAFTING_OVERLAY = AetherCore.getResource("textures/gui/inventory/dark_crafting_overlay.png");
 
+	private static final ResourceLocation UP_ARROW = AetherCore.getResource("textures/gui/inventory/up_arrow.png");
+
+	private static final ResourceLocation DOWN_ARROW = AetherCore.getResource("textures/gui/inventory/down_arrow.png");
+
 	/** The player inventory bound to this GUI. */
 	private final InventoryPlayer playerInventory;
 
@@ -76,12 +81,18 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 
 	private ItemStack lastStack;
 
+	private GuiCounterButton up, down;
+
+	private ContainerMasonryBench container;
+
 	public GuiMasonryBench(EntityPlayer player, BlockPos blockPosition)
 	{
 		super(new ContainerMasonryBench(player, blockPosition));
 
 		this.playerInventory = player.inventory;
 		this.allowUserInput = true;
+
+		this.container = (ContainerMasonryBench) this.inventorySlots;
 	}
 
 	@Override
@@ -115,14 +126,23 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 		{
 			this.currentRecipe = null;
 
-			ContainerMasonryBench container = (ContainerMasonryBench) this.inventorySlots;
-			container.onNewRecipe(null);
+			this.container.onNewRecipe(null);
 			NetworkingAether.sendPacketToServer(new MasonryRecipeChangedPacket(null));
 
 			for (int i = 0; i < 9; i++)
 			{
 				this.materials.get(i).setRequiredObject(null);
 			}
+		}
+
+		if (button.id == 32)
+		{
+			this.container.setInputCount(this.container.getInputCount() + 1);
+		}
+
+		if (button.id == 33)
+		{
+			this.container.setInputCount(this.container.getInputCount() - 1);
 		}
 
 		if (button instanceof GuiCraftingOption)
@@ -143,7 +163,7 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 
 							if (req instanceof ItemStack)
 							{
-								this.materials.get(index).setRequiredObject((ItemStack) req);
+								this.materials.get(index).setRequiredObject(req);
 							}
 							else if (req instanceof OreDictionaryRequirement)
 							{
@@ -229,7 +249,7 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 				}
 			}
 
-			if (stack != null)
+			if (!stack.isEmpty())
 			{
 				uniqueStacks.add(stack);
 			}
@@ -324,7 +344,7 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 		{
 			for (int j = 0; j < 3; ++j)
 			{
-				GuiRequiredMaterial material = new GuiRequiredMaterial(20 + (j + i * 3), this.guiLeft + 79 + (j * 18), this.guiTop + (17 + i * 18), null);
+				GuiRequiredMaterial material = new GuiRequiredMaterial(20 + (j + i * 3), this.guiLeft + 50 + (j * 18), this.guiTop + (36 + i * 18), null);
 
 				material.resultStack = true;
 
@@ -334,7 +354,7 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 
 					if (req instanceof ItemStack)
 					{
-						material.setRequiredObject((ItemStack) req);
+						material.setRequiredObject(req);
 					}
 					else if (req instanceof OreDictionaryRequirement)
 					{
@@ -349,15 +369,21 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 			}
 		}
 
-		this.result = new GuiRequiredMaterial(30, this.guiLeft + 79, this.guiTop + 51, null);
+		this.result = new GuiRequiredMaterial(30, this.guiLeft + 105, this.guiTop + 36, null);
 		this.result.resultStack = true;
 
 		this.buttonList.add(this.result);
 
-		this.xButton = new GuiXButton(31, this.guiLeft + 66, this.guiTop + 17);
+		this.xButton = new GuiXButton(31, this.guiLeft + 38, this.guiTop + 36);
 		this.xButton.visible = false;
 
 		this.buttonList.add(this.xButton);
+
+		this.up = new GuiCounterButton(32, this.guiLeft + 109, this.guiTop + 22, UP_ARROW);
+		this.down = new GuiCounterButton(33, this.guiLeft + 109, this.guiTop + 61, DOWN_ARROW);
+
+		this.buttonList.add(this.up);
+		this.buttonList.add(this.down);
 
 		this.updateCraftingOptions();
 	}
@@ -416,6 +442,8 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 		}
 
 		this.hoverDescription = null;
+
+		this.renderHoveredToolTip(mouseX, mouseY);
 	}
 
 	/**
@@ -462,10 +490,14 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 
 		if (this.currentRecipe != null)
 		{
+			this.up.visible = true;
+			this.down.visible = true;
 			this.xButton.visible = true;
 		}
 		else
 		{
+			this.up.visible = false;
+			this.down.visible = false;
 			this.xButton.visible = false;
 		}
 
@@ -497,26 +529,49 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 	public void handleMouseInput() throws IOException
 	{
 		super.handleMouseInput();
+
 		int i = Mouse.getEventDWheel();
 
-		if (i != 0 && this.needsScrollBars())
+		Slot s = this.container.craftingResult;
+
+		double mouseX = InputHelper.getMouseX();
+		double mouseY = InputHelper.getMouseY();
+
+		if (i != 0)
 		{
-			int j = (this.recipes.size() + 4 - 1) / 4 - 6;
-
-			if (i > 0)
+			if (this.isMouseOverSlot(s, (int) mouseX, (int) mouseY) && this.currentRecipe != null)
 			{
-				i = 1;
-			}
+				if (i > 0)
+				{
+					i = 1;
+				}
 
-			if (i < 0)
+				if (i < 0)
+				{
+					i = -1;
+				}
+
+				this.container.setInputCount(this.container.getInputCount() + i);
+			}
+			else if (this.needsScrollBars())
 			{
-				i = -1;
+				int j = (this.recipes.size() + 4 - 1) / 4 - 6;
+
+				if (i > 0)
+				{
+					i = 1;
+				}
+
+				if (i < 0)
+				{
+					i = -1;
+				}
+
+				this.currentScroll = (float) ((double) this.currentScroll - (double) i / (double) j);
+				this.currentScroll = MathHelper.clamp(this.currentScroll, 0.0F, 1.0F);
+
+				this.scrollTo(this.currentScroll);
 			}
-
-			this.currentScroll = (float) ((double) this.currentScroll - (double) i / (double) j);
-			this.currentScroll = MathHelper.clamp(this.currentScroll, 0.0F, 1.0F);
-
-			this.scrollTo(this.currentScroll);
 		}
 	}
 
@@ -530,6 +585,11 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 	public void setHoveredDescription(List<String> desc)
 	{
 		this.hoverDescription = desc;
+	}
+
+	private boolean isMouseOverSlot(Slot slotIn, int mouseX, int mouseY)
+	{
+		return this.isPointInRegion(slotIn.xPos, slotIn.yPos, 16, 16, mouseX, mouseY);
 	}
 
 }

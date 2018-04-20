@@ -2,16 +2,19 @@ package com.gildedgames.aether.common.containers.tiles;
 
 import com.gildedgames.aether.api.recipes.simple.ISimpleRecipe;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.containers.inventory.InventoryCraftResultSimple;
 import com.gildedgames.aether.common.containers.slots.SlotSimpleCrafting;
+import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.network.packets.MasonryInputCountChangedPacket;
 import com.gildedgames.aether.common.util.helpers.RecipeUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryCraftResult;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -19,7 +22,9 @@ import javax.annotation.Nullable;
 public class ContainerMasonryBench extends Container
 {
 
-	public IInventory craftResult = new InventoryCraftResult();
+	public IInventory craftResult = new InventoryCraftResultSimple();
+
+	public SlotSimpleCrafting craftingResult;
 
 	private EntityPlayer player;
 
@@ -29,7 +34,7 @@ public class ContainerMasonryBench extends Container
 
 	private BlockPos pos;
 
-	private SlotSimpleCrafting craftingResult;
+	private int inputCount = 1;
 
 	public ContainerMasonryBench(EntityPlayer player, BlockPos pos)
 	{
@@ -40,6 +45,30 @@ public class ContainerMasonryBench extends Container
 		this.pos = pos;
 
 		this.createSlots();
+	}
+
+	public int getInputCount()
+	{
+		int actual = this.craftingResult.getRecipe() != null ? this.craftingResult.getActualAmountOfReq(this.player) : this.inputCount;
+
+		return MathHelper.clamp(this.inputCount, 1, actual);
+	}
+
+	public void setInputCount(int inputCount)
+	{
+		this.inputCount = MathHelper.clamp(inputCount, 1, this.craftResult.getSizeInventory());
+
+		if (this.world.isRemote)
+		{
+			NetworkingAether.sendPacketToServer(new MasonryInputCountChangedPacket(this.inputCount));
+		}
+
+		ItemStack stack = this.craftResult.getStackInSlot(0);
+
+		if (!stack.isEmpty())
+		{
+			stack.setCount(this.getInputCount());
+		}
 	}
 
 	private void createSlots()
@@ -57,7 +86,7 @@ public class ContainerMasonryBench extends Container
 			this.addSlotToContainer(new Slot(this.inventory, l, 8 + l * 18, 146));
 		}
 
-		this.craftingResult = new SlotSimpleCrafting(this.player, null, this.craftResult, 37, 80, 52);
+		this.craftingResult = new SlotSimpleCrafting(this.player, null, this.craftResult, 37, 106, 37, this);
 
 		this.craftingResult.setSimpleCrafting(true);
 
@@ -73,6 +102,8 @@ public class ContainerMasonryBench extends Container
 
 			return;
 		}
+
+		recipe.getResult().setCount(this.getInputCount());
 
 		this.craftingResult.setRecipe(recipe);
 		this.craftResult.setInventorySlotContents(0, recipe.getResult());

@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.containers.slots;
 
 import com.gildedgames.aether.api.recipes.simple.ISimpleRecipe;
+import com.gildedgames.aether.common.containers.tiles.ContainerMasonryBench;
 import com.gildedgames.aether.common.recipes.simple.OreDictionaryRequirement;
 import com.gildedgames.aether.common.util.helpers.RecipeUtil;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,9 +18,14 @@ public class SlotSimpleCrafting extends SlotCrafting
 
 	private boolean isSimpleCrafting;
 
-	public SlotSimpleCrafting(EntityPlayer player, InventoryCrafting craftingInventory, IInventory inventoryIn, int slotIndex, int xPosition, int yPosition)
+	private ContainerMasonryBench container;
+
+	public SlotSimpleCrafting(EntityPlayer player, InventoryCrafting craftingInventory, IInventory inventoryIn, int slotIndex, int xPosition, int yPosition,
+			ContainerMasonryBench container)
 	{
 		super(player, craftingInventory, inventoryIn, slotIndex, xPosition, yPosition);
+
+		this.container = container;
 	}
 
 	public boolean isSimpleCrafting()
@@ -40,6 +46,25 @@ public class SlotSimpleCrafting extends SlotCrafting
 	public void setRecipe(ISimpleRecipe recipe)
 	{
 		this.recipe = recipe;
+	}
+
+	public int getActualAmountOfReq(EntityPlayer player)
+	{
+		Object req = this.recipe.getRequired()[0];
+
+		int amountSoFar = 0;
+
+		for (int i = 0; i < player.inventory.mainInventory.size(); i++)
+		{
+			ItemStack inventoryStack = player.inventory.mainInventory.get(i);
+
+			if (RecipeUtil.areEqual(req, inventoryStack))
+			{
+				amountSoFar += inventoryStack.getCount();
+			}
+		}
+
+		return amountSoFar;
 	}
 
 	@Override
@@ -91,6 +116,8 @@ public class SlotSimpleCrafting extends SlotCrafting
 				reqAmount = ((OreDictionaryRequirement) req).getCount();
 			}
 
+			reqAmount *= this.container.getInputCount();
+
 			int amountSoFar = 0;
 
 			for (int i = 0; i < player.inventory.mainInventory.size(); i++)
@@ -119,7 +146,12 @@ public class SlotSimpleCrafting extends SlotCrafting
 
 		if (RecipeUtil.canCraft(player, this.recipe))
 		{
-			this.putStack(this.recipe.getResult());
+			int count = this.container.getInputCount();
+			ItemStack res = this.recipe.getResult().copy();
+
+			res.setCount(count);
+
+			this.putStack(res);
 		}
 
 		return stack;
