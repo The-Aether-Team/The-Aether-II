@@ -13,16 +13,17 @@ import net.minecraft.world.World;
 
 public class TileEntityMultiblockDummy extends TileEntitySynced implements TileEntityMultiblockInterface
 {
-	private BlockPos controllerPos;
+	private BlockPos controllerPosOffset;
 
 	@Override
 	public void onInteract(final EntityPlayer player)
 	{
-		if (!hasLinkedController())
+		if (!this.hasLinkedController())
 		{
 			return;
 		}
-		final TileEntity entity = this.world.getTileEntity(this.controllerPos);
+
+		final TileEntity entity = this.world.getTileEntity(this.getLinkedController());
 
 		if (entity instanceof TileEntityMultiblockController)
 		{
@@ -31,18 +32,19 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements TileE
 		else
 		{
 			AetherCore.LOGGER.warn("TileEntityMultiblockDummy at " + this.pos.toString() + ", is missing it's linked controller at "
-					+ this.controllerPos.toString());
+					+ this.getLinkedController().toString());
 		}
 	}
 
 	@Override
 	public void onDestroyed()
 	{
-		if (!hasLinkedController())
+		if (!this.hasLinkedController())
 		{
 			return;
 		}
-		final TileEntity entity = this.world.getTileEntity(this.controllerPos);
+
+		final TileEntity entity = this.world.getTileEntity(this.getLinkedController());
 
 		if (entity instanceof TileEntityMultiblockInterface)
 		{
@@ -51,18 +53,19 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements TileE
 		else
 		{
 			AetherCore.LOGGER.warn("TileEntityMultiblockDummy at " + this.pos.toString() + ", is missing it's linked controller at "
-					+ this.controllerPos.toString());
+					+ this.getLinkedController().toString());
 		}
 	}
 
 	@Override
 	public ItemStack getPickedStack(final World world, final BlockPos pos, final IBlockState state)
 	{
-		if (!hasLinkedController())
+		if (!this.hasLinkedController())
 		{
 			return ItemStack.EMPTY;
 		}
-		final TileEntity entity = this.world.getTileEntity(this.controllerPos);
+
+		final TileEntity entity = this.world.getTileEntity(this.getLinkedController());
 
 		if (entity instanceof TileEntityMultiblockInterface)
 		{
@@ -71,7 +74,7 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements TileE
 		else
 		{
 			AetherCore.LOGGER.warn("TileEntityMultiblockDummy at " + this.pos.toString() + ", is missing it's linked controller at "
-					+ this.controllerPos.toString());
+					+ this.getLinkedController().toString());
 		}
 
 		return ItemStack.EMPTY;
@@ -79,15 +82,18 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements TileE
 
 	public void linkController(final BlockPos controllerPos)
 	{
-		this.controllerPos = controllerPos;
+		this.controllerPosOffset = controllerPos.add(-this.pos.getX(), -this.pos.getY(), -this.pos.getZ());
 	}
 
 	public BlockPos getLinkedController()
 	{
-		return this.controllerPos;
+		return this.getPos().add(this.controllerPosOffset);
 	}
 
-	public boolean hasLinkedController() { return this.controllerPos != null; }
+	public boolean hasLinkedController()
+	{
+		return this.controllerPosOffset != null;
+	}
 
 	@Override
 	public void readFromNBT(final NBTTagCompound compound)
@@ -96,7 +102,7 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements TileE
 
 		if (compound.hasKey("controller"))
 		{
-			this.controllerPos = NBTHelper.readBlockPos(compound.getCompoundTag("controller"));
+			this.controllerPosOffset = NBTHelper.readBlockPos(compound.getCompoundTag("controller"));
 		}
 	}
 
@@ -105,7 +111,7 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements TileE
 	{
 		super.writeToNBT(compound);
 
-		compound.setTag("controller", NBTHelper.writeBlockPos(this.controllerPos));
+		compound.setTag("controller", NBTHelper.writeBlockPos(this.controllerPosOffset));
 
 		return compound;
 	}
