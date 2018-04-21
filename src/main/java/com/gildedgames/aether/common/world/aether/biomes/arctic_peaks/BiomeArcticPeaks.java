@@ -56,7 +56,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase
 	@Override
 	public IIslandGenerator createIslandGenerator(Random rand)
 	{
-		int coastHeight = rand.nextInt(3);
+		int coastHeight = 1 + rand.nextInt(3);
 		double coastSpread = rand.nextDouble() * 0.6;
 
 		if (coastHeight == 0)
