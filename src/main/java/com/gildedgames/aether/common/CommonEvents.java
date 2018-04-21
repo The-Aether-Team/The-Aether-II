@@ -44,6 +44,7 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.EntityMountEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
@@ -62,6 +63,16 @@ import java.util.function.Supplier;
 
 public class CommonEvents
 {
+	@SubscribeEvent
+	public static void onExperienceDrop(LivingExperienceDropEvent event)
+	{
+		if (event.getEntityLiving().world.provider.getDimensionType() == DimensionsAether.AETHER
+				|| event.getEntityLiving().world.provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER)
+		{
+			event.setCanceled(true);
+		}
+	}
+
 	@SubscribeEvent
 	public static void onBlockPlaced(final BlockEvent.PlaceEvent event)
 	{

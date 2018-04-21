@@ -23,6 +23,7 @@ import com.gildedgames.aether.common.containers.slots.SlotMoaEgg;
 import com.gildedgames.aether.common.entities.util.mounts.FlyingMount;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketSpecialMovement;
+import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.orbis.client.gui.util.GuiFrameUtils;
 import com.gildedgames.orbis.common.util.InputHelper;
@@ -65,9 +66,23 @@ public class ClientEventHandler
 
 	private static boolean PREV_JUMP_BIND_STATE;
 
+	private static Minecraft mc = Minecraft.getMinecraft();
+
 	public static void drawBlackFade()
 	{
 		DRAWING_BLACK_FADE = true;
+	}
+
+	@SubscribeEvent
+	public static void onRenderGameOverlay(RenderGameOverlayEvent event)
+	{
+		if (mc.world != null && event.getType() == RenderGameOverlayEvent.ElementType.EXPERIENCE)
+		{
+			if (mc.world.provider.getDimensionType() == DimensionsAether.AETHER || mc.world.provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER)
+			{
+				event.setCanceled(true);
+			}
+		}
 	}
 
 	@SubscribeEvent
