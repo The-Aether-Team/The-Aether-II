@@ -76,11 +76,48 @@ public class ClientEventHandler
 	@SubscribeEvent
 	public static void onRenderGameOverlay(RenderGameOverlayEvent event)
 	{
-		if (mc.world != null && event.getType() == RenderGameOverlayEvent.ElementType.EXPERIENCE)
+		if (mc.world != null)
 		{
 			if (mc.world.provider.getDimensionType() == DimensionsAether.AETHER || mc.world.provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER)
 			{
-				event.setCanceled(true);
+				if (event.getType() == RenderGameOverlayEvent.ElementType.EXPERIENCE)
+				{
+					event.setCanceled(true);
+				}
+			}
+		}
+	}
+
+	@SubscribeEvent
+	public static void onRenderGameOverlay(RenderGameOverlayEvent.Pre event)
+	{
+		if (mc.world != null)
+		{
+			if (mc.world.provider.getDimensionType() == DimensionsAether.AETHER || mc.world.provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER)
+			{
+				if (event.getType() == RenderGameOverlayEvent.ElementType.AIR || event.getType() == RenderGameOverlayEvent.ElementType.HEALTH
+						|| event.getType() == RenderGameOverlayEvent.ElementType.HEALTHMOUNT || event.getType() == RenderGameOverlayEvent.ElementType.ARMOR
+						|| event.getType() == RenderGameOverlayEvent.ElementType.FOOD)
+				{
+					GlStateManager.translate(0.0, 6D, 0.0);
+				}
+			}
+		}
+	}
+
+	@SubscribeEvent
+	public static void onRenderGameOverlay(RenderGameOverlayEvent.Post event)
+	{
+		if (mc.world != null)
+		{
+			if (mc.world.provider.getDimensionType() == DimensionsAether.AETHER || mc.world.provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER)
+			{
+				if (event.getType() == RenderGameOverlayEvent.ElementType.AIR || event.getType() == RenderGameOverlayEvent.ElementType.HEALTH
+						|| event.getType() == RenderGameOverlayEvent.ElementType.HEALTHMOUNT || event.getType() == RenderGameOverlayEvent.ElementType.ARMOR
+						|| event.getType() == RenderGameOverlayEvent.ElementType.FOOD)
+				{
+					GlStateManager.translate(0.0, -6D, 0.0);
+				}
 			}
 		}
 	}
