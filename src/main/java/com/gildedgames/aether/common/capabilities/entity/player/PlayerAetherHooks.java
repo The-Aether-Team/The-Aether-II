@@ -6,8 +6,6 @@ import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.CommonEvents;
 import com.gildedgames.aether.common.blocks.IBlockSnowy;
-import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
-import com.gildedgames.aether.common.blocks.natural.plants.BlockTallAetherGrass;
 import com.gildedgames.aether.common.entities.util.shared.SharedAetherAttributes;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketMarkPlayerDeath;
@@ -17,7 +15,6 @@ import com.gildedgames.orbis.api.util.TeleporterGeneric;
 import com.gildedgames.orbis.api.util.mc.BlockUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSnow;
-import net.minecraft.block.BlockSnowBlock;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
@@ -28,6 +25,7 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
@@ -39,7 +37,6 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
@@ -55,6 +52,24 @@ public class PlayerAetherHooks
 		if (aePlayer != null)
 		{
 			aePlayer.sendFullUpdate();
+
+			DimensionType dim = event.player.world.provider.getDimensionType();
+
+			if (dim == DimensionsAether.AETHER || dim == DimensionsAether.NECROMANCER_TOWER)
+			{
+				aePlayer.getSeparateInventoryModule().switchToAetherInventory();
+			}
+		}
+	}
+
+	@SubscribeEvent
+	public static void onPlayerLoggedOut(final net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent event)
+	{
+		final PlayerAether aePlayer = PlayerAether.getPlayer(event.player);
+
+		if (aePlayer != null)
+		{
+			aePlayer.onLoggedOut();
 		}
 	}
 
@@ -156,7 +171,7 @@ public class PlayerAetherHooks
 
 		final PlayerAether aePlayer = PlayerAether.getPlayer(event.getPlayer());
 
-		IBlockState replaced = event.getBlockSnapshot().getReplacedBlock(),  placed = event.getPlacedBlock();
+		IBlockState replaced = event.getBlockSnapshot().getReplacedBlock(), placed = event.getPlacedBlock();
 		Block block = placed.getBlock();
 
 		if (replaced.getBlock() instanceof BlockSnow && replaced.getValue(BlockSnow.LAYERS).intValue() == 1 && block instanceof IBlockSnowy)
@@ -227,7 +242,9 @@ public class PlayerAetherHooks
 			final WorldServer toWorld = DimensionManager.getWorld(0);
 
 			if (bedPos != null)
+			{
 				bedPos = EntityPlayer.getBedSpawnLocation(mp.getServerWorld(), bedPos, mp.isSpawnForced(mp.dimension));
+			}
 
 			if (bedPos == null)
 			{

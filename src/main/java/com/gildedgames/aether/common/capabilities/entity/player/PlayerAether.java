@@ -9,6 +9,7 @@ import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketEquipment;
 import com.gildedgames.aether.common.network.packets.PacketMarkPlayerDeath;
 import com.gildedgames.aether.common.network.packets.PacketSetPlayedIntro;
+import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.orbis.api.util.mc.NBTHelper;
 import com.google.common.collect.Lists;
 import net.minecraft.block.material.Material;
@@ -24,6 +25,8 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.DimensionType;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -58,6 +61,8 @@ public class PlayerAether implements IPlayerAether
 
 	private final PlayerSwetTracker swetTracker;
 
+	private final PlayerSeparateInventoryModule separateInventoryModule;
+
 	private final List<PlayerAetherObserver> observers = Lists.newArrayList();
 
 	private boolean hasDiedInAetherBefore;
@@ -73,6 +78,7 @@ public class PlayerAether implements IPlayerAether
 		this.equipmentModule = null;
 		this.dialogModule = null;
 		this.swetTracker = null;
+		this.separateInventoryModule = null;
 	}
 
 	public PlayerAether(final EntityPlayer entity)
@@ -86,6 +92,7 @@ public class PlayerAether implements IPlayerAether
 		this.equipmentModule = new PlayerEquipmentModule(this);
 		this.dialogModule = new PlayerDialogModule(this);
 		this.swetTracker = new PlayerSwetTracker(this);
+		this.separateInventoryModule = new PlayerSeparateInventoryModule(this);
 
 		final Collection<PlayerAetherModule> modules = new ArrayList<>();
 
@@ -96,6 +103,7 @@ public class PlayerAether implements IPlayerAether
 		modules.add(this.equipmentModule);
 		modules.add(this.dialogModule);
 		modules.add(this.swetTracker);
+		modules.add(this.separateInventoryModule);
 
 		this.modules = modules.toArray(new PlayerAetherModule[modules.size()]);
 	}
@@ -123,6 +131,18 @@ public class PlayerAether implements IPlayerAether
 	public void setHasDiedInAetherBefore(final boolean flag)
 	{
 		this.hasDiedInAetherBefore = flag;
+	}
+
+	public PlayerSeparateInventoryModule getSeparateInventoryModule()
+	{
+		return this.separateInventoryModule;
+	}
+
+	public void onLoggedOut()
+	{
+		DimensionType dim = this.getEntity().world.provider.getDimensionType();
+
+		this.separateInventoryModule.switchToMinecraftInventory(dim == DimensionsAether.AETHER || dim == DimensionsAether.NECROMANCER_TOWER);
 	}
 
 	/**
@@ -204,6 +224,21 @@ public class PlayerAether implements IPlayerAether
 		this.sendFullUpdate();
 
 		this.equipmentModule.onTeleport();
+
+		DimensionType to = DimensionManager.getProviderType(event.toDim);
+		DimensionType from = DimensionManager.getProviderType(event.fromDim);
+
+		boolean fromAether = from == DimensionsAether.AETHER || from == DimensionsAether.NECROMANCER_TOWER;
+		boolean toAether = to == DimensionsAether.AETHER || to == DimensionsAether.NECROMANCER_TOWER;
+
+		if (toAether && !fromAether)
+		{
+			this.separateInventoryModule.switchToAetherInventory();
+		}
+		else if (!toAether && fromAether)
+		{
+			this.separateInventoryModule.switchToMinecraftInventory(fromAether);
+		}
 	}
 
 	public void onPlayerBeginWatching(final IPlayerAether other)
