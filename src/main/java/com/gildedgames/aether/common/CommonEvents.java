@@ -20,6 +20,7 @@ import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -41,6 +42,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.EntityMountEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -63,6 +65,19 @@ import java.util.function.Supplier;
 
 public class CommonEvents
 {
+	@SubscribeEvent
+	public static void onEntity(EntityJoinWorldEvent event)
+	{
+		if (event.getEntity() instanceof EntityXPOrb)
+		{
+			if (event.getWorld().provider.getDimensionType() == DimensionsAether.AETHER
+					|| event.getWorld().provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER)
+			{
+				event.setCanceled(true);
+			}
+		}
+	}
+
 	@SubscribeEvent
 	public static void onExperienceDrop(LivingExperienceDropEvent event)
 	{
