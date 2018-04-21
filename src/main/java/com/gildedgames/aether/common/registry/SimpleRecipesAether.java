@@ -68,6 +68,20 @@ public class SimpleRecipesAether
 				new ItemStack(BlocksAether.agiosite_brick, 1, OreDictionary.WILDCARD_VALUE));
 		addMasonry(new ItemStack(BlocksAether.agiosite_pillar), new ItemStack(BlocksAether.agiosite_brick, 1, OreDictionary.WILDCARD_VALUE));
 
+		addMasonry(new ItemStack(BlocksAether.icestone_bricks_decorative, 1, BlockIcestoneBricksDecorative.BASE_BRICKS.getMeta()),
+				new ItemStack(BlocksAether.icestone_bricks, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.icestone_bricks_decorative, 1, BlockIcestoneBricksDecorative.BASE_PILLAR.getMeta()),
+				new ItemStack(BlocksAether.icestone_bricks, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.icestone_bricks_decorative, 1, BlockIcestoneBricksDecorative.CAPSTONE_BRICKS.getMeta()),
+				new ItemStack(BlocksAether.icestone_bricks, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.icestone_bricks_decorative, 1, BlockIcestoneBricksDecorative.CAPSTONE_PILLAR.getMeta()),
+				new ItemStack(BlocksAether.icestone_bricks, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.icestone_bricks_decorative, 1, BlockIcestoneBricksDecorative.FLAGSTONES.getMeta()),
+				new ItemStack(BlocksAether.icestone_bricks, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.icestone_bricks_decorative, 1, BlockIcestoneBricksDecorative.KEYSTONE.getMeta()),
+				new ItemStack(BlocksAether.icestone_bricks, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.icestone_pillar), new ItemStack(BlocksAether.icestone_bricks, 1, OreDictionary.WILDCARD_VALUE));
+
 		addMasonry(new ItemStack(BlocksAether.skyroot_decorative, 1, BlockSkyrootDecorative.BASE_PLANKS.getMeta()),
 				new ItemStack(BlocksAether.skyroot_planks, 1, OreDictionary.WILDCARD_VALUE));
 		addMasonry(new ItemStack(BlocksAether.skyroot_decorative, 1, BlockSkyrootDecorative.BASE_BEAM.getMeta()),
@@ -85,6 +99,24 @@ public class SimpleRecipesAether
 		addMasonry(new ItemStack(BlocksAether.skyroot_decorative, 1, BlockSkyrootDecorative.TILES_SMALL.getMeta()),
 				new ItemStack(BlocksAether.skyroot_planks, 1, OreDictionary.WILDCARD_VALUE));
 		addMasonry(new ItemStack(BlocksAether.skyroot_beam), new ItemStack(BlocksAether.skyroot_planks, 1, OreDictionary.WILDCARD_VALUE));
+
+		addMasonry(new ItemStack(BlocksAether.light_skyroot_decorative, 1, BlockSkyrootDecorative.BASE_PLANKS.getMeta()),
+				new ItemStack(BlocksAether.light_skyroot_planks, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.light_skyroot_decorative, 1, BlockSkyrootDecorative.BASE_BEAM.getMeta()),
+				new ItemStack(BlocksAether.light_skyroot_planks, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.light_skyroot_decorative, 1, BlockSkyrootDecorative.TOP_PLANKS.getMeta()),
+				new ItemStack(BlocksAether.light_skyroot_planks, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.light_skyroot_decorative, 1, BlockSkyrootDecorative.TOP_BEAM.getMeta()),
+				new ItemStack(BlocksAether.light_skyroot_planks, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.light_skyroot_decorative, 1, BlockSkyrootDecorative.FLOORBOARDS.getMeta()),
+				new ItemStack(BlocksAether.light_skyroot_planks, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.light_skyroot_decorative, 1, BlockSkyrootDecorative.HIGHLIGHT.getMeta()),
+				new ItemStack(BlocksAether.light_skyroot_planks, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.light_skyroot_decorative, 1, BlockSkyrootDecorative.TILES.getMeta()),
+				new ItemStack(BlocksAether.light_skyroot_planks, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.light_skyroot_decorative, 1, BlockSkyrootDecorative.TILES_SMALL.getMeta()),
+				new ItemStack(BlocksAether.light_skyroot_planks, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.light_skyroot_beam), new ItemStack(BlocksAether.light_skyroot_planks, 1, OreDictionary.WILDCARD_VALUE));
 
 		addMasonry(new ItemStack(BlocksAether.quicksoil_glass_decorative, 1, BlockRockGlassDecorative.SKYROOT_FRAME.getMeta()),
 				new ItemStack(BlocksAether.quicksoil_glass, 1, OreDictionary.WILDCARD_VALUE));
@@ -115,6 +147,34 @@ public class SimpleRecipesAether
 				new ItemStack(BlocksAether.crude_scatterglass_pane, 1, OreDictionary.WILDCARD_VALUE));
 		addMasonry(new ItemStack(BlocksAether.crude_scatterglass_pane_decorative, 1, BlockRockGlassPaneDecorative.SKYROOT_FRAME.getMeta()),
 				new ItemStack(BlocksAether.crude_scatterglass_pane, 1, OreDictionary.WILDCARD_VALUE));
+
+		addMasonry(new ItemStack(BlocksAether.therastone_brick_decorative, 1, BlockTherastoneDecorative.BASE_BRICKS.getMeta()),
+				new ItemStack(BlocksAether.therastone_brick, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.therastone_brick_decorative, 1, BlockTherastoneDecorative.BASE_PILLAR.getMeta()),
+				new ItemStack(BlocksAether.therastone_brick, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.therastone_brick_decorative, 1, BlockTherastoneDecorative.CAPSTONE_BRICKS.getMeta()),
+				new ItemStack(BlocksAether.therastone_brick, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.therastone_brick_decorative, 1, BlockTherastoneDecorative.CAPSTONE_PILLAR.getMeta()),
+				new ItemStack(BlocksAether.therastone_brick, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.therastone_brick_decorative, 1, BlockTherastoneDecorative.FLAGSTONES.getMeta()),
+				new ItemStack(BlocksAether.therastone_brick, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.therastone_brick_decorative, 1, BlockTherastoneDecorative.KEYSTONE.getMeta()),
+				new ItemStack(BlocksAether.therastone_brick, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.therastone_pillar), new ItemStack(BlocksAether.therastone_brick, 1, OreDictionary.WILDCARD_VALUE));
+
+		addMasonry(new ItemStack(BlocksAether.therawood_decorative, 1, BlockTherawoodDecorative.BASE_PLANKS.getMeta()),
+				new ItemStack(BlocksAether.therawood_planks, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.therawood_decorative, 1, BlockTherawoodDecorative.BASE_BEAM.getMeta()),
+				new ItemStack(BlocksAether.therawood_planks, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.therawood_decorative, 1, BlockTherawoodDecorative.TOP_PLANKS.getMeta()),
+				new ItemStack(BlocksAether.therawood_planks, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.therawood_decorative, 1, BlockTherawoodDecorative.TOP_BEAM.getMeta()),
+				new ItemStack(BlocksAether.therawood_planks, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.therawood_decorative, 1, BlockTherawoodDecorative.FLOORBOARDS.getMeta()),
+				new ItemStack(BlocksAether.therawood_planks, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.therawood_decorative, 1, BlockTherawoodDecorative.HIGHLIGHT.getMeta()),
+				new ItemStack(BlocksAether.therawood_planks, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.therawood_beam), new ItemStack(BlocksAether.therawood_planks, 1, OreDictionary.WILDCARD_VALUE));
 	}
 
 	public static void postInit()
