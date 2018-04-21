@@ -276,8 +276,9 @@ public class IslandSectorAccessFlatFile implements ISectorAccess
 	@Nonnull
 	private ISector generateSector(final int sectorX, final int sectorZ)
 	{
-		final long seed =
-				WorldObjectManager.getWorldSeed(this.world.provider.getDimension()) ^ ((long) sectorX * 341873128712L + (long) sectorZ * 132897987541L);
+		long worldSeed = WorldObjectManager.getWorldSeed(this.world.provider.getDimension());
+
+		final long seed = worldSeed ^ ((long) sectorX * 341873128712L + (long) sectorZ * 132897987541L);
 
 		final ISector sector = IslandSectorFactory.create(this.world, sectorX, sectorZ, seed);
 		sector.markDirty();
