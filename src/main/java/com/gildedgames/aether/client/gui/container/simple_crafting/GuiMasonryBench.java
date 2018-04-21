@@ -30,6 +30,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
 import java.io.IOException;
@@ -186,6 +187,11 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 				container.onNewRecipe(this.currentRecipe);
 
 				NetworkingAether.sendPacketToServer(new MasonryRecipeChangedPacket(this.currentRecipe));
+
+				if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT))
+				{
+					this.container.setInputCount(64);
+				}
 
 				if (!RecipeUtil.canCraft(Minecraft.getMinecraft().player, option.getRecipe()) && option.getRecipe() != null)
 				{
