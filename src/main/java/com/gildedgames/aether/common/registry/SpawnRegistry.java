@@ -4,17 +4,15 @@ import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.entity.spawning.EntitySpawn;
 import com.gildedgames.aether.api.entity.spawning.ISpawningInfo;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.entities.living.mobs.*;
 import com.gildedgames.aether.common.entities.living.passive.*;
-import com.gildedgames.aether.common.registry.content.BiomesAether;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.world.spawning.PosCondition;
 import com.gildedgames.aether.common.world.spawning.SpawnArea;
 import com.gildedgames.aether.common.world.spawning.SpawnEntry;
 import com.gildedgames.aether.common.world.spawning.SpawnHandler;
-import com.gildedgames.aether.common.world.spawning.conditions.CheckBiome;
 import com.gildedgames.aether.common.world.spawning.conditions.CheckBlockStateUnderneath;
+import com.gildedgames.aether.common.world.spawning.conditions.CheckBlockUnderneath;
 import com.gildedgames.aether.common.world.spawning.conditions.CheckDimension;
 import com.gildedgames.aether.common.world.spawning.conditions.CheckTime;
 import com.gildedgames.aether.common.world.spawning.util.FlyingPositionSelector;
@@ -47,8 +45,7 @@ public class SpawnRegistry
 		final SpawnHandler animals = new SpawnHandler("aether_animals").chunkArea(4).targetEntityCountPerArea(9).updateFrequencyInTicks(200);
 		animals.worldCondition(new CheckDimension(DimensionsAether.AETHER));
 
-		final PosCondition grassCheck = new CheckBlockStateUnderneath(BlocksAether.aether_grass.getDefaultState(),
-				BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.ENCHANTED));
+		final PosCondition grassCheck = new CheckBlockUnderneath(BlocksAether.aether_grass);
 
 		final SpawnEntry burrukai = new SpawnEntry(EntityBurrukai.class, 10F, 2, 3).conditiion(grassCheck);
 		final SpawnEntry ram = new SpawnEntry(EntityKirrid.class, 10F, 2, 3).conditiion(grassCheck);
@@ -74,8 +71,7 @@ public class SpawnRegistry
 		final SpawnHandler hostiles = new SpawnHandler("aether_hostiles").chunkArea(4).targetEntityCountPerArea(9).updateFrequencyInTicks(1200);
 		hostiles.worldCondition(new CheckDimension(DimensionsAether.AETHER));
 
-		final PosCondition groundCheck = new CheckBlockStateUnderneath(BlocksAether.aether_grass.getDefaultState(), BlocksAether.holystone.getDefaultState(),
-				BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.ENCHANTED));
+		final PosCondition groundCheck = new CheckBlockUnderneath(BlocksAether.aether_grass, BlocksAether.holystone);
 
 		final SpawnEntry zephyr = new SpawnEntry(EntityZephyr.class, 3F, 2, 3, new FlyingPositionSelector())
 				.conditiion(new CheckBlockStateUnderneath(Blocks.AIR.getDefaultState()));
@@ -93,7 +89,7 @@ public class SpawnRegistry
 
 		/** FLYING **/
 		final SpawnHandler flying = new SpawnHandler("aether_flying").chunkArea(9).targetEntityCountPerArea(1).updateFrequencyInTicks(1200);
-		flying.worldCondition(new CheckDimension(DimensionsAether.AETHER)).condition(new CheckBiome(BiomesAether.HIGHLANDS));
+		flying.worldCondition(new CheckDimension(DimensionsAether.AETHER));
 
 		final SpawnEntry aerwhale = new SpawnEntry(EntityAerwhale.class, 10F, 1, 1, new FlyingPositionSelector())
 				.conditiion(new CheckBlockStateUnderneath(Blocks.AIR.getDefaultState()));
