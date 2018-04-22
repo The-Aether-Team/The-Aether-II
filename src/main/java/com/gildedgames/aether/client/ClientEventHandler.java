@@ -32,6 +32,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.GuiDownloadTerrain;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -134,6 +135,16 @@ public class ClientEventHandler
 	@SubscribeEvent
 	public static void onOpenGui(final GuiOpenEvent event)
 	{
+		if (mc.world != null && event.getGui() instanceof GuiInventory)
+		{
+			boolean necro = mc.world.provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER;
+
+			if (necro && !mc.player.isCreative())
+			{
+				event.setCanceled(true);
+			}
+		}
+
 		if (DRAW_BLACK_SCREEN && event.getGui() instanceof GuiDownloadTerrain)
 		{
 			event.setGui(new GuiBlackScreen());
