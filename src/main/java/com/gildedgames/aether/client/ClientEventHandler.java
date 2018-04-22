@@ -26,7 +26,7 @@ import com.gildedgames.aether.common.network.packets.PacketSpecialMovement;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.orbis_api.client.gui.util.GuiFrameUtils;
-import com.gildedgames.orbis_api.common.util.InputHelper;
+import com.gildedgames.orbis_api.util.InputHelper;
 import net.minecraft.client.LoadingScreenRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
