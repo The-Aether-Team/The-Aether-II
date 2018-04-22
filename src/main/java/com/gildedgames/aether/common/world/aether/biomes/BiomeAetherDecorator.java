@@ -134,7 +134,7 @@ public class BiomeAetherDecorator
 
 		for (int i = 0; i < 5000; i++)
 		{
-			final BlueprintDefinition outpost = GenerationAether.OUTPOST;
+			final BlueprintDefinition outpost = GenerationAether.OUTPOST.getRandomDefinition(random);
 
 			final int x = random.nextInt(island.getBounds().getWidth());
 			final int z = random.nextInt(island.getBounds().getLength());
@@ -169,17 +169,17 @@ public class BiomeAetherDecorator
 
 		if (!generated)
 		{
-			AetherCore.LOGGER.info("WARNING: OUTPOST NOT GENERATED ON AN ISLAND!");
+			AetherCore.LOGGER.info("WARNING: OUTPOST_A NOT GENERATED ON AN ISLAND!");
 		}
 
-		/*this.generate(GenerationAether.ABAND_ANGEL_STOREROOM, 20, random.nextInt(2), -1, pos, island, manager, primer, world, random);
-		this.generate(GenerationAether.ABAND_ANGEL_WATCHTOWER, 20, random.nextInt(2), -1, pos, island, manager, primer, world, random);
-		this.generate(GenerationAether.ABAND_CAMPSITE_1A, 200, random.nextInt(3), 0, pos, island, manager, primer, world, random);
-		this.generate(GenerationAether.ABAND_HUMAN_HOUSE_1A, 20, random.nextInt(3), -1, pos, island, manager, primer, world, random);
-		this.generate(GenerationAether.ABAND_HUMAN_HOUSE_1B, 20, random.nextInt(2), -5, pos, island, manager, primer, world, random);
-		this.generate(GenerationAether.SKYROOT_WATCHTOWER_1A, 20, random.nextInt(3), 1, pos, island, manager, primer, world, random);
-		this.generate(GenerationAether.WELL, 60, random.nextInt(3), -9, pos, island, manager, primer, world, random);
-*/
+		this.generate(GenerationAether.ABAND_ANGEL_STOREROOM, 200, random.nextInt(10), -1, pos, island, manager, primer, world, random);
+		this.generate(GenerationAether.ABAND_ANGEL_WATCHTOWER, 200, random.nextInt(10), -1, pos, island, manager, primer, world, random);
+		this.generate(GenerationAether.ABAND_CAMPSITE_1A, 300, random.nextInt(10), 0, pos, island, manager, primer, world, random);
+		this.generate(GenerationAether.ABAND_HUMAN_HOUSE_1A, 200, random.nextInt(10), -1, pos, island, manager, primer, world, random);
+		this.generate(GenerationAether.ABAND_HUMAN_HOUSE_1B, 200, random.nextInt(10), -5, pos, island, manager, primer, world, random);
+		this.generate(GenerationAether.SKYROOT_WATCHTOWER_1A, 300, random.nextInt(10), 1, pos, island, manager, primer, world, random);
+		//this.generate(GenerationAether.WELL, 600, random.nextInt(30), -9, pos, island, manager, primer, world, random);
+
 		island.getVirtualDataManager().setPlacedBlueprints(manager.getPlacedBlueprints());
 	}
 

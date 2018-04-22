@@ -15,11 +15,13 @@ import com.gildedgames.aether.common.world.templates.post.PostPlacementSetBlock;
 import com.gildedgames.aether.common.world.templates.post.PostPlacementSpawnEntity;
 import com.gildedgames.orbis_api.OrbisAPI;
 import com.gildedgames.orbis_api.core.BlueprintDefinition;
+import com.gildedgames.orbis_api.core.BlueprintDefinitionPool;
 import com.gildedgames.orbis_api.core.PlacementCondition;
 import com.gildedgames.orbis_api.core.registry.IOrbisDefinitionRegistry;
 import com.gildedgames.orbis_api.core.registry.OrbisDefinitionRegistry;
 import com.gildedgames.orbis_api.core.util.PlacementConditions;
 import com.gildedgames.orbis_api.processing.CenterOffsetProcessor;
+import net.minecraft.block.material.Material;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 
@@ -66,9 +68,51 @@ public class GenerationAether
 
 	public static WorldGenAercloud green_aercloud, golden_aercloud, storm_aercloud;
 
-	public static BlueprintDefinition OUTPOST;
+	public static BlueprintDefinition OUTPOST_A;
+
+	public static BlueprintDefinition OUTPOST_B;
+
+	public static BlueprintDefinitionPool OUTPOST;
 
 	public static BlueprintDefinition NECROMANCER_TOWER;
+
+	public static BlueprintDefinition ABAND_ANGEL_STOREROOM_1A;
+
+	public static BlueprintDefinitionPool ABAND_ANGEL_STOREROOM;
+
+	public static BlueprintDefinition ABAND_ANGEL_WATCHTOWER_1A;
+
+	public static BlueprintDefinitionPool ABAND_ANGEL_WATCHTOWER;
+
+	public static BlueprintDefinition ABAND_CAMPSITE_1A;
+
+	public static BlueprintDefinitionPool ABAND_CAMPSITE;
+
+	public static BlueprintDefinition ABAND_HUMAN_HOUSE_1A;
+
+	public static BlueprintDefinition ABAND_HUMAN_HOUSE_1B;
+
+	public static BlueprintDefinitionPool ABAND_HUMAN_HOUSE;
+
+	public static BlueprintDefinition SKYROOT_WATCHTOWER_1A;
+
+	public static BlueprintDefinition SKYROOT_WATCHTOWER_1B;
+
+	public static BlueprintDefinition SKYROOT_WATCHTOWER_2A;
+
+	public static BlueprintDefinition SKYROOT_WATCHTOWER_2B;
+
+	public static BlueprintDefinition SKYROOT_WATCHTOWER_3A;
+
+	public static BlueprintDefinition SKYROOT_WATCHTOWER_3B;
+
+	public static BlueprintDefinitionPool SKYROOT_WATCHTOWER;
+
+	public static BlueprintDefinition WELL_1A;
+
+	public static BlueprintDefinition WELL_1B;
+
+	public static BlueprintDefinitionPool WELL;
 
 	private GenerationAether()
 	{
@@ -272,14 +316,82 @@ public class GenerationAether
 						no_quicksoil
 				};
 
-		OUTPOST = new BlueprintDefinition(BlueprintsAether.OUTPOST).setRegistry(registry).setConditions(structureConditions)
+		OUTPOST_A = new BlueprintDefinition(BlueprintsAether.OUTPOST_A).setRegistry(registry).setConditions(structureConditions)
+				.setRandomRotation(false);
+
+		OUTPOST_B = new BlueprintDefinition(BlueprintsAether.OUTPOST_B).setRegistry(registry).setConditions(structureConditions)
 				.setRandomRotation(false);
 
 		NECROMANCER_TOWER = new BlueprintDefinition(BlueprintsAether.NECROMANCER_TOWER).setRegistry(registry)
 				.setRandomRotation(false);
 
-		registry.register(0, OUTPOST);
+		ABAND_ANGEL_STOREROOM_1A = new BlueprintDefinition(BlueprintsAether.ABAND_ANGEL_STOREROOM_1A).setRegistry(registry)
+				.setConditions(PlacementConditions.onSpecificBlock(0, BlocksAether.aether_grass, BlocksAether.aether_dirt, BlocksAether.holystone), replace,
+						PlacementConditions.ignoreBlock(0, BlocksAether.quicksoil.getDefaultState()));
+
+		ABAND_ANGEL_WATCHTOWER_1A = new BlueprintDefinition(BlueprintsAether.ABAND_ANGEL_WATCHTOWER_1A).setRegistry(registry)
+				.setConditions(PlacementConditions.onSpecificBlock(0, BlocksAether.aether_grass, BlocksAether.aether_dirt, BlocksAether.holystone), replace,
+						PlacementConditions.ignoreBlock(0, BlocksAether.quicksoil.getDefaultState()));
+
+		ABAND_CAMPSITE_1A = new BlueprintDefinition(BlueprintsAether.ABAND_CAMPSITE_1A).setRegistry(registry)
+				.setConditions(PlacementConditions.onSpecificBlock(0, BlocksAether.aether_grass), replace, no_quicksoil);
+
+		ABAND_HUMAN_HOUSE_1A = new BlueprintDefinition(BlueprintsAether.ABAND_HUMAN_HOUSE_1A).setRegistry(registry).setConditions(structureConditions);
+		ABAND_HUMAN_HOUSE_1B = new BlueprintDefinition(BlueprintsAether.ABAND_HUMAN_HOUSE_1B).setRegistry(registry)
+				.setConditions(PlacementConditions.onSpecificBlock(5, BlocksAether.aether_grass, BlocksAether.aether_dirt, BlocksAether.holystone),
+						PlacementConditions.replaceable(true, Material.ROCK, Material.GROUND, Material.GRASS, Material.AIR),
+						PlacementConditions.ignoreBlock(5, BlocksAether.quicksoil.getDefaultState()));
+
+		SKYROOT_WATCHTOWER_1A = new BlueprintDefinition(BlueprintsAether.SKYROOT_WATCHTOWER_1A).setRegistry(registry).setConditions(structureConditions);
+		SKYROOT_WATCHTOWER_1B = new BlueprintDefinition(BlueprintsAether.SKYROOT_WATCHTOWER_1B).setRegistry(registry).setConditions(structureConditions);
+
+		SKYROOT_WATCHTOWER_2A = new BlueprintDefinition(BlueprintsAether.SKYROOT_WATCHTOWER_2A).setRegistry(registry).setConditions(structureConditions);
+		SKYROOT_WATCHTOWER_2B = new BlueprintDefinition(BlueprintsAether.SKYROOT_WATCHTOWER_2B).setRegistry(registry).setConditions(structureConditions);
+
+		SKYROOT_WATCHTOWER_3A = new BlueprintDefinition(BlueprintsAether.SKYROOT_WATCHTOWER_3A).setRegistry(registry).setConditions(structureConditions);
+		SKYROOT_WATCHTOWER_3B = new BlueprintDefinition(BlueprintsAether.SKYROOT_WATCHTOWER_3B).setRegistry(registry).setConditions(structureConditions);
+
+		WELL_1A = new BlueprintDefinition(BlueprintsAether.WELL_1A).setRegistry(registry)
+				.setConditions(PlacementConditions.onSpecificBlock(9, BlocksAether.aether_grass, BlocksAether.aether_dirt, BlocksAether.holystone),
+						PlacementConditions.replaceable(true, Material.ROCK, Material.GROUND, Material.GRASS, Material.AIR),
+						PlacementConditions.ignoreBlock(9, BlocksAether.quicksoil.getDefaultState()));
+		WELL_1B = new BlueprintDefinition(BlueprintsAether.WELL_1B).setRegistry(registry)
+				.setConditions(PlacementConditions.onSpecificBlock(10, BlocksAether.aether_grass, BlocksAether.aether_dirt, BlocksAether.holystone),
+						PlacementConditions.replaceable(true, Material.ROCK, Material.GROUND, Material.GRASS, Material.AIR),
+						PlacementConditions.ignoreBlock(10, BlocksAether.quicksoil.getDefaultState()));
+
+		OUTPOST = new BlueprintDefinitionPool(OUTPOST_A, OUTPOST_B);
+		ABAND_ANGEL_STOREROOM = new BlueprintDefinitionPool(ABAND_ANGEL_STOREROOM_1A);
+		ABAND_ANGEL_WATCHTOWER = new BlueprintDefinitionPool(ABAND_ANGEL_WATCHTOWER_1A);
+		ABAND_CAMPSITE = new BlueprintDefinitionPool(ABAND_CAMPSITE_1A);
+		ABAND_HUMAN_HOUSE = new BlueprintDefinitionPool(ABAND_HUMAN_HOUSE_1A, ABAND_HUMAN_HOUSE_1B);
+		SKYROOT_WATCHTOWER = new BlueprintDefinitionPool(SKYROOT_WATCHTOWER_1A, SKYROOT_WATCHTOWER_1B, SKYROOT_WATCHTOWER_2A, SKYROOT_WATCHTOWER_2B,
+				SKYROOT_WATCHTOWER_3A, SKYROOT_WATCHTOWER_3B);
+		WELL = new BlueprintDefinitionPool(WELL_1A, WELL_1B);
+
+		registry.register(0, OUTPOST_A);
 		registry.register(1, NECROMANCER_TOWER);
+
+		registry.register(2, ABAND_CAMPSITE_1A);
+
+		registry.register(3, ABAND_HUMAN_HOUSE_1A);
+		registry.register(4, ABAND_HUMAN_HOUSE_1B);
+
+		registry.register(5, ABAND_ANGEL_STOREROOM_1A);
+		registry.register(6, ABAND_ANGEL_WATCHTOWER_1A);
+
+		registry.register(7, SKYROOT_WATCHTOWER_1A);
+		registry.register(8, SKYROOT_WATCHTOWER_1B);
+
+		registry.register(9, SKYROOT_WATCHTOWER_2A);
+		registry.register(10, SKYROOT_WATCHTOWER_2B);
+
+		registry.register(11, SKYROOT_WATCHTOWER_3A);
+		registry.register(12, SKYROOT_WATCHTOWER_3B);
+
+		registry.register(13, WELL_1A);
+		registry.register(14, WELL_1B);
+		registry.register(15, OUTPOST_B);
 
 		reg(0, blue_skyroot_tree_1);
 		reg(1, blue_skyroot_tree_2);
