@@ -5,7 +5,6 @@ import com.gildedgames.aether.api.items.IItemProperties;
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
-import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.entities.living.mobs.EntityAechorPlant;
 import com.gildedgames.aether.common.entities.living.npc.EntityNPC;
@@ -15,8 +14,6 @@ import com.gildedgames.aether.common.items.armor.ItemAetherShield;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.util.helpers.PlayerUtil;
 import com.gildedgames.aether.common.world.aether.TeleporterAether;
-import com.gildedgames.orbis_api.util.TeleporterGeneric;
-import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -24,37 +21,32 @@ import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.PlayerList;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.*;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.EntityMountEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
-import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.WorldEvent;
-import net.minecraftforge.fluids.*;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.FluidEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -145,60 +137,6 @@ public class CommonEvents
 	}
 
 	@SubscribeEvent
-	public static void onPlayerUseBucket(final FillBucketEvent event)
-	{
-		if (event.getTarget() != null && event.getTarget().typeOfHit == RayTraceResult.Type.BLOCK)
-		{
-			FluidStack fluidStack = null;
-
-			if (event.getEmptyBucket().hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null))
-			{
-				fluidStack = FluidUtil.getFluidContained(event.getEmptyBucket());
-			}
-
-			final EntityPlayer player = event.getEntityPlayer();
-
-			final BlockPos pos = event.getTarget().getBlockPos().offset(event.getTarget().sideHit);
-
-			final boolean hasWaterFluid = fluidStack != null && fluidStack.getFluid().getName().equals(FluidRegistry.WATER.getName());
-
-			if (hasWaterFluid || event.getEmptyBucket().getItem() == Items.WATER_BUCKET
-					|| event.getEmptyBucket().getItem() == ItemsAether.skyroot_water_bucket)
-			{
-				CommonEvents.onWaterPlaced(event, player, pos);
-			}
-		}
-	}
-
-	private static boolean tryToCreatePortal(final World world, final BlockPos target, final BlockPos pos)
-	{
-		if (world.getBlockState(target).getBlock() == Blocks.GLOWSTONE)
-		{
-			BlockAetherPortal.Size size = new BlockAetherPortal.Size(world, pos, EnumFacing.Axis.X);
-
-			if (size.isWithinSizeBounds() && size.getPortalBlocks() == 0)
-			{
-				size.createPortal();
-
-				return true;
-			}
-			else
-			{
-				size = new BlockAetherPortal.Size(world, pos, EnumFacing.Axis.Z);
-
-				if (size.isWithinSizeBounds() && size.getPortalBlocks() == 0)
-				{
-					size.createPortal();
-
-					return true;
-				}
-			}
-		}
-
-		return false;
-	}
-
-	@SubscribeEvent
 	public static void onLivingEntityUpdate(final LivingEvent.LivingUpdateEvent event)
 	{
 		final Entity entity = event.getEntity();
@@ -233,89 +171,18 @@ public class CommonEvents
 				if (entity instanceof EntityPlayer)
 				{
 					final EntityPlayer player = (EntityPlayer) entity;
-					final PlayerAether playerAether = PlayerAether.getPlayer(player);
 
-					if (playerAether.getParachuteModule().isParachuting())
-					{
-						CommonEvents.onFallenFromAether(entity);
-					}
-					else
-					{
-						player.attackEntityFrom(DamageSource.OUT_OF_WORLD, 200.0F);
+					player.attackEntityFrom(DamageSource.OUT_OF_WORLD, 200.0F);
 
-						if (player.getHealth() <= 0 && !player.isDead)
-						{
-							player.sendStatusMessage(new TextComponentString("You fell out of the Aether without a Cloud Parachute. Ouch!"), false);
-							player.isDead = true;
-						}
+					if (player.getHealth() <= 0 && !player.isDead)
+					{
+						player.isDead = true;
 					}
 				}
 				else
 				{
 					entity.setDead();
 				}
-			}
-		}
-	}
-
-	private static void onFallenFromAether(final Entity entity)
-	{
-		final WorldServer toWorld = DimensionManager.getWorld(0);
-
-		final Teleporter teleporter = new TeleporterGeneric(toWorld);
-
-		// TODO: Recrusive teleporting, newsystem in 1.9/1.10
-		final Entity mount = entity.getRidingEntity();
-
-		final boolean hasPassengers = !entity.getPassengers().isEmpty();
-
-		final List<Entity> teleportedPassengers = Lists.newLinkedList();
-
-		final Entity teleportedEntity;
-
-		final BlockPos teleportPos = new BlockPos(entity.posX, 200 + entity.posY, entity.posZ);
-
-		if (hasPassengers)
-		{
-			for (final Entity passenger : entity.getPassengers())
-			{
-				passenger.dismountRidingEntity();
-
-				teleportedPassengers.add(CommonEvents.teleportEntity(passenger, toWorld, teleporter, 0));
-
-				passenger.setPositionAndUpdate(teleportPos.getX(), teleportPos.getY(), teleportPos.getZ());
-			}
-		}
-
-		if (mount != null)
-		{
-			// Dismounts the entity it's riding first as teleporting will cause updates to the entities
-			entity.dismountRidingEntity();
-
-			// Teleports entity first, then what it's riding
-
-			teleportedEntity = CommonEvents.teleportEntity(entity, toWorld, teleporter, 0);
-
-			final Entity teleportedMount = CommonEvents.teleportEntity(mount, toWorld, teleporter, 0);
-
-			teleportedEntity.setPositionAndUpdate(teleportPos.getX(), teleportPos.getY(), teleportPos.getZ());
-			teleportedMount.setPositionAndUpdate(teleportPos.getX(), teleportPos.getY(), teleportPos.getZ());
-
-			// Re-onMounted what it was previously riding
-			teleportedEntity.startRiding(teleportedMount, true);
-		}
-		else
-		{
-			teleportedEntity = CommonEvents.teleportEntity(entity, toWorld, teleporter, 0);
-
-			teleportedEntity.setPositionAndUpdate(teleportPos.getX(), teleportPos.getY(), teleportPos.getZ());
-		}
-
-		if (hasPassengers)
-		{
-			for (final Entity passenger : teleportedPassengers)
-			{
-				passenger.startRiding(teleportedEntity, true);
 			}
 		}
 	}
@@ -454,42 +321,6 @@ public class CommonEvents
 			if (stack.getItem() == ItemsAether.skyroot_bucket)
 			{
 				PlayerUtil.fillBucketInHand(event.getEntityPlayer(), event.getItemStack(), new ItemStack(ItemsAether.skyroot_milk_bucket));
-			}
-		}
-	}
-
-	private static void onWaterPlaced(final FillBucketEvent event, final EntityPlayer player, final BlockPos pos)
-	{
-		if (event.getWorld().getBlockState(event.getTarget().getBlockPos()).getBlock() == Blocks.GLOWSTONE)
-		{
-			if (CommonEvents.tryToCreatePortal(event.getWorld(), event.getTarget().getBlockPos(), pos))
-			{
-				if (!event.getEntityPlayer().capabilities.isCreativeMode)
-				{
-					final IFluidHandler fluidHandler = FluidUtil.getFluidHandler(event.getEmptyBucket());
-					ItemStack stack = ItemStack.EMPTY;
-
-					if (fluidHandler != null)
-					{
-						final FluidActionResult result = FluidUtil.tryEmptyContainer(event.getEmptyBucket(), fluidHandler, Integer.MAX_VALUE, player, true);
-
-						stack = result.getResult();
-					}
-
-					if (event.getEmptyBucket().getItem() == Items.WATER_BUCKET)
-					{
-						stack = new ItemStack(Items.BUCKET);
-					}
-
-					if (event.getEmptyBucket().getItem() == ItemsAether.skyroot_water_bucket)
-					{
-						stack = new ItemStack(ItemsAether.skyroot_bucket);
-					}
-
-					event.getEntityPlayer().inventory.setInventorySlotContents(event.getEntityPlayer().inventory.currentItem, stack);
-				}
-
-				event.setCanceled(true);
 			}
 		}
 	}

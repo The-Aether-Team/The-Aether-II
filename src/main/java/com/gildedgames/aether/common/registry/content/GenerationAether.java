@@ -48,7 +48,7 @@ public class GenerationAether
 
 	public static TemplateDefinition skyroot_moa_nest_tree_1, skyroot_moa_nest_1, skyroot_moa_nest_2;
 
-	public static TemplateDefinition aether_portal_for_world, aether_portal, nether_portal, end_portal;
+	public static TemplateDefinition aether_portal_for_world, aether_portal;
 
 	public static TemplateDefinition mysterious_henge, outpost_a, outpost_b, outpost_c;
 
@@ -199,8 +199,6 @@ public class GenerationAether
 				TemplateConditions.REPLACEABLE_GROUND).setPostPlacements(new PostPlacementMoaFamily(new BlockPos(3, 0, 3)));
 
 		aether_portal = new TemplateDefinition(TemplatesAether.aether_portal).setConditions(TemplateConditions.REPLACEABLE);
-		nether_portal = new TemplateDefinition(TemplatesAether.nether_portal).setConditions(TemplateConditions.REPLACEABLE);
-		end_portal = new TemplateDefinition(TemplatesAether.end_portal).setConditions(TemplateConditions.REPLACEABLE);
 
 		aether_portal_for_world = new TemplateDefinition(TemplatesAether.aether_portal)
 				.setConditions(TemplateConditions.FLAT_GROUND, TemplateConditions.IGNORE_QUICKSOIL,
@@ -316,8 +314,6 @@ public class GenerationAether
 		reg(30, skyroot_moa_nest_1);
 		reg(31, skyroot_moa_nest_2);
 		reg(32, aether_portal);
-		reg(33, nether_portal);
-		reg(34, end_portal);
 		reg(35, aether_portal_for_world);
 		reg(36, mysterious_henge);
 		reg(37, outpost_a);

@@ -30,7 +30,7 @@ public class TemplatesAether
 
 	public static Template skyroot_moa_nest_tree_1, skyroot_moa_nest_1, skyroot_moa_nest_2;
 
-	public static Template aether_portal, nether_portal, end_portal;
+	public static Template aether_portal;
 
 	public static Template mysterious_henge, outpost_a, outpost_b, outpost_c;
 
@@ -84,8 +84,6 @@ public class TemplatesAether
 		dark_blue_skyroot_oak_2 = registerTemplate("highlands/trees/oak/dark_blue/dark_blue_skyroot_oak_2");
 
 		aether_portal = registerTemplate("aether_portal");
-		nether_portal = registerTemplate("nether_portal");
-		end_portal = registerTemplate("end_portal");
 
 		mysterious_henge = registerTemplate("mysterious_henge");
 

@@ -480,10 +480,6 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.icestone_wall, "aether_wall/icestone_wall");
 		registerItemModels(BlocksAether.scatterglass_wall, "aether_wall/scatterglass_wall");
 
-		registerItemModels(ItemsAether.aether_portal_frame, "aether_portal_frame");
-		registerItemModels(ItemsAether.nether_portal_frame, "nether_portal_frame");
-		registerItemModels(ItemsAether.end_portal_frame, "end_portal_frame");
-
 		registerItemModels(BlocksAether.altar, "tesr");
 		registerItemModels(BlocksAether.multiblock_dummy, "tesr");
 		registerItemModels(BlocksAether.multiblock_dummy_half, "tesr");
