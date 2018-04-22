@@ -122,7 +122,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase
 
 			final OpenSimplexNoise noise = aetherGen.getPreparation().getNoise();
 
-			final double[] heightMap = IslandGeneratorArcticPeaks.generateNoise(noise, island, chunkX, chunkZ);
+			final double[] heightMap = IslandGeneratorHighlands.generateNoise(noise, island, chunkX, chunkZ, 0, 300.0D);
 
 			final int posX = pos.getX() + 8;
 			final int posZ = pos.getZ() + 8;
@@ -150,7 +150,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase
 						// Get distance from center of Island
 						final double dist = Math.sqrt(distX * distX + distZ * distZ) / 1.0D;
 
-						final double sample = IslandGeneratorArcticPeaks.interpolate(heightMap, x, z);
+						final double sample = IslandGeneratorHighlands.interpolate(heightMap, x, z);
 						final double heightSample = sample + 1.0 - dist;
 
 						final BlockPos blockpos1 = p.add(0, world.getHeight(posX + x, posZ + z), 0);
