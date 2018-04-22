@@ -181,16 +181,36 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 
 				final double topSample = NoiseUtil.lerp(heightSample, terraceSample - diff > 0.7 ? terraceSample - diff : heightSample, 0.7);
 
+				double bottomSample = Math.min(1.0D, normal + 0.25);
+
 				if (heightSample > cutoffPoint)
 				{
-					if (heightSample < cutoffPoint + 0.1)
+					double islandEdgeBlendRange = 0.1;
+					double islandBottomBlendRange = 0.25;
+
+					double islandEdge = 0.75;
+					double islandBottom = (bottomSample * 0.25) + 0.75;
+
+					if (heightSample < cutoffPoint + islandEdgeBlendRange)
 					{
-						bottomHeightMod = cutoffPointDist * heightSample * 16.0;
+						double thresh = (heightSample - cutoffPoint);
+
+						double blend = thresh * (1.0 / islandEdgeBlendRange);
+
+						bottomSample = NoiseUtil.lerp(0.0, islandEdge, blend);
+					}
+					else if (heightSample < cutoffPoint + islandBottomBlendRange + islandEdgeBlendRange)
+					{
+						double thresh = (heightSample - cutoffPoint - islandEdgeBlendRange);
+
+						double blend = thresh * (1.0 / islandBottomBlendRange);
+
+						bottomSample = NoiseUtil.lerp(islandEdge, islandBottom, blend);
 					}
 
 					if (!cracked)
 					{
-						for (int y = (int) bottomMaxY; y > bottomMaxY - (bottomHeight * bottomHeightMod); y--)
+						for (int y = (int) bottomMaxY; y > bottomMaxY - (bottomHeight * bottomSample); y--)
 						{
 							if (y < 0)
 							{

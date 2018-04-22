@@ -153,8 +153,6 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 				final double cutoffPointDist = Math.abs(cutoffPoint - heightSample);
 				final double diff = Math.max(0.0, cutoffPoint - cutoffPointDist) * 8.0;
 
-				double bottomHeightMod = Math.pow(normal, 0.2);
-
 				double bottomHeight = 100;
 
 				double filteredSample = this.v.getHeightSampleFilter().apply(heightSample);
@@ -215,24 +213,42 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 					}
 				}
 
-				double sampleToUse = magnetic ? magneticSample : heightSample;
-
 				final double topHeight = magnetic ? this.currentPillar.getTopHeight() : this.v.getMaxTerrainHeight();
+
+				double bottomSample = magnetic ? magneticSample : Math.min(1.0D, normal + 0.25);
 
 				if (heightSample > cutoffPoint)
 				{
-					if (heightSample < cutoffPoint + 0.1)
+					double islandEdgeBlendRange = 0.1;
+					double islandBottomBlendRange = 0.25;
+
+					double islandEdge = 0.75;
+					double islandBottom = (bottomSample * 0.25) + 0.75;
+
+					if (heightSample < cutoffPoint + islandEdgeBlendRange)
 					{
-						bottomHeightMod = cutoffPointDist * sampleToUse * 16.0;
+						double thresh = (heightSample - cutoffPoint);
+
+						double blend = thresh * (1.0 / islandEdgeBlendRange);
+
+						bottomSample = NoiseUtil.lerp(0.0, islandEdge, blend);
+					}
+					else if (heightSample < cutoffPoint + islandBottomBlendRange + islandEdgeBlendRange)
+					{
+						double thresh = (heightSample - cutoffPoint - islandEdgeBlendRange);
+
+						double blend = thresh * (1.0 / islandBottomBlendRange);
+
+						bottomSample = NoiseUtil.lerp(islandEdge, islandBottom, blend);
 					}
 
 					if (magnetic)
 					{
-						bottomHeightMod = Math.min(1.0, (sampleToUse - cutoffPoint) * 1.4);
-						bottomHeightMod = Math.min(bottomHeightMod, bottomHeightMod * this.currentPillar.getElongationMod());
+						bottomSample = Math.min(1.0, (bottomSample - cutoffPoint) * 1.4);
+						bottomSample = Math.min(bottomSample, bottomSample * this.currentPillar.getElongationMod());
 					}
 
-					for (int y = (int) bottomMaxY; y > bottomMaxY - (bottomHeight * bottomHeightMod); y--)
+					for (int y = (int) bottomMaxY; y > bottomMaxY - (bottomHeight * bottomSample); y--)
 					{
 						if (y < 0)
 						{
