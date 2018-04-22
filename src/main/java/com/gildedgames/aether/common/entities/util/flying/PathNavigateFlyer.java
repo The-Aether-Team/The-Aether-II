@@ -39,12 +39,11 @@ public class PathNavigateFlyer extends PathNavigate
 	@Override
 	protected void pathFollow()
 	{
-		final Vec3d vec3d = this.getEntityPosition();
-		final float f = this.entity.width * this.entity.width;
-		final int i = 6;
+		Vec3d vec3d = this.getEntityPosition();
+		float f = this.entity.width * this.entity.width;
+		int i = 6;
 
-		if (vec3d.squareDistanceTo(this.currentPath.getVectorFromIndex(this.entity, this.currentPath.getCurrentPathIndex()))
-				< (double) f)
+		if (vec3d.squareDistanceTo(this.currentPath.getVectorFromIndex(this.entity, this.currentPath.getCurrentPathIndex())) < (double) f)
 		{
 			this.currentPath.incrementPathIndex();
 		}
@@ -52,7 +51,7 @@ public class PathNavigateFlyer extends PathNavigate
 		for (int j = Math.min(this.currentPath.getCurrentPathIndex() + 6, this.currentPath.getCurrentPathLength() - 1);
 			 j > this.currentPath.getCurrentPathIndex(); --j)
 		{
-			final Vec3d vec3d1 = this.currentPath.getVectorFromIndex(this.entity, j);
+			Vec3d vec3d1 = this.currentPath.getVectorFromIndex(this.entity, j);
 
 			if (vec3d1.squareDistanceTo(vec3d) <= 36.0D && this.isDirectPathBetweenPoints(vec3d, vec3d1, 0, 0, 0))
 			{
@@ -70,8 +69,8 @@ public class PathNavigateFlyer extends PathNavigate
 	@Override
 	protected boolean isDirectPathBetweenPoints(final Vec3d posVec31, final Vec3d posVec32, final int sizeX, final int sizeY, final int sizeZ)
 	{
-		final RayTraceResult raytraceresult = this.world.rayTraceBlocks(posVec31, new Vec3d(posVec32.x,
-				posVec32.y + (double) this.entity.height * 0.5D, posVec32.z), false, true, false);
+		RayTraceResult raytraceresult = this.world
+				.rayTraceBlocks(posVec31, new Vec3d(posVec32.x, posVec32.y + (double) this.entity.height * 0.5D, posVec32.z), false, true, false);
 		return raytraceresult == null || raytraceresult.typeOfHit == RayTraceResult.Type.MISS;
 	}
 

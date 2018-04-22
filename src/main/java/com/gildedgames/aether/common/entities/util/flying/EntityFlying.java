@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.entities.util.flying;
 
 import com.gildedgames.aether.common.entities.ai.EntityAIForcedWander;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityBodyHelper;
 import net.minecraft.entity.EntityCreature;
@@ -9,7 +10,6 @@ import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
 import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.init.Blocks;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -50,8 +50,8 @@ public class EntityFlying extends EntityCreature
 		wander.setMutexBits(3);
 		moveTowardsRestriction.setMutexBits(3);
 
-		this.tasks.addTask(0, moveTowardsRestriction);
-		this.tasks.addTask(1, wander);
+		this.tasks.addTask(1, moveTowardsRestriction);
+		this.tasks.addTask(2, wander);
 	}
 
 	@Override
@@ -75,7 +75,7 @@ public class EntityFlying extends EntityCreature
 	@Override
 	public float getBlockPathWeight(final BlockPos pos)
 	{
-		return this.world.getBlockState(pos.down()).getBlock() == Blocks.AIR ? 10.0F : this.world.getLightBrightness(pos) - 0.5F;
+		return this.world.getBlockState(pos).getMaterial() == Material.AIR ? 10.0F + this.world.getLightBrightness(pos) - 0.5F : super.getBlockPathWeight(pos);
 	}
 
 	@Override
@@ -214,11 +214,11 @@ public class EntityFlying extends EntityCreature
 	}
 
 	@Override
-	public void moveRelative(final float strafe, final float up, final float forward, final float resistance)
+	public void travel(float strafe, float vertical, float forward)
 	{
 		if (this.isServerWorld())
 		{
-			super.moveRelative(strafe, up, forward, 0.1F);
+			super.moveRelative(strafe, vertical, forward, 0.1F);
 			this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
 			this.motionX *= 0.8999999761581421D;
 			this.motionY *= 0.8999999761581421D;
@@ -226,7 +226,7 @@ public class EntityFlying extends EntityCreature
 		}
 		else
 		{
-			super.moveRelative(strafe, up, forward, resistance);
+			super.travel(strafe, vertical, forward);
 		}
 	}
 
