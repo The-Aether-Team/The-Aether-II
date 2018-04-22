@@ -50,14 +50,6 @@ public class TileEntityTeleporterRenderer extends TileEntitySpecialRenderer<Tile
 		}
 		else
 		{
-			GlStateManager.rotate(180.0f, 0.0f, 1.0f, 0.0f);
-
-			if (inGuiContext)
-			{
-				GlStateManager.scale(0.8, 0.8, 0.8);
-				GlStateManager.translate(0.0, 0.8, 0.0);
-			}
-
 			this.model.render(0.0625F, 0);
 		}
 
