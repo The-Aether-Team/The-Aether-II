@@ -3,6 +3,7 @@ package com.gildedgames.aether.client.renderer.tile_entities;
 import com.gildedgames.aether.client.models.entities.tile.ModelTeleporter;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.tiles.TileEntityTeleporter;
+import com.gildedgames.orbis_api.common.util.OpenGLHelper;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
@@ -14,7 +15,8 @@ public class TileEntityTeleporterRenderer extends TileEntitySpecialRenderer<Tile
 	private final ResourceLocation texture = AetherCore.getResource("textures/tile_entities/teleporter/pedestal.png");
 
 	@Override
-	public void render(final TileEntityTeleporter teleporter, final double x, final double y, final double z, final float partialTicks, final int destroyStage, final float alpha)
+	public void render(final TileEntityTeleporter teleporter, final double x, final double y, final double z, final float partialTicks, final int destroyStage,
+			final float alpha)
 	{
 		GlStateManager.pushMatrix();
 		GlStateManager.enableRescaleNormal();
@@ -23,6 +25,8 @@ public class TileEntityTeleporterRenderer extends TileEntitySpecialRenderer<Tile
 		GlStateManager.rotate(180f, 1f, 0f, 1f);
 
 		this.bindTexture(this.texture);
+
+		final boolean inGuiContext = OpenGLHelper.isInGuiContext();
 
 		if (teleporter != null)
 		{
@@ -47,6 +51,12 @@ public class TileEntityTeleporterRenderer extends TileEntitySpecialRenderer<Tile
 		else
 		{
 			GlStateManager.rotate(180.0f, 0.0f, 1.0f, 0.0f);
+
+			if (inGuiContext)
+			{
+				GlStateManager.scale(0.8, 0.8, 0.8);
+				GlStateManager.translate(0.0, 0.8, 0.0);
+			}
 
 			this.model.render(0.0625F, 0);
 		}
