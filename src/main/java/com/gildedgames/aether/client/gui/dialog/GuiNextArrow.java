@@ -61,7 +61,7 @@ public class GuiNextArrow extends GuiFrame
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(final float partialTicks, final int mouseX, final int mouseY)
+	public void drawGuiContainerBackgroundLayer(final float partialTicks, final int mouseX, final int mouseY)
 	{
 
 	}
