@@ -12,6 +12,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.Objects;
 
@@ -23,6 +24,18 @@ public class PlayerBlockLevitateModule extends PlayerAetherModule
 	public PlayerBlockLevitateModule(final PlayerAether playerAether)
 	{
 		super(playerAether);
+	}
+
+	@Override
+	public void tickStart(TickEvent.PlayerTickEvent event)
+	{
+
+	}
+
+	@Override
+	public void tickEnd(TickEvent.PlayerTickEvent event)
+	{
+
 	}
 
 	@Override

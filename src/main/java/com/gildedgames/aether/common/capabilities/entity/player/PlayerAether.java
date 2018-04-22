@@ -32,12 +32,13 @@ import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import java.util.ArrayList;
@@ -157,7 +158,7 @@ public class PlayerAether implements IPlayerAether
 		NetworkingAether.sendPacketToPlayer(new PacketSetPlayedIntro(this.getTeleportingModule().hasPlayedIntro()), (EntityPlayerMP) this.getEntity());
 	}
 
-	public void onUpdate(final LivingUpdateEvent event)
+	public void onUpdate(LivingEvent.LivingUpdateEvent event)
 	{
 		for (final PlayerAetherModule module : this.modules)
 		{
@@ -167,6 +168,22 @@ public class PlayerAether implements IPlayerAether
 		for (final PlayerAetherObserver observer : this.observers)
 		{
 			observer.onUpdate(this);
+		}
+	}
+
+	public void onPlayerTick(TickEvent.PlayerTickEvent event)
+	{
+		for (final PlayerAetherModule module : this.modules)
+		{
+			if (event.phase == TickEvent.Phase.START)
+			{
+				module.tickStart(event);
+			}
+
+			if (event.phase == TickEvent.Phase.END)
+			{
+				module.tickEnd(event);
+			}
 		}
 	}
 

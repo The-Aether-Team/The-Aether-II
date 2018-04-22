@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 public class PlayerSeparateInventoryModule extends PlayerAetherModule
 {
@@ -56,9 +57,21 @@ public class PlayerSeparateInventoryModule extends PlayerAetherModule
 	}
 
 	@Override
-	public void onUpdate()
+	public void tickStart(TickEvent.PlayerTickEvent event)
 	{
 
+	}
+
+	@Override
+	public void tickEnd(TickEvent.PlayerTickEvent event)
+	{
+
+	}
+
+	@Override
+	public void onUpdate()
+	{
+		
 	}
 
 	@Override

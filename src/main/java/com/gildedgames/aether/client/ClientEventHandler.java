@@ -78,9 +78,18 @@ public class ClientEventHandler
 	{
 		if (mc.world != null)
 		{
-			if (mc.world.provider.getDimensionType() == DimensionsAether.AETHER || mc.world.provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER)
+			boolean necro = mc.world.provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER;
+
+			if (mc.world.provider.getDimensionType() == DimensionsAether.AETHER || necro)
 			{
 				if (event.getType() == RenderGameOverlayEvent.ElementType.EXPERIENCE)
+				{
+					event.setCanceled(true);
+				}
+
+				if (necro && (event.getType() == RenderGameOverlayEvent.ElementType.AIR || event.getType() == RenderGameOverlayEvent.ElementType.HEALTH
+						|| event.getType() == RenderGameOverlayEvent.ElementType.HEALTHMOUNT || event.getType() == RenderGameOverlayEvent.ElementType.ARMOR
+						|| event.getType() == RenderGameOverlayEvent.ElementType.FOOD || event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR))
 				{
 					event.setCanceled(true);
 				}
@@ -93,7 +102,7 @@ public class ClientEventHandler
 	{
 		if (mc.world != null)
 		{
-			if (mc.world.provider.getDimensionType() == DimensionsAether.AETHER || mc.world.provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER)
+			if (mc.world.provider.getDimensionType() == DimensionsAether.AETHER)
 			{
 				if (event.getType() == RenderGameOverlayEvent.ElementType.AIR || event.getType() == RenderGameOverlayEvent.ElementType.HEALTH
 						|| event.getType() == RenderGameOverlayEvent.ElementType.HEALTHMOUNT || event.getType() == RenderGameOverlayEvent.ElementType.ARMOR
@@ -110,7 +119,7 @@ public class ClientEventHandler
 	{
 		if (mc.world != null)
 		{
-			if (mc.world.provider.getDimensionType() == DimensionsAether.AETHER || mc.world.provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER)
+			if (mc.world.provider.getDimensionType() == DimensionsAether.AETHER)
 			{
 				if (event.getType() == RenderGameOverlayEvent.ElementType.AIR || event.getType() == RenderGameOverlayEvent.ElementType.HEALTH
 						|| event.getType() == RenderGameOverlayEvent.ElementType.HEALTHMOUNT || event.getType() == RenderGameOverlayEvent.ElementType.ARMOR

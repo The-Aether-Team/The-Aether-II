@@ -14,6 +14,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.Validate;
@@ -35,9 +36,21 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 	}
 
 	@Override
-	public void onUpdate()
+	public void tickStart(TickEvent.PlayerTickEvent event)
 	{
 
+	}
+
+	@Override
+	public void tickEnd(TickEvent.PlayerTickEvent event)
+	{
+
+	}
+
+	@Override
+	public void onUpdate()
+	{
+		
 	}
 
 	private void updateListeners()

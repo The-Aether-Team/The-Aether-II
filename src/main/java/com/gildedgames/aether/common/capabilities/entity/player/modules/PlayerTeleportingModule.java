@@ -22,6 +22,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -101,6 +102,18 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 		{
 			ClientEventHandler.DRAW_BLACK_SCREEN = false;
 		}
+	}
+
+	@Override
+	public void tickStart(TickEvent.PlayerTickEvent event)
+	{
+
+	}
+
+	@Override
+	public void tickEnd(TickEvent.PlayerTickEvent event)
+	{
+
 	}
 
 	@Override

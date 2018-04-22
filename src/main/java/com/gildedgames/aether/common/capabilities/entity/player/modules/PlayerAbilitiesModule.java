@@ -6,6 +6,7 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModu
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 public class PlayerAbilitiesModule extends PlayerAetherModule
 {
@@ -29,6 +30,18 @@ public class PlayerAbilitiesModule extends PlayerAetherModule
 	public void setMidAirJumpsAllowed(int midAirJumpsAllowed)
 	{
 		this.midAirJumpsAllowed = midAirJumpsAllowed;
+	}
+
+	@Override
+	public void tickStart(TickEvent.PlayerTickEvent event)
+	{
+
+	}
+
+	@Override
+	public void tickEnd(TickEvent.PlayerTickEvent event)
+	{
+
 	}
 
 	@Override

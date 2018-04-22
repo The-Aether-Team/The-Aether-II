@@ -15,6 +15,7 @@ import com.gildedgames.aether.common.network.packets.PacketEquipment;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -37,9 +38,15 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 	}
 
 	@Override
-	public void onUpdate()
+	public void tickStart(TickEvent.PlayerTickEvent event)
 	{
-		this.update();
+
+	}
+
+	@Override
+	public void tickEnd(TickEvent.PlayerTickEvent event)
+	{
+
 	}
 
 	@Override
@@ -60,7 +67,8 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 		}
 	}
 
-	private void update()
+	@Override
+	public void onUpdate()
 	{
 		final List<Pair<Integer, ItemStack>> updates = this.getEntity().world.isRemote ? Collections.emptyList() : new ArrayList<>();
 

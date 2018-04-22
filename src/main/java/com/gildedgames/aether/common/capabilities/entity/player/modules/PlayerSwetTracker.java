@@ -8,6 +8,7 @@ import com.google.common.collect.Lists;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.List;
 
@@ -58,7 +59,7 @@ public class PlayerSwetTracker extends PlayerAetherModule
 
 	public boolean canLatchOn()
 	{
-		return this.swets.size() < PlayerSwetTracker.MAX_SWET_COUNT ;
+		return this.swets.size() < PlayerSwetTracker.MAX_SWET_COUNT;
 	}
 
 	public void latchSwet(final EntitySwet swet)
@@ -71,6 +72,18 @@ public class PlayerSwetTracker extends PlayerAetherModule
 		this.swets.add(EntityUtil.clone(swet));
 
 		swet.setDead();
+	}
+
+	@Override
+	public void tickStart(TickEvent.PlayerTickEvent event)
+	{
+
+	}
+
+	@Override
+	public void tickEnd(TickEvent.PlayerTickEvent event)
+	{
+
 	}
 
 	@Override

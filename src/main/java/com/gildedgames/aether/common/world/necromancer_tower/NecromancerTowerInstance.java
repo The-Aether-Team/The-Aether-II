@@ -137,6 +137,7 @@ public class NecromancerTowerInstance implements IInstance
 			if (playerMP.interactionManager.getGameType() == GameType.SURVIVAL)
 			{
 				player.setGameType(GameType.ADVENTURE);
+				player.setEntityInvulnerable(true);
 			}
 		}
 	}
@@ -153,6 +154,7 @@ public class NecromancerTowerInstance implements IInstance
 			if (playerMP.interactionManager.getGameType() == GameType.ADVENTURE)
 			{
 				player.setGameType(GameType.SURVIVAL);
+				player.setEntityInvulnerable(false);
 			}
 		}
 	}

@@ -31,7 +31,7 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
@@ -41,6 +41,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 public class PlayerAetherHooks
 {
@@ -96,13 +97,24 @@ public class PlayerAetherHooks
 	}
 
 	@SubscribeEvent
-	public static void onUpdate(final LivingUpdateEvent event)
+	public static void onUpdate(LivingEvent.LivingUpdateEvent event)
 	{
 		final PlayerAether aePlayer = PlayerAether.getPlayer(event.getEntity());
 
 		if (aePlayer != null)
 		{
 			aePlayer.onUpdate(event);
+		}
+	}
+
+	@SubscribeEvent
+	public static void onPlayerTick(TickEvent.PlayerTickEvent event)
+	{
+		final PlayerAether aePlayer = PlayerAether.getPlayer(event.player);
+
+		if (aePlayer != null)
+		{
+			aePlayer.onPlayerTick(event);
 		}
 	}
 

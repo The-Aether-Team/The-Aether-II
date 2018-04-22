@@ -11,6 +11,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 public class PlayerParachuteModule extends PlayerAetherModule
 {
@@ -26,6 +27,18 @@ public class PlayerParachuteModule extends PlayerAetherModule
 	public PlayerParachuteModule(final PlayerAether playerAether)
 	{
 		super(playerAether);
+	}
+
+	@Override
+	public void tickStart(TickEvent.PlayerTickEvent event)
+	{
+
+	}
+
+	@Override
+	public void tickEnd(TickEvent.PlayerTickEvent event)
+	{
+
 	}
 
 	@Override
