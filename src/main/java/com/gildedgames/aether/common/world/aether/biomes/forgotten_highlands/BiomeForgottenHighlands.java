@@ -40,7 +40,7 @@ public class BiomeForgottenHighlands extends BiomeAetherBase
 	}
 
 	@Override
-	public IIslandGenerator createIslandGenerator(Random rand)
+	public IIslandGenerator createIslandGenerator(Random rand, IIslandData islandData)
 	{
 		return IslandGenerators.FORGOTTEN_HIGHLANDS;
 	}

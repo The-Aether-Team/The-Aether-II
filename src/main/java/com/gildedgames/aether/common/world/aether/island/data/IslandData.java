@@ -69,7 +69,7 @@ public class IslandData implements IIslandData
 
 	private void initProperties(Random rand)
 	{
-		this.generator = this.biome.createIslandGenerator(rand);
+		this.generator = this.biome.createIslandGenerator(rand, this);
 		this.basicDecorations = this.biome.createBasicDecorations(rand);
 		this.treeDecorations = this.biome.createTreeDecorations(rand);
 		this.forestTreeCountModifier = this.biome.createForestTreeCountModifier(rand);

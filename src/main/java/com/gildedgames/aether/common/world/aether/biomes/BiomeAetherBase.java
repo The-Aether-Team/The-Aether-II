@@ -61,7 +61,7 @@ public abstract class BiomeAetherBase extends Biome
 		this.biomeDecorator.genDecorations(world, random, pos, this);
 	}
 
-	public abstract IIslandGenerator createIslandGenerator(Random rand);
+	public abstract IIslandGenerator createIslandGenerator(Random rand, IIslandData islandData);
 
 	public abstract Collection<NBT> createIslandComponents(IIslandData islandData);
 

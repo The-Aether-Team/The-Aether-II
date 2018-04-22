@@ -41,9 +41,11 @@ public class BiomeHighlands extends BiomeAetherBase
 	}
 
 	@Override
-	public IIslandGenerator createIslandGenerator(Random rand)
+	public IIslandGenerator createIslandGenerator(Random rand, IIslandData islandData)
 	{
 		int range = rand.nextInt(20);
+
+		boolean firstIsland = islandData.getBounds().getMinX() == 0 && islandData.getBounds().getMinZ() == 0;
 
 		if (range < 3)
 		{
@@ -65,7 +67,7 @@ public class BiomeHighlands extends BiomeAetherBase
 				.lakeDepth(rand.nextInt(40) + 5)
 				.lakeScale(40.0D + (rand.nextDouble() * 30.0D))
 				.lakeThreshold(rand.nextDouble() * 0.3)
-				.maxTerrainHeight(10 + rand.nextInt(120))
+				.maxTerrainHeight(firstIsland ? 10 + rand.nextInt(30) : 10 + rand.nextInt(120))
 				.terraces(rand.nextBoolean())
 				.lakeConcentrationModifier(0.5 + (rand.nextDouble() * -2.5)));
 	}

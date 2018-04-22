@@ -39,7 +39,7 @@ public class BiomeIrradiatedForests extends BiomeAetherBase
 	}
 
 	@Override
-	public IIslandGenerator createIslandGenerator(Random rand)
+	public IIslandGenerator createIslandGenerator(Random rand, IIslandData islandData)
 	{
 		return IslandGenerators.IRRADIATED_FORESTS;
 	}
