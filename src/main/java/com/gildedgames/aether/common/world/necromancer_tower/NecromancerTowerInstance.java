@@ -18,6 +18,7 @@ import net.minecraft.world.DimensionType;
 import net.minecraft.world.GameType;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.util.List;
 
@@ -178,6 +179,34 @@ public class NecromancerTowerInstance implements IInstance
 	public void setDimensionId(final int i)
 	{
 		this.dimensionId = i;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (obj == this)
+		{
+			return true;
+		}
+
+		if (obj instanceof NecromancerTowerInstance)
+		{
+			NecromancerTowerInstance instance = (NecromancerTowerInstance) obj;
+
+			return instance.getDimensionId() == this.getDimensionId();
+		}
+
+		return false;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		HashCodeBuilder builder = new HashCodeBuilder();
+
+		builder.append(this.dimensionId);
+
+		return builder.toHashCode();
 	}
 
 }
