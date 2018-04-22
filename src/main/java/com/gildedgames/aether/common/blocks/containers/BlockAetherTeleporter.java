@@ -87,6 +87,27 @@ public class BlockAetherTeleporter extends Block implements ITileEntityProvider
 	{
 		if (player.world.provider.getDimensionType() == DimensionsAether.AETHER)
 		{
+			if (player instanceof EntityPlayerMP)
+			{
+				final EntityPlayerMP playerMP = (EntityPlayerMP) player;
+
+				final PlayerAether playerAether = PlayerAether.getPlayer(player);
+
+				playerAether.getTeleportingModule()
+						.setAetherPos(new BlockPosDimension((int) player.posX, (int) player.posY, (int) player.posZ, player.dimension));
+
+				final BlockPosDimension nonAetherPos = playerAether.getTeleportingModule().getNonAetherPos();
+
+				final MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
+
+				final Teleporter teleporter = new TeleporterGeneric(server.getWorld(player.dimension));
+				final PlayerList playerList = server.getPlayerList();
+				playerList.transferPlayerToDimension(playerMP, nonAetherPos.getDim(), teleporter);
+				player.timeUntilPortal = player.getPortalCooldown();
+
+				playerMP.connection.setPlayerLocation(nonAetherPos.getX(), nonAetherPos.getY(), nonAetherPos.getZ(), 0, 0);
+			}
+
 			return false;
 		}
 
