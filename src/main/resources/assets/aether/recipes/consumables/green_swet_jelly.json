@@ -1,6 +1,5 @@
 {
   "type": "forge:ore_shapeless",
-  "group": "consumables",
   "ingredients": [
     {
       "item": "aether:swet_gel",

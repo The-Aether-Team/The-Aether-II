@@ -1,6 +1,5 @@
 {
 	"type": "forge:ore_shaped",
-	"group": "materials",
 	"pattern":
 	[
 		"X"
