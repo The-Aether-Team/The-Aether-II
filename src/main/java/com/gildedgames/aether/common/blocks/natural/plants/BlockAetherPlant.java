@@ -5,6 +5,7 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.BlockRenderLayer;
@@ -126,7 +127,7 @@ public class BlockAetherPlant extends Block implements IGrowable
 	{
 		if (playerIn.getHeldItemMainhand().getItem() == ItemsAether.swet_jelly)
 		{
-			if (!canGrow(worldIn, pos, state, true))
+			if (!this.canGrow(worldIn, pos, state, true))
 			{
 				return false;
 			}
@@ -138,5 +139,11 @@ public class BlockAetherPlant extends Block implements IGrowable
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
+	{
+		return BlockFaceShape.UNDEFINED;
 	}
 }
