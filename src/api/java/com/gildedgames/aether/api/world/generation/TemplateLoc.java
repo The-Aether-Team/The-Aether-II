@@ -1,7 +1,7 @@
 package com.gildedgames.aether.api.world.generation;
 
-import com.gildedgames.orbis.api.util.mc.NBT;
-import com.gildedgames.orbis.api.util.mc.NBTHelper;
+import com.gildedgames.orbis_api.util.mc.NBT;
+import com.gildedgames.orbis_api.util.mc.NBTHelper;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.math.BlockPos;

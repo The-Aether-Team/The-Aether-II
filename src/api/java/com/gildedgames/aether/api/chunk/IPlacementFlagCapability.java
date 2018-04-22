@@ -1,6 +1,6 @@
 package com.gildedgames.aether.api.chunk;
 
-import com.gildedgames.orbis.api.util.mc.NBT;
+import com.gildedgames.orbis_api.util.mc.NBT;
 import net.minecraft.util.math.BlockPos;
 
 /**

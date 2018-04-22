@@ -4,7 +4,7 @@ import com.gildedgames.aether.api.world.ISector;
 import com.gildedgames.aether.api.world.ISectorAccess;
 import com.gildedgames.aether.api.world.IslandSectorHelper;
 import com.gildedgames.aether.common.registry.content.BiomesAether;
-import com.gildedgames.orbis.api.world.WorldObjectManager;
+import com.gildedgames.orbis_api.world.WorldObjectManager;
 import com.google.common.collect.Lists;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

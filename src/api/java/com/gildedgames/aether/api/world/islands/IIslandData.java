@@ -1,7 +1,7 @@
 package com.gildedgames.aether.api.world.islands;
 
 import com.gildedgames.aether.api.world.generation.WorldDecoration;
-import com.gildedgames.orbis.api.util.mc.NBT;
+import com.gildedgames.orbis_api.util.mc.NBT;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 

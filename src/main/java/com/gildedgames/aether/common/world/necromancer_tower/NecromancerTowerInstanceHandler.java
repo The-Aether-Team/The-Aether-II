@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.world.necromancer_tower;
 
-import com.gildedgames.orbis.api.OrbisAPI;
-import com.gildedgames.orbis.api.util.mc.BlockPosDimension;
-import com.gildedgames.orbis.api.world.instances.IInstanceHandler;
-import com.gildedgames.orbis.api.world.instances.IPlayerInstances;
+import com.gildedgames.orbis_api.OrbisAPI;
+import com.gildedgames.orbis_api.util.mc.BlockPosDimension;
+import com.gildedgames.orbis_api.world.instances.IInstanceHandler;
+import com.gildedgames.orbis_api.world.instances.IPlayerInstances;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 

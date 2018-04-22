@@ -1,7 +1,7 @@
 package com.gildedgames.aether.api.world;
 
 import com.gildedgames.aether.api.world.islands.IIslandData;
-import com.gildedgames.orbis.api.util.mc.NBT;
+import com.gildedgames.orbis_api.util.mc.NBT;
 
 import java.util.Collection;
 

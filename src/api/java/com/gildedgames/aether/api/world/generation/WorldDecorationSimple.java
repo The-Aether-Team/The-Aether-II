@@ -1,7 +1,7 @@
 package com.gildedgames.aether.api.world.generation;
 
-import com.gildedgames.orbis.api.processing.IBlockAccessExtended;
-import com.gildedgames.orbis.api.world.IWorldGen;
+import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
+import com.gildedgames.orbis_api.world.IWorldGen;
 import net.minecraft.util.math.BlockPos;
 
 import java.util.Random;

@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client.gui.misc;
 
-import com.gildedgames.orbis.client.gui.util.GuiFrameNoContainer;
+import com.gildedgames.orbis_api.client.gui.util.GuiFrameNoContainer;
 import net.minecraft.client.renderer.GlStateManager;
 
 public class GuiBlackScreen extends GuiFrameNoContainer

@@ -1,10 +1,10 @@
 package com.gildedgames.aether.common.registry.content;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.orbis.api.OrbisAPI;
-import com.gildedgames.orbis.api.data.blueprint.BlueprintData;
-import com.gildedgames.orbis.api.data.management.IProject;
-import com.gildedgames.orbis.api.data.management.IProjectCache;
+import com.gildedgames.orbis_api.OrbisAPI;
+import com.gildedgames.orbis_api.data.blueprint.BlueprintData;
+import com.gildedgames.orbis_api.data.management.IProject;
+import com.gildedgames.orbis_api.data.management.IProjectCache;
 
 public class BlueprintsAether
 {

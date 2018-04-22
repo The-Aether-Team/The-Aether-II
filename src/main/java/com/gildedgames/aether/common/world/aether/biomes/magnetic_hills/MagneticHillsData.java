@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world.aether.biomes.magnetic_hills;
 
-import com.gildedgames.orbis.api.util.io.NBTFunnel;
-import com.gildedgames.orbis.api.util.mc.NBT;
+import com.gildedgames.orbis_api.util.io.NBTFunnel;
+import com.gildedgames.orbis_api.util.mc.NBT;
 import com.google.common.collect.Lists;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;

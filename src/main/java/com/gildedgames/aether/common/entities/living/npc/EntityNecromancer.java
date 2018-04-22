@@ -7,7 +7,7 @@ import com.gildedgames.aether.common.entities.ai.necromancer.NecromancerAIGoUpTo
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.registry.content.InstancesAether;
 import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstance;
-import com.gildedgames.orbis.api.util.mc.NBTHelper;
+import com.gildedgames.orbis_api.util.mc.NBTHelper;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIWatchClosest;

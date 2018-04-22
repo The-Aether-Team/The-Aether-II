@@ -14,10 +14,10 @@ import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.Magnetic
 import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.MagneticHillsData;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandVariables;
 import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstance;
-import com.gildedgames.orbis.api.OrbisAPI;
-import com.gildedgames.orbis.api.util.io.IClassSerializer;
-import com.gildedgames.orbis.api.util.io.Instantiator;
-import com.gildedgames.orbis.api.util.io.SimpleSerializer;
+import com.gildedgames.orbis_api.OrbisAPI;
+import com.gildedgames.orbis_api.util.io.IClassSerializer;
+import com.gildedgames.orbis_api.util.io.Instantiator;
+import com.gildedgames.orbis_api.util.io.SimpleSerializer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumParticleTypes;

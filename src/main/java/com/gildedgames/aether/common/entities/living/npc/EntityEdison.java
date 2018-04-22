@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.entities.living.npc;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
-import com.gildedgames.orbis.api.util.mc.NBTHelper;
+import com.gildedgames.orbis_api.util.mc.NBTHelper;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;

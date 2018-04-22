@@ -1,7 +1,7 @@
 package com.gildedgames.aether.api.world.generation;
 
 import com.gildedgames.aether.api.util.OpenSimplexNoise;
-import com.gildedgames.orbis.api.processing.IBlockAccessExtended;
+import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
 import net.minecraft.util.math.BlockPos;
 
 import java.util.List;

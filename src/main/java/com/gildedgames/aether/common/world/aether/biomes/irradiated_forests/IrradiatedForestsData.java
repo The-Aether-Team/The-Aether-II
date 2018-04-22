@@ -4,9 +4,9 @@ import com.gildedgames.aether.common.world.aether.island.nodename.as3delaunay.Po
 import com.gildedgames.aether.common.world.aether.island.nodename.as3delaunay.Rectangle;
 import com.gildedgames.aether.common.world.aether.island.nodename.as3delaunay.Voronoi;
 import com.gildedgames.aether.common.world.aether.island.voronoi.VoronoiGraphUtils;
-import com.gildedgames.orbis.api.util.LineHelp;
-import com.gildedgames.orbis.api.util.io.NBTFunnel;
-import com.gildedgames.orbis.api.util.mc.NBT;
+import com.gildedgames.orbis_api.util.LineHelp;
+import com.gildedgames.orbis_api.util.io.NBTFunnel;
+import com.gildedgames.orbis_api.util.mc.NBT;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import net.minecraft.nbt.NBTTagCompound;

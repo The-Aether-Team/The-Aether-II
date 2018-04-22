@@ -6,7 +6,7 @@ import com.gildedgames.aether.common.entities.genes.util.DataGene;
 import com.gildedgames.aether.common.entities.genes.util.GenePool;
 import com.gildedgames.aether.common.entities.genes.util.GeneUtil;
 import com.gildedgames.aether.common.entities.genes.util.SimpleGeneStorage;
-import com.gildedgames.orbis.api.util.mc.NBT;
+import com.gildedgames.orbis_api.util.mc.NBT;
 import com.google.common.collect.Lists;
 import net.minecraft.nbt.NBTTagCompound;
 

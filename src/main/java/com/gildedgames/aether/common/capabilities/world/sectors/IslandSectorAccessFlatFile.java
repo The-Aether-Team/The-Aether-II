@@ -6,7 +6,7 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.util.ChunkMap;
 import com.gildedgames.aether.common.world.aether.island.data.IslandSector;
 import com.gildedgames.aether.common.world.aether.island.data.IslandSectorFactory;
-import com.gildedgames.orbis.api.world.WorldObjectManager;
+import com.gildedgames.orbis_api.world.WorldObjectManager;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;

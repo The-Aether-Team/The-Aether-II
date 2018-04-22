@@ -15,7 +15,7 @@ import com.gildedgames.aether.common.items.armor.ItemAetherShield;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.util.helpers.PlayerUtil;
 import com.gildedgames.aether.common.world.aether.TeleporterAether;
-import com.gildedgames.orbis.api.util.TeleporterGeneric;
+import com.gildedgames.orbis_api.util.TeleporterGeneric;
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;

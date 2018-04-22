@@ -1,13 +1,13 @@
 package com.gildedgames.aether.common.world.necromancer_tower;
 
 import com.gildedgames.aether.common.registry.content.InstancesAether;
-import com.gildedgames.orbis.api.core.BlockDataChunk;
-import com.gildedgames.orbis.api.core.ICreationData;
-import com.gildedgames.orbis.api.core.PlacedEntity;
-import com.gildedgames.orbis.api.core.PostPlacement;
-import com.gildedgames.orbis.api.processing.BlockAccessChunkPrimer;
-import com.gildedgames.orbis.api.processing.BlockAccessExtendedWrapper;
-import com.gildedgames.orbis.api.processing.DataPrimer;
+import com.gildedgames.orbis_api.core.BlockDataChunk;
+import com.gildedgames.orbis_api.core.ICreationData;
+import com.gildedgames.orbis_api.core.PlacedEntity;
+import com.gildedgames.orbis_api.core.PostPlacement;
+import com.gildedgames.orbis_api.processing.BlockAccessChunkPrimer;
+import com.gildedgames.orbis_api.processing.BlockAccessExtendedWrapper;
+import com.gildedgames.orbis_api.processing.DataPrimer;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;

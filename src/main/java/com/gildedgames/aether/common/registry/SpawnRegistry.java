@@ -16,7 +16,7 @@ import com.gildedgames.aether.common.world.spawning.conditions.CheckBlockUnderne
 import com.gildedgames.aether.common.world.spawning.conditions.CheckDimension;
 import com.gildedgames.aether.common.world.spawning.conditions.CheckTime;
 import com.gildedgames.aether.common.world.spawning.util.FlyingPositionSelector;
-import com.gildedgames.orbis.api.util.mc.NBTHelper;
+import com.gildedgames.orbis_api.util.mc.NBTHelper;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;

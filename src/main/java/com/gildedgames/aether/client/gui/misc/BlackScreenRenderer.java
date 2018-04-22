@@ -1,7 +1,7 @@
 package com.gildedgames.aether.client.gui.misc;
 
 import com.gildedgames.aether.client.ClientEventHandler;
-import com.gildedgames.orbis.common.util.InputHelper;
+import com.gildedgames.orbis_api.common.util.InputHelper;
 import net.minecraft.client.LoadingScreenRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
@@ -196,7 +196,6 @@ public class BlackScreenRenderer extends LoadingScreenRenderer
 			}
 			catch (final Exception var15)
 			{
-				;
 			}
 		}
 	}

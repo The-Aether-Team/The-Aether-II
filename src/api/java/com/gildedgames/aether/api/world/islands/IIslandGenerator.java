@@ -1,7 +1,7 @@
 package com.gildedgames.aether.api.world.islands;
 
 import com.gildedgames.aether.api.util.OpenSimplexNoise;
-import com.gildedgames.orbis.api.processing.IBlockAccessExtended;
+import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
 import net.minecraft.world.chunk.ChunkPrimer;
 
 public interface IIslandGenerator

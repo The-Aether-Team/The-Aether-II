@@ -13,13 +13,13 @@ import com.gildedgames.aether.common.world.templates.conditions.TemplateConditio
 import com.gildedgames.aether.common.world.templates.post.PostPlacementMoaFamily;
 import com.gildedgames.aether.common.world.templates.post.PostPlacementSetBlock;
 import com.gildedgames.aether.common.world.templates.post.PostPlacementSpawnEntity;
-import com.gildedgames.orbis.api.OrbisAPI;
-import com.gildedgames.orbis.api.core.BlueprintDefinition;
-import com.gildedgames.orbis.api.core.PlacementCondition;
-import com.gildedgames.orbis.api.core.registry.IOrbisDefinitionRegistry;
-import com.gildedgames.orbis.api.core.registry.OrbisDefinitionRegistry;
-import com.gildedgames.orbis.api.core.util.PlacementConditions;
-import com.gildedgames.orbis.api.processing.CenterOffsetProcessor;
+import com.gildedgames.orbis_api.OrbisAPI;
+import com.gildedgames.orbis_api.core.BlueprintDefinition;
+import com.gildedgames.orbis_api.core.PlacementCondition;
+import com.gildedgames.orbis_api.core.registry.IOrbisDefinitionRegistry;
+import com.gildedgames.orbis_api.core.registry.OrbisDefinitionRegistry;
+import com.gildedgames.orbis_api.core.util.PlacementConditions;
+import com.gildedgames.orbis_api.processing.CenterOffsetProcessor;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 

@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.world.aether.features;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.orbis.api.processing.BlockAccessExtendedWrapper;
-import com.gildedgames.orbis.api.processing.IBlockAccessExtended;
-import com.gildedgames.orbis.api.world.IWorldGen;
+import com.gildedgames.orbis_api.processing.BlockAccessExtendedWrapper;
+import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
+import com.gildedgames.orbis_api.world.IWorldGen;
 import com.google.common.collect.Lists;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;

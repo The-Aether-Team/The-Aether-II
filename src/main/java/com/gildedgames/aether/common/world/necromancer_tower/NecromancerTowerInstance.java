@@ -2,12 +2,12 @@ package com.gildedgames.aether.common.world.necromancer_tower;
 
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.registry.content.GenerationAether;
-import com.gildedgames.orbis.api.core.CreationData;
-import com.gildedgames.orbis.api.core.PlacedBlueprint;
-import com.gildedgames.orbis.api.util.io.NBTFunnel;
-import com.gildedgames.orbis.api.util.mc.BlockPosDimension;
-import com.gildedgames.orbis.api.util.mc.NBTHelper;
-import com.gildedgames.orbis.api.world.instances.IInstance;
+import com.gildedgames.orbis_api.core.CreationData;
+import com.gildedgames.orbis_api.core.PlacedBlueprint;
+import com.gildedgames.orbis_api.util.io.NBTFunnel;
+import com.gildedgames.orbis_api.util.mc.BlockPosDimension;
+import com.gildedgames.orbis_api.util.mc.NBTHelper;
+import com.gildedgames.orbis_api.world.instances.IInstance;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;

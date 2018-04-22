@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.world.aether.island.gen;
 
-import com.gildedgames.orbis.api.util.mc.NBT;
+import com.gildedgames.orbis_api.util.mc.NBT;
 import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.function.Function;

@@ -1,6 +1,6 @@
 package com.gildedgames.aether.api.entity.genes;
 
-import com.gildedgames.orbis.api.util.mc.NBT;
+import com.gildedgames.orbis_api.util.mc.NBT;
 
 public interface IGeneStorage extends NBT
 {

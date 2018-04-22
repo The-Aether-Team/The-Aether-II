@@ -1,7 +1,7 @@
 package com.gildedgames.aether.island_gen;
 
 import com.gildedgames.aether.common.registry.content.BiomesAether;
-import com.gildedgames.orbis.api.processing.IBlockAccessExtended;
+import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;

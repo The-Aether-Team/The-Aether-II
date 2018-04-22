@@ -10,7 +10,7 @@ import com.gildedgames.aether.common.world.aether.island.data.IslandBounds;
 import com.gildedgames.aether.common.world.aether.island.data.IslandData;
 import com.gildedgames.aether.common.world.aether.island.nodename.as3delaunay.LineSegment;
 import com.gildedgames.aether.common.world.aether.island.nodename.as3delaunay.Voronoi;
-import com.gildedgames.orbis.api.util.mc.NBT;
+import com.gildedgames.orbis_api.util.mc.NBT;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Bootstrap;
 import org.lwjgl.BufferUtils;

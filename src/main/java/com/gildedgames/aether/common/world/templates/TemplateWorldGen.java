@@ -3,8 +3,8 @@ package com.gildedgames.aether.common.world.templates;
 import com.gildedgames.aether.api.world.generation.TemplateDefinition;
 import com.gildedgames.aether.api.world.generation.TemplateDefinitionPool;
 import com.gildedgames.aether.api.world.generation.TemplateLoc;
-import com.gildedgames.orbis.api.processing.IBlockAccessExtended;
-import com.gildedgames.orbis.api.world.IWorldGen;
+import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
+import com.gildedgames.orbis_api.world.IWorldGen;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
