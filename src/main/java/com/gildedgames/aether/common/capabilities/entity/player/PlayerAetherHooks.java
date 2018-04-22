@@ -13,6 +13,7 @@ import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import com.gildedgames.orbis_api.util.TeleporterGeneric;
 import com.gildedgames.orbis_api.util.mc.BlockUtil;
+import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSnow;
 import net.minecraft.block.state.IBlockState;
@@ -21,8 +22,10 @@ import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.DimensionType;
@@ -42,9 +45,12 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensio
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class PlayerAetherHooks
 {
+	private static ResourceLocation TELEPORTER_RECIPE = AetherCore.getResource("misc/aether_teleporter");
+
 	@SubscribeEvent
 	public static void onPlayerJoined(final PlayerLoggedInEvent event)
 	{
@@ -59,6 +65,13 @@ public class PlayerAetherHooks
 			if (dim == DimensionsAether.AETHER || dim == DimensionsAether.NECROMANCER_TOWER)
 			{
 				aePlayer.getSeparateInventoryModule().switchToAetherInventory();
+			}
+
+			IRecipe teleporterRecipe = ForgeRegistries.RECIPES.getValue(TELEPORTER_RECIPE);
+
+			if (teleporterRecipe != null)
+			{
+				event.player.unlockRecipes(Lists.newArrayList(teleporterRecipe));
 			}
 		}
 	}
