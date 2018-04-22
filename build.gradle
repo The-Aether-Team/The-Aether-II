@@ -8,8 +8,8 @@ buildscript {
 	}
 	dependencies {
 		classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
-        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.2'
-		classpath 'org.ajoberstar:grgit:2.1.1'
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.3'
+		classpath 'org.ajoberstar:grgit:2.2.0-beta.1'
 	}
 }
 
