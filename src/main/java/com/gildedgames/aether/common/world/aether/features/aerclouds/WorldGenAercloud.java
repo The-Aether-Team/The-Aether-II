@@ -4,6 +4,7 @@ import com.gildedgames.orbis_api.processing.BlockAccessExtendedWrapper;
 import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
 import com.gildedgames.orbis_api.world.IWorldGen;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -77,7 +78,7 @@ public class WorldGenAercloud extends WorldGenerator implements IWorldGen
 							return false;
 						}
 
-						if (blockAccess.getBlockState(pos).getBlock().isReplaceable(blockAccess, pos) &&
+						if (blockAccess.getBlockState(pos) == Blocks.AIR.getDefaultState() &&
 								Math.abs(x1 - x) + Math.abs(y1 - y) + Math.abs(z1 - z) < 4 * (this.isFlat ? 3 : 1) + rand.nextInt(2))
 						{
 							transaction.add(pos.toImmutable());
