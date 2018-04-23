@@ -9,17 +9,17 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-public class MasonryRecipeChangedPacket implements IMessage
+public class PacketMasonryRecipeChanged implements IMessage
 {
 
 	private ISimpleRecipe recipe;
 
-	public MasonryRecipeChangedPacket()
+	public PacketMasonryRecipeChanged()
 	{
 
 	}
 
-	public MasonryRecipeChangedPacket(ISimpleRecipe recipe)
+	public PacketMasonryRecipeChanged(ISimpleRecipe recipe)
 	{
 		this.recipe = recipe;
 	}
@@ -40,10 +40,10 @@ public class MasonryRecipeChangedPacket implements IMessage
 		pBuf.writeInt(AetherAPI.content().masonry().getId(this.recipe));
 	}
 
-	public static class HandlerServer extends MessageHandlerServer<MasonryRecipeChangedPacket, IMessage>
+	public static class HandlerServer extends MessageHandlerServer<PacketMasonryRecipeChanged, IMessage>
 	{
 		@Override
-		public IMessage onMessage(MasonryRecipeChangedPacket message, EntityPlayer player)
+		public IMessage onMessage(PacketMasonryRecipeChanged message, EntityPlayer player)
 		{
 			if (player == null || player.world == null)
 			{

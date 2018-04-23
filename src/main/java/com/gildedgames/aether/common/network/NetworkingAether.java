@@ -36,8 +36,9 @@ public class NetworkingAether
 		instance.registerMessage(PacketSaveStructure.HandlerServer.class, PacketSaveStructure.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketSetPlayedIntro.HandlerServer.class, PacketSetPlayedIntro.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketActivateButton.HandlerServer.class, PacketActivateButton.class, discriminant++, Side.SERVER);
-		instance.registerMessage(MasonryRecipeChangedPacket.HandlerServer.class, MasonryRecipeChangedPacket.class, discriminant++, Side.SERVER);
-		instance.registerMessage(MasonryInputCountChangedPacket.HandlerServer.class, MasonryInputCountChangedPacket.class, discriminant++, Side.SERVER);
+		instance.registerMessage(PacketMasonryRecipeChanged.HandlerServer.class, PacketMasonryRecipeChanged.class, discriminant++, Side.SERVER);
+		instance.registerMessage(PacketMasonryInputCountChanged.HandlerServer.class, PacketMasonryInputCountChanged.class, discriminant++, Side.SERVER);
+		instance.registerMessage(PacketCancelIntro.HandlerServer.class, PacketCancelIntro.class, discriminant++, Side.SERVER);
 
 		// C L I E N T
 		instance.registerMessage(PacketEquipment.HandlerClient.class, PacketEquipment.class, discriminant++, Side.CLIENT);

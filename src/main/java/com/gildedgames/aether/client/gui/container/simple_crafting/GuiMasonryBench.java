@@ -8,7 +8,7 @@ import com.gildedgames.aether.client.gui.IExtendedGui;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.containers.tiles.ContainerMasonryBench;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.network.packets.MasonryRecipeChangedPacket;
+import com.gildedgames.aether.common.network.packets.PacketMasonryRecipeChanged;
 import com.gildedgames.aether.common.recipes.simple.OreDictionaryRequirement;
 import com.gildedgames.aether.common.util.helpers.RecipeUtil;
 import com.gildedgames.orbis_api.util.InputHelper;
@@ -128,7 +128,7 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 			this.currentRecipe = null;
 
 			this.container.onNewRecipe(null);
-			NetworkingAether.sendPacketToServer(new MasonryRecipeChangedPacket(null));
+			NetworkingAether.sendPacketToServer(new PacketMasonryRecipeChanged(null));
 
 			for (int i = 0; i < 9; i++)
 			{
@@ -186,7 +186,7 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 
 				container.onNewRecipe(this.currentRecipe);
 
-				NetworkingAether.sendPacketToServer(new MasonryRecipeChangedPacket(this.currentRecipe));
+				NetworkingAether.sendPacketToServer(new PacketMasonryRecipeChanged(this.currentRecipe));
 
 				if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT))
 				{

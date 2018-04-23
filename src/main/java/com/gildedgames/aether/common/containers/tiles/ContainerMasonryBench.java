@@ -5,7 +5,7 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.containers.inventory.InventoryCraftResultSimple;
 import com.gildedgames.aether.common.containers.slots.SlotSimpleCrafting;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.network.packets.MasonryInputCountChangedPacket;
+import com.gildedgames.aether.common.network.packets.PacketMasonryInputCountChanged;
 import com.gildedgames.aether.common.util.helpers.RecipeUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -60,7 +60,7 @@ public class ContainerMasonryBench extends Container
 
 		if (this.world.isRemote)
 		{
-			NetworkingAether.sendPacketToServer(new MasonryInputCountChangedPacket(this.inputCount));
+			NetworkingAether.sendPacketToServer(new PacketMasonryInputCountChanged(this.inputCount));
 		}
 
 		ItemStack stack = this.craftResult.getStackInSlot(0);

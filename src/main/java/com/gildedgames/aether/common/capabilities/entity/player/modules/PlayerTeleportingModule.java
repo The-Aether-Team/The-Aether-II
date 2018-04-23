@@ -6,8 +6,6 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.CommonEvents;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
-import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.network.packets.PacketSetPlayedIntro;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.util.helpers.IslandHelper;
@@ -89,18 +87,11 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 	{
 		if (this.getWorld().provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER)
 		{
-			if (!this.playedIntro)
+			if (!this.playedIntro && Minecraft.getMinecraft().currentScreen == null)
 			{
 				Minecraft.getMinecraft().displayGuiScreen(new GuiIntro());
-
-				this.playedIntro = true;
-				NetworkingAether.sendPacketToServer(new PacketSetPlayedIntro(true));
+				ClientEventHandler.DRAW_BLACK_SCREEN = false;
 			}
-		}
-
-		if (this.playedIntro)
-		{
-			ClientEventHandler.DRAW_BLACK_SCREEN = false;
 		}
 	}
 

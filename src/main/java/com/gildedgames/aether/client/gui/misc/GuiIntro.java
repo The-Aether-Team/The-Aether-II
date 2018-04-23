@@ -4,11 +4,16 @@ import com.gildedgames.aether.client.ClientEventHandler;
 import com.gildedgames.aether.client.gui.dialog.GuiNextArrow;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.network.packets.PacketCancelIntro;
+import com.gildedgames.aether.common.network.packets.PacketSetPlayedIntro;
 import com.gildedgames.orbis_api.client.gui.data.Text;
 import com.gildedgames.orbis_api.client.gui.util.GuiFrameNoContainer;
 import com.gildedgames.orbis_api.client.gui.util.GuiText;
 import com.gildedgames.orbis_api.client.gui.util.GuiTextBox;
 import com.gildedgames.orbis_api.client.gui.util.GuiTexture;
+import com.gildedgames.orbis_api.client.gui.util.vanilla.GuiButtonVanilla;
 import com.gildedgames.orbis_api.client.rect.Dim2D;
 import com.gildedgames.orbis_api.client.rect.Pos2D;
 import com.gildedgames.orbis_api.util.InputHelper;
@@ -37,7 +42,9 @@ public class GuiIntro extends GuiFrameNoContainer
 
 	private GuiText proudlyPresents, holdToSkip;
 
-	private GuiTextBox prologue, tip1, tip2, tip3;
+	private GuiTextBox prologue, tip1, tip2, tip3, tip4;
+
+	private GuiButtonVanilla yes, no;
 
 	private long timeStarted, timeSinceHoldSkip, timeSinceStopSkip;
 
@@ -105,17 +112,31 @@ public class GuiIntro extends GuiFrameNoContainer
 
 		this.tip1 = new GuiTextBox(Dim2D.build().center(true).pos(center).width(300).flush(), false,
 				new Text(new TextComponentString(
-						"The world you're about to enter is completely separate from Minecraft, in both lore, time and space."),
+						"DISCLAIMER:" + System.lineSeparator() + System
+								.lineSeparator()
+								+ "This indev build is an UNFINISHED, BUGGY," + System
+								.lineSeparator() + "POOR PERFORMANCE iteration of the official Highlands release slated for the end of this year."
+								+ System.lineSeparator() + System
+								.lineSeparator()
+								+ "IF YOU DO NOT WANT TO SPOIL YOUR EXPERIENCE, we HIGHLY RECOMMEND you DO NOT PLAY THIS until the official release." + System
+								.lineSeparator() + System
+								.lineSeparator()
+								+ "Many features are missing, some are experimental, etc. We have released these indev builds for those who want to help test and who cannot wait to get their Aether fix."),
 						1.0F));
 
 		this.tip2 = new GuiTextBox(Dim2D.build().center(true).pos(center).width(300).flush(), false,
 				new Text(new TextComponentString(
-						"Your inventory will be separate from your Minecraft save, but you will be able to send items back to your original world."),
+						"The world you're about to enter is completely separate from Minecraft, in both lore, time and space."),
 						1.0F));
 
 		this.tip3 = new GuiTextBox(Dim2D.build().center(true).pos(center).width(300).flush(), false,
 				new Text(new TextComponentString(
-						"Let the journey begin..."),
+						"Your inventory will be separate from your Minecraft save, but you will be able to send items back to your original world."),
+						1.0F));
+
+		this.tip4 = new GuiTextBox(Dim2D.build().center(true).pos(center).width(300).flush(), false,
+				new Text(new TextComponentString(
+						"Begin your journey?"),
 						1.0F));
 
 		this.ggLogo.setVisible(false);
@@ -134,8 +155,19 @@ public class GuiIntro extends GuiFrameNoContainer
 		this.tip1.setVisible(false);
 		this.tip2.setVisible(false);
 		this.tip3.setVisible(false);
+		this.tip4.setVisible(false);
 
-		this.addChildren(this.ggLogo, this.proudlyPresents, this.highlands, this.prologue, this.tip1, this.tip2, this.tip3, this.nextArrow, this.holdToSkip);
+		this.yes = new GuiButtonVanilla(Dim2D.build().width(80).height(20).center(true).pos(center).addX(5).flush());
+		this.no = new GuiButtonVanilla(Dim2D.build().width(80).height(20).center(true).pos(center).addX(95).flush());
+
+		this.yes.getInner().displayString = "Yes";
+		this.no.getInner().displayString = "No";
+
+		this.yes.setVisible(false);
+		this.no.setVisible(false);
+
+		this.addChildren(this.ggLogo, this.proudlyPresents, this.highlands, this.prologue, this.tip1, this.tip2, this.tip3, this.tip4, this.nextArrow,
+				this.holdToSkip, this.yes, this.no);
 	}
 
 	@Override
@@ -150,8 +182,12 @@ public class GuiIntro extends GuiFrameNoContainer
 			this.tip1.setVisible(this.tipIndex == 0);
 			this.tip2.setVisible(this.tipIndex == 1);
 			this.tip3.setVisible(this.tipIndex == 2);
+			this.tip4.setVisible(this.tipIndex == 3);
 
-			this.nextArrow.setVisible(true);
+			this.nextArrow.setVisible(this.tipIndex != 3);
+
+			this.yes.setVisible(this.tipIndex == 3);
+			this.no.setVisible(this.tipIndex == 3);
 
 			return;
 		}
@@ -179,6 +215,11 @@ public class GuiIntro extends GuiFrameNoContainer
 				Minecraft.getMinecraft().displayGuiScreen(null);
 
 				Minecraft.getMinecraft().getSoundHandler().stopSounds();
+
+				PlayerAether.getPlayer(this.mc.player).getTeleportingModule().setPlayedIntro(true);
+				NetworkingAether.sendPacketToServer(new PacketSetPlayedIntro(true));
+
+				ClientEventHandler.DRAW_BLACK_SCREEN = false;
 
 				return;
 			}
@@ -271,6 +312,11 @@ public class GuiIntro extends GuiFrameNoContainer
 		{
 			ClientEventHandler.drawBlackFade();
 			Minecraft.getMinecraft().displayGuiScreen(null);
+
+			PlayerAether.getPlayer(this.mc.player).getTeleportingModule().setPlayedIntro(true);
+			NetworkingAether.sendPacketToServer(new PacketSetPlayedIntro(true));
+
+			ClientEventHandler.DRAW_BLACK_SCREEN = false;
 		}
 
 		if (!this.playedMusic)
@@ -288,10 +334,30 @@ public class GuiIntro extends GuiFrameNoContainer
 
 		if (!this.startIntro)
 		{
-			if (this.tipIndex >= 2)
+			if (this.tipIndex == 3)
+			{
+				if (InputHelper.isHovered(this.no))
+				{
+					NetworkingAether.sendPacketToServer(new PacketCancelIntro());
+					Minecraft.getMinecraft().displayGuiScreen(new GuiBlackScreen());
+
+					ClientEventHandler.DRAW_BLACK_SCREEN = false;
+					
+					return;
+				}
+
+				if (!InputHelper.isHovered(this.yes))
+				{
+					return;
+				}
+			}
+
+			if (this.tipIndex >= 3)
 			{
 				this.nextArrow.setVisible(false);
-				this.tip3.setVisible(false);
+				this.tip4.setVisible(false);
+				this.yes.setVisible(false);
+				this.no.setVisible(false);
 
 				this.startIntro = true;
 

@@ -6,17 +6,17 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-public class MasonryInputCountChangedPacket implements IMessage
+public class PacketMasonryInputCountChanged implements IMessage
 {
 
 	private int inputCount;
 
-	public MasonryInputCountChangedPacket()
+	public PacketMasonryInputCountChanged()
 	{
 
 	}
 
-	public MasonryInputCountChangedPacket(int inputCount)
+	public PacketMasonryInputCountChanged(int inputCount)
 	{
 		this.inputCount = inputCount;
 	}
@@ -33,10 +33,10 @@ public class MasonryInputCountChangedPacket implements IMessage
 		buf.writeInt(this.inputCount);
 	}
 
-	public static class HandlerServer extends MessageHandlerServer<MasonryInputCountChangedPacket, IMessage>
+	public static class HandlerServer extends MessageHandlerServer<PacketMasonryInputCountChanged, IMessage>
 	{
 		@Override
-		public IMessage onMessage(MasonryInputCountChangedPacket message, EntityPlayer player)
+		public IMessage onMessage(PacketMasonryInputCountChanged message, EntityPlayer player)
 		{
 			if (player == null || player.world == null)
 			{

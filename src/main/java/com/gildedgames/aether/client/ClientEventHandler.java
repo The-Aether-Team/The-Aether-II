@@ -145,6 +145,11 @@ public class ClientEventHandler
 			}
 		}
 
+		/*if (event.getGui() instanceof GuiInventory)
+		{
+			event.setGui(new GuiIntro());
+		}*/
+
 		if (DRAW_BLACK_SCREEN && event.getGui() instanceof GuiDownloadTerrain)
 		{
 			event.setGui(new GuiBlackScreen());
