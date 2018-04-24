@@ -162,7 +162,7 @@ public class BlockAetherTeleporter extends Block implements ITileEntityProvider
 				{
 					hook.setInstance(null);
 
-					final NecromancerTowerInstance inst = handler.get(new BlockPosDimension(pos, world.provider.getDimension()));
+					final NecromancerTowerInstance inst = handler.get(playerAether);
 
 					playerAether.getTeleportingModule()
 							.setNonAetherPos(new BlockPosDimension((int) player.posX, (int) player.posY, (int) player.posZ, player.dimension));
@@ -172,7 +172,7 @@ public class BlockAetherTeleporter extends Block implements ITileEntityProvider
 			}
 			else
 			{
-				final NecromancerTowerInstance inst = handler.get(new BlockPosDimension(pos, world.provider.getDimension()));
+				final NecromancerTowerInstance inst = handler.get(playerAether);
 
 				playerAether.getTeleportingModule()
 						.setNonAetherPos(new BlockPosDimension((int) player.posX, (int) player.posY, (int) player.posZ, player.dimension));

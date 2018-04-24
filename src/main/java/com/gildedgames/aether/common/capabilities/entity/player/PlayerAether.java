@@ -10,6 +10,8 @@ import com.gildedgames.aether.common.network.packets.PacketEquipment;
 import com.gildedgames.aether.common.network.packets.PacketMarkPlayerDeath;
 import com.gildedgames.aether.common.network.packets.PacketSetPlayedIntro;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
+import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstance;
+import com.gildedgames.orbis_api.util.io.NBTFunnel;
 import com.gildedgames.orbis_api.util.mc.NBTHelper;
 import com.google.common.collect.Lists;
 import net.minecraft.block.material.Material;
@@ -71,6 +73,8 @@ public class PlayerAether implements IPlayerAether
 
 	private boolean hasDiedInAetherBefore;
 
+	private NecromancerTowerInstance towerInstance;
+
 	public PlayerAether()
 	{
 		this.modules = new PlayerAetherModule[0];
@@ -125,6 +129,16 @@ public class PlayerAether implements IPlayerAether
 	public static boolean hasCapability(final Entity entity)
 	{
 		return entity.hasCapability(AetherCapabilities.PLAYER_DATA, null);
+	}
+
+	public NecromancerTowerInstance getNecromancerTowerInstance()
+	{
+		return this.towerInstance;
+	}
+
+	public void setNecromancerTowerInstance(NecromancerTowerInstance towerInstance)
+	{
+		this.towerInstance = towerInstance;
 	}
 
 	public boolean hasDiedInAetherBefore()
@@ -307,6 +321,8 @@ public class PlayerAether implements IPlayerAether
 	@Override
 	public void write(final NBTTagCompound tag)
 	{
+		NBTFunnel funnel = new NBTFunnel(tag);
+
 		final NBTTagList modules = new NBTTagList();
 
 		for (final PlayerAetherModule module : this.modules)
@@ -316,11 +332,15 @@ public class PlayerAether implements IPlayerAether
 
 		tag.setTag("Modules", modules);
 		tag.setBoolean("HasDiedInAether", this.hasDiedInAetherBefore);
+
+		funnel.set("towerInstance", this.towerInstance);
 	}
 
 	@Override
 	public void read(final NBTTagCompound tag)
 	{
+		NBTFunnel funnel = new NBTFunnel(tag);
+
 		final NBTTagList modules = tag.getTagList("Modules", 10);
 
 		for (int i = 0; i < this.modules.length; i++)
@@ -331,6 +351,13 @@ public class PlayerAether implements IPlayerAether
 		}
 
 		this.hasDiedInAetherBefore = tag.getBoolean("HasDiedInAether");
+
+		NecromancerTowerInstance inst = funnel.get("towerInstance");
+
+		if (inst != null)
+		{
+			this.towerInstance = inst;
+		}
 	}
 
 	@Override

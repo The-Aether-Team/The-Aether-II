@@ -27,7 +27,7 @@ public class NecromancerTowerInstance implements IInstance
 
 	private final List<EntityPlayer> players = Lists.newArrayList();
 
-	private BlockPosDimension outsideEntrance, insideEntrance;
+	private BlockPosDimension insideEntrance;
 
 	private int dimensionId;
 
@@ -69,24 +69,9 @@ public class NecromancerTowerInstance implements IInstance
 		return true;
 	}
 
-	public BlockPosDimension getOutsideEntrance()
-	{
-		return this.outsideEntrance;
-	}
-
-	public void setOutsideEntrance(final BlockPosDimension entrance)
-	{
-		this.outsideEntrance = entrance;
-	}
-
 	public BlockPosDimension getInsideEntrance()
 	{
 		return this.insideEntrance;
-	}
-
-	public void setInsideEntrance(final BlockPosDimension entrance)
-	{
-		this.insideEntrance = entrance;
 	}
 
 	public PlacedBlueprint getTower()
@@ -104,7 +89,6 @@ public class NecromancerTowerInstance implements IInstance
 	{
 		final NBTFunnel funnel = new NBTFunnel(output);
 
-		output.setTag("outsideEntrance", NBTHelper.write(this.outsideEntrance));
 		output.setTag("insideEntrance", NBTHelper.write(this.insideEntrance));
 
 		output.setInteger("dimensionId", this.dimensionId);
@@ -117,7 +101,6 @@ public class NecromancerTowerInstance implements IInstance
 	{
 		final NBTFunnel funnel = new NBTFunnel(input);
 
-		this.outsideEntrance = NBTHelper.read(input.getCompoundTag("outsideEntrance"));
 		this.insideEntrance = NBTHelper.read(input.getCompoundTag("insideEntrance"));
 
 		this.dimensionId = input.getInteger("dimensionId");
