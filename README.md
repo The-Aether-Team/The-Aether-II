@@ -35,3 +35,9 @@ Our official Discord server is the best place for development insight and collab
 
 <a href="https://discord.gg/YgTv7Vg"><img src="https://i.imgur.com/M1YSZen.png" height="60"></a>
 
+### Special Mentions
+
+The Aether II codebase makes use of the following:
+
+Java Delaunay
+https://github.com/Hoten/Java-Delaunay
