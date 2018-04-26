@@ -112,7 +112,7 @@ public class CommonEvents
 
 				IChunkProvider provider = new ChunkProviderAether((WorldServer) event.getWorld(), (ChunkProviderServer) event.getWorld().getChunkProvider());
 
-				ObfuscationReflectionHelper.setPrivateValue(World.class, event.getWorld(), provider, "chunkProvider");
+				ObfuscationReflectionHelper.setPrivateValue(World.class, event.getWorld(), provider, "field_73020_y", "chunkProvider");
 			}
 		}
 	}
