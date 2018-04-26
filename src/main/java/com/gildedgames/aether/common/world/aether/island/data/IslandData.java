@@ -4,14 +4,16 @@ import com.gildedgames.aether.api.world.generation.WorldDecoration;
 import com.gildedgames.aether.api.world.islands.IIslandBounds;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
-import com.gildedgames.aether.api.world.islands.IVirtualDataManager;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
-import com.gildedgames.aether.common.world.aether.island.data.virtual.VirtualDataManager;
+import com.gildedgames.orbis_api.core.BlueprintDefinition;
+import com.gildedgames.orbis_api.core.ICreationData;
+import com.gildedgames.orbis_api.core.PlacedBlueprint;
 import com.gildedgames.orbis_api.util.io.NBTFunnel;
 import com.gildedgames.orbis_api.util.mc.NBT;
 import com.gildedgames.orbis_api.util.mc.NBTHelper;
 import com.google.common.collect.Lists;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -27,8 +29,6 @@ public class IslandData implements IIslandData
 	private final World world;
 
 	private IIslandBounds bounds;
-
-	private IVirtualDataManager chunkManager;
 
 	private BiomeAetherBase biome;
 
@@ -46,6 +46,8 @@ public class IslandData implements IIslandData
 
 	private float forestTreeCountModifier, openAreaDecorationGenChance;
 
+	private List<PlacedBlueprint> blueprintInstances = Lists.newArrayList();
+
 	public IslandData(final World world, final IIslandBounds bounds, final BiomeAetherBase biome, final long seed)
 	{
 		this.world = world;
@@ -57,8 +59,6 @@ public class IslandData implements IIslandData
 		this.initProperties(rand);
 
 		this.seed = seed;
-
-		this.chunkManager = new VirtualDataManager(world, this);
 	}
 
 	public IslandData(final World world, final NBTTagCompound tag)
@@ -150,9 +150,25 @@ public class IslandData implements IIslandData
 	}
 
 	@Override
-	public IVirtualDataManager getVirtualDataManager()
+	public PlacedBlueprint placeBlueprint(BlueprintDefinition def, ICreationData data)
 	{
-		return this.chunkManager;
+		final PlacedBlueprint instance = new PlacedBlueprint(data.getWorld(), def, data);
+
+		this.blueprintInstances.add(instance);
+
+		return instance;
+	}
+
+	@Override
+	public List<PlacedBlueprint> getPlacedBlueprints()
+	{
+		return this.blueprintInstances;
+	}
+
+	@Override
+	public void setPlacedBlueprints(List<PlacedBlueprint> instances)
+	{
+		this.blueprintInstances = instances;
 	}
 
 	@Override
@@ -166,7 +182,19 @@ public class IslandData implements IIslandData
 		tag.setLong("Seed", this.seed);
 
 		tag.setTag("RespawnPoint", NBTHelper.writeBlockPos(this.respawnPoint));
-		tag.setTag("VirtualManager", NBTHelper.writeRaw(this.chunkManager));
+
+		final NBTTagList blueprintInstances = new NBTTagList();
+
+		for (final PlacedBlueprint instance : this.blueprintInstances)
+		{
+			final NBTTagCompound data = new NBTTagCompound();
+
+			instance.write(data);
+
+			blueprintInstances.appendTag(data);
+		}
+
+		tag.setTag("blueprintInstances", blueprintInstances);
 
 		funnel.setList("Components", this.components);
 	}
@@ -187,8 +215,17 @@ public class IslandData implements IIslandData
 			this.respawnPoint = NBTHelper.readBlockPos(tag.getCompoundTag("RespawnPoint"));
 		}
 
-		this.chunkManager = new VirtualDataManager(this.world, this);
-		this.chunkManager.read(tag.getCompoundTag("VirtualManager"));
+		final NBTTagList blueprintInstances = tag.getTagList("blueprintInstances", 10);
+
+		if (this.blueprintInstances.isEmpty())
+		{
+			for (int i = 0; i < blueprintInstances.tagCount(); i++)
+			{
+				final NBTTagCompound data = blueprintInstances.getCompoundTagAt(i);
+
+				this.blueprintInstances.add(new PlacedBlueprint(this.world, data));
+			}
+		}
 
 		this.components = funnel.getList("Components");
 

@@ -1,9 +1,6 @@
 package com.gildedgames.aether.common.world.aether.biomes.arctic_peaks;
 
 import com.gildedgames.aether.api.util.OpenSimplexNoise;
-import com.gildedgames.aether.api.world.ISector;
-import com.gildedgames.aether.api.world.ISectorAccess;
-import com.gildedgames.aether.api.world.IslandSectorHelper;
 import com.gildedgames.aether.api.world.generation.WorldDecoration;
 import com.gildedgames.aether.api.world.generation.WorldDecorationSimple;
 import com.gildedgames.aether.api.world.islands.IIslandData;
@@ -12,6 +9,7 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.IBlockSnowy;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.registry.content.GenerationAether;
+import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.island.ChunkGeneratorAether;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandVariables;
@@ -102,12 +100,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase
 		final int chunkX = pos.getX() >> 4;
 		final int chunkZ = pos.getZ() >> 4;
 
-		final ISectorAccess access = IslandSectorHelper.getAccess(world);
-		final ISector sector = access.provideSector(chunkX, chunkZ);
-
-		// TODO: support multiple islands in same chunk
-		final IIslandData island = sector.getIslandsForRegion(pos.getX(), 0, pos.getZ(), 16, 255, 16)
-				.stream().findFirst().orElse(null);
+		IIslandData island = IslandHelper.get(world, chunkX, chunkZ);
 
 		if (island == null)
 		{

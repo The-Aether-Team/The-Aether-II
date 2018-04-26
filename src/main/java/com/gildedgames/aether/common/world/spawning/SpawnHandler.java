@@ -4,7 +4,7 @@ import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.entity.spawning.EntitySpawn;
 import com.gildedgames.aether.api.entity.spawning.ISpawningInfo;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.util.ChunkMap;
+import com.gildedgames.orbis_api.util.ChunkMap;
 import com.gildedgames.orbis_api.util.mc.NBT;
 import com.gildedgames.orbis_api.util.mc.NBTHelper;
 import com.google.common.collect.Lists;

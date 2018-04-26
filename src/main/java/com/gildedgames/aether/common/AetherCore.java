@@ -6,6 +6,7 @@ import com.gildedgames.aether.common.analytics.GAReporter;
 import com.gildedgames.aether.common.registry.SpawnRegistry;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.world.aether.TeleporterAether;
+import com.gildedgames.orbis_api.preparation.impl.PrepTasks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.util.ResourceLocation;
@@ -133,6 +134,18 @@ public class AetherCore
 	public void serverStarted(final FMLServerStartedEvent event)
 	{
 		AetherCore.SPAWN_REGISTRY.read();
+
+		DimensionManager.initDimension(CONFIG.getAetherDimID());
+
+		PrepTasks.prepSector(DimensionManager.getWorld(CONFIG.getAetherDimID()), 0, 0, PROXY.getPrepAether());
+
+		for (int x = -1; x < 1; x++)
+		{
+			for (int y = -1; y < 1; y++)
+			{
+				PrepTasks.prepSector(DimensionManager.getWorld(CONFIG.getAetherDimID()), x, y, PROXY.getPrepAether());
+			}
+		}
 	}
 
 	@EventHandler

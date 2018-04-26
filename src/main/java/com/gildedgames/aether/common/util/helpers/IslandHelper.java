@@ -1,40 +1,53 @@
 package com.gildedgames.aether.common.util.helpers;
 
-import com.gildedgames.aether.api.world.ISector;
-import com.gildedgames.aether.api.world.IslandSectorHelper;
 import com.gildedgames.aether.api.world.islands.IIslandData;
+import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.world.aether.prep.PrepAether;
+import com.gildedgames.aether.common.world.aether.prep.PrepSectorDataAether;
+import com.gildedgames.orbis_api.preparation.IPrepManager;
+import com.gildedgames.orbis_api.preparation.IPrepManagerPool;
+import com.gildedgames.orbis_api.preparation.IPrepSector;
+import com.gildedgames.orbis_api.preparation.impl.capability.PrepHelper;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import java.util.Collection;
 
 public class IslandHelper
 {
 
 	public static BlockPos getRespawnPoint(final World world, final BlockPos pos)
 	{
-		final ISector loadedSector = IslandSectorHelper.getAccess(world)
-				.getLoadedSector(pos.getX() >> 4, pos.getZ() >> 4)
-				.orElseThrow(() -> new IllegalArgumentException("Couldn't find island sector:"));
-		final Collection<IIslandData> islands = loadedSector
-				.getIslandsForRegion(pos.getX(), 0, pos.getZ(), 1, 255, 1);
+		IIslandData island = get(world, pos.getX() >> 4, pos.getZ() >> 4);
 
-		boolean shouldSpawnAtRespawnPoint = false;
-		IIslandData island = null;
-
-		for (final IIslandData data : islands)
-		{
-			if (data != null && data.getRespawnPoint() != null)
-			{
-				shouldSpawnAtRespawnPoint = true;
-				island = data;
-				break;
-			}
-		}
-
-		if (shouldSpawnAtRespawnPoint)
+		if (island != null && island.getRespawnPoint() != null)
 		{
 			return island.getRespawnPoint();
+		}
+
+		if (island != null)
+		{
+			AetherCore.LOGGER.info("SOMETHING IS VERY WRONG - AN ISLAND DIDN'T HAVE A RESPAWN POINT, PLAYER WILL SPAWN AT ISLAND CENTER NOW");
+
+			return new BlockPos(island.getBounds().getCenterX(), world.getHeight((int) island.getBounds().getCenterX(), (int) island.getBounds().getCenterZ()),
+					island.getBounds().getCenterZ());
+		}
+
+		AetherCore.LOGGER.info("SOMETHING IS VERY WRONG - AN ISLAND DIDN'T HAVE A RESPAWN POINT, PLAYER WILL SPAWN AT ORIGIN NOW");
+
+		return BlockPos.ORIGIN;
+	}
+
+	public static IIslandData get(World world, int chunkX, int chunkZ)
+	{
+		IPrepManagerPool pool = PrepHelper.getPool(world);
+		IPrepManager manager = pool.get(PrepAether.UNIQUE_ID);
+
+		IPrepSector sector = manager.access().provideSector(chunkX, chunkZ);
+
+		if (sector != null && sector.getData() instanceof PrepSectorDataAether)
+		{
+			PrepSectorDataAether data = (PrepSectorDataAether) sector.getData();
+
+			return data.getIslandData();
 		}
 
 		return null;

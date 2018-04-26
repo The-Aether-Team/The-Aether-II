@@ -19,6 +19,19 @@ public interface IIslandBounds
 	boolean intersects(int minX, int minY, int minZ, int maxX, int maxY, int maxZ);
 
 	/**
+	 * Tests if this bounding box contains the specified bounding box
+	 *
+	 * @param minX The minimum X value of the box
+	 * @param minY The minimum Y value of the boz
+	 * @param minZ The minimum Z value of the box
+	 * @param maxX The maximum X value of the box
+	 * @param maxY The maximum Y value of the box
+	 * @param maxZ The maximum Z value of the box
+	 * @return True if the box is contained
+	 */
+	boolean contains(int minX, int minY, int minZ, int maxX, int maxY, int maxZ);
+
+	/**
 	 * Tests if this bounding box contains the point.
 	 *
 	 * @param x The x-coordinate to test

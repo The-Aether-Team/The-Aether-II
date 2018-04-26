@@ -8,11 +8,11 @@ import com.gildedgames.aether.common.entities.util.QuicksoilProcessor;
 import com.gildedgames.aether.common.items.tools.ItemToolHandler;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
 import com.gildedgames.aether.common.registry.ContentRegistry;
-import com.gildedgames.aether.common.world.SectorEventHandler;
 import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.IrradiatedForestsData;
 import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.MagneticHillPillar;
 import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.MagneticHillsData;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandVariables;
+import com.gildedgames.aether.common.world.aether.prep.PrepAether;
 import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstance;
 import com.gildedgames.orbis_api.OrbisAPI;
 import com.gildedgames.orbis_api.util.io.IClassSerializer;
@@ -36,6 +36,8 @@ public class CommonProxy implements IAetherServices
 
 	private File configDir;
 
+	private PrepAether prepAether;
+
 	public void preInit(final FMLPreInitializationEvent event)
 	{
 		this.configDir = new File(event.getModConfigurationDirectory(), "Aether/");
@@ -56,6 +58,10 @@ public class CommonProxy implements IAetherServices
 		OrbisAPI.services().io().register(s);
 
 		this.contentRegistry.preInit();
+
+		this.prepAether = new PrepAether();
+
+		OrbisAPI.sectors().register(this.prepAether);
 	}
 
 	public void init(final FMLInitializationEvent event)
@@ -70,7 +76,6 @@ public class CommonProxy implements IAetherServices
 		MinecraftForge.EVENT_BUS.register(ItemToolHandler.class);
 		MinecraftForge.EVENT_BUS.register(ItemSkyrootSword.class);
 		MinecraftForge.EVENT_BUS.register(QuicksoilProcessor.class);
-		MinecraftForge.EVENT_BUS.register(SectorEventHandler.class);
 	}
 
 	public void spawnJumpParticles(final World world, final double x, final double y, final double z, final double radius, final int quantity)
@@ -112,6 +117,11 @@ public class CommonProxy implements IAetherServices
 	public IContentRegistry content()
 	{
 		return this.contentRegistry;
+	}
+
+	public PrepAether getPrepAether()
+	{
+		return this.prepAether;
 	}
 
 }

@@ -1,13 +1,9 @@
 package com.gildedgames.aether.common.world.aether.biomes;
 
 import com.gildedgames.aether.api.util.OpenSimplexNoise;
-import com.gildedgames.aether.api.world.ISector;
-import com.gildedgames.aether.api.world.ISectorAccess;
-import com.gildedgames.aether.api.world.IslandSectorHelper;
 import com.gildedgames.aether.api.world.generation.TemplateLoc;
 import com.gildedgames.aether.api.world.generation.WorldDecorationUtil;
 import com.gildedgames.aether.api.world.islands.IIslandData;
-import com.gildedgames.aether.api.world.islands.IVirtualDataManager;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
@@ -17,11 +13,13 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockValkyrieGrass;
 import com.gildedgames.aether.common.registry.content.GenerationAether;
+import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import com.gildedgames.aether.common.world.aether.features.*;
 import com.gildedgames.aether.common.world.aether.features.aerclouds.WorldGenAercloud;
 import com.gildedgames.aether.common.world.aether.features.aerclouds.WorldGenPurpleAercloud;
 import com.gildedgames.aether.common.world.aether.features.trees.WorldGenOrangeTree;
 import com.gildedgames.aether.common.world.aether.island.ChunkGeneratorAether;
+import com.gildedgames.aether.common.world.aether.island.data.BlockAccessIsland;
 import com.gildedgames.aether.common.world.templates.TemplatePlacer;
 import com.gildedgames.orbis_api.core.*;
 import com.gildedgames.orbis_api.core.util.BlueprintPlacer;
@@ -120,9 +118,8 @@ public class BiomeAetherDecorator
 
 	public void prepareDecorationsWholeIsland(final World world, final IIslandData island, final Random random)
 	{
-		// TODO: REMOVE THIS DUMB CLONING SHIT. Essentially, island sectors seem to be syncing really strangely and as a result the virtual data manager's chunks are being cleared before this preparation is finished. So we need to clone its data and re set it at the end of this method.
-		final IVirtualDataManager manager = island.getVirtualDataManager().clone();
-		final DataPrimer primer = new DataPrimer(manager);
+		IBlockAccessExtended access = new BlockAccessIsland(world, island);
+		final DataPrimer primer = new DataPrimer(access);
 
 		final int startX = island.getBounds().getMinX();
 		final int startZ = island.getBounds().getMinZ();
@@ -139,9 +136,9 @@ public class BiomeAetherDecorator
 			final int x = random.nextInt(island.getBounds().getWidth());
 			final int z = random.nextInt(island.getBounds().getLength());
 
-			if (manager.canAccess(pos.getX() + x, pos.getZ() + z))
+			if (access.canAccess(pos.getX() + x, pos.getZ() + z))
 			{
-				final BlockPos pos2 = manager.getTopPos(pos.add(x, 0, z));
+				final BlockPos pos2 = access.getTopPos(pos.add(x, 0, z));
 
 				if (pos2.getY() >= 0)
 				{
@@ -152,7 +149,7 @@ public class BiomeAetherDecorator
 					if (generated)
 					{
 						BlueprintPlacer.placeForced(primer, outpost, data, random);
-						final PlacedBlueprint placed = manager.placeBlueprint(outpost, data);
+						final PlacedBlueprint placed = island.placeBlueprint(outpost, data);
 
 						final ScheduleRegion trigger = placed.getScheduleFromTriggerID("spawn");
 
@@ -172,20 +169,18 @@ public class BiomeAetherDecorator
 			AetherCore.LOGGER.info("WARNING: OUTPOST_A NOT GENERATED ON AN ISLAND!");
 		}
 
-		this.generate(GenerationAether.ABAND_ANGEL_STOREROOM, 200, random.nextInt(10), -1, pos, island, manager, primer, world, random);
-		this.generate(GenerationAether.ABAND_ANGEL_WATCHTOWER, 200, random.nextInt(10), -1, pos, island, manager, primer, world, random);
-		this.generate(GenerationAether.ABAND_CAMPSITE_1A, 300, random.nextInt(10), 0, pos, island, manager, primer, world, random);
-		this.generate(GenerationAether.ABAND_HUMAN_HOUSE_1A, 200, random.nextInt(10), -1, pos, island, manager, primer, world, random);
-		this.generate(GenerationAether.ABAND_HUMAN_HOUSE_1B, 200, random.nextInt(10), -5, pos, island, manager, primer, world, random);
-		this.generate(GenerationAether.SKYROOT_WATCHTOWER_1A, 300, random.nextInt(10), 1, pos, island, manager, primer, world, random);
+		this.generate(GenerationAether.ABAND_ANGEL_STOREROOM, 200, random.nextInt(10), -1, pos, island, access, primer, world, random);
+		this.generate(GenerationAether.ABAND_ANGEL_WATCHTOWER, 200, random.nextInt(10), -1, pos, island, access, primer, world, random);
+		this.generate(GenerationAether.ABAND_CAMPSITE_1A, 300, random.nextInt(10), 0, pos, island, access, primer, world, random);
+		this.generate(GenerationAether.ABAND_HUMAN_HOUSE_1A, 200, random.nextInt(10), -1, pos, island, access, primer, world, random);
+		this.generate(GenerationAether.ABAND_HUMAN_HOUSE_1B, 200, random.nextInt(10), -5, pos, island, access, primer, world, random);
+		this.generate(GenerationAether.SKYROOT_WATCHTOWER_1A, 300, random.nextInt(10), 1, pos, island, access, primer, world, random);
 		//this.generate(GenerationAether.WELL, 600, random.nextInt(30), -9, pos, island, manager, primer, world, random);
-
-		island.getVirtualDataManager().setPlacedBlueprints(manager.getPlacedBlueprints());
 	}
 
 	private void generate(
 			final BlueprintDefinition def, final int tries, final int maxGenerated, final int floorHeight, final BlockPos startPos, final IIslandData island,
-			final IVirtualDataManager manager, final DataPrimer primer, final World world, final Random rand)
+			final IBlockAccessExtended access, final DataPrimer primer, final World world, final Random rand)
 	{
 		if (maxGenerated <= 0)
 		{
@@ -199,9 +194,9 @@ public class BiomeAetherDecorator
 			final int x = rand.nextInt(island.getBounds().getWidth());
 			final int z = rand.nextInt(island.getBounds().getLength());
 
-			if (manager.canAccess(startPos.getX() + x, startPos.getZ() + z))
+			if (access.canAccess(startPos.getX() + x, startPos.getZ() + z))
 			{
-				final BlockPos pos2 = manager.getTopPos(startPos.add(x, 0, z)).add(0, floorHeight, 0);
+				final BlockPos pos2 = access.getTopPos(startPos.add(x, 0, z)).add(0, floorHeight, 0);
 
 				if (pos2.getY() >= 0)
 				{
@@ -212,7 +207,7 @@ public class BiomeAetherDecorator
 					if (generated)
 					{
 						BlueprintPlacer.placeForced(primer, def, data, rand);
-						manager.placeBlueprint(def, data);
+						island.placeBlueprint(def, data);
 
 						amountGenerated++;
 
@@ -229,7 +224,7 @@ public class BiomeAetherDecorator
 	private void generate(
 			final BlueprintDefinitionPool pool, final int tries, final int maxGenerated, final int floorHeight, final BlockPos startPos,
 			final IIslandData island,
-			final IVirtualDataManager manager, final DataPrimer primer, final World world, final Random rand)
+			final IBlockAccessExtended access, final DataPrimer primer, final World world, final Random rand)
 	{
 		if (maxGenerated <= 0)
 		{
@@ -245,9 +240,9 @@ public class BiomeAetherDecorator
 			final int x = rand.nextInt(island.getBounds().getWidth());
 			final int z = rand.nextInt(island.getBounds().getLength());
 
-			if (manager.canAccess(startPos.getX() + x, startPos.getZ() + z))
+			if (access.canAccess(startPos.getX() + x, startPos.getZ() + z))
 			{
-				final BlockPos pos2 = manager.getTopPos(startPos.add(x, 0, z)).add(0, floorHeight, 0);
+				final BlockPos pos2 = access.getTopPos(startPos.add(x, 0, z)).add(0, floorHeight, 0);
 
 				if (pos2.getY() >= 0)
 				{
@@ -258,7 +253,7 @@ public class BiomeAetherDecorator
 					if (generated)
 					{
 						BlueprintPlacer.placeForced(primer, blueprint, data, rand);
-						manager.placeBlueprint(blueprint, data);
+						island.placeBlueprint(blueprint, data);
 
 						amountGenerated++;
 
@@ -270,20 +265,6 @@ public class BiomeAetherDecorator
 				}
 			}
 		}
-	}
-
-	/**
-	 * Should be used with HEAVY CAUTION. You do not want to do too much preparation
-	 * for smaller structures/generations since it is very costly.
-	 * @param world
-	 * @param island
-	 * @param random
-	 * @param pos
-	 * @param genBase
-	 */
-	public void prepareDecorationsPerChunk(final World world, final IIslandData island, final Random random, final BlockPos pos, final Biome genBase)
-	{
-
 	}
 
 	protected void genDecorations(final World world, final Random random, final BlockPos pos, final Biome genBase)
@@ -299,12 +280,7 @@ public class BiomeAetherDecorator
 
 		int count;
 
-		final ISectorAccess access = IslandSectorHelper.getAccess(world);
-		final ISector sector = access.provideSector(chunkX, chunkZ);
-
-		// TODO: support multiple islands in same chunk
-		final IIslandData island = sector.getIslandsForRegion(pos.getX(), 0, pos.getZ(), 16, 255, 16)
-				.stream().findFirst().orElse(null);
+		IIslandData island = IslandHelper.get(world, chunkX, chunkZ);
 
 		if (island == null)
 		{

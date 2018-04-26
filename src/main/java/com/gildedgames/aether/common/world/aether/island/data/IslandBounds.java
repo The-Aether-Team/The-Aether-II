@@ -44,6 +44,12 @@ public class IslandBounds implements IIslandBounds
 	}
 
 	@Override
+	public boolean contains(int minX, int minY, int minZ, int maxX, int maxY, int maxZ)
+	{
+		return this.x1 <= minX && this.x2 >= maxX && this.y1 <= minY && this.y2 >= maxY && this.z1 <= minZ && this.z2 >= maxZ;
+	}
+
+	@Override
 	public boolean contains(int x, int y, int z)
 	{
 		return this.intersects(x, y, z, x, y, z);

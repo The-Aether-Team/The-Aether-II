@@ -1,6 +1,9 @@
 package com.gildedgames.aether.api.world.islands;
 
 import com.gildedgames.aether.api.world.generation.WorldDecoration;
+import com.gildedgames.orbis_api.core.BlueprintDefinition;
+import com.gildedgames.orbis_api.core.ICreationData;
+import com.gildedgames.orbis_api.core.PlacedBlueprint;
 import com.gildedgames.orbis_api.util.mc.NBT;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
@@ -73,12 +76,10 @@ public interface IIslandData extends NBT
 	 */
 	long getSeed();
 
-	/**
-	 * Returns the virtual manager of the island. This is used to prepare the
-	 * generation data of this island for future generation.
-	 * @return The virtual manager of the island
-	 */
-	@Nonnull
-	IVirtualDataManager getVirtualDataManager();
+	PlacedBlueprint placeBlueprint(BlueprintDefinition def, ICreationData data);
+
+	List<PlacedBlueprint> getPlacedBlueprints();
+
+	void setPlacedBlueprints(List<PlacedBlueprint> instances);
 
 }

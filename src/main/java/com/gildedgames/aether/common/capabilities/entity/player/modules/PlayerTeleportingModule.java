@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
+import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.client.ClientEventHandler;
 import com.gildedgames.aether.client.gui.misc.GuiIntro;
 import com.gildedgames.aether.common.AetherCore;
@@ -9,7 +10,6 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModu
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.util.helpers.IslandHelper;
-import com.gildedgames.aether.common.world.aether.island.ChunkGeneratorAether;
 import com.gildedgames.orbis_api.util.TeleporterGeneric;
 import com.gildedgames.orbis_api.util.io.NBTFunnel;
 import com.gildedgames.orbis_api.util.mc.BlockPosDimension;
@@ -19,7 +19,7 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldServer;
-import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -138,7 +138,15 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 
 			if (!this.teleported && (this.getEntity().capabilities.isCreativeMode || this.timeInPortal == 1.0F))
 			{
-				this.teleportToAether();
+				DimensionManager.initDimension(AetherCore.CONFIG.getAetherDimID());
+
+				IIslandData island = IslandHelper.get(DimensionManager.getWorld(AetherCore.CONFIG.getAetherDimID()), this.getEntity().getPosition().getX() >> 4,
+						this.getEntity().getPosition().getZ() >> 4);
+
+				if (island != null)
+				{
+					this.teleportToAether();
+				}
 			}
 		}
 		else if (this.getEntity().isPotionActive(MobEffects.NAUSEA)
@@ -211,14 +219,6 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 						if (playerAether.getTeleportingModule().getAetherPos() == null)
 						{
 							final BlockPos pos = new BlockPos(100, 0, 100);
-							final IChunkGenerator generator = worldServer.getChunkProvider().chunkGenerator;
-
-							if (generator instanceof ChunkGeneratorAether)
-							{
-								final ChunkGeneratorAether aetherGen = (ChunkGeneratorAether) generator;
-
-								aetherGen.getPreparation().checkAndPrepareIfAvailable(pos.getX() >> 4, pos.getZ() >> 4);
-							}
 
 							final BlockPos respawn = IslandHelper.getRespawnPoint(player.world, pos);
 

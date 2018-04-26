@@ -1,9 +1,13 @@
 package com.gildedgames.aether.common.world.aether.biomes;
 
-import com.gildedgames.aether.api.world.ISector;
-import com.gildedgames.aether.api.world.ISectorAccess;
-import com.gildedgames.aether.api.world.IslandSectorHelper;
 import com.gildedgames.aether.common.registry.content.BiomesAether;
+import com.gildedgames.aether.common.world.aether.prep.PrepAether;
+import com.gildedgames.aether.common.world.aether.prep.PrepSectorDataAether;
+import com.gildedgames.orbis_api.preparation.IPrepManager;
+import com.gildedgames.orbis_api.preparation.IPrepManagerPool;
+import com.gildedgames.orbis_api.preparation.IPrepSector;
+import com.gildedgames.orbis_api.preparation.IPrepSectorAccess;
+import com.gildedgames.orbis_api.preparation.impl.capability.PrepHelper;
 import com.gildedgames.orbis_api.world.WorldObjectManager;
 import com.google.common.collect.Lists;
 import net.minecraft.util.math.BlockPos;
@@ -28,15 +32,10 @@ public class BiomeProviderAether extends BiomeProvider
 
 	private final World world;
 
-	private final Random rand;
-
 	public BiomeProviderAether(final World world)
 	{
 		this.world = world;
 		this.cache = new BiomeCache(this);
-		this.rand = new Random();
-
-		final Random rand = new Random(world.getSeed());
 	}
 
 	@Override
@@ -60,16 +59,22 @@ public class BiomeProviderAether extends BiomeProvider
 	@Override
 	public Biome getBiome(final BlockPos pos, final Biome defaultBiome)
 	{
-		return this.cache.getBiome(pos.getX(), pos.getZ(), BiomesAether.VOID);
+		synchronized (this.cache)
+		{
+			return this.cache.getBiome(pos.getX(), pos.getZ(), BiomesAether.VOID);
+		}
 	}
 
 	private Biome[] generateBiomes(final Biome[] biomes, final int x, final int z, final int width, final int height)
 	{
 		Arrays.fill(biomes, BiomesAether.VOID);
 
-		final ISectorAccess access = IslandSectorHelper.getAccess(this.world);
+		IPrepManagerPool pool = PrepHelper.getPool(this.world);
+		IPrepManager manager = pool.get(PrepAether.UNIQUE_ID);
 
-		ISector cachedSector = null;
+		IPrepSectorAccess access = manager.access();
+
+		IPrepSector cachedSector = null;
 
 		int prevChunkX = 0, prevChunkY = 0;
 
@@ -93,10 +98,11 @@ public class BiomeProviderAether extends BiomeProvider
 					prevChunkY = chunkY;
 				}
 
-				if (cachedSector != null)
+				if (cachedSector != null && cachedSector.getData() instanceof PrepSectorDataAether)
 				{
-					cachedSector.getIslandsForRegion(posX, 0, posZ, 1, 255, 1).stream().findFirst().ifPresent(island ->
-							biomes[index] = island.getBiome());
+					PrepSectorDataAether sectorDataAether = (PrepSectorDataAether) cachedSector.getData();
+
+					biomes[index] = sectorDataAether.getIslandData().getBiome();
 				}
 			}
 		}
@@ -144,7 +150,7 @@ public class BiomeProviderAether extends BiomeProvider
 
 			return listToReuse;
 		}
-		
+
 		IntCache.resetIntCache();
 
 		if (listToReuse == null || listToReuse.length < width * length)

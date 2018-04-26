@@ -1,12 +1,7 @@
 package com.gildedgames.aether.common.world.aether.island;
 
-import com.gildedgames.aether.api.world.ISector;
-import com.gildedgames.aether.api.world.ISectorAccess;
-import com.gildedgames.aether.api.world.IslandSectorHelper;
-import com.gildedgames.aether.api.world.TemplateInstance;
-import com.gildedgames.aether.api.world.generation.PostPlacementTemplate;
 import com.gildedgames.aether.api.world.islands.IIslandData;
-import com.gildedgames.aether.common.world.templates.TemplatePrimer;
+import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import com.gildedgames.orbis_api.core.*;
 import com.gildedgames.orbis_api.processing.BlockAccessChunkPrimer;
 import com.gildedgames.orbis_api.processing.BlockAccessExtendedWrapper;
@@ -18,6 +13,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
+import net.minecraft.world.chunk.EmptyChunk;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
@@ -58,37 +54,21 @@ public class ChunkGeneratorAether implements IChunkGenerator
 	{
 		this.rand.setSeed((long) chunkX * 341873128712L + (long) chunkZ * 132897987541L);
 
-		this.preparation.checkAndPrepareIfAvailable(chunkX, chunkZ);
+		IIslandData islandData = IslandHelper.get(this.world, chunkX, chunkZ);
 
-		// TODO: support multiple islands in same chunk
-		final IIslandData island = this.preparation.getIslands(chunkX, chunkZ).stream().findFirst().orElse(null);
-
-		if (island == null)
+		if (islandData == null)
 		{
-			throw new IllegalStateException(
-					"The Aether's chunk provider is trying to generate chunks before the island has been prepared. Something is VERY WRONG!");
+			return new EmptyChunk(this.world, chunkX, chunkZ);
 		}
 
 		final ChunkPrimer primer = new ChunkPrimer();
 
-		this.preparation.generateBaseTerrain(primer, island, chunkX, chunkZ);
-
-		// Prime placed templates
-		for (final TemplateInstance instance : island.getVirtualDataManager().getPlacedTemplates())
-		{
-			for (final ChunkPos chunkPos : instance.getChunksOccupied())
-			{
-				if (chunkPos.x == chunkX && chunkPos.z == chunkZ)
-				{
-					TemplatePrimer.primeTemplateSingleChunk(chunkPos, this.world, primer, instance.getDef(), instance.getLoc());
-				}
-			}
-		}
+		this.preparation.generateBaseTerrain(primer, islandData, chunkX, chunkZ);
 
 		final DataPrimer dataPrimer = new DataPrimer(new BlockAccessChunkPrimer(this.world, primer));
 
 		// Prime placed templates
-		for (final PlacedBlueprint instance : island.getVirtualDataManager().getPlacedBlueprints())
+		for (final PlacedBlueprint instance : islandData.getPlacedBlueprints())
 		{
 			for (final BlockDataChunk dataChunk : instance.getDataChunks())
 			{
@@ -117,6 +97,13 @@ public class ChunkGeneratorAether implements IChunkGenerator
 	@Override
 	public void populate(final int chunkX, final int chunkZ)
 	{
+		IIslandData island = IslandHelper.get(this.world, chunkX, chunkZ);
+
+		if (island == null)
+		{
+			return;
+		}
+
 		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Pre(this, this.world, this.rand, chunkX, chunkZ, false));
 
 		final int x = chunkX * 16;
@@ -135,46 +122,10 @@ public class ChunkGeneratorAether implements IChunkGenerator
 
 		this.rand.setSeed(chunkX * seedX + chunkZ * seedZ ^ this.world.getSeed());
 
-		final ISectorAccess access = IslandSectorHelper.getAccess(this.world);
-		final ISector sector = access.provideSector(chunkX, chunkZ);
-
-		// TODO: support multiple islands in same chunk
-		final IIslandData island = sector.getIslandsForRegion(pos.getX(), 0, pos.getZ(), 16, 255, 16)
-				.stream().findFirst().orElse(null);
-
-		if (island == null)
-		{
-			return;
-		}
-
-		final BlockAccessExtendedWrapper blockAccess = new BlockAccessExtendedWrapper(this.world);
-
-		// Populate placed templates
-		for (final TemplateInstance instance : island.getVirtualDataManager().getPlacedTemplates())
-		{
-			for (final ChunkPos chunkPos : instance.getChunksOccupied())
-			{
-				if (chunkPos.x == chunkX && chunkPos.z == chunkZ)
-				{
-					TemplatePrimer.generateTemplateSingleChunk(chunkPos, this.world, blockAccess, instance.getDef(), instance.getLoc());
-
-					if (!instance.hasGeneratedAChunk())
-					{
-						instance.markGeneratedAChunk();
-
-						for (final PostPlacementTemplate post : instance.getDef().getPostPlacements())
-						{
-							post.postGenerate(this.world, this.rand, instance.getLoc());
-						}
-					}
-				}
-			}
-		}
-
 		final DataPrimer primer = new DataPrimer(new BlockAccessExtendedWrapper(this.world));
 
 		// Populate placed blueprints
-		for (final PlacedBlueprint instance : island.getVirtualDataManager().getPlacedBlueprints())
+		for (final PlacedBlueprint instance : island.getPlacedBlueprints())
 		{
 			for (final BlockDataChunk dataChunk : instance.getDataChunks())
 			{

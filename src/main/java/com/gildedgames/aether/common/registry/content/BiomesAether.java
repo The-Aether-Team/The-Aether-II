@@ -8,13 +8,17 @@ import com.gildedgames.aether.common.world.aether.biomes.forgotten_highlands.Bio
 import com.gildedgames.aether.common.world.aether.biomes.highlands.BiomeHighlands;
 import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.BiomeIrradiatedForests;
 import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.BiomeMagneticHills;
-import com.gildedgames.aether.common.world.aether.island.data.IslandSectorFactory;
 import com.gildedgames.aether.common.world.util.BiomeInstancedZone;
+import com.google.common.collect.Lists;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 @Mod.EventBusSubscriber()
 @GameRegistry.ObjectHolder(AetherCore.MOD_ID)
@@ -50,12 +54,49 @@ public class BiomesAether
 	@GameRegistry.ObjectHolder("instanced_zone")
 	public static final Biome INSTANCED_ZONE = new BiomeInstancedZone();
 
+	public static List<BiomeAetherBase> POSSIBLE_BIOMES = Lists.newArrayList();
+
 	@SubscribeEvent
 	public static void registerBiome(final RegistryEvent.Register<Biome> event)
 	{
 		event.getRegistry()
 				.registerAll(HIGHLANDS, MAGNETIC_HILLS, ARCTIC_PEAKS, FORGOTTEN_HIGHLANDS, IRRADIATED_FORESTS, VOID, INSTANCED_ZONE);
 
-		IslandSectorFactory.registerPossibleBiome(HIGHLANDS, MAGNETIC_HILLS, ARCTIC_PEAKS, FORGOTTEN_HIGHLANDS, IRRADIATED_FORESTS);
+		registerPossibleBiome(HIGHLANDS, MAGNETIC_HILLS, ARCTIC_PEAKS, FORGOTTEN_HIGHLANDS, IRRADIATED_FORESTS);
+	}
+
+	public static void registerPossibleBiome(final BiomeAetherBase... biomes)
+	{
+		POSSIBLE_BIOMES.addAll(Arrays.asList(biomes));
+	}
+
+	public static float getTotalBiomeWeight()
+	{
+		float total = 0.0F;
+
+		for (final BiomeAetherBase b : POSSIBLE_BIOMES)
+		{
+			total += b.getRarityWeight();
+		}
+
+		return total;
+	}
+
+	public static BiomeAetherBase fetchRandomBiome(final Random rand)
+	{
+		final float randomValue = rand.nextFloat() * getTotalBiomeWeight();
+		float chanceSum = 0.0F;
+
+		for (final BiomeAetherBase b : POSSIBLE_BIOMES)
+		{
+			if (b.getRarityWeight() + chanceSum >= randomValue)
+			{
+				return b;
+			}
+
+			chanceSum += b.getRarityWeight();
+		}
+
+		return null;
 	}
 }
