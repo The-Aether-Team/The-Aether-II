@@ -17,11 +17,14 @@ public class WorldGenAetherCaves extends MapGenBase
 {
 	protected static final IBlockState BLK_AIR = Blocks.AIR.getDefaultState();
 
+	protected ThreadLocal<Random> rand = ThreadLocal.withInitial(Random::new);
+
 	protected void addRoom(
 			final long p_180705_1_, final int p_180705_3_, final int p_180705_4_, final ChunkPrimer p_180705_5_, final double p_180705_6_,
 			final double p_180705_8_, final double p_180705_10_)
 	{
-		this.addTunnel(p_180705_1_, p_180705_3_, p_180705_4_, p_180705_5_, p_180705_6_, p_180705_8_, p_180705_10_, 1.0F + this.rand.nextFloat() * 6.0F, 0.0F,
+		this.addTunnel(p_180705_1_, p_180705_3_, p_180705_4_, p_180705_5_, p_180705_6_, p_180705_8_, p_180705_10_, 1.0F + this.rand.get().nextFloat() * 6.0F,
+				0.0F,
 				0.0F, -1, -1, 0.5D);
 	}
 
@@ -232,6 +235,29 @@ public class WorldGenAetherCaves extends MapGenBase
 		return block == Blocks.FLOWING_WATER || block == Blocks.WATER;
 	}
 
+	@Override
+	public void generate(World worldIn, int x, int z, ChunkPrimer primer)
+	{
+		Random rand = this.rand.get();
+
+		int i = this.range;
+		this.world = worldIn;
+		rand.setSeed(worldIn.getSeed());
+		long j = rand.nextLong();
+		long k = rand.nextLong();
+
+		for (int l = x - i; l <= x + i; ++l)
+		{
+			for (int i1 = z - i; i1 <= z + i; ++i1)
+			{
+				long j1 = (long) l * j;
+				long k1 = (long) i1 * k;
+				rand.setSeed(j1 ^ k1 ^ worldIn.getSeed());
+				this.recursiveGenerate(worldIn, l, i1, x, z, primer);
+			}
+		}
+	}
+
 	/**
 	 * Recursively called by generate()
 	 */
@@ -239,38 +265,40 @@ public class WorldGenAetherCaves extends MapGenBase
 	protected void recursiveGenerate(final World worldIn, final int chunkX, final int chunkZ, final int originalX, final int originalZ,
 			final ChunkPrimer primer)
 	{
-		int i = this.rand.nextInt(this.rand.nextInt(this.rand.nextInt(10) + 1) + 1);
+		Random rand = this.rand.get();
 
-		if (this.rand.nextInt(5) != 0)
+		int i = rand.nextInt(rand.nextInt(rand.nextInt(10) + 1) + 1);
+
+		if (rand.nextInt(5) != 0)
 		{
 			i = 0;
 		}
 
 		for (int j = 0; j < i; ++j)
 		{
-			final double d0 = (double) (chunkX * 16 + this.rand.nextInt(16));
-			final double d1 = (double) this.rand.nextInt(128);
-			final double d2 = (double) (chunkZ * 16 + this.rand.nextInt(16));
+			final double d0 = (double) (chunkX * 16 + rand.nextInt(16));
+			final double d1 = (double) rand.nextInt(128);
+			final double d2 = (double) (chunkZ * 16 + rand.nextInt(16));
 			int tunnels = 2;
 
-			if (this.rand.nextInt(4) == 0)
+			if (rand.nextInt(4) == 0)
 			{
-				this.addRoom(this.rand.nextLong(), originalX, originalZ, primer, d0, d1, d2);
-				tunnels += this.rand.nextInt(4);
+				this.addRoom(rand.nextLong(), originalX, originalZ, primer, d0, d1, d2);
+				tunnels += rand.nextInt(4);
 			}
 
 			for (int l = 0; l < tunnels; ++l)
 			{
-				final float f = this.rand.nextFloat() * ((float) Math.PI * 2F);
-				final float f1 = (this.rand.nextFloat() - 0.5F) * 2.0F / 8.0F;
-				float f2 = this.rand.nextFloat() * 2.0F + this.rand.nextFloat();
+				final float f = rand.nextFloat() * ((float) Math.PI * 2F);
+				final float f1 = (rand.nextFloat() - 0.5F) * 2.0F / 8.0F;
+				float f2 = rand.nextFloat() * 2.0F + rand.nextFloat();
 
-				if (this.rand.nextInt(10) == 0)
+				if (rand.nextInt(10) == 0)
 				{
-					f2 *= this.rand.nextFloat() * this.rand.nextFloat() * 3.0F + 1.0F;
+					f2 *= rand.nextFloat() * rand.nextFloat() * 3.0F + 1.0F;
 				}
 
-				this.addTunnel(this.rand.nextLong(), originalX, originalZ, primer, d0, d1, d2, f2 * 2.0F, f, f1, 0, 0, 0.5D);
+				this.addTunnel(rand.nextLong(), originalX, originalZ, primer, d0, d1, d2, f2 * 2.0F, f, f1, 0, 0, 0.5D);
 			}
 		}
 	}
