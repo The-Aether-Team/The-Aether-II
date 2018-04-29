@@ -1,10 +1,8 @@
 package com.gildedgames.aether.common.world.aether.biomes;
 
 import com.gildedgames.aether.common.registry.content.BiomesAether;
-import com.gildedgames.aether.common.world.aether.prep.PrepAether;
 import com.gildedgames.aether.common.world.aether.prep.PrepSectorDataAether;
 import com.gildedgames.orbis_api.preparation.IPrepManager;
-import com.gildedgames.orbis_api.preparation.IPrepManagerPool;
 import com.gildedgames.orbis_api.preparation.IPrepSector;
 import com.gildedgames.orbis_api.preparation.IPrepSectorAccess;
 import com.gildedgames.orbis_api.preparation.impl.capability.PrepHelper;
@@ -47,7 +45,10 @@ public class BiomeProviderAether extends BiomeProvider
 	@Override
 	public void cleanupCache()
 	{
-		this.cache.cleanupCache();
+		synchronized (this.cache)
+		{
+			this.cache.cleanupCache();
+		}
 	}
 
 	@Override
@@ -69,8 +70,12 @@ public class BiomeProviderAether extends BiomeProvider
 	{
 		Arrays.fill(biomes, BiomesAether.VOID);
 
-		IPrepManagerPool pool = PrepHelper.getPool(this.world);
-		IPrepManager manager = pool.get(PrepAether.UNIQUE_ID);
+		IPrepManager manager = PrepHelper.getManager(this.world);
+
+		if (manager == null)
+		{
+			return biomes;
+		}
 
 		IPrepSectorAccess access = manager.access();
 
@@ -160,10 +165,14 @@ public class BiomeProviderAether extends BiomeProvider
 
 		if (cacheFlag && width == 16 && length == 16 && (x & 15) == 0 && (z & 15) == 0)
 		{
-			final Biome[] abiome = this.cache.getCachedBiomes(x, z);
-			System.arraycopy(abiome, 0, listToReuse, 0, width * length);
+			synchronized (this.cache)
+			{
+				final Biome[] abiome = this.cache.getCachedBiomes(x, z);
 
-			return listToReuse;
+				System.arraycopy(abiome, 0, listToReuse, 0, width * length);
+
+				return listToReuse;
+			}
 		}
 		else
 		{

@@ -13,7 +13,6 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.armor.ItemAetherShield;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.util.helpers.PlayerUtil;
-import com.gildedgames.aether.common.world.aether.ChunkProviderAether;
 import com.gildedgames.aether.common.world.aether.TeleporterAether;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -37,8 +36,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.gen.ChunkProviderServer;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.EntityMountEvent;
@@ -109,10 +106,6 @@ public class CommonEvents
 				final WorldServer world = (WorldServer) event.getWorld();
 
 				AetherCore.TELEPORTER = new TeleporterAether(world);
-
-				IChunkProvider provider = new ChunkProviderAether((WorldServer) event.getWorld(), (ChunkProviderServer) event.getWorld().getChunkProvider());
-
-				ObfuscationReflectionHelper.setPrivateValue(World.class, event.getWorld(), provider, "field_73020_y", "chunkProvider");
 			}
 		}
 	}

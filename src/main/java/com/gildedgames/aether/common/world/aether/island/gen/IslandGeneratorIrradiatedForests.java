@@ -13,7 +13,7 @@ import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.Irra
 import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
 import com.gildedgames.orbis_api.util.ObjectFilter;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 
 public class IslandGeneratorIrradiatedForests implements IIslandGenerator
@@ -23,8 +23,6 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 
 	// Number of samples done per chunk.
 	private static final int NOISE_SAMPLES = NOISE_XZ_SCALE + 1;
-
-	private IrradiatedForestsData data;
 
 	public double interpolate(final double[] data, final int x, final int z)
 	{
@@ -81,16 +79,17 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 	}
 
 	@Override
-	public void genIslandForChunk(final OpenSimplexNoise noise, final IBlockAccessExtended access, final ChunkPrimer primer, final IIslandData island,
+	public void genIslandForChunk(Biome[] biomes, final OpenSimplexNoise noise, final IBlockAccessExtended access, final ChunkPrimer primer,
+			final IIslandData island,
 			final int chunkX,
 			final int chunkZ)
 	{
-		this.data = ObjectFilter.getFirstFrom(island.getComponents(), IrradiatedForestsData.class);
+		IrradiatedForestsData data = ObjectFilter.getFirstFrom(island.getComponents(), IrradiatedForestsData.class);
 
 		final double[] heightMap = this.generateNoise(noise, island, chunkX, chunkZ, 0, 300.0D);
 		final double[] terraceMap = this.generateNoise(noise, island, chunkX, chunkZ, 1000, 300.0D);
 
-		final BiomeAetherBase biome = (BiomeAetherBase) access.getServerBiome(new BlockPos(chunkX * 16, 0, chunkZ * 16));
+		final BiomeAetherBase biome = (BiomeAetherBase) biomes[0];
 
 		IBlockState coastBlock = biome.getCoastalBlock();
 		IBlockState stoneBlock = BlocksAether.holystone.getDefaultState();
@@ -143,7 +142,7 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 						final int crackX = worldX + x1;
 						final int crackZ = worldZ + z1;
 
-						final CrackChunk crackChunk = this.data.getCracks(crackX >> 4, crackZ >> 4);
+						final CrackChunk crackChunk = data.getCracks(crackX >> 4, crackZ >> 4);
 
 						if (crackChunk != null)
 						{

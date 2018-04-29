@@ -137,15 +137,15 @@ public class AetherCore
 
 		DimensionManager.initDimension(CONFIG.getAetherDimID());
 
-		PrepTasks.prepSector(DimensionManager.getWorld(CONFIG.getAetherDimID()), 0, 0, PROXY.getPrepAether());
+		PrepTasks.prepSector(DimensionManager.getWorld(CONFIG.getAetherDimID()), 0, 0);
 
-		for (int x = -1; x < 1; x++)
+		/*for (int x = -1; x < 1; x++)
 		{
 			for (int y = -1; y < 1; y++)
 			{
-				PrepTasks.prepSector(DimensionManager.getWorld(CONFIG.getAetherDimID()), x, y, PROXY.getPrepAether());
+				PrepTasks.prepSector(DimensionManager.getWorld(CONFIG.getAetherDimID()), x, y);
 			}
-		}
+		}*/
 	}
 
 	@EventHandler

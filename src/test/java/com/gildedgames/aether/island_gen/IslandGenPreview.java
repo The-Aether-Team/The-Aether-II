@@ -13,6 +13,7 @@ import com.gildedgames.aether.common.world.aether.island.nodename.as3delaunay.Vo
 import com.gildedgames.orbis_api.util.mc.NBT;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Bootstrap;
+import net.minecraft.world.biome.Biome;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
@@ -23,6 +24,7 @@ import org.lwjgl.opengl.GL11;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
+import java.util.Arrays;
 import java.util.Random;
 
 public class IslandGenPreview
@@ -150,7 +152,11 @@ public class IslandGenPreview
 
 				final ChunkPrimerIsland primer = new ChunkPrimerIsland();
 
-				this.island.getGenerator().genIslandForChunk(this.noise, new BlockAccessIsland(), primer, this.island, chunkX, chunkZ);
+				Biome[] biomes = new Biome[256];
+
+				Arrays.fill(biomes, BiomesAether.HIGHLANDS);
+
+				this.island.getGenerator().genIslandForChunk(biomes, this.noise, new BlockAccessIsland(), primer, this.island, chunkX, chunkZ);
 
 				for (int x = 0; x < 15; ++x)
 				{

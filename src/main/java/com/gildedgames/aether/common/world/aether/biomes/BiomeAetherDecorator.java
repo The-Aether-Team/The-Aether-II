@@ -24,6 +24,7 @@ import com.gildedgames.aether.common.world.templates.TemplatePlacer;
 import com.gildedgames.orbis_api.core.*;
 import com.gildedgames.orbis_api.core.util.BlueprintPlacer;
 import com.gildedgames.orbis_api.data.schedules.ScheduleRegion;
+import com.gildedgames.orbis_api.preparation.IPrepSectorData;
 import com.gildedgames.orbis_api.processing.BlockAccessExtendedWrapper;
 import com.gildedgames.orbis_api.processing.DataPrimer;
 import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
@@ -116,9 +117,9 @@ public class BiomeAetherDecorator
 		this.genPurpleAercloud = new WorldGenPurpleAercloud(BlockAercloud.getAercloudState(BlockAercloud.PURPLE_AERCLOUD), 4, false);
 	}
 
-	public void prepareDecorationsWholeIsland(final World world, final IIslandData island, final Random random)
+	public void prepareDecorationsWholeIsland(final World world, final IIslandData island, IPrepSectorData sectorData, final Random random)
 	{
-		IBlockAccessExtended access = new BlockAccessIsland(world, island);
+		IBlockAccessExtended access = new BlockAccessIsland(world, island, sectorData);
 		final DataPrimer primer = new DataPrimer(access);
 
 		final int startX = island.getBounds().getMinX();

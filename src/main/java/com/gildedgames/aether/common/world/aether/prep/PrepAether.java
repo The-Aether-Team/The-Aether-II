@@ -6,6 +6,7 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.registry.content.BiomesAether;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
+import com.gildedgames.aether.common.world.aether.island.ChunkGeneratorAether;
 import com.gildedgames.aether.common.world.aether.island.data.IslandBounds;
 import com.gildedgames.aether.common.world.aether.island.data.IslandData;
 import com.gildedgames.orbis_api.preparation.IPrepChunkManager;
@@ -15,6 +16,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.chunk.ChunkPrimer;
+import net.minecraft.world.gen.IChunkGenerator;
 
 import java.util.Random;
 
@@ -41,7 +44,7 @@ public class PrepAether implements IPrepRegistryEntry
 	}
 
 	@Override
-	public void preSectorDataSave(World world, IPrepSectorData sectorData, IPrepChunkManager iPrepChunkManager)
+	public void postSectorDataCreate(World world, IPrepSectorData sectorData, IPrepChunkManager iPrepChunkManager)
 	{
 		if (sectorData instanceof PrepSectorDataAether)
 		{
@@ -55,25 +58,8 @@ public class PrepAether implements IPrepRegistryEntry
 				BiomeAetherBase biomeAether = (BiomeAetherBase) biome;
 
 				islandData.addComponents(biomeAether.createIslandComponents(islandData));
-			}
-		}
-	}
 
-	@Override
-	public void postSectorDataSave(World world, IPrepSectorData sectorData, IPrepChunkManager iPrepChunkManager)
-	{
-		if (sectorData instanceof PrepSectorDataAether)
-		{
-			PrepSectorDataAether sectorDataAether = (PrepSectorDataAether) sectorData;
-
-			IIslandData islandData = sectorDataAether.getIslandData();
-			Biome biome = islandData.getBiome();
-
-			if (biome instanceof BiomeAetherBase)
-			{
-				BiomeAetherBase biomeAether = (BiomeAetherBase) biome;
-
-				biomeAether.getBiomeDecorator().prepareDecorationsWholeIsland(world, islandData, new Random(islandData.getSeed()));
+				biomeAether.getBiomeDecorator().prepareDecorationsWholeIsland(world, islandData, sectorData, new Random(islandData.getSeed()));
 			}
 		}
 	}
@@ -117,5 +103,21 @@ public class PrepAether implements IPrepRegistryEntry
 	public IPrepSectorData createDataAndRead(World world, NBTTagCompound tag)
 	{
 		return new PrepSectorDataAether(world, tag);
+	}
+
+	@Override
+	public void threadSafeGenerateChunk(World world, IPrepSectorData sectorData, Biome[] biomes, ChunkPrimer chunkPrimer, int chunkX, int chunkZ)
+	{
+		IChunkGenerator generator = world.provider.createChunkGenerator();
+
+		if (generator instanceof ChunkGeneratorAether && sectorData instanceof PrepSectorDataAether)
+		{
+			ChunkGeneratorAether aetherGen = (ChunkGeneratorAether) generator;
+			PrepSectorDataAether aetherData = (PrepSectorDataAether) sectorData;
+
+			IIslandData islandData = aetherData.getIslandData();
+
+			aetherGen.threadSafeGenerateChunk(biomes, chunkPrimer, islandData, chunkX, chunkZ);
+		}
 	}
 }

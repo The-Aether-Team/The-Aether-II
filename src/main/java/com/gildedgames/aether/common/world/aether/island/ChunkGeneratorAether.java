@@ -13,7 +13,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.chunk.EmptyChunk;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
@@ -58,12 +57,25 @@ public class ChunkGeneratorAether implements IChunkGenerator
 
 		if (islandData == null)
 		{
-			return new EmptyChunk(this.world, chunkX, chunkZ);
+			return new Chunk(this.world, chunkX, chunkZ);
 		}
 
-		final ChunkPrimer primer = new ChunkPrimer();
+		final Biome[] biomes = this.world.getBiomeProvider().getBiomesForGeneration(null, chunkX * 16, chunkZ * 16, 16, 16);
 
-		this.preparation.generateBaseTerrain(primer, islandData, chunkX, chunkZ);
+		ChunkPrimer primer = new ChunkPrimer();
+
+		this.threadSafeGenerateChunk(biomes, primer, islandData, chunkX, chunkZ);
+
+		final Chunk chunk = new Chunk(this.world, primer, chunkX, chunkZ);
+
+		chunk.generateSkylightMap();
+
+		return chunk;
+	}
+
+	public void threadSafeGenerateChunk(Biome[] biomes, ChunkPrimer primer, IIslandData islandData, int chunkX, int chunkZ)
+	{
+		this.preparation.generateBaseTerrain(biomes, primer, islandData, chunkX, chunkZ);
 
 		final DataPrimer dataPrimer = new DataPrimer(new BlockAccessChunkPrimer(this.world, primer));
 
@@ -86,12 +98,6 @@ public class ChunkGeneratorAether implements IChunkGenerator
 				}
 			}
 		}
-
-		final Chunk chunk = new Chunk(this.world, primer, chunkX, chunkZ);
-
-		chunk.generateSkylightMap();
-
-		return chunk;
 	}
 
 	@Override

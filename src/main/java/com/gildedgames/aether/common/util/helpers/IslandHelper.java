@@ -2,10 +2,7 @@ package com.gildedgames.aether.common.util.helpers;
 
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.world.aether.prep.PrepAether;
 import com.gildedgames.aether.common.world.aether.prep.PrepSectorDataAether;
-import com.gildedgames.orbis_api.preparation.IPrepManager;
-import com.gildedgames.orbis_api.preparation.IPrepManagerPool;
 import com.gildedgames.orbis_api.preparation.IPrepSector;
 import com.gildedgames.orbis_api.preparation.impl.capability.PrepHelper;
 import net.minecraft.util.math.BlockPos;
@@ -38,10 +35,7 @@ public class IslandHelper
 
 	public static IIslandData get(World world, int chunkX, int chunkZ)
 	{
-		IPrepManagerPool pool = PrepHelper.getPool(world);
-		IPrepManager manager = pool.get(PrepAether.UNIQUE_ID);
-
-		IPrepSector sector = manager.access().provideSector(chunkX, chunkZ);
+		IPrepSector sector = PrepHelper.getSector(world, chunkX, chunkZ);
 
 		if (sector != null && sector.getData() instanceof PrepSectorDataAether)
 		{

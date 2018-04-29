@@ -13,12 +13,9 @@ import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
 import com.gildedgames.orbis_api.util.ObjectFilter;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
-
-import java.util.Random;
 
 public class IslandGeneratorHighlands implements IIslandGenerator
 {
@@ -28,11 +25,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 	// Number of samples done per chunk.
 	private static final int NOISE_SAMPLES = NOISE_XZ_SCALE + 1;
 
-	private final Random magneticShaftsRand = new Random();
-
 	private IslandVariables v;
-
-	private MagneticHillPillar currentPillar;
 
 	public IslandGeneratorHighlands(IslandVariables variables)
 	{
@@ -94,7 +87,8 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 	}
 
 	@Override
-	public void genIslandForChunk(final OpenSimplexNoise noise, final IBlockAccessExtended access, final ChunkPrimer primer, final IIslandData island,
+	public void genIslandForChunk(Biome[] biomes, final OpenSimplexNoise noise, final IBlockAccessExtended access, final ChunkPrimer primer,
+			final IIslandData island,
 			final int chunkX,
 			final int chunkZ)
 	{
@@ -102,7 +96,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 		final double[] terraceMap = this.v.hasTerraces() ? generateNoise(noise, island, chunkX, chunkZ, 1000, 300.0D) : null;
 		//final double[] quicksoilMap = generateNoise(noise, island, chunkX, chunkZ, 2000, 200D);
 
-		final Biome biome = access.getServerBiome(new BlockPos(chunkX * 16, 0, chunkZ * 16));
+		final Biome biome = biomes[0];
 
 		final MagneticHillsData magneticHillsData = ObjectFilter.getFirstFrom(island.getComponents(), MagneticHillsData.class);
 
@@ -125,11 +119,6 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 		{
 			for (int z = 0; z < 16; z++)
 			{
-				if (this.v.hasMagneticPillars())
-				{
-					this.magneticShaftsRand.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
-				}
-
 				final int worldX = posX + x;
 				final int worldZ = posZ + z;
 
@@ -193,12 +182,16 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 				}
 
 				double magneticSample = filteredSample;
+				MagneticHillPillar currentPillar = null;
 
 				if (this.v.hasMagneticPillars())
 				{
 					if (magneticHillsData != null)
 					{
-						magneticSample = this.shapeMagneticShafts(magneticHillsData, magneticSample, x, z, chunkX, chunkZ);
+						Object[] magneticData = this.shapeMagneticShafts(magneticHillsData, magneticSample, x, z, chunkX, chunkZ);
+
+						magneticSample = (double) magneticData[1];
+						currentPillar = (MagneticHillPillar) magneticData[0];
 					}
 
 					if (magneticSample > 0.5)
@@ -208,12 +201,12 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 
 					if (magnetic)
 					{
-						bottomMaxY += this.currentPillar.getPos().getY();
+						bottomMaxY += currentPillar.getPos().getY();
 						bottomHeight = 55;
 					}
 				}
 
-				final double topHeight = magnetic ? this.currentPillar.getTopHeight() : this.v.getMaxTerrainHeight();
+				final double topHeight = magnetic ? currentPillar.getTopHeight() : this.v.getMaxTerrainHeight();
 
 				double bottomSample = magnetic ? magneticSample : Math.min(1.0D, normal + 0.25);
 
@@ -245,7 +238,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 					if (magnetic)
 					{
 						bottomSample = Math.min(1.0, (bottomSample - cutoffPoint) * 1.4);
-						bottomSample = Math.min(bottomSample, bottomSample * this.currentPillar.getElongationMod());
+						bottomSample = Math.min(bottomSample, bottomSample * currentPillar.getElongationMod());
 					}
 
 					for (int y = (int) bottomMaxY; y > bottomMaxY - (bottomHeight * bottomSample); y--)
@@ -331,13 +324,16 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 		}
 	}
 
-	private double shapeMagneticShafts(final MagneticHillsData data, final double magneticSample, final int x, final int z, final int chunkX, final int chunkZ)
+	private Object[] shapeMagneticShafts(final MagneticHillsData data, final double magneticSample, final int x, final int z, final int chunkX,
+			final int chunkZ)
 	{
 		final int worldX = (chunkX * 16) + x;
 		final int worldZ = (chunkZ * 16) + z;
 
 		double closestDistX = Double.MAX_VALUE;
 		double closestDistZ = Double.MAX_VALUE;
+
+		Object[] values = new Object[2];
 
 		for (final MagneticHillPillar p : data.getMagneticPillars())
 		{
@@ -348,13 +344,16 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 			{
 				closestDistX = distX;
 				closestDistZ = distZ;
-				this.currentPillar = p;
+
+				values[0] = p;
 			}
 		}
 
 		final double closestDist = Math.sqrt(closestDistX * closestDistX + closestDistZ * closestDistZ);
 
-		return magneticSample - closestDist;
+		values[1] = magneticSample - closestDist;
+
+		return values;
 	}
 
 }

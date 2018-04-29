@@ -57,10 +57,8 @@ public class WorldPreparationAether
 		return this.noise;
 	}
 
-	public void generateBaseTerrain(final ChunkPrimer primer, final IIslandData island, final int chunkX, final int chunkZ)
+	public void generateBaseTerrain(Biome[] biomes, final ChunkPrimer primer, final IIslandData island, final int chunkX, final int chunkZ)
 	{
-		final Biome[] biomes = this.world.getBiomeProvider().getBiomesForGeneration(null, chunkX * 16, chunkZ * 16, 16, 16);
-
 		final int worldX = chunkX * 16;
 		final int worldZ = chunkZ * 16;
 
@@ -92,11 +90,11 @@ public class WorldPreparationAether
 
 		final IIslandGenerator generator = island.getGenerator();
 
-		generator.genIslandForChunk(this.noise, this.access, primer, island, chunkX, chunkZ);
+		generator.genIslandForChunk(biomes, this.noise, this.access, primer, island, chunkX, chunkZ);
 
 		this.replaceBiomeBlocks(island, primer, chunkX, chunkZ, biomes);
 
-		this.caveGenerator.generate(this.world, chunkX, chunkZ, primer);
+		//this.caveGenerator.generate(this.world, chunkX, chunkZ, primer);
 	}
 
 	// Calculate max penetration depth
