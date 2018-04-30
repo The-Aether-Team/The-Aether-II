@@ -7,8 +7,6 @@ import com.gildedgames.aether.client.models.entities.player.LayerPlayerGloves;
 import com.gildedgames.aether.client.models.entities.player.LayerSwetLatch;
 import com.gildedgames.aether.client.renderer.entities.living.RenderPlayerHelper;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
-import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.util.helpers.PlayerUtil;
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,7 +14,6 @@ import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.util.EnumHand;
-import net.minecraftforge.client.event.RenderBlockOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderSpecificHandEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -70,29 +67,6 @@ public class ClientRenderHandler
 				{
 					overlay.draw();
 				}
-			}
-		}
-	}
-
-	@SubscribeEvent
-	public void onRenderBlockOverlay(final RenderBlockOverlayEvent event)
-	{
-		final EntityPlayer entity = event.getPlayer();
-
-		final PlayerAether aePlayer = PlayerAether.getPlayer(event.getPlayer());
-
-		if (event.getOverlayType() == RenderBlockOverlayEvent.OverlayType.WATER)
-		{
-			if (entity.getAir() >= 295 && PlayerUtil.isWearingEquipment(aePlayer, ItemsAether.iron_bubble))
-			{
-				event.setCanceled(true);
-			}
-		}
-		else if (event.getOverlayType() == RenderBlockOverlayEvent.OverlayType.FIRE)
-		{
-			if (PlayerUtil.isWearingEquipment(aePlayer, ItemsAether.phoenix_rune))
-			{
-				event.setCanceled(true);
 			}
 		}
 	}

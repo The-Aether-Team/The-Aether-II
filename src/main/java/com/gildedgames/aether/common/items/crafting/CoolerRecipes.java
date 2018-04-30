@@ -59,13 +59,6 @@ public class CoolerRecipes
 				new ItemStack(ItemsAether.skyroot_axe),
 				new ItemStack(ItemsAether.skyroot_pickaxe),
 				new ItemStack(ItemsAether.skyroot_shovel));
-
-		//TODO: Add the rest of charms, neckwear, and rings.
-		this.addCoolingFromItem(ItemsAether.irradiated_charm, new ItemStack(ItemsAether.charm_atk_dmg_01));
-
-		this.addCoolingFromItem(ItemsAether.irradiated_neckwear, new ItemStack(ItemsAether.winged_necklace));
-
-		this.addCoolingFromItem(ItemsAether.irradiated_ring, new ItemStack(ItemsAether.ring_of_strength));
 	}
 
 	public static CoolerRecipes instance()
@@ -82,7 +75,7 @@ public class CoolerRecipes
 	{
 		Random rand = new Random();
 
-		if (getCoolingResult(input) != ItemStack.EMPTY)
+		if (this.getCoolingResult(input) != ItemStack.EMPTY)
 		{
 			net.minecraftforge.fml.common.FMLLog.info("Ignored cooling recipe with conflicting input: " + input + stackList[0]);
 			return;
@@ -97,7 +90,7 @@ public class CoolerRecipes
 		{
 			if (this.compareItemStacks(stack, (ItemStack) entry.getKey()))
 			{
-				return (ItemStack) entry.getValue()[rand.nextInt(entry.getValue().length)];
+				return (ItemStack) entry.getValue()[this.rand.nextInt(entry.getValue().length)];
 			}
 		}
 		return ItemStack.EMPTY;

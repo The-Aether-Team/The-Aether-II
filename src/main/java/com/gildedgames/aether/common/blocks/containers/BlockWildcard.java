@@ -1,9 +1,6 @@
 package com.gildedgames.aether.common.blocks.containers;
 
-import com.gildedgames.aether.common.entities.tiles.TileEntitySchematicBlock;
 import com.gildedgames.aether.common.entities.tiles.TileEntityWildcard;
-import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.registry.content.SoundsAether;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -13,7 +10,10 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.*;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
@@ -77,23 +77,6 @@ public class BlockWildcard extends BlockContainer
 		}
 
 		final TileEntity te = world.getTileEntity(pos);
-
-		if (te instanceof TileEntitySchematicBlock)
-		{
-			final TileEntitySchematicBlock schematic = (TileEntitySchematicBlock) te;
-
-			final ItemStack heldItem = player.getHeldItem(hand);
-
-			if (heldItem.getItem() == ItemsAether.aether_developer_wand)
-			{
-				world.playSound(player, pos, SoundsAether.tempest_electric_shock, SoundCategory.NEUTRAL, 1.0F,
-						0.8F + (world.rand.nextFloat() * 0.5F));
-
-				schematic.setMarkedForGeneration(!schematic.isMarkedForGeneration());
-
-				return true;
-			}
-		}
 
 		if (!player.isSneaking())
 		{

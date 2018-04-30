@@ -413,8 +413,7 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.dart_shooter, new ItemModelBuilder("dart_shooter/")
 				.add(ItemDartType.GOLDEN.ordinal(), "golden_dart_shooter")
 				.add(ItemDartType.ENCHANTED.ordinal(), "enchanted_dart_shooter")
-				.add(ItemDartType.POISON.ordinal(), "poison_dart_shooter")
-				.add(ItemDartType.PHOENIX.ordinal(), "phoenix_dart_shooter"));
+				.add(ItemDartType.POISON.ordinal(), "poison_dart_shooter"));
 
 		registerItemModels(ItemsAether.dart, new ItemModelBuilder("dart/")
 				.add(ItemDartType.GOLDEN.ordinal(), "golden_dart")
@@ -450,22 +449,8 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.holystone_pressure_plate, "holystone_pressure_plate");
 		registerItemModels(BlocksAether.holystone_button, "holystone_button");
 
-		registerItemModels(ItemsAether.zanite_ring, "accessories/zanite_ring");
-		registerItemModels(ItemsAether.zanite_pendant, "accessories/zanite_pendant");
-
-		registerItemModels(ItemsAether.iron_bubble, "accessories/iron_bubble");
-		registerItemModels(ItemsAether.regeneration_stone, "accessories/regeneration_stone");
-
 		registerItemModels(BlocksAether.skyroot_chest, "skyroot_chest");
 		registerItemModels(BlocksAether.ambrosium_torch, "ambrosium_torch");
-
-		registerItemModels(ItemsAether.ice_ring, "accessories/ice_ring");
-		registerItemModels(ItemsAether.ice_pendant, "accessories/ice_pendant");
-
-		registerItemModels(ItemsAether.daggerfrost_rune, "accessories/daggerfrost_rune");
-
-		registerItemModels(ItemsAether.bone_ring, "accessories/bone_ring");
-		registerItemModels(ItemsAether.skyroot_ring, "accessories/skyroot_ring");
 
 		registerItemModels(ItemsAether.icestone, "icestone");
 
@@ -492,8 +477,6 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.arkenium_gloves, "accessories/arkenium_gloves");
 		registerItemModels(ItemsAether.gravitite_gloves, "accessories/gravitite_gloves");
 
-		registerItemModels(ItemsAether.pink_baby_swet, "companions/pink_baby_swet");
-
 		registerItemModels(ItemsAether.shard_of_life, "miscellaneous/shard_of_life");
 
 		registerItemModels(ItemsAether.aether_saddle, "aether_saddle");
@@ -504,15 +487,6 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.arkenium_shield, "arkenium_shield");
 		registerItemModels(ItemsAether.gravitite_shield, "gravitite_shield");
 
-		registerItemModels(ItemsAether.ethereal_stone, "companions/ethereal_stone");
-		registerItemModels(ItemsAether.fleeting_stone, "companions/fleeting_stone");
-		registerItemModels(ItemsAether.soaring_stone, "companions/soaring_stone");
-		registerItemModels(ItemsAether.frostpine_totem, "companions/frostpine_totem");
-		registerItemModels(ItemsAether.kraisith_capsule, "companions/kraisith_capsule");
-		registerItemModels(ItemsAether.orb_of_arkenzus, "companions/orb_of_arkenzus");
-		registerItemModels(ItemsAether.fangrin_capsule, "companions/fangrin_capsule");
-		registerItemModels(ItemsAether.death_seal, new ItemModelBuilder("companions/").add(0, "death_seal").add(1, "death_seal_broken"));
-
 		registerItemModels(BlocksAether.skyroot_slab, "aether_slab/skyroot_slab");
 		registerItemModels(BlocksAether.holystone_slab, "aether_slab/holystone_slab");
 		registerItemModels(BlocksAether.mossy_holystone_slab, "aether_slab/mossy_holystone_slab");
@@ -522,30 +496,6 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.agiosite_slab, "aether_slab/agiosite_slab");
 		registerItemModels(BlocksAether.agiosite_brick_slab, "aether_slab/agiosite_brick_slab");
 		registerItemModels(BlocksAether.scatterglass_slab, "aether_slab/scatterglass_slab");
-
-		registerItemModels(ItemsAether.solar_band, "accessories/solar_band");
-		registerItemModels(ItemsAether.lunar_band, "accessories/lunar_band");
-
-		registerItemModels(ItemsAether.ring_of_growth, "accessories/ring_of_growth");
-		registerItemModels(ItemsAether.plague_coil, "accessories/plague_coil");
-
-		registerItemModels(ItemsAether.fleeting_ring, "accessories/fleeting_ring");
-		registerItemModels(ItemsAether.lesser_ring_of_growth, "accessories/lesser_ring_of_growth");
-		registerItemModels(ItemsAether.winged_ring, "accessories/winged_ring");
-		registerItemModels(ItemsAether.life_coil, "accessories/life_coil");
-
-		registerItemModels(ItemsAether.glamoured_iron_screw, "iron_screw");
-		registerItemModels(ItemsAether.wisdom_bauble, "accessories/wisdom_bauble");
-		registerItemModels(ItemsAether.blight_ward, "accessories/blight_ward");
-		registerItemModels(ItemsAether.glamoured_skyroot_twig, "skyroot_twig");
-		registerItemModels(ItemsAether.glamoured_gold_screw, "gold_screw");
-		registerItemModels(ItemsAether.ambrosium_talisman, "accessories/ambrosium_talisman");
-		registerItemModels(ItemsAether.sunlit_scroll, "accessories/sunlit_scroll");
-		registerItemModels(ItemsAether.moonlit_scroll, "accessories/moonlit_scroll");
-		registerItemModels(ItemsAether.glamoured_cockatrice_heart, "cockatrice_heart");
-		registerItemModels(ItemsAether.damaged_moa_feather, "accessories/damaged_moa_feather");
-		registerItemModels(ItemsAether.osseous_bane, "accessories/osseous_bane");
-		registerItemModels(ItemsAether.rot_bane, "accessories/rot_bane");
 
 		registerItemModels(BlocksAether.skyroot_stairs, "aether_stairs/skyroot_stairs");
 		registerItemModels(BlocksAether.holystone_stairs, "aether_stairs/holystone_stairs");
@@ -565,101 +515,12 @@ public class ItemModelsAether
 
 		registerItemModels(BlocksAether.moa_egg, "moa_egg/moa_egg");
 
-		registerItemModels(ItemsAether.aether_developer_wand, "aether_developer_wand");
-
 		registerItemModels(ItemsAether.cloud_parachute, new ItemModelBuilder("cloud_parachute/")
 				.add(EntityParachute.Type.COLD.ordinal(), "cold_cloud_parachute")
 				.add(EntityParachute.Type.GOLDEN.ordinal(), "golden_cloud_parachute")
 				.add(EntityParachute.Type.PURPLE.ordinal(), "purple_cloud_parachute")
 				.add(EntityParachute.Type.GREEN.ordinal(), "green_cloud_parachute")
 				.add(EntityParachute.Type.BLUE.ordinal(), "blue_cloud_parachute"));
-
-		registerItemModels(ItemsAether.zanite_studded_choker, "accessories/zanite_studded_choker");
-		registerItemModels(ItemsAether.lesser_amulet_of_growth, "accessories/lesser_amulet_of_growth");
-		registerItemModels(ItemsAether.hide_gorget, "accessories/hide_gorget");
-		registerItemModels(ItemsAether.amulet_of_growth, "accessories/amulet_of_growth");
-		registerItemModels(ItemsAether.arkenium_studded_choker, "accessories/arkenium_studded_choker");
-		registerItemModels(ItemsAether.raegorite_gorget, "accessories/raegorite_gorget");
-		registerItemModels(ItemsAether.gruegar_scarf, "accessories/gruegar_scarf");
-		registerItemModels(ItemsAether.moon_sect_warden_gorget, "accessories/moon_sect_warden_gorget");
-		registerItemModels(ItemsAether.thiefs_gorget, "accessories/thiefs_gorget");
-		registerItemModels(ItemsAether.frostward_scarf, "accessories/frostward_scarf");
-
-		registerItemModels(ItemsAether.charm_arm_01, "charms/charm_arm_01");
-		registerItemModels(ItemsAether.charm_arm_02, "charms/charm_arm_02");
-		registerItemModels(ItemsAether.charm_arm_03, "charms/charm_arm_03");
-		registerItemModels(ItemsAether.charm_arm_tgh_01, "charms/charm_arm_tgh_01");
-		registerItemModels(ItemsAether.charm_arm_tgh_02, "charms/charm_arm_tgh_02");
-		registerItemModels(ItemsAether.charm_arm_tgh_03, "charms/charm_arm_tgh_03");
-		registerItemModels(ItemsAether.charm_atk_dmg_01, "charms/charm_atk_dmg_01");
-		registerItemModels(ItemsAether.charm_atk_dmg_02, "charms/charm_atk_dmg_02");
-		registerItemModels(ItemsAether.charm_atk_dmg_03, "charms/charm_atk_dmg_03");
-		registerItemModels(ItemsAether.charm_atk_spd_01, "charms/charm_atk_spd_01");
-		registerItemModels(ItemsAether.charm_atk_spd_02, "charms/charm_atk_spd_02");
-		registerItemModels(ItemsAether.charm_atk_spd_03, "charms/charm_atk_spd_03");
-		registerItemModels(ItemsAether.charm_kbk_res_01, "charms/charm_kbk_res_01");
-		registerItemModels(ItemsAether.charm_kbk_res_02, "charms/charm_kbk_res_02");
-		registerItemModels(ItemsAether.charm_kbk_res_03, "charms/charm_kbk_res_03");
-		registerItemModels(ItemsAether.charm_lck_01, "charms/charm_lck_01");
-		registerItemModels(ItemsAether.charm_lck_02, "charms/charm_lck_02");
-		registerItemModels(ItemsAether.charm_lck_03, "charms/charm_lck_03");
-		registerItemModels(ItemsAether.charm_max_hlt_01, "charms/charm_max_hlt_01");
-		registerItemModels(ItemsAether.charm_max_hlt_02, "charms/charm_max_hlt_02");
-		registerItemModels(ItemsAether.charm_max_hlt_03, "charms/charm_max_hlt_03");
-		registerItemModels(ItemsAether.charm_mve_spd_01, "charms/charm_mve_spd_01");
-		registerItemModels(ItemsAether.charm_mve_spd_02, "charms/charm_mve_spd_02");
-		registerItemModels(ItemsAether.charm_mve_spd_03, "charms/charm_mve_spd_03");
-
-		registerItemModels(ItemsAether.glamoured_zephyr_husk, "zephyr_husk");
-		registerItemModels(ItemsAether.glamoured_blue_swet_jelly, "swet_jelly/blue_swet_jelly");
-		registerItemModels(ItemsAether.glamoured_cockatrice_talons, "cockatrice_talons");
-		registerItemModels(ItemsAether.glamoured_coal_ember, "coal_ember");
-
-		registerItemModels(ItemsAether.granite_ring, "accessories/granite_ring");
-		registerItemModels(ItemsAether.gust_ring, "accessories/gust_ring");
-		registerItemModels(ItemsAether.typhoon_ring, "accessories/typhoon_ring");
-		registerItemModels(ItemsAether.sporing_ring, "accessories/sporing_ring");
-		registerItemModels(ItemsAether.ember_ring, "accessories/ember_ring");
-
-		registerItemModels(ItemsAether.sunlit_tome, "accessories/sunlit_tome");
-		registerItemModels(ItemsAether.moonlit_tome, "accessories/moonlit_tome");
-		registerItemModels(ItemsAether.primal_totem_of_survival, "accessories/primal_totem_of_survival");
-		registerItemModels(ItemsAether.primal_totem_of_rage, "accessories/primal_totem_of_rage");
-		registerItemModels(ItemsAether.divine_beacon, "accessories/divine_beacon");
-		registerItemModels(ItemsAether.phoenix_rune, "accessories/phoenix_rune");
-		registerItemModels(ItemsAether.glamoured_taegore_tusk, "taegore_tusk");
-
-		registerItemModels(ItemsAether.dust_ring, "accessories/dust_ring");
-		registerItemModels(ItemsAether.mud_ring, "accessories/mud_ring");
-		registerItemModels(ItemsAether.storm_ring, "accessories/storm_ring");
-		registerItemModels(ItemsAether.steam_ring, "accessories/steam_ring");
-
-		registerItemModels(ItemsAether.butchers_knife, "accessories/butchers_knife");
-
-		registerItemModels(ItemsAether.gruegar_ring, "accessories/gruegar_ring");
-		registerItemModels(ItemsAether.ring_of_strength, "accessories/ring_of_strength");
-		registerItemModels(ItemsAether.arkenium_ring, "accessories/arkenium_ring");
-		registerItemModels(ItemsAether.swift_ribbon, "accessories/swift_ribbon");
-		registerItemModels(ItemsAether.wynd_cluster_ring, "accessories/wynd_cluster_ring");
-		registerItemModels(ItemsAether.lesser_ring_of_wisdom, "accessories/lesser_ring_of_wisdom");
-		registerItemModels(ItemsAether.ring_of_wisdom, "accessories/ring_of_wisdom");
-
-		registerItemModels(ItemsAether.hide_pouch, "accessories/hide_pouch");
-		registerItemModels(ItemsAether.gruegar_pouch, "accessories/gruegar_pouch");
-		registerItemModels(ItemsAether.angel_bandage, "accessories/angel_bandage");
-		registerItemModels(ItemsAether.swift_rune, "accessories/swift_rune");
-		registerItemModels(ItemsAether.wynd_cluster, "accessories/wynd_cluster");
-		registerItemModels(ItemsAether.wisdom_rune, "accessories/wisdom_rune");
-
-		registerItemModels(ItemsAether.fleeting_scarf, "accessories/fleeting_scarf");
-		registerItemModels(ItemsAether.winged_necklace, "accessories/winged_necklace");
-		registerItemModels(ItemsAether.gust_amulet, "accessories/gust_amulet");
-		registerItemModels(ItemsAether.typhoon_amulet, "accessories/typhoon_amulet");
-		registerItemModels(ItemsAether.chain_of_sporing_bones, "accessories/chain_of_sporing_bones");
-		registerItemModels(ItemsAether.molten_amulet, "accessories/molten_amulet");
-		registerItemModels(ItemsAether.granite_studded_choker, "accessories/granite_studded_choker");
-		registerItemModels(ItemsAether.muggers_cloak, "accessories/muggers_cloak");
-		registerItemModels(ItemsAether.bandit_shawl, "accessories/bandit_shawl");
 
 		registerItemModels(ItemsAether.irradiated_chunk, "irradiated_chunk");
 		registerItemModels(ItemsAether.irradiated_sword, "irradiated_sword");

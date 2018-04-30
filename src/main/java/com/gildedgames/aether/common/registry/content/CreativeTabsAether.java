@@ -107,51 +107,6 @@ public class CreativeTabsAether
 		}
 	};
 
-	public static final CreativeTabs COMPANIONS = new CreativeTabs("aether.companions")
-	{
-		@Override
-		public ItemStack getTabIconItem()
-		{
-			return new ItemStack(ItemsAether.pink_baby_swet);
-		}
-	};
-
-	public static final CreativeTabs RINGS = new CreativeTabs("aether.rings")
-	{
-		@Override
-		public ItemStack getTabIconItem()
-		{
-			return new ItemStack(ItemsAether.zanite_ring);
-		}
-	};
-
-	public static final CreativeTabs NECKWEAR = new CreativeTabs("aether.neckwear")
-	{
-		@Override
-		public ItemStack getTabIconItem()
-		{
-			return new ItemStack(ItemsAether.amulet_of_growth);
-		}
-	};
-
-	public static final CreativeTabs RELICS = new CreativeTabs("aether.relics")
-	{
-		@Override
-		public ItemStack getTabIconItem()
-		{
-			return new ItemStack(ItemsAether.regeneration_stone);
-		}
-	};
-
-	public static final CreativeTabs CHARMS = new CreativeTabs("aether.charms")
-	{
-		@Override
-		public ItemStack getTabIconItem()
-		{
-			return new ItemStack(ItemsAether.charm_mve_spd_03);
-		}
-	};
-
 	public static final CreativeTabs THERA = new CreativeTabs("aether.thera")
 	{
 		@Override
@@ -160,7 +115,6 @@ public class CreativeTabsAether
 			return new ItemStack(BlocksAether.therastone_brick_decorative, 1, BlockTherastoneDecorative.KEYSTONE.getMeta());
 		}
 	};
-
 
 	private static abstract class CreativeTabsMisc extends CreativeTabs
 	{

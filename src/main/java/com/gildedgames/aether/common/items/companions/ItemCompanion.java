@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.items.companions;
 
 import com.gildedgames.aether.common.items.InformationProvider;
-import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -24,7 +23,7 @@ public class ItemCompanion extends Item
 	public ItemCompanion()
 	{
 		this.setMaxStackSize(1);
-		this.setCreativeTab(CreativeTabsAether.COMPANIONS);
+		//this.setCreativeTab(CreativeTabsAether.COMPANIONS);
 	}
 
 	public ItemCompanion(final InformationProvider informationProvider)
