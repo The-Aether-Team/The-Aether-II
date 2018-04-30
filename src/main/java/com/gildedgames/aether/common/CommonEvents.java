@@ -42,6 +42,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -91,9 +92,30 @@ public class CommonEvents
 			{
 				if (PrepHelper.isSectorLoaded(player.getEntityWorld(), player.chunkCoordX, player.chunkCoordZ))
 				{
-					player.closeScreen();
+					boolean isLoaded = true;
 
-					NetworkingAether.sendPacketToPlayer(new PacketCloseLoadingScreen(), (EntityPlayerMP) player);
+					int radius = Math.min(player.getServer().getPlayerList().getViewDistance(), 10);
+
+					for (int x = player.chunkCoordX - radius; x < player.chunkCoordX + radius; x++)
+					{
+						for (int z = player.chunkCoordZ - radius; z < player.chunkCoordZ + radius; z++)
+						{
+							Chunk chunk = player.world.getChunkProvider().getLoadedChunk(x, z);
+
+							if (chunk == null)
+							{
+								isLoaded = false;
+								break;
+							}
+						}
+					}
+
+					if (isLoaded)
+					{
+						player.closeScreen();
+
+						NetworkingAether.sendPacketToPlayer(new PacketCloseLoadingScreen(), (EntityPlayerMP) player);
+					}
 				}
 			}
 		}

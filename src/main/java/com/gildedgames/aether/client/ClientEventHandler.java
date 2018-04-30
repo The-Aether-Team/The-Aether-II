@@ -40,7 +40,6 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IProgressUpdate;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -227,11 +226,6 @@ public class ClientEventHandler
 		{
 			event.setGui(new GuiBlackScreen());
 		}
-
-		if (DRAW_LOADING_SCREEN && (event.getGui() instanceof GuiDownloadTerrain || event.getGui() instanceof IProgressUpdate))
-		{
-			//event.setGui(LOADING);
-		}
 	}
 
 	private static double getSecondsSinceStart()
@@ -251,6 +245,11 @@ public class ClientEventHandler
 
 			if (DRAW_LOADING_SCREEN)
 			{
+				if (Minecraft.getMinecraft().world != null)
+				{
+					Minecraft.getMinecraft().getSoundHandler().stopSounds();
+				}
+
 				CustomLoadingRenderer.CURRENT = LOADING;
 
 				GlStateManager.pushMatrix();
