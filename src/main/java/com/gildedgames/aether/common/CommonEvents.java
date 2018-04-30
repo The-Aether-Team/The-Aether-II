@@ -6,14 +6,20 @@ import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.containers.ContainerLoadingScreen;
 import com.gildedgames.aether.common.entities.living.mobs.EntityAechorPlant;
 import com.gildedgames.aether.common.entities.living.npc.EntityNPC;
 import com.gildedgames.aether.common.entities.living.passive.EntityCarrionSprout;
+import com.gildedgames.aether.common.events.PostAetherTravelEvent;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.armor.ItemAetherShield;
+import com.gildedgames.aether.common.network.AetherGuiHandler;
+import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.network.packets.PacketCloseLoadingScreen;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.util.helpers.PlayerUtil;
 import com.gildedgames.aether.common.world.aether.TeleporterAether;
+import com.gildedgames.orbis_api.preparation.impl.capability.PrepHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -36,6 +42,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.EntityMountEvent;
@@ -57,6 +64,41 @@ import java.util.function.Supplier;
 
 public class CommonEvents
 {
+
+	@SubscribeEvent
+	public static void onEvent(PostAetherTravelEvent event)
+	{
+		if (!event.getEntity().getEntityWorld().isRemote)
+		{
+			if (event.getEntity() instanceof EntityPlayer)
+			{
+				EntityPlayer player = (EntityPlayer) event.getEntity();
+
+				player.openGui(AetherCore.INSTANCE, AetherGuiHandler.AETHER_LOADING_ID, player.getEntityWorld(), player.getPosition().getX(),
+						player.getPosition().getY(), player.getPosition().getZ());
+			}
+		}
+	}
+
+	@SubscribeEvent
+	public static void onEvent(LivingEvent.LivingUpdateEvent event)
+	{
+		if (!event.getEntity().getEntityWorld().isRemote && event.getEntity() instanceof EntityPlayer)
+		{
+			EntityPlayer player = (EntityPlayer) event.getEntity();
+
+			if (player.openContainer instanceof ContainerLoadingScreen)
+			{
+				if (PrepHelper.isSectorLoaded(player.getEntityWorld(), player.chunkCoordX, player.chunkCoordZ))
+				{
+					player.closeScreen();
+
+					NetworkingAether.sendPacketToPlayer(new PacketCloseLoadingScreen(), (EntityPlayerMP) player);
+				}
+			}
+		}
+	}
+
 	@SubscribeEvent
 	public static void onEntity(EntityJoinWorldEvent event)
 	{
@@ -208,20 +250,21 @@ public class CommonEvents
 
 		if (entity instanceof EntityPlayer)
 		{
-			final PlayerList playerList = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList();
+			if (!net.minecraftforge.common.ForgeHooks.onTravelToDimension(entity, dimension))
+			{
+				return entity;
+			}
 
 			// Players require special magic to be teleported correctly, and are not duplicated
-
 			if (!toWorld.isRemote)
 			{
+				final MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
+				final PlayerList playerList = server.getPlayerList();
+
 				final EntityPlayerMP player = (EntityPlayerMP) entity;
 
-				if (!net.minecraftforge.common.ForgeHooks.onTravelToDimension(player, dimension))
-				{
-					return player;
-				}
-
-				playerList.transferPlayerToDimension((EntityPlayerMP) entity, dimension, teleporter);
+				playerList.transferPlayerToDimension(player, dimension, teleporter);
+				player.timeUntilPortal = player.getPortalCooldown();
 
 				if (optionalLoc == null)
 				{
@@ -236,6 +279,9 @@ public class CommonEvents
 
 				/** Strange flag that needs to be set to prevent the NetHandlerPlayServer instances from resetting your position **/
 				ObfuscationReflectionHelper.setPrivateValue(EntityPlayerMP.class, player, true, ReflectionAether.INVULNERABLE_DIMENSION_CHANGE.getMappings());
+
+				PostAetherTravelEvent event = new PostAetherTravelEvent(entity);
+				MinecraftForge.EVENT_BUS.post(event);
 			}
 
 			return entity;

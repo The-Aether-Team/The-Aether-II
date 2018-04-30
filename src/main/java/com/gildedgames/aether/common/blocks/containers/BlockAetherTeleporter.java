@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.blocks.containers;
 import com.gildedgames.aether.client.ClientEventHandler;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.entities.tiles.TileEntityTeleporter;
+import com.gildedgames.aether.common.events.PostAetherTravelEvent;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.registry.content.InstancesAether;
 import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstance;
@@ -30,6 +31,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import javax.annotation.Nullable;
@@ -117,7 +119,11 @@ public class BlockAetherTeleporter extends Block implements ITileEntityProvider
 
 			if (!playerAether.getTeleportingModule().hasPlayedIntro())
 			{
-				ClientEventHandler.DRAW_BLACK_SCREEN = true;
+				ClientEventHandler.setDrawBlackScreen(true);
+			}
+			else
+			{
+				ClientEventHandler.setDrawLoading(true);
 			}
 
 			return true;
@@ -143,12 +149,20 @@ public class BlockAetherTeleporter extends Block implements ITileEntityProvider
 
 				final MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
 
+				if (!net.minecraftforge.common.ForgeHooks.onTravelToDimension(playerMP, p.getDim()))
+				{
+					return false;
+				}
+
 				final Teleporter teleporter = new TeleporterGeneric(server.getWorld(player.dimension));
 				final PlayerList playerList = server.getPlayerList();
 				playerList.transferPlayerToDimension(playerMP, p.getDim(), teleporter);
 				player.timeUntilPortal = player.getPortalCooldown();
 
 				playerMP.connection.setPlayerLocation(p.getX(), p.getY(), p.getZ(), 225, 0);
+
+				PostAetherTravelEvent event = new PostAetherTravelEvent(playerMP);
+				MinecraftForge.EVENT_BUS.post(event);
 			}
 			else if (hook.getInstance() != null)
 			{

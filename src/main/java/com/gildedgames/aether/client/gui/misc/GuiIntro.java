@@ -219,7 +219,7 @@ public class GuiIntro extends GuiFrameNoContainer
 				PlayerAether.getPlayer(this.mc.player).getTeleportingModule().setPlayedIntro(true);
 				NetworkingAether.sendPacketToServer(new PacketSetPlayedIntro(true));
 
-				ClientEventHandler.DRAW_BLACK_SCREEN = false;
+				ClientEventHandler.setDrawBlackScreen(false);
 
 				return;
 			}
@@ -313,7 +313,7 @@ public class GuiIntro extends GuiFrameNoContainer
 			PlayerAether.getPlayer(this.mc.player).getTeleportingModule().setPlayedIntro(true);
 			NetworkingAether.sendPacketToServer(new PacketSetPlayedIntro(true));
 
-			ClientEventHandler.DRAW_BLACK_SCREEN = false;
+			ClientEventHandler.setDrawBlackScreen(false);
 
 			ClientEventHandler.drawBlackFade();
 			Minecraft.getMinecraft().displayGuiScreen(null);
@@ -341,7 +341,7 @@ public class GuiIntro extends GuiFrameNoContainer
 					NetworkingAether.sendPacketToServer(new PacketCancelIntro());
 					Minecraft.getMinecraft().displayGuiScreen(new GuiBlackScreen());
 
-					ClientEventHandler.DRAW_BLACK_SCREEN = false;
+					ClientEventHandler.setDrawBlackScreen(false);
 
 					return;
 				}

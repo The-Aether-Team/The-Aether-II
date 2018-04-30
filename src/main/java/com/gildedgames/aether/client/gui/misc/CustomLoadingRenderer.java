@@ -1,22 +1,19 @@
 package com.gildedgames.aether.client.gui.misc;
 
-import com.gildedgames.aether.client.ClientEventHandler;
-import com.gildedgames.orbis_api.util.InputHelper;
 import net.minecraft.client.LoadingScreenRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.shader.Framebuffer;
 
 /**
  * Ugly hack to override loading renderer when teleporting to Necromancer Tower
  */
-public class BlackScreenRenderer extends LoadingScreenRenderer
+public class CustomLoadingRenderer extends LoadingScreenRenderer
 {
+	public static ICustomLoading CURRENT;
+
 	/** A reference to the Minecraft object. */
 	private final Minecraft mc;
 
@@ -27,7 +24,7 @@ public class BlackScreenRenderer extends LoadingScreenRenderer
 	/** The system's time represented in milliseconds. */
 	private long systemTime = Minecraft.getSystemTime();
 
-	public BlackScreenRenderer(final Minecraft mcIn, final LoadingScreenRenderer original)
+	public CustomLoadingRenderer(final Minecraft mcIn, final LoadingScreenRenderer original)
 	{
 		super(mcIn);
 
@@ -38,41 +35,10 @@ public class BlackScreenRenderer extends LoadingScreenRenderer
 		this.original = original;
 	}
 
-	protected static void drawGradientRect(final int left, final int top, final int right, final int bottom, final int startColor, final int endColor)
-	{
-		final float f = (float) (startColor >> 24 & 255) / 255.0F;
-		final float f1 = (float) (startColor >> 16 & 255) / 255.0F;
-		final float f2 = (float) (startColor >> 8 & 255) / 255.0F;
-		final float f3 = (float) (startColor & 255) / 255.0F;
-		final float f4 = (float) (endColor >> 24 & 255) / 255.0F;
-		final float f5 = (float) (endColor >> 16 & 255) / 255.0F;
-		final float f6 = (float) (endColor >> 8 & 255) / 255.0F;
-		final float f7 = (float) (endColor & 255) / 255.0F;
-		GlStateManager.disableTexture2D();
-		GlStateManager.enableBlend();
-		GlStateManager.disableAlpha();
-		GlStateManager
-				.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE,
-						GlStateManager.DestFactor.ZERO);
-		GlStateManager.shadeModel(7425);
-		final Tessellator tessellator = Tessellator.getInstance();
-		final BufferBuilder bufferbuilder = tessellator.getBuffer();
-		bufferbuilder.begin(7, DefaultVertexFormats.POSITION_COLOR);
-		bufferbuilder.pos((double) right, (double) top, 0).color(f1, f2, f3, f).endVertex();
-		bufferbuilder.pos((double) left, (double) top, 0).color(f1, f2, f3, f).endVertex();
-		bufferbuilder.pos((double) left, (double) bottom, 0).color(f5, f6, f7, f4).endVertex();
-		bufferbuilder.pos((double) right, (double) bottom, 0).color(f5, f6, f7, f4).endVertex();
-		tessellator.draw();
-		GlStateManager.shadeModel(7424);
-		GlStateManager.disableBlend();
-		GlStateManager.enableAlpha();
-		GlStateManager.enableTexture2D();
-	}
-
 	@Override
 	public void resetProgressAndMessage(final String message)
 	{
-		if (!ClientEventHandler.DRAW_BLACK_SCREEN)
+		if (CURRENT == null)
 		{
 			this.original.resetProgressAndMessage(message);
 			return;
@@ -84,7 +50,7 @@ public class BlackScreenRenderer extends LoadingScreenRenderer
 	@Override
 	public void displaySavingString(final String message)
 	{
-		if (!ClientEventHandler.DRAW_BLACK_SCREEN)
+		if (CURRENT == null)
 		{
 			this.original.displaySavingString(message);
 			return;
@@ -96,7 +62,7 @@ public class BlackScreenRenderer extends LoadingScreenRenderer
 	@Override
 	public void displayLoadingString(final String message)
 	{
-		if (!ClientEventHandler.DRAW_BLACK_SCREEN)
+		if (CURRENT == null)
 		{
 			this.original.displayLoadingString(message);
 			return;
@@ -108,7 +74,7 @@ public class BlackScreenRenderer extends LoadingScreenRenderer
 	@Override
 	public void setDoneWorking()
 	{
-		if (!ClientEventHandler.DRAW_BLACK_SCREEN)
+		if (CURRENT == null)
 		{
 			this.original.setDoneWorking();
 			return;
@@ -125,7 +91,7 @@ public class BlackScreenRenderer extends LoadingScreenRenderer
 	@Override
 	public void setLoadingProgress(final int progress)
 	{
-		if (!ClientEventHandler.DRAW_BLACK_SCREEN)
+		if (CURRENT == null)
 		{
 			this.original.setLoadingProgress(progress);
 			return;
@@ -170,7 +136,7 @@ public class BlackScreenRenderer extends LoadingScreenRenderer
 				{
 					GlStateManager.disableDepth();
 
-					drawGradientRect(0, 0, (int) InputHelper.getScreenWidth(), (int) InputHelper.getScreenHeight(), 0xFF000000, 0xFF000000);
+					CURRENT.drawCustomLoading();
 
 					GlStateManager.enableDepth();
 
@@ -198,5 +164,10 @@ public class BlackScreenRenderer extends LoadingScreenRenderer
 			{
 			}
 		}
+	}
+
+	public interface ICustomLoading
+	{
+		void drawCustomLoading();
 	}
 }

@@ -12,7 +12,8 @@ import com.gildedgames.aether.api.items.equipment.effects.IEffectPool;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 import com.gildedgames.aether.client.gui.GuiUtils;
 import com.gildedgames.aether.client.gui.PerformanceIngame;
-import com.gildedgames.aether.client.gui.misc.BlackScreenRenderer;
+import com.gildedgames.aether.client.gui.misc.CustomLoadingRenderer;
+import com.gildedgames.aether.client.gui.misc.GuiAetherLoading;
 import com.gildedgames.aether.client.gui.misc.GuiBlackScreen;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
@@ -33,10 +34,15 @@ import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.GuiDownloadTerrain;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiInventory;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IProgressUpdate;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -59,7 +65,9 @@ public class ClientEventHandler
 {
 	private static final PerformanceIngame PERFORMANCE_LOGGER = new PerformanceIngame();
 
-	public static boolean DRAW_BLACK_SCREEN = false;
+	private static boolean DRAW_BLACK_SCREEN = false;
+
+	private static boolean DRAW_LOADING_SCREEN = false;
 
 	private static boolean DRAWING_BLACK_FADE = false;
 
@@ -67,11 +75,81 @@ public class ClientEventHandler
 
 	private static boolean PREV_JUMP_BIND_STATE;
 
+	private static CustomLoadingRenderer.ICustomLoading BLACK_LOADING = () -> drawGradientRect(0, 0, (int) InputHelper.getScreenWidth(),
+			(int) InputHelper.getScreenHeight(), 0xFF000000, 0xFF000000);
+
 	private static Minecraft mc = Minecraft.getMinecraft();
+
+	private static GuiAetherLoading LOADING = new GuiAetherLoading();
 
 	public static void drawBlackFade()
 	{
 		DRAWING_BLACK_FADE = true;
+	}
+
+	public static void setDrawBlackScreen(boolean flag)
+	{
+		DRAW_BLACK_SCREEN = flag;
+
+		if (flag)
+		{
+			CustomLoadingRenderer.CURRENT = BLACK_LOADING;
+		}
+		else if (CustomLoadingRenderer.CURRENT == BLACK_LOADING)
+		{
+			CustomLoadingRenderer.CURRENT = null;
+		}
+	}
+
+	public static void setDrawLoading(boolean flag)
+	{
+		DRAW_LOADING_SCREEN = flag;
+
+		if (flag)
+		{
+			LOADING = new GuiAetherLoading();
+
+			LOADING.setWorldAndResolution(Minecraft.getMinecraft(), MathHelper.floor(InputHelper.getScreenWidth()),
+					MathHelper.floor(InputHelper.getScreenHeight()));
+			LOADING.initGui();
+
+			CustomLoadingRenderer.CURRENT = LOADING;
+		}
+		else if (CustomLoadingRenderer.CURRENT == LOADING)
+		{
+			CustomLoadingRenderer.CURRENT = null;
+		}
+	}
+
+	protected static void drawGradientRect(final int left, final int top, final int right, final int bottom, final int startColor, final int endColor)
+	{
+		final float f = (float) (startColor >> 24 & 255) / 255.0F;
+		final float f1 = (float) (startColor >> 16 & 255) / 255.0F;
+		final float f2 = (float) (startColor >> 8 & 255) / 255.0F;
+		final float f3 = (float) (startColor & 255) / 255.0F;
+		final float f4 = (float) (endColor >> 24 & 255) / 255.0F;
+		final float f5 = (float) (endColor >> 16 & 255) / 255.0F;
+		final float f6 = (float) (endColor >> 8 & 255) / 255.0F;
+		final float f7 = (float) (endColor & 255) / 255.0F;
+		GlStateManager.disableTexture2D();
+		GlStateManager.enableBlend();
+		GlStateManager.disableAlpha();
+		GlStateManager
+				.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE,
+						GlStateManager.DestFactor.ZERO);
+		GlStateManager.shadeModel(7425);
+		final Tessellator tessellator = Tessellator.getInstance();
+		final BufferBuilder bufferbuilder = tessellator.getBuffer();
+		bufferbuilder.begin(7, DefaultVertexFormats.POSITION_COLOR);
+		bufferbuilder.pos((double) right, (double) top, 0).color(f1, f2, f3, f).endVertex();
+		bufferbuilder.pos((double) left, (double) top, 0).color(f1, f2, f3, f).endVertex();
+		bufferbuilder.pos((double) left, (double) bottom, 0).color(f5, f6, f7, f4).endVertex();
+		bufferbuilder.pos((double) right, (double) bottom, 0).color(f5, f6, f7, f4).endVertex();
+		tessellator.draw();
+		GlStateManager.shadeModel(7424);
+		GlStateManager.disableBlend();
+		GlStateManager.enableAlpha();
+		GlStateManager.enableTexture2D();
 	}
 
 	@SubscribeEvent
@@ -145,14 +223,14 @@ public class ClientEventHandler
 			}
 		}
 
-		/*if (event.getGui() instanceof GuiInventory)
-		{
-			event.setGui(new GuiIntro());
-		}*/
-
 		if (DRAW_BLACK_SCREEN && event.getGui() instanceof GuiDownloadTerrain)
 		{
 			event.setGui(new GuiBlackScreen());
+		}
+
+		if (DRAW_LOADING_SCREEN && (event.getGui() instanceof GuiDownloadTerrain || event.getGui() instanceof IProgressUpdate))
+		{
+			//event.setGui(LOADING);
 		}
 	}
 
@@ -166,13 +244,36 @@ public class ClientEventHandler
 	{
 		if (event.phase == TickEvent.Phase.END)
 		{
-			if (DRAW_BLACK_SCREEN)
+			if (Minecraft.getMinecraft().loadingScreen.getClass() == LoadingScreenRenderer.class)
 			{
+				Minecraft.getMinecraft().loadingScreen = new CustomLoadingRenderer(Minecraft.getMinecraft(), Minecraft.getMinecraft().loadingScreen);
+			}
+
+			if (DRAW_LOADING_SCREEN)
+			{
+				CustomLoadingRenderer.CURRENT = LOADING;
+
 				GlStateManager.pushMatrix();
 
 				GlStateManager.disableDepth();
 
-				GuiUtils.drawGradientRect(0, 0, (int) InputHelper.getScreenWidth(), (int) InputHelper.getScreenHeight(), 0xFF000000, 0xFF000000);
+				LOADING.drawScreen((int) InputHelper.getMouseX(), (int) InputHelper.getMouseY(), event.renderTickTime);
+
+				GlStateManager.enableDepth();
+
+				GlStateManager.popMatrix();
+			}
+
+			if (DRAW_BLACK_SCREEN)
+			{
+				CustomLoadingRenderer.CURRENT = BLACK_LOADING;
+
+				GlStateManager.pushMatrix();
+
+				GlStateManager.disableDepth();
+
+				GuiUtils.drawGradientRect(0, 0, MathHelper.floor(InputHelper.getScreenWidth()),
+						MathHelper.floor(InputHelper.getScreenHeight()), 0xFF000000, 0xFF000000);
 
 				GlStateManager.enableDepth();
 
@@ -194,7 +295,8 @@ public class ClientEventHandler
 
 				GlStateManager.disableDepth();
 
-				GuiUtils.drawGradientRect(0, 0, (int) InputHelper.getScreenWidth(), (int) InputHelper.getScreenHeight(), bg, bg);
+				GuiUtils.drawGradientRect(0, 0, MathHelper.floor(InputHelper.getScreenWidth()),
+						MathHelper.floor(InputHelper.getScreenHeight()), bg, bg);
 
 				GlStateManager.enableDepth();
 
@@ -216,7 +318,7 @@ public class ClientEventHandler
 		{
 			if (Minecraft.getMinecraft().loadingScreen.getClass() == LoadingScreenRenderer.class)
 			{
-				Minecraft.getMinecraft().loadingScreen = new BlackScreenRenderer(Minecraft.getMinecraft(), Minecraft.getMinecraft().loadingScreen);
+				Minecraft.getMinecraft().loadingScreen = new CustomLoadingRenderer(Minecraft.getMinecraft(), Minecraft.getMinecraft().loadingScreen);
 			}
 		}
 	}

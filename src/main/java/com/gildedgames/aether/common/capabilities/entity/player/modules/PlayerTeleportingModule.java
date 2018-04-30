@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
-import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.client.ClientEventHandler;
 import com.gildedgames.aether.client.gui.misc.GuiIntro;
 import com.gildedgames.aether.common.AetherCore;
@@ -17,14 +16,13 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldServer;
-import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.function.Supplier;
 
 public class PlayerTeleportingModule extends PlayerAetherModule
 {
@@ -90,7 +88,7 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 			if (!this.playedIntro && Minecraft.getMinecraft().currentScreen == null)
 			{
 				Minecraft.getMinecraft().displayGuiScreen(new GuiIntro());
-				ClientEventHandler.DRAW_BLACK_SCREEN = false;
+				ClientEventHandler.setDrawBlackScreen(false);
 			}
 		}
 	}
@@ -138,13 +136,7 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 
 			if (!this.teleported && (this.getEntity().capabilities.isCreativeMode || this.timeInPortal == 1.0F))
 			{
-				IIslandData island = IslandHelper.get(DimensionManager.getWorld(AetherCore.CONFIG.getAetherDimID()), this.getEntity().getPosition().getX() >> 4,
-						this.getEntity().getPosition().getZ() >> 4);
-
-				if (island != null)
-				{
-					this.teleportToAether();
-				}
+				this.teleportToAether();
 			}
 		}
 		else if (this.getEntity().isPotionActive(MobEffects.NAUSEA)
@@ -192,6 +184,11 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 
 	private void teleportToAether()
 	{
+		if (AetherCore.isClient())
+		{
+			ClientEventHandler.setDrawLoading(true);
+		}
+
 		this.getEntity().timeUntilPortal = this.getEntity().getPortalCooldown();
 		this.teleported = true;
 
@@ -202,16 +199,15 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 
 		if (this.getEntity().world instanceof WorldServer)
 		{
-			final WorldServer worldServer = (WorldServer) this.getEntity().world;
+			final MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
+			final WorldServer worldServer = server.getWorld(this.getEntity().dimension);
 
 			final EntityPlayer player = this.getEntity();
 
-			final boolean inAether = this.getEntity().world.provider.getDimensionType() == DimensionsAether.AETHER;
-
-			final int transferToID = inAether ? 0 : AetherCore.CONFIG.getAetherDimID();
+			final int transferToID = AetherCore.CONFIG.getAetherDimID();
 
 			CommonEvents
-					.teleportEntity(this.getEntity(), worldServer, new TeleporterGeneric(worldServer), transferToID, !inAether ? (Supplier<BlockPos>) () -> {
+					.teleportEntity(this.getEntity(), worldServer, new TeleporterGeneric(worldServer), transferToID, () -> {
 						final PlayerAether playerAether = PlayerAether.getPlayer(player);
 
 						if (playerAether.getTeleportingModule().getAetherPos() == null)
@@ -225,7 +221,7 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 						}
 
 						return playerAether.getTeleportingModule().getAetherPos();
-					} : null);
+					});
 		}
 
 		this.timeInPortal = 0.0F;

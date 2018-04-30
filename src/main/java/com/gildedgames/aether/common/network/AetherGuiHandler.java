@@ -4,9 +4,11 @@ import com.gildedgames.aether.client.gui.container.GuiEquipment;
 import com.gildedgames.aether.client.gui.container.GuiIcestoneCooler;
 import com.gildedgames.aether.client.gui.container.GuiIncubator;
 import com.gildedgames.aether.client.gui.container.simple_crafting.GuiMasonryBench;
+import com.gildedgames.aether.client.gui.misc.GuiAetherLoading;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.containers.ContainerCustomWorkbench;
 import com.gildedgames.aether.common.containers.ContainerEquipment;
+import com.gildedgames.aether.common.containers.ContainerLoadingScreen;
 import com.gildedgames.aether.common.containers.tiles.ContainerIcestoneCooler;
 import com.gildedgames.aether.common.containers.tiles.ContainerIncubator;
 import com.gildedgames.aether.common.containers.tiles.ContainerMasonryBench;
@@ -34,6 +36,8 @@ public class AetherGuiHandler implements IGuiHandler
 
 	public static final int MASONRY_BENCH_ID = 5;
 
+	public static final int AETHER_LOADING_ID = 6;
+
 	@Override
 	public Container getServerGuiElement(final int id, final EntityPlayer player, final World world, final int x, final int y, final int z)
 	{
@@ -51,6 +55,8 @@ public class AetherGuiHandler implements IGuiHandler
 				return new ContainerIncubator(player.inventory, (IInventory) world.getTileEntity(pos));
 			case MASONRY_BENCH_ID:
 				return new ContainerMasonryBench(player, new BlockPos(x, y, z));
+			case AETHER_LOADING_ID:
+				return new ContainerLoadingScreen();
 			default:
 				return null;
 		}
@@ -74,6 +80,8 @@ public class AetherGuiHandler implements IGuiHandler
 				return new GuiIncubator(player.inventory, (IInventory) world.getTileEntity(pos), pos);
 			case MASONRY_BENCH_ID:
 				return new GuiMasonryBench(player, new BlockPos(x, y, z));
+			case AETHER_LOADING_ID:
+				return new GuiAetherLoading();
 			default:
 				return null;
 		}

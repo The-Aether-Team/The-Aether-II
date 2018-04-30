@@ -1,12 +1,11 @@
 package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.client.gui.misc.BlackScreenRenderer;
+import com.gildedgames.aether.client.gui.misc.CustomLoadingRenderer;
 import com.gildedgames.aether.common.analytics.GAReporter;
 import com.gildedgames.aether.common.registry.SpawnRegistry;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.world.aether.TeleporterAether;
-import com.gildedgames.orbis_api.preparation.impl.PrepTasks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.util.ResourceLocation;
@@ -109,7 +108,7 @@ public class AetherCore
 	@SideOnly(Side.CLIENT)
 	public void onFMLPreInitClient(final FMLPreInitializationEvent event)
 	{
-		Minecraft.getMinecraft().loadingScreen = new BlackScreenRenderer(Minecraft.getMinecraft(), Minecraft.getMinecraft().loadingScreen);
+		Minecraft.getMinecraft().loadingScreen = new CustomLoadingRenderer(Minecraft.getMinecraft(), Minecraft.getMinecraft().loadingScreen);
 	}
 
 	@EventHandler
@@ -135,7 +134,7 @@ public class AetherCore
 	{
 		AetherCore.SPAWN_REGISTRY.read();
 
-		PrepTasks.prepSector(DimensionManager.getWorld(CONFIG.getAetherDimID()), 0, 0);
+		//PrepTasks.prepSector(DimensionManager.getWorld(CONFIG.getAetherDimID()), 0, 0);
 
 		/*for (int x = -1; x < 1; x++)
 		{
