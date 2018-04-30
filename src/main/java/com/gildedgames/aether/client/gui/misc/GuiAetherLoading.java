@@ -109,6 +109,11 @@ public class GuiAetherLoading extends GuiFrame implements CustomLoadingRenderer.
 	}
 
 	@Override
+	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+		
+	}
+
+	@Override
 	public void drawCustomLoading()
 	{
 		this.drawScreen((int) InputHelper.getMouseX(), (int) InputHelper.getMouseY(), PartialTicks.get());
