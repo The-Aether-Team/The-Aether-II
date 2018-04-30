@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.registry.content;
 
 import com.gildedgames.aether.common.entities.tiles.*;
-import com.gildedgames.aether.common.entities.tiles.builder.TileEntityStructureBuilder;
 import com.gildedgames.aether.common.entities.tiles.multiblock.TileEntityMultiblockDummy;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -21,7 +20,6 @@ public class TileEntitiesAether
 			WILDCARD_ID = "aether.wildcard",
 			MASONRY_BENCH_ID = "aether.masonry_bench",
 			OUTPOST_CAMPFIRE_ID = "aether.outpost_campfire",
-			STRUCTURE_BUILDER_ID = "aether.structure_builder",
 			TELEPORTER_ID = "aether.aether_teleporter",
 			SKYROOT_BED_ID = "aether.skyroot_bed";
 
@@ -39,7 +37,6 @@ public class TileEntitiesAether
 		GameRegistry.registerTileEntity(TileEntityWildcard.class, WILDCARD_ID);
 		GameRegistry.registerTileEntity(TileEntityMasonryBench.class, MASONRY_BENCH_ID);
 		GameRegistry.registerTileEntity(TileEntityOutpostCampfire.class, OUTPOST_CAMPFIRE_ID);
-		GameRegistry.registerTileEntity(TileEntityStructureBuilder.class, STRUCTURE_BUILDER_ID);
 		GameRegistry.registerTileEntity(TileEntityTeleporter.class, TELEPORTER_ID);
 		GameRegistry.registerTileEntity(TileEntitySkyrootBed.class, SKYROOT_BED_ID);
 	}

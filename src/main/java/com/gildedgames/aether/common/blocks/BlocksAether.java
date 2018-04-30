@@ -1,8 +1,6 @@
 package com.gildedgames.aether.common.blocks;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.blocks.builder.BlockStructureBuilder;
-import com.gildedgames.aether.common.blocks.builder.BlockStructureHint;
 import com.gildedgames.aether.common.blocks.construction.*;
 import com.gildedgames.aether.common.blocks.construction.redstone.BlockHolystoneButton;
 import com.gildedgames.aether.common.blocks.construction.redstone.BlockHolystonePressurePlate;
@@ -312,10 +310,6 @@ public class BlocksAether
 
 	public static Block light_skyroot_decorative = new BlockLightSkyrootDecorative();
 
-	public static Block structure_hint = new BlockStructureHint();
-
-	public static Block structure_builder = new BlockStructureBuilder();
-
 	public static Block aether_teleporter = new BlockAetherTeleporter();
 
 	@SubscribeEvent
@@ -529,9 +523,6 @@ public class BlocksAether
 		r.register("cloudwool_carpet", cloudwool_carpet.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 
 		r.register("outpost_campfire", outpost_campfire.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
-
-		r.register("structure_hint", structure_hint.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
-		r.register("structure_builder", structure_builder.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
 
 		r.register("aether_teleporter", aether_teleporter.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
 

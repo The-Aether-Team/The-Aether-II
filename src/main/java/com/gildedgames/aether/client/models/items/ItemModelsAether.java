@@ -3,7 +3,6 @@ package com.gildedgames.aether.client.models.items;
 import com.gildedgames.aether.client.util.ItemModelBuilder;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.builder.BlockStructureHint;
 import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
 import com.gildedgames.aether.common.blocks.containers.BlockIncubator;
 import com.gildedgames.aether.common.blocks.decorative.*;
@@ -688,16 +687,6 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.kirrid_loin, "kirrid_loin");
 		registerItemModels(ItemsAether.kirrid_cutlet, "kirrid_cutlet");
 		registerItemModels(ItemsAether.valkyrie_wings, "valkyrie_wings");
-
-		registerItemModels(BlocksAether.structure_hint, new ItemModelBuilder("structure_hint/")
-				.add(BlockStructureHint.WILDCARD_BLOCK.getMeta(), "wildcard")
-				.add(BlockStructureHint.SPAWNER_ENTITY.getMeta(), "spawner_entity")
-				.add(BlockStructureHint.SPAWNER_PACK.getMeta(), "spawner_pack")
-				.add(BlockStructureHint.GENERATOR_LOOT.getMeta(), "generator_loot"));
-
-		registerItemModels(BlocksAether.structure_builder, "structure_builder");
-
-		registerItemModels(BlocksAether.wildcard, "wildcard");
 	}
 
 	private static void registerItemModels(final Block block, final String path)
