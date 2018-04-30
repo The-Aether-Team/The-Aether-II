@@ -11,6 +11,7 @@ import com.gildedgames.orbis_api.client.rect.Pos2D;
 import com.gildedgames.orbis_api.util.InputHelper;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
 import org.lwjgl.opengl.GL11;
 
@@ -20,9 +21,13 @@ public class GuiAetherLoading extends GuiFrame implements CustomLoadingRenderer.
 
 	private static final ResourceLocation HUE_BACKGROUND = AetherCore.getResource("textures/gui/intro/hue_background.png");
 
+	public static float PERCENT = 0.0F;
+
 	private GuiTexture highlands;
 
 	private GuiText loading;
+
+	private float lastPercent;
 
 	@Override
 	public void onGuiClosed()
@@ -80,6 +85,18 @@ public class GuiAetherLoading extends GuiFrame implements CustomLoadingRenderer.
 		GlStateManager.enableBlend();
 
 		GlStateManager.popMatrix();
+
+		if (this.mc.world != null)
+		{
+			if (!MathHelper.epsilonEquals(PERCENT, this.lastPercent) && PERCENT > 0.0F)
+			{
+				this.lastPercent = PERCENT;
+
+				String percentString = String.valueOf(MathHelper.floor(PERCENT));
+
+				this.loading.setText(new Text(new TextComponentString(percentString + "% Loaded..."), 1.0F));
+			}
+		}
 	}
 
 	@Override

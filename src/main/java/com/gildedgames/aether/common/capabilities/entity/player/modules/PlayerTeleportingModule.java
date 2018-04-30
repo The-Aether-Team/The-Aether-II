@@ -35,6 +35,8 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 
 	private boolean playedIntro;
 
+	private float lastPercent;
+
 	public PlayerTeleportingModule(final PlayerAether playerAether)
 	{
 		super(playerAether);
@@ -91,6 +93,16 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 				ClientEventHandler.setDrawBlackScreen(false);
 			}
 		}
+	}
+
+	public float getLastPercent()
+	{
+		return this.lastPercent;
+	}
+
+	public void setLastPercent(float lastPercent)
+	{
+		this.lastPercent = lastPercent;
 	}
 
 	@Override

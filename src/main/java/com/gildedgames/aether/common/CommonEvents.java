@@ -16,6 +16,7 @@ import com.gildedgames.aether.common.items.armor.ItemAetherShield;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketCloseLoadingScreen;
+import com.gildedgames.aether.common.network.packets.PacketLoadingScreenPercent;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.util.helpers.PlayerUtil;
 import com.gildedgames.aether.common.world.aether.TeleporterAether;
@@ -87,6 +88,7 @@ public class CommonEvents
 		if (!event.getEntity().getEntityWorld().isRemote && event.getEntity() instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer) event.getEntity();
+			PlayerAether playerAether = PlayerAether.getPlayer(player);
 
 			if (player.openContainer instanceof ContainerLoadingScreen)
 			{
@@ -95,6 +97,8 @@ public class CommonEvents
 					boolean isLoaded = true;
 
 					int radius = Math.min(player.getServer().getPlayerList().getViewDistance(), 10);
+
+					int count = 0;
 
 					for (int x = player.chunkCoordX - radius; x < player.chunkCoordX + radius; x++)
 					{
@@ -105,7 +109,10 @@ public class CommonEvents
 							if (chunk == null)
 							{
 								isLoaded = false;
-								break;
+							}
+							else
+							{
+								count++;
 							}
 						}
 					}
@@ -115,6 +122,21 @@ public class CommonEvents
 						player.closeScreen();
 
 						NetworkingAether.sendPacketToPlayer(new PacketCloseLoadingScreen(), (EntityPlayerMP) player);
+
+						NetworkingAether.sendPacketToPlayer(new PacketLoadingScreenPercent(0.0F), (EntityPlayerMP) player);
+					}
+					else
+					{
+						float diam = radius + radius;
+
+						float percent = ((float) count / (diam * diam)) * 100.0F;
+
+						if (!MathHelper.epsilonEquals(playerAether.getTeleportingModule().getLastPercent(), percent))
+						{
+							playerAether.getTeleportingModule().setLastPercent(percent);
+
+							NetworkingAether.sendPacketToPlayer(new PacketLoadingScreenPercent(percent), (EntityPlayerMP) player);
+						}
 					}
 				}
 			}
