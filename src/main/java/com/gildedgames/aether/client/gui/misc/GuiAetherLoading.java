@@ -2,13 +2,16 @@ package com.gildedgames.aether.client.gui.misc;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis_api.client.PartialTicks;
+import com.gildedgames.orbis_api.client.gui.data.Text;
 import com.gildedgames.orbis_api.client.gui.util.GuiFrame;
+import com.gildedgames.orbis_api.client.gui.util.GuiText;
 import com.gildedgames.orbis_api.client.gui.util.GuiTexture;
 import com.gildedgames.orbis_api.client.rect.Dim2D;
 import com.gildedgames.orbis_api.client.rect.Pos2D;
 import com.gildedgames.orbis_api.util.InputHelper;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentString;
 import org.lwjgl.opengl.GL11;
 
 public class GuiAetherLoading extends GuiFrame implements CustomLoadingRenderer.ICustomLoading
@@ -18,6 +21,8 @@ public class GuiAetherLoading extends GuiFrame implements CustomLoadingRenderer.
 	private static final ResourceLocation HUE_BACKGROUND = AetherCore.getResource("textures/gui/intro/hue_background.png");
 
 	private GuiTexture highlands;
+
+	private GuiText loading;
 
 	@Override
 	public void onGuiClosed()
@@ -38,7 +43,10 @@ public class GuiAetherLoading extends GuiFrame implements CustomLoadingRenderer.
 
 		this.highlands = new GuiTexture(Dim2D.build().scale(0.45F).width(512).height(235).center(true).pos(center).flush(), HIGHLANDS);
 
-		this.addChildren(this.highlands);
+		this.loading = new GuiText(Dim2D.build().center(true).pos(center).addY(70).flush(),
+				new Text(new TextComponentString("Loading..."), 1.0F));
+
+		this.addChildren(this.highlands, this.loading);
 	}
 
 	@Override
