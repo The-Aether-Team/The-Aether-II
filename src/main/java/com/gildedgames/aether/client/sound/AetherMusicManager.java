@@ -140,7 +140,7 @@ public class AetherMusicManager
 	{
 		if (ClientEventHandler.isLoadingScreen())
 		{
-			event.setCanceled(true);
+			event.setResultSound(null);
 			return;
 		}
 
