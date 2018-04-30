@@ -1,5 +1,6 @@
 package com.gildedgames.aether.client.gui.misc;
 
+import com.gildedgames.aether.client.ClientEventHandler;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis_api.client.PartialTicks;
 import com.gildedgames.orbis_api.client.gui.data.Text;
@@ -97,6 +98,14 @@ public class GuiAetherLoading extends GuiFrame implements CustomLoadingRenderer.
 				this.loading.setText(new Text(new TextComponentString(percentString + "% Loaded..."), 1.0F));
 			}
 		}
+	}
+
+	@Override
+	public void drawScreen(int mouseX, int mouseY, float partialTicks)
+	{
+		super.drawScreen(mouseX, mouseY, partialTicks);
+
+		ClientEventHandler.drawFade(false);
 	}
 
 	@Override

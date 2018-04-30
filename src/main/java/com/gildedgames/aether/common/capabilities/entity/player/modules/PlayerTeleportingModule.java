@@ -37,6 +37,8 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 
 	private float lastPercent;
 
+	private double timeStartedFade = -1;
+
 	public PlayerTeleportingModule(final PlayerAether playerAether)
 	{
 		super(playerAether);
@@ -80,6 +82,11 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 	public void setPlayedIntro(final boolean playedIntro)
 	{
 		this.playedIntro = playedIntro;
+	}
+
+	private double getSecondsSinceStart()
+	{
+		return (System.currentTimeMillis() - this.timeStartedFade) / 1000.0D;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -146,9 +153,34 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 				this.timeInPortal = 1.0F;
 			}
 
-			if (!this.teleported && (this.getEntity().capabilities.isCreativeMode || this.timeInPortal == 1.0F))
+			if (!this.teleported && (this.timeInPortal >= 0.5F))
 			{
-				this.teleportToAether();
+				if (this.timeStartedFade == -1)
+				{
+					this.timeStartedFade = System.currentTimeMillis();
+				}
+
+				if (AetherCore.isClient())
+				{
+					if (!ClientEventHandler.isFadingIn())
+					{
+						ClientEventHandler.drawBlackFadeIn(2.0D, () ->
+						{
+							ClientEventHandler.setChangeFromBlackToLoad(true);
+							ClientEventHandler.setDrawBlackScreen(true);
+						});
+					}
+				}
+
+				this.getEntity().setPositionAndUpdate(this.getEntity().prevPosX, this.getEntity().prevPosY, this.getEntity().prevPosZ);
+
+				this.getEntity().motionX = this.getEntity().motionY = this.getEntity().motionZ = 0;
+
+				if (this.getSecondsSinceStart() >= 2.0D)
+				{
+					this.timeStartedFade = -1;
+					this.teleportToAether();
+				}
 			}
 		}
 		else if (this.getEntity().isPotionActive(MobEffects.NAUSEA)
@@ -196,11 +228,6 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 
 	private void teleportToAether()
 	{
-		if (AetherCore.isClient())
-		{
-			ClientEventHandler.setDrawLoading(true);
-		}
-
 		this.getEntity().timeUntilPortal = this.getEntity().getPortalCooldown();
 		this.teleported = true;
 

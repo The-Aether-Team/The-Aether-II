@@ -40,6 +40,7 @@ public class PacketCloseLoadingScreen implements IMessage
 			Minecraft.getMinecraft().displayGuiScreen(null);
 
 			ClientEventHandler.setDrawLoading(false);
+			ClientEventHandler.setDrawBlackScreen(false);
 
 			return null;
 		}

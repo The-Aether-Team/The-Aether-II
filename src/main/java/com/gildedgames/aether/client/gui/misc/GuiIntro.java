@@ -211,7 +211,7 @@ public class GuiIntro extends GuiFrameNoContainer
 
 			if (this.holding && this.getSecondsSinceHoldSkip() >= 2.5)
 			{
-				ClientEventHandler.drawBlackFade();
+				ClientEventHandler.drawBlackFade(10.0D);
 				Minecraft.getMinecraft().displayGuiScreen(null);
 
 				Minecraft.getMinecraft().getSoundHandler().stopSounds();
@@ -315,7 +315,7 @@ public class GuiIntro extends GuiFrameNoContainer
 
 			ClientEventHandler.setDrawBlackScreen(false);
 
-			ClientEventHandler.drawBlackFade();
+			ClientEventHandler.drawBlackFade(10.0D);
 			Minecraft.getMinecraft().displayGuiScreen(null);
 		}
 

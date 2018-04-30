@@ -26,6 +26,7 @@ import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketSpecialMovement;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
+import com.gildedgames.orbis_api.client.PartialTicks;
 import com.gildedgames.orbis_api.client.gui.util.GuiFrameUtils;
 import com.gildedgames.orbis_api.util.InputHelper;
 import net.minecraft.client.LoadingScreenRenderer;
@@ -68,22 +69,48 @@ public class ClientEventHandler
 
 	private static boolean DRAW_LOADING_SCREEN = false;
 
-	private static boolean DRAWING_BLACK_FADE = false;
+	private static boolean DRAWING_BLACK_FADE_OUT = false;
+
+	private static boolean DRAWING_BLACK_FADE_IN = false;
+
+	private static boolean CHANGE_FROM_BLACK_TO_LOAD = false;
 
 	private static double TIME_STARTED_FADE = -1;
 
 	private static boolean PREV_JUMP_BIND_STATE;
 
-	private static CustomLoadingRenderer.ICustomLoading BLACK_LOADING = () -> drawGradientRect(0, 0, (int) InputHelper.getScreenWidth(),
-			(int) InputHelper.getScreenHeight(), 0xFF000000, 0xFF000000);
+	private static double TIME_TO_FADE;
+
+	private static Runnable AFTER_FADE;
 
 	private static Minecraft mc = Minecraft.getMinecraft();
 
 	private static GuiAetherLoading LOADING = new GuiAetherLoading();
 
-	public static void drawBlackFade()
+	private static CustomLoadingRenderer.ICustomLoading BLACK_LOADING = ClientEventHandler::drawOverlay;
+
+	public static boolean isFadingIn()
 	{
-		DRAWING_BLACK_FADE = true;
+		return DRAWING_BLACK_FADE_IN;
+	}
+
+	public static void drawBlackFade(double time)
+	{
+		TIME_STARTED_FADE = System.currentTimeMillis();
+
+		DRAWING_BLACK_FADE_IN = false;
+		DRAWING_BLACK_FADE_OUT = true;
+		TIME_TO_FADE = time;
+	}
+
+	public static void drawBlackFadeIn(double time, Runnable after)
+	{
+		TIME_STARTED_FADE = System.currentTimeMillis();
+
+		DRAWING_BLACK_FADE_OUT = false;
+		DRAWING_BLACK_FADE_IN = true;
+		TIME_TO_FADE = time;
+		AFTER_FADE = after;
 	}
 
 	public static boolean isLoadingScreen()
@@ -103,6 +130,11 @@ public class ClientEventHandler
 		{
 			CustomLoadingRenderer.CURRENT = null;
 		}
+	}
+
+	public static void setChangeFromBlackToLoad(boolean flag)
+	{
+		CHANGE_FROM_BLACK_TO_LOAD = flag;
 	}
 
 	public static void setDrawLoading(boolean flag)
@@ -238,36 +270,89 @@ public class ClientEventHandler
 		return (System.currentTimeMillis() - TIME_STARTED_FADE) / 1000.0D;
 	}
 
-	@SubscribeEvent
-	public static void onRenderTick(final TickEvent.RenderTickEvent event)
+	public static void drawFade(boolean disableDepth)
 	{
-		if (event.phase == TickEvent.Phase.END)
+		if (DRAWING_BLACK_FADE_OUT || DRAWING_BLACK_FADE_IN)
 		{
-			if (Minecraft.getMinecraft().loadingScreen.getClass() == LoadingScreenRenderer.class)
+			final float bgAlpha = Math
+					.max(0.0F, DRAWING_BLACK_FADE_OUT ?
+							1.0F - (float) (getSecondsSinceStart() / TIME_TO_FADE) :
+							(float) (getSecondsSinceStart() / TIME_TO_FADE));
+
+			final int bg = GuiFrameUtils.changeAlpha(0xFF000000, (int) (bgAlpha * 255));
+
+			GlStateManager.pushMatrix();
+
+			if (disableDepth)
 			{
-				Minecraft.getMinecraft().loadingScreen = new CustomLoadingRenderer(Minecraft.getMinecraft(), Minecraft.getMinecraft().loadingScreen);
-			}
-
-			if (DRAW_LOADING_SCREEN)
-			{
-				if (Minecraft.getMinecraft().world != null)
-				{
-					Minecraft.getMinecraft().getSoundHandler().stopSounds();
-				}
-
-				CustomLoadingRenderer.CURRENT = LOADING;
-
-				GlStateManager.pushMatrix();
-
 				GlStateManager.disableDepth();
-
-				LOADING.drawScreen((int) InputHelper.getMouseX(), (int) InputHelper.getMouseY(), event.renderTickTime);
-
-				GlStateManager.enableDepth();
-
-				GlStateManager.popMatrix();
 			}
 
+			GuiUtils.drawGradientRect(0, 0, MathHelper.floor(InputHelper.getScreenWidth()),
+					MathHelper.floor(InputHelper.getScreenHeight()), bg, bg);
+
+			if (disableDepth)
+			{
+				GlStateManager.enableDepth();
+			}
+
+			GlStateManager.popMatrix();
+
+			if (getSecondsSinceStart() >= TIME_TO_FADE)
+			{
+				DRAWING_BLACK_FADE_OUT = false;
+				DRAWING_BLACK_FADE_IN = false;
+
+				if (AFTER_FADE != null)
+				{
+					AFTER_FADE.run();
+
+					AFTER_FADE = null;
+				}
+			}
+		}
+	}
+
+	public static void drawOverlay()
+	{
+		if (CHANGE_FROM_BLACK_TO_LOAD && DRAW_BLACK_SCREEN)
+		{
+			setChangeFromBlackToLoad(false);
+			setDrawBlackScreen(false);
+
+			drawBlackFade(2.0D);
+			setDrawLoading(true);
+		}
+
+		if (DRAW_LOADING_SCREEN)
+		{
+			if (Minecraft.getMinecraft().world != null)
+			{
+				Minecraft.getMinecraft().getSoundHandler().stopSounds();
+			}
+
+			setChangeFromBlackToLoad(false);
+
+			CustomLoadingRenderer.CURRENT = LOADING;
+
+			GlStateManager.pushMatrix();
+
+			if (!DRAWING_BLACK_FADE_OUT)
+			{
+				//GlStateManager.disableDepth();
+			}
+
+			LOADING.drawScreen((int) InputHelper.getMouseX(), (int) InputHelper.getMouseY(), PartialTicks.get());
+
+			if (!DRAWING_BLACK_FADE_OUT)
+			{
+				//GlStateManager.enableDepth();
+			}
+
+			GlStateManager.popMatrix();
+		}
+		else
+		{
 			if (DRAW_BLACK_SCREEN)
 			{
 				CustomLoadingRenderer.CURRENT = BLACK_LOADING;
@@ -284,34 +369,16 @@ public class ClientEventHandler
 				GlStateManager.popMatrix();
 			}
 
-			if (DRAWING_BLACK_FADE)
-			{
-				if (TIME_STARTED_FADE == -1)
-				{
-					TIME_STARTED_FADE = System.currentTimeMillis();
-				}
+			drawFade(true);
+		}
+	}
 
-				final float bgAlpha = Math.max(0.0F, 1.0F - (float) (getSecondsSinceStart() / 10.0D));
-
-				final int bg = GuiFrameUtils.changeAlpha(0xFF000000, (int) (bgAlpha * 255));
-
-				GlStateManager.pushMatrix();
-
-				GlStateManager.disableDepth();
-
-				GuiUtils.drawGradientRect(0, 0, MathHelper.floor(InputHelper.getScreenWidth()),
-						MathHelper.floor(InputHelper.getScreenHeight()), bg, bg);
-
-				GlStateManager.enableDepth();
-
-				GlStateManager.popMatrix();
-
-				if (getSecondsSinceStart() >= 10.0D)
-				{
-					DRAWING_BLACK_FADE = false;
-					TIME_STARTED_FADE = -1;
-				}
-			}
+	@SubscribeEvent
+	public static void onRenderTick(final TickEvent.RenderTickEvent event)
+	{
+		if (event.phase == TickEvent.Phase.END)
+		{
+			drawOverlay();
 		}
 	}
 
