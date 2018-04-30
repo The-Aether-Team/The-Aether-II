@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.orbis_api.util.mc.NBTHelper;
+import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
@@ -121,6 +122,24 @@ public class EntityEdison extends EntityNPC
 		}
 
 		return true;
+	}
+
+	@Override
+	public boolean isOnLadder()
+	{
+		return false;
+	}
+
+	@Override
+	protected void playStepSound(final BlockPos pos, final Block blockIn)
+	{
+
+	}
+
+	@Override
+	protected boolean canTriggerWalking()
+	{
+		return false;
 	}
 
 }
