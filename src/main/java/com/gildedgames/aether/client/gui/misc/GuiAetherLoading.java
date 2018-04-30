@@ -110,7 +110,7 @@ public class GuiAetherLoading extends GuiFrame implements CustomLoadingRenderer.
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-		
+
 	}
 
 	@Override
