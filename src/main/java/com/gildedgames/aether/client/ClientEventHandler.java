@@ -86,6 +86,11 @@ public class ClientEventHandler
 		DRAWING_BLACK_FADE = true;
 	}
 
+	public static boolean isLoadingScreen()
+	{
+		return DRAW_LOADING_SCREEN;
+	}
+
 	public static void setDrawBlackScreen(boolean flag)
 	{
 		DRAW_BLACK_SCREEN = flag;
