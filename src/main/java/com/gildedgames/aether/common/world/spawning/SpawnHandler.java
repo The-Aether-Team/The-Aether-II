@@ -11,11 +11,13 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldEntitySpawner;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.event.ForgeEventFactory;
 
@@ -49,10 +51,10 @@ public class SpawnHandler implements NBT
 		return dim + "_" + areaX + "_" + areaZ;
 	}
 
-	public static boolean isNotColliding(final World world, final Entity entity)
+	public static boolean isNotColliding(EntityLiving.SpawnPlacementType placementType, final World world, final Entity entity)
 	{
-		return !world.containsAnyLiquid(entity.getEntityBoundingBox())
-				&& world.getCollisionBoxes(entity, entity.getEntityBoundingBox()).isEmpty()
+		return WorldEntitySpawner.canCreatureTypeSpawnAtLocation(placementType, world, entity.getPosition()) && world
+				.getCollisionBoxes(entity, entity.getEntityBoundingBox()).isEmpty()
 				&& world.checkNoEntityCollision(entity.getEntityBoundingBox(), entity);
 	}
 
@@ -291,6 +293,8 @@ public class SpawnHandler implements NBT
 	private void checkAndSpawnEntries(final World world, final ChunkMap<SpawnArea> areas)
 			throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException
 	{
+		IEntityLivingData livingData = null;
+
 		final int areaInBlocks = this.chunkArea * 16;
 
 		for (final SpawnArea area : areas.getValues())
@@ -395,16 +399,7 @@ public class SpawnHandler implements NBT
 
 					entity.setLocationAndAngles(posX + 0.5F, posY, posZ + 0.5F, world.rand.nextFloat() * 360.0F, 0.0F);
 
-					world.spawnEntity(entity);
-
-					if (world instanceof WorldServer)
-					{
-						final WorldServer worldServer = (WorldServer) world;
-
-						worldServer.updateEntityWithOptionalForce(entity, true);
-					}
-
-					if (SpawnHandler.isNotColliding(world, entity))
+					if (SpawnHandler.isNotColliding(entry.getPlacementType(), world, entity))
 					{
 						if (entity instanceof EntityLiving)
 						{
@@ -421,6 +416,21 @@ public class SpawnHandler implements NBT
 						spawningInfo.setSpawnArea(new EntitySpawn(this.uniqueID, world.provider.getDimension(), area.getAreaX(), area.getAreaZ()));
 
 						area.addToEntityCount(1);
+
+						world.spawnEntity(entity);
+
+						if (world instanceof WorldServer)
+						{
+							final WorldServer worldServer = (WorldServer) world;
+
+							worldServer.updateEntityWithOptionalForce(entity, true);
+						}
+
+						if (entity instanceof EntityLiving)
+						{
+							EntityLiving entityLiving = (EntityLiving) entity;
+							livingData = entityLiving.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(entity)), livingData);
+						}
 					}
 					else
 					{

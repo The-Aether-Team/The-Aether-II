@@ -18,6 +18,7 @@ import com.gildedgames.aether.common.world.spawning.conditions.CheckTime;
 import com.gildedgames.aether.common.world.spawning.util.FlyingPositionSelector;
 import com.gildedgames.orbis_api.util.mc.NBTHelper;
 import com.google.common.collect.Lists;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
@@ -47,11 +48,12 @@ public class SpawnRegistry
 
 		final PosCondition grassCheck = new CheckBlockUnderneath(BlocksAether.aether_grass);
 
-		final SpawnEntry burrukai = new SpawnEntry(EntityBurrukai.class, 10F, 2, 3).conditiion(grassCheck);
-		final SpawnEntry ram = new SpawnEntry(EntityKirrid.class, 10F, 2, 3).conditiion(grassCheck);
-		final SpawnEntry aerbunny = new SpawnEntry(EntityAerbunny.class, 13F, 3, 5).conditiion(grassCheck);
-		final SpawnEntry taegore = new SpawnEntry(EntityTaegore.class, 13F, 2, 3).conditiion(grassCheck);
-		final SpawnEntry carrion_sprout = new SpawnEntry(EntityCarrionSprout.class, 10F, 2, 3).conditiion(grassCheck);
+		final SpawnEntry burrukai = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityBurrukai.class, 10F, 2, 3).conditiion(grassCheck);
+		final SpawnEntry ram = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityKirrid.class, 10F, 2, 3).conditiion(grassCheck);
+		final SpawnEntry aerbunny = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityAerbunny.class, 13F, 3, 5).conditiion(grassCheck);
+		final SpawnEntry taegore = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityTaegore.class, 13F, 2, 3).conditiion(grassCheck);
+		final SpawnEntry carrion_sprout = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityCarrionSprout.class, 10F, 2, 3)
+				.conditiion(grassCheck);
 
 		animals.addEntry(burrukai);
 		animals.addEntry(ram);
@@ -63,7 +65,7 @@ public class SpawnRegistry
 		final SpawnHandler atmospheric = new SpawnHandler("aether_atmospheric").chunkArea(4).targetEntityCountPerArea(9).updateFrequencyInTicks(200);
 		atmospheric.worldCondition(new CheckDimension(DimensionsAether.AETHER));
 
-		final SpawnEntry butterfly = new SpawnEntry(EntityGlitterwing.class, 10F, 1, 6).conditiion(grassCheck);
+		final SpawnEntry butterfly = new SpawnEntry(EntityLiving.SpawnPlacementType.IN_AIR, EntityGlitterwing.class, 10F, 1, 6).conditiion(grassCheck);
 
 		atmospheric.addEntry(butterfly);
 
@@ -73,13 +75,15 @@ public class SpawnRegistry
 
 		final PosCondition groundCheck = new CheckBlockUnderneath(BlocksAether.aether_grass, BlocksAether.holystone);
 
-		final SpawnEntry zephyr = new SpawnEntry(EntityZephyr.class, 3F, 2, 3, new FlyingPositionSelector())
+		final SpawnEntry zephyr = new SpawnEntry(EntityLiving.SpawnPlacementType.IN_AIR, EntityZephyr.class, 3F, 2, 3, new FlyingPositionSelector())
 				.conditiion(new CheckBlockStateUnderneath(Blocks.AIR.getDefaultState()));
-		final SpawnEntry tempest = new SpawnEntry(EntityTempest.class, 10F, 2, 3, new FlyingPositionSelector()).conditiion(new CheckTime(CheckTime.Time.NIGHT))
+		final SpawnEntry tempest = new SpawnEntry(EntityLiving.SpawnPlacementType.IN_AIR, EntityTempest.class, 10F, 2, 3, new FlyingPositionSelector())
+				.conditiion(new CheckTime(CheckTime.Time.NIGHT))
 				.conditiion(new CheckBlockStateUnderneath(Blocks.AIR.getDefaultState()));
-		final SpawnEntry cockatrice = new SpawnEntry(EntityCockatrice.class, 12F, 1, 1).conditiion(new CheckTime(CheckTime.Time.NIGHT)).conditiion(groundCheck);
-		final SpawnEntry swet = new SpawnEntry(EntitySwet.class, 10F, 2, 4).conditiion(groundCheck);
-		final SpawnEntry aechor_plant = new SpawnEntry(EntityAechorPlant.class, 10F, 2, 3).conditiion(grassCheck);
+		final SpawnEntry cockatrice = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityCockatrice.class, 12F, 1, 1)
+				.conditiion(new CheckTime(CheckTime.Time.NIGHT)).conditiion(groundCheck);
+		final SpawnEntry swet = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntitySwet.class, 10F, 2, 4).conditiion(groundCheck);
+		final SpawnEntry aechor_plant = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityAechorPlant.class, 10F, 2, 3).conditiion(grassCheck);
 
 		hostiles.addEntry(zephyr);
 		hostiles.addEntry(tempest);
@@ -91,7 +95,7 @@ public class SpawnRegistry
 		final SpawnHandler flying = new SpawnHandler("aether_flying").chunkArea(9).targetEntityCountPerArea(1).updateFrequencyInTicks(1200);
 		flying.worldCondition(new CheckDimension(DimensionsAether.AETHER));
 
-		final SpawnEntry aerwhale = new SpawnEntry(EntityAerwhale.class, 10F, 1, 1, new FlyingPositionSelector())
+		final SpawnEntry aerwhale = new SpawnEntry(EntityLiving.SpawnPlacementType.IN_AIR, EntityAerwhale.class, 10F, 1, 1, new FlyingPositionSelector())
 				.conditiion(new CheckBlockStateUnderneath(Blocks.AIR.getDefaultState()));
 
 		flying.addEntry(aerwhale);

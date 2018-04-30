@@ -11,6 +11,7 @@ import com.gildedgames.aether.common.entities.living.companions.EntityEtherealWi
 import com.gildedgames.aether.common.items.companions.ItemCompanion;
 import com.gildedgames.aether.common.world.spawning.SpawnHandler;
 import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -134,7 +135,8 @@ public class CompanionEffectFactory implements IEffectFactory<CompanionEffectFac
 				companion.setDespawned(true);
 				companion.setDead();
 
-				if (companion instanceof EntityEtherealWisp) {
+				if (companion instanceof EntityEtherealWisp)
+				{
 					EntityPlayer p = player.getEntity();
 					p.setInvisible(false);
 				}
@@ -162,7 +164,7 @@ public class CompanionEffectFactory implements IEffectFactory<CompanionEffectFac
 					continue;
 				}
 
-				if (SpawnHandler.isNotColliding(companion.getEntityWorld(), companion))
+				if (SpawnHandler.isNotColliding(EntityLiving.SpawnPlacementType.ON_GROUND, companion.getEntityWorld(), companion))
 				{
 					companion.getEntityWorld().updateEntityWithOptionalForce(companion, true);
 

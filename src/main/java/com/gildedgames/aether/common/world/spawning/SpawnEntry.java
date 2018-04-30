@@ -3,11 +3,16 @@ package com.gildedgames.aether.common.world.spawning;
 import com.gildedgames.aether.common.world.spawning.util.GroundPositionSelector;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 
 import java.util.List;
 
 public class SpawnEntry
 {
+
+	private final PositionSelector positionSelector;
+
+	private final EntityLiving.SpawnPlacementType placementType;
 
 	private Class<? extends Entity> clazz;
 
@@ -17,21 +22,25 @@ public class SpawnEntry
 
 	private List<PosCondition> conditions = Lists.newArrayList();
 
-	private final PositionSelector positionSelector;
-
-	public SpawnEntry(Class<? extends Entity> clazz, float rarityWeight, int minGroupSize, int maxGroupSize)
+	public SpawnEntry(EntityLiving.SpawnPlacementType placementType, Class<? extends Entity> clazz, float rarityWeight, int minGroupSize, int maxGroupSize)
 	{
-		this(clazz, rarityWeight, minGroupSize, maxGroupSize, new GroundPositionSelector());
+		this(placementType, clazz, rarityWeight, minGroupSize, maxGroupSize, new GroundPositionSelector());
 	}
 
-	public SpawnEntry(Class<? extends Entity> clazz, float rarityWeight, int minGroupSize, int maxGroupSize,
+	public SpawnEntry(EntityLiving.SpawnPlacementType placementType, Class<? extends Entity> clazz, float rarityWeight, int minGroupSize, int maxGroupSize,
 			PositionSelector heightSelector)
 	{
+		this.placementType = placementType;
 		this.clazz = clazz;
 		this.rarityWeight = rarityWeight;
 		this.minGroupSize = minGroupSize;
 		this.maxGroupSize = maxGroupSize;
 		this.positionSelector = heightSelector;
+	}
+
+	public EntityLiving.SpawnPlacementType getPlacementType()
+	{
+		return this.placementType;
 	}
 
 	public SpawnEntry conditiion(PosCondition condition)
