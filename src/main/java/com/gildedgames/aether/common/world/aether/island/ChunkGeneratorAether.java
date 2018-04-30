@@ -94,7 +94,8 @@ public class ChunkGeneratorAether implements IChunkGenerator
 					final ICreationData data = instance.getCreationData();
 
 					dataPrimer.create(dataChunk.getContainer(),
-							data.clone().pos(new BlockPos(dataChunk.getPos().getXStart(), data.getPos().getY(), dataChunk.getPos().getZStart())));
+							data.clone().spawnEntities(false)
+									.pos(new BlockPos(dataChunk.getPos().getXStart(), data.getPos().getY(), dataChunk.getPos().getZStart())));
 				}
 			}
 		}
