@@ -39,11 +39,7 @@ public class EntityDart extends EntityArrow
 
 		if (this.world.isRemote && this.world.getWorldTime() % 3 == 0)
 		{
-			if (this.getDartType() == ItemDartType.PHOENIX)
-			{
-				this.world.spawnParticle(EnumParticleTypes.FLAME, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
-			}
-			else if (this.getDartType() == ItemDartType.ENCHANTED)
+			if (this.getDartType() == ItemDartType.ENCHANTED)
 			{
 				this.world.spawnParticle(EnumParticleTypes.CRIT_MAGIC, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
 			}
@@ -57,10 +53,6 @@ public class EntityDart extends EntityArrow
 		{
 			entity.addPotionEffect(new PotionEffect(MobEffects.POISON, 80, 0));
 		}
-		else if (this.getDartType() == ItemDartType.PHOENIX)
-		{
-			entity.setFire(4);
-		}
 	}
 
 	@Override
@@ -71,13 +63,13 @@ public class EntityDart extends EntityArrow
 		this.dataManager.register(TYPE, (byte) 0);
 	}
 
-	public void setDartType(ItemDartType type)
-	{
-		this.dataManager.set(TYPE, (byte) type.ordinal());
-	}
-
 	public ItemDartType getDartType()
 	{
 		return ItemDartType.values()[this.dataManager.get(TYPE)];
+	}
+
+	public void setDartType(ItemDartType type)
+	{
+		this.dataManager.set(TYPE, (byte) type.ordinal());
 	}
 }
