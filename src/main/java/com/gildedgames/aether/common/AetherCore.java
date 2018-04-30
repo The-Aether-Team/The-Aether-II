@@ -135,8 +135,6 @@ public class AetherCore
 	{
 		AetherCore.SPAWN_REGISTRY.read();
 
-		DimensionManager.initDimension(CONFIG.getAetherDimID());
-
 		PrepTasks.prepSector(DimensionManager.getWorld(CONFIG.getAetherDimID()), 0, 0);
 
 		/*for (int x = -1; x < 1; x++)

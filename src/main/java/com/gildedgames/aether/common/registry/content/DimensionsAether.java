@@ -20,7 +20,7 @@ public class DimensionsAether
 	{
 		// Register dimension types
 		DimensionsAether.AETHER = DimensionType.register("Aether", "_aether",
-				AetherCore.CONFIG.getAetherDimID(), WorldProviderAether.class, false);
+				AetherCore.CONFIG.getAetherDimID(), WorldProviderAether.class, true);
 
 		DimensionsAether.NECROMANCER_TOWER = DimensionType.register("NecromancerTower", "_necromancer_tower",
 				AetherCore.CONFIG.getNecromancerDimID(), WorldProviderNecromancerTower.class, false);

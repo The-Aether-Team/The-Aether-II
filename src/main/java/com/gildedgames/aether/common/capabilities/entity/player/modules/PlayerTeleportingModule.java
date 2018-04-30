@@ -138,8 +138,6 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 
 			if (!this.teleported && (this.getEntity().capabilities.isCreativeMode || this.timeInPortal == 1.0F))
 			{
-				DimensionManager.initDimension(AetherCore.CONFIG.getAetherDimID());
-
 				IIslandData island = IslandHelper.get(DimensionManager.getWorld(AetherCore.CONFIG.getAetherDimID()), this.getEntity().getPosition().getX() >> 4,
 						this.getEntity().getPosition().getZ() >> 4);
 
