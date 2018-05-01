@@ -11,6 +11,8 @@ public class PlayerCampfiresModule extends PlayerAetherModule
 {
 	public BlockPosDimension lastCampfire;
 
+	private boolean shouldRespawnAtCampfire;
+
 	public PlayerCampfiresModule(final PlayerAether playerAether)
 	{
 		super(playerAether);
@@ -24,6 +26,16 @@ public class PlayerCampfiresModule extends PlayerAetherModule
 	public void setLastCampfire(BlockPosDimension lastCampfire)
 	{
 		this.lastCampfire = lastCampfire;
+	}
+
+	public void setShouldRespawnAtCampfire(boolean flag)
+	{
+		this.shouldRespawnAtCampfire = flag;
+	}
+
+	public boolean shouldRespawnAtCampfire()
+	{
+		return this.shouldRespawnAtCampfire;
 	}
 
 	@Override
@@ -50,6 +62,7 @@ public class PlayerCampfiresModule extends PlayerAetherModule
 		NBTFunnel funnel = new NBTFunnel(compound);
 
 		funnel.set("lastCampfire", this.lastCampfire);
+		compound.setBoolean("shouldRespawnAtCampfire", this.shouldRespawnAtCampfire);
 	}
 
 	@Override
@@ -58,5 +71,6 @@ public class PlayerCampfiresModule extends PlayerAetherModule
 		NBTFunnel funnel = new NBTFunnel(compound);
 
 		this.lastCampfire = funnel.get("lastCampfire");
+		this.shouldRespawnAtCampfire = compound.getBoolean("shouldRespawnAtCampfire");
 	}
 }

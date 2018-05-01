@@ -6,13 +6,10 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockTallAetherGrass;
-import com.gildedgames.aether.common.entities.living.npc.EntityEdison;
 import com.gildedgames.aether.common.world.aether.features.WorldGenFloorPlacer;
 import com.gildedgames.aether.common.world.aether.features.aerclouds.WorldGenAercloud;
 import com.gildedgames.aether.common.world.templates.conditions.TemplateConditions;
 import com.gildedgames.aether.common.world.templates.post.PostPlacementMoaFamily;
-import com.gildedgames.aether.common.world.templates.post.PostPlacementSetBlock;
-import com.gildedgames.aether.common.world.templates.post.PostPlacementSpawnEntity;
 import com.gildedgames.orbis_api.OrbisAPI;
 import com.gildedgames.orbis_api.core.BlueprintDefinition;
 import com.gildedgames.orbis_api.core.BlueprintDefinitionPool;
@@ -51,8 +48,6 @@ public class GenerationAether
 	public static TemplateDefinition skyroot_moa_nest_tree_1, skyroot_moa_nest_1, skyroot_moa_nest_2;
 
 	public static TemplateDefinition aether_portal_for_world, aether_portal;
-
-	public static TemplateDefinition mysterious_henge, outpost_a, outpost_b, outpost_c;
 
 	public static TemplateDefinitionPool green_skyroot_windswept;
 
@@ -248,31 +243,6 @@ public class GenerationAether
 				.setConditions(TemplateConditions.FLAT_GROUND, TemplateConditions.IGNORE_QUICKSOIL,
 						TemplateConditions.REPLACEABLE_GROUND);
 
-		final BlockPos edisonPos = new BlockPos(-1.0, 2, -1.0);
-		final BlockPos campfirePos = new BlockPos(0.0, 1, 0.0);
-
-		mysterious_henge = new TemplateDefinition(TemplatesAether.mysterious_henge)
-				.setConditions(TemplateConditions.INSIDE_GROUND, TemplateConditions.REPLACEABLE_GROUND)
-				.setPostPlacements(new PostPlacementSpawnEntity(EntityEdison::new, edisonPos));
-
-		outpost_a = new TemplateDefinition(TemplatesAether.outpost_a).setConditions(TemplateConditions.INSIDE_GROUND_AT_SOURCE)
-				.setPostPlacements(new PostPlacementSpawnEntity(EntityEdison::new, edisonPos),
-						new PostPlacementSetBlock(BlocksAether.outpost_campfire.getDefaultState(), campfirePos));
-
-		outpost_b = new TemplateDefinition(TemplatesAether.outpost_b).setConditions(TemplateConditions.INSIDE_GROUND_AT_SOURCE)
-				.setPostPlacements(new PostPlacementSpawnEntity(EntityEdison::new, edisonPos),
-						new PostPlacementSetBlock(BlocksAether.outpost_campfire.getDefaultState(), campfirePos));
-
-		outpost_c = new TemplateDefinition(TemplatesAether.outpost_c).setConditions(TemplateConditions.INSIDE_GROUND_AT_SOURCE)
-				.setPostPlacements(new PostPlacementSpawnEntity(EntityEdison::new, edisonPos),
-						new PostPlacementSetBlock(BlocksAether.outpost_campfire.getDefaultState(), campfirePos));
-
-		mysterious_henge.setRandomRotation(false);
-
-		outpost_a.setRandomRotation(false);
-		outpost_b.setRandomRotation(false);
-		outpost_c.setRandomRotation(false);
-
 		blue_skyroot_tree = new TemplateDefinitionPool(blue_skyroot_tree_1, blue_skyroot_tree_2, blue_skyroot_tree_3);
 		green_skyroot_tree = new TemplateDefinitionPool(green_skyroot_tree_1, green_skyroot_tree_2, green_skyroot_tree_3);
 		golden_oak = new TemplateDefinitionPool(golden_oak_1, golden_oak_2);
@@ -427,10 +397,6 @@ public class GenerationAether
 		reg(31, skyroot_moa_nest_2);
 		reg(32, aether_portal);
 		reg(35, aether_portal_for_world);
-		reg(36, mysterious_henge);
-		reg(37, outpost_a);
-		reg(38, outpost_b);
-		reg(39, outpost_c);
 	}
 
 	public static TemplateDefinition reg(final int id, final TemplateDefinition def)

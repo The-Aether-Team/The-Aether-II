@@ -18,6 +18,8 @@ public class ReflectionAether
 
 	public static final ReflectionEntry SERVER_CURRENT_TIME = new ReflectionEntry("field_175591_ab", "currentTime");
 
+	public static final ReflectionEntry BUTTON_LIST = new ReflectionEntry("field_146292_n", "buttonList");
+
 	public static Field getField(final Class clazz, final String... names)
 	{
 		for (final Field field : clazz.getDeclaredFields())

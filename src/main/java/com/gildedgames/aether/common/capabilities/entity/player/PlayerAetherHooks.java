@@ -4,13 +4,11 @@ import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.CommonEvents;
 import com.gildedgames.aether.common.blocks.IBlockSnowy;
 import com.gildedgames.aether.common.entities.util.shared.SharedAetherAttributes;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketMarkPlayerDeath;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
-import com.gildedgames.orbis_api.util.TeleporterGeneric;
 import com.gildedgames.orbis_api.util.mc.BlockUtil;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
@@ -28,9 +26,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.DimensionType;
-import net.minecraft.world.Teleporter;
-import net.minecraft.world.WorldServer;
-import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -263,61 +258,50 @@ public class PlayerAetherHooks
 		{
 			BlockPos bedPos = event.player.getBedLocation(((EntityPlayerMP) event.player).dimension);
 			final EntityPlayerMP mp = (EntityPlayerMP) event.player;
-			final WorldServer toWorld = DimensionManager.getWorld(0);
 
 			if (bedPos != null)
 			{
 				bedPos = EntityPlayer.getBedSpawnLocation(mp.getServerWorld(), bedPos, mp.isSpawnForced(mp.dimension));
 			}
 
-			if (bedPos == null)
+			final BlockPos respawnPoint = aePlayer.getCampfiresModule().getLastCampfire().add(-1, 0, -1);
+			boolean obstructed = false;
+
+			if (aePlayer.getCampfiresModule().shouldRespawnAtCampfire() || bedPos == null)
 			{
-				final BlockPos respawnPoint = aePlayer.getCampfiresModule().getLastCampfire().add(-1, 0, -1);
-				boolean obstructed = false;
+				BlockPos pos = mp.world.getTopSolidOrLiquidBlock(respawnPoint);
 
-				if (respawnPoint != null)
+				if (pos.getY() > respawnPoint.getY())
 				{
-					BlockPos pos = mp.world.getTopSolidOrLiquidBlock(respawnPoint);
+					pos = respawnPoint;
+				}
 
-					if (pos.getY() > respawnPoint.getY())
+				final BlockPos down = pos.down();
+
+				obstructed = mp.getServerWorld().getBlockState(pos.up()) != Blocks.AIR.getDefaultState()
+						|| mp.getServerWorld().getBlockState(pos.up(2)) != Blocks.AIR.getDefaultState();
+
+				if (BlockUtil.isSolid(mp.getServerWorld().getBlockState(down)) && !obstructed)
+				{
+					mp.connection.setPlayerLocation(pos.getX(), pos.getY() + 1, pos.getZ(), 0, 0);
+
+					if (!aePlayer.hasDiedInAetherBefore())
 					{
-						pos = respawnPoint;
-					}
+						aePlayer.getDialogController().openScene(AetherCore.getResource("edison/outpost_greet"));
 
-					final BlockPos down = pos.down();
+						aePlayer.setHasDiedInAetherBefore(true);
 
-					obstructed = mp.getServerWorld().getBlockState(pos.up()) != Blocks.AIR.getDefaultState()
-							|| mp.getServerWorld().getBlockState(pos.up(2)) != Blocks.AIR.getDefaultState();
-
-					if (BlockUtil.isSolid(mp.getServerWorld().getBlockState(down)) && !obstructed)
-					{
-						mp.connection.setPlayerLocation(pos.getX(), pos.getY() + 1, pos.getZ(), 0, 0);
-
-						if (!aePlayer.hasDiedInAetherBefore())
-						{
-							aePlayer.getDialogController().openScene(AetherCore.getResource("edison/outpost_greet"));
-
-							aePlayer.setHasDiedInAetherBefore(true);
-
-							NetworkingAether.sendPacketToPlayer(new PacketMarkPlayerDeath(aePlayer.hasDiedInAetherBefore()), mp);
-						}
+						NetworkingAether.sendPacketToPlayer(new PacketMarkPlayerDeath(aePlayer.hasDiedInAetherBefore()), mp);
 					}
 				}
-				else
-				{
-					final Teleporter teleporter = new TeleporterGeneric(toWorld);
 
-					CommonEvents.teleportEntity(mp, toWorld, teleporter, 3);
-					final BlockPos pos = toWorld.provider.getRandomizedSpawnPoint();
-					mp.connection.setPlayerLocation(pos.getX(), pos.getY(), pos.getZ(), 0, 0);
-				}
-
-				if (obstructed)
-				{
-					mp.sendMessage(new TextComponentString("The nearest Outpost was obstructed with blocks - you could not respawn there."));
-				}
+				aePlayer.getCampfiresModule().setShouldRespawnAtCampfire(false);
 			}
 
+			if (obstructed)
+			{
+				mp.sendMessage(new TextComponentString("The nearest Outpost was obstructed with blocks - you could not respawn there."));
+			}
 		}
 	}
 

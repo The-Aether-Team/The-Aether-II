@@ -2,6 +2,7 @@ package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.IAetherServices;
 import com.gildedgames.aether.api.registry.IContentRegistry;
+import com.gildedgames.aether.client.RespawnGuiOverrides;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherHooks;
 import com.gildedgames.aether.common.entities.util.MountEventHandler;
 import com.gildedgames.aether.common.entities.util.QuicksoilProcessor;
@@ -71,6 +72,7 @@ public class CommonProxy implements IAetherServices
 		MinecraftForge.EVENT_BUS.register(AetherCore.CONFIG);
 
 		MinecraftForge.EVENT_BUS.register(CommonEvents.class);
+		MinecraftForge.EVENT_BUS.register(RespawnGuiOverrides.class);
 		MinecraftForge.EVENT_BUS.register(PlayerAetherHooks.class);
 		MinecraftForge.EVENT_BUS.register(MountEventHandler.class);
 		MinecraftForge.EVENT_BUS.register(ItemToolHandler.class);
