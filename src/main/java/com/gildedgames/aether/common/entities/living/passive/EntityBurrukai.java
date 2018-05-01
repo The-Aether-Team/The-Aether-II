@@ -9,6 +9,7 @@ import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
@@ -147,10 +148,15 @@ public class EntityBurrukai extends EntityAetherAnimal
 	@Override
 	public boolean attackEntityAsMob(final Entity entityIn)
 	{
-		final EntityPlayer player = (EntityPlayer) entityIn;
-		player.attackEntityFrom(DamageSource.causeMobDamage(this), 5.0F);
-		this.playSound(SoundsAether.burrukai_attack, 0.5F, 1.0F);
-		player.knockBack(this, 1.0F, 0.2D, 0.2D);
+		if (entityIn instanceof EntityLivingBase)
+		{
+			final EntityLivingBase living = (EntityLivingBase) entityIn;
+
+			living.attackEntityFrom(DamageSource.causeMobDamage(this), 5.0F);
+			this.playSound(SoundsAether.burrukai_attack, 0.5F, 1.0F);
+			living.knockBack(this, 1.0F, 0.2D, 0.2D);
+		}
+
 		return true;
 	}
 
