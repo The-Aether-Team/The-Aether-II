@@ -36,9 +36,9 @@ public class AetherCore
 
 	public static final String MOD_ID = "aether";
 
-	public static final String MOD_VERSION = "1.12.2-1.0.1";
+	public static final String MOD_VERSION = "1.12.2-1.0.2";
 
-	public static final String MOD_DEPENDENCIES = "required-after:orbis_api";
+	public static final String MOD_DEPENDENCIES = "required-after:orbis_api@1.12.2-1.0.2";
 
 	public static final Logger LOGGER = LogManager.getLogger("AetherII");
 
