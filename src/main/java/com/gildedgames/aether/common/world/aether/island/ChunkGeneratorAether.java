@@ -2,7 +2,10 @@ package com.gildedgames.aether.common.world.aether.island;
 
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.common.util.helpers.IslandHelper;
-import com.gildedgames.orbis_api.core.*;
+import com.gildedgames.orbis_api.core.BlockDataChunk;
+import com.gildedgames.orbis_api.core.ICreationData;
+import com.gildedgames.orbis_api.core.PlacedBlueprint;
+import com.gildedgames.orbis_api.core.PostPlacement;
 import com.gildedgames.orbis_api.processing.BlockAccessChunkPrimer;
 import com.gildedgames.orbis_api.processing.BlockAccessExtendedWrapper;
 import com.gildedgames.orbis_api.processing.DataPrimer;
@@ -160,13 +163,7 @@ public class ChunkGeneratorAether implements IChunkGenerator
 				}
 			}
 
-			if (instance.getPlacedEntities().containsKey(p))
-			{
-				for (final PlacedEntity e : instance.getPlacedEntities().get(p))
-				{
-					e.spawn(primer);
-				}
-			}
+			instance.spawnEntitiesInChunk(primer, p);
 		}
 
 		biome.decorate(this.world, this.rand, pos);
