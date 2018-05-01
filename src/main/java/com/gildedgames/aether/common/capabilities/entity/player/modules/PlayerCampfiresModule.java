@@ -4,28 +4,80 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.orbis_api.util.io.NBTFunnel;
 import com.gildedgames.orbis_api.util.mc.BlockPosDimension;
+import com.google.common.collect.Sets;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+
+import java.util.Set;
 
 public class PlayerCampfiresModule extends PlayerAetherModule
 {
-	public BlockPosDimension lastCampfire;
+
+	public Set<BlockPosDimension> campfiresActivated = Sets.newHashSet();
 
 	private boolean shouldRespawnAtCampfire;
+
+	private BlockPosDimension deathPos;
 
 	public PlayerCampfiresModule(final PlayerAether playerAether)
 	{
 		super(playerAether);
 	}
 
-	public BlockPosDimension getLastCampfire()
+	public BlockPosDimension getDeathPos()
 	{
-		return this.lastCampfire;
+		return this.deathPos;
 	}
 
-	public void setLastCampfire(BlockPosDimension lastCampfire)
+	public void setDeathPos(BlockPosDimension deathPos)
 	{
-		this.lastCampfire = lastCampfire;
+		this.deathPos = deathPos;
+	}
+
+	public boolean hasCampfire(BlockPosDimension campfire)
+	{
+		return this.campfiresActivated.contains(campfire);
+	}
+
+	public Set<BlockPosDimension> getCampfiresActivated()
+	{
+		return this.campfiresActivated;
+	}
+
+	public void setCampfiresActivated(Set<BlockPosDimension> campfiresActivated)
+	{
+		this.campfiresActivated = campfiresActivated;
+	}
+
+	public BlockPos getClosestCampfire()
+	{
+		BlockPos closest = null;
+
+		int x = this.getDeathPos().getX();
+		int y = this.getDeathPos().getY();
+		int z = this.getDeathPos().getZ();
+
+		for (BlockPos p : this.campfiresActivated)
+		{
+			if (closest == null)
+			{
+				closest = p;
+				continue;
+			}
+
+			if (closest.getDistance(x, y, z) > p.getDistance(x, y, z))
+			{
+				closest = p;
+			}
+		}
+
+		return closest;
+	}
+
+	public void addActivatedCampfire(BlockPosDimension campfire)
+	{
+		this.campfiresActivated.add(campfire);
 	}
 
 	public void setShouldRespawnAtCampfire(boolean flag)
@@ -61,7 +113,8 @@ public class PlayerCampfiresModule extends PlayerAetherModule
 	{
 		NBTFunnel funnel = new NBTFunnel(compound);
 
-		funnel.set("lastCampfire", this.lastCampfire);
+		funnel.setSet("campfiresActivated", this.campfiresActivated);
+		funnel.set("deathPos", this.deathPos);
 		compound.setBoolean("shouldRespawnAtCampfire", this.shouldRespawnAtCampfire);
 	}
 
@@ -70,7 +123,8 @@ public class PlayerCampfiresModule extends PlayerAetherModule
 	{
 		NBTFunnel funnel = new NBTFunnel(compound);
 
-		this.lastCampfire = funnel.get("lastCampfire");
+		this.campfiresActivated = funnel.getSet("campfiresActivated");
+		this.deathPos = funnel.get("deathPos");
 		this.shouldRespawnAtCampfire = compound.getBoolean("shouldRespawnAtCampfire");
 	}
 }

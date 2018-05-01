@@ -51,6 +51,7 @@ public class NetworkingAether
 		instance.registerMessage(PacketSwitchToMinecraftInventory.HandlerClient.class, PacketSwitchToMinecraftInventory.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketCloseLoadingScreen.HandlerClient.class, PacketCloseLoadingScreen.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketLoadingScreenPercent.HandlerClient.class, PacketLoadingScreenPercent.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketCampfires.HandlerClient.class, PacketCampfires.class, discriminant++, Side.CLIENT);
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(AetherCore.INSTANCE, new AetherGuiHandler());
 	}

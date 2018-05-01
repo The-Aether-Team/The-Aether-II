@@ -6,6 +6,7 @@ import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.*;
 import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.network.packets.PacketCampfires;
 import com.gildedgames.aether.common.network.packets.PacketEquipment;
 import com.gildedgames.aether.common.network.packets.PacketMarkPlayerDeath;
 import com.gildedgames.aether.common.network.packets.PacketSetPlayedIntro;
@@ -175,6 +176,7 @@ public class PlayerAether implements IPlayerAether
 	{
 		NetworkingAether.sendPacketToPlayer(new PacketMarkPlayerDeath(this.hasDiedInAetherBefore()), (EntityPlayerMP) this.getEntity());
 		NetworkingAether.sendPacketToPlayer(new PacketSetPlayedIntro(this.getTeleportingModule().hasPlayedIntro()), (EntityPlayerMP) this.getEntity());
+		NetworkingAether.sendPacketToPlayer(new PacketCampfires(this.getCampfiresModule().getCampfiresActivated()), (EntityPlayerMP) this.getEntity());
 	}
 
 	public void onUpdate(LivingEvent.LivingUpdateEvent event)

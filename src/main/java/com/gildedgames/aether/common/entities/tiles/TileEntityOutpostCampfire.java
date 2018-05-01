@@ -29,6 +29,8 @@ public class TileEntityOutpostCampfire extends TileEntityMultiblockController im
 
 	private static final int PLAYER_SEARCHING_RADIUS = 2;
 
+	private BlockPosDimension posDim;
+
 	public TileEntityOutpostCampfire()
 	{
 		super((BlockMultiController) BlocksAether.outpost_campfire, BlocksAether.multiblock_dummy_half);
@@ -68,6 +70,11 @@ public class TileEntityOutpostCampfire extends TileEntityMultiblockController im
 	@Override
 	public void update()
 	{
+		if (this.posDim == null)
+		{
+			this.posDim = new BlockPosDimension(this.pos, this.world.provider.getDimension());
+		}
+
 		AxisAlignedBB searchingBB = new AxisAlignedBB(
 				new BlockPos(this.pos.getX() - PLAYER_SEARCHING_RADIUS, this.pos.getY() - PLAYER_SEARCHING_RADIUS,
 						this.pos.getZ() - PLAYER_SEARCHING_RADIUS),
@@ -80,10 +87,7 @@ public class TileEntityOutpostCampfire extends TileEntityMultiblockController im
 		{
 			PlayerAether playerAether = PlayerAether.getPlayer(Minecraft.getMinecraft().player);
 
-			BlockPosDimension p = playerAether.getCampfiresModule().getLastCampfire();
-
-			if (p != null && p.getX() == this.pos.getX() && p.getY() == this.pos.getY() && p.getZ() == this.pos.getZ() && p.getDim() == this.world.provider
-					.getDimension())
+			if (playerAether.getCampfiresModule().hasCampfire(this.posDim))
 			{
 				AetherCore.PROXY.spawnCampfireParticles(this.world, this.pos.getX() + 1.0D, this.pos.getY(), this.pos.getZ() + 1.0D);
 			}
@@ -93,12 +97,9 @@ public class TileEntityOutpostCampfire extends TileEntityMultiblockController im
 		{
 			PlayerAether playerAether = PlayerAether.getPlayer(player);
 
-			BlockPosDimension p = playerAether.getCampfiresModule().getLastCampfire();
-
-			if (p == null || p.getX() != this.pos.getX() || p.getY() != this.pos.getY() || p.getZ() != this.pos.getZ() || p.getDim() != this.world.provider
-					.getDimension())
+			if (!playerAether.getCampfiresModule().hasCampfire(this.posDim))
 			{
-				playerAether.getCampfiresModule().setLastCampfire(new BlockPosDimension(this.pos, this.world.provider.getDimension()));
+				playerAether.getCampfiresModule().addActivatedCampfire(this.posDim);
 
 				AetherCore.PROXY.spawnCampfireStartParticles(this.world, this.pos.getX() + 1.0D, this.pos.getY(), this.pos.getZ() + 1.0D);
 			}

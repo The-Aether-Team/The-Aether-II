@@ -9,6 +9,7 @@ import com.gildedgames.aether.common.entities.util.shared.SharedAetherAttributes
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketMarkPlayerDeath;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
+import com.gildedgames.orbis_api.util.mc.BlockPosDimension;
 import com.gildedgames.orbis_api.util.mc.BlockUtil;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
@@ -89,6 +90,11 @@ public class PlayerAetherHooks
 		if (aePlayer != null)
 		{
 			aePlayer.onDeath(event);
+
+			if (aePlayer.getEntity().world.provider.getDimensionType() == DimensionsAether.AETHER)
+			{
+				aePlayer.getCampfiresModule().setDeathPos(new BlockPosDimension(event.getEntity().getPosition(), aePlayer.getEntity().dimension));
+			}
 		}
 	}
 
@@ -264,7 +270,7 @@ public class PlayerAetherHooks
 				bedPos = EntityPlayer.getBedSpawnLocation(mp.getServerWorld(), bedPos, mp.isSpawnForced(mp.dimension));
 			}
 
-			final BlockPos respawnPoint = aePlayer.getCampfiresModule().getLastCampfire().add(-1, 0, -1);
+			final BlockPos respawnPoint = aePlayer.getCampfiresModule().getClosestCampfire().add(-1, 0, -1);
 			boolean obstructed = false;
 
 			if (aePlayer.getCampfiresModule().shouldRespawnAtCampfire() || bedPos == null)
