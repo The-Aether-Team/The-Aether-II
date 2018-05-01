@@ -35,22 +35,22 @@ import java.util.Collections;
 @Mod.EventBusSubscriber()
 public class ItemsAether
 {
-	public static final Item skyroot_stick = new Item();
+	public static final Item skyroot_stick = new ItemDropOnDeath();
 
-	public static final Item cloudtwine = new Item();
+	public static final Item cloudtwine = new ItemDropOnDeath();
 
 	public static final ItemMoaFeather moa_feather = new ItemMoaFeather();
 
-	public static final Item cockatrice_feather = new Item();
+	public static final Item cockatrice_feather = new ItemDropOnDeath();
 
-	public static final Item aether_saddle = new Item().setMaxStackSize(1);
+	public static final Item aether_saddle = new ItemDropOnDeath().setMaxStackSize(1);
 
-	public static final Item ambrosium_shard = new Item(),
+	public static final Item ambrosium_shard = new ItemDropOnDeath(),
 			ambrosium_chunk = new ItemAmbrosiumChunk(),
-			zanite_gemstone = new Item(),
-			arkenium = new Item(),
-			arkenium_strip = new Item(),
-			gravitite_plate = new Item();
+			zanite_gemstone = new ItemDropOnDeath(),
+			arkenium = new ItemDropOnDeath(),
+			arkenium_strip = new ItemDropOnDeath(),
+			gravitite_plate = new ItemDropOnDeath();
 
 	public static final ItemTool skyroot_axe = new ItemAetherAxe(MaterialsAether.SKYROOT_TOOL),
 			skyroot_pickaxe = new ItemAetherPickaxe(MaterialsAether.SKYROOT_TOOL),
@@ -100,9 +100,9 @@ public class ItemsAether
 			gravitite_leggings = new ItemGravititeArmor(EntityEquipmentSlot.LEGS),
 			gravitite_boots = new ItemGravititeArmor(EntityEquipmentSlot.FEET);
 
-	public static final Item golden_amber = new Item(),
-			taegore_hide = new Item(),
-			burrukai_pelt = new Item(),
+	public static final Item golden_amber = new ItemDropOnDeath(),
+			taegore_hide = new ItemDropOnDeath(),
+			burrukai_pelt = new ItemDropOnDeath(),
 			swet_gel = new ItemSwetGel();
 
 	public static final ItemAetherFood blueberries = new ItemAetherFood(2, false).setConsumptionDuration(12),
@@ -144,13 +144,13 @@ public class ItemsAether
 
 	public static final Item healing_stone = new ItemHealingStone();
 
-	public static final Item healing_stone_depleted = new Item();
+	public static final Item healing_stone_depleted = new ItemDropOnDeath();
 
 	public static final ItemDartShooter dart_shooter = new ItemDartShooter();
 
 	public static final ItemDart dart = new ItemDart();
 
-	public static final Item valkyrie_wings = new Item();
+	public static final Item valkyrie_wings = new ItemDropOnDeath();
 
 	public static final ItemDoor skyroot_door = new ItemDoor(BlocksAether.skyroot_door),
 			secret_skyroot_door = new ItemDoor(BlocksAether.secret_skyroot_door),
@@ -164,15 +164,15 @@ public class ItemsAether
 
 	public static final ItemBolt bolt = new ItemBolt();
 
-	public static final Item icestone = new Item();
+	public static final Item icestone = new ItemDropOnDeath();
 
 	public static final Item skyroot_sign = new ItemSkyrootSign();
 
-	public static final Item aechor_petal = new Item();
+	public static final Item aechor_petal = new ItemDropOnDeath();
 
 	public static final ItemBrettlCane brettl_cane = new ItemBrettlCane();
 
-	public static final Item brettl_grass = new Item();
+	public static final Item brettl_grass = new ItemDropOnDeath();
 
 	public static final Item taegore_hide_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.TAEGOREHIDE),
 			zanite_gloves = new ItemAetherGloves(ItemAetherGloves.GloveType.ZANITE),
@@ -210,7 +210,7 @@ public class ItemsAether
 	public static final Item wrapping_paper = new ItemWrappingPaper(),
 			fried_moa_egg = new ItemFood(10, false);
 
-	public static final Item swet_sugar = new Item();
+	public static final Item swet_sugar = new ItemDropOnDeath();
 
 	private static final Collection<Item> registeredItems = new ArrayList<>();
 

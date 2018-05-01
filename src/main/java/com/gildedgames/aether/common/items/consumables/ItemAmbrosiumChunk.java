@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.items.consumables;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
+import com.gildedgames.aether.common.items.IDropOnDeath;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -12,7 +13,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class ItemAmbrosiumChunk extends Item
+public class ItemAmbrosiumChunk extends Item implements IDropOnDeath
 {
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side,
@@ -26,7 +27,8 @@ public class ItemAmbrosiumChunk extends Item
 		{
 			if (player.canPlayerEdit(pos, side, stack))
 			{
-				world.setBlockState(pos, BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.ENCHANTED));
+				world.setBlockState(pos,
+						BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.ENCHANTED));
 
 				if (!player.capabilities.isCreativeMode)
 				{

@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.items;
 
 import com.gildedgames.aether.api.items.loot.Loot;
 
-public class ItemIrradiated extends ItemIrradiatedVisuals
+public class ItemIrradiated extends ItemIrradiatedVisuals implements IDropOnDeath
 {
 
 	private Loot itemSelector;

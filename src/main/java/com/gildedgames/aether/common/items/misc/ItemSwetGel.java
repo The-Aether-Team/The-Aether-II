@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.items.misc;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
+import com.gildedgames.aether.common.items.IDropOnDeath;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -20,7 +21,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.HashMap;
 
-public class ItemSwetGel extends Item
+public class ItemSwetGel extends Item implements IDropOnDeath
 {
 	private static final HashMap<Block, IBlockState> growables = new HashMap<>();
 

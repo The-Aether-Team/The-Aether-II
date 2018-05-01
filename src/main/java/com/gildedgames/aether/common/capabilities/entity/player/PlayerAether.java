@@ -6,10 +6,7 @@ import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.*;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.network.packets.PacketCampfires;
-import com.gildedgames.aether.common.network.packets.PacketEquipment;
-import com.gildedgames.aether.common.network.packets.PacketMarkPlayerDeath;
-import com.gildedgames.aether.common.network.packets.PacketSetPlayedIntro;
+import com.gildedgames.aether.common.network.packets.*;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstance;
 import com.gildedgames.orbis_api.util.io.NBTFunnel;
@@ -22,7 +19,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
@@ -72,6 +68,8 @@ public class PlayerAether implements IPlayerAether
 
 	private final PlayerCampfiresModule campfiresModule;
 
+	private final PlayerPreventDropsModule preventDropsModule;
+
 	private final List<PlayerAetherObserver> observers = Lists.newArrayList();
 
 	private boolean hasDiedInAetherBefore;
@@ -91,6 +89,7 @@ public class PlayerAether implements IPlayerAether
 		this.swetTracker = null;
 		this.separateInventoryModule = null;
 		this.campfiresModule = null;
+		this.preventDropsModule = null;
 	}
 
 	public PlayerAether(final EntityPlayer entity)
@@ -106,6 +105,7 @@ public class PlayerAether implements IPlayerAether
 		this.swetTracker = new PlayerSwetTracker(this);
 		this.separateInventoryModule = new PlayerSeparateInventoryModule(this);
 		this.campfiresModule = new PlayerCampfiresModule(this);
+		this.preventDropsModule = new PlayerPreventDropsModule(this);
 
 		final Collection<PlayerAetherModule> modules = new ArrayList<>();
 
@@ -118,6 +118,7 @@ public class PlayerAether implements IPlayerAether
 		modules.add(this.swetTracker);
 		modules.add(this.separateInventoryModule);
 		modules.add(this.campfiresModule);
+		modules.add(this.preventDropsModule);
 
 		this.modules = modules.toArray(new PlayerAetherModule[modules.size()]);
 	}
@@ -164,9 +165,7 @@ public class PlayerAether implements IPlayerAether
 
 	public void onLoggedOut()
 	{
-		DimensionType dim = this.getEntity().world.provider.getDimensionType();
 
-		this.separateInventoryModule.switchToMinecraftInventory(dim == DimensionsAether.AETHER || dim == DimensionsAether.NECROMANCER_TOWER);
 	}
 
 	/**
@@ -177,6 +176,8 @@ public class PlayerAether implements IPlayerAether
 		NetworkingAether.sendPacketToPlayer(new PacketMarkPlayerDeath(this.hasDiedInAetherBefore()), (EntityPlayerMP) this.getEntity());
 		NetworkingAether.sendPacketToPlayer(new PacketSetPlayedIntro(this.getTeleportingModule().hasPlayedIntro()), (EntityPlayerMP) this.getEntity());
 		NetworkingAether.sendPacketToPlayer(new PacketCampfires(this.getCampfiresModule().getCampfiresActivated()), (EntityPlayerMP) this.getEntity());
+		NetworkingAether.sendPacketToPlayer(new PacketPreventDropsInventories(this.preventDropsModule), (EntityPlayerMP) this.getEntity());
+		NetworkingAether.sendPacketToPlayer(new PacketSeparateInventoryModule(this.separateInventoryModule), (EntityPlayerMP) this.getEntity());
 	}
 
 	public void onUpdate(LivingEvent.LivingUpdateEvent event)
@@ -211,6 +212,11 @@ public class PlayerAether implements IPlayerAether
 	public void onRespawn(final PlayerEvent.PlayerRespawnEvent event)
 	{
 		this.sendFullUpdate();
+
+		for (PlayerAetherModule module : this.modules)
+		{
+			module.onRespawn(event);
+		}
 	}
 
 	public void onPlaceBlock(final BlockEvent.PlaceEvent event)
@@ -220,22 +226,17 @@ public class PlayerAether implements IPlayerAether
 
 	public void onDeath(final LivingDeathEvent event)
 	{
-		this.gravititeAbilityModule.onDeath(event);
+		for (PlayerAetherModule module : this.modules)
+		{
+			module.onDeath(event);
+		}
 	}
 
 	public void onDrops(final PlayerDropsEvent event)
 	{
-		if (!this.getEntity().world.isRemote && !this.getEntity().world.getGameRules().getBoolean("keepInventory"))
+		for (PlayerAetherModule module : this.modules)
 		{
-			for (int i = 0; i < this.getEquipmentModule().getInventory().getSizeInventory(); i++)
-			{
-				final ItemStack stack = this.getEquipmentModule().getInventory().removeStackFromSlot(i);
-
-				if (!stack.isEmpty())
-				{
-					this.getEntity().dropItem(stack, true, true);
-				}
-			}
+			module.onDrops(event);
 		}
 	}
 
@@ -278,7 +279,7 @@ public class PlayerAether implements IPlayerAether
 		}
 		else if (!toAether && fromAether)
 		{
-			this.separateInventoryModule.switchToMinecraftInventory(fromAether);
+			this.separateInventoryModule.switchToMinecraftInventory(true);
 		}
 
 		if (to == DimensionsAether.AETHER)
@@ -407,6 +408,11 @@ public class PlayerAether implements IPlayerAether
 	public PlayerEquipmentModule getEquipmentModule()
 	{
 		return this.equipmentModule;
+	}
+
+	public PlayerPreventDropsModule getPreventDropsModule()
+	{
+		return this.preventDropsModule;
 	}
 
 	public boolean containsObserver(final PlayerAetherObserver observer)

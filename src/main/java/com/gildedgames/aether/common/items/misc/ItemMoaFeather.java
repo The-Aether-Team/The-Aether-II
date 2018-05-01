@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.items.misc;
 
+import com.gildedgames.aether.common.items.IDropOnDeath;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -15,7 +16,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.awt.*;
 import java.util.List;
 
-public class ItemMoaFeather extends Item
+public class ItemMoaFeather extends Item implements IDropOnDeath
 {
 
 	public ItemMoaFeather()

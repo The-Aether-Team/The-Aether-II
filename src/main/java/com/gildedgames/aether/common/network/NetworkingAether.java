@@ -52,6 +52,8 @@ public class NetworkingAether
 		instance.registerMessage(PacketCloseLoadingScreen.HandlerClient.class, PacketCloseLoadingScreen.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketLoadingScreenPercent.HandlerClient.class, PacketLoadingScreenPercent.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketCampfires.HandlerClient.class, PacketCampfires.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketPreventDropsInventories.HandlerClient.class, PacketPreventDropsInventories.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketSeparateInventoryModule.HandlerClient.class, PacketSeparateInventoryModule.class, discriminant++, Side.CLIENT);
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(AetherCore.INSTANCE, new AetherGuiHandler());
 	}

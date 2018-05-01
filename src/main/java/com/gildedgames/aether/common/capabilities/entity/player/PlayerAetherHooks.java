@@ -26,7 +26,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
-import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -54,13 +53,6 @@ public class PlayerAetherHooks
 		if (aePlayer != null)
 		{
 			aePlayer.sendFullUpdate();
-
-			DimensionType dim = event.player.world.provider.getDimensionType();
-
-			if (dim == DimensionsAether.AETHER || dim == DimensionsAether.NECROMANCER_TOWER)
-			{
-				aePlayer.getSeparateInventoryModule().switchToAetherInventory();
-			}
 
 			IRecipe teleporterRecipe = ForgeRegistries.RECIPES.getValue(TELEPORTER_RECIPE);
 

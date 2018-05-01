@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.items.misc;
 
+import com.gildedgames.aether.common.items.IDropOnDeath;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -11,7 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class ItemWrappingPaper extends Item
+public class ItemWrappingPaper extends Item implements IDropOnDeath
 {
 
 	public static PresentDyeData getDyeData(final ItemStack stack)

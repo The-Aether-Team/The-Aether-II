@@ -5,6 +5,7 @@ import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.genes.util.GeneUtil;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.entities.tiles.TileEntityMoaEgg;
+import com.gildedgames.aether.common.items.IDropOnDeath;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -27,7 +28,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemMoaEgg extends Item
+public class ItemMoaEgg extends Item implements IDropOnDeath
 {
 
 	private final boolean creativeEgg;
@@ -80,7 +81,7 @@ public class ItemMoaEgg extends Item
 	}
 
 	@Override
-    @SideOnly(Side.CLIENT)
+	@SideOnly(Side.CLIENT)
 	public void addInformation(final ItemStack stack, final World world, final List<String> creativeList, final ITooltipFlag flag)
 	{
 		final MoaGenePool genePool = ItemMoaEgg.getGenePool(stack);

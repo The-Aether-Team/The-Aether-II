@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.items.consumables;
 
+import com.gildedgames.aether.common.items.IDropOnDeath;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,7 +14,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class ItemHealingStone extends Item
+public class ItemHealingStone extends Item implements IDropOnDeath
 {
 
 	public static final int MAX_USES = 5;

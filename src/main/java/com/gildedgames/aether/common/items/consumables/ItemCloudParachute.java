@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.items.consumables;
 
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.entities.blocks.EntityParachute;
+import com.gildedgames.aether.common.items.IDropOnDeath;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -18,7 +19,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemCloudParachute extends Item
+public class ItemCloudParachute extends Item implements IDropOnDeath
 {
 	public ItemCloudParachute()
 	{
@@ -41,7 +42,7 @@ public class ItemCloudParachute extends Item
 	}
 
 	@Override
-    @SideOnly(Side.CLIENT)
+	@SideOnly(Side.CLIENT)
 	public void addInformation(final ItemStack stack, @Nullable final World worldIn, final List<String> tooltip, final ITooltipFlag flagIn)
 	{
 		tooltip.add(I18n.format("cloudParachute.ability") + "\247r" + I18n.format(

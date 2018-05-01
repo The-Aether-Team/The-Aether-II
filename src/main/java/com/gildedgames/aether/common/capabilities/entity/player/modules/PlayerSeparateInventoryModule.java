@@ -71,15 +71,24 @@ public class PlayerSeparateInventoryModule extends PlayerAetherModule
 	@Override
 	public void onUpdate()
 	{
-		
+
 	}
 
 	@Override
 	public void write(final NBTTagCompound compound)
 	{
 		compound.setBoolean("WrittenInventory", true);
+
 		compound.setTag("Inventory", this.aetherInventory.writeToNBT(new NBTTagList()));
 		compound.setInteger("SelectedItemSlot", this.aetherInventory.currentItem);
+
+		if (this.minecraftInventory != null)
+		{
+			compound.setBoolean("MinecraftWrittenInventory", true);
+
+			compound.setTag("MinecraftInventory", this.minecraftInventory.writeToNBT(new NBTTagList()));
+			compound.setInteger("MinecraftSelectedItemSlot", this.minecraftInventory.currentItem);
+		}
 	}
 
 	@Override
@@ -89,6 +98,14 @@ public class PlayerSeparateInventoryModule extends PlayerAetherModule
 		{
 			this.aetherInventory.readFromNBT(compound.getTagList("Inventory", 10));
 			this.aetherInventory.currentItem = compound.getInteger("SelectedItemSlot");
+		}
+
+		if (compound.getBoolean("MinecraftWrittenInventory"))
+		{
+			this.minecraftInventory = new InventoryPlayer(this.getEntity());
+
+			this.minecraftInventory.readFromNBT(compound.getTagList("MinecraftInventory", 10));
+			this.minecraftInventory.currentItem = compound.getInteger("MinecraftSelectedItemSlot");
 		}
 	}
 }

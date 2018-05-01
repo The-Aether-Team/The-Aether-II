@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.items.consumables;
 
+import com.gildedgames.aether.common.items.IDropOnDeath;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import net.minecraft.entity.EntityLivingBase;
@@ -16,7 +17,7 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
-public class ItemSkyrootConsumableBucket extends Item
+public class ItemSkyrootConsumableBucket extends Item implements IDropOnDeath
 {
 	public ItemSkyrootConsumableBucket()
 	{

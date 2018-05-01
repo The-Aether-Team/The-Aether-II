@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.items.tools;
 
+import com.gildedgames.aether.common.items.IDropOnDeath;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import net.minecraft.block.Block;
@@ -22,7 +23,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 
-public class ItemSkyrootBucket extends ItemBucket
+public class ItemSkyrootBucket extends ItemBucket implements IDropOnDeath
 {
 	public ItemSkyrootBucket(Block liquid)
 	{

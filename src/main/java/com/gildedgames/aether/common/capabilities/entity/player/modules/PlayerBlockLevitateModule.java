@@ -89,6 +89,7 @@ public class PlayerBlockLevitateModule extends PlayerAetherModule
 
 	}
 
+	@Override
 	public void onDeath(final LivingDeathEvent event)
 	{
 		this.dropHeldBlock();

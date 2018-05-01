@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.items.misc;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.items.IDropOnDeath;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.SoundType;
@@ -16,7 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-public class ItemSkyrootBed extends Item
+public class ItemSkyrootBed extends Item implements IDropOnDeath
 {
 	public ItemSkyrootBed()
 	{

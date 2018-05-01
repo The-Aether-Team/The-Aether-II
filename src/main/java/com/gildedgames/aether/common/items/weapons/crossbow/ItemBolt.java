@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.items.weapons.crossbow;
 
+import com.gildedgames.aether.common.items.IDropOnDeath;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -13,7 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class ItemBolt extends Item
+public class ItemBolt extends Item implements IDropOnDeath
 {
 	private static final ItemBoltType[] ITEM_VARIANTS = new ItemBoltType[] {
 			ItemBoltType.SKYROOT,

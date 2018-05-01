@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.items.consumables;
 
+import com.gildedgames.aether.common.items.IDropOnDeath;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
@@ -12,7 +13,7 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
-public class ItemShardOfLife extends Item
+public class ItemShardOfLife extends Item implements IDropOnDeath
 {
 
 	public ItemShardOfLife()

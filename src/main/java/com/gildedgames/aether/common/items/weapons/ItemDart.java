@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.items.weapons;
 
+import com.gildedgames.aether.common.items.IDropOnDeath;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -7,7 +8,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemDart extends Item
+public class ItemDart extends Item implements IDropOnDeath
 {
 	private static final ItemDartType[] ITEM_VARIANTS = new ItemDartType[] { ItemDartType.GOLDEN, ItemDartType.ENCHANTED,
 			ItemDartType.POISON };

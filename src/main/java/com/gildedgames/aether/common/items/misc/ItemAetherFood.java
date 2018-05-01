@@ -1,10 +1,11 @@
 package com.gildedgames.aether.common.items.misc;
 
+import com.gildedgames.aether.common.items.IDropOnDeath;
 import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 
-public class ItemAetherFood extends ItemFood
+public class ItemAetherFood extends ItemFood implements IDropOnDeath
 {
 	private int duration = 32;
 
