@@ -781,9 +781,9 @@ edison.them.busy=I'm working on something at the moment, friend. Come back in a 
 necromancer.name=Necromancer
 
 necromancer.them.start1=I see you made it here safely. I appreciate that you may have many questions but I fear we are short on time.
-necromancer.them.start2=If you would follow me I will answer all questions in due time.
+necromancer.them.start2=Please make your way upstairs to the Rift Room to enter the Aether, good luck on your journey.
 
-necromancer.us.leadtheway=Lead the way.
+necromancer.us.leadtheway=Thankyou, goodbye.
 
 aether.warning.deprecated_item=§cDeprecated! Will be removed!
 aether.warning.operator_item=Requires Operator privileges
