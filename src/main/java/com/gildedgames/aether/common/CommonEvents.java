@@ -22,6 +22,7 @@ import com.gildedgames.aether.common.util.helpers.MathUtil;
 import com.gildedgames.aether.common.util.helpers.PlayerUtil;
 import com.gildedgames.aether.common.world.aether.TeleporterAether;
 import com.gildedgames.orbis_api.preparation.impl.capability.PrepHelper;
+import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -31,11 +32,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.PlayerList;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -60,6 +64,7 @@ import net.minecraftforge.fluids.FluidEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -130,6 +135,20 @@ public class CommonEvents
 						NetworkingAether.sendPacketToPlayer(new PacketCloseLoadingScreen(), (EntityPlayerMP) player);
 
 						NetworkingAether.sendPacketToPlayer(new PacketLoadingScreenPercent(0.0F), (EntityPlayerMP) player);
+
+						List<IRecipe> toUnlock = Lists.newArrayList();
+
+						for (IRecipe r : ForgeRegistries.RECIPES)
+						{
+							ResourceLocation loc = Item.REGISTRY.getNameForObject(r.getRecipeOutput().getItem());
+
+							if (loc != null && loc.getResourceDomain().equals("aether"))
+							{
+								toUnlock.add(r);
+							}
+						}
+
+						player.unlockRecipes(toUnlock);
 					}
 					else
 					{

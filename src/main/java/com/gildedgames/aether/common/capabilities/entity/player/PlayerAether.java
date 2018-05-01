@@ -18,8 +18,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.MobEffects;
-import net.minecraft.item.Item;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -38,7 +36,6 @@ import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -280,23 +277,6 @@ public class PlayerAether implements IPlayerAether
 		else if (!toAether && fromAether)
 		{
 			this.separateInventoryModule.switchToMinecraftInventory(true);
-		}
-
-		if (to == DimensionsAether.AETHER)
-		{
-			List<IRecipe> toUnlock = Lists.newArrayList();
-
-			for (IRecipe r : ForgeRegistries.RECIPES)
-			{
-				ResourceLocation loc = Item.REGISTRY.getNameForObject(r.getRecipeOutput().getItem());
-
-				if (loc != null && loc.getResourceDomain().equals("aether"))
-				{
-					toUnlock.add(r);
-				}
-			}
-
-			event.player.unlockRecipes(toUnlock);
 		}
 	}
 
