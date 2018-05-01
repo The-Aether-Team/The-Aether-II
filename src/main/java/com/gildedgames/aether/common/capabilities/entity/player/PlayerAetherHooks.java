@@ -10,7 +10,6 @@ import com.gildedgames.aether.common.entities.util.shared.SharedAetherAttributes
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketMarkPlayerDeath;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
-import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import com.gildedgames.orbis_api.util.TeleporterGeneric;
 import com.gildedgames.orbis_api.util.mc.BlockUtil;
 import com.google.common.collect.Lists;
@@ -273,7 +272,7 @@ public class PlayerAetherHooks
 
 			if (bedPos == null)
 			{
-				final BlockPos respawnPoint = IslandHelper.getRespawnPoint(mp.world, aePlayer.getEntity().getPosition());
+				final BlockPos respawnPoint = aePlayer.getCampfiresModule().getLastCampfire().add(-1, 0, -1);
 				boolean obstructed = false;
 
 				if (respawnPoint != null)

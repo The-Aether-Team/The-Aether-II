@@ -12,13 +12,20 @@ import com.gildedgames.aether.common.CommonProxy;
 import com.gildedgames.aether.common.analytics.GameAnalytics;
 import com.gildedgames.aether.common.util.helpers.PerfHelper;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleFlame;
+import net.minecraft.client.particle.ParticleLava;
+import net.minecraft.client.particle.ParticleSmokeNormal;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+
+import java.util.Random;
 
 public class ClientProxy extends CommonProxy
 {
@@ -86,5 +93,99 @@ public class ClientProxy extends CommonProxy
 		}
 
 		super.modifyEntityQuicksoil(entity);
+	}
+
+	@Override
+	public void spawnCampfireStartParticles(World world, double x, double y, double z)
+	{
+		ParticleLava.Factory lavaFactory = new ParticleLava.Factory();
+		ParticleFlame.Factory flameFactory = new ParticleFlame.Factory();
+		ParticleSmokeNormal.Factory smokeFactory = new ParticleSmokeNormal.Factory();
+		Random r = new Random();
+
+		for (int i = 0; i < 50; i++)
+		{
+			double range = r.nextDouble() * 0.9;
+
+			Particle lava = lavaFactory
+					.createParticle(0, world, x + (r.nextDouble() * (r.nextBoolean() ? range : -range)), y,
+							z + (r.nextDouble() * (r.nextBoolean() ? range : -range)),
+							(r.nextDouble() * (r.nextBoolean() ? range : -range)) * 0.2, 0.075 * r.nextDouble(),
+							(r.nextDouble() * (r.nextBoolean() ? range : -range)) * 0.2);
+
+			Particle flame = flameFactory
+					.createParticle(0, world, x + (r.nextDouble() * (r.nextBoolean() ? range : -range)), y,
+							z + (r.nextDouble() * (r.nextBoolean() ? range : -range)),
+							(r.nextDouble() * (r.nextBoolean() ? range : -range)) * 0.1, 0.1 * r.nextDouble(),
+							(r.nextDouble() * (r.nextBoolean() ? range : -range)) * 0.1);
+
+			Particle smoke = smokeFactory
+					.createParticle(0, world, x + (r.nextDouble() * (r.nextBoolean() ? range : -range)), y,
+							z + (r.nextDouble() * (r.nextBoolean() ? range : -range)),
+							(r.nextDouble() * (r.nextBoolean() ? range : -range)) * 0.1, 0.1 * r.nextDouble(),
+							(r.nextDouble() * (r.nextBoolean() ? range : -range)) * 0.1);
+
+			if (r.nextInt(10) == 0)
+			{
+				Minecraft.getMinecraft().effectRenderer.addEffect(lava);
+			}
+
+			if (r.nextInt(4) == 0)
+			{
+				Minecraft.getMinecraft().effectRenderer.addEffect(flame);
+			}
+
+			if (r.nextInt(4) == 0)
+			{
+				Minecraft.getMinecraft().effectRenderer.addEffect(smoke);
+			}
+		}
+	}
+
+	@Override
+	public void spawnCampfireParticles(World world, double x, double y, double z)
+	{
+		ParticleLava.Factory lavaFactory = new ParticleLava.Factory();
+		ParticleFlame.Factory flameFactory = new ParticleFlame.Factory();
+		ParticleSmokeNormal.Factory smokeFactory = new ParticleSmokeNormal.Factory();
+		Random r = new Random();
+
+		for (int i = 0; i < 10; i++)
+		{
+			double range = r.nextDouble() * 0.75;
+
+			Particle lava = lavaFactory
+					.createParticle(0, world, x + (r.nextDouble() * (r.nextBoolean() ? range : -range)), y,
+							z + (r.nextDouble() * (r.nextBoolean() ? range : -range)),
+							(r.nextDouble() * (r.nextBoolean() ? range : -range)) * 0.001, 0.075 * r.nextDouble(),
+							(r.nextDouble() * (r.nextBoolean() ? range : -range)) * 0.001);
+
+			Particle flame = flameFactory
+					.createParticle(0, world, x + (r.nextDouble() * (r.nextBoolean() ? range : -range)), y,
+							z + (r.nextDouble() * (r.nextBoolean() ? range : -range)),
+							(r.nextDouble() * (r.nextBoolean() ? range : -range)) * 0.001, 0.04 * r.nextDouble(),
+							(r.nextDouble() * (r.nextBoolean() ? range : -range)) * 0.001);
+
+			Particle smoke = smokeFactory
+					.createParticle(0, world, x + (r.nextDouble() * (r.nextBoolean() ? range : -range)), y,
+							z + (r.nextDouble() * (r.nextBoolean() ? range : -range)),
+							(r.nextDouble() * (r.nextBoolean() ? range : -range)) * 0.001, 0.075 * r.nextDouble(),
+							(r.nextDouble() * (r.nextBoolean() ? range : -range)) * 0.001);
+
+			if (r.nextInt(800) == 0)
+			{
+				Minecraft.getMinecraft().effectRenderer.addEffect(lava);
+			}
+
+			if (r.nextInt(4) == 0)
+			{
+				Minecraft.getMinecraft().effectRenderer.addEffect(flame);
+			}
+
+			if (r.nextInt(4) == 0)
+			{
+				Minecraft.getMinecraft().effectRenderer.addEffect(smoke);
+			}
+		}
 	}
 }

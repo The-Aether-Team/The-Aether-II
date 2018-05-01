@@ -92,6 +92,16 @@ public class CommonProxy implements IAetherServices
 		}
 	}
 
+	public void spawnCampfireStartParticles(World world, double x, double y, double z)
+	{
+
+	}
+
+	public void spawnCampfireParticles(World world, double x, double y, double z)
+	{
+
+	}
+
 	public File getConfigDir()
 	{
 		return this.configDir;

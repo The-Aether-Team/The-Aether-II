@@ -132,13 +132,13 @@ public class IslandData implements IIslandData
 	}
 
 	@Override
-	public BlockPos getRespawnPoint()
+	public BlockPos getOutpostPos()
 	{
 		return this.respawnPoint;
 	}
 
 	@Override
-	public void setRespawnPoint(final BlockPos pos)
+	public void setOutpostPos(final BlockPos pos)
 	{
 		this.respawnPoint = pos;
 	}

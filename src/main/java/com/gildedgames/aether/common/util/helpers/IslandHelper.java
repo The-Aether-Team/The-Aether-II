@@ -11,13 +11,13 @@ import net.minecraft.world.World;
 public class IslandHelper
 {
 
-	public static BlockPos getRespawnPoint(final World world, final BlockPos pos)
+	public static BlockPos getOutpostPos(final World world, final BlockPos pos)
 	{
 		IIslandData island = get(world, pos.getX() >> 4, pos.getZ() >> 4);
 
-		if (island != null && island.getRespawnPoint() != null)
+		if (island != null && island.getOutpostPos() != null)
 		{
-			return island.getRespawnPoint();
+			return island.getOutpostPos();
 		}
 
 		if (island != null)

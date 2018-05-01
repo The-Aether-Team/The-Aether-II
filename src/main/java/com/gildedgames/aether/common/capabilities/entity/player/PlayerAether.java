@@ -69,6 +69,8 @@ public class PlayerAether implements IPlayerAether
 
 	private final PlayerSeparateInventoryModule separateInventoryModule;
 
+	private final PlayerCampfiresModule campfiresModule;
+
 	private final List<PlayerAetherObserver> observers = Lists.newArrayList();
 
 	private boolean hasDiedInAetherBefore;
@@ -87,6 +89,7 @@ public class PlayerAether implements IPlayerAether
 		this.dialogModule = null;
 		this.swetTracker = null;
 		this.separateInventoryModule = null;
+		this.campfiresModule = null;
 	}
 
 	public PlayerAether(final EntityPlayer entity)
@@ -101,6 +104,7 @@ public class PlayerAether implements IPlayerAether
 		this.dialogModule = new PlayerDialogModule(this);
 		this.swetTracker = new PlayerSwetTracker(this);
 		this.separateInventoryModule = new PlayerSeparateInventoryModule(this);
+		this.campfiresModule = new PlayerCampfiresModule(this);
 
 		final Collection<PlayerAetherModule> modules = new ArrayList<>();
 
@@ -112,6 +116,7 @@ public class PlayerAether implements IPlayerAether
 		modules.add(this.dialogModule);
 		modules.add(this.swetTracker);
 		modules.add(this.separateInventoryModule);
+		modules.add(this.campfiresModule);
 
 		this.modules = modules.toArray(new PlayerAetherModule[modules.size()]);
 	}
@@ -389,6 +394,11 @@ public class PlayerAether implements IPlayerAether
 	public PlayerSwetTracker getSwetTracker()
 	{
 		return this.swetTracker;
+	}
+
+	public PlayerCampfiresModule getCampfiresModule()
+	{
+		return this.campfiresModule;
 	}
 
 	@Override

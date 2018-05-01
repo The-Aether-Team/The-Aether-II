@@ -156,7 +156,7 @@ public class BiomeAetherDecorator
 
 						if (trigger != null)
 						{
-							island.setRespawnPoint(trigger.getBounds().getMin());
+							island.setOutpostPos(trigger.getBounds().getMin());
 						}
 
 						break;

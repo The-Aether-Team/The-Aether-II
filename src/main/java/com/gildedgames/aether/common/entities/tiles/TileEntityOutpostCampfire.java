@@ -1,25 +1,33 @@
 package com.gildedgames.aether.common.entities.tiles;
 
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.multiblock.BlockMultiController;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.entities.tiles.multiblock.TileEntityMultiblockController;
+import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.orbis_api.util.TeleporterGeneric;
 import com.gildedgames.orbis_api.util.mc.BlockPosDimension;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.PlayerList;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
+import java.util.List;
+
 public class TileEntityOutpostCampfire extends TileEntityMultiblockController implements ITickable
 {
+
+	private static final int PLAYER_SEARCHING_RADIUS = 2;
 
 	public TileEntityOutpostCampfire()
 	{
@@ -29,7 +37,7 @@ public class TileEntityOutpostCampfire extends TileEntityMultiblockController im
 	@Override
 	public void onInteract(final EntityPlayer player)
 	{
-		if (player instanceof EntityPlayerMP)
+		if (player instanceof EntityPlayerMP && player.world.provider.getDimensionType() == DimensionsAether.AETHER)
 		{
 			final EntityPlayerMP playerMP = (EntityPlayerMP) player;
 
@@ -60,7 +68,41 @@ public class TileEntityOutpostCampfire extends TileEntityMultiblockController im
 	@Override
 	public void update()
 	{
+		AxisAlignedBB searchingBB = new AxisAlignedBB(
+				new BlockPos(this.pos.getX() - PLAYER_SEARCHING_RADIUS, this.pos.getY() - PLAYER_SEARCHING_RADIUS,
+						this.pos.getZ() - PLAYER_SEARCHING_RADIUS),
+				new BlockPos(this.pos.getX() + PLAYER_SEARCHING_RADIUS + 2.0F, this.pos.getY() + PLAYER_SEARCHING_RADIUS,
+						this.pos.getZ() + PLAYER_SEARCHING_RADIUS + 2.0F));
 
+		List<EntityPlayer> players = this.world.getEntitiesWithinAABB(EntityPlayer.class, searchingBB);
+
+		if (this.world.isRemote)
+		{
+			PlayerAether playerAether = PlayerAether.getPlayer(Minecraft.getMinecraft().player);
+
+			BlockPosDimension p = playerAether.getCampfiresModule().getLastCampfire();
+
+			if (p != null && p.getX() == this.pos.getX() && p.getY() == this.pos.getY() && p.getZ() == this.pos.getZ() && p.getDim() == this.world.provider
+					.getDimension())
+			{
+				AetherCore.PROXY.spawnCampfireParticles(this.world, this.pos.getX() + 1.0D, this.pos.getY(), this.pos.getZ() + 1.0D);
+			}
+		}
+
+		for (EntityPlayer player : players)
+		{
+			PlayerAether playerAether = PlayerAether.getPlayer(player);
+
+			BlockPosDimension p = playerAether.getCampfiresModule().getLastCampfire();
+
+			if (p == null || p.getX() != this.pos.getX() || p.getY() != this.pos.getY() || p.getZ() != this.pos.getZ() || p.getDim() != this.world.provider
+					.getDimension())
+			{
+				playerAether.getCampfiresModule().setLastCampfire(new BlockPosDimension(this.pos, this.world.provider.getDimension()));
+
+				AetherCore.PROXY.spawnCampfireStartParticles(this.world, this.pos.getX() + 1.0D, this.pos.getY(), this.pos.getZ() + 1.0D);
+			}
+		}
 	}
 
 }

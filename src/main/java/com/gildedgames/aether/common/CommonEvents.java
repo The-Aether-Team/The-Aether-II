@@ -91,6 +91,11 @@ public class CommonEvents
 			EntityPlayer player = (EntityPlayer) event.getEntity();
 			PlayerAether playerAether = PlayerAether.getPlayer(player);
 
+			if (player.getEntityWorld().provider.getDimensionType() != DimensionsAether.AETHER)
+			{
+				return;
+			}
+
 			if (player.openContainer instanceof ContainerLoadingScreen)
 			{
 				if (PrepHelper.isSectorLoaded(player.getEntityWorld(), player.chunkCoordX, player.chunkCoordZ))

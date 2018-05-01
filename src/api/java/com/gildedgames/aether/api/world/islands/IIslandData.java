@@ -55,19 +55,19 @@ public interface IIslandData extends NBT
 	IIslandGenerator getGenerator();
 
 	/**
-	 * Returns the respawn point of this island.
+	 * Returns the position of the Outpost on this island.
 	 *
-	 * @return The {@link BlockPos} of this island's respawn point, null if it doesn't exist
+	 * @return The {@link BlockPos} of this island's Outpost, null if it doesn't exist
 	 */
 	@Nullable
-	BlockPos getRespawnPoint();
+	BlockPos getOutpostPos();
 
 	/**
-	 * Sets the respawn point of this island and marks this island for saving.
+	 * Sets the position of the Outpost on this island.
 	 *
 	 * @param pos The {@link BlockPos} of the new respawn point, null to remove it.
 	 */
-	void setRespawnPoint(@Nullable BlockPos pos);
+	void setOutpostPos(@Nullable BlockPos pos);
 
 	/**
 	 * Returns the seed of the island used for generation.
