@@ -268,12 +268,29 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 						{
 							primer.setBlockState(x, y, z, magnetic ? BlocksAether.ferrosite.getDefaultState() : stoneBlock);
 						}
+					}
 
-						if (lakeNoise >= this.v.getLakeThreshold())
+					if (lakeNoise >= this.v.getLakeThreshold())
+					{
+						for (int y = 100 + this.v.getCoastHeight() - 1; y >= 100; y--)
 						{
-							if (y >= 100 && y <= 100 + this.v.getCoastHeight() - 1)
+							IBlockState found = primer.getBlockState(x, y, z);
+
+							if (found == stoneBlock)
 							{
-								primer.setBlockState(x, y, z, coastBlock);
+								IBlockState up = primer.getBlockState(x, y + 1, z);
+
+								if (up != Blocks.AIR.getDefaultState())
+								{
+									break;
+								}
+
+								if (y >= 100 && y <= 100 + this.v.getCoastHeight() - 1)
+								{
+									primer.setBlockState(x, y, z, coastBlock);
+								}
+
+								break;
 							}
 						}
 					}
