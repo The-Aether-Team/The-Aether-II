@@ -2,6 +2,7 @@ package com.gildedgames.aether.client.gui.misc;
 
 import com.gildedgames.aether.client.ClientEventHandler;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.util.helpers.MathUtil;
 import com.gildedgames.orbis_api.client.PartialTicks;
 import com.gildedgames.orbis_api.client.gui.data.Text;
 import com.gildedgames.orbis_api.client.gui.util.GuiFrame;
@@ -89,7 +90,7 @@ public class GuiAetherLoading extends GuiFrame implements CustomLoadingRenderer.
 
 		if (this.mc.world != null)
 		{
-			if (!MathHelper.epsilonEquals(PERCENT, this.lastPercent) && PERCENT > 0.0F)
+			if (!MathUtil.epsilonEquals(PERCENT, this.lastPercent) && PERCENT > 0.0F)
 			{
 				this.lastPercent = PERCENT;
 

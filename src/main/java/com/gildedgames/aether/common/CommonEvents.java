@@ -18,6 +18,7 @@ import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketCloseLoadingScreen;
 import com.gildedgames.aether.common.network.packets.PacketLoadingScreenPercent;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
+import com.gildedgames.aether.common.util.helpers.MathUtil;
 import com.gildedgames.aether.common.util.helpers.PlayerUtil;
 import com.gildedgames.aether.common.world.aether.TeleporterAether;
 import com.gildedgames.orbis_api.preparation.impl.capability.PrepHelper;
@@ -131,7 +132,7 @@ public class CommonEvents
 
 						float percent = ((float) count / (diam * diam)) * 100.0F;
 
-						if (!MathHelper.epsilonEquals(playerAether.getTeleportingModule().getLastPercent(), percent))
+						if (!MathUtil.epsilonEquals(playerAether.getTeleportingModule().getLastPercent(), percent))
 						{
 							playerAether.getTeleportingModule().setLastPercent(percent);
 
