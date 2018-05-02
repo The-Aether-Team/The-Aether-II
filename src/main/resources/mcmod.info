@@ -8,7 +8,7 @@
     "mcversion": "${mcversion}",
     "authorList": [ "Oscar Payn", "Brandon James Pearce", "Hugo Payn", "Jaryt Bustard", "Christian Peterson" ],
     "url": "https://aether.gildedgames.com",
-    "credits": "Designed and developed by Gilded Games with <3. Made possible thanks to our supporters on Patreon, and with special thanks to our project reporters, contributors, and moderation team.\nContributors: JellySquid, Emile van Krieken, Bluexin, Jonathan Lachney",
+    "credits": "Designed and developed by Gilded Games with <3. Made possible thanks to our supporters on Patreon, and with special thanks to our project reporters, contributors, and moderation team.\nContributors: JellySquid, Emile van Krieken, Bluexin, Jonathan Lachney, ETStarLight",
     "logoFile": "/assets/aether/full-logo.png"
   }]
 }
