@@ -117,7 +117,15 @@ public class EntityEdison extends EntityNPC
 			if (!player.world.isRemote)
 			{
 				final IPlayerAether aePlayer = PlayerAether.getPlayer(player);
-				aePlayer.getDialogController().openScene(AetherCore.getResource("edison/outpost_greet"));
+
+				if (((PlayerAether) aePlayer).hasDiedInAetherBefore())
+				{
+					aePlayer.getDialogController().openScene(AetherCore.getResource("edison/outpost_greet"));
+				}
+				else
+				{
+					aePlayer.getDialogController().openScene(AetherCore.getResource("edison/generic_busy"));
+				}
 			}
 		}
 
