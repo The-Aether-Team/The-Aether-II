@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.registry;
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.decorative.*;
+import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.recipes.simple.SimpleRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -174,7 +175,10 @@ public class SimpleRecipesAether
 				new ItemStack(BlocksAether.therawood_planks, 1, OreDictionary.WILDCARD_VALUE));
 		addMasonry(new ItemStack(BlocksAether.therawood_decorative, 1, BlockTherawoodDecorative.HIGHLIGHT.getMeta()),
 				new ItemStack(BlocksAether.therawood_planks, 1, OreDictionary.WILDCARD_VALUE));
-		addMasonry(new ItemStack(BlocksAether.therawood_beam), new ItemStack(BlocksAether.therawood_planks, 1, OreDictionary.WILDCARD_VALUE));
+
+		addMasonry(new ItemStack(ItemsAether.secret_skyroot_door), new ItemStack(ItemsAether.skyroot_door, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.secret_skyroot_trapdoor), new ItemStack(BlocksAether.skyroot_trapdoor, 1, OreDictionary.WILDCARD_VALUE));
+
 	}
 
 	public static void postInit()
