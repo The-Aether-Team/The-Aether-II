@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.capabilities.entity.player.modules;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.items.IDropOnDeath;
+import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.orbis_api.util.io.NBTFunnel;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.item.EntityItem;
@@ -45,9 +46,12 @@ public class PlayerPreventDropsModule extends PlayerAetherModule
 	{
 		EntityPlayer player = (EntityPlayer) event.getEntity();
 
-		this.setIfShouldKeep(player.inventory.mainInventory, this.mainInventory, true);
-		this.setIfShouldKeep(player.inventory.armorInventory, this.armorInventory, true);
-		this.setIfShouldKeep(player.inventory.offHandInventory, this.offHandInventory, true);
+		if (player.world.provider.getDimensionType() == DimensionsAether.AETHER)
+		{
+			this.setIfShouldKeep(player.inventory.mainInventory, this.mainInventory, true);
+			this.setIfShouldKeep(player.inventory.armorInventory, this.armorInventory, true);
+			this.setIfShouldKeep(player.inventory.offHandInventory, this.offHandInventory, true);
+		}
 	}
 
 	public void setIfShouldKeep(List<ItemStack> from, List<ItemStack> to, boolean shouldKeepCheck)
@@ -66,17 +70,20 @@ public class PlayerPreventDropsModule extends PlayerAetherModule
 	@Override
 	public void onDrops(PlayerDropsEvent event)
 	{
-		List<EntityItem> toRemove = Lists.newArrayList();
-
-		for (EntityItem item : event.getDrops())
+		if (event.getEntityPlayer().world.provider.getDimensionType() == DimensionsAether.AETHER)
 		{
-			if (item != null && shouldKeepOnDeath(item.getItem()))
-			{
-				toRemove.add(item);
-			}
-		}
+			List<EntityItem> toRemove = Lists.newArrayList();
 
-		event.getDrops().removeAll(toRemove);
+			for (EntityItem item : event.getDrops())
+			{
+				if (item != null && shouldKeepOnDeath(item.getItem()))
+				{
+					toRemove.add(item);
+				}
+			}
+
+			event.getDrops().removeAll(toRemove);
+		}
 	}
 
 	@Override
@@ -84,13 +91,16 @@ public class PlayerPreventDropsModule extends PlayerAetherModule
 	{
 		EntityPlayer player = event.player;
 
-		this.setIfShouldKeep(this.mainInventory, player.inventory.mainInventory, false);
-		this.setIfShouldKeep(this.armorInventory, player.inventory.armorInventory, false);
-		this.setIfShouldKeep(this.offHandInventory, player.inventory.offHandInventory, false);
+		if (player.world.provider.getDimensionType() == DimensionsAether.AETHER)
+		{
+			this.setIfShouldKeep(this.mainInventory, player.inventory.mainInventory, false);
+			this.setIfShouldKeep(this.armorInventory, player.inventory.armorInventory, false);
+			this.setIfShouldKeep(this.offHandInventory, player.inventory.offHandInventory, false);
 
-		this.mainInventory.clear();
-		this.armorInventory.clear();
-		this.offHandInventory.clear();
+			this.mainInventory.clear();
+			this.armorInventory.clear();
+			this.offHandInventory.clear();
+		}
 	}
 
 	@Override
