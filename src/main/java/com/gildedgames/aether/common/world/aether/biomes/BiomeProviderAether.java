@@ -149,18 +149,18 @@ public class BiomeProviderAether extends BiomeProvider
 	@Override
 	public Biome[] getBiomes(@Nullable Biome[] listToReuse, final int x, final int z, final int width, final int length, final boolean cacheFlag)
 	{
-		if (!WorldObjectManager.hasWorldSeed(this.world.provider.getDimension()))
-		{
-			Arrays.fill(listToReuse, BiomesAether.VOID);
-
-			return listToReuse;
-		}
-
 		IntCache.resetIntCache();
 
 		if (listToReuse == null || listToReuse.length < width * length)
 		{
 			listToReuse = new Biome[width * length];
+		}
+
+		if (!WorldObjectManager.hasWorldSeed(this.world.provider.getDimension()))
+		{
+			Arrays.fill(listToReuse, BiomesAether.VOID);
+
+			return listToReuse;
 		}
 
 		if (cacheFlag && width == 16 && length == 16 && (x & 15) == 0 && (z & 15) == 0)
