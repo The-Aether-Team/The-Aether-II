@@ -33,7 +33,7 @@ public class ItemAetherGloves extends Item
 					.getResource("textures/armor/" + ItemAetherArmor.PATRON_TEXTURE_TEMP_OVERRIDE + "_gloves.png");
 		}
 
-		if (ItemAetherArmor.RENDER_NORMAL_TEMP)
+		if (!ItemAetherArmor.RENDER_NORMAL_TEMP)
 		{
 			PlayerAether playerAether = PlayerAether.getPlayer(player);
 
