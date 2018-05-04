@@ -36,7 +36,7 @@ public class GuiAetherLoading extends GuiFrame implements CustomLoadingRenderer.
 	{
 		super.onGuiClosed();
 
-		preventInnerTyping = true;
+		preventInnerTyping = false;
 	}
 
 	@Override

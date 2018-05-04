@@ -67,6 +67,8 @@ public class GuiPatronRewards extends GuiFrame implements IListNavigatorListener
 		PlayerAether playerAether = PlayerAether.getPlayer(Minecraft.getMinecraft().player);
 
 		this.patronRewards = playerAether.getPatronRewardsModule();
+
+		this.allowUserInput = true;
 	}
 
 	@Override
