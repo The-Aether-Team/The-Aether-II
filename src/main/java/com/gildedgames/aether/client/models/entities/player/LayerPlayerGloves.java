@@ -60,12 +60,12 @@ public class LayerPlayerGloves extends LayerBipedArmor
 			if (skinType.equals("slim"))
 			{
 				GlStateManager.scale(0.7F, 1F, 0.7F);
-				GlStateManager.translate(left ? -0.15 : 0.15, 0.06F, -0.03F);
+				GlStateManager.translate(left ? -0.15 : 0.15, -0.04F, -0.03F);
 			}
 			else
 			{
 				GlStateManager.scale(0.725F, 1F, 0.725F);
-				GlStateManager.translate(left ? -0.17 : 0.17, 0.01F, -0.03F);
+				GlStateManager.translate(left ? -0.17 : 0.17, -0.05F, -0.03F);
 			}
 
 			this.renderer.bindTexture(glove.getGloveTexture(player.getEntity()));
