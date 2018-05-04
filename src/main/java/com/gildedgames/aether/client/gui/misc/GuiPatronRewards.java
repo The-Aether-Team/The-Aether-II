@@ -2,7 +2,6 @@ package com.gildedgames.aether.client.gui.misc;
 
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.patron.IPatronReward;
-import com.gildedgames.aether.api.patron.IPatronRewardRenderer;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerPatronRewards;
@@ -53,29 +52,7 @@ public class GuiPatronRewards extends GuiFrame implements IListNavigatorListener
 
 	private IPatronReward selected;
 
-	private PatronRewardArmor defaultArmor = new PatronRewardArmor("Default", PatronRewards.armorIcon("default"), () -> "", null, (d) -> true)
-	{
-		private final IPatronRewardRenderer NO_OP = new IPatronRewardRenderer()
-		{
-			@Override
-			public void renderInit()
-			{
-				// NO-OP
-			}
-
-			@Override
-			public void renderPreview(int posX, int posY)
-			{
-				// NO-OP
-			}
-		};
-
-		@Override
-		public IPatronRewardRenderer getPreviewRenderer()
-		{
-			return this.NO_OP;
-		}
-	};
+	private PatronRewardArmor defaultArmor = new PatronRewardArmor("Default", PatronRewards.armorIcon("default"), () -> null, null, (d) -> true);
 
 	private GuiText useText;
 

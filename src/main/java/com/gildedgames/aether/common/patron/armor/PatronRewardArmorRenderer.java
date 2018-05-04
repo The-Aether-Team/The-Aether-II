@@ -6,7 +6,6 @@ import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
 import com.gildedgames.orbis_api.util.InputHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
-import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
@@ -18,11 +17,7 @@ public class PatronRewardArmorRenderer implements IPatronRewardRenderer
 {
 	private PatronRewardArmor reward;
 
-	private ModelBiped modelLeggings;
-
-	private ModelBiped modelArmor;
-
-	private AbstractClientPlayer fakePlayer;
+	private AbstractClientPlayer player;
 
 	public PatronRewardArmorRenderer(PatronRewardArmor reward)
 	{
@@ -32,10 +27,7 @@ public class PatronRewardArmorRenderer implements IPatronRewardRenderer
 	@Override
 	public void renderInit()
 	{
-		this.modelLeggings = new ModelBiped(0.5F);
-		this.modelArmor = new ModelBiped(1.0F);
-
-		this.fakePlayer = Minecraft.getMinecraft().player;
+		this.player = Minecraft.getMinecraft().player;
 	}
 
 	@Override
@@ -54,20 +46,20 @@ public class PatronRewardArmorRenderer implements IPatronRewardRenderer
 
 		GlStateManager.rotate(180.0F, 0.0F, 0.0F, 1.0F);
 
-		float f = this.fakePlayer.renderYawOffset;
-		float f1 = this.fakePlayer.rotationYaw;
-		float f2 = this.fakePlayer.rotationPitch;
-		float f3 = this.fakePlayer.prevRotationYawHead;
-		float f4 = this.fakePlayer.rotationYawHead;
+		float f = this.player.renderYawOffset;
+		float f1 = this.player.rotationYaw;
+		float f2 = this.player.rotationPitch;
+		float f3 = this.player.prevRotationYawHead;
+		float f4 = this.player.rotationYawHead;
 		GlStateManager.rotate(135.0F, 0.0F, 1.0F, 0.0F);
 		RenderHelper.enableStandardItemLighting();
 		GlStateManager.rotate(-135.0F, 0.0F, 1.0F, 0.0F);
 		GlStateManager.rotate(-((float) Math.atan(mouseY / 40.0F)) * 20.0F, 1.0F, 0.0F, 0.0F);
-		this.fakePlayer.renderYawOffset = (float) Math.atan(mouseX / 40.0F) * 20.0F;
-		this.fakePlayer.rotationYaw = (float) Math.atan(mouseX / 40.0F) * 40.0F;
-		this.fakePlayer.rotationPitch = -((float) Math.atan(mouseY / 40.0F)) * 20.0F;
-		this.fakePlayer.rotationYawHead = this.fakePlayer.rotationYaw;
-		this.fakePlayer.prevRotationYawHead = this.fakePlayer.rotationYaw;
+		this.player.renderYawOffset = (float) Math.atan(mouseX / 40.0F) * 20.0F;
+		this.player.rotationYaw = (float) Math.atan(mouseX / 40.0F) * 40.0F;
+		this.player.rotationPitch = -((float) Math.atan(mouseY / 40.0F)) * 20.0F;
+		this.player.rotationYawHead = this.player.rotationYaw;
+		this.player.prevRotationYawHead = this.player.rotationYaw;
 		GlStateManager.translate(0.0F, 0.0F, 0.0F);
 
 		RenderManager rendermanager = Minecraft.getMinecraft().getRenderManager();
@@ -77,34 +69,42 @@ public class PatronRewardArmorRenderer implements IPatronRewardRenderer
 
 		rendermanager.setRenderShadow(false);
 
-		ItemStack head = this.fakePlayer.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
-		ItemStack chest = this.fakePlayer.getItemStackFromSlot(EntityEquipmentSlot.CHEST);
-		ItemStack legs = this.fakePlayer.getItemStackFromSlot(EntityEquipmentSlot.LEGS);
-		ItemStack feet = this.fakePlayer.getItemStackFromSlot(EntityEquipmentSlot.FEET);
+		String texture = this.reward.getArmorTextureName();
 
-		this.fakePlayer.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(ItemsAether.gravitite_helmet));
-		this.fakePlayer.setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(ItemsAether.gravitite_chestplate));
-		this.fakePlayer.setItemStackToSlot(EntityEquipmentSlot.LEGS, new ItemStack(ItemsAether.gravitite_leggings));
-		this.fakePlayer.setItemStackToSlot(EntityEquipmentSlot.FEET, new ItemStack(ItemsAether.gravitite_boots));
+		ItemStack head = this.player.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
+		ItemStack chest = this.player.getItemStackFromSlot(EntityEquipmentSlot.CHEST);
+		ItemStack legs = this.player.getItemStackFromSlot(EntityEquipmentSlot.LEGS);
+		ItemStack feet = this.player.getItemStackFromSlot(EntityEquipmentSlot.FEET);
 
-		ItemAetherArmor.PATRON_TEXTURE_TEMP_OVERRIDE = this.reward.getArmorTextureName();
+		if (texture != null)
+		{
+			this.player.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(ItemsAether.gravitite_helmet));
+			this.player.setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(ItemsAether.gravitite_chestplate));
+			this.player.setItemStackToSlot(EntityEquipmentSlot.LEGS, new ItemStack(ItemsAether.gravitite_leggings));
+			this.player.setItemStackToSlot(EntityEquipmentSlot.FEET, new ItemStack(ItemsAether.gravitite_boots));
 
-		rendermanager.renderEntity(this.fakePlayer, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F, false);
+			ItemAetherArmor.PATRON_TEXTURE_TEMP_OVERRIDE = this.reward.getArmorTextureName();
+		}
 
-		ItemAetherArmor.PATRON_TEXTURE_TEMP_OVERRIDE = null;
+		rendermanager.renderEntity(this.player, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F, false);
 
-		this.fakePlayer.setItemStackToSlot(EntityEquipmentSlot.HEAD, head);
-		this.fakePlayer.setItemStackToSlot(EntityEquipmentSlot.CHEST, chest);
-		this.fakePlayer.setItemStackToSlot(EntityEquipmentSlot.LEGS, legs);
-		this.fakePlayer.setItemStackToSlot(EntityEquipmentSlot.FEET, feet);
+		if (texture != null)
+		{
+			ItemAetherArmor.PATRON_TEXTURE_TEMP_OVERRIDE = null;
+
+			this.player.setItemStackToSlot(EntityEquipmentSlot.HEAD, head);
+			this.player.setItemStackToSlot(EntityEquipmentSlot.CHEST, chest);
+			this.player.setItemStackToSlot(EntityEquipmentSlot.LEGS, legs);
+			this.player.setItemStackToSlot(EntityEquipmentSlot.FEET, feet);
+		}
 
 		rendermanager.setRenderShadow(true);
 
-		this.fakePlayer.renderYawOffset = f;
-		this.fakePlayer.rotationYaw = f1;
-		this.fakePlayer.rotationPitch = f2;
-		this.fakePlayer.prevRotationYawHead = f3;
-		this.fakePlayer.rotationYawHead = f4;
+		this.player.renderYawOffset = f;
+		this.player.rotationYaw = f1;
+		this.player.rotationPitch = f2;
+		this.player.prevRotationYawHead = f3;
+		this.player.rotationYawHead = f4;
 
 		RenderHelper.disableStandardItemLighting();
 		GlStateManager.disableRescaleNormal();
