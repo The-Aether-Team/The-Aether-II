@@ -170,16 +170,17 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 
 		final Color base = genePool.getFeathers().gene().data();
 
-		GL11.glColor3f(base.getRed() / 255f, base.getGreen()/ 255f, base.getBlue() / 255f);
-		this.renderManager.renderEngine.bindTexture(BODY);
-		model.render(entity, par2, par3, par4, par5, par6, par7);
-
 		float[] hsb = new float[3];
 
 		Color.RGBtoHSB(base.getRed(), base.getGreen(), base.getBlue(), hsb);
 		Color highlight = Color.getHSBColor(hsb[0] + 13f / 255f, hsb[1] + 26f / 255f, hsb[2] + .001f);
 
-		GlStateManager.color(highlight.getRed() / 255f, highlight.getGreen()/ 255f, highlight.getBlue() / 255f);
+		GL11.glColor3f(highlight.getRed() / 255f, highlight.getGreen()/ 255f, highlight.getBlue() / 255f);
+		this.renderManager.renderEngine.bindTexture(BODY);
+		model.render(entity, par2, par3, par4, par5, par6, par7);
+
+
+		GlStateManager.color(base.getRed() / 255f, base.getGreen()/ 255f, base.getBlue() / 255f);
 
 		this.renderManager.renderEngine.bindTexture(BODY_HIGHLIGHT);
 		model.render(entity, par2, par3, par4, par5, par6, par7);
