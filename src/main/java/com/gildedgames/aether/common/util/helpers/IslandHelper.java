@@ -4,7 +4,7 @@ import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.world.aether.prep.PrepSectorDataAether;
 import com.gildedgames.orbis_api.preparation.IPrepSector;
-import com.gildedgames.orbis_api.preparation.impl.capability.PrepHelper;
+import com.gildedgames.orbis_api.preparation.impl.util.PrepHelper;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 

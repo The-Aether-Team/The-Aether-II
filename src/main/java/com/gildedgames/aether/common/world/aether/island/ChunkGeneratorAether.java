@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.world.aether.island;
 
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.common.util.helpers.IslandHelper;
+import com.gildedgames.aether.common.world.aether.WorldProviderAether;
 import com.gildedgames.orbis_api.core.BlockDataChunk;
 import com.gildedgames.orbis_api.core.ICreationData;
 import com.gildedgames.orbis_api.core.PlacedBlueprint;
@@ -43,7 +44,7 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		}
 
 		this.rand = new Random(seed);
-		this.preparation = new WorldPreparationAether(this.world, this.rand);
+		this.preparation = new WorldPreparationAether(this.world, this.rand, WorldProviderAether.get(world).getNoise());
 	}
 
 	public WorldPreparationAether getPreparation()

@@ -10,6 +10,7 @@ import com.gildedgames.orbis_api.preparation.impl.PrepTasks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -135,7 +136,13 @@ public class AetherCore
 	{
 		AetherCore.SPAWN_REGISTRY.read();
 
-		PrepTasks.prepSector(DimensionManager.getWorld(CONFIG.getAetherDimID()), 0, 0);
+		World world = DimensionManager.getWorld(CONFIG.getAetherDimID());
+
+		// TODO: In SpongeForge, the world is not loaded yet for some reason?
+		if (world != null)
+		{
+			PrepTasks.prepSector(world, 0, 0);
+		}
 	}
 
 	@EventHandler

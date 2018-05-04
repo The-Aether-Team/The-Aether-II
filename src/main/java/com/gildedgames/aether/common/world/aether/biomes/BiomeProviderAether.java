@@ -5,7 +5,7 @@ import com.gildedgames.aether.common.world.aether.prep.PrepSectorDataAether;
 import com.gildedgames.orbis_api.preparation.IPrepManager;
 import com.gildedgames.orbis_api.preparation.IPrepSector;
 import com.gildedgames.orbis_api.preparation.IPrepSectorAccess;
-import com.gildedgames.orbis_api.preparation.impl.capability.PrepHelper;
+import com.gildedgames.orbis_api.preparation.impl.util.PrepHelper;
 import com.gildedgames.orbis_api.world.WorldObjectManager;
 import com.google.common.collect.Lists;
 import net.minecraft.util.math.BlockPos;

@@ -14,6 +14,7 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockValkyrieGrass;
 import com.gildedgames.aether.common.registry.content.GenerationAether;
 import com.gildedgames.aether.common.util.helpers.IslandHelper;
+import com.gildedgames.aether.common.world.aether.WorldProviderAether;
 import com.gildedgames.aether.common.world.aether.features.*;
 import com.gildedgames.aether.common.world.aether.features.aerclouds.WorldGenAercloud;
 import com.gildedgames.aether.common.world.aether.features.aerclouds.WorldGenPurpleAercloud;
@@ -289,24 +290,14 @@ public class BiomeAetherDecorator
 		}
 
 		//Decorate SubBiomes
-		if (genBase instanceof BiomeAetherBase)
-		{
-			final BiomeAetherBase biome = (BiomeAetherBase) genBase;
-			IBlockAccessExtended blockAccessExtended = new BlockAccessExtendedWrapper(world);
+		IBlockAccessExtended blockAccessExtended = new BlockAccessExtendedWrapper(world);
 
-			WorldDecorationUtil.generateDecorations(island.getBasicDecorations(), blockAccessExtended, random, pos);
+		WorldDecorationUtil.generateDecorations(island.getBasicDecorations(), blockAccessExtended, random, pos);
 
-			final IChunkGenerator generator = ((WorldServer) world).getChunkProvider().chunkGenerator;
+		final WorldProviderAether provider = WorldProviderAether.get(world);
 
-			if (generator instanceof ChunkGeneratorAether)
-			{
-				final ChunkGeneratorAether aetherGen = (ChunkGeneratorAether) generator;
-
-				final OpenSimplexNoise noise = aetherGen.getPreparation().getNoise();
-				WorldDecorationUtil.generateDecorationsWithNoise(island.getTreeDecorations(), blockAccessExtended, random, pos, noise,
-						island.getOpenAreaDecorationGenChance(), island.getForestTreeCountModifier());
-			}
-		}
+		WorldDecorationUtil.generateDecorationsWithNoise(island.getTreeDecorations(), blockAccessExtended, random, pos, provider.getNoise(),
+				island.getOpenAreaDecorationGenChance(), island.getForestTreeCountModifier());
 
 		// Moa Nests
 		if (random.nextInt(4) == 0)

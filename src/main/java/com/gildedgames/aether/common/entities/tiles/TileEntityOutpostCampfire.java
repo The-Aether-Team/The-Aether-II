@@ -2,7 +2,6 @@ package com.gildedgames.aether.common.entities.tiles;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.multiblock.BlockMultiController;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.entities.tiles.multiblock.TileEntityMultiblockController;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
@@ -21,6 +20,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class TileEntityOutpostCampfire extends TileEntityMultiblockController im
 
 	public TileEntityOutpostCampfire()
 	{
-		super((BlockMultiController) BlocksAether.outpost_campfire, BlocksAether.multiblock_dummy_half);
+		super(BlocksAether.outpost_campfire, BlocksAether.multiblock_dummy_half);
 	}
 
 	@Override
@@ -52,7 +53,7 @@ public class TileEntityOutpostCampfire extends TileEntityMultiblockController im
 			final MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
 
 			final Teleporter teleporter = new TeleporterGeneric(server.getWorld(player.dimension));
-			final PlayerList playerList = server.getPlayerList();
+			PlayerList playerList = server.getPlayerList();
 			playerList.transferPlayerToDimension(playerMP, pos.getDim(), teleporter);
 			player.timeUntilPortal = player.getPortalCooldown();
 
@@ -65,6 +66,17 @@ public class TileEntityOutpostCampfire extends TileEntityMultiblockController im
 	public ItemStack getPickedStack(final World world, final BlockPos pos, final IBlockState state)
 	{
 		return new ItemStack(BlocksAether.outpost_campfire);
+	}
+
+	@SideOnly(Side.CLIENT)
+	public void clientUpdate()
+	{
+		PlayerAether playerAether = PlayerAether.getPlayer(Minecraft.getMinecraft().player);
+
+		if (playerAether.getCampfiresModule().hasCampfire(this.posDim))
+		{
+			AetherCore.PROXY.spawnCampfireParticles(this.world, this.pos.getX() + 1.0D, this.pos.getY(), this.pos.getZ() + 1.0D);
+		}
 	}
 
 	@Override
@@ -85,12 +97,7 @@ public class TileEntityOutpostCampfire extends TileEntityMultiblockController im
 
 		if (this.world.isRemote)
 		{
-			PlayerAether playerAether = PlayerAether.getPlayer(Minecraft.getMinecraft().player);
-
-			if (playerAether.getCampfiresModule().hasCampfire(this.posDim))
-			{
-				AetherCore.PROXY.spawnCampfireParticles(this.world, this.pos.getX() + 1.0D, this.pos.getY(), this.pos.getZ() + 1.0D);
-			}
+			this.clientUpdate();
 		}
 
 		for (EntityPlayer player : players)

@@ -34,27 +34,22 @@ public class WorldPreparationAether
 
 	private final NoiseGeneratorPerlin surfaceNoise;
 
-	private final OpenSimplexNoise noise;
-
 	private double[] depthBuffer;
 
-	public WorldPreparationAether(final World world, final Random rand)
+	private OpenSimplexNoise noise;
+
+	public WorldPreparationAether(final World world, final Random rand, OpenSimplexNoise noise)
 	{
 		this.world = world;
 		this.rand = rand;
 
-		this.access = new BlockAccessExtendedWrapper(this.world);
+		this.noise = noise;
 
-		this.noise = new OpenSimplexNoise(world.getSeed());
+		this.access = new BlockAccessExtendedWrapper(this.world);
 
 		this.surfaceNoise = new NoiseGeneratorPerlin(this.rand, 4);
 
 		this.caveGenerator = new WorldGenAetherCaves();
-	}
-
-	public OpenSimplexNoise getNoise()
-	{
-		return this.noise;
 	}
 
 	public void generateBaseTerrain(Biome[] biomes, final ChunkPrimer primer, final IIslandData island, final int chunkX, final int chunkZ)

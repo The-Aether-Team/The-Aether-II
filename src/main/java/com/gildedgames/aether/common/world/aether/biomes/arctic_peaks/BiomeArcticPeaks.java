@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.world.aether.biomes.arctic_peaks;
 
-import com.gildedgames.aether.api.util.OpenSimplexNoise;
 import com.gildedgames.aether.api.world.generation.WorldDecoration;
 import com.gildedgames.aether.api.world.generation.WorldDecorationSimple;
 import com.gildedgames.aether.api.world.islands.IIslandData;
@@ -10,8 +9,8 @@ import com.gildedgames.aether.common.blocks.IBlockSnowy;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.registry.content.GenerationAether;
 import com.gildedgames.aether.common.util.helpers.IslandHelper;
+import com.gildedgames.aether.common.world.aether.WorldProviderAether;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
-import com.gildedgames.aether.common.world.aether.island.ChunkGeneratorAether;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandVariables;
 import com.gildedgames.aether.common.world.aether.island.gen.highlands.IslandGeneratorHighlands;
 import com.gildedgames.aether.common.world.templates.TemplateWorldGen;
@@ -24,8 +23,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
-import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -107,74 +104,66 @@ public class BiomeArcticPeaks extends BiomeAetherBase
 			return;
 		}
 
-		final IChunkGenerator generator = ((WorldServer) world).getChunkProvider().chunkGenerator;
+		WorldProviderAether provider = WorldProviderAether.get(world);
 
-		if (generator instanceof ChunkGeneratorAether)
+		final double[] heightMap = IslandGeneratorHighlands.generateNoise(provider.getNoise(), island, chunkX, chunkZ, 0, 300.0D);
+
+		final int posX = pos.getX() + 8;
+		final int posZ = pos.getZ() + 8;
+
+		final double centerX = island.getBounds().getCenterX();
+		final double centerZ = island.getBounds().getCenterZ();
+
+		final double radiusX = island.getBounds().getWidth() / 2.0;
+		final double radiusZ = island.getBounds().getLength() / 2.0;
+
+		for (int x = 0; x < 16; x++)
 		{
-			final ChunkGeneratorAether aetherGen = (ChunkGeneratorAether) generator;
-
-			final OpenSimplexNoise noise = aetherGen.getPreparation().getNoise();
-
-			final double[] heightMap = IslandGeneratorHighlands.generateNoise(noise, island, chunkX, chunkZ, 0, 300.0D);
-
-			final int posX = pos.getX() + 8;
-			final int posZ = pos.getZ() + 8;
-
-			final double centerX = island.getBounds().getCenterX();
-			final double centerZ = island.getBounds().getCenterZ();
-
-			final double radiusX = island.getBounds().getWidth() / 2.0;
-			final double radiusZ = island.getBounds().getLength() / 2.0;
-
-			for (int x = 0; x < 16; x++)
+			for (int z = 0; z < 16; z++)
 			{
-				for (int z = 0; z < 16; z++)
+				final BlockPos p = new BlockPos(posX + x, 0, posZ + z);
+
+				if (world.isBlockLoaded(p))
 				{
-					final BlockPos p = new BlockPos(posX + x, 0, posZ + z);
+					final int worldX = posX + x;
+					final int worldZ = posZ + z;
 
-					if (world.isBlockLoaded(p))
+					final double distX = Math.abs((centerX - worldX) * (1.0 / radiusX));
+					final double distZ = Math.abs((centerZ - worldZ) * (1.0 / radiusZ));
+
+					// Get distance from center of Island
+					final double dist = Math.sqrt(distX * distX + distZ * distZ) / 1.0D;
+
+					final double sample = IslandGeneratorHighlands.interpolate(heightMap, x, z);
+					final double heightSample = sample + 1.0 - dist;
+
+					final BlockPos blockpos1 = p.add(0, world.getHeight(posX + x, posZ + z), 0);
+					final BlockPos blockpos2 = blockpos1.down();
+
+					if (world.canBlockFreezeWater(blockpos2))
 					{
-						final int worldX = posX + x;
-						final int worldZ = posZ + z;
+						world.setBlockState(blockpos2, Blocks.ICE.getDefaultState(), 2);
+					}
 
-						final double distX = Math.abs((centerX - worldX) * (1.0 / radiusX));
-						final double distZ = Math.abs((centerZ - worldZ) * (1.0 / radiusZ));
+					if (heightSample > 0.5)
+					{
+						final IBlockState state = world.getBlockState(blockpos1);
+						final Block block = state.getBlock();
 
-						// Get distance from center of Island
-						final double dist = Math.sqrt(distX * distX + distZ * distZ) / 1.0D;
-
-						final double sample = IslandGeneratorHighlands.interpolate(heightMap, x, z);
-						final double heightSample = sample + 1.0 - dist;
-
-						final BlockPos blockpos1 = p.add(0, world.getHeight(posX + x, posZ + z), 0);
-						final BlockPos blockpos2 = blockpos1.down();
-
-						if (world.canBlockFreezeWater(blockpos2))
+						if (world.canSnowAt(blockpos1, true))
 						{
-							world.setBlockState(blockpos2, Blocks.ICE.getDefaultState(), 2);
+							world.setBlockState(blockpos1, Blocks.SNOW_LAYER.getDefaultState(), 2);
 						}
-
-						if (heightSample > 0.5)
+						else if (block instanceof IBlockSnowy)
 						{
-							final IBlockState state = world.getBlockState(blockpos1);
-							final Block block = state.getBlock();
+							final IBlockState newState = state.withProperty(IBlockSnowy.PROPERTY_SNOWY, Boolean.TRUE);
 
-							if (world.canSnowAt(blockpos1, true))
-							{
-								world.setBlockState(blockpos1, Blocks.SNOW_LAYER.getDefaultState(), 2);
-							}
-							else if (block instanceof IBlockSnowy)
-							{
-								final IBlockState newState = state.withProperty(IBlockSnowy.PROPERTY_SNOWY, Boolean.TRUE);
-
-								world.setBlockState(blockpos1, newState, 2);
-							}
+							world.setBlockState(blockpos1, newState, 2);
 						}
 					}
 				}
 			}
 		}
-
 	}
 
 	@Override

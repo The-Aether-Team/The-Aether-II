@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.world.aether;
 
+import com.gildedgames.aether.api.util.OpenSimplexNoise;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeProviderAether;
@@ -10,6 +11,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldProviderSurface;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.IChunkGenerator;
@@ -22,12 +24,24 @@ public class WorldProviderAether extends WorldProviderSurface
 
 	private final float[] sunriseSunsetColors = new float[4];
 
+	private OpenSimplexNoise noise;
+
 	public WorldProviderAether()
 	{
 		if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
 		{
 			this.setupClientRenderer();
 		}
+	}
+
+	public static WorldProviderAether get(World world)
+	{
+		return (WorldProviderAether) world.provider;
+	}
+
+	public OpenSimplexNoise getNoise()
+	{
+		return this.noise;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -41,6 +55,7 @@ public class WorldProviderAether extends WorldProviderSurface
 	{
 		this.hasSkyLight = true;
 		this.biomeProvider = new BiomeProviderAether(this.world);
+		this.noise = new OpenSimplexNoise(this.world.getSeed());
 	}
 
 	@Override
