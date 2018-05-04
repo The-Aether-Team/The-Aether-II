@@ -23,6 +23,8 @@ public class ConfigAether
 
 	private boolean displayPerformanceIndicator;
 
+	private boolean transparentArmorFace;
+
 	public ConfigAether(final File file)
 	{
 		this.configuration = new Configuration(file, true);
@@ -47,6 +49,7 @@ public class ConfigAether
 
 		this.displayInventoryPattern = this.getBoolean(this.general, "Display Inventory Pattern", true);
 		this.displayPerformanceIndicator = this.getBoolean(this.general, "Display Performance Indicator", true);
+		this.transparentArmorFace = this.getBoolean(this.general, "Display Transparent Face Armor", false);
 
 		if (this.configuration.hasChanged())
 		{
@@ -101,5 +104,10 @@ public class ConfigAether
 	public boolean isAnalyticsEnabled()
 	{
 		return this.analyticsEnabled;
+	}
+
+	public boolean isTransparentArmorFace()
+	{
+		return this.transparentArmorFace;
 	}
 }

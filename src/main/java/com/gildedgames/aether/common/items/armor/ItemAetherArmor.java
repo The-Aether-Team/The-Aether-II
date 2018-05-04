@@ -69,6 +69,8 @@ public class ItemAetherArmor extends ItemArmor
 			}
 		}
 
-		return AetherCore.getResourcePath("textures/armor/" + this.name + "_layer_" + (slot == EntityEquipmentSlot.LEGS ? 2 : 1) + ".png");
+		return AetherCore.getResourcePath("textures/armor/" + this.name + "_layer_" + (slot == EntityEquipmentSlot.LEGS ?
+				2 :
+				String.valueOf(1) + (AetherCore.CONFIG.isTransparentArmorFace() ? "b" : "")) + ".png");
 	}
 }
