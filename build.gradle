@@ -18,7 +18,7 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'maven-publish'
 
 dependencies {
-	compile "com.gildedgames:orbis_api:1.0.2"
+	compile project(":OrbisAPI")
 }
 
 ext.config = loadConfig(file('build.properties'))

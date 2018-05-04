@@ -1,0 +1,3 @@
+[submodule "OrbisAPI"]
+	path = OrbisAPI
+	url = https://git.gildedgames.com/GildedGames/OrbisAPI.git
