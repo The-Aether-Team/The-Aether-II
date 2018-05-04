@@ -8,7 +8,6 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -70,7 +69,7 @@ public class RenderPlayerHelper
 
 		GlStateManager.pushMatrix();
 
-		Minecraft.getMinecraft().getTextureManager().bindTexture(glove.getGloveTexture(0));
+		Minecraft.getMinecraft().getTextureManager().bindTexture(glove.getGloveTexture(player));
 
 		final EnumHandSide hand = Minecraft.getMinecraft().gameSettings.mainHand;
 
@@ -159,12 +158,11 @@ public class RenderPlayerHelper
 			GlStateManager.translate(0.08F, 0.06F, 0.0F);
 		}
 
-		final Render<EntityPlayer> renderplayer = Minecraft.getMinecraft().getRenderManager().getEntityRenderObject(abstractclientplayer);
 		GlStateManager.disableCull();
 
 		if (flag)
 		{
-			final RenderLivingBase<?> playerRender = Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default");
+			final RenderLivingBase<?> playerRender = Minecraft.getMinecraft().getRenderManager().getSkinMap().get(skinType);
 
 			final ModelBiped t = new ModelBiped(1.0F);
 			t.bipedBody.showModel = true;
@@ -187,11 +185,6 @@ public class RenderPlayerHelper
 			GlStateManager.disableBlend();
 
 			GlStateManager.color(1.0F, 1.0F, 1.0F);
-		}
-		else
-		{
-			//TODO: RE-IMPLEMENT. 1.12.2
-			//renderplayer.renderLeftArm(abstractclientplayer);
 		}
 
 		GlStateManager.enableCull();

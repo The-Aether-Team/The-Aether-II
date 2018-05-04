@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.registry;
 
 import com.gildedgames.aether.api.dialog.IDialogManager;
+import com.gildedgames.aether.api.patron.PatronRewardRegistry;
 import com.gildedgames.aether.api.recipes.altar.IAltarRecipeRegistry;
 import com.gildedgames.aether.api.recipes.simple.ISimpleCraftingRegistry;
 import com.gildedgames.aether.api.registry.IContentRegistry;
@@ -11,12 +12,14 @@ import com.gildedgames.aether.api.registry.tab.ITabRegistry;
 import com.gildedgames.aether.api.world.generation.ITemplateRegistry;
 import com.gildedgames.aether.client.gui.tab.TabBugReport;
 import com.gildedgames.aether.client.gui.tab.TabEquipment;
+import com.gildedgames.aether.client.gui.tab.TabPatronRewards;
 import com.gildedgames.aether.common.capabilities.CapabilityManagerAether;
 import com.gildedgames.aether.common.capabilities.item.EffectRegistry;
 import com.gildedgames.aether.common.containers.tab.TabRegistry;
 import com.gildedgames.aether.common.dialog.DialogManager;
 import com.gildedgames.aether.common.entities.EntitiesAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.patron.PatronRewards;
 import com.gildedgames.aether.common.recipes.simple.RecipeIndexRegistry;
 import com.gildedgames.aether.common.recipes.simple.ShapedRecipeWrapper;
 import com.gildedgames.aether.common.recipes.simple.ShapelessRecipeWrapper;
@@ -47,6 +50,8 @@ public class ContentRegistry implements IContentRegistry
 
 	private final SimpleCraftingRegistry simpleCraftingRegistry = new SimpleCraftingRegistry();
 
+	private final PatronRewardRegistry patronRewardRegistry = new PatronRewardRegistry();
+
 	private boolean hasPreInit = false, hasInit = false;
 
 	public void preInit()
@@ -64,8 +69,11 @@ public class ContentRegistry implements IContentRegistry
 
 		PerfHelper.measure("Pre-initialize networking", NetworkingAether::preInit);
 
+		PerfHelper.measure("Pre-initialize patron rewards", PatronRewards::preInit);
+
 		this.tabRegistry.getInventoryGroup().registerServerTab(new TabEquipment());
 		this.tabRegistry.getInventoryGroup().registerServerTab(new TabBugReport());
+		this.tabRegistry.getInventoryGroup().registerServerTab(new TabPatronRewards());
 
 		this.hasPreInit = true;
 	}
@@ -150,5 +158,11 @@ public class ContentRegistry implements IContentRegistry
 	public ISimpleCraftingRegistry masonry()
 	{
 		return this.simpleCraftingRegistry;
+	}
+
+	@Override
+	public PatronRewardRegistry patronRewards()
+	{
+		return this.patronRewardRegistry;
 	}
 }

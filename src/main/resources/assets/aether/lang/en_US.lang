@@ -715,6 +715,7 @@ ability.attackSpeedMod.desc=%s Attack Speed
 tab.equipment=Equipment
 tab.bug_report=Report Bugs
 tab.backpack.name=Backpack
+tab.patron_rewards=Patron Rewards
 
 # Chat Messages
 chat.aether.resurrected=%s was resurrected by their Nex Spirit

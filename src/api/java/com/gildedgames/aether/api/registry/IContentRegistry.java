@@ -1,6 +1,7 @@
 package com.gildedgames.aether.api.registry;
 
 import com.gildedgames.aether.api.dialog.IDialogManager;
+import com.gildedgames.aether.api.patron.PatronRewardRegistry;
 import com.gildedgames.aether.api.recipes.altar.IAltarRecipeRegistry;
 import com.gildedgames.aether.api.recipes.simple.ISimpleCraftingRegistry;
 import com.gildedgames.aether.api.registry.recipes.IRecipeIndexRegistry;
@@ -49,4 +50,6 @@ public interface IContentRegistry
 	IRecipeIndexRegistry craftable();
 
 	ISimpleCraftingRegistry masonry();
+
+	PatronRewardRegistry patronRewards();
 }

@@ -50,7 +50,7 @@ public class BlueprintsAether
 
 	public static void init()
 	{
-		project = OrbisAPI.services().loadProject(null, AetherCore.getResource("aetherii"), AetherCore.INSTANCE, "AetherII");
+		project = OrbisAPI.services().loadProject(null, AetherCore.getResource("aetherii"), AetherCore.INSTANCE, "aether_ii");
 
 		final IProjectCache c = project.getCache();
 

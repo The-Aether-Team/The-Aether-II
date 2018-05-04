@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
 import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHandSide;
 
 public class LayerPlayerGloves extends LayerBipedArmor
 {
@@ -26,11 +27,14 @@ public class LayerPlayerGloves extends LayerBipedArmor
 	public void doRenderLayer(EntityLivingBase entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks,
 			float netHeadYaw, float headPitch, float scale)
 	{
-		this.renderGloves(PlayerAether.getPlayer(entity), limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale);
+		this.renderGloves(PlayerAether.getPlayer(entity), limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale,
+				EnumHandSide.RIGHT);
+		this.renderGloves(PlayerAether.getPlayer(entity), limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale,
+				EnumHandSide.LEFT);
 	}
 
 	private void renderGloves(PlayerAether player, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks,
-			float netHeadYaw, float headPitch, float scale)
+			float netHeadYaw, float headPitch, float scale, EnumHandSide side)
 	{
 		ItemStack stack = player.getEquipmentModule().getInventory().getStackInSlot(2);
 
@@ -42,29 +46,31 @@ public class LayerPlayerGloves extends LayerBipedArmor
 
 			ModelBiped t = this.modelArmor;
 
-			t.bipedBody.showModel = true;
-			t.bipedRightLeg.showModel = true;
-			t.bipedLeftLeg.showModel = true;
+			boolean left = side == EnumHandSide.RIGHT;
+			boolean right = side == EnumHandSide.LEFT;
+
+			t.bipedRightArm.showModel = left;
+			t.bipedLeftArm.showModel = right;
 
 			t.setModelAttributes(this.renderer.getMainModel());
 			t.setLivingAnimations(player.getEntity(), limbSwing, limbSwingAmount, partialTicks);
 
 			GlStateManager.pushMatrix();
 
-			GlStateManager.scale(0.92F, 0.92F, 0.92F);
-			GlStateManager.translate(0, 0.01F, 0);
-
 			if (skinType.equals("slim"))
 			{
-				GlStateManager.translate(0, 0.05F, 0);
+				GlStateManager.scale(0.7F, 1F, 0.7F);
+				GlStateManager.translate(left ? -0.15 : 0.15, 0.06F, -0.03F);
 			}
-
 			else
 			{
-				this.renderer.bindTexture(glove.getGloveTexture(0));
-
-				t.render(player.getEntity(), limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+				GlStateManager.scale(0.725F, 1F, 0.725F);
+				GlStateManager.translate(left ? -0.17 : 0.17, 0.01F, -0.03F);
 			}
+
+			this.renderer.bindTexture(glove.getGloveTexture(player.getEntity()));
+
+			t.render(player.getEntity(), limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
 			GlStateManager.popMatrix();
 		}

@@ -19,17 +19,8 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'maven-publish'
 
-allprojects {
-    repositories {
-        maven {
-            name = "maven-storage"
-            url = "https://git.gildedgames.com/GildedGames/maven-storage/raw/master/"
-        }
-    }
-
-    dependencies {
-    	compile files('libs/OrbisAPI-1.12.2-1.0.2')
-    }
+dependencies {
+	compile "com.gildedgames:orbis_api:1.0.2"
 }
 
 ext.config = loadConfig(file('build.properties'))
@@ -42,7 +33,7 @@ allprojects {
 
 version = "${config.mod_version}"
 group = "com.gildedgames"
-archivesBaseName = "AetherII"
+archivesBaseName = "aether_ii"
 
 sourceSets {
 	api {

@@ -1,1 +1,3 @@
-rootProject.name = 'AetherII'
+rootProject.name = 'aether_ii'
+
+includeBuild '../OrbisAPI'
