@@ -85,6 +85,10 @@ public class PatronRewardArmorRenderer implements IPatronRewardRenderer
 
 			ItemAetherArmor.PATRON_TEXTURE_TEMP_OVERRIDE = this.reward.getArmorTextureName();
 		}
+		else
+		{
+			ItemAetherArmor.RENDER_NORMAL_TEMP = true;
+		}
 
 		rendermanager.renderEntity(this.player, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F, false);
 
@@ -96,6 +100,10 @@ public class PatronRewardArmorRenderer implements IPatronRewardRenderer
 			this.player.setItemStackToSlot(EntityEquipmentSlot.CHEST, chest);
 			this.player.setItemStackToSlot(EntityEquipmentSlot.LEGS, legs);
 			this.player.setItemStackToSlot(EntityEquipmentSlot.FEET, feet);
+		}
+		else
+		{
+			ItemAetherArmor.RENDER_NORMAL_TEMP = false;
 		}
 
 		rendermanager.setRenderShadow(true);

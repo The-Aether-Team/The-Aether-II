@@ -33,15 +33,18 @@ public class ItemAetherGloves extends Item
 					.getResource("textures/armor/" + ItemAetherArmor.PATRON_TEXTURE_TEMP_OVERRIDE + "_gloves.png");
 		}
 
-		PlayerAether playerAether = PlayerAether.getPlayer(player);
-
-		if (playerAether != null)
+		if (ItemAetherArmor.RENDER_NORMAL_TEMP)
 		{
-			PatronRewardArmor armorChoice = playerAether.getPatronRewardsModule().getChoices().getArmorChoice();
+			PlayerAether playerAether = PlayerAether.getPlayer(player);
 
-			if (armorChoice != null)
+			if (playerAether != null)
 			{
-				return armorChoice.getArmorGloveTexture();
+				PatronRewardArmor armorChoice = playerAether.getPatronRewardsModule().getChoices().getArmorChoice();
+
+				if (armorChoice != null)
+				{
+					return armorChoice.getArmorGloveTexture();
+				}
 			}
 		}
 

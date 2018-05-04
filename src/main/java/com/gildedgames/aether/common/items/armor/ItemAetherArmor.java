@@ -14,6 +14,8 @@ public class ItemAetherArmor extends ItemArmor
 {
 	public static String PATRON_TEXTURE_TEMP_OVERRIDE;
 
+	public static boolean RENDER_NORMAL_TEMP;
+
 	private final String name;
 
 	public ItemAetherArmor(final ArmorMaterial material, final String name, final EntityEquipmentSlot armorType)
@@ -50,17 +52,20 @@ public class ItemAetherArmor extends ItemArmor
 					.getResourcePath("textures/armor/" + PATRON_TEXTURE_TEMP_OVERRIDE + "_layer_" + (slot == EntityEquipmentSlot.LEGS ? 2 : 1) + ".png");
 		}
 
-		PlayerAether playerAether = PlayerAether.getPlayer(entity);
-
-		if (playerAether != null)
+		if (!RENDER_NORMAL_TEMP)
 		{
-			PatronRewardArmor armorChoice = playerAether.getPatronRewardsModule().getChoices().getArmorChoice();
+			PlayerAether playerAether = PlayerAether.getPlayer(entity);
 
-			if (armorChoice != null)
+			if (playerAether != null)
 			{
-				String patronTexture = armorChoice.getArmorTextureName();
+				PatronRewardArmor armorChoice = playerAether.getPatronRewardsModule().getChoices().getArmorChoice();
 
-				return AetherCore.getResourcePath("textures/armor/" + patronTexture + "_layer_" + (slot == EntityEquipmentSlot.LEGS ? 2 : 1) + ".png");
+				if (armorChoice != null)
+				{
+					String patronTexture = armorChoice.getArmorTextureName();
+
+					return AetherCore.getResourcePath("textures/armor/" + patronTexture + "_layer_" + (slot == EntityEquipmentSlot.LEGS ? 2 : 1) + ".png");
+				}
 			}
 		}
 
