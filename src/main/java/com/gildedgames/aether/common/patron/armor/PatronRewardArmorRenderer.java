@@ -78,10 +78,10 @@ public class PatronRewardArmorRenderer implements IPatronRewardRenderer
 
 		if (texture != null)
 		{
-			this.player.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(ItemsAether.gravitite_helmet));
-			this.player.setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(ItemsAether.gravitite_chestplate));
-			this.player.setItemStackToSlot(EntityEquipmentSlot.LEGS, new ItemStack(ItemsAether.gravitite_leggings));
-			this.player.setItemStackToSlot(EntityEquipmentSlot.FEET, new ItemStack(ItemsAether.gravitite_boots));
+			this.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(ItemsAether.gravitite_helmet));
+			this.setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(ItemsAether.gravitite_chestplate));
+			this.setItemStackToSlot(EntityEquipmentSlot.LEGS, new ItemStack(ItemsAether.gravitite_leggings));
+			this.setItemStackToSlot(EntityEquipmentSlot.FEET, new ItemStack(ItemsAether.gravitite_boots));
 
 			ItemAetherArmor.PATRON_TEXTURE_TEMP_OVERRIDE = this.reward.getArmorTextureName();
 		}
@@ -96,10 +96,10 @@ public class PatronRewardArmorRenderer implements IPatronRewardRenderer
 		{
 			ItemAetherArmor.PATRON_TEXTURE_TEMP_OVERRIDE = null;
 
-			this.player.setItemStackToSlot(EntityEquipmentSlot.HEAD, head);
-			this.player.setItemStackToSlot(EntityEquipmentSlot.CHEST, chest);
-			this.player.setItemStackToSlot(EntityEquipmentSlot.LEGS, legs);
-			this.player.setItemStackToSlot(EntityEquipmentSlot.FEET, feet);
+			this.setItemStackToSlot(EntityEquipmentSlot.HEAD, head);
+			this.setItemStackToSlot(EntityEquipmentSlot.CHEST, chest);
+			this.setItemStackToSlot(EntityEquipmentSlot.LEGS, legs);
+			this.setItemStackToSlot(EntityEquipmentSlot.FEET, feet);
 		}
 		else
 		{
@@ -121,5 +121,21 @@ public class PatronRewardArmorRenderer implements IPatronRewardRenderer
 		GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
 
 		GlStateManager.popMatrix();
+	}
+
+	public void setItemStackToSlot(EntityEquipmentSlot slotIn, ItemStack stack)
+	{
+		if (slotIn == EntityEquipmentSlot.MAINHAND)
+		{
+			this.player.inventory.mainInventory.set(this.player.inventory.currentItem, stack);
+		}
+		else if (slotIn == EntityEquipmentSlot.OFFHAND)
+		{
+			this.player.inventory.offHandInventory.set(0, stack);
+		}
+		else if (slotIn.getSlotType() == EntityEquipmentSlot.Type.ARMOR)
+		{
+			this.player.inventory.armorInventory.set(slotIn.getIndex(), stack);
+		}
 	}
 }
