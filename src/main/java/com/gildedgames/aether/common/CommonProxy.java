@@ -72,7 +72,6 @@ public class CommonProxy implements IAetherServices
 		MinecraftForge.EVENT_BUS.register(AetherCore.CONFIG);
 
 		MinecraftForge.EVENT_BUS.register(CommonEvents.class);
-		MinecraftForge.EVENT_BUS.register(RespawnGuiOverrides.class);
 		MinecraftForge.EVENT_BUS.register(PlayerAetherHooks.class);
 		MinecraftForge.EVENT_BUS.register(MountEventHandler.class);
 		MinecraftForge.EVENT_BUS.register(ItemToolHandler.class);
