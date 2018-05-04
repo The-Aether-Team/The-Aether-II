@@ -5,11 +5,12 @@ import com.gildedgames.aether.api.registry.tab.ITabClient;
 import com.gildedgames.aether.client.gui.container.GuiEquipment;
 import com.gildedgames.aether.client.gui.misc.GuiPatronRewards;
 import com.gildedgames.aether.common.AetherCore;
-import net.minecraft.client.Minecraft;
+import com.gildedgames.aether.common.network.AetherGuiHandler;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -24,10 +25,9 @@ public class TabPatronRewards implements ITab
 	@Override
 	public void onOpen(EntityPlayer player)
 	{
-		if (player.world.isRemote)
-		{
-			Minecraft.getMinecraft().displayGuiScreen(new GuiPatronRewards());
-		}
+		BlockPos pos = player.getPosition();
+
+		player.openGui(AetherCore.MOD_ID, AetherGuiHandler.PATRON_REWARDS_ID, player.world, pos.getX(), pos.getY(), pos.getZ());
 	}
 
 	@Override
