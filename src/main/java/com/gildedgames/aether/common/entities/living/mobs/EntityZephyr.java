@@ -1,8 +1,10 @@
 package com.gildedgames.aether.common.entities.living.mobs;
 
 import com.gildedgames.aether.common.entities.util.flying.EntityFlyingDayMob;
+import com.gildedgames.aether.common.registry.content.LootTablesAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
@@ -16,6 +18,12 @@ public class EntityZephyr extends EntityFlyingDayMob
 		this.setSize(1.0F, 1.0F);
 
 		this.experienceValue = 3;
+	}
+
+	@Override
+	protected ResourceLocation getLootTable()
+	{
+		return LootTablesAether.ENTITY_ZEPHYR;
 	}
 
 	@Override
