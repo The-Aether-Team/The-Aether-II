@@ -1,6 +1,9 @@
 package com.gildedgames.aether.common.patron.armor;
 
+import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.api.patron.IPatronRewardRenderer;
+import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
+import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
 import com.gildedgames.orbis_api.util.InputHelper;
@@ -19,15 +22,39 @@ public class PatronRewardArmorRenderer implements IPatronRewardRenderer
 
 	private AbstractClientPlayer player;
 
+	private PlayerAether playerAether;
+
 	public PatronRewardArmorRenderer(PatronRewardArmor reward)
 	{
 		this.reward = reward;
+	}
+
+	private ItemStack getGloves()
+	{
+		IInventoryEquipment inventory = this.playerAether.getEquipmentModule().getInventory();
+
+		final int slot = inventory.getNextEmptySlotForType(ItemEquipmentSlot.HANDWEAR);
+
+		if (slot >= 0)
+		{
+			return inventory.getStackInSlot(slot);
+		}
+
+		return ItemStack.EMPTY;
+	}
+
+	private void setGloves(ItemStack stack)
+	{
+		IInventoryEquipment inventory = this.playerAether.getEquipmentModule().getInventory();
+
+		inventory.setInventorySlotContents(2, stack);
 	}
 
 	@Override
 	public void renderInit()
 	{
 		this.player = Minecraft.getMinecraft().player;
+		this.playerAether = PlayerAether.getPlayer(this.player);
 	}
 
 	@Override
@@ -75,6 +102,7 @@ public class PatronRewardArmorRenderer implements IPatronRewardRenderer
 		ItemStack chest = this.player.getItemStackFromSlot(EntityEquipmentSlot.CHEST);
 		ItemStack legs = this.player.getItemStackFromSlot(EntityEquipmentSlot.LEGS);
 		ItemStack feet = this.player.getItemStackFromSlot(EntityEquipmentSlot.FEET);
+		ItemStack hands = this.getGloves();
 
 		if (texture != null)
 		{
@@ -82,6 +110,7 @@ public class PatronRewardArmorRenderer implements IPatronRewardRenderer
 			this.setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(ItemsAether.gravitite_chestplate));
 			this.setItemStackToSlot(EntityEquipmentSlot.LEGS, new ItemStack(ItemsAether.gravitite_leggings));
 			this.setItemStackToSlot(EntityEquipmentSlot.FEET, new ItemStack(ItemsAether.gravitite_boots));
+			this.setGloves(new ItemStack(ItemsAether.gravitite_gloves));
 
 			ItemAetherArmor.PATRON_TEXTURE_TEMP_OVERRIDE = this.reward.getArmorTextureName();
 		}
@@ -100,6 +129,7 @@ public class PatronRewardArmorRenderer implements IPatronRewardRenderer
 			this.setItemStackToSlot(EntityEquipmentSlot.CHEST, chest);
 			this.setItemStackToSlot(EntityEquipmentSlot.LEGS, legs);
 			this.setItemStackToSlot(EntityEquipmentSlot.FEET, feet);
+			this.setGloves(hands);
 		}
 		else
 		{
