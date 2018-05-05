@@ -18,14 +18,13 @@ public class GuiFactoryAether implements IModGuiFactory
 	@Override
 	public boolean hasConfigGui()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
 	public GuiScreen createConfigGui(final GuiScreen parentScreen)
 	{
-		//TODO: Create gui screen for config?
-		return null;
+		return new GuiConfigAether(parentScreen);
 	}
 
 	@Override

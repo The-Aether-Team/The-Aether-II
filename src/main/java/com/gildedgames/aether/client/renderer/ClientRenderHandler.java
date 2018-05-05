@@ -3,6 +3,7 @@ package com.gildedgames.aether.client.renderer;
 import com.gildedgames.aether.client.gui.overlays.IOverlay;
 import com.gildedgames.aether.client.gui.overlays.PortalOverlay;
 import com.gildedgames.aether.client.gui.overlays.SwetOverlay;
+import com.gildedgames.aether.client.models.entities.player.LayerHeadShadow;
 import com.gildedgames.aether.client.models.entities.player.LayerPlayerGloves;
 import com.gildedgames.aether.client.models.entities.player.LayerSwetLatch;
 import com.gildedgames.aether.client.renderer.entities.living.RenderPlayerHelper;
@@ -30,11 +31,13 @@ public class ClientRenderHandler
 		RenderLivingBase<?> playerRender = Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default");
 
 		playerRender.addLayer(new LayerPlayerGloves(playerRender));
+		playerRender.addLayer(new LayerHeadShadow(playerRender));
 		playerRender.addLayer(new LayerSwetLatch(playerRender));
 
 		playerRender = Minecraft.getMinecraft().getRenderManager().getSkinMap().get("slim");
 
 		playerRender.addLayer(new LayerPlayerGloves(playerRender));
+		playerRender.addLayer(new LayerHeadShadow(playerRender));
 		playerRender.addLayer(new LayerSwetLatch(playerRender));
 
 		ClientRenderHandler.addOverlay(new PortalOverlay());

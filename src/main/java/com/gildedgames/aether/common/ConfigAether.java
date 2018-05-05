@@ -9,13 +9,11 @@ import java.io.File;
 
 public class ConfigAether
 {
-	public final ConfigCategory general, biomes, dimensions;
+	public final ConfigCategory general, dimensions;
 
 	private final Configuration configuration;
 
 	private int aetherDimID, necromancerDimId;
-
-	private int aetherBiomeID;
 
 	private boolean analyticsEnabled;
 
@@ -23,17 +21,17 @@ public class ConfigAether
 
 	private boolean displayPerformanceIndicator;
 
-	private boolean transparentArmorFace;
+	private boolean cutoutHelmets;
+
+	private boolean helmetShadow;
 
 	public ConfigAether(final File file)
 	{
 		this.configuration = new Configuration(file, true);
 
 		this.general = this.configuration.getCategory(Configuration.CATEGORY_GENERAL);
-		this.biomes = this.configuration.getCategory("Biome IDs");
 		this.dimensions = this.configuration.getCategory("Dimension IDs");
 
-		this.biomes.setRequiresMcRestart(true);
 		this.dimensions.setRequiresMcRestart(true);
 
 		this.loadAndSync();
@@ -43,13 +41,14 @@ public class ConfigAether
 	{
 		this.aetherDimID = this.getInt(this.dimensions, "Aether Dimension ID", 3);
 		this.necromancerDimId = this.getInt(this.dimensions, "Necromancer Tower Dimension ID", 4);
-		this.aetherBiomeID = this.getInt(this.biomes, "Aether Biome ID", 237);
 
 		this.analyticsEnabled = this.getBoolean(this.general, "Enable Analytics (client-side only)", true);
 
 		this.displayInventoryPattern = this.getBoolean(this.general, "Display Inventory Pattern", true);
 		this.displayPerformanceIndicator = this.getBoolean(this.general, "Display Performance Indicator", true);
-		this.transparentArmorFace = this.getBoolean(this.general, "Display Transparent Face Armor", false);
+
+		this.helmetShadow = this.getBoolean(this.general, "Helmet Shadow", true);
+		this.cutoutHelmets = this.getBoolean(this.general, "Cutout Helmets", true);
 
 		if (this.configuration.hasChanged())
 		{
@@ -86,11 +85,6 @@ public class ConfigAether
 		return this.necromancerDimId;
 	}
 
-	public int getAetherBiomeID()
-	{
-		return this.aetherBiomeID;
-	}
-
 	public boolean getDisplayInventoryPattern()
 	{
 		return this.displayInventoryPattern;
@@ -106,8 +100,13 @@ public class ConfigAether
 		return this.analyticsEnabled;
 	}
 
-	public boolean isTransparentArmorFace()
+	public boolean hasCutoutHelmets()
 	{
-		return this.transparentArmorFace;
+		return this.cutoutHelmets;
+	}
+
+	public boolean hasHelmetShadow()
+	{
+		return this.helmetShadow;
 	}
 }

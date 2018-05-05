@@ -21,7 +21,6 @@ public class GuiConfigAether extends GuiConfig
 	{
 		List<IConfigElement> list = new ArrayList<>();
 		list.addAll(new ConfigElement(AetherCore.CONFIG.general).getChildElements());
-		list.addAll(new ConfigElement(AetherCore.CONFIG.biomes).getChildElements());
 		list.addAll(new ConfigElement(AetherCore.CONFIG.dimensions).getChildElements());
 
 		return list;
