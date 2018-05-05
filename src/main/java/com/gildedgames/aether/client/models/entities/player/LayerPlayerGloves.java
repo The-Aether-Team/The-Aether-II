@@ -22,8 +22,8 @@ public class LayerPlayerGloves extends LayerBipedArmor
 		super(rendererIn);
 
 		this.renderer = rendererIn;
-		this.modelArmor = new ModelBiped(0.15f);
-		this.modelArmorSlim = new ModelPlayer(0.15f, true);
+		this.modelArmor = new ModelBiped(0.5f);
+		this.modelArmorSlim = new ModelPlayer(0.5f, true);
 	}
 
 	@Override
