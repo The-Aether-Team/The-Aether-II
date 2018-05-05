@@ -524,7 +524,7 @@ public class BlocksAether
 
 		r.register("outpost_campfire", outpost_campfire.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 
-		r.register("aether_teleporter", aether_teleporter.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
+		r.register("aether_teleporter", aether_teleporter.setCreativeTab(CreativeTabsAether.UTILITY));
 
 		Blocks.FIRE.setFireInfo(skyroot_twigs, 60, 100);
 		Blocks.FIRE.setFireInfo(tall_aether_grass, 60, 100);
