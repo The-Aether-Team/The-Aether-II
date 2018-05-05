@@ -2,6 +2,7 @@ package com.gildedgames.aether.client.models.entities.player;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import net.minecraft.client.Minecraft;
@@ -45,7 +46,9 @@ public class LayerHeadShadow extends LayerBipedArmor
 
 		PlayerAether player = PlayerAether.getPlayer(entity);
 
-		if (player.getEntity().getItemStackFromSlot(EntityEquipmentSlot.HEAD).isEmpty())
+		if (ItemAetherArmor.PATRON_TEXTURE_TEMP_OVERRIDE != null || player.getPatronRewardsModule().getChoices().getArmorChoice() != null || player.getEntity()
+				.getItemStackFromSlot(EntityEquipmentSlot.HEAD)
+				.isEmpty())
 		{
 			return;
 		}
@@ -80,6 +83,8 @@ public class LayerHeadShadow extends LayerBipedArmor
 		t.bipedRightArm.showModel = false;
 		t.bipedLeftArm.showModel = false;
 		t.bipedBody.showModel = false;
+		t.bipedLeftLeg.showModel = false;
+		t.bipedRightLeg.showModel = false;
 
 		GlStateManager.pushMatrix();
 
