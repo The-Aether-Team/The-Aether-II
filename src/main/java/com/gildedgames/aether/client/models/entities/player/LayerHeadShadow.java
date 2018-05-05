@@ -15,6 +15,7 @@ import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.Map;
@@ -46,9 +47,11 @@ public class LayerHeadShadow extends LayerBipedArmor
 
 		PlayerAether player = PlayerAether.getPlayer(entity);
 
-		if (ItemAetherArmor.PATRON_TEXTURE_TEMP_OVERRIDE != null || player.getPatronRewardsModule().getChoices().getArmorChoice() != null || player.getEntity()
-				.getItemStackFromSlot(EntityEquipmentSlot.HEAD)
-				.isEmpty())
+		ItemStack helm = player.getEntity()
+				.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
+
+		if (ItemAetherArmor.PATRON_TEXTURE_TEMP_OVERRIDE != null || player.getPatronRewardsModule().getChoices().getArmorChoice() != null ||
+				helm.isEmpty() || !(helm.getItem() instanceof ItemAetherArmor))
 		{
 			return;
 		}
