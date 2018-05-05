@@ -35,7 +35,7 @@ public class RenderFloatingBlock extends Render<EntityFloatingBlock>
 			final IBlockState state = floatingBlock.getBlockState();
 			final Block block = state.getBlock();
 
-			final BlockPos pos = new BlockPos(0, 0, 0);
+			final BlockPos pos = new BlockPos(floatingBlock);
 			final World world = floatingBlock.getEntityWorld();
 
 			if (state != world.getBlockState(pos))
