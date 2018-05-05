@@ -551,6 +551,11 @@ public class BlocksAether
 		Blocks.FIRE.setFireInfo(light_skyroot_decorative, 5, 20);
 		Blocks.FIRE.setFireInfo(light_skyroot_beam, 5, 20);
 
+		Blocks.FIRE.setFireInfo(therawood_log, 5, 5);
+		Blocks.FIRE.setFireInfo(therawood_planks, 5, 20);
+		Blocks.FIRE.setFireInfo(therawood_decorative, 5, 20);
+		Blocks.FIRE.setFireInfo(therawood_beam, 5, 20);
+
 		Blocks.FIRE.setFireInfo(dark_skyroot_log, 5, 5);
 		Blocks.FIRE.setFireInfo(dark_skyroot_planks, 5, 20);
 
@@ -569,6 +574,7 @@ public class BlocksAether
 		Blocks.FIRE.setFireInfo(skyroot_button, 5, 20);
 		Blocks.FIRE.setFireInfo(woven_sticks, 30, 60);
 
+		Blocks.FIRE.setFireInfo(green_skyroot_leaves, 30, 60);
 		Blocks.FIRE.setFireInfo(blue_skyroot_leaves, 30, 60);
 		Blocks.FIRE.setFireInfo(dark_blue_skyroot_leaves, 30, 60);
 		Blocks.FIRE.setFireInfo(golden_oak_leaves, 30, 60);
