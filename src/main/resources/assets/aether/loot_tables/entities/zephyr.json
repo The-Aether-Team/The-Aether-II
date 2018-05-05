@@ -1,0 +1,24 @@
+{
+	"pools": [
+		{
+			"rolls": 1,
+			"name": "string",
+			"entries": [
+				{
+					"type": "item",
+					"name": "aether:cloudtwine",
+					"weight": 1,
+					"functions": [
+						{
+							"function": "set_count",
+							"count": {
+								"min": 0,
+								"max": 3
+							}
+						}
+					]
+				}
+			]
+		}
+	]
+}
