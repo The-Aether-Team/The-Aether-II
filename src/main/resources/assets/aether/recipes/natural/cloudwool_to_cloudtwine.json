@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"X"
+	],
+	"key":
+	{
+		"X":
+		{
+			"item": "aether:cloudwool_block"
+		}
+	},
+	"result":
+	{
+		"item": "aether:cloudtwine",
+		"count": 4
+	}
+}

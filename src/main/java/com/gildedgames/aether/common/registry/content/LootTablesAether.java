@@ -26,6 +26,8 @@ public class LootTablesAether
 
 	public static ResourceLocation ENTITY_AERBUNNY;
 
+	public static ResourceLocation ENTITY_ZEPHYR;
+
 	public static void preInit()
 	{
 		ENTITY_KIRRID_SHEARED = LootTableList.register(AetherCore.getResource("entities/kirrid/kirrid_sheared"));
@@ -49,5 +51,7 @@ public class LootTablesAether
 		ENTITY_CARRION_SPROUT = LootTableList.register(AetherCore.getResource("entities/carrion_sprout"));
 
 		ENTITY_AERBUNNY = LootTableList.register(AetherCore.getResource("entities/aerbunny"));
+
+		ENTITY_ZEPHYR = LootTableList.register(AetherCore.getResource("entities/zephyr"));
 	}
 }

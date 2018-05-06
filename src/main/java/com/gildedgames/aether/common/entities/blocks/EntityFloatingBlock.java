@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.blocks;
 
+import com.gildedgames.aether.common.blocks.util.BlockFloating;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -94,7 +95,7 @@ public class EntityFloatingBlock extends Entity
 
 			BlockPos pos = new BlockPos(this);
 
-			if (!this.world.isAirBlock(pos.up()))
+			if (!BlockFloating.canFallInto(this.world, pos.up()))
 			{
 				if (!this.world.isRemote)
 				{

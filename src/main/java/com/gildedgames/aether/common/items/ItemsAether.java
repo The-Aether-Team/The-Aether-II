@@ -7,10 +7,7 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.items.armor.*;
 import com.gildedgames.aether.common.items.consumables.*;
 import com.gildedgames.aether.common.items.misc.*;
-import com.gildedgames.aether.common.items.tools.ItemAetherAxe;
-import com.gildedgames.aether.common.items.tools.ItemAetherPickaxe;
-import com.gildedgames.aether.common.items.tools.ItemAetherShovel;
-import com.gildedgames.aether.common.items.tools.ItemSkyrootBucket;
+import com.gildedgames.aether.common.items.tools.*;
 import com.gildedgames.aether.common.items.weapons.ItemDart;
 import com.gildedgames.aether.common.items.weapons.ItemDartShooter;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemBolt;
@@ -72,7 +69,7 @@ public class ItemsAether
 			arkenium_pickaxe = new ItemAetherPickaxe(MaterialsAether.ARKENIUM_TOOL),
 			arkenium_shovel = new ItemAetherShovel(MaterialsAether.ARKENIUM_TOOL);
 
-	public static final ItemShears arkenium_shears = new ItemShears();
+	public static final ItemArkeniumShears arkenium_shears = new ItemArkeniumShears();
 
 	public static final ItemAetherSword skyroot_sword = new ItemSkyrootSword(),
 			holystone_sword = new ItemHolystoneSword(),
