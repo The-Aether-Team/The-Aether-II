@@ -193,7 +193,7 @@ public class ModelMoa extends ModelBase
 		this.setRotateAngle(this.LegL3, -1.0471975511965976F, 0.0F, 0.12217304763960307F);
 		this.TailBase = new ModelRenderer(this, 91, 122);
 		this.TailBase.setRotationPoint(0.0F, 1.7F, 8.5F);
-		this.TailBase.addBox(-4.5F, -1.5F, -4.5F, 8, 5, 8, 0.0F);
+		this.TailBase.addBox(-4.5F, -1.6F, -4.5F, 8, 5, 8, 0.0F);
 		this.setRotateAngle(this.TailBase, 0.0F, -0.7853981633974483F, 0.0F);
 		this.JawToothL3 = new ModelRenderer(this, 120, 8);
 		this.JawToothL3.setRotationPoint(2.3F, -1.5F, -6.5F);
@@ -210,7 +210,7 @@ public class ModelMoa extends ModelBase
 		this.WingRFeatherInt2 = new ModelRenderer(this, 12, 113);
 		this.WingRFeatherInt2.setRotationPoint(-6.0F, -1.5F, 0.5F);
 		this.WingRFeatherInt2.addBox(-11.5F, 0.0F, -2.5F, 11, 1, 5, 0.0F);
-		this.setRotateAngle(this.WingRFeatherInt2, 0.0F, 1.7453292519943295F, 0.0F);
+		this.setRotateAngle(this.WingRFeatherInt2, 0.0F, 1.48352986419518F, 0.0F);
 		this.WingRFeatherInt1 = new ModelRenderer(this, 10, 119);
 		this.WingRFeatherInt1.setRotationPoint(-2.0F, 0.0F, 3.0F);
 		this.WingRFeatherInt1.addBox(-11.5F, 0.0F, -2.5F, 12, 1, 5, 0.0F);
@@ -439,7 +439,7 @@ public class ModelMoa extends ModelBase
 		this.WingLFeatherInt2 = new ModelRenderer(this, 44, 113);
 		this.WingLFeatherInt2.setRotationPoint(6.0F, -1.5F, 0.5F);
 		this.WingLFeatherInt2.addBox(-0.5F, 0.0F, -2.5F, 11, 1, 5, 0.0F);
-		this.setRotateAngle(this.WingLFeatherInt2, 0.0F, -1.9198621771937625F, 0.0F);
+		this.setRotateAngle(this.WingLFeatherInt2, 0.0F, -1.48352986419518F, 0.0F);
 		this.BodyMain.addChild(this.BodyBack);
 		this.JawMain.addChild(this.JawFrontL);
 		this.WingL3.addChild(this.WingLFeatherExt2);
@@ -618,8 +618,8 @@ public class ModelMoa extends ModelBase
 
 		float ageDif = ageInTicks - moa.getAgeSinceOffGround();
 
-		float unfoldTimeInSeconds = 0.75F;
-		float foldTimeInSeconds = 0.75F;
+		float unfoldTimeInSeconds = 0.3F;
+		float foldTimeInSeconds = 0.6F;
 
 		if (flying)
 		{
