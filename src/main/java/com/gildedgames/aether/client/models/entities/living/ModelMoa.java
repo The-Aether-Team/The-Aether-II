@@ -537,23 +537,31 @@ public class ModelMoa extends ModelBase
 		this.HeadMain.rotateAngleX = 0.17453292519943295F + pitch;
 		this.HeadMain.rotateAngleY = yaw;
 
-		float leftSwingX = (MathHelper.cos(limbSwing * 0.6662F) * 0.75F * limbSwingAmount);
-		float rightSwingX = (MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.75F * limbSwingAmount);
+		float leftSwingX = (MathHelper.cos(limbSwing * 0.6662F) * 0.55F * limbSwingAmount);
+		float rightSwingX = (MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.55F * limbSwingAmount);
 
 		this.LegL1.offsetY = leftSwingX / 4f + .01f;
 		this.LegR1.offsetY = rightSwingX / 4f + .01f;
 
-		this.LegL1.rotateAngleX = (rightSwingX * 0.8f) - 0.6981317007977318F;
-		this.LegR1.rotateAngleX = (leftSwingX * 0.8f) - 0.6981317007977318F;
+		this.LegL1.rotateAngleX = (rightSwingX * 1.2f) - 0.6981317007977318F;
+		this.LegR1.rotateAngleX = (leftSwingX * 1.2f) - 0.6981317007977318F;
 
 		float leftSwingXLower = (Math.max(-0.5009094953223726F, -rightSwingX * 2f)) - 0.1009094953223726F;
 		float rightSwingXLower = (Math.max(-0.5009094953223726F, -leftSwingX * 2f)) - 0.1009094953223726F;
 
-		this.LegL3.rotateAngleX = rightSwingXLower - 1.0471975511965976F;
-		this.LegR3.rotateAngleX = leftSwingXLower - 1.0471975511965976F;
+		this.LegL3.rotateAngleX = (rightSwingXLower * 1.55F) - 1.0471975511965976F;
+		this.LegR3.rotateAngleX = (leftSwingXLower * 1.55F) - 1.0471975511965976F;
 
-		this.LegLAnkle.rotateAngleX = -rightSwingXLower + 0.4363323129985824F;
-		this.LegRAnkle.rotateAngleX = -leftSwingXLower + 0.4363323129985824F;
+		this.LegLAnkle.rotateAngleX = -(rightSwingXLower * 0.75F) + 0.4363323129985824F;
+		this.LegRAnkle.rotateAngleX = -(leftSwingXLower * 0.75F) + 0.4363323129985824F;
+
+		this.LegLToeL.rotateAngleX = Math.max(0.0F, -(rightSwingXLower * 2.85F)) - 0.17453292519943295F;
+		this.LegLToeM.rotateAngleX = Math.max(0.0F, -(rightSwingXLower * 2.85F)) - 0.5235987755982988F;
+		this.LegLToeR.rotateAngleX = Math.max(0.0F, -(rightSwingXLower * 2.85F)) - 0.17453292519943295F;
+
+		this.LegRToeL.rotateAngleX = Math.max(0.0F, -(leftSwingXLower * 2.85F)) - 0.17453292519943295F;
+		this.LegRToeM.rotateAngleX = Math.max(0.0F, -(leftSwingXLower * 2.85F)) - 0.5235987755982988F;
+		this.LegRToeR.rotateAngleX = Math.max(0.0F, -(leftSwingXLower * 2.85F)) - 0.17453292519943295F;
 
 		float tailSwayRange = 0.05F;
 		float tailSwingModLeft = (leftSwingX * 0.5F);
