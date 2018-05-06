@@ -210,8 +210,8 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 			this.renderManager.renderEngine.bindTexture(SADDLE);
 			model.render(entity, par2, par3, par4, par5, par6, par7);
 
-			GL11.glScalef(1.0001F, 1.0001F, 1.0001F);
-			GL11.glTranslatef(0.0F, -0.001F, 0.0F);
+			GL11.glScalef(1.001F, 1.001F, 1.001F);
+			GL11.glTranslatef(0.0F, 0.001F, 0.0F);
 		}
 
 		if (true)
