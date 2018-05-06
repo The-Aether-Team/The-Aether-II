@@ -52,7 +52,7 @@ public class GuiPatronRewards extends GuiFrame implements IListNavigatorListener
 
 	private IPatronReward selected;
 
-	private PatronRewardArmor defaultArmor = new PatronRewardArmor("Default", PatronRewards.armorIcon("default"), () -> null, null, (d) -> true);
+	private PatronRewardArmor defaultArmor = new PatronRewardArmor("Default", PatronRewards.armorIcon("default"), () -> null, null, null, (d) -> true);
 
 	private GuiText useText;
 

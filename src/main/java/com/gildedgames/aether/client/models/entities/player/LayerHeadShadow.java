@@ -3,6 +3,7 @@ package com.gildedgames.aether.client.models.entities.player;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
+import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import net.minecraft.client.Minecraft;
@@ -76,7 +77,7 @@ public class LayerHeadShadow extends LayerBipedArmor
 			}
 		}
 
-		String skinType = DefaultPlayerSkin.getSkinType(entity.getUniqueID());
+		String skinType = EntityUtil.getSkin(player.getEntity());
 
 		ModelBiped t = skinType.equals("slim") ? this.modelArmorSlim : this.modelArmor;
 

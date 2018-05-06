@@ -2,12 +2,12 @@ package com.gildedgames.aether.client.models.entities.player;
 
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.items.armor.ItemAetherGloves;
+import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
-import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 
@@ -42,9 +42,10 @@ public class LayerPlayerGloves extends LayerBipedArmor
 		{
 			ItemAetherGloves glove = (ItemAetherGloves) stack.getItem();
 
-			String skinType = DefaultPlayerSkin.getSkinType(player.getEntity().getUniqueID());
+			String skinType = EntityUtil.getSkin(player.getEntity());
+			boolean slim = skinType.equals("slim");
 
-			ModelBiped t = skinType.equals("slim") ? this.modelArmorSlim : this.modelArmor;
+			ModelBiped t = slim ? this.modelArmorSlim : this.modelArmor;
 
 			t.bipedRightArm.showModel = true;
 			t.bipedLeftArm.showModel = true;

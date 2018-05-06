@@ -2,16 +2,17 @@ package com.gildedgames.aether.client.renderer.entities.living;
 
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.items.armor.ItemAetherGloves;
+import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHandSide;
@@ -46,7 +47,7 @@ public class RenderPlayerHelper
 		}
 
 		Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-		final String skinType = DefaultPlayerSkin.getSkinType(player.getUniqueID());
+		String skinType = EntityUtil.getSkin(player);
 
 		if (ring1 != null)
 		{
@@ -145,7 +146,7 @@ public class RenderPlayerHelper
 
 		GlStateManager.translate(0.07F, -0.018F, -0.035F);
 
-		final String skinType = DefaultPlayerSkin.getSkinType(Minecraft.getMinecraft().player.getUniqueID());
+		String skinType = EntityUtil.getSkin(Minecraft.getMinecraft().player);
 
 		GlStateManager.rotate(f * 120.0F, 0.0F, 0.0F, 1.0F);
 		GlStateManager.rotate(200.0F, 1.0F, 0.0F, 0.0F);
@@ -153,9 +154,15 @@ public class RenderPlayerHelper
 
 		GlStateManager.translate(f * 5.6F, 0.0F, 0.0F);
 
-		if (skinType.equals("slim"))
+		GlStateManager.translate(-0.03F, 0.04F, -0.04F);
+
+		if (!skinType.equals("slim"))
 		{
-			GlStateManager.translate(0.08F, 0.06F, 0.0F);
+			GlStateManager.translate(-0.03F, 0.0F, -0.02F);
+		}
+		else
+		{
+			GlStateManager.translate(0.0F, -0.07F, 0.0F);
 		}
 
 		GlStateManager.disableCull();
@@ -164,7 +171,7 @@ public class RenderPlayerHelper
 		{
 			final RenderLivingBase<?> playerRender = Minecraft.getMinecraft().getRenderManager().getSkinMap().get(skinType);
 
-			final ModelBiped t = new ModelBiped(1.0F);
+			final ModelBiped t = !skinType.equals("slim") ? new ModelBiped(0.5F) : new ModelPlayer(1F, true);
 			t.bipedBody.showModel = true;
 			t.bipedRightLeg.showModel = true;
 			t.bipedLeftLeg.showModel = true;

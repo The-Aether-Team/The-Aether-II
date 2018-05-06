@@ -4,6 +4,7 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.patron.armor.PatronRewardArmor;
 import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
+import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -27,10 +28,13 @@ public class ItemAetherGloves extends Item
 	@SideOnly(Side.CLIENT)
 	public ResourceLocation getGloveTexture(EntityPlayer player)
 	{
+		String skinType = EntityUtil.getSkin(player);
+		boolean slim = skinType.equals("slim");
+
 		if (ItemAetherArmor.PATRON_TEXTURE_TEMP_OVERRIDE != null && player == Minecraft.getMinecraft().player)
 		{
 			return AetherCore
-					.getResource("textures/armor/" + ItemAetherArmor.PATRON_TEXTURE_TEMP_OVERRIDE + "_gloves.png");
+					.getResource("textures/armor/" + ItemAetherArmor.PATRON_TEXTURE_TEMP_OVERRIDE + "_gloves" + (slim ? "_slim" : "") + ".png");
 		}
 
 		if (!ItemAetherArmor.RENDER_NORMAL_TEMP)
@@ -43,40 +47,41 @@ public class ItemAetherGloves extends Item
 
 				if (armorChoice != null)
 				{
-					return armorChoice.getArmorGloveTexture();
+					return armorChoice.getArmorGloveTexture(slim);
 				}
 			}
 		}
 
-		return this.gloveType.getGloveTexture();
+		return slim ? this.gloveType.getTextureSlim() : this.gloveType.getTexture();
 	}
 
 	public enum GloveType
 	{
-		TAEGOREHIDE("aether:textures/armor/taegore_hide_gloves.png"),
-		ZANITE("aether:textures/armor/zanite_gloves.png"),
-		ARKENIUM("aether:textures/armor/arkenium_gloves.png"),
-		GRAVITITE("aether:textures/armor/gravitite_gloves.png"),
-		VALKYRIE("aether:textures/armor/valkyrie_gloves.png"),
-		NEPTUNE("aether:textures/armor/neptune_gloves.png"),
-		PHOENIX("aether:textures/armor/phoenix_gloves.png"),
-		OBSIDIAN("aether:textures/armor/obsidian_gloves.png"),
-		LEATHER("aether:textures/armor/leather_gloves.png"),
-		IRON("aether:textures/armor/iron_gloves.png"),
-		GOLD("aether:textures/armor/gold_gloves.png"),
-		CHAIN("aether:textures/armor/chain_gloves.png"),
-		DIAMOND("aether:textures/armor/diamond_gloves.png");
+		TAEGOREHIDE("taegore_hide_gloves"),
+		ZANITE("zanite_gloves"),
+		ARKENIUM("arkenium_gloves"),
+		GRAVITITE("gravitite_gloves"),
+		VALKYRIE("valkyrie_gloves"),
+		NEPTUNE("neptune_gloves"),
+		PHOENIX("phoenix_gloves"),
+		OBSIDIAN("obsidian_gloves");
 
-		private final ResourceLocation resource;
+		private final ResourceLocation texture, textureSlim;
 
 		GloveType(String texture)
 		{
-			this.resource = new ResourceLocation(texture);
+			this.texture = AetherCore.getResource("textures/armor/" + texture + ".png");
+			this.textureSlim = AetherCore.getResource("textures/armor/" + texture + "_slim.png");
 		}
 
-		public ResourceLocation getGloveTexture()
+		public ResourceLocation getTextureSlim()
 		{
-			return this.resource;
+			return this.textureSlim;
+		}
+
+		public ResourceLocation getTexture()
+		{
+			return this.texture;
 		}
 	}
 }

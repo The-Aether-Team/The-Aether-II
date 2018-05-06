@@ -31,12 +31,15 @@ public class PatronRewards
 
 		r.register(0, new PatronRewardArmor("Sun Spirit", armorIcon("sun_spirit"), () -> "patron/sun_spirit",
 				armor("sun_spirit_gloves"),
+				armor("sun_spirit_gloves_slim"),
 				hasHadTier(PatronTier.ANGEL).or(gilded)));
 		r.register(1, new PatronRewardArmor("Slider", armorIcon("slider"), () -> "patron/slider",
 				armor("slider_gloves"),
+				armor("slider_gloves_slim"),
 				hasHadTier(PatronTier.ANGEL).or(gilded)));
 		r.register(2, new PatronRewardArmor("Valkyrie Queen", armorIcon("valkyrie_queen"), () -> "patron/valkyrie_queen",
 				armor("valkyrie_queen_gloves"),
+				armor("valkyrie_queen_gloves_slim"),
 				hasHadTier(PatronTier.ANGEL).or(gilded)));
 	}
 }

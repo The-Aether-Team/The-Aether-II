@@ -1,6 +1,8 @@
 package com.gildedgames.aether.common.util.helpers;
 
 import com.gildedgames.aether.common.ReflectionAether;
+import net.minecraft.client.entity.AbstractClientPlayer;
+import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.player.EntityPlayer;
@@ -168,6 +170,18 @@ public class EntityUtil
 				velcur -= veldif;
 			}
 		}
+	}
+
+	public static String getSkin(EntityPlayer player)
+	{
+		String skinType = DefaultPlayerSkin.getSkinType(player.getUniqueID());
+
+		if (player instanceof AbstractClientPlayer)
+		{
+			skinType = ((AbstractClientPlayer) player).getSkinType();
+		}
+
+		return skinType;
 	}
 
 }

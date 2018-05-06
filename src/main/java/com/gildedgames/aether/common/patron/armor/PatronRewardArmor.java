@@ -16,13 +16,14 @@ public class PatronRewardArmor implements IPatronReward
 
 	private String rewardName;
 
-	private ResourceLocation armorGloveTexture;
+	private ResourceLocation armorGloveTexture, armorGloveTextureSlim;
 
 	private ResourceLocation icon;
 
 	private IPatronRewardRenderer renderer;
 
 	public PatronRewardArmor(String rewardName, ResourceLocation icon, Supplier<String> armorTextureName, ResourceLocation armorGloveTexture,
+			ResourceLocation armorGloveTextureSlim,
 			Function<PatronDetails, Boolean> isUnlocked)
 	{
 		this.icon = icon;
@@ -31,6 +32,7 @@ public class PatronRewardArmor implements IPatronReward
 		this.isUnlocked = isUnlocked;
 
 		this.armorGloveTexture = armorGloveTexture;
+		this.armorGloveTextureSlim = armorGloveTextureSlim;
 	}
 
 	public String getArmorTextureName()
@@ -38,9 +40,9 @@ public class PatronRewardArmor implements IPatronReward
 		return this.armorTextureName.get();
 	}
 
-	public ResourceLocation getArmorGloveTexture()
+	public ResourceLocation getArmorGloveTexture(boolean slim)
 	{
-		return this.armorGloveTexture;
+		return slim ? this.armorGloveTextureSlim : this.armorGloveTexture;
 	}
 
 	@Override
