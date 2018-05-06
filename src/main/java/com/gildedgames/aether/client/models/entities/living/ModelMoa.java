@@ -531,6 +531,8 @@ public class ModelMoa extends ModelBase
 	@Override
 	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch, float scaleFactor, Entity entity)
 	{
+		boolean flying = !entity.onGround;
+
 		EntityMoa moa = (EntityMoa) entity;
 
 		super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, headYaw, headPitch, scaleFactor, entity);
@@ -544,31 +546,53 @@ public class ModelMoa extends ModelBase
 		float leftSwingX = (MathHelper.cos(limbSwing * 0.6662F) * 0.55F * limbSwingAmount);
 		float rightSwingX = (MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.55F * limbSwingAmount);
 
-		this.LegL1.offsetY = leftSwingX / 4f + .01f;
-		this.LegR1.offsetY = rightSwingX / 4f + .01f;
-
-		this.LegL1.rotateAngleX = (rightSwingX * 1.2f) - 0.6981317007977318F;
-		this.LegR1.rotateAngleX = (leftSwingX * 1.2f) - 0.6981317007977318F;
-
 		float leftSwingXLower = (Math.max(-0.5009094953223726F, -rightSwingX * 2f)) - 0.1009094953223726F;
 		float rightSwingXLower = (Math.max(-0.5009094953223726F, -leftSwingX * 2f)) - 0.1009094953223726F;
-
-		this.LegL3.rotateAngleX = (rightSwingXLower * 1.55F) - 1.0471975511965976F;
-		this.LegR3.rotateAngleX = (leftSwingXLower * 1.55F) - 1.0471975511965976F;
-
-		this.LegLAnkle.rotateAngleX = -(rightSwingXLower * 0.75F) + 0.4363323129985824F;
-		this.LegRAnkle.rotateAngleX = -(leftSwingXLower * 0.75F) + 0.4363323129985824F;
 
 		float leftToeCurlAngle = -(rightSwingXLower * 2.35F);
 		float rightToeCurlAngle = -(leftSwingXLower * 2.35F);
 
-		this.LegLToeL.rotateAngleX = leftToeCurlAngle - 0.17453292519943295F;
-		this.LegLToeM.rotateAngleX = leftToeCurlAngle - 0.5235987755982988F;
-		this.LegLToeR.rotateAngleX = leftToeCurlAngle - 0.17453292519943295F;
+		if (!flying)
+		{
+			this.LegL1.offsetY = leftSwingX / 4f + .01f;
+			this.LegR1.offsetY = rightSwingX / 4f + .01f;
 
-		this.LegRToeL.rotateAngleX = rightToeCurlAngle - 0.17453292519943295F;
-		this.LegRToeM.rotateAngleX = rightToeCurlAngle - 0.5235987755982988F;
-		this.LegRToeR.rotateAngleX = rightToeCurlAngle - 0.17453292519943295F;
+			this.LegL1.rotateAngleX = (rightSwingX * 1.2f) - 0.6981317007977318F;
+			this.LegR1.rotateAngleX = (leftSwingX * 1.2f) - 0.6981317007977318F;
+
+			this.LegL3.rotateAngleX = (rightSwingXLower * 1.55F) - 1.0471975511965976F;
+			this.LegR3.rotateAngleX = (leftSwingXLower * 1.55F) - 1.0471975511965976F;
+
+			this.LegLAnkle.rotateAngleX = -(rightSwingXLower * 0.75F) + 0.4363323129985824F;
+			this.LegRAnkle.rotateAngleX = -(leftSwingXLower * 0.75F) + 0.4363323129985824F;
+
+			this.LegLToeL.rotateAngleX = leftToeCurlAngle - 0.17453292519943295F;
+			this.LegLToeM.rotateAngleX = leftToeCurlAngle - 0.5235987755982988F;
+			this.LegLToeR.rotateAngleX = leftToeCurlAngle - 0.17453292519943295F;
+
+			this.LegRToeL.rotateAngleX = rightToeCurlAngle - 0.17453292519943295F;
+			this.LegRToeM.rotateAngleX = rightToeCurlAngle - 0.5235987755982988F;
+			this.LegRToeR.rotateAngleX = rightToeCurlAngle - 0.17453292519943295F;
+		}
+		else
+		{
+			this.setRotateAngle(this.LegL1, -0.6981317007977318F, 0.0F, -0.3490658503988659F);
+			this.setRotateAngle(this.LegR1, -0.6981317007977318F, 0.0F, 0.3490658503988659F);
+
+			this.setRotateAngle(this.LegL3, -1.0471975511965976F, 0.0F, 0.12217304763960307F);
+			this.setRotateAngle(this.LegR3, -1.0471975511965976F, 0.0F, -0.12217304763960307F);
+
+			this.setRotateAngle(this.LegLAnkle, 0.4363323129985824F, 0.0F, 0.24434609527920614F);
+			this.setRotateAngle(this.LegRAnkle, 0.4363323129985824F, 0.0F, -0.24434609527920614F);
+
+			this.setRotateAngle(this.LegLToeL, -0.17453292519943295F, -0.5235987755982988F, 0.0F);
+			this.setRotateAngle(this.LegLToeM, -0.5235987755982988F, 0.0F, 0.0F);
+			this.setRotateAngle(this.LegLToeR, -0.17453292519943295F, 0.5235987755982988F, 0.0F);
+
+			this.setRotateAngle(this.LegRToeL, -0.17453292519943295F, -0.5235987755982988F, 0.0F);
+			this.setRotateAngle(this.LegRToeM, -0.5235987755982988F, 0.0F, 0.0F);
+			this.setRotateAngle(this.LegRToeR, -0.17453292519943295F, 0.5235987755982988F, 0.0F);
+		}
 
 		float tailSwayRange = 0.05F;
 
@@ -589,8 +613,6 @@ public class ModelMoa extends ModelBase
 		this.HeadFeatherL2.rotateAngleX = -0.17453292519943295F + (MathHelper.cos((10.0F + ageInTicks) * 0.0755662F) * 0.05F);
 		this.HeadFeatherR1.rotateAngleX = 0.17453292519943295F + (MathHelper.cos((20.0F + ageInTicks) * 0.0755662F) * 0.05F);
 		this.HeadFeatherR2.rotateAngleX = -0.17453292519943295F + (MathHelper.cos((30.0F + ageInTicks) * 0.0755662F) * 0.05F);
-
-		boolean flying = !entity.onGround;
 
 		float wingSwayRange = 0.05F;
 
