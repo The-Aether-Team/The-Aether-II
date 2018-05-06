@@ -588,8 +588,8 @@ public class ModelMoa extends ModelBase
 		this.HeadFeatherR1.rotateAngleX = 0.17453292519943295F + (MathHelper.cos((20.0F + ageInTicks) * 0.0755662F) * 0.05F) + tailSwingModRight;
 		this.HeadFeatherR2.rotateAngleX = -0.17453292519943295F + (MathHelper.cos((30.0F + ageInTicks) * 0.0755662F) * 0.05F) + tailSwingModRight;
 
-		tailSwingModLeft = (leftSwingX * 1.1F);
-		tailSwingModRight = (rightSwingX * 1.1F);
+		tailSwingModLeft = (leftSwingX * 0.6F);
+		tailSwingModRight = (rightSwingX * 0.6F);
 
 		float wingSwayRange = 0.05F;
 
