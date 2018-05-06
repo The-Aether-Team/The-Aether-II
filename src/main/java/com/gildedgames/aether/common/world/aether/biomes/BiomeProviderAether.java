@@ -26,14 +26,13 @@ public class BiomeProviderAether extends BiomeProvider
 
 	public static ArrayList<Biome> allowedBiomes = Lists.newArrayList(BiomesAether.VOID, BiomesAether.HIGHLANDS, BiomesAether.MAGNETIC_HILLS);
 
-	private final BiomeCache cache;
+	private final ThreadLocal<BiomeCache> cache = ThreadLocal.withInitial(() -> new BiomeCache(this));
 
 	private final World world;
 
 	public BiomeProviderAether(final World world)
 	{
 		this.world = world;
-		this.cache = new BiomeCache(this);
 	}
 
 	@Override
@@ -45,10 +44,7 @@ public class BiomeProviderAether extends BiomeProvider
 	@Override
 	public void cleanupCache()
 	{
-		synchronized (this.cache)
-		{
-			this.cache.cleanupCache();
-		}
+		this.cache.get().cleanupCache();
 	}
 
 	@Override
@@ -60,10 +56,7 @@ public class BiomeProviderAether extends BiomeProvider
 	@Override
 	public Biome getBiome(final BlockPos pos, final Biome defaultBiome)
 	{
-		synchronized (this.cache)
-		{
-			return this.cache.getBiome(pos.getX(), pos.getZ(), BiomesAether.VOID);
-		}
+		return this.cache.get().getBiome(pos.getX(), pos.getZ(), BiomesAether.VOID);
 	}
 
 	private Biome[] generateBiomes(final Biome[] biomes, final int x, final int z, final int width, final int height)
@@ -165,14 +158,11 @@ public class BiomeProviderAether extends BiomeProvider
 
 		if (cacheFlag && width == 16 && length == 16 && (x & 15) == 0 && (z & 15) == 0)
 		{
-			synchronized (this.cache)
-			{
-				final Biome[] abiome = this.cache.getCachedBiomes(x, z);
+			final Biome[] abiome = this.cache.get().getCachedBiomes(x, z);
 
-				System.arraycopy(abiome, 0, listToReuse, 0, width * length);
+			System.arraycopy(abiome, 0, listToReuse, 0, width * length);
 
-				return listToReuse;
-			}
+			return listToReuse;
 		}
 		else
 		{
