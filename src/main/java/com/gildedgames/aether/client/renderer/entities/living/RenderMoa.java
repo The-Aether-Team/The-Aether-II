@@ -33,7 +33,7 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 
 	public static ResourceLocation BODY_HIGHLIGHT = AetherCore.getResource("textures/entities/moa/curved_highlight.png");
 
-	public static ResourceLocation BEAK = AetherCore.getResource("textures/entities/moa/beaklegs.png");
+	public static ResourceLocation BEAK = AetherCore.getResource("textures/entities/moa/keratin.png");
 
 	public static ResourceLocation EYES = AetherCore.getResource("textures/entities/moa/eyes.png");
 
