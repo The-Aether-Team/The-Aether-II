@@ -618,9 +618,14 @@ public class ModelMoa extends ModelBase
 
 		float ageDif = ageInTicks - moa.getAgeSinceOffGround();
 
+		float unfoldTimeInSeconds = 0.75F;
+		float foldTimeInSeconds = 0.75F;
+
 		if (flying)
 		{
-			float wingTime = ageDif / 15.0F;
+			float foldTime = (unfoldTimeInSeconds * 20.0F);
+
+			float wingTime = ageDif / foldTime;
 			float wingAlpha = Math.min(1.0F, wingTime);
 
 			this.setRotateAngle(this.ShoulderR, 0.0F, 0.0F, NoiseUtil.lerp(0.9599310885968813F, 0.17453292519943295F, wingAlpha));
@@ -640,11 +645,11 @@ public class ModelMoa extends ModelBase
 			this.setRotateAngle(this.WingL3, 0.0F, NoiseUtil.lerp(-0.2617993877991494F, -0.2617993877991494F, wingAlpha),
 					NoiseUtil.lerp(0.17453292519943295F, 0.17453292519943295F, wingAlpha));
 
-			if (ageDif >= 15.0F)
+			if (ageDif >= foldTime)
 			{
-				if (ageDif <= 20.0F)
+				if (ageDif <= foldTime + 5.0F)
 				{
-					wingAlpha = (ageDif - 15.0F) / 5.0F;
+					wingAlpha = (ageDif - foldTime) / 5.0F;
 
 					this.ShoulderR.rotateAngleZ = NoiseUtil
 							.lerp(this.ShoulderR.rotateAngleZ, this.ShoulderR.rotateAngleZ + (MathHelper.cos((0.0F + ageDif - 15.0F) * 0.175662F) * 0.6F),
@@ -655,16 +660,18 @@ public class ModelMoa extends ModelBase
 				}
 				else
 				{
-					this.ShoulderR.rotateAngleZ = this.ShoulderR.rotateAngleZ + (MathHelper.cos((0.0F + ageDif - 15.0F) * 0.175662F) * 0.6F);
-					this.ShoulderL.rotateAngleZ = this.ShoulderL.rotateAngleZ + (MathHelper.cos((0.0F + ageDif - 15.0F) * 0.175662F) * -0.6F);
+					this.ShoulderR.rotateAngleZ = this.ShoulderR.rotateAngleZ + (MathHelper.cos((0.0F + ageDif - foldTime) * 0.175662F) * 0.6F);
+					this.ShoulderL.rotateAngleZ = this.ShoulderL.rotateAngleZ + (MathHelper.cos((0.0F + ageDif - foldTime) * 0.175662F) * -0.6F);
 				}
 			}
 		}
 		else
 		{
+			float foldTime = (foldTimeInSeconds * 20.0F);
+
 			ageDif = Math.abs(moa.getAgeSinceOffGround() - ageInTicks);
 
-			float wingAlpha = Math.min(1.0F, ageDif / 15.0F);
+			float wingAlpha = Math.min(1.0F, ageDif / foldTime);
 
 			this.setRotateAngle(this.ShoulderR, 0.0F, 0.0F, NoiseUtil.lerpReverse(-0.9599310885968813F, 0.17453292519943295F, wingAlpha));
 			this.setRotateAngle(this.ShoulderL, 0.0F, 0.0F, NoiseUtil.lerpReverse(0.9599310885968813F, -0.17453292519943295F, wingAlpha));
