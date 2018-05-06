@@ -203,6 +203,16 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 		this.renderManager.renderEngine.bindTexture(BEAK);
 		model.render(entity, par2, par3, par4, par5, par6, par7);
 
+		if (moa.isSaddled())
+		{
+			GL11.glColor3f(1.0f, 1.0f, 1.0f);
+
+			this.renderManager.renderEngine.bindTexture(SADDLE);
+
+			GL11.glScalef(1.0001F, 1.0001F, 1.0001F);
+			GL11.glTranslatef(0.0F, -0.001F, 0.0F);
+		}
+
 		if (true)
 		{
 			return;
@@ -246,19 +256,6 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 		//		model.Claw1Right.render(par7);
 		//		model.Claw2Right.render(par7);
 		//		model.Claw3Right.render(par7);
-
-		if (moa.isSaddled())
-		{
-			GL11.glColor3f(1.0f, 1.0f, 1.0f);
-
-			this.renderManager.renderEngine.bindTexture(SADDLE);
-
-			GL11.glScalef(1.0001F, 1.0001F, 1.0001F);
-			GL11.glTranslatef(0.0F, -0.001F, 0.0F);
-
-			//			model.Body.render(par7);
-			//			model.Chest.render(par7);
-		}
 
 		if (moa.getGender() == AnimalGender.MALE)
 		{
