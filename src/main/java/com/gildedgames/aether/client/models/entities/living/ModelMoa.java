@@ -1,5 +1,7 @@
 package com.gildedgames.aether.client.models.entities.living;
 
+import com.gildedgames.aether.api.util.NoiseUtil;
+import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -529,6 +531,8 @@ public class ModelMoa extends ModelBase
 	@Override
 	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch, float scaleFactor, Entity entity)
 	{
+		EntityMoa moa = (EntityMoa) entity;
+
 		super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, headYaw, headPitch, scaleFactor, entity);
 
 		float pitch = headPitch * 0.017453292F;
@@ -567,40 +571,107 @@ public class ModelMoa extends ModelBase
 		this.LegRToeR.rotateAngleX = rightToeCurlAngle - 0.17453292519943295F;
 
 		float tailSwayRange = 0.05F;
-		float tailSwingModLeft = (leftSwingX * 0.5F);
-		float tailSwingModRight = (rightSwingX * 0.5F);
 
 		this.TailFeatherL.rotateAngleZ = (MathHelper.cos((24F + ageInTicks) * 0.15662F) * tailSwayRange);
 		this.TailFeatherM.rotateAngleZ = (MathHelper.cos((0.0F + ageInTicks) * 0.15662F) * tailSwayRange);
 		this.TailFeatherR.rotateAngleZ = (MathHelper.cos((48F + ageInTicks) * 0.15662F) * tailSwayRange);
 
-		this.TailFeatherL.rotateAngleX = -0.5235987755982988F + (MathHelper.cos((0F + ageInTicks) * 0.15662F) * tailSwayRange) + tailSwingModLeft;
-		this.TailFeatherM.rotateAngleX = -0.5235987755982988F + (MathHelper.cos((0.0F + ageInTicks) * 0.15662F) * tailSwayRange) + tailSwingModLeft;
-		this.TailFeatherR.rotateAngleX = -0.5235987755982988F + (MathHelper.cos((0F + ageInTicks) * 0.15662F) * tailSwayRange) + tailSwingModRight;
+		this.TailFeatherL.rotateAngleX = -0.5235987755982988F + (MathHelper.cos((0F + ageInTicks) * 0.15662F) * tailSwayRange);
+		this.TailFeatherM.rotateAngleX = -0.5235987755982988F + (MathHelper.cos((0.0F + ageInTicks) * 0.15662F) * tailSwayRange);
+		this.TailFeatherR.rotateAngleX = -0.5235987755982988F + (MathHelper.cos((0F + ageInTicks) * 0.15662F) * tailSwayRange);
 
 		this.HeadFeatherL1.rotateAngleZ = (MathHelper.cos((24F + ageInTicks) * 0.15662F) * 0.1F);
 		this.HeadFeatherL2.rotateAngleZ = (MathHelper.cos((0.0F + ageInTicks) * 0.15662F) * 0.1F);
 		this.HeadFeatherR1.rotateAngleZ = (MathHelper.cos((48F + ageInTicks) * 0.15662F) * 0.1F);
 		this.HeadFeatherR2.rotateAngleZ = (MathHelper.cos((48F + ageInTicks) * 0.15662F) * 0.1F);
 
-		this.HeadFeatherL1.rotateAngleX = 0.17453292519943295F + (MathHelper.cos((0.0F + ageInTicks) * 0.075662F) * 0.05F) + tailSwingModLeft;
-		this.HeadFeatherL2.rotateAngleX = -0.17453292519943295F + (MathHelper.cos((10.0F + ageInTicks) * 0.0755662F) * 0.05F) + tailSwingModLeft;
-		this.HeadFeatherR1.rotateAngleX = 0.17453292519943295F + (MathHelper.cos((20.0F + ageInTicks) * 0.0755662F) * 0.05F) + tailSwingModRight;
-		this.HeadFeatherR2.rotateAngleX = -0.17453292519943295F + (MathHelper.cos((30.0F + ageInTicks) * 0.0755662F) * 0.05F) + tailSwingModRight;
+		this.HeadFeatherL1.rotateAngleX = 0.17453292519943295F + (MathHelper.cos((0.0F + ageInTicks) * 0.075662F) * 0.05F);
+		this.HeadFeatherL2.rotateAngleX = -0.17453292519943295F + (MathHelper.cos((10.0F + ageInTicks) * 0.0755662F) * 0.05F);
+		this.HeadFeatherR1.rotateAngleX = 0.17453292519943295F + (MathHelper.cos((20.0F + ageInTicks) * 0.0755662F) * 0.05F);
+		this.HeadFeatherR2.rotateAngleX = -0.17453292519943295F + (MathHelper.cos((30.0F + ageInTicks) * 0.0755662F) * 0.05F);
 
-		tailSwingModLeft = (leftSwingX * 0.6F);
-		tailSwingModRight = (rightSwingX * 0.6F);
+		boolean flying = !entity.onGround;
 
 		float wingSwayRange = 0.05F;
 
-		this.WingLFeatherExt1.rotateAngleZ = (MathHelper.cos((0.0F + ageInTicks) * 0.15662F) * wingSwayRange) + tailSwingModLeft;
-		this.WingLFeatherExt2.rotateAngleZ = (MathHelper.cos((10.0F + ageInTicks) * 0.15662F) * wingSwayRange) + tailSwingModLeft;
-		this.WingLFeatherExt3.rotateAngleZ = (MathHelper.cos((20.0F + ageInTicks) * 0.15662F) * wingSwayRange) + tailSwingModLeft;
-		this.WingLFeatherInt1.rotateAngleZ = (MathHelper.cos((30.0F + ageInTicks) * 0.15662F) * wingSwayRange) + tailSwingModLeft;
+		float ageDif = ageInTicks - moa.getAgeSinceOffGround();
 
-		this.WingRFeatherExt1.rotateAngleZ = (MathHelper.cos((0.0F + ageInTicks) * 0.15662F) * wingSwayRange) + tailSwingModRight;
-		this.WingRFeatherExt2.rotateAngleZ = (MathHelper.cos((10.0F + ageInTicks) * 0.15662F) * wingSwayRange) + tailSwingModRight;
-		this.WingRFeatherExt3.rotateAngleZ = (MathHelper.cos((20.0F + ageInTicks) * 0.15662F) * wingSwayRange) + tailSwingModRight;
-		this.WingRFeatherInt1.rotateAngleZ = (MathHelper.cos((30.0F + ageInTicks) * 0.15662F) * wingSwayRange) + tailSwingModRight;
+		if (flying)
+		{
+			float wingTime = ageDif / 15.0F;
+			float wingAlpha = Math.min(1.0F, wingTime);
+
+			this.setRotateAngle(this.ShoulderR, 0.0F, 0.0F, NoiseUtil.lerp(0.9599310885968813F, 0.17453292519943295F, wingAlpha));
+			this.setRotateAngle(this.ShoulderL, 0.0F, 0.0F, NoiseUtil.lerp(-0.9599310885968813F, -0.17453292519943295F, wingAlpha));
+
+			this.setRotateAngle(this.WingR1, 0.0F, NoiseUtil.lerp(-0.17453292519943295F, 0.08726646259971647F, wingAlpha),
+					NoiseUtil.lerp(0.0F, -0.17453292519943295F, wingAlpha));
+			this.setRotateAngle(this.WingR2, 0.0F, NoiseUtil.lerp(1.8325957145940461F, -0.3490658503988659F, wingAlpha),
+					NoiseUtil.lerp(-0.5235987755982988F, 0.17453292519943295F, wingAlpha));
+			this.setRotateAngle(this.WingR3, 0.0F, NoiseUtil.lerp(0.2617993877991494F, 0.2617993877991494F, wingAlpha),
+					NoiseUtil.lerp(-0.17453292519943295F, -0.17453292519943295F, wingAlpha));
+
+			this.setRotateAngle(this.WingL1, 0.0F, NoiseUtil.lerp(0.17453292519943295F, -0.08726646259971647F, wingAlpha),
+					NoiseUtil.lerp(0.0F, 0.17453292519943295F, wingAlpha));
+			this.setRotateAngle(this.WingL2, 0.0F, NoiseUtil.lerp(-1.8325957145940461F, 0.3490658503988659F, wingAlpha),
+					NoiseUtil.lerp(0.5235987755982988F, -0.17453292519943295F, wingAlpha));
+			this.setRotateAngle(this.WingL3, 0.0F, NoiseUtil.lerp(-0.2617993877991494F, -0.2617993877991494F, wingAlpha),
+					NoiseUtil.lerp(0.17453292519943295F, 0.17453292519943295F, wingAlpha));
+
+			if (ageDif >= 15.0F)
+			{
+				if (ageDif <= 20.0F)
+				{
+					wingAlpha = (ageDif - 15.0F) / 5.0F;
+
+					this.ShoulderR.rotateAngleZ = NoiseUtil
+							.lerp(this.ShoulderR.rotateAngleZ, this.ShoulderR.rotateAngleZ + (MathHelper.cos((0.0F + ageDif - 15.0F) * 0.175662F) * 0.6F),
+									wingAlpha);
+					this.ShoulderL.rotateAngleZ = NoiseUtil
+							.lerp(this.ShoulderL.rotateAngleZ, this.ShoulderL.rotateAngleZ + (MathHelper.cos((0.0F + ageDif - 15.0F) * 0.175662F) * -0.6F),
+									wingAlpha);
+				}
+				else
+				{
+					this.ShoulderR.rotateAngleZ = this.ShoulderR.rotateAngleZ + (MathHelper.cos((0.0F + ageDif - 15.0F) * 0.175662F) * 0.6F);
+					this.ShoulderL.rotateAngleZ = this.ShoulderL.rotateAngleZ + (MathHelper.cos((0.0F + ageDif - 15.0F) * 0.175662F) * -0.6F);
+				}
+			}
+		}
+		else
+		{
+			ageDif = Math.abs(moa.getAgeSinceOffGround() - ageInTicks);
+
+			float wingAlpha = Math.min(1.0F, ageDif / 15.0F);
+
+			this.setRotateAngle(this.ShoulderR, 0.0F, 0.0F, NoiseUtil.lerpReverse(-0.9599310885968813F, 0.17453292519943295F, wingAlpha));
+			this.setRotateAngle(this.ShoulderL, 0.0F, 0.0F, NoiseUtil.lerpReverse(0.9599310885968813F, -0.17453292519943295F, wingAlpha));
+
+			this.setRotateAngle(this.WingR1, 0.0F, NoiseUtil.lerpReverse(-0.17453292519943295F, 0.08726646259971647F, wingAlpha),
+					NoiseUtil.lerpReverse(0.0F, -0.17453292519943295F, wingAlpha));
+			this.setRotateAngle(this.WingR2, 0.0F, NoiseUtil.lerpReverse(1.8325957145940461F, -0.3490658503988659F, wingAlpha),
+					NoiseUtil.lerpReverse(-0.5235987755982988F, 0.17453292519943295F, wingAlpha));
+			this.setRotateAngle(this.WingR3, 0.0F, NoiseUtil.lerpReverse(0.2617993877991494F, 0.2617993877991494F, wingAlpha),
+					NoiseUtil.lerpReverse(-0.17453292519943295F, -0.17453292519943295F, wingAlpha));
+
+			this.setRotateAngle(this.WingL1, 0.0F, NoiseUtil.lerpReverse(0.17453292519943295F, -0.08726646259971647F, wingAlpha),
+					NoiseUtil.lerpReverse(0.0F, 0.17453292519943295F, wingAlpha));
+			this.setRotateAngle(this.WingL2, 0.0F, NoiseUtil.lerpReverse(-1.8325957145940461F, 0.3490658503988659F, wingAlpha),
+					NoiseUtil.lerpReverse(0.5235987755982988F, -0.17453292519943295F, wingAlpha));
+			this.setRotateAngle(this.WingL3, 0.0F, NoiseUtil.lerpReverse(-0.2617993877991494F, -0.2617993877991494F, wingAlpha),
+					NoiseUtil.lerpReverse(0.17453292519943295F, 0.17453292519943295F, wingAlpha));
+		}
+
+		this.WingLFeatherExt1.rotateAngleZ = (MathHelper.cos((0.0F + ageInTicks) * 0.15662F) * wingSwayRange);
+		this.WingLFeatherExt2.rotateAngleZ = (MathHelper.cos((10.0F + ageInTicks) * 0.15662F) * wingSwayRange);
+		this.WingLFeatherExt3.rotateAngleZ = (MathHelper.cos((20.0F + ageInTicks) * 0.15662F) * wingSwayRange);
+		this.WingLFeatherInt1.rotateAngleZ = (MathHelper.cos((30.0F + ageInTicks) * 0.15662F) * wingSwayRange);
+		this.WingLFeatherInt2.rotateAngleZ = (MathHelper.cos((40.0F + ageInTicks) * 0.15662F) * wingSwayRange);
+
+		this.WingRFeatherExt1.rotateAngleZ = (MathHelper.cos((0.0F + ageInTicks) * 0.15662F) * wingSwayRange);
+		this.WingRFeatherExt2.rotateAngleZ = (MathHelper.cos((10.0F + ageInTicks) * 0.15662F) * wingSwayRange);
+		this.WingRFeatherExt3.rotateAngleZ = (MathHelper.cos((20.0F + ageInTicks) * 0.15662F) * wingSwayRange);
+		this.WingRFeatherInt1.rotateAngleZ = (MathHelper.cos((30.0F + ageInTicks) * 0.15662F) * wingSwayRange);
+		this.WingRFeatherInt2.rotateAngleZ = (MathHelper.cos((40.0F + ageInTicks) * 0.15662F) * wingSwayRange);
 	}
 }

@@ -12,6 +12,7 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
 import com.gildedgames.aether.common.items.misc.ItemMoaFeather;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
+import com.gildedgames.orbis_api.client.PartialTicks;
 import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -73,6 +74,10 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 
 	private int timeUntilDropFeather;
 
+	private float ageSinceOffGround;
+
+	private boolean wasOnGround = true;
+
 	private EntityGroup pack;
 
 	private MoaNest familyNest;
@@ -116,6 +121,11 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		{
 			this.getGenePool().transformFromParents(GeneUtil.getRandomSeed(world), fatherSeed, motherSeed);
 		}
+	}
+
+	public float getAgeSinceOffGround()
+	{
+		return this.ageSinceOffGround;
 	}
 
 	private void initAI()
@@ -308,6 +318,12 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	{
 		if (!this.onGround)
 		{
+			if (this.wasOnGround)
+			{
+				this.ageSinceOffGround = (float) this.ticksExisted + PartialTicks.get();
+				this.wasOnGround = false;
+			}
+
 			if (this.ticksUntilFlap == 0)
 			{
 				this.world.playSound(this.posX, this.posY, this.posZ, SoundsAether.generic_wing_flap, SoundCategory.NEUTRAL, 0.4f,
@@ -318,6 +334,14 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 			else
 			{
 				this.ticksUntilFlap--;
+			}
+		}
+		else if (this.world.isRemote)
+		{
+			if (!this.wasOnGround)
+			{
+				this.ageSinceOffGround = (float) this.ticksExisted + PartialTicks.get();
+				this.wasOnGround = true;
 			}
 		}
 

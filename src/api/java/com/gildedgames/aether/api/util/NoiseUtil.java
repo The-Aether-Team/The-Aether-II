@@ -3,6 +3,16 @@ package com.gildedgames.aether.api.util;
 public class NoiseUtil
 {
 
+	public static float lerpReverse(final float b, final float a, final float f)
+	{
+		return (a * (1.0F - f)) + (b * f);
+	}
+
+	public static float lerp(final float a, final float b, final float f)
+	{
+		return (a * (1.0F - f)) + (b * f);
+	}
+
 	public static double lerp(final double a, final double b, final double f)
 	{
 		return (a * (1.0 - f)) + (b * f);
