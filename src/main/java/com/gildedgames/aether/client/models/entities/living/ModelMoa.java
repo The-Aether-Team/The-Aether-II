@@ -555,13 +555,16 @@ public class ModelMoa extends ModelBase
 		this.LegLAnkle.rotateAngleX = -(rightSwingXLower * 0.75F) + 0.4363323129985824F;
 		this.LegRAnkle.rotateAngleX = -(leftSwingXLower * 0.75F) + 0.4363323129985824F;
 
-		this.LegLToeL.rotateAngleX = Math.max(0.0F, -(rightSwingXLower * 2.85F)) - 0.17453292519943295F;
-		this.LegLToeM.rotateAngleX = Math.max(0.0F, -(rightSwingXLower * 2.85F)) - 0.5235987755982988F;
-		this.LegLToeR.rotateAngleX = Math.max(0.0F, -(rightSwingXLower * 2.85F)) - 0.17453292519943295F;
+		float leftToeCurlAngle = -(rightSwingXLower * 2.35F);
+		float rightToeCurlAngle = -(leftSwingXLower * 2.35F);
 
-		this.LegRToeL.rotateAngleX = Math.max(0.0F, -(leftSwingXLower * 2.85F)) - 0.17453292519943295F;
-		this.LegRToeM.rotateAngleX = Math.max(0.0F, -(leftSwingXLower * 2.85F)) - 0.5235987755982988F;
-		this.LegRToeR.rotateAngleX = Math.max(0.0F, -(leftSwingXLower * 2.85F)) - 0.17453292519943295F;
+		this.LegLToeL.rotateAngleX = leftToeCurlAngle - 0.17453292519943295F;
+		this.LegLToeM.rotateAngleX = leftToeCurlAngle - 0.5235987755982988F;
+		this.LegLToeR.rotateAngleX = leftToeCurlAngle - 0.17453292519943295F;
+
+		this.LegRToeL.rotateAngleX = rightToeCurlAngle - 0.17453292519943295F;
+		this.LegRToeM.rotateAngleX = rightToeCurlAngle - 0.5235987755982988F;
+		this.LegRToeR.rotateAngleX = rightToeCurlAngle - 0.17453292519943295F;
 
 		float tailSwayRange = 0.05F;
 		float tailSwingModLeft = (leftSwingX * 0.5F);
