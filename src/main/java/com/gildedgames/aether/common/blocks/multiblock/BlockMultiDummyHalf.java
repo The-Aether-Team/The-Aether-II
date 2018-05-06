@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.blocks.multiblock;
 
 import com.gildedgames.aether.common.entities.tiles.multiblock.TileEntityMultiblockDummy;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
@@ -69,6 +70,12 @@ public class BlockMultiDummyHalf extends BlockMultiBase
 	public boolean doesSideBlockRendering(final IBlockState state, final IBlockAccess world, final BlockPos pos, final EnumFacing face)
 	{
 		return false;
+	}
+
+	@Override
+	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
+	{
+		return BlockFaceShape.UNDEFINED;
 	}
 
 }
