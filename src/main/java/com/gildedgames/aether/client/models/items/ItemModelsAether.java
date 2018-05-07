@@ -507,6 +507,11 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.agiosite_stairs, "aether_stairs/agiosite_stairs");
 		registerItemModels(BlocksAether.agiosite_brick_stairs, "aether_stairs/agiosite_brick_stairs");
 
+		registerItemModels(BlocksAether.highlands_snow, "highlands_snow");
+		registerItemModels(BlocksAether.highlands_snow_layer, "highlands_snow_height2");
+		registerItemModels(BlocksAether.highlands_ice, "highlands_ice");
+		registerItemModels(BlocksAether.highlands_packed_ice, "highlands_packed_ice");
+
 		registerItemModels(BlocksAether.woven_sticks, new ItemModelBuilder("woven_sticks/")
 				.add(BlockWovenSticks.SKYROOT.getMeta(), "woven_skyroot_sticks"));
 

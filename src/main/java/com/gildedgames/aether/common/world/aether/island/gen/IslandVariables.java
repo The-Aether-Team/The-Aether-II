@@ -62,7 +62,7 @@ public class IslandVariables implements NBT
 	private double lakeConcentrationModifier = 0.0;
 
 	/**
-	 * Whether or not this island will generate snop caps for high pieces of terrain.
+	 * Whether or not this island will generate snow caps for high pieces of terrain.
 	 */
 	private boolean snowCaps;
 

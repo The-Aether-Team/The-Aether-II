@@ -23,10 +23,7 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.blocks.ItemBlockMultiName;
 import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import com.google.common.collect.Sets;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockBed;
-import net.minecraft.block.BlockButtonStone;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -160,6 +157,14 @@ public class BlocksAether
 	public static final BlockQuicksoil quicksoil = new BlockQuicksoil();
 
 	public static final BlockFerrositeSand ferrosite_sand = new BlockFerrositeSand();
+
+	public static BlockCustomSnowBlock highlands_snow = new BlockCustomSnowBlock();
+
+	public static BlockCustomSnow highlands_snow_layer = new BlockCustomSnow();
+
+	public static Block highlands_ice = new BlockIce();
+
+	public static Block highlands_packed_ice = new BlockPackedIce();
 
 	public static final BlockAetherCraftingTable aether_crafting_table = new BlockAetherCraftingTable();
 
@@ -312,6 +317,7 @@ public class BlocksAether
 
 	public static Block aether_teleporter = new BlockAetherTeleporter();
 
+
 	@SubscribeEvent
 	public static void onRegisterBlocks(final RegistryEvent.Register<Block> event)
 	{
@@ -333,6 +339,11 @@ public class BlocksAether
 		r.register("holystone", holystone.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 		r.register("ferrosite", ferrosite.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 		r.register("rusted_ferrosite", rusted_ferrosite.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+
+		r.register("highlands_snow", highlands_snow.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		r.register("highlands_snow_layer", highlands_snow_layer.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		r.register("highlands_ice", highlands_ice.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		r.register("highlands_packed_ice", highlands_packed_ice.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
 		r.register("skyroot_bed", skyroot_bed);
 
@@ -630,9 +641,9 @@ public class BlocksAether
 		altar.setHarvestLevel("pickaxe", 0);
 		holystone_furnace.setHarvestLevel("pickaxe", 0);
 		aether_crafting_table.setHarvestLevel("axe", 0);
-		icestone_cooler.setHarvestLevel("axe", 0);
-		incubator.setHarvestLevel("axe", 0);
-		masonry_bench.setHarvestLevel("axe", 0);
+		icestone_cooler.setHarvestLevel("pickaxe", 0);
+		incubator.setHarvestLevel("pickaxe", 0);
+		masonry_bench.setHarvestLevel("pickaxe", 0);
 
 		zanite_block.setHarvestLevel("pickaxe", 1);
 		gravitite_block.setHarvestLevel("pickaxe", 2);

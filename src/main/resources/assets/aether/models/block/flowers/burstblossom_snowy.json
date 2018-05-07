@@ -2,6 +2,6 @@
 	"parent": "aether:block/crossbase",
 	"textures": {
 		"cross": "aether:blocks/flowers/burstblossom",
-		"texture": "blocks/snow"
+		"texture": "aether:blocks/highlands_snow"
 	}
 }

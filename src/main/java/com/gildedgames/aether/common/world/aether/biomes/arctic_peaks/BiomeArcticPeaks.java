@@ -44,7 +44,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase
 	@Override
 	public IBlockState getCoastalBlock()
 	{
-		return Blocks.PACKED_ICE.getDefaultState();
+		return BlocksAether.highlands_packed_ice.getDefaultState();
 	}
 
 	@Override
@@ -142,7 +142,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase
 
 					if (world.canBlockFreezeWater(blockpos2))
 					{
-						world.setBlockState(blockpos2, Blocks.ICE.getDefaultState(), 2);
+						world.setBlockState(blockpos2, BlocksAether.highlands_ice.getDefaultState(), 2);
 					}
 
 					if (heightSample > 0.5)
@@ -152,7 +152,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase
 
 						if (world.canSnowAt(blockpos1, true))
 						{
-							world.setBlockState(blockpos1, Blocks.SNOW_LAYER.getDefaultState(), 2);
+							world.setBlockState(blockpos1, BlocksAether.highlands_snow_layer.getDefaultState(), 2);
 						}
 						else if (block instanceof IBlockSnowy)
 						{

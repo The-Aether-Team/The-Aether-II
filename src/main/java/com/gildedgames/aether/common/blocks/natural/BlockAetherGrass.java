@@ -72,7 +72,7 @@ public class BlockAetherGrass extends BlockGrass implements IBlockMultiName
 		final Comparable<?> snowFlower = up.getProperties().get(BlockAetherFlower.PROPERTY_SNOWY);
 
 		return state.withProperty(SNOWY,
-				block == Blocks.SNOW || block == Blocks.SNOW_LAYER || (snowGrass != null && snowGrass.equals(BlockTallAetherGrass.Type.SNOWY)) || (
+				block == BlocksAether.highlands_snow || block == BlocksAether.highlands_snow_layer || (snowGrass != null && snowGrass.equals(BlockTallAetherGrass.Type.SNOWY)) || (
 						snowFlower != null && snowFlower
 								.equals(true)));
 	}

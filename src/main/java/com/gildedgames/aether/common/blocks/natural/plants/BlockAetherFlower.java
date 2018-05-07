@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.blocks.natural.plants;
 
+import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.IBlockMultiName;
 import com.gildedgames.aether.common.blocks.IBlockSnowy;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
@@ -95,7 +96,7 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 		{
 			if (worldIn.getBlockState(pos.down()) != Blocks.AIR.getDefaultState())
 			{
-				worldIn.setBlockState(pos, Blocks.SNOW_LAYER.getDefaultState().withProperty(BlockSnow.LAYERS, 1), 2);
+				worldIn.setBlockState(pos, BlocksAether.highlands_snow_layer.getDefaultState().withProperty(BlockSnow.LAYERS, 1), 2);
 			}
 		}
 	}

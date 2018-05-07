@@ -150,7 +150,7 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 		{
 			if (world.getBlockState(pos.down()) != Blocks.AIR.getDefaultState())
 			{
-				world.setBlockState(pos, Blocks.SNOW_LAYER.getDefaultState().withProperty(BlockSnow.LAYERS, 1), 2);
+				world.setBlockState(pos, BlocksAether.highlands_snow_layer.getDefaultState().withProperty(BlockSnow.LAYERS, 1), 2);
 			}
 		}
 	}
