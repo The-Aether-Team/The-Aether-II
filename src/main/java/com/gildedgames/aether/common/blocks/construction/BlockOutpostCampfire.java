@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.blocks.construction;
 import com.gildedgames.aether.common.blocks.multiblock.BlockMultiController;
 import com.gildedgames.aether.common.entities.tiles.TileEntityOutpostCampfire;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -22,6 +23,12 @@ public class BlockOutpostCampfire extends BlockMultiController
 
 		this.setBlockUnbreakable();
 		this.setLightOpacity(0);
+	}
+
+	@Override
+	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
+	{
+		return BlockFaceShape.UNDEFINED;
 	}
 
 	@Override
