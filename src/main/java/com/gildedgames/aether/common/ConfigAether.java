@@ -48,7 +48,7 @@ public class ConfigAether
 		this.displayPerformanceIndicator = this.getBoolean(this.general, "Display Performance Indicator", true);
 
 		this.helmetShadow = this.getBoolean(this.general, "Helmet Shadow", true);
-		this.cutoutHelmets = this.getBoolean(this.general, "Cutout Helmets", true);
+		this.cutoutHelmets = this.getBoolean(this.general, "Transparent Helmets", true);
 
 		if (this.configuration.hasChanged())
 		{
