@@ -262,7 +262,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 					{
 						if (this.v.hasSnowCaps() && filteredSample > 0.7 && y > maxY - 8)
 						{
-							primer.setBlockState(x, y, z, Blocks.SNOW.getDefaultState());
+							primer.setBlockState(x, y, z, BlocksAether.highlands_snow.getDefaultState());
 						}
 						else
 						{
