@@ -645,6 +645,15 @@ gui.aether.random_neckwear=Random Neckwear
 gui.aether.random_charm=Random Charm
 gui.aether.incubator_fuel=Incubator Fuel
 gui.aether.baby_moa=Baby Moa
+gui.aether.respawn.bed=Bed Respawn
+gui.aether.respawn.campfire=Campfire Rewspawn
+gui.aether.loading.indeterminate=Loading...
+gui.aether.loading.percentage=%s\% Loading...
+gui.aether.patreon.rewards.button.use=Use
+gui.aether.patreon.rewards.button.locked=Locked
+gui.aether.incubator.label.incubating=Incubating
+gui.aether.incubator.label.heating=Heating
+gui.aether.masonry.label.recipes=Recipes
 
 #Ability Tooltips
 ability.breatheUnderwater.name=Underwater Breathing
