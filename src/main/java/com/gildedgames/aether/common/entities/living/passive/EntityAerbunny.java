@@ -3,6 +3,8 @@ package com.gildedgames.aether.common.entities.living.passive;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.network.packets.PacketAerbunnySetRiding;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.google.common.collect.Sets;
@@ -17,7 +19,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.pathfinding.PathNavigateGround;
-import net.minecraft.util.*;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -106,9 +111,12 @@ public class EntityAerbunny extends EntityAetherAnimal
 		{
 			final Entity entity = this.getRidingEntity();
 
-			if (entity.isSneaking() && entity.onGround)
+			if (!this.world.isRemote && entity.isSneaking() && entity.onGround)
 			{
+				NetworkingAether.sendPacketToWatching(new PacketAerbunnySetRiding(null, this), this, false);
+
 				this.dismountRidingEntity();
+				this.setPosition(entity.posX, entity.posY + entity.getEyeHeight() + 0.5D, entity.posZ);
 			}
 
 			if (entity.motionY < 0)
@@ -138,11 +146,12 @@ public class EntityAerbunny extends EntityAetherAnimal
 		{
 			if (!this.isRiding() && player.getPassengers().size() <= 0)
 			{
-				this.world.playSound(player, player.getPosition(), SoundsAether.aerbunny_lift, SoundCategory.NEUTRAL, 1.0F,
-						0.8F + (this.rand.nextFloat() * 0.5F));
+				if (!this.world.isRemote)
+				{
+					this.startRiding(player, true);
 
-				this.startRiding(player, true);
-				AetherCore.PROXY.displayDismountMessage(player);
+					NetworkingAether.sendPacketToWatching(new PacketAerbunnySetRiding(player, this), this, false);
+				}
 
 				return true;
 			}

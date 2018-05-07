@@ -123,8 +123,14 @@ public class ModelAerbunny extends ModelBase
 		this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entity);
 
 		float rotation = bunny.getRotation();
-		GlStateManager.translate(0F, 1.1F, -0.2F);
+		GlStateManager.translate(0.0F, 1.1F, -0.2F);
 		GlStateManager.rotate(rotation, 20f, 0f, 0f);
+
+		if (bunny.isChild())
+		{
+			GlStateManager.scale(0.7F, 0.7F, 0.7F);
+			GlStateManager.translate(0.0F, 0.0F, 0.0F);
+		}
 
 		/*
 		Animation for the legs, because the rotation for the bunnie's jump is from -30 to 30, offsetting it allows the feet to be in a preset position,
