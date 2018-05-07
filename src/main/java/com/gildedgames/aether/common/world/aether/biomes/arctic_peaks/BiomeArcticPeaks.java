@@ -19,7 +19,6 @@ import com.gildedgames.orbis_api.util.mc.NBT;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -150,7 +149,9 @@ public class BiomeArcticPeaks extends BiomeAetherBase
 						final IBlockState state = world.getBlockState(blockpos1);
 						final Block block = state.getBlock();
 
-						if (world.canSnowAt(blockpos1, true))
+						IBlockState down = world.getBlockState(blockpos2);
+
+						if (world.canSnowAt(blockpos1, true) && down != BlocksAether.highlands_ice && down != BlocksAether.highlands_packed_ice)
 						{
 							world.setBlockState(blockpos1, BlocksAether.highlands_snow_layer.getDefaultState(), 2);
 						}
