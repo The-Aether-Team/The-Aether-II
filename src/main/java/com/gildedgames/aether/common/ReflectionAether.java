@@ -20,6 +20,8 @@ public class ReflectionAether
 
 	public static final ReflectionEntry BUTTON_LIST = new ReflectionEntry("field_146292_n", "buttonList");
 
+	public static final ReflectionEntry ENTITY_RENDER_LAYERS = new ReflectionEntry("field_177097_h", "layerRenderers");
+
 	public static Field getField(final Class clazz, final String... names)
 	{
 		for (final Field field : clazz.getDeclaredFields())
@@ -92,11 +94,12 @@ public class ReflectionAether
 		}
 	}
 
-	public static Object getValue(final Field field, final Object obj)
+	@SuppressWarnings("unchecked")
+	public static <T> T getValue(final Field field, final Object obj)
 	{
 		try
 		{
-			return field.get(obj);
+			return (T) field.get(obj);
 		}
 		catch (final IllegalAccessException e)
 		{
@@ -104,7 +107,7 @@ public class ReflectionAether
 		}
 	}
 
-	public static void setValue(final Field field, final Object instance, final Object value)
+	public static void setField(final Field field, final Object instance, final Object value)
 	{
 		try
 		{

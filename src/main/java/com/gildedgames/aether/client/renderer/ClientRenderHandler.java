@@ -7,11 +7,16 @@ import com.gildedgames.aether.client.models.entities.player.LayerHeadShadow;
 import com.gildedgames.aether.client.models.entities.player.LayerPlayerGloves;
 import com.gildedgames.aether.client.models.entities.player.LayerSwetLatch;
 import com.gildedgames.aether.client.renderer.entities.living.RenderPlayerHelper;
+import com.gildedgames.aether.client.renderer.entities.living.layers.LayerArmorProxy;
+import com.gildedgames.aether.client.renderer.entities.living.layers.LayerPatreonArmor;
+import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
+import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
+import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.util.EnumHand;
@@ -19,34 +24,46 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderSpecificHandEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class ClientRenderHandler
 {
-
 	private static final List<IOverlay> overlays = Lists.newArrayList();
 
 	public ClientRenderHandler()
 	{
-		RenderLivingBase<?> playerRender = Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default");
+		for (RenderLivingBase<?> playerRender: new HashSet<>(Minecraft.getMinecraft().getRenderManager().getSkinMap().values()))
+		{
+			Field field = ReflectionAether.getField(RenderLivingBase.class, ReflectionAether.ENTITY_RENDER_LAYERS.getMappings());
 
-		playerRender.addLayer(new LayerPlayerGloves(playerRender));
-		playerRender.addLayer(new LayerHeadShadow(playerRender));
-		playerRender.addLayer(new LayerSwetLatch(playerRender));
+			List<LayerRenderer<?>> original = new ArrayList<>(ReflectionAether.getValue(field, playerRender));
+			List<LayerRenderer<?>> updated = new ArrayList<>();
 
-		playerRender = Minecraft.getMinecraft().getRenderManager().getSkinMap().get("slim");
+			for (LayerRenderer<?> i : original)
+			{
+				if (i instanceof LayerBipedArmor)
+				{
+					updated.add(new LayerArmorProxy(playerRender, (LayerBipedArmor) i));
+				}
+				else
+				{
+					updated.add(i);
+				}
+			}
 
-		playerRender.addLayer(new LayerPlayerGloves(playerRender));
-		playerRender.addLayer(new LayerHeadShadow(playerRender));
-		playerRender.addLayer(new LayerSwetLatch(playerRender));
+			updated.add(new LayerPlayerGloves(playerRender));
+			updated.add(new LayerHeadShadow(playerRender));
+			updated.add(new LayerSwetLatch(playerRender));
+			updated.add(new LayerPatreonArmor(playerRender));
 
-		ClientRenderHandler.addOverlay(new PortalOverlay());
-		ClientRenderHandler.addOverlay(new SwetOverlay());
-	}
+			ReflectionAether.setField(field, playerRender, updated);
+		}
 
-	public static void addOverlay(final IOverlay overlay)
-	{
-		ClientRenderHandler.overlays.add(overlay);
+		ClientRenderHandler.overlays.add(new PortalOverlay());
+		ClientRenderHandler.overlays.add(new SwetOverlay());
 	}
 
 	@SubscribeEvent
