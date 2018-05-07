@@ -54,6 +54,7 @@ public class NetworkingAether
 		instance.registerMessage(PacketCampfires.HandlerClient.class, PacketCampfires.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketPreventDropsInventories.HandlerClient.class, PacketPreventDropsInventories.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketSeparateInventoryModule.HandlerClient.class, PacketSeparateInventoryModule.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketAerbunnySetRiding.HandlerClient.class, PacketAerbunnySetRiding.class, discriminant++, Side.CLIENT);
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(AetherCore.INSTANCE, new AetherGuiHandler());
 	}
