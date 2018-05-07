@@ -1,0 +1,21 @@
+{
+	"type": "forge:ore_shapeless",
+	"ingredients": [
+	    {
+	      	"item": "aether:ambrosium_chunk",
+			"count": 2
+	    },
+	    {
+	     	"type": "forge:ore_dict",
+	        "ore": "holystone",
+	        "count": 2
+	    },
+	    {
+	    	"item": "aether:ambrosium_shard"
+	    }
+  	],
+	"result":
+	{
+		"item": "aether:healing_stone_depleted"
+	}
+}
