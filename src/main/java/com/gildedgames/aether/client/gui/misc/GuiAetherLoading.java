@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import org.lwjgl.opengl.GL11;
 
 public class GuiAetherLoading extends GuiFrame implements CustomLoadingRenderer.ICustomLoading
@@ -51,7 +52,7 @@ public class GuiAetherLoading extends GuiFrame implements CustomLoadingRenderer.
 		this.highlands = new GuiTexture(Dim2D.build().scale(0.45F).width(512).height(235).center(true).pos(center).flush(), HIGHLANDS);
 
 		this.loading = new GuiText(Dim2D.build().center(true).pos(center).addY(70).flush(),
-				new Text(new TextComponentString("Loading..."), 1.0F));
+				new Text(new TextComponentTranslation("gui.aether.loading.indeterminate"), 1.0F));
 
 		this.addChildren(this.highlands, this.loading);
 	}
@@ -96,7 +97,7 @@ public class GuiAetherLoading extends GuiFrame implements CustomLoadingRenderer.
 
 				String percentString = String.valueOf(MathHelper.floor(PERCENT));
 
-				this.loading.setText(new Text(new TextComponentString(percentString + "% Loaded..."), 1.0F));
+				this.loading.setText(new Text(new TextComponentTranslation("gui.aether.loading.percentage", percentString), 1.0F));
 			}
 		}
 	}

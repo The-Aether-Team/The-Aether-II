@@ -463,7 +463,7 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 		this.fontRenderer.drawString(name, 88 - (this.fontRenderer.getStringWidth(name) / 2), 6, 4210752);
 		this.fontRenderer.drawString(I18n.format("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
 
-		this.fontRenderer.drawString("Recipes", -126, 7, 4210752);
+		this.fontRenderer.drawString(I18n.format("gui.aether.masonry.label.recipes"), -126, 7, 4210752);
 	}
 
 	/**
@@ -520,9 +520,6 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 			GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 
 			Gui.drawModalRectWithCustomSizedTexture(this.guiLeft - 126, this.guiTop + 21, 0, 0, 72, 108, 72, 126);
-
-			this.drawCenteredString(Minecraft.getMinecraft().fontRenderer, "Nothing left", this.guiLeft - 90, this.guiTop + 47, 0xFFFFFF);
-			this.drawCenteredString(Minecraft.getMinecraft().fontRenderer, "to craft!", this.guiLeft - 90, this.guiTop + 57, 0xFFFFFF);
 		}
 	}
 

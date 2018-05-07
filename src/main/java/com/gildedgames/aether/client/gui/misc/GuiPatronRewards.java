@@ -24,6 +24,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 
 import java.io.IOException;
 import java.util.Comparator;
@@ -58,9 +59,9 @@ public class GuiPatronRewards extends GuiFrame implements IListNavigatorListener
 
 	private PlayerPatronRewards patronRewards;
 
-	private Text useString = new Text(new TextComponentString("Use"), 1.0F);
+	private Text useString = new Text(new TextComponentTranslation("gui.aether.patreon.rewards.button.use"), 1.0F);
 
-	private Text lockedString = new Text(new TextComponentString("Locked"), 1.0F);
+	private Text lockedString = new Text(new TextComponentTranslation("gui.aether.patreon.rewards.button.locked"), 1.0F);
 
 	public GuiPatronRewards()
 	{

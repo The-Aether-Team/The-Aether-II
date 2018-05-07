@@ -7,6 +7,7 @@ import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiGameOver;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.resources.I18n;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -35,9 +36,9 @@ public class RespawnGuiOverrides
 
 		if (gui instanceof GuiGameOver && gui.mc.world.provider.getDimensionType() == DimensionsAether.AETHER)
 		{
-			event.getButtonList().get(0).displayString = "Bed Respawn";
+			event.getButtonList().get(0).displayString = I18n.format("gui.aether.respawn.bed");
 			event.getButtonList().get(1).y += 24;
-			event.getButtonList().add(new GuiButton(2, gui.width / 2 - 100, gui.height / 4 + 96, "Campfire Respawn"));
+			event.getButtonList().add(new GuiButton(2, gui.width / 2 - 100, gui.height / 4 + 96, I18n.format("gui.aether.campfire.bed")));
 		}
 	}
 

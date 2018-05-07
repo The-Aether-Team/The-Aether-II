@@ -6,6 +6,7 @@ import com.gildedgames.aether.common.entities.tiles.TileEntityIncubator;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
@@ -55,7 +56,9 @@ public class GuiIncubator extends GuiContainer
 			{
 				if (!te.getMoaEgg().isEmpty())
 				{
-					this.fontRenderer.drawString("Incubating", 126 - (this.fontRenderer.getStringWidth("Incubating") / 2), this.ySize - 126, 15435844);
+					String text = I18n.format("gui.aether.incubator.label.incubating");
+
+					this.fontRenderer.drawString(text, 126 - (this.fontRenderer.getStringWidth(text) / 2), this.ySize - 126, 15435844);
 				}
 
 				if (!te.hasStartedHeating())
@@ -97,7 +100,9 @@ public class GuiIncubator extends GuiContainer
 			}
 			else if (te.areFuelSlotsFilled() && te.getField(0) < 2500)
 			{
-				this.fontRenderer.drawString("Heating", 60 - (this.fontRenderer.getStringWidth("Heating") / 2), this.ySize - 126, 11743532);
+				String text = I18n.format("gui.aether.incubator.label.heating");
+
+				this.fontRenderer.drawString(text, 60 - (this.fontRenderer.getStringWidth(text) / 2), this.ySize - 126, 11743532);
 			}
 		}
 	}
