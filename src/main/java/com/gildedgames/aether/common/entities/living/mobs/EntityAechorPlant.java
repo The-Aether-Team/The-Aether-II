@@ -6,6 +6,7 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
 import com.gildedgames.aether.common.util.helpers.PlayerUtil;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -101,21 +102,19 @@ public class EntityAechorPlant extends EntityAetherMob
 		}
 	}
 
-	private boolean canStayHere(BlockPos pos)
+	private boolean canStayHere(final BlockPos pos)
 	{
-		if (!this.world.isAirBlock(pos))
+		if (this.world.getBlockState(pos).isFullCube())
 		{
 			return false;
 		}
 
-		Block rootBlock = this.world.getBlockState(pos.down()).getBlock();
+		final IBlockState rootBlock = this.world.getBlockState(pos.down());
 
-		if (rootBlock != BlocksAether.aether_grass && rootBlock != BlocksAether.aether_dirt)
-		{
-			return false;
-		}
-
-		return true;
+		return rootBlock.getBlock() == BlocksAether.aether_grass
+				|| rootBlock.getBlock() == BlocksAether.aether_dirt
+				|| rootBlock.getBlock() == BlocksAether.highlands_snow_layer
+				|| rootBlock.getBlock() == BlocksAether.highlands_snow;
 	}
 
 	@Override
