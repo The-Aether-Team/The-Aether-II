@@ -1,13 +1,14 @@
 package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.IAetherServices;
+import com.gildedgames.aether.api.net.IGildedGamesAccountApi;
 import com.gildedgames.aether.api.registry.IContentRegistry;
-import com.gildedgames.aether.client.RespawnGuiOverrides;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherHooks;
 import com.gildedgames.aether.common.entities.util.MountEventHandler;
 import com.gildedgames.aether.common.entities.util.QuicksoilProcessor;
 import com.gildedgames.aether.common.items.tools.ItemToolHandler;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
+import com.gildedgames.aether.common.network.api.GildedGamesAccountApiImpl;
 import com.gildedgames.aether.common.registry.ContentRegistry;
 import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.IrradiatedForestsData;
 import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.MagneticHillPillar;
@@ -34,6 +35,7 @@ import java.util.Random;
 public class CommonProxy implements IAetherServices
 {
 	private final ContentRegistry contentRegistry = new ContentRegistry();
+	private final GildedGamesAccountApiImpl webAPI = new GildedGamesAccountApiImpl();
 
 	private File configDir;
 
@@ -128,6 +130,12 @@ public class CommonProxy implements IAetherServices
 	public IContentRegistry content()
 	{
 		return this.contentRegistry;
+	}
+
+	@Override
+	public IGildedGamesAccountApi gildedGamesAccountApi()
+	{
+		return this.webAPI;
 	}
 
 	public PrepAether getPrepAether()

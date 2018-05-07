@@ -1,29 +1,29 @@
 package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
 import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.api.patron.PatronDetails;
-import com.gildedgames.aether.api.patron.PatronPayment;
+import com.gildedgames.aether.api.net.data.UserFeatures;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.patron.PatronChoices;
-import com.google.common.collect.Lists;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
-import java.time.YearMonth;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 public class PlayerPatronRewards extends PlayerAetherModule
 {
 	private PatronChoices choices;
 
-	private PatronDetails details;
+	private UserFeatures features = new UserFeatures();
+
+	private Future<UserFeatures> featuresFuture;
 
 	public PlayerPatronRewards(PlayerAether playerAether)
 	{
 		super(playerAether);
 
-		this.details = new PatronDetails(Lists.newArrayList(new PatronPayment(5000, YearMonth.now())));
-		this.choices = new PatronChoices(this.details, AetherAPI.content().patronRewards());
+		this.choices = new PatronChoices(this, AetherAPI.content().patronRewards());
 	}
 
 	public PatronChoices getChoices()
@@ -31,15 +31,33 @@ public class PlayerPatronRewards extends PlayerAetherModule
 		return this.choices;
 	}
 
-	public PatronDetails getDetails()
+	public UserFeatures getFeatures()
 	{
-		return this.details;
+		return this.features;
+	}
+
+	@Override
+	public void onEntityJoinWorld()
+	{
+		this.featuresFuture = AetherAPI.services().gildedGamesAccountApi().retrieveUserFeatures(this.getEntity().getGameProfile().getId());
 	}
 
 	@Override
 	public void tickStart(TickEvent.PlayerTickEvent event)
 	{
+		if (this.featuresFuture != null && this.featuresFuture.isDone())
+		{
+			try
+			{
+				this.features = this.featuresFuture.get();
+			}
+			catch (InterruptedException | ExecutionException e)
+			{
+				e.printStackTrace();
+			}
 
+			this.featuresFuture = null;
+		}
 	}
 
 	@Override

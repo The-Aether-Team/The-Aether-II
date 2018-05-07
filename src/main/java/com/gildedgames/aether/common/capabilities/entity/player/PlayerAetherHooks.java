@@ -27,6 +27,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
@@ -44,6 +45,20 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 public class PlayerAetherHooks
 {
 	private static ResourceLocation TELEPORTER_RECIPE = AetherCore.getResource("misc/aether_teleporter");
+
+	@SubscribeEvent
+	public static void onPlayerAddedToWorld(final EntityJoinWorldEvent event)
+	{
+		if (event.getEntity() instanceof EntityPlayer)
+		{
+			final PlayerAether aePlayer = PlayerAether.getPlayer(event.getEntity());
+
+			if (aePlayer != null)
+			{
+				aePlayer.onEntityJoinWorld();
+			}
+		}
+	}
 
 	@SubscribeEvent
 	public static void onPlayerJoined(final PlayerLoggedInEvent event)

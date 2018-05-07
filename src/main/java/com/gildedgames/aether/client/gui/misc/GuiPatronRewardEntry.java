@@ -7,6 +7,7 @@ import com.gildedgames.orbis_api.client.gui.util.GuiFrame;
 import com.gildedgames.orbis_api.client.gui.util.GuiText;
 import com.gildedgames.orbis_api.client.gui.util.GuiTexture;
 import com.gildedgames.orbis_api.client.rect.Dim2D;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;
 
@@ -18,7 +19,7 @@ public class GuiPatronRewardEntry extends GuiFrame
 
 	public static int SELECTED_INDEX = -1;
 
-	private String text;
+	private String name;
 
 	private ResourceLocation icon;
 
@@ -27,14 +28,14 @@ public class GuiPatronRewardEntry extends GuiFrame
 	private GuiAbstractButton button;
 
 	/**
-	 * @param text The text for ths button
+	 * @param name The text for ths button
 	 * @param icon Has to be a 16x16 icon
 	 */
-	public GuiPatronRewardEntry(String text, ResourceLocation icon, int index)
+	public GuiPatronRewardEntry(String name, ResourceLocation icon, int index)
 	{
 		super(Dim2D.build().width(110).height(22).flush());
 
-		this.text = text;
+		this.name = name;
 		this.icon = icon;
 		this.index = index;
 	}
@@ -53,7 +54,7 @@ public class GuiPatronRewardEntry extends GuiFrame
 
 		GuiText text = new GuiText(
 				Dim2D.build().centerY(true).x(25).y(this.dim().originalState().height() / 2).addY(2).flush(),
-				new Text(new TextComponentString(this.text), 1.0F));
+				new Text(new TextComponentString(I18n.format(this.name)), 1.0F));
 
 		this.addChildren(this.button, text, icon);
 	}

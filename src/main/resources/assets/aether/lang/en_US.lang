@@ -788,3 +788,9 @@ necromancer.us.leadtheway=Thank you. Goodbye.
 
 aether.warning.deprecated_item=§cDeprecated! Will be removed!
 aether.warning.operator_item=Requires Operator privileges
+
+# Rewards
+aether.reward.sun_spirit.name=Sun Spirit
+aether.reward.slider.name=Slider
+aether.reward.valkyrie_queen.name=Valkyrie Queen
+aether.reward.none.name=None

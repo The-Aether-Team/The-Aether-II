@@ -52,7 +52,7 @@ public class GuiPatronRewards extends GuiFrame implements IListNavigatorListener
 
 	private IPatronReward selected;
 
-	private PatronRewardArmor defaultArmor = new PatronRewardArmor("Default", PatronRewards.armorIcon("default"), () -> null, null, null, (d) -> true);
+	private PatronRewardArmor defaultArmor = new PatronRewardArmor("aether.reward.none.name", PatronRewards.armorIcon("none"), null, null, null, (d) -> true);
 
 	private GuiText useText;
 
@@ -116,7 +116,7 @@ public class GuiPatronRewards extends GuiFrame implements IListNavigatorListener
 						this.rewards,
 						(pos, node, index) ->
 						{
-							GuiPatronRewardEntry entry = new GuiPatronRewardEntry(node.getRewardName(), node.getRewardIcon(), index);
+							GuiPatronRewardEntry entry = new GuiPatronRewardEntry(node.getUnlocalizedName(), node.getRewardIcon(), index);
 
 							entry.dim().mod().pos(pos).flush();
 
@@ -165,7 +165,7 @@ public class GuiPatronRewards extends GuiFrame implements IListNavigatorListener
 	{
 		if (this.selected != null)
 		{
-			if (this.selected.isUnlocked(this.patronRewards.getDetails()))
+			if (this.selected.isUnlocked(this.patronRewards.getFeatures()))
 			{
 				this.useText.setText(this.useString);
 				this.use.setEnabled(true);

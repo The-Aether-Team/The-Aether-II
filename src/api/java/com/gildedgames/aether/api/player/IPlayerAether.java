@@ -1,6 +1,7 @@
 package com.gildedgames.aether.api.player;
 
 import com.gildedgames.aether.api.dialog.IDialogController;
+import com.gildedgames.aether.api.net.data.UserFeatures;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -43,4 +44,9 @@ public interface IPlayerAether
 	 * @param tag The {@link NBTTagCompound} to read from
 	 */
 	void read(NBTTagCompound tag);
+
+	/**
+	 * Called when a player logs in.
+	 */
+	void onEntityJoinWorld();
 }

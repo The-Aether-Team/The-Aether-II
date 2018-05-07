@@ -17,6 +17,12 @@ public abstract class PlayerAetherModule implements NBT
 		this.playerAether = playerAether;
 	}
 
+	public void onEntityJoinWorld()
+	{
+
+	}
+
+
 	public void onDrops(PlayerDropsEvent event)
 	{
 

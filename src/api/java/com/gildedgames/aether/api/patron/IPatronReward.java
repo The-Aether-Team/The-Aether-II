@@ -1,5 +1,6 @@
 package com.gildedgames.aether.api.patron;
 
+import com.gildedgames.aether.api.net.data.UserFeatures;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -12,9 +13,9 @@ public interface IPatronReward
 	 */
 	ResourceLocation getRewardIcon();
 
-	String getRewardName();
+	String getUnlocalizedName();
 
-	boolean isUnlocked(PatronDetails details);
+	boolean isUnlocked(UserFeatures details);
 
 	void onUse();
 

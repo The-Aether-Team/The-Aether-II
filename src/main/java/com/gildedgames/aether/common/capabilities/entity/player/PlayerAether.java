@@ -209,6 +209,7 @@ public class PlayerAether implements IPlayerAether
 				module.tickEnd(event);
 			}
 		}
+
 	}
 
 	public void onRespawn(final PlayerEvent.PlayerRespawnEvent event)
@@ -350,6 +351,15 @@ public class PlayerAether implements IPlayerAether
 		if (inst != null)
 		{
 			this.towerInstance = inst;
+		}
+	}
+
+	@Override
+	public void onEntityJoinWorld()
+	{
+		for (PlayerAetherModule module : this.modules)
+		{
+			module.onEntityJoinWorld();
 		}
 	}
 
