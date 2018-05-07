@@ -49,7 +49,12 @@ public class PlayerPatronRewards extends PlayerAetherModule
 		{
 			try
 			{
-				this.features = this.featuresFuture.get();
+				UserFeatures features = this.featuresFuture.get();
+
+				if (features != null)
+				{
+					this.features = features;
+				}
 			}
 			catch (InterruptedException | ExecutionException e)
 			{
