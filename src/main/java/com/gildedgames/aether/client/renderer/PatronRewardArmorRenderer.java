@@ -1,20 +1,33 @@
-package com.gildedgames.aether.common.patron.armor;
+package com.gildedgames.aether.client.renderer;
 
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.api.patron.IPatronRewardRenderer;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
+import com.gildedgames.aether.client.models.entities.player.LayerArmorProxy;
+import com.gildedgames.aether.client.models.entities.player.LayerHeadShadow;
+import com.gildedgames.aether.client.models.entities.player.LayerAetherPlayerGloves;
+import com.gildedgames.aether.client.models.entities.player.LayerAetherPatronArmor;
+import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
-import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
+import com.gildedgames.aether.common.patron.armor.PatronRewardArmor;
+import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import com.gildedgames.orbis_api.util.InputHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.RenderPlayer;
+import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
+import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PatronRewardArmorRenderer implements IPatronRewardRenderer
 {
@@ -23,6 +36,16 @@ public class PatronRewardArmorRenderer implements IPatronRewardRenderer
 	private AbstractClientPlayer player;
 
 	private PlayerAether playerAether;
+
+	private RenderPlayer renderPlayer;
+
+	private LayerAetherPatronArmor armorPreviewLayer;
+
+	private LayerAetherPlayerGloves glovePreviewLayer;
+
+	private LayerHeadShadow shadowPreviewLayer;
+
+	private LayerArmorProxy vanillaArmorPreviewLayer;
 
 	public PatronRewardArmorRenderer(PatronRewardArmor reward)
 	{
@@ -55,6 +78,31 @@ public class PatronRewardArmorRenderer implements IPatronRewardRenderer
 	{
 		this.player = Minecraft.getMinecraft().player;
 		this.playerAether = PlayerAether.getPlayer(this.player);
+
+		this.renderPlayer = new RenderPlayer(Minecraft.getMinecraft().getRenderManager(), EntityUtil.getSkin(this.player).equals("slim"));
+
+		Field field = ReflectionAether.getField(RenderLivingBase.class, ReflectionAether.ENTITY_RENDER_LAYERS.getMappings());
+
+		List<LayerRenderer<?>> original = new ArrayList<>(ReflectionAether.getValue(field, this.renderPlayer));
+		List<LayerRenderer<?>> updated = new ArrayList<>();
+
+		for (LayerRenderer<?> i : original)
+		{
+			if (i instanceof LayerBipedArmor)
+			{
+				updated.add(this.vanillaArmorPreviewLayer = new LayerArmorProxy(this.renderPlayer, (LayerBipedArmor) i));
+			}
+			else
+			{
+				updated.add(i);
+			}
+		}
+
+		updated.add(this.armorPreviewLayer = new LayerAetherPatronArmor(this.renderPlayer));
+		updated.add(this.glovePreviewLayer = new LayerAetherPlayerGloves(this.renderPlayer));
+		updated.add(this.shadowPreviewLayer = new LayerHeadShadow(this.renderPlayer));
+
+		ReflectionAether.setField(field, this.renderPlayer, updated);
 	}
 
 	@Override
@@ -78,65 +126,29 @@ public class PatronRewardArmorRenderer implements IPatronRewardRenderer
 		float f2 = this.player.rotationPitch;
 		float f3 = this.player.prevRotationYawHead;
 		float f4 = this.player.rotationYawHead;
+
 		GlStateManager.rotate(135.0F, 0.0F, 1.0F, 0.0F);
+
 		RenderHelper.enableStandardItemLighting();
+
 		GlStateManager.rotate(-135.0F, 0.0F, 1.0F, 0.0F);
 		GlStateManager.rotate(-((float) Math.atan(mouseY / 40.0F)) * 20.0F, 1.0F, 0.0F, 0.0F);
+
 		this.player.renderYawOffset = (float) Math.atan(mouseX / 40.0F) * 20.0F;
 		this.player.rotationYaw = (float) Math.atan(mouseX / 40.0F) * 40.0F;
 		this.player.rotationPitch = -((float) Math.atan(mouseY / 40.0F)) * 20.0F;
 		this.player.rotationYawHead = this.player.rotationYaw;
 		this.player.prevRotationYawHead = this.player.rotationYaw;
+
 		GlStateManager.translate(0.0F, 0.0F, 0.0F);
-
-		RenderManager rendermanager = Minecraft.getMinecraft().getRenderManager();
-		rendermanager.setPlayerViewY(180.0F);
-
 		GlStateManager.scale(-10.0, 10.0, 10.0);
 
-		rendermanager.setRenderShadow(false);
+		this.armorPreviewLayer.setPreviewArmor(this.reward);
+		this.glovePreviewLayer.setPreviewArmor(this.reward);
+		this.shadowPreviewLayer.setPreviewArmor(this.reward);
+		this.vanillaArmorPreviewLayer.setPreviewArmor(this.reward);
 
-		String texture = this.reward.getArmorTextureName();
-
-		ItemStack head = this.player.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
-		ItemStack chest = this.player.getItemStackFromSlot(EntityEquipmentSlot.CHEST);
-		ItemStack legs = this.player.getItemStackFromSlot(EntityEquipmentSlot.LEGS);
-		ItemStack feet = this.player.getItemStackFromSlot(EntityEquipmentSlot.FEET);
-		ItemStack hands = this.getGloves();
-
-		if (texture != null)
-		{
-			this.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(ItemsAether.gravitite_helmet));
-			this.setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(ItemsAether.gravitite_chestplate));
-			this.setItemStackToSlot(EntityEquipmentSlot.LEGS, new ItemStack(ItemsAether.gravitite_leggings));
-			this.setItemStackToSlot(EntityEquipmentSlot.FEET, new ItemStack(ItemsAether.gravitite_boots));
-			this.setGloves(new ItemStack(ItemsAether.gravitite_gloves));
-
-			ItemAetherArmor.PATRON_TEXTURE_TEMP_OVERRIDE = this.reward.getArmorTextureName();
-		}
-		else
-		{
-			ItemAetherArmor.RENDER_NORMAL_TEMP = true;
-		}
-
-		rendermanager.renderEntity(this.player, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F, false);
-
-		if (texture != null)
-		{
-			ItemAetherArmor.PATRON_TEXTURE_TEMP_OVERRIDE = null;
-
-			this.setItemStackToSlot(EntityEquipmentSlot.HEAD, head);
-			this.setItemStackToSlot(EntityEquipmentSlot.CHEST, chest);
-			this.setItemStackToSlot(EntityEquipmentSlot.LEGS, legs);
-			this.setItemStackToSlot(EntityEquipmentSlot.FEET, feet);
-			this.setGloves(hands);
-		}
-		else
-		{
-			ItemAetherArmor.RENDER_NORMAL_TEMP = false;
-		}
-
-		rendermanager.setRenderShadow(true);
+		this.renderPlayer.doRender(this.player, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F);
 
 		this.player.renderYawOffset = f;
 		this.player.rotationYaw = f1;
@@ -145,6 +157,7 @@ public class PatronRewardArmorRenderer implements IPatronRewardRenderer
 		this.player.rotationYawHead = f4;
 
 		RenderHelper.disableStandardItemLighting();
+
 		GlStateManager.disableRescaleNormal();
 		GlStateManager.setActiveTexture(OpenGlHelper.lightmapTexUnit);
 		GlStateManager.disableTexture2D();

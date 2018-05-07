@@ -4,11 +4,11 @@ import com.gildedgames.aether.client.gui.overlays.IOverlay;
 import com.gildedgames.aether.client.gui.overlays.PortalOverlay;
 import com.gildedgames.aether.client.gui.overlays.SwetOverlay;
 import com.gildedgames.aether.client.models.entities.player.LayerHeadShadow;
-import com.gildedgames.aether.client.models.entities.player.LayerPlayerGloves;
+import com.gildedgames.aether.client.models.entities.player.LayerAetherPlayerGloves;
 import com.gildedgames.aether.client.models.entities.player.LayerSwetLatch;
 import com.gildedgames.aether.client.renderer.entities.living.RenderPlayerHelper;
-import com.gildedgames.aether.client.renderer.entities.living.layers.LayerArmorProxy;
-import com.gildedgames.aether.client.renderer.entities.living.layers.LayerPatreonArmor;
+import com.gildedgames.aether.client.models.entities.player.LayerArmorProxy;
+import com.gildedgames.aether.client.models.entities.player.LayerAetherPatronArmor;
 import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.google.common.collect.Lists;
@@ -54,10 +54,10 @@ public class ClientRenderHandler
 				}
 			}
 
-			updated.add(new LayerPlayerGloves(playerRender));
+			updated.add(new LayerAetherPlayerGloves(playerRender));
 			updated.add(new LayerHeadShadow(playerRender));
 			updated.add(new LayerSwetLatch(playerRender));
-			updated.add(new LayerPatreonArmor(playerRender));
+			updated.add(new LayerAetherPatronArmor(playerRender));
 
 			ReflectionAether.setField(field, playerRender, updated);
 		}

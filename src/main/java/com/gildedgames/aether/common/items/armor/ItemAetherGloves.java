@@ -29,26 +29,18 @@ public class ItemAetherGloves extends Item
 	public ResourceLocation getGloveTexture(EntityPlayer player)
 	{
 		String skinType = EntityUtil.getSkin(player);
+
 		boolean slim = skinType.equals("slim");
 
-		if (ItemAetherArmor.PATRON_TEXTURE_TEMP_OVERRIDE != null && player == Minecraft.getMinecraft().player)
-		{
-			return AetherCore
-					.getResource("textures/armor/" + ItemAetherArmor.PATRON_TEXTURE_TEMP_OVERRIDE + "_gloves" + (slim ? "_slim" : "") + ".png");
-		}
+		PlayerAether playerAether = PlayerAether.getPlayer(player);
 
-		if (!ItemAetherArmor.RENDER_NORMAL_TEMP)
+		if (playerAether != null)
 		{
-			PlayerAether playerAether = PlayerAether.getPlayer(player);
+			PatronRewardArmor armorChoice = playerAether.getPatronRewardsModule().getChoices().getArmorChoice();
 
-			if (playerAether != null)
+			if (armorChoice != null)
 			{
-				PatronRewardArmor armorChoice = playerAether.getPatronRewardsModule().getChoices().getArmorChoice();
-
-				if (armorChoice != null)
-				{
-					return armorChoice.getArmorGloveTexture(slim);
-				}
+				return armorChoice.getArmorGloveTexture(slim);
 			}
 		}
 

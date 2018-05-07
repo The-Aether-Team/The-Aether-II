@@ -1,4 +1,4 @@
-package com.gildedgames.aether.client.renderer.entities.living.layers;
+package com.gildedgames.aether.client.models.entities.player;
 
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.patron.armor.PatronRewardArmor;
@@ -14,6 +14,8 @@ import net.minecraft.util.ResourceLocation;
 // Delegate Hack
 public class LayerArmorProxy extends LayerBipedArmor
 {
+	private PatronRewardArmor previewArmor;
+
 	private final LayerBipedArmor proxy;
 
 	public LayerArmorProxy(RenderLivingBase<?> rendererIn, LayerBipedArmor proxy)
@@ -23,10 +25,20 @@ public class LayerArmorProxy extends LayerBipedArmor
 		this.proxy = proxy;
 	}
 
+	public void setPreviewArmor(PatronRewardArmor armor)
+	{
+		this.previewArmor = armor;
+	}
+
 	@Override
 	public void doRenderLayer(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks,
 			float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
+		if (this.previewArmor != null)
+		{
+			return;
+		}
+
 		PlayerAether aePlayer = PlayerAether.getPlayer(entitylivingbaseIn);
 		PatronRewardArmor armor = aePlayer.getPatronRewardsModule().getChoices().getArmorChoice();
 

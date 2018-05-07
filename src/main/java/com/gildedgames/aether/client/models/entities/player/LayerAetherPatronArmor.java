@@ -1,4 +1,4 @@
-package com.gildedgames.aether.client.renderer.entities.living.layers;
+package com.gildedgames.aether.client.models.entities.player;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
@@ -14,8 +14,10 @@ import net.minecraft.util.ResourceLocation;
 
 import java.util.Map;
 
-public class LayerPatreonArmor implements LayerRenderer<EntityLivingBase>
+public class LayerAetherPatronArmor implements LayerRenderer<EntityLivingBase>
 {
+	private PatronRewardArmor previewArmor;
+
 	private ModelBiped modelLeggings;
 
 	private ModelBiped modelArmor;
@@ -24,19 +26,28 @@ public class LayerPatreonArmor implements LayerRenderer<EntityLivingBase>
 
 	private static final Map<String, ResourceLocation> ARMOR_TEXTURE_RES_MAP = Maps.newHashMap();
 
-	public LayerPatreonArmor(RenderLivingBase<?> rendererIn)
+	public LayerAetherPatronArmor(RenderLivingBase<?> rendererIn)
 	{
 		this.renderer = rendererIn;
 
 		this.initArmor();
 	}
 
+	public void setPreviewArmor(PatronRewardArmor armor)
+	{
+		this.previewArmor = armor;
+	}
+
 	public void doRenderLayer(EntityLivingBase entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks,
 			float netHeadYaw, float headPitch, float scale)
 	{
-		PlayerAether aePlayer = PlayerAether.getPlayer(entity);
+		PatronRewardArmor armor = this.previewArmor;
 
-		PatronRewardArmor armor = aePlayer.getPatronRewardsModule().getChoices().getArmorChoice();
+		if (armor == null)
+		{
+			PlayerAether aePlayer = PlayerAether.getPlayer(entity);
+			armor = aePlayer.getPatronRewardsModule().getChoices().getArmorChoice();
+		}
 
 		if (armor != null && armor.getArmorTextureName() != null) {
 			this.renderArmorLayer(entity, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale, EntityEquipmentSlot.CHEST, armor.getArmorTextureName());
@@ -51,7 +62,7 @@ public class LayerPatreonArmor implements LayerRenderer<EntityLivingBase>
 		return false;
 	}
 
-	private void renderArmorLayer(EntityLivingBase entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks,
+	protected void renderArmorLayer(EntityLivingBase entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks,
 			float netHeadYaw, float headPitch, float scale, EntityEquipmentSlot slot, String res)
 	{
 		ResourceLocation texture = ARMOR_TEXTURE_RES_MAP.computeIfAbsent(AetherCore.getResourcePath("textures/armor/" + res + "_layer_" + (slot == EntityEquipmentSlot.LEGS ? 2 : 1) + ".png"),

@@ -28,10 +28,12 @@ public class PatronRewards
 				armor("sun_spirit_gloves"),
 				armor("sun_spirit_gloves_slim"),
 				hasSkin("sun_spirit")));
+
 		r.register(1, new PatronRewardArmor("aether.reward.slider.name", armorIcon("slider"), "patron/slider",
 				armor("slider_gloves"),
 				armor("slider_gloves_slim"),
 				hasSkin("slider_gloves")));
+
 		r.register(2, new PatronRewardArmor("aether.reward.valkyrie_queen.name", armorIcon("valkyrie_queen"), "patron/valkyrie_queen",
 				armor("valkyrie_queen_gloves"),
 				armor("valkyrie_queen_gloves_slim"),

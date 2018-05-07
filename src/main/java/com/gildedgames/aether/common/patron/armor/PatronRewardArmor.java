@@ -3,7 +3,10 @@ package com.gildedgames.aether.common.patron.armor;
 import com.gildedgames.aether.api.net.data.UserFeatures;
 import com.gildedgames.aether.api.patron.IPatronReward;
 import com.gildedgames.aether.api.patron.IPatronRewardRenderer;
+import com.gildedgames.aether.client.renderer.PatronRewardArmorRenderer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.function.Function;
 
@@ -19,6 +22,7 @@ public class PatronRewardArmor implements IPatronReward
 
 	private ResourceLocation icon;
 
+	@SideOnly(Side.CLIENT)
 	private IPatronRewardRenderer renderer;
 
 	public PatronRewardArmor(String unlocalizedName, ResourceLocation icon, String armorTextureName, ResourceLocation armorGloveTexture,

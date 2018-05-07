@@ -3,6 +3,7 @@ package com.gildedgames.aether.client.models.entities.player;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
+import com.gildedgames.aether.common.patron.armor.PatronRewardArmor;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
@@ -24,6 +25,8 @@ import java.util.UUID;
 
 public class LayerHeadShadow extends LayerBipedArmor
 {
+	private PatronRewardArmor previewArmor;
+
 	private final RenderLivingBase<?> renderer;
 
 	private ModelPlayer modelArmorSlim;
@@ -37,6 +40,11 @@ public class LayerHeadShadow extends LayerBipedArmor
 		this.modelArmorSlim = new ModelPlayer(0.15f, true);
 	}
 
+	public void setPreviewArmor(PatronRewardArmor armor)
+	{
+		this.previewArmor = armor;
+	}
+
 	@Override
 	public void doRenderLayer(EntityLivingBase entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks,
 			float netHeadYaw, float headPitch, float scale)
@@ -48,11 +56,16 @@ public class LayerHeadShadow extends LayerBipedArmor
 
 		PlayerAether player = PlayerAether.getPlayer(entity);
 
-		ItemStack helm = player.getEntity()
-				.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
+		ItemStack helm = player.getEntity().getItemStackFromSlot(EntityEquipmentSlot.HEAD);
 
-		if (ItemAetherArmor.PATRON_TEXTURE_TEMP_OVERRIDE != null || player.getPatronRewardsModule().getChoices().getArmorChoice() != null ||
-				helm.isEmpty() || !(helm.getItem() instanceof ItemAetherArmor))
+		PatronRewardArmor armor = this.previewArmor;
+
+		if (armor == null)
+		{
+			armor = player.getPatronRewardsModule().getChoices().getArmorChoice();
+		}
+
+		if (armor != null || helm.isEmpty() || !(helm.getItem() instanceof ItemAetherArmor))
 		{
 			return;
 		}
