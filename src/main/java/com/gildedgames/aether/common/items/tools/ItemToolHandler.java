@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.items.tools;
 
+import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.items.tools.handlers.*;
 import com.gildedgames.aether.common.registry.content.MaterialsAether;
 import net.minecraft.entity.EntityLivingBase;
@@ -7,10 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.util.EnumHand;
-import net.minecraftforge.event.entity.player.AttackEntityEvent;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -32,7 +30,7 @@ public class ItemToolHandler
 		handlers.put(MaterialsAether.GRAVITITE_TOOL.name(), new ItemGravititeToolHandler());
 	}
 
-    @SideOnly(Side.CLIENT)
+	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public static void onTooltip(final ItemTooltipEvent event)
 	{
@@ -95,7 +93,15 @@ public class ItemToolHandler
 			return;
 		}
 
-		final ItemStack stack = event.getHarvester().getHeldItem(EnumHand.MAIN_HAND);
+		PlayerAether playerAether = PlayerAether.getPlayer(event.getHarvester());
+
+		ItemStack stack = event.getHarvester().getHeldItem(EnumHand.MAIN_HAND);
+
+		if (stack.isEmpty() && playerAether.getLastDestroyedStack() != null)
+		{
+			stack = playerAether.getLastDestroyedStack();
+			playerAether.setLastDestroyedStack(null);
+		}
 
 		if (stack.getItem() instanceof ItemTool)
 		{
@@ -109,6 +115,22 @@ public class ItemToolHandler
 			}
 
 			handler.onHarvestBlock(stack, event.getWorld(), event.getState(), event.getPos(), event.getHarvester(), event.getDrops());
+		}
+	}
+
+	@SubscribeEvent
+	public static void onItemDestroyed(final PlayerDestroyItemEvent event)
+	{
+		if (event.getEntityPlayer() == null)
+		{
+			return;
+		}
+
+		PlayerAether playerAether = PlayerAether.getPlayer(event.getEntityPlayer());
+
+		if (event.getOriginal().getItem() instanceof ItemTool)
+		{
+			playerAether.setLastDestroyedStack(event.getOriginal());
 		}
 	}
 

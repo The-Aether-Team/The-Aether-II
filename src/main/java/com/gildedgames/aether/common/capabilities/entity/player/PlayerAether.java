@@ -18,6 +18,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.MobEffects;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -74,6 +75,8 @@ public class PlayerAether implements IPlayerAether
 	private boolean hasDiedInAetherBefore;
 
 	private NecromancerTowerInstance towerInstance;
+
+	private ItemStack lastDestroyedStack;
 
 	public PlayerAether()
 	{
@@ -138,6 +141,16 @@ public class PlayerAether implements IPlayerAether
 	public static boolean hasCapability(final Entity entity)
 	{
 		return entity.hasCapability(AetherCapabilities.PLAYER_DATA, null);
+	}
+
+	public ItemStack getLastDestroyedStack()
+	{
+		return this.lastDestroyedStack;
+	}
+
+	public void setLastDestroyedStack(ItemStack lastDestroyedStack)
+	{
+		this.lastDestroyedStack = lastDestroyedStack;
 	}
 
 	public NecromancerTowerInstance getNecromancerTowerInstance()
