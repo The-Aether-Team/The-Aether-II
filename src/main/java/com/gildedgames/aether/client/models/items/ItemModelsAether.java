@@ -136,9 +136,11 @@ public class ItemModelsAether
 				.add(BlockAetherFlower.WHITE_ROSE.getMeta(), "white_rose")
 				.add(BlockAetherFlower.PURPLE_FLOWER.getMeta(), "purple_flower")
 				.add(BlockAetherFlower.BURSTBLOSSOM.getMeta(), "burstblossom")
+				.add(BlockAetherFlower.AECHOR_SPROUT.getMeta(), "aechor_sprout")
 				.add(BlockAetherFlower.WHITE_ROSE.getMeta() + BlockAetherFlower.PROPERTY_VARIANT.getAllowedValues().size(), "white_rose_snowy")
 				.add(BlockAetherFlower.PURPLE_FLOWER.getMeta() + BlockAetherFlower.PROPERTY_VARIANT.getAllowedValues().size(), "purple_flower_snowy")
-				.add(BlockAetherFlower.BURSTBLOSSOM.getMeta() + BlockAetherFlower.PROPERTY_VARIANT.getAllowedValues().size(), "burstblossom_snowy"));
+				.add(BlockAetherFlower.BURSTBLOSSOM.getMeta() + BlockAetherFlower.PROPERTY_VARIANT.getAllowedValues().size(), "burstblossom_snowy")
+				.add(BlockAetherFlower.AECHOR_SPROUT.getMeta() + BlockAetherFlower.PROPERTY_VARIANT.getAllowedValues().size(), "aechor_sprout_snowy"));
 
 		registerItemModels(BlocksAether.aether_sapling, new ItemModelBuilder("saplings/")
 				.add(BlockAetherSapling.BLUE_SKYROOT.getMeta(), "blue_skyroot_sapling")

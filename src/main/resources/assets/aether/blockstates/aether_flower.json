@@ -9,8 +9,8 @@
 		"snowy=false,variant=burstblossom": {
 			"model": "aether:flowers/burstblossom"
 		},
-		"snowy=false,variant=moonlit": {
-			"model": "aether:flowers/moonlit_bloom"
+		"snowy=false,variant=aechor_sprout": {
+			"model": "aether:flowers/aechor_sprout"
 		},
 		"snowy=true,variant=white_rose": {
 			"model": "aether:flowers/white_rose_snowy"
@@ -20,6 +20,9 @@
 		},
 		"snowy=true,variant=burstblossom": {
 			"model": "aether:flowers/burstblossom_snowy"
+		},
+		"snowy=true,variant=aechor_sprout": {
+			"model": "aether:flowers/aechor_sprout_snowy"
 		}
 	}
 }
