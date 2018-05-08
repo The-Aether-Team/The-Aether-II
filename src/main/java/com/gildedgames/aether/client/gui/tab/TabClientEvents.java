@@ -6,6 +6,7 @@ import com.gildedgames.aether.api.registry.tab.ITabGroup;
 import com.gildedgames.aether.api.registry.tab.ITabGroupHandler;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketOpenTab;
+import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,6 +26,11 @@ public class TabClientEvents
 	@SubscribeEvent
 	public static void onGuiOpen(final GuiOpenEvent event)
 	{
+		if (Minecraft.getMinecraft().world == null || Minecraft.getMinecraft().world.provider.getDimensionType() != DimensionsAether.AETHER)
+		{
+			return;
+		}
+
 		final GuiScreen gui = event.getGui();
 
 		final ITabGroupHandler groupHandler = AetherAPI.content().tabs().getActiveGroup();
@@ -77,6 +83,11 @@ public class TabClientEvents
 	@SubscribeEvent
 	public static void onGuiMouseEvent(final GuiScreenEvent.MouseInputEvent.Pre event)
 	{
+		if (Minecraft.getMinecraft().world == null || Minecraft.getMinecraft().world.provider.getDimensionType() != DimensionsAether.AETHER)
+		{
+			return;
+		}
+
 		final EntityPlayer player = Minecraft.getMinecraft().player;
 
 		if (player == null || !player.inventory.getItemStack().isEmpty())
@@ -126,6 +137,11 @@ public class TabClientEvents
 	@SubscribeEvent
 	public static void tickEnd(final TickEvent.RenderTickEvent event)
 	{
+		if (Minecraft.getMinecraft().world == null || Minecraft.getMinecraft().world.provider.getDimensionType() != DimensionsAether.AETHER)
+		{
+			return;
+		}
+
 		if (event.phase == TickEvent.Phase.END)
 		{
 			final EntityPlayer player = Minecraft.getMinecraft().player;
