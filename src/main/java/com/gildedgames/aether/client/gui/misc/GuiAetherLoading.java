@@ -97,7 +97,7 @@ public class GuiAetherLoading extends GuiFrame implements CustomLoadingRenderer.
 
 				String percentString = String.valueOf(MathHelper.floor(PERCENT));
 
-				this.loading.setText(new Text(new TextComponentTranslation("gui.aether.loading.percentage", percentString), 1.0F));
+				this.loading.setText(new Text(new TextComponentTranslation("gui.aether.loading.progress", percentString), 1.0F));
 			}
 		}
 	}
