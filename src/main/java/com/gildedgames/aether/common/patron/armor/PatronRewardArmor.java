@@ -79,6 +79,7 @@ public class PatronRewardArmor implements IPatronReward
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IPatronRewardRenderer getPreviewRenderer()
 	{
 		if (this.renderer == null)
