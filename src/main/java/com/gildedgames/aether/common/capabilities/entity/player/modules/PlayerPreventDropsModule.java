@@ -46,7 +46,7 @@ public class PlayerPreventDropsModule extends PlayerAetherModule
 	{
 		EntityPlayer player = (EntityPlayer) event.getEntity();
 
-		if (player.world.provider.getDimensionType() == DimensionsAether.AETHER)
+		if (player.world.provider.getDimensionType() == DimensionsAether.AETHER && !player.getEntityWorld().getGameRules().getBoolean("keepInventory"))
 		{
 			this.setIfShouldKeep(player.inventory.mainInventory, this.mainInventory, true);
 			this.setIfShouldKeep(player.inventory.armorInventory, this.armorInventory, true);
@@ -70,7 +70,7 @@ public class PlayerPreventDropsModule extends PlayerAetherModule
 	@Override
 	public void onDrops(PlayerDropsEvent event)
 	{
-		if (event.getEntityPlayer().world.provider.getDimensionType() == DimensionsAether.AETHER)
+		if (event.getEntityPlayer().world.provider.getDimensionType() == DimensionsAether.AETHER && !event.getEntityPlayer().getEntityWorld().getGameRules().getBoolean("keepInventory"))
 		{
 			List<EntityItem> toRemove = Lists.newArrayList();
 
@@ -91,7 +91,7 @@ public class PlayerPreventDropsModule extends PlayerAetherModule
 	{
 		EntityPlayer player = event.player;
 
-		if (player.world.provider.getDimensionType() == DimensionsAether.AETHER)
+		if (player.world.provider.getDimensionType() == DimensionsAether.AETHER && !player.getEntityWorld().getGameRules().getBoolean("keepInventory"))
 		{
 			this.setIfShouldKeep(this.mainInventory, player.inventory.mainInventory, false);
 			this.setIfShouldKeep(this.armorInventory, player.inventory.armorInventory, false);
