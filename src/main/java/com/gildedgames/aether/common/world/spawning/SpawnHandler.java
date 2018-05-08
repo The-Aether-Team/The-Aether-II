@@ -182,6 +182,15 @@ public class SpawnHandler implements NBT
 		{
 			final NBTTagCompound tag = NBTHelper.readNBTFromFile(areaFile);
 
+			if (tag == null)
+			{
+				final SpawnArea area = new SpawnArea(this.chunkArea, areaX, areaZ);
+
+				this.saveArea(dim, area);
+
+				return area;
+			}
+
 			final SpawnArea area = new SpawnArea(this.chunkArea, tag.getInteger("areaX"), tag.getInteger("areaZ"));
 
 			area.setEntityCount(tag.getInteger("entityCount"));
