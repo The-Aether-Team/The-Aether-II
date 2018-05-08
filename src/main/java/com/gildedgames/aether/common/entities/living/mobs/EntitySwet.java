@@ -78,12 +78,20 @@ public class EntitySwet extends EntityExtendedMob
 
 		this.setFoodSaturation(3);
 		actualSaturation = 3;
+
+		this.setDayMob(true);
 	}
 
 	public static boolean canLatch(final EntitySwet swet, final EntityPlayer player)
 	{
 		return !player.isInWater() && swet.getFoodSaturation() == 3 && PlayerAether.getPlayer(player).getSwetTracker()
 				.canLatchOn() && player.getFoodStats().getFoodLevel() > 4;
+	}
+
+	@Override
+	protected boolean isValidLightLevel()
+	{
+		return true;
 	}
 
 	public int getFoodSaturation()
@@ -379,12 +387,6 @@ public class EntitySwet extends EntityExtendedMob
 		tag.setInteger("foodSaturation", this.getFoodSaturation());
 
 		return tag;
-	}
-
-	@Override
-	protected boolean isValidLightLevel()
-	{
-		return true;
 	}
 
 	@Override
