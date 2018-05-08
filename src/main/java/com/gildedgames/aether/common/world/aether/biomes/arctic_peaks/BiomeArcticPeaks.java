@@ -151,7 +151,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase
 
 						IBlockState down = world.getBlockState(blockpos2);
 
-						if (world.canSnowAt(blockpos1, true) && down != BlocksAether.highlands_ice && down != BlocksAether.highlands_packed_ice)
+						if (world.canSnowAt(blockpos1, true) && down != BlocksAether.highlands_ice.getDefaultState() && down != BlocksAether.highlands_packed_ice.getDefaultState())
 						{
 							world.setBlockState(blockpos1, BlocksAether.highlands_snow_layer.getDefaultState(), 2);
 						}
