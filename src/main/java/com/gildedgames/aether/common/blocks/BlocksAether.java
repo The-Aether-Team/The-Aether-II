@@ -182,9 +182,9 @@ public class BlocksAether
 
 	public static final BlockIcestoneOre icestone_ore = new BlockIcestoneOre();
 
-	public static final Block quicksoil_glass = new BlockRockGlass().setLightLevel(1f),
+	public static final Block quicksoil_glass = new BlockRockGlassTranslucent().setLightLevel(1f),
 			crude_scatterglass = new BlockRockGlass(),
-			scatterglass = new BlockRockGlass();
+			scatterglass = new BlockRockGlassTranslucent();
 
 	public static final Block quicksoil_glass_decorative = new BlockRockGlassDecorative(quicksoil_glass).setLightLevel(1f),
 			crude_scatterglass_decorative = new BlockRockGlassDecorative(crude_scatterglass),
