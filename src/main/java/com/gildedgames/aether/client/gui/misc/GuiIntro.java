@@ -19,9 +19,10 @@ import com.gildedgames.orbis_api.client.rect.Pos2D;
 import com.gildedgames.orbis_api.util.InputHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import org.lwjgl.opengl.GL11;
 
 import java.io.IOException;
@@ -98,45 +99,36 @@ public class GuiIntro extends GuiFrameNoContainer
 		this.highlands = new GuiTexture(Dim2D.build().scale(0.45F).width(512).height(235).center(true).pos(center).flush(), HIGHLANDS);
 
 		this.proudlyPresents = new GuiText(Dim2D.build().center(true).pos(center).addY(70).flush(),
-				new Text(new TextComponentString("Proudly Presents..."), 1.0F));
+				new Text(new TextComponentTranslation("intro.proudlyPresents"), 1.0F));
 
 		this.holdToSkip = new GuiText(Dim2D.build().pos(this.width - 65, this.height - 17).flush(),
-				new Text(new TextComponentString("Hold To Skip"), 1.0F));
+				new Text(new TextComponentTranslation("intro.holdToSkip"), 1.0F));
 
 		this.holdToSkip.setVisible(false);
 
 		this.prologue = new GuiTextBox(Dim2D.build().center(true).pos(center).width(300).addY(30).flush(), false,
-				new Text(new TextComponentString(
-						"200 years after a lone adventurer defeated the tyrannical Sun Spirit, Karthuul, a new traveller is about to enter the Aether..."),
+				new Text(new TextComponentTranslation(
+						"intro.prologue"),
 						1.0F));
 
 		this.tip1 = new GuiTextBox(Dim2D.build().center(true).pos(center).width(300).flush(), false,
-				new Text(new TextComponentString(
-						"DISCLAIMER:" + System.lineSeparator() + System
-								.lineSeparator()
-								+ "This indev build is an UNFINISHED, BUGGY," + System
-								.lineSeparator() + "POOR PERFORMANCE iteration of the official Highlands release slated for the end of this year."
-								+ System.lineSeparator() + System
-								.lineSeparator()
-								+ "IF YOU DO NOT WANT TO SPOIL YOUR EXPERIENCE, we HIGHLY RECOMMEND you DO NOT PLAY THIS until the official release." + System
-								.lineSeparator() + System
-								.lineSeparator()
-								+ "Many features are missing, some are experimental, etc. We have released these indev builds for those who want to help test and who cannot wait to get their Aether fix."),
+				new Text(new TextComponentTranslation(
+						"intro.tip1"),
 						1.0F));
 
 		this.tip2 = new GuiTextBox(Dim2D.build().center(true).pos(center).width(300).flush(), false,
-				new Text(new TextComponentString(
-						"The world you're about to enter is completely separate from Minecraft, in both lore, time and space."),
+				new Text(new TextComponentTranslation(
+						"intro.tip2"),
 						1.0F));
 
 		this.tip3 = new GuiTextBox(Dim2D.build().center(true).pos(center).width(300).flush(), false,
-				new Text(new TextComponentString(
-						"Your inventory will be separate from your Minecraft save, but you will be able to send items back to your original world."),
+				new Text(new TextComponentTranslation(
+						"intro.tip3"),
 						1.0F));
 
 		this.tip4 = new GuiTextBox(Dim2D.build().center(true).pos(center).width(300).flush(), false,
-				new Text(new TextComponentString(
-						"Begin your journey?"),
+				new Text(new TextComponentTranslation(
+						"intro.tip4"),
 						1.0F));
 
 		this.ggLogo.setVisible(false);
@@ -160,8 +152,8 @@ public class GuiIntro extends GuiFrameNoContainer
 		this.yes = new GuiButtonVanilla(Dim2D.build().width(80).height(20).center(true).pos(center).addX(5).flush());
 		this.no = new GuiButtonVanilla(Dim2D.build().width(80).height(20).center(true).pos(center).addX(95).flush());
 
-		this.yes.getInner().displayString = "Yes";
-		this.no.getInner().displayString = "No";
+		this.yes.getInner().displayString = I18n.format("intro.yes");
+		this.no.getInner().displayString = I18n.format("intro.no");
 
 		this.yes.setVisible(false);
 		this.no.setVisible(false);
