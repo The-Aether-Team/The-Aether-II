@@ -9,7 +9,7 @@ public class ModelAechorPlant extends ModelBase
 {
 	private static int petals = 10, thorns = 4, stamens = 3;
 
-	private ModelRenderer petal[], leaf[], thorn[], stamen[], stamen2[];
+	public ModelRenderer petal[], leaf[], thorn[], stamen[], stamen2[];
 
 	private ModelRenderer stem, head;
 

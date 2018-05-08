@@ -2,25 +2,22 @@
 	"pools": [
 		{
 			"rolls": 1,
-			"name": "petals",
+			"name": "sprout",
 			"entries": [
 				{
 					"type": "item",
-					"name": "aether:aechor_petal",
+					"name": "aether:aether_flower",
 					"weight": 1,
 					"functions": [
+						{
+							"function": "minecraft:set_data",
+							"data": 3
+						},
 						{
 							"function": "set_count",
 							"count": {
 								"min": 1,
-								"max": 3
-							}
-						},
-						{
-							"function": "looting_enchant",
-							"count": {
-								"min": 0,
-								"max": 1
+								"max": 2
 							}
 						}
 					]
