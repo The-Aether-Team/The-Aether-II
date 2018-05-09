@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.entities.living.mobs;
 
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.entities.ai.hopping.AIHopFloat;
 import com.gildedgames.aether.common.entities.ai.hopping.AIHopFollowAttackTarget;
@@ -24,6 +25,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -78,12 +80,26 @@ public class EntitySwet extends EntityExtendedMob
 
 		this.setFoodSaturation(3);
 		actualSaturation = 3;
+
+		this.setDayMob(true);
 	}
 
 	public static boolean canLatch(final EntitySwet swet, final EntityPlayer player)
 	{
 		return !player.isInWater() && swet.getFoodSaturation() == 3 && PlayerAether.getPlayer(player).getSwetTracker()
 				.canLatchOn() && player.getFoodStats().getFoodLevel() > 4;
+	}
+
+	@Override
+	protected boolean isValidLightLevel()
+	{
+		return true;
+	}
+
+	@Override
+	public float getBlockPathWeight(BlockPos pos)
+	{
+		return this.world.getBlockState(pos.down()).getBlock() == BlocksAether.aether_grass ? 10.0F : this.world.getLightBrightness(pos) - 0.5F;
 	}
 
 	public int getFoodSaturation()
@@ -379,12 +395,6 @@ public class EntitySwet extends EntityExtendedMob
 		tag.setInteger("foodSaturation", this.getFoodSaturation());
 
 		return tag;
-	}
-
-	@Override
-	protected boolean isValidLightLevel()
-	{
-		return true;
 	}
 
 	@Override

@@ -24,6 +24,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.Arrays;
+
 public class EntityAechorPlant extends EntityAetherMob
 {
 	private static final DataParameter<Boolean> CAN_SEE_PREY = new DataParameter<>(16, DataSerializers.BOOLEAN);
@@ -34,6 +36,10 @@ public class EntityAechorPlant extends EntityAetherMob
 	public float sinage, prevSinage;
 
 	private int poisonLeft;
+
+	private boolean[] petalPresent = new boolean[4];
+
+	private int petalsLeft = 4, lastPetalsLeft = 4;
 
 	public EntityAechorPlant(World world)
 	{
@@ -52,6 +58,13 @@ public class EntityAechorPlant extends EntityAetherMob
 		}
 
 		this.experienceValue = 3;
+
+		Arrays.fill(this.petalPresent, true);
+	}
+
+	public boolean[] getPetalsPresent()
+	{
+		return this.petalPresent;
 	}
 
 	@Override
@@ -71,7 +84,7 @@ public class EntityAechorPlant extends EntityAetherMob
 		this.setPlantSize(this.rand.nextInt(3) + 1);
 
 		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(3.0F);
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0F + (this.rand.nextInt(this.getPlantSize()) * 5.0F));
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(26);
 	}
 
 	@Override
@@ -81,6 +94,37 @@ public class EntityAechorPlant extends EntityAetherMob
 
 		this.motionX = 0.0D;
 		this.motionZ = 0.0D;
+
+		if (this.getHealth() <= 20)
+		{
+			if (((this.getHealth() - 2) / 6) + 1 < this.petalsLeft && this.petalsLeft == this.lastPetalsLeft)
+			{
+				this.petalsLeft--;
+			}
+
+			if (this.petalsLeft != this.lastPetalsLeft)
+			{
+				boolean found = false;
+
+				while (!found)
+				{
+					int index = this.getRNG().nextInt(this.petalPresent.length);
+
+					if (this.petalPresent[index])
+					{
+						found = true;
+
+						this.petalPresent[index] = false;
+
+						ItemStack petal = new ItemStack(ItemsAether.aechor_petal);
+
+						Block.spawnAsEntity(this.world, this.getPosition(), petal);
+					}
+				}
+
+				this.lastPetalsLeft = this.petalsLeft;
+			}
+		}
 
 		if (this.world.isRemote)
 		{
@@ -187,6 +231,14 @@ public class EntityAechorPlant extends EntityAetherMob
 
 		tagCompound.setInteger("plantSize", this.getPlantSize());
 		tagCompound.setInteger("poisonLeft", this.getPoisonLeft());
+
+		tagCompound.setBoolean("petal0", this.petalPresent[0]);
+		tagCompound.setBoolean("petal1", this.petalPresent[1]);
+		tagCompound.setBoolean("petal2", this.petalPresent[2]);
+		tagCompound.setBoolean("petal3", this.petalPresent[3]);
+
+		tagCompound.setInteger("petalsLeft", this.petalsLeft);
+		tagCompound.setInteger("lastPetalsLeft", this.lastPetalsLeft);
 	}
 
 	@Override
@@ -196,6 +248,14 @@ public class EntityAechorPlant extends EntityAetherMob
 
 		this.setPlantSize(tagCompound.getInteger("plantSize"));
 		this.setPoisonLeft(tagCompound.getInteger("poisonLeft"));
+
+		this.petalPresent[0] = tagCompound.getBoolean("petal0");
+		this.petalPresent[1] = tagCompound.getBoolean("petal1");
+		this.petalPresent[2] = tagCompound.getBoolean("petal2");
+		this.petalPresent[3] = tagCompound.getBoolean("petal3");
+
+		this.petalsLeft = tagCompound.getInteger("petalsLeft");
+		this.lastPetalsLeft = tagCompound.getInteger("lastPetalsLeft");
 	}
 
 	@Override

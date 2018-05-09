@@ -12,6 +12,8 @@ public class EntityExtendedMob extends EntityMob
 
 	private static final DataParameter<Boolean> ATTACKED = EntityDataManager.createKey(EntityExtendedMob.class, DataSerializers.BOOLEAN);
 
+	private boolean isDayMob;
+
 	public EntityExtendedMob(World worldIn)
 	{
 		super(worldIn);
@@ -20,6 +22,23 @@ public class EntityExtendedMob extends EntityMob
 	protected void handleClientAttack()
 	{
 
+	}
+
+	@Override
+	public void onLivingUpdate() {
+		int idleTime = this.idleTime;
+
+		super.onLivingUpdate();
+
+		if (this.isDayMob)
+		{
+			this.idleTime = idleTime;
+		}
+	}
+
+	public void setDayMob(boolean flag)
+	{
+		this.isDayMob = flag;
 	}
 
 	@Override

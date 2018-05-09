@@ -153,7 +153,7 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 	@Override
 	public boolean canUseBonemeal(final World world, final Random rand, final BlockPos pos, final IBlockState state)
 	{
-		return world.rand.nextFloat() < 0.45f;
+		return rand.nextFloat() < 0.45f;
 	}
 
 	@Override

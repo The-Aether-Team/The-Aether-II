@@ -48,7 +48,7 @@ public class BiomeAetherDecorator
 
 	private final WorldGenAetherMinable genMossyHolystone, genCrudeScatterglass;
 
-	private final WorldGenAetherFlowers genPurpleFlowers, genWhiteRoses, genBurstblossom;
+	private final WorldGenAetherFlowers genPurpleFlowers, genWhiteRoses, genBurstblossom, genAechorSprout;
 
 	private final WorldGenOrangeTree genOrangeTree;
 
@@ -97,6 +97,8 @@ public class BiomeAetherDecorator
 				BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.WHITE_ROSE), 64);
 		this.genBurstblossom = new WorldGenAetherFlowers(
 				BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.BURSTBLOSSOM), 64);
+		this.genAechorSprout = new WorldGenAetherFlowers(
+				BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.AECHOR_SPROUT), 4);
 
 		this.genOrangeTree = new WorldGenOrangeTree();
 
@@ -364,6 +366,16 @@ public class BiomeAetherDecorator
 			z = random.nextInt(16) + 8;
 
 			this.genBurstblossom.generate(world, random, pos.add(x, y, z));
+		}
+
+		// Burstblossom Generator
+		for (count = 0; count < 2; count++)
+		{
+			x = random.nextInt(16) + 8;
+			y = random.nextInt(128);
+			z = random.nextInt(16) + 8;
+
+			this.genAechorSprout.generate(world, random, pos.add(x, y, z));
 		}
 
 		// Kirrid Grass Generator

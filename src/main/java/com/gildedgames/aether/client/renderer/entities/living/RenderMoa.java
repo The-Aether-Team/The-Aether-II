@@ -163,7 +163,6 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 		model.ShoulderL.showModel = false;
 		model.ShoulderR.showModel = false;
 		model.HeadBack.showModel = false;
-		model.HeadBrow.showModel = false;
 		model.HeadFeatherL1.showModel = false;
 		model.HeadFeatherR1.showModel = false;
 		model.HeadFeatherL2.showModel = false;
@@ -183,7 +182,6 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 		model.ShoulderL.showModel = true;
 		model.ShoulderR.showModel = true;
 		model.HeadBack.showModel = true;
-		model.HeadBrow.showModel = true;
 		model.HeadFeatherL1.showModel = true;
 		model.HeadFeatherR1.showModel = true;
 		model.HeadFeatherL2.showModel = true;
