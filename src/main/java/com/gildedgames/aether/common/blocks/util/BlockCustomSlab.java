@@ -38,12 +38,6 @@ public class BlockCustomSlab extends Block implements IBlockWithItem
 	}
 
 	@Override
-	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
-	{
-		return BlockFaceShape.UNDEFINED;
-	}
-
-	@Override
 	public BlockCustomSlab setSoundType(final SoundType type)
 	{
 		super.setSoundType(type);
@@ -144,6 +138,31 @@ public class BlockCustomSlab extends Block implements IBlockWithItem
 				return state.withProperty(PROPERTY_SLAB_STATE, EnumSlabPart.TOP_HALF);
 			}
 		}
+	}
+
+	@Override
+	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
+	{
+		if (state.getValue(PROPERTY_SLAB_STATE) == EnumSlabPart.FULL_BLOCK)
+		{
+			return BlockFaceShape.SOLID;
+		}
+		else if (face == EnumFacing.UP && state.getValue(PROPERTY_SLAB_STATE) == EnumSlabPart.TOP_HALF)
+		{
+			return BlockFaceShape.SOLID;
+		}
+		else if (face == EnumFacing.DOWN && state.getValue(PROPERTY_SLAB_STATE) == EnumSlabPart.BOTTOM_HALF)
+		{
+			return BlockFaceShape.SOLID;
+		}
+
+		return BlockFaceShape.UNDEFINED;
+	}
+
+	@Override
+	public boolean isTopSolid(IBlockState state)
+	{
+		return state.getValue(PROPERTY_SLAB_STATE) == EnumSlabPart.TOP_HALF || state.getValue(PROPERTY_SLAB_STATE) == EnumSlabPart.FULL_BLOCK;
 	}
 
 	@Override
