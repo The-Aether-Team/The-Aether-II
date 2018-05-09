@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.items.misc;
 
 import com.gildedgames.aether.common.items.IDropOnDeath;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -31,14 +32,16 @@ public class ItemWrappingPaper extends Item implements IDropOnDeath
 			return;
 		}
 
-		tooltip.add(TextFormatting.YELLOW + data.getBowColorName() + " Bow, " + data.getBoxColorName() + " Box");
-		tooltip.add(TextFormatting.GRAY + "Craft with items!");
+		tooltip.add(TextFormatting.YELLOW + I18n.format(data.getBoxColorName()));
+		tooltip.add(TextFormatting.YELLOW + I18n.format(data.getBowColorName()));
+
+		tooltip.add(TextFormatting.GRAY + I18n.format("item.aether.wrapping_paper.tooltip.craft"));
 	}
 
 	public static class PresentDyeData
 	{
-		public static final String[] dyeNames = new String[] { "Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "Silver", "Gray",
-				"Pink", "Lime", "Yellow", "Light Blue", "Magenta", "Orange", "White" };
+		public static final String[] dyeNames = new String[] { "black", "red", "green", "brown", "blue", "purple", "cyan", "silver", "gray",
+				"pink", "lime", "yellow", "light_blue", "magenta", "orange", "white" };
 
 		private byte bowColor = 1, boxColor = 15;
 
@@ -67,12 +70,12 @@ public class ItemWrappingPaper extends Item implements IDropOnDeath
 
 		public String getBowColorName()
 		{
-			return dyeNames[this.getBowColor()];
+			return "item.aether.wrapping_paper.bow." + dyeNames[this.getBowColor()] + ".name";
 		}
 
 		public String getBoxColorName()
 		{
-			return dyeNames[this.getBoxColor()];
+			return "item.aether.wrapping_paper.box." + dyeNames[this.getBoxColor()] + ".name";
 		}
 
 		public byte getBowColor()

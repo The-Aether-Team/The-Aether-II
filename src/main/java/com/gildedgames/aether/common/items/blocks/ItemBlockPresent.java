@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.items.blocks;
 
 import com.gildedgames.aether.common.items.misc.ItemWrappingPaper;
 import net.minecraft.block.Block;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemBlock;
@@ -49,11 +50,11 @@ public class ItemBlockPresent extends ItemBlock
 
 		if (data.getStack() != null)
 		{
-			tooltip.add(TextFormatting.GRAY + "" + TextFormatting.ITALIC + "Contains an item inside");
+			tooltip.add(TextFormatting.GRAY + "" + TextFormatting.ITALIC + I18n.format("item.aether.present.tooltip.hasitem"));
 		}
 		else
 		{
-			tooltip.add(TextFormatting.DARK_GRAY + "(empty)");
+			tooltip.add(TextFormatting.DARK_GRAY + "" + TextFormatting.ITALIC + I18n.format("item.aether.present.tooltip.empty"));
 		}
 	}
 
