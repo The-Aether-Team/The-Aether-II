@@ -70,6 +70,8 @@ public class PlayerAether implements IPlayerAether
 
 	private final PlayerPatronRewards patronRewardsModule;
 
+	private final PlayerRollMovementModule rollMovementModule;
+
 	private final List<PlayerAetherObserver> observers = Lists.newArrayList();
 
 	private boolean hasDiedInAetherBefore;
@@ -93,6 +95,7 @@ public class PlayerAether implements IPlayerAether
 		this.campfiresModule = null;
 		this.preventDropsModule = null;
 		this.patronRewardsModule = null;
+		this.rollMovementModule = null;
 	}
 
 	public PlayerAether(final EntityPlayer entity)
@@ -110,6 +113,7 @@ public class PlayerAether implements IPlayerAether
 		this.campfiresModule = new PlayerCampfiresModule(this);
 		this.preventDropsModule = new PlayerPreventDropsModule(this);
 		this.patronRewardsModule = new PlayerPatronRewards(this);
+		this.rollMovementModule = new PlayerRollMovementModule(this);
 
 		final Collection<PlayerAetherModule> modules = new ArrayList<>();
 
@@ -124,12 +128,18 @@ public class PlayerAether implements IPlayerAether
 		modules.add(this.campfiresModule);
 		modules.add(this.preventDropsModule);
 		modules.add(this.patronRewardsModule);
+		modules.add(this.rollMovementModule);
 
 		this.modules = modules.toArray(new PlayerAetherModule[modules.size()]);
 	}
 
 	public static PlayerAether getPlayer(final Entity player)
 	{
+		if (player == null)
+		{
+			return null;
+		}
+
 		if (!PlayerAether.hasCapability(player))
 		{
 			return null;
@@ -141,6 +151,11 @@ public class PlayerAether implements IPlayerAether
 	public static boolean hasCapability(final Entity entity)
 	{
 		return entity.hasCapability(AetherCapabilities.PLAYER_DATA, null);
+	}
+
+	public PlayerRollMovementModule getRollMovementModule()
+	{
+		return this.rollMovementModule;
 	}
 
 	public ItemStack getLastDestroyedStack()

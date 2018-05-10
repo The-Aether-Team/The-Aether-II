@@ -34,7 +34,11 @@ public class PacketSpecialMovement implements IMessage
 
 	public enum Action
 	{
-		EXTRA_JUMP
+		EXTRA_JUMP,
+		ROLL_FORWARD,
+		ROLL_BACK,
+		ROLL_LEFT,
+		ROLL_RIGHT
 	}
 
 	public static class HandlerServer extends MessageHandlerServer<PacketSpecialMovement, PacketSpecialMovement>
@@ -48,6 +52,14 @@ public class PacketSpecialMovement implements IMessage
 			{
 				case EXTRA_JUMP:
 					aePlayer.getAbilitiesModule().performMidAirJump();
+				case ROLL_FORWARD:
+					aePlayer.getRollMovementModule().startRolling(message.action);
+				case ROLL_BACK:
+					aePlayer.getRollMovementModule().startRolling(message.action);
+				case ROLL_LEFT:
+					aePlayer.getRollMovementModule().startRolling(message.action);
+				case ROLL_RIGHT:
+					aePlayer.getRollMovementModule().startRolling(message.action);
 			}
 
 			return null;
