@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.capabilities.entity.player.modules;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.network.packets.PacketSpecialMovement;
+import com.gildedgames.aether.common.util.helpers.AetherHelper;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -72,6 +73,11 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 
 	public void startRolling(PacketSpecialMovement.Action action)
 	{
+		if (!AetherHelper.isEnabled(this.getWorld()))
+		{
+			return;
+		}
+
 		//double xDif = this.getEntity().lastTickPosX - this.getEntity().posX;
 		//double zDif = this.getEntity().posZ - this.getEntity().lastTickPosZ;
 

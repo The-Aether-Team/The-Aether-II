@@ -3,6 +3,7 @@ package com.gildedgames.aether.client;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketSpecialMovement;
+import com.gildedgames.aether.common.util.helpers.AetherHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.settings.KeyBinding;
@@ -91,6 +92,11 @@ public class SpecialMovesEventsClient
 		long time = System.currentTimeMillis();
 
 		if (mc.player == null)
+		{
+			return;
+		}
+
+		if (!AetherHelper.isEnabled(mc.world))
 		{
 			return;
 		}
