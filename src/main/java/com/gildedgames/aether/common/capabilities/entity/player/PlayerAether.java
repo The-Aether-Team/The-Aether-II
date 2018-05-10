@@ -72,6 +72,8 @@ public class PlayerAether implements IPlayerAether
 
 	private final PlayerRollMovementModule rollMovementModule;
 
+	private final PlayerConfigModule configModule;
+
 	private final List<PlayerAetherObserver> observers = Lists.newArrayList();
 
 	private boolean hasDiedInAetherBefore;
@@ -96,6 +98,7 @@ public class PlayerAether implements IPlayerAether
 		this.preventDropsModule = null;
 		this.patronRewardsModule = null;
 		this.rollMovementModule = null;
+		this.configModule = null;
 	}
 
 	public PlayerAether(final EntityPlayer entity)
@@ -114,6 +117,7 @@ public class PlayerAether implements IPlayerAether
 		this.preventDropsModule = new PlayerPreventDropsModule(this);
 		this.patronRewardsModule = new PlayerPatronRewards(this);
 		this.rollMovementModule = new PlayerRollMovementModule(this);
+		this.configModule = new PlayerConfigModule(this);
 
 		final Collection<PlayerAetherModule> modules = new ArrayList<>();
 
@@ -129,6 +133,7 @@ public class PlayerAether implements IPlayerAether
 		modules.add(this.preventDropsModule);
 		modules.add(this.patronRewardsModule);
 		modules.add(this.rollMovementModule);
+		modules.add(this.configModule);
 
 		this.modules = modules.toArray(new PlayerAetherModule[modules.size()]);
 	}
@@ -395,6 +400,11 @@ public class PlayerAether implements IPlayerAether
 	public EntityPlayer getEntity()
 	{
 		return this.entity;
+	}
+
+	public PlayerConfigModule getConfigModule()
+	{
+		return this.configModule;
 	}
 
 	public PlayerBlockLevitateModule getGravititeAbility()

@@ -1,10 +1,12 @@
 package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketSwitchToAetherInventory;
 import com.gildedgames.aether.common.network.packets.PacketSwitchToMinecraftInventory;
+import com.gildedgames.aether.common.util.helpers.AetherHelper;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -17,6 +19,10 @@ public class PlayerSeparateInventoryModule extends PlayerAetherModule
 
 	public InventoryPlayer minecraftInventory;
 
+	private boolean usingAetherInventory;
+
+	private boolean turningOffSeparateInventories;
+
 	public PlayerSeparateInventoryModule(final PlayerAether playerAether)
 	{
 		super(playerAether);
@@ -26,10 +32,17 @@ public class PlayerSeparateInventoryModule extends PlayerAetherModule
 
 	public void switchToAetherInventory()
 	{
+		if (!AetherCore.CONFIG.separateInventories())
+		{
+			return;
+		}
+
 		this.minecraftInventory = new InventoryPlayer(this.getEntity());
 		this.minecraftInventory.copyInventory(this.getEntity().inventory);
 
 		this.getEntity().inventory.copyInventory(this.aetherInventory);
+
+		this.usingAetherInventory = true;
 
 		if (!this.getEntity().world.isRemote)
 		{
@@ -39,6 +52,11 @@ public class PlayerSeparateInventoryModule extends PlayerAetherModule
 
 	public void switchToMinecraftInventory(boolean saveAetherInv)
 	{
+		if (!AetherCore.CONFIG.separateInventories() && !this.turningOffSeparateInventories)
+		{
+			return;
+		}
+
 		if (saveAetherInv)
 		{
 			this.aetherInventory = new InventoryPlayer(this.getEntity());
@@ -49,6 +67,8 @@ public class PlayerSeparateInventoryModule extends PlayerAetherModule
 		{
 			this.getEntity().inventory.copyInventory(this.minecraftInventory);
 		}
+
+		this.usingAetherInventory = false;
 
 		if (!this.getEntity().world.isRemote)
 		{
@@ -71,7 +91,14 @@ public class PlayerSeparateInventoryModule extends PlayerAetherModule
 	@Override
 	public void onUpdate()
 	{
+		if (!this.getWorld().isRemote && !AetherCore.CONFIG.separateInventories() && this.usingAetherInventory)
+		{
+			this.turningOffSeparateInventories = true;
+			this.switchToMinecraftInventory(true);
+			this.turningOffSeparateInventories = false;
 
+			this.usingAetherInventory = false;
+		}
 	}
 
 	@Override
@@ -89,6 +116,8 @@ public class PlayerSeparateInventoryModule extends PlayerAetherModule
 			compound.setTag("MinecraftInventory", this.minecraftInventory.writeToNBT(new NBTTagList()));
 			compound.setInteger("MinecraftSelectedItemSlot", this.minecraftInventory.currentItem);
 		}
+
+		compound.setBoolean("usingAetherInventory", this.usingAetherInventory);
 	}
 
 	@Override
@@ -107,5 +136,7 @@ public class PlayerSeparateInventoryModule extends PlayerAetherModule
 			this.minecraftInventory.readFromNBT(compound.getTagList("MinecraftInventory", 10));
 			this.minecraftInventory.currentItem = compound.getInteger("MinecraftSelectedItemSlot");
 		}
+
+		this.usingAetherInventory = compound.getBoolean("usingAetherInventory");
 	}
 }

@@ -1,9 +1,12 @@
 package com.gildedgames.aether.common.blocks.containers;
 
 import com.gildedgames.aether.client.ClientEventHandler;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.entities.tiles.TileEntityTeleporter;
 import com.gildedgames.aether.common.events.PostAetherTravelEvent;
+import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.network.packets.PacketSetPlayedIntro;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.registry.content.InstancesAether;
 import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstance;
@@ -125,6 +128,12 @@ public class BlockAetherTeleporter extends Block implements ITileEntityProvider
 		{
 			final PlayerAether playerAether = PlayerAether.getPlayer(player);
 
+			if (AetherCore.CONFIG.skipIntro())
+			{
+				playerAether.getTeleportingModule().setPlayedIntro(true);
+				NetworkingAether.sendPacketToServer(new PacketSetPlayedIntro(true));
+			}
+
 			if (!playerAether.getTeleportingModule().hasPlayedIntro())
 			{
 				ClientEventHandler.setDrawBlackScreen(true);
@@ -194,12 +203,19 @@ public class BlockAetherTeleporter extends Block implements ITileEntityProvider
 			}
 			else
 			{
-				final NecromancerTowerInstance inst = handler.get(playerAether);
-
 				playerAether.getTeleportingModule()
 						.setNonAetherPos(new BlockPosDimension((int) player.posX, (int) player.posY, (int) player.posZ, player.dimension));
 
-				handler.teleportToInst((EntityPlayerMP) player, inst);
+				if (playerAether.getConfigModule().skipIntro())
+				{
+					playerAether.getTeleportingModule().teleportToAether();
+				}
+				else
+				{
+					final NecromancerTowerInstance inst = handler.get(playerAether);
+
+					handler.teleportToInst((EntityPlayerMP) player, inst);
+				}
 			}
 
 			return true;

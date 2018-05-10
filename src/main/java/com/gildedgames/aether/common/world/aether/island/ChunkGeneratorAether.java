@@ -164,7 +164,10 @@ public class ChunkGeneratorAether implements IChunkGenerator
 				}
 			}
 
-			instance.spawnEntitiesInChunk(primer, p);
+			if (!this.world.isRemote)
+			{
+				instance.spawnEntitiesInChunk(primer, p);
+			}
 		}
 
 		biome.decorate(this.world, this.rand, pos);

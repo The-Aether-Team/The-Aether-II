@@ -8,6 +8,7 @@ import com.gildedgames.aether.common.blocks.IBlockSnowy;
 import com.gildedgames.aether.common.entities.util.shared.SharedAetherAttributes;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketMarkPlayerDeath;
+import com.gildedgames.aether.common.network.packets.PacketRequestClientInfo;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.orbis_api.util.mc.BlockPosDimension;
 import com.gildedgames.orbis_api.util.mc.BlockUtil;
@@ -67,6 +68,8 @@ public class PlayerAetherHooks
 
 		if (aePlayer != null)
 		{
+			NetworkingAether.sendPacketToPlayer(new PacketRequestClientInfo(), (EntityPlayerMP) event.player);
+
 			aePlayer.sendFullUpdate();
 
 			IRecipe teleporterRecipe = ForgeRegistries.RECIPES.getValue(TELEPORTER_RECIPE);

@@ -1,5 +1,7 @@
 package com.gildedgames.aether.common;
 
+import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.network.packets.PacketSetPlayerConfig;
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
@@ -9,7 +11,7 @@ import java.io.File;
 
 public class ConfigAether
 {
-	public final ConfigCategory general, dimensions, controls;
+	public final ConfigCategory general, dimensions, controls, gameplay;
 
 	private final Configuration configuration;
 
@@ -31,6 +33,10 @@ public class ConfigAether
 
 	private double rollFOV;
 
+	private boolean skipIntro;
+
+	private boolean separateInventories;
+
 	public ConfigAether(final File file)
 	{
 		this.configuration = new Configuration(file, true);
@@ -38,6 +44,7 @@ public class ConfigAether
 		this.controls = this.configuration.getCategory("Controls");
 		this.general = this.configuration.getCategory(Configuration.CATEGORY_GENERAL);
 		this.dimensions = this.configuration.getCategory("Dimension IDs");
+		this.gameplay = this.configuration.getCategory("Gameplay");
 
 		this.dimensions.setRequiresMcRestart(true);
 
@@ -61,6 +68,9 @@ public class ConfigAether
 		this.rollCameraHeightLower = this.getDouble(this.controls, "Roll Camera Height Lower", 0.5D);
 		this.rollFOV = this.getDouble(this.controls, "Roll FOV", 2.0D);
 
+		this.skipIntro = this.getBoolean(this.gameplay, "Skip Intro", false);
+		this.separateInventories = this.getBoolean(this.gameplay, "Separate Inventories", true);
+
 		if (this.configuration.hasChanged())
 		{
 			this.configuration.save();
@@ -73,6 +83,11 @@ public class ConfigAether
 		if (event.getModID().equals(AetherCore.MOD_ID))
 		{
 			this.loadAndSync();
+
+			if (AetherCore.isClient())
+			{
+				NetworkingAether.sendPacketToServer(new PacketSetPlayerConfig(this));
+			}
 		}
 	}
 
@@ -139,5 +154,15 @@ public class ConfigAether
 	public double getRollFOV()
 	{
 		return this.rollFOV;
+	}
+
+	public boolean skipIntro()
+	{
+		return this.skipIntro;
+	}
+
+	public boolean separateInventories()
+	{
+		return this.separateInventories;
 	}
 }

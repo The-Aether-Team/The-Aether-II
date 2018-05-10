@@ -96,8 +96,9 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 		{
 			if (!this.playedIntro && Minecraft.getMinecraft().currentScreen == null)
 			{
-				Minecraft.getMinecraft().displayGuiScreen(new GuiIntro());
 				ClientEventHandler.setDrawBlackScreen(false);
+
+				Minecraft.getMinecraft().displayGuiScreen(new GuiIntro());
 			}
 		}
 	}
@@ -226,7 +227,7 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 		this.teleporting = true;
 	}
 
-	private void teleportToAether()
+	public void teleportToAether()
 	{
 		this.getEntity().timeUntilPortal = this.getEntity().getPortalCooldown();
 		this.teleported = true;
