@@ -9,7 +9,7 @@ import java.io.File;
 
 public class ConfigAether
 {
-	public final ConfigCategory general, dimensions;
+	public final ConfigCategory general, dimensions, controls;
 
 	private final Configuration configuration;
 
@@ -25,10 +25,17 @@ public class ConfigAether
 
 	private boolean helmetShadow;
 
+	private double rollCameraTilt;
+
+	private double rollCameraHeightLower;
+
+	private double rollFOV;
+
 	public ConfigAether(final File file)
 	{
 		this.configuration = new Configuration(file, true);
 
+		this.controls = this.configuration.getCategory("Controls");
 		this.general = this.configuration.getCategory(Configuration.CATEGORY_GENERAL);
 		this.dimensions = this.configuration.getCategory("Dimension IDs");
 
@@ -50,6 +57,10 @@ public class ConfigAether
 		this.helmetShadow = this.getBoolean(this.general, "Helmet Shadow", true);
 		this.cutoutHelmets = this.getBoolean(this.general, "Transparent Helmets", true);
 
+		this.rollCameraTilt = this.getDouble(this.controls, "Roll Camera Tilt", 30D);
+		this.rollCameraHeightLower = this.getDouble(this.controls, "Roll Camera Height Lower", 1.0D);
+		this.rollFOV = this.getDouble(this.controls, "Roll FOV", 6.5D);
+
 		if (this.configuration.hasChanged())
 		{
 			this.configuration.save();
@@ -63,6 +74,11 @@ public class ConfigAether
 		{
 			this.loadAndSync();
 		}
+	}
+
+	private double getDouble(final ConfigCategory category, final String name, final double defaultValue)
+	{
+		return this.configuration.get(category.getName(), name, defaultValue).getDouble();
 	}
 
 	private int getInt(final ConfigCategory category, final String name, final int defaultValue)
@@ -108,5 +124,20 @@ public class ConfigAether
 	public boolean hasHelmetShadow()
 	{
 		return this.helmetShadow;
+	}
+
+	public double getRollCameraTilt()
+	{
+		return this.rollCameraTilt;
+	}
+
+	public double getRollCameraHeightLower()
+	{
+		return this.rollCameraHeightLower;
+	}
+
+	public double getRollFOV()
+	{
+		return this.rollFOV;
 	}
 }

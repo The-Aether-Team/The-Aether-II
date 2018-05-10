@@ -1,6 +1,8 @@
 package com.gildedgames.aether.client;
 
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerRollMovementModule;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketSpecialMovement;
 import com.gildedgames.aether.common.util.helpers.AetherHelper;
@@ -28,15 +30,18 @@ public class SpecialMovesEventsClient
 	public static void onEvent(EntityViewRenderEvent.FOVModifier event)
 	{
 		PlayerAether playerAether = PlayerAether.getPlayer(event.getEntity());
+		PlayerRollMovementModule module = playerAether.getRollMovementModule();
 
 		if (playerAether != null)
 		{
-			if (playerAether.getRollMovementModule().isRolling())
+			if (module.isRolling())
 			{
-				int ticks = playerAether.getRollMovementModule().getTicksRolling();
-				float rollingPercent = Math.min(1.0F, ((float)ticks + (float)event.getRenderPartialTicks())/ 10.0F);
+				int ticks = module.getTicksRolling();
+				int ticksRequired = module.getTicksRollingMax();
 
-				float fovMod = 6.5F;
+				float rollingPercent = Math.min(1.0F, ((float)ticks + (float)event.getRenderPartialTicks()) / ticksRequired);
+
+				float fovMod = (float) AetherCore.CONFIG.getRollFOV();
 
 				if (rollingPercent <= 0.5F)
 				{
@@ -59,26 +64,36 @@ public class SpecialMovesEventsClient
 	{
 		PlayerAether playerAether = PlayerAether.getPlayer(event.getEntity());
 
-		if (playerAether != null)
+		if (playerAether == null)
 		{
-			if (playerAether.getRollMovementModule().isRolling())
+			return;
+		}
+
+		PlayerRollMovementModule module = playerAether.getRollMovementModule();
+
+		if (module.isRolling())
+		{
+			int ticks = module.getTicksRolling();
+			int ticksRequired = module.getTicksRollingMax();
+
+			float rollingPercent = Math.min(1.0F, ((float)ticks + (float)event.getRenderPartialTicks()) / ticksRequired);
+
+			float heightLower = (float) AetherCore.CONFIG.getRollCameraHeightLower();
+			float cameraTilt = (float) AetherCore.CONFIG.getRollCameraTilt();
+
+			float percent = rollingPercent * 2.0F;
+
+			if (rollingPercent <= 0.5F)
 			{
-				int ticks = playerAether.getRollMovementModule().getTicksRolling();
-				float rollingPercent = Math.min(1.0F, ((float)ticks + (float)event.getRenderPartialTicks())/ 10.0F);
+				event.setPitch(event.getPitch() + (percent * cameraTilt));
+				GlStateManager.translate(0.0F, percent * heightLower, 0.0F);
+			}
+			else
+			{
+				percent = (rollingPercent - 0.5F) * 2.0F;
 
-				float heightLower = 2.0F;
-				float cameraTilt = 30F;
-
-				if (rollingPercent <= 0.5F)
-				{
-					event.setPitch(event.getPitch() + (rollingPercent * cameraTilt));
-					GlStateManager.translate(0.0F, rollingPercent * heightLower, 0.0F);
-				}
-				else
-				{
-					event.setPitch(event.getPitch() + ((0.5F - (rollingPercent - 0.5F)) * cameraTilt));
-					GlStateManager.translate(0.0F, (0.5 - (rollingPercent - 0.5F)) * heightLower, 0.0F);
-				}
+				event.setPitch(event.getPitch() + cameraTilt - (percent * cameraTilt));
+				GlStateManager.translate(0.0F, heightLower - (percent * heightLower), 0.0F);
 			}
 		}
 	}
@@ -113,7 +128,7 @@ public class SpecialMovesEventsClient
 
 		if (forward || left || back || right)
 		{
-			if (time - sneakKeyDownTimeStamp < sneakTimeRequired)
+			if (time - sneakKeyDownTimeStamp < sneakTimeRequired && playerAether.getEntity().onGround)
 			{
 				if (!playerAether.getRollMovementModule().isRolling())
 				{

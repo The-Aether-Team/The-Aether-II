@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 public class PlayerRollMovementModule extends PlayerAetherModule
 {
-	private static float MAX_ROLLING_TICKS = 30;
+	private int maxRollingTicks = 10;
 
 	private boolean isRolling;
 
@@ -60,6 +60,11 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 	public int getTicksRolling()
 	{
 		return this.ticksRolling;
+	}
+
+	public int getTicksRollingMax()
+	{
+		return this.maxRollingTicks;
 	}
 
 	protected final Vec3d getVectorForRotation(float pitch, float yaw)
@@ -125,7 +130,7 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 		{
 			this.getEntity().stepHeight = 1.0F;
 
-			if (this.ticksRolling <= 10)
+			if (this.ticksRolling <= this.maxRollingTicks)
 			{
 				if (this.getEntity().onGround)
 				{
