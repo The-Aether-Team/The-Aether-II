@@ -159,7 +159,7 @@ public class SpecialMovesEventsClient
 			{
 				lastKeybind = mc.gameSettings.keyBindLeft;
 			}
-			else
+			else if (right)
 			{
 				lastKeybind = mc.gameSettings.keyBindRight;
 			}
