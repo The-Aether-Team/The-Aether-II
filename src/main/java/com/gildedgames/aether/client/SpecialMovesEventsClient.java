@@ -8,13 +8,14 @@ import com.gildedgames.aether.common.network.packets.PacketSpecialMovement;
 import com.gildedgames.aether.common.util.helpers.AetherHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
+import org.lwjgl.input.Keyboard;
 
 @Mod.EventBusSubscriber(Side.CLIENT)
 public class SpecialMovesEventsClient
@@ -24,7 +25,7 @@ public class SpecialMovesEventsClient
 
 	private static int sneakTimeRequired = 300;
 
-	private static KeyBinding lastKeybind;
+	private static int lastKey;
 
 	@SubscribeEvent
 	public static void onEvent(EntityViewRenderEvent.FOVModifier event)
@@ -99,13 +100,8 @@ public class SpecialMovesEventsClient
 	}
 
 	@SubscribeEvent
-	public static void onClientTick(final TickEvent.ClientTickEvent event)
+	public static void onClientTick(final InputEvent.KeyInputEvent event)
 	{
-		if (event.phase != TickEvent.Phase.END)
-		{
-			return;
-		}
-
 		final Minecraft mc = FMLClientHandler.instance().getClient();
 		long time = System.currentTimeMillis();
 
@@ -121,10 +117,19 @@ public class SpecialMovesEventsClient
 
 		PlayerAether playerAether = PlayerAether.getPlayer(mc.player);
 
-		boolean forward = mc.gameSettings.keyBindForward.isPressed();
-		boolean back = mc.gameSettings.keyBindBack.isPressed();
-		boolean left = mc.gameSettings.keyBindLeft.isPressed();
-		boolean right = mc.gameSettings.keyBindRight.isPressed();
+		Keyboard.enableRepeatEvents(false);
+
+		int key = Keyboard.getEventKey();
+
+		if (!Keyboard.getEventKeyState())
+		{
+			return;
+		}
+
+		boolean forward = key == mc.gameSettings.keyBindForward.getKeyCode();
+		boolean back = key == mc.gameSettings.keyBindBack.getKeyCode();
+		boolean left = key == mc.gameSettings.keyBindLeft.getKeyCode();
+		boolean right = key == mc.gameSettings.keyBindRight.getKeyCode();
 
 		if (forward || left || back || right)
 		{
@@ -134,19 +139,19 @@ public class SpecialMovesEventsClient
 				{
 					PacketSpecialMovement.Action action = null;
 
-					if (forward && lastKeybind == mc.gameSettings.keyBindForward)
+					if (forward && lastKey == mc.gameSettings.keyBindForward.getKeyCode())
 					{
 						action = PacketSpecialMovement.Action.ROLL_FORWARD;
 					}
-					else if (back && lastKeybind == mc.gameSettings.keyBindBack)
+					else if (back && lastKey == mc.gameSettings.keyBindBack.getKeyCode())
 					{
 						action = PacketSpecialMovement.Action.ROLL_BACK;
 					}
-					else if (left && lastKeybind == mc.gameSettings.keyBindLeft)
+					else if (left && lastKey == mc.gameSettings.keyBindLeft.getKeyCode())
 					{
 						action = PacketSpecialMovement.Action.ROLL_LEFT;
 					}
-					else if (right && lastKeybind == mc.gameSettings.keyBindRight)
+					else if (right && lastKey == mc.gameSettings.keyBindRight.getKeyCode())
 					{
 						action = PacketSpecialMovement.Action.ROLL_RIGHT;
 					}
@@ -160,7 +165,7 @@ public class SpecialMovesEventsClient
 					}
 				}
 
-				lastKeybind = null;
+				lastKey = Keyboard.KEY_NONE;
 			}
 			else
 			{
@@ -168,19 +173,19 @@ public class SpecialMovesEventsClient
 
 				if (forward)
 				{
-					lastKeybind = mc.gameSettings.keyBindForward;
+					lastKey = mc.gameSettings.keyBindForward.getKeyCode();
 				}
 				else if (back)
 				{
-					lastKeybind = mc.gameSettings.keyBindBack;
+					lastKey = mc.gameSettings.keyBindBack.getKeyCode();
 				}
 				else if (left)
 				{
-					lastKeybind = mc.gameSettings.keyBindLeft;
+					lastKey = mc.gameSettings.keyBindLeft.getKeyCode();
 				}
 				else if (right)
 				{
-					lastKeybind = mc.gameSettings.keyBindRight;
+					lastKey = mc.gameSettings.keyBindRight.getKeyCode();
 				}
 			}
 		}
