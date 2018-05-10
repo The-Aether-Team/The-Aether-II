@@ -4,11 +4,12 @@
 			"model": "aether:icestone_bricks/pillar"
 		},
 		"axis=z": {
-			"model": "aether:icestone_bricks/pillar_side"
+			"model": "aether:icestone_bricks/pillar",
+			"x": 90
 		},
 		"axis=x": {
-			"model": "aether:icestone_bricks/pillar_side",
-			"y": 90
+			"model": "aether:icestone_bricks/pillar",
+			"x": 90, "y": 90
 		}
 	}
 }

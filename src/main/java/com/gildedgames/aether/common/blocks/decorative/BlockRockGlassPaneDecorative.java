@@ -33,13 +33,9 @@ public class BlockRockGlassPaneDecorative extends BlockPane implements IBlockWit
 
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", SKYROOT_FRAME, ARKENIUM_FRAME);
 
-	private final Block parentBlock;
-
-	public BlockRockGlassPaneDecorative(@Nonnull final Block block)
+	public BlockRockGlassPaneDecorative()
 	{
 		super(Material.ROCK, true);
-
-		this.parentBlock = block;
 
 		this.setHardness(1f);
 		this.setResistance(2000f);
@@ -89,12 +85,6 @@ public class BlockRockGlassPaneDecorative extends BlockPane implements IBlockWit
 		{
 			list.add(new ItemStack(this, 1, variant.getMeta()));
 		}
-	}
-
-	@Override
-	public String getUnlocalizedName()
-	{
-		return this.parentBlock.getUnlocalizedName();
 	}
 
 	@Override

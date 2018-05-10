@@ -26,13 +26,9 @@ import java.util.List;
 
 public abstract class BlockDecorative extends BlockBuilder implements IBlockWithItem
 {
-	private final Block parentBlock;
-
-	public BlockDecorative(final Material material, @Nonnull final Block block)
+	public BlockDecorative(final Material material)
 	{
 		super(material);
-
-		this.parentBlock = block;
 	}
 
 	@Nonnull
@@ -72,12 +68,6 @@ public abstract class BlockDecorative extends BlockBuilder implements IBlockWith
 		{
 			list.add(new ItemStack(this, 1, variant.getMeta()));
 		}
-	}
-
-	@Override
-	public String getUnlocalizedName()
-	{
-		return this.parentBlock.getUnlocalizedName();
 	}
 
 	@Override

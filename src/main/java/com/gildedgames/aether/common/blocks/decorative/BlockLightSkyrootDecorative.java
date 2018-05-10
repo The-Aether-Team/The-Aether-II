@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.blocks.decorative;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
 import net.minecraft.block.SoundType;
@@ -21,7 +20,7 @@ public class BlockLightSkyrootDecorative extends BlockDecorative
 
 	public BlockLightSkyrootDecorative()
 	{
-		super(Material.WOOD, BlocksAether.light_skyroot_planks);
+		super(Material.WOOD);
 
 		this.setSoundType(SoundType.WOOD);
 

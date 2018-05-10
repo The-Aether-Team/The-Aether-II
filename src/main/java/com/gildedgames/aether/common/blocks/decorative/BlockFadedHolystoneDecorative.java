@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.blocks.decorative;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
 import net.minecraft.block.SoundType;
@@ -23,7 +22,7 @@ public class BlockFadedHolystoneDecorative extends BlockDecorative
 
 	public BlockFadedHolystoneDecorative()
 	{
-		super(Material.ROCK, BlocksAether.faded_holystone_brick);
+		super(Material.ROCK);
 
 		this.setHardness(2.0F);
 		this.setResistance(10.0F);

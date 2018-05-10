@@ -4,11 +4,12 @@
 			"model": "aether:agiosite_bricks/pillar"
 		},
 		"axis=z": {
-			"model": "aether:agiosite_bricks/pillar_side"
+			"model": "aether:agiosite_bricks/pillar",
+			"x": 90
 		},
 		"axis=x": {
-			"model": "aether:agiosite_bricks/pillar_side",
-			"y": 90
+			"model": "aether:agiosite_bricks/pillar",
+			"x": 90, "y": 90
 		}
 	}
 }
