@@ -134,11 +134,21 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 				}
 
 				this.ticksRolling++;
+
+				if (!this.getWorld().isRemote)
+				{
+					this.getEntity().setEntityInvulnerable(true);
+				}
 			}
 			else
 			{
 				this.isRolling = false;
 				this.ticksRolling = 0;
+
+				if (!this.getWorld().isRemote)
+				{
+					this.getEntity().setEntityInvulnerable(false);
+				}
 			}
 		}
 		else
