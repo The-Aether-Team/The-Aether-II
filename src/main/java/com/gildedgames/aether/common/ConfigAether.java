@@ -2,6 +2,7 @@ package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketSetPlayerConfig;
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
@@ -84,7 +85,7 @@ public class ConfigAether
 		{
 			this.loadAndSync();
 
-			if (AetherCore.isClient())
+			if (AetherCore.isClient() && Minecraft.getMinecraft().world != null)
 			{
 				NetworkingAether.sendPacketToServer(new PacketSetPlayerConfig(this));
 			}
