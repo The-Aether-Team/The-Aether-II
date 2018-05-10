@@ -20,6 +20,8 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 
 	private float startRotationYaw, rollingRotationYaw;
 
+	private float prevStepHeight;
+
 	public PlayerRollMovementModule(final PlayerAether playerAether)
 	{
 		super(playerAether);
@@ -83,12 +85,7 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 			return;
 		}
 
-		//double xDif = this.getEntity().lastTickPosX - this.getEntity().posX;
-		//double zDif = this.getEntity().posZ - this.getEntity().lastTickPosZ;
-
 		this.startRotationYaw = this.getEntity().rotationYaw;
-
-		//this.startVec = this.getVectorForRotation(this.getEntity().rotationPitch, (float) (MathHelper.atan2(xDif, zDif) * (180D / Math.PI)));
 
 		if (action == PacketSpecialMovement.Action.ROLL_FORWARD)
 		{
@@ -107,6 +104,7 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 			this.rollingRotationYaw = this.getEntity().rotationYaw + 90.0F;
 		}
 
+		this.prevStepHeight = this.getEntity().stepHeight;
 		this.isRolling = true;
 		this.ticksRolling = 0;
 	}
@@ -128,10 +126,10 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 	{
 		if (this.isRolling)
 		{
-			this.getEntity().stepHeight = 1.0F;
-
 			if (this.ticksRolling <= this.maxRollingTicks)
 			{
+				this.getEntity().stepHeight = 1.0F;
+
 				if (this.getEntity().onGround)
 				{
 					Vec3d vec = this.getVectorForRotation(this.getEntity().rotationPitch, (this.getEntity().rotationYaw - this.startRotationYaw) + this.rollingRotationYaw);
@@ -160,11 +158,9 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 				{
 					this.getEntity().setEntityInvulnerable(false);
 				}
+
+				this.getEntity().stepHeight = this.prevStepHeight;
 			}
-		}
-		else
-		{
-			this.getEntity().stepHeight = 0.5F;
 		}
 	}
 
