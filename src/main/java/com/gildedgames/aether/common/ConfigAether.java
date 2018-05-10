@@ -72,6 +72,8 @@ public class ConfigAether
 		this.skipIntro = this.getBoolean(this.gameplay, "Skip Intro", false);
 		this.separateInventories = this.getBoolean(this.gameplay, "Separate Inventories", true);
 
+		this.getBoolean(this.gameplay, "Rideable Aerwhales", false);
+
 		if (this.configuration.hasChanged())
 		{
 			this.configuration.save();
