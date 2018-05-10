@@ -36,7 +36,7 @@ public class SpecialMovesEventsClient
 				int ticks = playerAether.getRollMovementModule().getTicksRolling();
 				float rollingPercent = Math.min(1.0F, ((float)ticks + (float)event.getRenderPartialTicks())/ 10.0F);
 
-				float fovMod = 12.5F;
+				float fovMod = 6.5F;
 
 				if (rollingPercent <= 0.5F)
 				{
@@ -67,13 +67,16 @@ public class SpecialMovesEventsClient
 				float rollingPercent = Math.min(1.0F, ((float)ticks + (float)event.getRenderPartialTicks())/ 10.0F);
 
 				float heightLower = 2.0F;
+				float cameraTilt = 30F;
 
 				if (rollingPercent <= 0.5F)
 				{
+					event.setPitch(event.getPitch() + (rollingPercent * cameraTilt));
 					GlStateManager.translate(0.0F, rollingPercent * heightLower, 0.0F);
 				}
 				else
 				{
+					event.setPitch(event.getPitch() + ((0.5F - (rollingPercent - 0.5F)) * cameraTilt));
 					GlStateManager.translate(0.0F, (0.5 - (rollingPercent - 0.5F)) * heightLower, 0.0F);
 				}
 			}
@@ -141,27 +144,29 @@ public class SpecialMovesEventsClient
 						sneakKeyDownTimeStamp = 0;
 					}
 				}
+
+				lastKeybind = null;
 			}
 			else
 			{
 				sneakKeyDownTimeStamp = System.currentTimeMillis();
-			}
 
-			if (forward)
-			{
-				lastKeybind = mc.gameSettings.keyBindForward;
-			}
-			else if (back)
-			{
-				lastKeybind = mc.gameSettings.keyBindBack;
-			}
-			else if (left)
-			{
-				lastKeybind = mc.gameSettings.keyBindLeft;
-			}
-			else if (right)
-			{
-				lastKeybind = mc.gameSettings.keyBindRight;
+				if (forward)
+				{
+					lastKeybind = mc.gameSettings.keyBindForward;
+				}
+				else if (back)
+				{
+					lastKeybind = mc.gameSettings.keyBindBack;
+				}
+				else if (left)
+				{
+					lastKeybind = mc.gameSettings.keyBindLeft;
+				}
+				else if (right)
+				{
+					lastKeybind = mc.gameSettings.keyBindRight;
+				}
 			}
 		}
 	}
