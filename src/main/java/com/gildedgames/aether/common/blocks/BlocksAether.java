@@ -45,7 +45,7 @@ public class BlocksAether
 
 	public static final BlockTherastoneDecorative therastone_brick_decorative = new BlockTherastoneDecorative();
 
-	public static final Block therastone_pillar = new BlockParentPillar(Material.ROCK, therastone_brick)
+	public static final Block therastone_pillar = new BlockCustomPillar(Material.ROCK)
 			.setSoundType(SoundType.STONE).setHardness(2.0f);
 
 	public static final BlockAetherLog therawood_log = new BlockAetherLog();
@@ -54,7 +54,7 @@ public class BlocksAether
 
 	public static final BlockTherawoodPlanks therawood_planks = new BlockTherawoodPlanks();
 
-	public static final Block therawood_beam = new BlockParentPillar(Material.WOOD, therawood_planks)
+	public static final Block therawood_beam = new BlockCustomPillar(Material.WOOD)
 			.setSoundType(SoundType.WOOD).setHardness(2.0f);
 
 	public static final Block aether_dirt = new BlockAetherDirt();
@@ -76,7 +76,7 @@ public class BlocksAether
 
 	public static final BlockHolystoneDecorative holystone_brick_decorative = new BlockHolystoneDecorative();
 
-	public static final Block holystone_pillar = new BlockParentPillar(Material.ROCK, holystone_brick)
+	public static final Block holystone_pillar = new BlockCustomPillar(Material.ROCK)
 			.setSoundType(SoundType.STONE).setHardness(2.0f);
 
 	public static final Block faded_holystone_brick = new BlockBuilder(Material.ROCK)
@@ -84,7 +84,7 @@ public class BlocksAether
 
 	public static final BlockFadedHolystoneDecorative faded_holystone_brick_decorative = new BlockFadedHolystoneDecorative();
 
-	public static final Block faded_holystone_pillar = new BlockParentPillar(Material.ROCK, faded_holystone_brick)
+	public static final Block faded_holystone_pillar = new BlockCustomPillar(Material.ROCK)
 			.setSoundType(SoundType.STONE).setHardness(2.0f);
 
 	public static final Block agiosite = new BlockBuilder(Material.ROCK)
@@ -95,19 +95,19 @@ public class BlocksAether
 
 	public static final BlockAgiositeDecorative agiosite_brick_decorative = new BlockAgiositeDecorative();
 
-	public static final Block agiosite_pillar = new BlockParentPillar(Material.ROCK, agiosite_brick)
+	public static final Block agiosite_pillar = new BlockCustomPillar(Material.ROCK)
 			.setSoundType(SoundType.STONE).setHardness(2.0f);
 
 	public static final BlockSkyrootPlanks skyroot_planks = new BlockSkyrootPlanks();
 
-	public static final Block skyroot_beam = new BlockParentPillar(Material.WOOD, skyroot_planks)
+	public static final Block skyroot_beam = new BlockCustomPillar(Material.WOOD)
 			.setSoundType(SoundType.WOOD).setHardness(2.0f);
 
 	public static final BlockSkyrootPlanks dark_skyroot_planks = new BlockSkyrootPlanks();
 
 	public static final BlockSkyrootPlanks light_skyroot_planks = new BlockSkyrootPlanks();
 
-	public static final Block light_skyroot_beam = new BlockParentPillar(Material.WOOD, light_skyroot_planks)
+	public static final Block light_skyroot_beam = new BlockCustomPillar(Material.WOOD)
 			.setSoundType(SoundType.WOOD).setHardness(2.0f);
 
 	public static final BlockAercloud aercloud = new BlockAercloud();
@@ -186,9 +186,9 @@ public class BlocksAether
 			crude_scatterglass = new BlockRockGlass(),
 			scatterglass = new BlockRockGlassTranslucent();
 
-	public static final Block quicksoil_glass_decorative = new BlockRockGlassDecorative(quicksoil_glass).setLightLevel(1f),
-			crude_scatterglass_decorative = new BlockRockGlassDecorative(crude_scatterglass),
-			scatterglass_decorative = new BlockRockGlassDecorative(scatterglass);
+	public static final Block quicksoil_glass_decorative = new BlockRockGlassDecorative().setLightLevel(1f),
+			crude_scatterglass_decorative = new BlockRockGlassDecorative(),
+			scatterglass_decorative = new BlockRockGlassDecorative();
 
 	public static final Block zanite_block = new BlockBuilder(Material.IRON).setSoundType(SoundType.METAL).setHardness(5f);
 
@@ -212,7 +212,7 @@ public class BlocksAether
 
 	public static final BlockIcestoneBricksDecorative icestone_bricks_decorative = new BlockIcestoneBricksDecorative();
 
-	public static final Block icestone_pillar = new BlockParentPillar(Material.ROCK, icestone_bricks)
+	public static final Block icestone_pillar = new BlockCustomPillar(Material.ROCK)
 			.setSoundType(SoundType.GLASS).setHardness(2.0f);
 
 	public static final BlockSkyrootFence skyroot_fence = new BlockSkyrootFence();
@@ -291,9 +291,9 @@ public class BlocksAether
 			scatterglass_pane = new BlockRockGlassPane(scatterglass),
 			crude_scatterglass_pane = new BlockRockGlassPane(crude_scatterglass);
 
-	public static final Block quicksoil_glass_pane_decorative = new BlockRockGlassPaneDecorative(quicksoil_glass).setLightLevel(1f),
-			scatterglass_pane_decorative = new BlockRockGlassPaneDecorative(scatterglass),
-			crude_scatterglass_pane_decorative = new BlockRockGlassPaneDecorative(crude_scatterglass);
+	public static final Block quicksoil_glass_pane_decorative = new BlockRockGlassPaneDecorative().setLightLevel(1f),
+			scatterglass_pane_decorative = new BlockRockGlassPaneDecorative(),
+			crude_scatterglass_pane_decorative = new BlockRockGlassPaneDecorative();
 
 	public static final Block skyroot_twigs = new BlockFloorObject(Material.PLANTS, SoundType.WOOD);
 
@@ -685,8 +685,8 @@ public class BlocksAether
 		private void register(final String registryName, final Block block)
 		{
 			block.setUnlocalizedName(AetherCore.MOD_ID + "." + registryName);
-
 			block.setRegistryName(AetherCore.MOD_ID, registryName);
+
 			this.registry.register(block);
 
 			final ItemBlock item;

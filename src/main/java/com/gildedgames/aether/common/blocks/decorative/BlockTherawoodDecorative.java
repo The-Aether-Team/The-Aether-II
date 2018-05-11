@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.blocks.decorative;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
 import net.minecraft.block.SoundType;
@@ -19,7 +18,7 @@ public class BlockTherawoodDecorative extends BlockDecorative
 
 	public BlockTherawoodDecorative()
 	{
-		super(Material.WOOD, BlocksAether.therawood_planks);
+		super(Material.WOOD);
 
 		this.setSoundType(SoundType.WOOD);
 

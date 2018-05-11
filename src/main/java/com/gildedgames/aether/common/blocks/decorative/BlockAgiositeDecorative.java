@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.blocks.decorative;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
 import net.minecraft.block.SoundType;
@@ -21,7 +20,7 @@ public class BlockAgiositeDecorative extends BlockDecorative
 
 	public BlockAgiositeDecorative()
 	{
-		super(Material.ROCK, BlocksAether.agiosite_brick);
+		super(Material.ROCK);
 
 		this.setSoundType(SoundType.STONE);
 		this.setHardness(2f);
