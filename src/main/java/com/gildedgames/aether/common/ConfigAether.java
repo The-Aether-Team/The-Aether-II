@@ -65,9 +65,9 @@ public class ConfigAether
 		this.helmetShadow = this.getBoolean(this.general, "Helmet Shadow", true);
 		this.cutoutHelmets = this.getBoolean(this.general, "Transparent Helmets", true);
 
-		this.rollCameraTilt = this.getDouble(this.controls, "Roll Camera Tilt", 12.5D);
-		this.rollCameraHeightLower = this.getDouble(this.controls, "Roll Camera Height Lower", 0.5D);
-		this.rollFOV = this.getDouble(this.controls, "Roll FOV", 2.0D);
+		this.rollCameraTilt = this.getDouble(this.controls, "Roll Camera Tilt", 3.5D);
+		this.rollCameraHeightLower = this.getDouble(this.controls, "Roll Camera Height Lower", 0.25D);
+		this.rollFOV = this.getDouble(this.controls, "Roll FOV", 1.0D);
 
 		this.skipIntro = this.getBoolean(this.gameplay, "Skip Intro", false);
 		this.separateInventories = this.getBoolean(this.gameplay, "Separate Inventories", true);

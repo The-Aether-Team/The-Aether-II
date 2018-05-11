@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 public class PlayerRollMovementModule extends PlayerAetherModule
 {
-	private int maxRollingTicks = 10;
+	private int maxRollingTicks = 7;
 
 	private boolean isRolling;
 
@@ -132,7 +132,7 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 
 				if (this.getEntity().onGround)
 				{
-					Vec3d vec = this.getVectorForRotation(this.getEntity().rotationPitch, (this.getEntity().rotationYaw - this.startRotationYaw) + this.rollingRotationYaw);
+					Vec3d vec = this.getVectorForRotation(0, (this.getEntity().rotationYaw - this.startRotationYaw) + this.rollingRotationYaw);
 
 					double speed = Math.max(0.0, Math.pow(1.25, this.ticksRolling / 7.0) - 1.0) + 0.25;
 
