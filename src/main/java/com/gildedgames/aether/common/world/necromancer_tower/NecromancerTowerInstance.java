@@ -37,6 +37,12 @@ public class NecromancerTowerInstance implements IInstance
 	@SuppressWarnings("unused")
 	public NecromancerTowerInstance() { }
 
+	@SuppressWarnings("unused")
+	public NecromancerTowerInstance(World world)
+	{
+
+	}
+
 	public NecromancerTowerInstance(final int id)
 	{
 		this.dimensionId = id;
