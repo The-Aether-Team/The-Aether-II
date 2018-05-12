@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.world.necromancer_tower;
 
-import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.orbis_api.world.instances.IInstanceHandler;
 import net.minecraft.entity.player.EntityPlayerMP;
 
@@ -19,24 +18,14 @@ public class NecromancerTowerInstanceHelper
 		return this.handler.getInstanceForDimension(dimId);
 	}
 
-	public NecromancerTowerInstance get(PlayerAether playerAether)
+	public void teleportToInst(final EntityPlayerMP player)
 	{
-		if (playerAether.getNecromancerTowerInstance() != null)
-		{
-			return playerAether.getNecromancerTowerInstance();
-		}
+		NecromancerTowerInstance inst = this.handler.createNew();
 
-		final NecromancerTowerInstance inst = this.handler.createNew();
-
-		playerAether.setNecromancerTowerInstance(inst);
-
-		return inst;
-	}
-
-	public void teleportToInst(final EntityPlayerMP player, final NecromancerTowerInstance inst)
-	{
 		if (!net.minecraftforge.common.ForgeHooks.onTravelToDimension(player, inst.getDimensionId()))
 		{
+			this.handler.unregisterInstance(inst);
+
 			return;
 		}
 

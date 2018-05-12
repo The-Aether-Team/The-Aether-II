@@ -9,7 +9,6 @@ import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketSetPlayedIntro;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.registry.content.InstancesAether;
-import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstance;
 import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstanceHelper;
 import com.gildedgames.orbis_api.OrbisAPI;
 import com.gildedgames.orbis_api.util.TeleporterGeneric;
@@ -186,12 +185,10 @@ public class BlockAetherTeleporter extends Block implements ITileEntityProvider
 				{
 					hook.setInstance(null);
 
-					final NecromancerTowerInstance inst = handler.get(playerAether);
-
 					playerAether.getTeleportingModule()
 							.setNonAetherPos(new BlockPosDimension((int) player.posX, (int) player.posY, (int) player.posZ, player.dimension));
 
-					handler.teleportToInst((EntityPlayerMP) player, inst);
+					handler.teleportToInst((EntityPlayerMP) player);
 				}
 			}
 			else
@@ -205,9 +202,7 @@ public class BlockAetherTeleporter extends Block implements ITileEntityProvider
 				}
 				else
 				{
-					final NecromancerTowerInstance inst = handler.get(playerAether);
-
-					handler.teleportToInst((EntityPlayerMP) player, inst);
+					handler.teleportToInst((EntityPlayerMP) player);
 				}
 			}
 

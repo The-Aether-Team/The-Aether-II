@@ -162,12 +162,6 @@ public class NecromancerTowerInstance implements IInstance
 	}
 
 	@Override
-	public void setDimensionId(final int i)
-	{
-		this.dimensionId = i;
-	}
-
-	@Override
 	public boolean isTemporary()
 	{
 		return true;

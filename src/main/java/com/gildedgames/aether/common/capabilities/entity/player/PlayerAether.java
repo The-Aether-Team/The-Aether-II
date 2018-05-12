@@ -176,16 +176,6 @@ public class PlayerAether implements IPlayerAether
 		this.lastDestroyedStack = lastDestroyedStack;
 	}
 
-	public NecromancerTowerInstance getNecromancerTowerInstance()
-	{
-		return this.towerInstance;
-	}
-
-	public void setNecromancerTowerInstance(NecromancerTowerInstance towerInstance)
-	{
-		this.towerInstance = towerInstance;
-	}
-
 	public PlayerSeparateInventoryModule getSeparateInventoryModule()
 	{
 		return this.separateInventoryModule;
