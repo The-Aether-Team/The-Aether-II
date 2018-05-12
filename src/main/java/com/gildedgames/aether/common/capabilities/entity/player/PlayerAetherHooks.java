@@ -301,13 +301,11 @@ public class PlayerAetherHooks
 				{
 					mp.connection.setPlayerLocation(pos.getX(), pos.getY() + 1, pos.getZ(), 0, 0);
 
-					if (!aePlayer.hasDiedInAetherBefore())
+					if (!aePlayer.getProgressModule().hasDiedInAether())
 					{
-						aePlayer.getDialogController().openScene(AetherCore.getResource("edison/outpost_greet"));
+						aePlayer.getProgressModule().setHasDiedInAether(true);
 
-						aePlayer.setHasDiedInAetherBefore(true);
-
-						NetworkingAether.sendPacketToPlayer(new PacketMarkPlayerDeath(aePlayer.hasDiedInAetherBefore()), mp);
+						NetworkingAether.sendPacketToPlayer(new PacketMarkPlayerDeath(aePlayer.getProgressModule().hasDiedInAether()), mp);
 					}
 				}
 

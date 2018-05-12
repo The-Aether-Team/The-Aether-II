@@ -27,12 +27,17 @@ public interface IDialogController
 	 * Opens and displays the scene at it's starting node.
 	 * @param path The resource path to the scene file
 	 */
-	void openScene(ResourceLocation path);
+	void openScene(ResourceLocation path, String startinNodeId);
 
 	/**
 	 * Sets the current node in the scene.
 	 */
 	void navigateNode(String nodeId);
+
+	/**
+	 * Sets the current node in the scene to the last active node.
+	 */
+	void navigateBack();
 
 	/**
 	 * Called when the player presses a button in the dialog node.

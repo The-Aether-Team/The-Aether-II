@@ -1,81 +1,205 @@
 {
 	"nodes": [
 		{
-			"name": "#start",
+			"name": "start_not_introduced",
 			"lines": [
-				{ "speaker": "aether:edison#idle", "text": "edison.them.outpost_start" }
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.start_not_introduced" }
 			],
 			"buttons": [
-				{ "label": "edison.us.who_are_you", "actions": [ { "type": "navigate", "target": "what.edison" } ] },
-				{ "label": "edison.us.what_is_this_place", "actions": [ { "type": "navigate", "target": "what.this_place" } ] },
-				{ "label": "edison.us.why_am_i_here", "actions": [ { "type": "navigate", "target": "why.me" } ] },
-				{ "label": "edison.us.goodbye", "actions": [ { "type": "exit" } ] }
+				{ "label": "edison.greet.option.expecting", "actions": [ { "type": "navigate", "target": "expecting" } ] },
+				{ "label": "edison.greet.option.who", "actions": [ { "type": "navigate", "target": "who" } ] },
+				{ "label": "edison.greet.option.map", "actions": [ { "type": "navigate", "target": "map" } ] },
+				{ "label": "generic.goodbye", "actions": [ { "type": "exit" } ] }
 			]
 		},
 		{
-			"name": "what.edison",
+			"name": "start_respawn_not_introduced",
 			"lines": [
-				{ "speaker": "aether:edison#grin", "text": "edison.them.who_are_you" }
-			],
-            "buttons": [
-                { "label": "edison.us.can_i_buy_something", "actions": [ { "type": "navigate", "target": "can.buy" } ] },
-                { "label": "generic.us.okay", "actions": [ { "type": "navigate", "target": "#start"} ] }
-            ]
-		},
-        {
-            "name": "can.buy",
-            "lines": [
-                { "speaker": "aether:edison#thought", "text": "edison.them.can_i_buy_something.1" },
-                { "speaker": "aether:edison#grin", "text": "edison.them.can_i_buy_something.2" }
-            ]
-        },
-		{
-			"name": "what.this_place",
-			"lines": [
-				{ "speaker": "aether:edison#idle", "text": "edison.them.what_is_this_place" }
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.respawn_not_introduced" }
 			],
 			"buttons": [
-				{ "label": "edison.us.the_world_were_in", "actions": [ { "type": "navigate", "target": "what.the_world" } ] },
-				{ "label": "edison.us.this_outpost", "actions": [ { "type": "navigate", "target": "what.the_outpost" } ] }
+				{ "label": "edison.greet.option.who", "actions": [ { "type": "navigate", "target": "who" } ] },
+				{ "label": "edison.greet.option.what", "actions": [ { "type": "navigate", "target": "what" } ] },
+				{ "label": "edison.greet.option.died", "actions": [ { "type": "navigate", "target": "died" } ] },
+				{ "label": "generic.goodbye", "actions": [ { "type": "exit" } ] }
 			]
 		},
 		{
-			"name": "what.the_world",
+			"name": "start_respawn",
 			"lines": [
-				{ "speaker": "aether:edison#grin", "text": "edison.them.the_world_were_in.1" },
-				{ "speaker": "aether:edison#idle", "text": "edison.them.the_world_were_in.2" }
-			],
-            "buttons": [
-                { "label": "edison.us.valkyries", "actions": [ { "type": "navigate", "target": "what.valkyries" } ] },
-                { "label": "generic.us.okay", "actions": [ { "type": "navigate", "target": "#start" } ] }
-            ]
-		},
-		{
-			"name": "what.the_outpost",
-			"lines": [
-				{ "speaker": "aether:edison#idle", "text": "edison.them.this_outpost.1" },
-				{ "speaker": "aether:edison#grin", "text": "edison.them.this_outpost.2" }
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.respawn" }
 			],
 			"buttons": [
-				{ "label": "edison.us.valkyries", "actions": [ { "type": "navigate", "target": "what.valkyries" } ] },
-				{ "label": "generic.us.okay", "actions": [ { "type": "navigate", "target": "#start" } ] }
+				{ "label": "edison.greet.option.fine", "actions": [ { "type": "navigate", "target": "fine" } ] },
+				{ "label": "edison.greet.option.thanks", "actions": [ { "type": "navigate", "target": "thanks" } ] },
+				{ "label": "edison.greet.option.okay_sale", "actions": [ { "type": "navigate", "target": "sale" } ] },
+				{ "label": "generic.goodbye", "actions": [ { "type": "exit" } ] }
 			]
 		},
 		{
-			"name": "what.valkyries",
+			"name": "start",
 			"lines": [
-				{ "speaker": "aether:edison#sigh", "text": "edison.them.valkyries.1" },
-				{ "speaker": "aether:edison#grin", "text": "edison.them.valkyries.2" },
-				{ "speaker": "aether:edison#thought", "text": "edison.them.valkyries.3" }
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.start" }
+			],
+			"buttons": [
+				{ "label": "edison.greet.option.sale", "actions": [ { "type": "navigate", "target": "sale" } ] },
+				{ "label": "edison.greet.option.okay_goodbye", "actions": [ { "type": "exit" } ] }
 			]
 		},
 		{
-			"name": "why.me",
+			"name": "expecting",
 			"lines": [
-				{ "speaker": "aether:edison#grin", "text": "edison.them.why_am_i_here.1" },
-				{ "speaker": "aether:edison#thought", "text": "edison.them.why_am_i_here.2" },
-				{ "speaker": "aether:edison#idle", "text": "edison.them.why_am_i_here.3" },
-				{ "speaker": "aether:edison#sigh", "text": "edison.them.why_am_i_here.4" }
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.expecting1" },
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.expecting2" },
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.expecting3" }
+			],
+			"buttons": [
+				{ "label": "edison.greet.option.no_we_talked", "actions": [ { "type": "navigate", "target": "no_we_talked" } ] },
+				{ "label": "edison.greet.option.who", "actions": [ { "type": "navigate", "target": "who" } ] },
+				{ "label": "edison.greet.option.what", "actions": [ { "type": "navigate", "target": "what" } ] }
+			]
+		},
+		{
+			"name": "what",
+			"lines": [
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.what1" },
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.what2" },
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.what3" }
+			],
+			"buttons": [
+				{ "label": "edison.greet.option.building", "actions": [ { "type": "navigate", "target": "building" } ] },
+				{ "label": "edison.greet.option.world", "actions": [ { "type": "navigate", "target": "world" } ] }
+			]
+		},
+		{
+			"name": "who",
+			"lines": [
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.who1" },
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.who2" },
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.who3" },
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.who4" },
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.who5" }
+			],
+			"buttons": [
+				{ "label": "edison.greet.option.what", "actions": [ { "type": "navigate", "target": "what" } ] },
+				{ "label": "edison.greet.option.sale", "actions": [ { "type": "navigate", "target": "sale" } ] },
+				{ "label": "edison.greet.option.you_know_who", "actions": [ { "type": "navigate", "target": "you_know_who" } ] },
+				{ "label": "edison.greet.option.okay_goodbye", "actions": [ { "type": "exit" } ] }
+			]
+		},
+		{
+			"name": "map",
+			"lines": [
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.map1" },
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.map2" }
+			],
+			"buttons": [
+				{ "label": "edison.greet.option.what", "actions": [ { "type": "navigate", "target": "what" } ] },
+				{ "label": "edison.greet.option.who", "actions": [ { "type": "navigate", "target": "who" } ] }
+			]
+		},
+		{
+			"name": "died",
+			"lines": [
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.died1" }
+			],
+			"buttons": [
+				{ "label": "edison.greet.option.what", "actions": [ { "type": "navigate", "target": "what" } ] },
+				{ "label": "edison.greet.option.who", "actions": [ { "type": "navigate", "target": "who" } ] }
+			]
+		},
+		{
+			"name": "fine",
+			"lines": [
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.fine1" },
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.fine2" }
+			],
+			"buttons": [
+				{ "label": "edison.greet.option.sale", "actions": [ { "type": "navigate", "target": "sale" } ] },
+				{ "label": "generic.goodbye", "actions": [ { "type": "exit" } ] }
+			]
+		},
+		{
+			"name": "thanks",
+			"lines": [
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.thanks1" },
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.thanks2" }
+			],
+			"buttons": [
+				{ "label": "edison.greet.option.sale", "actions": [ { "type": "navigate", "target": "sale" } ] },
+				{ "label": "edison.greet.option.ready_goodbye", "actions": [ { "type": "exit" } ] }
+			]
+		},
+		{
+			"name": "sale",
+			"lines": [
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.sale1" },
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.sale2" }
+			],
+			"buttons": [
+				{ "label": "generic.back", "actions": [ { "type": "back" } ] }
+			]
+		},
+		{
+			"name": "no_we_talked",
+			"lines": [
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.no_we_talked1" },
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.no_we_talked2" }
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.no_we_talked3" }
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.no_we_talked4" }
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.no_we_talked5" }
+			],
+			"buttons": [
+				{ "label": "edison.greet.option.what", "actions": [ { "type": "navigate", "target": "what" } ] },
+				{ "label": "edison.greet.option.sale", "actions": [ { "type": "navigate", "target": "sale" } ] }
+			]
+		},
+		{
+			"name": "you_know_who",
+			"lines": [
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.you_know_who1" },
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.you_know_who2" },
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.you_know_who3" }
+			],
+			"buttons": [
+				{ "label": "edison.greet.option.what", "actions": [ { "type": "navigate", "target": "what" } ] },
+				{ "label": "edison.greet.option.sale", "actions": [ { "type": "navigate", "target": "sale" } ] },
+				{ "label": "edison.greet.option.mind_goodbye", "actions": [ { "type": "exit" } ] }
+			]
+		},
+		{
+			"name": "building",
+			"lines": [
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.building1" },
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.building2" }
+			],
+			"buttons": [
+				{ "label": "edison.greet.option.valkyries", "actions": [ { "type": "navigate", "target": "valkyries" } ] },
+				{ "label": "edison.greet.option.world", "actions": [ { "type": "navigate", "target": "world" } ] }
+			]
+		},
+		{
+			"name": "world",
+			"lines": [
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.world1" },
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.world2" }
+			],
+			"buttons": [
+				{ "label": "edison.greet.option.valkyries", "actions": [ { "type": "navigate", "target": "valkyries" } ] },
+				{ "label": "edison.greet.option.building", "actions": [ { "type": "navigate", "target": "building" } ] }
+			]
+		},
+		{
+			"name": "valkyries",
+			"lines": [
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.valkyries1" },
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.valkyries2" },
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.valkyries3" },
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.valkyries4" }
+			],
+			"buttons": [
+				{ "label": "edison.greet.option.who", "actions": [ { "type": "navigate", "target": "who" } ] },
+				{ "label": "edison.greet.option.okay_goodbye", "actions": [ { "type": "exit" } ] }
 			]
 		}
 	]

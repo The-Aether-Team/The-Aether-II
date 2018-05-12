@@ -822,54 +822,6 @@ bug_report.line2=Did you run into an issue? If you'd like, you can help contribu
 bug_report.line3=Issues are an easy way to report bugs and other problems with the mod, giving you direct access to developer help and our amazing community of volunteers.
 bug_report.line4=Clicking the button below will take you to an external website in your browser where our issue tracker is located. Register an account today, and help us squash bugs faster than ever!
 
-dialog.back=Back
-
-generic.us.okay=Okay
-
-edison.name=Edison
-
-edison.us.goodbye=Goodbye
-
-edison.them.outpost_start=You should really take better care of yourself, I really can't have folks saving your skin everywhere you go.
-
-edison.us.who_are_you=Who are you?
-edison.them.who_are_you=Oh have we not been introduced? I'm Edison, Edison Wrenk. Merchant by trade, but our "mutual friend" has requested I act as your contact out in these parts.
-
-edison.us.can_i_buy_something=Can I buy something?
-edison.them.can_i_buy_something.1=Sorry friend, I'm still working on getting my stock in order.
-edison.them.can_i_buy_something.2=Maybe come back later and I'll have more to offer.
-
-edison.us.what_is_this_place=What is this place?
-edison.them.what_is_this_place=Our friend didn't inform me as to what you've been told, so I wonder if you mean this structure around us or this world we're in?
-
-edison.us.the_world_were_in=The world we're in.
-edison.them.the_world_were_in.1=Okay then, not been told much? This here is The Aether! It's a world that exists high above our own, so high it has its own flora and fauna.
-edison.them.the_world_were_in.2=What you stand in now is one of many ancient Valkyrie outposts, they were set up originally as sacred burial grounds if I recall correctly, but since have served as a place of resting for many travellers.
-
-edison.us.this_outpost=This outpost.
-edison.them.this_outpost.1=Ah well this here is an old traveller's outpost! One built many years ago by the Valkyries as a burial ground.
-edison.them.this_outpost.2=Since then many people have taken it upon themselves to maintain these areas, making them a truly safe place for anyone wandering the Aether's landscape to rest.
-
-edison.us.valkyries=Valkyries?
-edison.them.valkyries.1=They're kinda like the city guards of this world but err... Heh... Much more powerful. A solo legionnaire could rip you to shreds if you gave it reason to.
-edison.them.valkyries.2=Luckily they're rather friendly, not big talkers though. You should find them wandering around most towns and villages. They have some sort of holy pact to protect people or something.
-edison.them.valkyries.3=Honestly I'm not entirely sure what they are, you're better off asking one of the natives. Or a Valkyrie in person! They're kinda hard to miss.
-
-edison.us.why_am_i_here=Why am I here?
-edison.them.why_am_i_here.1=Well, you see, part of my little agreement with our good friend is that I need to ensure you don't die out there on your little "mission" or whatever it is you're doing.
-edison.them.why_am_i_here.2=So I've had a few of my employees and aquaintances get familiar with your looks, so if they ever spot you in trouble, they'll bring you back to one of these outposts and patch you up.
-edison.them.why_am_i_here.3=They'll also contact me and I'll come running to check up on you, I'm getting a hefty pay for this contract so don't wanna make it look like I don't care...
-edison.them.why_am_i_here.4=That said I can't guarantee the fellas who find you won't try to line their pockets themselves. Not that they don't deserve it, but they might decide it's worth not telling ya about it is all.
-
-edison.them.busy=I'm working on something at the moment, friend. Come back in a bit.
-
-necromancer.name=Necromancer
-
-necromancer.them.start1=I see you made it here safely. I appreciate that you may have many questions but I fear we are short on time.
-necromancer.them.start2=Please make your way upstairs to the Rift Room to enter the Aether. Good luck on your journey.
-
-necromancer.us.leadtheway=Thank you. Goodbye.
-
 aether.warning.deprecated_item=§cDeprecated! Will be removed!
 aether.warning.operator_item=Requires Operator privileges
 
@@ -878,3 +830,132 @@ aether.reward.sun_spirit.name=Sun Spirit
 aether.reward.slider.name=Slider
 aether.reward.valkyrie_queen.name=Valkyrie Queen
 aether.reward.none.name=None
+
+
+##=======================##
+###########################
+#                         #
+#  CHARACTER NAMES        #
+#                         #
+###########################
+##=======================##
+
+edison.name=Edison
+necromancer.name=Necromancer
+
+##=======================##
+###########################
+#                         #
+#  GENERIC DIALOG         #
+#                         #
+###########################
+##=======================##
+
+generic.back=Back
+generic.okay=Okay
+generic.goodbye=Goodbye
+
+##=======================##
+###########################
+#                         #
+#  NECROMANCER DIALOGUE   #
+#                         #
+###########################
+##=======================##
+
+necromancer.them.start1=I see you made it here safely. I appreciate that you may have many questions but I fear we are short on time.
+necromancer.them.start2=Please make your way upstairs to the Rift Room to enter the Aether. Good luck on your journey.
+
+necromancer.us.leadtheway=Thank you. Goodbye.
+
+##=======================##
+###########################
+#                         #
+#  EDISON GREET DIALOGUE  #
+#                         #
+###########################
+##=======================##
+
+edison.greet.start_not_introduced=You’re late, newby. Been waiting here for a couple hours now.
+
+edison.greet.option.expecting=You were expecting me?
+edison.greet.option.who=Who are you?
+edison.greet.option.map=I didn't exactly have a map.
+
+edison.greet.respawn_not_introduced=You should really take better care of yourself, friend. You’re lucky you were found in one piece.
+edison.greet.respawn=You okay? You were found pretty beat up back there.
+
+edison.greet.option.what=What is this place?
+edison.greet.option.died=I thought I was done for...
+
+edison.greet.option.fine=I'm fine.
+edison.greet.option.thanks=Thanks, Edison.
+edison.greet.option.okay_sale=I'll be okay, you got anything for sale?
+
+edison.greet.start=Hey there friend, how's it going? You need anything?
+
+edison.greet.option.sale=You got anything for sale?
+
+edison.greet.option.okay_goodbye=I think I'm okay. Goodbye.
+edison.greet.option.ready_goodbye=I think I'm ready. Bye, Edison.
+edison.greet.option.mind_goodbye=I'll keep that in mind. Goodbye.
+
+edison.greet.expecting1=Of course! I’m being paid good money by our "mutual friend” to watch your back.
+edison.greet.expecting2=Wait, did he not explain our little arrangement? Typical...
+edison.greet.expecting3=Well then... What do I need to explain to you?
+
+edison.greet.option.no_we_talked=No we talked. You’re... Edison, right?
+
+edison.greet.who1=I’m Edison! International entrepreneur, salesman and master of persuasion!
+edison.greet.who2=But to you, due to our little agreement with "you know who”, I am also your contact in these strange lands.
+edison.greet.who3=Basically, that means I’ve got to look after you.
+edison.greet.who4=Now I’m a strong believer in knowledge being the best tool in this world. So in the interest of keeping you from, well, dying...
+edison.greet.who5=Do you have any more questions?
+
+edison.greet.option.you_know_who="You know who?"
+
+edison.greet.map1=Haha! Snarky one aren’t ya? Maybe I should’ve expected a bit of a wait.
+edison.greet.map2=Not exactly hard to find these places though. Would’ve thought you’d be dropped off nearby anyway.
+
+edison.greet.what1="This place?"" King of vague questions aren’t you?
+edison.greet.what2=I would assume you knew at least a little about what you were getting into coming here, but I’ll need you to be a bit more specific than that.
+edison.greet.what3=Do you mean this building we’re standing in? Or the actual world around us?
+
+edison.greet.option.building=This building.
+edison.greet.option.world=This world.
+
+edison.greet.died1=So did I! When my employee dragged you in here I wasn’t sure you were gonna wake up.
+
+edison.greet.fine1=Well that was passive aggressive considering me and my men just saved your skin.
+edison.greet.fine2=You need anything before you head off?
+
+edison.greet.thanks1=Don’t mention it. We’ve all got a role to play here, mine’s to keep you safe.
+edison.greet.thanks2=You need anything or are you good to set off?
+
+edison.greet.sale1=Sorry friend, I'm still working on getting my stock in order.
+edison.great.sale2=Maybe come back later and I'll have more to offer.
+
+edison.greet.no_we_talked1=That’s right! International entrepreneur, salesman and master of persuasion!
+edison.greet.no_we_talked2=But to you, due to our little agreement with The Necromancer, I am also your contact in these strange lands.
+edison.greet.no_we_talked3=Basically that means I’ve got to look after you.
+edison.greet.no_we_talked4=Now I’m a strong believer in knowledge being the best tool in this world. So in the interest of keeping you from, well, dying...
+edison.greet.no_we_talked5=Do you have any more questions?
+
+edison.greet.you_know_who1=The Necromancer. You know - Mr. Tall, Dark and Creepy?
+edison.greet.you_know_who2=Him and I have been in contact quite regularly, and he’s paying me quite a lot of coin to ensure if you’re ever in a pinch you’ll be taken to a safe place.
+edison.greet.you_know_who3=Thinking about it though, he usually leaves a note in with his little "gifts” he hands out. Maybe take a look through your Guidebook for one.
+
+edison.greet.building1=Ah well this here is an old traveller's outpost! One built many years ago by the Valkyries as a burial ground.
+edison.greet.building2=Since then many people have taken it upon themselves to maintain these areas, making them a truly safe place for anyone wandering the Aether's landscape to rest.
+
+edison.greet.option.valkyries=Valkyries?
+edison.greet.option.what_world=What about this world?
+edison.greet.option.what_building=What about this building?
+
+edison.greet.world1=Okay then, not been told much? This here is The Aether! It's a world that exists high above our own, so high it has its own flora and fauna.
+edison.greet.world2=What you stand in now is one of many ancient Valkyrie outposts, they were set up originally as sacred burial grounds if I recall correctly, but since have served as a place of resting for many travellers.
+
+edison.greet.valkyries1=They're kinda like the city guards of this world but err... Heh... Much more powerful. A solo legionnaire could rip you to shreds if you gave it reason to.
+edison.greet.valkyries2=Luckily they're rather friendly, not big talkers though. You should find them wandering around most towns and villages. They have some sort of holy pact to protect people or something.
+edison.greet.valkyries3=Honestly I'm not entirely sure what they are, you're better off asking one of the natives. Or a Valkyrie in person! They're kinda hard to miss.
+edison.greet.valkyries4=Have anything else you want to know?

@@ -6,17 +6,17 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-public class PacketMarkPlayerDeath implements IMessage
+public class PacketTalkedToEdison implements IMessage
 {
 
 	private boolean flag = true;
 
-	public PacketMarkPlayerDeath()
+	public PacketTalkedToEdison()
 	{
 
 	}
 
-	public PacketMarkPlayerDeath(final boolean flag)
+	public PacketTalkedToEdison(final boolean flag)
 	{
 		this.flag = flag;
 	}
@@ -33,10 +33,10 @@ public class PacketMarkPlayerDeath implements IMessage
 		buf.writeBoolean(this.flag);
 	}
 
-	public static class HandlerClient extends MessageHandlerClient<PacketMarkPlayerDeath, IMessage>
+	public static class HandlerClient extends MessageHandlerClient<PacketTalkedToEdison, IMessage>
 	{
 		@Override
-		public IMessage onMessage(final PacketMarkPlayerDeath message, final EntityPlayer player)
+		public IMessage onMessage(final PacketTalkedToEdison message, final EntityPlayer player)
 		{
 			if (player == null || player.world == null)
 			{
@@ -45,7 +45,7 @@ public class PacketMarkPlayerDeath implements IMessage
 
 			final PlayerAether playerAether = PlayerAether.getPlayer(player);
 
-			playerAether.getProgressModule().setHasDiedInAether(message.flag);
+			playerAether.getProgressModule().setHasTalkedToEdison(message.flag);
 
 			return null;
 		}

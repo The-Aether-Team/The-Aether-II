@@ -74,9 +74,9 @@ public class PlayerAether implements IPlayerAether
 
 	private final PlayerConfigModule configModule;
 
-	private final List<PlayerAetherObserver> observers = Lists.newArrayList();
+	private final PlayerProgressModule progressModule;
 
-	private boolean hasDiedInAetherBefore;
+	private final List<PlayerAetherObserver> observers = Lists.newArrayList();
 
 	private NecromancerTowerInstance towerInstance;
 
@@ -99,6 +99,7 @@ public class PlayerAether implements IPlayerAether
 		this.patronRewardsModule = null;
 		this.rollMovementModule = null;
 		this.configModule = null;
+		this.progressModule = null;
 	}
 
 	public PlayerAether(final EntityPlayer entity)
@@ -118,6 +119,7 @@ public class PlayerAether implements IPlayerAether
 		this.patronRewardsModule = new PlayerPatronRewards(this);
 		this.rollMovementModule = new PlayerRollMovementModule(this);
 		this.configModule = new PlayerConfigModule(this);
+		this.progressModule = new PlayerProgressModule(this);
 
 		final Collection<PlayerAetherModule> modules = new ArrayList<>();
 
@@ -134,6 +136,7 @@ public class PlayerAether implements IPlayerAether
 		modules.add(this.patronRewardsModule);
 		modules.add(this.rollMovementModule);
 		modules.add(this.configModule);
+		modules.add(this.progressModule);
 
 		this.modules = modules.toArray(new PlayerAetherModule[modules.size()]);
 	}
@@ -183,16 +186,6 @@ public class PlayerAether implements IPlayerAether
 		this.towerInstance = towerInstance;
 	}
 
-	public boolean hasDiedInAetherBefore()
-	{
-		return this.hasDiedInAetherBefore;
-	}
-
-	public void setHasDiedInAetherBefore(final boolean flag)
-	{
-		this.hasDiedInAetherBefore = flag;
-	}
-
 	public PlayerSeparateInventoryModule getSeparateInventoryModule()
 	{
 		return this.separateInventoryModule;
@@ -208,7 +201,7 @@ public class PlayerAether implements IPlayerAether
 	 */
 	public void sendFullUpdate()
 	{
-		NetworkingAether.sendPacketToPlayer(new PacketMarkPlayerDeath(this.hasDiedInAetherBefore()), (EntityPlayerMP) this.getEntity());
+		NetworkingAether.sendPacketToPlayer(new PacketProgressModule(this.getProgressModule()), (EntityPlayerMP) this.getEntity());
 		NetworkingAether.sendPacketToPlayer(new PacketSetPlayedIntro(this.getTeleportingModule().hasPlayedIntro()), (EntityPlayerMP) this.getEntity());
 		NetworkingAether.sendPacketToPlayer(new PacketCampfires(this.getCampfiresModule().getCampfiresActivated()), (EntityPlayerMP) this.getEntity());
 		NetworkingAether.sendPacketToPlayer(new PacketPreventDropsInventories(this.preventDropsModule), (EntityPlayerMP) this.getEntity());
@@ -324,6 +317,11 @@ public class PlayerAether implements IPlayerAether
 		NetworkingAether.sendPacketToPlayer(new PacketEquipment(this), (EntityPlayerMP) other.getEntity());
 	}
 
+	public PlayerProgressModule getProgressModule()
+	{
+		return this.progressModule;
+	}
+
 	@Override
 	public IDialogController getDialogController()
 	{
@@ -358,7 +356,6 @@ public class PlayerAether implements IPlayerAether
 		}
 
 		tag.setTag("Modules", modules);
-		tag.setBoolean("HasDiedInAether", this.hasDiedInAetherBefore);
 
 		funnel.set("towerInstance", this.towerInstance);
 	}
@@ -376,8 +373,6 @@ public class PlayerAether implements IPlayerAether
 
 			module.read(modules.getCompoundTagAt(i));
 		}
-
-		this.hasDiedInAetherBefore = tag.getBoolean("HasDiedInAether");
 
 		NecromancerTowerInstance inst = funnel.get("towerInstance");
 

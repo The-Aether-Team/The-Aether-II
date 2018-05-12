@@ -23,4 +23,10 @@ public interface IDialogScene
 	 */
 	@Nonnull
 	IDialogNode getStartingNode();
+
+	/**
+	 * Sets the starting node for this scene.
+	 * @param id The name of the node
+	 */
+	void setStartingNode(String id);
 }

@@ -3,11 +3,14 @@ package com.gildedgames.aether.common.entities.living.npc;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.network.packets.PacketTalkedToEdison;
 import com.gildedgames.orbis_api.util.mc.NBTHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
@@ -116,15 +119,22 @@ public class EntityEdison extends EntityNPC
 		{
 			if (!player.world.isRemote)
 			{
-				final IPlayerAether aePlayer = PlayerAether.getPlayer(player);
+				final PlayerAether playerAether = PlayerAether.getPlayer(player);
 
-				if (((PlayerAether) aePlayer).hasDiedInAetherBefore())
+				if (playerAether.getProgressModule().hasTalkedToEdison())
 				{
-					aePlayer.getDialogController().openScene(AetherCore.getResource("edison/outpost_greet"));
+					String node = playerAether.getProgressModule().hasDiedInAether() ? "start_respawn" : "start";
+
+					playerAether.getDialogController().openScene(AetherCore.getResource("edison/outpost_greet"), node);
 				}
 				else
 				{
-					aePlayer.getDialogController().openScene(AetherCore.getResource("edison/generic_busy"));
+					String node = playerAether.getProgressModule().hasDiedInAether() ? "start_respawn_not_introduced" : "start_not_introduced";
+
+					playerAether.getDialogController().openScene(AetherCore.getResource("edison/outpost_greet"), node);
+
+					playerAether.getProgressModule().setHasTalkedToEdison(true);
+					NetworkingAether.sendPacketToPlayer(new PacketTalkedToEdison(true), (EntityPlayerMP) player);
 				}
 			}
 		}

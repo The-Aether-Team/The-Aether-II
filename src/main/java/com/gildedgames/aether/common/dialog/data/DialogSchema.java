@@ -17,6 +17,8 @@ public class DialogSchema implements IDialogScene
 	@SerializedName("nodes")
 	private Collection<DialogNodeSchema> nodes;
 
+	private String startingNodeId;
+
 	@Override
 	public Optional<IDialogNode> getNode(final String id)
 	{
@@ -35,8 +37,14 @@ public class DialogSchema implements IDialogScene
 	@Override
 	public IDialogNode getStartingNode()
 	{
-		return this.getNode("#start").orElseThrow(() ->
-				new IllegalArgumentException("Couldn't find node with id: '#start'"));
+		return this.getNode(this.startingNodeId).orElseThrow(() ->
+				new IllegalArgumentException("Couldn't find starting node with id: '" + this.startingNodeId + "'"));
+	}
+
+	@Override
+	public void setStartingNode(String id)
+	{
+		this.startingNodeId = id;
 	}
 
 	private class DialogNodeSchema implements IDialogNode

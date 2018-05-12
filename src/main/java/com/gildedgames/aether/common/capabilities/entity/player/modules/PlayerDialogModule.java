@@ -28,6 +28,8 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 
 	private SceneInstance sceneInstance;
 
+	private String lastNodeId;
+
 	private Entity talkingEntity;
 
 	public PlayerDialogModule(final PlayerAether playerAether)
@@ -81,10 +83,12 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 	}
 
 	@Override
-	public void openScene(final ResourceLocation path)
+	public void openScene(final ResourceLocation path, String startingNodeId)
 	{
 		final IDialogScene scene = AetherAPI.content().dialog().getScene(path).orElseThrow(() ->
 				new IllegalArgumentException("Couldn't getByte scene " + path));
+
+		scene.setStartingNode(startingNodeId);
 
 		if (this.getPlayer().getEntity().world.isRemote)
 		{
@@ -116,7 +120,7 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 	{
 		this.sceneInstance = new SceneInstance(this, scene);
 
-		NetworkingAether.sendPacketToPlayer(new PacketOpenDialog(res), (EntityPlayerMP) this.getPlayer().getEntity());
+		NetworkingAether.sendPacketToPlayer(new PacketOpenDialog(res, scene.getStartingNode().getIdentifier()), (EntityPlayerMP) this.getPlayer().getEntity());
 	}
 
 	/**
@@ -132,7 +136,21 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 	@Override
 	public void navigateNode(final String nodeId)
 	{
+		if (this.sceneInstance.getNode() != null)
+		{
+			this.lastNodeId = this.sceneInstance.getNode().getIdentifier();
+		}
+
 		this.sceneInstance.navigate(nodeId);
+	}
+
+	@Override
+	public void navigateBack()
+	{
+		if (this.lastNodeId != null)
+		{
+			this.sceneInstance.navigate(this.lastNodeId);
+		}
 	}
 
 	@Override

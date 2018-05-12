@@ -14,25 +14,30 @@ public class PacketOpenDialog implements IMessage
 {
 	private ResourceLocation name;
 
+	private String startingNodeId;
+
 	public PacketOpenDialog()
 	{
 	}
 
-	public PacketOpenDialog(final ResourceLocation res)
+	public PacketOpenDialog(final ResourceLocation res, String startingNodeId)
 	{
 		this.name = res;
+		this.startingNodeId = startingNodeId;
 	}
 
 	@Override
 	public void fromBytes(final ByteBuf buf)
 	{
 		this.name = new ResourceLocation(ByteBufUtils.readUTF8String(buf));
+		this.startingNodeId = ByteBufUtils.readUTF8String(buf);
 	}
 
 	@Override
 	public void toBytes(final ByteBuf buf)
 	{
 		ByteBufUtils.writeUTF8String(buf, this.name.toString());
+		ByteBufUtils.writeUTF8String(buf, this.startingNodeId);
 	}
 
 	public static class HandlerClient extends MessageHandlerClient<PacketOpenDialog, PacketOpenDialog>
@@ -43,7 +48,7 @@ public class PacketOpenDialog implements IMessage
 			AetherCore.LOGGER.info("Server requested player to open dialog file {}", message.name);
 
 			final IPlayerAether aePlayer = PlayerAether.getPlayer(player);
-			aePlayer.getDialogController().openScene(message.name);
+			aePlayer.getDialogController().openScene(message.name, message.startingNodeId);
 
 			return null;
 		}

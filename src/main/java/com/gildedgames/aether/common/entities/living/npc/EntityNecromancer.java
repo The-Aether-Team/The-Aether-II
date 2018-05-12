@@ -124,7 +124,7 @@ public class EntityNecromancer extends EntityNPC
 			{
 				final IPlayerAether aePlayer = PlayerAether.getPlayer(player);
 				aePlayer.getDialogController().setTalkingEntity(this);
-				aePlayer.getDialogController().openScene(AetherCore.getResource("necromancer/start"));
+				aePlayer.getDialogController().openScene(AetherCore.getResource("necromancer/start"), "#start");
 			}
 		}
 

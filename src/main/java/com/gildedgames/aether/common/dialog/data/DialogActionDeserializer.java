@@ -1,9 +1,7 @@
 package com.gildedgames.aether.common.dialog.data;
 
 import com.gildedgames.aether.api.dialog.IDialogAction;
-import com.gildedgames.aether.common.dialog.data.actions.DialogActionExit;
-import com.gildedgames.aether.common.dialog.data.actions.DialogActionNavigate;
-import com.gildedgames.aether.common.dialog.data.actions.DialogActionNecromancerGoUpTower;
+import com.gildedgames.aether.common.dialog.data.actions.*;
 import com.google.gson.*;
 
 import java.lang.reflect.Type;
@@ -15,7 +13,9 @@ public class DialogActionDeserializer implements JsonDeserializer<IDialogAction>
 
 	public DialogActionDeserializer()
 	{
+		this.actions.put("back", DialogActionNavigateBack.class);
 		this.actions.put("navigate", DialogActionNavigate.class);
+		this.actions.put("navigate_scene", DialogActionNavigateScene.class);
 		this.actions.put("exit", DialogActionExit.class);
 		this.actions.put("go_up_tower", DialogActionNecromancerGoUpTower.class);
 	}

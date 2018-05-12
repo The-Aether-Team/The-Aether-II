@@ -38,8 +38,6 @@ public class GuiDialogViewer extends GuiFrame implements IDialogChangeListener
 
 	private boolean canApplyNextAction;
 
-	private EntityNPC npc;
-
 	private IDialogNode node;
 
 	private IDialogSpeaker speaker;
@@ -61,11 +59,6 @@ public class GuiDialogViewer extends GuiFrame implements IDialogChangeListener
 	{
 		this.drawWorldBackground(0);
 		net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.client.event.GuiScreenEvent.BackgroundDrawnEvent(this));
-
-		if (this.npc == null)
-		{
-			this.npc = new EntityEdison(this.mc.world);
-		}
 
 		GlStateManager.pushMatrix();
 

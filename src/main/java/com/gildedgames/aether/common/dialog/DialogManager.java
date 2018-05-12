@@ -3,9 +3,7 @@ package com.gildedgames.aether.common.dialog;
 import com.gildedgames.aether.api.dialog.*;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.dialog.data.*;
-import com.gildedgames.aether.common.dialog.data.actions.DialogActionExit;
-import com.gildedgames.aether.common.dialog.data.actions.DialogActionNavigate;
-import com.gildedgames.aether.common.dialog.data.actions.DialogActionNecromancerGoUpTower;
+import com.gildedgames.aether.common.dialog.data.actions.*;
 import com.gildedgames.aether.common.dialog.data.slide_renderers.DialogSlideRendererStatic;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -72,7 +70,9 @@ public class DialogManager implements IDialogManager
 		builder.registerTypeAdapter(IDialogAction.class, new DialogActionDeserializer());
 
 		builder.registerTypeAdapter(DialogActionExit.class, new DialogActionExit.Deserializer());
+		builder.registerTypeAdapter(DialogActionNavigateBack.class, new DialogActionNavigateBack.Deserializer());
 		builder.registerTypeAdapter(DialogActionNavigate.class, new DialogActionNavigate.Deserializer());
+		builder.registerTypeAdapter(DialogActionNavigateScene.class, new DialogActionNavigateScene.Deserializer());
 		builder.registerTypeAdapter(DialogActionNecromancerGoUpTower.class, new DialogActionNecromancerGoUpTower.Deserializer());
 
 		builder.registerTypeAdapter(IDialogSlideRenderer.class, new DialogSlideRendererDeserializer());
