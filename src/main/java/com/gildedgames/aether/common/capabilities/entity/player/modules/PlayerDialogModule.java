@@ -302,12 +302,18 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 			{
 				if (this.buttons.size() <= 0)
 				{
+					IDialogNode node = this.getNode();
+
 					for (final IDialogAction action : this.endActions)
 					{
 						action.performAction(this.controller);
 					}
 
-					this.setNode(this.scene.getStartingNode());
+					// Make sure actions haven't navigated somewhere
+					if (this.getNode() == node)
+					{
+						this.setNode(this.scene.getStartingNode());
+					}
 				}
 			}
 			else

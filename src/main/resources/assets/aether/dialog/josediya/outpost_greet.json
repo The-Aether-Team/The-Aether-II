@@ -1,0 +1,156 @@
+{
+	"nodes": [
+		{
+			"name": "start_not_introduced",
+			"lines": [
+				{ "speaker": "aether:josediya#idle", "text": "josediya.greet.start_not_introduced" }
+			],
+			"buttons": [
+				{ "label": "josediya.greet.option.services", "actions": [ { "type": "navigate", "target": "services" } ] },
+				{ "label": "josediya.greet.option.what", "actions": [ { "type": "navigate", "target": "what" } ] },
+				{ "label": "josediya.greet.option.who", "actions": [ { "type": "navigate", "target": "who" } ] },
+				{ "label": "josediya.greet.option.winged_beast", "actions": [ { "type": "navigate", "target": "winged_beast" } ] },
+				{ "label": "generic.goodbye", "actions": [ { "type": "exit" } ] }
+			]
+		},
+		{
+			"name": "start",
+			"lines": [
+				{ "speaker": "aether:josediya#idle", "text": "josediya.greet.start" }
+			],
+			"buttons": [
+				{ "label": "josediya.greet.option.services", "actions": [ { "type": "navigate", "target": "services" } ] },
+				{ "label": "josediya.greet.option.what", "actions": [ { "type": "navigate", "target": "what" } ] },
+				{ "label": "josediya.greet.option.who", "actions": [ { "type": "navigate", "target": "who" } ] },
+				{ "label": "josediya.greet.option.winged_beast", "actions": [ { "type": "navigate", "target": "winged_beast" } ] },
+				{ "label": "generic.goodbye", "actions": [ { "type": "exit" } ] }
+			]
+		},
+		{
+			"name": "what",
+			"lines": [
+				{ "speaker": "aether:josediya#idle", "text": "josediya.greet.what" }
+			],
+			"buttons": [
+				{ "label": "josediya.greet.option.where", "actions": [ { "type": "navigate", "target": "where" } ] },
+				{ "label": "generic.back", "actions": [ { "type": "back" } ] }
+			]
+		},
+		{
+			"name": "where",
+			"lines": [
+				{ "speaker": "aether:josediya#idle", "text": "josediya.greet.where" }
+			],
+			"buttons": [
+				{ "label": "josediya.greet.option.take_me", "actions": [ { "type": "navigate", "target": "take_me" } ] },
+				{ "label": "generic.back", "actions": [ { "type": "navigate_start" } ] }
+			]
+		},
+		{
+			"name": "take_me",
+			"lines": [
+				{ "speaker": "aether:josediya#idle", "text": "josediya.greet.take_me" }
+			],
+			"end_actions": [
+				{ "type": "navigate_start" }
+			]
+		},
+		{
+			"name": "winged_beast",
+			"lines": [
+				{ "speaker": "aether:josediya#idle", "text": "josediya.greet.winged_beast" }
+			],
+			"buttons": [
+				{ "label": "josediya.greet.option.fly", "actions": [ { "type": "navigate", "target": "fly" } ] },
+				{ "label": "generic.back", "actions": [ { "type": "back" } ] }
+			]
+		},
+		{
+			"name": "fly",
+			"lines": [
+				{ "speaker": "aether:josediya#idle", "text": "josediya.greet.fly" }
+			],
+			"buttons": [
+				{ "label": "josediya.greet.option.moa", "actions": [ { "type": "navigate", "target": "moa" } ] },
+				{ "label": "generic.back", "actions": [ { "type": "navigate_start" } ] }
+			]
+		},
+		{
+			"name": "moa",
+			"lines": [
+				{ "speaker": "aether:josediya#idle", "text": "josediya.greet.moa" }
+			],
+			"end_actions": [
+				{ "type": "navigate_start" }
+			]
+		},
+		{
+			"name": "who",
+			"lines": [
+				{ "speaker": "aether:josediya#idle", "text": "josediya.greet.who" }
+			],
+			"buttons": [
+				{ "label": "josediya.greet.option.friends", "actions": [ { "type": "navigate", "target": "friends" } ] },
+				{ "label": "generic.back", "actions": [ { "type": "back" } ] }
+			]
+		},
+		{
+			"name": "friends",
+			"lines": [
+				{ "speaker": "aether:josediya#idle", "text": "josediya.greet.friends" }
+			],
+			"buttons": [
+				{ "label": "josediya.greet.option.paying", "actions": [ { "type": "navigate", "target": "paying" } ] },
+				{ "label": "generic.back", "actions": [ { "type": "navigate_start" } ] }
+			]
+		},
+		{
+			"name": "paying",
+			"lines": [
+				{ "speaker": "aether:josediya#idle", "text": "josediya.greet.paying" }
+			],
+			"buttons": [
+				{ "label": "josediya.greet.option.white_gold", "actions": [ { "type": "navigate", "target": "white_gold" } ] },
+				{ "label": "generic.back", "actions": [ { "type": "navigate_start" } ] }
+			]
+		},
+		{
+			"name": "white_gold",
+			"lines": [
+				{ "speaker": "aether:josediya#idle", "text": "josediya.greet.white_gold" }
+			],
+			"end_actions": [
+				{ "type": "navigate_start" }
+			]
+		},
+		{
+			"name": "services",
+			"lines": [
+				{ "speaker": "aether:josediya#idle", "text": "josediya.greet.services" }
+			],
+			"buttons": [
+				{ "label": "josediya.greet.option.home", "actions": [ { "type": "navigate", "target": "home" } ] },
+				{ "label": "josediya.greet.option.walk_home", "actions": [ { "type": "navigate", "target": "walk_home" } ] },
+				{ "label": "generic.back", "actions": [ { "type": "navigate_start" } ] }
+			]
+		},
+		{
+			"name": "home",
+			"lines": [
+				{ "speaker": "aether:josediya#idle", "text": "josediya.greet.home" }
+			],
+			"end_actions": [
+				{ "type": "back" }
+			]
+		},
+		{
+			"name": "walk_home",
+			"lines": [
+				{ "speaker": "aether:josediya#idle", "text": "josediya.greet.walk_home" }
+			],
+			"end_actions": [
+				{ "type": "back" }
+			]
+		}
+	]
+}

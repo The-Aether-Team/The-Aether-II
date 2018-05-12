@@ -8,6 +8,7 @@ import com.gildedgames.aether.common.entities.living.companions.*;
 import com.gildedgames.aether.common.entities.living.mobs.*;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.entities.living.npc.EntityEdison;
+import com.gildedgames.aether.common.entities.living.npc.EntityJosediya;
 import com.gildedgames.aether.common.entities.living.npc.EntityNecromancer;
 import com.gildedgames.aether.common.entities.living.passive.*;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
@@ -46,6 +47,7 @@ public class EntitiesAether
 		registerLivingEntityWithEgg(EntityEdison.class, "edison", 0xedc5b1, 0x788b7e);
 		registerLivingEntityWithEgg(EntityBurrukai.class, "burrukai", 0x435258, 0x548193);
 		registerLivingEntityWithEgg(EntityNecromancer.class, "necromancer", 0x4b4b6a, 0x8a8a9e);
+		registerLivingEntityWithEgg(EntityJosediya.class, "josediya", 0xabd5cb, 0x87dbac);
 
 		registerLivingEntity(EntityFrostpineTotem.class, "frostpine_totem");
 		registerLivingEntity(EntityKraisith.class, "kraisith");

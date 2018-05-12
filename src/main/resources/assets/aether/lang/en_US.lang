@@ -584,6 +584,7 @@ entity.aether.glitterwing.name=Glitterwing
 entity.aether.edison.name=Edison
 entity.aether.burrukai.name=Burrukai
 entity.aether.necromancer.name=Necromancer
+entity.aether.josediya.name=Josediya
 
 # Creative Tabs
 itemGroup.aether.blocks=Aether II Blocks
@@ -831,7 +832,6 @@ aether.reward.slider.name=Slider
 aether.reward.valkyrie_queen.name=Valkyrie Queen
 aether.reward.none.name=None
 
-
 ##=======================##
 ###########################
 #                         #
@@ -842,6 +842,7 @@ aether.reward.none.name=None
 
 edison.name=Edison
 necromancer.name=Necromancer
+josediya.name=Josediya
 
 ##=======================##
 ###########################
@@ -959,3 +960,45 @@ edison.greet.valkyries1=They're kinda like the city guards of this world but err
 edison.greet.valkyries2=Luckily they're rather friendly, not big talkers though. You should find them wandering around most towns and villages. They have some sort of holy pact to protect people or something.
 edison.greet.valkyries3=Honestly I'm not entirely sure what they are, you're better off asking one of the natives. Or a Valkyrie in person! They're kinda hard to miss.
 edison.greet.valkyries4=Have anything else you want to know?
+
+##=======================##
+###########################
+#                         #
+#  JOSEDIYA DIALOGUE      #
+#                         #
+###########################
+##=======================##
+
+josediya.greet.start_not_introduced=So you’re finally here. I don’t see what’s so important about you, let’s get this over with.
+josediya.greet.start=Is there anything else you need?
+
+josediya.greet.option.what=What are you?
+josediya.greet.option.where=Where do you come from?
+josediya.greet.option.take_me=Can you take me there?
+
+josediya.greet.option.winged_beast=What is that winged beast?
+josediya.greet.option.fly=You fly on him?
+josediya.greet.option.moa=Can I get a Moa?
+
+josediya.greet.option.who=Who are you?
+josediya.greet.option.friends=Are you not friends with "Baldy"?
+josediya.greet.option.paying=Is he paying you to help me?
+josediya.greet.option.white_gold=I don't have any White Gold. What now?
+
+josediya.greet.option.services=What services do you provide?
+josediya.greet.option.home=How do you know where my home is?
+josediya.greet.option.walk_home=Why can't I just walk home?
+
+josediya.greet.what=Wow not very smart are you? I’m a person, like you or that bald idiot over there. Never seen an Angel before? Valkyries save us all.
+josediya.greet.where=I come from a nation far south from here called Veradex. It’s where I get most of my work from.
+josediya.greet.take_me=I don’t think you have the coin, human. Veradex is about 3 weeks of swift travel away from here, dangerous route too. I can’t take you there.
+josediya.greet.winged_beast=That is my friend, actually. He’s a Moa, a strong one too; he could fly both of us on his back and not break a sweat.
+josediya.greet.fly=Of course! That’s what he’s been trained for. I raise Moas as part of my work. They’re very friendly creatures if you treat them right.
+josediya.greet.moa=You’d need to raise one yourself for it to trust you enough to ride it, getting an egg isn’t an easy task though; Moas are very defensive of their nests.
+josediya.greet.who=The girl who’s going to be taking you places. My name is Josediya, I run a carriage business and baldy over there has brought me in to help you.
+josediya.greet.friends=Edison and I get along fine, he’s proved helpful over the years I’ve known him, but I still don’t trust him much. It’s just mutually beneficial for us to work together.
+josediya.greet.paying=No this is me repaying a favour. You’re the one who’s gonna pay me. And I don’t take coin from your world, White Gold only.
+josediya.greet.white_gold=That’s your problem. I don’t care how you get it, but I need to be paid for my work. Go help some farmers or something.
+josediya.greet.services=If you ever find yourself setting up shop somewhere, I can take you back to your home from any outpost. I will expect payment though.
+josediya.greet.home=I’m not taking you back to Thera, if that’s what you mean. You’ll have to find a new place to rest here in the Aether first.
+josediya.greet.walk_home=I won’t stop you but the Aether’s islands can be pretty far apart. Travelling in my carriage is going to be a lot faster and a lot smoother for you. The cloud bed is sturdy enough to walk between islands on foot, but it can be pretty dangerous without proper protection.

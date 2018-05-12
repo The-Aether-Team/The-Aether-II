@@ -2,31 +2,22 @@ package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
-import com.gildedgames.aether.common.items.IDropOnDeath;
-import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.orbis_api.util.io.NBTFunnel;
-import com.google.common.collect.Lists;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemDoor;
-import net.minecraft.item.ItemFood;
-import net.minecraft.item.ItemStack;
+import com.google.common.collect.Maps;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
-import java.util.List;
+import java.util.Map;
 
 public class PlayerProgressModule extends PlayerAetherModule
 {
 
 	public boolean hasDiedInAether;
 
-	private boolean hasTalkedToEdison;
+	private Map<ResourceLocation, Boolean> hasTalkedTo = Maps.newHashMap();
 
 	public PlayerProgressModule(PlayerAether playerAether)
 	{
@@ -43,14 +34,19 @@ public class PlayerProgressModule extends PlayerAetherModule
 		this.hasDiedInAether = flag;
 	}
 
-	public boolean hasTalkedToEdison()
+	public void setHasTalkedTo(ResourceLocation speaker, boolean flag)
 	{
-		return this.hasTalkedToEdison;
+		this.hasTalkedTo.put(speaker, flag);
 	}
 
-	public void setHasTalkedToEdison(boolean flag)
+	public boolean hasTalkedTo(ResourceLocation speaker)
 	{
-		this.hasTalkedToEdison = flag;
+		if (!this.hasTalkedTo.containsKey(speaker))
+		{
+			return false;
+		}
+
+		return this.hasTalkedTo.get(speaker);
 	}
 
 	@Override
@@ -86,14 +82,18 @@ public class PlayerProgressModule extends PlayerAetherModule
 	@Override
 	public void write(NBTTagCompound tag)
 	{
+		NBTFunnel funnel = new NBTFunnel(tag);
+
 		tag.setBoolean("hasDiedInAether", this.hasDiedInAether);
-		tag.setBoolean("hasTalkedToEdison", this.hasTalkedToEdison);
+		funnel.setMap("hasTalkedTo", this.hasTalkedTo, NBTFunnel.LOC_SETTER, NBTFunnel.BOOLEAN_SETTER);
 	}
 
 	@Override
 	public void read(NBTTagCompound tag)
 	{
+		NBTFunnel funnel = new NBTFunnel(tag);
+
 		this.hasDiedInAether = tag.getBoolean("hasDiedInAether");
-		this.hasTalkedToEdison = tag.getBoolean("hasTalkedToEdison");
+		this.hasTalkedTo = funnel.getMap("hasTalkedTo", NBTFunnel.LOC_GETTER, NBTFunnel.BOOLEAN_GETTER);
 	}
 }

@@ -70,6 +70,7 @@ public class DialogManager implements IDialogManager
 		builder.registerTypeAdapter(IDialogAction.class, new DialogActionDeserializer());
 
 		builder.registerTypeAdapter(DialogActionExit.class, new DialogActionExit.Deserializer());
+		builder.registerTypeAdapter(DialogActionNavigateToStart.class, new DialogActionNavigateToStart.Deserializer());
 		builder.registerTypeAdapter(DialogActionNavigateBack.class, new DialogActionNavigateBack.Deserializer());
 		builder.registerTypeAdapter(DialogActionNavigate.class, new DialogActionNavigate.Deserializer());
 		builder.registerTypeAdapter(DialogActionNavigateScene.class, new DialogActionNavigateScene.Deserializer());

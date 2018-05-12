@@ -4,39 +4,46 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-public class PacketTalkedToEdison implements IMessage
+public class PacketTalkedTo implements IMessage
 {
+
+	private ResourceLocation speaker;
 
 	private boolean flag = true;
 
-	public PacketTalkedToEdison()
+	public PacketTalkedTo()
 	{
 
 	}
 
-	public PacketTalkedToEdison(final boolean flag)
+	public PacketTalkedTo(ResourceLocation speaker, final boolean flag)
 	{
+		this.speaker = speaker;
 		this.flag = flag;
 	}
 
 	@Override
 	public void fromBytes(final ByteBuf buf)
 	{
+		this.speaker = new ResourceLocation(ByteBufUtils.readUTF8String(buf));
 		this.flag = buf.readBoolean();
 	}
 
 	@Override
 	public void toBytes(final ByteBuf buf)
 	{
+		ByteBufUtils.writeUTF8String(buf, this.speaker.toString());
 		buf.writeBoolean(this.flag);
 	}
 
-	public static class HandlerClient extends MessageHandlerClient<PacketTalkedToEdison, IMessage>
+	public static class HandlerClient extends MessageHandlerClient<PacketTalkedTo, IMessage>
 	{
 		@Override
-		public IMessage onMessage(final PacketTalkedToEdison message, final EntityPlayer player)
+		public IMessage onMessage(final PacketTalkedTo message, final EntityPlayer player)
 		{
 			if (player == null || player.world == null)
 			{
@@ -45,7 +52,7 @@ public class PacketTalkedToEdison implements IMessage
 
 			final PlayerAether playerAether = PlayerAether.getPlayer(player);
 
-			playerAether.getProgressModule().setHasTalkedToEdison(message.flag);
+			playerAether.getProgressModule().setHasTalkedTo(message.speaker, message.flag);
 
 			return null;
 		}

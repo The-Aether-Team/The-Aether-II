@@ -15,6 +15,7 @@ public class DialogActionDeserializer implements JsonDeserializer<IDialogAction>
 	{
 		this.actions.put("back", DialogActionNavigateBack.class);
 		this.actions.put("navigate", DialogActionNavigate.class);
+		this.actions.put("navigate_start", DialogActionNavigateToStart.class);
 		this.actions.put("navigate_scene", DialogActionNavigateScene.class);
 		this.actions.put("exit", DialogActionExit.class);
 		this.actions.put("go_up_tower", DialogActionNecromancerGoUpTower.class);
