@@ -4,10 +4,9 @@ import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.dialog.*;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.containers.ContainerDialogController;
-import com.gildedgames.aether.common.entities.living.npc.EntityEdison;
-import com.gildedgames.aether.common.entities.living.npc.EntityNPC;
 import com.gildedgames.orbis_api.client.gui.util.GuiFrame;
 import com.gildedgames.orbis_api.client.rect.Dim2D;
+import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
@@ -15,14 +14,17 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import org.lwjgl.Sys;
+import org.lwjgl.input.Mouse;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.Map;
 
 public class GuiDialogViewer extends GuiFrame implements IDialogChangeListener
@@ -45,6 +47,10 @@ public class GuiDialogViewer extends GuiFrame implements IDialogChangeListener
 	private IDialogSlide slide;
 
 	private IDialogSlideRenderer renderer;
+
+	private int currentScroll, maxScroll;
+
+	private LinkedList<GuiDialogButton> buttons = Lists.newLinkedList();
 
 	public GuiDialogViewer(final EntityPlayer player, final IDialogController controller)
 	{
@@ -75,6 +81,19 @@ public class GuiDialogViewer extends GuiFrame implements IDialogChangeListener
 		GlStateManager.translate(0, 0, 100F);
 
 		Gui.drawRect(0, this.height - 90, this.width, this.height, Integer.MIN_VALUE);
+
+		if (this.maxScroll > 0 && this.controller.isNodeFinished() && this.controller.getCurrentNode().getButtons().size() > 0)
+		{
+			int baseBoxSize = 350;
+			int x = (this.width / 2) - (baseBoxSize / 2);
+			int y = this.height - 85;
+
+			Gui.drawRect(x - 17, this.height - 85, x - 7, this.height - 10, Integer.MIN_VALUE);
+
+			int scrollYOffset = this.currentScroll == 0 ? 0 : MathHelper.floor((float) this.currentScroll * (55.0F / (float) this.maxScroll));
+
+			Gui.drawRect(x - 17, y + scrollYOffset, x - 7, y + 20 + scrollYOffset, Integer.MIN_VALUE);
+		}
 
 		super.drawScreen(mouseX, mouseY, partialTicks);
 
@@ -150,7 +169,7 @@ public class GuiDialogViewer extends GuiFrame implements IDialogChangeListener
 	}
 
 	@Override
-	protected void actionPerformed(final GuiButton button) throws IOException
+	protected void actionPerformed(final GuiButton button)
 	{
 		if (button instanceof GuiDialogButton)
 		{
@@ -205,6 +224,8 @@ public class GuiDialogViewer extends GuiFrame implements IDialogChangeListener
 			baseBoxSize = this.width - 40;
 		}
 
+		this.currentScroll = 0;
+
 		this.topTextBox = new GuiTextBox(buttons.size(),
 				resize ? (this.width / 2) - (baseBoxSize / 2) : 20, this.height - 175, baseBoxSize, 80);
 		this.bottomTextBox = new GuiTextBox(
@@ -215,15 +236,27 @@ public class GuiDialogViewer extends GuiFrame implements IDialogChangeListener
 
 		if (this.controller.isNodeFinished())
 		{
+			this.buttons.clear();
+
 			int index = 0;
 
 			for (final IDialogButton btn : buttons)
 			{
-				this.buttonList.add(new GuiDialogButton(index, (this.width / 2) - (baseBoxSize / 2), this.height - 85 + (index * 20), btn));
+				GuiDialogButton button = new GuiDialogButton(index, (this.width / 2) - (baseBoxSize / 2), this.height - 85 + (index * 20), btn);
+
+				button.visible = false;
+				button.enabled = false;
+
+				this.buttonList.add(button);
+				this.buttons.add(button);
 
 				index++;
 			}
 		}
+
+		this.refreshButtonsWithScroll();
+
+		this.maxScroll = Math.max(0, buttons.size() - 4);
 
 		final IDialogLine line = this.controller.getCurrentLine();
 
@@ -312,7 +345,7 @@ public class GuiDialogViewer extends GuiFrame implements IDialogChangeListener
 	}
 
 	@Override
-	protected void keyTyped(final char typedChar, final int keyCode) throws IOException
+	protected void keyTyped(final char typedChar, final int keyCode)
 	{
 		this.nextAction();
 	}
@@ -341,5 +374,41 @@ public class GuiDialogViewer extends GuiFrame implements IDialogChangeListener
 	public void init()
 	{
 		this.dim().mod().width(this.width).height(this.height).flush();
+	}
+
+	private void refreshButtonsWithScroll()
+	{
+		for (int i = 0; i < this.buttons.size(); i++)
+		{
+			GuiDialogButton button = this.buttons.get(i);
+
+			if (i >= this.currentScroll && i <= this.currentScroll + 3)
+			{
+				button.y = this.height - 85 + ((i - this.currentScroll) * 20);
+
+				button.enabled = true;
+				button.visible = true;
+			}
+			else
+			{
+				button.enabled = false;
+				button.visible = false;
+			}
+		}
+	}
+
+	@Override
+	public void handleMouseInput() throws IOException
+	{
+		super.handleMouseInput();
+
+		int scroll = MathHelper.clamp(Mouse.getEventDWheel(), -1, 1);
+
+		if (scroll != 0)
+		{
+			this.currentScroll = MathHelper.clamp(this.currentScroll - scroll, 0, this.maxScroll);
+
+			this.refreshButtonsWithScroll();
+		}
 	}
 }
