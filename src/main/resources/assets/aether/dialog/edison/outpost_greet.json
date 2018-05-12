@@ -144,9 +144,9 @@
 			"name": "no_we_talked",
 			"lines": [
 				{ "speaker": "aether:edison#idle", "text": "edison.greet.no_we_talked1" },
-				{ "speaker": "aether:edison#idle", "text": "edison.greet.no_we_talked2" }
-				{ "speaker": "aether:edison#idle", "text": "edison.greet.no_we_talked3" }
-				{ "speaker": "aether:edison#idle", "text": "edison.greet.no_we_talked4" }
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.no_we_talked2" },
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.no_we_talked3" },
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.no_we_talked4" },
 				{ "speaker": "aether:edison#idle", "text": "edison.greet.no_we_talked5" }
 			],
 			"buttons": [
