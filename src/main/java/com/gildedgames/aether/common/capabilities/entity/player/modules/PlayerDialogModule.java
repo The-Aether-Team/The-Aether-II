@@ -150,6 +150,11 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 		if (this.lastNodeId != null)
 		{
 			this.sceneInstance.navigate(this.lastNodeId);
+
+			while (!this.isNodeFinished())
+			{
+				this.advance();
+			}
 		}
 	}
 
