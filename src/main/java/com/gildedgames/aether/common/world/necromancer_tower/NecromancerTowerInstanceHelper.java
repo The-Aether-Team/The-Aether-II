@@ -1,18 +1,15 @@
 package com.gildedgames.aether.common.world.necromancer_tower;
 
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
-import com.gildedgames.orbis_api.OrbisAPI;
 import com.gildedgames.orbis_api.world.instances.IInstanceHandler;
-import com.gildedgames.orbis_api.world.instances.IPlayerInstances;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.world.World;
 
-public class NecromancerTowerInstanceHandler
+public class NecromancerTowerInstanceHelper
 {
 
-	private final IInstanceHandler<NecromancerTowerInstance> handler;
+	public final IInstanceHandler<NecromancerTowerInstance> handler;
 
-	public NecromancerTowerInstanceHandler(final IInstanceHandler<NecromancerTowerInstance> handler)
+	public NecromancerTowerInstanceHelper(final IInstanceHandler<NecromancerTowerInstance> handler)
 	{
 		this.handler = handler;
 	}
@@ -43,22 +40,13 @@ public class NecromancerTowerInstanceHandler
 			return;
 		}
 
-		final World world = this.handler.teleportPlayerToDimension(inst, player);
+		this.handler.teleportPlayerToInstance(inst, player);
 
 		player.connection.setPlayerLocation(inst.getInsideEntrance().getX(), inst.getInsideEntrance().getY(), inst.getInsideEntrance().getZ(), 215, 0);
-
-		inst.onJoin(player);
 	}
 
 	public void teleportBack(final EntityPlayerMP player)
 	{
-		final IPlayerInstances hook = OrbisAPI.instances().getPlayer(player);
-
-		if (hook.getInstance() != null)
-		{
-			hook.getInstance().onLeave(player);
-		}
-
-		this.handler.teleportPlayerOutsideInstance(player);
+		this.handler.returnPlayerFromInstance(player);
 	}
 }

@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.network.packets;
 
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import com.gildedgames.aether.common.registry.content.InstancesAether;
-import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstanceHandler;
+import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstanceHelper;
 import com.gildedgames.orbis_api.OrbisAPI;
 import com.gildedgames.orbis_api.world.instances.IInstance;
 import com.gildedgames.orbis_api.world.instances.IPlayerInstances;
@@ -41,7 +41,7 @@ public class PacketCancelIntro implements IMessage
 				return null;
 			}
 
-			final NecromancerTowerInstanceHandler handler = InstancesAether.NECROMANCER_TOWER_HANDLER;
+			final NecromancerTowerInstanceHelper handler = InstancesAether.NECROMANCER_TOWER_HANDLER;
 
 			final IPlayerInstances hook = OrbisAPI.instances().getPlayer(player);
 

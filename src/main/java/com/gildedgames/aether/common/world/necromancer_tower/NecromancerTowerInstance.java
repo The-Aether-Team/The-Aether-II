@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.world.necromancer_tower;
 
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.registry.content.GenerationAether;
+import com.gildedgames.aether.common.registry.content.InstancesAether;
 import com.gildedgames.orbis_api.core.CreationData;
 import com.gildedgames.orbis_api.core.PlacedBlueprint;
 import com.gildedgames.orbis_api.util.io.NBTFunnel;
@@ -33,13 +34,8 @@ public class NecromancerTowerInstance implements IInstance
 
 	private PlacedBlueprint tower;
 
-	private World world;
-
 	@SuppressWarnings("unused")
-	private NecromancerTowerInstance()
-	{
-
-	}
+	public NecromancerTowerInstance() { }
 
 	public NecromancerTowerInstance(final int id)
 	{
@@ -140,6 +136,11 @@ public class NecromancerTowerInstance implements IInstance
 				player.setEntityInvulnerable(false);
 			}
 		}
+
+		if (this.players.isEmpty())
+		{
+			InstancesAether.NECROMANCER_TOWER_HANDLER.handler.unregisterInstance(this);
+		}
 	}
 
 	@Override
@@ -164,6 +165,12 @@ public class NecromancerTowerInstance implements IInstance
 	public void setDimensionId(final int i)
 	{
 		this.dimensionId = i;
+	}
+
+	@Override
+	public boolean isTemporary()
+	{
+		return true;
 	}
 
 	@Override
