@@ -1,7 +1,5 @@
 package com.gildedgames.aether.common.entities.living.npc;
 
-import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.orbis_api.util.mc.NBTHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -9,19 +7,16 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EntityJosediya extends EntityNPC
+public class EntityTivalier extends EntityNPC
 {
-	public static ResourceLocation SPEAKER = AetherCore.getResource("josediya");
-
 	private BlockPos spawned;
 
-	public EntityJosediya(final World worldIn)
+	public EntityTivalier(final World worldIn)
 	{
 		super(worldIn);
 
@@ -113,25 +108,7 @@ public class EntityJosediya extends EntityNPC
 	@Override
 	public boolean processInteract(final EntityPlayer player, final EnumHand hand)
 	{
-		if (!super.processInteract(player, hand))
-		{
-			if (!player.world.isRemote)
-			{
-				final PlayerAether playerAether = PlayerAether.getPlayer(player);
-				boolean talkedBefore = playerAether.getProgressModule().hasTalkedTo(EntityJosediya.SPEAKER);
-
-				String node = talkedBefore ? "start" : "start_not_introduced";
-
-				playerAether.getDialogController().openScene(AetherCore.getResource("josediya/outpost_greet"), node);
-
-				if (!talkedBefore)
-				{
-					playerAether.getProgressModule().setHasTalkedTo(EntityJosediya.SPEAKER, true);
-				}
-			}
-		}
-
-		return true;
+		return super.processInteract(player, hand);
 	}
 
 	@Override
