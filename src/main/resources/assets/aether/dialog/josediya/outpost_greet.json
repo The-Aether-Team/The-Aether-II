@@ -3,7 +3,7 @@
 		{
 			"name": "start_not_introduced",
 			"lines": [
-				{ "speaker": "aether:josediya#idle", "text": "josediya.greet.start_not_introduced" }
+				{ "speaker": "aether:josediya#default", "text": "josediya.greet.start_not_introduced" }
 			],
 			"buttons": [
 				{ "label": "josediya.greet.option.services", "actions": [ { "type": "navigate", "target": "services" } ] },
@@ -16,7 +16,7 @@
 		{
 			"name": "start",
 			"lines": [
-				{ "speaker": "aether:josediya#idle", "text": "josediya.greet.start" }
+				{ "speaker": "aether:josediya#default", "text": "josediya.greet.start" }
 			],
 			"buttons": [
 				{ "label": "josediya.greet.option.services", "actions": [ { "type": "navigate", "target": "services" } ] },
@@ -29,7 +29,7 @@
 		{
 			"name": "what",
 			"lines": [
-				{ "speaker": "aether:josediya#idle", "text": "josediya.greet.what" }
+				{ "speaker": "aether:josediya#default", "text": "josediya.greet.what" }
 			],
 			"buttons": [
 				{ "label": "josediya.greet.option.where", "actions": [ { "type": "navigate", "target": "where" } ] },
@@ -39,7 +39,7 @@
 		{
 			"name": "where",
 			"lines": [
-				{ "speaker": "aether:josediya#idle", "text": "josediya.greet.where" }
+				{ "speaker": "aether:josediya#default", "text": "josediya.greet.where" }
 			],
 			"buttons": [
 				{ "label": "josediya.greet.option.take_me", "actions": [ { "type": "navigate", "target": "take_me" } ] },
@@ -49,7 +49,7 @@
 		{
 			"name": "take_me",
 			"lines": [
-				{ "speaker": "aether:josediya#idle", "text": "josediya.greet.take_me" }
+				{ "speaker": "aether:josediya#default", "text": "josediya.greet.take_me" }
 			],
 			"end_actions": [
 				{ "type": "navigate_start" }
@@ -58,7 +58,7 @@
 		{
 			"name": "winged_beast",
 			"lines": [
-				{ "speaker": "aether:josediya#idle", "text": "josediya.greet.winged_beast" }
+				{ "speaker": "aether:josediya#default", "text": "josediya.greet.winged_beast" }
 			],
 			"buttons": [
 				{ "label": "josediya.greet.option.fly", "actions": [ { "type": "navigate", "target": "fly" } ] },
@@ -68,7 +68,7 @@
 		{
 			"name": "fly",
 			"lines": [
-				{ "speaker": "aether:josediya#idle", "text": "josediya.greet.fly" }
+				{ "speaker": "aether:josediya#default", "text": "josediya.greet.fly" }
 			],
 			"buttons": [
 				{ "label": "josediya.greet.option.moa", "actions": [ { "type": "navigate", "target": "moa" } ] },
@@ -78,7 +78,7 @@
 		{
 			"name": "moa",
 			"lines": [
-				{ "speaker": "aether:josediya#idle", "text": "josediya.greet.moa" }
+				{ "speaker": "aether:josediya#default", "text": "josediya.greet.moa" }
 			],
 			"end_actions": [
 				{ "type": "navigate_start" }
@@ -87,7 +87,7 @@
 		{
 			"name": "who",
 			"lines": [
-				{ "speaker": "aether:josediya#idle", "text": "josediya.greet.who" }
+				{ "speaker": "aether:josediya#default", "text": "josediya.greet.who" }
 			],
 			"buttons": [
 				{ "label": "josediya.greet.option.friends", "actions": [ { "type": "navigate", "target": "friends" } ] },
@@ -97,7 +97,7 @@
 		{
 			"name": "friends",
 			"lines": [
-				{ "speaker": "aether:josediya#idle", "text": "josediya.greet.friends" }
+				{ "speaker": "aether:josediya#default", "text": "josediya.greet.friends" }
 			],
 			"buttons": [
 				{ "label": "josediya.greet.option.paying", "actions": [ { "type": "navigate", "target": "paying" } ] },
@@ -107,7 +107,7 @@
 		{
 			"name": "paying",
 			"lines": [
-				{ "speaker": "aether:josediya#idle", "text": "josediya.greet.paying" }
+				{ "speaker": "aether:josediya#default", "text": "josediya.greet.paying" }
 			],
 			"buttons": [
 				{ "label": "josediya.greet.option.white_gold", "actions": [ { "type": "navigate", "target": "white_gold" } ] },
@@ -117,7 +117,7 @@
 		{
 			"name": "white_gold",
 			"lines": [
-				{ "speaker": "aether:josediya#idle", "text": "josediya.greet.white_gold" }
+				{ "speaker": "aether:josediya#default", "text": "josediya.greet.white_gold" }
 			],
 			"end_actions": [
 				{ "type": "navigate_start" }
@@ -126,7 +126,7 @@
 		{
 			"name": "services",
 			"lines": [
-				{ "speaker": "aether:josediya#idle", "text": "josediya.greet.services" }
+				{ "speaker": "aether:josediya#default", "text": "josediya.greet.services" }
 			],
 			"buttons": [
 				{ "label": "josediya.greet.option.home", "actions": [ { "type": "navigate", "target": "home" } ] },
@@ -137,7 +137,7 @@
 		{
 			"name": "home",
 			"lines": [
-				{ "speaker": "aether:josediya#idle", "text": "josediya.greet.home" }
+				{ "speaker": "aether:josediya#default", "text": "josediya.greet.home" }
 			],
 			"end_actions": [
 				{ "type": "back" }
@@ -146,7 +146,7 @@
 		{
 			"name": "walk_home",
 			"lines": [
-				{ "speaker": "aether:josediya#idle", "text": "josediya.greet.walk_home" }
+				{ "speaker": "aether:josediya#default", "text": "josediya.greet.walk_home" }
 			],
 			"end_actions": [
 				{ "type": "back" }
