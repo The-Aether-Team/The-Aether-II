@@ -5,6 +5,7 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.orbis_api.util.mc.NBTHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -31,7 +32,8 @@ public class EntityJosediya extends EntityNPC
 	@Override
 	protected void initEntityAI()
 	{
-		this.tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 10.0F));
+		this.tasks.addTask(3, new EntityAILookIdle(this));
+		this.tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 50.0F, 1.0F));
 	}
 
 	@Override
@@ -89,9 +91,6 @@ public class EntityJosediya extends EntityNPC
 		this.posX = this.prevPosX;
 		this.posZ = this.prevPosZ;
 
-		this.renderYawOffset = 315F;
-		this.rotationYaw = 315F;
-
 		this.setHealth(this.getMaxHealth());
 		this.isDead = false;
 
@@ -105,9 +104,6 @@ public class EntityJosediya extends EntityNPC
 
 		this.posX = this.prevPosX;
 		this.posZ = this.prevPosZ;
-
-		this.renderYawOffset = 315F;
-		this.rotationYaw = 315F;
 	}
 
 	@Override
