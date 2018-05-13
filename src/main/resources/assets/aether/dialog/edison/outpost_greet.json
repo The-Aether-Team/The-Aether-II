@@ -136,8 +136,8 @@
 				{ "speaker": "aether:edison#idle", "text": "edison.greet.sale1" },
 				{ "speaker": "aether:edison#idle", "text": "edison.greet.sale2" }
 			],
-			"buttons": [
-				{ "label": "generic.back", "actions": [ { "type": "back" } ] }
+			"exit_actions": [
+				{ "type": "back" }
 			]
 		},
 		{
