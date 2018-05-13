@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.dialog.*;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.dialog.data.*;
 import com.gildedgames.aether.common.dialog.data.actions.*;
+import com.gildedgames.aether.common.dialog.data.slide_renderers.DialogSlideRendererNOOP;
 import com.gildedgames.aether.common.dialog.data.slide_renderers.DialogSlideRendererStatic;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -79,6 +80,7 @@ public class DialogManager implements IDialogManager
 		builder.registerTypeAdapter(IDialogSlideRenderer.class, new DialogSlideRendererDeserializer());
 
 		builder.registerTypeAdapter(DialogSlideRendererStatic.class, new DialogSlideRendererStatic.Deserializer());
+		builder.registerTypeAdapter(DialogSlideRendererNOOP.class, new DialogSlideRendererNOOP.Deserializer());
 
 		builder.registerTypeAdapter(IDialogSlide.class, new DialogSlideDeserializer());
 
@@ -88,6 +90,7 @@ public class DialogManager implements IDialogManager
 	protected void registerRenders()
 	{
 		this.registeredRenders.put("static", new DialogSlideRendererStatic());
+		this.registeredRenders.put("noop", new DialogSlideRendererNOOP());
 	}
 
 	@Override
