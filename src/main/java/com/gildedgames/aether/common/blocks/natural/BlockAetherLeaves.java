@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.blocks.natural;
 
 import com.gildedgames.aether.client.renderer.particles.ParticleGolden;
+import com.gildedgames.aether.client.renderer.particles.ParticleLeaf;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
@@ -9,6 +10,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -91,6 +93,11 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(final IBlockState state, final World world, final BlockPos pos, final Random rand)
 	{
+		if (Minecraft.getMinecraft().gameSettings.particleSetting != 0)
+		{
+			return;
+		}
+
 		if (this == BlocksAether.golden_oak_leaves)
 		{
 			if (rand.nextInt(100) > 90)
@@ -100,6 +107,24 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 				final double z = pos.getZ() + (rand.nextFloat() * 6f) - 3f;
 
 				final ParticleGolden effect = new ParticleGolden(world, x, y, z, 0, 0, 0);
+
+				FMLClientHandler.instance().getClient().effectRenderer.addEffect(effect);
+			}
+		}
+
+		if (world.isAirBlock(pos.down()))
+		{
+			if (rand.nextInt(100) > 97)
+			{
+				final double x = pos.getX() + rand.nextFloat();
+				final double y = pos.getY();
+				final double z = pos.getZ() + rand.nextFloat();
+
+				final ParticleLeaf effect = new ParticleLeaf(world, x, y, z,
+						-0.04D + (rand.nextFloat() * 0.08f),
+						-0.05D + (rand.nextFloat() * -0.02f),
+						-0.04D + (rand.nextFloat() * 0.08f),
+						this);
 
 				FMLClientHandler.instance().getClient().effectRenderer.addEffect(effect);
 			}
