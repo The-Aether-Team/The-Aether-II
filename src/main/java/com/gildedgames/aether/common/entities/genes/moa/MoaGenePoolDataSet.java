@@ -51,19 +51,29 @@ public class MoaGenePoolDataSet<T extends Gene>
 		KERATIN.genes().add(new DataGene<>("moa.keratin.royal", new Color(0x494964), new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
 		KERATIN.genes().add(new DataGene<>("moa.keratin.tempest", new Color(0x644949), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
 
-		EYES.genes().add(new DataGene<>("moa.eyes.enchanted", new Color(0xbfb62b), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
-		EYES.genes().add(new DataGene<>("moa.eyes.navy", new Color(0x2354a5), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
-		EYES.genes().add(new DataGene<>("moa.eyes.crimson", new Color(0x9e1d1d), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
-		EYES.genes().add(new DataGene<>("moa.eyes.cream", new Color(0xe8e9df), new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
-		EYES.genes().add(new DataGene<>("moa.eyes.emerald", new Color(0x41b543), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
+		EYES.genes().add(new DataGene<>("moa.eyes.alto", new Color(0xD9D9D9), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
+		EYES.genes().add(new DataGene<>("moa.eyes.straw", new Color(0xD9BC8F), new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
+		EYES.genes().add(new DataGene<>("moa.eyes.winter_hazel", new Color(0xD9CE8F), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
+		EYES.genes().add(new DataGene<>("moa.eyes.gossip", new Color(0xB1F3A0), new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
+		EYES.genes().add(new DataGene<>("moa.eyes.mint", new Color(0xA0F3C1), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
+		EYES.genes().add(new DataGene<>("moa.eyes.ice", new Color(0xA0F3F3), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
+		EYES.genes().add(new DataGene<>("moa.eyes.perano", new Color(0xA0C1F3), new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
+		EYES.genes().add(new DataGene<>("moa.eyes.portage", new Color(0xB1A0F3), new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
+		EYES.genes().add(new DataGene<>("moa.eyes.perfume", new Color(0xE2A0F3), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
+		EYES.genes().add(new DataGene<>("moa.eyes.illusion", new Color(0xF3A0D2), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
+		EYES.genes().add(new DataGene<>("moa.eyes.wewak", new Color(0xF3A0A0), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
 
-		FEATHERS.genes().add(new DataGene<>("moa.feathers.cream", new Color(0xecebe1), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
-		FEATHERS.genes().add(new DataGene<>("moa.feathers.midnight_sky", new Color(0x53576a), new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
-		FEATHERS.genes().add(new DataGene<>("moa.feathers.dawn", new Color(0x83c4e2), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
-		FEATHERS.genes().add(new DataGene<>("moa.feathers.nights_peak", new Color(0x484345), new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
-		FEATHERS.genes().add(new DataGene<>("moa.feathers.sakura", new Color(0xf2b4ce), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
-		FEATHERS.genes().add(new DataGene<>("moa.feathers.mud", new Color(0xab7a5c), new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
-		FEATHERS.genes().add(new DataGene<>("moa.feathers.enchanted", new Color(0xffc342), new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
+		FEATHERS.genes().add(new DataGene<>("moa.feathers.tundora", new Color(0x4D4D4D), new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
+		FEATHERS.genes().add(new DataGene<>("moa.feathers.iroko", new Color(0x4D3C22), new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
+		FEATHERS.genes().add(new DataGene<>("moa.feathers.lisbon_brown", new Color(0x4D4622), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
+		FEATHERS.genes().add(new DataGene<>("moa.feathers.mallard", new Color(0x2A4D22), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
+		FEATHERS.genes().add(new DataGene<>("moa.feathers.everglad", new Color(0x224D33), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
+		FEATHERS.genes().add(new DataGene<>("moa.feathers.plantation", new Color(0x224D4D), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
+		FEATHERS.genes().add(new DataGene<>("moa.feathers.cloud_burst", new Color(0x22324D), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
+		FEATHERS.genes().add(new DataGene<>("moa.feathers.port_gore", new Color(0x2A224D), new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
+		FEATHERS.genes().add(new DataGene<>("moa.feathers.bossanova", new Color(0x44224D), new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
+		FEATHERS.genes().add(new DataGene<>("moa.feathers.livid_brown", new Color(0x4D223B), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
+		FEATHERS.genes().add(new DataGene<>("moa.feathers.cocoa", new Color(0x4D2222), new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
 
 		MARKS.genes().add(new MoaMarkGene("moa.marks.spots", "spots", new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
 		MARKS.genes().add(new MoaMarkGene("moa.marks.circles", "circles", new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
