@@ -3,12 +3,8 @@ package com.gildedgames.aether.client.renderer;
 import com.gildedgames.aether.client.gui.overlays.IOverlay;
 import com.gildedgames.aether.client.gui.overlays.PortalOverlay;
 import com.gildedgames.aether.client.gui.overlays.SwetOverlay;
-import com.gildedgames.aether.client.models.entities.player.LayerHeadShadow;
-import com.gildedgames.aether.client.models.entities.player.LayerAetherPlayerGloves;
-import com.gildedgames.aether.client.models.entities.player.LayerSwetLatch;
+import com.gildedgames.aether.client.models.entities.player.*;
 import com.gildedgames.aether.client.renderer.entities.living.RenderPlayerHelper;
-import com.gildedgames.aether.client.models.entities.player.LayerArmorProxy;
-import com.gildedgames.aether.client.models.entities.player.LayerAetherPatronArmor;
 import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.google.common.collect.Lists;
@@ -35,7 +31,7 @@ public class ClientRenderHandler
 
 	public ClientRenderHandler()
 	{
-		for (RenderLivingBase<?> playerRender: new HashSet<>(Minecraft.getMinecraft().getRenderManager().getSkinMap().values()))
+		for (RenderLivingBase<?> playerRender : new HashSet<>(Minecraft.getMinecraft().getRenderManager().getSkinMap().values()))
 		{
 			Field field = ReflectionAether.getField(RenderLivingBase.class, ReflectionAether.ENTITY_RENDER_LAYERS.getMappings());
 

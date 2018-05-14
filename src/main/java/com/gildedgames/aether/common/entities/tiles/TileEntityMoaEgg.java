@@ -88,14 +88,14 @@ public class TileEntityMoaEgg extends TileEntitySynced implements ITickable
 		this.world.destroyBlock(this.getPos(), false);
 	}
 
-	public void setGender(AnimalGender gender)
-	{
-		this.gender = gender;
-	}
-
 	public AnimalGender getGender()
 	{
 		return this.gender;
+	}
+
+	public void setGender(AnimalGender gender)
+	{
+		this.gender = gender;
 	}
 
 	public void setFamilyNest(MoaNest familyNest)

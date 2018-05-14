@@ -20,14 +20,14 @@ public class TileEntityPresent extends TileEntity
 
 	private ItemBlockPresent.PresentData presentData = new ItemBlockPresent.PresentData();
 
-	public void setPresentData(ItemBlockPresent.PresentData data)
-	{
-		this.presentData = data;
-	}
-
 	public ItemBlockPresent.PresentData getPresentData()
 	{
 		return this.presentData;
+	}
+
+	public void setPresentData(ItemBlockPresent.PresentData data)
+	{
+		this.presentData = data;
 	}
 
 	public void dropItem()

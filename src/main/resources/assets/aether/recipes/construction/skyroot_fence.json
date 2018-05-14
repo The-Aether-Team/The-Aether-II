@@ -1,20 +1,20 @@
 {
-  "type": "forge:ore_shaped",
-  "pattern": [
-    "W#W",
-    "W#W"
-  ],
-  "key": {
-    "#": {
-      "item": "aether:skyroot_stick"
-    },
-    "W": {
-      "type": "forge:ore_dict",
-      "ore": "skyrootplanks"
-    }
-  },
-  "result": {
-    "item": "aether:skyroot_fence",
-    "count": 3
-  }
+	"type": "forge:ore_shaped",
+	"pattern": [
+		"W#W",
+		"W#W"
+	],
+	"key": {
+		"#": {
+			"item": "aether:skyroot_stick"
+		},
+		"W": {
+			"type": "forge:ore_dict",
+			"ore": "skyrootplanks"
+		}
+	},
+	"result": {
+		"item": "aether:skyroot_fence",
+		"count": 3
+	}
 }

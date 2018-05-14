@@ -7,7 +7,6 @@ import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
 import com.gildedgames.aether.common.entities.living.mobs.EntityAechorPlant;
 import net.minecraft.block.BlockSnow;
-import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
@@ -101,7 +100,7 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 
 		if (addSnow)
 		{
-			worldIn.setBlockState(pos, state.withProperty(PROPERTY_SNOWY, Boolean.valueOf(true)), 2);
+			worldIn.setBlockState(pos, state.withProperty(PROPERTY_SNOWY, Boolean.TRUE), 2);
 		}
 
 		return addSnow;

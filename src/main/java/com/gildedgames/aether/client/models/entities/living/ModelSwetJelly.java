@@ -30,7 +30,7 @@ public class ModelSwetJelly extends ModelBase
 		this.Right = new ModelRenderer(this, 0, 47);
 		this.Right.setRotationPoint(-10.0F, 0.0F, 0.0F);
 		this.Right.addBox(-6.5F, -6.5F, 0.0F, 13, 13, 2, 0.0F);
-		this.setRotateAngle(Right, 0.0F, 1.5707963267948966F, 0.0F);
+		this.setRotateAngle(this.Right, 0.0F, 1.5707963267948966F, 0.0F);
 		this.Front = new ModelRenderer(this, 0, 47);
 		this.Front.setRotationPoint(0.0F, 0.0F, -10.0F);
 		this.Front.addBox(-6.5F, -6.5F, 0.0F, 13, 13, 2, 0.0F);
@@ -43,17 +43,17 @@ public class ModelSwetJelly extends ModelBase
 		this.Back = new ModelRenderer(this, 0, 47);
 		this.Back.setRotationPoint(0.0F, 0.0F, 10.0F);
 		this.Back.addBox(-6.5F, -6.5F, 0.0F, 13, 13, 2, 0.0F);
-		this.setRotateAngle(Back, 0.0F, 3.141592653589793F, 0.0F);
+		this.setRotateAngle(this.Back, 0.0F, 3.141592653589793F, 0.0F);
 		this.Left = new ModelRenderer(this, 0, 47);
 		this.Left.mirror = true;
 		this.Left.setRotationPoint(10.0F, 0.0F, 0.0F);
 		this.Left.addBox(-6.5F, -6.5F, 0.0F, 13, 13, 2, 0.0F);
-		this.setRotateAngle(Left, 0.0F, -1.5707963267948966F, 0.0F);
+		this.setRotateAngle(this.Left, 0.0F, -1.5707963267948966F, 0.0F);
 		this.Top = new ModelRenderer(this, 0, 47);
 		this.Top.mirror = true;
 		this.Top.setRotationPoint(0.0F, -10.0F, 0.0F);
 		this.Top.addBox(-6.5F, -6.5F, 0.0F, 13, 13, 2, 0.0F);
-		this.setRotateAngle(Top, -1.5707963267948966F, 0.0F, 0.0F);
+		this.setRotateAngle(this.Top, -1.5707963267948966F, 0.0F, 0.0F);
 		this.Base.addChild(this.Right);
 		this.Base.addChild(this.Front);
 		this.Base.addChild(this.Back);
@@ -79,7 +79,7 @@ public class ModelSwetJelly extends ModelBase
 		float width = swet.getSquishPool();
 		float height = width * 1.14f;
 
-		GlStateManager.translate(0, -height / 2 + 1.2f,0);
+		GlStateManager.translate(0, -height / 2 + 1.2f, 0);
 		GlStateManager.scale(width, height, width);
 
 		this.Bottom.render(f5);
@@ -92,7 +92,7 @@ public class ModelSwetJelly extends ModelBase
 	public void renderRaw(final Entity entity, final float f, final float f1, final float f2, final float f3, final float f4, final float f5)
 	{
 		this.Base.render(f5);
-		GlStateManager.translate(0,.85f,0);
+		GlStateManager.translate(0, .85f, 0);
 		this.Bottom.render(f5);
 	}
 

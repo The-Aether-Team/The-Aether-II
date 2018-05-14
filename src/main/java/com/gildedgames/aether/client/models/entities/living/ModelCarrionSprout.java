@@ -7,6 +7,12 @@ import org.lwjgl.opengl.GL11;
 
 public class ModelCarrionSprout extends ModelBase
 {
+	private final float pie = 3.141593F * 2F;
+
+	public float sinage;
+
+	public float sinage2;
+
 	private ModelRenderer stem;
 
 	private ModelRenderer bud_base;
@@ -64,12 +70,6 @@ public class ModelCarrionSprout extends ModelBase
 	private ModelRenderer petal_front_right;
 
 	private ModelRenderer petal_back_right;
-
-	public float sinage;
-
-	public float sinage2;
-
-	private final float pie = 3.141593F * 2F;
 
 	public ModelCarrionSprout()
 	{

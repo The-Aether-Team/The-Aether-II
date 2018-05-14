@@ -22,7 +22,6 @@ public abstract class PlayerAetherModule implements NBT
 
 	}
 
-
 	public void onDrops(PlayerDropsEvent event)
 	{
 

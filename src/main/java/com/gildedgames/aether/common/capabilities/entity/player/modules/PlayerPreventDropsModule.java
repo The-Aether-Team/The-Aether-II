@@ -70,7 +70,8 @@ public class PlayerPreventDropsModule extends PlayerAetherModule
 	@Override
 	public void onDrops(PlayerDropsEvent event)
 	{
-		if (event.getEntityPlayer().world.provider.getDimensionType() == DimensionsAether.AETHER && !event.getEntityPlayer().getEntityWorld().getGameRules().getBoolean("keepInventory"))
+		if (event.getEntityPlayer().world.provider.getDimensionType() == DimensionsAether.AETHER && !event.getEntityPlayer().getEntityWorld().getGameRules()
+				.getBoolean("keepInventory"))
 		{
 			List<EntityItem> toRemove = Lists.newArrayList();
 

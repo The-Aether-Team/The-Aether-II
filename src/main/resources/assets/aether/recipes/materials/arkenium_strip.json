@@ -1,18 +1,14 @@
 {
 	"type": "forge:ore_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"X"
 	],
-	"key":
-	{
-		"X":
-		{
+	"key": {
+		"X": {
 			"item": "aether:arkenium"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "aether:arkenium_strip",
 		"count": 4
 	}

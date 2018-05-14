@@ -87,7 +87,8 @@ public class BlockMoaEgg extends BlockContainer
 
 				MoaGenePool stackGenes = ItemMoaEgg.getGenePool(eggStack);
 
-				stackGenes.transformFromParents(egg.getGenePool().getStorage().getSeed(), egg.getGenePool().getStorage().getFatherSeed(), egg.getGenePool().getStorage().getMotherSeed());
+				stackGenes.transformFromParents(egg.getGenePool().getStorage().getSeed(), egg.getGenePool().getStorage().getFatherSeed(),
+						egg.getGenePool().getStorage().getMotherSeed());
 
 				ItemMoaEgg.setGenePool(eggStack, stackGenes);
 

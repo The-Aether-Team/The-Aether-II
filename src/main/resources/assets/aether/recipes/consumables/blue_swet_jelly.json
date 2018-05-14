@@ -1,17 +1,17 @@
 {
-  "type": "forge:ore_shapeless",
-  "ingredients": [
-    {
-      "item": "aether:swet_gel",
-      "data": 0
-    },
-    {
-      "type": "forge:ore_dict",
-      "ore": "sugar"
-    }
-  ],
-  "result": {
-    "item": "aether:swet_jelly",
-    "data": 0
-  }
+	"type": "forge:ore_shapeless",
+	"ingredients": [
+		{
+			"item": "aether:swet_gel",
+			"data": 0
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "sugar"
+		}
+	],
+	"result": {
+		"item": "aether:swet_jelly",
+		"data": 0
+	}
 }

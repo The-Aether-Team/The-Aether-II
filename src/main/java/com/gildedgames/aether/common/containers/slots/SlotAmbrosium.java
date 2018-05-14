@@ -21,6 +21,12 @@ public class SlotAmbrosium extends Slot
 		super(inventoryIn, index, xPosition, yPosition);
 	}
 
+	@SideOnly(Side.CLIENT)
+	public static void registerIcons(TextureStitchEvent.Pre event)
+	{
+		sprite = event.getMap().registerSprite(AetherCore.getResource("gui/slots/slot_ambrosium"));
+	}
+
 	@Override
 	public boolean isItemValid(@Nonnull ItemStack stack)
 	{
@@ -32,12 +38,6 @@ public class SlotAmbrosium extends Slot
 	public TextureAtlasSprite getBackgroundSprite()
 	{
 		return sprite;
-	}
-
-	@SideOnly(Side.CLIENT)
-	public static void registerIcons(TextureStitchEvent.Pre event)
-	{
-		sprite = event.getMap().registerSprite(AetherCore.getResource("gui/slots/slot_ambrosium"));
 	}
 
 }

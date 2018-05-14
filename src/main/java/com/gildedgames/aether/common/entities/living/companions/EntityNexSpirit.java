@@ -22,21 +22,21 @@ public class EntityNexSpirit extends EntityCompanion
 	{
 		super.onUpdate();
 
-//		if (this.getOwner() != null)
-//		{
-//			PlayerAether aePlayer = PlayerAether.getPlayer(this.getOwner());
-//
-//			PlayerCompanionModule companionManager = aePlayer.getCompanionModule();
-//
-//			ItemStack equippedCompanion = companionManager.getCompanionItem();
-//
-//			if (equippedCompanion.getItem() instanceof ItemDeathSeal)
-//			{
-//				long ticks = ItemDeathSeal.getTicksUntilEnabled(equippedCompanion, this.world);
-//
-//				this.setBroken(ticks > 0);
-//			}
-//		}
+		//		if (this.getOwner() != null)
+		//		{
+		//			PlayerAether aePlayer = PlayerAether.getPlayer(this.getOwner());
+		//
+		//			PlayerCompanionModule companionManager = aePlayer.getCompanionModule();
+		//
+		//			ItemStack equippedCompanion = companionManager.getCompanionItem();
+		//
+		//			if (equippedCompanion.getItem() instanceof ItemDeathSeal)
+		//			{
+		//				long ticks = ItemDeathSeal.getTicksUntilEnabled(equippedCompanion, this.world);
+		//
+		//				this.setBroken(ticks > 0);
+		//			}
+		//		}
 	}
 
 	@Override
@@ -47,13 +47,13 @@ public class EntityNexSpirit extends EntityCompanion
 		this.dataManager.register(IS_BROKEN, false);
 	}
 
-	public void setBroken(boolean broken)
-	{
-		this.dataManager.set(IS_BROKEN, broken);
-	}
-
 	public boolean isBroken()
 	{
 		return this.dataManager.get(IS_BROKEN);
+	}
+
+	public void setBroken(boolean broken)
+	{
+		this.dataManager.set(IS_BROKEN, broken);
 	}
 }

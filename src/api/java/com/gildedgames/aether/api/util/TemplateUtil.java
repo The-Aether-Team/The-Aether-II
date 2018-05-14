@@ -122,6 +122,7 @@ public class TemplateUtil
 				|| TemplateUtil.canGrowInto(state.getBlock());
 	}
 
+	@SafeVarargs
 	public static <T> T pickRandom(final Random rand, final T... objects)
 	{
 		return objects[rand.nextInt(objects.length)];

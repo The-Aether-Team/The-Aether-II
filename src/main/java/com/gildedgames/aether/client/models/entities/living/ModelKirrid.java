@@ -10,6 +10,8 @@ import net.minecraft.util.math.MathHelper;
 
 public class ModelKirrid extends ModelBase
 {
+	protected float childYOffset = 8.0F;
+
 	//fields
 	private ModelRenderer BodyMain;
 
@@ -70,8 +72,6 @@ public class ModelKirrid extends ModelBase
 	private ModelRenderer HeadEarLeft;
 
 	private ModelRenderer HeadEarRight;
-
-	protected float childYOffset = 8.0F;
 
 	private float childZOffset = 4.0F;
 
@@ -416,9 +416,13 @@ public class ModelKirrid extends ModelBase
 		this.HeadEarLeft.rotationPointY = rotationPointY;
 		this.HeadEarRight.rotationPointY = rotationPointY;
 
-		this.HeadCheekLeft.offsetX = MathHelper.sin(headAng * -0.3662F + (float) Math.PI) * 0.1F * ((EntityKirrid) entitylivingbaseIn).getHeadRotationAngleX(partialTickTime) + .005f;
-		this.HeadCheekRight.offsetX = MathHelper.sin(headAng * 0.3662F + (float) Math.PI) * 0.1F * ((EntityKirrid) entitylivingbaseIn).getHeadRotationAngleX(partialTickTime) - .001f;
-		this.HeadJaw.offsetY = MathHelper.sin(headAng * 0.6662F + (float) Math.PI) * 0.2F * ((EntityKirrid) entitylivingbaseIn).getHeadRotationAngleX(partialTickTime);
+		this.HeadCheekLeft.offsetX =
+				MathHelper.sin(headAng * -0.3662F + (float) Math.PI) * 0.1F * ((EntityKirrid) entitylivingbaseIn).getHeadRotationAngleX(partialTickTime)
+						+ .005f;
+		this.HeadCheekRight.offsetX =
+				MathHelper.sin(headAng * 0.3662F + (float) Math.PI) * 0.1F * ((EntityKirrid) entitylivingbaseIn).getHeadRotationAngleX(partialTickTime) - .001f;
+		this.HeadJaw.offsetY =
+				MathHelper.sin(headAng * 0.6662F + (float) Math.PI) * 0.2F * ((EntityKirrid) entitylivingbaseIn).getHeadRotationAngleX(partialTickTime);
 
 		this.setHeadRotations(headAng * 9.0F);
 	}

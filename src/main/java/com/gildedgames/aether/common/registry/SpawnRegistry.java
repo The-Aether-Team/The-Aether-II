@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.registry;
 
 import com.gildedgames.aether.api.AetherCapabilities;
-import com.gildedgames.aether.api.world.ISpawnAreaManager;
 import com.gildedgames.aether.api.world.ISpawnSystem;
 import com.gildedgames.aether.api.world.PosCondition;
 import com.gildedgames.aether.common.AetherCore;
@@ -9,7 +8,10 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.entities.living.mobs.*;
 import com.gildedgames.aether.common.entities.living.passive.*;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
-import com.gildedgames.aether.common.world.spawning.*;
+import com.gildedgames.aether.common.world.spawning.SpawnEntry;
+import com.gildedgames.aether.common.world.spawning.SpawnHandler;
+import com.gildedgames.aether.common.world.spawning.SpawnSystem;
+import com.gildedgames.aether.common.world.spawning.SpawnSystemProvider;
 import com.gildedgames.aether.common.world.spawning.conditions.CheckBlockStateUnderneath;
 import com.gildedgames.aether.common.world.spawning.conditions.CheckBlockUnderneath;
 import com.gildedgames.aether.common.world.spawning.conditions.CheckDimension;
@@ -18,7 +20,6 @@ import com.gildedgames.aether.common.world.spawning.util.FlyingPositionSelector;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.init.Blocks;
-import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -134,7 +135,5 @@ public class SpawnRegistry
 			}
 		}
 	}
-
-
 
 }

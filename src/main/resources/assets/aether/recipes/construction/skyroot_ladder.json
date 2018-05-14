@@ -1,20 +1,16 @@
 {
 	"type": "forge:ore_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"X X",
 		"XXX",
 		"X X"
 	],
-	"key":
-	{
-		"X":
-		{
+	"key": {
+		"X": {
 			"item": "aether:skyroot_stick"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "aether:skyroot_ladder",
 		"count": 3
 	}

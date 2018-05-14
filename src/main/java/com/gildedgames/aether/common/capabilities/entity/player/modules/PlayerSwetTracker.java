@@ -96,10 +96,8 @@ public class PlayerSwetTracker extends PlayerAetherModule
 			this.detachSwets();
 		}
 
-		for (int i = 0; i < this.swets.size(); i++)
+		for (final EntitySwet swet : this.swets)
 		{
-			final EntitySwet swet = this.swets.get(i);
-
 			swet.processSucking(this.getEntity());
 		}
 	}
@@ -109,9 +107,8 @@ public class PlayerSwetTracker extends PlayerAetherModule
 	{
 		final NBTTagList list = new NBTTagList();
 
-		for (int i = 0; i < this.swets.size(); i++)
+		for (final EntitySwet swet : this.swets)
 		{
-			final EntitySwet swet = this.swets.get(i);
 			final NBTTagCompound tag = new NBTTagCompound();
 
 			swet.writeEntityToNBT(tag);

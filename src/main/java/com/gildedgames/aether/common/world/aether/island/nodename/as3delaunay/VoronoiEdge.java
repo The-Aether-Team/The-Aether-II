@@ -40,8 +40,8 @@ public final class VoronoiEdge
 
 	private VoronoiEdge()
 	{
-		_edgeIndex = _nedges++;
-		init();
+		this._edgeIndex = _nedges++;
+		this.init();
 	}
 
 	/**
@@ -117,15 +117,7 @@ public final class VoronoiEdge
 	{
 		final double length0 = edge0.sitesDistance();
 		final double length1 = edge1.sitesDistance();
-		if (length0 < length1)
-		{
-			return 1;
-		}
-		if (length0 > length1)
-		{
-			return -1;
-		}
-		return 0;
+		return Double.compare(length1, length0);
 	}
 
 	public static double compareSitesDistances(final VoronoiEdge edge0, final VoronoiEdge edge1)
@@ -175,43 +167,43 @@ public final class VoronoiEdge
 	public LineSegment delaunayLine()
 	{
 		// draw a line connecting the input Sites for which the edge is a bisector:
-		return new LineSegment(get_leftSite().get_coord(), get_rightSite().get_coord());
+		return new LineSegment(this.get_leftSite().get_coord(), this.get_rightSite().get_coord());
 	}
 
 	public LineSegment voronoiEdge()
 	{
-		if (!get_visible())
+		if (!this.get_visible())
 		{
 			return new LineSegment(null, null);
 		}
-		return new LineSegment(_clippedVertices.get(LR.LEFT),
-				_clippedVertices.get(LR.RIGHT));
+		return new LineSegment(this._clippedVertices.get(LR.LEFT),
+				this._clippedVertices.get(LR.RIGHT));
 	}
 
 	public Vertex get_leftVertex()
 	{
-		return _leftVertex;
+		return this._leftVertex;
 	}
 
 	public Vertex get_rightVertex()
 	{
-		return _rightVertex;
+		return this._rightVertex;
 	}
 
 	public Vertex vertex(final LR leftRight)
 	{
-		return (leftRight == LR.LEFT) ? _leftVertex : _rightVertex;
+		return (leftRight == LR.LEFT) ? this._leftVertex : this._rightVertex;
 	}
 
 	public void setVertex(final LR leftRight, final Vertex v)
 	{
 		if (leftRight == LR.LEFT)
 		{
-			_leftVertex = v;
+			this._leftVertex = v;
 		}
 		else
 		{
-			_rightVertex = v;
+			this._rightVertex = v;
 		}
 	}
 	// unless the entire VoronoiEdge is outside the bounds.
@@ -219,47 +211,47 @@ public final class VoronoiEdge
 
 	public boolean isPartOfConvexHull()
 	{
-		return (_leftVertex == null || _rightVertex == null);
+		return (this._leftVertex == null || this._rightVertex == null);
 	}
 
 	public double sitesDistance()
 	{
-		return Point.distance(get_leftSite().get_coord(), get_rightSite().get_coord());
+		return Point.distance(this.get_leftSite().get_coord(), this.get_rightSite().get_coord());
 	}
 
 	public HashMap<LR, Point> get_clippedEnds()
 	{
-		return _clippedVertices;
+		return this._clippedVertices;
 	}
 
 	public boolean get_visible()
 	{
-		return _clippedVertices != null;
+		return this._clippedVertices != null;
 	}
 
 	public Site get_leftSite()
 	{
-		return _sites.get(LR.LEFT);
+		return this._sites.get(LR.LEFT);
 	}
 
 	public void set_leftSite(final Site s)
 	{
-		_sites.put(LR.LEFT, s);
+		this._sites.put(LR.LEFT, s);
 	}
 
 	public Site get_rightSite()
 	{
-		return _sites.get(LR.RIGHT);
+		return this._sites.get(LR.RIGHT);
 	}
 
 	public void set_rightSite(final Site s)
 	{
-		_sites.put(LR.RIGHT, s);
+		this._sites.put(LR.RIGHT, s);
 	}
 
 	public Site site(final LR leftRight)
 	{
-		return _sites.get(leftRight);
+		return this._sites.get(leftRight);
 	}
 
 	public void dispose()
@@ -269,30 +261,30 @@ public final class VoronoiEdge
          _delaunayLineBmp.dispose();
          _delaunayLineBmp = null;
          }*/
-		_leftVertex = null;
-		_rightVertex = null;
-		if (_clippedVertices != null)
+		this._leftVertex = null;
+		this._rightVertex = null;
+		if (this._clippedVertices != null)
 		{
-			_clippedVertices.clear();
-			_clippedVertices = null;
+			this._clippedVertices.clear();
+			this._clippedVertices = null;
 		}
-		_sites.clear();
-		_sites = null;
+		this._sites.clear();
+		this._sites = null;
 
 		_pool.push(this);
 	}
 
 	private void init()
 	{
-		_sites = new HashMap();
+		this._sites = new HashMap();
 	}
 
 	@Override
 	public String toString()
 	{
-		return "VoronoiEdge " + _edgeIndex + "; sites " + _sites.get(LR.LEFT) + ", " + _sites.get(LR.RIGHT)
-				+ "; endVertices " + (_leftVertex != null ? _leftVertex.get_vertexIndex() : "null") + ", "
-				+ (_rightVertex != null ? _rightVertex.get_vertexIndex() : "null") + "::";
+		return "VoronoiEdge " + this._edgeIndex + "; sites " + this._sites.get(LR.LEFT) + ", " + this._sites.get(LR.RIGHT)
+				+ "; endVertices " + (this._leftVertex != null ? this._leftVertex.get_vertexIndex() : "null") + ", "
+				+ (this._rightVertex != null ? this._rightVertex.get_vertexIndex() : "null") + "::";
 	}
 
 	/**
@@ -314,18 +306,18 @@ public final class VoronoiEdge
 		final Vertex vertex1;
 		double x0, x1, y0, y1;
 
-		if (a == 1.0 && b >= 0.0)
+		if (this.a == 1.0 && this.b >= 0.0)
 		{
-			vertex0 = _rightVertex;
-			vertex1 = _leftVertex;
+			vertex0 = this._rightVertex;
+			vertex1 = this._leftVertex;
 		}
 		else
 		{
-			vertex0 = _leftVertex;
-			vertex1 = _rightVertex;
+			vertex0 = this._leftVertex;
+			vertex1 = this._rightVertex;
 		}
 
-		if (a == 1.0)
+		if (this.a == 1.0)
 		{
 			y0 = ymin;
 			if (vertex0 != null && vertex0.get_y() > ymin)
@@ -336,7 +328,7 @@ public final class VoronoiEdge
 			{
 				return;
 			}
-			x0 = c - b * y0;
+			x0 = this.c - this.b * y0;
 
 			y1 = ymax;
 			if (vertex1 != null && vertex1.get_y() < ymax)
@@ -347,7 +339,7 @@ public final class VoronoiEdge
 			{
 				return;
 			}
-			x1 = c - b * y1;
+			x1 = this.c - this.b * y1;
 
 			if ((x0 > xmax && x1 > xmax) || (x0 < xmin && x1 < xmin))
 			{
@@ -357,23 +349,23 @@ public final class VoronoiEdge
 			if (x0 > xmax)
 			{
 				x0 = xmax;
-				y0 = (c - x0) / b;
+				y0 = (this.c - x0) / this.b;
 			}
 			else if (x0 < xmin)
 			{
 				x0 = xmin;
-				y0 = (c - x0) / b;
+				y0 = (this.c - x0) / this.b;
 			}
 
 			if (x1 > xmax)
 			{
 				x1 = xmax;
-				y1 = (c - x1) / b;
+				y1 = (this.c - x1) / this.b;
 			}
 			else if (x1 < xmin)
 			{
 				x1 = xmin;
-				y1 = (c - x1) / b;
+				y1 = (this.c - x1) / this.b;
 			}
 		}
 		else
@@ -387,7 +379,7 @@ public final class VoronoiEdge
 			{
 				return;
 			}
-			y0 = c - a * x0;
+			y0 = this.c - this.a * x0;
 
 			x1 = xmax;
 			if (vertex1 != null && vertex1.get_x() < xmax)
@@ -398,7 +390,7 @@ public final class VoronoiEdge
 			{
 				return;
 			}
-			y1 = c - a * x1;
+			y1 = this.c - this.a * x1;
 
 			if ((y0 > ymax && y1 > ymax) || (y0 < ymin && y1 < ymin))
 			{
@@ -408,36 +400,36 @@ public final class VoronoiEdge
 			if (y0 > ymax)
 			{
 				y0 = ymax;
-				x0 = (c - y0) / a;
+				x0 = (this.c - y0) / this.a;
 			}
 			else if (y0 < ymin)
 			{
 				y0 = ymin;
-				x0 = (c - y0) / a;
+				x0 = (this.c - y0) / this.a;
 			}
 
 			if (y1 > ymax)
 			{
 				y1 = ymax;
-				x1 = (c - y1) / a;
+				x1 = (this.c - y1) / this.a;
 			}
 			else if (y1 < ymin)
 			{
 				y1 = ymin;
-				x1 = (c - y1) / a;
+				x1 = (this.c - y1) / this.a;
 			}
 		}
 
-		_clippedVertices = new HashMap();
-		if (vertex0 == _leftVertex)
+		this._clippedVertices = new HashMap();
+		if (vertex0 == this._leftVertex)
 		{
-			_clippedVertices.put(LR.LEFT, new Point(x0, y0));
-			_clippedVertices.put(LR.RIGHT, new Point(x1, y1));
+			this._clippedVertices.put(LR.LEFT, new Point(x0, y0));
+			this._clippedVertices.put(LR.RIGHT, new Point(x1, y1));
 		}
 		else
 		{
-			_clippedVertices.put(LR.RIGHT, new Point(x0, y0));
-			_clippedVertices.put(LR.LEFT, new Point(x1, y1));
+			this._clippedVertices.put(LR.RIGHT, new Point(x0, y0));
+			this._clippedVertices.put(LR.LEFT, new Point(x1, y1));
 		}
 	}
 }

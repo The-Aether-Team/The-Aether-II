@@ -1,9 +1,7 @@
 package com.gildedgames.aether.common.world.spawning;
 
-import com.gildedgames.aether.api.world.ISpawnAreaManager;
 import com.gildedgames.aether.api.world.ISpawnHandler;
 import com.gildedgames.aether.api.world.ISpawnSystem;
-import com.gildedgames.orbis_api.OrbisAPI;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;

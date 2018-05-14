@@ -1,17 +1,17 @@
 {
-    "type": "forge:ore_shaped",
-    "pattern": [
-        "##",
-        "##"
-    ],
-    "key": {
-        "#": {
-           "type": "forge:ore_dict",
-            "ore": "holystone"
-        }
-    },
-    "result": {
-        "item": "aether:holystone_brick",
-        "count": 4
-    }
+	"type": "forge:ore_shaped",
+	"pattern": [
+		"##",
+		"##"
+	],
+	"key": {
+		"#": {
+			"type": "forge:ore_dict",
+			"ore": "holystone"
+		}
+	},
+	"result": {
+		"item": "aether:holystone_brick",
+		"count": 4
+	}
 }

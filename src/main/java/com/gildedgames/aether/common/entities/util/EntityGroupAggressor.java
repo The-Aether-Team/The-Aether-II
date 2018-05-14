@@ -5,11 +5,11 @@ import net.minecraft.entity.EntityLivingBase;
 public class EntityGroupAggressor
 {
 
+	final EntityGroup pack;
+
 	public EntityLivingBase agressor;
 
 	public int time;
-
-	final EntityGroup pack;
 
 	public EntityGroupAggressor(EntityGroup pack, EntityLivingBase agressor, int time)
 	{

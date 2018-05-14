@@ -19,7 +19,8 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 //TODO:
 public class RecipePresentCrafting extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe
 {
-	private static final NonNullList<Ingredient> ingredients = CraftingHelper.parseShaped("PPP", "P P", "PPP", 'P', new ItemStack(ItemsAether.wrapping_paper)).input;
+	private static final NonNullList<Ingredient> ingredients = CraftingHelper
+			.parseShaped("PPP", "P P", "PPP", 'P', new ItemStack(ItemsAether.wrapping_paper)).input;
 
 	@Override
 	public boolean matches(final InventoryCrafting inventory, final World world)

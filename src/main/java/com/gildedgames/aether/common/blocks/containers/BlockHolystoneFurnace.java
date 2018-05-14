@@ -95,7 +95,8 @@ public class BlockHolystoneFurnace extends BlockContainer
 
 			if (rand.nextDouble() < 0.1D)
 			{
-				world.playSound(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
+				world.playSound(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F,
+						false);
 			}
 
 			switch (facing)

@@ -17,7 +17,6 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
@@ -47,7 +46,6 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 
 		SPRITE.initSprite(16, 16, 0, 0, false);
 	}
-
 
 	private void scaleMoa(EntityMoa entityMoa)
 	{

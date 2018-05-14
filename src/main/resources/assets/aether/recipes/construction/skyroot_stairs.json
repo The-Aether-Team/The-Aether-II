@@ -1,18 +1,18 @@
 {
-  "type": "forge:ore_shaped",
-  "pattern": [
-    "#  ",
-    "## ",
-    "###"
-  ],
-  "key": {
-    "#": {
-      "type": "forge:ore_dict",
-      "ore": "skyrootplanks"
-    }
-  },
-  "result": {
-    "item": "aether:skyroot_stairs",
-    "count": 4
-  }
+	"type": "forge:ore_shaped",
+	"pattern": [
+		"#  ",
+		"## ",
+		"###"
+	],
+	"key": {
+		"#": {
+			"type": "forge:ore_dict",
+			"ore": "skyrootplanks"
+		}
+	},
+	"result": {
+		"item": "aether:skyroot_stairs",
+		"count": 4
+	}
 }

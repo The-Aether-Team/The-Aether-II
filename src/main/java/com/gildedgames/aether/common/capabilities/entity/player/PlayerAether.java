@@ -138,7 +138,7 @@ public class PlayerAether implements IPlayerAether
 		modules.add(this.configModule);
 		modules.add(this.progressModule);
 
-		this.modules = modules.toArray(new PlayerAetherModule[modules.size()]);
+		this.modules = modules.toArray(new PlayerAetherModule[0]);
 	}
 
 	public static PlayerAether getPlayer(final Entity player)

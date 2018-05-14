@@ -1,24 +1,19 @@
 {
 	"type": "forge:ore_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"XXX",
 		"XZX"
 	],
-	"key":
-	{
-		"X":
-		{
+	"key": {
+		"X": {
 			"type": "forge:ore_dict",
 			"ore": "aerleather"
 		},
-		"Z":
-		{
+		"Z": {
 			"item": "aether:cloudtwine"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "aether:aether_saddle"
 	}
 }

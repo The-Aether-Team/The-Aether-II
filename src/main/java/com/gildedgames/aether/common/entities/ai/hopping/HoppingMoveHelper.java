@@ -56,7 +56,7 @@ public class HoppingMoveHelper extends EntityMoveHelper
 
 	public HopTimer getTimer()
 	{
-		return hopTimer;
+		return this.hopTimer;
 	}
 
 	@Override
@@ -66,7 +66,7 @@ public class HoppingMoveHelper extends EntityMoveHelper
 		this.entity.rotationYawHead = this.entity.rotationYaw;
 		this.entity.renderYawOffset = this.entity.rotationYaw;
 
-		if (!active)
+		if (!this.active)
 		{
 			return;
 		}
@@ -117,7 +117,7 @@ public class HoppingMoveHelper extends EntityMoveHelper
 		else
 		{
 			this.entity.setAIMoveSpeed((float) (this.speed
-				* this.entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()));
+					* this.entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()));
 		}
 
 		this.active = isActive;

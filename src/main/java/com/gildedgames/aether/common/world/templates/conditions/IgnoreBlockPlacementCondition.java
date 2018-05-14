@@ -34,10 +34,7 @@ public class IgnoreBlockPlacementCondition implements PlacementConditionTemplate
 
 			final IBlockState state = world.getBlockState(down);
 
-			if (this.state == state)
-			{
-				return false;
-			}
+			return this.state != state;
 		}
 
 		return true;

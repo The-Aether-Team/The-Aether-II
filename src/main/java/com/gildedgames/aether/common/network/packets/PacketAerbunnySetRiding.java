@@ -13,6 +13,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 public class PacketAerbunnySetRiding implements IMessage
 {
 	private int entityId;
+
 	private int playerId;
 
 	public PacketAerbunnySetRiding(EntityPlayer player, EntityAerbunny bunny)

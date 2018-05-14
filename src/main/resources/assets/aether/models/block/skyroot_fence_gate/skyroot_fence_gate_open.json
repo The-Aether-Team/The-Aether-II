@@ -1,6 +1,6 @@
 {
-    "parent": "block/fence_gate_open",
-    "textures": {
+	"parent": "block/fence_gate_open",
+	"textures": {
 		"texture": "aether:blocks/skyroot_planks/skyroot_planks"
-    }
+	}
 }

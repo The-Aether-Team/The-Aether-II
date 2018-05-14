@@ -1,18 +1,14 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"XX"
 	],
-	"key":
-	{
-		"X":
-		{
+	"key": {
+		"X": {
 			"item": "aether:cloudwool_block"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "aether:cloudwool_carpet",
 		"count": 3
 	}

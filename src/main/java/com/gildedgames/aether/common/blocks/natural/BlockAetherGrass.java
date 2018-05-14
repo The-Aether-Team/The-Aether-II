@@ -15,7 +15,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -72,7 +71,8 @@ public class BlockAetherGrass extends BlockGrass implements IBlockMultiName
 		final Comparable<?> snowFlower = up.getProperties().get(BlockAetherFlower.PROPERTY_SNOWY);
 
 		return state.withProperty(SNOWY,
-				block == BlocksAether.highlands_snow || block == BlocksAether.highlands_snow_layer || (snowGrass != null && snowGrass.equals(BlockTallAetherGrass.Type.SNOWY)) || (
+				block == BlocksAether.highlands_snow || block == BlocksAether.highlands_snow_layer || (snowGrass != null && snowGrass
+						.equals(BlockTallAetherGrass.Type.SNOWY)) || (
 						snowFlower != null && snowFlower
 								.equals(true)));
 	}

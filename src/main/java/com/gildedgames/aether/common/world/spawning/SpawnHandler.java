@@ -227,9 +227,11 @@ public class SpawnHandler implements ISpawnHandler
 				for (int count = 0; count < groupSize; count++)
 				{
 					int scatterX =
-							(manager.getWorld().rand.nextBoolean() ? 1 : -1) * (1 + manager.getWorld().rand.nextInt(entry.getPositionSelector().getScatter(manager.getWorld())));
+							(manager.getWorld().rand.nextBoolean() ? 1 : -1) * (1 + manager.getWorld().rand
+									.nextInt(entry.getPositionSelector().getScatter(manager.getWorld())));
 					int scatterZ =
-							(manager.getWorld().rand.nextBoolean() ? 1 : -1) * (1 + manager.getWorld().rand.nextInt(entry.getPositionSelector().getScatter(manager.getWorld())));
+							(manager.getWorld().rand.nextBoolean() ? 1 : -1) * (1 + manager.getWorld().rand
+									.nextInt(entry.getPositionSelector().getScatter(manager.getWorld())));
 
 					float posX = groupPosX + scatterX;
 					float posZ = groupPosZ + scatterZ;

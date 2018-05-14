@@ -3,7 +3,6 @@ package com.gildedgames.aether.common.network.packets;
 import com.gildedgames.aether.common.ConfigAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
-import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;

@@ -16,15 +16,7 @@ public final class LineSegment extends Object
 	{
 		final double length0 = Point.distance(segment0.p0, segment0.p1);
 		final double length1 = Point.distance(segment1.p0, segment1.p1);
-		if (length0 < length1)
-		{
-			return 1;
-		}
-		if (length0 > length1)
-		{
-			return -1;
-		}
-		return 0;
+		return Double.compare(length1, length0);
 	}
 
 	public static double compareLengths(final LineSegment edge0, final LineSegment edge1)

@@ -77,7 +77,7 @@ public class WorldGenLargeTree extends WorldGenAbstractTree
 
 						Block block = world.getBlockState(nPos).getBlock();
 
-						if (block != Blocks.AIR && block != this.leafBlock)
+						if (block != Blocks.AIR && block != this.leafBlock.getBlock())
 						{
 							flag = false;
 						}

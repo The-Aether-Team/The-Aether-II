@@ -22,6 +22,12 @@ public class SlotMoaEgg extends Slot
 		super(inventoryIn, index, xPosition, yPosition);
 	}
 
+	@SideOnly(Side.CLIENT)
+	public static void registerIcons(TextureStitchEvent.Pre event)
+	{
+		sprite = event.getMap().registerSprite(AetherCore.getResource("gui/slots/slot_moa_egg"));
+	}
+
 	@Override
 	public boolean isItemValid(@Nonnull ItemStack stack)
 	{
@@ -39,12 +45,6 @@ public class SlotMoaEgg extends Slot
 	public TextureAtlasSprite getBackgroundSprite()
 	{
 		return sprite;
-	}
-
-	@SideOnly(Side.CLIENT)
-	public static void registerIcons(TextureStitchEvent.Pre event)
-	{
-		sprite = event.getMap().registerSprite(AetherCore.getResource("gui/slots/slot_moa_egg"));
 	}
 
 }

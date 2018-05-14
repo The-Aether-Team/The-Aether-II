@@ -18,7 +18,7 @@ public class ItemPropertiesBuilder
 	private ItemEquipmentSlot slot = ItemEquipmentSlot.NONE;
 
 	private ItemRarity rarity = ItemRarity.NONE;
-	
+
 	/**
 	 * Sets the rarity of this item.
 	 * @param rarity The rarity of this item
@@ -55,7 +55,6 @@ public class ItemPropertiesBuilder
 
 		return this;
 	}
-
 
 	/**
 	 * Adds an {@link IEffectPrecondition} to this item that will determine whether or

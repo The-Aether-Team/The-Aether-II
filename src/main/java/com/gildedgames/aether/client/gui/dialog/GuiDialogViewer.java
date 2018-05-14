@@ -180,7 +180,6 @@ public class GuiDialogViewer extends GuiFrame implements IDialogChangeListener
 			if (this.controller.getCurrentScene() == null)
 			{
 				Minecraft.getMinecraft().displayGuiScreen(null);
-				return;
 			}
 		}
 	}

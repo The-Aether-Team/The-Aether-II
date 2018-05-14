@@ -45,10 +45,7 @@ public class BlockHolystone extends Block implements IBlockMultiName
 	{
 		if (target.apply(BlocksAether.holystone.getDefaultState()))
 		{
-			if (state.getBlock() == this && state.getValue(PROPERTY_VARIANT) == NORMAL_HOLYSTONE)
-			{
-				return true;
-			}
+			return state.getBlock() == this && state.getValue(PROPERTY_VARIANT) == NORMAL_HOLYSTONE;
 		}
 
 		return false;

@@ -14,9 +14,9 @@ import java.lang.reflect.Field;
 
 public class PerformanceIngame extends Gui
 {
-	private static ResourceLocation SERVER_STALL_ICON = AetherCore.getResource("textures/gui/overlay/server_stall.png");
-
 	private static final Field SERVER_CURRENT_TIME_FIELD = ReflectionAether.getField(MinecraftServer.class, ReflectionAether.SERVER_CURRENT_TIME.getMappings());
+
+	private static ResourceLocation SERVER_STALL_ICON = AetherCore.getResource("textures/gui/overlay/server_stall.png");
 
 	private static int ANIMATION_FRAMES = 4;
 

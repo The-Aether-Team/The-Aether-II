@@ -1,7 +1,6 @@
 {
 	"type": "forge:ore_shapeless",
-	"ingredients":
-	[
+	"ingredients": [
 		{
 			"item": "aether:dart_shooter",
 			"data": 0
@@ -10,8 +9,7 @@
 			"item": "aether:skyroot_poison_bucket"
 		}
 	],
-	"result":
-	{
+	"result": {
 		"item": "aether:dart_shooter",
 		"count": 1,
 		"data": 2

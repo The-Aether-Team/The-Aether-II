@@ -2,7 +2,6 @@ package com.gildedgames.aether.client;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.analytics.GAUser;
-import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent;
 import net.minecraftforge.fml.relauncher.Side;

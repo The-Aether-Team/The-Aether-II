@@ -6,35 +6,35 @@
 		"layer2": "aether:items/moa_egg/eyes"
 	},
 	"overrides": [
-        {
-            "predicate": {
-                "curves": 1
-            },
-            "model": "aether:item/moa_egg/moa_egg_curves"
-        },
-        {
-            "predicate": {
-                "circles": 1
-            },
-            "model": "aether:item/moa_egg/moa_egg_circles"
-        },
-        {
-            "predicate": {
-                "ladder": 1
-            },
-            "model": "aether:item/moa_egg/moa_egg_ladder"
-        },
-        {
-            "predicate": {
-                "lines": 1
-            },
-            "model": "aether:item/moa_egg/moa_egg_lines"
-        },
-        {
-            "predicate": {
-                "spots": 1
-            },
-            "model": "aether:item/moa_egg/moa_egg_spots"
-        }
-    ]
+		{
+			"predicate": {
+				"curves": 1
+			},
+			"model": "aether:item/moa_egg/moa_egg_curves"
+		},
+		{
+			"predicate": {
+				"circles": 1
+			},
+			"model": "aether:item/moa_egg/moa_egg_circles"
+		},
+		{
+			"predicate": {
+				"ladder": 1
+			},
+			"model": "aether:item/moa_egg/moa_egg_ladder"
+		},
+		{
+			"predicate": {
+				"lines": 1
+			},
+			"model": "aether:item/moa_egg/moa_egg_lines"
+		},
+		{
+			"predicate": {
+				"spots": 1
+			},
+			"model": "aether:item/moa_egg/moa_egg_spots"
+		}
+	]
 }

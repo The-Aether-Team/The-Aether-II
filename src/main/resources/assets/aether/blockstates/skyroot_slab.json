@@ -1,27 +1,33 @@
 {
 	"forge_marker": 1,
 	"variants": {
-		"state=bottom": [{
-			"textures": {
-				"bottom": "aether:blocks/skyroot_planks/skyroot_planks",
-				"top": "aether:blocks/skyroot_planks/skyroot_planks",
-				"side": "aether:blocks/skyroot_planks/skyroot_planks"
-			},
-			"model": "half_slab"
-		}],
-		"state=top": [{
-			"textures": {
-				"bottom": "aether:blocks/skyroot_planks/skyroot_planks",
-				"top": "aether:blocks/skyroot_planks/skyroot_planks",
-				"side": "aether:blocks/skyroot_planks/skyroot_planks"
-			},
-			"model": "upper_slab"
-		}],
-		"state=full": [{
-			"textures": {
-				"all": "aether:blocks/skyroot_planks/skyroot_planks"
-			},
-			"model": "cube_all"
-		}]
+		"state=bottom": [
+			{
+				"textures": {
+					"bottom": "aether:blocks/skyroot_planks/skyroot_planks",
+					"top": "aether:blocks/skyroot_planks/skyroot_planks",
+					"side": "aether:blocks/skyroot_planks/skyroot_planks"
+				},
+				"model": "half_slab"
+			}
+		],
+		"state=top": [
+			{
+				"textures": {
+					"bottom": "aether:blocks/skyroot_planks/skyroot_planks",
+					"top": "aether:blocks/skyroot_planks/skyroot_planks",
+					"side": "aether:blocks/skyroot_planks/skyroot_planks"
+				},
+				"model": "upper_slab"
+			}
+		],
+		"state=full": [
+			{
+				"textures": {
+					"all": "aether:blocks/skyroot_planks/skyroot_planks"
+				},
+				"model": "cube_all"
+			}
+		]
 	}
 }

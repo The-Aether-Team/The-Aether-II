@@ -40,12 +40,7 @@ public class AIProtectPack extends EntityAITarget
 			return false;
 		}
 
-		if (!this.isSuitableTarget(this.agressor, false))
-		{
-			return false;
-		}
-
-		return true;
+		return this.isSuitableTarget(this.agressor, false);
 	}
 
 	@Override

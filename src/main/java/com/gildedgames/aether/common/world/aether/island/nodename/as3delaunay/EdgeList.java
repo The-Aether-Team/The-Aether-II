@@ -19,46 +19,46 @@ public final class EdgeList implements IDisposable
 
 	public EdgeList(final double xmin, final double deltax, final int sqrt_nsites)
 	{
-		_xmin = xmin;
-		_deltax = deltax;
-		_hashsize = 2 * sqrt_nsites;
+		this._xmin = xmin;
+		this._deltax = deltax;
+		this._hashsize = 2 * sqrt_nsites;
 
-		_hash = new ArrayList(_hashsize);
+		this._hash = new ArrayList(this._hashsize);
 
 		// two dummy Halfedges:
-		leftEnd = Halfedge.createDummy();
-		rightEnd = Halfedge.createDummy();
-		leftEnd.edgeListLeftNeighbor = null;
-		leftEnd.edgeListRightNeighbor = rightEnd;
-		rightEnd.edgeListLeftNeighbor = leftEnd;
-		rightEnd.edgeListRightNeighbor = null;
+		this.leftEnd = Halfedge.createDummy();
+		this.rightEnd = Halfedge.createDummy();
+		this.leftEnd.edgeListLeftNeighbor = null;
+		this.leftEnd.edgeListRightNeighbor = this.rightEnd;
+		this.rightEnd.edgeListLeftNeighbor = this.leftEnd;
+		this.rightEnd.edgeListRightNeighbor = null;
 
-		for (int i = 0; i < _hashsize; i++)
+		for (int i = 0; i < this._hashsize; i++)
 		{
-			_hash.add(null);
+			this._hash.add(null);
 		}
 
-		_hash.set(0, leftEnd);
-		_hash.set(_hashsize - 1, rightEnd);
+		this._hash.set(0, this.leftEnd);
+		this._hash.set(this._hashsize - 1, this.rightEnd);
 	}
 
 	@Override
 	public void dispose()
 	{
-		Halfedge halfEdge = leftEnd;
+		Halfedge halfEdge = this.leftEnd;
 		Halfedge prevHe;
-		while (halfEdge != rightEnd)
+		while (halfEdge != this.rightEnd)
 		{
 			prevHe = halfEdge;
 			halfEdge = halfEdge.edgeListRightNeighbor;
 			prevHe.dispose();
 		}
-		leftEnd = null;
-		rightEnd.dispose();
-		rightEnd = null;
+		this.leftEnd = null;
+		this.rightEnd.dispose();
+		this.rightEnd = null;
 
-		_hash.clear();
-		_hash = null;
+		this._hash.clear();
+		this._hash = null;
 	}
 
 	/**
@@ -103,39 +103,39 @@ public final class EdgeList implements IDisposable
 		int i, bucket;
 		Halfedge halfEdge;
 
-        /* Use hash table to get close to desired halfedge */
-		bucket = (int) ((p.x - _xmin) / _deltax * _hashsize);
+		/* Use hash table to get close to desired halfedge */
+		bucket = (int) ((p.x - this._xmin) / this._deltax * this._hashsize);
 		if (bucket < 0)
 		{
 			bucket = 0;
 		}
-		if (bucket >= _hashsize)
+		if (bucket >= this._hashsize)
 		{
-			bucket = _hashsize - 1;
+			bucket = this._hashsize - 1;
 		}
-		halfEdge = getHash(bucket);
+		halfEdge = this.getHash(bucket);
 		if (halfEdge == null)
 		{
 			for (i = 1; true; ++i)
 			{
-				if ((halfEdge = getHash(bucket - i)) != null)
+				if ((halfEdge = this.getHash(bucket - i)) != null)
 				{
 					break;
 				}
-				if ((halfEdge = getHash(bucket + i)) != null)
+				if ((halfEdge = this.getHash(bucket + i)) != null)
 				{
 					break;
 				}
 			}
 		}
 		/* Now search linear list of halfedges for the correct one */
-		if (halfEdge == leftEnd || (halfEdge != rightEnd && halfEdge.isLeftOf(p)))
+		if (halfEdge == this.leftEnd || (halfEdge != this.rightEnd && halfEdge.isLeftOf(p)))
 		{
 			do
 			{
 				halfEdge = halfEdge.edgeListRightNeighbor;
 			}
-			while (halfEdge != rightEnd && halfEdge.isLeftOf(p));
+			while (halfEdge != this.rightEnd && halfEdge.isLeftOf(p));
 			halfEdge = halfEdge.edgeListLeftNeighbor;
 		}
 		else
@@ -144,13 +144,13 @@ public final class EdgeList implements IDisposable
 			{
 				halfEdge = halfEdge.edgeListLeftNeighbor;
 			}
-			while (halfEdge != leftEnd && !halfEdge.isLeftOf(p));
+			while (halfEdge != this.leftEnd && !halfEdge.isLeftOf(p));
 		}
 
-        /* Update hash table and reference counts */
-		if (bucket > 0 && bucket < _hashsize - 1)
+		/* Update hash table and reference counts */
+		if (bucket > 0 && bucket < this._hashsize - 1)
 		{
-			_hash.set(bucket, halfEdge);
+			this._hash.set(bucket, halfEdge);
 		}
 		return halfEdge;
 	}
@@ -160,15 +160,15 @@ public final class EdgeList implements IDisposable
 	{
 		final Halfedge halfEdge;
 
-		if (b < 0 || b >= _hashsize)
+		if (b < 0 || b >= this._hashsize)
 		{
 			return null;
 		}
-		halfEdge = _hash.get(b);
+		halfEdge = this._hash.get(b);
 		if (halfEdge != null && halfEdge.edge == VoronoiEdge.DELETED)
 		{
 			/* Hash table points to deleted halfedge.  Patch as necessary. */
-			_hash.set(b, null);
+			this._hash.set(b, null);
 			// still can't dispose halfEdge yet!
 			return null;
 		}

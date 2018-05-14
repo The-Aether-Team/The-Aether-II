@@ -53,6 +53,11 @@ public class PlacementFlagCapability implements IPlacementFlagCapability
 		}
 	}
 
+	private int getIndexFromCoordinate(int x, int y, int z)
+	{
+		return (x * 256 * 16 + y * 16 + z);
+	}
+
 	public static class Storage implements Capability.IStorage<IPlacementFlagCapability>
 	{
 		@Override
@@ -71,10 +76,5 @@ public class PlacementFlagCapability implements IPlacementFlagCapability
 			NBTTagCompound input = (NBTTagCompound) nbt;
 			instance.read(input);
 		}
-	}
-
-	private int getIndexFromCoordinate(int x, int y, int z)
-	{
-		return (x * 256 * 16 + y * 16 + z);
 	}
 }

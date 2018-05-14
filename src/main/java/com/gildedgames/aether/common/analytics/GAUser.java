@@ -13,11 +13,11 @@ public class GAUser
 	@SerializedName("persistent_id")
 	private final UUID persistentId;
 
+	private final UUID sessionId;
+
 	@Expose
 	@SerializedName("session_count")
 	private int sessionCount;
-
-	private final UUID sessionId;
 
 	private long sessionStart;
 

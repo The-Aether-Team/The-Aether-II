@@ -47,7 +47,8 @@ public class InvisiblityEffectFactory implements IEffectFactory<InvisiblityEffec
 	{
 
 		@Override
-		public void onEntityUpdate(IPlayerAether player) {
+		public void onEntityUpdate(IPlayerAether player)
+		{
 			EntityPlayer p = player.getEntity();
 			p.setInvisible(true);
 		}

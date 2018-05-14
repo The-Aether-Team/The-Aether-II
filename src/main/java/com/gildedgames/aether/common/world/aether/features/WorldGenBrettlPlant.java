@@ -38,11 +38,11 @@ public class WorldGenBrettlPlant extends WorldGenerator
 
 				if (growthStage == 0)
 				{
-					((BlockBrettlPlant) BlocksAether.brettl_plant).fullyGrowPlant(worldIn, randomPos.up(2), brettlState);
+					BlocksAether.brettl_plant.fullyGrowPlant(worldIn, randomPos.up(2), this.brettlState);
 				}
 				else if (growthStage > 0 && growthStage <= 3)
 				{
-					((BlockBrettlPlant) BlocksAether.brettl_plant).fullyPrunePlant(worldIn, randomPos.up(2), brettlState);
+					BlocksAether.brettl_plant.fullyPrunePlant(worldIn, randomPos.up(2), this.brettlState);
 				}
 				else if (growthStage > 4 && growthStage <= 8)
 				{

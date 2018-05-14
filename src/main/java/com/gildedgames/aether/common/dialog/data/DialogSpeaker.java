@@ -10,22 +10,22 @@ import java.util.Optional;
 
 public class DialogSpeaker implements IDialogSpeaker
 {
-    @SerializedName("name")
-    private String name;
+	@SerializedName("name")
+	private String name;
 
-    @SerializedName("slides")
-    private Map<String, IDialogSlide> slides;
+	@SerializedName("slides")
+	private Map<String, IDialogSlide> slides;
 
-    @Nonnull
-    @Override
-    public String getUnlocalizedName()
-    {
-        return this.name != null ? this.name : "";
-    }
+	@Nonnull
+	@Override
+	public String getUnlocalizedName()
+	{
+		return this.name != null ? this.name : "";
+	}
 
-    @Override
-    public Optional<Map<String, IDialogSlide>> getSlides()
-    {
-        return this.slides != null ? Optional.of(this.slides) : Optional.empty();
-    }
+	@Override
+	public Optional<Map<String, IDialogSlide>> getSlides()
+	{
+		return this.slides != null ? Optional.of(this.slides) : Optional.empty();
+	}
 }

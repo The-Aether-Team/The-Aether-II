@@ -29,15 +29,15 @@ public class BlockWallSkyrootSign extends BlockSkyrootSign
 	{
 		switch (state.getValue(FACING))
 		{
-		case NORTH:
-		default:
-			return SIGN_NORTH_AABB;
-		case SOUTH:
-			return SIGN_SOUTH_AABB;
-		case WEST:
-			return SIGN_WEST_AABB;
-		case EAST:
-			return SIGN_EAST_AABB;
+			case NORTH:
+			default:
+				return SIGN_NORTH_AABB;
+			case SOUTH:
+				return SIGN_SOUTH_AABB;
+			case WEST:
+				return SIGN_WEST_AABB;
+			case EAST:
+				return SIGN_EAST_AABB;
 		}
 	}
 

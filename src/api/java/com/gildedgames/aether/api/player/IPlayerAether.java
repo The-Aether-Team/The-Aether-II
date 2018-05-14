@@ -1,7 +1,6 @@
 package com.gildedgames.aether.api.player;
 
 import com.gildedgames.aether.api.dialog.IDialogController;
-import com.gildedgames.aether.api.net.data.UserFeatures;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 

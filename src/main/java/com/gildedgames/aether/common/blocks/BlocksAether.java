@@ -158,14 +158,6 @@ public class BlocksAether
 
 	public static final BlockFerrositeSand ferrosite_sand = new BlockFerrositeSand();
 
-	public static BlockCustomSnowBlock highlands_snow = new BlockCustomSnowBlock();
-
-	public static BlockCustomSnow highlands_snow_layer = new BlockCustomSnow();
-
-	public static Block highlands_ice = new BlockIce();
-
-	public static Block highlands_packed_ice = new BlockPackedIce();
-
 	public static final BlockAetherCraftingTable aether_crafting_table = new BlockAetherCraftingTable();
 
 	public static final BlockBlueberryBush blueberry_bush = new BlockBlueberryBush();
@@ -301,6 +293,14 @@ public class BlocksAether
 
 	private static final List<Block> registeredBlocks = new ArrayList<>();
 
+	public static BlockCustomSnowBlock highlands_snow = new BlockCustomSnowBlock();
+
+	public static BlockCustomSnow highlands_snow_layer = new BlockCustomSnow();
+
+	public static Block highlands_ice = new BlockIce();
+
+	public static Block highlands_packed_ice = new BlockPackedIce();
+
 	public static Block therawood_decorative = new BlockTherawoodDecorative();
 
 	public static BlockCustomCarpet cloudwool_carpet = new BlockCustomCarpet();
@@ -316,7 +316,6 @@ public class BlocksAether
 	public static Block light_skyroot_decorative = new BlockLightSkyrootDecorative();
 
 	public static Block aether_teleporter = new BlockAetherTeleporter();
-
 
 	@SubscribeEvent
 	public static void onRegisterBlocks(final RegistryEvent.Register<Block> event)

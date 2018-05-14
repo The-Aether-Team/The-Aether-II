@@ -1,15 +1,15 @@
 buildscript {
-	repositories {
-		jcenter()
-		maven {
-			name = "forge"
-			url = "http://files.minecraftforge.net/maven"
-		}
-	}
-	dependencies {
-		classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
-		classpath 'org.ajoberstar:grgit:2.2.0'
-	}
+    repositories {
+        jcenter()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath 'org.ajoberstar:grgit:2.2.0'
+    }
 }
 
 import org.ajoberstar.grgit.Grgit
@@ -18,15 +18,15 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'maven-publish'
 
 dependencies {
-	compile project(":OrbisAPI")
+    compile project(":OrbisAPI")
 }
 
 ext.config = loadConfig(file('build.properties'))
 ext.repo = Grgit.open()
 
 allprojects {
-	sourceCompatibility = 1.8
-	targetCompatibility = 1.8
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
 }
 
 version = "${config.mod_version}"
@@ -34,76 +34,76 @@ group = "com.gildedgames"
 archivesBaseName = "aether_ii"
 
 sourceSets {
-	api {
-		java { srcDir "src/api/java" }
-	}
+    api {
+        java { srcDir "src/api/java" }
+    }
 }
 
 jar {
-	from sourceSets.api.output
-	from sourceSets.main.output
+    from sourceSets.api.output
+    from sourceSets.main.output
 }
 
 minecraft {
-	version = config.forge_version
-	mappings = config.forge_mappings
+    version = config.forge_version
+    mappings = config.forge_mappings
 
-	runDir = "run"
+    runDir = "run"
 }
 
 processResources {
-	inputs.property "version", project.version
-	inputs.property "mcversion", project.minecraft.version
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
 
-	from (sourceSets.main.resources.srcDirs) {
-		include 'mcmod.info'
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
 
-		expand 'version': project.version, 'mcversion': project.minecraft.version
-	}
+        expand 'version': project.version, 'mcversion': project.minecraft.version
+    }
 
-	from (sourceSets.main.resources.srcDirs) {
-		exclude 'mcmod.info'
-	}
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
 }
 
 idea {
-	module {
-		inheritOutputDirs = true
-	}
+    module {
+        inheritOutputDirs = true
+    }
 }
 
 // We disable this because Gradle will fail to build otherwise for some reason.
 // See https://github.com/MinecraftForge/Srg2Source/issues/10
 minecraft {
-	makeObfSourceJar = false
+    makeObfSourceJar = false
 }
 
 static def loadConfig(File config) {
-	def props = new Properties()
-	config.withInputStream {
-		stream -> props.load(stream)
-	}
-	return new ConfigSlurper().parse(props)
+    def props = new Properties()
+    config.withInputStream {
+        stream -> props.load(stream)
+    }
+    return new ConfigSlurper().parse(props)
 }
 
 task signJar(type: SignJar, dependsOn: reobfJar) {
-	if (project.hasProperty("aether_keystore")) {
-		keyStore = project.aether_keystore
-		alias = project.aether_keystore_alias
-		storePass = project.aether_keystore_pass
-		keyPass = project.aether_keystore_pass
-		inputFile = jar.archivePath
-		outputFile = jar.archivePath
-	}
+    if (project.hasProperty("aether_keystore")) {
+        keyStore = project.aether_keystore
+        alias = project.aether_keystore_alias
+        storePass = project.aether_keystore_pass
+        keyPass = project.aether_keystore_pass
+        inputFile = jar.archivePath
+        outputFile = jar.archivePath
+    }
 }
 
 task apiJar(type: Jar) {
-	classifier = "api"
+    classifier = "api"
 
-	from sourceSets.api.output
+    from sourceSets.api.output
 }
 
 artifacts {
-	archives jar
-	archives apiJar
+    archives jar
+    archives apiJar
 }

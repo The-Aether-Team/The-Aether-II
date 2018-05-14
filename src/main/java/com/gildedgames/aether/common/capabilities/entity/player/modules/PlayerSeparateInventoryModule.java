@@ -6,7 +6,6 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModu
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketSwitchToAetherInventory;
 import com.gildedgames.aether.common.network.packets.PacketSwitchToMinecraftInventory;
-import com.gildedgames.aether.common.util.helpers.AetherHelper;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.nbt.NBTTagCompound;

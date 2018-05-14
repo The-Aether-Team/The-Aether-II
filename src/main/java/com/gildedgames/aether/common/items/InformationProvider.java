@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface InformationProvider
 {
-    @SideOnly(Side.CLIENT)
+	@SideOnly(Side.CLIENT)
 	void addInformation(ItemStack stack, List<String> tooltip, ITooltipFlag flag);
 
 }

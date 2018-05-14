@@ -16,6 +16,7 @@ public interface ITabClient extends ITab
 	 */
 	@SideOnly(Side.CLIENT)
 	boolean isTabValid(GuiScreen gui);
+
 	/**
 	 * Called when the player selects another {@link ITab} within this {@link ITab}'s parent {@link ITabGroupHandler}. This includes
 	 * when the {@link ITabGroupHandler} is closed and this {@link ITab} was open.

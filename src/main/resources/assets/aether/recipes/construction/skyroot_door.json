@@ -1,21 +1,17 @@
 {
 	"type": "forge:ore_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"XX",
 		"XX",
 		"XX"
 	],
-	"key":
-	{
-		"X":
-		{
+	"key": {
+		"X": {
 			"type": "forge:ore_dict",
 			"ore": "skyrootplanks"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "aether:skyroot_door_item",
 		"count": 3
 	}

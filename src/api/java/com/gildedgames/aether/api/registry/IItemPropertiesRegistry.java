@@ -19,7 +19,7 @@ public interface IItemPropertiesRegistry
 	/**
 	 * Registers an item with the registry, throwing an {@link IllegalArgumentException} if
 	 * it is already registered.
-	 * 
+	 *
 	 * @param item The item to register
 	 * @param def The {@link IItemProperties} to register
 	 */

@@ -55,12 +55,7 @@ public class NoisyEdges
 
 		points.add(h);
 
-		if (!subdivide(rand, points, h, Point.interpolate(f, c, s), c, Point.interpolate(i, d, t), minLength))
-		{
-			return false;
-		}
-
-		return true;
+		return subdivide(rand, points, h, Point.interpolate(f, c, s), c, Point.interpolate(i, d, t), minLength);
 	}
 
 	public static Vector<Point> buildNoisyLineSegments(final Random rand, final Point a, final Point b, final Point c, final Point d, final double minLength)

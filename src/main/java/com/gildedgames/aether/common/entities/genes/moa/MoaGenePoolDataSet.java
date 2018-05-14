@@ -14,23 +14,6 @@ import java.util.Random;
 public class MoaGenePoolDataSet<T extends Gene>
 {
 
-	private LinkedList<T> genes = Lists.newLinkedList();
-
-	private MoaGenePoolDataSet()
-	{
-
-	}
-
-	private LinkedList<T> genes()
-	{
-		return this.genes;
-	}
-
-	public T pickRandom(Random random)
-	{
-		return this.genes().get(random.nextInt(this.genes().size()));
-	}
-
 	public static final MoaGenePoolDataSet<DataGene<Color>> KERATIN = new MoaGenePoolDataSet<>();
 
 	public static final MoaGenePoolDataSet<DataGene<Color>> EYES = new MoaGenePoolDataSet<>();
@@ -85,6 +68,23 @@ public class MoaGenePoolDataSet<T extends Gene>
 		WING_STRENGTH.genes().add(new DataGene<>("moa.wing_strength.normal", 2, new SimpleInheritance(SimpleInheritance.Type.RANDOM)));
 		WING_STRENGTH.genes().add(new DataGene<>("moa.wing_strength.strong", 3, new SimpleInheritance(SimpleInheritance.Type.RANDOM)));
 		WING_STRENGTH.genes().add(new DataGene<>("moa.wing_strength.excellent", 4, new SimpleInheritance(SimpleInheritance.Type.RANDOM)));
+	}
+
+	private LinkedList<T> genes = Lists.newLinkedList();
+
+	private MoaGenePoolDataSet()
+	{
+
+	}
+
+	private LinkedList<T> genes()
+	{
+		return this.genes;
+	}
+
+	public T pickRandom(Random random)
+	{
+		return this.genes().get(random.nextInt(this.genes().size()));
 	}
 
 }

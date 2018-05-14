@@ -1,19 +1,15 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"XXX",
 		"XXX"
 	],
-	"key":
-	{
-		"X":
-		{
+	"key": {
+		"X": {
 			"item": "aether:crude_scatterglass"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "aether:crude_scatterglass_pane",
 		"count": 16
 	}

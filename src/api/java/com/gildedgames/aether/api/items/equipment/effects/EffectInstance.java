@@ -19,7 +19,9 @@ public abstract class EffectInstance
 	 *
 	 * @param player The player entity that is updating
 	 */
-	public void onEntityUpdate(IPlayerAether player) { }
+	public void onEntityUpdate(IPlayerAether player)
+	{
+	}
 
 	/**
 	 * Called when this instance is removed from a player. This is only called once per entity
@@ -28,7 +30,9 @@ public abstract class EffectInstance
 	 *
 	 * @param player The player this instance was removed from
 	 */
-	public void onInstanceRemoved(IPlayerAether player) { }
+	public void onInstanceRemoved(IPlayerAether player)
+	{
+	}
 
 	/**
 	 * Called when this instance is added to a player. This is guaranteed to called exactly once,
@@ -36,7 +40,9 @@ public abstract class EffectInstance
 	 *
 	 * @param player The player this instance was added to
 	 */
-	public void onInstanceAdded(IPlayerAether player) { }
+	public void onInstanceAdded(IPlayerAether player)
+	{
+	}
 
 	/**
 	 * Adds information about this instance to {@param label}, such as the stats

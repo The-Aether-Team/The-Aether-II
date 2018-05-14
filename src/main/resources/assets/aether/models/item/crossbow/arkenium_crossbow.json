@@ -25,27 +25,27 @@
 			"scale": [ 0.8, 0.8, 0.8 ]
 		}
 	},
-    "overrides": [
-        {
-            "predicate": {
-                "pulling": 1,
-                "pull": 0.25
-            },
-            "model": "aether:item/crossbow/arkenium/loading1"
-        },
-        {
-            "predicate": {
-                "pulling": 1,
-                "pull": 0.5
-            },
-            "model": "aether:item/crossbow/arkenium/loading2"
-        },
-        {
-            "predicate": {
-                "pulling": 1,
-                "pull": 1
-            },
-            "model": "aether:item/crossbow/arkenium/loaded"
-        }
-    ]
+	"overrides": [
+		{
+			"predicate": {
+				"pulling": 1,
+				"pull": 0.25
+			},
+			"model": "aether:item/crossbow/arkenium/loading1"
+		},
+		{
+			"predicate": {
+				"pulling": 1,
+				"pull": 0.5
+			},
+			"model": "aether:item/crossbow/arkenium/loading2"
+		},
+		{
+			"predicate": {
+				"pulling": 1,
+				"pull": 1
+			},
+			"model": "aether:item/crossbow/arkenium/loaded"
+		}
+	]
 }

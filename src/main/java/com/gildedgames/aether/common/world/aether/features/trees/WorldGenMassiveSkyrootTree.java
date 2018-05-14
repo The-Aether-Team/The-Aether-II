@@ -178,210 +178,210 @@ public class WorldGenMassiveSkyrootTree extends WorldGenAbstractTree
 
 					switch (side)
 					{
-					case (0):
-						for (int x2 = x; x2 <= x + branchLength; x2++)
-						{
-							world.setBlockState(new BlockPos(x2, y2, z), log);
+						case (0):
+							for (int x2 = x; x2 <= x + branchLength; x2++)
+							{
+								world.setBlockState(new BlockPos(x2, y2, z), log);
 
-							this.setBlockAirCheck(world, x2, y2 + 1, z, this.leaves);
-							this.setBlockAirCheck(world, x2, y2 - 1, z, this.leaves);
-							this.setBlockAirCheck(world, x2 + 1, y2, z + 1, this.leaves);
-							this.setBlockAirCheck(world, x2 - 1, y2, z - 1, this.leaves);
-						}
+								this.setBlockAirCheck(world, x2, y2 + 1, z, this.leaves);
+								this.setBlockAirCheck(world, x2, y2 - 1, z, this.leaves);
+								this.setBlockAirCheck(world, x2 + 1, y2, z + 1, this.leaves);
+								this.setBlockAirCheck(world, x2 - 1, y2, z - 1, this.leaves);
+							}
 
-						world.setBlockState(new BlockPos(x + (branchLength + 1), y2 + 1, z), log);
-						world.setBlockState(new BlockPos(x + (branchLength + 2), y2 + 2, z), log);
-						world.setBlockState(new BlockPos(x + (branchLength + 2), y2 + 3, z), log);
+							world.setBlockState(new BlockPos(x + (branchLength + 1), y2 + 1, z), log);
+							world.setBlockState(new BlockPos(x + (branchLength + 2), y2 + 2, z), log);
+							world.setBlockState(new BlockPos(x + (branchLength + 2), y2 + 3, z), log);
 
-						this.setBlockAirCheck(world, x + (branchLength + 1), y2 + 2, z, this.leaves);
-						this.setBlockAirCheck(world, x + (branchLength + 1), y2 + 3, z, this.leaves);
-						this.setBlockAirCheck(world, x + (branchLength + 2), y2 + 4, z, this.leaves);
+							this.setBlockAirCheck(world, x + (branchLength + 1), y2 + 2, z, this.leaves);
+							this.setBlockAirCheck(world, x + (branchLength + 1), y2 + 3, z, this.leaves);
+							this.setBlockAirCheck(world, x + (branchLength + 2), y2 + 4, z, this.leaves);
 
-						this.setBlockAirCheck(world, x + (branchLength + 3), y2 + 2, z, this.leaves);
-						this.setBlockAirCheck(world, x + (branchLength + 3), y2 + 3, z, this.leaves);
+							this.setBlockAirCheck(world, x + (branchLength + 3), y2 + 2, z, this.leaves);
+							this.setBlockAirCheck(world, x + (branchLength + 3), y2 + 3, z, this.leaves);
 
-						this.setBlockAirCheck(world, x + (branchLength + 2), y2 + 2, z - 1, this.leaves);
-						this.setBlockAirCheck(world, x + (branchLength + 2), y2 + 3, z - 1, this.leaves);
+							this.setBlockAirCheck(world, x + (branchLength + 2), y2 + 2, z - 1, this.leaves);
+							this.setBlockAirCheck(world, x + (branchLength + 2), y2 + 3, z - 1, this.leaves);
 
-						this.setBlockAirCheck(world, x + (branchLength + 2), y2 + 2, z + 1, this.leaves);
-						this.setBlockAirCheck(world, x + (branchLength + 2), y2 + 3, z + 1, this.leaves);
+							this.setBlockAirCheck(world, x + (branchLength + 2), y2 + 2, z + 1, this.leaves);
+							this.setBlockAirCheck(world, x + (branchLength + 2), y2 + 3, z + 1, this.leaves);
 
-						this.setBlockAirCheck(world, x + (branchLength + 1), y2 + 1, z - 1, this.leaves);
-						this.setBlockAirCheck(world, x + (branchLength + 1), y2 + 2, z - 1, this.leaves);
+							this.setBlockAirCheck(world, x + (branchLength + 1), y2 + 1, z - 1, this.leaves);
+							this.setBlockAirCheck(world, x + (branchLength + 1), y2 + 2, z - 1, this.leaves);
 
-						this.setBlockAirCheck(world, x + (branchLength + 1), y2 + 1, z + 1, this.leaves);
-						this.setBlockAirCheck(world, x + (branchLength + 1), y2 + 2, z + 1, this.leaves);
+							this.setBlockAirCheck(world, x + (branchLength + 1), y2 + 1, z + 1, this.leaves);
+							this.setBlockAirCheck(world, x + (branchLength + 1), y2 + 2, z + 1, this.leaves);
 
-						this.setBlockAirCheck(world, x + branchLength, y2, z - 1, this.leaves);
-						this.setBlockAirCheck(world, x + branchLength, y2 + 1, z - 1, this.leaves);
+							this.setBlockAirCheck(world, x + branchLength, y2, z - 1, this.leaves);
+							this.setBlockAirCheck(world, x + branchLength, y2 + 1, z - 1, this.leaves);
 
-						this.setBlockAirCheck(world, x + branchLength, y2, z + 1, this.leaves);
-						this.setBlockAirCheck(world, x + branchLength, y2 + 1, z + 1, this.leaves);
+							this.setBlockAirCheck(world, x + branchLength, y2, z + 1, this.leaves);
+							this.setBlockAirCheck(world, x + branchLength, y2 + 1, z + 1, this.leaves);
 
-						this.setBlockAirCheck(world, x + (branchLength - 1), y2, z - 1, this.leaves);
-						this.setBlockAirCheck(world, x + (branchLength - 1), y2, z + 1, this.leaves);
+							this.setBlockAirCheck(world, x + (branchLength - 1), y2, z - 1, this.leaves);
+							this.setBlockAirCheck(world, x + (branchLength - 1), y2, z + 1, this.leaves);
 
-						this.setBlockAirCheck(world, x + (branchLength - 2), y2 - 1, z, this.leaves);
-						this.setBlockAirCheck(world, x + (branchLength - 1), y2 - 1, z, this.leaves);
-						this.setBlockAirCheck(world, x + branchLength, y2 - 1, z, this.leaves);
+							this.setBlockAirCheck(world, x + (branchLength - 2), y2 - 1, z, this.leaves);
+							this.setBlockAirCheck(world, x + (branchLength - 1), y2 - 1, z, this.leaves);
+							this.setBlockAirCheck(world, x + branchLength, y2 - 1, z, this.leaves);
 
-						this.setBlockAirCheck(world, x + (branchLength + 1), y2, z, this.leaves);
-						this.setBlockAirCheck(world, x + (branchLength + 2), y2 + 1, z, this.leaves);
+							this.setBlockAirCheck(world, x + (branchLength + 1), y2, z, this.leaves);
+							this.setBlockAirCheck(world, x + (branchLength + 2), y2 + 1, z, this.leaves);
 
-						break;
+							break;
 
-					case (1):
-						for (int x3 = x; x3 >= x - branchLength; x3--)
-						{
-							world.setBlockState(new BlockPos(x3, y2, z), log);
-							this.setBlockAirCheck(world, x3, y2 + 1, z, this.leaves);
-							this.setBlockAirCheck(world, x3, y2 - 1, z, this.leaves);
-							this.setBlockAirCheck(world, x3 + 1, y2, z + 1, this.leaves);
-							this.setBlockAirCheck(world, x3 - 1, y2, z - 1, this.leaves);
-						}
+						case (1):
+							for (int x3 = x; x3 >= x - branchLength; x3--)
+							{
+								world.setBlockState(new BlockPos(x3, y2, z), log);
+								this.setBlockAirCheck(world, x3, y2 + 1, z, this.leaves);
+								this.setBlockAirCheck(world, x3, y2 - 1, z, this.leaves);
+								this.setBlockAirCheck(world, x3 + 1, y2, z + 1, this.leaves);
+								this.setBlockAirCheck(world, x3 - 1, y2, z - 1, this.leaves);
+							}
 
-						world.setBlockState(new BlockPos(x - (branchLength + 1), y2 + 1, z), log);
-						world.setBlockState(new BlockPos(x - (branchLength + 2), y2 + 2, z), log);
-						world.setBlockState(new BlockPos(x - (branchLength + 2), y2 + 3, z), log);
+							world.setBlockState(new BlockPos(x - (branchLength + 1), y2 + 1, z), log);
+							world.setBlockState(new BlockPos(x - (branchLength + 2), y2 + 2, z), log);
+							world.setBlockState(new BlockPos(x - (branchLength + 2), y2 + 3, z), log);
 
-						this.setBlockAirCheck(world, x - (branchLength + 1), y2 + 2, z, this.leaves);
-						this.setBlockAirCheck(world, x - (branchLength + 1), y2 + 3, z, this.leaves);
-						this.setBlockAirCheck(world, x - (branchLength + 2), y2 + 4, z, this.leaves);
+							this.setBlockAirCheck(world, x - (branchLength + 1), y2 + 2, z, this.leaves);
+							this.setBlockAirCheck(world, x - (branchLength + 1), y2 + 3, z, this.leaves);
+							this.setBlockAirCheck(world, x - (branchLength + 2), y2 + 4, z, this.leaves);
 
-						this.setBlockAirCheck(world, x - (branchLength + 3), y2 + 2, z, this.leaves);
-						this.setBlockAirCheck(world, x - (branchLength + 3), y2 + 3, z, this.leaves);
+							this.setBlockAirCheck(world, x - (branchLength + 3), y2 + 2, z, this.leaves);
+							this.setBlockAirCheck(world, x - (branchLength + 3), y2 + 3, z, this.leaves);
 
-						this.setBlockAirCheck(world, x - (branchLength + 2), y2 + 2, z - 1, this.leaves);
-						this.setBlockAirCheck(world, x - (branchLength + 2), y2 + 3, z - 1, this.leaves);
+							this.setBlockAirCheck(world, x - (branchLength + 2), y2 + 2, z - 1, this.leaves);
+							this.setBlockAirCheck(world, x - (branchLength + 2), y2 + 3, z - 1, this.leaves);
 
-						this.setBlockAirCheck(world, x - (branchLength + 2), y2 + 2, z + 1, this.leaves);
-						this.setBlockAirCheck(world, x - (branchLength + 2), y2 + 3, z + 1, this.leaves);
+							this.setBlockAirCheck(world, x - (branchLength + 2), y2 + 2, z + 1, this.leaves);
+							this.setBlockAirCheck(world, x - (branchLength + 2), y2 + 3, z + 1, this.leaves);
 
-						this.setBlockAirCheck(world, x - (branchLength + 1), y2 + 1, z - 1, this.leaves);
-						this.setBlockAirCheck(world, x - (branchLength + 1), y2 + 2, z - 1, this.leaves);
+							this.setBlockAirCheck(world, x - (branchLength + 1), y2 + 1, z - 1, this.leaves);
+							this.setBlockAirCheck(world, x - (branchLength + 1), y2 + 2, z - 1, this.leaves);
 
-						this.setBlockAirCheck(world, x - (branchLength + 1), y2 + 1, z + 1, this.leaves);
-						this.setBlockAirCheck(world, x - (branchLength + 1), y2 + 2, z + 1, this.leaves);
+							this.setBlockAirCheck(world, x - (branchLength + 1), y2 + 1, z + 1, this.leaves);
+							this.setBlockAirCheck(world, x - (branchLength + 1), y2 + 2, z + 1, this.leaves);
 
-						this.setBlockAirCheck(world, x - branchLength, y2, z - 1, this.leaves);
-						this.setBlockAirCheck(world, x - branchLength, y2 + 1, z - 1, this.leaves);
+							this.setBlockAirCheck(world, x - branchLength, y2, z - 1, this.leaves);
+							this.setBlockAirCheck(world, x - branchLength, y2 + 1, z - 1, this.leaves);
 
-						this.setBlockAirCheck(world, x - branchLength, y2, z + 1, this.leaves);
-						this.setBlockAirCheck(world, x - branchLength, y2 + 1, z + 1, this.leaves);
+							this.setBlockAirCheck(world, x - branchLength, y2, z + 1, this.leaves);
+							this.setBlockAirCheck(world, x - branchLength, y2 + 1, z + 1, this.leaves);
 
-						this.setBlockAirCheck(world, x - (branchLength - 1), y2, z - 1, this.leaves);
-						this.setBlockAirCheck(world, x - (branchLength - 1), y2, z + 1, this.leaves);
+							this.setBlockAirCheck(world, x - (branchLength - 1), y2, z - 1, this.leaves);
+							this.setBlockAirCheck(world, x - (branchLength - 1), y2, z + 1, this.leaves);
 
-						this.setBlockAirCheck(world, x - (branchLength - 2), y2 - 1, z, this.leaves);
-						this.setBlockAirCheck(world, x - (branchLength - 1), y2 - 1, z, this.leaves);
-						this.setBlockAirCheck(world, x - branchLength, y2 - 1, z, this.leaves);
+							this.setBlockAirCheck(world, x - (branchLength - 2), y2 - 1, z, this.leaves);
+							this.setBlockAirCheck(world, x - (branchLength - 1), y2 - 1, z, this.leaves);
+							this.setBlockAirCheck(world, x - branchLength, y2 - 1, z, this.leaves);
 
-						this.setBlockAirCheck(world, x - (branchLength + 1), y2, z, this.leaves);
-						this.setBlockAirCheck(world, x - (branchLength + 2), y2 + 1, z, this.leaves);
+							this.setBlockAirCheck(world, x - (branchLength + 1), y2, z, this.leaves);
+							this.setBlockAirCheck(world, x - (branchLength + 2), y2 + 1, z, this.leaves);
 
-						break;
+							break;
 
-					case (2):
-						for (int z2 = z; z2 <= z + branchLength; z2++)
-						{
-							world.setBlockState(new BlockPos(x, y2, z2), log);
-							this.setBlockAirCheck(world, x, y2 + 1, z2, this.leaves);
-							this.setBlockAirCheck(world, x, y2 - 1, z2, this.leaves);
-							this.setBlockAirCheck(world, x + 1, y2, z2, this.leaves);
-							this.setBlockAirCheck(world, x - 1, y2, z2, this.leaves);
-						}
+						case (2):
+							for (int z2 = z; z2 <= z + branchLength; z2++)
+							{
+								world.setBlockState(new BlockPos(x, y2, z2), log);
+								this.setBlockAirCheck(world, x, y2 + 1, z2, this.leaves);
+								this.setBlockAirCheck(world, x, y2 - 1, z2, this.leaves);
+								this.setBlockAirCheck(world, x + 1, y2, z2, this.leaves);
+								this.setBlockAirCheck(world, x - 1, y2, z2, this.leaves);
+							}
 
-						world.setBlockState(new BlockPos(x, y2 + 1, z + (branchLength + 1)), log);
-						world.setBlockState(new BlockPos(x, y2 + 2, z + (branchLength + 2)), log);
-						world.setBlockState(new BlockPos(x, y2 + 3, z + (branchLength + 2)), log);
+							world.setBlockState(new BlockPos(x, y2 + 1, z + (branchLength + 1)), log);
+							world.setBlockState(new BlockPos(x, y2 + 2, z + (branchLength + 2)), log);
+							world.setBlockState(new BlockPos(x, y2 + 3, z + (branchLength + 2)), log);
 
-						this.setBlockAirCheck(world, x, y2 + 2, z + (branchLength + 1), this.leaves);
-						this.setBlockAirCheck(world, x, y2 + 3, z + (branchLength + 1), this.leaves);
-						this.setBlockAirCheck(world, x, y2 + 4, z + (branchLength + 2), this.leaves);
+							this.setBlockAirCheck(world, x, y2 + 2, z + (branchLength + 1), this.leaves);
+							this.setBlockAirCheck(world, x, y2 + 3, z + (branchLength + 1), this.leaves);
+							this.setBlockAirCheck(world, x, y2 + 4, z + (branchLength + 2), this.leaves);
 
-						this.setBlockAirCheck(world, x, y2 + 2, z + (branchLength + 3), this.leaves);
-						this.setBlockAirCheck(world, x, y2 + 3, z + (branchLength + 3), this.leaves);
+							this.setBlockAirCheck(world, x, y2 + 2, z + (branchLength + 3), this.leaves);
+							this.setBlockAirCheck(world, x, y2 + 3, z + (branchLength + 3), this.leaves);
 
-						this.setBlockAirCheck(world, x - 1, y2 + 2, z + (branchLength + 2), this.leaves);
-						this.setBlockAirCheck(world, x - 1, y2 + 3, z + (branchLength + 2), this.leaves);
+							this.setBlockAirCheck(world, x - 1, y2 + 2, z + (branchLength + 2), this.leaves);
+							this.setBlockAirCheck(world, x - 1, y2 + 3, z + (branchLength + 2), this.leaves);
 
-						this.setBlockAirCheck(world, x + 1, y2 + 2, z + (branchLength + 2), this.leaves);
-						this.setBlockAirCheck(world, x + 1, y2 + 3, z + (branchLength + 2), this.leaves);
+							this.setBlockAirCheck(world, x + 1, y2 + 2, z + (branchLength + 2), this.leaves);
+							this.setBlockAirCheck(world, x + 1, y2 + 3, z + (branchLength + 2), this.leaves);
 
-						this.setBlockAirCheck(world, x - 1, y2 + 1, z + (branchLength + 1), this.leaves);
-						this.setBlockAirCheck(world, x - 1, y2 + 2, z + (branchLength + 1), this.leaves);
+							this.setBlockAirCheck(world, x - 1, y2 + 1, z + (branchLength + 1), this.leaves);
+							this.setBlockAirCheck(world, x - 1, y2 + 2, z + (branchLength + 1), this.leaves);
 
-						this.setBlockAirCheck(world, x + 1, y2 + 1, z + (branchLength + 1), this.leaves);
-						this.setBlockAirCheck(world, x + 1, y2 + 2, z + (branchLength + 1), this.leaves);
+							this.setBlockAirCheck(world, x + 1, y2 + 1, z + (branchLength + 1), this.leaves);
+							this.setBlockAirCheck(world, x + 1, y2 + 2, z + (branchLength + 1), this.leaves);
 
-						this.setBlockAirCheck(world, x - 1, y2, z + branchLength, this.leaves);
-						this.setBlockAirCheck(world, x - 1, y2 + 1, z + branchLength, this.leaves);
+							this.setBlockAirCheck(world, x - 1, y2, z + branchLength, this.leaves);
+							this.setBlockAirCheck(world, x - 1, y2 + 1, z + branchLength, this.leaves);
 
-						this.setBlockAirCheck(world, x + 1, y2, z + branchLength, this.leaves);
-						this.setBlockAirCheck(world, x + 1, y2 + 1, z + branchLength, this.leaves);
+							this.setBlockAirCheck(world, x + 1, y2, z + branchLength, this.leaves);
+							this.setBlockAirCheck(world, x + 1, y2 + 1, z + branchLength, this.leaves);
 
-						this.setBlockAirCheck(world, x - 1, y2, z + (branchLength - 1), this.leaves);
-						this.setBlockAirCheck(world, x + 1, y2, z + (branchLength - 1), this.leaves);
+							this.setBlockAirCheck(world, x - 1, y2, z + (branchLength - 1), this.leaves);
+							this.setBlockAirCheck(world, x + 1, y2, z + (branchLength - 1), this.leaves);
 
-						this.setBlockAirCheck(world, x, y2 - 1, z + (branchLength - 2), this.leaves);
-						this.setBlockAirCheck(world, x, y2 - 1, z + (branchLength - 1), this.leaves);
-						this.setBlockAirCheck(world, x, y2 - 1, z + branchLength, this.leaves);
+							this.setBlockAirCheck(world, x, y2 - 1, z + (branchLength - 2), this.leaves);
+							this.setBlockAirCheck(world, x, y2 - 1, z + (branchLength - 1), this.leaves);
+							this.setBlockAirCheck(world, x, y2 - 1, z + branchLength, this.leaves);
 
-						this.setBlockAirCheck(world, x, y2, z + (branchLength + 1), this.leaves);
-						this.setBlockAirCheck(world, x, y2 + 1, z + (branchLength + 2), this.leaves);
+							this.setBlockAirCheck(world, x, y2, z + (branchLength + 1), this.leaves);
+							this.setBlockAirCheck(world, x, y2 + 1, z + (branchLength + 2), this.leaves);
 
-						break;
+							break;
 
-					case (3):
-						for (int z3 = z; z3 >= z - branchLength; z3--)
-						{
-							world.setBlockState(new BlockPos(x, y2, z3), log);
-							this.setBlockAirCheck(world, x, y2 + 1, z3, this.leaves);
-							this.setBlockAirCheck(world, x, y2 - 1, z3, this.leaves);
-							this.setBlockAirCheck(world, x + 1, y2, z3, this.leaves);
-							this.setBlockAirCheck(world, x - 1, y2, z3, this.leaves);
-						}
+						case (3):
+							for (int z3 = z; z3 >= z - branchLength; z3--)
+							{
+								world.setBlockState(new BlockPos(x, y2, z3), log);
+								this.setBlockAirCheck(world, x, y2 + 1, z3, this.leaves);
+								this.setBlockAirCheck(world, x, y2 - 1, z3, this.leaves);
+								this.setBlockAirCheck(world, x + 1, y2, z3, this.leaves);
+								this.setBlockAirCheck(world, x - 1, y2, z3, this.leaves);
+							}
 
-						world.setBlockState(new BlockPos(x, y2 + 1, z - (branchLength + 1)), log);
-						world.setBlockState(new BlockPos(x, y2 + 2, z - (branchLength + 2)), log);
-						world.setBlockState(new BlockPos(x, y2 + 3, z - (branchLength + 2)), log);
+							world.setBlockState(new BlockPos(x, y2 + 1, z - (branchLength + 1)), log);
+							world.setBlockState(new BlockPos(x, y2 + 2, z - (branchLength + 2)), log);
+							world.setBlockState(new BlockPos(x, y2 + 3, z - (branchLength + 2)), log);
 
-						this.setBlockAirCheck(world, x, y2 + 2, z - (branchLength + 1), this.leaves);
-						this.setBlockAirCheck(world, x, y2 + 3, z - (branchLength + 1), this.leaves);
-						this.setBlockAirCheck(world, x, y2 + 4, z - (branchLength + 2), this.leaves);
+							this.setBlockAirCheck(world, x, y2 + 2, z - (branchLength + 1), this.leaves);
+							this.setBlockAirCheck(world, x, y2 + 3, z - (branchLength + 1), this.leaves);
+							this.setBlockAirCheck(world, x, y2 + 4, z - (branchLength + 2), this.leaves);
 
-						this.setBlockAirCheck(world, x, y2 + 2, z - (branchLength + 3), this.leaves);
-						this.setBlockAirCheck(world, x, y2 + 3, z - (branchLength + 3), this.leaves);
+							this.setBlockAirCheck(world, x, y2 + 2, z - (branchLength + 3), this.leaves);
+							this.setBlockAirCheck(world, x, y2 + 3, z - (branchLength + 3), this.leaves);
 
-						this.setBlockAirCheck(world, x - 1, y2 + 2, z - (branchLength + 2), this.leaves);
-						this.setBlockAirCheck(world, x - 1, y2 + 3, z - (branchLength + 2), this.leaves);
+							this.setBlockAirCheck(world, x - 1, y2 + 2, z - (branchLength + 2), this.leaves);
+							this.setBlockAirCheck(world, x - 1, y2 + 3, z - (branchLength + 2), this.leaves);
 
-						this.setBlockAirCheck(world, x + 1, y2 + 2, z - (branchLength + 2), this.leaves);
-						this.setBlockAirCheck(world, x + 1, y2 + 3, z - (branchLength + 2), this.leaves);
+							this.setBlockAirCheck(world, x + 1, y2 + 2, z - (branchLength + 2), this.leaves);
+							this.setBlockAirCheck(world, x + 1, y2 + 3, z - (branchLength + 2), this.leaves);
 
-						this.setBlockAirCheck(world, x - 1, y2 + 1, z - (branchLength + 1), this.leaves);
-						this.setBlockAirCheck(world, x - 1, y2 + 2, z - (branchLength + 1), this.leaves);
+							this.setBlockAirCheck(world, x - 1, y2 + 1, z - (branchLength + 1), this.leaves);
+							this.setBlockAirCheck(world, x - 1, y2 + 2, z - (branchLength + 1), this.leaves);
 
-						this.setBlockAirCheck(world, x + 1, y2 + 1, z - (branchLength + 1), this.leaves);
-						this.setBlockAirCheck(world, x + 1, y2 + 2, z - (branchLength + 1), this.leaves);
+							this.setBlockAirCheck(world, x + 1, y2 + 1, z - (branchLength + 1), this.leaves);
+							this.setBlockAirCheck(world, x + 1, y2 + 2, z - (branchLength + 1), this.leaves);
 
-						this.setBlockAirCheck(world, x - 1, y2, z - branchLength, this.leaves);
-						this.setBlockAirCheck(world, x - 1, y2 + 1, z - branchLength, this.leaves);
+							this.setBlockAirCheck(world, x - 1, y2, z - branchLength, this.leaves);
+							this.setBlockAirCheck(world, x - 1, y2 + 1, z - branchLength, this.leaves);
 
-						this.setBlockAirCheck(world, x + 1, y2, z - branchLength, this.leaves);
-						this.setBlockAirCheck(world, x + 1, y2 + 1, z - branchLength, this.leaves);
+							this.setBlockAirCheck(world, x + 1, y2, z - branchLength, this.leaves);
+							this.setBlockAirCheck(world, x + 1, y2 + 1, z - branchLength, this.leaves);
 
-						this.setBlockAirCheck(world, x - 1, y2, z - (branchLength - 1), this.leaves);
-						this.setBlockAirCheck(world, x + 1, y2, z - (branchLength - 1), this.leaves);
+							this.setBlockAirCheck(world, x - 1, y2, z - (branchLength - 1), this.leaves);
+							this.setBlockAirCheck(world, x + 1, y2, z - (branchLength - 1), this.leaves);
 
-						this.setBlockAirCheck(world, x, y2 - 1, z - (branchLength - 2), this.leaves);
-						this.setBlockAirCheck(world, x, y2 - 1, z - (branchLength - 1), this.leaves);
-						this.setBlockAirCheck(world, x, y2 - 1, z - branchLength, this.leaves);
+							this.setBlockAirCheck(world, x, y2 - 1, z - (branchLength - 2), this.leaves);
+							this.setBlockAirCheck(world, x, y2 - 1, z - (branchLength - 1), this.leaves);
+							this.setBlockAirCheck(world, x, y2 - 1, z - branchLength, this.leaves);
 
-						this.setBlockAirCheck(world, x, y2, z - (branchLength + 1), this.leaves);
-						this.setBlockAirCheck(world, x, y2 + 1, z - (branchLength + 2), this.leaves);
+							this.setBlockAirCheck(world, x, y2, z - (branchLength + 1), this.leaves);
+							this.setBlockAirCheck(world, x, y2 + 1, z - (branchLength + 2), this.leaves);
 
-						break;
+							break;
 					}
 
 					side++;

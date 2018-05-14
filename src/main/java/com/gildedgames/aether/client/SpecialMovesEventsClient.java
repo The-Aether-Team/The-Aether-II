@@ -7,11 +7,6 @@ import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketSpecialMovement;
 import com.gildedgames.aether.common.util.helpers.AetherHelper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.Mod;
@@ -43,7 +38,7 @@ public class SpecialMovesEventsClient
 				int ticks = module.getTicksRolling();
 				int ticksRequired = module.getTicksRollingMax();
 
-				float rollingPercent = Math.min(1.0F, ((float)ticks + (float)event.getRenderPartialTicks()) / ticksRequired);
+				float rollingPercent = Math.min(1.0F, ((float) ticks + (float) event.getRenderPartialTicks()) / ticksRequired);
 
 				float fovMod = (float) AetherCore.CONFIG.getRollFOV();
 
@@ -80,7 +75,7 @@ public class SpecialMovesEventsClient
 			int ticks = module.getTicksRolling();
 			int ticksRequired = module.getTicksRollingMax();
 
-			float rollingPercent = Math.min(1.0F, ((float)ticks + (float)event.getRenderPartialTicks()) / ticksRequired);
+			float rollingPercent = Math.min(1.0F, ((float) ticks + (float) event.getRenderPartialTicks()) / ticksRequired);
 
 			float cameraTilt = (float) AetherCore.CONFIG.getRollCameraTilt();
 

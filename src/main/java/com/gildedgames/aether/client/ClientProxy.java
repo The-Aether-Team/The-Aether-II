@@ -109,7 +109,7 @@ public class ClientProxy extends CommonProxy
 						z + (r.nextDouble() * (r.nextBoolean() ? range : -range)),
 						(r.nextDouble() * (r.nextBoolean() ? range : -range)) * 0.2, 0.075 * r.nextDouble(),
 						(r.nextDouble() * (r.nextBoolean() ? range : -range)) * 0.2);
-				}
+			}
 
 			if (r.nextInt(4) == 0)
 			{
@@ -117,7 +117,7 @@ public class ClientProxy extends CommonProxy
 						z + (r.nextDouble() * (r.nextBoolean() ? range : -range)),
 						(r.nextDouble() * (r.nextBoolean() ? range : -range)) * 0.1, 0.1 * r.nextDouble(),
 						(r.nextDouble() * (r.nextBoolean() ? range : -range)) * 0.1);
-				}
+			}
 
 			if (r.nextInt(4) == 0)
 			{
@@ -144,7 +144,7 @@ public class ClientProxy extends CommonProxy
 						z + (r.nextDouble() * (r.nextBoolean() ? range : -range)),
 						(r.nextDouble() * (r.nextBoolean() ? range : -range)) * 0.001, 0.075 * r.nextDouble(),
 						(r.nextDouble() * (r.nextBoolean() ? range : -range)) * 0.001);
-				}
+			}
 
 			if (r.nextInt(4) == 0)
 			{

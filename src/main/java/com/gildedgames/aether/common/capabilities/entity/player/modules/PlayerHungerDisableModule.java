@@ -73,7 +73,7 @@ public class PlayerHungerDisableModule extends PlayerAetherModule
 	@Override
 	public void onUpdate()
 	{
-		
+
 	}
 
 	@Override

@@ -3,7 +3,6 @@ package com.gildedgames.aether.common.world.aether.island.nodename.as3delaunay;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Stack;
 
 public final class Site implements ICoord
@@ -32,7 +31,7 @@ public final class Site implements ICoord
 
 	public Site(final Point p, final int index, final double weight, final Color color)
 	{
-		init(p, index, weight, color);
+		this.init(p, index, weight, color);
 	}
 
 	public static Site create(final Point p, final int index, final double weight, final Color color)
@@ -50,14 +49,7 @@ public final class Site implements ICoord
 	public static void sortSites(final ArrayList<Site> sites)
 	{
 		//sites.sort(Site.compare);
-		Collections.sort(sites, new Comparator<Site>()
-		{
-			@Override
-			public int compare(final Site o1, final Site o2)
-			{
-				return (int) Site.compare(o1, o2);
-			}
-		});
+		sites.sort((o1, o2) -> (int) compare(o1, o2));
 	}
 
 	/**
@@ -105,91 +97,84 @@ public final class Site implements ICoord
 	@Override
 	public Point get_coord()
 	{
-		return _coord;
+		return this._coord;
 	}
 
 	private Site init(final Point p, final int index, final double weight, final Color color)
 	{
-		_coord = p;
-		_siteIndex = index;
+		this._coord = p;
+		this._siteIndex = index;
 		this.weight = weight;
 		this.color = color;
-		_edges = new ArrayList();
-		_region = null;
+		this._edges = new ArrayList();
+		this._region = null;
 		return this;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "Site " + _siteIndex + ": " + get_coord();
+		return "Site " + this._siteIndex + ": " + this.get_coord();
 	}
 
 	private void move(final Point p)
 	{
-		clear();
-		_coord = p;
+		this.clear();
+		this._coord = p;
 	}
 
 	public void dispose()
 	{
-		_coord = null;
-		clear();
+		this._coord = null;
+		this.clear();
 		_pool.push(this);
 	}
 
 	private void clear()
 	{
-		if (_edges != null)
+		if (this._edges != null)
 		{
-			_edges.clear();
-			_edges = null;
+			this._edges.clear();
+			this._edges = null;
 		}
-		if (_edgeOrientations != null)
+		if (this._edgeOrientations != null)
 		{
-			_edgeOrientations.clear();
-			_edgeOrientations = null;
+			this._edgeOrientations.clear();
+			this._edgeOrientations = null;
 		}
-		if (_region != null)
+		if (this._region != null)
 		{
-			_region.clear();
-			_region = null;
+			this._region.clear();
+			this._region = null;
 		}
 	}
 
 	void addEdge(final VoronoiEdge edge)
 	{
-		_edges.add(edge);
+		this._edges.add(edge);
 	}
 
 	public VoronoiEdge nearestEdge()
 	{
 		// _edges.sort(VoronoiEdge.compareSitesDistances);
-		Collections.sort(_edges, new Comparator<VoronoiEdge>()
-		{
-			@Override
-			public int compare(final VoronoiEdge o1, final VoronoiEdge o2)
-			{
-				return (int) VoronoiEdge.compareSitesDistances(o1, o2);
-			}
-		});
-		return _edges.get(0);
+		this._edges.sort((o1, o2) -> (int) VoronoiEdge.compareSitesDistances(o1, o2));
+		return this._edges.get(0);
 	}
 
 	ArrayList<Site> neighborSites()
 	{
-		if (_edges == null || _edges.isEmpty())
+		if (this._edges == null || this._edges.isEmpty())
 		{
 			return new ArrayList();
 		}
-		if (_edgeOrientations == null)
+		if (this._edgeOrientations == null)
 		{
-			reorderEdges();
+			this.reorderEdges();
 		}
 		final ArrayList<Site> list = new ArrayList();
-		for (final VoronoiEdge edge : _edges)
+		for (final VoronoiEdge edge : this._edges)
 		{
-			list.add(neighborSite(edge));
+			list.add(this.neighborSite(edge));
 		}
 		return list;
 	}
@@ -209,39 +194,39 @@ public final class Site implements ICoord
 
 	ArrayList<Point> region(final Rectangle clippingBounds)
 	{
-		if (_edges == null || _edges.isEmpty())
+		if (this._edges == null || this._edges.isEmpty())
 		{
 			return new ArrayList();
 		}
-		if (_edgeOrientations == null)
+		if (this._edgeOrientations == null)
 		{
-			reorderEdges();
-			_region = clipToBounds(clippingBounds);
-			if ((new Polygon(_region)).winding() == Winding.CLOCKWISE)
+			this.reorderEdges();
+			this._region = this.clipToBounds(clippingBounds);
+			if ((new Polygon(this._region)).winding() == Winding.CLOCKWISE)
 			{
-				Collections.reverse(_region);
+				Collections.reverse(this._region);
 			}
 		}
-		return _region;
+		return this._region;
 	}
 
 	private void reorderEdges()
 	{
 		//trace("_edges:", _edges);
-		final EdgeReorderer reorderer = new EdgeReorderer(_edges, Vertex.class);
-		_edges = reorderer.get_edges();
+		final EdgeReorderer reorderer = new EdgeReorderer(this._edges, Vertex.class);
+		this._edges = reorderer.get_edges();
 		//trace("reordered:", _edges);
-		_edgeOrientations = reorderer.get_edgeOrientations();
+		this._edgeOrientations = reorderer.get_edgeOrientations();
 		reorderer.dispose();
 	}
 
 	private ArrayList<Point> clipToBounds(final Rectangle bounds)
 	{
 		final ArrayList<Point> points = new ArrayList();
-		final int n = _edges.size();
+		final int n = this._edges.size();
 		int i = 0;
 		VoronoiEdge edge;
-		while (i < n && (_edges.get(i).get_visible() == false))
+		while (i < n && (this._edges.get(i).get_visible() == false))
 		{
 			++i;
 		}
@@ -251,22 +236,22 @@ public final class Site implements ICoord
 			// no edges visible
 			return new ArrayList();
 		}
-		edge = _edges.get(i);
-		final LR orientation = _edgeOrientations.get(i);
+		edge = this._edges.get(i);
+		final LR orientation = this._edgeOrientations.get(i);
 		points.add(edge.get_clippedEnds().get(orientation));
 		points.add(edge.get_clippedEnds().get((LR.other(orientation))));
 
 		for (int j = i + 1; j < n; ++j)
 		{
-			edge = _edges.get(j);
+			edge = this._edges.get(j);
 			if (edge.get_visible() == false)
 			{
 				continue;
 			}
-			connect(points, j, bounds, false);
+			this.connect(points, j, bounds, false);
 		}
 		// close up the polygon by adding another corner point of the bounds if needed:
-		connect(points, i, bounds, true);
+		this.connect(points, i, bounds, true);
 
 		return points;
 	}
@@ -274,8 +259,8 @@ public final class Site implements ICoord
 	private void connect(final ArrayList<Point> points, final int j, final Rectangle bounds, final boolean closingUp)
 	{
 		final Point rightPoint = points.get(points.size() - 1);
-		final VoronoiEdge newEdge = _edges.get(j);
-		final LR newOrientation = _edgeOrientations.get(j);
+		final VoronoiEdge newEdge = this._edges.get(j);
+		final LR newOrientation = this._edgeOrientations.get(j);
 		// the point that  must be connected to rightPoint:
 		final Point newPoint = newEdge.get_clippedEnds().get(newOrientation);
 		if (!closeEnough(rightPoint, newPoint))
@@ -419,12 +404,12 @@ public final class Site implements ICoord
 
 	public double get_x()
 	{
-		return _coord.x;
+		return this._coord.x;
 	}
 
 	public double get_y()
 	{
-		return _coord.y;
+		return this._coord.y;
 	}
 
 	public double dist(final ICoord p)

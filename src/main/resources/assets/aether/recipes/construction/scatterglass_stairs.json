@@ -1,17 +1,17 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "#  ",
-    "## ",
-    "###"
-  ],
-  "key": {
-    "#": {
-      "item": "aether:scatterglass"
-    }
-  },
-  "result": {
-    "item": "aether:scatterglass_stairs",
-    "count": 4
-  }
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"#  ",
+		"## ",
+		"###"
+	],
+	"key": {
+		"#": {
+			"item": "aether:scatterglass"
+		}
+	},
+	"result": {
+		"item": "aether:scatterglass_stairs",
+		"count": 4
+	}
 }

@@ -28,10 +28,7 @@ public class InsideGroundPlacementCondition implements PlacementConditionTemplat
 
 			final IBlockState state = world.getBlockState(down);
 
-			if (state.getBlock() != BlocksAether.aether_grass)
-			{
-				return false;
-			}
+			return state.getBlock() == BlocksAether.aether_grass;
 		}
 
 		return true;

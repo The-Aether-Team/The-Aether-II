@@ -121,7 +121,7 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton button) throws IOException
+	protected void actionPerformed(GuiButton button)
 	{
 		if (button.id == 31)
 		{
@@ -306,17 +306,8 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 				return -1;
 			}
 
-			if (id1 > id2)
-			{
-				return 1;
-			}
+			return Integer.compare(id1, id2);
 
-			if (id1 < id2)
-			{
-				return -1;
-			}
-
-			return 0;
 		});
 
 		Collections.reverse(this.recipes);

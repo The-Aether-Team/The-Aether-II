@@ -1,21 +1,21 @@
 {
-    "type": "forge:ore_shaped",
-    "pattern": [
-        "#J#",
-        "###",
-        " # "
-    ],
-    "key": {
-        "#": {
-            "type": "forge:ore_dict",
-            "ore": "holystone"
-        },
-        "J": {
-            "item": "aether:skyroot_stick"
-        }
-    },
-    "result": {
-        "item": "aether:holystone_shield",
-        "count": 1
-    }
+	"type": "forge:ore_shaped",
+	"pattern": [
+		"#J#",
+		"###",
+		" # "
+	],
+	"key": {
+		"#": {
+			"type": "forge:ore_dict",
+			"ore": "holystone"
+		},
+		"J": {
+			"item": "aether:skyroot_stick"
+		}
+	},
+	"result": {
+		"item": "aether:holystone_shield",
+		"count": 1
+	}
 }

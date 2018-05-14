@@ -1,6 +1,6 @@
 {
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "aether:blocks/skyroot_frame_crude_scatterglass"
-    }
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "aether:blocks/skyroot_frame_crude_scatterglass"
+	}
 }

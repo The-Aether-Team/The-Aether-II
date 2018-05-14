@@ -1,20 +1,20 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "#J#",
-        "###",
-        " # "
-    ],
-    "key": {
-        "#": {
-            "item": "aether:skyroot_planks"
-        },
-        "J": {
-            "item": "aether:skyroot_stick"
-        }
-    },
-    "result": {
-        "item": "aether:skyroot_shield",
-        "count": 1
-    }
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"#J#",
+		"###",
+		" # "
+	],
+	"key": {
+		"#": {
+			"item": "aether:skyroot_planks"
+		},
+		"J": {
+			"item": "aether:skyroot_stick"
+		}
+	},
+	"result": {
+		"item": "aether:skyroot_shield",
+		"count": 1
+	}
 }

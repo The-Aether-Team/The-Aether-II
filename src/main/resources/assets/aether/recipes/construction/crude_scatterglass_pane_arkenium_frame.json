@@ -1,18 +1,18 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "###",
-        "###"
-    ],
-    "key": {
-        "#": {
-       "item": "aether:crude_scatterglass_decorative",
-      "data": 1
-    }
-    },
-    "result": {
-        "item": "aether:crude_scatterglass_pane_decorative",
-      "data": 1,
-    "count": 16
-    }
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"###",
+		"###"
+	],
+	"key": {
+		"#": {
+			"item": "aether:crude_scatterglass_decorative",
+			"data": 1
+		}
+	},
+	"result": {
+		"item": "aether:crude_scatterglass_pane_decorative",
+		"data": 1,
+		"count": 16
+	}
 }

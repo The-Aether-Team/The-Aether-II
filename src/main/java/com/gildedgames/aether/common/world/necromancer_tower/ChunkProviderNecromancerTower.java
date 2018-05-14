@@ -63,7 +63,7 @@ public class ChunkProviderNecromancerTower implements IChunkGenerator
 
 			if (dataChunk.getPos().x == chunkX && dataChunk.getPos().z == chunkZ)
 			{
-				final ICreationData data = inst.getTower().getCreationData();
+				final ICreationData<?> data = inst.getTower().getCreationData();
 
 				primer.create(dataChunk.getContainer(),
 						data.clone().pos(new BlockPos(dataChunk.getPos().getXStart(), data.getPos().getY(), dataChunk.getPos().getZStart())));
@@ -118,7 +118,7 @@ public class ChunkProviderNecromancerTower implements IChunkGenerator
 
 				if (dataChunk.getPos().x == chunkX && dataChunk.getPos().z == chunkZ)
 				{
-					final ICreationData data = inst.getTower().getCreationData();
+					final ICreationData<?> data = inst.getTower().getCreationData();
 
 					dataPrimer.create(dataChunk.getContainer(),
 							data.clone().pos(new BlockPos(dataChunk.getPos().getXStart(), data.getPos().getY(), dataChunk.getPos().getZStart())));

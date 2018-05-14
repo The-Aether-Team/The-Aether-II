@@ -109,13 +109,9 @@ public abstract class VoronoiGraph<VISUAL>
 			}
 		}
 
-		this.corners.forEach((c) -> {
-			c.loc = newP[c.index];
-		});
+		this.corners.forEach((c) -> c.loc = newP[c.index]);
 
-		this.edges.stream().filter((e) -> (e.v0 != null && e.v1 != null)).forEach((e) -> {
-			e.setVornoi(e.v0, e.v1);
-		});
+		this.edges.stream().filter((e) -> (e.v0 != null && e.v1 != null)).forEach((e) -> e.setVornoi(e.v0, e.v1));
 	}
 
 	public Edge edgeWithCenters(final Center c1, final Center c2)
@@ -150,9 +146,7 @@ public abstract class VoronoiGraph<VISUAL>
 		});
 
 		//bug fix
-		this.centers.forEach((c) -> {
-			v.region(c.loc);
-		});
+		this.centers.forEach((c) -> v.region(c.loc));
 
 		final ArrayList<VoronoiEdge> libedges = v.edges();
 		final HashMap<Integer, Corner> pointCornerMap = Maps.newHashMap();
@@ -451,7 +445,7 @@ public abstract class VoronoiGraph<VISUAL>
 	{
 		for (int i = 0; i < this.bounds.width / 2; i++)
 		{
-			Corner c = this.corners.get(r.nextInt(this.corners.size()));
+			Corner c = this.corners.get(this.r.nextInt(this.corners.size()));
 
 			if (c.ocean || c.elevation < 0.3 || c.elevation > 0.9)
 			{
@@ -535,7 +529,7 @@ public abstract class VoronoiGraph<VISUAL>
 		}
 
 		// Salt water
-		for (final Corner c : corners)
+		for (final Corner c : this.corners)
 		{
 			if (c.ocean || c.coast)
 			{

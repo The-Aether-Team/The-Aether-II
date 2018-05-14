@@ -3,7 +3,7 @@ package com.gildedgames.aether.api.util;
 /*
  * OpenSimplex Noise in Java.
  * by Kurt Spencer
- * 
+ *
  * v1.1 (October 5, 2014)
  * - Added 2D and 4D implementations.
  * - Proper gradient sets for all dimensions, from a

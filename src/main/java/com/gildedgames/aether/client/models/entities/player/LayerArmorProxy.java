@@ -14,9 +14,9 @@ import net.minecraft.util.ResourceLocation;
 // Delegate Hack
 public class LayerArmorProxy extends LayerBipedArmor
 {
-	private PatronRewardArmor previewArmor;
-
 	private final LayerBipedArmor proxy;
+
+	private PatronRewardArmor previewArmor;
 
 	public LayerArmorProxy(RenderLivingBase<?> rendererIn, LayerBipedArmor proxy)
 	{

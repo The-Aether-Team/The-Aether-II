@@ -7,6 +7,19 @@ import java.util.Random;
 public class SimpleInheritance implements Inheritance
 {
 
+	private Type type;
+
+	public SimpleInheritance(Type type)
+	{
+		this.type = type;
+	}
+
+	@Override
+	public float generateChanceToInherit(Random r)
+	{
+		return this.type.evaluate(r);
+	}
+
 	public enum Type
 	{
 
@@ -25,19 +38,6 @@ public class SimpleInheritance implements Inheritance
 			return this.min + (r.nextFloat() * (this.max - this.min));
 		}
 
-	}
-
-	private Type type;
-
-	public SimpleInheritance(Type type)
-	{
-		this.type = type;
-	}
-
-	@Override
-	public float generateChanceToInherit(Random r)
-	{
-		return this.type.evaluate(r);
 	}
 
 }

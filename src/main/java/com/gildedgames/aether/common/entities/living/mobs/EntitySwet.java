@@ -15,7 +15,6 @@ import com.gildedgames.aether.common.registry.content.LootTablesAether;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -60,7 +59,9 @@ public class EntitySwet extends EntityExtendedMob
 
 		final HoppingMoveHelper hoppingMoveHelper = new HoppingMoveHelper(this,
 				() -> EntitySwet.this.getFoodSaturation() == 0 ? SoundEvents.ENTITY_SLIME_JUMP : SoundEvents.ENTITY_SLIME_JUMP,
-				() -> EntitySwet.this.getRNG().nextInt(EntitySwet.this.getFoodSaturation() == 3 ? 10 : 60) + (EntitySwet.this.getFoodSaturation() == 3 ? 40 : 50));
+				() -> EntitySwet.this.getRNG().nextInt(EntitySwet.this.getFoodSaturation() == 3 ? 10 : 60) + (EntitySwet.this.getFoodSaturation() == 3 ?
+						40 :
+						50));
 
 		this.moveHelper = hoppingMoveHelper;
 
@@ -79,7 +80,7 @@ public class EntitySwet extends EntityExtendedMob
 		this.experienceValue = 3;
 
 		this.setFoodSaturation(3);
-		actualSaturation = 3;
+		this.actualSaturation = 3;
 
 		this.setDayMob(true);
 	}
@@ -109,7 +110,7 @@ public class EntitySwet extends EntityExtendedMob
 
 	public void setFoodSaturation(final int foodSaturation)
 	{
-		if (!world.isRemote)
+		if (!this.world.isRemote)
 		{
 			this.dataManager.set(EntitySwet.FOOD_SATURATION, foodSaturation);
 		}
@@ -117,7 +118,7 @@ public class EntitySwet extends EntityExtendedMob
 
 	public void processSucking(final EntityPlayer player)
 	{
-		PotionEffect slowness = new PotionEffect(Potion.getPotionById(2), 3, timeSinceSucking / 80, true, false);
+		PotionEffect slowness = new PotionEffect(Potion.getPotionById(2), 3, this.timeSinceSucking / 80, true, false);
 
 		player.addPotionEffect(slowness);
 
@@ -150,7 +151,7 @@ public class EntitySwet extends EntityExtendedMob
 					{
 						if (!p.getPotion().equals(Potion.getPotionById(2)))
 						{
-							addPotionEffect(p);
+							this.addPotionEffect(p);
 							player.removePotionEffect(p.getPotion());
 
 							if (p.getAmplifier() - 1 >= 0)
@@ -169,17 +170,17 @@ public class EntitySwet extends EntityExtendedMob
 			player.playSound(SoundEvents.ENTITY_SLIME_ATTACK, 1.0F, (player.getRNG().nextFloat() - player.getRNG().nextFloat()) * 0.2F + 1.0F);
 		}
 
-		if (timeSinceSucking >= 300 || player.getFoodStats().getFoodLevel() <= 0)
+		if (this.timeSinceSucking >= 300 || player.getFoodStats().getFoodLevel() <= 0)
 		{
 			if (!this.world.isRemote)
 			{
-				if (timeSinceSucking >= 220)
+				if (this.timeSinceSucking >= 220)
 				{
 					this.setFoodSaturation(4);
 				}
 
 				PlayerAether.getPlayer(player).getSwetTracker().detachSwet(this);
-				NetworkingAether.sendPacketToWatching(new PacketDetachSwet(this.getType(), player.getEntityId()), (EntityPlayerMP) player, true);
+				NetworkingAether.sendPacketToWatching(new PacketDetachSwet(this.getType(), player.getEntityId()), player, true);
 			}
 		}
 	}
@@ -227,7 +228,7 @@ public class EntitySwet extends EntityExtendedMob
 	{
 		if (this.isInWater())
 		{
-			timeStarved = -rand.nextInt(60);
+			this.timeStarved = -this.rand.nextInt(60);
 
 			this.setFoodSaturation(0);
 		}
@@ -237,9 +238,10 @@ public class EntitySwet extends EntityExtendedMob
 
 		super.onUpdate();
 
-		if (getAttackTarget() != null && getAttackTarget() instanceof EntityPlayer && ((EntityPlayer) getAttackTarget()).getFoodStats().getFoodLevel() < 5)
+		if (this.getAttackTarget() != null && this.getAttackTarget() instanceof EntityPlayer
+				&& ((EntityPlayer) this.getAttackTarget()).getFoodStats().getFoodLevel() < 5)
 		{
-			setAttackTarget(null);
+			this.setAttackTarget(null);
 		}
 
 		if (this.onGround && !this.wasOnGround)
@@ -251,100 +253,102 @@ public class EntitySwet extends EntityExtendedMob
 			this.squishAmount = 1.0F;
 		}
 
-		if (onGround)
+		if (this.onGround)
 		{
-			squishPoolSize += 0.2f;
+			this.squishPoolSize += 0.2f;
 
-			if (squishPoolSize > 1.54f)
+			if (this.squishPoolSize > 1.54f)
 			{
-				squishPoolSize = 1.54f;
+				this.squishPoolSize = 1.54f;
 			}
 		}
 		else
 		{
-			squishPoolSize -= 0.2f;
+			this.squishPoolSize -= 0.2f;
 
-			if (squishPoolSize < 1)
+			if (this.squishPoolSize < 1)
 			{
-				squishPoolSize = 1;
+				this.squishPoolSize = 1;
 			}
 		}
 
-		if (actualSaturation < getFoodSaturation() && transitionTime > 20)
+		if (this.actualSaturation < this.getFoodSaturation() && this.transitionTime > 20)
 		{
-			actualSaturation += 0.02f;
+			this.actualSaturation += 0.02f;
 
-			if (actualSaturation > getFoodSaturation())
+			if (this.actualSaturation > this.getFoodSaturation())
 			{
-				actualSaturation = getFoodSaturation();
+				this.actualSaturation = this.getFoodSaturation();
 
-				if (getFoodSaturation() < 3)
+				if (this.getFoodSaturation() < 3)
 				{
-					transitionTime = 0;
+					this.transitionTime = 0;
 				}
 				else
 				{
-					((HoppingMoveHelper) getMoveHelper()).setActive(true);
+					((HoppingMoveHelper) this.getMoveHelper()).setActive(true);
 				}
 			}
 		}
-		else if (actualSaturation > getFoodSaturation())
+		else if (this.actualSaturation > this.getFoodSaturation())
 		{
-			actualSaturation -= 0.2f;
+			this.actualSaturation -= 0.2f;
 
-			if (actualSaturation < getFoodSaturation())
+			if (this.actualSaturation < this.getFoodSaturation())
 			{
-				actualSaturation = getFoodSaturation();
+				this.actualSaturation = this.getFoodSaturation();
 			}
 
-			if (world.isRemote && getActualSaturation() != 0)
+			if (this.world.isRemote && this.getActualSaturation() != 0)
 			{
-				float[] redColors = new float[] { 0.486f, 0.45f, 0.411f};
+				float[] redColors = new float[] { 0.486f, 0.45f, 0.411f };
 				float[] greenColors = new float[] { 0.439f, 0.686f, 0.654f };
-				float[] blueColors = new float[] { 0.67f, 0.819f, 0.525f};
+				float[] blueColors = new float[] { 0.67f, 0.819f, 0.525f };
 
-				int type = getType().name.equals("purple") ? 0 : (getType().name.equals("blue") ? 1 : 2);
+				int type = this.getType().name.equals("purple") ? 0 : (this.getType().name.equals("blue") ? 1 : 2);
 
-				float f1 = getActualSaturation() / 5f;
+				float f1 = this.getActualSaturation() / 5f;
 
-				for (int i = 0; i < 5 + rand.nextInt(5); i++)
+				for (int i = 0; i < 5 + this.rand.nextInt(5); i++)
 				{
-					world.spawnParticle(EnumParticleTypes.REDSTONE, this.posX - f1 + rand.nextFloat() * f1 * 2f,
-							this.posY - f1 + rand.nextFloat() * f1 * 2f, this.posZ - f1 + rand.nextFloat()  * f1 * 2f, redColors[type], greenColors[type], blueColors[type]);
+					this.world.spawnParticle(EnumParticleTypes.REDSTONE, this.posX - f1 + this.rand.nextFloat() * f1 * 2f,
+							this.posY - f1 + this.rand.nextFloat() * f1 * 2f, this.posZ - f1 + this.rand.nextFloat() * f1 * 2f, redColors[type],
+							greenColors[type],
+							blueColors[type]);
 				}
 			}
 		}
 		else
 		{
-			if (getFoodSaturation() < 3 && timeStarved >= 2400)
+			if (this.getFoodSaturation() < 3 && this.timeStarved >= 2400)
 			{
-				((HoppingMoveHelper) getMoveHelper()).setActive(false);
-				setFoodSaturation(getFoodSaturation() + 1);
+				((HoppingMoveHelper) this.getMoveHelper()).setActive(false);
+				this.setFoodSaturation(this.getFoodSaturation() + 1);
 			}
 
-			transitionTime++;
+			this.transitionTime++;
 		}
 
-		if (getFoodSaturation() < 3)
+		if (this.getFoodSaturation() < 3)
 		{
-			timeStarved++;
-			setAttackTarget(null);
+			this.timeStarved++;
+			this.setAttackTarget(null);
 		}
-		else if (getFoodSaturation() != 3)
+		else if (this.getFoodSaturation() != 3)
 		{
-			timeStarved = 0;
+			this.timeStarved = 0;
 		}
 
-		if (getFoodSaturation() == 4)
+		if (this.getFoodSaturation() == 4)
 		{
-			addPotionEffect(new PotionEffect(Potion.getPotionById(2), 10, 2, true, false));
+			this.addPotionEffect(new PotionEffect(Potion.getPotionById(2), 10, 2, true, false));
 
-			digestTime++;
+			this.digestTime++;
 
-			if (digestTime > 1200)
+			if (this.digestTime > 1200)
 			{
-				setFoodSaturation(3);
-				digestTime = -rand.nextInt(300);
+				this.setFoodSaturation(3);
+				this.digestTime = -this.rand.nextInt(300);
 			}
 		}
 
@@ -357,7 +361,10 @@ public class EntitySwet extends EntityExtendedMob
 		this.timeSinceSucking = timeSucking;
 	}
 
-	public int getTimeSinceSucking() { return timeSinceSucking; }
+	public int getTimeSinceSucking()
+	{
+		return this.timeSinceSucking;
+	}
 
 	protected void alterSquishAmount()
 	{
@@ -382,7 +389,7 @@ public class EntitySwet extends EntityExtendedMob
 		this.setType(Type.fromOrdinal(tag.getInteger("type")));
 		this.timeSinceSucking = tag.getInteger("timeSinceSucking");
 		this.setFoodSaturation(tag.getInteger("foodSaturation"));
-		this.actualSaturation = getFoodSaturation();
+		this.actualSaturation = this.getFoodSaturation();
 	}
 
 	@Override
@@ -416,13 +423,13 @@ public class EntitySwet extends EntityExtendedMob
 	@SideOnly(Side.CLIENT)
 	public float getSquishPool()
 	{
-		return squishPoolSize;
+		return this.squishPoolSize;
 	}
 
 	@SideOnly(Side.CLIENT)
 	public float getActualSaturation()
 	{
-		return actualSaturation;
+		return this.actualSaturation;
 	}
 
 	public enum Type

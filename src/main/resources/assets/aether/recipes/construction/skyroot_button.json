@@ -1,19 +1,15 @@
 {
 	"type": "forge:ore_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"X"
 	],
-	"key":
-	{
-		"X":
-		{
+	"key": {
+		"X": {
 			"type": "forge:ore_dict",
 			"ore": "skyrootplanks"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "aether:skyroot_button",
 		"count": 1
 	}

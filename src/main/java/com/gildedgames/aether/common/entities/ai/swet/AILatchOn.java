@@ -7,7 +7,6 @@ import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketLatchSwet;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
 
 public class AILatchOn extends EntityAI<EntitySwet>
@@ -62,7 +61,7 @@ public class AILatchOn extends EntityAI<EntitySwet>
 
 			this.entity().setSucking(0);
 
-			NetworkingAether.sendPacketToWatching(new PacketLatchSwet(this.entity().getType(), player.getEntityId()), (EntityPlayerMP) player, true);
+			NetworkingAether.sendPacketToWatching(new PacketLatchSwet(this.entity().getType(), player.getEntityId()), player, true);
 			PlayerAether.getPlayer(player).getSwetTracker().latchSwet(this.entity());
 
 			this.entity().playSound(SoundEvents.ENTITY_SLIME_ATTACK, 1.0F,

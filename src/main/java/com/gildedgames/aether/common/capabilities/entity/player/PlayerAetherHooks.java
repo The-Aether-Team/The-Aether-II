@@ -209,9 +209,9 @@ public class PlayerAetherHooks
 		IBlockState replaced = event.getBlockSnapshot().getReplacedBlock(), placed = event.getPlacedBlock();
 		Block block = placed.getBlock();
 
-		if (replaced.getBlock() instanceof BlockSnow && replaced.getValue(BlockSnow.LAYERS).intValue() == 1 && block instanceof IBlockSnowy)
+		if (replaced.getBlock() instanceof BlockSnow && replaced.getValue(BlockSnow.LAYERS) == 1 && block instanceof IBlockSnowy)
 		{
-			event.getWorld().setBlockState(event.getPos(), placed.withProperty(IBlockSnowy.PROPERTY_SNOWY, Boolean.valueOf(true)), 2);
+			event.getWorld().setBlockState(event.getPos(), placed.withProperty(IBlockSnowy.PROPERTY_SNOWY, Boolean.TRUE), 2);
 		}
 		else if (replaced.getBlock() instanceof IBlockSnowy)
 		{
@@ -223,7 +223,7 @@ public class PlayerAetherHooks
 			}
 			else if (block instanceof BlockSnow)
 			{
-				event.getWorld().setBlockState(event.getPos(), replaced.withProperty(IBlockSnowy.PROPERTY_SNOWY, Boolean.valueOf(true)), 2);
+				event.getWorld().setBlockState(event.getPos(), replaced.withProperty(IBlockSnowy.PROPERTY_SNOWY, Boolean.TRUE), 2);
 			}
 		}
 

@@ -1,29 +1,23 @@
 {
 	"type": "forge:ore_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"  Z",
 		" X ",
 		"Y  "
 	],
-	"key":
-	{
-		"X":
-		{
+	"key": {
+		"X": {
 			"item": "aether:skyroot_stick"
 		},
-		"Y":
-		{
+		"Y": {
 			"item": "aether:scatterglass"
 		},
-		"Z":
-		{
+		"Z": {
 			"type": "forge:ore_dict",
 			"ore": "feather"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "aether:bolt",
 		"count": 4,
 		"data": 2

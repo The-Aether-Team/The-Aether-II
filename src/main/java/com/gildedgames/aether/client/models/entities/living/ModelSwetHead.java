@@ -39,32 +39,32 @@ public class ModelSwetHead extends ModelBase
 		this.TopRightTail.mirror = true;
 		this.TopRightTail.setRotationPoint(-3.5F, -1.0F, -3.0F);
 		this.TopRightTail.addBox(-5.0F, 0.0F, 0.0F, 5, 11, 0, 0.0F);
-		this.setRotateAngle(TopRightTail, 1.3962634015954636F, -0.3490658503988659F, 1.2217304763960306F);
+		this.setRotateAngle(this.TopRightTail, 1.3962634015954636F, -0.3490658503988659F, 1.2217304763960306F);
 		this.BottomLeftTail = new ModelRenderer(this, 50, 0);
 		this.BottomLeftTail.setRotationPoint(3.5F, 1.0F, -3.0F);
 		this.BottomLeftTail.addBox(0.0F, 0.0F, 0.0F, 5, 11, 0, 0.0F);
-		this.setRotateAngle(BottomLeftTail, 1.7453292519943295F, 0.3490658503988659F, 1.0471975511965976F);
+		this.setRotateAngle(this.BottomLeftTail, 1.7453292519943295F, 0.3490658503988659F, 1.0471975511965976F);
 		this.OuterBody = new ModelRenderer(this, 0, 0);
 		this.OuterBody.setRotationPoint(0.0F, 0.0F, 0.0F);
 		this.OuterBody.addBox(-5.0F, -5.0F, -5.0F, 10, 10, 10, 0.0F);
 		this.TopLeftTail = new ModelRenderer(this, 40, 0);
 		this.TopLeftTail.setRotationPoint(3.5F, -1.0F, -3.0F);
 		this.TopLeftTail.addBox(0.0F, 0.0F, 0.0F, 5, 11, 0, 0.0F);
-		this.setRotateAngle(TopLeftTail, 1.3962634015954636F, 0.3490658503988659F, -1.2217304763960306F);
+		this.setRotateAngle(this.TopLeftTail, 1.3962634015954636F, 0.3490658503988659F, -1.2217304763960306F);
 		this.BottomRightTail = new ModelRenderer(this, 50, 0);
 		this.BottomRightTail.mirror = true;
 		this.BottomRightTail.setRotationPoint(-3.5F, 1.0F, -3.0F);
 		this.BottomRightTail.addBox(-5.0F, 0.0F, 0.0F, 5, 11, 0, 0.0F);
-		this.setRotateAngle(BottomRightTail, 1.7453292519943295F, -0.3490658503988659F, -1.0471975511965976F);
+		this.setRotateAngle(this.BottomRightTail, 1.7453292519943295F, -0.3490658503988659F, -1.0471975511965976F);
 		this.BackRightTail = new ModelRenderer(this, 50, 0);
 		this.BackRightTail.setRotationPoint(-1.5F, 0.0F, 2.0F);
 		this.BackRightTail.addBox(-5.0F, 0.0F, 0.0F, 5, 11, 0, 0.0F);
-		this.setRotateAngle(BackRightTail, 1.6580627893946132F, -0.3490658503988659F, -1.3962634015954636F);
+		this.setRotateAngle(this.BackRightTail, 1.6580627893946132F, -0.3490658503988659F, -1.3962634015954636F);
 		this.BackLeftTail = new ModelRenderer(this, 50, 0);
 		this.BackLeftTail.mirror = true;
 		this.BackLeftTail.setRotationPoint(1.5F, 0.0F, 2.0F);
 		this.BackLeftTail.addBox(0.0F, 0.0F, 0.0F, 5, 11, 0, 0.0F);
-		this.setRotateAngle(BackLeftTail, 1.6580627893946132F, 0.3490658503988659F, 1.3962634015954636F);
+		this.setRotateAngle(this.BackLeftTail, 1.6580627893946132F, 0.3490658503988659F, 1.3962634015954636F);
 		this.OuterBody.addChild(this.TopRightTail);
 		this.OuterBody.addChild(this.BottomLeftTail);
 		this.InnerBody.addChild(this.OuterBody);
@@ -85,7 +85,7 @@ public class ModelSwetHead extends ModelBase
 		GlStateManager.translate(-this.InnerBody.rotationPointX * f5, -this.InnerBody.rotationPointY * f5, -this.InnerBody.rotationPointZ * f5);
 
 		EntitySwet swet = (EntitySwet) entity;
-		
+
 		final float sc = ((swet.getFoodSaturation() - 1));
 		final float s = sc / 1.2F;
 		final float wiggle = (swet.prevSquishFactor + (swet.squishFactor - swet.prevSquishFactor) * f5) / (f1 * 0.5F + 1.0F);

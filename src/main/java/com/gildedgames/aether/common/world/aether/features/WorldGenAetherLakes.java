@@ -103,7 +103,7 @@ public class WorldGenAetherLakes extends WorldGenerator
 							return false;
 						}
 
-						if (y < 4 && !material.isSolid() && state.getBlock() != this.liquid)
+						if (y < 4 && !material.isSolid() && state != this.liquid)
 						{
 							return false;
 						}

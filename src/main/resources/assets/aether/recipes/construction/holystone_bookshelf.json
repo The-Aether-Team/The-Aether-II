@@ -1,21 +1,21 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "###",
-    "XXX",
-    "###"
-  ],
-  "key": {
-    "#": [
-      {
-        "item": "aether:holystone_brick"
-      }
-    ],
-    "X": {
-      "item": "minecraft:book"
-    }
-  },
-  "result": {
-    "item": "aether:holystone_bookshelf"
-  }
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"###",
+		"XXX",
+		"###"
+	],
+	"key": {
+		"#": [
+			{
+				"item": "aether:holystone_brick"
+			}
+		],
+		"X": {
+			"item": "minecraft:book"
+		}
+	},
+	"result": {
+		"item": "aether:holystone_bookshelf"
+	}
 }

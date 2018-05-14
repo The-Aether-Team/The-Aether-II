@@ -255,17 +255,13 @@ public class VoronoiGraphUtils
 		if (drawSites)
 		{
 			g.setColor(Color.BLACK);
-			graph.centers.forEach((s) -> {
-				g.fillOval((int) (s.loc.x - 2), (int) (s.loc.y - 2), 4, 4);
-			});
+			graph.centers.forEach((s) -> g.fillOval((int) (s.loc.x - 2), (int) (s.loc.y - 2), 4, 4));
 		}
 
 		if (drawCorners)
 		{
 			g.setColor(Color.WHITE);
-			graph.corners.forEach((c) -> {
-				g.fillOval((int) (c.loc.x - 2), (int) (c.loc.y - 2), 4, 4);
-			});
+			graph.corners.forEach((c) -> g.fillOval((int) (c.loc.x - 2), (int) (c.loc.y - 2), 4, 4));
 		}
 		g.setColor(Color.WHITE);
 		g.drawRect((int) graph.bounds.x, (int) graph.bounds.y, (int) graph.bounds.width, (int) graph.bounds.height);

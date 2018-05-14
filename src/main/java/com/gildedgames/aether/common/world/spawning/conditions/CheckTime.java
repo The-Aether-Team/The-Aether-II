@@ -8,11 +8,6 @@ import net.minecraft.world.World;
 public class CheckTime implements PosCondition, WorldCondition
 {
 
-	public enum Time
-	{
-		DAY, NIGHT
-	}
-
 	private Time time;
 
 	public CheckTime(Time time)
@@ -30,6 +25,11 @@ public class CheckTime implements PosCondition, WorldCondition
 	public boolean isMet(World world)
 	{
 		return (this.time == Time.DAY) == world.isDaytime();
+	}
+
+	public enum Time
+	{
+		DAY, NIGHT
 	}
 
 }

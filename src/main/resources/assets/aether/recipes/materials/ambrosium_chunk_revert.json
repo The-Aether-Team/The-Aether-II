@@ -1,18 +1,14 @@
 {
 	"type": "forge:ore_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"X"
 	],
-	"key":
-	{
-		"X":
-		{
+	"key": {
+		"X": {
 			"item": "aether:ambrosium_chunk"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "aether:ambrosium_shard",
 		"count": 4
 	}

@@ -21,6 +21,13 @@ public enum ItemBoltType
 		this.id = id;
 	}
 
+	public static ItemBoltType fromOrdinal(int ordinal)
+	{
+		ItemBoltType[] bolts = values();
+
+		return bolts[ordinal > bolts.length || ordinal < 0 ? 0 : ordinal];
+	}
+
 	public float getDamage()
 	{
 		return this.damage;
@@ -34,12 +41,5 @@ public enum ItemBoltType
 	public ItemBoltType getAmmoItem()
 	{
 		return this;
-	}
-
-	public static ItemBoltType fromOrdinal(int ordinal)
-	{
-		ItemBoltType[] bolts = values();
-
-		return bolts[ordinal > bolts.length || ordinal < 0 ? 0 : ordinal];
 	}
 }

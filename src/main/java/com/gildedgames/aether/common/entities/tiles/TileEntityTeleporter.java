@@ -4,13 +4,9 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.containers.BlockAltar;
 import com.gildedgames.aether.common.entities.tiles.util.TileEntitySynced;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -44,13 +40,13 @@ public class TileEntityTeleporter extends TileEntitySynced implements ITickable
 			this.animationTicks++;
 		}
 
-		if (buildTime < 200)
+		if (this.buildTime < 200)
 		{
-			buildTime++;
+			this.buildTime++;
 		}
 		else
 		{
-			buildTime = 0;
+			this.buildTime = 0;
 		}
 	}
 
@@ -74,6 +70,6 @@ public class TileEntityTeleporter extends TileEntitySynced implements ITickable
 
 	public int getBuildTime()
 	{
-		return buildTime;
+		return this.buildTime;
 	}
 }

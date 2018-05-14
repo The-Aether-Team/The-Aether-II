@@ -1,9 +1,10 @@
-{   "parent": "block/block",
+{
+	"parent": "block/block",
 	"display": {
 		"gui": {
 			"rotation": [ 30, 135, 0 ],
-			"translation": [ 0, 0, 0],
-			"scale":[ 0.625, 0.625, 0.625 ]
+			"translation": [ 0, 0, 0 ],
+			"scale": [ 0.625, 0.625, 0.625 ]
 		},
 		"fixed": {
 			"rotation": [ 0, 90, 0 ],

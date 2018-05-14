@@ -125,7 +125,7 @@ public class EntityTaegore extends EntityAetherAnimal
 		{
 			if (this.getAttackingEntity() instanceof EntityPlayer)
 			{
-				final PlayerAether player = PlayerAether.getPlayer((EntityPlayer) this.getAttackingEntity());
+				final PlayerAether player = PlayerAether.getPlayer(this.getAttackingEntity());
 				if (player.getEntity().isCreative())
 				{
 					return;

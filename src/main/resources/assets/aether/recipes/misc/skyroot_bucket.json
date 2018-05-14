@@ -1,17 +1,17 @@
 {
-  "type": "forge:ore_shaped",
-  "pattern": [
-    "# #",
-    " # "
-  ],
-  "key": {
-    "#": {
-      "type": "forge:ore_dict",
-      "ore": "skyrootplanks"
-    }
-  },
-  "result": {
-    "item": "aether:skyroot_bucket",
-    "data": 0
-  }
+	"type": "forge:ore_shaped",
+	"pattern": [
+		"# #",
+		" # "
+	],
+	"key": {
+		"#": {
+			"type": "forge:ore_dict",
+			"ore": "skyrootplanks"
+		}
+	},
+	"result": {
+		"item": "aether:skyroot_bucket",
+		"data": 0
+	}
 }

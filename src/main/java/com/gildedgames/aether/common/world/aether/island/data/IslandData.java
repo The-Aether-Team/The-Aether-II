@@ -150,7 +150,7 @@ public class IslandData implements IIslandData
 	}
 
 	@Override
-	public PlacedBlueprint placeBlueprint(BlueprintDefinition def, ICreationData data)
+	public PlacedBlueprint placeBlueprint(BlueprintDefinition def, ICreationData<?> data)
 	{
 		final PlacedBlueprint instance = new PlacedBlueprint(data.getWorld(), def, data);
 

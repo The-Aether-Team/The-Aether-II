@@ -33,7 +33,7 @@ public class EntityKirrid extends EntitySheep
 	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(ItemsAether.valkyrie_wings);
 
 	private EntityAIEatAetherGrass entityAIEatGrass;
-	
+
 	public EntityKirrid(World world)
 	{
 		super(world);
@@ -86,16 +86,28 @@ public class EntityKirrid extends EntitySheep
 		return (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 0.55F;
 	}*/
 
-    protected float getSoundPitch()
-    {
-        return this.isChild() ? (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1F : (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 0.55F;
-    }
+	@Override
+	protected float getSoundPitch()
+	{
+		return this.isChild() ? (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1F : (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 0.55F;
+	}
 
-	protected SoundEvent getAmbientSound() {return SoundsAether.kirrid_ambient;}
+	@Override
+	protected SoundEvent getAmbientSound()
+	{
+		return SoundsAether.kirrid_ambient;
+	}
 
-	protected SoundEvent getHurtSound() {return SoundsAether.kirrid_hurt;}
+	protected SoundEvent getHurtSound()
+	{
+		return SoundsAether.kirrid_hurt;
+	}
 
-	protected SoundEvent getDeathSound() {return SoundsAether.kirrid_death;}
+	@Override
+	protected SoundEvent getDeathSound()
+	{
+		return SoundsAether.kirrid_death;
+	}
 
 	@Override
 	public EntityKirrid createChild(EntityAgeable ageable)

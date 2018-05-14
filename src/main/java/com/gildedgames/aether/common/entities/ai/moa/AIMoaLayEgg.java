@@ -18,11 +18,11 @@ public class AIMoaLayEgg extends EntityAIBase
 
 	public EntityMoa mother;
 
-	private int motherSeed, fatherSeed;
-
 	public float moveSpeed;
 
 	public boolean hasLayedEgg;
+
+	private int motherSeed, fatherSeed;
 
 	public AIMoaLayEgg(EntityMoa mother, int motherSeed, int fatherSeed, float moveSpeed)
 	{
@@ -69,10 +69,7 @@ public class AIMoaLayEgg extends EntityAIBase
 				return false;
 			}
 
-			if (!(this.world.getBlockState(nest.pos).getBlock() instanceof BlockWovenSticks))
-			{
-				return false;
-			}
+			return this.world.getBlockState(nest.pos).getBlock() instanceof BlockWovenSticks;
 		}
 
 		return true;

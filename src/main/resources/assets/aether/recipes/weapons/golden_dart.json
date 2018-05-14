@@ -1,23 +1,18 @@
 {
 	"type": "forge:ore_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"X ",
 		" Y"
 	],
-	"key":
-	{
-		"Y":
-		{
+	"key": {
+		"Y": {
 			"item": "aether:skyroot_stick"
 		},
-		"X":
-		{
+		"X": {
 			"item": "aether:golden_amber"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "aether:dart",
 		"count": 8,
 		"data": 0

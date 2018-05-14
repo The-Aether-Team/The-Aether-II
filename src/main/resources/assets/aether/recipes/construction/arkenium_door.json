@@ -1,20 +1,16 @@
 {
 	"type": "forge:ore_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"XX",
 		"XX",
 		"XX"
 	],
-	"key":
-	{
-		"X":
-		{
+	"key": {
+		"X": {
 			"item": "aether:arkenium"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "aether:arkenium_door_item",
 		"count": 3
 	}

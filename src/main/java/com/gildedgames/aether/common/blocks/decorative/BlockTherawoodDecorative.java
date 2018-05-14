@@ -14,7 +14,8 @@ public class BlockTherawoodDecorative extends BlockDecorative
 			FLOORBOARDS = new BlockVariant(4, "floorboards"),
 			HIGHLIGHT = new BlockVariant(5, "highlight");
 
-	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", BASE_PLANKS, BASE_BEAM, TOP_PLANKS, TOP_BEAM, FLOORBOARDS, HIGHLIGHT);
+	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant
+			.create("variant", BASE_PLANKS, BASE_BEAM, TOP_PLANKS, TOP_BEAM, FLOORBOARDS, HIGHLIGHT);
 
 	public BlockTherawoodDecorative()
 	{

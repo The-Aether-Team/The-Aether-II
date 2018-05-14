@@ -1,27 +1,24 @@
 package com.gildedgames.aether.common.items.tools;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
 
 public class ItemArkeniumShears extends ItemShears
 {
 
-		@Override
-		public float getDestroySpeed(ItemStack stack, IBlockState state)
+	@Override
+	public float getDestroySpeed(ItemStack stack, IBlockState state)
+	{
+		Block block = state.getBlock();
+
+		if (block == BlocksAether.cloudwool_block)
 		{
-			Block block = state.getBlock();
-
-			if (block == BlocksAether.cloudwool_block)
-			{
-				return 5.0f;
-			}
-
-			return super.getDestroySpeed(stack, state);
+			return 5.0f;
 		}
+
+		return super.getDestroySpeed(stack, state);
+	}
 }

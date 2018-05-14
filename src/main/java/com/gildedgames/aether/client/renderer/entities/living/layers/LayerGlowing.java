@@ -1,6 +1,5 @@
 package com.gildedgames.aether.client.renderer.entities.living.layers;
 
-import com.google.common.base.Supplier;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -9,6 +8,8 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.function.Supplier;
 
 @SideOnly(Side.CLIENT)
 public class LayerGlowing<T extends EntityLiving> implements LayerRenderer<T>

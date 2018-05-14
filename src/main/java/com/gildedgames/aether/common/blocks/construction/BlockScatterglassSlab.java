@@ -35,11 +35,7 @@ public class BlockScatterglassSlab extends BlockCustomSlab
 		{
 			if (state.getValue(PROPERTY_SLAB_STATE) == EnumSlabPart.FULL_BLOCK)
 			{
-				if (neighborState.getValue(PROPERTY_SLAB_STATE) == EnumSlabPart.FULL_BLOCK)
-				{
-					return false;
-				}
-				return true;
+				return neighborState.getValue(PROPERTY_SLAB_STATE) != EnumSlabPart.FULL_BLOCK;
 			}
 			return false;
 		}

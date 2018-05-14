@@ -15,9 +15,9 @@ import net.minecraft.util.ResourceLocation;
 
 public class LayerAetherPlayerGloves extends LayerBipedArmor
 {
-	private PatronRewardArmor previewArmor;
-
 	private final RenderLivingBase<?> renderer;
+
+	private PatronRewardArmor previewArmor;
 
 	private ModelPlayer modelArmorSlim;
 
@@ -53,7 +53,6 @@ public class LayerAetherPlayerGloves extends LayerBipedArmor
 		{
 			armor = player.getPatronRewardsModule().getChoices().getArmorChoice();
 		}
-
 
 		ResourceLocation texture = null;
 

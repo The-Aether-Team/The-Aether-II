@@ -13,7 +13,7 @@ public class CoolerRecipes
 {
 	private static final CoolerRecipes COOLING_BASE = new CoolerRecipes();
 
-	private final Map<ItemStack, ItemStack[]> coolingList = Maps.<ItemStack, ItemStack[]>newHashMap();
+	private final Map<ItemStack, ItemStack[]> coolingList = Maps.newHashMap();
 
 	private Random rand = new Random();
 
@@ -88,9 +88,9 @@ public class CoolerRecipes
 	{
 		for (Entry<ItemStack, ItemStack[]> entry : this.coolingList.entrySet())
 		{
-			if (this.compareItemStacks(stack, (ItemStack) entry.getKey()))
+			if (this.compareItemStacks(stack, entry.getKey()))
 			{
-				return (ItemStack) entry.getValue()[this.rand.nextInt(entry.getValue().length)];
+				return entry.getValue()[this.rand.nextInt(entry.getValue().length)];
 			}
 		}
 		return ItemStack.EMPTY;

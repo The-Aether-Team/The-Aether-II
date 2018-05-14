@@ -52,7 +52,7 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 	@Override
 	public void onUpdate()
 	{
-		
+
 	}
 
 	private void updateListeners()

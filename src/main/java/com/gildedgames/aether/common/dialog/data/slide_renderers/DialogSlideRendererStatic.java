@@ -51,9 +51,9 @@ public class DialogSlideRendererStatic implements IDialogSlideRenderer
 	}
 
 	@Override
-    public void draw(IDialogSlide slide, double screenWidth, double screenHeight, int mouseX, int mouseY, float partialTicks)
-    {
-    	if (this.slideTexture == null)
+	public void draw(IDialogSlide slide, double screenWidth, double screenHeight, int mouseX, int mouseY, float partialTicks)
+	{
+		if (this.slideTexture == null)
 		{
 			return;
 		}

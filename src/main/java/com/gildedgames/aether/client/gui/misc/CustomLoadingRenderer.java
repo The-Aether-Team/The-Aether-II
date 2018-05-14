@@ -160,7 +160,7 @@ public class CustomLoadingRenderer extends LoadingScreenRenderer
 			{
 				Thread.yield();
 			}
-			catch (final Exception var15)
+			catch (final Exception ignored)
 			{
 			}
 		}

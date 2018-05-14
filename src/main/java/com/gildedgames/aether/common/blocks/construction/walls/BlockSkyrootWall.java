@@ -65,6 +65,7 @@ public class BlockSkyrootWall extends BlockCustomWall
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, BlockCustomWall.UP, BlockCustomWall.NORTH, BlockCustomWall.EAST, BlockCustomWall.WEST, BlockCustomWall.SOUTH, BlockWall.VARIANT, BlockSkyrootWall.PROPERTY_GENERATED);
+		return new BlockStateContainer(this, BlockCustomWall.UP, BlockCustomWall.NORTH, BlockCustomWall.EAST, BlockCustomWall.WEST, BlockCustomWall.SOUTH,
+				BlockWall.VARIANT, BlockSkyrootWall.PROPERTY_GENERATED);
 	}
 }

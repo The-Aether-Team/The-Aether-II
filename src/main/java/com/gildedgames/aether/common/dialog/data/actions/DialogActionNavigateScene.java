@@ -37,7 +37,8 @@ public class DialogActionNavigateScene implements IDialogAction
 		@Override
 		public DialogActionNavigateScene deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
 		{
-			return new DialogActionNavigateScene(new ResourceLocation(json.getAsJsonObject().get("loc").getAsString()), json.getAsJsonObject().get("target").getAsString());
+			return new DialogActionNavigateScene(new ResourceLocation(json.getAsJsonObject().get("loc").getAsString()),
+					json.getAsJsonObject().get("target").getAsString());
 		}
 	}
 }

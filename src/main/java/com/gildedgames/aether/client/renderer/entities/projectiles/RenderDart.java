@@ -50,11 +50,11 @@ public class RenderDart extends Render<EntityDart>
 		final float f = 0.0F;
 		final float f1 = 0.5F;
 		final float f2 = (float) (i * 10) / 32.0F;
-		final float f3 = (float) (5 + i * 10) / 32.0F;
+		final float f3 = (float) (5) / 32.0F;
 		final float f4 = 0.0F;
 		final float f5 = 0.15625F;
-		final float f6 = (float) (5 + i * 10) / 32.0F;
-		final float f7 = (float) (10 + i * 10) / 32.0F;
+		final float f6 = (float) (5) / 32.0F;
+		final float f7 = (float) (10) / 32.0F;
 		final float f8 = 0.05625F;
 		final float f9 = (float) dart.arrowShake - partialTicks;
 

@@ -29,14 +29,6 @@ import java.util.Random;
 
 public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiName, IGrowable
 {
-	protected static final AxisAlignedBB BRETTL_AABB = new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 1.25D, 0.75D);
-	protected static final AxisAlignedBB BRETTL_TOP_AAB = new AxisAlignedBB(0D, 0D, 0D, 0D, 0D, 0D);
-	protected static final AxisAlignedBB BRETTL_MID_AAB = new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 1.5D, 0.75D);
-	protected static final AxisAlignedBB BRETTL_MID_G_AAB = new AxisAlignedBB(0D, 0D, 0D, 1.0D, 1.5D, 1.0D);
-
-	private static final int BRETTL_PLANT_BASE = 0, BRETTL_PLANT_MID = 1, BRETTL_PLANT_TOP = 2,
-							 BRETTL_PLANT_BASE_G = 3, BRETTL_PLANT_MID_G = 4, BRETTL_PLANT_TOP_G = 5;
-
 	public static final BlockVariant
 			BASE = new BlockVariant(0, "base"),
 			MID = new BlockVariant(1, "mid"),
@@ -46,9 +38,21 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 			TOP_G = new BlockVariant(5, "top_g");
 
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", BASE, MID, TOP, BASE_G, MID_G, TOP_G);
+
 	public static final PropertyBool PROPERTY_HARVESTABLE = PropertyBool.create("harvestable");
+
 	public static final PropertyInteger PROPERTY_AGE = PropertyInteger.create("age", 0, 10);
 
+	protected static final AxisAlignedBB BRETTL_AABB = new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 1.25D, 0.75D);
+
+	protected static final AxisAlignedBB BRETTL_TOP_AAB = new AxisAlignedBB(0D, 0D, 0D, 0D, 0D, 0D);
+
+	protected static final AxisAlignedBB BRETTL_MID_AAB = new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 1.5D, 0.75D);
+
+	protected static final AxisAlignedBB BRETTL_MID_G_AAB = new AxisAlignedBB(0D, 0D, 0D, 1.0D, 1.5D, 1.0D);
+
+	private static final int BRETTL_PLANT_BASE = 0, BRETTL_PLANT_MID = 1, BRETTL_PLANT_TOP = 2,
+			BRETTL_PLANT_BASE_G = 3, BRETTL_PLANT_MID_G = 4, BRETTL_PLANT_TOP_G = 5;
 
 	public BlockBrettlPlant()
 	{
@@ -75,10 +79,12 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 	{
 		if (meta <= 2)
 		{
-			return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta)).withProperty(PROPERTY_HARVESTABLE, false).withProperty(PROPERTY_AGE, 0);
+			return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta)).withProperty(PROPERTY_HARVESTABLE, false)
+					.withProperty(PROPERTY_AGE, 0);
 		}
 
-		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta)).withProperty(PROPERTY_HARVESTABLE, true).withProperty(PROPERTY_AGE, 0);
+		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta)).withProperty(PROPERTY_HARVESTABLE, true)
+				.withProperty(PROPERTY_AGE, 0);
 	}
 
 	@Override
@@ -94,27 +100,27 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 		{
 			if (world.getLight(pos) >= 9)
 			{
-					if (state.getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_BASE)
+				if (state.getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_BASE)
+				{
+					if (world.getBlockState(pos.up()).getBlock() == BlocksAether.brettl_plant)
 					{
-						if (world.getBlockState(pos.up()).getBlock() == BlocksAether.brettl_plant)
+						if (rand.nextInt(5) == 0)
 						{
-							if (rand.nextInt(5) == 0)
-							{
-								this.grow(world, rand, pos, state);
-							}
+							this.grow(world, rand, pos, state);
 						}
 					}
+				}
 
-					else if (state.getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_MID)
+				else if (state.getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_MID)
+				{
+					if (world.getBlockState(pos.up()).getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_MID)
 					{
-						if (world.getBlockState(pos.up()).getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_MID)
+						if (rand.nextInt(5) == 0)
 						{
-							if (rand.nextInt(5) == 0)
-							{
-								this.grow(world, rand, pos, state);
-							}
+							this.grow(world, rand, pos, state);
 						}
 					}
+				}
 			}
 		}
 		else
@@ -145,12 +151,11 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 	@Override
 	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient)
 	{
-		if (state.getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_BASE) {
-			if (worldIn.getBlockState(pos.up()).getBlock() == BlocksAether.brettl_plant || worldIn.isAirBlock(pos.up())) {
-				if (worldIn.getBlockState(pos.up(2)).getBlock() == BlocksAether.brettl_plant || worldIn.isAirBlock(pos.up(2)))
-				{
-					return true;
-				}
+		if (state.getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_BASE)
+		{
+			if (worldIn.getBlockState(pos.up()).getBlock() == BlocksAether.brettl_plant || worldIn.isAirBlock(pos.up()))
+			{
+				return worldIn.getBlockState(pos.up(2)).getBlock() == BlocksAether.brettl_plant || worldIn.isAirBlock(pos.up(2));
 			}
 
 			return false;
@@ -164,14 +169,12 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 
 		if (state.getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_TOP)
 		{
-			if (worldIn.getBlockState(pos.down()).getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_BASE) {
+			if (worldIn.getBlockState(pos.down()).getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_BASE)
+			{
 				return worldIn.isAirBlock(pos.up());
 			}
 
-			if (worldIn.getBlockState(pos.down()).getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_MID)
-			{
-				return true;
-			}
+			return worldIn.getBlockState(pos.down()).getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_MID;
 		}
 
 		return false;
@@ -186,7 +189,8 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 	@Override
 	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state)
 	{
-		if (state.getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_BASE) {
+		if (state.getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_BASE)
+		{
 			if (worldIn.isAirBlock(pos.up()) || worldIn.getBlockState(pos.up()).getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_TOP)
 			{
 				worldIn.setBlockState(pos.up(), this.getDefaultState().withProperty(PROPERTY_VARIANT, MID).withProperty(PROPERTY_HARVESTABLE, false));
@@ -203,7 +207,8 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 		}
 		else if (state.getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_MID)
 		{
-			if (worldIn.getBlockState(pos.up()).getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_TOP) {
+			if (worldIn.getBlockState(pos.up()).getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_TOP)
+			{
 				worldIn.setBlockState(pos.up(), this.getDefaultState().withProperty(PROPERTY_VARIANT, TOP_G).withProperty(PROPERTY_HARVESTABLE, false));
 			}
 			else if (worldIn.getBlockState(pos.up()).getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_TOP_G)
@@ -250,7 +255,6 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 				this.fullyPrunePlant(world, pos.down(), state);
 			}
 
-
 			return false;
 		}
 
@@ -279,7 +283,7 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 	{
 		IBlockState downBlock = world.getBlockState(pos);
 
-		return isSuitableSoilBlock(downBlock);
+		return this.isSuitableSoilBlock(downBlock);
 	}
 
 	@Override
@@ -289,9 +293,10 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 	}
 
 	@Override
-	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
+			EntityLivingBase placer)
 	{
-		if (canPlaceBlockAt(worldIn,pos))
+		if (this.canPlaceBlockAt(worldIn, pos))
 		{
 			return this.getDefaultState().withProperty(PROPERTY_VARIANT, BASE).withProperty(PROPERTY_HARVESTABLE, false);
 		}
@@ -302,7 +307,8 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
-		if (state.getValue(PROPERTY_HARVESTABLE)) {
+		if (state.getValue(PROPERTY_HARVESTABLE))
+		{
 			if (state.getValue(PROPERTY_VARIANT).getMeta() != BRETTL_PLANT_TOP_G)
 			{
 				if (state.getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_MID_G)
@@ -367,17 +373,23 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 	// pos should be set to the middle of the 3 states.
 	public void fullyGrowPlant(World worldIn, BlockPos pos, IBlockState state)
 	{
-		worldIn.setBlockState(pos.down(), this.getDefaultState().withProperty(PROPERTY_VARIANT, BASE_G).withProperty(PROPERTY_HARVESTABLE, true).withProperty(PROPERTY_AGE, 0));
-		worldIn.setBlockState(pos, this.getDefaultState().withProperty(PROPERTY_VARIANT, MID_G).withProperty(PROPERTY_HARVESTABLE, true).withProperty(PROPERTY_AGE, 0));
-		worldIn.setBlockState(pos.up(), this.getDefaultState().withProperty(PROPERTY_VARIANT, TOP_G).withProperty(PROPERTY_HARVESTABLE, true).withProperty(PROPERTY_AGE, 0));
+		worldIn.setBlockState(pos.down(),
+				this.getDefaultState().withProperty(PROPERTY_VARIANT, BASE_G).withProperty(PROPERTY_HARVESTABLE, true).withProperty(PROPERTY_AGE, 0));
+		worldIn.setBlockState(pos,
+				this.getDefaultState().withProperty(PROPERTY_VARIANT, MID_G).withProperty(PROPERTY_HARVESTABLE, true).withProperty(PROPERTY_AGE, 0));
+		worldIn.setBlockState(pos.up(),
+				this.getDefaultState().withProperty(PROPERTY_VARIANT, TOP_G).withProperty(PROPERTY_HARVESTABLE, true).withProperty(PROPERTY_AGE, 0));
 
 	}
 
 	public void fullyPrunePlant(World worldIn, BlockPos pos, IBlockState state)
 	{
-		worldIn.setBlockState(pos.down(), this.getDefaultState().withProperty(PROPERTY_VARIANT, BASE).withProperty(PROPERTY_HARVESTABLE, false).withProperty(PROPERTY_AGE, 0));
-		worldIn.setBlockState(pos, this.getDefaultState().withProperty(PROPERTY_VARIANT, MID).withProperty(PROPERTY_HARVESTABLE, false).withProperty(PROPERTY_AGE, 0));
-		worldIn.setBlockState(pos.up(), this.getDefaultState().withProperty(PROPERTY_VARIANT, TOP_G).withProperty(PROPERTY_HARVESTABLE, false).withProperty(PROPERTY_AGE, 0));
+		worldIn.setBlockState(pos.down(),
+				this.getDefaultState().withProperty(PROPERTY_VARIANT, BASE).withProperty(PROPERTY_HARVESTABLE, false).withProperty(PROPERTY_AGE, 0));
+		worldIn.setBlockState(pos,
+				this.getDefaultState().withProperty(PROPERTY_VARIANT, MID).withProperty(PROPERTY_HARVESTABLE, false).withProperty(PROPERTY_AGE, 0));
+		worldIn.setBlockState(pos.up(),
+				this.getDefaultState().withProperty(PROPERTY_VARIANT, TOP_G).withProperty(PROPERTY_HARVESTABLE, false).withProperty(PROPERTY_AGE, 0));
 
 	}
 }

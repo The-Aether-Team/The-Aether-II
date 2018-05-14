@@ -51,10 +51,7 @@ public class ReplaceablePlacementCondition implements PlacementConditionTemplate
 				return true;
 			}
 
-			if (!world.isAirBlock(block.pos))
-			{
-				return false;
-			}
+			return world.isAirBlock(block.pos);
 		}
 
 		return true;

@@ -25,9 +25,9 @@ import java.util.UUID;
 
 public class LayerHeadShadow extends LayerBipedArmor
 {
-	private PatronRewardArmor previewArmor;
-
 	private final RenderLivingBase<?> renderer;
+
+	private PatronRewardArmor previewArmor;
 
 	private ModelPlayer modelArmorSlim;
 

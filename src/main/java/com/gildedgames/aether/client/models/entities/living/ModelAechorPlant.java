@@ -11,11 +11,11 @@ public class ModelAechorPlant extends ModelBase
 
 	public ModelRenderer petal[], leaf[], thorn[], stamen[], stamen2[];
 
-	private ModelRenderer stem, head;
-
 	public float sinage, sinage2;
 
 	public float size;
+
+	private ModelRenderer stem, head;
 
 	public ModelAechorPlant()
 	{

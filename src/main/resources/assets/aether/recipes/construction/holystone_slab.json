@@ -1,17 +1,17 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "###"
-  ],
-  "key": {
-    "#": {
-      "item": "aether:holystone",
-      "data": 0
-    }
-  },
-  "result": {
-    "item": "aether:holystone_slab",
-    "data": 0,
-    "count": 6
-  }
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"###"
+	],
+	"key": {
+		"#": {
+			"item": "aether:holystone",
+			"data": 0
+		}
+	},
+	"result": {
+		"item": "aether:holystone_slab",
+		"data": 0,
+		"count": 6
+	}
 }

@@ -36,6 +36,7 @@ import java.util.Random;
 public class CommonProxy implements IAetherServices
 {
 	private final ContentRegistry contentRegistry = new ContentRegistry();
+
 	private final GildedGamesAccountApiImpl webAPI = new GildedGamesAccountApiImpl();
 
 	private File configDir;

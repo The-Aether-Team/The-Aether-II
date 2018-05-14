@@ -28,10 +28,7 @@ public class FlatGroundPlacementCondition implements PlacementConditionTemplate
 
 			final IBlockState state = world.getBlockState(down);
 
-			if (!BlockUtil.isSolid(state, world, down))
-			{
-				return false;
-			}
+			return BlockUtil.isSolid(state, world, down);
 		}
 
 		return true;

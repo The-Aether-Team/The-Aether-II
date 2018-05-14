@@ -1,27 +1,33 @@
 {
 	"forge_marker": 1,
 	"variants": {
-		"state=bottom": [{
-			"textures": {
-				"bottom": "aether:blocks/icestone_bricks",
-				"top": "aether:blocks/icestone_bricks",
-				"side": "aether:blocks/icestone_bricks"
-			},
-			"model": "half_slab"
-		}],
-		"state=top": [{
-			"textures": {
-				"bottom": "aether:blocks/icestone_bricks",
-				"top": "aether:blocks/icestone_bricks",
-				"side": "aether:blocks/icestone_bricks"
-			},
-			"model": "upper_slab"
-		}],
-		"state=full": [{
-			"textures": {
-				"all": "aether:blocks/icestone_bricks"
-			},
-			"model": "cube_all"
-		}]
+		"state=bottom": [
+			{
+				"textures": {
+					"bottom": "aether:blocks/icestone_bricks",
+					"top": "aether:blocks/icestone_bricks",
+					"side": "aether:blocks/icestone_bricks"
+				},
+				"model": "half_slab"
+			}
+		],
+		"state=top": [
+			{
+				"textures": {
+					"bottom": "aether:blocks/icestone_bricks",
+					"top": "aether:blocks/icestone_bricks",
+					"side": "aether:blocks/icestone_bricks"
+				},
+				"model": "upper_slab"
+			}
+		],
+		"state=full": [
+			{
+				"textures": {
+					"all": "aether:blocks/icestone_bricks"
+				},
+				"model": "cube_all"
+			}
+		]
 	}
 }

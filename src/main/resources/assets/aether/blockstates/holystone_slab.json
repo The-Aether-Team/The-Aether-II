@@ -1,27 +1,33 @@
 {
 	"forge_marker": 1,
 	"variants": {
-		"state=bottom": [{
-			"textures": {
-				"bottom": "aether:blocks/holystone/holystone",
-				"top": "aether:blocks/holystone/holystone",
-				"side": "aether:blocks/holystone/holystone"
-			},
-			"model": "half_slab"
-		}],
-		"state=top": [{
-			"textures": {
-				"bottom": "aether:blocks/holystone/holystone",
-				"top": "aether:blocks/holystone/holystone",
-				"side": "aether:blocks/holystone/holystone"
-			},
-			"model": "upper_slab"
-		}],
-		"state=full": [{
-			"textures": {
-				"all": "aether:blocks/holystone/holystone"
-			},
-			"model": "cube_all"
-		}]
+		"state=bottom": [
+			{
+				"textures": {
+					"bottom": "aether:blocks/holystone/holystone",
+					"top": "aether:blocks/holystone/holystone",
+					"side": "aether:blocks/holystone/holystone"
+				},
+				"model": "half_slab"
+			}
+		],
+		"state=top": [
+			{
+				"textures": {
+					"bottom": "aether:blocks/holystone/holystone",
+					"top": "aether:blocks/holystone/holystone",
+					"side": "aether:blocks/holystone/holystone"
+				},
+				"model": "upper_slab"
+			}
+		],
+		"state=full": [
+			{
+				"textures": {
+					"all": "aether:blocks/holystone/holystone"
+				},
+				"model": "cube_all"
+			}
+		]
 	}
 }

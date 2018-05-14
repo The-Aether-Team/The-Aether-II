@@ -59,10 +59,8 @@ public class ContainerIcestoneCooler extends Container
 	public void detectAndSendChanges()
 	{
 		super.detectAndSendChanges();
-		for (int i = 0; i < this.listeners.size(); ++i)
+		for (final IContainerListener iContainerListener : this.listeners)
 		{
-			final IContainerListener iContainerListener = (IContainerListener) this.listeners.get(i);
-
 			if (this.coolerCoolTime != this.tileCooler.getField(0))
 			{
 				iContainerListener.sendWindowProperty(this, 0, this.tileCooler.getField(0));
@@ -108,7 +106,7 @@ public class ContainerIcestoneCooler extends Container
 	public ItemStack transferStackInSlot(final EntityPlayer playerIn, final int index)
 	{
 		ItemStack itemstack = ItemStack.EMPTY;
-		final Slot slot = (Slot) this.inventorySlots.get(index);
+		final Slot slot = this.inventorySlots.get(index);
 
 		if (slot != null && slot.getHasStack())
 		{

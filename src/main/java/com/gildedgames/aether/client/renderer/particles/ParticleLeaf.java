@@ -20,12 +20,15 @@ public class ParticleLeaf extends Particle
 	private final ResourceLocation sprite = AetherCore.getResource("textures/particles/skyroot_leaf_particle.png");
 
 	private float mulRotX;
+
 	private float mulRotY;
 
 	private float prevRotX;
+
 	private float prevRotY;
 
 	private float rotX;
+
 	private float rotY;
 
 	public ParticleLeaf(World worldIn, double posXIn, double posYIn, double posZIn, double motionX, double motionY, double motionZ, Block block)
@@ -99,7 +102,6 @@ public class ParticleLeaf extends Particle
 			this.particleBlue = 0.301f;
 		}
 
-
 		this.motionY = motionY;
 		this.motionX = motionX;
 		this.motionZ = motionZ;
@@ -124,15 +126,16 @@ public class ParticleLeaf extends Particle
 	}
 
 	@Override
-	public void renderParticle(BufferBuilder buffer, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ)
+	public void renderParticle(BufferBuilder buffer, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY,
+			float rotationXZ)
 	{
 		Minecraft.getMinecraft().renderEngine.bindTexture(this.sprite);
 
 		GlStateManager.disableLighting();
 
-		double x = this.prevPosX + (this.posX - this.prevPosX) * (double)partialTicks - interpPosX;
-		double y = this.prevPosY + (this.posY - this.prevPosY) * (double)partialTicks - interpPosY;
-		double z = this.prevPosZ + (this.posZ - this.prevPosZ) * (double)partialTicks - interpPosZ;
+		double x = this.prevPosX + (this.posX - this.prevPosX) * (double) partialTicks - interpPosX;
+		double y = this.prevPosY + (this.posY - this.prevPosY) * (double) partialTicks - interpPosY;
+		double z = this.prevPosZ + (this.posZ - this.prevPosZ) * (double) partialTicks - interpPosZ;
 
 		int brightness = this.getBrightnessForRender(partialTicks);
 
@@ -146,47 +149,52 @@ public class ParticleLeaf extends Particle
 
 		int i = 0;
 
-		rotationX = MathHelper.cos(f3 * 0.017453292F) * (float)(1 - i * 2);
-		rotationZ = MathHelper.sin(f3 * 0.017453292F) * (float)(1 - i * 2);
+		rotationX = MathHelper.cos(f3 * 0.017453292F) * (float) (1 - i * 2);
+		rotationZ = MathHelper.sin(f3 * 0.017453292F) * (float) (1 - i * 2);
 
-		rotationYZ = -rotationZ * MathHelper.sin(f2 * 0.017453292F) * (float)(1 - i * 2);
-		rotationXY = rotationX * MathHelper.sin(f2 * 0.017453292F) * (float)(1 - i * 2);
+		rotationYZ = -rotationZ * MathHelper.sin(f2 * 0.017453292F) * (float) (1 - i * 2);
+		rotationXY = rotationX * MathHelper.sin(f2 * 0.017453292F) * (float) (1 - i * 2);
 		rotationXZ = MathHelper.cos(f2 * 0.017453292F);
 
 		Vec3d[] avec3d = new Vec3d[] {
 				new Vec3d(
-						(double)(-rotationX * scale - rotationXY * scale),
-						(double)(-rotationZ * scale),
-						(double)(-rotationYZ * scale - rotationXZ * scale)
+						(double) (-rotationX * scale - rotationXY * scale),
+						(double) (-rotationZ * scale),
+						(double) (-rotationYZ * scale - rotationXZ * scale)
 				),
 				new Vec3d(
-						(double)(-rotationX * scale + rotationXY * scale),
-						(double)(rotationZ * scale),
-						(double)(-rotationYZ * scale + rotationXZ * scale)
+						(double) (-rotationX * scale + rotationXY * scale),
+						(double) (rotationZ * scale),
+						(double) (-rotationYZ * scale + rotationXZ * scale)
 				),
 				new Vec3d(
-						(double)(rotationX * scale + rotationXY * scale),
-						(double)(rotationZ * scale),
-						(double)(rotationYZ * scale + rotationXZ * scale)
+						(double) (rotationX * scale + rotationXY * scale),
+						(double) (rotationZ * scale),
+						(double) (rotationYZ * scale + rotationXZ * scale)
 				),
 				new Vec3d(
-						(double)(rotationX * scale - rotationXY * scale),
-						(double)(-rotationZ * scale),
-						(double)(rotationYZ * scale - rotationXZ * scale)
+						(double) (rotationX * scale - rotationXY * scale),
+						(double) (-rotationZ * scale),
+						(double) (rotationYZ * scale - rotationXZ * scale)
 				)
 		};
 
 		float a = 1.0f - (Math.max(0.0f, this.particleAge - 70.0f) * 0.03f);
 
 		buffer.begin(7, DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
-		buffer.pos(x + avec3d[0].x, y + avec3d[0].y, z + avec3d[0].z).tex(0.0D, 1.0D).color(this.particleRed, this.particleGreen, this.particleBlue, a).lightmap(j, k).endVertex();
-		buffer.pos(x + avec3d[1].x, y + avec3d[1].y, z + avec3d[1].z).tex(1.0D, 1.0D).color(this.particleRed, this.particleGreen, this.particleBlue, a).lightmap(j, k).endVertex();
-		buffer.pos(x + avec3d[2].x, y + avec3d[2].y, z + avec3d[2].z).tex(1.0D, 0.0D).color(this.particleRed, this.particleGreen, this.particleBlue, a).lightmap(j, k).endVertex();
-		buffer.pos(x + avec3d[3].x, y + avec3d[3].y, z + avec3d[3].z).tex(0.0D, 0.0D).color(this.particleRed, this.particleGreen, this.particleBlue, a).lightmap(j, k).endVertex();
+		buffer.pos(x + avec3d[0].x, y + avec3d[0].y, z + avec3d[0].z).tex(0.0D, 1.0D).color(this.particleRed, this.particleGreen, this.particleBlue, a)
+				.lightmap(j, k).endVertex();
+		buffer.pos(x + avec3d[1].x, y + avec3d[1].y, z + avec3d[1].z).tex(1.0D, 1.0D).color(this.particleRed, this.particleGreen, this.particleBlue, a)
+				.lightmap(j, k).endVertex();
+		buffer.pos(x + avec3d[2].x, y + avec3d[2].y, z + avec3d[2].z).tex(1.0D, 0.0D).color(this.particleRed, this.particleGreen, this.particleBlue, a)
+				.lightmap(j, k).endVertex();
+		buffer.pos(x + avec3d[3].x, y + avec3d[3].y, z + avec3d[3].z).tex(0.0D, 0.0D).color(this.particleRed, this.particleGreen, this.particleBlue, a)
+				.lightmap(j, k).endVertex();
 
 		Tessellator.getInstance().draw();
 	}
 
+	@Override
 	public int getFXLayer()
 	{
 		return 3;

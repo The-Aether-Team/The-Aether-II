@@ -2,7 +2,6 @@ package com.gildedgames.aether.common.entities.living.passive;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -22,10 +21,10 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 {
 	private static final DataParameter<Integer> SIZE = new DataParameter<>(13, DataSerializers.VARINT);
 
-	private int maxSproutSize;
-
 	@SideOnly(Side.CLIENT)
 	public float sinage, prevSinage;
+
+	private int maxSproutSize;
 
 	public EntityCarrionSprout(final World world)
 	{

@@ -357,10 +357,7 @@ public class CommonEvents
 			{
 				size = new BlockAetherPortal.Size(world, pos, EnumFacing.Axis.Z);
 
-				if (size.isWithinSizeBounds() && size.getPortalBlocks() == 0)
-				{
-					return true;
-				}
+				return size.isWithinSizeBounds() && size.getPortalBlocks() == 0;
 			}
 		}
 

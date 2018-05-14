@@ -1,30 +1,24 @@
 {
 	"type": "forge:ore_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"AAA",
 		"SSS",
 		"HHH"
 	],
-	"key":
-	{
-		"H":
-		{
+	"key": {
+		"H": {
 			"type": "forge:ore_dict",
 			"ore": "holystone"
 		},
-		"A":
-		{
+		"A": {
 			"item": "aether:arkenium"
 		},
-		"S":
-		{
+		"S": {
 			"type": "forge:ore_dict",
 			"ore": "skyrootplanks"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "aether:masonry_bench"
 	}
 }

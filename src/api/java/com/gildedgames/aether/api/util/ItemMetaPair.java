@@ -43,10 +43,7 @@ public class ItemMetaPair
 		{
 			ItemMetaPair pair = (ItemMetaPair) obj;
 
-			if (pair.item == this.item && pair.meta == this.meta)
-			{
-				return true;
-			}
+			return pair.item == this.item && pair.meta == this.meta;
 		}
 
 		return false;

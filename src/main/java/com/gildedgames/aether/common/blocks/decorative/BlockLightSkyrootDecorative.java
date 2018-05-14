@@ -16,7 +16,8 @@ public class BlockLightSkyrootDecorative extends BlockDecorative
 			TILES = new BlockVariant(6, "tiles"),
 			TILES_SMALL = new BlockVariant(7, "tiles_small");
 
-	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", BASE_PLANKS, BASE_BEAM, TOP_PLANKS, TOP_BEAM, FLOORBOARDS, HIGHLIGHT, TILES, TILES_SMALL);
+	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant
+			.create("variant", BASE_PLANKS, BASE_BEAM, TOP_PLANKS, TOP_BEAM, FLOORBOARDS, HIGHLIGHT, TILES, TILES_SMALL);
 
 	public BlockLightSkyrootDecorative()
 	{

@@ -20,27 +20,27 @@ public class SimpleGeneStorage implements IGeneStorage
 	}
 
 	@Override
-	public int getFatherSeed()
-	{
-		return this.fatherSeed;
-	}
-
-	@Override
-	public int getMotherSeed()
-	{
-		return this.motherSeed;
-	}
-
-	@Override
 	public void setSeed(int seed)
 	{
 		this.seed = seed;
 	}
 
 	@Override
+	public int getFatherSeed()
+	{
+		return this.fatherSeed;
+	}
+
+	@Override
 	public void setFatherSeed(int seed)
 	{
 		this.fatherSeed = seed;
+	}
+
+	@Override
+	public int getMotherSeed()
+	{
+		return this.motherSeed;
 	}
 
 	@Override

@@ -95,7 +95,7 @@ public class ChunkGeneratorAether implements IChunkGenerator
 
 				if (dataChunk.getPos().x == chunkX && dataChunk.getPos().z == chunkZ)
 				{
-					final ICreationData data = instance.getCreationData();
+					final ICreationData<?> data = instance.getCreationData();
 
 					dataPrimer.create(dataChunk.getContainer(),
 							data.clone().spawnEntities(false)
@@ -147,7 +147,7 @@ public class ChunkGeneratorAether implements IChunkGenerator
 
 				if (dataChunk.getPos().x == chunkX && dataChunk.getPos().z == chunkZ)
 				{
-					final ICreationData data = instance.getCreationData();
+					final ICreationData<?> data = instance.getCreationData();
 
 					primer.create(dataChunk.getContainer(),
 							data.clone().pos(new BlockPos(dataChunk.getPos().getXStart(), data.getPos().getY(), dataChunk.getPos().getZStart())));

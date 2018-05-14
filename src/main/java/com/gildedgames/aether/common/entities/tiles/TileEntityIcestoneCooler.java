@@ -29,7 +29,7 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 
 	private final int itemCoolTime = 1600;
 
-	private NonNullList<ItemStack> coolerItemStacks = NonNullList.<ItemStack>withSize(3, ItemStack.EMPTY);
+	private NonNullList<ItemStack> coolerItemStacks = NonNullList.withSize(3, ItemStack.EMPTY);
 
 	private int coolerCoolTime;
 
@@ -93,7 +93,7 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 	@Override
 	public ItemStack getStackInSlot(int index)
 	{
-		return (ItemStack) this.coolerItemStacks.get(index);
+		return this.coolerItemStacks.get(index);
 	}
 
 	@Override
@@ -111,7 +111,7 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 	@Override
 	public void setInventorySlotContents(int index, ItemStack stack)
 	{
-		ItemStack itemstack = (ItemStack) this.coolerItemStacks.get(index);
+		ItemStack itemstack = this.coolerItemStacks.get(index);
 		boolean flag = !stack.isEmpty() && stack.isItemEqual(itemstack) && ItemStack.areItemStackTagsEqual(stack, itemstack);
 		this.coolerItemStacks.set(index, stack);
 
@@ -136,9 +136,8 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 	@Override
 	public boolean isUsableByPlayer(EntityPlayer player)
 	{
-		return this.world.getTileEntity(this.pos) != this ?
-				false :
-				player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
+		return this.world.getTileEntity(this.pos) == this
+				&& player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override
@@ -240,9 +239,9 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 
 		if (!this.world.isRemote)
 		{
-			ItemStack itemstack = (ItemStack) this.coolerItemStacks.get(1);
+			ItemStack itemstack = this.coolerItemStacks.get(1);
 
-			if (this.isCooling() || !itemstack.isEmpty() && !((ItemStack) this.coolerItemStacks.get(0)).isEmpty())
+			if (this.isCooling() || !itemstack.isEmpty() && !this.coolerItemStacks.get(0).isEmpty())
 			{
 				if (!this.isCooling() && this.canCool())
 				{
@@ -328,7 +327,7 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 	public void readFromNBT(NBTTagCompound compound)
 	{
 		super.readFromNBT(compound);
-		this.coolerItemStacks = NonNullList.<ItemStack>withSize(this.getSizeInventory(), ItemStack.EMPTY);
+		this.coolerItemStacks = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
 		ItemStackHelper.loadAllItems(compound, this.coolerItemStacks);
 		this.coolerCoolTime = compound.getInteger("coolerCoolTime");
 		this.coolTime = compound.getInteger("coolTime");
@@ -362,13 +361,13 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 
 	private boolean canCool()
 	{
-		if (((ItemStack) this.coolerItemStacks.get(0)).isEmpty())
+		if (this.coolerItemStacks.get(0).isEmpty())
 		{
 			return false;
 		}
 		else
 		{
-			ItemStack itemstack = CoolerRecipes.instance().getCoolingResult((ItemStack) this.coolerItemStacks.get(0));
+			ItemStack itemstack = CoolerRecipes.instance().getCoolingResult(this.coolerItemStacks.get(0));
 
 			if (itemstack.isEmpty())
 			{
@@ -376,7 +375,7 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 			}
 			else
 			{
-				ItemStack itemstack1 = (ItemStack) this.coolerItemStacks.get(2);
+				ItemStack itemstack1 = this.coolerItemStacks.get(2);
 
 				if (itemstack1.isEmpty())
 				{
@@ -401,9 +400,9 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 	{
 		if (this.canCool())
 		{
-			ItemStack itemstack = (ItemStack) this.coolerItemStacks.get(0);
+			ItemStack itemstack = this.coolerItemStacks.get(0);
 			ItemStack itemstack1 = CoolerRecipes.instance().getCoolingResult(itemstack);
-			ItemStack itemStack2 = (ItemStack) this.coolerItemStacks.get(2);
+			ItemStack itemStack2 = this.coolerItemStacks.get(2);
 
 			if (itemStack2.isEmpty())
 			{

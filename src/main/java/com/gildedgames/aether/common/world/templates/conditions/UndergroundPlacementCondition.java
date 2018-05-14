@@ -22,13 +22,9 @@ public class UndergroundPlacementCondition implements PlacementConditionTemplate
 				return false;
 			}
 
-			if ((!TemplateUtil.isReplaceable(world, block.pos) && !world.getBlockState(block.pos).getMaterial().isSolid()
-					&& block.blockState.getBlock() != Blocks.AIR) || (block.blockState.getBlock() != Blocks.AIR
-					&& world.getBlockState(block.pos)
-					== Blocks.AIR.getDefaultState()))// || !state.isSideSolid(world, itPos, EnumFacing.UP))
-			{
-				return false;
-			}
+			return (TemplateUtil.isReplaceable(world, block.pos) || world.getBlockState(block.pos).getMaterial().isSolid()
+					|| block.blockState.getBlock() == Blocks.AIR) && (block.blockState.getBlock() == Blocks.AIR
+					|| world.getBlockState(block.pos) != Blocks.AIR.getDefaultState());
 		}
 
 		return true;

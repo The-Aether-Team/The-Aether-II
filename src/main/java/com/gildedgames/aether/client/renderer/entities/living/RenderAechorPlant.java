@@ -1,7 +1,6 @@
 package com.gildedgames.aether.client.renderer.entities.living;
 
 import com.gildedgames.aether.client.models.entities.living.ModelAechorPlant;
-import com.gildedgames.aether.client.models.entities.living.ModelCarrionSprout;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.living.mobs.EntityAechorPlant;
 import net.minecraft.client.renderer.entity.RenderLiving;

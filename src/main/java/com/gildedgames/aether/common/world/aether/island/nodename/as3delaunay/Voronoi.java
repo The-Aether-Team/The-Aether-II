@@ -100,15 +100,7 @@ public final class Voronoi
 		{
 			return 1;
 		}
-		if (s1.get_x() < s2.get_x())
-		{
-			return -1;
-		}
-		if (s1.get_x() > s2.get_x())
-		{
-			return 1;
-		}
-		return 0;
+		return Double.compare(s1.get_x(), s2.get_x());
 	}
 
 	public static int compareByYThenX(final Site s1, final Point s2)
@@ -121,15 +113,7 @@ public final class Voronoi
 		{
 			return 1;
 		}
-		if (s1.get_x() < s2.x)
-		{
-			return -1;
-		}
-		if (s1.get_x() > s2.x)
-		{
-			return 1;
-		}
-		return 0;
+		return Double.compare(s1.get_x(), s2.x);
 	}
 
 	public Rectangle get_plotBounds()

@@ -58,10 +58,7 @@ public class EntityAICockatriceSneakAttack extends EntityAIBase
 			{
 				final EntityPlayer player = (EntityPlayer) this.attack;
 
-				if (player.isCreative())
-				{
-					return false;
-				}
+				return !player.isCreative();
 			}
 
 			return true;

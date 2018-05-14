@@ -1,24 +1,19 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"XXX",
 		" S "
 	],
-	"key":
-	{
-		"X":
-		{
+	"key": {
+		"X": {
 			"item": "aether:aercloud",
 			"data": 5
 		},
-		"S":
-		{
+		"S": {
 			"item": "aether:cloudtwine"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "aether:cloud_parachute",
 		"data": 2
 	}

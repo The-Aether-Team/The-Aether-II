@@ -20,27 +20,27 @@ public class EntityGeneStorage implements IGeneStorage
 	}
 
 	@Override
-	public int getFatherSeed()
-	{
-		return this.entity.getSeed();
-	}
-
-	@Override
-	public int getMotherSeed()
-	{
-		return this.entity.getMotherSeed();
-	}
-
-	@Override
 	public void setSeed(int seed)
 	{
 		this.entity.setSeed(seed);
 	}
 
 	@Override
+	public int getFatherSeed()
+	{
+		return this.entity.getSeed();
+	}
+
+	@Override
 	public void setFatherSeed(int seed)
 	{
 		this.entity.setFatherSeed(seed);
+	}
+
+	@Override
+	public int getMotherSeed()
+	{
+		return this.entity.getMotherSeed();
 	}
 
 	@Override

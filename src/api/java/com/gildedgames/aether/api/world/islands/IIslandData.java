@@ -76,7 +76,7 @@ public interface IIslandData extends NBT
 	 */
 	long getSeed();
 
-	PlacedBlueprint placeBlueprint(BlueprintDefinition def, ICreationData data);
+	PlacedBlueprint placeBlueprint(BlueprintDefinition def, ICreationData<?> data);
 
 	List<PlacedBlueprint> getPlacedBlueprints();
 

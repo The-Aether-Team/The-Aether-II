@@ -146,14 +146,7 @@ public class EntityParachute extends Entity
 	@Override
 	public boolean attackEntityFrom(final DamageSource source, final float damage)
 	{
-		if (source.getTrueSource() != this.getRidingEntity())
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return source.getTrueSource() != this.getRidingEntity();
 	}
 
 	public enum Type

@@ -18,6 +18,20 @@ public class BlockFloating extends Block
 		super(material);
 	}
 
+	public static boolean canFallInto(World world, BlockPos pos)
+	{
+		if (world.isAirBlock(pos))
+		{
+			return true;
+		}
+
+		IBlockState state = world.getBlockState(pos);
+
+		Material material = state.getMaterial();
+
+		return state.getBlock() == Blocks.FIRE || material == Material.AIR || material == Material.WATER || material == Material.LAVA;
+	}
+
 	@Override
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state)
 	{
@@ -73,20 +87,6 @@ public class BlockFloating extends Block
 				}
 			}
 		}
-	}
-
-	public static boolean canFallInto(World world, BlockPos pos)
-	{
-		if (world.isAirBlock(pos))
-		{
-			return true;
-		}
-
-		IBlockState state = world.getBlockState(pos);
-
-		Material material = state.getMaterial();
-
-		return state.getBlock() == Blocks.FIRE || material == Material.AIR || material == Material.WATER || material == Material.LAVA;
 	}
 
 	@Override

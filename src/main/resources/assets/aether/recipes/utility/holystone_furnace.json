@@ -1,18 +1,18 @@
 {
-    "type": "forge:ore_shaped",
-    "pattern": [
-        "###",
-        "# #",
-        "###"
-    ],
-    "key": {
-        "#": {
-            "type": "forge:ore_dict",
-            "ore": "holystone"
-        }
-    },
-    "result": {
-        "item": "aether:holystone_furnace",
-        "count": 1
-    }
+	"type": "forge:ore_shaped",
+	"pattern": [
+		"###",
+		"# #",
+		"###"
+	],
+	"key": {
+		"#": {
+			"type": "forge:ore_dict",
+			"ore": "holystone"
+		}
+	},
+	"result": {
+		"item": "aether:holystone_furnace",
+		"count": 1
+	}
 }

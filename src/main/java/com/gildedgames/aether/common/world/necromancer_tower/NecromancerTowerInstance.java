@@ -35,7 +35,9 @@ public class NecromancerTowerInstance implements IInstance
 	private PlacedBlueprint tower;
 
 	@SuppressWarnings("unused")
-	public NecromancerTowerInstance() { }
+	public NecromancerTowerInstance()
+	{
+	}
 
 	@SuppressWarnings("unused")
 	public NecromancerTowerInstance(World world)

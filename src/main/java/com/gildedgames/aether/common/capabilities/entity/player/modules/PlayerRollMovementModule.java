@@ -68,7 +68,7 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 
 	public int getTicksRollingMax()
 	{
-		return this.MAX_ROLLING_TICKS;
+		return MAX_ROLLING_TICKS;
 	}
 
 	private void setEntityHeight(float height)
@@ -93,7 +93,7 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 
 	public void startRolling(PacketSpecialMovement.Action action)
 	{
-		if (!AetherHelper.isEnabled(this.getWorld()) || rollCooldown > 0)
+		if (!AetherHelper.isEnabled(this.getWorld()) || this.rollCooldown > 0)
 		{
 			return;
 		}
@@ -122,7 +122,7 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 		this.prevEyeHeight = this.getEntity().getEyeHeight();
 		this.isRolling = true;
 		this.ticksRolling = 0;
-		this.rollCooldown = this.ROLL_COOLDOWN_TICKS;
+		this.rollCooldown = ROLL_COOLDOWN_TICKS;
 	}
 
 	@Override
@@ -136,15 +136,17 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 	{
 		if (this.isRolling)
 		{
-			if (this.ticksRolling <= this.MAX_ROLLING_TICKS)
+			if (this.ticksRolling <= MAX_ROLLING_TICKS)
 			{
-				float newHeight = MathHelper.clamp(this.prevHeight / 4f + this.prevHeight * (Math.abs(this.ticksRolling / (float) this.MAX_ROLLING_TICKS - 0.5f)), this.prevHeight / 2f, this.prevHeight);
+				float newHeight = MathHelper
+						.clamp(this.prevHeight / 4f + this.prevHeight * (Math.abs(this.ticksRolling / (float) MAX_ROLLING_TICKS - 0.5f)),
+								this.prevHeight / 2f, this.prevHeight);
 
-				setEntityHeight(newHeight);
+				this.setEntityHeight(newHeight);
 			}
 			else
 			{
-				this.setEntityHeight(prevHeight);
+				this.setEntityHeight(this.prevHeight);
 				this.getEntity().eyeHeight = this.prevEyeHeight;
 			}
 		}
@@ -155,7 +157,7 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 	{
 		if (this.isRolling)
 		{
-			if (this.ticksRolling <= this.MAX_ROLLING_TICKS)
+			if (this.ticksRolling <= MAX_ROLLING_TICKS)
 			{
 				this.getEntity().stepHeight = 1.0F;
 
@@ -190,9 +192,9 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 				this.getEntity().stepHeight = this.prevStepHeight;
 			}
 		}
-		else if (rollCooldown > 0)
+		else if (this.rollCooldown > 0)
 		{
-			rollCooldown--;
+			this.rollCooldown--;
 		}
 	}
 

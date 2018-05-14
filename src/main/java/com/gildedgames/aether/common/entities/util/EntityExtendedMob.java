@@ -25,7 +25,8 @@ public class EntityExtendedMob extends EntityMob
 	}
 
 	@Override
-	public void onLivingUpdate() {
+	public void onLivingUpdate()
+	{
 		int idleTime = this.idleTime;
 
 		super.onLivingUpdate();

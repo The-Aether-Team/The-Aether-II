@@ -163,7 +163,6 @@ public class SpawnAreaManager implements ISpawnAreaManager
 		}
 	}
 
-
 	@Override
 	public Collection<ISpawnArea> getLoaded()
 	{

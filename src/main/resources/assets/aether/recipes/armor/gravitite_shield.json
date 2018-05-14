@@ -1,20 +1,20 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "#J#",
-        "###",
-        " # "
-    ],
-    "key": {
-        "#": {
-            "item": "aether:gravitite_plate"
-        },
-        "J": {
-            "item": "aether:skyroot_stick"
-        }
-    },
-    "result": {
-        "item": "aether:gravitite_shield",
-        "count": 1
-    }
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"#J#",
+		"###",
+		" # "
+	],
+	"key": {
+		"#": {
+			"item": "aether:gravitite_plate"
+		},
+		"J": {
+			"item": "aether:skyroot_stick"
+		}
+	},
+	"result": {
+		"item": "aether:gravitite_shield",
+		"count": 1
+	}
 }

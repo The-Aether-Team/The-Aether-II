@@ -26,6 +26,37 @@ public class ItemAetherDeveloperWand extends Item
 		super();
 	}
 
+	@Nullable
+	public static Entity spawnCreature(World worldIn, @Nullable ResourceLocation entityID, double x, double y, double z)
+	{
+		if (entityID != null && EntityList.isRegistered(entityID))
+		{
+			Entity entity = null;
+
+			for (int i = 0; i < 1; ++i)
+			{
+				entity = EntityList.createEntityByIDFromName(entityID, worldIn);
+
+				if (entity instanceof EntityLivingBase)
+				{
+					EntityLiving entityliving = (EntityLiving) entity;
+					entity.setLocationAndAngles(x, y, z, MathHelper.wrapDegrees(worldIn.rand.nextFloat() * 360.0F), 0.0F);
+					entityliving.rotationYawHead = entityliving.rotationYaw;
+					entityliving.renderYawOffset = entityliving.rotationYaw;
+					entityliving.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityliving)), null);
+					worldIn.spawnEntity(entity);
+					entityliving.playLivingSound();
+				}
+			}
+
+			return entity;
+		}
+		else
+		{
+			return null;
+		}
+	}
+
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity)
 	{
@@ -82,37 +113,6 @@ public class ItemAetherDeveloperWand extends Item
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer playerIn, EnumHand hand)
 	{
 		return new ActionResult<>(EnumActionResult.PASS, playerIn.getHeldItem(hand));
-	}
-
-	@Nullable
-	public static Entity spawnCreature(World worldIn, @Nullable ResourceLocation entityID, double x, double y, double z)
-	{
-		if (entityID != null && EntityList.isRegistered(entityID))
-		{
-			Entity entity = null;
-
-			for (int i = 0; i < 1; ++i)
-			{
-				entity = EntityList.createEntityByIDFromName(entityID, worldIn);
-
-				if (entity instanceof EntityLivingBase)
-				{
-					EntityLiving entityliving = (EntityLiving) entity;
-					entity.setLocationAndAngles(x, y, z, MathHelper.wrapDegrees(worldIn.rand.nextFloat() * 360.0F), 0.0F);
-					entityliving.rotationYawHead = entityliving.rotationYaw;
-					entityliving.renderYawOffset = entityliving.rotationYaw;
-					entityliving.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityliving)), null);
-					worldIn.spawnEntity(entity);
-					entityliving.playLivingSound();
-				}
-			}
-
-			return entity;
-		}
-		else
-		{
-			return null;
-		}
 	}
 
 }

@@ -1,18 +1,14 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"X"
 	],
-	"key":
-	{
-		"X":
-		{
+	"key": {
+		"X": {
 			"item": "aether:skyroot_log"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "aether:skyroot_planks",
 		"count": 4
 	}

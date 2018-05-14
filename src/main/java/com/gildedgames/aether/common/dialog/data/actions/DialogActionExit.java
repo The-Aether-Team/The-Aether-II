@@ -11,7 +11,9 @@ import java.lang.reflect.Type;
 
 public class DialogActionExit implements IDialogAction
 {
-	private DialogActionExit() { }
+	private DialogActionExit()
+	{
+	}
 
 	@Override
 	public void performAction(IDialogController controller)

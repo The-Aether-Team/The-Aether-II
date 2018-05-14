@@ -1,19 +1,15 @@
 {
 	"type": "forge:ore_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"X"
 	],
-	"key":
-	{
-		"X":
-		{
+	"key": {
+		"X": {
 			"item": "aether:holystone",
-      		"data": 0
+			"data": 0
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "aether:holystone_button",
 		"count": 1
 	}

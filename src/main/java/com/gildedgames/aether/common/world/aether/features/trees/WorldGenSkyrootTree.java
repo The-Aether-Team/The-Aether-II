@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.world.aether.features.trees;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherSapling;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -78,7 +77,7 @@ public class WorldGenSkyrootTree extends WorldGenAbstractTree
 
 				final IBlockState rootState = worldIn.getBlockState(rootBlockPos);
 
-				final boolean isSoil = ((BlockAetherSapling) BlocksAether.aether_sapling).isSuitableSoilBlock(rootState);
+				final boolean isSoil = BlocksAether.aether_sapling.isSuitableSoilBlock(rootState);
 
 				IBlockState state;
 

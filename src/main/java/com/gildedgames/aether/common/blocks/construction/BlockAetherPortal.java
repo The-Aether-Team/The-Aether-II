@@ -52,6 +52,11 @@ public class BlockAetherPortal extends BlockBreakable
 		this.setDefaultState(this.blockState.getBaseState().withProperty(PROPERTY_AXIS, EnumFacing.Axis.X));
 	}
 
+	public static int getMetaForAxis(EnumFacing.Axis axis)
+	{
+		return axis == EnumFacing.Axis.X ? 1 : (axis == EnumFacing.Axis.Z ? 2 : 0);
+	}
+
 	@Override
 	public boolean isFullCube(IBlockState state)
 	{
@@ -63,13 +68,13 @@ public class BlockAetherPortal extends BlockBreakable
 	{
 		switch (state.getValue(PROPERTY_AXIS))
 		{
-		case X:
-			return X_AABB;
-		case Y:
-		default:
-			return Y_AABB;
-		case Z:
-			return Z_AABB;
+			case X:
+				return X_AABB;
+			case Y:
+			default:
+				return Y_AABB;
+			case Z:
+				return Z_AABB;
 		}
 	}
 
@@ -171,20 +176,20 @@ public class BlockAetherPortal extends BlockBreakable
 	{
 		switch (rot)
 		{
-		case COUNTERCLOCKWISE_90:
-		case CLOCKWISE_90:
-			switch (state.getValue(PROPERTY_AXIS))
-			{
-			case X:
-				return state.withProperty(PROPERTY_AXIS, EnumFacing.Axis.Z);
-			case Z:
-				return state.withProperty(PROPERTY_AXIS, EnumFacing.Axis.X);
+			case COUNTERCLOCKWISE_90:
+			case CLOCKWISE_90:
+				switch (state.getValue(PROPERTY_AXIS))
+				{
+					case X:
+						return state.withProperty(PROPERTY_AXIS, EnumFacing.Axis.Z);
+					case Z:
+						return state.withProperty(PROPERTY_AXIS, EnumFacing.Axis.X);
+					default:
+						return state;
+				}
+
 			default:
 				return state;
-			}
-
-		default:
-			return state;
 		}
 	}
 
@@ -192,11 +197,6 @@ public class BlockAetherPortal extends BlockBreakable
 	public int getMetaFromState(IBlockState state)
 	{
 		return getMetaForAxis(state.getValue(PROPERTY_AXIS));
-	}
-
-	public static int getMetaForAxis(EnumFacing.Axis axis)
-	{
-		return axis == EnumFacing.Axis.X ? 1 : (axis == EnumFacing.Axis.Z ? 2 : 0);
 	}
 
 	@Override
@@ -404,7 +404,8 @@ public class BlockAetherPortal extends BlockBreakable
 
 				for (int j = 0; j < this.height; ++j)
 				{
-					this.world.setBlockState(blockpos.up(j), BlocksAether.aether_portal.getDefaultState().withProperty(BlockAetherPortal.PROPERTY_AXIS, this.axis), 2);
+					this.world.setBlockState(blockpos.up(j),
+							BlocksAether.aether_portal.getDefaultState().withProperty(BlockAetherPortal.PROPERTY_AXIS, this.axis), 2);
 				}
 			}
 		}

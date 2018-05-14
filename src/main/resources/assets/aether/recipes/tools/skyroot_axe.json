@@ -1,20 +1,20 @@
 {
-  "type": "forge:ore_shaped",
-  "pattern": [
-    "XX",
-    "X#",
-    " #"
-  ],
-  "key": {
-    "#": {
-      "item": "aether:skyroot_stick"
-    },
-    "X": {
-      "type": "forge:ore_dict",
-      "ore": "skyrootplanks"
-    }
-  },
-  "result": {
-    "item": "aether:skyroot_axe"
-  }
+	"type": "forge:ore_shaped",
+	"pattern": [
+		"XX",
+		"X#",
+		" #"
+	],
+	"key": {
+		"#": {
+			"item": "aether:skyroot_stick"
+		},
+		"X": {
+			"type": "forge:ore_dict",
+			"ore": "skyrootplanks"
+		}
+	},
+	"result": {
+		"item": "aether:skyroot_axe"
+	}
 }

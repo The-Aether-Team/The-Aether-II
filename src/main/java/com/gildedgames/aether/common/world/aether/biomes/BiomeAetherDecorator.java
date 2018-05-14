@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.world.aether.biomes;
 
-import com.gildedgames.aether.api.util.OpenSimplexNoise;
 import com.gildedgames.aether.api.world.generation.TemplateLoc;
 import com.gildedgames.aether.api.world.generation.WorldDecorationUtil;
 import com.gildedgames.aether.api.world.islands.IIslandData;
@@ -19,7 +18,6 @@ import com.gildedgames.aether.common.world.aether.features.*;
 import com.gildedgames.aether.common.world.aether.features.aerclouds.WorldGenAercloud;
 import com.gildedgames.aether.common.world.aether.features.aerclouds.WorldGenPurpleAercloud;
 import com.gildedgames.aether.common.world.aether.features.trees.WorldGenOrangeTree;
-import com.gildedgames.aether.common.world.aether.island.ChunkGeneratorAether;
 import com.gildedgames.aether.common.world.aether.island.data.BlockAccessIsland;
 import com.gildedgames.aether.common.world.templates.TemplatePlacer;
 import com.gildedgames.orbis_api.core.*;
@@ -33,9 +31,7 @@ import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 
@@ -146,7 +142,7 @@ public class BiomeAetherDecorator
 
 				if (pos2.getY() >= 0)
 				{
-					final ICreationData data = new CreationData(world).pos(pos2);
+					final ICreationData<CreationData> data = new CreationData(world).pos(pos2);
 
 					generated = BlueprintPlacer.findPlace(primer, outpost, data, random);
 
@@ -204,7 +200,7 @@ public class BiomeAetherDecorator
 
 				if (pos2.getY() >= 0)
 				{
-					final ICreationData data = new CreationData(world).pos(pos2);
+					final ICreationData<CreationData> data = new CreationData(world).pos(pos2);
 
 					final boolean generated = BlueprintPlacer.findPlace(primer, def, data, rand);
 
@@ -250,7 +246,7 @@ public class BiomeAetherDecorator
 
 				if (pos2.getY() >= 0)
 				{
-					final ICreationData data = new CreationData(world).pos(pos2);
+					final ICreationData<CreationData> data = new CreationData(world).pos(pos2);
 
 					final boolean generated = BlueprintPlacer.findPlace(primer, blueprint, data, rand);
 

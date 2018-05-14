@@ -1,16 +1,16 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "##"
-    ],
-    "key": {
-        "#": {
-            "item": "aether:holystone",
-            "data": 0
-        }
-    },
-    "result": {
-        "item": "aether:holystone_pressure_plate",
-        "count": 1
-    }
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"##"
+	],
+	"key": {
+		"#": {
+			"item": "aether:holystone",
+			"data": 0
+		}
+	},
+	"result": {
+		"item": "aether:holystone_pressure_plate",
+		"count": 1
+	}
 }

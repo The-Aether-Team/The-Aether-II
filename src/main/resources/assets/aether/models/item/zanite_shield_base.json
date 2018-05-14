@@ -1,198 +1,198 @@
 {
-    "textures": {
-        "0": "aether:items/shields/zanite_shield/zanite_handle",
-        "1": "aether:items/shields/zanite_shield/zanite_base1_n_d",
-        "2": "aether:items/shields/zanite_shield/zanite_base1_w_e",
-        "3": "aether:items/shields/zanite_shield/zanite_base1_s_u",
-        "4": "aether:items/shields/zanite_shield/zanite_base2",
-        "5": "aether:items/shields/zanite_shield/zanite_center_mid",
-        "6": "aether:items/shields/zanite_shield/zanite_wing_righta",
-        "7": "aether:items/shields/zanite_shield/zanite_wing_rightb",
-        "8": "aether:items/shields/zanite_shield/zanite_wing_lefta",
-        "9": "aether:items/shields/zanite_shield/zanite_wing_leftb"
-    },
-    "elements": [
-        {
-            "name": "Handle",
-            "from": [ 7, 5, 5 ], 
-            "to": [ 9, 11, 11 ], 
-            "faces": {
-                "north": { "texture": "#0", "uv": [ 6, 6, 8, 12 ] },
-                "east": { "texture": "#0", "uv": [ 0, 6, 6, 12 ] },
-                "south": { "texture": "#0", "uv": [ 6, 6, 8, 12 ] },
-                "west": { "texture": "#0", "uv": [ 0, 6, 6, 12 ] },
-                "up": { "texture": "#0", "uv": [ 6, 6, 8, 12 ] },
-                "down": { "texture": "#0", "uv": [ 6, 6, 8, 12 ] }
-            }
-        },
-        {
-            "name": "Base1",
-            "from": [ 0, 3, 11 ], 
-            "to": [ 16, 15, 12 ], 
-            "faces": {
-                "north": { "texture": "#1", "uv": [ 0, 1, 16, 13 ] },
-                "east": { "texture": "#2", "uv": [ 3, 0, 4, 12 ] },
-                "south": { "texture": "#3", "uv": [ 0, 1, 16, 13 ] },
-                "west": { "texture": "#2", "uv": [ 0, 0, 1, 12 ] },
-                "up": { "texture": "#3", "uv": [ 0, 0, 16, 1 ] },
-                "down": { "texture": "#1", "uv": [ 0, 0, 16, 1 ] }
-            }
-        },
-        {
-            "name": "Base2",
-            "from": [ 2, 1, 11 ], 
-            "to": [ 14, 3, 12 ], 
-            "faces": {
-                "north": { "texture": "#4", "uv": [ 4, 4, 16, 6 ] },
-                "east": { "texture": "#4", "uv": [ 3, 4, 4, 6 ] },
-                "south": { "texture": "#4", "uv": [ 1, 1, 13, 3 ] },
-                "west": { "texture": "#4", "uv": [ 0, 1, 1, 3 ] },
-                "up": { "texture": "#4", "uv": [ 1, 0, 13, 1 ] },
-                "down": { "texture": "#4", "uv": [ 3, 3, 15, 4 ] }
-            }
-        },
-        {
-            "name": "Base3",
-            "from": [ 4, -1, 11 ], 
-            "to": [ 12, 1, 12 ], 
-            "faces": {
-                "north": { "texture": "#4", "uv": [ 8, 10, 16, 12 ] },
-                "east": { "texture": "#4", "uv": [ 7, 10, 8, 12 ] },
-                "south": { "texture": "#4", "uv": [ 1, 7, 9, 9 ] },
-                "west": { "texture": "#4", "uv": [ 0, 7, 1, 9 ] },
-                "up": { "texture": "#4", "uv": [ 1, 6, 9, 7 ] },
-                "down": { "texture": "#4", "uv": [ 7, 9, 15, 10 ] }
-            }
-        },
-        {
-            "name": "Base4",
-            "from": [ 6, -3, 11 ], 
-            "to": [ 10, -1, 12 ], 
-            "faces": {
-                "north": { "texture": "#4", "uv": [ 9, 13, 13, 15 ] },
-                "east": { "texture": "#4", "uv": [ 8, 13, 9, 15 ] },
-                "south": { "texture": "#4", "uv": [ 4, 13, 8, 15 ] },
-                "west": { "texture": "#4", "uv": [ 3, 13, 4, 15 ] },
-                "up": { "texture": "#4", "uv": [ 4, 12, 8, 13 ] },
-                "down": { "texture": "#4", "uv": [ 8, 12, 12, 13 ] }
-            }
-        },
-        {
-            "name": "CenterMid",
-            "from": [ 6, 0, 12 ], 
-            "to": [ 10, 16, 13 ], 
-            "faces": {
-                "north": { "texture": "#5", "uv": [ 6, 0, 10, 16 ] },
-                "east": { "texture": "#5", "uv": [ 5, 0, 6, 16 ] },
-                "south": { "texture": "#5", "uv": [ 1, 0, 5, 16 ] },
-                "west": { "texture": "#5", "uv": [ 0, 0, 1, 16 ] },
-                "up": { "texture": "#5", "uv": [ 11, 1, 15, 2 ] },
-                "down": { "texture": "#5", "uv": [ 11, 3, 15, 4 ] }
-            }
-        },
-        {
-            "name": "WingRight1",
-            "from": [ 3, 3, 11.5 ], 
-            "to": [ 5, 19, 12.5 ], 
-            "faces": {
-                "north": { "texture": "#6", "uv": [ 4, 0, 6, 16 ] },
-                "east": { "texture": "#6", "uv": [ 3, 0, 4, 16 ] },
-                "south": { "texture": "#6", "uv": [ 1, 0, 3, 16 ] },
-                "west": { "texture": "#6", "uv": [ 0, 0, 1, 16 ] },
-                "up": { "texture": "#6", "uv": [ 6, 0, 8, 1 ] },
-                "down": { "texture": "#6", "uv": [ 8, 0, 10, 1 ] }
-            }
-        },
-        {
-            "name": "Wing Right2",
-            "from": [ 1, 5, 11.5 ], 
-            "to": [ 3, 19, 12.5 ], 
-            "faces": {
-                "north": { "texture": "#6", "uv": [ 14, 2, 16, 16 ] },
-                "east": { "texture": "#6", "uv": [ 13, 2, 14, 16 ] },
-                "south": { "texture": "#6", "uv": [ 11, 2, 13, 16 ] },
-                "west": { "texture": "#6", "uv": [ 10, 2, 11, 16 ] },
-                "up": { "texture": "#6", "uv": [ 11, 1, 13, 2 ] },
-                "down": { "texture": "#6", "uv": [ 13, 1, 15, 2 ] }
-            }
-        },
-        {
-            "name": "WingRight3",
-            "from": [ -1, 7, 11.5 ], 
-            "to": [ 1, 17, 12.5 ], 
-            "faces": {
-                "north": { "texture": "#7", "uv": [ 4, 6, 6, 16 ] },
-                "east": { "texture": "#7", "uv": [ 3, 6, 4, 16 ] },
-                "south": { "texture": "#7", "uv": [ 1, 6, 3, 16 ] },
-                "west": { "texture": "#7", "uv": [ 0, 6, 1, 16 ] },
-                "up": { "texture": "#7", "uv": [ 1, 5, 3, 6 ] },
-                "down": { "texture": "#7", "uv": [ 3, 5, 5, 6 ] }
-            }
-        },
-        {
-            "name": "WingRight4",
-            "from": [ -2, 7, 11.5 ], 
-            "to": [ -1, 15, 12.5 ], 
-            "faces": {
-                "north": { "texture": "#7", "uv": [ 10, 8, 11, 16 ] },
-                "east": { "texture": "#7", "uv": [ 9, 8, 10, 16 ] },
-                "south": { "texture": "#7", "uv": [ 8, 8, 9, 16 ] },
-                "west": { "texture": "#7", "uv": [ 7, 8, 8, 16 ] },
-                "up": { "texture": "#7", "uv": [ 8, 7, 9, 8 ] },
-                "down": { "texture": "#7", "uv": [ 9, 7, 10, 8 ] }
-            }
-        },
-        {
-            "name": "WingLeft1",
-            "from": [ 11, 3, 11.5 ], 
-            "to": [ 13, 19, 12.5 ], 
-            "faces": {
-                "north": { "texture": "#8", "uv": [ 14, 0, 16, 16 ] },
-                "east": { "texture": "#8", "uv": [ 13, 0, 14, 16 ] },
-                "south": { "texture": "#8", "uv": [ 11, 0, 13, 16 ] },
-                "west": { "texture": "#8", "uv": [ 10, 0, 11, 16 ] },
-                "up": { "texture": "#8", "uv": [ 6, 0, 8, 1 ] },
-                "down": { "texture": "#8", "uv": [ 8, 0, 10, 1 ] }
-            }
-        },
-        {
-            "name": "WingLeft2",
-            "from": [ 13, 5, 11.5 ], 
-            "to": [ 15, 19, 12.5 ], 
-            "faces": {
-                "north": { "texture": "#8", "uv": [ 4, 2, 6, 16 ] },
-                "east": { "texture": "#8", "uv": [ 3, 2, 4, 16 ] },
-                "south": { "texture": "#8", "uv": [ 1, 2, 3, 16 ] },
-                "west": { "texture": "#8", "uv": [ 0, 2, 1, 16 ] },
-                "up": { "texture": "#8", "uv": [ 1, 1, 3, 2 ] },
-                "down": { "texture": "#8", "uv": [ 3, 1, 5, 2 ] }
-            }
-        },
-        {
-            "name": "WingLeft3",
-            "from": [ 15, 7, 11.5 ], 
-            "to": [ 17, 17, 12.5 ], 
-            "faces": {
-                "north": { "texture": "#9", "uv": [ 14, 6, 16, 16 ] },
-                "east": { "texture": "#9", "uv": [ 13, 6, 14, 16 ] },
-                "south": { "texture": "#9", "uv": [ 11, 6, 13, 16 ] },
-                "west": { "texture": "#9", "uv": [ 10, 6, 11, 16 ] },
-                "up": { "texture": "#9", "uv": [ 11, 5, 13, 6 ] },
-                "down": { "texture": "#9", "uv": [ 13, 5, 15, 6 ] }
-            }
-        },
-        {
-            "name": "WingLeft4",
-            "from": [ 17, 7, 11.5 ], 
-            "to": [ 18, 15, 12.5 ], 
-            "faces": {
-                "north": { "texture": "#9", "uv": [ 8, 8, 9, 16 ] },
-                "east": { "texture": "#9", "uv": [ 7, 8, 8, 16 ] },
-                "south": { "texture": "#9", "uv": [ 6, 8, 7, 16 ] },
-                "west": { "texture": "#9", "uv": [ 5, 8, 6, 14 ] },
-                "up": { "texture": "#9", "uv": [ 6, 7, 7, 8 ] },
-                "down": { "texture": "#9", "uv": [ 7, 7, 8, 8 ] }
-            }
-        }
-    ]
+	"textures": {
+		"0": "aether:items/shields/zanite_shield/zanite_handle",
+		"1": "aether:items/shields/zanite_shield/zanite_base1_n_d",
+		"2": "aether:items/shields/zanite_shield/zanite_base1_w_e",
+		"3": "aether:items/shields/zanite_shield/zanite_base1_s_u",
+		"4": "aether:items/shields/zanite_shield/zanite_base2",
+		"5": "aether:items/shields/zanite_shield/zanite_center_mid",
+		"6": "aether:items/shields/zanite_shield/zanite_wing_righta",
+		"7": "aether:items/shields/zanite_shield/zanite_wing_rightb",
+		"8": "aether:items/shields/zanite_shield/zanite_wing_lefta",
+		"9": "aether:items/shields/zanite_shield/zanite_wing_leftb"
+	},
+	"elements": [
+		{
+			"name": "Handle",
+			"from": [ 7, 5, 5 ],
+			"to": [ 9, 11, 11 ],
+			"faces": {
+				"north": { "texture": "#0", "uv": [ 6, 6, 8, 12 ] },
+				"east": { "texture": "#0", "uv": [ 0, 6, 6, 12 ] },
+				"south": { "texture": "#0", "uv": [ 6, 6, 8, 12 ] },
+				"west": { "texture": "#0", "uv": [ 0, 6, 6, 12 ] },
+				"up": { "texture": "#0", "uv": [ 6, 6, 8, 12 ] },
+				"down": { "texture": "#0", "uv": [ 6, 6, 8, 12 ] }
+			}
+		},
+		{
+			"name": "Base1",
+			"from": [ 0, 3, 11 ],
+			"to": [ 16, 15, 12 ],
+			"faces": {
+				"north": { "texture": "#1", "uv": [ 0, 1, 16, 13 ] },
+				"east": { "texture": "#2", "uv": [ 3, 0, 4, 12 ] },
+				"south": { "texture": "#3", "uv": [ 0, 1, 16, 13 ] },
+				"west": { "texture": "#2", "uv": [ 0, 0, 1, 12 ] },
+				"up": { "texture": "#3", "uv": [ 0, 0, 16, 1 ] },
+				"down": { "texture": "#1", "uv": [ 0, 0, 16, 1 ] }
+			}
+		},
+		{
+			"name": "Base2",
+			"from": [ 2, 1, 11 ],
+			"to": [ 14, 3, 12 ],
+			"faces": {
+				"north": { "texture": "#4", "uv": [ 4, 4, 16, 6 ] },
+				"east": { "texture": "#4", "uv": [ 3, 4, 4, 6 ] },
+				"south": { "texture": "#4", "uv": [ 1, 1, 13, 3 ] },
+				"west": { "texture": "#4", "uv": [ 0, 1, 1, 3 ] },
+				"up": { "texture": "#4", "uv": [ 1, 0, 13, 1 ] },
+				"down": { "texture": "#4", "uv": [ 3, 3, 15, 4 ] }
+			}
+		},
+		{
+			"name": "Base3",
+			"from": [ 4, -1, 11 ],
+			"to": [ 12, 1, 12 ],
+			"faces": {
+				"north": { "texture": "#4", "uv": [ 8, 10, 16, 12 ] },
+				"east": { "texture": "#4", "uv": [ 7, 10, 8, 12 ] },
+				"south": { "texture": "#4", "uv": [ 1, 7, 9, 9 ] },
+				"west": { "texture": "#4", "uv": [ 0, 7, 1, 9 ] },
+				"up": { "texture": "#4", "uv": [ 1, 6, 9, 7 ] },
+				"down": { "texture": "#4", "uv": [ 7, 9, 15, 10 ] }
+			}
+		},
+		{
+			"name": "Base4",
+			"from": [ 6, -3, 11 ],
+			"to": [ 10, -1, 12 ],
+			"faces": {
+				"north": { "texture": "#4", "uv": [ 9, 13, 13, 15 ] },
+				"east": { "texture": "#4", "uv": [ 8, 13, 9, 15 ] },
+				"south": { "texture": "#4", "uv": [ 4, 13, 8, 15 ] },
+				"west": { "texture": "#4", "uv": [ 3, 13, 4, 15 ] },
+				"up": { "texture": "#4", "uv": [ 4, 12, 8, 13 ] },
+				"down": { "texture": "#4", "uv": [ 8, 12, 12, 13 ] }
+			}
+		},
+		{
+			"name": "CenterMid",
+			"from": [ 6, 0, 12 ],
+			"to": [ 10, 16, 13 ],
+			"faces": {
+				"north": { "texture": "#5", "uv": [ 6, 0, 10, 16 ] },
+				"east": { "texture": "#5", "uv": [ 5, 0, 6, 16 ] },
+				"south": { "texture": "#5", "uv": [ 1, 0, 5, 16 ] },
+				"west": { "texture": "#5", "uv": [ 0, 0, 1, 16 ] },
+				"up": { "texture": "#5", "uv": [ 11, 1, 15, 2 ] },
+				"down": { "texture": "#5", "uv": [ 11, 3, 15, 4 ] }
+			}
+		},
+		{
+			"name": "WingRight1",
+			"from": [ 3, 3, 11.5 ],
+			"to": [ 5, 19, 12.5 ],
+			"faces": {
+				"north": { "texture": "#6", "uv": [ 4, 0, 6, 16 ] },
+				"east": { "texture": "#6", "uv": [ 3, 0, 4, 16 ] },
+				"south": { "texture": "#6", "uv": [ 1, 0, 3, 16 ] },
+				"west": { "texture": "#6", "uv": [ 0, 0, 1, 16 ] },
+				"up": { "texture": "#6", "uv": [ 6, 0, 8, 1 ] },
+				"down": { "texture": "#6", "uv": [ 8, 0, 10, 1 ] }
+			}
+		},
+		{
+			"name": "Wing Right2",
+			"from": [ 1, 5, 11.5 ],
+			"to": [ 3, 19, 12.5 ],
+			"faces": {
+				"north": { "texture": "#6", "uv": [ 14, 2, 16, 16 ] },
+				"east": { "texture": "#6", "uv": [ 13, 2, 14, 16 ] },
+				"south": { "texture": "#6", "uv": [ 11, 2, 13, 16 ] },
+				"west": { "texture": "#6", "uv": [ 10, 2, 11, 16 ] },
+				"up": { "texture": "#6", "uv": [ 11, 1, 13, 2 ] },
+				"down": { "texture": "#6", "uv": [ 13, 1, 15, 2 ] }
+			}
+		},
+		{
+			"name": "WingRight3",
+			"from": [ -1, 7, 11.5 ],
+			"to": [ 1, 17, 12.5 ],
+			"faces": {
+				"north": { "texture": "#7", "uv": [ 4, 6, 6, 16 ] },
+				"east": { "texture": "#7", "uv": [ 3, 6, 4, 16 ] },
+				"south": { "texture": "#7", "uv": [ 1, 6, 3, 16 ] },
+				"west": { "texture": "#7", "uv": [ 0, 6, 1, 16 ] },
+				"up": { "texture": "#7", "uv": [ 1, 5, 3, 6 ] },
+				"down": { "texture": "#7", "uv": [ 3, 5, 5, 6 ] }
+			}
+		},
+		{
+			"name": "WingRight4",
+			"from": [ -2, 7, 11.5 ],
+			"to": [ -1, 15, 12.5 ],
+			"faces": {
+				"north": { "texture": "#7", "uv": [ 10, 8, 11, 16 ] },
+				"east": { "texture": "#7", "uv": [ 9, 8, 10, 16 ] },
+				"south": { "texture": "#7", "uv": [ 8, 8, 9, 16 ] },
+				"west": { "texture": "#7", "uv": [ 7, 8, 8, 16 ] },
+				"up": { "texture": "#7", "uv": [ 8, 7, 9, 8 ] },
+				"down": { "texture": "#7", "uv": [ 9, 7, 10, 8 ] }
+			}
+		},
+		{
+			"name": "WingLeft1",
+			"from": [ 11, 3, 11.5 ],
+			"to": [ 13, 19, 12.5 ],
+			"faces": {
+				"north": { "texture": "#8", "uv": [ 14, 0, 16, 16 ] },
+				"east": { "texture": "#8", "uv": [ 13, 0, 14, 16 ] },
+				"south": { "texture": "#8", "uv": [ 11, 0, 13, 16 ] },
+				"west": { "texture": "#8", "uv": [ 10, 0, 11, 16 ] },
+				"up": { "texture": "#8", "uv": [ 6, 0, 8, 1 ] },
+				"down": { "texture": "#8", "uv": [ 8, 0, 10, 1 ] }
+			}
+		},
+		{
+			"name": "WingLeft2",
+			"from": [ 13, 5, 11.5 ],
+			"to": [ 15, 19, 12.5 ],
+			"faces": {
+				"north": { "texture": "#8", "uv": [ 4, 2, 6, 16 ] },
+				"east": { "texture": "#8", "uv": [ 3, 2, 4, 16 ] },
+				"south": { "texture": "#8", "uv": [ 1, 2, 3, 16 ] },
+				"west": { "texture": "#8", "uv": [ 0, 2, 1, 16 ] },
+				"up": { "texture": "#8", "uv": [ 1, 1, 3, 2 ] },
+				"down": { "texture": "#8", "uv": [ 3, 1, 5, 2 ] }
+			}
+		},
+		{
+			"name": "WingLeft3",
+			"from": [ 15, 7, 11.5 ],
+			"to": [ 17, 17, 12.5 ],
+			"faces": {
+				"north": { "texture": "#9", "uv": [ 14, 6, 16, 16 ] },
+				"east": { "texture": "#9", "uv": [ 13, 6, 14, 16 ] },
+				"south": { "texture": "#9", "uv": [ 11, 6, 13, 16 ] },
+				"west": { "texture": "#9", "uv": [ 10, 6, 11, 16 ] },
+				"up": { "texture": "#9", "uv": [ 11, 5, 13, 6 ] },
+				"down": { "texture": "#9", "uv": [ 13, 5, 15, 6 ] }
+			}
+		},
+		{
+			"name": "WingLeft4",
+			"from": [ 17, 7, 11.5 ],
+			"to": [ 18, 15, 12.5 ],
+			"faces": {
+				"north": { "texture": "#9", "uv": [ 8, 8, 9, 16 ] },
+				"east": { "texture": "#9", "uv": [ 7, 8, 8, 16 ] },
+				"south": { "texture": "#9", "uv": [ 6, 8, 7, 16 ] },
+				"west": { "texture": "#9", "uv": [ 5, 8, 6, 14 ] },
+				"up": { "texture": "#9", "uv": [ 6, 7, 7, 8 ] },
+				"down": { "texture": "#9", "uv": [ 7, 7, 8, 8 ] }
+			}
+		}
+	]
 }

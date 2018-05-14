@@ -71,24 +71,14 @@ public abstract class EntityGeneticAnimal<T extends IGenePool> extends EntityAni
 		return this.getDataManager().get(EntityGeneticAnimal.SEED);
 	}
 
-	public int getFatherSeed()
-	{
-		return this.getDataManager().get(EntityGeneticAnimal.FATHER_SEED);
-	}
-
-	public int getMotherSeed()
-	{
-		return this.getDataManager().get(EntityGeneticAnimal.MOTHER_SEED);
-	}
-
-	protected boolean shouldRetransform()
-	{
-		return this.getDataManager().get(EntityGeneticAnimal.SHOULD_RETRANSFORM);
-	}
-
 	protected void setSeed(int seed)
 	{
 		this.getDataManager().set(EntityGeneticAnimal.SEED, seed);
+	}
+
+	public int getFatherSeed()
+	{
+		return this.getDataManager().get(EntityGeneticAnimal.FATHER_SEED);
 	}
 
 	protected void setFatherSeed(int seed)
@@ -96,9 +86,19 @@ public abstract class EntityGeneticAnimal<T extends IGenePool> extends EntityAni
 		this.getDataManager().set(EntityGeneticAnimal.FATHER_SEED, seed);
 	}
 
+	public int getMotherSeed()
+	{
+		return this.getDataManager().get(EntityGeneticAnimal.MOTHER_SEED);
+	}
+
 	protected void setMotherSeed(int seed)
 	{
 		this.getDataManager().set(EntityGeneticAnimal.MOTHER_SEED, seed);
+	}
+
+	protected boolean shouldRetransform()
+	{
+		return this.getDataManager().get(EntityGeneticAnimal.SHOULD_RETRANSFORM);
 	}
 
 	protected void setShouldRetransform(boolean flag)

@@ -16,7 +16,8 @@ public class BlockAgiositeDecorative extends BlockDecorative
 			FLAGSTONES = new BlockVariant(4, "flagstones"),
 			KEYSTONE = new BlockVariant(5, "keystone");
 
-	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", BASE_BRICKS, BASE_PILLAR, CAPSTONE_BRICKS, CAPSTONE_PILLAR, FLAGSTONES, KEYSTONE);
+	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant
+			.create("variant", BASE_BRICKS, BASE_PILLAR, CAPSTONE_BRICKS, CAPSTONE_PILLAR, FLAGSTONES, KEYSTONE);
 
 	public BlockAgiositeDecorative()
 	{

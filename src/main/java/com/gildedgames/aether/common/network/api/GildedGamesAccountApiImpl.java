@@ -20,6 +20,7 @@ public class GildedGamesAccountApiImpl implements IGildedGamesAccountApi
 
 	private final Gson gson = new Gson();
 
+	@Override
 	public Future<UserFeatures> retrieveUserFeatures(UUID uuid)
 	{
 		return this.service.submit(() -> {

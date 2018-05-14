@@ -16,15 +16,15 @@ import java.util.Map;
 
 public class LayerAetherPatronArmor implements LayerRenderer<EntityLivingBase>
 {
+	private static final Map<String, ResourceLocation> ARMOR_TEXTURE_RES_MAP = Maps.newHashMap();
+
+	private final RenderLivingBase<?> renderer;
+
 	private PatronRewardArmor previewArmor;
 
 	private ModelBiped modelLeggings;
 
 	private ModelBiped modelArmor;
-
-	private final RenderLivingBase<?> renderer;
-
-	private static final Map<String, ResourceLocation> ARMOR_TEXTURE_RES_MAP = Maps.newHashMap();
 
 	public LayerAetherPatronArmor(RenderLivingBase<?> rendererIn)
 	{
@@ -38,6 +38,7 @@ public class LayerAetherPatronArmor implements LayerRenderer<EntityLivingBase>
 		this.previewArmor = armor;
 	}
 
+	@Override
 	public void doRenderLayer(EntityLivingBase entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks,
 			float netHeadYaw, float headPitch, float scale)
 	{
@@ -49,14 +50,20 @@ public class LayerAetherPatronArmor implements LayerRenderer<EntityLivingBase>
 			armor = aePlayer.getPatronRewardsModule().getChoices().getArmorChoice();
 		}
 
-		if (armor != null && armor.getArmorTextureName() != null) {
-			this.renderArmorLayer(entity, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale, EntityEquipmentSlot.CHEST, armor.getArmorTextureName());
-			this.renderArmorLayer(entity, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale, EntityEquipmentSlot.LEGS, armor.getArmorTextureName());
-			this.renderArmorLayer(entity, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale, EntityEquipmentSlot.FEET, armor.getArmorTextureName());
-			this.renderArmorLayer(entity, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale, EntityEquipmentSlot.HEAD, armor.getArmorTextureName());
+		if (armor != null && armor.getArmorTextureName() != null)
+		{
+			this.renderArmorLayer(entity, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale, EntityEquipmentSlot.CHEST,
+					armor.getArmorTextureName());
+			this.renderArmorLayer(entity, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale, EntityEquipmentSlot.LEGS,
+					armor.getArmorTextureName());
+			this.renderArmorLayer(entity, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale, EntityEquipmentSlot.FEET,
+					armor.getArmorTextureName());
+			this.renderArmorLayer(entity, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale, EntityEquipmentSlot.HEAD,
+					armor.getArmorTextureName());
 		}
 	}
 
+	@Override
 	public boolean shouldCombineTextures()
 	{
 		return false;
@@ -65,8 +72,9 @@ public class LayerAetherPatronArmor implements LayerRenderer<EntityLivingBase>
 	protected void renderArmorLayer(EntityLivingBase entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks,
 			float netHeadYaw, float headPitch, float scale, EntityEquipmentSlot slot, String res)
 	{
-		ResourceLocation texture = ARMOR_TEXTURE_RES_MAP.computeIfAbsent(AetherCore.getResourcePath("textures/armor/" + res + "_layer_" + (slot == EntityEquipmentSlot.LEGS ? 2 : 1) + ".png"),
-				ResourceLocation::new);
+		ResourceLocation texture = ARMOR_TEXTURE_RES_MAP
+				.computeIfAbsent(AetherCore.getResourcePath("textures/armor/" + res + "_layer_" + (slot == EntityEquipmentSlot.LEGS ? 2 : 1) + ".png"),
+						ResourceLocation::new);
 
 		ModelBiped model = this.getModelFromSlot(slot);
 

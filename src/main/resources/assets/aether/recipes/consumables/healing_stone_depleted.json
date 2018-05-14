@@ -1,29 +1,23 @@
 {
 	"type": "forge:ore_shaped",
-	"pattern":
-	[
+	"pattern": [
 		" ZX",
 		" XZ",
 		"Y  "
 	],
-	"key":
-	{
-		"X":
-		{
+	"key": {
+		"X": {
 			"item": "aether:ambrosium_chunk"
 		},
-		"Z":
-		{
+		"Z": {
 			"type": "forge:ore_dict",
-            "ore": "holystone"
+			"ore": "holystone"
 		},
-		"Y":
-		{
+		"Y": {
 			"item": "aether:ambrosium_shard"
-		}		
+		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "aether:healing_stone_depleted"
 	}
 }
