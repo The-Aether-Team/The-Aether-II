@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.world.spawning.conditions;
 
-import com.gildedgames.aether.common.world.spawning.PosCondition;
+import com.gildedgames.aether.api.world.PosCondition;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;

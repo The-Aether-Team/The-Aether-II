@@ -4,7 +4,7 @@ import com.gildedgames.aether.common.registry.content.BiomesAether;
 import com.gildedgames.aether.common.world.aether.prep.PrepSectorDataAether;
 import com.gildedgames.orbis_api.preparation.IPrepManager;
 import com.gildedgames.orbis_api.preparation.IPrepSector;
-import com.gildedgames.orbis_api.preparation.IPrepSectorAccess;
+import com.gildedgames.orbis_api.preparation.IPrepSectorAccessAsync;
 import com.gildedgames.orbis_api.preparation.impl.util.PrepHelper;
 import com.gildedgames.orbis_api.world.WorldObjectManager;
 import com.google.common.collect.Lists;
@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 
 public class BiomeProviderAether extends BiomeProvider
 {
@@ -70,7 +71,7 @@ public class BiomeProviderAether extends BiomeProvider
 			return biomes;
 		}
 
-		IPrepSectorAccess access = manager.access();
+		IPrepSectorAccessAsync access = manager.access();
 
 		IPrepSector cachedSector = null;
 
@@ -90,7 +91,14 @@ public class BiomeProviderAether extends BiomeProvider
 
 				if (chunkX != prevChunkX || chunkY != prevChunkY || cachedSector == null)
 				{
-					cachedSector = this.world.isRemote ? access.provideSector(chunkX, chunkY) : access.getLoadedSector(chunkX, chunkY).orElse(null);
+					try
+					{
+						cachedSector = this.world.isRemote ? access.provideSector(chunkX, chunkY).get() : access.getLoadedSector(chunkX, chunkY).orElse(null);
+					}
+					catch (InterruptedException | ExecutionException e)
+					{
+						throw new RuntimeException(e);
+					}
 
 					prevChunkX = chunkX;
 					prevChunkY = chunkY;

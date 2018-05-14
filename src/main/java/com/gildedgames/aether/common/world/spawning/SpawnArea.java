@@ -1,23 +1,28 @@
 package com.gildedgames.aether.common.world.spawning;
 
+import com.gildedgames.aether.api.world.ISpawnArea;
 import com.gildedgames.aether.common.AetherCore;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.ChunkPos;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public class SpawnArea
+import java.util.Objects;
+
+public class SpawnArea implements ISpawnArea
 {
+	private ChunkPos min;
 
-	private final ChunkPos min;
+	private ChunkPos max;
 
-	private final ChunkPos max;
+	private int areaX;
 
-	private final int areaX;
-
-	private final int areaZ;
+	private int areaZ;
 
 	private int entityCount;
 
 	private boolean hasPlayerInside;
+
+	private boolean dirty = false;
 
 	public SpawnArea(final int chunkArea, final int areaX, final int areaZ)
 	{
@@ -28,84 +33,138 @@ public class SpawnArea
 		this.areaZ = areaZ;
 	}
 
+	@Override
 	public ChunkPos getMinChunkPos()
 	{
 		return this.min;
 	}
 
+	@Override
 	public ChunkPos getMaxChunkPos()
 	{
 		return this.max;
 	}
 
+	@Override
 	public int getAreaX()
 	{
 		return this.areaX;
 	}
 
+	@Override
 	public int getAreaZ()
 	{
 		return this.areaZ;
 	}
 
+	@Override
 	public void addToEntityCount(final int count)
 	{
-		this.entityCount += count;
+		int entityCount = this.entityCount;
+		entityCount += count;
 
-		if (this.entityCount < 0)
+		if (entityCount < 0)
 		{
 			AetherCore.LOGGER
 					.warn("Something has gone horribly wrong! The entity count in a SpawnArea object has become negative. Please warn the devs so they can fix this bug.");
 		}
 
-		this.entityCount = Math.max(0, this.entityCount);
+		this.entityCount = Math.max(0, entityCount);
+
+		this.markDirty();
 	}
 
+	@Override
 	public int getEntityCount()
 	{
 		return this.entityCount;
 	}
 
-	public void setEntityCount(final int entityCount)
+	@Override
+	public void setEntityCount(int entityCount)
 	{
 		this.entityCount = entityCount;
+
+		this.markDirty();
 	}
 
+	@Override
 	public boolean hasPlayerInside()
 	{
 		return this.hasPlayerInside;
 	}
 
+	@Override
 	public void setInPlayersRenderDistance(final boolean flag)
 	{
 		this.hasPlayerInside = flag;
 	}
 
 	@Override
-	public boolean equals(final Object obj)
+	public boolean isDirty()
 	{
-		if (obj instanceof SpawnArea)
-		{
-			final SpawnArea area = (SpawnArea) obj;
-
-			if (area.min.equals(this.min) && area.max.equals(this.max))
-			{
-				return true;
-			}
-		}
-
-		return false;
+		return this.dirty;
 	}
 
 	@Override
+	public void markDirty()
+	{
+		this.dirty = true;
+	}
+
+	@Override
+	public void markClean()
+	{
+		this.dirty = false;
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+
+		if (o == null || getClass() != o.getClass())
+		{
+			return false;
+		}
+
+		SpawnArea area = (SpawnArea) o;
+
+		return areaX == area.areaX &&
+				areaZ == area.areaZ &&
+				entityCount == area.entityCount &&
+				hasPlayerInside == area.hasPlayerInside &&
+				dirty == area.dirty &&
+				Objects.equals(min, area.min) &&
+				Objects.equals(max, area.max);
+	}
+
+	@Override
+
 	public int hashCode()
 	{
 		final HashCodeBuilder builder = new HashCodeBuilder();
-
 		builder.append(this.min);
 		builder.append(this.max);
 
 		return builder.toHashCode();
 	}
 
+	@Override
+	public NBTTagCompound serializeNBT()
+	{
+		NBTTagCompound nbt = new NBTTagCompound();
+		nbt.setInteger("EntityCount", this.entityCount);
+
+		return nbt;
+	}
+
+	@Override
+	public void deserializeNBT(NBTTagCompound nbt)
+	{
+		this.entityCount = nbt.getInteger("EntityCount");
+	}
 }

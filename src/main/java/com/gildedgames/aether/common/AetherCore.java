@@ -6,7 +6,7 @@ import com.gildedgames.aether.common.analytics.GAReporter;
 import com.gildedgames.aether.common.registry.SpawnRegistry;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.world.aether.TeleporterAether;
-import com.gildedgames.orbis_api.preparation.impl.PrepTasks;
+import com.gildedgames.orbis_api.preparation.impl.util.PrepHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.util.ResourceLocation;
@@ -102,8 +102,6 @@ public class AetherCore
 	{
 		AetherCore.CONFIG = new ConfigAether(event.getSuggestedConfigurationFile());
 		AetherCore.PROXY.preInit(event);
-
-		AetherCore.SPAWN_REGISTRY.registerAetherSpawnHandlers();
 	}
 
 	@EventHandler
@@ -116,7 +114,7 @@ public class AetherCore
 	@EventHandler
 	public void onFMLInit(final FMLInitializationEvent event)
 	{
-		System.out.println("OrbisAPI is installed: " + Loader.isModLoaded("orbis_api"));
+		AetherCore.LOGGER.info("OrbisAPI is installed: " + Loader.isModLoaded("orbis_api"));
 
 		AetherCore.PROXY.init(event);
 
@@ -127,21 +125,17 @@ public class AetherCore
 	public void onServerStopping(final FMLServerStoppingEvent event)
 	{
 		DimensionsAether.onServerStopping(event);
-
-		AetherCore.SPAWN_REGISTRY.write();
 	}
 
 	@EventHandler
 	public void serverStarted(final FMLServerStartedEvent event)
 	{
-		AetherCore.SPAWN_REGISTRY.read();
-
 		World world = DimensionManager.getWorld(CONFIG.getAetherDimID());
 
 		// TODO: In SpongeForge, the world is not loaded yet for some reason?
 		if (world != null)
 		{
-			PrepTasks.prepSector(world, 0, 0);
+			PrepHelper.getManager(world).access().provideSector(0, 0);
 		}
 	}
 

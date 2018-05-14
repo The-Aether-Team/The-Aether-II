@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world.spawning.conditions;
 
-import com.gildedgames.aether.common.world.spawning.PosCondition;
-import com.gildedgames.aether.common.world.spawning.WorldCondition;
+import com.gildedgames.aether.api.world.PosCondition;
+import com.gildedgames.aether.api.world.WorldCondition;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;

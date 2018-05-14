@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.world.spawning;
+package com.gildedgames.aether.api.world;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

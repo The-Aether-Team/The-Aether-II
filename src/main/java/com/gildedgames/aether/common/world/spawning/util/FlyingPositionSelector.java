@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.world.spawning.util;
 
-import com.gildedgames.aether.common.world.spawning.PositionSelector;
+import com.gildedgames.aether.api.world.PositionSelector;
 import net.minecraft.world.World;
 
 public class FlyingPositionSelector implements PositionSelector

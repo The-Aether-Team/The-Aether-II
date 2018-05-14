@@ -1,26 +1,30 @@
 package com.gildedgames.aether.common.world.spawning;
 
+import com.gildedgames.aether.api.world.ISpawnEntry;
+import com.gildedgames.aether.api.world.PosCondition;
+import com.gildedgames.aether.api.world.PositionSelector;
 import com.gildedgames.aether.common.world.spawning.util.GroundPositionSelector;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 
+import java.util.Collections;
 import java.util.List;
 
-public class SpawnEntry
+public class SpawnEntry implements ISpawnEntry
 {
 
 	private final PositionSelector positionSelector;
 
 	private final EntityLiving.SpawnPlacementType placementType;
 
-	private Class<? extends Entity> clazz;
+	private final Class<? extends Entity> clazz;
 
-	private int minGroupSize, maxGroupSize;
+	private final int minGroupSize, maxGroupSize;
 
-	private float rarityWeight;
+	private final float rarityWeight;
 
-	private List<PosCondition> conditions = Lists.newArrayList();
+	private final List<PosCondition> conditions = Lists.newArrayList();
 
 	public SpawnEntry(EntityLiving.SpawnPlacementType placementType, Class<? extends Entity> clazz, float rarityWeight, int minGroupSize, int maxGroupSize)
 	{
@@ -38,43 +42,51 @@ public class SpawnEntry
 		this.positionSelector = heightSelector;
 	}
 
+	@Override
 	public EntityLiving.SpawnPlacementType getPlacementType()
 	{
 		return this.placementType;
 	}
 
-	public SpawnEntry conditiion(PosCondition condition)
+	@Override
+	public SpawnEntry addCondition(PosCondition condition)
 	{
 		this.conditions.add(condition);
 
 		return this;
 	}
 
+	@Override
 	public List<PosCondition> getConditions()
 	{
-		return this.conditions;
+		return Collections.unmodifiableList(this.conditions);
 	}
 
+	@Override
 	public Class<? extends Entity> getEntityClass()
 	{
 		return this.clazz;
 	}
 
+	@Override
 	public int getMinGroupSize()
 	{
 		return this.minGroupSize;
 	}
 
+	@Override
 	public int getMaxGroupSize()
 	{
 		return this.maxGroupSize;
 	}
 
+	@Override
 	public float getRarityWeight()
 	{
 		return this.rarityWeight;
 	}
 
+	@Override
 	public PositionSelector getPositionSelector()
 	{
 		return this.positionSelector;

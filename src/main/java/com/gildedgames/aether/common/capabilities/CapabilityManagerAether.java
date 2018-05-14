@@ -9,6 +9,8 @@ import com.gildedgames.aether.common.capabilities.entity.spawning.EntitySpawning
 import com.gildedgames.aether.common.capabilities.entity.spawning.EntitySpawningInfoProvider;
 import com.gildedgames.aether.common.capabilities.world.chunk.PlacementFlagCapability;
 import com.gildedgames.aether.common.capabilities.world.chunk.PlacementFlagProvider;
+import com.gildedgames.aether.api.world.ISpawnSystem;
+import com.gildedgames.aether.common.world.spawning.SpawnSystem;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.chunk.Chunk;
@@ -25,6 +27,7 @@ public class CapabilityManagerAether
 
 		CapabilityManager.INSTANCE.register(IPlayerAether.class, new PlayerAether.Storage(), PlayerAether::new);
 		CapabilityManager.INSTANCE.register(ISpawningInfo.class, new EntitySpawningInfo.Storage(), EntitySpawningInfo::new);
+		CapabilityManager.INSTANCE.register(ISpawnSystem.class, new SpawnSystem.Storage(), SpawnSystem::new);
 	}
 
 	@SubscribeEvent

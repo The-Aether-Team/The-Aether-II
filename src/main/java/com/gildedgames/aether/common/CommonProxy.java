@@ -16,6 +16,7 @@ import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.Magnetic
 import com.gildedgames.aether.common.world.aether.island.gen.IslandVariables;
 import com.gildedgames.aether.common.world.aether.prep.PrepAether;
 import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstance;
+import com.gildedgames.aether.common.world.spawning.SpawnAreaEvents;
 import com.gildedgames.orbis_api.OrbisAPI;
 import com.gildedgames.orbis_api.util.io.IClassSerializer;
 import com.gildedgames.orbis_api.util.io.Instantiator;
@@ -79,6 +80,7 @@ public class CommonProxy implements IAetherServices
 		MinecraftForge.EVENT_BUS.register(ItemToolHandler.class);
 		MinecraftForge.EVENT_BUS.register(ItemSkyrootSword.class);
 		MinecraftForge.EVENT_BUS.register(QuicksoilProcessor.class);
+		MinecraftForge.EVENT_BUS.register(SpawnAreaEvents.class);
 	}
 
 	public void spawnJumpParticles(final World world, final double x, final double y, final double z, final double radius, final int quantity)

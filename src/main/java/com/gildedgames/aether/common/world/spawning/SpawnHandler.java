@@ -3,31 +3,24 @@ package com.gildedgames.aether.common.world.spawning;
 import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.entity.spawning.EntitySpawn;
 import com.gildedgames.aether.api.entity.spawning.ISpawningInfo;
-import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.orbis_api.util.ChunkMap;
-import com.gildedgames.orbis_api.util.mc.NBT;
-import com.gildedgames.orbis_api.util.mc.NBTHelper;
+import com.gildedgames.aether.api.world.*;
+import com.gildedgames.orbis_api.OrbisAPI;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEntitySpawner;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
-import java.io.File;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-import java.util.Map;
 
-public class SpawnHandler implements NBT
+public class SpawnHandler implements ISpawnHandler
 {
 	private final String uniqueID;
 
@@ -35,34 +28,39 @@ public class SpawnHandler implements NBT
 
 	private final List<PosCondition> posConditions = Lists.newArrayList();
 
-	private final List<SpawnEntry> entries = Lists.newArrayList();
+	private final List<ISpawnEntry> entries = Lists.newArrayList();
 
-	private final Map<Integer, ChunkMap<SpawnArea>> activeAreas = Maps.newHashMap();
+	private ISpawnAreaManager access;
 
 	private int targetEntityCountPerArea, chunkArea = 1, updateFrequencyInTicks = 20;
 
-	public SpawnHandler(final String uniqueID)
+	public SpawnHandler(String uniqueID)
 	{
 		this.uniqueID = uniqueID;
 	}
 
-	private static String createAreaID(final int dim, final int areaX, final int areaZ)
-	{
-		return dim + "_" + areaX + "_" + areaZ;
-	}
-
 	public static boolean isNotColliding(EntityLiving.SpawnPlacementType placementType, final World world, final Entity entity)
 	{
-		return WorldEntitySpawner.canCreatureTypeSpawnAtLocation(placementType, world, entity.getPosition()) && world
-				.getCollisionBoxes(entity, entity.getEntityBoundingBox()).isEmpty()
+		return WorldEntitySpawner.canCreatureTypeSpawnAtLocation(placementType, world, entity.getPosition())
+				&& world.getCollisionBoxes(entity, entity.getEntityBoundingBox()).isEmpty()
 				&& world.checkNoEntityCollision(entity.getEntityBoundingBox(), entity);
 	}
 
+	@Override
+	public void init(World world)
+	{
+		this.access = new SpawnAreaManager(world, this);
+
+		OrbisAPI.services().getWorldDataManager(world).register(this.access);
+	}
+
+	@Override
 	public String getUniqueID()
 	{
 		return this.uniqueID;
 	}
 
+	@Override
 	public SpawnHandler targetEntityCountPerArea(final int targetEntityCountPerArea)
 	{
 		this.targetEntityCountPerArea = targetEntityCountPerArea;
@@ -70,6 +68,7 @@ public class SpawnHandler implements NBT
 		return this;
 	}
 
+	@Override
 	public SpawnHandler chunkArea(final int chunkArea)
 	{
 		this.chunkArea = chunkArea;
@@ -77,6 +76,7 @@ public class SpawnHandler implements NBT
 		return this;
 	}
 
+	@Override
 	public SpawnHandler updateFrequencyInTicks(final int updateFrequencyInTicks)
 	{
 		this.updateFrequencyInTicks = updateFrequencyInTicks;
@@ -84,13 +84,15 @@ public class SpawnHandler implements NBT
 		return this;
 	}
 
-	public <T extends WorldCondition> SpawnHandler worldCondition(final T condition)
+	@Override
+	public <T extends WorldCondition> SpawnHandler addWorldCondition(final T condition)
 	{
 		this.worldConditions.add(condition);
 
 		return this;
 	}
 
+	@Override
 	public <T extends PosCondition> SpawnHandler condition(final T condition)
 	{
 		this.posConditions.add(condition);
@@ -98,13 +100,19 @@ public class SpawnHandler implements NBT
 		return this;
 	}
 
-	public void addEntry(final SpawnEntry entry)
+	@Override
+	public void addEntry(final ISpawnEntry entry)
 	{
 		this.entries.add(entry);
 	}
 
-	public void tick(final World world, final List<EntityPlayer> players)
+	@Override
+	public void tick()
 	{
+		this.access.tick();
+
+		World world = this.access.getWorld();
+
 		if (world.getWorldTime() % this.updateFrequencyInTicks != 0)
 		{
 			return;
@@ -118,159 +126,36 @@ public class SpawnHandler implements NBT
 			}
 		}
 
-		if (!this.activeAreas.containsKey(world.provider.getDimension()))
-		{
-			this.activeAreas.put(world.provider.getDimension(), new ChunkMap<>());
-		}
-
-		final ChunkMap<SpawnArea> areas = this.activeAreas.get(world.provider.getDimension());
-
-		this.createMissingAreasAndRemoveInactiveAreas(world.provider.getDimension(), areas, players);
-
 		try
 		{
-			this.checkAndSpawnEntries(world, areas);
+			this.checkAndSpawnEntries(this.access);
 		}
-		catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e)
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
 	}
 
-	public boolean isAreaLoaded(final int dim, final int areaX, final int areaZ)
+	@Override
+	public int getChunkArea()
 	{
-		final ChunkMap<SpawnArea> areas = this.activeAreas.get(dim);
-
-		return areas != null && areas.containsKey(areaX, areaZ);
+		return this.chunkArea;
 	}
 
-	public SpawnArea getAreaReadOnly(final int dim, final int areaX, final int areaZ)
+	@Override
+	public void onLivingDeath(LivingDeathEvent event)
 	{
-		final ChunkMap<SpawnArea> areas = this.activeAreas.get(dim);
-
-		if (areas != null && areas.containsKey(areaX, areaZ))
-		{
-			return areas.get(areaX, areaZ);
-		}
-		else
-		{
-			return this.loadArea(dim, areaX, areaZ);
-		}
+		this.access.onLivingDeath(event);
 	}
 
-	public void saveArea(final int dim, final SpawnArea area)
-	{
-		final String areaID = SpawnHandler.createAreaID(dim, area.getAreaX(), area.getAreaZ());
-
-		final File areaFile = new File(AetherCore.getWorldDirectory(), "//data/spawn_areas/" + this.uniqueID + "/" + areaID + ".dat");
-		final NBTTagCompound tag = new NBTTagCompound();
-
-		tag.setInteger("areaX", area.getAreaX());
-		tag.setInteger("areaZ", area.getAreaZ());
-		tag.setInteger("entityCount", area.getEntityCount());
-
-		NBTHelper.writeNBTToFile(tag, areaFile);
-	}
-
-	private SpawnArea loadArea(final int dim, final int areaX, final int areaZ)
-	{
-		final String areaID = SpawnHandler.createAreaID(dim, areaX, areaZ);
-
-		final File areaFile = new File(AetherCore.getWorldDirectory(), "//data/spawn_areas/" + this.uniqueID + "/" + areaID + ".dat");
-
-		if (areaFile.exists())
-		{
-			final NBTTagCompound tag = NBTHelper.readNBTFromFile(areaFile);
-
-			if (tag == null)
-			{
-				final SpawnArea area = new SpawnArea(this.chunkArea, areaX, areaZ);
-
-				this.saveArea(dim, area);
-
-				return area;
-			}
-
-			final SpawnArea area = new SpawnArea(this.chunkArea, tag.getInteger("areaX"), tag.getInteger("areaZ"));
-
-			area.setEntityCount(tag.getInteger("entityCount"));
-
-			return area;
-		}
-		else
-		{
-			final SpawnArea area = new SpawnArea(this.chunkArea, areaX, areaZ);
-
-			this.saveArea(dim, area);
-
-			return area;
-		}
-	}
-
-	private void createMissingAreasAndRemoveInactiveAreas(final int dimension, final ChunkMap<SpawnArea> areas, final List<EntityPlayer> players)
-	{
-		for (final SpawnArea area : areas.getValues())
-		{
-			if (area != null)
-			{
-				area.setInPlayersRenderDistance(false);
-			}
-		}
-
-		for (final EntityPlayer player : players)
-		{
-			final int chunkX = MathHelper.floor(player.posX) >> 4;
-			final int chunkZ = MathHelper.floor(player.posZ) >> 4;
-
-			final int centerAreaX = chunkX / this.chunkArea;
-			final int centerAreaZ = chunkZ / this.chunkArea;
-
-			for (int areaX = centerAreaX - 1; areaX <= centerAreaX + 1; areaX++)
-			{
-				for (int areaZ = centerAreaZ - 1; areaZ <= centerAreaZ + 1; areaZ++)
-				{
-					if (!areas.containsKey(areaX, areaZ))
-					{
-						final SpawnArea area = this.loadArea(dimension, areaX, areaZ);
-
-						area.setInPlayersRenderDistance(true);
-
-						areas.put(areaX, areaZ, area);
-					}
-					else
-					{
-						areas.get(areaX, areaZ).setInPlayersRenderDistance(true);
-					}
-				}
-			}
-		}
-
-		final List<SpawnArea> areasToRemove = Lists.newArrayList();
-
-		for (final SpawnArea area : areas.getValues())
-		{
-			if (area != null && !area.hasPlayerInside())
-			{
-				areasToRemove.add(area);
-			}
-		}
-
-		for (final SpawnArea area : areasToRemove)
-		{
-			this.saveArea(dimension, area);
-
-			areas.remove(area.getAreaX(), area.getAreaZ());
-		}
-	}
-
-	private SpawnEntry getWeightedEntry()
+	private ISpawnEntry getWeightedEntry()
 	{
 		int maxRoll = 0;
 		int roll;
 
-		final List<SpawnEntry> table = Lists.newArrayList();
+		final List<ISpawnEntry> table = Lists.newArrayList();
 
-		for (final SpawnEntry entry : this.entries)
+		for (final ISpawnEntry entry : this.entries)
 		{
 			table.add(entry);
 
@@ -284,7 +169,7 @@ public class SpawnHandler implements NBT
 
 		roll = (int) (Math.random() * maxRoll);
 
-		for (final SpawnEntry entry : table)
+		for (final ISpawnEntry entry : table)
 		{
 			// return element if roll < weight
 			if (roll < entry.getRarityWeight())
@@ -299,61 +184,61 @@ public class SpawnHandler implements NBT
 		return null;
 	}
 
-	private void checkAndSpawnEntries(final World world, final ChunkMap<SpawnArea> areas)
-			throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException
+	private void checkAndSpawnEntries(ISpawnAreaManager manager) throws ReflectiveOperationException
 	{
 		IEntityLivingData livingData = null;
 
 		final int areaInBlocks = this.chunkArea * 16;
 
-		for (final SpawnArea area : areas.getValues())
+		for (ISpawnArea area : manager.getLoaded())
 		{
 			while (area.getEntityCount() < this.targetEntityCountPerArea)
 			{
-				final SpawnEntry entry = this.getWeightedEntry();
+				ISpawnEntry entry = this.getWeightedEntry();
 
 				if (entry == null)
 				{
 					break;
 				}
 
-				final int dif = entry.getMaxGroupSize() - entry.getMinGroupSize();
+				int dif = entry.getMaxGroupSize() - entry.getMinGroupSize();
 
-				final int randSize = dif > 0 ? world.rand.nextInt(dif) : 0;
+				int randSize = dif > 0 ? manager.getWorld().rand.nextInt(dif) : 0;
 
-				final int groupSize = entry.getMinGroupSize() + randSize;
+				int groupSize = entry.getMinGroupSize() + randSize;
 
 				if (area.getEntityCount() + groupSize > this.targetEntityCountPerArea)
 				{
 					break;
 				}
 
-				final int minX = (area.getMinChunkPos().x) * 16;
-				final int minZ = (area.getMinChunkPos().z) * 16;
+				int minX = (area.getMinChunkPos().x) * 16;
+				int minZ = (area.getMinChunkPos().z) * 16;
 
-				final int groupPosX = minX + world.rand.nextInt(areaInBlocks);
-				final int groupPosZ = minZ + world.rand.nextInt(areaInBlocks);
+				int groupPosX = minX + manager.getWorld().rand.nextInt(areaInBlocks);
+				int groupPosZ = minZ + manager.getWorld().rand.nextInt(areaInBlocks);
 
 				int attempts = 0;
 
-				final int MAX_ATTEMPTS = 100;
+				int MAX_ATTEMPTS = 100;
 
 				inner:
+
 				for (int count = 0; count < groupSize; count++)
 				{
-					final int scatterX =
-							(world.rand.nextBoolean() ? 1 : -1) * (1 + world.rand.nextInt(entry.getPositionSelector().getScatter(world)));
-					final int scatterZ =
-							(world.rand.nextBoolean() ? 1 : -1) * (1 + world.rand.nextInt(entry.getPositionSelector().getScatter(world)));
+					int scatterX =
+							(manager.getWorld().rand.nextBoolean() ? 1 : -1) * (1 + manager.getWorld().rand.nextInt(entry.getPositionSelector().getScatter(manager.getWorld())));
+					int scatterZ =
+							(manager.getWorld().rand.nextBoolean() ? 1 : -1) * (1 + manager.getWorld().rand.nextInt(entry.getPositionSelector().getScatter(manager.getWorld())));
 
-					final float posX = groupPosX + scatterX;
-					final float posZ = groupPosZ + scatterZ;
+					float posX = groupPosX + scatterX;
+					float posZ = groupPosZ + scatterZ;
 
-					final int posY = entry.getPositionSelector().getPosY(world, MathHelper.floor(posX), MathHelper.floor(posZ));
+					int posY = entry.getPositionSelector().getPosY(manager.getWorld(), MathHelper.floor(posX), MathHelper.floor(posZ));
 
-					final BlockPos spawnAt = new BlockPos(posX, posY, posZ);
+					BlockPos spawnAt = new BlockPos(posX, posY, posZ);
 
-					if (!world.isBlockLoaded(spawnAt, true))
+					if (!manager.getWorld().isBlockLoaded(spawnAt, true))
 					{
 						if (attempts < MAX_ATTEMPTS)
 						{
@@ -364,7 +249,7 @@ public class SpawnHandler implements NBT
 						continue;
 					}
 
-					if (world.isAnyPlayerWithinRangeAt(posX, posY, posZ, 24.0D))
+					if (manager.getWorld().isAnyPlayerWithinRangeAt(posX, posY, posZ, 24.0D))
 					{
 						if (attempts < MAX_ATTEMPTS)
 						{
@@ -375,9 +260,9 @@ public class SpawnHandler implements NBT
 						continue;
 					}
 
-					for (final PosCondition condition : this.posConditions)
+					for (PosCondition condition : this.posConditions)
 					{
-						if (!condition.isMet(world, spawnAt, spawnAt.down()))
+						if (!condition.isMet(manager.getWorld(), spawnAt, spawnAt.down()))
 						{
 							if (attempts < MAX_ATTEMPTS)
 							{
@@ -389,9 +274,9 @@ public class SpawnHandler implements NBT
 						}
 					}
 
-					for (final PosCondition condition : entry.getConditions())
+					for (PosCondition condition : entry.getConditions())
 					{
-						if (!condition.isMet(world, spawnAt, spawnAt.down()))
+						if (!condition.isMet(manager.getWorld(), spawnAt, spawnAt.down()))
 						{
 							if (attempts < MAX_ATTEMPTS)
 							{
@@ -403,42 +288,38 @@ public class SpawnHandler implements NBT
 						}
 					}
 
-					final Constructor<?> cons = entry.getEntityClass().getConstructor(World.class);
-					final Entity entity = (Entity) cons.newInstance(world);
+					Constructor<?> constructor = entry.getEntityClass().getConstructor(World.class);
 
-					entity.setLocationAndAngles(posX + 0.5F, posY, posZ + 0.5F, world.rand.nextFloat() * 360.0F, 0.0F);
+					Entity entity = (Entity) constructor.newInstance(manager.getWorld());
+					entity.setLocationAndAngles(posX + 0.5F, posY, posZ + 0.5F, manager.getWorld().rand.nextFloat() * 360.0F, 0.0F);
 
-					if (SpawnHandler.isNotColliding(entry.getPlacementType(), world, entity))
+					if (SpawnHandler.isNotColliding(entry.getPlacementType(), manager.getWorld(), entity))
 					{
 						if (entity instanceof EntityLiving)
 						{
-							final EntityLiving living = (EntityLiving) entity;
+							EntityLiving living = (EntityLiving) entity;
 
-							if (!ForgeEventFactory.doSpecialSpawn(living, world, posX, posY, posZ))
+							if (!ForgeEventFactory.doSpecialSpawn(living, manager.getWorld(), posX, posY, posZ))
 							{
-								living.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(living)), null);
+								living.onInitialSpawn(manager.getWorld().getDifficultyForLocation(new BlockPos(living)), null);
 							}
 						}
 
-						final ISpawningInfo spawningInfo = entity.getCapability(AetherCapabilities.ENTITY_SPAWNING_INFO, null);
-
-						spawningInfo.setSpawnArea(new EntitySpawn(this.uniqueID, world.provider.getDimension(), area.getAreaX(), area.getAreaZ()));
+						ISpawningInfo info = entity.getCapability(AetherCapabilities.ENTITY_SPAWNING_INFO, null);
+						info.setSpawnArea(new EntitySpawn(this.uniqueID, manager.getWorld().provider.getDimension(), area.getAreaX(), area.getAreaZ()));
 
 						area.addToEntityCount(1);
 
-						world.spawnEntity(entity);
+						manager.getWorld().spawnEntity(entity);
 
-						if (world instanceof WorldServer)
+						if (manager.getWorld() instanceof WorldServer)
 						{
-							final WorldServer worldServer = (WorldServer) world;
-
-							worldServer.updateEntityWithOptionalForce(entity, true);
+							manager.getWorld().updateEntityWithOptionalForce(entity, true);
 						}
 
 						if (entity instanceof EntityLiving)
 						{
-							EntityLiving entityLiving = (EntityLiving) entity;
-							livingData = entityLiving.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(entity)), livingData);
+							livingData = ((EntityLiving) entity).onInitialSpawn(manager.getWorld().getDifficultyForLocation(new BlockPos(entity)), livingData);
 						}
 					}
 					else
@@ -458,69 +339,6 @@ public class SpawnHandler implements NBT
 					break;
 				}
 			}
-		}
-	}
-
-	@Override
-	public void write(final NBTTagCompound output)
-	{
-		output.setInteger("dimensionCount", this.activeAreas.size());
-
-		int index = 0;
-
-		for (final Map.Entry<Integer, ChunkMap<SpawnArea>> set : this.activeAreas.entrySet())
-		{
-			final int dimension = set.getKey();
-			final ChunkMap<SpawnArea> chunkMap = set.getValue();
-
-			output.setInteger("dimension" + index, dimension);
-			output.setInteger("areaCount" + index, chunkMap.size());
-
-			int areaIndex = 0;
-
-			for (final SpawnArea area : chunkMap.getValues())
-			{
-				output.setInteger("map" + index + "_areaX" + areaIndex, area.getAreaX());
-				output.setInteger("map" + index + "_areaZ" + areaIndex, area.getAreaZ());
-
-				output.setInteger("map" + index + "_entityCount" + areaIndex, area.getEntityCount());
-
-				areaIndex++;
-			}
-
-			index++;
-		}
-	}
-
-	@Override
-	public void read(final NBTTagCompound input)
-	{
-		this.activeAreas.clear();
-
-		final int dimensionCount = input.getInteger("dimensionCount");
-
-		for (int index = 0; index < dimensionCount; index++)
-		{
-			final int dimension = input.getInteger("dimension" + index);
-			final int areaCount = input.getInteger("areaCount" + index);
-
-			final ChunkMap<SpawnArea> chunkMap = new ChunkMap<>();
-
-			for (int areaIndex = 0; areaIndex < areaCount; areaIndex++)
-			{
-				final int areaX = input.getInteger("map" + index + "_areaX" + areaIndex);
-				final int areaZ = input.getInteger("map" + index + "_areaZ" + areaIndex);
-
-				final int entityCount = input.getInteger("map" + index + "_entityCount" + areaIndex);
-
-				final SpawnArea area = new SpawnArea(this.chunkArea, areaX, areaZ);
-
-				area.setEntityCount(entityCount);
-
-				chunkMap.put(areaX, areaZ, area);
-			}
-
-			this.activeAreas.put(dimension, chunkMap);
 		}
 	}
 }
