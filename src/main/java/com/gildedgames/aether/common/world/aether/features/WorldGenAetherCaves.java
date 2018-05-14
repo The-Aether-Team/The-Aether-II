@@ -186,7 +186,7 @@ public class WorldGenAetherCaves extends MapGenBase
 										if (d9 > -0.7D && d10 * d10 + d9 * d9 + d8 * d8 < 1.0D)
 										{
 											IBlockState iblockstate1 = p_180702_5_.getBlockState(j3, j2, i2);
-											IBlockState iblockstate2 = (IBlockState) MoreObjects
+											IBlockState iblockstate2 = MoreObjects
 													.firstNonNull(p_180702_5_.getBlockState(j3, j2 + 1, i2), BLK_AIR);
 
 											if (this.isTopBlock(p_180702_5_, j3, j2, i2, p_180702_3_, p_180702_4_))
@@ -213,15 +213,19 @@ public class WorldGenAetherCaves extends MapGenBase
 
 	protected boolean canReplaceBlock(final IBlockState state, final IBlockState above)
 	{
-		if (state.getBlock() == Blocks.SNOW_LAYER)
+		if (state.getBlock() == BlocksAether.highlands_snow_layer)
 		{
 			return true;
 		}
-		else if (state.getBlock() == Blocks.PACKED_ICE)
+		else if (state.getBlock() == BlocksAether.highlands_packed_ice)
 		{
 			return true;
 		}
-		else if (state.getBlock() == Blocks.ICE)
+		else if (state.getBlock() == BlocksAether.highlands_ice)
+		{
+			return true;
+		}
+		else if (state.getBlock() == BlocksAether.ferrosite)
 		{
 			return true;
 		}
