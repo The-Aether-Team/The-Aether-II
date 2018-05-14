@@ -122,7 +122,7 @@ public class SpecialMovesEventsClient
 
 		if (!Keyboard.getEventKeyState())
 		{
-			if (rollKeyDownTimeStamp > 0 && time - rollKeyDownTimeStamp < 300 && playerAether.getEntity().onGround)
+			if (rollKeyDownTimeStamp > 0 && time - rollKeyDownTimeStamp < maxRollHold && playerAether.getEntity().onGround)
 			{
 				PacketSpecialMovement.Action action = null;
 
