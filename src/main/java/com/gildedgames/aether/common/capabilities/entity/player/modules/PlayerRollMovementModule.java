@@ -4,7 +4,6 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.network.packets.PacketSpecialMovement;
 import com.gildedgames.aether.common.util.helpers.AetherHelper;
-import net.minecraft.entity.MoverType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -15,15 +14,15 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 public class PlayerRollMovementModule extends PlayerAetherModule
 {
-	private int maxRollingTicks = 7;
+	private static final int MAX_ROLLING_TICKS = 10, ROLL_COOLDOWN_TICKS = 10;
 
 	private boolean isRolling;
 
-	private int ticksRolling;
+	private int ticksRolling, rollCooldown;
 
 	private float startRotationYaw, rollingRotationYaw;
 
-	private float prevStepHeight, prevHeight;
+	private float prevStepHeight, prevEyeHeight, prevHeight;
 
 	public PlayerRollMovementModule(final PlayerAether playerAether)
 	{
@@ -69,7 +68,7 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 
 	public int getTicksRollingMax()
 	{
-		return this.maxRollingTicks;
+		return this.MAX_ROLLING_TICKS;
 	}
 
 	private void setEntityHeight(float height)
@@ -80,6 +79,7 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 
 		p.setEntityBoundingBox(new AxisAlignedBB(p.posX - w, p.posY, p.posZ - w, p.posX + w, p.posY + height, p.posZ + w));
 		p.height = height;
+		p.eyeHeight = (height / this.prevHeight) * this.prevEyeHeight;
 	}
 
 	protected final Vec3d getVectorForRotation(float pitch, float yaw)
@@ -93,7 +93,7 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 
 	public void startRolling(PacketSpecialMovement.Action action)
 	{
-		if (!AetherHelper.isEnabled(this.getWorld()))
+		if (!AetherHelper.isEnabled(this.getWorld()) || rollCooldown > 0)
 		{
 			return;
 		}
@@ -119,8 +119,10 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 
 		this.prevStepHeight = this.getEntity().stepHeight;
 		this.prevHeight = this.getEntity().height;
+		this.prevEyeHeight = this.getEntity().getEyeHeight();
 		this.isRolling = true;
 		this.ticksRolling = 0;
+		this.rollCooldown = this.ROLL_COOLDOWN_TICKS;
 	}
 
 	@Override
@@ -134,11 +136,16 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 	{
 		if (this.isRolling)
 		{
-			if (this.ticksRolling <= this.maxRollingTicks)
+			if (this.ticksRolling <= this.MAX_ROLLING_TICKS)
 			{
-				float newHeight = MathHelper.clamp(this.prevHeight / 4f + this.prevHeight * (Math.abs(this.ticksRolling / (float) this.maxRollingTicks - 0.5f)), this.prevHeight / 2f, this.prevHeight);
+				float newHeight = MathHelper.clamp(this.prevHeight / 4f + this.prevHeight * (Math.abs(this.ticksRolling / (float) this.MAX_ROLLING_TICKS - 0.5f)), this.prevHeight / 2f, this.prevHeight);
 
 				setEntityHeight(newHeight);
+			}
+			else
+			{
+				this.setEntityHeight(prevHeight);
+				this.getEntity().eyeHeight = this.prevEyeHeight;
 			}
 		}
 	}
@@ -148,7 +155,7 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 	{
 		if (this.isRolling)
 		{
-			if (this.ticksRolling <= this.maxRollingTicks)
+			if (this.ticksRolling <= this.MAX_ROLLING_TICKS)
 			{
 				this.getEntity().stepHeight = 1.0F;
 
@@ -181,8 +188,11 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 				}
 
 				this.getEntity().stepHeight = this.prevStepHeight;
-				this.setEntityHeight(prevHeight);
 			}
+		}
+		else if (rollCooldown > 0)
+		{
+			rollCooldown--;
 		}
 	}
 

@@ -8,6 +8,10 @@ import com.gildedgames.aether.common.network.packets.PacketSpecialMovement;
 import com.gildedgames.aether.common.util.helpers.AetherHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.Mod;
@@ -78,7 +82,6 @@ public class SpecialMovesEventsClient
 
 			float rollingPercent = Math.min(1.0F, ((float)ticks + (float)event.getRenderPartialTicks()) / ticksRequired);
 
-			float heightLower = (float) AetherCore.CONFIG.getRollCameraHeightLower();
 			float cameraTilt = (float) AetherCore.CONFIG.getRollCameraTilt();
 
 			float percent = rollingPercent * 2.0F;
@@ -86,14 +89,12 @@ public class SpecialMovesEventsClient
 			if (rollingPercent <= 0.5F)
 			{
 				event.setPitch(event.getPitch() + (percent * cameraTilt));
-				GlStateManager.translate(0.0F, percent * heightLower, 0.0F);
 			}
 			else
 			{
 				percent = (rollingPercent - 0.5F) * 2.0F;
 
 				event.setPitch(event.getPitch() + cameraTilt - (percent * cameraTilt));
-				GlStateManager.translate(0.0F, heightLower - (percent * heightLower), 0.0F);
 			}
 		}
 	}
@@ -168,14 +169,12 @@ public class SpecialMovesEventsClient
 
 		if (forward || left || back || right)
 		{
-			if (time - sneakKeyDownTimeStamp < sneakTimeRequired && playerAether.getEntity().onGround)
+			if (!playerAether.getRollMovementModule().isRolling() && key == lastKey && time - sneakKeyDownTimeStamp < sneakTimeRequired)
 			{
-				if (!playerAether.getRollMovementModule().isRolling() && key == lastKey)
-				{
-					rollKeyDownTimeStamp = System.currentTimeMillis();
-				}
+				rollKeyDownTimeStamp = System.currentTimeMillis();
 			}
-			else
+
+			if (time - sneakKeyDownTimeStamp >= sneakTimeRequired)
 			{
 				sneakKeyDownTimeStamp = System.currentTimeMillis();
 
