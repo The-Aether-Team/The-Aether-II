@@ -20,9 +20,9 @@ import org.lwjgl.input.Keyboard;
 public class SpecialMovesEventsClient
 {
 
-	private static long sneakKeyDownTimeStamp;
+	private static long sneakKeyDownTimeStamp, rollKeyDownTimeStamp;
 
-	private static int sneakTimeRequired = 300;
+	private static int sneakTimeRequired = 300, maxRollHold = 300;
 
 	private static int lastKey;
 
@@ -122,6 +122,42 @@ public class SpecialMovesEventsClient
 
 		if (!Keyboard.getEventKeyState())
 		{
+			if (rollKeyDownTimeStamp > 0 && time - rollKeyDownTimeStamp < 300 && playerAether.getEntity().onGround)
+			{
+				PacketSpecialMovement.Action action = null;
+
+				if (lastKey == mc.gameSettings.keyBindForward.getKeyCode())
+				{
+					action = PacketSpecialMovement.Action.ROLL_FORWARD;
+				}
+				else if (lastKey == mc.gameSettings.keyBindBack.getKeyCode())
+				{
+					action = PacketSpecialMovement.Action.ROLL_BACK;
+				}
+				else if (lastKey == mc.gameSettings.keyBindLeft.getKeyCode())
+				{
+					action = PacketSpecialMovement.Action.ROLL_LEFT;
+				}
+				else if (lastKey == mc.gameSettings.keyBindRight.getKeyCode())
+				{
+					action = PacketSpecialMovement.Action.ROLL_RIGHT;
+				}
+
+				if (action != null)
+				{
+					playerAether.getRollMovementModule().startRolling(action);
+					NetworkingAether.sendPacketToServer(new PacketSpecialMovement(action));
+
+					sneakKeyDownTimeStamp = 0;
+				}
+
+				lastKey = Keyboard.KEY_NONE;
+			}
+			else
+			{
+				rollKeyDownTimeStamp = 0;
+			}
+
 			return;
 		}
 
@@ -134,37 +170,10 @@ public class SpecialMovesEventsClient
 		{
 			if (time - sneakKeyDownTimeStamp < sneakTimeRequired && playerAether.getEntity().onGround)
 			{
-				if (!playerAether.getRollMovementModule().isRolling())
+				if (!playerAether.getRollMovementModule().isRolling() && key == lastKey)
 				{
-					PacketSpecialMovement.Action action = null;
-
-					if (forward && lastKey == mc.gameSettings.keyBindForward.getKeyCode())
-					{
-						action = PacketSpecialMovement.Action.ROLL_FORWARD;
-					}
-					else if (back && lastKey == mc.gameSettings.keyBindBack.getKeyCode())
-					{
-						action = PacketSpecialMovement.Action.ROLL_BACK;
-					}
-					else if (left && lastKey == mc.gameSettings.keyBindLeft.getKeyCode())
-					{
-						action = PacketSpecialMovement.Action.ROLL_LEFT;
-					}
-					else if (right && lastKey == mc.gameSettings.keyBindRight.getKeyCode())
-					{
-						action = PacketSpecialMovement.Action.ROLL_RIGHT;
-					}
-
-					if (action != null)
-					{
-						playerAether.getRollMovementModule().startRolling(action);
-						NetworkingAether.sendPacketToServer(new PacketSpecialMovement(action));
-
-						sneakKeyDownTimeStamp = 0;
-					}
+					rollKeyDownTimeStamp = System.currentTimeMillis();
 				}
-
-				lastKey = Keyboard.KEY_NONE;
 			}
 			else
 			{
@@ -189,5 +198,4 @@ public class SpecialMovesEventsClient
 			}
 		}
 	}
-
 }
