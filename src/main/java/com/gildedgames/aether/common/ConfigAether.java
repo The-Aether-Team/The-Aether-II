@@ -30,8 +30,6 @@ public class ConfigAether
 
 	private double rollCameraTilt;
 
-	private double rollCameraHeightLower;
-
 	private double rollFOV;
 
 	private boolean skipIntro;
@@ -66,7 +64,6 @@ public class ConfigAether
 		this.cutoutHelmets = this.getBoolean(this.general, "Transparent Helmets", true);
 
 		this.rollCameraTilt = this.getDouble(this.controls, "Roll Camera Tilt", 3.5D);
-		this.rollCameraHeightLower = this.getDouble(this.controls, "Roll Camera Height Lower", 0.75D);
 		this.rollFOV = this.getDouble(this.controls, "Roll FOV", 1.0D);
 
 		this.skipIntro = this.getBoolean(this.gameplay, "Skip Intro", false);
@@ -147,11 +144,6 @@ public class ConfigAether
 	public double getRollCameraTilt()
 	{
 		return this.rollCameraTilt;
-	}
-
-	public double getRollCameraHeightLower()
-	{
-		return this.rollCameraHeightLower;
 	}
 
 	public double getRollFOV()
