@@ -4,7 +4,10 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.network.packets.PacketSpecialMovement;
 import com.gildedgames.aether.common.util.helpers.AetherHelper;
+import net.minecraft.entity.MoverType;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -20,7 +23,7 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 
 	private float startRotationYaw, rollingRotationYaw;
 
-	private float prevStepHeight;
+	private float prevStepHeight, prevHeight;
 
 	public PlayerRollMovementModule(final PlayerAether playerAether)
 	{
@@ -69,6 +72,16 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 		return this.maxRollingTicks;
 	}
 
+	private void setEntityHeight(float height)
+	{
+		EntityPlayer p = this.getEntity();
+
+		float w = p.width / 2f;
+
+		p.setEntityBoundingBox(new AxisAlignedBB(p.posX - w, p.posY, p.posZ - w, p.posX + w, p.posY + height, p.posZ + w));
+		p.height = height;
+	}
+
 	protected final Vec3d getVectorForRotation(float pitch, float yaw)
 	{
 		float f = MathHelper.cos(-yaw * 0.017453292F - (float) Math.PI);
@@ -105,6 +118,7 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 		}
 
 		this.prevStepHeight = this.getEntity().stepHeight;
+		this.prevHeight = this.getEntity().height;
 		this.isRolling = true;
 		this.ticksRolling = 0;
 	}
@@ -118,7 +132,15 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 	@Override
 	public void tickEnd(TickEvent.PlayerTickEvent event)
 	{
+		if (this.isRolling)
+		{
+			if (this.ticksRolling <= this.maxRollingTicks)
+			{
+				float newHeight = MathHelper.clamp(this.prevHeight / 4f + this.prevHeight * (Math.abs(this.ticksRolling / (float) this.maxRollingTicks - 0.5f)), this.prevHeight / 2f, this.prevHeight);
 
+				setEntityHeight(newHeight);
+			}
+		}
 	}
 
 	@Override
@@ -138,7 +160,6 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 
 					this.getEntity().motionX = (vec.x) * speed;
 					this.getEntity().motionZ = (vec.z) * speed;
-
 					this.getEntity().velocityChanged = true;
 				}
 
@@ -160,6 +181,7 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 				}
 
 				this.getEntity().stepHeight = this.prevStepHeight;
+				this.setEntityHeight(prevHeight);
 			}
 		}
 	}
