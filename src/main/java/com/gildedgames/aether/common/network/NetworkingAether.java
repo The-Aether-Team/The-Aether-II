@@ -2,9 +2,7 @@ package com.gildedgames.aether.common.network;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.packets.*;
-import com.gildedgames.aether.common.network.packets.dialog.PacketActivateButton;
-import com.gildedgames.aether.common.network.packets.dialog.PacketCloseDialog;
-import com.gildedgames.aether.common.network.packets.dialog.PacketOpenDialog;
+import com.gildedgames.aether.common.network.packets.dialog.*;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityTracker;
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,6 +37,7 @@ public class NetworkingAether
 		instance.registerMessage(PacketCancelIntro.HandlerServer.class, PacketCancelIntro.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketSetShouldRespawnAtCampfire.HandlerServer.class, PacketSetShouldRespawnAtCampfire.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketSetPlayerConfig.HandlerServer.class, PacketSetPlayerConfig.class, discriminant++, Side.SERVER);
+		instance.registerMessage(PacketAdvance.HandlerServer.class, PacketAdvance.class, discriminant++, Side.SERVER);
 
 		// C L I E N T
 		instance.registerMessage(PacketEquipment.HandlerClient.class, PacketEquipment.class, discriminant++, Side.CLIENT);
@@ -59,6 +58,11 @@ public class NetworkingAether
 		instance.registerMessage(PacketRequestClientInfo.HandlerClient.class, PacketRequestClientInfo.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketProgressModule.HandlerClient.class, PacketProgressModule.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketTalkedTo.HandlerClient.class, PacketTalkedTo.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketConditionsMetData.HandlerClient.class, PacketConditionsMetData.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketActivateButton.HandlerClient.class, PacketActivateButton.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketNavigateNode.HandlerClient.class, PacketNavigateNode.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketNavigateBack.HandlerClient.class, PacketNavigateBack.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketAdvance.HandlerClient.class, PacketAdvance.class, discriminant++, Side.CLIENT);
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(AetherCore.INSTANCE, new AetherGuiHandler());
 	}

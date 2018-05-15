@@ -1003,3 +1003,8 @@ josediya.greet.white_gold=That’s your problem. I don’t care how you get it, 
 josediya.greet.services=If you ever find yourself setting up shop somewhere, I can take you back to your home from any outpost. I will expect payment though.
 josediya.greet.home=I’m not taking you back to Thera, if that’s what you mean. You’ll have to find a new place to rest here in the Aether first.
 josediya.greet.walk_home=I won’t stop you but the Aether’s islands can be pretty far apart. Travelling in my carriage is going to be a lot faster and a lot smoother for you. The cloud bed is sturdy enough to walk between islands on foot, but it can be pretty dangerous without proper protection.
+
+josediya.greet.travel=Okay. Where to?
+josediya.greet.option.travel_to=Travel To Bed
+josediya.greet.option.travel_from=Travel Back To Last Outpost
+josediya.greet.option.travel=Travel

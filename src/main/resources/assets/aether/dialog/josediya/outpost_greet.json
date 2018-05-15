@@ -6,6 +6,11 @@
 				{ "speaker": "aether:josediya#default", "text": "josediya.greet.start_not_introduced" }
 			],
 			"buttons": [
+				{
+					"orConditions": [ { "type": "returningToOutpost", "validate": "true" }, { "type": "hasSleptInBed", "validate": "true" } ],
+					"label": "josediya.greet.option.travel",
+					"actions": [ { "type": "navigate", "target": "travel" } ]
+				},
 				{ "label": "josediya.greet.option.services", "actions": [ { "type": "navigate", "target": "services" } ] },
 				{ "label": "josediya.greet.option.what", "actions": [ { "type": "navigate", "target": "what" } ] },
 				{ "label": "josediya.greet.option.who", "actions": [ { "type": "navigate", "target": "who" } ] },
@@ -19,11 +24,35 @@
 				{ "speaker": "aether:josediya#default", "text": "josediya.greet.start" }
 			],
 			"buttons": [
+				{
+					"orConditions": [ { "type": "returningToOutpost", "validate": "true" }, { "type": "hasSleptInBed", "validate": "true" } ],
+					"label": "josediya.greet.option.travel",
+					"actions": [ { "type": "navigate", "target": "travel" } ]
+				},
 				{ "label": "josediya.greet.option.services", "actions": [ { "type": "navigate", "target": "services" } ] },
 				{ "label": "josediya.greet.option.what", "actions": [ { "type": "navigate", "target": "what" } ] },
 				{ "label": "josediya.greet.option.who", "actions": [ { "type": "navigate", "target": "who" } ] },
 				{ "label": "josediya.greet.option.winged_beast", "actions": [ { "type": "navigate", "target": "winged_beast" } ] },
 				{ "label": "generic.goodbye", "actions": [ { "type": "exit" } ] }
+			]
+		},
+		{
+			"name": "travel",
+			"lines": [
+				{ "speaker": "aether:josediya#default", "text": "josediya.greet.travel" }
+			],
+			"buttons": [
+				{
+					"conditions": [ { "type": "returningToOutpost", "validate": "true" } ],
+					"label": "josediya.greet.option.travel_from",
+					"actions": [ { "type": "travelToLastOutpost" } ]
+				},
+				{
+					"conditions": [ { "type": "hasSleptInBed", "validate": "true" } ],
+					"label": "josediya.greet.option.travel_to",
+					"actions": [ { "type": "travelToBed" } ]
+				},
+				{ "label": "generic.back", "actions": [ { "type": "back" } ] }
 			]
 		},
 		{

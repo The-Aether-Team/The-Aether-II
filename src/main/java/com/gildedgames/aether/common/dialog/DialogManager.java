@@ -4,6 +4,8 @@ import com.gildedgames.aether.api.dialog.*;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.dialog.data.*;
 import com.gildedgames.aether.common.dialog.data.actions.*;
+import com.gildedgames.aether.common.dialog.data.conditions.DialogConditionHasSleptInBed;
+import com.gildedgames.aether.common.dialog.data.conditions.DialogConditionReturningToOutpost;
 import com.gildedgames.aether.common.dialog.data.slide_renderers.DialogSlideRendererNOOP;
 import com.gildedgames.aether.common.dialog.data.slide_renderers.DialogSlideRendererStatic;
 import com.google.gson.Gson;
@@ -69,6 +71,7 @@ public class DialogManager implements IDialogManager
 		final GsonBuilder builder = new GsonBuilder();
 
 		builder.registerTypeAdapter(IDialogAction.class, new DialogActionDeserializer());
+		builder.registerTypeAdapter(IDialogCondition.class, new DialogConditionDeserializer());
 
 		builder.registerTypeAdapter(DialogActionExit.class, new DialogActionExit.Deserializer());
 		builder.registerTypeAdapter(DialogActionNavigateToStart.class, new DialogActionNavigateToStart.Deserializer());
@@ -76,6 +79,11 @@ public class DialogManager implements IDialogManager
 		builder.registerTypeAdapter(DialogActionNavigate.class, new DialogActionNavigate.Deserializer());
 		builder.registerTypeAdapter(DialogActionNavigateScene.class, new DialogActionNavigateScene.Deserializer());
 		builder.registerTypeAdapter(DialogActionNecromancerGoUpTower.class, new DialogActionNecromancerGoUpTower.Deserializer());
+		builder.registerTypeAdapter(DialogActionTravelToBed.class, new DialogActionTravelToBed.Deserializer());
+		builder.registerTypeAdapter(DialogActionTravelToLastOutpost.class, new DialogActionTravelToLastOutpost.Deserializer());
+
+		builder.registerTypeAdapter(DialogConditionReturningToOutpost.class, new DialogConditionReturningToOutpost.Deserializer());
+		builder.registerTypeAdapter(DialogConditionHasSleptInBed.class, new DialogConditionHasSleptInBed.Deserializer());
 
 		builder.registerTypeAdapter(IDialogSlideRenderer.class, new DialogSlideRendererDeserializer());
 

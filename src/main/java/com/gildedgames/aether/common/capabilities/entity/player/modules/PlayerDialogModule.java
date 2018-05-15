@@ -6,11 +6,11 @@ import com.gildedgames.aether.client.gui.dialog.GuiDialogViewer;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.network.packets.dialog.PacketActivateButton;
-import com.gildedgames.aether.common.network.packets.dialog.PacketCloseDialog;
-import com.gildedgames.aether.common.network.packets.dialog.PacketOpenDialog;
+import com.gildedgames.aether.common.network.packets.dialog.*;
+import com.google.common.collect.Maps;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
@@ -32,9 +32,28 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 
 	private Entity talkingEntity;
 
+	private Map<String, Boolean> conditionsMet;
+
 	public PlayerDialogModule(final PlayerAether playerAether)
 	{
 		super(playerAether);
+	}
+
+	@Override
+	public void setConditionsMetData(Map<String, Boolean> conditionsMet)
+	{
+		this.conditionsMet = conditionsMet;
+
+		if (this.sceneInstance != null)
+		{
+			this.sceneInstance.conditionsMet = conditionsMet;
+		}
+	}
+
+	@Override
+	public EntityPlayer getDialogPlayer()
+	{
+		return this.getEntity();
 	}
 
 	@Override
@@ -92,7 +111,7 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 
 		if (this.getPlayer().getEntity().world.isRemote)
 		{
-			this.openSceneClient(path, scene);
+			this.openSceneClient(path, scene, this.conditionsMet);
 		}
 		else
 		{
@@ -109,9 +128,11 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 	}
 
 	@SideOnly(Side.CLIENT)
-	private void openSceneClient(final ResourceLocation res, final IDialogScene scene)
+	private void openSceneClient(final ResourceLocation res, final IDialogScene scene, Map<String, Boolean> conditionsMet)
 	{
 		this.sceneInstance = new SceneInstance(this, scene);
+
+		this.sceneInstance.conditionsMet = conditionsMet;
 
 		Minecraft.getMinecraft().displayGuiScreen(new GuiDialogViewer(Minecraft.getMinecraft().player, this));
 	}
@@ -120,7 +141,8 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 	{
 		this.sceneInstance = new SceneInstance(this, scene);
 
-		NetworkingAether.sendPacketToPlayer(new PacketOpenDialog(res, scene.getStartingNode().getIdentifier()), (EntityPlayerMP) this.getPlayer().getEntity());
+		NetworkingAether.sendPacketToPlayer(new PacketOpenDialog(res, scene.getStartingNode().getIdentifier(), this.sceneInstance.conditionsMet),
+				(EntityPlayerMP) this.getPlayer().getEntity());
 	}
 
 	/**
@@ -133,10 +155,9 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 		NetworkingAether.sendPacketToServer(new PacketCloseDialog());
 	}
 
-	@Override
-	public void navigateNode(final String nodeId)
+	public void navigateNodeClient(String nodeId)
 	{
-		if (this.sceneInstance.getNode() != null)
+		if (this.sceneInstance.node != null)
 		{
 			this.lastNodeId = this.sceneInstance.getNode().getIdentifier();
 		}
@@ -144,8 +165,7 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 		this.sceneInstance.navigate(nodeId);
 	}
 
-	@Override
-	public void navigateBack()
+	public void navigateBackClient()
 	{
 		if (this.lastNodeId != null)
 		{
@@ -159,6 +179,76 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 	}
 
 	@Override
+	public void navigateNode(final String nodeId)
+	{
+		if (!this.getWorld().isRemote)
+		{
+			if (this.sceneInstance.getNode() != null)
+			{
+				this.lastNodeId = this.sceneInstance.getNode().getIdentifier();
+			}
+
+			this.sceneInstance.navigate(nodeId);
+
+			NetworkingAether.sendPacketToPlayer(new PacketNavigateNode(nodeId), (EntityPlayerMP) this.getDialogPlayer());
+		}
+	}
+
+	@Override
+	public void navigateBack()
+	{
+		if (!this.getWorld().isRemote)
+		{
+			NetworkingAether.sendPacketToPlayer(new PacketNavigateBack(), (EntityPlayerMP) this.getDialogPlayer());
+
+			if (this.lastNodeId != null)
+			{
+				this.sceneInstance.navigate(this.lastNodeId);
+
+				while (!this.isNodeFinished())
+				{
+					this.advance();
+				}
+			}
+		}
+	}
+
+	@Override
+	public boolean conditionsMet(IDialogButton button)
+	{
+		if (this.getWorld().isRemote)
+		{
+			return this.sceneInstance.conditionsMet.get(button.getLabel());
+		}
+
+		boolean flag = false;
+
+		for (IDialogCondition condition : button.getOrConditions())
+		{
+			if (condition.isMet(this))
+			{
+				flag = true;
+				break;
+			}
+		}
+
+		for (IDialogCondition condition : button.getConditions())
+		{
+			if (!condition.isMet(this))
+			{
+				flag = false;
+				break;
+			}
+			else
+			{
+				flag = true;
+			}
+		}
+
+		return flag || (button.getConditions().isEmpty() && button.getOrConditions().isEmpty());
+	}
+
+	@Override
 	public void activateButton(final IDialogButton button)
 	{
 		// Make sure this node actually contains the button
@@ -169,20 +259,47 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 			NetworkingAether.sendPacketToServer(new PacketActivateButton(button.getLabel()));
 		}
 
-		final Collection<IDialogAction> actions = button.getActions();
-
-		for (final IDialogAction action : actions)
+		if (!this.conditionsMet(button))
 		{
-			action.performAction(this);
+			return;
+		}
+
+		if (!this.getWorld().isRemote)
+		{
+			NetworkingAether.sendPacketToPlayer(new PacketActivateButton(button.getLabel()), (EntityPlayerMP) this.getEntity());
+
+			final Collection<IDialogAction> actions = button.getActions();
+
+			for (final IDialogAction action : actions)
+			{
+				action.performAction(this);
+			}
+		}
+	}
+
+	public void advanceClient()
+	{
+		if (this.sceneInstance != null)
+		{
+			this.sceneInstance.forwards();
 		}
 	}
 
 	@Override
 	public void advance()
 	{
-		if (this.sceneInstance != null)
+		if (this.getWorld().isRemote)
 		{
-			this.sceneInstance.forwards();
+			NetworkingAether.sendPacketToServer(new PacketAdvance());
+		}
+		else
+		{
+			NetworkingAether.sendPacketToPlayer(new PacketAdvance(), (EntityPlayerMP) this.getDialogPlayer());
+
+			if (this.sceneInstance != null)
+			{
+				this.sceneInstance.forwards();
+			}
 		}
 	}
 
@@ -248,6 +365,8 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 
 		private Collection<IDialogAction> endActions;
 
+		private Map<String, Boolean> conditionsMet = Maps.newHashMap();
+
 		private int index;
 
 		private SceneInstance(final PlayerDialogModule controller, final IDialogScene scene)
@@ -276,6 +395,16 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 			this.index = 0;
 
 			this.controller.updateListeners();
+
+			if (!this.controller.getWorld().isRemote)
+			{
+				for (IDialogButton button : this.buttons)
+				{
+					this.conditionsMet.put(button.getLabel(), this.controller.conditionsMet(button));
+				}
+
+				NetworkingAether.sendPacketToPlayer(new PacketConditionsMetData(this.conditionsMet), (EntityPlayerMP) this.controller.getEntity());
+			}
 		}
 
 		private IDialogLine getLine()

@@ -213,7 +213,7 @@ public class GuiDialogViewer extends GuiFrame implements IDialogChangeListener
 			return;
 		}
 
-		final Collection<IDialogButton> buttons = node.getButtons();
+		final Collection<IDialogButton> beforeConditionButtons = node.getButtons();
 
 		int baseBoxSize = 350;
 		final boolean resize = this.width - 40 > baseBoxSize;
@@ -223,39 +223,42 @@ public class GuiDialogViewer extends GuiFrame implements IDialogChangeListener
 			baseBoxSize = this.width - 40;
 		}
 
-		this.currentScroll = 0;
-
-		this.topTextBox = new GuiTextBox(buttons.size(),
-				resize ? (this.width / 2) - (baseBoxSize / 2) : 20, this.height - 175, baseBoxSize, 80);
-		this.bottomTextBox = new GuiTextBox(
-				buttons.size() + 1, resize ? (this.width / 2) - (baseBoxSize / 2) : 20, this.height - 85, baseBoxSize, 70);
-
-		this.topTextBox.showBackdrop = true;
-		this.topTextBox.bottomToTop = true;
-
 		if (this.controller.isNodeFinished())
 		{
 			this.buttons.clear();
 
 			int index = 0;
 
-			for (final IDialogButton btn : buttons)
+			for (final IDialogButton btn : beforeConditionButtons)
 			{
-				GuiDialogButton button = new GuiDialogButton(index, (this.width / 2) - (baseBoxSize / 2), this.height - 85 + (index * 20), btn);
+				if (this.controller.conditionsMet(btn))
+				{
+					GuiDialogButton button = new GuiDialogButton(index, (this.width / 2) - (baseBoxSize / 2), this.height - 85 + (index * 20), btn);
 
-				button.visible = false;
-				button.enabled = false;
+					button.visible = false;
+					button.enabled = false;
 
-				this.buttonList.add(button);
-				this.buttons.add(button);
+					this.buttonList.add(button);
+					this.buttons.add(button);
 
-				index++;
+					index++;
+				}
 			}
 		}
 
+		this.currentScroll = 0;
+
+		this.topTextBox = new GuiTextBox(this.buttons.size(),
+				resize ? (this.width / 2) - (baseBoxSize / 2) : 20, this.height - 175, baseBoxSize, 80);
+		this.bottomTextBox = new GuiTextBox(
+				this.buttons.size() + 1, resize ? (this.width / 2) - (baseBoxSize / 2) : 20, this.height - 85, baseBoxSize, 70);
+
+		this.topTextBox.showBackdrop = true;
+		this.topTextBox.bottomToTop = true;
+
 		this.refreshButtonsWithScroll();
 
-		this.maxScroll = Math.max(0, buttons.size() - 4);
+		this.maxScroll = Math.max(0, this.buttons.size() - 4);
 
 		final IDialogLine line = this.controller.getCurrentLine();
 
@@ -314,7 +317,7 @@ public class GuiDialogViewer extends GuiFrame implements IDialogChangeListener
 			final String name = I18n.format(this.speaker.getUnlocalizedName());
 
 			this.namePlate = new GuiTextBox(
-					buttons.size() + 2,
+					this.buttons.size() + 2,
 					resize ? (this.width / 2) - (baseBoxSize / 2) : 20,
 					this.height - (topText ? 122 + this.topTextBox.getTextHeight(this.fontRenderer) : 107),
 					this.fontRenderer.getStringWidth(name + 10), 20);

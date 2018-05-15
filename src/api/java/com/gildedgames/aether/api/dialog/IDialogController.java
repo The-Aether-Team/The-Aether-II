@@ -1,16 +1,28 @@
 package com.gildedgames.aether.api.dialog;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Map;
 
 /**
  * Controls the progression and displaying of a scene to the player.
  */
 public interface IDialogController
 {
+	void setConditionsMetData(Map<String, Boolean> data);
+
+	/**
+	 * @param button The button we're checking if their conditions are met.
+	 * @return Whether or not the conditions were met for this button.
+	 */
+	boolean conditionsMet(IDialogButton button);
+
+	EntityPlayer getDialogPlayer();
+
 	@Nullable
 	Entity getTalkingEntity();
 

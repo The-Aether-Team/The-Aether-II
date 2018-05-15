@@ -7,47 +7,35 @@ import com.gildedgames.orbis_api.util.io.NBTFunnel;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 import java.util.Map;
 
-public class PacketOpenDialog implements IMessage
+public class PacketConditionsMetData implements IMessage
 {
-	private ResourceLocation name;
-
-	private String startingNodeId;
-
 	private Map<String, Boolean> conditionsMet;
 
 	private NBTFunnel funnel;
 
-	public PacketOpenDialog()
+	public PacketConditionsMetData()
 	{
 	}
 
-	public PacketOpenDialog(final ResourceLocation res, String startingNodeId, Map<String, Boolean> conditionsMet)
+	public PacketConditionsMetData(Map<String, Boolean> conditionsMet)
 	{
-		this.name = res;
-		this.startingNodeId = startingNodeId;
 		this.conditionsMet = conditionsMet;
 	}
 
 	@Override
 	public void fromBytes(final ByteBuf buf)
 	{
-		this.name = new ResourceLocation(ByteBufUtils.readUTF8String(buf));
-		this.startingNodeId = ByteBufUtils.readUTF8String(buf);
 		this.funnel = new NBTFunnel(ByteBufUtils.readTag(buf));
 	}
 
 	@Override
 	public void toBytes(final ByteBuf buf)
 	{
-		ByteBufUtils.writeUTF8String(buf, this.name.toString());
-		ByteBufUtils.writeUTF8String(buf, this.startingNodeId);
-
 		NBTTagCompound tag = new NBTTagCompound();
 		NBTFunnel funnel = new NBTFunnel(tag);
 
@@ -56,19 +44,22 @@ public class PacketOpenDialog implements IMessage
 		ByteBufUtils.writeTag(buf, tag);
 	}
 
-	public static class HandlerClient extends MessageHandlerClient<PacketOpenDialog, PacketOpenDialog>
+	public static class HandlerClient extends MessageHandlerClient<PacketConditionsMetData, PacketConditionsMetData>
 	{
 		@Override
-		public PacketOpenDialog onMessage(final PacketOpenDialog message, final EntityPlayer player)
+		public PacketConditionsMetData onMessage(final PacketConditionsMetData message, final EntityPlayer player)
 		{
-			Map<String, Boolean> conditionsMet = message.funnel.getMap("c", NBTFunnel.STRING_GETTER, NBTFunnel.BOOLEAN_GETTER);
-
 			final IPlayerAether aePlayer = PlayerAether.getPlayer(player);
 
-			aePlayer.getDialogController().setConditionsMetData(conditionsMet);
-			aePlayer.getDialogController().openScene(message.name, message.startingNodeId);
+			Map<String, Boolean> conditionsMet = message.funnel.getMap("c", NBTFunnel.STRING_GETTER, NBTFunnel.BOOLEAN_GETTER);
+
+			if (conditionsMet != null)
+			{
+				aePlayer.getDialogController().setConditionsMetData(conditionsMet);
+			}
 
 			return null;
 		}
 	}
+
 }

@@ -50,7 +50,7 @@ public class DialogSchema implements IDialogScene
 	private class DialogNodeSchema implements IDialogNode
 	{
 		@SerializedName("buttons")
-		private final Collection<DialogButtonSchema> buttons = null;
+		private final List<DialogButtonSchema> buttons = null;
 
 		@SerializedName("end_actions")
 		private final Collection<IDialogAction> actions = null;
@@ -72,7 +72,7 @@ public class DialogSchema implements IDialogScene
 		@Override
 		public Collection<IDialogButton> getButtons()
 		{
-			return this.buttons == null ? Collections.emptyList() : Collections.unmodifiableCollection(this.buttons);
+			return this.buttons == null ? Collections.emptyList() : Collections.unmodifiableList(this.buttons);
 		}
 
 		@Nonnull
@@ -92,11 +92,31 @@ public class DialogSchema implements IDialogScene
 
 	private class DialogButtonSchema implements IDialogButton
 	{
+		@SerializedName("orConditions")
+		private Collection<IDialogCondition> orConditions;
+
+		@SerializedName("conditions")
+		private Collection<IDialogCondition> conditions;
+
 		@SerializedName("label")
 		private String label;
 
 		@SerializedName("actions")
 		private Collection<IDialogAction> actions;
+
+		@Nonnull
+		@Override
+		public Collection<IDialogCondition> getOrConditions()
+		{
+			return this.orConditions == null ? Collections.emptyList() : this.orConditions;
+		}
+
+		@Nonnull
+		@Override
+		public Collection<IDialogCondition> getConditions()
+		{
+			return this.conditions == null ? Collections.emptyList() : this.conditions;
+		}
 
 		@Nonnull
 		@Override
