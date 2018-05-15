@@ -116,7 +116,7 @@ public class EntitySwet extends EntityExtendedMob
 		}
 	}
 
-	public void processSucking(final EntityPlayer player)
+	public boolean processSucking(final EntityPlayer player)
 	{
 		PotionEffect slowness = new PotionEffect(Potion.getPotionById(2), 3, this.timeSinceSucking / 80, true, false);
 
@@ -179,10 +179,12 @@ public class EntitySwet extends EntityExtendedMob
 					this.setFoodSaturation(4);
 				}
 
-				PlayerAether.getPlayer(player).getSwetTracker().detachSwet(this);
 				NetworkingAether.sendPacketToWatching(new PacketDetachSwet(this.getType(), player.getEntityId()), player, true);
+				return true;
 			}
 		}
+
+		return false;
 	}
 
 	@Override

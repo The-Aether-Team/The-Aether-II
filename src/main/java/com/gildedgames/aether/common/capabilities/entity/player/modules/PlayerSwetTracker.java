@@ -10,6 +10,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
+import java.util.Iterator;
 import java.util.List;
 
 public class PlayerSwetTracker extends PlayerAetherModule
@@ -47,8 +48,12 @@ public class PlayerSwetTracker extends PlayerAetherModule
 
 	public void detachSwet(final EntitySwet swet)
 	{
-		this.swets.remove(swet);
+		swets.remove(swet);
+		spawnSwet(swet);
+	}
 
+	public void spawnSwet(final EntitySwet swet)
+	{
 		if (!this.getEntity().world.isRemote)
 		{
 			swet.setPosition(this.getEntity().posX, this.getEntity().posY, this.getEntity().posZ);
@@ -96,9 +101,17 @@ public class PlayerSwetTracker extends PlayerAetherModule
 			this.detachSwets();
 		}
 
-		for (final EntitySwet swet : this.swets)
+		final Iterator<EntitySwet> it = this.swets.iterator();
+
+		while (it.hasNext())
 		{
-			swet.processSucking(this.getEntity());
+			final EntitySwet swet = it.next();
+
+			if (swet.processSucking(this.getEntity()))
+			{
+				it.remove();
+				spawnSwet(swet);
+			}
 		}
 	}
 
