@@ -93,7 +93,7 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 
 	public void startRolling(PacketSpecialMovement.Action action)
 	{
-		if (!AetherHelper.isEnabled(this.getWorld()) || this.rollCooldown > 0)
+		if (!AetherHelper.isEnabled(this.getWorld()) || this.rollCooldown > 0 || getPlayer().getEntity().isSneaking())
 		{
 			return;
 		}

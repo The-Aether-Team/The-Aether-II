@@ -36,10 +36,8 @@ public class PlayerSwetTracker extends PlayerAetherModule
 		{
 			for (final EntitySwet swet : this.swets)
 			{
-				swet.setPosition(this.getEntity().posX, this.getEntity().posY, this.getEntity().posZ);
 				swet.setFoodSaturation(0);
-
-				this.getEntity().world.spawnEntity(swet);
+				spawnSwet(swet);
 			}
 		}
 
