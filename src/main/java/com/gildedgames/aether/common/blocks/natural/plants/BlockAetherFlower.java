@@ -183,25 +183,30 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 	{
 		BlockVariant variant = state.getValue(PROPERTY_VARIANT);
 
-		return variant == AECHOR_SPROUT && worldIn.getLightFromNeighbors(pos.up()) >= 9 && worldIn.rand.nextInt(7) == 0;
+		return variant == AECHOR_SPROUT;
 	}
 
 	@Override
 	public boolean canUseBonemeal(final World worldIn, final Random rand, final BlockPos pos, final IBlockState state)
 	{
-		return rand.nextFloat() < 0.45F;
+		return true;
 	}
 
 	@Override
 	public void grow(final World worldIn, final Random rand, final BlockPos pos, final IBlockState state)
 	{
-		EntityAechorPlant aechorPlant = new EntityAechorPlant(worldIn);
+		if (worldIn.getLightFromNeighbors(pos.up()) >= 9 && worldIn.rand.nextInt(7) == 0)
+		{
+			worldIn.destroyBlock(pos, false);
 
-		aechorPlant.setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
+			EntityAechorPlant aechorPlant = new EntityAechorPlant(worldIn);
 
-		worldIn.spawnEntity(aechorPlant);
+			aechorPlant.posX = pos.getX() + .5f;
+			aechorPlant.posY = pos.getY();
+			aechorPlant.posZ = pos.getZ() + .5f;
 
-		worldIn.destroyBlock(pos, false);
+			worldIn.spawnEntity(aechorPlant);
+		}
 	}
 
 }
