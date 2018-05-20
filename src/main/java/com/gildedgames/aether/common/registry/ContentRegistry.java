@@ -9,6 +9,8 @@ import com.gildedgames.aether.api.registry.IEffectRegistry;
 import com.gildedgames.aether.api.registry.IItemPropertiesRegistry;
 import com.gildedgames.aether.api.registry.recipes.IRecipeIndexRegistry;
 import com.gildedgames.aether.api.registry.tab.ITabRegistry;
+import com.gildedgames.aether.api.shop.ICurrencyRegistry;
+import com.gildedgames.aether.api.shop.IShopManager;
 import com.gildedgames.aether.api.world.generation.ITemplateRegistry;
 import com.gildedgames.aether.client.gui.tab.TabBugReport;
 import com.gildedgames.aether.client.gui.tab.TabEquipment;
@@ -21,19 +23,20 @@ import com.gildedgames.aether.common.entities.EntitiesAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.patron.PatronRewards;
 import com.gildedgames.aether.common.recipes.simple.RecipeIndexRegistry;
-import com.gildedgames.aether.common.recipes.simple.ShapedRecipeWrapper;
-import com.gildedgames.aether.common.recipes.simple.ShapelessRecipeWrapper;
+import com.gildedgames.aether.common.recipes.simple.RecipeWrapper;
 import com.gildedgames.aether.common.registry.content.*;
+import com.gildedgames.aether.common.shop.ShopManager;
 import com.gildedgames.aether.common.util.helpers.PerfHelper;
+import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraftforge.oredict.ShapedOreRecipe;
-import net.minecraftforge.oredict.ShapelessOreRecipe;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import org.apache.commons.lang3.Validate;
-
-import java.util.Collection;
 
 public class ContentRegistry implements IContentRegistry
 {
+	private final CurrencyRegistry currencyRegistry = new CurrencyRegistry();
+
 	private final TemplateRegistry templateRegistry = new TemplateRegistry();
 
 	private final AltarRegistry altarRegistry = new AltarRegistry();
@@ -51,6 +54,8 @@ public class ContentRegistry implements IContentRegistry
 	private final SimpleCraftingRegistry simpleCraftingRegistry = new SimpleCraftingRegistry();
 
 	private final PatronRewardRegistry patronRewardRegistry = new PatronRewardRegistry();
+
+	private final ShopManager shopManager = new ShopManager(true);
 
 	private boolean hasPreInit = false, hasInit = false;
 
@@ -89,27 +94,36 @@ public class ContentRegistry implements IContentRegistry
 		PerfHelper.measure("Initialize generations", GenerationAether::init);
 		PerfHelper.measure("Initialize recipes", RecipesAether::init);
 		PerfHelper.measure("Initialize instances", InstancesAether::init);
-		PerfHelper.measure("Initialize recipe indexes", this::rebuildIndexes);
 		PerfHelper.measure("Initialize simple recipes", SimpleRecipesAether::postInit);
 
 		this.hasInit = true;
 	}
 
-	private void rebuildIndexes()
+	public void rebuildIndexes()
 	{
-		final Collection<IRecipe> recipes = RecipesAether.getCraftableRecipes();
+		this.craftableItemsIndex.clearRegistrations();
 
-		for (final IRecipe recipe : recipes)
+		for (IRecipe recipe : ForgeRegistries.RECIPES)
 		{
-			if (recipe instanceof ShapedOreRecipe)
+			ResourceLocation loc = Item.REGISTRY.getNameForObject(recipe.getRecipeOutput().getItem());
+
+			if (loc != null && loc.getResourceDomain().equals("aether"))
 			{
-				this.craftableItemsIndex.registerRecipe(new ShapedRecipeWrapper((ShapedOreRecipe) recipe));
-			}
-			else if (recipe instanceof ShapelessOreRecipe)
-			{
-				this.craftableItemsIndex.registerRecipe(new ShapelessRecipeWrapper((ShapelessOreRecipe) recipe));
+				this.craftableItemsIndex.registerRecipe(new RecipeWrapper(recipe));
 			}
 		}
+	}
+
+	@Override
+	public IShopManager shop()
+	{
+		return this.shopManager;
+	}
+
+	@Override
+	public ICurrencyRegistry currency()
+	{
+		return this.currencyRegistry;
 	}
 
 	@Override

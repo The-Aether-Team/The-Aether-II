@@ -38,6 +38,9 @@ public class NetworkingAether
 		instance.registerMessage(PacketSetShouldRespawnAtCampfire.HandlerServer.class, PacketSetShouldRespawnAtCampfire.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketSetPlayerConfig.HandlerServer.class, PacketSetPlayerConfig.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketAdvance.HandlerServer.class, PacketAdvance.class, discriminant++, Side.SERVER);
+		instance.registerMessage(PacketShopSell.HandlerServer.class, PacketShopSell.class, discriminant++, Side.SERVER);
+		instance.registerMessage(PacketShopBack.HandlerServer.class, PacketShopBack.class, discriminant++, Side.SERVER);
+		instance.registerMessage(PacketShopBuy.HandlerServer.class, PacketShopBuy.class, discriminant++, Side.SERVER);
 
 		// C L I E N T
 		instance.registerMessage(PacketEquipment.HandlerClient.class, PacketEquipment.class, discriminant++, Side.CLIENT);
@@ -63,6 +66,7 @@ public class NetworkingAether
 		instance.registerMessage(PacketNavigateNode.HandlerClient.class, PacketNavigateNode.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketNavigateBack.HandlerClient.class, PacketNavigateBack.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketAdvance.HandlerClient.class, PacketAdvance.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketCurrencyModule.HandlerClient.class, PacketCurrencyModule.class, discriminant++, Side.CLIENT);
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(AetherCore.INSTANCE, new AetherGuiHandler());
 	}

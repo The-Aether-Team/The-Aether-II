@@ -20,9 +20,9 @@ public class DialogActionNecromancerGoUpTower implements IDialogAction
 	@Override
 	public void performAction(final IDialogController controller)
 	{
-		if (controller.getTalkingEntity() instanceof EntityNecromancer)
+		if (controller.getTalkingNPC() instanceof EntityNecromancer)
 		{
-			final EntityNecromancer necromancer = (EntityNecromancer) controller.getTalkingEntity();
+			final EntityNecromancer necromancer = (EntityNecromancer) controller.getTalkingNPC();
 
 			if (necromancer.getUpTowerTask() != null)
 			{

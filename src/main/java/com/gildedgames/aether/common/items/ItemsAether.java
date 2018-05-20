@@ -401,10 +401,7 @@ public class ItemsAether
 
 			this.registry.register(item);
 
-			if (!(item instanceof ItemMoaEgg))
-			{
-				registeredItems.add(item);
-			}
+			registeredItems.add(item);
 		}
 	}
 }

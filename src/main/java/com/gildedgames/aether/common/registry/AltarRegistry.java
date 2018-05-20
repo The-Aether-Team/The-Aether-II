@@ -17,11 +17,11 @@ public class AltarRegistry implements IAltarRecipeRegistry
 	}
 
 	@Override
-	public IAltarRecipe getMatchingRecipe(ItemStack stack)
+	public IAltarRecipe getMatchingRecipeFromInput(ItemStack stack)
 	{
 		for (IAltarRecipe recipe : this.altarRecipes)
 		{
-			if (recipe.matchesRecipe(stack))
+			if (recipe.matchesInput(stack))
 			{
 				return recipe;
 			}
@@ -30,8 +30,17 @@ public class AltarRegistry implements IAltarRecipeRegistry
 		return null;
 	}
 
-	public boolean isEnchantableItem(ItemStack stack)
+	@Override
+	public IAltarRecipe getMatchingRecipeFromOutput(ItemStack stack)
 	{
-		return this.getMatchingRecipe(stack) != null;
+		for (IAltarRecipe recipe : this.altarRecipes)
+		{
+			if (recipe.matchesOutput(stack))
+			{
+				return recipe;
+			}
+		}
+
+		return null;
 	}
 }

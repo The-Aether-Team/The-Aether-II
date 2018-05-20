@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.dialog.*;
+import com.gildedgames.aether.api.entity.EntityNPC;
 import com.gildedgames.aether.client.gui.dialog.GuiDialogViewer;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
@@ -9,7 +10,6 @@ import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.dialog.*;
 import com.google.common.collect.Maps;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
@@ -30,7 +30,7 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 
 	private String lastNodeId;
 
-	private Entity talkingEntity;
+	private EntityNPC talkingEntity;
 
 	private Map<String, Boolean> conditionsMet;
 
@@ -84,13 +84,13 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 
 	@Nullable
 	@Override
-	public Entity getTalkingEntity()
+	public EntityNPC getTalkingNPC()
 	{
 		return this.talkingEntity;
 	}
 
 	@Override
-	public void setTalkingEntity(final Entity entity)
+	public void setTalkingEntity(final EntityNPC entity)
 	{
 		this.talkingEntity = entity;
 	}
@@ -155,6 +155,7 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 		NetworkingAether.sendPacketToServer(new PacketCloseDialog());
 	}
 
+	@SideOnly(Side.CLIENT)
 	public void navigateNodeClient(String nodeId)
 	{
 		if (this.sceneInstance.node != null)
@@ -165,6 +166,7 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 		this.sceneInstance.navigate(nodeId);
 	}
 
+	@SideOnly(Side.CLIENT)
 	public void navigateBackClient()
 	{
 		if (this.lastNodeId != null)

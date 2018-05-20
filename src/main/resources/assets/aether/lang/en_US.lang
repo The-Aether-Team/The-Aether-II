@@ -833,6 +833,10 @@ aether.reward.slider.name=Slider
 aether.reward.valkyrie_queen.name=Valkyrie Queen
 aether.reward.none.name=None
 
+# Shop
+aether.shop.sell=Sell
+aether.shop.buy=Buy
+
 ##=======================##
 ###########################
 #                         #
@@ -934,8 +938,7 @@ edison.greet.fine2=You need anything before you head off?
 edison.greet.thanks1=Don’t mention it. We’ve all got a role to play here, mine’s to keep you safe.
 edison.greet.thanks2=You need anything or are you good to set off?
 
-edison.greet.sale1=Sorry friend, I'm still working on getting my stock in order.
-edison.greet.sale2=Maybe come back later and I'll have more to offer.
+edison.greet.sale=Sure thing, let’s take a look at my stock.
 
 edison.greet.no_we_talked1=That’s right! International entrepreneur, salesman and master of persuasion!
 edison.greet.no_we_talked2=But to you, due to our little agreement with The Necromancer, I am also your contact in these strange lands.
@@ -961,6 +964,31 @@ edison.greet.valkyries1=They're kinda like the city guards of this world but err
 edison.greet.valkyries2=Luckily they're rather friendly, not big talkers though. You should find them wandering around most towns and villages. They have some sort of holy pact to protect people or something.
 edison.greet.valkyries3=Honestly I'm not entirely sure what they are, you're better off asking one of the natives. Or a Valkyrie in person! They're kinda hard to miss.
 edison.greet.valkyries4=Have anything else you want to know?
+
+##=======================##
+###########################
+#                         #
+#  EDISON SHOP DIALOGUE   #
+#                         #
+###########################
+##=======================##
+
+edison.shop.greetings1=Here it is, friend - the finest stock you'll find. Look around, see what piques your fancy.
+edison.shop.greetings2=Got some great sales today, friend. Take a look around, I know you'll find just what you're looking for. Guaranteed!
+
+edison.shop.enchanted_wyndberry=Feeling hungry? These little fruits are some of the most nutritious you'll find. Enchanted from our finest Ambrosium, you can't go wrong with a Wyndberry.
+edison.shop.enchanted_blueberry=Who said Blueberries only exist on Thera? Enchanted from our finest Ambrosium, these little devils will fill you up in no time.
+edison.shop.ambrosium_shard=A common crystal found in the Aether, but don't let the fool you - these shards are one of the most important materials you'll need on your journey. From enchanting food to repairing broken items, they're an invaluable item to collect.
+edison.shop.skyroot_stick=You... You want sticks? My vision's not failing me, is it? I can see trees for miles! You could break a few sticks off any of them, free of charge! Hey, I'm not complaining, I'll gladly take your money.
+edison.shop.skyroot_pickaxe=A staple pickaxe to start your journey.
+edison.shop.skyroot_axe=A staple axe to start your journey.
+edison.shop.skyroot_sword=A staple sword to start your journey.
+edison.shop.skyroot_shovel=A staple shovel to start your journey.
+edison.shop.therawood_leaves=Nothing smells better than the autumn leaves down on Thera. Too bad the seasons aren't quite the same here.
+edison.shop.therawood_log=You want wood from our world? Feeling nostalgic? I guess I don't see why not.
+edison.shop.thera_dirt=Honestly, I have no idea why you want dirt from our world, but I'm happy to take your money.
+edison.shop.thera_grass=Ahh, I always thought the grass was greener down there. I take it you agree?
+edison.shop.therastone_brick=These finely-crafted bricks have a unique design you'll find no where else. Reminds me of home!
 
 ##=======================##
 ###########################

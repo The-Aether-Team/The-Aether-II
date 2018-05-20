@@ -76,6 +76,8 @@ public class PlayerAether implements IPlayerAether
 
 	private final PlayerProgressModule progressModule;
 
+	private final PlayerCurrencyModule currencyModule;
+
 	private final List<PlayerAetherObserver> observers = Lists.newArrayList();
 
 	private NecromancerTowerInstance towerInstance;
@@ -100,6 +102,7 @@ public class PlayerAether implements IPlayerAether
 		this.rollMovementModule = null;
 		this.configModule = null;
 		this.progressModule = null;
+		this.currencyModule = null;
 	}
 
 	public PlayerAether(final EntityPlayer entity)
@@ -120,6 +123,7 @@ public class PlayerAether implements IPlayerAether
 		this.rollMovementModule = new PlayerRollMovementModule(this);
 		this.configModule = new PlayerConfigModule(this);
 		this.progressModule = new PlayerProgressModule(this);
+		this.currencyModule = new PlayerCurrencyModule(this);
 
 		final Collection<PlayerAetherModule> modules = new ArrayList<>();
 
@@ -137,6 +141,7 @@ public class PlayerAether implements IPlayerAether
 		modules.add(this.rollMovementModule);
 		modules.add(this.configModule);
 		modules.add(this.progressModule);
+		modules.add(this.currencyModule);
 
 		this.modules = modules.toArray(new PlayerAetherModule[0]);
 	}
@@ -181,6 +186,11 @@ public class PlayerAether implements IPlayerAether
 		return this.separateInventoryModule;
 	}
 
+	public PlayerCurrencyModule getCurrencyModule()
+	{
+		return this.currencyModule;
+	}
+
 	public void onLoggedOut()
 	{
 
@@ -191,6 +201,7 @@ public class PlayerAether implements IPlayerAether
 	 */
 	public void sendFullUpdate()
 	{
+		NetworkingAether.sendPacketToPlayer(new PacketCurrencyModule(this.getCurrencyModule()), (EntityPlayerMP) this.getEntity());
 		NetworkingAether.sendPacketToPlayer(new PacketProgressModule(this.getProgressModule()), (EntityPlayerMP) this.getEntity());
 		NetworkingAether.sendPacketToPlayer(new PacketSetPlayedIntro(this.getTeleportingModule().hasPlayedIntro()), (EntityPlayerMP) this.getEntity());
 		NetworkingAether.sendPacketToPlayer(new PacketCampfires(this.getCampfiresModule().getCampfiresActivated()), (EntityPlayerMP) this.getEntity());

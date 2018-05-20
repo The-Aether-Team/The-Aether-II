@@ -81,6 +81,7 @@ public class DialogManager implements IDialogManager
 		builder.registerTypeAdapter(DialogActionNecromancerGoUpTower.class, new DialogActionNecromancerGoUpTower.Deserializer());
 		builder.registerTypeAdapter(DialogActionTravelToBed.class, new DialogActionTravelToBed.Deserializer());
 		builder.registerTypeAdapter(DialogActionTravelToLastOutpost.class, new DialogActionTravelToLastOutpost.Deserializer());
+		builder.registerTypeAdapter(DialogActionOpenShop.class, new DialogActionOpenShop.Deserializer());
 
 		builder.registerTypeAdapter(DialogConditionReturningToOutpost.class, new DialogConditionReturningToOutpost.Deserializer());
 		builder.registerTypeAdapter(DialogConditionHasSleptInBed.class, new DialogConditionHasSleptInBed.Deserializer());

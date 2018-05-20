@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.living.npc;
 
+import com.gildedgames.aether.api.entity.EntityNPC;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;

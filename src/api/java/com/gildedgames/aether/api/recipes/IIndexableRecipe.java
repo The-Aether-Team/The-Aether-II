@@ -2,6 +2,8 @@ package com.gildedgames.aether.api.recipes;
 
 import com.gildedgames.aether.api.util.ItemMetaPair;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.NonNullList;
 
 import java.util.Collection;
 import java.util.List;
@@ -14,27 +16,16 @@ import java.util.List;
 public interface IIndexableRecipe
 {
 	/**
-	 * Returns a {@link List} of objects in crafting matrix order, where elements can either be
-	 * an {@link ItemStack} or a {@link Collection<ItemStack>}.
+	 * Returns a {@link List} of Ingredients in crafting matrix order.
 	 * @return The recipe's matrix.
 	 */
-	List<Object> getCraftingMatrix();
+	NonNullList<Ingredient> getCraftingMatrix();
 
 	/**
 	 * Returns the collection of unique items this recipe requires to be crafted.
 	 * @return A non-empty collection of unique items this recipe requires as input
 	 */
 	Collection<ItemMetaPair> getRecipeItems();
-
-	/**
-	 * @return The width of the crafting matrix returned by {@link IIndexableRecipe#getCraftingMatrix()}
-	 */
-	int getRecipeWidth();
-
-	/**
-	 * @return The height of the crafting matrix returned by {@link IIndexableRecipe#getCraftingMatrix()}
-	 */
-	int getRecipeHeight();
 
 	/**
 	 * Returns the output {@link ItemStack} this recipe will return when it is crafted.

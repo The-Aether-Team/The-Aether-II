@@ -133,11 +133,10 @@
 		{
 			"name": "sale",
 			"lines": [
-				{ "speaker": "aether:edison#idle", "text": "edison.greet.sale1" },
-				{ "speaker": "aether:edison#idle", "text": "edison.greet.sale2" }
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.sale" }
 			],
-			"exit_actions": [
-				{ "type": "back" }
+			"end_actions": [
+				{ "type": "openShop" }
 			]
 		},
 		{

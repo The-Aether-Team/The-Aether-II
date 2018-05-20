@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.living.npc;
 
+import com.gildedgames.aether.api.entity.EntityNPC;
 import com.gildedgames.orbis_api.util.mc.NBTHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;

@@ -11,10 +11,16 @@ import net.minecraft.item.ItemTool;
 public class AltarRepairRecipe implements IAltarRecipe
 {
 	@Override
-	public boolean matchesRecipe(final ItemStack stack)
+	public boolean matchesInput(final ItemStack stack)
 	{
 		return (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemTool || stack.getItem() instanceof ItemArmor)
 				&& stack.isItemDamaged();
+	}
+
+	@Override
+	public boolean matchesOutput(ItemStack stack)
+	{
+		return false;
 	}
 
 	@Override
@@ -74,5 +80,11 @@ public class AltarRepairRecipe implements IAltarRecipe
 		stack.setItemDamage(0);
 
 		return stack;
+	}
+
+	@Override
+	public ItemStack getInput()
+	{
+		return null;
 	}
 }

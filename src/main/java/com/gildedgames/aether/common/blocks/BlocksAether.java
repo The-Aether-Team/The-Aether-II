@@ -667,7 +667,7 @@ public class BlocksAether
 		skyroot_bookshelf.setHarvestLevel("axe", 0);
 	}
 
-	public static Collection<Block> getAllBlocks()
+	public static Collection<Block> getRegisteredBlocks()
 	{
 		return Collections.unmodifiableCollection(registeredBlocks);
 	}
@@ -706,6 +706,8 @@ public class BlocksAether
 			item.setRegistryName(AetherCore.MOD_ID, registryName).setUnlocalizedName(AetherCore.MOD_ID + "." + registryName);
 
 			ITEM_BLOCKS.add(item);
+
+			registeredBlocks.add(block);
 		}
 	}
 }

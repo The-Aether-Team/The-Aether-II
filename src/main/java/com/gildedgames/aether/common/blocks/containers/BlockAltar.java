@@ -96,7 +96,7 @@ public class BlockAltar extends Block implements ITileEntityProvider
 					altar.addAmbrosiumShard();
 				}
 			}
-			else if (AetherAPI.content().altar().getMatchingRecipe(heldStack) != null)
+			else if (AetherAPI.content().altar().getMatchingRecipeFromInput(heldStack) != null)
 			{
 				ItemStack stack = heldStack.copy();
 				stack.setCount(1);

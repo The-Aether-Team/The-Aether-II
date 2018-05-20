@@ -19,7 +19,13 @@ public class AltarEnchantRecipe implements IAltarRecipe
 	}
 
 	@Override
-	public boolean matchesRecipe(ItemStack stack)
+	public boolean matchesInput(ItemStack stack)
+	{
+		return this.input.isItemEqual(stack);
+	}
+
+	@Override
+	public boolean matchesOutput(ItemStack stack)
 	{
 		return this.input.isItemEqual(stack);
 	}
@@ -34,5 +40,11 @@ public class AltarEnchantRecipe implements IAltarRecipe
 	public ItemStack getOutput(ItemStack stack)
 	{
 		return this.output.copy();
+	}
+
+	@Override
+	public ItemStack getInput()
+	{
+		return this.input;
 	}
 }

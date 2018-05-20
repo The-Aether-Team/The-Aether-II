@@ -1,5 +1,9 @@
 package com.gildedgames.aether.common.entities.living.npc;
 
+import com.gildedgames.aether.api.AetherAPI;
+import com.gildedgames.aether.api.entity.EntityNPC;
+import com.gildedgames.aether.api.shop.IShopDefinition;
+import com.gildedgames.aether.api.shop.IShopInstance;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
@@ -18,6 +22,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.Optional;
+import java.util.Random;
+
 public class EntityEdison extends EntityNPC
 {
 	public static ResourceLocation SPEAKER = AetherCore.getResource("edison");
@@ -31,6 +38,20 @@ public class EntityEdison extends EntityNPC
 		this.setSize(1.0F, 1.0F);
 
 		this.rotationYaw = 0.3F;
+	}
+
+	@Override
+	public IShopInstance createShopInstance(long seed)
+	{
+		Optional<IShopDefinition> shopDefinition = AetherAPI.content().shop().getShopDefinition(SPEAKER);
+		IShopInstance instance = null;
+
+		if (shopDefinition.isPresent())
+		{
+			instance = AetherAPI.content().shop().createInstance(shopDefinition.get(), new Random(seed));
+		}
+
+		return instance;
 	}
 
 	@Override
@@ -121,10 +142,12 @@ public class EntityEdison extends EntityNPC
 	{
 		if (!super.processInteract(player, hand))
 		{
+			final PlayerAether playerAether = PlayerAether.getPlayer(player);
+
+			playerAether.getDialogController().setTalkingEntity(this);
+
 			if (!player.world.isRemote)
 			{
-				final PlayerAether playerAether = PlayerAether.getPlayer(player);
-
 				if (playerAether.getProgressModule().hasTalkedTo(EntityEdison.SPEAKER))
 				{
 					String node = playerAether.getProgressModule().hasDiedInAether() ? "start_respawn" : "start";

@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.AetherAPI;
+import com.gildedgames.aether.api.entity.EntityNPC;
 import com.gildedgames.aether.api.items.IItemProperties;
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.api.player.IPlayerAether;
@@ -9,7 +10,6 @@ import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.containers.ContainerLoadingScreen;
 import com.gildedgames.aether.common.entities.living.mobs.EntityAechorPlant;
-import com.gildedgames.aether.common.entities.living.npc.EntityNPC;
 import com.gildedgames.aether.common.entities.living.passive.EntityCarrionSprout;
 import com.gildedgames.aether.common.events.PostAetherTravelEvent;
 import com.gildedgames.aether.common.items.ItemsAether;

@@ -1,19 +1,24 @@
 package com.gildedgames.aether.common.network;
 
+import com.gildedgames.aether.api.dialog.IDialogSlide;
+import com.gildedgames.aether.api.dialog.IDialogSlideRenderer;
+import com.gildedgames.aether.api.shop.IShopInstance;
 import com.gildedgames.aether.client.gui.container.GuiEquipment;
 import com.gildedgames.aether.client.gui.container.GuiIcestoneCooler;
 import com.gildedgames.aether.client.gui.container.GuiIncubator;
 import com.gildedgames.aether.client.gui.container.simple_crafting.GuiMasonryBench;
+import com.gildedgames.aether.client.gui.dialog.GuiDialogViewer;
+import com.gildedgames.aether.client.gui.dialog.GuiShop;
 import com.gildedgames.aether.client.gui.misc.GuiAetherLoading;
 import com.gildedgames.aether.client.gui.misc.GuiAetherTeleporterNotice;
 import com.gildedgames.aether.client.gui.misc.GuiPatronRewards;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
-import com.gildedgames.aether.common.containers.ContainerCustomWorkbench;
-import com.gildedgames.aether.common.containers.ContainerEquipment;
-import com.gildedgames.aether.common.containers.ContainerLoadingScreen;
+import com.gildedgames.aether.common.containers.*;
 import com.gildedgames.aether.common.containers.tiles.ContainerIcestoneCooler;
 import com.gildedgames.aether.common.containers.tiles.ContainerIncubator;
 import com.gildedgames.aether.common.containers.tiles.ContainerMasonryBench;
+import com.gildedgames.aether.common.dialog.DialogUtil;
+import com.gildedgames.orbis_api.client.gui.util.GuiFrame;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiCrafting;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,6 +26,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -44,10 +50,15 @@ public class AetherGuiHandler implements IGuiHandler
 
 	public static final int TELEPORTER_NOTICE_ID = 8;
 
+	public static final int DIALOG_SHOP_ID = 9;
+
+	public static final int DIALOG_VIEWER_ID = 10;
+
 	@Override
 	public Container getServerGuiElement(final int id, final EntityPlayer player, final World world, final int x, final int y, final int z)
 	{
 		final BlockPos pos = new BlockPos(x, y, z);
+		PlayerAether playerAether = PlayerAether.getPlayer(player);
 
 		switch (id)
 		{
@@ -63,6 +74,24 @@ public class AetherGuiHandler implements IGuiHandler
 				return new ContainerMasonryBench(player, new BlockPos(x, y, z));
 			case AETHER_LOADING_ID:
 				return new ContainerLoadingScreen();
+			case DIALOG_SHOP_ID:
+			{
+				if (playerAether.getDialogController().getTalkingNPC() == null)
+				{
+					return null;
+				}
+
+				IShopInstance shopInstance = playerAether.getDialogController().getTalkingNPC().getShopInstance();
+
+				if (shopInstance == null)
+				{
+					return null;
+				}
+
+				return new ContainerShop(player.inventory, shopInstance);
+			}
+			case DIALOG_VIEWER_ID:
+				return new ContainerDialogController(player);
 			default:
 				return null;
 		}
@@ -73,6 +102,7 @@ public class AetherGuiHandler implements IGuiHandler
 	public GuiContainer getClientGuiElement(final int id, final EntityPlayer player, final World world, final int x, final int y, final int z)
 	{
 		final BlockPos pos = new BlockPos(x, y, z);
+		PlayerAether playerAether = PlayerAether.getPlayer(player);
 
 		switch (id)
 		{
@@ -92,6 +122,41 @@ public class AetherGuiHandler implements IGuiHandler
 				return new GuiPatronRewards();
 			case TELEPORTER_NOTICE_ID:
 				return new GuiAetherTeleporterNotice();
+			case DIALOG_SHOP_ID:
+			{
+				if (playerAether.getDialogController().getTalkingNPC() == null)
+				{
+					return null;
+				}
+
+				IDialogSlide slide = DialogUtil.getSlide(playerAether.getDialogController());
+				IShopInstance shopInstance = playerAether.getDialogController().getTalkingNPC().getShopInstance();
+
+				if (shopInstance == null || slide == null)
+				{
+					return null;
+				}
+
+				GuiFrame prevFrame = null;
+
+				if (FMLClientHandler.instance().getClient().currentScreen instanceof GuiFrame)
+				{
+					prevFrame = (GuiFrame) FMLClientHandler.instance().getClient().currentScreen;
+				}
+
+				if (slide.getRenderer().isPresent())
+				{
+					IDialogSlideRenderer renderer = DialogUtil.getRenderer(slide);
+
+					return new GuiShop(prevFrame, player, slide, renderer, shopInstance);
+				}
+				else
+				{
+					return new GuiShop(prevFrame, player, slide, null, shopInstance);
+				}
+			}
+			case DIALOG_VIEWER_ID:
+				return new GuiDialogViewer(player, playerAether.getDialogController());
 			default:
 				return null;
 		}

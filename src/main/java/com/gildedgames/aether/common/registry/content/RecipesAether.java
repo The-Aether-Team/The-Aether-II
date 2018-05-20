@@ -24,16 +24,9 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-
 @Mod.EventBusSubscriber
 public class RecipesAether
 {
-	private static final Set<IRecipe> CRAFTABLE_RECIPES = new HashSet<>();
-
 	public static void preInit()
 	{
 	}
@@ -152,11 +145,11 @@ public class RecipesAether
 		AetherAPI.content().altar().registerAltarRecipe(new AltarEnchantRecipe(1, new ItemStack(ItemsAether.dart, 1, ItemDartType.GOLDEN.ordinal()),
 				new ItemStack(ItemsAether.dart, 1, ItemDartType.ENCHANTED.ordinal())));
 
-		// Enchanted Strawberry
+		// Enchanted Blueberry
 		AetherAPI.content().altar().registerAltarRecipe(new AltarEnchantRecipe(2, new ItemStack(ItemsAether.blueberries),
 				new ItemStack(ItemsAether.enchanted_blueberry)));
 
-		// Rainbow Strawberry
+		// Enchanted Wyndberry
 		AetherAPI.content().altar().registerAltarRecipe(new AltarEnchantRecipe(4, new ItemStack(ItemsAether.wyndberry),
 				new ItemStack(ItemsAether.enchanted_wyndberry)));
 
@@ -171,10 +164,5 @@ public class RecipesAether
 	private static void registerSmeltingRecipe(final ItemStack input, final ItemStack output, final float xp)
 	{
 		GameRegistry.addSmelting(input, output, xp);
-	}
-
-	public static Collection<IRecipe> getCraftableRecipes()
-	{
-		return Collections.unmodifiableCollection(CRAFTABLE_RECIPES);
 	}
 }

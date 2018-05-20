@@ -10,6 +10,9 @@ import com.gildedgames.aether.common.items.tools.ItemToolHandler;
 import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
 import com.gildedgames.aether.common.network.api.GildedGamesAccountApiImpl;
 import com.gildedgames.aether.common.registry.ContentRegistry;
+import com.gildedgames.aether.common.shop.ShopBuy;
+import com.gildedgames.aether.common.shop.ShopInstance;
+import com.gildedgames.aether.common.util.helpers.PerfHelper;
 import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.IrradiatedForestsData;
 import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.MagneticHillPillar;
 import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.MagneticHillsData;
@@ -29,6 +32,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
 
 import java.io.File;
 import java.util.Random;
@@ -59,6 +63,8 @@ public class CommonProxy implements IAetherServices
 		s.register(2, MagneticHillPillar.class, new Instantiator<>(MagneticHillPillar.class));
 		s.register(3, IrradiatedForestsData.class, new Instantiator<>(IrradiatedForestsData.class));
 		s.register(4, IslandVariables.class, new Instantiator<>(IslandVariables.class));
+		s.register(5, ShopInstance.class, new Instantiator<>(ShopInstance.class));
+		s.register(6, ShopBuy.class, new Instantiator<>(ShopBuy.class));
 
 		OrbisAPI.services().io().register(s);
 
@@ -82,6 +88,11 @@ public class CommonProxy implements IAetherServices
 		MinecraftForge.EVENT_BUS.register(ItemSkyrootSword.class);
 		MinecraftForge.EVENT_BUS.register(QuicksoilProcessor.class);
 		MinecraftForge.EVENT_BUS.register(SpawnAreaEvents.class);
+	}
+
+	public void serverStarted(FMLServerStartedEvent event)
+	{
+		PerfHelper.measure("Initialize recipe indexes", this.contentRegistry::rebuildIndexes);
 	}
 
 	public void spawnJumpParticles(final World world, final double x, final double y, final double z, final double radius, final int quantity)

@@ -1,6 +1,6 @@
 package com.gildedgames.aether.api.dialog;
 
-import net.minecraft.entity.Entity;
+import com.gildedgames.aether.api.entity.EntityNPC;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
@@ -24,9 +24,9 @@ public interface IDialogController
 	EntityPlayer getDialogPlayer();
 
 	@Nullable
-	Entity getTalkingEntity();
+	EntityNPC getTalkingNPC();
 
-	void setTalkingEntity(Entity entity);
+	void setTalkingEntity(EntityNPC entity);
 
 	/**
 	 * Adds a {@link IDialogChangeListener} to this controller. All listeners are removed

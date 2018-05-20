@@ -4,7 +4,9 @@ import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.client.gui.misc.CustomLoadingRenderer;
 import com.gildedgames.aether.common.analytics.GAReporter;
 import com.gildedgames.aether.common.registry.SpawnRegistry;
+import com.gildedgames.aether.common.registry.content.CurrencyAether;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
+import com.gildedgames.aether.common.util.helpers.PerfHelper;
 import com.gildedgames.aether.common.world.aether.TeleporterAether;
 import com.gildedgames.orbis_api.preparation.impl.util.PrepHelper;
 import net.minecraft.client.Minecraft;
@@ -137,6 +139,11 @@ public class AetherCore
 		{
 			PrepHelper.getManager(world).access().provideSector(0, 0);
 		}
+
+		PROXY.serverStarted(event);
+
+		AetherAPI.content().currency().clearRegistrations();
+		PerfHelper.measure("Initialize currency", CurrencyAether::serverStarted);
 	}
 
 	@EventHandler

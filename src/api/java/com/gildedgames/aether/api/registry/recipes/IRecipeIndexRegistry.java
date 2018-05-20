@@ -11,6 +11,8 @@ import java.util.Collection;
  */
 public interface IRecipeIndexRegistry
 {
+	void clearRegistrations();
+
 	/**
 	 * Registers a recipe with this index.
 	 *
@@ -33,5 +35,15 @@ public interface IRecipeIndexRegistry
 	 * @return A {@link Collection} containing {@link IIndexableRecipe} which
 	 * contain {@param item}, empty if none.
 	 */
-	Collection<IIndexableRecipe> getRecipesContainingItem(ItemStack item);
+	Collection<IIndexableRecipe> getRecipesContainingIngredient(ItemStack item);
+
+	/**
+	 * Gets a collection of recipes that use {@param item} as an input. This is damage
+	 * value sensitive.
+	 *
+	 * @param item The item index to search by
+	 * @return A {@link Collection} containing {@link IIndexableRecipe} which
+	 * contain {@param item}, empty if none.
+	 */
+	Collection<IIndexableRecipe> getRecipesContainingResult(ItemStack item);
 }

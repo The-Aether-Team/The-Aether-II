@@ -12,8 +12,15 @@ public interface IAltarRecipeRegistry
 
 	/**
 	 * Returns the first matching recipe that accepts {@param stack} as input.
-	 * @param stack The inputstack
+	 * @param stack The input stack
 	 * @return The first matching recipe, null if none match.
 	 */
-	IAltarRecipe getMatchingRecipe(ItemStack stack);
+	IAltarRecipe getMatchingRecipeFromInput(ItemStack stack);
+
+	/**
+	 * Returns the first matching recipe that accepts {@param stack} as output.
+	 * @param stack The output stack
+	 * @return The first matching recipe, null if none match.
+	 */
+	IAltarRecipe getMatchingRecipeFromOutput(ItemStack stack);
 }

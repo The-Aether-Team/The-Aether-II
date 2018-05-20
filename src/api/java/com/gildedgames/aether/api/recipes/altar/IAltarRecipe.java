@@ -10,7 +10,15 @@ public interface IAltarRecipe
 	 * @param stack The {@link ItemStack} on the Altar.
 	 * @return True if this recipe accepts this item.
 	 */
-	boolean matchesRecipe(ItemStack stack);
+	boolean matchesInput(ItemStack stack);
+
+	/**
+	 * Used internally by the Altar to search for matching recipes.
+	 *
+	 * @param stack The {@link ItemStack} on the Altar.
+	 * @return True if this recipe accepts this item.
+	 */
+	boolean matchesOutput(ItemStack stack);
 
 	/**
 	 * Used internally to determine how much Ambrosium this recipe will use upon completion with
@@ -29,4 +37,9 @@ public interface IAltarRecipe
 	 * @return The output of this recipe when completed.
 	 */
 	ItemStack getOutput(ItemStack stack);
+
+	/**
+	 * @return The inputs for this recipe.
+	 */
+	ItemStack getInput();
 }
