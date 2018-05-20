@@ -32,7 +32,6 @@ public class CurrencyAether
 		c.registerValue(new ItemStack(BlocksAether.aether_dirt, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(1).flush());
 		c.registerValue(new ItemStack(BlocksAether.aether_grass, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(1).flush());
 		c.registerValue(new ItemStack(BlocksAether.holystone, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(1).flush());
-
 		c.registerValue(new ItemStack(BlocksAether.golden_oak_leaves, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(1).flush());
 		c.registerValue(new ItemStack(BlocksAether.blue_dark_skyroot_leaves, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(1).flush());
 		c.registerValue(new ItemStack(BlocksAether.blue_light_skyroot_leaves, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(1).flush());
@@ -43,100 +42,52 @@ public class CurrencyAether
 		c.registerValue(new ItemStack(BlocksAether.green_dark_skyroot_leaves, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(1).flush());
 		c.registerValue(new ItemStack(BlocksAether.green_light_skyroot_leaves, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(1).flush());
 		c.registerValue(new ItemStack(BlocksAether.green_skyroot_leaves, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(1).flush());
-
 		c.registerValue(new ItemStack(BlocksAether.therawood_leaves, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(80).flush());
 		c.registerValue(new ItemStack(BlocksAether.therawood_log, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(80).flush());
 		c.registerValue(new ItemStack(BlocksAether.thera_dirt, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(80).flush());
 		c.registerValue(new ItemStack(BlocksAether.thera_grass, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(80).flush());
 		c.registerValue(new ItemStack(BlocksAether.therastone_brick, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(80).flush());
-
 		c.registerValue(new ItemStack(BlocksAether.scatterglass, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(3).flush());
 		c.registerValue(new ItemStack(BlocksAether.crude_scatterglass, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(3).flush());
-
 		c.registerValue(new ItemStack(BlocksAether.ferrosite_sand, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(2).flush());
 		c.registerValue(new ItemStack(BlocksAether.quicksoil, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(2).flush());
-
 		c.registerValue(new ItemStack(BlocksAether.aercloud, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(5).flush());
 		c.registerValue(new ItemStack(BlocksAether.ferrosite, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(3).flush());
-
 		c.registerValue(new ItemStack(BlocksAether.aether_sapling, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(5).flush());
-
 		c.registerValue(new ItemStack(BlocksAether.aether_flower, 1, BlockAetherFlower.WHITE_ROSE.getMeta()), builder.gilt(5).flush());
 		c.registerValue(new ItemStack(BlocksAether.aether_flower, 1, BlockAetherFlower.PURPLE_FLOWER.getMeta()), builder.gilt(5).flush());
 		c.registerValue(new ItemStack(BlocksAether.aether_flower, 1, BlockAetherFlower.BURSTBLOSSOM.getMeta()), builder.gilt(5).flush());
-
 		c.registerValue(new ItemStack(BlocksAether.aether_flower, 1, BlockAetherFlower.AECHOR_SPROUT.getMeta()), builder.gilt(15).flush());
-
 		c.registerValue(new ItemStack(BlocksAether.orange_tree, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(30).flush());
 		c.registerValue(new ItemStack(BlocksAether.blueberry_bush, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(30).flush());
-
 		c.registerValue(new ItemStack(BlocksAether.valkyrie_grass, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(5).flush());
 		c.registerValue(new ItemStack(ItemsAether.valkyrie_wings, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(5).flush());
-
 		c.registerValue(new ItemStack(BlocksAether.skyroot_log, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(3).flush());
-
 		c.registerValue(new ItemStack(ItemsAether.ambrosium_shard, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(40).flush());
-
 		c.registerValue(new ItemStack(ItemsAether.zanite_gemstone, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(90).flush());
 		c.registerValue(new ItemStack(ItemsAether.icestone, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(66).flush());
-
 		c.registerValue(new ItemStack(BlocksAether.arkenium_ore, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(20).giltae(1).flush());
 		c.registerValue(new ItemStack(ItemsAether.arkenium, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(40).giltae(1).flush());
-
 		c.registerValue(new ItemStack(ItemsAether.arkenium_strip, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(35).flush());
-
 		c.registerValue(new ItemStack(BlocksAether.gravitite_ore, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(80).giltae(1).flush());
-
 		c.registerValue(new ItemStack(ItemsAether.gravitite_plate, 1, OreDictionary.WILDCARD_VALUE), builder.giltae(2).flush());
-
 		c.registerValue(new ItemStack(BlocksAether.cloudwool_block, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(4).flush());
-
 		c.registerValue(new ItemStack(ItemsAether.moa_feather, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(1).flush());
 		c.registerValue(new ItemStack(ItemsAether.cockatrice_feather, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(3).flush());
-
 		c.registerValue(new ItemStack(ItemsAether.golden_amber, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(2).flush());
 		c.registerValue(new ItemStack(ItemsAether.taegore_hide, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(10).flush());
 		c.registerValue(new ItemStack(ItemsAether.burrukai_pelt, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(15).flush());
-
 		c.registerValue(new ItemStack(ItemsAether.brettl_cane, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(5).flush());
 		c.registerValue(new ItemStack(ItemsAether.brettl_grass, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(20).flush());
-
 		c.registerValue(new ItemStack(ItemsAether.swet_gel, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(3).flush());
 		c.registerValue(new ItemStack(ItemsAether.swet_sugar, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(6).flush());
-
 		c.registerValue(new ItemStack(ItemsAether.blueberries, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(2).flush());
-
-		c.registerValue(new ItemStack(ItemsAether.enchanted_blueberry, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(82).flush());
-
 		c.registerValue(new ItemStack(ItemsAether.wyndberry, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(5).flush());
-		c.registerValue(new ItemStack(ItemsAether.enchanted_wyndberry, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(65).giltae(1).flush());
-
 		c.registerValue(new ItemStack(ItemsAether.raw_taegore_meat, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(25).flush());
-		c.registerValue(new ItemStack(ItemsAether.taegore_steak, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(45).flush());
-
 		c.registerValue(new ItemStack(ItemsAether.burrukai_rib_cut, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(45).flush());
-		c.registerValue(new ItemStack(ItemsAether.burrukai_ribs, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(65).flush());
-
 		c.registerValue(new ItemStack(ItemsAether.kirrid_loin, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(15).flush());
-		c.registerValue(new ItemStack(ItemsAether.kirrid_cutlet, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(35).flush());
-
-		c.registerValue(new ItemStack(ItemsAether.fried_moa_egg, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(20).giltae(1).flush());
-
 		c.registerValue(new ItemStack(ItemsAether.moa_egg, 1, OreDictionary.WILDCARD_VALUE), builder.giltae(1).flush());
-
 		c.registerValue(new ItemStack(ItemsAether.healing_stone, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(62).giltae(5).flush());
-
-		c.registerValue(new ItemStack(BlocksAether.quicksoil_glass, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(22).flush());
-		c.registerValue(new ItemStack(BlocksAether.quicksoil_glass_decorative, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(22).flush());
-
-		c.registerValue(new ItemStack(BlocksAether.agiosite, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(22).flush());
-
-		c.registerValue(new ItemStack(BlocksAether.agiosite_brick_decorative, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(22).flush());
-		c.registerValue(new ItemStack(BlocksAether.agiosite_pillar, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(22).flush());
-
-		c.registerValue(new ItemStack(BlocksAether.icestone_bricks_decorative, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(66).flush());
-		c.registerValue(new ItemStack(BlocksAether.icestone_pillar, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(66).flush());
-
 		c.registerValue(new ItemStack(ItemsAether.aechor_petal, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(7).flush());
 
 		for (Block block : BlocksAether.getRegisteredBlocks())
@@ -282,7 +233,7 @@ public class CurrencyAether
 				}
 			}
 
-			double value = c.getValue(s);
+			double value = c.getValue(s) + c.getValue(new ItemStack(ItemsAether.ambrosium_shard, 1, recipe.getAmbrosiumCost(s)));
 
 			if (value > highestValue)
 			{
@@ -304,7 +255,7 @@ public class CurrencyAether
 
 		if (!smeltingResult.isEmpty() && !c.hasValue(smeltingResult))
 		{
-			c.registerValue(smeltingResult, c.getValue(stack) / (double) smeltingResult.getCount());
+			c.registerValue(smeltingResult, (c.getValue(stack) + 20) / (double) smeltingResult.getCount());
 		}
 	}
 
