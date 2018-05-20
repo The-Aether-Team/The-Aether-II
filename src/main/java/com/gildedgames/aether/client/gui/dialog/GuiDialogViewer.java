@@ -92,7 +92,7 @@ public class GuiDialogViewer extends GuiFrame implements IDialogChangeListener
 
 			int scrollYOffset = this.currentScroll == 0 ? 0 : MathHelper.floor((float) this.currentScroll * (55.0F / (float) this.maxScroll));
 
-			Gui.drawRect(x - 17, y + scrollYOffset, x - 7, y + 20 + scrollYOffset, Integer.MIN_VALUE);
+			Gui.drawRect(x - 17, y + scrollYOffset, x - 7, y + 20 + scrollYOffset, 0x96FFFFFF);
 		}
 
 		super.drawScreen(mouseX, mouseY, partialTicks);
