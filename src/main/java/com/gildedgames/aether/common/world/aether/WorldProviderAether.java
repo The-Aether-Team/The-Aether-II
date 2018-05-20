@@ -61,7 +61,7 @@ public class WorldProviderAether extends WorldProviderSurface
 	@Override
 	public Biome getBiomeForCoords(final BlockPos pos)
 	{
-		return this.biomeProvider.getBiome(pos);
+		return super.getBiomeForCoords(pos);
 	}
 
 	@Override

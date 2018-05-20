@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.ExecutionException;
 
 public class BiomeProviderAether extends BiomeProvider
 {
@@ -91,14 +90,7 @@ public class BiomeProviderAether extends BiomeProvider
 
 				if (chunkX != prevChunkX || chunkY != prevChunkY || cachedSector == null)
 				{
-					try
-					{
-						cachedSector = this.world.isRemote ? access.provideSector(chunkX, chunkY).get() : access.getLoadedSector(chunkX, chunkY).orElse(null);
-					}
-					catch (InterruptedException | ExecutionException e)
-					{
-						throw new RuntimeException(e);
-					}
+					cachedSector = access.getLoadedSector(chunkX, chunkY).orElse(null);
 
 					prevChunkX = chunkX;
 					prevChunkY = chunkY;
@@ -115,6 +107,7 @@ public class BiomeProviderAether extends BiomeProvider
 
 		return biomes;
 	}
+
 
 	/**
 	 * Returns an array of biomes for the location input.
