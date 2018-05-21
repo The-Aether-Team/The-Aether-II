@@ -16,7 +16,7 @@ public class PlayerCurrencyModule extends PlayerAetherModule
 {
 	private static int[] DENOMINATIONS = { CurrencyAether.GILTAENI, CurrencyAether.GILTAEN, CurrencyAether.GILTAE, CurrencyAether.GILT };
 
-	private long currencyValue = 4363467347L;
+	private long currencyValue;
 
 	private int gilt, giltae, giltaen, giltaeni;
 

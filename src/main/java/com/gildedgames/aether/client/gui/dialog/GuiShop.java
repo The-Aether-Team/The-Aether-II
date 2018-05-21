@@ -311,8 +311,8 @@ public class GuiShop extends GuiFrame implements ICurrencyListener
 		this.giltae.setVisible(module.getGiltae() > 0 || module.getGiltaen() > 0 || module.getGiltaeni() > 0);
 		this.giltaeCount.setVisible(module.getGiltae() > 0 || module.getGiltaen() > 0 || module.getGiltaeni() > 0);
 
-		this.gilt.setVisible(module.getGilt() > 0 || module.getGiltae() > 0 || module.getGiltaen() > 0 || module.getGiltaeni() > 0);
-		this.giltCount.setVisible(module.getGilt() > 0 || module.getGiltae() > 0 || module.getGiltaen() > 0 || module.getGiltaeni() > 0);
+		this.gilt.setVisible(module.getGilt() >= 0 || module.getGiltae() > 0 || module.getGiltaen() > 0 || module.getGiltaeni() > 0);
+		this.giltCount.setVisible(module.getGilt() >= 0 || module.getGiltae() > 0 || module.getGiltaen() > 0 || module.getGiltaeni() > 0);
 	}
 
 	@Override
