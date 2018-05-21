@@ -51,6 +51,8 @@ public class AetherCore
 
 	private static final SpawnRegistry SPAWN_REGISTRY = new SpawnRegistry();
 
+	public static boolean isAetherLegacyInstalled;
+
 	@Instance(AetherCore.MOD_ID)
 	public static AetherCore INSTANCE;
 
@@ -116,6 +118,8 @@ public class AetherCore
 	@EventHandler
 	public void onFMLInit(final FMLInitializationEvent event)
 	{
+		isAetherLegacyInstalled = Loader.isModLoaded("aether_legacy");
+
 		AetherCore.LOGGER.info("OrbisAPI is installed: " + Loader.isModLoaded("orbis_api"));
 
 		AetherCore.PROXY.init(event);

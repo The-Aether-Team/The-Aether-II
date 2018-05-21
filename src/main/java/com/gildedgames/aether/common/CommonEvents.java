@@ -64,7 +64,6 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
@@ -309,7 +308,7 @@ public class CommonEvents
 	@SubscribeEvent
 	public static void onPlayerUseBucket(final FillBucketEvent event)
 	{
-		if (Loader.isModLoaded("Aether Legacy"))
+		if (AetherCore.isAetherLegacyInstalled)
 		{
 			return;
 		}
