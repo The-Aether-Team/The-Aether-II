@@ -232,7 +232,7 @@ tile.aether.light_skyroot_decorative.tiles.name=木瓦
 tile.aether.light_skyroot_decorative.tiles_small.name=细木瓦
 tile.aether.light_skyroot_beam.name=天纤木梁
 tile.aether.quicksoil_glass_pane.name=速沙玻璃板
-ile.aether.quicksoil_glass_pane_decorative.name=镶框速沙玻璃板
+tile.aether.quicksoil_glass_pane_decorative.name=镶框速沙玻璃板
 tile.aether.quicksoil_glass_pane_decorative.arkenium_frame.name=阿肯钢边框
 tile.aether.quicksoil_glass_pane_decorative.skyroot_frame.name=天根木边框
 tile.aether.arkenium_frame.name=阿肯钢窗框
@@ -833,6 +833,10 @@ aether.reward.slider.name=滑行魔石
 aether.reward.valkyrie_queen.name=武神女王
 aether.reward.none.name=无
 
+# Shop
+aether.shop.sell=出售
+aether.shop.buy=购买
+
 ##=======================##
 ###########################
 #                         #
@@ -934,8 +938,7 @@ edison.greet.fine2=在你出发前，还需要点什么吗？
 edison.greet.thanks1=别客气。每个人都有自己的职责，我就是保护你安全的。
 edison.greet.thanks2=还需要些什么？还是说你已经准备好出发了？
 
-edison.greet.sale1=不好意思朋友，我还在准备货物。
-edison.greet.sale2=也许不久后你再来时我就有得卖了。
+edison.greet.sale=当然啦，来看看我的货物吧。
 
 edison.greet.no_we_talked1=没错，正是本人！国际企业家、推销员以及顶级说客！
 edison.greet.no_we_talked2=但由于我们和巫魂先生的小小约定，对你而言，我更是架起你与这些奇异群岛之间联系的枢纽和向导。
@@ -965,6 +968,31 @@ edison.greet.valkyries4=你还想问点什么？
 ##=======================##
 ###########################
 #                         #
+# EDISON SHOP DIALOGUE #
+# #
+###########################
+##=======================##
+
+edison.shop.greetings1=朋友——在这里，你能找到最好的货物。环顾四周，买点什么吧。
+edison.shop.greetings2=今天大减价，朋友！看看你周围，肯定能找到你想要的东西，我保证！
+
+edison.shop.enchanted_wyndberry=饿了吗？这些小巧的水果绝对是最有营养的。经过我们最上等神能晶体的滋养，质量绝对有保证！
+edison.shop.enchanted_blueberry=谁说只有介元才有蓝莓？最上等神能晶体滋养了它们，填饱你的肚子轻而易举！
+edison.shop.ambrosium_shard=天境中的常见晶体，但可别小瞧它们——这些片状晶体会是你在路途中最需要的材料之一。无论是用来魔能处理食物还是修复工具，它们都是值得收集的宝贝。
+edison.shop.skyroot_stick=买点···木棍？！我的梦可真的没让我失望。这地面上绵延几里的可都是树啊，随便掰点树脂下来哪用得着花钱！嘿嘿，我可不是抱怨，拿钱谁不开心呢。
+edison.shop.skyroot_pickaxe=开始旅程时所需的基本工具之一。
+edison.shop.skyroot_axe=开始旅程时所需的基本工具之一。
+edison.shop.skyroot_sword=开始旅程时所需的基本武器。
+edison.shop.skyroot_shovel=开始旅程时所需的基本工具之一，铲子而已。
+edison.shop.therawood_leaves=啊，介元秋叶的气息真是世界上最棒的！可惜啊，天境的季节并不和介元完全一样。
+edison.shop.therawood_log=想要我们世界上的木材？想家啦？我觉得，有什么不好的呢？
+edison.shop.thera_dirt=说实话，家乡的泥土好像没多大用处，但是钱我还是要的。
+edison.shop.thera_grass=啊，我一直觉得家乡的草更绿些。你也这么想，对吧？
+edison.shop.therastone_brick=这些精制砖块独特的设计在任何地方你都不会见到。啊，我的故乡！
+
+##=======================##
+###########################
+# #
 #  JOSEDIYA DIALOGUE      #
 #                         #
 ###########################
@@ -993,10 +1021,10 @@ josediya.greet.option.walk_home=我为什么不能靠我的双腿回家？
 josediya.greet.what=哇，你也没那么聪明嘛。和你或者那个秃驴一样，我也是个人。之前没见过天灵族是吗？女武神保护了我们全族。
 josediya.greet.where=我来自遥远南方的维拉德克斯王国，我主要在那里做活维持生计。
 josediya.greet.take_me=人类，我不觉着你付得起旅费。维拉德克斯离这里有三星期的航程，而且路线十分危险。我带不了你。
-josediya.greet.winged_beast=他是我真正的伙伴。他是只恐鸟，而且呢，相当强壮，就算驮着你我两人飞翔，也不会流哪怕一滴汗。
+josediya.greet.winged_beast=他是我真正的伙伴，一只叫泰瓦尔的强健恐鸟，就算驮着你我两人飞翔，也不会流哪怕一滴汗。
 josediya.greet.fly=当然啦！我正是为了这个才驯养他的。驯养恐鸟是我工作的一部分。好好对待它们，它们就会和你很亲近。
 josediya.greet.moa=想骑恐鸟，你得让它信任你。恐鸟蛋可不好弄，野生恐鸟非常注重保护自己的巢窠。
-josediya.greet.who=会带你去各种地方的女孩。我叫乔瑟迪娅，航运从业者，那的那个秃子叫我来帮你。
+josediya.greet.who=会带你去各种地方的女孩。我叫乔瑟迪娅，航运从业者，那边的那个秃子叫我来帮你。
 josediya.greet.friends=爱迪生和我相处得很好，我们结识的这几年来他一直是个很有帮助的伙伴，但我还是觉得他不太可信，只是共同的利益让我们共事而已。
 josediya.greet.paying=不，我只是还欠别人的一个情而已，你才是那个该付钱的。对了，我不收你们那里的钱，只收白金。
 josediya.greet.white_gold=问题出在你身上。我也得挣钱糊口，所以呢不关心你怎么挣钱。去农民们那边打打工或者找点别的什么活吧。
