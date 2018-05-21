@@ -835,7 +835,8 @@ aether.reward.none.name=None
 
 # Shop
 aether.shop.sell=Sell
-aether.shop.buy=Buy
+aether.shop.buy=Buy %s
+aether.shop.back=Back
 
 ##=======================##
 ###########################

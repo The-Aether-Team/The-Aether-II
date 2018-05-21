@@ -13,28 +13,31 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 public class PacketShopBuy implements IMessage
 {
-	private int stockIndex;
+	private int stockIndex, buyCount;
 
 	public PacketShopBuy()
 	{
 
 	}
 
-	public PacketShopBuy(int stockIndex)
+	public PacketShopBuy(int stockIndex, int buyCount)
 	{
 		this.stockIndex = stockIndex;
+		this.buyCount = buyCount;
 	}
 
 	@Override
 	public void fromBytes(final ByteBuf buf)
 	{
 		this.stockIndex = buf.readInt();
+		this.buyCount = buf.readInt();
 	}
 
 	@Override
 	public void toBytes(final ByteBuf buf)
 	{
 		buf.writeInt(this.stockIndex);
+		buf.writeInt(this.buyCount);
 	}
 
 	public static class HandlerServer extends MessageHandlerServer<PacketShopBuy, IMessage>
@@ -63,27 +66,42 @@ public class PacketShopBuy implements IMessage
 						{
 							IShopBuy buy = shopInstance.getStock().get(message.stockIndex);
 
+							if (buy.getStock() <= 0)
+							{
+								return null;
+							}
+
+							int maxAllowedWithHeldStack = buy.getItemStack().getMaxStackSize() - player.inventory.getItemStack().getCount();
+
+							int amount = Math.min(maxAllowedWithHeldStack, Math.min(message.buyCount, buy.getStock()));
+
+							if (amount <= 0)
+							{
+								return null;
+							}
+
 							boolean canAfford = playerAether.getCurrencyModule().getCurrencyValue() >= buy.getPrice();
 							boolean isBuyItem = ItemHelper.getHashForItemStack(player.inventory.getItemStack()) == ItemHelper
 									.getHashForItemStack(buy.getItemStack());
 							boolean canStack = player.inventory.getItemStack().isStackable();
+							boolean isAtStackLimit = player.inventory.getItemStack().getCount() >= player.inventory.getItemStack().getMaxStackSize();
 
-							if (canStack && canAfford && (isHandFree || isBuyItem) && buy.getStock() > 0)
+							if (!isAtStackLimit && canStack && canAfford && (isHandFree || isBuyItem) && buy.getStock() > 0)
 							{
 								if (isHandFree)
 								{
-									buy.addStock(-1);
+									buy.addStock(-amount);
 
 									ItemStack stack = buy.getItemStack().copy();
-									stack.setCount(1);
+									stack.setCount(amount);
 
 									player.inventory.setItemStack(stack);
 								}
 								else
 								{
-									buy.addStock(-1);
+									buy.addStock(-amount);
 
-									player.inventory.getItemStack().setCount(player.inventory.getItemStack().getCount() + 1);
+									player.inventory.getItemStack().setCount(player.inventory.getItemStack().getCount() + amount);
 								}
 
 								playerAether.getCurrencyModule().add(-buy.getPrice());
