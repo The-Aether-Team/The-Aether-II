@@ -835,7 +835,8 @@ aether.reward.none.name=无
 
 # Shop
 aether.shop.sell=出售
-aether.shop.buy=购买
+aether.shop.buy=购买 %s
+aether.shop.back=返回
 
 ##=======================##
 ###########################
