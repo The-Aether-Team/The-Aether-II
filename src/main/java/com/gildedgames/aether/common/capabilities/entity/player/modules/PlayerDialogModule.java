@@ -130,9 +130,7 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 	@SideOnly(Side.CLIENT)
 	private void openSceneClient(final ResourceLocation res, final IDialogScene scene, Map<String, Boolean> conditionsMet)
 	{
-		this.sceneInstance = new SceneInstance(this, scene);
-
-		this.sceneInstance.conditionsMet = conditionsMet;
+		this.sceneInstance = new SceneInstance(this, scene, conditionsMet);
 
 		Minecraft.getMinecraft().displayGuiScreen(new GuiDialogViewer(Minecraft.getMinecraft().player, this));
 	}
@@ -373,6 +371,12 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 
 		private SceneInstance(final PlayerDialogModule controller, final IDialogScene scene)
 		{
+			this(controller, scene, null);
+		}
+
+		private SceneInstance(final PlayerDialogModule controller, final IDialogScene scene, Map<String, Boolean> conditionsMet)
+		{
+			this.conditionsMet = conditionsMet;
 			this.controller = controller;
 			this.scene = scene;
 
