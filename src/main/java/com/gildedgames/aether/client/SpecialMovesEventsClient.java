@@ -29,31 +29,34 @@ public class SpecialMovesEventsClient
 	public static void onEvent(EntityViewRenderEvent.FOVModifier event)
 	{
 		PlayerAether playerAether = PlayerAether.getPlayer(event.getEntity());
+
+		if (playerAether == null)
+		{
+			return;
+		}
+
 		PlayerRollMovementModule module = playerAether.getRollMovementModule();
 
-		if (playerAether != null)
+		if (module.isRolling())
 		{
-			if (module.isRolling())
+			int ticks = module.getTicksRolling();
+			int ticksRequired = module.getTicksRollingMax();
+
+			float rollingPercent = Math.min(1.0F, ((float) ticks + (float) event.getRenderPartialTicks()) / ticksRequired);
+
+			float fovMod = (float) AetherCore.CONFIG.getRollFOV();
+
+			if (rollingPercent <= 0.5F)
 			{
-				int ticks = module.getTicksRolling();
-				int ticksRequired = module.getTicksRollingMax();
+				float percent = rollingPercent * 2.0F;
 
-				float rollingPercent = Math.min(1.0F, ((float) ticks + (float) event.getRenderPartialTicks()) / ticksRequired);
+				event.setFOV(event.getFOV() - (percent * fovMod));
+			}
+			else
+			{
+				float percent = (rollingPercent - 0.5F) * 2.0F;
 
-				float fovMod = (float) AetherCore.CONFIG.getRollFOV();
-
-				if (rollingPercent <= 0.5F)
-				{
-					float percent = rollingPercent * 2.0F;
-
-					event.setFOV(event.getFOV() - (percent * fovMod));
-				}
-				else
-				{
-					float percent = (rollingPercent - 0.5F) * 2.0F;
-
-					event.setFOV(event.getFOV() - fovMod + (percent * fovMod));
-				}
+				event.setFOV(event.getFOV() - fovMod + (percent * fovMod));
 			}
 		}
 	}
