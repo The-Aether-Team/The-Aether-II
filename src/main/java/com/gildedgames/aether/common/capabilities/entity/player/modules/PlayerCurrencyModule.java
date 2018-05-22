@@ -77,7 +77,7 @@ public class PlayerCurrencyModule extends PlayerAetherModule
 
 		this.currencyValue += gilt;
 
-		this.currencyValue = Math.max(0L, this.currencyValue);
+		this.currencyValue = Math.min(Math.max(0L, this.currencyValue), Long.MAX_VALUE);
 
 		this.refreshDenominators();
 
