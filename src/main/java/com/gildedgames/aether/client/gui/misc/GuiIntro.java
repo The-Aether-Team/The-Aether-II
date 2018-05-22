@@ -23,6 +23,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.TextComponentTranslation;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import java.io.IOException;
@@ -50,6 +51,8 @@ public class GuiIntro extends GuiFrameNoContainer
 	private long timeStarted, timeSinceHoldSkip, timeSinceStopSkip;
 
 	private boolean playedMusic, startIntro, holding;
+
+	private int keyHeld = Keyboard.KEY_NONE;
 
 	public GuiIntro()
 	{
@@ -165,6 +168,13 @@ public class GuiIntro extends GuiFrameNoContainer
 	@Override
 	public void draw()
 	{
+		if (this.startIntro && this.holding && !Keyboard.isKeyDown(this.keyHeld) && this.keyHeld != Keyboard.KEY_NONE)
+		{
+			this.timeSinceStopSkip = System.currentTimeMillis();
+			this.holding = false;
+			this.keyHeld = Keyboard.KEY_NONE;
+		}
+
 		final int bg = 0xFF000000;
 
 		this.drawGradientRect(0, 0, this.width, this.height, bg, bg);
@@ -320,43 +330,65 @@ public class GuiIntro extends GuiFrameNoContainer
 	}
 
 	@Override
+	protected void keyTyped(final char typedChar, final int keyCode) throws IOException
+	{
+		super.keyTyped(typedChar, keyCode);
+
+		if (!this.startIntro)
+		{
+			this.advanceTips();
+		}
+		else
+		{
+			this.timeSinceHoldSkip = System.currentTimeMillis();
+			this.holding = true;
+			this.keyHeld = keyCode;
+		}
+	}
+
+	private void advanceTips()
+	{
+		if (this.tipIndex == 3)
+		{
+			if (InputHelper.isHovered(this.no))
+			{
+				NetworkingAether.sendPacketToServer(new PacketCancelIntro());
+				Minecraft.getMinecraft().displayGuiScreen(new GuiBlackScreen());
+
+				ClientEventHandler.setDrawBlackScreen(false);
+
+				return;
+			}
+
+			if (!InputHelper.isHovered(this.yes))
+			{
+				return;
+			}
+		}
+
+		if (this.tipIndex >= 3)
+		{
+			this.nextArrow.setVisible(false);
+			this.tip4.setVisible(false);
+			this.yes.setVisible(false);
+			this.no.setVisible(false);
+
+			this.startIntro = true;
+
+			this.timeStarted = System.currentTimeMillis();
+		}
+
+		this.tipIndex++;
+	}
+
+	@Override
 	protected void mouseClicked(final int mouseX, final int mouseY, final int mouseButton) throws IOException
 	{
 		super.mouseClicked(mouseX, mouseY, mouseButton);
 
 		if (!this.startIntro)
 		{
-			if (this.tipIndex == 3)
-			{
-				if (InputHelper.isHovered(this.no))
-				{
-					NetworkingAether.sendPacketToServer(new PacketCancelIntro());
-					Minecraft.getMinecraft().displayGuiScreen(new GuiBlackScreen());
-
-					ClientEventHandler.setDrawBlackScreen(false);
-
-					return;
-				}
-
-				if (!InputHelper.isHovered(this.yes))
-				{
-					return;
-				}
-			}
-
-			if (this.tipIndex >= 3)
-			{
-				this.nextArrow.setVisible(false);
-				this.tip4.setVisible(false);
-				this.yes.setVisible(false);
-				this.no.setVisible(false);
-
-				this.startIntro = true;
-
-				this.timeStarted = System.currentTimeMillis();
-			}
-
-			this.tipIndex++;
+			this.advanceTips();
 		}
 		else
 		{
