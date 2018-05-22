@@ -29,4 +29,9 @@ public class ItemHelper
 	{
 		return getHashForItemStack(stack, true);
 	}
+
+	public static boolean areEqual(ItemStack s1, ItemStack s2)
+	{
+		return ItemHelper.getHashForItemStack(s1) == ItemHelper.getHashForItemStack(s2);
+	}
 }

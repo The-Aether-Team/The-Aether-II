@@ -87,7 +87,6 @@ public class CurrencyAether
 		c.registerValue(new ItemStack(ItemsAether.burrukai_rib_cut, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(45).flush());
 		c.registerValue(new ItemStack(ItemsAether.kirrid_loin, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(15).flush());
 		c.registerValue(new ItemStack(ItemsAether.moa_egg, 1, OreDictionary.WILDCARD_VALUE), builder.giltae(1).flush());
-		c.registerValue(new ItemStack(ItemsAether.healing_stone, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(62).giltae(5).flush());
 		c.registerValue(new ItemStack(ItemsAether.aechor_petal, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(7).flush());
 
 		for (Block block : BlocksAether.getRegisteredBlocks())

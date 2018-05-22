@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.recipes.altar;
 
 import com.gildedgames.aether.api.recipes.altar.IAltarRecipe;
+import com.gildedgames.aether.common.util.helpers.ItemHelper;
 import net.minecraft.item.ItemStack;
 
 public class AltarEnchantRecipe implements IAltarRecipe
@@ -21,13 +22,13 @@ public class AltarEnchantRecipe implements IAltarRecipe
 	@Override
 	public boolean matchesInput(ItemStack stack)
 	{
-		return this.input.isItemEqual(stack);
+		return ItemHelper.areEqual(this.input, stack);
 	}
 
 	@Override
 	public boolean matchesOutput(ItemStack stack)
 	{
-		return this.input.isItemEqual(stack);
+		return ItemHelper.areEqual(this.output, stack);
 	}
 
 	@Override
