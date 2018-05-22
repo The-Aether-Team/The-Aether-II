@@ -376,7 +376,11 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 
 		private SceneInstance(final PlayerDialogModule controller, final IDialogScene scene, Map<String, Boolean> conditionsMet)
 		{
-			this.conditionsMet = conditionsMet;
+			if (conditionsMet != null)
+			{
+				this.conditionsMet = conditionsMet;
+			}
+			
 			this.controller = controller;
 			this.scene = scene;
 
