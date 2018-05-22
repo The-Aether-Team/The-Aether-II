@@ -185,17 +185,11 @@ public class BlockAetherTeleporter extends Block implements ITileEntityProvider
 				{
 					hook.setInstance(null);
 
-					playerAether.getTeleportingModule()
-							.setNonAetherPos(new BlockPosDimension((int) player.posX, (int) player.posY, (int) player.posZ, player.dimension));
-
 					handler.teleportToInst((EntityPlayerMP) player);
 				}
 			}
 			else
 			{
-				playerAether.getTeleportingModule()
-						.setNonAetherPos(new BlockPosDimension((int) player.posX, (int) player.posY, (int) player.posZ, player.dimension));
-
 				if (playerAether.getConfigModule().skipIntro())
 				{
 					playerAether.getTeleportingModule().teleportToAether();

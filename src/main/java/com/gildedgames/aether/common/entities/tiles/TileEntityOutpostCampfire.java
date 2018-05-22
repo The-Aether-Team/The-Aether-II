@@ -50,14 +50,22 @@ public class TileEntityOutpostCampfire extends TileEntityMultiblockController im
 
 			final BlockPosDimension pos = playerAether.getTeleportingModule().getNonAetherPos();
 
-			final MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
+			if (pos == null)
+			{
 
-			final Teleporter teleporter = new TeleporterGeneric(server.getWorld(player.dimension));
-			PlayerList playerList = server.getPlayerList();
-			playerList.transferPlayerToDimension(playerMP, pos.getDim(), teleporter);
-			player.timeUntilPortal = player.getPortalCooldown();
+			}
 
-			playerMP.connection.setPlayerLocation(pos.getX(), pos.getY(), pos.getZ(), 0, 0);
+			if (pos != null)
+			{
+				final MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
+
+				final Teleporter teleporter = new TeleporterGeneric(server.getWorld(player.dimension));
+				PlayerList playerList = server.getPlayerList();
+				playerList.transferPlayerToDimension(playerMP, pos.getDim(), teleporter);
+				player.timeUntilPortal = player.getPortalCooldown();
+
+				playerMP.connection.setPlayerLocation(pos.getX(), pos.getY(), pos.getZ(), 0, 0);
+			}
 		}
 
 	}
