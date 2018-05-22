@@ -40,7 +40,7 @@ public class GuiDialogViewer extends GuiFrame implements IDialogChangeListener
 
 	private double nextArrowAnim, prevTime;
 
-	private boolean canApplyNextAction;
+	private boolean canApplyNextAction = true;
 
 	private IDialogNode node;
 
