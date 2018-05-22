@@ -125,7 +125,7 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 				moa.setRaisedByPlayer(true);
 				moa.setGrowingAge(-24000);
 				moa.setFoodRequired(3);
-				moa.setPosition(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ());
+				moa.setPosition(this.getPos().getX() + 0.5, this.getPos().getY() + 1.5, this.getPos().getZ() + 0.5);
 				moa.setGender(rand.nextBoolean() ? AnimalGender.FEMALE : AnimalGender.MALE);
 				moa.setAnimalPack(familyNest.getAnimalPack());
 
