@@ -1,13 +1,15 @@
 package com.gildedgames.aether.common.blocks.util;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
+import net.minecraft.block.BlockSnowBlock;
+import net.minecraft.block.SoundType;
 
-public class BlockCustomSnowBlock extends Block
+public class BlockCustomSnowBlock extends BlockSnowBlock
 {
 	public BlockCustomSnowBlock()
 	{
-		super(Material.CRAFTED_SNOW);
-		this.setTickRandomly(true);
+		super();
+
+		this.setHardness(0.2F);
+		this.setSoundType(SoundType.SNOW);
 	}
 }

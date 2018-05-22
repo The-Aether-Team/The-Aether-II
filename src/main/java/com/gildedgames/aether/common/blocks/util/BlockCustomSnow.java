@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.blocks.util;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSnow;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -12,6 +13,15 @@ import net.minecraft.world.World;
 
 public class BlockCustomSnow extends BlockSnow
 {
+	public BlockCustomSnow()
+	{
+		super();
+
+		this.setHardness(0.1F);
+		this.setSoundType(SoundType.SNOW);
+		this.setLightOpacity(0);
+	}
+
 	@Override
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
 	{
@@ -22,7 +32,7 @@ public class BlockCustomSnow extends BlockSnow
 		{
 			BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(worldIn, pos.down(), EnumFacing.UP);
 			return blockfaceshape == BlockFaceShape.SOLID || iblockstate.getBlock().isLeaves(iblockstate, worldIn, pos.down())
-					|| block == this && iblockstate.getValue(LAYERS) == 8;
+					|| block == this && iblockstate.getValue(LAYERS).intValue() == 8;
 		}
 		else
 		{

@@ -23,7 +23,10 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.blocks.ItemBlockMultiName;
 import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import com.google.common.collect.Sets;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockBed;
+import net.minecraft.block.BlockButtonStone;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -297,9 +300,9 @@ public class BlocksAether
 
 	public static BlockCustomSnow highlands_snow_layer = new BlockCustomSnow();
 
-	public static Block highlands_ice = new BlockIce();
+	public static Block highlands_ice = new BlockCustomIce().setHardness(0.5F).setLightOpacity(3);
 
-	public static Block highlands_packed_ice = new BlockPackedIce();
+	public static Block highlands_packed_ice = new BlockCustomPackedIce().setHardness(0.5F);
 
 	public static Block therawood_decorative = new BlockTherawoodDecorative();
 
@@ -619,6 +622,8 @@ public class BlocksAether
 		holystone_brick.setHarvestLevel("pickaxe", 0);
 		quicksoil.setHarvestLevel("shovel", 0);
 		aercloud.setHarvestLevel("shovel", 0);
+		highlands_snow.setHarvestLevel("shovel", 0);
+		highlands_snow_layer.setHarvestLevel("shovel", 0);
 
 		skyroot_decorative.setHarvestLevel("axe", 0);
 		skyroot_chest.setHarvestLevel("axe", 0);
@@ -636,6 +641,8 @@ public class BlocksAether
 		icestone_bricks.setHarvestLevel("pickaxe", 1);
 		crude_scatterglass.setHarvestLevel("pickaxe", 0);
 		scatterglass.setHarvestLevel("pickaxe", 0);
+		highlands_ice.setHarvestLevel("pickaxe", 0);
+		highlands_packed_ice.setHarvestLevel("pickaxe", 0);
 
 		altar.setHarvestLevel("pickaxe", 0);
 		holystone_furnace.setHarvestLevel("pickaxe", 0);
