@@ -23,19 +23,19 @@ public class ContainerShop extends Container
 		this.shopInstance = shopInstance;
 		this.shopInventory = shopInstance.getInventory();
 
-		this.addSlotToContainer(new SlotSell(this.shopInventory, 0, 7, 7));
+		this.addSlotToContainer(new SlotSell(this.shopInventory, 0, 257, 7));
 
 		for (int i = 0; i < 3; ++i)
 		{
 			for (int j = 0; j < 9; ++j)
 			{
-				this.addSlotToContainer(new Slot(playerInventory, j + i * 9 + 9, 186 + 7 + j * 18, 19 + 7 + i * 18));
+				this.addSlotToContainer(new Slot(playerInventory, j + i * 9 + 9, 186 + 7 + j * 18, 19 + 14 + i * 18));
 			}
 		}
 
 		for (int k = 0; k < 9; ++k)
 		{
-			this.addSlotToContainer(new Slot(playerInventory, k, 186 + 7 + k * 18, 77 + 7));
+			this.addSlotToContainer(new Slot(playerInventory, k, 186 + 7 + k * 18, 77 + 14));
 		}
 	}
 

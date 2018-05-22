@@ -837,6 +837,7 @@ aether.reward.none.name=None
 aether.shop.sell=Sell
 aether.shop.buy=Buy %s
 aether.shop.back=Back
+aether.shop.lockTooltip=If unlocked, each time you click on a new stock item, the amount you're trying to buy will reset to 1.
 
 ##=======================##
 ###########################
@@ -977,9 +978,9 @@ edison.greet.valkyries4=Have anything else you want to know?
 edison.shop.greetings1=Here it is, friend - the finest stock you'll find. Look around, see what piques your fancy.
 edison.shop.greetings2=Got some great sales today, friend. Take a look around, I know you'll find just what you're looking for. Guaranteed!
 
-edison.shop.enchanted_wyndberry=Feeling hungry? These fruits might just be what you're looking for! Bursting with nutrition, you can go wrong with a Wyndberry. This shipment in particular has them enchanted with some of our finest Ambrosium. Ever tasted enchanted fruit? You're missing out!
+edison.shop.enchanted_wyndberry=Feeling hungry? These fruits might just be what you're looking for! Bursting with nutrition, you can't go wrong with a Wyndberry. This shipment in particular has them enchanted with some of our finest Ambrosium. Ever tasted enchanted fruit? You're missing out!
 edison.shop.enchanted_blueberry=Who said Blueberries only exist on Thera? Enchanted from our finest Ambrosium, these little devils will fill you up in no time.
-edison.shop.ambrosium_shard=A common crystal found in the Aether, but don't let the fool you - these shards are one of the most important materials you'll need on your journey. From enchanting food to repairing broken items, they're an invaluable item to collect.
+edison.shop.ambrosium_shard=A common crystal found in the Aether, but don't let that fool you - these shards are one of the most important materials you'll need on your journey. From enchanting food to repairing broken items, they're an invaluable item to collect.
 edison.shop.skyroot_stick=You... You want sticks? My vision's not failing me, is it? I can see trees for miles! You could break a few sticks off any of them, free of charge! Hey, I'm not complaining, I'll gladly take your money.
 edison.shop.skyroot_pickaxe=A staple pickaxe to start your journey.
 edison.shop.skyroot_axe=A staple axe to start your journey.

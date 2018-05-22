@@ -20,7 +20,6 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextFormatting;
 
 public class GuiShopBuy extends GuiFrame
 {
@@ -95,6 +94,7 @@ public class GuiShopBuy extends GuiFrame
 
 		RenderItem renderitem = this.mc.getRenderItem();
 		renderitem.zLevel = 200.0F;
+
 		renderitem.renderItemAndEffectIntoGUI(this.mc.player, this.getShopBuy().getItemStack(), (int) this.dim().x() + 1, (int) this.dim().y() + 1);
 
 		RenderHelper.disableStandardItemLighting();
@@ -105,8 +105,8 @@ public class GuiShopBuy extends GuiFrame
 
 		int xOffset = (Math.max(String.valueOf(this.getShopBuy().getStock()).length() - 1, 0)) * -6;
 
-		this.drawString(font, (!hasEnough ? TextFormatting.RED : "") + String.valueOf(this.getShopBuy().getStock()),
-				(int) this.dim().x() + 12 + xOffset, (int) this.dim().y() + (int) this.dim().height() - 8, 0xFFFFFF);
+		this.drawString(font, String.valueOf(this.getShopBuy().getStock()),
+				(int) this.dim().x() + 12 + xOffset, (int) this.dim().y() + (int) this.dim().height() - 8, !hasEnough ? 0xba4a4a : 0xFFFFFF);
 
 		if (InputHelper.isHovered(this))
 		{

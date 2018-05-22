@@ -18,11 +18,18 @@ public class GuiItemStack extends GuiFrame
 {
 	private ItemStack stack;
 
+	private boolean drawCount = true;
+
 	public GuiItemStack(Rect rect)
 	{
 		super(null, rect);
 
 		this.dim().mod().width(18).height(18).flush();
+	}
+
+	public void setDrawCount(boolean drawCount)
+	{
+		this.drawCount = drawCount;
 	}
 
 	public ItemStack getItemStack()
@@ -32,7 +39,7 @@ public class GuiItemStack extends GuiFrame
 
 	public void setItemStack(ItemStack stack)
 	{
-		this.stack = stack;
+		this.stack = stack.copy();
 	}
 
 	@Override
@@ -78,10 +85,14 @@ public class GuiItemStack extends GuiFrame
 
 		renderitem.zLevel = 0.0F;
 
-		int xOffset = (Math.max(String.valueOf(this.stack.getCount()).length() - 1, 0)) * -6;
+		if (this.drawCount)
+		{
+			int xOffset = (Math.max(String.valueOf(this.stack.getCount()).length() - 1, 0)) * -6;
 
-		this.drawString(font, String.valueOf(this.stack.getCount()),
-				12 + xOffset, this.height - 8, 0xFFFFFF);
+			this.drawString(font, String.valueOf(this.stack.getCount()), (int) this.dim().x() + 12 + xOffset,
+					(int) this.dim().y() + (int) this.dim().height() + -8,
+					0xFFFFFF);
+		}
 
 		if (InputHelper.isHovered(this))
 		{

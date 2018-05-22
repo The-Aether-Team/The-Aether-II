@@ -5,11 +5,12 @@ import com.gildedgames.aether.api.dialog.IDialogSlide;
 import com.gildedgames.aether.api.dialog.IDialogSlideRenderer;
 import com.gildedgames.aether.api.shop.IShopBuy;
 import com.gildedgames.aether.api.shop.IShopInstance;
+import com.gildedgames.aether.client.gui.GuiUtils;
+import com.gildedgames.aether.client.gui.IExtendedGui;
 import com.gildedgames.aether.client.gui.util.GuiItemStack;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.ICurrencyListener;
-import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerCurrencyModule;
 import com.gildedgames.aether.common.containers.ContainerShop;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketShopBack;
@@ -17,18 +18,15 @@ import com.gildedgames.aether.common.network.packets.PacketShopBuy;
 import com.gildedgames.aether.common.network.packets.PacketShopSell;
 import com.gildedgames.aether.common.util.helpers.ItemHelper;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
-import com.gildedgames.orbis_api.client.gui.data.Text;
 import com.gildedgames.orbis_api.client.gui.util.GuiAbstractButton;
 import com.gildedgames.orbis_api.client.gui.util.GuiFrame;
-import com.gildedgames.orbis_api.client.gui.util.GuiText;
 import com.gildedgames.orbis_api.client.gui.util.GuiTexture;
 import com.gildedgames.orbis_api.client.gui.util.vanilla.GuiButtonVanilla;
 import com.gildedgames.orbis_api.client.rect.Dim2D;
 import com.gildedgames.orbis_api.client.rect.Pos2D;
-import com.gildedgames.orbis_api.client.rect.RectModifier;
-import com.gildedgames.orbis_api.client.rect.helpers.RectCollection;
 import com.gildedgames.orbis_api.util.InputHelper;
 import com.google.common.collect.Lists;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
@@ -36,30 +34,21 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.client.event.GuiScreenEvent;
+import net.minecraftforge.common.MinecraftForge;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
-public class GuiShop extends GuiFrame implements ICurrencyListener
+public class GuiShop extends GuiFrame implements ICurrencyListener, IExtendedGui
 {
 	private static final ResourceLocation INVENTORY = AetherCore.getResource("textures/gui/shop/inventory.png");
 
 	private static final ResourceLocation STOCK = AetherCore.getResource("textures/gui/shop/stock.png");
-
-	private static final ResourceLocation SELL_BAR = AetherCore.getResource("textures/gui/shop/sell_bar.png");
-
-	private static final ResourceLocation GILT = AetherCore.getResource("textures/gui/shop/gilt.png");
-
-	private static final ResourceLocation GILTAE = AetherCore.getResource("textures/gui/shop/giltae.png");
-
-	private static final ResourceLocation GILTAEN = AetherCore.getResource("textures/gui/shop/giltaen.png");
-
-	private static final ResourceLocation GILTAENI = AetherCore.getResource("textures/gui/shop/giltaeni.png");
 
 	private static final ResourceLocation UP_ARROW = AetherCore.getResource("textures/gui/shop/up_button.png");
 
@@ -69,7 +58,17 @@ public class GuiShop extends GuiFrame implements ICurrencyListener
 
 	private static final ResourceLocation DOWN_ARROW_HOVER = AetherCore.getResource("textures/gui/shop/down_button_hover.png");
 
+	private static final ResourceLocation LOCK = AetherCore.getResource("textures/gui/shop/lock.png");
+
+	private static final ResourceLocation UNLOCK = AetherCore.getResource("textures/gui/shop/unlock.png");
+
+	private static final ResourceLocation GILT_BAG = AetherCore.getResource("textures/gui/shop/gilt_bag.png");
+
 	private static int buyCount = 1, prevBuyCount = 1;
+
+	private static boolean isCountLocked;
+
+	private int buyCountUnlocked = 1, prevBuyCountUnlocked = 1;
 
 	private IDialogSlide slide;
 
@@ -77,17 +76,7 @@ public class GuiShop extends GuiFrame implements ICurrencyListener
 
 	private GuiButtonVanilla sell, buy;
 
-	private GuiTexture gilt, giltae, giltaen, giltaeni;
-
-	private GuiText giltCount, giltaeCount, giltaenCount, giltaeniCount;
-
-	private GuiText giltSellCount, giltaeSellCount, giltaenSellCount, giltaeniSellCount;
-
-	private GuiTexture giltSell, giltaeSell, giltaenSell, giltaeniSell;
-
-	private GuiText giltBuyCount, giltaeBuyCount, giltaenBuyCount, giltaeniBuyCount;
-
-	private GuiTexture giltBuy, giltaeBuy, giltaenBuy, giltaeniBuy;
+	private GuiCoins playerCoins, sellCoins, buyCoins;
 
 	private IShopInstance shopInstance;
 
@@ -98,8 +87,6 @@ public class GuiShop extends GuiFrame implements ICurrencyListener
 	private ItemStack lastSellStack;
 
 	private int lastSellStackCount;
-
-	private RectCollection coinOffset = RectCollection.flush(Dim2D.build().y(7).x(13).flush());
 
 	private GuiItemStack stackGui;
 
@@ -115,9 +102,15 @@ public class GuiShop extends GuiFrame implements ICurrencyListener
 
 	private GuiAbstractButton upArrow, downArrow;
 
+	private GuiButtonVanilla lockButton;
+
+	private GuiTexture lock, unlock, giltBag;
+
 	private boolean upArrowHeld, downArrowHeld, pressLongEnough;
 
 	private long lastBuyCountChangeTime;
+
+	private List<String> hoverDescription;
 
 	public GuiShop(GuiFrame prevFrame, EntityPlayer player, IDialogSlide slide, IDialogSlideRenderer renderer, IShopInstance shopInstance)
 	{
@@ -145,7 +138,7 @@ public class GuiShop extends GuiFrame implements ICurrencyListener
 		Pos2D center = InputHelper.getCenter().clone().addX(15).flush();
 
 		this.guiLeft = (int) center.x() - 189 - 7;
-		this.guiTop = this.height - 198 - 7;
+		this.guiTop = this.height - 198 - 14;
 
 		this.xSize = 345;
 		this.ySize = 180;
@@ -166,121 +159,42 @@ public class GuiShop extends GuiFrame implements ICurrencyListener
 
 		Pos2D center = InputHelper.getCenter().clone().addX(17).flush();
 
-		GuiTexture inventory = new GuiTexture(Dim2D.build().center(true).width(176).height(115).pos(center).y(this.height).addX(75).addY(-154.5F).flush(),
+		this.sellCoins = new GuiCoins(Dim2D.build().center(true).pos(center).y(this.height).addX(23).addY(-197).flush(), false);
+		this.sellCoins.setVisible(false);
+
+		this.buyCoins = new GuiCoins(Dim2D.build().center(true).pos(center).y(this.height).addX(-167).addY(-157).flush(), false);
+		this.buyCoins.setVisible(false);
+
+		this.playerCoins = new GuiCoins(Dim2D.build().center(true).pos(center).y(this.height).addX(193).addY(-113).flush(), true);
+		this.playerCoins.setVisible(true);
+
+		GuiTexture inventory = new GuiTexture(Dim2D.build().center(true).width(176).height(120).pos(center).y(this.height).addX(75).addY(-157F).flush(),
 				INVENTORY);
-		GuiTexture stock = new GuiTexture(Dim2D.build().center(true).width(176).height(70).pos(center).y(this.height).addX(-115).addY(-132).flush(), STOCK);
+		GuiTexture stock = new GuiTexture(Dim2D.build().center(true).width(176).height(80).pos(center).y(this.height).addX(-115).addY(-137).flush(), STOCK);
 
-		GuiTexture sell_bar = new GuiTexture(Dim2D.build().center(true).width(176).height(40).pos(center).y(this.height).addX(-115).addY(-190).flush(),
-				SELL_BAR);
-
-		this.sell = new GuiButtonVanilla(Dim2D.build().width(70).height(20).pos(center).y(this.height).addX(-165).addY(-200).flush());
+		this.sell = new GuiButtonVanilla(Dim2D.build().width(72).height(20).pos(center).y(this.height).addX(84).addY(-207).flush());
 
 		this.sell.getInner().displayString = I18n.format("aether.shop.sell");
 		this.sell.getInner().enabled = false;
 
-		this.gilt = new GuiTexture(Dim2D.build().center(true).width(7).height(7).pos(center).y(this.height).addX(0).addY(-199 + 4).flush(), GILT);
-		this.giltae = new GuiTexture(Dim2D.build().center(true).width(7).height(7).pos(center).y(this.height).addX(40).addY(-199 + 4).flush(), GILTAE);
-		this.giltaen = new GuiTexture(Dim2D.build().center(true).width(7).height(7).pos(center).y(this.height).addX(80).addY(-199 + 4).flush(), GILTAEN);
-		this.giltaeni = new GuiTexture(Dim2D.build().center(true).width(7).height(7).pos(center).y(this.height).addX(120).addY(-199 + 4).flush(),
-				GILTAENI);
+		this.addChildren(stock, inventory, this.sell);
 
-		this.giltSell = new GuiTexture(Dim2D.build().center(true).width(7).height(7).pos(center).y(this.height).addX(-82).addY(-198).flush(), GILT);
-		this.giltaeSell = new GuiTexture(Dim2D.build().center(true).width(7).height(7).pos(center).y(this.height).addX(-55).addY(-198).flush(), GILTAE);
-		this.giltaenSell = new GuiTexture(Dim2D.build().center(true).width(7).height(7).pos(center).y(this.height).addX(-82).addY(-183).flush(), GILTAEN);
-		this.giltaeniSell = new GuiTexture(Dim2D.build().center(true).width(7).height(7).pos(center).y(this.height).addX(-55).addY(-183).flush(),
-				GILTAENI);
-
-		this.giltBuy = new GuiTexture(Dim2D.build().center(true).width(7).height(7).pos(center).y(this.height).addX(-197).addY(-25 + 5).flush(), GILT);
-		this.giltaeBuy = new GuiTexture(Dim2D.build().center(true).width(7).height(7).pos(center).y(this.height).addX(-170).addY(-25 + 5).flush(), GILTAE);
-		this.giltaenBuy = new GuiTexture(Dim2D.build().center(true).width(7).height(7).pos(center).y(this.height).addX(-197).addY(-10 + 5).flush(), GILTAEN);
-		this.giltaeniBuy = new GuiTexture(Dim2D.build().center(true).width(7).height(7).pos(center).y(this.height).addX(-170).addY(-10 + 5).flush(),
-				GILTAENI);
-
-		this.giltBuy.setVisible(false);
-		this.giltaeBuy.setVisible(false);
-		this.giltaenBuy.setVisible(false);
-		this.giltaeniBuy.setVisible(false);
-
-		PlayerCurrencyModule module = this.playerAether.getCurrencyModule();
-
-		this.giltCount = new GuiText(Dim2D.build().pos(center).y(this.height).addX(6).addY(-203 + 4).flush(),
-				new Text(new TextComponentString(String.valueOf(module.getGilt())), 1.0F));
-		this.giltaeCount = new GuiText(Dim2D.build().pos(center).y(this.height).addX(46).addY(-203 + 4).flush(),
-				new Text(new TextComponentString(String.valueOf(module.getGiltae())), 1.0F));
-		this.giltaenCount = new GuiText(Dim2D.build().pos(center).y(this.height).addX(86).addY(-203 + 4).flush(),
-				new Text(new TextComponentString(String.valueOf(module.getGiltaen())), 1.0F));
-		this.giltaeniCount = new GuiText(Dim2D.build().pos(center).y(this.height).addX(126).addY(-203 + 4).flush(),
-				new Text(new TextComponentString(String.valueOf(module.getGiltaeni())), 1.0F));
-
-		this.giltSellCount = new GuiText(Dim2D.build().pos(center).y(this.height).addX(-76).addY(-202).flush(),
-				new Text(new TextComponentString("0"), 1.0F));
-		this.giltaeSellCount = new GuiText(Dim2D.build().pos(center).y(this.height).addX(-49).addY(-202).flush(),
-				new Text(new TextComponentString("0"), 1.0F));
-		this.giltaenSellCount = new GuiText(Dim2D.build().pos(center).y(this.height).addX(-76).addY(-187).flush(),
-				new Text(new TextComponentString("0"), 1.0F));
-		this.giltaeniSellCount = new GuiText(Dim2D.build().pos(center).y(this.height).addX(-49).addY(-187).flush(),
-				new Text(new TextComponentString("0"), 1.0F));
-
-		this.giltBuyCount = new GuiText(Dim2D.build().pos(center).y(this.height).addX(-191).addY(-29 + 5).flush(),
-				new Text(new TextComponentString("0"), 1.0F));
-		this.giltaeBuyCount = new GuiText(Dim2D.build().pos(center).y(this.height).addX(-164).addY(-29 + 5).flush(),
-				new Text(new TextComponentString("0"), 1.0F));
-		this.giltaenBuyCount = new GuiText(Dim2D.build().pos(center).y(this.height).addX(-191).addY(-14 + 5).flush(),
-				new Text(new TextComponentString("0"), 1.0F));
-		this.giltaeniBuyCount = new GuiText(Dim2D.build().pos(center).y(this.height).addX(-164).addY(-14 + 5).flush(),
-				new Text(new TextComponentString("0"), 1.0F));
-
-		this.giltBuyCount.setVisible(false);
-		this.giltaeBuyCount.setVisible(false);
-		this.giltaenBuyCount.setVisible(false);
-		this.giltaeniBuyCount.setVisible(false);
-
-		this.addChildren(stock, inventory, sell_bar, this.sell);
-
-		this.giltaeni.setVisible(module.getGiltaeni() > 0);
-		this.giltaeniCount.setVisible(module.getGiltaeni() > 0);
-
-		this.giltaen.setVisible(module.getGiltaen() > 0);
-		this.giltaenCount.setVisible(module.getGiltaen() > 0);
-
-		this.giltae.setVisible(module.getGiltae() > 0);
-		this.giltaeCount.setVisible(module.getGiltae() > 0);
-
-		this.gilt.setVisible(module.getGilt() > 0);
-		this.giltCount.setVisible(module.getGilt() > 0);
-
-		this.addChildren(this.gilt, this.giltae, this.giltaen, this.giltaeni, this.giltCount, this.giltaeCount, this.giltaenCount, this.giltaeniCount);
-		this.addChildren(this.giltSell, this.giltaeSell, this.giltaenSell, this.giltaeniSell, this.giltSellCount, this.giltaeSellCount, this.giltaenSellCount,
-				this.giltaeniSellCount);
-		this.addChildren(this.giltBuy, this.giltaeBuy, this.giltaenBuy, this.giltaeniBuy, this.giltBuyCount, this.giltaeBuyCount, this.giltaenBuyCount,
-				this.giltaeniBuyCount);
-
-		this.giltSell.setVisible(false);
-		this.giltaeSell.setVisible(false);
-		this.giltaenSell.setVisible(false);
-		this.giltaeniSell.setVisible(false);
-
-		this.giltSellCount.setVisible(false);
-		this.giltaeSellCount.setVisible(false);
-		this.giltaenSellCount.setVisible(false);
-		this.giltaeniSellCount.setVisible(false);
-
-		this.stackGui = new GuiItemStack(Dim2D.build().pos(center).y(this.height).addX(-201).addY(-88).scale(2.5F).flush());
-		this.buy = new GuiButtonVanilla(Dim2D.build().width(64).height(20).pos(center).y(this.height).addX(-113).addY(-122).flush());
+		this.stackGui = new GuiItemStack(Dim2D.build().pos(center).y(this.height).addX(-132).addY(-166).scale(1.0F).flush());
+		this.buy = new GuiButtonVanilla(Dim2D.build().width(44).height(20).pos(center).y(this.height).addX(-106).addY(-167).flush());
 
 		this.buy.getInner().displayString = I18n.format("aether.shop.buy", buyCount);
 		this.buy.setEnabled(false);
 
-		this.back = new GuiButtonVanilla(Dim2D.build().width(79).height(20).pos(center).y(this.height).addX(-196).addY(-122).flush());
+		this.back = new GuiButtonVanilla(Dim2D.build().width(20).height(20).pos(center).y(this.height).addX(-236).addY(-125).flush());
 
-		this.back.getInner().displayString = I18n.format("aether.shop.back");
+		this.back.getInner().displayString = "<";
 
 		this.addChildren(this.stackGui, this.buy, this.back);
 
-		int baseBoxSize = 310;
+		int baseBoxSize = 350;
 		final boolean resize = this.width - 40 > baseBoxSize;
 
-		this.npcDialogue = new GuiTextBox(0, resize ? 30 + (this.width / 2) - (baseBoxSize / 2) : 20, this.height - 85, baseBoxSize, 70);
+		this.npcDialogue = new GuiTextBox(0, resize ? (this.width / 2) - (baseBoxSize / 2) : 20, this.height - 85, baseBoxSize, 70);
 
 		int greetingBoxSize = 350;
 		final boolean greetingResize = this.width - 40 > greetingBoxSize;
@@ -297,12 +211,12 @@ public class GuiShop extends GuiFrame implements ICurrencyListener
 		this.buttonList.add(this.npcDialogue);
 		this.buttonList.add(this.npcGreeting);
 
-		this.addChildren(this.buyTitle);
+		//this.addChildren(this.buyTitle);
 
 		for (int i = 0; i < this.shopInstance.getStock().size(); i++)
 		{
 			GuiShopBuy gui = new GuiShopBuy(
-					Dim2D.build().width(18).height(18).pos(center).y(this.height).addX(-196 + (i * 18) - ((i / 9) * 162)).addY(-160F + ((i / 9) * 18)).flush(),
+					Dim2D.build().width(18).height(18).pos(center).y(this.height).addX(-196 + (i * 18) - ((i / 9) * 162)).addY(-140F + ((i / 9) * 18)).flush(),
 					i,
 					this.shopInstance);
 			this.buys.add(gui);
@@ -310,49 +224,80 @@ public class GuiShop extends GuiFrame implements ICurrencyListener
 			this.addChildren(gui);
 		}
 
-		this.upArrow = new GuiAbstractButton(Dim2D.build().width(15).height(10).pos(center).y(this.height).addX(-49).addY(-122).flush(),
+		this.upArrow = new GuiAbstractButton(Dim2D.build().width(15).height(10).pos(center).y(this.height).addX(-49).addY(-167).flush(),
 				new GuiTexture(Dim2D.build().width(15).height(10).flush(), UP_ARROW),
 				new GuiTexture(Dim2D.build().width(15).height(10).flush(), UP_ARROW_HOVER),
 				new GuiTexture(Dim2D.build().width(15).height(10).flush(), UP_ARROW));
 
-		this.downArrow = new GuiAbstractButton(Dim2D.build().width(15).height(10).pos(center).y(this.height).addX(-49).addY(-112).flush(),
+		this.downArrow = new GuiAbstractButton(Dim2D.build().width(15).height(10).pos(center).y(this.height).addX(-49).addY(-157).flush(),
 				new GuiTexture(Dim2D.build().width(15).height(10).flush(), DOWN_ARROW),
 				new GuiTexture(Dim2D.build().width(15).height(10).flush(), DOWN_ARROW_HOVER),
 				new GuiTexture(Dim2D.build().width(15).height(10).flush(), DOWN_ARROW));
 
-		this.addChildren(this.upArrow, this.downArrow);
-	}
+		this.lockButton = new GuiButtonVanilla(Dim2D.build().width(14).height(20).pos(center).y(this.height).addX(-63).addY(-167).flush());
 
-	private void refreshGilt()
-	{
-		PlayerCurrencyModule module = this.playerAether.getCurrencyModule();
+		this.lock = new GuiTexture(Dim2D.build().center(true).height(16).width(16).pos(center).y(this.height).addX(-65 + 9).addY(-167 + 10).flush(), LOCK);
+		this.unlock = new GuiTexture(Dim2D.build().center(true).height(16).width(16).pos(center).y(this.height).addX(-65 + 9).addY(-167 + 10).flush(), UNLOCK);
 
-		this.giltCount.setText(new Text(new TextComponentString(String.valueOf(module.getGilt())), 1.0F));
-		this.giltaeCount.setText(new Text(new TextComponentString(String.valueOf(module.getGiltae())), 1.0F));
-		this.giltaenCount.setText(new Text(new TextComponentString(String.valueOf(module.getGiltaen())), 1.0F));
-		this.giltaeniCount.setText(new Text(new TextComponentString(String.valueOf(module.getGiltaeni())), 1.0F));
+		this.giltBag = new GuiTexture(Dim2D.build().center(true).height(16).width(16).pos(center).y(this.height).addX(189).addY(-133).flush(), GILT_BAG);
 
-		this.giltaeni.setVisible(module.getGiltaeni() > 0);
-		this.giltaeniCount.setVisible(module.getGiltaeni() > 0);
+		this.addChildren(this.upArrow, this.downArrow, this.sellCoins, this.buyCoins, this.lockButton, this.lock, this.unlock, this.playerCoins, this.giltBag);
 
-		this.giltaen.setVisible(module.getGiltaen() > 0 || module.getGiltaeni() > 0);
-		this.giltaenCount.setVisible(module.getGiltaen() > 0 || module.getGiltaeni() > 0);
-
-		this.giltae.setVisible(module.getGiltae() > 0 || module.getGiltaen() > 0 || module.getGiltaeni() > 0);
-		this.giltaeCount.setVisible(module.getGiltae() > 0 || module.getGiltaen() > 0 || module.getGiltaeni() > 0);
-
-		this.gilt.setVisible(module.getGilt() >= 0 || module.getGiltae() > 0 || module.getGiltaen() > 0 || module.getGiltaeni() > 0);
-		this.giltCount.setVisible(module.getGilt() >= 0 || module.getGiltae() > 0 || module.getGiltaen() > 0 || module.getGiltaeni() > 0);
+		this.playerCoins.setCurrencyValue(this.playerAether.getCurrencyModule().getCurrencyValue());
 	}
 
 	public void addBuyCount(int buyCount)
 	{
-		GuiShop.buyCount = MathHelper.clamp(GuiShop.buyCount + buyCount, 1, 64);
+		if (isCountLocked)
+		{
+			GuiShop.buyCount = MathHelper.clamp(GuiShop.buyCount + buyCount, 1, 64);
+
+			if (this.getSelectedBuy() != null)
+			{
+				int count = (int) Math
+						.min(this.getSelectedBuy().getStock(), Math.min(GuiShop.buyCount, Math.min(this.getSelectedBuy().getItemStack().getMaxStackSize(),
+								this.playerAether.getCurrencyModule().getCurrencyValue() / this.getSelectedBuy().getPrice())));
+
+				this.stackGui.getItemStack().setCount(count);
+
+				int value = this.getSelectedBuy().getPrice() * count;
+
+				this.buyCoins.setCurrencyValue(value);
+				this.buyCoins.setVisible(true);
+			}
+		}
+		else
+		{
+			if (this.getSelectedBuy() != null)
+			{
+				int max = (int) Math.min(this.getSelectedBuy().getItemStack().getMaxStackSize(),
+						this.playerAether.getCurrencyModule().getCurrencyValue() / this.getSelectedBuy().getPrice());
+
+				this.buyCountUnlocked = MathHelper.clamp(this.buyCountUnlocked + buyCount, 1, max);
+
+				this.stackGui.getItemStack().setCount(this.buyCountUnlocked);
+
+				int value = this.getSelectedBuy().getPrice() * this.buyCountUnlocked;
+
+				this.buyCoins.setCurrencyValue(value);
+				this.buyCoins.setVisible(true);
+			}
+		}
 	}
 
 	@Override
 	public void drawScreen(final int mouseX, final int mouseY, final float partialTicks)
 	{
+		if (InputHelper.isHovered(this.back))
+		{
+			this.setHoveredDescription(Lists.newArrayList(I18n.format("aether.shop.back")));
+		}
+
+		this.stackGui.setDrawCount(isCountLocked);
+
+		this.lock.setVisible(isCountLocked);
+		this.unlock.setVisible(!isCountLocked);
+
 		if ((this.upArrowHeld || this.downArrowHeld) && !this.pressLongEnough && System.currentTimeMillis() - this.lastBuyCountChangeTime >= 300L)
 		{
 			this.lastBuyCountChangeTime = System.currentTimeMillis();
@@ -378,7 +323,7 @@ public class GuiShop extends GuiFrame implements ICurrencyListener
 		}
 
 		this.drawWorldBackground(0);
-		net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.client.event.GuiScreenEvent.BackgroundDrawnEvent(this));
+		MinecraftForge.EVENT_BUS.post(new GuiScreenEvent.BackgroundDrawnEvent(this));
 
 		GlStateManager.pushMatrix();
 
@@ -391,7 +336,7 @@ public class GuiShop extends GuiFrame implements ICurrencyListener
 		{
 			GlStateManager.pushMatrix();
 
-			GlStateManager.translate(-210F, 0F, 0F);
+			GlStateManager.translate(-100F, 0F, 0F);
 
 			this.renderer.draw(this.slide, this.width, this.height, mouseX, mouseY, partialTicks);
 			GlStateManager.popMatrix();
@@ -406,6 +351,20 @@ public class GuiShop extends GuiFrame implements ICurrencyListener
 		GlStateManager.enableDepth();
 
 		GlStateManager.popMatrix();
+
+		if (this.hoverDescription != null && this.hoverDescription.size() > 0)
+		{
+			GuiUtils.drawHoveringText(this.hoverDescription, mouseX, mouseY, Minecraft.getMinecraft().fontRenderer);
+		}
+
+		if (InputHelper.isHovered(this.lockButton))
+		{
+			net.minecraftforge.fml.client.config.GuiUtils
+					.drawHoveringText(Lists.newArrayList(I18n.format("aether.shop.lockTooltip")), mouseX, mouseY, this.width, this.height, 120,
+							Minecraft.getMinecraft().fontRenderer);
+		}
+
+		this.hoverDescription = null;
 
 		this.renderHoveredToolTip(mouseX, mouseY);
 
@@ -438,77 +397,13 @@ public class GuiShop extends GuiFrame implements ICurrencyListener
 				value = AetherAPI.content().currency().getValue(stack);
 			}
 
-			double giltaeni = 0;
-			double giltaen = 0;
-			double giltae = 0;
-			double gilt;
-
-			if (value >= 1)
-			{
-				int[] brokenUp = PlayerCurrencyModule.breakUpCurrency((long) value);
-
-				giltaeni = brokenUp[0];
-				giltaen = brokenUp[1];
-				giltae = brokenUp[2];
-				gilt = brokenUp[3];
-			}
-			else
-			{
-				gilt = value;
-			}
-
-			this.giltSellCount.setText(
-					new Text(new TextComponentString(value < 1 ? TextFormatting.GRAY + String.format("%.2f", gilt) : String.valueOf((int) gilt)), 1.0F));
-			this.giltaeSellCount.setText(new Text(new TextComponentString(String.valueOf((int) giltae)), 1.0F));
-			this.giltaenSellCount.setText(new Text(new TextComponentString(String.valueOf((int) giltaen)), 1.0F));
-			this.giltaeniSellCount.setText(new Text(new TextComponentString(String.valueOf((int) giltaeni)), 1.0F));
-
-			this.giltaeniSell.setVisible(giltaeni > 0);
-			this.giltaeniSellCount.setVisible(giltaeni > 0);
-
-			this.giltaenSell.setVisible(giltaen > 0 || giltaeni > 0);
-			this.giltaenSellCount.setVisible(giltaen > 0 || giltaeni > 0);
-
-			this.giltaeSell.setVisible(giltae > 0 || giltaen > 0 || giltaeni > 0);
-			this.giltaeSellCount.setVisible(giltae > 0 || giltaen > 0 || giltaeni > 0);
-
-			boolean hasValue = AetherAPI.content().currency().hasValue(stack);
-
-			this.giltSell.setVisible(hasValue);
-			this.giltSellCount.setVisible(hasValue);
-
-			if (!this.giltaeSell.isVisible())
-			{
-				this.giltSellCount.dim().add(this.coinOffset, RectModifier.ModifierType.POS);
-				this.giltSell.dim().add(this.coinOffset, RectModifier.ModifierType.POS);
-			}
-			else
-			{
-				this.giltSellCount.dim().remove(this.coinOffset, RectModifier.ModifierType.POS);
-				this.giltSell.dim().remove(this.coinOffset, RectModifier.ModifierType.POS);
-			}
-
-			if (!this.giltaenSell.isVisible())
-			{
-				this.giltSellCount.dim().add(this.coinOffset, RectModifier.ModifierType.Y);
-				this.giltSell.dim().add(this.coinOffset, RectModifier.ModifierType.Y);
-
-				this.giltaeSellCount.dim().add(this.coinOffset, RectModifier.ModifierType.Y);
-				this.giltaeSell.dim().add(this.coinOffset, RectModifier.ModifierType.Y);
-			}
-			else
-			{
-				this.giltSellCount.dim().remove(this.coinOffset, RectModifier.ModifierType.Y);
-				this.giltSell.dim().remove(this.coinOffset, RectModifier.ModifierType.Y);
-
-				this.giltaeSellCount.dim().remove(this.coinOffset, RectModifier.ModifierType.Y);
-				this.giltaeSell.dim().remove(this.coinOffset, RectModifier.ModifierType.Y);
-			}
+			this.sellCoins.setCurrencyValue(value);
 
 			this.lastSellStack = stack;
 			this.lastSellStackCount = stack.getCount();
 
 			this.sell.setEnabled(value >= 1);
+			this.sellCoins.setVisible(true);
 		}
 
 		if (this.getSelectedBuy() != null)
@@ -537,8 +432,8 @@ public class GuiShop extends GuiFrame implements ICurrencyListener
 		if (this.getSelectedBuy() != null && this.prevBuy != this.selectedBuy)
 		{
 			this.stackGui.setItemStack(this.getSelectedBuy().getItemStack());
-			this.buyTitle.setText(new Text(new TextComponentTranslation(this.getSelectedBuy().getItemStack().getDisplayName()), 1.0F));
-			this.buyTitle.init();
+			//this.buyTitle.setText(new Text(new TextComponentTranslation(this.getSelectedBuy().getItemStack().getDisplayName()), 1.0F));
+			//this.buyTitle.init();
 
 			String chosenDesc = MathUtil.getRandomElement(this.getSelectedBuy().getUnlocalizedDescriptions(), new Random());
 
@@ -546,65 +441,27 @@ public class GuiShop extends GuiFrame implements ICurrencyListener
 
 			this.prevBuy = this.selectedBuy;
 
-			int value = this.getSelectedBuy().getPrice();
-			int[] brokenUp = PlayerCurrencyModule.breakUpCurrency((long) value);
+			int count = (int) Math.min(GuiShop.buyCount, Math.min(this.getSelectedBuy().getItemStack().getMaxStackSize(),
+					this.playerAether.getCurrencyModule().getCurrencyValue() / this.getSelectedBuy().getPrice()));
 
-			int giltaeni = brokenUp[0];
-			int giltaen = brokenUp[1];
-			int giltae = brokenUp[2];
-			int gilt = brokenUp[3];
+			int value = this.getSelectedBuy().getPrice() * count;
 
-			this.giltBuyCount.setText(new Text(new TextComponentString(String.valueOf(gilt)), 1.0F));
-			this.giltaeBuyCount.setText(new Text(new TextComponentString(String.valueOf(giltae)), 1.0F));
-			this.giltaenBuyCount.setText(new Text(new TextComponentString(String.valueOf(giltaen)), 1.0F));
-			this.giltaeniBuyCount.setText(new Text(new TextComponentString(String.valueOf(giltaeni)), 1.0F));
-
-			this.giltaeniBuy.setVisible(giltaeni > 0);
-			this.giltaeniBuyCount.setVisible(giltaeni > 0);
-
-			this.giltaenBuy.setVisible(giltaen > 0 || giltaeni > 0);
-			this.giltaenBuyCount.setVisible(giltaen > 0 || giltaeni > 0);
-
-			this.giltaeBuy.setVisible(giltae > 0 || giltaen > 0 || giltaeni > 0);
-			this.giltaeBuyCount.setVisible(giltae > 0 || giltaen > 0 || giltaeni > 0);
-
-			this.giltBuy.setVisible(gilt > 0 || giltae > 0 || giltaen > 0 || giltaeni > 0);
-			this.giltBuyCount.setVisible(gilt > 0 || giltae > 0 || giltaen > 0 || giltaeni > 0);
-
-			if (!this.giltaeBuy.isVisible())
-			{
-				this.giltBuyCount.dim().add(this.coinOffset, RectModifier.ModifierType.POS);
-				this.giltBuy.dim().add(this.coinOffset, RectModifier.ModifierType.POS);
-			}
-			else
-			{
-				this.giltBuyCount.dim().remove(this.coinOffset, RectModifier.ModifierType.POS);
-				this.giltBuy.dim().remove(this.coinOffset, RectModifier.ModifierType.POS);
-			}
-
-			if (!this.giltaenBuy.isVisible())
-			{
-				this.giltBuyCount.dim().add(this.coinOffset, RectModifier.ModifierType.Y);
-				this.giltBuy.dim().add(this.coinOffset, RectModifier.ModifierType.Y);
-
-				this.giltaeBuyCount.dim().add(this.coinOffset, RectModifier.ModifierType.Y);
-				this.giltaeBuy.dim().add(this.coinOffset, RectModifier.ModifierType.Y);
-			}
-			else
-			{
-				this.giltBuyCount.dim().remove(this.coinOffset, RectModifier.ModifierType.Y);
-				this.giltBuy.dim().remove(this.coinOffset, RectModifier.ModifierType.Y);
-
-				this.giltaeBuyCount.dim().remove(this.coinOffset, RectModifier.ModifierType.Y);
-				this.giltaeBuy.dim().remove(this.coinOffset, RectModifier.ModifierType.Y);
-			}
+			this.buyCoins.setCurrencyValue(value);
+			this.buyCoins.setVisible(true);
 		}
 
-		if (buyCount != prevBuyCount)
+		if (buyCount != prevBuyCount && isCountLocked)
 		{
 			prevBuyCount = buyCount;
 
 			this.buy.getInner().displayString = I18n.format("aether.shop.buy", buyCount);
+		}
+
+		if (this.buyCountUnlocked != this.prevBuyCountUnlocked && !isCountLocked)
+		{
+			this.prevBuyCountUnlocked = this.buyCountUnlocked;
+
+			this.buy.getInner().displayString = I18n.format("aether.shop.buy", this.buyCountUnlocked);
 		}
 	}
 
@@ -636,11 +493,54 @@ public class GuiShop extends GuiFrame implements ICurrencyListener
 	{
 		super.mouseClicked(mouseX, mouseY, mouseButton);
 
+		if (InputHelper.isHovered(this.lockButton))
+		{
+			isCountLocked = !isCountLocked;
+
+			if (isCountLocked)
+			{
+				this.buy.getInner().displayString = I18n.format("aether.shop.buy", buyCount);
+
+				if (this.getSelectedBuy() != null)
+				{
+					int count = (int) Math
+							.min(this.getSelectedBuy().getStock(), Math.min(GuiShop.buyCount, Math.min(this.getSelectedBuy().getItemStack().getMaxStackSize(),
+									this.playerAether.getCurrencyModule().getCurrencyValue() / this.getSelectedBuy().getPrice())));
+
+					this.stackGui.getItemStack().setCount(count);
+
+					int value = this.getSelectedBuy().getPrice() * count;
+
+					this.buyCoins.setCurrencyValue(value);
+					this.buyCoins.setVisible(true);
+				}
+			}
+			else
+			{
+				this.buy.getInner().displayString = I18n.format("aether.shop.buy", this.buyCountUnlocked);
+
+				this.stackGui.getItemStack().setCount(this.buyCountUnlocked);
+
+				if (this.getSelectedBuy() != null)
+				{
+					int value = this.getSelectedBuy().getPrice() * this.buyCountUnlocked;
+
+					this.buyCoins.setCurrencyValue(value);
+					this.buyCoins.setVisible(true);
+				}
+			}
+		}
+
 		if (InputHelper.isHovered(this.upArrow))
 		{
 			this.upArrowHeld = true;
 			this.addBuyCount(1);
 			this.lastBuyCountChangeTime = System.currentTimeMillis();
+
+			if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
+			{
+				this.addBuyCount(64);
+			}
 		}
 
 		if (InputHelper.isHovered(this.downArrow))
@@ -648,6 +548,11 @@ public class GuiShop extends GuiFrame implements ICurrencyListener
 			this.downArrowHeld = true;
 			this.addBuyCount(-1);
 			this.lastBuyCountChangeTime = System.currentTimeMillis();
+
+			if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
+			{
+				this.addBuyCount(-64);
+			}
 		}
 
 		if (InputHelper.isHovered(this.back))
@@ -670,11 +575,11 @@ public class GuiShop extends GuiFrame implements ICurrencyListener
 				}
 			}
 
-			NetworkingAether.sendPacketToServer(new PacketShopBuy(index, buyCount));
+			NetworkingAether.sendPacketToServer(new PacketShopBuy(index, isCountLocked ? buyCount : this.buyCountUnlocked));
 
 			int maxAllowedWithHeldStack = this.getSelectedBuy().getItemStack().getMaxStackSize() - this.mc.player.inventory.getItemStack().getCount();
 
-			int amount = Math.min(maxAllowedWithHeldStack, Math.min(buyCount, this.getSelectedBuy().getStock()));
+			int amount = Math.min(maxAllowedWithHeldStack, Math.min(isCountLocked ? buyCount : this.buyCountUnlocked, this.getSelectedBuy().getStock()));
 
 			boolean isHandFree = this.mc.player.inventory.getItemStack().isEmpty();
 			boolean isBuyItem = ItemHelper.getHashForItemStack(this.mc.player.inventory.getItemStack()) == ItemHelper
@@ -695,8 +600,6 @@ public class GuiShop extends GuiFrame implements ICurrencyListener
 
 				this.mc.player.inventory.getItemStack().setCount(this.mc.player.inventory.getItemStack().getCount() + amount);
 			}
-
-			//this.playerAether.getCurrencyModule().add(-this.getSelectedBuy().getPrice());
 		}
 
 		if (InputHelper.isHovered(this.sell) && this.sell.isEnabled())
@@ -727,6 +630,7 @@ public class GuiShop extends GuiFrame implements ICurrencyListener
 		{
 			if (InputHelper.isHovered(b))
 			{
+				this.buyCountUnlocked = 1;
 				this.selectedBuy = b.getBuyIndex();
 
 				break;
@@ -737,7 +641,7 @@ public class GuiShop extends GuiFrame implements ICurrencyListener
 	@Override
 	public void onCurrencyChange(long prevCurrency, long newCurrency)
 	{
-		this.refreshGilt();
+		this.playerCoins.setCurrencyValue(newCurrency);
 	}
 
 	@Override
@@ -747,9 +651,29 @@ public class GuiShop extends GuiFrame implements ICurrencyListener
 
 		int scroll = MathHelper.clamp(Mouse.getEventDWheel(), -1, 1);
 
-		if (scroll != 0 && (InputHelper.isHovered(this.buy) || InputHelper.isHovered(this.upArrow) || InputHelper.isHovered(this.downArrow)))
+		if (scroll != 0 && (InputHelper.isHovered(this.buy) || InputHelper.isHovered(this.upArrow) || InputHelper.isHovered(this.downArrow) || InputHelper
+				.isHovered(this.lockButton)))
 		{
-			this.addBuyCount(scroll);
+			if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
+			{
+				this.addBuyCount(scroll * 64);
+			}
+			else
+			{
+				this.addBuyCount(scroll);
+			}
 		}
+	}
+
+	@Override
+	public List<String> getHoveredDescription()
+	{
+		return this.hoverDescription;
+	}
+
+	@Override
+	public void setHoveredDescription(List<String> desc)
+	{
+		this.hoverDescription = desc;
 	}
 }
