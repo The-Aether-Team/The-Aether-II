@@ -144,6 +144,8 @@ public class AetherGuiHandler implements IGuiHandler
 					prevFrame = (GuiFrame) FMLClientHandler.instance().getClient().currentScreen;
 				}
 
+				GuiDialogViewer.preventDialogControllerClose = true;
+
 				if (slide.getRenderer().isPresent())
 				{
 					IDialogSlideRenderer renderer = DialogUtil.getRenderer(slide);

@@ -144,8 +144,8 @@ public class GuiShop extends GuiFrame implements ICurrencyListener
 	{
 		Pos2D center = InputHelper.getCenter().clone().addX(15).flush();
 
-		this.guiLeft = (int) center.x() - 189;
-		this.guiTop = this.height - 198;
+		this.guiLeft = (int) center.x() - 189 - 7;
+		this.guiTop = this.height - 198 - 7;
 
 		this.xSize = 345;
 		this.ySize = 180;

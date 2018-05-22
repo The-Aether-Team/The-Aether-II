@@ -32,6 +32,8 @@ public class GuiDialogViewer extends GuiFrame implements IDialogChangeListener
 
 	private static final ResourceLocation NEXT_ARROW = AetherCore.getResource("textures/gui/conversation/next_arrow.png");
 
+	public static boolean preventDialogControllerClose;
+
 	private final IDialogController controller;
 
 	private GuiTextBox topTextBox, bottomTextBox, namePlate;
@@ -347,8 +349,10 @@ public class GuiDialogViewer extends GuiFrame implements IDialogChangeListener
 	}
 
 	@Override
-	protected void keyTyped(final char typedChar, final int keyCode)
+	protected void keyTyped(final char typedChar, final int keyCode) throws IOException
 	{
+		super.keyTyped(typedChar, keyCode);
+
 		this.nextAction();
 	}
 
@@ -411,6 +415,24 @@ public class GuiDialogViewer extends GuiFrame implements IDialogChangeListener
 			this.currentScroll = MathHelper.clamp(this.currentScroll - scroll, 0, this.maxScroll);
 
 			this.refreshButtonsWithScroll();
+		}
+	}
+
+	@Override
+	public void onGuiClosed()
+	{
+		super.onGuiClosed();
+
+		if (this.controller.getCurrentScene() != null)
+		{
+			if (preventDialogControllerClose)
+			{
+				preventDialogControllerClose = false;
+			}
+			else
+			{
+				this.controller.closeScene();
+			}
 		}
 	}
 }
