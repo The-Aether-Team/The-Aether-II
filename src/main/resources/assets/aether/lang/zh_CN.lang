@@ -837,6 +837,7 @@ aether.reward.none.name=无
 aether.shop.sell=出售
 aether.shop.buy=购买 %s
 aether.shop.back=返回
+aether.shop.lockTooltip=如果解锁，你每次更换想买的物品时，购买数都会重置为1。
 
 ##=======================##
 ###########################
