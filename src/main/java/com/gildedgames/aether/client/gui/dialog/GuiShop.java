@@ -463,8 +463,9 @@ public class GuiShop extends GuiFrame implements ICurrencyListener, IExtendedGui
 
 			this.prevBuy = this.selectedBuy;
 
-			int count = (int) Math.min(GuiShop.buyCount, Math.min(this.getSelectedBuy().getItemStack().getMaxStackSize(),
-					this.playerAether.getCurrencyModule().getCurrencyValue() / this.getSelectedBuy().getPrice()));
+			int count = (int) Math
+					.min(isCountLocked ? GuiShop.buyCount : this.buyCountUnlocked, Math.min(this.getSelectedBuy().getItemStack().getMaxStackSize(),
+							this.playerAether.getCurrencyModule().getCurrencyValue() / this.getSelectedBuy().getPrice()));
 
 			if (count <= 0)
 			{
