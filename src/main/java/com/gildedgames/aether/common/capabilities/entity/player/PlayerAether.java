@@ -78,6 +78,8 @@ public class PlayerAether implements IPlayerAether
 
 	private final PlayerCurrencyModule currencyModule;
 
+	private final PlayerSectorModule sectorModule;
+
 	private final List<PlayerAetherObserver> observers = Lists.newArrayList();
 
 	private NecromancerTowerInstance towerInstance;
@@ -103,6 +105,7 @@ public class PlayerAether implements IPlayerAether
 		this.configModule = null;
 		this.progressModule = null;
 		this.currencyModule = null;
+		this.sectorModule = null;
 	}
 
 	public PlayerAether(final EntityPlayer entity)
@@ -124,6 +127,7 @@ public class PlayerAether implements IPlayerAether
 		this.configModule = new PlayerConfigModule(this);
 		this.progressModule = new PlayerProgressModule(this);
 		this.currencyModule = new PlayerCurrencyModule(this);
+		this.sectorModule = new PlayerSectorModule(this);
 
 		final Collection<PlayerAetherModule> modules = new ArrayList<>();
 
@@ -142,6 +146,7 @@ public class PlayerAether implements IPlayerAether
 		modules.add(this.configModule);
 		modules.add(this.progressModule);
 		modules.add(this.currencyModule);
+		modules.add(this.sectorModule);
 
 		this.modules = modules.toArray(new PlayerAetherModule[0]);
 	}

@@ -16,6 +16,7 @@ import com.gildedgames.aether.common.util.helpers.PerfHelper;
 import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.IrradiatedForestsData;
 import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.MagneticHillPillar;
 import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.MagneticHillsData;
+import com.gildedgames.aether.common.world.aether.island.IslandTicker;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandVariables;
 import com.gildedgames.aether.common.world.aether.prep.PrepAether;
 import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstance;
@@ -88,6 +89,7 @@ public class CommonProxy implements IAetherServices
 		MinecraftForge.EVENT_BUS.register(ItemSkyrootSword.class);
 		MinecraftForge.EVENT_BUS.register(QuicksoilProcessor.class);
 		MinecraftForge.EVENT_BUS.register(SpawnAreaEvents.class);
+		MinecraftForge.EVENT_BUS.register(IslandTicker.class);
 	}
 
 	public void serverStarted(FMLServerStartedEvent event)

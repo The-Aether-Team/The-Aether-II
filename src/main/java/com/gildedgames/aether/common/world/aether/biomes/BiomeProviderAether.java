@@ -4,7 +4,7 @@ import com.gildedgames.aether.common.registry.content.BiomesAether;
 import com.gildedgames.aether.common.world.aether.prep.PrepSectorDataAether;
 import com.gildedgames.orbis_api.preparation.IPrepManager;
 import com.gildedgames.orbis_api.preparation.IPrepSector;
-import com.gildedgames.orbis_api.preparation.IPrepSectorAccessAsync;
+import com.gildedgames.orbis_api.preparation.IPrepSectorAccess;
 import com.gildedgames.orbis_api.preparation.impl.util.PrepHelper;
 import com.gildedgames.orbis_api.world.WorldObjectManager;
 import com.google.common.collect.Lists;
@@ -70,7 +70,7 @@ public class BiomeProviderAether extends BiomeProvider
 			return biomes;
 		}
 
-		IPrepSectorAccessAsync access = manager.access();
+		IPrepSectorAccess access = manager.getAccess();
 
 		IPrepSector cachedSector = null;
 
@@ -90,7 +90,7 @@ public class BiomeProviderAether extends BiomeProvider
 
 				if (chunkX != prevChunkX || chunkY != prevChunkY || cachedSector == null)
 				{
-					cachedSector = access.getLoadedSector(chunkX, chunkY).orElse(null);
+					cachedSector = access.getLoadedSectorForChunk(chunkX, chunkY).orElse(null);
 
 					prevChunkX = chunkX;
 					prevChunkY = chunkY;

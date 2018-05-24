@@ -1,5 +1,6 @@
 package com.gildedgames.aether.client.renderer;
 
+import com.gildedgames.aether.api.world.islands.IIslandDataPartial;
 import com.gildedgames.aether.client.gui.overlays.IOverlay;
 import com.gildedgames.aether.client.gui.overlays.PortalOverlay;
 import com.gildedgames.aether.client.gui.overlays.SwetOverlay;
@@ -7,6 +8,7 @@ import com.gildedgames.aether.client.models.entities.player.*;
 import com.gildedgames.aether.client.renderer.entities.living.RenderPlayerHelper;
 import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,6 +18,8 @@ import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderSpecificHandEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -100,6 +104,31 @@ public class ClientRenderHandler
 
 			GlStateManager.popMatrix();
 		}
+	}
+
+	@SubscribeEvent
+	public void onRenderDebugInfo(RenderGameOverlayEvent.Text event)
+	{
+		if (!Minecraft.getMinecraft().gameSettings.showDebugInfo)
+		{
+			return;
+		}
+
+		BlockPos pos = Minecraft.getMinecraft().player.getPosition();
+
+		IIslandDataPartial data = IslandHelper.getPartial(Minecraft.getMinecraft().world, pos.getX() >> 4, pos.getZ() >> 4);
+
+		if (data == null)
+		{
+			return;
+		}
+
+		event.getLeft().add("");
+		event.getLeft().add(TextFormatting.AQUA + "Aether Island Sector" + TextFormatting.GREEN + " (Partial, Client)");
+		event.getLeft().add("- Location: (" + data.getParentSectorData().getSectorX() + ", " + data.getParentSectorData().getSectorY() + ")");
+		event.getLeft().add("- Precipitation: " + data.getPrecipitation().getType().name() + " (" + data.getPrecipitation().getStrength().name() + ")");
+		event.getLeft().add("  - Duration: " + (data.getPrecipitation().getDuration()) + " ticks");
+		event.getLeft().add("  - Remaining: " + (data.getPrecipitation().getRemainingDuration()) + " ticks");
 	}
 
 }

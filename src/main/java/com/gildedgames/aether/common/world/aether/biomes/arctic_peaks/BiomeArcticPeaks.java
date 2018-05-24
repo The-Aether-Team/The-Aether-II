@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.world.aether.biomes.arctic_peaks;
 import com.gildedgames.aether.api.world.generation.WorldDecoration;
 import com.gildedgames.aether.api.world.generation.WorldDecorationSimple;
 import com.gildedgames.aether.api.world.islands.IIslandData;
+import com.gildedgames.aether.api.world.islands.IIslandDataPartial;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.IBlockSnowy;
@@ -96,7 +97,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase
 		final int chunkX = pos.getX() >> 4;
 		final int chunkZ = pos.getZ() >> 4;
 
-		IIslandData island = IslandHelper.get(world, chunkX, chunkZ);
+		IIslandDataPartial island = IslandHelper.get(world, chunkX, chunkZ);
 
 		if (island == null)
 		{

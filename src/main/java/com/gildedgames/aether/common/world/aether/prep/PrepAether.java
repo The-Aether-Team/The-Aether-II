@@ -7,6 +7,7 @@ import com.gildedgames.aether.common.registry.content.BiomesAether;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.island.ChunkGeneratorAether;
+import com.gildedgames.aether.common.world.aether.island.data.BlockAccessIsland;
 import com.gildedgames.aether.common.world.aether.island.data.IslandBounds;
 import com.gildedgames.aether.common.world.aether.island.data.IslandData;
 import com.gildedgames.orbis_api.preparation.IPrepChunkManager;
@@ -59,7 +60,7 @@ public class PrepAether implements IPrepRegistryEntry
 
 				islandData.addComponents(biomeAether.createIslandComponents(islandData));
 
-				biomeAether.getBiomeDecorator().prepareDecorationsWholeIsland(world, islandData, sectorData, new Random(islandData.getSeed()));
+				biomeAether.getBiomeDecorator().prepareDecorationsWholeIsland(world, new BlockAccessIsland(world, islandData, sectorData, iPrepChunkManager), islandData, sectorData, new Random(islandData.getSeed()));
 			}
 		}
 	}
@@ -94,9 +95,12 @@ public class PrepAether implements IPrepRegistryEntry
 			chosen = BiomesAether.fetchRandomBiome(rand);
 		}
 
-		final IslandData island = new IslandData(world, bounds, chosen, islandSeed);
+		final PrepSectorDataAether data = new PrepSectorDataAether(world, sectorX, sectorY);
+		final IslandData island = new IslandData(world, data, bounds, chosen, islandSeed);
 
-		return new PrepSectorDataAether(world, island, sectorX, sectorY);
+		data.setIslandData(island);
+
+		return data;
 	}
 
 	@Override

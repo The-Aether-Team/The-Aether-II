@@ -22,6 +22,14 @@ public class ReflectionAether
 
 	public static final ReflectionEntry ENTITY_RENDER_LAYERS = new ReflectionEntry("field_177097_h", "layerRenderers");
 
+	public static final ReflectionEntry GET_FOV_MODIFIER = new ReflectionEntry("func_78481_a", "getFOVModifier");
+
+	public static final ReflectionEntry ENTITY_RENDERER_LIGHTMAP_COLORS = new ReflectionEntry("lightmapColors", "field_78504_Q");
+
+	public static final ReflectionEntry ENTITY_RENDERER_LIGHTMAP_TEXTURE = new ReflectionEntry("lightmapTexture", "field_78513_d");
+
+	public static final ReflectionEntry ENTITY_RENDERER_TORCH_FLICKER_X = new ReflectionEntry("torchFlickerX", "field_78514_e");
+
 	public static Field getField(final Class clazz, final String... names)
 	{
 		for (final Field field : clazz.getDeclaredFields())
@@ -82,11 +90,11 @@ public class ReflectionAether
 		throw new RuntimeException("Couldn't find method");
 	}
 
-	public static void invokeMethod(final Method method, final Object obj, final Object... args)
+	public static Object invokeMethod(final Method method, final Object obj, final Object... args)
 	{
 		try
 		{
-			method.invoke(obj, args);
+			return method.invoke(obj, args);
 		}
 		catch (IllegalAccessException | InvocationTargetException e)
 		{

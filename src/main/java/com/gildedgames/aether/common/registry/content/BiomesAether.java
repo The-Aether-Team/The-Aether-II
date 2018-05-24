@@ -35,7 +35,7 @@ public class BiomesAether
 
 	@GameRegistry.ObjectHolder("aether_arctic_peaks")
 	public static final BiomeAetherBase ARCTIC_PEAKS = new BiomeArcticPeaks(
-			new Biome.BiomeProperties("Arctic Peaks").setRainDisabled().setTemperature(0.0f).setWaterColor(0x70DB70),
+			new Biome.BiomeProperties("Arctic Peaks").setRainDisabled().setSnowEnabled().setTemperature(0.0f).setWaterColor(0x70DB70),
 			AetherCore.getResource("aether_arctic_peaks"));
 
 	@GameRegistry.ObjectHolder("aether_forgotten_highlands")

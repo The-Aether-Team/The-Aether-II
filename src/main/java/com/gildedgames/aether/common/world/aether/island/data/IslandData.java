@@ -8,30 +8,23 @@ import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.orbis_api.core.BlueprintDefinition;
 import com.gildedgames.orbis_api.core.ICreationData;
 import com.gildedgames.orbis_api.core.PlacedBlueprint;
+import com.gildedgames.orbis_api.preparation.IPrepSectorData;
 import com.gildedgames.orbis_api.util.io.NBTFunnel;
 import com.gildedgames.orbis_api.util.mc.NBT;
 import com.gildedgames.orbis_api.util.mc.NBTHelper;
 import com.google.common.collect.Lists;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
 
 import javax.annotation.Nonnull;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
-public class IslandData implements IIslandData
+public class IslandData extends IslandDataPartial implements IIslandData
 {
-	private final World world;
-
-	private IIslandBounds bounds;
-
-	private BiomeAetherBase biome;
-
 	private BlockPos respawnPoint;
 
 	private long seed;
@@ -48,22 +41,19 @@ public class IslandData implements IIslandData
 
 	private List<PlacedBlueprint> blueprintInstances = Lists.newArrayList();
 
-	public IslandData(final World world, final IIslandBounds bounds, final BiomeAetherBase biome, final long seed)
+	public IslandData(final World world, final IPrepSectorData parent, final IIslandBounds bounds, final BiomeAetherBase biome, final long seed)
 	{
-		this.world = world;
-		this.bounds = bounds;
-		this.biome = biome;
-
-		final Random rand = new Random(seed);
-
-		this.initProperties(rand);
+		super(world, parent, bounds, biome);
 
 		this.seed = seed;
+
+		this.initProperties(new Random(seed));
 	}
 
-	public IslandData(final World world, final NBTTagCompound tag)
+	public IslandData(World world, final IPrepSectorData parent, NBTTagCompound tag)
 	{
-		this.world = world;
+		super(world, parent);
+
 		this.read(tag);
 	}
 
@@ -110,18 +100,6 @@ public class IslandData implements IIslandData
 	public float getOpenAreaDecorationGenChance()
 	{
 		return this.openAreaDecorationGenChance;
-	}
-
-	@Override
-	public IIslandBounds getBounds()
-	{
-		return this.bounds;
-	}
-
-	@Override
-	public Biome getBiome()
-	{
-		return this.biome;
 	}
 
 	@Nonnull
@@ -172,15 +150,17 @@ public class IslandData implements IIslandData
 	}
 
 	@Override
+	public IPrepSectorData getParentSectorData()
+	{
+		return this.parent;
+	}
+
+	@Override
 	public void write(final NBTTagCompound tag)
 	{
-		final NBTFunnel funnel = new NBTFunnel(tag);
+		super.write(tag);
 
-		tag.setTag("Bounds", this.bounds.serialize());
-
-		tag.setString("BiomeID", this.biome.getRegistryName().toString());
 		tag.setLong("Seed", this.seed);
-
 		tag.setTag("RespawnPoint", NBTHelper.writeBlockPos(this.respawnPoint));
 
 		final NBTTagList blueprintInstances = new NBTTagList();
@@ -196,17 +176,16 @@ public class IslandData implements IIslandData
 
 		tag.setTag("blueprintInstances", blueprintInstances);
 
+		final NBTFunnel funnel = new NBTFunnel(tag);
 		funnel.setList("Components", this.components);
 	}
 
 	@Override
 	public void read(final NBTTagCompound tag)
 	{
+		super.read(tag);
+
 		final NBTFunnel funnel = new NBTFunnel(tag);
-
-		this.bounds = new IslandBounds(tag.getCompoundTag("Bounds"));
-
-		this.biome = (BiomeAetherBase) Biome.REGISTRY.getObject(new ResourceLocation(tag.getString("BiomeID")));
 
 		this.seed = tag.getLong("Seed");
 

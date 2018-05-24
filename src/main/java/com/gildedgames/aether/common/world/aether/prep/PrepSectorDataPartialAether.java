@@ -1,13 +1,13 @@
 package com.gildedgames.aether.common.world.aether.prep;
 
-import com.gildedgames.aether.api.world.islands.IIslandData;
-import com.gildedgames.aether.common.world.aether.island.data.IslandData;
+import com.gildedgames.aether.api.world.islands.IIslandDataPartial;
+import com.gildedgames.aether.common.world.aether.island.data.IslandDataPartial;
 import com.gildedgames.orbis_api.preparation.IPrepSector;
 import com.gildedgames.orbis_api.preparation.IPrepSectorData;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-public class PrepSectorDataAether implements IPrepSectorData
+public class PrepSectorDataPartialAether implements IPrepSectorData
 {
 	private boolean dirty;
 
@@ -19,30 +19,24 @@ public class PrepSectorDataAether implements IPrepSectorData
 
 	private long seed;
 
-	private IIslandData islandData;
+	private IIslandDataPartial islandData;
 
-	public PrepSectorDataAether(World world, int sectorX, int sectorY)
+	public PrepSectorDataPartialAether(World world, NBTTagCompound tag)
 	{
 		this.world = world;
-		this.sectorX = sectorX;
-		this.sectorY = sectorY;
-	}
-
-	public PrepSectorDataAether(World world, NBTTagCompound tag)
-	{
-		this.world = world;
-
 		this.read(tag);
 	}
 
-	public IIslandData getIslandData()
+	public IIslandDataPartial getIslandData()
 	{
 		return this.islandData;
 	}
 
 	@Override
-	public IPrepSector setParent(IPrepSector sector)
+	public IPrepSector setParent(IPrepSector iPrepSector)
 	{
+		this.parent = iPrepSector;
+
 		return this.parent;
 	}
 
@@ -115,29 +109,6 @@ public class PrepSectorDataAether implements IPrepSectorData
 		this.sectorY = tag.getInteger("y");
 		this.seed = tag.getLong("s");
 
-		this.islandData = new IslandData(this.world, this, tag.getCompoundTag("island"));
-	}
-
-	public void writePartial(NBTTagCompound tag)
-	{
-		tag.setInteger("x", this.sectorX);
-		tag.setInteger("y", this.sectorY);
-		tag.setLong("s", this.seed);
-
-		NBTTagCompound islandTag = new NBTTagCompound();
-
-		this.islandData.writePartial(islandTag);
-
-		tag.setTag("island", islandTag);
-	}
-
-	public void setIslandData(IIslandData island)
-	{
-		this.islandData = island;
-	}
-
-	public void tick()
-	{
-		this.islandData.tick();
+		this.islandData = new IslandDataPartial(this.world, this, tag.getCompoundTag("island"));
 	}
 }

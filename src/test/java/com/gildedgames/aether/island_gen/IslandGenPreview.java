@@ -98,7 +98,7 @@ public class IslandGenPreview
 
 		final BiomeAetherBase chosen = BiomesAether.HIGHLANDS;
 
-		this.island = new IslandData(null, bounds, chosen, seed);
+		this.island = new IslandData(null, null, bounds, chosen, seed);
 
 		this.island.addComponents(chosen.createIslandComponents(this.island));
 	}

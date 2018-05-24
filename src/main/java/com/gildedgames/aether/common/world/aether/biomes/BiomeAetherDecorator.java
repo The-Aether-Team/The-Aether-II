@@ -116,9 +116,8 @@ public class BiomeAetherDecorator
 		this.genPurpleAercloud = new WorldGenPurpleAercloud(BlockAercloud.getAercloudState(BlockAercloud.PURPLE_AERCLOUD), 4, false);
 	}
 
-	public void prepareDecorationsWholeIsland(final World world, final IIslandData island, IPrepSectorData sectorData, final Random random)
+	public void prepareDecorationsWholeIsland(final World world, BlockAccessIsland access, final IIslandData island, IPrepSectorData sectorData, final Random random)
 	{
-		IBlockAccessExtended access = new BlockAccessIsland(world, island, sectorData);
 		final DataPrimer primer = new DataPrimer(access);
 
 		final int startX = island.getBounds().getMinX();

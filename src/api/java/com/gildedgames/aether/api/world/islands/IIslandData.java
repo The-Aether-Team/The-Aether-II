@@ -6,14 +6,13 @@ import com.gildedgames.orbis_api.core.ICreationData;
 import com.gildedgames.orbis_api.core.PlacedBlueprint;
 import com.gildedgames.orbis_api.util.mc.NBT;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.biome.Biome;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.List;
 
-public interface IIslandData extends NBT
+public interface IIslandData extends IIslandDataPartial
 {
 	/**
 	 * The contained components have specialised data, usually
@@ -35,21 +34,6 @@ public interface IIslandData extends NBT
 	float getForestTreeCountModifier();
 
 	float getOpenAreaDecorationGenChance();
-
-	/**
-	 * Returns the bounding box of the island. These coordinates are normalized
-	 * to the sector's region.
-	 *
-	 * @return The bounding box of the island
-	 */
-	@Nonnull
-	IIslandBounds getBounds();
-
-	/**
-	 * @return The biome of this island.
-	 */
-	@Nonnull
-	Biome getBiome();
 
 	@Nonnull
 	IIslandGenerator getGenerator();
@@ -81,5 +65,4 @@ public interface IIslandData extends NBT
 	List<PlacedBlueprint> getPlacedBlueprints();
 
 	void setPlacedBlueprints(List<PlacedBlueprint> instances);
-
 }

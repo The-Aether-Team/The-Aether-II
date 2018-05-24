@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.world.aether.island;
 import com.gildedgames.aether.api.util.NoiseUtil;
 import com.gildedgames.aether.api.util.OpenSimplexNoise;
 import com.gildedgames.aether.api.world.islands.IIslandData;
+import com.gildedgames.aether.api.world.islands.IIslandDataPartial;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.world.aether.features.WorldGenAetherCaves;
@@ -93,7 +94,7 @@ public class WorldPreparationAether
 	}
 
 	// Calculate max penetration depth
-	public void replaceBiomeBlocks(final IIslandData island, final ChunkPrimer primer, final int chunkX, final int chunkZ, final Biome[] biomes)
+	public void replaceBiomeBlocks(final IIslandDataPartial island, final ChunkPrimer primer, final int chunkX, final int chunkZ, final Biome[] biomes)
 	{
 		// Penetration depth evalNormalised generation
 		this.depthBuffer = this.surfaceNoise.getRegion(this.depthBuffer,
