@@ -1,6 +1,7 @@
 package com.gildedgames.aether.client.renderer.entities.living;
 
 import com.gildedgames.aether.client.models.entities.living.ModelMoa;
+import com.gildedgames.aether.client.renderer.EyeUtil;
 import com.gildedgames.aether.client.util.SpriteGeneric;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
@@ -39,6 +40,12 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 	private static ResourceLocation TONGUE = AetherCore.getResource("textures/entities/moa/tongue.png");
 
 	private static ResourceLocation SADDLE = AetherCore.getResource("textures/entities/moa/saddle.png");
+
+	private static ResourceLocation EYES_CLOSED = AetherCore.getResource("textures/entities/moa/eyes_closed.png");
+
+	private static ResourceLocation PUPIL_LEFT = AetherCore.getResource("textures/entities/moa/pupil_left.png");
+
+	private static ResourceLocation PUPIL_RIGHT = AetherCore.getResource("textures/entities/moa/pupil_right.png");
 
 	public RenderMoa(RenderManager manager)
 	{
@@ -93,6 +100,10 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 
 		this.renderManager.renderEngine.bindTexture(BODY);
 		model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+
+		EyeUtil.renderEyes(this.renderManager, model, model.HeadFront, entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale,
+				PUPIL_LEFT,
+				PUPIL_RIGHT, EYES_CLOSED, false);
 
 		GlStateManager.color(base.getRed() / 255f, base.getGreen() / 255f, base.getBlue() / 255f);
 
