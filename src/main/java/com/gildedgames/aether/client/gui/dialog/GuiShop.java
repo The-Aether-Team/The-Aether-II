@@ -633,6 +633,8 @@ public class GuiShop extends GuiFrame implements ICurrencyListener, IExtendedGui
 
 				this.mc.player.inventory.getItemStack().setCount(this.mc.player.inventory.getItemStack().getCount() + amount);
 			}
+
+			this.addBuyCount(0);
 		}
 
 		if (InputHelper.isHovered(this.sell) && this.sell.isEnabled())
