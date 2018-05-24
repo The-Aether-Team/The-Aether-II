@@ -258,6 +258,11 @@ public class GuiShop extends GuiFrame implements ICurrencyListener, IExtendedGui
 						.min(this.getSelectedBuy().getStock(), Math.min(GuiShop.buyCount, Math.min(this.getSelectedBuy().getItemStack().getMaxStackSize(),
 								this.playerAether.getCurrencyModule().getCurrencyValue() / this.getSelectedBuy().getPrice())));
 
+				if (count <= 0)
+				{
+					count = 1;
+				}
+
 				this.stackGui.getItemStack().setCount(count);
 
 				int value = this.getSelectedBuy().getPrice() * count;
@@ -272,6 +277,11 @@ public class GuiShop extends GuiFrame implements ICurrencyListener, IExtendedGui
 			{
 				int max = (int) Math.min(this.getSelectedBuy().getItemStack().getMaxStackSize(),
 						this.playerAether.getCurrencyModule().getCurrencyValue() / this.getSelectedBuy().getPrice());
+
+				if (max <= 0)
+				{
+					max = 1;
+				}
 
 				this.buyCountUnlocked = MathHelper.clamp(this.buyCountUnlocked + buyCount, 1, max);
 
@@ -443,6 +453,11 @@ public class GuiShop extends GuiFrame implements ICurrencyListener, IExtendedGui
 
 			int count = (int) Math.min(GuiShop.buyCount, Math.min(this.getSelectedBuy().getItemStack().getMaxStackSize(),
 					this.playerAether.getCurrencyModule().getCurrencyValue() / this.getSelectedBuy().getPrice()));
+
+			if (count <= 0)
+			{
+				count = 1;
+			}
 
 			int value = this.getSelectedBuy().getPrice() * count;
 
