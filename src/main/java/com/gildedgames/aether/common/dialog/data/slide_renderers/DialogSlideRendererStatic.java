@@ -29,6 +29,8 @@ public class DialogSlideRendererStatic implements IDialogSlideRenderer
 
 	private double scale = 1.0;
 
+	private int width, height;
+
 	@Override
 	public void setup(IDialogSlide slide)
 	{
@@ -48,6 +50,16 @@ public class DialogSlideRendererStatic implements IDialogSlideRenderer
 		{
 			this.scale = Double.valueOf(data.get("scale"));
 		}
+
+		if (data.containsKey("width"))
+		{
+			this.width = Integer.valueOf(data.get("width"));
+		}
+
+		if (data.containsKey("height"))
+		{
+			this.height = Integer.valueOf(data.get("height"));
+		}
 	}
 
 	@Override
@@ -60,8 +72,8 @@ public class DialogSlideRendererStatic implements IDialogSlideRenderer
 
 		TextureManager textureManager = Minecraft.getMinecraft().renderEngine;
 
-		double scaledWidth = 110 * this.scale;
-		double scaledHeight = 98 * this.scale;
+		double scaledWidth = this.width * this.scale;
+		double scaledHeight = this.height * this.scale;
 
 		GlStateManager.pushMatrix();
 
@@ -70,7 +82,7 @@ public class DialogSlideRendererStatic implements IDialogSlideRenderer
 
 		textureManager.bindTexture(this.slideTexture);
 
-		Gui.drawModalRectWithCustomSizedTexture(0, 0, 0, 0, 110, 98, 110, 98);
+		Gui.drawModalRectWithCustomSizedTexture(0, 0, 0, 0, this.width, this.height, this.width, this.height);
 		GlStateManager.popMatrix();
 	}
 
