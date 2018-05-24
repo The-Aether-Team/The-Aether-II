@@ -67,6 +67,19 @@ public class RecipesAether
 		OreDictionary.registerOre("skyroot_decorative", new ItemStack(BlocksAether.skyroot_decorative, 1, BlockSkyrootDecorative.TILES_SMALL.getMeta()));
 		OreDictionary.registerOre("skyroot_decorative", new ItemStack(BlocksAether.skyroot_decorative, 1, BlockSkyrootDecorative.TOP_BEAM.getMeta()));
 		OreDictionary.registerOre("skyroot_decorative", new ItemStack(BlocksAether.skyroot_decorative, 1, BlockSkyrootDecorative.TOP_PLANKS.getMeta()));
+		OreDictionary.registerOre("skyroot_decorative", new ItemStack(BlocksAether.skyroot_beam, 1));
+
+
+		OreDictionary.registerOre("therawood_decorative", new ItemStack(BlocksAether.therawood_decorative, 1, BlockSkyrootDecorative.HIGHLIGHT.getMeta()));
+		OreDictionary.registerOre("therawood_decorative", new ItemStack(BlocksAether.therawood_decorative, 1, BlockSkyrootDecorative.BASE_BEAM.getMeta()));
+		OreDictionary.registerOre("therawood_decorative", new ItemStack(BlocksAether.therawood_decorative, 1, BlockSkyrootDecorative.BASE_PLANKS.getMeta()));
+		OreDictionary.registerOre("therawood_decorative", new ItemStack(BlocksAether.therawood_decorative, 1, BlockSkyrootDecorative.FLOORBOARDS.getMeta()));
+		OreDictionary.registerOre("therawood_decorative", new ItemStack(BlocksAether.therawood_decorative, 1, BlockSkyrootDecorative.TILES.getMeta()));
+		OreDictionary.registerOre("therawood_decorative", new ItemStack(BlocksAether.therawood_decorative, 1, BlockSkyrootDecorative.TILES_SMALL.getMeta()));
+		OreDictionary.registerOre("therawood_decorative", new ItemStack(BlocksAether.therawood_decorative, 1, BlockSkyrootDecorative.TOP_BEAM.getMeta()));
+		OreDictionary.registerOre("therawood_decorative", new ItemStack(BlocksAether.therawood_decorative, 1, BlockSkyrootDecorative.TOP_PLANKS.getMeta()));
+		OreDictionary.registerOre("therawood_decorative", new ItemStack(BlocksAether.therawood_beam, 1));
+
 
 		OreDictionary.registerOre("icestone_bricks_decorative",
 				new ItemStack(BlocksAether.icestone_bricks_decorative, 1, BlockIcestoneBricksDecorative.BASE_BRICKS.getMeta()));
@@ -80,6 +93,9 @@ public class RecipesAether
 				new ItemStack(BlocksAether.icestone_bricks_decorative, 1, BlockIcestoneBricksDecorative.FLAGSTONES.getMeta()));
 		OreDictionary.registerOre("icestone_bricks_decorative",
 				new ItemStack(BlocksAether.icestone_bricks_decorative, 1, BlockIcestoneBricksDecorative.KEYSTONE.getMeta()));
+		OreDictionary.registerOre("icestone_bricks_decorative",
+				new ItemStack(BlocksAether.icestone_pillar, 1));
+
 
 		OreDictionary.registerOre("holystone_brick_decorative",
 				new ItemStack(BlocksAether.holystone_brick_decorative, 1, BlockHolystoneDecorative.BASE_BRICKS.getMeta()));
@@ -95,6 +111,8 @@ public class RecipesAether
 				new ItemStack(BlocksAether.holystone_brick_decorative, 1, BlockHolystoneDecorative.HEADSTONE.getMeta()));
 		OreDictionary.registerOre("holystone_brick_decorative",
 				new ItemStack(BlocksAether.holystone_brick_decorative, 1, BlockHolystoneDecorative.KEYSTONE.getMeta()));
+		OreDictionary.registerOre("holystone_brick_decorative",
+				new ItemStack(BlocksAether.holystone_pillar, 1));
 
 		OreDictionary.registerOre("faded_holystone_brick_decorative",
 				new ItemStack(BlocksAether.faded_holystone_brick_decorative, 1, BlockFadedHolystoneDecorative.BASE_BRICKS.getMeta()));
@@ -110,6 +128,8 @@ public class RecipesAether
 				new ItemStack(BlocksAether.faded_holystone_brick_decorative, 1, BlockFadedHolystoneDecorative.HEADSTONE.getMeta()));
 		OreDictionary.registerOre("faded_holystone_brick_decorative",
 				new ItemStack(BlocksAether.faded_holystone_brick_decorative, 1, BlockFadedHolystoneDecorative.KEYSTONE.getMeta()));
+		OreDictionary.registerOre("faded_holystone_brick_decorative",
+				new ItemStack(BlocksAether.faded_holystone_pillar, 1));
 	}
 
 	public static void init()
