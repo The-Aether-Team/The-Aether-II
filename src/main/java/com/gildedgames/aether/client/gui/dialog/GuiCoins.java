@@ -32,7 +32,7 @@ public class GuiCoins extends GuiFrame
 	{
 		super(null, rect);
 
-		this.dim().mod().width(51).height(17).flush();
+		this.dim().mod().width(51).height(19).flush();
 
 		this.shouldDisplayAlways = shouldDisplayAlways;
 	}
@@ -118,6 +118,11 @@ public class GuiCoins extends GuiFrame
 			{
 				coins[3].dim().mod().center(false).x(maxWidth + 2).y(11).flush();
 			}
+
+			float maxBackWidth = Math.max(coins[1].dim().originalState().x() + coins[1].dim().width(),
+					coins[3] != null ? coins[3].dim().originalState().x() + coins[3].dim().width() : 0);
+
+			this.dim().mod().width(maxBackWidth).flush();
 		}
 	}
 

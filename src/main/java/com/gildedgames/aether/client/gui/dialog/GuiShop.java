@@ -140,7 +140,7 @@ public class GuiShop extends GuiFrame implements ICurrencyListener, IExtendedGui
 		this.guiLeft = (int) center.x() - 189 - 7;
 		this.guiTop = this.height - 198 - 14;
 
-		this.xSize = 345;
+		this.xSize = 385;
 		this.ySize = 180;
 	}
 
@@ -165,7 +165,7 @@ public class GuiShop extends GuiFrame implements ICurrencyListener, IExtendedGui
 		this.buyCoins = new GuiCoins(Dim2D.build().center(true).pos(center).y(this.height).addX(-167).addY(-157).flush(), false);
 		this.buyCoins.setVisible(false);
 
-		this.playerCoins = new GuiCoins(Dim2D.build().center(true).pos(center).y(this.height).addX(193).addY(-113).flush(), true);
+		this.playerCoins = new GuiCoins(Dim2D.build().centerY(true).pos(center).y(this.height).addX(168).addY(-113).flush(), true);
 		this.playerCoins.setVisible(true);
 
 		GuiTexture inventory = new GuiTexture(Dim2D.build().center(true).width(176).height(120).pos(center).y(this.height).addX(75).addY(-157F).flush(),
@@ -182,7 +182,7 @@ public class GuiShop extends GuiFrame implements ICurrencyListener, IExtendedGui
 		this.stackGui = new GuiItemStack(Dim2D.build().pos(center).y(this.height).addX(-132).addY(-166).scale(1.0F).flush());
 		this.buy = new GuiButtonVanilla(Dim2D.build().width(44).height(20).pos(center).y(this.height).addX(-106).addY(-167).flush());
 
-		this.buy.getInner().displayString = I18n.format("aether.shop.buy", buyCount);
+		this.buy.getInner().displayString = I18n.format("aether.shop.buy", isCountLocked ? buyCount : this.buyCountUnlocked);
 		this.buy.setEnabled(false);
 
 		this.back = new GuiButtonVanilla(Dim2D.build().width(20).height(20).pos(center).y(this.height).addX(-236).addY(-125).flush());
@@ -239,11 +239,17 @@ public class GuiShop extends GuiFrame implements ICurrencyListener, IExtendedGui
 		this.lock = new GuiTexture(Dim2D.build().center(true).height(16).width(16).pos(center).y(this.height).addX(-65 + 9).addY(-167 + 10).flush(), LOCK);
 		this.unlock = new GuiTexture(Dim2D.build().center(true).height(16).width(16).pos(center).y(this.height).addX(-65 + 9).addY(-167 + 10).flush(), UNLOCK);
 
-		this.giltBag = new GuiTexture(Dim2D.build().center(true).height(16).width(16).pos(center).y(this.height).addX(189).addY(-133).flush(), GILT_BAG);
-
-		this.addChildren(this.upArrow, this.downArrow, this.sellCoins, this.buyCoins, this.lockButton, this.lock, this.unlock, this.playerCoins, this.giltBag);
+		this.addChildren(this.playerCoins);
 
 		this.playerCoins.setCurrencyValue(this.playerAether.getCurrencyModule().getCurrencyValue());
+
+		this.giltBag = new GuiTexture(
+				Dim2D.build().center(true).height(16).width(16).pos(center).y(this.height)
+						.x(this.playerCoins.dim().x() + (this.playerCoins.dim().width() / 2) - 1)
+						.addY(-138).scale(1.5F).flush(),
+				GILT_BAG);
+
+		this.addChildren(this.upArrow, this.downArrow, this.sellCoins, this.buyCoins, this.lockButton, this.lock, this.unlock, this.giltBag);
 	}
 
 	public void addBuyCount(int buyCount)
@@ -263,7 +269,10 @@ public class GuiShop extends GuiFrame implements ICurrencyListener, IExtendedGui
 					count = 1;
 				}
 
-				this.stackGui.getItemStack().setCount(count);
+				if (this.stackGui.getItemStack() != null)
+				{
+					this.stackGui.getItemStack().setCount(count);
+				}
 
 				int value = this.getSelectedBuy().getPrice() * count;
 
@@ -275,8 +284,8 @@ public class GuiShop extends GuiFrame implements ICurrencyListener, IExtendedGui
 		{
 			if (this.getSelectedBuy() != null)
 			{
-				int max = (int) Math.min(this.getSelectedBuy().getItemStack().getMaxStackSize(),
-						this.playerAether.getCurrencyModule().getCurrencyValue() / this.getSelectedBuy().getPrice());
+				int max = (int) Math.min(this.getSelectedBuy().getStock(), Math.min(this.getSelectedBuy().getItemStack().getMaxStackSize(),
+						this.playerAether.getCurrencyModule().getCurrencyValue() / this.getSelectedBuy().getPrice()));
 
 				if (max <= 0)
 				{
@@ -285,7 +294,10 @@ public class GuiShop extends GuiFrame implements ICurrencyListener, IExtendedGui
 
 				this.buyCountUnlocked = MathHelper.clamp(this.buyCountUnlocked + buyCount, 1, max);
 
-				this.stackGui.getItemStack().setCount(this.buyCountUnlocked);
+				if (this.stackGui.getItemStack() != null)
+				{
+					this.stackGui.getItemStack().setCount(this.buyCountUnlocked);
+				}
 
 				int value = this.getSelectedBuy().getPrice() * this.buyCountUnlocked;
 
@@ -522,7 +534,10 @@ public class GuiShop extends GuiFrame implements ICurrencyListener, IExtendedGui
 							.min(this.getSelectedBuy().getStock(), Math.min(GuiShop.buyCount, Math.min(this.getSelectedBuy().getItemStack().getMaxStackSize(),
 									this.playerAether.getCurrencyModule().getCurrencyValue() / this.getSelectedBuy().getPrice())));
 
-					this.stackGui.getItemStack().setCount(count);
+					if (this.stackGui.getItemStack() != null)
+					{
+						this.stackGui.getItemStack().setCount(count);
+					}
 
 					int value = this.getSelectedBuy().getPrice() * count;
 
@@ -534,7 +549,10 @@ public class GuiShop extends GuiFrame implements ICurrencyListener, IExtendedGui
 			{
 				this.buy.getInner().displayString = I18n.format("aether.shop.buy", this.buyCountUnlocked);
 
-				this.stackGui.getItemStack().setCount(this.buyCountUnlocked);
+				if (this.stackGui.getItemStack() != null)
+				{
+					this.stackGui.getItemStack().setCount(this.buyCountUnlocked);
+				}
 
 				if (this.getSelectedBuy() != null)
 				{
@@ -657,6 +675,8 @@ public class GuiShop extends GuiFrame implements ICurrencyListener, IExtendedGui
 	public void onCurrencyChange(long prevCurrency, long newCurrency)
 	{
 		this.playerCoins.setCurrencyValue(newCurrency);
+
+		this.giltBag.dim().mod().x(this.playerCoins.dim().x() + (this.playerCoins.dim().width() / 2) - 1).flush();
 	}
 
 	@Override
