@@ -1,6 +1,10 @@
 package com.gildedgames.aether.common.items.tools.handlers;
 
+import com.gildedgames.aether.api.world.islands.IIslandDataPartial;
+import com.gildedgames.aether.api.world.islands.precipitation.PrecipitationStrength;
+import com.gildedgames.aether.api.world.islands.precipitation.PrecipitationType;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -33,7 +37,7 @@ public class ItemGravititeToolHandler implements IToolEventHandler
 			return;
 		}
 
-		PlayerAether aePlayer = PlayerAether.getPlayer(player);
+ 		PlayerAether aePlayer = PlayerAether.getPlayer(player);
 
 		if (!aePlayer.getEntity().capabilities.allowEdit)
 		{
@@ -106,7 +110,17 @@ public class ItemGravititeToolHandler implements IToolEventHandler
 	@Override
 	public void onEntityHit(ItemStack stack, Entity target, EntityLivingBase attacker)
 	{
+		World world = attacker.world;
+		BlockPos pos = attacker.getPosition();
 
+		IIslandDataPartial island = IslandHelper.get(world, pos.getX() >> 4, pos.getZ() >> 4);
+
+		if (!world.isRemote && island != null)
+		{
+			PrecipitationType type = PrecipitationType.SNOW;
+
+			island.getPrecipitation().startPrecipitation(type, PrecipitationStrength.STORM);
+		}
 	}
 
 	@Override

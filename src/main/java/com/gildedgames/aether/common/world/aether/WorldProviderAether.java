@@ -1,14 +1,12 @@
 package com.gildedgames.aether.common.world.aether;
 
 import com.gildedgames.aether.api.util.OpenSimplexNoise;
-import com.gildedgames.aether.client.renderer.RenderHandlerMulti;
 import com.gildedgames.aether.client.renderer.world.RenderWorldPrecipitation;
 import com.gildedgames.aether.client.renderer.world.RenderWorldSkybox;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeProviderAether;
 import com.gildedgames.aether.common.world.aether.island.ChunkGeneratorAether;
-import com.google.common.collect.Lists;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -51,7 +49,8 @@ public class WorldProviderAether extends WorldProviderSurface
 	@SideOnly(Side.CLIENT)
 	private void setupClientRenderer()
 	{
-		this.setSkyRenderer(new RenderHandlerMulti(Lists.newArrayList(new RenderWorldPrecipitation(), new RenderWorldSkybox())));
+		this.setSkyRenderer(new RenderWorldSkybox());
+		this.setWeatherRenderer(new RenderWorldPrecipitation());
 	}
 
 	@Override

@@ -15,11 +15,6 @@ public enum PrecipitationType
 		this.id = id;
 	}
 
-	public static PrecipitationType lookup(byte ordinal)
-	{
-		return PrecipitationType.VALUES[ordinal];
-	}
-
 	public static PrecipitationType lookup(String name)
 	{
 		for (PrecipitationType type : PrecipitationType.VALUES)
@@ -30,7 +25,7 @@ public enum PrecipitationType
 			}
 		}
 
-		return null;
+		return PrecipitationType.NONE;
 	}
 
 	public String getResourceId()

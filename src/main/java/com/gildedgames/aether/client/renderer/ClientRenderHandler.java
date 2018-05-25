@@ -6,6 +6,7 @@ import com.gildedgames.aether.client.gui.overlays.PortalOverlay;
 import com.gildedgames.aether.client.gui.overlays.SwetOverlay;
 import com.gildedgames.aether.client.models.entities.player.*;
 import com.gildedgames.aether.client.renderer.entities.living.RenderPlayerHelper;
+import com.gildedgames.aether.client.renderer.world.RenderWorldPrecipitation;
 import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.util.helpers.IslandHelper;
@@ -20,9 +21,12 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
+import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderSpecificHandEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -125,10 +129,29 @@ public class ClientRenderHandler
 
 		event.getLeft().add("");
 		event.getLeft().add(TextFormatting.AQUA + "Aether Island Sector" + TextFormatting.GREEN + " (Partial, Client)");
-		event.getLeft().add("- Location: (" + data.getParentSectorData().getSectorX() + ", " + data.getParentSectorData().getSectorY() + ")");
+		event.getLeft().add("- Parent Sector: Sector @ " + data.getParentSectorData().getSectorX() + ", " + data.getParentSectorData().getSectorY());
+		event.getLeft().add("- Island Bounds: (" + data.getBounds().getMinX() + ", " + data.getBounds().getMinY() + ", " + data.getBounds().getMinZ() + ")"
+				+ " -> (" + data.getBounds().getMaxX() + ", " + data.getBounds().getMaxY() + ", " + data.getBounds().getMaxZ() + ")");
 		event.getLeft().add("- Precipitation: " + data.getPrecipitation().getType().name() + " (" + data.getPrecipitation().getStrength().name() + ")");
 		event.getLeft().add("  - Duration: " + (data.getPrecipitation().getDuration()) + " ticks");
 		event.getLeft().add("  - Remaining: " + (data.getPrecipitation().getRemainingDuration()) + " ticks");
 	}
 
+	@SubscribeEvent
+	public void onClientRenderTick(TickEvent.ClientTickEvent event)
+	{
+		World world = Minecraft.getMinecraft().world;
+
+		if (world == null || !world.isRemote)
+		{
+			return;
+		}
+
+		IRenderHandler handler = world.provider.getWeatherRenderer();
+
+		if (handler instanceof RenderWorldPrecipitation)
+		{
+			((RenderWorldPrecipitation) handler).tick();
+		}
+	}
 }

@@ -17,10 +17,6 @@ public interface IPrecipitationManager extends INBTSerializable<NBTTagCompound>
 
 	PrecipitationStrength getStrength();
 
-	long getTimeStart();
-
-	long getTimeEnd();
-
 	long getDuration();
 
 	void tick();

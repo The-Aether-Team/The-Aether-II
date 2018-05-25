@@ -96,6 +96,12 @@ public class SoundsAether
 
 	public static final SoundEvent burrukai_attack = new SoundEvent(AetherCore.getResource("mob.burrukai.attack"));
 
+	public static final SoundEvent environment_rain_light = new SoundEvent(AetherCore.getResource("environment.rain.light"));
+
+	public static final SoundEvent environment_rain_heavy = new SoundEvent(AetherCore.getResource("environment.rain.heavy"));
+
+	public static final SoundEvent environment_snow_wind = new SoundEvent(AetherCore.getResource("environment.snow.wind"));
+
 	@SubscribeEvent
 	public static void onRegisterSounds(final RegistryEvent.Register<SoundEvent> event)
 	{
@@ -159,6 +165,10 @@ public class SoundsAether
 		r.register("mob.burrukai.hurt", burrukai_hurt);
 		r.register("mob.burrukai.death", burrukai_death);
 		r.register("mob.burrukai.attack", burrukai_attack);
+
+		r.register("environment.rain.light", environment_rain_light);
+		r.register("environment.rain.heavy", environment_rain_heavy);
+		r.register("environment.snow.wind", environment_snow_wind);
 	}
 
 	private static class SoundRegistryHelper

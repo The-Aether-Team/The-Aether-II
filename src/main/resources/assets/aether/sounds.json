@@ -403,5 +403,32 @@
 			"aether:random/container_break"
 		],
 		"subtitle": "subtitles.aether.random.dungeon.container.smash"
+	},
+	"environment.rain.light": {
+		"category": "neutral",
+		"sounds": [
+			"aether:environment/rain1",
+			"aether:environment/rain2",
+			"aether:environment/rain3"
+		],
+		"subtitle": "subtitles.aether.environment.rain.light"
+	},
+	"environment.rain.heavy": {
+		"category": "neutral",
+		"sounds": [
+			"aether:environment/rain_heavy1",
+			"aether:environment/rain_heavy2",
+			"aether:environment/rain_heavy3"
+		],
+		"subtitle": "subtitles.aether.environment.rain.heavy"
+	},
+	"environment.snow.wind": {
+		"category": "neutral",
+		"sounds": [
+			"aether:environment/wind1",
+			"aether:environment/wind2",
+			"aether:environment/wind3"
+		],
+		"subtitle": "subtitles.aether.environment.snow.wind"
 	}
 }

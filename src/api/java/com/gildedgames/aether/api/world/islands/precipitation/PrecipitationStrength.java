@@ -25,7 +25,7 @@ public enum PrecipitationStrength
 			}
 		}
 
-		return null;
+		return PrecipitationStrength.LIGHT;
 	}
 
 	public String getResourceId()

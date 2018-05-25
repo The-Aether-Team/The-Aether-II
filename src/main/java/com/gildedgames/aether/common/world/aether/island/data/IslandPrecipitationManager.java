@@ -46,8 +46,8 @@ public class IslandPrecipitationManager implements IPrecipitationManager
 		this.start = this.world.getTotalWorldTime();
 		this.lastStrengthChange = this.start;
 
-		// Precipitate for 3600 + rand(16000) ticks
-		this.duration = 3600 + this.world.rand.nextInt(16000);
+		// Precipitate for 7000 + rand(30000) ticks
+		this.duration = 7000 + this.world.rand.nextInt(30000);
 
 		this.sendUpdates();
 	}
@@ -66,16 +66,7 @@ public class IslandPrecipitationManager implements IPrecipitationManager
 			// And it's time to change weather
 			if (this.getRemainingDuration() <= 0)
 			{
-				// Set to light precipitate with a 60% chance
-				if (this.world.rand.nextInt(100) > 40)
-				{
-					this.startPrecipitation(this.getPrecipitationTypeForBiome(), PrecipitationStrength.LIGHT);
-				}
-				// Or wait another 6000 + rand(2000) ticks
-				else
-				{
-					this.endPrecipitation(this.world.rand.nextInt(6000) + 2000);
-				}
+				this.startPrecipitation(this.getPrecipitationTypeForBiome(), PrecipitationStrength.LIGHT);
 			}
 		}
 		// If it is precipitating
@@ -84,10 +75,10 @@ public class IslandPrecipitationManager implements IPrecipitationManager
 			// Make weather clear for 20000 + rand(6000) ticks if the precipitation is ending
 			if (this.getRemainingDuration() <= 0)
 			{
-				this.endPrecipitation(this.world.rand.nextInt(20000) + 6000);
+				this.endPrecipitation(this.world.rand.nextInt(45000) + 15000);
 			}
 			// Otherwise, if we haven't changed intensity in 4000 ticks and there's still 4000 ticks remaining in the precipitation
-			else if (this.getRemainingDuration() > 4000 && this.getTimeSinceLastStrengthChange() > 4000)
+			else if (this.getRemainingDuration() > 1000 && this.getTimeSinceLastStrengthChange() > 4000)
 			{
 				// Intensify with a 30% chance
 				boolean intensify = this.world.rand.nextInt(100) > 70;
@@ -137,7 +128,7 @@ public class IslandPrecipitationManager implements IPrecipitationManager
 			case HEAVY:
 				return 0.3f;
 			case STORM:
-				return 0.7f;
+				return 0.6f;
 		}
 
 		return 0.0f;
@@ -200,18 +191,6 @@ public class IslandPrecipitationManager implements IPrecipitationManager
 	public PrecipitationStrength getStrength()
 	{
 		return this.strength;
-	}
-
-	@Override
-	public long getTimeStart()
-	{
-		return this.start;
-	}
-
-	@Override
-	public long getTimeEnd()
-	{
-		return this.start + this.duration;
 	}
 
 	@Override

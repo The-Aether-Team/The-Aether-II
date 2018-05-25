@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.world.islands.IIslandDataPartial;
 import com.gildedgames.aether.api.world.islands.precipitation.PrecipitationStrength;
 import com.gildedgames.aether.api.world.islands.precipitation.PrecipitationType;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
@@ -13,8 +14,11 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraftforge.client.IRenderHandler;
 
 import java.util.HashMap;
@@ -34,25 +38,31 @@ public class RenderWorldPrecipitation extends IRenderHandler
 
 	public RenderWorldPrecipitation()
 	{
-		for (int i = 0; i < 32; ++i)
+		for (int x = 0; x < 32; ++x)
 		{
-			for (int j = 0; j < 32; ++j)
+			for (int y = 0; y < 32; ++y)
 			{
-				float f = (float) (j - 16);
-				float f1 = (float) (i - 16);
-				float f2 = MathHelper.sqrt(f * f + f1 * f1);
-				this.rainXCoords[i << 5 | j] = -f1 / f2;
-				this.rainYCoords[i << 5 | j] = f / f2;
+				float y2 = (float) (y - 16);
+				float x2 = (float) (x - 16);
+
+				float f2 = MathHelper.sqrt(y2 * y2 + x2 * x2);
+
+				this.rainXCoords[x << 5 | y] = -x2 / f2;
+				this.rainYCoords[x << 5 | y] = y2 / f2;
 			}
 		}
+	}
+
+	// Called every 20th of a second
+	public void tick()
+	{
+		this.renderTicks++;
 	}
 
 	@Override
 	public void render(float partialTicks, WorldClient world, Minecraft mc)
 	{
-		this.updateLightmap(mc, partialTicks);
-
-		this.renderTicks++;
+		this.playSounds(mc);
 
 		mc.entityRenderer.enableLightmap();
 
@@ -90,8 +100,6 @@ public class RenderWorldPrecipitation extends IRenderHandler
 
 		int continuous = -1;
 
-		float ticks = (float) this.renderTicks + partialTicks;
-
 		buffer.setTranslation(-x, -y, -z);
 
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -115,8 +123,6 @@ public class RenderWorldPrecipitation extends IRenderHandler
 				{
 					continue;
 				}
-
-				double intensity = island.getPrecipitation().getStrength() == PrecipitationStrength.STORM ? 128.0f : (island.getPrecipitation().getStrength() == PrecipitationStrength.HEAVY ? 180.0f : 256.0f);
 
 				float opacity = Math.min(1.0f, island.getPrecipitation().getStrength(partialTicks));
 
@@ -152,6 +158,9 @@ public class RenderWorldPrecipitation extends IRenderHandler
 
 						if (island.getPrecipitation().getType() == PrecipitationType.RAIN)
 						{
+							float intensity = island.getPrecipitation().getStrength() == PrecipitationStrength.STORM ? 48.0f : (island.getPrecipitation().getStrength() == PrecipitationStrength.HEAVY ? 64.0f : 128.0f);
+							intensity *= island.getPrecipitation().getStrength(partialTicks);
+
 							if (continuous != 0)
 							{
 								if (continuous >= 0)
@@ -202,6 +211,9 @@ public class RenderWorldPrecipitation extends IRenderHandler
 						}
 						else if (island.getPrecipitation().getType() == PrecipitationType.SNOW)
 						{
+							float intensity = island.getPrecipitation().getStrength() == PrecipitationStrength.STORM ? 2.5f : (island.getPrecipitation().getStrength() == PrecipitationStrength.HEAVY ? 1.4f : 0.6f);
+							intensity *= island.getPrecipitation().getStrength(partialTicks);
+
 							if (continuous != 1)
 							{
 								if (continuous >= 0)
@@ -220,10 +232,12 @@ public class RenderWorldPrecipitation extends IRenderHandler
 								buffer.begin(7, DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
 							}
 
-							double d8 = (double) (-((float) (this.renderTicks & 511) + partialTicks) / 512.0F);
+							float ticks = (this.renderTicks + partialTicks) * intensity;
 
-							double uOffset = this.random.nextDouble() + (ticks * this.random.nextGaussian() * 0.01D);
-							double vOffset = this.random.nextDouble() + (ticks * this.random.nextGaussian() * 0.001D);
+							double d8 = -(this.renderTicks + partialTicks) * 0.001D * intensity;
+
+							double uOffset = this.random.nextDouble() + -((ticks + partialTicks) * this.random.nextGaussian() * 0.01D);
+							double vOffset = this.random.nextDouble() + -((ticks + partialTicks) * this.random.nextGaussian() * 0.001D);
 
 							double d11 = (double) ((float) x2 + 0.5F) - entity.posX;
 							double d12 = (double) ((float) z2 + 0.5F) - entity.posZ;
@@ -263,8 +277,13 @@ public class RenderWorldPrecipitation extends IRenderHandler
 		mc.entityRenderer.disableLightmap();
 	}
 
-	private void updateLightmap(Minecraft mc, float partialTicks)
+	private void playSounds(Minecraft mc)
 	{
+		if (mc.isGamePaused())
+		{
+			return;
+		}
+
 		BlockPos pos = mc.player.getPosition();
 
 		IIslandDataPartial island = IslandHelper.getPartial(mc.world, pos.getX() >> 4, pos.getZ() >> 4);
@@ -274,11 +293,66 @@ public class RenderWorldPrecipitation extends IRenderHandler
 			return;
 		}
 
-		float strength = 1.0f - (island.getPrecipitation().getSkyDarkness() * island.getPrecipitation().getStrength(partialTicks));
+		if (island.getPrecipitation().getType() == PrecipitationType.NONE || island.getPrecipitation().getStrength(mc.getRenderPartialTicks()) <= 0.7f)
+		{
+			return;
+		}
 
-		float f = mc.world.getSunBrightness(partialTicks);
-		f = f * strength;
+		int radius = 12;
 
-		EntityRendererHelper.updateLightmap(mc, partialTicks, f);
+		int chance;
+
+		switch (island.getPrecipitation().getStrength())
+		{
+			case LIGHT:
+				chance = 95;
+				break;
+			default:
+				chance = 90;
+				break;
+		}
+
+		if (mc.world.rand.nextInt(100) > chance)
+		{
+			int x = pos.getX() + mc.world.rand.nextInt(radius) - (radius / 2);
+			int z = pos.getZ() + mc.world.rand.nextInt(radius) - (radius / 2);
+
+			int y = mc.world.getHeight(x, z);
+
+			if (mc.world.getLightFor(EnumSkyBlock.SKY, new BlockPos(x, y, z)) > 13)
+			{
+				SoundEvent event = null;
+
+				float volume = 1.0f;
+
+				if (island.getPrecipitation().getType() == PrecipitationType.RAIN)
+				{
+					switch (island.getPrecipitation().getStrength())
+					{
+						case LIGHT:
+							event = SoundsAether.environment_rain_light;
+							break;
+						default:
+							event = SoundsAether.environment_rain_heavy;
+							break;
+					}
+				}
+				else if (island.getPrecipitation().getType() == PrecipitationType.SNOW && island.getPrecipitation().getStrength() == PrecipitationStrength.STORM)
+				{
+					event = SoundsAether.environment_snow_wind;
+					volume = 0.6f;
+				}
+
+				if (event == null)
+				{
+					return;
+				}
+
+				mc.world.playSound(x, y, z, event, SoundCategory.WEATHER, volume, 0.9f + (mc.world.rand.nextFloat() * 0.2f), false);
+			}
+		}
 	}
+
+
+
 }
