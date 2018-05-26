@@ -545,6 +545,8 @@ public class GuiShop extends GuiFrame implements ICurrencyListener, IExtendedGui
 					this.buyCoins.setCurrencyValue(value);
 					this.buyCoins.setVisible(true);
 				}
+
+				this.addBuyCount(0);
 			}
 			else
 			{
