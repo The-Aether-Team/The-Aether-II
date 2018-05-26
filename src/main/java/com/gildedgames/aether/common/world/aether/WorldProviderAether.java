@@ -7,6 +7,7 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeProviderAether;
 import com.gildedgames.aether.common.world.aether.island.ChunkGeneratorAether;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -100,7 +101,10 @@ public class WorldProviderAether extends WorldProviderSurface
 	@Override
 	public boolean canSnowAt(final BlockPos pos, final boolean checkLight)
 	{
-		return super.canSnowAt(pos, checkLight);
+		IBlockState down = this.world.getBlockState(pos.down());
+
+		return super.canSnowAt(pos, checkLight) && down != BlocksAether.highlands_ice.getDefaultState()
+				&& down != BlocksAether.highlands_packed_ice.getDefaultState();
 	}
 
 	@Override

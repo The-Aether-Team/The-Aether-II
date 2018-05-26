@@ -4,17 +4,36 @@ import com.gildedgames.aether.api.world.islands.IIslandDataPartial;
 import com.gildedgames.aether.api.world.islands.precipitation.IPrecipitationManager;
 import com.gildedgames.aether.api.world.islands.precipitation.PrecipitationStrength;
 import com.gildedgames.aether.api.world.islands.precipitation.PrecipitationType;
+import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.IBlockSnowy;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketUpdatePrecipitation;
+import com.gildedgames.aether.common.util.helpers.WorldUtil;
 import com.gildedgames.aether.common.world.aether.prep.PrepSectorDataAether;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import net.minecraft.world.chunk.Chunk;
+
+import java.util.Iterator;
+import java.util.Random;
 
 public class IslandPrecipitationManager implements IPrecipitationManager
 {
 	private final World world;
 
 	private final IIslandDataPartial parent;
+
+	/**
+	 * Contains the current Linear Congruential Generator seed for block updates. Used with an A value of 3 and a C
+	 * value of 0x3c6ef35f, producing a highly planar series of values ill-suited for choosing random blocks in a
+	 * 16x128x16 field.
+	 */
+	protected int updateLCG = (new Random()).nextInt();
 
 	private PrecipitationType type;
 
@@ -52,6 +71,7 @@ public class IslandPrecipitationManager implements IPrecipitationManager
 		this.sendUpdates();
 	}
 
+	@Override
 	public void tick()
 	{
 		// Clients never update their own weather
@@ -94,6 +114,78 @@ public class IslandPrecipitationManager implements IPrecipitationManager
 					this.modifyStrength(-1);
 				}
 			}
+
+			// Only iterate through persistent chunks
+			for (Iterator<Chunk> iterator = this.world.getPersistentChunkIterable(((WorldServer) this.world).getPlayerChunkMap().getChunkIterator()); iterator
+					.hasNext(); )
+			{
+				Chunk chunk = iterator.next();
+
+				int j = chunk.x * 16;
+				int k = chunk.z * 16;
+
+				// Make sure we're in this manager's island bounds
+				if (!(this.parent.getBounds().getMinX() <= j && this.parent.getBounds().getMinZ() <= k && this.parent.getBounds().getMaxX() >= j
+						&& this.parent.getBounds().getMaxZ() >= k))
+				{
+					continue;
+				}
+
+				// If storm, generate lightning at random positions, closer to entities
+				if (this.getStrength() == PrecipitationStrength.STORM && this.world.rand.nextInt(100000) == 0)
+				{
+					// Random position code I don't quite understand, vanilla does this for random block ticks
+					this.updateLCG = this.updateLCG * 3 + 1013904223;
+					int l = this.updateLCG >> 2;
+
+					BlockPos blockpos = WorldUtil.adjustPosToNearbyEntity(this.world, new BlockPos(j + (l & 15), 0, k + (l >> 8 & 15)));
+
+					this.world.addWeatherEffect(
+							new EntityLightningBolt(this.world, (double) blockpos.getX(), (double) blockpos.getY(), (double) blockpos.getZ(), false));
+				}
+
+				if (this.world.rand.nextInt(16) == 0)
+				{
+					// Random position code I don't quite understand, vanilla does this for random block ticks
+					this.updateLCG = this.updateLCG * 3 + 1013904223;
+					int j2 = this.updateLCG >> 2;
+
+					BlockPos blockpos1 = this.world.getPrecipitationHeight(new BlockPos(j + (j2 & 15), 0, k + (j2 >> 8 & 15)));
+					BlockPos blockpos2 = blockpos1.down();
+
+					// Freeze water
+					if (this.world.isAreaLoaded(blockpos2, 1))
+					{
+						if (this.world.canBlockFreezeNoWater(blockpos2))
+						{
+							this.world.setBlockState(blockpos2, Blocks.ICE.getDefaultState());
+						}
+					}
+
+					// Generate snow layers
+					if (this.getType() == PrecipitationType.SNOW)
+					{
+						IBlockState state = this.world.getBlockState(blockpos1);
+
+						if (this.world.canSnowAt(blockpos1, true))
+						{
+							this.world.setBlockState(blockpos1, BlocksAether.highlands_snow_layer.getDefaultState());
+						}
+						else if (state.getBlock() instanceof IBlockSnowy)
+						{
+							final IBlockState newState = state.withProperty(IBlockSnowy.PROPERTY_SNOWY, Boolean.TRUE);
+
+							this.world.setBlockState(blockpos1, newState, 2);
+						}
+					}
+
+					// Fill random blocks with rain, used by Cauldrons.
+					if (this.getType() == PrecipitationType.RAIN)
+					{
+						this.world.getBlockState(blockpos2).getBlock().fillWithRain(this.world, blockpos2);
+					}
+				}
+			}
 		}
 	}
 
@@ -102,9 +194,9 @@ public class IslandPrecipitationManager implements IPrecipitationManager
 	{
 		float progress;
 
-		if ((this.world.getTotalWorldTime() + partialTicks) - start < 200)
+		if ((this.world.getTotalWorldTime() + partialTicks) - this.start < 200)
 		{
-			progress = ((this.world.getTotalWorldTime() + partialTicks) - start) / 200.0f;
+			progress = ((this.world.getTotalWorldTime() + partialTicks) - this.start) / 200.0f;
 		}
 		else if ((this.start + this.duration) - (this.world.getTotalWorldTime() + partialTicks) < 200)
 		{
@@ -134,7 +226,6 @@ public class IslandPrecipitationManager implements IPrecipitationManager
 		return 0.0f;
 	}
 
-
 	private void endPrecipitation(int duration)
 	{
 		this.type = PrecipitationType.NONE;
@@ -148,6 +239,7 @@ public class IslandPrecipitationManager implements IPrecipitationManager
 		this.sendUpdates();
 	}
 
+	@Override
 	public long getRemainingDuration()
 	{
 		return (this.start + this.duration) - this.world.getTotalWorldTime();
@@ -170,7 +262,8 @@ public class IslandPrecipitationManager implements IPrecipitationManager
 	{
 		if (!this.world.isRemote)
 		{
-			NetworkingAether.sendPacketToDimension(new PacketUpdatePrecipitation((PrepSectorDataAether) this.parent.getParentSectorData()), this.world.provider.getDimension());
+			NetworkingAether.sendPacketToDimension(new PacketUpdatePrecipitation((PrepSectorDataAether) this.parent.getParentSectorData()),
+					this.world.provider.getDimension());
 
 			this.parent.getParentSectorData().markDirty();
 		}
