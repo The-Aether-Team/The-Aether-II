@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 public class PlayerRollMovementModule extends PlayerAetherModule
 {
-	private static final int MAX_ROLLING_TICKS = 10, ROLL_COOLDOWN_TICKS = 10;
+	private static final int MAX_ROLLING_TICKS = 12, ROLL_COOLDOWN_TICKS = 10;
 
 	private boolean isRolling;
 
@@ -27,33 +27,6 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 	public PlayerRollMovementModule(final PlayerAether playerAether)
 	{
 		super(playerAether);
-	}
-
-	public static float getLookAtYaw(Vec3d vec)
-	{
-		double dx = vec.x;
-		double dz = vec.z;
-
-		double yaw = 0;
-
-		if (dx != 0)
-		{
-			if (dx < 0)
-			{
-				yaw = 1.5 * Math.PI;
-			}
-			else
-			{
-				yaw = 0.5 * Math.PI;
-			}
-			yaw -= Math.atan(dz / dx);
-		}
-		else if (dz < 0)
-		{
-			yaw = Math.PI;
-		}
-
-		return (float) (-yaw * 180 / Math.PI - 90);
 	}
 
 	public boolean isRolling()
@@ -82,39 +55,55 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 		p.eyeHeight = (height / this.prevHeight) * this.prevEyeHeight;
 	}
 
-	protected final Vec3d getVectorForRotation(float pitch, float yaw)
+	protected final Vec3d getVectorForRotation(float yaw)
 	{
 		float f = MathHelper.cos(-yaw * 0.017453292F - (float) Math.PI);
 		float f1 = MathHelper.sin(-yaw * 0.017453292F - (float) Math.PI);
-		float f2 = -MathHelper.cos(-pitch * 0.017453292F);
-		float f3 = MathHelper.sin(-pitch * 0.017453292F);
-		return new Vec3d((double) (f1 * f2), (double) f3, (double) (f * f2));
+		return new Vec3d((double) (f1 * -1F), 0, (double) (f * -1F));
+	}
+
+	public boolean canRoll()
+	{
+		return AetherHelper.isEnabled(this.getWorld()) && this.rollCooldown <= 0 && !getEntity().isSneaking() && getEntity().onGround;
+	}
+
+	public float getDamageReduction(float inAmount)
+	{
+		return inAmount * (Math.abs(this.ticksRolling / (float) (MAX_ROLLING_TICKS) - 0.5f) * 2F);
 	}
 
 	public void startRolling(PacketSpecialMovement.Action action)
 	{
-		if (!AetherHelper.isEnabled(this.getWorld()) || this.rollCooldown > 0 || getPlayer().getEntity().isSneaking())
+		this.startRotationYaw = this.getEntity().rotationYaw;
+
+		final float angle;
+
+		if (action == PacketSpecialMovement.Action.ROLL_FORWARD)
+		{
+			angle = 0F;
+		}
+		else if (action == PacketSpecialMovement.Action.ROLL_BACK)
+		{
+			angle = 180F;
+		}
+		else if (action == PacketSpecialMovement.Action.ROLL_LEFT)
+		{
+			angle = -90F;
+		}
+		else if (action == PacketSpecialMovement.Action.ROLL_RIGHT)
+		{
+			angle = 90F;
+		}
+		else
 		{
 			return;
 		}
 
-		this.startRotationYaw = this.getEntity().rotationYaw;
+		this.rollingRotationYaw = this.startRotationYaw + angle;
 
-		if (action == PacketSpecialMovement.Action.ROLL_FORWARD)
+		if (!canRoll())
 		{
-			this.rollingRotationYaw = this.startRotationYaw;
-		}
-		else if (action == PacketSpecialMovement.Action.ROLL_BACK)
-		{
-			this.rollingRotationYaw = this.getEntity().rotationYaw + 180.0F;
-		}
-		else if (action == PacketSpecialMovement.Action.ROLL_LEFT)
-		{
-			this.rollingRotationYaw = this.getEntity().rotationYaw - 90.0F;
-		}
-		else if (action == PacketSpecialMovement.Action.ROLL_RIGHT)
-		{
-			this.rollingRotationYaw = this.getEntity().rotationYaw + 90.0F;
+			return;
 		}
 
 		this.prevStepHeight = this.getEntity().stepHeight;
@@ -139,8 +128,8 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 			if (this.ticksRolling <= MAX_ROLLING_TICKS)
 			{
 				float newHeight = MathHelper
-						.clamp(this.prevHeight / 4f + this.prevHeight * (Math.abs(this.ticksRolling / (float) MAX_ROLLING_TICKS - 0.5f)),
-								this.prevHeight / 2f, this.prevHeight);
+						.clamp(this.prevHeight / 4F + this.prevHeight * (Math.abs(this.ticksRolling / (float) (MAX_ROLLING_TICKS) - 0.5F)),
+								this.prevHeight / 2F, this.prevHeight);
 
 				this.setEntityHeight(newHeight);
 			}
@@ -163,9 +152,21 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 
 				if (this.getEntity().onGround)
 				{
-					Vec3d vec = this.getVectorForRotation(0, (this.getEntity().rotationYaw - this.startRotationYaw) + this.rollingRotationYaw);
+					Vec3d vec = this.getVectorForRotation(this.getEntity().rotationYaw - this.startRotationYaw + this.rollingRotationYaw);
 
-					double speed = Math.max(0.0, Math.pow(1.25, this.ticksRolling / 7.0) - 1.0) + 0.25;
+					double speed = Math.max(0.0D, Math.pow(1.25D, this.ticksRolling / 8f) - 1) + 0.25D;
+
+					if (ticksRolling > MAX_ROLLING_TICKS * .7F && !this.getEntity().isSprinting())
+					{
+						if (ticksRolling == MAX_ROLLING_TICKS)
+						{
+							speed = 0.05f;
+						}
+						else
+						{
+							speed /= (ticksRolling / (float) MAX_ROLLING_TICKS) * 5F;
+						}
+					}
 
 					this.getEntity().motionX = (vec.x) * speed;
 					this.getEntity().motionZ = (vec.z) * speed;
@@ -173,21 +174,11 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 				}
 
 				this.ticksRolling++;
-
-				if (!this.getWorld().isRemote)
-				{
-					this.getEntity().setEntityInvulnerable(true);
-				}
 			}
 			else
 			{
 				this.isRolling = false;
 				this.ticksRolling = 0;
-
-				if (!this.getWorld().isRemote)
-				{
-					this.getEntity().setEntityInvulnerable(false);
-				}
 
 				this.getEntity().stepHeight = this.prevStepHeight;
 			}
