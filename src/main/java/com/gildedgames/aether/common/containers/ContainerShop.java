@@ -21,7 +21,7 @@ public class ContainerShop extends Container
 	public ContainerShop(final InventoryPlayer playerInventory, IShopInstance shopInstance)
 	{
 		this.shopInstance = shopInstance;
-		this.shopInventory = shopInstance.getInventory();
+		this.shopInventory = shopInstance.getInventory(playerInventory.player);
 
 		this.addSlotToContainer(new SlotSell(this.shopInventory, 0, 257, 7));
 

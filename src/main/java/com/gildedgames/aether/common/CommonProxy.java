@@ -12,6 +12,7 @@ import com.gildedgames.aether.common.network.api.GildedGamesAccountApiImpl;
 import com.gildedgames.aether.common.registry.ContentRegistry;
 import com.gildedgames.aether.common.shop.ShopBuy;
 import com.gildedgames.aether.common.shop.ShopInstance;
+import com.gildedgames.aether.common.shop.ShopInventory;
 import com.gildedgames.aether.common.util.helpers.PerfHelper;
 import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.IrradiatedForestsData;
 import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.MagneticHillPillar;
@@ -66,6 +67,7 @@ public class CommonProxy implements IAetherServices
 		s.register(4, IslandVariables.class, new Instantiator<>(IslandVariables.class));
 		s.register(5, ShopInstance.class, new Instantiator<>(ShopInstance.class));
 		s.register(6, ShopBuy.class, new Instantiator<>(ShopBuy.class));
+		s.register(7, ShopInventory.class, new Instantiator<>(ShopInventory.class));
 
 		OrbisAPI.services().io().register(s);
 
