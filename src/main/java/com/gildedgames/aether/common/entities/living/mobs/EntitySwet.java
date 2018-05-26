@@ -1,17 +1,18 @@
 package com.gildedgames.aether.common.entities.living.mobs;
 
+import com.gildedgames.aether.api.world.islands.IIslandData;
+import com.gildedgames.aether.api.world.islands.precipitation.PrecipitationType;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
-import com.gildedgames.aether.common.entities.ai.hopping.AIHopFloat;
-import com.gildedgames.aether.common.entities.ai.hopping.AIHopFollowAttackTarget;
-import com.gildedgames.aether.common.entities.ai.hopping.AIHopWander;
-import com.gildedgames.aether.common.entities.ai.hopping.HoppingMoveHelper;
+import com.gildedgames.aether.common.entities.ai.EntityAIRestrictRain;
+import com.gildedgames.aether.common.entities.ai.hopping.*;
 import com.gildedgames.aether.common.entities.ai.swet.AILatchOn;
 import com.gildedgames.aether.common.entities.util.EntityExtendedMob;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketDetachSwet;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
+import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.player.EntityPlayer;
@@ -65,6 +66,8 @@ public class EntitySwet extends EntityExtendedMob
 
 		this.moveHelper = hoppingMoveHelper;
 
+		this.tasks.addTask(2, new EntityAIRestrictRain(this));
+		this.tasks.addTask(3, new AIHopHideFromRain(this, hoppingMoveHelper, 1.3D));
 		this.tasks.addTask(0, new AILatchOn(this, hoppingMoveHelper));
 		this.tasks.addTask(1, new AIHopWander(this, hoppingMoveHelper));
 		this.tasks.addTask(2, new AIHopFloat(this, hoppingMoveHelper));
@@ -92,15 +95,15 @@ public class EntitySwet extends EntityExtendedMob
 	}
 
 	@Override
-	protected boolean isValidLightLevel()
-	{
-		return true;
-	}
-
-	@Override
 	public float getBlockPathWeight(BlockPos pos)
 	{
 		return this.world.getBlockState(pos.down()).getBlock() == BlocksAether.aether_grass ? 10.0F : this.world.getLightBrightness(pos) - 0.5F;
+	}
+
+	@Override
+	protected boolean isValidLightLevel()
+	{
+		return true;
 	}
 
 	public int getFoodSaturation()
@@ -228,7 +231,10 @@ public class EntitySwet extends EntityExtendedMob
 	@Override
 	public void onUpdate()
 	{
-		if (this.isInWater())
+		IIslandData island = IslandHelper.get(this.world, this.chunkCoordX, this.chunkCoordZ);
+
+		if (this.isInWater() || (island != null && island.getPrecipitation().getType() == PrecipitationType.RAIN && this.world
+				.canSeeSky(new BlockPos(this.posX, this.getEntityBoundingBox().minY, this.posZ))))
 		{
 			this.timeStarved = -this.rand.nextInt(60);
 

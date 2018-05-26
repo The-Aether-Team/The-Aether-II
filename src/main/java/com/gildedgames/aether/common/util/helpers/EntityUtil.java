@@ -84,9 +84,14 @@ public class EntityUtil
 
 	public static void facePos(final Entity entity, final BlockPos pos, final float maxYawIncrease, final float maxPitchIncrease)
 	{
-		final double x = pos.getX() - entity.posX;
-		final double y = pos.getY() - entity.posY;
-		final double z = pos.getZ() - entity.posZ;
+		facePos(entity, pos.getX(), pos.getY(), pos.getZ(), maxYawIncrease, maxPitchIncrease);
+	}
+
+	public static void facePos(final Entity entity, double posX, double posY, double posZ, final float maxYawIncrease, final float maxPitchIncrease)
+	{
+		final double x = posX - entity.posX;
+		final double y = posY - entity.posY;
+		final double z = posZ - entity.posZ;
 
 		final double d3 = (double) MathHelper.sqrt(x * x + z * z);
 		final float f = (float) (MathHelper.atan2(z, x) * (180D / Math.PI)) - 90.0F;

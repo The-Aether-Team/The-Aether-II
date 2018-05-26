@@ -1,6 +1,8 @@
 package com.gildedgames.aether.common.entities.living.passive;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.entities.ai.EntityAIHideFromRain;
+import com.gildedgames.aether.common.entities.ai.EntityAIRestrictRain;
 import com.gildedgames.aether.common.entities.ai.kirrid.EntityAIEatAetherGrass;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
@@ -52,7 +54,15 @@ public class EntityKirrid extends EntitySheep
 
 		this.entityAIEatGrass = new EntityAIEatAetherGrass(this);
 
+		this.tasks.addTask(2, new EntityAIRestrictRain(this));
+		this.tasks.addTask(3, new EntityAIHideFromRain(this, 1.3D));
 		this.tasks.addTask(9, this.entityAIEatGrass);
+	}
+
+	@Override
+	public float getBlockPathWeight(BlockPos pos)
+	{
+		return super.getBlockPathWeight(pos);
 	}
 
 	@Override

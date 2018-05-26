@@ -2,6 +2,8 @@ package com.gildedgames.aether.common.entities.living.passive;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.entities.ai.EntityAIHideFromRain;
+import com.gildedgames.aether.common.entities.ai.EntityAIRestrictRain;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketAerbunnySetRiding;
@@ -51,6 +53,8 @@ public class EntityAerbunny extends EntityAetherAnimal
 	{
 		super(world);
 
+		this.tasks.addTask(2, new EntityAIRestrictRain(this));
+		this.tasks.addTask(3, new EntityAIHideFromRain(this, 1.3D));
 		this.tasks.addTask(1, new EntityAISwimming(this));
 		this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
@@ -63,6 +67,12 @@ public class EntityAerbunny extends EntityAetherAnimal
 		this.spawnableBlock = BlocksAether.aether_grass;
 
 		this.setSize(0.65F, 0.65F);
+	}
+
+	@Override
+	public float getBlockPathWeight(BlockPos pos)
+	{
+		return super.getBlockPathWeight(pos);
 	}
 
 	@Override
