@@ -51,7 +51,7 @@ public class EntityInfo implements IEntityInfo
 	private void lookAtNearbyEntity()
 	{
 		this.ticksUntilLook = 40 + this.entity.getRNG().nextInt(160);
-		this.ticksLooking = 10 + this.entity.getRNG().nextInt(70);
+		this.ticksLooking = 100000 + this.entity.getRNG().nextInt(70);
 	}
 
 	@Override

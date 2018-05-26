@@ -2,6 +2,7 @@ package com.gildedgames.aether.client.renderer;
 
 import com.gildedgames.aether.api.entity.IEntityInfo;
 import com.gildedgames.aether.common.capabilities.entity.info.EntityInfo;
+import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import com.google.common.collect.Lists;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -9,7 +10,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.MathHelper;
 
 import java.util.List;
 
@@ -75,16 +76,19 @@ public class EyeUtil
 				leftEye.isHidden = false;
 				rightEye.isHidden = false;
 
-				double eyeTranslate = 0.0;
-				double eyeCentering = eyeTracking ? 0.03 : 0.0;
+				float eyeTranslate = 0.0F;
+				float eyeCentering = eyeTracking ? 0.03F : 0.0F;
 
 				if (info.lookingAtEntity() != null && eyeTracking)
 				{
-					Vec3d vec = info.lookingAtEntity().getPositionVector().subtract(entity.getPositionVector()).normalize();
-					double distance = Math.min(entity.getDistance(info.lookingAtEntity()), 5.0);
+					double yawBetweenLookingEntity = EntityUtil.getYawFacingPosition(entity, info.lookingAtEntity().posX, info.lookingAtEntity().posZ);
+					double yawDif = MathHelper.wrapDegrees(yawBetweenLookingEntity - entity.rotationYawHead);
 
-					eyeTranslate = Math.min((vec.x) * 0.09 + 0.065, 0.035);
-					eyeCentering = ((distance / 5.0) * 0.03);
+					double clampYawDif = MathHelper.clamp(yawDif, -45.0, 45.0);
+
+					float percent = (float) ((clampYawDif) / 90.0F);
+
+					eyeTranslate = -0.05F * percent;
 				}
 
 				GlStateManager.pushMatrix();
@@ -94,8 +98,8 @@ public class EyeUtil
 				float oldOffsetX = leftEye.offsetX;
 				float oldOffsetZ = leftEye.offsetZ;
 
-				leftEye.offsetX = (float) Math.min(eyeTranslate - eyeCentering, 0.00);
-				leftEye.offsetZ = -0.0001F;
+				leftEye.offsetX = -eyeCentering + eyeTranslate;
+				leftEye.offsetZ = -0.001F;
 
 				model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
@@ -110,9 +114,10 @@ public class EyeUtil
 				oldOffsetX = rightEye.offsetX;
 				oldOffsetZ = rightEye.offsetZ;
 
-				rightEye.offsetX = (float) Math.max(0.0, Math.min(eyeTranslate + eyeCentering, 0.075));
-				rightEye.offsetZ = -0.0001F;
+				rightEye.offsetX = eyeCentering + eyeTranslate;
+				rightEye.offsetZ = -0.001F;
 
+				model.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entity);
 				model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
 				rightEye.offsetX = oldOffsetX;

@@ -87,6 +87,14 @@ public class EntityUtil
 		facePos(entity, pos.getX(), pos.getY(), pos.getZ(), maxYawIncrease, maxPitchIncrease);
 	}
 
+	public static double getYawFacingPosition(Entity entity, double posX, double posZ)
+	{
+		final double x = posX - entity.posX;
+		final double z = posZ - entity.posZ;
+
+		return (MathHelper.atan2(z, x) * (180D / Math.PI)) - 90.0D;
+	}
+
 	public static void facePos(final Entity entity, double posX, double posY, double posZ, final float maxYawIncrease, final float maxPitchIncrease)
 	{
 		final double x = posX - entity.posX;
