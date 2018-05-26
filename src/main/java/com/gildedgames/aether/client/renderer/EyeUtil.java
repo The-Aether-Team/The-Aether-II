@@ -135,8 +135,6 @@ public class EyeUtil
 				rightEye.offsetZ = -0.0001F;
 				leftEye.offsetZ = -0.0001F;
 
-				//GlStateManager.scale(1.001F, 1.001F, 1.001F);
-
 				model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
 				rightEye.offsetZ = oldOffsetZ;
