@@ -12,7 +12,6 @@ import com.gildedgames.aether.common.util.helpers.WorldUtil;
 import com.gildedgames.aether.common.world.aether.prep.PrepSectorDataAether;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.effect.EntityLightningBolt;
-import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -158,7 +157,7 @@ public class IslandPrecipitationManager implements IPrecipitationManager
 					{
 						if (this.world.canBlockFreezeNoWater(blockpos2))
 						{
-							this.world.setBlockState(blockpos2, Blocks.ICE.getDefaultState());
+							this.world.setBlockState(blockpos2, BlocksAether.highlands_ice.getDefaultState());
 						}
 					}
 
