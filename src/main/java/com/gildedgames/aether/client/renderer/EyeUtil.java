@@ -132,8 +132,8 @@ public class EyeUtil
 				float oldOffsetZ = rightEye.offsetZ;
 				float oldOffsetZLeft = leftEye.offsetZ;
 
-				rightEye.offsetZ = -0.00001F;
-				leftEye.offsetZ = -0.00001F;
+				rightEye.offsetZ = -0.0001F;
+				leftEye.offsetZ = -0.0001F;
 
 				//GlStateManager.scale(1.001F, 1.001F, 1.001F);
 

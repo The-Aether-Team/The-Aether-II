@@ -10,70 +10,67 @@ import net.minecraft.util.math.MathHelper;
 
 public class ModelKirrid extends ModelBase
 {
-	protected float childYOffset = 8.0F;
+	public ModelRenderer BodyMain;
 
-	//fields
-	private ModelRenderer BodyMain;
+	public ModelRenderer BodyBack;
 
-	private ModelRenderer BodyBack;
+	public ModelRenderer BodyBottom;
 
-	private ModelRenderer BodyBottom;
+	public ModelRenderer LegFrontLeft1;
 
-	private ModelRenderer LegFrontLeft1;
+	public ModelRenderer LegFrontLeft2;
 
-	private ModelRenderer LegFrontLeft2;
+	public ModelRenderer LegFrontLeft3;
 
-	private ModelRenderer LegFrontLeft3;
+	public ModelRenderer LegFrontRight1;
 
-	private ModelRenderer LegFrontRight1;
+	public ModelRenderer LegFrontRight2;
 
-	private ModelRenderer LegFrontRight2;
+	public ModelRenderer LegFrontRight3;
 
-	private ModelRenderer LegFrontRight3;
+	public ModelRenderer LegBackLeft1;
 
-	private ModelRenderer LegBackLeft1;
+	public ModelRenderer LegBackLeft2;
 
-	private ModelRenderer LegBackLeft2;
+	public ModelRenderer LegBackLeft3;
 
-	private ModelRenderer LegBackLeft3;
+	public ModelRenderer LegBackRight1;
 
-	private ModelRenderer LegBackRight1;
+	public ModelRenderer LegBackRight2;
 
-	private ModelRenderer LegBackRight2;
+	public ModelRenderer LegBackRight3;
 
-	private ModelRenderer LegBackRight3;
+	public ModelRenderer Tail;
 
-	private ModelRenderer Tail;
+	public ModelRenderer HeadNeck;
 
-	private ModelRenderer HeadNeck;
+	public ModelRenderer HeadMain;
 
-	private ModelRenderer HeadMain;
+	public ModelRenderer HeadSnout;
 
-	private ModelRenderer HeadSnout;
+	public ModelRenderer HeadCheekLeft;
 
-	private ModelRenderer HeadCheekLeft;
+	public ModelRenderer HeadCheekRight;
 
-	private ModelRenderer HeadCheekRight;
+	public ModelRenderer HeadJaw;
 
-	private ModelRenderer HeadJaw;
+	public ModelRenderer HeadEyeRight;
 
-	private ModelRenderer HeadEyeRight;
+	public ModelRenderer HeadBrowRight;
 
-	private ModelRenderer HeadBrowRight;
+	public ModelRenderer HeadEyeLeft;
 
-	private ModelRenderer HeadEyeLeft;
+	public ModelRenderer HeadBrowLeft;
 
-	private ModelRenderer HeadBrowLeft;
+	public ModelRenderer HeadPlate;
 
-	private ModelRenderer HeadPlate;
+	public ModelRenderer HeadTop;
 
-	private ModelRenderer HeadTop;
+	public ModelRenderer HeadEarLeft;
 
-	private ModelRenderer HeadEarLeft;
+	public ModelRenderer HeadEarRight;
 
-	private ModelRenderer HeadEarRight;
-
-	private float childZOffset = 4.0F;
+	public float childZOffset = 4.0F;
 
 	public ModelKirrid()
 	{
@@ -343,7 +340,7 @@ public class ModelKirrid extends ModelBase
 		}
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
+	public void setRotation(ModelRenderer model, float x, float y, float z)
 	{
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
@@ -427,7 +424,7 @@ public class ModelKirrid extends ModelBase
 		this.setHeadRotations(headAng * 9.0F);
 	}
 
-	private void setHeadRotations(float headPitch)
+	public void setHeadRotations(float headPitch)
 	{
 		this.HeadNeck.rotateAngleX = headPitch * 0.017453292F;
 		this.HeadMain.rotateAngleX = headPitch * 0.017453292F;
