@@ -99,7 +99,7 @@ public class EyeUtil
 				float oldOffsetZ = leftEye.offsetZ;
 
 				leftEye.offsetX = -eyeCentering + eyeTranslate;
-				leftEye.offsetZ = -0.001F;
+				leftEye.offsetZ = -0.0001F;
 
 				model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
@@ -115,7 +115,7 @@ public class EyeUtil
 				oldOffsetZ = rightEye.offsetZ;
 
 				rightEye.offsetX = eyeCentering + eyeTranslate;
-				rightEye.offsetZ = -0.001F;
+				rightEye.offsetZ = -0.0001F;
 
 				model.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entity);
 				model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
