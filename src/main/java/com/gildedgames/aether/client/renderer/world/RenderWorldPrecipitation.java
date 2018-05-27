@@ -159,7 +159,6 @@ public class RenderWorldPrecipitation extends IRenderHandler
 						if (island.getPrecipitation().getType() == PrecipitationType.RAIN)
 						{
 							float intensity = island.getPrecipitation().getStrength() == PrecipitationStrength.STORM ? 48.0f : (island.getPrecipitation().getStrength() == PrecipitationStrength.HEAVY ? 64.0f : 128.0f);
-							intensity *= island.getPrecipitation().getStrength(partialTicks);
 
 							if (continuous != 0)
 							{
@@ -212,7 +211,6 @@ public class RenderWorldPrecipitation extends IRenderHandler
 						else if (island.getPrecipitation().getType() == PrecipitationType.SNOW)
 						{
 							float intensity = island.getPrecipitation().getStrength() == PrecipitationStrength.STORM ? 2.5f : (island.getPrecipitation().getStrength() == PrecipitationStrength.HEAVY ? 1.4f : 0.6f);
-							intensity *= island.getPrecipitation().getStrength(partialTicks);
 
 							if (continuous != 1)
 							{
