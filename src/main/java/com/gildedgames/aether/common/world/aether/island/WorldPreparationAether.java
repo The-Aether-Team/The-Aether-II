@@ -90,9 +90,9 @@ public class WorldPreparationAether
 
 		this.replaceBiomeBlocks(island, mask, chunkX, chunkZ);
 
-		generator.genChunk(biomes, this.noise, this.access, mask, primer, island, chunkX, chunkZ);
+		this.caveGenerator.generate(this.world, chunkX, chunkZ, mask);
 
-		this.caveGenerator.generate(this.world, chunkX, chunkZ, primer);
+		generator.genChunk(biomes, this.noise, this.access, mask, primer, island, chunkX, chunkZ);
 	}
 
 	// Calculate max penetration depth
