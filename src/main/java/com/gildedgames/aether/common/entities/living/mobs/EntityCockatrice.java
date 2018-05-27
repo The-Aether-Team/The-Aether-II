@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.living.mobs;
 
+import com.gildedgames.aether.common.entities.ai.EntityAIUnstuckBlueAercloud;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceHide;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceSneakAttack;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceWander;
@@ -36,6 +37,7 @@ public class EntityCockatrice extends EntityAetherMob
 		super(world);
 
 		this.tasks.addTask(0, new EntityAISwimming(this));
+		this.tasks.addTask(0, new EntityAIUnstuckBlueAercloud(this));
 		this.tasks.addTask(1, new EntityAICockatriceHide(this, EntityPlayer.class, 0.9D));
 		this.tasks.addTask(2, new EntityAICockatriceWander(this, 0.35D));
 
