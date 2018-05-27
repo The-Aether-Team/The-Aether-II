@@ -3,8 +3,6 @@ package com.gildedgames.aether.common.world.aether.island.gen;
 import com.gildedgames.orbis_api.util.mc.NBT;
 import net.minecraft.nbt.NBTTagCompound;
 
-import java.util.function.Function;
-
 public class IslandVariables implements NBT
 {
 
@@ -71,7 +69,7 @@ public class IslandVariables implements NBT
 	 *
 	 * Default filter returns original value.
 	 */
-	private Function<Double, Double> heightSampleFilter = (heightSample) -> heightSample;
+	private NoiseTransformer heightSampleFilter = (heightSample) -> heightSample;
 
 	/**
 	 * Whether or not this island will generate magnetic pillars.
@@ -90,7 +88,7 @@ public class IslandVariables implements NBT
 	 *
 	 * Default filter returns original value.
 	 */
-	private Function<Double, Double> lakeBottomValueFilter = (lakeBottomValue) -> lakeBottomValue;
+	private NoiseTransformer lakeBottomValueFilter = (lakeBottomValue) -> lakeBottomValue;
 
 	private IslandVariables()
 	{
@@ -102,7 +100,7 @@ public class IslandVariables implements NBT
 		return new IslandVariables();
 	}
 
-	public Function<Double, Double> getLakeBottomValueFilter()
+	public NoiseTransformer getLakeBottomValueFilter()
 	{
 		return this.lakeBottomValueFilter;
 	}
@@ -117,7 +115,7 @@ public class IslandVariables implements NBT
 		return this.snowCaps;
 	}
 
-	public Function<Double, Double> getHeightSampleFilter()
+	public NoiseTransformer getHeightSampleFilter()
 	{
 		return this.heightSampleFilter;
 	}
@@ -235,7 +233,7 @@ public class IslandVariables implements NBT
 		return this;
 	}
 
-	public IslandVariables heightSampleFilter(Function<Double, Double> heightSampleFilter)
+	public IslandVariables heightSampleFilter(NoiseTransformer heightSampleFilter)
 	{
 		this.heightSampleFilter = heightSampleFilter;
 
@@ -263,7 +261,7 @@ public class IslandVariables implements NBT
 		return this;
 	}
 
-	public IslandVariables lakeBottomValueFilter(Function<Double, Double> lakeBottomValueFilter)
+	public IslandVariables lakeBottomValueFilter(NoiseTransformer lakeBottomValueFilter)
 	{
 		this.lakeBottomValueFilter = lakeBottomValueFilter;
 

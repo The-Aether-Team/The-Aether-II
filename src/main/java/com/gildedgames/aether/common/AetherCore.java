@@ -141,7 +141,7 @@ public class AetherCore
 		// TODO: In SpongeForge, the world is not loaded yet for some reason?
 		if (world != null)
 		{
-			PrepHelper.getManager(world).getAccess().provideSectorForChunk(0, 0);
+			PrepHelper.getManager(world).getAccess().provideSectorForChunk(0, 0, true);
 		}
 
 		PROXY.serverStarted(event);

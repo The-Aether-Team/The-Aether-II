@@ -5,10 +5,8 @@ import com.gildedgames.aether.api.util.OpenSimplexNoise;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandDataPartial;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
-import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
+import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
 import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 
@@ -191,15 +189,10 @@ public class IslandGeneratorForgottenHighlands implements IIslandGenerator
 	}
 
 	@Override
-	public void genIslandForChunk(Biome[] biomes, final OpenSimplexNoise noise, final IBlockAccessExtended access, final ChunkPrimer primer,
-			final IIslandData island,
-			final int chunkX,
-			final int chunkZ)
+	public void genMask(Biome[] biomes, OpenSimplexNoise noise, IBlockAccessExtended access, ChunkMask mask, IIslandData island,
+			int chunkX, int chunkZ)
 	{
 		final Biome biome = biomes[0];
-
-		final IBlockState coastBlock = ((BiomeAetherBase) biome).getCoastalBlock();
-		final IBlockState stoneBlock = BlocksAether.holystone.getDefaultState();
 
 		final double[] height3D = generate3DNoise(noise, island, chunkX, chunkZ, 0, 300.0D, 0.5D, false);
 
@@ -240,11 +233,16 @@ public class IslandGeneratorForgottenHighlands implements IIslandGenerator
 
 					if (heightSample > 0.2)
 					{
-						primer.setBlockState(x, y, z, stoneBlock);
+						mask.setBlock(x, y, z, IslandBlockType.STONE_BLOCK.ordinal());
 					}
 				}
 			}
 		}
 	}
 
+	@Override
+	public void genChunk(Biome[] biomes, OpenSimplexNoise noise, IBlockAccessExtended access, ChunkMask mask, ChunkPrimer primer, IIslandData island, int chunkX, int chunkZ)
+	{
+		mask.createChunk(primer, new IslandChunkMaskTransformer());
+	}
 }

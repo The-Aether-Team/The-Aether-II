@@ -4,7 +4,6 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.google.common.base.MoreObjects;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -20,22 +19,21 @@ public class WorldGenAetherCaves extends MapGenBase
 	protected ThreadLocal<Random> rand = ThreadLocal.withInitial(Random::new);
 
 	protected void addRoom(
-			final long p_180705_1_, final int p_180705_3_, final int p_180705_4_, final ChunkPrimer p_180705_5_, final double p_180705_6_,
-			final double p_180705_8_, final double p_180705_10_)
+			long seed, int originalX, int originalZ, ChunkPrimer primer, double dirX,
+			double dirY, double dirZ, Biome[] biomes)
 	{
-		this.addTunnel(p_180705_1_, p_180705_3_, p_180705_4_, p_180705_5_, p_180705_6_, p_180705_8_, p_180705_10_, 1.0F + this.rand.get().nextFloat() * 6.0F,
-				0.0F,
-				0.0F, -1, -1, 0.5D);
+		this.addTunnel(seed, originalX, originalZ, primer, dirX, dirY, dirZ, 1.0F + this.rand.get().nextFloat() * 6.0F,
+				0.0F, 0.0F, -1, -1, 0.5D, biomes);
 	}
 
-	protected void addTunnel(long p_180702_1_, int p_180702_3_, int p_180702_4_, ChunkPrimer p_180702_5_, double p_180702_6_, double p_180702_8_,
-			double p_180702_10_, float p_180702_12_, float p_180702_13_, float p_180702_14_, int p_180702_15_, int p_180702_16_, double p_180702_17_)
+	protected void addTunnel(long seed, int originalX, int originalZ, ChunkPrimer primer, double p_180702_6_, double p_180702_8_,
+			double p_180702_10_, float p_180702_12_, float p_180702_13_, float p_180702_14_, int p_180702_15_, int p_180702_16_, double p_180702_17_, Biome[] biomes)
 	{
-		double d0 = (double) (p_180702_3_ * 16 + 8);
-		double d1 = (double) (p_180702_4_ * 16 + 8);
+		double d0 = (double) (originalX * 16 + 8);
+		double d1 = (double) (originalZ * 16 + 8);
 		float f = 0.0F;
 		float f1 = 0.0F;
-		Random random = new Random(p_180702_1_);
+		Random random = new Random(seed);
 
 		if (p_180702_16_ <= 0)
 		{
@@ -81,10 +79,10 @@ public class WorldGenAetherCaves extends MapGenBase
 
 			if (!flag2 && p_180702_15_ == j && p_180702_12_ > 1.0F && p_180702_16_ > 0)
 			{
-				this.addTunnel(random.nextLong(), p_180702_3_, p_180702_4_, p_180702_5_, p_180702_6_, p_180702_8_, p_180702_10_,
-						random.nextFloat() * 0.5F + 0.5F, p_180702_13_ - ((float) Math.PI / 2F), p_180702_14_ / 3.0F, p_180702_15_, p_180702_16_, 1.0D);
-				this.addTunnel(random.nextLong(), p_180702_3_, p_180702_4_, p_180702_5_, p_180702_6_, p_180702_8_, p_180702_10_,
-						random.nextFloat() * 0.5F + 0.5F, p_180702_13_ + ((float) Math.PI / 2F), p_180702_14_ / 3.0F, p_180702_15_, p_180702_16_, 1.0D);
+				this.addTunnel(random.nextLong(), originalX, originalZ, primer, p_180702_6_, p_180702_8_, p_180702_10_,
+						random.nextFloat() * 0.5F + 0.5F, p_180702_13_ - ((float) Math.PI / 2F), p_180702_14_ / 3.0F, p_180702_15_, p_180702_16_, 1.0D, biomes);
+				this.addTunnel(random.nextLong(), originalX, originalZ, primer, p_180702_6_, p_180702_8_, p_180702_10_,
+						random.nextFloat() * 0.5F + 0.5F, p_180702_13_ + ((float) Math.PI / 2F), p_180702_14_ / 3.0F, p_180702_15_, p_180702_16_, 1.0D, biomes);
 				return;
 			}
 
@@ -103,12 +101,12 @@ public class WorldGenAetherCaves extends MapGenBase
 				if (p_180702_6_ >= d0 - 16.0D - d2 * 2.0D && p_180702_10_ >= d1 - 16.0D - d2 * 2.0D && p_180702_6_ <= d0 + 16.0D + d2 * 2.0D
 						&& p_180702_10_ <= d1 + 16.0D + d2 * 2.0D)
 				{
-					int k2 = MathHelper.floor(p_180702_6_ - d2) - p_180702_3_ * 16 - 1;
-					int k = MathHelper.floor(p_180702_6_ + d2) - p_180702_3_ * 16 + 1;
+					int k2 = MathHelper.floor(p_180702_6_ - d2) - originalX * 16 - 1;
+					int k = MathHelper.floor(p_180702_6_ + d2) - originalX * 16 + 1;
 					int l2 = MathHelper.floor(p_180702_8_ - d3) - 1;
 					int l = MathHelper.floor(p_180702_8_ + d3) + 1;
-					int i3 = MathHelper.floor(p_180702_10_ - d2) - p_180702_4_ * 16 - 1;
-					int i1 = MathHelper.floor(p_180702_10_ + d2) - p_180702_4_ * 16 + 1;
+					int i3 = MathHelper.floor(p_180702_10_ - d2) - originalZ * 16 - 1;
+					int i1 = MathHelper.floor(p_180702_10_ + d2) - originalZ * 16 + 1;
 
 					if (k2 < 0)
 					{
@@ -150,7 +148,7 @@ public class WorldGenAetherCaves extends MapGenBase
 							{
 								if (l1 >= 0 && l1 < 256)
 								{
-									if (this.isOceanBlock(p_180702_5_, j1, l1, k1, p_180702_3_, p_180702_4_))
+									if (this.isOceanBlock(primer, j1, l1, k1, originalX, originalZ))
 									{
 										flag3 = true;
 									}
@@ -166,15 +164,13 @@ public class WorldGenAetherCaves extends MapGenBase
 
 					if (!flag3)
 					{
-						BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-
 						for (int j3 = k2; j3 < k; ++j3)
 						{
-							double d10 = ((double) (j3 + p_180702_3_ * 16) + 0.5D - p_180702_6_) / d2;
+							double d10 = ((double) (j3 + originalX * 16) + 0.5D - p_180702_6_) / d2;
 
 							for (int i2 = i3; i2 < i1; ++i2)
 							{
-								double d8 = ((double) (i2 + p_180702_4_ * 16) + 0.5D - p_180702_10_) / d2;
+								double d8 = ((double) (i2 + originalZ * 16) + 0.5D - p_180702_10_) / d2;
 								boolean flag1 = false;
 
 								if (d10 * d10 + d8 * d8 < 1.0D)
@@ -185,16 +181,16 @@ public class WorldGenAetherCaves extends MapGenBase
 
 										if (d9 > -0.7D && d10 * d10 + d9 * d9 + d8 * d8 < 1.0D)
 										{
-											IBlockState iblockstate1 = p_180702_5_.getBlockState(j3, j2, i2);
+											IBlockState iblockstate1 = primer.getBlockState(j3, j2, i2);
 											IBlockState iblockstate2 = MoreObjects
-													.firstNonNull(p_180702_5_.getBlockState(j3, j2 + 1, i2), BLK_AIR);
+													.firstNonNull(primer.getBlockState(j3, j2 + 1, i2), BLK_AIR);
 
-											if (this.isTopBlock(p_180702_5_, j3, j2, i2, p_180702_3_, p_180702_4_))
+											if (this.isTopBlock(primer, biomes, j3, j2, i2, originalX, originalZ))
 											{
 												flag1 = true;
 											}
 
-											this.digBlock(p_180702_5_, j3, j2, i2, p_180702_3_, p_180702_4_, flag1, iblockstate1, iblockstate2);
+											this.digBlock(primer, biomes, j3, j2, i2, originalX, originalZ, flag1, iblockstate1, iblockstate2);
 										}
 									}
 								}
@@ -211,7 +207,7 @@ public class WorldGenAetherCaves extends MapGenBase
 		}
 	}
 
-	protected boolean canReplaceBlock(final IBlockState state, final IBlockState above)
+	protected boolean canReplaceBlock(IBlockState state, IBlockState above)
 	{
 		if (state.getBlock() == BlocksAether.highlands_snow_layer)
 		{
@@ -242,6 +238,8 @@ public class WorldGenAetherCaves extends MapGenBase
 	@Override
 	public void generate(World worldIn, int x, int z, ChunkPrimer primer)
 	{
+		Biome[] biomes = worldIn.provider.getBiomeProvider().getBiomes(null, x, z, 16, 16, true);
+
 		Random rand = this.rand.get();
 
 		int i = this.range;
@@ -256,8 +254,10 @@ public class WorldGenAetherCaves extends MapGenBase
 			{
 				long j1 = (long) l * j;
 				long k1 = (long) i1 * k;
+
 				rand.setSeed(j1 ^ k1 ^ worldIn.getSeed());
-				this.recursiveGenerate(worldIn, l, i1, x, z, primer);
+
+				this.recursiveGenerate(worldIn, l, i1, x, z, primer, biomes);
 			}
 		}
 	}
@@ -265,9 +265,7 @@ public class WorldGenAetherCaves extends MapGenBase
 	/**
 	 * Recursively called by generate()
 	 */
-	@Override
-	protected void recursiveGenerate(final World worldIn, final int chunkX, final int chunkZ, final int originalX, final int originalZ,
-			final ChunkPrimer primer)
+	protected void recursiveGenerate(World world, int chunkX, int chunkZ, int originalX, int originalZ, ChunkPrimer primer, Biome[] biomes)
 	{
 		Random rand = this.rand.get();
 
@@ -280,21 +278,22 @@ public class WorldGenAetherCaves extends MapGenBase
 
 		for (int j = 0; j < i; ++j)
 		{
-			final double d0 = (double) (chunkX * 16 + rand.nextInt(16));
-			final double d1 = (double) rand.nextInt(128);
-			final double d2 = (double) (chunkZ * 16 + rand.nextInt(16));
+			double x = (double) (chunkX * 16 + rand.nextInt(16));
+			double y = (double) rand.nextInt(128);
+			double z = (double) (chunkZ * 16 + rand.nextInt(16));
+
 			int tunnels = 2;
 
 			if (rand.nextInt(4) == 0)
 			{
-				this.addRoom(rand.nextLong(), originalX, originalZ, primer, d0, d1, d2);
+				this.addRoom(rand.nextLong(), originalX, originalZ, primer, x, y, z, biomes);
 				tunnels += rand.nextInt(4);
 			}
 
 			for (int l = 0; l < tunnels; ++l)
 			{
-				final float f = rand.nextFloat() * ((float) Math.PI * 2F);
-				final float f1 = (rand.nextFloat() - 0.5F) * 2.0F / 8.0F;
+				float f = rand.nextFloat() * ((float) Math.PI * 2F);
+				float f1 = (rand.nextFloat() - 0.5F) * 2.0F / 8.0F;
 				float f2 = rand.nextFloat() * 2.0F + rand.nextFloat();
 
 				if (rand.nextInt(10) == 0)
@@ -302,26 +301,24 @@ public class WorldGenAetherCaves extends MapGenBase
 					f2 *= rand.nextFloat() * rand.nextFloat() * 3.0F + 1.0F;
 				}
 
-				this.addTunnel(rand.nextLong(), originalX, originalZ, primer, d0, d1, d2, f2 * 2.0F, f, f1, 0, 0, 0.5D);
+				this.addTunnel(rand.nextLong(), originalX, originalZ, primer, x, y, z, f2 * 2.0F, f, f1, 0, 0, 0.5D, biomes);
 			}
 		}
 	}
 
-	private boolean isTopBlock(final ChunkPrimer data, final int x, final int y, final int z, final int chunkX, final int chunkZ)
+	private boolean isTopBlock(ChunkPrimer data, Biome[] biomes, int x, int y, int z, int chunkX, int chunkZ)
 	{
-		final Biome biome = this.world.getBiome(new BlockPos(x + chunkX * 16, 0, z + chunkZ * 16));
+		Biome biome = biomes[x + (z * 16)];
 
-		return data.getBlockState(x, y, z) == biome.topBlock;
+		return data.getBlockState(x, y, z).getBlock() == biome.topBlock.getBlock();
 	}
 
-	protected void digBlock(
-			final ChunkPrimer data, final int x, final int y, final int z, final int chunkX, final int chunkZ, final boolean foundTop, final IBlockState state,
-			final IBlockState up)
+	private void digBlock(ChunkPrimer data, Biome[] biomes, int x, int y, int z, int chunkX, int chunkZ, boolean foundTop, IBlockState state, IBlockState up)
 	{
-		final Biome biome = this.world.getBiome(new BlockPos(x + chunkX * 16, 0, z + chunkZ * 16));
+		Biome biome = biomes[x + (z * 16)];
 
-		final IBlockState top = biome.topBlock;
-		final IBlockState filler = biome.fillerBlock;
+		IBlockState top = biome.topBlock;
+		IBlockState filler = biome.fillerBlock;
 
 		if (this.canReplaceBlock(state, up) || state.getBlock() == top.getBlock() || state.getBlock() == filler.getBlock())
 		{

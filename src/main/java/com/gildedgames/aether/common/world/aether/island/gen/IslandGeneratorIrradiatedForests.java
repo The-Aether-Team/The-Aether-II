@@ -6,11 +6,11 @@ import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandDataPartial;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.CrackChunk;
 import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.CrackPos;
 import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.IrradiatedForestsData;
+import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
 import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
 import com.gildedgames.orbis_api.util.ObjectFilter;
 import net.minecraft.block.state.IBlockState;
@@ -80,10 +80,7 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 	}
 
 	@Override
-	public void genIslandForChunk(Biome[] biomes, final OpenSimplexNoise noise, final IBlockAccessExtended access, final ChunkPrimer primer,
-			final IIslandData island,
-			final int chunkX,
-			final int chunkZ)
+	public void genMask(Biome[] biomes, OpenSimplexNoise noise, IBlockAccessExtended access, ChunkMask mask, IIslandData island, int chunkX, int chunkZ)
 	{
 		IrradiatedForestsData data = ObjectFilter.getFirstFrom(island.getComponents(), IrradiatedForestsData.class);
 
@@ -219,11 +216,11 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 
 							if (coastBlock != null && heightSample < cutoffPoint + 0.025 && y == 100)
 							{
-								primer.setBlockState(x, y, z, coastBlock);
+								mask.setBlock(x, y, z, IslandBlockType.COAST_BLOCK.ordinal());
 							}
 							else
 							{
-								primer.setBlockState(x, y, z, stoneBlock);
+								mask.setBlock(x, y, z, IslandBlockType.STONE_BLOCK.ordinal());
 							}
 						}
 
@@ -233,11 +230,11 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 						{
 							if (coastBlock != null && (topSample < cutoffPoint + 0.025 && y == 100))
 							{
-								primer.setBlockState(x, y, z, coastBlock);
+								mask.setBlock(x, y, z, IslandBlockType.COAST_BLOCK.ordinal());
 							}
 							else
 							{
-								primer.setBlockState(x, y, z, stoneBlock);
+								mask.setBlock(x, y, z, IslandBlockType.STONE_BLOCK.ordinal());
 							}
 						}
 					}
@@ -250,13 +247,20 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 
 						for (int y = (int) bottomMinY; y < maxY; y++)
 						{
-							primer.setBlockState(x, y, z, closestDist < 0.95 ? BlocksAether.holystone.getDefaultState().withProperty(
-									BlockHolystone.PROPERTY_VARIANT, BlockHolystone.MOSSY_HOLYSTONE) : stoneBlock);
+							IslandBlockType type = closestDist < 0.95 ? IslandBlockType.STONE_MOSSY_BLOCK : IslandBlockType.STONE_BLOCK;
+
+							mask.setBlock(x, y, z, type.ordinal());
 						}
 					}
 				}
 			}
 		}
+	}
+
+	@Override
+	public void genChunk(Biome[] biomes, OpenSimplexNoise noise, IBlockAccessExtended access, ChunkMask mask, ChunkPrimer primer, IIslandData island, int chunkX, int chunkZ)
+	{
+		mask.createChunk(primer, new IslandChunkMaskTransformer());
 	}
 
 }

@@ -7,6 +7,7 @@ import com.gildedgames.orbis_api.core.BlockDataChunk;
 import com.gildedgames.orbis_api.core.ICreationData;
 import com.gildedgames.orbis_api.core.PlacedBlueprint;
 import com.gildedgames.orbis_api.core.PostPlacement;
+import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
 import com.gildedgames.orbis_api.processing.BlockAccessChunkPrimer;
 import com.gildedgames.orbis_api.processing.BlockAccessExtendedWrapper;
 import com.gildedgames.orbis_api.processing.DataPrimer;
@@ -211,5 +212,10 @@ public class ChunkGeneratorAether implements IChunkGenerator
 	public BlockPos getNearestStructurePos(final World worldIn, final String structureName, final BlockPos position, final boolean findUnexplored)
 	{
 		return null;
+	}
+
+	public void threadSafeGenerateMask(Biome[] biomes, ChunkMask mask, IIslandData islandData, int x, int y)
+	{
+		this.preparation.generateBaseTerrainMask(biomes, mask, islandData, x, y);
 	}
 }

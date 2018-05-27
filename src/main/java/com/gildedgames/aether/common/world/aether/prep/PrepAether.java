@@ -10,9 +10,12 @@ import com.gildedgames.aether.common.world.aether.island.ChunkGeneratorAether;
 import com.gildedgames.aether.common.world.aether.island.data.BlockAccessIsland;
 import com.gildedgames.aether.common.world.aether.island.data.IslandBounds;
 import com.gildedgames.aether.common.world.aether.island.data.IslandData;
+import com.gildedgames.aether.common.world.aether.island.gen.IslandChunkMaskTransformer;
+import com.gildedgames.orbis_api.preparation.IChunkMaskTransformer;
 import com.gildedgames.orbis_api.preparation.IPrepChunkManager;
 import com.gildedgames.orbis_api.preparation.IPrepRegistryEntry;
 import com.gildedgames.orbis_api.preparation.IPrepSectorData;
+import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -60,7 +63,8 @@ public class PrepAether implements IPrepRegistryEntry
 
 				islandData.addComponents(biomeAether.createIslandComponents(islandData));
 
-				biomeAether.getBiomeDecorator().prepareDecorationsWholeIsland(world, new BlockAccessIsland(world, islandData, sectorData, iPrepChunkManager), islandData, sectorData, new Random(islandData.getSeed()));
+				biomeAether.getBiomeDecorator().prepareDecorationsWholeIsland(world,
+						new BlockAccessIsland(world, islandData, sectorData, iPrepChunkManager), islandData, sectorData, new Random(islandData.getSeed()));
 			}
 		}
 	}
@@ -123,5 +127,27 @@ public class PrepAether implements IPrepRegistryEntry
 
 			aetherGen.threadSafeGenerateChunk(biomes, chunkPrimer, islandData, chunkX, chunkZ);
 		}
+	}
+
+	@Override
+	public void threadSafeGenerateMask(World world, IPrepSectorData sectorData, Biome[] biomes, ChunkMask mask, int x, int y)
+	{
+		IChunkGenerator generator = world.provider.createChunkGenerator();
+
+		if (generator instanceof ChunkGeneratorAether && sectorData instanceof PrepSectorDataAether)
+		{
+			ChunkGeneratorAether aetherGen = (ChunkGeneratorAether) generator;
+			PrepSectorDataAether aetherData = (PrepSectorDataAether) sectorData;
+
+			IIslandData islandData = aetherData.getIslandData();
+
+			aetherGen.threadSafeGenerateMask(biomes, mask, islandData, x, y);
+		}
+	}
+
+	@Override
+	public IChunkMaskTransformer createMaskTransformer()
+	{
+		return new IslandChunkMaskTransformer();
 	}
 }

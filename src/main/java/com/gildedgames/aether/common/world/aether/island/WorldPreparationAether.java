@@ -7,10 +7,10 @@ import com.gildedgames.aether.api.world.islands.IIslandDataPartial;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.world.aether.features.WorldGenAetherCaves;
+import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
+import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
 import com.gildedgames.orbis_api.processing.BlockAccessExtendedWrapper;
 import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
@@ -84,17 +84,20 @@ public class WorldPreparationAether
 			}
 		}
 
+		ChunkMask mask = new ChunkMask();
+
 		final IIslandGenerator generator = island.getGenerator();
+		generator.genMask(biomes, this.noise, this.access, mask, island, chunkX, chunkZ);
 
-		generator.genIslandForChunk(biomes, this.noise, this.access, primer, island, chunkX, chunkZ);
+		this.replaceBiomeBlocks(island, mask, chunkX, chunkZ);
 
-		this.replaceBiomeBlocks(island, primer, chunkX, chunkZ, biomes);
+		generator.genChunk(biomes, this.noise, this.access, mask, primer, island, chunkX, chunkZ);
 
 		this.caveGenerator.generate(this.world, chunkX, chunkZ, primer);
 	}
 
 	// Calculate max penetration depth
-	public void replaceBiomeBlocks(final IIslandDataPartial island, final ChunkPrimer primer, final int chunkX, final int chunkZ, final Biome[] biomes)
+	public void replaceBiomeBlocks(final IIslandDataPartial island, final ChunkMask mask, final int chunkX, final int chunkZ)
 	{
 		// Penetration depth evalNormalised generation
 		this.depthBuffer = this.surfaceNoise.getRegion(this.depthBuffer,
@@ -104,8 +107,6 @@ public class WorldPreparationAether
 		{
 			for (int z = 0; z < 16; z++)
 			{
-				final Biome biome = biomes[x + (z * 16)];
-
 				final double val = this.depthBuffer[x + (z * 16)];
 
 				// Calculate max penetration depth
@@ -121,7 +122,7 @@ public class WorldPreparationAether
 				{
 					if (!searchingSolid)
 					{
-						if (primer.getBlockState(x, y, z).getBlock() == Blocks.AIR)
+						if (mask.getBlock(x, y, z) == IslandBlockType.AIR_BLOCK.ordinal())
 						{
 							searchingSolid = true;
 						}
@@ -129,18 +130,18 @@ public class WorldPreparationAether
 						continue;
 					}
 
-					if (primer.getBlockState(x, y, z).getBlock() != Blocks.AIR)
+					if (mask.getBlock(x, y, z) != IslandBlockType.AIR_BLOCK.ordinal())
 					{
 						top = y;
 
 						// Penetrate ground and set biome blocks
 						for (int y1 = top; pentration <= depth & y1 > 0; y1--)
 						{
-							final IBlockState state = primer.getBlockState(x, y1, z);
+							final int state = mask.getBlock(x, y1, z);
 
-							if (state == BlocksAether.holystone.getDefaultState() || state.getBlock() == BlocksAether.ferrosite)
+							if (state == IslandBlockType.STONE_BLOCK.ordinal() || state == IslandBlockType.FERROSITE_BLOCK.ordinal())
 							{
-								primer.setBlockState(x, y1, z, pentration < 1 ? biome.topBlock : biome.fillerBlock);
+								mask.setBlock(x, y1, z, pentration < 1 ? IslandBlockType.TOPSOIL_BLOCK.ordinal() : IslandBlockType.SOIL_BLOCK.ordinal());
 							}
 
 							pentration++;
@@ -154,4 +155,10 @@ public class WorldPreparationAether
 		}
 	}
 
+	public void generateBaseTerrainMask(Biome[] biomes, ChunkMask mask, IIslandData island, int chunkX, int chunkZ)
+	{
+		island.getGenerator().genMask(biomes, this.noise, this.access, mask, island, chunkX, chunkZ);
+
+		this.replaceBiomeBlocks(island, mask, chunkX, chunkZ);
+	}
 }

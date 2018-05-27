@@ -123,8 +123,6 @@ public class BiomeAetherDecorator
 		final int startX = island.getBounds().getMinX();
 		final int startZ = island.getBounds().getMinZ();
 
-		final BlockPos pos = new BlockPos(startX, 0, startZ);
-
 		//TODO: REIMPLEMENT 1.12.2
 		boolean generated = false;
 
@@ -135,13 +133,13 @@ public class BiomeAetherDecorator
 			final int x = random.nextInt(island.getBounds().getWidth());
 			final int z = random.nextInt(island.getBounds().getLength());
 
-			if (access.canAccess(pos.getX() + x, pos.getZ() + z))
+			if (access.canAccess(startX + x, startZ + z))
 			{
-				final BlockPos pos2 = access.getTopPos(pos.add(x, 0, z));
+				final int y = access.getTopY(startX + x, startZ + z);
 
-				if (pos2.getY() >= 0)
+				if (y >= 0)
 				{
-					final ICreationData<CreationData> data = new CreationData(world).pos(pos2);
+					final ICreationData<CreationData> data = new CreationData(world).pos(new BlockPos(startX + x, y, startZ + z));
 
 					generated = BlueprintPlacer.findPlace(primer, outpost, data, random);
 
@@ -168,17 +166,16 @@ public class BiomeAetherDecorator
 			AetherCore.LOGGER.info("WARNING: OUTPOST_A NOT GENERATED ON AN ISLAND!");
 		}
 
-		this.generate(GenerationAether.ABAND_ANGEL_STOREROOM, 200, random.nextInt(10), -1, pos, island, access, primer, world, random);
-		this.generate(GenerationAether.ABAND_ANGEL_WATCHTOWER, 200, random.nextInt(10), -1, pos, island, access, primer, world, random);
-		this.generate(GenerationAether.ABAND_CAMPSITE_1A, 300, random.nextInt(10), 0, pos, island, access, primer, world, random);
-		this.generate(GenerationAether.ABAND_HUMAN_HOUSE_1A, 200, random.nextInt(10), -1, pos, island, access, primer, world, random);
-		this.generate(GenerationAether.ABAND_HUMAN_HOUSE_1B, 200, random.nextInt(10), -5, pos, island, access, primer, world, random);
-		this.generate(GenerationAether.SKYROOT_WATCHTOWER_1A, 300, random.nextInt(10), 1, pos, island, access, primer, world, random);
-		//this.generate(GenerationAether.WELL, 600, random.nextInt(30), -9, pos, island, manager, primer, world, random);
+		this.generate(GenerationAether.ABAND_ANGEL_STOREROOM, 200, random.nextInt(10), -1, island, access, primer, world, random);
+		this.generate(GenerationAether.ABAND_ANGEL_WATCHTOWER, 200, random.nextInt(10), -1, island, access, primer, world, random);
+		this.generate(GenerationAether.ABAND_CAMPSITE_1A, 300, random.nextInt(10), 0, island, access, primer, world, random);
+		this.generate(GenerationAether.ABAND_HUMAN_HOUSE_1A, 200, random.nextInt(10), -1, island, access, primer, world, random);
+		this.generate(GenerationAether.ABAND_HUMAN_HOUSE_1B, 200, random.nextInt(10), -5, island, access, primer, world, random);
+		this.generate(GenerationAether.SKYROOT_WATCHTOWER_1A, 300, random.nextInt(10), 1, island, access, primer, world, random);
 	}
 
 	private void generate(
-			final BlueprintDefinition def, final int tries, final int maxGenerated, final int floorHeight, final BlockPos startPos, final IIslandData island,
+			final BlueprintDefinition def, final int tries, final int maxGenerated, final int floorHeight, final IIslandData island,
 			final IBlockAccessExtended access, final DataPrimer primer, final World world, final Random rand)
 	{
 		if (maxGenerated <= 0)
@@ -188,18 +185,21 @@ public class BiomeAetherDecorator
 
 		int amountGenerated = 0;
 
+		final int startX = island.getBounds().getMinX();
+		final int startZ = island.getBounds().getMinZ();
+
 		for (int i = 0; i < tries; i++)
 		{
 			final int x = rand.nextInt(island.getBounds().getWidth());
 			final int z = rand.nextInt(island.getBounds().getLength());
 
-			if (access.canAccess(startPos.getX() + x, startPos.getZ() + z))
+			if (access.canAccess(startX + x, startZ + z))
 			{
-				final BlockPos pos2 = access.getTopPos(startPos.add(x, 0, z)).add(0, floorHeight, 0);
+				final int y = access.getTopY(startX + x, startZ + z);
 
-				if (pos2.getY() >= 0)
+				if (y >= 0)
 				{
-					final ICreationData<CreationData> data = new CreationData(world).pos(pos2);
+					final ICreationData<CreationData> data = new CreationData(world).pos(new BlockPos(startX + x, y, startZ + z));
 
 					final boolean generated = BlueprintPlacer.findPlace(primer, def, data, rand);
 
@@ -220,10 +220,7 @@ public class BiomeAetherDecorator
 		}
 	}
 
-	private void generate(
-			final BlueprintDefinitionPool pool, final int tries, final int maxGenerated, final int floorHeight, final BlockPos startPos,
-			final IIslandData island,
-			final IBlockAccessExtended access, final DataPrimer primer, final World world, final Random rand)
+	private void generate(final BlueprintDefinitionPool pool, final int tries, final int maxGenerated, final int floorHeight, final IIslandData island, final IBlockAccessExtended access, final DataPrimer primer, final World world, final Random rand)
 	{
 		if (maxGenerated <= 0)
 		{
@@ -232,6 +229,9 @@ public class BiomeAetherDecorator
 
 		int amountGenerated = 0;
 
+		final int startX = island.getBounds().getMinX();
+		final int startZ = island.getBounds().getMinZ();
+
 		for (int i = 0; i < tries; i++)
 		{
 			final BlueprintDefinition blueprint = pool.getRandomDefinition(rand);
@@ -239,13 +239,13 @@ public class BiomeAetherDecorator
 			final int x = rand.nextInt(island.getBounds().getWidth());
 			final int z = rand.nextInt(island.getBounds().getLength());
 
-			if (access.canAccess(startPos.getX() + x, startPos.getZ() + z))
+			if (access.canAccess(startX + x, startZ + z))
 			{
-				final BlockPos pos2 = access.getTopPos(startPos.add(x, 0, z)).add(0, floorHeight, 0);
+				final int y = access.getTopY(startX + x, startZ + z);
 
-				if (pos2.getY() >= 0)
+				if (y >= 0)
 				{
-					final ICreationData<CreationData> data = new CreationData(world).pos(pos2);
+					final ICreationData<CreationData> data = new CreationData(world).pos(new BlockPos(startX + x, y, startZ + z));
 
 					final boolean generated = BlueprintPlacer.findPlace(primer, blueprint, data, rand);
 

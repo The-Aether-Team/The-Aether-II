@@ -281,7 +281,7 @@ public class GenerationAether
 
 		final PlacementCondition[] structureConditions = new PlacementCondition[]
 				{
-						PlacementConditions.onSpecificBlock(0, BlocksAether.aether_grass, BlocksAether.aether_dirt),
+						PlacementConditions.onSpecificBlock(0, BlocksAether.holystone, BlocksAether.aether_dirt),
 						replace,
 						no_quicksoil
 				};

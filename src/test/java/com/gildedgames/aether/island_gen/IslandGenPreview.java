@@ -10,6 +10,7 @@ import com.gildedgames.aether.common.world.aether.island.data.IslandBounds;
 import com.gildedgames.aether.common.world.aether.island.data.IslandData;
 import com.gildedgames.aether.common.world.aether.island.nodename.as3delaunay.LineSegment;
 import com.gildedgames.aether.common.world.aether.island.nodename.as3delaunay.Voronoi;
+import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
 import com.gildedgames.orbis_api.util.mc.NBT;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Bootstrap;
@@ -156,7 +157,10 @@ public class IslandGenPreview
 
 				Arrays.fill(biomes, BiomesAether.HIGHLANDS);
 
-				this.island.getGenerator().genIslandForChunk(biomes, this.noise, new BlockAccessIsland(), primer, this.island, chunkX, chunkZ);
+				ChunkMask mask = new ChunkMask();
+
+				this.island.getGenerator().genMask(biomes, this.noise, new BlockAccessIsland(), mask, this.island, chunkX, chunkZ);
+				this.island.getGenerator().genChunk(biomes, this.noise, new BlockAccessIsland(), mask, primer, this.island, chunkX, chunkZ);
 
 				for (int x = 0; x < 15; ++x)
 				{

@@ -10,6 +10,7 @@ import com.gildedgames.aether.client.renderer.world.RenderWorldPrecipitation;
 import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.util.helpers.IslandHelper;
+import com.gildedgames.orbis_api.preparation.impl.util.PrepHelper;
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -120,21 +121,24 @@ public class ClientRenderHandler
 
 		BlockPos pos = Minecraft.getMinecraft().player.getPosition();
 
+		int loaded = PrepHelper.getManager(Minecraft.getMinecraft().world).getAccess().getLoadedSectors().size();
+
+		event.getLeft().add("");
+		event.getLeft().add(TextFormatting.AQUA + "Aether: " + "Sector Access " + TextFormatting.GREEN + "(CLIENT)");
+		event.getLeft().add("- Loaded Sectors: " + loaded);
+
 		IIslandDataPartial data = IslandHelper.getPartial(Minecraft.getMinecraft().world, pos.getX() >> 4, pos.getZ() >> 4);
 
 		if (data == null)
 		{
+			event.getLeft().add(" - Waiting for sector data from server...");
 			return;
 		}
 
-		event.getLeft().add("");
-		event.getLeft().add(TextFormatting.AQUA + "Aether Island Sector" + TextFormatting.GREEN + " (Partial, Client)");
-		event.getLeft().add("- Parent Sector: Sector @ " + data.getParentSectorData().getSectorX() + ", " + data.getParentSectorData().getSectorY());
-		event.getLeft().add("- Island Bounds: (" + data.getBounds().getMinX() + ", " + data.getBounds().getMinY() + ", " + data.getBounds().getMinZ() + ")"
+		event.getLeft().add(" - Current Sector @ " + data.getParentSectorData().getSectorX() + ", " + data.getParentSectorData().getSectorY());
+		event.getLeft().add("  - Island Bounds: (" + data.getBounds().getMinX() + ", " + data.getBounds().getMinY() + ", " + data.getBounds().getMinZ() + ")"
 				+ " -> (" + data.getBounds().getMaxX() + ", " + data.getBounds().getMaxY() + ", " + data.getBounds().getMaxZ() + ")");
-		event.getLeft().add("- Precipitation: " + data.getPrecipitation().getType().name() + " (" + data.getPrecipitation().getStrength().name() + ")");
-		event.getLeft().add("  - Duration: " + (data.getPrecipitation().getDuration()) + " ticks");
-		event.getLeft().add("  - Remaining: " + (data.getPrecipitation().getRemainingDuration()) + " ticks");
+		event.getLeft().add("  - Precipitation: " + data.getPrecipitation().getType().name() + " (" + data.getPrecipitation().getStrength().name() + ")");
 	}
 
 	@SubscribeEvent

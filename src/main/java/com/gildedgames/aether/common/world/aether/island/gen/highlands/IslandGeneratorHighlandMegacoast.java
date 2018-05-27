@@ -5,10 +5,10 @@ import com.gildedgames.aether.api.util.OpenSimplexNoise;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandDataPartial;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
-import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
+import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
+import com.gildedgames.aether.common.world.aether.island.gen.IslandChunkMaskTransformer;
+import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
 import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 
@@ -71,7 +71,7 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 	}
 
 	@Override
-	public void genIslandForChunk(Biome[] biomes, final OpenSimplexNoise noise, final IBlockAccessExtended access, final ChunkPrimer primer,
+	public void genMask(Biome[] biomes, final OpenSimplexNoise noise, final IBlockAccessExtended access, final ChunkMask mask,
 			final IIslandData island,
 			final int chunkX,
 			final int chunkZ)
@@ -79,9 +79,6 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 		final double[] heightMap = generateNoise(noise, island, chunkX, chunkZ);
 
 		final Biome biome = biomes[0];
-
-		final IBlockState coastBlock = ((BiomeAetherBase) biome).getCoastalBlock();
-		final IBlockState stoneBlock = BlocksAether.holystone.getDefaultState();
 
 		final int posX = chunkX * 16;
 		final int posZ = chunkZ * 16;
@@ -94,18 +91,20 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 
 		for (int x = 0; x < 16; x++)
 		{
+			final int worldX = posX + x;
+
+			final double distX = Math.abs((centerX - worldX) * (1.0 / radiusX));
+
 			for (int z = 0; z < 16; z++)
 			{
-				final int worldX = posX + x;
 				final int worldZ = posZ + z;
 
-				final double sample = interpolate(heightMap, x, z);
-
-				final double distX = Math.abs((centerX - worldX) * (1.0 / radiusX));
 				final double distZ = Math.abs((centerZ - worldZ) * (1.0 / radiusZ));
 
 				// Get distance from center of Island
 				final double dist = Math.sqrt(distX * distX + distZ * distZ) / 1.0D;
+
+				final double sample = interpolate(heightMap, x, z);
 
 				final double heightSample = sample + 1.0 - dist;
 
@@ -116,7 +115,6 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 				final double cutoffPoint = 0.325;
 
 				final double normal = NoiseUtil.normalise(sample);
-				final double cutoffPointDist = Math.abs(cutoffPoint - heightSample);
 
 				final double bottomHeight = 100;
 
@@ -166,13 +164,13 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 							continue;
 						}
 
-						if (coastBlock != null && heightSample < cutoffPoint + 0.10 && y == 100)
+						if (heightSample < cutoffPoint + 0.10 && y == 100)
 						{
-							primer.setBlockState(x, y, z, coastBlock);
+							mask.setBlock(x, y, z, IslandBlockType.COAST_BLOCK.ordinal());
 						}
 						else
 						{
-							primer.setBlockState(x, y, z, stoneBlock);
+							mask.setBlock(x, y, z, IslandBlockType.STONE_BLOCK.ordinal());
 						}
 					}
 
@@ -180,18 +178,25 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 
 					for (int y = (int) bottomMaxY; y < maxY; y++)
 					{
-						if (coastBlock != null && (topSample < cutoffPoint + 0.10 && y == 100))
+						if ((topSample < cutoffPoint + 0.10 && y == 100))
 						{
-							primer.setBlockState(x, y, z, coastBlock);
+							mask.setBlock(x, y, z, IslandBlockType.COAST_BLOCK.ordinal());
 						}
 						else
 						{
-							primer.setBlockState(x, y, z, stoneBlock);
+							mask.setBlock(x, y, z, IslandBlockType.STONE_BLOCK.ordinal());
 						}
 					}
 				}
 			}
 		}
 	}
+
+	@Override
+	public void genChunk(Biome[] biomes, OpenSimplexNoise noise, IBlockAccessExtended access, ChunkMask mask, ChunkPrimer primer, IIslandData island, int chunkX, int chunkZ)
+	{
+		mask.createChunk(primer, new IslandChunkMaskTransformer());
+	}
+
 
 }
