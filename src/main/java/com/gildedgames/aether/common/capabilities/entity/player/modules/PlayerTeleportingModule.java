@@ -257,7 +257,8 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 							final BlockPos respawn = IslandHelper.getOutpostPos(player.world, pos);
 
 							playerAether.getTeleportingModule()
-									.setAetherPos(new BlockPosDimension(respawn.getX(), respawn.getY(), respawn.getZ(), AetherCore.CONFIG.getAetherDimID()));
+									.setAetherPos(new BlockPosDimension(respawn.getX() + 4, respawn.getY() + 1, respawn.getZ() + 4,
+											AetherCore.CONFIG.getAetherDimID()));
 						}
 
 						return playerAether.getTeleportingModule().getAetherPos();
