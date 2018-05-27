@@ -82,6 +82,12 @@ public class PlayerSectorModule extends PlayerAetherModule
 		int maxChunkX = chunkX + radius;
 		int maxChunkY = chunkY + radius;
 
+		int centerSectorX = Math.floorDiv(chunkX, entry.getSectorChunkArea());
+		int centerSectorY = Math.floorDiv(chunkY, entry.getSectorChunkArea());
+
+		// Prepare this first to give priority to sectors the player is in
+		manager.getAccess().provideSector(centerSectorX, centerSectorY, true);
+
 		int minSectorX = Math.floorDiv(minChunkX, entry.getSectorChunkArea());
 		int minSectorY = Math.floorDiv(minChunkY, entry.getSectorChunkArea());
 
