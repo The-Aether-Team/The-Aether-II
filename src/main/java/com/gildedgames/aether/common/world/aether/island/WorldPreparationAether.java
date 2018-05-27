@@ -157,7 +157,9 @@ public class WorldPreparationAether
 	public void generateBaseTerrainMask(Biome[] biomes, ChunkMask mask, IIslandData island, int chunkX, int chunkZ)
 	{
 		island.getGenerator().genMask(biomes, this.noise, this.access, mask, island, chunkX, chunkZ);
-
+		
 		this.replaceBiomeBlocks(island, mask, chunkX, chunkZ);
+
+		this.caveGenerator.generate(this.world, chunkX, chunkZ, mask);
 	}
 }
