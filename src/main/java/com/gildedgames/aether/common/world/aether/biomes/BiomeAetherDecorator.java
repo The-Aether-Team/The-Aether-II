@@ -197,7 +197,7 @@ public class BiomeAetherDecorator
 			{
 				final int y = access.getTopY(startX + x, startZ + z);
 
-				if (y >= 0)
+				if (y >= 80)
 				{
 					final ICreationData<CreationData> data = new CreationData(world).pos(new BlockPos(startX + x, y, startZ + z));
 
@@ -243,7 +243,7 @@ public class BiomeAetherDecorator
 			{
 				final int y = access.getTopY(startX + x, startZ + z);
 
-				if (y >= 0)
+				if (y >= 80)
 				{
 					final ICreationData<CreationData> data = new CreationData(world).pos(new BlockPos(startX + x, y, startZ + z));
 

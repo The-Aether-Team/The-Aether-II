@@ -5,7 +5,6 @@ import com.gildedgames.aether.api.util.OpenSimplexNoise;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandDataPartial;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
-import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.world.aether.features.WorldGenAetherCaves;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
 import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
@@ -58,6 +57,8 @@ public class WorldPreparationAether
 		final int worldX = chunkX * 16;
 		final int worldZ = chunkZ * 16;
 
+		ChunkMask mask = new ChunkMask();
+
 		//TODO: Interpolate this! Can increase performance a lot
 		for (int x = 0; x < 16; x++)
 		{
@@ -73,18 +74,16 @@ public class WorldPreparationAether
 				{
 					for (int y = 70; y < 70 + ((val - 0.2) * 10); y++)
 					{
-						primer.setBlockState(x, y, z, BlocksAether.aercloud.getDefaultState());
+						mask.setBlock(x, y, z, IslandBlockType.CLOUD_BED_BLOCK.ordinal());
 					}
 
 					for (int y = 70; y > 70 - ((val - 0.2) * 10); y--)
 					{
-						primer.setBlockState(x, y, z, BlocksAether.aercloud.getDefaultState());
+						mask.setBlock(x, y, z, IslandBlockType.CLOUD_BED_BLOCK.ordinal());
 					}
 				}
 			}
 		}
-
-		ChunkMask mask = new ChunkMask();
 
 		final IIslandGenerator generator = island.getGenerator();
 		generator.genMask(biomes, this.noise, this.access, mask, island, chunkX, chunkZ);

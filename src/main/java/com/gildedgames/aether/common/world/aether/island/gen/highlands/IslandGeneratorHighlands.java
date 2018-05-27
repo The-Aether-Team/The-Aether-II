@@ -334,6 +334,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 		IslandChunkMaskTransformer transformer = new IslandChunkMaskTransformer();
 		transformer.setMaskValue(IslandBlockType.TOPSOIL_BLOCK, biome.topBlock);
 		transformer.setMaskValue(IslandBlockType.SOIL_BLOCK, biome.fillerBlock);
+		transformer.setMaskValue(IslandBlockType.COAST_BLOCK, biome.getCoastalBlock());
 
 		mask.createChunk(primer, transformer);
 	}
