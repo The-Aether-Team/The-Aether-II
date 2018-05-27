@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.world.aether.features;
 
 import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
 import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
+import com.gildedgames.orbis_api.util.XoShiRoRandom;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -13,7 +14,7 @@ public class WorldGenAetherCaves
 
 	protected int range = 8;
 
-	protected ThreadLocal<Random> rand = ThreadLocal.withInitial(Random::new);
+	protected ThreadLocal<XoShiRoRandom> rand = ThreadLocal.withInitial(XoShiRoRandom::new);
 
 	protected void addRoom(long seed, int originalX, int originalZ, ChunkMask mask, double dirX, double dirY, double dirZ, Biome[] biomes)
 	{
@@ -28,7 +29,7 @@ public class WorldGenAetherCaves
 		double d1 = (double) (originalZ * 16 + 8);
 		float f = 0.0F;
 		float f1 = 0.0F;
-		Random random = new Random(seed);
+		XoShiRoRandom random = new XoShiRoRandom(seed);
 
 		if (p_180702_16_ <= 0)
 		{
@@ -215,10 +216,11 @@ public class WorldGenAetherCaves
 	{
 		Biome[] biomes = worldIn.provider.getBiomeProvider().getBiomes(null, x, z, 16, 16, true);
 
-		Random rand = this.rand.get();
+		XoShiRoRandom rand = this.rand.get();
+		rand.setSeed(worldIn.getSeed());
 
 		int i = this.range;
-		rand.setSeed(worldIn.getSeed());
+
 		long j = rand.nextLong();
 		long k = rand.nextLong();
 
