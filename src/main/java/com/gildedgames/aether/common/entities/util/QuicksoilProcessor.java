@@ -18,7 +18,7 @@ public class QuicksoilProcessor
 
 		if (entity instanceof EntityPlayer)
 		{
-			if (((EntityPlayer) entity).isSpectator())
+			if (((EntityPlayer) entity).isSpectator() || entity.isInWater())
 			{
 				return;
 			}

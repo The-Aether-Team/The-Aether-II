@@ -16,6 +16,7 @@ import com.gildedgames.orbis_api.preparation.IPrepChunkManager;
 import com.gildedgames.orbis_api.preparation.IPrepRegistryEntry;
 import com.gildedgames.orbis_api.preparation.IPrepSectorData;
 import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
+import com.gildedgames.orbis_api.util.XoShiRoRandom;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -64,7 +65,8 @@ public class PrepAether implements IPrepRegistryEntry
 				islandData.addComponents(biomeAether.createIslandComponents(islandData));
 
 				biomeAether.getBiomeDecorator().prepareDecorationsWholeIsland(world,
-						new BlockAccessIsland(world, islandData, sectorData, iPrepChunkManager), islandData, sectorData, new Random(islandData.getSeed()));
+						new BlockAccessIsland(world, islandData, sectorData, iPrepChunkManager), islandData, sectorData,
+						new XoShiRoRandom(islandData.getSeed()));
 			}
 		}
 	}
