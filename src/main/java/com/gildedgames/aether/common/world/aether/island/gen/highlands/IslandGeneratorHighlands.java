@@ -290,7 +290,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 						{
 							if (y <= minY)
 							{
-								mask.setBlock(x, y, z, IslandBlockType.COAST_BLOCK.ordinal());
+								mask.setBlock(x, y, z, IslandBlockType.SOIL_BLOCK.ordinal());
 							}
 							else
 							{
@@ -327,7 +327,8 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 	}
 
 	@Override
-	public void genChunk(Biome[] biomes, OpenSimplexNoise noise, IBlockAccessExtended access, ChunkMask mask, ChunkPrimer primer, IIslandData island, int chunkX, int chunkZ)
+	public void genChunk(Biome[] biomes, OpenSimplexNoise noise, IBlockAccessExtended access, ChunkMask mask, ChunkPrimer primer, IIslandData island,
+			int chunkX, int chunkZ)
 	{
 		BiomeAetherBase biome = (BiomeAetherBase) island.getBiome();
 
