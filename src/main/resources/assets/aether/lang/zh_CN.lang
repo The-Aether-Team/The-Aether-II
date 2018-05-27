@@ -902,7 +902,7 @@ edison.greet.option.okay_sale=我会没事的。你这有啥好货吗？
 
 edison.greet.start=嘿，朋友，最近过得还顺利吗？要不要买点什么？
 
-edison.greet.option.sale=你弄到什么货物了？
+edison.greet.option.sale=你有啥好货吗？
 
 edison.greet.option.okay_goodbye=我觉得我过得不错。再见。
 edison.greet.option.ready_goodbye=我想我已经准备好了。爱迪生，再见。
@@ -979,7 +979,7 @@ edison.shop.greetings1=朋友——在这里，你能找到最好的货物。环
 edison.shop.greetings2=今天大减价，朋友！看看你周围，肯定能找到你想要的东西，我保证！
 
 edison.shop.enchanted_wyndberry=饿了吗？那你需要这些水果！这些空莓营养丰富，可千万别错过！从来没吃过魔化食物？那你就吃大亏啦！
-edison.shop.enchanted_blueberry=谁说只有介元才有蓝莓？最上等神能晶体滋养了它们，填饱你的肚子轻而易举！
+edison.shop.enchanted_blueberry=谁说只有介元才有蓝莓？最上等的神能晶体滋养了它们，填饱你的肚子轻而易举！
 edison.shop.ambrosium_shard=天境中的常见晶体，但可别小瞧它们——这些片状晶体会是你在路途中最需要的材料之一。无论是用来魔能处理食物还是修复工具，它们都是值得收集的宝贝。
 edison.shop.skyroot_stick=买点···木棍？！我的梦可真的没让我失望。这地面上绵延几里的可都是树啊，随便掰点树脂下来哪用得着花钱！嘿嘿，我可不是抱怨，拿钱谁不开心呢。
 edison.shop.skyroot_pickaxe=开始旅程时所需的基本工具之一。
@@ -1014,21 +1014,21 @@ josediya.greet.option.moa=我也能养只恐鸟吗？
 josediya.greet.option.who=请问你是···？
 josediya.greet.option.friends=你是那光头汉子的朋友？
 josediya.greet.option.paying=是他付钱请你来帮我忙的吗？
-josediya.greet.option.white_gold=我怎么会有白金呢。现在怎么说？
+josediya.greet.option.white_gold=你看我这样子，哪像是有···额，空镀币呢。那怎么办？
 
 josediya.greet.option.services=你能提供什么呢？
 josediya.greet.option.home=你是怎么知道我家在哪里的？
 josediya.greet.option.walk_home=我为什么不能靠我的双腿回家？
 
-josediya.greet.what=哇，你也没那么聪明嘛。和你或者那个秃驴一样，我也是个人。之前没见过天灵族是吗？女武神保护了我们全族。
+josediya.greet.what=哇，你也没那么聪明嘛。和你或者那个秃驴一样，我也是个人。之前没见过天灵族是吧？女武神保护了我们全族。
 josediya.greet.where=我来自遥远南方的维拉德克斯王国，我主要在那里做活维持生计。
 josediya.greet.take_me=人类，我不觉着你付得起旅费。维拉德克斯离这里有三星期的航程，而且路线十分危险。我带不了你。
 josediya.greet.winged_beast=他是我真正的伙伴，一只叫泰瓦尔的强健恐鸟，就算驮着你我两人飞翔，也不会流哪怕一滴汗。
 josediya.greet.fly=当然啦！我正是为了这个才驯养他的。驯养恐鸟是我工作的一部分。好好对待它们，它们就会和你很亲近。
 josediya.greet.moa=想骑恐鸟，你得让它信任你。恐鸟蛋可不好弄，野生恐鸟非常注重保护自己的巢窠。
 josediya.greet.who=会带你去各种地方的女孩。我叫乔瑟迪娅，航运从业者，那边的那个秃子叫我来帮你。
-josediya.greet.friends=爱迪生和我相处得很好，我们结识的这几年来他一直是个很有帮助的伙伴，但我还是觉得他不太可信，只是共同的利益让我们共事而已。
-josediya.greet.paying=不，我只是还欠别人的一个情而已，你才是那个该付钱的。对了，我不收你们那里的钱，只收白金。
+josediya.greet.friends=爱迪生和我相处得很好，我们结识的这几年来，他一直是个很有帮助的伙伴，但我还是觉得他不太可信，只是共同的利益让我们共事而已。
+josediya.greet.paying=不，我只是还欠别人的一个情而已，你才是那个该付钱的。对了，我不收你们那里的钱，只收空镀币。
 josediya.greet.white_gold=问题出在你身上。我也得挣钱糊口，所以呢不关心你怎么挣钱。去农民们那边打打工或者找点别的什么活吧。
 josediya.greet.services=你要是已经安好家的话，到随便哪个哨营来找我，我能把你带回家。当然，得付够钱。
 josediya.greet.home=如果你指的是介元的话，我可不是带你回那的。先在天境定居下来吧。
