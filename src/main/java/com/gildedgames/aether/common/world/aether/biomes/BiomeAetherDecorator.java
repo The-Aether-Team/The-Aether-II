@@ -115,7 +115,8 @@ public class BiomeAetherDecorator
 		this.genPurpleAercloud = new WorldGenPurpleAercloud(BlockAercloud.getAercloudState(BlockAercloud.PURPLE_AERCLOUD), 4, false);
 	}
 
-	public void prepareDecorationsWholeIsland(final World world, BlockAccessIsland access, final IIslandData island, IPrepSectorData sectorData, final Random random)
+	public void prepareDecorationsWholeIsland(final World world, BlockAccessIsland access, final IIslandData island, IPrepSectorData sectorData,
+			final Random random)
 	{
 		final DataPrimer primer = new DataPrimer(access);
 
@@ -219,7 +220,8 @@ public class BiomeAetherDecorator
 		}
 	}
 
-	private void generate(final BlueprintDefinitionPool pool, final int tries, final int maxGenerated, final int floorHeight, final IIslandData island, final IBlockAccessExtended access, final DataPrimer primer, final World world, final Random rand)
+	private void generate(final BlueprintDefinitionPool pool, final int tries, final int maxGenerated, final int floorHeight, final IIslandData island,
+			final IBlockAccessExtended access, final DataPrimer primer, final World world, final Random rand)
 	{
 		if (maxGenerated <= 0)
 		{
@@ -377,7 +379,6 @@ public class BiomeAetherDecorator
 		{
 			for (count = 0; count < 6; count++)
 			{
-
 				x = random.nextInt(16) + 8;
 				y = random.nextInt(128);
 				z = random.nextInt(16) + 8;
@@ -387,7 +388,7 @@ public class BiomeAetherDecorator
 		}
 
 		// Brettl Plant Generator
-		if (random.nextInt(2) == 0)
+		if (random.nextInt(5) == 0)
 		{
 			x = random.nextInt(16) + 8;
 			y = random.nextInt(128);

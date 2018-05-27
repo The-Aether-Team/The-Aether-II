@@ -2,7 +2,6 @@ package com.gildedgames.aether.common.world.aether.features;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBrettlPlant;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -28,9 +27,13 @@ public class WorldGenBrettlPlant extends WorldGenerator
 		int i = 0, growthStage = 0, count = 0;
 		while (i < 64 && count < 4)
 		{
-			final BlockPos randomPos = position.add(
-					rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
-			final Block block = worldIn.getBlockState(randomPos).getBlock();
+			BlockPos randomPos = position.add(rand.nextInt(8) - rand.nextInt(8), 0, rand.nextInt(8) - rand.nextInt(8));
+			randomPos = worldIn.getHeight(randomPos).down();
+
+			if (!worldIn.isBlockLoaded(randomPos))
+			{
+				continue;
+			}
 
 			if (worldIn.getBlockState(randomPos).getBlock() == BlocksAether.quicksoil && worldIn.isAirBlock(randomPos.up()))
 			{
@@ -60,6 +63,7 @@ public class WorldGenBrettlPlant extends WorldGenerator
 					worldIn.setBlockState(randomPos.up(2), this.brettlState.withProperty(BlockBrettlPlant.PROPERTY_HARVESTABLE, false)
 							.withProperty(BlockBrettlPlant.PROPERTY_VARIANT, BlockBrettlPlant.TOP));
 				}
+
 				count++;
 			}
 
