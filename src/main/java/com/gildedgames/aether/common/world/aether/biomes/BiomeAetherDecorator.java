@@ -166,16 +166,16 @@ public class BiomeAetherDecorator
 			AetherCore.LOGGER.info("WARNING: OUTPOST_A NOT GENERATED ON AN ISLAND!");
 		}
 
-		this.generate(GenerationAether.ABAND_ANGEL_STOREROOM, 200, random.nextInt(10), -1, island, access, primer, world, random);
-		this.generate(GenerationAether.ABAND_ANGEL_WATCHTOWER, 200, random.nextInt(10), -1, island, access, primer, world, random);
-		this.generate(GenerationAether.ABAND_CAMPSITE_1A, 300, random.nextInt(10), 0, island, access, primer, world, random);
-		this.generate(GenerationAether.ABAND_HUMAN_HOUSE_1A, 200, random.nextInt(10), -1, island, access, primer, world, random);
-		this.generate(GenerationAether.ABAND_HUMAN_HOUSE_1B, 200, random.nextInt(10), -5, island, access, primer, world, random);
-		this.generate(GenerationAether.SKYROOT_WATCHTOWER_1A, 300, random.nextInt(10), 1, island, access, primer, world, random);
+		this.generate(GenerationAether.WELL, 500, random.nextInt(50), island, access, primer, world, random);
+		this.generate(GenerationAether.ABAND_ANGEL_STOREROOM, 200, random.nextInt(10), island, access, primer, world, random);
+		this.generate(GenerationAether.ABAND_ANGEL_WATCHTOWER, 200, random.nextInt(10), island, access, primer, world, random);
+		this.generate(GenerationAether.ABAND_CAMPSITE, 200, 5, island, access, primer, world, random);
+		this.generate(GenerationAether.ABAND_HUMAN_HOUSE, 200, random.nextInt(10), island, access, primer, world, random);
+		this.generate(GenerationAether.SKYROOT_WATCHTOWER, 300, random.nextInt(10), island, access, primer, world, random);
 	}
 
 	private void generate(
-			final BlueprintDefinition def, final int tries, final int maxGenerated, final int floorHeight, final IIslandData island,
+			final BlueprintDefinition def, final int tries, final int maxGenerated, final IIslandData island,
 			final IBlockAccessExtended access, final DataPrimer primer, final World world, final Random rand)
 	{
 		if (maxGenerated <= 0)
@@ -195,7 +195,7 @@ public class BiomeAetherDecorator
 
 			if (access.canAccess(startX + x, startZ + z))
 			{
-				final int y = access.getTopY(startX + x, startZ + z);
+				final int y = access.getTopY(startX + x, startZ + z) - def.getFloorHeight() + (def.getFloorHeight() == 0 ? 1 : 0);
 
 				if (y >= 80)
 				{
@@ -220,7 +220,7 @@ public class BiomeAetherDecorator
 		}
 	}
 
-	private void generate(final BlueprintDefinitionPool pool, final int tries, final int maxGenerated, final int floorHeight, final IIslandData island,
+	private void generate(final BlueprintDefinitionPool pool, final int tries, final int maxGenerated, final IIslandData island,
 			final IBlockAccessExtended access, final DataPrimer primer, final World world, final Random rand)
 	{
 		if (maxGenerated <= 0)
@@ -242,7 +242,7 @@ public class BiomeAetherDecorator
 
 			if (access.canAccess(startX + x, startZ + z))
 			{
-				final int y = access.getTopY(startX + x, startZ + z);
+				final int y = access.getTopY(startX + x, startZ + z) - blueprint.getFloorHeight() + (blueprint.getFloorHeight() == 0 ? 1 : 0);
 
 				if (y >= 80)
 				{
