@@ -14,7 +14,10 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockValkyrieGrass;
 import com.gildedgames.aether.common.registry.content.GenerationAether;
 import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import com.gildedgames.aether.common.world.aether.WorldProviderAether;
-import com.gildedgames.aether.common.world.aether.features.*;
+import com.gildedgames.aether.common.world.aether.features.WorldGenAetherFlowers;
+import com.gildedgames.aether.common.world.aether.features.WorldGenAetherMinable;
+import com.gildedgames.aether.common.world.aether.features.WorldGenBrettlPlant;
+import com.gildedgames.aether.common.world.aether.features.WorldGenQuicksoil;
 import com.gildedgames.aether.common.world.aether.features.aerclouds.WorldGenAercloud;
 import com.gildedgames.aether.common.world.aether.features.aerclouds.WorldGenPurpleAercloud;
 import com.gildedgames.aether.common.world.aether.features.trees.WorldGenOrangeTree;
@@ -28,7 +31,6 @@ import com.gildedgames.orbis_api.processing.BlockAccessExtendedWrapper;
 import com.gildedgames.orbis_api.processing.DataPrimer;
 import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
 import net.minecraft.block.state.pattern.BlockMatcher;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -51,8 +53,6 @@ public class BiomeAetherDecorator
 	private final WorldGenAetherFlowers genBlueberryBushes, genKirridGrass;
 
 	private final WorldGenQuicksoil genQuicksoil;
-
-	private final WorldGenAetherLakes genAetherLakes;
 
 	private final WorldGenAercloud genColdColumbusAercloud, genColdFlatAercloud, genBlueAercloud;
 
@@ -105,7 +105,6 @@ public class BiomeAetherDecorator
 						.withProperty(BlockValkyrieGrass.PROPERTY_VARIANT, BlockValkyrieGrass.FULL), 64);
 
 		this.genQuicksoil = new WorldGenQuicksoil();
-		this.genAetherLakes = new WorldGenAetherLakes(Blocks.WATER.getDefaultState());
 
 		this.genBrettlPlant = new WorldGenBrettlPlant();
 
@@ -398,16 +397,6 @@ public class BiomeAetherDecorator
 		}
 
 		this.generateClouds(world, random, new BlockPos(pos.getX(), 0, pos.getZ()));
-
-		// Lake Generator
-		if (random.nextInt(4) == 0)
-		{
-			x = random.nextInt(16) + 8;
-			y = random.nextInt(128);
-			z = random.nextInt(16) + 8;
-
-			this.genAetherLakes.generate(world, random, pos.add(x, y, z));
-		}
 
 		//
 		if (genBase instanceof BiomeAetherBase)
