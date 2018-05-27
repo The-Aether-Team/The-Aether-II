@@ -2,6 +2,8 @@ package com.gildedgames.aether.common.entities.living.mounts;
 
 import com.gildedgames.aether.api.entity.IMount;
 import com.gildedgames.aether.api.entity.IMountProcessor;
+import com.gildedgames.aether.common.entities.ai.AetherNavigateGround;
+import com.gildedgames.aether.common.entities.ai.EntityAIUnstuckBlueAercloud;
 import com.gildedgames.aether.common.entities.ai.moa.*;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.genes.util.GeneUtil;
@@ -29,6 +31,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
@@ -128,11 +131,18 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		return this.ageSinceOffGround;
 	}
 
+	@Override
+	protected PathNavigate createNavigator(final World worldIn)
+	{
+		return new AetherNavigateGround(this, worldIn);
+	}
+
 	private void initAI()
 	{
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(0, new AIMoaPackBreeding(this, 0.25F));
 		this.tasks.addTask(1, new AIPanicPack(this, 0.55F));
+		this.tasks.addTask(3, new EntityAIUnstuckBlueAercloud(this));
 		this.tasks.addTask(3, new EntityAIWander(this, 0.50F));
 		this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		this.tasks.addTask(5, new EntityAILookIdle(this));

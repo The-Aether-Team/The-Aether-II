@@ -1,11 +1,13 @@
 package com.gildedgames.aether.common.util.helpers;
 
 import com.gildedgames.aether.common.ReflectionAether;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -195,6 +197,27 @@ public class EntityUtil
 		}
 
 		return skinType;
+	}
+
+	public static IBlockState getBlockBelow(Entity entity)
+	{
+		return getBlockBelow(entity.world, entity.getPosition());
+	}
+
+	public static IBlockState getBlockBelow(World world, BlockPos pos)
+	{
+		BlockPos startPos = pos;
+		IBlockState state;
+
+		state = world.getBlockState(startPos);
+
+		while (state == Blocks.AIR.getDefaultState())
+		{
+			startPos = startPos.down();
+			state = world.getBlockState(startPos);
+		}
+
+		return state;
 	}
 
 }

@@ -2,8 +2,10 @@ package com.gildedgames.aether.common.entities.living.passive;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.entities.ai.AetherNavigateGround;
 import com.gildedgames.aether.common.entities.ai.EntityAIHideFromRain;
 import com.gildedgames.aether.common.entities.ai.EntityAIRestrictRain;
+import com.gildedgames.aether.common.entities.ai.EntityAIUnstuckBlueAercloud;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketAerbunnySetRiding;
@@ -20,7 +22,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigate;
-import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
@@ -54,6 +55,7 @@ public class EntityAerbunny extends EntityAetherAnimal
 		super(world);
 
 		this.tasks.addTask(2, new EntityAIRestrictRain(this));
+		this.tasks.addTask(3, new EntityAIUnstuckBlueAercloud(this));
 		this.tasks.addTask(3, new EntityAIHideFromRain(this, 1.3D));
 		this.tasks.addTask(1, new EntityAISwimming(this));
 		this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
@@ -286,7 +288,7 @@ public class EntityAerbunny extends EntityAetherAnimal
 		}
 	}
 
-	private class AerbunnyNavigator extends PathNavigateGround
+	private class AerbunnyNavigator extends AetherNavigateGround
 	{
 		public AerbunnyNavigator(final EntityLiving entity, final World world)
 		{

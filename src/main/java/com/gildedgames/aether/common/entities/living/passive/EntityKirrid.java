@@ -1,8 +1,10 @@
 package com.gildedgames.aether.common.entities.living.passive;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.entities.ai.AetherNavigateGround;
 import com.gildedgames.aether.common.entities.ai.EntityAIHideFromRain;
 import com.gildedgames.aether.common.entities.ai.EntityAIRestrictRain;
+import com.gildedgames.aether.common.entities.ai.EntityAIUnstuckBlueAercloud;
 import com.gildedgames.aether.common.entities.ai.kirrid.EntityAIEatAetherGrass;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
@@ -17,6 +19,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
@@ -55,8 +58,15 @@ public class EntityKirrid extends EntitySheep
 		this.entityAIEatGrass = new EntityAIEatAetherGrass(this);
 
 		this.tasks.addTask(2, new EntityAIRestrictRain(this));
+		this.tasks.addTask(3, new EntityAIUnstuckBlueAercloud(this));
 		this.tasks.addTask(3, new EntityAIHideFromRain(this, 1.3D));
 		this.tasks.addTask(9, this.entityAIEatGrass);
+	}
+
+	@Override
+	protected PathNavigate createNavigator(final World worldIn)
+	{
+		return new AetherNavigateGround(this, worldIn);
 	}
 
 	@Override
