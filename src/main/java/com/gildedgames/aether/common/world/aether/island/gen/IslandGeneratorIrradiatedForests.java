@@ -12,6 +12,7 @@ import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.Crac
 import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.IrradiatedForestsData;
 import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
 import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
+import com.gildedgames.orbis_api.util.FastMathUtil;
 import com.gildedgames.orbis_api.util.ObjectFilter;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.world.biome.Biome;
@@ -151,7 +152,7 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 								final double crackDistX = Math.abs(x1 * (1.0 / radius));
 								final double crackDistZ = Math.abs(z1 * (1.0 / radius));
 
-								final double crackDist = Math.hypot(crackDistX, crackDistZ);
+								final double crackDist = FastMathUtil.hypot(crackDistX, crackDistZ);
 
 								if (closestDist > crackDist)
 								{

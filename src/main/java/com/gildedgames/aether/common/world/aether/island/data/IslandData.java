@@ -19,6 +19,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
@@ -140,7 +141,7 @@ public class IslandData extends IslandDataPartial implements IIslandData
 	@Override
 	public List<PlacedBlueprint> getPlacedBlueprints()
 	{
-		return this.blueprintInstances;
+		return new ArrayList<>(this.blueprintInstances);
 	}
 
 	@Override

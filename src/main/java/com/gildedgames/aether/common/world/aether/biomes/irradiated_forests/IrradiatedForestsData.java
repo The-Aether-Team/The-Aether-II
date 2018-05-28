@@ -8,20 +8,19 @@ import com.gildedgames.orbis_api.util.LineHelp;
 import com.gildedgames.orbis_api.util.io.NBTFunnel;
 import com.gildedgames.orbis_api.util.mc.NBT;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
+import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 public class IrradiatedForestsData implements NBT
 {
 	private static final int NUM_LLOYD_RELAXATIONS = 1;
 
-	private final Map<Long, CrackChunk> cracks = Maps.newHashMap();
+	private final Long2ObjectOpenHashMap<CrackChunk> cracks = new Long2ObjectOpenHashMap<>();
 
 	private Voronoi voronoi;
 
