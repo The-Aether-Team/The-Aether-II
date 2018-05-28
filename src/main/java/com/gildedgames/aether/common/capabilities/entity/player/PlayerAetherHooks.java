@@ -282,7 +282,7 @@ public class PlayerAetherHooks
 			}
 
 			BlockPos closestCampfire = aePlayer.getCampfiresModule().getClosestCampfire();
-			BlockPos islandSpawn = IslandHelper.getOutpostPos(mp.getServerWorld(), mp.getPosition()).add(4, 1, 4);
+			BlockPos islandSpawn = IslandHelper.getOutpostPos(mp.getServerWorld(), mp.getPosition());
 
 			final BlockPos respawnPoint = closestCampfire != null ? closestCampfire.add(-1, 0, -1) : islandSpawn;
 			boolean obstructed = false;
