@@ -6,6 +6,7 @@ import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandDataPartial;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.CrackChunk;
 import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.CrackPos;
@@ -261,7 +262,10 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 	@Override
 	public void genChunk(Biome[] biomes, OpenSimplexNoise noise, IBlockAccessExtended access, ChunkMask mask, ChunkPrimer primer, IIslandData island, int chunkX, int chunkZ)
 	{
-		mask.createChunk(primer, new IslandChunkMaskTransformer());
+		IslandChunkMaskTransformer transformer = new IslandChunkMaskTransformer();
+		transformer.setMaskValue(IslandBlockType.TOPSOIL_BLOCK, BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.IRRADIATED));
+
+		mask.createChunk(primer, transformer);
 	}
 
 }
