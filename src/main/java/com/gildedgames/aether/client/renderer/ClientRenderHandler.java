@@ -10,6 +10,7 @@ import com.gildedgames.aether.client.renderer.world.RenderWorldPrecipitation;
 import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.util.helpers.IslandHelper;
+import com.gildedgames.orbis_api.preparation.IPrepManager;
 import com.gildedgames.orbis_api.preparation.impl.util.PrepHelper;
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
@@ -121,7 +122,14 @@ public class ClientRenderHandler
 
 		BlockPos pos = Minecraft.getMinecraft().player.getPosition();
 
-		int loaded = PrepHelper.getManager(Minecraft.getMinecraft().world).getAccess().getLoadedSectors().size();
+		IPrepManager manager = PrepHelper.getManager(Minecraft.getMinecraft().world);
+
+		if (manager == null)
+		{
+			return;
+		}
+
+		int loaded = manager.getAccess().getLoadedSectors().size();
 
 		event.getLeft().add("");
 		event.getLeft().add(TextFormatting.AQUA + "Aether: " + "Sector Access " + TextFormatting.GREEN + "(CLIENT)");
