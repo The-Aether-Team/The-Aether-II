@@ -169,7 +169,7 @@ public class BiomeAetherDecorator
 		this.generate(GenerationAether.WELL, 500, random.nextInt(50), island, access, primer, world, random);
 		this.generate(GenerationAether.ABAND_ANGEL_STOREROOM, 200, random.nextInt(10), island, access, primer, world, random);
 		this.generate(GenerationAether.ABAND_ANGEL_WATCHTOWER, 200, random.nextInt(10), island, access, primer, world, random);
-		this.generate(GenerationAether.ABAND_CAMPSITE, 200, 5, island, access, primer, world, random);
+		//this.generate(GenerationAether.ABAND_CAMPSITE, 200, 5, island, access, primer, world, random);
 		this.generate(GenerationAether.ABAND_HUMAN_HOUSE, 200, random.nextInt(10), island, access, primer, world, random);
 		this.generate(GenerationAether.SKYROOT_WATCHTOWER, 300, random.nextInt(10), island, access, primer, world, random);
 	}
