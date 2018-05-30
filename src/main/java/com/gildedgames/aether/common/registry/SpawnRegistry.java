@@ -112,7 +112,7 @@ public class SpawnRegistry
 
 		flying.addEntry(aerwhale);
 
-		ISpawnSystem spawnSystem = new SpawnSystem(world, Lists.newArrayList(animals/*, atmospheric, hostiles, flying*/));
+		ISpawnSystem spawnSystem = new SpawnSystem(world, Lists.newArrayList(animals, atmospheric, hostiles, flying));
 
 		event.addCapability(AetherCore.getResource("SpawnSystem"), new SpawnSystemProvider(spawnSystem));
 	}
