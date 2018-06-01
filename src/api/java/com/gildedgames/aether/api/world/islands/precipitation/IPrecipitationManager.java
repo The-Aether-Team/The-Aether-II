@@ -5,7 +5,9 @@ import net.minecraftforge.common.util.INBTSerializable;
 
 public interface IPrecipitationManager extends INBTSerializable<NBTTagCompound>
 {
-	void startPrecipitation(PrecipitationType type, PrecipitationStrength strengthd);
+	void startPrecipitation(PrecipitationStrength strengthd);
+
+	void endPrecipitation();
 
 	float getStrength(float partialTicks);
 
