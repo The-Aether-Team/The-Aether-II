@@ -1,6 +1,7 @@
 package com.gildedgames.aether.client;
 
 import com.gildedgames.aether.api.AetherAPI;
+import com.gildedgames.aether.client.gui.misc.CustomLoadingRenderer;
 import com.gildedgames.aether.client.gui.tab.TabBugReport;
 import com.gildedgames.aether.client.gui.tab.TabClientEvents;
 import com.gildedgames.aether.client.gui.tab.TabEquipment;
@@ -32,6 +33,8 @@ public class ClientProxy extends CommonProxy
 	public void preInit(final FMLPreInitializationEvent event)
 	{
 		super.preInit(event);
+
+		Minecraft.getMinecraft().loadingScreen = new CustomLoadingRenderer(Minecraft.getMinecraft(), Minecraft.getMinecraft().loadingScreen);
 
 		PerfHelper.measure("Pre-initialize special renders", AetherRenderers::preInit);
 	}

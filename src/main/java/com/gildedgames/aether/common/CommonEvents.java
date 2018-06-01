@@ -22,7 +22,6 @@ import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.util.helpers.AetherHelper;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
 import com.gildedgames.aether.common.util.helpers.PlayerUtil;
-import com.gildedgames.aether.common.world.aether.TeleporterAether;
 import com.gildedgames.orbis_api.preparation.impl.util.PrepHelper;
 import com.gildedgames.orbis_api.util.mc.BlockPosDimension;
 import com.google.common.collect.Lists;
@@ -60,7 +59,6 @@ import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fluids.FluidEvent;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -222,20 +220,6 @@ public class CommonEvents
 				event.setCanceled(true);
 
 				break;
-			}
-		}
-	}
-
-	@SubscribeEvent
-	public static void onWorldLoaded(final WorldEvent.Load event)
-	{
-		if (event.getWorld() instanceof WorldServer)
-		{
-			if (event.getWorld().provider.getDimensionType() == DimensionsAether.AETHER)
-			{
-				final WorldServer world = (WorldServer) event.getWorld();
-
-				AetherCore.TELEPORTER = new TeleporterAether(world);
 			}
 		}
 	}

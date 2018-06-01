@@ -1,15 +1,11 @@
 package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.client.gui.misc.CustomLoadingRenderer;
 import com.gildedgames.aether.common.analytics.GAReporter;
 import com.gildedgames.aether.common.registry.SpawnRegistry;
 import com.gildedgames.aether.common.registry.content.CurrencyAether;
-import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.util.helpers.PerfHelper;
-import com.gildedgames.aether.common.world.aether.TeleporterAether;
 import com.gildedgames.orbis_api.preparation.impl.util.PrepHelper;
-import net.minecraft.client.Minecraft;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -22,12 +18,8 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.io.File;
 
 @Mod(name = AetherCore.MOD_NAME, modid = AetherCore.MOD_ID, version = AetherCore.MOD_VERSION,
 		certificateFingerprint = AetherCore.MOD_FINGERPRINT, guiFactory = AetherCore.MOD_GUI_FACTORY,
@@ -63,8 +55,6 @@ public class AetherCore
 
 	public static GAReporter ANALYTICS;
 
-	public static TeleporterAether TELEPORTER;
-
 	public static ResourceLocation getResource(final String name)
 	{
 		return new ResourceLocation(AetherCore.MOD_ID, name);
@@ -85,38 +75,26 @@ public class AetherCore
 		return FMLCommonHandler.instance().getSide().isServer();
 	}
 
-	public static File getWorldDirectory()
-	{
-		return DimensionManager.getCurrentSaveRootDirectory();
-	}
-
 	public static boolean isInsideDevEnvironment()
 	{
 		return Launch.blackboard.get("fml.deobfuscatedEnvironment") == Boolean.TRUE;
 	}
 
 	@EventHandler
-	public void onFMLConstruction(final FMLConstructionEvent event)
+	public void onModConstruction(final FMLConstructionEvent event)
 	{
 		AetherAPI.registerProvider(AetherCore.PROXY);
 	}
 
 	@EventHandler
-	public void onFMLPreInit(final FMLPreInitializationEvent event)
+	public void onModPreInit(final FMLPreInitializationEvent event)
 	{
 		AetherCore.CONFIG = new ConfigAether(event.getSuggestedConfigurationFile());
 		AetherCore.PROXY.preInit(event);
 	}
 
 	@EventHandler
-	@SideOnly(Side.CLIENT)
-	public void onFMLPreInitClient(final FMLPreInitializationEvent event)
-	{
-		Minecraft.getMinecraft().loadingScreen = new CustomLoadingRenderer(Minecraft.getMinecraft(), Minecraft.getMinecraft().loadingScreen);
-	}
-
-	@EventHandler
-	public void onFMLInit(final FMLInitializationEvent event)
+	public void onModInit(final FMLInitializationEvent event)
 	{
 		isAetherLegacyInstalled = Loader.isModLoaded("aether_legacy");
 
@@ -128,13 +106,13 @@ public class AetherCore
 	}
 
 	@EventHandler
-	public void onServerStopping(final FMLServerStoppingEvent event)
+	public void onServerStarting(final FMLServerStartingEvent event)
 	{
-		DimensionsAether.onServerStopping(event);
+		PROXY.onServerStarting(event);
 	}
 
 	@EventHandler
-	public void serverStarted(final FMLServerStartedEvent event)
+	public void onServerStarted(final FMLServerStartedEvent event)
 	{
 		World world = DimensionManager.getWorld(CONFIG.getAetherDimID());
 
@@ -144,7 +122,7 @@ public class AetherCore
 			PrepHelper.getManager(world).getAccess().provideSectorForChunk(0, 0, true);
 		}
 
-		PROXY.serverStarted(event);
+		PROXY.onServerStarted(event);
 
 		AetherAPI.content().currency().clearRegistrations();
 		PerfHelper.measure("Initialize currency", CurrencyAether::serverStarted);

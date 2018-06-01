@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.IAetherServices;
 import com.gildedgames.aether.api.net.IGildedGamesAccountApi;
 import com.gildedgames.aether.api.registry.IContentRegistry;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherHooks;
+import com.gildedgames.aether.common.commands.CommandIsland;
 import com.gildedgames.aether.common.entities.util.MountEventHandler;
 import com.gildedgames.aether.common.entities.util.QuicksoilProcessor;
 import com.gildedgames.aether.common.items.tools.ItemToolHandler;
@@ -35,6 +36,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 import java.io.File;
 import java.util.Random;
@@ -94,7 +96,12 @@ public class CommonProxy implements IAetherServices
 		MinecraftForge.EVENT_BUS.register(IslandTicker.class);
 	}
 
-	public void serverStarted(FMLServerStartedEvent event)
+	public void onServerStarting(FMLServerStartingEvent event)
+	{
+		event.registerServerCommand(new CommandIsland());
+	}
+
+	public void onServerStarted(FMLServerStartedEvent event)
 	{
 		PerfHelper.measure("Initialize recipe indexes", this.contentRegistry::rebuildIndexes);
 	}
