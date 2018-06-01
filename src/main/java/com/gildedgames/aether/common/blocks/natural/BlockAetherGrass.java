@@ -8,8 +8,9 @@ import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockGrass;
+import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -29,7 +30,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-public class BlockAetherGrass extends BlockGrass implements IBlockMultiName
+public class BlockAetherGrass extends Block implements IBlockMultiName, IGrowable
 {
 	public static final BlockVariant AETHER = new BlockVariant(0, "normal"),
 			ENCHANTED = new BlockVariant(1, "enchanted"), ARCTIC = new BlockVariant(2, "arctic"), MAGNETIC = new BlockVariant(3,
@@ -41,7 +42,7 @@ public class BlockAetherGrass extends BlockGrass implements IBlockMultiName
 
 	public BlockAetherGrass()
 	{
-		super();
+		super(Material.GRASS);
 
 		this.setSoundType(SoundType.PLANT);
 
