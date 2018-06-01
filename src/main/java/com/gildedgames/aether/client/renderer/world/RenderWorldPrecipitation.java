@@ -30,6 +30,8 @@ public class RenderWorldPrecipitation extends IRenderHandler
 
 	private int renderTicks;
 
+	private int renderTicksSinceSound;
+
 	private final float[] rainXCoords = new float[1024];
 
 	private final float[] rainYCoords = new float[1024];
@@ -56,7 +58,12 @@ public class RenderWorldPrecipitation extends IRenderHandler
 	// Called every 20th of a second
 	public void tick()
 	{
-		this.renderTicks++;
+		if (!Minecraft.getMinecraft().isGamePaused())
+		{
+			this.renderTicks++;
+			this.renderTicksSinceSound++;
+		}
+
 	}
 
 	@Override
@@ -291,33 +298,22 @@ public class RenderWorldPrecipitation extends IRenderHandler
 			return;
 		}
 
-		if (island.getPrecipitation().getType() == PrecipitationType.NONE || island.getPrecipitation().getStrength(mc.getRenderPartialTicks()) <= 0.7f)
+		if (island.getPrecipitation().getType() == PrecipitationType.NONE || island.getPrecipitation().getStrength(mc.getRenderPartialTicks()) <= 0.3f)
 		{
 			return;
 		}
 
-		int radius = 12;
+		int radius = 25;
+		int frequency = 15;
 
-		int chance;
-
-		switch (island.getPrecipitation().getStrength())
+		if (this.renderTicksSinceSound >= frequency)
 		{
-			case LIGHT:
-				chance = 95;
-				break;
-			default:
-				chance = 90;
-				break;
-		}
+			int x = pos.getX() + mc.world.rand.nextInt(radius) - (radius / 2) + (int) (mc.player.motionX * radius / 2.0);
+			int z = pos.getZ() + mc.world.rand.nextInt(radius) - (radius / 2) + (int) (mc.player.motionZ * radius / 2.0);
 
-		if (mc.world.rand.nextInt(100) > chance)
-		{
-			int x = pos.getX() + mc.world.rand.nextInt(radius) - (radius / 2);
-			int z = pos.getZ() + mc.world.rand.nextInt(radius) - (radius / 2);
+			int y = mc.world.getTopSolidOrLiquidBlock(new BlockPos(x, 255, z)).getY() + 1;
 
-			int y = mc.world.getHeight(x, z);
-
-			if (mc.world.getLightFor(EnumSkyBlock.SKY, new BlockPos(x, y, z)) > 13)
+			if (mc.world.getLightFor(EnumSkyBlock.SKY, new BlockPos(x, y, z)) >= 15)
 			{
 				SoundEvent event = null;
 
@@ -329,9 +325,11 @@ public class RenderWorldPrecipitation extends IRenderHandler
 					{
 						case LIGHT:
 							event = SoundsAether.environment_rain_light;
+							volume = 0.6f;
 							break;
 						default:
 							event = SoundsAether.environment_rain_heavy;
+							volume = 0.7f;
 							break;
 					}
 				}
@@ -346,7 +344,9 @@ public class RenderWorldPrecipitation extends IRenderHandler
 					return;
 				}
 
-				mc.world.playSound(x, y, z, event, SoundCategory.WEATHER, volume, 0.9f + (mc.world.rand.nextFloat() * 0.2f), false);
+				this.renderTicksSinceSound = 0;
+
+				mc.world.playSound(x, y, z, event, SoundCategory.WEATHER, volume, 1.0f + (mc.world.rand.nextFloat() * 0.1f), true);
 			}
 		}
 	}
