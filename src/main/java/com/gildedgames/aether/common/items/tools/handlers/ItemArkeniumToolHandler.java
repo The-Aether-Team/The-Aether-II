@@ -23,9 +23,9 @@ public class ItemArkeniumToolHandler implements IToolEventHandler
 	}
 
 	@Override
-	public void onRightClickBlock(World world, BlockPos pos, EntityPlayer player, EnumHand hand, EnumFacing facing)
+	public boolean onRightClickBlock(World world, BlockPos pos, EntityPlayer player, EnumHand hand, EnumFacing facing)
 	{
-
+		return false;
 	}
 
 	@Override

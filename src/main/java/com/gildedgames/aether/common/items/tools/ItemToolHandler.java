@@ -7,6 +7,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.event.world.BlockEvent;
@@ -50,7 +51,7 @@ public class ItemToolHandler
 	}
 
 	@SubscribeEvent
-	public static void onBlockActivated(final PlayerInteractEvent.RightClickItem event)
+	public static void onRightClickItem(final PlayerInteractEvent.RightClickItem event)
 	{
 		if (event.getItemStack().getItem() instanceof ItemTool)
 		{
@@ -81,7 +82,13 @@ public class ItemToolHandler
 				return;
 			}
 
-			handler.onRightClickBlock(event.getWorld(), event.getPos(), event.getEntityPlayer(), event.getHand(), event.getFace());
+			boolean result = handler.onRightClickBlock(event.getWorld(), event.getPos(), event.getEntityPlayer(), event.getHand(), event.getFace());
+
+			if (result)
+			{
+				event.setCanceled(true);
+				event.setCancellationResult(EnumActionResult.SUCCESS);
+			}
 		}
 	}
 

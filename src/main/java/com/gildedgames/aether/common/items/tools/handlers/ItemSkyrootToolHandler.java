@@ -55,9 +55,9 @@ public class ItemSkyrootToolHandler implements IToolEventHandler
 	}
 
 	@Override
-	public void onRightClickBlock(final World world, final BlockPos pos, final EntityPlayer player, final EnumHand hand, final EnumFacing facing)
+	public boolean onRightClickBlock(final World world, final BlockPos pos, final EntityPlayer player, final EnumHand hand, final EnumFacing facing)
 	{
-
+		return false;
 	}
 
 	@Override

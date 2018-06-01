@@ -26,34 +26,34 @@ public class ItemGravititeToolHandler implements IToolEventHandler
 	}
 
 	@Override
-	public void onRightClickBlock(World world, BlockPos pos, EntityPlayer player, EnumHand hand, EnumFacing facing)
+	public boolean onRightClickBlock(World world, BlockPos pos, EntityPlayer player, EnumHand hand, EnumFacing facing)
 	{
 		if (hand != EnumHand.MAIN_HAND)
 		{
-			return;
+			return false;
 		}
 
  		PlayerAether aePlayer = PlayerAether.getPlayer(player);
 
 		if (!aePlayer.getEntity().capabilities.allowEdit)
 		{
-			return;
+			return false;
 		}
 
 		ItemStack stack = player.getHeldItem(hand);
 
-		if (aePlayer.getGravititeAbility().getHeldBlock() == null)
+		if (aePlayer.getGravititeAbility().getHeldBlock() == null && player.isSneaking())
 		{
 			IBlockState state = world.getBlockState(pos);
 
 			if (state.getBlock().hasTileEntity(state))
 			{
-				return;
+				return false;
 			}
 
 			if (!state.isFullBlock() || state.getBlockHardness(world, pos) < 0.0f)
 			{
-				return;
+				return false;
 			}
 
 			if (!world.isRemote)
@@ -74,7 +74,11 @@ public class ItemGravititeToolHandler implements IToolEventHandler
 							Block.getStateId(state));
 				}
 			}
+
+			return true;
 		}
+
+		return false;
 	}
 
 	@Override
