@@ -1,17 +1,20 @@
 package com.gildedgames.aether.common.blocks.util;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.IBlockWithItem;
+import com.gildedgames.aether.common.items.blocks.ItemBlockCustomSnow;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSnow;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockCustomSnow extends BlockSnow
+public class BlockCustomSnow extends BlockSnow implements IBlockWithItem
 {
 	public BlockCustomSnow()
 	{
@@ -38,5 +41,11 @@ public class BlockCustomSnow extends BlockSnow
 		{
 			return false;
 		}
+	}
+
+	@Override
+	public ItemBlock createItemBlock()
+	{
+		return new ItemBlockCustomSnow(this);
 	}
 }
