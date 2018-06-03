@@ -452,7 +452,7 @@ item.aether.wrapping_paper.box.orange.name=橙色礼物盒
 item.aether.wrapping_paper.box.white.name=白色礼物盒
 item.aether.wrapping_paper.tooltip.craft=在工作台上把物品包装起来！
 item.aether.present.tooltip.empty=空
-item.aether.present.tooltip.hasitem=里面有什么东西哦！
+item.aether.present.tooltip.hasitem=里面有神秘的小东西哦！
 
 
 tile.aether.aether_portal.name=天境传送门
@@ -504,7 +504,7 @@ item.rarity.common.name=§7§o常见
 item.rarity.rare.name=§b§o稀有
 item.rarity.epic.name=§5§o史诗
 item.rarity.mythic.name=§6§o神秘
-item.rarity.godly.name=§o§aG§bo§6d§dl§ey
+item.rarity.godly.name=§o§a神§b创§6超§d能§e体
 
 # Weapon Tooltips
 item.aether.skyroot_sword.ability.desc=双倍掉落
@@ -517,7 +517,7 @@ item.aether.holy_sword.ability.desc=亡灵专杀
 item.aether.lightning_sword.ability.desc=雷霆一击
 item.aether.flaming_sword.ability.desc=烈火焚身
 item.aether.vampire_blade.ability.desc=生命吸取
-item.aether.candy_cane_sword.ability.desc=天赐糖杖
+item.aether.candy_cane_sword.ability.desc=天降糖果
 item.aether.valkyrie_lance.ability.desc=破空远击
 item.aether.sentry_vaultbox.ability.desc1=§d输出:§r随机物品
 item.aether.sentry_vaultbox.ability.desc2=§3投掷:§r右键
@@ -530,10 +530,10 @@ item.aether.bolt.desc1=攻击伤害
 item.aether.tool.skyroot.ability.desc=双倍方块掉落
 item.aether.tool.holystone.ability.desc=采掘时几率产生神能结晶
 item.aether.tool.zanite.ability.desc=随耐久降低提升效率
-item.aether.tool.gravitite.ability.desc=反重力升腾方块
+item.aether.tool.gravitite.ability.desc=无视重力升腾方块
 item.aether.tool.gravitite.use.desc=右击方块
 item.aether.tool.arkenium.ability.desc=沉重却极其耐用
-item.aether.tool.valkyrie.ability.desc=起效距离远
+item.aether.tool.valkyrie.ability.desc=
 
 # Tooltips
 item.aether.tooltip.ability=能力
@@ -713,9 +713,9 @@ gui.aether.masonry.label.recipes=合成
 # Intro
 
 intro.prologue=在那位孤独的勇士击败残暴的烈阳巨灵卡尔图尔的二百年后，一位新的旅者来到了天境······
-intro.tip1=免责声明:\n\n此版本仍未完成，BUG贼多\n\n年末会发布官方的空原迭代版本。\n\n如果不想获得糟糕的体验，我们强烈建议您等待官方正式版。\n\n很多生物——包括试验性的——都暂未添加。我们是为了测试和尝鲜的目的发布这一开发中版本的。
+intro.tip1=免责声明:\n\n此版本仍未完成，BUG贼多\n\n年末会发布官方的空原迭代版本。\n\n若不希望获得较差的游戏体验，我们强烈建议您等待官方正式版。\n\n很多生物——包括试验性的——都暂未添加。我们以测试和尝鲜为目的发布这一开发中版本。
 intro.tip2=你将前往的世界将从传说、时间和空间三个方面与主世界完全分开······
-intro.tip3=你的物品栏将与主世界的分开，但你能将物品带回原世界。
+intro.tip3=你的物品栏将与主世界分离，但你能将物品带回主世界。
 intro.tip4=开始旅程？
 intro.holdToSkip=点击跳过
 intro.proudlyPresents=荣誉出品
@@ -724,9 +724,9 @@ intro.no=否
 
 # Teleporter Notice
 
-notice.body=你是重回天境的玩家吧。\n\n在天境二中，我们不再使用简陋的荧石门了。\n\n制作一台天境之门试试吧！
-notice.gotcha=有疑问！
-notice.holdUp=哇哦！继续继续！
+notice.body=曾探索天境的勇士，欢迎归来！\n\n在天境二中，简陋的萤石门已无法连接天境了。\n\n试着打造一台天境之门吧！
+notice.gotcha=明白了！
+notice.holdUp=喔哦？请等一下！
 
 #Ability Tooltips
 ability.breatheUnderwater.name=水下呼吸
@@ -742,9 +742,9 @@ ability.maxHealthMod.name=提升生命上限
 ability.movementSpeedMod.name=提升移速
 ability.modifyXPCollection.name=提升经验
 ability.modifyDefense.name=提升防御
-ability.weightTolerance.name=质量抗性*
+ability.weightTolerance.name=质量抗性
 ability.invisibility.name=隐形
-ability.changeAttackElement.name=元素攻击*
+ability.changeAttackElement.name=元素攻击
 ability.setEnemiesOnFire.name=点亮火把
 ability.fireImmunity.name=火焰保护
 ability.companionMaxHealthMod.name=伙伴生命上限提升
@@ -757,26 +757,26 @@ elementalState.fire=火焰
 elementalState.water=水
 elementalState.earth=大地
 elementalState.air=空气
-elementalState.blight=疫病
+elementalState.blight=破击
 elementalState.lightning=闪电
 
 ability.extraDamage.attack=攻击
 ability.extraDamage.desc=%s %s 伤害
 ability.active=§5生效条件:
-ability.cosmetic=§e装饰*
+ability.cosmetic=§e装饰
 ability.breatheUnderwater.desc=§9水下呼吸
 ability.daggerfrost.desc=§9雪球攻击
 ability.doubleDrops.desc1=§9双倍猎获
-ability.doubleDrops.desc2=%s%% 几率
-ability.punchingDamage.desc1=%s 拳击伤害
-ability.punchingDamage.desc2=%s %s 拳击
+ability.doubleDrops.desc2=%s%%几率
+ability.punchingDamage.desc1=%s拳击伤害
+ability.punchingDamage.desc2=%s%s拳击
 ability.freezeBlocks.desc=§9冻结周围方块
 ability.pauseHunger.desc=§9不再饥饿
 ability.reduceHunger.desc=§9减少饥饿
 ability.regenerateHealth.desc=§9生命恢复
-ability.maxHealthMod.desc=%s 生命上限
-ability.movementSpeedMod.desc=%s 移动速度
-ability.modifyXPCollection.desc=%s 经验收集
+ability.maxHealthMod.desc=%s生命上限
+ability.movementSpeedMod.desc=%s移动速度
+ability.modifyXPCollection.desc=%s经验收集
 ability.defenseMod.desc=%s %s
 ability.defenseMod.desc1=防御
 ability.defenseMod.desc2=抗性
@@ -792,7 +792,7 @@ ability.slowfall.desc=§9缓慢下落
 ability.weight.desc1=%skg重
 ability.weight.desc2=%skg容量
 ability.levitateAttackers.desc1=§9浮空敌手
-ability.levitateAttackers.desc2=%s%%几率*
+ability.levitateAttackers.desc2=%s%%几率
 ability.setAttackersOnFire.desc1=§9引燃敌手
 ability.setAttackersOnFire.desc2=%s%%几率
 ability.attackSpeedMod.desc=%s攻击速度
@@ -837,7 +837,7 @@ aether.reward.none.name=无
 aether.shop.sell=出售
 aether.shop.buy=购买 %s
 aether.shop.back=返回
-aether.shop.lockTooltip=如果解锁，你每次更换想买的物品时，购买数都会重置为1。
+aether.shop.lockTooltip=如果解除锁定，你每次更换想买的物品时，购买数都会重置为1。
 
 ##=======================##
 ###########################
@@ -871,7 +871,7 @@ generic.goodbye=再见
 ###########################
 ##=======================##
 
-necromancer.them.start1=你安全地赶来了。你一定有很多想问的吧，但我们恐怕没时间了。
+necromancer.them.start1=你安全到达了。你一定有很多想问的吧，但我们恐怕没时间了。
 necromancer.them.start2=请前往楼上的裂隙之间，穿过天境之门吧。祝你一路顺风。
 
 necromancer.us.leadtheway=感谢指引。后会有期。
@@ -917,7 +917,7 @@ edison.greet.option.no_we_talked=不，我们还是谈过的。你是···爱�
 edison.greet.who1=我是爱迪生！国际企业家、推销员以及顶级说客！
 edison.greet.who2=但由于我们和那个人——你知道是谁——的小小约定，对你而言，我更是架起你与这些奇异群岛之间联系的枢纽和向导。
 edison.greet.who3=总地来说，这基本上意味着我必须好好照顾你。
-edison.greet.who4=如今，我坚信知识就是世界上最强的力量。所以为了让你远离，额，死亡······
+edison.greet.who4=如今，我坚信知识就是世界上最强的力量。所以为了让你远离，呃，死亡······
 edison.greet.who5=你还有什么要问的吗？
 
 edison.greet.option.you_know_who=那个···“你知道是谁”的···人？
@@ -976,7 +976,7 @@ edison.greet.valkyries4=你还想问点什么？
 ##=======================##
 
 edison.shop.greetings1=朋友——在这里，你能找到最好的货物。环顾四周，买点什么吧。
-edison.shop.greetings2=今天大减价，朋友！看看你周围，肯定能找到你想要的东西，我保证！
+edison.shop.greetings2=今天大减价，朋友！看这里，肯定能找到你想要的东西，我保证！
 
 edison.shop.enchanted_wyndberry=饿了吗？那你需要这些水果！这些空莓营养丰富，可千万别错过！从来没吃过魔化食物？那你就吃大亏啦！
 edison.shop.enchanted_blueberry=谁说只有介元才有蓝莓？最上等的神能晶体滋养了它们，填饱你的肚子轻而易举！
@@ -1000,7 +1000,7 @@ edison.shop.therastone_brick=这些精制砖块独特的设计在任何地方你
 ###########################
 ##=======================##
 
-josediya.greet.start_not_introduced=你还是来了。我看不出来你哪重要了，那就让我来看看吧。
+josediya.greet.start_not_introduced=你还是来了。我看不出来你有什么重要的，那就让我来看看吧。
 josediya.greet.start=你需要什么？
 
 josediya.greet.option.what=你是什么人？
@@ -1014,19 +1014,19 @@ josediya.greet.option.moa=我也能养只恐鸟吗？
 josediya.greet.option.who=请问你是···？
 josediya.greet.option.friends=你是那光头汉子的朋友？
 josediya.greet.option.paying=是他付钱请你来帮我忙的吗？
-josediya.greet.option.white_gold=你看我这样子，哪像是有···额，空镀币呢。那怎么办？
+josediya.greet.option.white_gold=你看我这样子，哪像是有···呃，空镀币呢。那怎么办？
 
 josediya.greet.option.services=你能提供什么呢？
 josediya.greet.option.home=你是怎么知道我家在哪里的？
 josediya.greet.option.walk_home=我为什么不能靠我的双腿回家？
 
-josediya.greet.what=哇，你也没那么聪明嘛。和你或者那个秃驴一样，我也是个人。之前没见过天灵族是吧？女武神保护了我们全族。
+josediya.greet.what=哇，你也没那么聪明嘛。和你或者那个秃驴一样，我也是个人。之前没见过天灵族是吧？是女武神让我们一族得以延续。
 josediya.greet.where=我来自遥远南方的维拉德克斯王国，我主要在那里做活维持生计。
 josediya.greet.take_me=人类，我不觉着你付得起旅费。维拉德克斯离这里有三星期的航程，而且路线十分危险。我带不了你。
-josediya.greet.winged_beast=他是我真正的伙伴，一只叫泰瓦尔的强健恐鸟，就算驮着你我两人飞翔，也不会流哪怕一滴汗。
+josediya.greet.winged_beast=泰瓦尔，我真正的伙伴，一只强健的恐鸟，就算驮着你我两人飞翔，也不会流哪怕一滴汗。
 josediya.greet.fly=当然啦！我正是为了这个才驯养他的。驯养恐鸟是我工作的一部分。好好对待它们，它们就会和你很亲近。
 josediya.greet.moa=想骑恐鸟，你得让它信任你。恐鸟蛋可不好弄，野生恐鸟非常注重保护自己的巢窠。
-josediya.greet.who=会带你去各种地方的女孩。我叫乔瑟迪娅，航运从业者，那边的那个秃子叫我来帮你。
+josediya.greet.who=能带你翱翔天境的女孩。我叫乔瑟迪娅，航运从业者，那边的那个秃子叫我来帮你。
 josediya.greet.friends=爱迪生和我相处得很好，我们结识的这几年来，他一直是个很有帮助的伙伴，但我还是觉得他不太可信，只是共同的利益让我们共事而已。
 josediya.greet.paying=不，我只是还欠别人的一个情而已，你才是那个该付钱的。对了，我不收你们那里的钱，只收空镀币。
 josediya.greet.white_gold=问题出在你身上。我也得挣钱糊口，所以呢不关心你怎么挣钱。去农民们那边打打工或者找点别的什么活吧。
