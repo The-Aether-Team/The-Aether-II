@@ -504,7 +504,7 @@ item.rarity.common.name=§7§o常见
 item.rarity.rare.name=§b§o稀有
 item.rarity.epic.name=§5§o史诗
 item.rarity.mythic.name=§6§o神秘
-item.rarity.godly.name=§o§a神§b创§6超§d能§e体
+item.rarity.godly.name=§o§a神§b灵§6之§d应§e许
 
 # Weapon Tooltips
 item.aether.skyroot_sword.ability.desc=双倍掉落
