@@ -2,16 +2,8 @@ package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.common.analytics.GAReporter;
-import com.gildedgames.aether.common.registry.SpawnRegistry;
-import com.gildedgames.aether.common.registry.content.CurrencyAether;
-import com.gildedgames.aether.common.util.helpers.PerfHelper;
-import com.gildedgames.orbis_api.preparation.IPrepSectorAccess;
-import com.gildedgames.orbis_api.preparation.impl.util.PrepHelper;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
-import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
@@ -22,14 +14,11 @@ import net.minecraftforge.fml.common.event.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.concurrent.ExecutionException;
-
 @Mod(name = AetherCore.MOD_NAME, modid = AetherCore.MOD_ID, version = AetherCore.MOD_VERSION,
 		certificateFingerprint = AetherCore.MOD_FINGERPRINT, guiFactory = AetherCore.MOD_GUI_FACTORY,
 		dependencies = AetherCore.MOD_DEPENDENCIES)
 public class AetherCore
 {
-
 	public static final String MOD_NAME = "Aether II";
 
 	public static final String MOD_ID = "aether";
@@ -43,8 +32,6 @@ public class AetherCore
 	protected static final String MOD_GUI_FACTORY = "com.gildedgames.aether.client.gui.GuiFactoryAether";
 
 	protected static final String MOD_FINGERPRINT = "b9a9be44fb51751dd1aec1dbb881b6de1a086abc";
-
-	private static final SpawnRegistry SPAWN_REGISTRY = new SpawnRegistry();
 
 	public static boolean isAetherLegacyInstalled;
 
@@ -101,11 +88,13 @@ public class AetherCore
 	{
 		isAetherLegacyInstalled = Loader.isModLoaded("aether_legacy");
 
-		AetherCore.LOGGER.info("OrbisAPI is installed: " + Loader.isModLoaded("orbis_api"));
+		PROXY.init(event);
+	}
 
-		AetherCore.PROXY.init(event);
-
-		MinecraftForge.EVENT_BUS.register(SPAWN_REGISTRY);
+	@EventHandler
+	public void onModPostInit(final FMLPostInitializationEvent event)
+	{
+		PROXY.postInit(event);
 	}
 
 	@EventHandler
@@ -117,27 +106,7 @@ public class AetherCore
 	@EventHandler
 	public void onServerStarted(final FMLServerStartedEvent event)
 	{
-		World world = DimensionManager.getWorld(CONFIG.getAetherDimID());
-
-		// TODO: In SpongeForge, the world is not loaded yet for some reason?
-		if (world != null)
-		{
-			IPrepSectorAccess access = PrepHelper.getManager(world).getAccess();
-
-			try
-			{
-				access.provideSectorForChunk(0, 0, false).get();
-			}
-			catch (InterruptedException | ExecutionException e)
-			{
-				throw new RuntimeException("Failed to generate spawn chunk sector", e);
-			}
-		}
-
 		PROXY.onServerStarted(event);
-
-		AetherAPI.content().currency().clearRegistrations();
-		PerfHelper.measure("Initialize currency", CurrencyAether::serverStarted);
 	}
 
 	@EventHandler

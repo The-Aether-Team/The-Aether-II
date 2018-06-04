@@ -18,18 +18,17 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+@Mod.EventBusSubscriber
 public class CapabilityManagerAether
 {
 	public static void init()
 	{
-		MinecraftForge.EVENT_BUS.register(CapabilityManagerAether.class);
-
 		CapabilityManager.INSTANCE.register(IPlayerAether.class, new PlayerAether.Storage(), PlayerAether::new);
 		CapabilityManager.INSTANCE.register(ISpawningInfo.class, new EntitySpawningInfo.Storage(), EntitySpawningInfo::new);
 		CapabilityManager.INSTANCE.register(ISpawnSystem.class, new SpawnSystem.Storage(), SpawnSystem::new);
@@ -69,7 +68,7 @@ public class CapabilityManagerAether
 	}
 
 	@SubscribeEvent
-	public static void attachChunk(final AttachCapabilitiesEvent<Chunk> event)
+	public static void onChunkLoad(final AttachCapabilitiesEvent<Chunk> event)
 	{
 		if (event.getObject() == null)
 		{

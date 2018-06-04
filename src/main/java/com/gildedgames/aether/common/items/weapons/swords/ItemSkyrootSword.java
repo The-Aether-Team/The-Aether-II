@@ -12,10 +12,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.util.EnumHand;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.*;
 
+@Mod.EventBusSubscriber
 public class ItemSkyrootSword extends ItemAetherSword
 {
 
@@ -74,4 +76,9 @@ public class ItemSkyrootSword extends ItemAetherSword
 		}
 	}
 
+	@Override
+	public int getItemBurnTime(ItemStack itemStack)
+	{
+		return 100;
+	}
 }

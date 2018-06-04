@@ -5,7 +5,6 @@ import com.gildedgames.aether.common.world.aether.WorldProviderAether;
 import com.gildedgames.aether.common.world.necromancer_tower.WorldProviderNecromancerTower;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.MinecraftForge;
 
 public class DimensionsAether
 {
@@ -24,7 +23,5 @@ public class DimensionsAether
 
 		// Register dimensions
 		DimensionManager.registerDimension(AetherCore.CONFIG.getAetherDimID(), DimensionsAether.AETHER);
-
-		MinecraftForge.EVENT_BUS.register(DimensionsAether.class);
 	}
 }

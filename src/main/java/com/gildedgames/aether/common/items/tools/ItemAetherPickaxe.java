@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.items.tools;
 
 import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
+import com.gildedgames.aether.common.registry.content.MaterialsAether;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
@@ -22,5 +23,16 @@ public class ItemAetherPickaxe extends ItemPickaxe
 		super.hitEntity(stack, target, attacker);
 
 		return ItemToolHandler.onEntityHit(stack, this.toolMaterial, target, attacker);
+	}
+
+	@Override
+	public int getItemBurnTime(ItemStack itemStack)
+	{
+		if (this.toolMaterial == MaterialsAether.SKYROOT_TOOL)
+		{
+			return 100;
+		}
+
+		return super.getItemBurnTime(itemStack);
 	}
 }

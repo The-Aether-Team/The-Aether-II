@@ -3,12 +3,10 @@ package com.gildedgames.aether.client;
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.client.gui.misc.CustomLoadingRenderer;
 import com.gildedgames.aether.client.gui.tab.TabBugReport;
-import com.gildedgames.aether.client.gui.tab.TabClientEvents;
 import com.gildedgames.aether.client.gui.tab.TabEquipment;
 import com.gildedgames.aether.client.gui.tab.TabPatronRewards;
 import com.gildedgames.aether.client.renderer.AetherRenderers;
 import com.gildedgames.aether.client.renderer.ClientRenderHandler;
-import com.gildedgames.aether.client.sound.AetherMusicManager;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.CommonProxy;
 import com.gildedgames.aether.common.analytics.GameAnalytics;
@@ -20,7 +18,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
@@ -63,13 +60,7 @@ public class ClientProxy extends CommonProxy
 
 		PerfHelper.measure("Initialize special renders", AetherRenderers::init);
 
-		MinecraftForge.EVENT_BUS.register(AetherMusicManager.INSTANCE);
-
-		MinecraftForge.EVENT_BUS.register(new ClientRenderHandler());
-		MinecraftForge.EVENT_BUS.register(RespawnGuiOverrides.class);
-		MinecraftForge.EVENT_BUS.register(new SessionEventHandler());
-
-		MinecraftForge.EVENT_BUS.register(TabClientEvents.class);
+		ClientRenderHandler.init();
 
 		AetherAPI.content().tabs().getInventoryGroup().registerClientTab(new TabEquipment.Client());
 		AetherAPI.content().tabs().getInventoryGroup().registerClientTab(new TabBugReport.Client());

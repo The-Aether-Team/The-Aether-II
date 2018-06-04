@@ -11,11 +11,8 @@ import com.google.common.collect.Maps;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
-import org.apache.commons.lang3.ArrayUtils;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class SimpleCraftingRegistry implements ISimpleCraftingRegistry
 {
@@ -26,29 +23,27 @@ public class SimpleCraftingRegistry implements ISimpleCraftingRegistry
 
 	private Map<String, ISimpleRecipeGroup> oreDictionaryLookup = Maps.newHashMap();
 
+	private int id;
+
 	@Override
 	public Collection<ISimpleRecipe> getAllRecipes()
 	{
-		return this.recipes.values();
+		return Collections.unmodifiableCollection(this.recipes.values());
 	}
 
 	@Override
-	public void clearAllRecipes()
+	public void registerRecipe(ISimpleRecipe recipe)
 	{
-		this.recipes.clear();
-		this.stackLookup.clear();
-		this.oreDictionaryLookup.clear();
+		this.recipes.put(this.id, recipe);
+
+		this.id++;
 	}
 
-	@Override
-	public void registerRecipe(int id, ISimpleRecipe recipe)
-	{
-		this.recipes.put(id, recipe);
-	}
-
-	@Override
 	public void finalizeRecipes()
 	{
+		this.stackLookup.clear();
+		this.oreDictionaryLookup.clear();
+
 		for (ISimpleRecipe recipe : this.recipes.values())
 		{
 			for (Object req : recipe.getRequired())
@@ -60,7 +55,7 @@ public class SimpleCraftingRegistry implements ISimpleCraftingRegistry
 						continue;
 					}
 
-					int hash = this.getHashForItemStack((ItemStack) req);
+					int hash = this.getItemStackKey((ItemStack) req);
 
 					if (!this.stackLookup.containsKey(hash))
 					{
@@ -107,7 +102,7 @@ public class SimpleCraftingRegistry implements ISimpleCraftingRegistry
 	}
 
 	@Override
-	public ISimpleRecipe getRecipe(int id)
+	public ISimpleRecipe getRecipeFromID(int id)
 	{
 		if (id < 0)
 		{
@@ -118,7 +113,7 @@ public class SimpleCraftingRegistry implements ISimpleCraftingRegistry
 	}
 
 	@Override
-	public int getId(ISimpleRecipe recipe)
+	public int getIDFromRecipe(ISimpleRecipe recipe)
 	{
 		if (recipe == null)
 		{
@@ -129,7 +124,7 @@ public class SimpleCraftingRegistry implements ISimpleCraftingRegistry
 	}
 
 	@Override
-	public ISimpleRecipeGroup[] getRecipesFromRequirement(Object req)
+	public Collection<ISimpleRecipeGroup> getRecipesFromRequirement(Object req)
 	{
 		if (req instanceof ItemStack)
 		{
@@ -137,7 +132,7 @@ public class SimpleCraftingRegistry implements ISimpleCraftingRegistry
 
 			if (stack.isEmpty())
 			{
-				return new ISimpleRecipeGroup[] {};
+				return new ArrayList<>();
 			}
 
 			int[] ids = OreDictionary.getOreIDs(stack);
@@ -158,29 +153,29 @@ public class SimpleCraftingRegistry implements ISimpleCraftingRegistry
 
 				if (groups.size() > 0)
 				{
-					int hash = this.getHashForItemStack(stack);
+					int key = this.getItemStackKey(stack);
 
-					return ArrayUtils.addAll(groups.toArray(new ISimpleRecipeGroup[0]), this.stackLookup.get(hash));
+					return Lists.newArrayList(this.stackLookup.get(key));
 				}
 			}
 
-			int hash = this.getHashForItemStack(stack);
+			int hash = this.getItemStackKey(stack);
 
-			return new ISimpleRecipeGroup[] { this.stackLookup.get(hash) };
+			return Lists.newArrayList(this.stackLookup.get(hash));
 		}
 		else if (req instanceof OreDictionaryRequirement)
 		{
-			return new ISimpleRecipeGroup[] { this.oreDictionaryLookup.get(((OreDictionaryRequirement) req).getKey()) };
+			return Lists.newArrayList(this.oreDictionaryLookup.get(((OreDictionaryRequirement) req).getKey()));
 		}
 		else if (req instanceof String)
 		{
-			return new ISimpleRecipeGroup[] { this.oreDictionaryLookup.get(req) };
+			return Lists.newArrayList(this.oreDictionaryLookup.get(req));
 		}
 
-		return new ISimpleRecipeGroup[] {};
+		return new ArrayList<>();
 	}
 
-	private int getHashForItemStack(ItemStack stack)
+	private int getItemStackKey(ItemStack stack)
 	{
 		int hash = (Item.getIdFromItem(stack.getItem()) & 0xFFFF) << 16;
 

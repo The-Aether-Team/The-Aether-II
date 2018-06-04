@@ -48,7 +48,7 @@ public class BlueprintsAether
 
 	}
 
-	public static void init()
+	public static void load()
 	{
 		project = OrbisAPI.services().loadProject(null, AetherCore.getResource("aetherii"), AetherCore.INSTANCE, "aether_ii");
 
@@ -70,6 +70,7 @@ public class BlueprintsAether
 		SKYROOT_WATCHTOWER_3B = c.getData(c.getDataId("skyroot_watchtower_3b.blueprint"));
 		WELL_1A = c.getData(c.getDataId("well_1a.blueprint"));
 		WELL_1B = c.getData(c.getDataId("well_1b.blueprint"));
+
 	}
 
 }

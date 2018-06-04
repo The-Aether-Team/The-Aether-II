@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
 
-public class AltarRegistry implements IAltarRecipeRegistry
+public class AltarRecipeRegistry implements IAltarRecipeRegistry
 {
 	private ArrayList<IAltarRecipe> altarRecipes = new ArrayList<>();
 

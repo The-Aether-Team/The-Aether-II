@@ -8,7 +8,7 @@ public class InstancesAether
 {
 	public static NecromancerTowerInstanceHelper NECROMANCER_TOWER_HANDLER;
 
-	public static void init()
+	public static void postInit()
 	{
 		final NecromancerTowerInstanceFactory factory = new NecromancerTowerInstanceFactory(DimensionsAether.NECROMANCER_TOWER);
 

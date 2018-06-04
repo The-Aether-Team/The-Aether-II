@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.items.armor;
 
+import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.entity.EntityLivingBase;
@@ -54,5 +55,16 @@ public class ItemAetherShield extends Item
 		playerIn.setActiveHand(handIn);
 
 		return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+	}
+
+	@Override
+	public int getItemBurnTime(ItemStack itemStack)
+	{
+		if (itemStack.getItem() == ItemsAether.skyroot_shield)
+		{
+			return 100;
+		}
+
+		return super.getItemBurnTime(itemStack);
 	}
 }

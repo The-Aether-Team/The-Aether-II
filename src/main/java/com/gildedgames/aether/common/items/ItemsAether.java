@@ -29,10 +29,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
-@Mod.EventBusSubscriber()
+@Mod.EventBusSubscriber
 public class ItemsAether
 {
-	public static final Item skyroot_stick = new ItemDropOnDeath();
+	public static final Item skyroot_stick = new ItemSkyrootStick();
 
 	public static final Item cloudtwine = new ItemDropOnDeath();
 
@@ -42,7 +42,7 @@ public class ItemsAether
 
 	public static final Item aether_saddle = new ItemDropOnDeath().setMaxStackSize(1);
 
-	public static final Item ambrosium_shard = new ItemDropOnDeath(),
+	public static final Item ambrosium_shard = new ItemAmbrosiumShard(),
 			ambrosium_chunk = new ItemAmbrosiumChunk(),
 			zanite_gemstone = new ItemDropOnDeath(),
 			arkenium = new ItemDropOnDeath(),

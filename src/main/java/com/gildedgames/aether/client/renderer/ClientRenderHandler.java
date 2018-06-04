@@ -27,6 +27,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderSpecificHandEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
@@ -35,11 +36,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+@Mod.EventBusSubscriber
 public class ClientRenderHandler
 {
 	private static final List<IOverlay> overlays = Lists.newArrayList();
 
-	public ClientRenderHandler()
+	public static void init()
 	{
 		for (RenderLivingBase<?> playerRender : new HashSet<>(Minecraft.getMinecraft().getRenderManager().getSkinMap().values()))
 		{
@@ -73,7 +75,7 @@ public class ClientRenderHandler
 	}
 
 	@SubscribeEvent
-	public void onRenderIngameOverlay(final RenderGameOverlayEvent.Pre event)
+	public static void onRenderIngameOverlay(final RenderGameOverlayEvent.Pre event)
 	{
 		if (event.getType() == RenderGameOverlayEvent.ElementType.AIR)
 		{
@@ -98,7 +100,7 @@ public class ClientRenderHandler
 	}
 
 	@SubscribeEvent
-	public void onRenderSpecificHandEvent(final RenderSpecificHandEvent event)
+	public static void onRenderSpecificHandEvent(final RenderSpecificHandEvent event)
 	{
 		if (event.getHand() == EnumHand.MAIN_HAND && event.getItemStack().isEmpty())
 		{
@@ -113,14 +115,12 @@ public class ClientRenderHandler
 	}
 
 	@SubscribeEvent
-	public void onRenderDebugInfo(RenderGameOverlayEvent.Text event)
+	public static void onRenderDebugInfo(RenderGameOverlayEvent.Text event)
 	{
 		if (!Minecraft.getMinecraft().gameSettings.showDebugInfo)
 		{
 			return;
 		}
-
-		BlockPos pos = Minecraft.getMinecraft().player.getPosition();
 
 		IPrepManager manager = PrepHelper.getManager(Minecraft.getMinecraft().world);
 
@@ -128,6 +128,8 @@ public class ClientRenderHandler
 		{
 			return;
 		}
+
+		BlockPos pos = Minecraft.getMinecraft().player.getPosition();
 
 		int loaded = manager.getAccess().getLoadedSectors().size();
 
@@ -150,7 +152,7 @@ public class ClientRenderHandler
 	}
 
 	@SubscribeEvent
-	public void onClientRenderTick(TickEvent.ClientTickEvent event)
+	public static void onClientRenderTick(TickEvent.ClientTickEvent event)
 	{
 		World world = Minecraft.getMinecraft().world;
 

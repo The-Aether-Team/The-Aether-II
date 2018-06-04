@@ -41,4 +41,10 @@ public class ItemAmbrosiumChunk extends Item implements IDropOnDeath
 
 		return EnumActionResult.FAIL;
 	}
+
+	@Override
+	public int getItemBurnTime(ItemStack itemStack)
+	{
+		return 20000;
+	}
 }

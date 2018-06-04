@@ -14,11 +14,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.ArrayList;
 
+@Mod.EventBusSubscriber
 public class AetherMusicManager
 {
 	public static final AetherMusicManager INSTANCE = new AetherMusicManager();
@@ -136,7 +138,7 @@ public class AetherMusicManager
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	// Lowest priority is important, so we can ensure the sound will actually be played
-	public void onPlaySound(final PlaySoundEvent event)
+	public static void onPlaySound(final PlaySoundEvent event)
 	{
 		if (ClientEventHandler.isLoadingScreen())
 		{

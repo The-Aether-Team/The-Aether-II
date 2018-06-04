@@ -1,16 +1,12 @@
 package com.gildedgames.aether.common;
 
+import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.IAetherServices;
 import com.gildedgames.aether.api.net.IGildedGamesAccountApi;
-import com.gildedgames.aether.api.registry.IContentRegistry;
-import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherHooks;
 import com.gildedgames.aether.common.commands.CommandIsland;
-import com.gildedgames.aether.common.entities.util.MountEventHandler;
-import com.gildedgames.aether.common.entities.util.QuicksoilProcessor;
-import com.gildedgames.aether.common.items.tools.ItemToolHandler;
-import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
 import com.gildedgames.aether.common.network.api.GildedGamesAccountApiImpl;
 import com.gildedgames.aether.common.registry.ContentRegistry;
+import com.gildedgames.aether.common.registry.content.CurrencyAether;
 import com.gildedgames.aether.common.shop.ShopBuy;
 import com.gildedgames.aether.common.shop.ShopInstance;
 import com.gildedgames.aether.common.shop.ShopInventory;
@@ -18,12 +14,12 @@ import com.gildedgames.aether.common.util.helpers.PerfHelper;
 import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.IrradiatedForestsData;
 import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.MagneticHillPillar;
 import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.MagneticHillsData;
-import com.gildedgames.aether.common.world.aether.island.IslandTicker;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandVariables;
 import com.gildedgames.aether.common.world.aether.prep.PrepAether;
 import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstance;
-import com.gildedgames.aether.common.world.spawning.SpawnAreaEvents;
 import com.gildedgames.orbis_api.OrbisAPI;
+import com.gildedgames.orbis_api.preparation.IPrepSectorAccess;
+import com.gildedgames.orbis_api.preparation.impl.util.PrepHelper;
 import com.gildedgames.orbis_api.util.io.IClassSerializer;
 import com.gildedgames.orbis_api.util.io.Instantiator;
 import com.gildedgames.orbis_api.util.io.SimpleSerializer;
@@ -32,14 +28,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.event.*;
 
 import java.io.File;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 
 public class CommonProxy implements IAetherServices
 {
@@ -85,25 +80,44 @@ public class CommonProxy implements IAetherServices
 		this.contentRegistry.init();
 
 		MinecraftForge.EVENT_BUS.register(AetherCore.CONFIG);
+	}
 
-		MinecraftForge.EVENT_BUS.register(CommonEvents.class);
-		MinecraftForge.EVENT_BUS.register(PlayerAetherHooks.class);
-		MinecraftForge.EVENT_BUS.register(MountEventHandler.class);
-		MinecraftForge.EVENT_BUS.register(ItemToolHandler.class);
-		MinecraftForge.EVENT_BUS.register(ItemSkyrootSword.class);
-		MinecraftForge.EVENT_BUS.register(QuicksoilProcessor.class);
-		MinecraftForge.EVENT_BUS.register(SpawnAreaEvents.class);
-		MinecraftForge.EVENT_BUS.register(IslandTicker.class);
+	public void postInit(final FMLPostInitializationEvent event)
+	{
+		this.content().postInit();
 	}
 
 	public void onServerStarting(FMLServerStartingEvent event)
 	{
+		this.content().onServerStarting();
+
+		PerfHelper.measure("Initialize recipe indexes", this.contentRegistry::rebuildIndexes);
+
+		AetherAPI.content().currency().clearRegistrations();
+
+		PerfHelper.measure("Initialize currency", CurrencyAether::serverStarted);
+
 		event.registerServerCommand(new CommandIsland());
 	}
 
 	public void onServerStarted(FMLServerStartedEvent event)
 	{
-		PerfHelper.measure("Initialize recipe indexes", this.contentRegistry::rebuildIndexes);
+		World world = DimensionManager.getWorld(AetherCore.CONFIG.getAetherDimID());
+
+		// TODO: In SpongeForge, the world is not loaded yet for some reason?
+		if (world != null)
+		{
+			IPrepSectorAccess access = PrepHelper.getManager(world).getAccess();
+
+			try
+			{
+				access.provideSectorForChunk(0, 0, false).get();
+			}
+			catch (InterruptedException | ExecutionException e)
+			{
+				throw new RuntimeException("Failed to generate spawn chunk sector", e);
+			}
+		}
 	}
 
 	public void spawnJumpParticles(final World world, final double x, final double y, final double z, final double radius, final int quantity)
@@ -152,7 +166,7 @@ public class CommonProxy implements IAetherServices
 	}
 
 	@Override
-	public IContentRegistry content()
+	public ContentRegistry content()
 	{
 		return this.contentRegistry;
 	}

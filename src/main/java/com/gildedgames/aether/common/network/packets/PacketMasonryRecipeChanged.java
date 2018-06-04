@@ -29,7 +29,7 @@ public class PacketMasonryRecipeChanged implements IMessage
 	{
 		PacketBuffer pBuf = new PacketBuffer(buf);
 
-		this.recipe = AetherAPI.content().masonry().getRecipe(pBuf.readInt());
+		this.recipe = AetherAPI.content().masonry().getRecipeFromID(pBuf.readInt());
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class PacketMasonryRecipeChanged implements IMessage
 	{
 		PacketBuffer pBuf = new PacketBuffer(buf);
 
-		pBuf.writeInt(AetherAPI.content().masonry().getId(this.recipe));
+		pBuf.writeInt(AetherAPI.content().masonry().getIDFromRecipe(this.recipe));
 	}
 
 	public static class HandlerServer extends MessageHandlerServer<PacketMasonryRecipeChanged, IMessage>

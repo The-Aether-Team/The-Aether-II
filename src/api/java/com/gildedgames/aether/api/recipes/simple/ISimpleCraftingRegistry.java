@@ -7,16 +7,12 @@ public interface ISimpleCraftingRegistry
 
 	Collection<ISimpleRecipe> getAllRecipes();
 
-	void clearAllRecipes();
+	void registerRecipe(ISimpleRecipe recipe);
 
-	void registerRecipe(int id, ISimpleRecipe recipe);
+	ISimpleRecipe getRecipeFromID(int id);
 
-	void finalizeRecipes();
+	int getIDFromRecipe(ISimpleRecipe recipe);
 
-	ISimpleRecipe getRecipe(int id);
-
-	int getId(ISimpleRecipe recipe);
-
-	ISimpleRecipeGroup[] getRecipesFromRequirement(Object req);
+	Collection<ISimpleRecipeGroup> getRecipesFromRequirement(Object req);
 
 }

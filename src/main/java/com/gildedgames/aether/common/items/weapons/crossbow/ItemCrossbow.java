@@ -319,4 +319,9 @@ public class ItemCrossbow extends Item
 		}
 	}
 
+	@Override
+	public int getItemBurnTime(ItemStack itemStack)
+	{
+		return 100;
+	}
 }

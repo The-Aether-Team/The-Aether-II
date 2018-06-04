@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.items.weapons.swords;
 
 import com.gildedgames.aether.common.items.ItemAbilityType;
+import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -43,5 +44,16 @@ public class ItemAetherSword extends ItemSword
 						TextFormatting.WHITE + I18n.format(this.getUnlocalizedName() + ".use.desc")));
 			}
 		}
+	}
+
+	@Override
+	public int getItemBurnTime(ItemStack itemStack)
+	{
+		if (this == ItemsAether.skyroot_sword)
+		{
+			return 100;
+		}
+
+		return super.getItemBurnTime(itemStack);
 	}
 }

@@ -114,7 +114,7 @@ public class GenerationAether
 
 	}
 
-	public static void init()
+	public static void load()
 	{
 		blue_skyroot_tree_1 = new TemplateDefinition(TemplatesAether.blue_skyroot_tree_1)
 				.setConditions(TemplateConditions.FLAT_GROUND, TemplateConditions.ON_SOIL,

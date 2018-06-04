@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.registry;
 
 import com.gildedgames.aether.api.AetherCapabilities;
+import com.gildedgames.aether.api.world.ISpawnHandler;
 import com.gildedgames.aether.api.world.ISpawnSystem;
 import com.gildedgames.aether.api.world.PosCondition;
 import com.gildedgames.aether.common.AetherCore;
@@ -22,26 +23,37 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
 
-public class SpawnRegistry
+import java.util.List;
+
+@Mod.EventBusSubscriber
+public class WorldEvents
 {
-	public SpawnRegistry()
-	{
-
-	}
-
 	@SubscribeEvent
-	public void registerAetherSpawnHandlers(AttachCapabilitiesEvent<World> event)
+	public static void onWorldAttachCapabilities(AttachCapabilitiesEvent<World> event)
 	{
-		if (event.getObject().isRemote || event.getObject().provider.getDimensionType() != DimensionsAether.AETHER)
+		if (event.getObject().isRemote)
 		{
 			return;
 		}
 
 		World world = event.getObject();
+
+		ISpawnSystem spawnSystem = new SpawnSystem(world, getSpawnHandlers(world));
+
+		event.addCapability(AetherCore.getResource("SpawnSystem"), new SpawnSystemProvider(spawnSystem));
+	}
+
+	private static List<ISpawnHandler> getSpawnHandlers(World world)
+	{
+		if (world.provider.getDimensionType() != DimensionsAether.AETHER)
+		{
+			return Lists.newArrayList();
+		}
 
 		PosCondition grassCheck = new CheckBlockUnderneath(BlocksAether.aether_grass);
 		PosCondition groundCheck = new CheckBlockUnderneath(BlocksAether.aether_grass, BlocksAether.holystone);
@@ -112,13 +124,11 @@ public class SpawnRegistry
 
 		flying.addEntry(aerwhale);
 
-		ISpawnSystem spawnSystem = new SpawnSystem(world, Lists.newArrayList(animals, atmospheric, hostiles, flying));
-
-		event.addCapability(AetherCore.getResource("SpawnSystem"), new SpawnSystemProvider(spawnSystem));
+		return Lists.newArrayList(animals, atmospheric, hostiles, flying);
 	}
 
 	@SubscribeEvent
-	public void onTick(final WorldTickEvent event)
+	public static void onWorldTick(final WorldTickEvent event)
 	{
 		if (event.phase == Phase.END)
 		{

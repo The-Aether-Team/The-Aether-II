@@ -35,6 +35,7 @@ import org.lwjgl.input.Mouse;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -205,10 +206,10 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 		}
 	}
 
-	public void scrollTo(float p_148329_1_)
+	private void scrollTo(float scroll)
 	{
 		int i = (this.recipes.size() + 4 - 1) / 4 - 6;
-		int j = (int) ((double) (p_148329_1_ * (float) i) + 0.5D);
+		int j = (int) ((double) (scroll * (float) i) + 0.5D);
 
 		if (j < 0)
 		{
@@ -233,7 +234,7 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 		}
 	}
 
-	public boolean canScroll()
+	private boolean canScroll()
 	{
 		return this.recipes.size() > this.options.size();
 	}
@@ -244,18 +245,9 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 
 		List<ItemStack> uniqueStacks = Lists.newArrayList();
 
-		outerloop:
 		for (ItemStack stack : this.playerInventory.mainInventory)
 		{
-			for (ItemStack uniqueStack : uniqueStacks)
-			{
-				if (RecipeUtil.areEqual(stack, uniqueStack))
-				{
-					continue outerloop;
-				}
-			}
-
-			if (!stack.isEmpty())
+			if (!stack.isEmpty() && !uniqueStacks.contains(stack))
 			{
 				uniqueStacks.add(stack);
 			}
@@ -263,25 +255,13 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 
 		for (ItemStack stack : uniqueStacks)
 		{
-			ISimpleRecipeGroup[] groups = AetherAPI.content().masonry().getRecipesFromRequirement(stack);
+			Collection<ISimpleRecipeGroup> groups = AetherAPI.content().masonry().getRecipesFromRequirement(stack);
 
 			for (ISimpleRecipeGroup group : groups)
 			{
 				if (group != null)
 				{
-					outer:
-					for (ISimpleRecipe recipe : group.getRecipes())
-					{
-						for (ISimpleRecipe r : this.recipes) //TODO: Shouldn't be returning duplicate recipes..
-						{
-							if (r.equals(recipe))
-							{
-								continue outer;
-							}
-						}
-
-						this.recipes.add(recipe);
-					}
+					this.recipes.addAll(group.getRecipes());
 				}
 			}
 		}
@@ -307,7 +287,6 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 			}
 
 			return Integer.compare(id1, id2);
-
 		});
 
 		Collections.reverse(this.recipes);
