@@ -155,6 +155,7 @@ public class PlayerAetherHooks
 		}
 	}
 
+
 	@SubscribeEvent
 	public static void onCalculateBreakSpeed(final PlayerEvent.BreakSpeed event)
 	{

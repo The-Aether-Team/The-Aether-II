@@ -15,8 +15,6 @@ import com.google.common.collect.Lists;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.MobEffects;
@@ -200,7 +198,7 @@ public class PlayerAether implements IPlayerAether
 
 	public void onLoggedOut()
 	{
-
+		this.sectorModule.releaseAll();
 	}
 
 	/**
@@ -305,6 +303,8 @@ public class PlayerAether implements IPlayerAether
 
 	public void onTeleport(final PlayerEvent.PlayerChangedDimensionEvent event)
 	{
+		this.sectorModule.releaseAll();
+
 		this.sendFullUpdate();
 
 		this.equipmentModule.onTeleport();

@@ -168,6 +168,20 @@ public class PlayerSectorModule extends PlayerAetherModule
 		}
 	}
 
+	public void releaseAll()
+	{
+		for (WatchedSector loadEntry : this.map.getValues())
+		{
+			loadEntry.watching = false;
+
+			if (loadEntry.sector != null)
+			{
+				loadEntry.sector.removeWatchingPlayer(this.getEntity().getEntityId());
+			}
+		}
+
+		this.map.clear();
+	}
 
 	private void processNext()
 	{
@@ -178,12 +192,13 @@ public class PlayerSectorModule extends PlayerAetherModule
 				IPrepSector sector = this.waiting.get();
 
 				WatchedSector watched = this.map.get(sector.getData().getSectorX(), sector.getData().getSectorY());
-				watched.sector = sector;
 
 				if (watched == null)
 				{
 					return;
 				}
+
+				watched.sector = sector;
 
 				IPrepManager manager = PrepHelper.getManager(this.getWorld());
 
