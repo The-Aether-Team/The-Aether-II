@@ -6,7 +6,6 @@ import com.gildedgames.orbis_api.preparation.IPrepManager;
 import com.gildedgames.orbis_api.preparation.IPrepSector;
 import com.gildedgames.orbis_api.preparation.IPrepSectorAccess;
 import com.gildedgames.orbis_api.preparation.impl.util.PrepHelper;
-import com.gildedgames.orbis_api.world.WorldObjectManager;
 import com.google.common.collect.Lists;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -148,13 +147,6 @@ public class BiomeProviderAether extends BiomeProvider
 		if (listToReuse == null || listToReuse.length < width * length)
 		{
 			listToReuse = new Biome[width * length];
-		}
-
-		if (!WorldObjectManager.hasWorldSeed(this.world.provider.getDimension()))
-		{
-			Arrays.fill(listToReuse, BiomesAether.VOID);
-
-			return listToReuse;
 		}
 
 		if (cacheFlag && width == 16 && length == 16 && (x & 15) == 0 && (z & 15) == 0)

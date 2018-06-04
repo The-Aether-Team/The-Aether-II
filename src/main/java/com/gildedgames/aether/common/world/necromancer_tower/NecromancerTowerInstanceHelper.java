@@ -5,7 +5,6 @@ import net.minecraft.entity.player.EntityPlayerMP;
 
 public class NecromancerTowerInstanceHelper
 {
-
 	public final IInstanceHandler<NecromancerTowerInstance> handler;
 
 	public NecromancerTowerInstanceHelper(final IInstanceHandler<NecromancerTowerInstance> handler)
@@ -30,8 +29,6 @@ public class NecromancerTowerInstanceHelper
 		}
 
 		this.handler.teleportPlayerToInstance(inst, player);
-
-		player.connection.setPlayerLocation(inst.getInsideEntrance().getX(), inst.getInsideEntrance().getY(), inst.getInsideEntrance().getZ(), 215, 0);
 	}
 
 	public void teleportBack(final EntityPlayerMP player)

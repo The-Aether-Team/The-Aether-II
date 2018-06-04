@@ -7,12 +7,12 @@ import com.gildedgames.orbis_api.core.CreationData;
 import com.gildedgames.orbis_api.core.PlacedBlueprint;
 import com.gildedgames.orbis_api.util.io.NBTFunnel;
 import com.gildedgames.orbis_api.util.mc.BlockPosDimension;
-import com.gildedgames.orbis_api.util.mc.NBTHelper;
 import com.gildedgames.orbis_api.world.instances.IInstance;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTUtil;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DimensionType;
@@ -28,7 +28,7 @@ public class NecromancerTowerInstance implements IInstance
 
 	private final List<EntityPlayer> players = Lists.newArrayList();
 
-	private BlockPosDimension insideEntrance;
+	private BlockPos insideEntrance;
 
 	private int dimensionId;
 
@@ -73,11 +73,6 @@ public class NecromancerTowerInstance implements IInstance
 		return true;
 	}
 
-	public BlockPosDimension getInsideEntrance()
-	{
-		return this.insideEntrance;
-	}
-
 	public PlacedBlueprint getTower()
 	{
 		if (this.tower == null)
@@ -93,9 +88,9 @@ public class NecromancerTowerInstance implements IInstance
 	{
 		final NBTFunnel funnel = new NBTFunnel(output);
 
-		output.setTag("insideEntrance", NBTHelper.write(this.insideEntrance));
+		output.setTag("spawn", NBTUtil.createPosTag(this.insideEntrance));
 
-		output.setInteger("dimensionId", this.dimensionId);
+		output.setInteger("dim", this.dimensionId);
 
 		funnel.set("tower", this.tower);
 	}
@@ -105,9 +100,9 @@ public class NecromancerTowerInstance implements IInstance
 	{
 		final NBTFunnel funnel = new NBTFunnel(input);
 
-		this.insideEntrance = NBTHelper.read(input.getCompoundTag("insideEntrance"));
+		this.insideEntrance = NBTUtil.getPosFromTag(input.getCompoundTag("spawn"));
 
-		this.dimensionId = input.getInteger("dimensionId");
+		this.dimensionId = input.getInteger("dim");
 
 		this.tower = funnel.get("tower");
 	}
@@ -126,6 +121,8 @@ public class NecromancerTowerInstance implements IInstance
 				player.setGameType(GameType.ADVENTURE);
 				player.setEntityInvulnerable(true);
 			}
+
+			this.teleportPlayerToSpawn(player);
 		}
 	}
 
@@ -149,6 +146,27 @@ public class NecromancerTowerInstance implements IInstance
 		{
 			InstancesAether.NECROMANCER_TOWER_HANDLER.handler.unregisterInstance(this);
 		}
+	}
+
+	@Override
+	public void onRespawn(EntityPlayer player)
+	{
+		this.teleportPlayerToSpawn(player);
+	}
+
+	private void teleportPlayerToSpawn(EntityPlayer player)
+	{
+		BlockPos spawn = this.getSpawnPosition();
+
+		if (spawn != null)
+		{
+			((EntityPlayerMP) player).connection.setPlayerLocation(spawn.getX() + 0.5D, spawn.getY() + 0.5D, spawn.getZ() + 0.5D, 215, 0);
+		}
+	}
+
+	public BlockPos getSpawnPosition()
+	{
+		return this.insideEntrance;
 	}
 
 	@Override
