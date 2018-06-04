@@ -142,15 +142,13 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 	}
 
 	@Override
-	public void breakBlock(World world, BlockPos pos, IBlockState state)
+	public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state)
 	{
-		super.breakBlock(world, pos, state);
-
 		if (state.getValue(PROPERTY_SNOWY))
 		{
-			if (world.getBlockState(pos.down()) != Blocks.AIR.getDefaultState())
+			if (worldIn.getBlockState(pos.down()) != Blocks.AIR.getDefaultState())
 			{
-				world.setBlockState(pos, BlocksAether.highlands_snow_layer.getDefaultState().withProperty(BlockSnow.LAYERS, 1), 2);
+				worldIn.setBlockState(pos, BlocksAether.highlands_snow_layer.getDefaultState().withProperty(BlockSnow.LAYERS, 1), 2);
 			}
 		}
 	}
