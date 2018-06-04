@@ -19,7 +19,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Mouse;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(Side.CLIENT)
 public class TabClientEvents
 {
 	@SideOnly(Side.CLIENT)

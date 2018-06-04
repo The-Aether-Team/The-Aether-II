@@ -30,13 +30,14 @@ import net.minecraftforge.client.event.RenderSpecificHandEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.relauncher.Side;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(Side.CLIENT)
 public class ClientRenderHandler
 {
 	private static final List<IOverlay> overlays = Lists.newArrayList();

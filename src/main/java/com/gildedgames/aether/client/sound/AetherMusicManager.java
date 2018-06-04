@@ -17,10 +17,11 @@ import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
 
 import java.util.ArrayList;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(Side.CLIENT)
 public class AetherMusicManager
 {
 	public static final AetherMusicManager INSTANCE = new AetherMusicManager();
