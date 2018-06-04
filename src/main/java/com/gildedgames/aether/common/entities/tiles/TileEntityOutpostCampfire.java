@@ -38,7 +38,7 @@ public class TileEntityOutpostCampfire extends TileEntityMultiblockController im
 	}
 
 	@Override
-	public void onInteract(final EntityPlayer player)
+	public boolean onInteract(final EntityPlayer player)
 	{
 		if (player instanceof EntityPlayerMP && player.world.provider.getDimensionType() == DimensionsAether.AETHER)
 		{
@@ -49,11 +49,6 @@ public class TileEntityOutpostCampfire extends TileEntityMultiblockController im
 			playerAether.getTeleportingModule().setAetherPos(new BlockPosDimension((int) player.posX, (int) player.posY, (int) player.posZ, player.dimension));
 
 			final BlockPosDimension pos = playerAether.getTeleportingModule().getNonAetherPos();
-
-			if (pos == null)
-			{
-
-			}
 
 			if (pos != null)
 			{
@@ -66,8 +61,11 @@ public class TileEntityOutpostCampfire extends TileEntityMultiblockController im
 
 				playerMP.connection.setPlayerLocation(pos.getX(), pos.getY(), pos.getZ(), 0, 0);
 			}
+
+			return true;
 		}
 
+		return false;
 	}
 
 	@Override

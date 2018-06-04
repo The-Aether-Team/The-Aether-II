@@ -318,7 +318,7 @@ public class BlocksAether
 
 	public static Block light_skyroot_decorative = new BlockLightSkyrootDecorative();
 
-	public static Block aether_teleporter = new BlockAetherTeleporter();
+	public static BlockAetherTeleporter aether_teleporter = new BlockAetherTeleporter();
 
 	@SubscribeEvent
 	public static void onRegisterBlocks(final RegistryEvent.Register<Block> event)

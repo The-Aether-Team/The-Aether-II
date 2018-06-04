@@ -10,7 +10,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class TileEntityMultiblockController extends TileEntitySynced implements TileEntityMultiblockInterface
+public abstract class TileEntityMultiblockController extends TileEntitySynced implements ITileEntityMultiblock
 {
 
 	private final BlockMultiController block;

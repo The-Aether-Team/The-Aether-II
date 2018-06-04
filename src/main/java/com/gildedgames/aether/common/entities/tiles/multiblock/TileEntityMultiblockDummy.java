@@ -11,29 +11,31 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class TileEntityMultiblockDummy extends TileEntitySynced implements TileEntityMultiblockInterface
+public class TileEntityMultiblockDummy extends TileEntitySynced implements ITileEntityMultiblock
 {
 	private BlockPos controllerPosOffset;
 
 	@Override
-	public void onInteract(final EntityPlayer player)
+	public boolean onInteract(final EntityPlayer player)
 	{
-		if (!this.hasLinkedController())
+		if (this.hasLinkedController())
 		{
-			return;
+			final TileEntity entity = this.world.getTileEntity(this.getLinkedController());
+
+			if (entity instanceof TileEntityMultiblockController)
+			{
+				((ITileEntityMultiblock) entity).onInteract(player);
+
+				return true;
+			}
+			else
+			{
+				AetherCore.LOGGER.warn("TileEntityMultiblockDummy at " + this.pos.toString() + ", is missing it's linked controller at "
+						+ this.getLinkedController().toString());
+			}
 		}
 
-		final TileEntity entity = this.world.getTileEntity(this.getLinkedController());
-
-		if (entity instanceof TileEntityMultiblockController)
-		{
-			((TileEntityMultiblockInterface) entity).onInteract(player);
-		}
-		else
-		{
-			AetherCore.LOGGER.warn("TileEntityMultiblockDummy at " + this.pos.toString() + ", is missing it's linked controller at "
-					+ this.getLinkedController().toString());
-		}
+		return false;
 	}
 
 	@Override
@@ -46,9 +48,9 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements TileE
 
 		final TileEntity entity = this.world.getTileEntity(this.getLinkedController());
 
-		if (entity instanceof TileEntityMultiblockInterface)
+		if (entity instanceof ITileEntityMultiblock)
 		{
-			((TileEntityMultiblockInterface) entity).onDestroyed();
+			((ITileEntityMultiblock) entity).onDestroyed();
 		}
 		else
 		{
@@ -67,9 +69,9 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements TileE
 
 		final TileEntity entity = this.world.getTileEntity(this.getLinkedController());
 
-		if (entity instanceof TileEntityMultiblockInterface)
+		if (entity instanceof ITileEntityMultiblock)
 		{
-			return ((TileEntityMultiblockInterface) entity).getPickedStack(world, pos, state);
+			return ((ITileEntityMultiblock) entity).getPickedStack(world, pos, state);
 		}
 		else
 		{

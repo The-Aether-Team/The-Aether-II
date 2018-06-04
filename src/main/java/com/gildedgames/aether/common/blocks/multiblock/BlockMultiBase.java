@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.blocks.multiblock;
 
-import com.gildedgames.aether.common.entities.tiles.multiblock.TileEntityMultiblockInterface;
+import com.gildedgames.aether.common.entities.tiles.multiblock.ITileEntityMultiblock;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -31,9 +31,9 @@ public abstract class BlockMultiBase extends BlockContainer
 
 		TileEntity entity = worldIn.getTileEntity(pos);
 
-		if (entity instanceof TileEntityMultiblockInterface)
+		if (entity instanceof ITileEntityMultiblock)
 		{
-			((TileEntityMultiblockInterface) entity).onInteract(playerIn);
+			((ITileEntityMultiblock) entity).onInteract(playerIn);
 		}
 
 		return true;
@@ -44,9 +44,9 @@ public abstract class BlockMultiBase extends BlockContainer
 	{
 		TileEntity te = worldIn.getTileEntity(pos);
 
-		if (te instanceof TileEntityMultiblockInterface)
+		if (te instanceof ITileEntityMultiblock)
 		{
-			TileEntityMultiblockInterface controller = (TileEntityMultiblockInterface) te;
+			ITileEntityMultiblock controller = (ITileEntityMultiblock) te;
 
 			controller.onDestroyed();
 		}
@@ -68,9 +68,9 @@ public abstract class BlockMultiBase extends BlockContainer
 	{
 		TileEntity te = world.getTileEntity(pos);
 
-		if (te instanceof TileEntityMultiblockInterface)
+		if (te instanceof ITileEntityMultiblock)
 		{
-			TileEntityMultiblockInterface controller = (TileEntityMultiblockInterface) te;
+			ITileEntityMultiblock controller = (ITileEntityMultiblock) te;
 
 			return controller.getPickedStack(world, pos, state);
 		}
