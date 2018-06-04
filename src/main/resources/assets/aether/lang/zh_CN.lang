@@ -533,7 +533,7 @@ item.aether.tool.zanite.ability.desc=随耐久降低提升效率
 item.aether.tool.gravitite.ability.desc=无视重力升腾方块
 item.aether.tool.gravitite.use.desc=右击方块
 item.aether.tool.arkenium.ability.desc=沉重却极其耐用
-item.aether.tool.valkyrie.ability.desc=
+item.aether.tool.valkyrie.ability.desc=能用于操作距玩家有一定距离的目标
 
 # Tooltips
 item.aether.tooltip.ability=能力
@@ -605,7 +605,7 @@ itemGroup.aether.visual_variants=天境二 装饰性方块
 itemGroup.aether.natural_blocks=天境二 天然方块
 itemGroup.aether.construction=天境二 建材
 itemGroup.aether.utility_blocks=天境二 效用型方块
-itemGroup.aether.dungeon_blocks=天境二 地牢方块
+itemGroup.aether.dungeon_blocks=天境二 地下城方块
 itemGroup.aether.thera=天境二 介元方块
 
 # Containers
