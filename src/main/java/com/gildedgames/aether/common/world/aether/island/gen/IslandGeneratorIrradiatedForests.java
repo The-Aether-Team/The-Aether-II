@@ -226,7 +226,12 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 							}
 						}
 
-						final double maxY = bottomMaxY + ((topSample - cutoffPoint) * topHeight);
+						double maxY = bottomMaxY + ((topSample - cutoffPoint) * topHeight);
+
+						if (maxY > 254.0D)
+						{
+							maxY = 254.0D;
+						}
 
 						for (int y = (int) bottomMaxY; y < maxY; y++)
 						{

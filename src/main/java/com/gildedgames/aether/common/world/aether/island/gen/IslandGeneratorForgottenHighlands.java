@@ -192,8 +192,6 @@ public class IslandGeneratorForgottenHighlands implements IIslandGenerator
 	public void genMask(Biome[] biomes, OpenSimplexNoise noise, IBlockAccessExtended access, ChunkMask mask, IIslandData island,
 			int chunkX, int chunkZ)
 	{
-		final Biome biome = biomes[0];
-
 		final double[] height3D = generate3DNoise(noise, island, chunkX, chunkZ, 0, 300.0D, 0.5D, false);
 
 		final double centerX = island.getBounds().getCenterX();

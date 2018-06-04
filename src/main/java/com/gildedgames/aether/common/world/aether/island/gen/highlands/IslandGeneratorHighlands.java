@@ -148,6 +148,11 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 					}
 				}
 
+				if (bottomMaxY < 0.0D)
+				{
+					bottomMaxY = 0.0D;
+				}
+
 				double topHeight = magnetic ? currentPillar.getTopHeight() : this.v.getMaxTerrainHeight();
 
 				double bottomSample = magnetic ? magneticSample : Math.min(1.0D, normal + 0.25);
@@ -198,6 +203,11 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 					if (water && !magnetic)
 					{
 						maxY = bottomMaxY;
+					}
+
+					if (maxY > 254.0D)
+					{
+						maxY = 254.0D;
 					}
 
 					for (int y = (int) bottomMaxY; y < maxY; y++)
