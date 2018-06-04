@@ -131,6 +131,14 @@ public class BlockMoaEgg extends BlockContainer
 		return false;
 	}
 
+
+	@Override
+	public boolean isFullBlock(IBlockState state)
+	{
+		return false;
+	}
+
+
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta)
 	{
