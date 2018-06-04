@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
-import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.network.NetworkingAether;
@@ -12,20 +11,20 @@ import com.gildedgames.orbis_api.preparation.IPrepRegistryEntry;
 import com.gildedgames.orbis_api.preparation.IPrepSector;
 import com.gildedgames.orbis_api.preparation.impl.util.PrepHelper;
 import com.gildedgames.orbis_api.util.ChunkMap;
-import com.google.common.util.concurrent.ListenableFuture;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
-// Arguably, this is a less than optimal model for the purposes of garbage collection, but who really cares. It's 2018.
 public class PlayerSectorModule extends PlayerAetherModule
 {
-	private ChunkMap<LoadEntry> map = new ChunkMap<>();
+	private ChunkMap<WatchedSector> map = new ChunkMap<>();
 
-	private IPrepSector lastSector;
+	private Future<IPrepSector> waiting;
 
 	public PlayerSectorModule(PlayerAether playerAether)
 	{
@@ -52,8 +51,18 @@ public class PlayerSectorModule extends PlayerAetherModule
 			return;
 		}
 
-		for (LoadEntry loadEntry : this.map.getValues())
+		this.uploadNext();
+
+		this.update();
+
+		this.unloadNext();
+	}
+
+	private void update()
+	{
+		for (WatchedSector loadEntry : this.map.getValues())
 		{
+			loadEntry.updateDistance(this.getEntity());
 			loadEntry.watching = false;
 
 			if (loadEntry.sector != null)
@@ -82,96 +91,124 @@ public class PlayerSectorModule extends PlayerAetherModule
 		int maxChunkX = chunkX + radius;
 		int maxChunkY = chunkY + radius;
 
-		int centerSectorX = Math.floorDiv(chunkX, entry.getSectorChunkArea());
-		int centerSectorY = Math.floorDiv(chunkY, entry.getSectorChunkArea());
-
-		// Prepare this first to give priority to sectors the player is in
-		manager.getAccess().provideSector(centerSectorX, centerSectorY, true);
-
 		int minSectorX = Math.floorDiv(minChunkX, entry.getSectorChunkArea());
 		int minSectorY = Math.floorDiv(minChunkY, entry.getSectorChunkArea());
 
 		int maxSectorX = Math.floorDiv(maxChunkX, entry.getSectorChunkArea());
-		int maxSectorY = Math.floorDiv(maxChunkY, entry.getSectorChunkArea());
+		int maxSectorZ = Math.floorDiv(maxChunkY, entry.getSectorChunkArea());
 
 		for (int x = minSectorX; x < maxSectorX; x++)
 		{
-			for (int y = minSectorY; y < maxSectorY; y++)
+			for (int z = minSectorY; z < maxSectorZ; z++)
 			{
-				if (!this.map.containsKey(x, y))
+				if (!this.map.containsKey(x, z))
 				{
-					LoadEntry loadEntry = new LoadEntry(manager.getAccess().provideSector(x, y, false));
+					WatchedSector watched = new WatchedSector(entry, x, z);
+					watched.watching = true;
+					watched.updateDistance(this.getEntity());
 
-					this.map.put(x, y, loadEntry);
+					this.map.put(x, z, watched);
 				}
-
-				LoadEntry loadEntry = this.map.get(x, y);
-				loadEntry.watching = true;
-
-				if (loadEntry.sector != null)
+				else
 				{
-					loadEntry.sector.addWatchingPlayer(this.getEntity().getEntityId());
+					WatchedSector watched = this.map.get(x, z);
+					watched.watching = true;
 				}
 			}
 		}
 
-		this.uploadPending();
-		this.unloadPending();
-	}
-
-	private void uploadPending()
-	{
-		ArrayList<LoadEntry> uploads = new ArrayList<>();
-
-		for (LoadEntry loadEntry : this.map.getValues())
+		if (this.waiting == null)
 		{
-			if (!loadEntry.generated && loadEntry.future.isDone())
-			{
-				try
-				{
-					loadEntry.sector = loadEntry.future.get();
-					loadEntry.generated = true;
+			WatchedSector closest = null;
 
-					if (loadEntry.sector != null)
+			for (WatchedSector watched : this.map.getValues())
+			{
+				if (!watched.watching || watched.sector != null)
+				{
+					continue;
+				}
+
+				if (closest == null)
+				{
+					closest = watched;
+				}
+				else
+				{
+					if (watched.distance < closest.distance)
 					{
-						loadEntry.sector.addWatchingPlayer(this.getEntity().getEntityId());
+						closest = watched;
 					}
-
-					uploads.add(loadEntry);
-				}
-				catch (InterruptedException | ExecutionException e)
-				{
-					throw new RuntimeException("Failed to generate AOT sector for player", e);
 				}
 			}
-		}
 
-		for (LoadEntry loadEntry : uploads)
-		{
-			AetherCore.LOGGER.info("Uploading sector " + loadEntry.sector.getData().getSectorX() + ", " + loadEntry.sector.getData().getSectorY() + " to client");
-
-			NetworkingAether.sendPacketToPlayer(new PacketPartialSectorData((PrepSectorDataAether) loadEntry.sector.getData()), (EntityPlayerMP) this.getEntity());
+			if (closest != null)
+			{
+				this.waiting = manager.getAccess().provideSector(closest.sectorX, closest.sectorZ, true);
+			}
 		}
 	}
 
-	private void unloadPending()
-	{
-		ArrayList<LoadEntry> unloads = new ArrayList<>();
 
-		for (LoadEntry loadEntry : this.map.getValues())
+	private void uploadNext()
+	{
+		if (this.waiting != null && this.waiting.isDone())
+		{
+			try
+			{
+				IPrepSector sector = this.waiting.get();
+				sector.addWatchingPlayer(this.getEntity().getEntityId());
+
+				WatchedSector watched = this.map.get(sector.getData().getSectorX(), sector.getData().getSectorY());
+				watched.sector = sector;
+
+				IPrepManager manager = PrepHelper.getManager(this.getWorld());
+
+				if (manager == null)
+				{
+					return;
+				}
+
+				manager.getAccess().retainSector(sector);
+
+				NetworkingAether.sendPacketToPlayer(new PacketPartialSectorData((PrepSectorDataAether) sector.getData()), (EntityPlayerMP) this.getEntity());
+			}
+			catch (InterruptedException | ExecutionException e)
+			{
+				throw new RuntimeException("Exception while generating AOT sector for player", e);
+			}
+			finally
+			{
+				this.waiting = null;
+			}
+		}
+	}
+
+	private void unloadNext()
+	{
+		ArrayList<WatchedSector> unloads = null;
+
+		for (WatchedSector loadEntry : this.map.getValues())
 		{
 			if (!loadEntry.watching)
 			{
+				if (unloads == null)
+				{
+					unloads = new ArrayList<>();
+				}
+
 				unloads.add(loadEntry);
 			}
 		}
 
-		for (LoadEntry loadEntry : unloads)
+		if (unloads == null)
+		{
+			return;
+		}
+
+		for (WatchedSector loadEntry : unloads)
 		{
 			if (loadEntry.sector != null)
 			{
-				AetherCore.LOGGER.info("Notifying client to unload sector " + loadEntry.sector.getData().getSectorX() + ", " + loadEntry.sector.getData().getSectorY());
-
 				NetworkingAether.sendPacketToPlayer(new PacketUnloadSector(loadEntry.sector.getData()), (EntityPlayerMP) this.getEntity());
 
 				this.map.remove(loadEntry.sector.getData().getSectorX(), loadEntry.sector.getData().getSectorY());
@@ -191,19 +228,31 @@ public class PlayerSectorModule extends PlayerAetherModule
 
 	}
 
-	private static class LoadEntry
+	private class WatchedSector
 	{
-		private final ListenableFuture<IPrepSector> future;
+		private final int sectorX, sectorZ;
 
 		private IPrepSector sector;
 
-		private boolean generated;
+		private IPrepRegistryEntry entry;
 
 		private boolean watching;
 
-		public LoadEntry(ListenableFuture<IPrepSector> future)
+		private double distance;
+
+		public WatchedSector(IPrepRegistryEntry entry, int sectorX, int sectorZ)
 		{
-			this.future = future;
+			this.entry = entry;
+			this.sectorX = sectorX;
+			this.sectorZ = sectorZ;
+		}
+
+		public void updateDistance(EntityPlayer player)
+		{
+			double x = ((this.sectorX * this.entry.getSectorChunkArea()) + (this.entry.getSectorChunkArea() / 2.0)) * 16.0;
+			double z = ((this.sectorZ * this.entry.getSectorChunkArea()) + (this.entry.getSectorChunkArea() / 2.0)) * 16.0;
+
+			this.distance = player.getDistance(x, player.posY, z);
 		}
 	}
 }

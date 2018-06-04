@@ -5,6 +5,7 @@ import com.gildedgames.aether.common.analytics.GAReporter;
 import com.gildedgames.aether.common.registry.SpawnRegistry;
 import com.gildedgames.aether.common.registry.content.CurrencyAether;
 import com.gildedgames.aether.common.util.helpers.PerfHelper;
+import com.gildedgames.orbis_api.preparation.IPrepSectorAccess;
 import com.gildedgames.orbis_api.preparation.impl.util.PrepHelper;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.util.ResourceLocation;
@@ -20,6 +21,8 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.concurrent.ExecutionException;
 
 @Mod(name = AetherCore.MOD_NAME, modid = AetherCore.MOD_ID, version = AetherCore.MOD_VERSION,
 		certificateFingerprint = AetherCore.MOD_FINGERPRINT, guiFactory = AetherCore.MOD_GUI_FACTORY,
@@ -119,7 +122,16 @@ public class AetherCore
 		// TODO: In SpongeForge, the world is not loaded yet for some reason?
 		if (world != null)
 		{
-			PrepHelper.getManager(world).getAccess().provideSectorForChunk(0, 0, true);
+			IPrepSectorAccess access = PrepHelper.getManager(world).getAccess();
+
+			try
+			{
+				access.provideSectorForChunk(0, 0, false).get();
+			}
+			catch (InterruptedException | ExecutionException e)
+			{
+				throw new RuntimeException("Failed to generate spawn chunk sector", e);
+			}
 		}
 
 		PROXY.onServerStarted(event);
