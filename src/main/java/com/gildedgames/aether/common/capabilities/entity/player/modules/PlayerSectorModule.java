@@ -17,6 +17,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
@@ -51,11 +52,8 @@ public class PlayerSectorModule extends PlayerAetherModule
 			return;
 		}
 
-		this.uploadNext();
-
 		this.update();
-
-		this.unloadNext();
+		this.processNext();
 	}
 
 	private void update()
@@ -104,8 +102,8 @@ public class PlayerSectorModule extends PlayerAetherModule
 				if (!this.map.containsKey(x, z))
 				{
 					WatchedSector watched = new WatchedSector(entry, x, z);
-					watched.watching = true;
 					watched.updateDistance(this.getEntity());
+					watched.watching = true;
 
 					this.map.put(x, z, watched);
 				}
@@ -146,20 +144,46 @@ public class PlayerSectorModule extends PlayerAetherModule
 				this.waiting = manager.getAccess().provideSector(closest.sectorX, closest.sectorZ, true);
 			}
 		}
+
+		List<WatchedSector> unload = new ArrayList<>();
+
+		for (WatchedSector loadEntry : this.map.getValues())
+		{
+			if (!loadEntry.watching)
+			{
+				unload.add(loadEntry);
+			}
+		}
+
+		for (WatchedSector loadEntry : unload)
+		{
+			if (loadEntry.sector != null)
+			{
+				loadEntry.sector.removeWatchingPlayer(this.getEntity().getEntityId());
+
+				NetworkingAether.sendPacketToPlayer(new PacketUnloadSector(loadEntry.sector.getData()), (EntityPlayerMP) this.getEntity());
+			}
+
+			this.map.remove(loadEntry.sectorX, loadEntry.sectorZ);
+		}
 	}
 
 
-	private void uploadNext()
+	private void processNext()
 	{
 		if (this.waiting != null && this.waiting.isDone())
 		{
 			try
 			{
 				IPrepSector sector = this.waiting.get();
-				sector.addWatchingPlayer(this.getEntity().getEntityId());
 
 				WatchedSector watched = this.map.get(sector.getData().getSectorX(), sector.getData().getSectorY());
 				watched.sector = sector;
+
+				if (watched == null)
+				{
+					return;
+				}
 
 				IPrepManager manager = PrepHelper.getManager(this.getWorld());
 
@@ -168,9 +192,14 @@ public class PlayerSectorModule extends PlayerAetherModule
 					return;
 				}
 
-				manager.getAccess().retainSector(sector);
+				if (watched.watching)
+				{
+					sector.addWatchingPlayer(this.getEntity().getEntityId());
 
-				NetworkingAether.sendPacketToPlayer(new PacketPartialSectorData((PrepSectorDataAether) sector.getData()), (EntityPlayerMP) this.getEntity());
+					NetworkingAether.sendPacketToPlayer(new PacketPartialSectorData((PrepSectorDataAether) sector.getData()), (EntityPlayerMP) this.getEntity());
+
+					manager.getAccess().retainSector(sector);
+				}
 			}
 			catch (InterruptedException | ExecutionException e)
 			{
@@ -183,38 +212,6 @@ public class PlayerSectorModule extends PlayerAetherModule
 		}
 	}
 
-	private void unloadNext()
-	{
-		ArrayList<WatchedSector> unloads = null;
-
-		for (WatchedSector loadEntry : this.map.getValues())
-		{
-			if (!loadEntry.watching)
-			{
-				if (unloads == null)
-				{
-					unloads = new ArrayList<>();
-				}
-
-				unloads.add(loadEntry);
-			}
-		}
-
-		if (unloads == null)
-		{
-			return;
-		}
-
-		for (WatchedSector loadEntry : unloads)
-		{
-			if (loadEntry.sector != null)
-			{
-				NetworkingAether.sendPacketToPlayer(new PacketUnloadSector(loadEntry.sector.getData()), (EntityPlayerMP) this.getEntity());
-
-				this.map.remove(loadEntry.sector.getData().getSectorX(), loadEntry.sector.getData().getSectorY());
-			}
-		}
-	}
 
 	@Override
 	public void write(NBTTagCompound tag)
