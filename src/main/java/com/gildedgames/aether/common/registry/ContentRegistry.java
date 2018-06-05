@@ -2,9 +2,7 @@ package com.gildedgames.aether.common.registry;
 
 import com.gildedgames.aether.api.patron.PatronRewardRegistry;
 import com.gildedgames.aether.api.registry.IContentRegistry;
-import com.gildedgames.aether.client.gui.tab.TabBugReport;
 import com.gildedgames.aether.client.gui.tab.TabEquipment;
-import com.gildedgames.aether.client.gui.tab.TabPatronRewards;
 import com.gildedgames.aether.common.capabilities.CapabilityManagerAether;
 import com.gildedgames.aether.common.capabilities.item.EffectRegistry;
 import com.gildedgames.aether.common.containers.tab.TabRegistry;
@@ -59,8 +57,8 @@ public class ContentRegistry implements IContentRegistry
 		PerfHelper.measure("Pre-initialize patron rewards", PatronRewards::preInit);
 
 		this.tabRegistry.getInventoryGroup().registerServerTab(new TabEquipment());
-		this.tabRegistry.getInventoryGroup().registerServerTab(new TabBugReport());
-		this.tabRegistry.getInventoryGroup().registerServerTab(new TabPatronRewards());
+		//this.tabRegistry.getInventoryGroup().registerServerTab(new TabBugReport());
+		//this.tabRegistry.getInventoryGroup().registerServerTab(new TabPatronRewards());
 	}
 
 	/**

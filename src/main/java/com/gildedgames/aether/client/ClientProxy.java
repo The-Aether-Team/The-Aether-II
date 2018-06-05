@@ -2,9 +2,7 @@ package com.gildedgames.aether.client;
 
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.client.gui.misc.CustomLoadingRenderer;
-import com.gildedgames.aether.client.gui.tab.TabBugReport;
 import com.gildedgames.aether.client.gui.tab.TabEquipment;
-import com.gildedgames.aether.client.gui.tab.TabPatronRewards;
 import com.gildedgames.aether.client.renderer.AetherRenderers;
 import com.gildedgames.aether.client.renderer.ClientRenderHandler;
 import com.gildedgames.aether.common.AetherCore;
@@ -63,8 +61,8 @@ public class ClientProxy extends CommonProxy
 		ClientRenderHandler.init();
 
 		AetherAPI.content().tabs().getInventoryGroup().registerClientTab(new TabEquipment.Client());
-		AetherAPI.content().tabs().getInventoryGroup().registerClientTab(new TabBugReport.Client());
-		AetherAPI.content().tabs().getInventoryGroup().registerClientTab(new TabPatronRewards.Client());
+		//AetherAPI.content().tabs().getInventoryGroup().registerClientTab(new TabBugReport.Client());
+		//AetherAPI.content().tabs().getInventoryGroup().registerClientTab(new TabPatronRewards.Client());
 	}
 
 	@Override
