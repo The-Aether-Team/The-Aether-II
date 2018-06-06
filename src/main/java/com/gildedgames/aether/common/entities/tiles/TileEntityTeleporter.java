@@ -130,7 +130,7 @@ public class TileEntityTeleporter extends TileEntityMultiblockController impleme
 			return false;
 		}
 
-		if (world.isRemote)
+		if (this.world.isRemote)
 		{
 			final PlayerAether playerAether = PlayerAether.getPlayer(player);
 
@@ -212,14 +212,8 @@ public class TileEntityTeleporter extends TileEntityMultiblockController impleme
 	}
 
 	@Override
-	public void onDestroyed()
-	{
-
-	}
-
-	@Override
 	public ItemStack getPickedStack(World world, BlockPos pos, IBlockState state)
 	{
-		return null;
+		return new ItemStack(BlocksAether.aether_teleporter);
 	}
 }
