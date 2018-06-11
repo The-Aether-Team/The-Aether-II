@@ -22,7 +22,6 @@ import com.gildedgames.aether.common.blocks.util.*;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.blocks.ItemBlockMultiName;
 import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
-import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.BlockButtonStone;
@@ -36,12 +35,15 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 @Mod.EventBusSubscriber()
 public class BlocksAether
 {
-	public static final Set<ItemBlock> ITEM_BLOCKS = Sets.newLinkedHashSet();
+	private static final Set<Block> registeredBlocks = new HashSet<>();
 
 	public static final Block therastone_brick = new BlockBuilder(Material.ROCK)
 			.setSoundType(SoundType.STONE).setHardness(2.0f);
@@ -293,8 +295,6 @@ public class BlocksAether
 	public static final Block skyroot_twigs = new BlockFloorObject(Material.PLANTS, SoundType.WOOD);
 
 	public static final Block holystone_rock = new BlockFloorObject(Material.ROCK, SoundType.STONE);
-
-	private static final List<Block> registeredBlocks = new ArrayList<>();
 
 	public static BlockCustomSnowBlock highlands_snow = new BlockCustomSnowBlock();
 
@@ -608,9 +608,38 @@ public class BlocksAether
 	@SubscribeEvent
 	public static void onRegisterItems(final RegistryEvent.Register<Item> event)
 	{
-		for (final ItemBlock itemBlock : ITEM_BLOCKS)
+		for (final Block block : registeredBlocks)
 		{
-			event.getRegistry().register(itemBlock);
+			final ItemBlock item;
+
+			if (block instanceof IInternalBlock)
+			{
+				continue;
+			}
+			else if (block instanceof IBlockWithItem)
+			{
+				item = ((IBlockWithItem) block).createItemBlock();
+			}
+			else if (block instanceof IBlockMultiName)
+			{
+				item = new ItemBlockMultiName(block);
+			}
+			else
+			{
+				item = new ItemBlock(block);
+			}
+
+			if (block.getRegistryName() == null)
+			{
+				throw new RuntimeException("Registry name of block cannot be null");
+			}
+
+			String registryName = block.getRegistryName().getResourcePath();
+
+			item.setUnlocalizedName(AetherCore.MOD_ID + "." + registryName);
+			item.setRegistryName(AetherCore.MOD_ID, registryName);
+
+			event.getRegistry().register(item);
 		}
 	}
 
@@ -694,25 +723,6 @@ public class BlocksAether
 			block.setRegistryName(AetherCore.MOD_ID, registryName);
 
 			this.registry.register(block);
-
-			final ItemBlock item;
-
-			if (block instanceof IBlockWithItem)
-			{
-				item = ((IBlockWithItem) block).createItemBlock();
-			}
-			else if (block instanceof IBlockMultiName)
-			{
-				item = new ItemBlockMultiName(block);
-			}
-			else
-			{
-				item = new ItemBlock(block);
-			}
-
-			item.setRegistryName(AetherCore.MOD_ID, registryName).setUnlocalizedName(AetherCore.MOD_ID + "." + registryName);
-
-			ITEM_BLOCKS.add(item);
 
 			registeredBlocks.add(block);
 		}

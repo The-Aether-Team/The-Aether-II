@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.blocks.util;
 
+import com.gildedgames.aether.common.blocks.IInternalBlock;
 import com.gildedgames.aether.common.entities.tiles.TileEntitySkyrootBed;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.SoundType;
@@ -18,7 +19,7 @@ import net.minecraft.world.World;
 import java.util.Random;
 import java.util.function.Supplier;
 
-public class BlockCustomBed extends BlockBed
+public class BlockCustomBed extends BlockBed implements IInternalBlock
 {
 
 	private Supplier<Item> bedItem;

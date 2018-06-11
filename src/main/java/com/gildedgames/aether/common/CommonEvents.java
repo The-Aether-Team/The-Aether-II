@@ -22,6 +22,7 @@ import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.util.helpers.AetherHelper;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
 import com.gildedgames.aether.common.util.helpers.PlayerUtil;
+import com.gildedgames.orbis_api.preparation.IPrepManager;
 import com.gildedgames.orbis_api.preparation.impl.util.PrepHelper;
 import com.gildedgames.orbis_api.util.mc.BlockPosDimension;
 import com.google.common.collect.Lists;
@@ -40,14 +41,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.management.PlayerList;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
-import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.EntityMountEvent;
@@ -59,6 +57,7 @@ import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fluids.FluidEvent;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -66,13 +65,12 @@ import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-import javax.annotation.Nullable;
 import java.util.List;
-import java.util.function.Supplier;
+import java.util.concurrent.ExecutionException;
 
 @Mod.EventBusSubscriber
 public class CommonEvents
@@ -303,11 +301,6 @@ public class CommonEvents
 		}
 	}
 
-	public static Entity teleportEntity(final Entity entity, final WorldServer toWorld, final Teleporter teleporter, final int dimension)
-	{
-		return teleportEntity(entity, toWorld, teleporter, dimension, null);
-	}
-
 	@SubscribeEvent
 	public static void onPlayerUseBucket(final FillBucketEvent event)
 	{
@@ -364,70 +357,6 @@ public class CommonEvents
 		}
 
 		return false;
-	}
-
-	/**
-	 * Teleports any entity by duplicating it and . the old one. If {@param entity} is a player,
-	 * the entity will be transferred instead of duplicated.
-	 *
-	 * @return A newsystem entity if {@param entity} wasn't a player, or the same entity if it was a player
-	 */
-	public static Entity teleportEntity(final Entity entity, final WorldServer toWorld, final Teleporter teleporter, final int dimension,
-			@Nullable final Supplier<BlockPos> optionalLoc)
-	{
-		if (entity == null)
-		{
-			return null;
-		}
-
-		if (entity instanceof EntityPlayer)
-		{
-			if (!net.minecraftforge.common.ForgeHooks.onTravelToDimension(entity, dimension))
-			{
-				return entity;
-			}
-
-			// Players require special magic to be teleported correctly, and are not duplicated
-			if (!toWorld.isRemote)
-			{
-				final MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
-				final PlayerList playerList = server.getPlayerList();
-
-				final EntityPlayerMP player = (EntityPlayerMP) entity;
-
-				playerList.transferPlayerToDimension(player, dimension, teleporter);
-				player.timeUntilPortal = player.getPortalCooldown();
-
-				if (optionalLoc == null)
-				{
-					player.connection.setPlayerLocation(player.posX, player.posY, player.posZ, 0, 0);
-				}
-				else
-				{
-					final BlockPos loc = optionalLoc.get();
-
-					player.connection.setPlayerLocation(loc.getX(), loc.getY(), loc.getZ(), 225, 0);
-				}
-
-				/** Strange flag that needs to be set to prevent the NetHandlerPlayServer instances from resetting your position **/
-				ObfuscationReflectionHelper.setPrivateValue(EntityPlayerMP.class, player, true, ReflectionAether.INVULNERABLE_DIMENSION_CHANGE.getMappings());
-
-				PostAetherTravelEvent event = new PostAetherTravelEvent(entity);
-				MinecraftForge.EVENT_BUS.post(event);
-			}
-
-			return entity;
-		}
-		else
-		{
-			final Entity newEntity = entity.changeDimension(dimension);
-
-			// Forces the entity to be sent to clients as early as possible
-			newEntity.forceSpawn = true;
-			newEntity.setPositionAndUpdate(entity.posX, entity.posY, entity.posZ);
-
-			return newEntity;
-		}
 	}
 
 	@SubscribeEvent
@@ -565,6 +494,24 @@ public class CommonEvents
 		if (event.getEntityMounting() instanceof EntityNPC)
 		{
 			event.setCanceled(true);
+		}
+	}
+
+	@SubscribeEvent(priority = EventPriority.LOWEST)
+	public static void onWorldLoad(final WorldEvent.Load event)
+	{
+		if (event.getWorld().provider.getDimensionType() == DimensionsAether.AETHER)
+		{
+			IPrepManager manager = PrepHelper.getManager(event.getWorld());
+
+			try
+			{
+				manager.getAccess().provideSectorForChunk(0, 0, false).get();
+			}
+			catch (InterruptedException | ExecutionException e)
+			{
+				throw new RuntimeException("Failed to generate spawn chunk sector", e);
+			}
 		}
 	}
 }

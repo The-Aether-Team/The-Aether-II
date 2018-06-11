@@ -33,8 +33,10 @@ import java.util.Random;
 public class BlockAetherGrass extends Block implements IBlockMultiName, IGrowable
 {
 	public static final BlockVariant AETHER = new BlockVariant(0, "normal"),
-			ENCHANTED = new BlockVariant(1, "enchanted"), ARCTIC = new BlockVariant(2, "arctic"), MAGNETIC = new BlockVariant(3,
-			"magnetic"), IRRADIATED = new BlockVariant(4, "irradiated");
+			ENCHANTED = new BlockVariant(1, "enchanted"),
+			ARCTIC = new BlockVariant(2, "arctic"),
+			MAGNETIC = new BlockVariant(3, "magnetic"),
+			IRRADIATED = new BlockVariant(4, "irradiated");
 
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", AETHER, ENCHANTED, ARCTIC, MAGNETIC, IRRADIATED);
 

@@ -38,10 +38,10 @@ public class EntityNecromancer extends EntityNPC
 		{
 			final NecromancerTowerInstance instance = InstancesAether.NECROMANCER_TOWER_HANDLER.getFromDimId(worldIn.provider.getDimension());
 
-			this.floor1 = instance.getTower().getScheduleFromTriggerID("p2").getBounds().getMin();
-			this.floor2 = instance.getTower().getScheduleFromTriggerID("p3").getBounds().getMin();
-			this.floor3 = instance.getTower().getScheduleFromTriggerID("p4").getBounds().getMin();
-			this.floor4 = instance.getTower().getScheduleFromTriggerID("p5").getBounds().getMin();
+			this.floor1 = instance.getTower().getBaked().getScheduleFromTriggerID("p2").getBounds().getMin();
+			this.floor2 = instance.getTower().getBaked().getScheduleFromTriggerID("p3").getBounds().getMin();
+			this.floor3 = instance.getTower().getBaked().getScheduleFromTriggerID("p4").getBounds().getMin();
+			this.floor4 = instance.getTower().getBaked().getScheduleFromTriggerID("p5").getBounds().getMin();
 
 			this.upTowerTask = new NecromancerAIGoUpTower(this, this.floor1);
 

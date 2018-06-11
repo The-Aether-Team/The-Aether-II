@@ -54,7 +54,7 @@ public class ChunkProviderNecromancerTower implements IChunkGenerator
 			return;
 		}
 
-		for (final BlockDataChunk dataChunk : inst.getTower().getDataChunks())
+		for (final BlockDataChunk dataChunk : inst.getTower().getBaked().getDataChunks())
 		{
 			if (dataChunk == null)
 			{
@@ -81,9 +81,9 @@ public class ChunkProviderNecromancerTower implements IChunkGenerator
 			}
 		}
 
-		if (inst.getTower().getPlacedEntities().containsKey(p))
+		if (inst.getTower().getBaked().getPlacedEntities().containsKey(p))
 		{
-			for (final PlacedEntity e : inst.getTower().getPlacedEntities().get(p))
+			for (final PlacedEntity e : inst.getTower().getBaked().getPlacedEntities().get(p))
 			{
 				e.spawn(primer);
 			}
@@ -109,7 +109,7 @@ public class ChunkProviderNecromancerTower implements IChunkGenerator
 		{
 			final DataPrimer dataPrimer = new DataPrimer(new BlockAccessChunkPrimer(this.world, primer));
 
-			for (final BlockDataChunk dataChunk : inst.getTower().getDataChunks())
+			for (final BlockDataChunk dataChunk : inst.getTower().getBaked().getDataChunks())
 			{
 				if (dataChunk == null)
 				{

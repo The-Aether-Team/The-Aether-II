@@ -148,7 +148,7 @@ public class BiomeAetherDecorator
 						BlueprintPlacer.placeForced(primer, outpost, data, random);
 						final PlacedBlueprint placed = island.placeBlueprint(outpost, data);
 
-						final ScheduleRegion trigger = placed.getScheduleFromTriggerID("spawn");
+						final ScheduleRegion trigger = placed.getBaked().getScheduleFromTriggerID("spawn");
 
 						if (trigger != null)
 						{

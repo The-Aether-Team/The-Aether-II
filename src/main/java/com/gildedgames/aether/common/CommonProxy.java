@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.IAetherServices;
 import com.gildedgames.aether.api.net.IGildedGamesAccountApi;
 import com.gildedgames.aether.common.commands.CommandIsland;
+import com.gildedgames.aether.common.events.PostAetherTravelEvent;
 import com.gildedgames.aether.common.network.api.GildedGamesAccountApiImpl;
 import com.gildedgames.aether.common.registry.ContentRegistry;
 import com.gildedgames.aether.common.registry.content.CurrencyAether;
@@ -18,23 +19,30 @@ import com.gildedgames.aether.common.world.aether.island.gen.IslandVariables;
 import com.gildedgames.aether.common.world.aether.prep.PrepAether;
 import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstance;
 import com.gildedgames.orbis_api.OrbisAPI;
-import com.gildedgames.orbis_api.preparation.IPrepSectorAccess;
-import com.gildedgames.orbis_api.preparation.impl.util.PrepHelper;
 import com.gildedgames.orbis_api.util.io.IClassSerializer;
 import com.gildedgames.orbis_api.util.io.Instantiator;
 import com.gildedgames.orbis_api.util.io.SimpleSerializer;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.management.PlayerList;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
-import net.minecraftforge.common.DimensionManager;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.event.*;
 
+import javax.annotation.Nullable;
 import java.io.File;
 import java.util.Random;
-import java.util.concurrent.ExecutionException;
+import java.util.function.Supplier;
 
 public class CommonProxy implements IAetherServices
 {
@@ -43,8 +51,6 @@ public class CommonProxy implements IAetherServices
 	private final GildedGamesAccountApiImpl webAPI = new GildedGamesAccountApiImpl();
 
 	private File configDir;
-
-	private PrepAether prepAether;
 
 	public void preInit(final FMLPreInitializationEvent event)
 	{
@@ -70,9 +76,7 @@ public class CommonProxy implements IAetherServices
 
 		this.contentRegistry.preInit();
 
-		this.prepAether = new PrepAether();
-
-		OrbisAPI.sectors().register(this.prepAether);
+		OrbisAPI.sectors().register(new PrepAether());
 	}
 
 	public void init(final FMLInitializationEvent event)
@@ -87,7 +91,7 @@ public class CommonProxy implements IAetherServices
 		this.content().postInit();
 	}
 
-	public void onServerStarting(FMLServerStartingEvent event)
+	public void onServerAboutToStart(FMLServerAboutToStartEvent event)
 	{
 		this.content().onServerStarting();
 
@@ -96,28 +100,11 @@ public class CommonProxy implements IAetherServices
 		AetherAPI.content().currency().clearRegistrations();
 
 		PerfHelper.measure("Initialize currency", CurrencyAether::serverStarted);
-
-		event.registerServerCommand(new CommandIsland());
 	}
 
-	public void onServerStarted(FMLServerStartedEvent event)
+	public void onServerStarting(FMLServerStartingEvent event)
 	{
-		World world = DimensionManager.getWorld(AetherCore.CONFIG.getAetherDimID());
-
-		// TODO: In SpongeForge, the world is not loaded yet for some reason?
-		if (world != null)
-		{
-			IPrepSectorAccess access = PrepHelper.getManager(world).getAccess();
-
-			try
-			{
-				access.provideSectorForChunk(0, 0, false).get();
-			}
-			catch (InterruptedException | ExecutionException e)
-			{
-				throw new RuntimeException("Failed to generate spawn chunk sector", e);
-			}
-		}
+		event.registerServerCommand(new CommandIsland());
 	}
 
 	public void spawnJumpParticles(final World world, final double x, final double y, final double z, final double radius, final int quantity)
@@ -165,6 +152,72 @@ public class CommonProxy implements IAetherServices
 		entity.motionZ = MathHelper.clamp(entity.motionZ, -maxMotion, maxMotion);
 	}
 
+
+	/**
+	 * Teleports any entity by duplicating it and . the old one. If {@param entity} is a player,
+	 * the entity will be transferred instead of duplicated.
+	 *
+	 * @return A newsystem entity if {@param entity} wasn't a player, or the same entity if it was a player
+	 */
+	public static Entity teleportEntity(final Entity entity, final WorldServer toWorld, final Teleporter teleporter, final int dimension,
+			@Nullable final Supplier<BlockPos> optionalLoc)
+	{
+		if (entity == null)
+		{
+			return null;
+		}
+
+		if (entity instanceof EntityPlayer)
+		{
+			if (!net.minecraftforge.common.ForgeHooks.onTravelToDimension(entity, dimension))
+			{
+				return entity;
+			}
+
+			// Players require special magic to be teleported correctly, and are not duplicated
+			if (!toWorld.isRemote)
+			{
+				final MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
+				final PlayerList playerList = server.getPlayerList();
+
+				final EntityPlayerMP player = (EntityPlayerMP) entity;
+
+				playerList.transferPlayerToDimension(player, dimension, teleporter);
+				player.timeUntilPortal = player.getPortalCooldown();
+
+				if (optionalLoc == null)
+				{
+					player.connection.setPlayerLocation(player.posX, player.posY, player.posZ, 0, 0);
+				}
+				else
+				{
+					final BlockPos loc = optionalLoc.get();
+
+					player.connection.setPlayerLocation(loc.getX(), loc.getY(), loc.getZ(), 225, 0);
+				}
+
+				/** Strange flag that needs to be set to prevent the NetHandlerPlayServer instances from resetting your position **/
+				ObfuscationReflectionHelper.setPrivateValue(EntityPlayerMP.class, player, true, ReflectionAether.INVULNERABLE_DIMENSION_CHANGE.getMappings());
+
+				PostAetherTravelEvent event = new PostAetherTravelEvent(entity);
+				MinecraftForge.EVENT_BUS.post(event);
+			}
+
+			return entity;
+		}
+		else
+		{
+			final Entity newEntity = entity.changeDimension(dimension);
+
+			// Forces the entity to be sent to clients as early as possible
+			newEntity.forceSpawn = true;
+			newEntity.setPositionAndUpdate(entity.posX, entity.posY, entity.posZ);
+
+			return newEntity;
+		}
+	}
+
+
 	@Override
 	public ContentRegistry content()
 	{
@@ -176,10 +229,4 @@ public class CommonProxy implements IAetherServices
 	{
 		return this.webAPI;
 	}
-
-	public PrepAether getPrepAether()
-	{
-		return this.prepAether;
-	}
-
 }

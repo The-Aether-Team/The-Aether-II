@@ -32,6 +32,8 @@ import java.util.Collections;
 @Mod.EventBusSubscriber
 public class ItemsAether
 {
+	private static final Collection<Item> registeredItems = new ArrayList<>();
+
 	public static final Item skyroot_stick = new ItemSkyrootStick();
 
 	public static final Item cloudtwine = new ItemDropOnDeath();
@@ -208,8 +210,6 @@ public class ItemsAether
 			fried_moa_egg = new ItemFood(10, false);
 
 	public static final Item swet_sugar = new ItemDropOnDeath();
-
-	private static final Collection<Item> registeredItems = new ArrayList<>();
 
 	@SubscribeEvent
 	public static void onRegisterItems(final RegistryEvent.Register<Item> event)

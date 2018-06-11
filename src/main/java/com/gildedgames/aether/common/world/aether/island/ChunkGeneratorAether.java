@@ -87,7 +87,7 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		// Prime placed templates
 		for (final PlacedBlueprint instance : islandData.getPlacedBlueprints())
 		{
-			for (final BlockDataChunk dataChunk : instance.getDataChunks())
+			for (final BlockDataChunk dataChunk : instance.getBaked().getDataChunks())
 			{
 				if (dataChunk == null)
 				{
@@ -139,7 +139,7 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		// Populate placed blueprints
 		for (final PlacedBlueprint instance : island.getPlacedBlueprints())
 		{
-			for (final BlockDataChunk dataChunk : instance.getDataChunks())
+			for (final BlockDataChunk dataChunk : instance.getBaked().getDataChunks())
 			{
 				if (dataChunk == null)
 				{

@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.blocks.multiblock;
 
+import com.gildedgames.aether.common.blocks.IInternalBlock;
 import com.gildedgames.aether.common.entities.tiles.multiblock.TileEntityMultiblockDummy;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -9,7 +10,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockMultiDummy extends BlockMultiBase
+public class BlockMultiDummy extends BlockMultiBase implements IInternalBlock
 {
 	public BlockMultiDummy()
 	{

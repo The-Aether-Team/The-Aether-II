@@ -98,15 +98,15 @@ public class AetherCore
 	}
 
 	@EventHandler
-	public void onServerStarting(final FMLServerStartingEvent event)
+	public void onServerAboutToStart(final FMLServerAboutToStartEvent event)
 	{
-		PROXY.onServerStarting(event);
+		PROXY.onServerAboutToStart(event);
 	}
 
 	@EventHandler
-	public void onServerStarted(final FMLServerStartedEvent event)
+	public void onServerStarting(final FMLServerStartingEvent event)
 	{
-		PROXY.onServerStarted(event);
+		PROXY.onServerStarting(event);
 	}
 
 	@EventHandler

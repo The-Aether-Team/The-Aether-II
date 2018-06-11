@@ -63,7 +63,7 @@ public class NecromancerTowerInstance implements IInstance
 
 		this.tower = new PlacedBlueprint(world, GenerationAether.NECROMANCER_TOWER, new CreationData(world).pos(BlockPos.ORIGIN));
 
-		final BlockPos spawn = this.tower.getScheduleFromTriggerID("spawn").getBounds().getMin();
+		final BlockPos spawn = this.tower.getBaked().getScheduleFromTriggerID("spawn").getBounds().getMin();
 
 		if (spawn != null)
 		{

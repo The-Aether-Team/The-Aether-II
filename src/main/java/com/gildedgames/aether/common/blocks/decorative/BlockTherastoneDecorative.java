@@ -15,8 +15,8 @@ public class BlockTherastoneDecorative extends BlockDecorative
 			HEADSTONE = new BlockVariant(5, "headstone"),
 			KEYSTONE = new BlockVariant(6, "keystone");
 
-	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant
-			.create("variant", BASE_BRICKS, BASE_PILLAR, CAPSTONE_BRICKS, CAPSTONE_PILLAR, FLAGSTONES, HEADSTONE, KEYSTONE);
+	public static final PropertyVariant PROPERTY_VARIANT =
+			PropertyVariant.create("variant", BASE_BRICKS, BASE_PILLAR, CAPSTONE_BRICKS, CAPSTONE_PILLAR, FLAGSTONES, HEADSTONE, KEYSTONE);
 
 	public BlockTherastoneDecorative()
 	{

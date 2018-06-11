@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.blocks.util;
 
+import com.gildedgames.aether.common.blocks.IInternalBlock;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -14,7 +15,7 @@ import net.minecraft.world.World;
 import java.util.Random;
 import java.util.function.Supplier;
 
-public class BlockCustomDoor extends BlockDoor
+public class BlockCustomDoor extends BlockDoor implements IInternalBlock
 {
 	private Supplier<Item> doorItem;
 

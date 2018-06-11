@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.blocks.construction.signs;
 
+import com.gildedgames.aether.common.blocks.IInternalBlock;
 import com.gildedgames.aether.common.entities.tiles.TileEntitySkyrootSign;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.block.BlockSign;
@@ -17,7 +18,7 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class BlockSkyrootSign extends BlockSign
+public class BlockSkyrootSign extends BlockSign implements IInternalBlock
 {
 	protected BlockSkyrootSign()
 	{

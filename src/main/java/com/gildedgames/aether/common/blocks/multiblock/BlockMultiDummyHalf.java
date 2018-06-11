@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.blocks.multiblock;
 
+import com.gildedgames.aether.common.blocks.IInternalBlock;
 import com.gildedgames.aether.common.entities.tiles.multiblock.TileEntityMultiblockDummy;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
@@ -14,7 +15,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockMultiDummyHalf extends BlockMultiBase
+public class BlockMultiDummyHalf extends BlockMultiBase implements IInternalBlock
 {
 
 	protected static final AxisAlignedBB AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
