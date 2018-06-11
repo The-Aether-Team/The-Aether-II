@@ -309,10 +309,10 @@ public class BiomeAetherDecorator
 		}
 
 		// Orange Tree Generator
-		for (count = 0; count < 2; count++)
+		for (count = 0; count < 3; count++)
 		{
 			x = random.nextInt(16) + 8;
-			y = random.nextInt(128);
+			y = random.nextInt(180) + 64;
 			z = random.nextInt(16) + 8;
 
 			this.genOrangeTree.generate(world, random, pos.add(x, y, z));
@@ -321,10 +321,10 @@ public class BiomeAetherDecorator
 		// Blueberry Bush Generator
 		if (this.generateBushes)
 		{
-			for (count = 0; count < 2; count++)
+			for (count = 0; count < 3; count++)
 			{
 				x = random.nextInt(16) + 8;
-				y = random.nextInt(128);
+				y = random.nextInt(180) + 64;
 				z = random.nextInt(16) + 8;
 
 				this.genBlueberryBushes.generate(world, random, pos.add(x, y, z));
@@ -332,12 +332,12 @@ public class BiomeAetherDecorator
 		}
 
 		// Purple Flowers Generator
-		for (count = 0; count < 6; count++)
+		for (count = 0; count < 8; count++)
 		{
 			if (random.nextInt(2) == 0)
 			{
 				x = random.nextInt(16) + 8;
-				y = random.nextInt(128);
+				y = random.nextInt(180) + 64;
 				z = random.nextInt(16) + 8;
 
 				this.genPurpleFlowers.generate(world, random, pos.add(x, y, z));
@@ -345,42 +345,42 @@ public class BiomeAetherDecorator
 		}
 
 		// White Rose Generator
-		for (count = 0; count < 2; count++)
+		for (count = 0; count < 3; count++)
 		{
 			x = random.nextInt(16) + 8;
-			y = random.nextInt(128);
+			y = random.nextInt(180) + 64;
 			z = random.nextInt(16) + 8;
 
 			this.genWhiteRoses.generate(world, random, pos.add(x, y, z));
 		}
 
 		// Burstblossom Generator
-		for (count = 0; count < 2; count++)
+		for (count = 0; count < 3; count++)
 		{
 			x = random.nextInt(16) + 8;
-			y = random.nextInt(128);
+			y = random.nextInt(180) + 64;
 			z = random.nextInt(16) + 8;
 
 			this.genBurstblossom.generate(world, random, pos.add(x, y, z));
 		}
 
 		// Burstblossom Generator
-		for (count = 0; count < 2; count++)
+		for (count = 0; count < 3; count++)
 		{
 			x = random.nextInt(16) + 8;
-			y = random.nextInt(128);
+			y = random.nextInt(180) + 64;
 			z = random.nextInt(16) + 8;
 
 			this.genAechorSprout.generate(world, random, pos.add(x, y, z));
 		}
 
 		// Kirrid Grass Generator
-		if (random.nextInt(12) == 0)
+		if (random.nextInt(20) == 0)
 		{
 			for (count = 0; count < 6; count++)
 			{
 				x = random.nextInt(16) + 8;
-				y = random.nextInt(128);
+				y = random.nextInt(180) + 64;
 				z = random.nextInt(16) + 8;
 
 				this.genKirridGrass.generate(world, random, pos.add(x, y, z));
@@ -391,7 +391,7 @@ public class BiomeAetherDecorator
 		if (random.nextInt(5) == 0)
 		{
 			x = random.nextInt(16) + 8;
-			y = random.nextInt(128);
+			y = random.nextInt(180) + 64;
 			z = random.nextInt(16) + 8;
 
 			this.genBrettlPlant.generate(world, random, pos.add(x, y, z));
