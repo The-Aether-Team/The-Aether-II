@@ -159,7 +159,7 @@ public class CommonEvents
 						{
 							ResourceLocation loc = Item.REGISTRY.getNameForObject(r.getRecipeOutput().getItem());
 
-							if (loc != null && loc.getResourceDomain().equals("aether"))
+							if (loc != null && loc.getResourceDomain().equals(AetherCore.MOD_ID))
 							{
 								toUnlock.add(r);
 							}
@@ -304,7 +304,7 @@ public class CommonEvents
 	@SubscribeEvent
 	public static void onPlayerUseBucket(final FillBucketEvent event)
 	{
-		if (AetherCore.isAetherLegacyInstalled)
+		if (CompatabilityAether.isAetherLegacyInstalled())
 		{
 			return;
 		}

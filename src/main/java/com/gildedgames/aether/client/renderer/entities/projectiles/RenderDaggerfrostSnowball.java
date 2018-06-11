@@ -1,6 +1,7 @@
 package com.gildedgames.aether.client.renderer.entities.projectiles;
 
 import com.gildedgames.aether.client.util.SpriteGeneric;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.projectiles.EntityDaggerfrostSnowball;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -17,7 +18,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class RenderDaggerfrostSnowball extends Render<EntityDaggerfrostSnowball>
 {
 
-	public static final ResourceLocation TEXTURE = new ResourceLocation("aether", "textures/entities/projectiles/daggerfrost_snowball.png");
+	public static final ResourceLocation TEXTURE = AetherCore.getResource("textures/entities/projectiles/daggerfrost_snowball.png");
 
 	public static final SpriteGeneric SPRITE = new SpriteGeneric("daggerfrost_snowball.png", 16, 16);
 

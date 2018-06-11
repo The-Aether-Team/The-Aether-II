@@ -3,7 +3,6 @@ package com.gildedgames.aether.common.capabilities.entity.player.modules;
 import com.gildedgames.aether.client.ClientEventHandler;
 import com.gildedgames.aether.client.gui.misc.GuiIntro;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.CommonProxy;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
@@ -246,7 +245,7 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 
 			final int transferToID = AetherCore.CONFIG.getAetherDimID();
 
-			CommonProxy.teleportEntity(this.getEntity(), worldServer, new TeleporterGeneric(worldServer), transferToID, () -> {
+			AetherCore.PROXY.teleportEntity(this.getEntity(), worldServer, new TeleporterGeneric(worldServer), transferToID, () -> {
 				final PlayerAether playerAether = PlayerAether.getPlayer(player);
 
 				if (playerAether.getTeleportingModule().getAetherPos() == null)

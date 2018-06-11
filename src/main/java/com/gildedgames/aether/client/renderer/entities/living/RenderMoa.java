@@ -25,7 +25,7 @@ import java.awt.*;
 public class RenderMoa extends RenderLiving<EntityMoa>
 {
 
-	private static final ResourceLocation AECHOR_PETAL_TEXTURE = new ResourceLocation("aether", "textures/items/consumables/aechor_petal.png");
+	private static final ResourceLocation AECHOR_PETAL_TEXTURE = AetherCore.getResource("textures/items/consumables/aechor_petal.png");
 
 	private static final SpriteGeneric SPRITE = new SpriteGeneric("aechor_petal.png", 16, 16);
 

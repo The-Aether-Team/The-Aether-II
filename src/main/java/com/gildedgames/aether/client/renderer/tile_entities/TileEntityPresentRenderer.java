@@ -1,6 +1,7 @@
 package com.gildedgames.aether.client.renderer.tile_entities;
 
 import com.gildedgames.aether.client.models.entities.tile.ModelPresent;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.tiles.TileEntityPresent;
 import com.gildedgames.aether.common.items.blocks.ItemBlockPresent;
 import net.minecraft.client.renderer.GlStateManager;
@@ -23,8 +24,8 @@ public class TileEntityPresentRenderer extends TileEntitySpecialRenderer<TileEnt
 	{
 		for (int i = 0; i < 16; i++)
 		{
-			boxTextures[i] = new ResourceLocation("aether", "textures/tile_entities/present/present_box_" + colors[i] + ".png");
-			bowTextures[i] = new ResourceLocation("aether", "textures/tile_entities/present/present_ribbon_" + colors[i] + ".png");
+			boxTextures[i] = AetherCore.getResource("textures/tile_entities/present/present_box_" + colors[i] + ".png");
+			bowTextures[i] = AetherCore.getResource("textures/tile_entities/present/present_ribbon_" + colors[i] + ".png");
 		}
 	}
 

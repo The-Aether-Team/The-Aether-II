@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.blocks;
 
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -162,7 +163,7 @@ public class EntityParachute extends Entity
 			this.name = name;
 			this.desc = "cloudParachute.ability." + this.name;
 
-			this.texture = new ResourceLocation("aether", "textures/entities/parachute/parachute_" + this.name + ".png");
+			this.texture = AetherCore.getResource("textures/entities/parachute/parachute_" + this.name + ".png");
 		}
 
 		public static Type fromOrdinal(final int ordinal)

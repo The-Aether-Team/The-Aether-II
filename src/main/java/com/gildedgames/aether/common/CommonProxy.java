@@ -1,17 +1,14 @@
 package com.gildedgames.aether.common;
 
-import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.IAetherServices;
 import com.gildedgames.aether.api.net.IGildedGamesAccountApi;
 import com.gildedgames.aether.common.commands.CommandIsland;
 import com.gildedgames.aether.common.events.PostAetherTravelEvent;
 import com.gildedgames.aether.common.network.api.GildedGamesAccountApiImpl;
 import com.gildedgames.aether.common.registry.ContentRegistry;
-import com.gildedgames.aether.common.registry.content.CurrencyAether;
 import com.gildedgames.aether.common.shop.ShopBuy;
 import com.gildedgames.aether.common.shop.ShopInstance;
 import com.gildedgames.aether.common.shop.ShopInventory;
-import com.gildedgames.aether.common.util.helpers.PerfHelper;
 import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.IrradiatedForestsData;
 import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.MagneticHillPillar;
 import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.MagneticHillsData;
@@ -54,15 +51,16 @@ public class CommonProxy implements IAetherServices
 
 	public void preInit(final FMLPreInitializationEvent event)
 	{
+		CompatabilityAether.locateInstalledMods();
+
 		this.configDir = new File(event.getModConfigurationDirectory(), "Aether/");
 
 		if (!this.configDir.exists() && !this.configDir.mkdir())
 		{
-			throw new RuntimeException("Couldn't createTE configuration directory");
+			throw new RuntimeException("Couldn't create configuration directory");
 		}
 
-		final IClassSerializer s = new SimpleSerializer("aether");
-
+		final IClassSerializer s = new SimpleSerializer(AetherCore.MOD_ID);
 		s.register(0, NecromancerTowerInstance.class, new Instantiator<>(NecromancerTowerInstance.class));
 		s.register(1, MagneticHillsData.class, new Instantiator<>(MagneticHillsData.class));
 		s.register(2, MagneticHillPillar.class, new Instantiator<>(MagneticHillPillar.class));
@@ -93,13 +91,7 @@ public class CommonProxy implements IAetherServices
 
 	public void onServerAboutToStart(FMLServerAboutToStartEvent event)
 	{
-		this.content().onServerStarting();
-
-		PerfHelper.measure("Initialize recipe indexes", this.contentRegistry::rebuildIndexes);
-
-		AetherAPI.content().currency().clearRegistrations();
-
-		PerfHelper.measure("Initialize currency", CurrencyAether::serverStarted);
+		this.content().onServerAboutToStart();
 	}
 
 	public void onServerStarting(FMLServerStartingEvent event)
@@ -159,7 +151,7 @@ public class CommonProxy implements IAetherServices
 	 *
 	 * @return A newsystem entity if {@param entity} wasn't a player, or the same entity if it was a player
 	 */
-	public static Entity teleportEntity(final Entity entity, final WorldServer toWorld, final Teleporter teleporter, final int dimension,
+	public Entity teleportEntity(final Entity entity, final WorldServer toWorld, final Teleporter teleporter, final int dimension,
 			@Nullable final Supplier<BlockPos> optionalLoc)
 	{
 		if (entity == null)
@@ -216,7 +208,6 @@ public class CommonProxy implements IAetherServices
 			return newEntity;
 		}
 	}
-
 
 	@Override
 	public ContentRegistry content()

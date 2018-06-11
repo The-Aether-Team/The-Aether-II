@@ -22,21 +22,19 @@ public class GuiEquipment extends GuiContainer
 {
 	// TODO: COINBAR AND COMPANIONS-- SEE TRELLO
 
-	private static final ResourceLocation textureAccessories = new ResourceLocation("aether", "textures/gui/inventory/accessories/equipment.png");
+	private static final ResourceLocation textureAccessories = AetherCore.getResource("textures/gui/inventory/accessories/equipment.png");
 
-	private static final ResourceLocation textureAccessoriesPattern = new ResourceLocation("aether",
-			"textures/gui/inventory/accessories/equipment_pattern.png");
+	private static final ResourceLocation textureAccessoriesPattern = AetherCore.getResource("textures/gui/inventory/accessories/equipment_pattern.png");
 
-	private static final ResourceLocation textureBackpack = new ResourceLocation("aether", "textures/gui/inventory/accessories/backpack.png");
+	private static final ResourceLocation textureBackpack = AetherCore.getResource("textures/gui/inventory/accessories/backpack.png");
 
-	private static final ResourceLocation textureBackpackCreative = new ResourceLocation("aether", "textures/gui/inventory/accessories/backpack_creative.png");
+	private static final ResourceLocation textureBackpackCreative = AetherCore.getResource("textures/gui/inventory/accessories/backpack_creative.png");
 
-	private static final ResourceLocation textureBackpackPattern = new ResourceLocation("aether", "textures/gui/inventory/accessories/backpack_pattern.png");
+	private static final ResourceLocation textureBackpackPattern = AetherCore.getResource("textures/gui/inventory/accessories/backpack_pattern.png");
 
-	private static final ResourceLocation textureBackpackCreativePattern = new ResourceLocation("aether",
-			"textures/gui/inventory/accessories/backpack_creative_pattern.png");
+	private static final ResourceLocation textureBackpackCreativePattern = AetherCore.getResource("textures/gui/inventory/accessories/backpack_creative_pattern.png");
 
-	//	private static final ResourceLocation TEXTURE_COINBAR = newsystem ResourceLocation("aether", "textures/gui/coinbar.png");
+	//	private static final ResourceLocation TEXTURE_COINBAR = AetherCore.getResource("textures/gui/coinbar.png");
 
 	private final PlayerAether aePlayer;
 

@@ -1,6 +1,7 @@
 package com.gildedgames.aether.client.renderer.entities.living;
 
 import com.gildedgames.aether.client.models.entities.living.ModelCarrionSprout;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.living.passive.EntityCarrionSprout;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -9,7 +10,7 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderCarrionSprout extends RenderLiving<EntityCarrionSprout>
 {
-	private static final ResourceLocation TEXTURE = new ResourceLocation("aether", "textures/entities/carrion_sprout/carrion_sprout.png");
+	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/entities/carrion_sprout/carrion_sprout.png");
 
 	private final ModelCarrionSprout plantModel;
 

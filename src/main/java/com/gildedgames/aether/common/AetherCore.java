@@ -5,7 +5,6 @@ import com.gildedgames.aether.common.analytics.GAReporter;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -32,8 +31,6 @@ public class AetherCore
 	protected static final String MOD_GUI_FACTORY = "com.gildedgames.aether.client.gui.GuiFactoryAether";
 
 	protected static final String MOD_FINGERPRINT = "b9a9be44fb51751dd1aec1dbb881b6de1a086abc";
-
-	public static boolean isAetherLegacyInstalled;
 
 	@Instance(AetherCore.MOD_ID)
 	public static AetherCore INSTANCE;
@@ -80,33 +77,32 @@ public class AetherCore
 	public void onModPreInit(final FMLPreInitializationEvent event)
 	{
 		AetherCore.CONFIG = new ConfigAether(event.getSuggestedConfigurationFile());
+
 		AetherCore.PROXY.preInit(event);
 	}
 
 	@EventHandler
 	public void onModInit(final FMLInitializationEvent event)
 	{
-		isAetherLegacyInstalled = Loader.isModLoaded("aether_legacy");
-
-		PROXY.init(event);
+		AetherCore.PROXY.init(event);
 	}
 
 	@EventHandler
 	public void onModPostInit(final FMLPostInitializationEvent event)
 	{
-		PROXY.postInit(event);
+		AetherCore.PROXY.postInit(event);
 	}
 
 	@EventHandler
 	public void onServerAboutToStart(final FMLServerAboutToStartEvent event)
 	{
-		PROXY.onServerAboutToStart(event);
+		AetherCore.PROXY.onServerAboutToStart(event);
 	}
 
 	@EventHandler
 	public void onServerStarting(final FMLServerStartingEvent event)
 	{
-		PROXY.onServerStarting(event);
+		AetherCore.PROXY.onServerStarting(event);
 	}
 
 	@EventHandler

@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.registry;
 import com.gildedgames.aether.api.patron.PatronRewardRegistry;
 import com.gildedgames.aether.api.registry.IContentRegistry;
 import com.gildedgames.aether.client.gui.tab.TabEquipment;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.CapabilityManagerAether;
 import com.gildedgames.aether.common.capabilities.item.EffectRegistry;
 import com.gildedgames.aether.common.containers.tab.TabRegistry;
@@ -85,15 +86,19 @@ public class ContentRegistry implements IContentRegistry
 	 * Called when the server is initializing. This should be used to setup systems that depend on the IDs in a
 	 * world or server instance.
 	 */
-	public void onServerStarting()
+	public void onServerAboutToStart()
 	{
 		PerfHelper.measure("Bake recipes", RecipesAether::bakeRecipes);
 
 		PerfHelper.measure("Load blueprints", BlueprintsAether::load);
 		PerfHelper.measure("Load generation", GenerationAether::load);
+
+		PerfHelper.measure("Re-build recipe indexes", this::rebuildIndexes);
+
+		PerfHelper.measure("Initialize currency", CurrencyAether::onServerAboutToStart);
 	}
 
-	public void rebuildIndexes()
+	private void rebuildIndexes()
 	{
 		this.craftableItemsIndex.clearRegistrations();
 
@@ -101,7 +106,7 @@ public class ContentRegistry implements IContentRegistry
 		{
 			ResourceLocation loc = Item.REGISTRY.getNameForObject(recipe.getRecipeOutput().getItem());
 
-			if (loc != null && loc.getResourceDomain().equals("aether"))
+			if (loc != null && loc.getResourceDomain().equals(AetherCore.MOD_ID))
 			{
 				this.craftableItemsIndex.registerRecipe(new RecipeWrapper(recipe));
 			}

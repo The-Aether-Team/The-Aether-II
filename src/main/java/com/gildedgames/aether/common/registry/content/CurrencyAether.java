@@ -24,11 +24,13 @@ public class CurrencyAether
 {
 	public static int GILT = 1, GILTAE = 100, GILTAEN = 10000, GILTAENI = 1000000;
 
-	public static void serverStarted()
+	public static void onServerAboutToStart()
 	{
-		GiltBuilder builder = new GiltBuilder();
-		ICurrencyRegistry c = AetherAPI.content().currency();
+		AetherAPI.content().currency().clearRegistrations();
 
+		GiltBuilder builder = new GiltBuilder();
+
+		ICurrencyRegistry c = AetherAPI.content().currency();
 		c.registerValue(new ItemStack(BlocksAether.aether_dirt, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(1).flush());
 		c.registerValue(new ItemStack(BlocksAether.aether_grass, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(1).flush());
 		c.registerValue(new ItemStack(BlocksAether.holystone, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(1).flush());
