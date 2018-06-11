@@ -88,14 +88,13 @@ public class ItemMoaEgg extends Item implements IDropOnDeath
 
 		if (genePool.getFeathers() != null && stack.getItem() != ItemsAether.rainbow_moa_egg)
 		{
-			creativeList.add("\u2022 " + genePool.getFeathers().gene().localizedName() + " " + I18n.format("moa.feathers"));
-			creativeList.add("\u2022 " + genePool.getKeratin().gene().localizedName() + " " + I18n.format("moa.keratin"));
-			creativeList.add("\u2022 " + genePool.getEyes().gene().localizedName() + " " + I18n.format("moa.eyes"));
+			creativeList.add("\u2022 " + I18n.format("moa.feathers", genePool.getFeathers().gene().localizedName()));
+			creativeList.add("\u2022 " + I18n.format("moa.keratin", genePool.getKeratin().gene().localizedName()));
+			creativeList.add("\u2022 " + I18n.format("moa.eyes", genePool.getEyes().gene().localizedName()));
 
 			creativeList.add("");
 
-			creativeList.add(TextFormatting.YELLOW + "" + TextFormatting.ITALIC + "" + genePool.getWingStrength().gene().data() + " "
-					+ I18n.format("moa.jumps"));
+			creativeList.add(TextFormatting.YELLOW + "" + TextFormatting.ITALIC + "" + I18n.format("moa.wing_strength", genePool.getWingStrength().gene().localizedName()));
 		}
 	}
 

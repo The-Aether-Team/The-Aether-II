@@ -465,38 +465,65 @@ cloudParachute.ability.purple=Directional Descent
 cloudParachute.ability.green=Slow Descent
 cloudParachute.ability.blue=Fast Elevation
 
-moa.feathers=Feathers
-moa.keratin=Keratin
-moa.eyes=Eyes
-moa.jumps=Mid-air Jumps
+moa.feathers=Feathers: %s
+moa.keratin=Keratin: %s
+moa.eyes=Eyes: %s
+moa.wing_strength=Wing Strength: %s
 
-moa.keratin.sky_blue=Sky-Blue
-moa.keratin.deep_sky=Deep-Sky
+moa.keratin.sky_blue=Sky Blue
+moa.keratin.deep_sky=Deep Sky
 moa.keratin.sand=Sand
-moa.keratin.midnight_sky=Midnight-Sky
+moa.keratin.midnight_sky=Midnight Sky
 moa.keratin.swamp=Swamp
 moa.keratin.royal=Royal
 moa.keratin.tempest=Tempest
 
-moa.eyes.enchanted=Enchanted
-moa.eyes.navy=Navy
-moa.eyes.crimson=Crimson
-moa.eyes.cream=Cream
-moa.eyes.emerald=Emerald
+moa.eyes.alto=Alto
+moa.eyes.straw=Straw
+moa.eyes.winter_hazel=Winter Hazel
+moa.eyes.gossip=Gossip
+moa.eyes.mint=Mint
+moa.eyes.ice=Ice
+moa.eyes.perano=Perano
+moa.eyes.portage=Portage
+moa.eyes.perfume=Perfume
+moa.eyes.illusion=Illusion
+moa.eyes.wewak=Wewak
 
-moa.feathers.cream=Cream
-moa.feathers.midnight_sky=Midnight-Sky
-moa.feathers.dawn=Dawn
-moa.feathers.nights_peak=Night-Peaked
-moa.feathers.sakura=Sakura
-moa.feathers.mud=Mud
-moa.feathers.enchanted=Enchanted
+moa.feathers.black=Black
+moa.feathers.grey=Grey
+moa.feathers.white=White
+moa.feathers.iroko=Iroko
+moa.feathers.orange=Orange
+moa.feathers.lisbon_brown=Lisbon Brown
+moa.feathers.yellow=Yellow
+moa.feathers.mallard=Mallard
+moa.feathers.lime_green=Lime Green
+moa.feathers.everglad=Everglad
+moa.feathers.green=Green
+moa.feathers.plantation=Plantation
+moa.feathers.sky_blue=Sky Blue
+moa.feathers.cloud_burst=Cloud Burst
+moa.feathers.blue=Blue
+moa.feathers.port_gore=Port Gore
+moa.feathers.purple=Purple
+moa.feathers.bossanova=Bossanova
+moa.feathers.pink=Pink
+moa.feathers.livid_brown=Livid Brown
+moa.feathers.puse=Puse
+moa.feathers.deep_red=Deep Red
+moa.feathers.red=Red
 
 moa.marks.spots=Spotted
 moa.marks.circles=Radial
 moa.marks.curves=Branched
 moa.marks.ladder=Zipline
 moa.marks.lines=Lined
+
+moa.wing_strength.weak=Weak
+moa.wing_strength.normal=Normal
+moa.wing_strength.strong=Strong
+moa.wing_strength.excellent=Excellent
 
 # Item Rarities
 item.rarity.none.name=§7§oBasic

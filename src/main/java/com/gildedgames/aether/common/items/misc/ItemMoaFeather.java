@@ -74,7 +74,7 @@ public class ItemMoaFeather extends Item implements IDropOnDeath
 		}
 
 		final ItemStack feather = new ItemStack(this);
-		ItemMoaFeather.setColor(feather, "moa.feathers.dawn", new Color(0x83c4e2).getRGB());
+		ItemMoaFeather.setColor(feather, "moa.feathers.blue", new Color(0x83c4e2).getRGB());
 
 		subItems.add(feather);
 	}
