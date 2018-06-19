@@ -1,0 +1,10 @@
+before_script:
+  - apt-get update -qq && apt-get install -y -qq openjdk-8-jdk
+
+build:
+  script:
+    - ./gradlew build
+  artifacts:
+    paths:
+    - build/libs/*.jar
+    expire_in: 1 month
