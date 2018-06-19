@@ -1,5 +1,6 @@
 before_script:
-  - apt-get update -qq && apt-get install -y -qq openjdk-8-jdk
+  - which java
+  - which javac
 
 build:
   script:
@@ -8,3 +9,5 @@ build:
     paths:
     - build/libs/*.jar
     expire_in: 1 month
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
