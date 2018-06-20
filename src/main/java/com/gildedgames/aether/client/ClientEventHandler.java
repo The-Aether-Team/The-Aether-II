@@ -14,8 +14,10 @@ import com.gildedgames.aether.client.gui.GuiUtils;
 import com.gildedgames.aether.client.gui.PerformanceIngame;
 import com.gildedgames.aether.client.gui.misc.CustomLoadingRenderer;
 import com.gildedgames.aether.client.gui.misc.GuiAetherLoading;
+import com.gildedgames.aether.client.gui.misc.GuiAetherUnsigned;
 import com.gildedgames.aether.client.gui.misc.GuiBlackScreen;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.containers.slots.SlotAmbrosium;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
@@ -33,6 +35,7 @@ import net.minecraft.client.LoadingScreenRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.GuiDownloadTerrain;
+import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -249,6 +252,13 @@ public class ClientEventHandler
 	@SubscribeEvent
 	public static void onOpenGui(final GuiOpenEvent event)
 	{
+		if (!AetherCore.isInsideDevEnvironment() && !AetherCore.CONFIG.hasAckFingerprintViolation() && event.getGui() instanceof GuiMainMenu)
+		{
+			event.setGui(new GuiAetherUnsigned(event.getGui()));
+
+			return;
+		}
+
 		if (mc.world != null && event.getGui() instanceof GuiInventory)
 		{
 			boolean necro = mc.world.provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER;

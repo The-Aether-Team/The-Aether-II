@@ -13,6 +13,9 @@ import net.minecraftforge.fml.common.event.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Mod(name = AetherCore.MOD_NAME, modid = AetherCore.MOD_ID, version = AetherCore.MOD_VERSION,
 		certificateFingerprint = AetherCore.MOD_FINGERPRINT, guiFactory = AetherCore.MOD_GUI_FACTORY,
 		dependencies = AetherCore.MOD_DEPENDENCIES)
@@ -28,9 +31,11 @@ public class AetherCore
 
 	public static final Logger LOGGER = LogManager.getLogger("AetherII");
 
-	protected static final String MOD_GUI_FACTORY = "com.gildedgames.aether.client.gui.GuiFactoryAether";
+	public static final String MOD_GUI_FACTORY = "com.gildedgames.aether.client.gui.GuiFactoryAether";
 
-	protected static final String MOD_FINGERPRINT = "b9a9be44fb51751dd1aec1dbb881b6de1a086abc";
+	public static final String MOD_FINGERPRINT = "b9a9be44fb51751dd1aec1dbb881b6de1a086abc";
+
+	private static Set<String> reportedFingerprints;
 
 	@Instance(AetherCore.MOD_ID)
 	public static AetherCore INSTANCE;
@@ -108,6 +113,13 @@ public class AetherCore
 	@EventHandler
 	public void onFingerprintViolation(final FMLFingerprintViolationEvent event)
 	{
+		AetherCore.reportedFingerprints = event.getFingerprints();
+
+		if (AetherCore.reportedFingerprints == null)
+		{
+			AetherCore.reportedFingerprints = new HashSet<>();
+		}
+
 		if (AetherCore.isInsideDevEnvironment())
 		{
 			return;
@@ -117,4 +129,8 @@ public class AetherCore
 		AetherCore.LOGGER.warn("The Aether may be packaged unofficially, tampered with, or corrupted. As a result, this build will not receive support.");
 	}
 
+	public static Set<String> getReportedFingerprints()
+	{
+		return reportedFingerprints;
+	}
 }

@@ -14,7 +14,7 @@ import java.io.File;
 @Mod.EventBusSubscriber
 public class ConfigAether
 {
-	public final ConfigCategory general, dimensions, controls, gameplay;
+	public final ConfigCategory general, dimensions, controls, gameplay, misc;
 
 	private final Configuration configuration;
 
@@ -38,6 +38,8 @@ public class ConfigAether
 
 	private boolean separateInventories;
 
+	private boolean acknowledgeFingerprintViolation = false;
+
 	public ConfigAether(final File file)
 	{
 		this.configuration = new Configuration(file, true);
@@ -46,6 +48,7 @@ public class ConfigAether
 		this.general = this.configuration.getCategory(Configuration.CATEGORY_GENERAL);
 		this.dimensions = this.configuration.getCategory("Dimension IDs");
 		this.gameplay = this.configuration.getCategory("Gameplay");
+		this.misc = this.configuration.getCategory("Miscellaneous");
 
 		this.dimensions.setRequiresMcRestart(true);
 
@@ -70,6 +73,8 @@ public class ConfigAether
 
 		this.skipIntro = this.getBoolean(this.gameplay, "Skip Intro", false);
 		this.separateInventories = this.getBoolean(this.gameplay, "Separate Inventories", true);
+
+		this.acknowledgeFingerprintViolation = this.getBoolean(this.misc, "Acknowledge Fingerprint Violation", false);
 
 		this.getBoolean(this.gameplay, "Rideable Aerwhales", false);
 
@@ -161,5 +166,22 @@ public class ConfigAether
 	public boolean separateInventories()
 	{
 		return this.separateInventories;
+	}
+
+	public boolean hasAckFingerprintViolation()
+	{
+		return this.acknowledgeFingerprintViolation;
+	}
+
+	public void markFingerprintViolationAck()
+	{
+		this.acknowledgeFingerprintViolation = true;
+
+		this.configuration.get(this.misc.getName(), "Acknowledge Fingerprint Violation", false).set(true);
+
+		if (this.configuration.hasChanged())
+		{
+			this.configuration.save();
+		}
 	}
 }
