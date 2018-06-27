@@ -33,7 +33,7 @@ public class AetherCore
 
 	public static final String MOD_GUI_FACTORY = "com.gildedgames.aether.client.gui.GuiFactoryAether";
 
-	public static final String MOD_FINGERPRINT = "b9a9be44fb51751dd1aec1dbb881b6de1a086abc";
+	public static final String MOD_FINGERPRINT = "db341c083b1b8ce9160a769b569ef6737b3f4cdf";
 
 	private static Set<String> reportedFingerprints;
 

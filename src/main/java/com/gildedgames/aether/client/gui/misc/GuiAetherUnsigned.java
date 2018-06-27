@@ -21,7 +21,7 @@ public class GuiAetherUnsigned extends GuiScreen
 
 	private GuiButton dlButton, ackButton;
 
-	public GuiAetherUnsigned(@Nullable  GuiScreen parent)
+	public GuiAetherUnsigned(@Nullable GuiScreen parent)
 	{
 		this.parent = parent;
 	}
@@ -51,8 +51,8 @@ public class GuiAetherUnsigned extends GuiScreen
 		String text1 = "Integrity check failed!";
 		String[] desc = ("You have downloaded a corrupted or unofficial release of the Aether II!\n\n"
 				+ "If you weren't expecting this warning, you should immediately re-download\n"
-				+ "the Aether II from our official CurseForge page. Otherwise, we won't be\n"
-				+ "able to provide official support if the Aether II eats your toes.\n\n\n\n\n\n"
+				+ "the Aether II from our official CurseForge page. Otherwise, you may\n"
+				+ "run into game-breaking bugs or other cryptic issues.\n\n\n\n\n\n"
 				+ "If you are a developer hacking on the code or otherwise know what\n"
 				+ "you're doing, then you can safely ignore this warning.").split("\n");
 
