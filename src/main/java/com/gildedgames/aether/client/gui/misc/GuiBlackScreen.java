@@ -1,18 +1,12 @@
 package com.gildedgames.aether.client.gui.misc;
 
-import com.gildedgames.orbis_api.client.gui.util.GuiFrameNoContainer;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 
-public class GuiBlackScreen extends GuiFrameNoContainer
+public class GuiBlackScreen extends GuiScreen
 {
 	@Override
-	public void init()
-	{
-		this.dim().mod().width(this.width).height(this.height).flush();
-	}
-
-	@Override
-	public void draw()
+	public void drawScreen(int mouseX, int mouseY, float partialTicks)
 	{
 		GlStateManager.pushMatrix();
 
