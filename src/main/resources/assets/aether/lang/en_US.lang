@@ -613,6 +613,7 @@ entity.aether.burrukai.name=Burrukai
 entity.aether.necromancer.name=Necromancer
 entity.aether.josediya.name=Josediya
 entity.aether.tivalier.name=Tivalier
+entity.aether.icehog.name=Icehog
 
 # Creative Tabs
 itemGroup.aether.blocks=Aether II Blocks
