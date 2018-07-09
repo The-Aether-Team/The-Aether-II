@@ -80,45 +80,12 @@ public class GuiIntro extends GuiFrameNoContainer
 		super.onGuiClosed();
 
 		AetherMusicManager.INSTANCE.stopMusic();
-		preventInnerTyping = true;
-	}
-
-	@Override
-	public void preDrawChildren()
-	{
-
-	}
-
-	@Override
-	public void mouseReleasedOutsideBounds(int mouseX, int mouseY, int state)
-	{
-
-	}
-
-	@Override
-	public void mouseClickMoveOutsideBounds(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick)
-	{
-
-	}
-
-	@Override
-	public void mouseClickedOutsideBounds(int mouseX, int mouseY, int mouseButton)
-	{
-
-	}
-
-	@Override
-	public int getZOrder()
-	{
-		return 0;
 	}
 
 	@Override
 	public void init()
 	{
 		this.dim().mod().width(this.width).height(this.height).flush();
-
-		preventInnerTyping = true;
 
 		final Pos2D center = InputHelper.getCenter();
 
@@ -192,6 +159,8 @@ public class GuiIntro extends GuiFrameNoContainer
 	@Override
 	public void draw()
 	{
+		preventInnerTyping();
+
 		if (this.startIntro && this.holding && !Keyboard.isKeyDown(this.keyHeld) && this.keyHeld != Keyboard.KEY_NONE)
 		{
 			this.timeSinceStopSkip = System.currentTimeMillis();

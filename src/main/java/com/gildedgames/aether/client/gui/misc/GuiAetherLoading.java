@@ -35,16 +35,12 @@ public class GuiAetherLoading extends GuiFrame implements CustomLoadingRenderer.
 	public void onGuiClosed()
 	{
 		super.onGuiClosed();
-
-		preventInnerTyping = false;
 	}
 
 	@Override
 	public void init()
 	{
 		this.dim().mod().width(this.width).height(this.height).flush();
-
-		preventInnerTyping = true;
 
 		final Pos2D center = InputHelper.getCenter();
 
@@ -59,6 +55,8 @@ public class GuiAetherLoading extends GuiFrame implements CustomLoadingRenderer.
 	@Override
 	public void draw()
 	{
+		preventInnerTyping();
+
 		GlStateManager.pushMatrix();
 
 		GlStateManager.disableDepth();
@@ -112,6 +110,6 @@ public class GuiAetherLoading extends GuiFrame implements CustomLoadingRenderer.
 	@Override
 	public void drawCustomLoading()
 	{
-		this.drawScreen((int) InputHelper.getMouseX(), (int) InputHelper.getMouseY(), PartialTicks.get());
+		this.drawScreen(InputHelper.getMouseX(), InputHelper.getMouseY(), PartialTicks.get());
 	}
 }
