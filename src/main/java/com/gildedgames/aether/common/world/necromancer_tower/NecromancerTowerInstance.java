@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.world.necromancer_tower;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.registry.content.GenerationAether;
 import com.gildedgames.aether.common.registry.content.InstancesAether;
+import com.gildedgames.orbis_api.core.BakedBlueprint;
 import com.gildedgames.orbis_api.core.CreationData;
 import com.gildedgames.orbis_api.core.PlacedBlueprint;
 import com.gildedgames.orbis_api.util.io.NBTFunnel;
@@ -61,7 +62,11 @@ public class NecromancerTowerInstance implements IInstance
 			return false;
 		}
 
-		this.tower = new PlacedBlueprint(world, GenerationAether.NECROMANCER_TOWER, new CreationData(world).pos(BlockPos.ORIGIN));
+		BakedBlueprint baked = new BakedBlueprint(GenerationAether.NECROMANCER_TOWER.getData(), new CreationData(world).pos(BlockPos.ORIGIN));
+
+		baked.bake();
+
+		this.tower = new PlacedBlueprint(world, GenerationAether.NECROMANCER_TOWER, baked, baked.getCreationData());
 
 		final BlockPos spawn = this.tower.getBaked().getScheduleFromTriggerID("spawn").getBounds().getMin();
 

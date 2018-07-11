@@ -5,22 +5,20 @@ import com.gildedgames.aether.api.world.islands.IIslandBounds;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
-import com.gildedgames.orbis_api.core.BlueprintDefinition;
-import com.gildedgames.orbis_api.core.ICreationData;
-import com.gildedgames.orbis_api.core.PlacedBlueprint;
+import com.gildedgames.orbis_api.core.*;
 import com.gildedgames.orbis_api.preparation.IPrepSectorData;
+import com.gildedgames.orbis_api.util.ChunkMap;
 import com.gildedgames.orbis_api.util.io.NBTFunnel;
 import com.gildedgames.orbis_api.util.mc.NBT;
 import com.gildedgames.orbis_api.util.mc.NBTHelper;
 import com.google.common.collect.Lists;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -40,7 +38,7 @@ public class IslandData extends IslandDataPartial implements IIslandData
 
 	private float forestTreeCountModifier, openAreaDecorationGenChance;
 
-	private List<PlacedBlueprint> blueprintInstances = Lists.newArrayList();
+	private ChunkMap<List<PlacedBlueprint>> placedBlueprints = new ChunkMap<>();
 
 	public IslandData(final World world, final IPrepSectorData parent, final IIslandBounds bounds, final BiomeAetherBase biome, final long seed)
 	{
@@ -129,25 +127,32 @@ public class IslandData extends IslandDataPartial implements IIslandData
 	}
 
 	@Override
-	public PlacedBlueprint placeBlueprint(BlueprintDefinition def, ICreationData<?> data)
+	public PlacedBlueprint placeBlueprint(BlueprintDefinition def, BakedBlueprint baked, ICreationData<?> data)
 	{
-		final PlacedBlueprint instance = new PlacedBlueprint(data.getWorld(), def, data);
+		final PlacedBlueprint instance = new PlacedBlueprint(data.getWorld(), def, baked, data);
 
-		this.blueprintInstances.add(instance);
+		for (BlockDataChunk chunk : baked.getDataChunks())
+		{
+			if (!this.placedBlueprints.containsKey(chunk.getPos().x, chunk.getPos().z))
+			{
+				this.placedBlueprints.put(chunk.getPos().x, chunk.getPos().z, Lists.newArrayList());
+			}
+
+			this.placedBlueprints.get(chunk.getPos().x, chunk.getPos().z).add(instance);
+		}
 
 		return instance;
 	}
 
 	@Override
-	public List<PlacedBlueprint> getPlacedBlueprints()
+	public List<PlacedBlueprint> getPlacedBlueprintsInChunk(int chunkX, int chunkZ)
 	{
-		return new ArrayList<>(this.blueprintInstances);
-	}
+		if (!this.placedBlueprints.containsKey(chunkX, chunkZ))
+		{
+			return Collections.emptyList();
+		}
 
-	@Override
-	public void setPlacedBlueprints(List<PlacedBlueprint> instances)
-	{
-		this.blueprintInstances = instances;
+		return this.placedBlueprints.get(chunkX, chunkZ);
 	}
 
 	@Override
@@ -161,23 +166,13 @@ public class IslandData extends IslandDataPartial implements IIslandData
 	{
 		super.write(tag);
 
+		NBTFunnel funnel = new NBTFunnel(tag);
+
 		tag.setLong("Seed", this.seed);
 		tag.setTag("RespawnPoint", NBTHelper.writeBlockPos(this.respawnPoint));
 
-		final NBTTagList blueprintInstances = new NBTTagList();
+		funnel.setLongMap("placedBlueprints", this.placedBlueprints.getInnerMap(), NBTFunnel.listSetter());
 
-		for (final PlacedBlueprint instance : this.blueprintInstances)
-		{
-			final NBTTagCompound data = new NBTTagCompound();
-
-			instance.write(data);
-
-			blueprintInstances.appendTag(data);
-		}
-
-		tag.setTag("blueprintInstances", blueprintInstances);
-
-		final NBTFunnel funnel = new NBTFunnel(tag);
 		funnel.setList("Components", this.components);
 	}
 
@@ -195,17 +190,7 @@ public class IslandData extends IslandDataPartial implements IIslandData
 			this.respawnPoint = NBTHelper.readBlockPos(tag.getCompoundTag("RespawnPoint"));
 		}
 
-		final NBTTagList blueprintInstances = tag.getTagList("blueprintInstances", 10);
-
-		if (this.blueprintInstances.isEmpty())
-		{
-			for (int i = 0; i < blueprintInstances.tagCount(); i++)
-			{
-				final NBTTagCompound data = blueprintInstances.getCompoundTagAt(i);
-
-				this.blueprintInstances.add(new PlacedBlueprint(this.world, data));
-			}
-		}
+		this.placedBlueprints = ChunkMap.createFrom(funnel.getLongMap("placedBlueprints", NBTFunnel.listGetter()));
 
 		this.components = funnel.getList("Components");
 

@@ -5,6 +5,7 @@ import com.gildedgames.orbis_api.OrbisAPI;
 import com.gildedgames.orbis_api.data.blueprint.BlueprintData;
 import com.gildedgames.orbis_api.data.management.IProject;
 import com.gildedgames.orbis_api.data.management.IProjectCache;
+import net.minecraft.util.ResourceLocation;
 
 public class BlueprintsAether
 {
@@ -41,6 +42,8 @@ public class BlueprintsAether
 
 	public static BlueprintData WELL_1B;
 
+	public static BlueprintData WISPROOT_TREE_TALL;
+
 	private static IProject project;
 
 	private BlueprintsAether()
@@ -50,7 +53,11 @@ public class BlueprintsAether
 
 	public static void load()
 	{
-		project = OrbisAPI.services().loadProject(null, AetherCore.getResource("aetherii"), AetherCore.INSTANCE, "aether_ii");
+		ResourceLocation location = AetherCore.getResource("aetherii");
+
+		project = OrbisAPI.services().loadProject(null, location, AetherCore.INSTANCE, "aether_ii");
+
+		OrbisAPI.services().getProjectManager().cacheProject(location.getResourcePath(), project);
 
 		final IProjectCache c = project.getCache();
 
@@ -70,7 +77,7 @@ public class BlueprintsAether
 		SKYROOT_WATCHTOWER_3B = c.getData(c.getDataId("skyroot_watchtower_3b.blueprint"));
 		WELL_1A = c.getData(c.getDataId("well_1a.blueprint"));
 		WELL_1B = c.getData(c.getDataId("well_1b.blueprint"));
-
+		WISPROOT_TREE_TALL = c.getData(c.getDataId("wisproot_tree_tall.blueprint"));
 	}
 
 }

@@ -73,6 +73,8 @@ public class GenerationAether
 
 	public static BlueprintDefinition ABAND_ANGEL_STOREROOM_1A;
 
+	public static BlueprintDefinition WISPROOT_TREE_TALL;
+
 	public static BlueprintDefinitionPool ABAND_ANGEL_STOREROOM;
 
 	public static BlueprintDefinition ABAND_ANGEL_WATCHTOWER_1A;
@@ -102,6 +104,8 @@ public class GenerationAether
 	public static BlueprintDefinition SKYROOT_WATCHTOWER_3B;
 
 	public static BlueprintDefinitionPool SKYROOT_WATCHTOWER;
+
+	public static BlueprintDefinitionPool WISPROOT_TREE;
 
 	public static BlueprintDefinition WELL_1A;
 
@@ -304,7 +308,7 @@ public class GenerationAether
 						PlacementConditions.ignoreBlock(1, BlocksAether.quicksoil.getDefaultState()));
 
 		ABAND_CAMPSITE_1A = new BlueprintDefinition(BlueprintsAether.ABAND_CAMPSITE_1A).setRegistry(registry)
-				.setConditions(PlacementConditions.onSpecificBlock(10, BlocksAether.aether_grass, BlocksAether.aether_dirt), replace,
+				.setConditions(PlacementConditions.onSpecificBlock(0, BlocksAether.aether_grass, BlocksAether.aether_dirt), replace,
 						PlacementConditions.ignoreBlock(0, BlocksAether.quicksoil.getDefaultState()));
 
 		ABAND_HUMAN_HOUSE_1A = new BlueprintDefinition(BlueprintsAether.ABAND_HUMAN_HOUSE_1A, 1).setRegistry(registry)
@@ -333,6 +337,10 @@ public class GenerationAether
 						PlacementConditions.replaceable(true, Material.ROCK, Material.GROUND, Material.GRASS, Material.AIR),
 						PlacementConditions.ignoreBlock(11, BlocksAether.quicksoil.getDefaultState()));
 
+		WISPROOT_TREE_TALL = new BlueprintDefinition(BlueprintsAether.WISPROOT_TREE_TALL, 0).setRegistry(registry)
+				.setConditions(PlacementConditions.onSpecificBlock(0, BlocksAether.aether_grass, BlocksAether.aether_dirt), replace,
+						PlacementConditions.ignoreBlock(0, BlocksAether.quicksoil.getDefaultState()));
+
 		OUTPOST = new BlueprintDefinitionPool(OUTPOST_A, OUTPOST_B);
 		ABAND_ANGEL_STOREROOM = new BlueprintDefinitionPool(ABAND_ANGEL_STOREROOM_1A);
 		ABAND_ANGEL_WATCHTOWER = new BlueprintDefinitionPool(ABAND_ANGEL_WATCHTOWER_1A);
@@ -341,6 +349,7 @@ public class GenerationAether
 		SKYROOT_WATCHTOWER = new BlueprintDefinitionPool(SKYROOT_WATCHTOWER_1A, SKYROOT_WATCHTOWER_1B, SKYROOT_WATCHTOWER_2A, SKYROOT_WATCHTOWER_2B,
 				SKYROOT_WATCHTOWER_3A, SKYROOT_WATCHTOWER_3B);
 		WELL = new BlueprintDefinitionPool(WELL_1A, WELL_1B);
+		WISPROOT_TREE = new BlueprintDefinitionPool(WISPROOT_TREE_TALL);
 
 		registry.register(0, OUTPOST_A);
 		registry.register(1, NECROMANCER_TOWER);
@@ -365,6 +374,8 @@ public class GenerationAether
 		registry.register(13, WELL_1A);
 		registry.register(14, WELL_1B);
 		registry.register(15, OUTPOST_B);
+
+		registry.register(16, WISPROOT_TREE_TALL);
 
 		reg(0, blue_skyroot_tree_1);
 		reg(1, blue_skyroot_tree_2);

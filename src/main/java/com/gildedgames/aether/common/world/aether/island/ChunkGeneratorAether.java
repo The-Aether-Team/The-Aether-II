@@ -12,6 +12,7 @@ import com.gildedgames.orbis_api.processing.BlockAccessChunkPrimer;
 import com.gildedgames.orbis_api.processing.BlockAccessExtendedWrapper;
 import com.gildedgames.orbis_api.processing.DataPrimer;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
@@ -85,21 +86,16 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		final DataPrimer dataPrimer = new DataPrimer(new BlockAccessChunkPrimer(this.world, primer));
 
 		// Prime placed templates
-		for (final PlacedBlueprint instance : islandData.getPlacedBlueprints())
+		for (final PlacedBlueprint instance : islandData.getPlacedBlueprintsInChunk(chunkX, chunkZ))
 		{
 			for (final BlockDataChunk dataChunk : instance.getBaked().getDataChunks())
 			{
-				if (dataChunk == null)
-				{
-					continue;
-				}
-
 				if (dataChunk.getPos().x == chunkX && dataChunk.getPos().z == chunkZ)
 				{
 					final ICreationData<?> data = instance.getCreationData();
 
 					dataPrimer.create(dataChunk.getContainer(),
-							data.clone().spawnEntities(false)
+							data.clone().spawnEntities(false).rotation(Rotation.NONE)
 									.pos(new BlockPos(dataChunk.getPos().getXStart(), data.getPos().getY(), dataChunk.getPos().getZStart())));
 				}
 			}
@@ -137,21 +133,16 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		final DataPrimer primer = new DataPrimer(new BlockAccessExtendedWrapper(this.world));
 
 		// Populate placed blueprints
-		for (final PlacedBlueprint instance : island.getPlacedBlueprints())
+		for (final PlacedBlueprint instance : island.getPlacedBlueprintsInChunk(chunkX, chunkZ))
 		{
 			for (final BlockDataChunk dataChunk : instance.getBaked().getDataChunks())
 			{
-				if (dataChunk == null)
-				{
-					continue;
-				}
-
 				if (dataChunk.getPos().x == chunkX && dataChunk.getPos().z == chunkZ)
 				{
 					final ICreationData<?> data = instance.getCreationData();
 
 					primer.create(dataChunk.getContainer(),
-							data.clone()
+							data.clone().rotation(Rotation.NONE)
 									.pos(new BlockPos(dataChunk.getPos().getXStart(), data.getPos().getY(), dataChunk.getPos().getZStart())));
 
 					if (!instance.hasGeneratedAChunk())

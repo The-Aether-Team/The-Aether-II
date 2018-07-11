@@ -1,6 +1,7 @@
 package com.gildedgames.aether.api.world.islands;
 
 import com.gildedgames.aether.api.world.generation.WorldDecoration;
+import com.gildedgames.orbis_api.core.BakedBlueprint;
 import com.gildedgames.orbis_api.core.BlueprintDefinition;
 import com.gildedgames.orbis_api.core.ICreationData;
 import com.gildedgames.orbis_api.core.PlacedBlueprint;
@@ -60,9 +61,7 @@ public interface IIslandData extends IIslandDataPartial
 	 */
 	long getSeed();
 
-	PlacedBlueprint placeBlueprint(BlueprintDefinition def, ICreationData<?> data);
+	PlacedBlueprint placeBlueprint(BlueprintDefinition def, BakedBlueprint baked, ICreationData<?> data);
 
-	List<PlacedBlueprint> getPlacedBlueprints();
-
-	void setPlacedBlueprints(List<PlacedBlueprint> instances);
+	List<PlacedBlueprint> getPlacedBlueprintsInChunk(int chunkX, int chunkZ);
 }

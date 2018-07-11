@@ -31,6 +31,7 @@ import com.gildedgames.orbis_api.processing.BlockAccessExtendedWrapper;
 import com.gildedgames.orbis_api.processing.DataPrimer;
 import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
 import net.minecraft.block.state.pattern.BlockMatcher;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -123,13 +124,20 @@ public class BiomeAetherDecorator
 		final int startX = island.getBounds().getMinX();
 		final int startZ = island.getBounds().getMinZ();
 
-		//TODO: REIMPLEMENT 1.12.2
 		boolean generated = false;
+
+		final BlueprintDefinition outpostDef = GenerationAether.OUTPOST.getRandomDefinition(random);
+
+		final Rotation rotation = (outpostDef.hasRandomRotation()) ?
+				BlueprintPlacer.ROTATIONS[world.rand.nextInt(BlueprintPlacer.ROTATIONS.length)] :
+				BlueprintPlacer.ROTATIONS[0];
+
+		BakedBlueprint outpostBake = new BakedBlueprint(outpostDef.getData(), new CreationData(world).seed(random.nextLong()).rotation(rotation));
+
+		outpostBake.bake();
 
 		for (int i = 0; i < 5000; i++)
 		{
-			final BlueprintDefinition outpost = GenerationAether.OUTPOST.getRandomDefinition(random);
-
 			final int x = random.nextInt(island.getBounds().getWidth());
 			final int z = random.nextInt(island.getBounds().getLength());
 
@@ -137,16 +145,19 @@ public class BiomeAetherDecorator
 			{
 				final int y = access.getTopY(startX + x, startZ + z);
 
-				if (y >= 0)
+				if (y > 0)
 				{
-					final ICreationData<CreationData> data = new CreationData(world).pos(new BlockPos(startX + x, y, startZ + z));
+					BlockPos pos = new BlockPos(startX + x, y, startZ + z);
 
-					generated = BlueprintPlacer.findPlace(primer, outpost, data, random);
+					generated = BlueprintPlacer.findPlace(primer, outpostBake, outpostDef.getConditions(), pos, true);
 
 					if (generated)
 					{
-						BlueprintPlacer.placeForced(primer, outpost, data, random);
-						final PlacedBlueprint placed = island.placeBlueprint(outpost, data);
+						outpostBake.rebake(pos);
+
+						BakedBlueprint clone = outpostBake.clone();
+
+						final PlacedBlueprint placed = island.placeBlueprint(outpostDef, clone, clone.getCreationData());
 
 						final ScheduleRegion trigger = placed.getBaked().getScheduleFromTriggerID("spawn");
 
@@ -166,10 +177,12 @@ public class BiomeAetherDecorator
 			AetherCore.LOGGER.info("WARNING: OUTPOST_A NOT GENERATED ON AN ISLAND!");
 		}
 
-		this.generate(GenerationAether.WELL, 500, random.nextInt(50), island, access, primer, world, random);
+		//this.generate(GenerationAether.WISPROOT_TREE, 500, 100, island, access, primer, world, random);
+
+		this.generate(GenerationAether.WELL, 500, random.nextInt(8), island, access, primer, world, random);
 		this.generate(GenerationAether.ABAND_ANGEL_STOREROOM, 200, random.nextInt(10), island, access, primer, world, random);
 		this.generate(GenerationAether.ABAND_ANGEL_WATCHTOWER, 200, random.nextInt(10), island, access, primer, world, random);
-		//this.generate(GenerationAether.ABAND_CAMPSITE, 200, 5, island, access, primer, world, random);
+		this.generate(GenerationAether.ABAND_CAMPSITE, 200, 5, island, access, primer, world, random);
 		this.generate(GenerationAether.ABAND_HUMAN_HOUSE, 200, random.nextInt(10), island, access, primer, world, random);
 		this.generate(GenerationAether.SKYROOT_WATCHTOWER, 300, random.nextInt(10), island, access, primer, world, random);
 	}
@@ -182,6 +195,14 @@ public class BiomeAetherDecorator
 		{
 			return;
 		}
+
+		Rotation rotation = (def.hasRandomRotation()) ?
+				BlueprintPlacer.ROTATIONS[rand.nextInt(BlueprintPlacer.ROTATIONS.length)] :
+				BlueprintPlacer.ROTATIONS[0];
+
+		BakedBlueprint baked = new BakedBlueprint(def.getData(), new CreationData(world).rotation(rotation));
+
+		baked.bake();
 
 		int amountGenerated = 0;
 
@@ -199,14 +220,25 @@ public class BiomeAetherDecorator
 
 				if (y >= 80)
 				{
-					final ICreationData<CreationData> data = new CreationData(world).pos(new BlockPos(startX + x, y, startZ + z));
+					BlockPos pos = new BlockPos(startX + x, y, startZ + z);
 
-					final boolean generated = BlueprintPlacer.findPlace(primer, def, data, rand);
+					final boolean generated = BlueprintPlacer.findPlace(primer, baked, def.getConditions(), pos, true);
 
 					if (generated)
 					{
-						BlueprintPlacer.placeForced(primer, def, data, rand);
-						island.placeBlueprint(def, data);
+						baked.rebake(pos);
+
+						BakedBlueprint clone = baked.clone();
+
+						island.placeBlueprint(def, clone, clone.getCreationData());
+
+						rotation = (def.hasRandomRotation()) ?
+								BlueprintPlacer.ROTATIONS[rand.nextInt(BlueprintPlacer.ROTATIONS.length)] :
+								BlueprintPlacer.ROTATIONS[0];
+
+						baked = new BakedBlueprint(def.getData(), new CreationData(world).rotation(rotation));
+
+						baked.bake();
 
 						amountGenerated++;
 
@@ -228,43 +260,9 @@ public class BiomeAetherDecorator
 			return;
 		}
 
-		int amountGenerated = 0;
+		final BlueprintDefinition def = pool.getRandomDefinition(rand);
 
-		final int startX = island.getBounds().getMinX();
-		final int startZ = island.getBounds().getMinZ();
-
-		for (int i = 0; i < tries; i++)
-		{
-			final BlueprintDefinition blueprint = pool.getRandomDefinition(rand);
-
-			final int x = rand.nextInt(island.getBounds().getWidth());
-			final int z = rand.nextInt(island.getBounds().getLength());
-
-			if (access.canAccess(startX + x, startZ + z))
-			{
-				final int y = access.getTopY(startX + x, startZ + z) - blueprint.getFloorHeight() + (blueprint.getFloorHeight() == 0 ? 1 : 0);
-
-				if (y >= 80)
-				{
-					final ICreationData<CreationData> data = new CreationData(world).pos(new BlockPos(startX + x, y, startZ + z));
-
-					final boolean generated = BlueprintPlacer.findPlace(primer, blueprint, data, rand);
-
-					if (generated)
-					{
-						BlueprintPlacer.placeForced(primer, blueprint, data, rand);
-						island.placeBlueprint(blueprint, data);
-
-						amountGenerated++;
-
-						if (amountGenerated >= maxGenerated)
-						{
-							return;
-						}
-					}
-				}
-			}
-		}
+		this.generate(def, tries, maxGenerated, island, access, primer, world, rand);
 	}
 
 	protected void genDecorations(final World world, final Random random, final BlockPos pos, final Biome genBase)
@@ -399,7 +397,7 @@ public class BiomeAetherDecorator
 
 		this.generateClouds(world, random, new BlockPos(pos.getX(), 0, pos.getZ()));
 
-		//
+		// Post decorate
 		if (genBase instanceof BiomeAetherBase)
 		{
 			final BiomeAetherBase aetherBiome = (BiomeAetherBase) genBase;

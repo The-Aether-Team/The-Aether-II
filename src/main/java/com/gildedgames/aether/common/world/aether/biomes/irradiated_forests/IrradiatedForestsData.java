@@ -13,6 +13,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
@@ -225,11 +226,19 @@ public class IrradiatedForestsData implements NBT
 		chunk.set(pos, Math.abs(x % 16), Math.abs(z % 16));
 	}
 
+	@Nullable
 	public CrackChunk getCracks(final int chunkX, final int chunkZ)
 	{
 		this.checkInit();
 
-		return this.cracks.get(ChunkPos.asLong(chunkX, chunkZ));
+		long key = ChunkPos.asLong(chunkX, chunkZ);
+
+		if (!this.cracks.containsKey(key))
+		{
+			return null;
+		}
+
+		return this.cracks.get(key);
 	}
 
 	public Voronoi getVoronoi()
