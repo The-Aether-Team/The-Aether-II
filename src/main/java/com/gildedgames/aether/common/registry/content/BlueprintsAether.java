@@ -79,5 +79,4 @@ public class BlueprintsAether
 		WELL_1B = c.getData(c.getDataId("well_1b.blueprint"));
 		WISPROOT_TREE_TALL = c.getData(c.getDataId("wisproot_tree_tall.blueprint"));
 	}
-
 }

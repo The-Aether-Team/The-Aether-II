@@ -16,12 +16,14 @@ import com.gildedgames.aether.common.recipes.simple.RecipeWrapper;
 import com.gildedgames.aether.common.registry.content.*;
 import com.gildedgames.aether.common.shop.ShopManager;
 import com.gildedgames.aether.common.util.helpers.PerfHelper;
+import com.gildedgames.orbis_api.OrbisAPI;
+import com.gildedgames.orbis_api.data.management.IProjectManagerListener;
 import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-public class ContentRegistry implements IContentRegistry
+public class ContentRegistry implements IContentRegistry, IProjectManagerListener
 {
 	private final CurrencyRegistry currencyRegistry = new CurrencyRegistry();
 
@@ -50,6 +52,8 @@ public class ContentRegistry implements IContentRegistry
 	 */
 	public void preInit()
 	{
+		OrbisAPI.services().getProjectManager().listen(this);
+
 		PerfHelper.measure("Pre-initialize tiles", TileEntitiesAether::preInit);
 		PerfHelper.measure("Pre-initialize dimensions", DimensionsAether::preInit);
 		PerfHelper.measure("Pre-initialize loot tables", LootTablesAether::preInit);
@@ -90,7 +94,7 @@ public class ContentRegistry implements IContentRegistry
 	{
 		PerfHelper.measure("Bake recipes", RecipesAether::bakeRecipes);
 
-		PerfHelper.measure("Load blueprints", BlueprintsAether::load);
+		PerfHelper.measure("Verify Orbis project manager", OrbisAPI.services()::verifyProjectManagerStarted);
 		PerfHelper.measure("Load generation", GenerationAether::load);
 
 		PerfHelper.measure("Re-build recipe indexes", this::rebuildIndexes);
@@ -177,5 +181,11 @@ public class ContentRegistry implements IContentRegistry
 	public PatronRewardRegistry patronRewards()
 	{
 		return this.patronRewardRegistry;
+	}
+
+	@Override
+	public void onPreScanAndCacheProjects()
+	{
+		BlueprintsAether.load();
 	}
 }

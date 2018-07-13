@@ -136,7 +136,7 @@ public class BiomeAetherDecorator
 
 		outpostBake.bake();
 
-		for (int i = 0; i < 5000; i++)
+		for (int i = 0; i < 10000; i++)
 		{
 			final int x = random.nextInt(island.getBounds().getWidth());
 			final int z = random.nextInt(island.getBounds().getLength());
@@ -174,11 +174,10 @@ public class BiomeAetherDecorator
 
 		if (!generated)
 		{
-			AetherCore.LOGGER.info("WARNING: OUTPOST_A NOT GENERATED ON AN ISLAND!");
+			AetherCore.LOGGER.info("WARNING: OUTPOST NOT GENERATED ON AN ISLAND!");
 		}
 
 		//this.generate(GenerationAether.WISPROOT_TREE, 500, 100, island, access, primer, world, random);
-
 		this.generate(GenerationAether.WELL, 500, random.nextInt(8), island, access, primer, world, random);
 		this.generate(GenerationAether.ABAND_ANGEL_STOREROOM, 200, random.nextInt(10), island, access, primer, world, random);
 		this.generate(GenerationAether.ABAND_ANGEL_WATCHTOWER, 200, random.nextInt(10), island, access, primer, world, random);
@@ -284,6 +283,11 @@ public class BiomeAetherDecorator
 		{
 			return;
 		}
+
+		/*if (true)
+		{
+			return;
+		}*/
 
 		//Decorate SubBiomes
 		IBlockAccessExtended blockAccessExtended = new BlockAccessExtendedWrapper(world);
