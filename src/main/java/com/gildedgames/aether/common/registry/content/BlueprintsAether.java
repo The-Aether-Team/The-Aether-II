@@ -44,6 +44,8 @@ public class BlueprintsAether
 
 	public static BlueprintData WISPROOT_TREE_TALL;
 
+	public static BlueprintData GREATROOT_TREE;
+
 	private static IProject project;
 
 	private BlueprintsAether()
@@ -88,5 +90,6 @@ public class BlueprintsAether
 		WELL_1A = loadData("well_1a");
 		WELL_1B = loadData("well_1b");
 		WISPROOT_TREE_TALL = loadData("wisproot_tree_tall");
+		GREATROOT_TREE = loadData("greatroot_1");
 	}
 }

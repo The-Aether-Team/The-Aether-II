@@ -103,6 +103,8 @@ public class GenerationAether
 
 	public static BlueprintDefinition SKYROOT_WATCHTOWER_3B;
 
+	public static BlueprintDefinition GREATROOT_TREE;
+
 	public static BlueprintDefinitionPool SKYROOT_WATCHTOWER;
 
 	public static BlueprintDefinitionPool WISPROOT_TREE;
@@ -341,6 +343,10 @@ public class GenerationAether
 				.setConditions(PlacementConditions.onSpecificBlock(0, BlocksAether.aether_grass, BlocksAether.aether_dirt), replace,
 						PlacementConditions.ignoreBlock(0, BlocksAether.quicksoil.getDefaultState()));
 
+		GREATROOT_TREE = new BlueprintDefinition(BlueprintsAether.GREATROOT_TREE, 0).setRegistry(registry)
+				.setConditions(PlacementConditions.onSpecificBlock(0, BlocksAether.aether_grass, BlocksAether.aether_dirt), replace,
+						PlacementConditions.ignoreBlock(0, BlocksAether.quicksoil.getDefaultState()));
+
 		OUTPOST = new BlueprintDefinitionPool(OUTPOST_A, OUTPOST_B);
 		ABAND_ANGEL_STOREROOM = new BlueprintDefinitionPool(ABAND_ANGEL_STOREROOM_1A);
 		ABAND_ANGEL_WATCHTOWER = new BlueprintDefinitionPool(ABAND_ANGEL_WATCHTOWER_1A);
@@ -376,6 +382,8 @@ public class GenerationAether
 		registry.register(15, OUTPOST_B);
 
 		registry.register(16, WISPROOT_TREE_TALL);
+
+		registry.register(17, GREATROOT_TREE);
 
 		reg(0, blue_skyroot_tree_1);
 		reg(1, blue_skyroot_tree_2);

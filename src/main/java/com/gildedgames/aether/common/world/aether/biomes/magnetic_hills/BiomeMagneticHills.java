@@ -11,6 +11,7 @@ import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandVariables;
 import com.gildedgames.aether.common.world.aether.island.gen.highlands.IslandGeneratorHighlands;
 import com.gildedgames.aether.common.world.templates.TemplateWorldGen;
+import com.gildedgames.orbis_api.core.BlueprintWorldGen;
 import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
 import com.gildedgames.orbis_api.util.mc.NBT;
 import com.google.common.collect.Lists;
@@ -137,6 +138,8 @@ public class BiomeMagneticHills extends BiomeAetherBase
 		treeDecorations.add(new WorldDecorationSimple(2, new TemplateWorldGen(GenerationAether.green_skyroot_oak)));
 		treeDecorations.add(new WorldDecorationSimple(1, new TemplateWorldGen(GenerationAether.golden_oak)));
 		treeDecorations.add(new WorldDecorationSimple(1, new TemplateWorldGen(GenerationAether.skyroot_moa_nest_tree_1)));
+		treeDecorations.add(new WorldDecorationSimple(4 + rand.nextInt(3),
+				new BlueprintWorldGen(GenerationAether.WISPROOT_TREE)));
 
 		return treeDecorations;
 	}
