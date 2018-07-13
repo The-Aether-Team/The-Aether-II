@@ -54,6 +54,8 @@ public class ContentRegistry implements IContentRegistry, IProjectManagerListene
 	 */
 	public void preInit()
 	{
+		OrbisAPI.services().listen(this);
+
 		PerfHelper.measure("Pre-initialize tiles", TileEntitiesAether::preInit);
 		PerfHelper.measure("Pre-initialize dimensions", DimensionsAether::preInit);
 		PerfHelper.measure("Pre-initialize loot tables", LootTablesAether::preInit);
