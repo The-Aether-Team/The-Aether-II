@@ -4,7 +4,6 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis_api.OrbisAPI;
 import com.gildedgames.orbis_api.data.blueprint.BlueprintData;
 import com.gildedgames.orbis_api.data.management.IProject;
-import com.gildedgames.orbis_api.data.management.IProjectCache;
 import com.gildedgames.orbis_api.data.management.IProjectManager;
 import net.minecraft.util.ResourceLocation;
 
@@ -52,6 +51,18 @@ public class BlueprintsAether
 
 	}
 
+	private static BlueprintData loadData(String name)
+	{
+		BlueprintData data = project.getCache().getData(project.getCache().getDataId(name + ".blueprint"));
+
+		if (data == null)
+		{
+			throw new RuntimeException("Failed to load Blueprint Data: " + name + ".blueprint");
+		}
+
+		return data;
+	}
+
 	public static void load(IProjectManager projectManager)
 	{
 		ResourceLocation location = AetherCore.getResource("aetherii");
@@ -60,24 +71,22 @@ public class BlueprintsAether
 
 		projectManager.cacheProject(location.getResourcePath(), project);
 
-		final IProjectCache c = project.getCache();
-
-		OUTPOST_A = c.getData(c.getDataId("outpost_a.blueprint"));
-		OUTPOST_B = c.getData(c.getDataId("outpost_b.blueprint"));
-		NECROMANCER_TOWER = c.getData(c.getDataId("necromancer_tower.blueprint"));
-		ABAND_ANGEL_STOREROOM_1A = c.getData(c.getDataId("aband_angel_storeroom_1a.blueprint"));
-		ABAND_ANGEL_WATCHTOWER_1A = c.getData(c.getDataId("aband_angel_watchtower_1a.blueprint"));
-		ABAND_CAMPSITE_1A = c.getData(c.getDataId("aband_campsite_1a.blueprint"));
-		ABAND_HUMAN_HOUSE_1A = c.getData(c.getDataId("aband_human_house_1a.blueprint"));
-		ABAND_HUMAN_HOUSE_1B = c.getData(c.getDataId("aband_human_house_1b.blueprint"));
-		SKYROOT_WATCHTOWER_1A = c.getData(c.getDataId("skyroot_watchtower_1a.blueprint"));
-		SKYROOT_WATCHTOWER_1B = c.getData(c.getDataId("skyroot_watchtower_1b.blueprint"));
-		SKYROOT_WATCHTOWER_2A = c.getData(c.getDataId("skyroot_watchtower_2a.blueprint"));
-		SKYROOT_WATCHTOWER_2B = c.getData(c.getDataId("skyroot_watchtower_2b.blueprint"));
-		SKYROOT_WATCHTOWER_3A = c.getData(c.getDataId("skyroot_watchtower_3a.blueprint"));
-		SKYROOT_WATCHTOWER_3B = c.getData(c.getDataId("skyroot_watchtower_3b.blueprint"));
-		WELL_1A = c.getData(c.getDataId("well_1a.blueprint"));
-		WELL_1B = c.getData(c.getDataId("well_1b.blueprint"));
-		WISPROOT_TREE_TALL = c.getData(c.getDataId("wisproot_tree_tall.blueprint"));
+		OUTPOST_A = loadData("outpost_a");
+		OUTPOST_B = loadData("outpost_b");
+		NECROMANCER_TOWER = loadData("necromancer_tower");
+		ABAND_ANGEL_STOREROOM_1A = loadData("aband_angel_storeroom_1a");
+		ABAND_ANGEL_WATCHTOWER_1A = loadData("aband_angel_watchtower_1a");
+		ABAND_CAMPSITE_1A = loadData("aband_campsite_1a");
+		ABAND_HUMAN_HOUSE_1A = loadData("aband_human_house_1a");
+		ABAND_HUMAN_HOUSE_1B = loadData("aband_human_house_1b");
+		SKYROOT_WATCHTOWER_1A = loadData("skyroot_watchtower_1a");
+		SKYROOT_WATCHTOWER_1B = loadData("skyroot_watchtower_1b");
+		SKYROOT_WATCHTOWER_2A = loadData("skyroot_watchtower_2a");
+		SKYROOT_WATCHTOWER_2B = loadData("skyroot_watchtower_2b");
+		SKYROOT_WATCHTOWER_3A = loadData("skyroot_watchtower_3a");
+		SKYROOT_WATCHTOWER_3B = loadData("skyroot_watchtower_3b");
+		WELL_1A = loadData("well_1a");
+		WELL_1B = loadData("well_1b");
+		WISPROOT_TREE_TALL = loadData("wisproot_tree_tall");
 	}
 }
