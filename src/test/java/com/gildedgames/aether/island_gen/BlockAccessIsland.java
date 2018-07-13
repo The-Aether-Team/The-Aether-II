@@ -78,6 +78,12 @@ public class BlockAccessIsland implements IBlockAccessExtended
 	}
 
 	@Override
+	public boolean canAccess(BlockPos pos, int radius)
+	{
+		return true;
+	}
+
+	@Override
 	public boolean canAccess(int i, int i1)
 	{
 		return true;
