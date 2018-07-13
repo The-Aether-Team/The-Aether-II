@@ -16,14 +16,16 @@ import com.gildedgames.aether.common.recipes.simple.RecipeWrapper;
 import com.gildedgames.aether.common.registry.content.*;
 import com.gildedgames.aether.common.shop.ShopManager;
 import com.gildedgames.aether.common.util.helpers.PerfHelper;
+import com.gildedgames.orbis_api.IOrbisServicesListener;
 import com.gildedgames.orbis_api.OrbisAPI;
+import com.gildedgames.orbis_api.data.management.IProjectManager;
 import com.gildedgames.orbis_api.data.management.IProjectManagerListener;
 import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-public class ContentRegistry implements IContentRegistry, IProjectManagerListener
+public class ContentRegistry implements IContentRegistry, IProjectManagerListener, IOrbisServicesListener
 {
 	private final CurrencyRegistry currencyRegistry = new CurrencyRegistry();
 
@@ -52,8 +54,6 @@ public class ContentRegistry implements IContentRegistry, IProjectManagerListene
 	 */
 	public void preInit()
 	{
-		OrbisAPI.services().getProjectManager().listen(this);
-
 		PerfHelper.measure("Pre-initialize tiles", TileEntitiesAether::preInit);
 		PerfHelper.measure("Pre-initialize dimensions", DimensionsAether::preInit);
 		PerfHelper.measure("Pre-initialize loot tables", LootTablesAether::preInit);
@@ -187,5 +187,11 @@ public class ContentRegistry implements IContentRegistry, IProjectManagerListene
 	public void onPreScanAndCacheProjects()
 	{
 		BlueprintsAether.load();
+	}
+
+	@Override
+	public void onStartProjectManager(IProjectManager projectManager)
+	{
+		projectManager.listen(this);
 	}
 }
