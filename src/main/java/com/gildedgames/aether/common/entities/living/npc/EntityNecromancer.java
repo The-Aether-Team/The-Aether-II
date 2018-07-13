@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 
 public class EntityNecromancer extends EntityNPC
 {
-	private BlockPos floor1, floor2, floor3, floor4;
+	private BlockPos floor1;
 
 	private BlockPos spawned;
 
@@ -39,9 +39,6 @@ public class EntityNecromancer extends EntityNPC
 			final NecromancerTowerInstance instance = InstancesAether.NECROMANCER_TOWER_HANDLER.getFromDimId(worldIn.provider.getDimension());
 
 			this.floor1 = instance.getTower().getBaked().getScheduleFromTriggerID("p2").getBounds().getMin();
-			this.floor2 = instance.getTower().getBaked().getScheduleFromTriggerID("p3").getBounds().getMin();
-			this.floor3 = instance.getTower().getBaked().getScheduleFromTriggerID("p4").getBounds().getMin();
-			this.floor4 = instance.getTower().getBaked().getScheduleFromTriggerID("p5").getBounds().getMin();
 
 			this.upTowerTask = new NecromancerAIGoUpTower(this, this.floor1);
 
