@@ -210,7 +210,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase
 	{
 		List<WorldDecoration> treeDecorations = Lists.newArrayList();
 
-		treeDecorations.add(new WorldDecorationSimple(4 + rand.nextInt(3), new BlueprintWorldGen(GenerationAether.GREATROOT_TREE)));
+		treeDecorations.add(new WorldDecorationSimple(20, new BlueprintWorldGen(GenerationAether.GREATROOT_TREE)));
 		treeDecorations.add(new WorldDecorationSimple(3, new TemplateWorldGen(GenerationAether.blue_skyroot_tree)));
 		treeDecorations.add(new WorldDecorationSimple(4, new TemplateWorldGen(GenerationAether.dark_blue_skyroot_tree)));
 		treeDecorations.add(new WorldDecorationSimple(3, new TemplateWorldGen(GenerationAether.dark_blue_skyroot_oak)));
