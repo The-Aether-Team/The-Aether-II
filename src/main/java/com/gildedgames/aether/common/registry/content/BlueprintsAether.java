@@ -5,6 +5,7 @@ import com.gildedgames.orbis_api.OrbisAPI;
 import com.gildedgames.orbis_api.data.blueprint.BlueprintData;
 import com.gildedgames.orbis_api.data.management.IProject;
 import com.gildedgames.orbis_api.data.management.IProjectCache;
+import com.gildedgames.orbis_api.data.management.IProjectManager;
 import net.minecraft.util.ResourceLocation;
 
 public class BlueprintsAether
@@ -51,13 +52,13 @@ public class BlueprintsAether
 
 	}
 
-	public static void load()
+	public static void load(IProjectManager projectManager)
 	{
 		ResourceLocation location = AetherCore.getResource("aetherii");
 
 		project = OrbisAPI.services().loadProject(null, location, AetherCore.INSTANCE, "aether_ii");
 
-		OrbisAPI.services().getProjectManager().cacheProject(location.getResourcePath(), project);
+		projectManager.cacheProject(location.getResourcePath(), project);
 
 		final IProjectCache c = project.getCache();
 
