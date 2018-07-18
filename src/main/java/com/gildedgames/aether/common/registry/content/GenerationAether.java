@@ -105,6 +105,8 @@ public class GenerationAether
 
 	public static BlueprintDefinition GREATROOT_TREE;
 
+	public static BlueprintDefinition SKYROOT_OAK_GREEN, SKYROOT_OAK_BLUE, SKYROOT_OAK_DARK_BLUE;
+
 	public static BlueprintDefinitionPool SKYROOT_WATCHTOWER;
 
 	public static BlueprintDefinitionPool WISPROOT_TREE;
@@ -114,6 +116,8 @@ public class GenerationAether
 	public static BlueprintDefinition WELL_1B;
 
 	public static BlueprintDefinitionPool WELL;
+
+	public static BlueprintDefinition AMBEROOT_TREE;
 
 	private GenerationAether()
 	{
@@ -347,6 +351,22 @@ public class GenerationAether
 				.setConditions(PlacementConditions.onSpecificBlock(0, BlocksAether.aether_grass, BlocksAether.aether_dirt), replace,
 						PlacementConditions.ignoreBlock(0, BlocksAether.quicksoil.getDefaultState()));
 
+		SKYROOT_OAK_GREEN = new BlueprintDefinition(BlueprintsAether.SKYROOT_OAK_GREEN, 0).setRegistry(registry)
+				.setConditions(PlacementConditions.onSpecificBlock(0, BlocksAether.aether_grass, BlocksAether.aether_dirt), replace,
+						PlacementConditions.ignoreBlock(0, BlocksAether.quicksoil.getDefaultState()));
+
+		SKYROOT_OAK_BLUE = new BlueprintDefinition(BlueprintsAether.SKYROOT_OAK_BLUE, 0).setRegistry(registry)
+				.setConditions(PlacementConditions.onSpecificBlock(0, BlocksAether.aether_grass, BlocksAether.aether_dirt), replace,
+						PlacementConditions.ignoreBlock(0, BlocksAether.quicksoil.getDefaultState()));
+
+		SKYROOT_OAK_DARK_BLUE = new BlueprintDefinition(BlueprintsAether.SKYROOT_OAK_DARK_BLUE, 0).setRegistry(registry)
+				.setConditions(PlacementConditions.onSpecificBlock(0, BlocksAether.aether_grass, BlocksAether.aether_dirt), replace,
+						PlacementConditions.ignoreBlock(0, BlocksAether.quicksoil.getDefaultState()));
+
+		AMBEROOT_TREE = new BlueprintDefinition(BlueprintsAether.AMBEROOT_TREE, 0).setRegistry(registry)
+				.setConditions(PlacementConditions.onSpecificBlock(0, BlocksAether.aether_grass, BlocksAether.aether_dirt), replace,
+						PlacementConditions.ignoreBlock(0, BlocksAether.quicksoil.getDefaultState()));
+
 		OUTPOST = new BlueprintDefinitionPool(OUTPOST_A, OUTPOST_B);
 		ABAND_ANGEL_STOREROOM = new BlueprintDefinitionPool(ABAND_ANGEL_STOREROOM_1A);
 		ABAND_ANGEL_WATCHTOWER = new BlueprintDefinitionPool(ABAND_ANGEL_WATCHTOWER_1A);
@@ -382,8 +402,11 @@ public class GenerationAether
 		registry.register(15, OUTPOST_B);
 
 		registry.register(16, WISPROOT_TREE_TALL);
-
 		registry.register(17, GREATROOT_TREE);
+		registry.register(18, SKYROOT_OAK_GREEN);
+		registry.register(19, SKYROOT_OAK_BLUE);
+		registry.register(20, SKYROOT_OAK_DARK_BLUE);
+		registry.register(21, AMBEROOT_TREE);
 
 		reg(0, blue_skyroot_tree_1);
 		reg(1, blue_skyroot_tree_2);

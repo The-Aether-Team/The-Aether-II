@@ -132,11 +132,10 @@ public class BiomeMagneticHills extends BiomeAetherBase
 	{
 		List<WorldDecoration> treeDecorations = Lists.newArrayList();
 
-		treeDecorations.add(new WorldDecorationSimple(2, new TemplateWorldGen(GenerationAether.blue_skyroot_tree)));
-		treeDecorations.add(new WorldDecorationSimple(2, new TemplateWorldGen(GenerationAether.green_skyroot_tree),
-				new TemplateWorldGen(GenerationAether.green_skyroot_small_pine)));
-		treeDecorations.add(new WorldDecorationSimple(2, new TemplateWorldGen(GenerationAether.green_skyroot_oak)));
-		treeDecorations.add(new WorldDecorationSimple(1, new TemplateWorldGen(GenerationAether.golden_oak)));
+		treeDecorations.add(new WorldDecorationSimple(2, new BlueprintWorldGen(GenerationAether.SKYROOT_OAK_GREEN)));
+		treeDecorations.add(new WorldDecorationSimple(2, new BlueprintWorldGen(GenerationAether.SKYROOT_OAK_BLUE)));
+
+		treeDecorations.add(new WorldDecorationSimple(1, new BlueprintWorldGen(GenerationAether.AMBEROOT_TREE)));
 		treeDecorations.add(new WorldDecorationSimple(1, new TemplateWorldGen(GenerationAether.skyroot_moa_nest_tree_1)));
 		treeDecorations.add(new WorldDecorationSimple(4 + rand.nextInt(3),
 				new BlueprintWorldGen(GenerationAether.WISPROOT_TREE)));

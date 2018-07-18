@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.world.aether.biomes.highlands;
 
-import com.gildedgames.aether.api.world.generation.TemplateDefinitionPool;
 import com.gildedgames.aether.api.world.generation.WorldDecoration;
 import com.gildedgames.aether.api.world.generation.WorldDecorationSimple;
 import com.gildedgames.aether.api.world.islands.IIslandData;
@@ -12,6 +11,7 @@ import com.gildedgames.aether.common.world.aether.island.gen.IslandGenerators;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandVariables;
 import com.gildedgames.aether.common.world.aether.island.gen.highlands.IslandGeneratorHighlands;
 import com.gildedgames.aether.common.world.templates.TemplateWorldGen;
+import com.gildedgames.orbis_api.core.BlueprintDefinition;
 import com.gildedgames.orbis_api.core.BlueprintWorldGen;
 import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
 import com.gildedgames.orbis_api.util.mc.NBT;
@@ -133,26 +133,23 @@ public class BiomeHighlands extends BiomeAetherBase
 	{
 		List<WorldDecoration> treeDecorations = Lists.newArrayList();
 
-		TemplateDefinitionPool[] forest = new TemplateDefinitionPool[]
+		BlueprintDefinition[] forest = new BlueprintDefinition[]
 				{
-						GenerationAether.blue_skyroot_tree, GenerationAether.green_skyroot_tree, GenerationAether.green_skyroot_oak,
-						GenerationAether.green_skyroot_windswept, GenerationAether.green_skyroot_small_pine, GenerationAether.green_skyroot_pine
+						GenerationAether.SKYROOT_OAK_GREEN
 				};
 
-		TemplateDefinitionPool[] neopolitan = new TemplateDefinitionPool[]
+		BlueprintDefinition[] neopolitan = new BlueprintDefinition[]
 				{
-						GenerationAether.blue_skyroot_tree, GenerationAether.green_skyroot_tree, GenerationAether.green_skyroot_oak,
-						GenerationAether.dark_blue_skyroot_oak, GenerationAether.dark_blue_skyroot_tree, GenerationAether.golden_oak
+						GenerationAether.SKYROOT_OAK_GREEN, GenerationAether.SKYROOT_OAK_DARK_BLUE, GenerationAether.SKYROOT_OAK_BLUE
 				};
 
-		TemplateDefinitionPool[] chosen = rand.nextBoolean() ? neopolitan : forest;
+		BlueprintDefinition[] chosen = rand.nextBoolean() ? neopolitan : forest;
 
 		int amountOfTreeTypes = 2 + rand.nextInt(4);
 
 		for (int i = 0; i < amountOfTreeTypes; i++)
 		{
-			treeDecorations.add(new WorldDecorationSimple(15,
-					new TemplateWorldGen(chosen[rand.nextInt(forest.length)])));
+			treeDecorations.add(new WorldDecorationSimple(15, new BlueprintWorldGen(chosen.length >= 2 ? chosen[rand.nextInt(chosen.length)] : chosen[0])));
 		}
 
 		treeDecorations.add(new WorldDecorationSimple(4 + rand.nextInt(3),
@@ -162,7 +159,7 @@ public class BiomeHighlands extends BiomeAetherBase
 				new TemplateWorldGen(GenerationAether.skyroot_moa_nest_tree_1)));
 
 		treeDecorations.add(new WorldDecorationSimple(1 + rand.nextInt(3), 0.5F * rand.nextFloat(),
-				new TemplateWorldGen(GenerationAether.golden_oak)));
+				new BlueprintWorldGen(GenerationAether.AMBEROOT_TREE)));
 
 		return treeDecorations;
 	}

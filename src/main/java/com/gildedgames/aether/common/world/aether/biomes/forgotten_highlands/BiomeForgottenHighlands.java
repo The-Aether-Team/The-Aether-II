@@ -9,7 +9,6 @@ import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.registry.content.GenerationAether;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandGenerators;
-import com.gildedgames.aether.common.world.templates.TemplateWorldGen;
 import com.gildedgames.orbis_api.core.BlueprintWorldGen;
 import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
 import com.gildedgames.orbis_api.util.mc.NBT;
@@ -107,10 +106,8 @@ public class BiomeForgottenHighlands extends BiomeAetherBase
 	{
 		List<WorldDecoration> treeDecorations = Lists.newArrayList();
 
-		treeDecorations.add(new WorldDecorationSimple(3, new TemplateWorldGen(GenerationAether.green_skyroot_tree)));
-		treeDecorations.add(new WorldDecorationSimple(1, new TemplateWorldGen(GenerationAether.golden_oak)));
-		treeDecorations.add(new WorldDecorationSimple(4 + rand.nextInt(3),
-				new BlueprintWorldGen(GenerationAether.WISPROOT_TREE)));
+		treeDecorations.add(new WorldDecorationSimple(6, new BlueprintWorldGen(GenerationAether.SKYROOT_OAK_GREEN)));
+		treeDecorations.add(new WorldDecorationSimple(1, new BlueprintWorldGen(GenerationAether.AMBEROOT_TREE)));
 
 		return treeDecorations;
 	}

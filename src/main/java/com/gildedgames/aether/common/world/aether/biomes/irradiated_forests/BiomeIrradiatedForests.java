@@ -9,7 +9,7 @@ import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.registry.content.GenerationAether;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandGenerators;
-import com.gildedgames.aether.common.world.templates.TemplateWorldGen;
+import com.gildedgames.orbis_api.core.BlueprintWorldGen;
 import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
 import com.gildedgames.orbis_api.util.mc.NBT;
 import com.google.common.collect.Lists;
@@ -105,7 +105,7 @@ public class BiomeIrradiatedForests extends BiomeAetherBase
 	{
 		List<WorldDecoration> treeDecorations = Lists.newArrayList();
 
-		treeDecorations.add(new WorldDecorationSimple(6, new TemplateWorldGen(GenerationAether.golden_oak)));
+		treeDecorations.add(new WorldDecorationSimple(30, new BlueprintWorldGen(GenerationAether.AMBEROOT_TREE)));
 
 		return treeDecorations;
 	}

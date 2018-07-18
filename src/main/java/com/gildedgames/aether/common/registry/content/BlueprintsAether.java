@@ -46,6 +46,10 @@ public class BlueprintsAether
 
 	public static BlueprintData GREATROOT_TREE;
 
+	public static BlueprintData SKYROOT_OAK_GREEN, SKYROOT_OAK_BLUE, SKYROOT_OAK_DARK_BLUE;
+
+	public static BlueprintData AMBEROOT_TREE;
+
 	private static IProject project;
 
 	private BlueprintsAether()
@@ -55,7 +59,7 @@ public class BlueprintsAether
 
 	private static BlueprintData loadData(String name)
 	{
-		BlueprintData data = project.getCache().getData(project.getCache().getDataId(name + ".blueprint"));
+		BlueprintData data = project.getCache().getData(project.getCache().getDataId(name.replace("/", "\\") + ".blueprint"));
 
 		if (data == null)
 		{
@@ -91,5 +95,9 @@ public class BlueprintsAether
 		WELL_1B = loadData("well_1b");
 		WISPROOT_TREE_TALL = loadData("wisproot_tree_tall");
 		GREATROOT_TREE = loadData("greatroot_1");
+		SKYROOT_OAK_GREEN = loadData("trees/skyroot/skyroot_oak_green");
+		SKYROOT_OAK_BLUE = loadData("trees/skyroot/skyroot_oak_blue");
+		SKYROOT_OAK_DARK_BLUE = loadData("trees/skyroot/skyroot_oak_dark_blue");
+		AMBEROOT_TREE = loadData("trees/amberoot/amberoot_tree");
 	}
 }
