@@ -100,6 +100,12 @@ public class SpecialMovesEventsClient
 	@SubscribeEvent
 	public static void onClientTick(final InputEvent.KeyInputEvent event)
 	{
+		//TODO: Temp disable of rolling
+		if (true)
+		{
+			return;
+		}
+
 		final Minecraft mc = FMLClientHandler.instance().getClient();
 		long time = System.currentTimeMillis();
 
