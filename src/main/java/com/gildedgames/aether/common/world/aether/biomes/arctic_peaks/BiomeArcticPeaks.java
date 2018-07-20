@@ -15,6 +15,7 @@ import com.gildedgames.aether.common.world.aether.WorldProviderAether;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandVariables;
 import com.gildedgames.aether.common.world.aether.island.gen.highlands.IslandGeneratorHighlands;
+import com.gildedgames.orbis_api.core.BlueprintDefinition;
 import com.gildedgames.orbis_api.core.BlueprintWorldGen;
 import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
 import com.gildedgames.orbis_api.util.mc.NBT;
@@ -209,9 +210,27 @@ public class BiomeArcticPeaks extends BiomeAetherBase
 	{
 		List<WorldDecoration> treeDecorations = Lists.newArrayList();
 
+		BlueprintDefinition[] forest = new BlueprintDefinition[]
+				{
+						GenerationAether.SKYROOT_OAK_DARK_BLUE, GenerationAether.SKYROOT_OAK_BLUE
+				};
+
+		BlueprintDefinition[] neopolitan = new BlueprintDefinition[]
+				{
+						GenerationAether.SKYROOT_OAK_DARK_BLUE, GenerationAether.SKYROOT_OAK_BLUE,
+						GenerationAether.WISPROOT_BLUE, GenerationAether.WISPROOT_DARK_BLUE
+				};
+
+		BlueprintDefinition[] chosen = rand.nextBoolean() ? neopolitan : forest;
+
+		int amountOfTreeTypes = 2 + rand.nextInt(4);
+
+		for (int i = 0; i < amountOfTreeTypes; i++)
+		{
+			treeDecorations.add(new WorldDecorationSimple(15, new BlueprintWorldGen(chosen.length >= 2 ? chosen[rand.nextInt(chosen.length)] : chosen[0])));
+		}
+
 		treeDecorations.add(new WorldDecorationSimple(20, new BlueprintWorldGen(GenerationAether.GREATROOT_TREE)));
-		treeDecorations.add(new WorldDecorationSimple(6, new BlueprintWorldGen(GenerationAether.SKYROOT_OAK_BLUE)));
-		treeDecorations.add(new WorldDecorationSimple(6, new BlueprintWorldGen(GenerationAether.SKYROOT_OAK_DARK_BLUE)));
 
 		return treeDecorations;
 	}

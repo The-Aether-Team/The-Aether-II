@@ -135,12 +135,13 @@ public class BiomeHighlands extends BiomeAetherBase
 
 		BlueprintDefinition[] forest = new BlueprintDefinition[]
 				{
-						GenerationAether.SKYROOT_OAK_GREEN
+						GenerationAether.SKYROOT_OAK_GREEN, GenerationAether.WISPROOT_GREEN
 				};
 
 		BlueprintDefinition[] neopolitan = new BlueprintDefinition[]
 				{
-						GenerationAether.SKYROOT_OAK_GREEN, GenerationAether.SKYROOT_OAK_DARK_BLUE, GenerationAether.SKYROOT_OAK_BLUE
+						GenerationAether.SKYROOT_OAK_GREEN, GenerationAether.SKYROOT_OAK_DARK_BLUE, GenerationAether.SKYROOT_OAK_BLUE,
+						GenerationAether.WISPROOT_GREEN, GenerationAether.WISPROOT_BLUE, GenerationAether.WISPROOT_DARK_BLUE
 				};
 
 		BlueprintDefinition[] chosen = rand.nextBoolean() ? neopolitan : forest;
@@ -151,9 +152,6 @@ public class BiomeHighlands extends BiomeAetherBase
 		{
 			treeDecorations.add(new WorldDecorationSimple(15, new BlueprintWorldGen(chosen.length >= 2 ? chosen[rand.nextInt(chosen.length)] : chosen[0])));
 		}
-
-		treeDecorations.add(new WorldDecorationSimple(4 + rand.nextInt(3),
-				new BlueprintWorldGen(GenerationAether.WISPROOT_TREE)));
 
 		treeDecorations.add(new WorldDecorationSimple(1 + rand.nextInt(3),
 				new TemplateWorldGen(GenerationAether.skyroot_moa_nest_tree_1)));

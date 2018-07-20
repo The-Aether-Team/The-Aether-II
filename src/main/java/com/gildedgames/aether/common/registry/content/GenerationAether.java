@@ -73,8 +73,6 @@ public class GenerationAether
 
 	public static BlueprintDefinition ABAND_ANGEL_STOREROOM_1A;
 
-	public static BlueprintDefinition WISPROOT_TREE_TALL;
-
 	public static BlueprintDefinitionPool ABAND_ANGEL_STOREROOM;
 
 	public static BlueprintDefinition ABAND_ANGEL_WATCHTOWER_1A;
@@ -107,9 +105,9 @@ public class GenerationAether
 
 	public static BlueprintDefinition SKYROOT_OAK_GREEN, SKYROOT_OAK_BLUE, SKYROOT_OAK_DARK_BLUE;
 
-	public static BlueprintDefinitionPool SKYROOT_WATCHTOWER;
+	public static BlueprintDefinition WISPROOT_GREEN, WISPROOT_BLUE, WISPROOT_DARK_BLUE;
 
-	public static BlueprintDefinitionPool WISPROOT_TREE;
+	public static BlueprintDefinitionPool SKYROOT_WATCHTOWER;
 
 	public static BlueprintDefinition WELL_1A;
 
@@ -343,10 +341,6 @@ public class GenerationAether
 						PlacementConditions.replaceable(true, Material.ROCK, Material.GROUND, Material.GRASS, Material.AIR),
 						PlacementConditions.ignoreBlock(11, BlocksAether.quicksoil.getDefaultState()));
 
-		WISPROOT_TREE_TALL = new BlueprintDefinition(BlueprintsAether.WISPROOT_TREE_TALL, 0).setRegistry(registry)
-				.setConditions(PlacementConditions.onSpecificBlock(0, BlocksAether.aether_grass, BlocksAether.aether_dirt), replace,
-						PlacementConditions.ignoreBlock(0, BlocksAether.quicksoil.getDefaultState()));
-
 		GREATROOT_TREE = new BlueprintDefinition(BlueprintsAether.GREATROOT_TREE, 0).setRegistry(registry)
 				.setConditions(PlacementConditions.onSpecificBlock(0, BlocksAether.aether_grass, BlocksAether.aether_dirt), replace,
 						PlacementConditions.ignoreBlock(0, BlocksAether.quicksoil.getDefaultState()));
@@ -367,6 +361,18 @@ public class GenerationAether
 				.setConditions(PlacementConditions.onSpecificBlock(0, BlocksAether.aether_grass, BlocksAether.aether_dirt), replace,
 						PlacementConditions.ignoreBlock(0, BlocksAether.quicksoil.getDefaultState()));
 
+		WISPROOT_GREEN = new BlueprintDefinition(BlueprintsAether.WISPROOT_GREEN, 0).setRegistry(registry)
+				.setConditions(PlacementConditions.onSpecificBlock(0, BlocksAether.aether_grass, BlocksAether.aether_dirt), replace,
+						PlacementConditions.ignoreBlock(0, BlocksAether.quicksoil.getDefaultState()));
+
+		WISPROOT_BLUE = new BlueprintDefinition(BlueprintsAether.WISPROOT_BLUE, 0).setRegistry(registry)
+				.setConditions(PlacementConditions.onSpecificBlock(0, BlocksAether.aether_grass, BlocksAether.aether_dirt), replace,
+						PlacementConditions.ignoreBlock(0, BlocksAether.quicksoil.getDefaultState()));
+
+		WISPROOT_DARK_BLUE = new BlueprintDefinition(BlueprintsAether.WISPROOT_DARK_BLUE, 0).setRegistry(registry)
+				.setConditions(PlacementConditions.onSpecificBlock(0, BlocksAether.aether_grass, BlocksAether.aether_dirt), replace,
+						PlacementConditions.ignoreBlock(0, BlocksAether.quicksoil.getDefaultState()));
+
 		OUTPOST = new BlueprintDefinitionPool(OUTPOST_A, OUTPOST_B);
 		ABAND_ANGEL_STOREROOM = new BlueprintDefinitionPool(ABAND_ANGEL_STOREROOM_1A);
 		ABAND_ANGEL_WATCHTOWER = new BlueprintDefinitionPool(ABAND_ANGEL_WATCHTOWER_1A);
@@ -375,7 +381,6 @@ public class GenerationAether
 		SKYROOT_WATCHTOWER = new BlueprintDefinitionPool(SKYROOT_WATCHTOWER_1A, SKYROOT_WATCHTOWER_1B, SKYROOT_WATCHTOWER_2A, SKYROOT_WATCHTOWER_2B,
 				SKYROOT_WATCHTOWER_3A, SKYROOT_WATCHTOWER_3B);
 		WELL = new BlueprintDefinitionPool(WELL_1A, WELL_1B);
-		WISPROOT_TREE = new BlueprintDefinitionPool(WISPROOT_TREE_TALL);
 
 		registry.register(0, OUTPOST_A);
 		registry.register(1, NECROMANCER_TOWER);
@@ -401,12 +406,14 @@ public class GenerationAether
 		registry.register(14, WELL_1B);
 		registry.register(15, OUTPOST_B);
 
-		registry.register(16, WISPROOT_TREE_TALL);
 		registry.register(17, GREATROOT_TREE);
 		registry.register(18, SKYROOT_OAK_GREEN);
 		registry.register(19, SKYROOT_OAK_BLUE);
 		registry.register(20, SKYROOT_OAK_DARK_BLUE);
 		registry.register(21, AMBEROOT_TREE);
+		registry.register(22, WISPROOT_GREEN);
+		registry.register(23, WISPROOT_BLUE);
+		registry.register(24, WISPROOT_DARK_BLUE);
 
 		reg(0, blue_skyroot_tree_1);
 		reg(1, blue_skyroot_tree_2);

@@ -42,13 +42,13 @@ public class BlueprintsAether
 
 	public static BlueprintData WELL_1B;
 
-	public static BlueprintData WISPROOT_TREE_TALL;
-
 	public static BlueprintData GREATROOT_TREE;
 
 	public static BlueprintData SKYROOT_OAK_GREEN, SKYROOT_OAK_BLUE, SKYROOT_OAK_DARK_BLUE;
 
 	public static BlueprintData AMBEROOT_TREE;
+
+	public static BlueprintData WISPROOT_GREEN, WISPROOT_BLUE, WISPROOT_DARK_BLUE;
 
 	private static IProject project;
 
@@ -93,11 +93,13 @@ public class BlueprintsAether
 		SKYROOT_WATCHTOWER_3B = loadData("skyroot_watchtower_3b");
 		WELL_1A = loadData("well_1a");
 		WELL_1B = loadData("well_1b");
-		WISPROOT_TREE_TALL = loadData("wisproot_tree_tall");
 		GREATROOT_TREE = loadData("greatroot_1");
 		SKYROOT_OAK_GREEN = loadData("trees/skyroot/skyroot_oak_green");
 		SKYROOT_OAK_BLUE = loadData("trees/skyroot/skyroot_oak_blue");
 		SKYROOT_OAK_DARK_BLUE = loadData("trees/skyroot/skyroot_oak_dark_blue");
 		AMBEROOT_TREE = loadData("trees/amberoot/amberoot_tree");
+		WISPROOT_GREEN = loadData("trees/wisproot/wisproot_green");
+		WISPROOT_BLUE = loadData("trees/wisproot/wisproot_blue");
+		WISPROOT_DARK_BLUE = loadData("trees/wisproot/wisproot_dark_blue");
 	}
 }
