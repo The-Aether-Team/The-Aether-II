@@ -25,17 +25,15 @@ public class AetherCore
 
 	public static final String MOD_ID = "aether";
 
-	public static final String MOD_VERSION = "1.12.2-1.0.8";
+	public static final String MOD_VERSION = "1.12.2-1.0.9";
 
-	public static final String MOD_DEPENDENCIES = "required-after:orbis_api@1.12.2-1.1.5";
+	public static final String MOD_DEPENDENCIES = "required-after:orbis_api@1.12.2-1.1.6";
 
 	public static final Logger LOGGER = LogManager.getLogger("AetherII");
 
 	public static final String MOD_GUI_FACTORY = "com.gildedgames.aether.client.gui.GuiFactoryAether";
 
 	public static final String MOD_FINGERPRINT = "db341c083b1b8ce9160a769b569ef6737b3f4cdf";
-
-	private static Set<String> reportedFingerprints;
 
 	@Instance(AetherCore.MOD_ID)
 	public static AetherCore INSTANCE;
@@ -46,6 +44,8 @@ public class AetherCore
 	public static ConfigAether CONFIG;
 
 	public static GAReporter ANALYTICS;
+
+	private static Set<String> reportedFingerprints;
 
 	public static ResourceLocation getResource(final String name)
 	{
@@ -70,6 +70,11 @@ public class AetherCore
 	public static boolean isInsideDevEnvironment()
 	{
 		return Launch.blackboard.get("fml.deobfuscatedEnvironment") == Boolean.TRUE;
+	}
+
+	public static Set<String> getReportedFingerprints()
+	{
+		return reportedFingerprints;
 	}
 
 	@EventHandler
@@ -127,10 +132,5 @@ public class AetherCore
 
 		AetherCore.LOGGER.warn("Heads up! Forge has failed to validate the integrity of the Aether.");
 		AetherCore.LOGGER.warn("The Aether may be packaged unofficially, tampered with, or corrupted. As a result, this build will not receive support.");
-	}
-
-	public static Set<String> getReportedFingerprints()
-	{
-		return reportedFingerprints;
 	}
 }
