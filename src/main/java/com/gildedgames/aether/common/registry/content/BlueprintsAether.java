@@ -59,7 +59,7 @@ public class BlueprintsAether
 
 	private static BlueprintData loadData(String name)
 	{
-		BlueprintData data = project.getCache().getData(project.getCache().getDataId(name.replace("/", "\\") + ".blueprint"));
+		BlueprintData data = project.getCache().getData(project.getCache().getDataId(name + ".blueprint"));
 
 		if (data == null)
 		{
