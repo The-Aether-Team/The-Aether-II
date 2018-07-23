@@ -13,9 +13,6 @@ import net.minecraftforge.fml.common.event.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @Mod(name = AetherCore.MOD_NAME, modid = AetherCore.MOD_ID, version = AetherCore.MOD_VERSION,
 		certificateFingerprint = AetherCore.MOD_FINGERPRINT, guiFactory = AetherCore.MOD_GUI_FACTORY,
 		dependencies = AetherCore.MOD_DEPENDENCIES)
@@ -45,7 +42,7 @@ public class AetherCore
 
 	public static GAReporter ANALYTICS;
 
-	private static Set<String> reportedFingerprints;
+	public static boolean IS_SIGNED = true;
 
 	public static ResourceLocation getResource(final String name)
 	{
@@ -70,16 +67,6 @@ public class AetherCore
 	public static boolean isInsideDevEnvironment()
 	{
 		return Launch.blackboard.get("fml.deobfuscatedEnvironment") == Boolean.TRUE;
-	}
-
-	public static Set<String> getReportedFingerprints()
-	{
-		return reportedFingerprints;
-	}
-
-	public static boolean isSigned()
-	{
-		return AetherCore.getReportedFingerprints().contains(AetherCore.MOD_FINGERPRINT);
 	}
 
 	@EventHandler
@@ -123,12 +110,7 @@ public class AetherCore
 	@EventHandler
 	public void onFingerprintViolation(final FMLFingerprintViolationEvent event)
 	{
-		AetherCore.reportedFingerprints = event.getFingerprints();
-
-		if (AetherCore.reportedFingerprints == null)
-		{
-			AetherCore.reportedFingerprints = new HashSet<>();
-		}
+		AetherCore.IS_SIGNED = false;
 
 		if (AetherCore.isInsideDevEnvironment())
 		{

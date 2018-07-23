@@ -252,8 +252,7 @@ public class ClientEventHandler
 	@SubscribeEvent
 	public static void onOpenGui(final GuiOpenEvent event)
 	{
-		if (!AetherCore.isInsideDevEnvironment() && !AetherCore.CONFIG.hasAckFingerprintViolation() && event.getGui() instanceof GuiMainMenu && !AetherCore
-				.isSigned())
+		if (event.getGui() instanceof GuiMainMenu && !AetherCore.IS_SIGNED && !AetherCore.isInsideDevEnvironment() && !AetherCore.CONFIG.hasAckFingerprintViolation())
 		{
 			event.setGui(new GuiAetherUnsigned(event.getGui()));
 
