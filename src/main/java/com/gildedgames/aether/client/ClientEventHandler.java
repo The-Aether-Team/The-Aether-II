@@ -252,7 +252,8 @@ public class ClientEventHandler
 	@SubscribeEvent
 	public static void onOpenGui(final GuiOpenEvent event)
 	{
-		if (!AetherCore.isInsideDevEnvironment() && !AetherCore.CONFIG.hasAckFingerprintViolation() && event.getGui() instanceof GuiMainMenu)
+		if (!AetherCore.isInsideDevEnvironment() && !AetherCore.CONFIG.hasAckFingerprintViolation() && event.getGui() instanceof GuiMainMenu && !AetherCore
+				.isSigned())
 		{
 			event.setGui(new GuiAetherUnsigned(event.getGui()));
 
@@ -352,7 +353,7 @@ public class ClientEventHandler
 				//GlStateManager.disableDepth();
 			}
 
-			LOADING.drawScreen((int) InputHelper.getMouseX(), (int) InputHelper.getMouseY(), PartialTicks.get());
+			LOADING.drawScreen(InputHelper.getMouseX(), InputHelper.getMouseY(), PartialTicks.get());
 
 			if (!DRAWING_BLACK_FADE_OUT)
 			{

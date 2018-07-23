@@ -77,6 +77,11 @@ public class AetherCore
 		return reportedFingerprints;
 	}
 
+	public static boolean isSigned()
+	{
+		return AetherCore.getReportedFingerprints().contains(AetherCore.MOD_FINGERPRINT);
+	}
+
 	@EventHandler
 	public void onModConstruction(final FMLConstructionEvent event)
 	{
