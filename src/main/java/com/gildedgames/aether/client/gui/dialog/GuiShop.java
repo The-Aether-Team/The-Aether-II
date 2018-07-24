@@ -682,6 +682,8 @@ public class GuiShop extends GuiFrame implements ICurrencyListener, IExtendedGui
 		this.playerCoins.setCurrencyValue(newCurrency);
 
 		this.giltBag.dim().mod().x(this.playerCoins.dim().x() + (this.playerCoins.dim().width() / 2) - 1).flush();
+
+		this.addBuyCount(0);
 	}
 
 	@Override
