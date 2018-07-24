@@ -218,6 +218,11 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 	{
 		if (this.getWorld().isRemote)
 		{
+			if (!this.sceneInstance.conditionsMet.containsKey(button.getLabel()))
+			{
+				return false;
+			}
+
 			return this.sceneInstance.conditionsMet.get(button.getLabel());
 		}
 
@@ -380,7 +385,7 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 			{
 				this.conditionsMet = conditionsMet;
 			}
-			
+
 			this.controller = controller;
 			this.scene = scene;
 
