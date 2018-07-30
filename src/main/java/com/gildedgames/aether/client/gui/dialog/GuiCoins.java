@@ -3,9 +3,9 @@ package com.gildedgames.aether.client.gui.dialog;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerCurrencyModule;
 import com.gildedgames.orbis_api.client.gui.data.Text;
-import com.gildedgames.orbis_api.client.gui.util.GuiFrame;
 import com.gildedgames.orbis_api.client.gui.util.GuiText;
 import com.gildedgames.orbis_api.client.gui.util.GuiTexture;
+import com.gildedgames.orbis_api.client.gui.util.gui_library.GuiElement;
 import com.gildedgames.orbis_api.client.rect.Dim2D;
 import com.gildedgames.orbis_api.client.rect.Pos2D;
 import com.gildedgames.orbis_api.client.rect.Rect;
@@ -13,7 +13,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 
-public class GuiCoins extends GuiFrame
+public class GuiCoins extends GuiElement
 {
 
 	private static final ResourceLocation GILT = AetherCore.getResource("textures/gui/shop/gilt.png");
@@ -30,7 +30,7 @@ public class GuiCoins extends GuiFrame
 
 	public GuiCoins(Rect rect, boolean shouldDisplayAlways)
 	{
-		super(null, rect);
+		super(rect, true);
 
 		this.dim().mod().width(51).height(19).flush();
 
@@ -63,31 +63,31 @@ public class GuiCoins extends GuiFrame
 		this.giltaen.setCount(giltaen);
 		this.giltaeni.setCount(giltaeni);
 
-		this.giltaeni.setVisible(giltaeni > 0 || this.shouldDisplayAlways);
-		this.giltaen.setVisible(giltaen > 0 || this.shouldDisplayAlways);
-		this.giltae.setVisible(giltae > 0 || this.shouldDisplayAlways);
-		this.gilt.setVisible(gilt > 0 || this.shouldDisplayAlways);
+		this.giltaeni.state().setVisible(giltaeni > 0 || this.shouldDisplayAlways);
+		this.giltaen.state().setVisible(giltaen > 0 || this.shouldDisplayAlways);
+		this.giltae.state().setVisible(giltae > 0 || this.shouldDisplayAlways);
+		this.gilt.state().setVisible(gilt > 0 || this.shouldDisplayAlways);
 
 		Coin[] coins = new Coin[4];
 
 		int index = 0;
 
-		if (this.giltaeni.isVisible())
+		if (this.giltaeni.state().isVisible())
 		{
 			coins[index++] = this.giltaeni;
 		}
 
-		if (this.giltaen.isVisible())
+		if (this.giltaen.state().isVisible())
 		{
 			coins[index++] = this.giltaen;
 		}
 
-		if (this.giltae.isVisible())
+		if (this.giltae.state().isVisible())
 		{
 			coins[index++] = this.giltae;
 		}
 
-		if (this.gilt.isVisible())
+		if (this.gilt.state().isVisible())
 		{
 			coins[index++] = this.gilt;
 		}
@@ -127,7 +127,7 @@ public class GuiCoins extends GuiFrame
 	}
 
 	@Override
-	public void init()
+	public void build()
 	{
 		this.gilt = new Coin(Dim2D.build().width(7).height(7).addX(0).addY(0).flush(), GILT);
 		this.giltae = new Coin(Dim2D.build().width(7).height(7).addX(27).addY(0).flush(), GILTAE);
@@ -135,16 +135,10 @@ public class GuiCoins extends GuiFrame
 		this.giltaeni = new Coin(Dim2D.build().width(7).height(7).addX(27).addY(15).flush(),
 				GILTAENI);
 
-		this.addChildren(this.gilt, this.giltae, this.giltaen, this.giltaeni);
+		this.context().addChildren(this.gilt, this.giltae, this.giltaen, this.giltaeni);
 	}
 
-	@Override
-	public void draw()
-	{
-		//Gui.drawRect((int) this.dim().x(), (int) this.dim().y(), (int) this.dim().maxX(), (int) this.dim().maxY(), Integer.MAX_VALUE);
-	}
-
-	private static class Coin extends GuiFrame
+	private static class Coin extends GuiElement
 	{
 		private GuiTexture icon;
 
@@ -154,7 +148,7 @@ public class GuiCoins extends GuiFrame
 
 		public Coin(Rect rect, ResourceLocation icon)
 		{
-			super(null, rect);
+			super(rect, false);
 
 			this.iconResource = icon;
 		}
@@ -166,23 +160,17 @@ public class GuiCoins extends GuiFrame
 			this.count.setText(
 					new Text(new TextComponentString(text), 1.0F));
 
-			this.dim().mod().width(9 + (this.fontRenderer.getStringWidth(text))).height(8).flush();
+			this.dim().mod().width(9 + (this.viewer().fontRenderer().getStringWidth(text))).height(8).flush();
 		}
 
 		@Override
-		public void init()
+		public void build()
 		{
 			this.icon = new GuiTexture(Dim2D.build().width(7).height(7).addX(0).addY(0).flush(), this.iconResource);
 			this.count = new GuiText(Dim2D.build().addX(9).addY(0).flush(),
 					new Text(new TextComponentString(String.valueOf(0)), 1.0F));
 
-			this.addChildren(this.icon, this.count);
-		}
-
-		@Override
-		public void draw()
-		{
-			//Gui.drawRect((int) this.dim().x(), (int) this.dim().y(), (int) this.dim().maxX(), (int) this.dim().maxY(), Integer.MAX_VALUE);
+			this.context().addChildren(this.icon, this.count);
 		}
 	}
 

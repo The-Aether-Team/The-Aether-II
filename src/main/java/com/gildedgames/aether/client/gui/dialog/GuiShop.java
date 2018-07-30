@@ -19,8 +19,10 @@ import com.gildedgames.aether.common.network.packets.PacketShopSell;
 import com.gildedgames.aether.common.util.helpers.ItemHelper;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
 import com.gildedgames.orbis_api.client.gui.util.GuiAbstractButton;
-import com.gildedgames.orbis_api.client.gui.util.GuiFrame;
 import com.gildedgames.orbis_api.client.gui.util.GuiTexture;
+import com.gildedgames.orbis_api.client.gui.util.gui_library.GuiElement;
+import com.gildedgames.orbis_api.client.gui.util.gui_library.GuiViewer;
+import com.gildedgames.orbis_api.client.gui.util.gui_library.IGuiContext;
 import com.gildedgames.orbis_api.client.gui.util.vanilla.GuiButtonVanilla;
 import com.gildedgames.orbis_api.client.rect.Dim2D;
 import com.gildedgames.orbis_api.client.rect.Pos2D;
@@ -44,7 +46,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
-public class GuiShop extends GuiFrame implements ICurrencyListener, IExtendedGui
+public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGui
 {
 	private static final ResourceLocation INVENTORY = AetherCore.getResource("textures/gui/shop/inventory.png");
 
@@ -112,9 +114,9 @@ public class GuiShop extends GuiFrame implements ICurrencyListener, IExtendedGui
 
 	private List<String> hoverDescription;
 
-	public GuiShop(GuiFrame prevFrame, EntityPlayer player, IDialogSlide slide, IDialogSlideRenderer renderer, IShopInstance shopInstance)
+	public GuiShop(GuiViewer prevViewer, EntityPlayer player, IDialogSlide slide, IDialogSlideRenderer renderer, IShopInstance shopInstance)
 	{
-		super(prevFrame, Dim2D.flush(), new ContainerShop(player.inventory, shopInstance));
+		super(new GuiElement(Dim2D.flush(), false), prevViewer, new ContainerShop(player.inventory, shopInstance));
 
 		this.container = (ContainerShop) this.inventorySlots;
 
@@ -153,20 +155,20 @@ public class GuiShop extends GuiFrame implements ICurrencyListener, IExtendedGui
 	}
 
 	@Override
-	public void init()
+	public void build(IGuiContext context)
 	{
-		this.dim().mod().width(300).height(300).flush();
+		this.getViewing().dim().mod().width(300).height(300).flush();
 
 		Pos2D center = InputHelper.getCenter().clone().addX(17).flush();
 
 		this.sellCoins = new GuiCoins(Dim2D.build().center(true).pos(center).y(this.height).addX(23).addY(-197).flush(), false);
-		this.sellCoins.setVisible(false);
+		this.sellCoins.state().setVisible(false);
 
 		this.buyCoins = new GuiCoins(Dim2D.build().center(true).pos(center).y(this.height).addX(-167).addY(-157).flush(), false);
-		this.buyCoins.setVisible(false);
+		this.buyCoins.state().setVisible(false);
 
 		this.playerCoins = new GuiCoins(Dim2D.build().centerY(true).pos(center).y(this.height).addX(168).addY(-113).flush(), true);
-		this.playerCoins.setVisible(true);
+		this.playerCoins.state().setVisible(true);
 
 		GuiTexture inventory = new GuiTexture(Dim2D.build().center(true).width(176).height(120).pos(center).y(this.height).addX(75).addY(-157F).flush(),
 				INVENTORY);
@@ -177,19 +179,19 @@ public class GuiShop extends GuiFrame implements ICurrencyListener, IExtendedGui
 		this.sell.getInner().displayString = I18n.format("aether.shop.sell");
 		this.sell.getInner().enabled = false;
 
-		this.addChildren(stock, inventory, this.sell);
+		context.addChildren(stock, inventory, this.sell);
 
 		this.stackGui = new GuiItemStack(Dim2D.build().pos(center).y(this.height).addX(-132).addY(-166).scale(1.0F).flush());
 		this.buy = new GuiButtonVanilla(Dim2D.build().width(44).height(20).pos(center).y(this.height).addX(-106).addY(-167).flush());
 
 		this.buy.getInner().displayString = I18n.format("aether.shop.buy", isCountLocked ? buyCount : this.buyCountUnlocked);
-		this.buy.setEnabled(false);
+		this.buy.state().setEnabled(false);
 
 		this.back = new GuiButtonVanilla(Dim2D.build().width(20).height(20).pos(center).y(this.height).addX(-236).addY(-125).flush());
 
 		this.back.getInner().displayString = "<";
 
-		this.addChildren(this.stackGui, this.buy, this.back);
+		context.addChildren(this.stackGui, this.buy, this.back);
 
 		int baseBoxSize = 350;
 		final boolean resize = this.width - 40 > baseBoxSize;
@@ -221,7 +223,7 @@ public class GuiShop extends GuiFrame implements ICurrencyListener, IExtendedGui
 					this.shopInstance);
 			this.buys.add(gui);
 
-			this.addChildren(gui);
+			context.addChildren(gui);
 		}
 
 		this.upArrow = new GuiAbstractButton(Dim2D.build().width(15).height(10).pos(center).y(this.height).addX(-49).addY(-167).flush(),
@@ -239,17 +241,17 @@ public class GuiShop extends GuiFrame implements ICurrencyListener, IExtendedGui
 		this.lock = new GuiTexture(Dim2D.build().center(true).height(16).width(16).pos(center).y(this.height).addX(-65 + 9).addY(-167 + 10).flush(), LOCK);
 		this.unlock = new GuiTexture(Dim2D.build().center(true).height(16).width(16).pos(center).y(this.height).addX(-65 + 9).addY(-167 + 10).flush(), UNLOCK);
 
-		this.addChildren(this.playerCoins);
+		context.addChildren(this.playerCoins);
 
 		this.playerCoins.setCurrencyValue(this.playerAether.getCurrencyModule().getCurrencyValue());
 
 		this.giltBag = new GuiTexture(
 				Dim2D.build().center(true).height(16).width(16).pos(center).y(this.height)
-						.x(this.playerCoins.dim().x() + (this.playerCoins.dim().width() / 2) - 1)
+						.x(this.playerCoins.state().dim().x() + (this.playerCoins.state().dim().width() / 2) - 1)
 						.addY(-138).scale(1.5F).flush(),
 				GILT_BAG);
 
-		this.addChildren(this.upArrow, this.downArrow, this.sellCoins, this.buyCoins, this.lockButton, this.lock, this.unlock, this.giltBag);
+		context.addChildren(this.upArrow, this.downArrow, this.sellCoins, this.buyCoins, this.lockButton, this.lock, this.unlock, this.giltBag);
 	}
 
 	public void addBuyCount(int buyCount)
@@ -277,7 +279,7 @@ public class GuiShop extends GuiFrame implements ICurrencyListener, IExtendedGui
 				int value = this.getSelectedBuy().getPrice() * count;
 
 				this.buyCoins.setCurrencyValue(value);
-				this.buyCoins.setVisible(true);
+				this.buyCoins.state().setVisible(true);
 			}
 		}
 		else
@@ -302,7 +304,7 @@ public class GuiShop extends GuiFrame implements ICurrencyListener, IExtendedGui
 				int value = this.getSelectedBuy().getPrice() * this.buyCountUnlocked;
 
 				this.buyCoins.setCurrencyValue(value);
-				this.buyCoins.setVisible(true);
+				this.buyCoins.state().setVisible(true);
 			}
 		}
 	}
@@ -317,8 +319,8 @@ public class GuiShop extends GuiFrame implements ICurrencyListener, IExtendedGui
 
 		this.stackGui.setDrawCount(isCountLocked);
 
-		this.lock.setVisible(isCountLocked);
-		this.unlock.setVisible(!isCountLocked);
+		this.lock.state().setVisible(isCountLocked);
+		this.unlock.state().setVisible(!isCountLocked);
 
 		if ((this.upArrowHeld || this.downArrowHeld) && !this.pressLongEnough && System.currentTimeMillis() - this.lastBuyCountChangeTime >= 300L)
 		{
@@ -424,8 +426,8 @@ public class GuiShop extends GuiFrame implements ICurrencyListener, IExtendedGui
 			this.lastSellStack = stack;
 			this.lastSellStackCount = stack.getCount();
 
-			this.sell.setEnabled(value >= 1);
-			this.sellCoins.setVisible(true);
+			this.sell.state().setEnabled(value >= 1);
+			this.sellCoins.state().setVisible(true);
 		}
 
 		if (this.getSelectedBuy() != null)
@@ -444,7 +446,8 @@ public class GuiShop extends GuiFrame implements ICurrencyListener, IExtendedGui
 			boolean isAtStackLimit = this.mc.player.inventory.getItemStack().getCount() >= this.mc.player.inventory.getItemStack().getMaxStackSize();
 			boolean hasStock = this.getSelectedBuy().getStock() > 0 && amount > 0;
 
-			this.buy.setEnabled(hasStock && !isAtStackLimit && canStack && canAfford && (isHandFree || isBuyItem) && this.getSelectedBuy().getStock() > 0);
+			this.buy.state()
+					.setEnabled(hasStock && !isAtStackLimit && canStack && canAfford && (isHandFree || isBuyItem) && this.getSelectedBuy().getStock() > 0);
 		}
 		else
 		{
@@ -475,7 +478,7 @@ public class GuiShop extends GuiFrame implements ICurrencyListener, IExtendedGui
 			int value = this.getSelectedBuy().getPrice() * count;
 
 			this.buyCoins.setCurrencyValue(value);
-			this.buyCoins.setVisible(true);
+			this.buyCoins.state().setVisible(true);
 		}
 
 		if (buyCount != prevBuyCount && isCountLocked)
@@ -543,7 +546,7 @@ public class GuiShop extends GuiFrame implements ICurrencyListener, IExtendedGui
 					int value = this.getSelectedBuy().getPrice() * count;
 
 					this.buyCoins.setCurrencyValue(value);
-					this.buyCoins.setVisible(true);
+					this.buyCoins.state().setVisible(true);
 				}
 
 				this.addBuyCount(0);
@@ -562,7 +565,7 @@ public class GuiShop extends GuiFrame implements ICurrencyListener, IExtendedGui
 					int value = this.getSelectedBuy().getPrice() * this.buyCountUnlocked;
 
 					this.buyCoins.setCurrencyValue(value);
-					this.buyCoins.setVisible(true);
+					this.buyCoins.state().setVisible(true);
 				}
 			}
 		}
@@ -596,7 +599,7 @@ public class GuiShop extends GuiFrame implements ICurrencyListener, IExtendedGui
 			NetworkingAether.sendPacketToServer(new PacketShopBack());
 		}
 
-		if (InputHelper.isHovered(this.buy) && this.buy.isEnabled())
+		if (InputHelper.isHovered(this.buy) && this.buy.state().isEnabled())
 		{
 			int index = 0;
 
@@ -640,7 +643,7 @@ public class GuiShop extends GuiFrame implements ICurrencyListener, IExtendedGui
 			this.addBuyCount(0);
 		}
 
-		if (InputHelper.isHovered(this.sell) && this.sell.isEnabled())
+		if (InputHelper.isHovered(this.sell) && this.sell.state().isEnabled())
 		{
 			ItemStack stack = this.container.getSlot(0).getStack();
 			double singleValue = AetherAPI.content().currency().getSingleValue(stack);

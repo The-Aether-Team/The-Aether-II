@@ -1,7 +1,7 @@
 package com.gildedgames.aether.client.gui.util;
 
 import com.gildedgames.aether.client.gui.IExtendedGui;
-import com.gildedgames.orbis_api.client.gui.util.GuiFrame;
+import com.gildedgames.orbis_api.client.gui.util.gui_library.GuiElement;
 import com.gildedgames.orbis_api.client.rect.Rect;
 import com.gildedgames.orbis_api.util.InputHelper;
 import net.minecraft.client.Minecraft;
@@ -14,7 +14,7 @@ import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 
-public class GuiItemStack extends GuiFrame
+public class GuiItemStack extends GuiElement
 {
 	private ItemStack stack;
 
@@ -22,7 +22,7 @@ public class GuiItemStack extends GuiFrame
 
 	public GuiItemStack(Rect rect)
 	{
-		super(null, rect);
+		super(rect, true);
 
 		this.dim().mod().width(18).height(18).flush();
 	}
@@ -43,13 +43,7 @@ public class GuiItemStack extends GuiFrame
 	}
 
 	@Override
-	public void init()
-	{
-
-	}
-
-	@Override
-	public void draw()
+	public void onDraw(GuiElement element)
 	{
 		if (this.stack == null || this.stack == ItemStack.EMPTY)
 		{
@@ -74,12 +68,12 @@ public class GuiItemStack extends GuiFrame
 
 		if (font == null)
 		{
-			font = this.fontRenderer;
+			font = this.viewer().fontRenderer();
 		}
 
-		RenderItem renderitem = this.mc.getRenderItem();
+		RenderItem renderitem = this.viewer().mc().getRenderItem();
 		renderitem.zLevel = 200.0F;
-		renderitem.renderItemAndEffectIntoGUI(this.mc.player, this.stack, (int) this.dim().x() + 1, (int) this.dim().y() + 1);
+		renderitem.renderItemAndEffectIntoGUI(this.viewer().mc().player, this.stack, (int) this.dim().x() + 1, (int) this.dim().y() + 1);
 
 		RenderHelper.disableStandardItemLighting();
 
@@ -89,7 +83,7 @@ public class GuiItemStack extends GuiFrame
 		{
 			int xOffset = (Math.max(String.valueOf(this.stack.getCount()).length() - 1, 0)) * -6;
 
-			this.drawString(font, String.valueOf(this.stack.getCount()), (int) this.dim().x() + 12 + xOffset,
+			this.viewer().getActualScreen().drawString(font, String.valueOf(this.stack.getCount()), (int) this.dim().x() + 12 + xOffset,
 					(int) this.dim().y() + (int) this.dim().height() + -8,
 					0xFFFFFF);
 		}

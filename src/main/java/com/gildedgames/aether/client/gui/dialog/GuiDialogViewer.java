@@ -4,7 +4,9 @@ import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.dialog.*;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.containers.ContainerDialogController;
-import com.gildedgames.orbis_api.client.gui.util.GuiFrame;
+import com.gildedgames.orbis_api.client.gui.util.gui_library.GuiElement;
+import com.gildedgames.orbis_api.client.gui.util.gui_library.GuiViewer;
+import com.gildedgames.orbis_api.client.gui.util.gui_library.IGuiContext;
 import com.gildedgames.orbis_api.client.rect.Dim2D;
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
@@ -27,7 +29,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Map;
 
-public class GuiDialogViewer extends GuiFrame implements IDialogChangeListener
+public class GuiDialogViewer extends GuiViewer implements IDialogChangeListener
 {
 
 	private static final ResourceLocation NEXT_ARROW = AetherCore.getResource("textures/gui/conversation/next_arrow.png");
@@ -56,7 +58,7 @@ public class GuiDialogViewer extends GuiFrame implements IDialogChangeListener
 
 	public GuiDialogViewer(final EntityPlayer player, final IDialogController controller)
 	{
-		super(null, Dim2D.flush(), new ContainerDialogController(player));
+		super(new GuiElement(Dim2D.flush(), false), null, new ContainerDialogController(player));
 
 		this.controller = controller;
 		this.controller.addListener(this);
@@ -377,9 +379,9 @@ public class GuiDialogViewer extends GuiFrame implements IDialogChangeListener
 	}
 
 	@Override
-	public void init()
+	public void build(IGuiContext context)
 	{
-		this.dim().mod().width(this.width).height(this.height).flush();
+		this.getViewing().dim().mod().width(this.width).height(this.height).flush();
 	}
 
 	private void refreshButtonsWithScroll()

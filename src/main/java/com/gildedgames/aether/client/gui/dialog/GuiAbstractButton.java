@@ -4,12 +4,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 
-public abstract class GuiElement extends GuiButton
+public abstract class GuiAbstractButton extends GuiButton
 {
 
 	protected boolean hasInit;
 
-	public GuiElement(final int elementId, final int x, final int y)
+	public GuiAbstractButton(final int elementId, final int x, final int y)
 	{
 		super(elementId, x, y, "");
 	}

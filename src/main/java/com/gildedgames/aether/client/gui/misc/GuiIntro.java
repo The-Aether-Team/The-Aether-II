@@ -9,10 +9,12 @@ import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketCancelIntro;
 import com.gildedgames.aether.common.network.packets.PacketSetPlayedIntro;
 import com.gildedgames.orbis_api.client.gui.data.Text;
-import com.gildedgames.orbis_api.client.gui.util.GuiFrameNoContainer;
 import com.gildedgames.orbis_api.client.gui.util.GuiText;
 import com.gildedgames.orbis_api.client.gui.util.GuiTextBox;
 import com.gildedgames.orbis_api.client.gui.util.GuiTexture;
+import com.gildedgames.orbis_api.client.gui.util.gui_library.GuiElement;
+import com.gildedgames.orbis_api.client.gui.util.gui_library.GuiViewerNoContainer;
+import com.gildedgames.orbis_api.client.gui.util.gui_library.IGuiContext;
 import com.gildedgames.orbis_api.client.gui.util.vanilla.GuiButtonVanilla;
 import com.gildedgames.orbis_api.client.rect.Dim2D;
 import com.gildedgames.orbis_api.client.rect.Pos2D;
@@ -28,7 +30,7 @@ import org.lwjgl.opengl.GL11;
 
 import java.io.IOException;
 
-public class GuiIntro extends GuiFrameNoContainer
+public class GuiIntro extends GuiViewerNoContainer
 {
 	private static final ResourceLocation GILDED_GAMES = AetherCore.getResource("textures/gui/intro/gg_logo.png");
 
@@ -56,7 +58,7 @@ public class GuiIntro extends GuiFrameNoContainer
 
 	public GuiIntro()
 	{
-
+		super(new GuiElement(Dim2D.flush(), false));
 	}
 
 	private double getSecondsSinceStopSkip()
@@ -83,9 +85,9 @@ public class GuiIntro extends GuiFrameNoContainer
 	}
 
 	@Override
-	public void init()
+	public void build(IGuiContext context)
 	{
-		this.dim().mod().width(this.width).height(this.height).flush();
+		this.getViewing().dim().mod().width(this.width).height(this.height).flush();
 
 		final Pos2D center = InputHelper.getCenter();
 
@@ -98,7 +100,9 @@ public class GuiIntro extends GuiFrameNoContainer
 		this.holdToSkip = new GuiText(Dim2D.build().pos(this.width - 65, this.height - 17).flush(),
 				new Text(new TextComponentTranslation("intro.holdToSkip"), 1.0F));
 
-		this.holdToSkip.setVisible(false);
+		this.holdToSkip.build(this);
+
+		this.holdToSkip.state().setVisible(false);
 
 		this.prologue = new GuiTextBox(Dim2D.build().center(true).pos(center).width(300).addY(30).flush(), false,
 				new Text(new TextComponentTranslation(
@@ -125,7 +129,9 @@ public class GuiIntro extends GuiFrameNoContainer
 						"intro.tip4"),
 						1.0F));
 
-		this.ggLogo.setVisible(false);
+		this.ggLogo.build(this);
+
+		this.ggLogo.state().setVisible(false);
 
 		this.nextArrow = new GuiNextArrow();
 
@@ -133,32 +139,36 @@ public class GuiIntro extends GuiFrameNoContainer
 
 		this.proudlyPresents.dim().mod().addX(3).flush();
 
-		this.proudlyPresents.setVisible(false);
-		this.prologue.setVisible(false);
-		this.highlands.setVisible(false);
-
-		this.nextArrow.setVisible(false);
-		this.tip1.setVisible(false);
-		this.tip2.setVisible(false);
-		this.tip3.setVisible(false);
-		this.tip4.setVisible(false);
-
 		this.yes = new GuiButtonVanilla(Dim2D.build().width(80).height(20).center(true).pos(center).addX(5).flush());
 		this.no = new GuiButtonVanilla(Dim2D.build().width(80).height(20).center(true).pos(center).addX(95).flush());
 
 		this.yes.getInner().displayString = I18n.format("intro.yes");
 		this.no.getInner().displayString = I18n.format("intro.no");
 
-		this.yes.setVisible(false);
-		this.no.setVisible(false);
-
-		this.addChildren(this.ggLogo, this.proudlyPresents, this.highlands, this.prologue, this.tip1, this.tip2, this.tip3, this.tip4, this.nextArrow,
+		context.addChildren(this.ggLogo, this.proudlyPresents, this.highlands, this.prologue, this.tip1, this.tip2, this.tip3, this.tip4, this.nextArrow,
 				this.holdToSkip, this.yes, this.no);
+
+		this.proudlyPresents.state().setVisible(false);
+		this.prologue.state().setVisible(false);
+		this.highlands.state().setVisible(false);
+
+		this.nextArrow.state().setVisible(false);
+		this.tip1.state().setVisible(false);
+		this.tip2.state().setVisible(false);
+		this.tip3.state().setVisible(false);
+		this.tip4.state().setVisible(false);
+
+		this.yes.state().setVisible(false);
+		this.no.state().setVisible(false);
 	}
 
 	@Override
-	public void draw()
+	public void drawScreen(int mouseX, int mouseY, float partialTicks)
 	{
+		final int bg = 0xFF000000;
+
+		this.drawGradientRect(0, 0, this.width, this.height, bg, bg);
+
 		preventInnerTyping();
 
 		if (this.startIntro && this.holding && !Keyboard.isKeyDown(this.keyHeld) && this.keyHeld != Keyboard.KEY_NONE)
@@ -168,21 +178,19 @@ public class GuiIntro extends GuiFrameNoContainer
 			this.keyHeld = Keyboard.KEY_NONE;
 		}
 
-		final int bg = 0xFF000000;
-
-		this.drawGradientRect(0, 0, this.width, this.height, bg, bg);
-
 		if (!this.startIntro)
 		{
-			this.tip1.setVisible(this.tipIndex == 0);
-			this.tip2.setVisible(this.tipIndex == 1);
-			this.tip3.setVisible(this.tipIndex == 2);
-			this.tip4.setVisible(this.tipIndex == 3);
+			this.tip1.state().setVisible(this.tipIndex == 0);
+			this.tip2.state().setVisible(this.tipIndex == 1);
+			this.tip3.state().setVisible(this.tipIndex == 2);
+			this.tip4.state().setVisible(this.tipIndex == 3);
 
-			this.nextArrow.setVisible(this.tipIndex != 3);
+			this.nextArrow.state().setVisible(this.tipIndex != 3);
 
-			this.yes.setVisible(this.tipIndex == 3);
-			this.no.setVisible(this.tipIndex == 3);
+			this.yes.state().setVisible(this.tipIndex == 3);
+			this.no.state().setVisible(this.tipIndex == 3);
+
+			super.drawScreen(mouseX, mouseY, partialTicks);
 
 			return;
 		}
@@ -193,16 +201,16 @@ public class GuiIntro extends GuiFrameNoContainer
 
 			if (this.holding)
 			{
-				this.holdToSkip.setAlpha(alpha);
+				this.holdToSkip.state().setAlpha(alpha);
 			}
 			else
 			{
 				final float combined = (float) Math.max(0.0F, alpha - this.getSecondsSinceStopSkip());
 
-				this.holdToSkip.setAlpha(combined);
+				this.holdToSkip.state().setAlpha(combined);
 			}
 
-			this.holdToSkip.setVisible(true);
+			this.holdToSkip.state().setVisible(true);
 
 			if (this.holding && this.getSecondsSinceHoldSkip() >= 2.5)
 			{
@@ -224,40 +232,40 @@ public class GuiIntro extends GuiFrameNoContainer
 		{
 			final float fade = Math.min(1.0F, (float) ((this.getSecondsSinceStart()) / 15.0D));
 
-			this.ggLogo.setAlpha(fade);
-			this.ggLogo.setVisible(true);
+			this.ggLogo.state().setAlpha(fade);
+			this.ggLogo.state().setVisible(true);
 
 			if (this.getSecondsSinceStart() >= 10)
 			{
-				this.proudlyPresents.setAlpha(Math.min(1.0F, Math.max(0.0F, (float) ((this.getSecondsSinceStart() - 10) / 5.0D))));
+				this.proudlyPresents.state().setAlpha(Math.min(1.0F, Math.max(0.0F, (float) ((this.getSecondsSinceStart() - 10) / 5.0D))));
 
-				this.proudlyPresents.setVisible(true);
+				this.proudlyPresents.state().setVisible(true);
 			}
 			else
 			{
-				this.proudlyPresents.setVisible(false);
+				this.proudlyPresents.state().setVisible(false);
 			}
 		}
 		else if (this.getSecondsSinceStart() <= 20)
 		{
 			final float fade = Math.max(0.0F, 1.0F - Math.min(1.0F, (float) ((this.getSecondsSinceStart() - 15) / 5.0D)));
 
-			this.ggLogo.setAlpha(fade);
-			this.proudlyPresents.setAlpha(fade);
+			this.ggLogo.state().setAlpha(fade);
+			this.proudlyPresents.state().setAlpha(fade);
 		}
 		else
 		{
-			this.ggLogo.setVisible(false);
-			this.proudlyPresents.setVisible(false);
+			this.ggLogo.state().setVisible(false);
+			this.proudlyPresents.state().setVisible(false);
 		}
 
 		if (this.getSecondsSinceStart() >= 20 && this.getSecondsSinceStart() < 30)
 		{
 			final float alpha = (float) Math.min(1.0F, (this.getSecondsSinceStart() - 20) / 10.0D);
 
-			this.highlands.setAlpha(alpha);
+			this.highlands.state().setAlpha(alpha);
 
-			this.highlands.setVisible(true);
+			this.highlands.state().setVisible(true);
 		}
 
 		if (this.getSecondsSinceStart() >= 30)
@@ -275,11 +283,11 @@ public class GuiIntro extends GuiFrameNoContainer
 			{
 				pAlpha = alpha = Math.min(1.0F, 1.0F - (float) ((this.getSecondsSinceStart() - 42.5D) / 10.0D));
 
-				this.highlands.setAlpha(alpha);
+				this.highlands.state().setAlpha(alpha);
 			}
 
-			this.prologue.setAlpha(pAlpha);
-			this.prologue.setVisible(true);
+			this.prologue.state().setAlpha(pAlpha);
+			this.prologue.state().setVisible(true);
 
 			GlStateManager.enableBlend();
 			GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -320,6 +328,8 @@ public class GuiIntro extends GuiFrameNoContainer
 			AetherMusicManager.INSTANCE.playMusic(new SoundEvent(AetherCore.getResource("music.intro")));
 			this.playedMusic = true;
 		}
+
+		super.drawScreen(mouseX, mouseY, partialTicks);
 	}
 
 	@Override
@@ -361,10 +371,10 @@ public class GuiIntro extends GuiFrameNoContainer
 
 		if (this.tipIndex >= 3)
 		{
-			this.nextArrow.setVisible(false);
-			this.tip4.setVisible(false);
-			this.yes.setVisible(false);
-			this.no.setVisible(false);
+			this.nextArrow.state().setVisible(false);
+			this.tip4.state().setVisible(false);
+			this.yes.state().setVisible(false);
+			this.no.state().setVisible(false);
 
 			this.startIntro = true;
 

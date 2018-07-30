@@ -9,7 +9,7 @@ import net.minecraft.util.text.ITextComponent;
 
 import java.util.List;
 
-public class GuiTextBox extends GuiElement
+public class GuiTextBox extends GuiAbstractButton
 {
 
 	public boolean showBackdrop = false;

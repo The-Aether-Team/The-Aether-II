@@ -3,10 +3,12 @@ package com.gildedgames.aether.client.gui.misc;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.orbis_api.client.gui.data.Text;
-import com.gildedgames.orbis_api.client.gui.util.GuiFrame;
 import com.gildedgames.orbis_api.client.gui.util.GuiText;
 import com.gildedgames.orbis_api.client.gui.util.GuiTextBox;
 import com.gildedgames.orbis_api.client.gui.util.GuiTexture;
+import com.gildedgames.orbis_api.client.gui.util.gui_library.GuiElement;
+import com.gildedgames.orbis_api.client.gui.util.gui_library.GuiViewer;
+import com.gildedgames.orbis_api.client.gui.util.gui_library.IGuiContext;
 import com.gildedgames.orbis_api.client.gui.util.vanilla.GuiButtonVanilla;
 import com.gildedgames.orbis_api.client.rect.Dim2D;
 import com.gildedgames.orbis_api.client.rect.Pos2D;
@@ -23,7 +25,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 
 import java.io.IOException;
 
-public class GuiAetherTeleporterNotice extends GuiFrame
+public class GuiAetherTeleporterNotice extends GuiViewer
 {
 	private static final ResourceLocation BACKDROP = AetherCore.getResource("textures/gui/notice/backdrop.png");
 
@@ -43,6 +45,8 @@ public class GuiAetherTeleporterNotice extends GuiFrame
 
 	public GuiAetherTeleporterNotice()
 	{
+		super(new GuiElement(Dim2D.flush(), false));
+
 		this.allowUserInput = true;
 
 		this.teleporter = new ItemStack(BlocksAether.aether_teleporter);
@@ -57,11 +61,11 @@ public class GuiAetherTeleporterNotice extends GuiFrame
 	}
 
 	@Override
-	public void init()
+	public void build(IGuiContext context)
 	{
 		this.setDrawDefaultBackground(true);
 
-		this.dim().mod().width(this.width).height(this.height).flush();
+		this.getViewing().dim().mod().width(this.width).height(this.height).flush();
 
 		this.center = InputHelper.getCenter().clone().addX(-60).flush();
 
@@ -81,7 +85,7 @@ public class GuiAetherTeleporterNotice extends GuiFrame
 
 		this.close.getInner().displayString = I18n.format("notice.gotcha");
 
-		this.addChildren(this.backdrop, this.matrix, this.body, this.title, this.close);
+		context.addChildren(this.backdrop, this.matrix, this.body, this.title, this.close);
 	}
 
 	@Override
@@ -113,12 +117,6 @@ public class GuiAetherTeleporterNotice extends GuiFrame
 
 		RenderHelper.disableStandardItemLighting();
 		GlStateManager.disableRescaleNormal();
-	}
-
-	@Override
-	public void draw()
-	{
-
 	}
 
 	@Override

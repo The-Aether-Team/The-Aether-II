@@ -18,7 +18,7 @@ import com.gildedgames.aether.common.containers.tiles.ContainerIcestoneCooler;
 import com.gildedgames.aether.common.containers.tiles.ContainerIncubator;
 import com.gildedgames.aether.common.containers.tiles.ContainerMasonryBench;
 import com.gildedgames.aether.common.dialog.DialogUtil;
-import com.gildedgames.orbis_api.client.gui.util.GuiFrame;
+import com.gildedgames.orbis_api.client.gui.util.gui_library.GuiViewer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiCrafting;
 import net.minecraft.entity.player.EntityPlayer;
@@ -137,11 +137,11 @@ public class AetherGuiHandler implements IGuiHandler
 					return null;
 				}
 
-				GuiFrame prevFrame = null;
+				GuiViewer prevViewer = null;
 
-				if (FMLClientHandler.instance().getClient().currentScreen instanceof GuiFrame)
+				if (FMLClientHandler.instance().getClient().currentScreen instanceof GuiViewer)
 				{
-					prevFrame = (GuiFrame) FMLClientHandler.instance().getClient().currentScreen;
+					prevViewer = (GuiViewer) FMLClientHandler.instance().getClient().currentScreen;
 				}
 
 				GuiDialogViewer.preventDialogControllerClose = true;
@@ -150,11 +150,11 @@ public class AetherGuiHandler implements IGuiHandler
 				{
 					IDialogSlideRenderer renderer = DialogUtil.getRenderer(slide);
 
-					return new GuiShop(prevFrame, player, slide, renderer, shopInstance);
+					return new GuiShop(prevViewer, player, slide, renderer, shopInstance);
 				}
 				else
 				{
-					return new GuiShop(prevFrame, player, slide, null, shopInstance);
+					return new GuiShop(prevViewer, player, slide, null, shopInstance);
 				}
 			}
 			case DIALOG_VIEWER_ID:

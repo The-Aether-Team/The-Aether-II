@@ -13,9 +13,11 @@ import com.gildedgames.orbis_api.client.gui.data.list.IListNavigator;
 import com.gildedgames.orbis_api.client.gui.data.list.IListNavigatorListener;
 import com.gildedgames.orbis_api.client.gui.data.list.ListNavigator;
 import com.gildedgames.orbis_api.client.gui.util.GuiAbstractButton;
-import com.gildedgames.orbis_api.client.gui.util.GuiFrame;
 import com.gildedgames.orbis_api.client.gui.util.GuiText;
 import com.gildedgames.orbis_api.client.gui.util.GuiTexture;
+import com.gildedgames.orbis_api.client.gui.util.gui_library.GuiElement;
+import com.gildedgames.orbis_api.client.gui.util.gui_library.GuiViewer;
+import com.gildedgames.orbis_api.client.gui.util.gui_library.IGuiContext;
 import com.gildedgames.orbis_api.client.gui.util.list.GuiListViewer;
 import com.gildedgames.orbis_api.client.rect.Dim2D;
 import com.gildedgames.orbis_api.client.rect.Pos2D;
@@ -29,7 +31,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import java.io.IOException;
 import java.util.Comparator;
 
-public class GuiPatronRewards extends GuiFrame implements IListNavigatorListener<IPatronReward>
+public class GuiPatronRewards extends GuiViewer implements IListNavigatorListener<IPatronReward>
 {
 	private static final ResourceLocation BACKDROP = AetherCore.getResource("textures/gui/patron/backdrop.png");
 
@@ -65,6 +67,8 @@ public class GuiPatronRewards extends GuiFrame implements IListNavigatorListener
 
 	public GuiPatronRewards()
 	{
+		super(new GuiElement(Dim2D.flush(), false));
+
 		PlayerAether playerAether = PlayerAether.getPlayer(Minecraft.getMinecraft().player);
 
 		this.patronRewards = playerAether.getPatronRewardsModule();
@@ -81,11 +85,11 @@ public class GuiPatronRewards extends GuiFrame implements IListNavigatorListener
 	}
 
 	@Override
-	public void init()
+	public void build(IGuiContext context)
 	{
 		this.setDrawDefaultBackground(true);
 
-		this.dim().mod().width(this.width).height(this.height).flush();
+		this.getViewing().dim().mod().width(this.width).height(this.height).flush();
 
 		final Pos2D center = InputHelper.getCenter().clone().addY(10).flush();
 
@@ -140,9 +144,9 @@ public class GuiPatronRewards extends GuiFrame implements IListNavigatorListener
 			i++;
 		}
 
-		this.addChildren(this.backdrop, this.patronRewardText, this.use, this.question, this.rewardViewer);
+		context.addChildren(this.backdrop, this.patronRewardText, this.use, this.question, this.rewardViewer);
 
-		this.use.addChildren(this.useText);
+		this.use.context().addChildren(this.useText);
 	}
 
 	@Override
@@ -162,19 +166,21 @@ public class GuiPatronRewards extends GuiFrame implements IListNavigatorListener
 	}
 
 	@Override
-	public void draw()
+	public void drawElements()
 	{
+		super.drawElements();
+
 		if (this.selected != null)
 		{
 			if (this.selected.isUnlocked(this.patronRewards.getFeatures()))
 			{
 				this.useText.setText(this.useString);
-				this.use.setEnabled(true);
+				this.use.state().setEnabled(true);
 			}
 			else
 			{
 				this.useText.setText(this.lockedString);
-				this.use.setEnabled(false);
+				this.use.state().setEnabled(false);
 			}
 		}
 	}

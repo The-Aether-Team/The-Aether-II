@@ -5,9 +5,11 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
 import com.gildedgames.orbis_api.client.PartialTicks;
 import com.gildedgames.orbis_api.client.gui.data.Text;
-import com.gildedgames.orbis_api.client.gui.util.GuiFrame;
 import com.gildedgames.orbis_api.client.gui.util.GuiText;
 import com.gildedgames.orbis_api.client.gui.util.GuiTexture;
+import com.gildedgames.orbis_api.client.gui.util.gui_library.GuiElement;
+import com.gildedgames.orbis_api.client.gui.util.gui_library.GuiViewer;
+import com.gildedgames.orbis_api.client.gui.util.gui_library.IGuiContext;
 import com.gildedgames.orbis_api.client.rect.Dim2D;
 import com.gildedgames.orbis_api.client.rect.Pos2D;
 import com.gildedgames.orbis_api.util.InputHelper;
@@ -17,7 +19,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
 import org.lwjgl.opengl.GL11;
 
-public class GuiAetherLoading extends GuiFrame implements CustomLoadingRenderer.ICustomLoading
+public class GuiAetherLoading extends GuiViewer implements CustomLoadingRenderer.ICustomLoading
 {
 	private static final ResourceLocation HIGHLANDS = AetherCore.getResource("textures/gui/intro/highlands.png");
 
@@ -31,6 +33,11 @@ public class GuiAetherLoading extends GuiFrame implements CustomLoadingRenderer.
 
 	private float lastPercent;
 
+	public GuiAetherLoading()
+	{
+		super(new GuiElement(Dim2D.flush(), false));
+	}
+
 	@Override
 	public void onGuiClosed()
 	{
@@ -38,9 +45,9 @@ public class GuiAetherLoading extends GuiFrame implements CustomLoadingRenderer.
 	}
 
 	@Override
-	public void init()
+	public void build(IGuiContext context)
 	{
-		this.dim().mod().width(this.width).height(this.height).flush();
+		this.getViewing().dim().mod().width(this.width).height(this.height).flush();
 
 		final Pos2D center = InputHelper.getCenter();
 
@@ -49,11 +56,11 @@ public class GuiAetherLoading extends GuiFrame implements CustomLoadingRenderer.
 		this.loading = new GuiText(Dim2D.build().center(true).pos(center).addY(70).flush(),
 				new Text(new TextComponentTranslation("gui.aether.loading.indeterminate"), 1.0F));
 
-		this.addChildren(this.highlands, this.loading);
+		context.addChildren(this.highlands, this.loading);
 	}
 
 	@Override
-	public void draw()
+	public void drawElements()
 	{
 		preventInnerTyping();
 
@@ -97,6 +104,8 @@ public class GuiAetherLoading extends GuiFrame implements CustomLoadingRenderer.
 				this.loading.setText(new Text(new TextComponentTranslation("gui.aether.loading.progress", percentString), 1.0F));
 			}
 		}
+
+		super.drawElements();
 	}
 
 	@Override
