@@ -6,14 +6,11 @@ import com.gildedgames.aether.api.shop.IShopDefinition;
 import com.gildedgames.aether.api.shop.IShopInstance;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
-import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.network.packets.PacketTalkedTo;
 import com.gildedgames.orbis_api.util.mc.NBTHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
@@ -148,20 +145,36 @@ public class EntityEdison extends EntityNPC
 
 			if (!player.world.isRemote)
 			{
+				boolean hasDied = playerAether.getProgressModule().hasDiedInAether();
+
 				if (playerAether.getProgressModule().hasTalkedTo(EntityEdison.SPEAKER))
 				{
-					String node = playerAether.getProgressModule().hasDiedInAether() ? "start_respawn" : "start";
+					String node = "start";
+
+					if (hasDied && !playerAether.getProgressModule().getBoolean("talkToEdisonAfterDying"))
+					{
+						node = "start_respawn";
+					}
 
 					playerAether.getDialogController().openScene(AetherCore.getResource("edison/outpost_greet"), node);
+
+					if (hasDied)
+					{
+						playerAether.getProgressModule().setBoolean("talkToEdisonAfterDying", true);
+					}
 				}
 				else
 				{
-					String node = playerAether.getProgressModule().hasDiedInAether() ? "start_respawn_not_introduced" : "start_not_introduced";
+					String node = hasDied ? "start_respawn_not_introduced" : "start_not_introduced";
 
 					playerAether.getDialogController().openScene(AetherCore.getResource("edison/outpost_greet"), node);
 
 					playerAether.getProgressModule().setHasTalkedTo(EntityEdison.SPEAKER, true);
-					NetworkingAether.sendPacketToPlayer(new PacketTalkedTo(EntityEdison.SPEAKER, true), (EntityPlayerMP) player);
+
+					if (hasDied)
+					{
+						playerAether.getProgressModule().setBoolean("talkToEdisonAfterDying", true);
+					}
 				}
 			}
 		}

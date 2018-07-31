@@ -2,8 +2,12 @@ package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
+import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.network.packets.PacketProgressBooleanData;
+import com.gildedgames.aether.common.network.packets.PacketTalkedTo;
 import com.gildedgames.orbis_api.util.io.NBTFunnel;
 import com.google.common.collect.Maps;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -20,6 +24,8 @@ public class PlayerProgressModule extends PlayerAetherModule
 
 	private Map<ResourceLocation, Boolean> hasTalkedTo = Maps.newHashMap();
 
+	private Map<String, Boolean> booleanData = Maps.newHashMap();
+
 	private boolean returnedToBed;
 
 	private BlockPos beforeReturnToBed;
@@ -27,6 +33,26 @@ public class PlayerProgressModule extends PlayerAetherModule
 	public PlayerProgressModule(PlayerAether playerAether)
 	{
 		super(playerAether);
+	}
+
+	public void setBoolean(String key, Boolean bool)
+	{
+		this.booleanData.put(key, bool);
+
+		if (!this.getWorld().isRemote)
+		{
+			NetworkingAether.sendPacketToPlayer(new PacketProgressBooleanData(key, bool), (EntityPlayerMP) this.getEntity());
+		}
+	}
+
+	public boolean getBoolean(String key)
+	{
+		if (!this.booleanData.containsKey(key))
+		{
+			return false;
+		}
+
+		return this.booleanData.get(key);
 	}
 
 	public boolean hasDiedInAether()
@@ -42,6 +68,11 @@ public class PlayerProgressModule extends PlayerAetherModule
 	public void setHasTalkedTo(ResourceLocation speaker, boolean flag)
 	{
 		this.hasTalkedTo.put(speaker, flag);
+
+		if (!this.getWorld().isRemote)
+		{
+			NetworkingAether.sendPacketToPlayer(new PacketTalkedTo(speaker, flag), (EntityPlayerMP) this.getEntity());
+		}
 	}
 
 	public boolean hasTalkedTo(ResourceLocation speaker)
@@ -113,6 +144,7 @@ public class PlayerProgressModule extends PlayerAetherModule
 		tag.setBoolean("returnedToBed", this.returnedToBed);
 		funnel.setMap("hasTalkedTo", this.hasTalkedTo, NBTFunnel.LOC_SETTER, NBTFunnel.BOOLEAN_SETTER);
 		funnel.setPos("beforeReturnToBed", this.beforeReturnToBed);
+		funnel.setMap("booleanData", this.booleanData, NBTFunnel.STRING_SETTER, NBTFunnel.BOOLEAN_SETTER);
 	}
 
 	@Override
@@ -124,5 +156,6 @@ public class PlayerProgressModule extends PlayerAetherModule
 		this.returnedToBed = tag.getBoolean("returnedToBed");
 		this.hasTalkedTo = funnel.getMap("hasTalkedTo", NBTFunnel.LOC_GETTER, NBTFunnel.BOOLEAN_GETTER);
 		this.beforeReturnToBed = funnel.getPos("beforeReturnToBed");
+		this.booleanData = funnel.getMap("booleanData", NBTFunnel.STRING_GETTER, NBTFunnel.BOOLEAN_GETTER);
 	}
 }
