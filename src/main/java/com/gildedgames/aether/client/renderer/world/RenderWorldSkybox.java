@@ -39,7 +39,7 @@ public class RenderWorldSkybox extends IRenderHandler
 
 		this.updateLightmap(mc, partialTicks);
 
-		float farPlaneDistance = (float) (mc.gameSettings.renderDistanceChunks * 16);
+		float farPlaneDistance = (float) (mc.gameSettings.renderDistanceChunks * 32);
 
 		mc.entityRenderer.enableLightmap();
 
