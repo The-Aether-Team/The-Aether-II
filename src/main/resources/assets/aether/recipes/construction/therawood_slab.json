@@ -5,11 +5,11 @@
 	],
 	"key": {
 		"X": {
-			"item": "aether:skyroot_planks"
+			"item": "aether:therawood_planks"
 		}
 	},
 	"result": {
-		"item": "aether:skyroot_slab",
+		"item": "aether:therawood_slab",
 		"data": 0,
 		"count": 6
 	}

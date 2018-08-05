@@ -490,6 +490,9 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.gravitite_shield, "gravitite_shield");
 
 		registerItemModels(BlocksAether.skyroot_slab, "aether_slab/skyroot_slab");
+		registerItemModels(BlocksAether.wisproot_slab, "aether_slab/wisproot_slab");
+		registerItemModels(BlocksAether.greatroot_slab, "aether_slab/greatroot_slab");
+		registerItemModels(BlocksAether.therawood_slab, "aether_slab/therawood_slab");
 		registerItemModels(BlocksAether.holystone_slab, "aether_slab/holystone_slab");
 		registerItemModels(BlocksAether.mossy_holystone_slab, "aether_slab/mossy_holystone_slab");
 		registerItemModels(BlocksAether.holystone_brick_slab, "aether_slab/holystone_brick_slab");

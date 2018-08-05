@@ -250,6 +250,9 @@ public class BlocksAether
 
 	public static final Block
 			skyroot_slab = new BlockCustomSlab(Material.WOOD).setSoundType(SoundType.WOOD).setHardness(2.0f),
+            wisproot_slab = new BlockCustomSlab(Material.WOOD).setSoundType(SoundType.WOOD).setHardness(2.0f),
+            greatroot_slab = new BlockCustomSlab(Material.WOOD).setSoundType(SoundType.WOOD).setHardness(2.0f),
+            therawood_slab = new BlockCustomSlab(Material.WOOD).setSoundType(SoundType.WOOD).setHardness(2.0f),
 			holystone_slab = new BlockCustomSlab(Material.ROCK).setSoundType(SoundType.STONE).setHardness(2.0f),
 			mossy_holystone_slab = new BlockCustomSlab(Material.ROCK).setSoundType(SoundType.STONE).setHardness(2.0f),
 			holystone_brick_slab = new BlockCustomSlab(Material.ROCK).setSoundType(SoundType.STONE).setHardness(2.0f),
@@ -498,6 +501,9 @@ public class BlocksAether
 		r.register("multiblock_dummy_half", multiblock_dummy_half);
 
 		r.register("skyroot_slab", skyroot_slab.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+        r.register("wisproot_slab", wisproot_slab.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+        r.register("greatroot_slab", greatroot_slab.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+        r.register("therawood_slab", therawood_slab.setCreativeTab(CreativeTabsAether.THERA));
 		r.register("holystone_slab", holystone_slab.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 		r.register("mossy_holystone_slab", mossy_holystone_slab.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 		r.register("holystone_brick_slab", holystone_brick_slab.setCreativeTab(CreativeTabsAether.CONSTRUCTION));

@@ -5,11 +5,11 @@
 	],
 	"key": {
 		"X": {
-			"item": "aether:skyroot_planks"
+			"item": "aether:light_skyroot_planks"
 		}
 	},
 	"result": {
-		"item": "aether:skyroot_slab",
+		"item": "aether:wisproot_slab",
 		"data": 0,
 		"count": 6
 	}
