@@ -1,0 +1,8 @@
+{
+	"parent": "block/stairs",
+	"textures": {
+		"bottom": "aether:blocks/therawood_planks/therawood_planks",
+		"side": "aether:blocks/therawood_planks/therawood_planks",
+		"top": "aether:blocks/therawood_planks/therawood_planks"
+	}
+}

@@ -500,6 +500,9 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.scatterglass_slab, "aether_slab/scatterglass_slab");
 
 		registerItemModels(BlocksAether.skyroot_stairs, "aether_stairs/skyroot_stairs");
+		registerItemModels(BlocksAether.wisproot_stairs, "aether_stairs/wisproot_stairs");
+		registerItemModels(BlocksAether.greatroot_stairs, "aether_stairs/greatroot_stairs");
+		registerItemModels(BlocksAether.therawood_stairs, "aether_stairs/therawood_stairs");
 		registerItemModels(BlocksAether.holystone_stairs, "aether_stairs/holystone_stairs");
 		registerItemModels(BlocksAether.mossy_holystone_stairs, "aether_stairs/mossy_holystone_stairs");
 		registerItemModels(BlocksAether.holystone_brick_stairs, "aether_stairs/holystone_brick_stairs");

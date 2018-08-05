@@ -7,11 +7,11 @@
 	],
 	"key": {
 		"X": {
-			"item": "aether:skyroot_planks"
+			"item": "aether:therawood_planks"
 		}
 	},
 	"result": {
-		"item": "aether:skyroot_stairs",
+		"item": "aether:therawood_stairs",
 		"count": 4
 	}
 }
