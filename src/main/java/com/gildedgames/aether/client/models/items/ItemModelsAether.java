@@ -494,6 +494,7 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.greatroot_slab, "aether_slab/greatroot_slab");
 		registerItemModels(BlocksAether.therawood_slab, "aether_slab/therawood_slab");
 		registerItemModels(BlocksAether.holystone_slab, "aether_slab/holystone_slab");
+		registerItemModels(BlocksAether.therastone_brick_slab, "aether_slab/therastone_brick_slab");
 		registerItemModels(BlocksAether.mossy_holystone_slab, "aether_slab/mossy_holystone_slab");
 		registerItemModels(BlocksAether.holystone_brick_slab, "aether_slab/holystone_brick_slab");
 		registerItemModels(BlocksAether.faded_holystone_brick_slab, "aether_slab/faded_holystone_brick_slab");
@@ -507,6 +508,7 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.greatroot_stairs, "aether_stairs/greatroot_stairs");
 		registerItemModels(BlocksAether.therawood_stairs, "aether_stairs/therawood_stairs");
 		registerItemModels(BlocksAether.holystone_stairs, "aether_stairs/holystone_stairs");
+		registerItemModels(BlocksAether.therastone_brick_stairs, "aether_stairs/therastone_brick_stairs");
 		registerItemModels(BlocksAether.mossy_holystone_stairs, "aether_stairs/mossy_holystone_stairs");
 		registerItemModels(BlocksAether.holystone_brick_stairs, "aether_stairs/holystone_brick_stairs");
 		registerItemModels(BlocksAether.icestone_brick_stairs, "aether_stairs/icestone_brick_stairs");

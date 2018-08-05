@@ -1,0 +1,8 @@
+{
+	"parent": "block/stairs",
+	"textures": {
+		"bottom": "aether:blocks/therastone_bricks/therastone_bricks",
+		"side": "aether:blocks/therastone_bricks/therastone_bricks",
+		"top": "aether:blocks/therastone_bricks/therastone_bricks"
+	}
+}

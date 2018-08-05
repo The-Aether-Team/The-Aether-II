@@ -254,6 +254,7 @@ public class BlocksAether
             greatroot_slab = new BlockCustomSlab(Material.WOOD).setSoundType(SoundType.WOOD).setHardness(2.0f),
             therawood_slab = new BlockCustomSlab(Material.WOOD).setSoundType(SoundType.WOOD).setHardness(2.0f),
 			holystone_slab = new BlockCustomSlab(Material.ROCK).setSoundType(SoundType.STONE).setHardness(2.0f),
+            therastone_brick_slab = new BlockCustomSlab(Material.ROCK).setSoundType(SoundType.STONE).setHardness(2.0f),
 			mossy_holystone_slab = new BlockCustomSlab(Material.ROCK).setSoundType(SoundType.STONE).setHardness(2.0f),
 			holystone_brick_slab = new BlockCustomSlab(Material.ROCK).setSoundType(SoundType.STONE).setHardness(2.0f),
 			faded_holystone_brick_slab = new BlockCustomSlab(Material.ROCK).setSoundType(SoundType.STONE).setHardness(2.0f),
@@ -267,6 +268,7 @@ public class BlocksAether
             greatroot_stairs = new BlockCustomStairs(dark_skyroot_planks.getDefaultState()),
             therawood_stairs = new BlockCustomStairs(therawood_planks.getDefaultState()),
             holystone_stairs = new BlockCustomStairs(holystone.getDefaultState()),
+            therastone_brick_stairs = new BlockCustomStairs(therastone_brick.getDefaultState()),
 			mossy_holystone_stairs = new BlockCustomStairs(
 					holystone.getDefaultState().withProperty(BlockHolystone.PROPERTY_VARIANT, BlockHolystone.MOSSY_HOLYSTONE)),
 			holystone_brick_stairs = new BlockCustomStairs(holystone_brick.getDefaultState()),
@@ -505,6 +507,7 @@ public class BlocksAether
         r.register("greatroot_slab", greatroot_slab.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
         r.register("therawood_slab", therawood_slab.setCreativeTab(CreativeTabsAether.THERA));
 		r.register("holystone_slab", holystone_slab.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+        r.register("therastone_brick_slab", therastone_brick_slab.setCreativeTab(CreativeTabsAether.THERA));
 		r.register("mossy_holystone_slab", mossy_holystone_slab.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 		r.register("holystone_brick_slab", holystone_brick_slab.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 		r.register("faded_holystone_brick_slab", faded_holystone_brick_slab.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
@@ -518,6 +521,7 @@ public class BlocksAether
         r.register("greatroot_stairs", greatroot_stairs.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
         r.register("therawood_stairs", therawood_stairs.setCreativeTab(CreativeTabsAether.THERA));
 		r.register("holystone_stairs", holystone_stairs.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+        r.register("therastone_brick_stairs", therastone_brick_stairs.setCreativeTab(CreativeTabsAether.THERA));
 		r.register("mossy_holystone_stairs", mossy_holystone_stairs.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 		r.register("holystone_brick_stairs", holystone_brick_stairs.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 		r.register("faded_holystone_brick_stairs", faded_holystone_brick_stairs.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
