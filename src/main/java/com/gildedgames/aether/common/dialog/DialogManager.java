@@ -220,6 +220,7 @@ public class DialogManager implements IDialogManager
 		}
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void attachReloadListener()
 	{

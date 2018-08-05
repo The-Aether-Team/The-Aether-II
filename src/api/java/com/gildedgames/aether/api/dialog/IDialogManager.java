@@ -1,6 +1,8 @@
 package com.gildedgames.aether.api.dialog;
 
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Optional;
 
@@ -46,4 +48,7 @@ public interface IDialogManager
 	 * @return The {@link IDialogSlideRenderer} representing the given String.
 	 */
 	Optional<IDialogSlideRenderer> findRenderer(String type);
+
+	@SideOnly(Side.CLIENT)
+	void attachReloadListener();
 }

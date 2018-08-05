@@ -3,16 +3,12 @@ package com.gildedgames.aether.common.world.aether.island;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import com.gildedgames.aether.common.world.aether.WorldProviderAether;
-import com.gildedgames.orbis_api.core.BlockDataChunk;
-import com.gildedgames.orbis_api.core.ICreationData;
 import com.gildedgames.orbis_api.core.PlacedBlueprint;
-import com.gildedgames.orbis_api.core.PostPlacement;
 import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
 import com.gildedgames.orbis_api.processing.BlockAccessChunkPrimer;
 import com.gildedgames.orbis_api.processing.BlockAccessExtendedWrapper;
 import com.gildedgames.orbis_api.processing.DataPrimer;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
@@ -81,6 +77,8 @@ public class ChunkGeneratorAether implements IChunkGenerator
 
 	public void threadSafeGenerateChunk(Biome[] biomes, ChunkPrimer primer, IIslandData islandData, int chunkX, int chunkZ)
 	{
+		ChunkPos chunkPos = new ChunkPos(chunkX, chunkZ);
+
 		this.preparation.generateBaseTerrain(biomes, primer, islandData, chunkX, chunkZ);
 
 		final DataPrimer dataPrimer = new DataPrimer(new BlockAccessChunkPrimer(this.world, primer));
@@ -88,17 +86,7 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		// Prime placed templates
 		for (final PlacedBlueprint instance : islandData.getPlacedBlueprintsInChunk(chunkX, chunkZ))
 		{
-			for (final BlockDataChunk dataChunk : instance.getBaked().getDataChunks())
-			{
-				if (dataChunk.getPos().x == chunkX && dataChunk.getPos().z == chunkZ)
-				{
-					final ICreationData<?> data = instance.getCreationData();
-
-					dataPrimer.create(dataChunk.getContainer(),
-							data.clone().spawnEntities(false).rotation(Rotation.NONE)
-									.pos(new BlockPos(dataChunk.getPos().getXStart(), data.getPos().getY(), dataChunk.getPos().getZStart())));
-				}
-			}
+			dataPrimer.create(instance.getBaked(), chunkPos, false);
 		}
 	}
 
@@ -117,8 +105,6 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		final int x = chunkX * 16;
 		final int z = chunkZ * 16;
 
-		final ChunkPos p = new ChunkPos(chunkX, chunkZ);
-
 		final BlockPos pos = new BlockPos(x, 0, z);
 
 		final Biome biome = this.world.getBiome(pos.add(16, 0, 16));
@@ -132,35 +118,12 @@ public class ChunkGeneratorAether implements IChunkGenerator
 
 		final DataPrimer primer = new DataPrimer(new BlockAccessExtendedWrapper(this.world));
 
+		ChunkPos chunkPos = new ChunkPos(chunkX, chunkZ);
+
 		// Populate placed blueprints
 		for (final PlacedBlueprint instance : island.getPlacedBlueprintsInChunk(chunkX, chunkZ))
 		{
-			for (final BlockDataChunk dataChunk : instance.getBaked().getDataChunks())
-			{
-				if (dataChunk.getPos().x == chunkX && dataChunk.getPos().z == chunkZ)
-				{
-					final ICreationData<?> data = instance.getCreationData();
-
-					primer.create(dataChunk.getContainer(),
-							data.clone().rotation(Rotation.NONE)
-									.pos(new BlockPos(dataChunk.getPos().getXStart(), data.getPos().getY(), dataChunk.getPos().getZStart())));
-
-					if (!instance.hasGeneratedAChunk())
-					{
-						instance.markGeneratedAChunk();
-
-						for (final PostPlacement post : instance.getDef().getPostPlacements())
-						{
-							post.postGenerate(this.world, this.rand, instance.getCreationData(), instance.getDef().getData().getBlockDataContainer());
-						}
-					}
-				}
-			}
-
-			if (!this.world.isRemote)
-			{
-				instance.spawnEntitiesInChunk(primer, p);
-			}
+			primer.create(instance.getBaked(), chunkPos, true);
 		}
 
 		biome.decorate(this.world, this.rand, pos);

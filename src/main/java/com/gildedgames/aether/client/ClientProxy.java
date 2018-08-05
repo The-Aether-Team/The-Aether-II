@@ -63,6 +63,8 @@ public class ClientProxy extends CommonProxy
 		AetherAPI.content().tabs().getInventoryGroup().registerClientTab(new TabEquipment.Client());
 		//AetherAPI.content().tabs().getInventoryGroup().registerClientTab(new TabBugReport.Client());
 		//AetherAPI.content().tabs().getInventoryGroup().registerClientTab(new TabPatronRewards.Client());
+
+		AetherAPI.content().dialog().attachReloadListener();
 	}
 
 	@Override
