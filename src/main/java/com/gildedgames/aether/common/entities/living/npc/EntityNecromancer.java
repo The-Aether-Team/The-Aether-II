@@ -4,10 +4,6 @@ import com.gildedgames.aether.api.entity.EntityNPC;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
-import com.gildedgames.aether.common.entities.ai.necromancer.NecromancerAIGoUpTower;
-import com.gildedgames.aether.common.registry.content.DimensionsAether;
-import com.gildedgames.aether.common.registry.content.InstancesAether;
-import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstance;
 import com.gildedgames.orbis_api.util.mc.NBTHelper;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -20,11 +16,8 @@ import net.minecraft.world.World;
 
 public class EntityNecromancer extends EntityNPC
 {
-	private BlockPos floor1;
 
 	private BlockPos spawned;
-
-	private NecromancerAIGoUpTower upTowerTask;
 
 	public EntityNecromancer(final World worldIn)
 	{
@@ -33,22 +26,6 @@ public class EntityNecromancer extends EntityNPC
 		this.setSize(1.0F, 2.5F);
 
 		this.rotationYaw = 0.3F;
-
-		if (!this.world.isRemote && this.world.provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER)
-		{
-			final NecromancerTowerInstance instance = InstancesAether.NECROMANCER_TOWER_HANDLER.getFromDimId(worldIn.provider.getDimension());
-
-			this.floor1 = instance.getTower().getBaked().getScheduleFromTriggerID("p2").getBounds().getMin();
-
-			this.upTowerTask = new NecromancerAIGoUpTower(this, this.floor1);
-
-			this.tasks.addTask(1, this.upTowerTask);
-		}
-	}
-
-	public NecromancerAIGoUpTower getUpTowerTask()
-	{
-		return this.upTowerTask;
 	}
 
 	@Override

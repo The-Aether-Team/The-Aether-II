@@ -9,8 +9,7 @@
 			"buttons": [
 				{
 					"label": "necromancer.us.leadtheway", "actions": [
-					{ "type": "exit" },
-					{ "type": "go_up_tower" }
+					{ "type": "exit" }
 				]
 				}
 			]
