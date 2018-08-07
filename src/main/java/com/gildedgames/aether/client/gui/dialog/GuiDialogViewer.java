@@ -62,6 +62,8 @@ public class GuiDialogViewer extends GuiViewer implements IDialogChangeListener
 
 		this.controller = controller;
 		this.controller.addListener(this);
+
+		this.setDrawDefaultBackground(false);
 	}
 
 	@Override

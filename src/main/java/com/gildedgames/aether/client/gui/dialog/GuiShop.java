@@ -118,6 +118,8 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 	{
 		super(new GuiElement(Dim2D.flush(), false), prevViewer, new ContainerShop(player.inventory, shopInstance));
 
+		this.setDrawDefaultBackground(false);
+
 		this.container = (ContainerShop) this.inventorySlots;
 
 		this.slide = slide;
