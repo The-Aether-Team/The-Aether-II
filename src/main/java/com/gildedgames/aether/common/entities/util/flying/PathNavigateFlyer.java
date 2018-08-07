@@ -14,6 +14,8 @@ public class PathNavigateFlyer extends PathNavigate
 {
 	private boolean shouldAvoidSun;
 
+	private boolean shouldAvoidGround;
+
 	public PathNavigateFlyer(final EntityLiving entitylivingIn, final World worldIn)
 	{
 		super(entitylivingIn, worldIn);
@@ -40,6 +42,29 @@ public class PathNavigateFlyer extends PathNavigate
 				BlockPos pos = new BlockPos(pathpoint.x, pathpoint.y, pathpoint.z);
 
 				if (!(this.world.getTopSolidOrLiquidBlock(pos).getY() > pos.getY()))
+				{
+					this.currentPath.setCurrentPathLength(i - 1);
+					return;
+				}
+			}
+		}
+
+		if (this.shouldAvoidGround)
+		{
+			BlockPos entityPos = new BlockPos(MathHelper.floor(this.entity.posX), (int) (this.entity.getEntityBoundingBox().minY + 0.5D),
+					MathHelper.floor(this.entity.posZ));
+
+			if (Math.abs(this.world.getHeight(entityPos).getY() - entityPos.getY()) <= 10)
+			{
+				return;
+			}
+
+			for (int i = 0; i < this.currentPath.getCurrentPathLength(); ++i)
+			{
+				PathPoint pathpoint = this.currentPath.getPathPointFromIndex(i);
+				BlockPos pos = new BlockPos(pathpoint.x, pathpoint.y, pathpoint.z);
+
+				if (Math.abs(this.world.getHeight(pos).getY() - pos.getY()) <= 10)
 				{
 					this.currentPath.setCurrentPathLength(i - 1);
 					return;
@@ -116,5 +141,10 @@ public class PathNavigateFlyer extends PathNavigate
 	public void setAvoidSun(boolean avoidSun)
 	{
 		this.shouldAvoidSun = avoidSun;
+	}
+
+	public void setAvoidGround(boolean avoidGround)
+	{
+		this.shouldAvoidGround = avoidGround;
 	}
 }

@@ -2,9 +2,11 @@ package com.gildedgames.aether.common.entities.living.passive;
 
 import com.gildedgames.aether.common.entities.ai.EntityAIForcedWander;
 import com.gildedgames.aether.common.entities.util.flying.EntityFlying;
+import com.gildedgames.aether.common.entities.util.flying.PathNavigateFlyer;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
 import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
@@ -17,6 +19,16 @@ public class EntityAerwhale extends EntityFlying
 		super(world);
 
 		this.setSize(5.0F, 1.0F);
+	}
+
+	@Override
+	protected PathNavigate createNavigator(final World worldIn)
+	{
+		PathNavigateFlyer navigateFlyer = new PathNavigateFlyer(this, worldIn);
+
+		navigateFlyer.setAvoidGround(true);
+
+		return navigateFlyer;
 	}
 
 	@Override

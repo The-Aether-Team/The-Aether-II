@@ -20,7 +20,7 @@ public class RenderAerwhale extends RenderLiving<EntityLiving>
 	@Override
 	protected void preRenderCallback(EntityLiving entity, float f)
 	{
-		GlStateManager.scale(1.0D, 1.0D, 1.0D);
+		GlStateManager.scale(2.0D, 2.0D, 2.0D);
 		GlStateManager.translate(0.0D, 1.0D, -1.5D);
 	}
 

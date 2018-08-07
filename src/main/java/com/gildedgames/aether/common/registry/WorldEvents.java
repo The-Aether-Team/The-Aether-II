@@ -114,7 +114,7 @@ public class WorldEvents
 		/** FLYING **/
 		SpawnHandler flying = new SpawnHandler("aether_flying")
 				.chunkArea(9)
-				.targetEntityCountPerArea(1)
+				.targetEntityCountPerArea(2)
 				.updateFrequencyInTicks(1200);
 
 		flying.addWorldCondition(new CheckDimension(DimensionsAether.AETHER));
@@ -125,7 +125,7 @@ public class WorldEvents
 		flying.addEntry(aerwhale);
 
 		/** UNDERGROUND **/
-		SpawnHandler underground = new SpawnHandler("aether_underground").chunkArea(4).targetEntityCountPerArea(5).updateFrequencyInTicks(0);
+		SpawnHandler underground = new SpawnHandler("aether_underground").chunkArea(4).targetEntityCountPerArea(5).updateFrequencyInTicks(1200);
 		hostiles.addWorldCondition(new CheckDimension(DimensionsAether.AETHER));
 
 		SpawnEntry cockatriceUnderground = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityCockatrice.class, 12F, 1, 1,
