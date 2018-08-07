@@ -8,6 +8,7 @@ import com.gildedgames.orbis_api.OrbisAPI;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -295,6 +296,14 @@ public class SpawnHandler implements ISpawnHandler
 
 					Entity entity = (Entity) constructor.newInstance(manager.getWorld());
 					entity.setLocationAndAngles(posX + 0.5F, posY, posZ + 0.5F, manager.getWorld().rand.nextFloat() * 360.0F, 0.0F);
+
+					if (entity instanceof EntityLivingBase)
+					{
+						EntityLivingBase entityliving = (EntityLivingBase) entity;
+
+						entityliving.rotationYawHead = entityliving.rotationYaw;
+						entityliving.renderYawOffset = entityliving.rotationYaw;
+					}
 
 					if (SpawnHandler.isNotColliding(entry.getPlacementType(), manager.getWorld(), entity))
 					{
