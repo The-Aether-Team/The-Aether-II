@@ -41,7 +41,8 @@ public class SpawnHandler implements ISpawnHandler
 
 	public static boolean isNotColliding(EntityLiving.SpawnPlacementType placementType, final World world, final Entity entity)
 	{
-		return WorldEntitySpawner.canCreatureTypeSpawnAtLocation(placementType, world, entity.getPosition())
+		return (placementType == EntityLiving.SpawnPlacementType.IN_AIR || WorldEntitySpawner
+				.canCreatureTypeSpawnAtLocation(placementType, world, entity.getPosition()))
 				&& world.getCollisionBoxes(entity, entity.getEntityBoundingBox()).isEmpty()
 				&& world.checkNoEntityCollision(entity.getEntityBoundingBox(), entity);
 	}

@@ -22,6 +22,12 @@ public class EntityAerwhale extends EntityFlying
 	}
 
 	@Override
+	public void onLivingUpdate()
+	{
+		super.onLivingUpdate();
+	}
+
+	@Override
 	protected PathNavigate createNavigator(final World worldIn)
 	{
 		PathNavigateFlyer navigateFlyer = new PathNavigateFlyer(this, worldIn);

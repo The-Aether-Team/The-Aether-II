@@ -15,6 +15,7 @@ import com.gildedgames.aether.common.world.spawning.SpawnSystem;
 import com.gildedgames.aether.common.world.spawning.SpawnSystemProvider;
 import com.gildedgames.aether.common.world.spawning.conditions.*;
 import com.gildedgames.aether.common.world.spawning.util.FlyingPositionSelector;
+import com.gildedgames.aether.common.world.spawning.util.OffsetFromTopBlockPositionSelector;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.init.Blocks;
@@ -87,12 +88,25 @@ public class WorldEvents
 
 		atmospheric.addEntry(butterfly);
 
-		/** HOSTILES **/
-		SpawnHandler hostiles = new SpawnHandler("aether_hostiles").chunkArea(4).targetEntityCountPerArea(9).updateFrequencyInTicks(1200);
-		hostiles.addWorldCondition(new CheckDimension(DimensionsAether.AETHER));
+		/** DAYTIME HOSTILES **/
+		SpawnHandler daytimeHostiles = new SpawnHandler("aether_daytime_hostiles").chunkArea(4).targetEntityCountPerArea(9).updateFrequencyInTicks(1200);
+		daytimeHostiles.addWorldCondition(new CheckDimension(DimensionsAether.AETHER));
 
-		SpawnEntry zephyr = new SpawnEntry(EntityLiving.SpawnPlacementType.IN_AIR, EntityZephyr.class, 3F, 2, 3, new FlyingPositionSelector())
+		SpawnEntry zephyr = new SpawnEntry(EntityLiving.SpawnPlacementType.IN_AIR, EntityZephyr.class, 5F, 1, 1, new OffsetFromTopBlockPositionSelector(15))
 				.addCondition(new CheckBlockStateUnderneath(Blocks.AIR.getDefaultState())).addCondition(new CheckBlockAtPosition(Blocks.AIR));
+
+		SpawnEntry swet = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntitySwet.class, 10F, 2, 4).addCondition(groundCheck);
+
+		SpawnEntry aechor_plant = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityAechorPlant.class, 10F, 2, 3).addCondition(grassCheck);
+
+		daytimeHostiles.addEntry(zephyr);
+		daytimeHostiles.addEntry(swet);
+		daytimeHostiles.addEntry(aechor_plant);
+
+		/** NIGHTTIME HOSTILES **/
+		SpawnHandler nighttimeHostiles = new SpawnHandler("aether_nighttime_hostiles").chunkArea(4).targetEntityCountPerArea(5).updateFrequencyInTicks(1200);
+		nighttimeHostiles.addWorldCondition(new CheckDimension(DimensionsAether.AETHER));
+		nighttimeHostiles.addWorldCondition(new CheckTime(CheckTime.Time.NIGHT));
 
 		SpawnEntry tempest = new SpawnEntry(EntityLiving.SpawnPlacementType.IN_AIR, EntityTempest.class, 10F, 2, 3, new FlyingPositionSelector())
 				.addCondition(new CheckBlockStateUnderneath(Blocks.AIR.getDefaultState())).addCondition(new CheckTime(CheckTime.Time.NIGHT))
@@ -101,34 +115,28 @@ public class WorldEvents
 		SpawnEntry cockatrice = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityCockatrice.class, 12F, 1, 1)
 				.addCondition(groundCheck).addCondition(new CheckTime(CheckTime.Time.NIGHT));
 
-		SpawnEntry swet = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntitySwet.class, 10F, 2, 4).addCondition(groundCheck);
-
-		SpawnEntry aechor_plant = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityAechorPlant.class, 10F, 2, 3).addCondition(grassCheck);
-
-		hostiles.addEntry(zephyr);
-		hostiles.addEntry(tempest);
-		hostiles.addEntry(cockatrice);
-		hostiles.addEntry(swet);
-		hostiles.addEntry(aechor_plant);
+		nighttimeHostiles.addEntry(tempest);
+		nighttimeHostiles.addEntry(cockatrice);
 
 		/** FLYING **/
 		SpawnHandler flying = new SpawnHandler("aether_flying")
-				.chunkArea(9)
-				.targetEntityCountPerArea(2)
+				.chunkArea(20)
+				.targetEntityCountPerArea(1)
 				.updateFrequencyInTicks(1200);
 
 		flying.addWorldCondition(new CheckDimension(DimensionsAether.AETHER));
 
-		SpawnEntry aerwhale = new SpawnEntry(EntityLiving.SpawnPlacementType.IN_AIR, EntityAerwhale.class, 10F, 1, 1, new FlyingPositionSelector())
+		SpawnEntry aerwhale = new SpawnEntry(EntityLiving.SpawnPlacementType.IN_AIR, EntityAerwhale.class, 10F, 1, 1,
+				new OffsetFromTopBlockPositionSelector(15))
 				.addCondition(new CheckBlockStateUnderneath(Blocks.AIR.getDefaultState()));
 
 		flying.addEntry(aerwhale);
 
 		/** UNDERGROUND **/
-		SpawnHandler underground = new SpawnHandler("aether_underground").chunkArea(4).targetEntityCountPerArea(5).updateFrequencyInTicks(1200);
-		hostiles.addWorldCondition(new CheckDimension(DimensionsAether.AETHER));
+		SpawnHandler underground = new SpawnHandler("aether_underground").chunkArea(4).targetEntityCountPerArea(4).updateFrequencyInTicks(1200);
+		daytimeHostiles.addWorldCondition(new CheckDimension(DimensionsAether.AETHER));
 
-		SpawnEntry cockatriceUnderground = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityCockatrice.class, 12F, 1, 1,
+		SpawnEntry cockatriceUnderground = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityCockatrice.class, 12F, 1, 3,
 				new FlyingPositionSelector())
 				.addCondition(stoneCheck).addCondition(isUnderground).addCondition(new CheckBlockAtPosition(Blocks.AIR));
 
@@ -138,7 +146,7 @@ public class WorldEvents
 		underground.addEntry(cockatriceUnderground);
 		underground.addEntry(tempestUnderground);
 
-		return Lists.newArrayList(animals, atmospheric, hostiles, flying, underground);
+		return Lists.newArrayList(animals, atmospheric, daytimeHostiles, nighttimeHostiles, flying, underground);
 	}
 
 	@SubscribeEvent

@@ -84,7 +84,7 @@ public class EntityFlying extends EntityCreature
 		final IBlockState state = this.world.getBlockState((new BlockPos(this)).down());
 
 		return state.canEntitySpawn(this)
-				&& this.getBlockPathWeight(new BlockPos(this.posX, this.getEntityBoundingBox().minY, this.posZ)) >= 0.0F;
+				&& this.getBlockPathWeight(this.world.getTopSolidOrLiquidBlock(new BlockPos(this.posX, this.getEntityBoundingBox().minY, this.posZ))) >= 0.0F;
 	}
 
 	@Override
