@@ -113,7 +113,7 @@ public class SpawnHandler implements ISpawnHandler
 
 		World world = this.access.getWorld();
 
-		if (world.getWorldTime() % this.updateFrequencyInTicks != 0)
+		if (this.updateFrequencyInTicks != 0 && world.getWorldTime() % this.updateFrequencyInTicks != 0)
 		{
 			return;
 		}

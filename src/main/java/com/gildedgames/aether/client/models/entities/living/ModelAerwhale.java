@@ -6,130 +6,102 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
+/**
+ * ModelAerwhale - Either Mojang or a mod author
+ * Created using Tabula 7.0.0
+ */
 public class ModelAerwhale extends ModelBase
 {
+	public ModelRenderer Head;
 
-	//fields
-	ModelRenderer FrontBody;
+	public ModelRenderer Middlebody;
 
-	ModelRenderer RightFin;
+	public ModelRenderer LeftFin;
 
-	ModelRenderer BottomPartHead;
+	public ModelRenderer RightFin;
 
-	ModelRenderer LeftFin;
+	public ModelRenderer BottomPartHead;
 
-	ModelRenderer BottomPartMiddlebody;
+	public ModelRenderer MiddleFin;
 
-	ModelRenderer Head;
+	public ModelRenderer BackBody;
 
-	ModelRenderer MiddleFin;
+	public ModelRenderer BottomPartMiddlebody;
 
-	ModelRenderer BackfinRight;
+	public ModelRenderer FrontBody;
 
-	ModelRenderer BackBody;
+	public ModelRenderer BackfinLeft;
 
-	ModelRenderer BackfinLeft;
-
-	ModelRenderer Middlebody;
+	public ModelRenderer BackfinRight;
 
 	public ModelAerwhale()
 	{
 		this.textureWidth = 512;
 		this.textureHeight = 64;
-
-		this.FrontBody = new ModelRenderer(this, 0, 0);
-		this.FrontBody.addBox(-11.5F, -1F, -0.5F, 19, 5, 21);
-		this.FrontBody.setRotationPoint(2F, 6F, 38F);
-		this.FrontBody.setTextureSize(512, 64);
-		this.FrontBody.mirror = true;
-		this.setRotation(this.FrontBody, -0.1047198F, 0F, 0F);
-		this.RightFin = new ModelRenderer(this, 446, 1);
-		this.RightFin.addBox(-20F, -2F, -6F, 19, 3, 14);
-		this.RightFin.setRotationPoint(-10F, 4F, 10F);
-		this.RightFin.setTextureSize(512, 64);
-		this.RightFin.mirror = true;
-		this.setRotation(this.RightFin, -0.148353F, 0.2094395F, 0F);
-		this.RightFin.mirror = false;
 		this.BottomPartHead = new ModelRenderer(this, 116, 28);
-		this.BottomPartHead.addBox(-13F, 4F, -15F, 26, 6, 30);
-		this.BottomPartHead.setRotationPoint(0F, 0F, 0F);
-		this.BottomPartHead.setTextureSize(512, 64);
-		this.BottomPartHead.mirror = true;
-		this.setRotation(this.BottomPartHead, 0F, 0F, 0F);
-		this.LeftFin = new ModelRenderer(this, 446, 1);
-		this.LeftFin.addBox(1F, -2F, -6F, 19, 3, 14);
-		this.LeftFin.setRotationPoint(10F, 4F, 10F);
-		this.LeftFin.setTextureSize(512, 64);
-		this.LeftFin.mirror = true;
-		this.setRotation(this.LeftFin, -0.148353F, -0.2094395F, 0F);
-		this.BottomPartMiddlebody = new ModelRenderer(this, 16, 32);
-		this.BottomPartMiddlebody.addBox(-12F, 5F, -1F, 24, 6, 26);
-		this.BottomPartMiddlebody.setRotationPoint(0F, -1F, 14F);
-		this.BottomPartMiddlebody.setTextureSize(512, 64);
-		this.BottomPartMiddlebody.mirror = true;
-		this.setRotation(this.BottomPartMiddlebody, 0F, 0F, 0F);
-		this.Head = new ModelRenderer(this, 408, 18);
-		this.Head.addBox(-12F, -9F, -14F, 24, 18, 28);
-		this.Head.setRotationPoint(0F, 0F, 0F);
-		this.Head.setTextureSize(512, 64);
-		this.Head.mirror = true;
-		this.setRotation(this.Head, 0F, 0F, 0F);
-		this.MiddleFin = new ModelRenderer(this, 318, 35);
-		this.MiddleFin.addBox(-1F, -11F, 7F, 2, 7, 8);
-		this.MiddleFin.setRotationPoint(0F, -1F, 14F);
-		this.MiddleFin.setTextureSize(512, 64);
-		this.MiddleFin.mirror = true;
-		this.setRotation(this.MiddleFin, -0.1441704F, 0F, 0F);
-		this.BackfinRight = new ModelRenderer(this, 261, 5);
-		this.BackfinRight.addBox(-11F, 0F, -6F, 15, 3, 24);
-		this.BackfinRight.setRotationPoint(-4F, 5F, 59F);
-		this.BackfinRight.setTextureSize(512, 64);
-		this.BackfinRight.mirror = true;
-		this.setRotation(this.BackfinRight, -0.1047198F, -0.7330383F, 0F);
-		this.BackfinRight.mirror = false;
+		this.BottomPartHead.setRotationPoint(0.0F, 0.0F, 0.0F);
+		this.BottomPartHead.addBox(-13.0F, 4.0F, -15.0F, 26, 6, 30, 0.0F);
 		this.BackBody = new ModelRenderer(this, 228, 32);
-		this.BackBody.addBox(-10.5F, -9F, -2F, 17, 10, 22);
-		this.BackBody.setRotationPoint(2F, 5F, 38F);
-		this.BackBody.setTextureSize(512, 64);
-		this.BackBody.mirror = true;
-		this.setRotation(this.BackBody, -0.1047198F, 0F, 0F);
+		this.BackBody.setRotationPoint(2.0F, 5.0F, 25.0F);
+		this.BackBody.addBox(-10.5F, -9.0F, -2.0F, 17, 10, 22, 0.0F);
+		this.RightFin = new ModelRenderer(this, 446, 1);
+		this.RightFin.setRotationPoint(-10.0F, 4.0F, 10.0F);
+		this.RightFin.addBox(-20.0F, -2.0F, -6.0F, 19, 3, 14, 0.0F);
+		this.setRotateAngle(this.RightFin, -0.148352986419518F, 0.20943951023931953F, -0.19530234329816545F);
+		this.Head = new ModelRenderer(this, 408, 18);
+		this.Head.setRotationPoint(0.0F, 0.0F, 0.0F);
+		this.Head.addBox(-12.0F, -9.0F, -14.0F, 24, 18, 28, 0.0F);
 		this.BackfinLeft = new ModelRenderer(this, 261, 5);
-		this.BackfinLeft.addBox(-4F, 0F, -6F, 13, 3, 24);
-		this.BackfinLeft.setRotationPoint(5F, 5F, 59F);
-		this.BackfinLeft.setTextureSize(512, 64);
-		this.BackfinLeft.mirror = true;
-		this.setRotation(this.BackfinLeft, -0.1047198F, 0.7330383F, 0F);
+		this.BackfinLeft.setRotationPoint(5.0F, 0.0F, 25.0F);
+		this.BackfinLeft.addBox(-4.0F, -2.0F, -8.0F, 13, 3, 24, 0.0F);
+		this.setRotateAngle(this.BackfinLeft, -0.10471975511965977F, 0.6866125277345694F, -0.19530234329816545F);
+		this.BottomPartMiddlebody = new ModelRenderer(this, 16, 32);
+		this.BottomPartMiddlebody.setRotationPoint(0.0F, 0.0F, 0.0F);
+		this.BottomPartMiddlebody.addBox(-12.0F, 5.0F, -1.0F, 24, 6, 26, 0.0F);
+		this.BackfinRight = new ModelRenderer(this, 261, 5);
+		this.BackfinRight.setRotationPoint(-4.0F, 0.0F, 25.0F);
+		this.BackfinRight.addBox(-11.0F, -2.0F, -8.0F, 15, 3, 24, 0.0F);
+		this.setRotateAngle(this.BackfinRight, -0.10471975511965977F, -0.7794640439406675F, 0.19530234329816545F);
+		this.FrontBody = new ModelRenderer(this, 0, 0);
+		this.FrontBody.setRotationPoint(0.0F, 0.0F, 0.0F);
+		this.FrontBody.addBox(-11.0F, 0.0F, -1.0F, 19, 5, 21, 0.0F);
+		this.LeftFin = new ModelRenderer(this, 446, 1);
+		this.LeftFin.setRotationPoint(10.0F, 4.0F, 10.0F);
+		this.LeftFin.addBox(1.0F, -2.0F, -6.0F, 19, 3, 14, 0.0F);
+		this.setRotateAngle(this.LeftFin, -0.1483529955148697F, -0.2094395011663437F, 0.19533973932266235F);
+		this.MiddleFin = new ModelRenderer(this, 318, 35);
+		this.MiddleFin.setRotationPoint(0.0F, 0.0F, 0.0F);
+		this.MiddleFin.addBox(-1.0F, -11.0F, 7.0F, 2, 7, 8, 0.0F);
+		this.setRotateAngle(this.MiddleFin, -0.14416419621473162F, -0.012217304763960306F, 0.0F);
 		this.Middlebody = new ModelRenderer(this, 314, 25);
-		this.Middlebody.addBox(-11F, -5F, -1F, 22, 14, 25);
-		this.Middlebody.setRotationPoint(0F, -1F, 14F);
-		this.Middlebody.setTextureSize(512, 64);
-		this.Middlebody.mirror = true;
-		this.setRotation(this.Middlebody, -0.0698132F, 0F, 0F);
+		this.Middlebody.setRotationPoint(0.0F, -1.0F, 14.0F);
+		this.Middlebody.addBox(-11.0F, -5.0F, -1.0F, 22, 14, 25, 0.0F);
+		this.Head.addChild(this.BottomPartHead);
+		this.Middlebody.addChild(this.BackBody);
+		this.Head.addChild(this.RightFin);
+		this.BackBody.addChild(this.BackfinLeft);
+		this.Middlebody.addChild(this.BottomPartMiddlebody);
+		this.BackBody.addChild(this.BackfinRight);
+		this.BackBody.addChild(this.FrontBody);
+		this.Head.addChild(this.LeftFin);
+		this.Middlebody.addChild(this.MiddleFin);
+		this.Head.addChild(this.Middlebody);
 	}
 
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
-		super.render(entity, f, f1, f2, f3, f4, f5);
-		this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		this.FrontBody.render(f5);
-		this.RightFin.render(f5);
-		this.BottomPartHead.render(f5);
-		this.LeftFin.render(f5);
-		this.BottomPartMiddlebody.render(f5);
 		this.Head.render(f5);
-		this.MiddleFin.render(f5);
-		this.BackfinRight.render(f5);
-		this.BackBody.render(f5);
-		this.BackfinLeft.render(f5);
-		this.Middlebody.render(f5);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
+	/**
+	 * This is a helper function from Tabula to set the rotation of model parts
+	 */
+	public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
 	{
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
+		modelRenderer.rotateAngleX = x;
+		modelRenderer.rotateAngleY = y;
+		modelRenderer.rotateAngleZ = z;
 	}
 
 	@Override
@@ -143,29 +115,22 @@ public class ModelAerwhale extends ModelBase
 
 		float tailAnimation = flying.getTailAnimation(deltaTime);
 
-/*		this.BackfinLeft.rotateAngleY = 0.7330383F + (MathHelper.sin(ageInTicks * 0.152F) * 0.02F * (float)Math.PI);
-		this.BackfinRight.rotateAngleY = -0.7330383F + (MathHelper.sin(ageInTicks * 0.152F) * 0.02F * (float)Math.PI);
+		float time = -0.05F;
 
-		this.BackfinLeft.rotateAngleZ = (MathHelper.sin(ageInTicks * 0.152F) * 0.02F * (float)Math.PI);
-		this.BackfinRight.rotateAngleZ = (MathHelper.sin(ageInTicks * 0.152F) * 0.02F * (float)Math.PI);
+		this.RightFin.rotateAngleZ = (MathHelper.sin(ageInTicks * (time + 0.01F)) * 0.18F * (float) Math.PI);
+		this.LeftFin.rotateAngleZ = -(MathHelper.sin(ageInTicks * (time + 0.01F)) * 0.18F * (float) Math.PI);
 
-		this.BackBody.rotateAngleY = MathHelper.sin(ageInTicks * 0.1662F) * 0.02F * (float)Math.PI;
-		this.FrontBody.rotateAngleY = MathHelper.sin(ageInTicks * 0.1662F) * 0.02F * (float)Math.PI;*/
+		this.BackBody.rotateAngleX = MathHelper.cos(ageInTicks * time) * 0.15F * (float) Math.PI;
+		this.Head.rotateAngleX = MathHelper.cos(ageInTicks * time) * -0.15F * (float) Math.PI;
+		this.Middlebody.rotateAngleX = MathHelper.sin(ageInTicks * time) * 0.15F * (float) Math.PI;
 
-		/*this.Middlebody.rotateAngleY = MathHelper.sin(ageInTicks * 0.1762F) * 0.02F * (float)Math.PI;
-		this.BottomPartMiddlebody.rotateAngleY = MathHelper.sin(ageInTicks * 0.1762F) * 0.02F * (float)Math.PI;
-		this.MiddleFin.rotateAngleY = MathHelper.sin(ageInTicks * 0.1762F) * 0.02F * (float)Math.PI;*/
+		this.BackfinRight.rotateAngleX = MathHelper.sin(ageInTicks * time) * 0.18F * (float) Math.PI;
+		this.BackfinLeft.rotateAngleX = MathHelper.sin(ageInTicks * time) * 0.18F * (float) Math.PI;
 
-		/*float angle = -0.1047198F + (float) ((float) flying.motionX * Math.PI);
+		/*float angle = 0.1047198F + (float) (MathHelper.sin(ageInTicks * time) * ((flying.rotationYaw - flying.prevRotationYaw) / 360F) * Math.PI);
 
-		this.BackBody.rotateAngleY = (float) Math.toRadians(this.limitAngle((float)Math.toDegrees(this.BackBody.rotateAngleY), (float)Math.toDegrees(angle), 2.0F));
-		this.FrontBody.rotateAngleY = this.BackBody.rotateAngleY;
-
-		this.BackfinLeft.rotateAngleY = 0.7330383F + this.BackBody.rotateAngleY;
-		this.BackfinRight.rotateAngleY = -0.7330383F + this.BackBody.rotateAngleY;
-
-		this.BackfinLeft.offsetX = this.BackBody.rotateAngleY;
-		this.BackfinRight.offsetX = this.BackBody.rotateAngleY;*/
+		this.Head.rotateAngleY = angle;
+		this.BackBody.rotateAngleY = -this.Head.rotateAngleY;*/
 	}
 
 	protected float limitAngle(float p_75639_1_, float p_75639_2_, float p_75639_3_)
@@ -195,5 +160,4 @@ public class ModelAerwhale extends ModelBase
 
 		return f1;
 	}
-
 }

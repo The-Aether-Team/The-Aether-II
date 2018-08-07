@@ -13,10 +13,7 @@ import com.gildedgames.aether.common.world.spawning.SpawnEntry;
 import com.gildedgames.aether.common.world.spawning.SpawnHandler;
 import com.gildedgames.aether.common.world.spawning.SpawnSystem;
 import com.gildedgames.aether.common.world.spawning.SpawnSystemProvider;
-import com.gildedgames.aether.common.world.spawning.conditions.CheckBlockStateUnderneath;
-import com.gildedgames.aether.common.world.spawning.conditions.CheckBlockUnderneath;
-import com.gildedgames.aether.common.world.spawning.conditions.CheckDimension;
-import com.gildedgames.aether.common.world.spawning.conditions.CheckTime;
+import com.gildedgames.aether.common.world.spawning.conditions.*;
 import com.gildedgames.aether.common.world.spawning.util.FlyingPositionSelector;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.EntityLiving;
@@ -28,6 +25,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
 
+import java.util.Collections;
 import java.util.List;
 
 @Mod.EventBusSubscriber
@@ -52,11 +50,13 @@ public class WorldEvents
 	{
 		if (world.provider.getDimensionType() != DimensionsAether.AETHER)
 		{
-			return Lists.newArrayList();
+			return Collections.emptyList();
 		}
 
 		PosCondition grassCheck = new CheckBlockUnderneath(BlocksAether.aether_grass);
 		PosCondition groundCheck = new CheckBlockUnderneath(BlocksAether.aether_grass, BlocksAether.holystone);
+		PosCondition stoneCheck = new CheckBlockUnderneath(BlocksAether.holystone);
+		PosCondition isUnderground = new CheckIsUnderground();
 
 		/** PASSIVE **/
 		SpawnHandler animals = new SpawnHandler("aether_animals").chunkArea(4).targetEntityCountPerArea(9).updateFrequencyInTicks(200);
@@ -92,14 +92,14 @@ public class WorldEvents
 		hostiles.addWorldCondition(new CheckDimension(DimensionsAether.AETHER));
 
 		SpawnEntry zephyr = new SpawnEntry(EntityLiving.SpawnPlacementType.IN_AIR, EntityZephyr.class, 3F, 2, 3, new FlyingPositionSelector())
-				.addCondition(new CheckBlockStateUnderneath(Blocks.AIR.getDefaultState()));
+				.addCondition(new CheckBlockStateUnderneath(Blocks.AIR.getDefaultState())).addCondition(new CheckBlockAtPosition(Blocks.AIR));
 
 		SpawnEntry tempest = new SpawnEntry(EntityLiving.SpawnPlacementType.IN_AIR, EntityTempest.class, 10F, 2, 3, new FlyingPositionSelector())
-				.addCondition(new CheckTime(CheckTime.Time.NIGHT))
-				.addCondition(new CheckBlockStateUnderneath(Blocks.AIR.getDefaultState()));
+				.addCondition(new CheckBlockStateUnderneath(Blocks.AIR.getDefaultState())).addCondition(new CheckTime(CheckTime.Time.NIGHT))
+				.addCondition(new CheckBlockAtPosition(Blocks.AIR));
 
 		SpawnEntry cockatrice = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityCockatrice.class, 12F, 1, 1)
-				.addCondition(new CheckTime(CheckTime.Time.NIGHT)).addCondition(groundCheck);
+				.addCondition(groundCheck).addCondition(new CheckTime(CheckTime.Time.NIGHT));
 
 		SpawnEntry swet = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntitySwet.class, 10F, 2, 4).addCondition(groundCheck);
 
@@ -124,7 +124,21 @@ public class WorldEvents
 
 		flying.addEntry(aerwhale);
 
-		return Lists.newArrayList(animals, atmospheric, hostiles, flying);
+		/** UNDERGROUND **/
+		SpawnHandler underground = new SpawnHandler("aether_underground").chunkArea(4).targetEntityCountPerArea(5).updateFrequencyInTicks(0);
+		hostiles.addWorldCondition(new CheckDimension(DimensionsAether.AETHER));
+
+		SpawnEntry cockatriceUnderground = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityCockatrice.class, 12F, 1, 1,
+				new FlyingPositionSelector())
+				.addCondition(stoneCheck).addCondition(isUnderground).addCondition(new CheckBlockAtPosition(Blocks.AIR));
+
+		SpawnEntry tempestUnderground = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityTempest.class, 10F, 2, 3, new FlyingPositionSelector())
+				.addCondition(stoneCheck).addCondition(isUnderground).addCondition(new CheckBlockAtPosition(Blocks.AIR));
+
+		underground.addEntry(cockatriceUnderground);
+		underground.addEntry(tempestUnderground);
+
+		return Lists.newArrayList(animals, atmospheric, hostiles, flying, underground);
 	}
 
 	@SubscribeEvent

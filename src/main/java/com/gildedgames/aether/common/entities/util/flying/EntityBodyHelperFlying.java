@@ -25,7 +25,7 @@ public class EntityBodyHelperFlying extends EntityBodyHelper
 
 		this.entity.renderYawOffset = renderYawOffset;
 
-		this.entity.renderYawOffset = this.limitAngle(this.entity.renderYawOffset, this.entity.rotationYaw, 3.0F);
+		this.entity.renderYawOffset = this.limitAngle(this.entity.renderYawOffset, this.entity.rotationYaw, 1F);
 	}
 
 	protected float limitAngle(float p_75639_1_, float p_75639_2_, float p_75639_3_)

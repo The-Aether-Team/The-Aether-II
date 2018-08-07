@@ -16,7 +16,11 @@ public class EntityAetherMob extends EntityMob
 	@Override
 	protected PathNavigate createNavigator(final World worldIn)
 	{
-		return new AetherNavigateGround(this, worldIn);
+		AetherNavigateGround navigateGround = new AetherNavigateGround(this, worldIn);
+
+		navigateGround.setAvoidSun(true);
+
+		return navigateGround;
 	}
 
 }

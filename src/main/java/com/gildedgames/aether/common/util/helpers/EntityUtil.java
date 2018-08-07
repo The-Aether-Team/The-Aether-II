@@ -6,12 +6,14 @@ import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
@@ -40,31 +42,36 @@ public class EntityUtil
 		return newEnt;
 	}
 
-	public static void despawnEntityDuringDaytime(final Entity entity)
+	public static void despawnEntityDuringDaytime(final EntityLivingBase entity)
 	{
-		if (!entity.world.isRemote && entity.world.isDaytime())
+		if (entity.ticksExisted % 400 == 0)
 		{
-			boolean canSee = false;
+			final BlockPos blockpos = new BlockPos(entity.posX, entity.getEntityBoundingBox().minY, entity.posZ);
 
-			final Vec3d vec3d = entity.getPositionVector();
-
-			for (final EntityPlayer player : entity.world.playerEntities)
+			if (!entity.world.isRemote && entity.world.getLightFor(EnumSkyBlock.SKY, blockpos) - entity.world.getSkylightSubtracted() >= 15)
 			{
-				final Vec3d look = player.getLook(1.0F);
+				boolean canSee = false;
 
-				Vec3d reverse = vec3d.subtractReverse(new Vec3d(player.posX, player.posY, player.posZ)).normalize();
-				reverse = new Vec3d(reverse.x, 0.0D, reverse.z);
+				final Vec3d vec3d = entity.getPositionVector();
 
-				if (reverse.dotProduct(look) < 0.0D && player.getDistance(entity) < 64.0D)
+				for (final EntityPlayer player : entity.world.playerEntities)
 				{
-					canSee = true;
-					break;
-				}
-			}
+					final Vec3d look = player.getLook(1.0F);
 
-			if (!canSee)
-			{
-				entity.setDead();
+					Vec3d reverse = vec3d.subtractReverse(new Vec3d(player.posX, player.posY, player.posZ)).normalize();
+					reverse = new Vec3d(reverse.x, 0.0D, reverse.z);
+
+					if (reverse.dotProduct(look) < 0.0D && player.getDistance(entity) < 64.0D)
+					{
+						canSee = true;
+						break;
+					}
+				}
+
+				if (!canSee)
+				{
+					entity.setDead();
+				}
 			}
 		}
 	}

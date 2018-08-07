@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -27,6 +28,16 @@ public class EntityFlyingMob extends EntityFlying implements IMob
 	public EntityFlyingMob(final World world)
 	{
 		super(world);
+	}
+
+	@Override
+	protected PathNavigate createNavigator(final World worldIn)
+	{
+		PathNavigateFlyer navigateFlyer = new PathNavigateFlyer(this, worldIn);
+
+		navigateFlyer.setAvoidSun(true);
+
+		return navigateFlyer;
 	}
 
 	protected void handleClientAttack()

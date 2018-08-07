@@ -3,16 +3,49 @@ package com.gildedgames.aether.common.entities.util.flying;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.pathfinding.PathFinder;
 import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.pathfinding.PathPoint;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class PathNavigateFlyer extends PathNavigate
 {
+	private boolean shouldAvoidSun;
+
 	public PathNavigateFlyer(final EntityLiving entitylivingIn, final World worldIn)
 	{
 		super(entitylivingIn, worldIn);
+	}
+
+	@Override
+	protected void removeSunnyPath()
+	{
+		super.removeSunnyPath();
+
+		if (this.shouldAvoidSun)
+		{
+			BlockPos entityPos = new BlockPos(MathHelper.floor(this.entity.posX), (int) (this.entity.getEntityBoundingBox().minY + 0.5D),
+					MathHelper.floor(this.entity.posZ));
+
+			if (!(this.world.getTopSolidOrLiquidBlock(entityPos).getY() > entityPos.getY()))
+			{
+				return;
+			}
+
+			for (int i = 0; i < this.currentPath.getCurrentPathLength(); ++i)
+			{
+				PathPoint pathpoint = this.currentPath.getPathPointFromIndex(i);
+				BlockPos pos = new BlockPos(pathpoint.x, pathpoint.y, pathpoint.z);
+
+				if (!(this.world.getTopSolidOrLiquidBlock(pos).getY() > pos.getY()))
+				{
+					this.currentPath.setCurrentPathLength(i - 1);
+					return;
+				}
+			}
+		}
 	}
 
 	@Override
@@ -78,5 +111,10 @@ public class PathNavigateFlyer extends PathNavigate
 	public boolean canEntityStandOnPos(final BlockPos pos)
 	{
 		return !this.world.getBlockState(pos).isFullBlock();
+	}
+
+	public void setAvoidSun(boolean avoidSun)
+	{
+		this.shouldAvoidSun = avoidSun;
 	}
 }
