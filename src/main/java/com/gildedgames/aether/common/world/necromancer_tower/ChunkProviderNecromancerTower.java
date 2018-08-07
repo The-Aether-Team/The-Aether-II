@@ -1,8 +1,6 @@
 package com.gildedgames.aether.common.world.necromancer_tower;
 
 import com.gildedgames.aether.common.registry.content.InstancesAether;
-import com.gildedgames.orbis_api.core.BlockDataChunk;
-import com.gildedgames.orbis_api.core.ICreationData;
 import com.gildedgames.orbis_api.processing.BlockAccessChunkPrimer;
 import com.gildedgames.orbis_api.processing.BlockAccessExtendedWrapper;
 import com.gildedgames.orbis_api.processing.DataPrimer;
@@ -64,6 +62,8 @@ public class ChunkProviderNecromancerTower implements IChunkGenerator
 	@Override
 	public Chunk generateChunk(final int chunkX, final int chunkZ)
 	{
+		final ChunkPos p = new ChunkPos(chunkX, chunkZ);
+
 		final NecromancerTowerInstance inst = InstancesAether.NECROMANCER_TOWER_HANDLER.getFromDimId(this.world.provider.getDimension());
 
 		this.random.setSeed(chunkX * 0x4f9939f508L + chunkZ * 0x1ef1565bd5L);
@@ -74,21 +74,7 @@ public class ChunkProviderNecromancerTower implements IChunkGenerator
 		{
 			final DataPrimer dataPrimer = new DataPrimer(new BlockAccessChunkPrimer(this.world, primer));
 
-			for (final BlockDataChunk dataChunk : inst.getTower().getBaked().getDataChunks())
-			{
-				if (dataChunk == null)
-				{
-					continue;
-				}
-
-				if (dataChunk.getPos().x == chunkX && dataChunk.getPos().z == chunkZ)
-				{
-					final ICreationData<?> data = inst.getTower().getCreationData();
-
-					dataPrimer.create(dataChunk.getContainer(),
-							data.clone().pos(new BlockPos(dataChunk.getPos().getXStart(), data.getPos().getY(), dataChunk.getPos().getZStart())));
-				}
-			}
+			dataPrimer.create(inst.getTower().getBaked(), p, true);
 		}
 
 		final Chunk chunk = new Chunk(this.world, primer, chunkX, chunkZ);
