@@ -74,7 +74,7 @@ public class ChunkProviderNecromancerTower implements IChunkGenerator
 		{
 			final DataPrimer dataPrimer = new DataPrimer(new BlockAccessChunkPrimer(this.world, primer));
 
-			dataPrimer.create(inst.getTower().getBaked(), p, true);
+			dataPrimer.create(inst.getTower().getBaked(), p, false);
 		}
 
 		final Chunk chunk = new Chunk(this.world, primer, chunkX, chunkZ);
