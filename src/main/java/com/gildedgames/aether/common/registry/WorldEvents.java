@@ -127,7 +127,7 @@ public class WorldEvents
 		flying.addWorldCondition(new CheckDimension(DimensionsAether.AETHER));
 
 		SpawnEntry aerwhale = new SpawnEntry(EntityLiving.SpawnPlacementType.IN_AIR, EntityAerwhale.class, 10F, 1, 1,
-				new OffsetFromTopBlockPositionSelector(15))
+				new OffsetFromTopBlockPositionSelector(35))
 				.addCondition(new CheckBlockStateUnderneath(Blocks.AIR.getDefaultState()));
 
 		flying.addEntry(aerwhale);
