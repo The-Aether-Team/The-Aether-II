@@ -6,8 +6,10 @@ import com.gildedgames.aether.api.shop.IShopDefinition;
 import com.gildedgames.aether.api.shop.IShopInstance;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.entities.util.EntityBodyHelperNoRotation;
 import com.gildedgames.orbis_api.util.mc.NBTHelper;
 import net.minecraft.block.Block;
+import net.minecraft.entity.EntityBodyHelper;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
@@ -35,6 +37,12 @@ public class EntityEdison extends EntityNPC
 		this.setSize(1.0F, 1.0F);
 
 		this.rotationYaw = 0.3F;
+	}
+
+	@Override
+	protected EntityBodyHelper createBodyHelper()
+	{
+		return new EntityBodyHelperNoRotation(this);
 	}
 
 	@Override
