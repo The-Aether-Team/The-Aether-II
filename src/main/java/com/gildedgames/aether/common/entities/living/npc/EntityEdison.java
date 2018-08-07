@@ -89,15 +89,15 @@ public class EntityEdison extends EntityNPC
 	}
 
 	@Override
-	public void entityInit()
-	{
-		super.entityInit();
-	}
-
-	@Override
 	protected void setRotation(final float yaw, final float pitch)
 	{
 
+	}
+
+	@Override
+	public void entityInit()
+	{
+		super.entityInit();
 	}
 
 	@Override
@@ -113,9 +113,6 @@ public class EntityEdison extends EntityNPC
 		this.posX = this.prevPosX;
 		this.posZ = this.prevPosZ;
 
-		this.renderYawOffset = 45F;
-		this.rotationYaw = 45F;
-
 		this.setHealth(this.getMaxHealth());
 		this.isDead = false;
 
@@ -129,9 +126,6 @@ public class EntityEdison extends EntityNPC
 
 		this.posX = this.prevPosX;
 		this.posZ = this.prevPosZ;
-
-		this.renderYawOffset = 45F;
-		this.rotationYaw = 45F;
 	}
 
 	@Override

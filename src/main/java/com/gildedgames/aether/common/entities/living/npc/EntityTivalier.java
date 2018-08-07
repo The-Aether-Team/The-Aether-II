@@ -85,9 +85,6 @@ public class EntityTivalier extends EntityNPC
 		this.posX = this.prevPosX;
 		this.posZ = this.prevPosZ;
 
-		this.renderYawOffset = 315F;
-		this.rotationYaw = 315F;
-
 		this.setHealth(this.getMaxHealth());
 		this.isDead = false;
 
@@ -101,9 +98,6 @@ public class EntityTivalier extends EntityNPC
 
 		this.posX = this.prevPosX;
 		this.posZ = this.prevPosZ;
-
-		this.renderYawOffset = 315F;
-		this.rotationYaw = 315F;
 	}
 
 	@Override
