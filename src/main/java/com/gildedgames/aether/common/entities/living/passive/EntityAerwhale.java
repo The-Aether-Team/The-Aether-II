@@ -4,8 +4,8 @@ import com.gildedgames.aether.common.entities.ai.EntityAIForcedWander;
 import com.gildedgames.aether.common.entities.util.flying.EntityFlying;
 import com.gildedgames.aether.common.entities.util.flying.PathNavigateFlyer;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
@@ -18,7 +18,16 @@ public class EntityAerwhale extends EntityFlying
 	{
 		super(world);
 
-		this.setSize(5.0F, 1.0F);
+		this.setSize(3.0F, 3.0F);
+	}
+
+	@Override
+	protected void applyEntityAttributes()
+	{
+		super.applyEntityAttributes();
+
+		this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(250);
 	}
 
 	@Override
@@ -40,8 +49,8 @@ public class EntityAerwhale extends EntityFlying
 	@Override
 	protected void initEntityAI()
 	{
-		final EntityAIMoveTowardsRestriction moveTowardsRestriction = new EntityAIMoveTowardsRestriction(this, 0.1D);
-		final EntityAIWander wander = new EntityAIForcedWander(this, 0.1D, 3);
+		final EntityAIMoveTowardsRestriction moveTowardsRestriction = new EntityAIMoveTowardsRestriction(this, 0.4D);
+		final EntityAIForcedWander wander = new EntityAIForcedWander(this, 0.4D, 2, 100, 7);
 
 		wander.setMutexBits(3);
 		moveTowardsRestriction.setMutexBits(3);

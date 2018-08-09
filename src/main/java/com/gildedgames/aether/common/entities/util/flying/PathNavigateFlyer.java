@@ -51,7 +51,8 @@ public class PathNavigateFlyer extends PathNavigate
 
 		if (this.shouldAvoidGround)
 		{
-			BlockPos entityPos = new BlockPos(MathHelper.floor(this.entity.posX), (int) (this.entity.getEntityBoundingBox().minY + 0.5D),
+			//TODO: Make this work better
+			/*BlockPos entityPos = new BlockPos(MathHelper.floor(this.entity.posX), (int) (this.entity.getEntityBoundingBox().minY + 0.5D),
 					MathHelper.floor(this.entity.posZ));
 
 			if (Math.abs(this.world.getHeight(entityPos).getY() - entityPos.getY()) <= 10)
@@ -69,7 +70,7 @@ public class PathNavigateFlyer extends PathNavigate
 					this.currentPath.setCurrentPathLength(i - 1);
 					return;
 				}
-			}
+			}*/
 		}
 	}
 
@@ -98,10 +99,13 @@ public class PathNavigateFlyer extends PathNavigate
 	protected void pathFollow()
 	{
 		Vec3d vec3d = this.getEntityPosition();
-		float f = this.entity.width * this.entity.width;
-		int i = 6;
+		Vec3d pathVec = this.currentPath.getVectorFromIndex(this.entity, this.currentPath.getCurrentPathIndex());
 
-		if (vec3d.squareDistanceTo(this.currentPath.getVectorFromIndex(this.entity, this.currentPath.getCurrentPathIndex())) < (double) f)
+		float f = this.entity.width * this.entity.width;
+
+		double sqDistTo = vec3d.squareDistanceTo(pathVec);
+
+		if (sqDistTo < (double) f)
 		{
 			this.currentPath.incrementPathIndex();
 		}

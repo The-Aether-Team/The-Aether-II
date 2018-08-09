@@ -50,7 +50,7 @@ public class EntityAILongDistanceWander extends EntityAIBase
 			this.longDistanceTarget = RandomPositionGenerator.findRandomTarget(this.entity, 100, 7);
 		}
 
-		final Vec3d vec3d = RandomPositionGenerator.findRandomTargetBlockTowards(this.entity, 10, 2, this.longDistanceTarget);
+		final Vec3d vec3d = this.longDistanceTarget;//RandomPositionGenerator.findRandomTargetBlockTowards(this.entity, 30, 2, this.longDistanceTarget);
 
 		if (vec3d == null)
 		{
