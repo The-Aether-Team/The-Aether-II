@@ -110,6 +110,9 @@ public class BlocksAether
 
 	public static final BlockSkyrootPlanks dark_skyroot_planks = new BlockSkyrootPlanks();
 
+	public static final Block dark_skyroot_beam = new BlockCustomPillar(Material.WOOD)
+			.setSoundType(SoundType.WOOD).setHardness(2.0f);
+
 	public static final BlockSkyrootPlanks light_skyroot_planks = new BlockSkyrootPlanks();
 
 	public static final Block light_skyroot_beam = new BlockCustomPillar(Material.WOOD)
@@ -326,6 +329,8 @@ public class BlocksAether
 
 	public static Block light_skyroot_decorative = new BlockLightSkyrootDecorative();
 
+	public static Block dark_skyroot_decorative = new BlockDarkSkyrootDecorative();
+
 	public static BlockAetherTeleporter aether_teleporter = new BlockAetherTeleporter();
 
 	@SubscribeEvent
@@ -456,6 +461,8 @@ public class BlocksAether
 		r.register("skyroot_beam", skyroot_beam.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
 
 		r.register("dark_skyroot_planks", dark_skyroot_planks.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+		r.register("dark_skyroot_decorative", dark_skyroot_decorative.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
+		r.register("dark_skyroot_beam", dark_skyroot_beam.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
 
 		r.register("light_skyroot_planks", light_skyroot_planks.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 		r.register("light_skyroot_decorative", light_skyroot_decorative.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));

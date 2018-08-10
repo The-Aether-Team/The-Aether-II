@@ -256,6 +256,24 @@ public class RecipesAether
 				new ItemStack(BlocksAether.light_skyroot_planks, 1, OreDictionary.WILDCARD_VALUE));
 		addMasonry(new ItemStack(BlocksAether.light_skyroot_beam), new ItemStack(BlocksAether.light_skyroot_planks, 1, OreDictionary.WILDCARD_VALUE));
 
+		addMasonry(new ItemStack(BlocksAether.dark_skyroot_decorative, 1, BlockSkyrootDecorative.BASE_PLANKS.getMeta()),
+				new ItemStack(BlocksAether.dark_skyroot_planks, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.dark_skyroot_decorative, 1, BlockSkyrootDecorative.BASE_BEAM.getMeta()),
+				new ItemStack(BlocksAether.dark_skyroot_planks, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.dark_skyroot_decorative, 1, BlockSkyrootDecorative.TOP_PLANKS.getMeta()),
+				new ItemStack(BlocksAether.dark_skyroot_planks, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.dark_skyroot_decorative, 1, BlockSkyrootDecorative.TOP_BEAM.getMeta()),
+				new ItemStack(BlocksAether.dark_skyroot_planks, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.dark_skyroot_decorative, 1, BlockSkyrootDecorative.FLOORBOARDS.getMeta()),
+				new ItemStack(BlocksAether.dark_skyroot_planks, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.dark_skyroot_decorative, 1, BlockSkyrootDecorative.HIGHLIGHT.getMeta()),
+				new ItemStack(BlocksAether.dark_skyroot_planks, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.dark_skyroot_decorative, 1, BlockSkyrootDecorative.TILES.getMeta()),
+				new ItemStack(BlocksAether.dark_skyroot_planks, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.dark_skyroot_decorative, 1, BlockSkyrootDecorative.TILES_SMALL.getMeta()),
+				new ItemStack(BlocksAether.dark_skyroot_planks, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.dark_skyroot_beam), new ItemStack(BlocksAether.dark_skyroot_planks, 1, OreDictionary.WILDCARD_VALUE));
+
 		addMasonry(new ItemStack(BlocksAether.quicksoil_glass_decorative, 1, BlockRockGlassDecorative.SKYROOT_FRAME.getMeta()),
 				new ItemStack(BlocksAether.quicksoil_glass, 1, OreDictionary.WILDCARD_VALUE));
 		addMasonry(new ItemStack(BlocksAether.quicksoil_glass_decorative, 1, BlockRockGlassDecorative.ARKENIUM_FRAME.getMeta()),
