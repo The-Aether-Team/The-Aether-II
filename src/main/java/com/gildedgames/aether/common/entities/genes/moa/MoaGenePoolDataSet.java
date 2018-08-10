@@ -42,9 +42,6 @@ public class MoaGenePoolDataSet<T extends Gene>
 		EYES.genes().add(new DataGene<>("moa.eyes.ice", new Color(0xA0F3F3), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
 		EYES.genes().add(new DataGene<>("moa.eyes.perano", new Color(0xA0C1F3), new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
 		EYES.genes().add(new DataGene<>("moa.eyes.portage", new Color(0xB1A0F3), new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
-		EYES.genes().add(new DataGene<>("moa.eyes.perfume", new Color(0xE2A0F3), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
-		EYES.genes().add(new DataGene<>("moa.eyes.illusion", new Color(0xF3A0D2), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
-		EYES.genes().add(new DataGene<>("moa.eyes.wewak", new Color(0xF3A0A0), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
 
 		FEATHERS.genes().add(new DataGene<>("moa.feathers.black", new Color(0x1a1a1a), new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
 		FEATHERS.genes().add(new DataGene<>("moa.feathers.grey", new Color(0x404040), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
