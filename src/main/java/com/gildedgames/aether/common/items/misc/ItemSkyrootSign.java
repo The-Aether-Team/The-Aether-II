@@ -50,10 +50,6 @@ public class ItemSkyrootSign extends Item
 			{
 				return EnumActionResult.FAIL;
 			}
-			else if (world.isRemote)
-			{
-				return EnumActionResult.PASS;
-			}
 			else
 			{
 				if (side == EnumFacing.UP)
@@ -71,7 +67,7 @@ public class ItemSkyrootSign extends Item
 
 				if (tileentity instanceof TileEntitySkyrootSign && !ItemBlock.setTileEntityNBT(world, player, pos, stack))
 				{
-					player.openEditSign((TileEntitySign) tileentity);
+					player.openEditSign((TileEntitySkyrootSign)tileentity);
 				}
 
 				return EnumActionResult.SUCCESS;

@@ -14,7 +14,7 @@ import java.util.List;
 public class GuiUtils
 {
 
-	public static void drawGradientRect(final float left, final float top, final float right, final float bottom, final int startColor, final int endColor)
+	public static void drawGradientRect(double left, double top, double right, double bottom, int startColor, int endColor)
 	{
 		final float f = (float) (startColor >> 24 & 255) / 255.0F;
 		final float f1 = (float) (startColor >> 16 & 255) / 255.0F;
@@ -34,10 +34,10 @@ public class GuiUtils
 		final Tessellator tessellator = Tessellator.getInstance();
 		final BufferBuilder bufferbuilder = tessellator.getBuffer();
 		bufferbuilder.begin(7, DefaultVertexFormats.POSITION_COLOR);
-		bufferbuilder.pos((double) right, (double) top, 0).color(f1, f2, f3, f).endVertex();
-		bufferbuilder.pos((double) left, (double) top, 0).color(f1, f2, f3, f).endVertex();
-		bufferbuilder.pos((double) left, (double) bottom, 0).color(f5, f6, f7, f4).endVertex();
-		bufferbuilder.pos((double) right, (double) bottom, 0).color(f5, f6, f7, f4).endVertex();
+		bufferbuilder.pos(right, top, 0).color(f1, f2, f3, f).endVertex();
+		bufferbuilder.pos(left, top, 0).color(f1, f2, f3, f).endVertex();
+		bufferbuilder.pos(left, bottom, 0).color(f5, f6, f7, f4).endVertex();
+		bufferbuilder.pos(right, bottom, 0).color(f5, f6, f7, f4).endVertex();
 		tessellator.draw();
 		GlStateManager.shadeModel(7424);
 		GlStateManager.disableBlend();

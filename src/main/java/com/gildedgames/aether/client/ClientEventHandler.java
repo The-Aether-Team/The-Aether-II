@@ -12,10 +12,7 @@ import com.gildedgames.aether.api.items.equipment.effects.IEffectPool;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 import com.gildedgames.aether.client.gui.GuiUtils;
 import com.gildedgames.aether.client.gui.PerformanceIngame;
-import com.gildedgames.aether.client.gui.misc.CustomLoadingRenderer;
-import com.gildedgames.aether.client.gui.misc.GuiAetherLoading;
-import com.gildedgames.aether.client.gui.misc.GuiAetherUnsigned;
-import com.gildedgames.aether.client.gui.misc.GuiBlackScreen;
+import com.gildedgames.aether.client.gui.misc.*;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
@@ -23,6 +20,7 @@ import com.gildedgames.aether.common.containers.slots.SlotAmbrosium;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
 import com.gildedgames.aether.common.containers.slots.SlotFlintAndSteel;
 import com.gildedgames.aether.common.containers.slots.SlotMoaEgg;
+import com.gildedgames.aether.common.entities.tiles.TileEntitySkyrootSign;
 import com.gildedgames.aether.common.entities.util.mounts.FlyingMount;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketSpecialMovement;
@@ -36,12 +34,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.GuiDownloadTerrain;
 import net.minecraft.client.gui.GuiMainMenu;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.gui.inventory.GuiEditSign;
 import net.minecraft.client.gui.inventory.GuiInventory;
-import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
@@ -162,33 +159,7 @@ public class ClientEventHandler
 
 	protected static void drawGradientRect(final int left, final int top, final int right, final int bottom, final int startColor, final int endColor)
 	{
-		final float f = (float) (startColor >> 24 & 255) / 255.0F;
-		final float f1 = (float) (startColor >> 16 & 255) / 255.0F;
-		final float f2 = (float) (startColor >> 8 & 255) / 255.0F;
-		final float f3 = (float) (startColor & 255) / 255.0F;
-		final float f4 = (float) (endColor >> 24 & 255) / 255.0F;
-		final float f5 = (float) (endColor >> 16 & 255) / 255.0F;
-		final float f6 = (float) (endColor >> 8 & 255) / 255.0F;
-		final float f7 = (float) (endColor & 255) / 255.0F;
-		GlStateManager.disableTexture2D();
-		GlStateManager.enableBlend();
-		GlStateManager.disableAlpha();
-		GlStateManager
-				.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE,
-						GlStateManager.DestFactor.ZERO);
-		GlStateManager.shadeModel(7425);
-		final Tessellator tessellator = Tessellator.getInstance();
-		final BufferBuilder bufferbuilder = tessellator.getBuffer();
-		bufferbuilder.begin(7, DefaultVertexFormats.POSITION_COLOR);
-		bufferbuilder.pos((double) right, (double) top, 0).color(f1, f2, f3, f).endVertex();
-		bufferbuilder.pos((double) left, (double) top, 0).color(f1, f2, f3, f).endVertex();
-		bufferbuilder.pos((double) left, (double) bottom, 0).color(f5, f6, f7, f4).endVertex();
-		bufferbuilder.pos((double) right, (double) bottom, 0).color(f5, f6, f7, f4).endVertex();
-		tessellator.draw();
-		GlStateManager.shadeModel(7424);
-		GlStateManager.disableBlend();
-		GlStateManager.enableAlpha();
-		GlStateManager.enableTexture2D();
+		GuiUtils.drawGradientRect(left, top, right, bottom, startColor, endColor);
 	}
 
 	@SubscribeEvent
@@ -257,6 +228,14 @@ public class ClientEventHandler
 			event.setGui(new GuiAetherUnsigned(event.getGui()));
 
 			return;
+		}
+
+		GuiScreen gui = event.getGui();
+
+		if(gui instanceof GuiEditSign) {
+			if(((GuiEditSign) gui).tileSign instanceof TileEntitySkyrootSign){
+				event.setGui(new GuiSkyrootSign(((GuiEditSign) gui).tileSign));
+			}
 		}
 
 		if (mc.world != null && event.getGui() instanceof GuiInventory)
