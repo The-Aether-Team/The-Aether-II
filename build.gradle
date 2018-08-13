@@ -42,6 +42,10 @@ sourceSets {
 jar {
     from sourceSets.api.output
     from sourceSets.main.output
+
+    manifest {
+        attributes 'FMLAT': 'aether_at.cfg'
+    }
 }
 
 minecraft {
@@ -64,6 +68,7 @@ processResources {
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+    rename '(.+_at.cfg)', 'META-INF/$1'
 }
 
 idea {
