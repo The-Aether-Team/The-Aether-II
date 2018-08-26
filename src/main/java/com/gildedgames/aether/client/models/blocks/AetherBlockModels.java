@@ -124,6 +124,8 @@ public class AetherBlockModels
 		ModelLoader.setCustomStateMapper(BlocksAether.standing_skyroot_sign, new StateMap.Builder().ignore(BlockStandingSkyrootSign.ROTATION).build());
 		ModelLoader.setCustomStateMapper(BlocksAether.wall_skyroot_sign, new StateMap.Builder().ignore(BlockWallSkyrootSign.FACING).build());
 		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_fence_gate, new StateMap.Builder().ignore(BlockFenceGate.POWERED).build());
+		ModelLoader.setCustomStateMapper(BlocksAether.wisproot_fence_gate, new StateMap.Builder().ignore(BlockFenceGate.POWERED).build());
+		ModelLoader.setCustomStateMapper(BlocksAether.greatroot_fence_gate, new StateMap.Builder().ignore(BlockFenceGate.POWERED).build());
 		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_bed, new StateMap.Builder().ignore(BlockBed.OCCUPIED).build());
 
 		ModelLoader.setCustomStateMapper(BlocksAether.moa_egg, new StateMap.Builder().ignore().build());

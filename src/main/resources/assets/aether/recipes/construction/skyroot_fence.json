@@ -9,8 +9,7 @@
 			"item": "aether:skyroot_stick"
 		},
 		"W": {
-			"type": "forge:ore_dict",
-			"ore": "skyrootplanks"
+			"item": "aether:skyroot_planks"
 		}
 	},
 	"result": {

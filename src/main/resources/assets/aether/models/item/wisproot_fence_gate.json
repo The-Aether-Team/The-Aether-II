@@ -1,0 +1,6 @@
+{
+	"parent": "aether:block/wisproot_fence_gate/wisproot_fence_gate_closed",
+	"textures": {
+		"texture": "aether:blocks/light_skyroot_planks/wisproot_planks"
+	}
+}

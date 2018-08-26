@@ -1,0 +1,6 @@
+{
+	"parent": "block/fence_side",
+	"textures": {
+		"texture": "aether:blocks/light_skyroot_planks/wisproot_planks"
+	}
+}

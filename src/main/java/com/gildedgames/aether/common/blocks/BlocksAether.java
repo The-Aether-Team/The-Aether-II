@@ -219,6 +219,14 @@ public class BlocksAether
 
 	public static final BlockSkyrootFenceGate skyroot_fence_gate = new BlockSkyrootFenceGate();
 
+	public static final BlockSkyrootFence wisproot_fence = new BlockSkyrootFence();
+
+	public static final BlockSkyrootFenceGate wisproot_fence_gate = new BlockSkyrootFenceGate();
+
+	public static final BlockSkyrootFence greatroot_fence = new BlockSkyrootFence();
+
+	public static final BlockSkyrootFenceGate greatroot_fence_gate = new BlockSkyrootFenceGate();
+
 	public static final BlockStandingSkyrootSign standing_skyroot_sign = new BlockStandingSkyrootSign();
 
 	public static final BlockWallSkyrootSign wall_skyroot_sign = new BlockWallSkyrootSign();
@@ -482,8 +490,13 @@ public class BlocksAether
 		r.register("icestone_pillar", icestone_pillar.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
 
 		r.register("skyroot_fence", skyroot_fence.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
-
 		r.register("skyroot_fence_gate", skyroot_fence_gate.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+
+		r.register("wisproot_fence", wisproot_fence.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+		r.register("wisproot_fence_gate", wisproot_fence_gate.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+
+		r.register("greatroot_fence", greatroot_fence.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+		r.register("greatroot_fence_gate", greatroot_fence_gate.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 
 		r.register("standing_skyroot_sign", standing_skyroot_sign);
 

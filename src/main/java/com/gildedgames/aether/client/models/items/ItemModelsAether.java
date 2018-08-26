@@ -155,6 +155,12 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.skyroot_fence, "skyroot_fence");
 		registerItemModels(BlocksAether.skyroot_fence_gate, "skyroot_fence_gate");
 
+		registerItemModels(BlocksAether.wisproot_fence, "wisproot_fence");
+		registerItemModels(BlocksAether.wisproot_fence_gate, "wisproot_fence_gate");
+
+		registerItemModels(BlocksAether.greatroot_fence, "greatroot_fence");
+		registerItemModels(BlocksAether.greatroot_fence_gate, "greatroot_fence_gate");
+
 		registerItemModels(BlocksAether.ambrosium_ore, "ores/ambrosium_ore");
 		registerItemModels(BlocksAether.zanite_ore, "ores/zanite_ore");
 		registerItemModels(BlocksAether.gravitite_ore, "ores/gravitite_ore");

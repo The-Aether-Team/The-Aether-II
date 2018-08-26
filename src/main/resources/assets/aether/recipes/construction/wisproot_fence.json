@@ -1,18 +1,19 @@
 {
 	"type": "forge:ore_shaped",
 	"pattern": [
-		"#W#",
-		"#W#"
+		"W#W",
+		"W#W"
 	],
 	"key": {
 		"#": {
 			"item": "aether:skyroot_stick"
 		},
 		"W": {
-			"item": "aether:skyroot_planks"
+			"item": "aether:light_skyroot_planks"
 		}
 	},
 	"result": {
-		"item": "aether:skyroot_fence_gate"
+		"item": "aether:wisproot_fence",
+		"count": 3
 	}
 }
