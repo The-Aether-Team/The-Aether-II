@@ -925,8 +925,11 @@ generic.goodbye=Goodbye
 ###########################
 ##=======================##
 
-necromancer.them.start1=I see you made it here safely. I appreciate that you may have many questions but I fear we are short on time.
-necromancer.them.start2=Please make your way upstairs to the Rift Room to enter the Aether. Good luck on your journey.
+necromancer.them.start1=I'm glad to see you here safe, traveller. I'm sure you have many questions but time is of the essence.
+necromancer.them.start2=Through this Rift in space you will find a man with a scar over his eye, his name is Edison. He is a friend of sorts.
+necromancer.them.start3=He will answer any questions you have, he has been contracted to assist you in your quest. He may seem strange but... well...
+necromancer.them.start4=We're in the company of strangers here, aren't we?
+necromancer.them.start5=Safe travels, a new world awaits you.
 
 necromancer.us.leadtheway=Thank you. Goodbye.
 
@@ -1029,22 +1032,22 @@ edison.greet.valkyries4=Have anything else you want to know?
 ###########################
 ##=======================##
 
-edison.shop.greetings1=Here it is, friend - the finest stock you'll find. Look around, see what piques your fancy.
-edison.shop.greetings2=Got some great sales today, friend. Take a look around, I know you'll find just what you're looking for. Guaranteed!
+edison.shop.greetings1=Here we are, great stock today. Got some real unique treasures mixed in, take a look.
+edison.shop.greetings2=Fair prices I assure you, but err... no refunds. Company policy.
 
-edison.shop.enchanted_wyndberry=Feeling hungry? These fruits might just be what you're looking for! Bursting with nutrition, you can't go wrong with a Wyndberry. This shipment in particular has them enchanted with some of our finest Ambrosium. Ever tasted enchanted fruit? You're missing out!
-edison.shop.enchanted_blueberry=Who said Blueberries only exist on Thera? Enchanted from our finest Ambrosium, these little devils will fill you up in no time.
-edison.shop.ambrosium_shard=A common crystal found in the Aether, but don't let that fool you - these shards are one of the most important materials you'll need on your journey. From enchanting food to repairing broken items, they're an invaluable item to collect.
-edison.shop.skyroot_stick=You... You want sticks? My vision's not failing me, is it? I can see trees for miles! You could break a few sticks off any of them, free of charge! Hey, I'm not complaining, I'll gladly take your money.
-edison.shop.skyroot_pickaxe=A staple pickaxe to start your journey.
-edison.shop.skyroot_axe=A staple axe to start your journey.
-edison.shop.skyroot_sword=A staple sword to start your journey.
-edison.shop.skyroot_shovel=A staple shovel to start your journey.
-edison.shop.therawood_leaves=Nothing smells better than the autumn leaves down on Thera. Too bad the seasons aren't quite the same here.
-edison.shop.therawood_log=You want wood from our world? Feeling nostalgic? I guess I don't see why not.
-edison.shop.thera_dirt=Honestly, I have no idea why you want dirt from our world, but I'm happy to take your money.
-edison.shop.thera_grass=Ahh, I always thought the grass was greener down there. I take it you agree?
-edison.shop.therastone_brick=These finely-crafted bricks have a unique design you'll find no where else. Reminds me of home!
+edison.shop.enchanted_wyndberry=I have a guy who picks these from the Carrion plants, dangerous little things they are. He also enriches them with Ambrosium for an extra kick!
+edison.shop.enchanted_blueberry=Blueberries are pretty easily found but these ones are enchanted with Ambrosium, good stuff if you're feeling a little under the weather.
+edison.shop.ambrosium_shard=Now this stuff is truly special, truly multipurpose material. It can repair equipment, enhance food, fuel fire. It's even known to treat diseases with the right application.
+edison.shop.skyroot_stick=I'm going to be straight with you, these aren't really part of my stock. But you're free to buy them if you like.
+edison.shop.skyroot_pickaxe=Great for whacking away at some stone, locals revere Skyroot as a material for its supposed "unparalleled accuracy". Load of bunk if you ask me but it's a good starter if you plan on mining.
+edison.shop.skyroot_axe=Feels a bit wrong, chopping down trees with trees. Ah well. It's a good axe to get you off your feet with woodwork.
+edison.shop.skyroot_sword=Looking to protect yourself? Wildlife around these parts can be a bit feisty. Carrying a sword would be a smart investment.
+edison.shop.skyroot_shovel=If the offensive route fails, why not dig yourself a little hidey-hole! Shovel will come in handy for sure.
+edison.shop.therawood_leaves=I actually had a fella make these from Brettl cane, painted them up nicely to resemble the leaves from Grinstol's forests.
+edison.shop.therawood_log=Our friend let me take a few saplings with me for growing trees, little experiment of his. The leaves came out bleached from the gasses in the air but the logs are just fine.
+edison.shop.thera_dirt=My little pet project, I wanted to see how the geology of this world is compared to back home so I cultivated some dirt of similar composition to Thera's. Utter waste of time but it looks nostalgic!
+edison.shop.thera_grass=Managed to grow something resembling Thera's grass. Always did think the grass was greener down there.
+edison.shop.therastone_brick=Now these I made to replicate old tall dark and scary's Tower. They're just simple Agretite but with enough wear and tear I got them looking just about right.
 
 ##=======================##
 ###########################
