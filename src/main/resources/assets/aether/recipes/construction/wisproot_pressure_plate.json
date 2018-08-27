@@ -1,15 +1,15 @@
 {
 	"type": "forge:ore_shaped",
 	"pattern": [
-		"X"
+		"XX "
 	],
 	"key": {
 		"X": {
-			"item": "aether:skyroot_planks"
+			"item": "aether:light_skyroot_planks"
 		}
 	},
 	"result": {
-		"item": "aether:skyroot_button",
+		"item": "aether:wisproot_pressure_plate",
 		"count": 1
 	}
 }

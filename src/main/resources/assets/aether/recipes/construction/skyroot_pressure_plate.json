@@ -5,8 +5,7 @@
 	],
 	"key": {
 		"X": {
-			"type": "forge:ore_dict",
-			"ore": "skyrootplanks"
+			"item": "aether:skyroot_planks"
 		}
 	},
 	"result": {

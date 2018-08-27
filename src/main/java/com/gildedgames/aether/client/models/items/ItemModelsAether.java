@@ -466,6 +466,12 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.skyroot_pressure_plate, "skyroot_pressure_plate");
 		registerItemModels(BlocksAether.skyroot_button, "skyroot_button");
 
+		registerItemModels(BlocksAether.wisproot_pressure_plate, "wisproot_pressure_plate");
+        registerItemModels(BlocksAether.wisproot_button, "wisproot_button");
+
+		registerItemModels(BlocksAether.greatroot_pressure_plate, "greatroot_pressure_plate");
+        registerItemModels(BlocksAether.greatroot_button, "greatroot_button");
+
 		registerItemModels(BlocksAether.holystone_pressure_plate, "holystone_pressure_plate");
 		registerItemModels(BlocksAether.holystone_button, "holystone_button");
 

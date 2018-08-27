@@ -1,0 +1,6 @@
+{
+	"parent": "block/button",
+	"textures": {
+		"texture": "aether:blocks/dark_skyroot_planks/greatroot_planks"
+	}
+}

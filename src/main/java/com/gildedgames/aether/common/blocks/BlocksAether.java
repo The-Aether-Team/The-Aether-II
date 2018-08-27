@@ -237,9 +237,17 @@ public class BlocksAether
 
 	public static final BlockSkyrootPressurePlate skyroot_pressure_plate = new BlockSkyrootPressurePlate();
 
+	public static final BlockSkyrootPressurePlate wisproot_pressure_plate = new BlockSkyrootPressurePlate();
+
+	public static final BlockSkyrootPressurePlate greatroot_pressure_plate = new BlockSkyrootPressurePlate();
+
 	public static final BlockHolystonePressurePlate holystone_pressure_plate = new BlockHolystonePressurePlate();
 
 	public static final BlockSkyrootButton skyroot_button = new BlockSkyrootButton();
+
+	public static final BlockSkyrootButton wisproot_button = new BlockSkyrootButton();
+
+	public static final BlockSkyrootButton greatroot_button = new BlockSkyrootButton();
 
 	public static final BlockButtonStone holystone_button = new BlockHolystoneButton();
 
@@ -505,9 +513,13 @@ public class BlocksAether
 		r.register("skyroot_ladder", skyroot_ladder.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 
 		r.register("skyroot_button", skyroot_button.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+		r.register("wisproot_button", wisproot_button.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+		r.register("greatroot_button", greatroot_button.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 		r.register("holystone_button", holystone_button.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 
 		r.register("skyroot_pressure_plate", skyroot_pressure_plate.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+		r.register("wisproot_pressure_plate", wisproot_pressure_plate.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+		r.register("greatroot_pressure_plate", greatroot_pressure_plate.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 		r.register("holystone_pressure_plate", holystone_pressure_plate.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 
 		r.register("wall_skyroot_sign", wall_skyroot_sign);
