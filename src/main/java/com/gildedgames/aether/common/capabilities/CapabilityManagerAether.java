@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.capabilities;
 
+import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.api.entity.IEntityInfo;
 import com.gildedgames.aether.api.entity.spawning.ISpawningInfo;
 import com.gildedgames.aether.api.player.IPlayerAether;
@@ -33,6 +34,7 @@ public class CapabilityManagerAether
 		CapabilityManager.INSTANCE.register(ISpawningInfo.class, new EntitySpawningInfo.Storage(), EntitySpawningInfo::new);
 		CapabilityManager.INSTANCE.register(ISpawnSystem.class, new SpawnSystem.Storage(), SpawnSystem::new);
 		CapabilityManager.INSTANCE.register(IEntityInfo.class, new EntityInfo.Storage(), EntityInfo::new);
+		CapabilityManager.INSTANCE.register(IPlacementFlagCapability.class, new PlacementFlagCapability.Storage(), PlacementFlagCapability::new);
 	}
 
 	@SubscribeEvent
@@ -49,11 +51,6 @@ public class CapabilityManagerAether
 	@SubscribeEvent
 	public static void onEntityLoad(final AttachCapabilitiesEvent<Entity> event)
 	{
-		if (event.getObject() == null)
-		{
-			return;
-		}
-
 		if (event.getObject() instanceof EntityLivingBase)
 		{
 			event.addCapability(AetherCore.getResource("Info"), new EntityInfoProvider((EntityLivingBase) event.getObject()));
@@ -70,15 +67,7 @@ public class CapabilityManagerAether
 	@SubscribeEvent
 	public static void onChunkLoad(final AttachCapabilitiesEvent<Chunk> event)
 	{
-		if (event.getObject() == null)
-		{
-			return;
-		}
-
-		if (event.getObject() instanceof Chunk)
-		{
-			event.addCapability(AetherCore.getResource("PlacementFlags"), new PlacementFlagProvider(new PlacementFlagCapability()));
-		}
+		event.addCapability(AetherCore.getResource("PlacementFlags"), new PlacementFlagProvider(new PlacementFlagCapability()));
 	}
 
 }
