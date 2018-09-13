@@ -8,8 +8,6 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.registry.content.GenerationAether;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandGenerators;
-import com.gildedgames.aether.common.world.aether.island.gen.IslandVariables;
-import com.gildedgames.aether.common.world.aether.island.gen.highlands.IslandGeneratorHighlands;
 import com.gildedgames.aether.common.world.templates.TemplateWorldGen;
 import com.gildedgames.orbis_api.core.BlueprintDefinition;
 import com.gildedgames.orbis_api.core.BlueprintWorldGen;
@@ -21,6 +19,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -44,7 +43,9 @@ public class BiomeHighlands extends BiomeAetherBase
 	@Override
 	public IIslandGenerator createIslandGenerator(Random rand, IIslandData islandData)
 	{
-		int range = rand.nextInt(20);
+		return IslandGenerators.HIGHLAND_MEGACOAST;
+
+		/*int range = rand.nextInt(20);
 
 		boolean firstIsland = islandData.getBounds().getMinX() == 0 && islandData.getBounds().getMinZ() == 0;
 
@@ -70,7 +71,7 @@ public class BiomeHighlands extends BiomeAetherBase
 				.lakeThreshold(rand.nextDouble() * 0.3)
 				.maxTerrainHeight(firstIsland ? 10 + rand.nextInt(30) : 10 + rand.nextInt(120))
 				.terraces(rand.nextBoolean())
-				.lakeConcentrationModifier(0.5 + (rand.nextDouble() * -2.5)));
+				.lakeConcentrationModifier(0.5 + (rand.nextDouble() * -2.5)));*/
 	}
 
 	@Override
@@ -96,10 +97,10 @@ public class BiomeHighlands extends BiomeAetherBase
 	{
 		List<WorldDecoration> decorations = Lists.newArrayList();
 
-		decorations.add(new WorldDecorationSimple(2, GenerationAether.short_aether_grass));
-		decorations.add(new WorldDecorationSimple(1, 0.2F, GenerationAether.skyroot_twigs));
+		decorations.add(new WorldDecorationSimple(2, DecorateBiomeEvent.Decorate.EventType.GRASS, GenerationAether.short_aether_grass));
+		decorations.add(new WorldDecorationSimple(1, 0.2F, DecorateBiomeEvent.Decorate.EventType.GRASS, GenerationAether.skyroot_twigs));
 
-		decorations.add(new WorldDecorationSimple(6, GenerationAether.holystone_rocks)
+		decorations.add(new WorldDecorationSimple(6, DecorateBiomeEvent.Decorate.EventType.GRASS, GenerationAether.holystone_rocks)
 		{
 			@Override
 			public BlockPos findPositionToPlace(final IBlockAccessExtended blockAccess, final Random rand, final BlockPos pos)
@@ -112,7 +113,7 @@ public class BiomeHighlands extends BiomeAetherBase
 			}
 		});
 
-		decorations.add(new WorldDecorationSimple(1, 0.06F, GenerationAether.golden_aercloud)
+		decorations.add(new WorldDecorationSimple(1, 0.06F, DecorateBiomeEvent.Decorate.EventType.CUSTOM, GenerationAether.golden_aercloud)
 		{
 			@Override
 			public BlockPos findPositionToPlace(final IBlockAccessExtended blockAccess, final Random rand, final BlockPos pos)
@@ -150,13 +151,14 @@ public class BiomeHighlands extends BiomeAetherBase
 
 		for (int i = 0; i < amountOfTreeTypes; i++)
 		{
-			treeDecorations.add(new WorldDecorationSimple(15, new BlueprintWorldGen(chosen.length >= 2 ? chosen[rand.nextInt(chosen.length)] : chosen[0])));
+			treeDecorations.add(new WorldDecorationSimple(15, DecorateBiomeEvent.Decorate.EventType.TREE,
+					new BlueprintWorldGen(chosen.length >= 2 ? chosen[rand.nextInt(chosen.length)] : chosen[0])));
 		}
 
-		treeDecorations.add(new WorldDecorationSimple(1 + rand.nextInt(3),
+		treeDecorations.add(new WorldDecorationSimple(1 + rand.nextInt(3), DecorateBiomeEvent.Decorate.EventType.TREE,
 				new TemplateWorldGen(GenerationAether.skyroot_moa_nest_tree_1)));
 
-		treeDecorations.add(new WorldDecorationSimple(1 + rand.nextInt(3), 0.5F * rand.nextFloat(),
+		treeDecorations.add(new WorldDecorationSimple(1 + rand.nextInt(3), 0.5F * rand.nextFloat(), DecorateBiomeEvent.Decorate.EventType.TREE,
 				new BlueprintWorldGen(GenerationAether.AMBEROOT_TREE)));
 
 		return treeDecorations;

@@ -17,6 +17,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -69,10 +70,11 @@ public class BiomeForgottenHighlands extends BiomeAetherBase
 		List<WorldDecoration> decorations = Lists.newArrayList();
 
 		decorations
-				.add(new WorldDecorationSimple(6, GenerationAether.short_aether_grass, GenerationAether.aether_grass, GenerationAether.long_aether_grass));
-		decorations.add(new WorldDecorationSimple(1, 0.2F, GenerationAether.skyroot_twigs));
+				.add(new WorldDecorationSimple(6, DecorateBiomeEvent.Decorate.EventType.GRASS, GenerationAether.short_aether_grass,
+						GenerationAether.aether_grass, GenerationAether.long_aether_grass));
+		decorations.add(new WorldDecorationSimple(1, 0.2F, DecorateBiomeEvent.Decorate.EventType.GRASS, GenerationAether.skyroot_twigs));
 
-		decorations.add(new WorldDecorationSimple(6, GenerationAether.holystone_rocks)
+		decorations.add(new WorldDecorationSimple(6, DecorateBiomeEvent.Decorate.EventType.GRASS, GenerationAether.holystone_rocks)
 		{
 			@Override
 			public BlockPos findPositionToPlace(final IBlockAccessExtended blockAccess, final Random rand, final BlockPos pos)
@@ -85,7 +87,7 @@ public class BiomeForgottenHighlands extends BiomeAetherBase
 			}
 		});
 
-		decorations.add(new WorldDecorationSimple(1, 0.06F, GenerationAether.golden_aercloud)
+		decorations.add(new WorldDecorationSimple(1, 0.06F, DecorateBiomeEvent.Decorate.EventType.CUSTOM, GenerationAether.golden_aercloud)
 		{
 			@Override
 			public BlockPos findPositionToPlace(final IBlockAccessExtended blockAccess, final Random rand, final BlockPos pos)
@@ -106,8 +108,9 @@ public class BiomeForgottenHighlands extends BiomeAetherBase
 	{
 		List<WorldDecoration> treeDecorations = Lists.newArrayList();
 
-		treeDecorations.add(new WorldDecorationSimple(6, new BlueprintWorldGen(GenerationAether.SKYROOT_OAK_GREEN)));
-		treeDecorations.add(new WorldDecorationSimple(1, new BlueprintWorldGen(GenerationAether.AMBEROOT_TREE)));
+		treeDecorations
+				.add(new WorldDecorationSimple(6, DecorateBiomeEvent.Decorate.EventType.TREE, new BlueprintWorldGen(GenerationAether.SKYROOT_OAK_GREEN)));
+		treeDecorations.add(new WorldDecorationSimple(1, DecorateBiomeEvent.Decorate.EventType.TREE, new BlueprintWorldGen(GenerationAether.AMBEROOT_TREE)));
 
 		return treeDecorations;
 	}
