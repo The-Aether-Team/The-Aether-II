@@ -84,9 +84,7 @@ public class BiomesAether
 
 	public static BiomeAetherBase fetchRandomBiome(final Random rand)
 	{
-		return HIGHLANDS;
-
-		/*final float randomValue = rand.nextFloat() * getTotalBiomeWeight();
+		final float randomValue = rand.nextFloat() * getTotalBiomeWeight();
 		float chanceSum = 0.0F;
 
 		for (final BiomeAetherBase b : POSSIBLE_BIOMES)
@@ -99,6 +97,6 @@ public class BiomesAether
 			chanceSum += b.getRarityWeight();
 		}
 
-		return null;*/
+		return null;
 	}
 }

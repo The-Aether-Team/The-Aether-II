@@ -8,6 +8,8 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.registry.content.GenerationAether;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandGenerators;
+import com.gildedgames.aether.common.world.aether.island.gen.IslandVariables;
+import com.gildedgames.aether.common.world.aether.island.gen.highlands.IslandGeneratorHighlands;
 import com.gildedgames.aether.common.world.templates.TemplateWorldGen;
 import com.gildedgames.orbis_api.core.BlueprintDefinition;
 import com.gildedgames.orbis_api.core.BlueprintWorldGen;
@@ -43,9 +45,7 @@ public class BiomeHighlands extends BiomeAetherBase
 	@Override
 	public IIslandGenerator createIslandGenerator(Random rand, IIslandData islandData)
 	{
-		return IslandGenerators.HIGHLAND_MEGACOAST;
-
-		/*int range = rand.nextInt(20);
+		int range = rand.nextInt(20);
 
 		boolean firstIsland = islandData.getBounds().getMinX() == 0 && islandData.getBounds().getMinZ() == 0;
 
@@ -71,7 +71,7 @@ public class BiomeHighlands extends BiomeAetherBase
 				.lakeThreshold(rand.nextDouble() * 0.3)
 				.maxTerrainHeight(firstIsland ? 10 + rand.nextInt(30) : 10 + rand.nextInt(120))
 				.terraces(rand.nextBoolean())
-				.lakeConcentrationModifier(0.5 + (rand.nextDouble() * -2.5)));*/
+				.lakeConcentrationModifier(0.5 + (rand.nextDouble() * -2.5)));
 	}
 
 	@Override
