@@ -5,6 +5,8 @@ import com.gildedgames.aether.api.dialog.IDialogController;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.*;
+import com.gildedgames.aether.common.entities.effects.AmbrosiumPoisoningEffect;
+import com.gildedgames.aether.common.entities.effects.StatusEffect;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.*;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
@@ -80,6 +82,8 @@ public class PlayerAether implements IPlayerAether
 
 	private final PlayerSectorModule sectorModule;
 
+	private final PlayerEffectsModule effectsModule;
+
 	private final List<PlayerAetherObserver> observers = Lists.newArrayList();
 
 	private NecromancerTowerInstance towerInstance;
@@ -106,6 +110,7 @@ public class PlayerAether implements IPlayerAether
 		this.progressModule = null;
 		this.currencyModule = null;
 		this.sectorModule = null;
+		this.effectsModule = null;
 	}
 
 	public PlayerAether(final EntityPlayer entity)
@@ -128,6 +133,7 @@ public class PlayerAether implements IPlayerAether
 		this.progressModule = new PlayerProgressModule(this);
 		this.currencyModule = new PlayerCurrencyModule(this);
 		this.sectorModule = new PlayerSectorModule(this);
+		this.effectsModule = new PlayerEffectsModule(this);
 
 		final Collection<PlayerAetherModule> modules = new ArrayList<>();
 
@@ -147,6 +153,7 @@ public class PlayerAether implements IPlayerAether
 		modules.add(this.progressModule);
 		modules.add(this.currencyModule);
 		modules.add(this.sectorModule);
+		modules.add(this.effectsModule);
 
 		this.modules = modules.toArray(new PlayerAetherModule[0]);
 	}
@@ -459,6 +466,11 @@ public class PlayerAether implements IPlayerAether
 	public PlayerPreventDropsModule getPreventDropsModule()
 	{
 		return this.preventDropsModule;
+	}
+
+	public PlayerEffectsModule getEffectsModule()
+	{
+		return this.effectsModule;
 	}
 
 	public boolean containsObserver(final PlayerAetherObserver observer)
