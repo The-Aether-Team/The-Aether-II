@@ -92,7 +92,21 @@ public class BlocksAether
 	public static final Block faded_holystone_pillar = new BlockCustomPillar(Material.ROCK)
 			.setSoundType(SoundType.STONE).setHardness(2.0f);
 
-	public static final Block agiosite = new BlockBuilder(Material.ROCK)
+	public static final Block sentrystone_brick = new BlockBuilder(Material.ROCK)
+            .setSoundType(SoundType.STONE).setHardness(2.0f);
+
+    public static final Block sentrystone_brick_decorative = new BlockSentrystoneDecorative();
+
+    public static final Block sentrystone_brick_decorative_lit = new BlockSentrystoneDecorativeLit()
+			.setLightLevel(0.5f);
+
+    public static final Block sentrystone_pillar = new BlockCustomPillar(Material.ROCK)
+            .setSoundType(SoundType.STONE).setHardness(2.0f);
+
+    public static final Block sentrystone_pillar_lit = new BlockCustomPillar(Material.ROCK)
+            .setSoundType(SoundType.STONE).setHardness(2.0f).setLightLevel(0.5f);
+
+    public static final Block agiosite = new BlockBuilder(Material.ROCK)
 			.setSoundType(SoundType.STONE).setHardness(2.0f);
 
 	public static final Block agiosite_brick = new BlockBuilder(Material.ROCK)
@@ -586,6 +600,12 @@ public class BlocksAether
 		r.register("outpost_campfire", outpost_campfire.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 
 		r.register("aether_teleporter", aether_teleporter.setCreativeTab(CreativeTabsAether.UTILITY));
+
+        r.register("sentrystone_brick", sentrystone_brick.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+        r.register("sentrystone_brick_decorative", sentrystone_brick_decorative.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
+        r.register("sentrystone_brick_decorative_lit", sentrystone_brick_decorative_lit.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
+        r.register("sentrystone_pillar", sentrystone_pillar.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
+        r.register("sentrystone_pillar_lit", sentrystone_pillar_lit.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
 
 		Blocks.FIRE.setFireInfo(skyroot_twigs, 60, 100);
 		Blocks.FIRE.setFireInfo(tall_aether_grass, 60, 100);

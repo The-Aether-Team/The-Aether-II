@@ -251,6 +251,29 @@ public class ItemModelsAether
 
 		registerItemModels(BlocksAether.holystone_pillar, "holystone_bricks/pillar");
 
+		registerItemModels(BlocksAether.sentrystone_brick_decorative, new ItemModelBuilder("sentrystone_bricks/")
+				.add(BlockSentrystoneDecorative.BASE_BRICKS.getMeta(), "base_bricks")
+				.add(BlockSentrystoneDecorative.BASE_PILLAR.getMeta(), "base_pillar")
+				.add(BlockSentrystoneDecorative.CAPSTONE_BRICKS.getMeta(), "capstone_bricks")
+				.add(BlockSentrystoneDecorative.CAPSTONE_PILLAR.getMeta(), "capstone_pillar")
+				.add(BlockSentrystoneDecorative.FLAGSTONES.getMeta(), "flagstones")
+				.add(BlockSentrystoneDecorative.LIGHTSTONE.getMeta(), "lightstone")
+				.add(BlockSentrystoneDecorative.KEYSTONE.getMeta(), "keystone"));
+
+		registerItemModels(BlocksAether.sentrystone_brick_decorative_lit, new ItemModelBuilder("sentrystone_bricks/")
+				.add(BlockSentrystoneDecorativeLit.BASE_BRICKS.getMeta(), "base_bricks_lit")
+				.add(BlockSentrystoneDecorativeLit.BASE_PILLAR.getMeta(), "base_pillar_lit")
+				.add(BlockSentrystoneDecorativeLit.CAPSTONE_BRICKS.getMeta(), "capstone_bricks_lit")
+				.add(BlockSentrystoneDecorativeLit.CAPSTONE_PILLAR.getMeta(), "capstone_pillar_lit")
+				.add(BlockSentrystoneDecorativeLit.LIGHTSTONE.getMeta(), "lightstone_lit")
+				.add(BlockSentrystoneDecorativeLit.KEYSTONE.getMeta(), "keystone_lit"));
+
+		registerItemModels(BlocksAether.sentrystone_brick, "sentrystone_bricks/normal");
+
+		registerItemModels(BlocksAether.sentrystone_pillar, "sentrystone_bricks/pillar");
+
+		registerItemModels(BlocksAether.sentrystone_pillar_lit, "sentrystone_bricks/pillar_lit");
+
 		registerItemModels(BlocksAether.faded_holystone_brick, "faded_holystone_bricks/normal");
 
 		registerItemModels(BlocksAether.faded_holystone_brick_decorative, new ItemModelBuilder("faded_holystone_bricks/")
