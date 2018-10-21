@@ -12,4 +12,6 @@ public interface IShopDefinition
 	int getMaxStock();
 
 	int getMinStock();
+
+	String getCurrencyType();
 }

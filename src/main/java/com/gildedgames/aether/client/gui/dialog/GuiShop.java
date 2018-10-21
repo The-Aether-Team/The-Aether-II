@@ -3,6 +3,8 @@ package com.gildedgames.aether.client.gui.dialog;
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.dialog.IDialogSlide;
 import com.gildedgames.aether.api.dialog.IDialogSlideRenderer;
+import com.gildedgames.aether.api.shop.ICurrencyListener;
+import com.gildedgames.aether.api.shop.IGuiCurrencyValue;
 import com.gildedgames.aether.api.shop.IShopBuy;
 import com.gildedgames.aether.api.shop.IShopInstance;
 import com.gildedgames.aether.client.gui.GuiUtils;
@@ -10,7 +12,6 @@ import com.gildedgames.aether.client.gui.IExtendedGui;
 import com.gildedgames.aether.client.gui.util.GuiItemStack;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
-import com.gildedgames.aether.common.capabilities.entity.player.modules.ICurrencyListener;
 import com.gildedgames.aether.common.containers.ContainerShop;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketShopBack;
@@ -78,7 +79,7 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 
 	private GuiButtonVanilla sell, buy;
 
-	private GuiCoins playerCoins, sellCoins, buyCoins;
+	private IGuiCurrencyValue playerCoins, sellCoins, buyCoins;
 
 	private IShopInstance shopInstance;
 
@@ -127,8 +128,6 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 		this.shopInstance = shopInstance;
 
 		this.playerAether = PlayerAether.getPlayer(player);
-
-		this.playerAether.getCurrencyModule().listen(this);
 	}
 
 	private IShopBuy getSelectedBuy()
@@ -153,7 +152,7 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 	{
 		super.onGuiClosed();
 
-		this.playerAether.getCurrencyModule().unlisten(this);
+		this.shopInstance.getCurrencyType().unlistenForCurrency(this.playerAether, this);
 	}
 
 	@Override
@@ -163,13 +162,16 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 
 		Pos2D center = InputHelper.getCenter().clone().addX(17).flush();
 
-		this.sellCoins = new GuiCoins(Dim2D.build().center(true).pos(center).y(this.height).addX(23).addY(-197).flush(), false);
+		this.sellCoins = this.shopInstance.getCurrencyType()
+				.createItemValueGui(Dim2D.build().center(true).pos(center).y(this.height).addX(23).addY(-197).flush());
 		this.sellCoins.state().setVisible(false);
 
-		this.buyCoins = new GuiCoins(Dim2D.build().center(true).pos(center).y(this.height).addX(-167).addY(-157).flush(), false);
+		this.buyCoins = this.shopInstance.getCurrencyType()
+				.createItemValueGui(Dim2D.build().center(true).pos(center).y(this.height).addX(-167).addY(-157).flush());
 		this.buyCoins.state().setVisible(false);
 
-		this.playerCoins = new GuiCoins(Dim2D.build().centerY(true).pos(center).y(this.height).addX(168).addY(-113).flush(), true);
+		this.playerCoins = this.shopInstance.getCurrencyType()
+				.createCurrencyValueGui(Dim2D.build().centerY(true).pos(center).y(this.height).addX(168).addY(-113).flush());
 		this.playerCoins.state().setVisible(true);
 
 		GuiTexture inventory = new GuiTexture(Dim2D.build().center(true).width(176).height(120).pos(center).y(this.height).addX(75).addY(-157F).flush(),
@@ -245,13 +247,13 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 
 		context.addChildren(this.playerCoins);
 
-		this.playerCoins.setCurrencyValue(this.playerAether.getCurrencyModule().getCurrencyValue());
-
 		this.giltBag = new GuiTexture(
 				Dim2D.build().center(true).height(16).width(16).pos(center).y(this.height)
 						.x(this.playerCoins.state().dim().x() + (this.playerCoins.state().dim().width() / 2) - 1)
 						.addY(-138).scale(1.5F).flush(),
 				GILT_BAG);
+
+		this.playerCoins.setCurrencyValue(this.shopInstance.getCurrencyType().getValue(this.playerAether));
 
 		context.addChildren(this.upArrow, this.downArrow, this.sellCoins, this.buyCoins, this.lockButton, this.lock, this.unlock, this.giltBag);
 	}
@@ -266,7 +268,7 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 			{
 				int count = (int) Math
 						.min(this.getSelectedBuy().getStock(), Math.min(GuiShop.buyCount, Math.min(this.getSelectedBuy().getItemStack().getMaxStackSize(),
-								this.playerAether.getCurrencyModule().getCurrencyValue() / this.getSelectedBuy().getPrice())));
+								this.shopInstance.getCurrencyType().getValue(this.playerAether) / this.getSelectedBuy().getPrice())));
 
 				if (count <= 0)
 				{
@@ -289,7 +291,7 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 			if (this.getSelectedBuy() != null)
 			{
 				int max = (int) Math.min(this.getSelectedBuy().getStock(), Math.min(this.getSelectedBuy().getItemStack().getMaxStackSize(),
-						this.playerAether.getCurrencyModule().getCurrencyValue() / this.getSelectedBuy().getPrice()));
+						this.shopInstance.getCurrencyType().getValue(this.playerAether) / this.getSelectedBuy().getPrice()));
 
 				if (max <= 0)
 				{
@@ -314,6 +316,9 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 	@Override
 	public void drawScreen(final int mouseX, final int mouseY, final float partialTicks)
 	{
+		this.shopInstance.getCurrencyType().listenForCurrency(this.playerAether, this);
+		this.shopInstance.getCurrencyType().update(this.playerAether);
+
 		if (InputHelper.isHovered(this.back))
 		{
 			this.setHoveredDescription(Lists.newArrayList(I18n.format("aether.shop.back")));
@@ -440,7 +445,7 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 
 			int amount = Math.min(maxAllowedWithHeldStack, Math.min(buyCount, this.getSelectedBuy().getStock()));
 
-			boolean canAfford = this.playerAether.getCurrencyModule().getCurrencyValue() >= this.getSelectedBuy().getPrice();
+			boolean canAfford = this.shopInstance.getCurrencyType().getValue(this.playerAether) >= this.getSelectedBuy().getPrice();
 			boolean isHandFree = this.mc.player.inventory.getItemStack().isEmpty();
 			boolean isBuyItem = ItemHelper.getHashForItemStack(this.mc.player.inventory.getItemStack()) == ItemHelper
 					.getHashForItemStack(this.getSelectedBuy().getItemStack());
@@ -470,7 +475,7 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 
 			int count = (int) Math
 					.min(isCountLocked ? GuiShop.buyCount : this.buyCountUnlocked, Math.min(this.getSelectedBuy().getItemStack().getMaxStackSize(),
-							this.playerAether.getCurrencyModule().getCurrencyValue() / this.getSelectedBuy().getPrice()));
+							this.shopInstance.getCurrencyType().getValue(this.playerAether) / this.getSelectedBuy().getPrice()));
 
 			if (count <= 0)
 			{
@@ -538,7 +543,7 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 				{
 					int count = (int) Math
 							.min(this.getSelectedBuy().getStock(), Math.min(GuiShop.buyCount, Math.min(this.getSelectedBuy().getItemStack().getMaxStackSize(),
-									this.playerAether.getCurrencyModule().getCurrencyValue() / this.getSelectedBuy().getPrice())));
+									this.shopInstance.getCurrencyType().getValue(this.playerAether) / this.getSelectedBuy().getPrice())));
 
 					if (this.stackGui.getItemStack() != null)
 					{

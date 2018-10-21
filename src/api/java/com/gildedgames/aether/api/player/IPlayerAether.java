@@ -11,6 +11,11 @@ import net.minecraft.nbt.NBTTagCompound;
 public interface IPlayerAether
 {
 	/**
+	 * @return The player's {@link ICurrencyModule} that is responsible for managing the Gilt currency of the player.
+	 */
+	ICurrencyModule getCurrencyModule();
+
+	/**
 	 * @return The player's {@link IEquipmentModule} that is responsible for updating and managing it's
 	 * equipment.
 	 */

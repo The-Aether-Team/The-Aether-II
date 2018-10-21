@@ -306,6 +306,7 @@ tile.aether.highlands_snow.name=Highlands Snow
 tile.aether.highlands_snow_layer.name=Highlands Snow
 tile.aether.highlands_ice.name=Highlands Ice
 tile.aether.highlands_packed_ice.name=Highlands Packed Ice
+tile.aether.plumproot.name=Plumproot
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick
@@ -363,7 +364,7 @@ item.aether.orange.name=Orange
 item.aether.wyndberry.name=Wyndberry
 item.aether.candy_corn.name=Candy Corn
 item.aether.cocoatrice.name=Cocoatrice
-item.aether.jelly_pumpkin.name=Jelly Pumpkin
+item.aether.jelly_plumproot.name=Jelly Plumproot
 item.aether.stomper_pop.name=Stomper Pop
 item.aether.blueberry_lollipop.name=Blueberry Lollipop
 item.aether.orange_lollipop.name=Orange Lollipop
@@ -417,6 +418,8 @@ item.aether.holystone_shield.name=Holystone Shield
 item.aether.zanite_shield.name=Zanite Shield
 item.aether.arkenium_shield.name=Arkenium Shield
 item.aether.gravitite_shield.name=Gravitite Shield
+item.aether.plumproot_mash.name=Plumproot Mash
+item.aether.plumproot_pie.name=Plumproot Pie
 
 item.aether.skyroot_bed_item.name=Skyroot Bed
 item.aether.moa_egg_item.name=Moa Egg
@@ -658,6 +661,7 @@ entity.aether.necromancer.name=Necromancer
 entity.aether.josediya.name=Josediya
 entity.aether.tivalier.name=Tivalier
 entity.aether.icehog.name=Icehog
+entity.aether.mysterious_figure.name=Mysterious Figure
 
 # Creative Tabs
 itemGroup.aether.blocks=Aether II Blocks
@@ -1113,3 +1117,29 @@ josediya.greet.travel=Okay. Where to?
 josediya.greet.option.travel_to=Travel To Bed
 josediya.greet.option.travel_from=Travel Back To Last Outpost
 josediya.greet.option.travel=Travel
+
+##================================##
+####################################
+#                                  #
+#    MYSTERIOUS FIGURE DIALOGUE    #
+#                                  #
+####################################
+##================================##
+
+mysterious_figure.greet.start=A new traveller I see! Welcome, welcome... Behold my wondrous wares from a realm beyond - an assortment of sweets shall correspond!
+mysterious_figure.greet.option.who_are_you=Who are you?
+mysterious_figure.greet.option.why_plumproots=Why are you holding a plumproot over your shoulder?
+mysterious_figure.greet.option.sale=Can I take a look at your wares?
+mysterious_figure.greet.who_are_you=You want a name, ‘tis but a mystery! All forgotten, even through history!
+mysterious_figure.greet.why_plumproots=Do you not know the marvelous things you can do with such beautiful plumproots? You can broth it, you can stew it, for my wares you must pursue it! Has your mouth graced the taste of plumproot pie? It’s something you must have before you die!
+mysterious_figure.greet.sale=Good, good! Plumproots you shall give, candies I shall weave.
+mysterious_figure.shop.greetings=Plumproots, plumproots, plumproots! My candies I will trade for plumproots - anything else as good as gumboots!
+mysterious_figure.shop.candy_corn=You know what goes good with corn? Plumproots! ...and candy too, I guess.
+mysterious_figure.shop.cocoatrice=No Cockatrices were harmed in the making of this product.
+mysterious_figure.shop.wrapped_chocolates=I hand wrap these chocolates myself! Don’t be surprised if you find trace amounts of bones.
+mysterious_figure.shop.jelly_plumproot=I’m not sure if you could tell, but these are by far my favourite supplies.
+mysterious_figure.shop.blueberry_lollipop=Children from far and wide love these little suckers. May or may not turn you into a giant blueberry.
+mysterious_figure.shop.orange_lollipop=Tastes like oranges! P.S: This candy contains zero traces of oranges.
+mysterious_figure.shop.icestone_poprocks=Not actually made with Icestone.
+mysterious_figure.shop.ginger_bread_man=I once heard a story of a man made gingerbread. Legend says, on the eve of this sacred month, they ate gingerbread in the shape of a man and turned into the very thing they consumed. Feeling lucky?
+mysterious_figure.shop.candy_cane=Try using this as walking cane. Go on, I dare you.

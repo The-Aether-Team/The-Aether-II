@@ -7,6 +7,9 @@ import com.gildedgames.orbis_api.data.management.IProject;
 import com.gildedgames.orbis_api.data.management.IProjectManager;
 import net.minecraft.util.ResourceLocation;
 
+import java.util.Optional;
+import java.util.UUID;
+
 public class BlueprintsAether
 {
 
@@ -59,14 +62,19 @@ public class BlueprintsAether
 
 	private static BlueprintData loadData(String name)
 	{
-		BlueprintData data = project.getCache().getData(project.getCache().getDataId(name + ".blueprint"));
+		Optional<UUID> id = project.getCache().getDataId(name + ".blueprint");
 
-		if (data == null)
+		if (id.isPresent())
 		{
-			throw new RuntimeException("Failed to load Blueprint Data: " + name + ".blueprint");
+			Optional<BlueprintData> data = project.getCache().getData(id.get());
+
+			if (data.isPresent())
+			{
+				return data.get();
+			}
 		}
 
-		return data;
+		throw new RuntimeException("Failed to load Blueprint Data: " + name + ".blueprint");
 	}
 
 	public static void load(IProjectManager projectManager)

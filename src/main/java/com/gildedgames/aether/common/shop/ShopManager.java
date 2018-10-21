@@ -128,7 +128,16 @@ public class ShopManager implements IShopManager
 			}
 		}
 
-		return new ShopInstance(chosenStock, Lists.newArrayList(definition.getUnlocalizedGreetings()));
+		IShopCurrency currency = new ShopCurrencyGilt();
+
+		switch (definition.getCurrencyType())
+		{
+			case "plumproots":
+				currency = new ShopCurrencyPlumproot();
+				break;
+		}
+
+		return new ShopInstance(chosenStock, Lists.newArrayList(definition.getUnlocalizedGreetings()), currency);
 	}
 
 	private IShopDefinition loadShopDefinition(final ResourceLocation resource) throws IOException

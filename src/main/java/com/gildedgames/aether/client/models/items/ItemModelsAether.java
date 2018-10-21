@@ -249,6 +249,11 @@ public class ItemModelsAether
 
 		registerItemModels(BlocksAether.holystone_brick, "holystone_bricks/normal");
 
+		registerItemModels(BlocksAether.plumproot, "plumproot");
+
+		registerItemModels(ItemsAether.plumproot_mash, "plumproot_mash");
+		registerItemModels(ItemsAether.plumproot_pie, "plumproot_pie");
+
 		registerItemModels(BlocksAether.holystone_pillar, "holystone_bricks/pillar");
 
 		registerItemModels(BlocksAether.sentrystone_brick_decorative, new ItemModelBuilder("sentrystone_bricks/")
@@ -422,7 +427,7 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.candy_corn, "candy_corn");
 		registerItemModels(ItemsAether.cocoatrice, "cocoatrice");
 		registerItemModels(ItemsAether.wrapped_chocolates, "wrapped_chocolates");
-		registerItemModels(ItemsAether.jelly_pumpkin, "jelly_pumpkin");
+		registerItemModels(ItemsAether.jelly_plumproot, "jelly_plumproot");
 		registerItemModels(ItemsAether.stomper_pop, "stomper_pop");
 		registerItemModels(ItemsAether.blueberry_lollipop, "blueberry_lollipop");
 		registerItemModels(ItemsAether.orange_lollipop, "orange_lollipop");
@@ -490,10 +495,10 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.skyroot_button, "skyroot_button");
 
 		registerItemModels(BlocksAether.wisproot_pressure_plate, "wisproot_pressure_plate");
-        registerItemModels(BlocksAether.wisproot_button, "wisproot_button");
+		registerItemModels(BlocksAether.wisproot_button, "wisproot_button");
 
 		registerItemModels(BlocksAether.greatroot_pressure_plate, "greatroot_pressure_plate");
-        registerItemModels(BlocksAether.greatroot_button, "greatroot_button");
+		registerItemModels(BlocksAether.greatroot_button, "greatroot_button");
 
 		registerItemModels(BlocksAether.holystone_pressure_plate, "holystone_pressure_plate");
 		registerItemModels(BlocksAether.holystone_button, "holystone_button");

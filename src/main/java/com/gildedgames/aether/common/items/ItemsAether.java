@@ -32,8 +32,6 @@ import java.util.Collections;
 @Mod.EventBusSubscriber
 public class ItemsAether
 {
-	private static final Collection<Item> registeredItems = new ArrayList<>();
-
 	public static final Item skyroot_stick = new ItemSkyrootStick();
 
 	public static final Item cloudtwine = new ItemDropOnDeath();
@@ -120,7 +118,7 @@ public class ItemsAether
 	public static final ItemAetherFood candy_corn = new ItemAetherFood(8, false),
 			cocoatrice = new ItemAetherFood(12, false),
 			wrapped_chocolates = new ItemAetherFood(12, false),
-			jelly_pumpkin = new ItemAetherFood(12, false),
+			jelly_plumproot = new ItemAetherFood(12, false),
 			stomper_pop = new ItemStomperPop(),
 			blueberry_lollipop = new ItemAetherFood(10, false),
 			orange_lollipop = new ItemAetherFood(8, false),
@@ -210,6 +208,12 @@ public class ItemsAether
 			fried_moa_egg = new ItemFood(10, false);
 
 	public static final Item swet_sugar = new ItemDropOnDeath();
+
+	public static final Item plumproot_mash = new ItemAetherFood(15, 1.0F, false).setConsumptionDuration(22);
+
+	public static final Item plumproot_pie = new ItemAetherFood(20, 1.0F, false).setConsumptionDuration(88);
+
+	private static final Collection<Item> registeredItems = new ArrayList<>();
 
 	@SubscribeEvent
 	public static void onRegisterItems(final RegistryEvent.Register<Item> event)
@@ -320,7 +324,7 @@ public class ItemsAether
 		r.register("candy_corn", candy_corn);
 		r.register("cocoatrice", cocoatrice);
 		r.register("wrapped_chocolates", wrapped_chocolates);
-		r.register("jelly_pumpkin", jelly_pumpkin);
+		r.register("jelly_plumproot", jelly_plumproot);
 		r.register("stomper_pop", stomper_pop);
 		r.register("blueberry_lollipop", blueberry_lollipop);
 		r.register("orange_lollipop", orange_lollipop);
@@ -378,6 +382,9 @@ public class ItemsAether
 		r.register("irradiated_dust", irradiated_dust.setCreativeTab(CreativeTabsAether.MATERIALS));
 
 		r.register("wrapping_paper", wrapping_paper.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
+
+		r.register("plumproot_mash", plumproot_mash);
+		r.register("plumproot_pie", plumproot_pie);
 	}
 
 	public static Collection<Item> getRegisteredItems()

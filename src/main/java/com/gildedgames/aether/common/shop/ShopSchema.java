@@ -29,6 +29,9 @@ public class ShopSchema implements IShopDefinition
 	@SerializedName("min_stock")
 	private int minStock;
 
+	@SerializedName("currency_type")
+	private String currencyType = null;
+
 	@Override
 	public List<IShopBuyDefinition> getBuyDefinitions()
 	{
@@ -51,6 +54,12 @@ public class ShopSchema implements IShopDefinition
 	public int getMinStock()
 	{
 		return this.minStock;
+	}
+
+	@Override
+	public String getCurrencyType()
+	{
+		return this.currencyType == null ? "" : this.currencyType;
 	}
 
 	private class ItemStackSchema

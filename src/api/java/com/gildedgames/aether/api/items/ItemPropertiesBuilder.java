@@ -7,6 +7,7 @@ import org.apache.commons.lang3.Validate;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 
 public class ItemPropertiesBuilder
@@ -14,6 +15,8 @@ public class ItemPropertiesBuilder
 	private final Collection<IEffectProvider> effects = new ArrayList<>();
 
 	private final Collection<IEffectPrecondition> preconditions = new ArrayList<>();
+
+	private final Collection<EffectActivator> effectActivators = new ArrayList<>();
 
 	private ItemEquipmentSlot slot = ItemEquipmentSlot.NONE;
 
@@ -68,8 +71,20 @@ public class ItemPropertiesBuilder
 		return this;
 	}
 
+	/**
+	 * Adds {@link EffectActivator}s to this item that will determine when it will
+	 * provide the effects the item has to an entity.
+	 * @param effectActivators The effect activators to add
+	 */
+	public ItemPropertiesBuilder withEffectActivators(EffectActivator... effectActivators)
+	{
+		this.effectActivators.addAll(Arrays.asList(effectActivators));
+
+		return this;
+	}
+
 	public IItemProperties build()
 	{
-		return new ImplItemProperties(this.slot, this.effects, this.preconditions, this.rarity);
+		return new ImplItemProperties(this.slot, this.effects, this.preconditions, this.effectActivators, this.rarity);
 	}
 }
