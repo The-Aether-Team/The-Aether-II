@@ -115,17 +115,17 @@ public class ItemsAether
 			kirrid_loin = new ItemAetherFood(3, 0.3F, false),
 			kirrid_cutlet = new ItemAetherFood(8, 0.8F, false);
 
-	public static final ItemAetherFood candy_corn = new ItemAetherFood(8, false),
-			cocoatrice = new ItemAetherFood(12, false),
-			wrapped_chocolates = new ItemAetherFood(12, false),
-			jelly_plumproot = new ItemAetherFood(12, false),
+	public static final ItemAetherFood candy_corn = new ItemAetherFood(8, 1.0F, false).setConsumptionDuration(8),
+			cocoatrice = new ItemAetherFood(12, 1.0F, false).setConsumptionDuration(8),
+			wrapped_chocolates = new ItemAetherFood(12, 1.0F, false).setConsumptionDuration(8),
+			jelly_plumproot = new ItemAetherFood(12, 1.0F, false).setConsumptionDuration(8),
 			stomper_pop = new ItemStomperPop(),
-			blueberry_lollipop = new ItemAetherFood(10, false),
-			orange_lollipop = new ItemAetherFood(8, false),
-			icestone_poprocks = new ItemAetherFood(5, false);
+			blueberry_lollipop = new ItemAetherFood(10, 1.0F, false).setConsumptionDuration(8),
+			orange_lollipop = new ItemAetherFood(8, 1.0F, false).setConsumptionDuration(8),
+			icestone_poprocks = new ItemAetherFood(5, 1.0F, false).setConsumptionDuration(8);
 
-	public static final ItemFood ginger_bread_man = new ItemFood(2, false),
-			candy_cane = new ItemFood(2, false);
+	public static final ItemFood ginger_bread_man = new ItemAetherFood(15, 0.4F, false).setConsumptionDuration(8),
+			candy_cane = new ItemAetherFood(13, 0.5F, false).setConsumptionDuration(8);
 
 	public static final ItemSkyrootBucket skyroot_bucket = new ItemSkyrootBucket(Blocks.AIR),
 			skyroot_water_bucket = new ItemSkyrootBucket(Blocks.FLOWING_WATER);
