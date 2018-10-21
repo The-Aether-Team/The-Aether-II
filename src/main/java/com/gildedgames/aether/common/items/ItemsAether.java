@@ -211,7 +211,7 @@ public class ItemsAether
 
 	public static final Item plumproot_mash = new ItemAetherFood(3, 1.0F, false).setConsumptionDuration(12);
 
-	public static final Item plumproot_pie = new ItemAetherFood(20, 1.0F, false).setConsumptionDuration(88);
+	public static final Item plumproot_pie = new ItemAetherFood(20, 1.0F, false).setConsumptionDuration(100);
 
 	private static final Collection<Item> registeredItems = new ArrayList<>();
 
