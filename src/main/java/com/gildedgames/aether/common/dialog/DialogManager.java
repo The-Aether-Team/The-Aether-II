@@ -210,13 +210,22 @@ public class DialogManager implements IDialogManager
 
 		AetherCore.LOGGER.info("Loading dialog speaker from file {}", speakerPath);
 
-		try (InputStream stream = MinecraftServer.class.getResourceAsStream(speakerPath))
+		try
 		{
-			try (InputStreamReader reader = new InputStreamReader(stream))
+			try (InputStream stream = MinecraftServer.class.getResourceAsStream(speakerPath))
 			{
-				return this.gson.fromJson(reader, DialogSpeaker.class);
+				try (InputStreamReader reader = new InputStreamReader(stream))
+				{
+					return this.gson.fromJson(reader, DialogSpeaker.class);
+				}
 			}
 		}
+		catch (NullPointerException e)
+		{
+			e.printStackTrace();
+		}
+
+		return null;
 	}
 
 	@Override

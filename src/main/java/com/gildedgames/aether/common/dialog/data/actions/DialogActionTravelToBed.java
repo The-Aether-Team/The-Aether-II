@@ -26,7 +26,7 @@ public class DialogActionTravelToBed implements IDialogAction
 		{
 			PlayerAether playerAether = PlayerAether.getPlayer(controller.getDialogPlayer());
 
-			playerAether.getDialogController().closeScene();
+			playerAether.getDialogController().closeScene(true);
 
 			return;
 		}

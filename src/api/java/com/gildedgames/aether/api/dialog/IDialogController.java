@@ -94,5 +94,5 @@ public interface IDialogController
 	/**
 	 * Closes the dialog and respective GUI.
 	 */
-	void closeScene();
+	void closeScene(boolean closeGUI);
 }

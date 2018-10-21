@@ -78,13 +78,13 @@ public class PacketShopSell implements IMessage
 						}
 						else
 						{
-							value = AetherAPI.content().currency().getValue(stack);
+							value = AetherAPI.content().currency().getValue(stack, shopInstance.getCurrencyType().getClass());
 						}
 
 						if (value > 0)
 						{
 							ItemStack s = container.getSlot(0).getStack();
-							double singleValue = AetherAPI.content().currency().getSingleValue(s);
+							double singleValue = AetherAPI.content().currency().getSingleValue(s, shopInstance.getCurrencyType().getClass());
 
 							if (shopBuy != null)
 							{
@@ -93,7 +93,7 @@ public class PacketShopSell implements IMessage
 
 							if (singleValue < 1)
 							{
-								double wholeValue = AetherAPI.content().currency().getValue(s);
+								double wholeValue = AetherAPI.content().currency().getValue(s, shopInstance.getCurrencyType().getClass());
 
 								if (shopBuy != null)
 								{

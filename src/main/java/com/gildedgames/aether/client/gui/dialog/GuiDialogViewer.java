@@ -375,9 +375,9 @@ public class GuiDialogViewer extends GuiViewer implements IDialogChangeListener
 	}
 
 	@Override
-	public void onSceneClosed()
+	public void beforeSceneCloses()
 	{
-		Minecraft.getMinecraft().displayGuiScreen(null);
+
 	}
 
 	@Override
@@ -435,7 +435,7 @@ public class GuiDialogViewer extends GuiViewer implements IDialogChangeListener
 			}
 			else
 			{
-				this.controller.closeScene();
+				this.controller.closeScene(false);
 			}
 		}
 	}

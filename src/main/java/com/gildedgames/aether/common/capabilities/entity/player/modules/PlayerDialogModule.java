@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.dialog.*;
 import com.gildedgames.aether.api.entity.EntityNPC;
 import com.gildedgames.aether.client.gui.dialog.GuiDialogViewer;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.network.NetworkingAether;
@@ -218,6 +219,11 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 	{
 		if (this.getWorld().isRemote)
 		{
+			if (this.sceneInstance == null)
+			{
+				throw new NullPointerException("Scene instance is null in activateButton()");
+			}
+
 			if (!this.sceneInstance.conditionsMet.containsKey(button.getLabel()))
 			{
 				return false;
@@ -327,10 +333,8 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 	}
 
 	@Override
-	public void closeScene()
+	public void closeScene(boolean closeGUI)
 	{
-		this.sceneInstance = null;
-
 		if (this.getPlayer().getEntity().world.isRemote)
 		{
 			this.closeSceneClient();
@@ -338,10 +342,17 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 
 		for (final IDialogChangeListener listener : this.listeners)
 		{
-			listener.onSceneClosed();
+			listener.beforeSceneCloses();
 		}
 
 		this.listeners.clear();
+
+		if (this.getPlayer().getEntity().world.isRemote && closeGUI)
+		{
+			AetherCore.PROXY.turnOffScreen();
+		}
+
+		this.sceneInstance = null;
 	}
 
 	@Override
@@ -356,7 +367,7 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 
 	}
 
-	private class SceneInstance
+	protected class SceneInstance
 	{
 		private final PlayerDialogModule controller;
 

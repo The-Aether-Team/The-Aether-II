@@ -38,7 +38,7 @@ public class EntityMysteriousFigure extends EntityNPC
 	{
 		super(worldIn);
 
-		this.setSize(1.0F, 1.0F);
+		this.setSize(1.0F, 2.0F);
 	}
 
 	@Override
@@ -153,7 +153,7 @@ public class EntityMysteriousFigure extends EntityNPC
 		{
 			if (this.width == 0 && this.height == 0)
 			{
-				this.setSize(1.0F, 1.0F);
+				this.setSize(1.0F, 2.0F);
 			}
 		}
 

@@ -134,6 +134,11 @@ public class CommonProxy implements IAetherServices
 
 	}
 
+	public void turnOffScreen()
+	{
+
+	}
+
 	public void modifyEntityQuicksoil(final EntityLivingBase entity)
 	{
 		entity.motionX *= 1.7D;

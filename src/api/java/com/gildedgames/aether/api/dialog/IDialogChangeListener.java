@@ -14,5 +14,5 @@ public interface IDialogChangeListener
 	/**
 	 * Called when the dialog controller closes a scene.
 	 */
-	void onSceneClosed();
+	void beforeSceneCloses();
 }

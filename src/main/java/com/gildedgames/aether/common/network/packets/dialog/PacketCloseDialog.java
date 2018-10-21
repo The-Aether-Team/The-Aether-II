@@ -31,7 +31,7 @@ public class PacketCloseDialog implements IMessage
 		public PacketCloseDialog onMessage(final PacketCloseDialog message, final EntityPlayer player)
 		{
 			final IPlayerAether aePlayer = PlayerAether.getPlayer(player);
-			aePlayer.getDialogController().closeScene();
+			aePlayer.getDialogController().closeScene(true);
 
 			return null;
 		}

@@ -25,6 +25,12 @@ public class ClientProxy extends CommonProxy
 {
 
 	@Override
+	public void turnOffScreen()
+	{
+		Minecraft.getMinecraft().displayGuiScreen(null);
+	}
+
+	@Override
 	public void preInit(final FMLPreInitializationEvent event)
 	{
 		super.preInit(event);

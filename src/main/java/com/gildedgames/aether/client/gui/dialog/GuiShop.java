@@ -425,7 +425,7 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 			}
 			else
 			{
-				value = AetherAPI.content().currency().getValue(stack);
+				value = AetherAPI.content().currency().getValue(stack, this.shopInstance.getCurrencyType().getClass());
 			}
 
 			this.sellCoins.setCurrencyValue(value);
@@ -653,11 +653,11 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 		if (InputHelper.isHovered(this.sell) && this.sell.state().isEnabled())
 		{
 			ItemStack stack = this.container.getSlot(0).getStack();
-			double singleValue = AetherAPI.content().currency().getSingleValue(stack);
+			double singleValue = AetherAPI.content().currency().getSingleValue(stack, this.shopInstance.getCurrencyType().getClass());
 
 			if (singleValue < 1)
 			{
-				double wholeValue = AetherAPI.content().currency().getValue(stack);
+				double wholeValue = AetherAPI.content().currency().getValue(stack, this.shopInstance.getCurrencyType().getClass());
 				double decimals = wholeValue - MathHelper.floor(wholeValue);
 
 				double howManyTimesDivInto = decimals / singleValue;
