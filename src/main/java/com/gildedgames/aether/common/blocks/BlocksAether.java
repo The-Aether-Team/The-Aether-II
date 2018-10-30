@@ -104,6 +104,17 @@ public class BlocksAether
 	public static final Block sentrystone_pillar_lit = new BlockCustomPillar(Material.ROCK)
 			.setSoundType(SoundType.STONE).setHardness(2.0f).setLightLevel(0.5f);
 
+	public static final Block hellfirestone_brick = new BlockBuilder(Material.ROCK)
+			.setSoundType(SoundType.STONE).setHardness(2.0f);
+
+	public static final Block hellfirestone_brick_decorative = new BlockHellfirestoneDecorative();
+
+    public static final Block hellfirestone_lantern = new BlockBuilder(Material.ROCK)
+            .setSoundType(SoundType.STONE).setHardness(2.0f).setLightLevel(1.0f);
+
+	public static final Block hellfirestone_pillar = new BlockCustomPillar(Material.ROCK)
+			.setSoundType(SoundType.STONE).setHardness(2.0f);
+
 	public static final Block agiosite = new BlockBuilder(Material.ROCK)
 			.setSoundType(SoundType.STONE).setHardness(2.0f);
 
@@ -608,6 +619,11 @@ public class BlocksAether
 		r.register("sentrystone_brick_decorative_lit", sentrystone_brick_decorative_lit.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
 		r.register("sentrystone_pillar", sentrystone_pillar.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
 		r.register("sentrystone_pillar_lit", sentrystone_pillar_lit.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
+
+        r.register("hellfirestone_brick", hellfirestone_brick.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+        r.register("hellfirestone_brick_decorative", hellfirestone_brick_decorative.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
+        r.register("hellfirestone_lantern", hellfirestone_lantern.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
+        r.register("hellfirestone_pillar", hellfirestone_pillar.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
 
 		r.register("plumproot", plumproot.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 

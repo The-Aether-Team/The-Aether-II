@@ -279,6 +279,20 @@ public class ItemModelsAether
 
 		registerItemModels(BlocksAether.sentrystone_pillar_lit, "sentrystone_bricks/pillar_lit");
 
+		registerItemModels(BlocksAether.hellfirestone_brick_decorative, new ItemModelBuilder("hellfirestone_bricks/")
+				.add(BlockHellfirestoneDecorative.BASE_BRICKS.getMeta(), "base_bricks")
+				.add(BlockHellfirestoneDecorative.BASE_PILLAR.getMeta(), "base_pillar")
+				.add(BlockHellfirestoneDecorative.CAPSTONE_BRICKS.getMeta(), "capstone_bricks")
+				.add(BlockHellfirestoneDecorative.CAPSTONE_PILLAR.getMeta(), "capstone_pillar")
+				.add(BlockHellfirestoneDecorative.FLAGSTONES.getMeta(), "flagstones")
+				.add(BlockHellfirestoneDecorative.KEYSTONE.getMeta(), "keystone"));
+
+		registerItemModels(BlocksAether.hellfirestone_brick, "hellfirestone_bricks/normal");
+
+		registerItemModels(BlocksAether.hellfirestone_lantern, "hellfirestone_bricks/lantern");
+
+		registerItemModels(BlocksAether.hellfirestone_pillar, "hellfirestone_bricks/pillar");
+
 		registerItemModels(BlocksAether.faded_holystone_brick, "faded_holystone_bricks/normal");
 
 		registerItemModels(BlocksAether.faded_holystone_brick_decorative, new ItemModelBuilder("faded_holystone_bricks/")

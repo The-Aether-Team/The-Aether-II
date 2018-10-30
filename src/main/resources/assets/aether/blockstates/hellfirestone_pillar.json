@@ -1,0 +1,15 @@
+{
+	"variants": {
+		"axis=y": {
+			"model": "aether:hellfirestone_bricks/pillar"
+		},
+		"axis=z": {
+			"model": "aether:hellfirestone_bricks/pillar",
+			"x": 90
+		},
+		"axis=x": {
+			"model": "aether:hellfirestone_bricks/pillar",
+			"x": 90, "y": 90
+		}
+	}
+}

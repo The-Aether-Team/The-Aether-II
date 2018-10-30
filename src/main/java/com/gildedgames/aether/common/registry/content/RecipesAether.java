@@ -188,6 +188,22 @@ public class RecipesAether
 				new ItemStack(BlocksAether.sentrystone_brick, 1, OreDictionary.WILDCARD_VALUE));
 		addMasonry(new ItemStack(BlocksAether.sentrystone_pillar_lit), new ItemStack(BlocksAether.sentrystone_brick));
 
+		addMasonry(new ItemStack(BlocksAether.hellfirestone_brick_decorative, 1, BlockHellfirestoneDecorative.BASE_BRICKS.getMeta()),
+				new ItemStack(BlocksAether.hellfirestone_brick, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.hellfirestone_brick_decorative, 1, BlockHellfirestoneDecorative.BASE_PILLAR.getMeta()),
+				new ItemStack(BlocksAether.hellfirestone_brick, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.hellfirestone_brick_decorative, 1, BlockHellfirestoneDecorative.CAPSTONE_BRICKS.getMeta()),
+				new ItemStack(BlocksAether.hellfirestone_brick, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.hellfirestone_brick_decorative, 1, BlockHellfirestoneDecorative.CAPSTONE_PILLAR.getMeta()),
+				new ItemStack(BlocksAether.hellfirestone_brick, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.hellfirestone_brick_decorative, 1, BlockHellfirestoneDecorative.FLAGSTONES.getMeta()),
+				new ItemStack(BlocksAether.hellfirestone_brick, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.hellfirestone_lantern, 1),
+				new ItemStack(BlocksAether.hellfirestone_brick, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.hellfirestone_brick_decorative, 1, BlockHellfirestoneDecorative.KEYSTONE.getMeta()),
+				new ItemStack(BlocksAether.hellfirestone_brick, 1, OreDictionary.WILDCARD_VALUE));
+		addMasonry(new ItemStack(BlocksAether.hellfirestone_pillar), new ItemStack(BlocksAether.hellfirestone_brick));
+
 		addMasonry(new ItemStack(BlocksAether.faded_holystone_brick),
 				new ItemStack(BlocksAether.holystone_brick, 1, OreDictionary.WILDCARD_VALUE));
 		addMasonry(new ItemStack(BlocksAether.faded_holystone_brick_decorative, 1, BlockFadedHolystoneDecorative.BASE_BRICKS.getMeta()),
