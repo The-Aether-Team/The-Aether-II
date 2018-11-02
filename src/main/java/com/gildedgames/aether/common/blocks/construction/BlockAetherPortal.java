@@ -45,7 +45,7 @@ public class BlockAetherPortal extends BlockBreakable
 		this.setSoundType(SoundType.GLASS);
 
 		this.setHardness(-1.0F);
-		this.setLightLevel(0.75F);
+		this.setLightLevel(0.3F);
 
 		this.setTickRandomly(true);
 
