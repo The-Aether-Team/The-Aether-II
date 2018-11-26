@@ -21,6 +21,7 @@ dependencies {
     compile project(":OrbisAPI")
 }
 
+ext.config = loadConfig(file('build.properties'))
 ext.repo = Grgit.open()
 
 allprojects {
@@ -28,7 +29,7 @@ allprojects {
     targetCompatibility = 1.8
 }
 
-version = "${mod_version}"
+version = "${config.mod_version}"
 group = "com.gildedgames"
 archivesBaseName = "aether_ii"
 
@@ -39,23 +40,17 @@ sourceSets {
 }
 
 jar {
-    dependsOn(':OrbisAPI:build')
     from sourceSets.api.output
     from sourceSets.main.output
 
     manifest {
         attributes 'FMLAT': 'aether_at.cfg'
-        attributes 'ContainedDeps': "${project(":OrbisAPI").mod_name}-${project(":OrbisAPI").mod_version}.jar"
     }
-    from("OrbisAPI/build/libs") {
-        include("${project(":OrbisAPI").mod_name}-${project(":OrbisAPI").mod_version}.jar")
-    }
-    classifier = 'universal'
 }
 
 minecraft {
-    version = forge_version
-    mappings = forge_mappings
+    version = config.forge_version
+    mappings = config.forge_mappings
 
     runDir = "run"
 }
@@ -86,6 +81,14 @@ idea {
 // See https://github.com/MinecraftForge/Srg2Source/issues/10
 minecraft {
     makeObfSourceJar = false
+}
+
+static def loadConfig(File config) {
+    def props = new Properties()
+    config.withInputStream {
+        stream -> props.load(stream)
+    }
+    return new ConfigSlurper().parse(props)
 }
 
 task signJar(type: SignJar, dependsOn: reobfJar) {
