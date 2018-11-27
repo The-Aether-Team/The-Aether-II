@@ -29,7 +29,7 @@ import java.util.Random;
 public class TileEntityIncubator extends TileEntityLockable implements ITickable, IInventory
 {
 
-	public static final int REQ_TEMPERATURE_THRESHOLD = 5000;
+	public static final int REQ_TEMPERATURE_THRESHOLD = 3000;
 
 	private static final int INVENTORY_SIZE = 2;
 
@@ -48,7 +48,7 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 
 	private final int eggtimerDecrement = 1;
 
-	private final float ambroTimerIncrement = 2.0F; // this should remain the same as heating increment.
+	private final float ambroTimerIncrement = 2.0F;
 
 	private NonNullList<ItemStack> inventory = NonNullList.withSize(INVENTORY_SIZE, ItemStack.EMPTY);
 
@@ -88,7 +88,14 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 
 		if (state.getBlock() instanceof BlockIncubator && state.getValue(BlockIncubator.PROPERTY_IS_LIT))
 		{
-			this.ambroTimer += this.ambroTimerIncrement;
+			if (canEggIncubate())
+			{
+				this.ambroTimer += (this.ambroTimerIncrement/2); // slow down rate of decay for fuel when heat is max and above
+			}
+			else
+			{
+				this.ambroTimer += this.ambroTimerIncrement;
+			}
 
 			if (this.currentHeatingProgress < REQ_TEMPERATURE_THRESHOLD)
 			{
@@ -107,16 +114,11 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 			{
 				this.eggTimer += this.eggTimerIncrement;
 			}
-			else
-			{
-				if (this.eggTimer > 0)
-				{
-					this.eggTimer -= this.eggtimerDecrement;
-				}
-			}
 
-			if (this.eggTimer >= (REQ_TEMPERATURE_THRESHOLD / 600))
+
+			if (this.eggTimer >= this.getEggTimerMax())
 			{
+				//TODO: Baby Moas still don't spawn from incubator, but I think this is an issue w/ the Moas not an issue with the incubator
 				Random rand = new Random();
 				MoaGenePool stackGenes = ItemMoaEgg.getGenePool(eggstack);
 				MoaNest familyNest = new MoaNest(this.world);
@@ -134,12 +136,21 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 				eggstack.shrink(1);
 				this.eggTimer = 0;
 			}
+
 		}
-		else
+
+		if (!this.isHeating() && !this.getMoaEgg().isEmpty())
+		{
+			if (this.currentHeatingProgress == 0) {
+				eggstack.shrink(1); 	// kill egg if heat reaches 0.
+			}
+		}
+
+		if (this.getMoaEgg().isEmpty())
 		{
 			this.eggTimer = 0;
 		}
-	}
+ 	}
 
 	@Nonnull
 	public ItemStack getMoaEgg()
@@ -170,17 +181,21 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 
 	public int getRequiredTemperatureThreshold()
 	{
-		return TileEntityIncubator.REQ_TEMPERATURE_THRESHOLD;
+		return (TileEntityIncubator.REQ_TEMPERATURE_THRESHOLD - 500);
 	}
 
 	public boolean canEggIncubate()
 	{
-		return this.getCurrentHeatingProgress() >= 2500;
+		return this.getCurrentHeatingProgress() >= getRequiredTemperatureThreshold();
 	}
 
 	public int getEggTimer()
 	{
 		return this.eggTimer;
+	}
+
+	public int getEggTimerMax() {
+		return REQ_TEMPERATURE_THRESHOLD;
 	}
 
 	@Override
@@ -258,7 +273,9 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack)
 	{
-		return stack.getItem() == ItemsAether.ambrosium_chunk || stack.getItem() == ItemsAether.rainbow_moa_egg;
+		// this code never seems to get called, commenting it out for reference in case I missed something during testing.
+		//return stack.getItem() == ItemsAether.ambrosium_chunk || stack.getItem() == ItemsAether.rainbow_moa_egg;
+		return false;
 	}
 
 	@Override
