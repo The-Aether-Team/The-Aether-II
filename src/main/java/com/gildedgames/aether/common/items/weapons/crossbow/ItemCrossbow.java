@@ -30,12 +30,37 @@ import java.util.List;
 
 public class ItemCrossbow extends Item
 {
+	//TODO: add Zanite ability (as weapon degrades, weapon fires faster from FAST speed to FASTEST), speed currently assigned in ItemsAether using setDurationInTicks
+	//TODO: add Gravitite ability : No bolt drop & Load blocks as ammo to be fired at long range.
 
 	public static final ItemBoltType[] BOLT_TYPES = ItemBoltType.values();
+
+	public enum crossBowTypes {
+		SKYROOT(1F, 200, "skyroot_crossbow"),
+		HOLYSTONE(1.2F, 250, "holystone_crossbow"),
+		ZANITE(1.3F, 300, "zanite_crossbow"),
+		ARKENIUM(1.4F, 400, "arkenium_crossbow"),
+		GRAVETITE(1.6F, 350, "gravitite_crossbow");
+
+		float damageMultiplier;
+		int maxDurability;
+		String name;
+
+		crossBowTypes(float damageMultiplier, int maxDurability, String name)
+		{
+			this.damageMultiplier = damageMultiplier;
+			this.maxDurability = maxDurability;
+			this.name = name;
+		}
+	}
 
 	private float durationInTicks;
 
 	private float knockBackValue;
+
+	private crossBowTypes cBType;
+
+	private boolean isSpecialLoaded = false;
 
 	public ItemCrossbow()
 	{
@@ -203,11 +228,45 @@ public class ItemCrossbow extends Item
 
 			final ItemBoltType boltType = ItemCrossbow.getLoadedBoltType(stack);
 
-			final EntityBolt dart = new EntityBolt(entityLiving.getEntityWorld(), entityLiving);
-			dart.shoot(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 0.0F, speed * 2.0F, 1.0F);
-			dart.setBoltAbility(BoltAbility.NORMAL);
-			dart.setBoltType(boltType);
-			dart.pickupStatus = EntityArrow.PickupStatus.ALLOWED;
+			EntityBolt bolt0 = null,
+					bolt1 = null,
+					bolt2 =  null;
+
+			// calculate bolts that are special is being loaded.
+			if (this.isSpecialLoaded)
+			{
+				if (this.cBType == crossBowTypes.SKYROOT)
+				{
+					bolt0 = createBolt(entityLiving, speed, 0, 0, 0, this.cBType.damageMultiplier);
+					bolt1 = createBolt(entityLiving, speed, 0, 0, 0, this.cBType.damageMultiplier);
+				}
+				else if (this.cBType == crossBowTypes.HOLYSTONE)
+				{
+					bolt0 = createBolt(entityLiving, speed / 2, 0, 0, 0, this.cBType.damageMultiplier);
+					bolt1 = createBolt(entityLiving, speed / 2, 10, 0, 0, this.cBType.damageMultiplier);
+					bolt2 = createBolt(entityLiving, speed / 2, -10, 0, 0, this.cBType.damageMultiplier);
+				}
+				else if (this.cBType == crossBowTypes.ZANITE)
+				{
+					bolt0 = createBolt(entityLiving, speed, 0,0,0, 1.5F);
+				}
+				else if (this.cBType == crossBowTypes.ARKENIUM)
+				{
+					bolt0 = createBolt(entityLiving, speed * 2.5f, 0, -1, 0, 2.0f);
+				}
+				else if (this.cBType == crossBowTypes.GRAVETITE)
+				{
+
+				}
+				else
+				{
+					bolt0 = createBolt(entityLiving, speed, 0, 0, -0.5f, this.cBType.damageMultiplier);
+				}
+			}
+			else
+			{
+				bolt0 = createBolt(entityLiving, speed, 0,0,0, this.cBType.damageMultiplier);
+			}
 
 			if (entityLiving instanceof EntityPlayer)
 			{
@@ -215,12 +274,74 @@ public class ItemCrossbow extends Item
 
 				if (player.capabilities.isCreativeMode)
 				{
-					dart.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
+					if (bolt0 != null)
+					{
+						bolt0.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
+					}
+					if (bolt1 != null)
+					{
+						bolt1.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
+					}
+					if (bolt2 != null)
+					{
+						bolt2.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
+					}
+				}
+				else
+				{
+					if (this.getDamage(stack) >= this.getMaxDamage(stack))
+					{
+						player.inventory.deleteStack(stack);
+						world.playSound(null, entityLiving.posX, entityLiving.posY, entityLiving.posZ, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 1.0F,
+								1.0F / (itemRand.nextFloat() * 0.4F + 1.2F));
+					}
+
+					// damage crossbow
+					if (this.isSpecialLoaded)
+					{
+						this.setDamage(stack, this.getDamage(stack) + 2);
+					}
+					else
+					{
+						this.setDamage(stack, this.getDamage(stack) + 1);
+					}
 				}
 			}
 
-			entityLiving.getEntityWorld().spawnEntity(dart);
+			if (bolt0 != null)
+			{
+				entityLiving.getEntityWorld().spawnEntity(bolt0);
+			}
+
+			if (bolt1 != null)
+			{
+				entityLiving.getEntityWorld().spawnEntity(bolt1);
+			}
+
+			if (bolt2 != null)
+			{
+				entityLiving.getEntityWorld().spawnEntity(bolt2);
+			}
+
+			this.isSpecialLoaded = false;
 		}
+	}
+
+	private EntityBolt createBolt(EntityLivingBase entityLiving, float speed, float addRotationYaw, float addRotationPitch, float addInaccuracy, float damageMultiplier)
+	{
+		if (!entityLiving.world.isRemote)
+		{
+			final EntityBolt bolt = new EntityBolt(entityLiving.getEntityWorld(), entityLiving);
+			bolt.shoot(entityLiving, entityLiving.rotationPitch + addRotationPitch, entityLiving.rotationYaw + addRotationYaw,
+					0.0F, speed * 2.0F, 1.0F + addInaccuracy);
+			bolt.setBoltAbility(BoltAbility.NORMAL);
+			bolt.setDamage(bolt.getDamage() * damageMultiplier);
+			bolt.pickupStatus = EntityArrow.PickupStatus.ALLOWED;
+
+			return bolt;
+		}
+
+		return null;
 	}
 
 	@Override
@@ -233,8 +354,7 @@ public class ItemCrossbow extends Item
 
 			if (this.hasAmmo(player))
 			{
-				final float use = (float) (stack.getMaxItemUseDuration() - living.getItemInUseCount()) / 20.0F;
-
+				final float use = (float) (this.getMaxItemUseDuration(stack) - living.getItemInUseCount()) / 20.0F;
 				if (use == (this.durationInTicks / 20.0F))
 				{
 					if (!living.getEntityWorld().isRemote)
@@ -242,9 +362,23 @@ public class ItemCrossbow extends Item
 						ItemCrossbow.setLoadedBoltType(stack, ItemCrossbow.BOLT_TYPES[boltStack.getItemDamage()]);
 						ItemCrossbow.setLoaded(stack, true);
 
+						this.isSpecialLoaded = player.isSneaking();
+
 						if (!player.capabilities.isCreativeMode)
 						{
-							boltStack.shrink(1);
+							int shrinkQuantity = 1;
+							if (isSpecialLoaded)
+							{
+								if (this.cBType == crossBowTypes.HOLYSTONE)
+								{
+									shrinkQuantity = 3;
+								}
+								if (this.cBType == crossBowTypes.SKYROOT)
+								{
+									shrinkQuantity = 2;
+								}
+							}
+							boltStack.shrink(shrinkQuantity);
 
 							if (boltStack.getCount() == 0)
 							{
@@ -317,11 +451,26 @@ public class ItemCrossbow extends Item
 			tooltip.add(TextFormatting.GRAY + "\u2022 " + String.valueOf(seconds) + " " + I18n.format(
 					"item.aether.crossbow.desc" + (seconds < 1 || seconds > 1 ? "2" : "3")));
 		}
+
+		tooltip.add(TextFormatting.BLUE + I18n.format("item.aether.crossbow.desc4"));
+		tooltip.add(TextFormatting.GRAY + "\u2022 " + I18n.format("item.aether." + this.cBType.name + ".ability"));
 	}
 
 	@Override
 	public int getItemBurnTime(ItemStack itemStack)
 	{
 		return 100;
+	}
+
+	public crossBowTypes getType()
+	{
+		return this.cBType;
+	}
+
+	public ItemCrossbow setType(crossBowTypes type)
+	{
+		this.cBType = type;
+		this.setMaxDamage(cBType.maxDurability);
+		return this;
 	}
 }

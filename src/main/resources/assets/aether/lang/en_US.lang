@@ -608,6 +608,12 @@ item.aether.sentry_vaultbox.ability.desc2=?3Throw: ?rRight-Click
 item.aether.crossbow.desc1=Reload Speed
 item.aether.crossbow.desc2=Seconds
 item.aether.crossbow.desc3=Second
+item.aether.crossbow.desc4=Ability
+item.aether.skyroot_crossbow.ability=Shift+Reload: Double Shot
+item.aether.holystone_crossbow.ability=Shift+Reload: Spread Shot
+item.aether.zanite_crossbow.ability=Not implemented
+item.aether.arkenium_crossbow.ability=Shift+Reload: Long shot
+item.aether.gravitite_crossbow.ability=Not implemented
 item.aether.bolt.desc1=Attack Damage
 
 # Tool tooltips
