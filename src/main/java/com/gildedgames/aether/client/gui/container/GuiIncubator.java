@@ -42,6 +42,10 @@ public class GuiIncubator extends GuiContainer
 	{
 		TileEntity tile = Minecraft.getMinecraft().world.getTileEntity(this.incubatorPos);
 
+		String name = tile.getDisplayName().getUnformattedText();
+		this.fontRenderer.drawString(name, this.xSize/2 - this.fontRenderer.getStringWidth(name)/2, 6, 4210752);
+		this.fontRenderer.drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96 +2, 4210752);
+
 		if (tile instanceof TileEntityIncubator)
 		{
 			TileEntityIncubator te = (TileEntityIncubator) tile;
