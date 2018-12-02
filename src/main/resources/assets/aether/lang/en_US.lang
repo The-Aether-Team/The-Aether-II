@@ -514,8 +514,8 @@ item.aether.present.tooltip.hasitem=Contains an item inside!
 
 tile.aether.aether_portal.name=Aether Portal
 
-cloudParachute.ability.rightClick=?3Use:?r Right-Click
-cloudParachute.ability=?9Ability:
+cloudParachute.ability.rightClick=§3Use:§r Right-Click
+cloudParachute.ability=§9Ability:
 cloudParachute.ability.cold=Slow Descent
 cloudParachute.ability.golden=Fast Descent
 cloudParachute.ability.purple=Directional Descent
@@ -583,12 +583,12 @@ moa.wing_strength.strong=Strong
 moa.wing_strength.excellent=Excellent
 
 # Item Rarities
-item.rarity.none.name=?7?oBasic
-item.rarity.common.name=?7?oCommon
-item.rarity.rare.name=?b?oRare
-item.rarity.epic.name=?5?oEpic
-item.rarity.mythic.name=?6?oMythic
-item.rarity.godly.name=?o?aG?bo?6d?dl?ey
+item.rarity.none.name=§7§oBasic
+item.rarity.common.name=§7§oCommon
+item.rarity.rare.name=§b§oRare
+item.rarity.epic.name=§5§oEpic
+item.rarity.mythic.name=§6§oMythic
+item.rarity.godly.name=§o§aG§bo§6d§dl§ey
 
 # Weapon Tooltips
 item.aether.skyroot_sword.ability.desc=Doubles Drops
@@ -603,17 +603,11 @@ item.aether.flaming_sword.ability.desc=Ignites Mobs
 item.aether.vampire_blade.ability.desc=Leeches Life
 item.aether.candy_cane_sword.ability.desc=Drops Candy Canes
 item.aether.valkyrie_lance.ability.desc=Extended Reach
-item.aether.sentry_vaultbox.ability.desc1=?dOutputs: ?rRandom Items
-item.aether.sentry_vaultbox.ability.desc2=?3Throw: ?rRight-Click
+item.aether.sentry_vaultbox.ability.desc1=§dOutputs: §rRandom Items
+item.aether.sentry_vaultbox.ability.desc2=§3Throw: §rRight-Click
 item.aether.crossbow.desc1=Reload Speed
 item.aether.crossbow.desc2=Seconds
 item.aether.crossbow.desc3=Second
-item.aether.crossbow.desc4=Ability
-item.aether.skyroot_crossbow.ability=Shift+Reload: Double Shot
-item.aether.holystone_crossbow.ability=Shift+Reload: Spread Shot
-item.aether.zanite_crossbow.ability=Not implemented
-item.aether.arkenium_crossbow.ability=Shift+Reload: Long shot
-item.aether.gravitite_crossbow.ability=Not implemented
 item.aether.bolt.desc1=Attack Damage
 
 # Tool tooltips
@@ -798,12 +792,8 @@ gui.aether.loading.indeterminate=Loading...
 gui.aether.loading.progress=%s%% Loading...
 gui.aether.patreon.rewards.button.use=Use
 gui.aether.patreon.rewards.button.locked=Locked
-gui.aether.incubator.label.incubation=Incubation
+gui.aether.incubator.label.incubating=Incubating
 gui.aether.incubator.label.heating=Heating
-gui.aether.incubator.label.more_heat=More Heat!
-gui.aether.incubator.label.ready=Ready!
-gui.aether.incubator.label.max=MAX
-gui.aether.incubator.label.fail=FAILING!
 gui.aether.masonry.label.recipes=Recipes
 
 # Intro
@@ -858,38 +848,38 @@ elementalState.lightning=Lightning
 
 ability.extraDamage.attack=Attack
 ability.extraDamage.desc=%s %s Damage
-ability.active=?5Only Active:
-ability.cosmetic=?eCosmetic
-ability.breatheUnderwater.desc=?9Water Breathing
-ability.daggerfrost.desc=?9Snowballs Cause Damage
-ability.doubleDrops.desc1=?9Double Mob Drops
+ability.active=§5Only Active:
+ability.cosmetic=§eCosmetic
+ability.breatheUnderwater.desc=§9Water Breathing
+ability.daggerfrost.desc=§9Snowballs Cause Damage
+ability.doubleDrops.desc1=§9Double Mob Drops
 ability.doubleDrops.desc2=%s%% Chance
 ability.punchingDamage.desc1=%s Punching Damage
 ability.punchingDamage.desc2=%s %s Punching
-ability.freezeBlocks.desc=?9Freezes Nearby Blocks
-ability.pauseHunger.desc=?9Stops Hunger
-ability.reduceHunger.desc=?9Reduces Hunger
-ability.regenerateHealth.desc=?9Regenerates Health
+ability.freezeBlocks.desc=§9Freezes Nearby Blocks
+ability.pauseHunger.desc=§9Stops Hunger
+ability.reduceHunger.desc=§9Reduces Hunger
+ability.regenerateHealth.desc=§9Regenerates Health
 ability.maxHealthMod.desc=%s Max Health
 ability.movementSpeedMod.desc=%s Movement Speed
 ability.modifyXPCollection.desc=%s XP Collected
 ability.defenseMod.desc=%s %s
 ability.defenseMod.desc1=Defense
 ability.defenseMod.desc2=Resistance
-ability.invisibility.desc=?9Invisibility
-ability.changeAttackElement.desc=?9All Attacks Become:
-ability.setEnemiesOnFire.desc=?9Sets Enemies On Fire
-ability.fireImmunity.desc=?9Fire Immunity
-ability.doubleJump.desc=?9Double Jump
+ability.invisibility.desc=§9Invisibility
+ability.changeAttackElement.desc=§9All Attacks Become:
+ability.setEnemiesOnFire.desc=§9Sets Enemies On Fire
+ability.fireImmunity.desc=§9Fire Immunity
+ability.doubleJump.desc=§9Double Jump
 ability.companion.desc=For Companion
-ability.leechLife.desc1=?9Life Leech
+ability.leechLife.desc1=§9Life Leech
 ability.leechLife.desc2=%s%% Chance
-ability.slowfall.desc=?9Slowfall
+ability.slowfall.desc=§9Slowfall
 ability.weight.desc1=%skg Weight
 ability.weight.desc2=%skg Weight Tolerance
-ability.levitateAttackers.desc1=?9Levitate Attackers
+ability.levitateAttackers.desc1=§9Levitate Attackers
 ability.levitateAttackers.desc2=%s%% Chance
-ability.setAttackersOnFire.desc1=?9Burns Attackers
+ability.setAttackersOnFire.desc1=§9Burns Attackers
 ability.setAttackersOnFire.desc2=%s%% Chance
 ability.attackSpeedMod.desc=%s Attack Speed
 
@@ -920,7 +910,7 @@ bug_report.line2=Did you run into an issue? If you'd like, you can help contribu
 bug_report.line3=Issues are an easy way to report bugs and other problems with the mod, giving you direct access to developer help and our amazing community of volunteers.
 bug_report.line4=Clicking the button below will take you to an external website in your browser where our issue tracker is located. Register an account today, and help us squash bugs faster than ever!
 
-aether.warning.deprecated_item=?cDeprecated! Will be removed!
+aether.warning.deprecated_item=§cDeprecated! Will be removed!
 aether.warning.operator_item=Requires Operator privileges
 
 # Rewards
@@ -983,13 +973,13 @@ necromancer.us.leadtheway=Thank you. Goodbye.
 ###########################
 ##=======================##
 
-edison.greet.start_not_introduced=You?re late, newby. Been waiting here for a couple hours now.
+edison.greet.start_not_introduced=You’re late, newby. Been waiting here for a couple hours now.
 
 edison.greet.option.expecting=You were expecting me?
 edison.greet.option.who=Who are you?
 edison.greet.option.map=I didn't exactly have a map.
 
-edison.greet.respawn_not_introduced=You should really take better care of yourself, friend. You?re lucky you were found in one piece.
+edison.greet.respawn_not_introduced=You should really take better care of yourself, friend. You’re lucky you were found in one piece.
 edison.greet.respawn=You okay? You were found pretty beat up back there.
 
 edison.greet.option.what=What is this place?
@@ -1007,49 +997,49 @@ edison.greet.option.okay_goodbye=I think I'm okay. Goodbye.
 edison.greet.option.ready_goodbye=I think I'm ready. Bye, Edison.
 edison.greet.option.mind_goodbye=I'll keep that in mind. Goodbye.
 
-edison.greet.expecting1=Of course! I?m being paid good money by our "mutual friend? to watch your back.
+edison.greet.expecting1=Of course! I’m being paid good money by our "mutual friend” to watch your back.
 edison.greet.expecting2=Wait, did he not explain our little arrangement? Typical...
 edison.greet.expecting3=Well then... What do I need to explain to you?
 
-edison.greet.option.no_we_talked=No we talked. You?re... Edison, right?
+edison.greet.option.no_we_talked=No we talked. You’re... Edison, right?
 
-edison.greet.who1=I?m Edison! International entrepreneur, salesman and master of persuasion!
-edison.greet.who2=But to you, due to our little agreement with "you know who?, I am also your contact in these strange lands.
-edison.greet.who3=Basically, that means I?ve got to look after you.
-edison.greet.who4=Now I?m a strong believer in knowledge being the best tool in this world. So in the interest of keeping you from, well, dying...
+edison.greet.who1=I’m Edison! International entrepreneur, salesman and master of persuasion!
+edison.greet.who2=But to you, due to our little agreement with "you know who”, I am also your contact in these strange lands.
+edison.greet.who3=Basically, that means I’ve got to look after you.
+edison.greet.who4=Now I’m a strong believer in knowledge being the best tool in this world. So in the interest of keeping you from, well, dying...
 edison.greet.who5=Do you have any more questions?
 
 edison.greet.option.you_know_who="You know who?"
 
-edison.greet.map1=Haha! Snarky one aren?t ya? Maybe I should?ve expected a bit of a wait.
-edison.greet.map2=Not exactly hard to find these places though. Would?ve thought you?d be dropped off nearby anyway.
+edison.greet.map1=Haha! Snarky one aren’t ya? Maybe I should’ve expected a bit of a wait.
+edison.greet.map2=Not exactly hard to find these places though. Would’ve thought you’d be dropped off nearby anyway.
 
-edison.greet.what1="This place?" King of vague questions aren?t you?
-edison.greet.what2=I would assume you knew at least a little about what you were getting into coming here, but I?ll need you to be a bit more specific than that.
-edison.greet.what3=Do you mean this building we?re standing in? Or the actual world around us?
+edison.greet.what1="This place?" King of vague questions aren’t you?
+edison.greet.what2=I would assume you knew at least a little about what you were getting into coming here, but I’ll need you to be a bit more specific than that.
+edison.greet.what3=Do you mean this building we’re standing in? Or the actual world around us?
 
 edison.greet.option.building=This building.
 edison.greet.option.world=This world.
 
-edison.greet.died1=So did I! When my employee dragged you in here I wasn?t sure you were gonna wake up.
+edison.greet.died1=So did I! When my employee dragged you in here I wasn’t sure you were gonna wake up.
 
 edison.greet.fine1=Well that was passive aggressive considering me and my men just saved your skin.
 edison.greet.fine2=You need anything before you head off?
 
-edison.greet.thanks1=Don?t mention it. We?ve all got a role to play here, mine?s to keep you safe.
+edison.greet.thanks1=Don’t mention it. We’ve all got a role to play here, mine’s to keep you safe.
 edison.greet.thanks2=You need anything or are you good to set off?
 
-edison.greet.sale=Sure thing, let?s take a look at my stock.
+edison.greet.sale=Sure thing, let’s take a look at my stock.
 
-edison.greet.no_we_talked1=That?s right! International entrepreneur, salesman and master of persuasion!
+edison.greet.no_we_talked1=That’s right! International entrepreneur, salesman and master of persuasion!
 edison.greet.no_we_talked2=But to you, due to our little agreement with The Necromancer, I am also your contact in these strange lands.
-edison.greet.no_we_talked3=Basically that means I?ve got to look after you.
-edison.greet.no_we_talked4=Now I?m a strong believer in knowledge being the best tool in this world. So in the interest of keeping you from, well, dying...
+edison.greet.no_we_talked3=Basically that means I’ve got to look after you.
+edison.greet.no_we_talked4=Now I’m a strong believer in knowledge being the best tool in this world. So in the interest of keeping you from, well, dying...
 edison.greet.no_we_talked5=Do you have any more questions?
 
 edison.greet.you_know_who1=The Necromancer. You know - Mr. Tall, Dark and Creepy?
-edison.greet.you_know_who2=Him and I have been in contact quite regularly, and he?s paying me quite a lot of coin to ensure if you?re ever in a pinch you?ll be taken to a safe place.
-edison.greet.you_know_who3=Thinking about it though, he usually leaves a note in with his little "gifts? he hands out. Maybe take a look through your Guidebook for one.
+edison.greet.you_know_who2=Him and I have been in contact quite regularly, and he’s paying me quite a lot of coin to ensure if you’re ever in a pinch you’ll be taken to a safe place.
+edison.greet.you_know_who3=Thinking about it though, he usually leaves a note in with his little "gifts” he hands out. Maybe take a look through your Guidebook for one.
 
 edison.greet.building1=Ah well this here is an old traveller's outpost! One built many years ago by the Valkyries as a burial ground.
 edison.greet.building2=Since then many people have taken it upon themselves to maintain these areas, making them a truly safe place for anyone wandering the Aether's landscape to rest.
@@ -1099,7 +1089,7 @@ edison.shop.therastone_brick=Now these I made to replicate old tall dark and sca
 ###########################
 ##=======================##
 
-josediya.greet.start_not_introduced=So you?re finally here. I don?t see what?s so important about you, let?s get this over with.
+josediya.greet.start_not_introduced=So you’re finally here. I don’t see what’s so important about you, let’s get this over with.
 josediya.greet.start=Is there anything else you need?
 
 josediya.greet.option.what=What are you?
@@ -1119,19 +1109,19 @@ josediya.greet.option.services=What services do you provide?
 josediya.greet.option.home=How do you know where my home is?
 josediya.greet.option.walk_home=Why can't I just walk home?
 
-josediya.greet.what=Wow not very smart are you? I?m a person, like you or that bald idiot over there. Never seen an Angel before? Valkyries save us all.
-josediya.greet.where=I come from a nation far south from here called Veradex. It?s where I get most of my work from.
-josediya.greet.take_me=I don?t think you have the coin, human. Veradex is about 3 weeks of swift travel away from here, dangerous route too. I can?t take you there.
-josediya.greet.winged_beast=That is my friend Tivalier, actually. He?s a Moa, a strong one too; he could fly both of us on his back and not break a sweat.
-josediya.greet.fly=Of course! That?s what he?s been trained for. I raise Moas as part of my work. They?re very friendly creatures if you treat them right.
-josediya.greet.moa=You?d need to raise one yourself for it to trust you enough to ride it, getting an egg isn?t an easy task though; Moas are very defensive of their nests.
-josediya.greet.who=The girl who?s going to be taking you places. My name is Josediya, I run a carriage business and baldy over there has brought me in to help you.
-josediya.greet.friends=Edison and I get along fine, he?s proved helpful over the years I?ve known him, but I still don?t trust him much. It?s just mutually beneficial for us to work together.
-josediya.greet.paying=No this is me repaying a favour. You?re the one who?s gonna pay me. And I don?t take coin from your world, Gilt only.
-josediya.greet.white_gold=That?s your problem. I don?t care how you get it, but I need to be paid for my work. Go help some farmers or something.
+josediya.greet.what=Wow not very smart are you? I’m a person, like you or that bald idiot over there. Never seen an Angel before? Valkyries save us all.
+josediya.greet.where=I come from a nation far south from here called Veradex. It’s where I get most of my work from.
+josediya.greet.take_me=I don’t think you have the coin, human. Veradex is about 3 weeks of swift travel away from here, dangerous route too. I can’t take you there.
+josediya.greet.winged_beast=That is my friend Tivalier, actually. He’s a Moa, a strong one too; he could fly both of us on his back and not break a sweat.
+josediya.greet.fly=Of course! That’s what he’s been trained for. I raise Moas as part of my work. They’re very friendly creatures if you treat them right.
+josediya.greet.moa=You’d need to raise one yourself for it to trust you enough to ride it, getting an egg isn’t an easy task though; Moas are very defensive of their nests.
+josediya.greet.who=The girl who’s going to be taking you places. My name is Josediya, I run a carriage business and baldy over there has brought me in to help you.
+josediya.greet.friends=Edison and I get along fine, he’s proved helpful over the years I’ve known him, but I still don’t trust him much. It’s just mutually beneficial for us to work together.
+josediya.greet.paying=No this is me repaying a favour. You’re the one who’s gonna pay me. And I don’t take coin from your world, Gilt only.
+josediya.greet.white_gold=That’s your problem. I don’t care how you get it, but I need to be paid for my work. Go help some farmers or something.
 josediya.greet.services=If you ever find yourself setting up shop somewhere, I can take you back to your home from any outpost. I will expect payment though.
-josediya.greet.home=I?m not taking you back to Thera, if that?s what you mean. You?ll have to find a new place to rest here in the Aether first.
-josediya.greet.walk_home=I won?t stop you but the Aether?s islands can be pretty far apart. Travelling in my carriage is going to be a lot faster and a lot smoother for you. The cloud bed is sturdy enough to walk between islands on foot, but it can be pretty dangerous without proper protection.
+josediya.greet.home=I’m not taking you back to Thera, if that’s what you mean. You’ll have to find a new place to rest here in the Aether first.
+josediya.greet.walk_home=I won’t stop you but the Aether’s islands can be pretty far apart. Travelling in my carriage is going to be a lot faster and a lot smoother for you. The cloud bed is sturdy enough to walk between islands on foot, but it can be pretty dangerous without proper protection.
 
 josediya.greet.travel=Okay. Where to?
 josediya.greet.option.travel_to=Travel To Bed
@@ -1150,14 +1140,14 @@ mysterious_figure.greet.start=A new traveller I see! Welcome, welcome... Behold 
 mysterious_figure.greet.option.who_are_you=Who are you?
 mysterious_figure.greet.option.why_plumproots=Why are you holding a plumproot over your shoulder?
 mysterious_figure.greet.option.sale=Can I take a look at your wares?
-mysterious_figure.greet.who_are_you=You want a name, ?tis but a mystery! All forgotten, even through history!
-mysterious_figure.greet.why_plumproots=Do you not know the marvelous things you can do with such beautiful plumproots? You can broth it, you can stew it, for my wares you must pursue it! Has your mouth graced the taste of plumproot pie? It?s something you must have before you die!
+mysterious_figure.greet.who_are_you=You want a name, ‘tis but a mystery! All forgotten, even through history!
+mysterious_figure.greet.why_plumproots=Do you not know the marvelous things you can do with such beautiful plumproots? You can broth it, you can stew it, for my wares you must pursue it! Has your mouth graced the taste of plumproot pie? It’s something you must have before you die!
 mysterious_figure.greet.sale=Good, good! Plumproots you shall give, candies I shall weave.
 mysterious_figure.shop.greetings=Plumproots, plumproots, plumproots! My candies I will trade for plumproots - anything else as good as gumboots!
 mysterious_figure.shop.candy_corn=You know what goes good with corn? Plumproots! ...and candy too, I guess.
 mysterious_figure.shop.cocoatrice=No Cockatrices were harmed in the making of this product.
-mysterious_figure.shop.wrapped_chocolates=I hand wrap these chocolates myself! Don?t be surprised if you find trace amounts of bones.
-mysterious_figure.shop.jelly_plumproot=I?m not sure if you could tell, but these are by far my favourite supplies.
+mysterious_figure.shop.wrapped_chocolates=I hand wrap these chocolates myself! Don’t be surprised if you find trace amounts of bones.
+mysterious_figure.shop.jelly_plumproot=I’m not sure if you could tell, but these are by far my favourite supplies.
 mysterious_figure.shop.blueberry_lollipop=Children from far and wide love these little suckers. May or may not turn you into a giant blueberry.
 mysterious_figure.shop.orange_lollipop=Tastes like oranges! P.S: This candy contains zero traces of oranges.
 mysterious_figure.shop.icestone_poprocks=Not actually made with Icestone.
