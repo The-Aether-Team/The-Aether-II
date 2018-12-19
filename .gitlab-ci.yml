@@ -4,6 +4,7 @@ before_script:
 
 build:
   script:
+    - export GRADLE_BUILD_SIGNED=true
     - ./gradlew build
   artifacts:
     paths:
