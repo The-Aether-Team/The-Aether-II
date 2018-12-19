@@ -4,6 +4,7 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.tiles.TileEntityIncubator;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -50,6 +51,12 @@ public class SlotMoaEgg extends Slot
 	public int getSlotStackLimit()
 	{
 		return 1;
+	}
+
+	@Override
+	public boolean canTakeStack(EntityPlayer playerIn)
+	{
+		return false;
 	}
 
 	@Override

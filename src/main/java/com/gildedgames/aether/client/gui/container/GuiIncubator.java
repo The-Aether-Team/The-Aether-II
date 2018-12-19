@@ -61,6 +61,27 @@ public class GuiIncubator extends GuiContainer
 
 			float eggPercent = 0.0F;
 
+			if (te.getField(0) < te.getRequiredTemperatureThreshold())
+			{
+				float heatValue = (float) te.getField(0) / ((float) te.getRequiredTemperatureThreshold()) * 100.f;
+				if (heatValue > 100.f)
+				{
+					heatValue = 100.f;
+				}
+				heatStatusString = String.valueOf(heatValue);
+				heatStatusString = String.format("%.0f", Float.valueOf(heatStatusString));
+				heatStatusString += "%";
+				if (te.getField(0) == 0)
+				{
+					heatStatusColor = 0x787878;
+				}
+			}
+			else
+			{
+				heatStatusString = I18n.format("gui.aether.incubator.label.max");
+				heatStatusColor = 0xffffff;
+			}
+
 			if (te.canEggIncubate())
 			{
 				eggStatusString = I18n.format("gui.aether.incubator.label.ready");
@@ -88,28 +109,8 @@ public class GuiIncubator extends GuiContainer
 				{
 					eggStatusString = I18n.format("gui.aether.incubator.label.fail");
 					eggStatusColor = 0x2f2f2f;
+					heatStatusColor = 0x2f2f2f;
 				}
-			}
-
-			if (te.getField(0) < te.getRequiredTemperatureThreshold())
-			{
-				float heatValue = (float) te.getField(0) / ((float) te.getRequiredTemperatureThreshold()) * 100.f;
-				if (heatValue > 100.f)
-				{
-					heatValue = 100.f;
-				}
-				heatStatusString = String.valueOf(heatValue);
-				heatStatusString = String.format("%.0f", Float.valueOf(heatStatusString));
-				heatStatusString += "%";
-				if (te.getField(0) == 0)
-				{
-					heatStatusColor = 0x787878;
-				}
-			}
-			else
-			{
-				heatStatusString = I18n.format("gui.aether.incubator.label.max");
-				heatStatusColor = 0xffffff;
 			}
 
 			// Text rendering
