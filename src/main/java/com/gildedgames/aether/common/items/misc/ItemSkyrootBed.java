@@ -51,7 +51,7 @@ public class ItemSkyrootBed extends Item implements IDropOnDeath
 
 			final int look = MathHelper.floor((double) (player.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
-			final EnumFacing enumfacing = EnumFacing.getHorizontal(look);
+			final EnumFacing enumfacing = EnumFacing.byHorizontalIndex(look);
 
 			final BlockPos adjPos = pos.offset(enumfacing);
 

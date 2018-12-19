@@ -61,7 +61,7 @@ public class ClientProxy extends CommonProxy
 
 		Minecraft.getMinecraft().loadingScreen = new CustomLoadingRenderer(Minecraft.getMinecraft(), Minecraft.getMinecraft().loadingScreen);
 
-		Minecraft.getMinecraft().metadataSerializer_.registerMetadataSectionType(new IMetadataSectionAether.MetadataSerializer(), IMetadataSectionAether.class);
+		Minecraft.getMinecraft().metadataSerializer.registerMetadataSectionType(new IMetadataSectionAether.MetadataSerializer(), IMetadataSectionAether.class);
 		MinecraftForge.EVENT_BUS.register(this);
 
 		PerfHelper.measure("Pre-initialize special renders", AetherRenderers::preInit);
@@ -117,13 +117,13 @@ public class ClientProxy extends CommonProxy
 
 	public static ResourceLocation toSpritePath(ResourceLocation sprite)
 	{
-		if (!sprite.getResourcePath().startsWith("textures/"))
+		if (!sprite.getPath().startsWith("textures/"))
 		{
-			sprite = new ResourceLocation(sprite.getResourceDomain(), "textures/" + sprite.getResourcePath());
+			sprite = new ResourceLocation(sprite.getNamespace(), "textures/" + sprite.getPath());
 		}
-		if (!sprite.getResourcePath().endsWith(".png"))
+		if (!sprite.getPath().endsWith(".png"))
 		{
-			sprite = new ResourceLocation(sprite.getResourceDomain(), sprite.getResourcePath() + ".png");
+			sprite = new ResourceLocation(sprite.getNamespace(), sprite.getPath() + ".png");
 		}
 		return sprite;
 	}

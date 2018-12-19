@@ -26,8 +26,8 @@ public class BlockRockGlassPane extends BlockPane
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer()
+	public BlockRenderLayer getRenderLayer()
 	{
-		return this.block.getBlockLayer();
+		return this.block.getRenderLayer();
 	}
 }

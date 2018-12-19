@@ -61,7 +61,7 @@ public class BlockAltar extends Block implements ITileEntityProvider
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return this.getDefaultState().withProperty(PROPERTY_FACING, EnumFacing.getHorizontal(meta));
+		return this.getDefaultState().withProperty(PROPERTY_FACING, EnumFacing.byHorizontalIndex(meta));
 	}
 
 	@Override

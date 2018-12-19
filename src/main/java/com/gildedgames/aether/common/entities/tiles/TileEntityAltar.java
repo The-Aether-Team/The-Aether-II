@@ -155,7 +155,7 @@ public class TileEntityAltar extends TileEntitySynced implements ITickable
 		super.readFromNBT(compound);
 
 		NBTTagCompound itemCompound = compound.getCompoundTag("StackOnAltar");
-		this.stackOnAltar = itemCompound.hasNoTags() ? null : new ItemStack(itemCompound);
+		this.stackOnAltar = itemCompound.isEmpty() ? null : new ItemStack(itemCompound);
 
 		this.ambrosiumCount = compound.getInteger("AmbrosiumCount");
 	}

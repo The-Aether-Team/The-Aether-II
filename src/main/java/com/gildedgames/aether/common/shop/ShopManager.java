@@ -142,7 +142,7 @@ public class ShopManager implements IShopManager
 
 	private IShopDefinition loadShopDefinition(final ResourceLocation resource) throws IOException
 	{
-		final String path = "/assets/" + resource.getResourceDomain() + "/shop/" + resource.getResourcePath() + ".json";
+		final String path = "/assets/" + resource.getNamespace() + "/shop/" + resource.getPath() + ".json";
 
 		AetherCore.LOGGER.info("Loading shop definition from file {}", path);
 

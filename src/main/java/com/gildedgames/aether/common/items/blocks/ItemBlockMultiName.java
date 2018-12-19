@@ -26,9 +26,9 @@ public class ItemBlockMultiName extends ItemBlock
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack)
+	public String getTranslationKey(ItemStack stack)
 	{
-		return super.getUnlocalizedName() + "." + this.blockWithVariants.getUnlocalizedName(stack);
+		return super.getTranslationKey() + "." + this.blockWithVariants.getTranslationKey(stack);
 	}
 
 }

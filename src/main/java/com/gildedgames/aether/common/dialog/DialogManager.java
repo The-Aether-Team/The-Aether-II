@@ -183,7 +183,7 @@ public class DialogManager implements IDialogManager
 
 	private IDialogScene loadScene(final ResourceLocation resource) throws IOException
 	{
-		final String path = "/assets/" + resource.getResourceDomain() + "/dialog/" + resource.getResourcePath() + ".json";
+		final String path = "/assets/" + resource.getNamespace() + "/dialog/" + resource.getPath() + ".json";
 
 		AetherCore.LOGGER.info("Loading dialog scene from file {}", path);
 
@@ -198,7 +198,7 @@ public class DialogManager implements IDialogManager
 
 	private IDialogSpeaker loadSpeaker(final ResourceLocation resource) throws IOException
 	{
-		final String path = resource.getResourcePath();
+		final String path = resource.getPath();
 		String pathWithoutSlide = path;
 
 		if (path.contains("#"))
@@ -206,7 +206,7 @@ public class DialogManager implements IDialogManager
 			pathWithoutSlide = path.replace(path.substring(path.indexOf("#"), path.length()), "");
 		}
 
-		final String speakerPath = "/assets/" + resource.getResourceDomain() + "/dialog/speakers/" + pathWithoutSlide + ".json";
+		final String speakerPath = "/assets/" + resource.getNamespace() + "/dialog/speakers/" + pathWithoutSlide + ".json";
 
 		AetherCore.LOGGER.info("Loading dialog speaker from file {}", speakerPath);
 

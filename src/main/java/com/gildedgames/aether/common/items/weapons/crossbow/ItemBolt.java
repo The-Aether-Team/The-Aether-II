@@ -64,8 +64,8 @@ public class ItemBolt extends Item implements IDropOnDeath
 	}
 
 	@Override
-	public String getUnlocalizedName(final ItemStack stack)
+	public String getTranslationKey(final ItemStack stack)
 	{
-		return super.getUnlocalizedName(stack) + "." + ItemBoltType.fromOrdinal(stack.getMetadata()).getID();
+		return super.getTranslationKey(stack) + "." + ItemBoltType.fromOrdinal(stack.getMetadata()).getID();
 	}
 }

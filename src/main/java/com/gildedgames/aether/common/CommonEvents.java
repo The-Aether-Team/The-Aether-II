@@ -159,7 +159,7 @@ public class CommonEvents
 						{
 							ResourceLocation loc = Item.REGISTRY.getNameForObject(r.getRecipeOutput().getItem());
 
-							if (loc != null && loc.getResourceDomain().equals(AetherCore.MOD_ID))
+							if (loc != null && loc.getNamespace().equals(AetherCore.MOD_ID))
 							{
 								toUnlock.add(r);
 							}

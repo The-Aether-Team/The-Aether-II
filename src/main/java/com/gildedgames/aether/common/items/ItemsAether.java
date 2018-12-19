@@ -201,7 +201,7 @@ public class ItemsAether
 	public static final Item cloud_parachute = new ItemCloudParachute();
 
 	public static final Item irradiated_chunk = new ItemIrradiated(new RandomItemSelector(stack -> !(stack instanceof ItemIrradiated))),
-			irradiated_sword = new ItemIrradiated(new RandomItemSelector(item -> item.getUnlocalizedName().contains("sword")
+			irradiated_sword = new ItemIrradiated(new RandomItemSelector(item -> item.getTranslationKey().contains("sword")
 					&& !(item instanceof ItemIrradiated))),
 			irradiated_armor = new ItemIrradiated(new RandomItemSelector(item -> item instanceof ItemArmor)),
 			irradiated_tool = new ItemIrradiated(new RandomItemSelector(item -> item instanceof ItemTool)),
@@ -412,7 +412,7 @@ public class ItemsAether
 
 		private void register(final String registryName, final Item item)
 		{
-			item.setUnlocalizedName(AetherCore.MOD_ID + "." + registryName);
+			item.setTranslationKey(AetherCore.MOD_ID + "." + registryName);
 			item.setRegistryName(registryName);
 
 			this.registry.register(item);

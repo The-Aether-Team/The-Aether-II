@@ -111,7 +111,7 @@ public class ContentRegistry implements IContentRegistry, IOrbisServicesListener
 		{
 			ResourceLocation loc = Item.REGISTRY.getNameForObject(recipe.getRecipeOutput().getItem());
 
-			if (loc != null && loc.getResourceDomain().equals(AetherCore.MOD_ID))
+			if (loc != null && loc.getNamespace().equals(AetherCore.MOD_ID))
 			{
 				this.craftableItemsIndex.registerRecipe(new RecipeWrapper(recipe));
 			}

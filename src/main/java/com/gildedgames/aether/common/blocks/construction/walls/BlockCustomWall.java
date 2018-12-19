@@ -42,7 +42,7 @@ public class BlockCustomWall extends BlockWall
 	@Override
 	public String getLocalizedName()
 	{
-		return new TextComponentTranslation(this.getUnlocalizedName() + ".name").getFormattedText();
+		return new TextComponentTranslation(this.getTranslationKey() + ".name").getFormattedText();
 	}
 
 	@Override

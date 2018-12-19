@@ -174,7 +174,7 @@ public class BlockPresent extends BlockContainer implements IBlockWithItem
 	}
 
 	@Override
-	public void onBlockDestroyedByExplosion(World world, BlockPos pos, Explosion explosionIn)
+	public void onExplosionDestroy(World world, BlockPos pos, Explosion explosionIn)
 	{
 		world.removeTileEntity(pos);
 		world.setBlockToAir(pos);

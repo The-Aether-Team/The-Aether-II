@@ -59,14 +59,14 @@ public class BlockWallSkyrootSign extends BlockSkyrootSign
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		EnumFacing enumfacing = EnumFacing.getFront(meta);
+		EnumFacing facing = EnumFacing.byIndex(meta);
 
-		if (enumfacing.getAxis() == EnumFacing.Axis.Y)
+		if (facing.getAxis() == EnumFacing.Axis.Y)
 		{
-			enumfacing = EnumFacing.NORTH;
+			facing = EnumFacing.NORTH;
 		}
 
-		return this.getDefaultState().withProperty(BlockWallSkyrootSign.FACING, enumfacing);
+		return this.getDefaultState().withProperty(BlockWallSkyrootSign.FACING, facing);
 	}
 
 	@Override

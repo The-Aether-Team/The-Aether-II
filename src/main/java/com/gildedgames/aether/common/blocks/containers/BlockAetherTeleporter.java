@@ -48,7 +48,7 @@ public class BlockAetherTeleporter extends BlockMultiController
 	@Override
 	public IBlockState getStateFromMeta(final int meta)
 	{
-		return this.getDefaultState().withProperty(PROPERTY_FACING, EnumFacing.getHorizontal(meta));
+		return this.getDefaultState().withProperty(PROPERTY_FACING, EnumFacing.byHorizontalIndex(meta));
 	}
 
 	@Override

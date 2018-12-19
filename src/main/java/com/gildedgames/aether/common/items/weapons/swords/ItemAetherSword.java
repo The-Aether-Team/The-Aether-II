@@ -35,13 +35,13 @@ public class ItemAetherSword extends ItemSword
 		{
 			tooltip.add(String.format("%s: %s",
 					TextFormatting.BLUE + I18n.format("item.aether.tooltip.ability"),
-					TextFormatting.WHITE + I18n.format(this.getUnlocalizedName() + ".ability.desc")));
+					TextFormatting.WHITE + I18n.format(this.getTranslationKey() + ".ability.desc")));
 
 			if (!this.abilityType.isPassive())
 			{
 				tooltip.add(String.format("%s: %s",
 						TextFormatting.DARK_AQUA + I18n.format("item.aether.tooltip.use"),
-						TextFormatting.WHITE + I18n.format(this.getUnlocalizedName() + ".use.desc")));
+						TextFormatting.WHITE + I18n.format(this.getTranslationKey() + ".use.desc")));
 			}
 		}
 	}

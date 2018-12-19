@@ -4,5 +4,5 @@ import net.minecraft.item.ItemStack;
 
 public interface IBlockMultiName
 {
-	String getUnlocalizedName(ItemStack stack);
+	String getTranslationKey(ItemStack stack);
 }

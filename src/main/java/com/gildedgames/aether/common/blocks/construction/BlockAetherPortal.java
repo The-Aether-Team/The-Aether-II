@@ -161,7 +161,7 @@ public class BlockAetherPortal extends BlockBreakable
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity)
+	public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity)
 	{
 		if (entity instanceof EntityPlayer)
 		{
@@ -235,7 +235,7 @@ public class BlockAetherPortal extends BlockBreakable
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer()
+	public BlockRenderLayer getRenderLayer()
 	{
 		return BlockRenderLayer.TRANSLUCENT;
 	}

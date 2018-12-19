@@ -71,7 +71,7 @@ public class ItemCloudParachute extends Item implements IDropOnDeath
 	}
 
 	@Override
-	public String getUnlocalizedName(final ItemStack stack)
+	public String getTranslationKey(final ItemStack stack)
 	{
 		return "item.aether." + EntityParachute.Type.fromOrdinal(stack.getMetadata()).name + "_cloud_parachute";
 	}

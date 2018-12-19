@@ -164,8 +164,8 @@ public class ItemDartShooter extends Item
 	}
 
 	@Override
-	public String getUnlocalizedName(final ItemStack stack)
+	public String getTranslationKey(final ItemStack stack)
 	{
-		return super.getUnlocalizedName(stack) + "." + ItemDartType.fromOrdinal(stack.getMetadata()).getID();
+		return super.getTranslationKey(stack) + "." + ItemDartType.fromOrdinal(stack.getMetadata()).getID();
 	}
 }

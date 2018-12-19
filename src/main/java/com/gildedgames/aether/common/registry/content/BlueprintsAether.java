@@ -83,7 +83,7 @@ public class BlueprintsAether
 
 		project = OrbisAPI.services().loadProject(null, location, AetherCore.INSTANCE, "aether_ii");
 
-		projectManager.cacheProject(location.getResourcePath(), project);
+		projectManager.cacheProject(location.getPath(), project);
 
 		OUTPOST_A = loadData("outpost_a");
 		OUTPOST_B = loadData("outpost_b");

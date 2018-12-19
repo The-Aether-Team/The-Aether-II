@@ -723,9 +723,9 @@ public class BlocksAether
 				throw new RuntimeException("Registry name of block cannot be null");
 			}
 
-			String registryName = block.getRegistryName().getResourcePath();
+			String registryName = block.getRegistryName().getPath();
 
-			item.setUnlocalizedName(AetherCore.MOD_ID + "." + registryName);
+			item.setTranslationKey(AetherCore.MOD_ID + "." + registryName);
 			item.setRegistryName(AetherCore.MOD_ID, registryName);
 
 			event.getRegistry().register(item);
@@ -808,7 +808,7 @@ public class BlocksAether
 
 		private void register(final String registryName, final Block block)
 		{
-			block.setUnlocalizedName(AetherCore.MOD_ID + "." + registryName);
+			block.setTranslationKey(AetherCore.MOD_ID + "." + registryName);
 			block.setRegistryName(AetherCore.MOD_ID, registryName);
 
 			this.registry.register(block);

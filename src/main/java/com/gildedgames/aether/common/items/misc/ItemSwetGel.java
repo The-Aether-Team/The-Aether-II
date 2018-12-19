@@ -85,7 +85,7 @@ public class ItemSwetGel extends Item implements IDropOnDeath
 	}
 
 	@Override
-	public String getUnlocalizedName(final ItemStack stack)
+	public String getTranslationKey(final ItemStack stack)
 	{
 		return "item.aether.swet_gel." + EntitySwet.Type.fromOrdinal(stack.getMetadata()).name;
 	}

@@ -80,7 +80,7 @@ public class BlockIcestoneCooler extends BlockContainer
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		EnumFacing facing = EnumFacing.getHorizontal(meta);
+		EnumFacing facing = EnumFacing.byHorizontalIndex(meta);
 
 		return this.getDefaultState().withProperty(PROPERTY_FACING, facing);
 	}
