@@ -14,10 +14,8 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockValkyrieGrass;
 import com.gildedgames.aether.common.registry.content.GenerationAether;
 import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import com.gildedgames.aether.common.world.aether.WorldProviderAether;
-import com.gildedgames.aether.common.world.aether.features.WorldGenAetherFlowers;
-import com.gildedgames.aether.common.world.aether.features.WorldGenAetherMinable;
-import com.gildedgames.aether.common.world.aether.features.WorldGenBrettlPlant;
-import com.gildedgames.aether.common.world.aether.features.WorldGenQuicksoil;
+import com.gildedgames.aether.common.world.aether.biomes.arctic_peaks.BiomeArcticPeaks;
+import com.gildedgames.aether.common.world.aether.features.*;
 import com.gildedgames.aether.common.world.aether.features.aerclouds.WorldGenAercloud;
 import com.gildedgames.aether.common.world.aether.features.aerclouds.WorldGenPurpleAercloud;
 import com.gildedgames.aether.common.world.aether.features.trees.WorldGenOrangeTree;
@@ -66,6 +64,8 @@ public class BiomeAetherDecorator
 	private final WorldGenPurpleAercloud genPurpleAercloud;
 
 	private final WorldGenBrettlPlant genBrettlPlant;
+
+	private final WorldGenIceCrystals genIceCrystals;
 
 	public boolean generateBushes = true;
 
@@ -124,6 +124,8 @@ public class BiomeAetherDecorator
 		this.genBlueAercloud = new WorldGenAercloud(BlockAercloud.getAercloudState(BlockAercloud.BLUE_AERCLOUD), 8, false);
 
 		this.genPurpleAercloud = new WorldGenPurpleAercloud(BlockAercloud.getAercloudState(BlockAercloud.PURPLE_AERCLOUD), 4, false);
+
+		this.genIceCrystals = new WorldGenIceCrystals(64);
 	}
 
 	public void prepareDecorationsWholeIsland(final World world, BlockAccessIsland access, final IIslandData island, IPrepSectorData sectorData,

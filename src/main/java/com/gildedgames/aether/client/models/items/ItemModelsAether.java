@@ -629,6 +629,8 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.kirrid_loin, "kirrid_loin");
 		registerItemModels(ItemsAether.kirrid_cutlet, "kirrid_cutlet");
 		registerItemModels(ItemsAether.valkyrie_wings, "valkyrie_wings");
+
+		registerItemModels(BlocksAether.ice_crystal, "highlands_ice_crystal");
 	}
 
 	private static void registerItemModels(final Block block, final String path)

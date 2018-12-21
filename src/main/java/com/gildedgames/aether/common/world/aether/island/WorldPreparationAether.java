@@ -6,7 +6,9 @@ import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandDataPartial;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.common.util.ChunkNoiseGenerator;
+import com.gildedgames.aether.common.world.aether.biomes.arctic_peaks.BiomeArcticPeaks;
 import com.gildedgames.aether.common.world.aether.features.WorldGenAetherCaves;
+import com.gildedgames.aether.common.world.aether.features.WorldGenUndergroundVeins;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
 import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
 import com.gildedgames.orbis_api.processing.BlockAccessExtendedWrapper;
@@ -31,6 +33,8 @@ public class WorldPreparationAether
 
 	private final WorldGenAetherCaves caveGenerator;
 
+	private final WorldGenUndergroundVeins veinGenerator;
+
 	private final OpenSimplexNoise surfaceNoise;
 
 	private final OpenSimplexNoise noise;
@@ -47,6 +51,8 @@ public class WorldPreparationAether
 		this.surfaceNoise = new OpenSimplexNoise(world.getSeed() ^ 745684654L);
 
 		this.caveGenerator = new WorldGenAetherCaves();
+
+		this.veinGenerator = new WorldGenUndergroundVeins();
 	}
 
 	public void generateBaseTerrain(Biome[] biomes, final ChunkPrimer primer, final IIslandData island, final int chunkX, final int chunkZ)
@@ -88,6 +94,10 @@ public class WorldPreparationAether
 		this.replaceBiomeBlocks(island, mask, chunkX, chunkZ);
 
 		this.caveGenerator.generate(this.world, chunkX, chunkZ, mask);
+
+		if (island.getBiome() instanceof BiomeArcticPeaks) {
+			this.veinGenerator.generate(this.world, chunkX, chunkZ, mask);
+		}
 
 		generator.genChunk(biomes, this.noise, this.access, mask, primer, island, chunkX, chunkZ);
 	}
@@ -145,5 +155,9 @@ public class WorldPreparationAether
 		this.replaceBiomeBlocks(island, mask, chunkX, chunkZ);
 
 		this.caveGenerator.generate(this.world, chunkX, chunkZ, mask);
+
+		if (island.getBiome() instanceof BiomeArcticPeaks) {
+			this.veinGenerator.generate(this.world, chunkX, chunkZ, mask);
+		}
 	}
 }

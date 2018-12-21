@@ -203,6 +203,19 @@ public class BiomeArcticPeaks extends BiomeAetherBase
 			}
 		});
 
+		decorations.add(new WorldDecorationSimple(2, 0.5f, DecorateBiomeEvent.Decorate.EventType.CUSTOM, GenerationAether.ice_crystals)
+		{
+			@Override
+			public BlockPos findPositionToPlace(final IBlockAccessExtended blockAccess, final Random rand, final BlockPos pos)
+			{
+				final int x = rand.nextInt(16) + 8;
+				final int y = rand.nextInt(96);
+				final int z = rand.nextInt(16) + 8;
+
+				return pos.add(x, y, z);
+			}
+		});
+
 		return decorations;
 	}
 
