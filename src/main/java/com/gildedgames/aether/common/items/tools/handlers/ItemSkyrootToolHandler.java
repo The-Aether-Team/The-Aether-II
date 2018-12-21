@@ -33,7 +33,7 @@ public class ItemSkyrootToolHandler implements IToolEventHandler
 				return;
 			}
 
-			final IPlacementFlagCapability data = world.getChunkFromBlockCoords(pos).getCapability(AetherCapabilities.CHUNK_PLACEMENT_FLAG, EnumFacing.UP);
+			final IPlacementFlagCapability data = world.getChunk(pos).getCapability(AetherCapabilities.CHUNK_PLACEMENT_FLAG, EnumFacing.UP);
 
 			if (data.isModified(pos))
 			{

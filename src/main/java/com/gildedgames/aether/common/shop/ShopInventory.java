@@ -135,7 +135,7 @@ public class ShopInventory implements IInventory, NBT
 			}
 		}
 
-		return AetherAPI.content().currency().hasValue(stack);
+		return AetherAPI.content().currency().hasValue(stack, this.shopInstance.getCurrencyType().getClass());
 	}
 
 	@Override

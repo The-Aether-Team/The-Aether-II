@@ -16,8 +16,6 @@ public class LootTablesAether
 
 	public static ResourceLocation ENTITY_SWET, ENTITY_SWET_BLUE, ENTITY_SWET_GREEN, ENTITY_SWET_PURPLE;
 
-	public static ResourceLocation ENTITY_FLYING_COW;
-
 	public static ResourceLocation ENTITY_TAEGORE;
 
 	public static ResourceLocation ENTITY_BURRUKAI;
@@ -41,8 +39,6 @@ public class LootTablesAether
 		ENTITY_SWET_BLUE = LootTableList.register(AetherCore.getResource("entities/swet/swet_blue"));
 		ENTITY_SWET_GREEN = LootTableList.register(AetherCore.getResource("entities/swet/swet_green"));
 		ENTITY_SWET_PURPLE = LootTableList.register(AetherCore.getResource("entities/swet/swet_purple"));
-
-		ENTITY_FLYING_COW = LootTableList.register(AetherCore.getResource("entities/flying_cow"));
 
 		ENTITY_TAEGORE = LootTableList.register(AetherCore.getResource("entities/taegore"));
 

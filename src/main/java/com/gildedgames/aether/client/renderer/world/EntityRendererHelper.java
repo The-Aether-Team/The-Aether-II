@@ -38,7 +38,7 @@ public class EntityRendererHelper
 		int[] lightmapColors = getLightmapColors(mc.entityRenderer);
 		DynamicTexture lightmapTexture = getLightmapTexture(mc.entityRenderer);
 
-		mc.mcProfiler.startSection("lightTexAetherDim");
+		mc.profiler.startSection("lightTexAetherDim");
 
 		World world = mc.world;
 
@@ -172,7 +172,7 @@ public class EntityRendererHelper
 
 			lightmapTexture.updateDynamicTexture();
 
-			mc.mcProfiler.endSection();
+			mc.profiler.endSection();
 		}
 	}
 

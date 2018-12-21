@@ -198,6 +198,7 @@ public class PlayerAether implements IPlayerAether
 		return this.separateInventoryModule;
 	}
 
+	@Override
 	public PlayerCurrencyModule getCurrencyModule()
 	{
 		return this.currencyModule;

@@ -16,6 +16,7 @@ import com.gildedgames.aether.common.world.spawning.SpawnSystemProvider;
 import com.gildedgames.aether.common.world.spawning.conditions.*;
 import com.gildedgames.aether.common.world.spawning.util.FlyingPositionSelector;
 import com.gildedgames.aether.common.world.spawning.util.OffsetFromTopBlockPositionSelector;
+import com.gildedgames.aether.common.world.spawning.util.UndergroundPositionSelector;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.init.Blocks;
@@ -137,10 +138,11 @@ public class WorldEvents
 		daytimeHostiles.addWorldCondition(new CheckDimension(DimensionsAether.AETHER));
 
 		SpawnEntry cockatriceUnderground = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityCockatrice.class, 12F, 1, 3,
-				new FlyingPositionSelector())
+				new UndergroundPositionSelector())
 				.addCondition(stoneCheck).addCondition(isUnderground).addCondition(new CheckBlockAtPosition(Blocks.AIR));
 
-		SpawnEntry tempestUnderground = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityTempest.class, 10F, 2, 3, new FlyingPositionSelector())
+		SpawnEntry tempestUnderground = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityTempest.class, 10F, 2, 3,
+				new UndergroundPositionSelector())
 				.addCondition(stoneCheck).addCondition(isUnderground).addCondition(new CheckBlockAtPosition(Blocks.AIR));
 
 		underground.addEntry(cockatriceUnderground);

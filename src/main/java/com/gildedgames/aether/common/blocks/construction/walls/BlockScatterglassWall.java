@@ -19,7 +19,7 @@ public class BlockScatterglassWall extends BlockCustomWall
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer()
+	public BlockRenderLayer getRenderLayer()
 	{
 		return BlockRenderLayer.TRANSLUCENT;
 	}

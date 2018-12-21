@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.network.packets;
 
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.shop.IShopBuy;
+import com.gildedgames.aether.api.shop.IShopInstance;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.containers.ContainerShop;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
@@ -42,76 +43,82 @@ public class PacketShopSell implements IMessage
 				return null;
 			}
 
+			PlayerAether playerAether = PlayerAether.getPlayer(player);
+
 			if (player.openContainer instanceof ContainerShop)
 			{
-				ContainerShop container = (ContainerShop) player.openContainer;
-				ItemStack stack = container.getSlot(0).getStack();
-
-				int hash = ItemHelper.getHashForItemStack(stack);
-				IShopBuy shopBuy = null;
-
-				for (IShopBuy buy : container.getShopInstance().getStock())
+				if (playerAether.getDialogController().getTalkingNPC() != null)
 				{
-					int buyHash = ItemHelper.getHashForItemStack(buy.getItemStack());
+					IShopInstance shopInstance = playerAether.getDialogController().getTalkingNPC().getShopInstance();
 
-					if (buyHash == hash)
+					if (shopInstance != null)
 					{
-						shopBuy = buy;
-						break;
-					}
-				}
+						ContainerShop container = (ContainerShop) player.openContainer;
+						ItemStack stack = container.getSlot(0).getStack();
 
-				double value;
+						int hash = ItemHelper.getHashForItemStack(stack);
+						IShopBuy shopBuy = null;
 
-				if (shopBuy != null)
-				{
-					value = shopBuy.getSellingPrice() * stack.getCount();
-				}
-				else
-				{
-					value = AetherAPI.content().currency().getValue(stack);
-				}
+						for (IShopBuy buy : container.getShopInstance().getStock())
+						{
+							int buyHash = ItemHelper.getHashForItemStack(buy.getItemStack());
 
-				if (value > 0)
-				{
-					ItemStack s = container.getSlot(0).getStack();
-					double singleValue = AetherAPI.content().currency().getSingleValue(s);
+							if (buyHash == hash)
+							{
+								shopBuy = buy;
+								break;
+							}
+						}
 
-					if (shopBuy != null)
-					{
-						singleValue = shopBuy.getSellingPrice();
-					}
-
-					if (singleValue < 1)
-					{
-						double wholeValue = AetherAPI.content().currency().getValue(s);
+						double value;
 
 						if (shopBuy != null)
 						{
-							wholeValue = shopBuy.getSellingPrice() * s.getCount();
+							value = shopBuy.getSellingPrice() * stack.getCount();
+						}
+						else
+						{
+							value = AetherAPI.content().currency().getValue(stack, shopInstance.getCurrencyType().getClass());
 						}
 
-						double floored = MathHelper.floor(wholeValue);
+						if (value > 0)
+						{
+							ItemStack s = container.getSlot(0).getStack();
+							double singleValue = AetherAPI.content().currency().getSingleValue(s, shopInstance.getCurrencyType().getClass());
 
-						double decimals = wholeValue - floored;
+							if (shopBuy != null)
+							{
+								singleValue = shopBuy.getSellingPrice();
+							}
 
-						double howManyTimesDivInto = decimals / singleValue;
+							if (singleValue < 1)
+							{
+								double wholeValue = AetherAPI.content().currency().getValue(s, shopInstance.getCurrencyType().getClass());
 
-						int leftover = MathHelper.floor(howManyTimesDivInto);
+								if (shopBuy != null)
+								{
+									wholeValue = shopBuy.getSellingPrice() * s.getCount();
+								}
 
-						s.setCount(leftover);
+								double floored = MathHelper.floor(wholeValue);
 
-						PlayerAether playerAether = PlayerAether.getPlayer(player);
+								double decimals = wholeValue - floored;
 
-						playerAether.getCurrencyModule().add((long) floored);
-					}
-					else
-					{
-						container.getSlot(0).putStack(ItemStack.EMPTY);
+								double howManyTimesDivInto = decimals / singleValue;
 
-						PlayerAether playerAether = PlayerAether.getPlayer(player);
+								int leftover = MathHelper.floor(howManyTimesDivInto);
 
-						playerAether.getCurrencyModule().add((long) value);
+								s.setCount(leftover);
+
+								shopInstance.getCurrencyType().addValue((long) floored, playerAether);
+							}
+							else
+							{
+								container.getSlot(0).putStack(ItemStack.EMPTY);
+
+								shopInstance.getCurrencyType().addValue((long) value, playerAether);
+							}
+						}
 					}
 				}
 			}

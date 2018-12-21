@@ -48,7 +48,8 @@ public class EntityUtil
 		{
 			final BlockPos blockpos = new BlockPos(entity.posX, entity.getEntityBoundingBox().minY, entity.posZ);
 
-			if (!entity.world.isRemote && entity.world.getLightFor(EnumSkyBlock.SKY, blockpos) - entity.world.getSkylightSubtracted() >= 15)
+			if (!entity.world.isRemote && entity.world.getLightFor(EnumSkyBlock.SKY, blockpos) - entity.world.getSkylightSubtracted() >= 15 && entity.world
+					.canBlockSeeSky(blockpos))
 			{
 				boolean canSee = false;
 

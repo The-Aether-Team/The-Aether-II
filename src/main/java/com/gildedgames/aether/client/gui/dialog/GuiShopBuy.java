@@ -95,7 +95,8 @@ public class GuiShopBuy extends GuiElement
 				renderitem.zLevel = 0.0F;
 
 				boolean hasEnough =
-						PlayerAether.getPlayer(this.viewer().mc().player).getCurrencyModule().getCurrencyValue() >= GuiShopBuy.this.getShopBuy().getPrice();
+						GuiShopBuy.this.shopInstance.getCurrencyType().getValue(PlayerAether.getPlayer(Minecraft.getMinecraft().player)) >= GuiShopBuy.this
+								.getShopBuy().getPrice();
 
 				int xOffset = (Math.max(String.valueOf(GuiShopBuy.this.getShopBuy().getStock()).length() - 1, 0)) * -6;
 

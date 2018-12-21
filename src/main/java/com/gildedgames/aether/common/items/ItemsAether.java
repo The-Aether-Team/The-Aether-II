@@ -32,8 +32,6 @@ import java.util.Collections;
 @Mod.EventBusSubscriber
 public class ItemsAether
 {
-	private static final Collection<Item> registeredItems = new ArrayList<>();
-
 	public static final Item skyroot_stick = new ItemSkyrootStick();
 
 	public static final Item cloudtwine = new ItemDropOnDeath();
@@ -117,17 +115,17 @@ public class ItemsAether
 			kirrid_loin = new ItemAetherFood(3, 0.3F, false),
 			kirrid_cutlet = new ItemAetherFood(8, 0.8F, false);
 
-	public static final ItemAetherFood candy_corn = new ItemAetherFood(8, false),
-			cocoatrice = new ItemAetherFood(12, false),
-			wrapped_chocolates = new ItemAetherFood(12, false),
-			jelly_pumpkin = new ItemAetherFood(12, false),
+	public static final ItemAetherFood candy_corn = new ItemAetherFood(8, 1.0F, false).setConsumptionDuration(8),
+			cocoatrice = new ItemAetherFood(12, 1.0F, false).setConsumptionDuration(8),
+			wrapped_chocolates = new ItemAetherFood(12, 1.0F, false).setConsumptionDuration(8),
+			jelly_plumproot = new ItemAetherFood(12, 1.0F, false).setConsumptionDuration(8),
 			stomper_pop = new ItemStomperPop(),
-			blueberry_lollipop = new ItemAetherFood(10, false),
-			orange_lollipop = new ItemAetherFood(8, false),
-			icestone_poprocks = new ItemAetherFood(5, false);
+			blueberry_lollipop = new ItemAetherFood(10, 1.0F, false).setConsumptionDuration(8),
+			orange_lollipop = new ItemAetherFood(8, 1.0F, false).setConsumptionDuration(8),
+			icestone_poprocks = new ItemAetherFood(5, 1.0F, false).setConsumptionDuration(8);
 
-	public static final ItemFood ginger_bread_man = new ItemFood(2, false),
-			candy_cane = new ItemFood(2, false);
+	public static final ItemFood ginger_bread_man = new ItemAetherFood(15, 0.4F, false).setConsumptionDuration(8),
+			candy_cane = new ItemAetherFood(13, 0.5F, false).setConsumptionDuration(8);
 
 	public static final ItemSkyrootBucket skyroot_bucket = new ItemSkyrootBucket(Blocks.AIR),
 			skyroot_water_bucket = new ItemSkyrootBucket(Blocks.FLOWING_WATER);
@@ -155,11 +153,20 @@ public class ItemsAether
 			secret_skyroot_door = new ItemDoor(BlocksAether.secret_skyroot_door),
 			arkenium_door = new ItemDoor(BlocksAether.arkenium_door);
 
-	public static final ItemCrossbow skyroot_crossbow = new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(0.5F),
-			holystone_crossbow = new ItemCrossbow().setDurationInTicks(30).setKnockBackValue(0.7F),
-			zanite_crossbow = new ItemCrossbow().setDurationInTicks(15).setKnockBackValue(0.5F),
-			arkenium_crossbow = new ItemCrossbow().setDurationInTicks(35).setKnockBackValue(0.5F),
-			gravitite_crossbow = new ItemCrossbow().setDurationInTicks(25).setKnockBackValue(1.2F);
+
+	/*
+		SLOWEST	- 35
+		SLOW	- 30
+		NORMAL	- 25
+		FAST	- 20
+		FASTEST	- 15
+	 */
+	public static final ItemCrossbow
+			skyroot_crossbow = new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(0.5F).setType(ItemCrossbow.crossBowTypes.SKYROOT),
+			holystone_crossbow = new ItemCrossbow().setDurationInTicks(30).setKnockBackValue(0.7F).setType(ItemCrossbow.crossBowTypes.HOLYSTONE),
+			zanite_crossbow = new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(0.5F).setType(ItemCrossbow.crossBowTypes.ZANITE),
+			arkenium_crossbow = new ItemCrossbow().setDurationInTicks(35).setKnockBackValue(0.5F).setType(ItemCrossbow.crossBowTypes.ARKENIUM),
+			gravitite_crossbow = new ItemCrossbow().setDurationInTicks(25).setKnockBackValue(1.2F).setType(ItemCrossbow.crossBowTypes.GRAVETITE);
 
 	public static final ItemBolt bolt = new ItemBolt();
 
@@ -194,7 +201,7 @@ public class ItemsAether
 	public static final Item cloud_parachute = new ItemCloudParachute();
 
 	public static final Item irradiated_chunk = new ItemIrradiated(new RandomItemSelector(stack -> !(stack instanceof ItemIrradiated))),
-			irradiated_sword = new ItemIrradiated(new RandomItemSelector(item -> item.getUnlocalizedName().contains("sword")
+			irradiated_sword = new ItemIrradiated(new RandomItemSelector(item -> item.getTranslationKey().contains("sword")
 					&& !(item instanceof ItemIrradiated))),
 			irradiated_armor = new ItemIrradiated(new RandomItemSelector(item -> item instanceof ItemArmor)),
 			irradiated_tool = new ItemIrradiated(new RandomItemSelector(item -> item instanceof ItemTool)),
@@ -210,6 +217,12 @@ public class ItemsAether
 			fried_moa_egg = new ItemFood(10, false);
 
 	public static final Item swet_sugar = new ItemDropOnDeath();
+
+	public static final Item plumproot_mash = new ItemAetherFood(3, 1.0F, false).setConsumptionDuration(12);
+
+	public static final Item plumproot_pie = new ItemAetherFood(20, 1.0F, false).setConsumptionDuration(100);
+
+	private static final Collection<Item> registeredItems = new ArrayList<>();
 
 	@SubscribeEvent
 	public static void onRegisterItems(final RegistryEvent.Register<Item> event)
@@ -320,7 +333,7 @@ public class ItemsAether
 		r.register("candy_corn", candy_corn);
 		r.register("cocoatrice", cocoatrice);
 		r.register("wrapped_chocolates", wrapped_chocolates);
-		r.register("jelly_pumpkin", jelly_pumpkin);
+		r.register("jelly_plumproot", jelly_plumproot);
 		r.register("stomper_pop", stomper_pop);
 		r.register("blueberry_lollipop", blueberry_lollipop);
 		r.register("orange_lollipop", orange_lollipop);
@@ -378,6 +391,9 @@ public class ItemsAether
 		r.register("irradiated_dust", irradiated_dust.setCreativeTab(CreativeTabsAether.MATERIALS));
 
 		r.register("wrapping_paper", wrapping_paper.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
+
+		r.register("plumproot_mash", plumproot_mash);
+		r.register("plumproot_pie", plumproot_pie);
 	}
 
 	public static Collection<Item> getRegisteredItems()
@@ -396,7 +412,7 @@ public class ItemsAether
 
 		private void register(final String registryName, final Item item)
 		{
-			item.setUnlocalizedName(AetherCore.MOD_ID + "." + registryName);
+			item.setTranslationKey(AetherCore.MOD_ID + "." + registryName);
 			item.setRegistryName(registryName);
 
 			this.registry.register(item);

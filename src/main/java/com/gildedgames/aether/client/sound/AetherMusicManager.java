@@ -149,7 +149,7 @@ public class AetherMusicManager
 
 		if (event.getSound().getCategory() == SoundCategory.MUSIC)
 		{
-			if (!event.getSound().getSoundLocation().getResourceDomain().equals(AetherCore.MOD_ID))
+			if (!event.getSound().getSoundLocation().getNamespace().equals(AetherCore.MOD_ID))
 			{
 				final EntityPlayer player = Minecraft.getMinecraft().player;
 

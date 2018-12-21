@@ -43,8 +43,6 @@ import java.util.Set;
 @Mod.EventBusSubscriber()
 public class BlocksAether
 {
-	private static final Set<Block> registeredBlocks = new HashSet<>();
-
 	public static final Block therastone_brick = new BlockBuilder(Material.ROCK)
 			.setSoundType(SoundType.STONE).setHardness(2.0f);
 
@@ -90,6 +88,31 @@ public class BlocksAether
 	public static final BlockFadedHolystoneDecorative faded_holystone_brick_decorative = new BlockFadedHolystoneDecorative();
 
 	public static final Block faded_holystone_pillar = new BlockCustomPillar(Material.ROCK)
+			.setSoundType(SoundType.STONE).setHardness(2.0f);
+
+	public static final Block sentrystone_brick = new BlockBuilder(Material.ROCK)
+			.setSoundType(SoundType.STONE).setHardness(2.0f);
+
+	public static final Block sentrystone_brick_decorative = new BlockSentrystoneDecorative();
+
+	public static final Block sentrystone_brick_decorative_lit = new BlockSentrystoneDecorativeLit()
+			.setLightLevel(0.5f);
+
+	public static final Block sentrystone_pillar = new BlockCustomPillar(Material.ROCK)
+			.setSoundType(SoundType.STONE).setHardness(2.0f);
+
+	public static final Block sentrystone_pillar_lit = new BlockCustomPillar(Material.ROCK)
+			.setSoundType(SoundType.STONE).setHardness(2.0f).setLightLevel(0.5f);
+
+	public static final Block hellfirestone_brick = new BlockBuilder(Material.ROCK)
+			.setSoundType(SoundType.STONE).setHardness(2.0f);
+
+	public static final Block hellfirestone_brick_decorative = new BlockHellfirestoneDecorative();
+
+    public static final Block hellfirestone_lantern = new BlockBuilder(Material.ROCK)
+            .setSoundType(SoundType.STONE).setHardness(2.0f).setLightLevel(1.0f);
+
+	public static final Block hellfirestone_pillar = new BlockCustomPillar(Material.ROCK)
 			.setSoundType(SoundType.STONE).setHardness(2.0f);
 
 	public static final Block agiosite = new BlockBuilder(Material.ROCK)
@@ -259,6 +282,8 @@ public class BlocksAether
 
 	public static final BlockBed skyroot_bed = new BlockCustomBed(() -> ItemsAether.skyroot_bed, SoundType.CLOTH);
 
+	public static final Block plumproot = new BlockPlumproot();
+
 	public static final BlockCustomWall
 			holystone_wall = new BlockCustomWall(holystone.getDefaultState(), 1.0f, 10.0f),
 			mossy_holystone_wall = new BlockCustomWall(holystone.getDefaultState(), 1.0f, 10.0f),
@@ -269,11 +294,11 @@ public class BlocksAether
 
 	public static final Block
 			skyroot_slab = new BlockCustomSlab(Material.WOOD).setSoundType(SoundType.WOOD).setHardness(2.0f),
-            wisproot_slab = new BlockCustomSlab(Material.WOOD).setSoundType(SoundType.WOOD).setHardness(2.0f),
-            greatroot_slab = new BlockCustomSlab(Material.WOOD).setSoundType(SoundType.WOOD).setHardness(2.0f),
-            therawood_slab = new BlockCustomSlab(Material.WOOD).setSoundType(SoundType.WOOD).setHardness(2.0f),
+			wisproot_slab = new BlockCustomSlab(Material.WOOD).setSoundType(SoundType.WOOD).setHardness(2.0f),
+			greatroot_slab = new BlockCustomSlab(Material.WOOD).setSoundType(SoundType.WOOD).setHardness(2.0f),
+			therawood_slab = new BlockCustomSlab(Material.WOOD).setSoundType(SoundType.WOOD).setHardness(2.0f),
 			holystone_slab = new BlockCustomSlab(Material.ROCK).setSoundType(SoundType.STONE).setHardness(2.0f),
-            therastone_brick_slab = new BlockCustomSlab(Material.ROCK).setSoundType(SoundType.STONE).setHardness(2.0f),
+			therastone_brick_slab = new BlockCustomSlab(Material.ROCK).setSoundType(SoundType.STONE).setHardness(2.0f),
 			mossy_holystone_slab = new BlockCustomSlab(Material.ROCK).setSoundType(SoundType.STONE).setHardness(2.0f),
 			holystone_brick_slab = new BlockCustomSlab(Material.ROCK).setSoundType(SoundType.STONE).setHardness(2.0f),
 			faded_holystone_brick_slab = new BlockCustomSlab(Material.ROCK).setSoundType(SoundType.STONE).setHardness(2.0f),
@@ -283,11 +308,11 @@ public class BlocksAether
 			scatterglass_slab = new BlockScatterglassSlab(Material.ROCK).setSoundType(SoundType.STONE).setHardness(1.0f);
 
 	public static final Block skyroot_stairs = new BlockCustomStairs(skyroot_planks.getDefaultState()),
-            wisproot_stairs = new BlockCustomStairs(light_skyroot_planks.getDefaultState()),
-            greatroot_stairs = new BlockCustomStairs(dark_skyroot_planks.getDefaultState()),
-            therawood_stairs = new BlockCustomStairs(therawood_planks.getDefaultState()),
-            holystone_stairs = new BlockCustomStairs(holystone.getDefaultState()),
-            therastone_brick_stairs = new BlockCustomStairs(therastone_brick.getDefaultState()),
+			wisproot_stairs = new BlockCustomStairs(light_skyroot_planks.getDefaultState()),
+			greatroot_stairs = new BlockCustomStairs(dark_skyroot_planks.getDefaultState()),
+			therawood_stairs = new BlockCustomStairs(therawood_planks.getDefaultState()),
+			holystone_stairs = new BlockCustomStairs(holystone.getDefaultState()),
+			therastone_brick_stairs = new BlockCustomStairs(therastone_brick.getDefaultState()),
 			mossy_holystone_stairs = new BlockCustomStairs(
 					holystone.getDefaultState().withProperty(BlockHolystone.PROPERTY_VARIANT, BlockHolystone.MOSSY_HOLYSTONE)),
 			holystone_brick_stairs = new BlockCustomStairs(holystone_brick.getDefaultState()),
@@ -322,6 +347,8 @@ public class BlocksAether
 	public static final Block skyroot_twigs = new BlockFloorObject(Material.PLANTS, SoundType.WOOD);
 
 	public static final Block holystone_rock = new BlockFloorObject(Material.ROCK, SoundType.STONE);
+
+	private static final Set<Block> registeredBlocks = new HashSet<>();
 
 	public static BlockCustomSnowBlock highlands_snow = new BlockCustomSnowBlock();
 
@@ -535,11 +562,11 @@ public class BlocksAether
 		r.register("multiblock_dummy_half", multiblock_dummy_half);
 
 		r.register("skyroot_slab", skyroot_slab.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
-        r.register("wisproot_slab", wisproot_slab.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
-        r.register("greatroot_slab", greatroot_slab.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
-        r.register("therawood_slab", therawood_slab.setCreativeTab(CreativeTabsAether.THERA));
+		r.register("wisproot_slab", wisproot_slab.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+		r.register("greatroot_slab", greatroot_slab.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+		r.register("therawood_slab", therawood_slab.setCreativeTab(CreativeTabsAether.THERA));
 		r.register("holystone_slab", holystone_slab.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
-        r.register("therastone_brick_slab", therastone_brick_slab.setCreativeTab(CreativeTabsAether.THERA));
+		r.register("therastone_brick_slab", therastone_brick_slab.setCreativeTab(CreativeTabsAether.THERA));
 		r.register("mossy_holystone_slab", mossy_holystone_slab.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 		r.register("holystone_brick_slab", holystone_brick_slab.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 		r.register("faded_holystone_brick_slab", faded_holystone_brick_slab.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
@@ -549,11 +576,11 @@ public class BlocksAether
 		r.register("scatterglass_slab", scatterglass_slab.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 
 		r.register("skyroot_stairs", skyroot_stairs.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
-        r.register("wisproot_stairs", wisproot_stairs.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
-        r.register("greatroot_stairs", greatroot_stairs.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
-        r.register("therawood_stairs", therawood_stairs.setCreativeTab(CreativeTabsAether.THERA));
+		r.register("wisproot_stairs", wisproot_stairs.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+		r.register("greatroot_stairs", greatroot_stairs.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+		r.register("therawood_stairs", therawood_stairs.setCreativeTab(CreativeTabsAether.THERA));
 		r.register("holystone_stairs", holystone_stairs.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
-        r.register("therastone_brick_stairs", therastone_brick_stairs.setCreativeTab(CreativeTabsAether.THERA));
+		r.register("therastone_brick_stairs", therastone_brick_stairs.setCreativeTab(CreativeTabsAether.THERA));
 		r.register("mossy_holystone_stairs", mossy_holystone_stairs.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 		r.register("holystone_brick_stairs", holystone_brick_stairs.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 		r.register("faded_holystone_brick_stairs", faded_holystone_brick_stairs.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
@@ -587,6 +614,20 @@ public class BlocksAether
 
 		r.register("aether_teleporter", aether_teleporter.setCreativeTab(CreativeTabsAether.UTILITY));
 
+		r.register("sentrystone_brick", sentrystone_brick.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+		r.register("sentrystone_brick_decorative", sentrystone_brick_decorative.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
+		r.register("sentrystone_brick_decorative_lit", sentrystone_brick_decorative_lit.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
+		r.register("sentrystone_pillar", sentrystone_pillar.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
+		r.register("sentrystone_pillar_lit", sentrystone_pillar_lit.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
+
+        r.register("hellfirestone_brick", hellfirestone_brick.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+        r.register("hellfirestone_brick_decorative", hellfirestone_brick_decorative.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
+        r.register("hellfirestone_lantern", hellfirestone_lantern.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
+        r.register("hellfirestone_pillar", hellfirestone_pillar.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
+
+		r.register("plumproot", plumproot.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+
+		Blocks.FIRE.setFireInfo(plumproot, 60, 100);
 		Blocks.FIRE.setFireInfo(skyroot_twigs, 60, 100);
 		Blocks.FIRE.setFireInfo(tall_aether_grass, 60, 100);
 		Blocks.FIRE.setFireInfo(aether_flower, 60, 100);
@@ -682,9 +723,9 @@ public class BlocksAether
 				throw new RuntimeException("Registry name of block cannot be null");
 			}
 
-			String registryName = block.getRegistryName().getResourcePath();
+			String registryName = block.getRegistryName().getPath();
 
-			item.setUnlocalizedName(AetherCore.MOD_ID + "." + registryName);
+			item.setTranslationKey(AetherCore.MOD_ID + "." + registryName);
 			item.setRegistryName(AetherCore.MOD_ID, registryName);
 
 			event.getRegistry().register(item);
@@ -767,7 +808,7 @@ public class BlocksAether
 
 		private void register(final String registryName, final Block block)
 		{
-			block.setUnlocalizedName(AetherCore.MOD_ID + "." + registryName);
+			block.setTranslationKey(AetherCore.MOD_ID + "." + registryName);
 			block.setRegistryName(AetherCore.MOD_ID, registryName);
 
 			this.registry.register(block);

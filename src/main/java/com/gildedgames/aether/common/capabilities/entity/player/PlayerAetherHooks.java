@@ -200,7 +200,7 @@ public class PlayerAetherHooks
 	@SubscribeEvent
 	public static void onPlaceBlockEvent(final BlockEvent.PlaceEvent event)
 	{
-		final IPlacementFlagCapability data = event.getWorld().getChunkFromBlockCoords(event.getPos())
+		final IPlacementFlagCapability data = event.getWorld().getChunk(event.getPos())
 				.getCapability(AetherCapabilities.CHUNK_PLACEMENT_FLAG, EnumFacing.UP);
 
 		if (data != null)

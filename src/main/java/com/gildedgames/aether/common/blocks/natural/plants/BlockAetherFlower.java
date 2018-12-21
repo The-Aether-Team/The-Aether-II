@@ -107,7 +107,7 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 	}
 
 	@Override
-	public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state)
+	public void onPlayerDestroy(World worldIn, BlockPos pos, IBlockState state)
 	{
 		if (state.getValue(PROPERTY_SNOWY))
 		{
@@ -173,7 +173,7 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 	}
 
 	@Override
-	public String getUnlocalizedName(final ItemStack stack)
+	public String getTranslationKey(final ItemStack stack)
 	{
 		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
 	}

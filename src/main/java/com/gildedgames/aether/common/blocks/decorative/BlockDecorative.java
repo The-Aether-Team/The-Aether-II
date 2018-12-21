@@ -75,7 +75,7 @@ public abstract class BlockDecorative extends BlockBuilder implements IBlockWith
 	{
 		final String name = this.getStateFromMeta(stack.getItemDamage()).getValue(this.getVariantProperty()).getName();
 
-		tooltip.add(TextFormatting.GRAY + I18n.format(this.getUnlocalizedName() + "." + name + ".name"));
+		tooltip.add(TextFormatting.GRAY + I18n.format(this.getTranslationKey() + "." + name + ".name"));
 	}
 
 	@Override

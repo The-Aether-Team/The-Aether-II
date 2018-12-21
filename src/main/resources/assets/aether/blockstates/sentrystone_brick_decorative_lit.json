@@ -1,0 +1,22 @@
+{
+	"variants": {
+		"variant=base_bricks": [
+			{ "model": "aether:sentrystone_bricks/base_bricks_lit" }
+		],
+		"variant=base_pillar": [
+			{ "model": "aether:sentrystone_bricks/base_pillar_lit" }
+		],
+		"variant=capstone_bricks": [
+			{ "model": "aether:sentrystone_bricks/capstone_bricks_lit" }
+		],
+		"variant=capstone_pillar": [
+			{ "model": "aether:sentrystone_bricks/capstone_pillar_lit" }
+		],
+		"variant=lightstone": [
+			{ "model": "aether:sentrystone_bricks/lightstone_lit" }
+		],
+		"variant=keystone": [
+			{ "model": "aether:sentrystone_bricks/keystone_lit" }
+		]
+	}
+}

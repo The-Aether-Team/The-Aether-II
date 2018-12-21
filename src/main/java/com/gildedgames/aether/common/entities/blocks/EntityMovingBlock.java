@@ -91,7 +91,7 @@ public class EntityMovingBlock extends Entity
 
 			if (this.world.getBlockState(pos).getBlock() == this.getBlockState().getBlock())
 			{
-				final IPlacementFlagCapability data = this.world.getChunkFromBlockCoords(pos)
+				final IPlacementFlagCapability data = this.world.getChunk(pos)
 						.getCapability(AetherCapabilities.CHUNK_PLACEMENT_FLAG, EnumFacing.UP);
 
 				if (data != null)
@@ -200,7 +200,7 @@ public class EntityMovingBlock extends Entity
 
 						if (!this.allowDoubleDrops)
 						{
-							final IPlacementFlagCapability data = this.world.getChunkFromBlockCoords(pos)
+							final IPlacementFlagCapability data = this.world.getChunk(pos)
 									.getCapability(AetherCapabilities.CHUNK_PLACEMENT_FLAG, EnumFacing.UP);
 
 							if (data != null)

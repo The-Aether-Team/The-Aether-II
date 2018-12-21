@@ -35,4 +35,10 @@ public interface IItemProperties
 	 */
 	@Nonnull
 	Collection<IEffectProvider> getEffectProviders();
+
+	/**
+	 * @return The collection of effect activators that this item provides. This defines what activates the effects this item has.
+	 */
+	@Nonnull
+	Collection<EffectActivator> getEffectActivators();
 }

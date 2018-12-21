@@ -20,7 +20,7 @@ public class CreativeTabsAether
 	public static final CreativeTabs NATURAL_BLOCKS = new CreativeTabs("aether.natural_blocks")
 	{
 		@Override
-		public ItemStack getTabIconItem()
+		public ItemStack createIcon()
 		{
 			return new ItemStack(BlocksAether.aether_grass);
 		}
@@ -29,7 +29,7 @@ public class CreativeTabsAether
 	public static final CreativeTabs CONSTRUCTION = new CreativeTabs("aether.construction")
 	{
 		@Override
-		public ItemStack getTabIconItem()
+		public ItemStack createIcon()
 		{
 			return new ItemStack(BlocksAether.holystone_brick);
 		}
@@ -38,7 +38,7 @@ public class CreativeTabsAether
 	public static final CreativeTabs UTILITY = new CreativeTabs("aether.utility_blocks")
 	{
 		@Override
-		public ItemStack getTabIconItem()
+		public ItemStack createIcon()
 		{
 			return new ItemStack(BlocksAether.altar);
 		}
@@ -47,7 +47,7 @@ public class CreativeTabsAether
 	public static final CreativeTabs DECORATIVE_BLOCKS = new CreativeTabs("aether.visual_variants")
 	{
 		@Override
-		public ItemStack getTabIconItem()
+		public ItemStack createIcon()
 		{
 			return new ItemStack(BlocksAether.skyroot_decorative, 1, BlockSkyrootDecorative.HIGHLIGHT.getMeta());
 		}
@@ -56,7 +56,7 @@ public class CreativeTabsAether
 	public static final CreativeTabs MISCELLANEOUS = new CreativeTabsMisc("aether.miscellaneous")
 	{
 		@Override
-		public ItemStack getTabIconItem()
+		public ItemStack createIcon()
 		{
 			return new ItemStack(ItemsAether.skyroot_poison_bucket);
 		}
@@ -65,7 +65,7 @@ public class CreativeTabsAether
 	public static final CreativeTabs MATERIALS = new CreativeTabs("aether.materials")
 	{
 		@Override
-		public ItemStack getTabIconItem()
+		public ItemStack createIcon()
 		{
 			return new ItemStack(ItemsAether.ambrosium_shard);
 		}
@@ -74,7 +74,7 @@ public class CreativeTabsAether
 	public static final CreativeTabs CONSUMABLES = new CreativeTabs("aether.consumables")
 	{
 		@Override
-		public ItemStack getTabIconItem()
+		public ItemStack createIcon()
 		{
 			return new ItemStack(ItemsAether.orange);
 		}
@@ -83,7 +83,7 @@ public class CreativeTabsAether
 	public static final CreativeTabs TOOLS = new CreativeTabs("aether.tools")
 	{
 		@Override
-		public ItemStack getTabIconItem()
+		public ItemStack createIcon()
 		{
 			return new ItemStack(ItemsAether.zanite_pickaxe);
 		}
@@ -92,7 +92,7 @@ public class CreativeTabsAether
 	public static final CreativeTabs WEAPONS = new CreativeTabs("aether.weapons")
 	{
 		@Override
-		public ItemStack getTabIconItem()
+		public ItemStack createIcon()
 		{
 			return new ItemStack(ItemsAether.gravitite_sword);
 		}
@@ -101,7 +101,7 @@ public class CreativeTabsAether
 	public static final CreativeTabs ARMOR = new CreativeTabs("aether.armor")
 	{
 		@Override
-		public ItemStack getTabIconItem()
+		public ItemStack createIcon()
 		{
 			return new ItemStack(ItemsAether.zanite_helmet);
 		}
@@ -110,7 +110,7 @@ public class CreativeTabsAether
 	public static final CreativeTabs THERA = new CreativeTabs("aether.thera")
 	{
 		@Override
-		public ItemStack getTabIconItem()
+		public ItemStack createIcon()
 		{
 			return new ItemStack(BlocksAether.therastone_brick_decorative, 1, BlockTherastoneDecorative.KEYSTONE.getMeta());
 		}

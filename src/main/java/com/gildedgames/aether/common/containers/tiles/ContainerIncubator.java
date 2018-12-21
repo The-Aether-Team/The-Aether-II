@@ -27,13 +27,10 @@ public class ContainerIncubator extends Container
 	{
 		this.tile = coolerInventory;
 
-		// ambrosium chunk slot
 		this.addSlotToContainer(new SlotAmbrosiumChunk(this.tile, 0, 80, 52));
 
-		// egg slot
 		this.addSlotToContainer(new SlotMoaEgg(this.tile, 1, 80, 17));
 
-		// player inventory
 		for (int i = 0; i < 3; ++i)
 		{
 			for (int j = 0; j < 9; ++j)
@@ -80,6 +77,7 @@ public class ContainerIncubator extends Container
 			final ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
+			// move from container to inv
 			if (index == 0 || index == 1)
 			{
 				if (!this.mergeItemStack(itemstack1, 2, 38, true))
@@ -89,6 +87,7 @@ public class ContainerIncubator extends Container
 
 				slot.onSlotChange(itemstack1, itemstack);
 			}
+			// move from inv to container
 			else if (index > 1)
 			{
 				if (!itemstack1.isEmpty())

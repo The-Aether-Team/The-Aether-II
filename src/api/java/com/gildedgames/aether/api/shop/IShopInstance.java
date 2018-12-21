@@ -20,4 +20,6 @@ public interface IShopInstance extends NBT
 	boolean isDirty();
 
 	void markClean();
+
+	IShopCurrency getCurrencyType();
 }

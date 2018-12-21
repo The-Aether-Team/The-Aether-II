@@ -1,6 +1,8 @@
 package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
 import com.gildedgames.aether.api.AetherAPI;
+import com.gildedgames.aether.api.items.EffectActivator;
+import com.gildedgames.aether.api.items.IItemProperties;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectFactory;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectPool;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
@@ -28,6 +30,8 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 	private final InventoryEquipment recordedInv;
 
 	private final Map<ResourceLocation, EquipmentEffectPool<IEffectProvider>> pools = new HashMap<>();
+
+	private ItemStack lastHeldStack = ItemStack.EMPTY;
 
 	public PlayerEquipmentModule(PlayerAether player)
 	{
@@ -70,6 +74,19 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 	@Override
 	public void onUpdate()
 	{
+		if (!ItemStack.areItemStacksEqual(this.lastHeldStack, this.getEntity().getHeldItemMainhand()))
+		{
+			ItemStack oldStack = this.lastHeldStack;
+			this.lastHeldStack = this.getEntity().getHeldItemMainhand();
+
+			if (oldStack != null)
+			{
+				this.deactivateEquipmentEffects(oldStack, this.stagingInv.getSizeInventory(), EffectActivator.WHEN_HELD);
+			}
+
+			this.deactivateEquipmentEffects(this.lastHeldStack, this.stagingInv.getSizeInventory(), EffectActivator.WHEN_HELD);
+		}
+
 		final List<Pair<Integer, ItemStack>> updates = this.getEntity().world.isRemote ? Collections.emptyList() : new ArrayList<>();
 
 		// Checks what items have been changed in the staging inventory, records them, and then
@@ -83,12 +100,12 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 			{
 				if (!oldStack.isEmpty())
 				{
-					this.onEquipmentRemoved(oldStack, i);
+					this.deactivateEquipmentEffects(oldStack, i, EffectActivator.WHEN_EQUIPPED);
 				}
 
 				if (!newStack.isEmpty())
 				{
-					this.onEquipmentAdded(newStack, i);
+					this.activateEquipmentEffects(newStack, i, EffectActivator.WHEN_EQUIPPED);
 				}
 
 				if (!this.getEntity().world.isRemote)
@@ -106,6 +123,7 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 		}
 
 		this.pools.values().forEach(EquipmentEffectPool::update);
+		this.lastHeldStack = this.getEntity().getHeldItemMainhand();
 	}
 
 	/**
@@ -113,9 +131,16 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 	 * @param stack The new {@link ItemStack}
 	 * @param index The inventory index of {@param stack}
 	 */
-	private void onEquipmentAdded(ItemStack stack, int index)
+	private void activateEquipmentEffects(ItemStack stack, int index, EffectActivator activator)
 	{
-		AetherAPI.content().items().getProperties(stack.getItem()).getEffectProviders().forEach(provider -> {
+		IItemProperties properties = AetherAPI.content().items().getProperties(stack.getItem());
+
+		if (!properties.getEffectActivators().contains(activator))
+		{
+			return;
+		}
+
+		properties.getEffectProviders().forEach(provider -> {
 			EquipmentEffectPool<IEffectProvider> pool = this.pools.computeIfAbsent(provider.getFactory(), (key) ->
 					new EquipmentEffectPool<>(this.getPlayer(), AetherAPI.content().effects().getFactory(key)));
 
@@ -132,9 +157,16 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 	 * @param stack The old {@link ItemStack}
 	 * @param index The inventory index of {@param stack}
 	 */
-	private void onEquipmentRemoved(ItemStack stack, int index)
+	private void deactivateEquipmentEffects(ItemStack stack, int index, EffectActivator activator)
 	{
-		AetherAPI.content().items().getProperties(stack.getItem()).getEffectProviders().forEach(provider -> {
+		IItemProperties properties = AetherAPI.content().items().getProperties(stack.getItem());
+
+		if (!properties.getEffectActivators().contains(activator))
+		{
+			return;
+		}
+
+		properties.getEffectProviders().forEach(provider -> {
 			EquipmentEffectPool<IEffectProvider> pool = this.pools.get(provider.getFactory());
 			pool.removeInstance(index);
 

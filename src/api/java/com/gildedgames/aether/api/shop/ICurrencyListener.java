@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.capabilities.entity.player.modules;
+package com.gildedgames.aether.api.shop;
 
 public interface ICurrencyListener
 {

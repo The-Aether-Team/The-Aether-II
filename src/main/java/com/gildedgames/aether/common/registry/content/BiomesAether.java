@@ -11,6 +11,7 @@ import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.BiomeMag
 import com.gildedgames.aether.common.world.util.BiomeInstancedZone;
 import com.google.common.collect.Lists;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -61,6 +62,14 @@ public class BiomesAether
 	{
 		event.getRegistry()
 				.registerAll(HIGHLANDS, MAGNETIC_HILLS, ARCTIC_PEAKS, FORGOTTEN_HIGHLANDS, IRRADIATED_FORESTS, VOID, INSTANCED_ZONE);
+
+		BiomeDictionary.addTypes(HIGHLANDS, BiomeDictionary.Type.PLAINS);
+		BiomeDictionary.addTypes(MAGNETIC_HILLS, BiomeDictionary.Type.HILLS, BiomeDictionary.Type.HOT, BiomeDictionary.Type.SPARSE);
+		BiomeDictionary.addTypes(ARCTIC_PEAKS, BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.COLD, BiomeDictionary.Type.SNOWY, BiomeDictionary.Type.DENSE);
+		BiomeDictionary.addTypes(FORGOTTEN_HIGHLANDS, BiomeDictionary.Type.DENSE);
+		BiomeDictionary.addTypes(IRRADIATED_FORESTS, BiomeDictionary.Type.FOREST, BiomeDictionary.Type.HOT, BiomeDictionary.Type.DENSE);
+		BiomeDictionary.addTypes(VOID, BiomeDictionary.Type.VOID);
+		BiomeDictionary.addTypes(INSTANCED_ZONE, BiomeDictionary.Type.VOID);
 
 		registerPossibleBiome(HIGHLANDS, MAGNETIC_HILLS, ARCTIC_PEAKS, FORGOTTEN_HIGHLANDS, IRRADIATED_FORESTS);
 	}

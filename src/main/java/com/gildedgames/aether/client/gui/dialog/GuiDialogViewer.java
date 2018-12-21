@@ -287,11 +287,10 @@ public class GuiDialogViewer extends GuiViewer implements IDialogChangeListener
 			final String address;
 
 			// Check if the speaker resourcelocation has a slide address
-			if (speakerPath.getResourcePath().contains("#"))
+			if (speakerPath.getPath().contains("#"))
 			{
 				// Obtain the slide address from the Speaker resourcelocation
-				address = speakerPath.getResourcePath().substring(speakerPath.getResourcePath().indexOf("#") + 1,
-						speakerPath.getResourcePath().length());
+				address = speakerPath.getPath().substring(speakerPath.getPath().indexOf("#") + 1);
 
 				this.slide = AetherAPI.content().dialog().findSlide(address, this.speaker).orElseThrow(() ->
 						new IllegalArgumentException("Couldn't find slide: " + address));
@@ -375,9 +374,9 @@ public class GuiDialogViewer extends GuiViewer implements IDialogChangeListener
 	}
 
 	@Override
-	public void onSceneClosed()
+	public void beforeSceneCloses()
 	{
-		Minecraft.getMinecraft().displayGuiScreen(null);
+
 	}
 
 	@Override
@@ -435,7 +434,7 @@ public class GuiDialogViewer extends GuiViewer implements IDialogChangeListener
 			}
 			else
 			{
-				this.controller.closeScene();
+				this.controller.closeScene(false);
 			}
 		}
 	}

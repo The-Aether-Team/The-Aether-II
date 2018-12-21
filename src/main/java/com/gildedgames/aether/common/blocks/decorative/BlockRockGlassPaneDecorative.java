@@ -92,12 +92,12 @@ public class BlockRockGlassPaneDecorative extends BlockPane implements IBlockWit
 	{
 		final String name = this.getStateFromMeta(stack.getItemDamage()).getValue(this.getVariantProperty()).getName();
 
-		tooltip.add(TextFormatting.GRAY + I18n.format(this.getUnlocalizedName() + "." + name + ".name"));
+		tooltip.add(TextFormatting.GRAY + I18n.format(this.getTranslationKey() + "." + name + ".name"));
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer()
+	public BlockRenderLayer getRenderLayer()
 	{
 		return BlockRenderLayer.TRANSLUCENT;
 	}

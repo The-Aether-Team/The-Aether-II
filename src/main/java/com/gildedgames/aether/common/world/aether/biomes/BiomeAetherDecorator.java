@@ -57,7 +57,7 @@ public class BiomeAetherDecorator
 
 	private final WorldGenOrangeTree genOrangeTree;
 
-	private final WorldGenAetherFlowers genBlueberryBushes, genKirridGrass;
+	private final WorldGenAetherFlowers genBlueberryBushes, genKirridGrass, genPlumproots;
 
 	private final WorldGenQuicksoil genQuicksoil;
 
@@ -110,6 +110,10 @@ public class BiomeAetherDecorator
 		this.genKirridGrass = new WorldGenAetherFlowers(
 				BlocksAether.valkyrie_grass.getDefaultState().withProperty(BlockValkyrieGrass.PROPERTY_HARVESTABLE, true)
 						.withProperty(BlockValkyrieGrass.PROPERTY_VARIANT, BlockValkyrieGrass.FULL), 64);
+
+		this.genPlumproots = new WorldGenAetherFlowers(
+				BlocksAether.plumproot.getDefaultState(), 64,
+				(state) -> state == BlocksAether.aether_grass.getDefaultState() || state == BlocksAether.aether_dirt.getDefaultState());
 
 		this.genQuicksoil = new WorldGenQuicksoil();
 
@@ -420,6 +424,35 @@ public class BiomeAetherDecorator
 				z = random.nextInt(16) + 8;
 
 				this.genBrettlPlant.generate(world, random, pos.add(x, y, z));
+			}
+
+			// Kirrid Grass Generator
+			if (random.nextInt(20) == 0)
+			{
+				for (count = 0; count < 6; count++)
+				{
+					x = random.nextInt(16) + 8;
+					y = random.nextInt(180) + 64;
+					z = random.nextInt(16) + 8;
+
+					this.genKirridGrass.generate(world, random, pos.add(x, y, z));
+				}
+			}
+		}
+
+		if (TerrainGen.decorate(world, random, pos, DecorateBiomeEvent.Decorate.EventType.PUMPKIN))
+		{
+			// Kirrid Grass Generator
+			if (random.nextInt(10) == 0)
+			{
+				for (count = 0; count < 6; count++)
+				{
+					x = random.nextInt(16) + 8;
+					y = random.nextInt(180) + 64;
+					z = random.nextInt(16) + 8;
+
+					this.genPlumproots.generate(world, random, pos.add(x, y, z));
+				}
 			}
 		}
 

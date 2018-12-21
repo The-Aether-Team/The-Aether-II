@@ -40,11 +40,10 @@ public class DialogUtil
 		IDialogSlide slide = null;
 
 		// Check if the speaker resourcelocation has a slide address
-		if (speakerPath.getResourcePath().contains("#"))
+		if (speakerPath.getPath().contains("#"))
 		{
 			// Obtain the slide address from the Speaker resourcelocation
-			address = speakerPath.getResourcePath().substring(speakerPath.getResourcePath().indexOf("#") + 1,
-					speakerPath.getResourcePath().length());
+			address = speakerPath.getPath().substring(speakerPath.getPath().indexOf("#") + 1);
 
 			slide = AetherAPI.content().dialog().findSlide(address, speaker).orElseThrow(() ->
 					new IllegalArgumentException("Couldn't find slide: " + address));

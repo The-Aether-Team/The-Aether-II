@@ -86,7 +86,7 @@ public class ItemSwetJelly extends ItemAetherFood
 	}
 
 	@Override
-	public String getUnlocalizedName(final ItemStack stack)
+	public String getTranslationKey(final ItemStack stack)
 	{
 		return "item.aether.swet_jelly." + EntitySwet.Type.fromOrdinal(stack.getMetadata()).name;
 	}

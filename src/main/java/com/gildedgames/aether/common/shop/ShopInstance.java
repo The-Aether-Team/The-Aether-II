@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.shop;
 
 import com.gildedgames.aether.api.shop.IShopBuy;
+import com.gildedgames.aether.api.shop.IShopCurrency;
 import com.gildedgames.aether.api.shop.IShopInstance;
 import com.gildedgames.orbis_api.util.io.NBTFunnel;
 import com.google.common.collect.Lists;
@@ -21,15 +22,18 @@ public class ShopInstance implements IShopInstance
 
 	private Map<UUID, ShopInventory> inventories = Maps.newHashMap();
 
+	private IShopCurrency currencyType;
+
 	private ShopInstance()
 	{
 
 	}
 
-	public ShopInstance(LinkedList<IShopBuy> stock, List<String> greetings)
+	public ShopInstance(LinkedList<IShopBuy> stock, List<String> greetings, IShopCurrency currencyType)
 	{
 		this.stock = stock;
 		this.greetings = greetings;
+		this.currencyType = currencyType;
 	}
 
 	@Override
@@ -87,6 +91,12 @@ public class ShopInstance implements IShopInstance
 	}
 
 	@Override
+	public IShopCurrency getCurrencyType()
+	{
+		return this.currencyType;
+	}
+
+	@Override
 	public void write(NBTTagCompound tag)
 	{
 		NBTFunnel funnel = new NBTFunnel(tag);
@@ -94,6 +104,7 @@ public class ShopInstance implements IShopInstance
 		funnel.setList("stock", this.stock);
 		funnel.setStringList("greetings", this.greetings);
 		funnel.setMap("inventories", this.inventories, NBTFunnel.UUID_SETTER, NBTFunnel.setter());
+		funnel.set("currencyType", this.currencyType);
 	}
 
 	@Override
@@ -109,6 +120,8 @@ public class ShopInstance implements IShopInstance
 		{
 			inventory.setShopInstance(this);
 		}
+
+		this.currencyType = funnel.getWithDefault("currencyType", ShopCurrencyGilt::new);
 	}
 
 }

@@ -6,6 +6,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import java.util.Random;
+import java.util.function.Function;
 
 public class WorldGenAetherFlowers extends WorldGenerator
 {
@@ -13,10 +14,19 @@ public class WorldGenAetherFlowers extends WorldGenerator
 
 	private final int max;
 
-	public WorldGenAetherFlowers(final IBlockState state, final int max)
+	private final Function<IBlockState, Boolean> canPlaceOn;
+
+	public WorldGenAetherFlowers(final IBlockState state, final int max, Function<IBlockState, Boolean> canPlaceOn)
 	{
 		this.state = state;
 		this.max = max;
+
+		this.canPlaceOn = canPlaceOn;
+	}
+
+	public WorldGenAetherFlowers(final IBlockState state, final int max)
+	{
+		this(state, max, null);
 	}
 
 	@Override
@@ -36,7 +46,9 @@ public class WorldGenAetherFlowers extends WorldGenerator
 				continue;
 			}
 
-			if (world.isAirBlock(randomPos) && (randomPos.getY() < world.getActualHeight()) && this.state.getBlock().canPlaceBlockAt(world, randomPos))
+			if ((this.canPlaceOn == null || this.canPlaceOn.apply(world.getBlockState(randomPos.down()))) && world.isAirBlock(randomPos) && (randomPos.getY()
+					< world
+					.getActualHeight()) && this.state.getBlock().canPlaceBlockAt(world, randomPos))
 			{
 				world.setBlockState(randomPos, this.state, 2);
 			}

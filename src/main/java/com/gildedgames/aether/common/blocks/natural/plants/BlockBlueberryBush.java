@@ -196,7 +196,7 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IBlockMultiN
 	}
 
 	@Override
-	public String getUnlocalizedName(final ItemStack stack)
+	public String getTranslationKey(final ItemStack stack)
 	{
 		switch (stack.getMetadata())
 		{

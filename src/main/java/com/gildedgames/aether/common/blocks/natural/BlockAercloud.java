@@ -72,7 +72,7 @@ public class BlockAercloud extends Block implements IBlockMultiName
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer()
+	public BlockRenderLayer getRenderLayer()
 	{
 		return BlockRenderLayer.TRANSLUCENT;
 	}
@@ -103,7 +103,7 @@ public class BlockAercloud extends Block implements IBlockMultiName
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(final World world, final BlockPos pos, final IBlockState state, final Entity entity)
+	public void onEntityCollision(final World world, final BlockPos pos, final IBlockState state, final Entity entity)
 	{
 		entity.fallDistance = 0;
 
@@ -141,8 +141,8 @@ public class BlockAercloud extends Block implements IBlockMultiName
 		{
 			final EnumFacing facing = variant == GREEN_AERCLOUD ? EnumFacing.random(world.rand) : state.getValue(PROPERTY_FACING);
 
-			entity.motionX = facing.getFrontOffsetX() * 2.5D;
-			entity.motionZ = facing.getFrontOffsetZ() * 2.5D;
+			entity.motionX = facing.getXOffset() * 2.5D;
+			entity.motionZ = facing.getZOffset() * 2.5D;
 		}
 		else if (variant == GOLDEN_AERCLOUD)
 		{
@@ -162,8 +162,8 @@ public class BlockAercloud extends Block implements IBlockMultiName
 
 			final EnumFacing facing = state.getValue(PROPERTY_FACING);
 
-			final float motionX = facing.getFrontOffsetX() * ((rand.nextFloat() * 0.01f) + 0.05f);
-			final float motionZ = facing.getFrontOffsetZ() * ((rand.nextFloat() * 0.01f) + 0.05f);
+			final float motionX = facing.getXOffset() * ((rand.nextFloat() * 0.01f) + 0.05f);
+			final float motionZ = facing.getZOffset() * ((rand.nextFloat() * 0.01f) + 0.05f);
 
 			world.spawnParticle(EnumParticleTypes.CLOUD, x, y, z, motionX, 0, motionZ);
 		}
@@ -212,7 +212,7 @@ public class BlockAercloud extends Block implements IBlockMultiName
 		if (meta >= PURPLE_AERCLOUD.getMeta())
 		{
 			return this.getDefaultState().withProperty(PROPERTY_VARIANT, PURPLE_AERCLOUD)
-					.withProperty(PROPERTY_FACING, EnumFacing.getHorizontal(meta - PURPLE_AERCLOUD.getMeta()));
+					.withProperty(PROPERTY_FACING, EnumFacing.byHorizontalIndex(meta - PURPLE_AERCLOUD.getMeta()));
 		}
 
 		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta));
@@ -251,7 +251,7 @@ public class BlockAercloud extends Block implements IBlockMultiName
 	}
 
 	@Override
-	public String getUnlocalizedName(final ItemStack stack)
+	public String getTranslationKey(final ItemStack stack)
 	{
 		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
 	}

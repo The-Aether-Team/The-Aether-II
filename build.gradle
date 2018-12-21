@@ -112,4 +112,6 @@ artifacts {
     archives apiJar
 }
 
-build.dependsOn signJar
+if (System.getenv("GRADLE_BUILD_SIGNED") == 'true') {
+    build.dependsOn signJar
+}

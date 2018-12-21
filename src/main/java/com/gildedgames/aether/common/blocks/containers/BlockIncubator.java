@@ -83,7 +83,7 @@ public class BlockIncubator extends BlockContainer
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer()
+	public BlockRenderLayer getRenderLayer()
 	{
 		return BlockRenderLayer.CUTOUT;
 	}
@@ -146,7 +146,7 @@ public class BlockIncubator extends BlockContainer
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		EnumFacing facing = EnumFacing.getHorizontal(meta & 7);
+		EnumFacing facing = EnumFacing.byHorizontalIndex(meta & 7);
 
 		boolean isLit = (meta & 8) == 8;
 

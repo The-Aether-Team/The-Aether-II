@@ -15,12 +15,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+//TODO: Adding/Removing ambrosium chunks freezes the GUI which requires to close and reopen GUI.
+
 @SideOnly(Side.CLIENT)
 public class GuiIncubator extends GuiContainer
 {
 	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/gui/inventory/incubator.png");
 
-	/** The player inventory bound to this GUI. */
 	private final InventoryPlayer playerInventory;
 
 	private final IInventory tileIncubator;
@@ -36,80 +37,90 @@ public class GuiIncubator extends GuiContainer
 		this.tileIncubator = incubatorInv;
 	}
 
-	/**
-	 * Draw the foreground layer for the GuiContainer (everything in front of the items)
-	 */
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
 		TileEntity tile = Minecraft.getMinecraft().world.getTileEntity(this.incubatorPos);
 
-		String s = tile.getDisplayName().getUnformattedText();
-		this.fontRenderer.drawString(s, this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6, 4210752);
-		this.fontRenderer.drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
+		String name = tile.getDisplayName().getUnformattedText();
+		this.fontRenderer.drawString(name, this.xSize/2 - this.fontRenderer.getStringWidth(name)/2, 6, 4210752);
+		this.fontRenderer.drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96 +2, 4210752);
 
 		if (tile instanceof TileEntityIncubator)
 		{
 			TileEntityIncubator te = (TileEntityIncubator) tile;
 
+			String incubateText = I18n.format("gui.aether.incubator.label.incubation");
+			String heatingText = I18n.format("gui.aether.incubator.label.heating");
+			String eggStatusString = "E%";
+			String heatStatusString = "H%";
+			int incubateColor 	= 0xff5a00;
+			int heatingColor 	= 0xcc0000;
+			int eggStatusColor 	= 0xffffff;
+			int heatStatusColor = 0xffffff;
+
+			float eggPercent = 0.0F;
+
+			if (te.getField(0) < te.getRequiredTemperatureThreshold())
+			{
+				float heatValue = (float) te.getField(0) / ((float) te.getRequiredTemperatureThreshold()) * 100.f;
+				if (heatValue > 100.f)
+				{
+					heatValue = 100.f;
+				}
+				heatStatusString = String.valueOf(heatValue);
+				heatStatusString = String.format("%.0f", Float.valueOf(heatStatusString));
+				heatStatusString += "%";
+				if (te.getField(0) == 0)
+				{
+					heatStatusColor = 0x787878;
+				}
+			}
+			else
+			{
+				heatStatusString = I18n.format("gui.aether.incubator.label.max");
+				heatStatusColor = 0xffffff;
+			}
+
 			if (te.canEggIncubate())
 			{
+				eggStatusString = I18n.format("gui.aether.incubator.label.ready");
+
 				if (!te.getMoaEgg().isEmpty())
 				{
-					String text = I18n.format("gui.aether.incubator.label.incubating");
-
-					this.fontRenderer.drawString(text, 126 - (this.fontRenderer.getStringWidth(text) / 2), this.ySize - 126, 15435844);
-				}
-
-				if (!te.hasStartedHeating())
-				{
-					return;
-				}
-
-				float percent = 0.0F;
-
-				if (te.getField(1) > 0)
-				{
-					// the percentage will represent the how long till the egg is finished incubation.
-					// currently the egg needs to incubate from 0 to half of the requiredTemperatureThreshold(5000/2 = 2500).
-					float eggMath = ((float) te.getEggTimer() / (float) (te.getRequiredTemperatureThreshold() / 2));
-
-					percent = eggMath * 100.0F;
-				}
-
-				String valueString = percent == (int) Math.floor(percent) ? String.valueOf((int) Math.floor(percent)) : String.valueOf(percent);
-
-				if (percent != (int) Math.floor(percent))
-				{
-					double floor = Math.floor(percent);
-					double dif = percent - floor;
-
-					if (dif < 0.1F)
+					if (te.getField(1) > 0)
 					{
-						valueString = String.valueOf((int) Math.floor(percent));
+						float eggMath = ((float) te.getEggTimer() / (float) (te.getEggTimerMax()));
+
+						eggPercent = eggMath * 100.0F;
 					}
-					else
-					{
-						valueString = String.format("%.1f", Float.valueOf(valueString));
-					}
+
+					eggStatusString = String.valueOf(eggPercent);
+					eggStatusString = String.format("%.0f", Float.valueOf(eggStatusString));
+					eggStatusString += "%";
 				}
-
-				valueString += "%";
-
-				this.fontRenderer.drawString(valueString, 113 - (this.fontRenderer.getStringWidth(valueString) / 2), this.ySize - 145 + 2, 4210752);
 			}
-			else if (te.areFuelSlotsFilled() && te.getField(0) < 2500)
+			else
 			{
-				String text = I18n.format("gui.aether.incubator.label.heating");
+				eggStatusString = I18n.format("gui.aether.incubator.label.more_heat");
+				eggStatusColor = 0x787878;
 
-				this.fontRenderer.drawString(text, 60 - (this.fontRenderer.getStringWidth(text) / 2), this.ySize - 126, 11743532);
+				if (!te.getMoaEgg().isEmpty())
+				{
+					eggStatusString = I18n.format("gui.aether.incubator.label.fail");
+					eggStatusColor = 0x2f2f2f;
+					heatStatusColor = 0x2f2f2f;
+				}
 			}
+
+			// Text rendering
+			this.fontRenderer.drawString(incubateText, 135 - (this.fontRenderer.getStringWidth(incubateText) / 2), this.ySize - 145, incubateColor);
+			this.fontRenderer.drawString(heatingText, 45 - (this.fontRenderer.getStringWidth(heatingText) / 2), this.ySize - 145, heatingColor);
+			this.fontRenderer.drawString(eggStatusString, 135 - (this.fontRenderer.getStringWidth(eggStatusString) / 2), this.ySize - 110, eggStatusColor);
+			this.fontRenderer.drawString(heatStatusString, 45 - (this.fontRenderer.getStringWidth(heatStatusString) / 2), this.ySize - 110, heatStatusColor);
 		}
 	}
 
-	/**
-	 * Draws the background layer of this container (behind the items).
-	 */
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
 	{
@@ -132,7 +143,7 @@ public class GuiIncubator extends GuiContainer
 	private int getHeatingScaled(int pixels)
 	{
 		int i = this.tileIncubator.getField(0);
-		int j = 2500;
+		int j = TileEntityIncubator.REQ_TEMPERATURE_THRESHOLD-500;
 
 		return j != 0 && i != 0 ? i * pixels / j : 0;
 	}
@@ -142,12 +153,8 @@ public class GuiIncubator extends GuiContainer
 	{
 		super.updateScreen();
 
-		this.drawGuiContainerForegroundLayer(0, 0);
 	}
 
-	/**
-	 * Draws the screen and all the components in it.
-	 */
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks)
 	{

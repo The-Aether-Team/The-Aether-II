@@ -18,7 +18,7 @@ public class DialogActionExit implements IDialogAction
 	@Override
 	public void performAction(IDialogController controller)
 	{
-		controller.closeScene();
+		controller.closeScene(true);
 	}
 
 	public static class Deserializer implements JsonDeserializer<DialogActionExit>

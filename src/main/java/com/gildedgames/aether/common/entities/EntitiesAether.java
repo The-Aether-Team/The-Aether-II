@@ -7,10 +7,7 @@ import com.gildedgames.aether.common.entities.blocks.EntityParachute;
 import com.gildedgames.aether.common.entities.living.companions.*;
 import com.gildedgames.aether.common.entities.living.mobs.*;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
-import com.gildedgames.aether.common.entities.living.npc.EntityEdison;
-import com.gildedgames.aether.common.entities.living.npc.EntityJosediya;
-import com.gildedgames.aether.common.entities.living.npc.EntityNecromancer;
-import com.gildedgames.aether.common.entities.living.npc.EntityTivalier;
+import com.gildedgames.aether.common.entities.living.npc.*;
 import com.gildedgames.aether.common.entities.living.passive.*;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
 import com.gildedgames.aether.common.entities.projectiles.EntityDaggerfrostSnowball;
@@ -51,6 +48,7 @@ public class EntitiesAether
 		registerLivingEntityWithEgg(EntityJosediya.class, "josediya", 0xabd5cb, 0x87dbac);
 		registerLivingEntityWithEgg(EntityTivalier.class, "tivalier", 0x6eb196, 0x454e68);
 		registerLivingEntityWithEgg(EntityIcehog.class, "icehog", 0x6eb196, 0x454e68);
+		registerLivingEntityWithEgg(EntityMysteriousFigure.class, "mysterious_figure", 0x504960, 0xb68b69);
 
 		registerLivingEntity(EntityFrostpineTotem.class, "frostpine_totem");
 		registerLivingEntity(EntityKraisith.class, "kraisith");

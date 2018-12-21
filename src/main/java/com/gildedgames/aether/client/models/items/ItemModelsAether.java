@@ -249,7 +249,49 @@ public class ItemModelsAether
 
 		registerItemModels(BlocksAether.holystone_brick, "holystone_bricks/normal");
 
+		registerItemModels(BlocksAether.plumproot, "plumproot");
+
+		registerItemModels(ItemsAether.plumproot_mash, "plumproot_mash");
+		registerItemModels(ItemsAether.plumproot_pie, "plumproot_pie");
+
 		registerItemModels(BlocksAether.holystone_pillar, "holystone_bricks/pillar");
+
+		registerItemModels(BlocksAether.sentrystone_brick_decorative, new ItemModelBuilder("sentrystone_bricks/")
+				.add(BlockSentrystoneDecorative.BASE_BRICKS.getMeta(), "base_bricks")
+				.add(BlockSentrystoneDecorative.BASE_PILLAR.getMeta(), "base_pillar")
+				.add(BlockSentrystoneDecorative.CAPSTONE_BRICKS.getMeta(), "capstone_bricks")
+				.add(BlockSentrystoneDecorative.CAPSTONE_PILLAR.getMeta(), "capstone_pillar")
+				.add(BlockSentrystoneDecorative.FLAGSTONES.getMeta(), "flagstones")
+				.add(BlockSentrystoneDecorative.LIGHTSTONE.getMeta(), "lightstone")
+				.add(BlockSentrystoneDecorative.KEYSTONE.getMeta(), "keystone"));
+
+		registerItemModels(BlocksAether.sentrystone_brick_decorative_lit, new ItemModelBuilder("sentrystone_bricks/")
+				.add(BlockSentrystoneDecorativeLit.BASE_BRICKS.getMeta(), "base_bricks_lit")
+				.add(BlockSentrystoneDecorativeLit.BASE_PILLAR.getMeta(), "base_pillar_lit")
+				.add(BlockSentrystoneDecorativeLit.CAPSTONE_BRICKS.getMeta(), "capstone_bricks_lit")
+				.add(BlockSentrystoneDecorativeLit.CAPSTONE_PILLAR.getMeta(), "capstone_pillar_lit")
+				.add(BlockSentrystoneDecorativeLit.LIGHTSTONE.getMeta(), "lightstone_lit")
+				.add(BlockSentrystoneDecorativeLit.KEYSTONE.getMeta(), "keystone_lit"));
+
+		registerItemModels(BlocksAether.sentrystone_brick, "sentrystone_bricks/normal");
+
+		registerItemModels(BlocksAether.sentrystone_pillar, "sentrystone_bricks/pillar");
+
+		registerItemModels(BlocksAether.sentrystone_pillar_lit, "sentrystone_bricks/pillar_lit");
+
+		registerItemModels(BlocksAether.hellfirestone_brick_decorative, new ItemModelBuilder("hellfirestone_bricks/")
+				.add(BlockHellfirestoneDecorative.BASE_BRICKS.getMeta(), "base_bricks")
+				.add(BlockHellfirestoneDecorative.BASE_PILLAR.getMeta(), "base_pillar")
+				.add(BlockHellfirestoneDecorative.CAPSTONE_BRICKS.getMeta(), "capstone_bricks")
+				.add(BlockHellfirestoneDecorative.CAPSTONE_PILLAR.getMeta(), "capstone_pillar")
+				.add(BlockHellfirestoneDecorative.FLAGSTONES.getMeta(), "flagstones")
+				.add(BlockHellfirestoneDecorative.KEYSTONE.getMeta(), "keystone"));
+
+		registerItemModels(BlocksAether.hellfirestone_brick, "hellfirestone_bricks/normal");
+
+		registerItemModels(BlocksAether.hellfirestone_lantern, "hellfirestone_bricks/lantern");
+
+		registerItemModels(BlocksAether.hellfirestone_pillar, "hellfirestone_bricks/pillar");
 
 		registerItemModels(BlocksAether.faded_holystone_brick, "faded_holystone_bricks/normal");
 
@@ -399,7 +441,7 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.candy_corn, "candy_corn");
 		registerItemModels(ItemsAether.cocoatrice, "cocoatrice");
 		registerItemModels(ItemsAether.wrapped_chocolates, "wrapped_chocolates");
-		registerItemModels(ItemsAether.jelly_pumpkin, "jelly_pumpkin");
+		registerItemModels(ItemsAether.jelly_plumproot, "jelly_plumproot");
 		registerItemModels(ItemsAether.stomper_pop, "stomper_pop");
 		registerItemModels(ItemsAether.blueberry_lollipop, "blueberry_lollipop");
 		registerItemModels(ItemsAether.orange_lollipop, "orange_lollipop");
@@ -467,10 +509,10 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.skyroot_button, "skyroot_button");
 
 		registerItemModels(BlocksAether.wisproot_pressure_plate, "wisproot_pressure_plate");
-        registerItemModels(BlocksAether.wisproot_button, "wisproot_button");
+		registerItemModels(BlocksAether.wisproot_button, "wisproot_button");
 
 		registerItemModels(BlocksAether.greatroot_pressure_plate, "greatroot_pressure_plate");
-        registerItemModels(BlocksAether.greatroot_button, "greatroot_button");
+		registerItemModels(BlocksAether.greatroot_button, "greatroot_button");
 
 		registerItemModels(BlocksAether.holystone_pressure_plate, "holystone_pressure_plate");
 		registerItemModels(BlocksAether.holystone_button, "holystone_button");

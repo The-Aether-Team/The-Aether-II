@@ -170,8 +170,8 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 		// NORMAL FACINGS
 		for (EnumFacing enumfacing : EnumFacing.values())
 		{
-			PathPoint pathpoint = this.getSafePoint(currentPoint.x + enumfacing.getFrontOffsetX(), currentPoint.y + enumfacing.getFrontOffsetY(),
-					currentPoint.z + enumfacing.getFrontOffsetZ(), blockHeightCanStep, currentYMaxValue, enumfacing);
+			PathPoint pathpoint = this.getSafePoint(currentPoint.x + enumfacing.getXOffset(), currentPoint.y + enumfacing.getYOffset(),
+					currentPoint.z + enumfacing.getZOffset(), blockHeightCanStep, currentYMaxValue, enumfacing);
 
 			valid[facingIndex] = pathpoint != null && pathpoint.nodeType == PathNodeType.WALKABLE && this.isConnectedToLatchedPosition(pathpoint);
 
@@ -204,9 +204,9 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 					}
 				}
 
-				PathPoint pathpoint = this.getSafePoint(currentPoint.x + base.getFrontOffsetX() + layer1.getFrontOffsetX(),
-						currentPoint.y + base.getFrontOffsetY() + layer1.getFrontOffsetY(),
-						currentPoint.z + base.getFrontOffsetZ() + layer1.getFrontOffsetZ(), blockHeightCanStep, currentYMaxValue, base);
+				PathPoint pathpoint = this.getSafePoint(currentPoint.x + base.getXOffset() + layer1.getXOffset(),
+						currentPoint.y + base.getYOffset() + layer1.getYOffset(),
+						currentPoint.z + base.getZOffset() + layer1.getZOffset(), blockHeightCanStep, currentYMaxValue, base);
 
 				if ((valid[base.ordinal()] || valid[layer1.ordinal()]) && pathpoint != null && this.isConnectedToLatchedPosition(pathpoint)
 						&& pathpoint.nodeType == PathNodeType.WALKABLE && !pathpoint.visited
@@ -230,9 +230,9 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 							}
 						}
 
-						pathpoint = this.getSafePoint(currentPoint.x + base.getFrontOffsetX() + layer1.getFrontOffsetX() + layer2.getFrontOffsetX(),
-								currentPoint.y + base.getFrontOffsetY() + layer1.getFrontOffsetY() + layer2.getFrontOffsetY(),
-								currentPoint.z + base.getFrontOffsetZ() + layer1.getFrontOffsetZ() + layer2.getFrontOffsetY(), blockHeightCanStep,
+						pathpoint = this.getSafePoint(currentPoint.x + base.getXOffset() + layer1.getXOffset() + layer2.getXOffset(),
+								currentPoint.y + base.getYOffset() + layer1.getYOffset() + layer2.getYOffset(),
+								currentPoint.z + base.getZOffset() + layer1.getZOffset() + layer2.getYOffset(), blockHeightCanStep,
 								currentYMaxValue, base);
 
 						if (pathpoint != null && this.isConnectedToLatchedPosition(pathpoint) && pathpoint.nodeType == PathNodeType.WALKABLE
@@ -335,9 +335,9 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 					return pathpoint;
 				}
 
-				PathNodeType nodeDownWest = this.getPathNodeType(this.entity, x + EnumFacing.WEST.getFrontOffsetX() + EnumFacing.DOWN.getFrontOffsetX(),
-						y + EnumFacing.WEST.getFrontOffsetY() + EnumFacing.DOWN.getFrontOffsetY(),
-						z + EnumFacing.WEST.getFrontOffsetZ() + EnumFacing.DOWN.getFrontOffsetZ());
+				PathNodeType nodeDownWest = this.getPathNodeType(this.entity, x + EnumFacing.WEST.getXOffset() + EnumFacing.DOWN.getXOffset(),
+						y + EnumFacing.WEST.getYOffset() + EnumFacing.DOWN.getYOffset(),
+						z + EnumFacing.WEST.getZOffset() + EnumFacing.DOWN.getZOffset());
 
 				if (nodeDownWest == PathNodeType.BLOCKED && pathpoint.nodeType == PathNodeType.OPEN)
 				{
@@ -346,9 +346,9 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 					return pathpoint;
 				}
 
-				PathNodeType nodeDownEast = this.getPathNodeType(this.entity, x + EnumFacing.EAST.getFrontOffsetX() + EnumFacing.DOWN.getFrontOffsetX(),
-						y + EnumFacing.EAST.getFrontOffsetY() + EnumFacing.DOWN.getFrontOffsetY(),
-						z + EnumFacing.EAST.getFrontOffsetZ() + EnumFacing.DOWN.getFrontOffsetZ());
+				PathNodeType nodeDownEast = this.getPathNodeType(this.entity, x + EnumFacing.EAST.getXOffset() + EnumFacing.DOWN.getXOffset(),
+						y + EnumFacing.EAST.getYOffset() + EnumFacing.DOWN.getYOffset(),
+						z + EnumFacing.EAST.getZOffset() + EnumFacing.DOWN.getZOffset());
 
 				if (nodeDownEast == PathNodeType.BLOCKED && pathpoint.nodeType == PathNodeType.OPEN)
 				{
@@ -357,9 +357,9 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 					return pathpoint;
 				}
 
-				PathNodeType nodeDownSouth = this.getPathNodeType(this.entity, x + EnumFacing.SOUTH.getFrontOffsetX() + EnumFacing.DOWN.getFrontOffsetX(),
-						y + EnumFacing.SOUTH.getFrontOffsetY() + EnumFacing.DOWN.getFrontOffsetY(),
-						z + EnumFacing.SOUTH.getFrontOffsetZ() + EnumFacing.DOWN.getFrontOffsetZ());
+				PathNodeType nodeDownSouth = this.getPathNodeType(this.entity, x + EnumFacing.SOUTH.getXOffset() + EnumFacing.DOWN.getXOffset(),
+						y + EnumFacing.SOUTH.getYOffset() + EnumFacing.DOWN.getYOffset(),
+						z + EnumFacing.SOUTH.getZOffset() + EnumFacing.DOWN.getZOffset());
 
 				if (nodeDownSouth == PathNodeType.BLOCKED && pathpoint.nodeType == PathNodeType.OPEN)
 				{
@@ -368,9 +368,9 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 					return pathpoint;
 				}
 
-				PathNodeType nodeDownNorth = this.getPathNodeType(this.entity, x + EnumFacing.NORTH.getFrontOffsetX() + EnumFacing.DOWN.getFrontOffsetX(),
-						y + EnumFacing.NORTH.getFrontOffsetY() + EnumFacing.DOWN.getFrontOffsetY(),
-						z + EnumFacing.NORTH.getFrontOffsetZ() + EnumFacing.DOWN.getFrontOffsetZ());
+				PathNodeType nodeDownNorth = this.getPathNodeType(this.entity, x + EnumFacing.NORTH.getXOffset() + EnumFacing.DOWN.getXOffset(),
+						y + EnumFacing.NORTH.getYOffset() + EnumFacing.DOWN.getYOffset(),
+						z + EnumFacing.NORTH.getZOffset() + EnumFacing.DOWN.getZOffset());
 
 				if (nodeDownNorth == PathNodeType.BLOCKED && pathpoint.nodeType == PathNodeType.OPEN)
 				{
@@ -380,9 +380,9 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 				}
 
 				PathNodeType nodeDownNorthWest = this.getPathNodeType(this.entity,
-						x + EnumFacing.WEST.getFrontOffsetX() + EnumFacing.NORTH.getFrontOffsetX() + EnumFacing.DOWN.getFrontOffsetX(),
-						y + EnumFacing.WEST.getFrontOffsetY() + EnumFacing.NORTH.getFrontOffsetY() + EnumFacing.DOWN.getFrontOffsetY(),
-						z + EnumFacing.WEST.getFrontOffsetZ() + EnumFacing.NORTH.getFrontOffsetZ() + EnumFacing.DOWN.getFrontOffsetZ());
+						x + EnumFacing.WEST.getXOffset() + EnumFacing.NORTH.getXOffset() + EnumFacing.DOWN.getXOffset(),
+						y + EnumFacing.WEST.getYOffset() + EnumFacing.NORTH.getYOffset() + EnumFacing.DOWN.getYOffset(),
+						z + EnumFacing.WEST.getZOffset() + EnumFacing.NORTH.getZOffset() + EnumFacing.DOWN.getZOffset());
 
 				if (nodeDownNorthWest == PathNodeType.BLOCKED && pathpoint.nodeType == PathNodeType.OPEN)
 				{
@@ -392,9 +392,9 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 				}
 
 				PathNodeType nodeDownNorthEast = this.getPathNodeType(this.entity,
-						x + EnumFacing.EAST.getFrontOffsetX() + EnumFacing.NORTH.getFrontOffsetX() + EnumFacing.DOWN.getFrontOffsetX(),
-						y + EnumFacing.EAST.getFrontOffsetY() + EnumFacing.NORTH.getFrontOffsetY() + EnumFacing.DOWN.getFrontOffsetY(),
-						z + EnumFacing.EAST.getFrontOffsetZ() + EnumFacing.NORTH.getFrontOffsetZ() + EnumFacing.DOWN.getFrontOffsetZ());
+						x + EnumFacing.EAST.getXOffset() + EnumFacing.NORTH.getXOffset() + EnumFacing.DOWN.getXOffset(),
+						y + EnumFacing.EAST.getYOffset() + EnumFacing.NORTH.getYOffset() + EnumFacing.DOWN.getYOffset(),
+						z + EnumFacing.EAST.getZOffset() + EnumFacing.NORTH.getZOffset() + EnumFacing.DOWN.getZOffset());
 
 				if (nodeDownNorthEast == PathNodeType.BLOCKED && pathpoint.nodeType == PathNodeType.OPEN)
 				{
@@ -404,9 +404,9 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 				}
 
 				PathNodeType nodeDownSouthWest = this.getPathNodeType(this.entity,
-						x + EnumFacing.WEST.getFrontOffsetX() + EnumFacing.SOUTH.getFrontOffsetX() + EnumFacing.DOWN.getFrontOffsetX(),
-						y + EnumFacing.WEST.getFrontOffsetY() + EnumFacing.SOUTH.getFrontOffsetY() + EnumFacing.DOWN.getFrontOffsetY(),
-						z + EnumFacing.WEST.getFrontOffsetZ() + EnumFacing.SOUTH.getFrontOffsetZ() + EnumFacing.DOWN.getFrontOffsetZ());
+						x + EnumFacing.WEST.getXOffset() + EnumFacing.SOUTH.getXOffset() + EnumFacing.DOWN.getXOffset(),
+						y + EnumFacing.WEST.getYOffset() + EnumFacing.SOUTH.getYOffset() + EnumFacing.DOWN.getYOffset(),
+						z + EnumFacing.WEST.getZOffset() + EnumFacing.SOUTH.getZOffset() + EnumFacing.DOWN.getZOffset());
 
 				if (nodeDownSouthWest == PathNodeType.BLOCKED && pathpoint.nodeType == PathNodeType.OPEN)
 				{
@@ -416,9 +416,9 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 				}
 
 				PathNodeType nodeDownSouthEast = this.getPathNodeType(this.entity,
-						x + EnumFacing.EAST.getFrontOffsetX() + EnumFacing.SOUTH.getFrontOffsetX() + EnumFacing.DOWN.getFrontOffsetX(),
-						y + EnumFacing.EAST.getFrontOffsetY() + EnumFacing.SOUTH.getFrontOffsetY() + EnumFacing.DOWN.getFrontOffsetY(),
-						z + EnumFacing.EAST.getFrontOffsetZ() + EnumFacing.SOUTH.getFrontOffsetZ() + EnumFacing.DOWN.getFrontOffsetZ());
+						x + EnumFacing.EAST.getXOffset() + EnumFacing.SOUTH.getXOffset() + EnumFacing.DOWN.getXOffset(),
+						y + EnumFacing.EAST.getYOffset() + EnumFacing.SOUTH.getYOffset() + EnumFacing.DOWN.getYOffset(),
+						z + EnumFacing.EAST.getZOffset() + EnumFacing.SOUTH.getZOffset() + EnumFacing.DOWN.getZOffset());
 
 				if (nodeDownSouthEast == PathNodeType.BLOCKED && pathpoint.nodeType == PathNodeType.OPEN)
 				{
@@ -427,9 +427,9 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 					return pathpoint;
 				}
 
-				PathNodeType nodeUpWest = this.getPathNodeType(this.entity, x + EnumFacing.WEST.getFrontOffsetX() + EnumFacing.UP.getFrontOffsetX(),
-						y + EnumFacing.WEST.getFrontOffsetY() + EnumFacing.UP.getFrontOffsetY(),
-						z + EnumFacing.WEST.getFrontOffsetZ() + EnumFacing.UP.getFrontOffsetZ());
+				PathNodeType nodeUpWest = this.getPathNodeType(this.entity, x + EnumFacing.WEST.getXOffset() + EnumFacing.UP.getXOffset(),
+						y + EnumFacing.WEST.getYOffset() + EnumFacing.UP.getYOffset(),
+						z + EnumFacing.WEST.getZOffset() + EnumFacing.UP.getZOffset());
 
 				if (nodeUpWest == PathNodeType.BLOCKED && pathpoint.nodeType == PathNodeType.OPEN)
 				{
@@ -438,9 +438,9 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 					return pathpoint;
 				}
 
-				PathNodeType nodeUpEast = this.getPathNodeType(this.entity, x + EnumFacing.EAST.getFrontOffsetX() + EnumFacing.UP.getFrontOffsetX(),
-						y + EnumFacing.EAST.getFrontOffsetY() + EnumFacing.UP.getFrontOffsetY(),
-						z + EnumFacing.EAST.getFrontOffsetZ() + EnumFacing.UP.getFrontOffsetZ());
+				PathNodeType nodeUpEast = this.getPathNodeType(this.entity, x + EnumFacing.EAST.getXOffset() + EnumFacing.UP.getXOffset(),
+						y + EnumFacing.EAST.getYOffset() + EnumFacing.UP.getYOffset(),
+						z + EnumFacing.EAST.getZOffset() + EnumFacing.UP.getZOffset());
 
 				if (nodeUpEast == PathNodeType.BLOCKED && pathpoint.nodeType == PathNodeType.OPEN)
 				{
@@ -449,9 +449,9 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 					return pathpoint;
 				}
 
-				PathNodeType nodeUpSouth = this.getPathNodeType(this.entity, x + EnumFacing.SOUTH.getFrontOffsetX() + EnumFacing.UP.getFrontOffsetX(),
-						y + EnumFacing.SOUTH.getFrontOffsetY() + EnumFacing.UP.getFrontOffsetY(),
-						z + EnumFacing.SOUTH.getFrontOffsetZ() + EnumFacing.UP.getFrontOffsetZ());
+				PathNodeType nodeUpSouth = this.getPathNodeType(this.entity, x + EnumFacing.SOUTH.getXOffset() + EnumFacing.UP.getXOffset(),
+						y + EnumFacing.SOUTH.getYOffset() + EnumFacing.UP.getYOffset(),
+						z + EnumFacing.SOUTH.getZOffset() + EnumFacing.UP.getZOffset());
 
 				if (nodeUpSouth == PathNodeType.BLOCKED && pathpoint.nodeType == PathNodeType.OPEN)
 				{
@@ -460,9 +460,9 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 					return pathpoint;
 				}
 
-				PathNodeType nodeUpNorth = this.getPathNodeType(this.entity, x + EnumFacing.NORTH.getFrontOffsetX() + EnumFacing.UP.getFrontOffsetX(),
-						y + EnumFacing.NORTH.getFrontOffsetY() + EnumFacing.UP.getFrontOffsetY(),
-						z + EnumFacing.NORTH.getFrontOffsetZ() + EnumFacing.UP.getFrontOffsetZ());
+				PathNodeType nodeUpNorth = this.getPathNodeType(this.entity, x + EnumFacing.NORTH.getXOffset() + EnumFacing.UP.getXOffset(),
+						y + EnumFacing.NORTH.getYOffset() + EnumFacing.UP.getYOffset(),
+						z + EnumFacing.NORTH.getZOffset() + EnumFacing.UP.getZOffset());
 
 				if (nodeUpNorth == PathNodeType.BLOCKED && pathpoint.nodeType == PathNodeType.OPEN)
 				{
@@ -472,9 +472,9 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 				}
 
 				PathNodeType nodeUpNorthWest = this.getPathNodeType(this.entity,
-						x + EnumFacing.WEST.getFrontOffsetX() + EnumFacing.NORTH.getFrontOffsetX() + EnumFacing.UP.getFrontOffsetX(),
-						y + EnumFacing.WEST.getFrontOffsetY() + EnumFacing.NORTH.getFrontOffsetY() + EnumFacing.UP.getFrontOffsetY(),
-						z + EnumFacing.WEST.getFrontOffsetZ() + EnumFacing.NORTH.getFrontOffsetZ() + EnumFacing.UP.getFrontOffsetZ());
+						x + EnumFacing.WEST.getXOffset() + EnumFacing.NORTH.getXOffset() + EnumFacing.UP.getXOffset(),
+						y + EnumFacing.WEST.getYOffset() + EnumFacing.NORTH.getYOffset() + EnumFacing.UP.getYOffset(),
+						z + EnumFacing.WEST.getZOffset() + EnumFacing.NORTH.getZOffset() + EnumFacing.UP.getZOffset());
 
 				if (nodeUpNorthWest == PathNodeType.BLOCKED && pathpoint.nodeType == PathNodeType.OPEN)
 				{
@@ -484,9 +484,9 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 				}
 
 				PathNodeType nodeUpNorthEast = this.getPathNodeType(this.entity,
-						x + EnumFacing.EAST.getFrontOffsetX() + EnumFacing.NORTH.getFrontOffsetX() + EnumFacing.UP.getFrontOffsetX(),
-						y + EnumFacing.EAST.getFrontOffsetY() + EnumFacing.NORTH.getFrontOffsetY() + EnumFacing.UP.getFrontOffsetY(),
-						z + EnumFacing.EAST.getFrontOffsetZ() + EnumFacing.NORTH.getFrontOffsetZ() + EnumFacing.UP.getFrontOffsetZ());
+						x + EnumFacing.EAST.getXOffset() + EnumFacing.NORTH.getXOffset() + EnumFacing.UP.getXOffset(),
+						y + EnumFacing.EAST.getYOffset() + EnumFacing.NORTH.getYOffset() + EnumFacing.UP.getYOffset(),
+						z + EnumFacing.EAST.getZOffset() + EnumFacing.NORTH.getZOffset() + EnumFacing.UP.getZOffset());
 
 				if (nodeUpNorthEast == PathNodeType.BLOCKED && pathpoint.nodeType == PathNodeType.OPEN)
 				{
@@ -496,9 +496,9 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 				}
 
 				PathNodeType nodeUpSouthWest = this.getPathNodeType(this.entity,
-						x + EnumFacing.WEST.getFrontOffsetX() + EnumFacing.SOUTH.getFrontOffsetX() + EnumFacing.UP.getFrontOffsetX(),
-						y + EnumFacing.WEST.getFrontOffsetY() + EnumFacing.SOUTH.getFrontOffsetY() + EnumFacing.UP.getFrontOffsetY(),
-						z + EnumFacing.WEST.getFrontOffsetZ() + EnumFacing.SOUTH.getFrontOffsetZ() + EnumFacing.UP.getFrontOffsetZ());
+						x + EnumFacing.WEST.getXOffset() + EnumFacing.SOUTH.getXOffset() + EnumFacing.UP.getXOffset(),
+						y + EnumFacing.WEST.getYOffset() + EnumFacing.SOUTH.getYOffset() + EnumFacing.UP.getYOffset(),
+						z + EnumFacing.WEST.getZOffset() + EnumFacing.SOUTH.getZOffset() + EnumFacing.UP.getZOffset());
 
 				if (nodeUpSouthWest == PathNodeType.BLOCKED && pathpoint.nodeType == PathNodeType.OPEN)
 				{
@@ -508,9 +508,9 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 				}
 
 				PathNodeType nodeUpSouthEast = this.getPathNodeType(this.entity,
-						x + EnumFacing.EAST.getFrontOffsetX() + EnumFacing.SOUTH.getFrontOffsetX() + EnumFacing.UP.getFrontOffsetX(),
-						y + EnumFacing.EAST.getFrontOffsetY() + EnumFacing.SOUTH.getFrontOffsetY() + EnumFacing.UP.getFrontOffsetY(),
-						z + EnumFacing.EAST.getFrontOffsetZ() + EnumFacing.SOUTH.getFrontOffsetZ() + EnumFacing.UP.getFrontOffsetZ());
+						x + EnumFacing.EAST.getXOffset() + EnumFacing.SOUTH.getXOffset() + EnumFacing.UP.getXOffset(),
+						y + EnumFacing.EAST.getYOffset() + EnumFacing.SOUTH.getYOffset() + EnumFacing.UP.getYOffset(),
+						z + EnumFacing.EAST.getZOffset() + EnumFacing.SOUTH.getZOffset() + EnumFacing.UP.getZOffset());
 
 				if (nodeUpSouthEast == PathNodeType.BLOCKED && pathpoint.nodeType == PathNodeType.OPEN)
 				{
@@ -536,8 +536,8 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 					if (pathpoint != null && (pathpoint.nodeType == PathNodeType.OPEN || pathpoint.nodeType == PathNodeType.WALKABLE)
 							&& this.entity.width < 1.0F)
 					{
-						double d2 = (double) (x - facing.getFrontOffsetX()) + 0.5D;
-						double d3 = (double) (z - facing.getFrontOffsetZ()) + 0.5D;
+						double d2 = (double) (x - facing.getXOffset()) + 0.5D;
+						double d3 = (double) (z - facing.getZOffset()) + 0.5D;
 						AxisAlignedBB axisalignedbb = new AxisAlignedBB(d2 - halfEntityWidth, (double) y + 0.001D, d3 - halfEntityWidth, d2 + halfEntityWidth,
 								(double) ((float) y + this.entity.height), d3 + halfEntityWidth);
 						AxisAlignedBB axisalignedbb1 = this.blockaccess.getBlockState(pos).getBoundingBox(this.blockaccess, pos);
@@ -650,9 +650,9 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 							return pathpoint;
 						}
 
-						PathNodeType nodeDownWest = this.getPathNodeType(this.entity, x + EnumFacing.WEST.getFrontOffsetX() + EnumFacing.DOWN.getFrontOffsetX(),
-								y + EnumFacing.WEST.getFrontOffsetY() + EnumFacing.DOWN.getFrontOffsetY(),
-								z + EnumFacing.WEST.getFrontOffsetZ() + EnumFacing.DOWN.getFrontOffsetZ());
+						PathNodeType nodeDownWest = this.getPathNodeType(this.entity, x + EnumFacing.WEST.getXOffset() + EnumFacing.DOWN.getXOffset(),
+								y + EnumFacing.WEST.getYOffset() + EnumFacing.DOWN.getYOffset(),
+								z + EnumFacing.WEST.getZOffset() + EnumFacing.DOWN.getZOffset());
 
 						if (nodeDownWest == PathNodeType.BLOCKED)
 						{
@@ -666,9 +666,9 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 							return pathpoint;
 						}
 
-						PathNodeType nodeDownEast = this.getPathNodeType(this.entity, x + EnumFacing.EAST.getFrontOffsetX() + EnumFacing.DOWN.getFrontOffsetX(),
-								y + EnumFacing.EAST.getFrontOffsetY() + EnumFacing.DOWN.getFrontOffsetY(),
-								z + EnumFacing.EAST.getFrontOffsetZ() + EnumFacing.DOWN.getFrontOffsetZ());
+						PathNodeType nodeDownEast = this.getPathNodeType(this.entity, x + EnumFacing.EAST.getXOffset() + EnumFacing.DOWN.getXOffset(),
+								y + EnumFacing.EAST.getYOffset() + EnumFacing.DOWN.getYOffset(),
+								z + EnumFacing.EAST.getZOffset() + EnumFacing.DOWN.getZOffset());
 
 						if (nodeDownEast == PathNodeType.BLOCKED)
 						{
@@ -683,9 +683,9 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 						}
 
 						PathNodeType nodeDownSouth = this
-								.getPathNodeType(this.entity, x + EnumFacing.SOUTH.getFrontOffsetX() + EnumFacing.DOWN.getFrontOffsetX(),
-										y + EnumFacing.SOUTH.getFrontOffsetY() + EnumFacing.DOWN.getFrontOffsetY(),
-										z + EnumFacing.SOUTH.getFrontOffsetZ() + EnumFacing.DOWN.getFrontOffsetZ());
+								.getPathNodeType(this.entity, x + EnumFacing.SOUTH.getXOffset() + EnumFacing.DOWN.getXOffset(),
+										y + EnumFacing.SOUTH.getYOffset() + EnumFacing.DOWN.getYOffset(),
+										z + EnumFacing.SOUTH.getZOffset() + EnumFacing.DOWN.getZOffset());
 
 						if (nodeDownSouth == PathNodeType.BLOCKED)
 						{
@@ -700,9 +700,9 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 						}
 
 						PathNodeType nodeDownNorth = this
-								.getPathNodeType(this.entity, x + EnumFacing.NORTH.getFrontOffsetX() + EnumFacing.DOWN.getFrontOffsetX(),
-										y + EnumFacing.NORTH.getFrontOffsetY() + EnumFacing.DOWN.getFrontOffsetY(),
-										z + EnumFacing.NORTH.getFrontOffsetZ() + EnumFacing.DOWN.getFrontOffsetZ());
+								.getPathNodeType(this.entity, x + EnumFacing.NORTH.getXOffset() + EnumFacing.DOWN.getXOffset(),
+										y + EnumFacing.NORTH.getYOffset() + EnumFacing.DOWN.getYOffset(),
+										z + EnumFacing.NORTH.getZOffset() + EnumFacing.DOWN.getZOffset());
 
 						if (nodeDownNorth == PathNodeType.BLOCKED)
 						{
@@ -717,9 +717,9 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 						}
 
 						PathNodeType nodeDownNorthWest = this.getPathNodeType(this.entity,
-								x + EnumFacing.WEST.getFrontOffsetX() + EnumFacing.NORTH.getFrontOffsetX() + EnumFacing.DOWN.getFrontOffsetX(),
-								y + EnumFacing.WEST.getFrontOffsetY() + EnumFacing.NORTH.getFrontOffsetY() + EnumFacing.DOWN.getFrontOffsetY(),
-								z + EnumFacing.WEST.getFrontOffsetZ() + EnumFacing.NORTH.getFrontOffsetZ() + EnumFacing.DOWN.getFrontOffsetZ());
+								x + EnumFacing.WEST.getXOffset() + EnumFacing.NORTH.getXOffset() + EnumFacing.DOWN.getXOffset(),
+								y + EnumFacing.WEST.getYOffset() + EnumFacing.NORTH.getYOffset() + EnumFacing.DOWN.getYOffset(),
+								z + EnumFacing.WEST.getZOffset() + EnumFacing.NORTH.getZOffset() + EnumFacing.DOWN.getZOffset());
 
 						if (nodeDownNorthWest == PathNodeType.BLOCKED)
 						{
@@ -734,9 +734,9 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 						}
 
 						PathNodeType nodeDownNorthEast = this.getPathNodeType(this.entity,
-								x + EnumFacing.EAST.getFrontOffsetX() + EnumFacing.NORTH.getFrontOffsetX() + EnumFacing.DOWN.getFrontOffsetX(),
-								y + EnumFacing.EAST.getFrontOffsetY() + EnumFacing.NORTH.getFrontOffsetY() + EnumFacing.DOWN.getFrontOffsetY(),
-								z + EnumFacing.EAST.getFrontOffsetZ() + EnumFacing.NORTH.getFrontOffsetZ() + EnumFacing.DOWN.getFrontOffsetZ());
+								x + EnumFacing.EAST.getXOffset() + EnumFacing.NORTH.getXOffset() + EnumFacing.DOWN.getXOffset(),
+								y + EnumFacing.EAST.getYOffset() + EnumFacing.NORTH.getYOffset() + EnumFacing.DOWN.getYOffset(),
+								z + EnumFacing.EAST.getZOffset() + EnumFacing.NORTH.getZOffset() + EnumFacing.DOWN.getZOffset());
 
 						if (nodeDownNorthEast == PathNodeType.BLOCKED)
 						{
@@ -751,9 +751,9 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 						}
 
 						PathNodeType nodeDownSouthWest = this.getPathNodeType(this.entity,
-								x + EnumFacing.WEST.getFrontOffsetX() + EnumFacing.SOUTH.getFrontOffsetX() + EnumFacing.DOWN.getFrontOffsetX(),
-								y + EnumFacing.WEST.getFrontOffsetY() + EnumFacing.SOUTH.getFrontOffsetY() + EnumFacing.DOWN.getFrontOffsetY(),
-								z + EnumFacing.WEST.getFrontOffsetZ() + EnumFacing.SOUTH.getFrontOffsetZ() + EnumFacing.DOWN.getFrontOffsetZ());
+								x + EnumFacing.WEST.getXOffset() + EnumFacing.SOUTH.getXOffset() + EnumFacing.DOWN.getXOffset(),
+								y + EnumFacing.WEST.getYOffset() + EnumFacing.SOUTH.getYOffset() + EnumFacing.DOWN.getYOffset(),
+								z + EnumFacing.WEST.getZOffset() + EnumFacing.SOUTH.getZOffset() + EnumFacing.DOWN.getZOffset());
 
 						if (nodeDownSouthWest == PathNodeType.BLOCKED)
 						{
@@ -768,9 +768,9 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 						}
 
 						PathNodeType nodeDownSouthEast = this.getPathNodeType(this.entity,
-								x + EnumFacing.EAST.getFrontOffsetX() + EnumFacing.SOUTH.getFrontOffsetX() + EnumFacing.DOWN.getFrontOffsetX(),
-								y + EnumFacing.EAST.getFrontOffsetY() + EnumFacing.SOUTH.getFrontOffsetY() + EnumFacing.DOWN.getFrontOffsetY(),
-								z + EnumFacing.EAST.getFrontOffsetZ() + EnumFacing.SOUTH.getFrontOffsetZ() + EnumFacing.DOWN.getFrontOffsetZ());
+								x + EnumFacing.EAST.getXOffset() + EnumFacing.SOUTH.getXOffset() + EnumFacing.DOWN.getXOffset(),
+								y + EnumFacing.EAST.getYOffset() + EnumFacing.SOUTH.getYOffset() + EnumFacing.DOWN.getYOffset(),
+								z + EnumFacing.EAST.getZOffset() + EnumFacing.SOUTH.getZOffset() + EnumFacing.DOWN.getZOffset());
 
 						if (nodeDownSouthEast == PathNodeType.BLOCKED)
 						{
@@ -784,9 +784,9 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 							return pathpoint;
 						}
 
-						PathNodeType nodeUpWest = this.getPathNodeType(this.entity, x + EnumFacing.WEST.getFrontOffsetX() + EnumFacing.UP.getFrontOffsetX(),
-								y + EnumFacing.WEST.getFrontOffsetY() + EnumFacing.UP.getFrontOffsetY(),
-								z + EnumFacing.WEST.getFrontOffsetZ() + EnumFacing.UP.getFrontOffsetZ());
+						PathNodeType nodeUpWest = this.getPathNodeType(this.entity, x + EnumFacing.WEST.getXOffset() + EnumFacing.UP.getXOffset(),
+								y + EnumFacing.WEST.getYOffset() + EnumFacing.UP.getYOffset(),
+								z + EnumFacing.WEST.getZOffset() + EnumFacing.UP.getZOffset());
 
 						if (nodeUpWest == PathNodeType.BLOCKED)
 						{
@@ -800,9 +800,9 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 							return pathpoint;
 						}
 
-						PathNodeType nodeUpEast = this.getPathNodeType(this.entity, x + EnumFacing.EAST.getFrontOffsetX() + EnumFacing.UP.getFrontOffsetX(),
-								y + EnumFacing.EAST.getFrontOffsetY() + EnumFacing.UP.getFrontOffsetY(),
-								z + EnumFacing.EAST.getFrontOffsetZ() + EnumFacing.UP.getFrontOffsetZ());
+						PathNodeType nodeUpEast = this.getPathNodeType(this.entity, x + EnumFacing.EAST.getXOffset() + EnumFacing.UP.getXOffset(),
+								y + EnumFacing.EAST.getYOffset() + EnumFacing.UP.getYOffset(),
+								z + EnumFacing.EAST.getZOffset() + EnumFacing.UP.getZOffset());
 
 						if (nodeUpEast == PathNodeType.BLOCKED)
 						{
@@ -816,9 +816,9 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 							return pathpoint;
 						}
 
-						PathNodeType nodeUpSouth = this.getPathNodeType(this.entity, x + EnumFacing.SOUTH.getFrontOffsetX() + EnumFacing.UP.getFrontOffsetX(),
-								y + EnumFacing.SOUTH.getFrontOffsetY() + EnumFacing.UP.getFrontOffsetY(),
-								z + EnumFacing.SOUTH.getFrontOffsetZ() + EnumFacing.UP.getFrontOffsetZ());
+						PathNodeType nodeUpSouth = this.getPathNodeType(this.entity, x + EnumFacing.SOUTH.getXOffset() + EnumFacing.UP.getXOffset(),
+								y + EnumFacing.SOUTH.getYOffset() + EnumFacing.UP.getYOffset(),
+								z + EnumFacing.SOUTH.getZOffset() + EnumFacing.UP.getZOffset());
 
 						if (nodeUpSouth == PathNodeType.BLOCKED)
 						{
@@ -832,9 +832,9 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 							return pathpoint;
 						}
 
-						PathNodeType nodeUpNorth = this.getPathNodeType(this.entity, x + EnumFacing.NORTH.getFrontOffsetX() + EnumFacing.UP.getFrontOffsetX(),
-								y + EnumFacing.NORTH.getFrontOffsetY() + EnumFacing.UP.getFrontOffsetY(),
-								z + EnumFacing.NORTH.getFrontOffsetZ() + EnumFacing.UP.getFrontOffsetZ());
+						PathNodeType nodeUpNorth = this.getPathNodeType(this.entity, x + EnumFacing.NORTH.getXOffset() + EnumFacing.UP.getXOffset(),
+								y + EnumFacing.NORTH.getYOffset() + EnumFacing.UP.getYOffset(),
+								z + EnumFacing.NORTH.getZOffset() + EnumFacing.UP.getZOffset());
 
 						if (nodeUpNorth == PathNodeType.BLOCKED)
 						{
@@ -849,9 +849,9 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 						}
 
 						PathNodeType nodeUpNorthWest = this.getPathNodeType(this.entity,
-								x + EnumFacing.WEST.getFrontOffsetX() + EnumFacing.NORTH.getFrontOffsetX() + EnumFacing.UP.getFrontOffsetX(),
-								y + EnumFacing.WEST.getFrontOffsetY() + EnumFacing.NORTH.getFrontOffsetY() + EnumFacing.UP.getFrontOffsetY(),
-								z + EnumFacing.WEST.getFrontOffsetZ() + EnumFacing.NORTH.getFrontOffsetZ() + EnumFacing.UP.getFrontOffsetZ());
+								x + EnumFacing.WEST.getXOffset() + EnumFacing.NORTH.getXOffset() + EnumFacing.UP.getXOffset(),
+								y + EnumFacing.WEST.getYOffset() + EnumFacing.NORTH.getYOffset() + EnumFacing.UP.getYOffset(),
+								z + EnumFacing.WEST.getZOffset() + EnumFacing.NORTH.getZOffset() + EnumFacing.UP.getZOffset());
 
 						if (nodeUpNorthWest == PathNodeType.BLOCKED)
 						{
@@ -866,9 +866,9 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 						}
 
 						PathNodeType nodeUpNorthEast = this.getPathNodeType(this.entity,
-								x + EnumFacing.EAST.getFrontOffsetX() + EnumFacing.NORTH.getFrontOffsetX() + EnumFacing.UP.getFrontOffsetX(),
-								y + EnumFacing.EAST.getFrontOffsetY() + EnumFacing.NORTH.getFrontOffsetY() + EnumFacing.UP.getFrontOffsetY(),
-								z + EnumFacing.EAST.getFrontOffsetZ() + EnumFacing.NORTH.getFrontOffsetZ() + EnumFacing.UP.getFrontOffsetZ());
+								x + EnumFacing.EAST.getXOffset() + EnumFacing.NORTH.getXOffset() + EnumFacing.UP.getXOffset(),
+								y + EnumFacing.EAST.getYOffset() + EnumFacing.NORTH.getYOffset() + EnumFacing.UP.getYOffset(),
+								z + EnumFacing.EAST.getZOffset() + EnumFacing.NORTH.getZOffset() + EnumFacing.UP.getZOffset());
 
 						if (nodeUpNorthEast == PathNodeType.BLOCKED)
 						{
@@ -883,9 +883,9 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 						}
 
 						PathNodeType nodeUpSouthWest = this.getPathNodeType(this.entity,
-								x + EnumFacing.WEST.getFrontOffsetX() + EnumFacing.SOUTH.getFrontOffsetX() + EnumFacing.UP.getFrontOffsetX(),
-								y + EnumFacing.WEST.getFrontOffsetY() + EnumFacing.SOUTH.getFrontOffsetY() + EnumFacing.UP.getFrontOffsetY(),
-								z + EnumFacing.WEST.getFrontOffsetZ() + EnumFacing.SOUTH.getFrontOffsetZ() + EnumFacing.UP.getFrontOffsetZ());
+								x + EnumFacing.WEST.getXOffset() + EnumFacing.SOUTH.getXOffset() + EnumFacing.UP.getXOffset(),
+								y + EnumFacing.WEST.getYOffset() + EnumFacing.SOUTH.getYOffset() + EnumFacing.UP.getYOffset(),
+								z + EnumFacing.WEST.getZOffset() + EnumFacing.SOUTH.getZOffset() + EnumFacing.UP.getZOffset());
 
 						if (nodeUpSouthWest == PathNodeType.BLOCKED)
 						{
@@ -900,9 +900,10 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 						}
 
 						PathNodeType nodeUpSouthEast = this.getPathNodeType(this.entity,
-								x + EnumFacing.EAST.getFrontOffsetX() + EnumFacing.SOUTH.getFrontOffsetX() + EnumFacing.UP.getFrontOffsetX(),
-								y + EnumFacing.EAST.getFrontOffsetY() + EnumFacing.SOUTH.getFrontOffsetY() + EnumFacing.UP.getFrontOffsetY(),
-								z + EnumFacing.EAST.getFrontOffsetZ() + EnumFacing.SOUTH.getFrontOffsetZ() + EnumFacing.UP.getFrontOffsetZ());
+								x + EnumFacing.EAST.getXOffset() + EnumFacing.SOUTH.getXOffset() + EnumFacing.UP.getXOffset(),
+								y + EnumFacing.EAST.getYOffset() + EnumFacing.SOUTH.getYOffset() + EnumFacing.UP.getYOffset(),
+								z + EnumFacing.EAST.getZOffset() + EnumFacing.SOUTH.getZOffset() + EnumFacing.UP.getZOffset()
+						);
 
 						if (nodeUpSouthEast == PathNodeType.BLOCKED)
 						{

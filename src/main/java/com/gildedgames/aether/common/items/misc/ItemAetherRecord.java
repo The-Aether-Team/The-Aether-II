@@ -20,7 +20,7 @@ public class ItemAetherRecord extends ItemRecord
 	@SideOnly(Side.CLIENT)
 	public String getRecordNameLocal()
 	{
-		return new TextComponentTranslation(this.getUnlocalizedName() + ".desc").getFormattedText();
+		return new TextComponentTranslation(this.getTranslationKey() + ".desc").getFormattedText();
 	}
 
 	//TODO: Reimplement for 1.12.2?

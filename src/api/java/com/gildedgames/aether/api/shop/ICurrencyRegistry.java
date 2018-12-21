@@ -7,12 +7,12 @@ public interface ICurrencyRegistry
 
 	void clearRegistrations();
 
-	void registerValue(ItemStack stack, double value);
+	void registerValue(ItemStack stack, double value, Class<? extends IShopCurrency> currency);
 
-	double getValue(ItemStack stack);
+	double getValue(ItemStack stack, Class<? extends IShopCurrency> currency);
 
-	double getSingleValue(ItemStack stack);
+	double getSingleValue(ItemStack stack, Class<? extends IShopCurrency> currency);
 
-	boolean hasValue(ItemStack stack);
+	boolean hasValue(ItemStack stack, Class<? extends IShopCurrency> currency);
 
 }

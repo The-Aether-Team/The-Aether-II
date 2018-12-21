@@ -89,7 +89,7 @@ public class BlockValkyrieGrass extends BlockAetherPlant implements IBlockMultiN
 	}
 
 	@Override
-	public String getUnlocalizedName(final ItemStack stack)
+	public String getTranslationKey(final ItemStack stack)
 	{
 		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
 	}

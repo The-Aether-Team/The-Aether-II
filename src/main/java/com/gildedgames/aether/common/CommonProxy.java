@@ -7,9 +7,7 @@ import com.gildedgames.aether.common.events.EntityEventHandler;
 import com.gildedgames.aether.common.events.PostAetherTravelEvent;
 import com.gildedgames.aether.common.network.api.GildedGamesAccountApiImpl;
 import com.gildedgames.aether.common.registry.ContentRegistry;
-import com.gildedgames.aether.common.shop.ShopBuy;
-import com.gildedgames.aether.common.shop.ShopInstance;
-import com.gildedgames.aether.common.shop.ShopInventory;
+import com.gildedgames.aether.common.shop.*;
 import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.IrradiatedForestsData;
 import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.MagneticHillPillar;
 import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.MagneticHillsData;
@@ -62,6 +60,7 @@ public class CommonProxy implements IAetherServices
 		}
 
 		final IClassSerializer s = new SimpleSerializer(AetherCore.MOD_ID);
+
 		s.register(0, NecromancerTowerInstance.class, new Instantiator<>(NecromancerTowerInstance.class));
 		s.register(1, MagneticHillsData.class, new Instantiator<>(MagneticHillsData.class));
 		s.register(2, MagneticHillPillar.class, new Instantiator<>(MagneticHillPillar.class));
@@ -70,6 +69,8 @@ public class CommonProxy implements IAetherServices
 		s.register(5, ShopInstance.class, new Instantiator<>(ShopInstance.class));
 		s.register(6, ShopBuy.class, new Instantiator<>(ShopBuy.class));
 		s.register(7, ShopInventory.class, new Instantiator<>(ShopInventory.class));
+		s.register(8, ShopCurrencyGilt.class, new Instantiator<>(ShopCurrencyGilt.class));
+		s.register(9, ShopCurrencyPlumproot.class, new Instantiator<>(ShopCurrencyPlumproot.class));
 
 		// Initialize Entity Events
 		MinecraftForge.EVENT_BUS.register(new EntityEventHandler());
@@ -137,6 +138,11 @@ public class CommonProxy implements IAetherServices
 
 	}
 
+	public void turnOffScreen()
+	{
+
+	}
+
 	public void modifyEntityQuicksoil(final EntityLivingBase entity)
 	{
 		entity.motionX *= 1.7D;
@@ -147,7 +153,6 @@ public class CommonProxy implements IAetherServices
 		entity.motionX = MathHelper.clamp(entity.motionX, -maxMotion, maxMotion);
 		entity.motionZ = MathHelper.clamp(entity.motionZ, -maxMotion, maxMotion);
 	}
-
 
 	/**
 	 * Teleports any entity by duplicating it and . the old one. If {@param entity} is a player,

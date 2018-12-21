@@ -1,8 +1,10 @@
 package com.gildedgames.aether.common.containers.slots;
 
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.entities.tiles.TileEntityIncubator;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -31,13 +33,30 @@ public class SlotMoaEgg extends Slot
 	@Override
 	public boolean isItemValid(@Nonnull ItemStack stack)
 	{
-		return stack.getItem() == ItemsAether.moa_egg;
+		if (this.inventory instanceof TileEntityIncubator)
+		{
+			if (stack.getItem() == ItemsAether.moa_egg || stack.getItem() == ItemsAether.rainbow_moa_egg)
+			{
+				// Check if incubator is ready before allowing transfer
+				if (this.inventory.getField(0) > TileEntityIncubator.REQ_TEMPERATURE_THRESHOLD - 500)
+				{
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	@Override
 	public int getSlotStackLimit()
 	{
 		return 1;
+	}
+
+	@Override
+	public boolean canTakeStack(EntityPlayer playerIn)
+	{
+		return false;
 	}
 
 	@Override

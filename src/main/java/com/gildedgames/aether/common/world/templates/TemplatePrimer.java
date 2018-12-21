@@ -591,7 +591,7 @@ public class TemplatePrimer
 			{
 				final NBTTagCompound nbttagcompound = template$entityinfo.entityData;
 				final Vec3d vec3d = transformedVec3d(template$entityinfo.pos, mirrorIn, rotationIn);
-				final Vec3d vec3d1 = vec3d.addVector((double) pos.getX(), (double) pos.getY(), (double) pos.getZ());
+				final Vec3d vec3d1 = vec3d.add((double) pos.getX(), (double) pos.getY(), (double) pos.getZ());
 				final NBTTagList nbttaglist = new NBTTagList();
 				nbttaglist.appendTag(new NBTTagDouble(vec3d1.x));
 				nbttaglist.appendTag(new NBTTagDouble(vec3d1.y));
