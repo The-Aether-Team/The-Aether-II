@@ -1,10 +1,11 @@
 package com.gildedgames.aether.common.entities.effects;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class StatusEffect
 {
+	private String id;
 	private String name;
 	/**
 	 * Current effect build-up amount
@@ -26,22 +27,28 @@ public abstract class StatusEffect
 	 */
 	private boolean exposed = false;
 
-	public static List<StatusEffect> effectsList = new ArrayList<>();
+	/**
+	 * Resistance towards this effect
+	 */
+	public float resistance = 0;
+
+	public static Map<String, StatusEffect> effectsList = new HashMap<>();
 
 	//private final IPlayerAether player;
 
-	public StatusEffect()
+	public StatusEffect(String id)
 	{
-		this("Generic",0f, 100.0f, 1.0f);
+		this(id,"Generic",0f, 100.0f, 1.0f);
 	}
 
-	public StatusEffect(String name, float buildAmount, float trigValue, float regRate)
+	public StatusEffect(String id, String displayName, float buildAmount, float trigValue, float regRate)
 	{
-		this.name = name;
+		this.id = id;
+		this.name = displayName;
 		this.buildupAmount = buildAmount;
 		this.triggerValue = trigValue;
 		this.regressionRate = regRate;
-		this.effectsList.add(this);
+		this.effectsList.put(id, this);
 	}
 
 	public void regress()
@@ -51,7 +58,7 @@ public abstract class StatusEffect
 
 	public void addBuildup(float amount)
 	{
-		this.buildupAmount += amount;
+		this.buildupAmount += (amount - (resistance * 0.01) * amount);
 		if(buildupAmount > triggerValue) buildupAmount = triggerValue;
 	}
 
@@ -63,6 +70,11 @@ public abstract class StatusEffect
 	public String getName()
 	{
 		return name;
+	}
+
+	public String getID()
+	{
+		return id;
 	}
 
 	public void setExposed(boolean exp)

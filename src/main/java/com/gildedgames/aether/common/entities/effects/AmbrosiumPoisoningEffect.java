@@ -2,9 +2,9 @@ package com.gildedgames.aether.common.entities.effects;
 
 public class AmbrosiumPoisoningEffect extends StatusEffect
 {
-	public AmbrosiumPoisoningEffect()
+	public AmbrosiumPoisoningEffect(String id, String displayName, float buildAmount, float trigValue, float regRate)
 	{
-		super("Ambrosium Poisoning",0f, 100.0f, 1.0f);
+		super(id, displayName, buildAmount, trigValue, regRate);
 	}
 
 	public void applyEffect()
