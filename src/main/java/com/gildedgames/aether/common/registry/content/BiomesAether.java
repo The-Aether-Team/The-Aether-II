@@ -92,7 +92,8 @@ public class BiomesAether
 	}
 
 	public static BiomeAetherBase fetchRandomBiome(final Random rand)
-	{
+	{/*
+
 		final float randomValue = rand.nextFloat() * getTotalBiomeWeight();
 		float chanceSum = 0.0F;
 
@@ -107,5 +108,8 @@ public class BiomesAether
 		}
 
 		return null;
+		 */
+
+		return ARCTIC_PEAKS;
 	}
 }
