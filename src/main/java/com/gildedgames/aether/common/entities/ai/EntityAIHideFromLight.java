@@ -14,7 +14,7 @@ import java.util.Random;
 public class EntityAIHideFromLight extends EntityAIBase
 {
 
-	private final double movementSpeed;
+	private final float movementSpeed;
 
 	private EntityCreature entity;
 
@@ -26,11 +26,14 @@ public class EntityAIHideFromLight extends EntityAIBase
 
 	private int lightLevel;
 
-	public EntityAIHideFromLight(EntityCreature entity, double movementSpeed, int lightLevel)
+	private boolean enabled;
+
+	public EntityAIHideFromLight(EntityCreature entity, float movementSpeed, int lightLevel)
 	{
 		this.entity = entity;
 		this.movementSpeed = movementSpeed;
 		this.lightLevel = lightLevel;
+		this.enabled = true;
 
 		this.setMutexBits(1);
 	}
@@ -38,7 +41,7 @@ public class EntityAIHideFromLight extends EntityAIBase
 	@Override
 	public boolean shouldExecute()
 	{
-		if (this.entity == null)
+		if (this.entity == null || !enabled)
 		{
 			return false;
 		}
@@ -98,4 +101,8 @@ public class EntityAIHideFromLight extends EntityAIBase
 		return null;
 	}
 
+	public void setEnabled(boolean b)
+	{
+		this.enabled = b;
+	}
 }
