@@ -448,6 +448,7 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.icestone_poprocks, "icestone_poprocks");
 		registerItemModels(ItemsAether.ginger_bread_man, "ginger_bread_man");
 		registerItemModels(ItemsAether.candy_cane, "candy_cane");
+		registerItemModels(ItemsAether.yule_log, "yule_log");
 
 		registerItemModels(ItemsAether.swet_sugar, "swet_sugar");
 

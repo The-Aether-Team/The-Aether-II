@@ -108,25 +108,25 @@ public class ItemsAether
 			wyndberry = new ItemAetherFood(4, false).setConsumptionDuration(22),
 			enchanted_wyndberry = new ItemEnchantedWyndberry().setConsumptionDuration(22),
 			swet_jelly = new ItemSwetJelly(),
-			raw_taegore_meat = new ItemAetherFood(3, 0.3F, false),
-			taegore_steak = new ItemAetherFood(8, 0.8F, false),
-			burrukai_rib_cut = new ItemAetherFood(3, 0.3F, false),
-			burrukai_ribs = new ItemAetherFood(8, 0.8F, false),
-			kirrid_loin = new ItemAetherFood(3, 0.3F, false),
-			kirrid_cutlet = new ItemAetherFood(8, 0.8F, false);
+			raw_taegore_meat = new ItemAetherFood(5, 0.3F, true),
+			taegore_steak = new ItemAetherFood(12, 0.5F, true),
+			burrukai_rib_cut = new ItemAetherFood(5, 0.3F, true).setConsumptionDuration(40),
+			burrukai_ribs = new ItemAetherFood(12, 0.5F, true).setConsumptionDuration(40),
+			kirrid_loin = new ItemAetherFood(5, 0.3F, true),
+			kirrid_cutlet = new ItemAetherFood(12, 0.5F, true);
 
-	public static final ItemAetherFood candy_corn = new ItemAetherFood(8, 1.0F, false).setConsumptionDuration(8),
-			cocoatrice = new ItemAetherFood(12, 1.0F, false).setConsumptionDuration(8),
-			wrapped_chocolates = new ItemAetherFood(12, 1.0F, false).setConsumptionDuration(8),
-			jelly_plumproot = new ItemAetherFood(12, 1.0F, false).setConsumptionDuration(8),
+	public static final ItemAetherFood candy_corn = new ItemAetherFood(4, 0.1F, false).setConsumptionDuration(5),
+			cocoatrice = new ItemAetherFood(8, 0.2F, false).setConsumptionDuration(8),
+			wrapped_chocolates = new ItemAetherFood(6, 0.25F, false).setConsumptionDuration(8),
+			jelly_plumproot = new ItemAetherFood(6, 0.25F, false).setConsumptionDuration(15),
 			stomper_pop = new ItemStomperPop(),
-			blueberry_lollipop = new ItemAetherFood(10, 1.0F, false).setConsumptionDuration(8),
-			orange_lollipop = new ItemAetherFood(8, 1.0F, false).setConsumptionDuration(8),
-			icestone_poprocks = new ItemAetherFood(5, 1.0F, false).setConsumptionDuration(8);
+			blueberry_lollipop = new ItemAetherFood(4, 0.2F, false).setConsumptionDuration(8),
+			orange_lollipop = new ItemAetherFood(4, 0.2F, false).setConsumptionDuration(8),
+			icestone_poprocks = new ItemAetherFood(2, 0.5F, false).setConsumptionDuration(8);
 
-	public static final ItemFood ginger_bread_man = new ItemAetherFood(15, 0.4F, false).setConsumptionDuration(8),
-			candy_cane = new ItemAetherFood(4, 0.25F, false).setConsumptionDuration(5),
-			yule_log = new ItemAetherFood(14, 5F, false).setConsumptionDuration(20);
+	public static final ItemFood ginger_bread_man = new ItemAetherFood(6, 0.2F, false).setConsumptionDuration(8),
+			candy_cane = new ItemAetherFood(4, 0.1F, false).setConsumptionDuration(10),
+			yule_log = new ItemAetherFood(10, 0.25F, false).setConsumptionDuration(50);
 
 	public static final ItemSkyrootBucket skyroot_bucket = new ItemSkyrootBucket(Blocks.AIR),
 			skyroot_water_bucket = new ItemSkyrootBucket(Blocks.FLOWING_WATER);
@@ -221,7 +221,7 @@ public class ItemsAether
 
 	public static final Item plumproot_mash = new ItemAetherFood(3, 1.0F, false).setConsumptionDuration(12);
 
-	public static final Item plumproot_pie = new ItemAetherFood(20, 1.0F, false).setConsumptionDuration(100);
+	public static final Item plumproot_pie = new ItemAetherFood(10, 0.5F, false).setConsumptionDuration(40);
 
 	private static final Collection<Item> registeredItems = new ArrayList<>();
 
@@ -381,7 +381,7 @@ public class ItemsAether
 		r.register("moa_egg_item", moa_egg);
 		r.register("rainbow_moa_egg", rainbow_moa_egg.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
 
-		r.register("cloud_parachute", cloud_parachute.setCreativeTab(CreativeTabsAether.CONSUMABLES));
+		r.register("cloud_parachute", cloud_parachute.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
 
 		r.register("irradiated_chunk", irradiated_chunk.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.MATERIALS));
 		r.register("irradiated_sword", irradiated_sword.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.MATERIALS));

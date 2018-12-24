@@ -10,7 +10,7 @@ public class ItemStomperPop extends ItemAetherFood
 
 	public ItemStomperPop()
 	{
-		super(20, false);
+		super(20, 0.5F,false);
 	}
 
 	@Override
