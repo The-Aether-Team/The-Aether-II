@@ -62,11 +62,11 @@ public class BlueprintsAether
 
 	private static BlueprintData loadData(String name)
 	{
-		Optional<UUID> id = project.getCache().getDataId(name + ".blueprint");
+		int id = project.getCache().getDataId(name + ".blueprint");
 
-		if (id.isPresent())
+		if (id != -1)
 		{
-			Optional<BlueprintData> data = project.getCache().getData(id.get());
+			Optional<BlueprintData> data = project.getCache().getData(id);
 
 			if (data.isPresent())
 			{

@@ -125,7 +125,8 @@ public class ItemsAether
 			icestone_poprocks = new ItemAetherFood(5, 1.0F, false).setConsumptionDuration(8);
 
 	public static final ItemFood ginger_bread_man = new ItemAetherFood(15, 0.4F, false).setConsumptionDuration(8),
-			candy_cane = new ItemAetherFood(13, 0.5F, false).setConsumptionDuration(8);
+			candy_cane = new ItemAetherFood(4, 0.25F, false).setConsumptionDuration(5),
+			yule_log = new ItemAetherFood(14, 5F, false).setConsumptionDuration(20);
 
 	public static final ItemSkyrootBucket skyroot_bucket = new ItemSkyrootBucket(Blocks.AIR),
 			skyroot_water_bucket = new ItemSkyrootBucket(Blocks.FLOWING_WATER);
@@ -341,6 +342,7 @@ public class ItemsAether
 
 		r.register("ginger_bread_man", ginger_bread_man.setCreativeTab(CreativeTabsAether.CONSUMABLES));
 		r.register("candy_cane", candy_cane.setCreativeTab(CreativeTabsAether.CONSUMABLES));
+		r.register("yule_log", yule_log.setCreativeTab(CreativeTabsAether.CONSUMABLES));
 
 		r.register("skyroot_bucket", skyroot_bucket);
 		r.register("skyroot_water_bucket", skyroot_water_bucket);
