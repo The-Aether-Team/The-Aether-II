@@ -7,6 +7,7 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockTallAetherGrass;
 import com.gildedgames.aether.common.world.aether.features.WorldGenFloorPlacer;
+import com.gildedgames.aether.common.world.aether.features.WorldGenIceCrystals;
 import com.gildedgames.aether.common.world.aether.features.aerclouds.WorldGenAercloud;
 import com.gildedgames.aether.common.world.templates.conditions.TemplateConditions;
 import com.gildedgames.aether.common.world.templates.post.PostPlacementMoaFamily;
@@ -60,6 +61,8 @@ public class GenerationAether
 	public static TemplateDefinitionPool skyroot_moa_nest;
 
 	public static WorldGenFloorPlacer short_aether_grass, aether_grass, long_aether_grass, skyroot_twigs, holystone_rocks;
+
+	public static WorldGenIceCrystals ice_crystals;
 
 	public static WorldGenAercloud green_aercloud, golden_aercloud, storm_aercloud;
 
@@ -277,6 +280,9 @@ public class GenerationAether
 		holystone_rocks = new WorldGenFloorPlacer(BlocksAether.holystone_rock.getDefaultState());
 
 		holystone_rocks.setStatesToPlaceOn(BlocksAether.holystone.getDefaultState());
+
+		ice_crystals = new WorldGenIceCrystals(64);
+		ice_crystals.setStatesToPlaceOn(BlocksAether.holystone.getDefaultState(), BlocksAether.highlands_ice.getDefaultState());
 
 		green_aercloud = new WorldGenAercloud(BlockAercloud.getAercloudState(BlockAercloud.GREEN_AERCLOUD), 4, false);
 		golden_aercloud = new WorldGenAercloud(BlockAercloud.getAercloudState(BlockAercloud.GOLDEN_AERCLOUD), 4, false);

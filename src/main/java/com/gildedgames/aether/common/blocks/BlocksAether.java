@@ -376,6 +376,8 @@ public class BlocksAether
 
 	public static BlockAetherTeleporter aether_teleporter = new BlockAetherTeleporter();
 
+	public static BlockIceCrystal ice_crystal = new BlockIceCrystal();
+
 	@SubscribeEvent
 	public static void onRegisterBlocks(final RegistryEvent.Register<Block> event)
 	{
@@ -626,6 +628,8 @@ public class BlocksAether
         r.register("hellfirestone_pillar", hellfirestone_pillar.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
 
 		r.register("plumproot", plumproot.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+
+		r.register("highlands_ice_crystal", ice_crystal);
 
 		Blocks.FIRE.setFireInfo(plumproot, 60, 100);
 		Blocks.FIRE.setFireInfo(skyroot_twigs, 60, 100);

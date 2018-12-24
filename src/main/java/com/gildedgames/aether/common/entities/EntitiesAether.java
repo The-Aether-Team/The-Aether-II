@@ -49,6 +49,7 @@ public class EntitiesAether
 		registerLivingEntityWithEgg(EntityTivalier.class, "tivalier", 0x6eb196, 0x454e68);
 		registerLivingEntityWithEgg(EntityIcehog.class, "icehog", 0x6eb196, 0x454e68);
 		registerLivingEntityWithEgg(EntityMysteriousFigure.class, "mysterious_figure", 0x504960, 0xb68b69);
+		registerLivingEntityWithEgg(EntityVaranys.class, "varanys", 0x86b1c9, 0x548193);
 
 		registerLivingEntity(EntityFrostpineTotem.class, "frostpine_totem");
 		registerLivingEntity(EntityKraisith.class, "kraisith");
