@@ -331,7 +331,6 @@ public class ModelVaranys extends ModelBase
 		float tailBase = -0.08726646259971647F;
 		float tail4Base = 0.17453292519943295F;
 
-
 		float tailSwing = MathHelper.cos(limbSwing * 0.6662F) * .05F * limbSwingAmount;
 
 		this.tail1.rotateAngleX = tailBase + tailSwing;

@@ -8,6 +8,7 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.entities.living.mobs.*;
 import com.gildedgames.aether.common.entities.living.passive.*;
+import com.gildedgames.aether.common.registry.content.BiomesAether;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.world.spawning.SpawnEntry;
 import com.gildedgames.aether.common.world.spawning.SpawnHandler;
@@ -141,12 +142,19 @@ public class WorldEvents
 				new UndergroundPositionSelector())
 				.addCondition(stoneCheck).addCondition(isUnderground).addCondition(new CheckBlockAtPosition(Blocks.AIR));
 
+
+		SpawnEntry varanysUnderground = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityVaranys.class, 12f, 1, 3,
+				new UndergroundPositionSelector())
+				.addCondition(stoneCheck).addCondition(isUnderground).addCondition(new CheckBiome(BiomesAether.ARCTIC_PEAKS)).
+						addCondition(new CheckLightLevel(5)).addCondition(new CheckBlockAtPosition(Blocks.AIR));
+
 		SpawnEntry tempestUnderground = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityTempest.class, 10F, 2, 3,
 				new UndergroundPositionSelector())
 				.addCondition(stoneCheck).addCondition(isUnderground).addCondition(new CheckBlockAtPosition(Blocks.AIR));
 
 		underground.addEntry(cockatriceUnderground);
 		underground.addEntry(tempestUnderground);
+		underground.addEntry(varanysUnderground);
 
 		return Lists.newArrayList(animals, atmospheric, daytimeHostiles, nighttimeHostiles, flying, underground);
 	}
