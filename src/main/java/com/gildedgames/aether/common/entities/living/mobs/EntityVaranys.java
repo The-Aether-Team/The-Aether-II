@@ -1,7 +1,9 @@
 package com.gildedgames.aether.common.entities.living.mobs;
 
+import com.gildedgames.aether.common.entities.ai.EntityAIHideFromLight;
 import com.gildedgames.aether.common.entities.ai.EntityAIHideFromTarget;
 import com.gildedgames.aether.common.entities.ai.EntityAIUnstuckBlueAercloud;
+import com.gildedgames.aether.common.entities.ai.EntityAIWanderAvoidLight;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceHide;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceSneakAttack;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceWander;
@@ -26,13 +28,18 @@ import net.minecraft.world.World;
 public class EntityVaranys extends EntityAetherMob
 {
 
+	private EntityAIHideFromLight lightAI;
+
 	public EntityVaranys(final World world)
 	{
 		super(world);
 
+		lightAI = new EntityAIHideFromLight(this, 0.8D, 5);
+
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(0, new EntityAIUnstuckBlueAercloud(this));
-		this.tasks.addTask(1, new EntityAIWander(this, 0.8D, 2));
+		this.tasks.addTask(1, lightAI);
+		this.tasks.addTask(1, new EntityAIWanderAvoidLight(this, 0.8D, 5));
 		this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 //		this.tasks.addTask(1, new EntityAIHideFromTarget(this, EntityPlayer.class, 0.8D));
 
