@@ -681,6 +681,7 @@ entity.aether.josediya.name=Josediya
 entity.aether.tivalier.name=Tivalier
 entity.aether.icehog.name=Icehog
 entity.aether.mysterious_figure.name=Mysterious Figure
+entity.aether.varanys.name=Varanys
 
 # Creative Tabs
 itemGroup.aether.blocks=Aether II Blocks
