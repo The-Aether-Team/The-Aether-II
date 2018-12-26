@@ -318,6 +318,7 @@ tile.aether.highlands_ice.name=Highlands Ice
 tile.aether.highlands_packed_ice.name=Highlands Packed Ice
 tile.aether.plumproot.name=Plumproot
 tile.aether.highlands_ice_crystal.stalagmite.name=Ice Crystal
+tile.aether.candy_cane_block.name=Candy Cane Block
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick

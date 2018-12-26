@@ -12,7 +12,7 @@
 			"x": 90, "y": 90
 		},
 		"axis=none": {
-			"model": "aether:candy_cane_block"
+			"model": "aether:candy_cane_block_full"
 		}
 	}
 }
