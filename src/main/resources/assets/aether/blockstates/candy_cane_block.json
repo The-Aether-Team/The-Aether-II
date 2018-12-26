@@ -1,0 +1,18 @@
+{
+	"variants": {
+		"axis=y": {
+			"model": "aether:candy_cane_block"
+		},
+		"axis=z": {
+			"model": "aether:candy_cane_block",
+			"x": 90
+		},
+		"axis=x": {
+			"model": "aether:candy_cane_block",
+			"x": 90, "y": 90
+		},
+		"axis=none": {
+			"model": "aether:candy_cane_block"
+		}
+	}
+}

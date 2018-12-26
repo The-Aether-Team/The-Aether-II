@@ -378,6 +378,8 @@ public class BlocksAether
 
 	public static BlockIceCrystal ice_crystal = new BlockIceCrystal();
 
+	public static Block candy_cane_block = new BlockCandyCane();
+
 	@SubscribeEvent
 	public static void onRegisterBlocks(final RegistryEvent.Register<Block> event)
 	{
@@ -626,6 +628,7 @@ public class BlocksAether
         r.register("hellfirestone_brick_decorative", hellfirestone_brick_decorative.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
         r.register("hellfirestone_lantern", hellfirestone_lantern.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
         r.register("hellfirestone_pillar", hellfirestone_pillar.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
+		r.register("candy_cane_block", candy_cane_block.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
 
 		r.register("plumproot", plumproot.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
@@ -794,6 +797,7 @@ public class BlocksAether
 
 		holystone_bookshelf.setHarvestLevel("pickaxe", 0);
 		skyroot_bookshelf.setHarvestLevel("axe", 0);
+		candy_cane_block.setHarvestLevel("pickaxe", 0);
 	}
 
 	public static Collection<Block> getRegisteredBlocks()

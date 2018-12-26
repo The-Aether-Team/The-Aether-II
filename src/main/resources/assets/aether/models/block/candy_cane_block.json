@@ -1,0 +1,7 @@
+{
+	"parent": "block/candy_cane_block",
+	"textures": {
+		"end": "aether:blocks/candy_cane_top",
+		"side": "aether:blocks/candy_cane_side"
+	}
+}
