@@ -22,12 +22,12 @@ public class PlayerEffectsModule extends PlayerAetherModule
 	{
 		if (!this.getWorld().isRemote)
 		{
-			System.out.println(StatusEffect.effectsList.size());
-			System.out.println(StatusEffect.effectsList.keySet());
+//			System.out.println(StatusEffect.effectsList.size());
+//			System.out.println(StatusEffect.effectsList.keySet());
 			Iterator it = StatusEffect.effectsList.entrySet().iterator();
 			while(it.hasNext()){
 				Map.Entry pair = (Map.Entry)it.next();
-				System.out.println(pair.getKey() + " " + pair.getValue() + " " + ((StatusEffect)pair.getValue()).getName());
+//				System.out.println(pair.getKey() + " " + pair.getValue() + " " + ((StatusEffect)pair.getValue()).getName());
 			}
 		}
 	}
