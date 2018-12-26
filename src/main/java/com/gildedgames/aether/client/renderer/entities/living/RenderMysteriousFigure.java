@@ -2,13 +2,11 @@ package com.gildedgames.aether.client.renderer.entities.living;
 
 import com.gildedgames.aether.api.entity.EntityNPC;
 import com.gildedgames.aether.client.models.entities.living.ModelMysteriousFigure;
+import com.gildedgames.aether.common.AetherCelebrations;
 import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
-
-import java.time.LocalDateTime;
-import java.time.Month;
 
 public class RenderMysteriousFigure extends RenderLiving<EntityNPC>
 {
@@ -29,9 +27,7 @@ public class RenderMysteriousFigure extends RenderLiving<EntityNPC>
 	@Override
 	protected void renderModel(EntityNPC entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
-		LocalDateTime time = LocalDateTime.now();
-
-		if (time.getMonth() == Month.OCTOBER)
+		if (AetherCelebrations.isHalloweenEvent())
 		{
 			super.renderModel(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 			this.shadowSize = 0.5f;

@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common;
 
+import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.IAetherServices;
 import com.gildedgames.aether.api.net.IGildedGamesAccountApi;
 import com.gildedgames.aether.common.commands.CommandIsland;
@@ -7,6 +8,7 @@ import com.gildedgames.aether.common.events.PostAetherTravelEvent;
 import com.gildedgames.aether.common.network.api.GildedGamesAccountApiImpl;
 import com.gildedgames.aether.common.registry.ContentRegistry;
 import com.gildedgames.aether.common.shop.*;
+import com.gildedgames.aether.common.shop.filters.ShopFilterHolidays;
 import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.IrradiatedForestsData;
 import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.MagneticHillPillar;
 import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.MagneticHillsData;
@@ -76,6 +78,7 @@ public class CommonProxy implements IAetherServices
 		this.contentRegistry.preInit();
 
 		OrbisAPI.sectors().register(new PrepAether());
+		AetherAPI.content().shop().registerGlobalFilter(new ShopFilterHolidays());
 	}
 
 	public void init(final FMLInitializationEvent event)

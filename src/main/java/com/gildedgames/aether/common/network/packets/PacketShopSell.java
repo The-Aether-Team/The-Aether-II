@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.network.packets;
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.shop.IShopBuy;
 import com.gildedgames.aether.api.shop.IShopInstance;
+import com.gildedgames.aether.api.shop.ShopUtil;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.containers.ContainerShop;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
@@ -74,30 +75,32 @@ public class PacketShopSell implements IMessage
 
 						if (shopBuy != null)
 						{
-							value = shopBuy.getSellingPrice() * stack.getCount();
+							value = ShopUtil.getFilteredPrice(shopBuy.getSellingPrice()) * stack.getCount();
 						}
 						else
 						{
-							value = AetherAPI.content().currency().getValue(stack, shopInstance.getCurrencyType().getClass());
+							value = ShopUtil.getFilteredPrice(AetherAPI.content().currency().getValue(stack, shopInstance.getCurrencyType().getClass()));
 						}
 
 						if (value > 0)
 						{
 							ItemStack s = container.getSlot(0).getStack();
-							double singleValue = AetherAPI.content().currency().getSingleValue(s, shopInstance.getCurrencyType().getClass());
+							double singleValue = ShopUtil
+									.getFilteredPrice(AetherAPI.content().currency().getSingleValue(s, shopInstance.getCurrencyType().getClass()));
 
 							if (shopBuy != null)
 							{
-								singleValue = shopBuy.getSellingPrice();
+								singleValue = ShopUtil.getFilteredPrice(shopBuy.getSellingPrice());
 							}
 
 							if (singleValue < 1)
 							{
-								double wholeValue = AetherAPI.content().currency().getValue(s, shopInstance.getCurrencyType().getClass());
+								double wholeValue = ShopUtil
+										.getFilteredPrice(AetherAPI.content().currency().getValue(s, shopInstance.getCurrencyType().getClass()));
 
 								if (shopBuy != null)
 								{
-									wholeValue = shopBuy.getSellingPrice() * s.getCount();
+									wholeValue = ShopUtil.getFilteredPrice(shopBuy.getSellingPrice()) * s.getCount();
 								}
 
 								double floored = MathHelper.floor(wholeValue);

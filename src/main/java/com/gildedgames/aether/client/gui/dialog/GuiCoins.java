@@ -1,6 +1,5 @@
 package com.gildedgames.aether.client.gui.dialog;
 
-import com.gildedgames.aether.api.shop.IGuiCurrencyValue;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerCurrencyModule;
 import com.gildedgames.orbis_api.client.gui.data.Text;
@@ -14,7 +13,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 
-public class GuiCoins extends GuiElement implements IGuiCurrencyValue
+public class GuiCoins extends GuiElement
 {
 
 	private static final ResourceLocation GILT = AetherCore.getResource("textures/gui/shop/gilt.png");
@@ -29,6 +28,8 @@ public class GuiCoins extends GuiElement implements IGuiCurrencyValue
 
 	private boolean shouldDisplayAlways;
 
+	private double value;
+
 	public GuiCoins(Rect rect, boolean shouldDisplayAlways)
 	{
 		super(rect, true);
@@ -38,9 +39,15 @@ public class GuiCoins extends GuiElement implements IGuiCurrencyValue
 		this.shouldDisplayAlways = shouldDisplayAlways;
 	}
 
-	@Override
+	public double getCurrencyValue()
+	{
+		return this.value;
+	}
+
 	public void setCurrencyValue(double value)
 	{
+		this.value = value;
+
 		double giltaeni = 0;
 		double giltaen = 0;
 		double giltae = 0;

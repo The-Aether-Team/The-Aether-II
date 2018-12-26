@@ -3,10 +3,7 @@ package com.gildedgames.aether.client.gui.dialog;
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.dialog.IDialogSlide;
 import com.gildedgames.aether.api.dialog.IDialogSlideRenderer;
-import com.gildedgames.aether.api.shop.ICurrencyListener;
-import com.gildedgames.aether.api.shop.IGuiCurrencyValue;
-import com.gildedgames.aether.api.shop.IShopBuy;
-import com.gildedgames.aether.api.shop.IShopInstance;
+import com.gildedgames.aether.api.shop.*;
 import com.gildedgames.aether.client.gui.GuiUtils;
 import com.gildedgames.aether.client.gui.IExtendedGui;
 import com.gildedgames.aether.client.gui.util.GuiItemStack;
@@ -163,11 +160,11 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 		Pos2D center = InputHelper.getCenter().clone().addX(17).flush();
 
 		this.sellCoins = this.shopInstance.getCurrencyType()
-				.createItemValueGui(Dim2D.build().center(true).pos(center).y(this.height).addX(23).addY(-197).flush());
+				.createSellItemCurrencyValueGui(Dim2D.build().center(true).pos(center).y(this.height).addX(23).addY(-197).flush());
 		this.sellCoins.state().setVisible(false);
 
 		this.buyCoins = this.shopInstance.getCurrencyType()
-				.createItemValueGui(Dim2D.build().center(true).pos(center).y(this.height).addX(-167).addY(-157).flush());
+				.createBuyItemCurrencyValueGui(Dim2D.build().center(true).pos(center).y(this.height).addX(-167).addY(-157).flush());
 		this.buyCoins.state().setVisible(false);
 
 		this.playerCoins = this.shopInstance.getCurrencyType()
@@ -268,7 +265,7 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 			{
 				int count = (int) Math
 						.min(this.getSelectedBuy().getStock(), Math.min(GuiShop.buyCount, Math.min(this.getSelectedBuy().getItemStack().getMaxStackSize(),
-								this.shopInstance.getCurrencyType().getValue(this.playerAether) / this.getSelectedBuy().getPrice())));
+								this.shopInstance.getCurrencyType().getValue(this.playerAether) / ShopUtil.getFilteredPrice(this.getSelectedBuy()))));
 
 				if (count <= 0)
 				{
@@ -280,9 +277,10 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 					this.stackGui.getItemStack().setCount(count);
 				}
 
-				int value = this.getSelectedBuy().getPrice() * count;
+				int value = ShopUtil.getFilteredPrice(this.getSelectedBuy()) * count;
 
 				this.buyCoins.setCurrencyValue(value);
+				this.buyCoins.setNonFilteredCurrencyValue(this.getSelectedBuy().getPrice() * count);
 				this.buyCoins.state().setVisible(true);
 			}
 		}
@@ -291,7 +289,7 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 			if (this.getSelectedBuy() != null)
 			{
 				int max = (int) Math.min(this.getSelectedBuy().getStock(), Math.min(this.getSelectedBuy().getItemStack().getMaxStackSize(),
-						this.shopInstance.getCurrencyType().getValue(this.playerAether) / this.getSelectedBuy().getPrice()));
+						this.shopInstance.getCurrencyType().getValue(this.playerAether) / ShopUtil.getFilteredPrice(this.getSelectedBuy())));
 
 				if (max <= 0)
 				{
@@ -305,9 +303,10 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 					this.stackGui.getItemStack().setCount(this.buyCountUnlocked);
 				}
 
-				int value = this.getSelectedBuy().getPrice() * this.buyCountUnlocked;
+				int value = ShopUtil.getFilteredPrice(this.getSelectedBuy()) * this.buyCountUnlocked;
 
 				this.buyCoins.setCurrencyValue(value);
+				this.buyCoins.setNonFilteredCurrencyValue(this.getSelectedBuy().getPrice() * this.buyCountUnlocked);
 				this.buyCoins.state().setVisible(true);
 			}
 		}
@@ -421,11 +420,15 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 
 			if (shopBuy != null)
 			{
-				value = shopBuy.getSellingPrice() * (double) stack.getCount();
+				value = ShopUtil.getFilteredPrice(shopBuy.getSellingPrice()) * (double) stack.getCount();
+				this.sellCoins.setNonFilteredCurrencyValue(shopBuy.getSellingPrice() * stack.getCount());
 			}
 			else
 			{
-				value = AetherAPI.content().currency().getValue(stack, this.shopInstance.getCurrencyType().getClass());
+				double originalValue = AetherAPI.content().currency().getValue(stack, this.shopInstance.getCurrencyType().getClass());
+
+				value = ShopUtil.getFilteredPrice(originalValue);
+				this.sellCoins.setNonFilteredCurrencyValue(originalValue);
 			}
 
 			this.sellCoins.setCurrencyValue(value);
@@ -445,7 +448,7 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 
 			int amount = Math.min(maxAllowedWithHeldStack, Math.min(buyCount, this.getSelectedBuy().getStock()));
 
-			boolean canAfford = this.shopInstance.getCurrencyType().getValue(this.playerAether) >= this.getSelectedBuy().getPrice();
+			boolean canAfford = this.shopInstance.getCurrencyType().getValue(this.playerAether) >= ShopUtil.getFilteredPrice(this.getSelectedBuy());
 			boolean isHandFree = this.mc.player.inventory.getItemStack().isEmpty();
 			boolean isBuyItem = ItemHelper.getHashForItemStack(this.mc.player.inventory.getItemStack()) == ItemHelper
 					.getHashForItemStack(this.getSelectedBuy().getItemStack());
@@ -475,16 +478,17 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 
 			int count = (int) Math
 					.min(isCountLocked ? GuiShop.buyCount : this.buyCountUnlocked, Math.min(this.getSelectedBuy().getItemStack().getMaxStackSize(),
-							this.shopInstance.getCurrencyType().getValue(this.playerAether) / this.getSelectedBuy().getPrice()));
+							this.shopInstance.getCurrencyType().getValue(this.playerAether) / ShopUtil.getFilteredPrice(this.getSelectedBuy())));
 
 			if (count <= 0)
 			{
 				count = 1;
 			}
 
-			int value = this.getSelectedBuy().getPrice() * count;
+			int value = ShopUtil.getFilteredPrice(this.getSelectedBuy()) * count;
 
 			this.buyCoins.setCurrencyValue(value);
+			this.buyCoins.setNonFilteredCurrencyValue(this.getSelectedBuy().getPrice() * count);
 			this.buyCoins.state().setVisible(true);
 		}
 
@@ -543,16 +547,17 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 				{
 					int count = (int) Math
 							.min(this.getSelectedBuy().getStock(), Math.min(GuiShop.buyCount, Math.min(this.getSelectedBuy().getItemStack().getMaxStackSize(),
-									this.shopInstance.getCurrencyType().getValue(this.playerAether) / this.getSelectedBuy().getPrice())));
+									this.shopInstance.getCurrencyType().getValue(this.playerAether) / ShopUtil.getFilteredPrice(this.getSelectedBuy()))));
 
 					if (this.stackGui.getItemStack() != null)
 					{
 						this.stackGui.getItemStack().setCount(count);
 					}
 
-					int value = this.getSelectedBuy().getPrice() * count;
+					int value = ShopUtil.getFilteredPrice(this.getSelectedBuy()) * count;
 
 					this.buyCoins.setCurrencyValue(value);
+					this.buyCoins.setNonFilteredCurrencyValue(this.getSelectedBuy().getPrice() * count);
 					this.buyCoins.state().setVisible(true);
 				}
 
@@ -569,9 +574,10 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 
 				if (this.getSelectedBuy() != null)
 				{
-					int value = this.getSelectedBuy().getPrice() * this.buyCountUnlocked;
+					int value = ShopUtil.getFilteredPrice(this.getSelectedBuy()) * this.buyCountUnlocked;
 
 					this.buyCoins.setCurrencyValue(value);
+					this.buyCoins.setNonFilteredCurrencyValue(this.getSelectedBuy().getPrice() * this.buyCountUnlocked);
 					this.buyCoins.state().setVisible(true);
 				}
 			}
@@ -653,11 +659,12 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 		if (InputHelper.isHovered(this.sell) && this.sell.state().isEnabled())
 		{
 			ItemStack stack = this.container.getSlot(0).getStack();
-			double singleValue = AetherAPI.content().currency().getSingleValue(stack, this.shopInstance.getCurrencyType().getClass());
+			double singleValue = ShopUtil
+					.getFilteredPrice(AetherAPI.content().currency().getSingleValue(stack, this.shopInstance.getCurrencyType().getClass()));
 
 			if (singleValue < 1)
 			{
-				double wholeValue = AetherAPI.content().currency().getValue(stack, this.shopInstance.getCurrencyType().getClass());
+				double wholeValue = ShopUtil.getFilteredPrice(AetherAPI.content().currency().getValue(stack, this.shopInstance.getCurrencyType().getClass()));
 				double decimals = wholeValue - MathHelper.floor(wholeValue);
 
 				double howManyTimesDivInto = decimals / singleValue;

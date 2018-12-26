@@ -94,7 +94,13 @@ public class ShopCurrencyPlumproot implements IShopCurrency
 	}
 
 	@Override
-	public IGuiCurrencyValue createItemValueGui(Rect rect)
+	public IGuiCurrencyValue createBuyItemCurrencyValueGui(Rect rect)
+	{
+		return new GuiPumpkinCurrency(rect);
+	}
+
+	@Override
+	public IGuiCurrencyValue createSellItemCurrencyValueGui(Rect rect)
 	{
 		return new GuiPumpkinCurrency(rect);
 	}

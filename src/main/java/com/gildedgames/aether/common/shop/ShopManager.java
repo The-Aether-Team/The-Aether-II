@@ -28,6 +28,8 @@ public class ShopManager implements IShopManager
 
 	private final boolean allowCaching;
 
+	private final List<IShopFilter> globalFilters = Lists.newArrayList();
+
 	public ShopManager()
 	{
 		this(true);
@@ -138,6 +140,21 @@ public class ShopManager implements IShopManager
 		}
 
 		return new ShopInstance(chosenStock, Lists.newArrayList(definition.getUnlocalizedGreetings()), currency);
+	}
+
+	@Override
+	public List<IShopFilter> getGlobalFilters()
+	{
+		return this.globalFilters;
+	}
+
+	@Override
+	public void registerGlobalFilter(IShopFilter filter)
+	{
+		if (!this.globalFilters.contains(filter))
+		{
+			this.globalFilters.add(filter);
+		}
 	}
 
 	private IShopDefinition loadShopDefinition(final ResourceLocation resource) throws IOException

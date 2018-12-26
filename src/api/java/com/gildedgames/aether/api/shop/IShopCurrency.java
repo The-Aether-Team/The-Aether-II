@@ -14,7 +14,9 @@ public interface IShopCurrency extends NBT
 
 	IGuiCurrencyValue createCurrencyValueGui(Rect rect);
 
-	IGuiCurrencyValue createItemValueGui(Rect rect);
+	IGuiCurrencyValue createBuyItemCurrencyValueGui(Rect rect);
+
+	IGuiCurrencyValue createSellItemCurrencyValueGui(Rect rect);
 
 	void listenForCurrency(IPlayerAether playerAether, ICurrencyListener listener);
 

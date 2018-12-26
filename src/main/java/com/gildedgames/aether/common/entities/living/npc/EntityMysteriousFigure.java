@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.entity.EntityNPC;
 import com.gildedgames.aether.api.shop.IShopDefinition;
 import com.gildedgames.aether.api.shop.IShopInstance;
+import com.gildedgames.aether.common.AetherCelebrations;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.orbis_api.util.mc.NBTHelper;
@@ -140,9 +141,7 @@ public class EntityMysteriousFigure extends EntityNPC
 	@Override
 	public void onUpdate()
 	{
-		LocalDateTime time = LocalDateTime.now();
-
-		if (time.getMonth() != Month.OCTOBER)
+		if (!AetherCelebrations.isHalloweenEvent())
 		{
 			if (this.width > 0 && this.height > 0)
 			{

@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.network.packets;
 
 import com.gildedgames.aether.api.shop.IShopBuy;
 import com.gildedgames.aether.api.shop.IShopInstance;
+import com.gildedgames.aether.api.shop.ShopUtil;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.containers.ContainerShop;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
@@ -80,7 +81,7 @@ public class PacketShopBuy implements IMessage
 								return null;
 							}
 
-							boolean canAfford = shopInstance.getCurrencyType().getValue(playerAether) >= (buy.getPrice() * amount);
+							boolean canAfford = shopInstance.getCurrencyType().getValue(playerAether) >= (ShopUtil.getFilteredPrice(buy) * amount);
 							boolean isBuyItem = ItemHelper.getHashForItemStack(player.inventory.getItemStack()) == ItemHelper
 									.getHashForItemStack(buy.getItemStack());
 							boolean canStack = player.inventory.getItemStack().isStackable();
@@ -104,7 +105,7 @@ public class PacketShopBuy implements IMessage
 									player.inventory.getItemStack().setCount(player.inventory.getItemStack().getCount() + amount);
 								}
 
-								shopInstance.getCurrencyType().removeValue(buy.getPrice() * amount, playerAether);
+								shopInstance.getCurrencyType().removeValue(ShopUtil.getFilteredPrice(buy) * amount, playerAether);
 							}
 						}
 					}

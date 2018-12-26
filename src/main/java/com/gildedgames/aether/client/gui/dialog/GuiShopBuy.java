@@ -2,6 +2,7 @@ package com.gildedgames.aether.client.gui.dialog;
 
 import com.gildedgames.aether.api.shop.IShopBuy;
 import com.gildedgames.aether.api.shop.IShopInstance;
+import com.gildedgames.aether.api.shop.ShopUtil;
 import com.gildedgames.aether.client.gui.IExtendedGui;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
@@ -95,8 +96,9 @@ public class GuiShopBuy extends GuiElement
 				renderitem.zLevel = 0.0F;
 
 				boolean hasEnough =
-						GuiShopBuy.this.shopInstance.getCurrencyType().getValue(PlayerAether.getPlayer(Minecraft.getMinecraft().player)) >= GuiShopBuy.this
-								.getShopBuy().getPrice();
+						GuiShopBuy.this.shopInstance.getCurrencyType().getValue(PlayerAether.getPlayer(Minecraft.getMinecraft().player)) >= ShopUtil
+								.getFilteredPrice(GuiShopBuy.this
+										.getShopBuy());
 
 				int xOffset = (Math.max(String.valueOf(GuiShopBuy.this.getShopBuy().getStock()).length() - 1, 0)) * -6;
 

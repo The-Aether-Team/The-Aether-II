@@ -4,7 +4,7 @@ import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.shop.ICurrencyListener;
 import com.gildedgames.aether.api.shop.IGuiCurrencyValue;
 import com.gildedgames.aether.api.shop.IShopCurrency;
-import com.gildedgames.aether.client.gui.dialog.GuiCoins;
+import com.gildedgames.aether.client.gui.dialog.GuiCoinsContainer;
 import com.gildedgames.orbis_api.client.rect.Rect;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -36,13 +36,19 @@ public class ShopCurrencyGilt implements IShopCurrency
 	@Override
 	public IGuiCurrencyValue createCurrencyValueGui(Rect rect)
 	{
-		return new GuiCoins(rect, true);
+		return new GuiCoinsContainer(rect, true, false);
 	}
 
 	@Override
-	public IGuiCurrencyValue createItemValueGui(Rect rect)
+	public IGuiCurrencyValue createBuyItemCurrencyValueGui(Rect rect)
 	{
-		return new GuiCoins(rect, false);
+		return new GuiCoinsContainer(rect, false, true);
+	}
+
+	@Override
+	public IGuiCurrencyValue createSellItemCurrencyValueGui(Rect rect)
+	{
+		return new GuiCoinsContainer(rect, false, false);
 	}
 
 	@Override

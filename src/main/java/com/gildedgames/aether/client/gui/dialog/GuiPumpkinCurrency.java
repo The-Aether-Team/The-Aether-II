@@ -40,6 +40,12 @@ public class GuiPumpkinCurrency extends GuiElement implements IGuiCurrencyValue
 	}
 
 	@Override
+	public void setNonFilteredCurrencyValue(double value)
+	{
+
+	}
+
+	@Override
 	public void build()
 	{
 		this.plumprootCount = new PlumprootCount(Dim2D.build().width(7).height(7).addX(0).addY(0).flush(), COIN_ICON);
