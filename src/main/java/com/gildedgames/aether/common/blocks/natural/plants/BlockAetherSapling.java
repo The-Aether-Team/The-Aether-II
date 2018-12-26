@@ -7,6 +7,10 @@ import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
 import com.gildedgames.aether.common.registry.content.GenerationAether;
 import com.gildedgames.aether.common.world.templates.TemplatePlacer;
+import com.gildedgames.orbis_api.core.BlueprintDefinition;
+import com.gildedgames.orbis_api.core.CreationData;
+import com.gildedgames.orbis_api.core.baking.BakedBlueprint;
+import com.gildedgames.orbis_api.core.util.BlueprintPlacer;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -33,9 +37,10 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 			BLUE_SKYROOT = new BlockVariant(0, "blue_skyroot"),
 			GREEN_SKYROOT = new BlockVariant(1, "green_skyroot"),
 			DARK_BLUE_SKYROOT = new BlockVariant(2, "dark_blue_skyroot"),
-			GOLDEN_OAK = new BlockVariant(3, "golden_oak");
+			GOLDEN_OAK = new BlockVariant(3, "golden_oak"),
+			MUTANT_TREE = new BlockVariant(4, "mutant_tree"); // Edison's Crazy Mutant Tree (christmas exclusive).
 
-	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", BLUE_SKYROOT, GREEN_SKYROOT, DARK_BLUE_SKYROOT, GOLDEN_OAK);
+	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", BLUE_SKYROOT, GREEN_SKYROOT, DARK_BLUE_SKYROOT, GOLDEN_OAK, MUTANT_TREE);
 
 	public static final PropertyInteger PROPERTY_STAGE = PropertyInteger.create("stage", 0, 1);
 
@@ -88,7 +93,10 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 		{
 			final int meta = state.getValue(PROPERTY_VARIANT).getMeta();
 
+			// TODO: Change all templates to blueprints.
+
 			TemplateDefinition tree = null;
+			BlueprintDefinition treeBp = null;
 
 			if (meta == BLUE_SKYROOT.getMeta())
 			{
@@ -106,6 +114,10 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 			{
 				tree = GenerationAether.dark_blue_skyroot_oak.getRandomDefinition(random);
 			}
+			else if (meta == MUTANT_TREE.getMeta())
+			{
+				treeBp = GenerationAether.CRAZY_MUTANT_TREE;
+			}
 
 			if (tree != null)
 			{
@@ -114,6 +126,16 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 				if (!TemplatePlacer.place(world, tree, new TemplateLoc().set(pos).set(true), random))
 				{
 					world.setBlockState(pos, state, 4);
+				}
+			}
+			if (treeBp != null)
+			{
+				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 4);
+				BakedBlueprint baked = new BakedBlueprint(GenerationAether.CRAZY_MUTANT_TREE.getData(), new CreationData(world).pos(BlockPos.ORIGIN));
+				baked.bake();
+				if (!BlueprintPlacer.place(world,baked,treeBp.getConditions(),pos,true));
+				{
+					world.setBlockState(pos,state,4);
 				}
 			}
 		}

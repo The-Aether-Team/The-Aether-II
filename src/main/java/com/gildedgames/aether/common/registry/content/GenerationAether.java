@@ -108,6 +108,8 @@ public class GenerationAether
 
 	public static BlueprintDefinition SKYROOT_OAK_GREEN, SKYROOT_OAK_BLUE, SKYROOT_OAK_DARK_BLUE;
 
+	public static BlueprintDefinition CRAZY_MUTANT_TREE;
+
 	public static BlueprintDefinition WISPROOT_GREEN, WISPROOT_BLUE, WISPROOT_DARK_BLUE;
 
 	public static BlueprintDefinitionPool SKYROOT_WATCHTOWER;
@@ -388,6 +390,10 @@ public class GenerationAether
 				SKYROOT_WATCHTOWER_3A, SKYROOT_WATCHTOWER_3B);
 		WELL = new BlueprintDefinitionPool(WELL_1A, WELL_1B);
 
+		CRAZY_MUTANT_TREE = new BlueprintDefinition(BlueprintsAether.CRAZY_MUTANT_TREE, 0).setRegistry(registry)
+				.setConditions(PlacementConditions.onSpecificBlock(0, BlocksAether.aether_grass, BlocksAether.aether_dirt), replace,
+						PlacementConditions.ignoreBlock(0,BlocksAether.quicksoil.getDefaultState()));
+
 		registry.register(0, OUTPOST_A);
 		registry.register(1, NECROMANCER_TOWER);
 
@@ -420,6 +426,7 @@ public class GenerationAether
 		registry.register(22, WISPROOT_GREEN);
 		registry.register(23, WISPROOT_BLUE);
 		registry.register(24, WISPROOT_DARK_BLUE);
+		registry.register(25, CRAZY_MUTANT_TREE);
 
 		reg(0, blue_skyroot_tree_1);
 		reg(1, blue_skyroot_tree_2);

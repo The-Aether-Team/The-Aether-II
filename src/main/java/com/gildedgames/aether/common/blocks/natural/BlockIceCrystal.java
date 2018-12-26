@@ -43,8 +43,9 @@ public class BlockIceCrystal extends BlockBuilder implements IBlockMultiName {
     {
         super(Material.GLASS);
         setSoundType(SoundType.GLASS);
-        this.setHardness(1f);
-        this.setResistance(2000f);
+        this.setHardness(0.25f);
+        this.setResistance(1f);
+        this.setTickRandomly(true);
     }
 
     @Override

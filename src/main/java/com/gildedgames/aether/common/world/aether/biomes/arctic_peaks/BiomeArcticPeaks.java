@@ -209,7 +209,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase
 			public BlockPos findPositionToPlace(final IBlockAccessExtended blockAccess, final Random rand, final BlockPos pos)
 			{
 				final int x = rand.nextInt(16) + 8;
-				final int y = rand.nextInt(96);
+				final int y = rand.nextInt(64) + 26; // between y: 26 and 90
 				final int z = rand.nextInt(16) + 8;
 
 				return pos.add(x, y, z);

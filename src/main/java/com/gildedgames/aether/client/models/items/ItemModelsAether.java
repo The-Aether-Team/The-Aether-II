@@ -146,7 +146,8 @@ public class ItemModelsAether
 				.add(BlockAetherSapling.BLUE_SKYROOT.getMeta(), "blue_skyroot_sapling")
 				.add(BlockAetherSapling.GREEN_SKYROOT.getMeta(), "green_skyroot_sapling")
 				.add(BlockAetherSapling.DARK_BLUE_SKYROOT.getMeta(), "dark_blue_skyroot_sapling")
-				.add(BlockAetherSapling.GOLDEN_OAK.getMeta(), "golden_oak_sapling"));
+				.add(BlockAetherSapling.GOLDEN_OAK.getMeta(), "golden_oak_sapling")
+				.add(BlockAetherSapling.MUTANT_TREE.getMeta(), "mutant_tree_sapling"));
 
 		registerItemModels(BlocksAether.holystone_furnace, new ItemModelBuilder("holystone_furnace/")
 				.add(BlockHolystoneFurnace.LIT_META, "holystone_furnace_lit")

@@ -11,6 +11,9 @@
 		},
 		"variant=golden_oak": {
 			"model": "aether:saplings/golden_oak_sapling"
+		},
+		"variant=mutant_tree": {
+			"model": "aether:saplings/mutant_tree_sapling"
 		}
 	}
 }
