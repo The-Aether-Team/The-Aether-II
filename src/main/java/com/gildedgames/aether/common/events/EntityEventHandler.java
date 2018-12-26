@@ -18,7 +18,7 @@ public class EntityEventHandler
 	@SubscribeEvent
 	public void onEntityUpdate(LivingEvent.LivingUpdateEvent event) {
 		Entity entity = event.getEntity();
-		System.out.println(entity.getName());
+//		System.out.println(entity.getName());
 		//Effect: id, currentValue, exposed, resistance
 	}
 
