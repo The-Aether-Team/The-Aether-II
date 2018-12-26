@@ -40,12 +40,21 @@ sourceSets {
 }
 
 jar {
+    dependsOn(':OrbisAPI:build')
+
     from sourceSets.api.output
     from sourceSets.main.output
 
-    manifest {
-        attributes 'FMLAT': 'aether_at.cfg'
+    manifest.mainAttributes(
+        "ContainedDeps": "${project(":OrbisAPI").mod_name}-${project(":OrbisAPI").mod_version}.jar",
+        "FMLAT": "aether_at.cfg"
+    )
+    
+    from("OrbisAPI/build/libs") {
+        include("${project(":OrbisAPI").mod_name}-${project(":OrbisAPI").mod_version}.jar")
     }
+    classifier = 'universal'
+
 }
 
 minecraft {
