@@ -8,6 +8,7 @@ import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceWa
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
+import com.gildedgames.aether.common.util.helpers.MathUtil;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.block.Block;
 import net.minecraft.entity.*;
@@ -28,13 +29,16 @@ import javax.annotation.Nullable;
 
 public class EntityVaranys extends EntityAetherMob implements IEntityMultiPart
 {
+	private MultiPartEntityPart[] parts;
 
-	public MultiPartEntityPart[] parts;
-	public MultiPartEntityPart head = new MultiPartEntityPart(this, "head", .7F, .7F);
-	public MultiPartEntityPart tail1 = new MultiPartEntityPart(this, "tail", 1F, .7F);
-	public MultiPartEntityPart tail2 = new MultiPartEntityPart(this, "tail2", 1F, .7F);
+	private MultiPartEntityPart head = new MultiPartEntityPart(this, "head", .7F, .7F);
+
+	private MultiPartEntityPart tail1 = new MultiPartEntityPart(this, "tail", 1F, .7F);
+
+	private MultiPartEntityPart tail2 = new MultiPartEntityPart(this, "tail2", 1F, .7F);
 
 	private EntityAIHideFromLight lightAI;
+
 	private	Vec3d[] old;
 
 	public EntityVaranys(final World world)
@@ -55,7 +59,7 @@ public class EntityVaranys extends EntityAetherMob implements IEntityMultiPart
 		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, new Class[0]));
 		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 
-		this.setSize(1.4F, 1.2F);
+		this.setSize(1.4F, 1F);
 
 		this.stepHeight = 1.0F;
 		this.head.setInvisible(true);
@@ -145,12 +149,26 @@ public class EntityVaranys extends EntityAetherMob implements IEntityMultiPart
 
 		lightAI.setEnabled(this.getAttackTarget() == null);
 
+		setMultiPartLocations();
+	}
+
+	private void setMultiPartLocations()
+	{
 		for (int i = 0; i < parts.length; i++)
 		{
 			old[i] = new Vec3d(parts[i].posX, parts[i].posY, parts[i].posZ);
 		}
 
-		setMultiPartLocations();
+		float f = MathUtil.interpolateRotation(prevRenderYawOffset, renderYawOffset, 1);
+		float f1 = MathHelper.cos(-f * 0.017453292F - (float)Math.PI);
+		float f2 = MathHelper.sin(-f * 0.017453292F - (float)Math.PI);
+
+		head.onUpdate();
+		head.setLocationAndAngles(posX - f2, posY + .25f, posZ - f1, 0F, 0F);
+		tail1.onUpdate();
+		tail1.setLocationAndAngles(posX + f2 * 1.1f, posY + .25f, posZ + f1 * 1.1f, 0F, 0F);
+		tail2.onUpdate();
+		tail2.setLocationAndAngles(posX + f2 * 2f, posY, posZ + f1 * 2f, 0F, 0F);
 
 		for (int i = 0; i < parts.length; i++)
 		{
@@ -158,19 +176,6 @@ public class EntityVaranys extends EntityAetherMob implements IEntityMultiPart
 			parts[i].prevPosY = old[i].y;
 			parts[i].prevPosZ = old[i].z;
 		}
-	}
-
-	private void setMultiPartLocations()
-	{
-		float f = MathHelper.cos(-rotationYaw * 0.017453292F - (float)Math.PI);
-		float f1 = MathHelper.sin(-rotationYaw * 0.017453292F - (float)Math.PI);
-
-		head.onUpdate();
-		head.setLocationAndAngles(posX - f1, posY + .25f, posZ - f, 0F, 0F);
-		tail1.onUpdate();
-		tail1.setLocationAndAngles(posX + f1 * 1.1f, posY + .25f, posZ + f * 1.1f, 0F, 0F);
-		tail2.onUpdate();
-		tail2.setLocationAndAngles(posX + f1 * 2f, posY, posZ + f * 2f, 0F, 0F);
 	}
 
 }

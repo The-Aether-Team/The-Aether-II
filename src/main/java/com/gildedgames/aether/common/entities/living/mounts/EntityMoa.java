@@ -14,13 +14,11 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
 import com.gildedgames.aether.common.items.misc.ItemMoaFeather;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
+import com.gildedgames.aether.common.util.helpers.MathUtil;
 import com.gildedgames.orbis_api.client.PartialTicks;
 import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -36,13 +34,15 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 import java.util.Set;
 
-public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements EntityGroupMember, IMount, IFlyingMountData
+public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements EntityGroupMember, IMount, IFlyingMountData, IEntityMultiPart
 {
 
 	private static final Set<Item> TEMPTATION_ITEMS = Sets
@@ -85,6 +85,10 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 
 	private MoaNest familyNest;
 
+	private MultiPartEntityPart[] parts;
+
+	private	Vec3d[] old;
+
 	public EntityMoa(final World world)
 	{
 		super(world);
@@ -93,6 +97,8 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 
 		this.familyNest = new MoaNest(world);
 
+		this.parts = new MultiPartEntityPart[] { head, neck, beak, body, tail };
+		this.old = new Vec3d[parts.length];
 		this.setSize(1.0F, 2.0F);
 		this.stepHeight = 1.0F;
 	}
@@ -596,6 +602,98 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 
 			this.pack.addOrRenewAggressor(entity);
 		}
+	}
+
+	@Override
+	public void onLivingUpdate()
+	{
+		super.onLivingUpdate();
+
+		setMultiPartLocations();
+	}
+
+
+	private MultiPartEntityPart neck = new MultiPartEntityPart(this, "neck", .4F, .8F);
+
+	private MultiPartEntityPart head = new MultiPartEntityPart(this, "head", .8F, .6F);
+
+	private MultiPartEntityPart beak = new MultiPartEntityPart(this, "beak", .4F, .5F);
+
+	private MultiPartEntityPart body = new MultiPartEntityPart(this, "body", 1.1F, 1.325F);
+
+	private MultiPartEntityPart tail = new MultiPartEntityPart(this, "tail", 1.1F, .6F);
+
+	private void setMultiPartLocations()
+	{
+		for (int i = 0; i < parts.length; i++)
+		{
+			old[i] = new Vec3d(parts[i].posX, parts[i].posY, parts[i].posZ);
+		}
+
+		float f = MathUtil.interpolateRotation(prevRenderYawOffset, renderYawOffset, 1);
+		float f1 = MathHelper.cos(-f * 0.017453292F - (float)Math.PI);
+		float f2 = MathHelper.sin(-f * 0.017453292F - (float)Math.PI);
+
+		head.onUpdate();
+		head.setLocationAndAngles(posX - f2 * .5f, posY + 1.45f, posZ - f1 * .5f, 0F, 0F);
+		beak.onUpdate();
+		beak.setLocationAndAngles(posX - f2 * 1.1f, posY + 1.5f, posZ - f1 * 1.1f, 0F, 0F);
+		neck.onUpdate();
+		neck.setLocationAndAngles(posX - f2 * .6f, posY + .75f, posZ - f1 * .6f, 0F, 0F);
+		tail.onUpdate();
+		tail.setLocationAndAngles(posX + f2 * 1.1f, posY + .5f, posZ + f1 * 1.1f, 0F, 0F);
+		body.onUpdate();
+		body.setLocationAndAngles(posX, posY, posZ, 0F, 0F);
+
+		for (int i = 0; i < parts.length; i++)
+		{
+			parts[i].prevPosX = old[i].x;
+			parts[i].prevPosY = old[i].y;
+			parts[i].prevPosZ = old[i].z;
+		}
+	}
+
+	@Override
+	public boolean attackEntityFromPart(MultiPartEntityPart part, DamageSource source, float damage)
+	{
+		switch (part.partName)
+		{
+			case "head":
+				damage *= 1.3f;
+				break;
+			case "beak":
+				damage *= 1.1f;
+				break;
+			case "tail":
+				damage *= .2f;
+				break;
+		}
+
+		if (hurtResistantTime <= 10)
+		{
+			return attackEntityFrom(source, damage);
+		}
+
+		return false;
+	}
+
+	@Override
+	public World getWorld()
+	{
+		return getEntityWorld();
+	}
+
+	@Override
+	public boolean canBeCollidedWith()
+	{
+		return false;
+	}
+
+	@Nullable
+	@Override
+	public MultiPartEntityPart[] getParts()
+	{
+		return parts;
 	}
 
 	@Override

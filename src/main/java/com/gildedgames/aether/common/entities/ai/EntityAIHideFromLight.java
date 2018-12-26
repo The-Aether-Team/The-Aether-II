@@ -48,7 +48,7 @@ public class EntityAIHideFromLight extends EntityAIBase
 
 		BlockPos entityPos = new BlockPos(this.entity.posX, this.entity.getEntityBoundingBox().minY, this.entity.posZ);
 
-		if (entity.world.getLightFromNeighbors(entityPos) <= lightLevel || (entity.world.isDaytime() && !this.entity.world.canSeeSky(entityPos)))
+		if (entity.world.getLightFromNeighbors(entityPos) <= lightLevel || (entity.world.isDaytime() && this.entity.world.canSeeSky(entityPos)))
 		{
 			return false;
 		}
