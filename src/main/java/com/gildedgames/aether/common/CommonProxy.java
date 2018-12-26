@@ -3,7 +3,6 @@ package com.gildedgames.aether.common;
 import com.gildedgames.aether.api.IAetherServices;
 import com.gildedgames.aether.api.net.IGildedGamesAccountApi;
 import com.gildedgames.aether.common.commands.CommandIsland;
-import com.gildedgames.aether.common.events.EntityEventHandler;
 import com.gildedgames.aether.common.events.PostAetherTravelEvent;
 import com.gildedgames.aether.common.network.api.GildedGamesAccountApiImpl;
 import com.gildedgames.aether.common.registry.ContentRegistry;
@@ -71,9 +70,6 @@ public class CommonProxy implements IAetherServices
 		s.register(7, ShopInventory.class, new Instantiator<>(ShopInventory.class));
 		s.register(8, ShopCurrencyGilt.class, new Instantiator<>(ShopCurrencyGilt.class));
 		s.register(9, ShopCurrencyPlumproot.class, new Instantiator<>(ShopCurrencyPlumproot.class));
-
-		// Initialize Entity Events
-		MinecraftForge.EVENT_BUS.register(new EntityEventHandler());
 
 		OrbisAPI.services().io().register(s);
 
