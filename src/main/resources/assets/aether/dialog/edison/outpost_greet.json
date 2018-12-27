@@ -33,6 +33,11 @@
 				{ "label": "edison.greet.option.fine", "actions": [ { "type": "navigate", "target": "fine" } ] },
 				{ "label": "edison.greet.option.thanks", "actions": [ { "type": "navigate", "target": "thanks" } ] },
 				{ "label": "edison.greet.option.okay_sale", "actions": [ { "type": "navigate", "target": "sale" } ] },
+				{
+					"orConditions": [ { "type": "isHolidayEvent", "validate": "true" } ],
+					"label": "edison.greet.option.okay_holiday_sale",
+					"actions": [ { "type": "navigate", "target": "holiday_sale" } ]
+				},
 				{ "label": "generic.goodbye", "actions": [ { "type": "exit" } ] }
 			]
 		},
@@ -43,6 +48,11 @@
 			],
 			"buttons": [
 				{ "label": "edison.greet.option.sale", "actions": [ { "type": "navigate", "target": "sale" } ] },
+				{
+					"orConditions": [ { "type": "isHolidayEvent", "validate": "true" } ],
+					"label": "edison.greet.option.holiday_sale",
+					"actions": [ { "type": "navigate", "target": "holiday_sale" } ]
+				},
 				{ "label": "edison.greet.option.okay_goodbye", "actions": [ { "type": "exit" } ] }
 			]
 		},
@@ -134,6 +144,15 @@
 			"name": "sale",
 			"lines": [
 				{ "speaker": "aether:edison#idle", "text": "edison.greet.sale" }
+			],
+			"end_actions": [
+				{ "type": "openShop" }
+			]
+		},
+		{
+			"name": "holiday_sale",
+			"lines": [
+				{ "speaker": "aether:edison#idle", "text": "edison.greet.holiday_sale" }
 			],
 			"end_actions": [
 				{ "type": "openShop" }
