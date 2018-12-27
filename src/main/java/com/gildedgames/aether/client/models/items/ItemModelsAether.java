@@ -128,6 +128,9 @@ public class ItemModelsAether
 
 		registerItemModels(BlocksAether.golden_oak_leaves, "leaves/golden_oak_leaves");
 
+		registerItemModels(BlocksAether.mutant_tree_leaves, "leaves/mutant_leaves");
+		registerItemModels(BlocksAether.mutant_tree_leaves_decorated, "leaves/mutant_leaves_decorated");
+
 		registerItemModels(BlocksAether.blueberry_bush, new ItemModelBuilder("bushes/")
 				.add(BlockBlueberryBush.BERRY_BUSH_STEM, "blueberry_bush_stem")
 				.add(BlockBlueberryBush.BERRY_BUSH_RIPE, "blueberry_bush_ripe"));

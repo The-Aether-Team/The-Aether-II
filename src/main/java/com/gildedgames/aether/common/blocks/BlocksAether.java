@@ -256,6 +256,10 @@ public class BlocksAether
 
 	public static final BlockAetherLeaves dark_blue_light_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.DARK_BLUE_SKYROOT.getMeta());
 
+	public static final BlockAetherLeaves mutant_tree_leaves = new BlockAetherLeaves(BlockAetherSapling.MUTANT_TREE.getMeta());
+
+	public static final Block mutant_tree_leaves_decorated = new BlockAetherLeaves(BlockAetherSapling.MUTANT_TREE.getMeta()).setLightLevel(1f);
+
 	public static final BlockAetherLog golden_oak_log = new BlockGoldenOakLog();
 
 	public static final BlockAetherLeaves golden_oak_leaves = new BlockAetherLeaves(BlockAetherSapling.GOLDEN_OAK.getMeta());
@@ -541,6 +545,8 @@ public class BlocksAether
 		r.register("blue_light_skyroot_leaves", blue_light_skyroot_leaves.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 		r.register("green_light_skyroot_leaves", green_light_skyroot_leaves.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 		r.register("dark_blue_light_skyroot_leaves", dark_blue_light_skyroot_leaves.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		r.register("mutant_leaves", mutant_tree_leaves.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		r.register("mutant_leaves_decorated", mutant_tree_leaves_decorated.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
 		r.register("golden_oak_log", golden_oak_log.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 		r.register("golden_oak_leaves", golden_oak_leaves.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
