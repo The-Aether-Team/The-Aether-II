@@ -27,11 +27,11 @@ public class BiomesAether
 {
 	@GameRegistry.ObjectHolder("aether_highlands")
 	public static final BiomeAetherBase HIGHLANDS = new BiomeHighlands(
-			new Biome.BiomeProperties("Highlands").setRainDisabled().setTemperature(0.5f).setWaterColor(0x70DB70), AetherCore.getResource("aether_highlands"));
+			new Biome.BiomeProperties("Highlands").setTemperature(0.5f).setWaterColor(0x70DB70), AetherCore.getResource("aether_highlands"));
 
 	@GameRegistry.ObjectHolder("aether_magnetic_hills")
 	public static final BiomeAetherBase MAGNETIC_HILLS = new BiomeMagneticHills(
-			new Biome.BiomeProperties("Magnetic Hills").setRainDisabled().setTemperature(0.5f).setWaterColor(0x70DB70),
+			new Biome.BiomeProperties("Magnetic Hills").setTemperature(0.5f).setWaterColor(0x70DB70),
 			AetherCore.getResource("aether_magnetic_hills"));
 
 	@GameRegistry.ObjectHolder("aether_arctic_peaks")
@@ -41,12 +41,12 @@ public class BiomesAether
 
 	@GameRegistry.ObjectHolder("aether_forgotten_highlands")
 	public static final BiomeAetherBase FORGOTTEN_HIGHLANDS = new BiomeForgottenHighlands(
-			new Biome.BiomeProperties("Forgotten Highlands").setRainDisabled().setTemperature(0.0f).setWaterColor(0x70DB70),
+			new Biome.BiomeProperties("Forgotten Highlands").setTemperature(0.0f).setWaterColor(0x70DB70),
 			AetherCore.getResource("aether_forgotten_highlands"));
 
 	@GameRegistry.ObjectHolder("aether_irradiated_forests")
 	public static final BiomeAetherBase IRRADIATED_FORESTS = new BiomeIrradiatedForests(
-			new Biome.BiomeProperties("Irradiated Forests").setRainDisabled().setTemperature(0.0f).setWaterColor(0xdebc33),
+			new Biome.BiomeProperties("Irradiated Forests").setTemperature(0.0f).setWaterColor(0xdebc33),
 			AetherCore.getResource("aether_irradiated_forests"));
 
 	@GameRegistry.ObjectHolder("aether_void")

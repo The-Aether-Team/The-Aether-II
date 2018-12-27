@@ -22,6 +22,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.vecmath.Vector2f;
 import java.util.Iterator;
 import java.util.Random;
 
@@ -33,7 +34,9 @@ public class PrecipitationManagerImpl implements IPrecipitationManager
 	@Nonnull
 	private final World world;
 
-	private PrecipitationStrength strength;
+	private PrecipitationStrength strength = PrecipitationStrength.LIGHT;
+
+	private Vector2f windVector = new Vector2f(0.0f, 0.0f);
 
 	private long ticksUntilStrengthChange;
 
@@ -47,8 +50,6 @@ public class PrecipitationManagerImpl implements IPrecipitationManager
 	public PrecipitationManagerImpl(World world)
 	{
 		this.world = world;
-
-		this.strength = PrecipitationStrength.LIGHT;
 	}
 
 	@Override
@@ -236,6 +237,9 @@ public class PrecipitationManagerImpl implements IPrecipitationManager
 
 		this.strength = PrecipitationStrength.VALUES[this.world.rand.nextInt(PrecipitationStrength.VALUES.length)];
 
+		this.windVector.x = ((this.world.rand.nextFloat() * 2.0f) - 1.0f) * 1.2f;
+		this.windVector.y = ((this.world.rand.nextFloat() * 2.0f) - 1.0f) * 1.2f;
+
 		WorldInfo info = this.world.getWorldInfo();
 		info.setRaining(true);
 		info.setCleanWeatherTime(duration);
@@ -296,11 +300,19 @@ public class PrecipitationManagerImpl implements IPrecipitationManager
 	}
 
 	@Override
+	public Vector2f getWindVector()
+	{
+		return this.windVector;
+	}
+
+	@Override
 	public NBTTagCompound serializeNBT()
 	{
 		NBTTagCompound tag = new NBTTagCompound();
 		tag.setString("Strength", this.strength.name());
 		tag.setLong("TicksUntilStrengthChange", this.ticksUntilStrengthChange);
+		tag.setFloat("WindX", this.windVector.x);
+		tag.setFloat("WindY", this.windVector.y);
 
 		return tag;
 	}
@@ -310,6 +322,7 @@ public class PrecipitationManagerImpl implements IPrecipitationManager
 	{
 		this.strength = PrecipitationStrength.lookup(nbt.getString("Strength"));
 		this.ticksUntilStrengthChange = nbt.getLong("TicksUntilStrengthChange");
+		this.windVector = new Vector2f(nbt.getFloat("WindX"), nbt.getFloat("WindY"));
 	}
 
 	public static class Storage implements Capability.IStorage<IPrecipitationManager>

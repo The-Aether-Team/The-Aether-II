@@ -21,6 +21,7 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.IRenderHandler;
 
+import javax.vecmath.Vector2f;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -116,6 +117,8 @@ public class RenderWorldPrecipitation extends IRenderHandler
 		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
 
 		IPrecipitationManager precipitation = world.getCapability(AetherCapabilities.PRECIPITATION_MANAGER, null);
+
+		Vector2f velocity = precipitation.getWindVector();
 
 		for (int z2 = entityZ - radius; z2 <= entityZ + radius; ++z2)
 		{
@@ -255,14 +258,25 @@ public class RenderWorldPrecipitation extends IRenderHandler
 							float blue = ((color & 0xFF00) >> 8) / 255.0f;
 							float green = (color & 0xFF) / 255.0f;
 
-							buffer.pos((double) x2 - rainX + 0.5D, (double) yMax, (double) z2 - rainY + 0.5D).tex(0.0D, (double) yMin * 0.25D + textureVOffset)
-									.color(red, blue, green, f4).lightmap(lightU, lightV).endVertex();
-							buffer.pos((double) x2 + rainX + 0.5D, (double) yMax, (double) z2 + rainY + 0.5D).tex(1.0D, (double) yMin * 0.25D + textureVOffset)
-									.color(red, blue, green, f4).lightmap(lightU, lightV).endVertex();
-							buffer.pos((double) x2 + rainX + 0.5D, (double) yMin, (double) z2 + rainY + 0.5D).tex(1.0D, (double) yMax * 0.25D + textureVOffset)
-									.color(red, blue, green, f4).lightmap(lightU, lightV).endVertex();
-							buffer.pos((double) x2 - rainX + 0.5D, (double) yMin, (double) z2 - rainY + 0.5D).tex(0.0D, (double) yMax * 0.25D + textureVOffset)
-									.color(red, blue, green, f4).lightmap(lightU, lightV).endVertex();
+							buffer.pos((double) x2 - rainX + 0.5D, (double) yMax, (double) z2 - rainY + 0.5D)
+									.tex(0.0D, (double) yMin * 0.25D + textureVOffset)
+									.color(red, blue, green, f4)
+									.lightmap(lightU, lightV).endVertex();
+
+							buffer.pos((double) x2 + rainX + 0.5D, (double) yMax, (double) z2 + rainY + 0.5D)
+									.tex(1.0D, (double) yMin * 0.25D + textureVOffset)
+									.color(red, blue, green, f4)
+									.lightmap(lightU, lightV).endVertex();
+
+							buffer.pos((double) x2 + rainX + 0.5D + velocity.x, (double) yMin, (double) z2 + rainY + 0.5D + velocity.y)
+									.tex(1.0D, (double) yMax * 0.25D + textureVOffset)
+									.color(red, blue, green, f4)
+									.lightmap(lightU, lightV).endVertex();
+
+							buffer.pos((double) x2 - rainX + 0.5D + velocity.x, (double) yMin, (double) z2 - rainY + 0.5D + velocity.y)
+									.tex(0.0D, (double) yMax * 0.25D + textureVOffset)
+									.color(red, blue, green, f4)
+									.lightmap(lightU, lightV).endVertex();
 						}
 					}
 				}
