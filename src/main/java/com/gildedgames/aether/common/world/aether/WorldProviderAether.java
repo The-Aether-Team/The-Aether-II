@@ -1,6 +1,8 @@
 package com.gildedgames.aether.common.world.aether;
 
+import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.util.OpenSimplexNoise;
+import com.gildedgames.aether.api.world.islands.precipitation.IPrecipitationManager;
 import com.gildedgames.aether.client.renderer.world.RenderWorldPrecipitation;
 import com.gildedgames.aether.client.renderer.world.RenderWorldSkybox;
 import com.gildedgames.aether.common.blocks.BlocksAether;
@@ -17,6 +19,7 @@ import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProviderSurface;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
@@ -24,6 +27,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class WorldProviderAether extends WorldProviderSurface
 {
+	@Override
+	public void updateWeather()
+	{
+		IPrecipitationManager precip = this.world.getCapability(AetherCapabilities.PRECIPITATION_MANAGER, null);
+
+		if (precip != null)
+		{
+			precip.tick();
+		}
+	}
 
 	private final float[] sunriseSunsetColors = new float[4];
 
@@ -87,34 +100,22 @@ public class WorldProviderAether extends WorldProviderSurface
 	}
 
 	@Override
-	public void calculateInitialWeather()
-	{
-
-	}
-
-	@Override
-	public void updateWeather()
-	{
-
-	}
-
-	@Override
 	public boolean canSnowAt(final BlockPos pos, final boolean checkLight)
 	{
+		if (!super.canSnowAt(pos, checkLight))
+		{
+			return false;
+		}
+
 		IBlockState down = this.world.getBlockState(pos.down());
 
-		return super.canSnowAt(pos, checkLight) && down != BlocksAether.highlands_ice.getDefaultState()
-				&& down != BlocksAether.highlands_packed_ice.getDefaultState();
+		return down != BlocksAether.highlands_ice.getDefaultState() && down != BlocksAether.highlands_packed_ice.getDefaultState();
 	}
 
+	// Disables Minecraft weather mechanics for the dimension
+	// See PrecipitationManagerImpl#updateBlocks
 	@Override
-	public boolean canDoLightning(final net.minecraft.world.chunk.Chunk chunk)
-	{
-		return false;
-	}
-
-	@Override
-	public boolean canDoRainSnowIce(final net.minecraft.world.chunk.Chunk chunk)
+	public boolean canDoRainSnowIce(final Chunk chunk)
 	{
 		return false;
 	}

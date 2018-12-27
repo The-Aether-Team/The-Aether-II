@@ -3,7 +3,6 @@ package com.gildedgames.aether.common.world.aether.island.gen.highlands;
 import com.gildedgames.aether.api.util.NoiseUtil;
 import com.gildedgames.aether.api.util.OpenSimplexNoise;
 import com.gildedgames.aether.api.world.islands.IIslandData;
-import com.gildedgames.aether.api.world.islands.IIslandDataPartial;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandChunkMaskTransformer;
@@ -40,7 +39,7 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 				fractionX * ((1.0 - fractionZ) * c + fractionZ * d);
 	}
 
-	public static double[] generateNoise(final OpenSimplexNoise noise, final IIslandDataPartial island, final int chunkX, final int chunkZ)
+	public static double[] generateNoise(final OpenSimplexNoise noise, final IIslandData island, final int chunkX, final int chunkZ)
 	{
 		final double posX = chunkX * 16;
 		final double posZ = chunkZ * 16;

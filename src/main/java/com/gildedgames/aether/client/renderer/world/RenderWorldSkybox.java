@@ -1,10 +1,9 @@
 package com.gildedgames.aether.client.renderer.world;
 
-import com.gildedgames.aether.api.world.islands.IIslandDataPartial;
-import com.gildedgames.aether.api.world.islands.precipitation.PrecipitationType;
+import com.gildedgames.aether.api.AetherCapabilities;
+import com.gildedgames.aether.api.world.islands.precipitation.IPrecipitationManager;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.ReflectionAether;
-import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -13,7 +12,6 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.client.IRenderHandler;
 import org.lwjgl.opengl.GL11;
@@ -75,6 +73,7 @@ public class RenderWorldSkybox extends IRenderHandler
 		BufferBuilder builder = tessellator.getBuffer();
 
 		builder.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_LMAP_COLOR);
+
 		builder.pos(-0.5f * f, -0.5f * f, 0.5f * f).tex(0.5f, 0.75f).lightmap(h, k).color(b, b, b, a).endVertex();
 		builder.pos(0.5f * f, -0.5f * f, 0.5f * f).tex(0.5f, 0.5f).lightmap(h, k).color(b, b, b, a).endVertex();
 		builder.pos(0.5f * f, -0.5f * f, -0.5f * f).tex(0.25f, 0.5f).lightmap(h, k).color(b, b, b, a).endVertex();
@@ -137,11 +136,16 @@ public class RenderWorldSkybox extends IRenderHandler
 
 	private void updateLightmap(Minecraft mc, float partialTicks)
 	{
-		BlockPos pos = mc.player.getPosition();
+		IPrecipitationManager precipitation = Minecraft.getMinecraft().world.getCapability(AetherCapabilities.PRECIPITATION_MANAGER, null);
 
-		IIslandDataPartial island = IslandHelper.getPartial(mc.world, pos.getX() >> 4, pos.getZ() >> 4);
+		if (precipitation == null)
+		{
+			this.skyDarkness = 0.0f;
 
-		if (island == null || island.getPrecipitation().getType() == PrecipitationType.NONE)
+			return;
+		}
+
+		if (!mc.world.isRaining())
 		{
 			this.skyDarkness -= this.getUpdateStep() * TRANSITION_PER_TICK;
 
@@ -152,7 +156,7 @@ public class RenderWorldSkybox extends IRenderHandler
 		}
 		else
 		{
-			float target = island.getPrecipitation().getSkyDarkness();
+			float target = precipitation.getSkyDarkness();
 
 			if (target > this.skyDarkness)
 			{

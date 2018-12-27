@@ -1,6 +1,7 @@
 package com.gildedgames.aether.client.renderer;
 
-import com.gildedgames.aether.api.world.islands.IIslandDataPartial;
+import com.gildedgames.aether.api.AetherCapabilities;
+import com.gildedgames.aether.api.world.islands.precipitation.IPrecipitationManager;
 import com.gildedgames.aether.client.gui.overlays.IOverlay;
 import com.gildedgames.aether.client.gui.overlays.PortalOverlay;
 import com.gildedgames.aether.client.gui.overlays.SwetOverlay;
@@ -9,7 +10,6 @@ import com.gildedgames.aether.client.renderer.entities.living.RenderPlayerHelper
 import com.gildedgames.aether.client.renderer.world.RenderWorldPrecipitation;
 import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
-import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import com.gildedgames.orbis_api.preparation.IPrepManager;
 import com.gildedgames.orbis_api.preparation.impl.util.PrepHelper;
 import com.google.common.collect.Lists;
@@ -21,7 +21,6 @@ import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.client.IRenderHandler;
@@ -123,33 +122,17 @@ public class ClientRenderHandler
 			return;
 		}
 
-		IPrepManager manager = PrepHelper.getManager(Minecraft.getMinecraft().world);
-
-		if (manager == null)
+		if (Minecraft.getMinecraft().world.getWorldInfo().isRaining())
 		{
-			return;
+			IPrecipitationManager precipitation = Minecraft.getMinecraft().world.getCapability(AetherCapabilities.PRECIPITATION_MANAGER, null);
+
+			if (precipitation != null)
+			{
+				event.getLeft().add("");
+				event.getLeft().add(TextFormatting.DARK_AQUA + "[" + TextFormatting.AQUA + "Aether Dimension" + TextFormatting.DARK_AQUA +"]");
+				event.getLeft().add("- Precipitation: " + precipitation.getStrength().name());
+			}
 		}
-
-		BlockPos pos = Minecraft.getMinecraft().player.getPosition();
-
-		int loaded = manager.getAccess().getLoadedSectors().size();
-
-		event.getLeft().add("");
-		event.getLeft().add(TextFormatting.AQUA + "Aether: " + "Sector Access " + TextFormatting.GREEN + "(CLIENT)");
-		event.getLeft().add("- Loaded Sectors: " + loaded);
-
-		IIslandDataPartial data = IslandHelper.getPartial(Minecraft.getMinecraft().world, pos.getX() >> 4, pos.getZ() >> 4);
-
-		if (data == null)
-		{
-			event.getLeft().add(" - Waiting for sector data from server...");
-			return;
-		}
-
-		event.getLeft().add(" - Current Sector @ " + data.getParentSectorData().getSectorX() + ", " + data.getParentSectorData().getSectorY());
-		event.getLeft().add("  - Island Bounds: (" + data.getBounds().getMinX() + ", " + data.getBounds().getMinY() + ", " + data.getBounds().getMinZ() + ")"
-				+ " -> (" + data.getBounds().getMaxX() + ", " + data.getBounds().getMaxY() + ", " + data.getBounds().getMaxZ() + ")");
-		event.getLeft().add("  - Precipitation: " + data.getPrecipitation().getType().name() + " (" + data.getPrecipitation().getStrength().name() + ")");
 	}
 
 	@SubscribeEvent

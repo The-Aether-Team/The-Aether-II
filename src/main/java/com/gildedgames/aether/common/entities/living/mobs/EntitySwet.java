@@ -1,6 +1,8 @@
 package com.gildedgames.aether.common.entities.living.mobs;
 
+import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.world.islands.IIslandData;
+import com.gildedgames.aether.api.world.islands.precipitation.IPrecipitationManager;
 import com.gildedgames.aether.api.world.islands.precipitation.PrecipitationType;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
@@ -231,9 +233,7 @@ public class EntitySwet extends EntityExtendedMob
 	@Override
 	public void onUpdate()
 	{
-		IIslandData island = IslandHelper.get(this.world, this.chunkCoordX, this.chunkCoordZ);
-
-		if (this.isInWater() || (island != null && island.getPrecipitation().getType() == PrecipitationType.RAIN && this.world
+		if (this.isInWater() || (this.world.isRaining() && this.world
 				.canSeeSky(new BlockPos(this.posX, this.getEntityBoundingBox().minY, this.posZ))))
 		{
 			this.timeStarved = -this.rand.nextInt(60);

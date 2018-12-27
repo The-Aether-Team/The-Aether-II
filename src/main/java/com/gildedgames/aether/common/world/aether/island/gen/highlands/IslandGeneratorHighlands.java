@@ -3,7 +3,6 @@ package com.gildedgames.aether.common.world.aether.island.gen.highlands;
 import com.gildedgames.aether.api.util.NoiseUtil;
 import com.gildedgames.aether.api.util.OpenSimplexNoise;
 import com.gildedgames.aether.api.world.islands.IIslandData;
-import com.gildedgames.aether.api.world.islands.IIslandDataPartial;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.common.util.ChunkNoiseGenerator;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
@@ -28,7 +27,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 		this.v = variables;
 	}
 
-	public static ChunkNoiseGenerator generateNoise(OpenSimplexNoise noise, IIslandDataPartial island, int chunkX, int chunkZ, int offset, double scale)
+	public static ChunkNoiseGenerator generateNoise(OpenSimplexNoise noise, IIslandData island, int chunkX, int chunkZ, int offset, double scale)
 	{
 		return new ChunkNoiseGenerator(noise, chunkX * 16, chunkZ * 16, 4, 5, island.getBounds().getMinX() + offset, island.getBounds().getMinZ() + offset, scale)
 		{

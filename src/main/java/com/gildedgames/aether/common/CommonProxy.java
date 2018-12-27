@@ -3,7 +3,6 @@ package com.gildedgames.aether.common;
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.IAetherServices;
 import com.gildedgames.aether.api.net.IGildedGamesAccountApi;
-import com.gildedgames.aether.common.commands.CommandIsland;
 import com.gildedgames.aether.common.events.PostAetherTravelEvent;
 import com.gildedgames.aether.common.network.api.GildedGamesAccountApiImpl;
 import com.gildedgames.aether.common.registry.ContentRegistry;
@@ -100,7 +99,7 @@ public class CommonProxy implements IAetherServices
 
 	public void onServerStarting(FMLServerStartingEvent event)
 	{
-		event.registerServerCommand(new CommandIsland());
+
 	}
 
 	public void spawnJumpParticles(final World world, final double x, final double y, final double z, final double radius, final int quantity)

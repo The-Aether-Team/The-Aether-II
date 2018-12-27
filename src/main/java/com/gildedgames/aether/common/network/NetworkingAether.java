@@ -67,8 +67,6 @@ public class NetworkingAether
 		instance.registerMessage(PacketNavigateBack.HandlerClient.class, PacketNavigateBack.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketAdvance.HandlerClient.class, PacketAdvance.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketCurrencyModule.HandlerClient.class, PacketCurrencyModule.class, discriminant++, Side.CLIENT);
-		instance.registerMessage(PacketUnloadSector.HandlerClient.class, PacketUnloadSector.class, discriminant++, Side.CLIENT);
-		instance.registerMessage(PacketPartialSectorData.HandlerClient.class, PacketPartialSectorData.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketUpdatePrecipitation.HandlerClient.class, PacketUpdatePrecipitation.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketProgressBooleanData.HandlerClient.class, PacketProgressBooleanData.class, discriminant++, Side.CLIENT);
 

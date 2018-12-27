@@ -6,6 +6,7 @@ import com.gildedgames.aether.api.entity.IEntityInfo;
 import com.gildedgames.aether.api.entity.spawning.ISpawningInfo;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.world.ISpawnSystem;
+import com.gildedgames.aether.api.world.islands.precipitation.IPrecipitationManager;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.info.EntityInfo;
 import com.gildedgames.aether.common.capabilities.entity.info.EntityInfoProvider;
@@ -15,10 +16,13 @@ import com.gildedgames.aether.common.capabilities.entity.spawning.EntitySpawning
 import com.gildedgames.aether.common.capabilities.entity.spawning.EntitySpawningInfoProvider;
 import com.gildedgames.aether.common.capabilities.world.chunk.PlacementFlagCapability;
 import com.gildedgames.aether.common.capabilities.world.chunk.PlacementFlagProvider;
+import com.gildedgames.aether.common.capabilities.world.precipitation.PrecipitationCapabilityProvider;
+import com.gildedgames.aether.common.capabilities.world.precipitation.PrecipitationManagerImpl;
 import com.gildedgames.aether.common.world.spawning.SpawnSystem;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -36,6 +40,7 @@ public class CapabilityManagerAether
 		CapabilityManager.INSTANCE.register(ISpawnSystem.class, new SpawnSystem.Storage(), SpawnSystem::new);
 		CapabilityManager.INSTANCE.register(IEntityInfo.class, new EntityInfo.Storage(), EntityInfo::new);
 		CapabilityManager.INSTANCE.register(IPlacementFlagCapability.class, new PlacementFlagCapability.Storage(), PlacementFlagCapability::new);
+		CapabilityManager.INSTANCE.register(IPrecipitationManager.class, new PrecipitationManagerImpl.Storage(), PrecipitationManagerImpl::new);
 	}
 
 	@SubscribeEvent

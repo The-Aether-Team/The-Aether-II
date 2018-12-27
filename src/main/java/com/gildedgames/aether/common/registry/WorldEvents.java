@@ -6,6 +6,8 @@ import com.gildedgames.aether.api.world.ISpawnSystem;
 import com.gildedgames.aether.api.world.PosCondition;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.capabilities.world.precipitation.PrecipitationCapabilityProvider;
+import com.gildedgames.aether.common.capabilities.world.precipitation.PrecipitationManagerImpl;
 import com.gildedgames.aether.common.entities.living.mobs.*;
 import com.gildedgames.aether.common.entities.living.passive.*;
 import com.gildedgames.aether.common.registry.content.BiomesAether;
@@ -37,6 +39,8 @@ public class WorldEvents
 	@SubscribeEvent
 	public static void onWorldAttachCapabilities(AttachCapabilitiesEvent<World> event)
 	{
+		event.addCapability(AetherCore.getResource("AetherPrecipitation"), new PrecipitationCapabilityProvider(new PrecipitationManagerImpl(event.getObject())));
+
 		if (event.getObject().isRemote)
 		{
 			return;

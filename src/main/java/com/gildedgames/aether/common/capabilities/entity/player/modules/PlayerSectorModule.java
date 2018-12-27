@@ -3,8 +3,6 @@ package com.gildedgames.aether.common.capabilities.entity.player.modules;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.network.packets.PacketPartialSectorData;
-import com.gildedgames.aether.common.network.packets.PacketUnloadSector;
 import com.gildedgames.aether.common.world.aether.prep.PrepSectorDataAether;
 import com.gildedgames.orbis_api.preparation.IPrepManager;
 import com.gildedgames.orbis_api.preparation.IPrepRegistryEntry;
@@ -160,8 +158,6 @@ public class PlayerSectorModule extends PlayerAetherModule
 			if (loadEntry.sector != null)
 			{
 				loadEntry.sector.removeWatchingPlayer(this.getEntity().getEntityId());
-
-				NetworkingAether.sendPacketToPlayer(new PacketUnloadSector(loadEntry.sector.getData()), (EntityPlayerMP) this.getEntity());
 			}
 
 			this.map.remove(loadEntry.sectorX, loadEntry.sectorZ);
@@ -210,8 +206,6 @@ public class PlayerSectorModule extends PlayerAetherModule
 				if (watched.watching)
 				{
 					sector.addWatchingPlayer(this.getEntity().getEntityId());
-
-					NetworkingAether.sendPacketToPlayer(new PacketPartialSectorData((PrepSectorDataAether) sector.getData()), (EntityPlayerMP) this.getEntity());
 
 					manager.getAccess().retainSector(sector);
 				}

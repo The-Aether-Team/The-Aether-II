@@ -76,5 +76,4 @@ public abstract class BiomeAetherBase extends Biome
 	public abstract float createForestTreeCountModifier(Random rand);
 
 	public abstract float createOpenAreaDecorationGenChance(Random rand);
-
 }

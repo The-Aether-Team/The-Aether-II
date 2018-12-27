@@ -1,8 +1,5 @@
 package com.gildedgames.aether.common.entities.ai;
 
-import com.gildedgames.aether.api.world.islands.IIslandData;
-import com.gildedgames.aether.api.world.islands.precipitation.PrecipitationType;
-import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.pathfinding.PathNavigateGround;
@@ -22,9 +19,7 @@ public class EntityAIRestrictRain extends EntityAIBase
 	@Override
 	public boolean shouldExecute()
 	{
-		IIslandData island = IslandHelper.get(this.entity.world, this.entity.chunkCoordX, this.entity.chunkCoordZ);
-
-		return island != null && island.getPrecipitation().getType() == PrecipitationType.RAIN;
+		return this.entity.world.isRaining();
 	}
 
 	/**

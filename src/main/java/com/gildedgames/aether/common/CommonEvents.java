@@ -504,6 +504,11 @@ public class CommonEvents
 		{
 			IPrepManager manager = PrepHelper.getManager(event.getWorld());
 
+			if (manager == null)
+			{
+				return;
+			}
+
 			try
 			{
 				manager.getAccess().provideSectorForChunk(0, 0, false).get();

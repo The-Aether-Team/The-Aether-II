@@ -17,8 +17,10 @@ import com.gildedgames.orbis_api.util.mc.NBT;
 import com.gildedgames.orbis_api.util.mc.NBTHelper;
 import com.google.common.collect.Lists;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 
 import javax.annotation.Nonnull;
 import java.util.Collection;
@@ -26,8 +28,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class IslandData extends IslandDataPartial implements IIslandData
+public class IslandData implements IIslandData
 {
+	private final IPrepSectorData parent;
+
+	private final World world;
+
 	private BlockPos respawnPoint;
 
 	private long seed;
@@ -44,18 +50,27 @@ public class IslandData extends IslandDataPartial implements IIslandData
 
 	private ChunkMap<List<PlacedBlueprint>> placedBlueprints = new ChunkMap<>();
 
+	private IIslandBounds bounds;
+
+	private BiomeAetherBase biome;
+
 	public IslandData(final World world, final IPrepSectorData parent, final IIslandBounds bounds, final BiomeAetherBase biome, final long seed)
 	{
-		super(world, parent, bounds, biome);
+		this.world = world;
+		this.parent = parent;
 
 		this.seed = seed;
+
+		this.bounds = bounds;
+		this.biome = biome;
 
 		this.initProperties(new Random(seed));
 	}
 
 	public IslandData(World world, final IPrepSectorData parent, NBTTagCompound tag)
 	{
-		super(world, parent);
+		this.world = world;
+		this.parent = parent;
 
 		this.read(tag);
 	}
@@ -159,6 +174,26 @@ public class IslandData extends IslandDataPartial implements IIslandData
 		return this.placedBlueprints.get(chunkX, chunkZ);
 	}
 
+	@Nonnull
+	@Override
+	public IIslandBounds getBounds()
+	{
+		return this.bounds;
+	}
+
+	@Nonnull
+	@Override
+	public Biome getBiome()
+	{
+		return this.biome;
+	}
+
+	@Override
+	public void tick()
+	{
+
+	}
+
 	@Override
 	public IPrepSectorData getParentSectorData()
 	{
@@ -168,22 +203,22 @@ public class IslandData extends IslandDataPartial implements IIslandData
 	@Override
 	public void write(final NBTTagCompound tag)
 	{
-		super.write(tag);
-
-		NBTFunnel funnel = new NBTFunnel(tag);
-
+		tag.setTag("Bounds", this.bounds.serialize());
+		tag.setString("BiomeID", this.biome.getRegistryName().toString());
 		tag.setLong("Seed", this.seed);
 		tag.setTag("RespawnPoint", NBTHelper.writeBlockPos(this.respawnPoint));
 
-		funnel.setLongMap("placedBlueprints", this.placedBlueprints.getInnerMap(), NBTFunnel.listSetter());
+		NBTFunnel funnel = new NBTFunnel(tag);
 
+		funnel.setLongMap("placedBlueprints", this.placedBlueprints.getInnerMap(), NBTFunnel.listSetter());
 		funnel.setList("Components", this.components);
 	}
 
 	@Override
 	public void read(final NBTTagCompound tag)
 	{
-		super.read(tag);
+		this.bounds = new IslandBounds(tag.getCompoundTag("Bounds"));
+		this.biome = (BiomeAetherBase) Biome.REGISTRY.getObject(new ResourceLocation(tag.getString("BiomeID")));
 
 		final NBTFunnel funnel = new NBTFunnel(tag);
 
