@@ -1,5 +1,7 @@
 package com.gildedgames.aether.client.renderer.particles;
 
+import com.gildedgames.aether.api.AetherCapabilities;
+import com.gildedgames.aether.api.world.islands.precipitation.IPrecipitationManager;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import net.minecraft.block.Block;
@@ -105,6 +107,21 @@ public class ParticleLeaf extends Particle
 		this.motionY = motionY;
 		this.motionX = motionX;
 		this.motionZ = motionZ;
+
+		if (worldIn.isRaining())
+		{
+			IPrecipitationManager precipitation = worldIn.getCapability(AetherCapabilities.PRECIPITATION_MANAGER, null);
+
+			if (precipitation != null)
+			{
+				float strength = precipitation.getStrength().getWindForceMultiplier();
+
+				this.motionX += precipitation.getWindVector().x * strength;
+				this.motionZ += precipitation.getWindVector().y * strength;
+
+				this.motionY += -strength * 0.5f;
+			}
+		}
 
 		this.mulRotY = (this.rand.nextFloat() * 100) * (float) (this.motionY);
 		this.mulRotX = (this.rand.nextFloat() * 100) * (float) (this.motionY);

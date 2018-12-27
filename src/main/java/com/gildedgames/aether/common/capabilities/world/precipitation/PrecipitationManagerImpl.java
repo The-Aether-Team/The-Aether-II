@@ -269,9 +269,9 @@ public class PrecipitationManagerImpl implements IPrecipitationManager
 			case LIGHT:
 				return 0.15f;
 			case HEAVY:
-				return 0.35f;
+				return 0.3f;
 			case STORM:
-				return 0.7f;
+				return 0.6f;
 		}
 
 		return 0.0f;
