@@ -634,6 +634,7 @@ public class ItemModelsAether
 
 		registerItemModels(BlocksAether.ice_crystal, "highlands_ice_crystal");
 		registerItemModels(BlocksAether.candy_cane_block, "candy_cane_block");
+		registerItemModels(BlocksAether.candy_cane_wall, "aether_wall/candy_cane_wall");
 	}
 
 	private static void registerItemModels(final Block block, final String path)

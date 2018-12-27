@@ -1,31 +1,114 @@
 package com.gildedgames.aether.common.blocks;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.blocks.construction.*;
+import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
+import com.gildedgames.aether.common.blocks.construction.BlockAmbrosiumTorch;
+import com.gildedgames.aether.common.blocks.construction.BlockOutpostCampfire;
+import com.gildedgames.aether.common.blocks.construction.BlockRockGlass;
+import com.gildedgames.aether.common.blocks.construction.BlockRockGlassPane;
+import com.gildedgames.aether.common.blocks.construction.BlockRockGlassTranslucent;
+import com.gildedgames.aether.common.blocks.construction.BlockScatterglassSlab;
+import com.gildedgames.aether.common.blocks.construction.BlockScatterglassStairs;
+import com.gildedgames.aether.common.blocks.construction.BlockSkyrootFence;
+import com.gildedgames.aether.common.blocks.construction.BlockSkyrootFenceGate;
+import com.gildedgames.aether.common.blocks.construction.BlockSkyrootPlanks;
+import com.gildedgames.aether.common.blocks.construction.BlockSkyrootTrapDoor;
+import com.gildedgames.aether.common.blocks.construction.BlockTherawoodPlanks;
 import com.gildedgames.aether.common.blocks.construction.redstone.BlockHolystoneButton;
 import com.gildedgames.aether.common.blocks.construction.redstone.BlockHolystonePressurePlate;
 import com.gildedgames.aether.common.blocks.construction.redstone.BlockSkyrootButton;
 import com.gildedgames.aether.common.blocks.construction.redstone.BlockSkyrootPressurePlate;
 import com.gildedgames.aether.common.blocks.construction.signs.BlockStandingSkyrootSign;
 import com.gildedgames.aether.common.blocks.construction.signs.BlockWallSkyrootSign;
+import com.gildedgames.aether.common.blocks.construction.walls.BlockCandyCaneWall;
 import com.gildedgames.aether.common.blocks.construction.walls.BlockCustomWall;
 import com.gildedgames.aether.common.blocks.construction.walls.BlockScatterglassWall;
 import com.gildedgames.aether.common.blocks.construction.walls.BlockSkyrootWall;
-import com.gildedgames.aether.common.blocks.containers.*;
-import com.gildedgames.aether.common.blocks.decorative.*;
+import com.gildedgames.aether.common.blocks.containers.BlockAetherCraftingTable;
+import com.gildedgames.aether.common.blocks.containers.BlockAetherTeleporter;
+import com.gildedgames.aether.common.blocks.containers.BlockAltar;
+import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
+import com.gildedgames.aether.common.blocks.containers.BlockIcestoneCooler;
+import com.gildedgames.aether.common.blocks.containers.BlockIncubator;
+import com.gildedgames.aether.common.blocks.containers.BlockMasonryBench;
+import com.gildedgames.aether.common.blocks.containers.BlockPresent;
+import com.gildedgames.aether.common.blocks.containers.BlockSkyrootChest;
+import com.gildedgames.aether.common.blocks.containers.BlockWildcard;
+import com.gildedgames.aether.common.blocks.decorative.BlockAgiositeDecorative;
+import com.gildedgames.aether.common.blocks.decorative.BlockCandyCane;
+import com.gildedgames.aether.common.blocks.decorative.BlockCustomPillar;
+import com.gildedgames.aether.common.blocks.decorative.BlockDarkSkyrootDecorative;
+import com.gildedgames.aether.common.blocks.decorative.BlockFadedHolystoneDecorative;
+import com.gildedgames.aether.common.blocks.decorative.BlockHellfirestoneDecorative;
+import com.gildedgames.aether.common.blocks.decorative.BlockHolystoneDecorative;
+import com.gildedgames.aether.common.blocks.decorative.BlockIcestoneBricksDecorative;
+import com.gildedgames.aether.common.blocks.decorative.BlockLightSkyrootDecorative;
+import com.gildedgames.aether.common.blocks.decorative.BlockRockGlassDecorative;
+import com.gildedgames.aether.common.blocks.decorative.BlockRockGlassPaneDecorative;
+import com.gildedgames.aether.common.blocks.decorative.BlockSentrystoneDecorative;
+import com.gildedgames.aether.common.blocks.decorative.BlockSentrystoneDecorativeLit;
+import com.gildedgames.aether.common.blocks.decorative.BlockSkyrootDecorative;
+import com.gildedgames.aether.common.blocks.decorative.BlockTherastoneDecorative;
+import com.gildedgames.aether.common.blocks.decorative.BlockTherawoodDecorative;
 import com.gildedgames.aether.common.blocks.multiblock.BlockMultiDummy;
 import com.gildedgames.aether.common.blocks.multiblock.BlockMultiDummyHalf;
-import com.gildedgames.aether.common.blocks.natural.*;
-import com.gildedgames.aether.common.blocks.natural.ores.*;
-import com.gildedgames.aether.common.blocks.natural.plants.*;
-import com.gildedgames.aether.common.blocks.util.*;
+import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
+import com.gildedgames.aether.common.blocks.natural.BlockAetherDirt;
+import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
+import com.gildedgames.aether.common.blocks.natural.BlockAetherLeaves;
+import com.gildedgames.aether.common.blocks.natural.BlockAetherLog;
+import com.gildedgames.aether.common.blocks.natural.BlockCloudwoolBlock;
+import com.gildedgames.aether.common.blocks.natural.BlockFerrosite;
+import com.gildedgames.aether.common.blocks.natural.BlockFerrositeSand;
+import com.gildedgames.aether.common.blocks.natural.BlockFloorObject;
+import com.gildedgames.aether.common.blocks.natural.BlockGoldenOakLog;
+import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
+import com.gildedgames.aether.common.blocks.natural.BlockIceCrystal;
+import com.gildedgames.aether.common.blocks.natural.BlockIcestoneBricks;
+import com.gildedgames.aether.common.blocks.natural.BlockMoaEgg;
+import com.gildedgames.aether.common.blocks.natural.BlockQuicksoil;
+import com.gildedgames.aether.common.blocks.natural.BlockRustedFerrosite;
+import com.gildedgames.aether.common.blocks.natural.BlockTheraDirt;
+import com.gildedgames.aether.common.blocks.natural.BlockTheraGrass;
+import com.gildedgames.aether.common.blocks.natural.ores.BlockAmbrosiumOre;
+import com.gildedgames.aether.common.blocks.natural.ores.BlockArkeniumOre;
+import com.gildedgames.aether.common.blocks.natural.ores.BlockGravititeOre;
+import com.gildedgames.aether.common.blocks.natural.ores.BlockIcestoneOre;
+import com.gildedgames.aether.common.blocks.natural.ores.BlockZaniteOre;
+import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
+import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherSapling;
+import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
+import com.gildedgames.aether.common.blocks.natural.plants.BlockBrettlPlant;
+import com.gildedgames.aether.common.blocks.natural.plants.BlockOrangeTree;
+import com.gildedgames.aether.common.blocks.natural.plants.BlockPlumproot;
+import com.gildedgames.aether.common.blocks.natural.plants.BlockTallAetherGrass;
+import com.gildedgames.aether.common.blocks.natural.plants.BlockValkyrieGrass;
+import com.gildedgames.aether.common.blocks.natural.plants.BlockWovenSticks;
+import com.gildedgames.aether.common.blocks.util.BlockBuilder;
+import com.gildedgames.aether.common.blocks.util.BlockCustomBed;
+import com.gildedgames.aether.common.blocks.util.BlockCustomBookshelf;
+import com.gildedgames.aether.common.blocks.util.BlockCustomCarpet;
+import com.gildedgames.aether.common.blocks.util.BlockCustomDoor;
+import com.gildedgames.aether.common.blocks.util.BlockCustomIce;
+import com.gildedgames.aether.common.blocks.util.BlockCustomLadder;
+import com.gildedgames.aether.common.blocks.util.BlockCustomPackedIce;
+import com.gildedgames.aether.common.blocks.util.BlockCustomSlab;
+import com.gildedgames.aether.common.blocks.util.BlockCustomSnow;
+import com.gildedgames.aether.common.blocks.util.BlockCustomSnowBlock;
+import com.gildedgames.aether.common.blocks.util.BlockCustomStairs;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.blocks.ItemBlockMultiName;
 import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.BlockButtonStone;
-import net.minecraft.block.BlockLog;
+import net.minecraft.block.BlockWall;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -35,11 +118,6 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
-
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 
 @Mod.EventBusSubscriber()
 public class BlocksAether
@@ -351,35 +429,37 @@ public class BlocksAether
 
 	private static final Set<Block> registeredBlocks = new HashSet<>();
 
-	public static BlockCustomSnowBlock highlands_snow = new BlockCustomSnowBlock();
+	public static final BlockCustomSnowBlock highlands_snow = new BlockCustomSnowBlock();
 
-	public static BlockCustomSnow highlands_snow_layer = new BlockCustomSnow();
+	public static final BlockCustomSnow highlands_snow_layer = new BlockCustomSnow();
 
-	public static Block highlands_ice = new BlockCustomIce().setHardness(0.5F).setLightOpacity(3);
+	public static final Block highlands_ice = new BlockCustomIce().setHardness(0.5F).setLightOpacity(3);
 
-	public static Block highlands_packed_ice = new BlockCustomPackedIce().setHardness(0.5F);
+	public static final Block highlands_packed_ice = new BlockCustomPackedIce().setHardness(0.5F);
 
-	public static Block therawood_decorative = new BlockTherawoodDecorative();
+	public static final Block therawood_decorative = new BlockTherawoodDecorative();
 
-	public static BlockCustomCarpet cloudwool_carpet = new BlockCustomCarpet();
+	public static final BlockCustomCarpet cloudwool_carpet = new BlockCustomCarpet();
 
-	public static Block skyroot_bookshelf = new BlockCustomBookshelf(Material.WOOD, SoundType.WOOD);
+	public static final Block skyroot_bookshelf = new BlockCustomBookshelf(Material.WOOD, SoundType.WOOD);
 
-	public static Block holystone_bookshelf = new BlockCustomBookshelf(Material.ROCK, SoundType.STONE);
+	public static final Block holystone_bookshelf = new BlockCustomBookshelf(Material.ROCK, SoundType.STONE);
 
-	public static BlockOutpostCampfire outpost_campfire = new BlockOutpostCampfire(Material.IRON);
+	public static final BlockOutpostCampfire outpost_campfire = new BlockOutpostCampfire(Material.IRON);
 
-	public static Block skyroot_decorative = new BlockSkyrootDecorative();
+	public static final Block skyroot_decorative = new BlockSkyrootDecorative();
 
-	public static Block light_skyroot_decorative = new BlockLightSkyrootDecorative();
+	public static final Block light_skyroot_decorative = new BlockLightSkyrootDecorative();
 
-	public static Block dark_skyroot_decorative = new BlockDarkSkyrootDecorative();
+	public static final Block dark_skyroot_decorative = new BlockDarkSkyrootDecorative();
 
-	public static BlockAetherTeleporter aether_teleporter = new BlockAetherTeleporter();
+	public static final BlockAetherTeleporter aether_teleporter = new BlockAetherTeleporter();
 
-	public static BlockIceCrystal ice_crystal = new BlockIceCrystal();
+	public static final BlockIceCrystal ice_crystal = new BlockIceCrystal();
 
-	public static Block candy_cane_block = new BlockCandyCane();
+	public static final Block candy_cane_block = new BlockCandyCane();
+
+	public static final BlockCustomWall candy_cane_wall = new BlockCandyCaneWall(candy_cane_block.getDefaultState(), 0.5f, 5.0f);
 
 	@SubscribeEvent
 	public static void onRegisterBlocks(final RegistryEvent.Register<Block> event)
@@ -629,7 +709,8 @@ public class BlocksAether
         r.register("hellfirestone_brick_decorative", hellfirestone_brick_decorative.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
         r.register("hellfirestone_lantern", hellfirestone_lantern.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
         r.register("hellfirestone_pillar", hellfirestone_pillar.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
-		r.register("candy_cane_block", candy_cane_block.setCreativeTab(CreativeTabsAether.DECORATIVE_BLOCKS));
+		r.register("candy_cane_block", candy_cane_block.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
+		r.register("candy_cane_wall", candy_cane_wall.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 
 		r.register("plumproot", plumproot.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
@@ -799,6 +880,7 @@ public class BlocksAether
 		holystone_bookshelf.setHarvestLevel("pickaxe", 0);
 		skyroot_bookshelf.setHarvestLevel("axe", 0);
 		candy_cane_block.setHarvestLevel("pickaxe", 0);
+		candy_cane_wall.setHarvestLevel("pickaxe", 0);
 	}
 
 	public static Collection<Block> getRegisteredBlocks()
