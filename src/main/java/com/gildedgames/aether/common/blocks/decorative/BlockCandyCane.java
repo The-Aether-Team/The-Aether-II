@@ -1,11 +1,6 @@
 package com.gildedgames.aether.common.blocks.decorative;
 
-import java.util.Random;
-
-import com.gildedgames.aether.api.world.islands.precipitation.PrecipitationType;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.util.helpers.IslandHelper;
-
 import net.minecraft.block.BlockRotatedPillar;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
@@ -25,6 +20,8 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class BlockCandyCane extends BlockRotatedPillar
 {
@@ -47,8 +44,8 @@ public class BlockCandyCane extends BlockRotatedPillar
     public void onEntityWalk(World world, BlockPos pos, Entity entity)
     {
         super.onEntityWalk(world, pos, entity);
-        if(world.isRaining() || (IslandHelper.getPartial(world, entity.chunkCoordX, entity.chunkCoordZ) != null &&
-                IslandHelper.getPartial(world, entity.chunkCoordX, entity.chunkCoordZ).getPrecipitation().getType() != PrecipitationType.NONE))
+
+        if (world.isRaining())
         {
             entity.motionX *= 0.1D;
             entity.motionZ *= 0.1D;

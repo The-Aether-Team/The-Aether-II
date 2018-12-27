@@ -27,8 +27,8 @@ public class BlockCandyCaneWall extends BlockCustomWall {
     public void onEntityWalk(World world, BlockPos pos, Entity entity)
     {
         super.onEntityWalk(world, pos, entity);
-        if(world.isRaining() || (IslandHelper.getPartial(world, entity.chunkCoordX, entity.chunkCoordZ) != null &&
-                IslandHelper.getPartial(world, entity.chunkCoordX, entity.chunkCoordZ).getPrecipitation().getType() != PrecipitationType.NONE))
+
+        if (world.isRaining())
         {
             entity.motionX *= 0.1D;
             entity.motionZ *= 0.1D;
