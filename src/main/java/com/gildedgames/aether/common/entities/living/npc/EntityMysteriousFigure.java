@@ -4,9 +4,11 @@ import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.entity.EntityNPC;
 import com.gildedgames.aether.api.shop.IShopDefinition;
 import com.gildedgames.aether.api.shop.IShopInstance;
+import com.gildedgames.aether.api.shop.IShopInstanceGroup;
 import com.gildedgames.aether.common.AetherCelebrations;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.shop.ShopInstanceGroup;
 import com.gildedgames.orbis_api.util.mc.NBTHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -43,6 +45,23 @@ public class EntityMysteriousFigure extends EntityNPC
 	}
 
 	@Override
+	public IShopInstanceGroup createShopInstanceGroup()
+	{
+		IShopInstanceGroup group = new ShopInstanceGroup();
+
+		Optional<IShopDefinition> shopDefinition = AetherAPI.content().shop().getShopDefinition(SPEAKER);
+
+		if (shopDefinition.isPresent())
+		{
+			IShopInstance instance = AetherAPI.content().shop().createInstance(shopDefinition.get(), new Random(this.getRNG().nextLong()));
+
+			group.setShopInstance(0, instance);
+		}
+
+		return group;
+	}
+
+	@Override
 	public void applyEntityCollision(Entity entityIn)
 	{
 		super.applyEntityCollision(entityIn);
@@ -64,20 +83,6 @@ public class EntityMysteriousFigure extends EntityNPC
 	protected EntityBodyHelper createBodyHelper()
 	{
 		return new EntityBodyHelper(this);
-	}
-
-	@Override
-	public IShopInstance createShopInstance(long seed)
-	{
-		Optional<IShopDefinition> shopDefinition = AetherAPI.content().shop().getShopDefinition(SPEAKER);
-		IShopInstance instance = null;
-
-		if (shopDefinition.isPresent())
-		{
-			instance = AetherAPI.content().shop().createInstance(shopDefinition.get(), new Random(seed));
-		}
-
-		return instance;
 	}
 
 	@Override

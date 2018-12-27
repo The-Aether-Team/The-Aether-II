@@ -4,9 +4,11 @@ import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.entity.EntityNPC;
 import com.gildedgames.aether.api.shop.IShopDefinition;
 import com.gildedgames.aether.api.shop.IShopInstance;
+import com.gildedgames.aether.api.shop.IShopInstanceGroup;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.entities.util.EntityBodyHelperNoRotation;
+import com.gildedgames.aether.common.shop.ShopInstanceGroup;
 import com.gildedgames.orbis_api.util.mc.NBTHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityBodyHelper;
@@ -28,6 +30,8 @@ public class EntityEdison extends EntityNPC
 {
 	public static ResourceLocation SPEAKER = AetherCore.getResource("edison");
 
+	public static ResourceLocation HOLIDAY_SHOP = AetherCore.getResource("edison_holiday");
+
 	private BlockPos spawned;
 
 	public EntityEdison(final World worldIn)
@@ -40,23 +44,35 @@ public class EntityEdison extends EntityNPC
 	}
 
 	@Override
-	protected EntityBodyHelper createBodyHelper()
+	public IShopInstanceGroup createShopInstanceGroup()
 	{
-		return new EntityBodyHelperNoRotation(this);
-	}
+		IShopInstanceGroup group = new ShopInstanceGroup();
 
-	@Override
-	public IShopInstance createShopInstance(long seed)
-	{
 		Optional<IShopDefinition> shopDefinition = AetherAPI.content().shop().getShopDefinition(SPEAKER);
-		IShopInstance instance = null;
 
 		if (shopDefinition.isPresent())
 		{
-			instance = AetherAPI.content().shop().createInstance(shopDefinition.get(), new Random(seed));
+			IShopInstance normalShop = AetherAPI.content().shop().createInstance(shopDefinition.get(), new Random(this.getRNG().nextLong()));
+
+			group.setShopInstance(0, normalShop);
 		}
 
-		return instance;
+		shopDefinition = AetherAPI.content().shop().getShopDefinition(HOLIDAY_SHOP);
+
+		if (shopDefinition.isPresent())
+		{
+			IShopInstance holidayShop = AetherAPI.content().shop().createInstance(shopDefinition.get(), new Random(this.getRNG().nextLong()));
+
+			group.setShopInstance(1, holidayShop);
+		}
+
+		return group;
+	}
+
+	@Override
+	protected EntityBodyHelper createBodyHelper()
+	{
+		return new EntityBodyHelperNoRotation(this);
 	}
 
 	@Override

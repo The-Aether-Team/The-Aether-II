@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.entities.living.npc;
 
 import com.gildedgames.aether.api.entity.EntityNPC;
 import com.gildedgames.aether.api.player.IPlayerAether;
+import com.gildedgames.aether.api.shop.IShopInstanceGroup;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.orbis_api.util.mc.NBTHelper;
@@ -26,6 +27,12 @@ public class EntityNecromancer extends EntityNPC
 		this.setSize(1.0F, 2.5F);
 
 		this.rotationYaw = 0.3F;
+	}
+
+	@Override
+	public IShopInstanceGroup createShopInstanceGroup()
+	{
+		return null;
 	}
 
 	@Override

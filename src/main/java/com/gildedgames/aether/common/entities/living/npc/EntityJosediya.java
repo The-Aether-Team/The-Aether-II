@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.entities.living.npc;
 
 import com.gildedgames.aether.api.entity.EntityNPC;
+import com.gildedgames.aether.api.shop.IShopInstanceGroup;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.orbis_api.util.mc.NBTHelper;
@@ -27,6 +28,12 @@ public class EntityJosediya extends EntityNPC
 		super(worldIn);
 
 		this.setSize(1.0F, 2.0F);
+	}
+
+	@Override
+	public IShopInstanceGroup createShopInstanceGroup()
+	{
+		return null;
 	}
 
 	@Override

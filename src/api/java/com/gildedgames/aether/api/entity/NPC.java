@@ -1,13 +1,11 @@
 package com.gildedgames.aether.api.entity;
 
-import com.gildedgames.aether.api.shop.IShopInstance;
+import com.gildedgames.aether.api.shop.IShopInstanceGroup;
 
 import javax.annotation.Nullable;
 
 public interface NPC
 {
-
 	@Nullable
-	IShopInstance getShopInstance();
-
+	IShopInstanceGroup getShopInstanceGroup();
 }

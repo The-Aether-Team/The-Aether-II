@@ -112,9 +112,13 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 
 	private List<String> hoverDescription;
 
-	public GuiShop(GuiViewer prevViewer, EntityPlayer player, IDialogSlide slide, IDialogSlideRenderer renderer, IShopInstance shopInstance)
+	private int shopIndex;
+
+	public GuiShop(GuiViewer prevViewer, EntityPlayer player, IDialogSlide slide, IDialogSlideRenderer renderer, IShopInstance shopInstance, int shopIndex)
 	{
 		super(new GuiElement(Dim2D.flush(), false), prevViewer, new ContainerShop(player.inventory, shopInstance));
+
+		this.shopIndex = shopIndex;
 
 		this.setDrawDefaultBackground(false);
 
@@ -627,7 +631,7 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 				}
 			}
 
-			NetworkingAether.sendPacketToServer(new PacketShopBuy(index, isCountLocked ? buyCount : this.buyCountUnlocked));
+			NetworkingAether.sendPacketToServer(new PacketShopBuy(index, isCountLocked ? buyCount : this.buyCountUnlocked, this.shopIndex));
 
 			int maxAllowedWithHeldStack = this.getSelectedBuy().getItemStack().getMaxStackSize() - this.mc.player.inventory.getItemStack().getCount();
 
@@ -678,7 +682,7 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 				this.container.getSlot(0).putStack(ItemStack.EMPTY);
 			}
 
-			NetworkingAether.sendPacketToServer(new PacketShopSell());
+			NetworkingAether.sendPacketToServer(new PacketShopSell(this.shopIndex));
 		}
 
 		for (GuiShopBuy b : this.buys)

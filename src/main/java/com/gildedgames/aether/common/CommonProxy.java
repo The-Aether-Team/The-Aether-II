@@ -71,6 +71,7 @@ public class CommonProxy implements IAetherServices
 		s.register(7, ShopInventory.class, new Instantiator<>(ShopInventory.class));
 		s.register(8, ShopCurrencyGilt.class, new Instantiator<>(ShopCurrencyGilt.class));
 		s.register(9, ShopCurrencyPlumproot.class, new Instantiator<>(ShopCurrencyPlumproot.class));
+		s.register(10, ShopInstanceGroup.class, new Instantiator<>(ShopInstanceGroup.class));
 
 		OrbisAPI.services().io().register(s);
 

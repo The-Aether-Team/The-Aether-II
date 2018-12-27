@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.network.packets;
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.shop.IShopBuy;
 import com.gildedgames.aether.api.shop.IShopInstance;
+import com.gildedgames.aether.api.shop.IShopInstanceGroup;
 import com.gildedgames.aether.api.shop.ShopUtil;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.containers.ContainerShop;
@@ -17,21 +18,28 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 public class PacketShopSell implements IMessage
 {
 
+	private int shopIndex;
+
 	public PacketShopSell()
 	{
 
 	}
 
+	public PacketShopSell(int shopIndex)
+	{
+		this.shopIndex = shopIndex;
+	}
+
 	@Override
 	public void fromBytes(final ByteBuf buf)
 	{
-
+		this.shopIndex = buf.readInt();
 	}
 
 	@Override
 	public void toBytes(final ByteBuf buf)
 	{
-
+		buf.writeInt(this.shopIndex);
 	}
 
 	public static class HandlerServer extends MessageHandlerServer<PacketShopSell, IMessage>
@@ -50,7 +58,14 @@ public class PacketShopSell implements IMessage
 			{
 				if (playerAether.getDialogController().getTalkingNPC() != null)
 				{
-					IShopInstance shopInstance = playerAether.getDialogController().getTalkingNPC().getShopInstance();
+					IShopInstanceGroup group = playerAether.getDialogController().getTalkingNPC().getShopInstanceGroup();
+
+					if (group == null)
+					{
+						return null;
+					}
+
+					IShopInstance shopInstance = group.getShopInstance(message.shopIndex);
 
 					if (shopInstance != null)
 					{

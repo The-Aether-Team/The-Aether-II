@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.entities.living.npc;
 
 import com.gildedgames.aether.api.entity.EntityNPC;
+import com.gildedgames.aether.api.shop.IShopInstanceGroup;
 import com.gildedgames.aether.common.entities.util.EntityBodyHelperNoRotation;
 import com.gildedgames.orbis_api.util.mc.NBTHelper;
 import net.minecraft.block.Block;
@@ -24,6 +25,12 @@ public class EntityTivalier extends EntityNPC
 		super(worldIn);
 
 		this.setSize(1.0F, 1.0F);
+	}
+
+	@Override
+	public IShopInstanceGroup createShopInstanceGroup()
+	{
+		return null;
 	}
 
 	@Override

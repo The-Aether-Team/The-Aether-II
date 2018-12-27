@@ -146,7 +146,7 @@
 				{ "speaker": "aether:edison#idle", "text": "edison.greet.sale" }
 			],
 			"end_actions": [
-				{ "type": "openShop" }
+				{ "type": "openShop", "shopIndex": 0 }
 			]
 		},
 		{
@@ -155,7 +155,7 @@
 				{ "speaker": "aether:edison#idle", "text": "edison.greet.holiday_sale" }
 			],
 			"end_actions": [
-				{ "type": "openShop" }
+				{ "type": "openShop", "shopIndex": 1 }
 			]
 		},
 		{

@@ -491,7 +491,7 @@ public class CommonEvents
 	@SubscribeEvent
 	public static void onEntityMounted(final EntityMountEvent event)
 	{
-		if (event.getEntityMounting() instanceof EntityNPC)
+		if (EntityNPC.class.isAssignableFrom(event.getEntityMounting().getClass()))
 		{
 			event.setCanceled(true);
 		}

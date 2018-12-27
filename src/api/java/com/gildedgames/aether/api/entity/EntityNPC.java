@@ -1,6 +1,7 @@
 package com.gildedgames.aether.api.entity;
 
 import com.gildedgames.aether.api.shop.IShopInstance;
+import com.gildedgames.aether.api.shop.IShopInstanceGroup;
 import com.gildedgames.orbis_api.util.io.NBTFunnel;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,11 +13,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
+
 public abstract class EntityNPC extends EntityCreature implements NPC
 {
-	private static final DataParameter<NBTTagCompound> SHOP_INSTANCE_TAG = new DataParameter<>(16, DataSerializers.COMPOUND_TAG);
+	private static final DataParameter<NBTTagCompound> SHOP_INSTANCE_GROUP_TAG = new DataParameter<>(16, DataSerializers.COMPOUND_TAG);
 
-	private IShopInstance shopInstance;
+	private IShopInstanceGroup shopInstanceGroup;
 
 	private boolean startupSynced;
 
@@ -27,24 +30,7 @@ public abstract class EntityNPC extends EntityCreature implements NPC
 		super(worldIn);
 
 		this.isImmuneToFire = true;
-	}
-
-	public NBTTagCompound getShopInstanceTag()
-	{
-		return this.dataManager.get(SHOP_INSTANCE_TAG);
-	}
-
-	public void setShopInstanceTag(NBTTagCompound tag)
-	{
-		this.dataManager.set(SHOP_INSTANCE_TAG, tag);
-	}
-
-	@Override
-	protected void entityInit()
-	{
-		super.entityInit();
-
-		this.dataManager.register(SHOP_INSTANCE_TAG, new NBTTagCompound());
+		this.shopInstanceGroup = this.createShopInstanceGroup();
 	}
 
 	@Override
@@ -72,10 +58,70 @@ public abstract class EntityNPC extends EntityCreature implements NPC
 		return false;
 	}
 
-	@Override
-	public IShopInstance getShopInstance()
+	@Nullable
+	public abstract IShopInstanceGroup createShopInstanceGroup();
+
+	public NBTTagCompound getShopInstanceGroupTag()
 	{
-		return this.shopInstance;
+		return this.dataManager.get(SHOP_INSTANCE_GROUP_TAG);
+	}
+
+	public void setShopInstanceGroupTag(NBTTagCompound tag)
+	{
+		this.dataManager.set(SHOP_INSTANCE_GROUP_TAG, tag);
+	}
+
+	@Override
+	protected void entityInit()
+	{
+		super.entityInit();
+
+		this.dataManager.register(SHOP_INSTANCE_GROUP_TAG, new NBTTagCompound());
+	}
+
+	@Override
+	public IShopInstanceGroup getShopInstanceGroup()
+	{
+		return this.shopInstanceGroup;
+	}
+
+	private void onClientUpdate()
+	{
+		if (this.getShopInstanceGroup() != null)
+		{
+			if (this.prevShopInstanceTag != this.getShopInstanceGroupTag())
+			{
+				this.prevShopInstanceTag = this.getShopInstanceGroupTag();
+
+				this.getShopInstanceGroup().read(this.getShopInstanceGroupTag());
+			}
+		}
+	}
+
+	private void onServerUpdate()
+	{
+		if (this.getShopInstanceGroup() != null)
+		{
+			for (IShopInstance shopInstance : this.getShopInstanceGroup().getShopInstances())
+			{
+				if (shopInstance != null)
+				{
+					shopInstance.tick();
+
+					if (shopInstance.isDirty() || !this.startupSynced)
+					{
+						this.startupSynced = true;
+
+						NBTTagCompound tag = new NBTTagCompound();
+						this.getShopInstanceGroup().write(tag);
+
+						this.setShopInstanceGroupTag(tag);
+
+						this.getShopInstanceGroup().getShopInstances().forEach(IShopInstance::markClean);
+					}
+				}
+			}
+		}
 	}
 
 	@Override
@@ -85,46 +131,12 @@ public abstract class EntityNPC extends EntityCreature implements NPC
 
 		if (!this.world.isRemote)
 		{
-			if (this.getShopInstance() != null)
-			{
-				this.getShopInstance().tick();
-
-				if (this.getShopInstance().isDirty() || !this.startupSynced)
-				{
-					this.startupSynced = true;
-
-					NBTTagCompound tag = new NBTTagCompound();
-					this.getShopInstance().write(tag);
-
-					this.setShopInstanceTag(tag);
-
-					this.getShopInstance().markClean();
-				}
-			}
-			else
-			{
-				this.shopInstance = this.createShopInstance(this.getRNG().nextLong());
-			}
+			this.onServerUpdate();
 		}
 		else
 		{
-			if (this.getShopInstance() == null)
-			{
-				this.shopInstance = this.createShopInstance(this.getRNG().nextLong());
-			}
-
-			if (this.prevShopInstanceTag != this.getShopInstanceTag() && this.shopInstance != null)
-			{
-				this.prevShopInstanceTag = this.getShopInstanceTag();
-
-				this.shopInstance.read(this.getShopInstanceTag());
-			}
+			this.onClientUpdate();
 		}
-	}
-
-	public IShopInstance createShopInstance(long seed)
-	{
-		return null;
 	}
 
 	@Override
@@ -134,7 +146,7 @@ public abstract class EntityNPC extends EntityCreature implements NPC
 
 		NBTFunnel funnel = new NBTFunnel(compound);
 
-		funnel.set("shopInstance", this.shopInstance);
+		funnel.set("shopInstanceGroup", this.shopInstanceGroup);
 	}
 
 	@Override
@@ -144,6 +156,6 @@ public abstract class EntityNPC extends EntityCreature implements NPC
 
 		NBTFunnel funnel = new NBTFunnel(compound);
 
-		this.shopInstance = funnel.getWithDefault("shopInstance", () -> this.shopInstance);
+		this.shopInstanceGroup = funnel.getWithDefault("shopInstanceGroup", () -> this.shopInstanceGroup);
 	}
 }
