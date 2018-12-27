@@ -1004,10 +1004,12 @@ edison.greet.option.died=I thought I was done for...
 edison.greet.option.fine=I'm fine.
 edison.greet.option.thanks=Thanks, Edison.
 edison.greet.option.okay_sale=I'll be okay, you got anything for sale?
+edison.greet.option.okay_holiday_sale=I'm good. Do you have a special stock for this holiday season?
 
 edison.greet.start=Hey there friend, how's it going? You need anything?
 
 edison.greet.option.sale=You got anything for sale?
+edison.greet.option.holiday_sale=Do you have special stock for this holiday season?
 
 edison.greet.option.okay_goodbye=I think I'm okay. Goodbye.
 edison.greet.option.ready_goodbye=I think I'm ready. Bye, Edison.
@@ -1046,6 +1048,7 @@ edison.greet.thanks1=Don’t mention it. We’ve all got a role to play here, mi
 edison.greet.thanks2=You need anything or are you good to set off?
 
 edison.greet.sale=Sure thing, let’s take a look at my stock.
+edison.greet.holiday_sale=50%% off all stock, friend! Take a peek at our exclusive stock for this holiday season.
 
 edison.greet.no_we_talked1=That’s right! International entrepreneur, salesman and master of persuasion!
 edison.greet.no_we_talked2=But to you, due to our little agreement with The Necromancer, I am also your contact in these strange lands.
