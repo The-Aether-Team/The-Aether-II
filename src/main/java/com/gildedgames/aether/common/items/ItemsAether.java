@@ -223,6 +223,8 @@ public class ItemsAether
 
 	public static final Item plumproot_pie = new ItemAetherFood(10, 0.5F, false).setConsumptionDuration(40);
 
+	public static final ItemWinterHat winter_hat = new ItemWinterHat();
+
 	private static final Collection<Item> registeredItems = new ArrayList<>();
 
 	@SubscribeEvent
@@ -396,6 +398,7 @@ public class ItemsAether
 
 		r.register("plumproot_mash", plumproot_mash);
 		r.register("plumproot_pie", plumproot_pie);
+		r.register("winter_hat", winter_hat);
 	}
 
 	public static Collection<Item> getRegisteredItems()

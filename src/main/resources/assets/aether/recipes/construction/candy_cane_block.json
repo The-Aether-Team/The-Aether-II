@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"##",
+		"##"
+	],
+	"key": {
+		"#": {
+			"item": "aether:candy_cane"
+		}
+	},
+	"result": {
+		"item": "aether:candy_cane_block",
+		"count": 1
+	}
+}

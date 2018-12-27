@@ -128,6 +128,9 @@ public class ItemModelsAether
 
 		registerItemModels(BlocksAether.golden_oak_leaves, "leaves/golden_oak_leaves");
 
+		registerItemModels(BlocksAether.mutant_tree_leaves, "leaves/mutant_leaves");
+		registerItemModels(BlocksAether.mutant_tree_leaves_decorated, "leaves/mutant_leaves_decorated");
+
 		registerItemModels(BlocksAether.blueberry_bush, new ItemModelBuilder("bushes/")
 				.add(BlockBlueberryBush.BERRY_BUSH_STEM, "blueberry_bush_stem")
 				.add(BlockBlueberryBush.BERRY_BUSH_RIPE, "blueberry_bush_ripe"));
@@ -634,6 +637,8 @@ public class ItemModelsAether
 
 		registerItemModels(BlocksAether.ice_crystal, "highlands_ice_crystal");
 		registerItemModels(BlocksAether.candy_cane_block, "candy_cane_block");
+		registerItemModels(BlocksAether.candy_cane_wall, "aether_wall/candy_cane_wall");
+		registerItemModels(ItemsAether.winter_hat, "armor/winter_hat");
 	}
 
 	private static void registerItemModels(final Block block, final String path)

@@ -34,6 +34,8 @@ tile.aether.blue_light_skyroot_leaves.name=Blue Wisproot Leaves
 tile.aether.green_light_skyroot_leaves.name=Green Wisproot Leaves
 tile.aether.dark_blue_light_skyroot_leaves.name=Dark Blue Wisproot Leaves
 tile.aether.golden_oak_leaves.name=Amberoot Leaves
+tile.aether.mutant_leaves.name=Mutated Leaves
+tile.aether.mutant_leaves_decorated.name=Decorated Mutated Leaves
 tile.aether.tall_aether_grass.short.name=Short Highlands Grass
 tile.aether.tall_aether_grass.normal.name=Highlands Grass
 tile.aether.tall_aether_grass.long.name=Long Highlands Grass
@@ -320,6 +322,7 @@ tile.aether.highlands_packed_ice.name=Highlands Packed Ice
 tile.aether.plumproot.name=Plumproot
 tile.aether.highlands_ice_crystal.stalagmite.name=Ice Crystal
 tile.aether.candy_cane_block.name=Candy Cane Block
+tile.aether.candy_cane_wall.name=Candy Cane Wall
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick
@@ -434,6 +437,7 @@ item.aether.arkenium_shield.name=Arkenium Shield
 item.aether.gravitite_shield.name=Gravitite Shield
 item.aether.plumproot_mash.name=Plumproot Mash
 item.aether.plumproot_pie.name=Plumproot Pie
+item.aether.winter_hat.name=Winter Hat
 
 item.aether.skyroot_bed_item.name=Skyroot Bed
 item.aether.moa_egg_item.name=Moa Egg
@@ -1003,10 +1007,12 @@ edison.greet.option.died=I thought I was done for...
 edison.greet.option.fine=I'm fine.
 edison.greet.option.thanks=Thanks, Edison.
 edison.greet.option.okay_sale=I'll be okay, you got anything for sale?
+edison.greet.option.okay_holiday_sale=I'm good. Do you have a special stock for this holiday season?
 
 edison.greet.start=Hey there friend, how's it going? You need anything?
 
 edison.greet.option.sale=You got anything for sale?
+edison.greet.option.holiday_sale=Do you have special stock for this holiday season?
 
 edison.greet.option.okay_goodbye=I think I'm okay. Goodbye.
 edison.greet.option.ready_goodbye=I think I'm ready. Bye, Edison.
@@ -1045,6 +1051,7 @@ edison.greet.thanks1=Don’t mention it. We’ve all got a role to play here, mi
 edison.greet.thanks2=You need anything or are you good to set off?
 
 edison.greet.sale=Sure thing, let’s take a look at my stock.
+edison.greet.holiday_sale=50%% off all stock, friend! Take a peek at our exclusive stock for this holiday season.
 
 edison.greet.no_we_talked1=That’s right! International entrepreneur, salesman and master of persuasion!
 edison.greet.no_we_talked2=But to you, due to our little agreement with The Necromancer, I am also your contact in these strange lands.
