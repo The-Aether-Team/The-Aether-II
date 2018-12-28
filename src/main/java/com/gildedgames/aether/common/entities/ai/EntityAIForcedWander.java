@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.entities.ai;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.RandomPositionGenerator;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
 import javax.annotation.Nullable;
@@ -50,7 +51,17 @@ public class EntityAIForcedWander extends EntityAIWander
 	@Nullable
 	protected Vec3d getPosition()
 	{
-		return RandomPositionGenerator.findRandomTarget(this.entity, this.xScatter, this.yScatter);
+		Vec3d pos = RandomPositionGenerator.findRandomTarget(this.entity, this.xScatter, this.yScatter);
+
+		if (pos != null)
+		{
+			if (!this.entity.world.isAreaLoaded(new BlockPos(pos), 8))
+			{
+				return null;
+			}
+		}
+
+		return pos;
 	}
 
 }
