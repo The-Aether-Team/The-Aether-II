@@ -45,7 +45,7 @@ public class EntityFlying extends EntityCreature
 	protected void initEntityAI()
 	{
 		final EntityAIMoveTowardsRestriction moveTowardsRestriction = new EntityAIMoveTowardsRestriction(this, 0.4D);
-		final EntityAIWander wander = new EntityAIForcedWander(this, 0.4D, 3);
+		final EntityAIWander wander = new EntityAIForcedWander(this, 0.4D, 5);
 
 		wander.setMutexBits(3);
 		moveTowardsRestriction.setMutexBits(3);
