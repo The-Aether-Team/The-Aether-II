@@ -2,13 +2,10 @@ package com.gildedgames.aether.common.world.aether.features;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockIceCrystal;
-import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
-import com.gildedgames.aether.common.world.aether.biomes.arctic_peaks.BiomeArcticPeaks;
 import com.gildedgames.orbis_api.processing.BlockAccessExtendedWrapper;
 import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
 import com.gildedgames.orbis_api.world.IWorldGen;
 import com.google.common.collect.Lists;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -91,7 +88,7 @@ public class WorldGenIceCrystals extends WorldGenerator implements IWorldGen
                 }
                 if (this.statesCanPlaceOn.isEmpty() || this.statesCanPlaceOn.contains(above))
                 {
-                    blockAccess.setBlockState(randomPos, this.crystalState.withProperty(BlockIceCrystal.PROPERTY_VARIANT, BlockIceCrystal.STALAGTITE));
+                    blockAccess.setBlockState(randomPos, this.crystalState.withProperty(BlockIceCrystal.PROPERTY_VARIANT, BlockIceCrystal.STALACTITE));
                     if (this.max > 0)
                     {
                         if (count < this.max)
