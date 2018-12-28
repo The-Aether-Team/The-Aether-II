@@ -44,7 +44,7 @@ public class EntityAerwhale extends EntityFlying
 	protected void initEntityAI()
 	{
 		final EntityAIMoveTowardsRestriction moveTowardsRestriction = new EntityAIMoveTowardsRestriction(this, 0.4D);
-		final EntityAIForcedWander wander = new EntityAIForcedWander(this, 0.4D, 2, 24, 7);
+		final EntityAIForcedWander wander = new EntityAIForcedWander(this, 0.4D, 10, 12, 7);
 
 		wander.setMutexBits(3);
 		moveTowardsRestriction.setMutexBits(3);

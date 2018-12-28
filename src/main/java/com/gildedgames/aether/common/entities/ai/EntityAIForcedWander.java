@@ -10,7 +10,6 @@ import javax.annotation.Nullable;
 
 public class EntityAIForcedWander extends EntityAIWander
 {
-
 	private final EntityCreature entity;
 
 	private final int chance;
@@ -37,14 +36,17 @@ public class EntityAIForcedWander extends EntityAIWander
 	@Override
 	public boolean shouldExecute()
 	{
-		this.makeUpdate();
-
-		if (this.entity.getRNG().nextInt(this.chance) != 0)
+		if (this.entity.getNavigator().noPath())
 		{
-			return false;
+			if (this.entity.getRNG().nextInt(this.chance) == 0)
+			{
+				this.makeUpdate();
+
+				return super.shouldExecute();
+			}
 		}
 
-		return super.shouldExecute();
+		return false;
 	}
 
 	@Override
@@ -55,7 +57,7 @@ public class EntityAIForcedWander extends EntityAIWander
 
 		if (pos != null)
 		{
-			if (!this.entity.world.isAreaLoaded(new BlockPos(pos), 8))
+			if (!this.entity.world.isBlockLoaded(new BlockPos(pos)))
 			{
 				return null;
 			}
