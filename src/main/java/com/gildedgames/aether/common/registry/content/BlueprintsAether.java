@@ -112,6 +112,6 @@ public class BlueprintsAether
 		WISPROOT_BLUE = loadData("trees/wisproot/wisproot_blue");
 		WISPROOT_DARK_BLUE = loadData("trees/wisproot/wisproot_dark_blue");
 
-		CRAZY_MUTANT_TREE = loadData("trees/skyroot/skyroot_oak_green");    // TODO: Assign this to the proper resource.
+		CRAZY_MUTANT_TREE = loadData("trees/skyroot/mutated_tree");
 	}
 }

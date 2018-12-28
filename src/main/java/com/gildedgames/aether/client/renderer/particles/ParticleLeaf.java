@@ -103,6 +103,19 @@ public class ParticleLeaf extends Particle
 			this.particleGreen = 0.512f;
 			this.particleBlue = 0.301f;
 		}
+		else if (block == BlocksAether.mutant_tree_leaves)
+		{
+			this.particleRed = 0.569f;
+			this.particleGreen = 0.533f;
+			this.particleBlue = 0.706f;
+
+		}
+		else if (block == BlocksAether.mutant_tree_leaves_decorated)
+		{
+			this.particleRed = 0.569f;
+			this.particleGreen = 0.533f;
+			this.particleBlue = 0.706f;
+		}
 
 		this.motionY = motionY;
 		this.motionX = motionX;

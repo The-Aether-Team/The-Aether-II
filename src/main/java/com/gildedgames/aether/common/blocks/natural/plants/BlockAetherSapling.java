@@ -94,49 +94,51 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 		{
 			final int meta = state.getValue(PROPERTY_VARIANT).getMeta();
 
-			// TODO: Change all templates to blueprints.
-
-			TemplateDefinition tree = null;
-			BlueprintDefinition treeBp = null;
+			BlueprintDefinition tree = null;
 
 			if (meta == BLUE_SKYROOT.getMeta())
 			{
-				tree = GenerationAether.blue_skyroot_tree.getRandomDefinition(random);
+				tree = GenerationAether.SKYROOT_OAK_BLUE;
 			}
 			else if (meta == GREEN_SKYROOT.getMeta())
 			{
-				tree = GenerationAether.green_skyroot_tree.getRandomDefinition(random);
+				tree = GenerationAether.SKYROOT_OAK_GREEN;
 			}
 			else if (meta == GOLDEN_OAK.getMeta())
 			{
-				tree = GenerationAether.golden_oak.getRandomDefinition(random);
+				tree = GenerationAether.AMBEROOT_TREE;
 			}
 			else if (meta == DARK_BLUE_SKYROOT.getMeta())
 			{
-				tree = GenerationAether.dark_blue_skyroot_oak.getRandomDefinition(random);
+				tree = GenerationAether.SKYROOT_OAK_DARK_BLUE;
 			}
 			else if (meta == MUTANT_TREE.getMeta())
 			{
-				treeBp = GenerationAether.CRAZY_MUTANT_TREE;
+				tree = GenerationAether.CRAZY_MUTANT_TREE;
 			}
 
 			if (tree != null)
 			{
 				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 4);
-
-				if (!TemplatePlacer.place(world, tree, new TemplateLoc().set(pos).set(true), random))
-				{
-					world.setBlockState(pos, state, 4);
-				}
-			}
-			if (treeBp != null)
-			{
-				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 4);
-				BakedBlueprint baked = new BakedBlueprint(GenerationAether.CRAZY_MUTANT_TREE.getData(), new CreationData(world).pos(BlockPos.ORIGIN));
+				BakedBlueprint baked = new BakedBlueprint(tree.getData(), new CreationData(world).pos(BlockPos.ORIGIN));
 				baked.bake();
-				if (!BlueprintPlacer.place(world, baked, treeBp.getConditions(), pos, true))
+
+				// Offset trees
+				BlockPos adjustedPos;
+				adjustedPos = new BlockPos(pos.getX()-4, pos.getY(), pos.getZ()-4);
+
+				if (tree == GenerationAether.AMBEROOT_TREE)
 				{
-					world.setBlockState(pos, state, 4);
+					adjustedPos = new BlockPos(pos.getX()-8, pos.getY(), pos.getZ()-6);
+				}
+				if (tree == GenerationAether.CRAZY_MUTANT_TREE)
+				{
+					adjustedPos = new BlockPos(pos.getX()-5, pos.getY(), pos.getZ()-5);
+				}
+
+				if (!BlueprintPlacer.place(world, baked, tree.getConditions(), adjustedPos, true))
+				{
+					world.setBlockState(adjustedPos, state, 4);
 				}
 			}
 		}

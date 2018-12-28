@@ -704,6 +704,8 @@ public class BlocksAether
 		Blocks.FIRE.setFireInfo(dark_blue_light_skyroot_leaves, 30, 60);
 		Blocks.FIRE.setFireInfo(green_light_skyroot_leaves, 30, 60);
 		Blocks.FIRE.setFireInfo(therawood_leaves, 30, 60);
+		Blocks.FIRE.setFireInfo(mutant_tree_leaves, 30,60);
+		Blocks.FIRE.setFireInfo(mutant_tree_leaves_decorated, 30, 60);
 
 		Blocks.FIRE.setFireInfo(cloudwool_block, 30, 60);
 		Blocks.FIRE.setFireInfo(cloudwool_carpet, 30, 60);
