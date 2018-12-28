@@ -27,9 +27,7 @@ public class NoiseUtil
 		final double noise4 = 0.1D * noise.eval(nx * 32D, nz * 32D);
 
 		// Averages evalNormalised samples linearly
-		final double sample = (noise1 + noise2 + noise3 + noise4) / 4.0D;
-
-		return sample;
+		return (noise1 + noise2 + noise3 + noise4) / 4.0D;
 	}
 
 	public static double genNoise(final OpenSimplexNoise noise, final double nx, final double ny, final double nz)
@@ -41,9 +39,7 @@ public class NoiseUtil
 		final double noise4 = 0.1D * noise.eval(nx * 32D, ny * 32D, nz * 32D);
 
 		// Averages evalNormalised samples linearly
-		final double sample = (noise1 + noise2 + noise3 + noise4) / 4.0D;
-
-		return sample;
+		return (noise1 + noise2 + noise3 + noise4) / 4.0D;
 	}
 
 	public static double normalise(final double value)

@@ -238,7 +238,8 @@ public class IslandGeneratorForgottenHighlands implements IIslandGenerator
 	}
 
 	@Override
-	public void genChunk(Biome[] biomes, OpenSimplexNoise noise, IBlockAccessExtended access, ChunkMask mask, ChunkPrimer primer, IIslandData island, int chunkX, int chunkZ)
+	public void genChunk(Biome[] biomes, OpenSimplexNoise noise, IBlockAccessExtended access, ChunkMask mask, ChunkPrimer primer, IIslandData island,
+			int chunkX, int chunkZ)
 	{
 		mask.createChunk(primer, new IslandChunkMaskTransformer());
 	}

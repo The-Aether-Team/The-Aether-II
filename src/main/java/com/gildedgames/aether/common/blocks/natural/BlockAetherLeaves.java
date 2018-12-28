@@ -206,20 +206,22 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 
 								final Block block = world.getBlockState(newPos).getBlock();
 
+								int i = (x2 + j1) * i1 + (y2 + j1) * b1 + z2 + j1;
+
 								if (!block.canSustainLeaves(state, world, newPos))
 								{
 									if (block.isLeaves(state, world, newPos))
 									{
-										this.surroundings[(x2 + j1) * i1 + (y2 + j1) * b1 + z2 + j1] = -2;
+										this.surroundings[i] = -2;
 									}
 									else
 									{
-										this.surroundings[(x2 + j1) * i1 + (y2 + j1) * b1 + z2 + j1] = -1;
+										this.surroundings[i] = -1;
 									}
 								}
 								else
 								{
-									this.surroundings[(x2 + j1) * i1 + (y2 + j1) * b1 + z2 + j1] = 0;
+									this.surroundings[i] = 0;
 								}
 							}
 						}
@@ -235,34 +237,46 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 								{
 									if (this.surroundings[(y2 + j1) * i1 + (z2 + j1) * b1 + j2 + j1] == x2 - 1)
 									{
-										if (this.surroundings[(y2 + j1 - 1) * i1 + (z2 + j1) * b1 + j2 + j1] == -2)
+										int i = (y2 + j1 - 1) * i1 + (z2 + j1) * b1 + j2 + j1;
+
+										if (this.surroundings[i] == -2)
 										{
-											this.surroundings[(y2 + j1 - 1) * i1 + (z2 + j1) * b1 + j2 + j1] = x2;
+											this.surroundings[i] = x2;
 										}
 
-										if (this.surroundings[(y2 + j1 + 1) * i1 + (z2 + j1) * b1 + j2 + j1] == -2)
+										int i2 = (y2 + j1 + 1) * i1 + (z2 + j1) * b1 + j2 + j1;
+
+										if (this.surroundings[i2] == -2)
 										{
-											this.surroundings[(y2 + j1 + 1) * i1 + (z2 + j1) * b1 + j2 + j1] = x2;
+											this.surroundings[i2] = x2;
 										}
 
-										if (this.surroundings[(y2 + j1) * i1 + (z2 + j1 - 1) * b1 + j2 + j1] == -2)
+										int i3 = (y2 + j1) * i1 + (z2 + j1 - 1) * b1 + j2 + j1;
+
+										if (this.surroundings[i3] == -2)
 										{
-											this.surroundings[(y2 + j1) * i1 + (z2 + j1 - 1) * b1 + j2 + j1] = x2;
+											this.surroundings[i3] = x2;
 										}
 
-										if (this.surroundings[(y2 + j1) * i1 + (z2 + j1 + 1) * b1 + j2 + j1] == -2)
+										int i4 = (y2 + j1) * i1 + (z2 + j1 + 1) * b1 + j2 + j1;
+
+										if (this.surroundings[i4] == -2)
 										{
-											this.surroundings[(y2 + j1) * i1 + (z2 + j1 + 1) * b1 + j2 + j1] = x2;
+											this.surroundings[i4] = x2;
 										}
 
-										if (this.surroundings[(y2 + j1) * i1 + (z2 + j1) * b1 + (j2 + j1 - 1)] == -2)
+										int i5 = (y2 + j1) * i1 + (z2 + j1) * b1 + (j2 + j1 - 1);
+
+										if (this.surroundings[i5] == -2)
 										{
-											this.surroundings[(y2 + j1) * i1 + (z2 + j1) * b1 + (j2 + j1 - 1)] = x2;
+											this.surroundings[i5] = x2;
 										}
 
-										if (this.surroundings[(y2 + j1) * i1 + (z2 + j1) * b1 + j2 + j1 + 1] == -2)
+										int i6 = (y2 + j1) * i1 + (z2 + j1) * b1 + j2 + j1 + 1;
+
+										if (this.surroundings[i6] == -2)
 										{
-											this.surroundings[(y2 + j1) * i1 + (z2 + j1) * b1 + j2 + j1 + 1] = x2;
+											this.surroundings[i6] = x2;
 										}
 									}
 								}
@@ -331,7 +345,7 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 	}
 
 	@SideOnly(Side.CLIENT)
-	public boolean superShouldSideBeRendered(final IBlockState blockState, final IBlockAccess blockAccess, final BlockPos pos, final EnumFacing side)
+	private boolean superShouldSideBeRendered(final IBlockState blockState, final IBlockAccess blockAccess, final BlockPos pos, final EnumFacing side)
 	{
 		final AxisAlignedBB axisalignedbb = blockState.getBoundingBox(blockAccess, pos);
 

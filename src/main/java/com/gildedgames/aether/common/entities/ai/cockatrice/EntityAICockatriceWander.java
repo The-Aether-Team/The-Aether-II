@@ -6,7 +6,7 @@ import net.minecraft.entity.ai.EntityAIWander;
 public class EntityAICockatriceWander extends EntityAIWander
 {
 
-	EntityCockatrice cockatrice;
+	final EntityCockatrice cockatrice;
 
 	public EntityAICockatriceWander(final EntityCockatrice cockatrice, final double wanderSpeed)
 	{

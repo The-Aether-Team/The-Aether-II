@@ -7,37 +7,37 @@ import net.minecraft.entity.Entity;
 public class ModelMasonryBench extends ModelBase
 {
 	//fields
-	ModelRenderer MainBottom;
+	final ModelRenderer MainBottom;
 
-	ModelRenderer Pedal;
+	final ModelRenderer Pedal;
 
-	ModelRenderer MainLeft;
+	final ModelRenderer MainLeft;
 
-	ModelRenderer MainBack;
+	final ModelRenderer MainBack;
 
-	ModelRenderer MainRight;
+	final ModelRenderer MainRight;
 
-	ModelRenderer MainTop;
+	final ModelRenderer MainTop;
 
-	ModelRenderer TopRight;
+	final ModelRenderer TopRight;
 
-	ModelRenderer TopBack;
+	final ModelRenderer TopBack;
 
-	ModelRenderer TopLeft;
+	final ModelRenderer TopLeft;
 
-	ModelRenderer Workslab;
+	final ModelRenderer Workslab;
 
-	ModelRenderer SawRotor;
+	final ModelRenderer SawRotor;
 
-	ModelRenderer SawRight;
+	final ModelRenderer SawRight;
 
-	ModelRenderer SawLeft;
+	final ModelRenderer SawLeft;
 
-	ModelRenderer RimRight;
+	final ModelRenderer RimRight;
 
-	ModelRenderer RimBack;
+	final ModelRenderer RimBack;
 
-	ModelRenderer RimLeft;
+	final ModelRenderer RimLeft;
 
 	public ModelMasonryBench()
 	{

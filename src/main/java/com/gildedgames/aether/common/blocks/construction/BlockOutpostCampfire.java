@@ -34,9 +34,7 @@ public class BlockOutpostCampfire extends BlockMultiController
 	@Override
 	public Iterable<BlockPos.MutableBlockPos> getMultiblockVolumeIterator(final BlockPos pos, final World world)
 	{
-		final Iterable<BlockPos.MutableBlockPos> positions = BlockPos.getAllInBoxMutable(pos, pos.south().east());
-
-		return positions;
+		return BlockPos.getAllInBoxMutable(pos, pos.south().east());
 	}
 
 	@Override

@@ -12,13 +12,13 @@ import java.util.List;
 public class AIAnimalPack extends EntityAIBase
 {
 
-	public World world;
+	public final World world;
 
 	public EntityLiving animal;
 
 	public EntityLiving packLeader;
 
-	public float moveSpeed;
+	public final float moveSpeed;
 
 	public AIAnimalPack(final EntityLiving animal, final float moveSpeed)
 	{

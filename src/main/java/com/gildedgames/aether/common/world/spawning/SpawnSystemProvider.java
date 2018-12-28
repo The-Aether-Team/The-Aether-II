@@ -24,6 +24,7 @@ public class SpawnSystemProvider implements ICapabilityProvider
 		return capability == AetherCapabilities.SPAWN_SYSTEM;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Nullable
 	@Override
 	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing)

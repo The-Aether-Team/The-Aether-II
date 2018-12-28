@@ -9,19 +9,19 @@ import org.lwjgl.opengl.GL11;
 
 public class ModelSwetJelly extends ModelBase
 {
-	public ModelRenderer Base;
+	public final ModelRenderer Base;
 
-	public ModelRenderer Front;
+	public final ModelRenderer Front;
 
-	public ModelRenderer Top;
+	public final ModelRenderer Top;
 
-	public ModelRenderer Right;
+	public final ModelRenderer Right;
 
-	public ModelRenderer Left;
+	public final ModelRenderer Left;
 
-	public ModelRenderer Back;
+	public final ModelRenderer Back;
 
-	public ModelRenderer Bottom;
+	public final ModelRenderer Bottom;
 
 	public ModelSwetJelly()
 	{

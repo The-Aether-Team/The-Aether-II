@@ -26,7 +26,7 @@ public class GuiCoins extends GuiElement
 
 	private Coin gilt, giltae, giltaen, giltaeni;
 
-	private boolean shouldDisplayAlways;
+	private final boolean shouldDisplayAlways;
 
 	private double value;
 
@@ -151,7 +151,7 @@ public class GuiCoins extends GuiElement
 	{
 		private GuiTexture icon;
 
-		private ResourceLocation iconResource;
+		private final ResourceLocation iconResource;
 
 		private GuiText count;
 

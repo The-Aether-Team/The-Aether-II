@@ -2,12 +2,12 @@ package com.gildedgames.aether.common.world.aether.island.nodename.as3delaunay;
 
 import java.util.Stack;
 
-final public class Vertex extends Object implements ICoord
+final public class Vertex implements ICoord
 {
 
 	final public static Vertex VERTEX_AT_INFINITY = new Vertex(Double.NaN, Double.NaN);
 
-	final private static Stack<Vertex> _pool = new Stack();
+	final private static Stack<Vertex> _pool = new Stack<>();
 
 	private static int _nvertices = 0;
 
@@ -17,7 +17,7 @@ final public class Vertex extends Object implements ICoord
 
 	public Vertex(final double x, final double y)
 	{
-		init(x, y);
+		this.init(x, y);
 	}
 
 	private static Vertex create(final double x, final double y)
@@ -101,44 +101,44 @@ final public class Vertex extends Object implements ICoord
 	@Override
 	public Point get_coord()
 	{
-		return _coord;
+		return this._coord;
 	}
 
 	public int get_vertexIndex()
 	{
-		return _vertexIndex;
+		return this._vertexIndex;
 	}
 
 	private Vertex init(final double x, final double y)
 	{
-		_coord = new Point(x, y);
+		this._coord = new Point(x, y);
 		return this;
 	}
 
 	public void dispose()
 	{
-		_coord = null;
+		this._coord = null;
 		_pool.push(this);
 	}
 
 	public void setIndex()
 	{
-		_vertexIndex = _nvertices++;
+		this._vertexIndex = _nvertices++;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "Vertex (" + _vertexIndex + ")";
+		return "Vertex (" + this._vertexIndex + ")";
 	}
 
 	public double get_x()
 	{
-		return _coord.x;
+		return this._coord.x;
 	}
 
 	public double get_y()
 	{
-		return _coord.y;
+		return this._coord.y;
 	}
 }

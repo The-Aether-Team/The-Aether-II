@@ -19,7 +19,7 @@ public class LayerAetherPlayerGloves extends LayerBipedArmor
 
 	private PatronRewardArmor previewArmor;
 
-	private ModelPlayer modelArmorSlim;
+	private final ModelPlayer modelArmorSlim;
 
 	public LayerAetherPlayerGloves(RenderLivingBase<?> rendererIn)
 	{

@@ -14,11 +14,11 @@ public class RenderEdisonSitting extends RenderLiving<EntityNPC>
 
 	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/entities/npcs/edison/edison.png");
 
-	private static ResourceLocation EYES_CLOSED = AetherCore.getResource("textures/entities/npcs/edison/edison_eyes_closed.png");
+	private static final ResourceLocation EYES_CLOSED = AetherCore.getResource("textures/entities/npcs/edison/edison_eyes_closed.png");
 
-	private static ResourceLocation PUPIL_LEFT = AetherCore.getResource("textures/entities/npcs/edison/edison_pupil_left.png");
+	private static final ResourceLocation PUPIL_LEFT = AetherCore.getResource("textures/entities/npcs/edison/edison_pupil_left.png");
 
-	private static ResourceLocation PUPIL_RIGHT = AetherCore.getResource("textures/entities/npcs/edison/edison_pupil_right.png");
+	private static final ResourceLocation PUPIL_RIGHT = AetherCore.getResource("textures/entities/npcs/edison/edison_pupil_right.png");
 
 	public RenderEdisonSitting(final RenderManager renderManager)
 	{

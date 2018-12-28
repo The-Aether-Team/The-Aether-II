@@ -9,25 +9,25 @@ import net.minecraft.util.math.MathHelper;
 public class ModelRamWool extends ModelBase
 {
 	//fields
-	ModelRenderer BodyMain;
+	final ModelRenderer BodyMain;
 
-	ModelRenderer BodyBack;
+	final ModelRenderer BodyBack;
 
-	ModelRenderer BodyBottom;
+	final ModelRenderer BodyBottom;
 
-	ModelRenderer LegFrontLeft1;
+	final ModelRenderer LegFrontLeft1;
 
-	ModelRenderer LegFrontRight1;
+	final ModelRenderer LegFrontRight1;
 
-	ModelRenderer LegBackLeft1;
+	final ModelRenderer LegBackLeft1;
 
-	ModelRenderer LegBackLeft2;
+	final ModelRenderer LegBackLeft2;
 
-	ModelRenderer LegBackRight1;
+	final ModelRenderer LegBackRight1;
 
-	ModelRenderer LegBackRight2;
+	final ModelRenderer LegBackRight2;
 
-	ModelRenderer Tail;
+	final ModelRenderer Tail;
 
 	public ModelRamWool()
 	{

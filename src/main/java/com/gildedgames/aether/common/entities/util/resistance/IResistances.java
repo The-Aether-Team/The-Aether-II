@@ -4,12 +4,15 @@ import java.util.Map;
 
 public interface IResistances
 {
-	public void addResistance(String id, float res);
-	public void setResistance(String id, float res);
-	public void removeResistance(String id, float res);
+	void addResistance(String id, float res);
 
-	public float getResistance(String id);
+	void setResistance(String id, float res);
 
-	public Map<String, Float> getResistances();
-	public void setResistances(Map<String, Float> list);
+	void removeResistance(String id, float res);
+
+	float getResistance(String id);
+
+	Map<String, Float> getResistances();
+
+	void setResistances(Map<String, Float> list);
 }

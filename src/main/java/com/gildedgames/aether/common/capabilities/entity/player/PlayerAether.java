@@ -5,8 +5,6 @@ import com.gildedgames.aether.api.dialog.IDialogController;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.*;
-import com.gildedgames.aether.common.entities.effects.AmbrosiumPoisoningEffect;
-import com.gildedgames.aether.common.entities.effects.StatusEffect;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.*;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;

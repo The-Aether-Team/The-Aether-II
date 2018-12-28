@@ -2,7 +2,6 @@ package com.gildedgames.aether.common.world.aether.prep;
 
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.common.world.aether.island.data.IslandData;
-import com.gildedgames.orbis_api.preparation.IPrepSector;
 import com.gildedgames.orbis_api.preparation.IPrepSectorData;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -11,7 +10,7 @@ public class PrepSectorDataAether implements IPrepSectorData
 {
 	private boolean dirty;
 
-	private World world;
+	private final World world;
 
 	private int sectorX, sectorY;
 

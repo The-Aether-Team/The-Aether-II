@@ -10,67 +10,67 @@ import net.minecraft.util.math.MathHelper;
 
 public class ModelKirrid extends ModelBase
 {
-	public ModelRenderer BodyMain;
+	public final ModelRenderer BodyMain;
 
-	public ModelRenderer BodyBack;
+	public final ModelRenderer BodyBack;
 
-	public ModelRenderer BodyBottom;
+	public final ModelRenderer BodyBottom;
 
-	public ModelRenderer LegFrontLeft1;
+	public final ModelRenderer LegFrontLeft1;
 
-	public ModelRenderer LegFrontLeft2;
+	public final ModelRenderer LegFrontLeft2;
 
-	public ModelRenderer LegFrontLeft3;
+	public final ModelRenderer LegFrontLeft3;
 
-	public ModelRenderer LegFrontRight1;
+	public final ModelRenderer LegFrontRight1;
 
-	public ModelRenderer LegFrontRight2;
+	public final ModelRenderer LegFrontRight2;
 
-	public ModelRenderer LegFrontRight3;
+	public final ModelRenderer LegFrontRight3;
 
-	public ModelRenderer LegBackLeft1;
+	public final ModelRenderer LegBackLeft1;
 
-	public ModelRenderer LegBackLeft2;
+	public final ModelRenderer LegBackLeft2;
 
-	public ModelRenderer LegBackLeft3;
+	public final ModelRenderer LegBackLeft3;
 
-	public ModelRenderer LegBackRight1;
+	public final ModelRenderer LegBackRight1;
 
-	public ModelRenderer LegBackRight2;
+	public final ModelRenderer LegBackRight2;
 
-	public ModelRenderer LegBackRight3;
+	public final ModelRenderer LegBackRight3;
 
-	public ModelRenderer Tail;
+	public final ModelRenderer Tail;
 
-	public ModelRenderer HeadNeck;
+	public final ModelRenderer HeadNeck;
 
-	public ModelRenderer HeadMain;
+	public final ModelRenderer HeadMain;
 
-	public ModelRenderer HeadSnout;
+	public final ModelRenderer HeadSnout;
 
-	public ModelRenderer HeadCheekLeft;
+	public final ModelRenderer HeadCheekLeft;
 
-	public ModelRenderer HeadCheekRight;
+	public final ModelRenderer HeadCheekRight;
 
-	public ModelRenderer HeadJaw;
+	public final ModelRenderer HeadJaw;
 
-	public ModelRenderer HeadEyeRight;
+	public final ModelRenderer HeadEyeRight;
 
-	public ModelRenderer HeadBrowRight;
+	public final ModelRenderer HeadBrowRight;
 
-	public ModelRenderer HeadEyeLeft;
+	public final ModelRenderer HeadEyeLeft;
 
-	public ModelRenderer HeadBrowLeft;
+	public final ModelRenderer HeadBrowLeft;
 
-	public ModelRenderer HeadPlate;
+	public final ModelRenderer HeadPlate;
 
-	public ModelRenderer HeadTop;
+	public final ModelRenderer HeadTop;
 
-	public ModelRenderer HeadEarLeft;
+	public final ModelRenderer HeadEarLeft;
 
-	public ModelRenderer HeadEarRight;
+	public final ModelRenderer HeadEarRight;
 
-	public float childZOffset = 4.0F;
+	public final float childZOffset = 4.0F;
 
 	public ModelKirrid()
 	{

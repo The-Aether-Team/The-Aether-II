@@ -7,7 +7,7 @@ import net.minecraft.pathfinding.PathNavigateGround;
 public class AIHopFloat extends EntityAI<EntityLiving>
 {
 
-	private HoppingMoveHelper hoppingMoveHelper;
+	private final HoppingMoveHelper hoppingMoveHelper;
 
 	public AIHopFloat(EntityLiving entity, HoppingMoveHelper hoppingMoveHelper)
 	{

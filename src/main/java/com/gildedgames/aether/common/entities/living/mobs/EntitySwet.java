@@ -1,9 +1,5 @@
 package com.gildedgames.aether.common.entities.living.mobs;
 
-import com.gildedgames.aether.api.AetherCapabilities;
-import com.gildedgames.aether.api.world.islands.IIslandData;
-import com.gildedgames.aether.api.world.islands.precipitation.IPrecipitationManager;
-import com.gildedgames.aether.api.world.islands.precipitation.PrecipitationType;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
@@ -14,7 +10,6 @@ import com.gildedgames.aether.common.entities.util.EntityExtendedMob;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketDetachSwet;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
-import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.player.EntityPlayer;
@@ -139,7 +134,7 @@ public class EntitySwet extends EntityExtendedMob
 
 				if (!effects.isEmpty())
 				{
-					ArrayList<PotionEffect> negEffects = new ArrayList();
+					ArrayList<PotionEffect> negEffects = new ArrayList<>();
 
 					for (PotionEffect p : effects)
 					{

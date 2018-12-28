@@ -95,8 +95,8 @@ public class PacketShopBuy implements IMessage
 							}
 
 							boolean canAfford = shopInstance.getCurrencyType().getValue(playerAether) >= (ShopUtil.getFilteredPrice(buy) * amount);
-							boolean isBuyItem = ItemHelper.getHashForItemStack(player.inventory.getItemStack()) == ItemHelper
-									.getHashForItemStack(buy.getItemStack());
+							boolean isBuyItem = ItemHelper.getKeyForItemStack(player.inventory.getItemStack()) == ItemHelper
+									.getKeyForItemStack(buy.getItemStack());
 							boolean canStack = player.inventory.getItemStack().isStackable();
 							boolean isAtStackLimit = player.inventory.getItemStack().getCount() >= player.inventory.getItemStack().getMaxStackSize();
 

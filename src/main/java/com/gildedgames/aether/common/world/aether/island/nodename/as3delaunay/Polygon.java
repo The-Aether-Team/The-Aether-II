@@ -9,17 +9,17 @@ public final class Polygon
 
 	public Polygon(final ArrayList<Point> vertices)
 	{
-		_vertices = vertices;
+		this._vertices = vertices;
 	}
 
 	public double area()
 	{
-		return Math.abs(signedDoubleArea() * 0.5);
+		return Math.abs(this.signedDoubleArea() * 0.5);
 	}
 
 	public Winding winding()
 	{
-		final double signedDoubleArea = signedDoubleArea();
+		final double signedDoubleArea = this.signedDoubleArea();
 		if (signedDoubleArea < 0)
 		{
 			return Winding.CLOCKWISE;
@@ -34,14 +34,14 @@ public final class Polygon
 	private double signedDoubleArea()
 	{
 		int index, nextIndex;
-		final int n = _vertices.size();
+		final int n = this._vertices.size();
 		Point point, next;
 		double signedDoubleArea = 0;
 		for (index = 0; index < n; ++index)
 		{
 			nextIndex = (index + 1) % n;
-			point = _vertices.get(index);
-			next = _vertices.get(nextIndex);
+			point = this._vertices.get(index);
+			next = this._vertices.get(nextIndex);
 			signedDoubleArea += point.x * next.y - next.x * point.y;
 		}
 		return signedDoubleArea;

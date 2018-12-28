@@ -63,17 +63,17 @@ public class Point
 	@Override
 	public String toString()
 	{
-		return x + ", " + y;
+		return this.x + ", " + this.y;
 	}
 
 	public double l2()
 	{
-		return x * x + y * y;
+		return this.x * this.x + this.y * this.y;
 	}
 
 	public double length()
 	{
-		return Math.sqrt(x * x + y * y);
+		return Math.sqrt(this.x * this.x + this.y * this.y);
 	}
 
 	@Override
@@ -92,11 +92,5 @@ public class Point
 		}
 
 		return false;
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
 	}
 }

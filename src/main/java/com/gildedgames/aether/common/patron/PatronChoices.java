@@ -10,9 +10,9 @@ public class PatronChoices implements NBT
 {
 	private PatronRewardArmor armorChoice;
 
-	private PlayerPatronRewards parent;
+	private final PlayerPatronRewards parent;
 
-	private PatronRewardRegistry registry;
+	private final PatronRewardRegistry registry;
 
 	public PatronChoices(PlayerPatronRewards parent, PatronRewardRegistry registry)
 	{

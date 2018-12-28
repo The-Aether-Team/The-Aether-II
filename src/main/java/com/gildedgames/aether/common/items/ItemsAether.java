@@ -154,7 +154,6 @@ public class ItemsAether
 			secret_skyroot_door = new ItemDoor(BlocksAether.secret_skyroot_door),
 			arkenium_door = new ItemDoor(BlocksAether.arkenium_door);
 
-
 	/*
 		SLOWEST	- 35
 		SLOW	- 30

@@ -16,13 +16,11 @@ import com.gildedgames.aether.common.capabilities.entity.spawning.EntitySpawning
 import com.gildedgames.aether.common.capabilities.entity.spawning.EntitySpawningInfoProvider;
 import com.gildedgames.aether.common.capabilities.world.chunk.PlacementFlagCapability;
 import com.gildedgames.aether.common.capabilities.world.chunk.PlacementFlagProvider;
-import com.gildedgames.aether.common.capabilities.world.precipitation.PrecipitationCapabilityProvider;
 import com.gildedgames.aether.common.capabilities.world.precipitation.PrecipitationManagerImpl;
 import com.gildedgames.aether.common.world.spawning.SpawnSystem;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.AttachCapabilitiesEvent;

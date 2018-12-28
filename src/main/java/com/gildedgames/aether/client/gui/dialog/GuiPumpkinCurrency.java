@@ -57,7 +57,7 @@ public class GuiPumpkinCurrency extends GuiElement implements IGuiCurrencyValue
 	{
 		private GuiTexture icon;
 
-		private ResourceLocation iconResource;
+		private final ResourceLocation iconResource;
 
 		private GuiText count;
 

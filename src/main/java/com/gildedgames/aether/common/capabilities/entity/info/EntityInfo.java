@@ -34,9 +34,7 @@ public class EntityInfo implements IEntityInfo
 	{
 		if (entity.hasCapability(AetherCapabilities.ENTITY_INFO, null))
 		{
-			IEntityInfo info = entity.getCapability(AetherCapabilities.ENTITY_INFO, null);
-
-			return info;
+			return entity.getCapability(AetherCapabilities.ENTITY_INFO, null);
 		}
 
 		return null;
@@ -115,9 +113,7 @@ public class EntityInfo implements IEntityInfo
 		@Override
 		public NBTBase writeNBT(Capability<IEntityInfo> capability, IEntityInfo instance, EnumFacing side)
 		{
-			NBTTagCompound tag = new NBTTagCompound();
-
-			return tag;
+			return new NBTTagCompound();
 		}
 
 		@Override

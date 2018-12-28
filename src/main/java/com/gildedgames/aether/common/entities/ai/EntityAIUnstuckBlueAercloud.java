@@ -15,7 +15,7 @@ import java.util.Random;
 public class EntityAIUnstuckBlueAercloud extends EntityAIBase
 {
 
-	private EntityCreature entity;
+	private final EntityCreature entity;
 
 	private double targetX;
 

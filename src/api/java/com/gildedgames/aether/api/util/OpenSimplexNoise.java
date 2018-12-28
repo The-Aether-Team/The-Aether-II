@@ -666,13 +666,11 @@ public class OpenSimplexNoise
 				final double score = p3 - 1;
 				if (aScore <= bScore && aScore < score)
 				{
-					aScore = score;
 					aPoint = 0x06;
 					aIsFurtherSide = true;
 				}
 				else if (aScore > bScore && bScore < score)
 				{
-					bScore = score;
 					bPoint = 0x06;
 					bIsFurtherSide = true;
 				}
@@ -682,13 +680,11 @@ public class OpenSimplexNoise
 				final double score = 1 - p3;
 				if (aScore <= bScore && aScore < score)
 				{
-					aScore = score;
 					aPoint = 0x01;
 					aIsFurtherSide = false;
 				}
 				else if (aScore > bScore && bScore < score)
 				{
-					bScore = score;
 					bPoint = 0x01;
 					bIsFurtherSide = false;
 				}

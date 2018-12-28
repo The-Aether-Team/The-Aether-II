@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 public class MoaNest
 {
 
-	public World world;
+	public final World world;
 
 	public BlockPos pos;
 

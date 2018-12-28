@@ -40,9 +40,9 @@ public class EntityTaegore extends EntityAetherAnimal implements IEntityMultiPar
 
 	private double prevHeadX, prevHeadY, prevHeadZ;
 
-	private MultiPartEntityPart[] parts;
+	private final MultiPartEntityPart[] parts;
 
-	private MultiPartEntityPart head = new MultiPartEntityPart(this, "head", .8F, .8F);
+	private final MultiPartEntityPart head = new MultiPartEntityPart(this, "head", .8F, .8F);
 
 	public EntityTaegore(final World world)
 	{
@@ -50,7 +50,7 @@ public class EntityTaegore extends EntityAetherAnimal implements IEntityMultiPar
 
 		this.setSize(1.25F, 1.25F);
 
-		this.parts = new MultiPartEntityPart[] { head };
+		this.parts = new MultiPartEntityPart[] { this.head };
 		this.spawnableBlock = BlocksAether.aether_grass;
 	}
 
@@ -75,15 +75,15 @@ public class EntityTaegore extends EntityAetherAnimal implements IEntityMultiPar
 	@Override
 	public World getWorld()
 	{
-		return getEntityWorld();
+		return this.getEntityWorld();
 	}
 
 	@Override
 	public boolean attackEntityFromPart(MultiPartEntityPart part, DamageSource source, float damage)
 	{
-		if (hurtResistantTime <= 10)
+		if (this.hurtResistantTime <= 10)
 		{
-			return attackEntityFrom(source, damage * 1.1f);
+			return this.attackEntityFrom(source, damage * 1.1f);
 		}
 		else
 		{
@@ -95,7 +95,7 @@ public class EntityTaegore extends EntityAetherAnimal implements IEntityMultiPar
 	@Override
 	public MultiPartEntityPart[] getParts()
 	{
-		return parts;
+		return this.parts;
 	}
 
 	@Override
@@ -172,21 +172,21 @@ public class EntityTaegore extends EntityAetherAnimal implements IEntityMultiPar
 	{
 		super.onLivingUpdate();
 
-		prevHeadX = head.posX;
-		prevHeadY = head.posY;
-		prevHeadZ = head.posZ;
+		this.prevHeadX = this.head.posX;
+		this.prevHeadY = this.head.posY;
+		this.prevHeadZ = this.head.posZ;
 
 		final float headDist = 1.05f;
-		float f = MathUtil.interpolateRotation(prevRenderYawOffset, renderYawOffset, 1);
-		float f1 = MathHelper.cos(-f * 0.017453292F - (float)Math.PI) * headDist;
-		float f2 = MathHelper.sin(-f * 0.017453292F - (float)Math.PI)* headDist;
+		float f = MathUtil.interpolateRotation(this.prevRenderYawOffset, this.renderYawOffset, 1);
+		float f1 = MathHelper.cos(-f * 0.017453292F - (float) Math.PI) * headDist;
+		float f2 = MathHelper.sin(-f * 0.017453292F - (float) Math.PI) * headDist;
 
-		head.setLocationAndAngles(posX - f2, posY + .4f, posZ - f1, 0F, 0F);
-		head.onUpdate();
+		this.head.setLocationAndAngles(this.posX - f2, this.posY + .4f, this.posZ - f1, 0F, 0F);
+		this.head.onUpdate();
 
-		head.prevPosX = prevHeadX;
-		head.prevPosY = prevHeadY;
-		head.prevPosZ = prevHeadZ;
+		this.head.prevPosX = this.prevHeadX;
+		this.head.prevPosY = this.prevHeadY;
+		this.head.prevPosZ = this.prevHeadZ;
 	}
 
 	@Override

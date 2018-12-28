@@ -19,7 +19,6 @@ public class PacketUpdatePrecipitation implements IMessage
 
 	private IPrecipitationManager precipitation;
 
-	@SuppressWarnings("unchecked")
 	public PacketUpdatePrecipitation()
 	{
 
@@ -69,7 +68,6 @@ public class PacketUpdatePrecipitation implements IMessage
 			{
 				precip.deserializeNBT(message.tag);
 			}
-
 
 			return null;
 		}

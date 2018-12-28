@@ -6,7 +6,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemHelper
 {
-	public static int getHashForItemStack(ItemStack stack, boolean hashDamage)
+	public static int getKeyForItemStack(ItemStack stack, boolean hashDamage)
 	{
 		if (stack == null)
 		{
@@ -25,13 +25,13 @@ public class ItemHelper
 		return hash;
 	}
 
-	public static int getHashForItemStack(ItemStack stack)
+	public static int getKeyForItemStack(ItemStack stack)
 	{
-		return getHashForItemStack(stack, true);
+		return getKeyForItemStack(stack, true);
 	}
 
 	public static boolean areEqual(ItemStack s1, ItemStack s2)
 	{
-		return ItemHelper.getHashForItemStack(s1) == ItemHelper.getHashForItemStack(s2);
+		return ItemHelper.getKeyForItemStack(s1) == ItemHelper.getKeyForItemStack(s2);
 	}
 }

@@ -28,9 +28,9 @@ public class GuiShopBuy extends GuiElement
 
 	private static final ResourceLocation BUTTON_PRESSED = AetherCore.getResource("textures/gui/shop/button_pressed.png");
 
-	private IShopInstance shopInstance;
+	private final IShopInstance shopInstance;
 
-	private int buyIndex;
+	private final int buyIndex;
 
 	public GuiShopBuy(Rect rect, int buyIndex, IShopInstance shopInstance)
 	{

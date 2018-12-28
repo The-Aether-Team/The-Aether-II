@@ -12,27 +12,27 @@ import net.minecraft.util.math.MathHelper;
  */
 public class ModelAerwhale extends ModelBase
 {
-	public ModelRenderer Head;
+	public final ModelRenderer Head;
 
-	public ModelRenderer Middlebody;
+	public final ModelRenderer Middlebody;
 
-	public ModelRenderer LeftFin;
+	public final ModelRenderer LeftFin;
 
-	public ModelRenderer RightFin;
+	public final ModelRenderer RightFin;
 
-	public ModelRenderer BottomPartHead;
+	public final ModelRenderer BottomPartHead;
 
-	public ModelRenderer MiddleFin;
+	public final ModelRenderer MiddleFin;
 
-	public ModelRenderer BackBody;
+	public final ModelRenderer BackBody;
 
-	public ModelRenderer BottomPartMiddlebody;
+	public final ModelRenderer BottomPartMiddlebody;
 
-	public ModelRenderer FrontBody;
+	public final ModelRenderer FrontBody;
 
-	public ModelRenderer BackfinLeft;
+	public final ModelRenderer BackfinLeft;
 
-	public ModelRenderer BackfinRight;
+	public final ModelRenderer BackfinRight;
 
 	public ModelAerwhale()
 	{

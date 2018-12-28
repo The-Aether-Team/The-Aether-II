@@ -16,7 +16,7 @@ public class PathNavigateAdvancedClimbing extends PathNavigate
 {
 	private boolean shouldAvoidSun;
 
-	private EntityAdvancedClimbing entity;
+	private final EntityAdvancedClimbing entity;
 
 	public PathNavigateAdvancedClimbing(EntityAdvancedClimbing entity, World worldIn)
 	{
@@ -56,10 +56,11 @@ public class PathNavigateAdvancedClimbing extends PathNavigate
 	{
 		if (this.world.getBlockState(pos).getMaterial() == Material.AIR)
 		{
-			BlockPos blockpos;
+			BlockPos blockpos = pos.down();
 
-			for (blockpos = pos.down(); blockpos.getY() > 0 && this.world.getBlockState(blockpos).getMaterial() == Material.AIR; blockpos = blockpos.down())
+			while (blockpos.getY() > 0 && this.world.getBlockState(blockpos).getMaterial() == Material.AIR)
 			{
+				blockpos = blockpos.down();
 			}
 
 			if (blockpos.getY() > 0)
@@ -81,11 +82,11 @@ public class PathNavigateAdvancedClimbing extends PathNavigate
 		}
 		else
 		{
-			BlockPos blockpos1;
+			BlockPos blockpos1 = pos.up();
 
-			for (blockpos1 = pos.up();
-				 blockpos1.getY() < this.world.getHeight() && this.world.getBlockState(blockpos1).getMaterial().isSolid(); blockpos1 = blockpos1.up())
+			while (blockpos1.getY() < this.world.getHeight() && this.world.getBlockState(blockpos1).getMaterial().isSolid())
 			{
+				blockpos1 = blockpos1.up();
 			}
 
 			return super.getPathToPos(blockpos1);

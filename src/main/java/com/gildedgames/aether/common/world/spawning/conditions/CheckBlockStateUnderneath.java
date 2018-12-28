@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 public class CheckBlockStateUnderneath implements PosCondition
 {
 
-	private IBlockState[] statesToCheckFor;
+	private final IBlockState[] statesToCheckFor;
 
 	public CheckBlockStateUnderneath(IBlockState... statesToCheckFor)
 	{

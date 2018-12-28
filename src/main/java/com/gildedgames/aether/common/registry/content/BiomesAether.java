@@ -55,7 +55,7 @@ public class BiomesAether
 	@GameRegistry.ObjectHolder("instanced_zone")
 	public static final Biome INSTANCED_ZONE = new BiomeInstancedZone();
 
-	public static List<BiomeAetherBase> POSSIBLE_BIOMES = Lists.newArrayList();
+	private static final List<BiomeAetherBase> POSSIBLE_BIOMES = Lists.newArrayList();
 
 	@SubscribeEvent
 	public static void registerBiome(final RegistryEvent.Register<Biome> event)
@@ -65,7 +65,8 @@ public class BiomesAether
 
 		BiomeDictionary.addTypes(HIGHLANDS, BiomeDictionary.Type.PLAINS);
 		BiomeDictionary.addTypes(MAGNETIC_HILLS, BiomeDictionary.Type.HILLS, BiomeDictionary.Type.HOT, BiomeDictionary.Type.SPARSE);
-		BiomeDictionary.addTypes(ARCTIC_PEAKS, BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.COLD, BiomeDictionary.Type.SNOWY, BiomeDictionary.Type.DENSE);
+		BiomeDictionary
+				.addTypes(ARCTIC_PEAKS, BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.COLD, BiomeDictionary.Type.SNOWY, BiomeDictionary.Type.DENSE);
 		BiomeDictionary.addTypes(FORGOTTEN_HIGHLANDS, BiomeDictionary.Type.DENSE);
 		BiomeDictionary.addTypes(IRRADIATED_FORESTS, BiomeDictionary.Type.FOREST, BiomeDictionary.Type.HOT, BiomeDictionary.Type.DENSE);
 		BiomeDictionary.addTypes(VOID, BiomeDictionary.Type.VOID);

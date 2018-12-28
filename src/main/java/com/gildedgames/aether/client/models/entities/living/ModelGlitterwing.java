@@ -8,17 +8,17 @@ import net.minecraft.entity.Entity;
 public class ModelGlitterwing extends ModelBase
 {
 
-	public ModelRenderer head;
+	public final ModelRenderer head;
 
-	public ModelRenderer body;
+	public final ModelRenderer body;
 
-	public ModelRenderer bodyback;
+	public final ModelRenderer bodyback;
 
-	public ModelRenderer wing_1;
+	public final ModelRenderer wing_1;
 
-	public ModelRenderer wing_2;
+	public final ModelRenderer wing_2;
 
-	public ModelRenderer shape8;
+	public final ModelRenderer shape8;
 
 	public ModelGlitterwing()
 	{

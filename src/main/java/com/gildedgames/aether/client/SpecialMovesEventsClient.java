@@ -21,7 +21,9 @@ public class SpecialMovesEventsClient
 
 	private static long sneakKeyDownTimeStamp, rollKeyDownTimeStamp;
 
-	private static int sneakTimeRequired = 300, maxRollHold = 300;
+	private static final int sneakTimeRequired = 300;
+
+	private static final int maxRollHold = 300;
 
 	private static int lastKey;
 

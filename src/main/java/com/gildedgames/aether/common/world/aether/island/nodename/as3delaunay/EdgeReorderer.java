@@ -15,28 +15,28 @@ public final class EdgeReorderer
 		{
 			throw new Error("Edges: criterion must be Vertex or Site");
 		}
-		_edges = new ArrayList();
-		_edgeOrientations = new ArrayList();
+		this._edges = new ArrayList<>();
+		this._edgeOrientations = new ArrayList<>();
 		if (origEdges.size() > 0)
 		{
-			_edges = reorderEdges(origEdges, criterion);
+			this._edges = this.reorderEdges(origEdges, criterion);
 		}
 	}
 
 	public ArrayList<VoronoiEdge> get_edges()
 	{
-		return _edges;
+		return this._edges;
 	}
 
 	public ArrayList<LR> get_edgeOrientations()
 	{
-		return _edgeOrientations;
+		return this._edgeOrientations;
 	}
 
 	public void dispose()
 	{
-		_edges = null;
-		_edgeOrientations = null;
+		this._edges = null;
+		this._edgeOrientations = null;
 	}
 
 	private ArrayList<VoronoiEdge> reorderEdges(final ArrayList<VoronoiEdge> origEdges, final Class criterion)
@@ -45,24 +45,24 @@ public final class EdgeReorderer
 		final int n = origEdges.size();
 		VoronoiEdge edge;
 		// we're going to reorder the edges in order of traversal
-		final ArrayList<Boolean> done = new ArrayList(n);
+		final ArrayList<Boolean> done = new ArrayList<>(n);
 		int nDone = 0;
 		for (int k = 0; k < n; k++)
 		{
 			done.add(false);
 		}
-		final ArrayList<VoronoiEdge> newEdges = new ArrayList();
+		final ArrayList<VoronoiEdge> newEdges = new ArrayList<>();
 
 		i = 0;
 		edge = origEdges.get(i);
 		newEdges.add(edge);
-		_edgeOrientations.add(LR.LEFT);
+		this._edgeOrientations.add(LR.LEFT);
 		ICoord firstPoint = (criterion == Vertex.class) ? edge.get_leftVertex() : edge.get_leftSite();
 		ICoord lastPoint = (criterion == Vertex.class) ? edge.get_rightVertex() : edge.get_rightSite();
 
 		if (firstPoint == Vertex.VERTEX_AT_INFINITY || lastPoint == Vertex.VERTEX_AT_INFINITY)
 		{
-			return new ArrayList();
+			return new ArrayList<>();
 		}
 
 		done.set(i, true);
@@ -81,26 +81,26 @@ public final class EdgeReorderer
 				final ICoord rightPoint = (criterion == Vertex.class) ? edge.get_rightVertex() : edge.get_rightSite();
 				if (leftPoint == Vertex.VERTEX_AT_INFINITY || rightPoint == Vertex.VERTEX_AT_INFINITY)
 				{
-					return new ArrayList();
+					return new ArrayList<>();
 				}
 				if (leftPoint == lastPoint)
 				{
 					lastPoint = rightPoint;
-					_edgeOrientations.add(LR.LEFT);
+					this._edgeOrientations.add(LR.LEFT);
 					newEdges.add(edge);
 					done.set(i, true);
 				}
 				else if (rightPoint == firstPoint)
 				{
 					firstPoint = leftPoint;
-					_edgeOrientations.add(0, LR.LEFT);
+					this._edgeOrientations.add(0, LR.LEFT);
 					newEdges.add(0, edge);
 					done.set(i, true);
 				}
 				else if (leftPoint == firstPoint)
 				{
 					firstPoint = rightPoint;
-					_edgeOrientations.add(0, LR.RIGHT);
+					this._edgeOrientations.add(0, LR.RIGHT);
 					newEdges.add(0, edge);
 
 					done.set(i, true);
@@ -108,7 +108,7 @@ public final class EdgeReorderer
 				else if (rightPoint == lastPoint)
 				{
 					lastPoint = leftPoint;
-					_edgeOrientations.add(LR.RIGHT);
+					this._edgeOrientations.add(LR.RIGHT);
 					newEdges.add(edge);
 					done.set(i, true);
 				}

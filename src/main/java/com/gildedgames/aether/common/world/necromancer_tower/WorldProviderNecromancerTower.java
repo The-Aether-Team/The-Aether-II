@@ -65,12 +65,6 @@ public class WorldProviderNecromancerTower extends WorldProviderSurface
 	}
 
 	@Override
-	public String getSaveFolder()
-	{
-		return super.getSaveFolder();
-	}
-
-	@Override
 	public double getHorizon()
 	{
 		return 0.0;

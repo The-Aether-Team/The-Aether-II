@@ -37,7 +37,7 @@ public class PlayerSwetTracker extends PlayerAetherModule
 			for (final EntitySwet swet : this.swets)
 			{
 				swet.setFoodSaturation(0);
-				spawnSwet(swet);
+				this.spawnSwet(swet);
 			}
 		}
 
@@ -46,8 +46,8 @@ public class PlayerSwetTracker extends PlayerAetherModule
 
 	public void detachSwet(final EntitySwet swet)
 	{
-		swets.remove(swet);
-		spawnSwet(swet);
+		this.swets.remove(swet);
+		this.spawnSwet(swet);
 	}
 
 	public void spawnSwet(final EntitySwet swet)
@@ -108,7 +108,7 @@ public class PlayerSwetTracker extends PlayerAetherModule
 			if (swet.processSucking(this.getEntity()))
 			{
 				it.remove();
-				spawnSwet(swet);
+				this.spawnSwet(swet);
 			}
 		}
 	}

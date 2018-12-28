@@ -14,11 +14,11 @@ public class RenderJosediya extends RenderLiving<EntityJosediya>
 
 	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/entities/npcs/josediya/josediya.png");
 
-	private static ResourceLocation EYES_CLOSED = AetherCore.getResource("textures/entities/npcs/josediya/josediya_eyes_closed.png");
+	private static final ResourceLocation EYES_CLOSED = AetherCore.getResource("textures/entities/npcs/josediya/josediya_eyes_closed.png");
 
-	private static ResourceLocation PUPIL_LEFT = AetherCore.getResource("textures/entities/npcs/josediya/josediya_pupil_left.png");
+	private static final ResourceLocation PUPIL_LEFT = AetherCore.getResource("textures/entities/npcs/josediya/josediya_pupil_left.png");
 
-	private static ResourceLocation PUPIL_RIGHT = AetherCore.getResource("textures/entities/npcs/josediya/josediya_pupil_right.png");
+	private static final ResourceLocation PUPIL_RIGHT = AetherCore.getResource("textures/entities/npcs/josediya/josediya_pupil_right.png");
 
 	public RenderJosediya(final RenderManager renderManager)
 	{

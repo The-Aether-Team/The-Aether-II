@@ -7,7 +7,7 @@ import java.util.Random;
 public class SimpleInheritance implements Inheritance
 {
 
-	private Type type;
+	private final Type type;
 
 	public SimpleInheritance(Type type)
 	{

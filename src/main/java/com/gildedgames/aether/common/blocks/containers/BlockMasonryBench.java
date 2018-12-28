@@ -65,9 +65,7 @@ public class BlockMasonryBench extends BlockContainer
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		int meta = state.getValue(PROPERTY_FACING).getIndex();
-
-		return meta;
+		return state.getValue(PROPERTY_FACING).getIndex();
 	}
 
 	@Override

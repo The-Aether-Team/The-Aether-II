@@ -1,7 +1,6 @@
 package com.gildedgames.aether.client.renderer.entities;
 
 import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.*;
@@ -32,7 +31,6 @@ public class RenderMovingBlock extends Render<EntityMovingBlock>
 			this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 
 			final IBlockState state = entity.getBlockState();
-			final Block block = state.getBlock();
 
 			final BlockPos pos = new BlockPos(0, 256, 0);
 
@@ -40,7 +38,7 @@ public class RenderMovingBlock extends Render<EntityMovingBlock>
 
 			if (state != world.getBlockState(pos))
 			{
-				if (block.getRenderType(state) == EnumBlockRenderType.MODEL)
+				if (state.getRenderType() == EnumBlockRenderType.MODEL)
 				{
 					RenderHelper.disableStandardItemLighting();
 

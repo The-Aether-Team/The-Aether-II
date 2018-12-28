@@ -14,7 +14,6 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockValkyrieGrass;
 import com.gildedgames.aether.common.registry.content.GenerationAether;
 import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import com.gildedgames.aether.common.world.aether.WorldProviderAether;
-import com.gildedgames.aether.common.world.aether.biomes.arctic_peaks.BiomeArcticPeaks;
 import com.gildedgames.aether.common.world.aether.features.*;
 import com.gildedgames.aether.common.world.aether.features.aerclouds.WorldGenAercloud;
 import com.gildedgames.aether.common.world.aether.features.aerclouds.WorldGenPurpleAercloud;
@@ -35,6 +34,7 @@ import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
 import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.MinecraftForge;
@@ -67,7 +67,7 @@ public class BiomeAetherDecorator
 
 	private final WorldGenIceCrystals genIceCrystals;
 
-	public boolean generateBushes = true;
+	public final boolean generateBushes = true;
 
 	public BiomeAetherDecorator()
 	{
@@ -280,10 +280,9 @@ public class BiomeAetherDecorator
 	{
 		MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Pre(world, random, pos));
 
-		final int chunkX = pos.getX() >> 4;
-		final int chunkZ = pos.getZ() >> 4;
+		ChunkPos chunkPos = new ChunkPos(pos);
 
-		if (TerrainGen.decorate(world, random, pos, DecorateBiomeEvent.Decorate.EventType.CUSTOM))
+		if (TerrainGen.decorate(world, random, chunkPos, DecorateBiomeEvent.Decorate.EventType.CUSTOM))
 		{
 			this.generateOres(world, random, pos);
 		}
@@ -292,7 +291,7 @@ public class BiomeAetherDecorator
 
 		int count;
 
-		IIslandData island = IslandHelper.get(world, chunkX, chunkZ);
+		IIslandData island = IslandHelper.get(world, chunkPos.x, chunkPos.z);
 
 		if (island == null)
 		{
@@ -311,13 +310,13 @@ public class BiomeAetherDecorator
 
 		final WorldProviderAether provider = WorldProviderAether.get(world);
 
-		if (TerrainGen.decorate(world, random, pos, DecorateBiomeEvent.Decorate.EventType.TREE))
+		if (TerrainGen.decorate(world, random, chunkPos, DecorateBiomeEvent.Decorate.EventType.TREE))
 		{
 			WorldDecorationUtil.generateDecorationsWithNoise(island.getTreeDecorations(), world, blockAccessExtended, random, pos, provider.getNoise(),
 					island.getOpenAreaDecorationGenChance(), island.getForestTreeCountModifier());
 		}
 
-		if (TerrainGen.decorate(world, random, pos, DecorateBiomeEvent.Decorate.EventType.CUSTOM))
+		if (TerrainGen.decorate(world, random, chunkPos, DecorateBiomeEvent.Decorate.EventType.CUSTOM))
 		{
 			// Moa Nests
 			if (random.nextInt(4) == 0)
@@ -331,7 +330,7 @@ public class BiomeAetherDecorator
 			}
 		}
 
-		if (TerrainGen.decorate(world, random, pos, DecorateBiomeEvent.Decorate.EventType.TREE))
+		if (TerrainGen.decorate(world, random, chunkPos, DecorateBiomeEvent.Decorate.EventType.TREE))
 		{
 			// Orange Tree Generator
 			for (count = 0; count < 3; count++)
@@ -344,7 +343,7 @@ public class BiomeAetherDecorator
 			}
 		}
 
-		if (TerrainGen.decorate(world, random, pos, DecorateBiomeEvent.Decorate.EventType.CUSTOM))
+		if (TerrainGen.decorate(world, random, chunkPos, DecorateBiomeEvent.Decorate.EventType.CUSTOM))
 		{
 			// Blueberry Bush Generator
 			if (this.generateBushes)
@@ -360,7 +359,7 @@ public class BiomeAetherDecorator
 			}
 		}
 
-		if (TerrainGen.decorate(world, random, pos, DecorateBiomeEvent.Decorate.EventType.FLOWERS))
+		if (TerrainGen.decorate(world, random, chunkPos, DecorateBiomeEvent.Decorate.EventType.FLOWERS))
 		{
 			// Purple Flowers Generator
 			for (count = 0; count < 8; count++)
@@ -442,7 +441,7 @@ public class BiomeAetherDecorator
 			}
 		}
 
-		if (TerrainGen.decorate(world, random, pos, DecorateBiomeEvent.Decorate.EventType.PUMPKIN))
+		if (TerrainGen.decorate(world, random, chunkPos, DecorateBiomeEvent.Decorate.EventType.PUMPKIN))
 		{
 			// Kirrid Grass Generator
 			if (random.nextInt(10) == 0)
@@ -458,7 +457,7 @@ public class BiomeAetherDecorator
 			}
 		}
 
-		if (TerrainGen.decorate(world, random, pos, DecorateBiomeEvent.Decorate.EventType.CUSTOM))
+		if (TerrainGen.decorate(world, random, chunkPos, DecorateBiomeEvent.Decorate.EventType.CUSTOM))
 		{
 			this.generateClouds(world, random, new BlockPos(pos.getX(), 0, pos.getZ()));
 		}

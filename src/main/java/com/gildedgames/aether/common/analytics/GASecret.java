@@ -4,7 +4,7 @@ import org.apache.commons.codec.binary.Base64;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
@@ -21,12 +21,12 @@ public class GASecret
 	{
 		try
 		{
-			SecretKeySpec key = new SecretKeySpec(secret.getBytes("UTF-8"), ALGORITHM);
+			SecretKeySpec key = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), ALGORITHM);
 
 			this.mac = Mac.getInstance(ALGORITHM);
 			this.mac.init(key);
 		}
-		catch (NoSuchAlgorithmException | InvalidKeyException | UnsupportedEncodingException e)
+		catch (NoSuchAlgorithmException | InvalidKeyException e)
 		{
 			throw new RuntimeException("Couldn't initialize MAC", e);
 		}

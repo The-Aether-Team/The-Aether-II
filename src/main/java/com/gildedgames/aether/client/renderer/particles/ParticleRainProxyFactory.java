@@ -50,7 +50,5 @@ public class ParticleRainProxyFactory extends ParticleRain.Factory
 
 		return particle;
 
-
-
 	}
 }

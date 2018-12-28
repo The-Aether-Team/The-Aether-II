@@ -14,7 +14,7 @@ import net.minecraft.item.ItemStack;
 public class ContainerEquipment extends ContainerPlayer
 {
 	/** See {@link GuiContainerCreative#basicInventory} **/
-	private static InventoryBasic dumbInventory = new InventoryBasic("tmp", true, 52);
+	private static final InventoryBasic dumbInventory = new InventoryBasic("tmp", true, 52);
 
 	private final IPlayerAether aePlayer;
 

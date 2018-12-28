@@ -24,7 +24,13 @@ import java.util.Collection;
 
 public class CurrencyAether
 {
-	public static int GILT = 1, GILTAE = 100, GILTAEN = 10000, GILTAENI = 1000000;
+	public static final int GILT = 1;
+
+	public static final int GILTAE = 100;
+
+	public static final int GILTAEN = 10000;
+
+	public static final int GILTAENI = 1000000;
 
 	public static void onServerAboutToStart()
 	{
@@ -193,8 +199,8 @@ public class CurrencyAether
 
 				for (ItemStack s : ingredient.getMatchingStacks())
 				{
-					if (!c.hasValue(s, currency) && (recursiveParent == null || ItemHelper.getHashForItemStack(recursiveParent) != ItemHelper
-							.getHashForItemStack(s)))
+					if (!c.hasValue(s, currency) && (recursiveParent == null || ItemHelper.getKeyForItemStack(recursiveParent) != ItemHelper
+							.getKeyForItemStack(s)))
 					{
 						if (recursiveParent == null)
 						{
@@ -236,7 +242,7 @@ public class CurrencyAether
 		{
 			ItemStack s = recipe.getInput();
 
-			if (!c.hasValue(s, currency) && (recursiveParent == null || ItemHelper.getHashForItemStack(recursiveParent) != ItemHelper.getHashForItemStack(s)))
+			if (!c.hasValue(s, currency) && (recursiveParent == null || ItemHelper.getKeyForItemStack(recursiveParent) != ItemHelper.getKeyForItemStack(s)))
 			{
 				if (recursiveParent == null)
 				{

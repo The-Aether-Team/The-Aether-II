@@ -15,13 +15,13 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
@@ -239,16 +239,14 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	}
 
 	@Override
-	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
+	public void getDrops(NonNullList<ItemStack> list, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
-		List<ItemStack> items = super.getDrops(world, pos, state, fortune);
+		super.getDrops(list, world, pos, state, fortune);
 
 		if (state.getValue(PROPERTY_STAGE) == STAGE_COUNT)
 		{
-			items.addAll(this.getFruitDrops(world, state));
+			list.addAll(this.getFruitDrops(world, state));
 		}
-
-		return items;
 	}
 
 	@Override

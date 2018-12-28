@@ -16,7 +16,7 @@ public final class VoronoiEdge
 
 	final public static VoronoiEdge DELETED = new VoronoiEdge();
 
-	final private static Stack<VoronoiEdge> _pool = new Stack();
+	final private static Stack<VoronoiEdge> _pool = new Stack<>();
 
 	private static int _nedges = 0;
 
@@ -276,7 +276,7 @@ public final class VoronoiEdge
 
 	private void init()
 	{
-		this._sites = new HashMap();
+		this._sites = new HashMap<>();
 	}
 
 	@Override
@@ -420,7 +420,7 @@ public final class VoronoiEdge
 			}
 		}
 
-		this._clippedVertices = new HashMap();
+		this._clippedVertices = new HashMap<>();
 		if (vertex0 == this._leftVertex)
 		{
 			this._clippedVertices.put(LR.LEFT, new Point(x0, y0));

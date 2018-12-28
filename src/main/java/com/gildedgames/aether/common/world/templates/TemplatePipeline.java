@@ -64,11 +64,11 @@ public class TemplatePipeline
 
 		private int chunksLeft;
 
-		private Template template;
+		private final Template template;
 
-		private BlockPos pos;
+		private final BlockPos pos;
 
-		private List<ChunkPos> chunksDone = Lists.newArrayList();
+		private final List<ChunkPos> chunksDone = Lists.newArrayList();
 
 		private Runnable postConstruction;
 

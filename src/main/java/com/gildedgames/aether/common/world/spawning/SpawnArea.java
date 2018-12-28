@@ -10,13 +10,13 @@ import java.util.Objects;
 
 public class SpawnArea implements ISpawnArea
 {
-	private ChunkPos min;
+	private final ChunkPos min;
 
-	private ChunkPos max;
+	private final ChunkPos max;
 
-	private int areaX;
+	private final int areaX;
 
-	private int areaZ;
+	private final int areaZ;
 
 	private int entityCount;
 
@@ -126,20 +126,20 @@ public class SpawnArea implements ISpawnArea
 			return true;
 		}
 
-		if (o == null || getClass() != o.getClass())
+		if (o == null || this.getClass() != o.getClass())
 		{
 			return false;
 		}
 
 		SpawnArea area = (SpawnArea) o;
 
-		return areaX == area.areaX &&
-				areaZ == area.areaZ &&
-				entityCount == area.entityCount &&
-				hasPlayerInside == area.hasPlayerInside &&
-				dirty == area.dirty &&
-				Objects.equals(min, area.min) &&
-				Objects.equals(max, area.max);
+		return this.areaX == area.areaX &&
+				this.areaZ == area.areaZ &&
+				this.entityCount == area.entityCount &&
+				this.hasPlayerInside == area.hasPlayerInside &&
+				this.dirty == area.dirty &&
+				Objects.equals(this.min, area.min) &&
+				Objects.equals(this.max, area.max);
 	}
 
 	@Override

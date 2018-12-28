@@ -83,11 +83,11 @@ public class ClientEventHandler
 
 	private static Runnable AFTER_FADE;
 
-	private static Minecraft mc = Minecraft.getMinecraft();
+	private static final Minecraft mc = Minecraft.getMinecraft();
 
 	private static GuiAetherLoading LOADING = new GuiAetherLoading();
 
-	private static CustomLoadingRenderer.ICustomLoading BLACK_LOADING = ClientEventHandler::drawOverlay;
+	private static final CustomLoadingRenderer.ICustomLoading BLACK_LOADING = ClientEventHandler::drawOverlay;
 
 	public static boolean isFadingIn()
 	{
@@ -223,7 +223,8 @@ public class ClientEventHandler
 	@SubscribeEvent
 	public static void onOpenGui(final GuiOpenEvent event)
 	{
-		if (event.getGui() instanceof GuiMainMenu && !AetherCore.IS_SIGNED && !AetherCore.isInsideDevEnvironment() && !AetherCore.CONFIG.hasAckFingerprintViolation())
+		if (event.getGui() instanceof GuiMainMenu && !AetherCore.IS_SIGNED && !AetherCore.isInsideDevEnvironment() && !AetherCore.CONFIG
+				.hasAckFingerprintViolation())
 		{
 			event.setGui(new GuiAetherUnsigned(event.getGui()));
 
@@ -232,8 +233,10 @@ public class ClientEventHandler
 
 		GuiScreen gui = event.getGui();
 
-		if(gui instanceof GuiEditSign) {
-			if(((GuiEditSign) gui).tileSign instanceof TileEntitySkyrootSign){
+		if (gui instanceof GuiEditSign)
+		{
+			if (((GuiEditSign) gui).tileSign instanceof TileEntitySkyrootSign)
+			{
 				event.setGui(new GuiSkyrootSign(((GuiEditSign) gui).tileSign));
 			}
 		}

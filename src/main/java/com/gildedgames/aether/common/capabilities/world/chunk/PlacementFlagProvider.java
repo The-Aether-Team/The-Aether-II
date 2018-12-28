@@ -12,7 +12,7 @@ import javax.annotation.Nullable;
 
 public class PlacementFlagProvider implements ICapabilitySerializable<NBTBase>
 {
-	private IPlacementFlagCapability capability;
+	private final IPlacementFlagCapability capability;
 
 	public PlacementFlagProvider(IPlacementFlagCapability capability)
 	{

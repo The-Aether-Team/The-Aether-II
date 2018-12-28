@@ -9,8 +9,6 @@ import java.awt.*;
 import java.util.LinkedList;
 import java.util.Random;
 
-// TODO: Replace with enums, this system is not upgrade-friendly
-@Deprecated
 public class MoaGenePoolDataSet<T extends Gene>
 {
 
@@ -79,7 +77,7 @@ public class MoaGenePoolDataSet<T extends Gene>
 		WING_STRENGTH.genes().add(new DataGene<>("moa.wing_strength.excellent", 4, new SimpleInheritance(SimpleInheritance.Type.RANDOM)));
 	}
 
-	private LinkedList<T> genes = Lists.newLinkedList();
+	private final LinkedList<T> genes = Lists.newLinkedList();
 
 	private MoaGenePoolDataSet()
 	{

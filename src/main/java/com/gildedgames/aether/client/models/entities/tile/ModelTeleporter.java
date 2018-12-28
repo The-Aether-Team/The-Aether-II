@@ -6,27 +6,87 @@ import net.minecraft.entity.Entity;
 
 public class ModelTeleporter extends ModelBase
 {
-	public ModelRenderer BlockBase;
+	public final ModelRenderer BlockBase;
 
-	public ModelRenderer ShardFront1, ShardLeft1, ShardLeft2, ShardLeft3, ShardLeft4, ShardLeft5;
+	public final ModelRenderer ShardFront1;
 
-	public ModelRenderer ShardBack, ShardRight1, ShardFront2, ShardFront3;
+	public final ModelRenderer ShardLeft1;
 
-	public ModelRenderer ShardRight2, ShardRight3, ShardRight4, ShardRight5;
+	public final ModelRenderer ShardLeft2;
 
-	public ModelRenderer PedestalPlatform, PedestalBase, PortalFramebase, PedestalFrameHolder;
+	public final ModelRenderer ShardLeft3;
 
-	public ModelRenderer Core1, Core2, Core3, Core4;
+	public final ModelRenderer ShardLeft4;
 
-	public ModelRenderer WingRightBase, WingLeftBase;
+	public final ModelRenderer ShardLeft5;
 
-	public ModelRenderer WingRightArm, WingRightFeather1, WingRightFeather2, WingRightFeather3;
+	public final ModelRenderer ShardBack;
 
-	public ModelRenderer WingLeftArm, WingLeftFeather1, WingLeftFeather2, WingLeftFeather3;
+	public final ModelRenderer ShardRight1;
 
-	public ModelRenderer PortalFrameRight, PortalFrameLeft, PortalFrameTop;
+	public final ModelRenderer ShardFront2;
 
-	public ModelRenderer PortalCorner1, PortalCorner2, PortalCorner3, PortalCorner4, PortalVortex;
+	public final ModelRenderer ShardFront3;
+
+	public final ModelRenderer ShardRight2;
+
+	public final ModelRenderer ShardRight3;
+
+	public final ModelRenderer ShardRight4;
+
+	public final ModelRenderer ShardRight5;
+
+	public final ModelRenderer PedestalPlatform;
+
+	public final ModelRenderer PedestalBase;
+
+	public final ModelRenderer PortalFramebase;
+
+	public final ModelRenderer PedestalFrameHolder;
+
+	public final ModelRenderer Core1;
+
+	public final ModelRenderer Core2;
+
+	public final ModelRenderer Core3;
+
+	public final ModelRenderer Core4;
+
+	public final ModelRenderer WingRightBase;
+
+	public final ModelRenderer WingLeftBase;
+
+	public final ModelRenderer WingRightArm;
+
+	public final ModelRenderer WingRightFeather1;
+
+	public final ModelRenderer WingRightFeather2;
+
+	public final ModelRenderer WingRightFeather3;
+
+	public final ModelRenderer WingLeftArm;
+
+	public final ModelRenderer WingLeftFeather1;
+
+	public final ModelRenderer WingLeftFeather2;
+
+	public final ModelRenderer WingLeftFeather3;
+
+	public final ModelRenderer PortalFrameRight;
+
+	public final ModelRenderer PortalFrameLeft;
+
+	public final ModelRenderer PortalFrameTop;
+
+	public final ModelRenderer PortalCorner1;
+
+	public final ModelRenderer PortalCorner2;
+
+	public final ModelRenderer PortalCorner3;
+
+	public final ModelRenderer PortalCorner4;
+
+	public final ModelRenderer PortalVortex;
 
 	public ModelTeleporter()
 	{

@@ -4,7 +4,7 @@ public enum AetherDamageType
 {
 	SLASH("aether.damagetype.slash"), PIERCE("aether.damagetype.pierce"), IMPACT("aether.damagetype.impact");
 
-	private String localizationKey;
+	private final String localizationKey;
 
 	AetherDamageType(String name)
 	{

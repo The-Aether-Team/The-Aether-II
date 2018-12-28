@@ -26,7 +26,7 @@ import net.minecraft.util.math.BlockPos;
 public class GenerationAether
 {
 
-	public static IOrbisDefinitionRegistry registry = new OrbisDefinitionRegistry(AetherCore.MOD_ID);
+	public static final IOrbisDefinitionRegistry registry = new OrbisDefinitionRegistry(AetherCore.MOD_ID);
 
 	public static TemplateDefinition blue_skyroot_tree_1, blue_skyroot_tree_2, blue_skyroot_tree_3;
 
@@ -392,7 +392,7 @@ public class GenerationAether
 
 		CRAZY_MUTANT_TREE = new BlueprintDefinition(BlueprintsAether.CRAZY_MUTANT_TREE, 0).setRegistry(registry)
 				.setConditions(PlacementConditions.onSpecificBlock(0, BlocksAether.aether_grass, BlocksAether.aether_dirt), replace,
-						PlacementConditions.ignoreBlock(0,BlocksAether.quicksoil.getDefaultState()));
+						PlacementConditions.ignoreBlock(0, BlocksAether.quicksoil.getDefaultState()));
 
 		registry.register(0, OUTPOST_A);
 		registry.register(1, NECROMANCER_TOWER);
@@ -428,47 +428,45 @@ public class GenerationAether
 		registry.register(24, WISPROOT_DARK_BLUE);
 		registry.register(25, CRAZY_MUTANT_TREE);
 
-		reg(0, blue_skyroot_tree_1);
-		reg(1, blue_skyroot_tree_2);
-		reg(2, blue_skyroot_tree_3);
-		reg(3, green_skyroot_tree_1);
-		reg(4, green_skyroot_tree_2);
-		reg(5, green_skyroot_tree_3);
-		reg(6, green_skyroot_oak_1);
-		reg(7, green_skyroot_oak_2);
-		reg(8, golden_oak_1);
-		reg(9, golden_oak_2);
-		reg(10, dark_blue_skyroot_oak_1);
-		reg(11, dark_blue_skyroot_oak_2);
-		reg(12, green_skyroot_windswept_1);
-		reg(13, green_skyroot_windswept_2);
-		reg(14, green_skyroot_windswept_3);
-		reg(15, green_skyroot_windswept_4);
-		reg(16, green_skyroot_windswept_5);
-		reg(17, green_skyroot_windswept_6);
-		reg(18, green_skyroot_windswept_7);
-		reg(19, large_green_skyroot_pine_1);
-		reg(20, large_green_skyroot_pine_2);
-		reg(21, green_skyroot_pine_1);
-		reg(22, green_skyroot_pine_2);
-		reg(23, green_skyroot_pine_3);
-		reg(24, green_skyroot_pine_4);
-		reg(25, green_skyroot_pine_5);
-		reg(26, dark_blue_skyroot_tree_1);
-		reg(27, dark_blue_skyroot_tree_2);
-		reg(28, dark_blue_skyroot_tree_3);
-		reg(29, skyroot_moa_nest_tree_1);
-		reg(30, skyroot_moa_nest_1);
-		reg(31, skyroot_moa_nest_2);
-		reg(32, aether_portal);
-		reg(35, aether_portal_for_world);
+		registerTemplate(0, blue_skyroot_tree_1);
+		registerTemplate(1, blue_skyroot_tree_2);
+		registerTemplate(2, blue_skyroot_tree_3);
+		registerTemplate(3, green_skyroot_tree_1);
+		registerTemplate(4, green_skyroot_tree_2);
+		registerTemplate(5, green_skyroot_tree_3);
+		registerTemplate(6, green_skyroot_oak_1);
+		registerTemplate(7, green_skyroot_oak_2);
+		registerTemplate(8, golden_oak_1);
+		registerTemplate(9, golden_oak_2);
+		registerTemplate(10, dark_blue_skyroot_oak_1);
+		registerTemplate(11, dark_blue_skyroot_oak_2);
+		registerTemplate(12, green_skyroot_windswept_1);
+		registerTemplate(13, green_skyroot_windswept_2);
+		registerTemplate(14, green_skyroot_windswept_3);
+		registerTemplate(15, green_skyroot_windswept_4);
+		registerTemplate(16, green_skyroot_windswept_5);
+		registerTemplate(17, green_skyroot_windswept_6);
+		registerTemplate(18, green_skyroot_windswept_7);
+		registerTemplate(19, large_green_skyroot_pine_1);
+		registerTemplate(20, large_green_skyroot_pine_2);
+		registerTemplate(21, green_skyroot_pine_1);
+		registerTemplate(22, green_skyroot_pine_2);
+		registerTemplate(23, green_skyroot_pine_3);
+		registerTemplate(24, green_skyroot_pine_4);
+		registerTemplate(25, green_skyroot_pine_5);
+		registerTemplate(26, dark_blue_skyroot_tree_1);
+		registerTemplate(27, dark_blue_skyroot_tree_2);
+		registerTemplate(28, dark_blue_skyroot_tree_3);
+		registerTemplate(29, skyroot_moa_nest_tree_1);
+		registerTemplate(30, skyroot_moa_nest_1);
+		registerTemplate(31, skyroot_moa_nest_2);
+		registerTemplate(32, aether_portal);
+		registerTemplate(35, aether_portal_for_world);
 	}
 
-	public static TemplateDefinition reg(final int id, final TemplateDefinition def)
+	private static void registerTemplate(final int id, final TemplateDefinition def)
 	{
 		AetherCore.PROXY.content().templates().register(id, def);
-
-		return def;
 	}
 
 }

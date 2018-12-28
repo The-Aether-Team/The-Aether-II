@@ -6,7 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 
 public class AIAvoidEntityAsChild extends EntityAIAvoidEntity<EntityPlayer>
 {
-	private EntityCreature entity;
+	private final EntityCreature entity;
 
 	public AIAvoidEntityAsChild(EntityCreature creature, Class<EntityPlayer> entityToAvoid, float par3, double par4, double par6)
 	{

@@ -396,20 +396,6 @@ public class BlockAetherPortal extends BlockBreakable
 			return this.portalPos != null && this.width >= 2 && this.width <= 21 && this.height >= 3 && this.height <= 21;
 		}
 
-		public void createPortal()
-		{
-			for (int i = 0; i < this.width; ++i)
-			{
-				final BlockPos blockpos = this.portalPos.offset(this.rightSideFacing, i);
-
-				for (int j = 0; j < this.height; ++j)
-				{
-					this.world.setBlockState(blockpos.up(j),
-							BlocksAether.aether_portal.getDefaultState().withProperty(BlockAetherPortal.PROPERTY_AXIS, this.axis), 2);
-				}
-			}
-		}
-
 		public int getPortalBlocks()
 		{
 			return this.portalBlocks;

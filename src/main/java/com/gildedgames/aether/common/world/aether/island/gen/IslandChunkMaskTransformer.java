@@ -23,7 +23,8 @@ public class IslandChunkMaskTransformer implements IChunkMaskTransformer
 		this.setMaskValue(IslandBlockType.WATER_BLOCK, Blocks.WATER.getDefaultState());
 
 		this.setMaskValue(IslandBlockType.STONE_BLOCK, BlocksAether.holystone.getDefaultState());
-		this.setMaskValue(IslandBlockType.STONE_MOSSY_BLOCK, BlocksAether.holystone.getDefaultState().withProperty(BlockHolystone.PROPERTY_VARIANT, BlockHolystone.MOSSY_HOLYSTONE));
+		this.setMaskValue(IslandBlockType.STONE_MOSSY_BLOCK,
+				BlocksAether.holystone.getDefaultState().withProperty(BlockHolystone.PROPERTY_VARIANT, BlockHolystone.MOSSY_HOLYSTONE));
 
 		this.setMaskValue(IslandBlockType.SNOW_BLOCK, BlocksAether.highlands_snow.getDefaultState());
 		this.setMaskValue(IslandBlockType.FERROSITE_BLOCK, BlocksAether.ferrosite.getDefaultState());

@@ -6,7 +6,7 @@ import net.minecraft.world.World;
 
 public class OffsetFromTopBlockPositionSelector implements PositionSelector
 {
-	private int offset;
+	private final int offset;
 
 	public OffsetFromTopBlockPositionSelector(int offset)
 	{

@@ -2,15 +2,12 @@ package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
-import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.world.aether.prep.PrepSectorDataAether;
 import com.gildedgames.orbis_api.preparation.IPrepManager;
 import com.gildedgames.orbis_api.preparation.IPrepRegistryEntry;
 import com.gildedgames.orbis_api.preparation.IPrepSector;
 import com.gildedgames.orbis_api.preparation.impl.util.PrepHelper;
 import com.gildedgames.orbis_api.util.ChunkMap;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
@@ -21,7 +18,7 @@ import java.util.concurrent.Future;
 
 public class PlayerSectorModule extends PlayerAetherModule
 {
-	private ChunkMap<WatchedSector> map = new ChunkMap<>();
+	private final ChunkMap<WatchedSector> map = new ChunkMap<>();
 
 	private Future<IPrepSector> waiting;
 
@@ -221,7 +218,6 @@ public class PlayerSectorModule extends PlayerAetherModule
 		}
 	}
 
-
 	@Override
 	public void write(NBTTagCompound tag)
 	{
@@ -240,7 +236,7 @@ public class PlayerSectorModule extends PlayerAetherModule
 
 		private IPrepSector sector;
 
-		private IPrepRegistryEntry entry;
+		private final IPrepRegistryEntry entry;
 
 		private boolean watching;
 

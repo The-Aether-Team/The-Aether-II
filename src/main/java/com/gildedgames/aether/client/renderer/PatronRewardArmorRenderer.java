@@ -30,7 +30,7 @@ import java.util.List;
 
 public class PatronRewardArmorRenderer implements IPatronRewardRenderer
 {
-	private PatronRewardArmor reward;
+	private final PatronRewardArmor reward;
 
 	private AbstractClientPlayer player;
 

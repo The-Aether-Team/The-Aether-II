@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.entity.spawning.EntitySpawn;
 import com.gildedgames.aether.api.entity.spawning.ISpawningInfo;
 import com.gildedgames.aether.api.world.*;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis_api.OrbisAPI;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.Entity;
@@ -134,7 +135,7 @@ public class SpawnHandler implements ISpawnHandler
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
+			AetherCore.LOGGER.warn("Failed to check and spawn entries", e);
 		}
 	}
 
@@ -311,7 +312,7 @@ public class SpawnHandler implements ISpawnHandler
 						{
 							EntityLiving living = (EntityLiving) entity;
 
-							if (!ForgeEventFactory.doSpecialSpawn(living, manager.getWorld(), posX, posY, posZ))
+							if (!ForgeEventFactory.doSpecialSpawn(living, manager.getWorld(), posX, posY, posZ, null))
 							{
 								living.onInitialSpawn(manager.getWorld().getDifficultyForLocation(new BlockPos(living)), null);
 							}

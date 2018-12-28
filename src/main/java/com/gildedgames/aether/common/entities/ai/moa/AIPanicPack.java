@@ -9,7 +9,7 @@ public class AIPanicPack extends EntityAIPanic
 
 	EntityGroupMember animal;
 
-	EntityCreature theEntityCreature;
+	final EntityCreature theEntityCreature;
 
 	public AIPanicPack(EntityCreature par1EntityCreature, double par2)
 	{

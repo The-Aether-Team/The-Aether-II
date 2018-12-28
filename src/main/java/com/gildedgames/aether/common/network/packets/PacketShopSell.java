@@ -72,12 +72,12 @@ public class PacketShopSell implements IMessage
 						ContainerShop container = (ContainerShop) player.openContainer;
 						ItemStack stack = container.getSlot(0).getStack();
 
-						int hash = ItemHelper.getHashForItemStack(stack);
+						int hash = ItemHelper.getKeyForItemStack(stack);
 						IShopBuy shopBuy = null;
 
 						for (IShopBuy buy : container.getShopInstance().getStock())
 						{
-							int buyHash = ItemHelper.getHashForItemStack(buy.getItemStack());
+							int buyHash = ItemHelper.getKeyForItemStack(buy.getItemStack());
 
 							if (buyHash == hash)
 							{

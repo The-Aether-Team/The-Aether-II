@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class AltarRecipeRegistry implements IAltarRecipeRegistry
 {
-	private ArrayList<IAltarRecipe> altarRecipes = new ArrayList<>();
+	private final ArrayList<IAltarRecipe> altarRecipes = new ArrayList<>();
 
 	@Override
 	public void registerAltarRecipe(IAltarRecipe recipe)

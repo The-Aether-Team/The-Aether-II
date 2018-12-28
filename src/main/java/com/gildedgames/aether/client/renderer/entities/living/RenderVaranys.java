@@ -1,11 +1,8 @@
 package com.gildedgames.aether.client.renderer.entities.living;
 
-import com.gildedgames.aether.client.models.entities.living.ModelNecromancer;
 import com.gildedgames.aether.client.models.entities.living.ModelVaranys;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.living.mobs.EntityVaranys;
-import com.gildedgames.aether.common.entities.living.npc.EntityNecromancer;
-import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;

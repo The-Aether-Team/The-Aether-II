@@ -11,8 +11,6 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.Map;
@@ -103,18 +101,6 @@ public class PlayerProgressModule extends PlayerAetherModule
 	public void setBeforeReturnToBed(BlockPos blockPos)
 	{
 		this.beforeReturnToBed = blockPos;
-	}
-
-	@Override
-	public void onDeath(LivingDeathEvent event)
-	{
-
-	}
-
-	@Override
-	public void onRespawn(PlayerEvent.PlayerRespawnEvent event)
-	{
-
 	}
 
 	@Override

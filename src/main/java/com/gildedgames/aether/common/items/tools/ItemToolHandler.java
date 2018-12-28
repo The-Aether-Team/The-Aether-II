@@ -186,7 +186,7 @@ public class ItemToolHandler
 
 	public static boolean onEntityHit(final ItemStack stack, final Item.ToolMaterial material, final EntityLivingBase target, final EntityLivingBase attacker)
 	{
-		final IToolEventHandler handler = handlers.get(material);
+		final IToolEventHandler handler = handlers.get(material.name());
 
 		if (handler != null)
 		{

@@ -2,18 +2,18 @@ package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.net.data.UserFeatures;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.patron.PatronChoices;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 public class PlayerPatronRewards extends PlayerAetherModule
 {
-	private PatronChoices choices;
+	private final PatronChoices choices;
 
 	private UserFeatures features = new UserFeatures();
 
@@ -56,9 +56,9 @@ public class PlayerPatronRewards extends PlayerAetherModule
 					this.features = features;
 				}
 			}
-			catch (InterruptedException | ExecutionException e)
+			catch (Exception e)
 			{
-				e.printStackTrace();
+				AetherCore.LOGGER.warn("Failed to retrieve Patreon reward status", e);
 			}
 
 			this.featuresFuture = null;

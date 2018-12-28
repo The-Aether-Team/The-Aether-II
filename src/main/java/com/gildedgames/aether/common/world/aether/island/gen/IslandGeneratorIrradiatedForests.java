@@ -264,10 +264,12 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 	}
 
 	@Override
-	public void genChunk(Biome[] biomes, OpenSimplexNoise noise, IBlockAccessExtended access, ChunkMask mask, ChunkPrimer primer, IIslandData island, int chunkX, int chunkZ)
+	public void genChunk(Biome[] biomes, OpenSimplexNoise noise, IBlockAccessExtended access, ChunkMask mask, ChunkPrimer primer, IIslandData island,
+			int chunkX, int chunkZ)
 	{
 		IslandChunkMaskTransformer transformer = new IslandChunkMaskTransformer();
-		transformer.setMaskValue(IslandBlockType.TOPSOIL_BLOCK, BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.IRRADIATED));
+		transformer.setMaskValue(IslandBlockType.TOPSOIL_BLOCK,
+				BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.IRRADIATED));
 
 		mask.createChunk(primer, transformer);
 	}

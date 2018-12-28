@@ -65,7 +65,8 @@ public class ItemSkyrootBed extends Item implements IDropOnDeath
 				final boolean flag2 = canReplace || world.isAirBlock(pos);
 				final boolean flag3 = flag1 || world.isAirBlock(adjPos);
 
-				if (flag2 && flag3 && world.getBlockState(pos.down()).isTopSolid() && world.getBlockState(adjPos.down()).isTopSolid())
+				if (flag2 && flag3 && world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP) &&
+						world.getBlockState(adjPos.down()).isSideSolid(world, adjPos.down(), EnumFacing.UP))
 				{
 					IBlockState otherBed = BlocksAether.skyroot_bed.getDefaultState().withProperty(BlockBed.OCCUPIED, Boolean.FALSE)
 							.withProperty(BlockBed.FACING, enumfacing).withProperty(BlockBed.PART, BlockBed.EnumPartType.FOOT);

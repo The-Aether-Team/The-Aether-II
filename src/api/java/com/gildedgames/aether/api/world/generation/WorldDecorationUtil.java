@@ -3,6 +3,7 @@ package com.gildedgames.aether.api.world.generation;
 import com.gildedgames.aether.api.util.OpenSimplexNoise;
 import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
@@ -14,11 +15,13 @@ public class WorldDecorationUtil
 
 	public static void generateDecorations(List<WorldDecoration> decorations, World world, IBlockAccessExtended blockAccess, Random rand, BlockPos pos)
 	{
+		ChunkPos chunkPos = new ChunkPos(pos);
+
 		for (final WorldDecoration decoration : decorations)
 		{
 			for (int count = 0; count < decoration.getGenerationCount(); count++)
 			{
-				if (decoration.shouldGenerate(rand) && TerrainGen.decorate(world, rand, pos, decoration.getDecorateType()))
+				if (decoration.shouldGenerate(rand) && TerrainGen.decorate(world, rand, chunkPos, decoration.getDecorateType()))
 				{
 					final BlockPos placeAt = decoration.findPositionToPlace(blockAccess, rand, pos);
 
@@ -31,11 +34,13 @@ public class WorldDecorationUtil
 	public static void generateDecorationsWithNoise(List<WorldDecoration> decorations, World world, IBlockAccessExtended blockAccess, Random rand, BlockPos pos,
 			OpenSimplexNoise noise, float openAreaChance, float clumpedDecorationCountModifier)
 	{
+		ChunkPos chunkPos = new ChunkPos(pos);
+
 		for (final WorldDecoration decoration : decorations)
 		{
 			for (int count = 0; count < decoration.getGenerationCount() * clumpedDecorationCountModifier; count++)
 			{
-				if (decoration.shouldGenerate(rand) && TerrainGen.decorate(world, rand, pos, decoration.getDecorateType()))
+				if (decoration.shouldGenerate(rand) && TerrainGen.decorate(world, rand, chunkPos, decoration.getDecorateType()))
 				{
 					final BlockPos placeAt = decoration.findPositionToPlace(blockAccess, rand, pos);
 

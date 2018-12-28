@@ -7,23 +7,23 @@ import net.minecraft.entity.Entity;
 public class ModelParachute extends ModelBase
 {
 
-	public ModelRenderer Cloud1;
+	public final ModelRenderer Cloud1;
 
-	public ModelRenderer Cloud2;
+	public final ModelRenderer Cloud2;
 
-	public ModelRenderer Cloud3;
+	public final ModelRenderer Cloud3;
 
-	public ModelRenderer Cloud4;
+	public final ModelRenderer Cloud4;
 
-	public ModelRenderer Cloud5;
+	public final ModelRenderer Cloud5;
 
-	public ModelRenderer Shape2;
+	public final ModelRenderer Shape2;
 
-	public ModelRenderer Shape3;
+	public final ModelRenderer Shape3;
 
-	public ModelRenderer Shape4;
+	public final ModelRenderer Shape4;
 
-	public ModelRenderer Shape1;
+	public final ModelRenderer Shape1;
 
 	public ModelParachute()
 	{

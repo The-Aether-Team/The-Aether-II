@@ -40,7 +40,8 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 			GOLDEN_OAK = new BlockVariant(3, "golden_oak"),
 			MUTANT_TREE = new BlockVariant(4, "mutant_tree"); // Edison's Crazy Mutant Tree (christmas exclusive).
 
-	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", BLUE_SKYROOT, GREEN_SKYROOT, DARK_BLUE_SKYROOT, GOLDEN_OAK, MUTANT_TREE);
+	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant
+			.create("variant", BLUE_SKYROOT, GREEN_SKYROOT, DARK_BLUE_SKYROOT, GOLDEN_OAK, MUTANT_TREE);
 
 	public static final PropertyInteger PROPERTY_STAGE = PropertyInteger.create("stage", 0, 1);
 
@@ -133,9 +134,9 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 4);
 				BakedBlueprint baked = new BakedBlueprint(GenerationAether.CRAZY_MUTANT_TREE.getData(), new CreationData(world).pos(BlockPos.ORIGIN));
 				baked.bake();
-				if (!BlueprintPlacer.place(world,baked,treeBp.getConditions(),pos,true));
+				if (!BlueprintPlacer.place(world, baked, treeBp.getConditions(), pos, true))
 				{
-					world.setBlockState(pos,state,4);
+					world.setBlockState(pos, state, 4);
 				}
 			}
 		}

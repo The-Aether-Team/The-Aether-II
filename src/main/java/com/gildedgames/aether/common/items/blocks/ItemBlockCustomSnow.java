@@ -58,11 +58,12 @@ public class ItemBlockCustomSnow extends ItemBlock
 					if (aabb != Block.NULL_AABB && world.checkNoEntityCollision(aabb.offset(otherPos)) && world.setBlockState(otherPos, modifiedState, 10))
 					{
 						SoundType soundtype = this.block.getSoundType(modifiedState, world, pos, player);
-						world.playSound(player, otherPos, soundtype.getPlaceSound(), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
+						world.playSound(player, otherPos, soundtype.getPlaceSound(), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F,
+								soundtype.getPitch() * 0.8F);
 
 						if (player instanceof EntityPlayerMP)
 						{
-							CriteriaTriggers.PLACED_BLOCK.trigger((EntityPlayerMP)player, pos, heldStack);
+							CriteriaTriggers.PLACED_BLOCK.trigger((EntityPlayerMP) player, pos, heldStack);
 						}
 
 						heldStack.shrink(1);
@@ -91,6 +92,7 @@ public class ItemBlockCustomSnow extends ItemBlock
 	{
 		IBlockState state = world.getBlockState(pos);
 
-		return (state.getBlock() == BlocksAether.highlands_snow_layer && state.getValue(BlockSnow.LAYERS) <= 7) || super.canPlaceBlockOnSide(world, pos, side, player, stack);
+		return (state.getBlock() == BlocksAether.highlands_snow_layer && state.getValue(BlockSnow.LAYERS) <= 7) || super
+				.canPlaceBlockOnSide(world, pos, side, player, stack);
 	}
 }

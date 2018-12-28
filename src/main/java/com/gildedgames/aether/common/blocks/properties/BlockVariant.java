@@ -44,19 +44,19 @@ public class BlockVariant implements Comparable<BlockVariant>
 			return true;
 		}
 
-		if (o == null || getClass() != o.getClass())
+		if (o == null || this.getClass() != o.getClass())
 		{
 			return false;
 		}
 
 		BlockVariant that = (BlockVariant) o;
 
-		return meta == that.meta && Objects.equals(name, that.name);
+		return this.meta == that.meta && Objects.equals(this.name, that.name);
 	}
 
 	@Override
 	public int hashCode()
 	{
-		return Objects.hash(meta, name);
+		return Objects.hash(this.meta, this.name);
 	}
 }

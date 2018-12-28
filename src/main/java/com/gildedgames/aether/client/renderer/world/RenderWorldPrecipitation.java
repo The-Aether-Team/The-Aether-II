@@ -27,7 +27,7 @@ import java.util.Random;
 
 public class RenderWorldPrecipitation extends IRenderHandler
 {
-	private HashMap<String, ResourceLocation> textureCache = new HashMap<>();
+	private final HashMap<String, ResourceLocation> textureCache = new HashMap<>();
 
 	private int renderTicks;
 
@@ -91,7 +91,7 @@ public class RenderWorldPrecipitation extends IRenderHandler
 		GlStateManager.glNormal3f(0.0F, 1.0F, 0.0F);
 
 		GlStateManager.enableBlend();
-		GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA,GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
+		GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
 				GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 		GlStateManager.alphaFunc(516, 0.1F);
 
@@ -167,7 +167,9 @@ public class RenderWorldPrecipitation extends IRenderHandler
 
 						if (biome.isSnowyBiome())
 						{
-							float intensity = precipitation.getStrength() == PrecipitationStrength.STORM ? 2.5f : (precipitation.getStrength() == PrecipitationStrength.HEAVY ? 1.4f : 0.6f);
+							float intensity = precipitation.getStrength() == PrecipitationStrength.STORM ?
+									2.5f :
+									(precipitation.getStrength() == PrecipitationStrength.HEAVY ? 1.4f : 0.6f);
 
 							if (continuous != 1)
 							{
@@ -206,18 +208,24 @@ public class RenderWorldPrecipitation extends IRenderHandler
 							int lightU = light >> 16 & 65535;
 							int lightV = light & 65535;
 
-							buffer.pos((double) x2 - rainX + 0.5D, (double) yMax, (double) z2 - rainY + 0.5D).tex(0.0D + uOffset, (double) yMin * 0.25D + d8 + vOffset)
+							buffer.pos((double) x2 - rainX + 0.5D, (double) yMax, (double) z2 - rainY + 0.5D)
+									.tex(0.0D + uOffset, (double) yMin * 0.25D + d8 + vOffset)
 									.color(1.0F, 1.0F, 1.0F, alpha).lightmap(lightU, lightV).endVertex();
-							buffer.pos((double) x2 + rainX + 0.5D, (double) yMax, (double) z2 + rainY + 0.5D).tex(1.0D + uOffset, (double) yMin * 0.25D + d8 + vOffset)
+							buffer.pos((double) x2 + rainX + 0.5D, (double) yMax, (double) z2 + rainY + 0.5D)
+									.tex(1.0D + uOffset, (double) yMin * 0.25D + d8 + vOffset)
 									.color(1.0F, 1.0F, 1.0F, alpha).lightmap(lightU, lightV).endVertex();
-							buffer.pos((double) x2 + rainX + 0.5D, (double) yMin, (double) z2 + rainY + 0.5D).tex(1.0D + uOffset, (double) yMax * 0.25D + d8 + vOffset)
+							buffer.pos((double) x2 + rainX + 0.5D, (double) yMin, (double) z2 + rainY + 0.5D)
+									.tex(1.0D + uOffset, (double) yMax * 0.25D + d8 + vOffset)
 									.color(1.0F, 1.0F, 1.0F, alpha).lightmap(lightU, lightV).endVertex();
-							buffer.pos((double) x2 - rainX + 0.5D, (double) yMin, (double) z2 - rainY + 0.5D).tex(0.0D + uOffset, (double) yMax * 0.25D + d8 + vOffset)
+							buffer.pos((double) x2 - rainX + 0.5D, (double) yMin, (double) z2 - rainY + 0.5D)
+									.tex(0.0D + uOffset, (double) yMax * 0.25D + d8 + vOffset)
 									.color(1.0F, 1.0F, 1.0F, alpha).lightmap(lightU, lightV).endVertex();
 						}
 						else
 						{
-							float intensity = precipitation.getStrength() == PrecipitationStrength.STORM ? 48.0f : (precipitation.getStrength() == PrecipitationStrength.HEAVY ? 64.0f : 128.0f);
+							float intensity = precipitation.getStrength() == PrecipitationStrength.STORM ?
+									48.0f :
+									(precipitation.getStrength() == PrecipitationStrength.HEAVY ? 64.0f : 128.0f);
 
 							if (continuous != 0)
 							{
@@ -361,7 +369,5 @@ public class RenderWorldPrecipitation extends IRenderHandler
 			}
 		}
 	}
-
-
 
 }

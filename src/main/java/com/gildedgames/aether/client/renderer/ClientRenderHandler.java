@@ -11,11 +11,8 @@ import com.gildedgames.aether.client.renderer.particles.ParticleRainProxyFactory
 import com.gildedgames.aether.client.renderer.world.RenderWorldPrecipitation;
 import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
-import com.gildedgames.orbis_api.preparation.IPrepManager;
-import com.gildedgames.orbis_api.preparation.impl.util.PrepHelper;
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.ParticleRain;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
@@ -135,7 +132,7 @@ public class ClientRenderHandler
 			if (precipitation != null)
 			{
 				event.getLeft().add("");
-				event.getLeft().add(TextFormatting.DARK_AQUA + "[" + TextFormatting.AQUA + "Aether Precipitation" + TextFormatting.DARK_AQUA +"]");
+				event.getLeft().add(TextFormatting.DARK_AQUA + "[" + TextFormatting.AQUA + "Aether Precipitation" + TextFormatting.DARK_AQUA + "]");
 				event.getLeft().add("- Strength: " + precipitation.getStrength().name());
 				event.getLeft().add("- Wind Velocity: (" + String.format("%.2f, %.2f", precipitation.getWindVector().x, precipitation.getWindVector().y) + ")");
 			}

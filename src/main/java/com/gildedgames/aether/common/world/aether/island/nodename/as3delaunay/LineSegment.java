@@ -1,9 +1,11 @@
 package com.gildedgames.aether.common.world.aether.island.nodename.as3delaunay;
 
-public final class LineSegment extends Object
+public final class LineSegment
 {
 
-	public Point p0, p1;
+	public final Point p0;
+
+	public final Point p1;
 
 	public LineSegment(final Point p0, final Point p1)
 	{

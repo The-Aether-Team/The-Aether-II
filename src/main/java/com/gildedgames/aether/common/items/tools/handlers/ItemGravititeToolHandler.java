@@ -33,7 +33,7 @@ public class ItemGravititeToolHandler implements IToolEventHandler
 			return false;
 		}
 
- 		PlayerAether aePlayer = PlayerAether.getPlayer(player);
+		PlayerAether aePlayer = PlayerAether.getPlayer(player);
 
 		if (!aePlayer.getEntity().capabilities.allowEdit)
 		{

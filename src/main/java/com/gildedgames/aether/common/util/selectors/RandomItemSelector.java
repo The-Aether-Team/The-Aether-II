@@ -14,7 +14,7 @@ public class RandomItemSelector implements Loot
 
 	private ArrayList<Item> validStackCache;
 
-	private Predicate<Item> constraint;
+	private final Predicate<Item> constraint;
 
 	public RandomItemSelector(Predicate<Item> constraint)
 	{

@@ -19,9 +19,7 @@ public class EntityPinkBabySwet extends EntityCompanion
 	{
 		super(worldIn);
 
-		final HoppingMoveHelper hoppingMoveHelper = new HoppingMoveHelper(this, () -> SoundEvents.ENTITY_SMALL_SLIME_JUMP);
-
-		this.moveHelper = hoppingMoveHelper;
+		this.moveHelper = new HoppingMoveHelper(this, () -> SoundEvents.ENTITY_SMALL_SLIME_JUMP);
 
 		this.setSize(0.75F, 0.75F);
 	}

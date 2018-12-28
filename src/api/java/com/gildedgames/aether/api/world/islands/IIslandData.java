@@ -7,7 +7,6 @@ import com.gildedgames.orbis_api.core.PlacedBlueprint;
 import com.gildedgames.orbis_api.core.baking.BakedBlueprint;
 import com.gildedgames.orbis_api.preparation.IPrepSectorData;
 import com.gildedgames.orbis_api.util.mc.NBT;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 

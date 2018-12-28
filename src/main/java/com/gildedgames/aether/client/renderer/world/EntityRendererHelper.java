@@ -74,9 +74,11 @@ public class EntityRendererHelper
 					f10 = 0.25F + f7 * 0.75F;
 				}
 
-				float[] colors = {f8, f9, f10};
+				float[] colors = { f8, f9, f10 };
 				world.provider.getLightmapColors(partialTicks, f, f2, f3, colors);
-				f8 = colors[0]; f9 = colors[1]; f10 = colors[2];
+				f8 = colors[0];
+				f9 = colors[1];
+				f10 = colors[2];
 
 				// Forge: fix MC-58177
 				f8 = MathHelper.clamp(f8, 0f, 1f);
@@ -163,9 +165,9 @@ public class EntityRendererHelper
 				}
 
 				int j = 255;
-				int k = (int)(f8 * 255.0F);
-				int l = (int)(f9 * 255.0F);
-				int i1 = (int)(f10 * 255.0F);
+				int k = (int) (f8 * 255.0F);
+				int l = (int) (f9 * 255.0F);
+				int i1 = (int) (f10 * 255.0F);
 
 				lightmapColors[i] = -16777216 | k << 16 | l << 8 | i1;
 			}
@@ -176,12 +178,11 @@ public class EntityRendererHelper
 		}
 	}
 
-
 	private static float getNightVisionBrightness(EntityLivingBase entitylivingbaseIn, float partialTicks)
 	{
 		int i = entitylivingbaseIn.getActivePotionEffect(MobEffects.NIGHT_VISION).getDuration();
 
-		return i > 200 ? 1.0F : 0.7F + MathHelper.sin(((float)i - partialTicks) * (float)Math.PI * 0.2F) * 0.3F;
+		return i > 200 ? 1.0F : 0.7F + MathHelper.sin(((float) i - partialTicks) * (float) Math.PI * 0.2F) * 0.3F;
 	}
 
 	private static float getTorchFlickerX(EntityRenderer entityRenderer)

@@ -6,7 +6,7 @@ import net.minecraft.nbt.NBTTagCompound;
 public class EntityGeneStorage implements IGeneStorage
 {
 
-	private EntityGeneticAnimal entity;
+	private final EntityGeneticAnimal entity;
 
 	public EntityGeneStorage(EntityGeneticAnimal entity)
 	{

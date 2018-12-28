@@ -6,29 +6,29 @@ import net.minecraft.entity.Entity;
 
 public class ModelLabyrinthChest extends ModelBase
 {
-	private ModelRenderer Main_Top;
+	private final ModelRenderer Main_Top;
 
-	private ModelRenderer Main_Bottom;
+	private final ModelRenderer Main_Bottom;
 
-	private ModelRenderer Hinge_Left;
+	private final ModelRenderer Hinge_Left;
 
-	private ModelRenderer Hinge_Right;
+	private final ModelRenderer Hinge_Right;
 
-	private ModelRenderer Corner_Bottom_Front_Right;
+	private final ModelRenderer Corner_Bottom_Front_Right;
 
-	private ModelRenderer Corner_Bottom_Front_Left;
+	private final ModelRenderer Corner_Bottom_Front_Left;
 
-	private ModelRenderer Corner_Bottom_Back_Left;
+	private final ModelRenderer Corner_Bottom_Back_Left;
 
-	private ModelRenderer Corner_Bottom_Back_Right;
+	private final ModelRenderer Corner_Bottom_Back_Right;
 
-	private ModelRenderer Corner_Top_Back_Left;
+	private final ModelRenderer Corner_Top_Back_Left;
 
-	private ModelRenderer Corner_Top_Back_Right;
+	private final ModelRenderer Corner_Top_Back_Right;
 
-	private ModelRenderer Corner_Top_Front_Left;
+	private final ModelRenderer Corner_Top_Front_Left;
 
-	private ModelRenderer Corner_Top_Front_Right;
+	private final ModelRenderer Corner_Top_Front_Right;
 
 	public ModelLabyrinthChest()
 	{

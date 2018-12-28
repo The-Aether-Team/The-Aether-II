@@ -70,7 +70,7 @@ public final class Voronoi
 
 	public Voronoi(final int numSites, final Random r, final Rectangle _plotBounds)
 	{
-		final ArrayList<Point> points = new ArrayList();
+		final ArrayList<Point> points = new ArrayList<>();
 		for (int i = 0; i < numSites; i++)
 		{
 			points.add(new Point(_plotBounds.x + (r.nextDouble() * _plotBounds.width), _plotBounds.y + (r.nextDouble() * _plotBounds.height)));
@@ -81,7 +81,7 @@ public final class Voronoi
 
 	public Voronoi(final int numSites, final double maxWidth, final double maxHeight, final Random r, final ArrayList<Color> colors)
 	{
-		final ArrayList<Point> points = new ArrayList();
+		final ArrayList<Point> points = new ArrayList<>();
 		for (int i = 0; i < numSites; i++)
 		{
 			points.add(new Point(r.nextDouble() * maxWidth, r.nextDouble() * maxHeight));
@@ -156,11 +156,11 @@ public final class Voronoi
 	private void init(final ArrayList<Point> points, final ArrayList<Color> colors, final Rectangle plotBounds)
 	{
 		this._sites = new SiteList();
-		this._sitesIndexedByLocation = new HashMap();
+		this._sitesIndexedByLocation = new HashMap<>();
 		this.addSites(points, colors);
 		this._plotBounds = plotBounds;
-		this._triangles = new ArrayList();
-		this._edges = new ArrayList();
+		this._triangles = new ArrayList<>();
+		this._edges = new ArrayList<>();
 	}
 
 	private void addSites(final ArrayList<Point> points, final ArrayList<Color> colors)
@@ -190,7 +190,7 @@ public final class Voronoi
 		final Site site = this._sitesIndexedByLocation.get(p);
 		if (site == null)
 		{
-			return new ArrayList();
+			return new ArrayList<>();
 		}
 		return site.region(this._plotBounds);
 	}
@@ -198,7 +198,7 @@ public final class Voronoi
 	// TODO: bug: if you call this before you call region(), generateDecorations goes wrong :(
 	public ArrayList<Point> neighborSitesForSite(final Point coord)
 	{
-		final ArrayList<Point> points = new ArrayList();
+		final ArrayList<Point> points = new ArrayList<>();
 		final Site site = this._sitesIndexedByLocation.get(coord);
 		if (site == null)
 		{
@@ -219,7 +219,7 @@ public final class Voronoi
 
 	private ArrayList<VoronoiEdge> selectEdgesForSitePoint(final Point coord, final ArrayList<VoronoiEdge> edgesToTest)
 	{
-		final ArrayList<VoronoiEdge> filtered = new ArrayList();
+		final ArrayList<VoronoiEdge> filtered = new ArrayList<>();
 
 		for (final VoronoiEdge e : edgesToTest)
 		{
@@ -240,7 +240,7 @@ public final class Voronoi
 
 	private ArrayList<LineSegment> visibleLineSegments(final ArrayList<VoronoiEdge> edges)
 	{
-		final ArrayList<LineSegment> segments = new ArrayList();
+		final ArrayList<LineSegment> segments = new ArrayList<>();
 
 		for (final VoronoiEdge edge : edges)
 		{
@@ -257,7 +257,7 @@ public final class Voronoi
 
 	private ArrayList<LineSegment> delaunayLinesForEdges(final ArrayList<VoronoiEdge> edges)
 	{
-		final ArrayList<LineSegment> segments = new ArrayList();
+		final ArrayList<LineSegment> segments = new ArrayList<>();
 
 		for (final VoronoiEdge edge : edges)
 		{
@@ -293,7 +293,7 @@ public final class Voronoi
 
 	private ArrayList<VoronoiEdge> hullEdges()
 	{
-		final ArrayList<VoronoiEdge> filtered = new ArrayList();
+		final ArrayList<VoronoiEdge> filtered = new ArrayList<>();
 
 		for (final VoronoiEdge e : this._edges)
 		{
@@ -320,7 +320,7 @@ public final class Voronoi
 	{
 		ArrayList<VoronoiEdge> hullEdges = this.hullEdges();
 
-		final ArrayList<Point> points = new ArrayList();
+		final ArrayList<Point> points = new ArrayList<>();
 		if (hullEdges.isEmpty())
 		{
 			return points;
@@ -373,8 +373,8 @@ public final class Voronoi
 		final int sqrt_nsites = (int) Math.sqrt(this._sites.get_length() + 4);
 		final HalfedgePriorityQueue heap = new HalfedgePriorityQueue(dataBounds.y, dataBounds.height, sqrt_nsites);
 		final EdgeList edgeList = new EdgeList(dataBounds.x, dataBounds.width, sqrt_nsites);
-		final ArrayList<Halfedge> halfEdges = new ArrayList();
-		final ArrayList<Vertex> vertices = new ArrayList();
+		final ArrayList<Halfedge> halfEdges = new ArrayList<>();
+		final ArrayList<Vertex> vertices = new ArrayList<>();
 
 		final Site bottomMostSite = this._sites.next();
 		newSite = this._sites.next();

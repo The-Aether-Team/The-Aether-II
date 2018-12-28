@@ -15,7 +15,7 @@ import java.lang.reflect.Type;
 
 public class DialogActionOpenShop implements IDialogAction
 {
-	private int shopIndex;
+	private final int shopIndex;
 
 	private DialogActionOpenShop(int shopIndex)
 	{

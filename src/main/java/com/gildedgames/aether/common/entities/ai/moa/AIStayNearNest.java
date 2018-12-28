@@ -7,13 +7,19 @@ import net.minecraft.world.World;
 public class AIStayNearNest extends EntityAIBase
 {
 
-	public World world;
+	public final World world;
 
-	public EntityMoa moa;
+	public final EntityMoa moa;
 
-	public float moveSpeed;
+	public final float moveSpeed;
 
-	public int nestX, nestY, nestZ, stayCloseDist;
+	public int nestX;
+
+	public int nestY;
+
+	public int nestZ;
+
+	public final int stayCloseDist;
 
 	public AIStayNearNest(final EntityMoa moa, final int stayCloseDist, final float moveSpeed)
 	{

@@ -43,8 +43,8 @@ public class GuiIncubator extends GuiContainer
 		TileEntity tile = Minecraft.getMinecraft().world.getTileEntity(this.incubatorPos);
 
 		String name = tile.getDisplayName().getUnformattedText();
-		this.fontRenderer.drawString(name, this.xSize/2 - this.fontRenderer.getStringWidth(name)/2, 6, 4210752);
-		this.fontRenderer.drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96 +2, 4210752);
+		this.fontRenderer.drawString(name, this.xSize / 2 - this.fontRenderer.getStringWidth(name) / 2, 6, 4210752);
+		this.fontRenderer.drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
 
 		if (tile instanceof TileEntityIncubator)
 		{
@@ -52,11 +52,11 @@ public class GuiIncubator extends GuiContainer
 
 			String incubateText = I18n.format("gui.aether.incubator.label.incubation");
 			String heatingText = I18n.format("gui.aether.incubator.label.heating");
-			String eggStatusString = "E%";
-			String heatStatusString = "H%";
-			int incubateColor 	= 0xff5a00;
-			int heatingColor 	= 0xcc0000;
-			int eggStatusColor 	= 0xffffff;
+			String eggStatusString;
+			String heatStatusString;
+			int incubateColor = 0xff5a00;
+			int heatingColor = 0xcc0000;
+			int eggStatusColor = 0xffffff;
 			int heatStatusColor = 0xffffff;
 
 			float eggPercent = 0.0F;
@@ -143,16 +143,9 @@ public class GuiIncubator extends GuiContainer
 	private int getHeatingScaled(int pixels)
 	{
 		int i = this.tileIncubator.getField(0);
-		int j = TileEntityIncubator.REQ_TEMPERATURE_THRESHOLD-500;
+		int j = TileEntityIncubator.REQ_TEMPERATURE_THRESHOLD - 500;
 
 		return j != 0 && i != 0 ? i * pixels / j : 0;
-	}
-
-	@Override
-	public void updateScreen()
-	{
-		super.updateScreen();
-
 	}
 
 	@Override

@@ -27,7 +27,9 @@ public class GuiCoinsContainer extends GuiElement implements IGuiCurrencyValue
 
 	private GuiTexture discountIndicator;
 
-	private boolean shouldDisplayAlways, displaysDiscount;
+	private final boolean shouldDisplayAlways;
+
+	private final boolean displaysDiscount;
 
 	public GuiCoinsContainer(Rect rect, boolean shouldDisplayAlways, boolean displaysDiscount)
 	{

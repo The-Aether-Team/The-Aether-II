@@ -70,19 +70,19 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 
 	private int buyCountUnlocked = 1, prevBuyCountUnlocked = 1;
 
-	private IDialogSlide slide;
+	private final IDialogSlide slide;
 
-	private IDialogSlideRenderer renderer;
+	private final IDialogSlideRenderer renderer;
 
 	private GuiButtonVanilla sell, buy;
 
 	private IGuiCurrencyValue playerCoins, sellCoins, buyCoins;
 
-	private IShopInstance shopInstance;
+	private final IShopInstance shopInstance;
 
-	private List<GuiShopBuy> buys = Lists.newArrayList();
+	private final List<GuiShopBuy> buys = Lists.newArrayList();
 
-	private ContainerShop container;
+	private final ContainerShop container;
 
 	private ItemStack lastSellStack;
 
@@ -98,7 +98,7 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 
 	private GuiButtonVanilla back;
 
-	private PlayerAether playerAether;
+	private final PlayerAether playerAether;
 
 	private GuiAbstractButton upArrow, downArrow;
 
@@ -112,7 +112,7 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 
 	private List<String> hoverDescription;
 
-	private int shopIndex;
+	private final int shopIndex;
 
 	public GuiShop(GuiViewer prevViewer, EntityPlayer player, IDialogSlide slide, IDialogSlideRenderer renderer, IShopInstance shopInstance, int shopIndex)
 	{
@@ -406,12 +406,12 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 
 		if (stack != this.lastSellStack || stack.getCount() != this.lastSellStackCount)
 		{
-			int hash = ItemHelper.getHashForItemStack(stack);
+			int hash = ItemHelper.getKeyForItemStack(stack);
 			IShopBuy shopBuy = null;
 
 			for (IShopBuy buy : this.shopInstance.getStock())
 			{
-				int buyHash = ItemHelper.getHashForItemStack(buy.getItemStack());
+				int buyHash = ItemHelper.getKeyForItemStack(buy.getItemStack());
 
 				if (buyHash == hash)
 				{
@@ -454,8 +454,8 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 
 			boolean canAfford = this.shopInstance.getCurrencyType().getValue(this.playerAether) >= ShopUtil.getFilteredPrice(this.getSelectedBuy());
 			boolean isHandFree = this.mc.player.inventory.getItemStack().isEmpty();
-			boolean isBuyItem = ItemHelper.getHashForItemStack(this.mc.player.inventory.getItemStack()) == ItemHelper
-					.getHashForItemStack(this.getSelectedBuy().getItemStack());
+			boolean isBuyItem = ItemHelper.getKeyForItemStack(this.mc.player.inventory.getItemStack()) == ItemHelper
+					.getKeyForItemStack(this.getSelectedBuy().getItemStack());
 			boolean canStack = this.mc.player.inventory.getItemStack().isStackable();
 			boolean isAtStackLimit = this.mc.player.inventory.getItemStack().getCount() >= this.mc.player.inventory.getItemStack().getMaxStackSize();
 			boolean hasStock = this.getSelectedBuy().getStock() > 0 && amount > 0;
@@ -638,8 +638,8 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 			int amount = Math.min(maxAllowedWithHeldStack, Math.min(isCountLocked ? buyCount : this.buyCountUnlocked, this.getSelectedBuy().getStock()));
 
 			boolean isHandFree = this.mc.player.inventory.getItemStack().isEmpty();
-			boolean isBuyItem = ItemHelper.getHashForItemStack(this.mc.player.inventory.getItemStack()) == ItemHelper
-					.getHashForItemStack(this.getSelectedBuy().getItemStack());
+			boolean isBuyItem = ItemHelper.getKeyForItemStack(this.mc.player.inventory.getItemStack()) == ItemHelper
+					.getKeyForItemStack(this.getSelectedBuy().getItemStack());
 
 			if (isHandFree)
 			{

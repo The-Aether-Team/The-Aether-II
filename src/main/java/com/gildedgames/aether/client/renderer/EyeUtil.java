@@ -16,7 +16,7 @@ import java.util.List;
 
 public class EyeUtil
 {
-	private static List<ModelRenderer> boxesToUnhide = Lists.newArrayList();
+	private static final List<ModelRenderer> boxesToUnhide = Lists.newArrayList();
 
 	public static <T extends ModelBase> void renderEyes(RenderManager renderManager, T model, ModelRenderer eyeModel,
 			EntityLivingBase entity, float limbSwing,

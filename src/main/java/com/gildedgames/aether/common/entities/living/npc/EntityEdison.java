@@ -28,9 +28,9 @@ import java.util.Random;
 
 public class EntityEdison extends EntityNPC
 {
-	public static ResourceLocation SPEAKER = AetherCore.getResource("edison");
+	public static final ResourceLocation SPEAKER = AetherCore.getResource("edison");
 
-	public static ResourceLocation HOLIDAY_SHOP = AetherCore.getResource("edison_holiday");
+	public static final ResourceLocation HOLIDAY_SHOP = AetherCore.getResource("edison_holiday");
 
 	private BlockPos spawned;
 

@@ -13,63 +13,63 @@ public class ModelCarrionSprout extends ModelBase
 
 	public float sinage2;
 
-	private ModelRenderer stem;
+	private final ModelRenderer stem;
 
-	private ModelRenderer bud_base;
+	private final ModelRenderer bud_base;
 
-	private ModelRenderer petal_base;
+	private final ModelRenderer petal_base;
 
-	private ModelRenderer bud_front;
+	private final ModelRenderer bud_front;
 
-	private ModelRenderer bud_back;
+	private final ModelRenderer bud_back;
 
-	private ModelRenderer bud_left;
+	private final ModelRenderer bud_left;
 
-	private ModelRenderer bud_right;
+	private final ModelRenderer bud_right;
 
-	private ModelRenderer bud_base_teeth_1;
+	private final ModelRenderer bud_base_teeth_1;
 
-	private ModelRenderer bud_base_teeth_2;
+	private final ModelRenderer bud_base_teeth_2;
 
-	private ModelRenderer bud_front_end;
+	private final ModelRenderer bud_front_end;
 
-	private ModelRenderer bud_front_teeth_1;
+	private final ModelRenderer bud_front_teeth_1;
 
-	private ModelRenderer bud_front_teeth_2;
+	private final ModelRenderer bud_front_teeth_2;
 
-	private ModelRenderer bud_back_end;
+	private final ModelRenderer bud_back_end;
 
-	private ModelRenderer bud_back_teeth_2;
+	private final ModelRenderer bud_back_teeth_2;
 
-	private ModelRenderer bud_back_teeth_1;
+	private final ModelRenderer bud_back_teeth_1;
 
-	private ModelRenderer bud_left_end;
+	private final ModelRenderer bud_left_end;
 
-	private ModelRenderer bud_left_teeth_2;
+	private final ModelRenderer bud_left_teeth_2;
 
-	private ModelRenderer bud_left_teeth_1;
+	private final ModelRenderer bud_left_teeth_1;
 
-	private ModelRenderer bud_right_end;
+	private final ModelRenderer bud_right_end;
 
-	private ModelRenderer bud_right_teeth_2;
+	private final ModelRenderer bud_right_teeth_2;
 
-	private ModelRenderer bud_right_teeth_1;
+	private final ModelRenderer bud_right_teeth_1;
 
-	private ModelRenderer petal_front;
+	private final ModelRenderer petal_front;
 
-	private ModelRenderer petal_right;
+	private final ModelRenderer petal_right;
 
-	private ModelRenderer petal_left;
+	private final ModelRenderer petal_left;
 
-	private ModelRenderer petal_back;
+	private final ModelRenderer petal_back;
 
-	private ModelRenderer petal_back_left;
+	private final ModelRenderer petal_back_left;
 
-	private ModelRenderer petal_front_left;
+	private final ModelRenderer petal_front_left;
 
-	private ModelRenderer petal_front_right;
+	private final ModelRenderer petal_front_right;
 
-	private ModelRenderer petal_back_right;
+	private final ModelRenderer petal_back_right;
 
 	public ModelCarrionSprout()
 	{

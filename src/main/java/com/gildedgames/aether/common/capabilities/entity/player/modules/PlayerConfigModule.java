@@ -3,7 +3,6 @@ package com.gildedgames.aether.common.capabilities.entity.player.modules;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 public class PlayerConfigModule extends PlayerAetherModule
@@ -51,12 +50,6 @@ public class PlayerConfigModule extends PlayerAetherModule
 
 	@Override
 	public void read(final NBTTagCompound compound)
-	{
-
-	}
-
-	@Override
-	public void onDeath(final LivingDeathEvent event)
 	{
 
 	}

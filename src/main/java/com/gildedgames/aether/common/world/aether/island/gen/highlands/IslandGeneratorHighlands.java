@@ -20,7 +20,7 @@ import net.minecraft.world.chunk.ChunkPrimer;
 
 public class IslandGeneratorHighlands implements IIslandGenerator
 {
-	private IslandVariables v;
+	private final IslandVariables v;
 
 	public IslandGeneratorHighlands(IslandVariables variables)
 	{
@@ -29,7 +29,8 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 
 	public static ChunkNoiseGenerator generateNoise(OpenSimplexNoise noise, IIslandData island, int chunkX, int chunkZ, int offset, double scale)
 	{
-		return new ChunkNoiseGenerator(noise, chunkX * 16, chunkZ * 16, 4, 5, island.getBounds().getMinX() + offset, island.getBounds().getMinZ() + offset, scale)
+		return new ChunkNoiseGenerator(noise, chunkX * 16, chunkZ * 16, 4, 5, island.getBounds().getMinX() + offset, island.getBounds().getMinZ() + offset,
+				scale)
 		{
 			@Override
 			protected double sample(double nx, double nz)

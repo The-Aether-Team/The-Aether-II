@@ -17,11 +17,11 @@ import java.util.*;
 public class SimpleCraftingRegistry implements ISimpleCraftingRegistry
 {
 
-	private HashBiMap<Integer, ISimpleRecipe> recipes = HashBiMap.create();
+	private final HashBiMap<Integer, ISimpleRecipe> recipes = HashBiMap.create();
 
-	private Map<Integer, ISimpleRecipeGroup> stackLookup = Maps.newHashMap();
+	private final Map<Integer, ISimpleRecipeGroup> stackLookup = Maps.newHashMap();
 
-	private Map<String, ISimpleRecipeGroup> oreDictionaryLookup = Maps.newHashMap();
+	private final Map<String, ISimpleRecipeGroup> oreDictionaryLookup = Maps.newHashMap();
 
 	private int id;
 

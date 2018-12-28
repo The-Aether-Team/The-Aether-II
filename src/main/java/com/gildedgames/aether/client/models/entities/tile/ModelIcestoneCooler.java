@@ -6,59 +6,59 @@ import net.minecraft.entity.Entity;
 
 public class ModelIcestoneCooler extends ModelBase
 {
-	ModelRenderer LidBase1;
+	final ModelRenderer LidBase1;
 
-	ModelRenderer LidBase2;
+	final ModelRenderer LidBase2;
 
-	ModelRenderer LidBase3;
+	final ModelRenderer LidBase3;
 
-	ModelRenderer LidBase4;
+	final ModelRenderer LidBase4;
 
-	ModelRenderer LidHingeRight;
+	final ModelRenderer LidHingeRight;
 
-	ModelRenderer LidHingeLeft;
+	final ModelRenderer LidHingeLeft;
 
-	ModelRenderer LidHandleBarRight;
+	final ModelRenderer LidHandleBarRight;
 
-	ModelRenderer LidHandleBarLeft;
+	final ModelRenderer LidHandleBarLeft;
 
-	ModelRenderer LidHandle;
+	final ModelRenderer LidHandle;
 
-	ModelRenderer LidTopCenter;
+	final ModelRenderer LidTopCenter;
 
-	ModelRenderer LidTop1;
+	final ModelRenderer LidTop1;
 
-	ModelRenderer LidTop2;
+	final ModelRenderer LidTop2;
 
-	ModelRenderer LidTop3;
+	final ModelRenderer LidTop3;
 
-	ModelRenderer LidTop4;
+	final ModelRenderer LidTop4;
 
-	ModelRenderer ChamberFront;
+	final ModelRenderer ChamberFront;
 
-	ModelRenderer ChamberFrontLeft;
+	final ModelRenderer ChamberFrontLeft;
 
-	ModelRenderer ChamberFrontRight;
+	final ModelRenderer ChamberFrontRight;
 
-	ModelRenderer ChamberBack;
+	final ModelRenderer ChamberBack;
 
-	ModelRenderer ChamberBackLeft;
+	final ModelRenderer ChamberBackLeft;
 
-	ModelRenderer ChamberBackRight;
+	final ModelRenderer ChamberBackRight;
 
-	ModelRenderer ChamberLeft;
+	final ModelRenderer ChamberLeft;
 
-	ModelRenderer ChamberRight;
+	final ModelRenderer ChamberRight;
 
-	ModelRenderer ChamberBase;
+	final ModelRenderer ChamberBase;
 
-	ModelRenderer ChamberAccentFront;
+	final ModelRenderer ChamberAccentFront;
 
-	ModelRenderer ChamberAccentBack;
+	final ModelRenderer ChamberAccentBack;
 
-	ModelRenderer ChamberAccentLeft;
+	final ModelRenderer ChamberAccentLeft;
 
-	ModelRenderer ChamberAccentRight;
+	final ModelRenderer ChamberAccentRight;
 
 	public ModelIcestoneCooler()
 	{

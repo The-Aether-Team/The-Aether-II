@@ -14,7 +14,7 @@ public class PrecipitationCapabilityProvider implements ICapabilitySerializable<
 {
 	private final PrecipitationManagerImpl.Storage storage = new PrecipitationManagerImpl.Storage();
 
-	private IPrecipitationManager capability;
+	private final IPrecipitationManager capability;
 
 	public PrecipitationCapabilityProvider(IPrecipitationManager manager)
 	{

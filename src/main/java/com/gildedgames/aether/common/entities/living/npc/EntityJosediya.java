@@ -19,7 +19,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityJosediya extends EntityNPC
 {
-	public static ResourceLocation SPEAKER = AetherCore.getResource("josediya");
+	public static final ResourceLocation SPEAKER = AetherCore.getResource("josediya");
 
 	private BlockPos spawned;
 

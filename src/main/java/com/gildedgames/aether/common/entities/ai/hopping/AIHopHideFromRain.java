@@ -21,7 +21,7 @@ public class AIHopHideFromRain extends EntityAIBase
 
 	private int nextRandomizeTime;
 
-	private EntityCreature entity;
+	private final EntityCreature entity;
 
 	private double shelterX;
 

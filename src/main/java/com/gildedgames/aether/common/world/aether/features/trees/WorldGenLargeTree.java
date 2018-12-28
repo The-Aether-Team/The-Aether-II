@@ -12,9 +12,9 @@ import java.util.Random;
 
 public class WorldGenLargeTree extends WorldGenAbstractTree
 {
-	private IBlockState leafBlock;
+	private final IBlockState leafBlock;
 
-	private IBlockState logBlock;
+	private final IBlockState logBlock;
 
 	public WorldGenLargeTree(IBlockState log, IBlockState leaf)
 	{

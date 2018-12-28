@@ -29,7 +29,7 @@ public class LayerHeadShadow extends LayerBipedArmor
 
 	private PatronRewardArmor previewArmor;
 
-	private ModelPlayer modelArmorSlim;
+	private final ModelPlayer modelArmorSlim;
 
 	public LayerHeadShadow(RenderLivingBase<?> rendererIn)
 	{

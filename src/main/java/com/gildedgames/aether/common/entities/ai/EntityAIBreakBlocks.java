@@ -15,7 +15,7 @@ public class EntityAIBreakBlocks extends EntityAIBase
 
 	private final float movementSpeed;
 
-	private EntityCreature entity;
+	private final EntityCreature entity;
 
 	private double targetX;
 
@@ -40,7 +40,7 @@ public class EntityAIBreakBlocks extends EntityAIBase
 	@Override
 	public boolean shouldExecute()
 	{
-		if (this.entity == null || !enabled)
+		if (this.entity == null || !this.enabled)
 		{
 			return false;
 		}
@@ -67,9 +67,9 @@ public class EntityAIBreakBlocks extends EntityAIBase
 	public boolean shouldContinueExecuting()
 	{
 
-		BlockPos destroyPos = new BlockPos(targetX, targetY, targetZ);
+		BlockPos destroyPos = new BlockPos(this.targetX, this.targetY, this.targetZ);
 
-		if (entity.getDistanceSq(destroyPos) < 15)
+		if (this.entity.getDistanceSq(destroyPos) < 15)
 		{
 			System.out.println("ATTack");
 		}
@@ -82,9 +82,9 @@ public class EntityAIBreakBlocks extends EntityAIBase
 	{
 		this.entity.getNavigator().tryMoveToXYZ(this.targetX, this.targetY, this.targetZ, this.movementSpeed);
 
-		BlockPos destroyPos = new BlockPos(targetX, targetY, targetZ);
+		BlockPos destroyPos = new BlockPos(this.targetX, this.targetY, this.targetZ);
 
-		if (entity.getDistanceSq(destroyPos) < 15)
+		if (this.entity.getDistanceSq(destroyPos) < 15)
 		{
 			System.out.println("ATTack");
 		}
@@ -98,7 +98,7 @@ public class EntityAIBreakBlocks extends EntityAIBase
 
 		final int rad = 5;
 
-		for (int i = -rad; i < rad; i ++)
+		for (int i = -rad; i < rad; i++)
 		{
 			for (int j = -rad; j < rad; j++)
 			{
@@ -106,11 +106,11 @@ public class EntityAIBreakBlocks extends EntityAIBase
 				{
 					BlockPos pos2 = blockpos.add(i, j, l);
 
-					if (!entity.getEntityWorld().isAirBlock(pos2))
+					if (!this.entity.getEntityWorld().isAirBlock(pos2))
 					{
-						IBlockState block = entity.getEntityWorld().getBlockState(pos2);
+						IBlockState block = this.entity.getEntityWorld().getBlockState(pos2);
 
-						for (Block bs : blocks)
+						for (Block bs : this.blocks)
 						{
 							if (block.getBlock().equals(bs))
 							{

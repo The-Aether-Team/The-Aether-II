@@ -59,7 +59,7 @@ public class RecipeUtil
 		{
 			OreDictionaryRequirement oreReq = (OreDictionaryRequirement) obj;
 
-			return oreReq.equals(stack);
+			return oreReq.matches(stack);
 		}
 		else if (obj instanceof String)
 		{

@@ -12,21 +12,21 @@ import net.minecraft.entity.Entity;
  */
 public class ModelSwetHead extends ModelBase
 {
-	public ModelRenderer InnerBody;
+	public final ModelRenderer InnerBody;
 
-	public ModelRenderer OuterBody;
+	public final ModelRenderer OuterBody;
 
-	public ModelRenderer TopLeftTail;
+	public final ModelRenderer TopLeftTail;
 
-	public ModelRenderer TopRightTail;
+	public final ModelRenderer TopRightTail;
 
-	public ModelRenderer BottomRightTail;
+	public final ModelRenderer BottomRightTail;
 
-	public ModelRenderer BottomLeftTail;
+	public final ModelRenderer BottomLeftTail;
 
-	public ModelRenderer BackLeftTail;
+	public final ModelRenderer BackLeftTail;
 
-	public ModelRenderer BackRightTail;
+	public final ModelRenderer BackRightTail;
 
 	public ModelSwetHead()
 	{

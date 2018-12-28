@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 public class CheckBlockAtPosition implements PosCondition
 {
 
-	private Block[] blocksToCheckFor;
+	private final Block[] blocksToCheckFor;
 
 	public CheckBlockAtPosition(Block... blocksToCheckFor)
 	{

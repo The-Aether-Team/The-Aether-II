@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.items.crafting;
 
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.google.common.collect.Maps;
 import net.minecraft.item.Item;
@@ -15,7 +16,7 @@ public class CoolerRecipes
 
 	private final Map<ItemStack, ItemStack[]> coolingList = Maps.newHashMap();
 
-	private Random rand = new Random();
+	private final Random rand = new Random();
 
 	private CoolerRecipes()
 	{
@@ -73,11 +74,9 @@ public class CoolerRecipes
 
 	public void addCoolingRecipe(ItemStack input, ItemStack... stackList)
 	{
-		Random rand = new Random();
-
 		if (this.getCoolingResult(input) != ItemStack.EMPTY)
 		{
-			net.minecraftforge.fml.common.FMLLog.info("Ignored cooling recipe with conflicting input: " + input + stackList[0]);
+			AetherCore.LOGGER.warn("Ignored cooling recipe with conflicting input: " + input + stackList[0]);
 			return;
 		}
 

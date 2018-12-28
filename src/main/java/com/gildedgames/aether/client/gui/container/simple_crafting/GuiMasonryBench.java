@@ -62,7 +62,7 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 
 	private final List<GuiRequiredMaterial> materials = new ArrayList<>(9);
 
-	public List<ISimpleRecipe> recipes = Lists.newArrayList();
+	public final List<ISimpleRecipe> recipes = Lists.newArrayList();
 
 	public List<String> hoverDescription;
 
@@ -85,7 +85,7 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 
 	private GuiCounterButton up, down;
 
-	private ContainerMasonryBench container;
+	private final ContainerMasonryBench container;
 
 	public GuiMasonryBench(EntityPlayer player, BlockPos blockPosition)
 	{

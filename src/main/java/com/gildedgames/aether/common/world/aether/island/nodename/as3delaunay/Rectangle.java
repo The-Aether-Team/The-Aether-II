@@ -12,27 +12,27 @@ public class Rectangle
 
 	public Rectangle(final double x, final double y, final double width, final double height)
 	{
-		left = this.x = x;
-		top = this.y = y;
+		this.left = this.x = x;
+		this.top = this.y = y;
 		this.width = width;
 		this.height = height;
-		right = x + width;
-		bottom = y + height;
+		this.right = x + width;
+		this.bottom = y + height;
 	}
 
 	public boolean liesOnAxes(final Point p)
 	{
-		return GenUtils.closeEnough(p.x, x, 1) || GenUtils.closeEnough(p.y, y, 1) || GenUtils.closeEnough(p.x, right, 1) || GenUtils
-				.closeEnough(p.y, bottom, 1);
+		return GenUtils.closeEnough(p.x, this.x, 1) || GenUtils.closeEnough(p.y, this.y, 1) || GenUtils.closeEnough(p.x, this.right, 1) || GenUtils
+				.closeEnough(p.y, this.bottom, 1);
 	}
 
 	public boolean inBounds(final Point p)
 	{
-		return inBounds(p.x, p.y);
+		return this.inBounds(p.x, p.y);
 	}
 
 	public boolean inBounds(final double x0, final double y0)
 	{
-		return !(x0 < x || x0 > right || y0 < y || y0 > bottom);
+		return !(x0 < this.x || x0 > this.right || y0 < this.y || y0 > this.bottom);
 	}
 }

@@ -79,7 +79,7 @@ public class BlockIceCrystal extends BlockBuilder implements IBlockMultiName
 	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	{
-		if (worldIn.getLightFor(EnumSkyBlock.BLOCK, pos) > 11 - this.getDefaultState().getLightOpacity())
+		if (worldIn.getLightFor(EnumSkyBlock.BLOCK, pos) > 11 - this.getDefaultState().getLightOpacity(worldIn, pos))
 		{
 			worldIn.setBlockToAir(pos);
 		}

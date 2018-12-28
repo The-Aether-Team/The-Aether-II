@@ -1,11 +1,5 @@
 package com.gildedgames.aether.common.entities.ai;
 
-import com.gildedgames.aether.api.AetherCapabilities;
-import com.gildedgames.aether.api.world.islands.IIslandData;
-import com.gildedgames.aether.api.world.islands.precipitation.IPrecipitationManager;
-import com.gildedgames.aether.api.world.islands.precipitation.PrecipitationType;
-import com.gildedgames.aether.common.util.helpers.IslandHelper;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.math.BlockPos;
@@ -19,7 +13,7 @@ public class EntityAIHideFromRain extends EntityAIBase
 
 	private final double movementSpeed;
 
-	private EntityCreature entity;
+	private final EntityCreature entity;
 
 	private double shelterX;
 

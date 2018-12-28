@@ -89,7 +89,6 @@ public class RenderWorldSkybox extends IRenderHandler
 		builder.pos(-0.5f * f, 0.5f * f, -0.5f * f).tex(0.0f, 0.25f).lightmap(h, k).color(b, b, b, a).endVertex();
 		builder.pos(-0.5f * f, -0.5f * f, -0.5f * f).tex(0.0f, 0.50f).lightmap(h, k).color(b, b, b, a).endVertex();
 
-
 		builder.pos(-0.5f * f, -0.5f * f, 0.5f * f).tex(0.75f, 0.50f).lightmap(h, k).color(b, b, b, a).endVertex();
 		builder.pos(-0.5f * f, 0.5f * f, 0.5f * f).tex(0.75f, 0.25f).lightmap(h, k).color(b, b, b, a).endVertex();
 		builder.pos(0.5f * f, 0.5f * f, 0.5f * f).tex(0.5f, 0.25f).lightmap(h, k).color(b, b, b, a).endVertex();
@@ -99,7 +98,6 @@ public class RenderWorldSkybox extends IRenderHandler
 		builder.pos(-0.5f * f, 0.5f * f, -0.5f * f).tex(1.0f, 0.25f).lightmap(h, k).color(b, b, b, a).endVertex();
 		builder.pos(-0.5f * f, 0.5f * f, 0.5f * f).tex(0.75f, 0.25f).lightmap(h, k).color(b, b, b, a).endVertex();
 		builder.pos(-0.5f * f, -0.5f * f, 0.5f * f).tex(0.75f, 0.50f).lightmap(h, k).color(b, b, b, a).endVertex();
-
 
 		builder.pos(0.5f * f, -0.5f * f, 0.5f * f).tex(0.5f, 0.5f).lightmap(h, k).color(b, b, b, a).endVertex();
 		builder.pos(0.5f * f, 0.5f * f, 0.5f * f).tex(0.5f, 0.25f).lightmap(h, k).color(b, b, b, a).endVertex();
@@ -116,7 +114,8 @@ public class RenderWorldSkybox extends IRenderHandler
 		GlStateManager.matrixMode(GL11.GL_PROJECTION);
 		GlStateManager.loadIdentity();
 
-		Project.gluPerspective(this.getFOVModifier(partialTicks, true), (float) mc.displayWidth / (float) mc.displayHeight, 0.05F, farPlaneDistance * MathHelper.SQRT_2);
+		Project.gluPerspective(this.getFOVModifier(partialTicks, true), (float) mc.displayWidth / (float) mc.displayHeight, 0.05F,
+				farPlaneDistance * MathHelper.SQRT_2);
 
 		GlStateManager.matrixMode(GL11.GL_MODELVIEW);
 
@@ -129,7 +128,8 @@ public class RenderWorldSkybox extends IRenderHandler
 
 	private float getFOVModifier(float partialTicks, boolean useFOVSetting)
 	{
-		Method method = ReflectionAether.getMethod(EntityRenderer.class, new Class[]{Float.TYPE, Boolean.TYPE}, ReflectionAether.GET_FOV_MODIFIER.getMappings());
+		Method method = ReflectionAether
+				.getMethod(EntityRenderer.class, new Class[] { Float.TYPE, Boolean.TYPE }, ReflectionAether.GET_FOV_MODIFIER.getMappings());
 
 		return (float) ReflectionAether.invokeMethod(method, Minecraft.getMinecraft().entityRenderer, partialTicks, useFOVSetting);
 	}

@@ -22,7 +22,7 @@ public class Perlin implements HeightAlgorithm
 
 	private final float median;
 
-	private final float noise[][];
+	private final float[][] noise;
 
 	/**
 	 * @param random Randomizer.

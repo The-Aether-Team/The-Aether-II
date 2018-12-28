@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 public class CheckTime implements PosCondition, WorldCondition
 {
 
-	private Time time;
+	private final Time time;
 
 	public CheckTime(Time time)
 	{

@@ -39,7 +39,8 @@ public class WorldEvents
 	@SubscribeEvent
 	public static void onWorldAttachCapabilities(AttachCapabilitiesEvent<World> event)
 	{
-		event.addCapability(AetherCore.getResource("AetherPrecipitation"), new PrecipitationCapabilityProvider(new PrecipitationManagerImpl(event.getObject())));
+		event.addCapability(AetherCore.getResource("AetherPrecipitation"),
+				new PrecipitationCapabilityProvider(new PrecipitationManagerImpl(event.getObject())));
 
 		if (event.getObject().isRemote)
 		{
@@ -145,7 +146,6 @@ public class WorldEvents
 		SpawnEntry cockatriceUnderground = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityCockatrice.class, 12F, 1, 3,
 				new UndergroundPositionSelector())
 				.addCondition(stoneCheck).addCondition(isUnderground).addCondition(new CheckBlockAtPosition(Blocks.AIR));
-
 
 		SpawnEntry varanysUnderground = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityVaranys.class, 12f, 1, 3,
 				new UndergroundPositionSelector())

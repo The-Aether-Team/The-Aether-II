@@ -2,31 +2,20 @@ package com.gildedgames.aether.common.util.helpers;
 
 import net.minecraft.util.math.MathHelper;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Random;
 
 public class MathUtil
 {
-	public static boolean epsilonEquals(double p_180185_0_, double p_180185_1_)
+
+	public static boolean epsilonEquals(float a, float b)
 	{
-		return Math.abs(p_180185_1_ - p_180185_0_) < 1.0E-5F;
+		return MathHelper.abs(b - a) < 1.0E-5F;
 	}
 
-	public static boolean epsilonEquals(float p_180185_0_, float p_180185_1_)
+	public static <T> T getRandomElement(List<T> from, Random rand)
 	{
-		return MathHelper.abs(p_180185_1_ - p_180185_0_) < 1.0E-5F;
-	}
-
-	public static <T> T getRandomElement(Collection<T> from, Random rand)
-	{
-		int i = rand.nextInt(from.size());
-		return (T) from.toArray()[i];
-	}
-
-	public static int floor(long value)
-	{
-		int i = (int) value;
-		return value < (long) i ? i - 1 : i;
+		return from.get(rand.nextInt(from.size()));
 	}
 
 	public static double getDoubleRange(Random random, double minimum, double maximum)
@@ -36,11 +25,11 @@ public class MathUtil
 
 	public static float interpolateRotation(float prevYawOffset, float yawOffset, float partialTicks)
 	{
-		float f;
+		float f = yawOffset - prevYawOffset;
 
-		for (f = yawOffset - prevYawOffset; f < -180.0F; f += 360.0F)
+		while (f < -180.0F)
 		{
-			;
+			f += 360.0F;
 		}
 
 		while (f >= 180.0F)

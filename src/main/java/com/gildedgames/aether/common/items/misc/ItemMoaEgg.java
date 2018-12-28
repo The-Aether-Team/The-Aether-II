@@ -94,7 +94,8 @@ public class ItemMoaEgg extends Item implements IDropOnDeath
 
 			creativeList.add("");
 
-			creativeList.add(TextFormatting.YELLOW + "" + TextFormatting.ITALIC + "" + I18n.format("moa.wing_strength", genePool.getWingStrength().gene().localizedName()));
+			creativeList.add(TextFormatting.YELLOW + "" + TextFormatting.ITALIC + "" + I18n
+					.format("moa.wing_strength", genePool.getWingStrength().gene().localizedName()));
 		}
 	}
 
@@ -153,7 +154,7 @@ public class ItemMoaEgg extends Item implements IDropOnDeath
 			}
 			else if (
 					world.checkNoEntityCollision(
-							BlocksAether.moa_egg.getCollisionBoundingBox(world.getBlockState(pos.add(0, yOffset, 0)), world, pos.add(0, yOffset, 0)))
+							world.getBlockState(pos.add(0, yOffset, 0)).getCollisionBoundingBox(world, pos.add(0, yOffset, 0)))
 							&& world.setBlockState(pos.add(0, yOffset, 0), BlocksAether.moa_egg.getDefaultState()))
 			{
 				final SoundType soundtype = world.getBlockState(pos).getBlock().getSoundType(world.getBlockState(pos), world, pos, player);

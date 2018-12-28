@@ -18,7 +18,7 @@ public class SlotSimpleCrafting extends SlotCrafting
 
 	private boolean isSimpleCrafting;
 
-	private ContainerMasonryBench container;
+	private final ContainerMasonryBench container;
 
 	public SlotSimpleCrafting(EntityPlayer player, InventoryCrafting craftingInventory, IInventory inventoryIn, int slotIndex, int xPosition, int yPosition,
 			ContainerMasonryBench container)

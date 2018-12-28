@@ -14,12 +14,12 @@ public final class Winding
 	private Winding(final String name)
 	{
 		super();
-		_name = name;
+		this._name = name;
 	}
 
 	@Override
 	public String toString()
 	{
-		return _name;
+		return this._name;
 	}
 }

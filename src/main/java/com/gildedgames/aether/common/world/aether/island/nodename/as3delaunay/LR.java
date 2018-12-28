@@ -11,7 +11,7 @@ public final class LR
 
 	public LR(final String name)
 	{
-		_name = name;
+		this._name = name;
 	}
 
 	public static LR other(final LR leftRight)
@@ -22,6 +22,6 @@ public final class LR
 	@Override
 	public String toString()
 	{
-		return _name;
+		return this._name;
 	}
 }

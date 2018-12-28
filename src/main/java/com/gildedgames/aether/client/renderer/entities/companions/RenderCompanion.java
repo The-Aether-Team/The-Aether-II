@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL11;
 
 public abstract class RenderCompanion<T extends EntityCompanion> extends RenderLiving<T>
 {
-	public static boolean RENDER_FADE_ON_NEAR = true;
+	public static final boolean RENDER_FADE_ON_NEAR = true;
 
 	private final double distanceLimit;
 

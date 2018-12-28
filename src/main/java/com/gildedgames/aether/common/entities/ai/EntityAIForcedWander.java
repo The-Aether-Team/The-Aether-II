@@ -10,11 +10,13 @@ import javax.annotation.Nullable;
 public class EntityAIForcedWander extends EntityAIWander
 {
 
-	private EntityCreature entity;
+	private final EntityCreature entity;
 
-	private int chance;
+	private final int chance;
 
-	private int xScatter, yScatter;
+	private final int xScatter;
+
+	private final int yScatter;
 
 	public EntityAIForcedWander(EntityCreature entity, double speedIn, int chance)
 	{

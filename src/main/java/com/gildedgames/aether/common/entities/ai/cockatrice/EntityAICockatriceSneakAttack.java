@@ -17,7 +17,7 @@ public class EntityAICockatriceSneakAttack extends EntityAIBase
 
 	protected int attackTick;
 
-	Class<? extends EntityLivingBase> attackClass;
+	final Class<? extends EntityLivingBase> attackClass;
 
 	public EntityAICockatriceSneakAttack(final EntityCockatrice entity, final Class<? extends EntityLivingBase> clazz)
 	{

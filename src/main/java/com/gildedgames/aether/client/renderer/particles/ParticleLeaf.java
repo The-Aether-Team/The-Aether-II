@@ -21,9 +21,9 @@ public class ParticleLeaf extends Particle
 {
 	private final ResourceLocation sprite = AetherCore.getResource("textures/particles/skyroot_leaf_particle.png");
 
-	private float mulRotX;
+	private final float mulRotX;
 
-	private float mulRotY;
+	private final float mulRotY;
 
 	private float prevRotX;
 

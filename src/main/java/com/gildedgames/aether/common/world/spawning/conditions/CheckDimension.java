@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 public class CheckDimension implements PosCondition, WorldCondition
 {
 
-	private DimensionType dimensionTypeToCheckFor;
+	private final DimensionType dimensionTypeToCheckFor;
 
 	public CheckDimension(DimensionType dimensionTypeToCheckFor)
 	{

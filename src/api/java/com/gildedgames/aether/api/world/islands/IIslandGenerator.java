@@ -13,5 +13,6 @@ public interface IIslandGenerator
 			final int chunkX,
 			final int chunkZ);
 
-	void genChunk(Biome[] biomes, OpenSimplexNoise noise, IBlockAccessExtended access, ChunkMask mask, ChunkPrimer primer, IIslandData island, int chunkX, int chunkZ);
+	void genChunk(Biome[] biomes, OpenSimplexNoise noise, IBlockAccessExtended access, ChunkMask mask, ChunkPrimer primer, IIslandData island, int chunkX,
+			int chunkZ);
 }

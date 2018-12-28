@@ -94,7 +94,8 @@ public class WorldPreparationAether
 
 		this.caveGenerator.generate(this.world, chunkX, chunkZ, mask);
 
-		if (island.getBiome() instanceof BiomeArcticPeaks) {
+		if (island.getBiome() instanceof BiomeArcticPeaks)
+		{
 			this.veinGenerator.generate(this.world, chunkX, chunkZ, mask);
 		}
 
@@ -137,7 +138,7 @@ public class WorldPreparationAether
 
 	private ChunkNoiseGenerator createDepthBuffer(IIslandData island, int chunkX, int chunkZ, double scale)
 	{
-		return new ChunkNoiseGenerator(this.surfaceNoise, chunkX * 16, chunkZ * 16,4, 5, island.getBounds().getMinX(), island.getBounds().getMinZ(), scale)
+		return new ChunkNoiseGenerator(this.surfaceNoise, chunkX * 16, chunkZ * 16, 4, 5, island.getBounds().getMinX(), island.getBounds().getMinZ(), scale)
 		{
 			@Override
 			protected double sample(double nx, double nz)
@@ -155,7 +156,8 @@ public class WorldPreparationAether
 
 		this.caveGenerator.generate(this.world, chunkX, chunkZ, mask);
 
-		if (island.getBiome() instanceof BiomeArcticPeaks) {
+		if (island.getBiome() instanceof BiomeArcticPeaks)
+		{
 			this.veinGenerator.generate(this.world, chunkX, chunkZ, mask);
 		}
 	}

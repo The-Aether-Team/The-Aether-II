@@ -15,7 +15,7 @@ public class EntityInfoProvider implements ICapabilitySerializable<NBTBase>
 
 	private IEntityInfo capability;
 
-	private EntityLivingBase entity;
+	private final EntityLivingBase entity;
 
 	public EntityInfoProvider(EntityLivingBase entity)
 	{

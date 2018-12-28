@@ -38,10 +38,7 @@ public class SlotMoaEgg extends Slot
 			if (stack.getItem() == ItemsAether.moa_egg || stack.getItem() == ItemsAether.rainbow_moa_egg)
 			{
 				// Check if incubator is ready before allowing transfer
-				if (this.inventory.getField(0) > TileEntityIncubator.REQ_TEMPERATURE_THRESHOLD - 500)
-				{
-					return true;
-				}
+				return this.inventory.getField(0) > TileEntityIncubator.REQ_TEMPERATURE_THRESHOLD - 500;
 			}
 		}
 		return false;

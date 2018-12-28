@@ -7,125 +7,125 @@ import net.minecraft.util.math.MathHelper;
 
 public class ModelTaegore extends ModelBase
 {
-	public ModelRenderer Tail;
+	public final ModelRenderer Tail;
 
-	public ModelRenderer HeadMain;
+	public final ModelRenderer HeadMain;
 
-	public ModelRenderer HeadThroat;
+	public final ModelRenderer HeadThroat;
 
-	public ModelRenderer HeadSnoutRight;
+	public final ModelRenderer HeadSnoutRight;
 
-	public ModelRenderer HeadSnoutLeft;
+	public final ModelRenderer HeadSnoutLeft;
 
-	public ModelRenderer HeadSnout;
+	public final ModelRenderer HeadSnout;
 
-	public ModelRenderer HeadJawBack;
+	public final ModelRenderer HeadJawBack;
 
-	public ModelRenderer HeadSnoutRidge;
+	public final ModelRenderer HeadSnoutRidge;
 
-	public ModelRenderer HeadBrowLeft;
+	public final ModelRenderer HeadBrowLeft;
 
-	public ModelRenderer HeadBrowRight;
+	public final ModelRenderer HeadBrowRight;
 
-	public ModelRenderer HeadEyeLeft;
+	public final ModelRenderer HeadEyeLeft;
 
-	public ModelRenderer HeadEyeRight;
+	public final ModelRenderer HeadEyeRight;
 
-	public ModelRenderer HeadCrestMiddle;
+	public final ModelRenderer HeadCrestMiddle;
 
-	public ModelRenderer HeadCrestLeft;
+	public final ModelRenderer HeadCrestLeft;
 
-	public ModelRenderer HeadCrestRight;
+	public final ModelRenderer HeadCrestRight;
 
-	public ModelRenderer HeadCrestBase;
+	public final ModelRenderer HeadCrestBase;
 
-	public ModelRenderer HeadTuskLeft;
+	public final ModelRenderer HeadTuskLeft;
 
-	public ModelRenderer HeadTuskRight;
+	public final ModelRenderer HeadTuskRight;
 
-	public ModelRenderer HeadBeardMiddle;
+	public final ModelRenderer HeadBeardMiddle;
 
-	public ModelRenderer HeadBeardRight;
+	public final ModelRenderer HeadBeardRight;
 
-	public ModelRenderer HeadBeardLeft;
+	public final ModelRenderer HeadBeardLeft;
 
-	public ModelRenderer HeadEarLeft;
+	public final ModelRenderer HeadEarLeft;
 
-	public ModelRenderer HeadEarRight;
+	public final ModelRenderer HeadEarRight;
 
-	public ModelRenderer HeadRuffTop;
+	public final ModelRenderer HeadRuffTop;
 
-	public ModelRenderer HeadRuffLeft;
+	public final ModelRenderer HeadRuffLeft;
 
-	public ModelRenderer HeadRuffRight;
+	public final ModelRenderer HeadRuffRight;
 
-	public ModelRenderer HeadJawFront;
+	public final ModelRenderer HeadJawFront;
 
-	public ModelRenderer TorsoNeck;
+	public final ModelRenderer TorsoNeck;
 
-	public ModelRenderer TorsoBack;
+	public final ModelRenderer TorsoBack;
 
-	public ModelRenderer TorsoSpine;
+	public final ModelRenderer TorsoSpine;
 
-	public ModelRenderer TorsoBelly;
+	public final ModelRenderer TorsoBelly;
 
-	public ModelRenderer TorsoFront;
+	public final ModelRenderer TorsoFront;
 
-	public ModelRenderer TorsoShoulderPlateLeft1;
+	public final ModelRenderer TorsoShoulderPlateLeft1;
 
-	public ModelRenderer TorsoShoulderPlateRight1;
+	public final ModelRenderer TorsoShoulderPlateRight1;
 
-	public ModelRenderer TorsoShoulderPlateLeft2;
+	public final ModelRenderer TorsoShoulderPlateLeft2;
 
-	public ModelRenderer TorsoShoulderPlateRight2;
+	public final ModelRenderer TorsoShoulderPlateRight2;
 
-	public ModelRenderer TorsoBackPlateRight;
+	public final ModelRenderer TorsoBackPlateRight;
 
-	public ModelRenderer TorsoBackPlateLeft;
+	public final ModelRenderer TorsoBackPlateLeft;
 
-	public ModelRenderer FrontLegLeftUpper;
+	public final ModelRenderer FrontLegLeftUpper;
 
-	public ModelRenderer FrontLegLeftLower;
+	public final ModelRenderer FrontLegLeftLower;
 
-	public ModelRenderer FrontLegLeftToeMiddle;
+	public final ModelRenderer FrontLegLeftToeMiddle;
 
-	public ModelRenderer FrontLegLeftToeOut;
+	public final ModelRenderer FrontLegLeftToeOut;
 
-	public ModelRenderer FrontLegLeftToeIn;
+	public final ModelRenderer FrontLegLeftToeIn;
 
-	public ModelRenderer FrontLegRightUpper;
+	public final ModelRenderer FrontLegRightUpper;
 
-	public ModelRenderer FrontLegRightLower;
+	public final ModelRenderer FrontLegRightLower;
 
-	public ModelRenderer FrontLegRightToeMiddle;
+	public final ModelRenderer FrontLegRightToeMiddle;
 
-	public ModelRenderer FrontLegRightToeOut;
+	public final ModelRenderer FrontLegRightToeOut;
 
-	public ModelRenderer FrontLegRightToeIn;
+	public final ModelRenderer FrontLegRightToeIn;
 
-	public ModelRenderer HindLegLeftCalf;
+	public final ModelRenderer HindLegLeftCalf;
 
-	public ModelRenderer HindLegLeftKnee;
+	public final ModelRenderer HindLegLeftKnee;
 
-	public ModelRenderer HindLegLeftShin;
+	public final ModelRenderer HindLegLeftShin;
 
-	public ModelRenderer HindLegLeftToeMiddle;
+	public final ModelRenderer HindLegLeftToeMiddle;
 
-	public ModelRenderer HindLegLeftToeOut;
+	public final ModelRenderer HindLegLeftToeOut;
 
-	public ModelRenderer HindLegLeftToeIn;
+	public final ModelRenderer HindLegLeftToeIn;
 
-	public ModelRenderer HindLegRightCalf;
+	public final ModelRenderer HindLegRightCalf;
 
-	public ModelRenderer HindLegRightKnee;
+	public final ModelRenderer HindLegRightKnee;
 
-	public ModelRenderer HindLegRightShin;
+	public final ModelRenderer HindLegRightShin;
 
-	public ModelRenderer HindLegRightToeMiddle;
+	public final ModelRenderer HindLegRightToeMiddle;
 
-	public ModelRenderer HindLegRightToeOut;
+	public final ModelRenderer HindLegRightToeOut;
 
-	public ModelRenderer HindLegRightToeIn;
+	public final ModelRenderer HindLegRightToeIn;
 
 	public ModelTaegore()
 	{

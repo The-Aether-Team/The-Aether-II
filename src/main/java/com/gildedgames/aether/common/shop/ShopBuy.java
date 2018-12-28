@@ -5,7 +5,6 @@ import com.gildedgames.orbis_api.util.io.NBTFunnel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-import java.util.Collection;
 import java.util.List;
 
 public class ShopBuy implements IShopBuy
@@ -64,7 +63,7 @@ public class ShopBuy implements IShopBuy
 	}
 
 	@Override
-	public Collection<String> getUnlocalizedDescriptions()
+	public List<String> getUnlocalizedDescriptions()
 	{
 		return this.descriptions;
 	}

@@ -12,9 +12,9 @@ import java.util.Random;
 public class WorldGenAetherCaves
 {
 
-	protected int range = 8;
+	protected final int range = 8;
 
-	protected ThreadLocal<XoShiRoRandom> rand = ThreadLocal.withInitial(XoShiRoRandom::new);
+	protected final ThreadLocal<XoShiRoRandom> rand = ThreadLocal.withInitial(XoShiRoRandom::new);
 
 	protected void addRoom(long seed, int originalX, int originalZ, ChunkMask mask, double dirX, double dirY, double dirZ, Biome[] biomes)
 	{
@@ -23,7 +23,8 @@ public class WorldGenAetherCaves
 	}
 
 	protected void addTunnel(long seed, int originalX, int originalZ, ChunkMask mask, double p_180702_6_, double p_180702_8_,
-			double p_180702_10_, float p_180702_12_, float p_180702_13_, float p_180702_14_, int p_180702_15_, int p_180702_16_, double p_180702_17_, Biome[] biomes)
+			double p_180702_10_, float p_180702_12_, float p_180702_13_, float p_180702_14_, int p_180702_15_, int p_180702_16_, double p_180702_17_,
+			Biome[] biomes)
 	{
 		double d0 = (double) (originalX * 16 + 8);
 		double d1 = (double) (originalZ * 16 + 8);
@@ -204,7 +205,8 @@ public class WorldGenAetherCaves
 
 	protected boolean canReplaceBlock(int state, int above)
 	{
-		return state == IslandBlockType.STONE_BLOCK.ordinal() || state == IslandBlockType.COAST_BLOCK.ordinal() || state == IslandBlockType.FERROSITE_BLOCK.ordinal();
+		return state == IslandBlockType.STONE_BLOCK.ordinal() || state == IslandBlockType.COAST_BLOCK.ordinal() || state == IslandBlockType.FERROSITE_BLOCK
+				.ordinal();
 	}
 
 	protected boolean isOceanBlock(ChunkMask data, int x, int y, int z, int chunkX, int chunkZ)

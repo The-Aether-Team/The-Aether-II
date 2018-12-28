@@ -12,7 +12,7 @@ public class EntityGroup
 
 	private static int nextPackID = Integer.MIN_VALUE;
 
-	List<EntityGroupAggressor> agressors = new ArrayList<>();
+	final List<EntityGroupAggressor> agressors = new ArrayList<>();
 
 	int tickCounter = 0;
 

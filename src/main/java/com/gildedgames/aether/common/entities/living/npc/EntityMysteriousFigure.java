@@ -20,7 +20,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -33,7 +32,7 @@ import java.util.Random;
 
 public class EntityMysteriousFigure extends EntityNPC
 {
-	public static ResourceLocation SPEAKER = AetherCore.getResource("mysterious_figure");
+	public static final ResourceLocation SPEAKER = AetherCore.getResource("mysterious_figure");
 
 	private BlockPos spawned;
 
@@ -65,18 +64,6 @@ public class EntityMysteriousFigure extends EntityNPC
 	public void applyEntityCollision(Entity entityIn)
 	{
 		super.applyEntityCollision(entityIn);
-	}
-
-	@Override
-	public boolean canBeCollidedWith()
-	{
-		return super.canBeCollidedWith();
-	}
-
-	@Override
-	public AxisAlignedBB getEntityBoundingBox()
-	{
-		return super.getEntityBoundingBox();
 	}
 
 	@Override
