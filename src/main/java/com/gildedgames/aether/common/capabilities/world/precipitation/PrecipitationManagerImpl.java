@@ -2,10 +2,12 @@ package com.gildedgames.aether.common.capabilities.world.precipitation;
 
 import com.gildedgames.aether.api.world.islands.precipitation.IPrecipitationManager;
 import com.gildedgames.aether.api.world.islands.precipitation.PrecipitationStrength;
+import com.gildedgames.aether.common.blocks.IBlockSnowy;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketUpdatePrecipitation;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.biomes.ISnowyBiome;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -221,6 +223,17 @@ public class PrecipitationManagerImpl implements IPrecipitationManager
 				if (this.world.canSnowAt(topBlockPos, true))
 				{
 					this.world.setBlockState(topBlockPos, snowyBiome.getSnowBlock());
+				}
+				else
+				{
+					IBlockState topState = this.world.getBlockState(topBlockPos);
+
+					if (topState.getBlock() instanceof IBlockSnowy)
+					{
+						final IBlockState newState = topState.withProperty(IBlockSnowy.PROPERTY_SNOWY, Boolean.TRUE);
+
+						this.world.setBlockState(topBlockPos, newState, 2);
+					}
 				}
 			}
 
