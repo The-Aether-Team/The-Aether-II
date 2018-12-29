@@ -75,7 +75,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class ItemsAether
 {
 	public static ArmorMaterial WINTER_ARMOR = EnumHelper.addArmorMaterial("winter", "", 8,
-			new int[]{0, 0, 0, 0}, 100, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0F).setRepairItem(new ItemStack(Blocks.WOOL,1, OreDictionary.WILDCARD_VALUE));
+			new int[]{0, 0, 0, 0}, 25, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0F).setRepairItem(new ItemStack(Blocks.WOOL,1, OreDictionary.WILDCARD_VALUE));
 
 	public static final Item skyroot_stick = new ItemSkyrootStick();
 
