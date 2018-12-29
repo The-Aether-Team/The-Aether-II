@@ -87,8 +87,25 @@
 			"max_stock": "200",
 			"ticks_until_restock": "1200",
 			"rarity_weight": "5.0"
+		},
+		{
+			"stack": {
+				"item": "aether:winter_hat",
+				"data": "0"
+			},
+			"descriptions": [
+				"edison.shop.winter_hat"
+			],
+			"min_price": "400",
+			"max_price": "600",
+			"min_sell_price": "300",
+			"max_sell_price": "400",
+			"min_stock": "1",
+			"max_stock": "4",
+			"ticks_until_restock": "1200",
+			"rarity_weight": "5.0"
 		}
 	],
-	"max_stock": "5",
-	"min_stock": "5"
+	"max_stock": "6",
+	"min_stock": "6"
 }
