@@ -236,10 +236,15 @@ public class SpawnHandler implements ISpawnHandler
 							(manager.getWorld().rand.nextBoolean() ? 1 : -1) * (1 + manager.getWorld().rand
 									.nextInt(entry.getPositionSelector().getScatter(manager.getWorld())));
 
-					float posX = groupPosX + scatterX;
-					float posZ = groupPosZ + scatterZ;
+					int posX = MathHelper.floor( groupPosX + scatterX);
+					int posZ = MathHelper.floor( groupPosZ + scatterZ);
 
-					int posY = entry.getPositionSelector().getPosY(manager.getWorld(), MathHelper.floor(posX), MathHelper.floor(posZ));
+					if (!manager.getWorld().isBlockLoaded(new BlockPos(posX, 0, posZ)))
+					{
+						continue;
+					}
+
+					int posY = entry.getPositionSelector().getPosY(manager.getWorld(), posX, posZ);
 
 					BlockPos spawnAt = new BlockPos(posX, posY, posZ);
 
