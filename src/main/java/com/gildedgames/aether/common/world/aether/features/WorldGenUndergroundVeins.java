@@ -15,8 +15,8 @@ public class WorldGenUndergroundVeins
 
 	protected final ThreadLocal<XoShiRoRandom> rand = ThreadLocal.withInitial(XoShiRoRandom::new);
 
-	protected void addTunnel(long seed, int originalX, int originalZ, ChunkMask mask, double p_180702_6_, double p_180702_8_,
-			double p_180702_10_, float p_180702_12_, float p_180702_13_, float p_180702_14_, int p_180702_15_, int p_180702_16_, double p_180702_17_,
+	protected void addTunnel(long seed, int originalX, int originalZ, ChunkMask mask, double t1, double t2,
+			double t3, float r1, float r2, float r3, int s1, int s2, double q,
 			Biome[] biomes)
 	{
 		double d0 = (double) (originalX * 16 + 8);
@@ -25,78 +25,78 @@ public class WorldGenUndergroundVeins
 		float f1 = 0.0F;
 		XoShiRoRandom random = new XoShiRoRandom(seed);
 
-		if (p_180702_16_ <= 0)
+		if (s2 <= 0)
 		{
 			int i = this.range * 16 - 16;
-			p_180702_16_ = i - random.nextInt(i / 4);
+			s2 = i - random.nextInt(i / 4);
 		}
 
 		boolean flag2 = false;
 
-		if (p_180702_15_ == -1)
+		if (s1 == -1)
 		{
-			p_180702_15_ = p_180702_16_ / 2;
+			s1 = s2 / 2;
 			flag2 = true;
 		}
 
-		int j = random.nextInt(p_180702_16_ / 2) + p_180702_16_ / 4;
+		int j = random.nextInt(s2 / 2) + s2 / 4;
 
-		for (boolean flag = random.nextInt(6) == 0; p_180702_15_ < p_180702_16_; ++p_180702_15_)
+		for (boolean flag = random.nextInt(6) == 0; s1 < s2; ++s1)
 		{
-			double d2 = 1.5D + (double) (MathHelper.sin((float) p_180702_15_ * (float) Math.PI / (float) p_180702_16_) * p_180702_12_);
-			double d3 = d2 * p_180702_17_;
-			float f2 = MathHelper.cos(p_180702_14_);
-			float f3 = MathHelper.sin(p_180702_14_);
-			p_180702_6_ += (double) (MathHelper.cos(p_180702_13_) * f2);
-			p_180702_8_ += (double) f3;
-			p_180702_10_ += (double) (MathHelper.sin(p_180702_13_) * f2);
+			double d2 = 1.5D + (double) (MathHelper.sin((float) s1 * (float) Math.PI / (float) s2) * r1);
+			double d3 = d2 * q;
+			float f2 = MathHelper.cos(r3);
+			float f3 = MathHelper.sin(r3);
+			t1 += (double) (MathHelper.cos(r2) * f2);
+			t2 += (double) f3;
+			t3 += (double) (MathHelper.sin(r2) * f2);
 
 			if (flag)
 			{
-				p_180702_14_ = p_180702_14_ * 0.92F;
+				r3 = r3 * 0.92F;
 			}
 			else
 			{
-				p_180702_14_ = p_180702_14_ * 0.7F;
+				r3 = r3 * 0.7F;
 			}
 
-			p_180702_14_ = p_180702_14_ + f1 * 0.1F;
-			p_180702_13_ += f * 0.1F;
+			r3 = r3 + f1 * 0.1F;
+			r2 += f * 0.1F;
 			f1 = f1 * 0.9F;
 			f = f * 0.75F;
 			f1 = f1 + (random.nextFloat() - random.nextFloat()) * random.nextFloat() * 2.0F;
 			f = f + (random.nextFloat() - random.nextFloat()) * random.nextFloat() * 4.0F;
 
-			if (!flag2 && p_180702_15_ == j && p_180702_12_ > 1.0F && p_180702_16_ > 0)
+			if (!flag2 && s1 == j && r1 > 1.0F && s2 > 0)
 			{
-				this.addTunnel(random.nextLong(), originalX, originalZ, mask, p_180702_6_, p_180702_8_, p_180702_10_,
-						random.nextFloat() * 0.5F + 0.5F, p_180702_13_ - ((float) Math.PI / 2F), p_180702_14_ / 3.0F, p_180702_15_, p_180702_16_, 1.0D, biomes);
-				this.addTunnel(random.nextLong(), originalX, originalZ, mask, p_180702_6_, p_180702_8_, p_180702_10_,
-						random.nextFloat() * 0.5F + 0.5F, p_180702_13_ + ((float) Math.PI / 2F), p_180702_14_ / 3.0F, p_180702_15_, p_180702_16_, 1.0D, biomes);
+				this.addTunnel(random.nextLong(), originalX, originalZ, mask, t1, t2, t3,
+						random.nextFloat() * 0.5F + 0.5F, r2 - ((float) Math.PI / 2F), r3 / 3.0F, s1, s2, 1.0D, biomes);
+				this.addTunnel(random.nextLong(), originalX, originalZ, mask, t1, t2, t3,
+						random.nextFloat() * 0.5F + 0.5F, r2 + ((float) Math.PI / 2F), r3 / 3.0F, s1, s2, 1.0D, biomes);
 				return;
 			}
 
 			if (flag2 || random.nextInt(4) != 0)
 			{
-				double d4 = p_180702_6_ - d0;
-				double d5 = p_180702_10_ - d1;
-				double d6 = (double) (p_180702_16_ - p_180702_15_);
-				double d7 = (double) (p_180702_12_ + 2.0F + 16.0F);
+				double d4 = t1 - d0;
+				double d5 = t3 - d1;
+				double d6 = (double) (s2 - s1);
+				double d7 = (double) (r1 + 2.0F + 16.0F);
 
 				if (d4 * d4 + d5 * d5 - d6 * d6 > d7 * d7)
 				{
 					return;
 				}
 
-				if (p_180702_6_ >= d0 - 16.0D - d2 * 2.0D && p_180702_10_ >= d1 - 16.0D - d2 * 2.0D && p_180702_6_ <= d0 + 16.0D + d2 * 2.0D
-						&& p_180702_10_ <= d1 + 16.0D + d2 * 2.0D)
+				if (t1 >= d0 - 16.0D - d2 * 2.0D && t3 >= d1 - 16.0D - d2 * 2.0D && t1 <= d0 + 16.0D + d2 * 2.0D
+						&& t3 <= d1 + 16.0D + d2 * 2.0D)
 				{
-					int k2 = MathHelper.floor(p_180702_6_ - d2) - originalX * 16 - 1;
-					int k = MathHelper.floor(p_180702_6_ + d2) - originalX * 16 + 1;
-					int l2 = MathHelper.floor(p_180702_8_ - d3) - 1;
-					int l = MathHelper.floor(p_180702_8_ + d3) + 1;
-					int i3 = MathHelper.floor(p_180702_10_ - d2) - originalZ * 16 - 1;
-					int i1 = MathHelper.floor(p_180702_10_ + d2) - originalZ * 16 + 1;
+					int k2 = MathHelper.floor(t1 - d2) - originalX * 16 - 1;
+					int k = MathHelper.floor(t1 + d2) - originalX * 16 + 1;
+					int l2 = MathHelper.floor(t2 - d3) - 1;
+					int l = MathHelper.floor(t2 + d3) + 1;
+					int i3 = MathHelper.floor(t3 - d2) - originalZ * 16 - 1;
+					int i1 = MathHelper.floor(t3 + d2) - originalZ * 16 + 1;
 
 					if (k2 < 0)
 					{
@@ -156,18 +156,18 @@ public class WorldGenUndergroundVeins
 					{
 						for (int j3 = k2; j3 < k; ++j3)
 						{
-							double d10 = ((double) (j3 + originalX * 16) + 0.5D - p_180702_6_) / d2;
+							double d10 = ((double) (j3 + originalX * 16) + 0.5D - t1) / d2;
 
 							for (int i2 = i3; i2 < i1; ++i2)
 							{
-								double d8 = ((double) (i2 + originalZ * 16) + 0.5D - p_180702_10_) / d2;
+								double d8 = ((double) (i2 + originalZ * 16) + 0.5D - t3) / d2;
 								boolean flag1 = false;
 
 								if (d10 * d10 + d8 * d8 < 1.0D)
 								{
 									for (int j2 = l; j2 > l2; --j2)
 									{
-										double d9 = ((double) (j2 - 1) + 0.5D - p_180702_8_) / d3;
+										double d9 = ((double) (j2 - 1) + 0.5D - t2) / d3;
 
 										if (d9 > -0.7D && d10 * d10 + d9 * d9 + d8 * d8 < 1.0D)
 										{

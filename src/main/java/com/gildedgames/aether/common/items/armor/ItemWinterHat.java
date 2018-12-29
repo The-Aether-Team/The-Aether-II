@@ -10,13 +10,11 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemWinterHat extends ItemArmor
 {
@@ -27,6 +25,7 @@ public class ItemWinterHat extends ItemArmor
 
     @Nullable
     @Override
+    @SideOnly(Side.CLIENT)
     public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type)
     {
         return AetherCore.getResourcePath("textures/armor/winter_hat.png");
@@ -34,6 +33,7 @@ public class ItemWinterHat extends ItemArmor
 
     @Nullable
     @Override
+    @SideOnly(Side.CLIENT)
     public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped _default)
     {
         return new ModelWinterHat();
