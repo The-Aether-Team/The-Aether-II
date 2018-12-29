@@ -10,7 +10,7 @@ import java.util.List;
 public class SimpleRecipeGroup implements ISimpleRecipeGroup
 {
 
-	private List<ISimpleRecipe> recipes = Lists.newArrayList();
+	private final List<ISimpleRecipe> recipes = Lists.newArrayList();
 
 	@Override
 	public Collection<ISimpleRecipe> getRecipes()

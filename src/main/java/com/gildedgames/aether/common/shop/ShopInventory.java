@@ -15,7 +15,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 
 public class ShopInventory implements IInventory, NBT
 {
-	private NonNullList<ItemStack> stacks = NonNullList.withSize(1, ItemStack.EMPTY);
+	private final NonNullList<ItemStack> stacks = NonNullList.withSize(1, ItemStack.EMPTY);
 
 	private ShopInstance shopInstance;
 
@@ -123,11 +123,11 @@ public class ShopInventory implements IInventory, NBT
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack)
 	{
-		int hash = ItemHelper.getHashForItemStack(stack);
+		int hash = ItemHelper.getKeyForItemStack(stack);
 
 		for (IShopBuy buy : this.shopInstance.getStock())
 		{
-			int buyHash = ItemHelper.getHashForItemStack(buy.getItemStack());
+			int buyHash = ItemHelper.getKeyForItemStack(buy.getItemStack());
 
 			if (buyHash == hash)
 			{

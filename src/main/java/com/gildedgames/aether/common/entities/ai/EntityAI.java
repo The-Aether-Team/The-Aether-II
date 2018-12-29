@@ -6,7 +6,7 @@ import net.minecraft.entity.ai.EntityAIBase;
 public abstract class EntityAI<T extends Entity> extends EntityAIBase
 {
 
-	private T entity;
+	private final T entity;
 
 	public EntityAI(T entity)
 	{

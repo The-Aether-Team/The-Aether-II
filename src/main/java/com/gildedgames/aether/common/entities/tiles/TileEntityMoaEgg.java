@@ -21,7 +21,7 @@ public class TileEntityMoaEgg extends TileEntitySynced implements ITickable
 
 	public AnimalGender gender = AnimalGender.FEMALE;
 
-	private MoaGenePool genePool = new MoaGenePool(new SimpleGeneStorage());
+	private final MoaGenePool genePool = new MoaGenePool(new SimpleGeneStorage());
 
 	public TileEntityMoaEgg()
 	{

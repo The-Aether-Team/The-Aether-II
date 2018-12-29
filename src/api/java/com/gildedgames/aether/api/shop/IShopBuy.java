@@ -3,7 +3,7 @@ package com.gildedgames.aether.api.shop;
 import com.gildedgames.orbis_api.util.mc.NBT;
 import net.minecraft.item.ItemStack;
 
-import java.util.Collection;
+import java.util.List;
 
 public interface IShopBuy extends NBT
 {
@@ -13,7 +13,7 @@ public interface IShopBuy extends NBT
 
 	int getStock();
 
-	Collection<String> getUnlocalizedDescriptions();
+	List<String> getUnlocalizedDescriptions();
 
 	int getMaxStock();
 

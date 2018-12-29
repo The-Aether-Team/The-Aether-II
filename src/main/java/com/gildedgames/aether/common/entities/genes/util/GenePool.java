@@ -11,7 +11,7 @@ public abstract class GenePool implements IGenePool
 
 	private List<GeneRegion> geneRegions;
 
-	private IGeneStorage storage;
+	private final IGeneStorage storage;
 
 	public GenePool(IGeneStorage storage)
 	{

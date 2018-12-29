@@ -205,29 +205,20 @@ public class DialogManager implements IDialogManager
 
 		if (path.contains("#"))
 		{
-			pathWithoutSlide = path.replace(path.substring(path.indexOf("#"), path.length()), "");
+			pathWithoutSlide = path.replace(path.substring(path.indexOf("#")), "");
 		}
 
 		final String speakerPath = "/assets/" + resource.getNamespace() + "/dialog/speakers/" + pathWithoutSlide + ".json";
 
 		AetherCore.LOGGER.info("Loading dialog speaker from file {}", speakerPath);
 
-		try
+		try (InputStream stream = MinecraftServer.class.getResourceAsStream(speakerPath))
 		{
-			try (InputStream stream = MinecraftServer.class.getResourceAsStream(speakerPath))
+			try (InputStreamReader reader = new InputStreamReader(stream))
 			{
-				try (InputStreamReader reader = new InputStreamReader(stream))
-				{
-					return this.gson.fromJson(reader, DialogSpeaker.class);
-				}
+				return this.gson.fromJson(reader, DialogSpeaker.class);
 			}
 		}
-		catch (NullPointerException e)
-		{
-			e.printStackTrace();
-		}
-
-		return null;
 	}
 
 	@Override

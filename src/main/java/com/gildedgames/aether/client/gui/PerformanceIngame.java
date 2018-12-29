@@ -16,9 +16,9 @@ public class PerformanceIngame extends Gui
 {
 	private static final Field SERVER_CURRENT_TIME_FIELD = ReflectionAether.getField(MinecraftServer.class, ReflectionAether.SERVER_CURRENT_TIME.getMappings());
 
-	private static ResourceLocation SERVER_STALL_ICON = AetherCore.getResource("textures/gui/overlay/server_stall.png");
+	private static final ResourceLocation SERVER_STALL_ICON = AetherCore.getResource("textures/gui/overlay/server_stall.png");
 
-	private static int ANIMATION_FRAMES = 4;
+	private static final int ANIMATION_FRAMES = 4;
 
 	private float iconAlpha = -1.0f;
 

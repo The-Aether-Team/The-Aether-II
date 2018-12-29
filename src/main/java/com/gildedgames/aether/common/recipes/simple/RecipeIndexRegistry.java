@@ -36,7 +36,7 @@ public class RecipeIndexRegistry implements IRecipeIndexRegistry
 		}
 
 		Collection<IIndexableRecipe> group = this.resultCache
-				.computeIfAbsent(ItemHelper.getHashForItemStack(recipe.getCraftingResult()), k -> new ArrayList<>());
+				.computeIfAbsent(ItemHelper.getKeyForItemStack(recipe.getCraftingResult()), k -> new ArrayList<>());
 		group.add(recipe);
 	}
 
@@ -65,7 +65,7 @@ public class RecipeIndexRegistry implements IRecipeIndexRegistry
 	@Override
 	public Collection<IIndexableRecipe> getRecipesContainingResult(ItemStack item)
 	{
-		int hash = ItemHelper.getHashForItemStack(item);
+		int hash = ItemHelper.getKeyForItemStack(item);
 
 		for (Map.Entry<Integer, Collection<IIndexableRecipe>> entry : this.resultCache.entrySet())
 		{

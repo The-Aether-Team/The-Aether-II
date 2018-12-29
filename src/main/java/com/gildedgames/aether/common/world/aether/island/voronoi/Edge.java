@@ -24,6 +24,6 @@ public class Edge
 	{
 		this.v0 = v0;
 		this.v1 = v1;
-		midpoint = new Point((v0.loc.x + v1.loc.x) / 2, (v0.loc.y + v1.loc.y) / 2);
+		this.midpoint = new Point((v0.loc.x + v1.loc.x) / 2, (v0.loc.y + v1.loc.y) / 2);
 	}
 }

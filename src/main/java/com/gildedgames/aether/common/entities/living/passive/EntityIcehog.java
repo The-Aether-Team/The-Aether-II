@@ -110,10 +110,4 @@ public class EntityIcehog extends EntityAdvancedClimbing
 	{
 		return LootTablesAether.ENTITY_TAEGORE;
 	}
-
-	@Override
-	public void onEntityUpdate()
-	{
-		super.onEntityUpdate();
-	}
 }

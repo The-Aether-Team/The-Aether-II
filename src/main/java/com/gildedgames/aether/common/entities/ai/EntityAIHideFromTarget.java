@@ -22,9 +22,9 @@ public class EntityAIHideFromTarget extends EntityAIBase
 
 	protected EntityLivingBase hideFrom;
 
-	EntityCreature entity;
+	final EntityCreature entity;
 
-	Class<? extends EntityLivingBase> hideFromClass;
+	final Class<? extends EntityLivingBase> hideFromClass;
 
 	private BlockPos hidingPos;
 
@@ -56,9 +56,7 @@ public class EntityAIHideFromTarget extends EntityAIBase
 		{
 			if (o instanceof EntityLivingBase)
 			{
-				final EntityLivingBase entity = (EntityLivingBase) o;
-
-				toHideFrom = entity;
+				toHideFrom = (EntityLivingBase) o;
 			}
 		}
 		if (toHideFrom == null)

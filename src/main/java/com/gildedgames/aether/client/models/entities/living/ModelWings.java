@@ -5,9 +5,13 @@ import net.minecraft.client.model.ModelRenderer;
 
 public class ModelWings extends ModelBase
 {
-	public ModelRenderer leftWingInner, leftWingOuter;
+	public final ModelRenderer leftWingInner;
 
-	public ModelRenderer rightWingInner, rightWingOuter;
+	public final ModelRenderer leftWingOuter;
+
+	public final ModelRenderer rightWingInner;
+
+	public final ModelRenderer rightWingOuter;
 
 	public ModelWings()
 	{

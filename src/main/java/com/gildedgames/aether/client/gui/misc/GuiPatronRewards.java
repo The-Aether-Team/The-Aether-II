@@ -45,7 +45,7 @@ public class GuiPatronRewards extends GuiViewer implements IListNavigatorListene
 
 	private GuiListViewer<IPatronReward, GuiPatronRewardEntry> rewardViewer;
 
-	private IListNavigator<IPatronReward> rewards = new ListNavigator<>();
+	private final IListNavigator<IPatronReward> rewards = new ListNavigator<>();
 
 	private GuiText patronRewardText;
 
@@ -55,15 +55,15 @@ public class GuiPatronRewards extends GuiViewer implements IListNavigatorListene
 
 	private IPatronReward selected;
 
-	private PatronRewardArmor defaultArmor = new PatronRewardArmor("aether.reward.none.name", PatronRewards.armorIcon("none"), null, null, null, (d) -> true);
+	private final PatronRewardArmor defaultArmor = new PatronRewardArmor("aether.reward.none.name", PatronRewards.armorIcon("none"), null, null, null, (d) -> true);
 
 	private GuiText useText;
 
-	private PlayerPatronRewards patronRewards;
+	private final PlayerPatronRewards patronRewards;
 
-	private Text useString = new Text(new TextComponentTranslation("gui.aether.patreon.rewards.button.use"), 1.0F);
+	private final Text useString = new Text(new TextComponentTranslation("gui.aether.patreon.rewards.button.use"), 1.0F);
 
-	private Text lockedString = new Text(new TextComponentTranslation("gui.aether.patreon.rewards.button.locked"), 1.0F);
+	private final Text lockedString = new Text(new TextComponentTranslation("gui.aether.patreon.rewards.button.locked"), 1.0F);
 
 	public GuiPatronRewards()
 	{

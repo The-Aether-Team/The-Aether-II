@@ -140,7 +140,6 @@ public class RecipesAether
 				new ItemStack(ItemsAether.healing_stone)));
 	}
 
-
 	private static void registerMasonryRecipes()
 	{
 		addMasonry(new ItemStack(BlocksAether.holystone_brick_decorative, 1, BlockHolystoneDecorative.BASE_BRICKS.getMeta()),

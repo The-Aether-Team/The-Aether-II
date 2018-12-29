@@ -1,8 +1,5 @@
 package com.gildedgames.aether.common.entities.ai;
 
-import com.gildedgames.aether.api.world.islands.IIslandData;
-import com.gildedgames.aether.api.world.islands.precipitation.PrecipitationType;
-import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.math.BlockPos;
@@ -16,7 +13,7 @@ public class EntityAIHideFromRain extends EntityAIBase
 
 	private final double movementSpeed;
 
-	private EntityCreature entity;
+	private final EntityCreature entity;
 
 	private double shelterX;
 
@@ -45,11 +42,7 @@ public class EntityAIHideFromRain extends EntityAIBase
 			return false;
 		}
 
-		IIslandData island = IslandHelper.get(this.entity.world, this.entity.chunkCoordX, this.entity.chunkCoordZ);
-
-		boolean executes = island != null && island.getPrecipitation().getType() == PrecipitationType.RAIN;
-
-		if (executes)
+		if (this.entity.world.isRaining())
 		{
 			Vec3d vec3d = this.findPossibleShelter();
 

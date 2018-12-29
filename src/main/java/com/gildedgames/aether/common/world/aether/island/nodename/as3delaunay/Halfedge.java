@@ -5,7 +5,7 @@ import java.util.Stack;
 public final class Halfedge
 {
 
-	private static final Stack<Halfedge> _pool = new Stack();
+	private static final Stack<Halfedge> _pool = new Stack<>();
 
 	public Halfedge edgeListLeftNeighbor, edgeListRightNeighbor;
 
@@ -22,7 +22,7 @@ public final class Halfedge
 
 	public Halfedge(final VoronoiEdge edge, final LR lr)
 	{
-		init(edge, lr);
+		this.init(edge, lr);
 	}
 
 	public static Halfedge create(final VoronoiEdge edge, final LR lr)
@@ -45,44 +45,44 @@ public final class Halfedge
 	private Halfedge init(final VoronoiEdge edge, final LR lr)
 	{
 		this.edge = edge;
-		leftRight = lr;
-		nextInPriorityQueue = null;
-		vertex = null;
+		this.leftRight = lr;
+		this.nextInPriorityQueue = null;
+		this.vertex = null;
 		return this;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "Halfedge (leftRight: " + leftRight + "; vertex: " + vertex + ")";
+		return "Halfedge (leftRight: " + this.leftRight + "; vertex: " + this.vertex + ")";
 	}
 
 	public void dispose()
 	{
-		if (edgeListLeftNeighbor != null || edgeListRightNeighbor != null)
+		if (this.edgeListLeftNeighbor != null || this.edgeListRightNeighbor != null)
 		{
 			// still in EdgeList
 			return;
 		}
-		if (nextInPriorityQueue != null)
+		if (this.nextInPriorityQueue != null)
 		{
 			// still in PriorityQueue
 			return;
 		}
-		edge = null;
-		leftRight = null;
-		vertex = null;
+		this.edge = null;
+		this.leftRight = null;
+		this.vertex = null;
 		_pool.push(this);
 	}
 
 	public void reallyDispose()
 	{
-		edgeListLeftNeighbor = null;
-		edgeListRightNeighbor = null;
-		nextInPriorityQueue = null;
-		edge = null;
-		leftRight = null;
-		vertex = null;
+		this.edgeListLeftNeighbor = null;
+		this.edgeListRightNeighbor = null;
+		this.nextInPriorityQueue = null;
+		this.edge = null;
+		this.leftRight = null;
+		this.vertex = null;
 		_pool.push(this);
 	}
 
@@ -100,7 +100,7 @@ public final class Halfedge
 		final double t3;
 		final double yl;
 
-		topSite = edge.get_rightSite();
+		topSite = this.edge.get_rightSite();
 		rightOfSite = p.x > topSite.get_x();
 		if (rightOfSite && this.leftRight == LR.LEFT)
 		{
@@ -111,20 +111,20 @@ public final class Halfedge
 			return false;
 		}
 
-		if (edge.a == 1.0)
+		if (this.edge.a == 1.0)
 		{
 			dyp = p.y - topSite.get_y();
 			dxp = p.x - topSite.get_x();
 			fast = false;
-			if ((!rightOfSite && edge.b < 0.0) || (rightOfSite && edge.b >= 0.0))
+			if ((!rightOfSite && this.edge.b < 0.0) || (rightOfSite && this.edge.b >= 0.0))
 			{
-				above = dyp >= edge.b * dxp;
+				above = dyp >= this.edge.b * dxp;
 				fast = above;
 			}
 			else
 			{
-				above = p.x + p.y * edge.b > edge.c;
-				if (edge.b < 0.0)
+				above = p.x + p.y * this.edge.b > this.edge.c;
+				if (this.edge.b < 0.0)
 				{
 					above = !above;
 				}
@@ -135,10 +135,10 @@ public final class Halfedge
 			}
 			if (!fast)
 			{
-				dxs = topSite.get_x() - edge.get_leftSite().get_x();
-				above = edge.b * (dxp * dxp - dyp * dyp)
-						< dxs * dyp * (1.0 + 2.0 * dxp / dxs + edge.b * edge.b);
-				if (edge.b < 0.0)
+				dxs = topSite.get_x() - this.edge.get_leftSite().get_x();
+				above = this.edge.b * (dxp * dxp - dyp * dyp)
+						< dxs * dyp * (1.0 + 2.0 * dxp / dxs + this.edge.b * this.edge.b);
+				if (this.edge.b < 0.0)
 				{
 					above = !above;
 				}
@@ -146,12 +146,12 @@ public final class Halfedge
 		}
 		else /* edge.b == 1.0 */
 		{
-			yl = edge.c - edge.a * p.x;
+			yl = this.edge.c - this.edge.a * p.x;
 			t1 = p.y - yl;
 			t2 = p.x - topSite.get_x();
 			t3 = yl - topSite.get_y();
 			above = t1 * t1 > t2 * t2 + t3 * t3;
 		}
-		return this.leftRight == LR.LEFT ? above : !above;
+		return (this.leftRight == LR.LEFT) == above;
 	}
 }

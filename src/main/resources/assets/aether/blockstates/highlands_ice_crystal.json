@@ -3,7 +3,7 @@
 		"variant=stalagmite": {
 			"model": "aether:highlands_ice_crystal"
 		},
-		"variant=stalagtite": {
+		"variant=stalactite": {
 			"model": "aether:highlands_ice_crystal",
 			"x": 180
 		}

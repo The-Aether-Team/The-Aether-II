@@ -11,53 +11,53 @@ import net.minecraft.util.math.MathHelper;
  */
 public class ModelMysteriousFigure extends ModelBase
 {
-	public ModelRenderer chest1;
+	public final ModelRenderer chest1;
 
-	public ModelRenderer chest2;
+	public final ModelRenderer chest2;
 
-	public ModelRenderer head1;
+	public final ModelRenderer head1;
 
-	public ModelRenderer shoulder_right;
+	public final ModelRenderer shoulder_right;
 
-	public ModelRenderer plumproot;
+	public final ModelRenderer plumproot;
 
-	public ModelRenderer shoulder_left;
+	public final ModelRenderer shoulder_left;
 
-	public ModelRenderer waist;
+	public final ModelRenderer waist;
 
-	public ModelRenderer leg_right;
+	public final ModelRenderer leg_right;
 
-	public ModelRenderer leg_left;
+	public final ModelRenderer leg_left;
 
-	public ModelRenderer boot_right1;
+	public final ModelRenderer boot_right1;
 
-	public ModelRenderer boot_right2;
+	public final ModelRenderer boot_right2;
 
-	public ModelRenderer boot_right3;
+	public final ModelRenderer boot_right3;
 
-	public ModelRenderer boot_left1;
+	public final ModelRenderer boot_left1;
 
-	public ModelRenderer boot_left2;
+	public final ModelRenderer boot_left2;
 
-	public ModelRenderer boot_left3;
+	public final ModelRenderer boot_left3;
 
-	public ModelRenderer head2;
+	public final ModelRenderer head2;
 
-	public ModelRenderer arm_right1;
+	public final ModelRenderer arm_right1;
 
-	public ModelRenderer arm_right2;
+	public final ModelRenderer arm_right2;
 
-	public ModelRenderer arm_right3;
+	public final ModelRenderer arm_right3;
 
-	public ModelRenderer sack;
+	public final ModelRenderer sack;
 
-	public ModelRenderer sack_handle;
+	public final ModelRenderer sack_handle;
 
-	public ModelRenderer arm_left1;
+	public final ModelRenderer arm_left1;
 
-	public ModelRenderer arm_left2;
+	public final ModelRenderer arm_left2;
 
-	public ModelRenderer arm_left3;
+	public final ModelRenderer arm_left3;
 
 	public ModelMysteriousFigure()
 	{

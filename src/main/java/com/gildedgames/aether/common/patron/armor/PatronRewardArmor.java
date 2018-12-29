@@ -12,15 +12,17 @@ import java.util.function.Function;
 
 public class PatronRewardArmor implements IPatronReward
 {
-	private String armorTextureName;
+	private final String armorTextureName;
 
-	private Function<UserFeatures, Boolean> isUnlocked;
+	private final Function<UserFeatures, Boolean> isUnlocked;
 
-	private String unlocalizedName;
+	private final String unlocalizedName;
 
-	private ResourceLocation armorGloveTexture, armorGloveTextureSlim;
+	private final ResourceLocation armorGloveTexture;
 
-	private ResourceLocation icon;
+	private final ResourceLocation armorGloveTextureSlim;
+
+	private final ResourceLocation icon;
 
 	@SideOnly(Side.CLIENT)
 	private IPatronRewardRenderer renderer;

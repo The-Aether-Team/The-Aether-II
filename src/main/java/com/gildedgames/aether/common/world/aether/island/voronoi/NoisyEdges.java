@@ -3,16 +3,18 @@ package com.gildedgames.aether.common.world.aether.island.voronoi;
 import com.gildedgames.aether.common.world.aether.island.nodename.as3delaunay.Point;
 import com.google.common.collect.Maps;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
-import java.util.Vector;
 
 public class NoisyEdges
 {
 
 	public static final double NOISY_LINE_TRADEOFF = 0.5; // low: jagged vedge; high: jagged dedge
 
-	public Map<Integer, Vector<Point>> path0 = Maps.newHashMap(), path1 = Maps.newHashMap();
+	public final Map<Integer, ArrayList<Point>> path0 = Maps.newHashMap();
+
+	public final Map<Integer, ArrayList<Point>> path1 = Maps.newHashMap();
 
 	public NoisyEdges()
 	{
@@ -24,7 +26,7 @@ public class NoisyEdges
 		return min + (max - min) * rand.nextDouble();
 	}
 
-	private static boolean subdivide(final Random rand, final Vector<Point> points, final Point a, final Point b, final Point c, final Point d,
+	private static boolean subdivide(final Random rand, final ArrayList<Point> points, final Point a, final Point b, final Point c, final Point d,
 			final double minLength)
 	{
 		if (Point.subtract(a, c).length() < minLength || Point.subtract(b, d).length() < minLength)
@@ -58,9 +60,9 @@ public class NoisyEdges
 		return subdivide(rand, points, h, Point.interpolate(f, c, s), c, Point.interpolate(i, d, t), minLength);
 	}
 
-	public static Vector<Point> buildNoisyLineSegments(final Random rand, final Point a, final Point b, final Point c, final Point d, final double minLength)
+	public static ArrayList<Point> buildNoisyLineSegments(final Random rand, final Point a, final Point b, final Point c, final Point d, final double minLength)
 	{
-		final Vector<Point> points = new Vector<>();
+		final ArrayList<Point> points = new ArrayList<>();
 
 		points.add(a);
 

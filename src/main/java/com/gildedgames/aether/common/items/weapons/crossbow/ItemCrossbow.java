@@ -35,16 +35,19 @@ public class ItemCrossbow extends Item
 
 	public static final ItemBoltType[] BOLT_TYPES = ItemBoltType.values();
 
-	public enum crossBowTypes {
+	public enum crossBowTypes
+	{
 		SKYROOT(1F, 200, "skyroot_crossbow"),
 		HOLYSTONE(1.2F, 250, "holystone_crossbow"),
 		ZANITE(1.3F, 300, "zanite_crossbow"),
 		ARKENIUM(1.4F, 400, "arkenium_crossbow"),
 		GRAVETITE(1.6F, 350, "gravitite_crossbow");
 
-		float damageMultiplier;
-		int maxDurability;
-		String name;
+		final float damageMultiplier;
+
+		final int maxDurability;
+
+		final String name;
 
 		crossBowTypes(float damageMultiplier, int maxDurability, String name)
 		{
@@ -230,29 +233,29 @@ public class ItemCrossbow extends Item
 
 			EntityBolt bolt0 = null,
 					bolt1 = null,
-					bolt2 =  null;
+					bolt2 = null;
 
 			// calculate bolts that are special is being loaded.
 			if (this.isSpecialLoaded)
 			{
 				if (this.cBType == crossBowTypes.SKYROOT)
 				{
-					bolt0 = createBolt(entityLiving, speed, 0, 0, 0, this.cBType.damageMultiplier);
-					bolt1 = createBolt(entityLiving, speed, 0, 0, 0, this.cBType.damageMultiplier);
+					bolt0 = this.createBolt(entityLiving, speed, 0, 0, 0, this.cBType.damageMultiplier);
+					bolt1 = this.createBolt(entityLiving, speed, 0, 0, 0, this.cBType.damageMultiplier);
 				}
 				else if (this.cBType == crossBowTypes.HOLYSTONE)
 				{
-					bolt0 = createBolt(entityLiving, speed / 2, 0, 0, 0, this.cBType.damageMultiplier);
-					bolt1 = createBolt(entityLiving, speed / 2, 10, 0, 0, this.cBType.damageMultiplier);
-					bolt2 = createBolt(entityLiving, speed / 2, -10, 0, 0, this.cBType.damageMultiplier);
+					bolt0 = this.createBolt(entityLiving, speed / 2, 0, 0, 0, this.cBType.damageMultiplier);
+					bolt1 = this.createBolt(entityLiving, speed / 2, 10, 0, 0, this.cBType.damageMultiplier);
+					bolt2 = this.createBolt(entityLiving, speed / 2, -10, 0, 0, this.cBType.damageMultiplier);
 				}
 				else if (this.cBType == crossBowTypes.ZANITE)
 				{
-					bolt0 = createBolt(entityLiving, speed, 0,0,0, 1.5F);
+					bolt0 = this.createBolt(entityLiving, speed, 0, 0, 0, 1.5F);
 				}
 				else if (this.cBType == crossBowTypes.ARKENIUM)
 				{
-					bolt0 = createBolt(entityLiving, speed * 2.5f, 0, -1, 0, 2.0f);
+					bolt0 = this.createBolt(entityLiving, speed * 2.5f, 0, -1, 0, 2.0f);
 				}
 				else if (this.cBType == crossBowTypes.GRAVETITE)
 				{
@@ -260,12 +263,12 @@ public class ItemCrossbow extends Item
 				}
 				else
 				{
-					bolt0 = createBolt(entityLiving, speed, 0, 0, -0.5f, this.cBType.damageMultiplier);
+					bolt0 = this.createBolt(entityLiving, speed, 0, 0, -0.5f, this.cBType.damageMultiplier);
 				}
 			}
 			else
 			{
-				bolt0 = createBolt(entityLiving, speed, 0,0,0, this.cBType.damageMultiplier);
+				bolt0 = this.createBolt(entityLiving, speed, 0, 0, 0, this.cBType.damageMultiplier);
 			}
 
 			if (entityLiving instanceof EntityPlayer)
@@ -292,7 +295,8 @@ public class ItemCrossbow extends Item
 					if (this.getDamage(stack) >= this.getMaxDamage(stack))
 					{
 						player.inventory.deleteStack(stack);
-						world.playSound(null, entityLiving.posX, entityLiving.posY, entityLiving.posZ, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 1.0F,
+						world.playSound(null, entityLiving.posX, entityLiving.posY, entityLiving.posZ, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS,
+								1.0F,
 								1.0F / (itemRand.nextFloat() * 0.4F + 1.2F));
 					}
 
@@ -327,7 +331,8 @@ public class ItemCrossbow extends Item
 		}
 	}
 
-	private EntityBolt createBolt(EntityLivingBase entityLiving, float speed, float addRotationYaw, float addRotationPitch, float addInaccuracy, float damageMultiplier)
+	private EntityBolt createBolt(EntityLivingBase entityLiving, float speed, float addRotationYaw, float addRotationPitch, float addInaccuracy,
+			float damageMultiplier)
 	{
 		if (!entityLiving.world.isRemote)
 		{
@@ -367,7 +372,7 @@ public class ItemCrossbow extends Item
 						if (!player.capabilities.isCreativeMode)
 						{
 							int shrinkQuantity = 1;
-							if (isSpecialLoaded)
+							if (this.isSpecialLoaded)
 							{
 								if (this.cBType == crossBowTypes.HOLYSTONE)
 								{
@@ -443,12 +448,12 @@ public class ItemCrossbow extends Item
 
 		if (seconds == Math.floor(seconds))
 		{
-			tooltip.add(TextFormatting.GRAY + "\u2022 " + String.valueOf((int) Math.floor(seconds)) + " " + I18n.format(
+			tooltip.add(TextFormatting.GRAY + "\u2022 " + (int) Math.floor(seconds) + " " + I18n.format(
 					"item.aether.crossbow.desc" + (seconds < 1 || seconds > 1 ? "2" : "3")));
 		}
 		else
 		{
-			tooltip.add(TextFormatting.GRAY + "\u2022 " + String.valueOf(seconds) + " " + I18n.format(
+			tooltip.add(TextFormatting.GRAY + "\u2022 " + seconds + " " + I18n.format(
 					"item.aether.crossbow.desc" + (seconds < 1 || seconds > 1 ? "2" : "3")));
 		}
 
@@ -470,7 +475,7 @@ public class ItemCrossbow extends Item
 	public ItemCrossbow setType(crossBowTypes type)
 	{
 		this.cBType = type;
-		this.setMaxDamage(cBType.maxDurability);
+		this.setMaxDamage(this.cBType.maxDurability);
 		return this;
 	}
 }

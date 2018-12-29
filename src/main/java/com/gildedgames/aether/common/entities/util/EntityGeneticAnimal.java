@@ -19,7 +19,7 @@ public abstract class EntityGeneticAnimal<T extends IGenePool> extends EntityAni
 
 	private static final DataParameter<Boolean> SHOULD_RETRANSFORM = EntityDataManager.createKey(EntityGeneticAnimal.class, DataSerializers.BOOLEAN);
 
-	private T genePool;
+	private final T genePool;
 
 	public EntityGeneticAnimal(World world)
 	{

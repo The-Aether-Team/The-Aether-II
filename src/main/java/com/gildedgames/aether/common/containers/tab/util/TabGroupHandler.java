@@ -22,7 +22,7 @@ public class TabGroupHandler implements ITabGroupHandler
 	@SideOnly(Side.CLIENT)
 	public TabGroup<ITabClient> clientGroup;
 
-	public TabGroup<ITab> serverGroup;
+	public final TabGroup<ITab> serverGroup;
 
 	public int discriminant;
 

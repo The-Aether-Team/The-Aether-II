@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 public class EffectRegistry implements IEffectRegistry
 {
-	private HashMap<ResourceLocation, IEffectFactory<IEffectProvider>> factories = new HashMap<>();
+	private final HashMap<ResourceLocation, IEffectFactory<IEffectProvider>> factories = new HashMap<>();
 
 	@Override
 	@SuppressWarnings("unchecked")

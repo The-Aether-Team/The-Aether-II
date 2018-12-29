@@ -1,8 +1,5 @@
 package com.gildedgames.aether.common.entities.ai;
 
-import com.gildedgames.aether.api.world.islands.IIslandData;
-import com.gildedgames.aether.api.world.islands.precipitation.PrecipitationType;
-import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.math.BlockPos;
@@ -16,7 +13,7 @@ public class EntityAIHideFromLight extends EntityAIBase
 
 	private final float movementSpeed;
 
-	private EntityCreature entity;
+	private final EntityCreature entity;
 
 	private double shelterX;
 
@@ -24,7 +21,7 @@ public class EntityAIHideFromLight extends EntityAIBase
 
 	private double shelterZ;
 
-	private int lightLevel;
+	private final int lightLevel;
 
 	private boolean enabled;
 
@@ -41,14 +38,14 @@ public class EntityAIHideFromLight extends EntityAIBase
 	@Override
 	public boolean shouldExecute()
 	{
-		if (this.entity == null || !enabled)
+		if (this.entity == null || !this.enabled)
 		{
 			return false;
 		}
 
 		BlockPos entityPos = new BlockPos(this.entity.posX, this.entity.getEntityBoundingBox().minY, this.entity.posZ);
 
-		if (entity.world.getLightFromNeighbors(entityPos) <= lightLevel || (entity.world.isDaytime() && this.entity.world.canSeeSky(entityPos)))
+		if (this.entity.world.getLightFromNeighbors(entityPos) <= this.lightLevel || (this.entity.world.isDaytime() && this.entity.world.canSeeSky(entityPos)))
 		{
 			return false;
 		}
@@ -91,7 +88,7 @@ public class EntityAIHideFromLight extends EntityAIBase
 		{
 			BlockPos blockpos1 = blockpos.add(random.nextInt(20) - 10, random.nextInt(6) - 3, random.nextInt(20) - 10);
 
-			if (this.entity.world.getLightFromNeighbors(blockpos1) <= lightLevel && !(entity.world.isDaytime() && this.entity.world.canSeeSky(blockpos1)))
+			if (this.entity.world.getLightFromNeighbors(blockpos1) <= this.lightLevel && !(this.entity.world.isDaytime() && this.entity.world.canSeeSky(blockpos1)))
 			{
 
 				return new Vec3d((double) blockpos1.getX(), (double) blockpos1.getY(), (double) blockpos1.getZ());

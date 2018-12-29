@@ -7,7 +7,7 @@ import net.minecraft.entity.EntityLivingBase;
 public class EntityAICockatriceHide extends EntityAIHideFromTarget
 {
 
-	EntityCockatrice cockatrice;
+	final EntityCockatrice cockatrice;
 
 	public EntityAICockatriceHide(EntityCockatrice entity, Class<? extends EntityLivingBase> clazz, double movementSpeed)
 	{

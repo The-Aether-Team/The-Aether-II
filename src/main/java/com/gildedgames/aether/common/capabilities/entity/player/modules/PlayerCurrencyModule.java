@@ -16,13 +16,13 @@ import java.util.List;
 
 public class PlayerCurrencyModule extends PlayerAetherModule implements ICurrencyModule
 {
-	private static int[] DENOMINATIONS = { CurrencyAether.GILTAENI, CurrencyAether.GILTAEN, CurrencyAether.GILTAE, CurrencyAether.GILT };
+	private static final int[] DENOMINATIONS = { CurrencyAether.GILTAENI, CurrencyAether.GILTAEN, CurrencyAether.GILTAE, CurrencyAether.GILT };
 
 	private long currencyValue;
 
 	private int gilt, giltae, giltaen, giltaeni;
 
-	private List<ICurrencyListener> listeners = Lists.newArrayList();
+	private final List<ICurrencyListener> listeners = Lists.newArrayList();
 
 	public PlayerCurrencyModule(PlayerAether playerAether)
 	{

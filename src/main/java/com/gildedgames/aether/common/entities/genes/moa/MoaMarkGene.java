@@ -12,13 +12,25 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class MoaMarkGene implements Gene
 {
 
-	private String name, resourceName;
+	private final String name;
 
-	private Inheritance inheritance;
+	private final String resourceName;
 
-	private Mutation[] potentialMutations;
+	private final Inheritance inheritance;
 
-	private ResourceLocation back, head, tail, wing, back_egg, head_egg;
+	private final Mutation[] potentialMutations;
+
+	private final ResourceLocation back;
+
+	private final ResourceLocation head;
+
+	private final ResourceLocation tail;
+
+	private final ResourceLocation wing;
+
+	private final ResourceLocation back_egg;
+
+	private final ResourceLocation head_egg;
 
 	public MoaMarkGene(String name, String resourceName, Inheritance inheritance, Mutation... potentialMutations)
 	{

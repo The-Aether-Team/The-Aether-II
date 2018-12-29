@@ -16,13 +16,13 @@ import net.minecraft.world.World;
 public class AIMoaPackBreeding extends EntityAIBase
 {
 
-	public World world;
+	public final World world;
 
-	public EntityMoa moa;
+	public final EntityMoa moa;
 
 	public EntityLiving packLeader;
 
-	public float moveSpeed;
+	public final float moveSpeed;
 
 	public BlockPos eggPos;
 
@@ -101,10 +101,7 @@ public class AIMoaPackBreeding extends EntityAIBase
 
 		if ((path == null || path.isFinished()) && !isNearEgg)
 		{
-			if (!this.moa.getNavigator().tryMoveToXYZ(this.eggPos.getX() - 1, this.eggPos.getY(), this.eggPos.getZ() - 1, this.moveSpeed))
-			{
-
-			}
+			this.moa.getNavigator().tryMoveToXYZ(this.eggPos.getX() - 1, this.eggPos.getY(), this.eggPos.getZ() - 1, this.moveSpeed);
 		}
 		else if (isNearEgg && this.moa.getNavigator().getPath() != null && this.moa.getNavigator().getPath().isFinished())
 		{

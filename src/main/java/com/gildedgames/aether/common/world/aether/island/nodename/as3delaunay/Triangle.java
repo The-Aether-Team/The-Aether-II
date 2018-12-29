@@ -9,20 +9,20 @@ public final class Triangle
 
 	public Triangle(final Site a, final Site b, final Site c)
 	{
-		_sites = new ArrayList();
-		_sites.add(a);
-		_sites.add(b);
-		_sites.add(c);
+		this._sites = new ArrayList<>();
+		this._sites.add(a);
+		this._sites.add(b);
+		this._sites.add(c);
 	}
 
 	public ArrayList<Site> get_sites()
 	{
-		return _sites;
+		return this._sites;
 	}
 
 	public void dispose()
 	{
-		_sites.clear();
-		_sites = null;
+		this._sites.clear();
+		this._sites = null;
 	}
 }

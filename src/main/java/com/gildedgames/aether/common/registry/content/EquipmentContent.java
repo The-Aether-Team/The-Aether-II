@@ -16,7 +16,7 @@ import net.minecraft.item.Item;
 
 public class EquipmentContent
 {
-	private static EffectActivator[] EMPTY_ACTIVATORS = new EffectActivator[0];
+	private static final EffectActivator[] EMPTY_ACTIVATORS = new EffectActivator[0];
 
 	public static void init()
 	{

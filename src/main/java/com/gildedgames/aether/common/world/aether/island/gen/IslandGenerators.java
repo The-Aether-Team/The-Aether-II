@@ -6,10 +6,10 @@ import com.gildedgames.aether.common.world.aether.island.gen.highlands.IslandGen
 public class IslandGenerators
 {
 
-	public static IIslandGenerator HIGHLAND_MEGACOAST = new IslandGeneratorHighlandMegacoast();
+	public static final IIslandGenerator HIGHLAND_MEGACOAST = new IslandGeneratorHighlandMegacoast();
 
-	public static IIslandGenerator FORGOTTEN_HIGHLANDS = new IslandGeneratorForgottenHighlands();
+	public static final IIslandGenerator FORGOTTEN_HIGHLANDS = new IslandGeneratorForgottenHighlands();
 
-	public static IIslandGenerator IRRADIATED_FORESTS = new IslandGeneratorIrradiatedForests();
+	public static final IIslandGenerator IRRADIATED_FORESTS = new IslandGeneratorIrradiatedForests();
 
 }

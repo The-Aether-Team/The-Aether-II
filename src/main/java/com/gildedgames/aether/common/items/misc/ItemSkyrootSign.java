@@ -9,7 +9,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -67,7 +66,7 @@ public class ItemSkyrootSign extends Item
 
 				if (tileentity instanceof TileEntitySkyrootSign && !ItemBlock.setTileEntityNBT(world, player, pos, stack))
 				{
-					player.openEditSign((TileEntitySkyrootSign)tileentity);
+					player.openEditSign((TileEntitySkyrootSign) tileentity);
 				}
 
 				return EnumActionResult.SUCCESS;

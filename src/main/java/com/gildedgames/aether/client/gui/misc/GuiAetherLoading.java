@@ -39,12 +39,6 @@ public class GuiAetherLoading extends GuiViewer implements CustomLoadingRenderer
 	}
 
 	@Override
-	public void onGuiClosed()
-	{
-		super.onGuiClosed();
-	}
-
-	@Override
 	public void build(IGuiContext context)
 	{
 		this.getViewing().dim().mod().width(this.width).height(this.height).flush();

@@ -6,7 +6,7 @@ public class PointGrid
 {
 	private final int width, length;
 
-	private Point[] grid;
+	private final Point[] grid;
 
 	public PointGrid(int width, int length)
 	{

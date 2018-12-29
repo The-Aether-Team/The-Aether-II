@@ -16,7 +16,7 @@ import java.util.List;
 
 public class BlockAccessIsland extends BlockAccessPrep
 {
-	private IIslandData island;
+	private final IIslandData island;
 
 	public BlockAccessIsland(World world, IIslandData island, IPrepSectorData sectorData, IPrepChunkManager iPrepChunkManager)
 	{

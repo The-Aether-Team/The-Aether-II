@@ -22,7 +22,7 @@ import java.util.function.Supplier;
 public class BlockCustomBed extends BlockBed implements IInternalBlock
 {
 
-	private Supplier<Item> bedItem;
+	private final Supplier<Item> bedItem;
 
 	public BlockCustomBed(Supplier<Item> bedItem, SoundType soundType)
 	{

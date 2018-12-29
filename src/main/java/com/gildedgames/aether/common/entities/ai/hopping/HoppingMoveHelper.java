@@ -16,7 +16,7 @@ public class HoppingMoveHelper extends EntityMoveHelper
 
 	private int jumpDelay;
 
-	private Supplier<SoundEvent> hoppingSound;
+	private final Supplier<SoundEvent> hoppingSound;
 
 	private HopTimer hopTimer;
 

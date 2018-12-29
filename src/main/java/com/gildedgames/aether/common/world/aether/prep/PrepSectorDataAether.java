@@ -2,7 +2,6 @@ package com.gildedgames.aether.common.world.aether.prep;
 
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.common.world.aether.island.data.IslandData;
-import com.gildedgames.orbis_api.preparation.IPrepSector;
 import com.gildedgames.orbis_api.preparation.IPrepSectorData;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -11,9 +10,7 @@ public class PrepSectorDataAether implements IPrepSectorData
 {
 	private boolean dirty;
 
-	private IPrepSector parent;
-
-	private World world;
+	private final World world;
 
 	private int sectorX, sectorY;
 
@@ -38,18 +35,6 @@ public class PrepSectorDataAether implements IPrepSectorData
 	public IIslandData getIslandData()
 	{
 		return this.islandData;
-	}
-
-	@Override
-	public IPrepSector setParent(IPrepSector sector)
-	{
-		return this.parent;
-	}
-
-	@Override
-	public IPrepSector getParent()
-	{
-		return this.parent;
 	}
 
 	@Override
@@ -89,12 +74,6 @@ public class PrepSectorDataAether implements IPrepSectorData
 	}
 
 	@Override
-	public boolean shouldPrepareChunk(int i, int i1)
-	{
-		return true;
-	}
-
-	@Override
 	public void write(NBTTagCompound tag)
 	{
 		tag.setInteger("x", this.sectorX);
@@ -116,19 +95,6 @@ public class PrepSectorDataAether implements IPrepSectorData
 		this.seed = tag.getLong("s");
 
 		this.islandData = new IslandData(this.world, this, tag.getCompoundTag("island"));
-	}
-
-	public void writePartial(NBTTagCompound tag)
-	{
-		tag.setInteger("x", this.sectorX);
-		tag.setInteger("y", this.sectorY);
-		tag.setLong("s", this.seed);
-
-		NBTTagCompound islandTag = new NBTTagCompound();
-
-		this.islandData.writePartial(islandTag);
-
-		tag.setTag("island", islandTag);
 	}
 
 	public void setIslandData(IIslandData island)

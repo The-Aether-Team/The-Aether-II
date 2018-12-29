@@ -15,17 +15,17 @@ public class LayerSwetLatch extends LayerBipedArmor
 {
 	private final RenderLivingBase<?> renderer;
 
-	private ModelSwetHead head;
+	private final ModelSwetHead head;
 
-	private ModelSwetJelly jelly;
+	private final ModelSwetJelly jelly;
 
 	public LayerSwetLatch(RenderLivingBase<?> rendererIn)
 	{
 		super(rendererIn);
 
 		this.renderer = rendererIn;
-		head = new ModelSwetHead();
-		jelly = new ModelSwetJelly();
+		this.head = new ModelSwetHead();
+		this.jelly = new ModelSwetJelly();
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class LayerSwetLatch extends LayerBipedArmor
 
 			this.renderer.bindTexture(swet.getType().texture_head);
 
-			head.renderRaw(swet, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+			this.head.renderRaw(swet, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
 			this.renderer.bindTexture(swet.getType().texture_jelly);
 
@@ -79,7 +79,7 @@ public class LayerSwetLatch extends LayerBipedArmor
 
 			float s2 = swet.getTimeSinceSucking() / 2000f;
 			GlStateManager.scale(1 + s / 3f + s2, 1 + s / 5f + s2, 1 + s + s2);
-			jelly.renderRaw(swet, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+			this.jelly.renderRaw(swet, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
 			GlStateManager.disableNormalize();
 			GlStateManager.disableBlend();

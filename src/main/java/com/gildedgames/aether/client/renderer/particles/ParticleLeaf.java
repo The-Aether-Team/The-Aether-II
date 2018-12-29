@@ -1,5 +1,7 @@
 package com.gildedgames.aether.client.renderer.particles;
 
+import com.gildedgames.aether.api.AetherCapabilities;
+import com.gildedgames.aether.api.world.islands.precipitation.IPrecipitationManager;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import net.minecraft.block.Block;
@@ -19,9 +21,9 @@ public class ParticleLeaf extends Particle
 {
 	private final ResourceLocation sprite = AetherCore.getResource("textures/particles/skyroot_leaf_particle.png");
 
-	private float mulRotX;
+	private final float mulRotX;
 
-	private float mulRotY;
+	private final float mulRotY;
 
 	private float prevRotX;
 
@@ -101,10 +103,38 @@ public class ParticleLeaf extends Particle
 			this.particleGreen = 0.512f;
 			this.particleBlue = 0.301f;
 		}
+		else if (block == BlocksAether.mutant_tree_leaves)
+		{
+			this.particleRed = 0.569f;
+			this.particleGreen = 0.533f;
+			this.particleBlue = 0.706f;
+
+		}
+		else if (block == BlocksAether.mutant_tree_leaves_decorated)
+		{
+			this.particleRed = 0.569f;
+			this.particleGreen = 0.533f;
+			this.particleBlue = 0.706f;
+		}
 
 		this.motionY = motionY;
 		this.motionX = motionX;
 		this.motionZ = motionZ;
+
+		if (worldIn.isRaining())
+		{
+			IPrecipitationManager precipitation = worldIn.getCapability(AetherCapabilities.PRECIPITATION_MANAGER, null);
+
+			if (precipitation != null)
+			{
+				float strength = precipitation.getStrength().getWindForceMultiplier();
+
+				this.motionX += precipitation.getWindVector().x * strength;
+				this.motionZ += precipitation.getWindVector().y * strength;
+
+				this.motionY += -strength * 0.5f;
+			}
+		}
 
 		this.mulRotY = (this.rand.nextFloat() * 100) * (float) (this.motionY);
 		this.mulRotX = (this.rand.nextFloat() * 100) * (float) (this.motionY);

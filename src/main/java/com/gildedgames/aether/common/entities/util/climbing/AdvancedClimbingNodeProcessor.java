@@ -80,12 +80,12 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 		}
 		else
 		{
-			BlockPos blockpos;
+			BlockPos blockpos = new BlockPos(this.entity);
 
-			for (blockpos = new BlockPos(this.entity);
-				 (this.blockaccess.getBlockState(blockpos).getMaterial() == Material.AIR || this.blockaccess.getBlockState(blockpos).getBlock()
-						 .isPassable(this.blockaccess, blockpos)) && blockpos.getY() > 0; blockpos = blockpos.down())
+			while ((this.blockaccess.getBlockState(blockpos).getMaterial() == Material.AIR || this.blockaccess.getBlockState(blockpos).getBlock()
+					.isPassable(this.blockaccess, blockpos)) && blockpos.getY() > 0)
 			{
+				blockpos = blockpos.down();
 			}
 
 			i = blockpos.up().getY();
@@ -1141,15 +1141,15 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 			{
 				return PathNodeType.DAMAGE_CACTUS;
 			}
-			else if (block instanceof BlockDoor && material == Material.WOOD && !iblockstate.getValue(BlockDoor.OPEN).booleanValue())
+			else if (block instanceof BlockDoor && material == Material.WOOD && !iblockstate.getValue(BlockDoor.OPEN))
 			{
 				return PathNodeType.DOOR_WOOD_CLOSED;
 			}
-			else if (block instanceof BlockDoor && material == Material.IRON && !iblockstate.getValue(BlockDoor.OPEN).booleanValue())
+			else if (block instanceof BlockDoor && material == Material.IRON && !iblockstate.getValue(BlockDoor.OPEN))
 			{
 				return PathNodeType.DOOR_IRON_CLOSED;
 			}
-			else if (block instanceof BlockDoor && iblockstate.getValue(BlockDoor.OPEN).booleanValue())
+			else if (block instanceof BlockDoor && iblockstate.getValue(BlockDoor.OPEN))
 			{
 				return PathNodeType.DOOR_OPEN;
 			}
@@ -1158,7 +1158,7 @@ public class AdvancedClimbingNodeProcessor extends NodeProcessor
 				return PathNodeType.RAIL;
 			}
 			else if (!(block instanceof BlockFence) && !(block instanceof BlockWall) && (!(block instanceof BlockFenceGate) || iblockstate
-					.getValue(BlockFenceGate.OPEN).booleanValue()))
+					.getValue(BlockFenceGate.OPEN)))
 			{
 				if (material == Material.WATER)
 				{

@@ -8,7 +8,7 @@ import net.minecraft.world.biome.Biome;
 public class CheckBiome implements PosCondition
 {
 
-	private Biome biomeToCheckFor;
+	private final Biome biomeToCheckFor;
 
 	public CheckBiome(Biome biomeToCheckFor)
 	{

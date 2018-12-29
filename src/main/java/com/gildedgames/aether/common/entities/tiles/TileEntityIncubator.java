@@ -6,7 +6,6 @@ import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.entities.util.AnimalGender;
 import com.gildedgames.aether.common.entities.util.MoaNest;
-import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -88,9 +87,9 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 
 		if (state.getBlock() instanceof BlockIncubator && state.getValue(BlockIncubator.PROPERTY_IS_LIT))
 		{
-			if (canEggIncubate())
+			if (this.canEggIncubate())
 			{
-				this.ambroTimer += (this.ambroTimerIncrement/2); // slow down rate of decay for fuel when heat is max and above
+				this.ambroTimer += (this.ambroTimerIncrement / 2); // slow down rate of decay for fuel when heat is max and above
 			}
 			else
 			{
@@ -114,7 +113,6 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 			{
 				this.eggTimer += this.eggTimerIncrement;
 			}
-
 
 			if (this.eggTimer >= this.getEggTimerMax())
 			{
@@ -141,8 +139,9 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 
 		if (!this.isHeating() && !this.getMoaEgg().isEmpty())
 		{
-			if (this.currentHeatingProgress == 0) {
-				eggstack.shrink(1); 	// kill egg if heat reaches 0.
+			if (this.currentHeatingProgress == 0)
+			{
+				eggstack.shrink(1);    // kill egg if heat reaches 0.
 			}
 		}
 
@@ -150,7 +149,7 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 		{
 			this.eggTimer = 0;
 		}
- 	}
+	}
 
 	@Nonnull
 	public ItemStack getMoaEgg()
@@ -186,7 +185,7 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 
 	public boolean canEggIncubate()
 	{
-		return this.getCurrentHeatingProgress() >= getRequiredTemperatureThreshold();
+		return this.getCurrentHeatingProgress() >= this.getRequiredTemperatureThreshold();
 	}
 
 	public int getEggTimer()
@@ -194,7 +193,8 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 		return this.eggTimer;
 	}
 
-	public int getEggTimerMax() {
+	public int getEggTimerMax()
+	{
 		return REQ_TEMPERATURE_THRESHOLD;
 	}
 

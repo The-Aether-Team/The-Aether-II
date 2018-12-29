@@ -14,15 +14,17 @@ import net.minecraft.world.World;
 public class AIMoaLayEgg extends EntityAIBase
 {
 
-	public World world;
+	public final World world;
 
-	public EntityMoa mother;
+	public final EntityMoa mother;
 
-	public float moveSpeed;
+	public final float moveSpeed;
 
 	public boolean hasLayedEgg;
 
-	private int motherSeed, fatherSeed;
+	private final int motherSeed;
+
+	private final int fatherSeed;
 
 	public AIMoaLayEgg(EntityMoa mother, int motherSeed, int fatherSeed, float moveSpeed)
 	{

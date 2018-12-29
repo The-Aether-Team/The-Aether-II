@@ -5,11 +5,11 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import java.util.List;
 import java.util.Random;
 
 public class BlockGoldenOakLog extends BlockAetherLog
@@ -17,16 +17,14 @@ public class BlockGoldenOakLog extends BlockAetherLog
 	private static final Random RANDOM = new Random();
 
 	@Override
-	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
+	public void getDrops(NonNullList<ItemStack> list, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
-		List<ItemStack> ret = super.getDrops(world, pos, state, fortune);
+		super.getDrops(list, world, pos, state, fortune);
 
 		// Why, Minecraft...
 		Random rand = world instanceof World ? ((World) world).rand : RANDOM;
 
-		ret.add(new ItemStack(ItemsAether.golden_amber, rand.nextInt(3) + 1));
-
-		return ret;
+		list.add(new ItemStack(ItemsAether.golden_amber, rand.nextInt(3) + 1));
 	}
 
 	@Override

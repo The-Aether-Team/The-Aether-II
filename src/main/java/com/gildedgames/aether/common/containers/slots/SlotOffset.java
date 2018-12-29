@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 
 public class SlotOffset extends Slot
 {
-	private int trueIndex;
+	private final int trueIndex;
 
 	public SlotOffset(IInventory inventoryIn, int index, int xPosition, int yPosition, int trueIndex)
 	{

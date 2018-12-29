@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.entities.ai;
 
-import javax.annotation.Nullable;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.RandomPositionGenerator;
@@ -9,15 +8,24 @@ import net.minecraft.pathfinding.PathPoint;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
+import javax.annotation.Nullable;
+
 public class EntityAIWanderAvoidLight extends EntityAIBase
 {
 	protected final EntityCreature entity;
+
 	protected double x;
+
 	protected double y;
+
 	protected double z;
+
 	protected final double speed;
+
 	protected int executionChance;
-	protected int lightLevel;
+
+	protected final int lightLevel;
+
 	protected boolean mustUpdate;
 
 	public EntityAIWanderAvoidLight(EntityCreature creatureIn, double speedIn, int lightLevel)
@@ -37,6 +45,7 @@ public class EntityAIWanderAvoidLight extends EntityAIBase
 	/**
 	 * Returns whether the EntityAIBase should begin execution.
 	 */
+	@Override
 	public boolean shouldExecute()
 	{
 		if (!this.mustUpdate)
@@ -79,7 +88,7 @@ public class EntityAIWanderAvoidLight extends EntityAIBase
 			{
 				BlockPos blockPos = new BlockPos(pos);
 
-				if (this.entity.world.getLightFromNeighbors(blockPos) <= lightLevel && !(entity.world.isDaytime() && this.entity.world.canSeeSky(blockPos)))
+				if (this.entity.world.getLightFromNeighbors(blockPos) <= this.lightLevel && !(this.entity.world.isDaytime() && this.entity.world.canSeeSky(blockPos)))
 				{
 					return pos;
 				}
@@ -92,6 +101,7 @@ public class EntityAIWanderAvoidLight extends EntityAIBase
 	/**
 	 * Returns whether an in-progress EntityAIBase should continue executing
 	 */
+	@Override
 	public boolean shouldContinueExecuting()
 	{
 		return !this.entity.getNavigator().noPath();
@@ -100,6 +110,7 @@ public class EntityAIWanderAvoidLight extends EntityAIBase
 	/**
 	 * Execute a one shot task or start executing a continuous task
 	 */
+	@Override
 	public void startExecuting()
 	{
 		this.entity.getNavigator().tryMoveToXYZ(this.x, this.y, this.z, this.speed);
@@ -113,7 +124,7 @@ public class EntityAIWanderAvoidLight extends EntityAIBase
 				PathPoint pp = path.getPathPointFromIndex(i);
 				BlockPos blockPos = new BlockPos(pp.x, pp.y, pp.z);
 
-				if (this.entity.world.getLightFromNeighbors(blockPos) > lightLevel || (entity.world.isDaytime() && this.entity.world.canSeeSky(blockPos)))
+				if (this.entity.world.getLightFromNeighbors(blockPos) > this.lightLevel || (this.entity.world.isDaytime() && this.entity.world.canSeeSky(blockPos)))
 				{
 					this.entity.getNavigator().clearPath();
 				}

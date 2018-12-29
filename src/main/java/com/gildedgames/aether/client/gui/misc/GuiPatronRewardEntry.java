@@ -19,11 +19,11 @@ public class GuiPatronRewardEntry extends GuiElement
 
 	public static int SELECTED_INDEX = -1;
 
-	private String name;
+	private final String name;
 
-	private ResourceLocation icon;
+	private final ResourceLocation icon;
 
-	private int index;
+	private final int index;
 
 	private GuiAbstractButton button;
 

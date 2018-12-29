@@ -99,9 +99,7 @@ public class TemplatesAether
 
 	public static Template registerTemplate(final ResourceLocation resourceLocation)
 	{
-		final Template template = TemplatesAether.MANAGER.getTemplate(null, resourceLocation);
-
-		return template;
+		return TemplatesAether.MANAGER.getTemplate(null, resourceLocation);
 	}
 
 }

@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "aether:blocks/saplings/green_skyroot_sapling"
+    "layer0": "aether:blocks/saplings/holiday_sapling"
   }
 }

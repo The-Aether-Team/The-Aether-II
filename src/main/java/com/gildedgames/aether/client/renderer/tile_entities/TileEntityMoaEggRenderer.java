@@ -16,7 +16,7 @@ public class TileEntityMoaEggRenderer extends TileEntitySpecialRenderer<TileEnti
 
 	private static final ResourceLocation TEXTURE_BEAK = AetherCore.getResource("textures/tile_entities/moa_egg/beak.png");
 
-	public ModelMoaEgg model = new ModelMoaEgg();
+	public final ModelMoaEgg model = new ModelMoaEgg();
 
 	@Override
 	public void render(final TileEntityMoaEgg egg, final double x, final double y, final double z, final float partialTicks, final int destroyStage,

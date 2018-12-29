@@ -1,9 +1,6 @@
 package com.gildedgames.aether.common.entities.ai.hopping;
 
-import com.gildedgames.aether.api.world.islands.IIslandDataPartial;
-import com.gildedgames.aether.api.world.islands.precipitation.PrecipitationType;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
-import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.init.MobEffects;
@@ -24,7 +21,7 @@ public class AIHopHideFromRain extends EntityAIBase
 
 	private int nextRandomizeTime;
 
-	private EntityCreature entity;
+	private final EntityCreature entity;
 
 	private double shelterX;
 
@@ -52,9 +49,7 @@ public class AIHopHideFromRain extends EntityAIBase
 			return false;
 		}
 
-		IIslandDataPartial island = IslandHelper.getPartial(this.entity.world, this.entity.chunkCoordX, this.entity.chunkCoordZ);
-
-		boolean executes = island != null && island.getPrecipitation().getType() == PrecipitationType.RAIN && this.entity.getAttackTarget() == null && (
+		boolean executes = this.entity.world.isRaining() && this.entity.getAttackTarget() == null && (
 				this.entity.onGround || this.entity.isInWater() || this.entity.isInLava()
 						|| this.entity.isPotionActive(MobEffects.LEVITATION));
 

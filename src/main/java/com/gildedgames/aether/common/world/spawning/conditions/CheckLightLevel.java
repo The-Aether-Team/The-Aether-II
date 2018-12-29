@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 public class CheckLightLevel implements PosCondition
 {
 
-	protected int lightLevel;
+	protected final int lightLevel;
 
 	public CheckLightLevel(int lightLevel)
 	{
@@ -17,6 +17,6 @@ public class CheckLightLevel implements PosCondition
 	@Override
 	public boolean isMet(World world, BlockPos spawnAt, BlockPos underneath)
 	{
-		return world.getLightFromNeighbors(spawnAt) <= lightLevel;
+		return world.getLightFromNeighbors(spawnAt) <= this.lightLevel;
 	}
 }

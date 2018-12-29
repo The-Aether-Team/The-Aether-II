@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 public class FlyingMount implements IMountProcessor
 {
 
-	private IFlyingMountData data;
+	private final IFlyingMountData data;
 
 	public FlyingMount(IFlyingMountData data)
 	{

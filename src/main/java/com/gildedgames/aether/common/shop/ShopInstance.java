@@ -43,7 +43,7 @@ public class ShopInstance implements IShopInstance
 	}
 
 	@Override
-	public Collection<String> getUnlocalizedGreetings()
+	public List<String> getUnlocalizedGreetings()
 	{
 		return this.greetings;
 	}

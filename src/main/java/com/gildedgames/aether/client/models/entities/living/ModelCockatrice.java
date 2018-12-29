@@ -9,87 +9,87 @@ import net.minecraft.util.math.MathHelper;
 public class ModelCockatrice extends ModelBase
 {
 
-	ModelRenderer LegTopRight;
+	final ModelRenderer LegTopRight;
 
-	ModelRenderer LegTopLeft;
+	final ModelRenderer LegTopLeft;
 
-	ModelRenderer LegMidRight;
+	final ModelRenderer LegMidRight;
 
-	ModelRenderer LegMidLeft;
+	final ModelRenderer LegMidLeft;
 
-	ModelRenderer LegBottomRight;
+	final ModelRenderer LegBottomRight;
 
-	ModelRenderer LegBottomLeft;
+	final ModelRenderer LegBottomLeft;
 
-	ModelRenderer FootRight;
+	final ModelRenderer FootRight;
 
-	ModelRenderer FootLeft;
+	final ModelRenderer FootLeft;
 
-	ModelRenderer LegFeatheredRight;
+	final ModelRenderer LegFeatheredRight;
 
-	ModelRenderer LegFeatheredLeft;
+	final ModelRenderer LegFeatheredLeft;
 
-	ModelRenderer BodyFront;
+	final ModelRenderer BodyFront;
 
-	ModelRenderer BodyBack;
+	final ModelRenderer BodyBack;
 
-	ModelRenderer ShoulderRight;
+	final ModelRenderer ShoulderRight;
 
-	ModelRenderer ShoulderLeft;
+	final ModelRenderer ShoulderLeft;
 
-	ModelRenderer WingBaseRight;
+	final ModelRenderer WingBaseRight;
 
-	ModelRenderer WingBaseLeft;
+	final ModelRenderer WingBaseLeft;
 
-	ModelRenderer WingRight;
+	final ModelRenderer WingRight;
 
-	ModelRenderer WingLeft;
+	final ModelRenderer WingLeft;
 
-	ModelRenderer TailMiddle;
+	final ModelRenderer TailMiddle;
 
-	ModelRenderer TailLeft;
+	final ModelRenderer TailLeft;
 
-	ModelRenderer TailRight;
+	final ModelRenderer TailRight;
 
-	ModelRenderer NeckBase;
+	final ModelRenderer NeckBase;
 
-	ModelRenderer NeckTop;
+	final ModelRenderer NeckTop;
 
-	ModelRenderer Head;
+	final ModelRenderer Head;
 
-	ModelRenderer BeakJaw;
+	final ModelRenderer BeakJaw;
 
-	ModelRenderer Teeth;
+	final ModelRenderer Teeth;
 
-	ModelRenderer FeatherRight;
+	final ModelRenderer FeatherRight;
 
-	ModelRenderer FeatherLeft;
+	final ModelRenderer FeatherLeft;
 
-	ModelRenderer FeatherTop;
+	final ModelRenderer FeatherTop;
 
-	ModelRenderer ToeLeftRight;
+	final ModelRenderer ToeLeftRight;
 
-	ModelRenderer ToeMidRight;
+	final ModelRenderer ToeMidRight;
 
-	ModelRenderer ToeRightRight;
+	final ModelRenderer ToeRightRight;
 
-	ModelRenderer ToeLeftLeft;
+	final ModelRenderer ToeLeftLeft;
 
-	ModelRenderer ToeMidLeft;
+	final ModelRenderer ToeMidLeft;
 
-	ModelRenderer ToeRightLeft;
+	final ModelRenderer ToeRightLeft;
 
-	ModelRenderer Dart1;
+	final ModelRenderer Dart1;
 
-	ModelRenderer Dart2;
+	final ModelRenderer Dart2;
 
-	ModelRenderer Dart3;
+	final ModelRenderer Dart3;
 
-	ModelRenderer Dart4;
+	final ModelRenderer Dart4;
 
-	ModelRenderer Dart5;
+	final ModelRenderer Dart5;
 
-	ModelRenderer Dart6;
+	final ModelRenderer Dart6;
 
 	public ModelCockatrice()
 	{

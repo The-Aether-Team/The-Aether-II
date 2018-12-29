@@ -39,7 +39,11 @@ public class GuiAetherTeleporterNotice extends GuiViewer
 
 	private GuiTexture backdrop, matrix;
 
-	private ItemStack teleporter, stone, iron_ingot;
+	private final ItemStack teleporter;
+
+	private final ItemStack stone;
+
+	private final ItemStack iron_ingot;
 
 	private Pos2D center;
 
@@ -52,12 +56,6 @@ public class GuiAetherTeleporterNotice extends GuiViewer
 		this.teleporter = new ItemStack(BlocksAether.aether_teleporter);
 		this.stone = new ItemStack(Blocks.STONE);
 		this.iron_ingot = new ItemStack(Items.IRON_INGOT);
-	}
-
-	@Override
-	public void onGuiClosed()
-	{
-		super.onGuiClosed();
 	}
 
 	@Override

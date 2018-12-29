@@ -5,7 +5,7 @@ import com.gildedgames.aether.api.items.loot.Loot;
 public class ItemIrradiated extends ItemIrradiatedVisuals implements IDropOnDeath
 {
 
-	private Loot itemSelector;
+	private final Loot itemSelector;
 
 	public ItemIrradiated(Loot itemSelector)
 	{

@@ -14,7 +14,7 @@ public abstract class EntityAdvancedClimbing extends EntityAetherAnimal
 {
 	private boolean climbing;
 
-	private List<BlockPos> fullBlocksBeside = Lists.newArrayList();
+	private final List<BlockPos> fullBlocksBeside = Lists.newArrayList();
 
 	private BlockPos current;
 
@@ -113,12 +113,6 @@ public abstract class EntityAdvancedClimbing extends EntityAetherAnimal
 	public boolean isOnLadder()
 	{
 		return false;
-	}
-
-	@Override
-	protected void jump()
-	{
-		super.jump();
 	}
 
 	@Override

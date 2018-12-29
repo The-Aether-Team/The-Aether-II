@@ -3,7 +3,6 @@ package com.gildedgames.aether.common.items.blocks;
 import com.gildedgames.aether.common.blocks.util.BlockCustomSlab;
 import com.gildedgames.aether.common.blocks.util.BlockCustomSlab.EnumSlabPart;
 import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
@@ -11,8 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -103,28 +100,4 @@ public class ItemBlockCustomSlab extends ItemBlock
 		return offsetState.getBlock() == this.block || super.canPlaceBlockOnSide(world, blockpos, side, player, stack);
 	}
 
-	private boolean tryPlace(EntityPlayer player, ItemStack stack, World world, BlockPos pos)
-	{
-		IBlockState iblockstate = world.getBlockState(pos);
-
-		if (iblockstate.getBlock() == this.block)
-		{
-			IBlockState state = this.block.getDefaultState();
-
-			AxisAlignedBB bounds = state.getCollisionBoundingBox(world, pos);
-
-			if (bounds != Block.NULL_AABB && world.checkNoEntityCollision(bounds.offset(pos)) && world.setBlockState(pos, state, 11))
-			{
-				SoundType soundtype = this.block.getSoundType();
-				world.playSound(player, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS,
-						(soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
-
-				stack.shrink(1);
-			}
-
-			return true;
-		}
-
-		return false;
-	}
 }

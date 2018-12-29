@@ -16,7 +16,7 @@ public class ContainerShop extends Container
 {
 	private final IInventory shopInventory;
 
-	private IShopInstance shopInstance;
+	private final IShopInstance shopInstance;
 
 	public ContainerShop(final InventoryPlayer playerInventory, IShopInstance shopInstance)
 	{
@@ -66,12 +66,6 @@ public class ContainerShop extends Container
 	{
 		super.addListener(listener);
 		listener.sendAllWindowProperties(this, this.shopInventory);
-	}
-
-	@Override
-	public void detectAndSendChanges()
-	{
-		super.detectAndSendChanges();
 	}
 
 	@Override

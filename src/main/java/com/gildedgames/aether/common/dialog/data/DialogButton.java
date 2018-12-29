@@ -16,9 +16,9 @@ public class DialogButton implements IDialogButton
 
 	private final Collection<IDialogAction> actions;
 
-	private Collection<IDialogCondition> conditions;
+	private final Collection<IDialogCondition> conditions;
 
-	private Collection<IDialogCondition> orConditions;
+	private final Collection<IDialogCondition> orConditions;
 
 	public DialogButton(Collection<IDialogCondition> orConditions, Collection<IDialogCondition> conditions, final String label,
 			final Collection<IDialogAction> actions)

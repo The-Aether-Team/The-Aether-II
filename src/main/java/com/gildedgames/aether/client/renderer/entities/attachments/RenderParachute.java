@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL11;
 public class RenderParachute extends Render<EntityParachute>
 {
 
-	private ModelParachute model = new ModelParachute();
+	private final ModelParachute model = new ModelParachute();
 
 	public RenderParachute(RenderManager renderManager)
 	{

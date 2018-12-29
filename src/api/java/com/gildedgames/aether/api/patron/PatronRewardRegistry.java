@@ -7,7 +7,7 @@ import java.util.Collection;
 
 public class PatronRewardRegistry
 {
-	private BiMap<Integer, IPatronReward> rewards = HashBiMap.create();
+	private final BiMap<Integer, IPatronReward> rewards = HashBiMap.create();
 
 	public PatronRewardRegistry()
 	{

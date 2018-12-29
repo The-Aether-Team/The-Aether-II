@@ -53,9 +53,7 @@ public class ShopManager implements IShopManager
 	 */
 	protected GsonBuilder buildDeserializer()
 	{
-		final GsonBuilder builder = new GsonBuilder();
-
-		return builder;
+		return new GsonBuilder();
 	}
 
 	@Override

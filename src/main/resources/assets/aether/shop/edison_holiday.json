@@ -1,0 +1,94 @@
+{
+	"greetings": [
+		"edison.shop.greetings_holiday"
+	],
+	"buy_definitions": [
+		{
+			"stack": {
+				"item": "aether:candy_cane",
+				"data": "0"
+			},
+			"descriptions": [
+				"edison.shop.candy_cane"
+			],
+			"min_price": "80",
+			"max_price": "100",
+			"min_sell_price": "60",
+			"max_sell_price": "80",
+			"min_stock": "10",
+			"max_stock": "30",
+			"ticks_until_restock": "1200",
+			"rarity_weight": "5.0"
+		},
+		{
+			"stack": {
+				"item": "aether:yule_log",
+				"data": "0"
+			},
+			"descriptions": [
+				"edison.shop.yule_log"
+			],
+			"min_price": "100",
+			"max_price": "150",
+			"min_sell_price": "80",
+			"max_sell_price": "100",
+			"min_stock": "10",
+			"max_stock": "30",
+			"ticks_until_restock": "1200",
+			"rarity_weight": "5.0"
+		},
+		{
+			"stack": {
+				"item": "aether:candy_cane_block",
+				"data": "0"
+			},
+			"descriptions": [
+				"edison.shop.candy_cane_block"
+			],
+			"min_price": "80",
+			"max_price": "120",
+			"min_sell_price": "50",
+			"max_sell_price": "80",
+			"min_stock": "5",
+			"max_stock": "30",
+			"ticks_until_restock": "1200",
+			"rarity_weight": "5.0"
+		},
+		{
+			"stack": {
+				"item": "aether:candy_cane_wall",
+				"data": "0"
+			},
+			"descriptions": [
+				"edison.shop.cande_cane_wall"
+			],
+			"min_price": "1",
+			"max_price": "5",
+			"min_sell_price": "1",
+			"max_sell_price": "1",
+			"min_stock": "30",
+			"max_stock": "200",
+			"ticks_until_restock": "1200",
+			"rarity_weight": "5.0"
+		},
+		{
+			"stack": {
+				"item": "aether:aether_sapling",
+				"data": "4"
+			},
+			"descriptions": [
+				"edison.shop.mutant_sapling"
+			],
+			"min_price": "1",
+			"max_price": "5",
+			"min_sell_price": "1",
+			"max_sell_price": "1",
+			"min_stock": "30",
+			"max_stock": "200",
+			"ticks_until_restock": "1200",
+			"rarity_weight": "5.0"
+		}
+	],
+	"max_stock": "5",
+	"min_stock": "5"
+}

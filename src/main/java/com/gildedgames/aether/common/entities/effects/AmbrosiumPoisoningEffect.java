@@ -7,6 +7,7 @@ public class AmbrosiumPoisoningEffect extends StatusEffect
 		super(id, displayName, buildAmount, trigValue, regRate);
 	}
 
+	@Override
 	public void applyEffect()
 	{
 

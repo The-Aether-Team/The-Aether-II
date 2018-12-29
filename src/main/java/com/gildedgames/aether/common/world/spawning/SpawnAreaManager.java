@@ -104,7 +104,7 @@ public class SpawnAreaManager implements ISpawnAreaManager
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
+			AetherCore.LOGGER.warn("Failed to fetch spawn area", e);
 		}
 
 		return null;
@@ -202,7 +202,7 @@ public class SpawnAreaManager implements ISpawnAreaManager
 			}
 			catch (IOException e)
 			{
-				e.printStackTrace();
+				AetherCore.LOGGER.warn("Failed to write spawn area", e);
 			}
 
 			area.markClean();

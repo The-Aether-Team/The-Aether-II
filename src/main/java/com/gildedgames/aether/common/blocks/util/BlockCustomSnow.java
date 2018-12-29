@@ -35,7 +35,7 @@ public class BlockCustomSnow extends BlockSnow implements IBlockWithItem
 		{
 			BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(worldIn, pos.down(), EnumFacing.UP);
 			return blockfaceshape == BlockFaceShape.SOLID || iblockstate.getBlock().isLeaves(iblockstate, worldIn, pos.down())
-					|| block == this && iblockstate.getValue(LAYERS).intValue() == 8;
+					|| block == this && iblockstate.getValue(LAYERS) == 8;
 		}
 		else
 		{

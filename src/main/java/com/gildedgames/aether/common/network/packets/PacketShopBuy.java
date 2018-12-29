@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.network.packets;
 
 import com.gildedgames.aether.api.shop.IShopBuy;
 import com.gildedgames.aether.api.shop.IShopInstance;
+import com.gildedgames.aether.api.shop.IShopInstanceGroup;
 import com.gildedgames.aether.api.shop.ShopUtil;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.containers.ContainerShop;
@@ -16,15 +17,18 @@ public class PacketShopBuy implements IMessage
 {
 	private int stockIndex, buyCount;
 
+	private int shopIndex;
+
 	public PacketShopBuy()
 	{
 
 	}
 
-	public PacketShopBuy(int stockIndex, int buyCount)
+	public PacketShopBuy(int stockIndex, int buyCount, int shopIndex)
 	{
 		this.stockIndex = stockIndex;
 		this.buyCount = buyCount;
+		this.shopIndex = shopIndex;
 	}
 
 	@Override
@@ -32,6 +36,7 @@ public class PacketShopBuy implements IMessage
 	{
 		this.stockIndex = buf.readInt();
 		this.buyCount = buf.readInt();
+		this.shopIndex = buf.readInt();
 	}
 
 	@Override
@@ -39,6 +44,7 @@ public class PacketShopBuy implements IMessage
 	{
 		buf.writeInt(this.stockIndex);
 		buf.writeInt(this.buyCount);
+		buf.writeInt(this.shopIndex);
 	}
 
 	public static class HandlerServer extends MessageHandlerServer<PacketShopBuy, IMessage>
@@ -57,7 +63,14 @@ public class PacketShopBuy implements IMessage
 
 				if (playerAether.getDialogController().getTalkingNPC() != null)
 				{
-					IShopInstance shopInstance = playerAether.getDialogController().getTalkingNPC().getShopInstance();
+					IShopInstanceGroup group = playerAether.getDialogController().getTalkingNPC().getShopInstanceGroup();
+
+					if (group == null)
+					{
+						return null;
+					}
+
+					IShopInstance shopInstance = group.getShopInstance(message.shopIndex);
 
 					if (shopInstance != null && shopInstance.getStock() != null)
 					{
@@ -82,8 +95,8 @@ public class PacketShopBuy implements IMessage
 							}
 
 							boolean canAfford = shopInstance.getCurrencyType().getValue(playerAether) >= (ShopUtil.getFilteredPrice(buy) * amount);
-							boolean isBuyItem = ItemHelper.getHashForItemStack(player.inventory.getItemStack()) == ItemHelper
-									.getHashForItemStack(buy.getItemStack());
+							boolean isBuyItem = ItemHelper.getKeyForItemStack(player.inventory.getItemStack()) == ItemHelper
+									.getKeyForItemStack(buy.getItemStack());
 							boolean canStack = player.inventory.getItemStack().isStackable();
 							boolean isAtStackLimit = player.inventory.getItemStack().getCount() >= player.inventory.getItemStack().getMaxStackSize();
 

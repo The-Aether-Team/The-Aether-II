@@ -54,7 +54,7 @@ public class GuiDialogViewer extends GuiViewer implements IDialogChangeListener
 
 	private int currentScroll, maxScroll;
 
-	private LinkedList<GuiDialogButton> buttons = Lists.newLinkedList();
+	private final LinkedList<GuiDialogButton> buttons = Lists.newLinkedList();
 
 	public GuiDialogViewer(final EntityPlayer player, final IDialogController controller)
 	{

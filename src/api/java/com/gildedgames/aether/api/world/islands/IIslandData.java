@@ -5,15 +5,17 @@ import com.gildedgames.orbis_api.core.BlueprintDefinition;
 import com.gildedgames.orbis_api.core.ICreationData;
 import com.gildedgames.orbis_api.core.PlacedBlueprint;
 import com.gildedgames.orbis_api.core.baking.BakedBlueprint;
+import com.gildedgames.orbis_api.preparation.IPrepSectorData;
 import com.gildedgames.orbis_api.util.mc.NBT;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.biome.Biome;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.List;
 
-public interface IIslandData extends IIslandDataPartial
+public interface IIslandData extends NBT
 {
 	/**
 	 * The contained components have specialised data, usually
@@ -64,4 +66,23 @@ public interface IIslandData extends IIslandDataPartial
 	PlacedBlueprint placeBlueprint(BlueprintDefinition def, BakedBlueprint baked, ICreationData<?> data);
 
 	List<PlacedBlueprint> getPlacedBlueprintsInChunk(int chunkX, int chunkZ);
+
+	/**
+	 * Returns the bounding box of the island. These coordinates are normalized
+	 * to the sector's region.
+	 *
+	 * @return The bounding box of the island
+	 */
+	@Nonnull
+	IIslandBounds getBounds();
+
+	/**
+	 * @return The biome of this island.
+	 */
+	@Nonnull
+	Biome getBiome();
+
+	IPrepSectorData getParentSectorData();
+
+	void tick();
 }

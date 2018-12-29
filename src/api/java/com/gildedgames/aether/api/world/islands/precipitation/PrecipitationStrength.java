@@ -32,4 +32,19 @@ public enum PrecipitationStrength
 	{
 		return this.id;
 	}
+
+	public float getWindForceMultiplier()
+	{
+		switch (this)
+		{
+			case LIGHT:
+				return 0.1f;
+			case HEAVY:
+				return 0.2f;
+			case STORM:
+				return 0.4f;
+		}
+
+		return 0.0f;
+	}
 }

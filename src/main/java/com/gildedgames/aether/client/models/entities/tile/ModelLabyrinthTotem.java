@@ -5,27 +5,27 @@ import net.minecraft.client.model.ModelRenderer;
 
 public class ModelLabyrinthTotem extends ModelBase
 {
-	public ModelRenderer Shape1;
+	public final ModelRenderer Shape1;
 
-	public ModelRenderer Shape2;
+	public final ModelRenderer Shape2;
 
-	public ModelRenderer Shape3;
+	public final ModelRenderer Shape3;
 
-	public ModelRenderer Shape4;
+	public final ModelRenderer Shape4;
 
-	public ModelRenderer Shape5;
+	public final ModelRenderer Shape5;
 
-	public ModelRenderer Shape6;
+	public final ModelRenderer Shape6;
 
-	public ModelRenderer Shape7;
+	public final ModelRenderer Shape7;
 
-	public ModelRenderer Shape8;
+	public final ModelRenderer Shape8;
 
-	public ModelRenderer Shape9;
+	public final ModelRenderer Shape9;
 
-	public ModelRenderer Shape10;
+	public final ModelRenderer Shape10;
 
-	public ModelRenderer Shape11;
+	public final ModelRenderer Shape11;
 
 	public ModelLabyrinthTotem()
 	{

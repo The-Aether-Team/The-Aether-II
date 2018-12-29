@@ -60,10 +60,4 @@ public class NecromancerAIGoUpTower extends EntityAIMoveToBlockYSensitive
 
 		return pos.equals(this.getCurrentPos());
 	}
-
-	@Override
-	public void updateTask()
-	{
-		super.updateTask();
-	}
 }

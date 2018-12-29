@@ -7,15 +7,29 @@ import org.lwjgl.opengl.GL11;
 
 public class ModelAechorPlant extends ModelBase
 {
-	private static int petals = 10, thorns = 4, stamens = 3;
+	private static final int petals = 10;
 
-	public ModelRenderer petal[], leaf[], thorn[], stamen[], stamen2[];
+	private static final int thorns = 4;
+
+	private static final int stamens = 3;
+
+	public final ModelRenderer[] petal;
+
+	public final ModelRenderer[] leaf;
+
+	public final ModelRenderer[] thorn;
+
+	public final ModelRenderer[] stamen;
+
+	public final ModelRenderer[] stamen2;
 
 	public float sinage, sinage2;
 
 	public float size;
 
-	private ModelRenderer stem, head;
+	private final ModelRenderer stem;
+
+	private final ModelRenderer head;
 
 	public ModelAechorPlant()
 	{

@@ -85,9 +85,7 @@ public abstract class TileEntityMultiblockController extends TileEntitySynced im
 			max = pos;
 		}
 
-		AxisAlignedBB bb = new AxisAlignedBB(min, max.add(1, 1, 1));
-
-		return bb;
+		return new AxisAlignedBB(min, max.add(1, 1, 1));
 	}
 
 }

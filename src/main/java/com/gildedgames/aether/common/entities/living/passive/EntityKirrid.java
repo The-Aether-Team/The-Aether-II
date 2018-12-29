@@ -20,6 +20,7 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
@@ -76,12 +77,6 @@ public class EntityKirrid extends EntitySheep
 	}
 
 	@Override
-	protected void updateAITasks()
-	{
-		super.updateAITasks();
-	}
-
-	@Override
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
@@ -118,7 +113,8 @@ public class EntityKirrid extends EntitySheep
 		return SoundsAether.kirrid_ambient;
 	}
 
-	protected SoundEvent getHurtSound()
+	@Override
+	protected SoundEvent getHurtSound(DamageSource source)
 	{
 		return SoundsAether.kirrid_hurt;
 	}

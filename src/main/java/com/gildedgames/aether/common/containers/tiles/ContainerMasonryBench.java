@@ -22,17 +22,17 @@ import javax.annotation.Nullable;
 public class ContainerMasonryBench extends Container
 {
 
-	public IInventory craftResult = new InventoryCraftResultSimple();
+	public final IInventory craftResult = new InventoryCraftResultSimple();
 
 	public SlotSimpleCrafting craftingResult;
 
-	private EntityPlayer player;
+	private final EntityPlayer player;
 
-	private InventoryPlayer inventory;
+	private final InventoryPlayer inventory;
 
-	private World world;
+	private final World world;
 
-	private BlockPos pos;
+	private final BlockPos pos;
 
 	private int inputCount = 1;
 

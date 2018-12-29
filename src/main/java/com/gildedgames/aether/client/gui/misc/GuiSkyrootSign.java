@@ -1,6 +1,5 @@
 package com.gildedgames.aether.client.gui.misc;
 
-import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.GuiButton;
@@ -9,23 +8,23 @@ import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.init.Blocks;
 import net.minecraft.network.play.client.CPacketUpdateSign;
 import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.util.ChatAllowedCharacters;
 import net.minecraft.util.text.TextComponentString;
 import org.lwjgl.input.Keyboard;
 
-import java.io.IOException;
-
 public class GuiSkyrootSign extends GuiScreen
 {
 	/** Reference to the sign object. */
 	private final TileEntitySign tileSign;
+
 	/** Counts the number of screen updates. */
 	private int updateCounter;
+
 	/** The index of the line that is being edited. */
 	private int editLine;
+
 	/** "Done" button for the GUI. */
 	private GuiButton doneBtn;
 
@@ -38,6 +37,7 @@ public class GuiSkyrootSign extends GuiScreen
 	 * Adds the buttons (and other controls) to the screen in question. Called when the GUI is displayed and when the
 	 * window resizes, the buttonList is cleared beforehand.
 	 */
+	@Override
 	public void initGui()
 	{
 		this.buttonList.clear();
@@ -49,6 +49,7 @@ public class GuiSkyrootSign extends GuiScreen
 	/**
 	 * Called when the screen is unloaded. Used to disable keyboard repeat events
 	 */
+	@Override
 	public void onGuiClosed()
 	{
 		Keyboard.enableRepeatEvents(false);
@@ -65,6 +66,7 @@ public class GuiSkyrootSign extends GuiScreen
 	/**
 	 * Called from the main game loop to update the screen.
 	 */
+	@Override
 	public void updateScreen()
 	{
 		++this.updateCounter;
@@ -73,6 +75,7 @@ public class GuiSkyrootSign extends GuiScreen
 	/**
 	 * Called by the controls from the buttonList when activated. (Mouse pressed for buttons)
 	 */
+	@Override
 	protected void actionPerformed(GuiButton button)
 	{
 		if (button.enabled)
@@ -89,7 +92,8 @@ public class GuiSkyrootSign extends GuiScreen
 	 * Fired when a key is typed (except F11 which toggles full screen). This is the equivalent of
 	 * KeyListener.keyTyped(KeyEvent e). Args : character (character on the key), keyCode (lwjgl Keyboard key code)
 	 */
-	protected void keyTyped(char typedChar, int keyCode) throws IOException
+	@Override
+	protected void keyTyped(char typedChar, int keyCode)
 	{
 		if (keyCode == 200)
 		{
@@ -124,13 +128,14 @@ public class GuiSkyrootSign extends GuiScreen
 	/**
 	 * Draws the screen and all the components in it.
 	 */
+	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks)
 	{
 		this.drawDefaultBackground();
 		this.drawCenteredString(this.fontRenderer, I18n.format("sign.edit"), this.width / 2, 40, 16777215);
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		GlStateManager.pushMatrix();
-		GlStateManager.translate((float)(this.width / 2), 0.0F, 50.0F);
+		GlStateManager.translate((float) (this.width / 2), 0.0F, 50.0F);
 		float f = 93.75F;
 		GlStateManager.scale(-93.75F, -93.75F, -93.75F);
 		GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
@@ -138,7 +143,7 @@ public class GuiSkyrootSign extends GuiScreen
 
 		if (block == BlocksAether.standing_skyroot_sign)
 		{
-			float f1 = (float)(this.tileSign.getBlockMetadata() * 360) / 16.0F;
+			float f1 = (float) (this.tileSign.getBlockMetadata() * 360) / 16.0F;
 			GlStateManager.rotate(f1, 0.0F, 1.0F, 0.0F);
 			GlStateManager.translate(0.0F, -1.0625F, 0.0F);
 		}

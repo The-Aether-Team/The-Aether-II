@@ -17,7 +17,7 @@ import java.util.function.Supplier;
 
 public class BlockCustomDoor extends BlockDoor implements IInternalBlock
 {
-	private Supplier<Item> doorItem;
+	private final Supplier<Item> doorItem;
 
 	public BlockCustomDoor(Material material, Supplier<Item> doorItem, SoundType soundType)
 	{

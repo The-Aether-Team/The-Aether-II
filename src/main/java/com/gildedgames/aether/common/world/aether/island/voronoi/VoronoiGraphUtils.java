@@ -7,7 +7,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Vector;
 
 public class VoronoiGraphUtils
 {
@@ -268,7 +267,7 @@ public class VoronoiGraphUtils
 	}
 
 	// Helper functions for rendering paths
-	private static void drawPathForwards(final Graphics2D g, final Vector<Point> path)
+	private static void drawPathForwards(final Graphics2D g, final ArrayList<Point> path)
 	{
 		final int[] xs = new int[path.size()];
 		final int[] ys = new int[path.size()];
@@ -282,7 +281,7 @@ public class VoronoiGraphUtils
 		g.drawPolyline(xs, ys, path.size());
 	}
 
-	private static void drawPathBackwards(final Graphics2D g, final Vector<Point> path)
+	private static void drawPathBackwards(final Graphics2D g, final ArrayList<Point> path)
 	{
 		final int[] xs = new int[path.size()];
 		final int[] ys = new int[path.size()];

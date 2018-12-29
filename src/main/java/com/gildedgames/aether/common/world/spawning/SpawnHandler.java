@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.entity.spawning.EntitySpawn;
 import com.gildedgames.aether.api.entity.spawning.ISpawningInfo;
 import com.gildedgames.aether.api.world.*;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis_api.OrbisAPI;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.Entity;
@@ -134,7 +135,7 @@ public class SpawnHandler implements ISpawnHandler
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
+			AetherCore.LOGGER.warn("Failed to check and spawn entries", e);
 		}
 	}
 
@@ -235,14 +236,10 @@ public class SpawnHandler implements ISpawnHandler
 							(manager.getWorld().rand.nextBoolean() ? 1 : -1) * (1 + manager.getWorld().rand
 									.nextInt(entry.getPositionSelector().getScatter(manager.getWorld())));
 
-					float posX = groupPosX + scatterX;
-					float posZ = groupPosZ + scatterZ;
+					int posX = MathHelper.floor( groupPosX + scatterX);
+					int posZ = MathHelper.floor( groupPosZ + scatterZ);
 
-					int posY = entry.getPositionSelector().getPosY(manager.getWorld(), MathHelper.floor(posX), MathHelper.floor(posZ));
-
-					BlockPos spawnAt = new BlockPos(posX, posY, posZ);
-
-					if (!manager.getWorld().isBlockLoaded(spawnAt, true))
+					if (!manager.getWorld().isBlockLoaded(new BlockPos(posX, 0, posZ)))
 					{
 						if (attempts < MAX_ATTEMPTS)
 						{
@@ -252,6 +249,10 @@ public class SpawnHandler implements ISpawnHandler
 
 						continue;
 					}
+
+					int posY = entry.getPositionSelector().getPosY(manager.getWorld(), posX, posZ);
+
+					BlockPos spawnAt = new BlockPos(posX, posY, posZ);
 
 					if (manager.getWorld().isAnyPlayerWithinRangeAt(posX, posY, posZ, 24.0D))
 					{
@@ -311,7 +312,7 @@ public class SpawnHandler implements ISpawnHandler
 						{
 							EntityLiving living = (EntityLiving) entity;
 
-							if (!ForgeEventFactory.doSpecialSpawn(living, manager.getWorld(), posX, posY, posZ))
+							if (!ForgeEventFactory.doSpecialSpawn(living, manager.getWorld(), posX, posY, posZ, null))
 							{
 								living.onInitialSpawn(manager.getWorld().getDifficultyForLocation(new BlockPos(living)), null);
 							}

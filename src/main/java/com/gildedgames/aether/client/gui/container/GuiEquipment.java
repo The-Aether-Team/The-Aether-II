@@ -32,7 +32,8 @@ public class GuiEquipment extends GuiContainer
 
 	private static final ResourceLocation textureBackpackPattern = AetherCore.getResource("textures/gui/inventory/accessories/backpack_pattern.png");
 
-	private static final ResourceLocation textureBackpackCreativePattern = AetherCore.getResource("textures/gui/inventory/accessories/backpack_creative_pattern.png");
+	private static final ResourceLocation textureBackpackCreativePattern = AetherCore
+			.getResource("textures/gui/inventory/accessories/backpack_creative_pattern.png");
 
 	//	private static final ResourceLocation TEXTURE_COINBAR = AetherCore.getResource("textures/gui/coinbar.png");
 

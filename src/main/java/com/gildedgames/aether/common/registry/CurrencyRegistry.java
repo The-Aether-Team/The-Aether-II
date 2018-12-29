@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class CurrencyRegistry implements ICurrencyRegistry
 {
-	private Map<Class<? extends IShopCurrency>, Map<Integer, Double>> registries = Maps.newHashMap();
+	private final Map<Class<? extends IShopCurrency>, Map<Integer, Double>> registries = Maps.newHashMap();
 
 	@Override
 	public void clearRegistrations()
@@ -31,7 +31,7 @@ public class CurrencyRegistry implements ICurrencyRegistry
 	@Override
 	public void registerValue(ItemStack stack, double value, Class<? extends IShopCurrency> currency)
 	{
-		int hash = ItemHelper.getHashForItemStack(stack);
+		int hash = ItemHelper.getKeyForItemStack(stack);
 
 		this.getHashToValue(currency).put(hash, value);
 	}
@@ -47,11 +47,11 @@ public class CurrencyRegistry implements ICurrencyRegistry
 	{
 		Map<Integer, Double> hashToValue = this.getHashToValue(currency);
 
-		Double value = hashToValue.get(ItemHelper.getHashForItemStack(stack));
+		Double value = hashToValue.get(ItemHelper.getKeyForItemStack(stack));
 
 		if (value == null)
 		{
-			value = hashToValue.get(ItemHelper.getHashForItemStack(stack, false));
+			value = hashToValue.get(ItemHelper.getKeyForItemStack(stack, false));
 
 			return value == null ? 0 : value;
 		}
@@ -62,8 +62,8 @@ public class CurrencyRegistry implements ICurrencyRegistry
 	@Override
 	public boolean hasValue(ItemStack stack, Class<? extends IShopCurrency> currency)
 	{
-		boolean has = this.getHashToValue(currency).containsKey(ItemHelper.getHashForItemStack(stack));
+		boolean has = this.getHashToValue(currency).containsKey(ItemHelper.getKeyForItemStack(stack));
 
-		return has || this.getHashToValue(currency).containsKey(ItemHelper.getHashForItemStack(stack, false));
+		return has || this.getHashToValue(currency).containsKey(ItemHelper.getKeyForItemStack(stack, false));
 	}
 }

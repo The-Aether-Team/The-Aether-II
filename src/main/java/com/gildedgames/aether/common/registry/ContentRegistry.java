@@ -186,7 +186,10 @@ public class ContentRegistry implements IContentRegistry, IOrbisServicesListener
 		return this.patronRewardRegistry;
 	}
 
-	public StatusEffectsRegistry statusEffects() { return this.statusEffectsRegistry; }
+	public StatusEffectsRegistry statusEffects()
+	{
+		return this.statusEffectsRegistry;
+	}
 
 	@Override
 	public void onStartProjectManager(IProjectManager projectManager)

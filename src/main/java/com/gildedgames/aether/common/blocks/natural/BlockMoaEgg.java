@@ -132,13 +132,11 @@ public class BlockMoaEgg extends BlockContainer implements IInternalBlock
 		return false;
 	}
 
-
 	@Override
 	public boolean isFullBlock(IBlockState state)
 	{
 		return false;
 	}
-
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta)
@@ -151,8 +149,6 @@ public class BlockMoaEgg extends BlockContainer implements IInternalBlock
 	{
 		ItemStack eggStack = new ItemStack(ItemsAether.moa_egg);
 		TileEntityMoaEgg egg = (TileEntityMoaEgg) world.getTileEntity(pos);
-
-		System.out.println(world.isRemote);
 
 		if (egg != null)
 		{

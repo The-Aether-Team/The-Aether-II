@@ -23,7 +23,7 @@ import java.util.Random;
 public class BiomeProviderAether extends BiomeProvider
 {
 
-	public static ArrayList<Biome> allowedBiomes = Lists.newArrayList(BiomesAether.VOID, BiomesAether.HIGHLANDS, BiomesAether.MAGNETIC_HILLS);
+	public static final ArrayList<Biome> allowedBiomes = Lists.newArrayList(BiomesAether.VOID, BiomesAether.HIGHLANDS, BiomesAether.MAGNETIC_HILLS);
 
 	private final ThreadLocal<BiomeCache> cache = ThreadLocal.withInitial(() -> new BiomeCache(this));
 
@@ -106,7 +106,6 @@ public class BiomeProviderAether extends BiomeProvider
 
 		return biomes;
 	}
-
 
 	/**
 	 * Returns an array of biomes for the location input.

@@ -16,7 +16,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.MathHelper;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
@@ -40,11 +40,11 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 
 	private String furnaceCustomName;
 
-	private IItemHandler handlerTop = new SidedInvWrapper(this, net.minecraft.util.EnumFacing.UP);
+	private final IItemHandler handlerTop = new SidedInvWrapper(this, net.minecraft.util.EnumFacing.UP);
 
-	private IItemHandler handlerBottom = new SidedInvWrapper(this, net.minecraft.util.EnumFacing.DOWN);
+	private final IItemHandler handlerBottom = new SidedInvWrapper(this, net.minecraft.util.EnumFacing.DOWN);
 
-	private IItemHandler handlerSide = new SidedInvWrapper(this, net.minecraft.util.EnumFacing.WEST);
+	private final IItemHandler handlerSide = new SidedInvWrapper(this, net.minecraft.util.EnumFacing.WEST);
 
 	public static int getItemBurnTime(ItemStack stack)
 	{
@@ -109,7 +109,7 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 				return 2400;
 			}
 
-			return GameRegistry.getFuelValue(stack);
+			return ForgeEventFactory.getItemBurnTime(stack);
 		}
 	}
 

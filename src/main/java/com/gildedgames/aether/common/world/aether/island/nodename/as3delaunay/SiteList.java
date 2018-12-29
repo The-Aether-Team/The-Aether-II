@@ -13,45 +13,45 @@ public final class SiteList implements IDisposable
 
 	public SiteList()
 	{
-		_sites = new ArrayList();
-		_sorted = false;
+		this._sites = new ArrayList<>();
+		this._sorted = false;
 	}
 
 	@Override
 	public void dispose()
 	{
-		if (_sites != null)
+		if (this._sites != null)
 		{
-			for (final Site site : _sites)
+			for (final Site site : this._sites)
 			{
 				site.dispose();
 			}
-			_sites.clear();
-			_sites = null;
+			this._sites.clear();
+			this._sites = null;
 		}
 	}
 
 	public int push(final Site site)
 	{
-		_sorted = false;
-		_sites.add(site);
-		return _sites.size();
+		this._sorted = false;
+		this._sites.add(site);
+		return this._sites.size();
 	}
 
 	public int get_length()
 	{
-		return _sites.size();
+		return this._sites.size();
 	}
 
 	public Site next()
 	{
-		if (_sorted == false)
+		if (this._sorted == false)
 		{
 			throw new Error("SiteList::next():  sites have not been sorted");
 		}
-		if (_currentIndex < _sites.size())
+		if (this._currentIndex < this._sites.size())
 		{
-			return _sites.get(_currentIndex++);
+			return this._sites.get(this._currentIndex++);
 		}
 		else
 		{
@@ -61,23 +61,23 @@ public final class SiteList implements IDisposable
 
 	public Rectangle getSitesBounds()
 	{
-		if (_sorted == false)
+		if (this._sorted == false)
 		{
-			Site.sortSites(_sites);
-			_currentIndex = 0;
-			_sorted = true;
+			Site.sortSites(this._sites);
+			this._currentIndex = 0;
+			this._sorted = true;
 		}
 		double xmin;
 		double xmax;
 		final double ymin;
 		final double ymax;
-		if (_sites.isEmpty())
+		if (this._sites.isEmpty())
 		{
 			return new Rectangle(0, 0, 0, 0);
 		}
 		xmin = Double.MAX_VALUE;
 		xmax = Double.MIN_VALUE;
-		for (final Site site : _sites)
+		for (final Site site : this._sites)
 		{
 			if (site.get_x() < xmin)
 			{
@@ -89,8 +89,8 @@ public final class SiteList implements IDisposable
 			}
 		}
 		// here's where we assume that the sites have been sorted on y:
-		ymin = _sites.get(0).get_y();
-		ymax = _sites.get(_sites.size() - 1).get_y();
+		ymin = this._sites.get(0).get_y();
+		ymax = this._sites.get(this._sites.size() - 1).get_y();
 
 		return new Rectangle(xmin, ymin, xmax - xmin, ymax - ymin);
 	}
@@ -106,8 +106,8 @@ public final class SiteList implements IDisposable
 	 }*/
 	public ArrayList<Point> siteCoords()
 	{
-		final ArrayList<Point> coords = new ArrayList();
-		for (final Site site : _sites)
+		final ArrayList<Point> coords = new ArrayList<>();
+		for (final Site site : this._sites)
 		{
 			coords.add(site.get_coord());
 		}
@@ -122,8 +122,8 @@ public final class SiteList implements IDisposable
 	 */
 	public ArrayList<Circle> circles()
 	{
-		final ArrayList<Circle> circles = new ArrayList();
-		for (final Site site : _sites)
+		final ArrayList<Circle> circles = new ArrayList<>();
+		for (final Site site : this._sites)
 		{
 			double radius = 0;
 			final VoronoiEdge nearestEdge = site.nearestEdge();
@@ -140,8 +140,8 @@ public final class SiteList implements IDisposable
 
 	public ArrayList<ArrayList<Point>> regions(final Rectangle plotBounds)
 	{
-		final ArrayList<ArrayList<Point>> regions = new ArrayList();
-		for (final Site site : _sites)
+		final ArrayList<ArrayList<Point>> regions = new ArrayList<>();
+		for (final Site site : this._sites)
 		{
 			regions.add(site.region(plotBounds));
 		}

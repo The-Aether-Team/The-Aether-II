@@ -1,11 +1,10 @@
 package com.gildedgames.aether.client.renderer.world;
 
-import com.gildedgames.aether.api.world.islands.IIslandDataPartial;
+import com.gildedgames.aether.api.AetherCapabilities;
+import com.gildedgames.aether.api.world.islands.precipitation.IPrecipitationManager;
 import com.gildedgames.aether.api.world.islands.precipitation.PrecipitationStrength;
-import com.gildedgames.aether.api.world.islands.precipitation.PrecipitationType;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
-import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -19,14 +18,16 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.IRenderHandler;
 
+import javax.vecmath.Vector2f;
 import java.util.HashMap;
 import java.util.Random;
 
 public class RenderWorldPrecipitation extends IRenderHandler
 {
-	private HashMap<String, ResourceLocation> textureCache = new HashMap<>();
+	private final HashMap<String, ResourceLocation> textureCache = new HashMap<>();
 
 	private int renderTicks;
 
@@ -37,6 +38,8 @@ public class RenderWorldPrecipitation extends IRenderHandler
 	private final float[] rainYCoords = new float[1024];
 
 	private final Random random = new Random();
+
+	private float skyDarkness, lastSkyDarkness;
 
 	public RenderWorldPrecipitation()
 	{
@@ -88,7 +91,7 @@ public class RenderWorldPrecipitation extends IRenderHandler
 		GlStateManager.glNormal3f(0.0F, 1.0F, 0.0F);
 
 		GlStateManager.enableBlend();
-		GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA,GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
+		GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
 				GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 		GlStateManager.alphaFunc(516, 0.1F);
 
@@ -113,6 +116,10 @@ public class RenderWorldPrecipitation extends IRenderHandler
 
 		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
 
+		IPrecipitationManager precipitation = world.getCapability(AetherCapabilities.PRECIPITATION_MANAGER, null);
+
+		Vector2f velocity = precipitation.getWindVector();
+
 		for (int z2 = entityZ - radius; z2 <= entityZ + radius; ++z2)
 		{
 			for (int x2 = entityX - radius; x2 <= entityX + radius; ++x2)
@@ -124,16 +131,9 @@ public class RenderWorldPrecipitation extends IRenderHandler
 
 				pos.setPos(x2, 0, z2);
 
-				IIslandDataPartial island = IslandHelper.getPartial(world, pos.getX() >> 4, pos.getZ() >> 4);
+				float opacity = world.getRainStrength(partialTicks);
 
-				if (island == null)
-				{
-					continue;
-				}
-
-				float opacity = Math.min(1.0f, island.getPrecipitation().getStrength(partialTicks));
-
-				if (opacity > 0 && island.getPrecipitation().getType() != PrecipitationType.NONE)
+				if (opacity > 0 && world.isRaining())
 				{
 					int height = world.getPrecipitationHeight(pos).getY();
 
@@ -163,61 +163,13 @@ public class RenderWorldPrecipitation extends IRenderHandler
 
 						pos.setPos(x2, yMin, z2);
 
-						if (island.getPrecipitation().getType() == PrecipitationType.RAIN)
+						Biome biome = world.getBiome(pos);
+
+						if (biome.isSnowyBiome())
 						{
-							float intensity = island.getPrecipitation().getStrength() == PrecipitationStrength.STORM ? 48.0f : (island.getPrecipitation().getStrength() == PrecipitationStrength.HEAVY ? 64.0f : 128.0f);
-
-							if (continuous != 0)
-							{
-								if (continuous >= 0)
-								{
-									tessellator.draw();
-								}
-
-								continuous = 0;
-
-								String textureKey = AetherCore.getResourcePath("textures/environment/weather/" + island.getPrecipitation().getType()
-										+ "_" + island.getPrecipitation().getStrength().getResourceId() + ".png");
-
-								ResourceLocation texture = this.textureCache.computeIfAbsent(textureKey, (key) -> new ResourceLocation(textureKey));
-								mc.getTextureManager().bindTexture(texture);
-
-								buffer.begin(7, DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
-							}
-
-							double textureVOffset = -((double) (this.renderTicks + x2 * x2 * 3121 + x2 * 45238971 + z2 * z2 * 418711 + z2 * 13761 & 31)
-									+ (double) partialTicks) / intensity * (3.0D + this.random.nextDouble());
-
-							double d6 = (double) ((float) x2 + 0.5F) - entity.posX;
-							double d7 = (double) ((float) z2 + 0.5F) - entity.posZ;
-
-							float f3 = MathHelper.sqrt(d6 * d6 + d7 * d7) / (float) radius;
-							float f4 = ((1.0F - f3 * f3) * 0.5F + 0.5F) * opacity;
-
-							pos.setPos(x2, y2, z2);
-
-							int light = world.getCombinedLight(pos, 0);
-							int lightU = light >> 16 & 65535;
-							int lightV = light & 65535;
-
-							int color = island.getBiome().getWaterColor();
-
-							float red = ((color & 0xFF0000) >> 16) / 255.0f;
-							float blue = ((color & 0xFF00) >> 8) / 255.0f;
-							float green = (color & 0xFF) / 255.0f;
-
-							buffer.pos((double) x2 - rainX + 0.5D, (double) yMax, (double) z2 - rainY + 0.5D).tex(0.0D, (double) yMin * 0.25D + textureVOffset)
-									.color(red, blue, green, f4).lightmap(lightU, lightV).endVertex();
-							buffer.pos((double) x2 + rainX + 0.5D, (double) yMax, (double) z2 + rainY + 0.5D).tex(1.0D, (double) yMin * 0.25D + textureVOffset)
-									.color(red, blue, green, f4).lightmap(lightU, lightV).endVertex();
-							buffer.pos((double) x2 + rainX + 0.5D, (double) yMin, (double) z2 + rainY + 0.5D).tex(1.0D, (double) yMax * 0.25D + textureVOffset)
-									.color(red, blue, green, f4).lightmap(lightU, lightV).endVertex();
-							buffer.pos((double) x2 - rainX + 0.5D, (double) yMin, (double) z2 - rainY + 0.5D).tex(0.0D, (double) yMax * 0.25D + textureVOffset)
-									.color(red, blue, green, f4).lightmap(lightU, lightV).endVertex();
-						}
-						else if (island.getPrecipitation().getType() == PrecipitationType.SNOW)
-						{
-							float intensity = island.getPrecipitation().getStrength() == PrecipitationStrength.STORM ? 2.5f : (island.getPrecipitation().getStrength() == PrecipitationStrength.HEAVY ? 1.4f : 0.6f);
+							float intensity = precipitation.getStrength() == PrecipitationStrength.STORM ?
+									2.5f :
+									(precipitation.getStrength() == PrecipitationStrength.HEAVY ? 1.4f : 0.6f);
 
 							if (continuous != 1)
 							{
@@ -228,8 +180,8 @@ public class RenderWorldPrecipitation extends IRenderHandler
 
 								continuous = 1;
 
-								String textureKey = AetherCore.getResourcePath("textures/environment/weather/" + island.getPrecipitation().getType()
-										+ "_" + island.getPrecipitation().getStrength().getResourceId() + ".png");
+								String textureKey = AetherCore.getResourcePath("textures/environment/weather/" + "snow"
+										+ "_" + precipitation.getStrength().getResourceId() + ".png");
 
 								ResourceLocation texture = this.textureCache.computeIfAbsent(textureKey, (key) -> new ResourceLocation(textureKey));
 								mc.getTextureManager().bindTexture(texture);
@@ -256,14 +208,83 @@ public class RenderWorldPrecipitation extends IRenderHandler
 							int lightU = light >> 16 & 65535;
 							int lightV = light & 65535;
 
-							buffer.pos((double) x2 - rainX + 0.5D, (double) yMax, (double) z2 - rainY + 0.5D).tex(0.0D + uOffset, (double) yMin * 0.25D + d8 + vOffset)
+							buffer.pos((double) x2 - rainX + 0.5D, (double) yMax, (double) z2 - rainY + 0.5D)
+									.tex(0.0D + uOffset, (double) yMin * 0.25D + d8 + vOffset)
 									.color(1.0F, 1.0F, 1.0F, alpha).lightmap(lightU, lightV).endVertex();
-							buffer.pos((double) x2 + rainX + 0.5D, (double) yMax, (double) z2 + rainY + 0.5D).tex(1.0D + uOffset, (double) yMin * 0.25D + d8 + vOffset)
+							buffer.pos((double) x2 + rainX + 0.5D, (double) yMax, (double) z2 + rainY + 0.5D)
+									.tex(1.0D + uOffset, (double) yMin * 0.25D + d8 + vOffset)
 									.color(1.0F, 1.0F, 1.0F, alpha).lightmap(lightU, lightV).endVertex();
-							buffer.pos((double) x2 + rainX + 0.5D, (double) yMin, (double) z2 + rainY + 0.5D).tex(1.0D + uOffset, (double) yMax * 0.25D + d8 + vOffset)
+							buffer.pos((double) x2 + rainX + 0.5D, (double) yMin, (double) z2 + rainY + 0.5D)
+									.tex(1.0D + uOffset, (double) yMax * 0.25D + d8 + vOffset)
 									.color(1.0F, 1.0F, 1.0F, alpha).lightmap(lightU, lightV).endVertex();
-							buffer.pos((double) x2 - rainX + 0.5D, (double) yMin, (double) z2 - rainY + 0.5D).tex(0.0D + uOffset, (double) yMax * 0.25D + d8 + vOffset)
+							buffer.pos((double) x2 - rainX + 0.5D, (double) yMin, (double) z2 - rainY + 0.5D)
+									.tex(0.0D + uOffset, (double) yMax * 0.25D + d8 + vOffset)
 									.color(1.0F, 1.0F, 1.0F, alpha).lightmap(lightU, lightV).endVertex();
+						}
+						else
+						{
+							float intensity = precipitation.getStrength() == PrecipitationStrength.STORM ?
+									48.0f :
+									(precipitation.getStrength() == PrecipitationStrength.HEAVY ? 64.0f : 128.0f);
+
+							if (continuous != 0)
+							{
+								if (continuous >= 0)
+								{
+									tessellator.draw();
+								}
+
+								continuous = 0;
+
+								String textureKey = AetherCore.getResourcePath("textures/environment/weather/" + "rain"
+										+ "_" + precipitation.getStrength().getResourceId() + ".png");
+
+								ResourceLocation texture = this.textureCache.computeIfAbsent(textureKey, (key) -> new ResourceLocation(textureKey));
+								mc.getTextureManager().bindTexture(texture);
+
+								buffer.begin(7, DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
+							}
+
+							double textureVOffset = -((double) (this.renderTicks + x2 * x2 * 3121 + x2 * 45238971 + z2 * z2 * 418711 + z2 * 13761 & 31)
+									+ (double) partialTicks) / intensity * (3.0D + this.random.nextDouble());
+
+							double d6 = (double) ((float) x2 + 0.5F) - entity.posX;
+							double d7 = (double) ((float) z2 + 0.5F) - entity.posZ;
+
+							float f3 = MathHelper.sqrt(d6 * d6 + d7 * d7) / (float) radius;
+							float f4 = ((1.0F - f3 * f3) * 0.5F + 0.5F) * opacity;
+
+							pos.setPos(x2, y2, z2);
+
+							int light = world.getCombinedLight(pos, 0);
+							int lightU = light >> 16 & 65535;
+							int lightV = light & 65535;
+
+							int color = biome.getWaterColor();
+
+							float red = ((color & 0xFF0000) >> 16) / 255.0f;
+							float blue = ((color & 0xFF00) >> 8) / 255.0f;
+							float green = (color & 0xFF) / 255.0f;
+
+							buffer.pos((double) x2 - rainX + 0.5D, (double) yMax, (double) z2 - rainY + 0.5D)
+									.tex(0.0D, (double) yMin * 0.25D + textureVOffset)
+									.color(red, blue, green, f4)
+									.lightmap(lightU, lightV).endVertex();
+
+							buffer.pos((double) x2 + rainX + 0.5D, (double) yMax, (double) z2 + rainY + 0.5D)
+									.tex(1.0D, (double) yMin * 0.25D + textureVOffset)
+									.color(red, blue, green, f4)
+									.lightmap(lightU, lightV).endVertex();
+
+							buffer.pos((double) x2 + rainX + 0.5D + velocity.x, (double) yMin, (double) z2 + rainY + 0.5D + velocity.y)
+									.tex(1.0D, (double) yMax * 0.25D + textureVOffset)
+									.color(red, blue, green, f4)
+									.lightmap(lightU, lightV).endVertex();
+
+							buffer.pos((double) x2 - rainX + 0.5D + velocity.x, (double) yMin, (double) z2 - rainY + 0.5D + velocity.y)
+									.tex(0.0D, (double) yMax * 0.25D + textureVOffset)
+									.color(red, blue, green, f4)
+									.lightmap(lightU, lightV).endVertex();
 						}
 					}
 				}
@@ -291,20 +312,17 @@ public class RenderWorldPrecipitation extends IRenderHandler
 
 		BlockPos pos = mc.player.getPosition();
 
-		IIslandDataPartial island = IslandHelper.getPartial(mc.world, pos.getX() >> 4, pos.getZ() >> 4);
+		IPrecipitationManager precipitation = mc.player.world.getCapability(AetherCapabilities.PRECIPITATION_MANAGER, null);
 
-		if (island == null)
-		{
-			return;
-		}
-
-		if (island.getPrecipitation().getType() == PrecipitationType.NONE || island.getPrecipitation().getStrength(mc.getRenderPartialTicks()) <= 0.3f)
+		if (!mc.world.isRaining() || mc.world.getRainStrength(mc.getRenderPartialTicks()) <= 0.3f)
 		{
 			return;
 		}
 
 		int radius = 25;
 		int frequency = 15;
+
+		BlockPos.MutableBlockPos searchPos = new BlockPos.MutableBlockPos();
 
 		if (this.renderTicksSinceSound >= frequency)
 		{
@@ -316,41 +334,40 @@ public class RenderWorldPrecipitation extends IRenderHandler
 			if (mc.world.getLightFor(EnumSkyBlock.SKY, new BlockPos(x, y, z)) >= 15)
 			{
 				SoundEvent event = null;
-
 				float volume = 1.0f;
 
-				if (island.getPrecipitation().getType() == PrecipitationType.RAIN)
+				searchPos.setPos(x, y, z);
+
+				if (mc.world.getBiome(searchPos).isSnowyBiome())
 				{
-					switch (island.getPrecipitation().getStrength())
+					if (precipitation.getStrength() == PrecipitationStrength.STORM)
 					{
-						case LIGHT:
-							event = SoundsAether.environment_rain_light;
-							volume = 0.6f;
-							break;
-						default:
-							event = SoundsAether.environment_rain_heavy;
-							volume = 0.7f;
-							break;
+						event = SoundsAether.environment_snow_wind;
+						volume = 0.6f;
 					}
 				}
-				else if (island.getPrecipitation().getType() == PrecipitationType.SNOW && island.getPrecipitation().getStrength() == PrecipitationStrength.STORM)
+				else
 				{
-					event = SoundsAether.environment_snow_wind;
-					volume = 0.6f;
-				}
-
-				if (event == null)
-				{
-					return;
+					if (precipitation.getStrength() == PrecipitationStrength.LIGHT)
+					{
+						event = SoundsAether.environment_rain_light;
+						volume = 0.6f;
+					}
+					else
+					{
+						event = SoundsAether.environment_rain_heavy;
+						volume = 0.7f;
+					}
 				}
 
 				this.renderTicksSinceSound = 0;
 
-				mc.world.playSound(x, y, z, event, SoundCategory.WEATHER, volume, 1.0f + (mc.world.rand.nextFloat() * 0.1f), true);
+				if (event != null)
+				{
+					mc.world.playSound(x, y, z, event, SoundCategory.WEATHER, volume, 1.0f + (mc.world.rand.nextFloat() * 0.1f), true);
+				}
 			}
 		}
 	}
-
-
 
 }

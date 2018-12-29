@@ -85,9 +85,9 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 
 	private MoaNest familyNest;
 
-	private MultiPartEntityPart[] parts;
+	private final MultiPartEntityPart[] parts;
 
-	private	Vec3d[] old;
+	private final Vec3d[] old;
 
 	public EntityMoa(final World world)
 	{
@@ -97,8 +97,8 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 
 		this.familyNest = new MoaNest(world);
 
-		this.parts = new MultiPartEntityPart[] { head, neck, beak, body, tail };
-		this.old = new Vec3d[parts.length];
+		this.parts = new MultiPartEntityPart[] { this.head, this.neck, this.beak, this.body, this.tail };
+		this.old = new Vec3d[this.parts.length];
 		this.setSize(1.0F, 2.0F);
 		this.stepHeight = 1.0F;
 	}
@@ -609,47 +609,46 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	{
 		super.onLivingUpdate();
 
-		setMultiPartLocations();
+		this.setMultiPartLocations();
 	}
 
+	private final MultiPartEntityPart neck = new MultiPartEntityPart(this, "neck", .4F, .8F);
 
-	private MultiPartEntityPart neck = new MultiPartEntityPart(this, "neck", .4F, .8F);
+	private final MultiPartEntityPart head = new MultiPartEntityPart(this, "head", .8F, .6F);
 
-	private MultiPartEntityPart head = new MultiPartEntityPart(this, "head", .8F, .6F);
+	private final MultiPartEntityPart beak = new MultiPartEntityPart(this, "beak", .4F, .5F);
 
-	private MultiPartEntityPart beak = new MultiPartEntityPart(this, "beak", .4F, .5F);
+	private final MultiPartEntityPart body = new MultiPartEntityPart(this, "body", 1.1F, 1.325F);
 
-	private MultiPartEntityPart body = new MultiPartEntityPart(this, "body", 1.1F, 1.325F);
-
-	private MultiPartEntityPart tail = new MultiPartEntityPart(this, "tail", 1.1F, .6F);
+	private final MultiPartEntityPart tail = new MultiPartEntityPart(this, "tail", 1.1F, .6F);
 
 	private void setMultiPartLocations()
 	{
-		for (int i = 0; i < parts.length; i++)
+		for (int i = 0; i < this.parts.length; i++)
 		{
-			old[i] = new Vec3d(parts[i].posX, parts[i].posY, parts[i].posZ);
+			this.old[i] = new Vec3d(this.parts[i].posX, this.parts[i].posY, this.parts[i].posZ);
 		}
 
-		float f = MathUtil.interpolateRotation(prevRenderYawOffset, renderYawOffset, 1);
-		float f1 = MathHelper.cos(-f * 0.017453292F - (float)Math.PI);
-		float f2 = MathHelper.sin(-f * 0.017453292F - (float)Math.PI);
+		float f = MathUtil.interpolateRotation(this.prevRenderYawOffset, this.renderYawOffset, 1);
+		float f1 = MathHelper.cos(-f * 0.017453292F - (float) Math.PI);
+		float f2 = MathHelper.sin(-f * 0.017453292F - (float) Math.PI);
 
-		head.onUpdate();
-		head.setLocationAndAngles(posX - f2 * .5f, posY + 1.45f, posZ - f1 * .5f, 0F, 0F);
-		beak.onUpdate();
-		beak.setLocationAndAngles(posX - f2 * 1.1f, posY + 1.5f, posZ - f1 * 1.1f, 0F, 0F);
-		neck.onUpdate();
-		neck.setLocationAndAngles(posX - f2 * .6f, posY + .75f, posZ - f1 * .6f, 0F, 0F);
-		tail.onUpdate();
-		tail.setLocationAndAngles(posX + f2 * 1.1f, posY + .5f, posZ + f1 * 1.1f, 0F, 0F);
-		body.onUpdate();
-		body.setLocationAndAngles(posX, posY, posZ, 0F, 0F);
+		this.head.onUpdate();
+		this.head.setLocationAndAngles(this.posX - f2 * .5f, this.posY + 1.45f, this.posZ - f1 * .5f, 0F, 0F);
+		this.beak.onUpdate();
+		this.beak.setLocationAndAngles(this.posX - f2 * 1.1f, this.posY + 1.5f, this.posZ - f1 * 1.1f, 0F, 0F);
+		this.neck.onUpdate();
+		this.neck.setLocationAndAngles(this.posX - f2 * .6f, this.posY + .75f, this.posZ - f1 * .6f, 0F, 0F);
+		this.tail.onUpdate();
+		this.tail.setLocationAndAngles(this.posX + f2 * 1.1f, this.posY + .5f, this.posZ + f1 * 1.1f, 0F, 0F);
+		this.body.onUpdate();
+		this.body.setLocationAndAngles(this.posX, this.posY, this.posZ, 0F, 0F);
 
-		for (int i = 0; i < parts.length; i++)
+		for (int i = 0; i < this.parts.length; i++)
 		{
-			parts[i].prevPosX = old[i].x;
-			parts[i].prevPosY = old[i].y;
-			parts[i].prevPosZ = old[i].z;
+			this.parts[i].prevPosX = this.old[i].x;
+			this.parts[i].prevPosY = this.old[i].y;
+			this.parts[i].prevPosZ = this.old[i].z;
 		}
 	}
 
@@ -669,9 +668,9 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 				break;
 		}
 
-		if (hurtResistantTime <= 10)
+		if (this.hurtResistantTime <= 10)
 		{
-			return attackEntityFrom(source, damage);
+			return this.attackEntityFrom(source, damage);
 		}
 
 		return false;
@@ -680,7 +679,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	@Override
 	public World getWorld()
 	{
-		return getEntityWorld();
+		return this.getEntityWorld();
 	}
 
 	@Override
@@ -693,7 +692,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	@Override
 	public MultiPartEntityPart[] getParts()
 	{
-		return parts;
+		return this.parts;
 	}
 
 	@Override

@@ -58,7 +58,6 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.WorldEvent;
-import net.minecraftforge.fluids.FluidEvent;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
@@ -242,12 +241,6 @@ public class CommonEvents
 				worldServer.getWorldInfo().setWorldTime(i - i % 24000L);
 			}
 		}
-	}
-
-	@SubscribeEvent
-	public static void onFluidEvent(final FluidEvent.FluidDrainingEvent event)
-	{
-
 	}
 
 	@SubscribeEvent
@@ -491,7 +484,7 @@ public class CommonEvents
 	@SubscribeEvent
 	public static void onEntityMounted(final EntityMountEvent event)
 	{
-		if (event.getEntityMounting() instanceof EntityNPC)
+		if (EntityNPC.class.isAssignableFrom(event.getEntityMounting().getClass()))
 		{
 			event.setCanceled(true);
 		}
@@ -503,6 +496,11 @@ public class CommonEvents
 		if (event.getWorld().provider.getDimensionType() == DimensionsAether.AETHER)
 		{
 			IPrepManager manager = PrepHelper.getManager(event.getWorld());
+
+			if (manager == null)
+			{
+				return;
+			}
 
 			try
 			{

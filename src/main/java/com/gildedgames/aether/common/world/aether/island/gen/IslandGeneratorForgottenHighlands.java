@@ -3,7 +3,6 @@ package com.gildedgames.aether.common.world.aether.island.gen;
 import com.gildedgames.aether.api.util.NoiseUtil;
 import com.gildedgames.aether.api.util.OpenSimplexNoise;
 import com.gildedgames.aether.api.world.islands.IIslandData;
-import com.gildedgames.aether.api.world.islands.IIslandDataPartial;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
 import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
@@ -82,7 +81,7 @@ public class IslandGeneratorForgottenHighlands implements IIslandGenerator
 		return NoiseUtil.lerp(c1, c2, fractionY);
 	}
 
-	public static double[] generate2DNoise(final OpenSimplexNoise noise, final IIslandDataPartial island, final int chunkX, final int chunkZ, final int offset,
+	public static double[] generate2DNoise(final OpenSimplexNoise noise, final IIslandData island, final int chunkX, final int chunkZ, final int offset,
 			final double scale, final boolean centerGradient)
 	{
 		final double posX = chunkX * 16;
@@ -130,7 +129,7 @@ public class IslandGeneratorForgottenHighlands implements IIslandGenerator
 		return data;
 	}
 
-	public static double[] generate3DNoise(final OpenSimplexNoise noise, final IIslandDataPartial island, final int chunkX, final int chunkZ, final int offset,
+	public static double[] generate3DNoise(final OpenSimplexNoise noise, final IIslandData island, final int chunkX, final int chunkZ, final int offset,
 			final double scale, final double yScale, final boolean centerGradient)
 	{
 		final double posX = chunkX * 16;
@@ -239,7 +238,8 @@ public class IslandGeneratorForgottenHighlands implements IIslandGenerator
 	}
 
 	@Override
-	public void genChunk(Biome[] biomes, OpenSimplexNoise noise, IBlockAccessExtended access, ChunkMask mask, ChunkPrimer primer, IIslandData island, int chunkX, int chunkZ)
+	public void genChunk(Biome[] biomes, OpenSimplexNoise noise, IBlockAccessExtended access, ChunkMask mask, ChunkPrimer primer, IIslandData island,
+			int chunkX, int chunkZ)
 	{
 		mask.createChunk(primer, new IslandChunkMaskTransformer());
 	}

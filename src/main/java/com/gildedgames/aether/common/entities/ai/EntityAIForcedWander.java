@@ -3,18 +3,20 @@ package com.gildedgames.aether.common.entities.ai;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.RandomPositionGenerator;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
 import javax.annotation.Nullable;
 
 public class EntityAIForcedWander extends EntityAIWander
 {
+	private final EntityCreature entity;
 
-	private EntityCreature entity;
+	private final int chance;
 
-	private int chance;
+	private final int xScatter;
 
-	private int xScatter, yScatter;
+	private final int yScatter;
 
 	public EntityAIForcedWander(EntityCreature entity, double speedIn, int chance)
 	{
@@ -34,21 +36,34 @@ public class EntityAIForcedWander extends EntityAIWander
 	@Override
 	public boolean shouldExecute()
 	{
-		this.makeUpdate();
-
-		if (this.entity.getRNG().nextInt(this.chance) != 0)
+		if (this.entity.getNavigator().noPath())
 		{
-			return false;
+			if (this.entity.getRNG().nextInt(this.chance) == 0)
+			{
+				this.makeUpdate();
+
+				return super.shouldExecute();
+			}
 		}
 
-		return super.shouldExecute();
+		return false;
 	}
 
 	@Override
 	@Nullable
 	protected Vec3d getPosition()
 	{
-		return RandomPositionGenerator.findRandomTarget(this.entity, this.xScatter, this.yScatter);
+		Vec3d pos = RandomPositionGenerator.findRandomTarget(this.entity, this.xScatter, this.yScatter);
+
+		if (pos != null)
+		{
+			if (!this.entity.world.isBlockLoaded(new BlockPos(pos)))
+			{
+				return null;
+			}
+		}
+
+		return pos;
 	}
 
 }

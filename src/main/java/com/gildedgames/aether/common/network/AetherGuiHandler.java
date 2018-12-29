@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.network;
 import com.gildedgames.aether.api.dialog.IDialogSlide;
 import com.gildedgames.aether.api.dialog.IDialogSlideRenderer;
 import com.gildedgames.aether.api.shop.IShopInstance;
+import com.gildedgames.aether.api.shop.IShopInstanceGroup;
 import com.gildedgames.aether.client.gui.container.GuiEquipment;
 import com.gildedgames.aether.client.gui.container.GuiIcestoneCooler;
 import com.gildedgames.aether.client.gui.container.GuiIncubator;
@@ -81,7 +82,16 @@ public class AetherGuiHandler implements IGuiHandler
 					return null;
 				}
 
-				IShopInstance shopInstance = playerAether.getDialogController().getTalkingNPC().getShopInstance();
+				IShopInstanceGroup group = playerAether.getDialogController().getTalkingNPC().getShopInstanceGroup();
+
+				if (group == null)
+				{
+					return null;
+				}
+
+				int shopIndex = pos.getX();
+
+				IShopInstance shopInstance = group.getShopInstance(shopIndex);
 
 				if (shopInstance == null)
 				{
@@ -130,7 +140,17 @@ public class AetherGuiHandler implements IGuiHandler
 				}
 
 				IDialogSlide slide = DialogUtil.getSlide(playerAether.getDialogController());
-				IShopInstance shopInstance = playerAether.getDialogController().getTalkingNPC().getShopInstance();
+
+				IShopInstanceGroup group = playerAether.getDialogController().getTalkingNPC().getShopInstanceGroup();
+
+				if (group == null)
+				{
+					return null;
+				}
+
+				int shopIndex = pos.getX();
+
+				IShopInstance shopInstance = group.getShopInstance(shopIndex);
 
 				if (shopInstance == null || slide == null)
 				{
@@ -150,11 +170,11 @@ public class AetherGuiHandler implements IGuiHandler
 				{
 					IDialogSlideRenderer renderer = DialogUtil.getRenderer(slide);
 
-					return new GuiShop(prevViewer, player, slide, renderer, shopInstance);
+					return new GuiShop(prevViewer, player, slide, renderer, shopInstance, shopIndex);
 				}
 				else
 				{
-					return new GuiShop(prevViewer, player, slide, null, shopInstance);
+					return new GuiShop(prevViewer, player, slide, null, shopInstance, shopIndex);
 				}
 			}
 			case DIALOG_VIEWER_ID:

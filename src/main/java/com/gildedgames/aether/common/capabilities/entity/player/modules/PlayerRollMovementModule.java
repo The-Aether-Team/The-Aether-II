@@ -9,7 +9,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 public class PlayerRollMovementModule extends PlayerAetherModule
@@ -64,7 +63,7 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 
 	public boolean canRoll()
 	{
-		return AetherHelper.isEnabled(this.getWorld()) && this.rollCooldown <= 0 && !getEntity().isSneaking() && getEntity().onGround;
+		return AetherHelper.isEnabled(this.getWorld()) && this.rollCooldown <= 0 && !this.getEntity().isSneaking() && this.getEntity().onGround;
 	}
 
 	public float getDamageReduction(float inAmount)
@@ -101,7 +100,7 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 
 		this.rollingRotationYaw = this.startRotationYaw + angle;
 
-		if (!canRoll())
+		if (!this.canRoll())
 		{
 			return;
 		}
@@ -156,15 +155,15 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 
 					double speed = Math.max(0.0D, Math.pow(1.25D, this.ticksRolling / 8f) - 1) + 0.25D;
 
-					if (ticksRolling > MAX_ROLLING_TICKS * .7F && !this.getEntity().isSprinting())
+					if (this.ticksRolling > MAX_ROLLING_TICKS * .7F && !this.getEntity().isSprinting())
 					{
-						if (ticksRolling == MAX_ROLLING_TICKS)
+						if (this.ticksRolling == MAX_ROLLING_TICKS)
 						{
 							speed = 0.05f;
 						}
 						else
 						{
-							speed /= (ticksRolling / (float) MAX_ROLLING_TICKS) * 5F;
+							speed /= (this.ticksRolling / (float) MAX_ROLLING_TICKS) * 5F;
 						}
 					}
 
@@ -197,12 +196,6 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 
 	@Override
 	public void read(final NBTTagCompound compound)
-	{
-
-	}
-
-	@Override
-	public void onDeath(final LivingDeathEvent event)
 	{
 
 	}

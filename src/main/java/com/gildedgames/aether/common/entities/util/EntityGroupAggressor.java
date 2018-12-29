@@ -7,7 +7,7 @@ public class EntityGroupAggressor
 
 	final EntityGroup pack;
 
-	public EntityLivingBase agressor;
+	public final EntityLivingBase agressor;
 
 	public int time;
 

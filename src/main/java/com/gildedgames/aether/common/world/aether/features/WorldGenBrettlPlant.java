@@ -24,7 +24,7 @@ public class WorldGenBrettlPlant extends WorldGenerator
 	{
 		// growth stage controls what stage will be grown.
 		// count is used to minimize the number of brettl plants that spawn in close proximity.
-		int i = 0, growthStage = 0, count = 0;
+		int i = 0, growthStage, count = 0;
 		while (i < 64 && count < 4)
 		{
 			BlockPos randomPos = position.add(rand.nextInt(8) - rand.nextInt(8), 0, rand.nextInt(8) - rand.nextInt(8));

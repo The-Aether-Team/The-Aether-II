@@ -10,7 +10,7 @@ public final class Site implements ICoord
 
 	final private static double EPSILON = .005;
 
-	private static final Stack<Site> _pool = new Stack();
+	private static final Stack<Site> _pool = new Stack<>();
 
 	public Color color;
 
@@ -106,7 +106,7 @@ public final class Site implements ICoord
 		this._siteIndex = index;
 		this.weight = weight;
 		this.color = color;
-		this._edges = new ArrayList();
+		this._edges = new ArrayList<>();
 		this._region = null;
 		return this;
 	}
@@ -165,13 +165,13 @@ public final class Site implements ICoord
 	{
 		if (this._edges == null || this._edges.isEmpty())
 		{
-			return new ArrayList();
+			return new ArrayList<>();
 		}
 		if (this._edgeOrientations == null)
 		{
 			this.reorderEdges();
 		}
-		final ArrayList<Site> list = new ArrayList();
+		final ArrayList<Site> list = new ArrayList<>();
 		for (final VoronoiEdge edge : this._edges)
 		{
 			list.add(this.neighborSite(edge));
@@ -196,7 +196,7 @@ public final class Site implements ICoord
 	{
 		if (this._edges == null || this._edges.isEmpty())
 		{
-			return new ArrayList();
+			return new ArrayList<>();
 		}
 		if (this._edgeOrientations == null)
 		{
@@ -222,7 +222,7 @@ public final class Site implements ICoord
 
 	private ArrayList<Point> clipToBounds(final Rectangle bounds)
 	{
-		final ArrayList<Point> points = new ArrayList();
+		final ArrayList<Point> points = new ArrayList<>();
 		final int n = this._edges.size();
 		int i = 0;
 		VoronoiEdge edge;
@@ -234,7 +234,7 @@ public final class Site implements ICoord
 		if (i == n)
 		{
 			// no edges visible
-			return new ArrayList();
+			return new ArrayList<>();
 		}
 		edge = this._edges.get(i);
 		final LR orientation = this._edgeOrientations.get(i);

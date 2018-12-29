@@ -11,131 +11,131 @@ import net.minecraft.util.math.MathHelper;
  */
 public class ModelBurrukai extends ModelBase
 {
-	public ModelRenderer Tail;
+	public final ModelRenderer Tail;
 
-	public ModelRenderer HeadMain;
+	public final ModelRenderer HeadMain;
 
-	public ModelRenderer HeadAntlerTopLeft1;
+	public final ModelRenderer HeadAntlerTopLeft1;
 
-	public ModelRenderer HeadAntlerTopLeft2;
+	public final ModelRenderer HeadAntlerTopLeft2;
 
-	public ModelRenderer HeadAntlerBottomLeft1;
+	public final ModelRenderer HeadAntlerBottomLeft1;
 
-	public ModelRenderer HeadAntlerBottomRight1;
+	public final ModelRenderer HeadAntlerBottomRight1;
 
-	public ModelRenderer HeadAntlerTopRight2;
+	public final ModelRenderer HeadAntlerTopRight2;
 
-	public ModelRenderer HeadAntlerBottomLeft2;
+	public final ModelRenderer HeadAntlerBottomLeft2;
 
-	public ModelRenderer HeadAntlerBottomRight2;
+	public final ModelRenderer HeadAntlerBottomRight2;
 
-	public ModelRenderer HeadPlateTop;
+	public final ModelRenderer HeadPlateTop;
 
-	public ModelRenderer HeadPlateLow;
+	public final ModelRenderer HeadPlateLow;
 
-	public ModelRenderer HeadAntlersMiddle;
+	public final ModelRenderer HeadAntlersMiddle;
 
-	public ModelRenderer HeadBrowLeft;
+	public final ModelRenderer HeadBrowLeft;
 
-	public ModelRenderer HeadBrowRight;
+	public final ModelRenderer HeadBrowRight;
 
-	public ModelRenderer HeadEyeLeft;
+	public final ModelRenderer HeadEyeLeft;
 
-	public ModelRenderer HeadEyeRight;
+	public final ModelRenderer HeadEyeRight;
 
-	public ModelRenderer HeadEarLeft;
+	public final ModelRenderer HeadEarLeft;
 
-	public ModelRenderer HeadEarRight;
+	public final ModelRenderer HeadEarRight;
 
-	public ModelRenderer HeadRidge;
+	public final ModelRenderer HeadRidge;
 
-	public ModelRenderer HeadBase;
+	public final ModelRenderer HeadBase;
 
-	public ModelRenderer HeadCheekRight;
+	public final ModelRenderer HeadCheekRight;
 
-	public ModelRenderer HeadCheekLeft;
+	public final ModelRenderer HeadCheekLeft;
 
-	public ModelRenderer HeadChin;
+	public final ModelRenderer HeadChin;
 
-	public ModelRenderer HeadAntlerTopRight1;
+	public final ModelRenderer HeadAntlerTopRight1;
 
-	public ModelRenderer HeadSnout;
+	public final ModelRenderer HeadSnout;
 
-	public ModelRenderer TorsoNeckJoint;
+	public final ModelRenderer TorsoNeckJoint;
 
-	public ModelRenderer TorsoFrontFurLeft;
+	public final ModelRenderer TorsoFrontFurLeft;
 
-	public ModelRenderer TorsoFrontFurRight;
+	public final ModelRenderer TorsoFrontFurRight;
 
-	public ModelRenderer TorsoShoulderLeft;
+	public final ModelRenderer TorsoShoulderLeft;
 
-	public ModelRenderer TorsoShoulderRight;
+	public final ModelRenderer TorsoShoulderRight;
 
-	public ModelRenderer TorsoChest;
+	public final ModelRenderer TorsoChest;
 
-	public ModelRenderer TorsoPlate1;
+	public final ModelRenderer TorsoPlate1;
 
-	public ModelRenderer TorsoPlate2;
+	public final ModelRenderer TorsoPlate2;
 
-	public ModelRenderer TorsoPlate3;
+	public final ModelRenderer TorsoPlate3;
 
-	public ModelRenderer TorsoShoulderPlateLeftMid;
+	public final ModelRenderer TorsoShoulderPlateLeftMid;
 
-	public ModelRenderer TorsoShoulderPlateLeftFront;
+	public final ModelRenderer TorsoShoulderPlateLeftFront;
 
-	public ModelRenderer TorsoShoulderPlateLeftBack;
+	public final ModelRenderer TorsoShoulderPlateLeftBack;
 
-	public ModelRenderer TorsoShoulderPlateRightMid;
+	public final ModelRenderer TorsoShoulderPlateRightMid;
 
-	public ModelRenderer TorsoShoulderPlateRightFront;
+	public final ModelRenderer TorsoShoulderPlateRightFront;
 
-	public ModelRenderer TorsoShoulderPlateRightBack;
+	public final ModelRenderer TorsoShoulderPlateRightBack;
 
-	public ModelRenderer TorsoBackFur;
+	public final ModelRenderer TorsoBackFur;
 
-	public ModelRenderer TorsoRear;
+	public final ModelRenderer TorsoRear;
 
-	public ModelRenderer TorsoCrotch;
+	public final ModelRenderer TorsoCrotch;
 
-	public ModelRenderer FrontLegLeftTop;
+	public final ModelRenderer FrontLegLeftTop;
 
-	public ModelRenderer FrontLegLeftBottom;
+	public final ModelRenderer FrontLegLeftBottom;
 
-	public ModelRenderer FrontLegLeftHoofIn;
+	public final ModelRenderer FrontLegLeftHoofIn;
 
-	public ModelRenderer FrontLegLeftHoofOut;
+	public final ModelRenderer FrontLegLeftHoofOut;
 
-	public ModelRenderer HindLegRightCalfMiddle;
+	public final ModelRenderer HindLegRightCalfMiddle;
 
-	public ModelRenderer HindLegRightKnee;
+	public final ModelRenderer HindLegRightKnee;
 
-	public ModelRenderer HindLegRightShin;
+	public final ModelRenderer HindLegRightShin;
 
-	public ModelRenderer HindLegRightHoofIn;
+	public final ModelRenderer HindLegRightHoofIn;
 
-	public ModelRenderer HindLegRightHoofOut;
+	public final ModelRenderer HindLegRightHoofOut;
 
-	public ModelRenderer HindLegRightHoofMiddle;
+	public final ModelRenderer HindLegRightHoofMiddle;
 
-	public ModelRenderer HindLegLeftCalfMiddle;
+	public final ModelRenderer HindLegLeftCalfMiddle;
 
-	public ModelRenderer HindLegLeftKnee;
+	public final ModelRenderer HindLegLeftKnee;
 
-	public ModelRenderer HindLegLeftShin;
+	public final ModelRenderer HindLegLeftShin;
 
-	public ModelRenderer HindLegLeftHoofIn;
+	public final ModelRenderer HindLegLeftHoofIn;
 
-	public ModelRenderer HindLegLeftHoofOut;
+	public final ModelRenderer HindLegLeftHoofOut;
 
-	public ModelRenderer HindLegLeftHoofMiddle;
+	public final ModelRenderer HindLegLeftHoofMiddle;
 
-	public ModelRenderer FrontLegRightTop;
+	public final ModelRenderer FrontLegRightTop;
 
-	public ModelRenderer FrontLegRightBottom;
+	public final ModelRenderer FrontLegRightBottom;
 
-	public ModelRenderer FrontLegRightHoofIn;
+	public final ModelRenderer FrontLegRightHoofIn;
 
-	public ModelRenderer FrontLegRightHoofOut;
+	public final ModelRenderer FrontLegRightHoofOut;
 
 	public ModelBurrukai()
 	{

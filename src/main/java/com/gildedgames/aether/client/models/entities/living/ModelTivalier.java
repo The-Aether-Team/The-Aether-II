@@ -7,147 +7,147 @@ import net.minecraft.util.math.MathHelper;
 
 public class ModelTivalier extends ModelBase
 {
-	public ModelRenderer BodyMain;
+	public final ModelRenderer BodyMain;
 
-	public ModelRenderer BodyFront;
+	public final ModelRenderer BodyFront;
 
-	public ModelRenderer BodyBack;
+	public final ModelRenderer BodyBack;
 
-	public ModelRenderer TailBase;
+	public final ModelRenderer TailBase;
 
-	public ModelRenderer LegL1;
+	public final ModelRenderer LegL1;
 
-	public ModelRenderer LegR1;
+	public final ModelRenderer LegR1;
 
-	public ModelRenderer ShoulderL;
+	public final ModelRenderer ShoulderL;
 
-	public ModelRenderer ShoulderR;
+	public final ModelRenderer ShoulderR;
 
-	public ModelRenderer Neck;
+	public final ModelRenderer Neck;
 
-	public ModelRenderer WingL1;
+	public final ModelRenderer WingL1;
 
-	public ModelRenderer WingL2;
+	public final ModelRenderer WingL2;
 
-	public ModelRenderer WingLFeatherInt2;
+	public final ModelRenderer WingLFeatherInt2;
 
-	public ModelRenderer WingL3;
+	public final ModelRenderer WingL3;
 
-	public ModelRenderer WingLFeatherInt1;
+	public final ModelRenderer WingLFeatherInt1;
 
-	public ModelRenderer WingLFeatherExt1;
+	public final ModelRenderer WingLFeatherExt1;
 
-	public ModelRenderer WingLFeatherExt2;
+	public final ModelRenderer WingLFeatherExt2;
 
-	public ModelRenderer WingLFeatherExt3;
+	public final ModelRenderer WingLFeatherExt3;
 
-	public ModelRenderer WingR1;
+	public final ModelRenderer WingR1;
 
-	public ModelRenderer WingR2;
+	public final ModelRenderer WingR2;
 
-	public ModelRenderer WingRFeatherInt2;
+	public final ModelRenderer WingRFeatherInt2;
 
-	public ModelRenderer WingR3;
+	public final ModelRenderer WingR3;
 
-	public ModelRenderer WingRFeatherInt1;
+	public final ModelRenderer WingRFeatherInt1;
 
-	public ModelRenderer WingRFeatherExt1;
+	public final ModelRenderer WingRFeatherExt1;
 
-	public ModelRenderer WingRFeatherExt2;
+	public final ModelRenderer WingRFeatherExt2;
 
-	public ModelRenderer WingRFeatherExt3;
+	public final ModelRenderer WingRFeatherExt3;
 
-	public ModelRenderer HeadMain;
+	public final ModelRenderer HeadMain;
 
-	public ModelRenderer HeadBack;
+	public final ModelRenderer HeadBack;
 
-	public ModelRenderer HeadBeakMain;
+	public final ModelRenderer HeadBeakMain;
 
-	public ModelRenderer JawMain;
+	public final ModelRenderer JawMain;
 
-	public ModelRenderer HeadFront;
+	public final ModelRenderer HeadFront;
 
-	public ModelRenderer HeadBrow;
+	public final ModelRenderer HeadBrow;
 
-	public ModelRenderer HeadFeatherL1;
+	public final ModelRenderer HeadFeatherL1;
 
-	public ModelRenderer HeadFeatherR1;
+	public final ModelRenderer HeadFeatherR1;
 
-	public ModelRenderer HeadFeatherL2;
+	public final ModelRenderer HeadFeatherL2;
 
-	public ModelRenderer HeadFeatherR2;
+	public final ModelRenderer HeadFeatherR2;
 
-	public ModelRenderer HeadBeakIntL;
+	public final ModelRenderer HeadBeakIntL;
 
-	public ModelRenderer HeadBeakIntR;
+	public final ModelRenderer HeadBeakIntR;
 
-	public ModelRenderer HeadBeakFrontL;
+	public final ModelRenderer HeadBeakFrontL;
 
-	public ModelRenderer HeadBeakFrontR;
+	public final ModelRenderer HeadBeakFrontR;
 
-	public ModelRenderer JawBack;
+	public final ModelRenderer JawBack;
 
-	public ModelRenderer JawFrontL;
+	public final ModelRenderer JawFrontL;
 
-	public ModelRenderer JawToothL2;
+	public final ModelRenderer JawToothL2;
 
-	public ModelRenderer JawToothR2;
+	public final ModelRenderer JawToothR2;
 
-	public ModelRenderer JawFrontR;
+	public final ModelRenderer JawFrontR;
 
-	public ModelRenderer JawToothL3;
+	public final ModelRenderer JawToothL3;
 
-	public ModelRenderer JawToothR3;
+	public final ModelRenderer JawToothR3;
 
-	public ModelRenderer JawToothL1;
+	public final ModelRenderer JawToothL1;
 
-	public ModelRenderer JawToothL1_1;
+	public final ModelRenderer JawToothL1_1;
 
-	public ModelRenderer TailFeatherR;
+	public final ModelRenderer TailFeatherR;
 
-	public ModelRenderer TailFeatherM;
+	public final ModelRenderer TailFeatherM;
 
-	public ModelRenderer TailFeatherL;
+	public final ModelRenderer TailFeatherL;
 
-	public ModelRenderer LegL2;
+	public final ModelRenderer LegL2;
 
-	public ModelRenderer LegL3;
+	public final ModelRenderer LegL3;
 
-	public ModelRenderer LegLAnkle;
+	public final ModelRenderer LegLAnkle;
 
-	public ModelRenderer LegLFoot;
+	public final ModelRenderer LegLFoot;
 
-	public ModelRenderer LegLToeM;
+	public final ModelRenderer LegLToeM;
 
-	public ModelRenderer LegLToeR;
+	public final ModelRenderer LegLToeR;
 
-	public ModelRenderer LegLToeL;
+	public final ModelRenderer LegLToeL;
 
-	public ModelRenderer LegLTalonM;
+	public final ModelRenderer LegLTalonM;
 
-	public ModelRenderer LegLTalonR;
+	public final ModelRenderer LegLTalonR;
 
-	public ModelRenderer LegLTalonL;
+	public final ModelRenderer LegLTalonL;
 
-	public ModelRenderer LegR2;
+	public final ModelRenderer LegR2;
 
-	public ModelRenderer LegR3;
+	public final ModelRenderer LegR3;
 
-	public ModelRenderer LegRAnkle;
+	public final ModelRenderer LegRAnkle;
 
-	public ModelRenderer LegRFoot;
+	public final ModelRenderer LegRFoot;
 
-	public ModelRenderer LegRToeM;
+	public final ModelRenderer LegRToeM;
 
-	public ModelRenderer LegRToeR;
+	public final ModelRenderer LegRToeR;
 
-	public ModelRenderer LegRToeL;
+	public final ModelRenderer LegRToeL;
 
-	public ModelRenderer LegRTalonM;
+	public final ModelRenderer LegRTalonM;
 
-	public ModelRenderer LegRTalonR;
+	public final ModelRenderer LegRTalonR;
 
-	public ModelRenderer LegRTalonL;
+	public final ModelRenderer LegRTalonL;
 
 	public ModelTivalier()
 	{

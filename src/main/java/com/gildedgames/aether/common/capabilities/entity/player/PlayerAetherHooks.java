@@ -48,7 +48,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 @Mod.EventBusSubscriber
 public class PlayerAetherHooks
 {
-	private static ResourceLocation TELEPORTER_RECIPE = AetherCore.getResource("misc/aether_teleporter");
+	private static final ResourceLocation TELEPORTER_RECIPE = AetherCore.getResource("misc/aether_teleporter");
 
 	@SubscribeEvent
 	public static void onPlayerAddedToWorld(final EntityJoinWorldEvent event)
@@ -154,7 +154,6 @@ public class PlayerAetherHooks
 			aePlayer.onFall(event);
 		}
 	}
-
 
 	@SubscribeEvent
 	public static void onCalculateBreakSpeed(final PlayerEvent.BreakSpeed event)

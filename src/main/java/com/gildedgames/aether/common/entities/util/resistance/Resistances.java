@@ -3,7 +3,6 @@ package com.gildedgames.aether.common.entities.util.resistance;
 import com.gildedgames.aether.common.entities.effects.StatusEffect;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 public class Resistances implements IResistances
@@ -12,10 +11,10 @@ public class Resistances implements IResistances
 
 	public Resistances()
 	{
-		Iterator it = StatusEffect.effectsList.entrySet().iterator();
-		while(it.hasNext()){
-			Map.Entry pair = (Map.Entry)it.next();
-			resistances.put(pair.getKey().toString(), 0.0f);
+		for (Map.Entry<String, StatusEffect> stringStatusEffectEntry : StatusEffect.effectsList.entrySet())
+		{
+			Map.Entry pair = stringStatusEffectEntry;
+			this.resistances.put(pair.getKey().toString(), 0.0f);
 		}
 	}
 

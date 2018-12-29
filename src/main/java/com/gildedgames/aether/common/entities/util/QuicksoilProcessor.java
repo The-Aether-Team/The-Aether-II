@@ -18,6 +18,11 @@ public class QuicksoilProcessor
 	{
 		final EntityLivingBase entity = event.getEntityLiving();
 
+		if (!entity.onGround)
+		{
+			return;
+		}
+
 		if (entity instanceof EntityPlayer)
 		{
 			if (((EntityPlayer) entity).isSpectator() || entity.isInWater())
@@ -26,9 +31,13 @@ public class QuicksoilProcessor
 			}
 		}
 
-		AxisAlignedBB bb = entity.getEntityBoundingBox().offset(0.0D, -0.2D, 0.0D).expand(0.0D, 0.2D, 0.0D);
+		AxisAlignedBB bb = entity.getEntityBoundingBox();
 
-		if (WorldUtil.isBlockInAABB(bb, entity.getEntityWorld(), BlocksAether.quicksoil.getDefaultState()))
+		// Set height of bounding box to 0.5, offset 0.5 into ground
+		// Prevents scanning of all the blocks above an entity... performance optimizations
+		AxisAlignedBB bbBelow = new AxisAlignedBB(bb.minX, bb.minY - 0.5D, bb.minZ, bb.maxX, bb.minY, bb.maxZ);
+
+		if (WorldUtil.isBlockInAABB(bbBelow, entity.getEntityWorld(), BlocksAether.quicksoil.getDefaultState()))
 		{
 			AetherCore.PROXY.modifyEntityQuicksoil(entity);
 		}

@@ -23,7 +23,7 @@ public final class EdgeList implements IDisposable
 		this._deltax = deltax;
 		this._hashsize = 2 * sqrt_nsites;
 
-		this._hash = new ArrayList(this._hashsize);
+		this._hash = new ArrayList<>(this._hashsize);
 
 		// two dummy Halfedges:
 		this.leftEnd = Halfedge.createDummy();

@@ -6,7 +6,7 @@ import net.minecraftforge.oredict.OreDictionary;
 public class OreDictionaryRequirement
 {
 
-	private String key;
+	private final String key;
 
 	private int count;
 
@@ -31,38 +31,37 @@ public class OreDictionaryRequirement
 		this.count += count;
 	}
 
-	@Override
-	public boolean equals(Object obj)
+	public boolean matches(ItemStack stack)
 	{
-		if (obj instanceof ItemStack)
+		int[] stackIds = OreDictionary.getOreIDs(stack);
+		int ore = OreDictionary.getOreID(this.getKey());
+
+		for (int id : stackIds)
 		{
-			ItemStack stack = (ItemStack) obj;
-
-			int[] stackIds = OreDictionary.getOreIDs(stack);
-			int ore = OreDictionary.getOreID(this.getKey());
-
-			for (int id : stackIds)
+			if (ore == id)
 			{
-				if (ore == id)
-				{
-					return true;
-				}
+				return true;
 			}
-		}
-		else if (obj instanceof OreDictionaryRequirement)
-		{
-			OreDictionaryRequirement oreReq = (OreDictionaryRequirement) obj;
-
-			return OreDictionary.getOreID(oreReq.getKey()) == OreDictionary.getOreID(this.getKey());
-		}
-		else if (obj instanceof String)
-		{
-			String key = (String) obj;
-
-			return OreDictionary.getOreID(key) == OreDictionary.getOreID(this.getKey());
 		}
 
 		return false;
 	}
 
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+		{
+			return true;
+		}
+
+		if (obj == null || this.getClass() != obj.getClass())
+		{
+			return false;
+		}
+
+		OreDictionaryRequirement other = (OreDictionaryRequirement) obj;
+
+		return OreDictionary.getOreID(other.getKey()) == OreDictionary.getOreID(this.getKey());
+	}
 }

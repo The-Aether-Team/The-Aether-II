@@ -1,7 +1,6 @@
 package com.gildedgames.aether.client.renderer.entities;
 
 import com.gildedgames.aether.common.entities.blocks.EntityFloatingBlock;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.*;
@@ -33,14 +32,13 @@ public class RenderFloatingBlock extends Render<EntityFloatingBlock>
 			this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 
 			final IBlockState state = floatingBlock.getBlockState();
-			final Block block = state.getBlock();
 
 			final BlockPos pos = new BlockPos(floatingBlock);
 			final World world = floatingBlock.getEntityWorld();
 
 			if (state != world.getBlockState(pos))
 			{
-				if (block.getRenderType(state) == EnumBlockRenderType.MODEL)
+				if (state.getRenderType() == EnumBlockRenderType.MODEL)
 				{
 					RenderHelper.disableStandardItemLighting();
 

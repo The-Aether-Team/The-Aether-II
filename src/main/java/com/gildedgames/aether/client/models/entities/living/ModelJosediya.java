@@ -11,71 +11,71 @@ import net.minecraft.util.math.MathHelper;
  */
 public class ModelJosediya extends ModelBase
 {
-	public ModelRenderer torso1;
+	public final ModelRenderer torso1;
 
-	public ModelRenderer torso4;
+	public final ModelRenderer torso4;
 
-	public ModelRenderer leg_left_upper;
+	public final ModelRenderer leg_left_upper;
 
-	public ModelRenderer leg_right_upper;
+	public final ModelRenderer leg_right_upper;
 
-	public ModelRenderer arm_left_upper;
+	public final ModelRenderer arm_left_upper;
 
-	public ModelRenderer arm_right_upper;
+	public final ModelRenderer arm_right_upper;
 
-	public ModelRenderer wing_left1;
+	public final ModelRenderer wing_left1;
 
-	public ModelRenderer wing_right1;
+	public final ModelRenderer wing_right1;
 
-	public ModelRenderer torso2;
+	public final ModelRenderer torso2;
 
-	public ModelRenderer neck;
+	public final ModelRenderer neck;
 
-	public ModelRenderer torso3;
+	public final ModelRenderer torso3;
 
-	public ModelRenderer leg_left_lower1;
+	public final ModelRenderer leg_left_lower1;
 
-	public ModelRenderer leg_left_lower2;
+	public final ModelRenderer leg_left_lower2;
 
-	public ModelRenderer leg_left_lower3;
+	public final ModelRenderer leg_left_lower3;
 
-	public ModelRenderer leg_right_lower1;
+	public final ModelRenderer leg_right_lower1;
 
-	public ModelRenderer leg_right_lower2;
+	public final ModelRenderer leg_right_lower2;
 
-	public ModelRenderer leg_right_lower3;
+	public final ModelRenderer leg_right_lower3;
 
-	public ModelRenderer arm_left_lower1;
+	public final ModelRenderer arm_left_lower1;
 
-	public ModelRenderer arm_left_lower2;
+	public final ModelRenderer arm_left_lower2;
 
-	public ModelRenderer arm_right_lower1;
+	public final ModelRenderer arm_right_lower1;
 
-	public ModelRenderer arm_right_lower2;
+	public final ModelRenderer arm_right_lower2;
 
-	public ModelRenderer wing_left2;
+	public final ModelRenderer wing_left2;
 
-	public ModelRenderer wing_right2;
+	public final ModelRenderer wing_right2;
 
-	public ModelRenderer head1;
+	public final ModelRenderer head1;
 
-	public ModelRenderer head2;
+	public final ModelRenderer head2;
 
-	public ModelRenderer head3;
+	public final ModelRenderer head3;
 
-	public ModelRenderer head4;
+	public final ModelRenderer head4;
 
-	public ModelRenderer head5;
+	public final ModelRenderer head5;
 
-	public ModelRenderer head6;
+	public final ModelRenderer head6;
 
-	public ModelRenderer head7;
+	public final ModelRenderer head7;
 
-	public ModelRenderer head8;
+	public final ModelRenderer head8;
 
-	public ModelRenderer hair;
+	public final ModelRenderer hair;
 
-	public ModelRenderer head9;
+	public final ModelRenderer head9;
 
 	public ModelJosediya()
 	{

@@ -6,67 +6,67 @@ import net.minecraft.entity.Entity;
 
 public class ModelOutpostCampfire extends ModelBase
 {
-	public ModelRenderer wallright;
+	public final ModelRenderer wallright;
 
-	public ModelRenderer wallleft;
+	public final ModelRenderer wallleft;
 
-	public ModelRenderer wallback;
+	public final ModelRenderer wallback;
 
-	public ModelRenderer wallfront;
+	public final ModelRenderer wallfront;
 
-	public ModelRenderer wallbackleft;
+	public final ModelRenderer wallbackleft;
 
-	public ModelRenderer wallfrontleft;
+	public final ModelRenderer wallfrontleft;
 
-	public ModelRenderer wallfrontright;
+	public final ModelRenderer wallfrontright;
 
-	public ModelRenderer wallbackright;
+	public final ModelRenderer wallbackright;
 
-	public ModelRenderer basefront;
+	public final ModelRenderer basefront;
 
-	public ModelRenderer baseback;
+	public final ModelRenderer baseback;
 
-	public ModelRenderer baseright;
+	public final ModelRenderer baseright;
 
-	public ModelRenderer baseleft;
+	public final ModelRenderer baseleft;
 
-	public ModelRenderer basefrontright;
+	public final ModelRenderer basefrontright;
 
-	public ModelRenderer basefrontleft;
+	public final ModelRenderer basefrontleft;
 
-	public ModelRenderer basebackleft;
+	public final ModelRenderer basebackleft;
 
-	public ModelRenderer basebackright;
+	public final ModelRenderer basebackright;
 
-	public ModelRenderer basemiddle;
+	public final ModelRenderer basemiddle;
 
-	public ModelRenderer log1;
+	public final ModelRenderer log1;
 
-	public ModelRenderer log2;
+	public final ModelRenderer log2;
 
-	public ModelRenderer log3;
+	public final ModelRenderer log3;
 
-	public ModelRenderer log4;
+	public final ModelRenderer log4;
 
-	public ModelRenderer log5;
+	public final ModelRenderer log5;
 
-	public ModelRenderer log6;
+	public final ModelRenderer log6;
 
-	public ModelRenderer stick1;
+	public final ModelRenderer stick1;
 
-	public ModelRenderer stick2;
+	public final ModelRenderer stick2;
 
-	public ModelRenderer stick3;
+	public final ModelRenderer stick3;
 
-	public ModelRenderer stick4;
+	public final ModelRenderer stick4;
 
-	public ModelRenderer stick5;
+	public final ModelRenderer stick5;
 
-	public ModelRenderer stick6;
+	public final ModelRenderer stick6;
 
-	public ModelRenderer flame1;
+	public final ModelRenderer flame1;
 
-	public ModelRenderer flame2;
+	public final ModelRenderer flame2;
 
 	public ModelOutpostCampfire()
 	{

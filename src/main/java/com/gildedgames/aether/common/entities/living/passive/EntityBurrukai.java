@@ -24,7 +24,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -39,15 +38,15 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 
 	private double prevHeadX, prevHeadY, prevHeadZ;
 
-	private MultiPartEntityPart[] parts;
+	private final MultiPartEntityPart[] parts;
 
-	private MultiPartEntityPart head = new MultiPartEntityPart(this, "head", .8F, 1.1F);
+	private final MultiPartEntityPart head = new MultiPartEntityPart(this, "head", .8F, 1.1F);
 
 	public EntityBurrukai(final World world)
 	{
 		super(world);
 
-		this.parts = new MultiPartEntityPart[] { head };
+		this.parts = new MultiPartEntityPart[] { this.head };
 		this.setSize(1.5F, 1.9F);
 
 		this.spawnableBlock = BlocksAether.aether_grass;
@@ -74,15 +73,15 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 	@Override
 	public World getWorld()
 	{
-		return getEntityWorld();
+		return this.getEntityWorld();
 	}
 
 	@Override
 	public boolean attackEntityFromPart(MultiPartEntityPart part, DamageSource source, float damage)
 	{
-		if (hurtResistantTime <= 10)
+		if (this.hurtResistantTime <= 10)
 		{
-			return attackEntityFrom(source, damage * 1.1f);
+			return this.attackEntityFrom(source, damage * 1.1f);
 		}
 		else
 		{
@@ -94,7 +93,7 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 	@Override
 	public MultiPartEntityPart[] getParts()
 	{
-		return parts;
+		return this.parts;
 	}
 
 	@Override
@@ -102,21 +101,21 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 	{
 		super.onLivingUpdate();
 
-		prevHeadX = head.posX;
-		prevHeadY = head.posY;
-		prevHeadZ = head.posZ;
+		this.prevHeadX = this.head.posX;
+		this.prevHeadY = this.head.posY;
+		this.prevHeadZ = this.head.posZ;
 
 		final float headDist = 1.2f;
-		float f = MathUtil.interpolateRotation(prevRenderYawOffset, renderYawOffset, 1);
-		float f1 = MathHelper.cos(-f * 0.017453292F - (float)Math.PI) * headDist;
-		float f2 = MathHelper.sin(-f * 0.017453292F - (float)Math.PI)* headDist;
+		float f = MathUtil.interpolateRotation(this.prevRenderYawOffset, this.renderYawOffset, 1);
+		float f1 = MathHelper.cos(-f * 0.017453292F - (float) Math.PI) * headDist;
+		float f2 = MathHelper.sin(-f * 0.017453292F - (float) Math.PI) * headDist;
 
-		head.setLocationAndAngles(posX - f2, posY + .7f, posZ - f1, 0F, 0F);
-		head.onUpdate();
+		this.head.setLocationAndAngles(this.posX - f2, this.posY + .7f, this.posZ - f1, 0F, 0F);
+		this.head.onUpdate();
 
-		head.prevPosX = prevHeadX;
-		head.prevPosY = prevHeadY;
-		head.prevPosZ = prevHeadZ;
+		this.head.prevPosX = this.prevHeadX;
+		this.head.prevPosY = this.prevHeadY;
+		this.head.prevPosZ = this.prevHeadZ;
 	}
 
 	@Override

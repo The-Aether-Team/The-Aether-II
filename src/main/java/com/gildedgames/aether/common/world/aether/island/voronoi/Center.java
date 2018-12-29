@@ -17,11 +17,11 @@ public class Center
 
 	public Point loc;
 
-	public ArrayList<Corner> corners = Lists.newArrayList();//good
+	public final ArrayList<Corner> corners = Lists.newArrayList();//good
 
-	public ArrayList<Center> neighbors = Lists.newArrayList();//good
+	public final ArrayList<Center> neighbors = Lists.newArrayList();//good
 
-	public ArrayList<Edge> borders = Lists.newArrayList();
+	public final ArrayList<Edge> borders = Lists.newArrayList();
 
 	public boolean border, ocean, water, coast;
 

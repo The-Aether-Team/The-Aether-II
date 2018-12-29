@@ -37,7 +37,7 @@ public class EntityAechorPlant extends EntityAetherMob
 
 	private int poisonLeft;
 
-	private boolean[] petalPresent = new boolean[4];
+	private final boolean[] petalPresent = new boolean[4];
 
 	private int petalsLeft = 4, lastPetalsLeft = 4;
 

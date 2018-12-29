@@ -13,13 +13,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.List;
 
 public class EntityMovingBlock extends Entity
 {
@@ -260,7 +259,9 @@ public class EntityMovingBlock extends Entity
 
 		final IBlockState state = this.getBlockState();
 
-		final List<ItemStack> drops = state.getBlock().getDrops(this.world, pos, state, 0);
+		final NonNullList<ItemStack> drops = NonNullList.create();
+
+		state.getBlock().getDrops(drops, this.world, pos, state, 0);
 
 		for (final ItemStack stack : drops)
 		{

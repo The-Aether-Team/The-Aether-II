@@ -29,23 +29,23 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 
 	private static final SpriteGeneric SPRITE = new SpriteGeneric("aechor_petal.png", 16, 16);
 
-	private static ResourceLocation BODY = AetherCore.getResource("textures/entities/moa/curved_main.png");
+	private static final ResourceLocation BODY = AetherCore.getResource("textures/entities/moa/curved_main.png");
 
-	private static ResourceLocation BODY_HIGHLIGHT = AetherCore.getResource("textures/entities/moa/curved_highlight.png");
+	private static final ResourceLocation BODY_HIGHLIGHT = AetherCore.getResource("textures/entities/moa/curved_highlight.png");
 
-	private static ResourceLocation BEAK = AetherCore.getResource("textures/entities/moa/keratin.png");
+	private static final ResourceLocation BEAK = AetherCore.getResource("textures/entities/moa/keratin.png");
 
-	private static ResourceLocation EYES = AetherCore.getResource("textures/entities/moa/eyes.png");
+	private static final ResourceLocation EYES = AetherCore.getResource("textures/entities/moa/eyes.png");
 
-	private static ResourceLocation TONGUE = AetherCore.getResource("textures/entities/moa/tongue.png");
+	private static final ResourceLocation TONGUE = AetherCore.getResource("textures/entities/moa/tongue.png");
 
-	private static ResourceLocation SADDLE = AetherCore.getResource("textures/entities/moa/saddle.png");
+	private static final ResourceLocation SADDLE = AetherCore.getResource("textures/entities/moa/saddle.png");
 
-	private static ResourceLocation EYES_CLOSED = AetherCore.getResource("textures/entities/moa/eyes_closed.png");
+	private static final ResourceLocation EYES_CLOSED = AetherCore.getResource("textures/entities/moa/eyes_closed.png");
 
-	private static ResourceLocation PUPIL_LEFT = AetherCore.getResource("textures/entities/moa/pupil_left.png");
+	private static final ResourceLocation PUPIL_LEFT = AetherCore.getResource("textures/entities/moa/pupil_left.png");
 
-	private static ResourceLocation PUPIL_RIGHT = AetherCore.getResource("textures/entities/moa/pupil_right.png");
+	private static final ResourceLocation PUPIL_RIGHT = AetherCore.getResource("textures/entities/moa/pupil_right.png");
 
 	public RenderMoa(RenderManager manager)
 	{

@@ -9,33 +9,35 @@ import net.minecraft.util.math.MathHelper;
 
 public class ModelAerbunny extends ModelBase
 {
-	private ModelRenderer body, puff;
+	private final ModelRenderer body;
 
-	private ModelRenderer leg_front_left;
+	private final ModelRenderer puff;
 
-	private ModelRenderer leg_front_right;
+	private final ModelRenderer leg_front_left;
 
-	private ModelRenderer leg_back_right_base;
+	private final ModelRenderer leg_front_right;
 
-	private ModelRenderer leg_back_left_base;
+	private final ModelRenderer leg_back_right_base;
 
-	private ModelRenderer tail;
+	private final ModelRenderer leg_back_left_base;
 
-	private ModelRenderer head;
+	private final ModelRenderer tail;
 
-	private ModelRenderer leg_back_right_foot;
+	private final ModelRenderer head;
 
-	private ModelRenderer leg_back_left_foot;
+	private final ModelRenderer leg_back_right_foot;
 
-	private ModelRenderer ear_right;
+	private final ModelRenderer leg_back_left_foot;
 
-	private ModelRenderer ear_left;
+	private final ModelRenderer ear_right;
 
-	private ModelRenderer nose;
+	private final ModelRenderer ear_left;
 
-	private ModelRenderer whiskers_left;
+	private final ModelRenderer nose;
 
-	private ModelRenderer whiskers_right;
+	private final ModelRenderer whiskers_left;
+
+	private final ModelRenderer whiskers_right;
 
 	public ModelAerbunny()
 	{

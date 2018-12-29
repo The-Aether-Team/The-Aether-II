@@ -18,7 +18,7 @@ import java.util.List;
 
 public class ShopCurrencyPlumproot implements IShopCurrency
 {
-	private List<ICurrencyListener> listeners = Lists.newArrayList();
+	private final List<ICurrencyListener> listeners = Lists.newArrayList();
 
 	private long value;
 
@@ -142,7 +142,7 @@ public class ShopCurrencyPlumproot implements IShopCurrency
 			}
 		}
 
-		if (Long.compare(count, this.value) != 0)
+		if (count != this.value)
 		{
 			long finalCount = count;
 			long old = this.value;

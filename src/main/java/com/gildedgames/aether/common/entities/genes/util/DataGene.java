@@ -10,13 +10,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class DataGene<T> implements Gene
 {
 
-	private String name;
+	private final String name;
 
-	private T data;
+	private final T data;
 
-	private Inheritance inheritance;
+	private final Inheritance inheritance;
 
-	private Mutation[] potentialMutations;
+	private final Mutation[] potentialMutations;
 
 	public DataGene(String name, T data, Inheritance inheritance, Mutation... potentialMutations)
 	{

@@ -30,7 +30,7 @@
 				{ "speaker": "aether:mysterious_figure", "text": "mysterious_figure.greet.sale" }
 			],
 			"end_actions": [
-				{ "type": "openShop" }
+				{ "type": "openShop", "shopIndex": 0 }
 			]
 		}
 	]

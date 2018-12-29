@@ -47,14 +47,14 @@ public class Radial implements HeightAlgorithm
 		final double angle = Math.atan2(p.y, p.x);
 		final double length = 0.5 * (Math.max(Math.abs(p.x), Math.abs(p.y)) + p.length());
 
-		double r1 = 0.5 + 0.40 * Math.sin(startAngle + bumps * angle + Math.cos((bumps + 3) * angle));
-		double r2 = 0.7 - 0.20 * Math.sin(startAngle + bumps * angle - Math.sin((bumps + 2) * angle));
-		if (Math.abs(angle - dipAngle) < dipWidth
-				|| Math.abs(angle - dipAngle + 2 * Math.PI) < dipWidth
-				|| Math.abs(angle - dipAngle - 2 * Math.PI) < dipWidth)
+		double r1 = 0.5 + 0.40 * Math.sin(this.startAngle + this.bumps * angle + Math.cos((this.bumps + 3) * angle));
+		double r2 = 0.7 - 0.20 * Math.sin(this.startAngle + this.bumps * angle - Math.sin((this.bumps + 2) * angle));
+		if (Math.abs(angle - this.dipAngle) < this.dipWidth
+				|| Math.abs(angle - this.dipAngle + 2 * Math.PI) < this.dipWidth
+				|| Math.abs(angle - this.dipAngle - 2 * Math.PI) < this.dipWidth)
 		{
 			r1 = r2 = 0.2;
 		}
-		return !(length < r1 || (length > r1 * ISLAND_FACTOR && length < r2));
+		return !(length < r1 || (length > r1 * this.ISLAND_FACTOR && length < r2));
 	}
 }

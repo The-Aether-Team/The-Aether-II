@@ -3,7 +3,6 @@ package com.gildedgames.aether.common.world.aether.biomes.arctic_peaks;
 import com.gildedgames.aether.api.world.generation.WorldDecoration;
 import com.gildedgames.aether.api.world.generation.WorldDecorationSimple;
 import com.gildedgames.aether.api.world.islands.IIslandData;
-import com.gildedgames.aether.api.world.islands.IIslandDataPartial;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.IBlockSnowy;
@@ -13,6 +12,7 @@ import com.gildedgames.aether.common.util.ChunkNoiseGenerator;
 import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import com.gildedgames.aether.common.world.aether.WorldProviderAether;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
+import com.gildedgames.aether.common.world.aether.biomes.ISnowyBiome;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandVariables;
 import com.gildedgames.aether.common.world.aether.island.gen.highlands.IslandGeneratorHighlands;
 import com.gildedgames.orbis_api.core.BlueprintDefinition;
@@ -34,7 +34,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class BiomeArcticPeaks extends BiomeAetherBase
+public class BiomeArcticPeaks extends BiomeAetherBase implements ISnowyBiome
 {
 
 	public BiomeArcticPeaks(final BiomeProperties properties, final ResourceLocation registryName)
@@ -100,7 +100,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase
 		final int chunkX = pos.getX() >> 4;
 		final int chunkZ = pos.getZ() >> 4;
 
-		IIslandDataPartial island = IslandHelper.get(world, chunkX, chunkZ);
+		IIslandData island = IslandHelper.get(world, chunkX, chunkZ);
 
 		if (island == null)
 		{
