@@ -44,7 +44,6 @@ public class EntityVaranys extends EntityAetherMob implements IEntityMultiPart
 		this.tasks.addTask(2, new EntityAILeapAtTarget(this, 0.4F));
 		this.tasks.addTask(3, new EntityAIAttackMelee(this, 1D, false));
 		this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		//		this.tasks.addTask(1, new EntityAIBreakBlocks(this, 1F, destroyList));
 		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
 
@@ -54,6 +53,7 @@ public class EntityVaranys extends EntityAetherMob implements IEntityMultiPart
 		this.head.setInvisible(true);
 		this.tail1.setInvisible(true);
 		this.tail2.setInvisible(true);
+
 		this.experienceValue = 7;
 
 		this.old = new Vec3d[this.parts.length];
@@ -65,8 +65,8 @@ public class EntityVaranys extends EntityAetherMob implements IEntityMultiPart
 		super.applyEntityAttributes();
 
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(26.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.5D);
 		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2.0D);
 	}
 
