@@ -140,14 +140,14 @@ public class WorldEvents
 		flying.addEntry(aerwhale);
 
 		/** UNDERGROUND **/
-		SpawnHandler underground = new SpawnHandler("aether_underground").chunkArea(4).targetEntityCountPerArea(4).updateFrequencyInTicks(1200);
+		SpawnHandler underground = new SpawnHandler("aether_underground").chunkArea(4).targetEntityCountPerArea(10).updateFrequencyInTicks(1200);
 		daytimeHostiles.addWorldCondition(new CheckDimension(DimensionsAether.AETHER));
 
 		SpawnEntry cockatriceUnderground = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityCockatrice.class, 12F, 1, 3,
 				new UndergroundPositionSelector())
 				.addCondition(stoneCheck).addCondition(isUnderground).addCondition(new CheckBlockAtPosition(Blocks.AIR));
 
-		SpawnEntry varanysUnderground = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityVaranys.class, 12f, 1, 3,
+		SpawnEntry varanysUnderground = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityVaranys.class, 20f, 1, 3,
 				new UndergroundPositionSelector())
 				.addCondition(stoneCheck).addCondition(isUnderground).addCondition(new CheckBiome(BiomesAether.ARCTIC_PEAKS)).
 						addCondition(new CheckLightLevel(5)).addCondition(new CheckBlockAtPosition(Blocks.AIR));
