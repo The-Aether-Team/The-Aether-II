@@ -241,15 +241,6 @@ public class SpawnHandler implements ISpawnHandler
 
 					if (!manager.getWorld().isBlockLoaded(new BlockPos(posX, 0, posZ)))
 					{
-						continue;
-					}
-
-					int posY = entry.getPositionSelector().getPosY(manager.getWorld(), posX, posZ);
-
-					BlockPos spawnAt = new BlockPos(posX, posY, posZ);
-
-					if (!manager.getWorld().isBlockLoaded(spawnAt, true))
-					{
 						if (attempts < MAX_ATTEMPTS)
 						{
 							attempts++;
@@ -258,6 +249,10 @@ public class SpawnHandler implements ISpawnHandler
 
 						continue;
 					}
+
+					int posY = entry.getPositionSelector().getPosY(manager.getWorld(), posX, posZ);
+
+					BlockPos spawnAt = new BlockPos(posX, posY, posZ);
 
 					if (manager.getWorld().isAnyPlayerWithinRangeAt(posX, posY, posZ, 24.0D))
 					{
