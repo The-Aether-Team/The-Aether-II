@@ -398,7 +398,7 @@ public class ItemsAether
 
 		r.register("plumproot_mash", plumproot_mash);
 		r.register("plumproot_pie", plumproot_pie);
-		r.register("winter_hat", winter_hat);
+		r.register("winter_hat", winter_hat.setCreativeTab(CreativeTabsAether.ARMOR));
 	}
 
 	public static Collection<Item> getRegisteredItems()
