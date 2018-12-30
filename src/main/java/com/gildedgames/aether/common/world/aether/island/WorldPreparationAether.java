@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.world.aether.island;
 
 import com.gildedgames.aether.api.util.NoiseUtil;
 import com.gildedgames.aether.api.util.OpenSimplexNoise;
+import com.gildedgames.aether.api.world.IAetherChunkColumnInfo;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.common.util.ChunkNoiseGenerator;
@@ -54,22 +55,22 @@ public class WorldPreparationAether
 		this.veinGenerator = new WorldGenUndergroundVeins();
 	}
 
-	public void generateBaseTerrain(Biome[] biomes, final ChunkPrimer primer, final IIslandData island, final int chunkX, final int chunkZ)
+	public void generateBaseTerrain(IAetherChunkColumnInfo info, Biome[] biomes, final ChunkPrimer primer, final IIslandData island, final int chunkX, final int chunkZ)
 	{
 		ChunkMask mask = new ChunkMask();
 
 		this.generateCloudLayer(island, mask, chunkX, chunkZ);
 
 		final IIslandGenerator generator = island.getGenerator();
-		generator.genMask(biomes, this.noise, this.access, mask, island, chunkX, chunkZ);
+		generator.genMask(info, mask, island, chunkX, chunkZ);
 
 		this.replaceBiomeBlocks(island, mask, chunkX, chunkZ);
 
-		this.caveGenerator.generate(this.world, chunkX, chunkZ, mask);
+		this.caveGenerator.generate(this.world, chunkX, chunkZ, mask, biomes);
 
 		if (island.getBiome() instanceof BiomeArcticPeaks)
 		{
-			this.veinGenerator.generate(this.world, chunkX, chunkZ, mask);
+			this.veinGenerator.generate(this.world, chunkX, chunkZ, mask, biomes);
 		}
 
 		generator.genChunk(biomes, this.noise, this.access, mask, primer, island, chunkX, chunkZ);
@@ -159,12 +160,17 @@ public class WorldPreparationAether
 		};
 	}
 
-	public void generateBaseTerrainMask(Biome[] biomes, ChunkMask mask, IIslandData island, int chunkX, int chunkZ)
+	public void generateBaseTerrainMask(IAetherChunkColumnInfo info, Biome[] biomes, ChunkMask mask, IIslandData island, int chunkX, int chunkZ)
 	{
-		island.getGenerator().genMask(biomes, this.noise, this.access, mask, island, chunkX, chunkZ);
+		island.getGenerator().genMask(info, mask, island, chunkX, chunkZ);
 
 		this.replaceBiomeBlocks(island, mask, chunkX, chunkZ);
 
-		this.caveGenerator.generate(this.world, chunkX, chunkZ, mask);
+		this.caveGenerator.generate(this.world, chunkX, chunkZ, mask, biomes);
+	}
+
+	public Object generateChunkColumnInfo(Biome[] biomes, IIslandData island, int chunkX, int chunkZ)
+	{
+		return island.getGenerator().genInfo(biomes, this.noise, island, chunkX, chunkZ);
 	}
 }

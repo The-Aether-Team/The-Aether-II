@@ -1,8 +1,10 @@
 package com.gildedgames.aether.common.world.aether.island;
 
+import com.gildedgames.aether.api.world.IAetherChunkColumnInfo;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import com.gildedgames.aether.common.world.aether.WorldProviderAether;
+import com.gildedgames.aether.common.world.aether.prep.AetherChunkColumnInfo;
 import com.gildedgames.orbis_api.core.PlacedBlueprint;
 import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
 import com.gildedgames.orbis_api.processing.BlockAccessChunkPrimer;
@@ -66,7 +68,12 @@ public class ChunkGeneratorAether implements IChunkGenerator
 
 		ChunkPrimer primer = new ChunkPrimer();
 
-		this.threadSafeGenerateChunk(biomes, primer, islandData, chunkX, chunkZ);
+		Object obj = this.generateChunkColumnInfo(biomes, islandData, chunkX, chunkZ);
+
+		AetherChunkColumnInfo info = new AetherChunkColumnInfo(1);
+		info.setIslandData(0, obj);
+
+		this.threadSafeGenerateChunk(info, biomes, primer, islandData, chunkX, chunkZ);
 
 		final Chunk chunk = new Chunk(this.world, primer, chunkX, chunkZ);
 
@@ -75,11 +82,11 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		return chunk;
 	}
 
-	public void threadSafeGenerateChunk(Biome[] biomes, ChunkPrimer primer, IIslandData islandData, int chunkX, int chunkZ)
+	public void threadSafeGenerateChunk(IAetherChunkColumnInfo info, Biome[] biomes, ChunkPrimer primer, IIslandData islandData, int chunkX, int chunkZ)
 	{
 		ChunkPos chunkPos = new ChunkPos(chunkX, chunkZ);
 
-		this.preparation.generateBaseTerrain(biomes, primer, islandData, chunkX, chunkZ);
+		this.preparation.generateBaseTerrain(info, biomes, primer, islandData, chunkX, chunkZ);
 
 		final DataPrimer dataPrimer = new DataPrimer(new BlockAccessChunkPrimer(this.world, primer));
 
@@ -169,8 +176,13 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		return null;
 	}
 
-	public void threadSafeGenerateMask(Biome[] biomes, ChunkMask mask, IIslandData islandData, int x, int y)
+	public void threadSafeGenerateMask(IAetherChunkColumnInfo info, Biome[] biomes, ChunkMask mask, IIslandData islandData, int x, int y)
 	{
-		this.preparation.generateBaseTerrainMask(biomes, mask, islandData, x, y);
+		this.preparation.generateBaseTerrainMask(info, biomes, mask, islandData, x, y);
+	}
+
+	public Object generateChunkColumnInfo(Biome[] biomes, IIslandData islandData, int chunkX, int chunkZ)
+	{
+		return this.preparation.generateChunkColumnInfo(biomes, islandData, chunkX, chunkZ);
 	}
 }

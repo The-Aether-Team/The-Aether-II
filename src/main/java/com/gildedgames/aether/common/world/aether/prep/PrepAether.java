@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.world.aether.prep;
 
+import com.gildedgames.aether.api.world.IAetherChunkColumnInfo;
 import com.gildedgames.aether.api.world.islands.IIslandBounds;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.common.AetherCore;
@@ -25,7 +26,7 @@ import net.minecraft.world.gen.IChunkGenerator;
 
 import java.util.Random;
 
-public class PrepAether implements IPrepRegistryEntry
+public class PrepAether implements IPrepRegistryEntry<IAetherChunkColumnInfo>
 {
 	public static final ResourceLocation UNIQUE_ID = AetherCore.getResource("islands");
 
@@ -126,12 +127,17 @@ public class PrepAether implements IPrepRegistryEntry
 
 			IIslandData islandData = aetherData.getIslandData();
 
-			aetherGen.threadSafeGenerateChunk(biomes, chunkPrimer, islandData, chunkX, chunkZ);
+			Object obj = aetherGen.generateChunkColumnInfo(biomes, islandData, chunkX, chunkZ);
+
+			AetherChunkColumnInfo info = new AetherChunkColumnInfo(1);
+			info.setIslandData(0, obj);
+
+			aetherGen.threadSafeGenerateChunk(info, biomes, chunkPrimer, islandData, chunkX, chunkZ);
 		}
 	}
 
 	@Override
-	public void threadSafeGenerateMask(World world, IPrepSectorData sectorData, Biome[] biomes, ChunkMask mask, int x, int y)
+	public void threadSafeGenerateMask(IAetherChunkColumnInfo info, World world, IPrepSectorData sectorData, Biome[] biomes, ChunkMask mask, int x, int y)
 	{
 		IChunkGenerator generator = world.provider.createChunkGenerator();
 
@@ -142,7 +148,7 @@ public class PrepAether implements IPrepRegistryEntry
 
 			IIslandData islandData = aetherData.getIslandData();
 
-			aetherGen.threadSafeGenerateMask(biomes, mask, islandData, x, y);
+			aetherGen.threadSafeGenerateMask(info, biomes, mask, islandData, x, y);
 		}
 	}
 
@@ -150,5 +156,28 @@ public class PrepAether implements IPrepRegistryEntry
 	public IChunkMaskTransformer createMaskTransformer()
 	{
 		return new IslandChunkMaskTransformer();
+	}
+
+	@Override
+	public AetherChunkColumnInfo generateChunkColumnInfo(World world, IPrepSectorData sectorData, Biome[] biomes, int chunkX, int chunkY)
+	{
+		IChunkGenerator generator = world.provider.createChunkGenerator();
+
+		if (generator instanceof ChunkGeneratorAether && sectorData instanceof PrepSectorDataAether)
+		{
+			ChunkGeneratorAether aetherGen = (ChunkGeneratorAether) generator;
+			PrepSectorDataAether aetherData = (PrepSectorDataAether) sectorData;
+
+			IIslandData islandData = aetherData.getIslandData();
+
+			Object obj = aetherGen.generateChunkColumnInfo(biomes, islandData, chunkX, chunkY);
+
+			AetherChunkColumnInfo info = new AetherChunkColumnInfo(1);
+			info.setIslandData(0, obj);
+
+			return info;
+		}
+
+		return null;
 	}
 }

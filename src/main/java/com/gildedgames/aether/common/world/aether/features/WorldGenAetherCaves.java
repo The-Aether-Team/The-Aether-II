@@ -214,10 +214,8 @@ public class WorldGenAetherCaves
 		return data.getBlock(x, y, z) == IslandBlockType.WATER_BLOCK.ordinal();
 	}
 
-	public void generate(World worldIn, int x, int z, ChunkMask mask)
+	public void generate(World worldIn, int x, int z, ChunkMask mask, Biome[] biomes)
 	{
-		Biome[] biomes = worldIn.provider.getBiomeProvider().getBiomes(null, x, z, 16, 16, true);
-
 		XoShiRoRandom rand = this.rand.get();
 		rand.setSeed(worldIn.getSeed());
 

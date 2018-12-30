@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.world.aether.island.gen.highlands;
 
 import com.gildedgames.aether.api.util.NoiseUtil;
 import com.gildedgames.aether.api.util.OpenSimplexNoise;
+import com.gildedgames.aether.api.world.IAetherChunkColumnInfo;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
@@ -69,12 +70,74 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 		return data;
 	}
 
+
 	@Override
-	public void genMask(Biome[] biomes, final OpenSimplexNoise noise, final IBlockAccessExtended access, final ChunkMask mask,
-			final IIslandData island,
-			final int chunkX,
-			final int chunkZ)
+	public void genMask(IAetherChunkColumnInfo info, ChunkMask mask, IIslandData island, int chunkX, int chunkZ)
 	{
+		HighlandMegacostColumnInfo column = info.getIslandData(0, HighlandMegacostColumnInfo.class);
+
+		for (int x = 0; x < 16; x++)
+		{
+			for (int z = 0; z < 16; z++)
+			{
+				double heightSample = column.heightSample_xz[x][z];
+
+				if (heightSample == 0.0D)
+				{
+					continue;
+				}
+
+				double bottomMaxY = column.bottomMaxY_xz[x][z];
+				double maxY = column.maxY_xz[x][z];
+
+				double cutoffPoint = column.cutoffPoint_xz[x][z];
+				double topSample = column.topSample_xz[x][z];
+				double bottomHeight = column.bottomHeight_xz[x][z];
+
+				for (int y = (int) bottomMaxY; y > bottomMaxY - bottomHeight; y--)
+				{
+					if (y < 0)
+					{
+						continue;
+					}
+
+					if (heightSample < cutoffPoint + 0.10 && y == 100)
+					{
+						mask.setBlock(x, y, z, IslandBlockType.COAST_BLOCK.ordinal());
+					}
+					else
+					{
+						mask.setBlock(x, y, z, IslandBlockType.STONE_BLOCK.ordinal());
+					}
+				}
+
+				for (int y = (int) bottomMaxY; y < maxY; y++)
+				{
+					if ((topSample < cutoffPoint + 0.10 && y == 100))
+					{
+						mask.setBlock(x, y, z, IslandBlockType.COAST_BLOCK.ordinal());
+					}
+					else
+					{
+						mask.setBlock(x, y, z, IslandBlockType.STONE_BLOCK.ordinal());
+					}
+				}
+			}
+		}
+	}
+
+	@Override
+	public void genChunk(Biome[] biomes, OpenSimplexNoise noise, IBlockAccessExtended access, ChunkMask mask, ChunkPrimer primer, IIslandData island,
+			int chunkX, int chunkZ)
+	{
+		mask.createChunk(primer, new IslandChunkMaskTransformer());
+	}
+
+	@Override
+	public Object genInfo(Biome[] biomes, OpenSimplexNoise noise, IIslandData island, int chunkX, int chunkZ)
+	{
+		HighlandMegacostColumnInfo info = new HighlandMegacostColumnInfo();
+
 		final double[] heightMap = generateNoise(noise, island, chunkX, chunkZ);
 
 		final int posX = chunkX * 16;
@@ -85,14 +148,6 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 
 		final double radiusX = island.getBounds().getWidth() / 2.0;
 		final double radiusZ = island.getBounds().getLength() / 2.0;
-
-
-		double[][] bottomMaxY_xz = new double[16][16];
-		double[][] maxY_xz = new double[16][16];
-		double[][] heightSample_xz = new double[16][16];
-		double[][] cutoffPoint_xz = new double[16][16];
-		double[][] topSample_xz = new double[16][16];
-		double[][] bottomHeight_xz = new double[16][16];
 
 		for (int x = 0; x < 16; x++)
 		{
@@ -169,74 +224,28 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 						maxY = 254.0D;
 					}
 
-					maxY_xz[x][z] = maxY;
-				}
+					info.maxY_xz[x][z] = maxY;
 
-				bottomMaxY_xz[x][z] = bottomMaxY;
-				bottomHeight_xz[x][z] = (bottomHeight * bottomSample);
+					info.bottomMaxY_xz[x][z] = bottomMaxY;
+					info.bottomHeight_xz[x][z] = (bottomHeight * bottomSample);
 
-				heightSample_xz[x][z] = heightSample;
-				cutoffPoint_xz[x][z] = cutoffPoint;
-				topSample_xz[x][z] = topSample;
-				bottomHeight_xz[x][z] = bottomHeight;
-			}
-		}
-
-		for (int x = 0; x < 16; x++)
-		{
-			for (int z = 0; z < 16; z++)
-			{
-				double heightSample = heightSample_xz[x][z];
-
-				if (heightSample <= 0.0D)
-				{
-					return;
-				}
-
-				double bottomMaxY = bottomMaxY_xz[x][z];
-				double maxY = maxY_xz[x][z];
-
-				double cutoffPoint = cutoffPoint_xz[x][z];
-				double topSample = topSample_xz[x][z];
-				double bottomHeight = bottomHeight_xz[x][z];
-
-				for (int y = (int) bottomMaxY; y > bottomMaxY - bottomHeight; y--)
-				{
-					if (y < 0)
-					{
-						continue;
-					}
-
-					if (heightSample < cutoffPoint + 0.10 && y == 100)
-					{
-						mask.setBlock(x, y, z, IslandBlockType.COAST_BLOCK.ordinal());
-					}
-					else
-					{
-						mask.setBlock(x, y, z, IslandBlockType.STONE_BLOCK.ordinal());
-					}
-				}
-
-				for (int y = (int) bottomMaxY; y < maxY; y++)
-				{
-					if ((topSample < cutoffPoint + 0.10 && y == 100))
-					{
-						mask.setBlock(x, y, z, IslandBlockType.COAST_BLOCK.ordinal());
-					}
-					else
-					{
-						mask.setBlock(x, y, z, IslandBlockType.STONE_BLOCK.ordinal());
-					}
+					info.heightSample_xz[x][z] = heightSample;
+					info.cutoffPoint_xz[x][z] = cutoffPoint;
+					info.topSample_xz[x][z] = topSample;
 				}
 			}
 		}
+
+		return info;
 	}
 
-	@Override
-	public void genChunk(Biome[] biomes, OpenSimplexNoise noise, IBlockAccessExtended access, ChunkMask mask, ChunkPrimer primer, IIslandData island,
-			int chunkX, int chunkZ)
+	private class HighlandMegacostColumnInfo
 	{
-		mask.createChunk(primer, new IslandChunkMaskTransformer());
+		final double[][] bottomMaxY_xz = new double[16][16];
+		final double[][] maxY_xz = new double[16][16];
+		final double[][] heightSample_xz = new double[16][16];
+		final double[][] cutoffPoint_xz = new double[16][16];
+		final double[][] topSample_xz = new double[16][16];
+		final double[][] bottomHeight_xz = new double[16][16];
 	}
-
 }
