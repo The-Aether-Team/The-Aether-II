@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.world.aether.island.data;
 
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.orbis_api.core.PlacedBlueprint;
-import com.gildedgames.orbis_api.preparation.IPrepChunkManager;
+import com.gildedgames.orbis_api.preparation.IPrepRegistryEntry;
 import com.gildedgames.orbis_api.preparation.IPrepSectorData;
 import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
 import com.gildedgames.orbis_api.preparation.impl.util.BlockAccessPrep;
@@ -17,9 +17,9 @@ public class BlockAccessIsland extends BlockAccessPrep
 {
 	private final IIslandData island;
 
-	public BlockAccessIsland(World world, IIslandData island, IPrepSectorData sectorData, IPrepChunkManager iPrepChunkManager)
+	public BlockAccessIsland(World world, IIslandData island, IPrepSectorData sectorData, IPrepRegistryEntry registryEntry)
 	{
-		super(world, sectorData, iPrepChunkManager);
+		super(world, sectorData, registryEntry);
 
 		this.island = island;
 	}

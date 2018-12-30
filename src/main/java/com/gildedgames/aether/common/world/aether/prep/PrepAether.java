@@ -12,7 +12,6 @@ import com.gildedgames.aether.common.world.aether.island.data.IslandBounds;
 import com.gildedgames.aether.common.world.aether.island.data.IslandData;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandChunkMaskTransformer;
 import com.gildedgames.orbis_api.preparation.IChunkMaskTransformer;
-import com.gildedgames.orbis_api.preparation.IPrepChunkManager;
 import com.gildedgames.orbis_api.preparation.IPrepRegistryEntry;
 import com.gildedgames.orbis_api.preparation.IPrepSectorData;
 import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
@@ -49,7 +48,7 @@ public class PrepAether implements IPrepRegistryEntry
 	}
 
 	@Override
-	public void postSectorDataCreate(World world, IPrepSectorData sectorData, IPrepChunkManager iPrepChunkManager)
+	public void postSectorDataCreate(World world, IPrepSectorData sectorData)
 	{
 		if (sectorData instanceof PrepSectorDataAether)
 		{
@@ -65,7 +64,7 @@ public class PrepAether implements IPrepRegistryEntry
 				islandData.addComponents(biomeAether.createIslandComponents(islandData));
 
 				biomeAether.getBiomeDecorator().prepareDecorationsWholeIsland(world,
-						new BlockAccessIsland(world, islandData, sectorData, iPrepChunkManager), islandData, sectorData,
+						new BlockAccessIsland(world, islandData, sectorData, this), islandData, sectorData,
 						new XoShiRoRandom(islandData.getSeed()));
 			}
 		}
