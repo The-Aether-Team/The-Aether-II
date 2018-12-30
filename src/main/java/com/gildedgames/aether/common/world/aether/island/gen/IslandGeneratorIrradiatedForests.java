@@ -205,67 +205,67 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 
 				final double heightSample = sample + 1.0 - dist;
 
-				final double bottomMaxY = 100;
-
-				final double topHeight = 80;
-
 				final double cutoffPoint = 0.325;
-
-				boolean cracked = false;
-
-				final int radius = Math.max(2, (int) (16.0 * (1.0 - dist)));
-
-				double closestDist = Double.POSITIVE_INFINITY;
-
-				for (int x1 = -radius; x1 < radius; x1++)
-				{
-					for (int z1 = -radius; z1 < radius; z1++)
-					{
-						final int crackX = worldX + x1;
-						final int crackZ = worldZ + z1;
-
-						final CrackChunk crackChunk = data.getCracks(crackX >> 4, crackZ >> 4);
-
-						if (crackChunk != null)
-						{
-							final CrackPos crack = crackChunk.get(Math.abs(crackX % 16), Math.abs(crackZ % 16));
-
-							if (crack != null)
-							{
-								final double crackDistX = Math.abs(x1 * (1.0 / radius));
-								final double crackDistZ = Math.abs(z1 * (1.0 / radius));
-
-								final double crackDist = FastMathUtil.hypot(crackDistX, crackDistZ);
-
-								if (closestDist > crackDist)
-								{
-									closestDist = crackDist;
-								}
-
-								cracked = true;
-							}
-						}
-					}
-				}
-
-				closestDist = Math.min(1.0, closestDist);
-
-				final double normal = NoiseUtil.normalise(sample);
-				final double cutoffPointDist = Math.abs(cutoffPoint - heightSample);
-				final double diff = Math.max(0.0, cutoffPoint - cutoffPointDist) * 8.0;
-
-				double bottomHeightMod = Math.pow(normal, 0.2);
-
-				final double bottomHeight = 100;
-
-				final double terraceSample = this.interpolate(terraceMap, x, z) + 1.0;
-
-				final double topSample = NoiseUtil.lerp(heightSample, terraceSample - diff > 0.7 ? terraceSample - diff : heightSample, 0.7);
-
-				double bottomSample = Math.min(1.0D, normal + 0.25);
 
 				if (heightSample > cutoffPoint)
 				{
+					final double bottomMaxY = 100;
+
+					final double topHeight = 80;
+
+					boolean cracked = false;
+
+					final int radius = Math.max(2, (int) (16.0 * (1.0 - dist)));
+
+					double closestDist = Double.POSITIVE_INFINITY;
+
+					for (int x1 = -radius; x1 < radius; x1++)
+					{
+						for (int z1 = -radius; z1 < radius; z1++)
+						{
+							final int crackX = worldX + x1;
+							final int crackZ = worldZ + z1;
+
+							final CrackChunk crackChunk = data.getCracks(crackX >> 4, crackZ >> 4);
+
+							if (crackChunk != null)
+							{
+								final CrackPos crack = crackChunk.get(Math.abs(crackX % 16), Math.abs(crackZ % 16));
+
+								if (crack != null)
+								{
+									final double crackDistX = Math.abs(x1 * (1.0 / radius));
+									final double crackDistZ = Math.abs(z1 * (1.0 / radius));
+
+									final double crackDist = FastMathUtil.hypot(crackDistX, crackDistZ);
+
+									if (closestDist > crackDist)
+									{
+										closestDist = crackDist;
+									}
+
+									cracked = true;
+								}
+							}
+						}
+					}
+
+					closestDist = Math.min(1.0, closestDist);
+
+					final double normal = NoiseUtil.normalise(sample);
+					final double cutoffPointDist = Math.abs(cutoffPoint - heightSample);
+					final double diff = Math.max(0.0, cutoffPoint - cutoffPointDist) * 8.0;
+
+					double bottomHeightMod = Math.pow(normal, 0.2);
+
+					final double bottomHeight = 100;
+
+					final double terraceSample = this.interpolate(terraceMap, x, z) + 1.0;
+
+					final double topSample = NoiseUtil.lerp(heightSample, terraceSample - diff > 0.7 ? terraceSample - diff : heightSample, 0.7);
+
+					double bottomSample = Math.min(1.0D, normal + 0.25);
+
 					double islandEdgeBlendRange = 0.1;
 					double islandBottomBlendRange = 0.25;
 

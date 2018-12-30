@@ -188,107 +188,109 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 
 		for (int x = 0; x < 16; x++)
 		{
+			int worldX = posX + x;
+
+			double distX = Math.abs((centerX - worldX) * (1.0 / radiusX));
+
 			for (int z = 0; z < 16; z++)
 			{
-				int worldX = posX + x;
 				int worldZ = posZ + z;
 
 				double sample = heightMap.interpolate(x, z);
 
-				double distX = Math.abs((centerX - worldX) * (1.0 / radiusX));
 				double distZ = Math.abs((centerZ - worldZ) * (1.0 / radiusZ));
 
 				// Get distance from center of Island
 				double dist = Math.sqrt(distX * distX + distZ * distZ) / 1.0D;
 
 				double heightSample = sample + 1.0 - dist;
-
-				boolean magnetic = false;
-
-				double bottomMaxY = 100;
-
 				double cutoffPoint = 0.325;
-
-				double normal = NoiseUtil.normalise(sample);
-				double cutoffPointDist = Math.abs(cutoffPoint - heightSample);
-				double diff = Math.max(0.0, cutoffPoint - cutoffPointDist) * 8.0;
-
-				double bottomHeight = 100;
-
-				double filteredSample = this.v.getHeightSampleFilter().transform(heightSample);
-
-				if (terraceMap != null)
-				{
-					double terraceSample = terraceMap.interpolate(x, z) + 1.0;
-
-					filteredSample = NoiseUtil.lerp(heightSample, terraceSample - diff > 0.7 ? terraceSample - diff : heightSample, 0.7);
-				}
-
-				filteredSample = Math.pow(filteredSample, 1.0 + (this.v.getCoastSpread() * 0.25));
-
-				double lakeX = (worldX) / this.v.getLakeScale();
-				double lakeZ = (worldZ) / this.v.getLakeScale();
-
-				double lakeSample = NoiseUtil.something(noise, lakeX, lakeZ);
-
-				double dif = MathHelper.clamp(Math.abs(cutoffPoint - heightSample) * 10.0, 0.0, 1.0);
-
-				double lakeNoise = (lakeSample + this.v.getLakeConcentrationModifier()) * dif;
-				double lakeBottomValue = this.v.getLakeBottomValueFilter().transform(cutoffPoint);
-
-				boolean water = false;
-
-				if (lakeNoise > this.v.getLakeThreshold())
-				{
-					if (lakeNoise < this.v.getLakeThreshold() + this.v.getLakeBlendRange())
-					{
-						double blend = (lakeNoise - this.v.getLakeThreshold()) * (1.0 / this.v.getLakeBlendRange());
-
-						filteredSample = NoiseUtil.lerp(filteredSample, lakeBottomValue, blend);
-					}
-					else
-					{
-						water = true;
-					}
-				}
-
-				double magneticSample = filteredSample;
-
-				MagneticHillPillar currentPillar = null;
-
-				if (this.v.hasMagneticPillars())
-				{
-					if (magneticHillsData != null)
-					{
-						MagneticHillSampleData magneticData = this.shapeMagneticShafts(magneticHillsData, magneticSample, x, z, chunkX, chunkZ);
-
-						magneticSample = magneticData.height;
-						currentPillar = magneticData.pillar;
-					}
-
-					if (magneticSample > 0.5)
-					{
-						magnetic = true;
-					}
-
-					if (magnetic)
-					{
-						bottomMaxY += currentPillar.getPos().getY();
-						bottomHeight = 55;
-					}
-				}
-
-				if (bottomMaxY < 0.0D)
-				{
-					bottomMaxY = 0.0D;
-				}
-
-				double topHeight = magnetic ? currentPillar.getTopHeight() : this.v.getMaxTerrainHeight();
-
-				double bottomSample = magnetic ? magneticSample : Math.min(1.0D, normal + 0.25);
 
 				if (heightSample > cutoffPoint)
 				{
+
+					boolean magnetic = false;
+
+					double bottomMaxY = 100;
+
+					double normal = NoiseUtil.normalise(sample);
+					double cutoffPointDist = Math.abs(cutoffPoint - heightSample);
+					double diff = Math.max(0.0, cutoffPoint - cutoffPointDist) * 8.0;
+
+					double bottomHeight = 100;
+
+					double filteredSample = this.v.getHeightSampleFilter().transform(heightSample);
+
+					if (terraceMap != null)
+					{
+						double terraceSample = terraceMap.interpolate(x, z) + 1.0;
+
+						filteredSample = NoiseUtil.lerp(heightSample, terraceSample - diff > 0.7 ? terraceSample - diff : heightSample, 0.7);
+					}
+
+					filteredSample = Math.pow(filteredSample, 1.0 + (this.v.getCoastSpread() * 0.25));
+
+					double lakeX = (worldX) / this.v.getLakeScale();
+					double lakeZ = (worldZ) / this.v.getLakeScale();
+
+					double lakeSample = NoiseUtil.something(noise, lakeX, lakeZ);
+
+					double dif = MathHelper.clamp(Math.abs(cutoffPoint - heightSample) * 10.0, 0.0, 1.0);
+
+					double lakeNoise = (lakeSample + this.v.getLakeConcentrationModifier()) * dif;
+					double lakeBottomValue = this.v.getLakeBottomValueFilter().transform(cutoffPoint);
+
+					boolean water = false;
+
+					if (lakeNoise > this.v.getLakeThreshold())
+					{
+						if (lakeNoise < this.v.getLakeThreshold() + this.v.getLakeBlendRange())
+						{
+							double blend = (lakeNoise - this.v.getLakeThreshold()) * (1.0 / this.v.getLakeBlendRange());
+
+							filteredSample = NoiseUtil.lerp(filteredSample, lakeBottomValue, blend);
+						}
+						else
+						{
+							water = true;
+						}
+					}
+
+					double magneticSample = filteredSample;
+
+					MagneticHillPillar currentPillar = null;
+
+					if (this.v.hasMagneticPillars())
+					{
+						if (magneticHillsData != null)
+						{
+							MagneticHillSampleData magneticData = this.shapeMagneticShafts(magneticHillsData, magneticSample, x, z, chunkX, chunkZ);
+
+							magneticSample = magneticData.height;
+							currentPillar = magneticData.pillar;
+						}
+
+						if (magneticSample > 0.5)
+						{
+							magnetic = true;
+						}
+
+						if (magnetic)
+						{
+							bottomMaxY += currentPillar.getPos().getY();
+							bottomHeight = 55;
+						}
+					}
+
+					if (bottomMaxY < 0.0D)
+					{
+						bottomMaxY = 0.0D;
+					}
+
+					double topHeight = magnetic ? currentPillar.getTopHeight() : this.v.getMaxTerrainHeight();
+
+					double bottomSample = magnetic ? magneticSample : Math.min(1.0D, normal + 0.25);
+
 					double islandEdgeBlendRange = 0.1;
 					double islandBottomBlendRange = 0.25;
 
@@ -331,15 +333,15 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 					}
 
 					info.maxY_xz[x][z] = maxY;
+
+					info.bottomMaxY_xz[x][z] = bottomMaxY;
+					info.lakeNoise_xz[x][z] = lakeNoise;
+					info.bottomHeight_xz[x][z] = (bottomHeight * bottomSample);
+
+					info.magnetic_xz[x][z] = magnetic;
+					info.water_xz[x][z] = water;
+					info.snow_xz[x][z] = filteredSample > 0.7;
 				}
-
-				info.bottomMaxY_xz[x][z] = bottomMaxY;
-				info.lakeNoise_xz[x][z] = lakeNoise;
-				info.bottomHeight_xz[x][z] = (bottomHeight * bottomSample);
-
-				info.magnetic_xz[x][z] = magnetic;
-				info.water_xz[x][z] = water;
-				info.snow_xz[x][z] = filteredSample > 0.7;
 			}
 		}
 

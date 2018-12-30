@@ -167,33 +167,32 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 				final double sample = interpolate(heightMap, x, z);
 
 				final double heightSample = sample + 1.0 - dist;
-
-				final double bottomMaxY = 100;
-
-				final double topHeight = 80;
-
 				final double cutoffPoint = 0.325;
-
-				final double normal = NoiseUtil.normalise(sample);
-
-				final double bottomHeight = 100;
-
-				final double terraceWidth = 0.15;
-
-				final double k = Math.floor(heightSample / terraceWidth);
-
-				final double f = (heightSample - k * terraceWidth) / 0.05;
-
-				final double s = Math.min(2 * f, 1.0);
-
-				final double terrace = (k + s) * terraceWidth;
-
-				final double topSample = Math.pow(terrace, 2.5) + (heightSample / 2.0);
-
-				double bottomSample = Math.min(1.0D, normal + 0.25);
 
 				if (heightSample > cutoffPoint)
 				{
+					final double bottomMaxY = 100;
+
+					final double topHeight = 80;
+
+					final double normal = NoiseUtil.normalise(sample);
+
+					final double bottomHeight = 100;
+
+					final double terraceWidth = 0.15;
+
+					final double k = Math.floor(heightSample / terraceWidth);
+
+					final double f = (heightSample - k * terraceWidth) / 0.05;
+
+					final double s = Math.min(2 * f, 1.0);
+
+					final double terrace = (k + s) * terraceWidth;
+
+					final double topSample = Math.pow(terrace, 2.5) + (heightSample / 2.0);
+
+					double bottomSample = Math.min(1.0D, normal + 0.25);
+
 					double islandEdgeBlendRange = 0.1;
 					double islandBottomBlendRange = 0.25;
 
