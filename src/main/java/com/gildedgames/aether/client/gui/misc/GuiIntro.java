@@ -335,8 +335,6 @@ public class GuiIntro extends GuiViewerNoContainer
 	@Override
 	protected void keyTyped(final char typedChar, final int keyCode) throws IOException
 	{
-		super.keyTyped(typedChar, keyCode);
-
 		if (!this.startIntro)
 		{
 			this.advanceTips();
