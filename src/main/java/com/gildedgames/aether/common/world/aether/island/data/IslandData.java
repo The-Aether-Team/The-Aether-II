@@ -5,7 +5,6 @@ import com.gildedgames.aether.api.world.islands.IIslandBounds;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
-import com.gildedgames.orbis_api.core.BlockDataChunk;
 import com.gildedgames.orbis_api.core.BlueprintDefinition;
 import com.gildedgames.orbis_api.core.ICreationData;
 import com.gildedgames.orbis_api.core.PlacedBlueprint;
@@ -19,6 +18,7 @@ import com.google.common.collect.Lists;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
@@ -146,18 +146,21 @@ public class IslandData implements IIslandData
 	}
 
 	@Override
-	public PlacedBlueprint placeBlueprint(BlueprintDefinition def, BakedBlueprint baked, ICreationData<?> data)
+	public PlacedBlueprint placeBlueprint(BlueprintDefinition def, BakedBlueprint baked, BlockPos offset)
 	{
-		final PlacedBlueprint instance = new PlacedBlueprint(data.getWorld(), def, baked, data);
+		ICreationData<?> data = baked.getCreationData().clone();
+		data.pos(offset);
 
-		for (BlockDataChunk chunk : baked.getDataChunks())
+		final PlacedBlueprint instance = new PlacedBlueprint(this.world, def, baked, data);
+
+		for (ChunkPos pos : baked.getOccupiedChunks(offset))
 		{
-			if (!this.placedBlueprints.containsKey(chunk.getPos().x, chunk.getPos().z))
+			if (!this.placedBlueprints.containsKey(pos.x, pos.z))
 			{
-				this.placedBlueprints.put(chunk.getPos().x, chunk.getPos().z, Lists.newArrayList());
+				this.placedBlueprints.put(pos.x, pos.z, Lists.newArrayList());
 			}
 
-			this.placedBlueprints.get(chunk.getPos().x, chunk.getPos().z).add(instance);
+			this.placedBlueprints.get(pos.x, pos.z).add(instance);
 		}
 
 		return instance;

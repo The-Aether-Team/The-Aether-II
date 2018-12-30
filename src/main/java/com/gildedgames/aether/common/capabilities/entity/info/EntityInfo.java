@@ -32,12 +32,7 @@ public class EntityInfo implements IEntityInfo
 
 	public static IEntityInfo get(EntityLivingBase entity)
 	{
-		if (entity.hasCapability(AetherCapabilities.ENTITY_INFO, null))
-		{
-			return entity.getCapability(AetherCapabilities.ENTITY_INFO, null);
-		}
-
-		return null;
+		return entity.getCapability(AetherCapabilities.ENTITY_INFO, null);
 	}
 
 	private void closeEyes()

@@ -146,8 +146,6 @@ public class BiomeAetherDecorator
 
 		BakedBlueprint outpostBake = new BakedBlueprint(outpostDef.getData(), new CreationData(world).seed(random.nextLong()).rotation(rotation));
 
-		outpostBake.bake();
-
 		for (int i = 0; i < 10000; i++)
 		{
 			final int x = random.nextInt(island.getBounds().getWidth());
@@ -165,17 +163,13 @@ public class BiomeAetherDecorator
 
 					if (generated)
 					{
-						outpostBake.rebake(pos);
-
-						BakedBlueprint clone = outpostBake.clone();
-
-						final PlacedBlueprint placed = island.placeBlueprint(outpostDef, clone, clone.getCreationData());
+						final PlacedBlueprint placed = island.placeBlueprint(outpostDef, outpostBake, pos);
 
 						final ScheduleRegion trigger = placed.getBaked().getScheduleFromTriggerID("spawn");
 
 						if (trigger != null)
 						{
-							island.setOutpostPos(trigger.getBounds().getMin());
+							island.setOutpostPos(trigger.getBounds().getMin().add(pos));
 						}
 
 						break;
@@ -213,8 +207,6 @@ public class BiomeAetherDecorator
 
 		BakedBlueprint baked = new BakedBlueprint(def.getData(), new CreationData(world).rotation(rotation));
 
-		baked.bake();
-
 		int amountGenerated = 0;
 
 		final int startX = island.getBounds().getMinX();
@@ -237,19 +229,13 @@ public class BiomeAetherDecorator
 
 					if (generated)
 					{
-						baked.rebake(pos);
-
-						BakedBlueprint clone = baked.clone();
-
-						island.placeBlueprint(def, clone, clone.getCreationData());
+						island.placeBlueprint(def, baked, pos);
 
 						rotation = (def.hasRandomRotation()) ?
 								BlueprintPlacer.ROTATIONS[rand.nextInt(BlueprintPlacer.ROTATIONS.length)] :
 								BlueprintPlacer.ROTATIONS[0];
 
 						baked = new BakedBlueprint(def.getData(), new CreationData(world).rotation(rotation));
-
-						baked.bake();
 
 						amountGenerated++;
 

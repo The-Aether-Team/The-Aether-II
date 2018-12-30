@@ -31,7 +31,6 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
@@ -41,6 +40,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
@@ -53,14 +53,11 @@ public class PlayerAetherHooks
 	@SubscribeEvent
 	public static void onPlayerAddedToWorld(final EntityJoinWorldEvent event)
 	{
-		if (event.getEntity() instanceof EntityPlayer)
-		{
-			final PlayerAether aePlayer = PlayerAether.getPlayer(event.getEntity());
+		final PlayerAether aePlayer = PlayerAether.getPlayer(event.getEntity());
 
-			if (aePlayer != null)
-			{
-				aePlayer.onEntityJoinWorld();
-			}
+		if (aePlayer != null)
+		{
+			aePlayer.onEntityJoinWorld();
 		}
 	}
 
@@ -85,7 +82,7 @@ public class PlayerAetherHooks
 	}
 
 	@SubscribeEvent
-	public static void onPlayerLoggedOut(final net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent event)
+	public static void onPlayerLoggedOut(final PlayerLoggedOutEvent event)
 	{
 		final PlayerAether aePlayer = PlayerAether.getPlayer(event.player);
 
@@ -119,17 +116,6 @@ public class PlayerAetherHooks
 		if (aePlayer != null)
 		{
 			aePlayer.onDrops(event);
-		}
-	}
-
-	@SubscribeEvent
-	public static void onUpdate(LivingEvent.LivingUpdateEvent event)
-	{
-		final PlayerAether aePlayer = PlayerAether.getPlayer(event.getEntity());
-
-		if (aePlayer != null)
-		{
-			aePlayer.onUpdate(event);
 		}
 	}
 

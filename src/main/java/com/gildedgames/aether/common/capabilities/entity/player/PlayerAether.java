@@ -30,7 +30,6 @@ import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
@@ -163,11 +162,6 @@ public class PlayerAether implements IPlayerAether
 			return null;
 		}
 
-		if (!PlayerAether.hasCapability(player))
-		{
-			return null;
-		}
-
 		return (PlayerAether) player.getCapability(AetherCapabilities.PLAYER_DATA, null);
 	}
 
@@ -220,7 +214,7 @@ public class PlayerAether implements IPlayerAether
 		NetworkingAether.sendPacketToPlayer(new PacketSeparateInventoryModule(this.separateInventoryModule), (EntityPlayerMP) this.getEntity());
 	}
 
-	public void onUpdate(LivingEvent.LivingUpdateEvent event)
+	public void onUpdate()
 	{
 		for (final PlayerAetherModule module : this.modules)
 		{
@@ -235,6 +229,8 @@ public class PlayerAether implements IPlayerAether
 
 	public void onPlayerTick(TickEvent.PlayerTickEvent event)
 	{
+		this.onUpdate();
+
 		for (final PlayerAetherModule module : this.modules)
 		{
 			if (event.phase == TickEvent.Phase.START)

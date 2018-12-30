@@ -2,7 +2,6 @@ package com.gildedgames.aether.api.world.islands;
 
 import com.gildedgames.aether.api.world.generation.WorldDecoration;
 import com.gildedgames.orbis_api.core.BlueprintDefinition;
-import com.gildedgames.orbis_api.core.ICreationData;
 import com.gildedgames.orbis_api.core.PlacedBlueprint;
 import com.gildedgames.orbis_api.core.baking.BakedBlueprint;
 import com.gildedgames.orbis_api.preparation.IPrepSectorData;
@@ -63,7 +62,7 @@ public interface IIslandData extends NBT
 	 */
 	long getSeed();
 
-	PlacedBlueprint placeBlueprint(BlueprintDefinition def, BakedBlueprint baked, ICreationData<?> data);
+	PlacedBlueprint placeBlueprint(BlueprintDefinition def, BakedBlueprint baked, BlockPos pos);
 
 	List<PlacedBlueprint> getPlacedBlueprintsInChunk(int chunkX, int chunkZ);
 

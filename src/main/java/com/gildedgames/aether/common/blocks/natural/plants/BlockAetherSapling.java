@@ -1,12 +1,9 @@
 package com.gildedgames.aether.common.blocks.natural.plants;
 
-import com.gildedgames.aether.api.world.generation.TemplateDefinition;
-import com.gildedgames.aether.api.world.generation.TemplateLoc;
 import com.gildedgames.aether.common.blocks.IBlockMultiName;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
 import com.gildedgames.aether.common.registry.content.GenerationAether;
-import com.gildedgames.aether.common.world.templates.TemplatePlacer;
 import com.gildedgames.orbis_api.core.BlueprintDefinition;
 import com.gildedgames.orbis_api.core.CreationData;
 import com.gildedgames.orbis_api.core.baking.BakedBlueprint;
@@ -120,12 +117,11 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 			if (tree != null)
 			{
 				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 4);
+
 				BakedBlueprint baked = new BakedBlueprint(tree.getData(), new CreationData(world).pos(BlockPos.ORIGIN));
-				baked.bake();
 
 				// Offset trees
-				BlockPos adjustedPos;
-				adjustedPos = new BlockPos(pos.getX()-4, pos.getY(), pos.getZ()-4);
+				BlockPos adjustedPos = new BlockPos(pos.getX() - 4, pos.getY(), pos.getZ() - 4);
 
 				if (tree == GenerationAether.AMBEROOT_TREE)
 				{

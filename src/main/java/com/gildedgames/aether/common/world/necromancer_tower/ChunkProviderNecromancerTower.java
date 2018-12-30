@@ -50,7 +50,7 @@ public class ChunkProviderNecromancerTower implements IChunkGenerator
 			return;
 		}
 
-		primer.create(inst.getTower().getBaked(), p, true);
+		primer.place(inst.getTower(), p, true);
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class ChunkProviderNecromancerTower implements IChunkGenerator
 		{
 			final DataPrimer dataPrimer = new DataPrimer(new BlockAccessChunkPrimer(this.world, primer));
 
-			dataPrimer.create(inst.getTower().getBaked(), p, false);
+			dataPrimer.place(inst.getTower(), p, false);
 		}
 
 		final Chunk chunk = new Chunk(this.world, primer, chunkX, chunkZ);

@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.world.aether.island.data;
 
 import com.gildedgames.aether.api.world.islands.IIslandData;
-import com.gildedgames.orbis_api.core.BlockDataChunk;
 import com.gildedgames.orbis_api.core.PlacedBlueprint;
 import com.gildedgames.orbis_api.preparation.IPrepChunkManager;
 import com.gildedgames.orbis_api.preparation.IPrepSectorData;
@@ -53,28 +52,26 @@ public class BlockAccessIsland extends BlockAccessPrep
 
 		for (PlacedBlueprint placed : placedBlueprints)
 		{
-			if (pos.getY() < placed.getCreationData().getPos().getY()
-					|| pos.getY() > placed.getCreationData().getPos().getY() + placed.getBaked().getHeight() - 1)
+			if (!placed.getRegion().contains(pos))
 			{
 				continue;
 			}
 
-			for (final BlockDataChunk dataChunk : placed.getBaked().getDataChunks())
-			{
-				if (dataChunk.getPos().x == chunkX && dataChunk.getPos().z == chunkZ)
-				{
-					IBlockState state = dataChunk.getContainer()
-							.getBlockState(pos.getX() & 15, pos.getY() - placed.getCreationData().getPos().getY(), pos.getZ() & 15);
+			BlockPos min = placed.getRegion().getMin();
 
-					if (state != null && !BlockUtil.isVoid(state))
-					{
-						return state;
-					}
-				}
+			IBlockState state = placed.getBaked().getBlockData().getBlockState(
+					pos.getX() - min.getX(),
+					pos.getY() - min.getY(),
+					pos.getZ() - min.getZ()
+			);
+
+			if (!BlockUtil.isVoid(state))
+			{
+				return state;
 			}
 		}
 
-		ChunkMask chunk = this.getChunk(pos.getX() >> 4, pos.getZ() >> 4);
+		ChunkMask chunk = this.getChunk(chunkX, chunkZ);
 
 		return this.transformer.remapBlock(chunk.getBlock(pos.getX() & 15, pos.getY(), pos.getZ() & 15));
 	}

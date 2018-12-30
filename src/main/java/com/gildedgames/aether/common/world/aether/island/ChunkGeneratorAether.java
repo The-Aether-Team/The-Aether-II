@@ -86,7 +86,7 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		// Prime placed templates
 		for (final PlacedBlueprint instance : islandData.getPlacedBlueprintsInChunk(chunkX, chunkZ))
 		{
-			dataPrimer.create(instance.getBaked(), chunkPos, false);
+			dataPrimer.place(instance, chunkPos, false);
 		}
 	}
 
@@ -123,7 +123,7 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		// Populate placed blueprints
 		for (final PlacedBlueprint instance : island.getPlacedBlueprintsInChunk(chunkX, chunkZ))
 		{
-			primer.create(instance.getBaked(), chunkPos, true);
+			primer.place(instance, chunkPos, true);
 		}
 
 		biome.decorate(this.world, this.rand, pos);

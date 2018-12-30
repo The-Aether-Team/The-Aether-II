@@ -64,8 +64,6 @@ public class NecromancerTowerInstance implements IInstance
 
 		BakedBlueprint baked = new BakedBlueprint(GenerationAether.NECROMANCER_TOWER.getData(), new CreationData(world).pos(BlockPos.ORIGIN));
 
-		baked.bake();
-
 		this.tower = new PlacedBlueprint(world, GenerationAether.NECROMANCER_TOWER, baked, baked.getCreationData());
 
 		final BlockPos spawn = this.tower.getBaked().getScheduleFromTriggerID("spawn").getBounds().getMin();
