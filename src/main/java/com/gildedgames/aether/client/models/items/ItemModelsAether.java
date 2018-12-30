@@ -639,6 +639,7 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.candy_cane_block, "candy_cane_block");
 		registerItemModels(BlocksAether.candy_cane_wall, "aether_wall/candy_cane_wall");
 		registerItemModels(ItemsAether.winter_hat, "armor/winter_hat");
+		registerItemModels(ItemsAether.eggnog, "eggnog");
 	}
 
 	private static void registerItemModels(final Block block, final String path)

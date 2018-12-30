@@ -18,6 +18,7 @@ import com.gildedgames.aether.common.items.armor.ItemZaniteArmor;
 import com.gildedgames.aether.common.items.consumables.ItemAmbrosiumChunk;
 import com.gildedgames.aether.common.items.consumables.ItemBrettlCane;
 import com.gildedgames.aether.common.items.consumables.ItemCloudParachute;
+import com.gildedgames.aether.common.items.consumables.ItemEggnog;
 import com.gildedgames.aether.common.items.consumables.ItemEnchantedWyndberry;
 import com.gildedgames.aether.common.items.consumables.ItemHealingStone;
 import com.gildedgames.aether.common.items.consumables.ItemShardOfLife;
@@ -269,6 +270,8 @@ public class ItemsAether
 
 	public static final ItemWinterHat winter_hat = new ItemWinterHat();
 
+	public static final Item eggnog = new ItemEggnog();
+
 	private static final Collection<Item> registeredItems = new ArrayList<>();
 
 	@SubscribeEvent
@@ -443,6 +446,7 @@ public class ItemsAether
 		r.register("plumproot_mash", plumproot_mash);
 		r.register("plumproot_pie", plumproot_pie);
 		r.register("winter_hat", winter_hat.setCreativeTab(CreativeTabsAether.ARMOR));
+		r.register("eggnog", eggnog.setCreativeTab(CreativeTabsAether.CONSUMABLES));
 	}
 
 	public static Collection<Item> getRegisteredItems()
