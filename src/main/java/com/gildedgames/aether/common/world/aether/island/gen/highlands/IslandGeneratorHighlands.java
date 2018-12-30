@@ -57,6 +57,15 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 		double radiusX = island.getBounds().getWidth() / 2.0;
 		double radiusZ = island.getBounds().getLength() / 2.0;
 
+		double[][] bottomMaxY_xz = new double[16][16];
+		double[][] lakeNoise_xz = new double[16][16];
+		double[][] maxY_xz = new double[16][16];
+		double[][] bottomHeight_xz = new double[16][16];
+
+		boolean[][] magnetic_xz = new boolean[16][16];
+		boolean[][] water_xz = new boolean[16][16];
+		boolean[][] snow_xz = new boolean[16][16];
+
 		for (int x = 0; x < 16; x++)
 		{
 			for (int z = 0; z < 16; z++)
@@ -88,7 +97,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 
 				double filteredSample = this.v.getHeightSampleFilter().transform(heightSample);
 
-				if (this.v.hasTerraces())
+				if (terraceMap != null)
 				{
 					double terraceSample = terraceMap.interpolate(x, z) + 1.0;
 
@@ -124,16 +133,17 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 				}
 
 				double magneticSample = filteredSample;
+
 				MagneticHillPillar currentPillar = null;
 
 				if (this.v.hasMagneticPillars())
 				{
 					if (magneticHillsData != null)
 					{
-						Object[] magneticData = this.shapeMagneticShafts(magneticHillsData, magneticSample, x, z, chunkX, chunkZ);
+						MagneticHillSampleData magneticData = this.shapeMagneticShafts(magneticHillsData, magneticSample, x, z, chunkX, chunkZ);
 
-						magneticSample = (double) magneticData[1];
-						currentPillar = (MagneticHillPillar) magneticData[0];
+						magneticSample = magneticData.height;
+						currentPillar = magneticData.pillar;
 					}
 
 					if (magneticSample > 0.5)
@@ -188,16 +198,6 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 						bottomSample = Math.min(bottomSample, bottomSample * currentPillar.getElongationMod());
 					}
 
-					for (int y = (int) bottomMaxY; y > bottomMaxY - (bottomHeight * bottomSample); y--)
-					{
-						if (y < 0)
-						{
-							continue;
-						}
-
-						mask.setBlock(x, y, z, magnetic ? IslandBlockType.FERROSITE_BLOCK.ordinal() : IslandBlockType.STONE_BLOCK.ordinal());
-					}
-
 					double maxY = this.v.getMaxYFilter().maxY(bottomMaxY, filteredSample, cutoffPoint, topHeight);
 
 					if (water && !magnetic)
@@ -210,78 +210,119 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 						maxY = 254.0D;
 					}
 
-					for (int y = (int) bottomMaxY; y < maxY; y++)
+					maxY_xz[x][z] = maxY;
+
+					bottomMaxY_xz[x][z] = bottomMaxY;
+					lakeNoise_xz[x][z] = lakeNoise;
+					bottomHeight_xz[x][z] = (bottomHeight * bottomSample);
+
+					magnetic_xz[x][z] = magnetic;
+					water_xz[x][z] = water;
+					snow_xz[x][z] = filteredSample > 0.7;
+				}
+			}
+		}
+
+		for (int x = 0; x < 16; x++)
+		{
+			for (int z = 0; z < 16; z++)
+			{
+				double maxY = maxY_xz[x][z];
+
+				if (maxY <= 0.0D)
+				{
+					return;
+				}
+
+				double bottomMaxY = bottomMaxY_xz[x][z];
+				double lakeNoise = lakeNoise_xz[x][z];
+				double bottomHeight = bottomHeight_xz[x][z];
+
+				boolean magnetic = magnetic_xz[x][z];
+				boolean water = water_xz[x][z];
+				boolean snow = snow_xz[x][z];
+
+				for (int y = (int) bottomMaxY; y > bottomMaxY - bottomHeight; y--)
+				{
+					if (y < 0)
 					{
-						if (this.v.hasSnowCaps() && filteredSample > 0.7 && y > maxY - 8)
+						continue;
+					}
+
+					mask.setBlock(x, y, z, magnetic ? IslandBlockType.FERROSITE_BLOCK.ordinal() : IslandBlockType.STONE_BLOCK.ordinal());
+				}
+
+				for (int y = (int) bottomMaxY; y < maxY; y++)
+				{
+					if (this.v.hasSnowCaps() && snow && y > maxY - 8)
+					{
+						mask.setBlock(x, y, z, IslandBlockType.SNOW_BLOCK.ordinal());
+					}
+					else
+					{
+						mask.setBlock(x, y, z, magnetic ? IslandBlockType.FERROSITE_BLOCK.ordinal() : IslandBlockType.STONE_BLOCK.ordinal());
+					}
+				}
+
+				if (lakeNoise >= this.v.getLakeThreshold())
+				{
+					for (int y = 100 + this.v.getCoastHeight() - 1; y >= 100; y--)
+					{
+						int found = mask.getBlock(x, y, z);
+
+						if (found == IslandBlockType.STONE_BLOCK.ordinal())
 						{
-							mask.setBlock(x, y, z, IslandBlockType.SNOW_BLOCK.ordinal());
+							if (mask.getBlock(x, y + 1, z) != 0)
+							{
+								break;
+							}
+
+							if (y <= 100 + this.v.getCoastHeight() - 1)
+							{
+								mask.setBlock(x, y, z, IslandBlockType.COAST_BLOCK.ordinal());
+							}
+
+							break;
+						}
+					}
+				}
+
+				if (water && !magnetic)
+				{
+					double minY = maxY - ((Math.max(0.0, lakeNoise - (this.v.getLakeThreshold() + this.v.getLakeBlendRange()))) * this.v.getLakeDepth());
+
+					for (int y = (int) maxY; y > minY - 1; y--)
+					{
+						if (y <= minY)
+						{
+							mask.setBlock(x, y, z, IslandBlockType.SOIL_BLOCK.ordinal());
 						}
 						else
 						{
-							mask.setBlock(x, y, z, magnetic ? IslandBlockType.FERROSITE_BLOCK.ordinal() : IslandBlockType.STONE_BLOCK.ordinal());
+							mask.setBlock(x, y, z, IslandBlockType.WATER_BLOCK.ordinal());
 						}
 					}
+				}
 
-					if (lakeNoise >= this.v.getLakeThreshold())
+				if (this.v.getCoastHeight() > 0)
+				{
+					for (int y = 100 + this.v.getCoastHeight() - 1; y >= 100; y--)
 					{
-						for (int y = 100 + this.v.getCoastHeight() - 1; y >= 100; y--)
+						int found = mask.getBlock(x, y, z);
+
+						if (found == IslandBlockType.STONE_BLOCK.ordinal())
 						{
-							int found = mask.getBlock(x, y, z);
-
-							if (found == IslandBlockType.STONE_BLOCK.ordinal())
+							if (mask.getBlock(x, y + 1, z) != 0)
 							{
-								if (mask.getBlock(x, y + 1, z) != 0)
-								{
-									break;
-								}
-
-								if (y >= 100 && y <= 100 + this.v.getCoastHeight() - 1)
-								{
-									mask.setBlock(x, y, z, IslandBlockType.COAST_BLOCK.ordinal());
-								}
-
 								break;
 							}
-						}
-					}
 
-					if (water && !magnetic)
-					{
-						double minY = maxY - ((Math.max(0.0, lakeNoise - (this.v.getLakeThreshold() + this.v.getLakeBlendRange()))) * this.v.getLakeDepth());
-
-						for (int y = (int) maxY; y > minY - 1; y--)
-						{
-							if (y <= minY)
+							if (y <= 100 + this.v.getCoastHeight() - 1)
 							{
-								mask.setBlock(x, y, z, IslandBlockType.SOIL_BLOCK.ordinal());
+								mask.setBlock(x, y, z, IslandBlockType.COAST_BLOCK.ordinal());
 							}
-							else
-							{
-								mask.setBlock(x, y, z, IslandBlockType.WATER_BLOCK.ordinal());
-							}
-						}
-					}
 
-					if (this.v.getCoastHeight() > 0)
-					{
-						for (int y = 100 + this.v.getCoastHeight() - 1; y >= 100; y--)
-						{
-							int found = mask.getBlock(x, y, z);
-
-							if (found == IslandBlockType.STONE_BLOCK.ordinal())
-							{
-								if (mask.getBlock(x, y + 1, z) != 0)
-								{
-									break;
-								}
-
-								if (y >= 100 && y <= 100 + this.v.getCoastHeight() - 1)
-								{
-									mask.setBlock(x, y, z, IslandBlockType.COAST_BLOCK.ordinal());
-								}
-
-								break;
-							}
+							break;
 						}
 					}
 				}
@@ -303,7 +344,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 		mask.createChunk(primer, transformer);
 	}
 
-	private Object[] shapeMagneticShafts(MagneticHillsData data, double magneticSample, int x, int z, int chunkX,
+	private MagneticHillSampleData shapeMagneticShafts(MagneticHillsData data, double magneticSample, int x, int z, int chunkX,
 			int chunkZ)
 	{
 		int worldX = (chunkX * 16) + x;
@@ -312,7 +353,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 		double closestDistX = Double.MAX_VALUE;
 		double closestDistZ = Double.MAX_VALUE;
 
-		Object[] values = new Object[2];
+		MagneticHillPillar pillar = null;
 
 		for (MagneticHillPillar p : data.getMagneticPillars())
 		{
@@ -324,15 +365,27 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 				closestDistX = distX;
 				closestDistZ = distZ;
 
-				values[0] = p;
+				pillar = p;
 			}
 		}
 
 		double closestDist = Math.sqrt(closestDistX * closestDistX + closestDistZ * closestDistZ);
 
-		values[1] = magneticSample - closestDist;
+		double result = magneticSample - closestDist;
 
-		return values;
+		return new MagneticHillSampleData(pillar, result);
 	}
 
+	private class MagneticHillSampleData
+	{
+		public final MagneticHillPillar pillar;
+
+		public final double height;
+
+		private MagneticHillSampleData(MagneticHillPillar pillar, double height)
+		{
+			this.pillar = pillar;
+			this.height = height;
+		}
+	}
 }

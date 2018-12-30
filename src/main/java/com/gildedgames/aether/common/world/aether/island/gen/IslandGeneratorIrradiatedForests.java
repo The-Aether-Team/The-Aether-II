@@ -14,7 +14,6 @@ import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
 import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
 import com.gildedgames.orbis_api.util.FastMathUtil;
 import com.gildedgames.orbis_api.util.ObjectFilter;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 
@@ -46,7 +45,7 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 				fractionX * ((1.0 - fractionZ) * c + fractionZ * d);
 	}
 
-	public double[] generateNoise(final OpenSimplexNoise noise, final IIslandData island, final int chunkX, final int chunkZ, final int offset,
+	private double[] generateNoise(final OpenSimplexNoise noise, final IIslandData island, final int chunkX, final int chunkZ, final int offset,
 			final double scale)
 	{
 		final double posX = chunkX * 16;
@@ -85,16 +84,17 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 	{
 		IrradiatedForestsData data = ObjectFilter.getFirstFrom(island.getComponents(), IrradiatedForestsData.class);
 
+		if (data == null)
+		{
+			throw new RuntimeException("IrradiatedForestsData could not be found");
+		}
+
 		final double[] heightMap = this.generateNoise(noise, island, chunkX, chunkZ, 0, 300.0D);
 		final double[] terraceMap = this.generateNoise(noise, island, chunkX, chunkZ, 1000, 300.0D);
 
 		final BiomeAetherBase biome = (BiomeAetherBase) biomes[0];
 
-		IBlockState coastBlock = biome.getCoastalBlock();
-		IBlockState stoneBlock = BlocksAether.holystone.getDefaultState();
-
-		/*coastBlock = Blocks.SAND.getDefaultState();
-		stoneBlock = Blocks.STONE.getDefaultState();*/
+		boolean hasCoast = biome.getCoastalBlock() != null;
 
 		final int posX = chunkX * 16;
 		final int posZ = chunkZ * 16;
@@ -104,6 +104,17 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 
 		final double radiusX = island.getBounds().getWidth() / 2.0;
 		final double radiusZ = island.getBounds().getLength() / 2.0;
+
+		boolean[][] cracked_xz = new boolean[16][16];
+
+		double[][] bottomHeight_xz = new double[16][16];
+		double[][] bottomMaxY_xz = new double[16][16];
+
+		double[][] heightSample_xz = new double[16][16];
+		double[][] cutoffPoint_xz = new double[16][16];
+		double[][] topSample_xz = new double[16][16];
+		double[][] topHeight_xz = new double[16][16];
+		double[][] closestDist_xz = new double[16][16];
 
 		for (int x = 0; x < 16; x++)
 		{
@@ -208,55 +219,97 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 
 					if (!cracked)
 					{
-						for (int y = (int) bottomMaxY; y > bottomMaxY - (bottomHeight * bottomSample); y--)
-						{
-							if (y < 0)
-							{
-								continue;
-							}
-
-							if (coastBlock != null && heightSample < cutoffPoint + 0.025 && y == 100)
-							{
-								mask.setBlock(x, y, z, IslandBlockType.COAST_BLOCK.ordinal());
-							}
-							else
-							{
-								mask.setBlock(x, y, z, IslandBlockType.STONE_BLOCK.ordinal());
-							}
-						}
-
-						double maxY = bottomMaxY + ((topSample - cutoffPoint) * topHeight);
-
-						if (maxY > 254.0D)
-						{
-							maxY = 254.0D;
-						}
-
-						for (int y = (int) bottomMaxY; y < maxY; y++)
-						{
-							if (coastBlock != null && (topSample < cutoffPoint + 0.025 && y == 100))
-							{
-								mask.setBlock(x, y, z, IslandBlockType.COAST_BLOCK.ordinal());
-							}
-							else
-							{
-								mask.setBlock(x, y, z, IslandBlockType.STONE_BLOCK.ordinal());
-							}
-						}
+						bottomHeight_xz[x][z] = bottomHeight * bottomSample;
 					}
 					else
 					{
-						final double bottomMinY = bottomMaxY - (bottomHeight * bottomHeightMod);
-						final double expectedTopY = bottomMaxY + ((topSample - cutoffPoint) * topHeight);
+						bottomHeight_xz[x][z] = bottomHeight * bottomHeightMod;
+					}
 
-						final double maxY = (expectedTopY * closestDist);
+					cracked_xz[x][z] = cracked;
+					bottomMaxY_xz[x][z] = bottomMaxY;
 
-						for (int y = (int) bottomMinY; y < maxY; y++)
+					heightSample_xz[x][z] = heightSample;
+					cutoffPoint_xz[x][z] = cutoffPoint;
+					topSample_xz[x][z] = topSample;
+					topHeight_xz[x][z] = topHeight;
+					closestDist_xz[x][z] = closestDist;
+				}
+			}
+		}
+
+		for (int x = 0; x < 16; x++)
+		{
+			for (int z = 0; z < 16; z++)
+			{
+				double heightSample = heightSample_xz[x][z];
+
+				if (heightSample <= 0.0D)
+				{
+					return;
+				}
+
+				boolean cracked = cracked_xz[x][z];
+
+				double bottomMaxY = bottomMaxY_xz[x][z];
+				double bottomHeight = bottomHeight_xz[x][z];
+
+				double cutoffPoint = cutoffPoint_xz[x][z];
+				double topSample = topSample_xz[x][z];
+				double topHeight = topHeight_xz[x][z];
+
+				double closestDist = closestDist_xz[x][z];
+
+				if (!cracked)
+				{
+					for (int y = (int) bottomMaxY; y > bottomMaxY - bottomHeight; y--)
+					{
+						if (y < 0)
 						{
-							IslandBlockType type = closestDist < 0.95 ? IslandBlockType.STONE_MOSSY_BLOCK : IslandBlockType.STONE_BLOCK;
-
-							mask.setBlock(x, y, z, type.ordinal());
+							continue;
 						}
+
+						if (hasCoast && heightSample < cutoffPoint + 0.025 && y == 100)
+						{
+							mask.setBlock(x, y, z, IslandBlockType.COAST_BLOCK.ordinal());
+						}
+						else
+						{
+							mask.setBlock(x, y, z, IslandBlockType.STONE_BLOCK.ordinal());
+						}
+					}
+
+					double maxY = bottomMaxY + ((topSample - cutoffPoint) * topHeight);
+
+					if (maxY > 254.0D)
+					{
+						maxY = 254.0D;
+					}
+
+					for (int y = (int) bottomMaxY; y < maxY; y++)
+					{
+						if (hasCoast && (topSample < cutoffPoint + 0.025 && y == 100))
+						{
+							mask.setBlock(x, y, z, IslandBlockType.COAST_BLOCK.ordinal());
+						}
+						else
+						{
+							mask.setBlock(x, y, z, IslandBlockType.STONE_BLOCK.ordinal());
+						}
+					}
+				}
+				else
+				{
+					final double bottomMinY = bottomMaxY - bottomHeight;
+					final double expectedTopY = bottomMaxY + ((topSample - cutoffPoint) * topHeight);
+
+					final double maxY = (expectedTopY * closestDist);
+
+					for (int y = (int) bottomMinY; y < maxY; y++)
+					{
+						IslandBlockType type = closestDist < 0.95 ? IslandBlockType.STONE_MOSSY_BLOCK : IslandBlockType.STONE_BLOCK;
+
+						mask.setBlock(x, y, z, type.ordinal());
 					}
 				}
 			}

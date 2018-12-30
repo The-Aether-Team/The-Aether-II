@@ -39,7 +39,7 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 				fractionX * ((1.0 - fractionZ) * c + fractionZ * d);
 	}
 
-	public static double[] generateNoise(final OpenSimplexNoise noise, final IIslandData island, final int chunkX, final int chunkZ)
+	private static double[] generateNoise(final OpenSimplexNoise noise, final IIslandData island, final int chunkX, final int chunkZ)
 	{
 		final double posX = chunkX * 16;
 		final double posZ = chunkZ * 16;
@@ -77,8 +77,6 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 	{
 		final double[] heightMap = generateNoise(noise, island, chunkX, chunkZ);
 
-		final Biome biome = biomes[0];
-
 		final int posX = chunkX * 16;
 		final int posZ = chunkZ * 16;
 
@@ -87,6 +85,14 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 
 		final double radiusX = island.getBounds().getWidth() / 2.0;
 		final double radiusZ = island.getBounds().getLength() / 2.0;
+
+
+		double[][] bottomMaxY_xz = new double[16][16];
+		double[][] maxY_xz = new double[16][16];
+		double[][] heightSample_xz = new double[16][16];
+		double[][] cutoffPoint_xz = new double[16][16];
+		double[][] topSample_xz = new double[16][16];
+		double[][] bottomHeight_xz = new double[16][16];
 
 		for (int x = 0; x < 16; x++)
 		{
@@ -156,23 +162,6 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 						bottomSample = NoiseUtil.lerp(islandEdge, islandBottom, blend);
 					}
 
-					for (int y = (int) bottomMaxY; y > bottomMaxY - (bottomHeight * bottomSample); y--)
-					{
-						if (y < 0)
-						{
-							continue;
-						}
-
-						if (heightSample < cutoffPoint + 0.10 && y == 100)
-						{
-							mask.setBlock(x, y, z, IslandBlockType.COAST_BLOCK.ordinal());
-						}
-						else
-						{
-							mask.setBlock(x, y, z, IslandBlockType.STONE_BLOCK.ordinal());
-						}
-					}
-
 					double maxY = bottomMaxY + ((topSample - cutoffPoint) * topHeight);
 
 					if (maxY > 254.0D)
@@ -180,16 +169,63 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 						maxY = 254.0D;
 					}
 
-					for (int y = (int) bottomMaxY; y < maxY; y++)
+					maxY_xz[x][z] = maxY;
+				}
+
+				bottomMaxY_xz[x][z] = bottomMaxY;
+				bottomHeight_xz[x][z] = (bottomHeight * bottomSample);
+
+				heightSample_xz[x][z] = heightSample;
+				cutoffPoint_xz[x][z] = cutoffPoint;
+				topSample_xz[x][z] = topSample;
+				bottomHeight_xz[x][z] = bottomHeight;
+			}
+		}
+
+		for (int x = 0; x < 16; x++)
+		{
+			for (int z = 0; z < 16; z++)
+			{
+				double heightSample = heightSample_xz[x][z];
+
+				if (heightSample <= 0.0D)
+				{
+					return;
+				}
+
+				double bottomMaxY = bottomMaxY_xz[x][z];
+				double maxY = maxY_xz[x][z];
+
+				double cutoffPoint = cutoffPoint_xz[x][z];
+				double topSample = topSample_xz[x][z];
+				double bottomHeight = bottomHeight_xz[x][z];
+
+				for (int y = (int) bottomMaxY; y > bottomMaxY - bottomHeight; y--)
+				{
+					if (y < 0)
 					{
-						if ((topSample < cutoffPoint + 0.10 && y == 100))
-						{
-							mask.setBlock(x, y, z, IslandBlockType.COAST_BLOCK.ordinal());
-						}
-						else
-						{
-							mask.setBlock(x, y, z, IslandBlockType.STONE_BLOCK.ordinal());
-						}
+						continue;
+					}
+
+					if (heightSample < cutoffPoint + 0.10 && y == 100)
+					{
+						mask.setBlock(x, y, z, IslandBlockType.COAST_BLOCK.ordinal());
+					}
+					else
+					{
+						mask.setBlock(x, y, z, IslandBlockType.STONE_BLOCK.ordinal());
+					}
+				}
+
+				for (int y = (int) bottomMaxY; y < maxY; y++)
+				{
+					if ((topSample < cutoffPoint + 0.10 && y == 100))
+					{
+						mask.setBlock(x, y, z, IslandBlockType.COAST_BLOCK.ordinal());
+					}
+					else
+					{
+						mask.setBlock(x, y, z, IslandBlockType.STONE_BLOCK.ordinal());
 					}
 				}
 			}

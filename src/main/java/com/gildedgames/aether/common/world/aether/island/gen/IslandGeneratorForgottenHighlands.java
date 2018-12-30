@@ -41,11 +41,6 @@ public class IslandGeneratorForgottenHighlands implements IIslandGenerator
 				fractionX * ((1.0 - fractionZ) * c + fractionZ * d);
 	}
 
-	public static float lerp(final float x, final float x1, final float x2, final float q00, final float q01)
-	{
-		return ((x2 - x) / (x2 - x1)) * q00 + ((x - x1) / (x2 - x1)) * q01;
-	}
-
 	public static double interpolate(final double[] data, final int x, final int y, final int z)
 	{
 		final double x0 = (double) x / NOISE_XZ_SCALE;
@@ -81,55 +76,7 @@ public class IslandGeneratorForgottenHighlands implements IIslandGenerator
 		return NoiseUtil.lerp(c1, c2, fractionY);
 	}
 
-	public static double[] generate2DNoise(final OpenSimplexNoise noise, final IIslandData island, final int chunkX, final int chunkZ, final int offset,
-			final double scale, final boolean centerGradient)
-	{
-		final double posX = chunkX * 16;
-		final double posZ = chunkZ * 16;
-
-		final double minX = island.getBounds().getMinX();
-		final double minZ = island.getBounds().getMinZ();
-
-		final double centerX = island.getBounds().getCenterX();
-		final double centerZ = island.getBounds().getCenterZ();
-
-		final double[] data = new double[NOISE_SAMPLES * NOISE_SAMPLES];
-
-		// Generate half-resolution evalNormalised
-		for (int x = 0; x < NOISE_SAMPLES; x++)
-		{
-			// Creates world coordinate and normalized evalNormalised coordinate
-			final double worldX = posX - (x == 0 ? NOISE_XZ_SCALE - 1 : 0) + (x * (16D / NOISE_SAMPLES));
-			final double nx = (worldX + minX + offset) / scale;
-
-			for (int z = 0; z < NOISE_SAMPLES; z++)
-			{
-				// Creates world coordinate and normalized evalNormalised coordinate
-				final double worldZ = posZ - (z == 0 ? NOISE_XZ_SCALE - 1 : 0) + (z * (16.0D / NOISE_SAMPLES));
-				final double nz = (worldZ + minZ + offset) / scale;
-
-				final double radiusX = island.getBounds().getWidth() / 2.0;
-				final double radiusZ = island.getBounds().getLength() / 2.0;
-
-				final double distX = Math.abs((centerX - worldX) * (1.0 / radiusX));
-				final double distZ = Math.abs((centerZ - worldZ) * (1.0 / radiusZ));
-
-				// Get distance from center of Island
-				final double dist = Math.sqrt(distX * distX + distZ * distZ);
-
-				final double sample = NoiseUtil.genNoise(noise, nx, nz);
-
-				// Apply formula to shape evalNormalised into island, evalNormalised decreases in value the further the coord is from the center
-				final double height = sample - (centerGradient ? dist : 0);
-
-				data[x + (z * NOISE_SAMPLES)] = height;
-			}
-		}
-
-		return data;
-	}
-
-	public static double[] generate3DNoise(final OpenSimplexNoise noise, final IIslandData island, final int chunkX, final int chunkZ, final int offset,
+	private static double[] generate3DNoise(final OpenSimplexNoise noise, final IIslandData island, final int chunkX, final int chunkZ, final int offset,
 			final double scale, final double yScale, final boolean centerGradient)
 	{
 		final double posX = chunkX * 16;
