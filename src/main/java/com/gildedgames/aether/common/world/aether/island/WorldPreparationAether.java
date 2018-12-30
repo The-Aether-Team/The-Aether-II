@@ -155,10 +155,5 @@ public class WorldPreparationAether
 		this.replaceBiomeBlocks(island, mask, chunkX, chunkZ);
 
 		this.caveGenerator.generate(this.world, chunkX, chunkZ, mask);
-
-		if (island.getBiome() instanceof BiomeArcticPeaks)
-		{
-			this.veinGenerator.generate(this.world, chunkX, chunkZ, mask);
-		}
 	}
 }
