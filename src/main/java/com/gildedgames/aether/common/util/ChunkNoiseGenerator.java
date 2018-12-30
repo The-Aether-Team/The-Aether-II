@@ -13,13 +13,15 @@ public abstract class ChunkNoiseGenerator
 
 	protected final int posX, posZ;
 
-	private final int noiseScale, noiseSamples;
+	private final double noiseScale;
+
+	private final int noiseSamples;
 
 	protected final int offsetX, offsetZ;
 
 	protected final double scale;
 
-	public ChunkNoiseGenerator(OpenSimplexNoise generator, int posX, int posZ, int noiseScale, int noiseSamples, int offsetX, int offsetZ, double scale)
+	public ChunkNoiseGenerator(OpenSimplexNoise generator, int posX, int posZ, double noiseScale, int noiseSamples, int offsetX, int offsetZ, double scale)
 	{
 		this.generator = generator;
 

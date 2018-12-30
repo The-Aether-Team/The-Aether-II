@@ -56,21 +56,34 @@ public class WorldPreparationAether
 
 	public void generateBaseTerrain(Biome[] biomes, final ChunkPrimer primer, final IIslandData island, final int chunkX, final int chunkZ)
 	{
-		final int worldX = chunkX * 16;
-		final int worldZ = chunkZ * 16;
-
 		ChunkMask mask = new ChunkMask();
 
-		//TODO: Interpolate this! Can increase performance a lot
+		this.generateCloudLayer(island, mask, chunkX, chunkZ);
+
+		final IIslandGenerator generator = island.getGenerator();
+		generator.genMask(biomes, this.noise, this.access, mask, island, chunkX, chunkZ);
+
+		this.replaceBiomeBlocks(island, mask, chunkX, chunkZ);
+
+		this.caveGenerator.generate(this.world, chunkX, chunkZ, mask);
+
+		if (island.getBiome() instanceof BiomeArcticPeaks)
+		{
+			this.veinGenerator.generate(this.world, chunkX, chunkZ, mask);
+		}
+
+		generator.genChunk(biomes, this.noise, this.access, mask, primer, island, chunkX, chunkZ);
+	}
+
+	private void generateCloudLayer(final IIslandData island, final ChunkMask mask, final int chunkX, final int chunkZ)
+	{
+		ChunkNoiseGenerator cloudBuffer = this.createCloudBuffer(island, chunkX, chunkZ, 70.0D);
+
 		for (int x = 0; x < 16; x++)
 		{
-			final double nx = (worldX + x) / 70D;
-
 			for (int z = 0; z < 16; z++)
 			{
-				final double nz = (worldZ + z) / 70D;
-
-				final double val = NoiseUtil.normalise(NoiseUtil.something(this.noise, nx, nz));
+				final double val = cloudBuffer.interpolate(x, z);
 
 				if (val > 0.2)
 				{
@@ -86,20 +99,6 @@ public class WorldPreparationAether
 				}
 			}
 		}
-
-		final IIslandGenerator generator = island.getGenerator();
-		generator.genMask(biomes, this.noise, this.access, mask, island, chunkX, chunkZ);
-
-		this.replaceBiomeBlocks(island, mask, chunkX, chunkZ);
-
-		this.caveGenerator.generate(this.world, chunkX, chunkZ, mask);
-
-		if (island.getBiome() instanceof BiomeArcticPeaks)
-		{
-			this.veinGenerator.generate(this.world, chunkX, chunkZ, mask);
-		}
-
-		generator.genChunk(biomes, this.noise, this.access, mask, primer, island, chunkX, chunkZ);
 	}
 
 	// Calculate max penetration depth
@@ -144,6 +143,18 @@ public class WorldPreparationAether
 			protected double sample(double nx, double nz)
 			{
 				return this.generator.eval(nx, nz);
+			}
+		};
+	}
+
+	private ChunkNoiseGenerator createCloudBuffer(IIslandData island, int chunkX, int chunkZ, double scale)
+	{
+		return new ChunkNoiseGenerator(this.noise, chunkX * 16, chunkZ * 16, 4, 5, 0, 0, scale)
+		{
+			@Override
+			protected double sample(double nx, double nz)
+			{
+				return NoiseUtil.normalise(NoiseUtil.something(this.generator, nx, nz));
 			}
 		};
 	}
