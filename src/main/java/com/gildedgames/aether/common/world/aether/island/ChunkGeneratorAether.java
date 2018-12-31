@@ -7,7 +7,10 @@ import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import com.gildedgames.aether.common.world.aether.WorldProviderAether;
 import com.gildedgames.aether.common.world.aether.prep.AetherChunkColumnInfo;
 import com.gildedgames.orbis_api.core.PlacedBlueprint;
+import com.gildedgames.orbis_api.data.region.IRegion;
+import com.gildedgames.orbis_api.data.region.Region;
 import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
+import com.gildedgames.orbis_api.processing.BlockAccessChunkPrimer;
 import com.gildedgames.orbis_api.processing.BlockAccessExtendedWrapper;
 import com.gildedgames.orbis_api.processing.DataPrimer;
 import net.minecraft.entity.EnumCreatureType;
@@ -87,15 +90,16 @@ public class ChunkGeneratorAether implements IChunkGenerator
 	{
 		this.preparation.generateBaseTerrain(info, biomes, primer, islandData, chunkX, chunkY, chunkZ);
 
-//		final DataPrimer dataPrimer = new DataPrimer(new BlockAccessChunkPrimer(this.world, primer));
-//
-//		ChunkPos chunkPos = new ChunkPos(chunkX, chunkZ);
-//
-//		// Prime placed templates
-//		for (final PlacedBlueprint instance : islandData.getPlacedBlueprintsInChunk(chunkX, chunkZ))
-//		{
-//			dataPrimer.place(instance, chunkPos, false);
-//		}
+		final DataPrimer dataPrimer = new DataPrimer(new BlockAccessChunkPrimer(this.world, primer));
+
+		IRegion region = new Region(new BlockPos(chunkX * 16, chunkY * 16, chunkZ * 16),
+				new BlockPos(chunkX * 16, chunkY * 16, chunkZ * 16).add(15, 15, 15));
+
+		// Prime placed templates
+		for (final PlacedBlueprint instance : islandData.getPlacedBlueprintsInChunk(chunkX, chunkZ))
+		{
+			dataPrimer.place(instance, region, false);
+		}
 	}
 
 	@Override
@@ -128,10 +132,13 @@ public class ChunkGeneratorAether implements IChunkGenerator
 
 		ChunkPos chunkPos = new ChunkPos(chunkX, chunkZ);
 
+		IRegion region = new Region(new BlockPos(chunkX * 16, 0, chunkZ * 16),
+				new BlockPos(chunkX * 16, 255, chunkZ * 16).add(15, 15, 15));
+
 		// Populate placed blueprints
 		for (final PlacedBlueprint instance : island.getPlacedBlueprintsInChunk(chunkX, chunkZ))
 		{
-			primer.place(instance, chunkPos, true);
+			primer.place(instance, region, true);
 		}
 
 		biome.decorate(this.world, this.rand, pos);

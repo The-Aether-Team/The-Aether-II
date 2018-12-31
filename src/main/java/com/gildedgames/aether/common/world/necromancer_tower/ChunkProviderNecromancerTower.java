@@ -1,6 +1,8 @@
 package com.gildedgames.aether.common.world.necromancer_tower;
 
 import com.gildedgames.aether.common.registry.content.InstancesAether;
+import com.gildedgames.orbis_api.data.region.IRegion;
+import com.gildedgames.orbis_api.data.region.Region;
 import com.gildedgames.orbis_api.processing.BlockAccessChunkPrimer;
 import com.gildedgames.orbis_api.processing.BlockAccessExtendedWrapper;
 import com.gildedgames.orbis_api.processing.DataPrimer;
@@ -39,8 +41,6 @@ public class ChunkProviderNecromancerTower implements IChunkGenerator
 	@Override
 	public void populate(final int chunkX, final int chunkZ)
 	{
-		final ChunkPos p = new ChunkPos(chunkX, chunkZ);
-
 		final NecromancerTowerInstance inst = InstancesAether.NECROMANCER_TOWER_HANDLER.getFromDimId(this.world.provider.getDimension());
 
 		final DataPrimer primer = new DataPrimer(new BlockAccessExtendedWrapper(this.world));
@@ -50,7 +50,10 @@ public class ChunkProviderNecromancerTower implements IChunkGenerator
 			return;
 		}
 
-		primer.place(inst.getTower(), p, true);
+		IRegion region = new Region(new BlockPos(chunkX * 16, 0, chunkZ * 16),
+				new BlockPos(chunkX * 16, 255, chunkZ * 16).add(15, 15, 15));
+
+		primer.place(inst.getTower(), region, true);
 	}
 
 	@Override
@@ -72,9 +75,12 @@ public class ChunkProviderNecromancerTower implements IChunkGenerator
 
 		if (inst.getTower() != null)
 		{
+			IRegion region = new Region(new BlockPos(chunkX * 16, 0, chunkZ * 16),
+					new BlockPos(chunkX * 16, 255, chunkZ * 16).add(15, 15, 15));
+
 			final DataPrimer dataPrimer = new DataPrimer(new BlockAccessChunkPrimer(this.world, primer));
 
-			dataPrimer.place(inst.getTower(), p, false);
+			dataPrimer.place(inst.getTower(), region, false);
 		}
 
 		final Chunk chunk = new Chunk(this.world, primer, chunkX, chunkZ);
