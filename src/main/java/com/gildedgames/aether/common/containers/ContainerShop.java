@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.containers;
 import com.gildedgames.aether.api.shop.IShopInstance;
 import com.gildedgames.aether.common.containers.slots.SlotSell;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
@@ -51,12 +52,13 @@ public class ContainerShop extends Container
 
 		if (!playerIn.world.isRemote)
 		{
-			ItemStack itemstack = this.shopInventory.removeStackFromSlot(0);
-
-			if (!itemstack.isEmpty())
+			if (!playerIn.isEntityAlive() || playerIn instanceof EntityPlayerMP && ((EntityPlayerMP)playerIn).hasDisconnected())
 			{
-				//TODO: Figure out why this is destroying the item - you can pick it up, but it's a fake entity I believe
-				//playerIn.dropItem(itemstack, false);
+				playerIn.dropItem(this.shopInventory.removeStackFromSlot(0), false);
+			}
+			else
+			{
+				playerIn.inventory.placeItemBackInInventory(playerIn.world, shopInventory.removeStackFromSlot(0));
 			}
 		}
 	}

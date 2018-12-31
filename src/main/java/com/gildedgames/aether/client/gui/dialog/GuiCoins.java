@@ -120,7 +120,6 @@ public class GuiCoins extends GuiElement
 
 			coins[0].dim().mod().center(false).x(0).y(0).flush();
 			coins[1].dim().mod().center(false).x(maxWidth + 2).y(0).flush();
-
 			coins[2].dim().mod().center(false).x(0).y(11).flush();
 
 			if (coins[3] != null)

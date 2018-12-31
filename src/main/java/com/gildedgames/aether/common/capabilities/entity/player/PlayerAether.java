@@ -81,11 +81,15 @@ public class PlayerAether implements IPlayerAether
 
 	private final PlayerEffectsModule effectsModule;
 
+	private final PlayerTradeModule tradingModule;
+
 	private final List<PlayerAetherObserver> observers = Lists.newArrayList();
 
 	private NecromancerTowerInstance towerInstance;
 
 	private ItemStack lastDestroyedStack;
+
+	private boolean isTrading;
 
 	public PlayerAether()
 	{
@@ -108,6 +112,7 @@ public class PlayerAether implements IPlayerAether
 		this.currencyModule = null;
 		this.sectorModule = null;
 		this.effectsModule = null;
+		this.tradingModule = null;
 	}
 
 	public PlayerAether(final EntityPlayer entity)
@@ -131,6 +136,7 @@ public class PlayerAether implements IPlayerAether
 		this.currencyModule = new PlayerCurrencyModule(this);
 		this.sectorModule = new PlayerSectorModule(this);
 		this.effectsModule = new PlayerEffectsModule(this);
+		this.tradingModule = new PlayerTradeModule(this);
 
 		final Collection<PlayerAetherModule> modules = new ArrayList<>();
 
@@ -151,6 +157,7 @@ public class PlayerAether implements IPlayerAether
 		modules.add(this.currencyModule);
 		modules.add(this.sectorModule);
 		modules.add(this.effectsModule);
+		modules.add(this.tradingModule);
 
 		this.modules = modules.toArray(new PlayerAetherModule[0]);
 	}
@@ -466,6 +473,11 @@ public class PlayerAether implements IPlayerAether
 	public PlayerEffectsModule getEffectsModule()
 	{
 		return this.effectsModule;
+	}
+
+	public PlayerTradeModule getTradingModule()
+	{
+		return this.tradingModule;
 	}
 
 	public boolean containsObserver(final PlayerAetherObserver observer)

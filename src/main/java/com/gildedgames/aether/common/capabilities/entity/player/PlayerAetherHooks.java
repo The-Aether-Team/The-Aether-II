@@ -5,7 +5,9 @@ import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.IBlockSnowy;
+import com.gildedgames.aether.common.containers.ContainerTrade;
 import com.gildedgames.aether.common.entities.util.shared.SharedAetherAttributes;
+import com.gildedgames.aether.common.network.AetherGuiHandler;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketMarkPlayerDeath;
 import com.gildedgames.aether.common.network.packets.PacketRequestClientInfo;
@@ -27,6 +29,7 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -35,6 +38,7 @@ import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -42,6 +46,7 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensio
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemPickupEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
@@ -320,6 +325,30 @@ public class PlayerAetherHooks
 		if (aeSourcePlayer != null && aeTargetPlayer != null)
 		{
 			aeTargetPlayer.onPlayerBeginWatching(aeSourcePlayer);
+		}
+	}
+
+	@SubscribeEvent
+	public static void onPlayerPickUpItem(final ItemPickupEvent event)
+	{
+		final PlayerAether aePlayer = PlayerAether.getPlayer(event.player);
+
+		if (event.player.openContainer instanceof ContainerTrade)
+		{
+			((ContainerTrade) event.player.openContainer).addItemToQueue(event.getStack());
+		}
+	}
+
+	@SubscribeEvent
+	public static void onPlayerInteract(final PlayerInteractEvent.EntityInteract event)
+	{
+		if (event.getTarget() instanceof EntityPlayerMP)
+		{
+			EntityPlayerMP otherPlayer = (EntityPlayerMP) event.getTarget();
+			Vec3i vec = otherPlayer.getPosition();
+
+//			otherPlayer.openGui(AetherCore.INSTANCE, AetherGuiHandler.CUSTOM_WORKBENCH_ID, event.getWorld(), vec.getX(), vec.getY(), vec.getZ());
+//			System.out.println(otherPlayer);
 		}
 	}
 }

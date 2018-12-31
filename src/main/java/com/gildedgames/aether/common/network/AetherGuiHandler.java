@@ -10,6 +10,7 @@ import com.gildedgames.aether.client.gui.container.GuiIncubator;
 import com.gildedgames.aether.client.gui.container.simple_crafting.GuiMasonryBench;
 import com.gildedgames.aether.client.gui.dialog.GuiDialogViewer;
 import com.gildedgames.aether.client.gui.dialog.GuiShop;
+import com.gildedgames.aether.client.gui.dialog.GuiTrade;
 import com.gildedgames.aether.client.gui.misc.GuiAetherLoading;
 import com.gildedgames.aether.client.gui.misc.GuiAetherTeleporterNotice;
 import com.gildedgames.aether.client.gui.misc.GuiPatronRewards;
@@ -55,6 +56,8 @@ public class AetherGuiHandler implements IGuiHandler
 
 	public static final int DIALOG_VIEWER_ID = 10;
 
+	public static final int TRADE_ID = 11;
+
 	@Override
 	public Container getServerGuiElement(final int id, final EntityPlayer player, final World world, final int x, final int y, final int z)
 	{
@@ -66,7 +69,7 @@ public class AetherGuiHandler implements IGuiHandler
 			case CUSTOM_WORKBENCH_ID:
 				return new ContainerCustomWorkbench(player.inventory, world, pos);
 			case INVENTORY_EQUIPMENT_ID:
-				return new ContainerEquipment(PlayerAether.getPlayer(player));
+				return new ContainerEquipment(playerAether);
 			case FROSTPINE_COOLER_ID:
 				return new ContainerIcestoneCooler(player.inventory, (IInventory) world.getTileEntity(pos));
 			case INCUBATOR_ID:
@@ -102,6 +105,8 @@ public class AetherGuiHandler implements IGuiHandler
 			}
 			case DIALOG_VIEWER_ID:
 				return new ContainerDialogController(player);
+			case TRADE_ID:
+				return new ContainerTrade(player.inventory);
 			default:
 				return null;
 		}
@@ -179,6 +184,15 @@ public class AetherGuiHandler implements IGuiHandler
 			}
 			case DIALOG_VIEWER_ID:
 				return new GuiDialogViewer(player, playerAether.getDialogController());
+			case TRADE_ID:
+				GuiViewer prevViewerA = null;
+
+				if (FMLClientHandler.instance().getClient().currentScreen instanceof GuiViewer)
+				{
+					prevViewerA = (GuiViewer) FMLClientHandler.instance().getClient().currentScreen;
+				}
+
+				return new GuiTrade(prevViewerA, player);
 			default:
 				return null;
 		}
