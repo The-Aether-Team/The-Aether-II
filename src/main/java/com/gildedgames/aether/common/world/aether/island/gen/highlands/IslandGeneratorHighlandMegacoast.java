@@ -9,6 +9,7 @@ import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.common.world.aether.island.gen.AbstractIslandChunkColumnInfo;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandChunkMaskTransformer;
+import com.gildedgames.aether.common.world.util.data.ChunkDoubleSegment;
 import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
 import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
 import net.minecraft.world.biome.Biome;
@@ -85,19 +86,19 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 		{
 			for (int z = 0; z < 16; z++)
 			{
-				double heightSample = column.heightSample_xz[x][z];
+				double heightSample = column.heightSample_xz.get(x, z);
 
 				if (heightSample == 0.0D)
 				{
 					continue;
 				}
 
-				double bottomMaxY = column.bottomMaxY_xz[x][z];
-				double maxY = column.maxY_xz[x][z];
+				double bottomMaxY = column.bottomMaxY_xz.get(x, z);
+				double maxY = column.maxY_xz.get(x, z);
 
-				double cutoffPoint = column.cutoffPoint_xz[x][z];
-				double topSample = column.topSample_xz[x][z];
-				double bottomHeight = column.bottomHeight_xz[x][z];
+				double cutoffPoint = column.cutoffPoint_xz.get(x, z);
+				double topSample = column.topSample_xz.get(x, z);
+				double bottomHeight = column.bottomHeight_xz.get(x, z);
 
 				for (int y = (int) bottomMaxY; y > bottomMaxY - bottomHeight; y--)
 				{
@@ -233,14 +234,14 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 						maxY = 254.0D;
 					}
 
-					info.maxY_xz[x][z] = maxY;
+					info.maxY_xz.set(x, z, maxY);
 
-					info.bottomMaxY_xz[x][z] = bottomMaxY;
-					info.bottomHeight_xz[x][z] = (bottomHeight * bottomSample);
+					info.bottomMaxY_xz.set(x, z, bottomMaxY);
+					info.bottomHeight_xz.set(x, z, bottomHeight * bottomSample);
 
-					info.heightSample_xz[x][z] = heightSample;
-					info.cutoffPoint_xz[x][z] = cutoffPoint;
-					info.topSample_xz[x][z] = topSample;
+					info.heightSample_xz.set(x, z, heightSample);
+					info.cutoffPoint_xz.set(x, z, cutoffPoint);
+					info.topSample_xz.set(x, z, topSample);
 
 					info.setHeight(x, z, (int) Math.max(maxY, bottomMaxY));
 				}
@@ -256,12 +257,12 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 
 	private class HighlandMegacostChunkColumnInfo extends AbstractIslandChunkColumnInfo
 	{
-		final double[][] bottomMaxY_xz = new double[16][16];
-		final double[][] maxY_xz = new double[16][16];
-		final double[][] heightSample_xz = new double[16][16];
-		final double[][] cutoffPoint_xz = new double[16][16];
-		final double[][] topSample_xz = new double[16][16];
-		final double[][] bottomHeight_xz = new double[16][16];
+		final ChunkDoubleSegment bottomMaxY_xz = new ChunkDoubleSegment();
+		final ChunkDoubleSegment maxY_xz = new ChunkDoubleSegment();
+		final ChunkDoubleSegment heightSample_xz = new ChunkDoubleSegment();
+		final ChunkDoubleSegment cutoffPoint_xz = new ChunkDoubleSegment();
+		final ChunkDoubleSegment topSample_xz = new ChunkDoubleSegment();
+		final ChunkDoubleSegment bottomHeight_xz = new ChunkDoubleSegment();
 
 		HighlandMegacostChunkColumnInfo(OpenSimplexNoise noise, int chunkX, int chunkZ)
 		{

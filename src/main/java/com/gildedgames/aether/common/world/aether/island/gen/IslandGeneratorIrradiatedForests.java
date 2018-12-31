@@ -12,6 +12,8 @@ import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.CrackChunk;
 import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.CrackPos;
 import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.IrradiatedForestsData;
+import com.gildedgames.aether.common.world.util.data.ChunkBooleanSegment;
+import com.gildedgames.aether.common.world.util.data.ChunkDoubleSegment;
 import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
 import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
 import com.gildedgames.orbis_api.util.FastMathUtil;
@@ -94,24 +96,24 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 		{
 			for (int z = 0; z < 16; z++)
 			{
-				double topSample = column.topSample_xz[x][z];
+				double topSample = column.topSample_xz.get(x, z);
 
 				if (topSample == 0.0D)
 				{
 					continue;
 				}
 
-				double maxY = column.maxY_xz[x][z];
-				double heightSample = column.heightSample_xz[x][z];
+				double maxY = column.maxY_xz.get(x, z);
+				double heightSample = column.heightSample_xz.get(x, z);
 
-				double bottomMinY = column.bottomMinY_xz[x][z];
-				double bottomMaxY = column.bottomMaxY_xz[x][z];
-				double bottomHeight = column.bottomHeight_xz[x][z];
+				double bottomMinY = column.bottomMinY_xz.get(x, z);
+				double bottomMaxY = column.bottomMaxY_xz.get(x, z);
+				double bottomHeight = column.bottomHeight_xz.get(x, z);
 
-				double cutoffPoint = column.cutoffPoint_xz[x][z];
+				double cutoffPoint = column.cutoffPoint_xz.get(x, z);
 
-				boolean cracked = column.cracked_xz[x][z];
-				boolean mossy = column.mossy_xz[x][z];
+				boolean cracked = column.cracked_xz.get(x, z);
+				boolean mossy = column.mossy_xz.get(x, z);
 
 				if (!cracked)
 				{
@@ -312,8 +314,8 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 							maxY = 254.0D;
 						}
 
-						info.maxY_xz[x][z] = maxY;
-						info.bottomHeight_xz[x][z] = bottomHeight * bottomSample;
+						info.maxY_xz.set(x, z, maxY);
+						info.bottomHeight_xz.set(x, z, bottomHeight * bottomSample);
 
 						info.setHeight(x, z, (int) Math.max(maxY, bottomHeight));
 					}
@@ -324,19 +326,20 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 
 						final double maxY = (expectedTopY * closestDist);
 
-						info.maxY_xz[x][z] = maxY;
-						info.bottomMinY_xz[x][z] = bottomMinY;
+						info.maxY_xz.set(x, z, maxY);
+						info.bottomMinY_xz.set(x, z, bottomMinY);
 
 						info.setHeight(x, z, (int) Math.max(maxY, bottomHeight));
 					}
 
-					info.cracked_xz[x][z] = cracked;
-					info.bottomMaxY_xz[x][z] = bottomMaxY;
+					info.cracked_xz.set(x, z, cracked);
+					info.mossy_xz.set(x, z, closestDist < 0.95D);
 
-					info.heightSample_xz[x][z] = heightSample;
-					info.cutoffPoint_xz[x][z] = cutoffPoint;
-					info.topSample_xz[x][z] = topSample;
-					info.mossy_xz[x][z] = closestDist < 0.95;
+					info.bottomMaxY_xz.set(x, z, bottomMaxY);
+
+					info.heightSample_xz.set(x, z, heightSample);
+					info.cutoffPoint_xz.set(x, z, cutoffPoint);
+					info.topSample_xz.set(x, z, topSample);
 				}
 				else
 				{
@@ -350,18 +353,18 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 
 	private class IrradiatedForestsChunkColumnData extends AbstractIslandChunkColumnInfo
 	{
-		final boolean[][] cracked_xz = new boolean[16][16];
-		final boolean[][] mossy_xz = new boolean[16][16];
+		final ChunkBooleanSegment cracked_xz = new ChunkBooleanSegment();
+		final ChunkBooleanSegment mossy_xz = new ChunkBooleanSegment();
 
-		final double[][] maxY_xz = new double[16][16];
+		final ChunkDoubleSegment maxY_xz = new ChunkDoubleSegment();
 
-		final double[][] bottomHeight_xz = new double[16][16];
-		final double[][] bottomMaxY_xz = new double[16][16];
-		final double[][] bottomMinY_xz = new double[16][16];
+		final ChunkDoubleSegment bottomHeight_xz = new ChunkDoubleSegment();
+		final ChunkDoubleSegment bottomMaxY_xz = new ChunkDoubleSegment();
+		final ChunkDoubleSegment bottomMinY_xz = new ChunkDoubleSegment();
 
-		final double[][] heightSample_xz = new double[16][16];
-		final double[][] cutoffPoint_xz = new double[16][16];
-		final double[][] topSample_xz = new double[16][16];
+		final ChunkDoubleSegment heightSample_xz = new ChunkDoubleSegment();
+		final ChunkDoubleSegment cutoffPoint_xz = new ChunkDoubleSegment();
+		final ChunkDoubleSegment topSample_xz = new ChunkDoubleSegment();
 
 		IrradiatedForestsChunkColumnData(OpenSimplexNoise noise, int chunkX, int chunkZ)
 		{

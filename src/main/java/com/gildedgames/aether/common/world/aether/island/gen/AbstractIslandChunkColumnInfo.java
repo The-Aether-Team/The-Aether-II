@@ -5,12 +5,13 @@ import com.gildedgames.aether.api.util.OpenSimplexNoise;
 import com.gildedgames.aether.api.world.islands.IIslandChunkColumnInfo;
 import com.gildedgames.aether.api.world.islands.INoiseProvider;
 import com.gildedgames.aether.common.util.ChunkNoiseGenerator;
+import com.gildedgames.aether.common.world.util.data.ChunkShortSegment;
 
 public abstract class AbstractIslandChunkColumnInfo implements IIslandChunkColumnInfo
 {
 	private final ChunkNoiseGenerator terrainDepthBuffer, cloudDepthBuffer;
 
-	private final short[][] heightmap = new short[16][16];
+	private final ChunkShortSegment heightmap = new ChunkShortSegment();
 
 	protected AbstractIslandChunkColumnInfo(OpenSimplexNoise noise, int chunkX, int chunkZ)
 	{
@@ -46,14 +47,14 @@ public abstract class AbstractIslandChunkColumnInfo implements IIslandChunkColum
 	}
 
 	@Override
-	public int getHeight(int x, int y)
+	public int getHeight(int x, int z)
 	{
-		return (int) this.heightmap[x][y];
+		return (int) this.heightmap.get(x, z);
 	}
 
 	@Override
-	public void setHeight(int x, int y, int height)
+	public void setHeight(int x, int z, int height)
 	{
-		this.heightmap[x][y] = (short) height;
+		this.heightmap.set(x, z, (short) height);
 	}
 }

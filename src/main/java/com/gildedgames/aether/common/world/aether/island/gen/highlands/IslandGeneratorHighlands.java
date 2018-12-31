@@ -8,15 +8,14 @@ import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.common.util.ChunkNoiseGenerator;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
-import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.MagneticHillPillar;
-import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.MagneticHillsData;
 import com.gildedgames.aether.common.world.aether.island.gen.AbstractIslandChunkColumnInfo;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandChunkMaskTransformer;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandVariables;
+import com.gildedgames.aether.common.world.util.data.ChunkBooleanSegment;
+import com.gildedgames.aether.common.world.util.data.ChunkDoubleSegment;
 import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
 import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
-import com.gildedgames.orbis_api.util.ObjectFilter;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
@@ -43,6 +42,19 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 		};
 	}
 
+	public static ChunkNoiseGenerator generateLakeNoise(OpenSimplexNoise noise, IIslandData island, int chunkX, int chunkZ, int offset, double scale)
+	{
+		return new ChunkNoiseGenerator(noise, chunkX * 16, chunkZ * 16, 4, 5, island.getBounds().getMinX() + offset, island.getBounds().getMinZ() + offset,
+				scale)
+		{
+			@Override
+			protected double sample(double nx, double nz)
+			{
+				return NoiseUtil.something(noise, nx, nz);
+			}
+		};
+	}
+
 	@Override
 	public void genMask(IAetherChunkColumnInfo columnInfo, ChunkMask mask, IIslandData island, int chunkX, int chunkY, int chunkZ)
 	{
@@ -55,20 +67,20 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 		{
 			for (int z = 0; z < 16; z++)
 			{
-				double maxY = info.maxY_xz[x][z];
+				double maxY = info.maxY_xz.get(x, z);
 
 				if (maxY < 0.0D)
 				{
 					continue;
 				}
 
-				double bottomMaxY = info.bottomMaxY_xz[x][z];
-				double lakeNoise = info.lakeNoise_xz[x][z];
-				double bottomHeight = info.bottomHeight_xz[x][z];
+				double bottomMaxY = info.bottomMaxY_xz.get(x, z);
+				double lakeNoise = info.lakeNoise_xz.get(x, z);
+				double bottomHeight = info.bottomHeight_xz.get(x, z);
 
-				boolean magnetic = info.magnetic_xz[x][z];
-				boolean water = info.water_xz[x][z];
-				boolean snow = info.snow_xz[x][z];
+				boolean magnetic = info.magnetic_xz.get(x, z);
+				boolean water = info.water_xz.get(x, z);
+				boolean snow = info.snow_xz.get(x, z);
 
 				for (int y = (int) bottomMaxY; y > bottomMaxY - bottomHeight; y--)
 				{
@@ -199,8 +211,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 
 		ChunkNoiseGenerator heightMap = generateNoise(noise, island, chunkX, chunkZ, 0, 300.0D);
 		ChunkNoiseGenerator terraceMap = this.v.hasTerraces() ? generateNoise(noise, island, chunkX, chunkZ, 1000, 300.0D) : null;
-
-		MagneticHillsData magneticHillsData = ObjectFilter.getFirstFrom(island.getComponents(), MagneticHillsData.class);
+		ChunkNoiseGenerator lakeMap = generateLakeNoise(noise, island, chunkX, chunkZ, 10000, this.v.getLakeScale());
 
 		int posX = chunkX * 16;
 		int posZ = chunkZ * 16;
@@ -233,8 +244,6 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 
 				if (heightSample > cutoffPoint)
 				{
-					boolean magnetic = false;
-
 					double bottomMaxY = 100;
 
 					double normal = NoiseUtil.normalise(sample);
@@ -254,10 +263,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 
 					filteredSample = Math.pow(filteredSample, 1.0 + (this.v.getCoastSpread() * 0.25));
 
-					double lakeX = (worldX) / this.v.getLakeScale();
-					double lakeZ = (worldZ) / this.v.getLakeScale();
-
-					double lakeSample = NoiseUtil.something(noise, lakeX, lakeZ);
+					double lakeSample = lakeMap.interpolate(x, z);
 
 					double dif = MathHelper.clamp(Math.abs(cutoffPoint - heightSample) * 10.0, 0.0, 1.0);
 
@@ -280,40 +286,9 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 						}
 					}
 
-					double magneticSample = filteredSample;
+					double topHeight = this.v.getMaxTerrainHeight();
 
-					MagneticHillPillar currentPillar = null;
-
-					if (this.v.hasMagneticPillars())
-					{
-						if (magneticHillsData != null)
-						{
-							MagneticHillSampleData magneticData = this.shapeMagneticShafts(magneticHillsData, magneticSample, x, z, chunkX, chunkZ);
-
-							magneticSample = magneticData.height;
-							currentPillar = magneticData.pillar;
-						}
-
-						if (magneticSample > 0.5)
-						{
-							magnetic = true;
-						}
-
-						if (magnetic)
-						{
-							bottomMaxY += currentPillar.getPos().getY();
-							bottomHeight = 55;
-						}
-					}
-
-					if (bottomMaxY < 0.0D)
-					{
-						bottomMaxY = 0.0D;
-					}
-
-					double topHeight = magnetic ? currentPillar.getTopHeight() : this.v.getMaxTerrainHeight();
-
-					double bottomSample = magnetic ? magneticSample : Math.min(1.0D, normal + 0.25);
+					double bottomSample = Math.min(1.0D, normal + 0.25);
 
 					double islandEdgeBlendRange = 0.1;
 					double islandBottomBlendRange = 0.25;
@@ -338,15 +313,9 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 						bottomSample = NoiseUtil.lerp(islandEdge, islandBottom, blend);
 					}
 
-					if (magnetic)
-					{
-						bottomSample = Math.min(1.0, (bottomSample - cutoffPoint) * 1.4);
-						bottomSample = Math.min(bottomSample, bottomSample * currentPillar.getElongationMod());
-					}
-
 					double maxY = this.v.getMaxYFilter().maxY(bottomMaxY, filteredSample, cutoffPoint, topHeight);
 
-					if (water && !magnetic)
+					if (water)
 					{
 						maxY = bottomMaxY;
 					}
@@ -356,15 +325,15 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 						maxY = 254.0D;
 					}
 
-					info.maxY_xz[x][z] = maxY;
+					info.maxY_xz.set(x, z, maxY);
 
-					info.bottomMaxY_xz[x][z] = bottomMaxY;
-					info.lakeNoise_xz[x][z] = lakeNoise;
-					info.bottomHeight_xz[x][z] = (bottomHeight * bottomSample);
+					info.bottomMaxY_xz.set(x, z, bottomMaxY);
+					info.lakeNoise_xz.set(x, z, lakeNoise);
+					info.bottomHeight_xz.set(x, z, bottomHeight * bottomSample);
 
-					info.magnetic_xz[x][z] = magnetic;
-					info.water_xz[x][z] = water;
-					info.snow_xz[x][z] = filteredSample > 0.7;
+					info.magnetic_xz.set(x, z, false);
+					info.water_xz.set(x, z, water);
+					info.snow_xz.set(x, z, filteredSample > 0.7);
 
 					info.setHeight(x, z, (int) Math.max(maxY, bottomMaxY));
 				}
@@ -372,72 +341,26 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 				{
 					info.setHeight(x, z, -1);
 				}
-
 			}
 		}
 
 		return info;
 	}
 
-	private MagneticHillSampleData shapeMagneticShafts(MagneticHillsData data, double magneticSample, int x, int z, int chunkX,
-			int chunkZ)
-	{
-		int worldX = (chunkX * 16) + x;
-		int worldZ = (chunkZ * 16) + z;
-
-		double closestDistX = Double.MAX_VALUE;
-		double closestDistZ = Double.MAX_VALUE;
-
-		MagneticHillPillar pillar = null;
-
-		for (MagneticHillPillar p : data.getMagneticPillars())
-		{
-			double distX = Math.abs((p.getPos().getX() - worldX) * (1.0 / p.getRadius()));
-			double distZ = Math.abs((p.getPos().getZ() - worldZ) * (1.0 / p.getRadius()));
-
-			if (distX + distZ < closestDistX + closestDistZ)
-			{
-				closestDistX = distX;
-				closestDistZ = distZ;
-
-				pillar = p;
-			}
-		}
-
-		double closestDist = Math.sqrt(closestDistX * closestDistX + closestDistZ * closestDistZ);
-
-		double result = magneticSample - closestDist;
-
-		return new MagneticHillSampleData(pillar, result);
-	}
-
-	private class MagneticHillSampleData
-	{
-		public final MagneticHillPillar pillar;
-
-		public final double height;
-
-		private MagneticHillSampleData(MagneticHillPillar pillar, double height)
-		{
-			this.pillar = pillar;
-			this.height = height;
-		}
-	}
-
 	private class HighlandsChunkColumnInfo extends AbstractIslandChunkColumnInfo
 	{
-		final double[][] lakeNoise_xz = new double[16][16];
+		final ChunkDoubleSegment lakeNoise_xz = new ChunkDoubleSegment();
 
-		final double[][] bottomMaxY_xz = new double[16][16];
-		final double[][] bottomHeight_xz = new double[16][16];
+		final ChunkDoubleSegment bottomMaxY_xz = new ChunkDoubleSegment();
+		final ChunkDoubleSegment bottomHeight_xz = new ChunkDoubleSegment();
 
-		final double[][] maxY_xz = new double[16][16];
+		final ChunkDoubleSegment maxY_xz = new ChunkDoubleSegment();
 
-		final boolean[][] magnetic_xz = new boolean[16][16];
-		final boolean[][] water_xz = new boolean[16][16];
-		final boolean[][] snow_xz = new boolean[16][16];
+		final ChunkBooleanSegment magnetic_xz = new ChunkBooleanSegment();
+		final ChunkBooleanSegment water_xz = new ChunkBooleanSegment();
+		final ChunkBooleanSegment snow_xz = new ChunkBooleanSegment();
 
-		protected HighlandsChunkColumnInfo(OpenSimplexNoise noise, int chunkX, int chunkZ)
+		HighlandsChunkColumnInfo(OpenSimplexNoise noise, int chunkX, int chunkZ)
 		{
 			super(noise, chunkX, chunkZ);
 		}
