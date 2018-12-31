@@ -75,49 +75,37 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 				}
 
 				double bottomMaxY = info.bottomMaxY_xz.get(x, z);
-				double lakeNoise = info.lakeNoise_xz.get(x, z);
 				double bottomHeight = info.bottomHeight_xz.get(x, z);
+
+				double lakeNoise = info.lakeNoise_xz.get(x, z);
 
 				boolean magnetic = info.magnetic_xz.get(x, z);
 				boolean water = info.water_xz.get(x, z);
 				boolean snow = info.snow_xz.get(x, z);
 
-				for (int y = (int) bottomMaxY; y > bottomMaxY - bottomHeight; y--)
-				{
-					if (y < boundsMinY || y >= boundsMaxY)
-					{
-						continue;
-					}
+				int stone = magnetic ? IslandBlockType.FERROSITE_BLOCK.ordinal() : IslandBlockType.STONE_BLOCK.ordinal();
 
-					mask.setBlock(x, y - boundsMinY, z, magnetic ? IslandBlockType.FERROSITE_BLOCK.ordinal() : IslandBlockType.STONE_BLOCK.ordinal());
+				for (int y = Math.min((int) bottomMaxY, boundsMaxY - 1); y > Math.max(bottomMaxY - bottomHeight, boundsMinY - 1); y--)
+				{
+					mask.setBlock(x, y - boundsMinY, z, stone);
 				}
 
-				for (int y = (int) bottomMaxY; y < maxY; y++)
+				for (int y = Math.max((int) bottomMaxY, boundsMinY); y < Math.min(maxY, boundsMaxY); y++)
 				{
-					if (y < boundsMinY || y >= boundsMaxY)
-					{
-						continue;
-					}
-
-					if (this.v.hasSnowCaps() && snow && y > maxY - 8)
+					if (snow && y > maxY - 8)
 					{
 						mask.setBlock(x, y - boundsMinY, z, IslandBlockType.SNOW_BLOCK.ordinal());
 					}
 					else
 					{
-						mask.setBlock(x, y - boundsMinY, z, magnetic ? IslandBlockType.FERROSITE_BLOCK.ordinal() : IslandBlockType.STONE_BLOCK.ordinal());
+						mask.setBlock(x, y - boundsMinY, z, stone);
 					}
 				}
 
 				if (lakeNoise >= this.v.getLakeThreshold())
 				{
-					for (int y = 100 + this.v.getCoastHeight() - 1; y >= 100; y--)
+					for (int y = Math.min(100 + this.v.getCoastHeight() - 1, boundsMaxY); y >= Math.max(100, boundsMinY + 1); y--)
 					{
-						if (y < boundsMinY || y >= boundsMaxY)
-						{
-							continue;
-						}
-
 						int found = mask.getBlock(x, y - boundsMinY, z);
 
 						if (found == IslandBlockType.STONE_BLOCK.ordinal())
@@ -141,13 +129,8 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 				{
 					double minY = maxY - ((Math.max(0.0, lakeNoise - (this.v.getLakeThreshold() + this.v.getLakeBlendRange()))) * this.v.getLakeDepth());
 
-					for (int y = (int) maxY; y > minY - 1; y--)
+					for (int y = Math.min((int) maxY, boundsMaxY - 1); y > Math.max(minY - 1, boundsMinY); y--)
 					{
-						if (y < boundsMinY || y >= boundsMaxY)
-						{
-							continue;
-						}
-
 						if (y <= minY)
 						{
 							mask.setBlock(x, y - boundsMinY, z, IslandBlockType.SOIL_BLOCK.ordinal());
@@ -161,13 +144,8 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 
 				if (this.v.getCoastHeight() > 0)
 				{
-					for (int y = 100 + this.v.getCoastHeight() - 1; y >= 100; y--)
+					for (int y = Math.min(100 + this.v.getCoastHeight() - 1, boundsMaxY - 1); y >= Math.max(100, boundsMinY - 1); y--)
 					{
-						if (y < boundsMinY || y >= boundsMaxY)
-						{
-							continue;
-						}
-
 						int found = mask.getBlock(x, y - boundsMinY, z);
 
 						if (found == IslandBlockType.STONE_BLOCK.ordinal())
@@ -333,7 +311,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 
 					info.magnetic_xz.set(x, z, false);
 					info.water_xz.set(x, z, water);
-					info.snow_xz.set(x, z, filteredSample > 0.7);
+					info.snow_xz.set(x, z, this.v.hasSnowCaps() && (filteredSample > 0.7));
 
 					info.setHeight(x, z, (int) Math.max(maxY, bottomMaxY));
 				}

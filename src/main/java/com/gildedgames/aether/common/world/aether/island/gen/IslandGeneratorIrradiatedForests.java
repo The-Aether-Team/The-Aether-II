@@ -117,14 +117,9 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 
 				if (!cracked)
 				{
-					for (int y = (int) bottomMaxY; y > bottomMaxY - bottomHeight; y--)
+					for (int y = Math.min((int) bottomMaxY, boundsMaxY - 1); y > Math.max(bottomMaxY - bottomHeight, boundsMinY - 1); y--)
 					{
-						if (y < boundsMinY || y >= boundsMaxY)
-						{
-							continue;
-						}
-
-						if (hasCoast && heightSample < cutoffPoint + 0.025 && y == 100)
+						if (hasCoast && y == 100 && heightSample < cutoffPoint + 0.025)
 						{
 							mask.setBlock(x, y - boundsMinY, z, IslandBlockType.COAST_BLOCK.ordinal());
 						}
@@ -134,14 +129,9 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 						}
 					}
 
-					for (int y = (int) bottomMaxY; y < maxY; y++)
+					for (int y = Math.max((int) bottomMaxY, boundsMinY); y < Math.min(maxY, boundsMaxY); y++)
 					{
-						if (y < boundsMinY || y >= boundsMaxY)
-						{
-							continue;
-						}
-
-						if (hasCoast && (topSample < cutoffPoint + 0.025 && y == 100))
+						if (hasCoast && (y == 100 && topSample < cutoffPoint + 0.025))
 						{
 							mask.setBlock(x, y - boundsMinY, z, IslandBlockType.COAST_BLOCK.ordinal());
 						}
@@ -153,15 +143,10 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 				}
 				else
 				{
-					for (int y = (int) bottomMinY; y < maxY; y++)
-					{
-						if (y < boundsMinY || y >= boundsMaxY)
-						{
-							continue;
-						}
-						
-						IslandBlockType type = mossy ? IslandBlockType.STONE_MOSSY_BLOCK : IslandBlockType.STONE_BLOCK;
+					IslandBlockType type = mossy ? IslandBlockType.STONE_MOSSY_BLOCK : IslandBlockType.STONE_BLOCK;
 
+					for (int y = Math.max((int) bottomMinY, boundsMinY); y < Math.min(maxY, boundsMaxY); y++)
+					{
 						mask.setBlock(x, y - boundsMinY, z, type.ordinal());
 					}
 				}

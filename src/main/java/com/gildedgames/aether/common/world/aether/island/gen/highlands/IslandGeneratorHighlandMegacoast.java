@@ -100,14 +100,9 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 				double topSample = column.topSample_xz.get(x, z);
 				double bottomHeight = column.bottomHeight_xz.get(x, z);
 
-				for (int y = (int) bottomMaxY; y > bottomMaxY - bottomHeight; y--)
+				for (int y = Math.min((int) bottomMaxY, boundsMaxY - 1); y > Math.max(bottomMaxY - bottomHeight, boundsMinY - 1); y--)
 				{
-					if (y < boundsMinY || y >= boundsMaxY)
-					{
-						continue;
-					}
-
-					if (heightSample < cutoffPoint + 0.10 && y == 100)
+					if (y == 100 && heightSample < cutoffPoint + 0.10)
 					{
 						mask.setBlock(x, y - boundsMinY, z, IslandBlockType.COAST_BLOCK.ordinal());
 					}
@@ -117,14 +112,9 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 					}
 				}
 
-				for (int y = (int) bottomMaxY; y < maxY; y++)
+				for (int y = Math.max((int) bottomMaxY, boundsMinY); y < Math.min(maxY, boundsMaxY); y++)
 				{
-					if (y < boundsMinY || y >= boundsMaxY)
-					{
-						continue;
-					}
-
-					if ((topSample < cutoffPoint + 0.10 && y == 100))
+					if (y == 100 && topSample < cutoffPoint + 0.10)
 					{
 						mask.setBlock(x, y - boundsMinY, z, IslandBlockType.COAST_BLOCK.ordinal());
 					}
