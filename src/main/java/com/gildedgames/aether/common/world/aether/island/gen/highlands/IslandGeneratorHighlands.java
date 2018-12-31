@@ -3,12 +3,14 @@ package com.gildedgames.aether.common.world.aether.island.gen.highlands;
 import com.gildedgames.aether.api.util.NoiseUtil;
 import com.gildedgames.aether.api.util.OpenSimplexNoise;
 import com.gildedgames.aether.api.world.IAetherChunkColumnInfo;
+import com.gildedgames.aether.api.world.islands.IIslandChunkColumnInfo;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.common.util.ChunkNoiseGenerator;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.MagneticHillPillar;
 import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.MagneticHillsData;
+import com.gildedgames.aether.common.world.aether.island.gen.AbstractIslandChunkColumnInfo;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandChunkMaskTransformer;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandVariables;
@@ -42,14 +44,24 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 	}
 
 	@Override
-	public void genMask(IAetherChunkColumnInfo columnInfo, ChunkMask mask, IIslandData island, int chunkX, int chunkZ)
+	public void genMask(IAetherChunkColumnInfo columnInfo, ChunkMask mask, IIslandData island, int chunkX, int chunkY, int chunkZ)
 	{
-		HighlandsColumnInfo info = columnInfo.getIslandData(0, HighlandsColumnInfo.class);
+		HighlandsChunkColumnInfo info = columnInfo.getIslandData(0, HighlandsChunkColumnInfo.class);
+
+		int boundsMinY = chunkY * 16;
+		int boundsMaxY = boundsMinY + 16;
 
 		for (int x = 0; x < 16; x++)
 		{
 			for (int z = 0; z < 16; z++)
 			{
+				double maxY = info.maxY_xz[x][z];
+
+				if (maxY < 0.0D)
+				{
+					continue;
+				}
+
 				double bottomMaxY = info.bottomMaxY_xz[x][z];
 				double lakeNoise = info.lakeNoise_xz[x][z];
 				double bottomHeight = info.bottomHeight_xz[x][z];
@@ -58,32 +70,30 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 				boolean water = info.water_xz[x][z];
 				boolean snow = info.snow_xz[x][z];
 
-				double maxY = info.maxY_xz[x][z];
-
-				if (maxY == 0.0D)
-				{
-					continue;
-				}
-
 				for (int y = (int) bottomMaxY; y > bottomMaxY - bottomHeight; y--)
 				{
-					if (y < 0)
+					if (y < boundsMinY || y >= boundsMaxY)
 					{
 						continue;
 					}
 
-					mask.setBlock(x, y, z, magnetic ? IslandBlockType.FERROSITE_BLOCK.ordinal() : IslandBlockType.STONE_BLOCK.ordinal());
+					mask.setBlock(x, y - boundsMinY, z, magnetic ? IslandBlockType.FERROSITE_BLOCK.ordinal() : IslandBlockType.STONE_BLOCK.ordinal());
 				}
 
 				for (int y = (int) bottomMaxY; y < maxY; y++)
 				{
+					if (y < boundsMinY || y >= boundsMaxY)
+					{
+						continue;
+					}
+
 					if (this.v.hasSnowCaps() && snow && y > maxY - 8)
 					{
-						mask.setBlock(x, y, z, IslandBlockType.SNOW_BLOCK.ordinal());
+						mask.setBlock(x, y - boundsMinY, z, IslandBlockType.SNOW_BLOCK.ordinal());
 					}
 					else
 					{
-						mask.setBlock(x, y, z, magnetic ? IslandBlockType.FERROSITE_BLOCK.ordinal() : IslandBlockType.STONE_BLOCK.ordinal());
+						mask.setBlock(x, y - boundsMinY, z, magnetic ? IslandBlockType.FERROSITE_BLOCK.ordinal() : IslandBlockType.STONE_BLOCK.ordinal());
 					}
 				}
 
@@ -91,18 +101,23 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 				{
 					for (int y = 100 + this.v.getCoastHeight() - 1; y >= 100; y--)
 					{
-						int found = mask.getBlock(x, y, z);
+						if (y < boundsMinY || y >= boundsMaxY)
+						{
+							continue;
+						}
+
+						int found = mask.getBlock(x, y - boundsMinY, z);
 
 						if (found == IslandBlockType.STONE_BLOCK.ordinal())
 						{
-							if (mask.getBlock(x, y + 1, z) != 0)
+							if (mask.getBlock(x, y + 1 - boundsMinY, z) != 0)
 							{
 								break;
 							}
 
 							if (y <= 100 + this.v.getCoastHeight() - 1)
 							{
-								mask.setBlock(x, y, z, IslandBlockType.COAST_BLOCK.ordinal());
+								mask.setBlock(x, y - boundsMinY, z, IslandBlockType.COAST_BLOCK.ordinal());
 							}
 
 							break;
@@ -116,13 +131,18 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 
 					for (int y = (int) maxY; y > minY - 1; y--)
 					{
+						if (y < boundsMinY || y >= boundsMaxY)
+						{
+							continue;
+						}
+
 						if (y <= minY)
 						{
-							mask.setBlock(x, y, z, IslandBlockType.SOIL_BLOCK.ordinal());
+							mask.setBlock(x, y - boundsMinY, z, IslandBlockType.SOIL_BLOCK.ordinal());
 						}
 						else
 						{
-							mask.setBlock(x, y, z, IslandBlockType.WATER_BLOCK.ordinal());
+							mask.setBlock(x, y - boundsMinY, z, IslandBlockType.WATER_BLOCK.ordinal());
 						}
 					}
 				}
@@ -131,18 +151,23 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 				{
 					for (int y = 100 + this.v.getCoastHeight() - 1; y >= 100; y--)
 					{
-						int found = mask.getBlock(x, y, z);
+						if (y < boundsMinY || y >= boundsMaxY)
+						{
+							continue;
+						}
+
+						int found = mask.getBlock(x, y - boundsMinY, z);
 
 						if (found == IslandBlockType.STONE_BLOCK.ordinal())
 						{
-							if (mask.getBlock(x, y + 1, z) != 0)
+							if (mask.getBlock(x, y + 1 - boundsMinY, z) != 0)
 							{
 								break;
 							}
 
 							if (y <= 100 + this.v.getCoastHeight() - 1)
 							{
-								mask.setBlock(x, y, z, IslandBlockType.COAST_BLOCK.ordinal());
+								mask.setBlock(x, y - boundsMinY, z, IslandBlockType.COAST_BLOCK.ordinal());
 							}
 
 							break;
@@ -155,7 +180,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 
 	@Override
 	public void genChunk(Biome[] biomes, OpenSimplexNoise noise, IBlockAccessExtended access, ChunkMask mask, ChunkPrimer primer, IIslandData island,
-			int chunkX, int chunkZ)
+			int chunkX, int chunkY, int chunkZ)
 	{
 		BiomeAetherBase biome = (BiomeAetherBase) island.getBiome();
 
@@ -168,9 +193,9 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 	}
 
 	@Override
-	public Object genInfo(Biome[] biomes, OpenSimplexNoise noise, IIslandData island, int chunkX, int chunkZ)
+	public IIslandChunkColumnInfo genInfo(Biome[] biomes, OpenSimplexNoise noise, IIslandData island, int chunkX, int chunkZ)
 	{
-		HighlandsColumnInfo info = new HighlandsColumnInfo();
+		HighlandsChunkColumnInfo info = new HighlandsChunkColumnInfo(noise, chunkX, chunkZ);
 
 		ChunkNoiseGenerator heightMap = generateNoise(noise, island, chunkX, chunkZ, 0, 300.0D);
 		ChunkNoiseGenerator terraceMap = this.v.hasTerraces() ? generateNoise(noise, island, chunkX, chunkZ, 1000, 300.0D) : null;
@@ -208,7 +233,6 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 
 				if (heightSample > cutoffPoint)
 				{
-
 					boolean magnetic = false;
 
 					double bottomMaxY = 100;
@@ -341,7 +365,14 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 					info.magnetic_xz[x][z] = magnetic;
 					info.water_xz[x][z] = water;
 					info.snow_xz[x][z] = filteredSample > 0.7;
+
+					info.setHeight(x, z, (int) Math.max(maxY, bottomMaxY));
 				}
+				else
+				{
+					info.setHeight(x, z, -1);
+				}
+
 			}
 		}
 
@@ -393,17 +424,22 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 		}
 	}
 
-	private class HighlandsColumnInfo
+	private class HighlandsChunkColumnInfo extends AbstractIslandChunkColumnInfo
 	{
-		public final double[][] bottomMaxY_xz = new double[16][16];
-		public final double[][] lakeNoise_xz = new double[16][16];
-		public final double[][] maxY_xz = new double[16][16];
-		public final double[][] bottomHeight_xz = new double[16][16];
+		final double[][] lakeNoise_xz = new double[16][16];
 
-		public final boolean[][] magnetic_xz = new boolean[16][16];
-		public final boolean[][] water_xz = new boolean[16][16];
-		public final boolean[][] snow_xz = new boolean[16][16];
+		final double[][] bottomMaxY_xz = new double[16][16];
+		final double[][] bottomHeight_xz = new double[16][16];
 
-		public int chunkX, chunkZ;
+		final double[][] maxY_xz = new double[16][16];
+
+		final boolean[][] magnetic_xz = new boolean[16][16];
+		final boolean[][] water_xz = new boolean[16][16];
+		final boolean[][] snow_xz = new boolean[16][16];
+
+		protected HighlandsChunkColumnInfo(OpenSimplexNoise noise, int chunkX, int chunkZ)
+		{
+			super(noise, chunkX, chunkZ);
+		}
 	}
 }

@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.world.aether.island.gen;
 import com.gildedgames.aether.api.util.NoiseUtil;
 import com.gildedgames.aether.api.util.OpenSimplexNoise;
 import com.gildedgames.aether.api.world.IAetherChunkColumnInfo;
+import com.gildedgames.aether.api.world.islands.IIslandChunkColumnInfo;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.common.blocks.BlocksAether;
@@ -46,8 +47,7 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 				fractionX * ((1.0 - fractionZ) * c + fractionZ * d);
 	}
 
-	private double[] generateNoise(final OpenSimplexNoise noise, final IIslandData island, final int chunkX, final int chunkZ, final int offset,
-			final double scale)
+	private double[] generateNoise(OpenSimplexNoise noise, IIslandData island, int chunkX, int chunkZ, int offset, double scale)
 	{
 		final double posX = chunkX * 16;
 		final double posZ = chunkZ * 16;
@@ -81,9 +81,12 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 	}
 
 	@Override
-	public void genMask(IAetherChunkColumnInfo info, ChunkMask mask, IIslandData island, int chunkX, int chunkZ)
+	public void genMask(IAetherChunkColumnInfo info, ChunkMask mask, IIslandData island, int chunkX, int chunkY, int chunkZ)
 	{
-		IrradiatedForestsColumnData column = info.getIslandData(0, IrradiatedForestsColumnData.class);
+		IrradiatedForestsChunkColumnData column = info.getIslandData(0, IrradiatedForestsChunkColumnData.class);
+
+		int boundsMinY = chunkY * 16;
+		int boundsMaxY = boundsMinY + 16;
 
 		boolean hasCoast = ((BiomeAetherBase) island.getBiome()).getCoastalBlock() != null;
 
@@ -91,6 +94,13 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 		{
 			for (int z = 0; z < 16; z++)
 			{
+				double topSample = column.topSample_xz[x][z];
+
+				if (topSample == 0.0D)
+				{
+					continue;
+				}
+
 				double maxY = column.maxY_xz[x][z];
 				double heightSample = column.heightSample_xz[x][z];
 
@@ -99,12 +109,6 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 				double bottomHeight = column.bottomHeight_xz[x][z];
 
 				double cutoffPoint = column.cutoffPoint_xz[x][z];
-				double topSample = column.topSample_xz[x][z];
-
-				if (topSample == 0.0D)
-				{
-					continue;
-				}
 
 				boolean cracked = column.cracked_xz[x][z];
 				boolean mossy = column.mossy_xz[x][z];
@@ -113,30 +117,35 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 				{
 					for (int y = (int) bottomMaxY; y > bottomMaxY - bottomHeight; y--)
 					{
-						if (y < 0)
+						if (y < boundsMinY || y >= boundsMaxY)
 						{
 							continue;
 						}
 
 						if (hasCoast && heightSample < cutoffPoint + 0.025 && y == 100)
 						{
-							mask.setBlock(x, y, z, IslandBlockType.COAST_BLOCK.ordinal());
+							mask.setBlock(x, y - boundsMinY, z, IslandBlockType.COAST_BLOCK.ordinal());
 						}
 						else
 						{
-							mask.setBlock(x, y, z, IslandBlockType.STONE_BLOCK.ordinal());
+							mask.setBlock(x, y - boundsMinY, z, IslandBlockType.STONE_BLOCK.ordinal());
 						}
 					}
 
 					for (int y = (int) bottomMaxY; y < maxY; y++)
 					{
+						if (y < boundsMinY || y >= boundsMaxY)
+						{
+							continue;
+						}
+
 						if (hasCoast && (topSample < cutoffPoint + 0.025 && y == 100))
 						{
-							mask.setBlock(x, y, z, IslandBlockType.COAST_BLOCK.ordinal());
+							mask.setBlock(x, y - boundsMinY, z, IslandBlockType.COAST_BLOCK.ordinal());
 						}
 						else
 						{
-							mask.setBlock(x, y, z, IslandBlockType.STONE_BLOCK.ordinal());
+							mask.setBlock(x, y - boundsMinY, z, IslandBlockType.STONE_BLOCK.ordinal());
 						}
 					}
 				}
@@ -144,9 +153,14 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 				{
 					for (int y = (int) bottomMinY; y < maxY; y++)
 					{
+						if (y < boundsMinY || y >= boundsMaxY)
+						{
+							continue;
+						}
+						
 						IslandBlockType type = mossy ? IslandBlockType.STONE_MOSSY_BLOCK : IslandBlockType.STONE_BLOCK;
 
-						mask.setBlock(x, y, z, type.ordinal());
+						mask.setBlock(x, y - boundsMinY, z, type.ordinal());
 					}
 				}
 			}
@@ -155,7 +169,7 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 
 	@Override
 	public void genChunk(Biome[] biomes, OpenSimplexNoise noise, IBlockAccessExtended access, ChunkMask mask, ChunkPrimer primer, IIslandData island,
-			int chunkX, int chunkZ)
+			int chunkX, int chunkY, int chunkZ)
 	{
 		IslandChunkMaskTransformer transformer = new IslandChunkMaskTransformer();
 		transformer.setMaskValue(IslandBlockType.TOPSOIL_BLOCK,
@@ -165,9 +179,9 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 	}
 
 	@Override
-	public Object genInfo(Biome[] biomes, OpenSimplexNoise noise, IIslandData island, int chunkX, int chunkZ)
+	public IIslandChunkColumnInfo genInfo(Biome[] biomes, OpenSimplexNoise noise, IIslandData island, int chunkX, int chunkZ)
 	{
-		IrradiatedForestsColumnData column = new IrradiatedForestsColumnData();
+		IrradiatedForestsChunkColumnData info = new IrradiatedForestsChunkColumnData(noise, chunkX, chunkZ);
 
 		IrradiatedForestsData data = ObjectFilter.getFirstFrom(island.getComponents(), IrradiatedForestsData.class);
 
@@ -298,8 +312,10 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 							maxY = 254.0D;
 						}
 
-						column.maxY_xz[x][z] = maxY;
-						column.bottomHeight_xz[x][z] = bottomHeight * bottomSample;
+						info.maxY_xz[x][z] = maxY;
+						info.bottomHeight_xz[x][z] = bottomHeight * bottomSample;
+
+						info.setHeight(x, z, (int) Math.max(maxY, bottomHeight));
 					}
 					else
 					{
@@ -308,25 +324,31 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 
 						final double maxY = (expectedTopY * closestDist);
 
-						column.maxY_xz[x][z] = maxY;
-						column.bottomMinY_xz[x][z] = bottomMinY;
+						info.maxY_xz[x][z] = maxY;
+						info.bottomMinY_xz[x][z] = bottomMinY;
+
+						info.setHeight(x, z, (int) Math.max(maxY, bottomHeight));
 					}
 
-					column.cracked_xz[x][z] = cracked;
-					column.bottomMaxY_xz[x][z] = bottomMaxY;
+					info.cracked_xz[x][z] = cracked;
+					info.bottomMaxY_xz[x][z] = bottomMaxY;
 
-					column.heightSample_xz[x][z] = heightSample;
-					column.cutoffPoint_xz[x][z] = cutoffPoint;
-					column.topSample_xz[x][z] = topSample;
-					column.mossy_xz[x][z] = closestDist < 0.95;
+					info.heightSample_xz[x][z] = heightSample;
+					info.cutoffPoint_xz[x][z] = cutoffPoint;
+					info.topSample_xz[x][z] = topSample;
+					info.mossy_xz[x][z] = closestDist < 0.95;
+				}
+				else
+				{
+					info.setHeight(x, z, -1);
 				}
 			}
 		}
 
-		return column;
+		return info;
 	}
 
-	private class IrradiatedForestsColumnData
+	private class IrradiatedForestsChunkColumnData extends AbstractIslandChunkColumnInfo
 	{
 		final boolean[][] cracked_xz = new boolean[16][16];
 		final boolean[][] mossy_xz = new boolean[16][16];
@@ -340,5 +362,10 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 		final double[][] heightSample_xz = new double[16][16];
 		final double[][] cutoffPoint_xz = new double[16][16];
 		final double[][] topSample_xz = new double[16][16];
+
+		IrradiatedForestsChunkColumnData(OpenSimplexNoise noise, int chunkX, int chunkZ)
+		{
+			super(noise, chunkX, chunkZ);
+		}
 	}
 }

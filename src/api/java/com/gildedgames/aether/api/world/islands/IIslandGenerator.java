@@ -12,11 +12,10 @@ import javax.annotation.Nonnull;
 public interface IIslandGenerator
 {
 
-	void genMask(IAetherChunkColumnInfo info, ChunkMask mask, IIslandData island, int chunkX, int chunkZ);
+	void genMask(IAetherChunkColumnInfo info, ChunkMask mask, IIslandData island, int chunkX, int chunkY, int chunkZ);
 
-	void genChunk(Biome[] biomes, OpenSimplexNoise noise, IBlockAccessExtended access, ChunkMask mask, ChunkPrimer primer, IIslandData island, int chunkX,
-			int chunkZ);
+	void genChunk(Biome[] biomes, OpenSimplexNoise noise, IBlockAccessExtended access, ChunkMask mask, ChunkPrimer primer, IIslandData island, int chunkX, int chunkY, int chunkZ);
 
 	@Nonnull
-	Object genInfo(Biome[] biomes, OpenSimplexNoise noise, IIslandData island, int chunkX, int chunkZ);
+	IIslandChunkColumnInfo genInfo(Biome[] biomes, OpenSimplexNoise noise, IIslandData island, int chunkX, int chunkZ);
 }

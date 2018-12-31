@@ -3,8 +3,10 @@ package com.gildedgames.aether.common.world.aether.island.gen.highlands;
 import com.gildedgames.aether.api.util.NoiseUtil;
 import com.gildedgames.aether.api.util.OpenSimplexNoise;
 import com.gildedgames.aether.api.world.IAetherChunkColumnInfo;
+import com.gildedgames.aether.api.world.islands.IIslandChunkColumnInfo;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
+import com.gildedgames.aether.common.world.aether.island.gen.AbstractIslandChunkColumnInfo;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandChunkMaskTransformer;
 import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
@@ -72,9 +74,12 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 
 
 	@Override
-	public void genMask(IAetherChunkColumnInfo info, ChunkMask mask, IIslandData island, int chunkX, int chunkZ)
+	public void genMask(IAetherChunkColumnInfo info, ChunkMask mask, IIslandData island, int chunkX, int chunkY, int chunkZ)
 	{
-		HighlandMegacostColumnInfo column = info.getIslandData(0, HighlandMegacostColumnInfo.class);
+		int boundsMinY = chunkY * 16;
+		int boundsMaxY = boundsMinY + 16;
+
+		HighlandMegacostChunkColumnInfo column = info.getIslandData(0, HighlandMegacostChunkColumnInfo.class);
 
 		for (int x = 0; x < 16; x++)
 		{
@@ -96,30 +101,35 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 
 				for (int y = (int) bottomMaxY; y > bottomMaxY - bottomHeight; y--)
 				{
-					if (y < 0)
+					if (y < boundsMinY || y >= boundsMaxY)
 					{
 						continue;
 					}
 
 					if (heightSample < cutoffPoint + 0.10 && y == 100)
 					{
-						mask.setBlock(x, y, z, IslandBlockType.COAST_BLOCK.ordinal());
+						mask.setBlock(x, y - boundsMinY, z, IslandBlockType.COAST_BLOCK.ordinal());
 					}
 					else
 					{
-						mask.setBlock(x, y, z, IslandBlockType.STONE_BLOCK.ordinal());
+						mask.setBlock(x, y - boundsMinY, z, IslandBlockType.STONE_BLOCK.ordinal());
 					}
 				}
 
 				for (int y = (int) bottomMaxY; y < maxY; y++)
 				{
+					if (y < boundsMinY || y >= boundsMaxY)
+					{
+						continue;
+					}
+
 					if ((topSample < cutoffPoint + 0.10 && y == 100))
 					{
-						mask.setBlock(x, y, z, IslandBlockType.COAST_BLOCK.ordinal());
+						mask.setBlock(x, y - boundsMinY, z, IslandBlockType.COAST_BLOCK.ordinal());
 					}
 					else
 					{
-						mask.setBlock(x, y, z, IslandBlockType.STONE_BLOCK.ordinal());
+						mask.setBlock(x, y - boundsMinY, z, IslandBlockType.STONE_BLOCK.ordinal());
 					}
 				}
 			}
@@ -128,15 +138,15 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 
 	@Override
 	public void genChunk(Biome[] biomes, OpenSimplexNoise noise, IBlockAccessExtended access, ChunkMask mask, ChunkPrimer primer, IIslandData island,
-			int chunkX, int chunkZ)
+			int chunkX, int chunkY, int chunkZ)
 	{
 		mask.createChunk(primer, new IslandChunkMaskTransformer());
 	}
 
 	@Override
-	public Object genInfo(Biome[] biomes, OpenSimplexNoise noise, IIslandData island, int chunkX, int chunkZ)
+	public IIslandChunkColumnInfo genInfo(Biome[] biomes, OpenSimplexNoise noise, IIslandData island, int chunkX, int chunkZ)
 	{
-		HighlandMegacostColumnInfo info = new HighlandMegacostColumnInfo();
+		HighlandMegacostChunkColumnInfo info = new HighlandMegacostChunkColumnInfo(noise, chunkX, chunkZ);
 
 		final double[] heightMap = generateNoise(noise, island, chunkX, chunkZ);
 
@@ -231,6 +241,12 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 					info.heightSample_xz[x][z] = heightSample;
 					info.cutoffPoint_xz[x][z] = cutoffPoint;
 					info.topSample_xz[x][z] = topSample;
+
+					info.setHeight(x, z, (int) Math.max(maxY, bottomMaxY));
+				}
+				else
+				{
+					info.setHeight(x, z, -1);
 				}
 			}
 		}
@@ -238,7 +254,7 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 		return info;
 	}
 
-	private class HighlandMegacostColumnInfo
+	private class HighlandMegacostChunkColumnInfo extends AbstractIslandChunkColumnInfo
 	{
 		final double[][] bottomMaxY_xz = new double[16][16];
 		final double[][] maxY_xz = new double[16][16];
@@ -246,5 +262,10 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 		final double[][] cutoffPoint_xz = new double[16][16];
 		final double[][] topSample_xz = new double[16][16];
 		final double[][] bottomHeight_xz = new double[16][16];
+
+		HighlandMegacostChunkColumnInfo(OpenSimplexNoise noise, int chunkX, int chunkZ)
+		{
+			super(noise, chunkX, chunkZ);
+		}
 	}
 }

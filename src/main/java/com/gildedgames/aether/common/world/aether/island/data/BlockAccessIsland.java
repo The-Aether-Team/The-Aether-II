@@ -46,6 +46,7 @@ public class BlockAccessIsland extends BlockAccessPrep
 	public IBlockState getBlockState(BlockPos pos)
 	{
 		int chunkX = pos.getX() >> 4;
+		int chunkY = pos.getY() >> 4;
 		int chunkZ = pos.getZ() >> 4;
 
 		List<PlacedBlueprint> placedBlueprints = this.island.getPlacedBlueprintsInChunk(chunkX, chunkZ);
@@ -71,8 +72,8 @@ public class BlockAccessIsland extends BlockAccessPrep
 			}
 		}
 
-		ChunkMask chunk = this.getChunk(chunkX, chunkZ);
+		ChunkMask chunk = this.getChunk(chunkX, chunkY, chunkZ);
 
-		return this.transformer.remapBlock(chunk.getBlock(pos.getX() & 15, pos.getY(), pos.getZ() & 15));
+		return this.transformer.remapBlock(chunk.getBlock(pos.getX() & 15, pos.getY() & 15, pos.getZ() & 15));
 	}
 }

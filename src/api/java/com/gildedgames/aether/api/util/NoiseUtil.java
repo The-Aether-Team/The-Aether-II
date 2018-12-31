@@ -71,5 +71,4 @@ public class NoiseUtil
 
 		return total;
 	}
-
 }

@@ -28,6 +28,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -321,5 +322,15 @@ public class PlayerAetherHooks
 		{
 			aeTargetPlayer.onPlayerBeginWatching(aeSourcePlayer);
 		}
+	}
+
+	@SubscribeEvent
+	public static void onPlayerJoinWarnDumb(final net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event)
+	{
+		event.player.sendStatusMessage(new TextComponentString(TextFormatting.RED.toString() + TextFormatting.BOLD.toString() +
+				"You are using an experimental build of the Aether II."), false);
+
+		event.player.sendStatusMessage(new TextComponentString(TextFormatting.RED.toString() + " " +
+				"World generation may break or destroy your computer at any moment. Please do not report issues for this build. You have been warned."), false);
 	}
 }

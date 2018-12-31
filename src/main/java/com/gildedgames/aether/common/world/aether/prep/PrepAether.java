@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.world.aether.prep;
 
 import com.gildedgames.aether.api.world.IAetherChunkColumnInfo;
 import com.gildedgames.aether.api.world.islands.IIslandBounds;
+import com.gildedgames.aether.api.world.islands.IIslandChunkColumnInfo;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.registry.content.BiomesAether;
@@ -127,17 +128,20 @@ public class PrepAether implements IPrepRegistryEntry<IAetherChunkColumnInfo>
 
 			IIslandData islandData = aetherData.getIslandData();
 
-			Object obj = aetherGen.generateChunkColumnInfo(biomes, islandData, chunkX, chunkZ);
+			IIslandChunkColumnInfo obj = aetherGen.generateChunkColumnInfo(biomes, islandData, chunkX, chunkZ);
 
 			AetherChunkColumnInfo info = new AetherChunkColumnInfo(1);
 			info.setIslandData(0, obj);
 
-			aetherGen.threadSafeGenerateChunk(info, biomes, chunkPrimer, islandData, chunkX, chunkZ);
+			for (int chunkY = 0; chunkY < 16; chunkY++)
+			{
+				aetherGen.threadSafeGenerateChunk(info, biomes, chunkPrimer, islandData, chunkX, chunkY, chunkZ);
+			}
 		}
 	}
 
 	@Override
-	public void threadSafeGenerateMask(IAetherChunkColumnInfo info, World world, IPrepSectorData sectorData, Biome[] biomes, ChunkMask mask, int x, int y)
+	public void threadSafeGenerateMask(IAetherChunkColumnInfo info, World world, IPrepSectorData sectorData, Biome[] biomes, ChunkMask mask, int x, int y, int z)
 	{
 		IChunkGenerator generator = world.provider.createChunkGenerator();
 
@@ -148,7 +152,7 @@ public class PrepAether implements IPrepRegistryEntry<IAetherChunkColumnInfo>
 
 			IIslandData islandData = aetherData.getIslandData();
 
-			aetherGen.threadSafeGenerateMask(info, biomes, mask, islandData, x, y);
+			aetherGen.threadSafeGenerateMask(info, biomes, mask, islandData, x, y, z);
 		}
 	}
 
@@ -159,7 +163,7 @@ public class PrepAether implements IPrepRegistryEntry<IAetherChunkColumnInfo>
 	}
 
 	@Override
-	public AetherChunkColumnInfo generateChunkColumnInfo(World world, IPrepSectorData sectorData, Biome[] biomes, int chunkX, int chunkY)
+	public AetherChunkColumnInfo generateChunkColumnInfo(World world, IPrepSectorData sectorData, Biome[] biomes, int chunkX, int chunkZ)
 	{
 		IChunkGenerator generator = world.provider.createChunkGenerator();
 
@@ -170,7 +174,7 @@ public class PrepAether implements IPrepRegistryEntry<IAetherChunkColumnInfo>
 
 			IIslandData islandData = aetherData.getIslandData();
 
-			Object obj = aetherGen.generateChunkColumnInfo(biomes, islandData, chunkX, chunkY);
+			IIslandChunkColumnInfo obj = aetherGen.generateChunkColumnInfo(biomes, islandData, chunkX, chunkZ);
 
 			AetherChunkColumnInfo info = new AetherChunkColumnInfo(1);
 			info.setIslandData(0, obj);

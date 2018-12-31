@@ -1,11 +1,12 @@
 package com.gildedgames.aether.common.util;
 
 import com.gildedgames.aether.api.util.OpenSimplexNoise;
+import com.gildedgames.aether.api.world.islands.INoiseProvider;
 
 /**
  * Generates 2D noise using the provided noise generator and linearly interpolates between values.
  */
-public abstract class ChunkNoiseGenerator
+public abstract class ChunkNoiseGenerator implements INoiseProvider
 {
 	protected final OpenSimplexNoise generator;
 
@@ -62,6 +63,7 @@ public abstract class ChunkNoiseGenerator
 
 	protected abstract double sample(double nx, double nz);
 
+	@Override
 	public double interpolate(final int x, final int z)
 	{
 		final double x0 = (double) x / this.noiseScale;

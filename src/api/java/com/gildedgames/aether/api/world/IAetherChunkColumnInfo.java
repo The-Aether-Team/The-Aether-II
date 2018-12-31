@@ -1,9 +1,12 @@
 package com.gildedgames.aether.api.world;
 
-public interface IAetherChunkColumnInfo
+import com.gildedgames.aether.api.world.islands.IIslandChunkColumnInfo;
+import com.gildedgames.orbis_api.preparation.IChunkColumnInfo;
+
+public interface IAetherChunkColumnInfo extends IChunkColumnInfo
 {
-	void setIslandData(int index, Object data);
+	void setIslandData(int index, IIslandChunkColumnInfo data);
 
 	@SuppressWarnings("unchecked")
-	<T> T getIslandData(int index, Class<T> clazz);
+	<T extends IIslandChunkColumnInfo> T getIslandData(int index, Class<T> clazz);
 }

@@ -1,18 +1,19 @@
 package com.gildedgames.aether.common.world.aether.prep;
 
 import com.gildedgames.aether.api.world.IAetherChunkColumnInfo;
+import com.gildedgames.aether.api.world.islands.IIslandChunkColumnInfo;
 
 public class AetherChunkColumnInfo implements IAetherChunkColumnInfo
 {
-	private final Object[] islands;
+	private final IIslandChunkColumnInfo[] islands;
 
 	public AetherChunkColumnInfo(int count)
 	{
-		this.islands = new Object[count];
+		this.islands = new IIslandChunkColumnInfo[count];
 	}
 
 	@Override
-	public void setIslandData(int index, Object data)
+	public void setIslandData(int index, IIslandChunkColumnInfo data)
 	{
 		if (data == null)
 		{
@@ -29,15 +30,26 @@ public class AetherChunkColumnInfo implements IAetherChunkColumnInfo
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public <T> T getIslandData(int index, Class<T> clazz)
+	public <T extends IIslandChunkColumnInfo> T getIslandData(int index, Class<T> clazz)
 	{
-		Object obj = this.islands[index];
+		return (T) this.islands[index];
+	}
 
-		if (obj.getClass() != clazz)
+	@Override
+	public int getHeight(int x, int z)
+	{
+		int height = -1;
+
+		for (IIslandChunkColumnInfo info : this.islands)
 		{
-			throw new IllegalArgumentException("Expected " + clazz + ", got " + obj.getClass());
+			int i = info.getHeight(x, z);
+
+			if (i > height)
+			{
+				return i;
+			}
 		}
 
-		return (T) obj;
+		return height;
 	}
 }
