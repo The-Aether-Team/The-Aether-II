@@ -53,19 +53,11 @@ public class WorldPreparationAether
 
 	private void generateCloudLayer(IAetherChunkColumnInfo info, final ChunkMask mask, final int chunkY)
 	{
-		// ???
-		int error = 6;
-
 		int maxDepth = 10;
 		int levelY = 70;
 
 		int limitMinY = chunkY * 16;
 		int limitMaxY = limitMinY + 16;
-
-		if (limitMinY > (levelY + maxDepth + error) || limitMaxY < (levelY - maxDepth - error))
-		{
-			return;
-		}
 
 		IIslandChunkColumnInfo chunkInfo = info.getIslandData(0, IIslandChunkColumnInfo.class);
 
@@ -118,14 +110,9 @@ public class WorldPreparationAether
 
 				final int depth = (int) chunkInfo.getTerrainDepthBuffer().interpolate(x, z);
 
-				for (int y = height; y >= (height - depth); y--)
+				for (int y = Math.min(limitMaxY - 1, height); y >= Math.max((height - depth), limitMinY); y--)
 				{
 					int y2 = y - limitMinY;
-
-					if (y2 < 0 || y2 >= 16)
-					{
-						continue;
-					}
 
 					final int state = mask.getBlock(x, y2, z);
 
@@ -143,6 +130,10 @@ public class WorldPreparationAether
 					else if (pentration <= depth)
 					{
 						mask.setBlock(x, y2, z, IslandBlockType.SOIL_BLOCK.ordinal());
+					}
+					else
+					{
+						break;
 					}
 				}
 			}

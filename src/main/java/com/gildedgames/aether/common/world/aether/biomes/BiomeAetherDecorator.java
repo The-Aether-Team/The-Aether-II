@@ -27,7 +27,6 @@ import com.gildedgames.orbis_api.core.PlacedBlueprint;
 import com.gildedgames.orbis_api.core.baking.BakedBlueprint;
 import com.gildedgames.orbis_api.core.util.BlueprintPlacer;
 import com.gildedgames.orbis_api.data.schedules.ScheduleRegion;
-import com.gildedgames.orbis_api.preparation.IPrepSectorData;
 import com.gildedgames.orbis_api.processing.BlockAccessExtendedWrapper;
 import com.gildedgames.orbis_api.processing.DataPrimer;
 import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
@@ -128,8 +127,7 @@ public class BiomeAetherDecorator
 		this.genIceCrystals = new WorldGenIceCrystals(64);
 	}
 
-	public void prepareDecorationsWholeIsland(final World world, BlockAccessIsland access, final IIslandData island, IPrepSectorData sectorData,
-			final Random random)
+	public void prepareDecorationsWholeIsland(final World world, BlockAccessIsland access, final IIslandData island, final Random random)
 	{
 		final DataPrimer primer = new DataPrimer(access);
 

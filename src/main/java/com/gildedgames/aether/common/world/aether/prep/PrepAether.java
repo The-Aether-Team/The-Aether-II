@@ -66,7 +66,7 @@ public class PrepAether implements IPrepRegistryEntry<IAetherChunkColumnInfo>
 				islandData.addComponents(biomeAether.createIslandComponents(islandData));
 
 				biomeAether.getBiomeDecorator().prepareDecorationsWholeIsland(world,
-						new BlockAccessIsland(world, islandData, sectorData, this), islandData, sectorData,
+						new BlockAccessIsland(world, islandData, sectorData, this), islandData,
 						new XoShiRoRandom(islandData.getSeed()));
 			}
 		}
