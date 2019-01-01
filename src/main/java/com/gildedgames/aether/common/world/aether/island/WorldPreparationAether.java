@@ -111,35 +111,38 @@ public class WorldPreparationAether
 			{
 				int height = chunkInfo.getHeight(x, z);
 
-				if (height < 0 || height < limitMinY || height >= limitMaxY)
+				if (height < 0)
 				{
 					continue;
 				}
 
 				final int depth = (int) chunkInfo.getTerrainDepthBuffer().interpolate(x, z);
 
-				for (int y = (height - limitMinY); y >= 0; y--)
+				for (int y = height; y >= (height - depth); y--)
 				{
-					final int state = mask.getBlock(x, y, z);
+					int y2 = y - limitMinY;
+
+					if (y2 < 0 || y2 >= 16)
+					{
+						continue;
+					}
+
+					final int state = mask.getBlock(x, y2, z);
 
 					if (state != IslandBlockType.STONE_BLOCK.ordinal() && state != IslandBlockType.FERROSITE_BLOCK.ordinal())
 					{
 						continue;
 					}
 
-					int pentration = height - limitMinY - y;
+					int pentration = height - y;
 
 					if (pentration == 0)
 					{
-						mask.setBlock(x, y, z, IslandBlockType.TOPSOIL_BLOCK.ordinal());
+						mask.setBlock(x, y2, z, IslandBlockType.TOPSOIL_BLOCK.ordinal());
 					}
 					else if (pentration <= depth)
 					{
-						mask.setBlock(x, y, z, IslandBlockType.SOIL_BLOCK.ordinal());
-					}
-					else
-					{
-						break;
+						mask.setBlock(x, y2, z, IslandBlockType.SOIL_BLOCK.ordinal());
 					}
 				}
 			}
