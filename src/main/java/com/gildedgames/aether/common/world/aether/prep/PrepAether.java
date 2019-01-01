@@ -31,6 +31,8 @@ public class PrepAether implements IPrepRegistryEntry<IAetherChunkColumnInfo>
 {
 	public static final ResourceLocation UNIQUE_ID = AetherCore.getResource("islands");
 
+	private final IslandChunkMaskTransformer chunkMaskTransformer = new IslandChunkMaskTransformer();
+
 	@Override
 	public ResourceLocation getUniqueId()
 	{
@@ -159,7 +161,7 @@ public class PrepAether implements IPrepRegistryEntry<IAetherChunkColumnInfo>
 	@Override
 	public IChunkMaskTransformer createMaskTransformer()
 	{
-		return new IslandChunkMaskTransformer();
+		return this.chunkMaskTransformer;
 	}
 
 	@Override
