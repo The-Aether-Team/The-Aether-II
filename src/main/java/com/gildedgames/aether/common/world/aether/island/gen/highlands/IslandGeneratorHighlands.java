@@ -69,7 +69,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 			{
 				double maxY = info.maxY_xz.get(x, z);
 
-				if (maxY < 0.0D)
+				if (maxY <= 0.0D)
 				{
 					continue;
 				}
@@ -83,7 +83,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 				int stone = IslandBlockType.STONE_BLOCK.ordinal();
 
 
-				for (int y = Math.min((int) bottomMaxY, boundsMaxY); y > Math.max(bottomMaxY - bottomHeight, boundsMinY - 1); y--)
+				for (int y = Math.min((int) bottomMaxY, boundsMaxY); y >= Math.max(bottomMaxY - bottomHeight, boundsMinY); y--)
 				{
 					mask.setBlock(x, y - boundsMinY, z, stone);
 				}
