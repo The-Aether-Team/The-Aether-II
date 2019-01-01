@@ -22,11 +22,11 @@ import net.minecraft.world.chunk.ChunkPrimer;
 
 public class IslandGeneratorHighlands implements IIslandGenerator
 {
-	private final IslandVariables v;
+	private final IslandVariables vars;
 
 	public IslandGeneratorHighlands(IslandVariables variables)
 	{
-		this.v = variables;
+		this.vars = variables;
 	}
 
 	public static ChunkNoiseGenerator generateNoise(OpenSimplexNoise noise, IIslandData island, int chunkX, int chunkZ, int offset, double scale)
@@ -61,7 +61,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 		HighlandsChunkColumnInfo info = columnInfo.getIslandData(0, HighlandsChunkColumnInfo.class);
 
 		int boundsMinY = chunkY * 16;
-		int boundsMaxY = boundsMinY + 16;
+		int boundsMaxY = boundsMinY + 15;
 
 		for (int x = 0; x < 16; x++)
 		{
@@ -76,21 +76,19 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 
 				double bottomMaxY = info.bottomMaxY_xz.get(x, z);
 				double bottomHeight = info.bottomHeight_xz.get(x, z);
+				double lakeDepth = info.lakeDepth_xz.get(x, z);
 
-				double lakeNoise = info.lakeNoise_xz.get(x, z);
-
-				boolean magnetic = info.magnetic_xz.get(x, z);
-				boolean water = info.water_xz.get(x, z);
 				boolean snow = info.snow_xz.get(x, z);
 
-				int stone = magnetic ? IslandBlockType.FERROSITE_BLOCK.ordinal() : IslandBlockType.STONE_BLOCK.ordinal();
+				int stone = IslandBlockType.STONE_BLOCK.ordinal();
 
-				for (int y = Math.min((int) bottomMaxY, boundsMaxY - 1); y > Math.max(bottomMaxY - bottomHeight, boundsMinY - 1); y--)
+
+				for (int y = Math.min((int) bottomMaxY, boundsMaxY); y > Math.max(bottomMaxY - bottomHeight, boundsMinY - 1); y--)
 				{
 					mask.setBlock(x, y - boundsMinY, z, stone);
 				}
 
-				for (int y = Math.max((int) bottomMaxY, boundsMinY); y < Math.min(maxY, boundsMaxY); y++)
+				for (int y = Math.max((int) bottomMaxY, boundsMinY); y <= Math.min(maxY, boundsMaxY); y++)
 				{
 					if (snow && y > maxY - 8)
 					{
@@ -102,38 +100,17 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 					}
 				}
 
-				if (lakeNoise >= this.v.getLakeThreshold())
+				int waterLevel = 100;
+
+				if (lakeDepth > 0.0D)
 				{
-					for (int y = Math.min(100 + this.v.getCoastHeight() - 1, boundsMaxY); y >= Math.max(100, boundsMinY + 1); y--)
+					double minY = waterLevel - lakeDepth - 3;
+
+					for (int y = Math.min(waterLevel, boundsMaxY); y >= Math.max(minY, boundsMinY); y--)
 					{
-						int found = mask.getBlock(x, y - boundsMinY, z);
-
-						if (found == IslandBlockType.STONE_BLOCK.ordinal())
+						if (y <= minY + 3)
 						{
-							if (mask.getBlock(x, y + 1 - boundsMinY, z) != 0)
-							{
-								break;
-							}
-
-							if (y <= 100 + this.v.getCoastHeight() - 1)
-							{
-								mask.setBlock(x, y - boundsMinY, z, IslandBlockType.COAST_BLOCK.ordinal());
-							}
-
-							break;
-						}
-					}
-				}
-
-				if (water && !magnetic)
-				{
-					double minY = maxY - ((Math.max(0.0, lakeNoise - (this.v.getLakeThreshold() + this.v.getLakeBlendRange()))) * this.v.getLakeDepth());
-
-					for (int y = Math.min((int) maxY, boundsMaxY - 1); y > Math.max(minY - 1, boundsMinY); y--)
-					{
-						if (y <= minY)
-						{
-							mask.setBlock(x, y - boundsMinY, z, IslandBlockType.SOIL_BLOCK.ordinal());
+							mask.setBlock(x, y - boundsMinY, z, IslandBlockType.COAST_BLOCK.ordinal());
 						}
 						else
 						{
@@ -142,26 +119,22 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 					}
 				}
 
-				if (this.v.getCoastHeight() > 0)
+				if (this.vars.getCoastHeight() > 0)
 				{
-					for (int y = Math.min(100 + this.v.getCoastHeight() - 1, boundsMaxY - 1); y >= Math.max(100, boundsMinY - 1); y--)
+					int coastMaxY = 100 + (this.vars.getCoastHeight() / 2);
+
+					double coastMinY = coastMaxY - this.vars.getCoastHeight();
+
+					for (int y = Math.min(coastMaxY, boundsMaxY); y >= Math.max(coastMinY, boundsMinY); y--)
 					{
-						int found = mask.getBlock(x, y - boundsMinY, z);
+						final int state = mask.getBlock(x, y - boundsMinY, z);
 
-						if (found == IslandBlockType.STONE_BLOCK.ordinal())
+						if (state != IslandBlockType.STONE_BLOCK.ordinal() && state != IslandBlockType.FERROSITE_BLOCK.ordinal())
 						{
-							if (mask.getBlock(x, y + 1 - boundsMinY, z) != 0)
-							{
-								break;
-							}
-
-							if (y <= 100 + this.v.getCoastHeight() - 1)
-							{
-								mask.setBlock(x, y - boundsMinY, z, IslandBlockType.COAST_BLOCK.ordinal());
-							}
-
-							break;
+							continue;
 						}
+
+						mask.setBlock(x, y - boundsMinY, z, IslandBlockType.COAST_BLOCK.ordinal());
 					}
 				}
 			}
@@ -188,8 +161,8 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 		HighlandsChunkColumnInfo info = new HighlandsChunkColumnInfo(noise, chunkX, chunkZ);
 
 		ChunkNoiseGenerator heightMap = generateNoise(noise, island, chunkX, chunkZ, 0, 300.0D);
-		ChunkNoiseGenerator terraceMap = this.v.hasTerraces() ? generateNoise(noise, island, chunkX, chunkZ, 1000, 300.0D) : null;
-		ChunkNoiseGenerator lakeMap = generateLakeNoise(noise, island, chunkX, chunkZ, 10000, this.v.getLakeScale());
+		ChunkNoiseGenerator terraceMap = this.vars.hasTerraces() ? generateNoise(noise, island, chunkX, chunkZ, 1000, 300.0D) : null;
+		ChunkNoiseGenerator lakeMap = generateLakeNoise(noise, island, chunkX, chunkZ, 10000, this.vars.getLakeScale());
 
 		int posX = chunkX * 16;
 		int posZ = chunkZ * 16;
@@ -230,7 +203,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 
 					double bottomHeight = 100;
 
-					double filteredSample = this.v.getHeightSampleFilter().transform(heightSample);
+					double filteredSample = this.vars.getHeightSampleFilter().transform(heightSample);
 
 					if (terraceMap != null)
 					{
@@ -239,22 +212,22 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 						filteredSample = NoiseUtil.lerp(heightSample, terraceSample - diff > 0.7 ? terraceSample - diff : heightSample, 0.7);
 					}
 
-					filteredSample = Math.pow(filteredSample, 1.0 + (this.v.getCoastSpread() * 0.25));
+					filteredSample = Math.pow(filteredSample, 1.0 + (this.vars.getCoastSpread() * 0.25));
 
 					double lakeSample = lakeMap.interpolate(x, z);
 
 					double dif = MathHelper.clamp(Math.abs(cutoffPoint - heightSample) * 10.0, 0.0, 1.0);
 
-					double lakeNoise = (lakeSample + this.v.getLakeConcentrationModifier()) * dif;
-					double lakeBottomValue = this.v.getLakeBottomValueFilter().transform(cutoffPoint);
+					double lakeNoise = (lakeSample + this.vars.getLakeConcentrationModifier()) * dif;
+					double lakeBottomValue = this.vars.getLakeBottomValueFilter().transform(cutoffPoint);
 
 					boolean water = false;
 
-					if (lakeNoise > this.v.getLakeThreshold())
+					if (lakeNoise > this.vars.getLakeThreshold())
 					{
-						if (lakeNoise < this.v.getLakeThreshold() + this.v.getLakeBlendRange())
+						if (lakeNoise < this.vars.getLakeThreshold() + this.vars.getLakeBlendRange())
 						{
-							double blend = (lakeNoise - this.v.getLakeThreshold()) * (1.0 / this.v.getLakeBlendRange());
+							double blend = (lakeNoise - this.vars.getLakeThreshold()) * (1.0 / this.vars.getLakeBlendRange());
 
 							filteredSample = NoiseUtil.lerp(filteredSample, lakeBottomValue, blend);
 						}
@@ -264,7 +237,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 						}
 					}
 
-					double topHeight = this.v.getMaxTerrainHeight();
+					double topHeight = this.vars.getMaxTerrainHeight();
 
 					double bottomSample = Math.min(1.0D, normal + 0.25);
 
@@ -291,7 +264,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 						bottomSample = NoiseUtil.lerp(islandEdge, islandBottom, blend);
 					}
 
-					double maxY = this.v.getMaxYFilter().maxY(bottomMaxY, filteredSample, cutoffPoint, topHeight);
+					double maxY = this.vars.getMaxYFilter().maxY(bottomMaxY, filteredSample, cutoffPoint, topHeight);
 
 					if (water)
 					{
@@ -303,17 +276,23 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 						maxY = 254.0D;
 					}
 
-					info.maxY_xz.set(x, z, maxY);
+					if (water)
+					{
+						double depth = ((Math.max(0.0, lakeNoise - (this.vars.getLakeThreshold() + this.vars.getLakeBlendRange()))) * this.vars.getLakeDepth());
 
-					info.bottomMaxY_xz.set(x, z, bottomMaxY);
-					info.lakeNoise_xz.set(x, z, lakeNoise);
-					info.bottomHeight_xz.set(x, z, bottomHeight * bottomSample);
+						maxY -= depth;
+						bottomMaxY -= depth;
 
-					info.magnetic_xz.set(x, z, false);
-					info.water_xz.set(x, z, water);
-					info.snow_xz.set(x, z, this.v.hasSnowCaps() && (filteredSample > 0.7));
+						info.lakeDepth_xz.set(x, z, depth);
+					}
 
 					info.setHeight(x, z, (int) Math.max(maxY, bottomMaxY));
+
+					info.maxY_xz.set(x, z, maxY);
+					info.bottomHeight_xz.set(x, z, bottomHeight * bottomSample);
+					info.bottomMaxY_xz.set(x, z, bottomMaxY);
+
+					info.snow_xz.set(x, z, this.vars.hasSnowCaps() && (filteredSample > 0.7));
 				}
 				else
 				{
@@ -327,15 +306,13 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 
 	private class HighlandsChunkColumnInfo extends AbstractIslandChunkColumnInfo
 	{
-		final ChunkDoubleSegment lakeNoise_xz = new ChunkDoubleSegment();
-
-		final ChunkDoubleSegment bottomMaxY_xz = new ChunkDoubleSegment();
 		final ChunkDoubleSegment bottomHeight_xz = new ChunkDoubleSegment();
+		final ChunkDoubleSegment bottomMaxY_xz = new ChunkDoubleSegment();
 
 		final ChunkDoubleSegment maxY_xz = new ChunkDoubleSegment();
 
-		final ChunkBooleanSegment magnetic_xz = new ChunkBooleanSegment();
-		final ChunkBooleanSegment water_xz = new ChunkBooleanSegment();
+		final ChunkDoubleSegment lakeDepth_xz = new ChunkDoubleSegment();
+
 		final ChunkBooleanSegment snow_xz = new ChunkBooleanSegment();
 
 		HighlandsChunkColumnInfo(OpenSimplexNoise noise, int chunkX, int chunkZ)
