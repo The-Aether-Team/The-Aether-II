@@ -84,7 +84,7 @@ public class WorldGenAetherMinable extends WorldGenerator
 
 									if (state.getBlock().isReplaceableOreGen(state, worldIn, blockpos, this.predicate))
 									{
-										worldIn.setBlockState(blockpos, this.oreBlock, 2);
+										worldIn.setBlockState(blockpos, this.oreBlock, 2 | 16);
 									}
 								}
 							}
