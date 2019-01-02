@@ -2,10 +2,7 @@ package com.gildedgames.aether.common.entities.living.passive;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.entities.ai.AetherNavigateGround;
-import com.gildedgames.aether.common.entities.ai.EntityAIHideFromRain;
-import com.gildedgames.aether.common.entities.ai.EntityAIRestrictRain;
-import com.gildedgames.aether.common.entities.ai.EntityAIUnstuckBlueAercloud;
+import com.gildedgames.aether.common.entities.ai.*;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketAerbunnySetRiding;
@@ -60,6 +57,7 @@ public class EntityAerbunny extends EntityAetherAnimal
 		this.tasks.addTask(1, new EntityAISwimming(this));
 		this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
+		this.tasks.addTask(3, new EntityAIEggnogTempt(this, 2.2D));
 		this.tasks.addTask(4, new EntityAIAvoidEntity<>(this, EntityPlayer.class, 12.0F, 1.2F, 1.8F));
 		this.tasks.addTask(5, new EntityAIWander(this, 1.0D, 10));
 		this.tasks.addTask(11, new EntityAIWatchClosest(this, EntityPlayer.class, 10.0F));

@@ -89,6 +89,8 @@ public class PlayerAether implements IPlayerAether
 
 	private ItemStack lastDestroyedStack;
 
+	private int ticksWithEggnogEffect;
+
 	private boolean isTrading;
 
 	public PlayerAether()
@@ -197,6 +199,16 @@ public class PlayerAether implements IPlayerAether
 		return this.separateInventoryModule;
 	}
 
+	public void setDrankEggnog()
+	{
+		this.ticksWithEggnogEffect = 500;
+	}
+
+	public boolean hasEggnogEffect()
+	{
+		return this.ticksWithEggnogEffect > 0;
+	}
+
 	@Override
 	public PlayerCurrencyModule getCurrencyModule()
 	{
@@ -223,6 +235,11 @@ public class PlayerAether implements IPlayerAether
 
 	public void onUpdate()
 	{
+		if (this.ticksWithEggnogEffect > 0)
+		{
+			this.ticksWithEggnogEffect--;
+		}
+
 		for (final PlayerAetherModule module : this.modules)
 		{
 			module.onUpdate();
