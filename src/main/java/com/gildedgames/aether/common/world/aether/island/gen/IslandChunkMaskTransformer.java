@@ -4,7 +4,6 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
 import com.gildedgames.orbis_api.preparation.IChunkMaskTransformer;
 import com.gildedgames.orbis_api.preparation.impl.ChunkSegmentMask;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 
@@ -16,16 +15,11 @@ public class IslandChunkMaskTransformer implements IChunkMaskTransformer
 {
 	private final IBlockState[] states;
 
-	private final int[] blocks, metas;
-
 	public IslandChunkMaskTransformer()
 	{
 		int count = IslandBlockType.values().length;
 
 		this.states = new IBlockState[count];
-
-		this.blocks = new int[count];
-		this.metas = new int[count];
 
 		this.setMaskValue(IslandBlockType.AIR_BLOCK, Blocks.AIR.getDefaultState());
 		this.setMaskValue(IslandBlockType.WATER_BLOCK, Blocks.WATER.getDefaultState());
@@ -47,29 +41,20 @@ public class IslandChunkMaskTransformer implements IChunkMaskTransformer
 
 	public void setMaskValue(IslandBlockType type, IBlockState state)
 	{
-		int index = type.ordinal();
+		int key = type.ordinal();
 
-		this.states[index] = state;
-
-		this.blocks[index] = Block.getIdFromBlock(state.getBlock());
-		this.metas[index] = state.getBlock().getMetaFromState(state);
+		this.states[key] = state;
 	}
 
 	@Override
-	public IBlockState getBlockState(int val)
+	public IBlockState getBlockState(int key)
 	{
-		return this.states[val];
+		return this.states[key];
 	}
 
 	@Override
-	public int getBlockID(int val)
+	public int getBlockCount()
 	{
-		return this.blocks[val];
-	}
-
-	@Override
-	public int getBlockMeta(int val)
-	{
-		return this.metas[val];
+		return this.states.length;
 	}
 }
