@@ -9,4 +9,6 @@ public interface IIslandChunkColumnInfo
 	int getHeight(int x, int y);
 
 	void setHeight(int x, int y, int height);
+
+	boolean isEmpty();
 }

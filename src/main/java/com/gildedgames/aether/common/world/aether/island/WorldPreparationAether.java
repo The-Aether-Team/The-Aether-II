@@ -53,11 +53,10 @@ public class WorldPreparationAether
 
 	private void generateCloudLayer(IAetherChunkColumnInfo info, final ChunkMask mask, final int chunkY)
 	{
-		int maxDepth = 10;
+		int maxDepth = 8;
 		int levelY = 70;
 
-		int limitMinY = chunkY * 16;
-		int limitMaxY = limitMinY + 16;
+		int offsetY = chunkY * 16;
 
 		IIslandChunkColumnInfo chunkInfo = info.getIslandData(0, IIslandChunkColumnInfo.class);
 
@@ -69,20 +68,18 @@ public class WorldPreparationAether
 		{
 			for (int z = 0; z < 16; z++)
 			{
-				final double val = cloudBuffer.interpolate(x, z);
+				final double val = cloudBuffer.getNoiseValue(x, z);
 
 				if (val > threshold)
 				{
 					final int depth = (int) ((val - threshold) * maxDepth);
 
-					for (int y = levelY + depth; y >= levelY - depth; y--)
-					{
-						if (y < limitMinY || y >= limitMaxY)
-						{
-							continue;
-						}
+					final int m0a = Math.min(levelY + depth - offsetY, 15);
+					final int m0b = Math.max(levelY - depth - offsetY, 0);
 
-						mask.setBlock(x, y - limitMinY, z, IslandBlockType.CLOUD_BED_BLOCK.ordinal());
+					for (int y = m0a; y >= m0b; y--)
+					{
+						mask.setBlock(x, y, z, IslandBlockType.CLOUD_BED_BLOCK.ordinal());
 					}
 				}
 			}
@@ -94,8 +91,12 @@ public class WorldPreparationAether
 	{
 		IIslandChunkColumnInfo chunkInfo = info.getIslandData(0, IIslandChunkColumnInfo.class);
 
-		int limitMinY = chunkY * 16;
-		int limitMaxY = limitMinY + 16;
+		if (chunkInfo.isEmpty())
+		{
+			return;
+		}
+
+		int offsetY = chunkY * 16;
 
 		for (int x = 0; x < 16; x++)
 		{
@@ -108,32 +109,27 @@ public class WorldPreparationAether
 					continue;
 				}
 
-				final int depth = (int) chunkInfo.getTerrainDepthBuffer().interpolate(x, z);
+				final int depth = (int) chunkInfo.getTerrainDepthBuffer().getNoiseValue(x, z);
 
-				for (int y = Math.min(limitMaxY - 1, height); y >= Math.max((height - depth), limitMinY); y--)
+				int m0a = Math.min(height - offsetY, 15);
+				int m0b = Math.max((height - depth) - offsetY, 0);
+
+				for (int y = m0a; y >= m0b; y--)
 				{
-					int y2 = y - limitMinY;
+					final int state = mask.getBlock(x, y, z);
 
-					final int state = mask.getBlock(x, y2, z);
+					if (state == IslandBlockType.STONE_BLOCK.ordinal() || state == IslandBlockType.FERROSITE_BLOCK.ordinal())
+					{
+						int pentration = height - (offsetY + y);
 
-					if (state != IslandBlockType.STONE_BLOCK.ordinal() && state != IslandBlockType.FERROSITE_BLOCK.ordinal())
-					{
-						continue;
-					}
-
-					int pentration = height - y;
-
-					if (pentration == 0)
-					{
-						mask.setBlock(x, y2, z, IslandBlockType.TOPSOIL_BLOCK.ordinal());
-					}
-					else if (pentration <= depth)
-					{
-						mask.setBlock(x, y2, z, IslandBlockType.SOIL_BLOCK.ordinal());
-					}
-					else
-					{
-						break;
+						if (pentration == 0)
+						{
+							mask.setBlock(x, y, z, IslandBlockType.TOPSOIL_BLOCK.ordinal());
+						}
+						else
+						{
+							mask.setBlock(x, y, z, IslandBlockType.SOIL_BLOCK.ordinal());
+						}
 					}
 				}
 			}
