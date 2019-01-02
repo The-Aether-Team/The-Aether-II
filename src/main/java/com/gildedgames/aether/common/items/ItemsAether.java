@@ -226,14 +226,14 @@ public class ItemsAether
 
 	public static final Item plumproot_pie = new ItemAetherFood(10, 0.5F, false).setConsumptionDuration(40);
 
+	public static final ArmorMaterial WINTER_ARMOR = EnumHelper.addArmorMaterial("winter", "", 8,
+			new int[] { 0, 0, 0, 0 }, 25, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0F).setRepairItem(new ItemStack(Blocks.WOOL, 1, OreDictionary.WILDCARD_VALUE));
+
 	public static final ItemWinterHat winter_hat = new ItemWinterHat();
 
 	public static final Item eggnog = new ItemEggnog();
 
 	private static final Collection<Item> registeredItems = new ArrayList<>();
-
-	public static ArmorMaterial WINTER_ARMOR = EnumHelper.addArmorMaterial("winter", "", 8,
-			new int[] { 0, 0, 0, 0 }, 25, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0F).setRepairItem(new ItemStack(Blocks.WOOL, 1, OreDictionary.WILDCARD_VALUE));
 
 	@SubscribeEvent
 	public static void onRegisterItems(final RegistryEvent.Register<Item> event)
