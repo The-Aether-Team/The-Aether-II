@@ -118,18 +118,18 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 			{
 				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 4);
 
-				BakedBlueprint baked = new BakedBlueprint(tree.getData(), new CreationData(world).pos(BlockPos.ORIGIN));
+				BakedBlueprint baked = new BakedBlueprint(tree.getData(), new CreationData(world).pos(BlockPos.ORIGIN).placesAir(false).placesVoid(false));
 
 				// Offset trees
 				BlockPos adjustedPos = new BlockPos(pos.getX() - 4, pos.getY(), pos.getZ() - 4);
 
 				if (tree == GenerationAether.AMBEROOT_TREE)
 				{
-					adjustedPos = new BlockPos(pos.getX()-8, pos.getY(), pos.getZ()-6);
+					adjustedPos = new BlockPos(pos.getX() - 8, pos.getY(), pos.getZ() - 6);
 				}
 				if (tree == GenerationAether.CRAZY_MUTANT_TREE)
 				{
-					adjustedPos = new BlockPos(pos.getX()-5, pos.getY(), pos.getZ()-5);
+					adjustedPos = new BlockPos(pos.getX() - 5, pos.getY(), pos.getZ() - 5);
 				}
 
 				if (!BlueprintPlacer.place(world, baked, tree.getConditions(), adjustedPos, true))
