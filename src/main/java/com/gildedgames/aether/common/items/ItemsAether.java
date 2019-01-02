@@ -1,70 +1,27 @@
 package com.gildedgames.aether.common.items;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.items.armor.ItemAetherGloves;
-import com.gildedgames.aether.common.items.armor.ItemAetherShield;
-import com.gildedgames.aether.common.items.armor.ItemArkeniumArmor;
-import com.gildedgames.aether.common.items.armor.ItemGravititeArmor;
-import com.gildedgames.aether.common.items.armor.ItemTaegoreHideArmor;
-import com.gildedgames.aether.common.items.armor.ItemWinterHat;
-import com.gildedgames.aether.common.items.armor.ItemZaniteArmor;
-import com.gildedgames.aether.common.items.consumables.ItemAmbrosiumChunk;
-import com.gildedgames.aether.common.items.consumables.ItemBrettlCane;
-import com.gildedgames.aether.common.items.consumables.ItemCloudParachute;
-import com.gildedgames.aether.common.items.consumables.ItemEggnog;
-import com.gildedgames.aether.common.items.consumables.ItemEnchantedWyndberry;
-import com.gildedgames.aether.common.items.consumables.ItemHealingStone;
-import com.gildedgames.aether.common.items.consumables.ItemShardOfLife;
-import com.gildedgames.aether.common.items.consumables.ItemSkyrootConsumableBucket;
-import com.gildedgames.aether.common.items.consumables.ItemStomperPop;
-import com.gildedgames.aether.common.items.consumables.ItemSwetJelly;
-import com.gildedgames.aether.common.items.misc.ItemAetherFood;
-import com.gildedgames.aether.common.items.misc.ItemAetherRecord;
-import com.gildedgames.aether.common.items.misc.ItemAmbrosiumShard;
-import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
-import com.gildedgames.aether.common.items.misc.ItemMoaFeather;
-import com.gildedgames.aether.common.items.misc.ItemSkyrootBed;
-import com.gildedgames.aether.common.items.misc.ItemSkyrootSign;
-import com.gildedgames.aether.common.items.misc.ItemSkyrootStick;
-import com.gildedgames.aether.common.items.misc.ItemSwetGel;
-import com.gildedgames.aether.common.items.misc.ItemWrappingPaper;
-import com.gildedgames.aether.common.items.tools.ItemAetherAxe;
-import com.gildedgames.aether.common.items.tools.ItemAetherPickaxe;
-import com.gildedgames.aether.common.items.tools.ItemAetherShovel;
-import com.gildedgames.aether.common.items.tools.ItemArkeniumShears;
-import com.gildedgames.aether.common.items.tools.ItemSkyrootBucket;
+import com.gildedgames.aether.common.items.armor.*;
+import com.gildedgames.aether.common.items.consumables.*;
+import com.gildedgames.aether.common.items.misc.*;
+import com.gildedgames.aether.common.items.tools.*;
 import com.gildedgames.aether.common.items.weapons.ItemDart;
 import com.gildedgames.aether.common.items.weapons.ItemDartShooter;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemBolt;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemCrossbow;
-import com.gildedgames.aether.common.items.weapons.swords.ItemAetherSword;
-import com.gildedgames.aether.common.items.weapons.swords.ItemArkeniumSword;
-import com.gildedgames.aether.common.items.weapons.swords.ItemGravititeSword;
-import com.gildedgames.aether.common.items.weapons.swords.ItemHolystoneSword;
-import com.gildedgames.aether.common.items.weapons.swords.ItemSkyrootSword;
-import com.gildedgames.aether.common.items.weapons.swords.ItemZaniteSword;
+import com.gildedgames.aether.common.items.weapons.swords.*;
 import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import com.gildedgames.aether.common.registry.content.MaterialsAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.util.selectors.RandomItemSelector;
-
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
+import net.minecraft.item.*;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
-import net.minecraft.item.ItemDoor;
-import net.minecraft.item.ItemFood;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTool;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -72,12 +29,13 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
 @Mod.EventBusSubscriber
 public class ItemsAether
 {
-	public static ArmorMaterial WINTER_ARMOR = EnumHelper.addArmorMaterial("winter", "", 8,
-			new int[]{0, 0, 0, 0}, 25, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0F).setRepairItem(new ItemStack(Blocks.WOOL,1, OreDictionary.WILDCARD_VALUE));
-
 	public static final Item skyroot_stick = new ItemSkyrootStick();
 
 	public static final Item cloudtwine = new ItemDropOnDeath();
@@ -171,7 +129,7 @@ public class ItemsAether
 			icestone_poprocks = new ItemAetherFood(2, 0.5F, false).setConsumptionDuration(8);
 
 	public static final ItemFood ginger_bread_man = new ItemAetherFood(6, 0.2F, false).setConsumptionDuration(8),
-			candy_cane = new ItemAetherFood(4, 0.1F, false).setConsumptionDuration(10),
+			candy_cane = new ItemAetherFood(5, 0.3F, false).setConsumptionDuration(10),
 			yule_log = new ItemAetherFood(10, 0.25F, false).setConsumptionDuration(50);
 
 	public static final ItemSkyrootBucket skyroot_bucket = new ItemSkyrootBucket(Blocks.AIR),
@@ -273,6 +231,9 @@ public class ItemsAether
 	public static final Item eggnog = new ItemEggnog();
 
 	private static final Collection<Item> registeredItems = new ArrayList<>();
+
+	public static ArmorMaterial WINTER_ARMOR = EnumHelper.addArmorMaterial("winter", "", 8,
+			new int[] { 0, 0, 0, 0 }, 25, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0F).setRepairItem(new ItemStack(Blocks.WOOL, 1, OreDictionary.WILDCARD_VALUE));
 
 	@SubscribeEvent
 	public static void onRegisterItems(final RegistryEvent.Register<Item> event)
