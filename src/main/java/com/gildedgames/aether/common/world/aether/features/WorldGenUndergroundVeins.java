@@ -15,9 +15,7 @@ public class WorldGenUndergroundVeins
 
 	protected final ThreadLocal<XoShiRoRandom> rand = ThreadLocal.withInitial(XoShiRoRandom::new);
 
-	protected void addTunnel(long seed, int originalX, int originalZ, ChunkMask mask, double t1, double t2,
-			double t3, float r1, float r2, float r3, int s1, int s2, double q,
-			Biome[] biomes)
+	protected void addTunnel(long seed, int originalX, int originalZ, ChunkMask mask, double posX, double posY, double posZ, float r1, float r2, float r3, int minY, int maxY, double q, Biome[] biomes)
 	{
 		double d0 = (double) (originalX * 16 + 8);
 		double d1 = (double) (originalZ * 16 + 8);
@@ -25,31 +23,32 @@ public class WorldGenUndergroundVeins
 		float f1 = 0.0F;
 		XoShiRoRandom random = new XoShiRoRandom(seed);
 
-		if (s2 <= 0)
+		if (maxY <= 0)
 		{
 			int i = this.range * 16 - 16;
-			s2 = i - random.nextInt(i / 4);
+			maxY = i - random.nextInt(i / 4);
 		}
 
 		boolean flag2 = false;
 
-		if (s1 == -1)
+		if (minY == -1)
 		{
-			s1 = s2 / 2;
+			minY = maxY / 2;
 			flag2 = true;
 		}
 
-		int j = random.nextInt(s2 / 2) + s2 / 4;
+		int j = random.nextInt(maxY / 2) + maxY / 4;
 
-		for (boolean flag = random.nextInt(6) == 0; s1 < s2; ++s1)
+		for (boolean flag = random.nextInt(6) == 0; minY < maxY; ++minY)
 		{
-			double d2 = 1.5D + (double) (MathHelper.sin((float) s1 * (float) Math.PI / (float) s2) * r1);
+			double d2 = 1.5D + (double) (MathHelper.sin((float) minY * (float) Math.PI / (float) maxY) * r1);
 			double d3 = d2 * q;
 			float f2 = MathHelper.cos(r3);
 			float f3 = MathHelper.sin(r3);
-			t1 += (double) (MathHelper.cos(r2) * f2);
-			t2 += (double) f3;
-			t3 += (double) (MathHelper.sin(r2) * f2);
+
+			posX += (double) (MathHelper.cos(r2) * f2);
+			posY += (double) f3;
+			posZ += (double) (MathHelper.sin(r2) * f2);
 
 			if (flag)
 			{
@@ -67,20 +66,20 @@ public class WorldGenUndergroundVeins
 			f1 = f1 + (random.nextFloat() - random.nextFloat()) * random.nextFloat() * 2.0F;
 			f = f + (random.nextFloat() - random.nextFloat()) * random.nextFloat() * 4.0F;
 
-			if (!flag2 && s1 == j && r1 > 1.0F && s2 > 0)
+			if (!flag2 && minY == j && r1 > 1.0F && maxY > 0)
 			{
-				this.addTunnel(random.nextLong(), originalX, originalZ, mask, t1, t2, t3,
-						random.nextFloat() * 0.5F + 0.5F, r2 - ((float) Math.PI / 2F), r3 / 3.0F, s1, s2, 1.0D, biomes);
-				this.addTunnel(random.nextLong(), originalX, originalZ, mask, t1, t2, t3,
-						random.nextFloat() * 0.5F + 0.5F, r2 + ((float) Math.PI / 2F), r3 / 3.0F, s1, s2, 1.0D, biomes);
+				this.addTunnel(random.nextLong(), originalX, originalZ, mask, posX, posY, posZ,
+						random.nextFloat() * 0.5F + 0.5F, r2 - ((float) Math.PI / 2F), r3 / 3.0F, minY, maxY, 1.0D, biomes);
+				this.addTunnel(random.nextLong(), originalX, originalZ, mask, posX, posY, posZ,
+						random.nextFloat() * 0.5F + 0.5F, r2 + ((float) Math.PI / 2F), r3 / 3.0F, minY, maxY, 1.0D, biomes);
 				return;
 			}
 
 			if (flag2 || random.nextInt(4) != 0)
 			{
-				double d4 = t1 - d0;
-				double d5 = t3 - d1;
-				double d6 = (double) (s2 - s1);
+				double d4 = posX - d0;
+				double d5 = posZ - d1;
+				double d6 = (double) (maxY - minY);
 				double d7 = (double) (r1 + 2.0F + 16.0F);
 
 				if (d4 * d4 + d5 * d5 - d6 * d6 > d7 * d7)
@@ -88,15 +87,15 @@ public class WorldGenUndergroundVeins
 					return;
 				}
 
-				if (t1 >= d0 - 16.0D - d2 * 2.0D && t3 >= d1 - 16.0D - d2 * 2.0D && t1 <= d0 + 16.0D + d2 * 2.0D
-						&& t3 <= d1 + 16.0D + d2 * 2.0D)
+				if (posX >= d0 - 16.0D - d2 * 2.0D && posZ >= d1 - 16.0D - d2 * 2.0D && posX <= d0 + 16.0D + d2 * 2.0D
+						&& posZ <= d1 + 16.0D + d2 * 2.0D)
 				{
-					int k2 = MathHelper.floor(t1 - d2) - originalX * 16 - 1;
-					int k = MathHelper.floor(t1 + d2) - originalX * 16 + 1;
-					int l2 = MathHelper.floor(t2 - d3) - 1;
-					int l = MathHelper.floor(t2 + d3) + 1;
-					int i3 = MathHelper.floor(t3 - d2) - originalZ * 16 - 1;
-					int i1 = MathHelper.floor(t3 + d2) - originalZ * 16 + 1;
+					int k2 = MathHelper.floor(posX - d2) - originalX * 16 - 1;
+					int k = MathHelper.floor(posX + d2) - originalX * 16 + 1;
+					int l2 = MathHelper.floor(posY - d3) - 1;
+					int l = MathHelper.floor(posY + d3) + 1;
+					int i3 = MathHelper.floor(posZ - d2) - originalZ * 16 - 1;
+					int i1 = MathHelper.floor(posZ + d2) - originalZ * 16 + 1;
 
 					if (k2 < 0)
 					{
@@ -156,18 +155,18 @@ public class WorldGenUndergroundVeins
 					{
 						for (int j3 = k2; j3 < k; ++j3)
 						{
-							double d10 = ((double) (j3 + originalX * 16) + 0.5D - t1) / d2;
+							double d10 = ((double) (j3 + originalX * 16) + 0.5D - posX) / d2;
 
 							for (int i2 = i3; i2 < i1; ++i2)
 							{
-								double d8 = ((double) (i2 + originalZ * 16) + 0.5D - t3) / d2;
+								double d8 = ((double) (i2 + originalZ * 16) + 0.5D - posZ) / d2;
 								boolean flag1 = false;
 
 								if (d10 * d10 + d8 * d8 < 1.0D)
 								{
 									for (int j2 = l; j2 > l2; --j2)
 									{
-										double d9 = ((double) (j2 - 1) + 0.5D - t2) / d3;
+										double d9 = ((double) (j2 - 1) + 0.5D - posY) / d3;
 
 										if (d9 > -0.7D && d10 * d10 + d9 * d9 + d8 * d8 < 1.0D)
 										{
@@ -209,6 +208,7 @@ public class WorldGenUndergroundVeins
 
 	public void generate(World worldIn, int x, int z, ChunkMask mask)
 	{
+
 		Biome[] biomes = worldIn.provider.getBiomeProvider().getBiomes(null, x, z, 16, 16, true);
 
 		XoShiRoRandom rand = this.rand.get();
