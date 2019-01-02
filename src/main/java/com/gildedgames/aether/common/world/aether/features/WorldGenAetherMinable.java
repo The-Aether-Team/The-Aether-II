@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.world.aether.features;
 
 import com.gildedgames.aether.common.world.util.WorldSlice;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.init.Blocks;
@@ -36,7 +37,7 @@ public class WorldGenAetherMinable
 		World world = slice.getWorld();
 
 		final double f = rand.nextDouble() * Math.PI;
-		final double fSin = Math.sin(f);
+		final double fSin = (double) MathHelper.sin((float) f);
 
 		final double d0 = ((position.getX() + 8) + fSin * this.numberOfBlocks / 8.0D);
 		final double d1 = ((position.getX() + 8) - fSin * this.numberOfBlocks / 8.0D);
@@ -98,9 +99,9 @@ public class WorldGenAetherMinable
 
 									final IBlockState state = slice.getBlockState(nextPos);
 
-									if (state.getBlock().isReplaceableOreGen(state, world, nextPos, this.predicate))
+									if (state.getMaterial() != Material.AIR && state.getBlock().isReplaceableOreGen(state, world, nextPos, this.predicate))
 									{
-										world.setBlockState(nextPos, this.oreBlock, 2 | 16);
+										slice.replaceBlockState(nextPos, state, this.oreBlock, this.oreBlock.getLightValue() > 0);
 									}
 								}
 							}

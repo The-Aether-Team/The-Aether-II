@@ -7,12 +7,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
 
 public class WorldSlice
 {
 	private final World world;
 
-	private final Chunk[][] chunks;
+	private final Chunk[] chunks;
 
 	private final int offsetX, offsetZ;
 
@@ -22,24 +23,24 @@ public class WorldSlice
 	{
 		this.world = world;
 
-		this.chunks = new Chunk[3][3];
+		this.chunks = new Chunk[3 * 3];
 
 		this.offsetX = (pos.x * 16) - 16;
 		this.offsetZ = (pos.z * 16) - 16;
 
-		for (int x = -1; x <= 1; x++)
+		for (int x = 0; x < 3; x++)
 		{
-			for (int z = -1; z <= 1; z++)
+			for (int z = 0; z < 3; z++)
 			{
-				int chunkX = pos.x + x;
-				int chunkZ = pos.z + z;
+				int chunkX = pos.x + x - 1;
+				int chunkZ = pos.z + z - 1;
 
 				BlockPos from = new BlockPos(chunkX * 16, 0, chunkZ * 16);
 				BlockPos to = new BlockPos((chunkX * 16) + 15, 255, (chunkZ * 16) + 15);
 
 				if (world.isAreaLoaded(from, to))
 				{
-					this.chunks[x + 1][z + 1] = world.getChunk(chunkX, chunkZ);
+					this.chunks[(x * 3) + z] = world.getChunk(chunkX, chunkZ);
 				}
 			}
 		}
@@ -52,21 +53,70 @@ public class WorldSlice
 
 	public IBlockState getBlockState(int x, int y, int z)
 	{
-		int x2 = (x - this.offsetX);
-		int z2 = (z - this.offsetZ);
+		int chunkX = (x - this.offsetX) >> 4;
+		int chunkZ = (z - this.offsetZ) >> 4;
 
-		int chunkX = x2 >> 4;
-		int chunkZ = z2 >> 4;
+		Chunk chunk = this.chunks[(chunkX * 3) + chunkZ];
 
-		Chunk chunk = this.chunks[chunkX][chunkZ];
-
-		if (chunk == null)
+		if (chunk != null && y >= 0 && y >> 4 < chunk.getBlockStorageArray().length)
 		{
-			return this.defaultBlockState;
+			ExtendedBlockStorage extendedblockstorage = chunk.getBlockStorageArray()[y >> 4];
+
+			if (extendedblockstorage != Chunk.NULL_BLOCK_STORAGE)
+			{
+				return extendedblockstorage.get(x & 15, y & 15, z & 15);
+			}
 		}
 
-		return chunk.getBlockState(x & 15, y, z & 15);
+		return this.defaultBlockState;
 	}
+
+	/**
+	 * This method is intended to be used when you are doing "check and replace" generation. Rather than
+	 * performing an additional fetch operation, we can avoid it entirely. Care must be taken to ensure
+	 * that {@param before} is the block previously queried at the same {@param pos} using
+	 * {@link WorldSlice#getBlockState(BlockPos)}.
+	 *
+	 * It is also possible to control whether or not replacing the block should prompt a lighting
+	 * update.
+	 *
+	 * You should NEVER use this method if you are replacing an air block. Only use it if the block
+	 * you are replacing is non-air.
+	 *
+	 * @param pos The {@link BlockPos} of the block to replace
+	 * @param before The state of the block at {@link BlockPos} before it was replaced
+	 * @param after The state of the block at {@link BlockPos} after it is replaced
+	 * @param updateLight Whether or not to perform block/sky lighting updates
+	 */
+	public void replaceBlockState(BlockPos pos, IBlockState before, IBlockState after, boolean updateLight)
+	{
+		int x = pos.getX();
+		int y = pos.getY();
+		int z = pos.getZ();
+
+		int chunkX = (x - this.offsetX) >> 4;
+		int chunkZ = (z - this.offsetZ) >> 4;
+
+		Chunk chunk = this.chunks[(chunkX * 3) + chunkZ];
+
+		if (chunk != null && y >= 0 && y >> 4 < chunk.getBlockStorageArray().length)
+		{
+			ExtendedBlockStorage extendedblockstorage = chunk.getBlockStorageArray()[y >> 4];
+
+			if (extendedblockstorage != Chunk.NULL_BLOCK_STORAGE)
+			{
+				extendedblockstorage.set(x & 15, y & 15, z & 15, after);
+
+				if (updateLight)
+				{
+					this.world.checkLight(pos);
+				}
+
+				this.world.notifyBlockUpdate(pos, before, after, 2 | 16);
+			}
+		}
+	}
+
 
 	public World getWorld()
 	{
@@ -75,19 +125,6 @@ public class WorldSlice
 
 	public boolean isAirBlock(BlockPos pos)
 	{
-		int x2 = (pos.getX() - this.offsetX);
-		int z2 = (pos.getZ() - this.offsetZ);
-
-		int chunkX = x2 >> 4;
-		int chunkZ = z2 >> 4;
-
-		Chunk chunk = this.chunks[chunkX][chunkZ];
-
-		if (chunk == null)
-		{
-			return this.defaultBlockState.getMaterial() == Material.AIR;
-		}
-
-		return chunk.getBlockState(pos.getX() & 15, pos.getY(), pos.getZ() & 15).getMaterial() == Material.AIR;
+		return this.getBlockState(pos).getMaterial() == Material.AIR;
 	}
 }
