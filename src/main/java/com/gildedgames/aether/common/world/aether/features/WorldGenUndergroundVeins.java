@@ -11,139 +11,110 @@ import java.util.Random;
 
 public class WorldGenUndergroundVeins
 {
-	protected final int range = 12;
+	protected final int chunkRange = 12;
 
 	protected final ThreadLocal<XoShiRoRandom> rand = ThreadLocal.withInitial(XoShiRoRandom::new);
 
-	protected void addTunnel(long seed, int originalX, int originalZ, ChunkMask mask, double posX, double posY, double posZ, float r1, float r2, float r3, int minY, int maxY, double q, Biome[] biomes)
-	{
-		double d0 = (double) (originalX * 16 + 8);
-		double d1 = (double) (originalZ * 16 + 8);
-		float f = 0.0F;
-		float f1 = 0.0F;
+	/**
+	 * see:
+	 * {@link WorldGenAetherCaves#addTunnel(long, int, int, ChunkMask, double, double, double, float, float, float, int, int, double, Biome[])}
+	 */
+	protected void addTunnel(long seed, int chunkX, int chunkZ, ChunkMask mask, double posX, double posY, double posZ, float nodeSizeMultiplier, float angleBetweenNodes, float distBetweenNodes, int nodeIndex, int noOfNodes, double startingNodeHeightMult, Biome[] biomes) {
+		double chunkBlockCenterX = (double) (chunkX * 16 + 8);
+		double chunkBlockCenterZ = (double) (chunkZ * 16 + 8);
+		float nodeAngleMult = 0.0F;
+		float nodeDistMult = 0.0F;
 		XoShiRoRandom random = new XoShiRoRandom(seed);
 
-		if (maxY <= 0)
-		{
-			int i = this.range * 16 - 16;
-			maxY = i - random.nextInt(i / 4);
+		// Generates number of nodes the tunnel is going to have based on the chunkRange
+		if (noOfNodes <= 0) {
+			int i = this.chunkRange * 16 - 16;
+			noOfNodes = i - random.nextInt(i / 4);
 		}
 
-		boolean flag2 = false;
 
-		if (minY == -1)
-		{
-			minY = maxY / 2;
-			flag2 = true;
-		}
+		// Gets a random value between (noOfNodes/4, noOfNodes/4 + noOfNodes/2 - 1)
+		int branchNodeIndex = random.nextInt(noOfNodes / 2) + noOfNodes / 4;
+		// branchNodeIndex = nodeIndex + (noOfNodes - nodeIndex)/ 2; -- Custom code to generate branches every half of a tunnel and branch
 
-		int j = random.nextInt(maxY / 2) + maxY / 4;
+		for (boolean higherDist = random.nextInt(6) == 0; nodeIndex < noOfNodes; ++nodeIndex) {
+			double nodeHeight = 1.5D + (double) (MathHelper.sin((float) nodeIndex * (float) Math.PI / (float) noOfNodes) * nodeSizeMultiplier);
+			double d3 = nodeHeight * startingNodeHeightMult;
+			float f2 = MathHelper.cos(distBetweenNodes);
+			float f3 = MathHelper.sin(distBetweenNodes);
 
-		for (boolean flag = random.nextInt(6) == 0; minY < maxY; ++minY)
-		{
-			double d2 = 1.5D + (double) (MathHelper.sin((float) minY * (float) Math.PI / (float) maxY) * r1);
-			double d3 = d2 * q;
-			float f2 = MathHelper.cos(r3);
-			float f3 = MathHelper.sin(r3);
-
-			posX += (double) (MathHelper.cos(r2) * f2);
+			// Determines the position of the next node of the tunnel
+			posX += (double) (MathHelper.cos(angleBetweenNodes) * f2);
 			posY += (double) f3;
-			posZ += (double) (MathHelper.sin(r2) * f2);
+			posZ += (double) (MathHelper.sin(angleBetweenNodes) * f2);
 
-			if (flag)
-			{
-				r3 = r3 * 0.92F;
-			}
-			else
-			{
-				r3 = r3 * 0.7F;
-			}
+			// Changes distance between nodes based on higherDist for even more random generation (not sure why specifically those 2 values, though)
+			distBetweenNodes *= (higherDist ? 0.92F : 0.7F);
 
-			r3 = r3 + f1 * 0.1F;
-			r2 += f * 0.1F;
-			f1 = f1 * 0.9F;
-			f = f * 0.75F;
-			f1 = f1 + (random.nextFloat() - random.nextFloat()) * random.nextFloat() * 2.0F;
-			f = f + (random.nextFloat() - random.nextFloat()) * random.nextFloat() * 4.0F;
+			// Ensures that the next node is on a different position, so the tunnel isn't on the same Y level
+			distBetweenNodes += nodeDistMult * 0.1F;
+			angleBetweenNodes += nodeAngleMult * 0.1F;
 
-			if (!flag2 && minY == j && r1 > 1.0F && maxY > 0)
-			{
-				this.addTunnel(random.nextLong(), originalX, originalZ, mask, posX, posY, posZ,
-						random.nextFloat() * 0.5F + 0.5F, r2 - ((float) Math.PI / 2F), r3 / 3.0F, minY, maxY, 1.0D, biomes);
-				this.addTunnel(random.nextLong(), originalX, originalZ, mask, posX, posY, posZ,
-						random.nextFloat() * 0.5F + 0.5F, r2 + ((float) Math.PI / 2F), r3 / 3.0F, minY, maxY, 1.0D, biomes);
-				return;
-			}
+			// Even more randomness introduced
+			nodeDistMult = nodeDistMult * 0.9F;
+			nodeAngleMult = nodeAngleMult * 0.75F;
+			nodeDistMult = nodeDistMult + (random.nextFloat() - random.nextFloat()) * random.nextFloat() * 2.0F;
+			nodeAngleMult = nodeAngleMult + (random.nextFloat() - random.nextFloat()) * random.nextFloat() * 4.0F;
 
-			if (flag2 || random.nextInt(4) != 0)
-			{
-				double d4 = posX - d0;
-				double d5 = posZ - d1;
-				double d6 = (double) (maxY - minY);
-				double d7 = (double) (r1 + 2.0F + 16.0F);
+			if (random.nextInt(4) != 0) {
+				double d4 = posX - chunkBlockCenterX;
+				double d5 = posZ - chunkBlockCenterZ;
+				double nodesLeft = (double) (noOfNodes - nodeIndex);
+				double d7 = (double) (nodeSizeMultiplier + 18.0F);
 
-				if (d4 * d4 + d5 * d5 - d6 * d6 > d7 * d7)
-				{
+				if (d4 * d4 + d5 * d5 - nodesLeft * nodesLeft > d7 * d7) {
 					return;
 				}
 
-				if (posX >= d0 - 16.0D - d2 * 2.0D && posZ >= d1 - 16.0D - d2 * 2.0D && posX <= d0 + 16.0D + d2 * 2.0D
-						&& posZ <= d1 + 16.0D + d2 * 2.0D)
-				{
-					int k2 = MathHelper.floor(posX - d2) - originalX * 16 - 1;
-					int k = MathHelper.floor(posX + d2) - originalX * 16 + 1;
+				if (posX >= chunkBlockCenterX - 16.0D - nodeHeight * 2.0D && posZ >= chunkBlockCenterZ - 16.0D - nodeHeight * 2.0D && posX <= chunkBlockCenterX + 16.0D + nodeHeight * 2.0D
+						&& posZ <= chunkBlockCenterZ + 16.0D + nodeHeight * 2.0D) {
+					int k2 = MathHelper.floor(posX - nodeHeight) - chunkX * 16 - 1;
+					int k = MathHelper.floor(posX + nodeHeight) - chunkX * 16 + 1;
 					int l2 = MathHelper.floor(posY - d3) - 1;
 					int l = MathHelper.floor(posY + d3) + 1;
-					int i3 = MathHelper.floor(posZ - d2) - originalZ * 16 - 1;
-					int i1 = MathHelper.floor(posZ + d2) - originalZ * 16 + 1;
+					int i3 = MathHelper.floor(posZ - nodeHeight) - chunkZ * 16 - 1;
+					int i1 = MathHelper.floor(posZ + nodeHeight) - chunkZ * 16 + 1;
 
-					if (k2 < 0)
-					{
+					if (k2 < 0) {
 						k2 = 0;
 					}
 
-					if (k > 16)
-					{
+					if (k > 16) {
 						k = 16;
 					}
 
-					if (l2 < 1)
-					{
+					if (l2 < 1) {
 						l2 = 1;
 					}
 
-					if (l > 248)
-					{
+					if (l > 248) {
 						l = 248;
 					}
 
-					if (i3 < 0)
-					{
+					if (i3 < 0) {
 						i3 = 0;
 					}
 
-					if (i1 > 16)
-					{
+					if (i1 > 16) {
 						i1 = 16;
 					}
 
-					boolean flag3 = false;
+					boolean isBlockWater = false;
 
-					for (int j1 = k2; !flag3 && j1 < k; ++j1)
-					{
-						for (int k1 = i3; !flag3 && k1 < i1; ++k1)
-						{
-							for (int l1 = l + 1; !flag3 && l1 >= l2 - 1; --l1)
-							{
-								if (l1 >= 0 && l1 < 256)
-								{
-									if (this.isOceanBlock(mask, j1, l1, k1, originalX, originalZ))
-									{
-										flag3 = true;
+					for (int j1 = k2; !isBlockWater && j1 < k; ++j1) {
+						for (int k1 = i3; !isBlockWater && k1 < i1; ++k1) {
+							for (int l1 = l + 1; !isBlockWater && l1 >= l2 - 1; --l1) {
+								if (l1 >= 0 && l1 < 256) {
+									if (this.isOceanBlock(mask, j1, l1, k1, chunkX, chunkZ)) {
+										isBlockWater = true;
 									}
 
-									if (l1 != l2 - 1 && j1 != k2 && j1 != k - 1 && k1 != i3 && k1 != i1 - 1)
-									{
+									if (l1 != l2 - 1 && j1 != k2 && j1 != k - 1 && k1 != i3 && k1 != i1 - 1) {
 										l1 = l2;
 									}
 								}
@@ -151,43 +122,30 @@ public class WorldGenUndergroundVeins
 						}
 					}
 
-					if (!flag3)
-					{
-						for (int j3 = k2; j3 < k; ++j3)
-						{
-							double d10 = ((double) (j3 + originalX * 16) + 0.5D - posX) / d2;
+					if (!isBlockWater) {
+						for (int j3 = k2; j3 < k; ++j3) {
+							double d10 = ((double) (j3 + chunkX * 16) + 0.5D - posX) / nodeHeight;
 
-							for (int i2 = i3; i2 < i1; ++i2)
-							{
-								double d8 = ((double) (i2 + originalZ * 16) + 0.5D - posZ) / d2;
-								boolean flag1 = false;
+							for (int i2 = i3; i2 < i1; ++i2) {
+								double d8 = ((double) (i2 + chunkZ * 16) + 0.5D - posZ) / nodeHeight;
+								boolean foundTop = false;
 
-								if (d10 * d10 + d8 * d8 < 1.0D)
-								{
-									for (int j2 = l; j2 > l2; --j2)
-									{
+								if (d10 * d10 + d8 * d8 < 1.0D) {
+									for (int j2 = l; j2 > l2; --j2) {
 										double d9 = ((double) (j2 - 1) + 0.5D - posY) / d3;
 
-										if (d9 > -0.7D && d10 * d10 + d9 * d9 + d8 * d8 < 1.0D)
-										{
-											int blockType1 = mask.getBlock(j3, j2, i2);
-											int blockType2 = mask.getBlock(j3, j2 + 1, i2);
+										if (d9 > -0.7D && d10 * d10 + d9 * d9 + d8 * d8 < 1.0D) {
+											int block = mask.getBlock(j3, j2, i2);
+											int topBlock = mask.getBlock(j3, j2 + 1, i2);
 
-											if (this.isTopBlock(mask, biomes, j3, j2, i2, originalX, originalZ))
-											{
-												flag1 = true;
+											if (this.isTopBlock(mask, biomes, j3, j2, i2, chunkX, chunkZ)) {
+												foundTop = true;
 											}
-
-											this.digBlock(mask, j3, j2, i2, originalX, originalZ, flag1, blockType1, blockType2);
+											this.digBlock(mask, j3, j2, i2, chunkX, chunkZ, foundTop, block, topBlock);
 										}
 									}
 								}
 							}
-						}
-
-						if (flag2)
-						{
-							break;
 						}
 					}
 				}
@@ -214,7 +172,7 @@ public class WorldGenUndergroundVeins
 		XoShiRoRandom rand = this.rand.get();
 		rand.setSeed(worldIn.getSeed());
 
-		int i = this.range;
+		int i = this.chunkRange;
 
 		long j = rand.nextLong();
 		long k = rand.nextLong();
@@ -261,13 +219,13 @@ public class WorldGenUndergroundVeins
 				float f1 = (rand.nextFloat() - 0.5F) * 2.0F / 8.0F;
 				float f2 = rand.nextFloat() * 2.0F + rand.nextFloat();
 
-				if (rand.nextInt(4) == 0)
+				if (rand.nextInt(8) == 0)
 				{
 					this.addTunnel(rand.nextLong(), originalX, originalZ, mask, x, y, z, f2, f, f1, 0, 0, 0.5D, biomes);
 					tunnels += rand.nextInt(2);
 				}
 
-				if (rand.nextInt(10) == 0)
+				if (rand.nextInt(20) == 0)
 				{
 					f2 *= rand.nextFloat() * rand.nextFloat() * 3.0F + 1.0F;
 				}
