@@ -138,23 +138,6 @@
 			"max_stock": "30",
 			"ticks_until_restock": "1200",
 			"rarity_weight": "5.0"
-		},
-		{
-			"stack": {
-				"item": "aether:candy_cane",
-				"data": "0"
-			},
-			"descriptions": [
-				"mysterious_figure.shop.candy_cane"
-			],
-			"min_price": "1",
-			"max_price": "2",
-			"min_sell_price": "1",
-			"max_sell_price": "1",
-			"min_stock": "10",
-			"max_stock": "30",
-			"ticks_until_restock": "1200",
-			"rarity_weight": "5.0"
 		}
 	],
 	"max_stock": "9",
