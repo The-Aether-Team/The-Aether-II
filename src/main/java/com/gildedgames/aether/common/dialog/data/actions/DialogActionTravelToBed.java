@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.dialog.data.actions;
 
 import com.gildedgames.aether.api.dialog.IDialogAction;
 import com.gildedgames.aether.api.dialog.IDialogController;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
@@ -24,9 +25,7 @@ public class DialogActionTravelToBed implements IDialogAction
 	{
 		if (controller.getDialogPlayer().world.isRemote)
 		{
-			PlayerAether playerAether = PlayerAether.getPlayer(controller.getDialogPlayer());
-
-			playerAether.getDialogController().closeScene(true);
+			AetherCore.PROXY.turnOffScreen();
 
 			return;
 		}

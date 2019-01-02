@@ -69,6 +69,8 @@ public interface IDialogController
 	 */
 	IDialogScene getCurrentScene();
 
+	ISceneInstance getCurrentSceneInstance();
+
 	/**
 	 * Returns the current node of the controller's scene.
 	 * @return An {@link IDialogNode} of the current scene
@@ -92,7 +94,7 @@ public interface IDialogController
 	boolean isNodeFinished();
 
 	/**
-	 * Closes the dialog and respective GUI.
+	 * Kills the scene instance, not gui counterpart.
 	 */
-	void closeScene(boolean closeGUI);
+	void closeScene(ISceneInstance scene);
 }

@@ -38,6 +38,8 @@ public class GuiDialogViewer extends GuiViewer implements IDialogChangeListener
 
 	private final IDialogController controller;
 
+	private final LinkedList<GuiDialogButton> buttons = Lists.newLinkedList();
+
 	private GuiTextBox topTextBox, bottomTextBox, namePlate;
 
 	private double nextArrowAnim, prevTime;
@@ -54,11 +56,13 @@ public class GuiDialogViewer extends GuiViewer implements IDialogChangeListener
 
 	private int currentScroll, maxScroll;
 
-	private final LinkedList<GuiDialogButton> buttons = Lists.newLinkedList();
+	private ISceneInstance sceneInstance;
 
-	public GuiDialogViewer(final EntityPlayer player, final IDialogController controller)
+	public GuiDialogViewer(final EntityPlayer player, final IDialogController controller, ISceneInstance sceneInstance)
 	{
 		super(new GuiElement(Dim2D.flush(), false), null, new ContainerDialogController(player));
+
+		this.sceneInstance = sceneInstance;
 
 		this.controller = controller;
 		this.controller.addListener(this);
@@ -434,7 +438,7 @@ public class GuiDialogViewer extends GuiViewer implements IDialogChangeListener
 			}
 			else
 			{
-				this.controller.closeScene(false);
+				this.controller.closeScene(this.sceneInstance);
 			}
 		}
 	}

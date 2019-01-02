@@ -183,7 +183,7 @@ public class AetherGuiHandler implements IGuiHandler
 				}
 			}
 			case DIALOG_VIEWER_ID:
-				return new GuiDialogViewer(player, playerAether.getDialogController());
+				return new GuiDialogViewer(player, playerAether.getDialogController(), playerAether.getDialogController().getCurrentSceneInstance());
 			case TRADE_ID:
 				GuiViewer prevViewerA = null;
 

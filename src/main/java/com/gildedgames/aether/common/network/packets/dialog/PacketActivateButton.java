@@ -46,6 +46,11 @@ public class PacketActivateButton implements IMessage
 		{
 			final IPlayerAether aePlayer = PlayerAether.getPlayer(player);
 
+			if (aePlayer.getDialogController().getCurrentSceneInstance() == null)
+			{
+				return null;
+			}
+
 			IDialogButton found = null;
 
 			for (final IDialogButton b : aePlayer.getDialogController().getCurrentNode().getButtons())
@@ -77,6 +82,11 @@ public class PacketActivateButton implements IMessage
 		public PacketActivateButton onMessage(final PacketActivateButton message, final EntityPlayer player)
 		{
 			final IPlayerAether aePlayer = PlayerAether.getPlayer(player);
+
+			if (aePlayer.getDialogController().getCurrentSceneInstance() == null)
+			{
+				return null;
+			}
 
 			IDialogButton found = null;
 

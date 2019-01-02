@@ -4,12 +4,10 @@ import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.dialog.*;
 import com.gildedgames.aether.api.entity.EntityNPC;
 import com.gildedgames.aether.client.gui.dialog.GuiDialogViewer;
-import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.dialog.*;
-import com.google.common.collect.Maps;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -21,13 +19,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.Validate;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class PlayerDialogModule extends PlayerAetherModule implements IDialogController
 {
 	private final Set<IDialogChangeListener> listeners = new HashSet<>();
 
-	private SceneInstance sceneInstance;
+	private ISceneInstance sceneInstance;
 
 	private String lastNodeId;
 
@@ -47,7 +48,7 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 
 		if (this.sceneInstance != null)
 		{
-			this.sceneInstance.conditionsMet = conditionsMet;
+			this.sceneInstance.setConditionsMet(conditionsMet);
 		}
 	}
 
@@ -75,7 +76,7 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 
 	}
 
-	private void updateListeners()
+	protected void updateListeners()
 	{
 		for (final IDialogChangeListener listener : this.listeners)
 		{
@@ -125,7 +126,13 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 	@Override
 	public IDialogScene getCurrentScene()
 	{
-		return this.sceneInstance != null ? this.sceneInstance.scene : null;
+		return this.sceneInstance != null ? this.sceneInstance.getScene() : null;
+	}
+
+	@Override
+	public ISceneInstance getCurrentSceneInstance()
+	{
+		return this.sceneInstance;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -133,31 +140,21 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 	{
 		this.sceneInstance = new SceneInstance(this, scene, conditionsMet);
 
-		Minecraft.getMinecraft().displayGuiScreen(new GuiDialogViewer(Minecraft.getMinecraft().player, this));
+		Minecraft.getMinecraft().displayGuiScreen(new GuiDialogViewer(Minecraft.getMinecraft().player, this, this.sceneInstance));
 	}
 
 	private void openSceneServer(final ResourceLocation res, final IDialogScene scene)
 	{
 		this.sceneInstance = new SceneInstance(this, scene);
 
-		NetworkingAether.sendPacketToPlayer(new PacketOpenDialog(res, scene.getStartingNode().getIdentifier(), this.sceneInstance.conditionsMet),
+		NetworkingAether.sendPacketToPlayer(new PacketOpenDialog(res, scene.getStartingNode().getIdentifier(), this.sceneInstance.getConditionsMet()),
 				(EntityPlayerMP) this.getPlayer().getEntity());
-	}
-
-	/**
-	 * Called from the client when the dialog scene has been closed. Notifies
-	 * the server to also close it's end.
-	 */
-	@SideOnly(Side.CLIENT)
-	private void closeSceneClient()
-	{
-		NetworkingAether.sendPacketToServer(new PacketCloseDialog());
 	}
 
 	@SideOnly(Side.CLIENT)
 	public void navigateNodeClient(String nodeId)
 	{
-		if (this.sceneInstance.node != null)
+		if (this.sceneInstance.getNode() != null)
 		{
 			this.lastNodeId = this.sceneInstance.getNode().getIdentifier();
 		}
@@ -224,12 +221,12 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 				throw new NullPointerException("Scene instance is null in activateButton()");
 			}
 
-			if (!this.sceneInstance.conditionsMet.containsKey(button.getLabel()))
+			if (!this.sceneInstance.getConditionsMet().containsKey(button.getLabel()))
 			{
 				return false;
 			}
 
-			return this.sceneInstance.conditionsMet.get(button.getLabel());
+			return this.sceneInstance.getConditionsMet().get(button.getLabel());
 		}
 
 		boolean flag = false;
@@ -317,7 +314,7 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 	@Override
 	public IDialogNode getCurrentNode()
 	{
-		return this.sceneInstance.node;
+		return this.sceneInstance.getNode();
 	}
 
 	@Override
@@ -329,15 +326,20 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 	@Override
 	public boolean isNodeFinished()
 	{
+		if (this.sceneInstance == null)
+		{
+			return false;
+		}
+
 		return this.sceneInstance.isDoneReading();
 	}
 
 	@Override
-	public void closeScene(boolean closeGUI)
+	public void closeScene(ISceneInstance sceneInstance)
 	{
-		if (this.getPlayer().getEntity().world.isRemote)
+		if (this.sceneInstance != sceneInstance)
 		{
-			this.closeSceneClient();
+			return;
 		}
 
 		for (final IDialogChangeListener listener : this.listeners)
@@ -347,12 +349,12 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 
 		this.listeners.clear();
 
-		if (this.getPlayer().getEntity().world.isRemote && closeGUI)
-		{
-			AetherCore.PROXY.turnOffScreen();
-		}
-
 		this.sceneInstance = null;
+
+		if (this.getWorld().isRemote)
+		{
+			NetworkingAether.sendPacketToServer(new PacketCloseScene());
+		}
 	}
 
 	@Override
@@ -365,118 +367,5 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 	public void read(final NBTTagCompound compound)
 	{
 
-	}
-
-	protected class SceneInstance
-	{
-		private final PlayerDialogModule controller;
-
-		private final IDialogScene scene;
-
-		private IDialogNode node;
-
-		private List<IDialogLine> lines;
-
-		private Collection<IDialogButton> buttons;
-
-		private Collection<IDialogAction> endActions;
-
-		private Map<String, Boolean> conditionsMet = Maps.newHashMap();
-
-		private int index;
-
-		private SceneInstance(final PlayerDialogModule controller, final IDialogScene scene)
-		{
-			this(controller, scene, null);
-		}
-
-		private SceneInstance(final PlayerDialogModule controller, final IDialogScene scene, Map<String, Boolean> conditionsMet)
-		{
-			if (conditionsMet != null)
-			{
-				this.conditionsMet = conditionsMet;
-			}
-
-			this.controller = controller;
-			this.scene = scene;
-
-			this.setNode(this.scene.getStartingNode());
-		}
-
-		private IDialogNode getNode()
-		{
-			return this.node;
-		}
-
-		private void setNode(final IDialogNode node)
-		{
-			Validate.notNull(node);
-
-			this.node = node;
-
-			this.lines = node.getLines();
-			this.buttons = node.getButtons();
-			this.endActions = node.getEndActions();
-
-			this.index = 0;
-
-			this.controller.updateListeners();
-
-			if (!this.controller.getWorld().isRemote)
-			{
-				for (IDialogButton button : this.buttons)
-				{
-					this.conditionsMet.put(button.getLabel(), this.controller.conditionsMet(button));
-				}
-
-				NetworkingAether.sendPacketToPlayer(new PacketConditionsMetData(this.conditionsMet), (EntityPlayerMP) this.controller.getEntity());
-			}
-		}
-
-		private IDialogLine getLine()
-		{
-			return this.lines.get(this.index);
-		}
-
-		private boolean isDoneReading()
-		{
-			return this.index >= this.lines.size() - 1;
-		}
-
-		private void navigate(final String nodeId)
-		{
-			final Optional<IDialogNode> node = this.scene.getNode(nodeId);
-
-			this.setNode(node.orElseThrow(() ->
-					new IllegalArgumentException("Node " + nodeId + " doesn't exist")));
-		}
-
-		private void forwards()
-		{
-			if (this.isDoneReading())
-			{
-				if (this.buttons.size() <= 0)
-				{
-					IDialogNode node = this.getNode();
-
-					for (final IDialogAction action : this.endActions)
-					{
-						action.performAction(this.controller);
-					}
-
-					// Make sure actions haven't navigated somewhere
-					if (this.getNode() == node)
-					{
-						this.setNode(this.scene.getStartingNode());
-					}
-				}
-			}
-			else
-			{
-				this.index++;
-
-				this.controller.updateListeners();
-			}
-		}
 	}
 }

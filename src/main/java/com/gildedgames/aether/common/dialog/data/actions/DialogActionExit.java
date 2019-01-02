@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.dialog.data.actions;
 
 import com.gildedgames.aether.api.dialog.IDialogAction;
 import com.gildedgames.aether.api.dialog.IDialogController;
+import com.gildedgames.aether.common.AetherCore;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -18,7 +19,7 @@ public class DialogActionExit implements IDialogAction
 	@Override
 	public void performAction(IDialogController controller)
 	{
-		controller.closeScene(true);
+		AetherCore.PROXY.turnOffScreen();
 	}
 
 	public static class Deserializer implements JsonDeserializer<DialogActionExit>

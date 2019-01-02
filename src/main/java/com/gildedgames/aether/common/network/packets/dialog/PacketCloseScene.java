@@ -7,9 +7,9 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-public class PacketCloseDialog implements IMessage
+public class PacketCloseScene implements IMessage
 {
-	public PacketCloseDialog()
+	public PacketCloseScene()
 	{
 	}
 
@@ -25,13 +25,13 @@ public class PacketCloseDialog implements IMessage
 
 	}
 
-	public static class HandlerServer extends MessageHandlerServer<PacketCloseDialog, PacketCloseDialog>
+	public static class HandlerServer extends MessageHandlerServer<PacketCloseScene, PacketCloseScene>
 	{
 		@Override
-		public PacketCloseDialog onMessage(final PacketCloseDialog message, final EntityPlayer player)
+		public PacketCloseScene onMessage(final PacketCloseScene message, final EntityPlayer player)
 		{
 			final IPlayerAether aePlayer = PlayerAether.getPlayer(player);
-			aePlayer.getDialogController().closeScene(true);
+			aePlayer.getDialogController().closeScene(aePlayer.getDialogController().getCurrentSceneInstance());
 
 			return null;
 		}
