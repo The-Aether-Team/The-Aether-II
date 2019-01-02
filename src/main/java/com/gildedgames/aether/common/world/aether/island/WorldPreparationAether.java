@@ -29,7 +29,7 @@ public class WorldPreparationAether
 		this.noise = noise;
 	}
 
-	public void generateBaseTerrain(IAetherChunkColumnInfo info, ChunkSegmentMask mask, IIslandData island, int chunkX, int chunkY, int chunkZ)
+	public void generateFull(IAetherChunkColumnInfo info, ChunkSegmentMask mask, IIslandData island, int chunkX, int chunkY, int chunkZ)
 	{
 		this.generateCloudLayer(info, mask, chunkY);
 
@@ -131,7 +131,7 @@ public class WorldPreparationAether
 		}
 	}
 
-	public void generateBaseTerrainMask(IAetherChunkColumnInfo info, Biome[] biomes, ChunkSegmentMask mask, IIslandData island, int chunkX, int chunkY, int chunkZ)
+	public void generateBaseTerrain(IAetherChunkColumnInfo info, Biome[] biomes, ChunkSegmentMask mask, IIslandData island, int chunkX, int chunkY, int chunkZ)
 	{
 		island.getGenerator().genMask(info, mask, island, chunkX, chunkY, chunkZ);
 

@@ -8,8 +8,6 @@ import com.gildedgames.aether.common.blocks.multiblock.BlockMultiDummy;
 import com.gildedgames.aether.common.blocks.multiblock.BlockMultiDummyHalf;
 import com.gildedgames.aether.common.entities.tiles.TileEntityWildcard;
 import com.gildedgames.aether.common.entities.tiles.multiblock.TileEntityMultiblockController;
-import com.gildedgames.orbis_api.processing.BlockAccessChunkPrimer;
-import com.gildedgames.orbis_api.processing.BlockAccessExtendedWrapper;
 import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
@@ -25,10 +23,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
@@ -86,60 +82,6 @@ public class TemplatePrimer
 		return true;
 	}
 
-	public static boolean canGenerate(final World world, final TemplateDefinition def, final TemplateLoc loc)
-	{
-		return canGenerate(world, def, loc, true);
-	}
-
-	public static boolean canGenerateWithoutAreaCheck(final World world, final TemplateDefinition def, final TemplateLoc loc)
-	{
-		return canGenerate(world, def, loc, false);
-	}
-
-	private static boolean canGenerate(final World world, final TemplateDefinition def, final TemplateLoc loc, final boolean checkAreaLoaded)
-	{
-		BlockPos pos = loc.getPos();
-
-		if (loc.isCentered())
-		{
-			pos = TemplateUtil.getCenteredPos(def, loc);
-		}
-
-		final StructureBoundingBox bb = TemplateUtil.getBoundingBoxFromTemplate(def, loc);
-
-		if ((checkAreaLoaded && !world.isAreaLoaded(bb)) || bb.maxY > world.getActualHeight())
-		{
-			return false;
-		}
-
-		final BlockAccessExtendedWrapper blockAccess = new BlockAccessExtendedWrapper(world);
-
-		final List<Template.BlockInfo> info = TemplatePrimer.getBlocks(def.getTemplate());
-
-		final List<Template.BlockInfo> infoTransformed = TemplatePrimer.getBlocks(info, pos, loc.getSettings(), def.getTemplate());
-
-		for (final Template.BlockInfo block : infoTransformed)
-		{
-			for (final PlacementConditionTemplate condition : def.getConditions())
-			{
-				if (!condition.canPlace(def.getTemplate(), blockAccess, pos, block))
-				{
-					return false;
-				}
-			}
-		}
-
-		for (final PlacementConditionTemplate condition : def.getConditions())
-		{
-			if (!condition.canPlaceCheckAll(def.getTemplate(), blockAccess, pos, infoTransformed))
-			{
-				return false;
-			}
-		}
-
-		return true;
-	}
-
 	public static void generateTemplate(final IBlockAccessExtended blockAccess, final TemplateDefinition def, final TemplateLoc loc)
 	{
 		BlockPos pos = loc.getPos();
@@ -153,37 +95,6 @@ public class TemplatePrimer
 		TemplatePrimer.populateAll(def.getTemplate(), blockAccess, pos, processor, loc.getSettings());
 	}
 
-	public static void generateTemplateSingleChunk(final ChunkPos chunk, final World world, final IBlockAccessExtended blockAccess,
-			final TemplateDefinition def,
-			final TemplateLoc loc)
-	{
-		BlockPos pos = loc.getPos();
-
-		if (loc.isCentered())
-		{
-			pos = TemplateUtil.getCenteredPos(def, loc);
-		}
-
-		final ITemplateProcessorExtended processor = new BlockRotationProcessorExtended(pos, loc.getSettings());
-		TemplatePrimer.populateChunk(def.getTemplate(), world, blockAccess, chunk, pos, processor, loc.getSettings());
-	}
-
-	public static void primeTemplateSingleChunk(final ChunkPos chunk, final World world, final ChunkPrimer primer,
-			final TemplateDefinition def,
-			final TemplateLoc loc)
-	{
-		BlockPos pos = loc.getPos();
-
-		if (loc.isCentered())
-		{
-			pos = TemplateUtil.getCenteredPos(def, loc);
-		}
-
-		final IBlockAccessExtended blockAccess = new BlockAccessChunkPrimer(world, primer);
-
-		final ITemplateProcessorExtended processor = new BlockRotationProcessorExtended(pos, loc.getSettings());
-		TemplatePrimer.primeChunk(def.getTemplate(), blockAccess, world, chunk, primer, pos, processor, loc.getSettings());
-	}
 
 	@SuppressWarnings("unchecked")
 	public static List<Template.BlockInfo> getBlocks(final Template template)
@@ -204,11 +115,6 @@ public class TemplatePrimer
 		}
 
 		return newInfo;
-	}
-
-	public static List<BlockPos> getBlockPos(final BlockPos pos, final PlacementSettings settings, final Template template)
-	{
-		return TemplatePrimer.getBlockPos(TemplatePrimer.getBlocks(template), pos, settings);
 	}
 
 	public static List<BlockPos> getBlockPos(final List<Template.BlockInfo> blockInfo, final BlockPos pos, final PlacementSettings settings)
@@ -359,221 +265,6 @@ public class TemplatePrimer
 				{
 					TemplatePrimer.addEntitiesToWorld(template, blockAccess.getWorld(), pos, settings.getMirror(), settings.getRotation(), bb);
 				}
-			}
-		}
-	}
-
-	public static void primeChunk(final Template template, final IBlockAccessExtended blockAccess, final World world, final ChunkPos chunk,
-			final ChunkPrimer primer, final BlockPos pos,
-			@Nullable final ITemplateProcessorExtended processor, final PlacementSettings settings)
-	{
-		final List<Template.BlockInfo> blocks = TemplatePrimer.getBlocks(template);
-
-		if (!blocks.isEmpty() && template.getSize().getX() >= 1 && template.getSize().getY() >= 1 && template.getSize().getZ() >= 1)
-		{
-			final Block block = settings.getReplacedBlock();
-
-			final int minX = chunk.x * 16;
-			final int minY = 0;
-			final int minZ = chunk.z * 16;
-
-			final int maxX = minX + 15;
-			final int maxY = world.getActualHeight();
-			final int maxZ = minZ + 15;
-
-			final StructureBoundingBox chunkBB = new StructureBoundingBox(minX, minY, minZ, maxX, maxY, maxZ);
-
-			for (final Template.BlockInfo template$blockinfo : blocks)
-			{
-				final BlockPos blockpos = Template.transformedBlockPos(settings, template$blockinfo.pos).add(pos);
-				final Template.BlockInfo template$blockinfo1 =
-						processor != null ? processor.processBlock(world, blockpos, template$blockinfo) : template$blockinfo;
-
-				if (template$blockinfo1 != null)
-				{
-					final Block block1 = template$blockinfo1.blockState.getBlock();
-
-					if ((block == null || block != block1) && (!settings.getIgnoreStructureBlock() || block1 != Blocks.STRUCTURE_BLOCK)
-							&& chunkBB.isVecInside(blockpos))
-					{
-						final IBlockState iblockstate = template$blockinfo1.blockState.withMirror(settings.getMirror());
-						final IBlockState iblockstate1 = iblockstate.withRotation(settings.getRotation());
-
-						if (iblockstate1.getBlock() instanceof BlockMultiDummy || iblockstate1.getBlock() instanceof BlockMultiDummyHalf)
-						{
-							continue;
-						}
-
-						if (iblockstate1.getBlock() == BlocksAether.wildcard)
-						{
-							final TileEntityWildcard wildcard = new TileEntityWildcard();
-
-							wildcard.setWorld(world);
-
-							template$blockinfo1.tileentityData.setInteger("x", blockpos.getX());
-							template$blockinfo1.tileentityData.setInteger("y", blockpos.getY());
-							template$blockinfo1.tileentityData.setInteger("z", blockpos.getZ());
-							wildcard.readFromNBT(template$blockinfo1.tileentityData);
-							wildcard.mirror(settings.getMirror());
-							wildcard.rotate(settings.getRotation());
-
-							//wildcard.onSchematicGeneration(blockAccess, world.rand);
-
-							continue;
-						}
-
-						try
-						{
-							primer.setBlockState(
-									blockpos.getX() - minX, blockpos.getY(),
-									blockpos.getZ() - minZ, iblockstate1);
-						}
-						catch (final ArrayIndexOutOfBoundsException ex)
-						{
-							System.out.println("Array out of bounds in TemplatePrimer.primeChunk");
-							System.out.println(blockpos.getX() - minX);
-							System.out.println("z " + (blockpos.getZ() - minZ));
-						}
-					}
-				}
-			}
-		}
-	}
-
-	public static void populateChunk(final Template template, final World world, final IBlockAccessExtended blockAccess, final ChunkPos chunk,
-			final BlockPos pos,
-			@Nullable final ITemplateProcessorExtended processor,
-			final PlacementSettings settings)
-	{
-		final List<Template.BlockInfo> blocks = TemplatePrimer.getBlocks(template);
-
-		if (!blocks.isEmpty() && template.getSize().getX() >= 1 && template.getSize().getY() >= 1 && template.getSize().getZ() >= 1)
-		{
-			final Block block = settings.getReplacedBlock();
-
-			final int minX = chunk.x * 16;
-			final int minY = 0;
-			final int minZ = chunk.z * 16;
-
-			final int maxX = minX + 15;
-			final int maxY = world.getActualHeight();
-			final int maxZ = minZ + 15;
-
-			final StructureBoundingBox chunkBB = new StructureBoundingBox(minX, minY, minZ, maxX, maxY, maxZ);
-
-			for (final Template.BlockInfo template$blockinfo : blocks)
-			{
-				final BlockPos blockpos = Template.transformedBlockPos(settings, template$blockinfo.pos).add(pos);
-				final Template.BlockInfo template$blockinfo1 =
-						processor != null ? processor.processBlock(world, blockpos, template$blockinfo) : template$blockinfo;
-
-				if (template$blockinfo1 != null)
-				{
-					final Block block1 = template$blockinfo1.blockState.getBlock();
-
-					if ((block == null || block != block1) && (!settings.getIgnoreStructureBlock() || block1 != Blocks.STRUCTURE_BLOCK)
-							&& chunkBB.isVecInside(blockpos))
-					{
-						final IBlockState iblockstate = template$blockinfo1.blockState.withMirror(settings.getMirror());
-						final IBlockState iblockstate1 = iblockstate.withRotation(settings.getRotation());
-
-						if (iblockstate1.getBlock() instanceof BlockMultiDummy || iblockstate1.getBlock() instanceof BlockMultiDummyHalf)
-						{
-							continue;
-						}
-
-						if (iblockstate1.getBlock() == BlocksAether.wildcard)
-						{
-							final TileEntityWildcard wildcard = new TileEntityWildcard();
-
-							if (blockAccess.getWorld() != null)
-							{
-								wildcard.setWorld(world);
-
-								template$blockinfo1.tileentityData.setInteger("x", blockpos.getX());
-								template$blockinfo1.tileentityData.setInteger("y", blockpos.getY());
-								template$blockinfo1.tileentityData.setInteger("z", blockpos.getZ());
-								wildcard.readFromNBT(template$blockinfo1.tileentityData);
-								wildcard.mirror(settings.getMirror());
-								wildcard.rotate(settings.getRotation());
-
-								wildcard.onSchematicGeneration(blockAccess, world.rand);
-							}
-
-							continue;
-						}
-
-						if (template$blockinfo1.tileentityData != null)
-						{
-							final TileEntity tileentity = blockAccess.getTileEntity(blockpos);
-
-							if (tileentity != null)
-							{
-								if (tileentity instanceof IInventory)
-								{
-									((IInventory) tileentity).clear();
-								}
-							}
-						}
-
-						if (blockAccess.setBlockState(blockpos, iblockstate1))
-						{
-							iblockstate.getBlock().onBlockAdded(world, blockpos, iblockstate1);
-
-							if (template$blockinfo1.tileentityData != null)
-							{
-								final TileEntity tileentity2 = blockAccess.getTileEntity(blockpos);
-
-								if (tileentity2 != null)
-								{
-									template$blockinfo1.tileentityData.setInteger("x", blockpos.getX());
-									template$blockinfo1.tileentityData.setInteger("y", blockpos.getY());
-									template$blockinfo1.tileentityData.setInteger("z", blockpos.getZ());
-									tileentity2.readFromNBT(template$blockinfo1.tileentityData);
-									tileentity2.mirror(settings.getMirror());
-									tileentity2.rotate(settings.getRotation());
-
-									tileentity2.markDirty();
-
-									if (tileentity2 instanceof TileEntityMultiblockController)
-									{
-										final TileEntityMultiblockController controller = (TileEntityMultiblockController) tileentity2;
-
-										controller.rebuild();
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-
-			for (final Template.BlockInfo template$blockinfo2 : blocks)
-			{
-				if (block == null || block != template$blockinfo2.blockState.getBlock())
-				{
-					final BlockPos blockpos1 = Template.transformedBlockPos(settings, template$blockinfo2.pos).add(pos);
-
-					if (chunkBB.isVecInside(blockpos1))
-					{
-						world.notifyNeighborsRespectDebug(blockpos1, template$blockinfo2.blockState.getBlock(), false);
-
-						if (template$blockinfo2.tileentityData != null)
-						{
-							final TileEntity tileentity1 = world.getTileEntity(blockpos1);
-
-							if (tileentity1 != null)
-							{
-								tileentity1.markDirty();
-							}
-						}
-					}
-				}
-			}
-
-			if (!settings.getIgnoreEntities())
-			{
-				TemplatePrimer.addEntitiesToWorld(template, world, pos, settings.getMirror(), settings.getRotation(), chunkBB);
 			}
 		}
 	}

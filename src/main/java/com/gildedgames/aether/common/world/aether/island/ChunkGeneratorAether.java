@@ -10,13 +10,12 @@ import com.gildedgames.orbis_api.core.PlacedBlueprint;
 import com.gildedgames.orbis_api.data.region.IRegion;
 import com.gildedgames.orbis_api.data.region.Region;
 import com.gildedgames.orbis_api.preparation.IChunkMaskTransformer;
+import com.gildedgames.orbis_api.preparation.impl.ChunkDataContainer;
 import com.gildedgames.orbis_api.preparation.impl.ChunkSegmentMask;
-import com.gildedgames.orbis_api.preparation.impl.util.ChunkHelper;
-import com.gildedgames.orbis_api.processing.BlockAccessExtendedWrapper;
+import com.gildedgames.orbis_api.processing.BlockAccessChunkDataContainer;
 import com.gildedgames.orbis_api.processing.DataPrimer;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
@@ -78,31 +77,30 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		{
 			masks[chunkY] = new ChunkSegmentMask(chunkX, chunkY, chunkZ);
 
-			this.threadSafeGenerateChunk(info, masks[chunkY], islandData, chunkX, chunkY, chunkZ);
+			this.preparation.generateFull(info, masks[chunkY], islandData, chunkX, chunkY, chunkZ);
 		}
 
 		IChunkMaskTransformer transformer = islandData.getGenerator().createMaskTransformer(islandData, chunkX, chunkZ);
 
-		final Chunk chunk = ChunkHelper.createChunk(this.world, masks, transformer, chunkX, chunkZ);
+		final ChunkDataContainer data = ChunkDataContainer.createFromChunkSegmentMasks(masks, transformer, chunkX, chunkZ);
+
+		final BlockAccessChunkDataContainer blockAccess = new BlockAccessChunkDataContainer(this.world, data);
+
+		final DataPrimer dataPrimer = new DataPrimer(blockAccess);
+
+		IRegion region = new Region(new BlockPos(chunkX * 16, 0, chunkZ * 16),
+				new BlockPos(chunkX * 16, 255, chunkZ * 16).add(15, 15, 15));
+
+		// Prime placed templates
+		for (final PlacedBlueprint instance : islandData.getPlacedBlueprintsInChunk(chunkX, chunkZ))
+		{
+			dataPrimer.place(instance, region);
+		}
+
+		final Chunk chunk = data.createChunk(this.world, chunkX, chunkZ);
 		chunk.generateSkylightMap();
 
 		return chunk;
-	}
-
-	public void threadSafeGenerateChunk(IAetherChunkColumnInfo info, ChunkSegmentMask mask, IIslandData islandData, int chunkX, int chunkY, int chunkZ)
-	{
-		this.preparation.generateBaseTerrain(info, mask, islandData, chunkX, chunkY, chunkZ);
-
-//		final DataPrimer dataPrimer = new DataPrimer(new BlockAccessChunkPrimer(this.world, primer));
-//
-//		IRegion region = new Region(new BlockPos(chunkX * 16, chunkY * 16, chunkZ * 16),
-//				new BlockPos(chunkX * 16, chunkY * 16, chunkZ * 16).add(15, 15, 15));
-//
-//		// Prime placed templates
-//		for (final PlacedBlueprint instance : islandData.getPlacedBlueprintsInChunk(chunkX, chunkZ))
-//		{
-//			dataPrimer.place(instance, region, false);
-//		}
 	}
 
 	@Override
@@ -130,19 +128,6 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		final long seedZ = this.rand.nextLong() / 2L * 2L + 1L;
 
 		this.rand.setSeed(chunkX * seedX + chunkZ * seedZ ^ this.world.getSeed());
-
-		final DataPrimer primer = new DataPrimer(new BlockAccessExtendedWrapper(this.world));
-
-		ChunkPos chunkPos = new ChunkPos(chunkX, chunkZ);
-
-		IRegion region = new Region(new BlockPos(chunkX * 16, 0, chunkZ * 16),
-				new BlockPos(chunkX * 16, 255, chunkZ * 16).add(15, 15, 15));
-
-		// Populate placed blueprints
-		for (final PlacedBlueprint instance : island.getPlacedBlueprintsInChunk(chunkX, chunkZ))
-		{
-			primer.place(instance, region, true);
-		}
 
 		biome.decorate(this.world, this.rand, pos);
 	}
@@ -187,9 +172,9 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		return null;
 	}
 
-	public void threadSafeGenerateMask(IAetherChunkColumnInfo info, Biome[] biomes, ChunkSegmentMask mask, IIslandData islandData, int x, int y, int z)
+	public void generateBaseTerrain(IAetherChunkColumnInfo info, Biome[] biomes, ChunkSegmentMask mask, IIslandData islandData, int x, int y, int z)
 	{
-		this.preparation.generateBaseTerrainMask(info, biomes, mask, islandData, x, y, z);
+		this.preparation.generateBaseTerrain(info, biomes, mask, islandData, x, y, z);
 	}
 
 	public IIslandChunkColumnInfo generateChunkColumnInfo(Biome[] biomes, IIslandData islandData, int chunkX, int chunkZ)

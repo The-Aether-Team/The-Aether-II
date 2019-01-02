@@ -129,7 +129,7 @@ public class PrepAether implements IPrepRegistryEntry<IAetherChunkColumnInfo>
 
 			IIslandData islandData = aetherData.getIslandData();
 
-			aetherGen.threadSafeGenerateMask(info, biomes, mask, islandData, x, y, z);
+			aetherGen.generateBaseTerrain(info, biomes, mask, islandData, x, y, z);
 		}
 	}
 

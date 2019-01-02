@@ -3,16 +3,14 @@ package com.gildedgames.aether.common.world.necromancer_tower;
 import com.gildedgames.aether.common.registry.content.InstancesAether;
 import com.gildedgames.orbis_api.data.region.IRegion;
 import com.gildedgames.orbis_api.data.region.Region;
-import com.gildedgames.orbis_api.processing.BlockAccessChunkPrimer;
-import com.gildedgames.orbis_api.processing.BlockAccessExtendedWrapper;
+import com.gildedgames.orbis_api.preparation.impl.ChunkDataContainer;
+import com.gildedgames.orbis_api.processing.BlockAccessChunkDataContainer;
 import com.gildedgames.orbis_api.processing.DataPrimer;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.IChunkGenerator;
 
 import javax.annotation.Nullable;
@@ -41,19 +39,7 @@ public class ChunkProviderNecromancerTower implements IChunkGenerator
 	@Override
 	public void populate(final int chunkX, final int chunkZ)
 	{
-		final NecromancerTowerInstance inst = InstancesAether.NECROMANCER_TOWER_HANDLER.getFromDimId(this.world.provider.getDimension());
 
-		final DataPrimer primer = new DataPrimer(new BlockAccessExtendedWrapper(this.world));
-
-		if (inst.getTower() == null)
-		{
-			return;
-		}
-
-		IRegion region = new Region(new BlockPos(chunkX * 16, 0, chunkZ * 16),
-				new BlockPos(chunkX * 16, 255, chunkZ * 16).add(15, 15, 15));
-
-		primer.place(inst.getTower(), region, true);
 	}
 
 	@Override
@@ -65,25 +51,23 @@ public class ChunkProviderNecromancerTower implements IChunkGenerator
 	@Override
 	public Chunk generateChunk(final int chunkX, final int chunkZ)
 	{
-		final ChunkPos p = new ChunkPos(chunkX, chunkZ);
-
 		final NecromancerTowerInstance inst = InstancesAether.NECROMANCER_TOWER_HANDLER.getFromDimId(this.world.provider.getDimension());
 
 		this.random.setSeed(chunkX * 0x4f9939f508L + chunkZ * 0x1ef1565bd5L);
 
-		final ChunkPrimer primer = new ChunkPrimer();
+		final ChunkDataContainer blocks = new ChunkDataContainer(chunkX, chunkZ);
 
 		if (inst.getTower() != null)
 		{
 			IRegion region = new Region(new BlockPos(chunkX * 16, 0, chunkZ * 16),
 					new BlockPos(chunkX * 16, 255, chunkZ * 16).add(15, 15, 15));
 
-			final DataPrimer dataPrimer = new DataPrimer(new BlockAccessChunkPrimer(this.world, primer));
+			final DataPrimer dataPrimer = new DataPrimer(new BlockAccessChunkDataContainer(this.world, blocks));
 
-			dataPrimer.place(inst.getTower(), region, false);
+			dataPrimer.place(inst.getTower(), region);
 		}
 
-		final Chunk chunk = new Chunk(this.world, primer, chunkX, chunkZ);
+		final Chunk chunk = blocks.createChunk(this.world, chunkX, chunkZ);
 
 		chunk.generateSkylightMap();
 		//chunk.resetRelightChecks();
