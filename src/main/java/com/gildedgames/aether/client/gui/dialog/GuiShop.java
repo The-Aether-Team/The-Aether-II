@@ -7,6 +7,7 @@ import com.gildedgames.aether.api.shop.*;
 import com.gildedgames.aether.client.gui.GuiUtils;
 import com.gildedgames.aether.client.gui.IExtendedGui;
 import com.gildedgames.aether.client.gui.util.GuiItemStack;
+import com.gildedgames.aether.common.AetherCelebrations;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.containers.ContainerShop;
@@ -16,6 +17,7 @@ import com.gildedgames.aether.common.network.packets.PacketShopBuy;
 import com.gildedgames.aether.common.network.packets.PacketShopSell;
 import com.gildedgames.aether.common.util.helpers.ItemHelper;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
+import com.gildedgames.orbis_api.client.gui.data.Text;
 import com.gildedgames.orbis_api.client.gui.util.GuiAbstractButton;
 import com.gildedgames.orbis_api.client.gui.util.GuiTexture;
 import com.gildedgames.orbis_api.client.gui.util.gui_library.GuiElement;
@@ -64,25 +66,33 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 
 	private static final ResourceLocation GILT_BAG = AetherCore.getResource("textures/gui/shop/gilt_bag.png");
 
+	private static final ResourceLocation HOLIDAY_NOTICE = AetherCore.getResource("textures/gui/shop/shop_notice.png");
+
+	private static final ResourceLocation HOLIDAY_ICON = AetherCore.getResource("textures/gui/shop/holiday_icon.png");
+
 	private static int buyCount = 1, prevBuyCount = 1;
 
 	private static boolean isCountLocked;
 
-	private int buyCountUnlocked = 1, prevBuyCountUnlocked = 1;
-
 	private final IDialogSlide slide;
 
 	private final IDialogSlideRenderer renderer;
-
-	private GuiButtonVanilla sell, buy;
-
-	private IGuiCurrencyValue playerCoins, sellCoins, buyCoins;
 
 	private final IShopInstance shopInstance;
 
 	private final List<GuiShopBuy> buys = Lists.newArrayList();
 
 	private final ContainerShop container;
+
+	private final PlayerAether playerAether;
+
+	private final int shopIndex;
+
+	private int buyCountUnlocked = 1, prevBuyCountUnlocked = 1;
+
+	private GuiButtonVanilla sell, buy;
+
+	private IGuiCurrencyValue playerCoins, sellCoins, buyCoins;
 
 	private ItemStack lastSellStack;
 
@@ -98,8 +108,6 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 
 	private GuiButtonVanilla back;
 
-	private final PlayerAether playerAether;
-
 	private GuiAbstractButton upArrow, downArrow;
 
 	private GuiButtonVanilla lockButton;
@@ -112,7 +120,9 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 
 	private List<String> hoverDescription;
 
-	private final int shopIndex;
+	private GuiTexture holidayNotice, holidayIcon;
+
+	private com.gildedgames.orbis_api.client.gui.util.GuiTextBox holidayNoticeText;
 
 	public GuiShop(GuiViewer prevViewer, EntityPlayer player, IDialogSlide slide, IDialogSlideRenderer renderer, IShopInstance shopInstance, int shopIndex)
 	{
@@ -163,6 +173,13 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 
 		Pos2D center = InputHelper.getCenter().clone().addX(17).flush();
 
+		this.holidayNotice = new GuiTexture(Dim2D.build().width(110).height(50).flush(), HOLIDAY_NOTICE);
+
+		this.holidayIcon = new GuiTexture(Dim2D.build().width(14).height(16).x(8).y(18).flush(), HOLIDAY_ICON);
+
+		this.holidayNoticeText = new com.gildedgames.orbis_api.client.gui.util.GuiTextBox(Dim2D.build().width(80).height(40).x(27).y(17).flush(), false,
+				new Text(new TextComponentTranslation("edison.shop.holiday_notice"), 1.0F));
+
 		this.sellCoins = this.shopInstance.getCurrencyType()
 				.createSellItemCurrencyValueGui(Dim2D.build().center(true).pos(center).y(this.height).addX(23).addY(-197).flush());
 		this.sellCoins.state().setVisible(false);
@@ -183,6 +200,11 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 
 		this.sell.getInner().displayString = I18n.format("aether.shop.sell");
 		this.sell.getInner().enabled = false;
+
+		if (AetherCelebrations.isHolidayEvent())
+		{
+			context.addChildren(this.holidayNotice, this.holidayNoticeText, this.holidayIcon);
+		}
 
 		context.addChildren(stock, inventory, this.sell);
 

@@ -45,10 +45,10 @@
 			"descriptions": [
 				"edison.shop.candy_cane_block"
 			],
-			"min_price": "80",
-			"max_price": "120",
-			"min_sell_price": "50",
-			"max_sell_price": "80",
+			"min_price": "320",
+			"max_price": "400",
+			"min_sell_price": "220",
+			"max_sell_price": "320",
 			"min_stock": "5",
 			"max_stock": "30",
 			"ticks_until_restock": "1200",
@@ -60,12 +60,12 @@
 				"data": "0"
 			},
 			"descriptions": [
-				"edison.shop.cande_cane_wall"
+				"edison.shop.candy_cane_wall"
 			],
-			"min_price": "1",
-			"max_price": "5",
-			"min_sell_price": "1",
-			"max_sell_price": "1",
+			"min_price": "320",
+			"max_price": "400",
+			"min_sell_price": "220",
+			"max_sell_price": "320",
 			"min_stock": "30",
 			"max_stock": "200",
 			"ticks_until_restock": "1200",
@@ -79,12 +79,12 @@
 			"descriptions": [
 				"edison.shop.mutant_sapling"
 			],
-			"min_price": "1",
-			"max_price": "5",
-			"min_sell_price": "1",
-			"max_sell_price": "1",
-			"min_stock": "30",
-			"max_stock": "200",
+			"min_price": "1500",
+			"max_price": "2000",
+			"min_sell_price": "1000",
+			"max_sell_price": "1500",
+			"min_stock": "1",
+			"max_stock": "1",
 			"ticks_until_restock": "1200",
 			"rarity_weight": "5.0"
 		},
