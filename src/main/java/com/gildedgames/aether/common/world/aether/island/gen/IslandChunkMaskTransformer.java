@@ -3,12 +3,12 @@ package com.gildedgames.aether.common.world.aether.island.gen;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
 import com.gildedgames.orbis_api.preparation.IChunkMaskTransformer;
-import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
+import com.gildedgames.orbis_api.preparation.impl.ChunkSegmentMask;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 
 /**
- * Transforms generic blocks in a {@link ChunkMask} into real-world blocks for usage by block accessors or
+ * Transforms generic blocks in a {@link ChunkSegmentMask} into real-world blocks for usage by block accessors or
  * chunk generation.
  */
 public class IslandChunkMaskTransformer implements IChunkMaskTransformer

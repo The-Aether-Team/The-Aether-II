@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world.aether.features;
 
 import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
-import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
+import com.gildedgames.orbis_api.preparation.impl.ChunkSegmentMask;
 import com.gildedgames.orbis_api.util.XoShiRoRandom;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -16,13 +16,13 @@ public class WorldGenAetherCaves
 
 	protected final ThreadLocal<XoShiRoRandom> rand = ThreadLocal.withInitial(XoShiRoRandom::new);
 
-	protected void addRoom(long seed, int originalX, int originalZ, ChunkMask mask, double dirX, double dirY, double dirZ, Biome[] biomes)
+	protected void addRoom(long seed, int originalX, int originalZ, ChunkSegmentMask mask, double dirX, double dirY, double dirZ, Biome[] biomes)
 	{
 		this.addTunnel(seed, originalX, originalZ, mask, dirX, dirY, dirZ, 1.0F + this.rand.get().nextFloat() * 6.0F,
 				0.0F, 0.0F, -1, -1, 0.5D, biomes);
 	}
 
-	protected void addTunnel(long seed, int originalX, int originalZ, ChunkMask mask, double p_180702_6_, double p_180702_8_,
+	protected void addTunnel(long seed, int originalX, int originalZ, ChunkSegmentMask mask, double p_180702_6_, double p_180702_8_,
 			double p_180702_10_, float p_180702_12_, float p_180702_13_, float p_180702_14_, int p_180702_15_, int p_180702_16_, double p_180702_17_,
 			Biome[] biomes)
 	{
@@ -209,12 +209,12 @@ public class WorldGenAetherCaves
 				.ordinal();
 	}
 
-	protected boolean isOceanBlock(ChunkMask data, int x, int y, int z, int chunkX, int chunkZ)
+	protected boolean isOceanBlock(ChunkSegmentMask data, int x, int y, int z, int chunkX, int chunkZ)
 	{
 		return data.getBlock(x, y, z) == IslandBlockType.WATER_BLOCK.ordinal();
 	}
 
-	public void generate(World worldIn, int x, int z, ChunkMask mask, Biome[] biomes)
+	public void generate(World worldIn, int x, int z, ChunkSegmentMask mask, Biome[] biomes)
 	{
 		XoShiRoRandom rand = this.rand.get();
 		rand.setSeed(worldIn.getSeed());
@@ -241,7 +241,7 @@ public class WorldGenAetherCaves
 	/**
 	 * Recursively called by generate()
 	 */
-	protected void recursiveGenerate(World world, int chunkX, int chunkZ, int originalX, int originalZ, ChunkMask mask, Biome[] biomes)
+	protected void recursiveGenerate(World world, int chunkX, int chunkZ, int originalX, int originalZ, ChunkSegmentMask mask, Biome[] biomes)
 	{
 		Random rand = this.rand.get();
 
@@ -282,12 +282,12 @@ public class WorldGenAetherCaves
 		}
 	}
 
-	private boolean isTopBlock(ChunkMask data, Biome[] biomes, int x, int y, int z, int chunkX, int chunkZ)
+	private boolean isTopBlock(ChunkSegmentMask data, Biome[] biomes, int x, int y, int z, int chunkX, int chunkZ)
 	{
 		return data.getBlock(x, y, z) == IslandBlockType.TOPSOIL_BLOCK.ordinal();
 	}
 
-	private void digBlock(ChunkMask data, int x, int y, int z, int chunkX, int chunkZ, boolean foundTop, int state, int up)
+	private void digBlock(ChunkSegmentMask data, int x, int y, int z, int chunkX, int chunkZ, boolean foundTop, int state, int up)
 	{
 		if (this.canReplaceBlock(state, up) || state == IslandBlockType.TOPSOIL_BLOCK.ordinal() || state == IslandBlockType.SOIL_BLOCK.ordinal())
 		{

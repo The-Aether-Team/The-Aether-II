@@ -7,12 +7,11 @@ import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.api.world.islands.INoiseProvider;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
-import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
+import com.gildedgames.orbis_api.preparation.impl.ChunkSegmentMask;
 import com.gildedgames.orbis_api.processing.BlockAccessExtendedWrapper;
 import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.chunk.ChunkPrimer;
 
 /**
  * This is like a ChunkGenerator, but instead using virtual chunks
@@ -30,10 +29,8 @@ public class WorldPreparationAether
 		this.noise = noise;
 	}
 
-	public void generateBaseTerrain(IAetherChunkColumnInfo info, Biome[] biomes, final ChunkPrimer primer, final IIslandData island, final int chunkX, final int chunkY, final int chunkZ)
+	public void generateBaseTerrain(IAetherChunkColumnInfo info, ChunkSegmentMask mask, IIslandData island, int chunkX, int chunkY, int chunkZ)
 	{
-		ChunkMask mask = new ChunkMask(chunkX, chunkY, chunkZ);
-
 		this.generateCloudLayer(info, mask, chunkY);
 
 		final IIslandGenerator generator = island.getGenerator();
@@ -47,11 +44,9 @@ public class WorldPreparationAether
 //		{
 //			this.veinGenerator.generate(this.world, chunkX, chunkY, chunkZ, mask, biomes);
 //		}
-
-		generator.genChunk(biomes, this.noise, this.access, mask, primer, island, chunkX, chunkY, chunkZ);
 	}
 
-	private void generateCloudLayer(IAetherChunkColumnInfo info, final ChunkMask mask, final int chunkY)
+	private void generateCloudLayer(IAetherChunkColumnInfo info, final ChunkSegmentMask mask, final int chunkY)
 	{
 		int maxDepth = 8;
 		int levelY = 70;
@@ -87,7 +82,7 @@ public class WorldPreparationAether
 	}
 
 	// Calculate max penetration depth
-	private void replaceBiomeBlocks(IAetherChunkColumnInfo info, final ChunkMask mask, final int chunkY)
+	private void replaceBiomeBlocks(IAetherChunkColumnInfo info, final ChunkSegmentMask mask, final int chunkY)
 	{
 		IIslandChunkColumnInfo chunkInfo = info.getIslandData(0, IIslandChunkColumnInfo.class);
 
@@ -136,7 +131,7 @@ public class WorldPreparationAether
 		}
 	}
 
-	public void generateBaseTerrainMask(IAetherChunkColumnInfo info, Biome[] biomes, ChunkMask mask, IIslandData island, int chunkX, int chunkY, int chunkZ)
+	public void generateBaseTerrainMask(IAetherChunkColumnInfo info, Biome[] biomes, ChunkSegmentMask mask, IIslandData island, int chunkX, int chunkY, int chunkZ)
 	{
 		island.getGenerator().genMask(info, mask, island, chunkX, chunkY, chunkZ);
 

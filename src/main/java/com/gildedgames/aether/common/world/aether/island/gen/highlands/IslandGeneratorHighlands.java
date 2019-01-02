@@ -14,11 +14,10 @@ import com.gildedgames.aether.common.world.aether.island.gen.IslandChunkMaskTran
 import com.gildedgames.aether.common.world.aether.island.gen.IslandVariables;
 import com.gildedgames.aether.common.world.util.data.ChunkBooleanSegment;
 import com.gildedgames.aether.common.world.util.data.ChunkDoubleSegment;
-import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
-import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
+import com.gildedgames.orbis_api.preparation.IChunkMaskTransformer;
+import com.gildedgames.orbis_api.preparation.impl.ChunkSegmentMask;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.chunk.ChunkPrimer;
 
 public class IslandGeneratorHighlands implements IIslandGenerator
 {
@@ -31,24 +30,24 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 
 	public static ChunkNoiseGenerator generateNoise(OpenSimplexNoise noise, IIslandData island, int chunkX, int chunkZ, int offset, double scale)
 	{
-		return new ChunkNoiseGenerator(noise, chunkX * 16, chunkZ * 16, 4, 5, island.getBounds().getMinX() + offset, island.getBounds().getMinZ() + offset,
+		return new ChunkNoiseGenerator(chunkX * 16, chunkZ * 16, 4, 5, island.getBounds().getMinX() + offset, island.getBounds().getMinZ() + offset,
 				scale)
 		{
 			@Override
-			protected double sample(double nx, double nz)
+			protected double getSample(double nx, double nz)
 			{
-				return NoiseUtil.genNoise(this.generator, nx, nz);
+				return NoiseUtil.genNoise(noise, nx, nz);
 			}
 		};
 	}
 
 	public static ChunkNoiseGenerator generateLakeNoise(OpenSimplexNoise noise, IIslandData island, int chunkX, int chunkZ, int offset, double scale)
 	{
-		return new ChunkNoiseGenerator(noise, chunkX * 16, chunkZ * 16, 4, 5, island.getBounds().getMinX() + offset, island.getBounds().getMinZ() + offset,
+		return new ChunkNoiseGenerator(chunkX * 16, chunkZ * 16, 4, 5, island.getBounds().getMinX() + offset, island.getBounds().getMinZ() + offset,
 				scale)
 		{
 			@Override
-			protected double sample(double nx, double nz)
+			protected double getSample(double nx, double nz)
 			{
 				return NoiseUtil.something(noise, nx, nz);
 			}
@@ -56,65 +55,73 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 	}
 
 	@Override
-	public void genMask(IAetherChunkColumnInfo columnInfo, ChunkMask mask, IIslandData island, int chunkX, int chunkY, int chunkZ)
+	public void genMask(IAetherChunkColumnInfo columnInfo, ChunkSegmentMask mask, IIslandData island, int chunkX, int chunkY, int chunkZ)
 	{
 		HighlandsChunkColumnInfo info = columnInfo.getIslandData(0, HighlandsChunkColumnInfo.class);
 
-		int boundsMinY = chunkY * 16;
-		int boundsMaxY = boundsMinY + 15;
+		int yOffset = chunkY * 16;
 
 		for (int x = 0; x < 16; x++)
 		{
 			for (int z = 0; z < 16; z++)
 			{
-				double maxY = info.maxY_xz.get(x, z);
+				int maxY = (int) info.maxY_xz.get(x, z);
 
-				if (maxY <= 0.0D)
+				if (maxY <= 0)
 				{
 					continue;
 				}
 
-				double bottomMaxY = info.bottomMaxY_xz.get(x, z);
-				double bottomHeight = info.bottomHeight_xz.get(x, z);
-				double lakeDepth = info.lakeDepth_xz.get(x, z);
+				int bottomMaxY = (int) info.bottomMaxY_xz.get(x, z);
+				int bottomHeight = (int) info.bottomHeight_xz.get(x, z);
 
 				boolean snow = info.snow_xz.get(x, z);
 
-				int stone = IslandBlockType.STONE_BLOCK.ordinal();
+				int m0a = Math.min(bottomMaxY - yOffset, 15);
+				int m0b = Math.max(bottomMaxY - bottomHeight - yOffset, 0);
 
-
-				for (int y = Math.min((int) bottomMaxY, boundsMaxY); y >= Math.max(bottomMaxY - bottomHeight, boundsMinY); y--)
+				for (int y = m0a; y >= m0b; y--)
 				{
-					mask.setBlock(x, y - boundsMinY, z, stone);
+					mask.setBlock(x, y, z, IslandBlockType.STONE_BLOCK.ordinal());
 				}
 
-				for (int y = Math.max((int) bottomMaxY, boundsMinY); y <= Math.min(maxY, boundsMaxY); y++)
+				int m1a = Math.max(bottomMaxY - yOffset, 0);
+				int m1b = Math.min(maxY - yOffset, 15);
+
+				int snowThreshold = maxY - yOffset - 8;
+
+				for (int y = m1a; y <= m1b; y++)
 				{
-					if (snow && y > maxY - 8)
+					if (snow && y > snowThreshold)
 					{
-						mask.setBlock(x, y - boundsMinY, z, IslandBlockType.SNOW_BLOCK.ordinal());
+						mask.setBlock(x, y, z, IslandBlockType.SNOW_BLOCK.ordinal());
 					}
 					else
 					{
-						mask.setBlock(x, y - boundsMinY, z, stone);
+						mask.setBlock(x, y, z, IslandBlockType.STONE_BLOCK.ordinal());
 					}
 				}
 
-				int waterLevel = 100;
+				double lakeDepth = info.lakeDepth_xz.get(x, z);
 
 				if (lakeDepth > 0.0D)
 				{
-					double minY = waterLevel - lakeDepth - 3;
+					int waterLevel = 100;
 
-					for (int y = Math.min(waterLevel, boundsMaxY); y >= Math.max(minY, boundsMinY); y--)
+					int minY = (int) (waterLevel - lakeDepth - 3);
+
+					int m2a = Math.min(waterLevel - yOffset, 15);
+					int m2b = Math.max(minY - yOffset, 0);
+
+					for (int y = m2a; y >= m2b; y--)
 					{
 						if (y <= minY + 3)
 						{
-							mask.setBlock(x, y - boundsMinY, z, IslandBlockType.COAST_BLOCK.ordinal());
+							mask.setBlock(x, y, z, IslandBlockType.COAST_BLOCK.ordinal());
 						}
 						else
 						{
-							mask.setBlock(x, y - boundsMinY, z, IslandBlockType.WATER_BLOCK.ordinal());
+							mask.setBlock(x, y, z, IslandBlockType.WATER_BLOCK.ordinal());
 						}
 					}
 				}
@@ -122,19 +129,19 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 				if (this.vars.getCoastHeight() > 0)
 				{
 					int coastMaxY = 100 + (this.vars.getCoastHeight() / 2);
+					int coastMinY = coastMaxY - this.vars.getCoastHeight();
 
-					double coastMinY = coastMaxY - this.vars.getCoastHeight();
+					int m3a = Math.min(coastMaxY - yOffset, 15);
+					int m3b = Math.max(coastMinY - yOffset, 0);
 
-					for (int y = Math.min(coastMaxY, boundsMaxY); y >= Math.max(coastMinY, boundsMinY); y--)
+					for (int y = m3a; y > m3b; y--)
 					{
-						final int state = mask.getBlock(x, y - boundsMinY, z);
+						final int state = mask.getBlock(x, y, z);
 
-						if (state != IslandBlockType.STONE_BLOCK.ordinal() && state != IslandBlockType.FERROSITE_BLOCK.ordinal())
+						if (state == IslandBlockType.STONE_BLOCK.ordinal() || state == IslandBlockType.FERROSITE_BLOCK.ordinal())
 						{
-							continue;
+							mask.setBlock(x, y, z, IslandBlockType.COAST_BLOCK.ordinal());
 						}
-
-						mask.setBlock(x, y - boundsMinY, z, IslandBlockType.COAST_BLOCK.ordinal());
 					}
 				}
 			}
@@ -142,8 +149,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 	}
 
 	@Override
-	public void genChunk(Biome[] biomes, OpenSimplexNoise noise, IBlockAccessExtended access, ChunkMask mask, ChunkPrimer primer, IIslandData island,
-			int chunkX, int chunkY, int chunkZ)
+	public IChunkMaskTransformer createMaskTransformer(IIslandData island, int chunkX, int chunkZ)
 	{
 		BiomeAetherBase biome = (BiomeAetherBase) island.getBiome();
 
@@ -152,7 +158,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 		transformer.setMaskValue(IslandBlockType.SOIL_BLOCK, biome.fillerBlock);
 		transformer.setMaskValue(IslandBlockType.COAST_BLOCK, biome.getCoastalBlock());
 
-		mask.createChunk(primer, transformer);
+		return transformer;
 	}
 
 	@Override
@@ -160,9 +166,10 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 	{
 		HighlandsChunkColumnInfo info = new HighlandsChunkColumnInfo(noise, chunkX, chunkZ);
 
-		ChunkNoiseGenerator heightMap = generateNoise(noise, island, chunkX, chunkZ, 0, 300.0D);
-		ChunkNoiseGenerator terraceMap = this.vars.hasTerraces() ? generateNoise(noise, island, chunkX, chunkZ, 1000, 300.0D) : null;
-		ChunkNoiseGenerator lakeMap = generateLakeNoise(noise, island, chunkX, chunkZ, 10000, this.vars.getLakeScale());
+		final ChunkNoiseGenerator heightMap = generateNoise(noise, island, chunkX, chunkZ, 0, 300.0D);
+
+		ChunkNoiseGenerator terraceMap = null;
+		ChunkNoiseGenerator lakeMap = null;
 
 		int posX = chunkX * 16;
 		int posZ = chunkZ * 16;
@@ -183,7 +190,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 			{
 				int worldZ = posZ + z;
 
-				double sample = heightMap.interpolate(x, z);
+				double sample = heightMap.getNoiseValue(x, z);
 
 				double distZ = Math.abs((centerZ - worldZ) * (1.0 / radiusZ));
 
@@ -205,16 +212,26 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 
 					double filteredSample = this.vars.getHeightSampleFilter().transform(heightSample);
 
-					if (terraceMap != null)
+					if (this.vars.hasTerraces())
 					{
-						double terraceSample = terraceMap.interpolate(x, z) + 1.0;
+						if (terraceMap == null)
+						{
+							terraceMap = generateNoise(noise, island, chunkX, chunkZ, 1000, 300.0D);
+						}
+
+						double terraceSample = terraceMap.getNoiseValue(x, z) + 1.0;
 
 						filteredSample = NoiseUtil.lerp(heightSample, terraceSample - diff > 0.7 ? terraceSample - diff : heightSample, 0.7);
 					}
 
 					filteredSample = Math.pow(filteredSample, 1.0 + (this.vars.getCoastSpread() * 0.25));
 
-					double lakeSample = lakeMap.interpolate(x, z);
+					if (lakeMap == null)
+					{
+						lakeMap = generateLakeNoise(noise, island, chunkX, chunkZ, 10000, this.vars.getLakeScale());
+					}
+
+					double lakeSample = lakeMap.getNoiseValue(x, z);
 
 					double dif = MathHelper.clamp(Math.abs(cutoffPoint - heightSample) * 10.0, 0.0, 1.0);
 
@@ -293,10 +310,6 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 					info.bottomMaxY_xz.set(x, z, bottomMaxY);
 
 					info.snow_xz.set(x, z, this.vars.hasSnowCaps() && (filteredSample > 0.7));
-				}
-				else
-				{
-					info.setHeight(x, z, -1);
 				}
 			}
 		}

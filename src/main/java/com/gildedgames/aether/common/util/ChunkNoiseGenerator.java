@@ -1,31 +1,27 @@
 package com.gildedgames.aether.common.util;
 
-import com.gildedgames.aether.api.util.OpenSimplexNoise;
 import com.gildedgames.aether.api.world.islands.INoiseProvider;
+import net.minecraft.util.math.MathHelper;
 
 /**
  * Generates 2D noise using the provided noise generator and linearly interpolates between values.
  */
 public abstract class ChunkNoiseGenerator implements INoiseProvider
 {
-	protected final OpenSimplexNoise generator;
-
-	private final double[] data;
-
-	protected final int posX, posZ;
+	private final int posX, posZ;
 
 	private final double noiseScale;
 
 	private final int noiseSamples;
 
-	protected final int offsetX, offsetZ;
+	private final double[] interpolatedSamples;
 
-	protected final double scale;
+	private final int offsetX, offsetZ;
 
-	public ChunkNoiseGenerator(OpenSimplexNoise generator, int posX, int posZ, double noiseScale, int noiseSamples, int offsetX, int offsetZ, double scale)
+	private final double scale;
+
+	public ChunkNoiseGenerator(int posX, int posZ, double noiseScale, int noiseSamples, int offsetX, int offsetZ, double scale)
 	{
-		this.generator = generator;
-
 		this.posX = posX;
 		this.posZ = posZ;
 
@@ -37,13 +33,13 @@ public abstract class ChunkNoiseGenerator implements INoiseProvider
 
 		this.scale = scale;
 
-		this.data = new double[this.noiseSamples * this.noiseSamples];
-
-		this.generateNoise();
+		this.interpolatedSamples = this.generateNoise();
 	}
 
-	private void generateNoise()
+	private double[] generateNoise()
 	{
+		double[] samples = new double[this.noiseSamples * this.noiseSamples];
+
 		for (int x = 0; x < this.noiseSamples; x++)
 		{
 			// Creates world coordinate and normalized evalNormalised coordinate
@@ -56,32 +52,54 @@ public abstract class ChunkNoiseGenerator implements INoiseProvider
 				double worldZ = this.posZ - (z == 0 ? this.noiseScale - 1 : 0) + (z * (16.0D / this.noiseSamples));
 				double nz = (worldZ + this.offsetZ) / this.scale;
 
-				this.data[x + (z * this.noiseSamples)] = this.sample(nx, nz);
+				samples[x + (z * this.noiseSamples)] = this.getSample(nx, nz);
 			}
 		}
+
+		return this.interpolateSamples(samples);
 	}
 
-	protected abstract double sample(double nx, double nz);
+	private double[] interpolateSamples(double[] samples)
+	{
+		double[] interpolatedSamples = new double[16 * 16];
 
-	@Override
-	public double interpolate(final int x, final int z)
+		for (int x = 0; x < 16; x++)
+		{
+			for (int z = 0; z < 16; z++)
+			{
+				interpolatedSamples[x << 4 | z] = this.interpolate(samples, x, z);
+			}
+		}
+
+		return interpolatedSamples;
+	}
+
+	private double interpolate(final double[] samples, final int x, final int z)
 	{
 		final double x0 = (double) x / this.noiseScale;
 		final double z0 = (double) z / this.noiseScale;
 
-		final int integerX = (int) Math.floor(x0);
+		final int integerX = MathHelper.floor(x0);
 		final double fractionX = x0 - integerX;
 
-		final int integerZ = (int) Math.floor(z0);
+		final int integerZ = MathHelper.floor(z0);
 		final double fractionZ = z0 - integerZ;
 
-		final double a = this.data[integerX + (integerZ * this.noiseSamples)];
-		final double b = this.data[integerX + ((integerZ + 1) * this.noiseSamples)];
-		final double c = this.data[integerX + 1 + (integerZ * this.noiseSamples)];
-		final double d = this.data[integerX + 1 + ((integerZ + 1) * this.noiseSamples)];
+		final double a = samples[integerX + (integerZ * this.noiseSamples)];
+		final double b = samples[integerX + ((integerZ + 1) * this.noiseSamples)];
+		final double c = samples[integerX + 1 + (integerZ * this.noiseSamples)];
+		final double d = samples[integerX + 1 + ((integerZ + 1) * this.noiseSamples)];
 
 		return (1.0 - fractionX) * ((1.0 - fractionZ) * a + fractionZ * b) +
 				fractionX * ((1.0 - fractionZ) * c + fractionZ * d);
+	}
+
+	protected abstract double getSample(double nx, double nz);
+
+	@Override
+	public double getNoiseValue(int x, int z)
+	{
+		return this.interpolatedSamples[x << 4 | z];
 	}
 
 }

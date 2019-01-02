@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world.aether.features;
 
 import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
-import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
+import com.gildedgames.orbis_api.preparation.impl.ChunkSegmentMask;
 import com.gildedgames.orbis_api.util.XoShiRoRandom;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -15,7 +15,7 @@ public class WorldGenUndergroundVeins
 
 	protected final ThreadLocal<XoShiRoRandom> rand = ThreadLocal.withInitial(XoShiRoRandom::new);
 
-	protected void addTunnel(long seed, int originalX, int originalZ, ChunkMask mask, double t1, double t2,
+	protected void addTunnel(long seed, int originalX, int originalZ, ChunkSegmentMask mask, double t1, double t2,
 			double t3, float r1, float r2, float r3, int s1, int s2, double q,
 			Biome[] biomes)
 	{
@@ -202,12 +202,12 @@ public class WorldGenUndergroundVeins
 				.ordinal();
 	}
 
-	protected boolean isOceanBlock(ChunkMask data, int x, int y, int z, int chunkX, int chunkZ)
+	protected boolean isOceanBlock(ChunkSegmentMask data, int x, int y, int z, int chunkX, int chunkZ)
 	{
 		return data.getBlock(x, y, z) == IslandBlockType.WATER_BLOCK.ordinal();
 	}
 
-	public void generate(World worldIn, int x, int z, ChunkMask mask, Biome[] biomes)
+	public void generate(World worldIn, int x, int z, ChunkSegmentMask mask, Biome[] biomes)
 	{
 		XoShiRoRandom rand = this.rand.get();
 		rand.setSeed(worldIn.getSeed());
@@ -234,7 +234,7 @@ public class WorldGenUndergroundVeins
 	/**
 	 * Recursively called by generate()
 	 */
-	protected void recursiveGenerate(World world, int chunkX, int chunkZ, int originalX, int originalZ, ChunkMask mask, Biome[] biomes)
+	protected void recursiveGenerate(World world, int chunkX, int chunkZ, int originalX, int originalZ, ChunkSegmentMask mask, Biome[] biomes)
 	{
 		Random rand = this.rand.get();
 
@@ -276,12 +276,12 @@ public class WorldGenUndergroundVeins
 		}
 	}
 
-	private boolean isTopBlock(ChunkMask data, Biome[] biomes, int x, int y, int z, int chunkX, int chunkZ)
+	private boolean isTopBlock(ChunkSegmentMask data, Biome[] biomes, int x, int y, int z, int chunkX, int chunkZ)
 	{
 		return data.getBlock(x, y, z) == IslandBlockType.TOPSOIL_BLOCK.ordinal();
 	}
 
-	private void digBlock(ChunkMask data, int x, int y, int z, int chunkX, int chunkZ, boolean foundTop, int state, int up)
+	private void digBlock(ChunkSegmentMask data, int x, int y, int z, int chunkX, int chunkZ, boolean foundTop, int state, int up)
 	{
 		if ((this.canReplaceBlock(state, up) || state == IslandBlockType.SOIL_BLOCK.ordinal()) && state != IslandBlockType.TOPSOIL_BLOCK.ordinal())
 		{

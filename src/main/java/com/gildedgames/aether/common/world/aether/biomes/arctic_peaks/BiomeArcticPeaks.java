@@ -137,7 +137,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase implements ISnowyBiome
 					// Get distance from center of Island
 					final double dist = Math.sqrt(distX * distX + distZ * distZ) / 1.0D;
 
-					final double sample = heightMap.interpolate(x, z);
+					final double sample = heightMap.getNoiseValue(x, z);
 					final double heightSample = sample + 1.0 - dist;
 
 					final BlockPos blockpos1 = p.add(0, world.getHeight(posX + x, posZ + z), 0);

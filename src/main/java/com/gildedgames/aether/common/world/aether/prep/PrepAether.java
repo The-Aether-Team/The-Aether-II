@@ -16,13 +16,12 @@ import com.gildedgames.aether.common.world.aether.island.gen.IslandChunkMaskTran
 import com.gildedgames.orbis_api.preparation.IChunkMaskTransformer;
 import com.gildedgames.orbis_api.preparation.IPrepRegistryEntry;
 import com.gildedgames.orbis_api.preparation.IPrepSectorData;
-import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
+import com.gildedgames.orbis_api.preparation.impl.ChunkSegmentMask;
 import com.gildedgames.orbis_api.util.XoShiRoRandom;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.IChunkGenerator;
 
 import java.util.Random;
@@ -119,31 +118,7 @@ public class PrepAether implements IPrepRegistryEntry<IAetherChunkColumnInfo>
 	}
 
 	@Override
-	public void threadSafeGenerateChunk(World world, IPrepSectorData sectorData, Biome[] biomes, ChunkPrimer chunkPrimer, int chunkX, int chunkZ)
-	{
-		IChunkGenerator generator = world.provider.createChunkGenerator();
-
-		if (generator instanceof ChunkGeneratorAether && sectorData instanceof PrepSectorDataAether)
-		{
-			ChunkGeneratorAether aetherGen = (ChunkGeneratorAether) generator;
-			PrepSectorDataAether aetherData = (PrepSectorDataAether) sectorData;
-
-			IIslandData islandData = aetherData.getIslandData();
-
-			IIslandChunkColumnInfo obj = aetherGen.generateChunkColumnInfo(biomes, islandData, chunkX, chunkZ);
-
-			AetherChunkColumnInfo info = new AetherChunkColumnInfo(1);
-			info.setIslandData(0, obj);
-
-			for (int chunkY = 0; chunkY < 16; chunkY++)
-			{
-				aetherGen.threadSafeGenerateChunk(info, biomes, chunkPrimer, islandData, chunkX, chunkY, chunkZ);
-			}
-		}
-	}
-
-	@Override
-	public void threadSafeGenerateMask(IAetherChunkColumnInfo info, World world, IPrepSectorData sectorData, Biome[] biomes, ChunkMask mask, int x, int y, int z)
+	public void threadSafeGenerateMask(IAetherChunkColumnInfo info, World world, IPrepSectorData sectorData, Biome[] biomes, ChunkSegmentMask mask, int x, int y, int z)
 	{
 		IChunkGenerator generator = world.provider.createChunkGenerator();
 

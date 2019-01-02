@@ -9,8 +9,9 @@ import com.gildedgames.aether.common.world.aether.prep.AetherChunkColumnInfo;
 import com.gildedgames.orbis_api.core.PlacedBlueprint;
 import com.gildedgames.orbis_api.data.region.IRegion;
 import com.gildedgames.orbis_api.data.region.Region;
-import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
-import com.gildedgames.orbis_api.processing.BlockAccessChunkPrimer;
+import com.gildedgames.orbis_api.preparation.IChunkMaskTransformer;
+import com.gildedgames.orbis_api.preparation.impl.ChunkSegmentMask;
+import com.gildedgames.orbis_api.preparation.impl.util.ChunkHelper;
 import com.gildedgames.orbis_api.processing.BlockAccessExtendedWrapper;
 import com.gildedgames.orbis_api.processing.DataPrimer;
 import net.minecraft.entity.EnumCreatureType;
@@ -19,7 +20,6 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
@@ -72,34 +72,37 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		AetherChunkColumnInfo info = new AetherChunkColumnInfo(1);
 		info.setIslandData(0, this.generateChunkColumnInfo(biomes, islandData, chunkX, chunkZ));
 
-		ChunkPrimer primer = new ChunkPrimer();
+		ChunkSegmentMask[] masks = new ChunkSegmentMask[16];
 
 		for (int chunkY = 0; chunkY < 16; chunkY++)
 		{
-			this.threadSafeGenerateChunk(info, biomes, primer, islandData, chunkX, chunkY, chunkZ);
+			masks[chunkY] = new ChunkSegmentMask(chunkX, chunkY, chunkZ);
+
+			this.threadSafeGenerateChunk(info, masks[chunkY], islandData, chunkX, chunkY, chunkZ);
 		}
 
-		final Chunk chunk = new Chunk(this.world, primer, chunkX, chunkZ);
+		IChunkMaskTransformer transformer = islandData.getGenerator().createMaskTransformer(islandData, chunkX, chunkZ);
 
+		final Chunk chunk = ChunkHelper.createChunk(this.world, masks, transformer, chunkX, chunkZ);
 		chunk.generateSkylightMap();
 
 		return chunk;
 	}
 
-	public void threadSafeGenerateChunk(IAetherChunkColumnInfo info, Biome[] biomes, ChunkPrimer primer, IIslandData islandData, int chunkX, int chunkY, int chunkZ)
+	public void threadSafeGenerateChunk(IAetherChunkColumnInfo info, ChunkSegmentMask mask, IIslandData islandData, int chunkX, int chunkY, int chunkZ)
 	{
-		this.preparation.generateBaseTerrain(info, biomes, primer, islandData, chunkX, chunkY, chunkZ);
+		this.preparation.generateBaseTerrain(info, mask, islandData, chunkX, chunkY, chunkZ);
 
-		final DataPrimer dataPrimer = new DataPrimer(new BlockAccessChunkPrimer(this.world, primer));
-
-		IRegion region = new Region(new BlockPos(chunkX * 16, chunkY * 16, chunkZ * 16),
-				new BlockPos(chunkX * 16, chunkY * 16, chunkZ * 16).add(15, 15, 15));
-
-		// Prime placed templates
-		for (final PlacedBlueprint instance : islandData.getPlacedBlueprintsInChunk(chunkX, chunkZ))
-		{
-			dataPrimer.place(instance, region, false);
-		}
+//		final DataPrimer dataPrimer = new DataPrimer(new BlockAccessChunkPrimer(this.world, primer));
+//
+//		IRegion region = new Region(new BlockPos(chunkX * 16, chunkY * 16, chunkZ * 16),
+//				new BlockPos(chunkX * 16, chunkY * 16, chunkZ * 16).add(15, 15, 15));
+//
+//		// Prime placed templates
+//		for (final PlacedBlueprint instance : islandData.getPlacedBlueprintsInChunk(chunkX, chunkZ))
+//		{
+//			dataPrimer.place(instance, region, false);
+//		}
 	}
 
 	@Override
@@ -184,7 +187,7 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		return null;
 	}
 
-	public void threadSafeGenerateMask(IAetherChunkColumnInfo info, Biome[] biomes, ChunkMask mask, IIslandData islandData, int x, int y, int z)
+	public void threadSafeGenerateMask(IAetherChunkColumnInfo info, Biome[] biomes, ChunkSegmentMask mask, IIslandData islandData, int x, int y, int z)
 	{
 		this.preparation.generateBaseTerrainMask(info, biomes, mask, islandData, x, y, z);
 	}

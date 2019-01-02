@@ -6,76 +6,19 @@ import com.gildedgames.aether.api.world.IAetherChunkColumnInfo;
 import com.gildedgames.aether.api.world.islands.IIslandChunkColumnInfo;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
+import com.gildedgames.aether.common.util.ChunkNoiseGenerator;
 import com.gildedgames.aether.common.world.aether.island.gen.AbstractIslandChunkColumnInfo;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandChunkMaskTransformer;
 import com.gildedgames.aether.common.world.util.data.ChunkDoubleSegment;
-import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
-import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
+import com.gildedgames.orbis_api.preparation.IChunkMaskTransformer;
+import com.gildedgames.orbis_api.preparation.impl.ChunkSegmentMask;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.chunk.ChunkPrimer;
 
 public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 {
-	// Resolution of the evalNormalised for a chunk. Should be a power of 2.
-	private static final int NOISE_XZ_SCALE = 4;
-
-	// Number of samples done per chunk.
-	private static final int NOISE_SAMPLES = NOISE_XZ_SCALE + 1;
-
-	public static double interpolate(final double[] data, final int x, final int z)
-	{
-		final double x0 = (double) x / NOISE_XZ_SCALE;
-		final double z0 = (double) z / NOISE_XZ_SCALE;
-
-		final int integerX = (int) Math.floor(x0);
-		final double fractionX = x0 - integerX;
-
-		final int integerZ = (int) Math.floor(z0);
-		final double fractionZ = z0 - integerZ;
-
-		final double a = data[integerX + (integerZ * NOISE_SAMPLES)];
-		final double b = data[integerX + ((integerZ + 1) * NOISE_SAMPLES)];
-		final double c = data[integerX + 1 + (integerZ * NOISE_SAMPLES)];
-		final double d = data[integerX + 1 + ((integerZ + 1) * NOISE_SAMPLES)];
-
-		return (1.0 - fractionX) * ((1.0 - fractionZ) * a + fractionZ * b) +
-				fractionX * ((1.0 - fractionZ) * c + fractionZ * d);
-	}
-
-	private static double[] generateNoise(final OpenSimplexNoise noise, final IIslandData island, final int chunkX, final int chunkZ)
-	{
-		final double posX = chunkX * 16;
-		final double posZ = chunkZ * 16;
-
-		final double minX = island.getBounds().getMinX();
-		final double minZ = island.getBounds().getMinZ();
-
-		final double[] data = new double[NOISE_SAMPLES * NOISE_SAMPLES];
-
-		// Generate half-resolution evalNormalised
-		for (int x = 0; x < NOISE_SAMPLES; x++)
-		{
-			// Creates world coordinate and normalized evalNormalised coordinate
-			final double worldX = posX - (x == 0 ? NOISE_XZ_SCALE - 1 : 0) + (x * (16D / NOISE_SAMPLES));
-			final double nx = (worldX + minX) / 300.0D;
-
-			for (int z = 0; z < NOISE_SAMPLES; z++)
-			{
-				// Creates world coordinate and normalized evalNormalised coordinate
-				final double worldZ = posZ - (z == 0 ? NOISE_XZ_SCALE - 1 : 0) + (z * (16.0D / NOISE_SAMPLES));
-				final double nz = (worldZ + minZ) / 300.0D;
-
-				data[x + (z * NOISE_SAMPLES)] = NoiseUtil.genNoise(noise, nx, nz);
-			}
-		}
-
-		return data;
-	}
-
-
 	@Override
-	public void genMask(IAetherChunkColumnInfo info, ChunkMask mask, IIslandData island, int chunkX, int chunkY, int chunkZ)
+	public void genMask(IAetherChunkColumnInfo info, ChunkSegmentMask mask, IIslandData island, int chunkX, int chunkY, int chunkZ)
 	{
 		int boundsMinY = chunkY * 16;
 		int boundsMaxY = boundsMinY + 16;
@@ -128,10 +71,10 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 	}
 
 	@Override
-	public void genChunk(Biome[] biomes, OpenSimplexNoise noise, IBlockAccessExtended access, ChunkMask mask, ChunkPrimer primer, IIslandData island,
-			int chunkX, int chunkY, int chunkZ)
+	public IChunkMaskTransformer createMaskTransformer(IIslandData island,
+			int chunkX, int chunkZ)
 	{
-		mask.createChunk(primer, new IslandChunkMaskTransformer());
+		return new IslandChunkMaskTransformer();
 	}
 
 	@Override
@@ -139,7 +82,7 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 	{
 		HighlandMegacostChunkColumnInfo info = new HighlandMegacostChunkColumnInfo(noise, chunkX, chunkZ);
 
-		final double[] heightMap = generateNoise(noise, island, chunkX, chunkZ);
+		final ChunkNoiseGenerator heightMap = IslandGeneratorHighlands.generateNoise(noise, island, chunkX, chunkZ, 0, 300.0D);
 
 		final int posX = chunkX * 16;
 		final int posZ = chunkZ * 16;
@@ -165,7 +108,7 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 				// Get distance from center of Island
 				final double dist = Math.sqrt(distX * distX + distZ * distZ) / 1.0D;
 
-				final double sample = interpolate(heightMap, x, z);
+				final double sample = heightMap.getNoiseValue(x, z) * 0.8;
 
 				final double heightSample = sample + 1.0 - dist;
 				final double cutoffPoint = 0.325;
@@ -234,10 +177,6 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 					info.topSample_xz.set(x, z, topSample);
 
 					info.setHeight(x, z, (int) Math.max(maxY, bottomMaxY));
-				}
-				else
-				{
-					info.setHeight(x, z, -1);
 				}
 			}
 		}

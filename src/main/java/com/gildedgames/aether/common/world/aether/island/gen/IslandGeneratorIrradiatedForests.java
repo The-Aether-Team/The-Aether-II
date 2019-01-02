@@ -14,12 +14,11 @@ import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.Crac
 import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.IrradiatedForestsData;
 import com.gildedgames.aether.common.world.util.data.ChunkBooleanSegment;
 import com.gildedgames.aether.common.world.util.data.ChunkDoubleSegment;
-import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
-import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
+import com.gildedgames.orbis_api.preparation.IChunkMaskTransformer;
+import com.gildedgames.orbis_api.preparation.impl.ChunkSegmentMask;
 import com.gildedgames.orbis_api.util.FastMathUtil;
 import com.gildedgames.orbis_api.util.ObjectFilter;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.chunk.ChunkPrimer;
 
 public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 {
@@ -83,7 +82,7 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 	}
 
 	@Override
-	public void genMask(IAetherChunkColumnInfo info, ChunkMask mask, IIslandData island, int chunkX, int chunkY, int chunkZ)
+	public void genMask(IAetherChunkColumnInfo info, ChunkSegmentMask mask, IIslandData island, int chunkX, int chunkY, int chunkZ)
 	{
 		IrradiatedForestsChunkColumnData column = info.getIslandData(0, IrradiatedForestsChunkColumnData.class);
 
@@ -155,14 +154,14 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 	}
 
 	@Override
-	public void genChunk(Biome[] biomes, OpenSimplexNoise noise, IBlockAccessExtended access, ChunkMask mask, ChunkPrimer primer, IIslandData island,
-			int chunkX, int chunkY, int chunkZ)
+	public IChunkMaskTransformer createMaskTransformer(IIslandData island,
+			int chunkX, int chunkZ)
 	{
 		IslandChunkMaskTransformer transformer = new IslandChunkMaskTransformer();
 		transformer.setMaskValue(IslandBlockType.TOPSOIL_BLOCK,
 				BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.IRRADIATED));
 
-		mask.createChunk(primer, transformer);
+		return transformer;
 	}
 
 	@Override
@@ -325,10 +324,6 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 					info.heightSample_xz.set(x, z, heightSample);
 					info.cutoffPoint_xz.set(x, z, cutoffPoint);
 					info.topSample_xz.set(x, z, topSample);
-				}
-				else
-				{
-					info.setHeight(x, z, -1);
 				}
 			}
 		}
