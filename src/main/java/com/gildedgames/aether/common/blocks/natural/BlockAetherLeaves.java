@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.blocks.natural;
 import com.gildedgames.aether.client.renderer.particles.ParticleGolden;
 import com.gildedgames.aether.client.renderer.particles.ParticleLeaf;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherSapling;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
@@ -419,8 +420,10 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 
 			if (rand.nextInt(20) == 0)
 			{
-				stacks.add(new ItemStack(BlocksAether.aether_sapling, 1, this.saplingMeta));
-
+				if (this.saplingMeta != BlockAetherSapling.MUTANT_TREE.getMeta())
+				{
+					stacks.add(new ItemStack(BlocksAether.aether_sapling, 1, this.saplingMeta));
+				}
 			}
 		}
 
