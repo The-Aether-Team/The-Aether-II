@@ -14,12 +14,15 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockValkyrieGrass;
 import com.gildedgames.aether.common.registry.content.GenerationAether;
 import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import com.gildedgames.aether.common.world.aether.WorldProviderAether;
-import com.gildedgames.aether.common.world.aether.features.*;
+import com.gildedgames.aether.common.world.aether.features.WorldGenAetherFlowers;
+import com.gildedgames.aether.common.world.aether.features.WorldGenAetherMinable;
+import com.gildedgames.aether.common.world.aether.features.WorldGenBrettlPlant;
 import com.gildedgames.aether.common.world.aether.features.aerclouds.WorldGenAercloud;
 import com.gildedgames.aether.common.world.aether.features.aerclouds.WorldGenPurpleAercloud;
 import com.gildedgames.aether.common.world.aether.features.trees.WorldGenOrangeTree;
 import com.gildedgames.aether.common.world.aether.island.data.BlockAccessIsland;
 import com.gildedgames.aether.common.world.templates.TemplatePlacer;
+import com.gildedgames.aether.common.world.util.WorldSlice;
 import com.gildedgames.orbis_api.core.BlueprintDefinition;
 import com.gildedgames.orbis_api.core.BlueprintDefinitionPool;
 import com.gildedgames.orbis_api.core.CreationData;
@@ -38,7 +41,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
-import net.minecraftforge.event.terraingen.OreGenEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
 import java.util.Random;
@@ -56,15 +58,11 @@ public class BiomeAetherDecorator
 
 	private final WorldGenAetherFlowers genBlueberryBushes, genKirridGrass, genPlumproots;
 
-	private final WorldGenQuicksoil genQuicksoil;
-
-	private final WorldGenAercloud genColdColumbusAercloud, genColdFlatAercloud, genBlueAercloud;
+	private final WorldGenAercloud genColdColumbusAercloud, genBlueAercloud;
 
 	private final WorldGenPurpleAercloud genPurpleAercloud;
 
 	private final WorldGenBrettlPlant genBrettlPlant;
-
-	private final WorldGenIceCrystals genIceCrystals;
 
 	public final boolean generateBushes = true;
 
@@ -114,17 +112,12 @@ public class BiomeAetherDecorator
 				BlocksAether.plumproot.getDefaultState(), 64,
 				(state) -> state == BlocksAether.aether_grass.getDefaultState() || state == BlocksAether.aether_dirt.getDefaultState());
 
-		this.genQuicksoil = new WorldGenQuicksoil();
-
 		this.genBrettlPlant = new WorldGenBrettlPlant();
 
-		this.genColdFlatAercloud = new WorldGenAercloud(BlockAercloud.getAercloudState(BlockAercloud.COLD_AERCLOUD), 64, true);
 		this.genColdColumbusAercloud = new WorldGenAercloud(BlockAercloud.getAercloudState(BlockAercloud.COLD_AERCLOUD), 16, false);
 		this.genBlueAercloud = new WorldGenAercloud(BlockAercloud.getAercloudState(BlockAercloud.BLUE_AERCLOUD), 8, false);
 
 		this.genPurpleAercloud = new WorldGenPurpleAercloud(BlockAercloud.getAercloudState(BlockAercloud.PURPLE_AERCLOUD), 4, false);
-
-		this.genIceCrystals = new WorldGenIceCrystals(64);
 	}
 
 	public void prepareDecorationsWholeIsland(final World world, BlockAccessIsland access, final IIslandData island, final Random random)
@@ -262,13 +255,15 @@ public class BiomeAetherDecorator
 
 	protected void genDecorations(final World world, final Random random, final BlockPos pos, final Biome genBase)
 	{
-		MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Pre(world, random, pos));
-
 		ChunkPos chunkPos = new ChunkPos(pos);
+
+		MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Pre(world, random, chunkPos));
+
+		WorldSlice slice = new WorldSlice(world, chunkPos);
 
 		if (TerrainGen.decorate(world, random, chunkPos, DecorateBiomeEvent.Decorate.EventType.CUSTOM))
 		{
-			this.generateOres(world, random, pos);
+			this.generateOres(slice, random, pos);
 		}
 
 		int x, y, z;
@@ -338,7 +333,7 @@ public class BiomeAetherDecorator
 					y = random.nextInt(180) + 64;
 					z = random.nextInt(16) + 8;
 
-					this.genBlueberryBushes.generate(world, random, pos.add(x, y, z));
+					this.genBlueberryBushes.generate(slice, random, pos.add(x, y, z));
 				}
 			}
 		}
@@ -354,7 +349,7 @@ public class BiomeAetherDecorator
 					y = random.nextInt(180) + 64;
 					z = random.nextInt(16) + 8;
 
-					this.genPurpleFlowers.generate(world, random, pos.add(x, y, z));
+					this.genPurpleFlowers.generate(slice, random, pos.add(x, y, z));
 				}
 			}
 
@@ -365,7 +360,7 @@ public class BiomeAetherDecorator
 				y = random.nextInt(180) + 64;
 				z = random.nextInt(16) + 8;
 
-				this.genWhiteRoses.generate(world, random, pos.add(x, y, z));
+				this.genWhiteRoses.generate(slice, random, pos.add(x, y, z));
 			}
 
 			// Burstblossom Generator
@@ -375,7 +370,7 @@ public class BiomeAetherDecorator
 				y = random.nextInt(180) + 64;
 				z = random.nextInt(16) + 8;
 
-				this.genBurstblossom.generate(world, random, pos.add(x, y, z));
+				this.genBurstblossom.generate(slice, random, pos.add(x, y, z));
 			}
 
 			// Burstblossom Generator
@@ -385,7 +380,7 @@ public class BiomeAetherDecorator
 				y = random.nextInt(180) + 64;
 				z = random.nextInt(16) + 8;
 
-				this.genAechorSprout.generate(world, random, pos.add(x, y, z));
+				this.genAechorSprout.generate(slice, random, pos.add(x, y, z));
 			}
 
 			// Kirrid Grass Generator
@@ -397,7 +392,7 @@ public class BiomeAetherDecorator
 					y = random.nextInt(180) + 64;
 					z = random.nextInt(16) + 8;
 
-					this.genKirridGrass.generate(world, random, pos.add(x, y, z));
+					this.genKirridGrass.generate(slice, random, pos.add(x, y, z));
 				}
 			}
 
@@ -420,7 +415,7 @@ public class BiomeAetherDecorator
 					y = random.nextInt(180) + 64;
 					z = random.nextInt(16) + 8;
 
-					this.genKirridGrass.generate(world, random, pos.add(x, y, z));
+					this.genKirridGrass.generate(slice, random, pos.add(x, y, z));
 				}
 			}
 		}
@@ -436,15 +431,12 @@ public class BiomeAetherDecorator
 					y = random.nextInt(180) + 64;
 					z = random.nextInt(16) + 8;
 
-					this.genPlumproots.generate(world, random, pos.add(x, y, z));
+					this.genPlumproots.generate(slice, random, pos.add(x, y, z));
 				}
 			}
 		}
 
-		if (TerrainGen.decorate(world, random, chunkPos, DecorateBiomeEvent.Decorate.EventType.CUSTOM))
-		{
-			this.generateClouds(world, random, new BlockPos(pos.getX(), 0, pos.getZ()));
-		}
+		this.generateClouds(world, random, new BlockPos(pos.getX(), 0, pos.getZ()));
 
 		// Post decorate
 		if (genBase instanceof BiomeAetherBase)
@@ -454,10 +446,10 @@ public class BiomeAetherDecorator
 			aetherBiome.postDecorate(world, random, pos);
 		}
 
-		MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Post(world, random, pos));
+		MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Post(world, random, chunkPos));
 	}
 
-	private void generateMineable(final WorldGenAetherMinable minable, final World world, final Random random, final BlockPos pos, final int minY,
+	private void generateMineable(final WorldGenAetherMinable minable, final WorldSlice world, final Random random, final BlockPos pos, final int minY,
 			final int maxY, final int attempts)
 	{
 		for (int count = 0; count < attempts; count++)
@@ -489,53 +481,17 @@ public class BiomeAetherDecorator
 		return random.nextInt(i);
 	}
 
-	protected void generateOres(final World world, final Random random, final BlockPos pos)
+	protected void generateOres(final WorldSlice slice, final Random random, final BlockPos pos)
 	{
-		if (TerrainGen.generateOre(world, random, this.genAmbrosium, pos, OreGenEvent.GenerateMinable.EventType.CUSTOM))
-		{
-			this.generateMineable(this.genAmbrosium, world, random, pos, 0, 256, 20);
-		}
-
-		if (TerrainGen.generateOre(world, random, this.genZanite, pos, OreGenEvent.GenerateMinable.EventType.CUSTOM))
-		{
-			this.generateMineable(this.genZanite, world, random, pos, 0, 256, 18);
-		}
-
-		if (TerrainGen.generateOre(world, random, this.genGravitite, pos, OreGenEvent.GenerateMinable.EventType.CUSTOM))
-		{
-			this.generateMineable(this.genGravitite, world, random, pos, 0, 50, 10);
-		}
-
-		if (TerrainGen.generateOre(world, random, this.genIcestone, pos, OreGenEvent.GenerateMinable.EventType.CUSTOM))
-		{
-			this.generateMineable(this.genIcestone, world, random, pos, 0, 256, 20);
-		}
-
-		if (TerrainGen.generateOre(world, random, this.genArkenium, pos, OreGenEvent.GenerateMinable.EventType.CUSTOM))
-		{
-			this.generateMineable(this.genArkenium, world, random, pos, 0, 70, 15);
-		}
-
-		if (TerrainGen.generateOre(world, random, this.genCoarseAetherDirtOnDirt, pos, OreGenEvent.GenerateMinable.EventType.CUSTOM))
-		{
-			this.generateMineable(this.genCoarseAetherDirtOnDirt, world, random, pos, 0, 128, 10);
-		}
-
-		if (TerrainGen.generateOre(world, random, this.genCoarseAetherDirtOnHolystone, pos, OreGenEvent.GenerateMinable.EventType.CUSTOM))
-		{
-			this.generateMineable(this.genCoarseAetherDirtOnHolystone, world, random, pos, 0, 100, 10);
-		}
-		//this.generateMineable(this.genQuicksoilOnGrass, world, random, pos, 0, 128, 10);
-
-		if (TerrainGen.generateOre(world, random, this.genMossyHolystone, pos, OreGenEvent.GenerateMinable.EventType.CUSTOM))
-		{
-			this.generateMineable(this.genMossyHolystone, world, random, pos, 0, 100, 25);
-		}
-
-		if (TerrainGen.generateOre(world, random, this.genCrudeScatterglass, pos, OreGenEvent.GenerateMinable.EventType.CUSTOM))
-		{
-			this.generateMineable(this.genCrudeScatterglass, world, random, pos, 0, 110, 25);
-		}
+		this.generateMineable(this.genAmbrosium, slice, random, pos, 0, 256, 20);
+		this.generateMineable(this.genZanite, slice, random, pos, 0, 256, 18);
+		this.generateMineable(this.genGravitite, slice, random, pos, 0, 50, 10);
+		this.generateMineable(this.genIcestone, slice, random, pos, 0, 256, 20);
+		this.generateMineable(this.genArkenium, slice, random, pos, 0, 70, 15);
+		this.generateMineable(this.genCoarseAetherDirtOnDirt, slice, random, pos, 0, 128, 10);
+		this.generateMineable(this.genCoarseAetherDirtOnHolystone, slice, random, pos, 0, 100, 10);
+		this.generateMineable(this.genMossyHolystone, slice, random, pos, 0, 100, 25);
+		this.generateMineable(this.genCrudeScatterglass, slice, random, pos, 0, 110, 25);
 	}
 
 	protected void generateClouds(final World world, final Random random, final BlockPos pos)

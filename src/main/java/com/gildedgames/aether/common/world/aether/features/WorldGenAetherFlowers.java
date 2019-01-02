@@ -1,14 +1,14 @@
 package com.gildedgames.aether.common.world.aether.features;
 
+import com.gildedgames.aether.common.world.util.WorldSlice;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
 
 import java.util.Random;
 import java.util.function.Function;
 
-public class WorldGenAetherFlowers extends WorldGenerator
+public class WorldGenAetherFlowers
 {
 	private final IBlockState state;
 
@@ -29,9 +29,10 @@ public class WorldGenAetherFlowers extends WorldGenerator
 		this(state, max, null);
 	}
 
-	@Override
-	public boolean generate(final World world, final Random rand, final BlockPos pos)
+	public boolean generate(final WorldSlice slice, final Random rand, final BlockPos pos)
 	{
+		World world = slice.getWorld();
+
 		int i = 0;
 
 		while (i < this.max)
@@ -41,16 +42,10 @@ public class WorldGenAetherFlowers extends WorldGenerator
 
 			i++;
 
-			if (!world.isBlockLoaded(randomPos))
+			if ((this.canPlaceOn == null || this.canPlaceOn.apply(slice.getBlockState(randomPos.down())))
+					&& slice.isAirBlock(randomPos) && (randomPos.getY() < world.getActualHeight()) && this.state.getBlock().canPlaceBlockAt(world, randomPos))
 			{
-				continue;
-			}
-
-			if ((this.canPlaceOn == null || this.canPlaceOn.apply(world.getBlockState(randomPos.down()))) && world.isAirBlock(randomPos) && (randomPos.getY()
-					< world
-					.getActualHeight()) && this.state.getBlock().canPlaceBlockAt(world, randomPos))
-			{
-				world.setBlockState(randomPos, this.state, 2);
+				world.setBlockState(randomPos, this.state, 2 | 16);
 			}
 		}
 
