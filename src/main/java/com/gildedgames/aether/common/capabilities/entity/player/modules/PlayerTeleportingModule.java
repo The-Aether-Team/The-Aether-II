@@ -115,7 +115,7 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 	@Override
 	public void tickStart(TickEvent.PlayerTickEvent event)
 	{
-
+		this.teleporting = false;
 	}
 
 	@Override
@@ -217,8 +217,6 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 		{
 			--this.getEntity().timeUntilPortal;
 		}
-
-		this.teleporting = false;
 	}
 
 	public void processTeleporting()
