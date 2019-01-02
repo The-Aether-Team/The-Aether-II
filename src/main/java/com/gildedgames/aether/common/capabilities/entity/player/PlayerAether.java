@@ -201,7 +201,7 @@ public class PlayerAether implements IPlayerAether
 
 	public void setDrankEggnog()
 	{
-		this.ticksWithEggnogEffect = 500;
+		this.ticksWithEggnogEffect = 5000;
 	}
 
 	public boolean hasEggnogEffect()
