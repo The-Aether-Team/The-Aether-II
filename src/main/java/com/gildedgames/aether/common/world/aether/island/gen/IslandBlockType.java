@@ -15,5 +15,7 @@ public enum IslandBlockType
 	FERROSITE_BLOCK,
 	WATER_BLOCK,
 	CLOUD_BED_BLOCK,
-	VEIN_BLOCK
+	VEIN_BLOCK;
+
+	public static final IslandBlockType[] VALUES = IslandBlockType.values();
 }

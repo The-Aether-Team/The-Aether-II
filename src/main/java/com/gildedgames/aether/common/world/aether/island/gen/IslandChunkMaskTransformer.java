@@ -17,9 +17,7 @@ public class IslandChunkMaskTransformer implements IChunkMaskTransformer
 
 	public IslandChunkMaskTransformer()
 	{
-		int count = IslandBlockType.values().length;
-
-		this.states = new IBlockState[count];
+		this.states = new IBlockState[IslandBlockType.VALUES.length];
 
 		this.setMaskValue(IslandBlockType.AIR_BLOCK, Blocks.AIR.getDefaultState());
 		this.setMaskValue(IslandBlockType.WATER_BLOCK, Blocks.WATER.getDefaultState());
