@@ -3,7 +3,6 @@ package com.gildedgames.aether.client.renderer.tile_entities;
 import com.gildedgames.aether.client.models.entities.tile.ModelTeleporter;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.tiles.TileEntityTeleporter;
-import com.gildedgames.orbis_api.util.OpenGLHelper;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
@@ -25,8 +24,6 @@ public class TileEntityTeleporterRenderer extends TileEntitySpecialRenderer<Tile
 		GlStateManager.rotate(180f, 1f, 0f, 1f);
 
 		this.bindTexture(this.texture);
-
-		final boolean inGuiContext = OpenGLHelper.isInGuiContext();
 
 		if (teleporter != null)
 		{

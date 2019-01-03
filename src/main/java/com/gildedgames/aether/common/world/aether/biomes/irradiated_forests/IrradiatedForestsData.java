@@ -45,7 +45,7 @@ public class IrradiatedForestsData implements NBT
 		this.min = min;
 	}
 
-	private void checkInit()
+	public void checkInit()
 	{
 		if (this.voronoi == null)
 		{
@@ -228,24 +228,8 @@ public class IrradiatedForestsData implements NBT
 
 	@Nullable
 	public CrackChunk getCracks(final int chunkX, final int chunkZ)
-	{
-		this.checkInit();
-
-		long key = ChunkPos.asLong(chunkX, chunkZ);
-
-		if (!this.cracks.containsKey(key))
-		{
-			return null;
-		}
-
-		return this.cracks.get(key);
-	}
-
-	public Voronoi getVoronoi()
-	{
-		this.checkInit();
-
-		return this.voronoi;
+	{ ;
+		return this.cracks.get(ChunkPos.asLong(chunkX, chunkZ));
 	}
 
 	@Override

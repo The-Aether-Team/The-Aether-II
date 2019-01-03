@@ -6,81 +6,23 @@ import com.gildedgames.aether.api.world.IAetherChunkColumnInfo;
 import com.gildedgames.aether.api.world.islands.IIslandChunkColumnInfo;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
+import com.gildedgames.aether.api.world.islands.INoiseProvider;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.CrackChunk;
 import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.CrackPos;
 import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.IrradiatedForestsData;
+import com.gildedgames.aether.common.world.aether.island.gen.highlands.IslandGeneratorHighlands;
 import com.gildedgames.aether.common.world.util.data.ChunkBooleanSegment;
 import com.gildedgames.aether.common.world.util.data.ChunkDoubleSegment;
 import com.gildedgames.orbis_api.preparation.IChunkMaskTransformer;
 import com.gildedgames.orbis_api.preparation.impl.ChunkSegmentMask;
-import com.gildedgames.orbis_api.util.FastMathUtil;
 import com.gildedgames.orbis_api.util.ObjectFilter;
 import net.minecraft.world.biome.Biome;
 
 public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 {
-	// Resolution of the evalNormalised for a chunk. Should be a power of 2.
-	private static final int NOISE_XZ_SCALE = 4;
-
-	// Number of samples done per chunk.
-	private static final int NOISE_SAMPLES = NOISE_XZ_SCALE + 1;
-
-	public double interpolate(final double[] data, final int x, final int z)
-	{
-		final double x0 = (double) x / NOISE_XZ_SCALE;
-		final double z0 = (double) z / NOISE_XZ_SCALE;
-
-		final int integerX = (int) Math.floor(x0);
-		final double fractionX = x0 - integerX;
-
-		final int integerZ = (int) Math.floor(z0);
-		final double fractionZ = z0 - integerZ;
-
-		final double a = data[integerX + (integerZ * NOISE_SAMPLES)];
-		final double b = data[integerX + ((integerZ + 1) * NOISE_SAMPLES)];
-		final double c = data[integerX + 1 + (integerZ * NOISE_SAMPLES)];
-		final double d = data[integerX + 1 + ((integerZ + 1) * NOISE_SAMPLES)];
-
-		return (1.0 - fractionX) * ((1.0 - fractionZ) * a + fractionZ * b) +
-				fractionX * ((1.0 - fractionZ) * c + fractionZ * d);
-	}
-
-	private double[] generateNoise(OpenSimplexNoise noise, IIslandData island, int chunkX, int chunkZ, int offset, double scale)
-	{
-		final double posX = chunkX * 16;
-		final double posZ = chunkZ * 16;
-
-		final double minX = island.getBounds().getMinX();
-		final double minZ = island.getBounds().getMinZ();
-
-		final double[] data = new double[NOISE_SAMPLES * NOISE_SAMPLES];
-
-		// Generate half-resolution evalNormalised
-		for (int x = 0; x < NOISE_SAMPLES; x++)
-		{
-			// Creates world coordinate and normalized evalNormalised coordinate
-			final double worldX = posX - (x == 0 ? NOISE_XZ_SCALE - 1 : 0) + (x * (16D / NOISE_SAMPLES));
-			final double nx = (worldX + minX + offset) / scale;
-
-			for (int z = 0; z < NOISE_SAMPLES; z++)
-			{
-				// Creates world coordinate and normalized evalNormalised coordinate
-				final double worldZ = posZ - (z == 0 ? NOISE_XZ_SCALE - 1 : 0) + (z * (16.0D / NOISE_SAMPLES));
-				final double nz = (worldZ + minZ + offset) / scale;
-
-				// Apply formula to shape evalNormalised into island, evalNormalised decreases in value the further the coord is from the center
-				final double height = NoiseUtil.genNoise(noise, nx, nz);
-
-				data[x + (z * NOISE_SAMPLES)] = height;
-			}
-		}
-
-		return data;
-	}
-
 	@Override
 	public void genMask(IAetherChunkColumnInfo info, ChunkSegmentMask mask, IIslandData island, int chunkX, int chunkY, int chunkZ)
 	{
@@ -176,8 +118,11 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 			throw new RuntimeException("IrradiatedForestsData could not be found");
 		}
 
-		final double[] heightMap = this.generateNoise(noise, island, chunkX, chunkZ, 0, 300.0D);
-		final double[] terraceMap = this.generateNoise(noise, island, chunkX, chunkZ, 1000, 300.0D);
+		data.checkInit();
+
+		final INoiseProvider heightMap = IslandGeneratorHighlands.generateNoise(noise, island, chunkX, chunkZ, 0, 300.0D);
+
+		INoiseProvider terraceMap = null;
 
 		final int posX = chunkX * 16;
 		final int posZ = chunkZ * 16;
@@ -188,6 +133,16 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 		final double radiusX = island.getBounds().getWidth() / 2.0;
 		final double radiusZ = island.getBounds().getLength() / 2.0;
 
+		CrackChunk[][] crackChunks = new CrackChunk[3][3];
+
+		for (int x = -1; x <= 1; x++)
+		{
+			for (int z = -1; z <= 1; z++)
+			{
+				crackChunks[x + 1][z + 1] = data.getCracks(chunkX + x, chunkZ + z);
+			}
+		}
+
 		for (int x = 0; x < 16; x++)
 		{
 			for (int z = 0; z < 16; z++)
@@ -195,7 +150,7 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 				final int worldX = posX + x;
 				final int worldZ = posZ + z;
 
-				final double sample = this.interpolate(heightMap, x, z);
+				final double sample = heightMap.getNoiseValue(x, z);
 
 				final double distX = Math.abs((centerX - worldX) * (1.0 / radiusX));
 				final double distZ = Math.abs((centerZ - worldZ) * (1.0 / radiusZ));
@@ -226,18 +181,18 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 							final int crackX = worldX + x1;
 							final int crackZ = worldZ + z1;
 
-							final CrackChunk crackChunk = data.getCracks(crackX >> 4, crackZ >> 4);
+							final CrackChunk crackChunk = crackChunks[(crackX >> 4) - chunkX + 1][(crackZ >> 4) - chunkZ + 1];
 
 							if (crackChunk != null)
 							{
-								final CrackPos crack = crackChunk.get(Math.abs(crackX % 16), Math.abs(crackZ % 16));
+								final CrackPos crack = crackChunk.get(crackX & 15, crackZ & 15);
 
 								if (crack != null)
 								{
 									final double crackDistX = Math.abs(x1 * (1.0 / radius));
 									final double crackDistZ = Math.abs(z1 * (1.0 / radius));
 
-									final double crackDist = FastMathUtil.hypot(crackDistX, crackDistZ);
+									final double crackDist = Math.sqrt((crackDistX * crackDistX) + (crackDistZ * crackDistZ));
 
 									if (closestDist > crackDist)
 									{
@@ -260,7 +215,12 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 
 					final double bottomHeight = 100;
 
-					final double terraceSample = this.interpolate(terraceMap, x, z) + 1.0;
+					if (terraceMap == null)
+					{
+						terraceMap = IslandGeneratorHighlands.generateNoise(noise, island, chunkX, chunkZ, 1000, 300.0D);
+					}
+
+					final double terraceSample = terraceMap.getNoiseValue(x, z) + 1.0;
 
 					final double topSample = NoiseUtil.lerp(heightSample, terraceSample - diff > 0.7 ? terraceSample - diff : heightSample, 0.7);
 
