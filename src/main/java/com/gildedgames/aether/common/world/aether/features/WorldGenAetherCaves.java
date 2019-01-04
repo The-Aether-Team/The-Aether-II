@@ -244,7 +244,7 @@ public class WorldGenAetherCaves
                 // 10% chance for a node to have massively increased size
                 if (rand.nextInt(10) == 0) nodeSize *= rand.nextFloat() * rand.nextFloat() * 3.0F + 1.0F;
 
-                this.addTunnel(rand.nextLong(), centerChunkX, centerChunkZ, mask, x, y, z, nodeSize * 2.0F, nodeAngle, nodeDist, 0, 2, 0.5D, biomes);
+                this.addTunnel(rand.nextLong(), centerChunkX, centerChunkZ, mask, x, y, z, nodeSize * 2.0F, nodeAngle, nodeDist, 0, 0, 0.5D, biomes);
             }
         }
     }
