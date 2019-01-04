@@ -4,19 +4,20 @@ import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
 import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
 import com.gildedgames.orbis_api.util.XoShiRoRandom;
 
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
 import java.util.Random;
 
-public class WorldGenAetherCaves {
+public class WorldGenAetherCaves
+{
     protected final int chunkRange = 8;
 
     protected final ThreadLocal<XoShiRoRandom> rand = ThreadLocal.withInitial(XoShiRoRandom::new);
 
-    protected void addRoom(long seed, int originalX, int originalZ, ChunkMask mask, double dirX, double dirY, double dirZ, Biome[] biomes) {
+    protected void addRoom(long seed, int originalX, int originalZ, ChunkMask mask, double dirX, double dirY, double dirZ, Biome[] biomes)
+    {
         this.addTunnel(seed, originalX, originalZ, mask, dirX, dirY, dirZ, 1.0F + this.rand.get().nextFloat() * 6.0F, 0.0F, 0.0F, -1, -1, 0.5D, biomes);
     }
 
@@ -24,8 +25,8 @@ public class WorldGenAetherCaves {
      * Tunnel generation
      *
      * @param seed                   The seed of the randomizer
-     * @param chunkX                 Chunk position X
-     * @param chunkZ                 Chunk position Z
+     * @param centerChunkX           The original Chunk X position
+     * @param centerChunkZ           The original Chunk Z position
      * @param mask                   mask of the land to carve out
      * @param posX                   X block position for the starting node
      * @param posY                   Y block position for the starting node
@@ -43,11 +44,13 @@ public class WorldGenAetherCaves {
      *                               Lower values flatten it out and larger make it taller
      * @param biomes                 List of biomes which can be used for custom biome generation
      */
-    protected void addTunnel(long seed, int chunkX, int chunkZ, ChunkMask mask, double posX, double posY, double posZ, float nodeSizeMultiplier, float angleBetweenNodes, float distBetweenNodes, int nodeIndex, int noOfNodes, double startingNodeHeightMult, Biome[] biomes) {
-        double chunkBlockCenterX = (double) (chunkX * 16 + 8);
-        double chunkBlockCenterZ = (double) (chunkZ * 16 + 8);
+    protected void addTunnel(long seed, int centerChunkX, int centerChunkZ, ChunkMask mask, double posX, double posY, double posZ, float nodeSizeMultiplier, float angleBetweenNodes, float distBetweenNodes, int nodeIndex, int noOfNodes, double startingNodeHeightMult, Biome[] biomes)
+    {
+        double chunkBlockCenterX = (double) (centerChunkX * 16 + 8);
+        double chunkBlockCenterZ = (double) (centerChunkZ * 16 + 8);
         float nodeAngleMult = 0.0F;
         float nodeDistMult = 0.0F;
+        boolean isRoom = false;
         XoShiRoRandom random = new XoShiRoRandom(seed);
 
         // Generates number of nodes the tunnel is going to have based on the chunkRange
@@ -55,8 +58,6 @@ public class WorldGenAetherCaves {
             int i = this.chunkRange * 16 - 16;
             noOfNodes = i - random.nextInt(i / 4);
         }
-
-        boolean isRoom = false;
 
         // Determines if the tunnel is actually going to be a room
         if (nodeIndex == -1) {
@@ -66,18 +67,20 @@ public class WorldGenAetherCaves {
 
         // Gets a random value between (noOfNodes/4, noOfNodes/4 + noOfNodes/2 - 1)
         int branchNodeIndex = random.nextInt(noOfNodes / 2) + noOfNodes / 4;
-        // branchNodeIndex = nodeIndex + (noOfNodes - nodeIndex)/ 2; -- Custom code to generate branches every half of a tunnel and branch
+        //branchNodeIndex = nodeIndex + (noOfNodes - nodeIndex)/ 2; //-- Custom code to generate branches halfway of a tunnel/branch
 
-        for (boolean higherDist = random.nextInt(6) == 0; nodeIndex < noOfNodes; ++nodeIndex) {
-            double nodeHeight = 1.5D + (double) (MathHelper.sin((float) nodeIndex * (float) Math.PI / (float) noOfNodes) * nodeSizeMultiplier);
-            double d3 = nodeHeight * startingNodeHeightMult;
-            float f2 = MathHelper.cos(distBetweenNodes);
-            float f3 = MathHelper.sin(distBetweenNodes);
+        // Generates a tunnel from nodeIndex to noOfNodes - 1
+        for (boolean higherDist = random.nextInt(6) == 0; nodeIndex < noOfNodes; ++nodeIndex)
+        {
+            double nodeWidthRadius = 1.5D + (double) (MathHelper.sin((float) nodeIndex * (float) Math.PI / (float) noOfNodes) * nodeSizeMultiplier); // How wide the node will be (it's more of a radius since nodes are spheres)
+            double nodeHeightRadius = nodeWidthRadius * startingNodeHeightMult; // How tall a node is
+            float nodeDistMultiplier = MathHelper.cos(distBetweenNodes); // A multiplier to determine how far apart each node will be from the other
+            float nodeYIncrease = MathHelper.sin(distBetweenNodes); // By how much a node will move up
 
             // Determines the position of the next node of the tunnel
-            posX += (double) (MathHelper.cos(angleBetweenNodes) * f2);
-            posY += (double) f3;
-            posZ += (double) (MathHelper.sin(angleBetweenNodes) * f2);
+            posX += (double) (MathHelper.cos(angleBetweenNodes) * nodeDistMultiplier);
+            posY += (double) nodeYIncrease;
+            posZ += (double) (MathHelper.sin(angleBetweenNodes) * nodeDistMultiplier);
 
             // Changes distance between nodes based on higherDist for even more random generation (not sure why specifically those 2 values, though)
             distBetweenNodes *= (higherDist ? 0.92F : 0.7F);
@@ -94,121 +97,99 @@ public class WorldGenAetherCaves {
 
             // Adding new branches starting at node index = branchNodeIndex
             if (!isRoom && nodeIndex == branchNodeIndex && nodeSizeMultiplier > 1.0F && noOfNodes > 0) {
-                this.addTunnel(random.nextLong(), chunkX, chunkZ, mask, posX, posY, posZ,
+                this.addTunnel(random.nextLong(), centerChunkX, centerChunkZ, mask, posX, posY, posZ,
                         random.nextFloat() * 0.5F + 0.5F, angleBetweenNodes - ((float) Math.PI / 2F), distBetweenNodes / 3.0F, nodeIndex, noOfNodes, 1.0D, biomes);
-                this.addTunnel(random.nextLong(), chunkX, chunkZ, mask, posX, posY, posZ,
+                this.addTunnel(random.nextLong(), centerChunkX, centerChunkZ, mask, posX, posY, posZ,
                         random.nextFloat() * 0.5F + 0.5F, angleBetweenNodes + ((float) Math.PI / 2F), distBetweenNodes / 3.0F, nodeIndex, noOfNodes, 1.0D, biomes);
                 return;
             }
 
+            // 75% chance to generate a node normally or 100% chance if it's a room
             if (isRoom || random.nextInt(4) != 0) {
                 double d4 = posX - chunkBlockCenterX;
                 double d5 = posZ - chunkBlockCenterZ;
                 double nodesLeft = (double) (noOfNodes - nodeIndex);
                 double d7 = (double) (nodeSizeMultiplier + 18.0F);
-                //System.out.format("posX: %f; chunkBlockCenterX: %f; posZ: %f; chunkBlockCenterZ: %f; nodesLeft: %f; d7: %f\n", posX, chunkBlockCenterX, posZ, chunkBlockCenterZ, nodesLeft, d7);
+                if (d4 * d4 + d5 * d5 - nodesLeft * nodesLeft > d7 * d7) return;
 
-                if (d4 * d4 + d5 * d5 - nodesLeft * nodesLeft > d7 * d7) {
-                    return;
-                }
+                // Generates a tunnel only if the position of the node is with a 3x3 chunk area from the center chunk + the diameter of the node
+                if (posX >= chunkBlockCenterX - 16.0D - nodeWidthRadius * 2.0D && posZ >= chunkBlockCenterZ - 16.0D - nodeWidthRadius * 2.0D &&
+                    posX <= chunkBlockCenterX + 16.0D + nodeWidthRadius * 2.0D && posZ <= chunkBlockCenterZ + 16.0D + nodeWidthRadius * 2.0D) {
+                    int minPosX = MathHelper.floor(posX - nodeWidthRadius) - centerChunkX * 16 - 1;
+                    int maxPosX = MathHelper.floor(posX + nodeWidthRadius) - centerChunkX * 16 + 1;
+                    int minPosY = MathHelper.floor(posY - nodeHeightRadius) - 1;
+                    int maxPosY = MathHelper.floor(posY + nodeHeightRadius) + 1;
+                    int minPosZ = MathHelper.floor(posZ - nodeWidthRadius) - centerChunkZ * 16 - 1;
+                    int maxPosZ = MathHelper.floor(posZ + nodeWidthRadius) - centerChunkZ * 16 + 1;
 
-                if (posX >= chunkBlockCenterX - 16.0D - nodeHeight * 2.0D && posZ >= chunkBlockCenterZ - 16.0D - nodeHeight * 2.0D && posX <= chunkBlockCenterX + 16.0D + nodeHeight * 2.0D
-                        && posZ <= chunkBlockCenterZ + 16.0D + nodeHeight * 2.0D) {
-                    int k2 = MathHelper.floor(posX - nodeHeight) - chunkX * 16 - 1;
-                    int k = MathHelper.floor(posX + nodeHeight) - chunkX * 16 + 1;
-                    int l2 = MathHelper.floor(posY - d3) - 1;
-                    int l = MathHelper.floor(posY + d3) + 1;
-                    int i3 = MathHelper.floor(posZ - nodeHeight) - chunkZ * 16 - 1;
-                    int i1 = MathHelper.floor(posZ + nodeHeight) - chunkZ * 16 + 1;
+                    // Makes sure the node stays within the 16x256x16 chunk area
+                    if (minPosX < 0) minPosX = 0;
+                    if (maxPosX > 16) maxPosX = 16;
+                    if (minPosY < 1) minPosY = 1;
+                    if (maxPosY > 248) maxPosY = 248;
+                    if (minPosZ < 0) minPosZ = 0;
+                    if (maxPosZ > 16) maxPosZ = 16;
 
-                    if (k2 < 0) {
-                        k2 = 0;
-                    }
+                    boolean doesNodeIntersectWater = false;
 
-                    if (k > 16) {
-                        k = 16;
-                    }
-
-                    if (l2 < 1) {
-                        l2 = 1;
-                    }
-
-                    if (l > 248) {
-                        l = 248;
-                    }
-
-                    if (i3 < 0) {
-                        i3 = 0;
-                    }
-
-                    if (i1 > 16) {
-                        i1 = 16;
-                    }
-
-                    boolean isBlockWater = false;
-
-                    for (int j1 = k2; !isBlockWater && j1 < k; ++j1) {
-                        for (int k1 = i3; !isBlockWater && k1 < i1; ++k1) {
-                            for (int l1 = l + 1; !isBlockWater && l1 >= l2 - 1; --l1) {
-                                if (l1 >= 0 && l1 < 256) {
-                                    if (this.isOceanBlock(mask, j1, l1, k1, chunkX, chunkZ)) {
-                                        isBlockWater = true;
-                                    }
-
-                                    if (l1 != l2 - 1 && j1 != k2 && j1 != k - 1 && k1 != i3 && k1 != i1 - 1) {
-                                        l1 = l2;
-                                    }
+                    // Goes through each block from maxPosY + 1 to minPosY - 1 to check if the block is a water tile, as long as doesNodeIntersectWater is false
+                    // Basically makes sure that the shell of the node doesn't intersect water and stops it from generating if it does
+                    for (int x = minPosX; !doesNodeIntersectWater && x < maxPosX; ++x) {
+                        for (int z = minPosZ; !doesNodeIntersectWater && z < maxPosZ; ++z) {
+                            for (int y = maxPosY + 1; !doesNodeIntersectWater && y >= minPosY - 1; --y) {
+                                // Makes sure the block is between acceptable y levels
+                                if (y >= 0 && y < 256) {
+                                    if (this.isBlockX(mask, x, y, z, centerChunkX, centerChunkZ, IslandBlockType.WATER_BLOCK)) doesNodeIntersectWater = true;
+                                    // If the block is not part of the outer layer of the node (the furthest-most blocks of the node) set the y to minPosY
+                                    // This makes it so it doesn't care if the interior has water in it, as long as none of the walls have water
+                                    if (y != minPosY - 1 && x != minPosX && x != maxPosX - 1 && z != minPosZ && z != maxPosZ - 1) y = minPosY;
                                 }
                             }
                         }
                     }
 
-                    if (!isBlockWater) {
-                        for (int j3 = k2; j3 < k; ++j3) {
-                            double d10 = ((double) (j3 + chunkX * 16) + 0.5D - posX) / nodeHeight;
+                    if (!doesNodeIntersectWater)
+                    {
+                        for (int x = minPosX; x < maxPosX; ++x) {
+                            // Gets the distance from the respective block position X to the center of the node and divides by the width radius
+                            double blockDistXMult = ((double) (x + centerChunkX * 16) + 0.5D - posX) / nodeWidthRadius;
 
-                            for (int i2 = i3; i2 < i1; ++i2) {
-                                double d8 = ((double) (i2 + chunkZ * 16) + 0.5D - posZ) / nodeHeight;
+                            for (int z = minPosZ; z < maxPosZ; ++z) {
+                                // Gets the distance from the respective block position Z to the center of the node and divides by the width radius
+                                double blockDistZMult = ((double) (z + centerChunkZ * 16) + 0.5D - posZ) / nodeWidthRadius;
                                 boolean foundTop = false;
 
-                                if (d10 * d10 + d8 * d8 < 1.0D) {
-                                    for (int j2 = l; j2 > l2; --j2) {
-                                        double d9 = ((double) (j2 - 1) + 0.5D - posY) / d3;
+                                // Makes it so it carves out a block from a cylinder rather than a cube (this is presumably to cut out on extra loops for blocks that shouldn't generate anyway)
+                                if (blockDistXMult * blockDistXMult + blockDistZMult * blockDistZMult < 1.0D) {
+                                    for (int y = maxPosY; y > minPosY; --y) {
+                                        // Gets the distance from the respective block position Y to the center of the node and divides by the height radius
+                                        double blockDistYMult = ((double)y - 0.5D - posY) / nodeHeightRadius;
 
-                                        if (d9 > -0.7D && d10 * d10 + d9 * d9 + d8 * d8 < 1.0D) {
-                                            int block = mask.getBlock(j3, j2, i2);
-                                            int topBlock = mask.getBlock(j3, j2 + 1, i2);
+                                        // Checks to see if the block is inside the sphere (based on the Sphere's surface formula: x^2 + y^2 + z^2 = r2)
+                                        if (blockDistYMult > -0.7D && blockDistXMult * blockDistXMult + blockDistYMult * blockDistYMult + blockDistZMult * blockDistZMult < 1.0D) {
+                                            int block = mask.getBlock(x, y, z);
+                                            int topBlock = mask.getBlock(x, y + 1, z);
 
-                                            if (this.isTopBlock(mask, biomes, j3, j2, i2, chunkX, chunkZ)) {
-                                                foundTop = true;
-                                            }
-                                            this.digBlock(mask, j3, j2, i2, chunkX, chunkZ, foundTop, block, topBlock);
+                                            // Checks to see if the block is soil
+                                            if (this.isBlockX(mask, x, y, z, centerChunkX, centerChunkZ, IslandBlockType.TOPSOIL_BLOCK)) foundTop = true;
+                                            this.digBlock(mask, x, y, z, centerChunkX, centerChunkZ, foundTop, block, topBlock);
                                         }
                                     }
                                 }
                             }
                         }
 
-                        if (isRoom) {
-                            break;
-                        }
+                        // If the tunnel is destined to be a room, it stops generation at 1 node
+                        if (isRoom) break;
                     }
                 }
             }
         }
     }
 
-    protected boolean canReplaceBlock(int state, int above) {
-        return state == IslandBlockType.STONE_BLOCK.ordinal() || state == IslandBlockType.COAST_BLOCK.ordinal() || state == IslandBlockType.FERROSITE_BLOCK
-                .ordinal();
-    }
-
-    protected boolean isOceanBlock(ChunkMask data, int x, int y, int z, int chunkX, int chunkZ) {
-        return data.getBlock(x, y, z) == IslandBlockType.WATER_BLOCK.ordinal();
-    }
-
-    public void generate(World worldIn, int x, int z, ChunkMask mask) {
-        Biome[] biomes = worldIn.provider.getBiomeProvider().getBiomes(null, x, z, 16, 16, true);
+    public void generate(World worldIn, int centerChunkX, int centerChunkZ, ChunkMask mask)
+    {
+        Biome[] biomes = worldIn.provider.getBiomeProvider().getBiomes(null, centerChunkX, centerChunkZ, 16, 16, true);
 
         XoShiRoRandom rand = this.rand.get();
         rand.setSeed(worldIn.getSeed());
@@ -218,14 +199,15 @@ public class WorldGenAetherCaves {
         long j = rand.nextLong();
         long k = rand.nextLong();
 
-        for (int chunkX = x - i; chunkX <= x + i; ++chunkX) {
-            for (int chunkZ = z - i; chunkZ <= z + i; ++chunkZ) {
+        // Generates tunnels in the current chunk and surrounding ones in chunkRange distance (which is 8, so it generates tunnels in a 16x16 chunks area)
+        for (int chunkX = centerChunkX - i; chunkX <= centerChunkX + i; ++chunkX) {
+            for (int chunkZ = centerChunkZ - i; chunkZ <= centerChunkZ + i; ++chunkZ) {
                 long j1 = (long) chunkX * j;
                 long k1 = (long) chunkZ * k;
 
                 rand.setSeed(j1 ^ k1 ^ worldIn.getSeed());
 
-                this.recursiveGenerate(worldIn, chunkX, chunkZ, x, z, mask, biomes);
+                this.recursiveGenerate(worldIn, chunkX, chunkZ, centerChunkX, centerChunkZ, mask, biomes);
             }
         }
     }
@@ -233,16 +215,15 @@ public class WorldGenAetherCaves {
     /**
      * Recursively called by generate()
      */
-    protected void recursiveGenerate(World world, int chunkX, int chunkZ, int originalX, int originalZ, ChunkMask mask, Biome[] biomes) {
+    protected void recursiveGenerate(World world, int chunkX, int chunkZ, int centerChunkX, int centerChunkZ, ChunkMask mask, Biome[] biomes)
+    {
         Random rand = this.rand.get();
 
         int tunnelsPerChunk = rand.nextInt(rand.nextInt(rand.nextInt(10) + 1) + 1);
+        if (rand.nextInt(5) != 0)  tunnelsPerChunk = 0;
 
-        if (rand.nextInt(5) != 0) {
-            tunnelsPerChunk = 0;
-        }
-
-        for (int j = 0; j < tunnelsPerChunk; ++j) {
+        for (int j = 0; j < tunnelsPerChunk; ++j)
+        {
             double x = (double) (chunkX * 16 + rand.nextInt(16));
             double y = (double) rand.nextInt(128);
             double z = (double) (chunkZ * 16 + rand.nextInt(16));
@@ -250,35 +231,40 @@ public class WorldGenAetherCaves {
             int tunnels = 2;
 
             if (rand.nextInt(4) == 0) {
-                this.addRoom(rand.nextLong(), originalX, originalZ, mask, x, y, z, biomes);
+                this.addRoom(rand.nextLong(), centerChunkX, centerChunkZ, mask, x, y, z, biomes);
                 tunnels += rand.nextInt(4);
             }
 
-            for (int l = 0; l < tunnels; ++l) {
+            for (int l = 0; l < tunnels; ++l)
+            {
                 float nodeAngle = rand.nextFloat() * ((float) Math.PI * 2F);
                 float nodeDist = (rand.nextFloat() - 0.5F) * 2.0F / 8.0F;
                 float nodeSize = rand.nextFloat() * 2.0F + rand.nextFloat();
 
-                if (rand.nextInt(10) == 0) {
-                    nodeSize *= rand.nextFloat() * rand.nextFloat() * 3.0F + 1.0F;
-                }
+                // 10% chance for a node to have massively increased size
+                if (rand.nextInt(10) == 0) nodeSize *= rand.nextFloat() * rand.nextFloat() * 3.0F + 1.0F;
 
-                this.addTunnel(rand.nextLong(), originalX, originalZ, mask, x, y, z, nodeSize * 2.0F, nodeAngle, nodeDist, 0, 0, 0.5D, biomes);
+                this.addTunnel(rand.nextLong(), centerChunkX, centerChunkZ, mask, x, y, z, nodeSize * 2.0F, nodeAngle, nodeDist, 0, 2, 0.5D, biomes);
             }
         }
     }
 
-    private boolean isTopBlock(ChunkMask data, Biome[] biomes, int x, int y, int z, int chunkX, int chunkZ) {
-        return data.getBlock(x, y, z) == IslandBlockType.TOPSOIL_BLOCK.ordinal();
+    protected boolean canReplaceBlock(int state, int above)
+    {
+        return state == IslandBlockType.STONE_BLOCK.ordinal() || state == IslandBlockType.COAST_BLOCK.ordinal() || state == IslandBlockType.FERROSITE_BLOCK.ordinal();
     }
 
-    private void digBlock(ChunkMask data, int x, int y, int z, int chunkX, int chunkZ, boolean foundTop, int state, int up) {
-        if (this.canReplaceBlock(state, up) || state == IslandBlockType.TOPSOIL_BLOCK.ordinal() || state == IslandBlockType.SOIL_BLOCK.ordinal()) {
-            data.setBlock(x, y, z, IslandBlockType.AIR_BLOCK.ordinal());
+    protected boolean isBlockX(ChunkMask data, int x, int y, int z, int chunkX, int chunkZ, IslandBlockType blockType)
+    {
+        return data.getBlock(x, y, z) == blockType.ordinal();
+    }
 
-            if (foundTop && data.getBlock(x, y - 1, z) == IslandBlockType.SOIL_BLOCK.ordinal()) {
-                data.setBlock(x, y - 1, z, IslandBlockType.TOPSOIL_BLOCK.ordinal());
-            }
+    private void digBlock(ChunkMask data, int x, int y, int z, int chunkX, int chunkZ, boolean foundTop, int state, int up)
+    {
+        if (this.canReplaceBlock(state, up) || state == IslandBlockType.TOPSOIL_BLOCK.ordinal() || state == IslandBlockType.SOIL_BLOCK.ordinal())
+        {
+            data.setBlock(x, y, z, IslandBlockType.AIR_BLOCK.ordinal());
+            if (foundTop && data.getBlock(x, y - 1, z) == IslandBlockType.SOIL_BLOCK.ordinal()) data.setBlock(x, y - 1, z, IslandBlockType.TOPSOIL_BLOCK.ordinal());
         }
     }
 }
