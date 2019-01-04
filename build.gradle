@@ -46,8 +46,9 @@ jar {
     from sourceSets.main.output
 
     manifest.mainAttributes(
-        "ContainedDeps": "${project(":OrbisAPI").mod_name}-${project(":OrbisAPI").mod_version}.jar",
-        "FMLAT": "aether_at.cfg"
+            "ContainedDeps": "${project(":OrbisAPI").mod_name}-${project(":OrbisAPI").mod_version}.jar",
+            "FMLAT": "aether_at.cfg",
+            "FMLCorePlugin": "com.gildedgames.aether.common.asm.AetherFMLLoadingPlugin"
     )
     
     from("OrbisAPI/build/libs") {
