@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.asm;
 
-import com.gildedgames.aether.common.asm.transformers.*;
+import com.gildedgames.aether.common.asm.transformers.lighting.*;
 import net.minecraft.launchwrapper.IClassTransformer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,20 +9,26 @@ import java.util.HashMap;
 
 public class AetherASMTransformer implements IClassTransformer
 {
-	private final Logger logger = LogManager.getLogger(this);
+	@SuppressWarnings("FieldCanBeLocal")
+	private static boolean LIGHTING_ENGINE_ENABLED = true;
+
+	public static final Logger LOGGER = LogManager.getLogger("AetherASM");
 
 	private final HashMap<String, IClassTransformer> transformers = new HashMap<>();
 
 	public AetherASMTransformer()
 	{
-		this.registerTransformerForNames(new TransformerChunkPacket(), "net.minecraft.network.play.server.SPacketChunkData");
-		this.registerTransformerForNames(new TransformerAnvilChunkLoader(), "net.minecraft.world.chunk.storage.AnvilChunkLoader");
-		this.registerTransformerForNames(new TransformerChunkProviderServer(), "net.minecraft.world.gen.ChunkProviderServer");
-		this.registerTransformerForNames(new TransformerWorld(), "net.minecraft.world.World");
-		this.registerTransformerForNames(new TransformerMinecraft(), "net.minecraft.client.Minecraft");
-		this.registerTransformerForNames(new TransformerChunk(), "net.minecraft.world.chunk.Chunk");
+		if (LIGHTING_ENGINE_ENABLED)
+		{
+			this.registerTransformerForNames(new TransformerChunkPacket(), "net.minecraft.network.play.server.SPacketChunkData");
+			this.registerTransformerForNames(new TransformerAnvilChunkLoader(), "net.minecraft.world.chunk.storage.AnvilChunkLoader");
+			this.registerTransformerForNames(new TransformerChunkProviderServer(), "net.minecraft.world.gen.ChunkProviderServer");
+			this.registerTransformerForNames(new TransformerWorld(), "net.minecraft.world.World");
+			this.registerTransformerForNames(new TransformerMinecraft(), "net.minecraft.client.Minecraft");
+			this.registerTransformerForNames(new TransformerChunk(), "net.minecraft.world.chunk.Chunk");
 
-		this.registerTransformerForNames(new TransformerLightingHooks(), "com.gildedgames.aether.common.world.lighting.LightingHooks");
+			this.registerTransformerForNames(new TransformerLightingHooks(), "com.gildedgames.aether.common.world.lighting.LightingHooks");
+		}
 	}
 
 	private void registerTransformerForNames(IClassTransformer transformer, String... names)
@@ -43,15 +49,13 @@ public class AetherASMTransformer implements IClassTransformer
 			return basicClass;
 		}
 
-		this.logger.info("Injecting! Transforming class {}", transformedName);
-
 		try
 		{
 			return transformer.transform(name, transformedName, basicClass);
 		}
 		catch (Exception e)
 		{
-			this.logger.error("Caught exception while transforming class... this is not going to end well.", e);
+			LOGGER.error("Caught exception while transforming class... this is not going to end well.", e);
 
 			throw e;
 		}

@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.world.lighting;
 
-import com.gildedgames.aether.api.world.lighting.ILightingEngine;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.profiler.Profiler;
@@ -18,7 +17,8 @@ import org.apache.logging.log4j.Logger;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-public class LightingEngine implements ILightingEngine
+@SuppressWarnings("unused")
+public class LightingEngine
 {
 	private static final int MAX_SCHEDULED_COUNT = 1 << 22;
 
@@ -27,6 +27,7 @@ public class LightingEngine implements ILightingEngine
 	private static final Logger logger = LogManager.getLogger();
 
 	private final World world;
+
 	private final Profiler profiler;
 
 	//Layout of longs: [padding(4)] [y(8)] [x(26)] [z(26)]
@@ -34,10 +35,12 @@ public class LightingEngine implements ILightingEngine
 
 	//Layout of longs: see above
 	private final PooledLongQueue[] queuedDarkenings = new PooledLongQueue[MAX_LIGHT + 1];
+
 	private final PooledLongQueue[] queuedBrightenings = new PooledLongQueue[MAX_LIGHT + 1];
 
 	//Layout of longs: [newLight(4)] [pos(60)]
 	private final PooledLongQueue initialBrightenings = new PooledLongQueue();
+
 	//Layout of longs: [padding(4)] [pos(60)]
 	private final PooledLongQueue initialDarkenings = new PooledLongQueue();
 
@@ -89,16 +92,24 @@ public class LightingEngine implements ILightingEngine
 	//Iteration state data
 	//Cache position to avoid allocation of new object each time
 	private final MutableBlockPos curPos = new MutableBlockPos();
+
 	private PooledLongQueue curQueue;
+
 	private Chunk curChunk;
+
 	private long curChunkIdentifier;
+
 	private long curData;
 
 	//Cached data about neighboring blocks (of tempPos)
 	private boolean isNeighborDataValid = false;
+
 	private final Chunk[] neighborsChunk = new Chunk[6];
+
 	private final MutableBlockPos[] neighborsPos = new MutableBlockPos[6];
+
 	private final long[] neighborsLongPos = new long[6];
+
 	private final int[] neighborsLight = new int[6];
 
 	public LightingEngine(final World world)
@@ -130,7 +141,7 @@ public class LightingEngine implements ILightingEngine
 	/**
 	 * Schedules a light update for the specified light type and position to be processed later by {@link #procLightUpdates(EnumSkyBlock)}
 	 */
-	@Override
+	@SuppressWarnings("WeakerAccess")
 	public void scheduleLightUpdate(final EnumSkyBlock lightType, final BlockPos pos)
 	{
 		this.scheduleLightUpdate(lightType, posToLong(pos));
@@ -155,7 +166,7 @@ public class LightingEngine implements ILightingEngine
 	/**
 	 * Calls {@link #procLightUpdates(EnumSkyBlock)} for both light types
 	 */
-	@Override
+	@SuppressWarnings("WeakerAccess")
 	public void procLightUpdates()
 	{
 		this.procLightUpdates(EnumSkyBlock.SKY);
@@ -165,7 +176,7 @@ public class LightingEngine implements ILightingEngine
 	/**
 	 * Processes light updates of the given light type
 	 */
-	@Override
+	@SuppressWarnings("WeakerAccess")
 	public void procLightUpdates(final EnumSkyBlock lightType)
 	{
 		final PooledLongQueue queue = this.queuedLightUpdates[lightType.ordinal()];
@@ -550,6 +561,7 @@ public class LightingEngine implements ILightingEngine
 	//Implement own queue with pooled segments to reduce allocation costs and reduce idle memory footprint
 
 	private static final int CACHED_QUEUE_SEGMENTS_COUNT = 1 << 12;
+
 	private static final int QUEUE_SEGMENT_SIZE = 1 << 10;
 
 	private final Deque<PooledLongQueueSegment> segmentPool = new ArrayDeque<>();
@@ -567,7 +579,9 @@ public class LightingEngine implements ILightingEngine
 	private class PooledLongQueueSegment
 	{
 		private final long[] longArray = new long[QUEUE_SEGMENT_SIZE];
+
 		private int index = 0;
+
 		private PooledLongQueueSegment next;
 
 		private void release()
@@ -598,6 +612,7 @@ public class LightingEngine implements ILightingEngine
 	private class PooledLongQueue
 	{
 		private PooledLongQueueSegment cur, last;
+
 		private int size = 0;
 
 		private int index = 0;
