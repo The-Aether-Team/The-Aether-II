@@ -26,6 +26,6 @@ public class AetherFMLModContainer extends DummyModContainer
 	@Override
 	public boolean registerBus(EventBus bus, LoadController controller)
 	{
-		return false;
+		return true;
 	}
 }

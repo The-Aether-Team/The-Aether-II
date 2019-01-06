@@ -5,24 +5,48 @@ buildscript {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
         }
+        maven {
+            name = 'sponge'
+            url = 'https://repo.spongepowered.org/maven'
+        }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath 'org.spongepowered:mixingradle:0.6-SNAPSHOT'
         classpath 'org.ajoberstar:grgit:2.2.0'
     }
 }
 
-import org.ajoberstar.grgit.Grgit
-
 apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'org.spongepowered.mixin'
+
 apply plugin: 'maven-publish'
+
+deobfMcMCP { failOnAtError = false }
+deobfMcSRG { failOnAtError = false }
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'sponge'
+        url = 'https://repo.spongepowered.org/maven'
+    }
+}
+
+configurations {
+    shade
+    compile.extendsFrom shade
+}
 
 dependencies {
     compile project(":OrbisAPI")
+
+    shade('org.spongepowered:mixin:0.7.11-SNAPSHOT') {
+        transitive = false
+    }
 }
 
 ext.config = loadConfig(file('build.properties'))
-ext.repo = Grgit.open()
 
 allprojects {
     sourceCompatibility = 1.8
@@ -49,13 +73,26 @@ jar {
             "ContainedDeps": "${project(":OrbisAPI").mod_name}-${project(":OrbisAPI").mod_version}.jar",
             "FMLAT": "aether_at.cfg",
             "FMLCorePlugin": "com.gildedgames.aether.common.asm.AetherFMLLoadingPlugin",
+            "TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
+            "TweakOrder": 0,
             "FMLCorePluginContainsFMLMod": true,
-            "ForceLoadAsMod": true,
+            "ForceLoadAsMod": true
     )
     
     from("OrbisAPI/build/libs") {
         include("${project(":OrbisAPI").mod_name}-${project(":OrbisAPI").mod_version}.jar")
     }
+
+    configurations.shade.each { dep ->
+        from(project.zipTree(dep)) {
+            rename 'LICENSE.txt', 'org/spongepowered/LICENSE.txt'
+
+            exclude 'META-INF/*.SF'
+            exclude 'META-INF/*.RSA'
+            exclude 'META-INF/*.MF'
+        }
+    }
+
     classifier = 'universal'
 
 }
@@ -80,7 +117,12 @@ processResources {
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+
     rename '(.+_at.cfg)', 'META-INF/$1'
+}
+
+mixin {
+    add sourceSets.main, "mixins.aether.refmap.json"
 }
 
 idea {
