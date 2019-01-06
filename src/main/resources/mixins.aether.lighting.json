@@ -8,7 +8,6 @@
 		"MixinChunk",
 		"MixinChunkProviderServer",
 		"MixinMinecraft",
-		"MixinRenderGlobal",
 		"MixinSPacketChunkData",
 		"MixinWorld"
 	],
