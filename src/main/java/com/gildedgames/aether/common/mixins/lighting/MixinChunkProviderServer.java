@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Set;
 
 @Mixin(ChunkProviderServer.class)
-public class MixinChunkProviderServer
+public abstract class MixinChunkProviderServer
 {
 	@Shadow
 	@Final

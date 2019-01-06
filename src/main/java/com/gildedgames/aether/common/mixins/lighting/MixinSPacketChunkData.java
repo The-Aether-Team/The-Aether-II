@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(SPacketChunkData.class)
-public class MixinSPacketChunkData
+public abstract class MixinSPacketChunkData
 {
 	@Inject(method = "<init>(Lnet/minecraft/world/chunk/Chunk;I)V", at = @At("HEAD"))
 	private void onConstructed(Chunk chunkIn, int changedSectionFilter, CallbackInfo ci)
