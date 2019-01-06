@@ -15,6 +15,7 @@ import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.IThreadListener;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -164,5 +165,11 @@ public class ClientProxy extends CommonProxy
 						(r.nextDouble() * (r.nextBoolean() ? range : -range)) * 0.001);
 			}
 		}
+	}
+
+	@Override
+	public IThreadListener getMinecraftThread()
+	{
+		return Minecraft.getMinecraft();
 	}
 }

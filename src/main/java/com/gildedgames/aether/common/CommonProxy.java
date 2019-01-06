@@ -25,6 +25,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.PlayerList;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.IThreadListener;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Teleporter;
@@ -227,5 +228,10 @@ public class CommonProxy implements IAetherServices
 	public IGildedGamesAccountApi gildedGamesAccountApi()
 	{
 		return this.webAPI;
+	}
+
+	public IThreadListener getMinecraftThread()
+	{
+		return null;
 	}
 }

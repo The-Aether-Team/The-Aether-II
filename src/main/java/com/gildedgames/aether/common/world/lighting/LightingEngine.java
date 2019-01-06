@@ -2,8 +2,8 @@ package com.gildedgames.aether.common.world.lighting;
 
 import com.gildedgames.aether.api.lighting.IChunkLighting;
 import com.gildedgames.aether.api.lighting.ILightingEngine;
+import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.profiler.Profiler;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -177,7 +177,7 @@ public class LightingEngine implements ILightingEngine
 		}
 
 		//renderer accesses world unsynchronized, don't modify anything in that case
-		if (this.world.isRemote && !Minecraft.getMinecraft().isCallingFromMinecraftThread())
+		if (this.world.isRemote && !AetherCore.PROXY.getMinecraftThread().isCallingFromMinecraftThread())
 		{
 			return;
 		}
