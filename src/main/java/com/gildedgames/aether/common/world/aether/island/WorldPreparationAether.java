@@ -6,10 +6,12 @@ import com.gildedgames.aether.api.world.islands.IIslandChunkColumnInfo;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.api.world.islands.INoiseProvider;
+import com.gildedgames.aether.common.world.aether.features.WorldGenAetherCaves;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
 import com.gildedgames.orbis_api.preparation.impl.ChunkSegmentMask;
 import com.gildedgames.orbis_api.processing.BlockAccessExtendedWrapper;
 import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
+
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
@@ -23,13 +25,17 @@ public class WorldPreparationAether
 
 	private final OpenSimplexNoise noise;
 
+	private final WorldGenAetherCaves caveGenerator;
+
+
 	public WorldPreparationAether(World world, OpenSimplexNoise noise)
 	{
 		this.access = new BlockAccessExtendedWrapper(world);
 		this.noise = noise;
+		this.caveGenerator = new WorldGenAetherCaves();
 	}
 
-	public void generateFull(IAetherChunkColumnInfo info, ChunkSegmentMask mask, IIslandData island, int chunkX, int chunkY, int chunkZ)
+	public void generateFull(IAetherChunkColumnInfo info, Biome[] biomes, ChunkSegmentMask mask, IIslandData island, int chunkX, int chunkY, int chunkZ, long seed)
 	{
 		this.generateCloudLayer(info, mask, chunkY);
 
@@ -37,6 +43,8 @@ public class WorldPreparationAether
 		generator.genMask(info, mask, island, chunkX, chunkY, chunkZ);
 
 		this.replaceBiomeBlocks(info, mask, chunkY);
+
+		this.caveGenerator.generate(seed, chunkX, chunkY, chunkZ, mask, biomes, info);
 //
 //		this.caveGenerator.generate(this.world, chunkX, chunkY, chunkZ, mask, biomes);
 //
@@ -131,13 +139,11 @@ public class WorldPreparationAether
 		}
 	}
 
-	public void generateBaseTerrain(IAetherChunkColumnInfo info, Biome[] biomes, ChunkSegmentMask mask, IIslandData island, int chunkX, int chunkY, int chunkZ)
+	public void generateBaseTerrain(IAetherChunkColumnInfo info, Biome[] biomes, ChunkSegmentMask mask, IIslandData island, int chunkX, int chunkY, int chunkZ, long seed)
 	{
 		island.getGenerator().genMask(info, mask, island, chunkX, chunkY, chunkZ);
 
 		this.replaceBiomeBlocks(info, mask, chunkY);
-
-//		this.caveGenerator.generate(this.world, chunkX, chunkZ, mask, biomes);
 	}
 
 	public IIslandChunkColumnInfo generateChunkColumnInfo(Biome[] biomes, IIslandData island, int chunkX, int chunkZ)
