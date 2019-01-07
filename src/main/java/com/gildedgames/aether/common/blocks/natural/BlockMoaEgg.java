@@ -30,7 +30,7 @@ import java.util.Random;
 public class BlockMoaEgg extends BlockContainer implements IInternalBlock
 {
 
-	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.2F, 0.0F, 0.2F, 0.8F, 0.75F, 0.8F);
+	public static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.2F, 0.0F, 0.2F, 0.8F, 0.75F, 0.8F);
 
 	public BlockMoaEgg()
 	{

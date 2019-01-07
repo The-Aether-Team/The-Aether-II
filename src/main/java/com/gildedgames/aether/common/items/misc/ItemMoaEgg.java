@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.items.misc;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.natural.BlockMoaEgg;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.genes.util.GeneUtil;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
@@ -19,6 +20,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -152,10 +154,8 @@ public class ItemMoaEgg extends Item implements IDropOnDeath
 
 				return EnumActionResult.SUCCESS;
 			}
-			else if (
-					world.checkNoEntityCollision(
-							world.getBlockState(pos.add(0, yOffset, 0)).getCollisionBoundingBox(world, pos.add(0, yOffset, 0)))
-							&& world.setBlockState(pos.add(0, yOffset, 0), BlocksAether.moa_egg.getDefaultState()))
+			else if (world.checkNoEntityCollision(BlockMoaEgg.BOUNDING_BOX.offset(pos.getX(), pos.getY() + 1, pos.getZ())) &&
+					world.setBlockState(pos.add(0, yOffset, 0), BlocksAether.moa_egg.getDefaultState()))
 			{
 				final SoundType soundtype = world.getBlockState(pos).getBlock().getSoundType(world.getBlockState(pos), world, pos, player);
 				world.playSound(player, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS,
@@ -181,6 +181,11 @@ public class ItemMoaEgg extends Item implements IDropOnDeath
 		}
 
 		return EnumActionResult.PASS;
+	}
+
+	private boolean checkCollision(BlockPos pos, World world, float yOffset)
+	{
+		return false;
 	}
 
 	@Override
