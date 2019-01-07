@@ -174,7 +174,7 @@ public class ClientEventHandler
 
 			if (mc.world.provider.getDimensionType() == DimensionsAether.AETHER || atNecromancerInstance)
 			{
-				if (event.getType() == RenderGameOverlayEvent.ElementType.EXPERIENCE)
+				if (AetherCore.CONFIG.hideXPBarInAether() && event.getType() == RenderGameOverlayEvent.ElementType.EXPERIENCE)
 				{
 					event.setCanceled(true);
 				}
@@ -195,7 +195,7 @@ public class ClientEventHandler
 	{
 		if (mc.world != null)
 		{
-			if (mc.world.provider.getDimensionType() == DimensionsAether.AETHER)
+			if (AetherCore.CONFIG.hideXPBarInAether() && mc.world.provider.getDimensionType() == DimensionsAether.AETHER)
 			{
 				old_left_height = GuiIngameForge.left_height;
 				old_right_height = GuiIngameForge.right_height;
@@ -211,7 +211,7 @@ public class ClientEventHandler
 	{
 		if (mc.world != null)
 		{
-			if (mc.world.provider.getDimensionType() == DimensionsAether.AETHER)
+			if (AetherCore.CONFIG.hideXPBarInAether() && mc.world.provider.getDimensionType() == DimensionsAether.AETHER)
 			{
 				GuiIngameForge.left_height = old_left_height;
 				GuiIngameForge.right_height = old_right_height;

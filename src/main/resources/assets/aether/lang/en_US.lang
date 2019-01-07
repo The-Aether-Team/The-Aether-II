@@ -819,9 +819,9 @@ gui.aether.masonry.label.recipes=Recipes
 # Intro
 
 intro.prologue=200 years after a lone adventurer defeated the tyrannical Sun Spirit, Karthuul, a new traveller is about to enter the Aether...
-intro.tip1=DISCLAIMER:\n\nThis indev build is an UNFINISHED, BUGGY,\n\nPOOR PERFORMANCE iteration of the official Highlands release slated for the end of this year.\n\nIF YOU DO NOT WANT TO SPOIL YOUR EXPERIENCE, we HIGHLY RECOMMEND you DO NOT PLAY THIS until the official release.\n\nMany features are missing, some are experimental, etc. We have released these indev builds for those who want to help test and who cannot wait to get their Aether fix.
+intro.tip1=DISCLAIMER:\n\nThis indev build is an UNFINISHED, BUGGY,\n\nPOOR PERFORMANCE iteration of the official Highlands release (date not decided yet).\n\nIF YOU DO NOT WANT TO SPOIL YOUR EXPERIENCE, we HIGHLY RECOMMEND you DO NOT PLAY THIS until the official release.\n\nMany features are missing, some are experimental, etc. We have released these indev builds for those who want to help test and who cannot wait to get their Aether fix.
 intro.tip2=DUNGEONS ARE NOT IN THE MOD YET. We're still designing and developing the technology for them through our other tech/tool mod called Orbis. It will take some time for this content to get into the mod. The prime experience you can mess around with right now is exploring the new biomes and terrain generation, as well as the new art assets and models we've developed.
-intro.tip3=The world you're about to enter is completely separate from Minecraft, in both lore, time and space. Your inventory will be separate from your Minecraft save, but you will be able to send items back to your original world.
+intro.tip3=The world you're about to enter is completely separate from Minecraft, in both lore, time and space...
 intro.tip4=Begin your journey?
 intro.holdToSkip=Hold To Skip
 intro.proudlyPresents=Proudly Presents...

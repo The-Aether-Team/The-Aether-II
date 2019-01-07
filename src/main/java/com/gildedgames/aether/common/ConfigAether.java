@@ -40,6 +40,8 @@ public class ConfigAether
 
 	private boolean acknowledgeFingerprintViolation = false;
 
+	private boolean hideXPBarInAether;
+
 	public ConfigAether(final File file)
 	{
 		this.configuration = new Configuration(file, true);
@@ -67,12 +69,13 @@ public class ConfigAether
 
 		this.helmetShadow = this.getBoolean(this.general, "Helmet Shadow", true);
 		this.cutoutHelmets = this.getBoolean(this.general, "Transparent Helmets", true);
+		this.hideXPBarInAether = this.getBoolean(this.general, "Hide XP Bar In Aether", false);
 
 		this.rollCameraTilt = this.getDouble(this.controls, "Roll Camera Tilt", 3.5D);
 		this.rollFOV = this.getDouble(this.controls, "Roll FOV", 1.0D);
 
 		this.skipIntro = this.getBoolean(this.gameplay, "Skip Intro", false);
-		this.separateInventories = this.getBoolean(this.gameplay, "Separate Inventories", true);
+		this.separateInventories = this.getBoolean(this.gameplay, "Separate Inventories In Aether", false);
 
 		this.acknowledgeFingerprintViolation = this.getBoolean(this.misc, "Acknowledge Fingerprint Violation", false);
 
@@ -111,6 +114,11 @@ public class ConfigAether
 	private boolean getBoolean(final ConfigCategory category, final String name, final boolean defaultValue)
 	{
 		return this.configuration.get(category.getName(), name, defaultValue).getBoolean();
+	}
+
+	public boolean hideXPBarInAether()
+	{
+		return this.hideXPBarInAether;
 	}
 
 	public int getAetherDimID()
