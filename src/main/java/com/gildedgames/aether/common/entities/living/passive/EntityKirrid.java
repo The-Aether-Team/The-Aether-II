@@ -6,13 +6,14 @@ import com.gildedgames.aether.common.entities.ai.EntityAIHideFromRain;
 import com.gildedgames.aether.common.entities.ai.EntityAIRestrictRain;
 import com.gildedgames.aether.common.entities.ai.EntityAIUnstuckBlueAercloud;
 import com.gildedgames.aether.common.entities.ai.kirrid.EntityAIEatAetherGrass;
+import com.gildedgames.aether.common.entities.util.AetherMultiPartEntity;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
+import com.gildedgames.aether.common.util.Vec3dMutable;
+import com.gildedgames.aether.common.util.helpers.MathUtil;
 import com.google.common.collect.Sets;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.init.SoundEvents;
@@ -24,6 +25,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -33,12 +36,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class EntityKirrid extends EntitySheep
+public class EntityKirrid extends EntitySheep implements IEntityMultiPart
 {
-
 	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(ItemsAether.valkyrie_wings);
 
 	private EntityAIEatAetherGrass entityAIEatGrass;
+
+	private final Vec3dMutable[] old;
+
+	private final MultiPartEntityPart[] parts;
+
+	private final MultiPartEntityPart head = new AetherMultiPartEntity(this, "head", 0.7F, 0.8F);
+
+	private final MultiPartEntityPart back = new AetherMultiPartEntity(this, "back", 0.8F, 1.5F);
 
 	public EntityKirrid(World world)
 	{
@@ -49,6 +59,13 @@ public class EntityKirrid extends EntitySheep
 		this.setSize(1.0F, 1.5F);
 
 		this.spawnableBlock = BlocksAether.aether_grass;
+		this.parts = new MultiPartEntityPart[] { head, back };
+		this.old = new Vec3dMutable[this.parts.length];
+
+		for (int i = 0; i < old.length; i++)
+		{
+			this.old[i] = new Vec3dMutable();
+		}
 	}
 
 	@Override
@@ -62,6 +79,59 @@ public class EntityKirrid extends EntitySheep
 		this.tasks.addTask(3, new EntityAIUnstuckBlueAercloud(this));
 		this.tasks.addTask(3, new EntityAIHideFromRain(this, 1.3D));
 		this.tasks.addTask(9, this.entityAIEatGrass);
+	}
+
+	@Override
+	public World getWorld()
+	{
+		return this.getEntityWorld();
+	}
+
+	@Override
+	public void onLivingUpdate()
+	{
+		super.onLivingUpdate();
+
+		for (int i = 0; i < this.parts.length; i++)
+		{
+			this.old[i].set(this.parts[i].posX, this.parts[i].posY, this.parts[i].posZ);
+		}
+
+		float f = MathUtil.interpolateRotation(this.prevRenderYawOffset, this.renderYawOffset, 1);
+		float f1 = MathHelper.cos(-f * 0.017453292F - (float) Math.PI);
+		float f2 = MathHelper.sin(-f * 0.017453292F - (float) Math.PI);
+
+		this.head.setLocationAndAngles(this.posX - f2 * .9f, this.posY + .75f, this.posZ - f1 * .9f, 0F, 0F);
+		this.head.onUpdate();
+		this.back.setLocationAndAngles(this.posX + f2 * .8f, this.posY, this.posZ + f1 * .8f, 0F, 0F);
+		this.back.onUpdate();
+
+		for (int i = 0; i < this.parts.length; i++)
+		{
+			this.parts[i].prevPosX = this.old[i].getX();
+			this.parts[i].prevPosY = this.old[i].getY();
+			this.parts[i].prevPosZ = this.old[i].getZ();
+		}
+	}
+
+	@Override
+	public boolean attackEntityFromPart(MultiPartEntityPart part, DamageSource source, float damage)
+	{
+		if (this.hurtResistantTime <= 10)
+		{
+			return this.attackEntityFrom(source, damage * 1.1f);
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	@Nullable
+	@Override
+	public MultiPartEntityPart[] getParts()
+	{
+		return this.parts;
 	}
 
 	@Override

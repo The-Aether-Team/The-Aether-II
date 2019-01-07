@@ -6,6 +6,7 @@ import com.gildedgames.aether.common.entities.ai.AetherNavigateGround;
 import com.gildedgames.aether.common.entities.ai.EntityAIHideFromRain;
 import com.gildedgames.aether.common.entities.ai.EntityAIRestrictRain;
 import com.gildedgames.aether.common.entities.ai.EntityAIUnstuckBlueAercloud;
+import com.gildedgames.aether.common.entities.util.AetherMultiPartEntity;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
@@ -40,7 +41,7 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 
 	private final MultiPartEntityPart[] parts;
 
-	private final MultiPartEntityPart head = new MultiPartEntityPart(this, "head", .8F, 1.1F);
+	private final MultiPartEntityPart head = new AetherMultiPartEntity(this, "head", .8F, 1.1F);
 
 	public EntityBurrukai(final World world)
 	{

@@ -14,6 +14,7 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
 import com.gildedgames.aether.common.items.misc.ItemMoaFeather;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
+import com.gildedgames.aether.common.util.Vec3dMutable;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
 import com.gildedgames.orbis_api.client.PartialTicks;
 import com.google.common.collect.Sets;
@@ -87,7 +88,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 
 	private final MultiPartEntityPart[] parts;
 
-	private final Vec3d[] old;
+	private final Vec3dMutable[] old;
 
 	public EntityMoa(final World world)
 	{
@@ -97,10 +98,20 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 
 		this.familyNest = new MoaNest(world);
 
-		this.parts = new MultiPartEntityPart[] { this.head, this.neck, this.beak, this.body, this.tail };
-		this.old = new Vec3d[this.parts.length];
 		this.setSize(1.0F, 2.0F);
 		this.stepHeight = 1.0F;
+		this.parts = new MultiPartEntityPart[] { this.head, this.neck, this.beak, this.body, this.tail };
+		this.old = new Vec3dMutable[this.parts.length];
+
+		for (int i = 0; i < old.length; i++)
+		{
+			this.old[i] = new Vec3dMutable();
+		}
+
+		if (this.isChild() || this.isGroupLeader())
+		{
+			this.updateMultiPart();
+		}
 	}
 
 	public EntityMoa(final World world, final int geneticSeed)
@@ -514,6 +525,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	public void setGender(final AnimalGender gender)
 	{
 		this.dataManager.set(EntityMoa.GENDER, gender == AnimalGender.MALE);
+		this.updateMultiPart();
 	}
 
 	public int getRemainingJumps()
@@ -612,43 +624,67 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		this.setMultiPartLocations();
 	}
 
-	private final MultiPartEntityPart neck = new MultiPartEntityPart(this, "neck", .4F, .8F);
+	private final AetherMultiPartEntity neck = new AetherMultiPartEntity(this, "neck", 0.4F, 0.8F);
 
-	private final MultiPartEntityPart head = new MultiPartEntityPart(this, "head", .8F, .6F);
+	private final AetherMultiPartEntity head = new AetherMultiPartEntity(this, "head", 0.8F, 0.6F);
 
-	private final MultiPartEntityPart beak = new MultiPartEntityPart(this, "beak", .4F, .5F);
+	private final AetherMultiPartEntity beak = new AetherMultiPartEntity(this, "beak", 0.4F, 0.5F);
 
-	private final MultiPartEntityPart body = new MultiPartEntityPart(this, "body", 1.1F, 1.325F);
+	private final AetherMultiPartEntity body = new AetherMultiPartEntity(this, "body", 1.1F, 1.325F);
 
-	private final MultiPartEntityPart tail = new MultiPartEntityPart(this, "tail", 1.1F, .6F);
+	private final AetherMultiPartEntity tail = new AetherMultiPartEntity(this, "tail", 1.1F, 0.6F);
+
+	public float getSize()
+	{
+		return (this.isChild() ? 0.65f : 1) + (this.isGroupLeader() ? 0.15F : 0.0F);
+	}
+
+	@Override
+	protected void onGrowingAdult()
+	{
+		this.updateMultiPart();
+	}
+
+	private void updateMultiPart()
+	{
+		float scale = this.getSize();
+
+		this.neck.updateSize(0.4F * scale, 0.8F * scale);
+		this.head.updateSize(0.8F * scale, 0.6F * scale);
+		this.beak.updateSize(0.4F * scale, 0.5F * scale);
+		this.body.updateSize(1.1F * scale, 1.325F * scale);
+		this.tail.updateSize(1.1F * scale, 0.6F * scale);
+	}
 
 	private void setMultiPartLocations()
 	{
+		float scale = this.getSize();
+
 		for (int i = 0; i < this.parts.length; i++)
 		{
-			this.old[i] = new Vec3d(this.parts[i].posX, this.parts[i].posY, this.parts[i].posZ);
+			this.old[i].set(this.parts[i].posX, this.parts[i].posY, this.parts[i].posZ);
 		}
 
 		float f = MathUtil.interpolateRotation(this.prevRenderYawOffset, this.renderYawOffset, 1);
-		float f1 = MathHelper.cos(-f * 0.017453292F - (float) Math.PI);
-		float f2 = MathHelper.sin(-f * 0.017453292F - (float) Math.PI);
+		float f1 = MathHelper.cos(-f * 0.017453292F - (float) Math.PI) * scale;
+		float f2 = MathHelper.sin(-f * 0.017453292F - (float) Math.PI) * scale;
 
 		this.head.onUpdate();
-		this.head.setLocationAndAngles(this.posX - f2 * .5f, this.posY + 1.45f, this.posZ - f1 * .5f, 0F, 0F);
+		this.head.setLocationAndAngles(this.posX - f2 * 0.5f, this.posY + 1.45f * scale, this.posZ - f1 * 0.5f, 0F, 0F);
 		this.beak.onUpdate();
-		this.beak.setLocationAndAngles(this.posX - f2 * 1.1f, this.posY + 1.5f, this.posZ - f1 * 1.1f, 0F, 0F);
+		this.beak.setLocationAndAngles(this.posX - f2 * 1.1f, this.posY + 1.5f * scale, this.posZ - f1 * 1.1f, 0F, 0F);
 		this.neck.onUpdate();
-		this.neck.setLocationAndAngles(this.posX - f2 * .6f, this.posY + .75f, this.posZ - f1 * .6f, 0F, 0F);
+		this.neck.setLocationAndAngles(this.posX - f2 * 0.6f, this.posY + 0.75f * scale, this.posZ - f1 * 0.6f, 0F, 0F);
 		this.tail.onUpdate();
-		this.tail.setLocationAndAngles(this.posX + f2 * 1.1f, this.posY + .5f, this.posZ + f1 * 1.1f, 0F, 0F);
+		this.tail.setLocationAndAngles(this.posX + f2 * 1.1f, this.posY + 0.5f * scale, this.posZ + f1 * 1.1f, 0F, 0F);
 		this.body.onUpdate();
 		this.body.setLocationAndAngles(this.posX, this.posY, this.posZ, 0F, 0F);
 
 		for (int i = 0; i < this.parts.length; i++)
 		{
-			this.parts[i].prevPosX = this.old[i].x;
-			this.parts[i].prevPosY = this.old[i].y;
-			this.parts[i].prevPosZ = this.old[i].z;
+			this.parts[i].prevPosX = this.old[i].getX();
+			this.parts[i].prevPosY = this.old[i].getY();
+			this.parts[i].prevPosZ = this.old[i].getZ();
 		}
 	}
 

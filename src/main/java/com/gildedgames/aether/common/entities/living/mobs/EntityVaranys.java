@@ -3,6 +3,8 @@ package com.gildedgames.aether.common.entities.living.mobs;
 import com.gildedgames.aether.common.entities.ai.EntityAIHideFromLight;
 import com.gildedgames.aether.common.entities.ai.EntityAIUnstuckBlueAercloud;
 import com.gildedgames.aether.common.entities.ai.EntityAIWanderAvoidLight;
+import com.gildedgames.aether.common.entities.util.AetherMultiPartEntity;
+import com.gildedgames.aether.common.util.Vec3dMutable;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
@@ -20,15 +22,15 @@ public class EntityVaranys extends EntityAetherMob implements IEntityMultiPart
 {
 	private final MultiPartEntityPart[] parts;
 
-	private final MultiPartEntityPart head = new MultiPartEntityPart(this, "head", .7F, .7F);
+	private final MultiPartEntityPart head = new AetherMultiPartEntity(this, "head", .7F, .7F);
 
-	private final MultiPartEntityPart tail1 = new MultiPartEntityPart(this, "tail", 1F, .7F);
+	private final MultiPartEntityPart tail1 = new AetherMultiPartEntity(this, "tail", 1F, .7F);
 
-	private final MultiPartEntityPart tail2 = new MultiPartEntityPart(this, "tail2", 1F, .7F);
+	private final MultiPartEntityPart tail2 = new AetherMultiPartEntity(this, "tail2", 1F, .7F);
 
 	private final EntityAIHideFromLight lightAI;
 
-	private final Vec3d[] old;
+	private final Vec3dMutable[] old;
 
 	public EntityVaranys(final World world)
 	{
@@ -56,7 +58,12 @@ public class EntityVaranys extends EntityAetherMob implements IEntityMultiPart
 
 		this.experienceValue = 7;
 
-		this.old = new Vec3d[this.parts.length];
+		this.old = new Vec3dMutable[this.parts.length];
+
+		for (int i = 0; i < old.length; i++)
+		{
+			this.old[i] = new Vec3dMutable();
+		}
 	}
 
 	@Override
@@ -139,7 +146,7 @@ public class EntityVaranys extends EntityAetherMob implements IEntityMultiPart
 	{
 		for (int i = 0; i < this.parts.length; i++)
 		{
-			this.old[i] = new Vec3d(this.parts[i].posX, this.parts[i].posY, this.parts[i].posZ);
+			this.old[i].set(this.parts[i].posX, this.parts[i].posY, this.parts[i].posZ);
 		}
 
 		float f = MathUtil.interpolateRotation(this.prevRenderYawOffset, this.renderYawOffset, 1);
@@ -155,9 +162,9 @@ public class EntityVaranys extends EntityAetherMob implements IEntityMultiPart
 
 		for (int i = 0; i < this.parts.length; i++)
 		{
-			this.parts[i].prevPosX = this.old[i].x;
-			this.parts[i].prevPosY = this.old[i].y;
-			this.parts[i].prevPosZ = this.old[i].z;
+			this.parts[i].prevPosX = this.old[i].getX();
+			this.parts[i].prevPosY = this.old[i].getY();
+			this.parts[i].prevPosZ = this.old[i].getZ();
 		}
 	}
 
