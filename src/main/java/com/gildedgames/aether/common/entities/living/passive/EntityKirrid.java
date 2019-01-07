@@ -10,7 +10,6 @@ import com.gildedgames.aether.common.entities.util.AetherMultiPartEntity;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
-import com.gildedgames.aether.common.util.Vec3dMutable;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
 import com.google.common.collect.Sets;
 import net.minecraft.entity.*;
@@ -26,12 +25,12 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import javax.vecmath.Point3d;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -42,7 +41,7 @@ public class EntityKirrid extends EntitySheep implements IEntityMultiPart
 
 	private EntityAIEatAetherGrass entityAIEatGrass;
 
-	private final Vec3dMutable[] old;
+	private final Point3d[] old;
 
 	private final MultiPartEntityPart[] parts;
 
@@ -60,11 +59,11 @@ public class EntityKirrid extends EntitySheep implements IEntityMultiPart
 
 		this.spawnableBlock = BlocksAether.aether_grass;
 		this.parts = new MultiPartEntityPart[] { head, back };
-		this.old = new Vec3dMutable[this.parts.length];
+		this.old = new Point3d[this.parts.length];
 
 		for (int i = 0; i < old.length; i++)
 		{
-			this.old[i] = new Vec3dMutable();
+			this.old[i] = new Point3d();
 		}
 	}
 

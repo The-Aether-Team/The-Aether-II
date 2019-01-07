@@ -4,7 +4,6 @@ import com.gildedgames.aether.common.entities.ai.EntityAIHideFromLight;
 import com.gildedgames.aether.common.entities.ai.EntityAIUnstuckBlueAercloud;
 import com.gildedgames.aether.common.entities.ai.EntityAIWanderAvoidLight;
 import com.gildedgames.aether.common.entities.util.AetherMultiPartEntity;
-import com.gildedgames.aether.common.util.Vec3dMutable;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
@@ -13,10 +12,10 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import javax.vecmath.Point3d;
 
 public class EntityVaranys extends EntityAetherMob implements IEntityMultiPart
 {
@@ -30,7 +29,7 @@ public class EntityVaranys extends EntityAetherMob implements IEntityMultiPart
 
 	private final EntityAIHideFromLight lightAI;
 
-	private final Vec3dMutable[] old;
+	private final Point3d[] old;
 
 	public EntityVaranys(final World world)
 	{
@@ -58,11 +57,11 @@ public class EntityVaranys extends EntityAetherMob implements IEntityMultiPart
 
 		this.experienceValue = 7;
 
-		this.old = new Vec3dMutable[this.parts.length];
+		this.old = new Point3d[this.parts.length];
 
 		for (int i = 0; i < old.length; i++)
 		{
-			this.old[i] = new Vec3dMutable();
+			this.old[i] = new Point3d();
 		}
 	}
 

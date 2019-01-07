@@ -14,7 +14,6 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
 import com.gildedgames.aether.common.items.misc.ItemMoaFeather;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
-import com.gildedgames.aether.common.util.Vec3dMutable;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
 import com.gildedgames.orbis_api.client.PartialTicks;
 import com.google.common.collect.Sets;
@@ -37,10 +36,10 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import javax.vecmath.Point3d;
 import java.util.Set;
 
 public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements EntityGroupMember, IMount, IFlyingMountData, IEntityMultiPart
@@ -88,7 +87,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 
 	private final MultiPartEntityPart[] parts;
 
-	private final Vec3dMutable[] old;
+	private final Point3d[] old;
 
 	public EntityMoa(final World world)
 	{
@@ -101,11 +100,11 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		this.setSize(1.0F, 2.0F);
 		this.stepHeight = 1.0F;
 		this.parts = new MultiPartEntityPart[] { this.head, this.neck, this.beak, this.body, this.tail };
-		this.old = new Vec3dMutable[this.parts.length];
+		this.old = new Point3d[this.parts.length];
 
 		for (int i = 0; i < old.length; i++)
 		{
-			this.old[i] = new Vec3dMutable();
+			this.old[i] = new Point3d();
 		}
 
 		if (this.isChild() || this.isGroupLeader())
