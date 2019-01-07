@@ -34,7 +34,7 @@
 				{ "label": "edison.greet.option.thanks", "actions": [ { "type": "navigate", "target": "thanks" } ] },
 				{ "label": "edison.greet.option.okay_sale", "actions": [ { "type": "navigate", "target": "sale" } ] },
 				{
-					"orConditions": [ { "type": "isHolidayEvent", "validate": "true" } ],
+					"orConditions": [ { "type": "isChristmasEvent", "validate": "true" }, { "type": "isNewYearsEvent", "validate": "true" } ],
 					"label": "edison.greet.option.okay_holiday_sale",
 					"actions": [ { "type": "navigate", "target": "holiday_sale" } ]
 				},
@@ -49,7 +49,7 @@
 			"buttons": [
 				{ "label": "edison.greet.option.sale", "actions": [ { "type": "navigate", "target": "sale" } ] },
 				{
-					"orConditions": [ { "type": "isHolidayEvent", "validate": "true" } ],
+					"orConditions": [ { "type": "isChristmasEvent", "validate": "true" }, { "type": "isNewYearsEvent", "validate": "true" } ],
 					"label": "edison.greet.option.holiday_sale",
 					"actions": [ { "type": "navigate", "target": "holiday_sale" } ]
 				},

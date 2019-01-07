@@ -2,7 +2,8 @@ package com.gildedgames.aether.common.dialog.data;
 
 import com.gildedgames.aether.api.dialog.IDialogCondition;
 import com.gildedgames.aether.common.dialog.data.conditions.DialogConditionHasSleptInBed;
-import com.gildedgames.aether.common.dialog.data.conditions.DialogConditionIsHolidayEvent;
+import com.gildedgames.aether.common.dialog.data.conditions.DialogConditionIsChristmasEvent;
+import com.gildedgames.aether.common.dialog.data.conditions.DialogConditionIsNewYearsEvent;
 import com.gildedgames.aether.common.dialog.data.conditions.DialogConditionReturningToOutpost;
 import com.google.gson.*;
 
@@ -17,7 +18,8 @@ public class DialogConditionDeserializer implements JsonDeserializer<IDialogCond
 	{
 		this.conditions.put("returningToOutpost", DialogConditionReturningToOutpost.class);
 		this.conditions.put("hasSleptInBed", DialogConditionHasSleptInBed.class);
-		this.conditions.put("isHolidayEvent", DialogConditionIsHolidayEvent.class);
+		this.conditions.put("isChristmasEvent", DialogConditionIsChristmasEvent.class);
+		this.conditions.put("isNewYearsEvent", DialogConditionIsNewYearsEvent.class);
 	}
 
 	@Override

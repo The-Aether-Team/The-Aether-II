@@ -5,7 +5,8 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.dialog.data.*;
 import com.gildedgames.aether.common.dialog.data.actions.*;
 import com.gildedgames.aether.common.dialog.data.conditions.DialogConditionHasSleptInBed;
-import com.gildedgames.aether.common.dialog.data.conditions.DialogConditionIsHolidayEvent;
+import com.gildedgames.aether.common.dialog.data.conditions.DialogConditionIsChristmasEvent;
+import com.gildedgames.aether.common.dialog.data.conditions.DialogConditionIsNewYearsEvent;
 import com.gildedgames.aether.common.dialog.data.conditions.DialogConditionReturningToOutpost;
 import com.gildedgames.aether.common.dialog.data.slide_renderers.DialogSlideRendererNOOP;
 import com.gildedgames.aether.common.dialog.data.slide_renderers.DialogSlideRendererStatic;
@@ -85,7 +86,8 @@ public class DialogManager implements IDialogManager
 
 		builder.registerTypeAdapter(DialogConditionReturningToOutpost.class, new DialogConditionReturningToOutpost.Deserializer());
 		builder.registerTypeAdapter(DialogConditionHasSleptInBed.class, new DialogConditionHasSleptInBed.Deserializer());
-		builder.registerTypeAdapter(DialogConditionIsHolidayEvent.class, new DialogConditionIsHolidayEvent.Deserializer());
+		builder.registerTypeAdapter(DialogConditionIsChristmasEvent.class, new DialogConditionIsChristmasEvent.Deserializer());
+		builder.registerTypeAdapter(DialogConditionIsNewYearsEvent.class, new DialogConditionIsNewYearsEvent.Deserializer());
 
 		builder.registerTypeAdapter(IDialogSlideRenderer.class, new DialogSlideRendererDeserializer());
 

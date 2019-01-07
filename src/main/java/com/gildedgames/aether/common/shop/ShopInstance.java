@@ -9,8 +9,12 @@ import com.google.common.collect.Maps;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class ShopInstance implements IShopInstance
 {
@@ -24,16 +28,25 @@ public class ShopInstance implements IShopInstance
 
 	private IShopCurrency currencyType;
 
+	private ResourceLocation shopDefinitionLocation;
+
 	private ShopInstance()
 	{
 
 	}
 
-	public ShopInstance(LinkedList<IShopBuy> stock, List<String> greetings, IShopCurrency currencyType)
+	public ShopInstance(ResourceLocation shopDefinitionLocation, LinkedList<IShopBuy> stock, List<String> greetings, IShopCurrency currencyType)
 	{
+		this.shopDefinitionLocation = shopDefinitionLocation;
 		this.stock = stock;
 		this.greetings = greetings;
 		this.currencyType = currencyType;
+	}
+
+	@Override
+	public ResourceLocation getShopDefinitionLocation()
+	{
+		return this.shopDefinitionLocation;
 	}
 
 	@Override
@@ -105,6 +118,11 @@ public class ShopInstance implements IShopInstance
 		funnel.setStringList("greetings", this.greetings);
 		funnel.setMap("inventories", this.inventories, NBTFunnel.UUID_SETTER, NBTFunnel.setter());
 		funnel.set("currencyType", this.currencyType);
+
+		if (this.shopDefinitionLocation != null)
+		{
+			tag.setString("shopDefinitionLocation", this.shopDefinitionLocation.toString());
+		}
 	}
 
 	@Override
@@ -122,6 +140,11 @@ public class ShopInstance implements IShopInstance
 		}
 
 		this.currencyType = funnel.getWithDefault("currencyType", ShopCurrencyGilt::new);
+
+		if (tag.hasKey("shopDefinitionLocation"))
+		{
+			this.shopDefinitionLocation = new ResourceLocation(tag.getString("shopDefinitionLocation"));
+		}
 	}
 
 }

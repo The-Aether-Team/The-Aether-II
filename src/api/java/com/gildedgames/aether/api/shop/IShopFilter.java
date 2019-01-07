@@ -2,7 +2,7 @@ package com.gildedgames.aether.api.shop;
 
 public interface IShopFilter
 {
-	double getFilteredPrice(double originalPrice);
+	double getFilteredPrice(IShopInstance instance, double originalPrice);
 
-	int getFilteredPrice(int originalPrice);
+	int getFilteredPrice(IShopInstance instance, int originalPrice);
 }

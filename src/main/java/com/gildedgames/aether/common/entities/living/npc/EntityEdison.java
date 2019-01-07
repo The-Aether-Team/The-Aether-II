@@ -52,7 +52,7 @@ public class EntityEdison extends EntityNPC
 
 		if (shopDefinition.isPresent())
 		{
-			IShopInstance normalShop = AetherAPI.content().shop().createInstance(shopDefinition.get(), new Random(this.getRNG().nextLong()));
+			IShopInstance normalShop = AetherAPI.content().shop().createInstance(SPEAKER, shopDefinition.get(), new Random(this.getRNG().nextLong()));
 
 			group.setShopInstance(0, normalShop);
 		}
@@ -61,7 +61,7 @@ public class EntityEdison extends EntityNPC
 
 		if (shopDefinition.isPresent())
 		{
-			IShopInstance holidayShop = AetherAPI.content().shop().createInstance(shopDefinition.get(), new Random(this.getRNG().nextLong()));
+			IShopInstance holidayShop = AetherAPI.content().shop().createInstance(HOLIDAY_SHOP, shopDefinition.get(), new Random(this.getRNG().nextLong()));
 
 			group.setShopInstance(1, holidayShop);
 		}

@@ -90,32 +90,34 @@ public class PacketShopSell implements IMessage
 
 						if (shopBuy != null)
 						{
-							value = ShopUtil.getFilteredPrice(shopBuy.getSellingPrice()) * stack.getCount();
+							value = ShopUtil.getFilteredPrice(shopInstance, shopBuy.getSellingPrice()) * stack.getCount();
 						}
 						else
 						{
-							value = ShopUtil.getFilteredPrice(AetherAPI.content().currency().getValue(stack, shopInstance.getCurrencyType().getClass()));
+							value = ShopUtil
+									.getFilteredPrice(shopInstance, AetherAPI.content().currency().getValue(stack, shopInstance.getCurrencyType().getClass()));
 						}
 
 						if (value > 0)
 						{
 							ItemStack s = container.getSlot(0).getStack();
 							double singleValue = ShopUtil
-									.getFilteredPrice(AetherAPI.content().currency().getSingleValue(s, shopInstance.getCurrencyType().getClass()));
+									.getFilteredPrice(shopInstance,
+											AetherAPI.content().currency().getSingleValue(s, shopInstance.getCurrencyType().getClass()));
 
 							if (shopBuy != null)
 							{
-								singleValue = ShopUtil.getFilteredPrice(shopBuy.getSellingPrice());
+								singleValue = ShopUtil.getFilteredPrice(shopInstance, shopBuy.getSellingPrice());
 							}
 
 							if (singleValue < 1)
 							{
 								double wholeValue = ShopUtil
-										.getFilteredPrice(AetherAPI.content().currency().getValue(s, shopInstance.getCurrencyType().getClass()));
+										.getFilteredPrice(shopInstance, AetherAPI.content().currency().getValue(s, shopInstance.getCurrencyType().getClass()));
 
 								if (shopBuy != null)
 								{
-									wholeValue = ShopUtil.getFilteredPrice(shopBuy.getSellingPrice()) * s.getCount();
+									wholeValue = ShopUtil.getFilteredPrice(shopInstance, shopBuy.getSellingPrice()) * s.getCount();
 								}
 
 								double floored = MathHelper.floor(wholeValue);

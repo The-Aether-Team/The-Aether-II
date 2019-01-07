@@ -10,11 +10,11 @@ import com.google.gson.JsonParseException;
 
 import java.lang.reflect.Type;
 
-public class DialogConditionIsHolidayEvent implements IDialogCondition
+public class DialogConditionIsNewYearsEvent implements IDialogCondition
 {
 	private final boolean validate;
 
-	private DialogConditionIsHolidayEvent(boolean validate)
+	private DialogConditionIsNewYearsEvent(boolean validate)
 	{
 		this.validate = validate;
 	}
@@ -27,15 +27,15 @@ public class DialogConditionIsHolidayEvent implements IDialogCondition
 			return false;
 		}
 
-		return AetherCelebrations.isHolidayEvent() == this.validate;
+		return AetherCelebrations.isNewYearsEvent() == this.validate;
 	}
 
-	public static class Deserializer implements JsonDeserializer<DialogConditionIsHolidayEvent>
+	public static class Deserializer implements JsonDeserializer<DialogConditionIsNewYearsEvent>
 	{
 		@Override
-		public DialogConditionIsHolidayEvent deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
+		public DialogConditionIsNewYearsEvent deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
 		{
-			return new DialogConditionIsHolidayEvent(json.getAsJsonObject().get("validate").getAsBoolean());
+			return new DialogConditionIsNewYearsEvent(json.getAsJsonObject().get("validate").getAsBoolean());
 		}
 	}
 }

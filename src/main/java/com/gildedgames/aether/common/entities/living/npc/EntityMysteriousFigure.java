@@ -52,7 +52,7 @@ public class EntityMysteriousFigure extends EntityNPC
 
 		if (shopDefinition.isPresent())
 		{
-			IShopInstance instance = AetherAPI.content().shop().createInstance(shopDefinition.get(), new Random(this.getRNG().nextLong()));
+			IShopInstance instance = AetherAPI.content().shop().createInstance(SPEAKER, shopDefinition.get(), new Random(this.getRNG().nextLong()));
 
 			group.setShopInstance(0, instance);
 		}

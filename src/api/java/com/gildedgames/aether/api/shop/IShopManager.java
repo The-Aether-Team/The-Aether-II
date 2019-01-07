@@ -11,7 +11,7 @@ public interface IShopManager
 
 	Optional<IShopDefinition> getShopDefinition(final ResourceLocation resource);
 
-	IShopInstance createInstance(IShopDefinition definition, Random rand);
+	IShopInstance createInstance(ResourceLocation definitionLocation, IShopDefinition definition, Random rand);
 
 	List<IShopFilter> getGlobalFilters();
 

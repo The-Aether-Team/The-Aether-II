@@ -94,7 +94,8 @@ public class PacketShopBuy implements IMessage
 								return null;
 							}
 
-							boolean canAfford = shopInstance.getCurrencyType().getValue(playerAether) >= (ShopUtil.getFilteredPrice(buy) * amount);
+							boolean canAfford =
+									shopInstance.getCurrencyType().getValue(playerAether) >= (ShopUtil.getFilteredPrice(shopInstance, buy) * amount);
 							boolean isBuyItem = ItemHelper.getKeyForItemStack(player.inventory.getItemStack()) == ItemHelper
 									.getKeyForItemStack(buy.getItemStack());
 							boolean canStack = player.inventory.getItemStack().isStackable();
@@ -118,7 +119,7 @@ public class PacketShopBuy implements IMessage
 									player.inventory.getItemStack().setCount(player.inventory.getItemStack().getCount() + amount);
 								}
 
-								shopInstance.getCurrencyType().removeValue(ShopUtil.getFilteredPrice(buy) * amount, playerAether);
+								shopInstance.getCurrencyType().removeValue(ShopUtil.getFilteredPrice(shopInstance, buy) * amount, playerAether);
 							}
 						}
 					}

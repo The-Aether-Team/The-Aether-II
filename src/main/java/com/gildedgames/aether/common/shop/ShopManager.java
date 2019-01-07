@@ -86,7 +86,7 @@ public class ShopManager implements IShopManager
 	}
 
 	@Override
-	public IShopInstance createInstance(IShopDefinition definition, Random rand)
+	public IShopInstance createInstance(ResourceLocation definitionLocation, IShopDefinition definition, Random rand)
 	{
 		int stock = MathHelper.getInt(rand, definition.getMinStock(), definition.getMaxStock());
 
@@ -137,7 +137,7 @@ public class ShopManager implements IShopManager
 				break;
 		}
 
-		return new ShopInstance(chosenStock, Lists.newArrayList(definition.getUnlocalizedGreetings()), currency);
+		return new ShopInstance(definitionLocation, chosenStock, Lists.newArrayList(definition.getUnlocalizedGreetings()), currency);
 	}
 
 	@Override
