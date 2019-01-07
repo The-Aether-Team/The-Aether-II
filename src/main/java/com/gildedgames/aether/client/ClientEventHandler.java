@@ -44,6 +44,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
@@ -65,6 +66,8 @@ public class ClientEventHandler
 {
 	private static final PerformanceIngame PERFORMANCE_LOGGER = new PerformanceIngame();
 
+	private static final Minecraft mc = Minecraft.getMinecraft();
+
 	private static boolean DRAW_BLACK_SCREEN = false;
 
 	private static boolean DRAW_LOADING_SCREEN = false;
@@ -83,11 +86,11 @@ public class ClientEventHandler
 
 	private static Runnable AFTER_FADE;
 
-	private static final Minecraft mc = Minecraft.getMinecraft();
-
 	private static GuiAetherLoading LOADING = new GuiAetherLoading();
 
 	private static final CustomLoadingRenderer.ICustomLoading BLACK_LOADING = ClientEventHandler::drawOverlay;
+
+	private static int old_left_height, old_right_height;
 
 	public static boolean isFadingIn()
 	{
@@ -167,16 +170,17 @@ public class ClientEventHandler
 	{
 		if (mc.world != null)
 		{
-			boolean necro = mc.world.provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER;
+			boolean atNecromancerInstance = mc.world.provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER;
 
-			if (mc.world.provider.getDimensionType() == DimensionsAether.AETHER || necro)
+			if (mc.world.provider.getDimensionType() == DimensionsAether.AETHER || atNecromancerInstance)
 			{
 				if (event.getType() == RenderGameOverlayEvent.ElementType.EXPERIENCE)
 				{
 					event.setCanceled(true);
 				}
 
-				if (necro && (event.getType() == RenderGameOverlayEvent.ElementType.AIR || event.getType() == RenderGameOverlayEvent.ElementType.HEALTH
+				if (atNecromancerInstance && (event.getType() == RenderGameOverlayEvent.ElementType.AIR
+						|| event.getType() == RenderGameOverlayEvent.ElementType.HEALTH
 						|| event.getType() == RenderGameOverlayEvent.ElementType.HEALTHMOUNT || event.getType() == RenderGameOverlayEvent.ElementType.ARMOR
 						|| event.getType() == RenderGameOverlayEvent.ElementType.FOOD || event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR))
 				{
@@ -193,12 +197,11 @@ public class ClientEventHandler
 		{
 			if (mc.world.provider.getDimensionType() == DimensionsAether.AETHER)
 			{
-				if (event.getType() == RenderGameOverlayEvent.ElementType.AIR || event.getType() == RenderGameOverlayEvent.ElementType.HEALTH
-						|| event.getType() == RenderGameOverlayEvent.ElementType.HEALTHMOUNT || event.getType() == RenderGameOverlayEvent.ElementType.ARMOR
-						|| event.getType() == RenderGameOverlayEvent.ElementType.FOOD)
-				{
-					GlStateManager.translate(0.0, 6D, 0.0);
-				}
+				old_left_height = GuiIngameForge.left_height;
+				old_right_height = GuiIngameForge.right_height;
+
+				GuiIngameForge.left_height = 33;
+				GuiIngameForge.right_height = 33;
 			}
 		}
 	}
@@ -210,12 +213,8 @@ public class ClientEventHandler
 		{
 			if (mc.world.provider.getDimensionType() == DimensionsAether.AETHER)
 			{
-				if (event.getType() == RenderGameOverlayEvent.ElementType.AIR || event.getType() == RenderGameOverlayEvent.ElementType.HEALTH
-						|| event.getType() == RenderGameOverlayEvent.ElementType.HEALTHMOUNT || event.getType() == RenderGameOverlayEvent.ElementType.ARMOR
-						|| event.getType() == RenderGameOverlayEvent.ElementType.FOOD)
-				{
-					GlStateManager.translate(0.0, -6D, 0.0);
-				}
+				GuiIngameForge.left_height = old_left_height;
+				GuiIngameForge.right_height = old_right_height;
 			}
 		}
 	}
