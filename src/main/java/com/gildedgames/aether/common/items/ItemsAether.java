@@ -406,7 +406,7 @@ public class ItemsAether
 
 		r.register("plumproot_mash", plumproot_mash);
 		r.register("plumproot_pie", plumproot_pie);
-		r.register("winter_hat", winter_hat.setCreativeTab(CreativeTabsAether.ARMOR));
+		r.register("winter_hat", winter_hat.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
 		r.register("eggnog", eggnog.setCreativeTab(CreativeTabsAether.CONSUMABLES));
 	}
 
