@@ -99,9 +99,11 @@ public class ContentRegistry implements IContentRegistry, IOrbisServicesListener
 
 		PerfHelper.measure("Verify Orbis project manager", OrbisAPI.services()::verifyProjectManagerStarted);
 		PerfHelper.measure("Load generation", GenerationAether::load);
+	}
 
+	public void onServerStarting()
+	{
 		PerfHelper.measure("Re-build recipe indexes", this::rebuildIndexes);
-
 		PerfHelper.measure("Initialize currency", CurrencyAether::onServerAboutToStart);
 	}
 

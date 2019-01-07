@@ -100,7 +100,7 @@ public class CommonProxy implements IAetherServices
 
 	public void onServerStarting(FMLServerStartingEvent event)
 	{
-
+		this.content().onServerStarting();
 	}
 
 	public void spawnJumpParticles(final World world, final double x, final double y, final double z, final double radius, final int quantity)
