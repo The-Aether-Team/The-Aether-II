@@ -70,9 +70,9 @@ public class PacketShopSell implements IMessage
 					if (shopInstance != null)
 					{
 						ContainerShop container = (ContainerShop) player.openContainer;
-						ItemStack stack = container.getSlot(0).getStack();
+						ItemStack stackToSell = container.getSlot(0).getStack();
 
-						int hash = ItemHelper.getKeyForItemStack(stack);
+						int hash = ItemHelper.getKeyForItemStack(stackToSell);
 						IShopBuy shopBuy = null;
 
 						for (IShopBuy buy : container.getShopInstance().getStock())
@@ -90,34 +90,35 @@ public class PacketShopSell implements IMessage
 
 						if (shopBuy != null)
 						{
-							value = ShopUtil.getFilteredPrice(shopInstance, shopBuy.getSellingPrice()) * stack.getCount();
+							value = ShopUtil.getFilteredPrice(shopInstance, stackToSell, shopBuy.getSellingPrice()) * stackToSell.getCount();
 						}
 						else
 						{
 							value = ShopUtil
-									.getFilteredPrice(shopInstance, AetherAPI.content().currency().getValue(stack, shopInstance.getCurrencyType().getClass()));
+									.getFilteredPrice(shopInstance, stackToSell,
+											AetherAPI.content().currency().getValue(stackToSell, shopInstance.getCurrencyType().getClass()));
 						}
 
 						if (value > 0)
 						{
-							ItemStack s = container.getSlot(0).getStack();
 							double singleValue = ShopUtil
-									.getFilteredPrice(shopInstance,
-											AetherAPI.content().currency().getSingleValue(s, shopInstance.getCurrencyType().getClass()));
+									.getFilteredPrice(shopInstance, stackToSell,
+											AetherAPI.content().currency().getSingleValue(stackToSell, shopInstance.getCurrencyType().getClass()));
 
 							if (shopBuy != null)
 							{
-								singleValue = ShopUtil.getFilteredPrice(shopInstance, shopBuy.getSellingPrice());
+								singleValue = ShopUtil.getFilteredPrice(shopInstance, stackToSell, shopBuy.getSellingPrice());
 							}
 
 							if (singleValue < 1)
 							{
 								double wholeValue = ShopUtil
-										.getFilteredPrice(shopInstance, AetherAPI.content().currency().getValue(s, shopInstance.getCurrencyType().getClass()));
+										.getFilteredPrice(shopInstance, stackToSell,
+												AetherAPI.content().currency().getValue(stackToSell, shopInstance.getCurrencyType().getClass()));
 
 								if (shopBuy != null)
 								{
-									wholeValue = ShopUtil.getFilteredPrice(shopInstance, shopBuy.getSellingPrice()) * s.getCount();
+									wholeValue = ShopUtil.getFilteredPrice(shopInstance, stackToSell, shopBuy.getSellingPrice()) * stackToSell.getCount();
 								}
 
 								double floored = MathHelper.floor(wholeValue);
@@ -128,7 +129,7 @@ public class PacketShopSell implements IMessage
 
 								int leftover = MathHelper.floor(howManyTimesDivInto);
 
-								s.setCount(leftover);
+								stackToSell.setCount(leftover);
 
 								shopInstance.getCurrencyType().addValue((long) floored, playerAether);
 							}
