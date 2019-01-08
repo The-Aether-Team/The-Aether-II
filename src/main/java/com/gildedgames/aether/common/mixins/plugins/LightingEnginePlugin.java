@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.mixins.plugins;
 
+import net.minecraft.launchwrapper.Launch;
 import org.spongepowered.asm.lib.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -18,14 +19,12 @@ public class LightingEnginePlugin implements IMixinConfigPlugin
 	@Override
 	public String getRefMapperConfig()
 	{
-		String refmap = "mixins.aether.refmap.json";
-
-		if (LightingEnginePlugin.class.getResourceAsStream(refmap) != null)
+		if (Launch.blackboard.get("fml.deobfuscatedEnvironment") == Boolean.TRUE)
 		{
-			return refmap;
+			return null;
 		}
 
-		return null;
+		return "mixins.aether.refmap.json";
 	}
 
 	@Override

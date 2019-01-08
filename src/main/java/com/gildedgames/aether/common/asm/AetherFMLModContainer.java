@@ -18,7 +18,8 @@ public class AetherFMLModContainer extends DummyModContainer
 		meta.modId = "aether-lighting-engine";
 		meta.version = "${version}";
 		meta.description = "Lighting engine performance optimizations and bug fixes for Minecraft. These improvements are based upon "
-				+ "the work done by any6w.";
+				+ "the work done by Mathe172 and PhiPro95. Without their work towards reverse engineering and diagnosing Minecraft's "
+				+ "lighting performance crisis, this project would not have been possible.";
 		meta.authorList = new ArrayList<>();
 		meta.authorList.add("Angeline (@jellysquid)");
 	}
