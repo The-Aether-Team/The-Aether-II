@@ -4,20 +4,23 @@ public enum ItemBoltType
 {
 
 	/* DAMAGES ARE NOT FINAL */
-	SKYROOT(1.0f, "skyroot"),
-	HOLYSTONE(1.5f, "holystone"),
-	SCATTERGLASS(2.0f, "scatterglass"),
-	ZANITE(2.5f, "zanite"),
-	ARKENIUM(3.5f, "arkenium"),
-	GRAVITITE(3.0f, "gravitite");
+	SKYROOT(0, 4, 0, "skyroot"),
+	HOLYSTONE(0, 7, 0, "holystone"),
+	SCATTERGLASS(0, 10, 0, "scatterglass"),
+	ZANITE(0, 13, 0, "zanite"),
+	ARKENIUM(0, 20, 0, "arkenium"),
+	GRAVITITE(0, 16, 0, "gravitite");
 
-	private final float damage;
+	private final int slashDamageLevel, pierceDamageLevel, impactDamageLevel;
 
 	private final String id;
 
-	ItemBoltType(float damage, String id)
+	ItemBoltType(int slashDamageLevel, int pierceDamageLevel, int impactDamageLevel, String id)
 	{
-		this.damage = damage;
+		this.slashDamageLevel = slashDamageLevel;
+		this.pierceDamageLevel = pierceDamageLevel;
+		this.impactDamageLevel = impactDamageLevel;
+
 		this.id = id;
 	}
 
@@ -28,9 +31,19 @@ public enum ItemBoltType
 		return bolts[ordinal > bolts.length || ordinal < 0 ? 0 : ordinal];
 	}
 
-	public float getDamage()
+	public int getSlashDamageLevel()
 	{
-		return this.damage;
+		return this.slashDamageLevel;
+	}
+
+	public int getPierceDamageLevel()
+	{
+		return this.pierceDamageLevel;
+	}
+
+	public int getImpactDamageLevel()
+	{
+		return this.impactDamageLevel;
 	}
 
 	public String getID()

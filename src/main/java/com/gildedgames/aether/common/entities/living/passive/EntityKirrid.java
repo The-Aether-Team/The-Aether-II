@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.living.passive;
 
+import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.entities.ai.AetherNavigateGround;
 import com.gildedgames.aether.common.entities.ai.EntityAIHideFromRain;
@@ -39,8 +40,6 @@ public class EntityKirrid extends EntitySheep implements IEntityMultiPart
 {
 	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(ItemsAether.valkyrie_wings);
 
-	private EntityAIEatAetherGrass entityAIEatGrass;
-
 	private final Point3d[] old;
 
 	private final MultiPartEntityPart[] parts;
@@ -48,6 +47,8 @@ public class EntityKirrid extends EntitySheep implements IEntityMultiPart
 	private final MultiPartEntityPart head = new AetherMultiPartEntity(this, "head", 0.7F, 0.8F);
 
 	private final MultiPartEntityPart back = new AetherMultiPartEntity(this, "back", 0.8F, 1.5F);
+
+	private EntityAIEatAetherGrass entityAIEatGrass;
 
 	public EntityKirrid(World world)
 	{
@@ -58,10 +59,10 @@ public class EntityKirrid extends EntitySheep implements IEntityMultiPart
 		this.setSize(1.0F, 1.5F);
 
 		this.spawnableBlock = BlocksAether.aether_grass;
-		this.parts = new MultiPartEntityPart[] { head, back };
+		this.parts = new MultiPartEntityPart[] { this.head, this.back };
 		this.old = new Point3d[this.parts.length];
 
-		for (int i = 0; i < old.length; i++)
+		for (int i = 0; i < this.old.length; i++)
 		{
 			this.old[i] = new Point3d();
 		}
@@ -150,7 +151,11 @@ public class EntityKirrid extends EntitySheep implements IEntityMultiPart
 	{
 		super.applyEntityAttributes();
 
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(12.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
+
+		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(8);
+		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(2);
+		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(5);
 	}
 
 	@Override

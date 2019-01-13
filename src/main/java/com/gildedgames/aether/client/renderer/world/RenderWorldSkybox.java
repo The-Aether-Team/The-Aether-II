@@ -1,9 +1,9 @@
 package com.gildedgames.aether.client.renderer.world;
 
 import com.gildedgames.aether.api.AetherCapabilities;
+import com.gildedgames.aether.api.ReflectionAether;
 import com.gildedgames.aether.api.world.islands.precipitation.IPrecipitationManager;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.ReflectionAether;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.BufferBuilder;

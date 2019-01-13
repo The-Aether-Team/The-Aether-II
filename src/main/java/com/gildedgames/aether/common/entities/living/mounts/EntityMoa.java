@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.living.mounts;
 
+import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
 import com.gildedgames.aether.api.entity.IMount;
 import com.gildedgames.aether.api.entity.IMountProcessor;
 import com.gildedgames.aether.common.entities.ai.AetherNavigateGround;
@@ -69,6 +70,20 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 
 	private final IMountProcessor mountProcessor = new FlyingMount(this);
 
+	private final MultiPartEntityPart[] parts;
+
+	private final Point3d[] old;
+
+	private final AetherMultiPartEntity neck = new AetherMultiPartEntity(this, "neck", 0.4F, 0.8F);
+
+	private final AetherMultiPartEntity head = new AetherMultiPartEntity(this, "head", 0.8F, 0.6F);
+
+	private final AetherMultiPartEntity beak = new AetherMultiPartEntity(this, "beak", 0.4F, 0.5F);
+
+	private final AetherMultiPartEntity body = new AetherMultiPartEntity(this, "body", 1.1F, 1.325F);
+
+	private final AetherMultiPartEntity tail = new AetherMultiPartEntity(this, "tail", 1.1F, 0.6F);
+
 	public float wingRotation, destPos, prevDestPos, prevWingRotation;
 
 	public int ticksUntilFlap;
@@ -85,10 +100,6 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 
 	private MoaNest familyNest;
 
-	private final MultiPartEntityPart[] parts;
-
-	private final Point3d[] old;
-
 	public EntityMoa(final World world)
 	{
 		super(world);
@@ -102,7 +113,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		this.parts = new MultiPartEntityPart[] { this.head, this.neck, this.beak, this.body, this.tail };
 		this.old = new Point3d[this.parts.length];
 
-		for (int i = 0; i < old.length; i++)
+		for (int i = 0; i < this.old.length; i++)
 		{
 			this.old[i] = new Point3d();
 		}
@@ -183,7 +194,11 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		super.applyEntityAttributes();
 
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(22.0D);
+
+		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(8);
+		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(8);
+		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(9);
 	}
 
 	@Override
@@ -622,16 +637,6 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 
 		this.setMultiPartLocations();
 	}
-
-	private final AetherMultiPartEntity neck = new AetherMultiPartEntity(this, "neck", 0.4F, 0.8F);
-
-	private final AetherMultiPartEntity head = new AetherMultiPartEntity(this, "head", 0.8F, 0.6F);
-
-	private final AetherMultiPartEntity beak = new AetherMultiPartEntity(this, "beak", 0.4F, 0.5F);
-
-	private final AetherMultiPartEntity body = new AetherMultiPartEntity(this, "body", 1.1F, 1.325F);
-
-	private final AetherMultiPartEntity tail = new AetherMultiPartEntity(this, "tail", 1.1F, 0.6F);
 
 	public float getSize()
 	{

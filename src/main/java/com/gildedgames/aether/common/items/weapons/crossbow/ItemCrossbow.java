@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.items.weapons.crossbow;
 
-import com.gildedgames.aether.common.ReflectionAether;
+import com.gildedgames.aether.api.ReflectionAether;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt.BoltAbility;
 import com.gildedgames.aether.common.items.ItemsAether;
@@ -34,28 +34,6 @@ public class ItemCrossbow extends Item
 	//TODO: add Gravitite ability : No bolt drop & Load blocks as ammo to be fired at long range.
 
 	public static final ItemBoltType[] BOLT_TYPES = ItemBoltType.values();
-
-	public enum crossBowTypes
-	{
-		SKYROOT(1F, 200, "skyroot_crossbow"),
-		HOLYSTONE(1.2F, 250, "holystone_crossbow"),
-		ZANITE(1.3F, 300, "zanite_crossbow"),
-		ARKENIUM(1.4F, 400, "arkenium_crossbow"),
-		GRAVETITE(1.6F, 350, "gravitite_crossbow");
-
-		final float damageMultiplier;
-
-		final int maxDurability;
-
-		final String name;
-
-		crossBowTypes(float damageMultiplier, int maxDurability, String name)
-		{
-			this.damageMultiplier = damageMultiplier;
-			this.maxDurability = maxDurability;
-			this.name = name;
-		}
-	}
 
 	private float durationInTicks;
 
@@ -168,7 +146,7 @@ public class ItemCrossbow extends Item
 		stack.getTagCompound().setInteger("boltType", type.ordinal());
 	}
 
-	private boolean hasAmmo(final EntityPlayer player)
+	public static boolean hasAmmo(final EntityPlayer player)
 	{
 		final ItemStack boltStack = player.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND);
 
@@ -209,7 +187,7 @@ public class ItemCrossbow extends Item
 
 		if (!ItemCrossbow.isLoaded(stack))
 		{
-			if (this.hasAmmo(playerIn))
+			if (hasAmmo(playerIn))
 			{
 				playerIn.setActiveHand(EnumHand.MAIN_HAND);
 			}
@@ -240,22 +218,22 @@ public class ItemCrossbow extends Item
 			{
 				if (this.cBType == crossBowTypes.SKYROOT)
 				{
-					bolt0 = this.createBolt(entityLiving, speed, 0, 0, 0, this.cBType.damageMultiplier);
-					bolt1 = this.createBolt(entityLiving, speed, 0, 0, 0, this.cBType.damageMultiplier);
+					bolt0 = this.createBolt(entityLiving, speed, 0, 0, 0, this.cBType.damageMultiplier, boltType);
+					bolt1 = this.createBolt(entityLiving, speed, 0, 0, 0, this.cBType.damageMultiplier, boltType);
 				}
 				else if (this.cBType == crossBowTypes.HOLYSTONE)
 				{
-					bolt0 = this.createBolt(entityLiving, speed / 2, 0, 0, 0, this.cBType.damageMultiplier);
-					bolt1 = this.createBolt(entityLiving, speed / 2, 10, 0, 0, this.cBType.damageMultiplier);
-					bolt2 = this.createBolt(entityLiving, speed / 2, -10, 0, 0, this.cBType.damageMultiplier);
+					bolt0 = this.createBolt(entityLiving, speed / 2, 0, 0, 0, this.cBType.damageMultiplier, boltType);
+					bolt1 = this.createBolt(entityLiving, speed / 2, 10, 0, 0, this.cBType.damageMultiplier, boltType);
+					bolt2 = this.createBolt(entityLiving, speed / 2, -10, 0, 0, this.cBType.damageMultiplier, boltType);
 				}
 				else if (this.cBType == crossBowTypes.ZANITE)
 				{
-					bolt0 = this.createBolt(entityLiving, speed, 0, 0, 0, 1.5F);
+					bolt0 = this.createBolt(entityLiving, speed, 0, 0, 0, 1.5F, boltType);
 				}
 				else if (this.cBType == crossBowTypes.ARKENIUM)
 				{
-					bolt0 = this.createBolt(entityLiving, speed * 2.5f, 0, -1, 0, 2.0f);
+					bolt0 = this.createBolt(entityLiving, speed * 2.5f, 0, -1, 0, 2.0f, boltType);
 				}
 				else if (this.cBType == crossBowTypes.GRAVETITE)
 				{
@@ -263,12 +241,12 @@ public class ItemCrossbow extends Item
 				}
 				else
 				{
-					bolt0 = this.createBolt(entityLiving, speed, 0, 0, -0.5f, this.cBType.damageMultiplier);
+					bolt0 = this.createBolt(entityLiving, speed, 0, 0, -0.5f, this.cBType.damageMultiplier, boltType);
 				}
 			}
 			else
 			{
-				bolt0 = this.createBolt(entityLiving, speed, 0, 0, 0, this.cBType.damageMultiplier);
+				bolt0 = this.createBolt(entityLiving, speed, 0, 0, 0, this.cBType.damageMultiplier, boltType);
 			}
 
 			if (entityLiving instanceof EntityPlayer)
@@ -332,11 +310,14 @@ public class ItemCrossbow extends Item
 	}
 
 	private EntityBolt createBolt(EntityLivingBase entityLiving, float speed, float addRotationYaw, float addRotationPitch, float addInaccuracy,
-			float damageMultiplier)
+			float damageMultiplier, ItemBoltType boltType)
 	{
 		if (!entityLiving.world.isRemote)
 		{
 			final EntityBolt bolt = new EntityBolt(entityLiving.getEntityWorld(), entityLiving);
+
+			bolt.setBoltType(boltType);
+
 			bolt.shoot(entityLiving, entityLiving.rotationPitch + addRotationPitch, entityLiving.rotationYaw + addRotationYaw,
 					0.0F, speed * 2.0F, 1.0F + addInaccuracy);
 			bolt.setBoltAbility(BoltAbility.NORMAL);
@@ -357,7 +338,7 @@ public class ItemCrossbow extends Item
 			final EntityPlayer player = (EntityPlayer) living;
 			final ItemStack boltStack = player.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND);
 
-			if (this.hasAmmo(player))
+			if (hasAmmo(player))
 			{
 				final float use = (float) (this.getMaxItemUseDuration(stack) - living.getItemInUseCount()) / 20.0F;
 				if (use == (this.durationInTicks / 20.0F))
@@ -477,5 +458,27 @@ public class ItemCrossbow extends Item
 		this.cBType = type;
 		this.setMaxDamage(this.cBType.maxDurability);
 		return this;
+	}
+
+	public enum crossBowTypes
+	{
+		SKYROOT(1F, 200, "skyroot_crossbow"),
+		HOLYSTONE(1.2F, 250, "holystone_crossbow"),
+		ZANITE(1.3F, 300, "zanite_crossbow"),
+		ARKENIUM(1.4F, 400, "arkenium_crossbow"),
+		GRAVETITE(1.6F, 350, "gravitite_crossbow");
+
+		final float damageMultiplier;
+
+		final int maxDurability;
+
+		final String name;
+
+		crossBowTypes(float damageMultiplier, int maxDurability, String name)
+		{
+			this.damageMultiplier = damageMultiplier;
+			this.maxDurability = maxDurability;
+			this.name = name;
+		}
 	}
 }

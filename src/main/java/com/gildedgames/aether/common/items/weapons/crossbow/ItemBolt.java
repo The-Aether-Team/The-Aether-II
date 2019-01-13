@@ -36,16 +36,29 @@ public class ItemBolt extends Item implements IDropOnDeath
 	{
 		final ItemBoltType type = ITEM_VARIANTS[stack.getItemDamage()];
 
-		final float damage = type.getDamage() * 2.0F;
+		final int slashDamageLevel = type.getSlashDamageLevel();
+		final int pierceDamageLevel = type.getPierceDamageLevel();
+		final int impactDamageLevel = type.getImpactDamageLevel();
 
-		if (damage == Math.floor(damage))
+		if (slashDamageLevel > 0)
 		{
-			tooltip.add(TextFormatting.GRAY + String.valueOf((int) Math.floor(damage)) + " " + I18n.format("item.aether.bolt.desc1"));
+			this.addDamageLevel("slash", slashDamageLevel, tooltip);
 		}
-		else
+
+		if (pierceDamageLevel > 0)
 		{
-			tooltip.add(TextFormatting.GRAY + String.valueOf(damage) + " " + I18n.format("item.aether.bolt.desc1"));
+			this.addDamageLevel("pierce", pierceDamageLevel, tooltip);
 		}
+
+		if (impactDamageLevel > 0)
+		{
+			this.addDamageLevel("impact", impactDamageLevel, tooltip);
+		}
+	}
+
+	private void addDamageLevel(String damageType, int damageLevel, final List<String> tooltip)
+	{
+		tooltip.add(TextFormatting.GRAY + String.valueOf(damageLevel) + " " + I18n.format("item.aether.bolt." + damageType));
 	}
 
 	@Override

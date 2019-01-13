@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.living.mobs;
 
+import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
 import com.gildedgames.aether.common.entities.ai.EntityAIHideFromLight;
 import com.gildedgames.aether.common.entities.ai.EntityAIUnstuckBlueAercloud;
 import com.gildedgames.aether.common.entities.ai.EntityAIWanderAvoidLight;
@@ -59,7 +60,7 @@ public class EntityVaranys extends EntityAetherMob implements IEntityMultiPart
 
 		this.old = new Point3d[this.parts.length];
 
-		for (int i = 0; i < old.length; i++)
+		for (int i = 0; i < this.old.length; i++)
 		{
 			this.old[i] = new Point3d();
 		}
@@ -74,6 +75,10 @@ public class EntityVaranys extends EntityAetherMob implements IEntityMultiPart
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.5D);
 		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2.0D);
+
+		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(15);
+		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(8);
+		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(4);
 	}
 
 	@Override

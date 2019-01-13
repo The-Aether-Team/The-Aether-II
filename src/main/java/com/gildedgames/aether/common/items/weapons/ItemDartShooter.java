@@ -111,7 +111,6 @@ public class ItemDartShooter extends Item
 			final EntityDart dart = new EntityDart(world, player);
 			dart.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, speed * 3.0F, 1.0F);
 			dart.setDartType(dartType);
-			dart.setDamage(dartType.getAmmoItem().getDamage());
 
 			if (speed >= 0.8f)
 			{

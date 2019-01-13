@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client.renderer.world;
 
-import com.gildedgames.aether.common.ReflectionAether;
+import com.gildedgames.aether.api.ReflectionAether;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.texture.DynamicTexture;

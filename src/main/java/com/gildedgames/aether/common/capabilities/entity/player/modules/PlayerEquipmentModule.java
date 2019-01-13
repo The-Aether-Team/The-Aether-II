@@ -8,10 +8,12 @@ import com.gildedgames.aether.api.items.equipment.effects.IEffectPool;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 import com.gildedgames.aether.api.player.IEquipmentModule;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.containers.inventory.InventoryEquipment;
 import com.gildedgames.aether.common.entities.effects.EquipmentEffectPool;
+import com.gildedgames.aether.common.entities.effects.InventoryProvider;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketEquipment;
 import net.minecraft.item.ItemStack;
@@ -25,6 +27,12 @@ import java.util.*;
 
 public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipmentModule
 {
+	private static final InventoryProvider EQUIPMENT_INV_PROVIDER = new InventoryProvider(AetherCore.getResource("equipmentInv"),
+			(playerAether -> playerAether.getEquipmentModule().getInventory()));
+
+	private static final InventoryProvider NORMAL_INV_PROVIDER = new InventoryProvider(AetherCore.getResource("normalInv"),
+			(playerAether -> playerAether.getEntity().inventory));
+
 	private final InventoryEquipment stagingInv;
 
 	private final InventoryEquipment recordedInv;
@@ -32,6 +40,8 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 	private final Map<ResourceLocation, EquipmentEffectPool<IEffectProvider>> pools = new HashMap<>();
 
 	private ItemStack lastHeldStack = ItemStack.EMPTY;
+
+	private int lastHeldStackIndex = -1;
 
 	public PlayerEquipmentModule(PlayerAether player)
 	{
@@ -76,15 +86,17 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 	{
 		if (!ItemStack.areItemStacksEqual(this.lastHeldStack, this.getEntity().getHeldItemMainhand()))
 		{
-			ItemStack oldStack = this.lastHeldStack;
-			this.lastHeldStack = this.getEntity().getHeldItemMainhand();
+			int mainHandIndex = this.getEntity().inventory.currentItem;
 
-			if (oldStack != null)
+			if (!this.lastHeldStack.isEmpty() && this.lastHeldStackIndex != -1)
 			{
-				this.deactivateEquipmentEffects(oldStack, this.stagingInv.getSizeInventory(), EffectActivator.WHEN_HELD);
+				this.deactivateEquipmentEffects(this.lastHeldStack, Pair.of(this.lastHeldStackIndex, NORMAL_INV_PROVIDER), EffectActivator.WHEN_HELD);
 			}
 
-			this.deactivateEquipmentEffects(this.lastHeldStack, this.stagingInv.getSizeInventory(), EffectActivator.WHEN_HELD);
+			if (!this.getEntity().getHeldItemMainhand().isEmpty())
+			{
+				this.activateEquipmentEffects(this.getEntity().getHeldItemMainhand(), Pair.of(mainHandIndex, NORMAL_INV_PROVIDER), EffectActivator.WHEN_HELD);
+			}
 		}
 
 		final List<Pair<Integer, ItemStack>> updates = this.getEntity().world.isRemote ? Collections.emptyList() : new ArrayList<>();
@@ -100,12 +112,12 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 			{
 				if (!oldStack.isEmpty())
 				{
-					this.deactivateEquipmentEffects(oldStack, i, EffectActivator.WHEN_EQUIPPED);
+					this.deactivateEquipmentEffects(oldStack, Pair.of(i, EQUIPMENT_INV_PROVIDER), EffectActivator.WHEN_EQUIPPED);
 				}
 
 				if (!newStack.isEmpty())
 				{
-					this.activateEquipmentEffects(newStack, i, EffectActivator.WHEN_EQUIPPED);
+					this.activateEquipmentEffects(newStack, Pair.of(i, EQUIPMENT_INV_PROVIDER), EffectActivator.WHEN_EQUIPPED);
 				}
 
 				if (!this.getEntity().world.isRemote)
@@ -124,14 +136,15 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 
 		this.pools.values().forEach(EquipmentEffectPool::update);
 		this.lastHeldStack = this.getEntity().getHeldItemMainhand();
+		this.lastHeldStackIndex = this.getEntity().inventory.currentItem;
 	}
 
 	/**
 	 * Called when a new equipment item is added to the inventory.
 	 * @param stack The new {@link ItemStack}
-	 * @param index The inventory index of {@param stack}
+	 * @param inventoryIndexPair The inventory and index of {@param stack}
 	 */
-	private void activateEquipmentEffects(ItemStack stack, int index, EffectActivator activator)
+	private void activateEquipmentEffects(ItemStack stack, Pair<Integer, InventoryProvider> inventoryIndexPair, EffectActivator activator)
 	{
 		IItemProperties properties = AetherAPI.content().items().getProperties(stack.getItem());
 
@@ -148,16 +161,16 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 
 			Validate.isTrue(copy != provider, "IEffectProvider#copy() cannot return itself");
 
-			pool.addInstance(index, copy);
+			pool.addInstance(inventoryIndexPair, copy);
 		});
 	}
 
 	/**
 	 * Called when an equipment item is removed from the inventory.
 	 * @param stack The old {@link ItemStack}
-	 * @param index The inventory index of {@param stack}
+	 * @param inventoryIndexPair The inventory and index of {@param stack}
 	 */
-	private void deactivateEquipmentEffects(ItemStack stack, int index, EffectActivator activator)
+	private void deactivateEquipmentEffects(ItemStack stack, Pair<Integer, InventoryProvider> inventoryIndexPair, EffectActivator activator)
 	{
 		IItemProperties properties = AetherAPI.content().items().getProperties(stack.getItem());
 
@@ -168,7 +181,7 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 
 		properties.getEffectProviders().forEach(provider -> {
 			EquipmentEffectPool<IEffectProvider> pool = this.pools.get(provider.getFactory());
-			pool.removeInstance(index);
+			pool.removeInstance(inventoryIndexPair);
 
 			if (pool.isEmpty())
 			{

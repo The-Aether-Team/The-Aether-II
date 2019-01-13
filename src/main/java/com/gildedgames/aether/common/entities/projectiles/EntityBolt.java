@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.projectiles;
 
+import com.gildedgames.aether.api.damage_system.IDamageLevelsHolder;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
 import net.minecraft.entity.EntityLivingBase;
@@ -13,7 +14,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EntityBolt extends EntityArrow
+public class EntityBolt extends EntityArrow implements IDamageLevelsHolder
 {
 	private static final DataParameter<Byte> TYPE = new DataParameter<>(20, DataSerializers.BYTE);
 
@@ -84,7 +85,24 @@ public class EntityBolt extends EntityArrow
 	public void setBoltType(final ItemBoltType type)
 	{
 		this.dataManager.set(TYPE, (byte) type.ordinal());
-		this.setDamage(type.getDamage());
+	}
+
+	@Override
+	public int getSlashDamageLevel()
+	{
+		return this.getBoltType().getSlashDamageLevel();
+	}
+
+	@Override
+	public int getPierceDamageLevel()
+	{
+		return this.getBoltType().getPierceDamageLevel();
+	}
+
+	@Override
+	public int getImpactDamageLevel()
+	{
+		return this.getBoltType().getImpactDamageLevel();
 	}
 
 	public enum BoltAbility

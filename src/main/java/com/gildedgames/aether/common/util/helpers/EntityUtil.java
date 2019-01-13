@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.util.helpers;
 
-import com.gildedgames.aether.common.ReflectionAether;
+import com.gildedgames.aether.api.ReflectionAether;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.resources.DefaultPlayerSkin;

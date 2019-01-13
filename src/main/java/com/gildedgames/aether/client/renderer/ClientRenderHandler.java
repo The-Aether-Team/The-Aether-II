@@ -1,6 +1,7 @@
 package com.gildedgames.aether.client.renderer;
 
 import com.gildedgames.aether.api.AetherCapabilities;
+import com.gildedgames.aether.api.ReflectionAether;
 import com.gildedgames.aether.api.world.islands.precipitation.IPrecipitationManager;
 import com.gildedgames.aether.client.gui.overlays.IOverlay;
 import com.gildedgames.aether.client.gui.overlays.PortalOverlay;
@@ -9,7 +10,6 @@ import com.gildedgames.aether.client.models.entities.player.*;
 import com.gildedgames.aether.client.renderer.entities.living.RenderPlayerHelper;
 import com.gildedgames.aether.client.renderer.particles.ParticleRainProxyFactory;
 import com.gildedgames.aether.client.renderer.world.RenderWorldPrecipitation;
-import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;

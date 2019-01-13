@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.registry.content;
 
 import com.gildedgames.aether.api.AetherAPI;
+import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
 import com.gildedgames.aether.api.items.EffectActivator;
 import com.gildedgames.aether.api.items.ItemPropertiesBuilder;
 import com.gildedgames.aether.api.items.ItemRarity;
@@ -17,6 +18,10 @@ import net.minecraft.item.Item;
 public class EquipmentContent
 {
 	private static final EffectActivator[] EMPTY_ACTIVATORS = new EffectActivator[0];
+
+	private static final EffectActivator[] WHEN_HELD = new EffectActivator[] {
+			EffectActivator.WHEN_HELD
+	};
 
 	public static void init()
 	{
@@ -42,11 +47,33 @@ public class EquipmentContent
 		createEquipmentItem(ItemsAether.zanite_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE);
 		createEquipmentItem(ItemsAether.arkenium_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE);
 		createEquipmentItem(ItemsAether.gravitite_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE);
+
+		createEquipmentItem(ItemsAether.skyroot_sword, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD, new StatEffectFactory.StatProvider(
+				DamageTypeAttributes.SLASH_DAMAGE_LEVEL, 7, StatEffectFactory.StatProvider.OP_ADD));
+		createEquipmentItem(ItemsAether.holystone_sword, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD, new StatEffectFactory.StatProvider(
+				DamageTypeAttributes.SLASH_DAMAGE_LEVEL, 10, StatEffectFactory.StatProvider.OP_ADD));
+		createEquipmentItem(ItemsAether.zanite_sword, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD, new StatEffectFactory.StatProvider(
+				DamageTypeAttributes.SLASH_DAMAGE_LEVEL, 16, StatEffectFactory.StatProvider.OP_ADD));
+		createEquipmentItem(ItemsAether.arkenium_sword, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD, new StatEffectFactory.StatProvider(
+				DamageTypeAttributes.SLASH_DAMAGE_LEVEL, 24, StatEffectFactory.StatProvider.OP_ADD));
+		createEquipmentItem(ItemsAether.gravitite_sword, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD, new StatEffectFactory.StatProvider(
+				DamageTypeAttributes.SLASH_DAMAGE_LEVEL, 20, StatEffectFactory.StatProvider.OP_ADD));
+
+		createEquipmentItem(ItemsAether.skyroot_axe, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD, new StatEffectFactory.StatProvider(
+				DamageTypeAttributes.IMPACT_DAMAGE_LEVEL, 7, StatEffectFactory.StatProvider.OP_ADD));
+		createEquipmentItem(ItemsAether.holystone_axe, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD, new StatEffectFactory.StatProvider(
+				DamageTypeAttributes.IMPACT_DAMAGE_LEVEL, 10, StatEffectFactory.StatProvider.OP_ADD));
+		createEquipmentItem(ItemsAether.zanite_axe, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD, new StatEffectFactory.StatProvider(
+				DamageTypeAttributes.IMPACT_DAMAGE_LEVEL, 16, StatEffectFactory.StatProvider.OP_ADD));
+		createEquipmentItem(ItemsAether.arkenium_axe, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD, new StatEffectFactory.StatProvider(
+				DamageTypeAttributes.IMPACT_DAMAGE_LEVEL, 24, StatEffectFactory.StatProvider.OP_ADD));
+		createEquipmentItem(ItemsAether.gravitite_axe, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD, new StatEffectFactory.StatProvider(
+				DamageTypeAttributes.IMPACT_DAMAGE_LEVEL, 20, StatEffectFactory.StatProvider.OP_ADD));
 	}
 
-	private static void createEquipmentItem(final Item item, final ItemEquipmentSlot slot, final ItemRarity rarity, final IEffectProvider... providers)
+	private static void createEquipmentItem(final Item item, final ItemEquipmentSlot slot, final ItemRarity rarity)
 	{
-		createEquipmentItem(item, slot, rarity, EMPTY_ACTIVATORS, providers);
+		createEquipmentItem(item, slot, rarity, EMPTY_ACTIVATORS);
 	}
 
 	private static void createEquipmentItem(final Item item, final ItemEquipmentSlot slot, final ItemRarity rarity, EffectActivator[] effectActivators,

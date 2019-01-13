@@ -623,7 +623,9 @@ item.aether.holystone_crossbow.ability=Shift+Reload: Spread Shot
 item.aether.zanite_crossbow.ability=Not implemented
 item.aether.arkenium_crossbow.ability=Shift+Reload: Long shot
 item.aether.gravitite_crossbow.ability=Not implemented
-item.aether.bolt.desc1=Attack Damage
+item.aether.bolt.slash=Slash Damage Level
+item.aether.bolt.pierce=Pierce Damage Level
+item.aether.bolt.impact=Impact Damage Level
 
 # Tool tooltips
 item.aether.tool.skyroot.ability.desc=Doubles drops from blocks

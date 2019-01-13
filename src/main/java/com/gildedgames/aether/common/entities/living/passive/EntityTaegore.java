@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.living.passive;
 
+import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.entities.ai.AetherNavigateGround;
@@ -39,11 +40,11 @@ public class EntityTaegore extends EntityAetherAnimal implements IEntityMultiPar
 
 	private final EntityAIPanic AIPanic = new EntityAIPanic(this, 2.0D);
 
-	private double prevHeadX, prevHeadY, prevHeadZ;
-
 	private final MultiPartEntityPart[] parts;
 
 	private final MultiPartEntityPart head = new AetherMultiPartEntity(this, "head", .8F, .8F);
+
+	private double prevHeadX, prevHeadY, prevHeadZ;
 
 	public EntityTaegore(final World world)
 	{
@@ -116,8 +117,12 @@ public class EntityTaegore extends EntityAetherAnimal implements IEntityMultiPar
 	{
 		super.applyEntityAttributes();
 
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(22.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
+
+		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(8);
+		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(5);
+		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(2);
 	}
 
 	@Override

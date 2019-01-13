@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client;
 
-import com.gildedgames.aether.common.ReflectionAether;
+import com.gildedgames.aether.api.ReflectionAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketSetShouldRespawnAtCampfire;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;

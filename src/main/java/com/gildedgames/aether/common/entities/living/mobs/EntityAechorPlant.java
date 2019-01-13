@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.living.mobs;
 
+import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.entities.ai.EntityAIAechorPlantAttack;
 import com.gildedgames.aether.common.items.ItemsAether;
@@ -32,12 +33,12 @@ public class EntityAechorPlant extends EntityAetherMob
 
 	private static final DataParameter<Byte> PLANT_SIZE = new DataParameter<>(17, DataSerializers.BYTE);
 
+	private final boolean[] petalPresent = new boolean[4];
+
 	@SideOnly(Side.CLIENT)
 	public float sinage, prevSinage;
 
 	private int poisonLeft;
-
-	private final boolean[] petalPresent = new boolean[4];
 
 	private int petalsLeft = 4, lastPetalsLeft = 4;
 
@@ -84,7 +85,11 @@ public class EntityAechorPlant extends EntityAetherMob
 		this.setPlantSize(this.rand.nextInt(3) + 1);
 
 		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(3.0F);
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(26);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(15.0D);
+
+		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(4);
+		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(8);
+		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(8);
 	}
 
 	@Override

@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.items;
 
-import com.gildedgames.aether.common.ReflectionAether;
+import com.gildedgames.aether.api.ReflectionAether;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderItem;

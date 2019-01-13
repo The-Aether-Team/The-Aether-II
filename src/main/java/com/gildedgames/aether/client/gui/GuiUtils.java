@@ -2,6 +2,7 @@ package com.gildedgames.aether.client.gui;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -13,6 +14,12 @@ import java.util.List;
 
 public class GuiUtils
 {
+	private static final Gui DUMMY_GUI = new Gui();
+
+	public static void drawString(FontRenderer font, String line, int x, int y, int color)
+	{
+		DUMMY_GUI.drawString(font, line, x, y, color);
+	}
 
 	public static void drawGradientRect(double left, double top, double right, double bottom, int startColor, int endColor)
 	{

@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.living.passive;
 
+import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
 import net.minecraft.block.state.IBlockState;
@@ -55,6 +56,10 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 		final int min = 3;
 
 		this.setSproutSize(min + this.rand.nextInt(this.getMaxSproutSize() - min));
+
+		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(3);
+		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(6);
+		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(6);
 	}
 
 	@Override

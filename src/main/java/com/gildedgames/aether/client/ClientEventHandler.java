@@ -10,6 +10,7 @@ import com.gildedgames.aether.api.items.equipment.effects.EffectInstance;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectFactory;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectPool;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
+import com.gildedgames.aether.client.gui.DamageSystemOverlay;
 import com.gildedgames.aether.client.gui.GuiUtils;
 import com.gildedgames.aether.client.gui.PerformanceIngame;
 import com.gildedgames.aether.client.gui.misc.*;
@@ -66,6 +67,8 @@ public class ClientEventHandler
 {
 	private static final PerformanceIngame PERFORMANCE_LOGGER = new PerformanceIngame();
 
+	private static final DamageSystemOverlay DAMAGE_SYSTEM_OVERLAY = new DamageSystemOverlay();
+
 	private static final Minecraft mc = Minecraft.getMinecraft();
 
 	private static boolean DRAW_BLACK_SCREEN = false;
@@ -95,6 +98,11 @@ public class ClientEventHandler
 	public static boolean isFadingIn()
 	{
 		return DRAWING_BLACK_FADE_IN;
+	}
+
+	public static DamageSystemOverlay getDamageSystemOverlay()
+	{
+		return DAMAGE_SYSTEM_OVERLAY;
 	}
 
 	public static void drawBlackFade(double time)
@@ -203,6 +211,16 @@ public class ClientEventHandler
 				GuiIngameForge.left_height = 33;
 				GuiIngameForge.right_height = 33;
 			}
+
+			boolean atNecromancerInstance = mc.world.provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER;
+
+			if (atNecromancerInstance && (event.getType() == RenderGameOverlayEvent.ElementType.AIR
+					|| event.getType() == RenderGameOverlayEvent.ElementType.HEALTH
+					|| event.getType() == RenderGameOverlayEvent.ElementType.HEALTHMOUNT || event.getType() == RenderGameOverlayEvent.ElementType.ARMOR
+					|| event.getType() == RenderGameOverlayEvent.ElementType.FOOD || event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR))
+			{
+				event.setCanceled(true);
+			}
 		}
 	}
 
@@ -215,6 +233,20 @@ public class ClientEventHandler
 			{
 				GuiIngameForge.left_height = old_left_height;
 				GuiIngameForge.right_height = old_right_height;
+			}
+
+			boolean atNecromancerInstance = mc.world.provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER;
+
+			if (atNecromancerInstance && (event.getType() == RenderGameOverlayEvent.ElementType.AIR
+					|| event.getType() == RenderGameOverlayEvent.ElementType.HEALTH
+					|| event.getType() == RenderGameOverlayEvent.ElementType.HEALTHMOUNT || event.getType() == RenderGameOverlayEvent.ElementType.ARMOR
+					|| event.getType() == RenderGameOverlayEvent.ElementType.FOOD || event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR))
+			{
+				event.setCanceled(true);
+			}
+			else if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR)
+			{
+				DAMAGE_SYSTEM_OVERLAY.renderIcons(mc);
 			}
 		}
 	}
@@ -386,10 +418,14 @@ public class ClientEventHandler
 	}
 
 	@SubscribeEvent(priority = EventPriority.NORMAL)
+	public static void onRenderGuiPre(final RenderGameOverlayEvent.Pre event)
+	{
+
+	}
+
+	@SubscribeEvent(priority = EventPriority.NORMAL)
 	public static void onRenderGui(final RenderGameOverlayEvent event)
 	{
-		final Minecraft mc = Minecraft.getMinecraft();
-
 		final ScaledResolution scaledRes = new ScaledResolution(mc);
 
 		if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR)

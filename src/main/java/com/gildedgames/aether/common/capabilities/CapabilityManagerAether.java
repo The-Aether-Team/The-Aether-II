@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.capabilities;
 
 import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
-import com.gildedgames.aether.api.damagetypes.DamageTypeAttributes;
 import com.gildedgames.aether.api.entity.IEntityInfo;
 import com.gildedgames.aether.api.entity.spawning.ISpawningInfo;
 import com.gildedgames.aether.api.player.IPlayerAether;
@@ -58,14 +57,6 @@ public class CapabilityManagerAether
 		if (event.getObject() instanceof EntityLivingBase)
 		{
 			EntityLivingBase living = (EntityLivingBase) event.getObject();
-
-			living.getAttributeMap().registerAttribute(DamageTypeAttributes.SLASH_DAMAGE_LEVEL);
-			living.getAttributeMap().registerAttribute(DamageTypeAttributes.PIERCE_DAMAGE_LEVEL);
-			living.getAttributeMap().registerAttribute(DamageTypeAttributes.IMPACT_DAMAGE_LEVEL);
-
-			living.getAttributeMap().registerAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL);
-			living.getAttributeMap().registerAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL);
-			living.getAttributeMap().registerAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL);
 
 			event.addCapability(AetherCore.getResource("Info"), new EntityInfoProvider((EntityLivingBase) event.getObject()));
 		}

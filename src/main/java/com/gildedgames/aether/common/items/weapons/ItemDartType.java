@@ -2,17 +2,20 @@ package com.gildedgames.aether.common.items.weapons;
 
 public enum ItemDartType
 {
-	GOLDEN(1.5f, "golden"),
-	ENCHANTED(2.0f, "enchanted"),
-	POISON(1.5f, "poison");
+	GOLDEN(0, 3, 0, "golden"),
+	ENCHANTED(0, 6, 0, "enchanted"),
+	POISON(0, 5, 0, "poison");
 
-	private final float damage;
+	private final int slashDamageLevel, pierceDamageLevel, impactDamageLevel;
 
 	private final String id;
 
-	ItemDartType(float damage, String id)
+	ItemDartType(int slashDamageLevel, int pierceDamageLevel, int impactDamageLevel, String id)
 	{
-		this.damage = damage;
+		this.slashDamageLevel = slashDamageLevel;
+		this.pierceDamageLevel = pierceDamageLevel;
+		this.impactDamageLevel = impactDamageLevel;
+
 		this.id = id;
 	}
 
@@ -23,9 +26,19 @@ public enum ItemDartType
 		return darts[ordinal > darts.length || ordinal < 0 ? 0 : ordinal];
 	}
 
-	public float getDamage()
+	public int getSlashDamageLevel()
 	{
-		return this.damage;
+		return this.slashDamageLevel;
+	}
+
+	public int getPierceDamageLevel()
+	{
+		return this.pierceDamageLevel;
+	}
+
+	public int getImpactDamageLevel()
+	{
+		return this.impactDamageLevel;
 	}
 
 	public String getID()

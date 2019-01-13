@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common;
+package com.gildedgames.aether.api;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -29,6 +29,8 @@ public class ReflectionAether
 	public static final ReflectionEntry ENTITY_RENDERER_LIGHTMAP_TEXTURE = new ReflectionEntry("lightmapTexture", "field_78513_d");
 
 	public static final ReflectionEntry ENTITY_RENDERER_TORCH_FLICKER_X = new ReflectionEntry("torchFlickerX", "field_78514_e");
+
+	public static final ReflectionEntry IS_UNBLOCKABLE = new ReflectionEntry("isUnblockable", "field_76374_o");
 
 	public static Field getField(final Class clazz, final String... names)
 	{

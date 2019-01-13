@@ -1,7 +1,7 @@
 package com.gildedgames.aether.client.gui;
 
+import com.gildedgames.aether.api.ReflectionAether;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.ReflectionAether;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;

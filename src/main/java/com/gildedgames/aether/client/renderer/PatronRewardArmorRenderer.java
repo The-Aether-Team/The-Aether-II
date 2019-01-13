@@ -1,5 +1,6 @@
 package com.gildedgames.aether.client.renderer;
 
+import com.gildedgames.aether.api.ReflectionAether;
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.api.patron.IPatronRewardRenderer;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
@@ -7,7 +8,6 @@ import com.gildedgames.aether.client.models.entities.player.LayerAetherPatronArm
 import com.gildedgames.aether.client.models.entities.player.LayerAetherPlayerGloves;
 import com.gildedgames.aether.client.models.entities.player.LayerArmorProxy;
 import com.gildedgames.aether.client.models.entities.player.LayerHeadShadow;
-import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.patron.armor.PatronRewardArmor;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
