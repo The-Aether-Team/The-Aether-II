@@ -172,11 +172,11 @@ public class BlocksAether
 
 	public static final BlockAetherLog light_skyroot_log = new BlockAetherLog();
 
-	public static final BlockAetherLeaves blue_light_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.BLUE_SKYROOT.getMeta());
+	public static final BlockAetherLeaves blue_light_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.WISPROOT_BLUE.getMeta());
 
-	public static final BlockAetherLeaves green_light_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.GREEN_SKYROOT.getMeta());
+	public static final BlockAetherLeaves green_light_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.WISPROOT_GREEN.getMeta());
 
-	public static final BlockAetherLeaves dark_blue_light_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.DARK_BLUE_SKYROOT.getMeta());
+	public static final BlockAetherLeaves dark_blue_light_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.WISPROOT_DARK_BLUE.getMeta());
 
 	public static final BlockAetherLeaves mutant_tree_leaves = new BlockAetherLeaves(BlockAetherSapling.MUTANT_TREE.getMeta());
 
@@ -184,7 +184,7 @@ public class BlocksAether
 
 	public static final BlockAetherLog golden_oak_log = new BlockGoldenOakLog();
 
-	public static final BlockAetherLeaves golden_oak_leaves = new BlockAetherLeaves(BlockAetherSapling.GOLDEN_OAK.getMeta());
+	public static final BlockAetherLeaves amberoot_leaves = new BlockAetherLeaves(BlockAetherSapling.AMBEROOT.getMeta());
 
 	public static final BlockAetherPortal aether_portal = new BlockAetherPortal();
 
@@ -471,7 +471,7 @@ public class BlocksAether
 		r.register("mutant_leaves_decorated", mutant_tree_leaves_decorated.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
 		r.register("golden_oak_log", golden_oak_log.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
-		r.register("golden_oak_leaves", golden_oak_leaves.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		r.register("amberoot_leaves", amberoot_leaves.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
 		r.register("woven_sticks", woven_sticks.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
@@ -696,7 +696,7 @@ public class BlocksAether
 		Blocks.FIRE.setFireInfo(green_skyroot_leaves, 30, 60);
 		Blocks.FIRE.setFireInfo(blue_skyroot_leaves, 30, 60);
 		Blocks.FIRE.setFireInfo(dark_blue_skyroot_leaves, 30, 60);
-		Blocks.FIRE.setFireInfo(golden_oak_leaves, 30, 60);
+		Blocks.FIRE.setFireInfo(amberoot_leaves, 30, 60);
 		Blocks.FIRE.setFireInfo(blue_dark_skyroot_leaves, 30, 60);
 		Blocks.FIRE.setFireInfo(dark_blue_dark_skyroot_leaves, 30, 60);
 		Blocks.FIRE.setFireInfo(green_dark_skyroot_leaves, 30, 60);

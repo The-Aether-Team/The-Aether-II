@@ -28,17 +28,28 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
+/*
+ * TODO: Saplings has run out of metadata values.
+ * TODO: This class needs to be abstracted with an abstract method that provides PropertyVariant
+ * TODO: Each Sapling should be a subclass.
+ ( TODO: Each subclass should implement their own variants in this method.
+ */
+
 public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, IBlockMultiName
 {
 	public static final BlockVariant
 			BLUE_SKYROOT = new BlockVariant(0, "blue_skyroot"),
 			GREEN_SKYROOT = new BlockVariant(1, "green_skyroot"),
 			DARK_BLUE_SKYROOT = new BlockVariant(2, "dark_blue_skyroot"),
-			GOLDEN_OAK = new BlockVariant(3, "golden_oak"),
-			MUTANT_TREE = new BlockVariant(4, "mutant_tree"); // Edison's Crazy Mutant Tree (christmas exclusive).
+			AMBEROOT = new BlockVariant(3, "amberoot"),
+			MUTANT_TREE = new BlockVariant(4, "mutant_tree"),
+			WISPROOT_GREEN = new BlockVariant(5, "wisproot_green"),
+			WISPROOT_BLUE = new BlockVariant(6, "wisproot_blue"),
+			WISPROOT_DARK_BLUE = new BlockVariant(7, "wisproot_dark_blue");
 
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant
-			.create("variant", BLUE_SKYROOT, GREEN_SKYROOT, DARK_BLUE_SKYROOT, GOLDEN_OAK, MUTANT_TREE);
+			.create("variant", BLUE_SKYROOT, GREEN_SKYROOT, DARK_BLUE_SKYROOT, AMBEROOT, MUTANT_TREE,
+					WISPROOT_GREEN, WISPROOT_BLUE, WISPROOT_DARK_BLUE);
 
 	public static final PropertyInteger PROPERTY_STAGE = PropertyInteger.create("stage", 0, 1);
 
@@ -91,46 +102,62 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 		{
 			final int meta = state.getValue(PROPERTY_VARIANT).getMeta();
 
-			BlueprintDefinition tree = null;
+			BlockPos adjustedPos;
+
+			BlueprintDefinition tree;
 
 			if (meta == BLUE_SKYROOT.getMeta())
 			{
 				tree = GenerationAether.SKYROOT_OAK_BLUE;
+				adjustedPos = new BlockPos(pos.getX() - 4, pos.getY(), pos.getZ() - 4);
 			}
 			else if (meta == GREEN_SKYROOT.getMeta())
 			{
 				tree = GenerationAether.SKYROOT_OAK_GREEN;
+				adjustedPos = new BlockPos(pos.getX() - 4, pos.getY(), pos.getZ() - 4);
 			}
-			else if (meta == GOLDEN_OAK.getMeta())
+			else if (meta == AMBEROOT.getMeta())
 			{
 				tree = GenerationAether.AMBEROOT_TREE;
+				adjustedPos = new BlockPos(pos.getX() - 8, pos.getY(), pos.getZ() - 6);
 			}
 			else if (meta == DARK_BLUE_SKYROOT.getMeta())
 			{
 				tree = GenerationAether.SKYROOT_OAK_DARK_BLUE;
+				adjustedPos = new BlockPos(pos.getX() - 4, pos.getY(), pos.getZ() - 4);
 			}
 			else if (meta == MUTANT_TREE.getMeta())
 			{
 				tree = GenerationAether.CRAZY_MUTANT_TREE;
+				adjustedPos = new BlockPos(pos.getX() - 5, pos.getY(), pos.getZ() - 5);
 			}
+			else if (meta == WISPROOT_GREEN.getMeta())
+			{
+				tree = GenerationAether.WISPROOT_GREEN;
+				adjustedPos = new BlockPos(pos.getX() - 8, pos.getY(), pos.getZ() - 8);
+			}
+			else if (meta == WISPROOT_BLUE.getMeta())
+			{
+				tree = GenerationAether.WISPROOT_BLUE;
+				adjustedPos = new BlockPos(pos.getX() - 8, pos.getY(), pos.getZ() - 8);
+			}
+			else if (meta == WISPROOT_DARK_BLUE.getMeta())
+			{
+				tree = GenerationAether.WISPROOT_DARK_BLUE;
+				adjustedPos = new BlockPos(pos.getX() - 8, pos.getY(), pos.getZ() - 8);
+			}
+			else
+			{
+				tree = null;
+				adjustedPos = pos;
+			}
+
 
 			if (tree != null)
 			{
 				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 4);
 
 				BakedBlueprint baked = new BakedBlueprint(tree.getData(), new CreationData(world).pos(BlockPos.ORIGIN).placesAir(false).placesVoid(false));
-
-				// Offset trees
-				BlockPos adjustedPos = new BlockPos(pos.getX() - 4, pos.getY(), pos.getZ() - 4);
-
-				if (tree == GenerationAether.AMBEROOT_TREE)
-				{
-					adjustedPos = new BlockPos(pos.getX() - 8, pos.getY(), pos.getZ() - 6);
-				}
-				if (tree == GenerationAether.CRAZY_MUTANT_TREE)
-				{
-					adjustedPos = new BlockPos(pos.getX() - 5, pos.getY(), pos.getZ() - 5);
-				}
 
 				if (!BlueprintPlacer.place(world, baked, tree.getConditions(), adjustedPos, true))
 				{

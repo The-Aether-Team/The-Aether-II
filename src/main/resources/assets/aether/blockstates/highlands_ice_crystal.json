@@ -1,10 +1,24 @@
 {
 	"variants": {
 		"variant=stalagmite": {
-			"model": "aether:highlands_ice_crystal"
+			"model": "aether:crystals/highlands_ice_crystal"
+		},
+		"variant=stalagmite_a": {
+			"model": "aether:crystals/highlands_ice_crystal_a"
+		},
+		"variant=stalagmite_b": {
+			"model": "aether:crystals/highlands_ice_crystal_b"
 		},
 		"variant=stalactite": {
-			"model": "aether:highlands_ice_crystal",
+			"model": "aether:crystals/highlands_ice_crystal",
+			"x": 180
+		},
+		"variant=stalactite_a": {
+			"model": "aether:crystals/highlands_ice_crystal_a",
+			"x": 180
+		},
+		"variant=stalactite_b": {
+			"model": "aether:crystals/highlands_ice_crystal_b",
 			"x": 180
 		}
 	}

@@ -146,7 +146,7 @@ public class ItemCrossbow extends Item
 		stack.getTagCompound().setInteger("boltType", type.ordinal());
 	}
 
-	public static boolean hasAmmo(final EntityPlayer player)
+	private boolean hasAmmo(final EntityPlayer player)
 	{
 		final ItemStack boltStack = player.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND);
 
@@ -187,7 +187,7 @@ public class ItemCrossbow extends Item
 
 		if (!ItemCrossbow.isLoaded(stack))
 		{
-			if (hasAmmo(playerIn))
+			if (this.hasAmmo(playerIn))
 			{
 				playerIn.setActiveHand(EnumHand.MAIN_HAND);
 			}
@@ -213,27 +213,33 @@ public class ItemCrossbow extends Item
 					bolt1 = null,
 					bolt2 = null;
 
+
 			// calculate bolts that are special is being loaded.
 			if (this.isSpecialLoaded)
 			{
+				float specialShotMultiplier = this.cBType.damageMultiplier * this.cBType.specialMultiplier; // bolt damage multiplier gets applied in #creatBolt
+				if (specialShotMultiplier < 1) {
+					specialShotMultiplier = 1;
+				}
+
 				if (this.cBType == crossBowTypes.SKYROOT)
 				{
-					bolt0 = this.createBolt(entityLiving, speed, 0, 0, 0, this.cBType.damageMultiplier, boltType);
-					bolt1 = this.createBolt(entityLiving, speed, 0, 0, 0, this.cBType.damageMultiplier, boltType);
+					bolt0 = this.createBolt(entityLiving, speed, 0, 0, 0, specialShotMultiplier, boltType);
+					bolt1 = this.createBolt(entityLiving, speed, 0, 0, 0, specialShotMultiplier, boltType);
 				}
 				else if (this.cBType == crossBowTypes.HOLYSTONE)
 				{
-					bolt0 = this.createBolt(entityLiving, speed / 2, 0, 0, 0, this.cBType.damageMultiplier, boltType);
-					bolt1 = this.createBolt(entityLiving, speed / 2, 10, 0, 0, this.cBType.damageMultiplier, boltType);
-					bolt2 = this.createBolt(entityLiving, speed / 2, -10, 0, 0, this.cBType.damageMultiplier, boltType);
+					bolt0 = this.createBolt(entityLiving, speed / 2, 0, 0, 0, specialShotMultiplier, boltType);
+					bolt1 = this.createBolt(entityLiving, speed / 2, 10, 0, 0, specialShotMultiplier, boltType);
+					bolt2 = this.createBolt(entityLiving, speed / 2, -10, 0, 0, specialShotMultiplier, boltType);
 				}
 				else if (this.cBType == crossBowTypes.ZANITE)
 				{
-					bolt0 = this.createBolt(entityLiving, speed, 0, 0, 0, 1.5F, boltType);
+					bolt0 = this.createBolt(entityLiving, speed, 0, 0, 0, specialShotMultiplier, boltType);
 				}
 				else if (this.cBType == crossBowTypes.ARKENIUM)
 				{
-					bolt0 = this.createBolt(entityLiving, speed * 2.5f, 0, -1, 0, 2.0f, boltType);
+					bolt0 = this.createBolt(entityLiving, speed * 2.5f, 0, -1, 0, specialShotMultiplier, boltType);
 				}
 				else if (this.cBType == crossBowTypes.GRAVETITE)
 				{
@@ -241,9 +247,10 @@ public class ItemCrossbow extends Item
 				}
 				else
 				{
-					bolt0 = this.createBolt(entityLiving, speed, 0, 0, -0.5f, this.cBType.damageMultiplier, boltType);
+					bolt0 = this.createBolt(entityLiving, speed, 0, 0, -0.5f, specialShotMultiplier, boltType);
 				}
 			}
+			// standard bolts
 			else
 			{
 				bolt0 = this.createBolt(entityLiving, speed, 0, 0, 0, this.cBType.damageMultiplier, boltType);
@@ -338,7 +345,7 @@ public class ItemCrossbow extends Item
 			final EntityPlayer player = (EntityPlayer) living;
 			final ItemStack boltStack = player.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND);
 
-			if (hasAmmo(player))
+			if (this.hasAmmo(player))
 			{
 				final float use = (float) (this.getMaxItemUseDuration(stack) - living.getItemInUseCount()) / 20.0F;
 				if (use == (this.durationInTicks / 20.0F))
@@ -462,21 +469,24 @@ public class ItemCrossbow extends Item
 
 	public enum crossBowTypes
 	{
-		SKYROOT(1F, 200, "skyroot_crossbow"),
-		HOLYSTONE(1.2F, 250, "holystone_crossbow"),
-		ZANITE(1.3F, 300, "zanite_crossbow"),
-		ARKENIUM(1.4F, 400, "arkenium_crossbow"),
-		GRAVETITE(1.6F, 350, "gravitite_crossbow");
+		SKYROOT(1F, 1.f,200, "skyroot_crossbow"),
+		HOLYSTONE(1.2F, 1.f,250, "holystone_crossbow"),
+		ZANITE(1.3F, 1.5f,300, "zanite_crossbow"),
+		ARKENIUM(1.4F, 2.0f,400, "arkenium_crossbow"),
+		GRAVETITE(1.6F, 1.f,350, "gravitite_crossbow");
 
 		final float damageMultiplier;
+
+		final float specialMultiplier;
 
 		final int maxDurability;
 
 		final String name;
 
-		crossBowTypes(float damageMultiplier, int maxDurability, String name)
+		crossBowTypes(float damageMultiplier, float specialMultiplier, int maxDurability, String name)
 		{
 			this.damageMultiplier = damageMultiplier;
+			this.specialMultiplier = specialMultiplier;
 			this.maxDurability = maxDurability;
 			this.name = name;
 		}

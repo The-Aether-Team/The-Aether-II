@@ -99,7 +99,7 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 			return;
 		}
 
-		if (this == BlocksAether.golden_oak_leaves)
+		if (this == BlocksAether.amberoot_leaves)
 		{
 			if (rand.nextInt(100) > 90)
 			{

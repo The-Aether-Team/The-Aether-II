@@ -43,7 +43,7 @@ public class ParticleLeaf extends Particle
 			this.particleGreen = 0.753f;
 			this.particleBlue = 0.522f;
 		}
-		else if (block == BlocksAether.golden_oak_leaves)
+		else if (block == BlocksAether.amberoot_leaves)
 		{
 			this.particleRed = 0.976f;
 			this.particleGreen = 0.745f;

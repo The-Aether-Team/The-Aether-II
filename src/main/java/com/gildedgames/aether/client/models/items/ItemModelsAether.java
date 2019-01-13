@@ -126,7 +126,7 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.green_light_skyroot_leaves, "leaves/green_light_skyroot_leaves");
 		registerItemModels(BlocksAether.dark_blue_light_skyroot_leaves, "leaves/dark_blue_light_skyroot_leaves");
 
-		registerItemModels(BlocksAether.golden_oak_leaves, "leaves/golden_oak_leaves");
+		registerItemModels(BlocksAether.amberoot_leaves, "leaves/amberoot_leaves");
 
 		registerItemModels(BlocksAether.mutant_tree_leaves, "leaves/mutant_leaves");
 		registerItemModels(BlocksAether.mutant_tree_leaves_decorated, "leaves/mutant_leaves_decorated");
@@ -149,8 +149,11 @@ public class ItemModelsAether
 				.add(BlockAetherSapling.BLUE_SKYROOT.getMeta(), "blue_skyroot_sapling")
 				.add(BlockAetherSapling.GREEN_SKYROOT.getMeta(), "green_skyroot_sapling")
 				.add(BlockAetherSapling.DARK_BLUE_SKYROOT.getMeta(), "dark_blue_skyroot_sapling")
-				.add(BlockAetherSapling.GOLDEN_OAK.getMeta(), "golden_oak_sapling")
-				.add(BlockAetherSapling.MUTANT_TREE.getMeta(), "mutant_tree_sapling"));
+				.add(BlockAetherSapling.AMBEROOT.getMeta(), "amberoot_sapling")
+				.add(BlockAetherSapling.MUTANT_TREE.getMeta(), "mutant_tree_sapling")
+				.add(BlockAetherSapling.WISPROOT_GREEN.getMeta(), "green_wisproot_sapling")
+				.add(BlockAetherSapling.WISPROOT_BLUE.getMeta(), "blue_wisproot_sapling")
+				.add(BlockAetherSapling.WISPROOT_DARK_BLUE.getMeta(), "dark_blue_wisproot_sapling"));
 
 		registerItemModels(BlocksAether.holystone_furnace, new ItemModelBuilder("holystone_furnace/")
 				.add(BlockHolystoneFurnace.LIT_META, "holystone_furnace_lit")
@@ -635,7 +638,7 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.kirrid_cutlet, "kirrid_cutlet");
 		registerItemModels(ItemsAether.valkyrie_wings, "valkyrie_wings");
 
-		registerItemModels(BlocksAether.ice_crystal, "highlands_ice_crystal");
+		registerItemModels(BlocksAether.ice_crystal, "crystals/highlands_ice_crystal");
 		registerItemModels(BlocksAether.candy_cane_block, "candy_cane_block");
 		registerItemModels(BlocksAether.candy_cane_wall, "aether_wall/candy_cane_wall");
 		registerItemModels(ItemsAether.winter_hat, "miscellaneous/winter_hat");

@@ -17,9 +17,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
@@ -32,15 +30,28 @@ import java.util.Random;
 
 public class BlockIceCrystal extends BlockBuilder implements IBlockMultiName
 {
+	public static final int CRYSTAL_META = 0;
+	public static final int CRYSTAL_A_META = 1;
+	public static final int CRYSTAL_B_META = 2;
+
 	public static final BlockVariant
 			STALAGMITE = new BlockVariant(0, "stalagmite"),
-			STALACTITE = new BlockVariant(1, "stalactite");
+			STALAGMITE_A = new BlockVariant(1, "stalagmite_a"),
+			STALAGMITE_B = new BlockVariant(2, "stalagmite_b"),
+			STALACTITE = new BlockVariant(3, "stalactite"),
+			STALACTITE_A = new BlockVariant(4, "stalactite_a"),
+			STALACTITE_B = new BlockVariant(5, "stalactite_b");
 
-	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", STALAGMITE, STALACTITE);
+	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant",
+			STALAGMITE, STALAGMITE_A, STALAGMITE_B, STALACTITE, STALACTITE_A, STALACTITE_B);
 
 	private static final AxisAlignedBB STALACTITE_BB = new AxisAlignedBB(0.25D, 0.25D, 0.25D, 0.75D, 1D, 0.75D);
 
+	private static final AxisAlignedBB STALACTITE_SHORT_BB = new AxisAlignedBB(0.25D, 0.5D, 0.25F, 0.75D, 1D, 0.75D);
+
 	private static final AxisAlignedBB STALAGMITE_BB = new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 1D, 0.75D);
+
+	private static final AxisAlignedBB STALAGMITE_SHORT_BB = new AxisAlignedBB(0.25D, 0.0D, 0.25F, 0.75D, 0.5D, 0.75D);
 
 	public BlockIceCrystal()
 	{
@@ -120,17 +131,28 @@ public class BlockIceCrystal extends BlockBuilder implements IBlockMultiName
 	}
 
 	@Override
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	{
+		if (playerIn.isCreative())
+		{
+			worldIn.setBlockState(pos, state.cycleProperty(PROPERTY_VARIANT));
+			return true;
+		}
+		return false;
+	}
+
+	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
 	{
 
-		if (state.getValue(PROPERTY_VARIANT) == STALACTITE)
+		if (state.getValue(PROPERTY_VARIANT) == STALACTITE || state.getValue(PROPERTY_VARIANT) == STALACTITE_A || state.getValue(PROPERTY_VARIANT) == STALACTITE_B)
 		{
 			if (worldIn.isAirBlock(pos.up()) || worldIn.getBlockState(pos.up()).getBlock() == Blocks.WATER)
 			{
 				worldIn.setBlockToAir(pos);
 			}
 		}
-		if (state.getValue(PROPERTY_VARIANT) == STALAGMITE)
+		if (state.getValue(PROPERTY_VARIANT) == STALAGMITE || state.getValue(PROPERTY_VARIANT) == STALAGMITE_A || state.getValue(PROPERTY_VARIANT) == STALAGMITE_B)
 		{
 			if (worldIn.isAirBlock(pos.down()) || worldIn.getBlockState(pos.down()).getBlock() == Blocks.WATER)
 			{
@@ -145,27 +167,35 @@ public class BlockIceCrystal extends BlockBuilder implements IBlockMultiName
 	{
 		if (hitY == 0)
 		{
-			return this.getDefaultState().withProperty(PROPERTY_VARIANT, STALACTITE);
+			return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta+3));
 		}
 
-		return this.getDefaultState().withProperty(PROPERTY_VARIANT, STALAGMITE);
+		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta));
 	}
 
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
-		if (state.getValue(PROPERTY_VARIANT).getMeta() == STALAGMITE.getMeta())
+		int meta = state.getValue(PROPERTY_VARIANT).getMeta();
+
+		if (meta == STALAGMITE.getMeta() || meta == STALAGMITE_A.getMeta() || meta == STALAGMITE_B.getMeta())
 		{
+			if (meta == STALAGMITE_B.getMeta()) {
+				return STALAGMITE_SHORT_BB;
+			}
 			return STALAGMITE_BB;
 		}
 
+		if (meta == STALACTITE_B.getMeta()) {
+			return STALACTITE_SHORT_BB;
+		}
 		return STALACTITE_BB;
 	}
 
 	@Override
 	public String getTranslationKey(ItemStack stack)
 	{
-		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
+		return PROPERTY_VARIANT.fromMeta(CRYSTAL_META).getName();
 	}
 
 	@Override

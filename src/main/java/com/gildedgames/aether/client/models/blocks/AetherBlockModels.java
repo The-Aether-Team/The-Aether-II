@@ -52,7 +52,7 @@ public class AetherBlockModels
 		ModelLoader.setCustomStateMapper(BlocksAether.blue_skyroot_leaves, leavesMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.green_skyroot_leaves, leavesMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.dark_blue_skyroot_leaves, leavesMapper);
-		ModelLoader.setCustomStateMapper(BlocksAether.golden_oak_leaves, leavesMapper);
+		ModelLoader.setCustomStateMapper(BlocksAether.amberoot_leaves, leavesMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.blue_dark_skyroot_leaves, leavesMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.green_dark_skyroot_leaves, leavesMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.dark_blue_dark_skyroot_leaves, leavesMapper);
