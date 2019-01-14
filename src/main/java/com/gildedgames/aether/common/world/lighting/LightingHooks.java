@@ -5,6 +5,7 @@ import com.gildedgames.aether.api.lighting.IChunkLightingData;
 import com.gildedgames.aether.api.lighting.ILightingEngine;
 import com.gildedgames.aether.api.lighting.ILightingEngineProvider;
 import com.gildedgames.aether.common.AetherCore;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagShort;
@@ -366,20 +367,38 @@ public class LightingHooks
 
 			for (int j = 0; j < extendedBlockStorage.length; ++j)
 			{
-				if (extendedBlockStorage[j] == Chunk.NULL_BLOCK_STORAGE)
+				final ExtendedBlockStorage storage = extendedBlockStorage[j];
+
+				if (storage == Chunk.NULL_BLOCK_STORAGE)
 				{
 					continue;
 				}
 
-				for (int x = 0; x < 16; ++x)
+				int yBase = j * 16;
+
+				for (int y = 0; y < 16; y++)
 				{
-					for (int z = 0; z < 16; ++z)
+					for (int z = 0; z < 16; z++)
 					{
-						for (int y = j << 4; y < (j + 1) << 4; ++y)
+						for (int x = 0; x < 16; x++)
 						{
-							if (chunk.getBlockState(x, y, z).getLightValue(world, pos.setPos(xBase + x, y, zBase + z)) > 0)
+							int key = storage.data.storage.getAt(y << 8 | z << 4 | x);
+
+							if (key != 0)
 							{
-								world.checkLightFor(EnumSkyBlock.BLOCK, pos);
+								IBlockState state = storage.data.palette.getBlockState(key);
+
+								if (state != null)
+								{
+									int light = state.getLightValue(world, pos);
+
+									if (light > 0)
+									{
+										pos.setPos(xBase + x, yBase + y, zBase + z);
+
+										world.checkLightFor(EnumSkyBlock.BLOCK, pos);
+									}
+								}
 							}
 						}
 					}
