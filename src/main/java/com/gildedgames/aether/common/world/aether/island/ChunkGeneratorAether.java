@@ -42,7 +42,7 @@ public class ChunkGeneratorAether implements IChunkGenerator
 
 		if (!this.world.isRemote)
 		{
-			this.world.setSeaLevel(255);
+			this.world.setSeaLevel(0);
 		}
 
 		this.rand = new Random(seed);
@@ -82,7 +82,7 @@ public class ChunkGeneratorAether implements IChunkGenerator
 
 		IChunkMaskTransformer transformer = islandData.getGenerator().createMaskTransformer(islandData, chunkX, chunkZ);
 
-		final ChunkDataContainer data = ChunkDataContainer.createFromChunkSegmentMasks(masks, transformer, chunkX, chunkZ);
+		final ChunkDataContainer data = ChunkDataContainer.createFromChunkSegmentMasks(this.world, masks, transformer, chunkX, chunkZ);
 
 		final BlockAccessChunkDataContainer blockAccess = new BlockAccessChunkDataContainer(this.world, data);
 

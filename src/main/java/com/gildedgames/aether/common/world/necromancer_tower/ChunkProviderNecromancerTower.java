@@ -30,7 +30,7 @@ public class ChunkProviderNecromancerTower implements IChunkGenerator
 
 		if (!this.world.isRemote)
 		{
-			this.world.setSeaLevel(255);
+			this.world.setSeaLevel(0);
 		}
 
 		this.random = new Random(seed);
@@ -55,7 +55,7 @@ public class ChunkProviderNecromancerTower implements IChunkGenerator
 
 		this.random.setSeed(chunkX * 0x4f9939f508L + chunkZ * 0x1ef1565bd5L);
 
-		final ChunkDataContainer blocks = new ChunkDataContainer(chunkX, chunkZ);
+		final ChunkDataContainer blocks = new ChunkDataContainer(chunkX, chunkZ, this.world.provider.hasSkyLight());
 
 		if (inst.getTower() != null)
 		{
