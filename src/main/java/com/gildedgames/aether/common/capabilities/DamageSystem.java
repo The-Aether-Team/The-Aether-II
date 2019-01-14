@@ -3,8 +3,12 @@ package com.gildedgames.aether.common.capabilities;
 import com.gildedgames.aether.api.damage_system.DamageSystemTables;
 import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
 import com.gildedgames.aether.api.damage_system.IDamageLevelsHolder;
+import com.gildedgames.aether.client.renderer.particles.AetherParticles;
+import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.network.packets.PacketParticles;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -63,9 +67,7 @@ public class DamageSystem
 				baseImpactDamageLevel = levelsHolder.getImpactDamageLevel();
 				basePierceDamageLevel = levelsHolder.getPierceDamageLevel();
 
-				float totalDamage = calculateTotalDamage(baseSlashDamageLevel, basePierceDamageLevel, baseImpactDamageLevel, event.getEntityLiving());
-
-				event.setAmount(totalDamage);
+				processTotalDamage(event, immediateSource, baseSlashDamageLevel, basePierceDamageLevel, baseImpactDamageLevel, event.getEntityLiving());
 
 				return;
 			}
@@ -87,14 +89,13 @@ public class DamageSystem
 				baseImpactDamageLevel = entitySource.getEntityAttribute(DamageTypeAttributes.IMPACT_DAMAGE_LEVEL).getAttributeValue();
 				basePierceDamageLevel = entitySource.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).getAttributeValue();
 
-				float totalDamage = calculateTotalDamage(baseSlashDamageLevel, basePierceDamageLevel, baseImpactDamageLevel, event.getEntityLiving());
-
-				event.setAmount(totalDamage);
+				processTotalDamage(event, entitySource, baseSlashDamageLevel, basePierceDamageLevel, baseImpactDamageLevel, event.getEntityLiving());
 			}
 		}
 	}
 
-	private static float calculateTotalDamage(double slashDamageLevel, double pierceDamageLevel, double impactDamageLevel, EntityLivingBase receiving)
+	private static void processTotalDamage(LivingHurtEvent event, Entity entitySource, double slashDamageLevel, double pierceDamageLevel,
+			double impactDamageLevel, EntityLivingBase receiving)
 	{
 		double slashDefenseLevel = receiving.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).getAttributeValue();
 		double impactDefenseLevel = receiving.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).getAttributeValue();
@@ -108,6 +109,32 @@ public class DamageSystem
 		double impactDamage = DamageSystemTables.getValueFromLevelRange(resultImpactDamageLevel);
 		double pierceDamage = DamageSystemTables.getValueFromLevelRange(resultPierceDamageLevel);
 
-		return (float) (slashDamage + impactDamage + pierceDamage);
+		float totalDamage = (float) (slashDamage + impactDamage + pierceDamage);
+
+		event.setAmount(totalDamage);
+
+		double offsetX = (double) (-MathHelper.sin(entitySource.rotationYaw * 0.017453292F));
+		double offsetZ = (double) MathHelper.cos(entitySource.rotationYaw * 0.017453292F);
+
+		double x = entitySource.posX + offsetX;
+		double y = entitySource.posY + (double) entitySource.height * 0.5D;
+		double z = entitySource.posZ + offsetZ;
+
+		if (slashDamageLevel > 0)
+		{
+			NetworkingAether.sendPacketToDimension(new PacketParticles(AetherParticles.SLASH, x, y, z, offsetX, 0.0D, offsetZ), entitySource.dimension);
+		}
+
+		if (pierceDamageLevel > 0)
+		{
+			NetworkingAether
+					.sendPacketToDimension(new PacketParticles(AetherParticles.PIERCE, x, y, z, offsetX, 0.0D, offsetZ), entitySource.dimension);
+		}
+
+		if (impactDamageLevel > 0)
+		{
+			NetworkingAether
+					.sendPacketToDimension(new PacketParticles(AetherParticles.IMPACT, x, y, z, offsetX, 0.0D, offsetZ), entitySource.dimension);
+		}
 	}
 }

@@ -5,6 +5,9 @@ import com.gildedgames.aether.client.gui.misc.CustomLoadingRenderer;
 import com.gildedgames.aether.client.gui.tab.TabEquipment;
 import com.gildedgames.aether.client.renderer.AetherRenderers;
 import com.gildedgames.aether.client.renderer.ClientRenderHandler;
+import com.gildedgames.aether.client.renderer.particles.ParticleImpact;
+import com.gildedgames.aether.client.renderer.particles.ParticlePierce;
+import com.gildedgames.aether.client.renderer.particles.ParticleSlash;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.CommonProxy;
 import com.gildedgames.aether.common.analytics.GameAnalytics;
@@ -24,6 +27,33 @@ import java.util.Random;
 
 public class ClientProxy extends CommonProxy
 {
+	@Override
+	public void spawnSlashParticleFrom(World world, double x, double y, double z, double offsetX, double offsetY, double offsetZ)
+	{
+		ParticleSlash effect = new ParticleSlash(Minecraft.getMinecraft().getTextureManager(), world, x,
+				y, z, offsetX, 0.0D, offsetZ);
+
+		Minecraft.getMinecraft().effectRenderer.addEffect(effect);
+	}
+
+	@Override
+	public void spawnPierceParticleFrom(World world, double x, double y, double z, double offsetX, double offsetY, double offsetZ)
+	{
+		ParticlePierce effect = new ParticlePierce(Minecraft.getMinecraft().getTextureManager(), world, x,
+				y, z, offsetX, 0.0D, offsetZ);
+
+		Minecraft.getMinecraft().effectRenderer.addEffect(effect);
+	}
+
+	@Override
+	public void spawnImpactParticleFrom(World world, double x, double y, double z, double offsetX, double offsetY, double offsetZ)
+	{
+		ParticleImpact effect = new ParticleImpact(Minecraft.getMinecraft().getTextureManager(), world, x,
+				y, z, offsetX, 0.0D, offsetZ);
+
+		Minecraft.getMinecraft().effectRenderer.addEffect(effect);
+	}
+
 	@Override
 	public void turnOffScreen()
 	{

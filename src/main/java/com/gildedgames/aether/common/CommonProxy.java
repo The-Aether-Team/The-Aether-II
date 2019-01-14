@@ -128,6 +128,21 @@ public class CommonProxy implements IAetherServices
 
 	}
 
+	public void spawnSlashParticleFrom(World world, double x, double y, double z, double offsetX, double offsetY, double offsetZ)
+	{
+
+	}
+
+	public void spawnPierceParticleFrom(World world, double x, double y, double z, double offsetX, double offsetY, double offsetZ)
+	{
+
+	}
+
+	public void spawnImpactParticleFrom(World world, double x, double y, double z, double offsetX, double offsetY, double offsetZ)
+	{
+
+	}
+
 	public File getConfigDir()
 	{
 		return this.configDir;
