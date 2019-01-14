@@ -19,6 +19,7 @@ import com.gildedgames.aether.common.blocks.multiblock.BlockMultiDummyHalf;
 import com.gildedgames.aether.common.blocks.natural.*;
 import com.gildedgames.aether.common.blocks.natural.ores.*;
 import com.gildedgames.aether.common.blocks.natural.plants.*;
+import com.gildedgames.aether.common.blocks.natural.plants.saplings.*;
 import com.gildedgames.aether.common.blocks.util.*;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.blocks.ItemBlockMultiName;
@@ -156,35 +157,35 @@ public class BlocksAether
 
 	public static final BlockAetherLog skyroot_log = new BlockAetherLog();
 
-	public static final BlockAetherLeaves blue_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.BLUE_SKYROOT.getMeta());
+	public static final BlockAetherLeaves blue_skyroot_leaves = new BlockAetherLeaves(BlockAetherSkyrootSapling.BLUE_SKYROOT.getMeta());
 
-	public static final BlockAetherLeaves green_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.GREEN_SKYROOT.getMeta());
+	public static final BlockAetherLeaves green_skyroot_leaves = new BlockAetherLeaves(BlockAetherSkyrootSapling.GREEN_SKYROOT.getMeta());
 
-	public static final BlockAetherLeaves dark_blue_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.DARK_BLUE_SKYROOT.getMeta());
+	public static final BlockAetherLeaves dark_blue_skyroot_leaves = new BlockAetherLeaves(BlockAetherSkyrootSapling.DARK_BLUE_SKYROOT.getMeta());
 
 	public static final BlockAetherLog dark_skyroot_log = new BlockAetherLog();
 
-	public static final BlockAetherLeaves blue_dark_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.BLUE_SKYROOT.getMeta());
+	public static final BlockAetherLeaves blue_dark_skyroot_leaves = new BlockAetherLeaves(BlockAetherGreatrootSapling.BLUE_GREATROOT.getMeta());
 
-	public static final BlockAetherLeaves green_dark_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.GREEN_SKYROOT.getMeta());
+	public static final BlockAetherLeaves green_dark_skyroot_leaves = new BlockAetherLeaves(BlockAetherGreatrootSapling.GREEN_GREATROOT.getMeta());
 
-	public static final BlockAetherLeaves dark_blue_dark_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.DARK_BLUE_SKYROOT.getMeta());
+	public static final BlockAetherLeaves dark_blue_dark_skyroot_leaves = new BlockAetherLeaves(BlockAetherGreatrootSapling.DARK_BLUE_GREATROOT.getMeta());
 
 	public static final BlockAetherLog light_skyroot_log = new BlockAetherLog();
 
-	public static final BlockAetherLeaves blue_light_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.WISPROOT_BLUE.getMeta());
+	public static final BlockAetherLeaves blue_light_skyroot_leaves = new BlockAetherLeaves(BlockAetherWisprootSapling.BLUE_WISPROOT.getMeta());
 
-	public static final BlockAetherLeaves green_light_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.WISPROOT_GREEN.getMeta());
+	public static final BlockAetherLeaves green_light_skyroot_leaves = new BlockAetherLeaves(BlockAetherWisprootSapling.GREEN_WISPROOT.getMeta());
 
-	public static final BlockAetherLeaves dark_blue_light_skyroot_leaves = new BlockAetherLeaves(BlockAetherSapling.WISPROOT_DARK_BLUE.getMeta());
+	public static final BlockAetherLeaves dark_blue_light_skyroot_leaves = new BlockAetherLeaves(BlockAetherWisprootSapling.DARK_BLUE_WISPROOT.getMeta());
 
-	public static final BlockAetherLeaves mutant_tree_leaves = new BlockAetherLeaves(BlockAetherSapling.MUTANT_TREE.getMeta());
+	public static final BlockAetherLeaves mutant_tree_leaves = new BlockAetherLeaves(BlockAetherUniqueSapling.MUTANT_TREE.getMeta());
 
-	public static final Block mutant_tree_leaves_decorated = new BlockAetherLeaves(BlockAetherSapling.MUTANT_TREE.getMeta()).setLightLevel(1f);
+	public static final Block mutant_tree_leaves_decorated = new BlockAetherLeaves(BlockAetherUniqueSapling.MUTANT_TREE.getMeta()).setLightLevel(1f);
 
 	public static final BlockAetherLog golden_oak_log = new BlockGoldenOakLog();
 
-	public static final BlockAetherLeaves amberoot_leaves = new BlockAetherLeaves(BlockAetherSapling.AMBEROOT.getMeta());
+	public static final BlockAetherLeaves amberoot_leaves = new BlockAetherLeaves(BlockAetherUniqueSapling.AMBEROOT.getMeta());
 
 	public static final BlockAetherPortal aether_portal = new BlockAetherPortal();
 
@@ -222,7 +223,10 @@ public class BlocksAether
 
 	public static final Block gravitite_block = new BlockBuilder(Material.ROCK).setSoundType(SoundType.STONE).setHardness(5f);
 
-	public static final BlockAetherSapling aether_sapling = new BlockAetherSapling();
+	public static final BlockAetherSkyrootSapling aether_skyroot_sapling = new BlockAetherSkyrootSapling();
+	public static final BlockAetherUniqueSapling aether_unique_sapling = new BlockAetherUniqueSapling();
+	public static final BlockAetherWisprootSapling aether_wisproot_sapling = new BlockAetherWisprootSapling();
+	public static final BlockAetherGreatrootSapling aether_greatroot_sapling = new BlockAetherGreatrootSapling();
 
 	public static final BlockHolystoneFurnace holystone_furnace = new BlockHolystoneFurnace();
 
@@ -475,7 +479,10 @@ public class BlocksAether
 
 		r.register("woven_sticks", woven_sticks.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
-		r.register("aether_sapling", aether_sapling.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		r.register("skyroot_sapling", aether_skyroot_sapling.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		r.register("unique_sapling", aether_unique_sapling.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		r.register("wisproot_sapling", aether_wisproot_sapling.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		r.register("greatroot_sapling", aether_greatroot_sapling.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
 		r.register("aether_portal", aether_portal);
 

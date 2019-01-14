@@ -3,7 +3,8 @@ package com.gildedgames.aether.common.blocks.natural;
 import com.gildedgames.aether.client.renderer.particles.ParticleGolden;
 import com.gildedgames.aether.client.renderer.particles.ParticleLeaf;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherSapling;
+import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherSapling;
+import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherUniqueSapling;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
@@ -420,9 +421,26 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 
 			if (rand.nextInt(20) == 0)
 			{
-				if (this.saplingMeta != BlockAetherSapling.MUTANT_TREE.getMeta())
+				if (this != BlocksAether.mutant_tree_leaves || this != BlocksAether.mutant_tree_leaves_decorated)
 				{
-					stacks.add(new ItemStack(BlocksAether.aether_sapling, 1, this.saplingMeta));
+					if (this == BlocksAether.blue_skyroot_leaves || this == BlocksAether.green_skyroot_leaves || this == BlocksAether.dark_blue_skyroot_leaves)
+					{
+						stacks.add(new ItemStack(BlocksAether.aether_skyroot_sapling, 1, this.saplingMeta));
+					}
+
+					if (this == BlocksAether.amberoot_leaves)
+					{
+						stacks.add(new ItemStack(BlocksAether.aether_unique_sapling, 1, this.saplingMeta));
+					}
+
+					if (this == BlocksAether.blue_light_skyroot_leaves || this == BlocksAether.green_light_skyroot_leaves || this == BlocksAether.dark_blue_light_skyroot_leaves)
+					{
+						stacks.add(new ItemStack(BlocksAether.aether_wisproot_sapling, 1, this.saplingMeta));
+					}
+					if (this == BlocksAether.green_dark_skyroot_leaves || this == BlocksAether.blue_dark_skyroot_leaves || this == BlocksAether.dark_blue_dark_skyroot_leaves)
+					{
+						stacks.add(new ItemStack(BlocksAether.aether_greatroot_sapling, 1, this.saplingMeta));
+					}
 				}
 			}
 		}

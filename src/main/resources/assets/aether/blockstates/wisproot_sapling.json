@@ -1,0 +1,13 @@
+{
+	"variants": {
+		"variant=wisproot_green": {
+			"model": "aether:saplings/green_wisproot_sapling"
+		},
+		"variant=wisproot_blue": {
+			"model": "aether:saplings/blue_wisproot_sapling"
+		},
+		"variant=wisproot_dark_blue": {
+			"model": "aether:saplings/dark_blue_wisproot_sapling"
+		}
+	}
+}

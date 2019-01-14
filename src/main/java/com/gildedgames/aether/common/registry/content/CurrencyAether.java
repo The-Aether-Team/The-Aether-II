@@ -68,7 +68,9 @@ public class CurrencyAether
 		c.registerValue(new ItemStack(BlocksAether.quicksoil, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(2).flush(), ShopCurrencyGilt.class);
 		c.registerValue(new ItemStack(BlocksAether.aercloud, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(5).flush(), ShopCurrencyGilt.class);
 		c.registerValue(new ItemStack(BlocksAether.ferrosite, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(3).flush(), ShopCurrencyGilt.class);
-		c.registerValue(new ItemStack(BlocksAether.aether_sapling, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(5).flush(), ShopCurrencyGilt.class);
+		c.registerValue(new ItemStack(BlocksAether.aether_skyroot_sapling, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(5).flush(), ShopCurrencyGilt.class);
+		c.registerValue(new ItemStack(BlocksAether.aether_unique_sapling, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(5).flush(), ShopCurrencyGilt.class);
+		c.registerValue(new ItemStack(BlocksAether.aether_wisproot_sapling, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(5).flush(), ShopCurrencyGilt.class);
 		c.registerValue(new ItemStack(BlocksAether.aether_flower, 1, BlockAetherFlower.WHITE_ROSE.getMeta()), builder.gilt(5).flush(), ShopCurrencyGilt.class);
 		c.registerValue(new ItemStack(BlocksAether.aether_flower, 1, BlockAetherFlower.PURPLE_FLOWER.getMeta()), builder.gilt(5).flush(),
 				ShopCurrencyGilt.class);

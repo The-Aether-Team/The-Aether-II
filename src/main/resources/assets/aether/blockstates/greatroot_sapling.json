@@ -1,0 +1,13 @@
+{
+	"variants": {
+		"variant=green_greatroot": {
+			"model": "aether:saplings/green_greatroot_sapling"
+		},
+		"variant=blue_greatroot": {
+			"model": "aether:saplings/blue_greatroot_sapling"
+		},
+		"variant=dark_blue_greatroot": {
+			"model": "aether:saplings/dark_blue_greatroot_sapling"
+		}
+	}
+}

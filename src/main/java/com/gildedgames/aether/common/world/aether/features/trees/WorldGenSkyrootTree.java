@@ -77,7 +77,8 @@ public class WorldGenSkyrootTree extends WorldGenAbstractTree
 
 				final IBlockState rootState = worldIn.getBlockState(rootBlockPos);
 
-				final boolean isSoil = BlocksAether.aether_sapling.isSuitableSoilBlock(rootState);
+				// just using skyroot sapling since all tree's require the same soil blocks ATM.
+				final boolean isSoil = BlocksAether.aether_skyroot_sapling.isSuitableSoilBlock(rootState);
 
 				IBlockState state;
 
@@ -135,6 +136,9 @@ public class WorldGenSkyrootTree extends WorldGenAbstractTree
 	@Override
 	protected boolean canGrowInto(final Block block)
 	{
-		return super.canGrowInto(block) || block == BlocksAether.aether_sapling;
+		return super.canGrowInto(block) ||
+				block == BlocksAether.aether_skyroot_sapling ||
+				block == BlocksAether.aether_unique_sapling ||
+				block == BlocksAether.aether_wisproot_sapling;
 	}
 }
