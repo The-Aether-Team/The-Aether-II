@@ -8,6 +8,7 @@ import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTradeModule;
 import com.gildedgames.aether.common.containers.ContainerLoadingScreen;
 import com.gildedgames.aether.common.entities.living.mobs.EntityAechorPlant;
 import com.gildedgames.aether.common.entities.living.passive.EntityCarrionSprout;
@@ -43,6 +44,10 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
@@ -416,11 +421,16 @@ public class CommonEvents
 	{
 		if (event.getTarget() instanceof EntityCow && !((EntityCow) event.getTarget()).isChild())
 		{
-			final ItemStack stack = event.getEntityPlayer().inventory.getCurrentItem();
+			ItemStack main = event.getEntityLiving().getHeldItemMainhand();
+			ItemStack off = event.getEntityLiving().getHeldItemOffhand();
 
-			if (stack.getItem() == ItemsAether.skyroot_bucket)
+			if (main.getItem() == ItemsAether.skyroot_bucket)
 			{
-				PlayerUtil.fillBucketInHand(event.getEntityPlayer(), event.getItemStack(), new ItemStack(ItemsAether.skyroot_milk_bucket));
+				PlayerUtil.fillBucketInHand(event.getEntityPlayer(), main, new ItemStack(ItemsAether.skyroot_milk_bucket));
+			}
+			else if (off.getItem() == ItemsAether.skyroot_bucket)
+			{
+				PlayerUtil.fillBucketInHand(event.getEntityPlayer(), off, new ItemStack(ItemsAether.skyroot_milk_bucket));
 			}
 		}
 	}
