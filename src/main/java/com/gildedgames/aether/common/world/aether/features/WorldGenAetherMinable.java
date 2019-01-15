@@ -11,8 +11,6 @@ import java.util.Random;
 
 public class WorldGenAetherMinable
 {
-	private static final float PI = (float) Math.PI;
-
 	private final IBlockState oreBlock;
 
 	/** The number of blocks to generate. */
@@ -20,16 +18,19 @@ public class WorldGenAetherMinable
 
 	private final IBlockState[] predicate;
 
+	private final boolean emitsLight;
+
 	public WorldGenAetherMinable(final IBlockState state, final int blockCount, final IBlockState[] replaceableStates)
 	{
 		this.oreBlock = state;
 		this.numberOfBlocks = blockCount;
 		this.predicate = replaceableStates;
+		this.emitsLight = this.oreBlock.getLightValue() > 0;
 	}
 
 	public boolean generate(final WorldSlice slice, final Random rand, final BlockPos position)
 	{
-		final float f = rand.nextFloat() * PI;
+		final float f = rand.nextFloat() * (float) Math.PI;
 		final float fSin = MathHelper.sin(f);
 
 		final float d0 = ((position.getX() + 8) + fSin * this.numberOfBlocks / 8.0f);
@@ -48,7 +49,7 @@ public class WorldGenAetherMinable
 		while (attempts < this.numberOfBlocks)
 		{
 			final float radius = attempts / (float) this.numberOfBlocks;
-			final float radiusSin = MathHelper.sin(PI * radius);
+			final float radiusSin = MathHelper.sin((float) Math.PI * radius);
 
 			final float d6 = d0 + (d1 - d0) * radius;
 			final float d7 = d4 + (d5 - d4) * radius;
@@ -94,7 +95,7 @@ public class WorldGenAetherMinable
 
 									if (state.getMaterial() != Material.AIR && ArrayUtils.contains(this.predicate, state))
 									{
-										slice.replaceBlockState(nextPos, this.oreBlock, this.oreBlock.getLightValue() > 0);
+										slice.replaceBlockState(nextPos, this.oreBlock, this.emitsLight);
 									}
 								}
 							}

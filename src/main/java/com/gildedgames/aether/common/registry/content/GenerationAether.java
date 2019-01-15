@@ -328,7 +328,7 @@ public class GenerationAether
 						PlacementConditions.ignoreBlock(1, BlocksAether.quicksoil.getDefaultState()));
 		ABAND_HUMAN_HOUSE_1B = new BlueprintDefinition(BlueprintsAether.ABAND_HUMAN_HOUSE_1B, 5).setRegistry(registry)
 				.setConditions(PlacementConditions.onSpecificBlock(5, BlocksAether.aether_grass, BlocksAether.aether_dirt, BlocksAether.holystone),
-						PlacementConditions.replaceable(true, Material.ROCK, Material.GROUND, Material.GRASS, Material.AIR),
+						PlacementConditions.replaceable(Material.ROCK, Material.GROUND, Material.GRASS, Material.AIR),
 						PlacementConditions.ignoreBlock(5, BlocksAether.quicksoil.getDefaultState()));
 
 		SKYROOT_WATCHTOWER_1A = new BlueprintDefinition(BlueprintsAether.SKYROOT_WATCHTOWER_1A).setRegistry(registry).setConditions(structureConditions);
@@ -342,11 +342,11 @@ public class GenerationAether
 
 		WELL_1A = new BlueprintDefinition(BlueprintsAether.WELL_1A, 10).setRegistry(registry)
 				.setConditions(PlacementConditions.onSpecificBlock(10, BlocksAether.aether_grass, BlocksAether.aether_dirt, BlocksAether.holystone),
-						PlacementConditions.replaceable(true, Material.ROCK, Material.GROUND, Material.GRASS, Material.AIR),
+						PlacementConditions.replaceable(Material.ROCK, Material.GROUND, Material.GRASS, Material.AIR),
 						PlacementConditions.ignoreBlock(10, BlocksAether.quicksoil.getDefaultState()));
 		WELL_1B = new BlueprintDefinition(BlueprintsAether.WELL_1B, 11).setRegistry(registry)
 				.setConditions(PlacementConditions.onSpecificBlock(11, BlocksAether.aether_grass, BlocksAether.aether_dirt, BlocksAether.holystone),
-						PlacementConditions.replaceable(true, Material.ROCK, Material.GROUND, Material.GRASS, Material.AIR),
+						PlacementConditions.replaceable(Material.ROCK, Material.GROUND, Material.GRASS, Material.AIR),
 						PlacementConditions.ignoreBlock(11, BlocksAether.quicksoil.getDefaultState()));
 
 		GREATROOT_TREE = new BlueprintDefinition(BlueprintsAether.GREATROOT_TREE, 0).setRegistry(registry)
