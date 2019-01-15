@@ -6,8 +6,6 @@ import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
-import com.gildedgames.aether.common.blocks.natural.BlockAetherDirt;
-import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockValkyrieGrass;
@@ -48,9 +46,17 @@ import java.util.Random;
 public class BiomeAetherDecorator
 {
 
-	private final WorldGenAetherMinable genAmbrosium, genZanite, genGravitite, genIcestone, genArkenium, genQuicksoilOnGrass, genCoarseAetherDirtOnDirt, genCoarseAetherDirtOnHolystone;
+	private final WorldGenAetherMinable genAmbrosium;
 
-	private final WorldGenAetherMinable genMossyHolystone, genCrudeScatterglass;
+	private final WorldGenAetherMinable genZanite;
+
+	private final WorldGenAetherMinable genGravitite;
+
+	private final WorldGenAetherMinable genIcestone;
+
+	private final WorldGenAetherMinable genArkenium;
+
+	private final WorldGenAetherMinable genCrudeScatterglass;
 
 	private final WorldGenAetherFlowers genPurpleFlowers, genWhiteRoses, genBurstblossom, genAechorSprout;
 
@@ -77,18 +83,8 @@ public class BiomeAetherDecorator
 		this.genArkenium = new WorldGenAetherMinable(BlocksAether.arkenium_ore.getDefaultState(), 6, holystoneMatcher);
 
 		final BlockMatcher dirtMatcher = BlockMatcher.forBlock(BlocksAether.aether_dirt);
-
 		final BlockMatcher grassMatcher = BlockMatcher.forBlock(BlocksAether.aether_grass);
 
-		this.genCoarseAetherDirtOnDirt = new WorldGenAetherMinable(
-				BlocksAether.aether_dirt.getDefaultState().withProperty(BlockAetherDirt.PROPERTY_VARIANT, BlockAetherDirt.COARSE_DIRT), 22, dirtMatcher);
-		this.genCoarseAetherDirtOnHolystone = new WorldGenAetherMinable(
-				BlocksAether.aether_dirt.getDefaultState().withProperty(BlockAetherDirt.PROPERTY_VARIANT, BlockAetherDirt.COARSE_DIRT), 22, holystoneMatcher);
-
-		this.genQuicksoilOnGrass = new WorldGenAetherMinable(BlocksAether.quicksoil.getDefaultState(), 22, grassMatcher);
-
-		this.genMossyHolystone = new WorldGenAetherMinable(
-				BlocksAether.holystone.getDefaultState().withProperty(BlockHolystone.PROPERTY_VARIANT, BlockHolystone.MOSSY_HOLYSTONE), 20, holystoneMatcher);
 		this.genCrudeScatterglass = new WorldGenAetherMinable(BlocksAether.crude_scatterglass.getDefaultState(), 16, holystoneMatcher);
 
 		this.genPurpleFlowers = new WorldGenAetherFlowers(
@@ -295,6 +291,8 @@ public class BiomeAetherDecorator
 					island.getOpenAreaDecorationGenChance(), island.getForestTreeCountModifier());
 		}
 
+		BlockPos.PooledMutableBlockPos randomPos = BlockPos.PooledMutableBlockPos.retain();
+
 		if (TerrainGen.decorate(world, random, chunkPos, DecorateBiomeEvent.Decorate.EventType.CUSTOM))
 		{
 			// Moa Nests
@@ -318,7 +316,7 @@ public class BiomeAetherDecorator
 				y = random.nextInt(180) + 64;
 				z = random.nextInt(16) + 8;
 
-				this.genOrangeTree.generate(world, random, pos.add(x, y, z));
+				this.genOrangeTree.generate(world, random, translate(randomPos, pos, x, y, z));
 			}
 		}
 
@@ -333,7 +331,7 @@ public class BiomeAetherDecorator
 					y = random.nextInt(180) + 64;
 					z = random.nextInt(16) + 8;
 
-					this.genBlueberryBushes.generate(slice, random, pos.add(x, y, z));
+					this.genBlueberryBushes.generate(slice, random, translate(randomPos, pos, x, y, z));
 				}
 			}
 		}
@@ -349,7 +347,7 @@ public class BiomeAetherDecorator
 					y = random.nextInt(180) + 64;
 					z = random.nextInt(16) + 8;
 
-					this.genPurpleFlowers.generate(slice, random, pos.add(x, y, z));
+					this.genPurpleFlowers.generate(slice, random, translate(randomPos, pos, x, y, z));
 				}
 			}
 
@@ -360,7 +358,7 @@ public class BiomeAetherDecorator
 				y = random.nextInt(180) + 64;
 				z = random.nextInt(16) + 8;
 
-				this.genWhiteRoses.generate(slice, random, pos.add(x, y, z));
+				this.genWhiteRoses.generate(slice, random, translate(randomPos, pos, x, y, z));
 			}
 
 			// Burstblossom Generator
@@ -370,7 +368,7 @@ public class BiomeAetherDecorator
 				y = random.nextInt(180) + 64;
 				z = random.nextInt(16) + 8;
 
-				this.genBurstblossom.generate(slice, random, pos.add(x, y, z));
+				this.genBurstblossom.generate(slice, random, translate(randomPos, pos, x, y, z));
 			}
 
 			// Burstblossom Generator
@@ -380,7 +378,7 @@ public class BiomeAetherDecorator
 				y = random.nextInt(180) + 64;
 				z = random.nextInt(16) + 8;
 
-				this.genAechorSprout.generate(slice, random, pos.add(x, y, z));
+				this.genAechorSprout.generate(slice, random, translate(randomPos, pos, x, y, z));
 			}
 
 			// Kirrid Grass Generator
@@ -392,7 +390,7 @@ public class BiomeAetherDecorator
 					y = random.nextInt(180) + 64;
 					z = random.nextInt(16) + 8;
 
-					this.genKirridGrass.generate(slice, random, pos.add(x, y, z));
+					this.genKirridGrass.generate(slice, random, translate(randomPos, pos, x, y, z));
 				}
 			}
 
@@ -403,7 +401,7 @@ public class BiomeAetherDecorator
 				y = random.nextInt(180) + 64;
 				z = random.nextInt(16) + 8;
 
-				this.genBrettlPlant.generate(world, random, pos.add(x, y, z));
+				this.genBrettlPlant.generate(world, random, translate(randomPos, pos, x, y, z));
 			}
 
 			// Kirrid Grass Generator
@@ -415,7 +413,7 @@ public class BiomeAetherDecorator
 					y = random.nextInt(180) + 64;
 					z = random.nextInt(16) + 8;
 
-					this.genKirridGrass.generate(slice, random, pos.add(x, y, z));
+					this.genKirridGrass.generate(slice, random, translate(randomPos, pos, x, y, z));
 				}
 			}
 		}
@@ -431,10 +429,12 @@ public class BiomeAetherDecorator
 					y = random.nextInt(180) + 64;
 					z = random.nextInt(16) + 8;
 
-					this.genPlumproots.generate(slice, random, pos.add(x, y, z));
+					this.genPlumproots.generate(slice, random, translate(randomPos, pos, x, y, z));
 				}
 			}
 		}
+
+		randomPos.release();
 
 		this.generateClouds(world, random, new BlockPos(pos.getX(), 0, pos.getZ()));
 
@@ -452,23 +452,32 @@ public class BiomeAetherDecorator
 	private void generateMineable(final WorldGenAetherMinable minable, final WorldSlice world, final Random random, final BlockPos pos, final int minY,
 			final int maxY, final int attempts)
 	{
+		BlockPos.PooledMutableBlockPos randomPos = BlockPos.PooledMutableBlockPos.retain();
+
 		for (int count = 0; count < attempts; count++)
 		{
-			final BlockPos randomPos = pos.add(random.nextInt(16), random.nextInt(maxY - minY) + minY, random.nextInt(16));
+			translate(randomPos, pos, random.nextInt(16), random.nextInt(maxY - minY) + minY, random.nextInt(16));
 
 			minable.generate(world, random, randomPos);
 		}
+
+		randomPos.release();
 	}
 
 	private void generateCloud(final WorldGenAercloud gen, final World world, final BlockPos pos, final Random rand, final int rarity, final int width,
 			final int minY, final int maxY)
 	{
+		BlockPos.PooledMutableBlockPos randomPos = BlockPos.PooledMutableBlockPos.retain();
+
 		if (rand.nextInt(rarity) == 0)
 		{
-			final BlockPos nextPos = pos.add(rand.nextInt(width), minY + rand.nextInt(maxY - minY), rand.nextInt(width));
+			translate(randomPos, pos, rand.nextInt(width), minY + rand.nextInt(maxY - minY), rand.nextInt(width));
 
-			gen.generate(world, rand, nextPos);
+			gen.generate(world, rand, randomPos);
 		}
+
+		randomPos.release();
+
 	}
 
 	protected int nextInt(final Random random, final int i)
@@ -481,6 +490,11 @@ public class BiomeAetherDecorator
 		return random.nextInt(i);
 	}
 
+	private static BlockPos translate(BlockPos.PooledMutableBlockPos pos, BlockPos origin, int x, int y, int z)
+	{
+		return pos.setPos(origin.getX() + x, origin.getY() + y, origin.getZ() + z);
+	}
+
 	protected void generateOres(final WorldSlice slice, final Random random, final BlockPos pos)
 	{
 		this.generateMineable(this.genAmbrosium, slice, random, pos, 0, 256, 20);
@@ -488,16 +502,12 @@ public class BiomeAetherDecorator
 		this.generateMineable(this.genGravitite, slice, random, pos, 0, 50, 10);
 		this.generateMineable(this.genIcestone, slice, random, pos, 0, 256, 20);
 		this.generateMineable(this.genArkenium, slice, random, pos, 0, 70, 15);
-//		this.generateMineable(this.genCoarseAetherDirtOnDirt, slice, random, pos, 0, 128, 10);
-//		this.generateMineable(this.genCoarseAetherDirtOnHolystone, slice, random, pos, 0, 100, 10);
-//		this.generateMineable(this.genMossyHolystone, slice, random, pos, 0, 100, 25);
 		this.generateMineable(this.genCrudeScatterglass, slice, random, pos, 0, 110, 25);
 	}
 
 	protected void generateClouds(final World world, final Random random, final BlockPos pos)
 	{
 		this.generateCloud(this.genBlueAercloud, world, pos, random, 15, 16, 90, 130);
-		//		this.generateCloud(this.genColdFlatAercloud, world, pos, random, 10, 16, 32);
 		this.generateCloud(this.genColdColumbusAercloud, world, pos, random, 30, 16, 90, 130);
 
 		this.generateCloud(this.genPurpleAercloud, world, pos, random, 50, 4, 90, 130);
