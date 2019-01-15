@@ -41,9 +41,9 @@ public class WorldGenAetherFlowers
 		while (i < this.max)
 		{
 			randomPos.setPos(
-					pos.getX() + (rand.nextInt(8) - rand.nextInt(8)),
-					pos.getY() + (rand.nextInt(4) - rand.nextInt(4)),
-					pos.getZ() + (rand.nextInt(8) - rand.nextInt(8))
+					pos.getX() + (rand.nextInt(16) - 8),
+					pos.getY() + (rand.nextInt(8) - 4),
+					pos.getZ() + (rand.nextInt(16) - 8)
 			);
 
 			randomPosDown.setPos(randomPos);

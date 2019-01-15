@@ -60,9 +60,9 @@ public class WorldGenFloorPlacer extends WorldGenerator implements IWorldGen
 		for (int attempts = 0; attempts < 128; attempts++)
 		{
 			randomPos.setPos(
-					pos.getX() + (rand.nextInt(8) - rand.nextInt(8)),
-					pos.getY() + (rand.nextInt(4) - rand.nextInt(4)),
-					pos.getZ() + (rand.nextInt(8) - rand.nextInt(8))
+					pos.getX() + (rand.nextInt(16) - 8),
+					pos.getY() + (rand.nextInt(8) - 4),
+					pos.getZ() + (rand.nextInt(16) - 8)
 			);
 
 
