@@ -35,19 +35,32 @@ public class WorldGenAetherFlowers
 
 		int i = 0;
 
+		BlockPos.PooledMutableBlockPos randomPos = BlockPos.PooledMutableBlockPos.retain();
+		BlockPos.PooledMutableBlockPos randomPosDown = BlockPos.PooledMutableBlockPos.retain();
+
 		while (i < this.max)
 		{
-			final BlockPos randomPos = pos.add(
-					rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
+			randomPos.setPos(
+					pos.getX() + (rand.nextInt(8) - rand.nextInt(8)),
+					pos.getY() + (rand.nextInt(4) - rand.nextInt(4)),
+					pos.getZ() + (rand.nextInt(8) - rand.nextInt(8))
+			);
+
+			randomPosDown.setPos(randomPos);
+			randomPosDown.setY(randomPosDown.getY() - 1);
 
 			i++;
 
-			if ((this.canPlaceOn == null || this.canPlaceOn.apply(slice.getBlockState(randomPos.down())))
+			if ((this.canPlaceOn == null || this.canPlaceOn.apply(slice.getBlockState(randomPosDown)))
 					&& slice.isAirBlock(randomPos) && (randomPos.getY() < world.getActualHeight()) && this.state.getBlock().canPlaceBlockAt(world, randomPos))
 			{
 				world.setBlockState(randomPos, this.state, 2 | 16);
 			}
 		}
+
+		randomPos.release();
+		randomPosDown.release();
+
 
 		return true;
 	}

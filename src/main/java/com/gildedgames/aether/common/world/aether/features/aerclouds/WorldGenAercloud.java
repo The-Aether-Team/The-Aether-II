@@ -90,7 +90,7 @@ public class WorldGenAercloud extends WorldGenerator implements IWorldGen
 
 		for (final BlockPos block : transaction)
 		{
-			world.setBlockState(block, state, 3);
+			world.setBlockState(block, state, 2 | 16);
 		}
 
 		return true;

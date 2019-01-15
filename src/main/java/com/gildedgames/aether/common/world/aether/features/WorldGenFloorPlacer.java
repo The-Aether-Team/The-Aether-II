@@ -4,13 +4,12 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.orbis_api.processing.BlockAccessExtendedWrapper;
 import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
 import com.gildedgames.orbis_api.world.IWorldGen;
-import com.google.common.collect.Lists;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import org.apache.commons.lang3.ArrayUtils;
 
-import java.util.List;
 import java.util.Random;
 
 public class WorldGenFloorPlacer extends WorldGenerator implements IWorldGen
@@ -19,7 +18,7 @@ public class WorldGenFloorPlacer extends WorldGenerator implements IWorldGen
 
 	private final int amount;
 
-	private List<IBlockState> statesCanPlaceOn = Lists.newArrayList();
+	private IBlockState[] statesCanPlaceOn = new IBlockState[0];
 
 	public WorldGenFloorPlacer(final IBlockState... states)
 	{
@@ -34,7 +33,7 @@ public class WorldGenFloorPlacer extends WorldGenerator implements IWorldGen
 
 	public void setStatesToPlaceOn(final IBlockState... states)
 	{
-		this.statesCanPlaceOn = Lists.newArrayList(states);
+		this.statesCanPlaceOn = states;
 	}
 
 	@Override
@@ -44,37 +43,48 @@ public class WorldGenFloorPlacer extends WorldGenerator implements IWorldGen
 	}
 
 	@Override
-	public boolean generate(final IBlockAccessExtended blockAccess, final World world, final Random rand, BlockPos pos, final boolean centered)
+	public boolean generate(final IBlockAccessExtended access, final World world, final Random rand, BlockPos pos, final boolean centered)
 	{
-		if (!blockAccess.canAccess(pos))
+		if (!access.canAccess(pos))
 		{
 			return false;
 		}
 
-		pos = blockAccess.getTopPos(pos);
+		pos = access.getTopPos(pos);
 
 		int count = 0;
 
+		BlockPos.PooledMutableBlockPos randomPos = BlockPos.PooledMutableBlockPos.retain();
+		BlockPos.PooledMutableBlockPos randomPosDown = BlockPos.PooledMutableBlockPos.retain();
+
 		for (int attempts = 0; attempts < 128; attempts++)
 		{
-			final BlockPos randomPos = pos.add(rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
+			randomPos.setPos(
+					pos.getX() + (rand.nextInt(8) - rand.nextInt(8)),
+					pos.getY() + (rand.nextInt(4) - rand.nextInt(4)),
+					pos.getZ() + (rand.nextInt(8) - rand.nextInt(8))
+			);
 
-			if (!blockAccess.canAccess(randomPos))
+
+			if (!access.canAccess(randomPos))
 			{
 				return false;
 			}
 
 			final IBlockState chosen = this.states[rand.nextInt(this.states.length)];
 
-			if (!blockAccess.canAccess(randomPos.down()))
+			randomPosDown.setPos(randomPos);
+			randomPosDown.setY(randomPosDown.getY() - 1);
+
+			if (!access.canAccess(randomPosDown))
 			{
 				return false;
 			}
 
-			final IBlockState below = blockAccess.getBlockState(randomPos.down());
+			final IBlockState below = access.getBlockState(randomPosDown);
 
-			if (blockAccess.isAirBlock(randomPos) && ((this.statesCanPlaceOn.isEmpty() && below.getBlock() == BlocksAether.aether_grass)
-					|| this.statesCanPlaceOn.contains(below)))
+			if (access.isAirBlock(randomPos) && ((this.statesCanPlaceOn.length == 0 && below.getBlock() == BlocksAether.aether_grass)
+					|| ArrayUtils.contains(this.statesCanPlaceOn, below)))
 			{
 				access.setBlockState(randomPos, chosen, 2 | 16);
 
@@ -91,6 +101,9 @@ public class WorldGenFloorPlacer extends WorldGenerator implements IWorldGen
 				}
 			}
 		}
+
+		randomPos.release();
+		randomPosDown.release();
 
 		return true;
 	}

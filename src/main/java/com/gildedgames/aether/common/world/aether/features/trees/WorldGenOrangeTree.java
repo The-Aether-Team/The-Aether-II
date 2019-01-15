@@ -18,7 +18,8 @@ public class WorldGenOrangeTree extends WorldGenerator
 	@Override
 	public boolean generate(final World world, final Random rand, final BlockPos position)
 	{
-		final Object[] stages = BlockOrangeTree.PROPERTY_STAGE.getAllowedValues().toArray();
+		BlockPos.PooledMutableBlockPos pos = BlockPos.PooledMutableBlockPos.retain();
+		BlockPos.PooledMutableBlockPos posUp = BlockPos.PooledMutableBlockPos.retain();
 
 		int i = 0;
 
@@ -28,7 +29,8 @@ public class WorldGenOrangeTree extends WorldGenerator
 			final int y = rand.nextInt(4) - rand.nextInt(4);
 			final int z = rand.nextInt(8) - rand.nextInt(8);
 
-			final BlockPos pos = position.add(x, y, z);
+			pos.setPos(position.getX() + x, position.getY() + y, position.getZ() + z);
+			posUp.setPos(pos.getX(), pos.getY() + 1, pos.getZ());
 
 			i++;
 
@@ -37,20 +39,23 @@ public class WorldGenOrangeTree extends WorldGenerator
 				continue;
 			}
 
-			if (world.isAirBlock(pos) && world.isAirBlock(pos.up()) && this.treeBlock.isSuitableSoilBlock(world.getBlockState(pos.down())))
+			if (world.isAirBlock(pos) && world.isAirBlock(posUp) && this.treeBlock.isSuitableSoilBlock(world.getBlockState(pos.down())))
 			{
-				final int stage = (Integer) stages[rand.nextInt(stages.length)];
+				final int stage = 1 + rand.nextInt(4);
 
 				final IBlockState state = BlocksAether.orange_tree.getDefaultState().withProperty(BlockOrangeTree.PROPERTY_STAGE, stage);
 
 				if (stage >= 3)
 				{
-					world.setBlockState(pos.up(), state.withProperty(BlockOrangeTree.PROPERTY_IS_TOP_BLOCK, Boolean.TRUE));
+					world.setBlockState(posUp, state.withProperty(BlockOrangeTree.PROPERTY_IS_TOP_BLOCK, Boolean.TRUE), 2 | 16);
 				}
 
-				world.setBlockState(pos, state.withProperty(BlockOrangeTree.PROPERTY_IS_TOP_BLOCK, Boolean.FALSE));
+				world.setBlockState(pos, state.withProperty(BlockOrangeTree.PROPERTY_IS_TOP_BLOCK, Boolean.FALSE), 2 | 16);
 			}
 		}
+
+		posUp.release();
+		pos.release();
 
 		return true;
 	}

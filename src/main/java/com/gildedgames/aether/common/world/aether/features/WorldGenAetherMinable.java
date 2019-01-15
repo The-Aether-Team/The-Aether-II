@@ -48,7 +48,7 @@ public class WorldGenAetherMinable
 		final double d4 = (position.getY() + rand.nextInt(3) - 2.0D);
 		final double d5 = (position.getY() + rand.nextInt(3) - 2.0D);
 
-		BlockPos.MutableBlockPos nextPos = new BlockPos.MutableBlockPos();
+		BlockPos.PooledMutableBlockPos nextPos = BlockPos.PooledMutableBlockPos.retain();
 
 		int attempts = 0;
 
@@ -112,6 +112,8 @@ public class WorldGenAetherMinable
 
 			attempts++;
 		}
+
+		nextPos.release();
 
 		return true;
 	}
