@@ -45,11 +45,6 @@ public class WorldGenFloorPlacer extends WorldGenerator implements IWorldGen
 	@Override
 	public boolean generate(final IBlockAccessExtended access, final World world, final Random rand, BlockPos pos, final boolean centered)
 	{
-		if (!access.canAccess(pos))
-		{
-			return false;
-		}
-
 		pos = access.getTopPos(pos);
 
 		int count = 0;
@@ -65,38 +60,30 @@ public class WorldGenFloorPlacer extends WorldGenerator implements IWorldGen
 					pos.getZ() + (rand.nextInt(16) - 8)
 			);
 
-
-			if (!access.canAccess(randomPos))
-			{
-				return false;
-			}
-
 			final IBlockState chosen = this.states[rand.nextInt(this.states.length)];
 
-			randomPosDown.setPos(randomPos);
-			randomPosDown.setY(randomPosDown.getY() - 1);
-
-			if (!access.canAccess(randomPosDown))
+			if (access.isAirBlock(randomPos))
 			{
-				return false;
-			}
+				randomPosDown.setPos(randomPos);
+				randomPosDown.setY(randomPosDown.getY() - 1);
 
-			final IBlockState below = access.getBlockState(randomPosDown);
+				final IBlockState below = access.getBlockState(randomPosDown);
 
-			if (access.isAirBlock(randomPos) && ((this.statesCanPlaceOn.length == 0 && below.getBlock() == BlocksAether.aether_grass)
-					|| ArrayUtils.contains(this.statesCanPlaceOn, below)))
-			{
-				access.setBlockState(randomPos, chosen, 2 | 16);
-
-				if (this.amount > 0)
+				if (((this.statesCanPlaceOn.length == 0 && below.getBlock() == BlocksAether.aether_grass)
+						|| ArrayUtils.contains(this.statesCanPlaceOn, below)))
 				{
-					if (count < this.amount)
+					access.setBlockState(randomPos, chosen, 2 | 16);
+
+					if (this.amount > 0)
 					{
-						count++;
-					}
-					else
-					{
-						return true;
+						if (count < this.amount)
+						{
+							count++;
+						}
+						else
+						{
+							return true;
+						}
 					}
 				}
 			}
