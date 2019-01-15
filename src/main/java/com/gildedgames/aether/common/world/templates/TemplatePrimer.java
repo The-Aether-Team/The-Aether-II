@@ -206,7 +206,7 @@ public class TemplatePrimer
 							}
 						}
 
-						if (blockAccess.setBlockState(blockpos, iblockstate1, 2) && template$blockinfo1.tileentityData != null)
+						if (blockAccess.setBlockState(blockpos, iblockstate1, 2 | 16) && template$blockinfo1.tileentityData != null)
 						{
 							final TileEntity tileentity2 = blockAccess.getTileEntity(blockpos);
 
