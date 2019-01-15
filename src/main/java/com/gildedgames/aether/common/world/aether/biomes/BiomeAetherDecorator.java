@@ -31,7 +31,7 @@ import com.gildedgames.orbis_api.data.schedules.ScheduleRegion;
 import com.gildedgames.orbis_api.processing.BlockAccessExtendedWrapper;
 import com.gildedgames.orbis_api.processing.DataPrimer;
 import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
-import net.minecraft.block.state.pattern.BlockMatcher;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -74,18 +74,15 @@ public class BiomeAetherDecorator
 
 	public BiomeAetherDecorator()
 	{
-		final BlockMatcher holystoneMatcher = BlockMatcher.forBlock(BlocksAether.holystone);
+		final IBlockState[] holystoneStates = new IBlockState[] { BlocksAether.holystone.getDefaultState() };
 
-		this.genAmbrosium = new WorldGenAetherMinable(BlocksAether.ambrosium_ore.getDefaultState(), 16, holystoneMatcher);
-		this.genZanite = new WorldGenAetherMinable(BlocksAether.zanite_ore.getDefaultState(), 8, holystoneMatcher);
-		this.genGravitite = new WorldGenAetherMinable(BlocksAether.gravitite_ore.getDefaultState(), 5, holystoneMatcher);
-		this.genIcestone = new WorldGenAetherMinable(BlocksAether.icestone_ore.getDefaultState(), 12, holystoneMatcher);
-		this.genArkenium = new WorldGenAetherMinable(BlocksAether.arkenium_ore.getDefaultState(), 6, holystoneMatcher);
+		this.genAmbrosium = new WorldGenAetherMinable(BlocksAether.ambrosium_ore.getDefaultState(), 16, holystoneStates);
+		this.genZanite = new WorldGenAetherMinable(BlocksAether.zanite_ore.getDefaultState(), 8, holystoneStates);
+		this.genGravitite = new WorldGenAetherMinable(BlocksAether.gravitite_ore.getDefaultState(), 5, holystoneStates);
+		this.genIcestone = new WorldGenAetherMinable(BlocksAether.icestone_ore.getDefaultState(), 12, holystoneStates);
+		this.genArkenium = new WorldGenAetherMinable(BlocksAether.arkenium_ore.getDefaultState(), 6, holystoneStates);
 
-		final BlockMatcher dirtMatcher = BlockMatcher.forBlock(BlocksAether.aether_dirt);
-		final BlockMatcher grassMatcher = BlockMatcher.forBlock(BlocksAether.aether_grass);
-
-		this.genCrudeScatterglass = new WorldGenAetherMinable(BlocksAether.crude_scatterglass.getDefaultState(), 16, holystoneMatcher);
+		this.genCrudeScatterglass = new WorldGenAetherMinable(BlocksAether.crude_scatterglass.getDefaultState(), 16, holystoneStates);
 
 		this.genPurpleFlowers = new WorldGenAetherFlowers(
 				BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.PURPLE_FLOWER), 64);
