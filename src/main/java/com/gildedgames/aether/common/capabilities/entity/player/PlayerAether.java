@@ -83,6 +83,8 @@ public class PlayerAether implements IPlayerAether
 
 	private final PlayerTradeModule tradingModule;
 
+	private final CaveSpawnModule caveSpawnModule;
+
 	private final List<PlayerAetherObserver> observers = Lists.newArrayList();
 
 	private NecromancerTowerInstance towerInstance;
@@ -115,6 +117,7 @@ public class PlayerAether implements IPlayerAether
 		this.sectorModule = null;
 		this.effectsModule = null;
 		this.tradingModule = null;
+		this.caveSpawnModule = null;
 	}
 
 	public PlayerAether(final EntityPlayer entity)
@@ -139,6 +142,7 @@ public class PlayerAether implements IPlayerAether
 		this.sectorModule = new PlayerSectorModule(this);
 		this.effectsModule = new PlayerEffectsModule(this);
 		this.tradingModule = new PlayerTradeModule(this);
+		this.caveSpawnModule = new CaveSpawnModule(this);
 
 		final Collection<PlayerAetherModule> modules = new ArrayList<>();
 
@@ -160,6 +164,7 @@ public class PlayerAether implements IPlayerAether
 		modules.add(this.sectorModule);
 		modules.add(this.effectsModule);
 		modules.add(this.tradingModule);
+		modules.add(this.caveSpawnModule);
 
 		this.modules = modules.toArray(new PlayerAetherModule[0]);
 	}
