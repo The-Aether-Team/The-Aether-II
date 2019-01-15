@@ -84,11 +84,10 @@ public class WorldSlice
 	 * you are replacing is non-air.
 	 *
 	 * @param pos The {@link BlockPos} of the block to replace
-	 * @param before The state of the block at {@link BlockPos} before it was replaced
 	 * @param after The state of the block at {@link BlockPos} after it is replaced
 	 * @param updateLight Whether or not to perform block/sky lighting updates
 	 */
-	public void replaceBlockState(BlockPos pos, IBlockState before, IBlockState after, boolean updateLight)
+	public void replaceBlockState(BlockPos pos, IBlockState after, boolean updateLight)
 	{
 		int x = pos.getX();
 		int y = pos.getY();
@@ -111,8 +110,6 @@ public class WorldSlice
 				{
 					this.world.checkLight(pos);
 				}
-
-				this.world.notifyBlockUpdate(pos, before, after, 2 | 16);
 			}
 		}
 	}
