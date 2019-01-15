@@ -94,13 +94,16 @@ public class LightingHooks
 		}
 	}
 
-	private static void scheduleRelightChecksForColumn(final World world, final EnumSkyBlock lightType, final int x, final int z, final int yMin,
-			final int yMax)
+	private static void scheduleRelightChecksForColumn(final World world, final EnumSkyBlock lightType, final int x, final int z, final int yMin, final int yMax)
 	{
+		BlockPos.PooledMutableBlockPos pos = BlockPos.PooledMutableBlockPos.retain();
+
 		for (int y = yMin; y <= yMax; ++y)
 		{
-			world.checkLightFor(lightType, new BlockPos(x, y, z));
+			world.checkLightFor(lightType, pos.setPos(x, y, z));
 		}
+
+		pos.release();
 	}
 
 	public enum EnumBoundaryFacing
