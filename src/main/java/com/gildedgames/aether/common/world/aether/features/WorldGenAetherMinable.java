@@ -3,50 +3,43 @@ package com.gildedgames.aether.common.world.aether.features;
 import com.gildedgames.aether.common.world.util.WorldSlice;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.block.state.pattern.BlockMatcher;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
+import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.Random;
 
 public class WorldGenAetherMinable
 {
+	private static final float PI = (float) Math.PI;
+
 	private final IBlockState oreBlock;
 
 	/** The number of blocks to generate. */
 	private final int numberOfBlocks;
 
-	private final BlockMatcher predicate;
+	private final IBlockState[] predicate;
 
-	public WorldGenAetherMinable(final IBlockState state, final int blockCount)
-	{
-		this(state, blockCount, BlockMatcher.forBlock(Blocks.STONE));
-	}
-
-	public WorldGenAetherMinable(final IBlockState state, final int blockCount, final BlockMatcher p_i45631_3_)
+	public WorldGenAetherMinable(final IBlockState state, final int blockCount, final IBlockState[] replaceableStates)
 	{
 		this.oreBlock = state;
 		this.numberOfBlocks = blockCount;
-		this.predicate = p_i45631_3_;
+		this.predicate = replaceableStates;
 	}
 
 	public boolean generate(final WorldSlice slice, final Random rand, final BlockPos position)
 	{
-		World world = slice.getWorld();
+		final float f = rand.nextFloat() * PI;
+		final float fSin = MathHelper.sin(f);
 
-		final double f = rand.nextDouble() * Math.PI;
-		final double fSin = (double) MathHelper.sin((float) f);
+		final float d0 = ((position.getX() + 8) + fSin * this.numberOfBlocks / 8.0f);
+		final float d1 = ((position.getX() + 8) - fSin * this.numberOfBlocks / 8.0f);
 
-		final double d0 = ((position.getX() + 8) + fSin * this.numberOfBlocks / 8.0D);
-		final double d1 = ((position.getX() + 8) - fSin * this.numberOfBlocks / 8.0D);
+		final float d2 = ((position.getZ() + 8) + fSin * this.numberOfBlocks / 8.0f);
+		final float d3 = ((position.getZ() + 8) - fSin * this.numberOfBlocks / 8.0f);
 
-		final double d2 = ((position.getZ() + 8) + fSin * this.numberOfBlocks / 8.0D);
-		final double d3 = ((position.getZ() + 8) - fSin * this.numberOfBlocks / 8.0D);
-
-		final double d4 = (position.getY() + rand.nextInt(3) - 2.0D);
-		final double d5 = (position.getY() + rand.nextInt(3) - 2.0D);
+		final float d4 = (position.getY() + rand.nextInt(3) - 2.0f);
+		final float d5 = (position.getY() + rand.nextInt(3) - 2.0f);
 
 		BlockPos.PooledMutableBlockPos nextPos = BlockPos.PooledMutableBlockPos.retain();
 
@@ -54,54 +47,54 @@ public class WorldGenAetherMinable
 
 		while (attempts < this.numberOfBlocks)
 		{
-			final double radius = attempts / (double) this.numberOfBlocks;
-			final double radiusSin = (double) MathHelper.sin((float) (Math.PI * radius));
+			final float radius = attempts / (float) this.numberOfBlocks;
+			final float radiusSin = MathHelper.sin(PI * radius);
 
-			final double d6 = d0 + (d1 - d0) * radius;
-			final double d7 = d4 + (d5 - d4) * radius;
-			final double d8 = d2 + (d3 - d2) * radius;
+			final float d6 = d0 + (d1 - d0) * radius;
+			final float d7 = d4 + (d5 - d4) * radius;
+			final float d8 = d2 + (d3 - d2) * radius;
 
-			final double d9 = rand.nextDouble() * (double) this.numberOfBlocks / 16.0D;
+			final float d9 = rand.nextFloat() * (float) this.numberOfBlocks / 16.0f;
 
-			final double d10 = (radiusSin + 1.0D) * d9 + 1.0D;
-			final double d11 = (radiusSin + 1.0D) * d9 + 1.0D;
+			final float d10 = (radiusSin + 1.0f) * d9 + 1.0f;
+			final float d11 = (radiusSin + 1.0f) * d9 + 1.0f;
 
-			final int minX = MathHelper.floor(d6 - d10 / 2.0D);
-			final int minY = MathHelper.floor(d7 - d11 / 2.0D);
-			final int minZ = MathHelper.floor(d8 - d10 / 2.0D);
+			final int minX = MathHelper.floor(d6 - d10 / 2.0f);
+			final int minY = MathHelper.floor(d7 - d11 / 2.0f);
+			final int minZ = MathHelper.floor(d8 - d10 / 2.0f);
 
-			final int maxX = MathHelper.floor(d6 + d10 / 2.0D);
-			final int maxY = MathHelper.floor(d7 + d11 / 2.0D);
-			final int maxZ = MathHelper.floor(d8 + d10 / 2.0D);
+			final int maxX = MathHelper.floor(d6 + d10 / 2.0f);
+			final int maxY = MathHelper.floor(d7 + d11 / 2.0f);
+			final int maxZ = MathHelper.floor(d8 + d10 / 2.0f);
 
 			for (int x = minX; x <= maxX; ++x)
 			{
-				double xDist = (x + 0.5D - d6) / (d10 / 2.0D);
+				float xDist = (x + 0.5f - d6) / (d10 / 2.0f);
 				xDist *= xDist;
 
-				if (xDist < 1.0D)
+				if (xDist < 1.0f)
 				{
 					for (int y = minY; y <= maxY; ++y)
 					{
-						double yDist = (y + 0.5D - d7) / (d11 / 2.0D);
+						float yDist = (y + 0.5f - d7) / (d11 / 2.0f);
 						yDist *= yDist;
 
-						if (xDist + yDist < 1.0D)
+						if (xDist + yDist < 1.0f)
 						{
 							for (int z = minZ; z <= maxZ; ++z)
 							{
-								double zDist = (z + 0.5D - d8) / (d10 / 2.0D);
+								float zDist = (z + 0.5f - d8) / (d10 / 2.0f);
 								zDist *= zDist;
 
-								if (xDist + yDist + zDist < 1.0D)
+								if (xDist + yDist + zDist < 1.0f)
 								{
 									nextPos.setPos(x, y, z);
 
 									final IBlockState state = slice.getBlockState(nextPos);
 
-									if (state.getMaterial() != Material.AIR && state.getBlock().isReplaceableOreGen(state, world, nextPos, this.predicate))
+									if (state.getMaterial() != Material.AIR && ArrayUtils.contains(this.predicate, state))
 									{
-										slice.replaceBlockState(nextPos, state, this.oreBlock, this.oreBlock.getLightValue() > 0);
+										slice.replaceBlockState(nextPos, this.oreBlock, this.oreBlock.getLightValue() > 0);
 									}
 								}
 							}
