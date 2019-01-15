@@ -35,7 +35,7 @@ public class WorldGenCustomVines extends WorldGenerator
 								enumfacing == EnumFacing.NORTH).withProperty(BlockVine.EAST,
 								enumfacing == EnumFacing.EAST).withProperty(BlockVine.SOUTH,
 								enumfacing == EnumFacing.SOUTH).withProperty(BlockVine.WEST, enumfacing == EnumFacing.WEST);
-						world.setBlockState(pos, iblockstate, 2);
+						world.setBlockState(pos, iblockstate, 2 | 16);
 
 						break;
 					}

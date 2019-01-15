@@ -76,7 +76,7 @@ public class WorldGenFloorPlacer extends WorldGenerator implements IWorldGen
 			if (blockAccess.isAirBlock(randomPos) && ((this.statesCanPlaceOn.isEmpty() && below.getBlock() == BlocksAether.aether_grass)
 					|| this.statesCanPlaceOn.contains(below)))
 			{
-				blockAccess.setBlockState(randomPos, chosen, 2);
+				access.setBlockState(randomPos, chosen, 2 | 16);
 
 				if (this.amount > 0)
 				{

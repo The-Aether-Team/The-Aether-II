@@ -50,18 +50,18 @@ public class WorldGenBrettlPlant extends WorldGenerator
 				else if (growthStage > 4 && growthStage <= 8)
 				{
 					worldIn.setBlockState(randomPos.up(), this.brettlState.withProperty(BlockBrettlPlant.PROPERTY_HARVESTABLE, false)
-							.withProperty(BlockBrettlPlant.PROPERTY_VARIANT, BlockBrettlPlant.BASE));
+							.withProperty(BlockBrettlPlant.PROPERTY_VARIANT, BlockBrettlPlant.BASE), 2 | 16);
 					worldIn.setBlockState(randomPos.up(2), this.brettlState.withProperty(BlockBrettlPlant.PROPERTY_HARVESTABLE, false)
-							.withProperty(BlockBrettlPlant.PROPERTY_VARIANT, BlockBrettlPlant.MID));
+							.withProperty(BlockBrettlPlant.PROPERTY_VARIANT, BlockBrettlPlant.MID), 2 | 16);
 					worldIn.setBlockState(randomPos.up(3), this.brettlState.withProperty(BlockBrettlPlant.PROPERTY_HARVESTABLE, false)
-							.withProperty(BlockBrettlPlant.PROPERTY_VARIANT, BlockBrettlPlant.TOP));
+							.withProperty(BlockBrettlPlant.PROPERTY_VARIANT, BlockBrettlPlant.TOP), 2 | 16);
 				}
 				else
 				{
 					worldIn.setBlockState(randomPos.up(), this.brettlState.withProperty(BlockBrettlPlant.PROPERTY_HARVESTABLE, false)
-							.withProperty(BlockBrettlPlant.PROPERTY_VARIANT, BlockBrettlPlant.BASE));
+							.withProperty(BlockBrettlPlant.PROPERTY_VARIANT, BlockBrettlPlant.BASE), 2 | 16);
 					worldIn.setBlockState(randomPos.up(2), this.brettlState.withProperty(BlockBrettlPlant.PROPERTY_HARVESTABLE, false)
-							.withProperty(BlockBrettlPlant.PROPERTY_VARIANT, BlockBrettlPlant.TOP));
+							.withProperty(BlockBrettlPlant.PROPERTY_VARIANT, BlockBrettlPlant.TOP), 2 | 16);
 				}
 
 				count++;

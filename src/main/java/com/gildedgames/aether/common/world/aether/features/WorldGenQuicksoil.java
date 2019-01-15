@@ -30,7 +30,7 @@ public class WorldGenQuicksoil extends WorldGenerator
 
 				if (world.isAirBlock(nextPos) && ((x - pos.getX()) * (x - pos.getX()) + (z - pos.getZ()) * (z - pos.getZ())) < 12)
 				{
-					world.setBlockState(nextPos, this.quicksoil);
+					world.setBlockState(nextPos, this.quicksoil, 2 | 16);
 				}
 			}
 		}

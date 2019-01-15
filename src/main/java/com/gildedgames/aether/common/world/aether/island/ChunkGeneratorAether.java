@@ -77,7 +77,7 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		{
 			masks[chunkY] = new ChunkSegmentMask(chunkX, chunkY, chunkZ);
 
-			this.preparation.generateFull(info, biomes, masks[chunkY], islandData, chunkX, chunkY, chunkZ, world.getSeed());
+			this.preparation.generateFull(info, biomes, masks[chunkY], islandData, chunkX, chunkY, chunkZ, this.world.getSeed());
 		}
 
 		IChunkMaskTransformer transformer = islandData.getGenerator().createMaskTransformer(islandData, chunkX, chunkZ);

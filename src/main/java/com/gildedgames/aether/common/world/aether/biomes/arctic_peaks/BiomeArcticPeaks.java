@@ -145,7 +145,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase implements ISnowyBiome
 
 					if (world.canBlockFreezeWater(blockpos2))
 					{
-						world.setBlockState(blockpos2, BlocksAether.highlands_ice.getDefaultState(), 2);
+						world.setBlockState(blockpos2, BlocksAether.highlands_ice.getDefaultState(), 2 | 16);
 					}
 
 					if (heightSample > 0.5)
@@ -155,13 +155,13 @@ public class BiomeArcticPeaks extends BiomeAetherBase implements ISnowyBiome
 
 						if (world.canSnowAt(blockpos1, true))
 						{
-							world.setBlockState(blockpos1, BlocksAether.highlands_snow_layer.getDefaultState(), 2);
+							world.setBlockState(blockpos1, BlocksAether.highlands_snow_layer.getDefaultState(), 2 | 16);
 						}
 						else if (block instanceof IBlockSnowy)
 						{
 							final IBlockState newState = state.withProperty(IBlockSnowy.PROPERTY_SNOWY, Boolean.TRUE);
 
-							world.setBlockState(blockpos1, newState, 2);
+							world.setBlockState(blockpos1, newState, 2 | 16);
 						}
 					}
 				}

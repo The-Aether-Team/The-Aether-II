@@ -72,7 +72,7 @@ public class WorldGenIceCrystals extends WorldGenerator implements IWorldGen
 			{
 				if (this.statesCanPlaceOn.isEmpty() || this.statesCanPlaceOn.contains(below))
 				{
-					blockAccess.setBlockState(randomPos, this.crystalState.withProperty(BlockIceCrystal.PROPERTY_VARIANT, BlockIceCrystal.STALAGMITE));
+					blockAccess.setBlockState(randomPos, this.crystalState.withProperty(BlockIceCrystal.PROPERTY_VARIANT, BlockIceCrystal.STALAGMITE), 2 | 16);
 					if (this.max > 0)
 					{
 						if (count < this.max)
@@ -87,7 +87,7 @@ public class WorldGenIceCrystals extends WorldGenerator implements IWorldGen
 				}
 				if (this.statesCanPlaceOn.isEmpty() || this.statesCanPlaceOn.contains(above))
 				{
-					blockAccess.setBlockState(randomPos, this.crystalState.withProperty(BlockIceCrystal.PROPERTY_VARIANT, BlockIceCrystal.STALACTITE));
+					blockAccess.setBlockState(randomPos, this.crystalState.withProperty(BlockIceCrystal.PROPERTY_VARIANT, BlockIceCrystal.STALACTITE), 2 | 16);
 					if (this.max > 0)
 					{
 						if (count < this.max)
