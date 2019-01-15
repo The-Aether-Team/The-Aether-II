@@ -65,7 +65,7 @@ public class ConfigAether
 		this.analyticsEnabled = this.getBoolean(this.general, "Enable Analytics (client-side only)", true);
 
 		this.displayInventoryPattern = this.getBoolean(this.general, "Display Inventory Pattern", true);
-		this.displayPerformanceIndicator = this.getBoolean(this.general, "Display Performance Indicator", true);
+		this.displayPerformanceIndicator = this.getBoolean(this.general, "Display Performance Indicator Overlay", false);
 
 		this.helmetShadow = this.getBoolean(this.general, "Helmet Shadow", true);
 		this.cutoutHelmets = this.getBoolean(this.general, "Transparent Helmets", true);
