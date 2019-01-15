@@ -93,7 +93,6 @@ public abstract class MixinChunk implements IChunkLighting, IChunkLightingData, 
 
 	// === END OF HOOKS ===
 
-
 	// === REPLACEMENTS ===
 
 	/**
@@ -158,7 +157,6 @@ public abstract class MixinChunk implements IChunkLighting, IChunkLightingData, 
 		{
 			Block block = state.getBlock();
 			Block block1 = iblockstate.getBlock();
-			int k1 = iblockstate.getLightOpacity(this.world, pos); // Relocate old light value lookup here, so that it is called before TE is removed.
 			ExtendedBlockStorage extendedblockstorage = this.storageArrays[j >> 4];
 
 			if (extendedblockstorage == Chunk.NULL_BLOCK_STORAGE)
@@ -180,15 +178,22 @@ public abstract class MixinChunk implements IChunkLighting, IChunkLightingData, 
 				if (!this.world.isRemote)
 				{
 					if (block1 != block) //Only fire block breaks when the block changes.
+					{
 						block1.breakBlock(this.world, pos, iblockstate);
+					}
 					TileEntity te = this.shadow$getTileEntity(pos, Chunk.EnumCreateEntityType.CHECK);
-					if (te != null && te.shouldRefresh(this.world, pos, iblockstate, state)) this.world.removeTileEntity(pos);
+					if (te != null && te.shouldRefresh(this.world, pos, iblockstate, state))
+					{
+						this.world.removeTileEntity(pos);
+					}
 				}
 				else if (block1.hasTileEntity(iblockstate))
 				{
 					TileEntity te = this.shadow$getTileEntity(pos, Chunk.EnumCreateEntityType.CHECK);
 					if (te != null && te.shouldRefresh(this.world, pos, iblockstate, state))
+					{
 						this.world.removeTileEntity(pos);
+					}
 				}
 			}
 
@@ -240,7 +245,6 @@ public abstract class MixinChunk implements IChunkLighting, IChunkLightingData, 
 		}
 	}
 
-
 	/**
 	 * @author Angeline
 	 */
@@ -278,6 +282,8 @@ public abstract class MixinChunk implements IChunkLighting, IChunkLightingData, 
 		}
 	}
 
+	@Shadow
+	public abstract IBlockState getBlockState(int x, int y, int z);
 
 	/**
 	 * Hook for calculating light updates only as needed. {@link MixinChunk#getCachedLightFor(EnumSkyBlock, BlockPos)} does not
@@ -326,6 +332,87 @@ public abstract class MixinChunk implements IChunkLighting, IChunkLightingData, 
 			return type == EnumSkyBlock.BLOCK ? extendedblockstorage.getBlockLight(i, j & 15, k) : type.defaultLightValue;
 		}
 	}
+
+	/**
+	 * @author
+	 */
+	@Overwrite
+	public void generateSkylightMap()
+	{
+		int maxY = this.getTopFilledSegment();
+
+		this.heightMapMinimum = Integer.MAX_VALUE;
+
+		BlockPos.PooledMutableBlockPos pos = BlockPos.PooledMutableBlockPos.retain();
+
+		for (int x = 0; x < 16; ++x)
+		{
+			for (int z = 0; z < 16; ++z)
+			{
+				this.precipitationHeightMap[x + (z << 4)] = -999;
+
+				for (int y = maxY + 16; y > 0; --y)
+				{
+					if (this.getBlockLightOpacity(x, y - 1, z) != 0)
+					{
+						this.heightMap[z << 4 | x] = y;
+
+						if (y < this.heightMapMinimum)
+						{
+							this.heightMapMinimum = y;
+						}
+
+						break;
+					}
+				}
+
+				if (this.world.provider.hasSkyLight())
+				{
+					int light = 15;
+					int y2 = maxY + 16 - 1;
+
+					do
+					{
+						int opacity = this.getBlockLightOpacity(x, y2, z);
+
+						if (opacity == 0 && light != 15)
+						{
+							opacity = 1;
+						}
+
+						light -= opacity;
+
+						if (light > 0)
+						{
+							ExtendedBlockStorage extendedblockstorage = this.storageArrays[y2 >> 4];
+
+							if (extendedblockstorage != Chunk.NULL_BLOCK_STORAGE)
+							{
+								extendedblockstorage.setSkyLight(x, y2 & 15, z, light);
+
+								if (this.world.isRemote)
+								{
+									this.world.notifyLightSet(pos.setPos((this.x << 4) + x, y2, (this.z << 4) + z));
+								}
+							}
+						}
+
+						--y2;
+
+					}
+					while (y2 > 0 && light > 0);
+				}
+			}
+		}
+
+
+		pos.release();
+
+		this.dirty = true;
+	}
+
+	@Shadow
+	public abstract int getTopFilledSegment();
 
 	// === END OF REPLACEMENTS ===
 
