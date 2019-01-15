@@ -11,7 +11,6 @@ import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
 import com.gildedgames.orbis_api.preparation.impl.ChunkSegmentMask;
 import com.gildedgames.orbis_api.processing.BlockAccessExtendedWrapper;
 import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
-
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
@@ -44,9 +43,7 @@ public class WorldPreparationAether
 
 		this.replaceBiomeBlocks(info, mask, chunkY);
 
-		this.caveGenerator.generate(seed, chunkX, chunkY, chunkZ, mask, biomes, info);
-//
-//		this.caveGenerator.generate(this.world, chunkX, chunkY, chunkZ, mask, biomes);
+//		this.caveGenerator.generate(seed, chunkX, chunkY, chunkZ, mask, biomes, info);
 //
 //		if (island.getBiome() instanceof BiomeArcticPeaks)
 //		{
