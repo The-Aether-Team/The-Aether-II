@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.player.IPlayerAether;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
 
 public class PlayerUtil
 {
@@ -44,17 +45,19 @@ public class PlayerUtil
 		return true;
 	}
 
-	public static void fillBucketInHand(EntityPlayer player, ItemStack emptyBucket, ItemStack fillBucket)
+	public static void fillBucketInHand(EntityPlayer player, EnumHand hand, ItemStack emptyBucket, ItemStack fillBucket)
 	{
+		final int invSlot = hand == EnumHand.MAIN_HAND ? player.inventory.currentItem : 40;
+
 		if (emptyBucket.getCount() == 1)
 		{
-			player.inventory.setInventorySlotContents(player.inventory.currentItem, fillBucket);
+			player.inventory.setInventorySlotContents(invSlot, fillBucket);
 		}
 		else
 		{
 			emptyBucket.shrink(1);
 
-			player.inventory.setInventorySlotContents(player.inventory.currentItem, emptyBucket);
+			player.inventory.setInventorySlotContents(invSlot, emptyBucket);
 
 			if (!player.inventory.addItemStackToInventory(fillBucket))
 			{

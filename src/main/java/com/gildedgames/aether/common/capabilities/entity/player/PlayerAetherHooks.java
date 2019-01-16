@@ -339,16 +339,5 @@ public class PlayerAetherHooks
 		}
 	}
 
-	@SubscribeEvent
-	public static void onPlayerInteract(final PlayerInteractEvent.EntityInteract event)
-	{
-		if (event.getTarget() instanceof EntityPlayerMP)
-		{
-			EntityPlayerMP otherPlayer = (EntityPlayerMP) event.getTarget();
-			Vec3i vec = otherPlayer.getPosition();
 
-//			otherPlayer.openGui(AetherCore.INSTANCE, AetherGuiHandler.CUSTOM_WORKBENCH_ID, event.getWorld(), vec.getX(), vec.getY(), vec.getZ());
-//			System.out.println(otherPlayer);
-		}
-	}
 }

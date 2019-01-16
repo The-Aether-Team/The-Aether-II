@@ -421,11 +421,11 @@ public class CommonEvents
 	{
 		if (event.getTarget() instanceof EntityCow && !((EntityCow) event.getTarget()).isChild())
 		{
-			ItemStack item = event.getHand() == EnumHand.MAIN_HAND ? event.getEntityLiving().getHeldItemMainhand() : event.getEntityLiving().getHeldItemOffhand();
+			ItemStack item = event.getEntityPlayer().getHeldItem(event.getHand());
 
 			if (item.getItem() == ItemsAether.skyroot_bucket)
 			{
-				PlayerUtil.fillBucketInHand(event.getEntityPlayer(), item, new ItemStack(ItemsAether.skyroot_milk_bucket));
+				PlayerUtil.fillBucketInHand(event.getEntityPlayer(), event.getHand(), item, new ItemStack(ItemsAether.skyroot_milk_bucket));
 			}
 		}
 	}

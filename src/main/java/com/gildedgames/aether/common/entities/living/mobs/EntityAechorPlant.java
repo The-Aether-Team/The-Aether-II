@@ -195,7 +195,7 @@ public class EntityAechorPlant extends EntityAetherMob
 		{
 			if (this.getPoisonLeft() > 0)
 			{
-				PlayerUtil.fillBucketInHand(player, stack, new ItemStack(ItemsAether.skyroot_poison_bucket));
+				PlayerUtil.fillBucketInHand(player, hand, stack, new ItemStack(ItemsAether.skyroot_poison_bucket));
 
 				this.setPoisonLeft(this.getPoisonLeft() - 1);
 
