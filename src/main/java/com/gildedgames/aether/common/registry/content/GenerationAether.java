@@ -164,9 +164,9 @@ public class GenerationAether
 		OrbisAPI.services().register(registry);
 
 		final PlacementCondition avoidQuicksoil = new PlacementConditionAvoidBlock(BlocksAether.quicksoil);
-		final PlacementCondition isReplaceableGround = new PlacementConditionReplaceableMaterials(Material.GROUND, Material.GRASS, Material.AIR, Material.SNOW);
-		final PlacementCondition isReplaceableTerrain = new PlacementConditionReplaceableMaterials(Material.ROCK, Material.GROUND, Material.GRASS, Material.AIR);
-		final PlacementCondition isOnSoil = new PlacementConditionOnBlock(BlocksAether.aether_grass, BlocksAether.aether_dirt);
+		final PlacementCondition isReplaceableGround = new PlacementConditionReplaceableMaterials(Material.GROUND, Material.GRASS);
+		final PlacementCondition isReplaceableTerrain = new PlacementConditionReplaceableMaterials(Material.ROCK, Material.GROUND, Material.GRASS);
+		final PlacementCondition isOnSoil = new PlacementConditionOnBlock(BlocksAether.aether_grass);
 		final PlacementCondition isOnEarth = new PlacementConditionOnBlock(BlocksAether.aether_grass, BlocksAether.aether_dirt, BlocksAether.holystone);
 
 		final PlacementCondition[] structureConditions = new PlacementCondition[] { isOnEarth, avoidQuicksoil, isReplaceableGround };
@@ -203,7 +203,7 @@ public class GenerationAether
 
 		ABAND_HUMAN_HOUSE_1B = new BlueprintDefinition(BlueprintsAether.ABAND_HUMAN_HOUSE_1B, 5)
 				.setRegistry(registry)
-				.setConditions(isOnEarth, isReplaceableTerrain, avoidQuicksoil);
+				.setConditions(isOnEarth, isReplaceableGround, avoidQuicksoil);
 
 		SKYROOT_WATCHTOWER_1A = new BlueprintDefinition(BlueprintsAether.SKYROOT_WATCHTOWER_1A)
 				.setRegistry(registry)
