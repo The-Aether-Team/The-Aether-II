@@ -104,7 +104,7 @@ public class PrepAether implements IPrepRegistryEntry<IAetherChunkColumnInfo>
 		}
 
 		final PrepSectorDataAether data = new PrepSectorDataAether(world, sectorX, sectorY);
-		final IslandData island = new IslandData(world, data, bounds, chosen, islandSeed);
+		final IslandData island = new IslandData(data, bounds, chosen, islandSeed);
 
 		data.setIslandData(island);
 

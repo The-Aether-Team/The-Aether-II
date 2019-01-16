@@ -5,7 +5,6 @@ import com.gildedgames.aether.api.world.islands.IIslandBounds;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
-import com.gildedgames.orbis_api.core.BlueprintDefinition;
 import com.gildedgames.orbis_api.core.ICreationData;
 import com.gildedgames.orbis_api.core.PlacedBlueprint;
 import com.gildedgames.orbis_api.core.baking.BakedBlueprint;
@@ -19,7 +18,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
 import javax.annotation.Nonnull;
@@ -31,8 +29,6 @@ import java.util.Random;
 public class IslandData implements IIslandData
 {
 	private final IPrepSectorData parent;
-
-	private final World world;
 
 	private BlockPos respawnPoint;
 
@@ -54,9 +50,8 @@ public class IslandData implements IIslandData
 
 	private BiomeAetherBase biome;
 
-	public IslandData(final World world, final IPrepSectorData parent, final IIslandBounds bounds, final BiomeAetherBase biome, final long seed)
+	public IslandData(final IPrepSectorData parent, final IIslandBounds bounds, final BiomeAetherBase biome, final long seed)
 	{
-		this.world = world;
 		this.parent = parent;
 
 		this.seed = seed;
@@ -67,9 +62,8 @@ public class IslandData implements IIslandData
 		this.initProperties(new Random(seed));
 	}
 
-	public IslandData(World world, final IPrepSectorData parent, NBTTagCompound tag)
+	public IslandData(final IPrepSectorData parent, NBTTagCompound tag)
 	{
-		this.world = world;
 		this.parent = parent;
 
 		this.read(tag);
@@ -146,12 +140,12 @@ public class IslandData implements IIslandData
 	}
 
 	@Override
-	public PlacedBlueprint placeBlueprint(BlueprintDefinition def, BakedBlueprint baked, BlockPos offset)
+	public PlacedBlueprint placeBlueprint(BakedBlueprint baked, BlockPos offset)
 	{
 		ICreationData<?> data = baked.getCreationData().clone();
 		data.pos(offset);
 
-		final PlacedBlueprint instance = new PlacedBlueprint(this.world, def, baked, data);
+		final PlacedBlueprint instance = new PlacedBlueprint(baked, data);
 
 		for (ChunkPos pos : baked.getOccupiedChunks(offset))
 		{

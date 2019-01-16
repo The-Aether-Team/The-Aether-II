@@ -128,7 +128,7 @@ public class BiomeAetherDecorator
 				BlueprintPlacer.ROTATIONS[world.rand.nextInt(BlueprintPlacer.ROTATIONS.length)] :
 				BlueprintPlacer.ROTATIONS[0];
 
-		BakedBlueprint outpostBake = new BakedBlueprint(outpostDef.getData(), new CreationData(world).seed(random.nextLong()).rotation(rotation));
+		BakedBlueprint outpostBake = new BakedBlueprint(outpostDef, new CreationData(world).seed(random.nextLong()).rotation(rotation));
 
 		for (int i = 0; i < 10000; i++)
 		{
@@ -143,11 +143,11 @@ public class BiomeAetherDecorator
 				{
 					BlockPos pos = new BlockPos(startX + x, y, startZ + z);
 
-					generated = BlueprintPlacer.findPlace(primer, outpostBake, outpostDef.getConditions(), pos, true);
+					generated = primer.canGenerate(outpostBake, pos, true);
 
 					if (generated)
 					{
-						final PlacedBlueprint placed = island.placeBlueprint(outpostDef, outpostBake, pos);
+						final PlacedBlueprint placed = island.placeBlueprint(outpostBake, pos);
 
 						final ScheduleRegion trigger = placed.getBaked().getScheduleFromTriggerID("spawn");
 
@@ -189,7 +189,7 @@ public class BiomeAetherDecorator
 				BlueprintPlacer.ROTATIONS[rand.nextInt(BlueprintPlacer.ROTATIONS.length)] :
 				BlueprintPlacer.ROTATIONS[0];
 
-		BakedBlueprint baked = new BakedBlueprint(def.getData(), new CreationData(world).rotation(rotation));
+		BakedBlueprint baked = new BakedBlueprint(def, new CreationData(world).rotation(rotation));
 
 		int amountGenerated = 0;
 
@@ -209,17 +209,17 @@ public class BiomeAetherDecorator
 				{
 					BlockPos pos = new BlockPos(startX + x, y, startZ + z);
 
-					final boolean generated = BlueprintPlacer.findPlace(primer, baked, def.getConditions(), pos, true);
+					final boolean generated = primer.canGenerate(baked, pos, true);
 
 					if (generated)
 					{
-						island.placeBlueprint(def, baked, pos);
+						island.placeBlueprint(baked, pos);
 
 						rotation = (def.hasRandomRotation()) ?
 								BlueprintPlacer.ROTATIONS[rand.nextInt(BlueprintPlacer.ROTATIONS.length)] :
 								BlueprintPlacer.ROTATIONS[0];
 
-						baked = new BakedBlueprint(def.getData(), new CreationData(world).rotation(rotation));
+						baked = new BakedBlueprint(def, new CreationData(world).rotation(rotation));
 
 						amountGenerated++;
 

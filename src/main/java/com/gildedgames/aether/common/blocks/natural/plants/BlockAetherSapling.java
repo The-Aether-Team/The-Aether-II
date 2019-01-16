@@ -118,7 +118,7 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 			{
 				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 4);
 
-				BakedBlueprint baked = new BakedBlueprint(tree.getData(), new CreationData(world).pos(BlockPos.ORIGIN));
+				BakedBlueprint baked = new BakedBlueprint(tree, new CreationData(world).pos(BlockPos.ORIGIN));
 
 				// Offset trees
 				BlockPos adjustedPos = new BlockPos(pos.getX() - 4, pos.getY(), pos.getZ() - 4);
@@ -132,7 +132,7 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 					adjustedPos = new BlockPos(pos.getX()-5, pos.getY(), pos.getZ()-5);
 				}
 
-				if (!BlueprintPlacer.place(world, baked, tree.getConditions(), adjustedPos, true))
+				if (!BlueprintPlacer.place(world, baked, adjustedPos, true))
 				{
 					world.setBlockState(pos, state, 4);
 				}
