@@ -10,7 +10,6 @@ import com.gildedgames.aether.common.registry.content.GenerationAether;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandGenerators;
 import com.gildedgames.orbis_api.core.BlueprintWorldGen;
-import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
 import com.gildedgames.orbis_api.util.mc.NBT;
 import com.google.common.collect.Lists;
 import net.minecraft.block.state.IBlockState;
@@ -75,7 +74,7 @@ public class BiomeIrradiatedForests extends BiomeAetherBase
 		decorations.add(new WorldDecorationSimple(6, DecorateBiomeEvent.Decorate.EventType.GRASS, GenerationAether.holystone_rocks)
 		{
 			@Override
-			public BlockPos findPositionToPlace(final IBlockAccessExtended blockAccess, final Random rand, final BlockPos pos)
+			public BlockPos findPositionToPlace(final World world, final Random rand, final BlockPos pos)
 			{
 				final int x = rand.nextInt(16) + 8;
 				final int y = rand.nextInt(128);
@@ -88,7 +87,7 @@ public class BiomeIrradiatedForests extends BiomeAetherBase
 		decorations.add(new WorldDecorationSimple(1, 0.06F, DecorateBiomeEvent.Decorate.EventType.CUSTOM, GenerationAether.golden_aercloud)
 		{
 			@Override
-			public BlockPos findPositionToPlace(final IBlockAccessExtended blockAccess, final Random rand, final BlockPos pos)
+			public BlockPos findPositionToPlace(final World world, final Random rand, final BlockPos pos)
 			{
 				final int width = 16;
 				final int minY = 90;

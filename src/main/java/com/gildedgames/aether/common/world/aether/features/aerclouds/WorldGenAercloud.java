@@ -1,8 +1,5 @@
 package com.gildedgames.aether.common.world.aether.features.aerclouds;
 
-import com.gildedgames.orbis_api.processing.BlockAccessExtendedWrapper;
-import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
-import com.gildedgames.orbis_api.world.IWorldGen;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -12,7 +9,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class WorldGenAercloud extends WorldGenerator implements IWorldGen
+public class WorldGenAercloud extends WorldGenerator
 {
 	protected final IBlockState state;
 
@@ -27,19 +24,13 @@ public class WorldGenAercloud extends WorldGenerator implements IWorldGen
 		this.isFlat = isFlat;
 	}
 
-	@Override
-	public boolean generate(final World worldIn, final Random rand, final BlockPos position)
-	{
-		return this.generate(new BlockAccessExtendedWrapper(worldIn), worldIn, rand, position, false);
-	}
-
 	public IBlockState getAercloudState(final Random random)
 	{
 		return this.state;
 	}
 
 	@Override
-	public boolean generate(final IBlockAccessExtended blockAccess, final World world, final Random rand, final BlockPos position, final boolean centered)
+	public boolean generate(final World world, final Random rand, final BlockPos position)
 	{
 		final IBlockState state = this.getAercloudState(rand);
 
@@ -78,7 +69,7 @@ public class WorldGenAercloud extends WorldGenerator implements IWorldGen
 							return false;
 						}
 
-						if (blockAccess.getBlockState(pos) == Blocks.AIR.getDefaultState() &&
+						if (world.getBlockState(pos) == Blocks.AIR.getDefaultState() &&
 								Math.abs(x1 - x) + Math.abs(y1 - y) + Math.abs(z1 - z) < 4 * (this.isFlat ? 3 : 1) + rand.nextInt(2))
 						{
 							transaction.add(pos.toImmutable());
@@ -94,11 +85,5 @@ public class WorldGenAercloud extends WorldGenerator implements IWorldGen
 		}
 
 		return true;
-	}
-
-	@Override
-	public boolean generate(final IBlockAccessExtended blockAccess, final World world, final Random rand, final BlockPos position)
-	{
-		return this.generate(blockAccess, world, rand, position, false);
 	}
 }

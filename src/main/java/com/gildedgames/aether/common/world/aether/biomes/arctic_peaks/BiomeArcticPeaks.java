@@ -17,7 +17,6 @@ import com.gildedgames.aether.common.world.aether.island.gen.IslandVariables;
 import com.gildedgames.aether.common.world.aether.island.gen.highlands.IslandGeneratorHighlands;
 import com.gildedgames.orbis_api.core.BlueprintDefinition;
 import com.gildedgames.orbis_api.core.BlueprintWorldGen;
-import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
 import com.gildedgames.orbis_api.util.mc.NBT;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
@@ -180,7 +179,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase implements ISnowyBiome
 		decorations.add(new WorldDecorationSimple(6, DecorateBiomeEvent.Decorate.EventType.GRASS, GenerationAether.holystone_rocks)
 		{
 			@Override
-			public BlockPos findPositionToPlace(final IBlockAccessExtended blockAccess, final Random rand, final BlockPos pos)
+			public BlockPos findPositionToPlace(final World world, final Random rand, final BlockPos pos)
 			{
 				final int x = rand.nextInt(16) + 8;
 				final int y = rand.nextInt(128);
@@ -193,7 +192,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase implements ISnowyBiome
 		decorations.add(new WorldDecorationSimple(1, 0.06F, DecorateBiomeEvent.Decorate.EventType.CUSTOM, GenerationAether.storm_aercloud)
 		{
 			@Override
-			public BlockPos findPositionToPlace(final IBlockAccessExtended blockAccess, final Random rand, final BlockPos pos)
+			public BlockPos findPositionToPlace(final World world, final Random rand, final BlockPos pos)
 			{
 				final int width = 16;
 				final int minY = 90;
@@ -206,7 +205,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase implements ISnowyBiome
 		decorations.add(new WorldDecorationSimple(2, 0.5f, DecorateBiomeEvent.Decorate.EventType.CUSTOM, GenerationAether.ice_crystals)
 		{
 			@Override
-			public BlockPos findPositionToPlace(final IBlockAccessExtended blockAccess, final Random rand, final BlockPos pos)
+			public BlockPos findPositionToPlace(final World world, final Random rand, final BlockPos pos)
 			{
 				final int x = rand.nextInt(16) + 8;
 				final int y = rand.nextInt(64) + 26; // between y: 26 and 90

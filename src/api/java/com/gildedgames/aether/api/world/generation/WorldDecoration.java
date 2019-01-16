@@ -1,8 +1,8 @@
 package com.gildedgames.aether.api.world.generation;
 
-import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
-import com.gildedgames.orbis_api.world.IWorldGen;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 
 import java.util.Random;
@@ -19,8 +19,8 @@ public interface WorldDecoration
 	 */
 	int getGenerationCount();
 
-	IWorldGen getGenerator(Random rand);
+	WorldGenerator getGenerator(Random rand);
 
-	BlockPos findPositionToPlace(IBlockAccessExtended blockAccess, Random rand, BlockPos pos);
+	BlockPos findPositionToPlace(World world, Random rand, BlockPos pos);
 
 }

@@ -20,7 +20,6 @@ import com.gildedgames.aether.common.world.aether.features.aerclouds.WorldGenPur
 import com.gildedgames.aether.common.world.aether.features.trees.WorldGenOrangeTree;
 import com.gildedgames.aether.common.world.aether.island.data.BlockAccessIsland;
 import com.gildedgames.aether.common.world.templates.TemplatePlacer;
-import com.gildedgames.aether.common.world.util.WorldSlice;
 import com.gildedgames.orbis_api.core.BlueprintDefinition;
 import com.gildedgames.orbis_api.core.BlueprintDefinitionPool;
 import com.gildedgames.orbis_api.core.CreationData;
@@ -31,12 +30,14 @@ import com.gildedgames.orbis_api.data.schedules.ScheduleRegion;
 import com.gildedgames.orbis_api.processing.BlockAccessExtendedWrapper;
 import com.gildedgames.orbis_api.processing.DataPrimer;
 import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
+import com.gildedgames.orbis_api.world.WorldSlice;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
@@ -143,7 +144,7 @@ public class BiomeAetherDecorator
 				{
 					BlockPos pos = new BlockPos(startX + x, y, startZ + z);
 
-					generated = primer.canGenerate(outpostBake, pos, true);
+					generated = primer.canGenerate(outpostBake, pos);
 
 					if (generated)
 					{
@@ -209,7 +210,7 @@ public class BiomeAetherDecorator
 				{
 					BlockPos pos = new BlockPos(startX + x, y, startZ + z);
 
-					final boolean generated = primer.canGenerate(baked, pos, true);
+					final boolean generated = primer.canGenerate(baked, pos);
 
 					if (generated)
 					{
@@ -278,13 +279,13 @@ public class BiomeAetherDecorator
 		//Decorate SubBiomes
 		IBlockAccessExtended blockAccessExtended = new BlockAccessExtendedWrapper(world);
 
-		WorldDecorationUtil.generateDecorations(island.getBasicDecorations(), world, blockAccessExtended, random, pos);
+		WorldDecorationUtil.generateDecorations(island.getBasicDecorations(), world, random, pos);
 
 		final WorldProviderAether provider = WorldProviderAether.get(world);
 
 		if (TerrainGen.decorate(world, random, chunkPos, DecorateBiomeEvent.Decorate.EventType.TREE))
 		{
-			WorldDecorationUtil.generateDecorationsWithNoise(island.getTreeDecorations(), world, blockAccessExtended, random, pos, provider.getNoise(),
+			WorldDecorationUtil.generateDecorationsWithNoise(island.getTreeDecorations(), world, random, pos, provider.getNoise(),
 					island.getOpenAreaDecorationGenChance(), island.getForestTreeCountModifier());
 		}
 
@@ -446,16 +447,41 @@ public class BiomeAetherDecorator
 		MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Post(world, random, chunkPos));
 	}
 
-	private void generateMineable(final WorldGenAetherMinable minable, final WorldSlice world, final Random random, final BlockPos pos, final int minY,
+	private void generateMineable(final WorldGenAetherMinable minable, final WorldSlice slice, final Random random, final BlockPos pos,
 			final int maxY, final int attempts)
 	{
+		double attemptsPerLevel = (double) attempts / (double) maxY;
+
+		int topY = Math.max(slice.getWorld().getTopSolidOrLiquidBlock(pos).getY() + 8, 255);
+
+		if (topY <= 0)
+		{
+			return;
+		}
+
+		int adjustedMaxY = Math.min(topY, maxY);
+
+		if (adjustedMaxY < 0)
+		{
+			return;
+		}
+
+		int bottomY = Math.min(getBottomSolidOrLiquidBlock(slice.getWorld(), pos).getY() - 8, 0);
+
+		if (adjustedMaxY <= bottomY)
+		{
+			return;
+		}
+
+		double adjustedAttempts = (double) (adjustedMaxY - bottomY) * attemptsPerLevel;
+
 		BlockPos.PooledMutableBlockPos randomPos = BlockPos.PooledMutableBlockPos.retain();
 
-		for (int count = 0; count < attempts; count++)
+		for (int count = 0; count < adjustedAttempts; count++)
 		{
-			translate(randomPos, pos, random.nextInt(16), random.nextInt(maxY - minY) + minY, random.nextInt(16));
+			translate(randomPos, pos, random.nextInt(16), random.nextInt(adjustedMaxY - bottomY) + bottomY, random.nextInt(16));
 
-			minable.generate(world, random, randomPos);
+			minable.generate(slice, random, randomPos);
 		}
 
 		randomPos.release();
@@ -494,12 +520,12 @@ public class BiomeAetherDecorator
 
 	protected void generateOres(final WorldSlice slice, final Random random, final BlockPos pos)
 	{
-		this.generateMineable(this.genAmbrosium, slice, random, pos, 0, 256, 20);
-		this.generateMineable(this.genZanite, slice, random, pos, 0, 256, 18);
-		this.generateMineable(this.genGravitite, slice, random, pos, 0, 50, 10);
-		this.generateMineable(this.genIcestone, slice, random, pos, 0, 256, 20);
-		this.generateMineable(this.genArkenium, slice, random, pos, 0, 70, 15);
-		this.generateMineable(this.genCrudeScatterglass, slice, random, pos, 0, 110, 25);
+		this.generateMineable(this.genAmbrosium, slice, random, pos, 256, 10);
+		this.generateMineable(this.genZanite, slice, random, pos, 256, 9);
+		this.generateMineable(this.genGravitite, slice, random, pos, 50, 5);
+		this.generateMineable(this.genIcestone, slice, random, pos, 256, 10);
+		this.generateMineable(this.genArkenium, slice, random, pos, 70, 8);
+		this.generateMineable(this.genCrudeScatterglass, slice, random, pos, 110, 14);
 	}
 
 	protected void generateClouds(final World world, final Random random, final BlockPos pos)
@@ -508,5 +534,43 @@ public class BiomeAetherDecorator
 		this.generateCloud(this.genColdColumbusAercloud, world, pos, random, 30, 16, 90, 130);
 
 		this.generateCloud(this.genPurpleAercloud, world, pos, random, 50, 4, 90, 130);
+	}
+
+	private static BlockPos getBottomSolidOrLiquidBlock(World world, BlockPos pos)
+	{
+		Chunk chunk = world.getChunk(pos);
+
+		int lowestSection = -1;
+
+		for (int i = 0; i < chunk.getBlockStorageArray().length; i++)
+		{
+			if (chunk.getBlockStorageArray()[i] != Chunk.NULL_BLOCK_STORAGE)
+			{
+				lowestSection = i * 16;
+
+				break;
+			}
+		}
+
+		if (lowestSection == -1)
+		{
+			return new BlockPos(pos.getX(), 0, pos.getZ());
+		}
+
+		BlockPos blockpos;
+		BlockPos blockpos1;
+
+		for (blockpos = new BlockPos(pos.getX(), lowestSection, pos.getZ()); blockpos.getY() <= 255; blockpos = blockpos1)
+		{
+			blockpos1 = blockpos.up();
+			IBlockState state = chunk.getBlockState(blockpos1);
+
+			if (state.getMaterial().blocksMovement() && !state.getBlock().isLeaves(state, world, blockpos1) && !state.getBlock().isFoliage(world, blockpos1))
+			{
+				break;
+			}
+		}
+
+		return blockpos;
 	}
 }

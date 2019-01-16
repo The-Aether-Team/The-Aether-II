@@ -132,7 +132,7 @@ public class BlockAetherSapling extends BlockAetherPlant implements IGrowable, I
 					adjustedPos = new BlockPos(pos.getX()-5, pos.getY(), pos.getZ()-5);
 				}
 
-				if (!BlueprintPlacer.place(world, baked, adjustedPos, true))
+				if (!BlueprintPlacer.place(world, baked, adjustedPos))
 				{
 					world.setBlockState(pos, state, 4);
 				}

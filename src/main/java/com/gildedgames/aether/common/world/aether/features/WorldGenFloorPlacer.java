@@ -1,18 +1,17 @@
 package com.gildedgames.aether.common.world.aether.features;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.orbis_api.processing.BlockAccessExtendedWrapper;
-import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
-import com.gildedgames.orbis_api.world.IWorldGen;
+import com.gildedgames.orbis_api.world.WorldSlice;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.Random;
 
-public class WorldGenFloorPlacer extends WorldGenerator implements IWorldGen
+public class WorldGenFloorPlacer extends WorldGenerator
 {
 	private final IBlockState[] states;
 
@@ -37,20 +36,16 @@ public class WorldGenFloorPlacer extends WorldGenerator implements IWorldGen
 	}
 
 	@Override
-	public boolean generate(final World world, final Random rand, final BlockPos pos)
+	public boolean generate(final World world, final Random rand, BlockPos pos)
 	{
-		return this.generate(new BlockAccessExtendedWrapper(world), world, rand, pos, false);
-	}
-
-	@Override
-	public boolean generate(final IBlockAccessExtended access, final World world, final Random rand, BlockPos pos, final boolean centered)
-	{
-		pos = access.getTopPos(pos);
+		pos = world.getTopSolidOrLiquidBlock(pos);
 
 		int count = 0;
 
-		BlockPos.PooledMutableBlockPos randomPos = BlockPos.PooledMutableBlockPos.retain();
-		BlockPos.PooledMutableBlockPos randomPosDown = BlockPos.PooledMutableBlockPos.retain();
+		WorldSlice slice = new WorldSlice(world, new ChunkPos(pos));
+
+		BlockPos.MutableBlockPos randomPos = new BlockPos.MutableBlockPos();
+		BlockPos.MutableBlockPos randomPosDown = new BlockPos.MutableBlockPos();
 
 		for (int attempts = 0; attempts < 128; attempts++)
 		{
@@ -60,43 +55,36 @@ public class WorldGenFloorPlacer extends WorldGenerator implements IWorldGen
 					pos.getZ() + (rand.nextInt(16) - 8)
 			);
 
-			final IBlockState chosen = this.states[rand.nextInt(this.states.length)];
-
-			if (access.isAirBlock(randomPos))
+			if (!slice.isAirBlock(randomPos))
 			{
-				randomPosDown.setPos(randomPos);
-				randomPosDown.setY(randomPosDown.getY() - 1);
+				continue;
+			}
 
-				final IBlockState below = access.getBlockState(randomPosDown);
+			randomPosDown.setPos(randomPos);
+			randomPosDown.setY(randomPosDown.getY() - 1);
 
-				if (((this.statesCanPlaceOn.length == 0 && below.getBlock() == BlocksAether.aether_grass) || ArrayUtils.contains(this.statesCanPlaceOn, below)))
+			final IBlockState below = slice.getBlockState(randomPosDown);
+
+			if (((this.statesCanPlaceOn.length == 0 && below.getBlock() == BlocksAether.aether_grass) || ArrayUtils.contains(this.statesCanPlaceOn, below)))
+			{
+				final IBlockState chosen = this.states[rand.nextInt(this.states.length)];
+
+				slice.setBlockState(randomPos, chosen);
+
+				if (this.amount > 0)
 				{
-					access.setBlockState(randomPos, chosen, 2 | 16);
-
-					if (this.amount > 0)
+					if (count < this.amount)
 					{
-						if (count < this.amount)
-						{
-							count++;
-						}
-						else
-						{
-							return true;
-						}
+						count++;
+					}
+					else
+					{
+						return true;
 					}
 				}
 			}
 		}
 
-		randomPos.release();
-		randomPosDown.release();
-
 		return true;
-	}
-
-	@Override
-	public boolean generate(final IBlockAccessExtended blockAccess, final World world, final Random rand, final BlockPos position)
-	{
-		return this.generate(blockAccess, world, rand, position, false);
 	}
 }

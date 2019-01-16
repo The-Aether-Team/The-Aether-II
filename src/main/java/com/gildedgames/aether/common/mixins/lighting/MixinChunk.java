@@ -353,7 +353,7 @@ public abstract class MixinChunk implements IChunkLighting, IChunkLightingData, 
 
 				for (int y = maxY + 16; y > 0; --y)
 				{
-					if (this.getBlockLightOpacity(x, y - 1, z) != 0)
+					if (this.getBlockState(x, y - 1, z).getLightOpacity() != 0)
 					{
 						this.heightMap[z << 4 | x] = y;
 
@@ -373,7 +373,7 @@ public abstract class MixinChunk implements IChunkLighting, IChunkLightingData, 
 
 					do
 					{
-						int opacity = this.getBlockLightOpacity(x, y2, z);
+						int opacity = this.getBlockState(x, y2, z).getLightOpacity();
 
 						if (opacity == 0 && light != 15)
 						{

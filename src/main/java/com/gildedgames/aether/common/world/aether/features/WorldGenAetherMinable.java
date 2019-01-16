@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.world.aether.features;
 
-import com.gildedgames.aether.common.world.util.WorldSlice;
+import com.gildedgames.orbis_api.world.WorldSlice;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;

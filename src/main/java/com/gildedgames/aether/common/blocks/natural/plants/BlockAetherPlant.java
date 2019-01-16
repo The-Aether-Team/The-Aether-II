@@ -38,11 +38,7 @@ public class BlockAetherPlant extends Block implements IGrowable
 	@Override
 	public boolean canPlaceBlockAt(final World world, final BlockPos pos)
 	{
-		BlockPos.PooledMutableBlockPos down = BlockPos.PooledMutableBlockPos.retain(pos);
-
-		final IBlockState soilBlock = world.getBlockState(down);
-
-		down.release();
+		final IBlockState soilBlock = world.getBlockState(pos.down());
 
 		return this.isSuitableSoilBlock(soilBlock);
 	}

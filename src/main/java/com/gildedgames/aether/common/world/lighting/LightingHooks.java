@@ -96,14 +96,12 @@ public class LightingHooks
 
 	private static void scheduleRelightChecksForColumn(final World world, final EnumSkyBlock lightType, final int x, final int z, final int yMin, final int yMax)
 	{
-		BlockPos.PooledMutableBlockPos pos = BlockPos.PooledMutableBlockPos.retain();
+		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
 
 		for (int y = yMin; y <= yMax; ++y)
 		{
 			world.checkLightFor(lightType, pos.setPos(x, y, z));
 		}
-
-		pos.release();
 	}
 
 	public enum EnumBoundaryFacing

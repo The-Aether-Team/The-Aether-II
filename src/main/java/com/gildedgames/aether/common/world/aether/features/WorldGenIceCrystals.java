@@ -2,9 +2,6 @@ package com.gildedgames.aether.common.world.aether.features;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockIceCrystal;
-import com.gildedgames.orbis_api.processing.BlockAccessExtendedWrapper;
-import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
-import com.gildedgames.orbis_api.world.IWorldGen;
 import com.google.common.collect.Lists;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -14,7 +11,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import java.util.List;
 import java.util.Random;
 
-public class WorldGenIceCrystals extends WorldGenerator implements IWorldGen
+public class WorldGenIceCrystals extends WorldGenerator
 {
 
 	private final IBlockState crystalState;
@@ -35,44 +32,39 @@ public class WorldGenIceCrystals extends WorldGenerator implements IWorldGen
 	}
 
 	@Override
-	public boolean generate(World worldIn, Random rand, BlockPos position)
+	public boolean generate(World world, Random rand, BlockPos position)
 	{
-
-		return this.generate(new BlockAccessExtendedWrapper(worldIn), worldIn, rand, position, false);
-	}
-
-	@Override
-	public boolean generate(IBlockAccessExtended blockAccess, World world, Random rand, BlockPos position, boolean centered)
-	{
-		if (!blockAccess.canAccess(position))
+		if (!world.isBlockLoaded(position))
 		{
 			return false;
 		}
 
 		int count = 0;
+
 		for (int attempts = 0; attempts < 128; attempts++)
 		{
 			final BlockPos randomPos =
 					position.add(rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
 
-			if (!blockAccess.canAccess(randomPos))
+			if (!world.isBlockLoaded(randomPos))
 			{
 				return false;
 			}
 
-			if (!blockAccess.canAccess(randomPos.down()) || !blockAccess.canAccess(randomPos.up()))
+			if (!world.isBlockLoaded(randomPos.down()) || !world.isBlockLoaded(randomPos.up()))
 			{
 				return false;
 			}
 
-			final IBlockState above = blockAccess.getBlockState(randomPos.up());
-			final IBlockState below = blockAccess.getBlockState(randomPos.down());
+			final IBlockState above = world.getBlockState(randomPos.up());
+			final IBlockState below = world.getBlockState(randomPos.down());
 
-			if (blockAccess.isAirBlock(randomPos))
+			if (world.isAirBlock(randomPos))
 			{
 				if (this.statesCanPlaceOn.isEmpty() || this.statesCanPlaceOn.contains(below))
 				{
-					blockAccess.setBlockState(randomPos, this.crystalState.withProperty(BlockIceCrystal.PROPERTY_VARIANT, BlockIceCrystal.STALAGMITE), 2 | 16);
+					world.setBlockState(randomPos, this.crystalState.withProperty(BlockIceCrystal.PROPERTY_VARIANT, BlockIceCrystal.STALAGMITE), 2 | 16);
+
 					if (this.max > 0)
 					{
 						if (count < this.max)
@@ -85,9 +77,11 @@ public class WorldGenIceCrystals extends WorldGenerator implements IWorldGen
 						}
 					}
 				}
+
 				if (this.statesCanPlaceOn.isEmpty() || this.statesCanPlaceOn.contains(above))
 				{
-					blockAccess.setBlockState(randomPos, this.crystalState.withProperty(BlockIceCrystal.PROPERTY_VARIANT, BlockIceCrystal.STALACTITE), 2 | 16);
+					world.setBlockState(randomPos, this.crystalState.withProperty(BlockIceCrystal.PROPERTY_VARIANT, BlockIceCrystal.STALACTITE), 2 | 16);
+
 					if (this.max > 0)
 					{
 						if (count < this.max)
@@ -104,11 +98,5 @@ public class WorldGenIceCrystals extends WorldGenerator implements IWorldGen
 		}
 
 		return true;
-	}
-
-	@Override
-	public boolean generate(IBlockAccessExtended blockAccess, World world, Random rand, BlockPos position)
-	{
-		return this.generate(blockAccess, world, rand, position, false);
 	}
 }
