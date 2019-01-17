@@ -214,15 +214,15 @@ public class EntityUtil
 
 	public static IBlockState getBlockBelow(World world, BlockPos pos)
 	{
-		BlockPos startPos = pos;
 		IBlockState state;
 
-		state = world.getBlockState(startPos);
+		state = world.getBlockState(pos);
 
-		while (state == Blocks.AIR.getDefaultState())
+		while (state == Blocks.AIR.getDefaultState() && pos.getY() > 0 && pos.getY() < 256)
 		{
-			startPos = startPos.down();
-			state = world.getBlockState(startPos);
+			pos = pos.down();
+
+			state = world.getBlockState(pos);
 		}
 
 		return state;
