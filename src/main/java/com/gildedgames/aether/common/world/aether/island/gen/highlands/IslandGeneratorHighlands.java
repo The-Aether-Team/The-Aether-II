@@ -128,8 +128,13 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 
 				if (this.vars.getCoastHeight() > 0)
 				{
-					int coastMaxY = 100 + (this.vars.getCoastHeight() / 2);
-					int coastMinY = coastMaxY - this.vars.getCoastHeight();
+					int coastMaxY = 100 + (this.vars.getCoastHeight() / 2) - 1;
+					int coastMinY = coastMaxY - this.vars.getCoastHeight() + 1;
+
+					if (maxY > coastMaxY)
+					{
+						continue;
+					}
 
 					int m3a = Math.min(coastMaxY - yOffset, 15);
 					int m3b = Math.max(coastMinY - yOffset, 0);
@@ -190,7 +195,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 			{
 				int worldZ = posZ + z;
 
-				double sample = heightMap.getNoiseValue(x, z);
+				double sample = heightMap.getNoiseValue(x, z) * 0.7;
 
 				double distZ = Math.abs((centerZ - worldZ) * (1.0 / radiusZ));
 

@@ -150,7 +150,7 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 				final int worldX = posX + x;
 				final int worldZ = posZ + z;
 
-				final double sample = heightMap.getNoiseValue(x, z);
+				final double sample = heightMap.getNoiseValue(x, z) * 0.7;
 
 				final double distX = Math.abs((centerX - worldX) * (1.0 / radiusX));
 				final double distZ = Math.abs((centerZ - worldZ) * (1.0 / radiusZ));

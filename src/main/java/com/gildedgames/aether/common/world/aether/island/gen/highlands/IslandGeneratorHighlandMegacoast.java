@@ -108,7 +108,7 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 				// Get distance from center of Island
 				final double dist = Math.sqrt(distX * distX + distZ * distZ) / 1.0D;
 
-				final double sample = heightMap.getNoiseValue(x, z) * 0.8;
+				final double sample = heightMap.getNoiseValue(x, z) * 0.7;
 
 				final double heightSample = sample + 1.0 - dist;
 				final double cutoffPoint = 0.325;
