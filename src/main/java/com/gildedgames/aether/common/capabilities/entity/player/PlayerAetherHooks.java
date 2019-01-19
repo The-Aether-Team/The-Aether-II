@@ -35,6 +35,7 @@ import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
+import net.minecraftforge.event.entity.living.LivingHealEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -339,5 +340,22 @@ public class PlayerAetherHooks
 		}
 	}
 
+
+	@SubscribeEvent
+	public static void onLivingHeal(final LivingHealEvent event)
+	{
+		final PlayerAether aePlayer = PlayerAether.getPlayer(event.getEntity());
+
+		if (aePlayer != null)
+		{
+			if (event.getAmount() <= 1.5)
+			{
+				if (aePlayer.getEffectsModule().isAmbrosiumPoisoned)
+				{
+					event.setCanceled(true);
+				}
+			}
+		}
+	}
 
 }

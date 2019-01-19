@@ -287,7 +287,6 @@ public class PlayerAether implements IPlayerAether
 
 	public void onPlaceBlock(final BlockEvent.PlaceEvent event)
 	{
-
 	}
 
 	public void onDeath(final LivingDeathEvent event)
