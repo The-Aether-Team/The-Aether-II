@@ -9,7 +9,6 @@ public interface IAetherEffects
 	int TICKS_PER_SECOND = 20;
 
 	boolean isEffectApplied();
-	int getActiveEffectTime();
 	effectTypes getEffectType();
 
 	AttributeModifier getAttributeModifier();
@@ -25,6 +24,16 @@ public interface IAetherEffects
 	 * reduce the current build up amount.
 	 */
 	void reduceBuildup();
+
+	/**
+	 * Buildup amount is reduced by player's resistances.
+	 * resistance default is 1.0, since it is multipled by the buildup.
+	 * @param addResistance the amount to add to player resistance.
+	 *                      caps at 0.0 and 2.0.
+	 *                      a lower resistance value will yield higher defense from buildup.
+	 *                      a higher resistance value will yeild lower defense from buildup.
+	 */
+	void addResistanceToEffectBuildup(double addResistance);
 
 	void tickStart(TickEvent.PlayerTickEvent event);
 	void onUpdate();

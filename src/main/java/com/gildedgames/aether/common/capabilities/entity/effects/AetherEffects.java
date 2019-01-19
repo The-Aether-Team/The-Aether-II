@@ -43,7 +43,6 @@ abstract public class AetherEffects implements IAetherEffects
 		return this.isEffectApplied;
 	}
 
-	@Override
 	public int getActiveEffectTime()
 	{
 		return this.ACTIVE_EFFECT_TIME;
@@ -97,6 +96,22 @@ abstract public class AetherEffects implements IAetherEffects
 					this.effectBuildup = this.effectBuildup - this.REDUCTION_RATE;
 				}
 			}
+		}
+	}
+
+	@Override
+	public void addResistanceToEffectBuildup(double addResistance)
+	{
+		this.effectResistance = this.effectResistance + addResistance;
+
+		if (this.effectResistance > 2.0D)
+		{
+			this.effectResistance = 2.0D;
+		}
+
+		if (this.effectResistance < 0.0D)
+		{
+			this.effectResistance = 0.0D;
 		}
 	}
 

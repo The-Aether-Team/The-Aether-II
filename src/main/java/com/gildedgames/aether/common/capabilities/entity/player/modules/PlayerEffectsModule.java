@@ -81,6 +81,21 @@ public class PlayerEffectsModule extends PlayerAetherModule
 		return false;
 	}
 
+	public void addResistanceToEffectBuildup(IAetherEffects.effectTypes effectType, double addResistance)
+	{
+		for (AetherEffects effect : this.effects)
+		{
+			if (effect == null)
+			{
+				continue;
+			}
+
+			if (effect.getEffectType() == effectType)
+			{
+				effect.addResistanceToEffectBuildup(addResistance);
+			}
+		}
+	}
 
 	@Override
 	public void tickStart(TickEvent.PlayerTickEvent event)
