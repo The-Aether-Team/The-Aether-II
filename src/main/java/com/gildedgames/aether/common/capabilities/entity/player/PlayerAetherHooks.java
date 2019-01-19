@@ -5,9 +5,9 @@ import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.IBlockSnowy;
+import com.gildedgames.aether.common.capabilities.entity.effects.IAetherEffects;
 import com.gildedgames.aether.common.containers.ContainerTrade;
 import com.gildedgames.aether.common.entities.util.shared.SharedAetherAttributes;
-import com.gildedgames.aether.common.network.AetherGuiHandler;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketMarkPlayerDeath;
 import com.gildedgames.aether.common.network.packets.PacketRequestClientInfo;
@@ -29,7 +29,6 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -39,7 +38,6 @@ import net.minecraftforge.event.entity.living.LivingHealEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -350,7 +348,7 @@ public class PlayerAetherHooks
 		{
 			if (event.getAmount() <= 1.5)
 			{
-				if (aePlayer.getEffectsModule().isAmbrosiumPoisoned)
+				if (aePlayer.getEffectsModule().isEffectApplied(IAetherEffects.effectTypes.AMBROSIUM_POISONING))
 				{
 					event.setCanceled(true);
 				}
