@@ -426,10 +426,14 @@ public class PlayerEffectsModule extends PlayerAetherModule
 		if (this.entityAilments.get(effectTypes.AMBROSIUM_POISONING.numericValue) > 0 || this.isAmbrosiumPoisoned)
 		{
 			++ this.ambrosiumPoisonTimer;
-			if (this.ambrosiumPoisonTimer % (effectTypes.AMBROSIUM_POISONING.timeTillReduction * this.TICKS_PER_SECOND) == 0)
+
+			if (!this.isAmbrosiumPoisoned)
 			{
-				this.entityAilments.put(effectTypes.AMBROSIUM_POISONING.numericValue,
-						this.entityAilments.get(effectTypes.AMBROSIUM_POISONING.numericValue) - effectTypes.AMBROSIUM_POISONING.reductionRate);
+				if (this.ambrosiumPoisonTimer % (effectTypes.AMBROSIUM_POISONING.timeTillReduction * this.TICKS_PER_SECOND) == 0)
+				{
+					this.entityAilments.put(effectTypes.AMBROSIUM_POISONING.numericValue,
+							this.entityAilments.get(effectTypes.AMBROSIUM_POISONING.numericValue) - effectTypes.AMBROSIUM_POISONING.reductionRate);
+				}
 			}
 		}
 
@@ -437,10 +441,14 @@ public class PlayerEffectsModule extends PlayerAetherModule
 		if (this.entityAilments.get(effectTypes.TOXIN.numericValue) > 0 || this.isToxic)
 		{
 			++ this.toxinTimer;
-			if (this.toxinTimer % (effectTypes.TOXIN.timeTillReduction * this.TICKS_PER_SECOND) == 0)
+
+			if (!this.isToxic)
 			{
-				this.entityAilments.put(effectTypes.TOXIN.numericValue,
-						this.entityAilments.get(effectTypes.TOXIN.numericValue) - effectTypes.TOXIN.reductionRate);
+				if (this.toxinTimer % (effectTypes.TOXIN.timeTillReduction * this.TICKS_PER_SECOND) == 0)
+				{
+					this.entityAilments.put(effectTypes.TOXIN.numericValue,
+							this.entityAilments.get(effectTypes.TOXIN.numericValue) - effectTypes.TOXIN.reductionRate);
+				}
 			}
 		}
 
@@ -448,10 +456,14 @@ public class PlayerEffectsModule extends PlayerAetherModule
 		if (this.entityAilments.get(effectTypes.COCKATRICE_VENOM.numericValue) > 0 || this.isCockatriceVenomed)
 		{
 			++ this.cockatriceVenomTimer;
-			if (this.cockatriceVenomTimer % (effectTypes.COCKATRICE_VENOM.timeTillReduction * this.TICKS_PER_SECOND) == 0)
+
+			if (!this.isCockatriceVenomed)
 			{
-				this.entityAilments.put(effectTypes.COCKATRICE_VENOM.numericValue,
-						this.entityAilments.get(effectTypes.COCKATRICE_VENOM.numericValue) - effectTypes.COCKATRICE_VENOM.reductionRate);
+				if (this.cockatriceVenomTimer % (effectTypes.COCKATRICE_VENOM.timeTillReduction * this.TICKS_PER_SECOND) == 0)
+				{
+					this.entityAilments.put(effectTypes.COCKATRICE_VENOM.numericValue,
+							this.entityAilments.get(effectTypes.COCKATRICE_VENOM.numericValue) - effectTypes.COCKATRICE_VENOM.reductionRate);
+				}
 			}
 		}
 
@@ -459,10 +471,14 @@ public class PlayerEffectsModule extends PlayerAetherModule
 		if (this.entityAilments.get(effectTypes.STUN.numericValue) > 0 || this.isStunned)
 		{
 			++ this.stunTimer;
-			if (this.stunTimer % (effectTypes.STUN.timeTillReduction * this.TICKS_PER_SECOND) == 0)
+
+			if (!this.isStunned)
 			{
-				this.entityAilments.put(effectTypes.STUN.numericValue,
-						this.entityAilments.get(effectTypes.STUN.numericValue) - effectTypes.STUN.reductionRate);
+				if (this.stunTimer % (effectTypes.STUN.timeTillReduction * this.TICKS_PER_SECOND) == 0)
+				{
+					this.entityAilments.put(effectTypes.STUN.numericValue,
+							this.entityAilments.get(effectTypes.STUN.numericValue) - effectTypes.STUN.reductionRate);
+				}
 			}
 		}
 
@@ -470,10 +486,14 @@ public class PlayerEffectsModule extends PlayerAetherModule
 		if (this.entityAilments.get(effectTypes.BLEED.numericValue) > 0 || this.isBleeding)
 		{
 			++ this.bleedTimer;
-			if (this.bleedTimer % (effectTypes.BLEED.timeTillReduction * this.TICKS_PER_SECOND) == 0)
+
+			if (!this.isBleeding)
 			{
-				this.entityAilments.put(effectTypes.BLEED.numericValue,
-						this.entityAilments.get(effectTypes.BLEED.numericValue) - effectTypes.BLEED.reductionRate);
+				if (this.bleedTimer % (effectTypes.BLEED.timeTillReduction * this.TICKS_PER_SECOND) == 0)
+				{
+					this.entityAilments.put(effectTypes.BLEED.numericValue,
+							this.entityAilments.get(effectTypes.BLEED.numericValue) - effectTypes.BLEED.reductionRate);
+				}
 			}
 		}
 
@@ -481,10 +501,14 @@ public class PlayerEffectsModule extends PlayerAetherModule
 		if (this.entityAilments.get(effectTypes.FRACTURE.numericValue) > 0 || this.isFractured)
 		{
 			++ this.fractureTimer;
-			if (this.fractureTimer % (effectTypes.FRACTURE.timeTillReduction * this.TICKS_PER_SECOND) == 0)
+
+			if (!this.isFractured)
 			{
-				this.entityAilments.put(effectTypes.FRACTURE.numericValue,
-						this.entityAilments.get(effectTypes.FRACTURE.numericValue) - effectTypes.FRACTURE.reductionRate);
+				if (this.fractureTimer % (effectTypes.FRACTURE.timeTillReduction * this.TICKS_PER_SECOND) == 0)
+				{
+					this.entityAilments.put(effectTypes.FRACTURE.numericValue,
+							this.entityAilments.get(effectTypes.FRACTURE.numericValue) - effectTypes.FRACTURE.reductionRate);
+				}
 			}
 		}
 
@@ -492,10 +516,14 @@ public class PlayerEffectsModule extends PlayerAetherModule
 		if (this.entityAilments.get(effectTypes.FUNGAL_ROT.numericValue) > 0 || this.isFungalRot)
 		{
 			++ this.fungalRotTimer;
-			if (this.fungalRotTimer % (effectTypes.FUNGAL_ROT.timeTillReduction * this.TICKS_PER_SECOND) == 0)
+
+			if (!this.isFungalRot)
 			{
-				this.entityAilments.put(effectTypes.FUNGAL_ROT.numericValue,
-						this.entityAilments.get(effectTypes.FUNGAL_ROT.numericValue) - effectTypes.FUNGAL_ROT.reductionRate);
+				if (this.fungalRotTimer % (effectTypes.FUNGAL_ROT.timeTillReduction * this.TICKS_PER_SECOND) == 0)
+				{
+					this.entityAilments.put(effectTypes.FUNGAL_ROT.numericValue,
+							this.entityAilments.get(effectTypes.FUNGAL_ROT.numericValue) - effectTypes.FUNGAL_ROT.reductionRate);
+				}
 			}
 		}
 	}
@@ -507,6 +535,9 @@ public class PlayerEffectsModule extends PlayerAetherModule
 			if (this.ambrosiumPoisonTimer == effectTypes.AMBROSIUM_POISONING.activeEffectTime * this.TICKS_PER_SECOND)
 			{
 				this.isAmbrosiumPoisoned = false;
+				this.ambrosiumPoisonTimer = 0;
+				this.entityAilments.put(effectTypes.AMBROSIUM_POISONING.numericValue, 0);
+
 				AetherCore.LOGGER.info(this.getEntity().getName() + " : No longer Ambrosium Poisoined.");
 			}
 		}
@@ -516,6 +547,9 @@ public class PlayerEffectsModule extends PlayerAetherModule
 			if (this.toxinTimer >= effectTypes.TOXIN.activeEffectTime * this.TICKS_PER_SECOND)
 			{
 				this.isToxic = false;
+				this.toxinTimer = 0;
+				this.entityAilments.put(effectTypes.TOXIN.numericValue, 0);
+
 				AetherCore.LOGGER.info(this.getEntity().getName() + " : No longer Toxic.");
 			}
 		}
@@ -525,6 +559,9 @@ public class PlayerEffectsModule extends PlayerAetherModule
 			if (this.cockatriceVenomTimer >= effectTypes.COCKATRICE_VENOM.activeEffectTime * this.TICKS_PER_SECOND)
 			{
 				this.isCockatriceVenomed = false;
+				this.cockatriceVenomTimer = 0;
+				this.entityAilments.put(effectTypes.COCKATRICE_VENOM.numericValue, 0);
+
 				AetherCore.LOGGER.info(this.getEntity().getName() + " : No longer effected by Cockatrice Venom.");
 			}
 		}
@@ -534,6 +571,9 @@ public class PlayerEffectsModule extends PlayerAetherModule
 			if (this.stunTimer >= effectTypes.STUN.activeEffectTime * this.TICKS_PER_SECOND)
 			{
 				this.isStunned = false;
+				this.stunTimer = 0;
+				this.entityAilments.put(effectTypes.STUN.numericValue, 0);
+
 				AetherCore.LOGGER.info(this.getEntity().getName() + " : No longer Stunned.");
 			}
 		}
@@ -543,6 +583,9 @@ public class PlayerEffectsModule extends PlayerAetherModule
 			if (this.bleedTimer >= effectTypes.BLEED.activeEffectTime * this.TICKS_PER_SECOND)
 			{
 				this.isBleeding = false;
+				this.bleedTimer = 0;
+				this.entityAilments.put(effectTypes.BLEED.numericValue, 0);
+
 				AetherCore.LOGGER.info(this.getEntity().getName() + " : No longer Bleeding.");
 			}
 		}
@@ -552,6 +595,9 @@ public class PlayerEffectsModule extends PlayerAetherModule
 			if (this.fractureTimer == effectTypes.FRACTURE.activeEffectTime * this.TICKS_PER_SECOND)
 			{
 				this.isFractured = false;
+				this.fractureTimer = 0;
+				this.entityAilments.put(effectTypes.FRACTURE.numericValue, 0);
+
 				AetherCore.LOGGER.info(this.getEntity().getName() + " : No longer Fractured.");
 			}
 		}
@@ -561,6 +607,9 @@ public class PlayerEffectsModule extends PlayerAetherModule
 			if (this.fungalRotTimer == effectTypes.FUNGAL_ROT.activeEffectTime * this.TICKS_PER_SECOND)
 			{
 				this.isFungalRot = false;
+				this.fungalRotTimer = 0;
+				this.entityAilments.put(effectTypes.FUNGAL_ROT.numericValue, 0);
+
 				AetherCore.LOGGER.info(this.getEntity().getName() + " : No longer effected by Fungal Rot.");
 			}
 		}

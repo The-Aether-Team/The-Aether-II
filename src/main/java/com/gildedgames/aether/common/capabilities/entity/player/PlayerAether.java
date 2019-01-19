@@ -287,6 +287,7 @@ public class PlayerAether implements IPlayerAether
 
 	public void onPlaceBlock(final BlockEvent.PlaceEvent event)
 	{
+		this.effectsModule.applyAilment(PlayerEffectsModule.effectTypes.TOXIN, 50);
 	}
 
 	public void onDeath(final LivingDeathEvent event)
