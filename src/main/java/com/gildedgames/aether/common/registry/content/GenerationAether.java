@@ -11,6 +11,7 @@ import com.gildedgames.aether.common.world.aether.features.WorldGenIceCrystals;
 import com.gildedgames.aether.common.world.aether.features.aerclouds.WorldGenAercloud;
 import com.gildedgames.aether.common.world.templates.conditions.TemplateConditions;
 import com.gildedgames.aether.common.world.templates.post.PostPlacementMoaFamily;
+import com.gildedgames.aether.common.world.util.GenUtil;
 import com.gildedgames.orbis_api.OrbisAPI;
 import com.gildedgames.orbis_api.core.BlueprintDefinition;
 import com.gildedgames.orbis_api.core.BlueprintDefinitionPool;
@@ -270,16 +271,20 @@ public class GenerationAether
 		dark_blue_skyroot_oak = new TemplateDefinitionPool(dark_blue_skyroot_oak_1, dark_blue_skyroot_oak_2);
 		skyroot_moa_nest = new TemplateDefinitionPool(skyroot_moa_nest_1, skyroot_moa_nest_2);
 
-		short_aether_grass = new WorldGenFloorPlacer(
-				BlocksAether.tall_aether_grass.getDefaultState().withProperty(BlockTallAetherGrass.PROPERTY_VARIANT, BlockTallAetherGrass.SHORT));
-		aether_grass = new WorldGenFloorPlacer(
-				BlocksAether.tall_aether_grass.getDefaultState().withProperty(BlockTallAetherGrass.PROPERTY_VARIANT, BlockTallAetherGrass.NORMAL));
-		long_aether_grass = new WorldGenFloorPlacer(
-				BlocksAether.tall_aether_grass.getDefaultState().withProperty(BlockTallAetherGrass.PROPERTY_VARIANT, BlockTallAetherGrass.LONG));
+		short_aether_grass = new WorldGenFloorPlacer(GenUtil.equalStateFetcher(),
+				GenUtil.standardStateDefiner(
+						BlocksAether.tall_aether_grass.getDefaultState().withProperty(BlockTallAetherGrass.PROPERTY_VARIANT, BlockTallAetherGrass.SHORT)));
+		aether_grass = new WorldGenFloorPlacer(GenUtil.equalStateFetcher(),
+				GenUtil.standardStateDefiner(
+						BlocksAether.tall_aether_grass.getDefaultState().withProperty(BlockTallAetherGrass.PROPERTY_VARIANT, BlockTallAetherGrass.NORMAL)));
+		long_aether_grass = new WorldGenFloorPlacer(GenUtil.equalStateFetcher(),
+				GenUtil.standardStateDefiner(
+						BlocksAether.tall_aether_grass.getDefaultState().withProperty(BlockTallAetherGrass.PROPERTY_VARIANT, BlockTallAetherGrass.LONG)));
 
-		skyroot_twigs = new WorldGenFloorPlacer(4, BlocksAether.skyroot_twigs.getDefaultState(), BlocksAether.skyroot_twigs.getDefaultState(),
-				BlocksAether.holystone_rock.getDefaultState());
-		holystone_rocks = new WorldGenFloorPlacer(BlocksAether.holystone_rock.getDefaultState());
+		skyroot_twigs = new WorldGenFloorPlacer(4, GenUtil.equalStateFetcher(), GenUtil.standardStateDefiner(BlocksAether.skyroot_twigs.getDefaultState(),
+				BlocksAether.holystone_rock.getDefaultState()));
+
+		holystone_rocks = new WorldGenFloorPlacer(GenUtil.equalStateFetcher(), GenUtil.standardStateDefiner(BlocksAether.holystone_rock.getDefaultState()));
 
 		holystone_rocks.setStatesToPlaceOn(BlocksAether.holystone.getDefaultState());
 

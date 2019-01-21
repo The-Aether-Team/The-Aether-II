@@ -14,7 +14,9 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockValkyrieGrass;
 import com.gildedgames.aether.common.registry.content.GenerationAether;
 import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import com.gildedgames.aether.common.world.aether.WorldProviderAether;
-import com.gildedgames.aether.common.world.aether.features.*;
+import com.gildedgames.aether.common.world.aether.features.WorldGenAetherFlowers;
+import com.gildedgames.aether.common.world.aether.features.WorldGenAetherMinable;
+import com.gildedgames.aether.common.world.aether.features.WorldGenBrettlPlant;
 import com.gildedgames.aether.common.world.aether.features.aerclouds.WorldGenAercloud;
 import com.gildedgames.aether.common.world.aether.features.aerclouds.WorldGenPurpleAercloud;
 import com.gildedgames.aether.common.world.aether.features.trees.WorldGenOrangeTree;
@@ -47,27 +49,23 @@ import java.util.Random;
 public class BiomeAetherDecorator
 {
 
-	private final WorldGenAetherMinable genAmbrosium, genZanite, genGravitite, genIcestone, genArkenium, genQuicksoilOnGrass, genCoarseAetherDirtOnDirt, genCoarseAetherDirtOnHolystone;
+	public final boolean generateBushes = true;
+
+	private final WorldGenAetherMinable genAmbrosium, genZanite, genGravitite, genIcestone, genArkenium, genCoarseAetherDirtOnDirt, genCoarseAetherDirtOnHolystone;
 
 	private final WorldGenAetherMinable genMossyHolystone, genCrudeScatterglass;
 
-	private final WorldGenAetherFlowers genPurpleFlowers, genWhiteRoses, genBurstblossom, genAechorSprout;
+	private final WorldGenAetherFlowers genAechorSprout;
 
 	private final WorldGenOrangeTree genOrangeTree;
 
 	private final WorldGenAetherFlowers genBlueberryBushes, genKirridGrass, genPlumproots;
 
-	private final WorldGenQuicksoil genQuicksoil;
-
-	private final WorldGenAercloud genColdColumbusAercloud, genColdFlatAercloud, genBlueAercloud;
+	private final WorldGenAercloud genColdColumbusAercloud, genBlueAercloud;
 
 	private final WorldGenPurpleAercloud genPurpleAercloud;
 
 	private final WorldGenBrettlPlant genBrettlPlant;
-
-	private final WorldGenIceCrystals genIceCrystals;
-
-	public final boolean generateBushes = true;
 
 	public BiomeAetherDecorator()
 	{
@@ -88,18 +86,10 @@ public class BiomeAetherDecorator
 		this.genCoarseAetherDirtOnHolystone = new WorldGenAetherMinable(
 				BlocksAether.aether_dirt.getDefaultState().withProperty(BlockAetherDirt.PROPERTY_VARIANT, BlockAetherDirt.COARSE_DIRT), 22, holystoneMatcher);
 
-		this.genQuicksoilOnGrass = new WorldGenAetherMinable(BlocksAether.quicksoil.getDefaultState(), 22, grassMatcher);
-
 		this.genMossyHolystone = new WorldGenAetherMinable(
 				BlocksAether.holystone.getDefaultState().withProperty(BlockHolystone.PROPERTY_VARIANT, BlockHolystone.MOSSY_HOLYSTONE), 20, holystoneMatcher);
 		this.genCrudeScatterglass = new WorldGenAetherMinable(BlocksAether.crude_scatterglass.getDefaultState(), 16, holystoneMatcher);
 
-		this.genPurpleFlowers = new WorldGenAetherFlowers(
-				BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.PURPLE_FLOWER), 64);
-		this.genWhiteRoses = new WorldGenAetherFlowers(
-				BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.WHITE_ROSE), 64);
-		this.genBurstblossom = new WorldGenAetherFlowers(
-				BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.BURSTBLOSSOM), 64);
 		this.genAechorSprout = new WorldGenAetherFlowers(
 				BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.AECHOR_SPROUT), 4);
 
@@ -115,17 +105,12 @@ public class BiomeAetherDecorator
 				BlocksAether.plumproot.getDefaultState(), 64,
 				(state) -> state == BlocksAether.aether_grass.getDefaultState() || state == BlocksAether.aether_dirt.getDefaultState());
 
-		this.genQuicksoil = new WorldGenQuicksoil();
-
 		this.genBrettlPlant = new WorldGenBrettlPlant();
 
-		this.genColdFlatAercloud = new WorldGenAercloud(BlockAercloud.getAercloudState(BlockAercloud.COLD_AERCLOUD), 64, true);
 		this.genColdColumbusAercloud = new WorldGenAercloud(BlockAercloud.getAercloudState(BlockAercloud.COLD_AERCLOUD), 16, false);
 		this.genBlueAercloud = new WorldGenAercloud(BlockAercloud.getAercloudState(BlockAercloud.BLUE_AERCLOUD), 8, false);
 
 		this.genPurpleAercloud = new WorldGenPurpleAercloud(BlockAercloud.getAercloudState(BlockAercloud.PURPLE_AERCLOUD), 4, false);
-
-		this.genIceCrystals = new WorldGenIceCrystals(64);
 	}
 
 	public void prepareDecorationsWholeIsland(final World world, BlockAccessIsland access, final IIslandData island, IPrepSectorData sectorData,
@@ -347,7 +332,7 @@ public class BiomeAetherDecorator
 
 		if (TerrainGen.decorate(world, random, chunkPos, DecorateBiomeEvent.Decorate.EventType.FLOWERS))
 		{
-			// Purple Flowers Generator
+			/*// Purple Flowers Generator
 			for (count = 0; count < 8; count++)
 			{
 				if (random.nextInt(2) == 0)
@@ -378,9 +363,9 @@ public class BiomeAetherDecorator
 				z = random.nextInt(16) + 8;
 
 				this.genBurstblossom.generate(world, random, pos.add(x, y, z));
-			}
+			}*/
 
-			// Burstblossom Generator
+			// Aechor Sprout Generator
 			for (count = 0; count < 3; count++)
 			{
 				x = random.nextInt(16) + 8;
@@ -429,7 +414,7 @@ public class BiomeAetherDecorator
 
 		if (TerrainGen.decorate(world, random, chunkPos, DecorateBiomeEvent.Decorate.EventType.PUMPKIN))
 		{
-			// Kirrid Grass Generator
+			// Plumproot Generator
 			if (random.nextInt(10) == 0)
 			{
 				for (count = 0; count < 6; count++)

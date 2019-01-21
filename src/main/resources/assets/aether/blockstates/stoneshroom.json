@@ -1,0 +1,10 @@
+{
+	"variants": {
+		"snowy=false": {
+			"model": "aether:flowers/stoneshroom"
+		},
+		"snowy=true": {
+			"model": "aether:flowers/stoneshroom_snowy"
+		}
+	}
+}

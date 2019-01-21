@@ -66,7 +66,7 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 			return false;
 		}
 
-		return this.isSuitableSoilBlock(soilBlock);
+		return this.isSuitableSoilBlock(world, pos, soilBlock);
 	}
 
 	@Override
@@ -196,9 +196,10 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	}
 
 	@Override
-	public boolean isSuitableSoilBlock(IBlockState state)
+	public boolean isSuitableSoilBlock(World world, BlockPos pos, IBlockState state)
 	{
-		return (state.getBlock() == this && !state.getValue(PROPERTY_IS_TOP_BLOCK) && state.getValue(PROPERTY_STAGE) >= 3) || super.isSuitableSoilBlock(state);
+		return (state.getBlock() == this && !state.getValue(PROPERTY_IS_TOP_BLOCK) && state.getValue(PROPERTY_STAGE) >= 3) || super
+				.isSuitableSoilBlock(world, pos, state);
 	}
 
 	private ArrayList<ItemStack> getFruitDrops(IBlockAccess world, IBlockState state)

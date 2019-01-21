@@ -1,0 +1,10 @@
+{
+	"variants": {
+		"snowy=false": {
+			"model": "aether:flowers/forgotten_rose"
+		},
+		"snowy=true": {
+			"model": "aether:flowers/forgotten_rose_snowy"
+		}
+	}
+}

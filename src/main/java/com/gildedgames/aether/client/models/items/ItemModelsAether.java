@@ -8,7 +8,10 @@ import com.gildedgames.aether.common.blocks.containers.BlockIncubator;
 import com.gildedgames.aether.common.blocks.decorative.*;
 import com.gildedgames.aether.common.blocks.natural.*;
 import com.gildedgames.aether.common.blocks.natural.plants.*;
-import com.gildedgames.aether.common.blocks.natural.plants.saplings.*;
+import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherGreatrootSapling;
+import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherSkyrootSapling;
+import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherUniqueSapling;
+import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherWisprootSapling;
 import com.gildedgames.aether.common.entities.blocks.EntityParachute;
 import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
 import com.gildedgames.aether.common.entities.tiles.*;
@@ -146,24 +149,37 @@ public class ItemModelsAether
 				.add(BlockAetherFlower.BURSTBLOSSOM.getMeta() + BlockAetherFlower.PROPERTY_VARIANT.getAllowedValues().size(), "burstblossom_snowy")
 				.add(BlockAetherFlower.AECHOR_SPROUT.getMeta() + BlockAetherFlower.PROPERTY_VARIANT.getAllowedValues().size(), "aechor_sprout_snowy"));
 
+		registerSnowyFlower(BlocksAether.arctic_spikespring, "arctic_spikespring");
+		registerSnowyFlower(BlocksAether.barkshroom, "barkshroom");
+		registerSnowyFlower(BlocksAether.blue_swingtip, "blue_swingtip");
+		registerSnowyFlower(BlocksAether.forgotten_rose, "forgotten_rose");
+		registerSnowyFlower(BlocksAether.green_swingtip, "green_swingtip");
+		registerSnowyFlower(BlocksAether.highlands_tulips, "highlands_tulips");
+		registerSnowyFlower(BlocksAether.irradiated_flower, "irradiated_flower");
+		registerSnowyFlower(BlocksAether.magnetic_shroom, "magnetic_shroom");
+		registerSnowyFlower(BlocksAether.neverbloom, "neverbloom");
+		registerSnowyFlower(BlocksAether.pink_swingtip, "pink_swingtip");
+		registerSnowyFlower(BlocksAether.quickshoot, "quickshoot");
+		registerSnowyFlower(BlocksAether.stoneshroom, "stoneshroom");
+
 		registerItemModels(BlocksAether.aether_skyroot_sapling, new ItemModelBuilder("saplings/")
-			.add(BlockAetherSkyrootSapling.GREEN_SKYROOT.getMeta(), "green_skyroot_sapling")
-			.add(BlockAetherSkyrootSapling.BLUE_SKYROOT.getMeta(), "blue_skyroot_sapling")
-			.add(BlockAetherSkyrootSapling.DARK_BLUE_SKYROOT.getMeta(), "dark_blue_skyroot_sapling"));
+				.add(BlockAetherSkyrootSapling.GREEN_SKYROOT.getMeta(), "green_skyroot_sapling")
+				.add(BlockAetherSkyrootSapling.BLUE_SKYROOT.getMeta(), "blue_skyroot_sapling")
+				.add(BlockAetherSkyrootSapling.DARK_BLUE_SKYROOT.getMeta(), "dark_blue_skyroot_sapling"));
 
 		registerItemModels(BlocksAether.aether_unique_sapling, new ItemModelBuilder("saplings/")
-			.add(BlockAetherUniqueSapling.AMBEROOT.getMeta(), "amberoot_sapling")
-			.add(BlockAetherUniqueSapling.MUTANT_TREE.getMeta(), "mutant_tree_sapling"));
+				.add(BlockAetherUniqueSapling.AMBEROOT.getMeta(), "amberoot_sapling")
+				.add(BlockAetherUniqueSapling.MUTANT_TREE.getMeta(), "mutant_tree_sapling"));
 
 		registerItemModels(BlocksAether.aether_wisproot_sapling, new ItemModelBuilder("saplings/")
-			.add(BlockAetherWisprootSapling.GREEN_WISPROOT.getMeta(), "green_wisproot_sapling")
-			.add(BlockAetherWisprootSapling.BLUE_WISPROOT.getMeta(), "blue_wisproot_sapling")
-			.add(BlockAetherWisprootSapling.DARK_BLUE_WISPROOT.getMeta(), "dark_blue_wisproot_sapling"));
+				.add(BlockAetherWisprootSapling.GREEN_WISPROOT.getMeta(), "green_wisproot_sapling")
+				.add(BlockAetherWisprootSapling.BLUE_WISPROOT.getMeta(), "blue_wisproot_sapling")
+				.add(BlockAetherWisprootSapling.DARK_BLUE_WISPROOT.getMeta(), "dark_blue_wisproot_sapling"));
 
 		registerItemModels(BlocksAether.aether_greatroot_sapling, new ItemModelBuilder("saplings/")
-			.add(BlockAetherGreatrootSapling.GREEN_GREATROOT.getMeta(), "green_greatroot_sapling")
-			.add(BlockAetherGreatrootSapling.BLUE_GREATROOT.getMeta(), "blue_greatroot_sapling")
-			.add(BlockAetherGreatrootSapling.DARK_BLUE_GREATROOT.getMeta(), "dark_blue_greatroot_sapling"));
+				.add(BlockAetherGreatrootSapling.GREEN_GREATROOT.getMeta(), "green_greatroot_sapling")
+				.add(BlockAetherGreatrootSapling.BLUE_GREATROOT.getMeta(), "blue_greatroot_sapling")
+				.add(BlockAetherGreatrootSapling.DARK_BLUE_GREATROOT.getMeta(), "dark_blue_greatroot_sapling"));
 
 		registerItemModels(BlocksAether.holystone_furnace, new ItemModelBuilder("holystone_furnace/")
 				.add(BlockHolystoneFurnace.LIT_META, "holystone_furnace_lit")
@@ -653,6 +669,13 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.candy_cane_wall, "aether_wall/candy_cane_wall");
 		registerItemModels(ItemsAether.winter_hat, "miscellaneous/winter_hat");
 		registerItemModels(ItemsAether.eggnog, "eggnog");
+	}
+
+	private static void registerSnowyFlower(Block block, String name)
+	{
+		registerItemModels(block, new ItemModelBuilder("flowers/")
+				.add(BlockAetherFlowerBase.NORMAL_META, name)
+				.add(BlockAetherFlowerBase.SNOWY_META, name + "_snowy"));
 	}
 
 	private static void registerItemModels(final Block block, final String path)

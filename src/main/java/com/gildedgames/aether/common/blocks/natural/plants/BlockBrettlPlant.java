@@ -283,11 +283,11 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 	{
 		IBlockState downBlock = world.getBlockState(pos);
 
-		return this.isSuitableSoilBlock(downBlock);
+		return this.isSuitableSoilBlock(world, pos, downBlock);
 	}
 
 	@Override
-	public boolean isSuitableSoilBlock(IBlockState state)
+	public boolean isSuitableSoilBlock(World world, BlockPos pos, IBlockState state)
 	{
 		return state.getBlock() == BlocksAether.quicksoil || state.getBlock() == BlocksAether.brettl_plant;
 	}

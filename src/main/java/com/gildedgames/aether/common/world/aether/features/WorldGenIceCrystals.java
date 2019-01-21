@@ -19,9 +19,11 @@ public class WorldGenIceCrystals extends WorldGenerator implements IWorldGen
 
 	private final IBlockState crystalState;
 
-	private List<IBlockState> statesCanPlaceOn = Lists.newArrayList();
+	 Lists.newArrayList()n =
 
 	private final int max;
+
+	private List<IBlockState> statesCanPlaceO
 
 	public WorldGenIceCrystals(final int max)
 	{
@@ -37,7 +39,6 @@ public class WorldGenIceCrystals extends WorldGenerator implements IWorldGen
 	@Override
 	public boolean generate(World worldIn, Random rand, BlockPos position)
 	{
-
 		return this.generate(new BlockAccessExtendedWrapper(worldIn), worldIn, rand, position, false);
 	}
 
@@ -73,7 +74,8 @@ public class WorldGenIceCrystals extends WorldGenerator implements IWorldGen
 				if (this.statesCanPlaceOn.isEmpty() || this.statesCanPlaceOn.contains(below))
 				{
 					int type = rand.nextInt(3);
-					blockAccess.setBlockState(randomPos, this.crystalState.withProperty(BlockIceCrystal.PROPERTY_VARIANT, BlockIceCrystal.PROPERTY_VARIANT.fromMeta(type)));
+					blockAccess.setBlockState(randomPos,
+							this.crystalState.withProperty(BlockIceCrystal.PROPERTY_VARIANT, BlockIceCrystal.PROPERTY_VARIANT.fromMeta(type)));
 					if (this.max > 0)
 					{
 						if (count < this.max)
@@ -90,7 +92,8 @@ public class WorldGenIceCrystals extends WorldGenerator implements IWorldGen
 				{
 					int type = rand.nextInt(3);
 					type = type + 3;
-					blockAccess.setBlockState(randomPos, this.crystalState.withProperty(BlockIceCrystal.PROPERTY_VARIANT, BlockIceCrystal.PROPERTY_VARIANT.fromMeta(type)));
+					blockAccess.setBlockState(randomPos,
+							this.crystalState.withProperty(BlockIceCrystal.PROPERTY_VARIANT, BlockIceCrystal.PROPERTY_VARIANT.fromMeta(type)));
 					if (this.max > 0)
 					{
 						if (count < this.max)

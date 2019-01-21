@@ -1,0 +1,10 @@
+{
+	"variants": {
+		"snowy=false": {
+			"model": "aether:flowers/quickshoot"
+		},
+		"snowy=true": {
+			"model": "aether:flowers/quickshoot_snowy"
+		}
+	}
+}

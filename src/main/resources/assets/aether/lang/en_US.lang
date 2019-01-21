@@ -329,6 +329,20 @@ tile.aether.plumproot.name=Plumproot
 tile.aether.highlands_ice_crystal.stalagmite.name=Ice Crystal
 tile.aether.candy_cane_block.name=Candy Cane Block
 tile.aether.candy_cane_wall.name=Candy Cane Wall
+tile.aether.arctic_spikespring.name=Arctic Spikespring
+tile.aether.barkshroom.name=Barkshroom
+tile.aether.blue_swingtip.name=Blue Swingtip
+tile.aether.forgotten_rose.name=Forgotten Rose
+tile.aether.green_swingtip.name=Green Swingtip
+tile.aether.highlands_bush.name=Highlands Bush
+tile.aether.highlands_bush_stem.name=Highlands Bush Stem
+tile.aether.highlands_tulips.name=Highlands Tulips
+tile.aether.irradiated_flower.name=Irradiated Flower
+tile.aether.magnetic_shroom.name=Magnetic Shroom
+tile.aether.neverbloom.name=Neverbloom
+tile.aether.pink_swingtip.name=Pink Swingtip
+tile.aether.quickshoot.name=Quickshoot
+tile.aether.stoneshroom.name=Stoneshroom
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick

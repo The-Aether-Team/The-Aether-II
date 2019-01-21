@@ -1,0 +1,7 @@
+{
+	"parent": "aether:block/crossbase",
+	"textures": {
+		"cross": "aether:blocks/flowers/forgotten_rose",
+		"texture": "aether:blocks/highlands_snow"
+	}
+}

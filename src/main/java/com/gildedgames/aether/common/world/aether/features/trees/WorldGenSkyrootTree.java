@@ -78,7 +78,7 @@ public class WorldGenSkyrootTree extends WorldGenAbstractTree
 				final IBlockState rootState = worldIn.getBlockState(rootBlockPos);
 
 				// just using skyroot sapling since all tree's require the same soil blocks ATM.
-				final boolean isSoil = BlocksAether.aether_skyroot_sapling.isSuitableSoilBlock(rootState);
+				final boolean isSoil = BlocksAether.aether_skyroot_sapling.isSuitableSoilBlock(worldIn, position, rootState);
 
 				IBlockState state;
 

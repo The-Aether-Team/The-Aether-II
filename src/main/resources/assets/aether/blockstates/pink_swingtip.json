@@ -1,0 +1,10 @@
+{
+	"variants": {
+		"snowy=false": {
+			"model": "aether:flowers/pink_swingtip"
+		},
+		"snowy=true": {
+			"model": "aether:flowers/pink_swingtip_snowy"
+		}
+	}
+}

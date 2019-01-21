@@ -19,7 +19,10 @@ import com.gildedgames.aether.common.blocks.multiblock.BlockMultiDummyHalf;
 import com.gildedgames.aether.common.blocks.natural.*;
 import com.gildedgames.aether.common.blocks.natural.ores.*;
 import com.gildedgames.aether.common.blocks.natural.plants.*;
-import com.gildedgames.aether.common.blocks.natural.plants.saplings.*;
+import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherGreatrootSapling;
+import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherSkyrootSapling;
+import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherUniqueSapling;
+import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherWisprootSapling;
 import com.gildedgames.aether.common.blocks.util.*;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.blocks.ItemBlockMultiName;
@@ -224,8 +227,11 @@ public class BlocksAether
 	public static final Block gravitite_block = new BlockBuilder(Material.ROCK).setSoundType(SoundType.STONE).setHardness(5f);
 
 	public static final BlockAetherSkyrootSapling aether_skyroot_sapling = new BlockAetherSkyrootSapling();
+
 	public static final BlockAetherUniqueSapling aether_unique_sapling = new BlockAetherUniqueSapling();
+
 	public static final BlockAetherWisprootSapling aether_wisproot_sapling = new BlockAetherWisprootSapling();
+
 	public static final BlockAetherGreatrootSapling aether_greatroot_sapling = new BlockAetherGreatrootSapling();
 
 	public static final BlockHolystoneFurnace holystone_furnace = new BlockHolystoneFurnace();
@@ -357,8 +363,6 @@ public class BlocksAether
 
 	public static final Block holystone_rock = new BlockFloorObject(Material.ROCK, SoundType.STONE);
 
-	private static final Set<Block> registeredBlocks = new HashSet<>();
-
 	public static final BlockCustomSnowBlock highlands_snow = new BlockCustomSnowBlock();
 
 	public static final BlockCustomSnow highlands_snow_layer = new BlockCustomSnow();
@@ -390,6 +394,32 @@ public class BlocksAether
 	public static final Block candy_cane_block = new BlockCandyCane();
 
 	public static final BlockCustomWall candy_cane_wall = new BlockCandyCaneWall(candy_cane_block.getDefaultState(), 0.5f, 5.0f);
+
+	public static final BlockAetherFlowerBase arctic_spikespring = new BlockAetherFlowerBase();
+
+	public static final BlockAetherFlowerBase barkshroom = new BlockAetherMushroom();
+
+	public static final BlockAetherFlowerBase blue_swingtip = new BlockAetherFlowerBase();
+
+	public static final BlockAetherFlowerBase forgotten_rose = new BlockAetherFlowerBase();
+
+	public static final BlockAetherFlowerBase green_swingtip = new BlockAetherFlowerBase();
+
+	public static final BlockAetherFlowerBase highlands_tulips = new BlockAetherFlowerBase();
+
+	public static final BlockAetherFlowerBase irradiated_flower = new BlockAetherFlowerBase();
+
+	public static final BlockAetherFlowerBase magnetic_shroom = new BlockAetherMushroom();
+
+	public static final BlockAetherFlowerBase neverbloom = new BlockAetherFlowerBase();
+
+	public static final BlockAetherFlowerBase pink_swingtip = new BlockAetherFlowerBase();
+
+	public static final BlockAetherFlowerBase quickshoot = new BlockAetherFlowerBase();
+
+	public static final BlockAetherFlowerBase stoneshroom = new BlockAetherMushroom();
+
+	private static final Set<Block> registeredBlocks = new HashSet<>();
 
 	@SubscribeEvent
 	public static void onRegisterBlocks(final RegistryEvent.Register<Block> event)
@@ -497,6 +527,18 @@ public class BlocksAether
 		r.register("brettl_plant", brettl_plant);
 
 		r.register("aether_flower", aether_flower.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		r.register("arctic_spikespring", arctic_spikespring.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		r.register("barkshroom", barkshroom.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		r.register("blue_swingtip", blue_swingtip.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		r.register("forgotten_rose", forgotten_rose.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		r.register("green_swingtip", green_swingtip.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		r.register("highlands_tulips", highlands_tulips.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		r.register("irradiated_flower", irradiated_flower.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		r.register("magnetic_shroom", magnetic_shroom.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		r.register("neverbloom", neverbloom.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		r.register("pink_swingtip", pink_swingtip.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		r.register("quickshoot", quickshoot.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+		r.register("stoneshroom", stoneshroom.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
 
 		r.register("zanite_block", zanite_block.setCreativeTab(CreativeTabsAether.CONSTRUCTION));
 
@@ -655,6 +697,18 @@ public class BlocksAether
 		Blocks.FIRE.setFireInfo(skyroot_twigs, 60, 100);
 		Blocks.FIRE.setFireInfo(tall_aether_grass, 60, 100);
 		Blocks.FIRE.setFireInfo(aether_flower, 60, 100);
+		Blocks.FIRE.setFireInfo(arctic_spikespring, 60, 100);
+		Blocks.FIRE.setFireInfo(barkshroom, 60, 100);
+		Blocks.FIRE.setFireInfo(blue_swingtip, 60, 100);
+		Blocks.FIRE.setFireInfo(forgotten_rose, 60, 100);
+		Blocks.FIRE.setFireInfo(green_swingtip, 60, 100);
+		Blocks.FIRE.setFireInfo(highlands_tulips, 60, 100);
+		Blocks.FIRE.setFireInfo(irradiated_flower, 60, 100);
+		Blocks.FIRE.setFireInfo(magnetic_shroom, 60, 100);
+		Blocks.FIRE.setFireInfo(neverbloom, 60, 100);
+		Blocks.FIRE.setFireInfo(pink_swingtip, 60, 100);
+		Blocks.FIRE.setFireInfo(quickshoot, 60, 100);
+		Blocks.FIRE.setFireInfo(stoneshroom, 60, 100);
 		Blocks.FIRE.setFireInfo(orange_tree, 60, 100);
 		Blocks.FIRE.setFireInfo(blueberry_bush, 60, 100);
 		Blocks.FIRE.setFireInfo(valkyrie_grass, 60, 100);
@@ -711,7 +765,7 @@ public class BlocksAether
 		Blocks.FIRE.setFireInfo(dark_blue_light_skyroot_leaves, 30, 60);
 		Blocks.FIRE.setFireInfo(green_light_skyroot_leaves, 30, 60);
 		Blocks.FIRE.setFireInfo(therawood_leaves, 30, 60);
-		Blocks.FIRE.setFireInfo(mutant_tree_leaves, 30,60);
+		Blocks.FIRE.setFireInfo(mutant_tree_leaves, 30, 60);
 		Blocks.FIRE.setFireInfo(mutant_tree_leaves_decorated, 30, 60);
 
 		Blocks.FIRE.setFireInfo(cloudwool_block, 30, 60);

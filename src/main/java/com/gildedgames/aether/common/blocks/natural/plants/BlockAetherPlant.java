@@ -30,9 +30,9 @@ public class BlockAetherPlant extends Block implements IGrowable
 		super(material);
 	}
 
-	public boolean isSuitableSoilBlock(final IBlockState state)
+	public boolean isSuitableSoilBlock(World world, BlockPos pos, final IBlockState blockUnderneath)
 	{
-		return state.getBlock() == BlocksAether.aether_grass || state.getBlock() == BlocksAether.aether_dirt;
+		return blockUnderneath.getBlock() == BlocksAether.aether_grass || blockUnderneath.getBlock() == BlocksAether.aether_dirt;
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class BlockAetherPlant extends Block implements IGrowable
 	{
 		final IBlockState soilBlock = world.getBlockState(pos.down());
 
-		return this.isSuitableSoilBlock(soilBlock);
+		return this.isSuitableSoilBlock(world, pos, soilBlock);
 	}
 
 	@Override

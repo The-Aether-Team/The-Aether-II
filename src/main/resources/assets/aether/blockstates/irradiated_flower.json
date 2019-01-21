@@ -1,0 +1,10 @@
+{
+	"variants": {
+		"snowy=false": {
+			"model": "aether:flowers/irradiated_flower"
+		},
+		"snowy=true": {
+			"model": "aether:flowers/irradiated_flower_snowy"
+		}
+	}
+}

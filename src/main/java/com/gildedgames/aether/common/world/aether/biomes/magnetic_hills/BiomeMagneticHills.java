@@ -11,6 +11,7 @@ import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandVariables;
 import com.gildedgames.aether.common.world.aether.island.gen.highlands.IslandGeneratorHighlands;
 import com.gildedgames.aether.common.world.templates.TemplateWorldGen;
+import com.gildedgames.aether.common.world.util.GenUtil;
 import com.gildedgames.orbis_api.core.BlueprintDefinition;
 import com.gildedgames.orbis_api.core.BlueprintWorldGen;
 import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
@@ -99,6 +100,14 @@ public class BiomeMagneticHills extends BiomeAetherBase
 
 		decorations.add(new WorldDecorationSimple(2, DecorateBiomeEvent.Decorate.EventType.GRASS, GenerationAether.short_aether_grass));
 		decorations.add(new WorldDecorationSimple(1, 0.2F, DecorateBiomeEvent.Decorate.EventType.GRASS, GenerationAether.skyroot_twigs));
+
+		List<IBlockState> flowers = Lists.newArrayList();
+
+		flowers.addAll(GenUtil.GENERAL_FLOWER_STATES);
+
+		decorations.add(GenUtil.createFlowerDecorations(rand, flowers, Lists.newArrayList(BlocksAether.magnetic_shroom.getDefaultState())));
+		decorations.add(GenUtil.createShroomDecorations(GenUtil.SHROOM_STATES));
+		decorations.add(GenUtil.createShroomDecorations(Lists.newArrayList(BlocksAether.magnetic_shroom.getDefaultState())));
 
 		decorations.add(new WorldDecorationSimple(6, DecorateBiomeEvent.Decorate.EventType.GRASS, GenerationAether.holystone_rocks)
 		{

@@ -1,0 +1,10 @@
+{
+	"variants": {
+		"snowy=false": {
+			"model": "aether:flowers/arctic_spikespring"
+		},
+		"snowy=true": {
+			"model": "aether:flowers/arctic_spikespring_snowy"
+		}
+	}
+}

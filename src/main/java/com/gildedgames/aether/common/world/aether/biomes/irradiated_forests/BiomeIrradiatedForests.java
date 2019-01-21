@@ -9,6 +9,7 @@ import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.registry.content.GenerationAether;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandGenerators;
+import com.gildedgames.aether.common.world.util.GenUtil;
 import com.gildedgames.orbis_api.core.BlueprintWorldGen;
 import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
 import com.gildedgames.orbis_api.util.mc.NBT;
@@ -71,6 +72,13 @@ public class BiomeIrradiatedForests extends BiomeAetherBase
 
 		decorations.add(new WorldDecorationSimple(2, DecorateBiomeEvent.Decorate.EventType.GRASS, GenerationAether.short_aether_grass));
 		decorations.add(new WorldDecorationSimple(1, 0.2F, DecorateBiomeEvent.Decorate.EventType.GRASS, GenerationAether.skyroot_twigs));
+
+		List<IBlockState> flowers = Lists.newArrayList();
+
+		flowers.addAll(GenUtil.GENERAL_FLOWER_STATES);
+
+		decorations.add(GenUtil.createFlowerDecorations(rand, flowers, Lists.newArrayList(BlocksAether.irradiated_flower.getDefaultState())));
+		decorations.add(GenUtil.createShroomDecorations(GenUtil.SHROOM_STATES));
 
 		decorations.add(new WorldDecorationSimple(6, DecorateBiomeEvent.Decorate.EventType.GRASS, GenerationAether.holystone_rocks)
 		{
