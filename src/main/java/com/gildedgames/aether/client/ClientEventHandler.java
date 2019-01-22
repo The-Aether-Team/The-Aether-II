@@ -31,7 +31,6 @@ import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.orbis_api.client.PartialTicks;
 import com.gildedgames.orbis_api.client.gui.util.GuiFrameUtils;
 import com.gildedgames.orbis_api.util.InputHelper;
-import javafx.scene.effect.Effect;
 import net.minecraft.client.LoadingScreenRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
