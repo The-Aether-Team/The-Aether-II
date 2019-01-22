@@ -19,11 +19,9 @@ public class WorldGenIceCrystals extends WorldGenerator implements IWorldGen
 
 	private final IBlockState crystalState;
 
-	 Lists.newArrayList()n =
-
 	private final int max;
 
-	private List<IBlockState> statesCanPlaceO
+	private List<IBlockState> statesCanPlaceOn = Lists.newArrayList();
 
 	public WorldGenIceCrystals(final int max)
 	{
