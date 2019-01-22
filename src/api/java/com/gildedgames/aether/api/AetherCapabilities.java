@@ -1,6 +1,7 @@
 package com.gildedgames.aether.api;
 
 import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
+import com.gildedgames.aether.api.effects_system.IAetherStatusEffectPool;
 import com.gildedgames.aether.api.entity.IEntityInfo;
 import com.gildedgames.aether.api.entity.spawning.ISpawningInfo;
 import com.gildedgames.aether.api.player.IPlayerAether;
@@ -28,4 +29,7 @@ public class AetherCapabilities
 
 	@CapabilityInject(IPrecipitationManager.class)
 	public static final Capability<IPrecipitationManager> PRECIPITATION_MANAGER = null;
+
+	@CapabilityInject(IAetherStatusEffectPool.class)
+	public static final Capability<IAetherStatusEffectPool> STATUS_EFFECT_POOL = null;
 }

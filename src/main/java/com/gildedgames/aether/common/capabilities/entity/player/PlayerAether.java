@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.capabilities.entity.player;
 
 import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.dialog.IDialogController;
+import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.*;
@@ -79,8 +80,6 @@ public class PlayerAether implements IPlayerAether
 
 	private final PlayerSectorModule sectorModule;
 
-	private final PlayerEffectsModule effectsModule;
-
 	private final PlayerTradeModule tradingModule;
 
 	private final CaveSpawnModule caveSpawnModule;
@@ -115,7 +114,6 @@ public class PlayerAether implements IPlayerAether
 		this.progressModule = null;
 		this.currencyModule = null;
 		this.sectorModule = null;
-		this.effectsModule = null;
 		this.tradingModule = null;
 		this.caveSpawnModule = null;
 	}
@@ -140,7 +138,6 @@ public class PlayerAether implements IPlayerAether
 		this.progressModule = new PlayerProgressModule(this);
 		this.currencyModule = new PlayerCurrencyModule(this);
 		this.sectorModule = new PlayerSectorModule(this);
-		this.effectsModule = new PlayerEffectsModule(this);
 		this.tradingModule = new PlayerTradeModule(this);
 		this.caveSpawnModule = new CaveSpawnModule(this);
 
@@ -162,7 +159,6 @@ public class PlayerAether implements IPlayerAether
 		modules.add(this.progressModule);
 		modules.add(this.currencyModule);
 		modules.add(this.sectorModule);
-		modules.add(this.effectsModule);
 		modules.add(this.tradingModule);
 		modules.add(this.caveSpawnModule);
 
@@ -489,11 +485,6 @@ public class PlayerAether implements IPlayerAether
 	public PlayerPreventDropsModule getPreventDropsModule()
 	{
 		return this.preventDropsModule;
-	}
-
-	public PlayerEffectsModule getEffectsModule()
-	{
-		return this.effectsModule;
 	}
 
 	public PlayerTradeModule getTradingModule()

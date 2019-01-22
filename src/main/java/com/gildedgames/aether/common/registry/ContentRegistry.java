@@ -46,8 +46,6 @@ public class ContentRegistry implements IContentRegistry, IOrbisServicesListener
 
 	private final PatronRewardRegistry patronRewardRegistry = new PatronRewardRegistry();
 
-	private final StatusEffectsRegistry statusEffectsRegistry = new StatusEffectsRegistry();
-
 	private final ShopManager shopManager = new ShopManager(true);
 
 	/**
@@ -186,11 +184,6 @@ public class ContentRegistry implements IContentRegistry, IOrbisServicesListener
 	public PatronRewardRegistry patronRewards()
 	{
 		return this.patronRewardRegistry;
-	}
-
-	public StatusEffectsRegistry statusEffects()
-	{
-		return this.statusEffectsRegistry;
 	}
 
 	@Override

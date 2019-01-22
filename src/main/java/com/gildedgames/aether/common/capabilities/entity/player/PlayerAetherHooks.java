@@ -2,10 +2,10 @@ package com.gildedgames.aether.common.capabilities.entity.player;
 
 import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
+import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.IBlockSnowy;
-import com.gildedgames.aether.common.capabilities.entity.effects.IAetherEffects;
 import com.gildedgames.aether.common.containers.ContainerTrade;
 import com.gildedgames.aether.common.entities.util.shared.SharedAetherAttributes;
 import com.gildedgames.aether.common.network.NetworkingAether;
@@ -342,15 +342,16 @@ public class PlayerAetherHooks
 	@SubscribeEvent
 	public static void onLivingHeal(final LivingHealEvent event)
 	{
-		final PlayerAether aePlayer = PlayerAether.getPlayer(event.getEntity());
-
-		if (aePlayer != null)
+		if (event.getEntityLiving() != null)
 		{
 			if (event.getAmount() <= 1.5)
 			{
-				if (aePlayer.getEffectsModule().isEffectApplied(IAetherEffects.effectTypes.AMBROSIUM_POISONING))
+				if (event.getEntityLiving().hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
 				{
-					event.setCanceled(true);
+					if (event.getEntityLiving().getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).isEffectApplied(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING))
+					{
+						event.setCanceled(true);
+					}
 				}
 			}
 		}

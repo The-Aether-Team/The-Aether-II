@@ -11,6 +11,7 @@ import com.gildedgames.aether.api.items.equipment.effects.IEffectFactory;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectPool;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 import com.gildedgames.aether.client.gui.DamageSystemOverlay;
+import com.gildedgames.aether.client.gui.EffectSystemOverlay;
 import com.gildedgames.aether.client.gui.GuiUtils;
 import com.gildedgames.aether.client.gui.PerformanceIngame;
 import com.gildedgames.aether.client.gui.misc.*;
@@ -30,6 +31,7 @@ import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.orbis_api.client.PartialTicks;
 import com.gildedgames.orbis_api.client.gui.util.GuiFrameUtils;
 import com.gildedgames.orbis_api.util.InputHelper;
+import javafx.scene.effect.Effect;
 import net.minecraft.client.LoadingScreenRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -69,6 +71,8 @@ public class ClientEventHandler
 
 	private static final DamageSystemOverlay DAMAGE_SYSTEM_OVERLAY = new DamageSystemOverlay();
 
+	private static final EffectSystemOverlay EFFECT_SYSTEM_OVERLAY = new EffectSystemOverlay();
+
 	private static final Minecraft mc = Minecraft.getMinecraft();
 
 	private static boolean DRAW_BLACK_SCREEN = false;
@@ -103,6 +107,11 @@ public class ClientEventHandler
 	public static DamageSystemOverlay getDamageSystemOverlay()
 	{
 		return DAMAGE_SYSTEM_OVERLAY;
+	}
+
+	public static EffectSystemOverlay getEffectSystemOverlay()
+	{
+		return EFFECT_SYSTEM_OVERLAY;
 	}
 
 	public static void drawBlackFade(double time)
@@ -247,6 +256,7 @@ public class ClientEventHandler
 			else if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR)
 			{
 				DAMAGE_SYSTEM_OVERLAY.renderIcons(mc);
+				EFFECT_SYSTEM_OVERLAY.renderIcons(mc);
 			}
 		}
 	}

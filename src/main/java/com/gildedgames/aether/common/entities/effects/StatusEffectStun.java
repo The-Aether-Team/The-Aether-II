@@ -1,24 +1,23 @@
-package com.gildedgames.aether.common.capabilities.entity.effects;
+package com.gildedgames.aether.common.entities.effects;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 
-public class EffectStun extends AetherEffects
+public class StatusEffectStun extends StatusEffect
 {
-	public EffectStun()
+	public StatusEffectStun()
 	{
-		super(effectTypes.STUN,
-				new AttributeModifier("aether.effect.status.stun", -1D, 1).setSaved(false));
+		super(effectTypes.STUN, new AttributeModifier("aether.statusEffectStun", -1D, 1).setSaved(false));
 	}
 
 	@Override
-	public void applyEffect(EntityLivingBase entity)
+	public void applyEffect(EntityLivingBase livingBase, int timer)
 	{
-		IAttributeInstance iAttributeInstance = entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
+		IAttributeInstance iAttributeInstance = livingBase.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
 
-		if (this.isEffectApplied())
+		if (this.isEffectApplied)
 		{
 			if (!iAttributeInstance.hasModifier(this.getAttributeModifier()))
 			{
@@ -32,5 +31,11 @@ public class EffectStun extends AetherEffects
 				iAttributeInstance.removeModifier(this.getAttributeModifier());
 			}
 		}
+	}
+
+	@Override
+	public void onEffectEnd()
+	{
+
 	}
 }
