@@ -1,10 +1,10 @@
 package com.gildedgames.aether.common.entities.effects;
 
+import com.gildedgames.aether.common.capabilities.entity.effects.EffectsDamageSource;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
-import net.minecraft.util.DamageSource;
 
 public class StatusEffectFungalRot extends StatusEffect
 {
@@ -20,7 +20,7 @@ public class StatusEffectFungalRot extends StatusEffect
 
 		if (this.isEffectApplied && this.effectTimer % (TICKS_PER_SECOND * 2) == 0)
 		{
-			livingBase.attackEntityFrom(DamageSource.MAGIC, 1f);
+			livingBase.attackEntityFrom(EffectsDamageSource.FUNGAL_ROT, 1f);
 
 			if (!iAttributeInstance.hasModifier(this.getAttributeModifier()))
 			{

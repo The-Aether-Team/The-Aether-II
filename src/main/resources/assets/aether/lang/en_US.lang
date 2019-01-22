@@ -838,6 +838,13 @@ gui.aether.incubator.label.max=MAX
 gui.aether.incubator.label.fail=FAILING!
 gui.aether.masonry.label.recipes=Recipes
 
+# Death messages
+
+death.attack.aether.effect.bleed=Bleed
+death.attack.aether.effect.toxin=Toxin
+death.attack.aether.effect.cockatriceVenom=Cockatrice Venom
+death.attack.aether.effect.fungalRot=Fungal Rot
+
 # Intro
 
 intro.prologue=200 years after a lone adventurer defeated the tyrannical Sun Spirit, Karthuul, a new traveller is about to enter the Aether...

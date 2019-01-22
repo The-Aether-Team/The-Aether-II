@@ -21,6 +21,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	protected double effectResistance = 1.0D;
 	protected IAetherStatusEffects.effectTypes effectType;
 	protected boolean isEffectApplied;
+	protected double activeEffectTimeModifier = 1.0D;
 
 	public StatusEffect(IAetherStatusEffects.effectTypes effectType, AttributeModifier attributeModifier)
 	{
@@ -51,7 +52,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 		//manageEffect
 		if (this.isEffectApplied)
 		{
-			if (this.effectTimer >= this.ACTIVE_EFFECT_TIME * TICKS_PER_SECOND)
+			if (this.effectTimer >= (this.ACTIVE_EFFECT_TIME * TICKS_PER_SECOND) * this.activeEffectTimeModifier)
 			{
 				this.resetEffect();
 			}
@@ -132,6 +133,12 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	}
 
 	@Override
+	public void setActiveEffectTimeModifier(double activeEffectTimeModifier)
+	{
+		this.activeEffectTimeModifier = activeEffectTimeModifier;
+	}
+
+	@Override
 	public double getResistance()
 	{
 		return this.effectResistance;
@@ -145,6 +152,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 		this.isEffectApplied = false;
 		this.effectBuildup = 0;
 		this.effectTimer = 0;
+		this.activeEffectTimeModifier = 1.0D;
 
 		AetherCore.LOGGER.info("Effect Reset : " + this.NAME);
 	}
@@ -190,6 +198,8 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	{
 		compound.setInteger(this.NAME + ".effectBuildup", this.effectBuildup);
 		compound.setBoolean(this.NAME + ".effectIsApplied", this.isEffectApplied);
+		compound.setInteger(this.NAME + ".effectTimer", this.effectTimer);
+		compound.setDouble(this.NAME + ".effectActiveTimeModifier", this.activeEffectTimeModifier);
 	}
 
 	@Override
@@ -197,5 +207,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	{
 		this.effectBuildup = compound.getInteger(this.NAME + ".effectBuildup");
 		this.isEffectApplied = compound.getBoolean(this.NAME + ".effectIsApplied");
+		this.effectTimer = compound.getInteger(this.NAME + ".effectTimer");
+		this.activeEffectTimeModifier =  compound.getInteger(this.NAME + ".effectActiveTimeModifier");
 	}
 }

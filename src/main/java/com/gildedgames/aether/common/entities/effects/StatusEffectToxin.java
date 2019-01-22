@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.entities.effects;
 
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.capabilities.entity.effects.EffectsDamageSource;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.DamageSource;
 
 public class StatusEffectToxin extends StatusEffect
 {
@@ -21,7 +21,7 @@ public class StatusEffectToxin extends StatusEffect
 		{
 			if (timer % TICKS_PER_SECOND == 0 && this.NumOfHeartsEffected < this.MAX_HEARTS)
 			{
-				livingBase.attackEntityFrom(DamageSource.MAGIC, 1f);
+				livingBase.attackEntityFrom(EffectsDamageSource.TOXIN, 1f);
 				++this.NumOfHeartsEffected;
 			}
 		}

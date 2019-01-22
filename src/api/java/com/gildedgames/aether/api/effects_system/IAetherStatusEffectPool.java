@@ -55,5 +55,29 @@ public interface IAetherStatusEffectPool
 	 */
 	void addResistanceToEffect(IAetherStatusEffects.effectTypes effectType, double addResistance);
 
+	/**
+	 * Method to change how long an effect lasts.
+	 * @param effectType The effect to modify
+	 * @param activeEffectTimeModifier Multiplied by the active effect time of an effect.
+	 */
+	void modifyActiveEffectTime(IAetherStatusEffects.effectTypes effectType, double activeEffectTimeModifier);
+
+	/**
+	 * Modifies all the active effect times in the pool.
+	 * @param activeEffectTimeModifier Multiplied by the active effect time of an effect.
+	 */
+	void modifyAllActiveEffectTimes(double activeEffectTimeModifier);
+
+	/**
+	 * Cures a specific effect, method essentially modifies the active effect time to 0.
+	 * @param effectType The effect to cure.
+	 */
+	void cureActiveEffect(IAetherStatusEffects.effectTypes effectType);
+
+	/**
+	 * Cures all active effects by modifying their active effect time to 0.
+	 */
+	void cureAllActiveEffects();
+
 	HashMap<String, IAetherStatusEffects> getPool();
 }

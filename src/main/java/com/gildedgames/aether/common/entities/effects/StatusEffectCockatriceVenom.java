@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.entities.effects;
 
+import com.gildedgames.aether.common.capabilities.entity.effects.EffectsDamageSource;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.DamageSource;
 
 public class StatusEffectCockatriceVenom extends StatusEffect
 {
@@ -15,7 +15,7 @@ public class StatusEffectCockatriceVenom extends StatusEffect
 	{
 		if (this.isEffectApplied && livingBase.getHealth() > 1 && this.effectTimer % (TICKS_PER_SECOND) == 0)
 		{
-			livingBase.attackEntityFrom(DamageSource.MAGIC, 1f);
+			livingBase.attackEntityFrom(EffectsDamageSource.COCKATRICE_VENOM, 1f);
 		}
 	}
 

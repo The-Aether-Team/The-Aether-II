@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.entities.effects;
 
+import com.gildedgames.aether.common.capabilities.entity.effects.EffectsDamageSource;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.DamageSource;
 
 public class StatusEffectBleed extends StatusEffect
 {
@@ -15,7 +15,7 @@ public class StatusEffectBleed extends StatusEffect
 	{
 		if (this.isEffectApplied)
 		{
-			livingBase.attackEntityFrom(DamageSource.MAGIC, 10);
+			livingBase.attackEntityFrom(EffectsDamageSource.BLEED, 10);
 		}
 	}
 

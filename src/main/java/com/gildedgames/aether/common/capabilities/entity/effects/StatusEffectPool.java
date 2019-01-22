@@ -5,6 +5,7 @@ import com.gildedgames.aether.api.effects_system.IAetherStatusEffectPool;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
 import com.gildedgames.aether.common.entities.effects.*;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -42,6 +43,18 @@ public class StatusEffectPool implements IAetherStatusEffectPool
 	{
 		for (IAetherStatusEffects effect : this.statusEffects.values())
 		{
+			if (this.livingBase instanceof EntityPlayer)
+			{
+				EntityPlayer player = (EntityPlayer) this.livingBase;
+				if (player.isCreative())
+				{
+					if (effect.getIsEffectApplied()|| effect.getBuildup() > 0)
+					{
+						this.cureActiveEffect(effect.getEffectType());
+					}
+				}
+			}
+
 			effect.Tick(this.livingBase);
 		}
 	}
@@ -100,6 +113,46 @@ public class StatusEffectPool implements IAetherStatusEffectPool
 		{
 			effect.addResistance(addResistance);
 		}
+	}
+
+	@Override
+	public void modifyActiveEffectTime(IAetherStatusEffects.effectTypes effectType, double activeEffectTimeModifier)
+	{
+		IAetherStatusEffects effect = this.statusEffects.get(effectType.name);
+		if (effect != null)
+		{
+			effect.setActiveEffectTimeModifier(activeEffectTimeModifier);
+		}
+	}
+
+	@Override
+	public void modifyAllActiveEffectTimes(double activeEffectTimeModifier)
+	{
+		for (IAetherStatusEffects effect : this.statusEffects.values())
+		{
+			if (effect == null)
+			{
+				continue;
+			}
+
+			effect.setActiveEffectTimeModifier(activeEffectTimeModifier);
+		}
+	}
+
+	@Override
+	public void cureActiveEffect(IAetherStatusEffects.effectTypes effectType)
+	{
+		IAetherStatusEffects effect = this.statusEffects.get(effectType.name);
+		if (effect != null)
+		{
+			effect.setActiveEffectTimeModifier(0.0D);
+		}
+	}
+
+	@Override
+	public void cureAllActiveEffects()
+	{
+		this.modifyAllActiveEffectTimes(0.0D);
 	}
 
 	@Override
