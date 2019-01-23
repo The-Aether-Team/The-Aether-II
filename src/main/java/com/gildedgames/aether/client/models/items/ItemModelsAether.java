@@ -132,6 +132,8 @@ public class ItemModelsAether
 
 		registerItemModels(BlocksAether.amberoot_leaves, "leaves/amberoot_leaves");
 
+		registerItemModels(BlocksAether.highlands_bush, "bushes/highlands_bush");
+
 		registerItemModels(BlocksAether.mutant_tree_leaves, "leaves/mutant_leaves");
 		registerItemModels(BlocksAether.mutant_tree_leaves_decorated, "leaves/mutant_leaves_decorated");
 

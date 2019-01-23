@@ -9,10 +9,10 @@ import com.gildedgames.aether.common.blocks.containers.BlockIcestoneCooler;
 import com.gildedgames.aether.common.blocks.containers.BlockMasonryBench;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLeaves;
-import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherSapling;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBrettlPlant;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockOrangeTree;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockValkyrieGrass;
+import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherSapling;
 import com.gildedgames.aether.common.blocks.util.BlockCustomDoor;
 import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
@@ -61,6 +61,7 @@ public class AetherBlockModels
 		ModelLoader.setCustomStateMapper(BlocksAether.dark_blue_light_skyroot_leaves, leavesMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.mutant_tree_leaves, leavesMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.mutant_tree_leaves_decorated, leavesMapper);
+		ModelLoader.setCustomStateMapper(BlocksAether.highlands_bush, leavesMapper);
 
 		ModelLoader.setCustomStateMapper(BlocksAether.aether_skyroot_sapling, new StateMap.Builder().ignore(BlockAetherSapling.PROPERTY_STAGE).build());
 		ModelLoader.setCustomStateMapper(BlocksAether.aether_unique_sapling, new StateMap.Builder().ignore(BlockAetherSapling.PROPERTY_STAGE).build());

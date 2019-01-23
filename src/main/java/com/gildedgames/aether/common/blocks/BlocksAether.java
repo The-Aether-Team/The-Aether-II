@@ -419,6 +419,8 @@ public class BlocksAether
 
 	public static final BlockAetherFlowerBase stoneshroom = new BlockAetherMushroom();
 
+	public static final BlockAetherLeaves highlands_bush = new BlockAetherLeaves();
+
 	private static final Set<Block> registeredBlocks = new HashSet<>();
 
 	@SubscribeEvent
@@ -693,6 +695,8 @@ public class BlocksAether
 
 		r.register("highlands_ice_crystal", ice_crystal);
 
+		r.register("highlands_bush", highlands_bush.setCreativeTab(CreativeTabsAether.NATURAL_BLOCKS));
+
 		Blocks.FIRE.setFireInfo(plumproot, 60, 100);
 		Blocks.FIRE.setFireInfo(skyroot_twigs, 60, 100);
 		Blocks.FIRE.setFireInfo(tall_aether_grass, 60, 100);
@@ -767,6 +771,7 @@ public class BlocksAether
 		Blocks.FIRE.setFireInfo(therawood_leaves, 30, 60);
 		Blocks.FIRE.setFireInfo(mutant_tree_leaves, 30, 60);
 		Blocks.FIRE.setFireInfo(mutant_tree_leaves_decorated, 30, 60);
+		Blocks.FIRE.setFireInfo(highlands_bush, 30, 60);
 
 		Blocks.FIRE.setFireInfo(cloudwool_block, 30, 60);
 		Blocks.FIRE.setFireInfo(cloudwool_carpet, 30, 60);
