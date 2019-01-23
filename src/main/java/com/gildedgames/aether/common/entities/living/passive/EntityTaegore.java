@@ -238,7 +238,8 @@ public class EntityTaegore extends EntityAetherAnimal implements IEntityMultiPar
 		return true;
 	}
 
-	private void applyStatusEffectOnAttack(final Entity target)
+	@Override
+	protected void applyStatusEffectOnAttack(final Entity target)
 	{
 		if (target instanceof EntityLivingBase)
 		{
@@ -250,6 +251,13 @@ public class EntityTaegore extends EntityAetherAnimal implements IEntityMultiPar
 				{
 					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).applyStatusEffect(IAetherStatusEffects.effectTypes.FRACTURE, 20);
 					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).applyStatusEffect(IAetherStatusEffects.effectTypes.STUN, 50);
+				}
+			}
+			else
+			{
+				if (target.hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
+				{
+					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).applyStatusEffect(IAetherStatusEffects.effectTypes.FRACTURE, 5);
 				}
 			}
 		}

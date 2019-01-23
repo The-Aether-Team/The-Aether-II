@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.entities.living.mobs;
 
 import com.gildedgames.aether.common.entities.ai.AetherNavigateGround;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.world.World;
@@ -21,6 +22,11 @@ public class EntityAetherMob extends EntityMob
 		navigateGround.setAvoidSun(true);
 
 		return navigateGround;
+	}
+
+	protected void applyStatusEffectOnAttack(final Entity target)
+	{
+
 	}
 
 }

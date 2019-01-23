@@ -243,7 +243,8 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 		return true;
 	}
 
-	private void applyStatusEffectOnAttack(final Entity target)
+	@Override
+	protected void applyStatusEffectOnAttack(final Entity target)
 	{
 		if (target instanceof EntityLivingBase)
 		{
@@ -253,8 +254,15 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 			{
 				if (target.hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
 				{
-					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).applyStatusEffect(IAetherStatusEffects.effectTypes.FRACTURE, 30);
+					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).applyStatusEffect(IAetherStatusEffects.effectTypes.FRACTURE, 40);
 					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).applyStatusEffect(IAetherStatusEffects.effectTypes.STUN, 70);
+				}
+			}
+			else
+			{
+				if (target.hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
+				{
+					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).applyStatusEffect(IAetherStatusEffects.effectTypes.FRACTURE, 15);
 				}
 			}
 		}

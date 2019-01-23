@@ -4,7 +4,6 @@ import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffectPool;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
 import com.gildedgames.aether.common.AetherCore;
-import com.sun.istack.internal.NotNull;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
@@ -141,7 +140,6 @@ public class EffectSystemOverlay extends Gui
 		GlStateManager.popMatrix();
 	}
 
-	@NotNull
 	private ResourceLocation getEffectIconFromType(IAetherStatusEffects.effectTypes effectType)
 	{
 		switch(effectType)

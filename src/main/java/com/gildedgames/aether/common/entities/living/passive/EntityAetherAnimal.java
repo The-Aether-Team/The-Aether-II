@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.entities.living.passive;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.entities.ai.AetherNavigateGround;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.math.BlockPos;
@@ -25,5 +26,10 @@ public abstract class EntityAetherAnimal extends EntityAnimal
 	protected PathNavigate createNavigator(final World worldIn)
 	{
 		return new AetherNavigateGround(this, worldIn);
+	}
+
+	protected void applyStatusEffectOnAttack(final Entity target)
+	{
+
 	}
 }

@@ -131,7 +131,8 @@ public class EntityVaranys extends EntityAetherMob implements IEntityMultiPart
 		return flag;
 	}
 
-	private void applyStatusEffectOnAttack(final Entity target)
+	@Override
+	protected void applyStatusEffectOnAttack(final Entity target)
 	{
 		if (target instanceof EntityLivingBase)
 		{
@@ -144,6 +145,13 @@ public class EntityVaranys extends EntityAetherMob implements IEntityMultiPart
 					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).applyStatusEffect(IAetherStatusEffects.effectTypes.FRACTURE, 30);
 					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).applyStatusEffect(IAetherStatusEffects.effectTypes.STUN, 40);
 					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).applyStatusEffect(IAetherStatusEffects.effectTypes.BLEED, 2);
+				}
+			}
+			else
+			{
+				if (target.hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
+				{
+					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).applyStatusEffect(IAetherStatusEffects.effectTypes.FRACTURE, 10);
 				}
 			}
 		}

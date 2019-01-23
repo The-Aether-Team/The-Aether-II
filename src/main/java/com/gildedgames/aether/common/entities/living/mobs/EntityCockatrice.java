@@ -106,7 +106,8 @@ public class EntityCockatrice extends EntityAetherMob
 		return flag;
 	}
 
-	private void applyStatusEffectOnAttack(final Entity target)
+	@Override
+	protected void applyStatusEffectOnAttack(final Entity target)
 	{
 		if (target instanceof EntityLivingBase)
 		{
