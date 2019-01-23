@@ -968,6 +968,33 @@ aether.reward.slider.name=Slider
 aether.reward.valkyrie_queen.name=Valkyrie Queen
 aether.reward.none.name=None
 
+# Trade
+aether.trade.gui.thirdtrade=%s's Trade
+aether.trade.gui.firsttrade=Your Trade
+aether.trade.gui.lock=Lock-in Trade
+aether.trade.gui.unlock=Unlock Trade
+aether.trade.gui.confirm=Confirm Trade
+aether.trade.chat.success=Your trade with %s has been completed!
+aether.trade.chat.cancel=Your trade with %s has been canceled!
+aether.trade.chat.request=%s wants to trade with you! Interact with them to begin trading!
+aether.trade.chat.failexpired=Your trade request for %s has expired!
+aether.trade.chat.failtrade=%s is currently trading.
+aether.trade.chat.failsent=You have already sent a trade invitation to %s.
+aether.trade.status.waitingboth=Waiting on both parties to lock-in
+aether.trade.status.waitingyou=Waiting on you to lock-in
+aether.trade.status.waitingthem=Waiting on other party to lock-in
+aether.trade.status.confirmboth=Waiting on both parties to confirm
+aether.trade.status.confirmyou=Waiting on you to confirm
+aether.trade.status.confirmthem=Waiting on other party to confirm
+aether.trade.status.sizeerror=Trade cannot safely be made
+aether.trade.message.targetlock=%s locked in their trade!
+aether.trade.message.targetconfirm=%s confirmed their trade!
+aether.trade.message.unlockwarn=%s unlocked their trade! Check their trade before locking in again!
+aether.trade.message.unlocksafe=%s unlocked their trade!
+aether.trade.message.inventorywarn=You do not have enough space in your inventory to accept this trade!
+aether.trade.message.tradewarn=They do not have enough space in their inventory to accept your trade!
+
+
 # Shop
 aether.shop.sell=Sell
 aether.shop.buy=Buy %s

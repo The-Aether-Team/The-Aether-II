@@ -33,7 +33,7 @@ public class SlotDynamic extends Slot
 	@SideOnly(Side.CLIENT)
 	public boolean isEnabled()
 	{
-		return (getHasStack() ? true : enabled);
+		return (this.getHasStack() || this.enabled);
 	}
 
 	public void setEnabled(boolean enabled)
@@ -41,3 +41,4 @@ public class SlotDynamic extends Slot
 		this.enabled = enabled;
 	}
 }
+

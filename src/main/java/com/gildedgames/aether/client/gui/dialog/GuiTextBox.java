@@ -16,6 +16,8 @@ public class GuiTextBox extends GuiAbstractButton
 
 	public boolean bottomToTop = false;
 
+	public boolean center;
+
 	private ITextComponent text;
 
 	private List<ITextComponent> cachedSplitText = Lists.newArrayList();
@@ -38,6 +40,11 @@ public class GuiTextBox extends GuiAbstractButton
 		this.text = text;
 
 		this.markForReInit();
+	}
+
+	public void setCentered(boolean center)
+	{
+		this.center = center;
 	}
 
 	public int getTextHeight(final FontRenderer fontRenderer)
@@ -93,8 +100,15 @@ public class GuiTextBox extends GuiAbstractButton
 			for (int index = 0; index < splitCount; ++index)
 			{
 				final ITextComponent text = this.cachedSplitText.get(index);
+				float offset = 5;
+
+				if (this.center)
+				{
+					offset = (this.width - fontRenderer.getStringWidth(text.getUnformattedText())) / 2f;
+				}
+
 				fontRenderer.drawStringWithShadow(text.getUnformattedText(),
-						this.x + 5,
+						this.x + offset,
 						this.y + (this.bottomToTop ? this.height - 5 : 5) + index * fontRenderer.FONT_HEIGHT - (this.bottomToTop ?
 								(splitCount * fontRenderer.FONT_HEIGHT) : 0), 0xFFFFFF);
 			}

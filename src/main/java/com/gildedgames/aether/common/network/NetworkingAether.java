@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.network;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.packets.*;
 import com.gildedgames.aether.common.network.packets.dialog.*;
+import com.gildedgames.aether.common.network.packets.trade.*;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityTracker;
 import net.minecraft.entity.player.EntityPlayer;
@@ -41,6 +42,9 @@ public class NetworkingAether
 		instance.registerMessage(PacketShopSell.HandlerServer.class, PacketShopSell.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketShopBack.HandlerServer.class, PacketShopBack.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketShopBuy.HandlerServer.class, PacketShopBuy.class, discriminant++, Side.SERVER);
+		instance.registerMessage(PacketChangeCoinAmount.HandlerServer.class, PacketChangeCoinAmount.class, discriminant++, Side.SERVER);
+		instance.registerMessage(PacketTradeState.HandlerServer.class, PacketTradeState.class, discriminant++, Side.SERVER);
+		instance.registerMessage(PacketTradeMessage.HandlerServer.class, PacketTradeMessage.class, discriminant++, Side.SERVER);
 
 		// C L I E N T
 		instance.registerMessage(PacketEquipment.HandlerClient.class, PacketEquipment.class, discriminant++, Side.CLIENT);
@@ -70,6 +74,13 @@ public class NetworkingAether
 		instance.registerMessage(PacketUpdatePrecipitation.HandlerClient.class, PacketUpdatePrecipitation.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketProgressBooleanData.HandlerClient.class, PacketProgressBooleanData.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketParticles.HandlerClient.class, PacketParticles.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketChangeCoinAmount.HandlerClient.class, PacketChangeCoinAmount.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketCloseScreen.HandlerClient.class, PacketCloseScreen.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketSendInventorySize.HandlerClient.class, PacketSendInventorySize.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketTradeState.HandlerClient.class, PacketTradeState.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketTradeInventory.HandlerClient.class, PacketTradeInventory.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketTradeMessage.HandlerClient.class, PacketTradeMessage.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketTradeInitial.HandlerClient.class, PacketTradeInitial.class, discriminant++, Side.CLIENT);
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(AetherCore.INSTANCE, new AetherGuiHandler());
 	}

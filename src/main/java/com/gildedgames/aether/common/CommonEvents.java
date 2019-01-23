@@ -44,10 +44,6 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
@@ -426,6 +422,29 @@ public class CommonEvents
 			if (item.getItem() == ItemsAether.skyroot_bucket)
 			{
 				PlayerUtil.fillBucketInHand(event.getEntityPlayer(), event.getHand(), item, new ItemStack(ItemsAether.skyroot_milk_bucket));
+			}
+		}
+		else if (event.getSide().isServer() && event.getTarget() instanceof EntityPlayer && event.getHand() == EnumHand.MAIN_HAND && event.getItemStack().isEmpty())
+		{
+			PlayerTradeModule me = PlayerAether.getPlayer(event.getEntityPlayer()).getTradingModule();
+			PlayerTradeModule other = PlayerAether.getPlayer(event.getTarget()).getTradingModule();
+
+			if (me != null && other != null)
+			{
+				if (me.getPlayer().equals(other.getTarget()) && other.canAccept(event.getEntity().getPosition()))
+				{
+					me.setTrading(other);
+					other.accept();
+					AetherCore.LOGGER.info(event.getTarget().getDisplayName().getFormattedText() + " is now trading with " + event.getEntity().getDisplayName().getFormattedText());
+				}
+				else if (!other.isTrading() && me.canRequest())
+				{
+					me.request(other.getPlayer());
+				}
+				else if (me.getFailTime() == 0)
+				{
+					me.failRequest(other);
+				}
 			}
 		}
 	}

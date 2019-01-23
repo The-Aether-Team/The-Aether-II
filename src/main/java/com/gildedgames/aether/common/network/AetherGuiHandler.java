@@ -190,9 +190,9 @@ public class AetherGuiHandler implements IGuiHandler
 				if (FMLClientHandler.instance().getClient().currentScreen instanceof GuiViewer)
 				{
 					prevViewerA = (GuiViewer) FMLClientHandler.instance().getClient().currentScreen;
-
-					return new GuiTrade(prevViewerA, player);
 				}
+
+				return new GuiTrade(prevViewerA, player);
 			default:
 				return null;
 		}

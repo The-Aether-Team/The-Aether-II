@@ -18,7 +18,7 @@ public class PlayerCurrencyModule extends PlayerAetherModule implements ICurrenc
 {
 	private static final int[] DENOMINATIONS = { CurrencyAether.GILTAENI, CurrencyAether.GILTAEN, CurrencyAether.GILTAE, CurrencyAether.GILT };
 
-	private long currencyValue;
+	private long currencyValue = 0;
 
 	private int gilt, giltae, giltaen, giltaeni;
 

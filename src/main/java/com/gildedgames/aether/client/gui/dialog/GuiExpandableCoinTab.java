@@ -1,9 +1,6 @@
 package com.gildedgames.aether.client.gui.dialog;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerCurrencyModule;
-import com.gildedgames.orbis_api.client.gui.data.Text;
-import com.gildedgames.orbis_api.client.gui.util.GuiText;
 import com.gildedgames.orbis_api.client.gui.util.GuiTexture;
 import com.gildedgames.orbis_api.client.gui.util.gui_library.GuiElement;
 import com.gildedgames.orbis_api.client.rect.Dim2D;
@@ -11,8 +8,6 @@ import com.gildedgames.orbis_api.client.rect.Pos2D;
 import com.gildedgames.orbis_api.client.rect.Rect;
 import com.gildedgames.orbis_api.util.InputHelper;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
 
 public class GuiExpandableCoinTab extends GuiElement
 {
@@ -31,15 +26,16 @@ public class GuiExpandableCoinTab extends GuiElement
 
 	private boolean left, inactive;
 
-	private float x;
+	private float x, y;
 
-	public GuiExpandableCoinTab(Rect rect, boolean shouldDisplayAlways, boolean left, boolean inactive, float x)
+	public GuiExpandableCoinTab(Rect rect, boolean shouldDisplayAlways, boolean left, boolean inactive, float x, float y)
 	{
 		super(rect, shouldDisplayAlways);
 
 		this.left = left;
 		this.inactive = inactive;
 		this.x = x;
+		this.y = y;
 	}
 
 	@Override
@@ -74,7 +70,7 @@ public class GuiExpandableCoinTab extends GuiElement
 
 		float off = coinsCount.dim().width();
 
-		this.dim().mod().pos(center).addX(x - (left ? off : 0)).addY(-84).flush();
+		this.dim().mod().pos(center).addX(x - (left ? off : 0)).y(y).flush();
 
 		this.giltBag.dim().mod().pos((left ? -18 : off + 2), 4).flush();
 

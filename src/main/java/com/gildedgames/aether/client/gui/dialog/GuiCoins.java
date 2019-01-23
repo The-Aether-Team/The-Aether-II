@@ -34,7 +34,7 @@ public class GuiCoins extends GuiElement
 	{
 		super(rect, true);
 
-		this.dim().mod().width(51).height(19).flush();
+		this.dim().mod().width(32).height(19).flush();
 
 		this.shouldDisplayAlways = shouldDisplayAlways;
 	}
@@ -137,11 +137,19 @@ public class GuiCoins extends GuiElement
 	@Override
 	public void build()
 	{
-		this.gilt = new Coin(Dim2D.build().width(7).height(7).addX(0).addY(0).flush(), GILT);
-		this.giltae = new Coin(Dim2D.build().width(7).height(7).addX(27).addY(0).flush(), GILTAE);
-		this.giltaen = new Coin(Dim2D.build().width(7).height(7).addX(0).addY(15).flush(), GILTAEN);
-		this.giltaeni = new Coin(Dim2D.build().width(7).height(7).addX(27).addY(15).flush(),
+		this.gilt = new Coin(Dim2D.build().width(7).height(7).addX(17).addY(11).flush(), GILT);
+		this.giltae = new Coin(Dim2D.build().width(7).height(7).addX(0).addY(11).flush(), GILTAE);
+		this.giltaen = new Coin(Dim2D.build().width(7).height(7).addX(17).addY(0).flush(), GILTAEN);
+		this.giltaeni = new Coin(Dim2D.build().width(7).height(7).addX(0).addY(0).flush(),
 				GILTAENI);
+
+		if (!shouldDisplayAlways)
+		{
+			this.giltaeni.state().setVisible(false);
+			this.giltaen.state().setVisible(false);
+			this.giltae.state().setVisible(false);
+			this.gilt.state().setVisible(false);
+		}
 
 		this.context().addChildren(this.gilt, this.giltae, this.giltaen, this.giltaeni);
 	}
