@@ -8,9 +8,9 @@ import net.minecraft.entity.ai.attributes.IAttributeInstance;
 
 public class StatusEffectFungalRot extends StatusEffect
 {
-	public StatusEffectFungalRot()
+	public StatusEffectFungalRot(EntityLivingBase livingBase)
 	{
-		super(effectTypes.FUNGAL_ROT, new AttributeModifier("aether.statusEffectFungalRot", -0.5D, 1).setSaved(false));
+		super(effectTypes.FUNGAL_ROT, new AttributeModifier("aether.statusEffectFungalRot", -0.5D, 1).setSaved(false), livingBase);
 	}
 
 	@Override

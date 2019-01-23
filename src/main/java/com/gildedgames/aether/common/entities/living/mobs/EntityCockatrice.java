@@ -1,6 +1,8 @@
 package com.gildedgames.aether.common.entities.living.mobs;
 
+import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
+import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
 import com.gildedgames.aether.common.entities.ai.EntityAIUnstuckBlueAercloud;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceHide;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceSneakAttack;
@@ -98,13 +100,25 @@ public class EntityCockatrice extends EntityAetherMob
 		{
 			final EntityLivingBase living = (EntityLivingBase) entity;
 
-			if (!living.isActiveItemStackBlocking())
-			{
-				living.addPotionEffect(new PotionEffect(MobEffects.POISON, 40));
-			}
+			this.applyStatusEffectOnAttack(entity);
 		}
 
 		return flag;
+	}
+
+	private void applyStatusEffectOnAttack(final Entity target)
+	{
+		if (target instanceof EntityLivingBase)
+		{
+			final EntityLivingBase living = (EntityLivingBase) target;
+			if (!living.isActiveItemStackBlocking())
+			{
+				if (target.hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
+				{
+					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).applyStatusEffect(IAetherStatusEffects.effectTypes.COCKATRICE_VENOM, 50);
+				}
+			}
+		}
 	}
 
 	@Override

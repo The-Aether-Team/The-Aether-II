@@ -5,9 +5,9 @@ import net.minecraftforge.event.entity.living.LivingHealEvent;
 
 public class StatusEffectAmbrosiumPoisoning extends StatusEffect
 {
-	public StatusEffectAmbrosiumPoisoning()
+	public StatusEffectAmbrosiumPoisoning(EntityLivingBase livingBase)
 	{
-		super(effectTypes.AMBROSIUM_POISONING, null);
+		super(effectTypes.AMBROSIUM_POISONING, null, livingBase);
 	}
 
 	@Override

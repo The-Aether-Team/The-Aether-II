@@ -5,7 +5,7 @@ import com.gildedgames.aether.api.effects_system.IAetherStatusEffectPool;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
 import com.gildedgames.aether.common.entities.effects.*;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -28,14 +28,13 @@ public class StatusEffectPool implements IAetherStatusEffectPool
 	@Override
 	public void initPool()
 	{
-		this.statusEffects.put(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING.name, new StatusEffectAmbrosiumPoisoning());
-		this.statusEffects.put(IAetherStatusEffects.effectTypes.BLEED.name, new StatusEffectBleed());
-		this.statusEffects.put(IAetherStatusEffects.effectTypes.COCKATRICE_VENOM.name, new StatusEffectCockatriceVenom());
-		this.statusEffects.put(IAetherStatusEffects.effectTypes.FRACTURE.name, new StatusEffectFracture());
-		this.statusEffects.put(IAetherStatusEffects.effectTypes.FUNGAL_ROT.name, new StatusEffectFungalRot());
-		this.statusEffects.put(IAetherStatusEffects.effectTypes.STUN.name, new StatusEffectStun());
-		this.statusEffects.put(IAetherStatusEffects.effectTypes.TOXIN.name, new StatusEffectToxin());
-
+		this.statusEffects.put(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING.name, new StatusEffectAmbrosiumPoisoning(this.livingBase));
+		this.statusEffects.put(IAetherStatusEffects.effectTypes.BLEED.name, new StatusEffectBleed(this.livingBase));
+		this.statusEffects.put(IAetherStatusEffects.effectTypes.COCKATRICE_VENOM.name, new StatusEffectCockatriceVenom(this.livingBase));
+		this.statusEffects.put(IAetherStatusEffects.effectTypes.FRACTURE.name, new StatusEffectFracture(this.livingBase));
+		this.statusEffects.put(IAetherStatusEffects.effectTypes.FUNGAL_ROT.name, new StatusEffectFungalRot(this.livingBase));
+		this.statusEffects.put(IAetherStatusEffects.effectTypes.STUN.name, new StatusEffectStun(this.livingBase));
+		this.statusEffects.put(IAetherStatusEffects.effectTypes.TOXIN.name, new StatusEffectToxin(this.livingBase));
 	}
 
 	@Override
@@ -43,14 +42,14 @@ public class StatusEffectPool implements IAetherStatusEffectPool
 	{
 		for (IAetherStatusEffects effect : this.statusEffects.values())
 		{
-			if (this.livingBase instanceof EntityPlayer)
+			if (this.livingBase instanceof EntityPlayerMP)
 			{
-				EntityPlayer player = (EntityPlayer) this.livingBase;
+				EntityPlayerMP player = (EntityPlayerMP) this.livingBase;
 				if (player.isCreative())
 				{
 					if (effect.getIsEffectApplied()|| effect.getBuildup() > 0)
 					{
-						this.cureActiveEffect(effect.getEffectType());
+						effect.resetEffect();
 					}
 				}
 			}

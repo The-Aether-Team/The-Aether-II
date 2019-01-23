@@ -1,12 +1,15 @@
 package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.AetherAPI;
+import com.gildedgames.aether.api.AetherCapabilities;
+import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
 import com.gildedgames.aether.api.entity.EntityNPC;
 import com.gildedgames.aether.api.items.IItemProperties;
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
+import com.gildedgames.aether.common.capabilities.entity.effects.EffectsDamageSource;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTradeModule;
 import com.gildedgames.aether.common.containers.ContainerLoadingScreen;
@@ -452,6 +455,20 @@ public class CommonEvents
 	@SubscribeEvent
 	public static void onEntityAttacked(final LivingAttackEvent event)
 	{
+		DamageSource source = event.getEntityLiving().getLastDamageSource();
+
+		if (!(source instanceof EffectsDamageSource) && source != null)
+		{
+			if (source instanceof EntityDamageSource)
+			{
+				if (event.getEntityLiving().hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
+				{
+					event.getEntityLiving().getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null)
+							.applyStatusEffect(IAetherStatusEffects.effectTypes.BLEED, 3);
+				}
+			}
+		}
+
 		if (!(event.getEntityLiving() instanceof EntityPlayer))
 		{
 			return;

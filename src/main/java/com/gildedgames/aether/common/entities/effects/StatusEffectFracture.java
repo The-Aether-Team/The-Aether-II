@@ -7,9 +7,9 @@ import net.minecraft.entity.ai.attributes.IAttributeInstance;
 
 public class StatusEffectFracture extends StatusEffect
 {
-	public StatusEffectFracture()
+	public StatusEffectFracture(EntityLivingBase livingBase)
 	{
-		super(effectTypes.FRACTURE, new AttributeModifier("aether.statusEffectFractureCripple", -0.25, 1).setSaved(false));
+		super(effectTypes.FRACTURE, new AttributeModifier("aether.statusEffectFractureCripple", -0.25, 1).setSaved(false), livingBase);
 	}
 
 	@Override

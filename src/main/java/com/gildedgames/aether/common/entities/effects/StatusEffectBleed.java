@@ -5,9 +5,9 @@ import net.minecraft.entity.EntityLivingBase;
 
 public class StatusEffectBleed extends StatusEffect
 {
-	public StatusEffectBleed()
+	public StatusEffectBleed(EntityLivingBase livingBase)
 	{
-		super(effectTypes.BLEED, null);
+		super(effectTypes.BLEED, null, livingBase);
 	}
 
 	@Override

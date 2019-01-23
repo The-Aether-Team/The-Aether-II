@@ -2,8 +2,11 @@ package com.gildedgames.aether.common.entities.effects;
 
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.network.packets.effects.PacketStatusEffect;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.MathHelper;
 
@@ -23,7 +26,9 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	protected boolean isEffectApplied;
 	protected double activeEffectTimeModifier = 1.0D;
 
-	public StatusEffect(IAetherStatusEffects.effectTypes effectType, AttributeModifier attributeModifier)
+	private final EntityLivingBase livingEffected;
+
+	public StatusEffect(IAetherStatusEffects.effectTypes effectType, AttributeModifier attributeModifier, EntityLivingBase living)
 	{
 		this.effectType = effectType;
 		this.isEffectApplied = false;
@@ -34,6 +39,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 		this.ACTIVE_EFFECT_TIME = effectType.activeEffectTime;
 
 		this.ATTRIBUTE_MODIFIER = attributeModifier;
+		this.livingEffected = living;
 	}
 
 	@Override
@@ -43,7 +49,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 		if (this.effectBuildup >= 101)
 		{
 			this.isEffectApplied = true;
-			AetherCore.LOGGER.info("Effect Applied : " + this.NAME);
+			AetherCore.LOGGER.info("Effect Applied : " + this.NAME + " to : " + this.livingEffected.getName());
 			this.effectBuildup = 100;
 		}
 
@@ -67,6 +73,11 @@ public abstract class StatusEffect implements IAetherStatusEffects
 				this.effectTimer = 0;
 			}
 			this.effectBuildup = 0;
+		}
+
+		if (livingBase instanceof EntityPlayerMP && !livingBase.world.isRemote)
+		{
+			NetworkingAether.sendPacketToPlayer(new PacketStatusEffect(livingBase), (EntityPlayerMP) livingBase);
 		}
 	}
 
@@ -98,9 +109,21 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	}
 
 	@Override
+	public void setBuildup(int buildup)
+	{
+		this.effectBuildup = buildup;
+	}
+
+	@Override
+	public void setApplied(boolean isApplied)
+	{
+		this.isEffectApplied = isApplied;
+	}
+
+	@Override
 	public void reduceBuildup()
 	{
-		if (this.effectBuildup > 0 || this.isEffectApplied)
+		if (this.effectBuildup > 0)
 		{
 			++ this.effectTimer;
 
@@ -154,7 +177,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 		this.effectTimer = 0;
 		this.activeEffectTimeModifier = 1.0D;
 
-		AetherCore.LOGGER.info("Effect Reset : " + this.NAME);
+		AetherCore.LOGGER.info("Effect Reset : " + this.NAME + " to : " + this.livingEffected.getName());
 	}
 
 	@Override

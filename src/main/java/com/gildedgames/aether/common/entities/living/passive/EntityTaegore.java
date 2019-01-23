@@ -1,6 +1,8 @@
 package com.gildedgames.aether.common.entities.living.passive;
 
+import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
+import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.entities.ai.AetherNavigateGround;
@@ -228,8 +230,29 @@ public class EntityTaegore extends EntityAetherAnimal implements IEntityMultiPar
 	public boolean attackEntityAsMob(final Entity entityIn)
 	{
 		entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 2.0F);
+
+
+		this.applyStatusEffectOnAttack(entityIn);
+
 		this.playSound(SoundsAether.taegore_attack, 0.5F, 1.0F);
 		return true;
+	}
+
+	private void applyStatusEffectOnAttack(final Entity target)
+	{
+		if (target instanceof EntityLivingBase)
+		{
+			final EntityLivingBase living = (EntityLivingBase) target;
+
+			if (!living.isActiveItemStackBlocking())
+			{
+				if (target.hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
+				{
+					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).applyStatusEffect(IAetherStatusEffects.effectTypes.FRACTURE, 20);
+					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).applyStatusEffect(IAetherStatusEffects.effectTypes.STUN, 50);
+				}
+			}
+		}
 	}
 
 }

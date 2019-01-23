@@ -255,7 +255,7 @@ public class ClientEventHandler
 			else if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR)
 			{
 				DAMAGE_SYSTEM_OVERLAY.renderIcons(mc);
-				EFFECT_SYSTEM_OVERLAY.renderIcons(mc);
+				EFFECT_SYSTEM_OVERLAY.render(mc);
 			}
 		}
 	}

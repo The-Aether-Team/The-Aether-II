@@ -1,6 +1,8 @@
 package com.gildedgames.aether.common.entities.living.passive;
 
+import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
+import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.entities.ai.AetherNavigateGround;
@@ -234,9 +236,28 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 			living.attackEntityFrom(DamageSource.causeMobDamage(this), 5.0F);
 			this.playSound(SoundsAether.burrukai_attack, 0.5F, 1.0F);
 			living.knockBack(this, 1.0F, 0.2D, 0.2D);
+
+			this.applyStatusEffectOnAttack(entityIn);
 		}
 
 		return true;
+	}
+
+	private void applyStatusEffectOnAttack(final Entity target)
+	{
+		if (target instanceof EntityLivingBase)
+		{
+			final EntityLivingBase living = (EntityLivingBase) target;
+
+			if (!living.isActiveItemStackBlocking())
+			{
+				if (target.hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
+				{
+					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).applyStatusEffect(IAetherStatusEffects.effectTypes.FRACTURE, 30);
+					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).applyStatusEffect(IAetherStatusEffects.effectTypes.STUN, 70);
+				}
+			}
+		}
 	}
 
 }

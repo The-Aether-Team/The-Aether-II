@@ -7,9 +7,9 @@ import net.minecraft.entity.ai.attributes.IAttributeInstance;
 
 public class StatusEffectStun extends StatusEffect
 {
-	public StatusEffectStun()
+	public StatusEffectStun(EntityLivingBase livingBase)
 	{
-		super(effectTypes.STUN, new AttributeModifier("aether.statusEffectStun", -1D, 1).setSaved(false));
+		super(effectTypes.STUN, new AttributeModifier("aether.statusEffectStun", -1D, 1).setSaved(false), livingBase);
 	}
 
 	@Override

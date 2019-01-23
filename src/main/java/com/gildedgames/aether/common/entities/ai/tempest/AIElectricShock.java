@@ -1,13 +1,14 @@
 package com.gildedgames.aether.common.entities.ai.tempest;
 
+import com.gildedgames.aether.api.AetherCapabilities;
+import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
 import com.gildedgames.aether.common.entities.ai.EntityAI;
 import com.gildedgames.aether.common.entities.living.mobs.EntityTempest;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
-import net.minecraft.init.MobEffects;
-import net.minecraft.potion.PotionEffect;
 
 public class AIElectricShock extends EntityAI<EntityTempest>
 {
@@ -86,10 +87,7 @@ public class AIElectricShock extends EntityAI<EntityTempest>
 					this.entity().setAttacked(false);
 					this.entity().attackEntityAsMob(prey);
 
-					if (!prey.isActiveItemStackBlocking())
-					{
-						prey.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 80, 3));
-					}
+					this.applyStatusEffectOnAttack(prey);
 
 					this.attackTimer = 0;
 					this.cooldownTimer = 0;
@@ -102,4 +100,20 @@ public class AIElectricShock extends EntityAI<EntityTempest>
 		}
 	}
 
+
+	private void applyStatusEffectOnAttack(final Entity target)
+	{
+		if (target instanceof EntityLivingBase)
+		{
+			final EntityLivingBase living = (EntityLivingBase) target;
+
+			if (!living.isActiveItemStackBlocking())
+			{
+				if (target.hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
+				{
+					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).applyStatusEffect(IAetherStatusEffects.effectTypes.STUN, 90);
+				}
+			}
+		}
+	}
 }

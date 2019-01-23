@@ -39,6 +39,10 @@ public interface IAetherStatusEffects extends NBT
 	 */
 	void addBuildup(int buildup, double additionalResistance);
 
+	void setBuildup(int buildup);
+
+	void setApplied(boolean isApplied);
+
 	/**
 	 * Reduce the buildup by the effect's specified amount of reduction.
 	 * Handle's timer incrementing, since the timer should only be active if effect is applied or buildup is greater than 0.
@@ -72,19 +76,21 @@ public interface IAetherStatusEffects extends NBT
 	String getEffectName();
 	AttributeModifier getAttributeModifier();
 
+	int NUMBER_OF_EFFECTS = 7;
+
 	enum effectTypes
 	{
 		AMBROSIUM_POISONING("aether.effect.ambrosium_poisoning",0, 1, 1, 120),
 		TOXIN("aether.effect.toxin",1, 1, 1, 10),
-		COCKATRICE_VENOM("aether.effect.cockatrice_venom",2, 5, 60*5, 60),
+		COCKATRICE_VENOM("aether.effect.cockatrice_venom",2, 5, 60, 60),
 		STUN("aether.effect.stun", 3,5, 1, 5),
 		BLEED("aether.effect.bleed", 4,1,10,0),
 		FRACTURE("aether.effect.fracture", 5,1, 1, 60*5),
-		FUNGAL_ROT("aether.effect.fungal_rot", 6,1, 1, 20);
+		FUNGAL_ROT("aether.effect.fungal_rot", 6,1, 10, 20);
 
 		public final int numericValue;			// identifier for this effect.
 		public final String name;
-		public final int reductionRate;	    // amount to reduce by.
+		public final int reductionRate;	    	// amount to reduce by.
 		public final int timeTillReduction; 	// time between each reduction in seconds.
 		public final int activeEffectTime;		// how long the active effect lasts in seconds. (0 is instant)
 
@@ -94,6 +100,29 @@ public interface IAetherStatusEffects extends NBT
 			this.reductionRate = reductionRate;
 			this.timeTillReduction = timeTillReduction;
 			this.activeEffectTime = activeEffectTime;
+		}
+
+		public static effectTypes getEffectFromNumericValue(int numericValue)
+		{
+			switch(numericValue)
+			{
+				case 0:
+					return AMBROSIUM_POISONING;
+				case 1:
+					return TOXIN;
+				case 2:
+					return COCKATRICE_VENOM;
+				case 3:
+					return STUN;
+				case 4:
+					return BLEED;
+				case 5:
+					return FRACTURE;
+				case 6:
+					return FUNGAL_ROT;
+					default:
+						return null;
+			}
 		}
 	}
 }

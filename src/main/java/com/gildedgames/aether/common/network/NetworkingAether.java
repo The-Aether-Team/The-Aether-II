@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.network;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.packets.*;
 import com.gildedgames.aether.common.network.packets.dialog.*;
+import com.gildedgames.aether.common.network.packets.effects.PacketStatusEffect;
 import com.gildedgames.aether.common.network.packets.trade.*;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityTracker;
@@ -74,6 +75,7 @@ public class NetworkingAether
 		instance.registerMessage(PacketUpdatePrecipitation.HandlerClient.class, PacketUpdatePrecipitation.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketProgressBooleanData.HandlerClient.class, PacketProgressBooleanData.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketParticles.HandlerClient.class, PacketParticles.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketStatusEffect.HandlerClient.class, PacketStatusEffect.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketChangeCoinAmount.HandlerClient.class, PacketChangeCoinAmount.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketCloseScreen.HandlerClient.class, PacketCloseScreen.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketSendInventorySize.HandlerClient.class, PacketSendInventorySize.class, discriminant++, Side.CLIENT);

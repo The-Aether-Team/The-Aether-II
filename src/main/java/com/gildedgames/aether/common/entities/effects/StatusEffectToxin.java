@@ -9,9 +9,9 @@ public class StatusEffectToxin extends StatusEffect
 	private int NumOfHeartsEffected = 0;
 	private final int MAX_HEARTS = 6;
 
-	public StatusEffectToxin()
+	public StatusEffectToxin(EntityLivingBase livingBase)
 	{
-		super(effectTypes.TOXIN, null);
+		super(effectTypes.TOXIN, null, livingBase);
 	}
 
 	@Override

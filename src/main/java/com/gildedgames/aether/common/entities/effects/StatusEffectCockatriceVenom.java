@@ -5,15 +5,15 @@ import net.minecraft.entity.EntityLivingBase;
 
 public class StatusEffectCockatriceVenom extends StatusEffect
 {
-	public StatusEffectCockatriceVenom()
+	public StatusEffectCockatriceVenom(EntityLivingBase livingBase)
 	{
-		super(effectTypes.COCKATRICE_VENOM, null);
+		super(effectTypes.COCKATRICE_VENOM, null, livingBase);
 	}
 
 	@Override
 	public void applyEffect(EntityLivingBase livingBase, int timer)
 	{
-		if (this.isEffectApplied && livingBase.getHealth() > 1 && this.effectTimer % (TICKS_PER_SECOND) == 0)
+		if (this.isEffectApplied && livingBase.getHealth() > 1 && this.effectTimer % (TICKS_PER_SECOND * 2) == 0)
 		{
 			livingBase.attackEntityFrom(EffectsDamageSource.COCKATRICE_VENOM, 1f);
 		}
