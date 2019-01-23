@@ -34,6 +34,8 @@ tile.aether.blue_light_skyroot_leaves.name=蓝天纤树叶
 tile.aether.green_light_skyroot_leaves.name=绿天纤树叶
 tile.aether.dark_blue_light_skyroot_leaves.name=暗蓝天纤树叶
 tile.aether.golden_oak_leaves.name=金琥珀树叶
+tile.aether.mutant_leaves.name=突变树叶
+tile.aether.mutant_leaves_decorated.name=挂饰突变树叶
 tile.aether.tall_aether_grass.short.name=矮空叶草
 tile.aether.tall_aether_grass.normal.name=空叶草丛
 tile.aether.tall_aether_grass.long.name=高空叶草
@@ -89,6 +91,7 @@ tile.aether.aether_sapling.blue_skyroot.name=蓝天根树苗
 tile.aether.aether_sapling.green_skyroot.name=绿天根树苗
 tile.aether.aether_sapling.dark_blue_skyroot.name=暗蓝天根树苗
 tile.aether.aether_sapling.golden_oak.name=金琥珀树苗
+tile.aether.aether_sapling.mutant_tree.name=爱迪生的狂热突变树苗
 tile.aether.carved_stone.normal.name=雕纹石
 tile.aether.carved_stone.divine.name=神佑雕纹石
 tile.aether.sentry_stone.normal.name=岗哨石
@@ -200,7 +203,17 @@ tile.aether.sentrystone_brick_decorative_lit.keystone.name=发光拱顶石
 tile.aether.sentrystone_brick_decorative_lit.capstone_bricks.name=发光拱石柱
 tile.aether.sentrystone_brick_decorative_lit.capstone_pillar.name=发光石板
 tile.aether.sentrystone_brick_decorative_lit.lightstone.name=发光亮石
-tile.aether.sentrystone_pillar_lit.name=发光岗哨石柱
+tile.aether.sentrystone_pillar_lit.name=流光岗哨石柱
+tile.aether.hellfirestone_brick.name=狱炎石砖
+tile.aether.hellfirestone_brick_decorative.name=饰纹狱炎石砖
+tile.aether.hellfirestone_brick_decorative.base_bricks.name=砖石
+tile.aether.hellfirestone_brick_decorative.base_pillar.name=柱石
+tile.aether.hellfirestone_brick_decorative.keystone.name=拱顶石
+tile.aether.hellfirestone_brick_decorative.capstone_bricks.name=拱石
+tile.aether.hellfirestone_brick_decorative.capstone_pillar.name=拱石柱
+tile.aether.hellfirestone_brick_decorative.flagstones.name=石板
+tile.aether.hellfirestone_lantern.name=狱炎石灯
+tile.aether.hellfirestone_pillar.name=狱炎石柱
 tile.aether.faded_holystone_brick.name=风化圣石砖
 tile.aether.faded_holystone_brick_decorative.name=饰纹风化圣石砖
 tile.aether.faded_holystone_brick_decorative.base_bricks.name=砖石
@@ -306,7 +319,10 @@ tile.aether.highlands_snow.name=空原雪
 tile.aether.highlands_snow_layer.name=空原雪
 tile.aether.highlands_ice.name=空原冰
 tile.aether.highlands_packed_ice.name=空原浮冰
-tile.aether.plumproot.name=软根
+tile.aether.plumproot.name=腴根
+tile.aether.highlands_ice_crystal.stalagmite.name=凝冰结晶
+tile.aether.candy_cane_block.name=拐杖糖块
+tile.aether.candy_cane_wall.name=拐杖糖墙
 
 # Aether Items
 item.aether.skyroot_stick.name=天根木棍
@@ -363,14 +379,15 @@ item.aether.enchanted_blueberry.name=魔莓
 item.aether.orange.name=橙子
 item.aether.wyndberry.name=风莓
 item.aether.candy_corn.name=玉米糖
-item.aether.cocoatrice.name=即食可可
-item.aether.jelly_plumproot.name=软根果冻
+item.aether.cocoatrice.name=可可鸡蛇
+item.aether.jelly_plumproot.name=腴根软糖
 item.aether.stomper_pop.name=粉红史维特棒棒糖
 item.aether.blueberry_lollipop.name=蓝莓棒棒糖
 item.aether.orange_lollipop.name=橙子棒棒糖
 item.aether.icestone_poprocks.name=冰爽跳跳糖
 item.aether.ginger_bread_man.name=姜饼人
-item.aether.candy_cane.name=糖果杖
+item.aether.candy_cane.name=拐杖糖
+item.aether.yule_log.name=圣诞树原木
 item.aether.wrapped_chocolates.name=精装巧克力
 item.aether.enchanted_wyndberry.name=魔风莓
 item.aether.swet_jelly.blue.name=天蓝史维特果冻
@@ -418,8 +435,10 @@ item.aether.holystone_shield.name=圣石重盾
 item.aether.zanite_shield.name=紫晶战盾
 item.aether.arkenium_shield.name=阿肯钢盾
 item.aether.gravitite_shield.name=重力晶盾
-item.aether.plumproot_mash.name=软根糊
-item.aether.plumproot_pie.name=软根派
+item.aether.plumproot_mash.name=腴根羹
+item.aether.plumproot_pie.name=腴根派
+item.aether.winter_hat.name=冬帽
+item.aether.eggnog.name=蛋奶酒
 
 item.aether.skyroot_bed_item.name=天根床
 item.aether.moa_egg_item.name=恐鸟蛋
@@ -499,7 +518,7 @@ item.aether.wrapping_paper.box.orange.name=橙色礼物盒
 item.aether.wrapping_paper.box.white.name=白色礼物盒
 item.aether.wrapping_paper.tooltip.craft=在工作台上把物品包装起来！
 item.aether.present.tooltip.empty=空
-item.aether.present.tooltip.hasitem=里面有神秘的小东西哦！
+item.aether.present.tooltip.hasitem=里面有神秘的小惊喜哦！
 
 
 tile.aether.aether_portal.name=天境传送门
@@ -598,6 +617,12 @@ item.aether.sentry_vaultbox.ability.desc2=§3投掷:§r右键
 item.aether.crossbow.desc1=装填速度
 item.aether.crossbow.desc2=秒
 item.aether.crossbow.desc3=秒
+item.aether.crossbow.desc4=功能
+item.aether.skyroot_crossbow.ability=潜行装弹：双发
+item.aether.holystone_crossbow.ability=潜行装弹：散射
+item.aether.zanite_crossbow.ability=无特技
+item.aether.arkenium_crossbow.ability=潜行装弹：远射
+item.aether.gravitite_crossbow.ability=无特技
 item.aether.bolt.desc1=攻击伤害
 
 # Tool tooltips
@@ -662,6 +687,7 @@ entity.aether.josediya.name=乔瑟迪娅
 entity.aether.tivalier.name=泰瓦尔
 entity.aether.icehog.name=冰川刺猬
 entity.aether.mysterious_figure.name=神秘人
+entity.aether.varanys.name=冰穴巨蜥
 
 # Creative Tabs
 itemGroup.aether.blocks=天境二 方块
@@ -782,16 +808,20 @@ gui.aether.loading.indeterminate=加载中···
 gui.aether.loading.progress=加载中%s%%
 gui.aether.patreon.rewards.button.use=使用
 gui.aether.patreon.rewards.button.locked=已锁定
-gui.aether.incubator.label.incubating=孵化中
-gui.aether.incubator.label.heating=加热中
+gui.aether.incubator.label.incubation=孵化
+gui.aether.incubator.label.heating加热中
+gui.aether.incubator.label.more_heat=需要更多热量！
+gui.aether.incubator.label.ready=就绪！
+gui.aether.incubator.label.max=满
+gui.aether.incubator.label.fail=失败！
 gui.aether.masonry.label.recipes=合成
 
 # Intro
 
 intro.prologue=在那位孤独的勇士击败残暴的烈阳巨灵卡尔图尔的二百年后，一位新的旅行者来到了天境······
-intro.tip1=免责声明:\n\n此版本仍未完成，BUG贼多\n\n年末会发布官方的空原迭代版本。\n\n若不希望获得较差的游戏体验，我们强烈建议您等待官方正式版。\n\n很多生物——包括试验性的——都暂未添加。我们以测试和尝鲜为目的发布这一开发中版本。
+intro.tip1=免责声明:\n\n此版本仍未完成，BUG贼多\n\n空原的正式版本发布日期未定。\n\n若不希望获得较差的游戏体验，我们强烈建议您等待官方正式版。\n\n很多生物——包括试验性的——都暂未添加。我们以测试和尝鲜为目的发布这一开发中版本。
 intro.tip2=本模组仍未加入地下城。我们仍在设计开发相关的技术工具，这一技术工具模组被命名为Orbis。将相关内容加入模组是需要花费时间的。现阶段你可以体验到的内容以探索新的生物群系和地形为主，还可以欣赏我们的艺术作品和新近构建的模型。
-intro.tip3=你将前往的世界将从背景、时间和空间三个方面与主世界完全分开，你的物品栏将与主世界分离，但你能将物品带回主世界。
+intro.tip3=你将前往的世界将从背景、时间和空间三个方面与主世界完全分开······
 intro.tip4=开始旅程？
 intro.holdToSkip=点击跳过
 intro.proudlyPresents=荣誉出品
@@ -889,7 +919,7 @@ indev.line2=感谢您对本模组的关注！在继续游戏之前，我们先�
 indev.line3=世界错误与崩溃
 indev.line4=生物丢失材质和模型
 indev.line5=游戏损坏
-indev.line6=最重要的，海量Bug！
+indev.line6=最重要的，成吨的Bug！
 indev.line7=欢迎试玩天境二的预览版，而我们诚挚地希望您在我们开发的过程中给予我们耐心和支持。
 indev.line8=点击下方的按钮，也就表明您了解了以上事项，要是您的游戏长出腿带着您的咖啡跑了，可不要怪在我们的头上哦。
 
@@ -978,10 +1008,12 @@ edison.greet.option.died=我还以为我死定了······
 edison.greet.option.fine=我很好。
 edison.greet.option.thanks=爱迪生，谢谢你。
 edison.greet.option.okay_sale=我会没事的。你这有啥好货吗？
+edison.greet.option.okay_holiday_sale=我很好。已经节日假期了，有没有特供的商品啊？
 
 edison.greet.start=嘿，朋友，最近过得还顺利吗？要不要买点什么？
 
 edison.greet.option.sale=你有啥好货吗？
+edison.greet.option.holiday_sale=这个节日假期有没有特供商品？
 
 edison.greet.option.okay_goodbye=我觉得我过得不错。再见。
 edison.greet.option.ready_goodbye=我想我已经准备好了。爱迪生，再见。
@@ -1020,6 +1052,7 @@ edison.greet.thanks1=别客气。每个人都有自己的职责，我就是保�
 edison.greet.thanks2=还需要些什么？还是说你已经准备好出发了？
 
 edison.greet.sale=当然啦，来看看我的货物吧。
+edison.greet.holiday_sale=希望你感受到节日的气息，朋友！来看看我们假期特卖的商品吧。
 
 edison.greet.no_we_talked1=没错，正是本人！国际企业家、推销员以及顶级说客！
 edison.greet.no_we_talked2=但由于我们和巫魂先生的小小约定，对你而言，我更是架起你与这些奇异群岛之间联系的枢纽和向导。
@@ -1071,6 +1104,18 @@ edison.shop.thera_dirt=我自己很喜欢一项小研究，那就是看看这里
 edison.shop.thera_grass=折腾了好久才种出来和介元草相仿的植物，我总觉得还是故土的草地更绿。
 edison.shop.therastone_brick=呃，这些是我仿制的又老又高又黑又吓人的那位的塔楼的建材，就是普通的天冶石而已，不过，我弄出来的磨损和裂纹让它们基本一模一样。
 
+edison.shop.holiday_notice=半价甩卖！\n节日特供
+
+edison.shop.greetings_holiday=欢迎光临我的假日商店！这些商品都是限时出售，抓紧时间买点什么吧，可别错过了后悔哟。
+
+edison.shop.candy_cane=这些甜食可是假日的一大享受啊。别把它们和真的拐杖搞混了，那些来自远方的广袤空域的人们常用它来装饰我的变异树种——而且你正巧赶上了树苗优惠出售！
+edison.shop.candy_cane_block=你有没有想过“哇，要是能把一大堆糖果做成超级大的一块该多棒啊”？我也没想过。不过嘛，现在这玩意减价了——为什么不趁机买下这最后一批货尝个鲜呢？
+edison.shop.candy_cane_wall=我猜你大概能能用这个······挡住世界上所有不爱甜食的人？我都弄糊涂了，但是这些东西这两天卖得特别好。坦率地说我也不想搞明白为什么，卖得好就得了呗。
+edison.shop.mutant_sapling=它们让我回忆起了一些事情。不好意思，我可不能告诉你这些奇妙的树苗是怎么做出来的。我们只是说它是节日中的又一种好东西，是会长出灯泡的哦。
+edison.shop.winter_hat=下面世界的市民们就喜欢这个，就没有哪怕一个节日的夜晚不会有人戴着它到处乱窜。没什么实用价值，不过人们说衣柜里当然得有这么件赶时髦的东西。
+edison.shop.eggnog=事情是这样的：我喜欢蛋奶酒，喝起来味道真不错——可我要是喝上那么几杯，就老是有一群小兔子缠着我！只有我这样吗？
+edison.shop.yule_log=有没有想过尝尝原木的味道？那你运气真不错，这可是仅有的一次啃木头还不觉得难吃的机会！
+
 ##=======================##
 ###########################
 # #
@@ -1117,3 +1162,28 @@ josediya.greet.travel=好的，想去哪？
 josediya.greet.option.travel_to=返回住处
 josediya.greet.option.travel_from=返回前哨营地
 josediya.greet.option.travel=出发
+##================================##
+####################################
+#                                  #
+#    MYSTERIOUS FIGURE DIALOGUE    #
+#                                  #
+####################################
+##================================##
+
+mysterious_figure.greet.start=我看见了一位新来的旅行家!欢迎，欢迎······看看我从遥远国度进口的稀罕玩意吧————各式各样值得一尝的甜点！
+mysterious_figure.greet.option.who_are_you=你是谁？
+mysterious_figure.greet.option.why_plumproots=你为什么要在肩膀上扛个腴根？
+mysterious_figure.greet.option.sale=我能看看你都卖点什么吗？
+mysterious_figure.greet.who_are_you=你想知道我的名字？但这是个秘密！所有人都忘记了，甚至连历史都忘记了它！
+mysterious_figure.greet.why_plumproots=你知道这些漂漂亮亮的腴根都能派上多棒的用场吗？煮着吃，炖着吃，多采点来跟我换糖吃！你的口腔感受过腴根派的绝顶滋味吗？人生一世，一定要试！
+mysterious_figure.greet.sale=多好啊，多好啊，你出腴根我做糖！
+mysterious_figure.shop.greetings=腴根，腴根，腴根！腴根才能换我糖，除非货比长靴棒！
+mysterious_figure.shop.candy_corn=猜猜什么和玉米最配？腴根！······当然还有糖，我猜的。
+mysterious_figure.shop.cocoatrice=制作时未曾残害哪怕一只鸡蛇！
+mysterious_figure.shop.wrapped_chocolates=这些巧克力是我亲手包装的!如含微量骨骼，无需惊讶，请放心食用。
+mysterious_figure.shop.jelly_plumproot=我不知道你分不分得清楚，但它们可和我最爱的口粮差远了。
+mysterious_figure.shop.blueberry_lollipop=许多小孩都很喜欢这种小零食，吃了以后没准会把你变成一颗大蓝莓。
+mysterious_figure.shop.orange_lollipop=味道和橙子一模一样！P.S.：不含任何橙子成分。
+mysterious_figure.shop.icestone_poprocks=并不真的是用冰石做的。
+mysterious_figure.shop.ginger_bread_man=我曾听说过一位姜饼糕点师的故事。据传说，在那个恐怖月份的前夜，他们吃下人形的姜饼后，就变成了他们刚吃下的东西。觉不觉得自己运气真好?
+mysterious_figure.shop.candy_cane=试着把这个当手杖用用，来呀，谅你也不敢。
