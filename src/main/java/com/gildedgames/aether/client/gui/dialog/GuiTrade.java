@@ -316,6 +316,11 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 
 	private void addTradeCoins(double val)
 	{
+		if (!this.module.isLockedIn())
+		{
+			return;
+		}
+
 		if (this.playerAether != null)
 		{
 			long currency = this.playerAether.getCurrencyModule().getCurrencyValue();
@@ -391,6 +396,8 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 	@Override
 	public void drawScreen(final int mouseX, final int mouseY, final float partialTicks)
 	{
+		Gui.drawRect(0, this.height - 90, this.width, this.height, Integer.MIN_VALUE);
+
 		if (!this.labelUpdated)
 		{
 			this.updateTraderLabel();

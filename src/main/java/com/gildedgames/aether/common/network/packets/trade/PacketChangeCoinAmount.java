@@ -48,7 +48,7 @@ public class PacketChangeCoinAmount implements IMessage
 
 			double val = aePlayer.getCurrencyModule().getCurrencyValue();
 
-			if (message.coinCount <= val && tradeModule.isTrading())
+			if (message.coinCount <= val && tradeModule.isTrading() && !tradeModule.isLockedIn())
 			{
 				tradeModule.setCoinAmount(message.coinCount);
 				NetworkingAether.sendPacketToPlayer(new PacketChangeCoinAmount(message.coinCount), (EntityPlayerMP) tradeModule.getTarget().getEntity());
