@@ -2,6 +2,8 @@ package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.AetherCapabilities;
+import com.gildedgames.aether.api.effects_system.EEffectIntensity;
+import com.gildedgames.aether.api.effects_system.IAetherStatusEffectIntensity;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
 import com.gildedgames.aether.api.entity.EntityNPC;
 import com.gildedgames.aether.api.items.IItemProperties;
@@ -13,6 +15,7 @@ import com.gildedgames.aether.common.capabilities.entity.effects.EffectsDamageSo
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTradeModule;
 import com.gildedgames.aether.common.containers.ContainerLoadingScreen;
+import com.gildedgames.aether.common.entities.effects.StatusEffectBleed;
 import com.gildedgames.aether.common.entities.living.mobs.EntityAechorPlant;
 import com.gildedgames.aether.common.entities.living.passive.EntityCarrionSprout;
 import com.gildedgames.aether.common.events.PostAetherTravelEvent;
@@ -464,7 +467,8 @@ public class CommonEvents
 				if (event.getEntityLiving().hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
 				{
 					event.getEntityLiving().getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null)
-							.applyStatusEffect(IAetherStatusEffects.effectTypes.BLEED, 3);
+							.applyStatusEffect(IAetherStatusEffects.effectTypes.BLEED,
+									IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectBleed(event.getEntityLiving()), EEffectIntensity.MINOR));
 				}
 			}
 		}

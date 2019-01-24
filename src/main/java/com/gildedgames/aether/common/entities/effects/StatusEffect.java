@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.effects;
 
+import com.gildedgames.aether.api.effects_system.EEffectIntensity;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.NetworkingAether;
@@ -215,6 +216,9 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	{
 		return this.ATTRIBUTE_MODIFIER;
 	}
+
+	@Override
+	public abstract int getBuildupFromIntensity(EEffectIntensity intensity);
 
 	@Override
 	public void write(NBTTagCompound compound)

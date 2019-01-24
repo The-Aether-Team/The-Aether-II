@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.effects;
 
+import com.gildedgames.aether.api.effects_system.EEffectIntensity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
 
@@ -27,5 +28,21 @@ public class StatusEffectAmbrosiumPoisoning extends StatusEffect
 	public void onEffectEnd()
 	{
 
+	}
+
+	@Override
+	public int getBuildupFromIntensity(EEffectIntensity intensity)
+	{
+		switch (intensity)
+		{
+			case MINOR:
+				return 3;
+			case ORDINARY:
+				return 25;
+			case MAJOR:
+				return 50;
+		}
+
+		return 0;
 	}
 }

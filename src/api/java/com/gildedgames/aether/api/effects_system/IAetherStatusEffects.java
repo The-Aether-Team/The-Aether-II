@@ -4,6 +4,8 @@ import com.gildedgames.orbis_api.util.mc.NBT;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 
+import java.util.HashMap;
+
 public interface IAetherStatusEffects extends NBT
 {
 	int TICKS_PER_SECOND = 20;
@@ -75,6 +77,8 @@ public interface IAetherStatusEffects extends NBT
 	effectTypes getEffectType();
 	String getEffectName();
 	AttributeModifier getAttributeModifier();
+
+	int getBuildupFromIntensity(EEffectIntensity intensity);
 
 	int NUMBER_OF_EFFECTS = 7;
 

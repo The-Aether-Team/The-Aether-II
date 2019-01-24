@@ -2,6 +2,8 @@ package com.gildedgames.aether.common.entities.living.mobs;
 
 import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
+import com.gildedgames.aether.api.effects_system.EEffectIntensity;
+import com.gildedgames.aether.api.effects_system.IAetherStatusEffectIntensity;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
@@ -9,11 +11,13 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.entities.ai.EntityAIRestrictRain;
 import com.gildedgames.aether.common.entities.ai.hopping.*;
 import com.gildedgames.aether.common.entities.ai.swet.AILatchOn;
+import com.gildedgames.aether.common.entities.effects.StatusEffectToxin;
 import com.gildedgames.aether.common.entities.util.EntityExtendedMob;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketDetachSwet;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.player.EntityPlayer;
@@ -196,9 +200,14 @@ public class EntitySwet extends EntityExtendedMob
 
 	private void applyStatusEffectOnAttack(final Entity target)
 	{
-		if (target.hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
+		if (target instanceof EntityLivingBase)
 		{
-			target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).applyStatusEffect(IAetherStatusEffects.effectTypes.TOXIN, 10);
+			if (target.hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
+			{
+				target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).
+						applyStatusEffect(IAetherStatusEffects.effectTypes.TOXIN,
+								IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectToxin((EntityLivingBase) target), EEffectIntensity.MINOR));
+			}
 		}
 	}
 

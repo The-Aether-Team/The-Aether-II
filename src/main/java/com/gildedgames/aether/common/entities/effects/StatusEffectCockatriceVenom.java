@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.effects;
 
+import com.gildedgames.aether.api.effects_system.EEffectIntensity;
 import com.gildedgames.aether.common.capabilities.entity.effects.EffectsDamageSource;
 import net.minecraft.entity.EntityLivingBase;
 
@@ -23,5 +24,11 @@ public class StatusEffectCockatriceVenom extends StatusEffect
 	public void onEffectEnd()
 	{
 
+	}
+
+	@Override
+	public int getBuildupFromIntensity(EEffectIntensity intensity)
+	{
+		return 55;
 	}
 }

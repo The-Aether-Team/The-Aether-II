@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.effects;
 
+import com.gildedgames.aether.api.effects_system.EEffectIntensity;
 import com.gildedgames.aether.common.capabilities.entity.effects.EffectsDamageSource;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -40,5 +41,21 @@ public class StatusEffectFungalRot extends StatusEffect
 	public void onEffectEnd()
 	{
 
+	}
+
+	@Override
+	public int getBuildupFromIntensity(EEffectIntensity intensity)
+	{
+		switch (intensity)
+		{
+			case MINOR:
+				return 5;
+			case ORDINARY:
+				return 15;
+			case MAJOR:
+				return 40;
+		}
+
+		return 0;
 	}
 }

@@ -2,10 +2,15 @@ package com.gildedgames.aether.common.entities.living.mobs;
 
 import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
+import com.gildedgames.aether.api.effects_system.EEffectIntensity;
+import com.gildedgames.aether.api.effects_system.IAetherStatusEffectIntensity;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
 import com.gildedgames.aether.common.entities.ai.EntityAIHideFromLight;
 import com.gildedgames.aether.common.entities.ai.EntityAIUnstuckBlueAercloud;
 import com.gildedgames.aether.common.entities.ai.EntityAIWanderAvoidLight;
+import com.gildedgames.aether.common.entities.effects.StatusEffectBleed;
+import com.gildedgames.aether.common.entities.effects.StatusEffectFracture;
+import com.gildedgames.aether.common.entities.effects.StatusEffectStun;
 import com.gildedgames.aether.common.entities.util.AetherMultiPartEntity;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
 import net.minecraft.entity.*;
@@ -142,16 +147,26 @@ public class EntityVaranys extends EntityAetherMob implements IEntityMultiPart
 			{
 				if (target.hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
 				{
-					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).applyStatusEffect(IAetherStatusEffects.effectTypes.FRACTURE, 30);
-					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).applyStatusEffect(IAetherStatusEffects.effectTypes.STUN, 40);
-					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).applyStatusEffect(IAetherStatusEffects.effectTypes.BLEED, 2);
+					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).
+							applyStatusEffect(IAetherStatusEffects.effectTypes.FRACTURE,
+									IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectFracture(living),EEffectIntensity.ORDINARY));
+
+					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).
+							applyStatusEffect(IAetherStatusEffects.effectTypes.STUN,
+									IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectStun(living),EEffectIntensity.MINOR));
+
+					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).
+							applyStatusEffect(IAetherStatusEffects.effectTypes.BLEED,
+									IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectBleed(living),EEffectIntensity.MINOR));
 				}
 			}
 			else
 			{
 				if (target.hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
 				{
-					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).applyStatusEffect(IAetherStatusEffects.effectTypes.FRACTURE, 10);
+					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).
+							applyStatusEffect(IAetherStatusEffects.effectTypes.FRACTURE,
+									IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectFracture(living),EEffectIntensity.ORDINARY)/4);
 				}
 			}
 		}

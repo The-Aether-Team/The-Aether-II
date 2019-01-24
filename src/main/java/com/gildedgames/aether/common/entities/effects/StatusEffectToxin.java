@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.effects;
 
+import com.gildedgames.aether.api.effects_system.EEffectIntensity;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.effects.EffectsDamageSource;
 import net.minecraft.entity.EntityLivingBase;
@@ -32,6 +33,22 @@ public class StatusEffectToxin extends StatusEffect
 	{
 		this.NumOfHeartsEffected = 0;
 		AetherCore.LOGGER.info(this.NAME + " : Ended");
+	}
+
+	@Override
+	public int getBuildupFromIntensity(EEffectIntensity intensity)
+	{
+		switch (intensity)
+		{
+			case MINOR:
+				return 15;
+			case ORDINARY:
+				return 50;
+			case MAJOR:
+				return 80;
+		}
+
+		return 0;
 	}
 
 }

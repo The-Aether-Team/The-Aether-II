@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.effects;
 
+import com.gildedgames.aether.api.effects_system.EEffectIntensity;
 import com.gildedgames.aether.common.capabilities.entity.effects.EffectsDamageSource;
 import net.minecraft.entity.EntityLivingBase;
 
@@ -23,6 +24,22 @@ public class StatusEffectBleed extends StatusEffect
 	public void onEffectEnd()
 	{
 
+	}
+
+	@Override
+	public int getBuildupFromIntensity(EEffectIntensity intensity)
+	{
+		switch (intensity)
+		{
+			case MINOR:
+				return 3;
+			case ORDINARY:
+				return 10;
+			case MAJOR:
+				return 35;
+		}
+
+		return 0;
 	}
 
 }

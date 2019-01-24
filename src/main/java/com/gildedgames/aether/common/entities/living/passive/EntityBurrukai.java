@@ -2,6 +2,8 @@ package com.gildedgames.aether.common.entities.living.passive;
 
 import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
+import com.gildedgames.aether.api.effects_system.EEffectIntensity;
+import com.gildedgames.aether.api.effects_system.IAetherStatusEffectIntensity;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
@@ -9,6 +11,8 @@ import com.gildedgames.aether.common.entities.ai.AetherNavigateGround;
 import com.gildedgames.aether.common.entities.ai.EntityAIHideFromRain;
 import com.gildedgames.aether.common.entities.ai.EntityAIRestrictRain;
 import com.gildedgames.aether.common.entities.ai.EntityAIUnstuckBlueAercloud;
+import com.gildedgames.aether.common.entities.effects.StatusEffectFracture;
+import com.gildedgames.aether.common.entities.effects.StatusEffectStun;
 import com.gildedgames.aether.common.entities.util.AetherMultiPartEntity;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
@@ -254,15 +258,22 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 			{
 				if (target.hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
 				{
-					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).applyStatusEffect(IAetherStatusEffects.effectTypes.FRACTURE, 40);
-					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).applyStatusEffect(IAetherStatusEffects.effectTypes.STUN, 70);
+					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).
+							applyStatusEffect(IAetherStatusEffects.effectTypes.FRACTURE,
+									IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectFracture(living), EEffectIntensity.MAJOR));
+
+					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).
+							applyStatusEffect(IAetherStatusEffects.effectTypes.STUN,
+									IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectStun(living),EEffectIntensity.MAJOR));
 				}
 			}
 			else
 			{
 				if (target.hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
 				{
-					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).applyStatusEffect(IAetherStatusEffects.effectTypes.FRACTURE, 15);
+					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).
+							applyStatusEffect(IAetherStatusEffects.effectTypes.FRACTURE,
+									IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectFracture(living),EEffectIntensity.MINOR));
 				}
 			}
 		}

@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.effects;
 
+import com.gildedgames.aether.api.effects_system.EEffectIntensity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -63,6 +64,22 @@ public class StatusEffectFracture extends StatusEffect
 	public void onEffectEnd()
 	{
 
+	}
+
+	@Override
+	public int getBuildupFromIntensity(EEffectIntensity intensity)
+	{
+		switch (intensity)
+		{
+			case MINOR:
+				return 15;
+			case ORDINARY:
+				return 35;
+			case MAJOR:
+				return 75;
+		}
+
+		return 0;
 	}
 
 }

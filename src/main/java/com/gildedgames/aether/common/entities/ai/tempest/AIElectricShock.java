@@ -1,8 +1,11 @@
 package com.gildedgames.aether.common.entities.ai.tempest;
 
 import com.gildedgames.aether.api.AetherCapabilities;
+import com.gildedgames.aether.api.effects_system.EEffectIntensity;
+import com.gildedgames.aether.api.effects_system.IAetherStatusEffectIntensity;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
 import com.gildedgames.aether.common.entities.ai.EntityAI;
+import com.gildedgames.aether.common.entities.effects.StatusEffectStun;
 import com.gildedgames.aether.common.entities.living.mobs.EntityTempest;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import net.minecraft.entity.Entity;
@@ -111,7 +114,9 @@ public class AIElectricShock extends EntityAI<EntityTempest>
 			{
 				if (target.hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
 				{
-					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).applyStatusEffect(IAetherStatusEffects.effectTypes.STUN, 90);
+					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).
+							applyStatusEffect(IAetherStatusEffects.effectTypes.STUN,
+									IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectStun(living), EEffectIntensity.MAJOR));
 				}
 			}
 		}

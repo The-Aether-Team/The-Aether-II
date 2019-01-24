@@ -2,11 +2,14 @@ package com.gildedgames.aether.common.entities.living.mobs;
 
 import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
+import com.gildedgames.aether.api.effects_system.EEffectIntensity;
+import com.gildedgames.aether.api.effects_system.IAetherStatusEffectIntensity;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
 import com.gildedgames.aether.common.entities.ai.EntityAIUnstuckBlueAercloud;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceHide;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceSneakAttack;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceWander;
+import com.gildedgames.aether.common.entities.effects.StatusEffectCockatriceVenom;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
@@ -116,7 +119,9 @@ public class EntityCockatrice extends EntityAetherMob
 			{
 				if (target.hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
 				{
-					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).applyStatusEffect(IAetherStatusEffects.effectTypes.COCKATRICE_VENOM, 50);
+					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).
+							applyStatusEffect(IAetherStatusEffects.effectTypes.COCKATRICE_VENOM,
+									IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectCockatriceVenom(living), EEffectIntensity.ORDINARY));
 				}
 			}
 		}
