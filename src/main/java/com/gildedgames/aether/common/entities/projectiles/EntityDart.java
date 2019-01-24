@@ -1,6 +1,8 @@
 package com.gildedgames.aether.common.entities.projectiles;
 
+import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.damage_system.IDamageLevelsHolder;
+import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import net.minecraft.entity.EntityLivingBase;
@@ -52,7 +54,10 @@ public class EntityDart extends EntityArrow implements IDamageLevelsHolder
 	{
 		if (this.getDartType() == ItemDartType.POISON)
 		{
-			entity.addPotionEffect(new PotionEffect(MobEffects.POISON, 80, 0));
+			if (entity.hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
+			{
+				entity.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).applyStatusEffect(IAetherStatusEffects.effectTypes.TOXIN, 100);
+			}
 		}
 	}
 
