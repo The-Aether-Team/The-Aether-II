@@ -1,5 +1,6 @@
 package com.gildedgames.aether.api.effects_system;
 
+import javax.annotation.Nonnegative;
 import java.util.HashMap;
 
 /**
@@ -21,11 +22,11 @@ public interface IAetherStatusEffectPool
 	/**
 	 * Handles all calls to add buildup to effects.
 	 * Given the effectType and buildup, addBuildup to corresponding effect.
-	 * Method should also handle any temporary additions to resistances.
+	 * Method handles any temporary additions to resistances.
 	 * @param effectType The effect buildup should be applied to.
 	 * @param buildup The amount of buildup to add to the effect.
 	 */
-	void applyStatusEffect(IAetherStatusEffects.effectTypes effectType, int buildup);
+	void applyStatusEffect(IAetherStatusEffects.effectTypes effectType, @Nonnegative int buildup);
 
 	/**
 	 * @param effectType The effect to retrieve buildup from.

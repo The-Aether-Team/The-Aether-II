@@ -13,6 +13,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+
 import java.util.Collection;
 
 public abstract class StatusEffect implements IAetherStatusEffects
@@ -21,6 +22,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	protected final int REDUCTION_RATE;
 	protected final int TIME_TILL_REDUCTION;
 	protected final int ACTIVE_EFFECT_TIME;
+	protected final int BUILDUP_SPEED;
 
 	private final AttributeModifier ATTRIBUTE_MODIFIER;
 
@@ -30,6 +32,8 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	protected IAetherStatusEffects.effectTypes effectType;
 	protected boolean isEffectApplied;
 	protected double activeEffectTimeModifier = 1.0D;
+
+	protected int potentialBuildup;
 
 	private final EntityLivingBase livingEffected;
 
@@ -42,6 +46,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 		this.REDUCTION_RATE = effectType.reductionRate;
 		this.TIME_TILL_REDUCTION = effectType.timeTillReduction;
 		this.ACTIVE_EFFECT_TIME = effectType.activeEffectTime;
+		this.BUILDUP_SPEED = effectType.buildupSpeed;
 
 		this.ATTRIBUTE_MODIFIER = attributeModifier;
 		this.livingEffected = living;
@@ -50,12 +55,23 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	@Override
 	public void Tick(EntityLivingBase livingBase)
 	{
+		if (this.effectBuildup < this.potentialBuildup)
+		{
+			this.effectBuildup += this.BUILDUP_SPEED;
+		}
+
+		if (this.effectBuildup >= this.potentialBuildup)
+		{
+			this.potentialBuildup = 0;
+		}
+
 		/* When buildup reaches 101 we can apply the effect, then immediately lower buildup so it remains at 100, but doesn't continue applying effect */
 		if (this.effectBuildup >= 101)
 		{
 			this.isEffectApplied = true;
 			AetherCore.LOGGER.info("Effect Applied : " + this.NAME + " to : " + this.livingEffected.getName());
 			this.effectBuildup = 100;
+			this.potentialBuildup = 0;
 		}
 
 		this.applyEffect(livingBase, this.effectTimer);
@@ -80,7 +96,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 			this.effectBuildup = 0;
 		}
 
-		if (livingBase instanceof EntityPlayerMP && !livingBase.world.isRemote)
+		if (livingBase instanceof EntityPlayerMP)
 		{
 			NetworkingAether.sendPacketToPlayer(new PacketStatusEffect(livingBase), (EntityPlayerMP) livingBase);
 		}
@@ -97,16 +113,11 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	{
 		if (!this.isEffectApplied)
 		{
-			this.effectBuildup = this.effectBuildup + MathHelper.ceil(buildup * (this.effectResistance + additionalResistance));
+			this.potentialBuildup = this.effectBuildup + MathHelper.ceil(buildup * (this.effectResistance + additionalResistance));
 
-			if (this.effectBuildup >= 100)
+			if (this.potentialBuildup >= 100)
 			{
-				this.effectBuildup = 101;	// buildup is set to 101 for activation.
-			}
-
-			if (this.effectBuildup < 0)
-			{
-				this.effectBuildup = 0;
+				this.potentialBuildup = 101;	// buildup is set to 101 for activation.
 			}
 
 			this.effectTimer = 0;
@@ -136,7 +147,14 @@ public abstract class StatusEffect implements IAetherStatusEffects
 			{
 				if (this.effectTimer % (this.TIME_TILL_REDUCTION * TICKS_PER_SECOND) == 0)
 				{
-					this.effectBuildup = this.effectBuildup - this.REDUCTION_RATE;
+					if (this.effectBuildup < this.potentialBuildup)
+					{
+						this.potentialBuildup = this.potentialBuildup - this.REDUCTION_RATE;
+					}
+					else
+					{
+						this.effectBuildup = this.effectBuildup - this.REDUCTION_RATE;
+					}
 				}
 			}
 		}
@@ -181,6 +199,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 		this.effectBuildup = 0;
 		this.effectTimer = 0;
 		this.activeEffectTimeModifier = 1.0D;
+		this.potentialBuildup = 0;
 
 		AetherCore.LOGGER.info("Effect Reset : " + this.NAME + " to : " + this.livingEffected.getName());
 	}

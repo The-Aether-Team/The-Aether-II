@@ -6,6 +6,8 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnegative;
+import javax.annotation.Nullable;
 import java.util.Collection;
 
 public interface IAetherStatusEffects extends NBT
@@ -38,13 +40,22 @@ public interface IAetherStatusEffects extends NBT
 	 * The lower the resistance, the higher the actual entity's resistance to buildup is.
 	 * The higher the resistance, the lower the actual entity's resistance to buildup is.
 	 * @see IAetherStatusEffectPool#addResistanceToEffect(effectTypes, double) for more information.
-	 * @param buildup The amount to increment buildup.
+	 * @param buildup The amount to increment buildup, excludes negatives since reductions of buildup should be done in #setBuildup or #reduceBuildup
 	 * @param additionalResistance The amount of temporary additional resistance to modify the buildup amount.
 	 */
-	void addBuildup(int buildup, double additionalResistance);
+	void addBuildup(@Nonnegative int buildup, double additionalResistance);
 
-	void setBuildup(int buildup);
+	/**
+	 * Assign the buildup of this effect to a certain value. Primarily used for curing effects, resetting, and network sync.
+	 * @param buildup the buildup to be assigned to effect.
+	 */
+	void setBuildup(@Nonnegative int buildup);
 
+	/**
+	 * Set whether effect is applied or not.
+	 * Note applied references whether effect is currently effecting an entity, not whether buildup is applied.
+	 * @param isApplied boolean representing what state effect should be in.
+	 */
 	void setApplied(boolean isApplied);
 
 	/**
@@ -72,43 +83,61 @@ public interface IAetherStatusEffects extends NBT
 	 */
 	void setActiveEffectTimeModifier(double activeEffectTimeModifier);
 
+	/**
+	 * Add information about the effect (it's name) from lang file, to provided collection.
+	 * @param label Collection to add information too.
+	 */
+	@SideOnly(Side.CLIENT)
+	void addInformation(Collection<String> label);
+
+	/**
+	 * Retrieves the amount of buildup to use from a specified intensity (minor, ordinary, and major).
+	 * @param intensity intensity to get buildup for.
+	 * @return buildup according to instensity.
+	 */
+	int getBuildupFromIntensity(EEffectIntensity intensity);
+
 	int getBuildup();
 	double getResistance();
 	int getTimer();
 	boolean getIsEffectApplied();
 	effectTypes getEffectType();
+
+	/**
+	 * @return the effect's name in code, does not refer to how the effect should read on a GUI.
+	 * @see #addInformation(Collection) to get the effect's readable name.
+	 */
 	String getEffectName();
+
+	@Nullable
 	AttributeModifier getAttributeModifier();
-
-	@SideOnly(Side.CLIENT)
-	void addInformation(Collection<String> label);
-
-	int getBuildupFromIntensity(EEffectIntensity intensity);
 
 	int NUMBER_OF_EFFECTS = 7;
 
 	enum effectTypes
 	{
-		AMBROSIUM_POISONING("aether.effect.ambrosium_poisoning",0, 1, 1, 120),
-		TOXIN("aether.effect.toxin",1, 1, 1, 10),
-		COCKATRICE_VENOM("aether.effect.cockatrice_venom",2, 5, 60, 60),
-		STUN("aether.effect.stun", 3,5, 1, 5),
-		BLEED("aether.effect.bleed", 4,1,10,0),
-		FRACTURE("aether.effect.fracture", 5,1, 1, 60*5),
-		FUNGAL_ROT("aether.effect.fungal_rot", 6,1, 10, 20);
+		AMBROSIUM_POISONING("aether.effect.ambrosium_poisoning",0, 1, 1, 120,10),
+		TOXIN("aether.effect.toxin",1, 1, 1, 10,10),
+		COCKATRICE_VENOM("aether.effect.cockatrice_venom",2, 5, 60, 60,10),
+		STUN("aether.effect.stun", 3,5, 1, 5,10),
+		BLEED("aether.effect.bleed", 4,1,10,0,10),
+		FRACTURE("aether.effect.fracture", 5,1, 1, 60*5,10),
+		FUNGAL_ROT("aether.effect.fungal_rot", 6,1, 10, 20,10);
 
 		public final int numericValue;			// identifier for this effect.
 		public final String name;
 		public final int reductionRate;	    	// amount to reduce by.
 		public final int timeTillReduction; 	// time between each reduction in seconds.
 		public final int activeEffectTime;		// how long the active effect lasts in seconds. (0 is instant)
+		public final int buildupSpeed;
 
-		effectTypes(String name, int numericValue, int reductionRate, int timeTillReduction, int activeEffectTime) {
+		effectTypes(String name, int numericValue, int reductionRate, int timeTillReduction, int activeEffectTime, int buildupSpeed) {
 			this.name = name;
 			this.numericValue = numericValue;
 			this.reductionRate = reductionRate;
 			this.timeTillReduction = timeTillReduction;
 			this.activeEffectTime = activeEffectTime;
+			this.buildupSpeed = buildupSpeed;
 		}
 
 		public static effectTypes getEffectFromNumericValue(int numericValue)
