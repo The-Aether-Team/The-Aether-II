@@ -316,7 +316,7 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 
 	private void addTradeCoins(double val)
 	{
-		if (!this.module.isLockedIn())
+		if (this.module.isLockedIn())
 		{
 			return;
 		}
@@ -563,7 +563,7 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 	{
 		this.updateLockedButton();
 
-		String append = state < 4 ? "waiting" : "confirm";
+		String append = state < 3 ? "waiting" : "confirm";
 
 		if (state == -1)
 		{

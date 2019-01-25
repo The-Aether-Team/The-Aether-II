@@ -16,13 +16,13 @@ import net.minecraft.util.text.TextFormatting;
 public class GuiCoins extends GuiElement
 {
 
-	private static final ResourceLocation GILT = AetherCore.getResource("textures/gui/shop/gilt.png");
+	public static final ResourceLocation GILT = AetherCore.getResource("textures/gui/shop/gilt.png");
 
-	private static final ResourceLocation GILTAE = AetherCore.getResource("textures/gui/shop/giltae.png");
+	public static final ResourceLocation GILTAE = AetherCore.getResource("textures/gui/shop/giltae.png");
 
-	private static final ResourceLocation GILTAEN = AetherCore.getResource("textures/gui/shop/giltaen.png");
+	public static final ResourceLocation GILTAEN = AetherCore.getResource("textures/gui/shop/giltaen.png");
 
-	private static final ResourceLocation GILTAENI = AetherCore.getResource("textures/gui/shop/giltaeni.png");
+	public static final ResourceLocation GILTAENI = AetherCore.getResource("textures/gui/shop/giltaeni.png");
 
 	private Coin gilt, giltae, giltaen, giltaeni;
 
