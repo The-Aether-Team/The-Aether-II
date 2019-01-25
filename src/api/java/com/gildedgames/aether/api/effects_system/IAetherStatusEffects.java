@@ -3,8 +3,10 @@ package com.gildedgames.aether.api.effects_system;
 import com.gildedgames.orbis_api.util.mc.NBT;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.HashMap;
+import java.util.Collection;
 
 public interface IAetherStatusEffects extends NBT
 {
@@ -77,6 +79,9 @@ public interface IAetherStatusEffects extends NBT
 	effectTypes getEffectType();
 	String getEffectName();
 	AttributeModifier getAttributeModifier();
+
+	@SideOnly(Side.CLIENT)
+	void addInformation(Collection<String> label);
 
 	int getBuildupFromIntensity(EEffectIntensity intensity);
 

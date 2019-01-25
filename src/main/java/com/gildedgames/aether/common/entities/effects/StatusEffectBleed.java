@@ -2,7 +2,11 @@ package com.gildedgames.aether.common.entities.effects;
 
 import com.gildedgames.aether.api.effects_system.EEffectIntensity;
 import com.gildedgames.aether.common.capabilities.entity.effects.EffectsDamageSource;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.text.TextFormatting;
+
+import java.util.Collection;
 
 public class StatusEffectBleed extends StatusEffect
 {
@@ -40,6 +44,12 @@ public class StatusEffectBleed extends StatusEffect
 		}
 
 		return 0;
+	}
+
+	@Override
+	public void addInformation(Collection<String> label)
+	{
+		label.add(TextFormatting.RED.toString() + I18n.format("statusEffect.aether.bleed"));
 	}
 
 }

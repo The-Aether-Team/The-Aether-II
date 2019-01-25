@@ -1,8 +1,12 @@
 package com.gildedgames.aether.common.entities.effects;
 
 import com.gildedgames.aether.api.effects_system.EEffectIntensity;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
+
+import java.util.Collection;
 
 public class StatusEffectAmbrosiumPoisoning extends StatusEffect
 {
@@ -44,5 +48,11 @@ public class StatusEffectAmbrosiumPoisoning extends StatusEffect
 		}
 
 		return 0;
+	}
+
+	@Override
+	public void addInformation(Collection<String> label)
+	{
+		label.add(TextFormatting.YELLOW.toString() + I18n.format("statusEffect.aether.ambroPoison"));
 	}
 }

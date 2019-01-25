@@ -41,6 +41,7 @@ public class CapabilityManagerAether
 		CapabilityManager.INSTANCE.register(IEntityInfo.class, new EntityInfo.Storage(), EntityInfo::new);
 		CapabilityManager.INSTANCE.register(IPlacementFlagCapability.class, new PlacementFlagCapability.Storage(), PlacementFlagCapability::new);
 		CapabilityManager.INSTANCE.register(IPrecipitationManager.class, new PrecipitationManagerImpl.Storage(), PrecipitationManagerImpl::new);
+		CapabilityManager.INSTANCE.register(IAetherStatusEffectPool.class, new StatusEffectPool.Storage(), StatusEffectPool::new);
 
 	}
 

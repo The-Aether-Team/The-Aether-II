@@ -31,5 +31,5 @@ package com.gildedgames.aether.api.effects_system;
 
 public enum EEffectIntensity
 {
-	MINOR, ORDINARY, MAJOR;
+	MINOR, ORDINARY, MAJOR
 }

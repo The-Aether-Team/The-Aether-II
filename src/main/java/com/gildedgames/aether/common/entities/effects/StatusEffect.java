@@ -10,6 +10,10 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.Collection;
 
 public abstract class StatusEffect implements IAetherStatusEffects
 {
@@ -219,6 +223,10 @@ public abstract class StatusEffect implements IAetherStatusEffects
 
 	@Override
 	public abstract int getBuildupFromIntensity(EEffectIntensity intensity);
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public abstract void addInformation(Collection<String> label);
 
 	@Override
 	public void write(NBTTagCompound compound)

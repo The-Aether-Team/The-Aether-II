@@ -1,10 +1,14 @@
 package com.gildedgames.aether.common.entities.effects;
 
 import com.gildedgames.aether.api.effects_system.EEffectIntensity;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.util.text.TextFormatting;
+
+import java.util.Collection;
 
 public class StatusEffectFracture extends StatusEffect
 {
@@ -80,6 +84,12 @@ public class StatusEffectFracture extends StatusEffect
 		}
 
 		return 0;
+	}
+
+	@Override
+	public void addInformation(Collection<String> label)
+	{
+		label.add(TextFormatting.GRAY.toString() + I18n.format("statusEffect.aether.fracture"));
 	}
 
 }

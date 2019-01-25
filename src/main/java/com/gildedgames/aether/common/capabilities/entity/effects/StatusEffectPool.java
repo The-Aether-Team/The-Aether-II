@@ -16,8 +16,13 @@ import java.util.HashMap;
 
 public class StatusEffectPool implements IAetherStatusEffectPool
 {
-	private final EntityLivingBase livingBase;
+	private EntityLivingBase livingBase;
 	private HashMap<String, IAetherStatusEffects> statusEffects = new HashMap<>();
+
+	public StatusEffectPool() throws InstantiationException
+	{
+		throw new InstantiationException("Do not use default constructor to instantiate pool!");
+	}
 
 	public StatusEffectPool(EntityLivingBase livingBase)
 	{
