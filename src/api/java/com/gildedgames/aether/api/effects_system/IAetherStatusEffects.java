@@ -97,6 +97,10 @@ public interface IAetherStatusEffects extends NBT
 	 */
 	int getBuildupFromIntensity(EEffectIntensity intensity);
 
+	boolean isDirty();
+	void markDirty();
+	void markClean();
+
 	int getBuildup();
 	double getResistance();
 	int getTimer();

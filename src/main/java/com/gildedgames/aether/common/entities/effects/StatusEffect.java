@@ -32,6 +32,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	protected IAetherStatusEffects.effectTypes effectType;
 	protected boolean isEffectApplied;
 	protected double activeEffectTimeModifier = 1.0D;
+	protected boolean isDirty;
 
 	protected int potentialBuildup;
 
@@ -50,6 +51,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 
 		this.ATTRIBUTE_MODIFIER = attributeModifier;
 		this.livingEffected = living;
+		this.isDirty = false;
 	}
 
 	@Override
@@ -63,6 +65,11 @@ public abstract class StatusEffect implements IAetherStatusEffects
 		if (this.effectBuildup >= this.potentialBuildup)
 		{
 			this.potentialBuildup = 0;
+		}
+
+		if (this.effectBuildup > 0)
+		{
+			this.markDirty();
 		}
 
 		/* When buildup reaches 101 we can apply the effect, then immediately lower buildup so it remains at 100, but doesn't continue applying effect */
@@ -96,7 +103,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 			this.effectBuildup = 0;
 		}
 
-		if (livingBase instanceof EntityPlayerMP)
+		if (livingBase instanceof EntityPlayerMP && this.isDirty)
 		{
 			NetworkingAether.sendPacketToPlayer(new PacketStatusEffect(livingBase), (EntityPlayerMP) livingBase);
 		}
@@ -242,6 +249,24 @@ public abstract class StatusEffect implements IAetherStatusEffects
 
 	@Override
 	public abstract int getBuildupFromIntensity(EEffectIntensity intensity);
+
+	@Override
+	public boolean isDirty()
+	{
+		return this.isDirty;
+	}
+
+	@Override
+	public void markDirty()
+	{
+		this.isDirty = true;
+	}
+
+	@Override
+	public void markClean()
+	{
+		this.isDirty = false;
+	}
 
 	@Override
 	@SideOnly(Side.CLIENT)

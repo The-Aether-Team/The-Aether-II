@@ -1,23 +1,22 @@
 package com.gildedgames.aether.common.network.packets.effects;
 
 import com.gildedgames.aether.api.AetherCapabilities;
-import com.gildedgames.aether.api.effects_system.IAetherStatusEffectPool;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PacketStatusEffect implements IMessage
 {
 
-	private HashMap<String, IAetherStatusEffects> map;
+	private ArrayList<StatusEffectData> statusEffectData;
 	private int entityID;
+	private int numberOfDirtyEffects;
 
 	public PacketStatusEffect()
 	{
@@ -28,52 +27,64 @@ public class PacketStatusEffect implements IMessage
 	{
 		this.entityID = entity.getEntityId();
 
-		this.map = entity.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).getPool();
+		HashMap<String, IAetherStatusEffects> map =  entity.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).getPool();
+		this.statusEffectData = new ArrayList<>();
+
+		for (IAetherStatusEffects effect : map.values())
+		{
+			if (effect.isDirty())
+			{
+				this.statusEffectData.add(new StatusEffectData(effect.getEffectType().numericValue, effect.getBuildup(), effect.getIsEffectApplied()));
+				this.numberOfDirtyEffects++;
+			}
+		}
 	}
 
 	@Override
 	public void fromBytes(ByteBuf buf)
 	{
+		this.numberOfDirtyEffects = buf.readByte();
 		this.entityID = buf.readInt();
 
-		for (int i = 0; i < IAetherStatusEffects.NUMBER_OF_EFFECTS; i++)
+		if (this.statusEffectData == null)
 		{
-			int effectId = buf.readInt();
-			int effectBuildup = buf.readInt();
+			this.statusEffectData = new ArrayList<>();
+		}
+		for (int i = 0; i < this.numberOfDirtyEffects; i++)
+		{
+			int effectId = buf.readShort();
+			int effectBuildup = buf.readShort();
 			boolean isEffectApplied = buf.readBoolean();
 
-			String effectKey = IAetherStatusEffects.effectTypes.getEffectFromNumericValue(effectId).name;
-
-			World world = Minecraft.getMinecraft().world;
-
-			if (world != null)
-			{
-				Entity entity = world.getEntityByID(this.entityID);
-
-				IAetherStatusEffectPool pool = entity.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null);
-
-				this.map = pool.getPool();
-
-				if (this.map != null)
-				{
-					this.map.get(effectKey).setBuildup(effectBuildup);
-					this.map.get(effectKey).setApplied(isEffectApplied);
-
-				}
-			}
+			this.statusEffectData.add(new StatusEffectData(effectId,effectBuildup,isEffectApplied));
 		}
 	}
 
 	@Override
 	public void toBytes(ByteBuf buf)
 	{
+		buf.writeByte(this.numberOfDirtyEffects);
 		buf.writeInt(this.entityID);
 
-		for (IAetherStatusEffects effect : this.map.values())
+		for (StatusEffectData data : this.statusEffectData)
 		{
-			buf.writeInt(effect.getEffectType().numericValue);
-			buf.writeInt(effect.getBuildup());
-			buf.writeBoolean(effect.getIsEffectApplied());
+			buf.writeShort(data.effectId);
+			buf.writeShort(data.buildup);
+			buf.writeBoolean(data.isApplied);
+		}
+	}
+
+	private class StatusEffectData
+	{
+		private final int effectId;
+		private final int buildup;
+		private final boolean isApplied;
+
+		StatusEffectData(int effectTypeId, int buildup, boolean isApplied)
+		{
+			this.effectId = effectTypeId;
+			this.buildup = buildup;
+			this.isApplied = isApplied;
 		}
 	}
 
@@ -96,14 +107,20 @@ public class PacketStatusEffect implements IMessage
 
 				if (map != null)
 				{
-					for (IAetherStatusEffects effect : message.map.values())
+					if (message.statusEffectData != null)
 					{
-						map.put(effect.getEffectName(), effect);
+						for (StatusEffectData data : message.statusEffectData)
+						{
+							IAetherStatusEffects effect = map.get(IAetherStatusEffects.effectTypes.getEffectFromNumericValue(data.effectId).name);
+							effect.setBuildup(data.buildup);
+							effect.setApplied(data.isApplied);
+						}
 					}
 				}
 			}
 
 			return null;
 		}
+
 	}
 }

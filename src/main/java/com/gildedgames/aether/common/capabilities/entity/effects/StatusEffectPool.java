@@ -58,7 +58,6 @@ public class StatusEffectPool implements IAetherStatusEffectPool
 					}
 				}
 			}
-
 			effect.Tick(this.livingBase);
 		}
 	}
@@ -89,6 +88,8 @@ public class StatusEffectPool implements IAetherStatusEffectPool
 	{
 		return this.statusEffects.get(effectType.name).getBuildup();
 	}
+
+
 
 	@Override
 	public boolean isEffectApplied(IAetherStatusEffects.effectTypes effectType)
