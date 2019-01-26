@@ -14,13 +14,11 @@ import com.gildedgames.aether.client.gui.DamageSystemOverlay;
 import com.gildedgames.aether.client.gui.EffectSystemOverlay;
 import com.gildedgames.aether.client.gui.GuiUtils;
 import com.gildedgames.aether.client.gui.PerformanceIngame;
-import com.gildedgames.aether.client.gui.dialog.GuiCoins;
-import com.gildedgames.aether.client.gui.dialog.GuiTrade;
 import com.gildedgames.aether.client.gui.misc.*;
+import com.gildedgames.aether.client.gui.util.ToolTipCurrencyHelper;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
-import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerCurrencyModule;
 import com.gildedgames.aether.common.containers.slots.SlotAmbrosium;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
 import com.gildedgames.aether.common.containers.slots.SlotFlintAndSteel;
@@ -35,7 +33,6 @@ import com.gildedgames.aether.common.shop.ShopCurrencyGilt;
 import com.gildedgames.orbis_api.client.PartialTicks;
 import com.gildedgames.orbis_api.client.gui.util.GuiFrameUtils;
 import com.gildedgames.orbis_api.util.InputHelper;
-import com.google.common.collect.Lists;
 import net.minecraft.client.LoadingScreenRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -43,10 +40,8 @@ import net.minecraft.client.gui.*;
 import net.minecraft.client.gui.inventory.GuiEditSign;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -63,9 +58,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 import net.minecraftforge.fml.relauncher.Side;
-import scala.collection.parallel.ParIterableLike;
 
-import javax.print.DocFlavor;
 import java.util.*;
 
 @Mod.EventBusSubscriber(Side.CLIENT)
@@ -76,6 +69,8 @@ public class ClientEventHandler
 	private static final DamageSystemOverlay DAMAGE_SYSTEM_OVERLAY = new DamageSystemOverlay();
 
 	private static final EffectSystemOverlay EFFECT_SYSTEM_OVERLAY = new EffectSystemOverlay();
+
+	private static final ToolTipCurrencyHelper toolTipHelper = new ToolTipCurrencyHelper();
 
 	private static final Minecraft mc = Minecraft.getMinecraft();
 
@@ -98,8 +93,6 @@ public class ClientEventHandler
 	private static Runnable AFTER_FADE;
 
 	private static GuiAetherLoading LOADING = new GuiAetherLoading();
-
-	private static final ToolTipHelper toolTipHelper = new ToolTipHelper();
 
 	private static final CustomLoadingRenderer.ICustomLoading BLACK_LOADING = ClientEventHandler::drawOverlay;
 
@@ -503,7 +496,7 @@ public class ClientEventHandler
 
 		if (value != 0)
 		{
-			event.getToolTip().addAll(toolTipHelper.getSpaces(value));
+			event.getToolTip().addAll(toolTipHelper.getText(value));
 		}
 	}
 
@@ -512,47 +505,7 @@ public class ClientEventHandler
 	{
 		final double value = AetherAPI.content().currency().getValue(event.getStack(), ShopCurrencyGilt.class);
 
-		if (value != 0)
-		{
-			TextureManager textureManager = Minecraft.getMinecraft().getTextureManager();
-			FontRenderer fontRenderer = event.getFontRenderer();
-			int[] brokenUp = PlayerCurrencyModule.breakUpCurrency((long) value);
-
-			ResourceLocation[] resourceMap = new ResourceLocation[] { GuiCoins.GILTAENI, GuiCoins.GILTAEN, GuiCoins.GILTAE, GuiCoins.GILT };
-
-			final int size = toolTipHelper.cachedText.size();
-			int x = event.getX() + 1, y = event.getY() + event.getHeight() - fontRenderer.FONT_HEIGHT * size + (size == 1 ? 1 : 0);
-			boolean newLine = false;
-
-			for (int i = 0; i < brokenUp.length; i++)
-			{
-				int currency = brokenUp[i];
-
-				if (currency != 0)
-				{
-					GlStateManager.pushMatrix();
-					GlStateManager.enableBlend();
-					GlStateManager.disableRescaleNormal();
-					GlStateManager.disableLighting();
-					GlStateManager.color(1, 1, 1, 1);
-
-					textureManager.bindTexture(resourceMap[i]);
-					Gui.drawModalRectWithCustomSizedTexture(x, y, 0, 0, 7, 7, 7, 7);
-
-					GlStateManager.popMatrix();
-
-					x += fontRenderer.getStringWidth(String.valueOf(currency)) + 16;
-
-					if (newLine)
-					{
-						y += fontRenderer.FONT_HEIGHT + 1;
-						x = event.getX() + 1;
-					}
-
-					newLine = !newLine;
-				}
-			}
-		}
+		toolTipHelper.render(event.getFontRenderer(), event.getX(), event.getY(), event.getHeight(), value);
 	}
 
 	@SubscribeEvent
@@ -644,49 +597,5 @@ public class ClientEventHandler
 		{
 			return false;
 		}
-	}
-
-	private static class ToolTipHelper
-	{
-		final List<String> cachedText = Lists.newArrayList();
-
-		double lastValue;
-
-		private List<String> getSpaces(double value)
-		{
-			if (value != this.lastValue)
-			{
-				this.cachedText.clear();
-
-				FontRenderer renderer = Minecraft.getMinecraft().fontRenderer;
-				int[] brokenUp = PlayerCurrencyModule.breakUpCurrency((long) value);
-				boolean newLine = false;
-				String curLine = "";
-
-				for (int cur : brokenUp)
-				{
-					if (cur > 0)
-					{
-						curLine += (newLine ? "    " : "   ") + cur;
-
-						if (newLine)
-						{
-							this.cachedText.add(curLine);
-							curLine = "";
-						}
-
-						newLine = !newLine;
-					}
-				}
-
-				if (!curLine.isEmpty() && newLine)
-				{
-					this.cachedText.add(curLine);
-				}
-			}
-
-			return this.cachedText;
-		}
-
 	}
 }

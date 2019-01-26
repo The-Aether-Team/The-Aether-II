@@ -120,6 +120,8 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 
 	private List<String> hoverDescription;
 
+	private ItemStack hoveredStack;
+
 	private GuiTexture holidayNotice, holidayIcon;
 
 	private com.gildedgames.orbis_api.client.gui.util.GuiTextBox holidayNoticeText;
@@ -347,7 +349,7 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 
 		if (InputHelper.isHovered(this.back))
 		{
-			this.setHoveredDescription(Lists.newArrayList(I18n.format("aether.shop.back")));
+			this.setHoveredDescription(null, Lists.newArrayList(I18n.format("aether.shop.back")));
 		}
 
 		this.stackGui.setDrawCount(isCountLocked);
@@ -411,7 +413,16 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 
 		if (this.hoverDescription != null && this.hoverDescription.size() > 0)
 		{
-			GuiUtils.drawHoveringText(this.hoverDescription, mouseX, mouseY, Minecraft.getMinecraft().fontRenderer);
+			if (this.hoveredStack != null)
+			{
+				net.minecraftforge.fml.client.config.GuiUtils.preItemToolTip(this.hoveredStack);
+				GuiUtils.drawHoveringText(this.hoverDescription, mouseX, mouseY, Minecraft.getMinecraft().fontRenderer);
+				net.minecraftforge.fml.client.config.GuiUtils.postItemToolTip();
+			}
+			else
+			{
+				GuiUtils.drawHoveringText(this.hoverDescription, mouseX, mouseY, Minecraft.getMinecraft().fontRenderer);
+			}
 		}
 
 		if (InputHelper.isHovered(this.lockButton))
@@ -764,8 +775,9 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 	}
 
 	@Override
-	public void setHoveredDescription(List<String> desc)
+	public void setHoveredDescription(ItemStack stack, List<String> desc)
 	{
+		this.hoveredStack = stack;
 		this.hoverDescription = desc;
 	}
 }

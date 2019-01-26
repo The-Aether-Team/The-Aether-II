@@ -26,7 +26,7 @@ public class GuiExpandableCoinTab extends GuiElement
 
 	private boolean left, inactive;
 
-	private float x, y;
+	private float x, y, width;
 
 	public GuiExpandableCoinTab(Rect rect, boolean shouldDisplayAlways, boolean left, boolean inactive, float x, float y)
 	{
@@ -49,7 +49,7 @@ public class GuiExpandableCoinTab extends GuiElement
 		this.extent = new GuiTexture(Dim2D.build().width(1).height(23).flush(),
 				GILT_GROW);
 
-		if (left)
+		if (this.left)
 		{
 			this.shape = new GuiTexture(Dim2D.build().width(3).height(23).flush(),
 					GILT_GROW_LEFT);
@@ -61,24 +61,24 @@ public class GuiExpandableCoinTab extends GuiElement
 		}
 
 		this.update();
-		this.context().addChildren(shape, extent, coinsCount, giltBag);
+		this.context().addChildren(this.shape, this.extent, this.coinsCount, this.giltBag);
 	}
 
 	private void update()
 	{
 		Pos2D center = InputHelper.getCenter().clone().flush();
 
-		float off = coinsCount.dim().width();
+		float off = this.coinsCount.dim().width();
 
-		this.dim().mod().pos(center).addX(x - (left ? off : 0)).y(y).flush();
+		this.dim().mod().pos(center).addX(this.x - (this.left ? off : 0)).y(this.y).flush();
 
-		this.giltBag.dim().mod().pos((left ? -18 : off + 2), 4).flush();
+		this.giltBag.dim().mod().pos((this.left ? -18 : off + 2), 4).flush();
 
 		this.coinsCount.dim().mod().pos(0, 4).flush();
 
-		this.extent.dim().mod().width(off + 21).pos((left ? -19 : -2), 0).flush();
+		this.extent.dim().mod().width(off + 21).pos((this.left ? -19 : -2), 0).flush();
 
-		if (left)
+		if (this.left)
 		{
 			this.shape.dim().mod().pos(-22, 0).flush();
 		}
@@ -86,6 +86,16 @@ public class GuiExpandableCoinTab extends GuiElement
 		{
 			this.shape.dim().mod().pos(off + 19, 0).flush();
 		}
+
+		this.width = off + 27;
+	}
+
+	public boolean intersected(int mouseX, int mouseY)
+	{
+		Pos2D center = InputHelper.getCenter().clone().flush();
+		float off = (this.left ? this.width - 12 : 0);
+
+		return mouseX > center.x() - 7 + this.x - off && mouseX < center.x() - 7 + this.x - off + this.width && mouseY > this.y && mouseY < this.y + 21;
 	}
 
 	public void setCurrencyValue(double value)

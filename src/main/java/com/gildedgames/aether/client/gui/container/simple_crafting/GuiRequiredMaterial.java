@@ -107,7 +107,7 @@ public class GuiRequiredMaterial extends GuiButton
 				if (gui instanceof IExtendedGui)
 				{
 					IExtendedGui extendedGui = (IExtendedGui) gui;
-					extendedGui.setHoveredDescription(this.displayStack.getTooltip(Minecraft.getMinecraft().player,
+					extendedGui.setHoveredDescription(this.displayStack, this.displayStack.getTooltip(Minecraft.getMinecraft().player,
 							Minecraft.getMinecraft().gameSettings.advancedItemTooltips ?
 									ITooltipFlag.TooltipFlags.ADVANCED :
 									ITooltipFlag.TooltipFlags.NORMAL));

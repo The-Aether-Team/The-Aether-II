@@ -66,6 +66,8 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 
 	public List<String> hoverDescription;
 
+	private ItemStack hoveredStack;
+
 	/** Amount scrolled in crafting options inventory (0 = top, 1 = bottom) */
 	private float currentScroll;
 
@@ -115,7 +117,7 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 	{
 		super.handleMouseClick(slotIn, slotId, mouseButton, type);
 
-		if (slotIn != null && (slotIn.getHasStack() || this.playerInventory.getItemStack() != null))
+		if (slotIn != null && slotIn.getHasStack())
 		{
 			this.updateCraftingOptions();
 		}
@@ -414,7 +416,16 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 
 		if (this.hoverDescription != null && this.hoverDescription.size() > 0)
 		{
-			GuiUtils.drawHoveringText(this.hoverDescription, mouseX, mouseY, Minecraft.getMinecraft().fontRenderer);
+			if (this.hoveredStack != null)
+			{
+				net.minecraftforge.fml.client.config.GuiUtils.preItemToolTip(this.hoveredStack);
+				GuiUtils.drawHoveringText(this.hoverDescription, mouseX, mouseY, Minecraft.getMinecraft().fontRenderer);
+				net.minecraftforge.fml.client.config.GuiUtils.postItemToolTip();
+			}
+			else
+			{
+				GuiUtils.drawHoveringText(this.hoverDescription, mouseX, mouseY, Minecraft.getMinecraft().fontRenderer);
+			}
 		}
 
 		this.hoverDescription = null;
@@ -555,8 +566,9 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 	}
 
 	@Override
-	public void setHoveredDescription(List<String> desc)
+	public void setHoveredDescription(ItemStack stack, List<String> desc)
 	{
+		this.hoveredStack = stack;
 		this.hoverDescription = desc;
 	}
 

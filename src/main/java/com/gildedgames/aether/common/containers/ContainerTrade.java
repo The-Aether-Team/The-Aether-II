@@ -1,5 +1,8 @@
 package com.gildedgames.aether.common.containers;
 
+import com.gildedgames.aether.api.AetherAPI;
+import com.gildedgames.aether.api.shop.IShopCurrency;
+import com.gildedgames.aether.client.gui.GuiUtils;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTradeModule;
 import com.gildedgames.aether.common.containers.slots.SlotDynamic;
@@ -7,6 +10,7 @@ import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.trade.PacketSendInventorySize;
 import com.gildedgames.aether.common.network.packets.trade.PacketTradeInventory;
 import com.gildedgames.aether.common.network.packets.trade.PacketTradeMessage;
+import com.gildedgames.aether.common.shop.ShopCurrencyGilt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -153,14 +157,21 @@ public class ContainerTrade extends Container
 	private void compressAndSendStacks(boolean forceSend)
 	{
 		boolean change = false;
+		double value = 0;
 
 		for (int i = 36; i < 52; i++)
 		{
-			if (this.mergeItemStack(this.getSlot(i).getStack(), 36, i, false))
+			ItemStack stack = this.getSlot(i).getStack();
+
+			value += AetherAPI.content().currency().getValue(stack, ShopCurrencyGilt.class);
+
+			if (this.mergeItemStack(stack, 36, i, false))
 			{
 				change = true;
 			}
 		}
+
+		this.tradeModule.setValue(value);
 
 		if (change || forceSend)
 		{

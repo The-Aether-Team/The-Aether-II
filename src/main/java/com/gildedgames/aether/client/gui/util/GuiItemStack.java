@@ -95,7 +95,7 @@ public class GuiItemStack extends GuiElement
 			if (gui instanceof IExtendedGui)
 			{
 				IExtendedGui extendedGui = (IExtendedGui) gui;
-				extendedGui.setHoveredDescription(this.stack.getTooltip(Minecraft.getMinecraft().player,
+				extendedGui.setHoveredDescription(this.stack, this.stack.getTooltip(Minecraft.getMinecraft().player,
 						Minecraft.getMinecraft().gameSettings.advancedItemTooltips ?
 								ITooltipFlag.TooltipFlags.ADVANCED :
 								ITooltipFlag.TooltipFlags.NORMAL));

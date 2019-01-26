@@ -1,6 +1,8 @@
 package com.gildedgames.aether.client.gui.dialog;
 
+import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.client.gui.util.IRemoteClose;
+import com.gildedgames.aether.client.gui.util.ToolTipCurrencyHelper;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTradeModule;
@@ -9,6 +11,7 @@ import com.gildedgames.aether.common.network.AetherGuiHandler;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.trade.PacketChangeCoinAmount;
 import com.gildedgames.aether.common.network.packets.trade.PacketTradeMessage;
+import com.gildedgames.aether.common.shop.ShopCurrencyGilt;
 import com.gildedgames.orbis_api.client.gui.util.GuiAbstractButton;
 import com.gildedgames.orbis_api.client.gui.util.GuiTexture;
 import com.gildedgames.orbis_api.client.gui.util.gui_library.*;
@@ -16,6 +19,7 @@ import com.gildedgames.orbis_api.client.rect.Dim2D;
 import com.gildedgames.orbis_api.client.rect.Pos2D;
 import com.gildedgames.orbis_api.util.InputHelper;
 import com.google.common.collect.Lists;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -55,6 +59,8 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 
 	private static final ResourceLocation SLOT_BLOCKED = AetherCore.getResource("textures/gui/trade/prevent_tile.png");
 
+	private static final ToolTipCurrencyHelper TOOLTIP_HELPER = new ToolTipCurrencyHelper();
+
 	private final NonNullList<ItemStack> offeredContents;
 
 	private final List<TradeChatLine> chatLines = Lists.newArrayList();
@@ -79,7 +85,7 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 
 	private long lastBuyCountChangeTime;
 
-	private double transferCoins;
+	private double transferCoins, viewValue;
 
 	public GuiTrade(GuiViewer prevViewer, EntityPlayer player)
 	{
@@ -90,7 +96,6 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 		this.offeredContents = NonNullList.withSize(16, ItemStack.EMPTY);
 		this.lockinLocalText = I18n.format("aether.trade.gui.lock");
 		this.unlockLocalText = I18n.format("aether.trade.gui.unlock");
-
 	}
 
 	@Override
@@ -492,6 +497,56 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 				this.drawString(this.fontRenderer, tradeChatLine.text.getUnformattedText(), 4, y, 0xFFFFFF);
 			}
 		}
+
+		double value = 0;
+
+		if (this.tradeTab.intersected(mouseX, mouseY))
+		{
+			value = this.module.getValue();
+		}
+		else if (this.viewTab.intersected(mouseX, mouseY))
+		{
+			value = this.viewValue;
+		}
+
+		if (value != 0)
+		{
+			List<String> text = TOOLTIP_HELPER.getText(value);
+
+			int i = 0;
+
+			for (String s : text)
+			{
+				int j = this.fontRenderer.getStringWidth(s);
+
+				if (j > i)
+				{
+					i = j;
+				}
+			}
+
+			int l1 = mouseX + 12;
+			int i2 = mouseY - 12;
+			int k = 8;
+
+			if (text.size() > 1)
+			{
+				k += 2 + (text.size() - 1) * 10;
+			}
+
+			if (l1 + i + 4 > this.width)
+			{
+				l1 -= 28 + i;
+			}
+
+			if (i2 + k + 6 > this.height)
+			{
+				i2 = this.height - k - 6;
+			}
+
+			this.drawHoveringText(text, mouseX, mouseY);
+			TOOLTIP_HELPER.render(this.fontRenderer, l1, i2, 8 + (text.size() - 1) * 10, value);
+		}
 	}
 
 	private void drawItemStack(ItemStack stack, int x, int y)
@@ -546,9 +601,11 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 	public void setTradeOffer(List<Pair<Integer,ItemStack>> changes)
 	{
 		int count = 0;
+		this.viewValue = 0;
 
 		for (final Pair<Integer, ItemStack> pair : changes)
 		{
+			this.viewValue += AetherAPI.content().currency().getValue(pair.getValue(), ShopCurrencyGilt.class);
 			this.offeredContents.set(pair.getKey(), pair.getValue());
 			count++;
 		}

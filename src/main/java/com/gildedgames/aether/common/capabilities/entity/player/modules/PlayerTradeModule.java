@@ -31,7 +31,7 @@ public class PlayerTradeModule extends PlayerAetherModule
 
 	private boolean isTrading, lockedIn, confirmed, error;
 
-	private double coinCount;
+	private double coinCount, tradeValue;
 
 	private Vec3i requestPosition;
 
@@ -355,5 +355,15 @@ public class PlayerTradeModule extends PlayerAetherModule
 	public double getCoinAmount()
 	{
 		return this.coinCount;
+	}
+
+	public void setValue(double value)
+	{
+		this.tradeValue = value;
+	}
+
+	public double getValue()
+	{
+		return this.tradeValue;
 	}
 }

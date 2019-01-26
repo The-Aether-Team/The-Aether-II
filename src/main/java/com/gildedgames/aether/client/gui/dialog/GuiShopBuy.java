@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.shop.IShopBuy;
 import com.gildedgames.aether.api.shop.IShopInstance;
 import com.gildedgames.aether.api.shop.ShopUtil;
 import com.gildedgames.aether.client.gui.IExtendedGui;
+import com.gildedgames.aether.client.gui.util.ToolTipCurrencyHelper;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.orbis_api.client.gui.util.GuiAbstractButton;
@@ -20,6 +21,7 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiShopBuy extends GuiElement
@@ -27,6 +29,8 @@ public class GuiShopBuy extends GuiElement
 	private static final ResourceLocation BUTTON = AetherCore.getResource("textures/gui/shop/button.png");
 
 	private static final ResourceLocation BUTTON_PRESSED = AetherCore.getResource("textures/gui/shop/button_pressed.png");
+
+	private static final ToolTipCurrencyHelper toolTipHelper = new ToolTipCurrencyHelper();
 
 	private final IShopInstance shopInstance;
 
@@ -112,8 +116,10 @@ public class GuiShopBuy extends GuiElement
 
 					if (gui instanceof IExtendedGui)
 					{
+						ItemStack stack = GuiShopBuy.this.getShopBuy().getItemStack();
+
 						IExtendedGui extendedGui = (IExtendedGui) gui;
-						extendedGui.setHoveredDescription(GuiShopBuy.this.getShopBuy().getItemStack().getTooltip(Minecraft.getMinecraft().player,
+						extendedGui.setHoveredDescription(stack, stack.getTooltip(Minecraft.getMinecraft().player,
 								Minecraft.getMinecraft().gameSettings.advancedItemTooltips ?
 										ITooltipFlag.TooltipFlags.ADVANCED :
 										ITooltipFlag.TooltipFlags.NORMAL));
