@@ -5,6 +5,7 @@ import com.gildedgames.aether.client.renderer.particles.ParticleLeaf;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherSapling;
 import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherUniqueSapling;
+import com.gildedgames.aether.common.entities.living.passive.EntitySkyrootLizard;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
@@ -161,6 +162,16 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 					}
 				}
 			}
+		}
+
+		if (!worldIn.isRemote && state.getValue(DECAYABLE) && worldIn.rand.nextInt(15) == 0)
+		{
+			EntitySkyrootLizard lizard = new EntitySkyrootLizard(worldIn);
+
+			lizard.setPosition(pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f);
+			lizard.setLizardType(this);
+
+			worldIn.spawnEntity(lizard);
 		}
 	}
 
