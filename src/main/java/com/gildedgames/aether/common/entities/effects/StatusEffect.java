@@ -67,7 +67,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 			this.potentialBuildup = 0;
 		}
 
-		if (this.effectBuildup > 0)
+		if (this.effectBuildup > 0 || this.isEffectApplied)
 		{
 			this.markDirty();
 		}
@@ -106,6 +106,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 		if (livingBase instanceof EntityPlayerMP && this.isDirty)
 		{
 			NetworkingAether.sendPacketToPlayer(new PacketStatusEffect(livingBase), (EntityPlayerMP) livingBase);
+			this.markClean();
 		}
 	}
 
