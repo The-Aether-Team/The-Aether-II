@@ -9,6 +9,7 @@ import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -32,8 +33,9 @@ public class EntitySkyrootLizard extends EntityAetherAnimal
 		super(world);
 		this.setSize(.8f, .3f);
 
-		this.tasks.addTask(2, new EntityAIAvoidEntity<>(this, EntityPlayer.class, 12.0F, 1.2F, 1.4F));
-		this.tasks.addTask(1, new EntityAIWander(this, 1.0D, 10));
+		this.tasks.addTask(2, new EntityAIAvoidEntity<>(this, EntityPlayer.class, 12.0F, .8D, 1D));
+		this.tasks.addTask(1, new EntityAIWander(this, 0.5D, 10));
+		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 	}
 
 	@Override
@@ -49,7 +51,7 @@ public class EntitySkyrootLizard extends EntityAetherAnimal
 	{
 		super.applyEntityAttributes();
 
-		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(1.2D);
+		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(.8D);
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(22.0D);
 
 		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(2);

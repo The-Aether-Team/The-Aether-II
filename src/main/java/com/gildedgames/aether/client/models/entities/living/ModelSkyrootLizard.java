@@ -4,6 +4,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.util.math.MathHelper;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -246,7 +247,8 @@ public class ModelSkyrootLizard extends ModelBase
 	}
 
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+	{
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(this.body.offsetX, this.body.offsetY, this.body.offsetZ);
 		GlStateManager.translate(this.body.rotationPointX * f5, this.body.rotationPointY * f5, this.body.rotationPointZ * f5);
@@ -264,5 +266,60 @@ public class ModelSkyrootLizard extends ModelBase
 		modelRenderer.rotateAngleX = x;
 		modelRenderer.rotateAngleY = y;
 		modelRenderer.rotateAngleZ = z;
+	}
+
+
+	@Override
+	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch, float scaleFactor, Entity entity)
+	{
+		super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, headYaw, headPitch, scaleFactor, entity);
+
+		this.head_1.rotateAngleX = headPitch * 0.017453292F;
+		this.head_1.rotateAngleY = headYaw * 0.017453292F;
+
+		this.tongue.showModel = MathHelper.cos(ageInTicks / 15) > 0 && MathHelper.cos(ageInTicks) > 0;
+
+		float swingCos = MathHelper.cos(limbSwing * 0.6662F);
+		float swingSin = MathHelper.sin(limbSwing * 0.6662F);
+
+		this.leg_front_right_1.rotateAngleY =  -0.35F + (swingCos -.5f) * .6F * limbSwingAmount;
+		this.leg_front_right_1.rotateAngleZ = swingCos * 1F * limbSwingAmount;
+		this.leg_front_right_2.rotateAngleY =  -0.35F + swingSin * .6F * limbSwingAmount;
+		this.leg_front_right_2.rotateAngleZ =  -0.436F + swingSin* .3F * limbSwingAmount;
+
+		this.leg_back_left_1.rotateAngleY =  -0.35F + (swingCos -.5f) * .3F * limbSwingAmount;
+		this.leg_back_left_1.rotateAngleZ = swingCos * .5F * limbSwingAmount;
+		this.leg_back_left_2.rotateAngleY =  -0.35F + swingSin * .3F * limbSwingAmount;
+		this.leg_back_left_2.rotateAngleZ =  0.436F + swingSin* .15F * limbSwingAmount;
+
+		this.leg_front_left_1.rotateAngleY =  0.35F + (swingSin -.5f) * .6F * limbSwingAmount;
+		this.leg_front_left_1.rotateAngleZ =  swingSin * 1F * limbSwingAmount;
+		this.leg_front_left_2.rotateAngleY =  0.35F + swingCos * .6F * limbSwingAmount;
+		this.leg_front_left_2.rotateAngleZ =  0.436F + swingCos * .3F * limbSwingAmount;
+
+		this.leg_back_right_1.rotateAngleY =  0.35F + (swingSin -.5f) * .3F * limbSwingAmount;
+		this.leg_back_right_1.rotateAngleZ =  swingSin * .5F * limbSwingAmount;
+		this.leg_front_right_2_1.rotateAngleY =  0.35F + swingCos * .3F * limbSwingAmount;
+		this.leg_front_right_2_1.rotateAngleZ =  -0.436F + swingCos * .15F * limbSwingAmount;
+
+		float tailVal = (limbSwing * .3f + ageInTicks * .06f);
+		float tailSway = MathHelper.cos(tailVal) / 3f;
+		float tailSwaySin = MathHelper.sin(tailVal) / 3f;
+
+		this.tail_1.rotateAngleY = tailSway;
+		this.tail_2.rotateAngleY = tailSwaySin;
+		this.tail_3.rotateAngleY = tailSway;
+
+		float tailBase = -0.08726646259971647F;
+		float tailSwing = MathHelper.cos(limbSwing * 0.6662F) * .01F * limbSwingAmount;
+		float tailSwingSin = MathHelper.sin(limbSwing * 0.6662F) * .01F * limbSwingAmount;
+
+		this.tail_1.rotateAngleX = tailBase + tailSwing;
+		this.tail_2.rotateAngleX = tailBase + tailSwing;
+		this.tail_3.rotateAngleX = tailBase + tailSwing;
+
+		this.neck_1.rotateAngleX = tailSway / 2f + tailSwing / 5f - 0.52f;
+		this.neck_2.rotateAngleX = .7f + tailSwaySin / 2f + tailSwingSin / 5f;
+		this.head_1.rotateAngleX -= tailSwing / 2f + tailSway / 5f + .1f;
 	}
 }
