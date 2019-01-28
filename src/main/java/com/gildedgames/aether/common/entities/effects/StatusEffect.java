@@ -208,6 +208,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 		this.effectTimer = 0;
 		this.activeEffectTimeModifier = 1.0D;
 		this.potentialBuildup = 0;
+		this.markDirty();
 
 		AetherCore.LOGGER.info("Effect Reset : " + this.NAME + " to : " + this.livingEffected.getName());
 	}

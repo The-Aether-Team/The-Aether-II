@@ -112,12 +112,8 @@ public class AIElectricShock extends EntityAI<EntityTempest>
 
 			if (!living.isActiveItemStackBlocking())
 			{
-				if (target.hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
-				{
-					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).
-							applyStatusEffect(IAetherStatusEffects.effectTypes.STUN,
-									IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectStun(living), EEffectIntensity.MAJOR));
-				}
+				int buildup = IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectStun(living), EEffectIntensity.MAJOR);
+				IAetherStatusEffects.applyStatusEffect(living, IAetherStatusEffects.effectTypes.STUN, buildup);
 			}
 		}
 	}

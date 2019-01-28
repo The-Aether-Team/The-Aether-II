@@ -256,25 +256,13 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 
 			if (!living.isActiveItemStackBlocking())
 			{
-				if (target.hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
-				{
-					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).
-							applyStatusEffect(IAetherStatusEffects.effectTypes.FRACTURE,
-									IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectFracture(living), EEffectIntensity.MAJOR));
-
-					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).
-							applyStatusEffect(IAetherStatusEffects.effectTypes.STUN,
-									IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectStun(living),EEffectIntensity.MAJOR));
-				}
+				int buildup = IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectFracture(living), EEffectIntensity.MAJOR);
+				IAetherStatusEffects.applyStatusEffect(living, IAetherStatusEffects.effectTypes.FRACTURE, buildup);
 			}
 			else
 			{
-				if (target.hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
-				{
-					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).
-							applyStatusEffect(IAetherStatusEffects.effectTypes.FRACTURE,
-									IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectFracture(living),EEffectIntensity.MINOR));
-				}
+				int buildup = IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectFracture(living), EEffectIntensity.MINOR);
+				IAetherStatusEffects.applyStatusEffect(living, IAetherStatusEffects.effectTypes.FRACTURE, buildup);
 			}
 		}
 	}

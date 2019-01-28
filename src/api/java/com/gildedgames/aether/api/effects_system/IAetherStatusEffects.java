@@ -1,5 +1,6 @@
 package com.gildedgames.aether.api.effects_system;
 
+import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.orbis_api.util.mc.NBT;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -96,6 +97,24 @@ public interface IAetherStatusEffects extends NBT
 	 * @return buildup according to instensity.
 	 */
 	int getBuildupFromIntensity(EEffectIntensity intensity);
+
+	/**
+	 * Check if living has appropriate capabilities, and apply buildup for status effect.
+	 * @param livingBase living to apply effect buildup to.
+	 * @param effectType effect to apply buildup for.
+	 * @param buildup amount of buildup to add.
+	 * @return boolean if successful.
+	 */
+	static boolean applyStatusEffect(EntityLivingBase livingBase, effectTypes effectType, @Nonnegative int buildup)
+	{
+		if (livingBase.hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
+		{
+			livingBase.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).applyStatusEffect(effectType, buildup);
+			return true;
+		}
+
+		return false;
+	}
 
 	boolean isDirty();
 	void markDirty();

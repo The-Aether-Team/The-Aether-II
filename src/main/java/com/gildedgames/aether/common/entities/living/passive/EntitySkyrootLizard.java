@@ -64,7 +64,7 @@ public class EntitySkyrootLizard extends EntityAetherAnimal
 	{
 		if (distance > 4)
 		{
-			this.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).applyStatusEffect(IAetherStatusEffects.effectTypes.STUN, 100);
+			IAetherStatusEffects.applyStatusEffect(this, IAetherStatusEffects.effectTypes.STUN, 100);
 		}
 	}
 

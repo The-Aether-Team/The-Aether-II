@@ -52,8 +52,8 @@ public class PacketStatusEffect implements IMessage
 		}
 		for (int i = 0; i < this.numberOfDirtyEffects; i++)
 		{
-			int effectId = buf.readShort();
-			int effectBuildup = buf.readShort();
+			int effectId = buf.readByte();
+			int effectBuildup = buf.readByte();
 			boolean isEffectApplied = buf.readBoolean();
 
 			this.statusEffectData.add(new StatusEffectData(effectId,effectBuildup,isEffectApplied));
@@ -68,8 +68,8 @@ public class PacketStatusEffect implements IMessage
 
 		for (StatusEffectData data : this.statusEffectData)
 		{
-			buf.writeShort(data.effectId);
-			buf.writeShort(data.buildup);
+			buf.writeByte(data.effectId);
+			buf.writeByte(data.buildup);
 			buf.writeBoolean(data.isApplied);
 		}
 	}

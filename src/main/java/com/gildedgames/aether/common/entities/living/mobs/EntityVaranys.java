@@ -145,29 +145,8 @@ public class EntityVaranys extends EntityAetherMob implements IEntityMultiPart
 
 			if (!living.isActiveItemStackBlocking())
 			{
-				if (target.hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
-				{
-					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).
-							applyStatusEffect(IAetherStatusEffects.effectTypes.FRACTURE,
-									IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectFracture(living),EEffectIntensity.ORDINARY));
-
-					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).
-							applyStatusEffect(IAetherStatusEffects.effectTypes.STUN,
-									IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectStun(living),EEffectIntensity.MINOR));
-
-					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).
-							applyStatusEffect(IAetherStatusEffects.effectTypes.BLEED,
-									IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectBleed(living),EEffectIntensity.MINOR));
-				}
-			}
-			else
-			{
-				if (target.hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
-				{
-					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).
-							applyStatusEffect(IAetherStatusEffects.effectTypes.FRACTURE,
-									IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectFracture(living),EEffectIntensity.ORDINARY)/4);
-				}
+				int buildup = IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectBleed(living), EEffectIntensity.MINOR);
+				IAetherStatusEffects.applyStatusEffect(living, IAetherStatusEffects.effectTypes.BLEED, buildup);
 			}
 		}
 	}

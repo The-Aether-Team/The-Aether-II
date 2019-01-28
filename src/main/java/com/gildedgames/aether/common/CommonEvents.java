@@ -464,11 +464,10 @@ public class CommonEvents
 		{
 			if (source instanceof EntityDamageSource)
 			{
-				if (event.getEntityLiving().hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
+				if (!event.getEntityLiving().isActiveItemStackBlocking())
 				{
-					event.getEntityLiving().getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null)
-							.applyStatusEffect(IAetherStatusEffects.effectTypes.BLEED,
-									IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectBleed(event.getEntityLiving()), EEffectIntensity.MINOR));
+					int buildup = IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectBleed(event.getEntityLiving()), EEffectIntensity.MINOR);
+					IAetherStatusEffects.applyStatusEffect(event.getEntityLiving(), IAetherStatusEffects.effectTypes.BLEED, buildup);
 				}
 			}
 		}

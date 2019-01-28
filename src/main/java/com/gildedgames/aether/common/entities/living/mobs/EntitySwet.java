@@ -202,12 +202,10 @@ public class EntitySwet extends EntityExtendedMob
 	{
 		if (target instanceof EntityLivingBase)
 		{
-			if (target.hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
-			{
-				target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).
-						applyStatusEffect(IAetherStatusEffects.effectTypes.TOXIN,
-								IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectToxin((EntityLivingBase) target), EEffectIntensity.MINOR));
-			}
+			final EntityLivingBase living = (EntityLivingBase) target;
+
+			int buildup = IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectToxin(living), EEffectIntensity.MINOR)/2;
+			IAetherStatusEffects.applyStatusEffect(living, IAetherStatusEffects.effectTypes.TOXIN, buildup);
 		}
 	}
 

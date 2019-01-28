@@ -115,14 +115,11 @@ public class EntityCockatrice extends EntityAetherMob
 		if (target instanceof EntityLivingBase)
 		{
 			final EntityLivingBase living = (EntityLivingBase) target;
+
 			if (!living.isActiveItemStackBlocking())
 			{
-				if (target.hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
-				{
-					target.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).
-							applyStatusEffect(IAetherStatusEffects.effectTypes.COCKATRICE_VENOM,
-									IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectCockatriceVenom(living), EEffectIntensity.ORDINARY));
-				}
+				int buildup = IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectCockatriceVenom(living), EEffectIntensity.ORDINARY);
+				IAetherStatusEffects.applyStatusEffect(living, IAetherStatusEffects.effectTypes.COCKATRICE_VENOM, buildup);
 			}
 		}
 	}

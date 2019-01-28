@@ -54,10 +54,7 @@ public class EntityDart extends EntityArrow implements IDamageLevelsHolder
 	{
 		if (this.getDartType() == ItemDartType.POISON)
 		{
-			if (entity.hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
-			{
-				entity.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).applyStatusEffect(IAetherStatusEffects.effectTypes.TOXIN, 100);
-			}
+			IAetherStatusEffects.applyStatusEffect(entity, IAetherStatusEffects.effectTypes.TOXIN, 100);
 		}
 	}
 
