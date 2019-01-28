@@ -709,6 +709,7 @@ entity.aether.tivalier.name=Tivalier
 entity.aether.icehog.name=Icehog
 entity.aether.mysterious_figure.name=Mysterious Figure
 entity.aether.varanys.name=Varanys
+entity.aether.skyroot_lizard.name=Skyroot Lizard
 
 # Creative Tabs
 itemGroup.aether.blocks=Aether II Blocks
