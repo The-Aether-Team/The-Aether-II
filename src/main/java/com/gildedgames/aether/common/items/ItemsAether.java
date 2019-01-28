@@ -81,25 +81,25 @@ public class ItemsAether
 			gravitite_sword = new ItemGravititeSword(),
 			arkenium_sword = new ItemArkeniumSword();
 
-	public static final ItemTaegoreHideArmor taegore_hide_helmet = new ItemTaegoreHideArmor(EntityEquipmentSlot.HEAD),
-			taegore_hide_chestplate = new ItemTaegoreHideArmor(EntityEquipmentSlot.CHEST),
-			taegore_hide_leggings = new ItemTaegoreHideArmor(EntityEquipmentSlot.LEGS),
-			taegore_hide_boots = new ItemTaegoreHideArmor(EntityEquipmentSlot.FEET);
+	public static final ItemTaegoreHideArmor taegore_hide_helmet = new ItemTaegoreHideArmor(EntityEquipmentSlot.HEAD).impactDefense(2),
+			taegore_hide_chestplate = new ItemTaegoreHideArmor(EntityEquipmentSlot.CHEST).slashDefense(2),
+			taegore_hide_leggings = new ItemTaegoreHideArmor(EntityEquipmentSlot.LEGS).pierceDefense(2),
+			taegore_hide_boots = new ItemTaegoreHideArmor(EntityEquipmentSlot.FEET).slashDefense(1);
 
-	public static final ItemZaniteArmor zanite_helmet = new ItemZaniteArmor(EntityEquipmentSlot.HEAD),
-			zanite_chestplate = new ItemZaniteArmor(EntityEquipmentSlot.CHEST),
-			zanite_leggings = new ItemZaniteArmor(EntityEquipmentSlot.LEGS),
-			zanite_boots = new ItemZaniteArmor(EntityEquipmentSlot.FEET);
+	public static final ItemZaniteArmor zanite_helmet = new ItemZaniteArmor(EntityEquipmentSlot.HEAD).impactDefense(2),
+			zanite_chestplate = new ItemZaniteArmor(EntityEquipmentSlot.CHEST).slashDefense(2),
+			zanite_leggings = new ItemZaniteArmor(EntityEquipmentSlot.LEGS).pierceDefense(2),
+			zanite_boots = new ItemZaniteArmor(EntityEquipmentSlot.FEET).pierceDefense(2);
 
-	public static final ItemArkeniumArmor arkenium_helmet = new ItemArkeniumArmor(EntityEquipmentSlot.HEAD),
-			arkenium_chestplate = new ItemArkeniumArmor(EntityEquipmentSlot.CHEST),
-			arkenium_leggings = new ItemArkeniumArmor(EntityEquipmentSlot.LEGS),
-			arkenium_boots = new ItemArkeniumArmor(EntityEquipmentSlot.FEET);
+	public static final ItemArkeniumArmor arkenium_helmet = new ItemArkeniumArmor(EntityEquipmentSlot.HEAD).impactDefense(1),
+			arkenium_chestplate = new ItemArkeniumArmor(EntityEquipmentSlot.CHEST).slashDefense(2).impactDefense(1),
+			arkenium_leggings = new ItemArkeniumArmor(EntityEquipmentSlot.LEGS).pierceDefense(2).impactDefense(1),
+			arkenium_boots = new ItemArkeniumArmor(EntityEquipmentSlot.FEET).pierceDefense(1).impactDefense(1);
 
-	public static final ItemGravititeArmor gravitite_helmet = new ItemGravititeArmor(EntityEquipmentSlot.HEAD),
-			gravitite_chestplate = new ItemGravititeArmor(EntityEquipmentSlot.CHEST),
-			gravitite_leggings = new ItemGravititeArmor(EntityEquipmentSlot.LEGS),
-			gravitite_boots = new ItemGravititeArmor(EntityEquipmentSlot.FEET);
+	public static final ItemGravititeArmor gravitite_helmet = new ItemGravititeArmor(EntityEquipmentSlot.HEAD).impactDefense(3),
+			gravitite_chestplate = new ItemGravititeArmor(EntityEquipmentSlot.CHEST).slashDefense(3),
+			gravitite_leggings = new ItemGravititeArmor(EntityEquipmentSlot.LEGS).pierceDefense(3),
+			gravitite_boots = new ItemGravititeArmor(EntityEquipmentSlot.FEET).pierceDefense(2);
 
 	public static final Item golden_amber = new ItemDropOnDeath(),
 			taegore_hide = new ItemDropOnDeath(),

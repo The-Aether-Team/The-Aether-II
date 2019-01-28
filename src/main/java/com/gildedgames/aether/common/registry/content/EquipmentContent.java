@@ -23,6 +23,10 @@ public class EquipmentContent
 			EffectActivator.WHEN_HELD
 	};
 
+	private static final EffectActivator[] WHEN_EQUIPPED = new EffectActivator[] {
+			EffectActivator.WHEN_EQUIPPED
+	};
+
 	public static void init()
 	{
 		registerProcessors();
@@ -43,10 +47,15 @@ public class EquipmentContent
 	private static void registerItems()
 	{
 		// Gloves
-		createEquipmentItem(ItemsAether.taegore_hide_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE);
-		createEquipmentItem(ItemsAether.zanite_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE);
-		createEquipmentItem(ItemsAether.arkenium_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE);
-		createEquipmentItem(ItemsAether.gravitite_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE);
+		createEquipmentItem(ItemsAether.taegore_hide_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE, WHEN_EQUIPPED, new StatEffectFactory.StatProvider(
+				DamageTypeAttributes.PIERCE_DEFENSE_LEVEL, 1, StatEffectFactory.StatProvider.OP_ADD));
+		createEquipmentItem(ItemsAether.zanite_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE, WHEN_EQUIPPED, new StatEffectFactory.StatProvider(
+				DamageTypeAttributes.SLASH_DEFENSE_LEVEL, 2, StatEffectFactory.StatProvider.OP_ADD));
+		createEquipmentItem(ItemsAether.arkenium_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE, WHEN_EQUIPPED, new StatEffectFactory.StatProvider(
+				DamageTypeAttributes.SLASH_DEFENSE_LEVEL, 1, StatEffectFactory.StatProvider.OP_ADD), new StatEffectFactory.StatProvider(
+				DamageTypeAttributes.IMPACT_DEFENSE_LEVEL, 1, StatEffectFactory.StatProvider.OP_ADD));
+		createEquipmentItem(ItemsAether.gravitite_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE, WHEN_EQUIPPED, new StatEffectFactory.StatProvider(
+				DamageTypeAttributes.SLASH_DEFENSE_LEVEL, 2, StatEffectFactory.StatProvider.OP_ADD));
 
 		createEquipmentItem(ItemsAether.skyroot_sword, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD, new StatEffectFactory.StatProvider(
 				DamageTypeAttributes.SLASH_DAMAGE_LEVEL, 7, StatEffectFactory.StatProvider.OP_ADD));

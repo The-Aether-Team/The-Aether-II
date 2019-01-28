@@ -30,7 +30,7 @@ public class ReflectionAether
 
 	public static final ReflectionEntry ENTITY_RENDERER_TORCH_FLICKER_X = new ReflectionEntry("torchFlickerX", "field_78514_e");
 
-	public static final ReflectionEntry IS_UNBLOCKABLE = new ReflectionEntry("isUnblockable", "field_76374_o");
+	public static final ReflectionEntry DAMAGE_REDUCE_AMOUNT = new ReflectionEntry("damageReduceAmount", "field_77879_b");
 
 	public static Field getField(final Class clazz, final String... names)
 	{
