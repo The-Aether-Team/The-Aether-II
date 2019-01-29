@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.entities.living.passive;
 
-import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
 import com.gildedgames.aether.common.blocks.BlocksAether;
@@ -33,8 +32,8 @@ public class EntitySkyrootLizard extends EntityAetherAnimal
 		super(world);
 		this.setSize(.8f, .3f);
 
-		this.tasks.addTask(2, new EntityAIAvoidEntity<>(this, EntityPlayer.class, 12.0F, .8D, 1D));
 		this.tasks.addTask(1, new EntityAIWander(this, 0.5D, 10));
+		this.tasks.addTask(2, new EntityAIAvoidEntity<>(this, EntityPlayer.class, 20.0F, .7D, .85D));
 		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 	}
 
@@ -51,7 +50,7 @@ public class EntitySkyrootLizard extends EntityAetherAnimal
 	{
 		super.applyEntityAttributes();
 
-		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(.8D);
+		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(.7D);
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(22.0D);
 
 		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(2);
@@ -88,8 +87,6 @@ public class EntitySkyrootLizard extends EntityAetherAnimal
 		}
 		else
 		{
-			System.out.println(leaf.getTranslationKey().substring(12));
-
 			int val = VARIETIES.table.get(leaf.getTranslationKey().substring(12));
 
 			this.dataManager.set(LIZARD_TYPE, val);

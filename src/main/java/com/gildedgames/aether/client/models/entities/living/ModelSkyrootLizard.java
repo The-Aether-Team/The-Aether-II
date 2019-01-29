@@ -279,8 +279,8 @@ public class ModelSkyrootLizard extends ModelBase
 
 		this.tongue.showModel = MathHelper.cos(ageInTicks / 15) > 0 && MathHelper.cos(ageInTicks) > 0;
 
-		float swingCos = MathHelper.cos(limbSwing * 0.6662F);
-		float swingSin = MathHelper.sin(limbSwing * 0.6662F);
+		float swingCos = MathHelper.cos(limbSwing * 0.7662F);
+		float swingSin = MathHelper.sin(limbSwing * 0.7662F);
 
 		this.leg_front_right_1.rotateAngleY =  -0.35F + (swingCos -.5f) * .6F * limbSwingAmount;
 		this.leg_front_right_1.rotateAngleZ = swingCos * 1F * limbSwingAmount;

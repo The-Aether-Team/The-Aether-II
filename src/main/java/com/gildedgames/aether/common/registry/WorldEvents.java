@@ -133,11 +133,13 @@ public class WorldEvents
 
 		flying.addWorldCondition(new CheckDimension(DimensionsAether.AETHER));
 
+		/*
 		SpawnEntry aerwhale = new SpawnEntry(EntityLiving.SpawnPlacementType.IN_AIR, EntityAerwhale.class, 10F, 1, 1,
 				new OffsetFromTopBlockPositionSelector(35))
 				.addCondition(new CheckBlockStateUnderneath(Blocks.AIR.getDefaultState()));
 
 		flying.addEntry(aerwhale);
+		 */
 
 		/** UNDERGROUND **/
 		SpawnHandler underground = new SpawnHandler("aether_underground").chunkArea(4).targetEntityCountPerArea(10).updateFrequencyInTicks(1200);

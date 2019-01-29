@@ -1,18 +1,13 @@
 package com.gildedgames.aether.common.entities.living.passive;
 
-import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
 import com.gildedgames.aether.api.effects_system.EEffectIntensity;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffectIntensity;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
-import com.gildedgames.aether.common.entities.ai.AetherNavigateGround;
-import com.gildedgames.aether.common.entities.ai.EntityAIHideFromRain;
-import com.gildedgames.aether.common.entities.ai.EntityAIRestrictRain;
-import com.gildedgames.aether.common.entities.ai.EntityAIUnstuckBlueAercloud;
+import com.gildedgames.aether.common.entities.ai.*;
 import com.gildedgames.aether.common.entities.effects.StatusEffectFracture;
-import com.gildedgames.aether.common.entities.effects.StatusEffectStun;
 import com.gildedgames.aether.common.entities.util.AetherMultiPartEntity;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
@@ -42,13 +37,11 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 
 	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(ItemsAether.brettl_grass);
 
-	private final EntityAIAttackMelee AIAttackMelee = new EntityAIAttackMelee(this, 1.2D, false);
-
 	private final MultiPartEntityPart[] parts;
 
 	private final MultiPartEntityPart head = new AetherMultiPartEntity(this, "head", .8F, 1.1F);
 
-	private double prevHeadX, prevHeadY, prevHeadZ;
+	private EntityAIRamAttack ramAttack;
 
 	public EntityBurrukai(final World world)
 	{
@@ -65,6 +58,9 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 	{
 		super.initEntityAI();
 
+		this.ramAttack = new EntityAIRamAttack(this, 0.5D, 0.5f, 2, 16.0f);
+
+		this.tasks.addTask(2, this.ramAttack);
 		this.tasks.addTask(2, new EntityAIRestrictRain(this));
 		this.tasks.addTask(3, new EntityAIHideFromRain(this, 1.3D));
 		this.tasks.addTask(3, new EntityAIUnstuckBlueAercloud(this));
@@ -109,9 +105,9 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 	{
 		super.onLivingUpdate();
 
-		this.prevHeadX = this.head.posX;
-		this.prevHeadY = this.head.posY;
-		this.prevHeadZ = this.head.posZ;
+		double prevHeadX = this.head.posX;
+		double prevHeadY = this.head.posY;
+		double prevHeadZ = this.head.posZ;
 
 		final float headDist = 1.2f;
 		float f = MathUtil.interpolateRotation(this.prevRenderYawOffset, this.renderYawOffset, 1);
@@ -121,9 +117,9 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 		this.head.setLocationAndAngles(this.posX - f2, this.posY + .7f, this.posZ - f1, 0F, 0F);
 		this.head.onUpdate();
 
-		this.head.prevPosX = this.prevHeadX;
-		this.head.prevPosY = this.prevHeadY;
-		this.head.prevPosZ = this.prevHeadZ;
+		this.head.prevPosX = prevHeadX;
+		this.head.prevPosY = prevHeadY;
+		this.head.prevPosZ = prevHeadZ;
 	}
 
 	@Override
@@ -145,8 +141,8 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(15.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
-		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(8.0);
+		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
 
 		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(8);
 		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(4);
@@ -206,28 +202,45 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 	{
 		super.onEntityUpdate();
 
-		if (this.getAttackingEntity() != null)
+		if (this.ramAttack == null)
 		{
-			if (this.getAttackingEntity() instanceof EntityPlayer)
+			return;
+		}
+
+		if (this.getAttackTarget() != null)
+		{
+			if (this.getAttackTarget() instanceof EntityPlayer)
 			{
-				final PlayerAether player = PlayerAether.getPlayer(this.getAttackingEntity());
-				if (player.getEntity().isCreative())
-				{
-					return;
-				}
+				final PlayerAether player = PlayerAether.getPlayer(this.getAttackTarget());
+//				if (player.getEntity().isCreative())
+//				{
+//					return;
+//				}
 			}
 
-			this.tasks.addTask(3, this.AIAttackMelee);
-			this.updateAITasks();
+		}
 
-			if (this.getDistance(this.getAttackingEntity()) > this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).getAttributeValue())
+		this.ramAttack.update();
+
+		this.setAttackTarget(this.getAttackTarget());
+	}
+
+	@Override
+	public boolean attackEntityFrom(DamageSource source, float amount)
+	{
+		if (source.getTrueSource() instanceof EntityLivingBase)
+		{
+			EntityLivingBase attacker = (EntityLivingBase) source.getTrueSource();
+
+			this.setAttackTarget(attacker);
+
+			if (this.ramAttack != null && (!(attacker instanceof EntityPlayer) || !((EntityPlayer) attacker).isCreative()))
 			{
-				this.tasks.removeTask(this.AIAttackMelee);
-				this.updateAITasks();
+				this.ramAttack.setTarget(attacker);
 			}
 		}
 
-		this.setAttackTarget(this.getAttackingEntity());
+		return super.attackEntityFrom(source, amount);
 	}
 
 	@Override
@@ -242,6 +255,8 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 			living.knockBack(this, 1.0F, 0.2D, 0.2D);
 
 			this.applyStatusEffectOnAttack(entityIn);
+			this.ramAttack.setTarget(this.getAttackTarget());
+			this.setAttackTarget(null);
 		}
 
 		return true;
