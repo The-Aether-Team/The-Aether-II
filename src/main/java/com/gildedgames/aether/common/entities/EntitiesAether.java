@@ -47,7 +47,7 @@ public class EntitiesAether
 		registerLivingEntityWithEgg(EntityNecromancer.class, "necromancer", 0x4b4b6a, 0x8a8a9e);
 		registerLivingEntityWithEgg(EntityJosediya.class, "josediya", 0xabd5cb, 0x87dbac);
 		registerLivingEntityWithEgg(EntityTivalier.class, "tivalier", 0x6eb196, 0x454e68);
-		//registerLivingEntityWithEgg(EntityIcehog.class, "icehog", 0x6eb196, 0x454e68);
+		registerLivingEntityWithEgg(EntityGlactrix.class, "glactrix", 0x6eb196, 0x454e68);
 		registerLivingEntityWithEgg(EntityMysteriousFigure.class, "mysterious_figure", 0x504960, 0xb68b69);
 		registerLivingEntityWithEgg(EntityVaranys.class, "varanys", 0x86b1c9, 0x548193);
 		registerLivingEntityWithEgg(EntitySkyrootLizard.class, "skyroot_lizard", 0x463B30, 0x86A470);

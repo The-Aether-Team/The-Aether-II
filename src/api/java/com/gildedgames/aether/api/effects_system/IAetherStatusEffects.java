@@ -116,6 +116,26 @@ public interface IAetherStatusEffects extends NBT
 		return false;
 	}
 
+	static boolean isEffectApplying(EntityLivingBase livingBase, effectTypes effectType)
+	{
+		if (livingBase.hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
+		{
+			return livingBase.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).isEffectApplied(effectType);
+		}
+
+		return false;
+	}
+
+	static boolean doesEffectHaveBuildup(EntityLivingBase livingBase, effectTypes effectType)
+	{
+		if (livingBase.hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
+		{
+			return (livingBase.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).getBuildupFromEffect(effectType) > 0);
+		}
+
+		return false;
+	}
+
 	boolean isDirty();
 	void markDirty();
 	void markClean();

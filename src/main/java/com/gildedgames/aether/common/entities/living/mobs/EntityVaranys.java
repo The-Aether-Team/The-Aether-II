@@ -1,16 +1,11 @@
 package com.gildedgames.aether.common.entities.living.mobs;
 
-import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
 import com.gildedgames.aether.api.effects_system.EEffectIntensity;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffectIntensity;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
-import com.gildedgames.aether.common.entities.ai.EntityAIHideFromLight;
-import com.gildedgames.aether.common.entities.ai.EntityAIUnstuckBlueAercloud;
-import com.gildedgames.aether.common.entities.ai.EntityAIWanderAvoidLight;
+import com.gildedgames.aether.common.entities.ai.*;
 import com.gildedgames.aether.common.entities.effects.StatusEffectBleed;
-import com.gildedgames.aether.common.entities.effects.StatusEffectFracture;
-import com.gildedgames.aether.common.entities.effects.StatusEffectStun;
 import com.gildedgames.aether.common.entities.util.AetherMultiPartEntity;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
 import net.minecraft.entity.*;
@@ -48,6 +43,7 @@ public class EntityVaranys extends EntityAetherMob implements IEntityMultiPart
 		this.tasks.addTask(0, new EntityAIUnstuckBlueAercloud(this));
 		this.tasks.addTask(1, this.lightAI);
 		this.tasks.addTask(1, new EntityAIWanderAvoidLight(this, 0.8D, 5));
+
 		this.tasks.addTask(2, new EntityAILeapAtTarget(this, 0.4F));
 		this.tasks.addTask(3, new EntityAIAttackMelee(this, 1D, false));
 		this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));

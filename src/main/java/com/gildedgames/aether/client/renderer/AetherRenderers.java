@@ -86,6 +86,8 @@ public class AetherRenderers
 		RenderingRegistry.registerEntityRenderingHandler(EntityVaranys.class, RenderVaranys::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntitySkyrootLizard.class, RenderSkyrootLizard::new);
 
+		RenderingRegistry.registerEntityRenderingHandler(EntityGlactrix.class, RenderGlactrix::new);
+
 		RenderingRegistry.registerEntityRenderingHandler(EntityNecromancer.class, RenderNecromancer::new);
 	}
 
