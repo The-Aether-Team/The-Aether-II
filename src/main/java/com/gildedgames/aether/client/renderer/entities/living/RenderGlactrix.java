@@ -10,6 +10,9 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RenderGlactrix extends RenderLiving<EntityGlactrix>
 {
@@ -34,7 +37,6 @@ public class RenderGlactrix extends RenderLiving<EntityGlactrix>
 		float scale = 1F;
 
 		GlStateManager.scale(scale, scale, scale);
-		GlStateManager.translate(0.0F, 0.0F, -0.4F);
 	}
 
 	@Override
@@ -47,27 +49,21 @@ public class RenderGlactrix extends RenderLiving<EntityGlactrix>
 	protected void renderModel(EntityGlactrix entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
 		GlStateManager.disableTexture2D();
-
-		super.renderModel(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-
-		GlStateManager.enableTexture2D();
-
-		ModelGlactrix model = (ModelGlactrix) this.mainModel;
-
-		boolean globalInvisible = !entity.isInvisible() || this.renderOutlines;
-		boolean playerInvisible = !globalInvisible && !entity.isInvisibleToPlayer(Minecraft.getMinecraft().player);
-
-		if (globalInvisible || playerInvisible)
-		{
-			/*
-			EyeUtil.renderEyes(this.renderManager, model, model, model.HeadEyeLeft, entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw,
-					headPitch, scale,
-					PUPIL_LEFT,
-					PUPIL_RIGHT, EYES_CLOSED, false);*/
-		}
+		GlStateManager.pushMatrix();
+		GlStateManager.disableTexture2D();
 
 		if (entity.getIsToppled())
 		{
+			GlStateManager.rotate(180F , 0, 0, 1F);
+			GlStateManager.translate(0, -2.3F, 0);
+			GlStateManager.rotate(MathHelper.cos((ageInTicks % 100) / 4) * 10, 0, 0F, 1.0F);
+			GlStateManager.rotate((ageInTicks % 100) / 100f * 360, 0, 1.0F, 0F);
 		}
+
+		super.renderModel(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+
+		GlStateManager.popMatrix();
+		GlStateManager.enableTexture2D();
 	}
+
 }

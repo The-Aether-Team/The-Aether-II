@@ -7,6 +7,9 @@ import com.gildedgames.aether.common.entities.living.passive.EntityGlactrix;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
+
+import javax.swing.text.html.parser.Entity;
 
 public class LayerGlactrixCrystals implements LayerRenderer<EntityGlactrix>
 {
@@ -29,20 +32,21 @@ public class LayerGlactrixCrystals implements LayerRenderer<EntityGlactrix>
 		GlStateManager.pushMatrix();
 		GlStateManager.disableTexture2D();
 
-		if (glactrix.getIsToppled())
-		{
-			GlStateManager.rotate(180F, 0,0,1.0F);
-			GlStateManager.translate(0, -2.35F, 0);
-		}
-
 		if (!glactrix.getIsSheared())
 		{
+			if (glactrix.getIsToppled())
+			{
+				GlStateManager.rotate(180F, 0,0, 1F);
+				GlStateManager.translate(0, -2.35F, 0);
+				GlStateManager.rotate(MathHelper.cos((ageInTicks % 100) / 4) * 10, 0, 0F, 1.0F);
+				GlStateManager.rotate((ageInTicks % 100) / 100f * 360, 0, 1.0F, 0F);
+			}
+
 			this.crystals.render(glactrix, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 		}
 
 		GlStateManager.enableTexture2D();
 		GlStateManager.popMatrix();
-
 	}
 
 	@Override

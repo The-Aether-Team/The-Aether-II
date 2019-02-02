@@ -5,6 +5,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.math.MathHelper;
 
 /**
  * NewProject - Undefined
@@ -116,25 +117,9 @@ public class ModelGlactrix extends ModelBase {
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-        if (entity instanceof EntityGlactrix)
-        {
-            EntityGlactrix glactrix = (EntityGlactrix)entity;
-
-            GlStateManager.pushMatrix();
-            GlStateManager.disableTexture2D();
-
-            if (glactrix.getIsToppled())
-            {
-                GlStateManager.rotate(180F, 0, 0, 1.0F);
-                GlStateManager.translate(0, -2.3F, 0);
-            }
-            this.body_main.render(f5);
-
-            GlStateManager.enableTexture2D();
-            GlStateManager.popMatrix();
-        }
-
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+    {
+        this.body_main.render(f5);
     }
 
     /**
@@ -144,5 +129,16 @@ public class ModelGlactrix extends ModelBase {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;
+    }
+
+    @Override
+    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn)
+    {
+        super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entityIn);
+
+        this.leg_front_left.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * limbSwingAmount * 3;
+        this.leg_back_left_1_1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * limbSwingAmount * 3;
+        this.leg_back_left_1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F)  * limbSwingAmount * 3;
+        this.leg_front_right.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * limbSwingAmount * 3;
     }
 }
