@@ -187,6 +187,12 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	}
 
 	@Override
+	public void resetResistance()
+	{
+		this.effectResistance = 1.0D;
+	}
+
+	@Override
 	public void setActiveEffectTimeModifier(double activeEffectTimeModifier)
 	{
 		this.activeEffectTimeModifier = activeEffectTimeModifier;

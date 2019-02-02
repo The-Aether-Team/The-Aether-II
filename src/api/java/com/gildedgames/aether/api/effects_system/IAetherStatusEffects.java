@@ -77,6 +77,11 @@ public interface IAetherStatusEffects extends NBT
 	void addResistance(double addResistance);
 
 	/**
+	 * Reset's the resistance to this effect back to defualt (1.0)
+	 */
+	void resetResistance();
+
+	/**
 	 * The active effect time varies between different effects, this modifier multiples to the active effect time.
 	 * 0.0 Modifier will reduce active effect time to 0.
 	 * 2.0 Modifier will increase active effect time by 2.

@@ -57,6 +57,17 @@ public interface IAetherStatusEffectPool
 	void addResistanceToEffect(IAetherStatusEffects.effectTypes effectType, double addResistance);
 
 	/**
+	 * Reset's a specified resistance back to its default (1.0)
+	 * @param effectType effect to reset.
+	 */
+	void resetResistanceToEffect(IAetherStatusEffects.effectTypes effectType);
+
+	/**
+	 * Reset's every effect's resistance in the pool.
+	 */
+	void resetAllResistances();
+
+	/**
 	 * Method to change how long an effect lasts.
 	 * @param effectType The effect to modify
 	 * @param activeEffectTimeModifier Multiplied by the active effect time of an effect.

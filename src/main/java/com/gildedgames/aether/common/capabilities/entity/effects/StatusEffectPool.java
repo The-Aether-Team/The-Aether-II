@@ -121,6 +121,30 @@ public class StatusEffectPool implements IAetherStatusEffectPool
 	}
 
 	@Override
+	public void resetResistanceToEffect(IAetherStatusEffects.effectTypes effectType)
+	{
+		IAetherStatusEffects effect = this.statusEffects.get(effectType.name);
+		if (effect != null)
+		{
+			effect.resetResistance();
+		}
+	}
+
+	@Override
+	public void resetAllResistances()
+	{
+		for (IAetherStatusEffects effect : this.statusEffects.values())
+		{
+			if (effect == null)
+			{
+				continue;
+			}
+
+			effect.resetResistance();
+		}
+	}
+
+	@Override
 	public void modifyActiveEffectTime(IAetherStatusEffects.effectTypes effectType, double activeEffectTimeModifier)
 	{
 		IAetherStatusEffects effect = this.statusEffects.get(effectType.name);
