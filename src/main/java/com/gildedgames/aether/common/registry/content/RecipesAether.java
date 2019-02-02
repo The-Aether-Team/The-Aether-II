@@ -45,6 +45,7 @@ public class RecipesAether
 		registerSmeltingRecipe(new ItemStack(ItemsAether.raw_taegore_meat), new ItemStack(ItemsAether.taegore_steak), 0.4f);
 		registerSmeltingRecipe(new ItemStack(ItemsAether.burrukai_rib_cut), new ItemStack(ItemsAether.burrukai_ribs), 0.4f);
 		registerSmeltingRecipe(new ItemStack(ItemsAether.kirrid_loin), new ItemStack(ItemsAether.kirrid_cutlet), 0.4f);
+		registerSmeltingRecipe(new ItemStack(ItemsAether.skyroot_lizard_stick), new ItemStack(ItemsAether.skyroot_lizard_stick_roasted), 0.65f);
 	}
 
 	public static void registerOreDictionary()

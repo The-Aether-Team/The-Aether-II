@@ -48,7 +48,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 
 	private static final Set<Item> TEMPTATION_ITEMS = Sets
 			.newHashSet(Items.WHEAT, ItemsAether.blueberries, ItemsAether.orange, ItemsAether.enchanted_blueberry, ItemsAether.enchanted_wyndberry,
-					ItemsAether.wyndberry);
+					ItemsAether.wyndberry, ItemsAether.skyroot_lizard_stick);
 
 	private static final DataParameter<Integer> REMAINING_JUMPS = EntityDataManager.createKey(EntityMoa.class, DataSerializers.VARINT);
 
@@ -234,7 +234,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 
 		if (this.isChild())
 		{
-			if (this.isHungry() && stack.getItem() == ItemsAether.aechor_petal)
+			if (this.isHungry() && (stack.getItem() == ItemsAether.aechor_petal || stack.getItem() == ItemsAether.skyroot_lizard_stick))
 			{
 				this.setIsHungry(false);
 				this.setHealth(this.getMaxHealth());

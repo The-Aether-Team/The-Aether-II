@@ -671,6 +671,9 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.candy_cane_wall, "aether_wall/candy_cane_wall");
 		registerItemModels(ItemsAether.winter_hat, "miscellaneous/winter_hat");
 		registerItemModels(ItemsAether.eggnog, "eggnog");
+
+		registerItemModels(ItemsAether.skyroot_lizard_stick, "skyroot_lizard_stick");
+		registerItemModels(ItemsAether.skyroot_lizard_stick_roasted, "skyroot_lizard_stick_roasted");
 	}
 
 	private static void registerSnowyFlower(Block block, String name)

@@ -4,16 +4,20 @@ import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherLeaves;
+import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import java.awt.Color;
 
@@ -93,6 +97,31 @@ public class EntitySkyrootLizard extends EntityAetherAnimal
 		}
 	}
 
+	@Override
+	public boolean processInteract(EntityPlayer player, EnumHand hand)
+	{
+		super.processInteract(player, hand);
+
+		ItemStack itemStack = player.getHeldItem(hand);
+
+		if (!itemStack.isEmpty())
+		{
+			if (itemStack.getItem() ==  ItemsAether.skyroot_stick || itemStack.getItem() == Items.STICK)
+			{
+				this.consumeItemFromStack(player, itemStack);
+
+				ItemStack itemStackLizard = new ItemStack(ItemsAether.skyroot_lizard_stick);
+
+				player.addItemStackToInventory(itemStackLizard);
+
+				this.world.removeEntity(this);
+
+				return true;
+			}
+		}
+
+		return false;
+	}
 
 	@Override
 	public void writeEntityToNBT(final NBTTagCompound nbt)

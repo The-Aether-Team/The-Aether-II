@@ -117,7 +117,9 @@ public class ItemsAether
 			burrukai_rib_cut = new ItemAetherFood(5, 0.3F, true).setConsumptionDuration(40),
 			burrukai_ribs = new ItemAetherFood(12, 0.5F, true).setConsumptionDuration(40),
 			kirrid_loin = new ItemAetherFood(5, 0.3F, true),
-			kirrid_cutlet = new ItemAetherFood(12, 0.5F, true);
+			kirrid_cutlet = new ItemAetherFood(12, 0.5F, true),
+			skyroot_lizard_stick = new ItemAetherFood(2, 0.5F, false).setConsumptionDuration(30),
+			skyroot_lizard_stick_roasted = new ItemAetherFood(8, 0.5F, false).setConsumptionDuration(20);
 
 	public static final ItemAetherFood candy_corn = new ItemAetherFood(4, 0.1F, false).setConsumptionDuration(5),
 			cocoatrice = new ItemAetherFood(8, 0.2F, false).setConsumptionDuration(8),
@@ -408,6 +410,9 @@ public class ItemsAether
 		r.register("plumproot_pie", plumproot_pie);
 		r.register("winter_hat", winter_hat.setCreativeTab(CreativeTabsAether.MISCELLANEOUS));
 		r.register("eggnog", eggnog.setCreativeTab(CreativeTabsAether.CONSUMABLES));
+
+		r.register("skyroot_lizard_stick", skyroot_lizard_stick.setCreativeTab(CreativeTabsAether.CONSUMABLES));
+		r.register("skyroot_lizard_stick_roasted", skyroot_lizard_stick_roasted.setCreativeTab(CreativeTabsAether.CONSUMABLES));
 	}
 
 	public static Collection<Item> getRegisteredItems()
