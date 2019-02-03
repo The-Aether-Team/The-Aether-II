@@ -62,9 +62,11 @@ public class WorldEvents
 		}
 
 		PosCondition grassCheck = new CheckBlockUnderneath(BlocksAether.aether_grass);
+		PosCondition iceCheck = new CheckBlockUnderneath(BlocksAether.highlands_packed_ice, BlocksAether.highlands_ice);
 		PosCondition groundCheck = new CheckBlockUnderneath(BlocksAether.aether_grass, BlocksAether.holystone);
 		PosCondition stoneCheck = new CheckBlockUnderneath(BlocksAether.holystone);
 		PosCondition isUnderground = new CheckIsUnderground();
+		PosCondition arcticPeaks = new CheckBiome(BiomesAether.ARCTIC_PEAKS);
 
 		/** PASSIVE **/
 		SpawnHandler animals = new SpawnHandler("aether_animals").chunkArea(4).targetEntityCountPerArea(9).updateFrequencyInTicks(200);
@@ -80,12 +82,15 @@ public class WorldEvents
 				.addCondition(grassCheck);
 		SpawnEntry carrion_sprout = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityCarrionSprout.class, 10F, 2, 3)
 				.addCondition(grassCheck);
+		SpawnEntry glactrix = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityGlactrix.class, 10F, 2, 3).addCondition(arcticPeaks)
+				.addCondition(iceCheck);
 
 		animals.addEntry(burrukai);
 		animals.addEntry(ram);
 		animals.addEntry(aerbunny);
 		animals.addEntry(taegore);
 		animals.addEntry(carrion_sprout);
+		animals.addEntry(glactrix);
 
 		/** ATMOSPHERIC **/
 		SpawnHandler atmospheric = new SpawnHandler("aether_atmospheric").chunkArea(4).targetEntityCountPerArea(9).updateFrequencyInTicks(200);
@@ -151,7 +156,7 @@ public class WorldEvents
 
 		SpawnEntry varanysUnderground = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityVaranys.class, 20f, 1, 3,
 				new UndergroundPositionSelector())
-				.addCondition(stoneCheck).addCondition(isUnderground).addCondition(new CheckBiome(BiomesAether.ARCTIC_PEAKS)).
+				.addCondition(stoneCheck).addCondition(isUnderground).addCondition(arcticPeaks).
 						addCondition(new CheckLightLevel(5)).addCondition(new CheckBlockAtPosition(Blocks.AIR));
 
 		SpawnEntry tempestUnderground = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityTempest.class, 10F, 2, 3,
