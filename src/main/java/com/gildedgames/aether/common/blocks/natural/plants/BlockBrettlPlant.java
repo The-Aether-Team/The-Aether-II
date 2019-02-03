@@ -113,7 +113,7 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 
 				else if (state.getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_MID)
 				{
-					if (world.getBlockState(pos.up()).getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_MID)
+					if (world.getBlockState(pos.up()).getBlock() == BlocksAether.brettl_plant && world.getBlockState(pos.up()).getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_MID)
 					{
 						if (rand.nextInt(5) == 0)
 						{
@@ -191,27 +191,27 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 	{
 		if (state.getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_BASE)
 		{
-			if (worldIn.isAirBlock(pos.up()) || worldIn.getBlockState(pos.up()).getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_TOP)
+			if (worldIn.getBlockState(pos.up()).getBlock() == BlocksAether.brettl_plant && (worldIn.isAirBlock(pos.up()) || worldIn.getBlockState(pos.up()).getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_TOP))
 			{
 				worldIn.setBlockState(pos.up(), this.getDefaultState().withProperty(PROPERTY_VARIANT, MID).withProperty(PROPERTY_HARVESTABLE, false));
 				worldIn.setBlockState(pos.up(2), this.getDefaultState().withProperty(PROPERTY_VARIANT, TOP).withProperty(PROPERTY_HARVESTABLE, false));
 			}
-			else if (worldIn.getBlockState(pos.up(2)).getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_TOP)
+			else if (worldIn.getBlockState(pos.up(2)).getBlock() == BlocksAether.brettl_plant && worldIn.getBlockState(pos.up(2)).getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_TOP)
 			{
 				worldIn.setBlockState(pos.up(2), this.getDefaultState().withProperty(PROPERTY_VARIANT, TOP_G).withProperty(PROPERTY_HARVESTABLE, false));
 			}
-			else if (worldIn.getBlockState(pos.up(2)).getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_TOP_G)
+			else if (worldIn.getBlockState(pos.up(2)).getBlock() == BlocksAether.brettl_plant && (worldIn.getBlockState(pos.up(2)).getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_TOP_G))
 			{
 				this.fullyGrowPlant(worldIn, pos.up(), state);
 			}
 		}
 		else if (state.getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_MID)
 		{
-			if (worldIn.getBlockState(pos.up()).getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_TOP)
+			if (worldIn.getBlockState(pos.up()).getBlock() == BlocksAether.brettl_plant && worldIn.getBlockState(pos.up()).getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_TOP)
 			{
 				worldIn.setBlockState(pos.up(), this.getDefaultState().withProperty(PROPERTY_VARIANT, TOP_G).withProperty(PROPERTY_HARVESTABLE, false));
 			}
-			else if (worldIn.getBlockState(pos.up()).getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_TOP_G)
+			else if (worldIn.getBlockState(pos.up()).getBlock() == BlocksAether.brettl_plant&& worldIn.getBlockState(pos.up()).getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_TOP_G)
 			{
 				this.fullyGrowPlant(worldIn, pos, state);
 			}
