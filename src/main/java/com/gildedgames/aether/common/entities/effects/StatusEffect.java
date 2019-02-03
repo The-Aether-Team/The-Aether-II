@@ -29,6 +29,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	protected int effectBuildup;
 	protected int effectTimer;
 	protected double effectResistance = 1.0D;
+	protected double tempEffectResistance = 0.0D;
 	protected IAetherStatusEffects.effectTypes effectType;
 	protected boolean isEffectApplied;
 	protected double activeEffectTimeModifier = 1.0D;
@@ -121,7 +122,14 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	{
 		if (!this.isEffectApplied)
 		{
-			this.potentialBuildup = this.effectBuildup + MathHelper.ceil(buildup * (this.effectResistance + additionalResistance));
+			this.tempEffectResistance = additionalResistance;
+
+			this.potentialBuildup = this.effectBuildup + MathHelper.ceil(buildup * this.calculateResistances());
+
+			if (additionalResistance > 0)
+			{
+				this.markDirty();
+			}
 
 			if (this.potentialBuildup >= 100)
 			{
@@ -130,6 +138,23 @@ public abstract class StatusEffect implements IAetherStatusEffects
 
 			this.effectTimer = 0;
 		}
+	}
+
+	@Override
+	public double calculateResistances()
+	{
+		double ret = this.effectResistance + this.tempEffectResistance;
+
+		if (ret > 2.0)
+		{
+			return 2.0;
+		}
+		if (ret < 0.0)
+		{
+			return 0.0;
+		}
+
+		return ret;
 	}
 
 	@Override
@@ -171,6 +196,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	@Override
 	public void addResistance(double addResistance)
 	{
+		this.markDirty();
 		if (this.effectResistance + addResistance >= 2.0D)
 		{
 			this.effectResistance = 2.0;
@@ -190,6 +216,8 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	public void resetResistance()
 	{
 		this.effectResistance = 1.0D;
+		this.tempEffectResistance = 0.0D;
+		this.markDirty();
 	}
 
 	@Override
@@ -214,6 +242,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 		this.effectTimer = 0;
 		this.activeEffectTimeModifier = 1.0D;
 		this.potentialBuildup = 0;
+		this.tempEffectResistance = 0;
 		this.markDirty();
 
 		AetherCore.LOGGER.info("Effect Reset : " + this.NAME + " to : " + this.livingEffected.getName());
