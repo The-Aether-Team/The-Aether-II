@@ -7,7 +7,11 @@ before_script:
 build:
   cache:
     paths:
-      - .gradle/minecraft
+      - .gradle
+      - build/classes
+      - build/resources
+      - build/sources
+      - build/tmp
   script:
     - export GRADLE_BUILD_SIGNED=true
     - ./gradlew build
