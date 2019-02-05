@@ -8,10 +8,6 @@ build:
   cache:
     paths:
       - .gradle
-      - build/classes
-      - build/resources
-      - build/sources
-      - build/tmp
   script:
     - export GRADLE_BUILD_SIGNED=true
     - ./gradlew build
