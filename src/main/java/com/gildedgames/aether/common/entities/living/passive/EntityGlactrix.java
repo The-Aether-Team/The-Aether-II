@@ -66,7 +66,6 @@ public class EntityGlactrix extends EntityAetherAnimal implements IShearable
 	{
 		super(world);
 		this.setSize(1f,1f);
-		this.spawnableBlock = BlocksAether.aether_grass;
 
 		this.favoriteBlocks.add(BlocksAether.highlands_packed_ice);
 		this.favoriteBlocks.add(BlocksAether.highlands_ice);

@@ -145,16 +145,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	{
 		double ret = this.effectResistance + this.tempEffectResistance;
 
-		if (ret > 2.0)
-		{
-			return 2.0;
-		}
-		if (ret < 0.0)
-		{
-			return 0.0;
-		}
-
-		return ret;
+		return MathHelper.clamp(ret, 0.0, 2.0);
 	}
 
 	@Override
