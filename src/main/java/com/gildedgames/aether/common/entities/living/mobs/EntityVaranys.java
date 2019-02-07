@@ -43,8 +43,8 @@ public class EntityVaranys extends EntityAetherMob implements IEntityMultiPart
 		this.tasks.addTask(0, new EntityAIUnstuckBlueAercloud(this));
 		this.tasks.addTask(1, this.lightAI);
 		this.tasks.addTask(1, new EntityAIWanderAvoidLight(this, 0.8D, 5));
-
 		this.tasks.addTask(2, new EntityAILeapAtTarget(this, 0.4F));
+		this.tasks.addTask(3, new EntityAIFleeSun(this, 1.0D));
 		this.tasks.addTask(3, new EntityAIAttackMelee(this, 1D, false));
 		this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));

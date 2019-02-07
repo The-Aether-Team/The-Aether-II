@@ -45,7 +45,7 @@ public class EntityAIHideFromLight extends EntityAIBase
 
 		BlockPos entityPos = new BlockPos(this.entity.posX, this.entity.getEntityBoundingBox().minY, this.entity.posZ);
 
-		if (this.entity.world.getLightFromNeighbors(entityPos) <= this.lightLevel || (this.entity.world.isDaytime() && this.entity.world.canSeeSky(entityPos)))
+		if (this.entity.world.getLightFromNeighbors(entityPos) <= this.lightLevel)
 		{
 			return false;
 		}
@@ -88,7 +88,7 @@ public class EntityAIHideFromLight extends EntityAIBase
 		{
 			BlockPos blockpos1 = blockpos.add(random.nextInt(20) - 10, random.nextInt(6) - 3, random.nextInt(20) - 10);
 
-			if (this.entity.world.getLightFromNeighbors(blockpos1) <= this.lightLevel && !(this.entity.world.isDaytime() && this.entity.world.canSeeSky(blockpos1)))
+			if (this.entity.world.getLightFromNeighbors(blockpos1) <= this.lightLevel)
 			{
 
 				return new Vec3d((double) blockpos1.getX(), (double) blockpos1.getY(), (double) blockpos1.getZ());
