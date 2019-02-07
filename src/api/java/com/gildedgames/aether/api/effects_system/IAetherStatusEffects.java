@@ -77,9 +77,16 @@ public interface IAetherStatusEffects extends NBT
 	void addResistance(double addResistance);
 
 	/**
-	 * Reset's the resistance to this effect back to defualt (1.0)
+	 * Reset's the resistance to this effect back to default (1.0)
 	 */
 	void resetResistance();
+
+	/**
+	 * Calculates all resistances, including temporary ones (like from Ambrosium Poisoning effect),
+	 * and ensures they are in the correct value ranges, and returns result.
+	 * @return calculated resistance, including temporary resistance.
+	 */
+	double calculateResistances();
 
 	/**
 	 * The active effect time varies between different effects, this modifier multiples to the active effect time.
