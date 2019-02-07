@@ -62,7 +62,7 @@ public class WorldEvents
 		}
 
 		PosCondition grassCheck = new CheckBlockUnderneath(BlocksAether.aether_grass);
-		PosCondition iceCheck = new CheckBlockUnderneath(BlocksAether.highlands_packed_ice, BlocksAether.highlands_ice);
+		PosCondition iceCheck = new CheckBlockUnderneath(BlocksAether.highlands_packed_ice, BlocksAether.highlands_ice, BlocksAether.aether_grass);
 		PosCondition groundCheck = new CheckBlockUnderneath(BlocksAether.aether_grass, BlocksAether.holystone);
 		PosCondition stoneCheck = new CheckBlockUnderneath(BlocksAether.holystone);
 		PosCondition isUnderground = new CheckIsUnderground();
@@ -82,7 +82,7 @@ public class WorldEvents
 				.addCondition(grassCheck);
 		SpawnEntry carrion_sprout = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityCarrionSprout.class, 10F, 2, 3)
 				.addCondition(grassCheck);
-		SpawnEntry glactrix = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityGlactrix.class, 10F, 2, 3).addCondition(arcticPeaks)
+		SpawnEntry glactrix = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityGlactrix.class, 20F, 2, 3).addCondition(arcticPeaks)
 				.addCondition(iceCheck);
 
 		animals.addEntry(burrukai);

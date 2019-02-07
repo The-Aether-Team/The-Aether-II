@@ -141,6 +141,9 @@ public class ModelGlactrix extends ModelBase {
 
         EntityGlactrix glactrix = (EntityGlactrix) entityIn;
 
+        this.head.rotateAngleX = headPitch * 0.017453292F;
+        this.head.rotateAngleY = netHeadYaw * 0.017453292F;
+
         float swingVal = glactrix.getIsToppled() ? (ageInTicks % 100) : limbSwing;
         float swingAmount = glactrix.getIsToppled() ? .5f : (limbSwingAmount * 4f);
 

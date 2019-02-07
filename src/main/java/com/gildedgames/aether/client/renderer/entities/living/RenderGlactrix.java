@@ -21,7 +21,7 @@ public class RenderGlactrix extends RenderLiving<EntityGlactrix>
 
 	public RenderGlactrix(RenderManager renderManager)
 	{
-		super(renderManager, new ModelGlactrix(), 0.75f);
+		super(renderManager, new ModelGlactrix(), 0.4f);
 
 		this.addLayer(new LayerGlactrixCrystals(this));
 	}
