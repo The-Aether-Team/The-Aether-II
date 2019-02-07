@@ -5,6 +5,7 @@ import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
 import com.gildedgames.aether.api.effects_system.EEffectIntensity;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffectIntensity;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
+import com.gildedgames.aether.api.items.loot.Loot;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
@@ -436,17 +437,22 @@ public class EntitySwet extends EntityExtendedMob
 	@Override
 	protected ResourceLocation getLootTable()
 	{
-		switch (this.getType())
+		if (this.getFoodSaturation() > 0)
 		{
-			case BLUE:
-				return LootTablesAether.ENTITY_SWET_BLUE;
-			case GREEN:
-				return LootTablesAether.ENTITY_SWET_GREEN;
-			case PURPLE:
-				return LootTablesAether.ENTITY_SWET_PURPLE;
-			default:
-				return LootTablesAether.ENTITY_SWET;
+			switch (this.getType())
+			{
+				case BLUE:
+					return LootTablesAether.ENTITY_SWET_BLUE;
+				case GREEN:
+					return LootTablesAether.ENTITY_SWET_GREEN;
+				case PURPLE:
+					return LootTablesAether.ENTITY_SWET_PURPLE;
+				default:
+					return LootTablesAether.ENTITY_SWET;
+			}
 		}
+
+		return null;
 	}
 
 	@SideOnly(Side.CLIENT)
