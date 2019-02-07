@@ -4,6 +4,7 @@ import com.gildedgames.aether.client.models.entities.living.ModelGlactrixCrystal
 import com.gildedgames.aether.client.renderer.entities.living.RenderGlactrix;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.living.passive.EntityGlactrix;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.util.ResourceLocation;
@@ -13,7 +14,8 @@ import javax.swing.text.html.parser.Entity;
 
 public class LayerGlactrixCrystals implements LayerRenderer<EntityGlactrix>
 {
-	private static final ResourceLocation texture = AetherCore.getResource("textures/entities/kirrid/kirrid_wool.png");
+	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/entities/glactrix/glactrix_crystals.png");
+
 	private final ModelGlactrixCrystals crystals = new ModelGlactrixCrystals();
 
 	private final RenderGlactrix render;
@@ -30,7 +32,7 @@ public class LayerGlactrixCrystals implements LayerRenderer<EntityGlactrix>
 		this.crystals.setModelAttributes(this.render.getMainModel());
 
 		GlStateManager.pushMatrix();
-		GlStateManager.disableTexture2D();
+		Minecraft.getMinecraft().renderEngine.bindTexture(TEXTURE);
 
 		if (!glactrix.getIsSheared())
 		{
@@ -45,7 +47,6 @@ public class LayerGlactrixCrystals implements LayerRenderer<EntityGlactrix>
 			this.crystals.render(glactrix, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 		}
 
-		GlStateManager.enableTexture2D();
 		GlStateManager.popMatrix();
 	}
 

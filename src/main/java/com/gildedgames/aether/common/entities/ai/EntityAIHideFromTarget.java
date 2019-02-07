@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.entities.ai;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.pathfinding.Path;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -54,7 +55,7 @@ public class EntityAIHideFromTarget extends EntityAIBase
 
 		for (final Object o : entities)
 		{
-			if (o instanceof EntityLivingBase)
+			if (o instanceof EntityLivingBase && !(o instanceof EntityPlayer && ((EntityPlayer) o).isCreative()))
 			{
 				toHideFrom = (EntityLivingBase) o;
 			}

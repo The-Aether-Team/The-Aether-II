@@ -5,6 +5,7 @@ import com.gildedgames.aether.client.renderer.EyeUtil;
 import com.gildedgames.aether.client.renderer.entities.living.layers.LayerGlactrixCrystals;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.living.passive.EntityGlactrix;
+import io.netty.handler.codec.spdy.SpdyHeaderBlockRawDecoder;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -16,13 +17,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RenderGlactrix extends RenderLiving<EntityGlactrix>
 {
-	private static final ResourceLocation texture = AetherCore.getResource("textures/entities/taegore/taegore.png");
-
-	private static final ResourceLocation PUPIL_LEFT = AetherCore.getResource("textures/entities/taegore/pupil_left.png");
-
-	private static final ResourceLocation PUPIL_RIGHT = AetherCore.getResource("textures/entities/taegore/pupil_right.png");
-
-	private static final ResourceLocation EYES_CLOSED = AetherCore.getResource("textures/entities/taegore/eyes_closed.png");
+	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/entities/glactrix/glactrix.png");
 
 	public RenderGlactrix(RenderManager renderManager)
 	{
@@ -42,15 +37,13 @@ public class RenderGlactrix extends RenderLiving<EntityGlactrix>
 	@Override
 	protected ResourceLocation getEntityTexture(EntityGlactrix entity)
 	{
-		return texture;
+		return TEXTURE;
 	}
 
 	@Override
 	protected void renderModel(EntityGlactrix entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
-		GlStateManager.disableTexture2D();
 		GlStateManager.pushMatrix();
-		GlStateManager.disableTexture2D();
 
 		if (entity.getIsToppled())
 		{
@@ -63,7 +56,6 @@ public class RenderGlactrix extends RenderLiving<EntityGlactrix>
 		super.renderModel(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
 		GlStateManager.popMatrix();
-		GlStateManager.enableTexture2D();
 	}
 
 }

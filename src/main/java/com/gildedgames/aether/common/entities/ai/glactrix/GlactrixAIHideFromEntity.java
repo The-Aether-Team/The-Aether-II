@@ -37,7 +37,7 @@ public class GlactrixAIHideFromEntity extends EntityAIBase
 
 		for (final Object o : entities)
 		{
-			if (o instanceof EntityAetherMob || o instanceof EntityPlayer)
+			if (o instanceof EntityLivingBase && !(o instanceof EntityPlayer && ((EntityPlayer) o).isCreative()))
 			{
 				threat = (EntityLivingBase) o;
 			}
