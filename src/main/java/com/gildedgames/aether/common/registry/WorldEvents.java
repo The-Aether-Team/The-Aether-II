@@ -127,8 +127,12 @@ public class WorldEvents
 		SpawnEntry cockatrice = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityCockatrice.class, 12F, 1, 1)
 				.addCondition(groundCheck).addCondition(new CheckTime(CheckTime.Time.NIGHT));
 
+		SpawnEntry varanys = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityVaranys.class, 10f,1,2)
+				.addCondition(groundCheck).addCondition(new CheckTime(CheckTime.Time.NIGHT)).addCondition(arcticPeaks);
+
 		nighttimeHostiles.addEntry(tempest);
 		nighttimeHostiles.addEntry(cockatrice);
+		nighttimeHostiles.addEntry(varanys);
 
 		/** FLYING **/
 		SpawnHandler flying = new SpawnHandler("aether_flying")
