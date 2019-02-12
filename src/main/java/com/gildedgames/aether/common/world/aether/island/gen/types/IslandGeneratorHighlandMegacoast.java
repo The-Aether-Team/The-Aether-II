@@ -17,7 +17,7 @@ import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandChunkMaskTransformer;
 import com.gildedgames.aether.common.world.aether.noise.NoiseGeneratorIslandTerrain;
 import com.gildedgames.orbis_api.preparation.IChunkMaskTransformer;
-import com.gildedgames.orbis_api.preparation.impl.ChunkSegmentMask;
+import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
 
 public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 {
@@ -38,10 +38,8 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 	private static final double ISLAND_EDGE = 0.75;
 
 	@Override
-	public void generateChunkSegment(IAetherChunkColumnInfo info, ChunkSegmentMask mask, IIslandData island, int chunkX, int chunkY, int chunkZ)
+	public void generateChunkSegment(IAetherChunkColumnInfo info, ChunkMask mask, IIslandData island, int chunkX, int chunkZ)
 	{
-		int yOffset = chunkY * 16;
-
 		HighlandMegacostChunkColumnInfo column = info.getIslandData(0, HighlandMegacostChunkColumnInfo.class);
 
 		for (int x = 0; x < 16; x++)
@@ -51,14 +49,14 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 				final int topHeight = (int) column.topHeight.get(x, z);
 				final int bottomHeight = (int) column.bottomHeight.get(x, z);
 
-				final int minY = Math.max(BOTTOM_MAX_Y - bottomHeight - yOffset, 0);
-				final int maxY = Math.min(BOTTOM_MAX_Y + topHeight - yOffset, 15);
+				final int minY = Math.max(BOTTOM_MAX_Y - bottomHeight, 0);
+				final int maxY = Math.min(BOTTOM_MAX_Y + topHeight, 255);
 
 				final boolean coast = topHeight < 3;
 
 				for (int y = minY; y <= maxY; y++)
 				{
-					if (coast && y + yOffset > BOTTOM_MAX_Y - 2)
+					if (coast && y > BOTTOM_MAX_Y - 2)
 					{
 						mask.setBlock(x, y, z, IslandBlockType.COAST_BLOCK.ordinal());
 					}

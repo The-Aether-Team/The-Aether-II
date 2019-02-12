@@ -4,7 +4,7 @@ import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.orbis_api.core.PlacedBlueprint;
 import com.gildedgames.orbis_api.preparation.IPrepRegistryEntry;
 import com.gildedgames.orbis_api.preparation.IPrepSectorData;
-import com.gildedgames.orbis_api.preparation.impl.ChunkSegmentMask;
+import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
 import com.gildedgames.orbis_api.preparation.impl.util.BlockAccessPrep;
 import com.gildedgames.orbis_api.util.mc.BlockUtil;
 import net.minecraft.block.state.IBlockState;
@@ -46,7 +46,6 @@ public class BlockAccessIsland extends BlockAccessPrep
 	public IBlockState getBlockState(BlockPos pos)
 	{
 		int chunkX = pos.getX() >> 4;
-		int chunkY = pos.getY() >> 4;
 		int chunkZ = pos.getZ() >> 4;
 
 		List<PlacedBlueprint> placedBlueprints = this.island.getPlacedBlueprintsInChunk(chunkX, chunkZ);
@@ -72,8 +71,8 @@ public class BlockAccessIsland extends BlockAccessPrep
 			}
 		}
 
-		ChunkSegmentMask chunk = this.getChunk(chunkX, chunkY, chunkZ);
+		ChunkMask chunk = this.getChunk(chunkX, chunkZ);
 
-		return this.transformer.getBlockState(chunk.getBlock(pos.getX() & 15, pos.getY() & 15, pos.getZ() & 15));
+		return this.transformer.getBlockState(chunk.getBlock(pos.getX() & 15, pos.getY(), pos.getZ() & 15));
 	}
 }

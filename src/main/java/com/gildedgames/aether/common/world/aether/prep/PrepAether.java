@@ -17,7 +17,7 @@ import com.gildedgames.aether.common.world.aether.island.gen.IslandChunkMaskTran
 import com.gildedgames.orbis_api.preparation.IChunkMaskTransformer;
 import com.gildedgames.orbis_api.preparation.IPrepRegistryEntry;
 import com.gildedgames.orbis_api.preparation.IPrepSectorData;
-import com.gildedgames.orbis_api.preparation.impl.ChunkSegmentMask;
+import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
 import com.gildedgames.orbis_api.util.XoShiRoRandom;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
@@ -119,7 +119,7 @@ public class PrepAether implements IPrepRegistryEntry<IAetherChunkColumnInfo>
 	}
 
 	@Override
-	public void threadSafeGenerateMask(IAetherChunkColumnInfo info, World world, IPrepSectorData sectorData, ChunkSegmentMask mask, int x, int y, int z)
+	public void threadSafeGenerateMask(IAetherChunkColumnInfo info, World world, IPrepSectorData sectorData, ChunkMask mask, int x, int z)
 	{
 		IChunkGenerator generator = world.provider.createChunkGenerator();
 
@@ -130,7 +130,7 @@ public class PrepAether implements IPrepRegistryEntry<IAetherChunkColumnInfo>
 
 			IIslandData islandData = aetherData.getIslandData();
 
-			aetherGen.generateBaseTerrain(info, mask, islandData, x, y, z);
+			aetherGen.generateBaseTerrain(info, mask, islandData, x, z);
 		}
 	}
 

@@ -22,7 +22,7 @@ import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandChunkMaskTransformer;
 import com.gildedgames.aether.common.world.aether.noise.NoiseGeneratorIslandTerrain;
 import com.gildedgames.orbis_api.preparation.IChunkMaskTransformer;
-import com.gildedgames.orbis_api.preparation.impl.ChunkSegmentMask;
+import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
 import com.gildedgames.orbis_api.util.ObjectFilter;
 import net.minecraft.util.math.MathHelper;
 
@@ -42,11 +42,9 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 	private static final double ISLAND_EDGE = 0.75;
 
 	@Override
-	public void generateChunkSegment(IAetherChunkColumnInfo info, ChunkSegmentMask mask, IIslandData island, int chunkX, int chunkY, int chunkZ)
+	public void generateChunkSegment(IAetherChunkColumnInfo info, ChunkMask mask, IIslandData island, int chunkX, int chunkZ)
 	{
 		IrradiatedForestsChunkColumnData column = info.getIslandData(0, IrradiatedForestsChunkColumnData.class);
-
-		int yOffset = chunkY * 16;
 
 		for (int x = 0; x < 16; x++)
 		{
@@ -68,8 +66,8 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 					continue;
 				}
 
-				final int minY = Math.max(BOTTOM_HEIGHT - bottomHeight - yOffset, 0);
-				final int maxY = Math.min(BOTTOM_HEIGHT + topHeight - yOffset, 15);
+				final int minY = Math.max(BOTTOM_HEIGHT - bottomHeight, 0);
+				final int maxY = Math.min(BOTTOM_HEIGHT + topHeight, 255);
 
 				boolean mossy = column.distToCrack.get(x, z) < 12.0D;
 

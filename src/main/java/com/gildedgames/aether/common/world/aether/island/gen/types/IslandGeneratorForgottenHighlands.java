@@ -4,7 +4,7 @@
 //import com.gildedgames.aether.api.util.OpenSimplexNoise;
 //import com.gildedgames.aether.api.world.islands.IIslandData;
 //import com.gildedgames.aether.api.world.islands.IIslandGenerator;
-//import com.gildedgames.orbis_api.preparation.impl.ChunkSegmentMask;
+//import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
 //import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
 //import net.minecraft.world.biome.Biome;
 //import net.minecraft.world.chunk.ChunkPrimer;
@@ -135,7 +135,7 @@
 //	}
 //
 //	@Override
-//	public void genMask(Biome[] biomes, OpenSimplexNoise noise, IBlockAccessExtended access, ChunkSegmentMask mask, IIslandData island,
+//	public void genMask(Biome[] biomes, OpenSimplexNoise noise, IBlockAccessExtended access, ChunkMask mask, IIslandData island,
 //			int chunkX, int chunkZ)
 //	{
 //		final double[] height3D = generate3DNoise(noise, island, chunkX, chunkZ, 0, 300.0D, 0.5D, false);
@@ -185,7 +185,7 @@
 //	}
 //
 //	@Override
-//	public void genChunk(Biome[] biomes, OpenSimplexNoise noise, IBlockAccessExtended access, ChunkSegmentMask mask, ChunkPrimer primer, IIslandData island,
+//	public void genChunk(Biome[] biomes, OpenSimplexNoise noise, IBlockAccessExtended access, ChunkMask mask, ChunkPrimer primer, IIslandData island,
 //			int chunkX, int chunkZ)
 //	{
 //		mask.createChunk(primer, new IslandChunkMaskTransformer());

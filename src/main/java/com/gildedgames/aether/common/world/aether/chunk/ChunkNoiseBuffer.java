@@ -25,14 +25,15 @@ public class ChunkNoiseBuffer implements IChunkNoiseBuffer
 		final double z0 = z / noiseScaleFactor;
 
 		final int integerX = (int) x0;
-		final double fractionX = x0 - integerX;
-
 		final int integerZ = (int) z0;
+
+		final double fractionX = x0 - integerX;
 		final double fractionZ = z0 - integerZ;
 
-		final double a = source[(integerX * sampleCount) + integerZ];
+		final double a = source[(integerX * sampleCount) + (integerZ)];
 		final double b = source[(integerX * sampleCount) + (integerZ + 1)];
-		final double c = source[((integerX + 1) * sampleCount) + integerZ];
+
+		final double c = source[((integerX + 1) * sampleCount) + (integerZ)];
 		final double d = source[((integerX + 1) * sampleCount) + (integerZ + 1)];
 
 		return (1.0 - fractionX) * ((1.0 - fractionZ) * a + fractionZ * b) +

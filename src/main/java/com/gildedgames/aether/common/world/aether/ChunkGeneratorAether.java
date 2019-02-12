@@ -10,7 +10,7 @@ import com.gildedgames.orbis_api.data.region.IRegion;
 import com.gildedgames.orbis_api.data.region.Region;
 import com.gildedgames.orbis_api.preparation.IChunkMaskTransformer;
 import com.gildedgames.orbis_api.preparation.impl.ChunkDataContainer;
-import com.gildedgames.orbis_api.preparation.impl.ChunkSegmentMask;
+import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
 import com.gildedgames.orbis_api.processing.BlockAccessChunkDataContainer;
 import com.gildedgames.orbis_api.processing.DataPrimer;
 import net.minecraft.entity.EnumCreatureType;
@@ -68,18 +68,13 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		AetherChunkColumnInfo info = new AetherChunkColumnInfo(1);
 		info.setIslandData(0, this.generateChunkColumnInfo(islandData, chunkX, chunkZ));
 
-		ChunkSegmentMask[] masks = new ChunkSegmentMask[16];
+		ChunkMask mask = new ChunkMask(chunkX, chunkZ);
 
-		for (int chunkY = 0; chunkY < 16; chunkY++)
-		{
-			masks[chunkY] = new ChunkSegmentMask(chunkX, chunkY, chunkZ);
-
-			this.preparation.generateFull(info, masks[chunkY], islandData, chunkX, chunkY, chunkZ, this.world.getSeed());
-		}
+		this.preparation.generateFull(info, mask, islandData, chunkX, chunkZ, this.world.getSeed());
 
 		IChunkMaskTransformer transformer = islandData.getGenerator().createMaskTransformer(islandData, chunkX, chunkZ);
 
-		final ChunkDataContainer data = ChunkDataContainer.createFromChunkSegmentMasks(this.world, masks, transformer, chunkX, chunkZ);
+		final ChunkDataContainer data = ChunkDataContainer.createFromMask(this.world, mask, transformer, chunkX, chunkZ);
 
 		final BlockAccessChunkDataContainer blockAccess = new BlockAccessChunkDataContainer(this.world, data);
 
@@ -169,9 +164,9 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		return null;
 	}
 
-	public void generateBaseTerrain(IAetherChunkColumnInfo info, ChunkSegmentMask mask, IIslandData islandData, int x, int y, int z)
+	public void generateBaseTerrain(IAetherChunkColumnInfo info, ChunkMask mask, IIslandData islandData, int x, int z)
 	{
-		this.preparation.generateBaseTerrain(info, mask, islandData, x, y, z, this.world.getSeed());
+		this.preparation.generateBaseTerrain(info, mask, islandData, x, z, this.world.getSeed());
 	}
 
 	public IIslandChunkColumnInfo generateChunkColumnInfo(IIslandData islandData, int chunkX, int chunkZ)

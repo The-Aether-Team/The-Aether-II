@@ -19,7 +19,7 @@ import com.gildedgames.aether.common.world.aether.island.gen.IslandChunkMaskTran
 import com.gildedgames.aether.common.world.aether.island.gen.IslandVariables;
 import com.gildedgames.aether.common.world.aether.noise.NoiseGeneratorIslandTerrain;
 import com.gildedgames.orbis_api.preparation.IChunkMaskTransformer;
-import com.gildedgames.orbis_api.preparation.impl.ChunkSegmentMask;
+import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
 import net.minecraft.util.math.MathHelper;
 
 public class IslandGeneratorHighlands implements IIslandGenerator
@@ -68,11 +68,9 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 	}
 
 	@Override
-	public void generateChunkSegment(IAetherChunkColumnInfo columnInfo, ChunkSegmentMask mask, IIslandData island, int chunkX, int chunkY, int chunkZ)
+	public void generateChunkSegment(IAetherChunkColumnInfo columnInfo, ChunkMask mask, IIslandData island, int chunkX, int chunkZ)
 	{
 		HighlandsChunkColumnInfo info = columnInfo.getIslandData(0, HighlandsChunkColumnInfo.class);
-
-		int yOffset = chunkY * 16;
 
 		for (int x = 0; x < 16; x++)
 		{
@@ -83,10 +81,10 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 
 				boolean snowy = this.vars.hasSnowCaps() && maxY > (ISLAND_BOTTOM_HEIGHT + (this.vars.getMaxTerrainHeight() * 0.7));
 
-				int m1a = Math.max(minY - yOffset, 0);
-				int m1b = Math.min(maxY - yOffset, 15);
+				int m1a = Math.max(minY, 0);
+				int m1b = Math.min(maxY, 255);
 
-				int snowThreshold = maxY - yOffset - 8;
+				int snowThreshold = maxY - 8;
 
 				for (int y = m1a; y <= m1b; y++)
 				{
@@ -106,8 +104,8 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 
 					if (maxY <= coastMaxY)
 					{
-						int m3a = Math.min(coastMaxY - yOffset, 15);
-						int m3b = Math.max(ISLAND_BOTTOM_HEIGHT - yOffset, 0);
+						int m3a = Math.min(coastMaxY, 255);
+						int m3b = Math.max(ISLAND_BOTTOM_HEIGHT, 0);
 
 						for (int y = m3a; y >= m3b; y--)
 						{

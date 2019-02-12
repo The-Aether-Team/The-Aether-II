@@ -1,23 +1,16 @@
 package com.gildedgames.aether.common.world.aether.features;
 
 import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
-import com.gildedgames.orbis_api.preparation.impl.ChunkSegmentMask;
+import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
 import com.gildedgames.orbis_api.util.XoShiRoRandom;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
-
-import java.util.Random;
 
 public class WorldGenUndergroundVeins
 {
 	protected final int range = 12;
 
-	protected final ThreadLocal<XoShiRoRandom> rand = ThreadLocal.withInitial(XoShiRoRandom::new);
-
-	protected void addTunnel(long seed, int originalX, int originalZ, ChunkSegmentMask mask, double t1, double t2,
-			double t3, float r1, float r2, float r3, int s1, int s2, double q,
-			Biome[] biomes)
+	protected void addTunnel(long seed, int originalX, int originalZ, ChunkMask mask, double t1, double t2,
+			double t3, float r1, float r2, float r3, int s1, int s2, double q)
 	{
 		double d0 = (double) (originalX * 16 + 8);
 		double d1 = (double) (originalZ * 16 + 8);
@@ -70,9 +63,9 @@ public class WorldGenUndergroundVeins
 			if (!flag2 && s1 == j && r1 > 1.0F && s2 > 0)
 			{
 				this.addTunnel(random.nextLong(), originalX, originalZ, mask, t1, t2, t3,
-						random.nextFloat() * 0.5F + 0.5F, r2 - ((float) Math.PI / 2F), r3 / 3.0F, s1, s2, 1.0D, biomes);
+						random.nextFloat() * 0.5F + 0.5F, r2 - ((float) Math.PI / 2F), r3 / 3.0F, s1, s2, 1.0D);
 				this.addTunnel(random.nextLong(), originalX, originalZ, mask, t1, t2, t3,
-						random.nextFloat() * 0.5F + 0.5F, r2 + ((float) Math.PI / 2F), r3 / 3.0F, s1, s2, 1.0D, biomes);
+						random.nextFloat() * 0.5F + 0.5F, r2 + ((float) Math.PI / 2F), r3 / 3.0F, s1, s2, 1.0D);
 				return;
 			}
 
@@ -138,7 +131,7 @@ public class WorldGenUndergroundVeins
 							{
 								if (l1 >= 0 && l1 < 256)
 								{
-									if (this.isOceanBlock(mask, j1, l1, k1, originalX, originalZ))
+									if (this.isOceanBlock(mask, j1, l1, k1))
 									{
 										flag3 = true;
 									}
@@ -172,14 +165,13 @@ public class WorldGenUndergroundVeins
 										if (d9 > -0.7D && d10 * d10 + d9 * d9 + d8 * d8 < 1.0D)
 										{
 											int blockType1 = mask.getBlock(j3, j2, i2);
-											int blockType2 = mask.getBlock(j3, j2 + 1, i2);
 
-											if (this.isTopBlock(mask, biomes, j3, j2, i2, originalX, originalZ))
+											if (this.isTopBlock(mask, j3, j2, i2))
 											{
 												flag1 = true;
 											}
 
-											this.digBlock(mask, j3, j2, i2, originalX, originalZ, flag1, blockType1, blockType2);
+											this.digBlock(mask, j3, j2, i2, flag1, blockType1);
 										}
 									}
 								}
@@ -196,21 +188,20 @@ public class WorldGenUndergroundVeins
 		}
 	}
 
-	protected boolean canReplaceBlock(int state, int above)
+	protected boolean canReplaceBlock(int state)
 	{
 		return state == IslandBlockType.STONE_BLOCK.ordinal() || state == IslandBlockType.COAST_BLOCK.ordinal() || state == IslandBlockType.FERROSITE_BLOCK
 				.ordinal();
 	}
 
-	protected boolean isOceanBlock(ChunkSegmentMask data, int x, int y, int z, int chunkX, int chunkZ)
+	protected boolean isOceanBlock(ChunkMask data, int x, int y, int z)
 	{
 		return data.getBlock(x, y, z) == IslandBlockType.WATER_BLOCK.ordinal();
 	}
 
-	public void generate(World worldIn, int x, int z, ChunkSegmentMask mask, Biome[] biomes)
+	public void generate(long seed, int x, int z, ChunkMask mask)
 	{
-		XoShiRoRandom rand = this.rand.get();
-		rand.setSeed(worldIn.getSeed());
+		XoShiRoRandom rand = new XoShiRoRandom(seed);
 
 		int i = this.range;
 
@@ -224,9 +215,9 @@ public class WorldGenUndergroundVeins
 				long j1 = (long) l * j;
 				long k1 = (long) i1 * k;
 
-				rand.setSeed(j1 ^ k1 ^ worldIn.getSeed());
+				rand.setSeed(j1 ^ k1 ^ seed);
 
-				this.recursiveGenerate(worldIn, l, i1, x, z, mask, biomes);
+				this.recursiveGenerate(rand, seed, l, i1, x, z, mask);
 			}
 		}
 	}
@@ -234,9 +225,9 @@ public class WorldGenUndergroundVeins
 	/**
 	 * Recursively called by generate()
 	 */
-	protected void recursiveGenerate(World world, int chunkX, int chunkZ, int originalX, int originalZ, ChunkSegmentMask mask, Biome[] biomes)
+	protected void recursiveGenerate(XoShiRoRandom rand, long seed, int chunkX, int chunkZ, int originalX, int originalZ, ChunkMask mask)
 	{
-		Random rand = this.rand.get();
+		rand.setSeed(seed);
 
 		int i = rand.nextInt(rand.nextInt(rand.nextInt(10) + 1) + 1);
 
@@ -261,7 +252,7 @@ public class WorldGenUndergroundVeins
 
 				if (rand.nextInt(4) == 0)
 				{
-					this.addTunnel(rand.nextLong(), originalX, originalZ, mask, x, y, z, f2, f, f1, 0, 0, 0.5D, biomes);
+					this.addTunnel(rand.nextLong(), originalX, originalZ, mask, x, y, z, f2, f, f1, 0, 0, 0.5D);
 					tunnels += rand.nextInt(2);
 				}
 
@@ -270,20 +261,20 @@ public class WorldGenUndergroundVeins
 					f2 *= rand.nextFloat() * rand.nextFloat() * 3.0F + 1.0F;
 				}
 
-				this.addTunnel(rand.nextLong(), originalX, originalZ, mask, x, y, z, f2, f, f1, 0, 0, 0.5D, biomes);
+				this.addTunnel(rand.nextLong(), originalX, originalZ, mask, x, y, z, f2, f, f1, 0, 0, 0.5D);
 			}
 
 		}
 	}
 
-	private boolean isTopBlock(ChunkSegmentMask data, Biome[] biomes, int x, int y, int z, int chunkX, int chunkZ)
+	private boolean isTopBlock(ChunkMask data, int x, int y, int z)
 	{
 		return data.getBlock(x, y, z) == IslandBlockType.TOPSOIL_BLOCK.ordinal();
 	}
 
-	private void digBlock(ChunkSegmentMask data, int x, int y, int z, int chunkX, int chunkZ, boolean foundTop, int state, int up)
+	private void digBlock(ChunkMask data, int x, int y, int z, boolean foundTop, int state)
 	{
-		if ((this.canReplaceBlock(state, up) || state == IslandBlockType.SOIL_BLOCK.ordinal()) && state != IslandBlockType.TOPSOIL_BLOCK.ordinal())
+		if ((this.canReplaceBlock(state) || state == IslandBlockType.SOIL_BLOCK.ordinal()) && state != IslandBlockType.TOPSOIL_BLOCK.ordinal())
 		{
 			data.setBlock(x, y, z, IslandBlockType.VEIN_BLOCK.ordinal());
 
