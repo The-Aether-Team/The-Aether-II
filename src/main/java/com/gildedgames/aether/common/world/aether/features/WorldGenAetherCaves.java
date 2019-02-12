@@ -248,7 +248,7 @@ public class WorldGenAetherCaves
 
 				rand.setSeed(j1 ^ k1 ^ seed);
 
-				this.recursiveGenerate(rand, seed, chunkX, chunkZ, centerChunkX, centerChunkZ, mask);
+				this.recursiveGenerate(rand, chunkX, chunkZ, centerChunkX, centerChunkZ, mask);
 			}
 		}
 	}
@@ -256,10 +256,8 @@ public class WorldGenAetherCaves
 	/**
 	 * Recursively called by generate()
 	 */
-	protected void recursiveGenerate(XoShiRoRandom rand, long seed, int chunkX, int chunkZ, int centerChunkX, int centerChunkZ, ChunkMask mask)
+	protected void recursiveGenerate(XoShiRoRandom rand, int chunkX, int chunkZ, int centerChunkX, int centerChunkZ, ChunkMask mask)
 	{
-		rand.setSeed(seed);
-
 		int tunnelsPerChunk = rand.nextInt(rand.nextInt(rand.nextInt(10) + 1) + 1);
 
 		if (rand.nextInt(5) != 0)
