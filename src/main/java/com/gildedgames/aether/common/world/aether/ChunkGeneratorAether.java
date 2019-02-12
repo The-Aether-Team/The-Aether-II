@@ -13,6 +13,7 @@ import com.gildedgames.orbis_api.preparation.impl.ChunkDataContainer;
 import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
 import com.gildedgames.orbis_api.processing.BlockAccessChunkDataContainer;
 import com.gildedgames.orbis_api.processing.DataPrimer;
+import com.gildedgames.orbis_api.util.XoShiRoRandom;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -44,7 +45,7 @@ public class ChunkGeneratorAether implements IChunkGenerator
 			this.world.setSeaLevel(0);
 		}
 
-		this.rand = new Random(seed);
+		this.rand = new XoShiRoRandom(seed);
 		this.preparation = new WorldPreparationAether(this.world, WorldProviderAether.get(world).getNoise());
 	}
 
