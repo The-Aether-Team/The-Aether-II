@@ -47,8 +47,7 @@ public class BiomeIrradiatedForests extends BiomeAetherBase
 	@Override
 	public Collection<NBT> createIslandComponents(final IIslandData islandData)
 	{
-		return Lists.newArrayList(new IrradiatedForestsData(120, islandData.getSeed(), islandData.getBounds().getWidth(), islandData.getBounds().getLength(),
-				new BlockPos(islandData.getBounds().getMinX(), islandData.getBounds().getMinY(), islandData.getBounds().getMinZ())));
+		return Lists.newArrayList(new IrradiatedForestsData(120, islandData.getSeed(), islandData.getBounds()));
 	}
 
 	@Override

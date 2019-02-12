@@ -1,7 +1,8 @@
 package com.gildedgames.aether.common.world.aether.island.gen;
 
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
-import com.gildedgames.aether.common.world.aether.island.gen.highlands.IslandGeneratorHighlandMegacoast;
+import com.gildedgames.aether.common.world.aether.island.gen.types.IslandGeneratorHighlandMegacoast;
+import com.gildedgames.aether.common.world.aether.island.gen.types.IslandGeneratorIrradiatedForests;
 
 public class IslandGenerators
 {

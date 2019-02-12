@@ -1,14 +1,15 @@
 package com.gildedgames.aether.api.world.islands;
 
+import com.gildedgames.aether.api.world.noise.IChunkHeightmap;
+import com.gildedgames.aether.api.world.noise.IChunkNoiseBuffer;
+
 public interface IIslandChunkColumnInfo
 {
-	INoiseProvider getTerrainDepthBuffer();
+	IChunkNoiseBuffer getTerrainDepthBuffer();
 
-	INoiseProvider getCloudDepthBuffer();
+	IChunkNoiseBuffer getCloudDepthBuffer();
 
-	int getHeight(int x, int y);
+	IChunkHeightmap getHeightmap();
 
-	void setHeight(int x, int y, int height);
-
-	boolean isEmpty();
+	boolean hasSoil(int x, int z);
 }

@@ -1,89 +1,49 @@
 package com.gildedgames.aether.common.world.aether.island.nodename.as3delaunay;
 
-import java.util.ArrayList;
-
-public final class EdgeList implements IDisposable
+public final class EdgeList
 {
 
-	private final double _deltax;
+	private final double deltaX;
 
-	private final double _xmin;
+	private final double minX;
 
-	private final int _hashsize;
+	private final int hashSize;
 
-	public Halfedge leftEnd;
+	private final HalfEdge leftEnd;
 
-	public Halfedge rightEnd;
+	private final HalfEdge rightEnd;
 
-	private ArrayList<Halfedge> _hash;
+	private final HalfEdge[] hash;
 
-	public EdgeList(final double xmin, final double deltax, final int sqrt_nsites)
+	public EdgeList(final double xmin, final double deltax, final int sqrtnsites)
 	{
-		this._xmin = xmin;
-		this._deltax = deltax;
-		this._hashsize = 2 * sqrt_nsites;
+		this.minX = xmin;
+		this.deltaX = deltax;
+		this.hashSize = 2 * sqrtnsites;
 
-		this._hash = new ArrayList<>(this._hashsize);
+		this.hash = new HalfEdge[this.hashSize];
 
 		// two dummy Halfedges:
-		this.leftEnd = Halfedge.createDummy();
-		this.rightEnd = Halfedge.createDummy();
+		this.leftEnd = HalfEdge.createDummy();
+		this.rightEnd = HalfEdge.createDummy();
 		this.leftEnd.edgeListLeftNeighbor = null;
 		this.leftEnd.edgeListRightNeighbor = this.rightEnd;
 		this.rightEnd.edgeListLeftNeighbor = this.leftEnd;
 		this.rightEnd.edgeListRightNeighbor = null;
 
-		for (int i = 0; i < this._hashsize; i++)
-		{
-			this._hash.add(null);
-		}
-
-		this._hash.set(0, this.leftEnd);
-		this._hash.set(this._hashsize - 1, this.rightEnd);
+		this.hash[0] = this.leftEnd;
+		this.hash[this.hashSize - 1] = this.rightEnd;
 	}
 
-	@Override
-	public void dispose()
+	public void insert(final HalfEdge lb, final HalfEdge newHalfEdge)
 	{
-		Halfedge halfEdge = this.leftEnd;
-		Halfedge prevHe;
-		while (halfEdge != this.rightEnd)
-		{
-			prevHe = halfEdge;
-			halfEdge = halfEdge.edgeListRightNeighbor;
-			prevHe.dispose();
-		}
-		this.leftEnd = null;
-		this.rightEnd.dispose();
-		this.rightEnd = null;
-
-		this._hash.clear();
-		this._hash = null;
+		newHalfEdge.edgeListLeftNeighbor = lb;
+		newHalfEdge.edgeListRightNeighbor = lb.edgeListRightNeighbor;
+		lb.edgeListRightNeighbor.edgeListLeftNeighbor = newHalfEdge;
+		lb.edgeListRightNeighbor = newHalfEdge;
 	}
 
-	/**
-	 * Insert newHalfedge to the right of lb
-	 *
-	 * @param lb
-	 * @param newHalfedge
-	 *
-	 */
-	public void insert(final Halfedge lb, final Halfedge newHalfedge)
-	{
-		newHalfedge.edgeListLeftNeighbor = lb;
-		newHalfedge.edgeListRightNeighbor = lb.edgeListRightNeighbor;
-		lb.edgeListRightNeighbor.edgeListLeftNeighbor = newHalfedge;
-		lb.edgeListRightNeighbor = newHalfedge;
-	}
-
-	/**
-	 * This function only removes the Halfedge from the left-right list. We
-	 * cannot dispose it yet because we are still using it.
-	 *
-	 * @param halfEdge
-	 *
-	 */
-	public void remove(final Halfedge halfEdge)
+	public void remove(final HalfEdge halfEdge)
 	{
 		halfEdge.edgeListLeftNeighbor.edgeListRightNeighbor = halfEdge.edgeListRightNeighbor;
 		halfEdge.edgeListRightNeighbor.edgeListLeftNeighbor = halfEdge.edgeListLeftNeighbor;
@@ -91,32 +51,23 @@ public final class EdgeList implements IDisposable
 		halfEdge.edgeListLeftNeighbor = halfEdge.edgeListRightNeighbor = null;
 	}
 
-	/**
-	 * Find the rightmost Halfedge that is still left of p
-	 *
-	 * @param p
-	 * @return
-	 *
-	 */
-	public Halfedge edgeListLeftNeighbor(final Point p)
+	public HalfEdge edgeListLeftNeighbor(final Point p)
 	{
-		int i, bucket;
-		Halfedge halfEdge;
 
 		/* Use hash table to get close to desired halfedge */
-		bucket = (int) ((p.x - this._xmin) / this._deltax * this._hashsize);
+		int bucket = (int) ((p.x - this.minX) / this.deltaX * this.hashSize);
 		if (bucket < 0)
 		{
 			bucket = 0;
 		}
-		if (bucket >= this._hashsize)
+		if (bucket >= this.hashSize)
 		{
-			bucket = this._hashsize - 1;
+			bucket = this.hashSize - 1;
 		}
-		halfEdge = this.getHash(bucket);
+		HalfEdge halfEdge = this.getHash(bucket);
 		if (halfEdge == null)
 		{
-			for (i = 1; true; ++i)
+			for (int i = 1; true; ++i)
 			{
 				if ((halfEdge = this.getHash(bucket - i)) != null)
 				{
@@ -148,27 +99,27 @@ public final class EdgeList implements IDisposable
 		}
 
 		/* Update hash table and reference counts */
-		if (bucket > 0 && bucket < this._hashsize - 1)
+		if (bucket > 0 && bucket < this.hashSize - 1)
 		{
-			this._hash.set(bucket, halfEdge);
+			this.hash[bucket] = halfEdge;
 		}
 		return halfEdge;
 	}
 
 	/* Get entry from hash table, pruning any deleted nodes */
-	private Halfedge getHash(final int b)
+	private HalfEdge getHash(final int b)
 	{
-		final Halfedge halfEdge;
+		final HalfEdge halfEdge;
 
-		if (b < 0 || b >= this._hashsize)
+		if (b < 0 || b >= this.hashSize)
 		{
 			return null;
 		}
-		halfEdge = this._hash.get(b);
+		halfEdge = this.hash[b];
 		if (halfEdge != null && halfEdge.edge == VoronoiEdge.DELETED)
 		{
 			/* Hash table points to deleted halfedge.  Patch as necessary. */
-			this._hash.set(b, null);
+			this.hash[b] = null;
 			// still can't dispose halfEdge yet!
 			return null;
 		}

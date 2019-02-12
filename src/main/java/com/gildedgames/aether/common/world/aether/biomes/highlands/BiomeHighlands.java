@@ -9,7 +9,7 @@ import com.gildedgames.aether.common.registry.content.GenerationAether;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandGenerators;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandVariables;
-import com.gildedgames.aether.common.world.aether.island.gen.highlands.IslandGeneratorHighlands;
+import com.gildedgames.aether.common.world.aether.island.gen.types.IslandGeneratorHighlands;
 import com.gildedgames.aether.common.world.templates.TemplateWorldGen;
 import com.gildedgames.orbis_api.core.BlueprintDefinition;
 import com.gildedgames.orbis_api.core.BlueprintWorldGen;
@@ -54,6 +54,7 @@ public class BiomeHighlands extends BiomeAetherBase
 		}
 
 		int coastHeight = 1 + rand.nextInt(3);
+
 		double coastSpread = rand.nextDouble() * 0.6;
 
 		if (coastHeight == 0)

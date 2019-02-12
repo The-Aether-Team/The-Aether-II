@@ -5,120 +5,120 @@ import java.util.ArrayList;
 public final class EdgeReorderer
 {
 
-	private ArrayList<VoronoiEdge> _edges;
+	private ArrayList<VoronoiEdge> edges;
 
-	private ArrayList<LR> _edgeOrientations;
+	private ArrayList<LeftRight> edgeLeftRights;
 
-	public EdgeReorderer(final ArrayList<VoronoiEdge> origEdges, final Class criterion)
+	public EdgeReorderer(final ArrayList<VoronoiEdge> origEdges)
 	{
-		if (criterion != Vertex.class && criterion != Site.class)
-		{
-			throw new Error("Edges: criterion must be Vertex or Site");
-		}
-		this._edges = new ArrayList<>();
-		this._edgeOrientations = new ArrayList<>();
 		if (origEdges.size() > 0)
 		{
-			this._edges = this.reorderEdges(origEdges, criterion);
+			this.reorderEdges(origEdges);
+		}
+		else
+		{
+			this.edges = new ArrayList<>();
+			this.edgeLeftRights = new ArrayList<>();
 		}
 	}
 
-	public ArrayList<VoronoiEdge> get_edges()
+	public ArrayList<VoronoiEdge> getEdges()
 	{
-		return this._edges;
+		return this.edges;
 	}
 
-	public ArrayList<LR> get_edgeOrientations()
+	public ArrayList<LeftRight> getEdgeLeftRights()
 	{
-		return this._edgeOrientations;
+		return this.edgeLeftRights;
 	}
 
-	public void dispose()
+	private void reorderEdges(final ArrayList<VoronoiEdge> origEdges)
 	{
-		this._edges = null;
-		this._edgeOrientations = null;
-	}
-
-	private ArrayList<VoronoiEdge> reorderEdges(final ArrayList<VoronoiEdge> origEdges, final Class criterion)
-	{
-		int i, j;
 		final int n = origEdges.size();
-		VoronoiEdge edge;
+
 		// we're going to reorder the edges in order of traversal
-		final ArrayList<Boolean> done = new ArrayList<>(n);
-		int nDone = 0;
-		for (int k = 0; k < n; k++)
-		{
-			done.add(false);
-		}
-		final ArrayList<VoronoiEdge> newEdges = new ArrayList<>();
+		final boolean[] done = new boolean[n];
 
-		i = 0;
-		edge = origEdges.get(i);
+		final ArrayList<VoronoiEdge> newEdges = new ArrayList<>(n);
+		final ArrayList<LeftRight> newLeftRights = new ArrayList<>(n);
+
+		int i = 0;
+
+		VoronoiEdge edge = origEdges.get(i);
+
 		newEdges.add(edge);
-		this._edgeOrientations.add(LR.LEFT);
-		ICoord firstPoint = (criterion == Vertex.class) ? edge.get_leftVertex() : edge.get_leftSite();
-		ICoord lastPoint = (criterion == Vertex.class) ? edge.get_rightVertex() : edge.get_rightSite();
+		newLeftRights.add(LeftRight.LEFT);
 
-		if (firstPoint == Vertex.VERTEX_AT_INFINITY || lastPoint == Vertex.VERTEX_AT_INFINITY)
-		{
-			return new ArrayList<>();
-		}
+		Vertex firstPoint = edge.getLeftVertex();
+		Vertex lastPoint = edge.getRightVertex();
 
-		done.set(i, true);
-		++nDone;
+		done[i] = true;
+
+		int nDone = 1;
 
 		while (nDone < n)
 		{
 			for (i = 1; i < n; ++i)
 			{
-				if (done.get(i))
+				if (done[i])
 				{
 					continue;
 				}
+
 				edge = origEdges.get(i);
-				final ICoord leftPoint = (criterion == Vertex.class) ? edge.get_leftVertex() : edge.get_leftSite();
-				final ICoord rightPoint = (criterion == Vertex.class) ? edge.get_rightVertex() : edge.get_rightSite();
-				if (leftPoint == Vertex.VERTEX_AT_INFINITY || rightPoint == Vertex.VERTEX_AT_INFINITY)
-				{
-					return new ArrayList<>();
-				}
+
+				final Vertex leftPoint = edge.getLeftVertex();
+				final Vertex rightPoint = edge.getRightVertex();
+
+				boolean created = false;
+
 				if (leftPoint == lastPoint)
 				{
 					lastPoint = rightPoint;
-					this._edgeOrientations.add(LR.LEFT);
+
+					newLeftRights.add(LeftRight.LEFT);
 					newEdges.add(edge);
-					done.set(i, true);
+
+					created = true;
 				}
 				else if (rightPoint == firstPoint)
 				{
 					firstPoint = leftPoint;
-					this._edgeOrientations.add(0, LR.LEFT);
+
+					newLeftRights.add(0, LeftRight.LEFT);
 					newEdges.add(0, edge);
-					done.set(i, true);
+
+					created = true;
 				}
 				else if (leftPoint == firstPoint)
 				{
 					firstPoint = rightPoint;
-					this._edgeOrientations.add(0, LR.RIGHT);
+
+					newLeftRights.add(0, LeftRight.RIGHT);
 					newEdges.add(0, edge);
 
-					done.set(i, true);
+					created = true;
 				}
 				else if (rightPoint == lastPoint)
 				{
 					lastPoint = leftPoint;
-					this._edgeOrientations.add(LR.RIGHT);
+
+					newLeftRights.add(LeftRight.RIGHT);
 					newEdges.add(edge);
-					done.set(i, true);
+
+					created = true;
 				}
-				if (done.get(i))
+
+				if (created)
 				{
+					done[i] = true;
+
 					++nDone;
 				}
 			}
 		}
 
-		return newEdges;
+		this.edgeLeftRights = newLeftRights;
+		this.edges = newEdges;
 	}
 }

@@ -1,18 +1,13 @@
 package com.gildedgames.aether.common.world.aether.features;
 
-import java.util.Random;
-
-import com.gildedgames.aether.api.util.NoiseUtil;
 import com.gildedgames.aether.api.world.IAetherChunkColumnInfo;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
-import com.gildedgames.aether.common.world.aether.island.gen.NoiseTransformer;
 import com.gildedgames.orbis_api.preparation.impl.ChunkSegmentMask;
 import com.gildedgames.orbis_api.util.XoShiRoRandom;
-
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.NoiseGenerator;
-import net.minecraft.world.gen.NoiseGeneratorSimplex;
+
+import java.util.Random;
 
 public class WorldGenAetherCaves
 {

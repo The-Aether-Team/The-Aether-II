@@ -1,18 +1,19 @@
 package com.gildedgames.aether.common.world.aether.island.gen;
 
-import com.gildedgames.aether.api.util.NoiseUtil;
 import com.gildedgames.aether.api.util.OpenSimplexNoise;
 import com.gildedgames.aether.api.world.islands.IIslandChunkColumnInfo;
-import com.gildedgames.aether.api.world.islands.INoiseProvider;
-import com.gildedgames.aether.common.util.ChunkNoiseGenerator;
-import com.gildedgames.aether.common.world.util.data.ChunkShortSegment;
+import com.gildedgames.aether.api.world.noise.IChunkNoiseBuffer;
+import com.gildedgames.aether.common.world.aether.chunk.ChunkDataGeneratorSingle;
+import com.gildedgames.aether.common.world.aether.noise.NoiseGeneratorClouds;
+import com.gildedgames.aether.common.world.aether.noise.NoiseGeneratorSoilDepth;
+import com.gildedgames.aether.common.world.util.data.ChunkHeightmap;
 
 public abstract class AbstractIslandChunkColumnInfo implements IIslandChunkColumnInfo
 {
 	// Lazily initialized.
-	private ChunkNoiseGenerator terrainDepthBuffer, cloudDepthBuffer;
+	private IChunkNoiseBuffer terrainDepthBuffer, cloudDepthBuffer;
 
-	private final ChunkShortSegment heightmap = new ChunkShortSegment((short) -1);
+	private final ChunkHeightmap heightmap = new ChunkHeightmap();
 
 	private final OpenSimplexNoise noise;
 
@@ -27,64 +28,40 @@ public abstract class AbstractIslandChunkColumnInfo implements IIslandChunkColum
 	}
 
 	@Override
-	public final INoiseProvider getTerrainDepthBuffer()
+	public final IChunkNoiseBuffer getTerrainDepthBuffer()
 	{
 		if (this.terrainDepthBuffer == null)
 		{
-			this.terrainDepthBuffer = new ChunkNoiseGenerator(this.chunkX * 16, this.chunkZ * 16, 4, 5, 0, 0, 0.0625D)
-			{
-				@Override
-				protected double getSample(double nx, double nz)
-				{
-					return (AbstractIslandChunkColumnInfo.this.noise.eval(nx, nz) / 3.0D + 3.0D);
-				}
-			};
+			this.terrainDepthBuffer = new ChunkDataGeneratorSingle(new NoiseGeneratorSoilDepth(this.noise), 2)
+					.generate(this.chunkX, this.chunkZ)
+					.createChunkBuffer();
 		}
 
 		return this.terrainDepthBuffer;
 	}
 
 	@Override
-	public ChunkNoiseGenerator getCloudDepthBuffer()
+	public final IChunkNoiseBuffer getCloudDepthBuffer()
 	{
 		if (this.cloudDepthBuffer == null)
 		{
-			this.cloudDepthBuffer = new ChunkNoiseGenerator(this.chunkX * 16, this.chunkZ * 16, 4, 5, 0, 0, 100.0D)
-			{
-				@Override
-				protected double getSample(double nx, double nz)
-				{
-					return NoiseUtil.normalise(NoiseUtil.something(AbstractIslandChunkColumnInfo.this.noise, nx, nz));
-				}
-			};
+			this.cloudDepthBuffer = new ChunkDataGeneratorSingle(new NoiseGeneratorClouds(this.noise), 2)
+					.generate(this.chunkX, this.chunkZ)
+					.createChunkBuffer();
 		}
 
 		return this.cloudDepthBuffer;
 	}
 
 	@Override
-	public int getHeight(int x, int z)
+	public ChunkHeightmap getHeightmap()
 	{
-		return (int) this.heightmap.get(x, z);
+		return this.heightmap;
 	}
 
 	@Override
-	public void setHeight(int x, int z, int height)
+	public boolean hasSoil(int x, int z)
 	{
-		this.heightmap.set(x, z, (short) height);
-	}
-
-	@Override
-	public boolean isEmpty()
-	{
-		for (short i : this.heightmap.getRawArray())
-		{
-			if (i >= 0)
-			{
-				return false;
-			}
-		}
-
 		return true;
 	}
 }

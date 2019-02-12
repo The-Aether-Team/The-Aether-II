@@ -4,22 +4,9 @@ import java.util.ArrayList;
 
 public final class Polygon
 {
-
-	private final ArrayList<Point> _vertices;
-
-	public Polygon(final ArrayList<Point> vertices)
+	public static Winding getWinding(ArrayList<Point> vertices)
 	{
-		this._vertices = vertices;
-	}
-
-	public double area()
-	{
-		return Math.abs(this.signedDoubleArea() * 0.5);
-	}
-
-	public Winding winding()
-	{
-		final double signedDoubleArea = this.signedDoubleArea();
+		final double signedDoubleArea = signedDoubleArea(vertices);
 		if (signedDoubleArea < 0)
 		{
 			return Winding.CLOCKWISE;
@@ -31,17 +18,17 @@ public final class Polygon
 		return Winding.NONE;
 	}
 
-	private double signedDoubleArea()
+	private static double signedDoubleArea(ArrayList<Point> vertices)
 	{
 		int index, nextIndex;
-		final int n = this._vertices.size();
+		final int n = vertices.size();
 		Point point, next;
 		double signedDoubleArea = 0;
 		for (index = 0; index < n; ++index)
 		{
 			nextIndex = (index + 1) % n;
-			point = this._vertices.get(index);
-			next = this._vertices.get(nextIndex);
+			point = vertices.get(index);
+			next = vertices.get(nextIndex);
 			signedDoubleArea += point.x * next.y - next.x * point.y;
 		}
 		return signedDoubleArea;

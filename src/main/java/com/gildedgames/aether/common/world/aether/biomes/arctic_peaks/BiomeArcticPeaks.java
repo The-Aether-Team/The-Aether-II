@@ -2,19 +2,22 @@ package com.gildedgames.aether.common.world.aether.biomes.arctic_peaks;
 
 import com.gildedgames.aether.api.world.generation.WorldDecoration;
 import com.gildedgames.aether.api.world.generation.WorldDecorationSimple;
+import com.gildedgames.aether.api.world.islands.IIslandBounds;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
+import com.gildedgames.aether.api.world.noise.IChunkNoiseBuffer;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.IBlockSnowy;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.registry.content.GenerationAether;
-import com.gildedgames.aether.common.util.ChunkNoiseGenerator;
 import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import com.gildedgames.aether.common.world.aether.WorldProviderAether;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.biomes.ISnowyBiome;
+import com.gildedgames.aether.common.world.aether.chunk.ChunkDataGeneratorSingle;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandVariables;
-import com.gildedgames.aether.common.world.aether.island.gen.highlands.IslandGeneratorHighlands;
+import com.gildedgames.aether.common.world.aether.island.gen.types.IslandGeneratorHighlands;
+import com.gildedgames.aether.common.world.aether.noise.NoiseGeneratorIslandTerrain;
 import com.gildedgames.orbis_api.core.BlueprintDefinition;
 import com.gildedgames.orbis_api.core.BlueprintWorldGen;
 import com.gildedgames.orbis_api.util.mc.NBT;
@@ -64,6 +67,8 @@ public class BiomeArcticPeaks extends BiomeAetherBase implements ISnowyBiome
 
 		boolean hasTerraces = rand.nextInt(30) == 0;
 
+		int maxTerrainHeight = 80 + rand.nextInt(70);
+
 		return new IslandGeneratorHighlands(IslandVariables.build()
 				.coastHeight(coastHeight)
 				.coastSpread(coastSpread)
@@ -71,13 +76,13 @@ public class BiomeArcticPeaks extends BiomeAetherBase implements ISnowyBiome
 				.lakeDepth(rand.nextInt(40) + 5)
 				.lakeScale(40.0D + (rand.nextDouble() * 30.0D))
 				.lakeThreshold(rand.nextDouble() * 0.3)
-				.maxTerrainHeight(80 + rand.nextInt(70))
+				.maxTerrainHeight(maxTerrainHeight)
 				.terraces(hasTerraces)
 				.lakeConcentrationModifier(0.5 + (rand.nextDouble() * -2.5))
 				.heightSampleFilter((heightSample) -> Math.min(1.1, Math.pow(heightSample, mountainAmplitude) * 0.55))
 				.snowCaps(!hasTerraces)
-				.maxYFilter((bottomMaxY, filteredSample, cutoffPoint, topHeight) -> bottomMaxY + ((filteredSample - (hasTerraces ? cutoffPoint : 0.0))
-						* topHeight))
+				.maxYFilter((bottomMaxY, filteredSample, cutoffPoint) -> bottomMaxY + ((filteredSample - (hasTerraces ? cutoffPoint : 0.0))
+						* maxTerrainHeight))
 				.lakeBottomValueFilter((lakeBottomValue) -> 0.0));
 	}
 
@@ -108,7 +113,11 @@ public class BiomeArcticPeaks extends BiomeAetherBase implements ISnowyBiome
 
 		WorldProviderAether provider = WorldProviderAether.get(world);
 
-		final ChunkNoiseGenerator heightMap = IslandGeneratorHighlands.generateNoise(provider.getNoise(), island, chunkX, chunkZ, 0, 300.0D);
+		IIslandBounds bounds  = island.getBounds();
+
+		final IChunkNoiseBuffer samples = new ChunkDataGeneratorSingle(new NoiseGeneratorIslandTerrain(provider.getNoise(), bounds), 4)
+				.generate(chunkX, chunkZ)
+				.createChunkBuffer();
 
 		final int posX = pos.getX() + 8;
 		final int posZ = pos.getZ() + 8;
@@ -136,7 +145,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase implements ISnowyBiome
 					// Get distance from center of Island
 					final double dist = Math.sqrt(distX * distX + distZ * distZ) / 1.0D;
 
-					final double sample = heightMap.getNoiseValue(x, z);
+					final double sample = samples.get(x, z);
 					final double heightSample = sample + 1.0 - dist;
 
 					final BlockPos blockpos1 = p.add(0, world.getHeight(posX + x, posZ + z), 0);
