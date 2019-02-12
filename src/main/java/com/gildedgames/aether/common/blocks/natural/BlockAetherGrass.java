@@ -85,8 +85,8 @@ public class BlockAetherGrass extends Block implements IBlockMultiName, IGrowabl
 	{
 		if (!world.isRemote && state.getValue(PROPERTY_VARIANT) != ENCHANTED)
 		{
-			BlockPos.PooledMutableBlockPos up = BlockPos.PooledMutableBlockPos.retain(pos);
-			up.setY(pos.getY() + 1);
+			BlockPos.PooledMutableBlockPos up = BlockPos.PooledMutableBlockPos.retain();
+			up.setPos(pos.getX(), pos.getY() + 1, pos.getZ());
 
 			if (world.getLightFromNeighbors(up) < 4 && world.getBlockState(up).getLightOpacity(world, up) > 2)
 			{
