@@ -2,13 +2,13 @@ package com.gildedgames.aether.common.world.templates;
 
 import com.gildedgames.aether.api.world.generation.TemplateDefinition;
 import com.gildedgames.aether.api.world.generation.TemplateLoc;
+import com.gildedgames.aether.api.world.generation.WorldDecorationGenerator;
+import com.gildedgames.orbis_api.world.WorldSlice;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
 
 import java.util.Random;
 
-public class TemplateWorldGen extends WorldGenerator
+public class TemplateWorldGen implements WorldDecorationGenerator
 {
 	private final TemplateDefinition def;
 
@@ -18,8 +18,8 @@ public class TemplateWorldGen extends WorldGenerator
 	}
 
 	@Override
-	public boolean generate(World world, Random rand, BlockPos position)
+	public boolean generate(WorldSlice slice, Random rand, BlockPos pos)
 	{
-		return TemplatePlacer.place(world, this.def, new TemplateLoc().set(position), rand);
+		return TemplatePlacer.place(slice.getWorld(), this.def, new TemplateLoc().set(pos), rand);
 	}
 }

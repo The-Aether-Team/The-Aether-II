@@ -9,7 +9,7 @@
 //import com.gildedgames.aether.common.registry.content.GenerationAether;
 //import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 //import com.gildedgames.aether.common.world.aether.island.gen.IslandGenerators;
-//import com.gildedgames.orbis_api.core.BlueprintWorldGen;
+//import com.gildedgames.aether.api.world.generation.BlueprintWorldGen;
 //import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
 //import com.gildedgames.orbis_api.util.mc.NBT;
 //import com.google.common.collect.Lists;

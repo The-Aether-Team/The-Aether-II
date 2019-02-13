@@ -1,7 +1,10 @@
 package com.gildedgames.aether.common.world.aether.biomes.arctic_peaks;
 
+import com.gildedgames.aether.api.world.generation.BlueprintWorldGen;
 import com.gildedgames.aether.api.world.generation.WorldDecoration;
 import com.gildedgames.aether.api.world.generation.WorldDecorationSimple;
+import com.gildedgames.aether.api.world.generation.positioners.PositionerLevels;
+import com.gildedgames.aether.api.world.generation.positioners.PositionerSurface;
 import com.gildedgames.aether.api.world.islands.IIslandBounds;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
@@ -19,7 +22,6 @@ import com.gildedgames.aether.common.world.aether.island.gen.IslandVariables;
 import com.gildedgames.aether.common.world.aether.island.gen.types.IslandGeneratorHighlands;
 import com.gildedgames.aether.common.world.aether.noise.NoiseGeneratorIslandTerrain;
 import com.gildedgames.orbis_api.core.BlueprintDefinition;
-import com.gildedgames.orbis_api.core.BlueprintWorldGen;
 import com.gildedgames.orbis_api.util.mc.NBT;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
@@ -27,7 +29,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
+import net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -182,47 +184,14 @@ public class BiomeArcticPeaks extends BiomeAetherBase implements ISnowyBiome
 	{
 		List<WorldDecoration> decorations = Lists.newArrayList();
 
-		decorations.add(new WorldDecorationSimple(2, DecorateBiomeEvent.Decorate.EventType.GRASS, GenerationAether.short_aether_grass));
-		decorations.add(new WorldDecorationSimple(1, 0.2F, DecorateBiomeEvent.Decorate.EventType.GRASS, GenerationAether.skyroot_twigs));
+		decorations.add(new WorldDecorationSimple(2, 0.0F, EventType.GRASS, new PositionerSurface(), GenerationAether.short_aether_grass));
+		decorations.add(new WorldDecorationSimple(1, 0.2F, EventType.GRASS, new PositionerSurface(), GenerationAether.skyroot_twigs));
 
-		decorations.add(new WorldDecorationSimple(6, DecorateBiomeEvent.Decorate.EventType.GRASS, GenerationAether.holystone_rocks)
-		{
-			@Override
-			public BlockPos findPositionToPlace(final World world, final Random rand, final BlockPos pos)
-			{
-				final int x = rand.nextInt(16) + 8;
-				final int y = rand.nextInt(128);
-				final int z = rand.nextInt(16) + 8;
+		decorations.add(new WorldDecorationSimple(6, 0.0F, EventType.GRASS, new PositionerLevels(0, 128), GenerationAether.holystone_rocks));
 
-				return pos.add(x, y, z);
-			}
-		});
+		decorations.add(new WorldDecorationSimple(1, 0.06F, EventType.CUSTOM, new PositionerLevels(90, 130), GenerationAether.storm_aercloud));
 
-		decorations.add(new WorldDecorationSimple(1, 0.06F, DecorateBiomeEvent.Decorate.EventType.CUSTOM, GenerationAether.storm_aercloud)
-		{
-			@Override
-			public BlockPos findPositionToPlace(final World world, final Random rand, final BlockPos pos)
-			{
-				final int width = 16;
-				final int minY = 90;
-				final int maxY = 130;
-
-				return pos.add(rand.nextInt(width), minY + rand.nextInt(maxY - minY), rand.nextInt(width));
-			}
-		});
-
-		decorations.add(new WorldDecorationSimple(2, 0.5f, DecorateBiomeEvent.Decorate.EventType.CUSTOM, GenerationAether.ice_crystals)
-		{
-			@Override
-			public BlockPos findPositionToPlace(final World world, final Random rand, final BlockPos pos)
-			{
-				final int x = rand.nextInt(16) + 8;
-				final int y = rand.nextInt(64) + 26; // between y: 26 and 90
-				final int z = rand.nextInt(16) + 8;
-
-				return pos.add(x, y, z);
-			}
-		});
+		decorations.add(new WorldDecorationSimple(2, 0.5f, EventType.CUSTOM, new PositionerLevels(26, 90), GenerationAether.ice_crystals));
 
 		return decorations;
 	}
@@ -249,11 +218,11 @@ public class BiomeArcticPeaks extends BiomeAetherBase implements ISnowyBiome
 
 		for (int i = 0; i < amountOfTreeTypes; i++)
 		{
-			treeDecorations.add(new WorldDecorationSimple(15, DecorateBiomeEvent.Decorate.EventType.TREE,
-					new BlueprintWorldGen(chosen.length >= 2 ? chosen[rand.nextInt(chosen.length)] : chosen[0])));
+			treeDecorations.add(new WorldDecorationSimple(15, 0.0F, EventType.TREE, new PositionerSurface(),
+					new BlueprintWorldGen(chosen[rand.nextInt(chosen.length)])));
 		}
 
-		treeDecorations.add(new WorldDecorationSimple(20, DecorateBiomeEvent.Decorate.EventType.TREE, new BlueprintWorldGen(GenerationAether.GREATROOT_TREE)));
+		treeDecorations.add(new WorldDecorationSimple(20, 0.0F, EventType.TREE, new PositionerSurface(), new BlueprintWorldGen(GenerationAether.GREATROOT_TREE)));
 
 		return treeDecorations;
 	}

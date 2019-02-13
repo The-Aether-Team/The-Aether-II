@@ -1,6 +1,7 @@
 package com.gildedgames.aether.api.world.generation;
 
 import com.gildedgames.aether.api.util.OpenSimplexNoise;
+import com.gildedgames.orbis_api.world.WorldSlice;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
@@ -16,6 +17,8 @@ public class WorldDecorationUtil
 	{
 		ChunkPos chunkPos = new ChunkPos(pos);
 
+		WorldSlice slice = new WorldSlice(world, chunkPos);
+
 		for (final WorldDecoration decoration : decorations)
 		{
 			for (int count = 0; count < decoration.getGenerationCount(); count++)
@@ -24,7 +27,7 @@ public class WorldDecorationUtil
 				{
 					final BlockPos placeAt = decoration.findPositionToPlace(world, rand, pos);
 
-					decoration.getGenerator(rand).generate(world, rand, placeAt);
+					decoration.getGenerator(rand).generate(slice, rand, placeAt);
 				}
 			}
 		}
@@ -34,6 +37,8 @@ public class WorldDecorationUtil
 			OpenSimplexNoise noise, float openAreaChance, float clumpedDecorationCountModifier)
 	{
 		ChunkPos chunkPos = new ChunkPos(pos);
+
+		WorldSlice slice = new WorldSlice(world, chunkPos);
 
 		for (final WorldDecoration decoration : decorations)
 		{
@@ -48,7 +53,7 @@ public class WorldDecorationUtil
 
 					if (isClumped || override)
 					{
-						decoration.getGenerator(rand).generate(world, rand, placeAt);
+						decoration.getGenerator(rand).generate(slice, rand, placeAt);
 
 						if (!isClumped)
 						{

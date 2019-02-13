@@ -1,17 +1,15 @@
 package com.gildedgames.aether.common.world.aether.features;
 
+import com.gildedgames.aether.api.world.generation.WorldDecorationGenerator;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.orbis_api.world.WorldSlice;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.Random;
 
-public class WorldGenFloorPlacer extends WorldGenerator
+public class WorldGenFloorPlacer implements WorldDecorationGenerator
 {
 	private final IBlockState[] states;
 
@@ -36,13 +34,9 @@ public class WorldGenFloorPlacer extends WorldGenerator
 	}
 
 	@Override
-	public boolean generate(final World world, final Random rand, BlockPos pos)
+	public boolean generate(WorldSlice slice, Random rand, BlockPos pos)
 	{
-		pos = world.getTopSolidOrLiquidBlock(pos);
-
 		int count = 0;
-
-		WorldSlice slice = new WorldSlice(world, new ChunkPos(pos));
 
 		BlockPos.MutableBlockPos randomPos = new BlockPos.MutableBlockPos();
 		BlockPos.MutableBlockPos randomPosDown = new BlockPos.MutableBlockPos();

@@ -312,6 +312,7 @@ public class WorldGenAetherCaves
 		if (this.canReplaceBlock(state) || state == IslandBlockType.TOPSOIL_BLOCK.ordinal() || state == IslandBlockType.SOIL_BLOCK.ordinal())
 		{
 			data.setBlock(x, y, z, IslandBlockType.AIR_BLOCK.ordinal());
+
 			if (foundTop && data.getBlock(x, y - 1, z) == IslandBlockType.SOIL_BLOCK.ordinal())
 			{
 				data.setBlock(x, y - 1, z, IslandBlockType.TOPSOIL_BLOCK.ordinal());

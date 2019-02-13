@@ -2,8 +2,7 @@ package com.gildedgames.aether.api.world.generation;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
+import net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType;
 
 import java.util.Random;
 
@@ -12,23 +11,20 @@ public class WorldDecorationSimple implements WorldDecoration
 
 	private final int count;
 
-	private final WorldGenerator[] generators;
+	private final WorldDecorationGenerator[] generators;
 
 	private final float percentRequired;
 
-	private final DecorateBiomeEvent.Decorate.EventType decorateType;
+	private final EventType decorateType;
 
-	public WorldDecorationSimple(final int count, DecorateBiomeEvent.Decorate.EventType decorateType, final WorldGenerator... generators)
-	{
-		this(count, 0, decorateType, generators);
-	}
+	private final WorldDecorationPositioner positioner;
 
-	public WorldDecorationSimple(final int count, final float percentRequired, DecorateBiomeEvent.Decorate.EventType decorateType,
-			final WorldGenerator... generators)
+	public WorldDecorationSimple(final int count, final float percentRequired, EventType decorateType,
+			WorldDecorationPositioner positioner, final WorldDecorationGenerator... generators)
 	{
 		this.decorateType = decorateType;
 
-		for (final WorldGenerator generator : generators)
+		for (final WorldDecorationGenerator generator : generators)
 		{
 			if (generator == null)
 			{
@@ -39,10 +35,11 @@ public class WorldDecorationSimple implements WorldDecoration
 		this.count = count;
 		this.generators = generators;
 		this.percentRequired = percentRequired;
+		this.positioner = positioner;
 	}
 
 	@Override
-	public DecorateBiomeEvent.Decorate.EventType getDecorateType()
+	public EventType getDecorateType()
 	{
 		return this.decorateType;
 	}
@@ -65,25 +62,14 @@ public class WorldDecorationSimple implements WorldDecoration
 	}
 
 	@Override
-	public WorldGenerator getGenerator(final Random rand)
+	public WorldDecorationGenerator getGenerator(final Random rand)
 	{
 		return this.generators[rand.nextInt(this.generators.length)];
 	}
 
 	@Override
-	public BlockPos findPositionToPlace(final World world, final Random rand, final BlockPos pos)
+	public final BlockPos findPositionToPlace(World world, Random rand, BlockPos pos)
 	{
-		final int x = rand.nextInt(16) + 8;
-		final int z = rand.nextInt(16) + 8;
-
-		final BlockPos pos2 = pos.add(x, 0, z);
-
-		if (!world.isBlockLoaded(pos2))
-		{
-			return new BlockPos(pos2.getX(), -1, pos2.getZ());
-		}
-
-		return world.getTopSolidOrLiquidBlock(pos2);
+		return this.positioner.findPositionToPlace(world, rand, pos);
 	}
-
 }
