@@ -2,10 +2,10 @@ package com.gildedgames.aether.common.world.aether.features;
 
 import com.gildedgames.aether.api.world.generation.WorldDecorationGenerator;
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.orbis_api.util.ArrayHelper;
 import com.gildedgames.orbis_api.world.WorldSlice;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
-import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.Random;
 
@@ -15,7 +15,7 @@ public class WorldGenFloorPlacer implements WorldDecorationGenerator
 
 	private final int amount;
 
-	private IBlockState[] statesCanPlaceOn = new IBlockState[0];
+	private IBlockState[] statesCanPlaceOn = new IBlockState[] { BlocksAether.aether_grass.getDefaultState() };
 
 	public WorldGenFloorPlacer(final IBlockState... states)
 	{
@@ -39,7 +39,6 @@ public class WorldGenFloorPlacer implements WorldDecorationGenerator
 		int count = 0;
 
 		BlockPos.MutableBlockPos randomPos = new BlockPos.MutableBlockPos();
-		BlockPos.MutableBlockPos randomPosDown = new BlockPos.MutableBlockPos();
 
 		for (int attempts = 0; attempts < 128; attempts++)
 		{
@@ -54,12 +53,9 @@ public class WorldGenFloorPlacer implements WorldDecorationGenerator
 				continue;
 			}
 
-			randomPosDown.setPos(randomPos);
-			randomPosDown.setY(randomPosDown.getY() - 1);
+			final IBlockState below = slice.getBlockState(randomPos.getX(), randomPos.getY() - 1, randomPos.getZ());
 
-			final IBlockState below = slice.getBlockState(randomPosDown);
-
-			if (((this.statesCanPlaceOn.length == 0 && below.getBlock() == BlocksAether.aether_grass) || ArrayUtils.contains(this.statesCanPlaceOn, below)))
+			if (ArrayHelper.contains(this.statesCanPlaceOn, below))
 			{
 				final IBlockState chosen = this.states[rand.nextInt(this.states.length)];
 
