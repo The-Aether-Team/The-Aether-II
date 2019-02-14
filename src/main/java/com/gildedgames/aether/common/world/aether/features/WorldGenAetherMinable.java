@@ -1,11 +1,10 @@
 package com.gildedgames.aether.common.world.aether.features;
 
+import com.gildedgames.orbis_api.util.ArrayHelper;
 import com.gildedgames.orbis_api.world.WorldSlice;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.Random;
 
@@ -42,7 +41,7 @@ public class WorldGenAetherMinable
 		final float d4 = (position.getY() + rand.nextInt(3) - 2.0f);
 		final float d5 = (position.getY() + rand.nextInt(3) - 2.0f);
 
-		BlockPos.PooledMutableBlockPos nextPos = BlockPos.PooledMutableBlockPos.retain();
+		BlockPos.MutableBlockPos nextPos = new BlockPos.MutableBlockPos();
 
 		int attempts = 0;
 
@@ -68,46 +67,60 @@ public class WorldGenAetherMinable
 			final int maxY = MathHelper.floor(d7 + d11 / 2.0f);
 			final int maxZ = MathHelper.floor(d8 + d10 / 2.0f);
 
+			float xStepFactor = (minX + 0.5f - d6) / (d10 / 2.0f);
+			float xStep = ((minX + 1 + 0.5f - d6) / (d10 / 2.0f)) - xStepFactor;
+
+			float yStepFactor = (minY + 0.5f - d7) / (d11 / 2.0f);
+			float yStep = ((minY + 1 + 0.5f - d7) / (d11 / 2.0f)) - yStepFactor;
+
+			float zStepFactor = (minZ + 0.5f - d8) / (d10 / 2.0f);
+			float zStep = ((minZ + 1 + 0.5f - d8) / (d10 / 2.0f)) - zStepFactor;
+
+			float xDist = xStepFactor;
+
 			for (int x = minX; x <= maxX; ++x)
 			{
-				float xDist = (x + 0.5f - d6) / (d10 / 2.0f);
-				xDist *= xDist;
+				float xDistSq = xDist * xDist;
 
-				if (xDist < 1.0f)
+				if (xDistSq < 1.0f)
 				{
+					float yDist = yStepFactor;
+
 					for (int y = minY; y <= maxY; ++y)
 					{
-						float yDist = (y + 0.5f - d7) / (d11 / 2.0f);
-						yDist *= yDist;
+						float yDistSq = yDist * yDist;
 
-						if (xDist + yDist < 1.0f)
+						if (xDistSq + yDistSq < 1.0f)
 						{
+							float zDist = zStepFactor;
+
 							for (int z = minZ; z <= maxZ; ++z)
 							{
-								float zDist = (z + 0.5f - d8) / (d10 / 2.0f);
-								zDist *= zDist;
+								float zDistSq = zDist * zDist;
 
-								if (xDist + yDist + zDist < 1.0f)
+								if (xDistSq + yDistSq + zDistSq < 1.0f)
 								{
-									nextPos.setPos(x, y, z);
+									final IBlockState state = slice.getBlockState(x, y, z);
 
-									final IBlockState state = slice.getBlockState(nextPos);
-
-									if (state.getMaterial() != Material.AIR && ArrayUtils.contains(this.predicate, state))
+									if (ArrayHelper.contains(this.predicate, state))
 									{
-										slice.replaceBlockState(nextPos, this.oreBlock, this.emitsLight);
+										slice.replaceBlockState(nextPos.setPos(x, y, z), this.oreBlock, this.emitsLight);
 									}
 								}
+
+								zDist += zStep;
 							}
 						}
+
+						yDist += yStep;
 					}
 				}
+
+				xDist += xStep;
 			}
 
 			attempts++;
 		}
-
-		nextPos.release();
 
 		return true;
 	}
