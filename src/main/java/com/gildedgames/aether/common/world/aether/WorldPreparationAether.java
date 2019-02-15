@@ -8,8 +8,8 @@ import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.api.world.noise.IChunkHeightmap;
 import com.gildedgames.aether.api.world.noise.IChunkNoiseBuffer;
 import com.gildedgames.aether.common.world.aether.biomes.arctic_peaks.BiomeArcticPeaks;
-import com.gildedgames.aether.common.world.aether.features.WorldGenAetherCaves;
 import com.gildedgames.aether.common.world.aether.features.WorldGenUndergroundVeins;
+import com.gildedgames.aether.common.world.aether.features.caves.WorldGenAetherCaves;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
 import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
 import com.gildedgames.orbis_api.processing.BlockAccessExtendedWrapper;
@@ -45,9 +45,9 @@ public class WorldPreparationAether
 		final IIslandGenerator generator = island.getGenerator();
 		generator.generateChunkSegment(info, mask, island, chunkX, chunkZ);
 
-		this.replaceBiomeBlocks(info, mask);
+		this.caveGenerator.generate(island, chunkX, chunkZ, mask);
 
-		this.caveGenerator.generate(seed, chunkX, chunkZ, mask);
+		this.replaceBiomeBlocks(info, mask);
 
 		if (island.getBiome() instanceof BiomeArcticPeaks)
 		{
@@ -88,11 +88,6 @@ public class WorldPreparationAether
 	// Calculate max penetration depth
 	private void replaceBiomeBlocks(IAetherChunkColumnInfo info, final ChunkMask mask)
 	{
-		if (!mask.wasTouched())
-		{
-			return;
-		}
-
 		IIslandChunkColumnInfo chunkInfo = info.getIslandData(0, IIslandChunkColumnInfo.class);
 
 		IChunkHeightmap heightmap = chunkInfo.getHeightmap();
@@ -118,6 +113,8 @@ public class WorldPreparationAether
 					continue;
 				}
 
+				int penetration = 0;
+
 				final int depth = (int) chunkInfo.getTerrainDepthBuffer().get(x, z);
 
 				int m0a = Math.min(height, 255);
@@ -129,9 +126,7 @@ public class WorldPreparationAether
 
 					if (state == IslandBlockType.STONE_BLOCK.ordinal() || state == IslandBlockType.STONE_MOSSY_BLOCK.ordinal() || state == IslandBlockType.FERROSITE_BLOCK.ordinal())
 					{
-						int pentration = height - y;
-
-						if (pentration == 0)
+						if (penetration == 0 && mask.getBlock(x, y + 1, z) == IslandBlockType.AIR_BLOCK.ordinal())
 						{
 							mask.setBlock(x, y, z, IslandBlockType.TOPSOIL_BLOCK.ordinal());
 						}
@@ -139,6 +134,12 @@ public class WorldPreparationAether
 						{
 							mask.setBlock(x, y, z, IslandBlockType.SOIL_BLOCK.ordinal());
 						}
+
+						penetration++;
+					}
+					else
+					{
+						penetration = 0;
 					}
 				}
 			}

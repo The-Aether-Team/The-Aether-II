@@ -6,7 +6,7 @@ import com.gildedgames.orbis_api.data.region.Region;
 import com.gildedgames.orbis_api.preparation.impl.ChunkDataContainer;
 import com.gildedgames.orbis_api.processing.BlockAccessChunkDataContainer;
 import com.gildedgames.orbis_api.processing.DataPrimer;
-import com.gildedgames.orbis_api.util.XoShiRoRandom;
+import com.gildedgames.orbis_api.util.random.XoRoShiRoRandom;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -34,7 +34,7 @@ public class ChunkProviderNecromancerTower implements IChunkGenerator
 			this.world.setSeaLevel(0);
 		}
 
-		this.random = new XoShiRoRandom(seed);
+		this.random = new XoRoShiRoRandom(seed);
 	}
 
 	@Override

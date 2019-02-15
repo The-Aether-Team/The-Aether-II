@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.world.aether.features;
 
 import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
 import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
-import com.gildedgames.orbis_api.util.XoShiRoRandom;
+import com.gildedgames.orbis_api.util.random.XoRoShiRoRandom;
 import net.minecraft.util.math.MathHelper;
 
 public class WorldGenUndergroundVeins
@@ -16,7 +16,7 @@ public class WorldGenUndergroundVeins
 		double d1 = (double) (originalZ * 16 + 8);
 		float f = 0.0F;
 		float f1 = 0.0F;
-		XoShiRoRandom random = new XoShiRoRandom(seed);
+		XoRoShiRoRandom random = new XoRoShiRoRandom(seed);
 
 		if (s2 <= 0)
 		{
@@ -201,7 +201,7 @@ public class WorldGenUndergroundVeins
 
 	public void generate(long seed, int x, int z, ChunkMask mask)
 	{
-		XoShiRoRandom rand = new XoShiRoRandom(seed);
+		XoRoShiRoRandom rand = new XoRoShiRoRandom(seed);
 
 		int i = this.range;
 
@@ -225,7 +225,7 @@ public class WorldGenUndergroundVeins
 	/**
 	 * Recursively called by generate()
 	 */
-	protected void recursiveGenerate(XoShiRoRandom rand, long seed, int chunkX, int chunkZ, int originalX, int originalZ, ChunkMask mask)
+	protected void recursiveGenerate(XoRoShiRoRandom rand, long seed, int chunkX, int chunkZ, int originalX, int originalZ, ChunkMask mask)
 	{
 		rand.setSeed(seed);
 

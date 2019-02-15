@@ -1,10 +1,12 @@
 package com.gildedgames.aether.common.world.aether.island.data;
 
 import com.gildedgames.aether.api.world.generation.WorldDecoration;
+import com.gildedgames.aether.api.world.generation.caves.ICaveSystemGenerator;
 import com.gildedgames.aether.api.world.islands.IIslandBounds;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
+import com.gildedgames.aether.common.world.aether.features.caves.VanillaCaveSystemGenerator;
 import com.gildedgames.orbis_api.core.ICreationData;
 import com.gildedgames.orbis_api.core.PlacedBlueprint;
 import com.gildedgames.orbis_api.core.baking.BakedBlueprint;
@@ -50,6 +52,8 @@ public class IslandData implements IIslandData
 
 	private BiomeAetherBase biome;
 
+	private ICaveSystemGenerator caveSystemGenerator;
+
 	public IslandData(final IPrepSectorData parent, final IIslandBounds bounds, final BiomeAetherBase biome, final long seed)
 	{
 		this.parent = parent;
@@ -76,6 +80,7 @@ public class IslandData implements IIslandData
 		this.treeDecorations = this.biome.createTreeDecorations(rand);
 		this.forestTreeCountModifier = this.biome.createForestTreeCountModifier(rand);
 		this.openAreaDecorationGenChance = this.biome.createOpenAreaDecorationGenChance(rand);
+		this.caveSystemGenerator = new VanillaCaveSystemGenerator(this.seed);
 	}
 
 	@Override
@@ -183,6 +188,13 @@ public class IslandData implements IIslandData
 	public Biome getBiome()
 	{
 		return this.biome;
+	}
+
+	@Nonnull
+	@Override
+	public ICaveSystemGenerator getCaveSystemGenerator()
+	{
+		return this.caveSystemGenerator;
 	}
 
 	@Override

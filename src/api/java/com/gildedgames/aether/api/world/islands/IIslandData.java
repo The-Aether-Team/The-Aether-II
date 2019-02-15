@@ -1,6 +1,7 @@
 package com.gildedgames.aether.api.world.islands;
 
 import com.gildedgames.aether.api.world.generation.WorldDecoration;
+import com.gildedgames.aether.api.world.generation.caves.ICaveSystemGenerator;
 import com.gildedgames.orbis_api.core.PlacedBlueprint;
 import com.gildedgames.orbis_api.core.baking.BakedBlueprint;
 import com.gildedgames.orbis_api.preparation.IPrepSectorData;
@@ -79,6 +80,9 @@ public interface IIslandData extends NBT
 	 */
 	@Nonnull
 	Biome getBiome();
+
+	@Nonnull
+	ICaveSystemGenerator getCaveSystemGenerator();
 
 	IPrepSectorData getParentSectorData();
 
