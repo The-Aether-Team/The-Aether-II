@@ -35,12 +35,12 @@ public class WorldGenAetherCaves
 				return;
 			}
 
-			if (segment.posY - segment.nodeHeightRadius > chunkMaxY)
+			if (segment.posY - segment.nodeHeightRadius - 1 > chunkMaxY)
 			{
 				continue;
 			}
 
-			if (segment.posY + segment.nodeHeightRadius < chunkMinY)
+			if (segment.posY + segment.nodeHeightRadius + 1 < chunkMinY)
 			{
 				continue;
 			}

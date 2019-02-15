@@ -89,7 +89,7 @@ public class PrepAether implements IPrepRegistryEntry<IAetherChunkColumnInfo>
 
 		final IIslandBounds bounds = new IslandBounds(x, y, z, x + width, y + height, z + length);
 
-		final long islandSeed = seed ^ ((long) x * 341873128712L + (long) z * 132897987541L);
+		final long islandSeed = seed ^ ((long) sectorX * 341873128712L + (long) sectorY * 132897987541L);
 
 		final Random rand = new Random(islandSeed);
 
