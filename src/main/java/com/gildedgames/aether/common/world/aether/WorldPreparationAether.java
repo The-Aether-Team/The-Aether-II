@@ -45,7 +45,7 @@ public class WorldPreparationAether
 		final IIslandGenerator generator = island.getGenerator();
 		generator.generateChunkSegment(info, mask, island, chunkX, chunkZ);
 
-		this.caveGenerator.generate(island, chunkX, chunkZ, mask);
+		this.caveGenerator.generate(island.getCaveSystemGenerator(), chunkX, chunkZ, mask);
 
 		this.replaceBiomeBlocks(info, mask);
 

@@ -3,7 +3,6 @@ package com.gildedgames.aether.common.world.aether.features.caves;
 import com.gildedgames.aether.api.world.generation.caves.CaveSystemNode;
 import com.gildedgames.aether.api.world.generation.caves.CaveSystemTunnel;
 import com.gildedgames.aether.api.world.generation.caves.ICaveSystemGenerator;
-import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
 import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
 import com.gildedgames.orbis_api.preparation.impl.ChunkMaskSegment;
@@ -106,76 +105,91 @@ public class WorldGenAetherCaves
 	private boolean carveTunnel(ChunkMask mask, int centerChunkX, int centerChunkZ, CaveSystemTunnel segment, int minPosX, int maxPosX, int minPosY,
 			int maxPosY, int minPosZ, int maxPosZ)
 	{
-		//		boolean doesNodeIntersectWater = false;
-		//
-		//		// Goes through each block from maxPosY + 1 to minPosY - 1 to check if the block is a water tile, as long as doesNodeIntersectWater is false
-		//		// Basically makes sure that the shell of the node doesn't intersect water and stops it from generating if it does
-		//		for (int x = minPosX; !doesNodeIntersectWater && x < maxPosX; ++x)
-		//		{
-		//			for (int z = minPosZ; !doesNodeIntersectWater && z < maxPosZ; ++z)
-		//			{
-		//				for (int y = maxPosY + 1; !doesNodeIntersectWater && y >= minPosY - 1; --y)
-		//				{
-		//					if (mask.getBlock(x, y, z) == IslandBlockType.WATER_BLOCK.ordinal())
-		//					{
-		//						doesNodeIntersectWater = true;
-		//					}
-		//
-		//					// If the block is not part of the outer layer of the node (the furthest-most blocks of the node) set the y to minPosY
-		//					// This makes it so it doesn't care if the interior has water in it, as long as none of the walls have water
-		//					if (y != minPosY - 1 && x != minPosX && x != maxPosX - 1 && z != minPosZ && z != maxPosZ - 1)
-		//					{
-		//						y = minPosY;
-		//					}
-		//				}
-		//			}
-		//		}
+		boolean doesNodeIntersectWater = false;
 
-		double wStep = 1.0 / segment.nodeWidthRadius;
-		double hStep = 1.0 / segment.nodeHeightRadius;
+		outerLoop:
 
-		double distX = (minPosX + (centerChunkX * 16) + 0.5D - segment.posX) * wStep;
-
+		// Goes through each block from maxPosY + 1 to minPosY - 1 to check if the block is a water tile, as long as doesNodeIntersectWater is false
+		// Basically makes sure that the shell of the node doesn't intersect water and stops it from generating if it does
 		for (int x = minPosX; x < maxPosX; ++x)
 		{
-			double distXSq = distX * distX;
+			boolean a = x != minPosX && x != maxPosX - 1;
 
-			if (distXSq < 1.0D)
+			for (int z = minPosZ; z < maxPosZ; ++z)
 			{
-				double distZ = (minPosZ + (centerChunkZ * 16) + 0.5D - segment.posZ) * wStep;
+				boolean b = z != minPosZ && z != maxPosZ - 1;
 
-				for (int z = minPosZ; z < maxPosZ; ++z)
+				for (int y = maxPosY + 1; y >= minPosY - 1; --y)
 				{
-					double distZSq = distZ * distZ;
-
-					// Makes it so it carves out a block from a cylinder rather than a cube (this is presumably to cut out on extra loops for blocks that shouldn't generate anyway)
-					if (distXSq + distZSq < 1.0D)
+					// If the block is not part of the outer layer of the node (the furthest-most blocks of the node) set the y to minPosY
+					// This makes it so it doesn't care if the interior has water in it, as long as none of the walls have water
+					if (y != minPosY - 1 && a && b)
 					{
-						double distY = (maxPosY - 0.5D - segment.posY) * hStep;
-
-						for (int y = maxPosY; y > minPosY; --y)
-						{
-							double distYSq = distY * distY;
-
-							// Checks to see if the block is inside the sphere (based on the Sphere's surface formula: x^2 + y^2 + z^2 = r2)
-							if (distYSq + distXSq + distZSq < 1.0D)
-							{
-								this.digBlock(mask, x, y, z);
-							}
-
-							distY -= hStep;
-						}
+						y = minPosY;
 					}
 
-					distZ += wStep;
+					int block = mask.getBlock(x, y, z);
+
+					if (block == IslandBlockType.WATER_BLOCK.ordinal() || block == IslandBlockType.COAST_BLOCK.ordinal())
+					{
+						doesNodeIntersectWater = true;
+
+						break outerLoop;
+					}
 				}
 			}
-
-			distX += wStep;
 		}
 
-		// If the tunnel is destined to be a room, it stops generation at 1 node
-		return segment.isRoom;
+		if (!doesNodeIntersectWater)
+		{
+			double wStep = 1.0 / segment.nodeWidthRadius;
+			double hStep = 1.0 / segment.nodeHeightRadius;
+
+			double distX = (minPosX + (centerChunkX * 16) + 0.5D - segment.posX) * wStep;
+
+			for (int x = minPosX; x < maxPosX; ++x)
+			{
+				double distXSq = distX * distX;
+
+				if (distXSq < 1.0D)
+				{
+					double distZ = (minPosZ + (centerChunkZ * 16) + 0.5D - segment.posZ) * wStep;
+
+					for (int z = minPosZ; z < maxPosZ; ++z)
+					{
+						double distZSq = distZ * distZ;
+
+						// Makes it so it carves out a block from a cylinder rather than a cube (this is presumably to cut out on extra loops for blocks that shouldn't generate anyway)
+						if (distXSq + distZSq < 1.0D)
+						{
+							double distY = (maxPosY - 0.5D - segment.posY) * hStep;
+
+							for (int y = maxPosY; y > minPosY; --y)
+							{
+								double distYSq = distY * distY;
+
+								// Checks to see if the block is inside the sphere (based on the Sphere's surface formula: x^2 + y^2 + z^2 = r2)
+								if (distYSq + distXSq + distZSq < 1.0D)
+								{
+									this.digBlock(mask, x, y, z);
+								}
+
+								distY -= hStep;
+							}
+						}
+
+						distZ += wStep;
+					}
+				}
+
+				distX += wStep;
+			}
+
+			// If the tunnel is destined to be a room, it stops generation at 1 node
+			return segment.isRoom;
+		}
+
+		return false;
 	}
 
 	private void digBlock(ChunkMask mask, int x, int y, int z)
@@ -184,21 +198,14 @@ public class WorldGenAetherCaves
 
 		if (segment != null)
 		{
-			int state = segment.getBlock(x, y & 15, z);
-
-			if (state == IslandBlockType.STONE_BLOCK.ordinal() || state == IslandBlockType.COAST_BLOCK.ordinal())
-			{
-				segment.setBlock(x, y & 15, z, IslandBlockType.AIR_BLOCK.ordinal());
-			}
+			segment.setBlock(x, y & 15, z, IslandBlockType.AIR_BLOCK.ordinal());
 		}
 
 //		mask.setBlock(x, y, z, IslandBlockType.FERROSITE_BLOCK.ordinal());
 	}
 
-	public void generate(IIslandData island, int centerChunkX, int centerChunkZ, ChunkMask mask)
+	public void generate(ICaveSystemGenerator generator, int centerChunkX, int centerChunkZ, ChunkMask mask)
 	{
-		ICaveSystemGenerator generator = island.getCaveSystemGenerator();
-
 		int i = generator.getNeighborChunkSearchRadius();
 
 		// Generates tunnels in the current chunk and surrounding ones in chunkRange distance (which is 8, so it generates tunnels in a 16x16 chunks area)
