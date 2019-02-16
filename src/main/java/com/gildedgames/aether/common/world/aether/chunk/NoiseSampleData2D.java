@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.world.aether.chunk;
 
-import com.gildedgames.aether.api.world.noise.IChunkNoiseBuffer;
+import com.gildedgames.aether.api.world.noise.IChunkNoiseBuffer2D;
 
-public class NoiseSampleData
+public class NoiseSampleData2D
 {
 	private final double[] data;
 
@@ -10,7 +10,7 @@ public class NoiseSampleData
 
 	private final int sampleCount;
 
-	public NoiseSampleData(double noiseScaleFactor, int sampleCount)
+	public NoiseSampleData2D(double noiseScaleFactor, int sampleCount)
 	{
 		this.noiseScaleFactor = noiseScaleFactor;
 		this.sampleCount = sampleCount;
@@ -28,9 +28,9 @@ public class NoiseSampleData
 		return this.data[(x * this.sampleCount) + z];
 	}
 
-	public IChunkNoiseBuffer createChunkBuffer()
+	public IChunkNoiseBuffer2D createInterpolatedNoiseBuffer()
 	{
-		return new ChunkNoiseBuffer(this.data,  this.noiseScaleFactor, this.sampleCount);
+		return new InterpolatedChunkNoiseBuffer2D(this.data,  this.noiseScaleFactor, this.sampleCount);
 	}
 
 }

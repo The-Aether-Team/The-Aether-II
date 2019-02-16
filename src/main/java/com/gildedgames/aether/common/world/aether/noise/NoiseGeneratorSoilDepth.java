@@ -1,10 +1,10 @@
 package com.gildedgames.aether.common.world.aether.noise;
 
 import com.gildedgames.aether.api.util.OpenSimplexNoise;
-import com.gildedgames.aether.api.world.noise.INoiseGenerator;
+import com.gildedgames.aether.api.world.noise.INoiseGenerator2D;
 import net.minecraft.util.math.MathHelper;
 
-public class NoiseGeneratorSoilDepth implements INoiseGenerator
+public class NoiseGeneratorSoilDepth implements INoiseGenerator2D
 {
 	private static final double NOISE_SCALE = 0.0625D;
 

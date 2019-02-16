@@ -8,7 +8,7 @@ import com.gildedgames.aether.api.world.generation.positioners.PositionerSurface
 import com.gildedgames.aether.api.world.islands.IIslandBounds;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
-import com.gildedgames.aether.api.world.noise.IChunkNoiseBuffer;
+import com.gildedgames.aether.api.world.noise.IChunkNoiseBuffer2D;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.IBlockSnowy;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
@@ -117,9 +117,9 @@ public class BiomeArcticPeaks extends BiomeAetherBase implements ISnowyBiome
 
 		IIslandBounds bounds  = island.getBounds();
 
-		final IChunkNoiseBuffer samples = new ChunkDataGeneratorSingle(new NoiseGeneratorIslandTerrain(provider.getNoise(), bounds), 4)
+		final IChunkNoiseBuffer2D samples = new ChunkDataGeneratorSingle(new NoiseGeneratorIslandTerrain(provider.getNoise(), bounds), 4)
 				.generate(chunkX, chunkZ)
-				.createChunkBuffer();
+				.createInterpolatedNoiseBuffer();
 
 		final int posX = pos.getX() + 8;
 		final int posZ = pos.getZ() + 8;

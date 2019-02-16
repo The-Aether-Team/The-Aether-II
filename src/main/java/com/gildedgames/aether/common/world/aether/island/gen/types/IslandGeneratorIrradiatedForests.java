@@ -8,15 +8,15 @@ import com.gildedgames.aether.api.world.islands.IIslandChunkColumnInfo;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.api.world.noise.IChunkHeightmap;
-import com.gildedgames.aether.api.world.noise.IChunkNoiseBuffer;
-import com.gildedgames.aether.api.world.noise.INoiseGenerator;
+import com.gildedgames.aether.api.world.noise.IChunkNoiseBuffer2D;
+import com.gildedgames.aether.api.world.noise.INoiseGenerator2D;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.CrackLineSegment;
 import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.IrradiatedForestsData;
-import com.gildedgames.aether.common.world.aether.chunk.ChunkDataGenerator;
-import com.gildedgames.aether.common.world.aether.chunk.NoiseSampleData;
+import com.gildedgames.aether.common.world.aether.chunk.ChunkDataGenerator2D;
+import com.gildedgames.aether.common.world.aether.chunk.NoiseSampleData2D;
 import com.gildedgames.aether.common.world.aether.island.gen.AbstractIslandChunkColumnInfo;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandChunkMaskTransformer;
@@ -100,23 +100,23 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 
 	private class IrradiatedForestsChunkColumnData extends AbstractIslandChunkColumnInfo
 	{
-		final IChunkNoiseBuffer topHeight;
-		final IChunkNoiseBuffer bottomHeight;
-		final IChunkNoiseBuffer heightSample_xz;
-		final IChunkNoiseBuffer topSample_xz;
-		final IChunkNoiseBuffer distToCrack;
+		final IChunkNoiseBuffer2D topHeight;
+		final IChunkNoiseBuffer2D bottomHeight;
+		final IChunkNoiseBuffer2D heightSample_xz;
+		final IChunkNoiseBuffer2D topSample_xz;
+		final IChunkNoiseBuffer2D distToCrack;
 
 		IrradiatedForestsChunkColumnData(OpenSimplexNoise noise, NoiseDataIrradiatedForests data)
 		{
 			super(noise, data.chunkX, data.chunkZ);
 			
-			this.topHeight = data.topHeight.createChunkBuffer();
-			this.bottomHeight = data.bottomHeight.createChunkBuffer();
+			this.topHeight = data.topHeight.createInterpolatedNoiseBuffer();
+			this.bottomHeight = data.bottomHeight.createInterpolatedNoiseBuffer();
 
-			this.distToCrack = data.distToCrack_xz.createChunkBuffer();
+			this.distToCrack = data.distToCrack_xz.createInterpolatedNoiseBuffer();
 
-			this.heightSample_xz = data.heightSample_xz.createChunkBuffer();
-			this.topSample_xz = data.topSample_xz.createChunkBuffer();
+			this.heightSample_xz = data.heightSample_xz.createInterpolatedNoiseBuffer();
+			this.topSample_xz = data.topSample_xz.createInterpolatedNoiseBuffer();
 
 			IChunkHeightmap heightmap = this.getHeightmap();
 
@@ -143,11 +143,11 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 		}
 	}
 
-	private class ChunkDataGeneratorIrradiatedForests extends ChunkDataGenerator<NoiseDataIrradiatedForests>
+	private class ChunkDataGeneratorIrradiatedForests extends ChunkDataGenerator2D<NoiseDataIrradiatedForests>
 	{
 		private static final int NOISE_RESOLUTION = 3;
 
-		private final INoiseGenerator terrain, terrace;
+		private final INoiseGenerator2D terrain, terrace;
 
 		private final IIslandData island;
 
@@ -251,13 +251,13 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 	
 	private class NoiseDataIrradiatedForests
 	{
-		final NoiseSampleData topHeight;
-		final NoiseSampleData bottomHeight;
+		final NoiseSampleData2D topHeight;
+		final NoiseSampleData2D bottomHeight;
 
-		final NoiseSampleData heightSample_xz;
-		final NoiseSampleData topSample_xz;
+		final NoiseSampleData2D heightSample_xz;
+		final NoiseSampleData2D topSample_xz;
 
-		final NoiseSampleData distToCrack_xz;
+		final NoiseSampleData2D distToCrack_xz;
 
 		final Collection<CrackLineSegment> cracks;
 
@@ -268,13 +268,13 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 			this.chunkX = chunkX;
 			this.chunkZ = chunkZ;
 
-			this.topHeight = new NoiseSampleData(noiseScaleFactor, noiseResolution);
-			this.bottomHeight = new NoiseSampleData(noiseScaleFactor, noiseResolution);
+			this.topHeight = new NoiseSampleData2D(noiseScaleFactor, noiseResolution);
+			this.bottomHeight = new NoiseSampleData2D(noiseScaleFactor, noiseResolution);
 
-			this.distToCrack_xz = new NoiseSampleData(noiseScaleFactor, noiseResolution);
+			this.distToCrack_xz = new NoiseSampleData2D(noiseScaleFactor, noiseResolution);
 
-			this.heightSample_xz = new NoiseSampleData(noiseScaleFactor, noiseResolution);
-			this.topSample_xz = new NoiseSampleData(noiseScaleFactor, noiseResolution);
+			this.heightSample_xz = new NoiseSampleData2D(noiseScaleFactor, noiseResolution);
+			this.topSample_xz = new NoiseSampleData2D(noiseScaleFactor, noiseResolution);
 
 			IrradiatedForestsData data = ObjectFilter.getFirstFrom(island.getComponents(), IrradiatedForestsData.class);
 

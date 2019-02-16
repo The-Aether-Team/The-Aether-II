@@ -2,9 +2,9 @@ package com.gildedgames.aether.common.world.aether.noise;
 
 import com.gildedgames.aether.api.util.NoiseUtil;
 import com.gildedgames.aether.api.util.OpenSimplexNoise;
-import com.gildedgames.aether.api.world.noise.INoiseGenerator;
+import com.gildedgames.aether.api.world.noise.INoiseGenerator2D;
 
-public class NoiseGeneratorClouds implements INoiseGenerator
+public class NoiseGeneratorClouds implements INoiseGenerator2D
 {
 	private static final double SCALE_FACTOR = 100.0D;
 

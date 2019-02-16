@@ -8,11 +8,11 @@ import com.gildedgames.aether.api.world.islands.IIslandChunkColumnInfo;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.api.world.noise.IChunkHeightmap;
-import com.gildedgames.aether.api.world.noise.IChunkNoiseBuffer;
-import com.gildedgames.aether.api.world.noise.INoiseGenerator;
+import com.gildedgames.aether.api.world.noise.IChunkNoiseBuffer2D;
+import com.gildedgames.aether.api.world.noise.INoiseGenerator2D;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
-import com.gildedgames.aether.common.world.aether.chunk.ChunkDataGenerator;
-import com.gildedgames.aether.common.world.aether.chunk.NoiseSampleData;
+import com.gildedgames.aether.common.world.aether.chunk.ChunkDataGenerator2D;
+import com.gildedgames.aether.common.world.aether.chunk.NoiseSampleData2D;
 import com.gildedgames.aether.common.world.aether.island.gen.AbstractIslandChunkColumnInfo;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandChunkMaskTransformer;
@@ -135,7 +135,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 		return transformer;
 	}
 
-	private class ChunkDataGeneratorHighlands extends ChunkDataGenerator<ChunkDataGeneratorHighlands.NoiseDataHighlands>
+	private class ChunkDataGeneratorHighlands extends ChunkDataGenerator2D<ChunkDataGeneratorHighlands.NoiseDataHighlands>
 	{
 		private static final int NOISE_RESOLUTION = 3;
 
@@ -145,9 +145,9 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 
 		private final double radiusX, radiusZ;
 
-		private final INoiseGenerator heightGen;
+		private final INoiseGenerator2D heightGen;
 
-		private final INoiseGenerator terraceGen;
+		private final INoiseGenerator2D terraceGen;
 
 		public ChunkDataGeneratorHighlands(OpenSimplexNoise noise, IIslandData island, IslandVariables vars)
 		{
@@ -233,15 +233,15 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 		{
 			final int chunkX, chunkZ;
 
-			final NoiseSampleData minY, maxY;
+			final NoiseSampleData2D minY, maxY;
 
 			NoiseDataHighlands(double noiseScaleFactor, int sampleCount, int chunkX, int chunkZ)
 			{
 				this.chunkX = chunkX;
 				this.chunkZ = chunkZ;
 
-				this.minY = new NoiseSampleData(noiseScaleFactor, sampleCount);
-				this.maxY = new NoiseSampleData(noiseScaleFactor, sampleCount);
+				this.minY = new NoiseSampleData2D(noiseScaleFactor, sampleCount);
+				this.maxY = new NoiseSampleData2D(noiseScaleFactor, sampleCount);
 			}
 		}
 	}
@@ -249,14 +249,14 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 	// The final resulting data for the chunk column for Highlands terrain.
 	private class HighlandsChunkColumnInfo extends AbstractIslandChunkColumnInfo
 	{
-		final IChunkNoiseBuffer minY, maxY;
+		final IChunkNoiseBuffer2D minY, maxY;
 
 		HighlandsChunkColumnInfo(ChunkDataGeneratorHighlands.NoiseDataHighlands data, OpenSimplexNoise noise)
 		{
 			super(noise, data.chunkX, data.chunkZ);
 
-			this.minY = data.minY.createChunkBuffer();
-			this.maxY = data.maxY.createChunkBuffer();
+			this.minY = data.minY.createInterpolatedNoiseBuffer();
+			this.maxY = data.maxY.createInterpolatedNoiseBuffer();
 		}
 	}
 

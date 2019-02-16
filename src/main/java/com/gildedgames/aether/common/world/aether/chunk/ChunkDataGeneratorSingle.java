@@ -1,12 +1,12 @@
 package com.gildedgames.aether.common.world.aether.chunk;
 
-import com.gildedgames.aether.api.world.noise.INoiseGenerator;
+import com.gildedgames.aether.api.world.noise.INoiseGenerator2D;
 
-public class ChunkDataGeneratorSingle extends ChunkDataGenerator<NoiseSampleData>
+public class ChunkDataGeneratorSingle extends ChunkDataGenerator2D<NoiseSampleData2D>
 {
-	private final INoiseGenerator generator;
+	private final INoiseGenerator2D generator;
 
-	public ChunkDataGeneratorSingle(INoiseGenerator generator, int noiseResolution)
+	public ChunkDataGeneratorSingle(INoiseGenerator2D generator, int noiseResolution)
 	{
 		super(noiseResolution);
 
@@ -14,13 +14,13 @@ public class ChunkDataGeneratorSingle extends ChunkDataGenerator<NoiseSampleData
 	}
 
 	@Override
-	protected NoiseSampleData prepare(int chunkX, int chunkZ)
+	protected NoiseSampleData2D prepare(int chunkX, int chunkZ)
 	{
-		return new NoiseSampleData(this.noiseScaleFactor, this.noiseSampleCount);
+		return new NoiseSampleData2D(this.noiseScaleFactor, this.noiseSampleCount);
 	}
 
 	@Override
-	protected void generate(NoiseSampleData data, int x, int z, double worldX, double worldZ)
+	protected void generate(NoiseSampleData2D data, int x, int z, double worldX, double worldZ)
 	{
 		data.set(x, z, this.generator.generate(worldX, worldZ));
 	}

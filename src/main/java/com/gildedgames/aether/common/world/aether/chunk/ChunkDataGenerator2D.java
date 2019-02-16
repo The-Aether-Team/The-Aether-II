@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.world.aether.chunk;
 
-public abstract class ChunkDataGenerator<T>
+public abstract class ChunkDataGenerator2D<T>
 {
 	// The scale of each sampled point in world coordinates.
 	protected final double noiseScaleFactor;
@@ -9,7 +9,7 @@ public abstract class ChunkDataGenerator<T>
 	// to generate samples at the top and right edges in order to interpolate cleanly into adjacent chunks.
 	protected final int noiseSampleCount;
 
-	public ChunkDataGenerator(int noiseResolution)
+	public ChunkDataGenerator2D(int noiseResolution)
 	{
 		// Sanity check. We can't handle very high resolutions where the scale factor would be a fraction of a world coordinate.
 		if (noiseResolution > 16)

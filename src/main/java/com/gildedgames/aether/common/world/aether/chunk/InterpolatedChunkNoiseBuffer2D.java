@@ -1,12 +1,12 @@
 package com.gildedgames.aether.common.world.aether.chunk;
 
-import com.gildedgames.aether.api.world.noise.IChunkNoiseBuffer;
+import com.gildedgames.aether.api.world.noise.IChunkNoiseBuffer2D;
 
-public class ChunkNoiseBuffer implements IChunkNoiseBuffer
+public class InterpolatedChunkNoiseBuffer2D implements IChunkNoiseBuffer2D
 {
 	private final double[] interpolatedSamples;
 
-	public ChunkNoiseBuffer(double[] samples, final double noiseScaleFactor, final int sampleCount)
+	public InterpolatedChunkNoiseBuffer2D(double[] samples, final double noiseScaleFactor, final int sampleCount)
 	{
 		this.interpolatedSamples = new double[16 * 16];
 

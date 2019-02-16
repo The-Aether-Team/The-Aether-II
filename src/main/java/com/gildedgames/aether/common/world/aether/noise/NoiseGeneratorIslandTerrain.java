@@ -2,9 +2,9 @@ package com.gildedgames.aether.common.world.aether.noise;
 
 import com.gildedgames.aether.api.util.OpenSimplexNoise;
 import com.gildedgames.aether.api.world.islands.IIslandBounds;
-import com.gildedgames.aether.api.world.noise.INoiseGenerator;
+import com.gildedgames.aether.api.world.noise.INoiseGenerator2D;
 
-public class NoiseGeneratorIslandTerrain implements INoiseGenerator
+public class NoiseGeneratorIslandTerrain implements INoiseGenerator2D
 {
 	private static final double NOISE_SCALE = 300.0D;
 

@@ -8,10 +8,10 @@ import com.gildedgames.aether.api.world.islands.IIslandChunkColumnInfo;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.api.world.noise.IChunkHeightmap;
-import com.gildedgames.aether.api.world.noise.IChunkNoiseBuffer;
-import com.gildedgames.aether.api.world.noise.INoiseGenerator;
-import com.gildedgames.aether.common.world.aether.chunk.ChunkDataGenerator;
-import com.gildedgames.aether.common.world.aether.chunk.NoiseSampleData;
+import com.gildedgames.aether.api.world.noise.IChunkNoiseBuffer2D;
+import com.gildedgames.aether.api.world.noise.INoiseGenerator2D;
+import com.gildedgames.aether.common.world.aether.chunk.ChunkDataGenerator2D;
+import com.gildedgames.aether.common.world.aether.chunk.NoiseSampleData2D;
 import com.gildedgames.aether.common.world.aether.island.gen.AbstractIslandChunkColumnInfo;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandChunkMaskTransformer;
@@ -98,7 +98,7 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 		return info;
 	}
 
-	private class ChunkDataGeneratorMegacoast extends ChunkDataGenerator<ChunkDataGeneratorMegacoast.NoiseDataMegacoast>
+	private class ChunkDataGeneratorMegacoast extends ChunkDataGenerator2D<ChunkDataGeneratorMegacoast.NoiseDataMegacoast>
 	{
 		private static final int NOISE_RESOLUTION = 3;
 
@@ -106,7 +106,7 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 
 		private final double radiusX, radiusZ;
 
-		private final INoiseGenerator heightGen;
+		private final INoiseGenerator2D heightGen;
 
 		public ChunkDataGeneratorMegacoast(OpenSimplexNoise noise, IIslandData island)
 		{
@@ -185,29 +185,29 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 		{
 			final int chunkX, chunkZ;
 
-			final NoiseSampleData bottomHeight, topHeight;
+			final NoiseSampleData2D bottomHeight, topHeight;
 
 			NoiseDataMegacoast(double noiseScaleFactor, int sampleCount, int chunkX, int chunkZ)
 			{
 				this.chunkX = chunkX;
 				this.chunkZ = chunkZ;
 
-				this.bottomHeight = new NoiseSampleData(noiseScaleFactor, sampleCount);
-				this.topHeight = new NoiseSampleData(noiseScaleFactor, sampleCount);
+				this.bottomHeight = new NoiseSampleData2D(noiseScaleFactor, sampleCount);
+				this.topHeight = new NoiseSampleData2D(noiseScaleFactor, sampleCount);
 			}
 		}
 	}
 
 	private class HighlandMegacostChunkColumnInfo extends AbstractIslandChunkColumnInfo
 	{
-		final IChunkNoiseBuffer bottomHeight, topHeight;
+		final IChunkNoiseBuffer2D bottomHeight, topHeight;
 
 		HighlandMegacostChunkColumnInfo(ChunkDataGeneratorMegacoast.NoiseDataMegacoast data, OpenSimplexNoise noise)
 		{
 			super(noise, data.chunkX, data.chunkZ);
 
-			this.bottomHeight = data.bottomHeight.createChunkBuffer();
-			this.topHeight = data.topHeight.createChunkBuffer();
+			this.bottomHeight = data.bottomHeight.createInterpolatedNoiseBuffer();
+			this.topHeight = data.topHeight.createInterpolatedNoiseBuffer();
 		}
 	}
 

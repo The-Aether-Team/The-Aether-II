@@ -6,7 +6,7 @@ import com.gildedgames.aether.api.world.islands.IIslandChunkColumnInfo;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.api.world.noise.IChunkHeightmap;
-import com.gildedgames.aether.api.world.noise.IChunkNoiseBuffer;
+import com.gildedgames.aether.api.world.noise.IChunkNoiseBuffer2D;
 import com.gildedgames.aether.common.world.aether.biomes.arctic_peaks.BiomeArcticPeaks;
 import com.gildedgames.aether.common.world.aether.features.WorldGenUndergroundVeins;
 import com.gildedgames.aether.common.world.aether.features.caves.WorldGenAetherCaves;
@@ -62,7 +62,7 @@ public class WorldPreparationAether
 
 		IIslandChunkColumnInfo chunkInfo = info.getIslandData(0, IIslandChunkColumnInfo.class);
 
-		IChunkNoiseBuffer cloudBuffer = chunkInfo.getCloudDepthBuffer();
+		IChunkNoiseBuffer2D cloudBuffer = chunkInfo.getCloudDepthBuffer();
 
 		double threshold = 0.2;
 

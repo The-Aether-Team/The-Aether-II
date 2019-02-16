@@ -1,6 +1,6 @@
 package com.gildedgames.aether.api.world.noise;
 
-public interface IChunkNoiseBuffer
+public interface IChunkNoiseBuffer2D
 {
 	double get(int x, int z);
 
