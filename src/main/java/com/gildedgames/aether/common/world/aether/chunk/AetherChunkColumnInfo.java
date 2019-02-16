@@ -34,22 +34,4 @@ public class AetherChunkColumnInfo implements IAetherChunkColumnInfo
 	{
 		return (T) this.islands[index];
 	}
-
-	@Override
-	public int getHeight(int x, int z)
-	{
-		int height = 0;
-
-		for (IIslandChunkColumnInfo info : this.islands)
-		{
-			int i = info.getHeightmap().getHeight(x, z);
-
-			if (i > height)
-			{
-				return i;
-			}
-		}
-
-		return height;
-	}
 }

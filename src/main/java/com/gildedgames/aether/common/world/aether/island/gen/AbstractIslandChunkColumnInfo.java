@@ -6,14 +6,11 @@ import com.gildedgames.aether.api.world.noise.IChunkNoiseBuffer2D;
 import com.gildedgames.aether.common.world.aether.chunk.ChunkDataGeneratorSingle;
 import com.gildedgames.aether.common.world.aether.noise.NoiseGeneratorClouds;
 import com.gildedgames.aether.common.world.aether.noise.NoiseGeneratorSoilDepth;
-import com.gildedgames.aether.common.world.util.data.ChunkHeightmap;
 
 public abstract class AbstractIslandChunkColumnInfo implements IIslandChunkColumnInfo
 {
 	// Lazily initialized.
 	private IChunkNoiseBuffer2D terrainDepthBuffer, cloudDepthBuffer;
-
-	private final ChunkHeightmap heightmap = new ChunkHeightmap();
 
 	private final OpenSimplexNoise noise;
 
@@ -51,17 +48,5 @@ public abstract class AbstractIslandChunkColumnInfo implements IIslandChunkColum
 		}
 
 		return this.cloudDepthBuffer;
-	}
-
-	@Override
-	public ChunkHeightmap getHeightmap()
-	{
-		return this.heightmap;
-	}
-
-	@Override
-	public boolean hasSoil(int x, int z)
-	{
-		return true;
 	}
 }

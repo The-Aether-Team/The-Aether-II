@@ -7,7 +7,6 @@ import com.gildedgames.aether.api.world.islands.IIslandBounds;
 import com.gildedgames.aether.api.world.islands.IIslandChunkColumnInfo;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
-import com.gildedgames.aether.api.world.noise.IChunkHeightmap;
 import com.gildedgames.aether.api.world.noise.IChunkNoiseBuffer2D;
 import com.gildedgames.aether.api.world.noise.INoiseGenerator2D;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
@@ -49,22 +48,7 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 				.generate(chunkX, chunkZ);
 
 		// Generate chunk column information from low-resolution terrain data
-		final HighlandsChunkColumnInfo info = new HighlandsChunkColumnInfo(data, noise);
-
-		IChunkHeightmap heightmap = info.getHeightmap();
-
-		// Populate height-map
-		for (int x = 0; x < 16; x++)
-		{
-			for (int z = 0; z < 16; z++)
-			{
-				double maxY = info.maxY.get(x, z);
-
-				heightmap.setHeight(x, z, (int) maxY);
-			}
-		}
-
-		return info;
+		return new HighlandsChunkColumnInfo(data, noise);
 	}
 
 	@Override

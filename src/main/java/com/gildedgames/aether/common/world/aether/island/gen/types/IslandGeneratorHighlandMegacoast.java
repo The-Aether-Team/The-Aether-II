@@ -7,7 +7,6 @@ import com.gildedgames.aether.api.world.islands.IIslandBounds;
 import com.gildedgames.aether.api.world.islands.IIslandChunkColumnInfo;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
-import com.gildedgames.aether.api.world.noise.IChunkHeightmap;
 import com.gildedgames.aether.api.world.noise.IChunkNoiseBuffer2D;
 import com.gildedgames.aether.api.world.noise.INoiseGenerator2D;
 import com.gildedgames.aether.common.world.aether.chunk.ChunkDataGenerator2D;
@@ -79,23 +78,10 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 	@Override
 	public IIslandChunkColumnInfo generateColumnInfo(OpenSimplexNoise noise, IIslandData island, int chunkX, int chunkZ)
 	{
-
 		final ChunkDataGeneratorMegacoast.NoiseDataMegacoast data = new ChunkDataGeneratorMegacoast(noise, island)
 				.generate(chunkX, chunkZ);
 
-		final HighlandMegacostChunkColumnInfo info = new HighlandMegacostChunkColumnInfo(data, noise);
-
-		IChunkHeightmap heightMap = info.getHeightmap();
-
-		for (int x = 0; x < 16; x++)
-		{
-			for (int z = 0; z < 16; z++)
-			{
-				heightMap.setHeight(x, z, BOTTOM_MAX_Y + (int) info.topHeight.get(x, z));
-			}
-		}
-
-		return info;
+		return new HighlandMegacostChunkColumnInfo(data, noise);
 	}
 
 	private class ChunkDataGeneratorMegacoast extends ChunkDataGenerator2D<ChunkDataGeneratorMegacoast.NoiseDataMegacoast>

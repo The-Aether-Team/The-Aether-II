@@ -12,14 +12,8 @@ public class WorldGenAetherCaves
 {
 	private void tryCarveTunnel(ChunkMask mask, CaveSystemNode node, double chunkBlockCenterX, double chunkBlockCenterZ, int centerChunkX, int centerChunkZ)
 	{
-		double chunkMaxY = mask.getMaxYSegment();
-
-		if (chunkMaxY <= 0)
-		{
-			return;
-		}
-
-		double chunkMinY = mask.getMinYSegment();
+		double chunkMaxY = (mask.getMaxYSegment() * 8) + 8;
+		double chunkMinY = (mask.getMinYSegment() * 8);
 
 		for (CaveSystemTunnel segment : node.entries)
 		{
@@ -194,11 +188,11 @@ public class WorldGenAetherCaves
 
 	private void digBlock(ChunkMask mask, int x, int y, int z)
 	{
-		ChunkMaskSegment segment = mask.getSegment(y >> 4);
+		ChunkMaskSegment segment = mask.getSegment(y >> 3);
 
 		if (segment != null)
 		{
-			segment.setBlock(x, y & 15, z, IslandBlockType.AIR_BLOCK.ordinal());
+			segment.setBlock(x, y & 7, z, IslandBlockType.AIR_BLOCK.ordinal());
 		}
 
 //		mask.setBlock(x, y, z, IslandBlockType.FERROSITE_BLOCK.ordinal());

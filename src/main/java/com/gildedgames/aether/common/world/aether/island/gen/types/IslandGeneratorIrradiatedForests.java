@@ -7,7 +7,6 @@ import com.gildedgames.aether.api.world.islands.IIslandBounds;
 import com.gildedgames.aether.api.world.islands.IIslandChunkColumnInfo;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
-import com.gildedgames.aether.api.world.noise.IChunkHeightmap;
 import com.gildedgames.aether.api.world.noise.IChunkNoiseBuffer2D;
 import com.gildedgames.aether.api.world.noise.INoiseGenerator2D;
 import com.gildedgames.aether.common.AetherCore;
@@ -118,16 +117,12 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 			this.heightSample_xz = data.heightSample_xz.createInterpolatedNoiseBuffer();
 			this.topSample_xz = data.topSample_xz.createInterpolatedNoiseBuffer();
 
-			IChunkHeightmap heightmap = this.getHeightmap();
-
 			for (int x = 0; x < 16; x++)
 			{
 				for (int z = 0; z < 16; z++)
 				{
 					double top = this.topHeight.get(x, z);
 					double bottom = this.bottomHeight.get(x, z);
-
-					heightmap.setHeight(x, z, BOTTOM_HEIGHT + (int) top);
 
 					double closestCrackDist = this.distToCrack.get(x, z);
 

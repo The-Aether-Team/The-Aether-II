@@ -5,7 +5,6 @@ import com.gildedgames.aether.api.world.IAetherChunkColumnInfo;
 import com.gildedgames.aether.api.world.islands.IIslandChunkColumnInfo;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
-import com.gildedgames.aether.api.world.noise.IChunkHeightmap;
 import com.gildedgames.aether.api.world.noise.IChunkNoiseBuffer2D;
 import com.gildedgames.aether.common.world.aether.biomes.arctic_peaks.BiomeArcticPeaks;
 import com.gildedgames.aether.common.world.aether.features.WorldGenUndergroundVeins;
@@ -90,23 +89,11 @@ public class WorldPreparationAether
 	{
 		IIslandChunkColumnInfo chunkInfo = info.getIslandData(0, IIslandChunkColumnInfo.class);
 
-		IChunkHeightmap heightmap = chunkInfo.getHeightmap();
-
-		if (heightmap.isEmpty())
-		{
-			return;
-		}
-
 		for (int x = 0; x < 16; x++)
 		{
 			for (int z = 0; z < 16; z++)
 			{
-				if (!chunkInfo.hasSoil(x, z))
-				{
-					continue;
-				}
-
-				int height = heightmap.getHeight(x, z);
+				int height = mask.getHighestBlock(x, z);
 
 				if (height == 0)
 				{
