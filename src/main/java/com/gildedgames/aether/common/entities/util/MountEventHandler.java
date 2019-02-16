@@ -3,7 +3,6 @@ package com.gildedgames.aether.common.entities.util;
 import com.gildedgames.aether.api.entity.IMount;
 import com.gildedgames.aether.api.entity.IMountProcessor;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.ReflectionAether;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
@@ -16,7 +15,6 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -143,7 +141,7 @@ public class MountEventHandler
 			forward *= 0.25F;
 		}
 
-		final boolean riderIsJumping = ObfuscationReflectionHelper.getPrivateValue(EntityLivingBase.class, rider, ReflectionAether.IS_JUMPING.getMappings());
+		final boolean riderIsJumping = rider.isJumping;
 
 		if (riderIsJumping)
 		{

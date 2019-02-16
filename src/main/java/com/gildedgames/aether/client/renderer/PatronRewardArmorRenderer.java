@@ -7,7 +7,6 @@ import com.gildedgames.aether.client.models.entities.player.LayerAetherPatronArm
 import com.gildedgames.aether.client.models.entities.player.LayerAetherPlayerGloves;
 import com.gildedgames.aether.client.models.entities.player.LayerArmorProxy;
 import com.gildedgames.aether.client.models.entities.player.LayerHeadShadow;
-import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.patron.armor.PatronRewardArmor;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
@@ -17,14 +16,12 @@ import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,9 +77,7 @@ public class PatronRewardArmorRenderer implements IPatronRewardRenderer
 
 		this.renderPlayer = new RenderPlayer(Minecraft.getMinecraft().getRenderManager(), EntityUtil.getSkin(this.player).equals("slim"));
 
-		Field field = ReflectionAether.getField(RenderLivingBase.class, ReflectionAether.ENTITY_RENDER_LAYERS.getMappings());
-
-		List<LayerRenderer<?>> original = new ArrayList<>(ReflectionAether.getValue(field, this.renderPlayer));
+		List<LayerRenderer<?>> original = new ArrayList<>(this.renderPlayer.layerRenderers);
 		List<LayerRenderer<?>> updated = new ArrayList<>();
 
 		for (LayerRenderer<?> i : original)
@@ -101,7 +96,8 @@ public class PatronRewardArmorRenderer implements IPatronRewardRenderer
 		updated.add(this.glovePreviewLayer = new LayerAetherPlayerGloves(this.renderPlayer));
 		updated.add(this.shadowPreviewLayer = new LayerHeadShadow(this.renderPlayer));
 
-		ReflectionAether.setField(field, this.renderPlayer, updated);
+		original.clear();
+		original.addAll(updated);
 	}
 
 	@Override

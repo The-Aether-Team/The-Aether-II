@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.items;
 
-import com.gildedgames.aether.common.ReflectionAether;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderItem;
@@ -13,21 +12,14 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.lang.reflect.Method;
-
 public class ItemIrradiatedVisuals extends Item
 {
-	private static Method RENDER_MODEL_METHOD;
-
 	private static ResourceLocation RES_ITEM_GLINT;
 
 	static
 	{
 		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
 		{
-			RENDER_MODEL_METHOD = ReflectionAether.getMethod(RenderItem.class, new Class<?>[] { IBakedModel.class,
-					int.class }, "renderModel", "func_191965_a");
-
 			RES_ITEM_GLINT = new ResourceLocation("textures/misc/enchanted_item_glint.png");
 		}
 	}
@@ -77,7 +69,7 @@ public class ItemIrradiatedVisuals extends Item
 		GlStateManager.translate(f, 0.0F, 0.0F);
 		GlStateManager.rotate(-50.0F, 0.0F, 0.0F, 1.0F);
 
-		ReflectionAether.invokeMethod(RENDER_MODEL_METHOD, mc.getRenderItem(), model, -999999992);
+		mc.getRenderItem().renderModel(model, -999999992);
 
 		GlStateManager.popMatrix();
 		GlStateManager.pushMatrix();
@@ -88,7 +80,7 @@ public class ItemIrradiatedVisuals extends Item
 		GlStateManager.translate(-f1, 0.0F, 0.0F);
 		GlStateManager.rotate(10.0F, 0.0F, 0.0F, 1.0F);
 
-		ReflectionAether.invokeMethod(RENDER_MODEL_METHOD, mc.getRenderItem(), model, -999999992);
+		mc.getRenderItem().renderModel(model, -999999992);
 
 		GlStateManager.popMatrix();
 		GlStateManager.matrixMode(5888);

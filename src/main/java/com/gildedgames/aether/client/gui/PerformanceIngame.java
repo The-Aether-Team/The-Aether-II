@@ -1,21 +1,15 @@
 package com.gildedgames.aether.client.gui;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.ReflectionAether;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
-import java.lang.reflect.Field;
-
 public class PerformanceIngame extends Gui
 {
-	private static final Field SERVER_CURRENT_TIME_FIELD = ReflectionAether.getField(MinecraftServer.class, ReflectionAether.SERVER_CURRENT_TIME.getMappings());
-
 	private static final ResourceLocation SERVER_STALL_ICON = AetherCore.getResource("textures/gui/overlay/server_stall.png");
 
 	private static final int ANIMATION_FRAMES = 4;
@@ -122,8 +116,7 @@ public class PerformanceIngame extends Gui
 
 		this.isDisabled = false;
 
-		this.timeSinceLastTick = System.currentTimeMillis() - (long) ReflectionAether.getValue(SERVER_CURRENT_TIME_FIELD,
-				FMLCommonHandler.instance().getMinecraftServerInstance());
+		this.timeSinceLastTick = System.currentTimeMillis() - FMLCommonHandler.instance().getMinecraftServerInstance().currentTime;
 
 		if (this.timeSinceLastTick > 200)
 		{

@@ -3,11 +3,9 @@ package com.gildedgames.aether.client.renderer.world;
 import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.world.islands.precipitation.IPrecipitationManager;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.ReflectionAether;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -16,8 +14,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.client.IRenderHandler;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.Project;
-
-import java.lang.reflect.Method;
 
 public class RenderWorldSkybox extends IRenderHandler
 {
@@ -128,10 +124,7 @@ public class RenderWorldSkybox extends IRenderHandler
 
 	private float getFOVModifier(float partialTicks, boolean useFOVSetting)
 	{
-		Method method = ReflectionAether
-				.getMethod(EntityRenderer.class, new Class[] { Float.TYPE, Boolean.TYPE }, ReflectionAether.GET_FOV_MODIFIER.getMappings());
-
-		return (float) ReflectionAether.invokeMethod(method, Minecraft.getMinecraft().entityRenderer, partialTicks, useFOVSetting);
+		return Minecraft.getMinecraft().entityRenderer.getFOVModifier(partialTicks, useFOVSetting);
 	}
 
 	private void updateLightmap(Minecraft mc, float partialTicks)

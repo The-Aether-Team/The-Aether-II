@@ -33,7 +33,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.event.*;
 
 import javax.annotation.Nullable;
@@ -198,7 +197,7 @@ public class CommonProxy implements IAetherServices
 				}
 
 				/** Strange flag that needs to be set to prevent the NetHandlerPlayServer instances from resetting your position **/
-				ObfuscationReflectionHelper.setPrivateValue(EntityPlayerMP.class, player, true, ReflectionAether.INVULNERABLE_DIMENSION_CHANGE.getMappings());
+				player.invulnerableDimensionChange = true;
 
 				PostAetherTravelEvent event = new PostAetherTravelEvent(entity);
 				MinecraftForge.EVENT_BUS.post(event);

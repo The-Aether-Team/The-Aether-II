@@ -2,7 +2,6 @@ package com.gildedgames.aether.common.world.templates;
 
 import com.gildedgames.aether.api.util.TemplateUtil;
 import com.gildedgames.aether.api.world.generation.*;
-import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.multiblock.BlockMultiDummy;
 import com.gildedgames.aether.common.blocks.multiblock.BlockMultiDummyHalf;
@@ -30,16 +29,11 @@ import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 
 import javax.annotation.Nullable;
-import java.lang.reflect.Field;
 import java.util.List;
 import java.util.UUID;
 
 public class TemplatePrimer
 {
-	private static final Field GET_BLOCKS_FIELD = ReflectionAether.getField(Template.class, "blocks", "field_186270_a");
-
-	private static final Field GET_ENTITIES_FIELD = ReflectionAether.getField(Template.class, "entities", "field_186271_b");
-
 	public static boolean canGenerate(final IBlockAccessExtended blockAccess, final TemplateDefinition def, final TemplateLoc loc)
 	{
 		BlockPos pos = loc.getPos();
@@ -56,7 +50,7 @@ public class TemplatePrimer
 			return false;
 		}
 
-		final List<Template.BlockInfo> info = TemplatePrimer.getBlocks(def.getTemplate());
+		final List<Template.BlockInfo> info = def.getTemplate().blocks;
 
 		final List<Template.BlockInfo> infoTransformed = TemplatePrimer.getBlocks(info, pos, loc.getSettings(), def.getTemplate());
 
@@ -95,13 +89,6 @@ public class TemplatePrimer
 		TemplatePrimer.populateAll(def.getTemplate(), blockAccess, pos, processor, loc.getSettings());
 	}
 
-
-	@SuppressWarnings("unchecked")
-	public static List<Template.BlockInfo> getBlocks(final Template template)
-	{
-		return (List<Template.BlockInfo>) ReflectionAether.getValue(GET_BLOCKS_FIELD, template);
-	}
-
 	public static List<Template.BlockInfo> getBlocks(final List<Template.BlockInfo> blockInfo, final BlockPos pos, final PlacementSettings settings,
 			final Template template)
 	{
@@ -131,17 +118,11 @@ public class TemplatePrimer
 		return blockPos;
 	}
 
-	@SuppressWarnings("unchecked")
-	private static List<Template.EntityInfo> getEntities(final Template template)
-	{
-		return (List<Template.EntityInfo>) ReflectionAether.getValue(GET_ENTITIES_FIELD, template);
-	}
-
 	public static void populateAll(final Template template, final IBlockAccessExtended blockAccess, final BlockPos pos,
 			@Nullable final ITemplateProcessorExtended processor,
 			final PlacementSettings settings)
 	{
-		final List<Template.BlockInfo> blocks = TemplatePrimer.getBlocks(template);
+		final List<Template.BlockInfo> blocks = template.blocks;
 
 		if (!blocks.isEmpty() && template.getSize().getX() >= 1 && template.getSize().getY() >= 1 && template.getSize().getZ() >= 1)
 		{
@@ -272,7 +253,7 @@ public class TemplatePrimer
 	private static void addEntitiesToWorld(final Template template, final World worldIn, final BlockPos pos, final Mirror mirrorIn, final Rotation rotationIn,
 			@Nullable final StructureBoundingBox aabb)
 	{
-		final List<Template.EntityInfo> entities = TemplatePrimer.getEntities(template);
+		final List<Template.EntityInfo> entities = template.entities;
 
 		for (final Template.EntityInfo template$entityinfo : entities)
 		{

@@ -9,7 +9,6 @@ import com.gildedgames.aether.client.models.entities.player.*;
 import com.gildedgames.aether.client.renderer.entities.living.RenderPlayerHelper;
 import com.gildedgames.aether.client.renderer.particles.ParticleRainProxyFactory;
 import com.gildedgames.aether.client.renderer.world.RenderWorldPrecipitation;
-import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
@@ -31,7 +30,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -45,9 +43,7 @@ public class ClientRenderHandler
 	{
 		for (RenderLivingBase<?> playerRender : new HashSet<>(Minecraft.getMinecraft().getRenderManager().getSkinMap().values()))
 		{
-			Field field = ReflectionAether.getField(RenderLivingBase.class, ReflectionAether.ENTITY_RENDER_LAYERS.getMappings());
-
-			List<LayerRenderer<?>> original = new ArrayList<>(ReflectionAether.getValue(field, playerRender));
+			List<LayerRenderer<?>> original = new ArrayList<>(playerRender.layerRenderers);
 			List<LayerRenderer<?>> updated = new ArrayList<>();
 
 			for (LayerRenderer<?> i : original)
@@ -67,7 +63,8 @@ public class ClientRenderHandler
 			updated.add(new LayerSwetLatch(playerRender));
 			updated.add(new LayerAetherPatronArmor(playerRender));
 
-			ReflectionAether.setField(field, playerRender, updated);
+			original.clear();
+			original.addAll(updated);
 		}
 
 		ClientRenderHandler.overlays.add(new PortalOverlay());

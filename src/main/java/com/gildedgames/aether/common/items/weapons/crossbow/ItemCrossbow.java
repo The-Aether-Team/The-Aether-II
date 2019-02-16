@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.items.weapons.crossbow;
 
-import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt.BoltAbility;
 import com.gildedgames.aether.common.items.ItemsAether;
@@ -21,7 +20,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -183,8 +181,7 @@ public class ItemCrossbow extends Item
 			if (entityLiving.world.isRemote)
 			{
 				final ItemRenderer renderer = Minecraft.getMinecraft().getItemRenderer();
-
-				ObfuscationReflectionHelper.setPrivateValue(ItemRenderer.class, renderer, 1.5F, ReflectionAether.EQUIPPED_PROGRESS_MAIN_HAND.getMappings());
+				renderer.equippedProgressMainHand = 1.5F;
 			}
 
 			this.shootBolt(entityLiving, stack);
@@ -194,7 +191,7 @@ public class ItemCrossbow extends Item
 				ItemCrossbow.setLoaded(stack, false);
 			}
 
-			ObfuscationReflectionHelper.setPrivateValue(EntityLivingBase.class, entityLiving, 0, ReflectionAether.ACTIVE_ITEMSTACK_USE_COUNT.getMappings());
+			entityLiving.activeItemStackUseCount = 0;
 
 			return true;
 		}

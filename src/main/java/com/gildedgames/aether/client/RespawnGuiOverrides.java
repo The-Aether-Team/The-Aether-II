@@ -1,6 +1,5 @@
 package com.gildedgames.aether.client;
 
-import com.gildedgames.aether.common.ReflectionAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketSetShouldRespawnAtCampfire;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
@@ -10,11 +9,8 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
-
-import java.util.List;
 
 @Mod.EventBusSubscriber(Side.CLIENT)
 public class RespawnGuiOverrides
@@ -26,9 +22,7 @@ public class RespawnGuiOverrides
 
 		if (gui instanceof GuiGameOver && gui.mc.world.provider.getDimensionType() == DimensionsAether.AETHER)
 		{
-			List<GuiButton> buttonList = ObfuscationReflectionHelper.getPrivateValue(GuiScreen.class, gui, ReflectionAether.BUTTON_LIST.getMappings());
-
-			buttonList.get(2).enabled = buttonList.get(1).enabled;
+			gui.buttonList.get(2).enabled = gui.buttonList.get(1).enabled;
 		}
 	}
 
