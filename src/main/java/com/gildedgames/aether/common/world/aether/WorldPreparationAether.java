@@ -39,19 +39,18 @@ public class WorldPreparationAether
 
 	public void generateFull(IAetherChunkColumnInfo info, ChunkMask mask, IIslandData island, int chunkX, int chunkZ, long seed)
 	{
-		this.generateCloudLayer(info, mask);
-
 		final IIslandGenerator generator = island.getGenerator();
 		generator.generateChunkSegment(info, mask, island, chunkX, chunkZ);
 
 		this.caveGenerator.generate(island.getCaveSystemGenerator(), chunkX, chunkZ, mask);
 
-		this.replaceBiomeBlocks(info, mask);
-
 		if (island.getBiome() instanceof BiomeArcticPeaks)
 		{
 			this.veinGenerator.generate(seed, chunkX, chunkZ, mask);
 		}
+
+		this.replaceBiomeBlocks(info, mask);
+		this.generateCloudLayer(info, mask);
 	}
 
 	private void generateCloudLayer(IAetherChunkColumnInfo info, final ChunkMask mask)
@@ -77,7 +76,10 @@ public class WorldPreparationAether
 
 					for (int y = levelY + depth; y >= levelY - depth; y--)
 					{
-						mask.setBlock(x, y, z, IslandBlockType.CLOUD_BED_BLOCK.ordinal());
+						if (mask.getBlock(x, y, z) == IslandBlockType.AIR_BLOCK.ordinal())
+						{
+							mask.setBlock(x, y, z, IslandBlockType.CLOUD_BED_BLOCK.ordinal());
+						}
 					}
 				}
 			}
@@ -104,7 +106,7 @@ public class WorldPreparationAether
 
 				final int depth = (int) chunkInfo.getTerrainDepthBuffer().get(x, z);
 
-				int m0a = Math.min(height, 255);
+				int m0a = Math.min(height, 254);
 				int m0b = Math.max((height - depth), 0);
 
 				for (int y = m0a; y >= m0b; y--)

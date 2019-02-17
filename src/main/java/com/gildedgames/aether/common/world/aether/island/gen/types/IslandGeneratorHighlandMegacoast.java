@@ -162,8 +162,8 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 
 			final double maxY = (topSample - CUTOFF_POINT) * TOP_HEIGHT;
 
-			data.topHeight.set(x, z, Math.max(0.0, maxY));
-			data.bottomHeight.set(x, z, BOTTOM_HEIGHT * bottomSample);
+			data.topHeight.set(x, z, (float) Math.max(0.0, maxY));
+			data.bottomHeight.set(x, z, (float) (BOTTOM_HEIGHT * bottomSample));
 		}
 
 		// The generated noise data from the Highlands generator.

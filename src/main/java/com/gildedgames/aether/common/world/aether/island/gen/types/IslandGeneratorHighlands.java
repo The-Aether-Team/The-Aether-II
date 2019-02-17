@@ -208,8 +208,8 @@ public class IslandGeneratorHighlands implements IIslandGenerator
 			final double maxY = this.vars.getMaxYFilter().transform(ISLAND_BOTTOM_HEIGHT, topSample, ISLAND_CUTOFF_POINT);
 			final double minY = ISLAND_BOTTOM_HEIGHT - (ISLAND_BOTTOM_HEIGHT * bottomSample);
 
-			data.maxY.set(x, z, MathHelper.clamp(maxY, ISLAND_BOTTOM_HEIGHT, 254.0D));
-			data.minY.set(x, z, minY);
+			data.maxY.set(x, z, (float) MathHelper.clamp(maxY, ISLAND_BOTTOM_HEIGHT, 254.0D));
+			data.minY.set(x, z, (float) minY);
 		}
 
 		// The generated noise data from the Highlands generator.

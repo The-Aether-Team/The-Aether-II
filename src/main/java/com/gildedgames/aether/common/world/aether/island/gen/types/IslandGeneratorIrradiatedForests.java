@@ -57,16 +57,29 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 					continue;
 				}
 
-				final int topHeight = (int) column.topHeight.get(x, z);
-				final int bottomHeight = (int) column.bottomHeight.get(x, z);
+				float topHeight = column.topHeight.get(x, z);
+				float bottomHeight = column.bottomHeight.get(x, z);
 
-				if (topHeight + bottomHeight == 0)
+				double closestCrackDist = column.distToCrack.get(x, z);
+
+				if (closestCrackDist < 10.0D)
+				{
+					double f = Math.max(0.0, (closestCrackDist - 5.0D) / 5.0D);
+
+					topHeight *= f;
+					bottomHeight *= f;
+				}
+
+				int top = (int) topHeight;
+				int bottom = (int) bottomHeight;
+
+				if (top + bottom == 0)
 				{
 					continue;
 				}
 
-				final int minY = Math.max(BOTTOM_HEIGHT - bottomHeight, 0);
-				final int maxY = Math.min(BOTTOM_HEIGHT + topHeight, 255);
+				final int minY = Math.max(BOTTOM_HEIGHT - bottom, 0);
+				final int maxY = Math.min(BOTTOM_HEIGHT + top, 255);
 
 				boolean mossy = column.distToCrack.get(x, z) < 12.0D;
 
@@ -116,25 +129,6 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 
 			this.heightSample_xz = data.heightSample_xz.createInterpolatedNoiseBuffer();
 			this.topSample_xz = data.topSample_xz.createInterpolatedNoiseBuffer();
-
-			for (int x = 0; x < 16; x++)
-			{
-				for (int z = 0; z < 16; z++)
-				{
-					double top = this.topHeight.get(x, z);
-					double bottom = this.bottomHeight.get(x, z);
-
-					double closestCrackDist = this.distToCrack.get(x, z);
-
-					if (closestCrackDist < 10.0D)
-					{
-						double f = Math.max(0.0, (closestCrackDist - 5.0D) / 5.0D);
-
-						this.topHeight.set(x, z, top * f);
-						this.bottomHeight.set(x, z, bottom * f);
-					}
-				}
-			}
 		}
 	}
 
@@ -234,13 +228,13 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 			topHeight = MathHelper.clamp(topHeight, 0.0D, 254.0D);
 			bottomHeight = MathHelper.clamp(bottomHeight, 0.0D, 254.0D);
 
-			data.topHeight.set(x, z, topHeight);
-			data.bottomHeight.set(x, z, bottomHeight);
+			data.topHeight.set(x, z, (float) topHeight);
+			data.bottomHeight.set(x, z, (float) bottomHeight);
 
-			data.distToCrack_xz.set(x, z, closestCrackDist);
+			data.distToCrack_xz.set(x, z, (float) closestCrackDist);
 
-			data.heightSample_xz.set(x, z, heightSample);
-			data.topSample_xz.set(x, z, topSample);
+			data.heightSample_xz.set(x, z, (float) heightSample);
+			data.topSample_xz.set(x, z, (float) topSample);
 		}
 	}
 	

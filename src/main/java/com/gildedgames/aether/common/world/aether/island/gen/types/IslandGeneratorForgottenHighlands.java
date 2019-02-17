@@ -1,193 +1,158 @@
-//package com.gildedgames.aether.common.world.aether.island.gen;
-//
-//import com.gildedgames.aether.api.util.NoiseUtil;
-//import com.gildedgames.aether.api.util.OpenSimplexNoise;
-//import com.gildedgames.aether.api.world.islands.IIslandData;
-//import com.gildedgames.aether.api.world.islands.IIslandGenerator;
-//import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
-//import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
-//import net.minecraft.world.biome.Biome;
-//import net.minecraft.world.chunk.ChunkPrimer;
-//
-//public class IslandGeneratorForgottenHighlands implements IIslandGenerator
-//{
-//	// Resolution of the evalNormalised for a chunk. Should be a power of 2.
-//	private static final int NOISE_XZ_SCALE = 4;
-//
-//	private static final int NOISE_Y_SCALE = 32;
-//
-//	// Number of samples done per chunk.
-//	private static final int NOISE_SAMPLES = NOISE_XZ_SCALE + 1;
-//
-//	private static final int SAMPLE_HEIGHT = (256 / NOISE_Y_SCALE) + 1;
-//
-//	public static double interpolate(final double[] data, final int x, final int z)
-//	{
-//		final double x0 = (double) x / NOISE_XZ_SCALE;
-//		final double z0 = (double) z / NOISE_XZ_SCALE;
-//
-//		final int integerX = (int) Math.floor(x0);
-//		final double fractionX = x0 - integerX;
-//
-//		final int integerZ = (int) Math.floor(z0);
-//		final double fractionZ = z0 - integerZ;
-//
-//		final double a = data[integerX + (integerZ * NOISE_SAMPLES)];
-//		final double b = data[integerX + ((integerZ + 1) * NOISE_SAMPLES)];
-//		final double c = data[integerX + 1 + (integerZ * NOISE_SAMPLES)];
-//		final double d = data[integerX + 1 + ((integerZ + 1) * NOISE_SAMPLES)];
-//
-//		return (1.0 - fractionX) * ((1.0 - fractionZ) * a + fractionZ * b) +
-//				fractionX * ((1.0 - fractionZ) * c + fractionZ * d);
-//	}
-//
-//	public static double interpolate(final double[] data, final int x, final int y, final int z)
-//	{
-//		final double x0 = (double) x / NOISE_XZ_SCALE;
-//		final double y0 = (double) y / NOISE_Y_SCALE;
-//		final double z0 = (double) z / NOISE_XZ_SCALE;
-//
-//		final int integerX = (int) Math.floor(x0);
-//		final double fractionX = x0 - integerX;
-//
-//		final int integerY = (int) Math.floor(y0);
-//		final double fractionY = y0 - integerY;
-//
-//		final int integerZ = (int) Math.floor(z0);
-//		final double fractionZ = z0 - integerZ;
-//
-//		//z + y * NOISE_SAMPLES + x * SAMPLE_HEIGHT * NOISE_SAMPLES
-//
-//		final double a = data[integerZ + integerY * NOISE_SAMPLES + integerX * SAMPLE_HEIGHT * NOISE_SAMPLES];
-//		final double b = data[(integerZ + 1) + integerY * NOISE_SAMPLES + integerX * SAMPLE_HEIGHT * NOISE_SAMPLES];
-//		final double c = data[integerZ + integerY * NOISE_SAMPLES + (integerX + 1) * SAMPLE_HEIGHT * NOISE_SAMPLES];
-//		final double d = data[(integerZ + 1) + integerY * NOISE_SAMPLES + (integerX + 1) * SAMPLE_HEIGHT * NOISE_SAMPLES];
-//
-//		final double e = data[integerZ + (integerY + 1) * NOISE_SAMPLES + integerX * SAMPLE_HEIGHT * NOISE_SAMPLES];
-//		final double f = data[(integerZ + 1) + (integerY + 1) * NOISE_SAMPLES + integerX * SAMPLE_HEIGHT * NOISE_SAMPLES];
-//		final double g = data[integerZ + (integerY + 1) * NOISE_SAMPLES + (integerX + 1) * SAMPLE_HEIGHT * NOISE_SAMPLES];
-//		final double h = data[(integerZ + 1) + (integerY + 1) * NOISE_SAMPLES + (integerX + 1) * SAMPLE_HEIGHT * NOISE_SAMPLES];
-//
-//		final double c1 = (1.0 - fractionX) * ((1.0 - fractionZ) * a + fractionZ * b) +
-//				fractionX * ((1.0 - fractionZ) * c + fractionZ * d);
-//		final double c2 = (1.0 - fractionX) * ((1.0 - fractionZ) * e + fractionZ * f) +
-//				fractionX * ((1.0 - fractionZ) * g + fractionZ * h);
-//
-//		return NoiseUtil.lerp(c1, c2, fractionY);
-//	}
-//
-//	private static double[] generate3DNoise(final OpenSimplexNoise noise, final IIslandData island, final int chunkX, final int chunkZ, final int offset,
-//			final double scale, final double yScale, final boolean centerGradient)
-//	{
-//		final double posX = chunkX * 16;
-//		final double posZ = chunkZ * 16;
-//
-//		final double minX = island.getBounds().getMinX();
-//		final double minZ = island.getBounds().getMinZ();
-//
-//		final double centerX = island.getBounds().getCenterX();
-//		final double centerY = island.getBounds().getCenterY();
-//		final double centerZ = island.getBounds().getCenterZ();
-//
-//		final double[] data = new double[NOISE_SAMPLES * SAMPLE_HEIGHT * NOISE_SAMPLES];
-//
-//		// Generate half-resolution evalNormalised
-//		for (int x = 0; x < NOISE_SAMPLES; x++)
-//		{
-//			// Creates world coordinate and normalized evalNormalised coordinate
-//			final double worldX = posX - (x == 0 ? NOISE_XZ_SCALE - 1 : 0) + (x * (16D / NOISE_SAMPLES));
-//			final double nx = (worldX + minX + offset) / scale;
-//
-//			for (int z = 0; z < NOISE_SAMPLES; z++)
-//			{
-//				// Creates world coordinate and normalized evalNormalised coordinate
-//				final double worldZ = posZ - (z == 0 ? NOISE_XZ_SCALE - 1 : 0) + (z * (16.0D / NOISE_SAMPLES));
-//				final double nz = (worldZ + minZ + offset) / scale;
-//
-//				for (int y = 0; y < SAMPLE_HEIGHT; y++)
-//				{
-//					// Creates world coordinate and normalized evalNormalised coordinate
-//					final double worldY = (y * (16.0D / NOISE_Y_SCALE));
-//					final double ny = (worldY + offset) / yScale;
-//
-//					final double radiusX = island.getBounds().getWidth() / 2.0;
-//					final double radiusY = island.getBounds().getHeight() / 2.0;
-//					final double radiusZ = island.getBounds().getLength() / 2.0;
-//
-//					final double distX = Math.abs((centerX - worldX) * (1.0 / radiusX));
-//					final double distY = Math.abs((centerY - worldY) * (1.0 / radiusY));
-//					final double distZ = Math.abs((centerZ - worldZ) * (1.0 / radiusZ));
-//
-//					// Get distance from center of Island
-//					final double dist = Math.sqrt(distX * distX + distY * distY + distZ * distZ);
-//
-//					final double sample = NoiseUtil.genNoise(noise, nx, ny, nz);
-//
-//					// Apply formula to shape evalNormalised into island, evalNormalised decreases in value the further the coord is from the center
-//					final double height = sample - (centerGradient ? dist : 0);
-//
-//					data[z + y * NOISE_SAMPLES + x * SAMPLE_HEIGHT * NOISE_SAMPLES] = height;
-//				}
-//			}
-//		}
-//
-//		return data;
-//	}
-//
-//	@Override
-//	public void genMask(Biome[] biomes, OpenSimplexNoise noise, IBlockAccessExtended access, ChunkMask mask, IIslandData island,
-//			int chunkX, int chunkZ)
-//	{
-//		final double[] height3D = generate3DNoise(noise, island, chunkX, chunkZ, 0, 300.0D, 0.5D, false);
-//
-//		final double centerX = island.getBounds().getCenterX();
-//		final double centerY = 100;
-//		final double centerZ = island.getBounds().getCenterZ();
-//
-//		final int posX = chunkX * 16;
-//		final int posY = 0;
-//		final int posZ = chunkZ * 16;
-//
-//		final double radiusX = island.getBounds().getWidth() / 2.0;
-//		final double radiusY = 180 / 2.0;
-//		final double radiusZ = island.getBounds().getLength() / 2.0;
-//
-//		for (int x = 0; x < 16; x++)
-//		{
-//			final int worldX = posX + x;
-//
-//			for (int z = 0; z < 16; z++)
-//			{
-//				final int worldZ = posZ + z;
-//
-//				for (int y = 0; y < 250; y++)
-//				{
-//					final int worldY = posY + y;
-//
-//					final double sample = interpolate(height3D, x, y, z);
-//
-//					final double distX = Math.abs((centerX - worldX) * (1.0 / radiusX));
-//					final double distY = Math.abs((centerY - worldY) * (1.0 / radiusY));
-//					final double distZ = Math.abs((centerZ - worldZ) * (1.0 / radiusZ));
-//
-//					// Get distance from center of Island
-//					final double dist = Math.sqrt(distX * distX + distY * distY + distZ * distZ);
-//
-//					final double heightSample = sample + 1.0 - dist;
-//
-//					if (heightSample > 0.2)
-//					{
-//						mask.setBlock(x, y, z, IslandBlockType.STONE_BLOCK.ordinal());
-//					}
-//				}
-//			}
-//		}
-//	}
-//
-//	@Override
-//	public void genChunk(Biome[] biomes, OpenSimplexNoise noise, IBlockAccessExtended access, ChunkMask mask, ChunkPrimer primer, IIslandData island,
-//			int chunkX, int chunkZ)
-//	{
-//		mask.createChunk(primer, new IslandChunkMaskTransformer());
-//	}
-//}
+package com.gildedgames.aether.common.world.aether.island.gen.types;
+
+import com.gildedgames.aether.api.util.NoiseUtil;
+import com.gildedgames.aether.api.util.OpenSimplexNoise;
+import com.gildedgames.aether.api.world.IAetherChunkColumnInfo;
+import com.gildedgames.aether.api.world.islands.IIslandChunkColumnInfo;
+import com.gildedgames.aether.api.world.islands.IIslandData;
+import com.gildedgames.aether.api.world.islands.IIslandGenerator;
+import com.gildedgames.aether.api.world.noise.IChunkNoiseBuffer3D;
+import com.gildedgames.aether.common.world.aether.chunk.ChunkDataGenerator3D;
+import com.gildedgames.aether.common.world.aether.chunk.NoiseSampleData3D;
+import com.gildedgames.aether.common.world.aether.island.gen.AbstractIslandChunkColumnInfo;
+import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
+import com.gildedgames.aether.common.world.aether.island.gen.IslandChunkMaskTransformer;
+import com.gildedgames.orbis_api.preparation.IChunkMaskTransformer;
+import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
+
+import javax.annotation.Nonnull;
+
+public class IslandGeneratorForgottenHighlands implements IIslandGenerator
+{
+	private class ChunkDataGeneratorForgottenHighlands extends ChunkDataGenerator3D<ForgottenHighlandsNoiseData>
+	{
+		private final double minX, minZ;
+
+		private final double centerX, centerY, centerZ;
+
+		private final double radiusX, radiusY, radiusZ;
+
+		private final double offset = 0;
+
+		private final double scaleXZ = 300.0D, scaleY = 0.5D;
+
+		private final OpenSimplexNoise noise;
+
+		private final boolean centerGradient = false;
+
+		public ChunkDataGeneratorForgottenHighlands(OpenSimplexNoise noise, IIslandData island)
+		{
+			super(3, 15);
+
+			this.noise = noise;
+
+			this.minX = island.getBounds().getMinX();
+			this.minZ = island.getBounds().getMinZ();
+
+			this.centerX = island.getBounds().getCenterX();
+			this.centerY = 100;
+			this.centerZ = island.getBounds().getCenterZ();
+
+			this.radiusX = island.getBounds().getWidth() / 2.0;
+			this.radiusY = 180 / 2.0;
+			this.radiusZ = island.getBounds().getLength() / 2.0;
+		}
+
+		@Override
+		protected ForgottenHighlandsNoiseData prepare(int chunkX, int chunkZ)
+		{
+			return new ForgottenHighlandsNoiseData(chunkX, chunkZ, this.noiseScaleFactorXZ, this.noiseScaleFactorY, this.noiseSampleCountXZ, this.noiseSampleCountY);
+		}
+
+		@Override
+		protected void generate(ForgottenHighlandsNoiseData data, int x, int y, int z, double worldX, double worldY, double worldZ)
+		{
+			final double nx = (worldX + this.minX + this.offset) / this.scaleXZ;
+			final double ny = (worldY + this.offset) / this.scaleY;
+			final double nz = (worldZ + this.minZ + this.offset) / this.scaleXZ;
+
+			final double distX = Math.abs((this.centerX - worldX) * (1.0 / this.radiusX));
+			final double distY = Math.abs((this.centerY - worldY) * (1.0 / this.radiusY));
+			final double distZ = Math.abs((this.centerZ - worldZ) * (1.0 / this.radiusZ));
+
+			// Get distance from center of Island
+			final double dist = Math.sqrt(distX * distX + distY * distY + distZ * distZ);
+
+			final double sample = NoiseUtil.genNoise(this.noise, nx, ny, nz);
+
+			final double height = sample - (this.centerGradient ? dist : 0);
+
+			data.samples.set(x, y, z, (float) (height + 1.0 - dist));
+		}
+	}
+
+	private class ForgottenHighlandsNoiseData
+	{
+		private final NoiseSampleData3D samples;
+
+		private final int chunkX, chunkZ;
+
+		private ForgottenHighlandsNoiseData(int chunkX, int chunkZ, double noiseScaleFactorXZ, double noiseScaleFactorY, int sampleCountXZ, int sampleCountY)
+		{
+			this.chunkX = chunkX;
+			this.chunkZ = chunkZ;
+
+			this.samples = new NoiseSampleData3D(noiseScaleFactorXZ, noiseScaleFactorY, sampleCountXZ, sampleCountY);
+		}
+	}
+
+	private class ForgottenHighlandsColumnInfo extends AbstractIslandChunkColumnInfo
+	{
+		public final IChunkNoiseBuffer3D samples;
+
+		protected ForgottenHighlandsColumnInfo(OpenSimplexNoise noise, int chunkX, int chunkZ, ForgottenHighlandsNoiseData noiseData)
+		{
+			super(noise, chunkX, chunkZ);
+
+			this.samples = noiseData.samples.createInterpolatedNoiseBuffer();
+		}
+	}
+
+	@Override
+	public void generateChunkSegment(IAetherChunkColumnInfo info, ChunkMask mask, IIslandData island, int chunkX, int chunkZ)
+	{
+		ForgottenHighlandsColumnInfo column = info.getIslandData(0, ForgottenHighlandsColumnInfo.class);
+
+		double k = 1.0 / 16.0;
+
+		for (int x = 0; x < 16; x++)
+		{
+			for (int z = 0; z < 16; z++)
+			{
+				for (int y = 0; y < 15; y++)
+				{
+					float a = column.samples.get(x, y, z);
+					float b = column.samples.get(x, y + 1, z);
+
+					float t = 0.0f;
+
+					for (int y2 = 0; y2 < 16; y2++, t += k)
+					{
+						float result = a + (b - a) * t;
+
+						if (result > 0.2f)
+						{
+							mask.setBlock(x, (y * 16) + y2, z, IslandBlockType.STONE_BLOCK.ordinal());
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@Nonnull
+	@Override
+	public IIslandChunkColumnInfo generateColumnInfo(OpenSimplexNoise noise, IIslandData island, int chunkX, int chunkZ)
+	{
+		ForgottenHighlandsNoiseData noiseData = new ChunkDataGeneratorForgottenHighlands(noise, island)
+				.generate(chunkX, chunkZ);
+
+		return new ForgottenHighlandsColumnInfo(noise, chunkX, chunkZ, noiseData);
+	}
+
+	@Override
+	public IChunkMaskTransformer createMaskTransformer(IIslandData island, int chunkX, int chunkZ)
+	{
+		return new IslandChunkMaskTransformer();
+	}
+}

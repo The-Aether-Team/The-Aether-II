@@ -4,6 +4,7 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeVoid;
 import com.gildedgames.aether.common.world.aether.biomes.arctic_peaks.BiomeArcticPeaks;
+import com.gildedgames.aether.common.world.aether.biomes.forgotten_highlands.BiomeForgottenHighlands;
 import com.gildedgames.aether.common.world.aether.biomes.highlands.BiomeHighlands;
 import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.BiomeIrradiatedForests;
 import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.BiomeMagneticHills;
@@ -19,8 +20,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-
-//import com.gildedgames.aether.common.world.aether.biomes.forgotten_highlands.BiomeForgottenHighlands;
 
 @Mod.EventBusSubscriber()
 @GameRegistry.ObjectHolder(AetherCore.MOD_ID)
@@ -39,11 +38,11 @@ public class BiomesAether
 	public static final BiomeAetherBase ARCTIC_PEAKS = new BiomeArcticPeaks(
 			new Biome.BiomeProperties("Arctic Peaks").setRainDisabled().setSnowEnabled().setTemperature(0.0f).setWaterColor(0x70DB70),
 			AetherCore.getResource("aether_arctic_peaks"));
-//
-//	@GameRegistry.ObjectHolder("aether_forgotten_highlands")
-//	public static final BiomeAetherBase FORGOTTEN_HIGHLANDS = new BiomeForgottenHighlands(
-//			new Biome.BiomeProperties("Forgotten Highlands").setTemperature(0.0f).setWaterColor(0x70DB70),
-//			AetherCore.getResource("aether_forgotten_highlands"));
+
+	@GameRegistry.ObjectHolder("aether_forgotten_highlands")
+	public static final BiomeAetherBase FORGOTTEN_HIGHLANDS = new BiomeForgottenHighlands(
+			new Biome.BiomeProperties("Forgotten Highlands").setTemperature(0.0f).setWaterColor(0x70DB70),
+			AetherCore.getResource("aether_forgotten_highlands"));
 
 	@GameRegistry.ObjectHolder("aether_irradiated_forests")
 	public static final BiomeAetherBase IRRADIATED_FORESTS = new BiomeIrradiatedForests(
@@ -62,18 +61,17 @@ public class BiomesAether
 	public static void registerBiome(final RegistryEvent.Register<Biome> event)
 	{
 		event.getRegistry()
-				.registerAll(HIGHLANDS, MAGNETIC_HILLS, ARCTIC_PEAKS/*, FORGOTTEN_HIGHLANDS*/, IRRADIATED_FORESTS, VOID, INSTANCED_ZONE);
+				.registerAll(HIGHLANDS, MAGNETIC_HILLS, ARCTIC_PEAKS, FORGOTTEN_HIGHLANDS, IRRADIATED_FORESTS, VOID, INSTANCED_ZONE);
 
 		BiomeDictionary.addTypes(HIGHLANDS, BiomeDictionary.Type.PLAINS);
 		BiomeDictionary.addTypes(MAGNETIC_HILLS, BiomeDictionary.Type.HILLS, BiomeDictionary.Type.HOT, BiomeDictionary.Type.SPARSE);
-		BiomeDictionary
-				.addTypes(ARCTIC_PEAKS, BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.COLD, BiomeDictionary.Type.SNOWY, BiomeDictionary.Type.DENSE);
-//		BiomeDictionary.addTypes(FORGOTTEN_HIGHLANDS, BiomeDictionary.Type.DENSE);
+		BiomeDictionary.addTypes(ARCTIC_PEAKS, BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.COLD, BiomeDictionary.Type.SNOWY, BiomeDictionary.Type.DENSE);
+		BiomeDictionary.addTypes(FORGOTTEN_HIGHLANDS, BiomeDictionary.Type.DENSE);
 		BiomeDictionary.addTypes(IRRADIATED_FORESTS, BiomeDictionary.Type.FOREST, BiomeDictionary.Type.HOT, BiomeDictionary.Type.DENSE);
 		BiomeDictionary.addTypes(VOID, BiomeDictionary.Type.VOID);
 		BiomeDictionary.addTypes(INSTANCED_ZONE, BiomeDictionary.Type.VOID);
 
-		registerPossibleBiome(HIGHLANDS, MAGNETIC_HILLS, ARCTIC_PEAKS/*, FORGOTTEN_HIGHLANDS*/, IRRADIATED_FORESTS);
+		registerPossibleBiome(HIGHLANDS, MAGNETIC_HILLS, ARCTIC_PEAKS, FORGOTTEN_HIGHLANDS, IRRADIATED_FORESTS);
 	}
 
 	public static void registerPossibleBiome(final BiomeAetherBase... biomes)
@@ -96,6 +94,7 @@ public class BiomesAether
 	public static BiomeAetherBase fetchRandomBiome(final Random rand)
 	{
 		final float randomValue = rand.nextFloat() * getTotalBiomeWeight();
+
 		float chanceSum = 0.0F;
 
 		for (final BiomeAetherBase b : POSSIBLE_BIOMES)

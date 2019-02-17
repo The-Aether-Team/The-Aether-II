@@ -4,51 +4,42 @@ import com.gildedgames.aether.api.world.noise.IChunkNoiseBuffer2D;
 
 public class InterpolatedChunkNoiseBuffer2D implements IChunkNoiseBuffer2D
 {
-	private final double[] interpolatedSamples;
+	private final float[] samples;
 
-	public InterpolatedChunkNoiseBuffer2D(double[] samples, final double noiseScaleFactor, final int sampleCount)
+	private final int sampleCount;
+
+	private final float noiseScaleFactor;
+
+	public InterpolatedChunkNoiseBuffer2D(final float[] samples, final int sampleCount, final double noiseScaleFactor)
 	{
-		this.interpolatedSamples = new double[16 * 16];
+		this.samples = samples;
+		this.sampleCount = sampleCount;
 
-		for (int x = 0; x < 16; x++)
-		{
-			for (int z = 0; z < 16; z++)
-			{
-				this.set(x, z, interpolate(samples, x, z, noiseScaleFactor, sampleCount));
-			}
-		}
+		this.noiseScaleFactor = 1.0f / (float) noiseScaleFactor;
 	}
 
-	private static double interpolate(double[] source, final int x, final int z, final double noiseScaleFactor, final int sampleCount)
+	@Override
+	public float get(int x, int z)
 	{
-		final double x0 = x / noiseScaleFactor;
-		final double z0 = z / noiseScaleFactor;
+		final float x0 = x * this.noiseScaleFactor;
+		final float z0 = z * this.noiseScaleFactor;
 
 		final int integerX = (int) x0;
 		final int integerZ = (int) z0;
 
-		final double fractionX = x0 - integerX;
-		final double fractionZ = z0 - integerZ;
+		final float fractionX = x0 - integerX;
+		final float fractionZ = z0 - integerZ;
 
-		final double a = source[(integerX * sampleCount) + (integerZ)];
-		final double b = source[(integerX * sampleCount) + (integerZ + 1)];
+		final float a = this.samples[(integerX * this.sampleCount) + integerZ];
+		final float b = this.samples[(integerX * this.sampleCount) + integerZ + 1];
 
-		final double c = source[((integerX + 1) * sampleCount) + (integerZ)];
-		final double d = source[((integerX + 1) * sampleCount) + (integerZ + 1)];
+		final float c = this.samples[((integerX + 1) * this.sampleCount) + integerZ];
+		final float d = this.samples[((integerX + 1) * this.sampleCount) + integerZ + 1];
 
-		return (1.0 - fractionX) * ((1.0 - fractionZ) * a + fractionZ * b) +
-				fractionX * ((1.0 - fractionZ) * c + fractionZ * d);
+		final float r1 = a + (b - a) * fractionZ;
+		final float r2 = c + (d - c) * fractionZ;
+
+		return r1 + (r2 - r1) * fractionX;
 	}
 
-	@Override
-	public double get(int x, int z)
-	{
-		return this.interpolatedSamples[x << 4 | z];
-	}
-
-	@Override
-	public void set(int x, int z, double val)
-	{
-		this.interpolatedSamples[x << 4 | z] = val;
-	}
 }

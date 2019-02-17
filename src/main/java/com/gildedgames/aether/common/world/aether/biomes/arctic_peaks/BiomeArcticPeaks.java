@@ -17,7 +17,7 @@ import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import com.gildedgames.aether.common.world.aether.WorldProviderAether;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.biomes.ISnowyBiome;
-import com.gildedgames.aether.common.world.aether.chunk.ChunkDataGeneratorSingle;
+import com.gildedgames.aether.common.world.aether.chunk.ChunkDataGenerator2DSingle;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandVariables;
 import com.gildedgames.aether.common.world.aether.island.gen.types.IslandGeneratorHighlands;
 import com.gildedgames.aether.common.world.aether.noise.NoiseGeneratorIslandTerrain;
@@ -117,7 +117,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase implements ISnowyBiome
 
 		IIslandBounds bounds  = island.getBounds();
 
-		final IChunkNoiseBuffer2D samples = new ChunkDataGeneratorSingle(new NoiseGeneratorIslandTerrain(provider.getNoise(), bounds), 4)
+		final IChunkNoiseBuffer2D samples = new ChunkDataGenerator2DSingle(new NoiseGeneratorIslandTerrain(provider.getNoise(), bounds), 4)
 				.generate(chunkX, chunkZ)
 				.createInterpolatedNoiseBuffer();
 
