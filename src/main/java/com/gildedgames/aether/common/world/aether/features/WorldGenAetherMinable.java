@@ -17,14 +17,23 @@ public class WorldGenAetherMinable
 
 	private final IBlockState[] predicate;
 
-	private final boolean emitsLight;
+	private boolean emitsLight, isFloating;
 
 	public WorldGenAetherMinable(final IBlockState state, final int blockCount, final IBlockState[] replaceableStates)
 	{
 		this.oreBlock = state;
 		this.numberOfBlocks = blockCount;
 		this.predicate = replaceableStates;
-		this.emitsLight = this.oreBlock.getLightValue() > 0;
+	}
+
+	public void setFloating(boolean val)
+	{
+		this.isFloating = val;
+	}
+
+	public void setEmitsLight(boolean val)
+	{
+		this.emitsLight = val;
 	}
 
 	public boolean generate(final WorldSlice slice, final Random rand, final BlockPos position)
@@ -104,7 +113,17 @@ public class WorldGenAetherMinable
 
 									if (ArrayHelper.contains(this.predicate, state))
 									{
-										slice.replaceBlockState(nextPos.setPos(x, y, z), this.oreBlock, this.emitsLight);
+										slice.replaceBlockState(nextPos.setPos(x, y, z), this.oreBlock);
+
+										if (this.emitsLight)
+										{
+											slice.getWorld().checkLight(nextPos);
+										}
+
+										if (this.isFloating && slice.isAirBlock(x, y + 1, z))
+										{
+											slice.getWorld().markAndNotifyBlock(nextPos, slice.getWorld().getChunk(nextPos), state, this.oreBlock, 1 | 2 | 16);
+										}
 									}
 								}
 

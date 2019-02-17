@@ -77,10 +77,14 @@ public class BiomeAetherDecorator
 		final IBlockState[] holystoneStates = new IBlockState[] { BlocksAether.holystone.getDefaultState() };
 
 		this.genAmbrosium = new WorldGenAetherMinable(BlocksAether.ambrosium_ore.getDefaultState(), 16, holystoneStates);
+
 		this.genZanite = new WorldGenAetherMinable(BlocksAether.zanite_ore.getDefaultState(), 8, holystoneStates);
 		this.genGravitite = new WorldGenAetherMinable(BlocksAether.gravitite_ore.getDefaultState(), 5, holystoneStates);
 		this.genIcestone = new WorldGenAetherMinable(BlocksAether.icestone_ore.getDefaultState(), 12, holystoneStates);
 		this.genArkenium = new WorldGenAetherMinable(BlocksAether.arkenium_ore.getDefaultState(), 6, holystoneStates);
+
+		this.genAmbrosium.setEmitsLight(true);
+		this.genGravitite.setFloating(true);
 
 		this.genCrudeScatterglass = new WorldGenAetherMinable(BlocksAether.crude_scatterglass.getDefaultState(), 16, holystoneStates);
 
@@ -373,7 +377,7 @@ public class BiomeAetherDecorator
 		}
 	}
 
-	private void generateMineable(final WorldGenAetherMinable minable, final WorldSlice slice, final Random random, final BlockPos pos,
+	private void generateMinable(final WorldGenAetherMinable minable, final WorldSlice slice, final Random random, final BlockPos pos,
 			final int maxY, final int attempts)
 	{
 		double attemptsPerLevel = (double) attempts / (double) maxY;
@@ -446,12 +450,12 @@ public class BiomeAetherDecorator
 
 	protected void generateOres(final WorldSlice slice, final Random random, final BlockPos pos)
 	{
-		this.generateMineable(this.genAmbrosium, slice, random, pos, 256, 10);
-		this.generateMineable(this.genZanite, slice, random, pos, 256, 9);
-		this.generateMineable(this.genGravitite, slice, random, pos, 50, 5);
-		this.generateMineable(this.genIcestone, slice, random, pos, 256, 10);
-		this.generateMineable(this.genArkenium, slice, random, pos, 70, 8);
-		this.generateMineable(this.genCrudeScatterglass, slice, random, pos, 110, 14);
+		this.generateMinable(this.genAmbrosium, slice, random, pos, 256, 10);
+		this.generateMinable(this.genZanite, slice, random, pos, 256, 9);
+		this.generateMinable(this.genGravitite, slice, random, pos, 50, 5);
+		this.generateMinable(this.genIcestone, slice, random, pos, 256, 10);
+		this.generateMinable(this.genArkenium, slice, random, pos, 70, 8);
+		this.generateMinable(this.genCrudeScatterglass, slice, random, pos, 110, 14);
 	}
 
 	protected void generateClouds(final WorldSlice world, final Random random, final BlockPos pos)
