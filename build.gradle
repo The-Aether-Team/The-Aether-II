@@ -39,7 +39,7 @@ configurations {
 }
 
 dependencies {
-    compile project(":OrbisAPI")
+    compile project("lib:OrbisAPI")
 
     shade('org.spongepowered:mixin:0.7.11-SNAPSHOT') {
         transitive = false
@@ -64,13 +64,13 @@ sourceSets {
 }
 
 jar {
-    dependsOn(':OrbisAPI:build')
+    dependsOn('lib:OrbisAPI:build')
 
     from sourceSets.api.output
     from sourceSets.main.output
 
     manifest.mainAttributes(
-            "ContainedDeps": "${project(":OrbisAPI").mod_name}-${project(":OrbisAPI").mod_version}.jar",
+            "ContainedDeps": "${project("lib:OrbisAPI").mod_name}-${project("lib:OrbisAPI").mod_version}.jar",
             "FMLAT": "aether_at.cfg",
             "FMLCorePlugin": "com.gildedgames.aether.common.asm.AetherFMLLoadingPlugin",
             "TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
@@ -80,7 +80,7 @@ jar {
     )
     
     from("OrbisAPI/build/libs") {
-        include("${project(":OrbisAPI").mod_name}-${project(":OrbisAPI").mod_version}.jar")
+        include("${project("lib:OrbisAPI").mod_name}-${project("lib:OrbisAPI").mod_version}.jar")
     }
 
     configurations.shade.each { dep ->

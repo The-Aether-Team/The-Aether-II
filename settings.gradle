@@ -1,3 +1,3 @@
 rootProject.name = 'aether_ii'
 
-include 'OrbisAPI'
+include 'lib:OrbisAPI'
