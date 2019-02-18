@@ -5,20 +5,13 @@ buildscript {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
         }
-        maven {
-            name = 'sponge'
-            url = 'https://repo.spongepowered.org/maven'
-        }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
-        classpath 'org.spongepowered:mixingradle:0.6-SNAPSHOT'
-        classpath 'org.ajoberstar:grgit:2.2.0'
     }
 }
 
 apply plugin: 'net.minecraftforge.gradle.forge'
-apply plugin: 'org.spongepowered.mixin'
 
 apply plugin: 'maven-publish'
 
@@ -27,33 +20,25 @@ deobfMcSRG { failOnAtError = false }
 
 repositories {
     mavenCentral()
-    maven {
-        name = 'sponge'
-        url = 'https://repo.spongepowered.org/maven'
-    }
-}
-
-configurations {
-    shade
-    compile.extendsFrom shade
+    maven { url = 'https://repo.spongepowered.org/maven' }
 }
 
 dependencies {
-    compile project("lib:OrbisAPI")
-
-    shade('org.spongepowered:mixin:0.7.11-SNAPSHOT') {
-        transitive = false
-    }
+    compile project(":OrbisAPI")
+    runtime project(":Phosphor")
 }
-
-ext.config = loadConfig(file('build.properties'))
 
 allprojects {
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
 }
 
-version = "${config.mod_version}"
+if (System.getenv("CI_JOB_ID") != null) {
+    version = "${minecraft_version}-${mod_version}+build-${System.getenv("CI_JOB_ID")}"
+} else {
+    version = "${minecraft_version}-${mod_version}+snapshot-${System.currentTimeMillis()}"
+}
+
 group = "com.gildedgames"
 archivesBaseName = "aether_ii"
 
@@ -64,44 +49,42 @@ sourceSets {
 }
 
 jar {
-    dependsOn('lib:OrbisAPI:build')
+    dependsOn(':OrbisAPI:build')
+    dependsOn(':Phosphor:build')
 
     from sourceSets.api.output
     from sourceSets.main.output
 
-    manifest.mainAttributes(
-            "ContainedDeps": "${project("lib:OrbisAPI").mod_name}-${project("lib:OrbisAPI").mod_version}.jar",
-            "FMLAT": "aether_at.cfg",
-            "FMLCorePlugin": "com.gildedgames.aether.common.asm.AetherFMLLoadingPlugin",
-            "TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
-            "TweakOrder": 0,
-            "FMLCorePluginContainsFMLMod": true,
-            "ForceLoadAsMod": true
-    )
-    
-    from("OrbisAPI/build/libs") {
-        include("${project("lib:OrbisAPI").mod_name}-${project("lib:OrbisAPI").mod_version}.jar")
-    }
+    gradle.projectsEvaluated({
+        manifest.mainAttributes(
+                "ContainedDeps": "${project(":OrbisAPI").mod_name}-${project(":OrbisAPI").version}.jar " +
+                        "${project(":Phosphor").mod_name}-${project(":Phosphor").version}-universal.jar",
+                "FMLAT": "aether_at.cfg"
+        )
 
-    configurations.shade.each { dep ->
-        from(project.zipTree(dep)) {
-            rename 'LICENSE.txt', 'org/spongepowered/LICENSE.txt'
-
-            exclude 'META-INF/*.SF'
-            exclude 'META-INF/*.RSA'
-            exclude 'META-INF/*.MF'
+        from("lib/OrbisAPI/build/libs") {
+            include("${project(":OrbisAPI").mod_name}-${project(":OrbisAPI").version}.jar")
         }
-    }
+
+        from("lib/Phosphor/build/libs") {
+            include("${project(":Phosphor").mod_name}-${project(":Phosphor").version}-universal.jar")
+        }
+    })
 
     classifier = 'universal'
 
 }
 
 minecraft {
-    version = config.forge_version
-    mappings = config.forge_mappings
+    version = "$minecraft_version-$forge_version"
+    mappings = "$forge_mappings"
 
     runDir = "run"
+}
+
+minecraft {
+    clientJvmArgs += "-Dfml.coreMods.load=me.jellysquid.mods.phosphor.core.PhosphorFMLLoadingPlugin"
+    serverJvmArgs += "-Dfml.coreMods.load=me.jellysquid.mods.phosphor.core.PhosphorFMLLoadingPlugin"
 }
 
 processResources {
@@ -121,10 +104,6 @@ processResources {
     rename '(.+_at.cfg)', 'META-INF/$1'
 }
 
-mixin {
-    add sourceSets.main, "mixins.aether.refmap.json"
-}
-
 idea {
     module {
         inheritOutputDirs = true
@@ -137,22 +116,18 @@ minecraft {
     makeObfSourceJar = false
 }
 
-static def loadConfig(File config) {
-    def props = new Properties()
-    config.withInputStream {
-        stream -> props.load(stream)
-    }
-    return new ConfigSlurper().parse(props)
-}
-
 task signJar(type: SignJar, dependsOn: reobfJar) {
-    keyStore = System.getenv('GG_SIGN_KEYSTORE')
-    alias = System.getenv('GG_SIGN_ALIAS')
-    storePass = System.getenv('GG_SIGN_STORE_PASS')
-    keyPass = System.getenv('GG_SIGN_KEY_PASS')
+    keyStore = System.getenv('SIGN_KEYSTORE')
+    alias = System.getenv('SIGN_ALIAS')
+    storePass = System.getenv('SIGN_STORE_PASS')
+    keyPass = System.getenv('SIGN_KEY_PASS')
 
     inputFile = jar.archivePath
     outputFile = jar.archivePath
+}
+
+if (System.getenv("SIGN_BUILD") == 'true') {
+    build.dependsOn signJar
 }
 
 task apiJar(type: Jar) {
@@ -164,8 +139,4 @@ task apiJar(type: Jar) {
 artifacts {
     archives jar
     archives apiJar
-}
-
-if (System.getenv("GRADLE_BUILD_SIGNED") == 'true') {
-    build.dependsOn signJar
 }
