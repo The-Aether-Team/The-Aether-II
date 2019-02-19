@@ -73,6 +73,6 @@ public class BlockAccessIsland extends BlockAccessPrep
 
 		ChunkMask chunk = this.getChunk(chunkX, chunkZ);
 
-		return this.transformer.remapBlock(chunk.getBlock(pos.getX() & 15, pos.getY(), pos.getZ() & 15));
+		return this.transformer.getBlockState(chunk.getBlock(pos.getX() & 15, pos.getY(), pos.getZ() & 15));
 	}
 }

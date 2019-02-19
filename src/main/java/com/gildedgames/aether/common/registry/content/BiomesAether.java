@@ -65,8 +65,7 @@ public class BiomesAether
 
 		BiomeDictionary.addTypes(HIGHLANDS, BiomeDictionary.Type.PLAINS);
 		BiomeDictionary.addTypes(MAGNETIC_HILLS, BiomeDictionary.Type.HILLS, BiomeDictionary.Type.HOT, BiomeDictionary.Type.SPARSE);
-		BiomeDictionary
-				.addTypes(ARCTIC_PEAKS, BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.COLD, BiomeDictionary.Type.SNOWY, BiomeDictionary.Type.DENSE);
+		BiomeDictionary.addTypes(ARCTIC_PEAKS, BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.COLD, BiomeDictionary.Type.SNOWY, BiomeDictionary.Type.DENSE);
 		BiomeDictionary.addTypes(FORGOTTEN_HIGHLANDS, BiomeDictionary.Type.DENSE);
 		BiomeDictionary.addTypes(IRRADIATED_FORESTS, BiomeDictionary.Type.FOREST, BiomeDictionary.Type.HOT, BiomeDictionary.Type.DENSE);
 		BiomeDictionary.addTypes(VOID, BiomeDictionary.Type.VOID);
@@ -96,6 +95,7 @@ public class BiomesAether
 	{
 
 		final float randomValue = rand.nextFloat() * getTotalBiomeWeight();
+
 		float chanceSum = 0.0F;
 
 		for (final BiomeAetherBase b : POSSIBLE_BIOMES)

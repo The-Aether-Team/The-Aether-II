@@ -2,7 +2,6 @@ package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.IAetherServices;
-import com.gildedgames.aether.api.ReflectionAether;
 import com.gildedgames.aether.api.net.IGildedGamesAccountApi;
 import com.gildedgames.aether.common.events.PostAetherTravelEvent;
 import com.gildedgames.aether.common.network.api.GildedGamesAccountApiImpl;
@@ -26,6 +25,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.PlayerList;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.IThreadListener;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Teleporter;
@@ -33,7 +33,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.event.*;
 
 import javax.annotation.Nullable;
@@ -213,7 +212,7 @@ public class CommonProxy implements IAetherServices
 				}
 
 				/** Strange flag that needs to be set to prevent the NetHandlerPlayServer instances from resetting your position **/
-				ObfuscationReflectionHelper.setPrivateValue(EntityPlayerMP.class, player, true, ReflectionAether.INVULNERABLE_DIMENSION_CHANGE.getMappings());
+				player.invulnerableDimensionChange = true;
 
 				PostAetherTravelEvent event = new PostAetherTravelEvent(entity);
 				MinecraftForge.EVENT_BUS.post(event);
@@ -243,5 +242,10 @@ public class CommonProxy implements IAetherServices
 	public IGildedGamesAccountApi gildedGamesAccountApi()
 	{
 		return this.webAPI;
+	}
+
+	public IThreadListener getMinecraftThread()
+	{
+		return null;
 	}
 }

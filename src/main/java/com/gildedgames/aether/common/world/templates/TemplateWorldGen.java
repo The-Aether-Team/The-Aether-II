@@ -1,44 +1,25 @@
 package com.gildedgames.aether.common.world.templates;
 
 import com.gildedgames.aether.api.world.generation.TemplateDefinition;
-import com.gildedgames.aether.api.world.generation.TemplateDefinitionPool;
 import com.gildedgames.aether.api.world.generation.TemplateLoc;
-import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
-import com.gildedgames.orbis_api.world.IWorldGen;
+import com.gildedgames.aether.api.world.generation.WorldDecorationGenerator;
+import com.gildedgames.orbis_api.world.WorldSlice;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class TemplateWorldGen implements IWorldGen
+public class TemplateWorldGen implements WorldDecorationGenerator
 {
-
 	private final TemplateDefinition def;
-
-	private final TemplateDefinitionPool defPool;
-
-	public TemplateWorldGen(final TemplateDefinitionPool defPool)
-	{
-		this.def = null;
-		this.defPool = defPool;
-	}
 
 	public TemplateWorldGen(final TemplateDefinition def)
 	{
 		this.def = def;
-		this.defPool = null;
 	}
 
 	@Override
-	public boolean generate(final IBlockAccessExtended blockAccess, final World world, final Random rand, final BlockPos position, final boolean centered)
+	public boolean generate(WorldSlice slice, Random rand, BlockPos pos)
 	{
-		return TemplatePlacer
-				.place(blockAccess, this.def == null ? this.defPool.getRandomDefinition(rand) : this.def, new TemplateLoc().set(position).set(centered), rand);
-	}
-
-	@Override
-	public boolean generate(final IBlockAccessExtended blockAccess, final World world, final Random rand, final BlockPos position)
-	{
-		return this.generate(blockAccess, world, rand, position, false);
+		return TemplatePlacer.place(slice.getWorld(), this.def, new TemplateLoc().set(pos), rand);
 	}
 }

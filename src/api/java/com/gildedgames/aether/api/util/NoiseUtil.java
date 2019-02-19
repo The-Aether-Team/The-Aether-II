@@ -18,18 +18,6 @@ public class NoiseUtil
 		return (a * (1.0 - f)) + (b * f);
 	}
 
-	public static double genNoise(final OpenSimplexNoise noise, final double nx, final double nz)
-	{
-		// Generate evalNormalised for X/Z coordinate
-		final double noise1 = noise.eval(nx, nz);
-		final double noise2 = 0.5D * noise.eval(nx * 8D, nz * 8D);
-		final double noise3 = 0.25D * noise.eval(nx * 16D, nz * 16D);
-		final double noise4 = 0.1D * noise.eval(nx * 32D, nz * 32D);
-
-		// Averages evalNormalised samples linearly
-		return (noise1 + noise2 + noise3 + noise4) / 4.0D;
-	}
-
 	public static double genNoise(final OpenSimplexNoise noise, final double nx, final double ny, final double nz)
 	{
 		// Generate evalNormalised for X/Z coordinate
@@ -44,12 +32,7 @@ public class NoiseUtil
 
 	public static double normalise(final double value)
 	{
-		if (value >= 0)
-		{
-			return Math.min(1.0, 0.5 + (value / 2.0));
-		}
-
-		return Math.max(0.0, 0.5 - (Math.abs(value) / 2.0));
+		return 0.5 + (value * 0.5);
 	}
 
 	public static double something(final OpenSimplexNoise noise, final double x, final double z)
@@ -71,5 +54,4 @@ public class NoiseUtil
 
 		return total;
 	}
-
 }

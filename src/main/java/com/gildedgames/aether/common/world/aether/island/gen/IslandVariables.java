@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.world.aether.island.gen;
 
+import com.gildedgames.aether.api.world.noise.INoiseTransformer;
 import com.gildedgames.orbis_api.util.mc.NBT;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -69,7 +70,7 @@ public class IslandVariables implements NBT
 	 *
 	 * Default filter returns original value.
 	 */
-	private NoiseTransformer heightSampleFilter = (heightSample) -> heightSample;
+	private INoiseTransformer heightSampleFilter = (heightSample) -> heightSample;
 
 	/**
 	 * Whether or not this island will generate magnetic pillars.
@@ -81,14 +82,14 @@ public class IslandVariables implements NBT
 	 *
 	 * Default filter returns the filter sample multiplied by the top height of the island, negating the cutoff point.
 	 */
-	private MaxYFilter maxYFilter = (bottomMaxY, filteredSample, cutoffPoint, topHeight) -> bottomMaxY + ((filteredSample - cutoffPoint) * topHeight);
+	private MaxYFilter maxYFilter = (bottomMaxY, filteredSample, cutoffPoint) -> bottomMaxY + ((filteredSample - cutoffPoint) * this.getMaxTerrainHeight());
 
 	/**
 	 * A filter which allows the variables to change the bottom value of the water/lakes.
 	 *
 	 * Default filter returns original value.
 	 */
-	private NoiseTransformer lakeBottomValueFilter = (lakeBottomValue) -> lakeBottomValue;
+	private INoiseTransformer lakeBottomValueFilter = (lakeBottomValue) -> lakeBottomValue;
 
 	private IslandVariables()
 	{
@@ -100,7 +101,7 @@ public class IslandVariables implements NBT
 		return new IslandVariables();
 	}
 
-	public NoiseTransformer getLakeBottomValueFilter()
+	public INoiseTransformer getLakeBottomValueFilter()
 	{
 		return this.lakeBottomValueFilter;
 	}
@@ -115,7 +116,7 @@ public class IslandVariables implements NBT
 		return this.snowCaps;
 	}
 
-	public NoiseTransformer getHeightSampleFilter()
+	public INoiseTransformer getHeightSampleFilter()
 	{
 		return this.heightSampleFilter;
 	}
@@ -233,7 +234,7 @@ public class IslandVariables implements NBT
 		return this;
 	}
 
-	public IslandVariables heightSampleFilter(NoiseTransformer heightSampleFilter)
+	public IslandVariables heightSampleFilter(INoiseTransformer heightSampleFilter)
 	{
 		this.heightSampleFilter = heightSampleFilter;
 
@@ -261,7 +262,7 @@ public class IslandVariables implements NBT
 		return this;
 	}
 
-	public IslandVariables lakeBottomValueFilter(NoiseTransformer lakeBottomValueFilter)
+	public IslandVariables lakeBottomValueFilter(INoiseTransformer lakeBottomValueFilter)
 	{
 		this.lakeBottomValueFilter = lakeBottomValueFilter;
 
@@ -296,6 +297,6 @@ public class IslandVariables implements NBT
 
 	public interface MaxYFilter
 	{
-		double maxY(double bottomMaxY, double filteredSample, double cutoffPoint, double topHeight);
+		double transform(double bottomMaxY, double filteredSample, double cutoffPoint);
 	}
 }

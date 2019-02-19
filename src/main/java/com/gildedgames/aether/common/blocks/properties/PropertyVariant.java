@@ -2,7 +2,6 @@ package com.gildedgames.aether.common.blocks.properties;
 
 import com.google.common.base.Optional;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.util.IntHashMap;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,9 +12,7 @@ public class PropertyVariant implements IProperty<BlockVariant>
 {
 	private final String name;
 
-	private final BlockVariant defaultVariant;
-
-	private final IntHashMap<BlockVariant> mappings;
+	private final BlockVariant[] mappings;
 
 	private final HashMap<String, BlockVariant> entries;
 
@@ -23,16 +20,18 @@ public class PropertyVariant implements IProperty<BlockVariant>
 
 	protected PropertyVariant(String name, BlockVariant... variants)
 	{
+		if (variants.length <= 0)
+		{
+			throw new RuntimeException("At least one variant must be supplied");
+		}
+
 		this.name = name;
 
-		this.mappings = new IntHashMap<>();
+		this.mappings = variants;
 		this.entries = new HashMap<>();
-
-		this.defaultVariant = variants[0];
 
 		for (BlockVariant variant : variants)
 		{
-			this.mappings.addKey(variant.getMeta(), variant);
 			this.entries.put(variant.getName(), variant);
 			this.values.add(variant);
 		}
@@ -75,9 +74,12 @@ public class PropertyVariant implements IProperty<BlockVariant>
 
 	public BlockVariant fromMeta(int meta)
 	{
-		BlockVariant variant = this.mappings.lookup(meta);
+		if (meta < 0 || meta > this.mappings.length)
+		{
+			return this.mappings[0];
+		}
 
-		return variant != null ? variant : this.defaultVariant;
+		return this.mappings[meta];
 	}
 
 	@Override

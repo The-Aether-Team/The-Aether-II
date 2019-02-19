@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.util.helpers;
 
-import com.gildedgames.aether.api.ReflectionAether;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.resources.DefaultPlayerSkin;
@@ -17,26 +16,18 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
-import java.lang.reflect.Method;
 import java.util.UUID;
 
 public class EntityUtil
 {
-
-	private static final Method COPY_DATA_FROM_OLD;
-
-	static
-	{
-		COPY_DATA_FROM_OLD = ReflectionAether.getMethod(Entity.class, new Class<?>[] { Entity.class }, "copyDataFromOld", "func_180432_n");
-	}
-
+	@SuppressWarnings("unchecked")
 	public static <T extends Entity> T clone(final T entity)
 	{
 		final T newEnt = (T) EntityList.newEntity(entity.getClass(), entity.getEntityWorld());
 
 		if (newEnt != null)
 		{
-			ReflectionAether.invokeMethod(COPY_DATA_FROM_OLD, newEnt, entity);
+			newEnt.copyDataFromOld(entity);
 		}
 
 		return newEnt;
@@ -214,15 +205,15 @@ public class EntityUtil
 
 	public static IBlockState getBlockBelow(World world, BlockPos pos)
 	{
-		BlockPos startPos = pos;
 		IBlockState state;
 
-		state = world.getBlockState(startPos);
+		state = world.getBlockState(pos);
 
-		while (state == Blocks.AIR.getDefaultState())
+		while (state == Blocks.AIR.getDefaultState() && pos.getY() > 0 && pos.getY() < 256)
 		{
-			startPos = startPos.down();
-			state = world.getBlockState(startPos);
+			pos = pos.down();
+
+			state = world.getBlockState(pos);
 		}
 
 		return state;

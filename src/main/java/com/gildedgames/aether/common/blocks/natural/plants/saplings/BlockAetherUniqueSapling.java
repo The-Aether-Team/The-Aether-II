@@ -55,9 +55,9 @@ public class BlockAetherUniqueSapling extends BlockAetherSapling
 			{
 				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 4);
 
-				BakedBlueprint baked = new BakedBlueprint(tree.getData(), new CreationData(world).pos(BlockPos.ORIGIN).placesAir(false).placesVoid(false));
+				BakedBlueprint baked = new BakedBlueprint(tree, new CreationData(world).pos(BlockPos.ORIGIN).placesAir(false).placesVoid(false));
 
-				if (!BlueprintPlacer.place(world, baked, tree.getConditions(), adjustedPos, true))
+				if (!BlueprintPlacer.place(world, baked, adjustedPos))
 				{
 					world.setBlockState(pos, state, 4);
 				}

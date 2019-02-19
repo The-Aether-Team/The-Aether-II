@@ -1,99 +1,144 @@
 package com.gildedgames.aether.common.world.aether.features;
 
+import com.gildedgames.orbis_api.util.ArrayHelper;
+import com.gildedgames.orbis_api.world.WorldSlice;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.block.state.pattern.BlockMatcher;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
 
 import java.util.Random;
 
-public class WorldGenAetherMinable extends WorldGenerator
+public class WorldGenAetherMinable
 {
 	private final IBlockState oreBlock;
 
 	/** The number of blocks to generate. */
 	private final int numberOfBlocks;
 
-	private final BlockMatcher predicate;
+	private final IBlockState[] predicate;
 
-	public WorldGenAetherMinable(final IBlockState state, final int blockCount)
-	{
-		this(state, blockCount, BlockMatcher.forBlock(Blocks.STONE));
-	}
+	private boolean emitsLight, isFloating;
 
-	public WorldGenAetherMinable(final IBlockState state, final int blockCount, final BlockMatcher p_i45631_3_)
+	public WorldGenAetherMinable(final IBlockState state, final int blockCount, final IBlockState[] replaceableStates)
 	{
 		this.oreBlock = state;
 		this.numberOfBlocks = blockCount;
-		this.predicate = p_i45631_3_;
+		this.predicate = replaceableStates;
 	}
 
-	@Override
-	public boolean generate(final World worldIn, final Random rand, final BlockPos position)
+	public void setFloating(boolean val)
+	{
+		this.isFloating = val;
+	}
+
+	public void setEmitsLight(boolean val)
+	{
+		this.emitsLight = val;
+	}
+
+	public boolean generate(final WorldSlice slice, final Random rand, final BlockPos position)
 	{
 		final float f = rand.nextFloat() * (float) Math.PI;
-		final double d0 = (double) ((float) (position.getX() + 8) + MathHelper.sin(f) * (float) this.numberOfBlocks / 8.0F);
-		final double d1 = (double) ((float) (position.getX() + 8) - MathHelper.sin(f) * (float) this.numberOfBlocks / 8.0F);
-		final double d2 = (double) ((float) (position.getZ() + 8) + MathHelper.cos(f) * (float) this.numberOfBlocks / 8.0F);
-		final double d3 = (double) ((float) (position.getZ() + 8) - MathHelper.cos(f) * (float) this.numberOfBlocks / 8.0F);
-		final double d4 = (double) (position.getY() + rand.nextInt(3) - 2);
-		final double d5 = (double) (position.getY() + rand.nextInt(3) - 2);
+		final float fSin = MathHelper.sin(f);
 
-		int i = 0;
+		final float d0 = ((position.getX() + 8) + fSin * this.numberOfBlocks / 8.0f);
+		final float d1 = ((position.getX() + 8) - fSin * this.numberOfBlocks / 8.0f);
 
-		while (i < this.numberOfBlocks)
+		final float d2 = ((position.getZ() + 8) + fSin * this.numberOfBlocks / 8.0f);
+		final float d3 = ((position.getZ() + 8) - fSin * this.numberOfBlocks / 8.0f);
+
+		final float d4 = (position.getY() + rand.nextInt(3) - 2.0f);
+		final float d5 = (position.getY() + rand.nextInt(3) - 2.0f);
+
+		BlockPos.MutableBlockPos nextPos = new BlockPos.MutableBlockPos();
+
+		int attempts = 0;
+
+		while (attempts < this.numberOfBlocks)
 		{
-			final float f1 = (float) i / (float) this.numberOfBlocks;
-			final double d6 = d0 + (d1 - d0) * (double) f1;
-			final double d7 = d4 + (d5 - d4) * (double) f1;
-			final double d8 = d2 + (d3 - d2) * (double) f1;
-			final double d9 = rand.nextDouble() * (double) this.numberOfBlocks / 16.0D;
-			final double d10 = (double) (MathHelper.sin((float) Math.PI * f1) + 1.0F) * d9 + 1.0D;
-			final double d11 = (double) (MathHelper.sin((float) Math.PI * f1) + 1.0F) * d9 + 1.0D;
-			final int j = MathHelper.floor(d6 - d10 / 2.0D);
-			final int k = MathHelper.floor(d7 - d11 / 2.0D);
-			final int l = MathHelper.floor(d8 - d10 / 2.0D);
-			final int i1 = MathHelper.floor(d6 + d10 / 2.0D);
-			final int j1 = MathHelper.floor(d7 + d11 / 2.0D);
-			final int k1 = MathHelper.floor(d8 + d10 / 2.0D);
+			final float radius = attempts / (float) this.numberOfBlocks;
+			final float radiusSin = MathHelper.sin((float) Math.PI * radius);
 
-			for (int l1 = j; l1 <= i1; ++l1)
+			final float d6 = d0 + (d1 - d0) * radius;
+			final float d7 = d4 + (d5 - d4) * radius;
+			final float d8 = d2 + (d3 - d2) * radius;
+
+			final float d9 = rand.nextFloat() * (float) this.numberOfBlocks / 16.0f;
+
+			final float d10 = (radiusSin + 1.0f) * d9 + 1.0f;
+			final float d11 = (radiusSin + 1.0f) * d9 + 1.0f;
+
+			final int minX = MathHelper.floor(d6 - d10 / 2.0f);
+			final int minY = MathHelper.floor(d7 - d11 / 2.0f);
+			final int minZ = MathHelper.floor(d8 - d10 / 2.0f);
+
+			final int maxX = MathHelper.floor(d6 + d10 / 2.0f);
+			final int maxY = MathHelper.floor(d7 + d11 / 2.0f);
+			final int maxZ = MathHelper.floor(d8 + d10 / 2.0f);
+
+			float xStepFactor = (minX + 0.5f - d6) / (d10 / 2.0f);
+			float xStep = ((minX + 1 + 0.5f - d6) / (d10 / 2.0f)) - xStepFactor;
+
+			float yStepFactor = (minY + 0.5f - d7) / (d11 / 2.0f);
+			float yStep = ((minY + 1 + 0.5f - d7) / (d11 / 2.0f)) - yStepFactor;
+
+			float zStepFactor = (minZ + 0.5f - d8) / (d10 / 2.0f);
+			float zStep = ((minZ + 1 + 0.5f - d8) / (d10 / 2.0f)) - zStepFactor;
+
+			float xDist = xStepFactor;
+
+			for (int x = minX; x <= maxX; ++x)
 			{
-				final double d12 = ((double) l1 + 0.5D - d6) / (d10 / 2.0D);
+				float xDistSq = xDist * xDist;
 
-				if (d12 * d12 < 1.0D)
+				if (xDistSq < 1.0f)
 				{
-					for (int i2 = k; i2 <= j1; ++i2)
+					float yDist = yStepFactor;
+
+					for (int y = minY; y <= maxY; ++y)
 					{
-						final double d13 = ((double) i2 + 0.5D - d7) / (d11 / 2.0D);
+						float yDistSq = yDist * yDist;
 
-						if (d12 * d12 + d13 * d13 < 1.0D)
+						if (xDistSq + yDistSq < 1.0f)
 						{
-							for (int j2 = l; j2 <= k1; ++j2)
+							float zDist = zStepFactor;
+
+							for (int z = minZ; z <= maxZ; ++z)
 							{
-								final double d14 = ((double) j2 + 0.5D - d8) / (d10 / 2.0D);
+								float zDistSq = zDist * zDist;
 
-								if (d12 * d12 + d13 * d13 + d14 * d14 < 1.0D)
+								if (xDistSq + yDistSq + zDistSq < 1.0f)
 								{
-									final BlockPos blockpos = new BlockPos(l1, i2, j2);
+									final IBlockState state = slice.getBlockState(x, y, z);
 
-									final IBlockState state = worldIn.getBlockState(blockpos);
-
-									if (state.getBlock().isReplaceableOreGen(state, worldIn, blockpos, this.predicate))
+									if (ArrayHelper.contains(this.predicate, state))
 									{
-										worldIn.setBlockState(blockpos, this.oreBlock, 2);
+										slice.replaceBlockState(nextPos.setPos(x, y, z), this.oreBlock);
+
+										if (this.emitsLight)
+										{
+											slice.getWorld().checkLight(nextPos);
+										}
+
+										if (this.isFloating && slice.isAirBlock(x, y + 1, z))
+										{
+											slice.getWorld().markAndNotifyBlock(nextPos, slice.getWorld().getChunk(nextPos), state, this.oreBlock, 1 | 2 | 16);
+										}
 									}
 								}
+
+								zDist += zStep;
 							}
 						}
+
+						yDist += yStep;
 					}
 				}
+
+				xDist += xStep;
 			}
 
-			i++;
+			attempts++;
 		}
 
 		return true;

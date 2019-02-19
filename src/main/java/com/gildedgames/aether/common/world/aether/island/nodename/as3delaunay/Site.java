@@ -1,232 +1,118 @@
 package com.gildedgames.aether.common.world.aether.island.nodename.as3delaunay;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Stack;
 
-public final class Site implements ICoord
+public final class Site extends Point implements Comparable<Site>
 {
 
 	final private static double EPSILON = .005;
 
-	private static final Stack<Site> _pool = new Stack<>();
-
-	public Color color;
-
-	public double weight;
-
 	// the edges that define this Site's Voronoi region:
-	public ArrayList<VoronoiEdge> _edges;
+	private ArrayList<VoronoiEdge> edges;
 
-	private Point _coord;
+	private int siteIndex;
 
-	private int _siteIndex;
-
-	// which end of each edge hooks up with the previous edge in _edges:
-	private ArrayList<LR> _edgeOrientations;
+	// which end of each edge hooks up with the previous edge in edges:
+	private ArrayList<LeftRight> edgeLeftRights;
 
 	// ordered list of points that define the region clipped to bounds:
-	private ArrayList<Point> _region;
+	private ArrayList<Point> region;
 
-	public Site(final Point p, final int index, final double weight, final Color color)
+	public Site(final Point p, final int index)
 	{
-		this.init(p, index, weight, color);
-	}
+		super(p.x, p.y);
 
-	public static Site create(final Point p, final int index, final double weight, final Color color)
-	{
-		if (_pool.size() > 0)
-		{
-			return _pool.pop().init(p, index, weight, color);
-		}
-		else
-		{
-			return new Site(p, index, weight, color);
-		}
-	}
-
-	public static void sortSites(final ArrayList<Site> sites)
-	{
-		//sites.sort(Site.compare);
-		sites.sort((o1, o2) -> (int) compare(o1, o2));
-	}
-
-	/**
-	 * sort sites on y, then x, coord also change each site's _siteIndex to
-	 * match its new position in the list so the _siteIndex can be used to
-	 * identify the site for nearest-neighbor queries
-	 *
-	 * haha "also" - means more than one responsibility...
-	 *
-	 */
-	private static double compare(final Site s1, final Site s2)
-	{
-		final int returnValue = Voronoi.compareByYThenX(s1, s2);
-
-		// swap _siteIndex values if necessary to match new ordering:
-		final int tempIndex;
-		if (returnValue == -1)
-		{
-			if (s1._siteIndex > s2._siteIndex)
-			{
-				tempIndex = s1._siteIndex;
-				s1._siteIndex = s2._siteIndex;
-				s2._siteIndex = tempIndex;
-			}
-		}
-		else if (returnValue == 1)
-		{
-			if (s2._siteIndex > s1._siteIndex)
-			{
-				tempIndex = s2._siteIndex;
-				s2._siteIndex = s1._siteIndex;
-				s1._siteIndex = tempIndex;
-			}
-
-		}
-
-		return returnValue;
+		this.siteIndex = index;
+		this.edges = new ArrayList<>();
+		this.region = null;
 	}
 
 	private static boolean closeEnough(final Point p0, final Point p1)
 	{
-		return Point.distance(p0, p1) < EPSILON;
-	}
-
-	@Override
-	public Point get_coord()
-	{
-		return this._coord;
-	}
-
-	private Site init(final Point p, final int index, final double weight, final Color color)
-	{
-		this._coord = p;
-		this._siteIndex = index;
-		this.weight = weight;
-		this.color = color;
-		this._edges = new ArrayList<>();
-		this._region = null;
-		return this;
-	}
-
-	@Override
-	public String toString()
-	{
-		return "Site " + this._siteIndex + ": " + this.get_coord();
-	}
-
-	private void move(final Point p)
-	{
-		this.clear();
-		this._coord = p;
-	}
-
-	public void dispose()
-	{
-		this._coord = null;
-		this.clear();
-		_pool.push(this);
-	}
-
-	private void clear()
-	{
-		if (this._edges != null)
-		{
-			this._edges.clear();
-			this._edges = null;
-		}
-		if (this._edgeOrientations != null)
-		{
-			this._edgeOrientations.clear();
-			this._edgeOrientations = null;
-		}
-		if (this._region != null)
-		{
-			this._region.clear();
-			this._region = null;
-		}
+		return Point.distanceSq(p0, p1) < EPSILON;
 	}
 
 	void addEdge(final VoronoiEdge edge)
 	{
-		this._edges.add(edge);
+		this.edges.add(edge);
 	}
 
 	public VoronoiEdge nearestEdge()
 	{
-		// _edges.sort(VoronoiEdge.compareSitesDistances);
-		this._edges.sort((o1, o2) -> (int) VoronoiEdge.compareSitesDistances(o1, o2));
-		return this._edges.get(0);
+		// edges.sort(VoronoiEdge.compareSitesDistances);
+		this.edges.sort((o1, o2) -> (int) VoronoiEdge.compareSitesDistances(o1, o2));
+		return this.edges.get(0);
 	}
 
-	ArrayList<Site> neighborSites()
+	Site[] neighborSites()
 	{
-		if (this._edges == null || this._edges.isEmpty())
+		if (this.edges == null || this.edges.isEmpty())
 		{
-			return new ArrayList<>();
+			return new Site[0];
 		}
-		if (this._edgeOrientations == null)
+
+		if (this.edgeLeftRights == null)
 		{
 			this.reorderEdges();
 		}
-		final ArrayList<Site> list = new ArrayList<>();
-		for (final VoronoiEdge edge : this._edges)
+
+		final Site[] list = new Site[this.edges.size()];
+
+		for (int i = 0; i < this.edges.size(); i++)
 		{
-			list.add(this.neighborSite(edge));
+			VoronoiEdge edge = this.edges.get(i);
+
+			list[i] = this.neighborSite(edge);
 		}
+
 		return list;
 	}
 
 	private Site neighborSite(final VoronoiEdge edge)
 	{
-		if (this == edge.get_leftSite())
+		if (this == edge.getLeftSite())
 		{
-			return edge.get_rightSite();
+			return edge.getRightSite();
 		}
-		if (this == edge.get_rightSite())
+		if (this == edge.getRightSite())
 		{
-			return edge.get_leftSite();
+			return edge.getLeftSite();
 		}
 		return null;
 	}
 
 	ArrayList<Point> region(final Rectangle clippingBounds)
 	{
-		if (this._edges == null || this._edges.isEmpty())
+		if (this.edges == null || this.edges.isEmpty())
 		{
 			return new ArrayList<>();
 		}
-		if (this._edgeOrientations == null)
+		if (this.edgeLeftRights == null)
 		{
 			this.reorderEdges();
-			this._region = this.clipToBounds(clippingBounds);
-			if ((new Polygon(this._region)).winding() == Winding.CLOCKWISE)
+			this.region = this.clipToBounds(clippingBounds);
+			if (Polygon.getWinding(this.region) == Winding.CLOCKWISE)
 			{
-				Collections.reverse(this._region);
+				Collections.reverse(this.region);
 			}
 		}
-		return this._region;
+		return this.region;
 	}
 
 	private void reorderEdges()
 	{
-		//trace("_edges:", _edges);
-		final EdgeReorderer reorderer = new EdgeReorderer(this._edges, Vertex.class);
-		this._edges = reorderer.get_edges();
-		//trace("reordered:", _edges);
-		this._edgeOrientations = reorderer.get_edgeOrientations();
-		reorderer.dispose();
+		final EdgeReorderer reorderer = new EdgeReorderer(this.edges);
+
+		this.edges = reorderer.getEdges();
+		this.edgeLeftRights = reorderer.getEdgeLeftRights();
 	}
 
 	private ArrayList<Point> clipToBounds(final Rectangle bounds)
 	{
-		final ArrayList<Point> points = new ArrayList<>();
-		final int n = this._edges.size();
+		final int n = this.edges.size();
 		int i = 0;
-		VoronoiEdge edge;
-		while (i < n && (this._edges.get(i).get_visible() == false))
+		while (i < n && (!this.edges.get(i).getVisible()))
 		{
 			++i;
 		}
@@ -236,20 +122,26 @@ public final class Site implements ICoord
 			// no edges visible
 			return new ArrayList<>();
 		}
-		edge = this._edges.get(i);
-		final LR orientation = this._edgeOrientations.get(i);
-		points.add(edge.get_clippedEnds().get(orientation));
-		points.add(edge.get_clippedEnds().get((LR.other(orientation))));
+
+		VoronoiEdge edge = this.edges.get(i);
+		LeftRight leftRight = this.edgeLeftRights.get(i);
+
+		final ArrayList<Point> points = new ArrayList<>();
+		points.add(edge.getClippedEnds().get(leftRight));
+		points.add(edge.getClippedEnds().get(leftRight.other()));
 
 		for (int j = i + 1; j < n; ++j)
 		{
-			edge = this._edges.get(j);
-			if (edge.get_visible() == false)
+			edge = this.edges.get(j);
+
+			if (!edge.getVisible())
 			{
 				continue;
 			}
+
 			this.connect(points, j, bounds, false);
 		}
+
 		// close up the polygon by adding another corner point of the bounds if needed:
 		this.connect(points, i, bounds, true);
 
@@ -259,16 +151,15 @@ public final class Site implements ICoord
 	private void connect(final ArrayList<Point> points, final int j, final Rectangle bounds, final boolean closingUp)
 	{
 		final Point rightPoint = points.get(points.size() - 1);
-		final VoronoiEdge newEdge = this._edges.get(j);
-		final LR newOrientation = this._edgeOrientations.get(j);
+		final VoronoiEdge newEdge = this.edges.get(j);
+		final LeftRight newLeftRight = this.edgeLeftRights.get(j);
 		// the point that  must be connected to rightPoint:
-		final Point newPoint = newEdge.get_clippedEnds().get(newOrientation);
+		final Point newPoint = newEdge.getClippedEnds().get(newLeftRight);
 		if (!closeEnough(rightPoint, newPoint))
 		{
 			// The points do not coincide, so they must have been clipped at the bounds;
 			// see if they are on the same border of the bounds:
-			if (rightPoint.x != newPoint.x
-					&& rightPoint.y != newPoint.y)
+			if (rightPoint.x != newPoint.x && rightPoint.y != newPoint.y)
 			{
 				// They are on different borders of the bounds;
 				// insert one or two corners of bounds as needed to hook them up:
@@ -395,72 +286,55 @@ public final class Site implements ICoord
 			}
 			points.add(newPoint);
 		}
-		final Point newRightPoint = newEdge.get_clippedEnds().get(LR.other(newOrientation));
+		final Point newRightPoint = newEdge.getClippedEnds().get(newLeftRight.other());
 		if (!closeEnough(points.get(0), newRightPoint))
 		{
 			points.add(newRightPoint);
 		}
 	}
 
-	public double get_x()
+	public double dist(final Vertex p)
 	{
-		return this._coord.x;
-	}
-
-	public double get_y()
-	{
-		return this._coord.y;
-	}
-
-	public double dist(final ICoord p)
-	{
-		return Point.distance(p.get_coord(), this._coord);
-	}
-}
-
-final class BoundsCheck
-{
-
-	final public static int TOP = 1;
-
-	final public static int BOTTOM = 2;
-
-	final public static int LEFT = 4;
-
-	final public static int RIGHT = 8;
-
-	public BoundsCheck()
-	{
-		throw new Error("BoundsCheck constructor unused");
+		return Point.distance(p, this);
 	}
 
 	/**
+	 * sort sites on y, then x, coord also change each site's siteIndex to
+	 * match its new position in the list so the siteIndex can be used to
+	 * identify the site for nearest-neighbor queries
 	 *
-	 * @param point
-	 * @param bounds
-	 * @return an int with the appropriate bits set if the Point lies on the
-	 * corresponding bounds lines
+	 * haha "also" - means more than one responsibility...
 	 *
 	 */
-	public static int check(final Point point, final Rectangle bounds)
+	@Override
+	public int compareTo(Site other)
 	{
-		int value = 0;
-		if (point.x == bounds.left)
+		if (this.y < other.y)
 		{
-			value |= LEFT;
+			if (this.siteIndex > other.siteIndex)
+			{
+				final int tempIndex = this.siteIndex;
+				this.siteIndex = other.siteIndex;
+				other.siteIndex = tempIndex;
+			}
+
+			return -1;
 		}
-		if (point.x == bounds.right)
+		else if (this.y > other.y)
 		{
-			value |= RIGHT;
+			if (other.siteIndex > this.siteIndex)
+			{
+				final int tempIndex = other.siteIndex;
+				other.siteIndex = this.siteIndex;
+				this.siteIndex = tempIndex;
+			}
+
+			return 1;
 		}
-		if (point.y == bounds.top)
+		else
 		{
-			value |= TOP;
+			return 0;
 		}
-		if (point.y == bounds.bottom)
-		{
-			value |= BOTTOM;
-		}
-		return value;
 	}
 }
+

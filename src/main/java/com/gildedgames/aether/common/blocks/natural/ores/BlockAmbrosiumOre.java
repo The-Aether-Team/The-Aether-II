@@ -6,7 +6,10 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.ChunkCache;
+import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -21,7 +24,9 @@ public class BlockAmbrosiumOre extends BlockAetherOre
 		this.setHardness(3.0f);
 		this.setResistance(5.0f);
 		this.setHarvestLevel("pickaxe", 0);
-		this.setLightLevel(0.5f);
+		this.setLightLevel(0.4f);
+
+		this.useNeighborBrightness = true;
 
 		this.setSoundType(SoundType.STONE);
 	}
@@ -45,4 +50,14 @@ public class BlockAmbrosiumOre extends BlockAetherOre
 		return BlockRenderLayer.CUTOUT_MIPPED;
 	}
 
+	@Override
+	public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos)
+	{
+		if (world instanceof ChunkCache)
+		{
+			return 0;
+		}
+
+		return super.getLightValue(state, world, pos);
+	}
 }

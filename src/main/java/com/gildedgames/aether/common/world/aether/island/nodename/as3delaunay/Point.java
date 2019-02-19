@@ -16,9 +16,14 @@ public class Point
 		this.y = y;
 	}
 
-	public static double distance(final Point _coord, final Point _coord0)
+	public static double distanceSq(final Point p1, final Point p2)
 	{
-		return Math.sqrt((_coord.x - _coord0.x) * (_coord.x - _coord0.x) + (_coord.y - _coord0.y) * (_coord.y - _coord0.y));
+		return (p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y);
+	}
+
+	public static double distance(final Point p1, final Point p2)
+	{
+		return Math.sqrt(distanceSq(p1, p2));
 	}
 
 	public static Point interpolate(final Point p1, final Point p2, final double alpha)
@@ -26,7 +31,7 @@ public class Point
 		return new Point(lerp(p1.x, p2.x, alpha), lerp(p1.y, p2.y, alpha));
 	}
 
-	private static double lerp(final double point1, final double point2, final double alpha)
+	public static double lerp(final double point1, final double point2, final double alpha)
 	{
 		return point1 + alpha * (point2 - point1);
 	}
@@ -50,7 +55,7 @@ public class Point
 	}
 
 	/** Compare two doubles within a given epsilon */
-	public static boolean equals(final double a, final double b, final double eps)
+	private static boolean equals(final double a, final double b, final double eps)
 	{
 		if (a == b)
 		{
@@ -64,11 +69,6 @@ public class Point
 	public String toString()
 	{
 		return this.x + ", " + this.y;
-	}
-
-	public double l2()
-	{
-		return this.x * this.x + this.y * this.y;
 	}
 
 	public double length()

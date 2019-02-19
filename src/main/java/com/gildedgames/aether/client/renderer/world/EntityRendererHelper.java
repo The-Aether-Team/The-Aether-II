@@ -1,42 +1,18 @@
 package com.gildedgames.aether.client.renderer.world;
 
-import com.gildedgames.aether.api.ReflectionAether;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.MobEffects;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-import java.lang.reflect.Field;
-
 public class EntityRendererHelper
 {
-	private static Field lightmapColorsField, lightmapTextureField, torchFlickerXField;
-
-	private static boolean init;
-
-	public static void init()
-	{
-		if (init)
-		{
-			return;
-		}
-
-		lightmapColorsField = ReflectionAether.getField(EntityRenderer.class, ReflectionAether.ENTITY_RENDERER_LIGHTMAP_COLORS.getMappings());
-		lightmapTextureField = ReflectionAether.getField(EntityRenderer.class, ReflectionAether.ENTITY_RENDERER_LIGHTMAP_TEXTURE.getMappings());
-		torchFlickerXField = ReflectionAether.getField(EntityRenderer.class, ReflectionAether.ENTITY_RENDERER_TORCH_FLICKER_X.getMappings());
-
-		init = true;
-	}
-
 	public static void updateLightmap(Minecraft mc, float partialTicks, float f)
 	{
-		init();
-
-		int[] lightmapColors = getLightmapColors(mc.entityRenderer);
-		DynamicTexture lightmapTexture = getLightmapTexture(mc.entityRenderer);
+		int[] lightmapColors = mc.entityRenderer.lightmapColors;
+		DynamicTexture lightmapTexture = mc.entityRenderer.lightmapTexture;
 
 		mc.profiler.startSection("lightTexAetherDim");
 
@@ -49,7 +25,7 @@ public class EntityRendererHelper
 			for (int i = 0; i < 256; ++i)
 			{
 				float f2 = world.provider.getLightBrightnessTable()[i / 16] * f1;
-				float f3 = world.provider.getLightBrightnessTable()[i % 16] * (getTorchFlickerX(mc.entityRenderer) * 0.1F + 1.5F);
+				float f3 = world.provider.getLightBrightnessTable()[i % 16] * (mc.entityRenderer.torchFlickerX * 0.1F + 1.5F);
 
 				if (world.getLastLightningBolt() > 0)
 				{
@@ -185,18 +161,4 @@ public class EntityRendererHelper
 		return i > 200 ? 1.0F : 0.7F + MathHelper.sin(((float) i - partialTicks) * (float) Math.PI * 0.2F) * 0.3F;
 	}
 
-	private static float getTorchFlickerX(EntityRenderer entityRenderer)
-	{
-		return ReflectionAether.getValue(torchFlickerXField, entityRenderer);
-	}
-
-	private static int[] getLightmapColors(EntityRenderer entityRenderer)
-	{
-		return ReflectionAether.getValue(lightmapColorsField, entityRenderer);
-	}
-
-	private static DynamicTexture getLightmapTexture(EntityRenderer entityRenderer)
-	{
-		return ReflectionAether.getValue(lightmapTextureField, entityRenderer);
-	}
 }

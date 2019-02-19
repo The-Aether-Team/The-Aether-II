@@ -85,13 +85,16 @@ public class BlockAetherGrass extends Block implements IBlockMultiName, IGrowabl
 	{
 		if (!world.isRemote && state.getValue(PROPERTY_VARIANT) != ENCHANTED)
 		{
-			if (world.getLightFromNeighbors(pos.up()) < 4 && world.getBlockState(pos.up()).getLightOpacity(world, pos.up()) > 2)
+			BlockPos.PooledMutableBlockPos up = BlockPos.PooledMutableBlockPos.retain();
+			up.setPos(pos.getX(), pos.getY() + 1, pos.getZ());
+
+			if (world.getLightFromNeighbors(up) < 4 && world.getBlockState(up).getLightOpacity(world, up) > 2)
 			{
 				world.setBlockState(pos, BlocksAether.aether_dirt.getDefaultState());
 			}
 			else
 			{
-				if (world.getLightFromNeighbors(pos.up()) >= 9)
+				if (world.getLightFromNeighbors(up) >= 9)
 				{
 					for (int i = 0; i < 4; ++i)
 					{
@@ -117,6 +120,8 @@ public class BlockAetherGrass extends Block implements IBlockMultiName, IGrowabl
 					}
 				}
 			}
+
+			up.release();
 		}
 	}
 

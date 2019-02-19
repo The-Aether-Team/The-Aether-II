@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.items.armor;
 
-import com.gildedgames.aether.api.ReflectionAether;
 import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.item.effects.stats.StatEffectFactory;
@@ -11,10 +10,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.util.UUID;
 
 public class ItemAetherArmor extends ItemArmor
@@ -35,20 +31,7 @@ public class ItemAetherArmor extends ItemArmor
 
 		this.setCreativeTab(CreativeTabsAether.ARMOR);
 
-		Field field = ReflectionHelper.findField(ItemArmor.class, ReflectionAether.DAMAGE_REDUCE_AMOUNT.getMappings());
-
-		try
-		{
-			Field modifiersField = Field.class.getDeclaredField("modifiers");
-			modifiersField.setAccessible(true);
-			modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
-
-			field.set(this, 0);
-		}
-		catch (NoSuchFieldException | IllegalAccessException e)
-		{
-			AetherCore.LOGGER.error(e);
-		}
+		this.damageReduceAmount = 0;
 	}
 
 	public <T extends ItemAetherArmor> T slashDefense(int level)

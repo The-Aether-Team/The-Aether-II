@@ -57,6 +57,10 @@ public class BlockVariant implements Comparable<BlockVariant>
 	@Override
 	public int hashCode()
 	{
-		return Objects.hash(this.meta, this.name);
+		int hash = 1;
+		hash = 31 * hash + this.name.hashCode();
+		hash = 31 * hash + this.meta;
+
+		return hash;
 	}
 }

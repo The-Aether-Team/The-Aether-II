@@ -2,11 +2,12 @@ package com.gildedgames.aether.common.world.util;
 
 import com.gildedgames.aether.api.world.generation.WorldDecoration;
 import com.gildedgames.aether.api.world.generation.WorldDecorationSimple;
+import com.gildedgames.aether.api.world.generation.positioners.PositionerLevels;
+import com.gildedgames.aether.api.world.generation.positioners.PositionerSurface;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.world.aether.features.WorldGenCaveFloorPlacer;
 import com.gildedgames.aether.common.world.aether.features.WorldGenFloorPlacer;
-import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
 import com.google.common.collect.Lists;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.Rotation;
@@ -37,18 +38,7 @@ public class GenUtil
 	{
 		WorldGenCaveFloorPlacer shroomPlacer = new WorldGenCaveFloorPlacer((random) -> toPickFrom.get(random.nextInt(toPickFrom.size())), 7);
 
-		return new WorldDecorationSimple(2, 0.2f, DecorateBiomeEvent.Decorate.EventType.CUSTOM, shroomPlacer)
-		{
-			@Override
-			public BlockPos findPositionToPlace(final IBlockAccessExtended blockAccess, final Random rand, final BlockPos pos)
-			{
-				final int x = rand.nextInt(16) + 8;
-				final int y = rand.nextInt(64) + 26; // between y: 26 and 90
-				final int z = rand.nextInt(16) + 8;
-
-				return pos.add(x, y, z);
-			}
-		};
+		return new WorldDecorationSimple(2, 0.2f, DecorateBiomeEvent.Decorate.EventType.CUSTOM, new PositionerLevels(26, 90), shroomPlacer);
 	}
 
 	public static WorldDecoration createFlowerDecorations(Random rand, List<IBlockState> toPickFrom, List<IBlockState> mustHave)
@@ -76,7 +66,7 @@ public class GenUtil
 					return returned;
 				});
 
-		return new WorldDecorationSimple(1 + rand.nextInt(6), 0.05F + rand.nextFloat() * 0.2F, DecorateBiomeEvent.Decorate.EventType.FLOWERS, flowers);
+		return new WorldDecorationSimple(1 + rand.nextInt(6), 0.05F + rand.nextFloat() * 0.2F, DecorateBiomeEvent.Decorate.EventType.FLOWERS, new PositionerSurface(), flowers);
 	}
 
 	public static BlockPos rotate(final BlockPos origin, final BlockPos pos, final Rotation rotation)

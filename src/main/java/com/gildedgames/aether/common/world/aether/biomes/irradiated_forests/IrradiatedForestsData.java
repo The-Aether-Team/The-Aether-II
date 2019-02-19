@@ -1,27 +1,25 @@
 package com.gildedgames.aether.common.world.aether.biomes.irradiated_forests;
 
+import com.gildedgames.aether.api.world.islands.IIslandBounds;
 import com.gildedgames.aether.common.world.aether.island.nodename.as3delaunay.Point;
 import com.gildedgames.aether.common.world.aether.island.nodename.as3delaunay.Rectangle;
+import com.gildedgames.aether.common.world.aether.island.nodename.as3delaunay.Site;
 import com.gildedgames.aether.common.world.aether.island.nodename.as3delaunay.Voronoi;
 import com.gildedgames.aether.common.world.aether.island.voronoi.VoronoiGraphUtils;
-import com.gildedgames.orbis_api.util.LineHelp;
+import com.gildedgames.orbis_api.util.ChunkMap;
 import com.gildedgames.orbis_api.util.io.NBTFunnel;
 import com.gildedgames.orbis_api.util.mc.NBT;
 import com.google.common.collect.Lists;
-import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
 
-import javax.annotation.Nullable;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class IrradiatedForestsData implements NBT
 {
 	private static final int NUM_LLOYD_RELAXATIONS = 1;
 
-	private final Long2ObjectOpenHashMap<CrackChunk> cracks = new Long2ObjectOpenHashMap<>();
+	private final ChunkMap<List<CrackLineSegment>> cracks = new ChunkMap<>();
 
 	private Voronoi voronoi;
 
@@ -36,35 +34,36 @@ public class IrradiatedForestsData implements NBT
 
 	}
 
-	public IrradiatedForestsData(final int crackPoints, final long seed, final int islandWidth, final int islandLength, final BlockPos min)
+	public IrradiatedForestsData(final int crackPoints, final long seed, IIslandBounds bounds)
 	{
 		this.crackPoints = crackPoints;
 		this.seed = seed;
-		this.islandWidth = islandWidth;
-		this.islandLength = islandLength;
-		this.min = min;
+		this.islandWidth = bounds.getWidth();
+		this.islandLength = bounds.getLength();
+		this.min = new BlockPos(bounds.getMinX(), bounds.getMinY(), bounds.getMinZ());
 	}
 
-	private void checkInit()
+	public boolean checkInit()
 	{
-		if (this.voronoi == null)
+		boolean generate = this.voronoi == null;
+
+		if (generate)
 		{
 			final Random rand = new Random(this.seed);
 
-			this.voronoi = VoronoiGraphUtils
-					.lloydRelax(new Voronoi(this.crackPoints, rand, new Rectangle(0, 0, this.islandWidth, this.islandLength)),
-							NUM_LLOYD_RELAXATIONS);
+			this.voronoi = new Voronoi(this.crackPoints, rand, new Rectangle(0, 0, this.islandWidth, this.islandLength));
+			this.voronoi = VoronoiGraphUtils.lloydRelax(this.voronoi, NUM_LLOYD_RELAXATIONS);
 
-			final List<Point> pointsUsed = Lists.newArrayList();
+			final List<Site> sitesUsed = Lists.newArrayList();
 
-			Point centerSite = null;
+			Site centerSite = null;
 
 			final double radiusX = (this.islandWidth / 2.0);
 			final double radiusZ = (this.islandLength / 2.0);
 
-			double oldDist = Integer.MAX_VALUE;
+			double oldDist = Double.POSITIVE_INFINITY;
 
-			for (final Point s : this.voronoi.siteCoords())
+			for (final Site s : this.voronoi.getSites())
 			{
 				final double newDistX = Math.abs((radiusX - s.x) * (1.0 / radiusX));
 				final double newDistZ = Math.abs((radiusZ - s.y) * (1.0 / radiusZ));
@@ -79,25 +78,31 @@ public class IrradiatedForestsData implements NBT
 				}
 			}
 
+			if (centerSite == null)
+			{
+				throw new IllegalStateException("Couldn't find center site");
+			}
+
 			for (int crackIt = 0; crackIt < 4; crackIt++)
 			{
-				Point site = centerSite;
+				Site site = centerSite;
 
 				loop:
 				for (int i = 0; i < 20; i++)
 				{
-					final List<Point> sites = this.voronoi.neighborSitesForSite(site);
+					final Site[] sites = this.voronoi.neighborSitesForSite(site);
 
-					Point end = null;
+					Site end = null;
+
 					int sitesChecked = 0;
 
-					while (end == null || pointsUsed.contains(end))
+					while (end == null || sitesUsed.contains(end))
 					{
-						end = sites.get(rand.nextInt(sites.size()));
+						end = sites[rand.nextInt(sites.length)];
 
 						sitesChecked++;
 
-						if (sitesChecked > sites.size())
+						if (sitesChecked > sites.length)
 						{
 							break loop;
 						}
@@ -106,146 +111,72 @@ public class IrradiatedForestsData implements NBT
 					final Point a = site;
 					final Point b = end;
 
-					final List<Point> divided = this.subdivideFractal(a, b, 4, 0.8, rand);
+					final Point[] divided = this.subdivideFractal(a, b, 4, 0.8, rand);
 
-					for (int j = 0; j <= divided.size(); j++)
+					for (int j = 0; j < divided.length - 1; j++)
 					{
-						final Point div1 = divided.get(j);
-						final int index2 = j + 1;
+						final Point div1 = divided[j];
+						final Point div2 = divided[j + 1];
 
-						if (index2 >= divided.size())
-						{
-							break;
-						}
-
-						final Point div2 = divided.get(index2);
-
-						final Iterable<BlockPos.MutableBlockPos> line = LineHelp
-								.createLinePositions(2, new BlockPos(div1.x + this.min.getX(), 0, div1.y + this.min.getZ()),
-										new BlockPos(div2.x + this.min.getX(), 0, div2.y + this.min.getZ()));
-
-						for (final BlockPos.MutableBlockPos p : line)
-						{
-							if (this.getCrackPos(p.getX(), p.getZ()) == null)
-							{
-								final CrackPos c = new CrackPos(p.getX(), p.getZ(), 1);
-
-								this.setCrackPos(c, c.getX(), c.getZ());
-							}
-						}
+						this.addCrackLine(div1.x, div1.y, div2.x, div2.y);
 					}
 
-					pointsUsed.add(site);
+					sitesUsed.add(site);
+
 					site = end;
 				}
 			}
 		}
+
+		return generate;
 	}
 
-	private List<Point> subdivideFractal(final Point a, final Point b, final int subdivisionCount, final double amplitude,
+	private static final double ANGLE_COS = Math.cos(Math.PI / 2.0);
+	private static final double ANGLE_SIN = Math.sin(Math.PI / 2.0);
+
+	private Point[] subdivideFractal(final Point a, final Point b, final int subdivisionCount, final double amplitude,
 			final Random rand)
 	{
-		List<Point> values = Lists.newArrayList(a, b);
+		Point[] values = new Point[] { a, b };
 
 		for (int i = 0; i < subdivisionCount; i++)
 		{
-			final List<Point> divided = Lists.newArrayList();
+			final Point[] divided = new Point[(values.length - 1) * 3];
 
-			for (int j = 0; j < values.size(); j++)
+			for (int j = 0; j < values.length - 1; j++)
 			{
-				final Point div1 = values.get(j);
+				final Point div1 = values[j];
+				final Point div2 = values[j + 1];
 
-				final int index2 = j + 1;
+				double centerX = Point.lerp(div1.x, div2.x, 0.5);
+				double centerY = Point.lerp(div1.y, div2.y, 0.5);
 
-				if (index2 >= values.size())
-				{
-					break;
-				}
+				double cX = centerX + (div1.x - centerX) * ANGLE_COS - (div1.y - centerY) * ANGLE_SIN;
+				double cY = centerY + (div1.x - centerX) * ANGLE_SIN - (div1.y - centerY) * ANGLE_COS;
 
-				final Point div2 = values.get(index2);
+				double dX = centerX + (div2.x - centerX) * ANGLE_COS - (div2.y - centerY) * ANGLE_SIN;
+				double dY = centerY + (div2.x - centerX) * ANGLE_SIN - (div2.y - centerY) * ANGLE_COS;
 
-				final double angle = Math.PI / 2.0;
+				final double zAlpha = 0.1 + ((amplitude - 0.1) * rand.nextDouble());
+				final double zX = Point.lerp(cX, dX, zAlpha);
+				final double zY = Point.lerp(cY, dY, zAlpha);
 
-				final Point center = Point.interpolate(div1, div2, 0.5);
+				final double lerpedX = Point.lerp(centerX, zX, 0.5);
+				final double lerpedY = Point.lerp(centerY, zY, 0.5);
 
-				double newX = center.x + (div1.x - center.x) * Math.cos(angle) - (div1.y - center.y) * Math.sin(angle);
-				double newY = center.y + (div1.x - center.x) * Math.sin(angle) - (div1.y - center.y) * Math.cos(angle);
+				final Point lerped = new Point(lerpedX, lerpedY);
 
-				final Point c = new Point(newX, newY);
+				final int n = j * 3;
 
-				newX = center.x + (div2.x - center.x) * Math.cos(angle) - (div2.y - center.y) * Math.sin(angle);
-				newY = center.y + (div2.x - center.x) * Math.sin(angle) - (div2.y - center.y) * Math.cos(angle);
-
-				final Point d = new Point(newX, newY);
-
-				final Point lerped = Point
-						.interpolate(Point.interpolate(div1, div2, 0.5),
-								Point.interpolate(c, d, 0.1 + ((amplitude - 0.1) * rand.nextDouble())),
-								0.5);
-
-				divided.add(div1);
-				divided.add(lerped);
-				divided.add(div2);
+				divided[n] = div1;
+				divided[n + 1] = lerped;
+				divided[n + 2] = div2;
 			}
 
 			values = divided;
 		}
 
 		return values;
-	}
-
-	private CrackPos getCrackPos(final int x, final int z)
-	{
-		final long index = ChunkPos.asLong(x >> 4, z >> 4);
-
-		CrackChunk chunk = this.cracks.get(index);
-
-		if (chunk == null)
-		{
-			chunk = new CrackChunk();
-
-			this.cracks.put(index, chunk);
-		}
-
-		return chunk.get(Math.abs(x % 16), Math.abs(z % 16));
-	}
-
-	private void setCrackPos(final CrackPos pos, final int x, final int z)
-	{
-		final long index = ChunkPos.asLong(x >> 4, z >> 4);
-
-		CrackChunk chunk = this.cracks.get(index);
-
-		if (chunk == null)
-		{
-			chunk = new CrackChunk();
-
-			this.cracks.put(index, chunk);
-		}
-
-		chunk.set(pos, Math.abs(x % 16), Math.abs(z % 16));
-	}
-
-	@Nullable
-	public CrackChunk getCracks(final int chunkX, final int chunkZ)
-	{
-		this.checkInit();
-
-		long key = ChunkPos.asLong(chunkX, chunkZ);
-
-		if (!this.cracks.containsKey(key))
-		{
-			return null;
-		}
-
-		return this.cracks.get(key);
-	}
-
-	public Voronoi getVoronoi()
-	{
-		this.checkInit();
-
-		return this.voronoi;
 	}
 
 	@Override
@@ -270,5 +201,125 @@ public class IrradiatedForestsData implements NBT
 		this.islandWidth = tag.getInteger("width");
 		this.islandLength = tag.getInteger("length");
 		this.min = funnel.getPos("min");
+	}
+
+	public Collection<CrackLineSegment> getCracksInRegion(int chunkX, int chunkZ, int radius)
+	{
+		int minX = (chunkX) - radius;
+		int minZ = (chunkZ) - radius;
+
+		int maxX = (chunkX) + radius + 1;
+		int maxZ = (chunkZ) + radius + 1;
+
+		HashSet<CrackLineSegment> list = new HashSet<>();
+
+		for (int x = minX; x < maxX; x++)
+		{
+			for (int z = minZ; z < maxZ; z++)
+			{
+				List<CrackLineSegment> lines = this.cracks.get(x - (this.min.getX() >> 4), z - (this.min.getZ() >> 4));
+
+				if (lines != null)
+				{
+					list.addAll(lines);
+				}
+			}
+		}
+
+		return list;
+	}
+
+	private void addCrackLine(double x0, double y0, double x1, double y1)
+	{
+		CrackLineSegment segment = new CrackLineSegment(
+				(this.min.getX() + x0), (this.min.getX() + x1),
+				(this.min.getZ() + y0), (this.min.getZ() + y1)
+		);
+
+		x0 /= 16.0;
+		x1 /= 16.0;
+		y0 /= 16.0;
+		y1 /= 16.0;
+
+		double dx = Math.abs(x1 - x0);
+		double dy = Math.abs(y1 - y0);
+
+		int x = (int) (Math.floor(x0) / 1.0);
+		int y = (int) (Math.floor(y0) / 1.0);
+
+		double dt_dx = 1.0 / dx;
+		double dt_dy = 1.0 / dy;
+
+		double t = 0;
+
+		int n = 1;
+		int x_inc, y_inc;
+		double t_next_vertical, t_next_horizontal;
+
+		if (dx == 0)
+		{
+			x_inc = 0;
+			t_next_horizontal = dt_dx; // infinity
+		}
+		else if (x1 > x0)
+		{
+			x_inc = 1;
+			n += (int) (Math.floor(x1)) - x;
+			t_next_horizontal = (Math.floor(x0) + 1 - x0) * dt_dx;
+		}
+		else
+		{
+			x_inc = -1;
+			n += x - (int) (Math.floor(x1));
+			t_next_horizontal = (x0 - Math.floor(x0)) * dt_dx;
+		}
+
+		if (dy == 0)
+		{
+			y_inc = 0;
+			t_next_vertical = dt_dy; // infinity
+		}
+		else if (y1 > y0)
+		{
+			y_inc = 1;
+			n += (int) (Math.floor(y1)) - y;
+			t_next_vertical = (Math.floor(y0) + 1 - y0) * dt_dy;
+		}
+		else
+		{
+			y_inc = -1;
+			n += y - (int) (Math.floor(y1));
+			t_next_vertical = (y0 - Math.floor(y0)) * dt_dy;
+		}
+
+		while (n > 0)
+		{
+			List<CrackLineSegment> list = this.cracks.get(x, y);
+
+			if (list == null)
+			{
+				list = new ArrayList<>();
+
+				this.cracks.put(x, y, list);
+			}
+
+			list.add(segment);
+
+			if (t_next_vertical < t_next_horizontal)
+			{
+				y += y_inc;
+				t = t_next_vertical;
+				t_next_vertical += dt_dy;
+			}
+			else
+			{
+				x += x_inc;
+				t = t_next_horizontal;
+				t_next_horizontal += dt_dx;
+			}
+
+			--n;
+		}
+
 	}
 }

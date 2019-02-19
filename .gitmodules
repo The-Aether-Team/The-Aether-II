@@ -1,3 +1,6 @@
 [submodule "OrbisAPI"]
-	path = OrbisAPI
+	path = lib/OrbisAPI
 	url = https://git.gildedgames.com/GildedGames/OrbisAPI.git
+[submodule "lib/Phosphor"]
+	path = lib/Phosphor
+	url = https://git.gildedgames.com/jellysquid/phosphor.git

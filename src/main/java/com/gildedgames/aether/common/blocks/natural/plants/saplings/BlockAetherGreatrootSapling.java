@@ -3,7 +3,6 @@ package com.gildedgames.aether.common.blocks.natural.plants.saplings;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
 import com.gildedgames.aether.common.registry.content.GenerationAether;
-import com.gildedgames.aether.common.registry.content.TemplatesAether;
 import com.gildedgames.orbis_api.core.BlueprintDefinition;
 import com.gildedgames.orbis_api.core.CreationData;
 import com.gildedgames.orbis_api.core.baking.BakedBlueprint;
@@ -59,9 +58,9 @@ public class BlockAetherGreatrootSapling extends BlockAetherSapling
 			{
 				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 4);
 
-				BakedBlueprint baked = new BakedBlueprint(tree.getData(), new CreationData(world).pos(BlockPos.ORIGIN).placesAir(false).placesVoid(false));
+				BakedBlueprint baked = new BakedBlueprint(tree, new CreationData(world).pos(BlockPos.ORIGIN).placesAir(false).placesVoid(false));
 
-				if (!BlueprintPlacer.place(world, baked, tree.getConditions(), adjustedPos, true))
+				if (!BlueprintPlacer.place(world, baked, adjustedPos))
 				{
 					world.setBlockState(pos, state, 4);
 				}

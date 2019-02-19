@@ -94,7 +94,7 @@ public class PrepSectorDataAether implements IPrepSectorData
 		this.sectorY = tag.getInteger("y");
 		this.seed = tag.getLong("s");
 
-		this.islandData = new IslandData(this.world, this, tag.getCompoundTag("island"));
+		this.islandData = new IslandData(this, tag.getCompoundTag("island"));
 	}
 
 	public void setIslandData(IIslandData island)

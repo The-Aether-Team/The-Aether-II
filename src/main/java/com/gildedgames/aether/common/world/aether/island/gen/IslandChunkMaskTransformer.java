@@ -17,7 +17,7 @@ public class IslandChunkMaskTransformer implements IChunkMaskTransformer
 
 	public IslandChunkMaskTransformer()
 	{
-		this.states = new IBlockState[IslandBlockType.values().length];
+		this.states = new IBlockState[IslandBlockType.VALUES.length];
 
 		this.setMaskValue(IslandBlockType.AIR_BLOCK, Blocks.AIR.getDefaultState());
 		this.setMaskValue(IslandBlockType.WATER_BLOCK, Blocks.WATER.getDefaultState());
@@ -39,12 +39,20 @@ public class IslandChunkMaskTransformer implements IChunkMaskTransformer
 
 	public void setMaskValue(IslandBlockType type, IBlockState state)
 	{
-		this.states[type.ordinal()] = state;
+		int key = type.ordinal();
+
+		this.states[key] = state;
 	}
 
 	@Override
-	public IBlockState remapBlock(int val)
+	public IBlockState getBlockState(int key)
 	{
-		return this.states[val];
+		return this.states[key];
+	}
+
+	@Override
+	public int getBlockCount()
+	{
+		return this.states.length;
 	}
 }

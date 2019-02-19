@@ -1,10 +1,8 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.IBlockMultiName;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
-import com.google.common.base.Predicate;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -14,7 +12,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -38,17 +35,6 @@ public class BlockHolystone extends Block implements IBlockMultiName
 		this.setSoundType(SoundType.STONE);
 
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, NORMAL_HOLYSTONE));
-	}
-
-	@Override
-	public boolean isReplaceableOreGen(final IBlockState state, final IBlockAccess world, final BlockPos pos, final Predicate<IBlockState> target)
-	{
-		if (target.apply(BlocksAether.holystone.getDefaultState()))
-		{
-			return state.getBlock() == this && state.getValue(PROPERTY_VARIANT) == NORMAL_HOLYSTONE;
-		}
-
-		return false;
 	}
 
 	@Override

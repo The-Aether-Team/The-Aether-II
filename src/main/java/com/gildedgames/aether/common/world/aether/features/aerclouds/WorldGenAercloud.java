@@ -1,18 +1,16 @@
 package com.gildedgames.aether.common.world.aether.features.aerclouds;
 
-import com.gildedgames.orbis_api.processing.BlockAccessExtendedWrapper;
-import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
-import com.gildedgames.orbis_api.world.IWorldGen;
+import com.gildedgames.aether.api.world.generation.WorldDecorationGenerator;
+import com.gildedgames.orbis_api.world.WorldSlice;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class WorldGenAercloud extends WorldGenerator implements IWorldGen
+public class WorldGenAercloud implements WorldDecorationGenerator
 {
 	protected final IBlockState state;
 
@@ -27,27 +25,25 @@ public class WorldGenAercloud extends WorldGenerator implements IWorldGen
 		this.isFlat = isFlat;
 	}
 
-	@Override
-	public boolean generate(final World worldIn, final Random rand, final BlockPos position)
-	{
-		return this.generate(new BlockAccessExtendedWrapper(worldIn), worldIn, rand, position, false);
-	}
-
 	public IBlockState getAercloudState(final Random random)
 	{
 		return this.state;
 	}
 
+
 	@Override
-	public boolean generate(final IBlockAccessExtended blockAccess, final World world, final Random rand, final BlockPos position, final boolean centered)
+	public boolean generate(WorldSlice slice, Random rand, BlockPos pos)
 	{
+		// TODO: Use WorldSlice
+		World world = slice.getWorld();
+
 		final IBlockState state = this.getAercloudState(rand);
 
-		final BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(position.getX(), position.getY(), position.getZ());
+		final BlockPos.MutableBlockPos posMut = new BlockPos.MutableBlockPos(pos.getX(), pos.getY(), pos.getZ());
 
-		int x = position.getX();
-		int y = position.getY();
-		int z = position.getZ();
+		int x = pos.getX();
+		int y = pos.getY();
+		int z = pos.getZ();
 
 		final int xTendency = rand.nextInt(3) - 1;
 		final int zTendency = rand.nextInt(3) - 1;
@@ -71,17 +67,17 @@ public class WorldGenAercloud extends WorldGenerator implements IWorldGen
 				{
 					for (int z1 = z; z1 < z + rand.nextInt(4) + 3 * (this.isFlat ? 3 : 1); z1++)
 					{
-						pos.setPos(x1, y1, z1);
+						posMut.setPos(x1, y1, z1);
 
-						if (!world.isAreaLoaded(pos, 2))
+						if (!world.isAreaLoaded(posMut, 2))
 						{
 							return false;
 						}
 
-						if (blockAccess.getBlockState(pos) == Blocks.AIR.getDefaultState() &&
+						if (world.getBlockState(posMut) == Blocks.AIR.getDefaultState() &&
 								Math.abs(x1 - x) + Math.abs(y1 - y) + Math.abs(z1 - z) < 4 * (this.isFlat ? 3 : 1) + rand.nextInt(2))
 						{
-							transaction.add(pos.toImmutable());
+							transaction.add(posMut.toImmutable());
 						}
 					}
 				}
@@ -90,15 +86,9 @@ public class WorldGenAercloud extends WorldGenerator implements IWorldGen
 
 		for (final BlockPos block : transaction)
 		{
-			world.setBlockState(block, state, 3);
+			world.setBlockState(block, state, 2 | 16);
 		}
 
 		return true;
-	}
-
-	@Override
-	public boolean generate(final IBlockAccessExtended blockAccess, final World world, final Random rand, final BlockPos position)
-	{
-		return this.generate(blockAccess, world, rand, position, false);
 	}
 }

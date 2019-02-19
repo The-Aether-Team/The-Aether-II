@@ -61,12 +61,6 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(final World world, final BlockPos pos)
-	{
-		return super.canPlaceBlockAt(world, pos);
-	}
-
-	@Override
 	public int getLightValue(final IBlockState state)
 	{
 		return this.lightValue;
