@@ -39,6 +39,8 @@ public class WorldPreparationAether
 
 	public void generateFull(IAetherChunkColumnInfo info, ChunkMask mask, IIslandData island, int chunkX, int chunkZ, long seed)
 	{
+		this.generateCloudLayer(info, mask);
+
 		final IIslandGenerator generator = island.getGenerator();
 		generator.generateChunkSegment(info, mask, island, chunkX, chunkZ);
 
@@ -50,7 +52,6 @@ public class WorldPreparationAether
 		}
 
 		this.replaceBiomeBlocks(info, mask);
-		this.generateCloudLayer(info, mask);
 	}
 
 	private void generateCloudLayer(IAetherChunkColumnInfo info, final ChunkMask mask)
@@ -76,10 +77,7 @@ public class WorldPreparationAether
 
 					for (int y = levelY + depth; y >= levelY - depth; y--)
 					{
-						if (mask.getBlock(x, y, z) == IslandBlockType.AIR_BLOCK.ordinal())
-						{
-							mask.setBlock(x, y, z, IslandBlockType.CLOUD_BED_BLOCK.ordinal());
-						}
+						mask.setBlock(x, y, z, IslandBlockType.CLOUD_BED_BLOCK.ordinal());
 					}
 				}
 			}
