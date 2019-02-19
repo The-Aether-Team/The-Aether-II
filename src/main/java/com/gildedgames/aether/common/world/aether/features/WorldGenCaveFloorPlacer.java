@@ -1,12 +1,12 @@
 package com.gildedgames.aether.common.world.aether.features;
 
 import com.gildedgames.aether.api.world.generation.WorldDecorationGenerator;
+import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.orbis_api.util.ArrayHelper;
 import com.gildedgames.orbis_api.world.WorldSlice;
-import com.google.common.collect.Lists;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 
-import java.util.List;
 import java.util.Random;
 import java.util.function.Function;
 
@@ -17,7 +17,7 @@ public class WorldGenCaveFloorPlacer implements WorldDecorationGenerator
 
 	private final int max;
 
-	private List<IBlockState> statesCanPlaceOn = Lists.newArrayList();
+	private IBlockState[] statesCanPlaceOn = new IBlockState[] { BlocksAether.holystone.getDefaultState() };
 
 	public WorldGenCaveFloorPlacer(Function<Random, IBlockState> statesToPlace, final int max)
 	{
@@ -27,26 +27,32 @@ public class WorldGenCaveFloorPlacer implements WorldDecorationGenerator
 
 	public void setStatesToPlaceOn(final IBlockState... states)
 	{
-		this.statesCanPlaceOn = Lists.newArrayList(states);
+		this.statesCanPlaceOn = states;
 	}
 
 	@Override
 	public boolean generate(WorldSlice slice, Random rand, BlockPos pos)
 	{
 		int count = 0;
+
+		BlockPos.MutableBlockPos randomPos = new BlockPos.MutableBlockPos();
+
 		for (int attempts = 0; attempts < 128; attempts++)
 		{
-			final BlockPos randomPos =
-					pos.add(rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
-
-			final IBlockState below = slice.getBlockState(randomPos.down());
+			randomPos.setPos(
+					pos.getX() + (rand.nextInt(16) - 8),
+					pos.getY() + (rand.nextInt(8) - 4),
+					pos.getZ() + (rand.nextInt(16) - 8)
+			);
 
 			if (slice.isAirBlock(randomPos))
 			{
-				IBlockState toPlace = this.statesToPlace.apply(rand);
+				final IBlockState below = slice.getBlockState(randomPos.down());
 
-				if ((this.statesCanPlaceOn.isEmpty() && toPlace.getBlock().canPlaceBlockAt(slice.getWorld(), randomPos)) || this.statesCanPlaceOn.contains(below))
+				if (ArrayHelper.contains(this.statesCanPlaceOn, below))
 				{
+					final IBlockState toPlace = this.statesToPlace.apply(rand);
+
 					slice.setBlockState(randomPos, toPlace);
 
 					if (this.max > 0)
