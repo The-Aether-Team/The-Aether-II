@@ -63,9 +63,19 @@ public class WorldGenAercloud implements WorldDecorationGenerator
 
 			for (int x1 = x; x1 < x + rand.nextInt(4) + 3 * (this.isFlat ? 3 : 1); x1++)
 			{
-				for (int y1 = y; y1 < y + rand.nextInt(1) + 2; y1++)
+				for (int z1 = z; z1 < z + rand.nextInt(4) + 3 * (this.isFlat ? 3 : 1); z1++)
 				{
-					for (int z1 = z; z1 < z + rand.nextInt(4) + 3 * (this.isFlat ? 3 : 1); z1++)
+					posMut.setPos(x1, 0, z1);
+
+					int height = world.getChunk(posMut).getHeight(posMut);
+					int maxY = y + rand.nextInt(1) + 2;
+
+					if (height >= maxY)
+					{
+						return false;
+					}
+
+					for (int y1 = y; y1 < maxY; y1++)
 					{
 						posMut.setPos(x1, y1, z1);
 
