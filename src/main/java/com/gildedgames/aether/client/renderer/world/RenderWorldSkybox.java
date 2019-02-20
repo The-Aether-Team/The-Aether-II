@@ -38,7 +38,6 @@ public class RenderWorldSkybox extends IRenderHandler
 		mc.entityRenderer.enableLightmap();
 
 		GlStateManager.disableFog();
-		GlStateManager.disableLighting();
 
 		GlStateManager.matrixMode(GL11.GL_PROJECTION);
 		GlStateManager.loadIdentity();
@@ -116,7 +115,6 @@ public class RenderWorldSkybox extends IRenderHandler
 		GlStateManager.matrixMode(GL11.GL_MODELVIEW);
 
 		GlStateManager.disableFog();
-		GlStateManager.enableLighting();
 
 		mc.entityRenderer.disableLightmap();
 
