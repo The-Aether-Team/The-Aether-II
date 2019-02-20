@@ -50,7 +50,7 @@ public class MoaGenePoolDataSet<T extends Gene>
 		FEATHERS.genes().add(new DataGene<>("moa.feathers.yellow", new Color(0xd9c65d), new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
 		FEATHERS.genes().add(new DataGene<>("moa.feathers.mallard", new Color(0x3f4d36), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
 		FEATHERS.genes().add(new DataGene<>("moa.feathers.lime_green", new Color(0xc0f39b), new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
-		FEATHERS.genes().add(new DataGene<>("moa.feathers.everglad", new Color(0x304d3b), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
+		FEATHERS.genes().add(new DataGene<>("moa.feathers.everglade", new Color(0x304d3b), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
 		FEATHERS.genes().add(new DataGene<>("moa.feathers.green", new Color(0x79f39a), new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
 		FEATHERS.genes().add(new DataGene<>("moa.feathers.plantation", new Color(0x364d4d), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
 		FEATHERS.genes().add(new DataGene<>("moa.feathers.sky_blue", new Color(0xaa7f3f3), new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
