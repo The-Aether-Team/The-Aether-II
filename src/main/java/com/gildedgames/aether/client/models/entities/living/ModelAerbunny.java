@@ -126,7 +126,15 @@ public class ModelAerbunny extends ModelBase
 
 		float rotation = bunny.getRotation();
 		GlStateManager.translate(0.0F, 1.1F, -0.2F);
-		GlStateManager.rotate(rotation, 20f, 0f, 0f);
+
+		if (!bunny.isRiding())
+		{
+			GlStateManager.rotate(rotation, 20f, 0f, 0f);
+		}
+		else if (bunny.getRidingEntity() != null && bunny.getRidingEntity().isSneaking())
+		{
+			GlStateManager.translate(0.0F, 0.3F, -0.2F);
+		}
 
 		if (bunny.isChild())
 		{
@@ -138,7 +146,7 @@ public class ModelAerbunny extends ModelBase
 		Animation for the legs, because the rotation for the bunnie's jump is from -30 to 30, offsetting it allows the feet to be in a preset position,
 		and dividing it by a greater number than it will ever become keeps the value < 1f
 		 */
-		if (!bunny.onGround)
+		if (!bunny.onGround && !bunny.isRiding())
 		{
 			this.leg_front_right.rotateAngleX = (rotation + 20) / 30f;
 			this.leg_front_left.rotateAngleX = (rotation + 20) / 30f;
