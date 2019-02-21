@@ -68,12 +68,7 @@ public class ChunkProviderNecromancerTower implements IChunkGenerator
 			dataPrimer.place(inst.getTower(), region);
 		}
 
-		final Chunk chunk = blocks.createChunk(this.world, chunkX, chunkZ);
-
-		chunk.generateSkylightMap();
-		//chunk.resetRelightChecks();
-
-		return chunk;
+		return blocks.createChunk(this.world, chunkX, chunkZ);
 	}
 
 	@Override

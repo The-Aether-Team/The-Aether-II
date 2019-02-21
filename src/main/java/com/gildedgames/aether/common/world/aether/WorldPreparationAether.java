@@ -44,14 +44,16 @@ public class WorldPreparationAether
 		final IIslandGenerator generator = island.getGenerator();
 		generator.generateChunkSegment(info, mask, island, chunkX, chunkZ);
 
+		byte[] heightmap = this.createHeightmap(mask);
+
 		this.caveGenerator.generate(island.getCaveSystemGenerator(), chunkX, chunkZ, mask);
+
+		this.replaceBiomeBlocks(info, mask, heightmap);
 
 		if (island.getBiome() instanceof BiomeArcticPeaks)
 		{
 			this.veinGenerator.generate(seed, chunkX, chunkZ, mask);
 		}
-
-		this.replaceBiomeBlocks(info, mask);
 	}
 
 	private void generateCloudLayer(IAetherChunkColumnInfo info, final ChunkMask mask)
@@ -85,15 +87,17 @@ public class WorldPreparationAether
 	}
 
 	// Calculate max penetration depth
-	private void replaceBiomeBlocks(IAetherChunkColumnInfo info, final ChunkMask mask)
+	private void replaceBiomeBlocks(IAetherChunkColumnInfo info, final ChunkMask mask, final byte[] heightmap)
 	{
 		IIslandChunkColumnInfo chunkInfo = info.getIslandData(0, IIslandChunkColumnInfo.class);
 
+		int i = 0;
+
 		for (int x = 0; x < 16; x++)
 		{
-			for (int z = 0; z < 16; z++)
+			for (int z = 0; z < 16; z++, i++)
 			{
-				int height = mask.getHighestBlock(x, z);
+				int height = Byte.toUnsignedInt(heightmap[i]);
 
 				if (height == 0)
 				{
@@ -133,11 +137,32 @@ public class WorldPreparationAether
 		}
 	}
 
+	private byte[] createHeightmap(final ChunkMask mask)
+	{
+		byte[] heightmap = new byte[256];
+
+		int i = 0;
+
+		for (int x = 0; x < 16; x++)
+		{
+			for (int z = 0; z < 16; z++)
+			{
+				int height = mask.getHighestBlock(x, z);
+
+				heightmap[i++] = (byte) height;
+			}
+		}
+
+		return heightmap;
+	}
+
 	public void generateBaseTerrain(IAetherChunkColumnInfo info, ChunkMask mask, IIslandData island, int chunkX, int chunkZ, long seed)
 	{
 		island.getGenerator().generateChunkSegment(info, mask, island, chunkX, chunkZ);
 
-		this.replaceBiomeBlocks(info, mask);
+		byte[] heightmap = this.createHeightmap(mask);
+
+		this.replaceBiomeBlocks(info, mask, heightmap);
 	}
 
 	public IIslandChunkColumnInfo generateChunkColumnInfo(IIslandData island, int chunkX, int chunkZ)

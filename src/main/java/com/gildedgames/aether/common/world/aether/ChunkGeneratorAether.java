@@ -90,10 +90,7 @@ public class ChunkGeneratorAether implements IChunkGenerator
 			dataPrimer.place(instance, region);
 		}
 
-		final Chunk chunk = data.createChunk(this.world, chunkX, chunkZ);
-		chunk.generateSkylightMap();
-
-		return chunk;
+		return data.createChunk(this.world, chunkX, chunkZ);
 	}
 
 	@Override
