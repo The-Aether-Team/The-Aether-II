@@ -192,7 +192,12 @@ public class WorldGenAetherCaves
 
 		if (segment != null)
 		{
-			segment.setBlock(x, y & 7, z, IslandBlockType.AIR_BLOCK.ordinal());
+			int block = segment.getBlock(x, y & 7, z);
+
+			if (block == IslandBlockType.STONE_BLOCK.ordinal() || block == IslandBlockType.STONE_MOSSY_BLOCK.ordinal())
+			{
+				segment.setBlock(x, y & 7, z, IslandBlockType.AIR_BLOCK.ordinal());
+			}
 		}
 
 //		mask.setBlock(x, y, z, IslandBlockType.FERROSITE_BLOCK.ordinal());
