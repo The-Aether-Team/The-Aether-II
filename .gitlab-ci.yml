@@ -8,6 +8,8 @@ build:
   cache:
     paths:
       - .gradle
+      - lib/OrbisAPI/.gradle
+      - lib/Phosphor/.gradle
   script:
     - export SIGN_BUILD=true
     - ./gradlew build
