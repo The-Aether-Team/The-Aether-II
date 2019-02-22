@@ -43,9 +43,7 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 
 	private static final ResourceLocation EYES_CLOSED = AetherCore.getResource("textures/entities/moa/eyes_closed.png");
 
-	private static final ResourceLocation PUPIL_LEFT = AetherCore.getResource("textures/entities/moa/pupil_left.png");
-
-	private static final ResourceLocation PUPIL_RIGHT = AetherCore.getResource("textures/entities/moa/pupil_right.png");
+	private static final ResourceLocation PUPILS = AetherCore.getResource("textures/entities/moa/taegore_pupils.png");
 
 	public RenderMoa(RenderManager manager)
 	{
@@ -102,8 +100,7 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 		model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
 		EyeUtil.renderEyes(this.renderManager, model, model.HeadFront, entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale,
-				PUPIL_LEFT,
-				PUPIL_RIGHT, EYES_CLOSED, false);
+				PUPILS, EYES_CLOSED, false);
 
 		GlStateManager.color(base.getRed() / 255f, base.getGreen() / 255f, base.getBlue() / 255f);
 

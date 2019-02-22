@@ -20,11 +20,10 @@ public class EyeUtil
 
 	public static <T extends ModelBase> void renderEyes(RenderManager renderManager, T model, ModelRenderer eyeModel,
 			EntityLivingBase entity, float limbSwing,
-			float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale, ResourceLocation pupilLeft, ResourceLocation pupilRight,
+			float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale, ResourceLocation pupils,
 			ResourceLocation eyesClosed, boolean eyeTracking)
 	{
-		renderEyes(renderManager, model, eyeModel, eyeModel, entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, pupilLeft,
-				pupilRight,
+		renderEyes(renderManager, model, eyeModel, eyeModel, entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, pupils,
 				eyesClosed, eyeTracking);
 	}
 
@@ -51,7 +50,7 @@ public class EyeUtil
 
 	public static <T extends ModelBase> void renderEyes(RenderManager renderManager, T model, ModelRenderer leftEye, ModelRenderer rightEye,
 			EntityLivingBase entity, float limbSwing,
-			float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale, ResourceLocation pupilLeft, ResourceLocation pupilRight,
+			float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale, ResourceLocation pupils,
 			ResourceLocation eyesClosed, boolean eyeTracking)
 	{
 		for (ModelRenderer box : model.boxList)
@@ -93,26 +92,16 @@ public class EyeUtil
 
 				GlStateManager.pushMatrix();
 
-				renderManager.renderEngine.bindTexture(pupilLeft);
+				renderManager.renderEngine.bindTexture(pupils);
 
-				float oldOffsetX = leftEye.offsetX;
-				float oldOffsetZ = leftEye.offsetZ;
+				float oldLeftOffsetX = leftEye.offsetX;
+				float oldLeftOffsetZ = leftEye.offsetZ;
+
+				float oldRightOffsetX = rightEye.offsetX;
+				float oldRightOffsetZ = rightEye.offsetZ;
 
 				leftEye.offsetX = -eyeCentering + eyeTranslate;
 				leftEye.offsetZ = -0.0001F;
-
-				model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-
-				leftEye.offsetX = oldOffsetX;
-				leftEye.offsetZ = oldOffsetZ;
-
-				GlStateManager.popMatrix();
-
-				GlStateManager.pushMatrix();
-				renderManager.renderEngine.bindTexture(pupilRight);
-
-				oldOffsetX = rightEye.offsetX;
-				oldOffsetZ = rightEye.offsetZ;
 
 				rightEye.offsetX = eyeCentering + eyeTranslate;
 				rightEye.offsetZ = -0.0001F;
@@ -120,8 +109,11 @@ public class EyeUtil
 				model.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entity);
 				model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
-				rightEye.offsetX = oldOffsetX;
-				rightEye.offsetZ = oldOffsetZ;
+				leftEye.offsetX = oldLeftOffsetX;
+				leftEye.offsetZ = oldLeftOffsetZ;
+
+				rightEye.offsetX = oldRightOffsetX;
+				rightEye.offsetZ = oldRightOffsetZ;
 
 				GlStateManager.popMatrix();
 			}

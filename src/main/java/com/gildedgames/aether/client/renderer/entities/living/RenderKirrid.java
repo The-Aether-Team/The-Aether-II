@@ -14,9 +14,7 @@ public class RenderKirrid extends RenderLiving<EntityKirrid>
 {
 	private static final ResourceLocation texture = AetherCore.getResource("textures/entities/kirrid/kirrid.png");
 
-	private static final ResourceLocation PUPIL_LEFT = AetherCore.getResource("textures/entities/kirrid/pupil_left.png");
-
-	private static final ResourceLocation PUPIL_RIGHT = AetherCore.getResource("textures/entities/kirrid/pupil_right.png");
+	private static final ResourceLocation PUPILS = AetherCore.getResource("textures/entities/kirrid/kirrid_pupils.png");
 
 	private static final ResourceLocation EYES_CLOSED = AetherCore.getResource("textures/entities/kirrid/eyes_closed.png");
 
@@ -47,8 +45,7 @@ public class RenderKirrid extends RenderLiving<EntityKirrid>
 		{
 			EyeUtil.renderEyes(this.renderManager, model, model.HeadEyeRight, model.HeadEyeLeft, entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw,
 					headPitch, scale,
-					PUPIL_LEFT,
-					PUPIL_RIGHT, EYES_CLOSED, false);
+					PUPILS, EYES_CLOSED, false);
 		}
 	}
 }

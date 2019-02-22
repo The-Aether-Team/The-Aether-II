@@ -16,9 +16,7 @@ public class RenderEdisonSitting extends RenderLiving<EntityNPC>
 
 	private static final ResourceLocation EYES_CLOSED = AetherCore.getResource("textures/entities/npcs/edison/edison_eyes_closed.png");
 
-	private static final ResourceLocation PUPIL_LEFT = AetherCore.getResource("textures/entities/npcs/edison/edison_pupil_left.png");
-
-	private static final ResourceLocation PUPIL_RIGHT = AetherCore.getResource("textures/entities/npcs/edison/edison_pupil_right.png");
+	private static final ResourceLocation PUPILS = AetherCore.getResource("textures/entities/npcs/edison/edison_pupils.png");
 
 	public RenderEdisonSitting(final RenderManager renderManager)
 	{
@@ -43,8 +41,7 @@ public class RenderEdisonSitting extends RenderLiving<EntityNPC>
 
 		if (globalInvisible || playerInvisible)
 		{
-			EyeUtil.renderEyes(this.renderManager, model, model.head, entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, PUPIL_LEFT,
-					PUPIL_RIGHT, EYES_CLOSED, true);
+			EyeUtil.renderEyes(this.renderManager, model, model.head, entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, PUPILS, EYES_CLOSED, true);
 		}
 	}
 
