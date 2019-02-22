@@ -110,7 +110,7 @@ public class ClientRenderHandler
 		{
 			Minecraft minecraft = Minecraft.getMinecraft();
 
-			if (minecraft.objectMouseOver != null)
+			if (minecraft.currentScreen == null && minecraft.objectMouseOver != null)
 			{
 				IWorldObjectHoverable hoverable = null;
 
