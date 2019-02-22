@@ -7,7 +7,6 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.*;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.*;
-import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstance;
 import com.gildedgames.orbis_api.util.io.NBTFunnel;
 import com.gildedgames.orbis_api.util.mc.NBTHelper;
@@ -25,8 +24,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.DimensionType;
-import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -60,8 +57,6 @@ public class PlayerAether implements IPlayerAether
 	private final PlayerDialogModule dialogModule;
 
 	private final PlayerSwetTracker swetTracker;
-
-	private final PlayerSeparateInventoryModule separateInventoryModule;
 
 	private final PlayerCampfiresModule campfiresModule;
 
@@ -106,7 +101,6 @@ public class PlayerAether implements IPlayerAether
 		this.equipmentModule = null;
 		this.dialogModule = null;
 		this.swetTracker = null;
-		this.separateInventoryModule = null;
 		this.campfiresModule = null;
 		this.preventDropsModule = null;
 		this.patronRewardsModule = null;
@@ -131,7 +125,6 @@ public class PlayerAether implements IPlayerAether
 		this.equipmentModule = new PlayerEquipmentModule(this);
 		this.dialogModule = new PlayerDialogModule(this);
 		this.swetTracker = new PlayerSwetTracker(this);
-		this.separateInventoryModule = new PlayerSeparateInventoryModule(this);
 		this.campfiresModule = new PlayerCampfiresModule(this);
 		this.preventDropsModule = new PlayerPreventDropsModule(this);
 		this.patronRewardsModule = new PlayerPatronRewards(this);
@@ -153,7 +146,6 @@ public class PlayerAether implements IPlayerAether
 		modules.add(this.equipmentModule);
 		modules.add(this.dialogModule);
 		modules.add(this.swetTracker);
-		modules.add(this.separateInventoryModule);
 		modules.add(this.campfiresModule);
 		modules.add(this.preventDropsModule);
 		modules.add(this.patronRewardsModule);
@@ -199,11 +191,6 @@ public class PlayerAether implements IPlayerAether
 		this.lastDestroyedStack = lastDestroyedStack;
 	}
 
-	public PlayerSeparateInventoryModule getSeparateInventoryModule()
-	{
-		return this.separateInventoryModule;
-	}
-
 	public void setDrankEggnog()
 	{
 		this.ticksWithEggnogEffect = 5000;
@@ -235,7 +222,6 @@ public class PlayerAether implements IPlayerAether
 		NetworkingAether.sendPacketToPlayer(new PacketSetPlayedIntro(this.getTeleportingModule().hasPlayedIntro()), (EntityPlayerMP) this.getEntity());
 		NetworkingAether.sendPacketToPlayer(new PacketCampfires(this.getCampfiresModule().getCampfiresActivated()), (EntityPlayerMP) this.getEntity());
 		NetworkingAether.sendPacketToPlayer(new PacketPreventDropsInventories(this.preventDropsModule), (EntityPlayerMP) this.getEntity());
-		NetworkingAether.sendPacketToPlayer(new PacketSeparateInventoryModule(this.separateInventoryModule), (EntityPlayerMP) this.getEntity());
 	}
 
 	public void onUpdate()
@@ -338,21 +324,6 @@ public class PlayerAether implements IPlayerAether
 		this.sendFullUpdate();
 
 		this.equipmentModule.onTeleport();
-
-		DimensionType to = DimensionManager.getProviderType(event.toDim);
-		DimensionType from = DimensionManager.getProviderType(event.fromDim);
-
-		boolean fromAether = from == DimensionsAether.AETHER || from == DimensionsAether.NECROMANCER_TOWER;
-		boolean toAether = to == DimensionsAether.AETHER || to == DimensionsAether.NECROMANCER_TOWER;
-
-		if (toAether && !fromAether)
-		{
-			this.separateInventoryModule.switchToAetherInventory();
-		}
-		else if (!toAether && fromAether)
-		{
-			this.separateInventoryModule.switchToMinecraftInventory(true);
-		}
 	}
 
 	public void onPlayerBeginWatching(final IPlayerAether other)

@@ -36,8 +36,6 @@ public class ConfigAether
 
 	private boolean skipIntro;
 
-	private boolean separateInventories;
-
 	private boolean acknowledgeFingerprintViolation = false;
 
 	private boolean hideXPBarInAether;
@@ -75,7 +73,6 @@ public class ConfigAether
 		this.rollFOV = this.getDouble(this.controls, "Roll FOV", 1.0D);
 
 		this.skipIntro = this.getBoolean(this.gameplay, "Skip Intro", false);
-		this.separateInventories = this.getBoolean(this.gameplay, "Separate Inventories In Aether", false);
 
 		this.acknowledgeFingerprintViolation = this.getBoolean(this.misc, "Acknowledge Fingerprint Violation", false);
 
@@ -169,11 +166,6 @@ public class ConfigAether
 	public boolean skipIntro()
 	{
 		return this.skipIntro;
-	}
-
-	public boolean separateInventories()
-	{
-		return this.separateInventories;
 	}
 
 	public boolean hasAckFingerprintViolation()
