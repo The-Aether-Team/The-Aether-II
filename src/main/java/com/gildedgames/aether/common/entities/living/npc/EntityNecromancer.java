@@ -84,9 +84,6 @@ public class EntityNecromancer extends EntityNPC
 	@Override
 	public void onUpdate()
 	{
-		this.setHealth(this.getMaxHealth());
-		this.isDead = false;
-
 		this.setHomePosAndDistance(this.getPosition(), 500);
 
 		if (this.spawned == null)

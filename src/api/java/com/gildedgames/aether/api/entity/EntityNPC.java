@@ -40,7 +40,7 @@ public abstract class EntityNPC extends EntityCreature implements NPC, IWorldObj
 	@Override
 	public boolean isEntityInvulnerable(final DamageSource source)
 	{
-		return source != DamageSource.OUT_OF_WORLD || super.isEntityInvulnerable(source);
+		return !source.canHarmInCreative();
 	}
 
 	@Override

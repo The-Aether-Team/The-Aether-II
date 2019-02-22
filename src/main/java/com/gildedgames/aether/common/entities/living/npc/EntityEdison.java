@@ -137,9 +137,6 @@ public class EntityEdison extends EntityNPC
 		this.posX = this.prevPosX;
 		this.posZ = this.prevPosZ;
 
-		this.setHealth(this.getMaxHealth());
-		this.isDead = false;
-
 		if (this.spawned == null)
 		{
 			this.spawned = this.getPosition();
