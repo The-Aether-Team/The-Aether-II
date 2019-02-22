@@ -43,7 +43,7 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 
 	private static final ResourceLocation EYES_CLOSED = AetherCore.getResource("textures/entities/moa/eyes_closed.png");
 
-	private static final ResourceLocation PUPILS = AetherCore.getResource("textures/entities/moa/taegore_pupils.png");
+	private static final ResourceLocation PUPILS = AetherCore.getResource("textures/entities/moa/moa_pupils.png");
 
 	public RenderMoa(RenderManager manager)
 	{
