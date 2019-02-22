@@ -2,6 +2,7 @@ package com.gildedgames.aether.api.entity;
 
 import com.gildedgames.aether.api.shop.IShopInstance;
 import com.gildedgames.aether.api.shop.IShopInstanceGroup;
+import com.gildedgames.aether.api.world.IWorldObjectHoverable;
 import com.gildedgames.orbis_api.util.io.NBTFunnel;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,13 +10,16 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
-public abstract class EntityNPC extends EntityCreature implements NPC
+public abstract class EntityNPC extends EntityCreature implements NPC, IWorldObjectHoverable
 {
 	private static final DataParameter<NBTTagCompound> SHOP_INSTANCE_GROUP_TAG = new DataParameter<>(16, DataSerializers.COMPOUND_TAG);
 
@@ -157,5 +161,11 @@ public abstract class EntityNPC extends EntityCreature implements NPC
 		NBTFunnel funnel = new NBTFunnel(compound);
 
 		this.shopInstanceGroup = funnel.getWithDefault("shopInstanceGroup", () -> this.shopInstanceGroup);
+	}
+
+	@Override
+	public ITextComponent getHoverText(World world, RayTraceResult result)
+	{
+		return new TextComponentTranslation("gui.aether.hover.npc", this.getName());
 	}
 }

@@ -1,6 +1,7 @@
 package com.gildedgames.aether.client.renderer;
 
 import com.gildedgames.aether.api.AetherCapabilities;
+import com.gildedgames.aether.api.world.IWorldObjectHoverable;
 import com.gildedgames.aether.api.world.islands.precipitation.IPrecipitationManager;
 import com.gildedgames.aether.client.gui.overlays.IOverlay;
 import com.gildedgames.aether.client.gui.overlays.PortalOverlay;
@@ -11,15 +12,22 @@ import com.gildedgames.aether.client.renderer.particles.ParticleRainProxyFactory
 import com.gildedgames.aether.client.renderer.world.RenderWorldPrecipitation;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.google.common.collect.Lists;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.client.IRenderHandler;
@@ -94,6 +102,65 @@ public class ClientRenderHandler
 				if (overlay.isEnabled())
 				{
 					overlay.draw();
+				}
+			}
+		}
+
+		if (event.getType() == RenderGameOverlayEvent.ElementType.CROSSHAIRS)
+		{
+			Minecraft minecraft = Minecraft.getMinecraft();
+
+			if (minecraft.objectMouseOver != null)
+			{
+				IWorldObjectHoverable hoverable = null;
+
+				if (minecraft.objectMouseOver.typeOfHit == RayTraceResult.Type.BLOCK)
+				{
+					BlockPos pos = minecraft.objectMouseOver.getBlockPos();
+
+					Block block = minecraft.world.getBlockState(pos).getBlock();
+
+					if (!(block instanceof IWorldObjectHoverable))
+					{
+						return;
+					}
+
+					hoverable = (IWorldObjectHoverable) block;
+				}
+				else if (minecraft.objectMouseOver.typeOfHit == RayTraceResult.Type.ENTITY)
+				{
+					Entity entity = minecraft.objectMouseOver.entityHit;
+
+					if (!(entity instanceof IWorldObjectHoverable))
+					{
+						return;
+					}
+
+					hoverable = (IWorldObjectHoverable) entity;
+				}
+
+				if (hoverable != null)
+				{
+					ITextComponent body = hoverable.getHoverText(minecraft.world, minecraft.objectMouseOver);
+
+					if (body == null)
+					{
+						return;
+					}
+
+					String button = minecraft.gameSettings.keyBindUseItem.getDisplayName();
+
+					String label = String.format("%s[%s]%s %s", TextFormatting.YELLOW, button, TextFormatting.WHITE, body.getFormattedText());
+
+					ScaledResolution resolution = new ScaledResolution(minecraft);
+
+					int width = minecraft.fontRenderer.getStringWidth(label);
+					int x = (resolution.getScaledWidth() / 2) - (width / 2);
+					int y = (resolution.getScaledHeight() / 2) + 32;
+
+					Gui.drawRect(x - 3, y - 3, x + width + 3, y + 10, Integer.MIN_VALUE);
+
+					minecraft.fontRenderer.drawString(label, x, y, 0xFFFFFF);
 				}
 			}
 		}

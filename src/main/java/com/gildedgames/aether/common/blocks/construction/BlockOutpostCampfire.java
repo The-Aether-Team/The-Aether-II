@@ -73,5 +73,4 @@ public class BlockOutpostCampfire extends BlockMultiController
 	{
 		return false;
 	}
-
 }

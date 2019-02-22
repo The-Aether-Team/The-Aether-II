@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.tiles.multiblock;
 
+import com.gildedgames.aether.api.world.IWorldObjectHoverable;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.tiles.util.TileEntitySynced;
 import com.gildedgames.orbis_api.util.mc.NBTHelper;
@@ -9,9 +10,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 
-public class TileEntityMultiblockDummy extends TileEntitySynced implements ITileEntityMultiblock
+public class TileEntityMultiblockDummy extends TileEntitySynced implements ITileEntityMultiblock, IWorldObjectHoverable
 {
 	private BlockPos controllerPosOffset;
 
@@ -118,4 +121,16 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements ITile
 		return compound;
 	}
 
+	@Override
+	public ITextComponent getHoverText(World world, RayTraceResult result)
+	{
+		TileEntity entity = this.world.getTileEntity(this.getLinkedController());
+
+		if (entity instanceof IWorldObjectHoverable)
+		{
+			return ((IWorldObjectHoverable) entity).getHoverText(world, result);
+		}
+
+		return null;
+	}
 }

@@ -841,6 +841,10 @@ gui.aether.incubator.label.max=MAX
 gui.aether.incubator.label.fail=FAILING!
 gui.aether.masonry.label.recipes=Recipes
 
+gui.aether.hover.npc=Talk to %s
+gui.aether.hover.campfire=Return to Overworld
+gui.aether.hover.teleporter=Enter the Aether
+
 # Death messages
 
 death.attack.aether.effect.bleed=Bleed

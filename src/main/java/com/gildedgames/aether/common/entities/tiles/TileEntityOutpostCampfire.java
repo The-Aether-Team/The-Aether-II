@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.tiles;
 
+import com.gildedgames.aether.api.world.IWorldObjectHoverable;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
@@ -17,6 +18,9 @@ import net.minecraft.server.management.PlayerList;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -25,7 +29,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class TileEntityOutpostCampfire extends TileEntityMultiblockController implements ITickable
+public class TileEntityOutpostCampfire extends TileEntityMultiblockController implements ITickable, IWorldObjectHoverable
 {
 
 	private static final int PLAYER_SEARCHING_RADIUS = 2;
@@ -119,4 +123,9 @@ public class TileEntityOutpostCampfire extends TileEntityMultiblockController im
 		}
 	}
 
+	@Override
+	public ITextComponent getHoverText(World world, RayTraceResult result)
+	{
+		return new TextComponentTranslation("gui.aether.hover.campfire");
+	}
 }

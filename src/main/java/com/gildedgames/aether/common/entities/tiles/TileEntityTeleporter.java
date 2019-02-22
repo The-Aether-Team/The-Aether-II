@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.tiles;
 
+import com.gildedgames.aether.api.world.IWorldObjectHoverable;
 import com.gildedgames.aether.client.ClientEventHandler;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
@@ -27,6 +28,9 @@ import net.minecraft.server.management.PlayerList;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -34,7 +38,7 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TileEntityTeleporter extends TileEntityMultiblockController implements ITickable
+public class TileEntityTeleporter extends TileEntityMultiblockController implements ITickable, IWorldObjectHoverable
 {
 	@SideOnly(Side.CLIENT)
 	public double animationTicks, prevAnimationTicks;
@@ -215,5 +219,11 @@ public class TileEntityTeleporter extends TileEntityMultiblockController impleme
 	public ItemStack getPickedStack(World world, BlockPos pos, IBlockState state)
 	{
 		return new ItemStack(BlocksAether.aether_teleporter);
+	}
+
+	@Override
+	public ITextComponent getHoverText(World world, RayTraceResult result)
+	{
+		return new TextComponentTranslation("gui.aether.hover.teleporter");
 	}
 }

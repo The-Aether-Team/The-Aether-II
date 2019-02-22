@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.blocks.multiblock;
 
+import com.gildedgames.aether.api.world.IWorldObjectHoverable;
 import com.gildedgames.aether.common.entities.tiles.multiblock.ITileEntityMultiblock;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -11,9 +12,10 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 
-public abstract class BlockMultiBase extends BlockContainer
+public abstract class BlockMultiBase extends BlockContainer implements IWorldObjectHoverable
 {
 	public BlockMultiBase(Material material)
 	{
@@ -78,4 +80,16 @@ public abstract class BlockMultiBase extends BlockContainer
 		return super.getPickBlock(state, target, world, pos, player);
 	}
 
+	@Override
+	public ITextComponent getHoverText(World world, RayTraceResult result)
+	{
+		TileEntity entity = world.getTileEntity(result.getBlockPos());
+
+		if (entity instanceof IWorldObjectHoverable)
+		{
+			return ((IWorldObjectHoverable) entity).getHoverText(world, result);
+		}
+
+		return null;
+	}
 }
