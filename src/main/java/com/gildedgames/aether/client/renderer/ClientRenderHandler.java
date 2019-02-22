@@ -156,7 +156,7 @@ public class ClientRenderHandler
 
 					int width = minecraft.fontRenderer.getStringWidth(label);
 					int x = (resolution.getScaledWidth() / 2) - (width / 2);
-					int y = (resolution.getScaledHeight() / 2) + 32;
+					int y = resolution.getScaledHeight() - 70;
 
 					Gui.drawRect(x - 3, y - 3, x + width + 3, y + 10, Integer.MIN_VALUE);
 
