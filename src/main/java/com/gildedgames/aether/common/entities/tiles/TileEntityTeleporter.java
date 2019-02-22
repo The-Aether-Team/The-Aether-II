@@ -41,7 +41,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class TileEntityTeleporter extends TileEntityMultiblockController implements ITickable, IWorldObjectHoverable
 {
 	@SideOnly(Side.CLIENT)
-	public double animationTicks, prevAnimationTicks;
+	public int animationTicks, prevAnimationTicks;
 
 	private int buildTime;
 

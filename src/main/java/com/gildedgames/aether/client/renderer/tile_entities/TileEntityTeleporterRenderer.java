@@ -43,7 +43,7 @@ public class TileEntityTeleporterRenderer extends TileEntitySpecialRenderer<Tile
 					break;
 			}
 
-			this.model.render(0.0625F, teleporter.getBuildTime());
+			this.model.render(0.0625F, teleporter.animationTicks + ((double) (teleporter.animationTicks - teleporter.prevAnimationTicks) * partialTicks));
 		}
 		else
 		{

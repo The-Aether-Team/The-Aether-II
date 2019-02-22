@@ -295,7 +295,7 @@ public class ModelTeleporter extends ModelBase
 
 	 */
 
-	public void render(float scale, int progress)
+	public void render(float scale, double progress)
 	{
 		final double degtorad = 180 / Math.PI;
 
