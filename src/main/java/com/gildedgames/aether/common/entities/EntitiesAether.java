@@ -14,6 +14,7 @@ import com.gildedgames.aether.common.entities.projectiles.EntityDaggerfrostSnowb
 import com.gildedgames.aether.common.entities.projectiles.EntityDart;
 import com.gildedgames.aether.common.entities.projectiles.EntityTNTPresent;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -51,6 +52,7 @@ public class EntitiesAether
 		registerLivingEntityWithEgg(EntityMysteriousFigure.class, "mysterious_figure", 0x504960, 0xb68b69);
 		registerLivingEntityWithEgg(EntityVaranys.class, "varanys", 0x86b1c9, 0x548193);
 		registerLivingEntityWithEgg(EntitySkyrootLizard.class, "skyroot_lizard", 0x463B30, 0x86A470);
+		registerLivingEntityWithEgg(EntitySheepuff.class, "sheepuff", 0xA3EBEA, 0xB99972);
 
 		registerLivingEntity(EntityFrostpineTotem.class, "frostpine_totem");
 		registerLivingEntity(EntityKraisith.class, "kraisith");

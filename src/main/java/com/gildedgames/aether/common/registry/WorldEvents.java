@@ -67,23 +67,25 @@ public class WorldEvents
 		PosCondition stoneCheck = new CheckBlockUnderneath(BlocksAether.holystone);
 		PosCondition isUnderground = new CheckIsUnderground();
 		PosCondition arcticPeaks = new CheckBiome(BiomesAether.ARCTIC_PEAKS);
+		PosCondition notForgot = new CheckBannedBiomes(BiomesAether.FORGOTTEN_HIGHLANDS);
+		PosCondition forgottenHighlands = new CheckBiome(BiomesAether.FORGOTTEN_HIGHLANDS);
 
 		/** PASSIVE **/
 		SpawnHandler animals = new SpawnHandler("aether_animals").chunkArea(4).targetEntityCountPerArea(9).updateFrequencyInTicks(200);
 		animals.addWorldCondition(new CheckDimension(DimensionsAether.AETHER));
 
 		SpawnEntry burrukai = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityBurrukai.class, 10F, 2, 3)
-				.addCondition(grassCheck);
+				.addCondition(grassCheck).addCondition(notForgot);
 		SpawnEntry ram = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityKirrid.class, 10F, 2, 3)
-				.addCondition(grassCheck);
+				.addCondition(grassCheck).addCondition(notForgot);
 		SpawnEntry aerbunny = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityAerbunny.class, 13F, 3, 5)
-				.addCondition(grassCheck);
+				.addCondition(grassCheck).addCondition(notForgot);
 		SpawnEntry taegore = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityTaegore.class, 13F, 2, 3)
-				.addCondition(grassCheck);
+				.addCondition(grassCheck).addCondition(notForgot);
 		SpawnEntry carrion_sprout = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityCarrionSprout.class, 10F, 2, 3)
-				.addCondition(grassCheck);
-		SpawnEntry glactrix = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityGlactrix.class, 20F, 2, 3).addCondition(arcticPeaks)
-				.addCondition(iceCheck);
+				.addCondition(grassCheck).addCondition(notForgot);
+		SpawnEntry glactrix = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityGlactrix.class, 14F, 2, 3).addCondition(arcticPeaks)
+				.addCondition(iceCheck).addCondition(notForgot);
 
 		animals.addEntry(burrukai);
 		animals.addEntry(ram);
@@ -91,6 +93,14 @@ public class WorldEvents
 		animals.addEntry(taegore);
 		animals.addEntry(carrion_sprout);
 		animals.addEntry(glactrix);
+
+		/** FORGOTTEN HIGHLANDS **/
+
+
+		SpawnEntry sheepuff = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntitySheepuff.class, 10F, 2, 3)
+				.addCondition(grassCheck).addCondition(forgottenHighlands);
+		animals.addEntry(sheepuff);
+
 
 		/** ATMOSPHERIC **/
 		SpawnHandler atmospheric = new SpawnHandler("aether_atmospheric").chunkArea(4).targetEntityCountPerArea(9).updateFrequencyInTicks(200);
@@ -105,9 +115,9 @@ public class WorldEvents
 		daytimeHostiles.addWorldCondition(new CheckDimension(DimensionsAether.AETHER));
 
 		SpawnEntry zephyr = new SpawnEntry(EntityLiving.SpawnPlacementType.IN_AIR, EntityZephyr.class, 5F, 1, 1, new OffsetFromTopBlockPositionSelector(15))
-				.addCondition(new CheckBlockStateUnderneath(Blocks.AIR.getDefaultState())).addCondition(new CheckBlockAtPosition(Blocks.AIR));
+				.addCondition(new CheckBlockStateUnderneath(Blocks.AIR.getDefaultState())).addCondition(new CheckBlockAtPosition(Blocks.AIR)).addCondition(notForgot);
 
-		SpawnEntry swet = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntitySwet.class, 10F, 2, 4).addCondition(groundCheck);
+		SpawnEntry swet = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntitySwet.class, 10F, 2, 4).addCondition(groundCheck).addCondition(notForgot);
 
 		SpawnEntry aechor_plant = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityAechorPlant.class, 10F, 2, 3).addCondition(grassCheck);
 
@@ -122,7 +132,7 @@ public class WorldEvents
 
 		SpawnEntry tempest = new SpawnEntry(EntityLiving.SpawnPlacementType.IN_AIR, EntityTempest.class, 10F, 2, 3, new FlyingPositionSelector())
 				.addCondition(new CheckBlockStateUnderneath(Blocks.AIR.getDefaultState())).addCondition(new CheckTime(CheckTime.Time.NIGHT))
-				.addCondition(new CheckBlockAtPosition(Blocks.AIR));
+				.addCondition(new CheckBlockAtPosition(Blocks.AIR)).addCondition(notForgot);
 
 		SpawnEntry cockatrice = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityCockatrice.class, 12F, 1, 1)
 				.addCondition(groundCheck).addCondition(new CheckTime(CheckTime.Time.NIGHT));
@@ -165,7 +175,7 @@ public class WorldEvents
 
 		SpawnEntry tempestUnderground = new SpawnEntry(EntityLiving.SpawnPlacementType.ON_GROUND, EntityTempest.class, 10F, 2, 3,
 				new UndergroundPositionSelector())
-				.addCondition(stoneCheck).addCondition(isUnderground).addCondition(new CheckBlockAtPosition(Blocks.AIR));
+				.addCondition(stoneCheck).addCondition(isUnderground).addCondition(new CheckBlockAtPosition(Blocks.AIR)).addCondition(notForgot);
 
 		underground.addEntry(cockatriceUnderground);
 		underground.addEntry(tempestUnderground);

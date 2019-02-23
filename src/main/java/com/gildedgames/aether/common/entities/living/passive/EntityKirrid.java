@@ -48,13 +48,12 @@ public class EntityKirrid extends EntitySheep implements IEntityMultiPart
 
 	private final MultiPartEntityPart back = new AetherMultiPartEntity(this, "back", 0.8F, 1.5F);
 
-	private EntityAIEatAetherGrass entityAIEatGrass;
+	protected EntityAIEatAetherGrass entityAIEatGrass;
 
 	public EntityKirrid(World world)
 	{
 		super(world);
 
-		this.tasks.addTask(3, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
 
 		this.setSize(1.0F, 1.5F);
 
@@ -73,11 +72,12 @@ public class EntityKirrid extends EntitySheep implements IEntityMultiPart
 	{
 		super.initEntityAI();
 
-		this.entityAIEatGrass = new EntityAIEatAetherGrass(this);
+		this.entityAIEatGrass = new EntityAIEatAetherGrass(this, this.getEatChance());
 
 		this.tasks.addTask(2, new EntityAIRestrictRain(this));
 		this.tasks.addTask(3, new EntityAIUnstuckBlueAercloud(this));
 		this.tasks.addTask(3, new EntityAIHideFromRain(this, 1.3D));
+		this.tasks.addTask(3, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
 		this.tasks.addTask(9, this.entityAIEatGrass);
 	}
 
@@ -112,6 +112,11 @@ public class EntityKirrid extends EntitySheep implements IEntityMultiPart
 			this.parts[i].prevPosY = this.old[i].getY();
 			this.parts[i].prevPosZ = this.old[i].getZ();
 		}
+	}
+
+	public int getEatChance()
+	{
+		return 1000;
 	}
 
 	@Override

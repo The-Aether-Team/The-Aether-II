@@ -65,7 +65,7 @@ public class EntityGlactrix extends EntityAetherAnimal implements IShearable
 	public EntityGlactrix(World world)
 	{
 		super(world);
-		this.setSize(1f,1f);
+		this.setSize(.65f,.5f);
 
 		this.favoriteBlocks.add(BlocksAether.highlands_packed_ice);
 		this.favoriteBlocks.add(BlocksAether.highlands_ice);

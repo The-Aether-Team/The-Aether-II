@@ -101,6 +101,8 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 			return;
 		}
 
+		super.randomDisplayTick(state, world, pos, rand);
+
 		if (this == BlocksAether.amberoot_leaves)
 		{
 			if (rand.nextInt(100) > 90)

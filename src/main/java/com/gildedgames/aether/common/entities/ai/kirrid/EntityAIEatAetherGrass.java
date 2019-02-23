@@ -17,13 +17,23 @@ public class EntityAIEatAetherGrass extends EntityAIBase
 	private final World world;
 
 	/** Number of ticks since the entity started to eat grass */
-	int timer;
+	private int timer;
 
-	public EntityAIEatAetherGrass(final EntityLiving grassEaterEntityIn)
+	/** Chance of executing **/
+	private int chance;
+
+	public EntityAIEatAetherGrass(final EntityLiving grassEaterEntityIn, int chance)
 	{
 		this.entity = grassEaterEntityIn;
 		this.world = grassEaterEntityIn.world;
 		this.setMutexBits(7);
+		this.chance = chance;
+	}
+
+
+	public EntityAIEatAetherGrass(final EntityLiving grassEaterEntityIn)
+	{
+		this(grassEaterEntityIn, 1000);
 	}
 
 	/**
@@ -32,7 +42,7 @@ public class EntityAIEatAetherGrass extends EntityAIBase
 	@Override
 	public boolean shouldExecute()
 	{
-		if (this.entity.getRNG().nextInt(this.entity.isChild() ? 50 : 1000) != 0)
+		if (this.entity.getRNG().nextInt(this.entity.isChild() ? 50 : this.chance) != 0)
 		{
 			return false;
 		}
@@ -40,7 +50,7 @@ public class EntityAIEatAetherGrass extends EntityAIBase
 		{
 			final BlockPos blockpos = new BlockPos(this.entity.posX, this.entity.posY, this.entity.posZ);
 			return this.world.getBlockState(blockpos).getBlock() == BlocksAether.tall_aether_grass
-					&& this.world.getBlockState(blockpos.down()).getBlock() == BlocksAether.aether_grass;
+					|| this.world.getBlockState(blockpos.down()).getBlock() == BlocksAether.aether_grass;
 		}
 	}
 
@@ -106,7 +116,7 @@ public class EntityAIEatAetherGrass extends EntityAIBase
 			{
 				final BlockPos blockpos1 = blockpos.down();
 
-				if (this.world.getBlockState(blockpos1).getBlock() == Blocks.GRASS)
+				if (this.world.getBlockState(blockpos1).getBlock() == BlocksAether.aether_grass)
 				{
 					if (this.world.getGameRules().getBoolean("mobGriefing"))
 					{
