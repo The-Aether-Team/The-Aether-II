@@ -12,6 +12,7 @@ import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketSetPlayedIntro;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.registry.content.InstancesAether;
+import com.gildedgames.aether.common.util.helpers.AetherHelper;
 import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstanceHelper;
 import com.gildedgames.orbis_api.OrbisAPI;
 import com.gildedgames.orbis_api.util.TeleporterGeneric;
@@ -224,6 +225,6 @@ public class TileEntityTeleporter extends TileEntityMultiblockController impleme
 	@Override
 	public ITextComponent getHoverText(World world, RayTraceResult result)
 	{
-		return new TextComponentTranslation("gui.aether.hover.teleporter");
+		return new TextComponentTranslation(AetherHelper.isAether(world) ? "gui.aether.hover.campfire" : "gui.aether.hover.teleporter");
 	}
 }

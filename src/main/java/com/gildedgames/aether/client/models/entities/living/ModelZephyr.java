@@ -1,7 +1,12 @@
 package com.gildedgames.aether.client.models.entities.living;
 
+import com.gildedgames.aether.common.entities.living.mobs.EntityZephyr;
+import com.gildedgames.aether.common.util.helpers.MathUtil;
+import com.gildedgames.orbis_api.util.mc.GlUtil;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 
 /**
@@ -159,9 +164,10 @@ public class ModelZephyr extends ModelBase
 		this.textureWidth = 124;
 		this.textureHeight = 64;
 		this.Head2 = new ModelRenderer(this, 0, 19);
-		this.Head2.setRotationPoint(0.0F, 20.0F, -3.0F);
-		this.Head2.addBox(-0.5F, 0.4000000059604645F, -2.799999952316284F, 1, 1, 1, 0.0F);
-		this.setRotateAngle(this.Head2, 0.2617993950843811F, -0.0F, 0.0F);
+//		this.Head2.setRotationPoint(0.0F, 20.0F, -3.0F);
+//		this.Head2.addBox(-0.5F, 0.4000000059604645F, -2.799999952316284F, 1, 1, 1, 0.0F);
+		this.Head2.addBox(0, 0, 0, 1, 1, 1, 0.0F);
+//		this.setRotateAngle(this.Head2, 0.2617993950843811F, -0.0F, 0.0F);
 		this.Head11 = new ModelRenderer(this, 0, 14);
 		this.Head11.setRotationPoint(0.0F, 20.0F, -3.0F);
 		this.Head11.addBox(-1.5F, -0.5F, 0.0F, 3, 4, 1, 0.0F);
@@ -519,7 +525,13 @@ public class ModelZephyr extends ModelBase
 	@Override
 	public void render(final Entity entity, final float f, final float f1, final float f2, final float f3, final float f4, final float f5)
 	{
+
+		GlStateManager.pushMatrix();
+
 		this.Head2.render(f5);
+
+		GlStateManager.translate(0.025f, -1.35f,0);
+
 		this.Head11.render(f5);
 		this.Head3.render(f5);
 		this.Head4.render(f5);
@@ -543,6 +555,8 @@ public class ModelZephyr extends ModelBase
 		this.Body2.render(f5);
 		this.Head12.render(f5);
 		this.Head1.render(f5);
+
+		GlStateManager.popMatrix();
 	}
 
 	/**

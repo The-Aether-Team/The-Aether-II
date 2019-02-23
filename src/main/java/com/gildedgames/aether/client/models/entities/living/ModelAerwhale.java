@@ -1,6 +1,5 @@
 package com.gildedgames.aether.client.models.entities.living;
 
-import com.gildedgames.aether.common.entities.util.flying.EntityFlying;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -14,7 +13,7 @@ public class ModelAerwhale extends ModelBase
 {
 	public final ModelRenderer Head;
 
-	public final ModelRenderer Middlebody;
+	public final ModelRenderer MiddleBody;
 
 	public final ModelRenderer LeftFin;
 
@@ -73,25 +72,27 @@ public class ModelAerwhale extends ModelBase
 		this.MiddleFin.setRotationPoint(0.0F, 0.0F, 0.0F);
 		this.MiddleFin.addBox(-1.0F, -11.0F, 7.0F, 2, 7, 8, 0.0F);
 		this.setRotateAngle(this.MiddleFin, -0.14416419621473162F, -0.012217304763960306F, 0.0F);
-		this.Middlebody = new ModelRenderer(this, 314, 25);
-		this.Middlebody.setRotationPoint(0.0F, -1.0F, 14.0F);
-		this.Middlebody.addBox(-11.0F, -5.0F, -1.0F, 22, 14, 25, 0.0F);
+		this.MiddleBody = new ModelRenderer(this, 314, 25);
+		this.MiddleBody.setRotationPoint(0.0F, -1.0F, 14.0F);
+		this.MiddleBody.addBox(-11.0F, -5.0F, -1.0F, 22, 14, 25, 0.0F);
 		this.Head.addChild(this.BottomPartHead);
-		this.Middlebody.addChild(this.BackBody);
+//		this.MiddleBody.addChild(this.BackBody);
 		this.Head.addChild(this.RightFin);
 		this.BackBody.addChild(this.BackfinLeft);
-		this.Middlebody.addChild(this.BottomPartMiddlebody);
+		this.MiddleBody.addChild(this.BottomPartMiddlebody);
 		this.BackBody.addChild(this.BackfinRight);
-		this.BackBody.addChild(this.FrontBody);
+//		this.BackBody.addChild(this.FrontBody);
 		this.Head.addChild(this.LeftFin);
-		this.Middlebody.addChild(this.MiddleFin);
-		this.Head.addChild(this.Middlebody);
+		this.MiddleBody.addChild(this.MiddleFin);
+//		this.Head.addChild(this.MiddleBody);
 	}
 
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
 		this.Head.render(f5);
+		this.MiddleBody.render(f5);
+		this.BackBody.render(f5);
 	}
 
 	/**
@@ -110,19 +111,19 @@ public class ModelAerwhale extends ModelBase
 	{
 		super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entity);
 
-		EntityFlying flying = (EntityFlying) entity;
-		float deltaTime = ageInTicks - (float) flying.ticksExisted;
-
-		float tailAnimation = flying.getTailAnimation(deltaTime);
-
+//		EntityFlying flying = (EntityFlying) entity;
+//		float deltaTime = ageInTicks - (float) flying.ticksExisted;
+//
+//		float tailAnimation = flying.getTailAnimation(deltaTime);
+//
 		float time = -0.05F;
-
+//
 		this.RightFin.rotateAngleZ = (MathHelper.sin(ageInTicks * (time + 0.01F)) * 0.18F * (float) Math.PI);
 		this.LeftFin.rotateAngleZ = -(MathHelper.sin(ageInTicks * (time + 0.01F)) * 0.18F * (float) Math.PI);
 
-		this.BackBody.rotateAngleX = MathHelper.cos(ageInTicks * time) * 0.15F * (float) Math.PI;
-		this.Head.rotateAngleX = MathHelper.cos(ageInTicks * time) * -0.15F * (float) Math.PI;
-		this.Middlebody.rotateAngleX = MathHelper.sin(ageInTicks * time) * 0.15F * (float) Math.PI;
+//		this.BackBody.rotateAngleX = MathHelper.cos(ageInTicks * time) * 0.15F * (float) Math.PI;
+//		this.Head.rotateAngleX = MathHelper.cos(ageInTicks * time) * -0.15F * (float) Math.PI;
+//		this.MiddleBody.rotateAngleX = MathHelper.sin(ageInTicks * time) * 0.15F * (float) Math.PI;
 
 		this.BackfinRight.rotateAngleX = MathHelper.sin(ageInTicks * time) * 0.18F * (float) Math.PI;
 		this.BackfinLeft.rotateAngleX = MathHelper.sin(ageInTicks * time) * 0.18F * (float) Math.PI;

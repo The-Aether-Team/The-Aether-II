@@ -201,6 +201,8 @@ public class ClientRenderHandler
 				event.getLeft().add("- Wind Velocity: (" + String.format("%.2f, %.2f", precipitation.getWindVector().x, precipitation.getWindVector().y) + ")");
 			}
 		}
+
+
 	}
 
 	@SubscribeEvent
