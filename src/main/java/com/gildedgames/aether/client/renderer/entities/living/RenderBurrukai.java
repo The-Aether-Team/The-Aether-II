@@ -14,8 +14,10 @@ public class RenderBurrukai extends RenderLiving<EntityBurrukai>
 {
 	private static final ResourceLocation texture = AetherCore.getResource("textures/entities/burrukai/burrukai.png");
 
-	private static final ResourceLocation PUPILS = AetherCore.getResource("textures/entities/burrukai/burrukai_pupils.png");
-	
+	private static final ResourceLocation PUPIL_LEFT = AetherCore.getResource("textures/entities/burrukai/burrukai_pupil_left.png");
+
+	private static final ResourceLocation PUPIL_RIGHT = AetherCore.getResource("textures/entities/burrukai/burrukai_pupil_right.png");
+
 	private static final ResourceLocation EYES_CLOSED = AetherCore.getResource("textures/entities/burrukai/burrukai_eyes_closed.png");
 
 	public RenderBurrukai(RenderManager renderManager)
@@ -52,7 +54,8 @@ public class RenderBurrukai extends RenderLiving<EntityBurrukai>
 		{
 			EyeUtil.renderEyes(this.renderManager, model, model.HeadEyeRight, model.HeadEyeLeft, entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw,
 					headPitch, scale,
-					PUPILS, EYES_CLOSED, false);
+					PUPIL_LEFT,
+					PUPIL_RIGHT, EYES_CLOSED, false);
 		}
 	}
 }

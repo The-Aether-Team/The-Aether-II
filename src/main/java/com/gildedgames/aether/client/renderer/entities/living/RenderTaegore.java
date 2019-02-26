@@ -14,7 +14,9 @@ public class RenderTaegore extends RenderLiving<EntityTaegore>
 {
 	private static final ResourceLocation texture = AetherCore.getResource("textures/entities/taegore/taegore.png");
 
-	private static final ResourceLocation PUPILS = AetherCore.getResource("textures/entities/taegore/taegore_pupils.png");
+	private static final ResourceLocation PUPIL_LEFT = AetherCore.getResource("textures/entities/taegore/pupil_left.png");
+
+	private static final ResourceLocation PUPIL_RIGHT = AetherCore.getResource("textures/entities/taegore/pupil_right.png");
 
 	private static final ResourceLocation EYES_CLOSED = AetherCore.getResource("textures/entities/taegore/eyes_closed.png");
 
@@ -51,7 +53,9 @@ public class RenderTaegore extends RenderLiving<EntityTaegore>
 		if (globalInvisible || playerInvisible)
 		{
 			EyeUtil.renderEyes(this.renderManager, model, model.HeadEyeRight, model.HeadEyeLeft, entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw,
-					headPitch, scale, PUPILS, EYES_CLOSED, false);
+					headPitch, scale,
+					PUPIL_LEFT,
+					PUPIL_RIGHT, EYES_CLOSED, false);
 		}
 	}
 }
