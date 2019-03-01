@@ -88,7 +88,13 @@ jar {
         )
     })
 
-    classifier = "no-assets"
+    classifier = "reobf"
+}
+
+task apiJar(type: Jar) {
+    classifier = "api"
+
+    from sourceSets.api.output
 }
 
 task reobfJarWithAssets(type: Jar) {
@@ -109,7 +115,9 @@ minecraft {
 
     runDir = "run"
 
-    clientJvmArgs = serverJvmArgs += "-Dfml.coreMods.load=me.jellysquid.mods.phosphor.core.PhosphorFMLLoadingPlugin"
+    def plugin = "me.jellysquid.mods.phosphor.core.PhosphorFMLLoadingPlugin"
+
+    clientJvmArgs = serverJvmArgs += "-Dfml.coreMods.load=$plugin"
 }
 
 processResources {
@@ -143,27 +151,30 @@ minecraft {
     makeObfSourceJar = false
 }
 
-task signJar(type: SignJar, dependsOn: reobfJar) {
-    keyStore = System.getenv('SIGN_KEYSTORE')
-    alias = System.getenv('SIGN_ALIAS')
-    storePass = System.getenv('SIGN_STORE_PASS')
-    keyPass = System.getenv('SIGN_KEY_PASS')
+if (System.getenv("JARSIGN_SECRETS_FILE") != null) {
+    def secretsFile = file(System.getenv("JARSIGN_SECRETS_FILE"))
 
-    inputFile = jar.archivePath
-    outputFile = jar.archivePath
+    def secrets = new Properties()
+    secrets.load(secretsFile.newReader())
+
+    [reobfJarWithAssets, apiJar].each { jarTask ->
+        def task = task(jarTask.name + 'Sign', type: SignJar) {
+            keyStore = System.getenv("JARSIGN_KEYSTORE_FILE")
+            alias = secrets.alias
+            storePass = secrets.storePassword
+            keyPass = secrets.keyPassword
+
+            inputFile = jarTask.archivePath
+            outputFile = jarTask.archivePath
+        }
+
+        jarTask.finalizedBy task
+    }
 }
 
-if (System.getenv("SIGN_BUILD") == 'true') {
-    build.dependsOn signJar
-}
+build.dependsOn apiJar
 
-task apiJar(type: Jar) {
-    classifier = "api"
-
-    from sourceSets.api.output
-}
-
-artifacts {
-    archives jar
-    archives apiJar
+// Prevents re-building OrbisAPI
+task ciBuild {
+    dependsOn build
 }
