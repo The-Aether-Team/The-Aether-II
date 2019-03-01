@@ -36,10 +36,10 @@ configurations {
 }
 
 dependencies {
-    compileShaded project(":OrbisAPI")
+    compileShaded project(":orbis-api")
 
     if (isPhosphorSubmodule) {
-        runtime project(':Phosphor')
+        runtime project(':phosphor')
     } else {
         runtime "me.jellysquid.mods:phosphor:${phosphor_version}:dev"
         shaded  "me.jellysquid.mods:phosphor:${phosphor_version}:universal"
@@ -97,7 +97,7 @@ task apiJar(type: Jar) {
     from sourceSets.api.output
 }
 
-task reobfJarWithAssets(type: Jar) {
+task reobfJarWithAssets(type: Jar, dependsOn: extractAnnotationsJar) {
     from zipTree(jar.archivePath)
 
     into("assets") {
