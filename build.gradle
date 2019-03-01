@@ -12,20 +12,38 @@ buildscript {
 }
 
 apply plugin: 'net.minecraftforge.gradle.forge'
-
 apply plugin: 'maven-publish'
 
-deobfMcMCP { failOnAtError = false }
-deobfMcSRG { failOnAtError = false }
+def isPhosphorSubmodule = findProject(":Phosphor") != null
 
 repositories {
     mavenCentral()
+
     maven { url = 'https://repo.spongepowered.org/maven' }
+    maven { url = 'https://files.gildedgames.com/maven' }
+}
+
+configurations {
+    compileShaded
+    compile.extendsFrom compileShaded
+
+    runtimeShaded
+    runtime.extendsFrom runtimeShaded
+
+    shaded
+    shaded.extendsFrom runtimeShaded, compileShaded
+    shaded.exclude group: "org.spongepowered"
 }
 
 dependencies {
-    compile project(":OrbisAPI")
-    runtime project(":Phosphor")
+    compileShaded project(":OrbisAPI")
+
+    if (isPhosphorSubmodule) {
+        runtime project(':Phosphor')
+    } else {
+        runtime "me.jellysquid.mods:phosphor:${phosphor_version}:dev"
+        shaded  "me.jellysquid.mods:phosphor:${phosphor_version}:universal"
+    }
 }
 
 allprojects {
@@ -34,9 +52,9 @@ allprojects {
 }
 
 if (System.getenv("CI_JOB_ID") != null) {
-    version = "${minecraft_version}-${mod_version}+build-${System.getenv("CI_JOB_ID")}"
+    version = "${minecraft_version}-${mod_version}+build${System.getenv("CI_JOB_ID")}"
 } else {
-    version = "${minecraft_version}-${mod_version}+snapshot-${System.currentTimeMillis()}"
+    version = "${minecraft_version}-${mod_version}-SNAPSHOT"
 }
 
 group = "com.gildedgames"
@@ -46,45 +64,52 @@ sourceSets {
     api {
         java { srcDir "src/api/java" }
     }
+
+    main {
+        resources {
+            exclude 'assets/**'
+        }
+    }
 }
 
 jar {
-    dependsOn(':OrbisAPI:build')
-    dependsOn(':Phosphor:build')
-
     from sourceSets.api.output
     from sourceSets.main.output
 
     gradle.projectsEvaluated({
+        def artifacts = configurations.shaded.files
+            .findAll { it.name.contains("-universal.jar") }
+
+        from(artifacts)
+
         manifest.mainAttributes(
-                "ContainedDeps": "${project(":OrbisAPI").mod_name}-${project(":OrbisAPI").version}.jar " +
-                        "${project(":Phosphor").mod_name}-${project(":Phosphor").version}-universal.jar",
+                "ContainedDeps": artifacts.collect { it.name }.join(' '),
                 "FMLAT": "aether_at.cfg"
         )
-
-        from("lib/OrbisAPI/build/libs") {
-            include("${project(":OrbisAPI").mod_name}-${project(":OrbisAPI").version}.jar")
-        }
-
-        from("lib/Phosphor/build/libs") {
-            include("${project(":Phosphor").mod_name}-${project(":Phosphor").version}-universal.jar")
-        }
     })
 
-    classifier = 'universal'
-
+    classifier = "no-assets"
 }
+
+task reobfJarWithAssets(type: Jar) {
+    from zipTree(jar.archivePath)
+
+    into("assets") {
+        from "src/main/resources/assets"
+    }
+
+    classifier "universal"
+}
+
+reobfJar.finalizedBy reobfJarWithAssets
 
 minecraft {
     version = "$minecraft_version-$forge_version"
     mappings = "$forge_mappings"
 
     runDir = "run"
-}
 
-minecraft {
-    clientJvmArgs += "-Dfml.coreMods.load=me.jellysquid.mods.phosphor.core.PhosphorFMLLoadingPlugin"
-    serverJvmArgs += "-Dfml.coreMods.load=me.jellysquid.mods.phosphor.core.PhosphorFMLLoadingPlugin"
+    clientJvmArgs = serverJvmArgs += "-Dfml.coreMods.load=me.jellysquid.mods.phosphor.core.PhosphorFMLLoadingPlugin"
 }
 
 processResources {
@@ -93,12 +118,14 @@ processResources {
 
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
+        exclude 'assets/**'
 
         expand 'version': project.version, 'mcversion': project.minecraft.version
     }
 
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
+        exclude 'assets/**'
     }
 
     rename '(.+_at.cfg)', 'META-INF/$1'

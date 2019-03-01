@@ -1,7 +1,13 @@
-rootProject.name = 'Aether-II'
+rootProject.name = 'aether-ii'
 
 include 'OrbisAPI'
-include 'Phosphor'
 
 project(':OrbisAPI').projectDir = file("lib/OrbisAPI")
-project(':Phosphor').projectDir = file("lib/Phosphor")
+
+def phosphorSubmodule = file("lib/Phosphor")
+
+if (phosphorSubmodule.exists()) {
+    include 'Phosphor'
+
+    project(":Phosphor").projectDir = phosphorSubmodule
+}
