@@ -51,8 +51,8 @@ allprojects {
     targetCompatibility = 1.8
 }
 
-if (System.getenv("CI_JOB_ID") != null) {
-    version = "${minecraft_version}-${mod_version}+build${System.getenv("CI_JOB_ID")}"
+if (System.getenv("BUILD_NUMBER") != null) {
+    version = "${minecraft_version}-${mod_version}+build${System.getenv("BUILD_NUMBER")}"
 } else {
     version = "${minecraft_version}-${mod_version}-SNAPSHOT"
 }
