@@ -20,7 +20,7 @@ repositories {
     mavenCentral()
 
     maven { url = 'https://repo.spongepowered.org/maven' }
-    maven { url = 'https://files.gildedgames.com/maven' }
+    maven { url = 'https://repo.gildedgames.com/maven' }
 }
 
 configurations {
@@ -64,12 +64,6 @@ sourceSets {
     api {
         java { srcDir "src/api/java" }
     }
-
-    main {
-        resources {
-            exclude 'assets/**'
-        }
-    }
 }
 
 jar {
@@ -87,6 +81,8 @@ jar {
                 "FMLAT": "aether_at.cfg"
         )
     })
+
+    exclude 'assets/**'
 
     classifier = "reobf"
 }
