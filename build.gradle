@@ -70,17 +70,9 @@ jar {
     from sourceSets.api.output
     from sourceSets.main.output
 
-    gradle.projectsEvaluated({
-        def artifacts = configurations.shaded.files
-            .findAll { it.name.contains("-universal.jar") }
-
-        from(artifacts)
-
-        manifest.mainAttributes(
-                "ContainedDeps": artifacts.collect { it.name }.join(' '),
-                "FMLAT": "aether_at.cfg"
-        )
-    })
+    manifest.mainAttributes(
+            "FMLAT": "aether_at.cfg"
+    )
 
     exclude 'assets/**'
 
@@ -99,6 +91,18 @@ task reobfJarWithAssets(type: Jar, dependsOn: extractAnnotationsJar) {
     into("assets") {
         from "src/main/resources/assets"
     }
+
+    gradle.projectsEvaluated({
+        def artifacts = configurations.shaded.files
+                .findAll { it.name.contains("-universal.jar") }
+
+        from(artifacts)
+
+        manifest.mainAttributes(
+                "ContainedDeps": artifacts.collect { it.name }.join(' '),
+                "FMLAT": "aether_at.cfg"
+        )
+    })
 
     classifier "universal"
 }
