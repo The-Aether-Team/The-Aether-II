@@ -36,14 +36,14 @@ configurations {
 }
 
 dependencies {
-    compileShaded project(":orbis-api")
-
     if (isPhosphorSubmodule) {
         runtime project(':phosphor')
     } else {
         runtime "me.jellysquid.mods:phosphor:${phosphor_version}:dev"
         shaded  "me.jellysquid.mods:phosphor:${phosphor_version}:universal"
     }
+
+    compileShaded project(":orbis-lib")
 }
 
 allprojects {
@@ -92,9 +92,19 @@ task reobfJarWithAssets(type: Jar, dependsOn: extractAnnotationsJar) {
         from "src/main/resources/assets"
     }
 
+    dependsOn ":orbis-lib:reobfJar"
+
+    if (isPhosphorSubmodule) {
+        dependsOn ":orbis-lib:reobfJar"
+    }
+
     gradle.projectsEvaluated({
+        // This is an ugly hack to make Phosphor appear before Orbis-Lib
+        // If we don't do this, then Forge will explode for some unknown reason and not be able to handle dependency resolution
         def artifacts = configurations.shaded.files
                 .findAll { it.name.contains("-universal.jar") }
+                .toList()
+                .reverse()
 
         from(artifacts)
 

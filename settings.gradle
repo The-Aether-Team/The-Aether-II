@@ -1,8 +1,8 @@
 rootProject.name = 'aether-ii'
 
-include 'orbis-api'
+include 'orbis-lib'
 
-project(':orbis-api').projectDir = file("lib/OrbisAPI")
+project(':orbis-lib').projectDir = file("lib/orbis-lib")
 
 def phosphorSubmodule = file("lib/Phosphor")
 
