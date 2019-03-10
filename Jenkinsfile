@@ -16,6 +16,13 @@ pipeline {
         }
 
         stage('Build') {
+            environment {
+                MAVEN_SECRETS_FILE = credentials('maven-secrets')
+
+                JARSIGN_KEYSTORE_FILE = credentials('gilded-games-jarsign-keystore')
+                JARSIGN_SECRETS_FILE = credentials('gilded-games-jarsign-secrets')
+            }
+
             steps {
                 sh 'gradle ciBuild'
             }
