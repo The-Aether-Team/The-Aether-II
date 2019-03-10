@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world.aether.island.gen;
 
 import com.gildedgames.aether.api.world.noise.INoiseTransformer;
-import com.gildedgames.orbis_api.util.mc.NBT;
+import com.gildedgames.orbis.lib.util.mc.NBT;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class IslandVariables implements NBT

@@ -2,8 +2,8 @@ package com.gildedgames.aether.api.world.islands;
 
 import com.gildedgames.aether.api.util.OpenSimplexNoise;
 import com.gildedgames.aether.api.world.IAetherChunkColumnInfo;
-import com.gildedgames.orbis_api.preparation.IChunkMaskTransformer;
-import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
+import com.gildedgames.orbis.lib.preparation.IChunkMaskTransformer;
+import com.gildedgames.orbis.lib.preparation.impl.ChunkMask;
 
 import javax.annotation.Nonnull;
 

@@ -10,7 +10,7 @@ import com.gildedgames.aether.client.models.entities.player.LayerHeadShadow;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.patron.armor.PatronRewardArmor;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
-import com.gildedgames.orbis_api.util.InputHelper;
+import com.gildedgames.orbis.lib.util.InputHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.GlStateManager;

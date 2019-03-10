@@ -1,9 +1,5 @@
 package com.gildedgames.aether.client.models.entities.living;
 
-import com.gildedgames.aether.common.entities.living.mobs.EntityZephyr;
-import com.gildedgames.aether.common.util.helpers.MathUtil;
-import com.gildedgames.orbis_api.util.mc.GlUtil;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;

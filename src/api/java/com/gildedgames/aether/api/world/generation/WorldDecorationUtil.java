@@ -1,7 +1,7 @@
 package com.gildedgames.aether.api.world.generation;
 
 import com.gildedgames.aether.api.util.OpenSimplexNoise;
-import com.gildedgames.orbis_api.world.WorldSlice;
+import com.gildedgames.orbis.lib.world.WorldSlice;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;

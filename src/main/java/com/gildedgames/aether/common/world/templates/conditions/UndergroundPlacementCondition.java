@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.world.templates.conditions;
 
 import com.gildedgames.aether.api.util.TemplateUtil;
 import com.gildedgames.aether.api.world.generation.PlacementConditionTemplate;
-import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
+import com.gildedgames.orbis.lib.processing.IBlockAccessExtended;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.structure.template.Template;

@@ -13,7 +13,7 @@ import com.gildedgames.aether.common.registry.content.GenerationAether;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandGenerators;
 import com.gildedgames.aether.common.world.util.GenUtil;
-import com.gildedgames.orbis_api.util.mc.NBT;
+import com.gildedgames.orbis.lib.util.mc.NBT;
 import com.google.common.collect.Lists;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;

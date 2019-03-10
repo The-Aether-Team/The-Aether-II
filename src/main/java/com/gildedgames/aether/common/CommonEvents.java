@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.effects_system.EEffectIntensity;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffectIntensity;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
@@ -29,9 +28,9 @@ import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.util.helpers.AetherHelper;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
 import com.gildedgames.aether.common.util.helpers.PlayerUtil;
-import com.gildedgames.orbis_api.preparation.IPrepManager;
-import com.gildedgames.orbis_api.preparation.impl.util.PrepHelper;
-import com.gildedgames.orbis_api.util.mc.BlockPosDimension;
+import com.gildedgames.orbis.lib.preparation.IPrepManager;
+import com.gildedgames.orbis.lib.preparation.impl.util.PrepHelper;
+import com.gildedgames.orbis.lib.util.mc.BlockPosDimension;
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;

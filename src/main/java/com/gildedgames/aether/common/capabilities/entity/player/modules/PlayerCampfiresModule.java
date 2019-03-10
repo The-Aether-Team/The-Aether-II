@@ -2,8 +2,8 @@ package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
-import com.gildedgames.orbis_api.util.io.NBTFunnel;
-import com.gildedgames.orbis_api.util.mc.BlockPosDimension;
+import com.gildedgames.orbis.lib.util.io.NBTFunnel;
+import com.gildedgames.orbis.lib.util.mc.BlockPosDimension;
 import com.google.common.collect.Sets;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;

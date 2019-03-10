@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.shop;
 
 import com.gildedgames.aether.api.shop.IShopInstance;
 import com.gildedgames.aether.api.shop.IShopInstanceGroup;
-import com.gildedgames.orbis_api.util.io.NBTFunnel;
+import com.gildedgames.orbis.lib.util.io.NBTFunnel;
 import com.google.common.collect.Maps;
 import net.minecraft.nbt.NBTTagCompound;
 

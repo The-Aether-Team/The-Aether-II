@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.world.necromancer_tower;
 
-import com.gildedgames.orbis_api.world.instances.IInstanceHandler;
+import com.gildedgames.orbis.lib.world.instances.IInstanceHandler;
 import net.minecraft.entity.player.EntityPlayerMP;
 
 public class NecromancerTowerInstanceHelper

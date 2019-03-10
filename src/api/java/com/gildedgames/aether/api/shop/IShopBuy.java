@@ -1,6 +1,6 @@
 package com.gildedgames.aether.api.shop;
 
-import com.gildedgames.orbis_api.util.mc.NBT;
+import com.gildedgames.orbis.lib.util.mc.NBT;
 import net.minecraft.item.ItemStack;
 
 import java.util.List;

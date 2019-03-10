@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.entities.util;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.entities.genes.util.GeneUtil;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
-import com.gildedgames.orbis_api.util.mc.NBTHelper;
+import com.gildedgames.orbis.lib.util.mc.NBTHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

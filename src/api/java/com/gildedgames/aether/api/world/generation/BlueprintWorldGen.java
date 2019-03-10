@@ -1,13 +1,13 @@
 package com.gildedgames.aether.api.world.generation;
 
-import com.gildedgames.orbis_api.core.BlueprintDefinition;
-import com.gildedgames.orbis_api.core.CreationData;
-import com.gildedgames.orbis_api.core.ICreationData;
-import com.gildedgames.orbis_api.core.baking.BakedBlueprint;
-import com.gildedgames.orbis_api.core.util.BlueprintPlacer;
-import com.gildedgames.orbis_api.processing.BlockAccessWorldSlice;
-import com.gildedgames.orbis_api.processing.DataPrimer;
-import com.gildedgames.orbis_api.world.WorldSlice;
+import com.gildedgames.orbis.lib.core.BlueprintDefinition;
+import com.gildedgames.orbis.lib.core.CreationData;
+import com.gildedgames.orbis.lib.core.ICreationData;
+import com.gildedgames.orbis.lib.core.baking.BakedBlueprint;
+import com.gildedgames.orbis.lib.core.util.BlueprintPlacer;
+import com.gildedgames.orbis.lib.processing.BlockAccessWorldSlice;
+import com.gildedgames.orbis.lib.processing.DataPrimer;
+import com.gildedgames.orbis.lib.world.WorldSlice;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 

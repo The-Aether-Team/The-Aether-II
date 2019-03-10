@@ -1,12 +1,12 @@
 package com.gildedgames.aether.client.gui.misc;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.orbis_api.client.gui.data.Text;
-import com.gildedgames.orbis_api.client.gui.util.GuiAbstractButton;
-import com.gildedgames.orbis_api.client.gui.util.GuiText;
-import com.gildedgames.orbis_api.client.gui.util.GuiTexture;
-import com.gildedgames.orbis_api.client.gui.util.gui_library.GuiElement;
-import com.gildedgames.orbis_api.client.rect.Dim2D;
+import com.gildedgames.orbis.lib.client.gui.data.Text;
+import com.gildedgames.orbis.lib.client.gui.util.GuiAbstractButton;
+import com.gildedgames.orbis.lib.client.gui.util.GuiText;
+import com.gildedgames.orbis.lib.client.gui.util.GuiTexture;
+import com.gildedgames.orbis.lib.client.gui.util.gui_library.GuiElement;
+import com.gildedgames.orbis.lib.client.rect.Dim2D;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;

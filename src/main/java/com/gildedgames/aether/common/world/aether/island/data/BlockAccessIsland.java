@@ -1,12 +1,12 @@
 package com.gildedgames.aether.common.world.aether.island.data;
 
 import com.gildedgames.aether.api.world.islands.IIslandData;
-import com.gildedgames.orbis_api.core.PlacedBlueprint;
-import com.gildedgames.orbis_api.preparation.IPrepRegistryEntry;
-import com.gildedgames.orbis_api.preparation.IPrepSectorData;
-import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
-import com.gildedgames.orbis_api.preparation.impl.util.BlockAccessPrep;
-import com.gildedgames.orbis_api.util.mc.BlockUtil;
+import com.gildedgames.orbis.lib.core.PlacedBlueprint;
+import com.gildedgames.orbis.lib.preparation.IPrepRegistryEntry;
+import com.gildedgames.orbis.lib.preparation.IPrepSectorData;
+import com.gildedgames.orbis.lib.preparation.impl.ChunkMask;
+import com.gildedgames.orbis.lib.preparation.impl.util.BlockAccessPrep;
+import com.gildedgames.orbis.lib.util.mc.BlockUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

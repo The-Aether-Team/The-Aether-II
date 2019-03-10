@@ -3,8 +3,8 @@ package com.gildedgames.aether.common.world.aether.features.caves;
 import com.gildedgames.aether.api.world.generation.caves.CaveSystemNode;
 import com.gildedgames.aether.api.world.generation.caves.CaveSystemTunnel;
 import com.gildedgames.aether.api.world.generation.caves.ICaveSystemGenerator;
-import com.gildedgames.orbis_api.util.ChunkMap;
-import com.gildedgames.orbis_api.util.random.XoRoShiRoRandom;
+import com.gildedgames.orbis.lib.util.ChunkMap;
+import com.gildedgames.orbis.lib.util.random.XoRoShiRoRandom;
 import net.minecraft.util.math.MathHelper;
 
 public class VanillaCaveSystemGenerator implements ICaveSystemGenerator

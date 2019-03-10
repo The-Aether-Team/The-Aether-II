@@ -1,12 +1,12 @@
 package com.gildedgames.aether.client.gui.dialog;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.orbis_api.client.gui.util.GuiTexture;
-import com.gildedgames.orbis_api.client.gui.util.gui_library.GuiElement;
-import com.gildedgames.orbis_api.client.rect.Dim2D;
-import com.gildedgames.orbis_api.client.rect.Pos2D;
-import com.gildedgames.orbis_api.client.rect.Rect;
-import com.gildedgames.orbis_api.util.InputHelper;
+import com.gildedgames.orbis.lib.client.gui.util.GuiTexture;
+import com.gildedgames.orbis.lib.client.gui.util.gui_library.GuiElement;
+import com.gildedgames.orbis.lib.client.rect.Dim2D;
+import com.gildedgames.orbis.lib.client.rect.Pos2D;
+import com.gildedgames.orbis.lib.client.rect.Rect;
+import com.gildedgames.orbis.lib.util.InputHelper;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiExpandableCoinTab extends GuiElement

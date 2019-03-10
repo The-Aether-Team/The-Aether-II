@@ -4,8 +4,8 @@ import com.gildedgames.aether.api.world.generation.caves.CaveSystemNode;
 import com.gildedgames.aether.api.world.generation.caves.CaveSystemTunnel;
 import com.gildedgames.aether.api.world.generation.caves.ICaveSystemGenerator;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
-import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
-import com.gildedgames.orbis_api.preparation.impl.ChunkMaskSegment;
+import com.gildedgames.orbis.lib.preparation.impl.ChunkMask;
+import com.gildedgames.orbis.lib.preparation.impl.ChunkMaskSegment;
 import net.minecraft.util.math.MathHelper;
 
 public class WorldGenAetherCaves

@@ -2,11 +2,11 @@ package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
-import com.gildedgames.orbis_api.preparation.IPrepManager;
-import com.gildedgames.orbis_api.preparation.IPrepRegistryEntry;
-import com.gildedgames.orbis_api.preparation.IPrepSector;
-import com.gildedgames.orbis_api.preparation.impl.util.PrepHelper;
-import com.gildedgames.orbis_api.util.ChunkMap;
+import com.gildedgames.orbis.lib.preparation.IPrepManager;
+import com.gildedgames.orbis.lib.preparation.IPrepRegistryEntry;
+import com.gildedgames.orbis.lib.preparation.IPrepSector;
+import com.gildedgames.orbis.lib.preparation.impl.util.PrepHelper;
+import com.gildedgames.orbis.lib.util.ChunkMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.gameevent.TickEvent;

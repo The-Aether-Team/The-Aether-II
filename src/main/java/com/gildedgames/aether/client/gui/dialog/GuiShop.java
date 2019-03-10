@@ -17,16 +17,16 @@ import com.gildedgames.aether.common.network.packets.PacketShopBuy;
 import com.gildedgames.aether.common.network.packets.PacketShopSell;
 import com.gildedgames.aether.common.util.helpers.ItemHelper;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
-import com.gildedgames.orbis_api.client.gui.data.Text;
-import com.gildedgames.orbis_api.client.gui.util.GuiAbstractButton;
-import com.gildedgames.orbis_api.client.gui.util.GuiTexture;
-import com.gildedgames.orbis_api.client.gui.util.gui_library.GuiElement;
-import com.gildedgames.orbis_api.client.gui.util.gui_library.GuiViewer;
-import com.gildedgames.orbis_api.client.gui.util.gui_library.IGuiContext;
-import com.gildedgames.orbis_api.client.gui.util.vanilla.GuiButtonVanilla;
-import com.gildedgames.orbis_api.client.rect.Dim2D;
-import com.gildedgames.orbis_api.client.rect.Pos2D;
-import com.gildedgames.orbis_api.util.InputHelper;
+import com.gildedgames.orbis.lib.client.gui.data.Text;
+import com.gildedgames.orbis.lib.client.gui.util.GuiAbstractButton;
+import com.gildedgames.orbis.lib.client.gui.util.GuiTexture;
+import com.gildedgames.orbis.lib.client.gui.util.gui_library.GuiElement;
+import com.gildedgames.orbis.lib.client.gui.util.gui_library.GuiViewer;
+import com.gildedgames.orbis.lib.client.gui.util.gui_library.IGuiContext;
+import com.gildedgames.orbis.lib.client.gui.util.vanilla.GuiButtonVanilla;
+import com.gildedgames.orbis.lib.client.rect.Dim2D;
+import com.gildedgames.orbis.lib.client.rect.Pos2D;
+import com.gildedgames.orbis.lib.util.InputHelper;
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -100,7 +100,7 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 
 	private GuiItemStack stackGui;
 
-	private com.gildedgames.orbis_api.client.gui.util.GuiTextBox buyTitle;
+	private com.gildedgames.orbis.lib.client.gui.util.GuiTextBox buyTitle;
 
 	private GuiTextBox npcDialogue, npcGreeting;
 
@@ -124,7 +124,7 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 
 	private GuiTexture holidayNotice, holidayIcon;
 
-	private com.gildedgames.orbis_api.client.gui.util.GuiTextBox holidayNoticeText;
+	private com.gildedgames.orbis.lib.client.gui.util.GuiTextBox holidayNoticeText;
 
 	public GuiShop(GuiViewer prevViewer, EntityPlayer player, IDialogSlide slide, IDialogSlideRenderer renderer, IShopInstance shopInstance, int shopIndex)
 	{
@@ -179,7 +179,7 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 
 		this.holidayIcon = new GuiTexture(Dim2D.build().width(14).height(16).x(8).y(18).flush(), HOLIDAY_ICON);
 
-		this.holidayNoticeText = new com.gildedgames.orbis_api.client.gui.util.GuiTextBox(Dim2D.build().width(80).height(40).x(27).y(17).flush(), false,
+		this.holidayNoticeText = new com.gildedgames.orbis.lib.client.gui.util.GuiTextBox(Dim2D.build().width(80).height(40).x(27).y(17).flush(), false,
 				new Text(new TextComponentTranslation("edison.shop.holiday_notice"), 1.0F));
 
 		this.sellCoins = this.shopInstance.getCurrencyType()
@@ -236,7 +236,7 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 
 		this.npcGreeting.setText(new TextComponentTranslation(greeting));
 
-		this.buyTitle = new com.gildedgames.orbis_api.client.gui.util.GuiTextBox(
+		this.buyTitle = new com.gildedgames.orbis.lib.client.gui.util.GuiTextBox(
 				Dim2D.build().centerX(true).pos(center).width(60).height(50).y(this.height).addX(-178).addY(-40).flush(), true);
 
 		this.buttonList.add(this.npcDialogue);

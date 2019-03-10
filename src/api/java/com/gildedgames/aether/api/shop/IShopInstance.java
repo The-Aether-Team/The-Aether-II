@@ -1,6 +1,6 @@
 package com.gildedgames.aether.api.shop;
 
-import com.gildedgames.orbis_api.util.mc.NBT;
+import com.gildedgames.orbis.lib.util.mc.NBT;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;

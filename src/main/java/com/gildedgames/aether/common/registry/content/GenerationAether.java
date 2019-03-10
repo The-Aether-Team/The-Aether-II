@@ -12,16 +12,16 @@ import com.gildedgames.aether.common.world.aether.features.aerclouds.WorldGenAer
 import com.gildedgames.aether.common.world.templates.conditions.TemplateConditions;
 import com.gildedgames.aether.common.world.templates.post.PostPlacementMoaFamily;
 import com.gildedgames.aether.common.world.util.GenUtil;
-import com.gildedgames.orbis_api.OrbisAPI;
-import com.gildedgames.orbis_api.core.BlueprintDefinition;
-import com.gildedgames.orbis_api.core.BlueprintDefinitionPool;
-import com.gildedgames.orbis_api.core.PlacementCondition;
-import com.gildedgames.orbis_api.core.conditions.PlacementConditionAvoidBlock;
-import com.gildedgames.orbis_api.core.conditions.PlacementConditionOnBlock;
-import com.gildedgames.orbis_api.core.conditions.PlacementConditionReplaceableMaterials;
-import com.gildedgames.orbis_api.core.registry.IOrbisDefinitionRegistry;
-import com.gildedgames.orbis_api.core.registry.OrbisDefinitionRegistry;
-import com.gildedgames.orbis_api.processing.CenterOffsetProcessor;
+import com.gildedgames.orbis.lib.OrbisLib;
+import com.gildedgames.orbis.lib.core.BlueprintDefinition;
+import com.gildedgames.orbis.lib.core.BlueprintDefinitionPool;
+import com.gildedgames.orbis.lib.core.PlacementCondition;
+import com.gildedgames.orbis.lib.core.conditions.PlacementConditionAvoidBlock;
+import com.gildedgames.orbis.lib.core.conditions.PlacementConditionOnBlock;
+import com.gildedgames.orbis.lib.core.conditions.PlacementConditionReplaceableMaterials;
+import com.gildedgames.orbis.lib.core.registry.IOrbisDefinitionRegistry;
+import com.gildedgames.orbis.lib.core.registry.OrbisDefinitionRegistry;
+import com.gildedgames.orbis.lib.processing.CenterOffsetProcessor;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
@@ -165,7 +165,7 @@ public class GenerationAether
 
 	private static void registerBlueprints()
 	{
-		OrbisAPI.services().register(registry);
+		OrbisLib.services().register(registry);
 
 		final PlacementCondition avoidQuicksoil = new PlacementConditionAvoidBlock(BlocksAether.quicksoil);
 		final PlacementCondition isReplaceableGround = new PlacementConditionReplaceableMaterials(Material.GROUND, Material.GRASS);

@@ -1,8 +1,8 @@
 package com.gildedgames.aether.api.shop;
 
 import com.gildedgames.aether.api.player.IPlayerAether;
-import com.gildedgames.orbis_api.client.rect.Rect;
-import com.gildedgames.orbis_api.util.mc.NBT;
+import com.gildedgames.orbis.lib.client.rect.Rect;
+import com.gildedgames.orbis.lib.util.mc.NBT;
 
 public interface IShopCurrency extends NBT
 {

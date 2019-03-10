@@ -5,7 +5,7 @@ import com.gildedgames.aether.api.entity.spawning.EntitySpawn;
 import com.gildedgames.aether.api.entity.spawning.ISpawningInfo;
 import com.gildedgames.aether.api.world.*;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.orbis_api.OrbisAPI;
+import com.gildedgames.orbis.lib.OrbisLib;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -54,7 +54,7 @@ public class SpawnHandler implements ISpawnHandler
 	{
 		this.access = new SpawnAreaManager(world, this);
 
-		OrbisAPI.services().getWorldDataManager(world).register(this.access);
+		OrbisLib.services().getWorldDataManager(world).register(this.access);
 	}
 
 	@Override

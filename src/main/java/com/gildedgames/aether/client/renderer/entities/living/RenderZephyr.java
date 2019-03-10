@@ -4,9 +4,8 @@ import com.gildedgames.aether.client.models.entities.living.ModelZephyr;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.living.mobs.EntityZephyr;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
-import com.gildedgames.orbis_api.util.mc.GlUtil;
 import it.unimi.dsi.fastutil.floats.FloatList;
-import it.unimi.dsi.fastutil.floats.FloatListIterator;
+
 import java.awt.Color;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -17,8 +16,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
 
 import javax.vecmath.Point3d;
-import java.util.Optional;
-import java.util.Stack;
 
 public class RenderZephyr extends RenderLiving<EntityLiving>
 {

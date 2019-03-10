@@ -7,7 +7,7 @@ import com.gildedgames.aether.common.blocks.multiblock.BlockMultiDummy;
 import com.gildedgames.aether.common.blocks.multiblock.BlockMultiDummyHalf;
 import com.gildedgames.aether.common.entities.tiles.TileEntityWildcard;
 import com.gildedgames.aether.common.entities.tiles.multiblock.TileEntityMultiblockController;
-import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
+import com.gildedgames.orbis.lib.processing.IBlockAccessExtended;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

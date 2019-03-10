@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.world.aether.features;
 import com.gildedgames.aether.api.world.generation.WorldDecorationGenerator;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockIceCrystal;
-import com.gildedgames.orbis_api.world.WorldSlice;
+import com.gildedgames.orbis.lib.world.WorldSlice;
 import com.google.common.collect.Lists;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;

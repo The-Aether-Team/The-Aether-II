@@ -14,10 +14,10 @@ import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.Magnetic
 import com.gildedgames.aether.common.world.aether.island.gen.IslandVariables;
 import com.gildedgames.aether.common.world.aether.prep.PrepAether;
 import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstance;
-import com.gildedgames.orbis_api.OrbisAPI;
-import com.gildedgames.orbis_api.util.io.IClassSerializer;
-import com.gildedgames.orbis_api.util.io.Instantiator;
-import com.gildedgames.orbis_api.util.io.SimpleSerializer;
+import com.gildedgames.orbis.lib.OrbisLib;
+import com.gildedgames.orbis.lib.util.io.IClassSerializer;
+import com.gildedgames.orbis.lib.util.io.Instantiator;
+import com.gildedgames.orbis.lib.util.io.SimpleSerializer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -73,11 +73,11 @@ public class CommonProxy implements IAetherServices
 		s.register(9, ShopCurrencyPlumproot.class, new Instantiator<>(ShopCurrencyPlumproot.class));
 		s.register(10, ShopInstanceGroup.class, new Instantiator<>(ShopInstanceGroup.class));
 
-		OrbisAPI.services().io().register(s);
+		OrbisLib.services().io().register(s);
 
 		this.contentRegistry.preInit();
 
-		OrbisAPI.sectors().register(new PrepAether());
+		OrbisLib.sectors().register(new PrepAether());
 		AetherAPI.content().shop().registerGlobalFilter(new ShopFilterNewYearsEdisonSale());
 	}
 

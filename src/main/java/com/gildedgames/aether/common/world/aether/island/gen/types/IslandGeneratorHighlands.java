@@ -17,8 +17,8 @@ import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandChunkMaskTransformer;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandVariables;
 import com.gildedgames.aether.common.world.aether.noise.NoiseGeneratorIslandTerrain;
-import com.gildedgames.orbis_api.preparation.IChunkMaskTransformer;
-import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
+import com.gildedgames.orbis.lib.preparation.IChunkMaskTransformer;
+import com.gildedgames.orbis.lib.preparation.impl.ChunkMask;
 import net.minecraft.util.math.MathHelper;
 
 public class IslandGeneratorHighlands implements IIslandGenerator

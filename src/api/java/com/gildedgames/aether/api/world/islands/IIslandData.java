@@ -2,10 +2,10 @@ package com.gildedgames.aether.api.world.islands;
 
 import com.gildedgames.aether.api.world.generation.WorldDecoration;
 import com.gildedgames.aether.api.world.generation.caves.ICaveSystemGenerator;
-import com.gildedgames.orbis_api.core.PlacedBlueprint;
-import com.gildedgames.orbis_api.core.baking.BakedBlueprint;
-import com.gildedgames.orbis_api.preparation.IPrepSectorData;
-import com.gildedgames.orbis_api.util.mc.NBT;
+import com.gildedgames.orbis.lib.core.PlacedBlueprint;
+import com.gildedgames.orbis.lib.core.baking.BakedBlueprint;
+import com.gildedgames.orbis.lib.preparation.IPrepSectorData;
+import com.gildedgames.orbis.lib.util.mc.NBT;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 

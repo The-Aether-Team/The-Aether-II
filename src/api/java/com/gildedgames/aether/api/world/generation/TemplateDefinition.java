@@ -1,6 +1,6 @@
 package com.gildedgames.aether.api.world.generation;
 
-import com.gildedgames.orbis_api.processing.CenterOffsetProcessor;
+import com.gildedgames.orbis.lib.processing.CenterOffsetProcessor;
 import com.google.common.collect.Lists;
 import net.minecraft.world.gen.structure.template.Template;
 

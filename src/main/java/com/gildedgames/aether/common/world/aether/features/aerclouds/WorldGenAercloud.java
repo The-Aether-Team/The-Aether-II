@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world.aether.features.aerclouds;
 
 import com.gildedgames.aether.api.world.generation.WorldDecorationGenerator;
-import com.gildedgames.orbis_api.world.WorldSlice;
+import com.gildedgames.orbis.lib.world.WorldSlice;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;

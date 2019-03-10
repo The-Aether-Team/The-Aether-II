@@ -5,7 +5,7 @@ import com.gildedgames.aether.api.shop.ICurrencyListener;
 import com.gildedgames.aether.api.shop.IGuiCurrencyValue;
 import com.gildedgames.aether.api.shop.IShopCurrency;
 import com.gildedgames.aether.client.gui.dialog.GuiCoinsContainer;
-import com.gildedgames.orbis_api.client.rect.Rect;
+import com.gildedgames.orbis.lib.client.rect.Rect;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class ShopCurrencyGilt implements IShopCurrency

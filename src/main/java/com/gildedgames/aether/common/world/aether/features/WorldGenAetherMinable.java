@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world.aether.features;
 
-import com.gildedgames.orbis_api.util.ArrayHelper;
-import com.gildedgames.orbis_api.world.WorldSlice;
+import com.gildedgames.orbis.lib.util.ArrayHelper;
+import com.gildedgames.orbis.lib.world.WorldSlice;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;

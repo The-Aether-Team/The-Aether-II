@@ -1,6 +1,6 @@
 package com.gildedgames.aether.api.world;
 
-import com.gildedgames.orbis_api.world.data.IWorldData;
+import com.gildedgames.orbis.lib.world.data.IWorldData;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 

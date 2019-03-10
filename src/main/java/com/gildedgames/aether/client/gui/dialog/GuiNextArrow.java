@@ -1,8 +1,8 @@
 package com.gildedgames.aether.client.gui.dialog;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.orbis_api.client.gui.util.gui_library.GuiElement;
-import com.gildedgames.orbis_api.client.rect.Dim2D;
+import com.gildedgames.orbis.lib.client.gui.util.gui_library.GuiElement;
+import com.gildedgames.orbis.lib.client.rect.Dim2D;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;

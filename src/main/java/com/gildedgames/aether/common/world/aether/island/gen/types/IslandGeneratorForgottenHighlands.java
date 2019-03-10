@@ -12,8 +12,8 @@ import com.gildedgames.aether.common.world.aether.chunk.NoiseSampleData3D;
 import com.gildedgames.aether.common.world.aether.island.gen.AbstractIslandChunkColumnInfo;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandChunkMaskTransformer;
-import com.gildedgames.orbis_api.preparation.IChunkMaskTransformer;
-import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
+import com.gildedgames.orbis.lib.preparation.IChunkMaskTransformer;
+import com.gildedgames.orbis.lib.preparation.impl.ChunkMask;
 
 import javax.annotation.Nonnull;
 

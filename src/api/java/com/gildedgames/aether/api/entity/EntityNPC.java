@@ -3,7 +3,7 @@ package com.gildedgames.aether.api.entity;
 import com.gildedgames.aether.api.shop.IShopInstance;
 import com.gildedgames.aether.api.shop.IShopInstanceGroup;
 import com.gildedgames.aether.api.world.IWorldObjectHoverable;
-import com.gildedgames.orbis_api.util.io.NBTFunnel;
+import com.gildedgames.orbis.lib.util.io.NBTFunnel;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;

@@ -8,9 +8,9 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModu
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.util.helpers.IslandHelper;
-import com.gildedgames.orbis_api.util.TeleporterGeneric;
-import com.gildedgames.orbis_api.util.io.NBTFunnel;
-import com.gildedgames.orbis_api.util.mc.BlockPosDimension;
+import com.gildedgames.orbis.lib.util.TeleporterGeneric;
+import com.gildedgames.orbis.lib.util.io.NBTFunnel;
+import com.gildedgames.orbis.lib.util.mc.BlockPosDimension;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;

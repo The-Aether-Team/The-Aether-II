@@ -5,7 +5,7 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModu
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketProgressBooleanData;
 import com.gildedgames.aether.common.network.packets.PacketTalkedTo;
-import com.gildedgames.orbis_api.util.io.NBTFunnel;
+import com.gildedgames.orbis.lib.util.io.NBTFunnel;
 import com.google.common.collect.Maps;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;

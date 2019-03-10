@@ -4,7 +4,7 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.items.IDropOnDeath;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
-import com.gildedgames.orbis_api.util.io.NBTFunnel;
+import com.gildedgames.orbis.lib.util.io.NBTFunnel;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;

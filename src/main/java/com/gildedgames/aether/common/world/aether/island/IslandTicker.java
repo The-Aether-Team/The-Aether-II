@@ -2,9 +2,9 @@ package com.gildedgames.aether.common.world.aether.island;
 
 import com.gildedgames.aether.common.world.aether.prep.PrepAether;
 import com.gildedgames.aether.common.world.aether.prep.PrepSectorDataAether;
-import com.gildedgames.orbis_api.preparation.IPrepManager;
-import com.gildedgames.orbis_api.preparation.IPrepSector;
-import com.gildedgames.orbis_api.preparation.impl.util.PrepHelper;
+import com.gildedgames.orbis.lib.preparation.IPrepManager;
+import com.gildedgames.orbis.lib.preparation.IPrepSector;
+import com.gildedgames.orbis.lib.preparation.impl.util.PrepHelper;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;

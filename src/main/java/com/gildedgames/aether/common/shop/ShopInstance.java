@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.shop;
 import com.gildedgames.aether.api.shop.IShopBuy;
 import com.gildedgames.aether.api.shop.IShopCurrency;
 import com.gildedgames.aether.api.shop.IShopInstance;
-import com.gildedgames.orbis_api.util.io.NBTFunnel;
+import com.gildedgames.orbis.lib.util.io.NBTFunnel;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.entities.tiles;
 
-import com.gildedgames.orbis_api.processing.BlockAccessExtendedWrapper;
-import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
+import com.gildedgames.orbis.lib.processing.BlockAccessExtendedWrapper;
+import com.gildedgames.orbis.lib.processing.IBlockAccessExtended;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

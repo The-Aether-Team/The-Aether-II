@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.shop;
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.shop.IShopBuy;
 import com.gildedgames.aether.common.util.helpers.ItemHelper;
-import com.gildedgames.orbis_api.util.mc.NBT;
+import com.gildedgames.orbis.lib.util.mc.NBT;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ItemStackHelper;

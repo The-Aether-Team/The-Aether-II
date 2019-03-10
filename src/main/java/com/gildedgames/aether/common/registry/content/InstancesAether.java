@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.registry.content;
 
 import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstanceFactory;
 import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstanceHelper;
-import com.gildedgames.orbis_api.OrbisAPI;
+import com.gildedgames.orbis.lib.OrbisLib;
 
 public class InstancesAether
 {
@@ -12,6 +12,6 @@ public class InstancesAether
 	{
 		final NecromancerTowerInstanceFactory factory = new NecromancerTowerInstanceFactory(DimensionsAether.NECROMANCER_TOWER);
 
-		NECROMANCER_TOWER_HANDLER = new NecromancerTowerInstanceHelper(OrbisAPI.instances().createInstanceHandler(factory));
+		NECROMANCER_TOWER_HANDLER = new NecromancerTowerInstanceHelper(OrbisLib.instances().createInstanceHandler(factory));
 	}
 }

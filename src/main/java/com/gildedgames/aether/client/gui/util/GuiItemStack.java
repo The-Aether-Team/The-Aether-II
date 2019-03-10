@@ -1,9 +1,9 @@
 package com.gildedgames.aether.client.gui.util;
 
 import com.gildedgames.aether.client.gui.IExtendedGui;
-import com.gildedgames.orbis_api.client.gui.util.gui_library.GuiElement;
-import com.gildedgames.orbis_api.client.rect.Rect;
-import com.gildedgames.orbis_api.util.InputHelper;
+import com.gildedgames.orbis.lib.client.gui.util.gui_library.GuiElement;
+import com.gildedgames.orbis.lib.client.rect.Rect;
+import com.gildedgames.orbis.lib.util.InputHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;

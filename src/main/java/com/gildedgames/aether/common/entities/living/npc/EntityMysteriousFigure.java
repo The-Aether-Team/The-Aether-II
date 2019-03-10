@@ -9,7 +9,7 @@ import com.gildedgames.aether.common.AetherCelebrations;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.shop.ShopInstanceGroup;
-import com.gildedgames.orbis_api.util.mc.NBTHelper;
+import com.gildedgames.orbis.lib.util.mc.NBTHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityBodyHelper;

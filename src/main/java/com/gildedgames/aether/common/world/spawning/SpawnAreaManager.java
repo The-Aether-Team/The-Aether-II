@@ -7,9 +7,9 @@ import com.gildedgames.aether.api.world.ISpawnArea;
 import com.gildedgames.aether.api.world.ISpawnAreaManager;
 import com.gildedgames.aether.api.world.ISpawnHandler;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.orbis_api.OrbisAPI;
-import com.gildedgames.orbis_api.util.ChunkMap;
-import com.gildedgames.orbis_api.world.data.IWorldDataManager;
+import com.gildedgames.orbis.lib.OrbisLib;
+import com.gildedgames.orbis.lib.util.ChunkMap;
+import com.gildedgames.orbis.lib.world.data.IWorldDataManager;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.CompressedStreamTools;
@@ -45,7 +45,7 @@ public class SpawnAreaManager implements ISpawnAreaManager
 		this.world = world;
 		this.handler = handler;
 
-		this.dataManager = OrbisAPI.services().getWorldDataManager(world);
+		this.dataManager = OrbisLib.services().getWorldDataManager(world);
 	}
 
 	private boolean isLoaded(int chunkX, int chunkZ)

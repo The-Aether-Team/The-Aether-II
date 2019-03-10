@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.shop;
 
 import com.gildedgames.aether.api.shop.IShopBuy;
-import com.gildedgames.orbis_api.util.io.NBTFunnel;
+import com.gildedgames.orbis.lib.util.io.NBTFunnel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 

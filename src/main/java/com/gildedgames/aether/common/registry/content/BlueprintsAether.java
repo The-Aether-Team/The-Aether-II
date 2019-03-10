@@ -1,10 +1,10 @@
 package com.gildedgames.aether.common.registry.content;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.orbis_api.OrbisAPI;
-import com.gildedgames.orbis_api.data.blueprint.BlueprintData;
-import com.gildedgames.orbis_api.data.management.IProject;
-import com.gildedgames.orbis_api.data.management.IProjectManager;
+import com.gildedgames.orbis.lib.OrbisLib;
+import com.gildedgames.orbis.lib.data.blueprint.BlueprintData;
+import com.gildedgames.orbis.lib.data.management.IProject;
+import com.gildedgames.orbis.lib.data.management.IProjectManager;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.Optional;
@@ -83,7 +83,7 @@ public class BlueprintsAether
 	{
 		ResourceLocation location = AetherCore.getResource("aetherii");
 
-		project = OrbisAPI.services().loadProject(null, location, AetherCore.INSTANCE, "aether_ii");
+		project = OrbisLib.services().loadProject(null, location, AetherCore.INSTANCE, "aether_ii");
 
 		projectManager.cacheProject(location.getPath(), project);
 

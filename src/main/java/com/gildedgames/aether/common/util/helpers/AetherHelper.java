@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.util.helpers;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.registry.content.InstancesAether;
-import com.gildedgames.orbis_api.world.instances.IInstance;
+import com.gildedgames.orbis.lib.world.instances.IInstance;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 

@@ -1,7 +1,7 @@
 package com.gildedgames.aether.api.effects_system;
 
 import com.gildedgames.aether.api.AetherCapabilities;
-import com.gildedgames.orbis_api.util.mc.NBT;
+import com.gildedgames.orbis.lib.util.mc.NBT;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraftforge.fml.relauncher.Side;

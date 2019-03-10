@@ -4,7 +4,7 @@ import com.gildedgames.aether.api.entity.EntityNPC;
 import com.gildedgames.aether.api.shop.IShopInstanceGroup;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
-import com.gildedgames.orbis_api.util.mc.NBTHelper;
+import com.gildedgames.orbis.lib.util.mc.NBTHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;

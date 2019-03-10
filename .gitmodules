@@ -1,3 +1,3 @@
 [submodule "OrbisAPI"]
 	path = lib/orbis-lib
-	url = https://gitea.gildedgames.com/GildedGames/Orbis-Library.git
+	url = https://gitea.gildedgames.com/GildedGames/OrbisLib.git

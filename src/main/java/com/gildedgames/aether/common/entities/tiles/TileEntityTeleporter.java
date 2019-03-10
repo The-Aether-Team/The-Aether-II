@@ -14,11 +14,11 @@ import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.registry.content.InstancesAether;
 import com.gildedgames.aether.common.util.helpers.AetherHelper;
 import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstanceHelper;
-import com.gildedgames.orbis_api.OrbisAPI;
-import com.gildedgames.orbis_api.util.TeleporterGeneric;
-import com.gildedgames.orbis_api.util.mc.BlockPosDimension;
-import com.gildedgames.orbis_api.world.instances.IInstance;
-import com.gildedgames.orbis_api.world.instances.IPlayerInstances;
+import com.gildedgames.orbis.lib.OrbisLib;
+import com.gildedgames.orbis.lib.util.TeleporterGeneric;
+import com.gildedgames.orbis.lib.util.mc.BlockPosDimension;
+import com.gildedgames.orbis.lib.world.instances.IInstance;
+import com.gildedgames.orbis.lib.world.instances.IPlayerInstances;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -161,7 +161,7 @@ public class TileEntityTeleporter extends TileEntityMultiblockController impleme
 			final NecromancerTowerInstanceHelper handler = InstancesAether.NECROMANCER_TOWER_HANDLER;
 
 			final PlayerAether playerAether = PlayerAether.getPlayer(player);
-			final IPlayerInstances hook = OrbisAPI.instances().getPlayer(player);
+			final IPlayerInstances hook = OrbisLib.instances().getPlayer(player);
 
 			if (playerAether.getTeleportingModule().getAetherPos() != null)
 			{

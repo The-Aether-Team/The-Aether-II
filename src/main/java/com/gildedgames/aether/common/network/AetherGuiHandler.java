@@ -20,7 +20,7 @@ import com.gildedgames.aether.common.containers.tiles.ContainerIcestoneCooler;
 import com.gildedgames.aether.common.containers.tiles.ContainerIncubator;
 import com.gildedgames.aether.common.containers.tiles.ContainerMasonryBench;
 import com.gildedgames.aether.common.dialog.DialogUtil;
-import com.gildedgames.orbis_api.client.gui.util.gui_library.GuiViewer;
+import com.gildedgames.orbis.lib.client.gui.util.gui_library.GuiViewer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiCrafting;
 import net.minecraft.entity.player.EntityPlayer;

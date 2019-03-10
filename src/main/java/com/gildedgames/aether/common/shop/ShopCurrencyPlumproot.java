@@ -7,7 +7,7 @@ import com.gildedgames.aether.api.shop.IShopCurrency;
 import com.gildedgames.aether.client.gui.dialog.GuiPumpkinCurrency;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockPlumproot;
-import com.gildedgames.orbis_api.client.rect.Rect;
+import com.gildedgames.orbis.lib.client.rect.Rect;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;

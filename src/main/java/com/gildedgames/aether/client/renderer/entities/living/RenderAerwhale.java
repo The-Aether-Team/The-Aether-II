@@ -4,7 +4,6 @@ import com.gildedgames.aether.client.models.entities.living.ModelAerwhale;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.living.passive.EntityAerwhale;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
-import com.gildedgames.orbis_api.util.mc.GlUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;

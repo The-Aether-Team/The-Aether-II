@@ -10,9 +10,9 @@ import com.gildedgames.aether.common.world.aether.biomes.arctic_peaks.BiomeArcti
 import com.gildedgames.aether.common.world.aether.features.WorldGenUndergroundVeins;
 import com.gildedgames.aether.common.world.aether.features.caves.WorldGenAetherCaves;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
-import com.gildedgames.orbis_api.preparation.impl.ChunkMask;
-import com.gildedgames.orbis_api.processing.BlockAccessExtendedWrapper;
-import com.gildedgames.orbis_api.processing.IBlockAccessExtended;
+import com.gildedgames.orbis.lib.preparation.impl.ChunkMask;
+import com.gildedgames.orbis.lib.processing.BlockAccessExtendedWrapper;
+import com.gildedgames.orbis.lib.processing.IBlockAccessExtended;
 import net.minecraft.world.World;
 
 /**

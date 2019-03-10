@@ -1,6 +1,6 @@
 package com.gildedgames.aether.api.world.generation;
 
-import com.gildedgames.orbis_api.world.WorldSlice;
+import com.gildedgames.orbis.lib.world.WorldSlice;
 import net.minecraft.util.math.BlockPos;
 
 import java.util.Random;
