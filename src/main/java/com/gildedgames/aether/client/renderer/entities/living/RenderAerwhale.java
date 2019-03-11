@@ -1,6 +1,7 @@
 package com.gildedgames.aether.client.renderer.entities.living;
 
 import com.gildedgames.aether.client.models.entities.living.ModelAerwhale;
+import com.gildedgames.aether.client.util.QuaternionUtil;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.living.passive.EntityAerwhale;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
@@ -106,7 +107,7 @@ public class RenderAerwhale extends RenderLiving<EntityLiving>
 					Point3d v2 = MathUtil.getPoints(aerwhale.getFlightPath(), aerwhale.getTime() - 0.001f );
 					Vec3d cur2 = new Vec3d(v2.x, -v2.y, -v2.z);
 
-					GlStateManager.rotate(MathUtil.lookAt(last, cur2));
+					GlStateManager.rotate(QuaternionUtil.lookAt(last, cur2));
 
 					ModelAerwhale model = (ModelAerwhale) this.mainModel;
 
