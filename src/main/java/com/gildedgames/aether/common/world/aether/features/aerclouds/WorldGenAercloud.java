@@ -6,6 +6,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -67,7 +68,15 @@ public class WorldGenAercloud implements WorldDecorationGenerator
 				{
 					posMut.setPos(x1, 0, z1);
 
-					int height = world.getChunk(posMut).getHeight(posMut);
+					Chunk chunk = world.getChunkProvider().getLoadedChunk(x1, z1);
+
+					if (chunk == null)
+					{
+						return false;
+					}
+
+					int height = chunk.getHeight(posMut);
+
 					int maxY = y + rand.nextInt(1) + 2;
 
 					if (height >= maxY)
