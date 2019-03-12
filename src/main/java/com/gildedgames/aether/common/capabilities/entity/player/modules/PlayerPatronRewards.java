@@ -13,6 +13,8 @@ import java.util.concurrent.Future;
 
 public class PlayerPatronRewards extends PlayerAetherModule
 {
+	private static final boolean ENABLED = false;
+
 	private final PatronChoices choices;
 
 	private UserFeatures features = new UserFeatures();
@@ -45,6 +47,11 @@ public class PlayerPatronRewards extends PlayerAetherModule
 	@Override
 	public void tickStart(TickEvent.PlayerTickEvent event)
 	{
+		if (!ENABLED)
+		{
+			return;
+		}
+
 		if (this.featuresFuture != null && this.featuresFuture.isDone())
 		{
 			try
