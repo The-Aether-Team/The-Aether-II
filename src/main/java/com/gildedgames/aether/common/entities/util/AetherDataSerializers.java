@@ -127,7 +127,7 @@ public class AetherDataSerializers
 		}
 	};
 
-	static
+	public static void registerSerializers()
 	{
 		DataSerializers.registerSerializer(PATH);
 		DataSerializers.registerSerializer(FLOAT_LIST);
