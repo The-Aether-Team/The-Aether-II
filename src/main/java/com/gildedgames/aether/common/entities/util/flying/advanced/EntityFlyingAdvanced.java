@@ -1,8 +1,10 @@
 package com.gildedgames.aether.common.entities.util.flying.advanced;
 
 import com.gildedgames.aether.common.entities.ai.EntityAIForcedWander;
-import com.gildedgames.aether.common.entities.util.AetherDataSerializers;
 import com.gildedgames.aether.common.entities.util.flying.PathNavigateFlyer;
+import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.network.packets.flying.PacketSetEntityPath;
+import com.gildedgames.aether.common.network.packets.flying.PacketSetEntityPathRamps;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
 import it.unimi.dsi.fastutil.floats.FloatList;
 import net.minecraft.entity.EntityCreature;
@@ -15,24 +17,14 @@ import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.world.World;
 
 import javax.vecmath.Point3d;
-import java.util.Optional;
 
 public class EntityFlyingAdvanced extends EntityCreature
 {
-
-	private static final DataParameter<Optional<FlightPath>> CUR_PATH = EntityDataManager.createKey(EntityFlyingAdvanced.class, AetherDataSerializers.PATH);
-
-	private static final DataParameter<Optional<FlightPath>> FUTURE_PATH = EntityDataManager.createKey(EntityFlyingAdvanced.class, AetherDataSerializers.PATH);
-
 	private static final DataParameter<Float> FLY_T = EntityDataManager.createKey(EntityFlyingAdvanced.class, DataSerializers.FLOAT);
 
-	private static final DataParameter<Optional<FloatList>> SPEED_MAP = EntityDataManager.createKey(EntityFlyingAdvanced.class, AetherDataSerializers.FLOAT_LIST);
+	private FloatList speedMap, speedMapFuture;
 
-	private static final DataParameter<Optional<FloatList>> FUTURE_SPEED_MAP = EntityDataManager.createKey(EntityFlyingAdvanced.class, AetherDataSerializers.FLOAT_LIST);
-
-	private static final DataParameter<Optional<FloatList>> TIME_MAP = EntityDataManager.createKey(EntityFlyingAdvanced.class, AetherDataSerializers.FLOAT_LIST);
-
-	private static final DataParameter<Optional<FloatList>> FUTURE_TIME_MAP = EntityDataManager.createKey(EntityFlyingAdvanced.class, AetherDataSerializers.FLOAT_LIST);
+	private FloatList timeMap, timeMapFuture;
 
 	private float lastVelocity = 0.023f, velocityStep = 0.03f, tagetVelocity = 0.023f;
 
@@ -48,13 +40,7 @@ public class EntityFlyingAdvanced extends EntityCreature
 	{
 		super.entityInit();
 
-		this.dataManager.register(CUR_PATH, Optional.empty());
-		this.dataManager.register(FUTURE_PATH,  Optional.empty());
 		this.dataManager.register(FLY_T, 0F);
-		this.dataManager.register(SPEED_MAP, Optional.empty());
-		this.dataManager.register(TIME_MAP, Optional.empty());
-		this.dataManager.register(FUTURE_SPEED_MAP, Optional.empty());
-		this.dataManager.register(FUTURE_TIME_MAP, Optional.empty());
 	}
 
 	@Override
@@ -77,14 +63,11 @@ public class EntityFlyingAdvanced extends EntityCreature
 		{
 			float t = this.getTime();
 
-			Optional<FloatList> speedMap = this.dataManager.get(SPEED_MAP);
-			Optional<FloatList> timeMap = this.dataManager.get(TIME_MAP);
+			FloatList speedList = this.speedMap;
+			FloatList timeList = this.timeMap;
 
-			if (speedMap.isPresent() && timeMap.isPresent())
+			if (speedList != null && timeList != null)
 			{
-				FloatList speedList = speedMap.get();
-				FloatList timeList = timeMap.get();
-
 				if (!timeList.isEmpty())
 				{
 					float threshold = timeList.get(0);
@@ -163,14 +146,26 @@ public class EntityFlyingAdvanced extends EntityCreature
 		return (FlyingAdvancedMoveHelper) this.moveHelper;
 	}
 
+	private FlightPath curPath, futurePath;
+
 	public void updateFlyNav(FlightPath flyNav)
 	{
-		this.dataManager.set(CUR_PATH, Optional.ofNullable(flyNav));
+		this.curPath = flyNav;
+
+		if (!this.world.isRemote)
+		{
+			NetworkingAether.sendPacketToWatching(new PacketSetEntityPath(this, flyNav, false), this, false);
+		}
 	}
 
 	public void updateFutureFlyNav(FlightPath flyNav)
 	{
-		this.dataManager.set(FUTURE_PATH, Optional.ofNullable(flyNav));
+		this.futurePath = flyNav;
+
+		if (!this.world.isRemote)
+		{
+			NetworkingAether.sendPacketToWatching(new PacketSetEntityPath(this, flyNav, true), this, false);
+		}
 	}
 
 	public void setFlyTime(float t)
@@ -190,57 +185,55 @@ public class EntityFlyingAdvanced extends EntityCreature
 
 	public FlightPath getFlightPath()
 	{
-		Optional<FlightPath> path = this.dataManager.get(CUR_PATH);
-
-		return path.map(o -> path.get()).orElse(null);
+		return this.curPath;
 	}
 
 
 	public FlightPath getFutureFlightPath()
 	{
-		Optional<FlightPath> path = this.dataManager.get(FUTURE_PATH);
-
-		return path.map(o -> path.get()).orElse(null);
+		return this.futurePath;
 	}
 
 	public void updateSpeedMap(FloatList speedMap, FloatList timeMap)
 	{
-		this.dataManager.set(SPEED_MAP, Optional.ofNullable(speedMap));
-		this.dataManager.set(TIME_MAP, Optional.ofNullable(timeMap));
+		this.speedMap = speedMap;
+		this.timeMap = timeMap;
+
+		if (!this.world.isRemote)
+		{
+			NetworkingAether.sendPacketToWatching(new PacketSetEntityPathRamps(this, speedMap, timeMap, false), this, false);
+		}
 	}
 
 	public FloatList getSpeedMap()
 	{
-		Optional<FloatList> path = this.dataManager.get(SPEED_MAP);
-
-		return path.map(o -> path.get()).orElse(null);
+		return this.speedMap;
 	}
 
 	public FloatList getTimeMap()
 	{
-		Optional<FloatList> path = this.dataManager.get(TIME_MAP);
-
-		return path.map(o -> path.get()).orElse(null);
+		return this.timeMap;
 	}
 
 
 	public void updateFutureSpeedMap(FloatList speedMap, FloatList timeMap)
 	{
-		this.dataManager.set(FUTURE_SPEED_MAP, Optional.ofNullable(speedMap));
-		this.dataManager.set(FUTURE_TIME_MAP, Optional.ofNullable(timeMap));
+		this.speedMapFuture = speedMap;
+		this.timeMapFuture = timeMap;
+
+		if (!this.world.isRemote)
+		{
+			NetworkingAether.sendPacketToWatching(new PacketSetEntityPathRamps(this, speedMap, timeMap, true), this, false);
+		}
 	}
 
 	public FloatList getFutureSpeedMap()
 	{
-		Optional<FloatList> path = this.dataManager.get(FUTURE_SPEED_MAP);
-
-		return path.map(o -> path.get()).orElse(null);
+		return this.speedMapFuture;
 	}
 
 	public FloatList getFutureTimeMap()
 	{
-		Optional<FloatList> path = this.dataManager.get(FUTURE_TIME_MAP);
-
-		return path.map(o -> path.get()).orElse(null);
+		return this.timeMapFuture;
 	}
 }

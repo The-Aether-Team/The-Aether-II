@@ -4,6 +4,8 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.packets.*;
 import com.gildedgames.aether.common.network.packets.dialog.*;
 import com.gildedgames.aether.common.network.packets.effects.PacketStatusEffect;
+import com.gildedgames.aether.common.network.packets.flying.PacketSetEntityPath;
+import com.gildedgames.aether.common.network.packets.flying.PacketSetEntityPathRamps;
 import com.gildedgames.aether.common.network.packets.trade.*;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityTracker;
@@ -80,6 +82,8 @@ public class NetworkingAether
 		instance.registerMessage(PacketTradeInventory.HandlerClient.class, PacketTradeInventory.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketTradeMessage.HandlerClient.class, PacketTradeMessage.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketTradeInitial.HandlerClient.class, PacketTradeInitial.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketSetEntityPath.HandlerClient.class, PacketSetEntityPath.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketSetEntityPathRamps.HandlerClient.class, PacketSetEntityPathRamps.class, discriminant++, Side.CLIENT);
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(AetherCore.INSTANCE, new AetherGuiHandler());
 	}

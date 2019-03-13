@@ -3,7 +3,6 @@ package com.gildedgames.aether.common;
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.IAetherServices;
 import com.gildedgames.aether.api.net.IGildedGamesAccountApi;
-import com.gildedgames.aether.common.entities.util.AetherDataSerializers;
 import com.gildedgames.aether.common.events.PostAetherTravelEvent;
 import com.gildedgames.aether.common.network.api.GildedGamesAccountApiImpl;
 import com.gildedgames.aether.common.registry.ContentRegistry;
@@ -59,8 +58,6 @@ public class CommonProxy implements IAetherServices
 		{
 			throw new RuntimeException("Couldn't create configuration directory");
 		}
-
-		AetherDataSerializers.registerSerializers();
 
 		final IClassSerializer s = new SimpleSerializer(AetherCore.MOD_ID);
 
