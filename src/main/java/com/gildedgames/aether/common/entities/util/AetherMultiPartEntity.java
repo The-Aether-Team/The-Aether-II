@@ -25,9 +25,9 @@ public class AetherMultiPartEntity extends MultiPartEntityPart
 	@Override
 	public boolean processInitialInteract(EntityPlayer player, EnumHand hand)
 	{
-		if (parent instanceof EntityAnimal)
+		if (this.parent instanceof EntityAnimal)
 		{
-			return ((EntityAnimal) parent).processInitialInteract(player, hand);
+			return ((EntityAnimal) this.parent).processInitialInteract(player, hand);
 		}
 
 		return false;
@@ -36,9 +36,9 @@ public class AetherMultiPartEntity extends MultiPartEntityPart
 	@Override
 	public ItemStack getPickedResult(RayTraceResult target)
 	{
-		if (parent instanceof Entity)
+		if (this.parent instanceof Entity)
 		{
-			return ((Entity) parent).getPickedResult(target);
+			return ((Entity) this.parent).getPickedResult(target);
 		}
 
 		return super.getPickedResult(target);

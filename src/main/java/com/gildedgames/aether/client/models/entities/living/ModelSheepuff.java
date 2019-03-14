@@ -282,16 +282,19 @@ public class ModelSheepuff extends ModelBase
 
 		if (!entityIn.onGround && puffiness > .5f)
 		{
+			float swayLeft = MathHelper.cos(ageInTicks) / 5f;
+			float swayRight = MathHelper.sin(ageInTicks) / 5f;
+
 			float p2 = puffiness * 2f - 1f;
 
-			this.legBackLeftThigh.rotateAngleX = 0.5462880558742251F * p2;
-			this.legFrontLeftThigh.rotateAngleX = -0.5009094953223726F * p2;
-			this.legBackRightThigh.rotateAngleX = 0.5462880558742251F * p2;
-			this.legFrontRightThigh.rotateAngleX = -0.5009094953223726F * p2;
-			this.legBackLeftThigh.rotateAngleZ = -1.0051351162235345F * p2;
-			this.legFrontLeftThigh.rotateAngleZ = -1.0051351162235345F * p2;
-			this.legBackRightThigh.rotateAngleZ = 1.1383037381507017F * p2;
-			this.legFrontRightThigh.rotateAngleZ = 1.1383037381507017F * p2;
+			this.legBackLeftThigh.rotateAngleX = (0.54F + swayLeft) * p2;
+			this.legFrontLeftThigh.rotateAngleX = (-0.50F  + swayLeft) * p2;
+			this.legBackRightThigh.rotateAngleX = (0.54F + swayRight) * p2;
+			this.legFrontRightThigh.rotateAngleX =(-0.5F + swayRight) * p2;
+			this.legBackLeftThigh.rotateAngleZ = (-1F + swayLeft) * p2;
+			this.legFrontLeftThigh.rotateAngleZ = (-1F + swayRight) * p2;
+			this.legBackRightThigh.rotateAngleZ = (1.13F + swayRight) * p2;
+			this.legFrontRightThigh.rotateAngleZ = (1.13F + swayLeft) * p2;
 		}
 		else
 		{

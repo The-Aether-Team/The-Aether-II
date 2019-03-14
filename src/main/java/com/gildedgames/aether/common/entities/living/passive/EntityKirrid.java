@@ -8,6 +8,7 @@ import com.gildedgames.aether.common.entities.ai.EntityAIRestrictRain;
 import com.gildedgames.aether.common.entities.ai.EntityAIUnstuckBlueAercloud;
 import com.gildedgames.aether.common.entities.ai.kirrid.EntityAIEatAetherGrass;
 import com.gildedgames.aether.common.entities.util.AetherMultiPartEntity;
+import com.gildedgames.aether.common.entities.util.AetherMultiPartShearable;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
@@ -44,9 +45,9 @@ public class EntityKirrid extends EntitySheep implements IEntityMultiPart
 
 	private final MultiPartEntityPart[] parts;
 
-	private final MultiPartEntityPart head = new AetherMultiPartEntity(this, "head", 0.7F, 0.8F);
+	private final MultiPartEntityPart head = new AetherMultiPartShearable(this, "head", 0.7F, 0.8F);
 
-	private final MultiPartEntityPart back = new AetherMultiPartEntity(this, "back", 0.8F, 1.5F);
+	private final MultiPartEntityPart back = new AetherMultiPartShearable(this, "back", 0.8F, 1.5F);
 
 	protected EntityAIEatAetherGrass entityAIEatGrass;
 
