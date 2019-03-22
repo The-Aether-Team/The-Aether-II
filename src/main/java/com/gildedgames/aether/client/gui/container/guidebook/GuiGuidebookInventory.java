@@ -1,4 +1,4 @@
-package com.gildedgames.aether.client.gui.container;
+package com.gildedgames.aether.client.gui.container.guidebook;
 
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.common.AetherCore;
@@ -7,7 +7,6 @@ import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerEq
 import com.gildedgames.aether.common.containers.guidebook.ContainerGuidebookInventory;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
@@ -19,37 +18,18 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class GuiGuidebookInventory extends GuiContainer
+public class GuiGuidebookInventory extends AbstractGuidebookPage
 {
-	private static final ResourceLocation textureBase = AetherCore.getResource("textures/gui/guidebook/guidebook_base.png");
 
-	private static final ResourceLocation textureInventoryLeft = AetherCore.getResource("textures/gui/guidebook/inventory/guidebook_inventory_left.png");
+	private static final ResourceLocation LEFT_PAGE = AetherCore.getResource("textures/gui/guidebook/inventory/guidebook_inventory_left.png");
 
-	private static final ResourceLocation textureInventoryCreative = AetherCore.getResource("textures/gui/guidebook/inventory/guidebook_inventory_right_creative.png");
+	private static final ResourceLocation RIGHT_PAGE_CREATIVE = AetherCore.getResource("textures/gui/guidebook/inventory/guidebook_inventory_right_creative.png");
 
-	private static final ResourceLocation textureInventorySurvival = AetherCore.getResource("textures/gui/guidebook/inventory/guidebook_inventory_right_survival.png");
-
-	private final PlayerAether aePlayer;
+	private static final ResourceLocation RIGHT_PAGE_SURVIVAL = AetherCore.getResource("textures/gui/guidebook/inventory/guidebook_inventory_right_survival.png");
 
 	public GuiGuidebookInventory(final PlayerAether aePlayer)
 	{
-		//super(new ContainerEquipment(aePlayer));
-		super(new ContainerGuidebookInventory(aePlayer));
-
-		this.allowUserInput = true;
-		this.aePlayer = aePlayer;
-	}
-
-	@Override
-	public void initGui()
-	{
-		super.initGui();
-
-		this.guiLeft = (this.width/2) - 153 - 11;
-		this.guiTop = (this.height/2) - 69;
-
-		this.xSize = 176*2;
-		this.ySize = 169;
+		super(aePlayer, new ContainerGuidebookInventory(aePlayer));
 	}
 
 	@Override
@@ -65,38 +45,26 @@ public class GuiGuidebookInventory extends GuiContainer
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
+	protected void drawLeftPage()
 	{
-		int pageWidth = 188;
-		int pageHeight = 185;
-
-		this.drawWorldBackground(0);
-
-		this.mc.renderEngine.bindTexture(textureBase);
+		this.mc.renderEngine.bindTexture(LEFT_PAGE);
 
 		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 
-		Gui.drawModalRectWithCustomSizedTexture((this.width/2) - 176 - 11, this.height/2 - 185/2, 0, 0, pageWidth*2, 256, 512, 256);
+		Gui.drawModalRectWithCustomSizedTexture((this.width/2) - 176 - 11, this.height/2 - 185/2, 0, 0, this.PAGE_WIDTH, this.PAGE_HEIGHT, this.TEXTURE_WIDTH, this.TEXTURE_HEIGHT);
+	}
 
-		this.mc.renderEngine.bindTexture(textureInventoryLeft);
+	@Override
+	protected void drawRightPage()
+	{
+		this.mc.renderEngine.bindTexture(this.aePlayer.getEntity().capabilities.isCreativeMode ? RIGHT_PAGE_CREATIVE : RIGHT_PAGE_SURVIVAL);
 
-		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
-
-		Gui.drawModalRectWithCustomSizedTexture((this.width/2) - 176 - 11, this.height/2 - 185/2, 0, 0, pageWidth, pageHeight, 512, 256);
-
-		this.mc.renderEngine.bindTexture(this.aePlayer.getEntity().capabilities.isCreativeMode ? textureInventoryCreative : textureInventorySurvival);
 		int rightPageCoordX = (this.width/2) - 12;
 		int rightPageCoordY = (this.height/2) - (185/2);
 
 		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 
-		Gui.drawModalRectWithCustomSizedTexture(rightPageCoordX, rightPageCoordY, pageWidth - 13 ,0, pageWidth, pageHeight,512, 256);
-
-	}
-
-	@Override
-	public void drawDefaultBackground()
-	{
+		Gui.drawModalRectWithCustomSizedTexture(rightPageCoordX, rightPageCoordY, this.PAGE_WIDTH - 13 ,0, this.PAGE_WIDTH, this.PAGE_HEIGHT,this.TEXTURE_WIDTH, this.TEXTURE_HEIGHT);
 	}
 
 	private void drawPlayer(final int mouseX, final int mouseY)

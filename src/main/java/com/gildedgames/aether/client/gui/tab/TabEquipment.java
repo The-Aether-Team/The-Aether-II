@@ -2,7 +2,7 @@ package com.gildedgames.aether.client.gui.tab;
 
 import com.gildedgames.aether.api.registry.tab.ITab;
 import com.gildedgames.aether.api.registry.tab.ITabClient;
-import com.gildedgames.aether.client.gui.container.GuiGuidebookInventory;
+import com.gildedgames.aether.client.gui.container.guidebook.AbstractGuidebookPage;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
 import net.minecraft.client.gui.GuiScreen;
@@ -26,7 +26,7 @@ public class TabEquipment implements ITab
 	{
 		BlockPos pos = player.getPosition();
 
-		player.openGui(AetherCore.MOD_ID, AetherGuiHandler.GUIDEBOOK_ID, player.world, pos.getX(), pos.getY(), pos.getZ());
+		player.openGui(AetherCore.MOD_ID, AetherGuiHandler.INVENTORY_ID, player.world, pos.getX(), pos.getY(), pos.getZ());
 	}
 
 	@Override
@@ -49,7 +49,7 @@ public class TabEquipment implements ITab
 		@Override
 		public boolean isTabValid(GuiScreen gui)
 		{
-			return gui instanceof GuiInventory || gui instanceof GuiGuidebookInventory;
+			return gui instanceof GuiInventory || gui instanceof AbstractGuidebookPage;
 		}
 
 		@Override
