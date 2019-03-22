@@ -1,0 +1,182 @@
+package com.gildedgames.aether.client.gui.container;
+
+import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
+import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerEquipmentModule;
+import com.gildedgames.aether.common.containers.guidebook.ContainerGuidebookInventory;
+import com.gildedgames.aether.common.containers.slots.SlotEquipment;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.gui.inventory.GuiInventory;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.inventory.Slot;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextFormatting;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class GuiGuidebookInventory extends GuiContainer
+{
+	private static final ResourceLocation textureBase = AetherCore.getResource("textures/gui/guidebook/guidebook_base.png");
+
+	private static final ResourceLocation textureInventoryLeft = AetherCore.getResource("textures/gui/guidebook/inventory/guidebook_inventory_left.png");
+
+	private static final ResourceLocation textureInventoryCreative = AetherCore.getResource("textures/gui/guidebook/inventory/guidebook_inventory_right_creative.png");
+
+	private static final ResourceLocation textureInventorySurvival = AetherCore.getResource("textures/gui/guidebook/inventory/guidebook_inventory_right_survival.png");
+
+	private final PlayerAether aePlayer;
+
+	public GuiGuidebookInventory(final PlayerAether aePlayer)
+	{
+		//super(new ContainerEquipment(aePlayer));
+		super(new ContainerGuidebookInventory(aePlayer));
+
+		this.allowUserInput = true;
+		this.aePlayer = aePlayer;
+	}
+
+	@Override
+	public void initGui()
+	{
+		super.initGui();
+
+		this.guiLeft = (this.width/2) - 153 - 11;
+		this.guiTop = (this.height/2) - 69;
+
+		this.xSize = 176*2;
+		this.ySize = 169;
+	}
+
+	@Override
+	public void drawScreen(final int mouseX, final int mouseY, final float partialTick)
+	{
+		this.drawPlayer(mouseX, mouseY);
+
+		this.drawEquipmentEffects();
+
+		super.drawScreen(mouseX,mouseY, partialTick);
+
+		this.drawSlotName(mouseX, mouseY);
+	}
+
+	@Override
+	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
+	{
+		int pageWidth = 188;
+		int pageHeight = 185;
+
+		this.drawWorldBackground(0);
+
+		this.mc.renderEngine.bindTexture(textureBase);
+
+		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+
+		Gui.drawModalRectWithCustomSizedTexture((this.width/2) - 176 - 11, this.height/2 - 185/2, 0, 0, pageWidth*2, 256, 512, 256);
+
+		this.mc.renderEngine.bindTexture(textureInventoryLeft);
+
+		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+
+		Gui.drawModalRectWithCustomSizedTexture((this.width/2) - 176 - 11, this.height/2 - 185/2, 0, 0, pageWidth, pageHeight, 512, 256);
+
+		this.mc.renderEngine.bindTexture(this.aePlayer.getEntity().capabilities.isCreativeMode ? textureInventoryCreative : textureInventorySurvival);
+		int rightPageCoordX = (this.width/2) - 12;
+		int rightPageCoordY = (this.height/2) - (185/2);
+
+		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+
+		Gui.drawModalRectWithCustomSizedTexture(rightPageCoordX, rightPageCoordY, pageWidth - 13 ,0, pageWidth, pageHeight,512, 256);
+
+	}
+
+	@Override
+	public void drawDefaultBackground()
+	{
+	}
+
+	private void drawPlayer(final int mouseX, final int mouseY)
+	{
+		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+
+		GuiInventory.drawEntityOnScreen(
+				this.width / 2 - 48,
+				this.height / 2, 32, (this.guiLeft + 88) - mouseX, (this.guiTop + 35) - mouseY, this.mc.player);
+	}
+
+	private boolean isMouseOverSlot(final Slot slot, final int mouseX, final int mouseY)
+	{
+		return this.isPointInRegion(slot.xPos, slot.yPos, 16, 16, mouseX, mouseY);
+	}
+
+	private void drawSlotName(final int mouseX, final int mouseY)
+	{
+		String unlocalizedTooltip = null;
+
+		for (final Slot slot : this.inventorySlots.inventorySlots)
+		{
+			if (slot.isEnabled() && !slot.getHasStack())
+			{
+				if (this.isMouseOverSlot(slot, mouseX, mouseY))
+				{
+					if (slot instanceof SlotEquipment)
+					{
+						final ItemEquipmentSlot type = ((SlotEquipment) slot).getEquipmentType();
+
+						unlocalizedTooltip = type.getUnlocalizedName();
+					}
+
+					final int dif = this.aePlayer.getEntity().inventory.getSizeInventory() - 2;
+
+					if (slot.getSlotIndex() == dif + 1)
+					{
+						unlocalizedTooltip = "gui.aether.slot.offhand";
+					}
+
+					if (slot.getSlotIndex() == dif)
+					{
+						unlocalizedTooltip = "gui.aether.slot.helmet";
+					}
+
+					if (slot.getSlotIndex() == dif - 1)
+					{
+						unlocalizedTooltip = "gui.aether.slot.chestplate";
+					}
+
+					if (slot.getSlotIndex() == dif - 2)
+					{
+						unlocalizedTooltip = "gui.aether.slot.leggings";
+					}
+
+					if (slot.getSlotIndex() == dif - 3)
+					{
+						unlocalizedTooltip = "gui.aether.slot.boots";
+					}
+
+					break;
+				}
+			}
+		}
+
+		if (unlocalizedTooltip != null)
+		{
+			this.drawHoveringText(Collections.singletonList(I18n.format(unlocalizedTooltip)), mouseX, mouseY, this.mc.fontRenderer);
+		}
+	}
+
+	private void drawEquipmentEffects()
+	{
+		final ArrayList<String> label = new ArrayList<>();
+
+		final PlayerEquipmentModule equipment = this.aePlayer.getEquipmentModule();
+		equipment.getActivePools().forEach((pool) -> pool.getInstance().ifPresent(instance -> instance.addInformation(label)));
+
+		final String compiled = StringUtils.join(label, TextFormatting.RESET + ", ");
+
+		this.mc.fontRenderer.drawString(compiled, this.guiLeft, this.guiTop + 160, 0xFFFFFF, true);
+	}
+}

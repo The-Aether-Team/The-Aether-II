@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.containers;
+package com.gildedgames.aether.common.containers.guidebook;
 
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.items.IItemProperties;
@@ -6,14 +6,12 @@ import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
-import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;
 
-public class ContainerEquipment extends ContainerPlayer
+public class ContainerGuidebookInventory extends ContainerPlayer
 {
-	/** See {@link GuiContainerCreative#basicInventory} **/
 	private static final InventoryBasic dumbInventory = new InventoryBasic("tmp", true, 52);
 
 	private final IPlayerAether aePlayer;
@@ -22,7 +20,7 @@ public class ContainerEquipment extends ContainerPlayer
 
 	private Slot binSlot;
 
-	public ContainerEquipment(IPlayerAether aePlayer)
+	public ContainerGuidebookInventory(IPlayerAether aePlayer)
 	{
 		super(aePlayer.getEntity().inventory, false, aePlayer.getEntity());
 
@@ -50,8 +48,8 @@ public class ContainerEquipment extends ContainerPlayer
 
 	private void createSlots()
 	{
-		int widthOffset = 180;
-		int heightOffset = -10;
+		int widthOffset = 180 - 16;
+		int heightOffset = -15;
 
 		for (Slot slot : this.inventorySlots)
 		{
@@ -65,23 +63,20 @@ public class ContainerEquipment extends ContainerPlayer
 		Slot boots = this.inventorySlots.get(8);
 		Slot shield = this.inventorySlots.get(45);
 
-		int offsetX = -1;
-		int offsetY = -25;
+		shield.xPos = 49;
+		shield.yPos = 57;
 
-		shield.xPos = 64 + offsetX;
-		shield.yPos = 91 + offsetY;
+		helmet.xPos = 31;
+		helmet.yPos = 3;
 
-		helmet.xPos = 39 + offsetX;
-		helmet.yPos = 28 + offsetY;
+		chestplate.xPos = 31;
+		chestplate.yPos = 21;
 
-		chestplate.xPos = 39 + offsetX;
-		chestplate.yPos = 49 + offsetY;
+		leggings.xPos = 31;
+		leggings.yPos = 39;
 
-		leggings.xPos = 39 + offsetX;
-		leggings.yPos = 70 + offsetY;
-
-		boots.xPos = 39 + offsetX;
-		boots.yPos = 91 + offsetY;
+		boots.xPos = 31;
+		boots.yPos = 57;
 
 		Slot craftResult = this.inventorySlots.get(0);
 
@@ -90,7 +85,7 @@ public class ContainerEquipment extends ContainerPlayer
 		Slot craft3 = this.inventorySlots.get(3);
 		Slot craft4 = this.inventorySlots.get(4);
 
-		this.binSlot = new Slot(ContainerEquipment.dumbInventory, this.inventorySlots.size(), 213, 26);
+		this.binSlot = new Slot(ContainerGuidebookInventory.dumbInventory, this.inventorySlots.size(), 197, 27);
 
 		if (this.aePlayer.getEntity().capabilities.isCreativeMode)
 		{
@@ -103,12 +98,12 @@ public class ContainerEquipment extends ContainerPlayer
 			craft3.xPos -= 27;
 			craft4.xPos -= 27;
 
-			craftResult.yPos += 8;
+			craftResult.yPos += 14;
 
-			craft1.yPos += 8;
-			craft2.yPos += 8;
-			craft3.yPos += 8;
-			craft4.yPos += 8;
+			craft1.yPos += 14;
+			craft2.yPos += 14;
+			craft3.yPos += 14;
+			craft4.yPos += 14;
 		}
 		else
 		{
@@ -119,40 +114,39 @@ public class ContainerEquipment extends ContainerPlayer
 			craft3.xPos -= 46;
 			craft4.xPos -= 46;
 
-			craftResult.yPos += 8;
+			craftResult.yPos += 14;
 
-			craft1.yPos += 8;
-			craft2.yPos += 8;
-			craft3.yPos += 8;
-			craft4.yPos += 8;
+			craft1.yPos += 14;
+			craft2.yPos += 14;
+			craft3.yPos += 14;
+			craft4.yPos += 14;
 		}
 
 		int inventorySlotId = 0;
 
 		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.RELIC, inventorySlotId++,
-				14 + offsetX, 28 + offsetY));
+				13, 3));
 		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.RELIC, inventorySlotId++,
-				64 + offsetX, 28 + offsetY));
+				49, 3));
 
 		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.HANDWEAR, inventorySlotId++,
-				64 + offsetX, 49 + offsetY));
+				49, 21));
 
 		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.RING, inventorySlotId++,
-				14 + offsetX, 70 + offsetY));
+				13, 39));
 		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.RING, inventorySlotId++,
-				14 + offsetX, 91 + offsetY));
+				13, 57));
+
 		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.NECKWEAR, inventorySlotId++,
-				14 + offsetX, 49 + offsetY));
+				13, 21));
 
 		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.COMPANION, inventorySlotId++,
-				64 + offsetX, 70 + offsetY));
-		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.ARTIFACT, inventorySlotId++,
-				39 + offsetX, 122 + offsetY));
+				49, 39));
 
 		for (int x = 0; x < 6; x++)
 		{
-			int x1 = 35 + (x * 18);
-			int y1 = 128;
+			int x1 = 24 + (x * 18);
+			int y1 = 127;
 
 			this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.CHARM, inventorySlotId, x1, y1));
 			inventorySlotId++;

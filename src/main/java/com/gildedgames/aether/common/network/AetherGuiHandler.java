@@ -4,7 +4,7 @@ import com.gildedgames.aether.api.dialog.IDialogSlide;
 import com.gildedgames.aether.api.dialog.IDialogSlideRenderer;
 import com.gildedgames.aether.api.shop.IShopInstance;
 import com.gildedgames.aether.api.shop.IShopInstanceGroup;
-import com.gildedgames.aether.client.gui.container.GuiEquipment;
+import com.gildedgames.aether.client.gui.container.GuiGuidebookInventory;
 import com.gildedgames.aether.client.gui.container.GuiIcestoneCooler;
 import com.gildedgames.aether.client.gui.container.GuiIncubator;
 import com.gildedgames.aether.client.gui.container.simple_crafting.GuiMasonryBench;
@@ -16,6 +16,7 @@ import com.gildedgames.aether.client.gui.misc.GuiAetherTeleporterNotice;
 import com.gildedgames.aether.client.gui.misc.GuiPatronRewards;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.containers.*;
+import com.gildedgames.aether.common.containers.guidebook.ContainerGuidebookInventory;
 import com.gildedgames.aether.common.containers.tiles.ContainerIcestoneCooler;
 import com.gildedgames.aether.common.containers.tiles.ContainerIncubator;
 import com.gildedgames.aether.common.containers.tiles.ContainerMasonryBench;
@@ -38,7 +39,7 @@ public class AetherGuiHandler implements IGuiHandler
 
 	public static final int CUSTOM_WORKBENCH_ID = 1;
 
-	public static final int INVENTORY_EQUIPMENT_ID = 2;
+	public static final int GUIDEBOOK_ID = 2;
 
 	public static final int FROSTPINE_COOLER_ID = 3;
 
@@ -68,8 +69,8 @@ public class AetherGuiHandler implements IGuiHandler
 		{
 			case CUSTOM_WORKBENCH_ID:
 				return new ContainerCustomWorkbench(player.inventory, world, pos);
-			case INVENTORY_EQUIPMENT_ID:
-				return new ContainerEquipment(playerAether);
+			case GUIDEBOOK_ID:
+				return new ContainerGuidebookInventory(playerAether);
 			case FROSTPINE_COOLER_ID:
 				return new ContainerIcestoneCooler(player.inventory, (IInventory) world.getTileEntity(pos));
 			case INCUBATOR_ID:
@@ -123,8 +124,8 @@ public class AetherGuiHandler implements IGuiHandler
 		{
 			case CUSTOM_WORKBENCH_ID:
 				return new GuiCrafting(player.inventory, world, pos);
-			case INVENTORY_EQUIPMENT_ID:
-				return new GuiEquipment(PlayerAether.getPlayer(player));
+			case GUIDEBOOK_ID:
+				return new GuiGuidebookInventory(PlayerAether.getPlayer(player));
 			case FROSTPINE_COOLER_ID:
 				return new GuiIcestoneCooler(player.inventory, (IInventory) world.getTileEntity(pos));
 			case INCUBATOR_ID:

@@ -951,7 +951,7 @@ ability.setAttackersOnFire.desc2=%s%% Chance
 ability.attackSpeedMod.desc=%s Attack Speed
 
 # Tabs
-tab.equipment=Equipment
+tab.guidebook=Traveler's Guidebook
 tab.bug_report=Report Bugs
 tab.backpack.name=Backpack
 tab.patron_rewards=Patron Rewards

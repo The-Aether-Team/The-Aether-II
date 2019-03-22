@@ -2,7 +2,7 @@ package com.gildedgames.aether.client.gui.tab;
 
 import com.gildedgames.aether.api.registry.tab.ITab;
 import com.gildedgames.aether.api.registry.tab.ITabClient;
-import com.gildedgames.aether.client.gui.container.GuiEquipment;
+import com.gildedgames.aether.client.gui.container.GuiGuidebookInventory;
 import com.gildedgames.aether.client.gui.misc.GuiPatronRewards;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
@@ -50,7 +50,7 @@ public class TabPatronRewards implements ITab
 		@Override
 		public boolean isTabValid(GuiScreen gui)
 		{
-			return gui instanceof GuiInventory || gui instanceof GuiEquipment || gui instanceof GuiPatronRewards;
+			return gui instanceof GuiInventory || gui instanceof GuiGuidebookInventory || gui instanceof GuiPatronRewards;
 		}
 
 		@Override
