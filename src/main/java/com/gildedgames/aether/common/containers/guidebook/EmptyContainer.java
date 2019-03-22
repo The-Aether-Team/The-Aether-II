@@ -1,12 +1,13 @@
 package com.gildedgames.aether.common.containers.guidebook;
 
-import com.gildedgames.aether.api.player.IPlayerAether;
-import net.minecraft.inventory.ContainerPlayer;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
 
-public class EmptyContainer extends ContainerPlayer
+public class EmptyContainer extends Container
 {
-	public EmptyContainer(IPlayerAether aePlayer)
+	@Override
+	public boolean canInteractWith(EntityPlayer playerIn)
 	{
-		super(aePlayer.getEntity().inventory, false, aePlayer.getEntity());
+		return true;
 	}
 }

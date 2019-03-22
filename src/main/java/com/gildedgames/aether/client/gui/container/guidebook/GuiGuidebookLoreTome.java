@@ -14,7 +14,7 @@ public class GuiGuidebookLoreTome extends AbstractGuidebookPage
 
 	public GuiGuidebookLoreTome(final PlayerAether aePlayer)
 	{
-		super(aePlayer, new EmptyContainer(aePlayer));
+		super(aePlayer, new EmptyContainer());
 	}
 
 	@Override

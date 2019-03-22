@@ -5,6 +5,7 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.util.ResourceLocation;
 
@@ -24,7 +25,7 @@ public abstract class AbstractGuidebookPage extends GuiContainer
 
 	protected final PlayerAether aePlayer;
 
-	public AbstractGuidebookPage(final PlayerAether aePlayer, ContainerPlayer container)
+	public AbstractGuidebookPage(final PlayerAether aePlayer, Container container)
 	{
 		super(container);
 

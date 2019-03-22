@@ -15,7 +15,7 @@ public class GuiGuidebookStatus extends AbstractGuidebookPage
 
 	public GuiGuidebookStatus(final PlayerAether aePlayer)
 	{
-		super(aePlayer, new EmptyContainer(aePlayer));
+		super(aePlayer, new EmptyContainer());
 	}
 
 	@Override

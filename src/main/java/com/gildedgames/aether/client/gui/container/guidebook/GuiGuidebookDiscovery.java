@@ -15,7 +15,7 @@ public class GuiGuidebookDiscovery extends AbstractGuidebookPage
 
 	public GuiGuidebookDiscovery(final PlayerAether aePlayer)
 	{
-		super(aePlayer, new EmptyContainer(aePlayer));
+		super(aePlayer, new EmptyContainer());
 	}
 
 	@Override

@@ -83,11 +83,11 @@ public class AetherGuiHandler implements IGuiHandler
 			case INVENTORY_ID:
 				return new ContainerGuidebookInventory(playerAether);
 			case STATUS_ID:
-				return new EmptyContainer(playerAether);
+				return new EmptyContainer();
 			case LORE_TOME_ID:
-				return new EmptyContainer(playerAether);
+				return new EmptyContainer();
 			case DISCOVERY_ID:
-				return new EmptyContainer(playerAether);
+				return new EmptyContainer();
 			case FROSTPINE_COOLER_ID:
 				return new ContainerIcestoneCooler(player.inventory, (IInventory) world.getTileEntity(pos));
 			case INCUBATOR_ID:

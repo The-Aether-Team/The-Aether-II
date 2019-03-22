@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.registry;
 
 import com.gildedgames.aether.api.patron.PatronRewardRegistry;
 import com.gildedgames.aether.api.registry.IContentRegistry;
-import com.gildedgames.aether.client.gui.tab.TabEquipment;
+import com.gildedgames.aether.client.gui.tab.guidebook.TabGuidebook;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.CapabilityManagerAether;
 import com.gildedgames.aether.common.capabilities.item.EffectRegistry;
@@ -62,7 +62,7 @@ public class ContentRegistry implements IContentRegistry, IOrbisServicesListener
 		PerfHelper.measure("Pre-initialize networking", NetworkingAether::preInit);
 		PerfHelper.measure("Pre-initialize patron rewards", PatronRewards::preInit);
 
-		this.tabRegistry.getInventoryGroup().registerServerTab(new TabEquipment());
+		this.tabRegistry.getInventoryGroup().registerServerTab(new TabGuidebook());
 		//this.tabRegistry.getInventoryGroup().registerServerTab(new TabBugReport());
 		//this.tabRegistry.getInventoryGroup().registerServerTab(new TabPatronRewards());
 	}

@@ -1,10 +1,11 @@
-package com.gildedgames.aether.client.gui.tab;
+package com.gildedgames.aether.client.gui.tab.guidebook;
 
 import com.gildedgames.aether.api.registry.tab.ITab;
 import com.gildedgames.aether.api.registry.tab.ITabClient;
 import com.gildedgames.aether.client.gui.container.guidebook.AbstractGuidebookPage;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,7 +14,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TabEquipment implements ITab
+public class TabGuidebook implements ITab
 {
 	@Override
 	public String getUnlocalizedName()
@@ -32,7 +33,7 @@ public class TabEquipment implements ITab
 	@Override
 	public boolean isEnabled()
 	{
-		return true;
+		return !(Minecraft.getMinecraft().currentScreen instanceof AbstractGuidebookPage);
 	}
 
 	@Override
@@ -42,7 +43,7 @@ public class TabEquipment implements ITab
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static class Client extends TabEquipment implements ITabClient
+	public static class Client extends TabGuidebook implements ITabClient
 	{
 		private static final ResourceLocation ICON = AetherCore.getResource("textures/gui/tabs/equipment.png");
 
@@ -60,7 +61,7 @@ public class TabEquipment implements ITab
 		@Override
 		public ResourceLocation getIcon()
 		{
-			return TabEquipment.Client.ICON;
+			return TabGuidebook.Client.ICON;
 		}
 	}
 }

@@ -952,6 +952,10 @@ ability.attackSpeedMod.desc=%s Attack Speed
 
 # Tabs
 tab.guidebook=Traveler's Guidebook
+tab.guidebook.equipment=Equipment
+tab.guidebook.status=Status
+tab.guidebook.loretome=Lore Tome
+tab.guidebook.discovery=Discovery
 tab.bug_report=Report Bugs
 tab.backpack.name=Backpack
 tab.patron_rewards=Patron Rewards
