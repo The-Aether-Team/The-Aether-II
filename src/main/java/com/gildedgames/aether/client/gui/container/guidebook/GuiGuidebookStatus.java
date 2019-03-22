@@ -19,25 +19,22 @@ public class GuiGuidebookStatus extends AbstractGuidebookPage
 	}
 
 	@Override
-	protected void drawLeftPage()
+	protected void drawLeftPage(int screenX, int screenY, float u, float v)
 	{
 		this.mc.renderEngine.bindTexture(LEFT_PAGE);
 
 		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 
-		Gui.drawModalRectWithCustomSizedTexture((this.width/2) - 176 - 11, this.height/2 - 185/2, 0, 0, this.PAGE_WIDTH, this.PAGE_HEIGHT, this.TEXTURE_WIDTH, this.TEXTURE_HEIGHT);
+		Gui.drawModalRectWithCustomSizedTexture(screenX, screenY, u, v, this.PAGE_WIDTH, this.PAGE_HEIGHT, this.TEXTURE_WIDTH, this.TEXTURE_HEIGHT);
 	}
 
 	@Override
-	protected void drawRightPage()
+	protected void drawRightPage(int screenX, int screenY, float u, float v)
 	{
 		this.mc.renderEngine.bindTexture(RIGHT_PAGE);
 
-		int rightPageCoordX = (this.width/2) - 12;
-		int rightPageCoordY = (this.height/2) - (185/2);
-
 		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 
-		Gui.drawModalRectWithCustomSizedTexture(rightPageCoordX, rightPageCoordY, this.PAGE_WIDTH - 13 ,0, this.PAGE_WIDTH, this.PAGE_HEIGHT,this.TEXTURE_WIDTH, this.TEXTURE_HEIGHT);
+		Gui.drawModalRectWithCustomSizedTexture(screenX, screenY, u ,v, this.PAGE_WIDTH, this.PAGE_HEIGHT,this.TEXTURE_WIDTH, this.TEXTURE_HEIGHT);
 	}
 }
