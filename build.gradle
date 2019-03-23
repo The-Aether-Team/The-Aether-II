@@ -1,20 +1,36 @@
 buildscript {
     repositories {
-        jcenter()
         maven {
-            name = "forge"
-            url = "http://files.minecraftforge.net/maven"
+            url 'https://files.minecraftforge.net/maven'
         }
+        jcenter()
+        mavenCentral()
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
     }
 }
 
-apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'maven-publish'
 
-def isPhosphorSubmodule = findProject(":Phosphor") != null
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+group = "com.gildedgames"
+archivesBaseName = "aether_ii"
+
+if (System.getenv("BUILD_NUMBER") != null) {
+    version = "${minecraft_version}-${mod_version}+build${System.getenv("BUILD_NUMBER")}"
+} else {
+    version = "${minecraft_version}-${mod_version}-SNAPSHOT"
+}
+
+sourceSets {
+    api {
+        java { srcDir "src/api/java" }
+    }
+}
 
 repositories {
     mavenCentral()
@@ -24,45 +40,51 @@ repositories {
 }
 
 configurations {
-    compileShaded
-    compile.extendsFrom compileShaded
-
-    runtimeShaded
-    runtime.extendsFrom runtimeShaded
-
     shaded
-    shaded.extendsFrom runtimeShaded, compileShaded
-    shaded.exclude group: "org.spongepowered"
+    runtime.extendsFrom shaded
 }
 
 dependencies {
-    if (isPhosphorSubmodule) {
-        runtime project(':phosphor')
-    } else {
-        runtime "me.jellysquid.mods:phosphor:${phosphor_version}:dev"
-        shaded  "me.jellysquid.mods:phosphor:${phosphor_version}:universal"
-    }
+    minecraft "net.minecraftforge:forge:$minecraft_version-$forge_version"
 
-    compileShaded project(":orbis-lib")
+    shaded project(":orbis-lib")
 }
 
-allprojects {
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
-}
+minecraft {
+    mappings channel: mcp_mappings_channel, version: mcp_mappings_version
 
-if (System.getenv("BUILD_NUMBER") != null) {
-    version = "${minecraft_version}-${mod_version}+build${System.getenv("BUILD_NUMBER")}"
-} else {
-    version = "${minecraft_version}-${mod_version}-SNAPSHOT"
-}
+    runs {
+        client {
+            workingDirectory project.file('run')
 
-group = "com.gildedgames"
-archivesBaseName = "aether_ii"
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 
-sourceSets {
-    api {
-        java { srcDir "src/api/java" }
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                aether {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory project.file('run')
+
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                aether {
+                    source sourceSets.main
+                }
+            }
+        }
     }
 }
 
@@ -70,96 +92,19 @@ jar {
     from sourceSets.api.output
     from sourceSets.main.output
 
-    manifest.mainAttributes(
-            "FMLAT": "aether_at.cfg"
-    )
-
-    exclude 'assets/**'
-
-    classifier = "reobf"
-}
-
-task apiJar(type: Jar) {
-    classifier = "api"
-
-    from sourceSets.api.output
-}
-
-task reobfJarWithAssets(type: Jar, dependsOn: extractAnnotationsJar) {
-    from zipTree(jar.archivePath)
-
-    into("assets") {
-        from "src/main/resources/assets"
-    }
-
-    dependsOn ":orbis-lib:reobfJar"
-
-    if (isPhosphorSubmodule) {
-        dependsOn ":orbis-lib:reobfJar"
-    }
-
-    gradle.projectsEvaluated({
-        // This is an ugly hack to make Phosphor appear before Orbis-Lib
-        // If we don't do this, then Forge will explode for some unknown reason and not be able to handle dependency resolution
-        def artifacts = configurations.shaded.files
-                .findAll { it.name.contains("-universal.jar") }
-                .toList()
-                .reverse()
-
-        from(artifacts)
-
-        manifest.mainAttributes(
-                "ContainedDeps": artifacts.collect { it.name }.join(' '),
-                "FMLAT": "aether_at.cfg"
-        )
-    })
-
-    classifier "universal"
-}
-
-reobfJar.finalizedBy reobfJarWithAssets
-
-minecraft {
-    version = "$minecraft_version-$forge_version"
-    mappings = "$forge_mappings"
-
-    runDir = "run"
-
-    def plugin = "me.jellysquid.mods.phosphor.core.PhosphorFMLLoadingPlugin"
-
-    clientJvmArgs = serverJvmArgs += "-Dfml.coreMods.load=$plugin"
-}
-
-processResources {
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
-
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-        exclude 'assets/**'
-
-        expand 'version': project.version, 'mcversion': project.minecraft.version
-    }
-
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
-        exclude 'assets/**'
-    }
-
-    rename '(.+_at.cfg)', 'META-INF/$1'
-}
-
-idea {
-    module {
-        inheritOutputDirs = true
+    manifest {
+        attributes([
+            "Specification-Title": "examplemod",
+            "Specification-Vendor": "examplemodsareus",
+            "Specification-Version": "1",
+            "Implementation-Title": project.name,
+            "Implementation-Version": "${version}",
+            "Implementation-Vendor" :"examplemodsareus",
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
     }
 }
 
-// We disable this because Gradle will fail to build otherwise for some reason.
-// See https://github.com/MinecraftForge/Srg2Source/issues/10
-minecraft {
-    makeObfSourceJar = false
-}
 
 if (System.getenv("JARSIGN_SECRETS_FILE") != null) {
     def secretsFile = file(System.getenv("JARSIGN_SECRETS_FILE"))
@@ -167,7 +112,7 @@ if (System.getenv("JARSIGN_SECRETS_FILE") != null) {
     def secrets = new Properties()
     secrets.load(secretsFile.newReader())
 
-    [reobfJarWithAssets, apiJar].each { jarTask ->
+    [jar, apiJar].each { jarTask ->
         def task = task(jarTask.name + 'Sign', type: SignJar) {
             keyStore = System.getenv("JARSIGN_KEYSTORE_FILE")
             alias = secrets.alias
@@ -181,8 +126,6 @@ if (System.getenv("JARSIGN_SECRETS_FILE") != null) {
         jarTask.finalizedBy task
     }
 }
-
-build.dependsOn apiJar
 
 // Prevents re-building OrbisAPI
 task ciBuild {
