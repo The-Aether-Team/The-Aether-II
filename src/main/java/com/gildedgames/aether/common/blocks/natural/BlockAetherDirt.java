@@ -11,8 +11,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class BlockAetherDirt extends BlockBuilder implements IBlockMultiName
 {
@@ -39,7 +39,7 @@ public class BlockAetherDirt extends BlockBuilder implements IBlockMultiName
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void getSubBlocks(final CreativeTabs tab, final NonNullList<ItemStack> list)
 	{
 		for (final BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())

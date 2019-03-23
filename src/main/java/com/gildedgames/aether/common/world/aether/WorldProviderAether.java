@@ -21,8 +21,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class WorldProviderAether extends WorldProviderSurface
 {
@@ -59,7 +59,7 @@ public class WorldProviderAether extends WorldProviderSurface
 		return this.noise;
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	private void setupClientRenderer()
 	{
 		this.setSkyRenderer(new RenderWorldSkybox());
@@ -169,7 +169,7 @@ public class WorldProviderAether extends WorldProviderSurface
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public Vec3d getFogColor(final float angle, final float partialTicks)
 	{
 		final int color = 0x8080a0;
@@ -197,14 +197,14 @@ public class WorldProviderAether extends WorldProviderSurface
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public boolean doesXZShowFog(final int x, final int z)
 	{
 		return false;
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public float[] calcSunriseSunsetColors(final float angle, final float partialTicks)
 	{
 		final float f2 = 0.4F;
@@ -231,14 +231,14 @@ public class WorldProviderAether extends WorldProviderSurface
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public double getVoidFogYFactor()
 	{
 		return 0.03125D;
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public float getCloudHeight()
 	{
 		return 200;

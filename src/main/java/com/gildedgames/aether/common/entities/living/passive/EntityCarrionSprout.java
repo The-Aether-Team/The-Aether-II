@@ -15,14 +15,14 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class EntityCarrionSprout extends EntityAetherAnimal
 {
 	private static final DataParameter<Integer> SIZE = new DataParameter<>(13, DataSerializers.VARINT);
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public float sinage, prevSinage;
 
 	private int maxSproutSize;
@@ -176,7 +176,7 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 		return LootTablesAether.ENTITY_CARRION_SPROUT;
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void clientUpdate()
 	{
 		this.prevSinage = this.sinage;

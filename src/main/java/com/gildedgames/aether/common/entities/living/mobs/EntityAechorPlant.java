@@ -22,8 +22,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Arrays;
 
@@ -35,7 +35,7 @@ public class EntityAechorPlant extends EntityAetherMob
 
 	private final boolean[] petalPresent = new boolean[4];
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public float sinage, prevSinage;
 
 	private int poisonLeft;
@@ -206,7 +206,7 @@ public class EntityAechorPlant extends EntityAetherMob
 		return false;
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	private void tickAnimation()
 	{
 		this.prevSinage = this.sinage;

@@ -18,8 +18,8 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -77,7 +77,7 @@ public class BlockRockGlassPaneDecorative extends BlockPane implements IBlockWit
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void getSubBlocks(final CreativeTabs tab, final NonNullList<ItemStack> list)
 	{
 		for (final BlockVariant variant : this.getVariantProperty().getAllowedValues())
@@ -87,7 +87,7 @@ public class BlockRockGlassPaneDecorative extends BlockPane implements IBlockWit
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void addInformation(final ItemStack stack, @Nullable final World player, final List<String> tooltip, final ITooltipFlag advanced)
 	{
 		final String name = this.getStateFromMeta(stack.getItemDamage()).getValue(this.getVariantProperty()).getName();
@@ -96,7 +96,7 @@ public class BlockRockGlassPaneDecorative extends BlockPane implements IBlockWit
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public BlockRenderLayer getRenderLayer()
 	{
 		return BlockRenderLayer.TRANSLUCENT;

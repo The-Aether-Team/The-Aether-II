@@ -12,12 +12,12 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 //TODO: Adding/Removing ambrosium chunks freezes the GUI which requires to close and reopen GUI.
 
-@SideOnly(Side.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class GuiIncubator extends GuiContainer
 {
 	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/gui/inventory/incubator.png");

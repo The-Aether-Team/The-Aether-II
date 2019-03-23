@@ -20,8 +20,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -53,7 +53,7 @@ public class ItemCrossbow extends Item
 		this.addPropertyOverride(new ResourceLocation("pull"), new IItemPropertyGetter()
 		{
 			@Override
-			@SideOnly(Side.CLIENT)
+			@OnlyIn(Dist.CLIENT)
 			public float apply(final ItemStack stack, @Nullable final World worldIn, @Nullable final EntityLivingBase entityIn)
 			{
 				if (entityIn == null)
@@ -79,7 +79,7 @@ public class ItemCrossbow extends Item
 		this.addPropertyOverride(new ResourceLocation("pulling"), new IItemPropertyGetter()
 		{
 			@Override
-			@SideOnly(Side.CLIENT)
+			@OnlyIn(Dist.CLIENT)
 			public float apply(final ItemStack stack, @Nullable final World worldIn, @Nullable final EntityLivingBase entityIn)
 			{
 				return entityIn != null && (entityIn.isHandActive() && entityIn.getActiveItemStack() == stack)
@@ -424,7 +424,7 @@ public class ItemCrossbow extends Item
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void addInformation(final ItemStack stack, final World world, final List<String> tooltip, final ITooltipFlag flag)
 	{
 		final float seconds = this.durationInTicks / 20.0F;

@@ -9,8 +9,8 @@ import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 /**
  * The {@link ITab} representation of the Minecraft's vanilla Inventory {@link GuiScreen}
@@ -41,7 +41,7 @@ public class TabBackpack implements ITab
 		return true;
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static class Client extends TabBackpack implements ITabClient
 	{
 		private static final ResourceLocation ICON = AetherCore.getResource("textures/gui/tabs/backpack.png");

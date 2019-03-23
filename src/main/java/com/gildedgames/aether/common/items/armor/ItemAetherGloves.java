@@ -8,8 +8,8 @@ import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class ItemAetherGloves extends Item
 {
@@ -24,7 +24,7 @@ public class ItemAetherGloves extends Item
 		this.setCreativeTab(CreativeTabsAether.ARMOR);
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public ResourceLocation getGloveTexture(EntityPlayer player)
 	{
 		String skinType = EntityUtil.getSkin(player);

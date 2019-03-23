@@ -17,8 +17,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -102,7 +102,7 @@ public class EntitiesAether
 		return AetherCore.MOD_ID + "." + name;
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static Collection<ResourceLocation> getRegisteredSpawnEggs()
 	{
 		return Collections.unmodifiableCollection(registeredEggs);

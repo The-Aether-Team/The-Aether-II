@@ -23,8 +23,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Random;
 
@@ -199,7 +199,7 @@ public class BlockIceCrystal extends BlockBuilder implements IBlockMultiName
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public boolean isTranslucent(IBlockState state)
 	{
 		return true;
@@ -230,14 +230,14 @@ public class BlockIceCrystal extends BlockBuilder implements IBlockMultiName
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public BlockRenderLayer getRenderLayer()
 	{
 		return BlockRenderLayer.TRANSLUCENT;
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public Block.EnumOffsetType getOffsetType()
 	{
 		return EnumOffsetType.XZ;

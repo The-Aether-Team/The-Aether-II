@@ -18,8 +18,8 @@ import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.client.resources.IResourceManagerReloadListener;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -224,7 +224,7 @@ public class DialogManager implements IDialogManager
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void attachReloadListener()
 	{
 		final IResourceManager resManager = Minecraft.getMinecraft().getResourceManager();
@@ -235,7 +235,7 @@ public class DialogManager implements IDialogManager
 		}
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static class ReloadListener implements IResourceManagerReloadListener
 	{
 		private final DialogManager manager;

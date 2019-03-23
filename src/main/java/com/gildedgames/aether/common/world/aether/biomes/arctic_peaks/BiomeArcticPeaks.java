@@ -31,8 +31,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -253,7 +253,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase implements ISnowyBiome
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public int getSkyColorByTemp(final float currentTemperature)
 	{
 		return 0xcbe4eb;

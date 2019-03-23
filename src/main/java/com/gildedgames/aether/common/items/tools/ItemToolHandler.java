@@ -13,8 +13,8 @@ import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +33,7 @@ public class ItemToolHandler
 		handlers.put(MaterialsAether.GRAVITITE_TOOL.name(), new ItemGravititeToolHandler());
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public static void onTooltip(final ItemTooltipEvent event)
 	{

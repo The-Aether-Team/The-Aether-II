@@ -14,8 +14,8 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.apache.commons.lang3.Validate;
 
 import javax.annotation.Nullable;
@@ -135,7 +135,7 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 		return this.sceneInstance;
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	private void openSceneClient(final ResourceLocation res, final IDialogScene scene, Map<String, Boolean> conditionsMet)
 	{
 		this.sceneInstance = new SceneInstance(this, scene, conditionsMet);
@@ -151,7 +151,7 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 				(EntityPlayerMP) this.getPlayer().getEntity());
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void navigateNodeClient(String nodeId)
 	{
 		if (this.sceneInstance.getNode() != null)
@@ -162,7 +162,7 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 		this.sceneInstance.navigate(nodeId);
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void navigateBackClient()
 	{
 		if (this.lastNodeId != null)

@@ -14,10 +14,10 @@ import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
-@SideOnly(Side.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class ParticleImpact extends Particle
 {
 	private static final ResourceLocation SLASH_TEXTURE = AetherCore.getResource("textures/particles/impact.png");
@@ -120,7 +120,7 @@ public class ParticleImpact extends Particle
 		return 3;
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static class Factory implements IParticleFactory
 	{
 		@Override

@@ -8,8 +8,8 @@ import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class TabChat implements ITab
 {
@@ -37,7 +37,7 @@ public class TabChat implements ITab
 		return true;
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static class Client extends TabChat implements ITabClient
 	{
 		private static final ResourceLocation ICON = AetherCore.getResource("textures/gui/tabs/chat.png");

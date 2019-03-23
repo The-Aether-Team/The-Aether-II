@@ -36,8 +36,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.world.NoteBlockEvent;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.network.IGuiHandler;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class AetherGuiHandler implements IGuiHandler
 {
@@ -131,7 +131,7 @@ public class AetherGuiHandler implements IGuiHandler
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public GuiContainer getClientGuiElement(final int id, final EntityPlayer player, final World world, final int x, final int y, final int z)
 	{
 		final BlockPos pos = new BlockPos(x, y, z);

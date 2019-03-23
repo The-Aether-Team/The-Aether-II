@@ -18,8 +18,8 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class ItemDartShooter extends Item
 {
@@ -31,7 +31,7 @@ public class ItemDartShooter extends Item
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void getSubItems(final CreativeTabs tab, final NonNullList<ItemStack> subItems)
 	{
 		if (!this.isInCreativeTab(tab))

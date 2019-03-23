@@ -10,7 +10,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 
 @Mod.EventBusSubscriber(Side.CLIENT)
 public class RespawnGuiOverrides

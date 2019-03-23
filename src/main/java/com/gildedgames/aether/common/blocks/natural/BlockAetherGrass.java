@@ -25,8 +25,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Random;
 
@@ -55,7 +55,7 @@ public class BlockAetherGrass extends Block implements IBlockMultiName, IGrowabl
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void getSubBlocks(final CreativeTabs tab, final NonNullList<ItemStack> list)
 	{
 		for (final BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
@@ -234,7 +234,7 @@ public class BlockAetherGrass extends Block implements IBlockMultiName, IGrowabl
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public boolean onBlockActivated(
 			final World worldIn, final BlockPos pos, final IBlockState state, final EntityPlayer playerIn, final EnumHand hand, final EnumFacing facing,
 			final float hitX, final float hitY, final float hitZ)

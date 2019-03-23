@@ -11,8 +11,8 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class ItemAetherShield extends Item
 {
@@ -24,7 +24,7 @@ public class ItemAetherShield extends Item
 		this.addPropertyOverride(new ResourceLocation("blocking"), new IItemPropertyGetter()
 		{
 			@Override
-			@SideOnly(Side.CLIENT)
+			@OnlyIn(Dist.CLIENT)
 			public float apply(ItemStack stack, World worldIn, EntityLivingBase entity)
 			{
 				return entity != null && entity.isHandActive() && entity.getActiveItemStack() == stack ? 1.0F : 0.0F;

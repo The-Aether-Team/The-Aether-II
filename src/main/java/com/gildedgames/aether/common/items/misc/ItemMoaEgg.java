@@ -24,8 +24,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -83,7 +83,7 @@ public class ItemMoaEgg extends Item implements IDropOnDeath
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void addInformation(final ItemStack stack, final World world, final List<String> creativeList, final ITooltipFlag flag)
 	{
 		final MoaGenePool genePool = ItemMoaEgg.getGenePool(stack);
@@ -217,7 +217,7 @@ public class ItemMoaEgg extends Item implements IDropOnDeath
 		}
 
 		@Override
-		@SideOnly(Side.CLIENT)
+		@OnlyIn(Dist.CLIENT)
 		public float apply(final ItemStack stack, @Nullable final World worldIn, @Nullable final EntityLivingBase entityIn)
 		{
 			final MoaGenePool genePool = ItemMoaEgg.getGenePool(stack);

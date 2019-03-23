@@ -9,8 +9,8 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class TabBugReport implements ITab
 {
@@ -42,7 +42,7 @@ public class TabBugReport implements ITab
 		return false;
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static class Client extends TabBugReport implements ITabClient
 	{
 		private static final ResourceLocation ICON = AetherCore.getResource("textures/gui/tabs/bug_report.png");

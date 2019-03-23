@@ -12,8 +12,8 @@ import net.minecraft.item.ItemMonsterPlacer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class CreativeTabsAether
 {
@@ -124,7 +124,7 @@ public class CreativeTabsAether
 		}
 
 		@Override
-		@SideOnly(Side.CLIENT)
+		@OnlyIn(Dist.CLIENT)
 		public void displayAllRelevantItems(final NonNullList<ItemStack> list)
 		{
 			super.displayAllRelevantItems(list);

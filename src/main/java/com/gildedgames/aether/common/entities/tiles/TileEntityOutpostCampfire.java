@@ -24,8 +24,8 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
 
@@ -78,7 +78,7 @@ public class TileEntityOutpostCampfire extends TileEntityMultiblockController im
 		return new ItemStack(BlocksAether.outpost_campfire);
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void clientUpdate()
 	{
 		PlayerAether playerAether = PlayerAether.getPlayer(Minecraft.getMinecraft().player);

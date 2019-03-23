@@ -2,14 +2,14 @@ package com.gildedgames.aether.common.items;
 
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
 
 public interface InformationProvider
 {
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	void addInformation(ItemStack stack, List<String> tooltip, ITooltipFlag flag);
 
 }

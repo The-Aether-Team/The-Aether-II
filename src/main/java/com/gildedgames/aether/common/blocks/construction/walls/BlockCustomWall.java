@@ -10,8 +10,8 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class BlockCustomWall extends BlockWall
 {
@@ -46,7 +46,7 @@ public class BlockCustomWall extends BlockWall
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void getSubBlocks(final CreativeTabs tab, final NonNullList<ItemStack> list)
 	{
 		list.add(new ItemStack(this, 1, 0));

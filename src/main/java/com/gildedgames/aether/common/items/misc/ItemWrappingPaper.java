@@ -8,8 +8,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class ItemWrappingPaper extends Item implements IDropOnDeath
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void addInformation(final ItemStack stack, final World world, final List<String> tooltip, final ITooltipFlag flag)
 	{
 		final PresentDyeData data = ItemWrappingPaper.getDyeData(stack);
@@ -99,7 +99,7 @@ public class ItemWrappingPaper extends Item implements IDropOnDeath
 		}
 	}
 
-/*	@SideOnly(Side.CLIENT)
+/*	@OnlyIn(Dist.CLIENT)
 	@Override
 	public int getColorFromItemStack(ItemStack stack, int phase)
 	{

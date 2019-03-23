@@ -4,8 +4,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public abstract class MessageHandlerClient<REQ extends IMessage, RES extends IMessage> extends MessageHandler<REQ, RES>
 {
@@ -28,7 +28,7 @@ public abstract class MessageHandlerClient<REQ extends IMessage, RES extends IMe
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public RES onMessage(final REQ message, final MessageContext ctx)
 	{
 		final Minecraft mc = Minecraft.getMinecraft();
@@ -44,7 +44,7 @@ public abstract class MessageHandlerClient<REQ extends IMessage, RES extends IMe
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public abstract RES onMessage(REQ message, EntityPlayer player);
 
 	/**
@@ -54,7 +54,7 @@ public abstract class MessageHandlerClient<REQ extends IMessage, RES extends IMe
 	 *
 	 * @param <REQ> The original {@link IMessage} type
 	 */
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	private static class FutureMessage<REQ extends IMessage> implements Runnable
 	{
 		private final MessageHandlerClient<REQ, ?> handler;

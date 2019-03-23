@@ -3,8 +3,8 @@ package com.gildedgames.aether.api.registry.tab;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public interface ITabClient extends ITab
 {
@@ -14,7 +14,7 @@ public interface ITabClient extends ITab
 	 * won't display when the {@link GuiScreen} is open.
 	 * @return All of the {@link GuiScreen} classes which are used within this tab.
 	 */
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	boolean isTabValid(GuiScreen gui);
 
 	/**
@@ -26,6 +26,6 @@ public interface ITabClient extends ITab
 	/**
 	 * @return Returns the icon this tab has.
 	 */
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	ResourceLocation getIcon();
 }

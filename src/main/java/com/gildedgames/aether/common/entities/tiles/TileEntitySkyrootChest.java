@@ -2,8 +2,8 @@ package com.gildedgames.aether.common.entities.tiles;
 
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class TileEntitySkyrootChest extends TileEntityChest
 {
@@ -14,7 +14,7 @@ public class TileEntitySkyrootChest extends TileEntityChest
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public AxisAlignedBB getRenderBoundingBox()
 	{
 		return new AxisAlignedBB(this.getPos().add(-1, 0, -1), this.getPos().add(2, 2, 2));

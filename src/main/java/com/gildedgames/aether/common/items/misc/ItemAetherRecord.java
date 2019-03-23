@@ -4,8 +4,8 @@ import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class ItemAetherRecord extends ItemRecord
 {
@@ -17,7 +17,7 @@ public class ItemAetherRecord extends ItemRecord
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public String getRecordNameLocal()
 	{
 		return new TextComponentTranslation(this.getTranslationKey() + ".desc").getFormattedText();

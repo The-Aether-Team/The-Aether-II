@@ -22,8 +22,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Random;
 
@@ -62,7 +62,7 @@ public class BlockAercloud extends Block implements IBlockMultiName
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void getSubBlocks(final CreativeTabs tab, final NonNullList<ItemStack> list)
 	{
 		for (final BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
@@ -72,14 +72,14 @@ public class BlockAercloud extends Block implements IBlockMultiName
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public BlockRenderLayer getRenderLayer()
 	{
 		return BlockRenderLayer.TRANSLUCENT;
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public boolean shouldSideBeRendered(final IBlockState state, final IBlockAccess world, final BlockPos pos, final EnumFacing side)
 	{
 		final IBlockState offsetState = world.getBlockState(pos.offset(side));
@@ -152,7 +152,7 @@ public class BlockAercloud extends Block implements IBlockMultiName
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void randomDisplayTick(final IBlockState state, final World world, final BlockPos pos, final Random rand)
 	{
 		if (state.getValue(PROPERTY_VARIANT) == PURPLE_AERCLOUD)

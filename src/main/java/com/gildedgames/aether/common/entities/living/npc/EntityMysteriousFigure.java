@@ -22,8 +22,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -124,7 +124,7 @@ public class EntityMysteriousFigure extends EntityNPC
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void turn(final float yaw, final float pitch)
 	{
 		//super.turn(yaw, pitch);

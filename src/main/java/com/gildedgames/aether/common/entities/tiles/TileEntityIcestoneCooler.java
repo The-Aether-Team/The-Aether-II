@@ -19,8 +19,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.MathHelper;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class TileEntityIcestoneCooler extends TileEntityLockable implements ITickable, IInventory
 {
@@ -39,7 +39,7 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 
 	private String coolerCustomeName;
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static boolean isCooling(IInventory inventory)
 	{
 		return inventory.getField(0) > 0;

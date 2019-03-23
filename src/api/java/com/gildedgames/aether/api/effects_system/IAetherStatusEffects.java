@@ -4,8 +4,8 @@ import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.orbis.lib.util.mc.NBT;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nullable;
@@ -100,7 +100,7 @@ public interface IAetherStatusEffects extends NBT
 	 * Add information about the effect (it's name) from lang file, to provided collection.
 	 * @param label Collection to add information too.
 	 */
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	void addInformation(Collection<String> label);
 
 	/**

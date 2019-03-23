@@ -23,8 +23,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 import net.minecraftforge.fml.client.FMLClientHandler;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,7 +93,7 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void randomDisplayTick(final IBlockState state, final World world, final BlockPos pos, final Random rand)
 	{
 		if (Minecraft.getMinecraft().gameSettings.particleSetting != 0)
@@ -324,7 +324,7 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public BlockRenderLayer getRenderLayer()
 	{
 		return BlockRenderLayer.CUTOUT_MIPPED;
@@ -353,13 +353,13 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public boolean shouldSideBeRendered(final IBlockState blockState, final IBlockAccess blockAccess, final BlockPos pos, final EnumFacing side)
 	{
 		return this.superShouldSideBeRendered(blockState, blockAccess, pos, side);
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	private boolean superShouldSideBeRendered(final IBlockState blockState, final IBlockAccess blockAccess, final BlockPos pos, final EnumFacing side)
 	{
 		final AxisAlignedBB axisalignedbb = blockState.getBoundingBox(blockAccess, pos);

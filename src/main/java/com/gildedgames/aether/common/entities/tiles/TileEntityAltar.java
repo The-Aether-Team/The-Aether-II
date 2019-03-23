@@ -12,14 +12,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
 
 public class TileEntityAltar extends TileEntitySynced implements ITickable
 {
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public double animationTicks, prevAnimationTicks;
 
 	private ItemStack stackOnAltar = ItemStack.EMPTY;

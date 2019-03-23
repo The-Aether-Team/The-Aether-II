@@ -27,8 +27,8 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.Set;
@@ -39,13 +39,13 @@ public class EntityAerbunny extends EntityAetherAnimal
 			.newHashSet(Items.CARROT, Items.POTATO, Items.BEETROOT, ItemsAether.blueberries, ItemsAether.orange, ItemsAether.enchanted_blueberry,
 					ItemsAether.enchanted_wyndberry, ItemsAether.wyndberry);
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	private double prevMotionY;
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	private int puffiness;
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	private float curRotation;
 
 	public EntityAerbunny(final World world)
@@ -221,13 +221,13 @@ public class EntityAerbunny extends EntityAetherAnimal
 		return new EntityAerbunny(this.world);
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public int getPuffiness()
 	{
 		return this.puffiness;
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public float getRotation()
 	{
 		if (this.motionY > 0)

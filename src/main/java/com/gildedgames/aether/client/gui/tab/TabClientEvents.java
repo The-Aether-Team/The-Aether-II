@@ -15,14 +15,14 @@ import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.lwjgl.input.Mouse;
 
 @Mod.EventBusSubscriber(Side.CLIENT)
 public class TabClientEvents
 {
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	private final static RenderTabGroup tabGroupRenderer = new RenderTabGroup();
 
 	@SubscribeEvent

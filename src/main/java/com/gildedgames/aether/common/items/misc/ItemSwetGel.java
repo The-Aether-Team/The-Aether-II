@@ -16,8 +16,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.HashMap;
 
@@ -39,7 +39,7 @@ public class ItemSwetGel extends Item implements IDropOnDeath
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void getSubItems(final CreativeTabs tab, final NonNullList<ItemStack> subItems)
 	{
 		if (!this.isInCreativeTab(tab))

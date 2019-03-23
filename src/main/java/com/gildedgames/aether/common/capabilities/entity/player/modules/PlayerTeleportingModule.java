@@ -20,8 +20,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class PlayerTeleportingModule extends PlayerAetherModule
 {
@@ -88,7 +88,7 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 		return (System.currentTimeMillis() - this.timeStartedFade) / 1000.0D;
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	private void onUpdateClient()
 	{
 		if (this.getWorld().provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER)
