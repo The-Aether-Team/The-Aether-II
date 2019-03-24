@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.entities.living.passive;
 
 import com.gildedgames.aether.common.entities.ai.EntityAIForcedWander;
+import com.gildedgames.aether.common.entities.util.flying.EntityFlying;
 import com.gildedgames.aether.common.entities.util.flying.advanced.EntityFlyingAdvanced;
 import com.gildedgames.aether.common.entities.util.flying.PathNavigateFlyer;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
@@ -11,7 +12,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
-public class EntityAerwhale extends EntityFlyingAdvanced
+public class EntityAerwhale extends EntityFlying
 {
 
 	public EntityAerwhale(final World world)

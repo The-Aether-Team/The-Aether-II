@@ -41,7 +41,7 @@ public class RenderAerwhale extends RenderLiving<EntityLiving>
 	{
 		EntityAerwhale aerwhale = (EntityAerwhale) entitylivingbaseIn;
 
-		if (aerwhale.getFlightPath() != null)
+		/*if (aerwhale.getFlightPath() != null)
 		{
 			Vec3d pos = entitylivingbaseIn.getPositionVector();
 
@@ -136,9 +136,9 @@ public class RenderAerwhale extends RenderLiving<EntityLiving>
 			}
 		}
 		else
-		{
+		{*/
 			super.renderModel(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);
-		}
+//		}
 	}
 
 	@Override

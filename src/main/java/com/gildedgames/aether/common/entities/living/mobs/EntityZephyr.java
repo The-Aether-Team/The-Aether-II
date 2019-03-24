@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.entities.living.mobs;
 
 import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
+import com.gildedgames.aether.common.entities.util.flying.EntityFlying;
 import com.gildedgames.aether.common.entities.util.flying.advanced.EntityFlyingAdvanced;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
@@ -10,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
-public class EntityZephyr extends EntityFlyingAdvanced
+public class EntityZephyr extends EntityFlying
 {
 	public EntityZephyr(final World world)
 	{

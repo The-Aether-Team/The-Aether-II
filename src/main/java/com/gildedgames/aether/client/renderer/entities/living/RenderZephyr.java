@@ -45,7 +45,7 @@ public class RenderZephyr extends RenderLiving<EntityLiving>
 
 		GlStateManager.translate(0, 1.1f, 0);
 
-		if (zephyr.getFlightPath() != null)
+		/*if (zephyr.getFlightPath() != null)
 		{
 			Vec3d pos = entitylivingbaseIn.getPositionVector();
 
@@ -111,7 +111,7 @@ public class RenderZephyr extends RenderLiving<EntityLiving>
 			Point3d v2 = MathUtil.getPoints(zephyr.getFlightPath(), zephyr.getTime() - 0.001f);
 
 			GlStateManager.rotate(QuaternionUtil.lookAt(new Vec3d(cur.x, -cur.y, -cur.z), new Vec3d(v2.x, -v2.y, -v2.z)));
-		}
+		}*/
 
 		super.renderModel(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);
 

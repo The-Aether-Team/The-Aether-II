@@ -76,23 +76,21 @@ public class ModelAerwhale extends ModelBase
 		this.MiddleBody.setRotationPoint(0.0F, -1.0F, 14.0F);
 		this.MiddleBody.addBox(-11.0F, -5.0F, -1.0F, 22, 14, 25, 0.0F);
 		this.Head.addChild(this.BottomPartHead);
-//		this.MiddleBody.addChild(this.BackBody);
+		this.MiddleBody.addChild(this.BackBody);
 		this.Head.addChild(this.RightFin);
 		this.BackBody.addChild(this.BackfinLeft);
 		this.MiddleBody.addChild(this.BottomPartMiddlebody);
 		this.BackBody.addChild(this.BackfinRight);
-//		this.BackBody.addChild(this.FrontBody);
+		this.BackBody.addChild(this.FrontBody);
 		this.Head.addChild(this.LeftFin);
 		this.MiddleBody.addChild(this.MiddleFin);
-//		this.Head.addChild(this.MiddleBody);
+		this.Head.addChild(this.MiddleBody);
 	}
 
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
 		this.Head.render(f5);
-		this.MiddleBody.render(f5);
-		this.BackBody.render(f5);
 	}
 
 	/**
@@ -111,19 +109,18 @@ public class ModelAerwhale extends ModelBase
 	{
 		super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entity);
 
-//		EntityFlying flying = (EntityFlying) entity;
-//		float deltaTime = ageInTicks - (float) flying.ticksExisted;
-//
+		float deltaTime = ageInTicks - (float) entity.ticksExisted;
+
 //		float tailAnimation = flying.getTailAnimation(deltaTime);
-//
+
 		float time = -0.05F;
 //
 		this.RightFin.rotateAngleZ = (MathHelper.sin(ageInTicks * (time + 0.01F)) * 0.18F * (float) Math.PI);
 		this.LeftFin.rotateAngleZ = -(MathHelper.sin(ageInTicks * (time + 0.01F)) * 0.18F * (float) Math.PI);
 
-//		this.BackBody.rotateAngleX = MathHelper.cos(ageInTicks * time) * 0.15F * (float) Math.PI;
-//		this.Head.rotateAngleX = MathHelper.cos(ageInTicks * time) * -0.15F * (float) Math.PI;
-//		this.MiddleBody.rotateAngleX = MathHelper.sin(ageInTicks * time) * 0.15F * (float) Math.PI;
+		this.BackBody.rotateAngleX = MathHelper.cos(ageInTicks * time) * 0.15F * (float) Math.PI;
+		this.Head.rotateAngleX = MathHelper.cos(ageInTicks * time) * -0.15F * (float) Math.PI;
+		this.MiddleBody.rotateAngleX = MathHelper.sin(ageInTicks * time) * 0.15F * (float) Math.PI;
 
 		this.BackfinRight.rotateAngleX = MathHelper.sin(ageInTicks * time) * 0.18F * (float) Math.PI;
 		this.BackfinLeft.rotateAngleX = MathHelper.sin(ageInTicks * time) * 0.18F * (float) Math.PI;
