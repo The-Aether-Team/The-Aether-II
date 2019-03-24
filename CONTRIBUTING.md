@@ -1,28 +1,16 @@
-### Creating issues
-When opening issues on our issue tracker, we ask that you provide the following information:
-
-- The exact version of the Aether you are running, such as `1.10.2-1.0.0`. If you are not using the Aether Launcher, please also include the version of Forge you are using.
-- If your issue is a bug, state what you expected to happen.
-- If your issue is a crash, attach the latest client/server log and crash report.
-- If your issue only occurs with other mods/plugins installed, list the exact mod/plugin versions installed.
-
-Make sure to keep your issue's description clear and concise. Your issue's title should also be easy to digest, giving our developers and reporters a good idea of what's wrong without including too many details.
-
-Our reporters and developers work around the clock, and will take care of debugging, labeling, and sorting your issues. However, please note that there are currently _many_ open issues, and that it may take some time (up to a few weeks in the worst case) for your issue to be triaged and resolved. Typically, issues are resolved in order of severity and complexity, not the date submitted.
-
-### Getting started for contributors
+### Getting started for programmers
 We're excited to hear that you're interested in contributing to the Aether!
 
-Before getting started, you'll need to install [Git](https://git-scm.com/) (even if you have your own Git client, our buildscripts require Git to be present on your system's environment path) and the latest version of the [Oracle Java 8 JDK](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) (or OpenJDK 8). On Windows, we recommend you use [Chocolately](https://chocolatey.org) to install these packages, although you're free to install them manually. If you're developing on Mac OS or Linux, these should be standard packages in your software repositories.
+Before getting started, you'll need to install the latest 64-bit version of the OpenJDK 8 for your environment.
+- Windows users: We **strongly** recommend you use the Hotspot OpenJDK 8 builds provided by the [AdoptOpenJDK project](https://adoptopenjdk.net/) instead of the builds provided by Oracle.
+- macOS and Linux users: If you are already using a package manager, OpenJDK builds should be present in your software repositories. If not, we recommend using [SDKMan](https://sdkman.io/) to install the Hotspot OpenJDK 8 builds provided by the [AdoptOpenJDK](https://adoptopenjdk.net/) project.
 
-If you're going to be making code contributions, we strongly recommend you use [IntelliJ IDEA Community Edition](https://www.jetbrains.com/idea/), which is our weapon of choice for taming the beast. We've received reports that Gradle integration in other IDEs (such as Eclipse) can have issues with the ForgeGradle project, and as such we can only recommend and provide instructions for IntelliJ IDEA.
-
-If you're not familiar with setting up IntelliJ IDEA for use with ForgeGradle projects, cpw has created a setup video which runs over a few of the basics of ForgeGradle [here](https://www.youtube.com/watch?v=PfmlNiHonV0).
+We strongly recommend you use [IntelliJ IDEA Community Edition](https://www.jetbrains.com/idea/) when making code contributions. While other IDEs may work (in theory, anyways), support is spotty and you will often run into issues and other roadblocks. If you're not familiar with setting up IntelliJ IDEA for use with ForgeGradle projects, cpw has created a setup video which runs over a few of the basics of ForgeGradle [here](https://www.youtube.com/watch?v=PfmlNiHonV0).
 
 If you have any questions or issues, or would just like to discuss Aether development, feel free to [join us on Discord](https://discord.gg/HYG3VPj).
 
 ### Creating merge requests
-When contributing source code changes to the Aether II, it is **mandatory** to keep consistent use of the formatting and style guidelines used throughout the codebase.
+When contributing source code changes to the Aether II, it is **mandatory** to keep consistent use of the formatting and style guidelines used throughout the codebase. Merge requests which do not adhere to them will be held back until they're updated to meet our requirements.
 
 If you are using IntelliJ IDEA 2017 or newer, we provide configuration files for our code formatting guidelines and inspections in the `idea` folder.
 
