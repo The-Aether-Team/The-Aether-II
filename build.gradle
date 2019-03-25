@@ -74,29 +74,7 @@ jar {
             "FMLAT": "aether_at.cfg"
     )
 
-    exclude 'assets/**'
-
-    classifier = "reobf"
-}
-
-task apiJar(type: Jar) {
-    classifier = "api"
-
-    from sourceSets.api.output
-}
-
-task reobfJarWithAssets(type: Jar, dependsOn: extractAnnotationsJar) {
-    from zipTree(jar.archivePath)
-
-    into("assets") {
-        from "src/main/resources/assets"
-    }
-
     dependsOn ":orbis-lib:reobfJar"
-
-    if (isPhosphorSubmodule) {
-        dependsOn ":orbis-lib:reobfJar"
-    }
 
     gradle.projectsEvaluated({
         // This is an ugly hack to make Phosphor appear before Orbis-Lib
@@ -117,7 +95,11 @@ task reobfJarWithAssets(type: Jar, dependsOn: extractAnnotationsJar) {
     classifier "universal"
 }
 
-reobfJar.finalizedBy reobfJarWithAssets
+task apiJar(type: Jar) {
+    classifier = "api"
+
+    from sourceSets.api.output
+}
 
 minecraft {
     version = "$minecraft_version-$forge_version"
@@ -145,8 +127,6 @@ processResources {
         exclude 'mcmod.info'
         exclude 'assets/**'
     }
-
-    rename '(.+_at.cfg)', 'META-INF/$1'
 }
 
 idea {
@@ -167,7 +147,7 @@ if (System.getenv("JARSIGN_SECRETS_FILE") != null) {
     def secrets = new Properties()
     secrets.load(secretsFile.newReader())
 
-    [reobfJarWithAssets, apiJar].each { jarTask ->
+    [jar, apiJar].each { jarTask ->
         def task = task(jarTask.name + 'Sign', type: SignJar) {
             keyStore = System.getenv("JARSIGN_KEYSTORE_FILE")
             alias = secrets.alias
@@ -184,7 +164,7 @@ if (System.getenv("JARSIGN_SECRETS_FILE") != null) {
 
 build.dependsOn apiJar
 
-// Prevents re-building OrbisAPI
+// Prevents re-building orbis-lib
 task ciBuild {
     dependsOn build
 }
