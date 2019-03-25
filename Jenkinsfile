@@ -24,7 +24,7 @@ pipeline {
             }
 
             steps {
-                sh 'gradle ciBuild'
+                sh 'gradle build'
             }
         }
     }

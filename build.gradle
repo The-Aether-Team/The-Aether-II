@@ -163,8 +163,3 @@ if (System.getenv("JARSIGN_SECRETS_FILE") != null) {
 }
 
 build.dependsOn apiJar
-
-// Prevents re-building orbis-lib
-task ciBuild {
-    dependsOn build
-}
