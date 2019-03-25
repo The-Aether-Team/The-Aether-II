@@ -24,7 +24,7 @@ pipeline {
             }
 
             steps {
-                sh 'gradle build'
+                sh 'gradle build --no-daemon'
             }
         }
     }
