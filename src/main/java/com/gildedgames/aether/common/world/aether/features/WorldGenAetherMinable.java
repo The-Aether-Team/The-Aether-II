@@ -120,9 +120,9 @@ public class WorldGenAetherMinable
 											slice.getWorld().checkLight(nextPos);
 										}
 
-										if (this.isFloating && slice.isAirBlock(x, y + 1, z))
+										if (this.isFloating)
 										{
-											slice.getWorld().markAndNotifyBlock(nextPos, slice.getWorld().getChunk(nextPos), state, this.oreBlock, 1 | 2 | 16);
+											slice.getWorld().scheduleUpdate(nextPos, this.oreBlock.getBlock(), 0);
 										}
 									}
 								}
