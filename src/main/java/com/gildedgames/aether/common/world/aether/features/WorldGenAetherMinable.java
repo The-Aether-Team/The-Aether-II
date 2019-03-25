@@ -113,7 +113,9 @@ public class WorldGenAetherMinable
 
 									if (ArrayHelper.contains(this.predicate, state))
 									{
-										slice.replaceBlockState(nextPos.setPos(x, y, z), this.oreBlock);
+										nextPos.setPos(x, y, z);
+
+										slice.setBlockState(nextPos, this.oreBlock);
 
 										if (this.emitsLight)
 										{
