@@ -74,7 +74,7 @@ jar {
             "FMLAT": "aether_at.cfg"
     )
 
-    dependsOn ":orbis-lib:reobfJar"
+    dependsOn ":orbis-lib:build"
 
     gradle.projectsEvaluated({
         // This is an ugly hack to make Phosphor appear before Orbis-Lib
@@ -158,7 +158,7 @@ if (System.getenv("JARSIGN_SECRETS_FILE") != null) {
             outputFile = jarTask.archivePath
         }
 
-        jarTask.finalizedBy task
+        build.dependsOn task
     }
 }
 
