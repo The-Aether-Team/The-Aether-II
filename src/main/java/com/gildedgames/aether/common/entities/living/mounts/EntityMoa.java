@@ -11,6 +11,8 @@ import com.gildedgames.aether.common.entities.genes.util.GeneUtil;
 import com.gildedgames.aether.common.entities.util.*;
 import com.gildedgames.aether.common.entities.util.mounts.FlyingMount;
 import com.gildedgames.aether.common.entities.util.mounts.IFlyingMountData;
+import com.gildedgames.aether.common.entities.util.multipart.AetherMultiPartEntity;
+import com.gildedgames.aether.common.entities.util.multipart.AetherMultiPartMount;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
 import com.gildedgames.aether.common.items.misc.ItemMoaFeather;
@@ -74,15 +76,15 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 
 	private final Point3d[] old;
 
-	private final AetherMultiPartEntity neck = new AetherMultiPartEntity(this, "neck", 0.4F, 0.8F);
+	private final AetherMultiPartEntity neck = new AetherMultiPartMount(this, "neck", 0.4F, 0.8F);
 
-	private final AetherMultiPartEntity head = new AetherMultiPartEntity(this, "head", 0.8F, 0.6F);
+	private final AetherMultiPartEntity head = new AetherMultiPartMount(this, "head", 0.8F, 0.6F);
 
-	private final AetherMultiPartEntity beak = new AetherMultiPartEntity(this, "beak", 0.4F, 0.5F);
+	private final AetherMultiPartEntity beak = new AetherMultiPartMount(this, "beak", 0.4F, 0.5F);
 
-	private final AetherMultiPartEntity body = new AetherMultiPartEntity(this, "body", 1.1F, 1.325F);
+	private final AetherMultiPartEntity body = new AetherMultiPartMount(this, "body", 1.1F, 1.325F);
 
-	private final AetherMultiPartEntity tail = new AetherMultiPartEntity(this, "tail", 1.1F, 0.6F);
+	private final AetherMultiPartEntity tail = new AetherMultiPartMount(this, "tail", 1.1F, 0.6F);
 
 	public float wingRotation, destPos, prevDestPos, prevWingRotation;
 
@@ -94,7 +96,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 
 	private float ageSinceOffGround;
 
-	private boolean wasOnGround = true;
+	private boolean wasOnGround = true, isFastFalling = false;
 
 	private EntityGroup pack;
 
@@ -116,11 +118,6 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		for (int i = 0; i < this.old.length; i++)
 		{
 			this.old[i] = new Point3d();
-		}
-
-		if (this.isChild() || this.isGroupLeader())
-		{
-			this.updateMultiPart();
 		}
 	}
 
@@ -349,10 +346,28 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		final boolean riderSneaking =
 				!this.getPassengers().isEmpty() && this.getPassengers().get(0) != null && this.getPassengers().get(0).isSneaking();
 
-		if (!this.onGround && this.motionY < 0.0D && !riderSneaking)
+		if (!this.onGround)
 		{
-			this.motionY *= 0.63749999999999996D;
+			if (riderSneaking)
+			{
+				this.isFastFalling = true;
+			}
+			else if (this.motionY < 0.0D)
+			{
+				this.motionY *= 0.63749999999999996D;
+			}
 		}
+
+		if (!riderSneaking)
+		{
+			this.isFastFalling = false;
+		}
+	}
+
+	@Override
+	public boolean isFastFalling()
+	{
+		return this.isFastFalling;
 	}
 
 	public void updateWingRotation()
@@ -668,6 +683,8 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		{
 			this.old[i].set(this.parts[i].posX, this.parts[i].posY, this.parts[i].posZ);
 		}
+
+		this.updateMultiPart();
 
 		float f = MathUtil.interpolateRotation(this.prevRenderYawOffset, this.renderYawOffset, 1);
 		float f1 = MathHelper.cos(-f * 0.017453292F - (float) Math.PI) * scale;

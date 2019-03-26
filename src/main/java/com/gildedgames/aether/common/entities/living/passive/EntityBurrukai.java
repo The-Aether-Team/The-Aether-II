@@ -8,7 +8,7 @@ import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.entities.ai.*;
 import com.gildedgames.aether.common.entities.effects.StatusEffectFracture;
-import com.gildedgames.aether.common.entities.util.AetherMultiPartEntity;
+import com.gildedgames.aether.common.entities.util.multipart.AetherMultiPartEntity;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;

@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.entities.util;
+package com.gildedgames.aether.common.entities.util.multipart;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IEntityMultiPart;

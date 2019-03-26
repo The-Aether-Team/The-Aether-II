@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.util.mounts;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
@@ -17,5 +18,7 @@ public interface IFlyingMountData
 	void setRemainingAirborneTime(float set);
 
 	void addRemainingAirborneTime(float add);
+
+	boolean isFastFalling();
 
 }

@@ -6,7 +6,7 @@ import com.gildedgames.aether.api.effects_system.IAetherStatusEffectIntensity;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
 import com.gildedgames.aether.common.entities.ai.*;
 import com.gildedgames.aether.common.entities.effects.StatusEffectBleed;
-import com.gildedgames.aether.common.entities.util.AetherMultiPartEntity;
+import com.gildedgames.aether.common.entities.util.multipart.AetherMultiPartEntity;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;

@@ -107,6 +107,7 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 				fuelstack.shrink(1);
 			}
 		}
+
 		if (this.hasStartedHeating())
 		{
 			if (this.canEggIncubate())

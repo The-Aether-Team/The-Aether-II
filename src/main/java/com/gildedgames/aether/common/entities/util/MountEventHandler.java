@@ -3,6 +3,8 @@ package com.gildedgames.aether.common.entities.util;
 import com.gildedgames.aether.api.entity.IMount;
 import com.gildedgames.aether.api.entity.IMountProcessor;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.entities.util.mounts.IFlyingMountData;
+import com.gildedgames.aether.common.entities.util.multipart.AetherMultiPartMount;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
@@ -25,7 +27,12 @@ public class MountEventHandler
 	@SubscribeEvent
 	public static void onPlayerInteract(final PlayerInteractEvent.EntityInteractSpecific event)
 	{
-		final Entity target = event.getTarget();
+		Entity target = event.getTarget();
+
+		if (target instanceof AetherMultiPartMount)
+		{
+			target = ((AetherMultiPartMount) target).getEntity();
+		}
 
 		if (target instanceof IMount)
 		{
@@ -103,9 +110,11 @@ public class MountEventHandler
 	@SubscribeEvent
 	public static void onMountEvent(final EntityMountEvent event)
 	{
-		if (event.isDismounting() && event.getEntityBeingMounted() instanceof IMount)
+		final Entity entity = event.getEntityBeingMounted();
+
+		if (event.isDismounting() && entity instanceof IMount && !entity.world.isRemote)
 		{
-			if (!event.getEntityBeingMounted().world.isRemote && !event.getEntityBeingMounted().onGround)
+			if (!entity.onGround || (entity instanceof IFlyingMountData && ((IFlyingMountData) entity).isFastFalling()))
 			{
 				event.setCanceled(true);
 			}

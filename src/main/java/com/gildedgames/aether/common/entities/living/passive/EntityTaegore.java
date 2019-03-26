@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.entities.living.passive;
 
-import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
 import com.gildedgames.aether.api.effects_system.EEffectIntensity;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffectIntensity;
@@ -12,8 +11,7 @@ import com.gildedgames.aether.common.entities.ai.EntityAIHideFromRain;
 import com.gildedgames.aether.common.entities.ai.EntityAIRestrictRain;
 import com.gildedgames.aether.common.entities.ai.EntityAIUnstuckBlueAercloud;
 import com.gildedgames.aether.common.entities.effects.StatusEffectFracture;
-import com.gildedgames.aether.common.entities.effects.StatusEffectStun;
-import com.gildedgames.aether.common.entities.util.AetherMultiPartEntity;
+import com.gildedgames.aether.common.entities.util.multipart.AetherMultiPartEntity;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
