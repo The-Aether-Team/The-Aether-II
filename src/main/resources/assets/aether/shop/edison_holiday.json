@@ -73,8 +73,8 @@
 		},
 		{
 			"stack": {
-				"item": "aether:aether_sapling",
-				"data": "4"
+				"item": "aether:unique_sapling",
+				"data": "1"
 			},
 			"descriptions": [
 				"edison.shop.mutant_sapling"
