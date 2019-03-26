@@ -77,7 +77,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 		if (this.effectBuildup >= 101)
 		{
 			this.isEffectApplied = true;
-			AetherCore.LOGGER.info("Effect Applied : " + this.NAME + " to : " + this.livingEffected.getName());
+//			AetherCore.LOGGER.info("Effect Applied : " + this.NAME + " to : " + this.livingEffected.getName());
 			this.effectBuildup = 100;
 			this.potentialBuildup = 0;
 		}
@@ -236,7 +236,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 		this.tempEffectResistance = 0;
 		this.markDirty();
 
-		AetherCore.LOGGER.info("Effect Reset : " + this.NAME + " to : " + this.livingEffected.getName());
+//		AetherCore.LOGGER.info("Effect Reset : " + this.NAME + " to : " + this.livingEffected.getName());
 	}
 
 	@Override
