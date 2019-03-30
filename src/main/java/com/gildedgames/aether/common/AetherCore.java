@@ -22,7 +22,7 @@ public class AetherCore
 
 	public static final String MOD_ID = "aether";
 
-	public static final String MOD_VERSION = "0.1.2";
+	public static final String MOD_VERSION = "0.1.3";
 
 	public static final String MOD_DEPENDENCIES = "required-after:orbis-lib@[0.2.0,)";
 
