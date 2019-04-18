@@ -16,8 +16,9 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
-// TODO: Remove effects once no longer needed
 public class StatusEffectPool implements IAetherStatusEffectPool
 {
 	private static final HashMap<String, StatusEffectFactory> types = new HashMap<>();
@@ -51,10 +52,14 @@ public class StatusEffectPool implements IAetherStatusEffectPool
 	@Override
 	public void tick()
 	{
+		Iterator<Map.Entry<String, IAetherStatusEffects>> it = this.activeEffects.entrySet().iterator();
+
 		boolean creative = this.livingBase instanceof EntityPlayerMP && ((EntityPlayerMP) this.livingBase).isCreative();
 
-		for (IAetherStatusEffects effect : this.activeEffects.values())
+		while (it.hasNext())
 		{
+			IAetherStatusEffects effect = it.next().getValue();
+
 			if (creative)
 			{
 				if (effect.getIsEffectApplied() || effect.getBuildup() > 0)
@@ -64,7 +69,17 @@ public class StatusEffectPool implements IAetherStatusEffectPool
 			}
 
 			effect.tick(this.livingBase);
+
+			if (this.shouldRemoveEffect(effect))
+			{
+				it.remove();
+			}
 		}
+	}
+
+	private boolean shouldRemoveEffect(IAetherStatusEffects effect)
+	{
+		return !effect.isDirty() && !effect.getIsEffectApplied() && effect.getBuildup() == 0 && effect.getResistance() == 1.0D;
 	}
 
 	@Override

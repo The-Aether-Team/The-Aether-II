@@ -104,10 +104,19 @@ public abstract class StatusEffect implements IAetherStatusEffects
 			this.effectBuildup = 0;
 		}
 
-		if (livingBase instanceof EntityPlayerMP && this.isDirty)
+		if (this.isDirty)
 		{
-			NetworkingAether.sendPacketToPlayer(new PacketStatusEffect(livingBase), (EntityPlayerMP) livingBase);
-			this.markClean();
+			if (livingBase instanceof EntityPlayerMP)
+			{
+				NetworkingAether.sendPacketToPlayer(new PacketStatusEffect(livingBase), (EntityPlayerMP) livingBase);
+
+				this.markClean();
+			}
+			else
+			{
+				// hack -- Never send to clients
+				this.markClean();
+			}
 		}
 	}
 
