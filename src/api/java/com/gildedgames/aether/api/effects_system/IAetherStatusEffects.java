@@ -16,11 +16,11 @@ public interface IAetherStatusEffects extends NBT
 	int TICKS_PER_SECOND = 20;
 
 	/**
-	 * Called every Tick.
+	 * Called every tick.
 	 * Handle's applying and managing effects and reducing buildup.
 	 * @param livingBase EntityLivingBase being updated.
 	 */
-	void Tick(EntityLivingBase livingBase);
+	void tick(EntityLivingBase livingBase);
 
 	/**
 	 * Apply the status effect.

@@ -56,7 +56,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	}
 
 	@Override
-	public void Tick(EntityLivingBase livingBase)
+	public void tick(EntityLivingBase livingBase)
 	{
 		if (this.effectBuildup < this.potentialBuildup)
 		{

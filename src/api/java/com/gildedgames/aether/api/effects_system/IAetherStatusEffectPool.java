@@ -10,14 +10,9 @@ public interface IAetherStatusEffectPool
 {
 
 	/**
-	 * Initialize and add all status effects.
+	 * Call supplied tick() method for all StatusEffects in pool.
 	 */
-	void initPool();
-
-	/**
-	 * Call supplied Tick() method for all StatusEffects in pool.
-	 */
-	void Tick();
+	void tick();
 
 	/**
 	 * Handles all calls to add buildup to effects.

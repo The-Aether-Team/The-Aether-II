@@ -59,7 +59,7 @@ public class CapabilityManagerAether
 
 		if (statusEffectPool != null)
 		{
-			statusEffectPool.Tick();
+			statusEffectPool.tick();
 		}
 	}
 
