@@ -5,7 +5,7 @@ import com.gildedgames.aether.api.player.IPlayerAetherModule;
 import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.*;
-import com.gildedgames.aether.common.capabilities.entity.player.modules.guidebook.PlayerTGEventsModule;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.guidebook.PlayerTGModule;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.*;
 import com.gildedgames.aether.common.world.instances.necromancer_tower.NecromancerTowerInstance;
@@ -81,7 +81,7 @@ public class PlayerAether implements IPlayerAether
 		this.registerModule(new PlayerSectorModule(this));
 		this.registerModule(new PlayerTradeModule(this));
 		this.registerModule(new PlayerCaveSpawnModule(this));
-		this.registerModule(new PlayerTGEventsModule(this));
+		this.registerModule(new PlayerTGModule(this));
 	}
 
 	@Override

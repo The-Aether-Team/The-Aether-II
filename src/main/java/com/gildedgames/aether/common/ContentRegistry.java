@@ -4,6 +4,8 @@ import com.gildedgames.aether.api.patron.PatronRewardRegistry;
 import com.gildedgames.aether.api.registrar.*;
 import com.gildedgames.aether.api.registry.IContentRegistry;
 import com.gildedgames.aether.api.world.preparation.IPrepRegistry;
+import com.gildedgames.aether.api.travellers_guidebook.ITGManager;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.CapabilityManagerAether;
 import com.gildedgames.aether.common.capabilities.item.EffectRegistry;
 import com.gildedgames.aether.common.containers.overlays.TabRegistry;
@@ -20,6 +22,8 @@ import com.gildedgames.aether.common.recipes.simple.SimpleCraftingRegistry;
 import com.gildedgames.aether.common.shop.CurrencyRegistry;
 import com.gildedgames.aether.common.shop.ShopManager;
 import com.gildedgames.aether.common.util.ObjectHolderHelper;
+import com.gildedgames.aether.common.tab.guidebook.TabGuidebook;
+import com.gildedgames.aether.common.travellers_guidebook.TGManager;
 import com.gildedgames.aether.common.util.helpers.PerfHelper;
 import com.gildedgames.aether.common.world.aether.PrepAether;
 import com.gildedgames.aether.common.world.preparation.PrepRegistry;
@@ -51,6 +55,8 @@ public class ContentRegistry implements IContentRegistry, IOrbisServicesListener
 	private final EffectRegistry effectRegistry = new EffectRegistry();
 
 	private final DialogManager dialogManager = new DialogManager(true);
+
+	private final TGManager tgManager = new TGManager();
 
 	private final RecipeIndexRegistry craftableItemsIndex = new RecipeIndexRegistry();
 
@@ -140,6 +146,12 @@ public class ContentRegistry implements IContentRegistry, IOrbisServicesListener
 				this.craftableItemsIndex.registerRecipe(new RecipeWrapper(recipe));
 			}
 		}
+	}
+
+	@Override
+	public ITGManager tgManager()
+	{
+		return this.tgManager;
 	}
 
 	@Override

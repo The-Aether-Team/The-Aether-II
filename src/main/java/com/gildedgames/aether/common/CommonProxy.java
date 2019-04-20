@@ -24,6 +24,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.PlayerList;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.IThreadListener;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Teleporter;
@@ -82,6 +83,8 @@ public class CommonProxy implements IAetherServices
 	{
 		this.contentRegistry.init();
 
+		this.contentRegistry.tgManager().registerEntry(new ResourceLocation("aether:test_entry"));
+
 		MinecraftForge.EVENT_BUS.register(AetherCore.CONFIG);
 	}
 
@@ -90,12 +93,12 @@ public class CommonProxy implements IAetherServices
 		this.content().postInit();
 	}
 
-	public void onServerAboutToStart(FMLServerAboutToStartEvent event)
+	public void onServerAboutToStart(final FMLServerAboutToStartEvent event)
 	{
 		this.content().onServerAboutToStart();
 	}
 
-	public void onServerStarting(FMLServerStartingEvent event)
+	public void onServerStarting(final FMLServerStartingEvent event)
 	{
 		this.content().onServerStarting();
 	}
@@ -114,27 +117,30 @@ public class CommonProxy implements IAetherServices
 		}
 	}
 
-	public void spawnCampfireStartParticles(World world, double x, double y, double z)
+	public void spawnCampfireStartParticles(final World world, final double x, final double y, final double z)
 	{
 
 	}
 
-	public void spawnCampfireParticles(World world, double x, double y, double z)
+	public void spawnCampfireParticles(final World world, final double x, final double y, final double z)
 	{
 
 	}
 
-	public void spawnSlashParticleFrom(World world, double x, double y, double z, double offsetX, double offsetY, double offsetZ)
+	public void spawnSlashParticleFrom(
+			final World world, final double x, final double y, final double z, final double offsetX, final double offsetY, final double offsetZ)
 	{
 
 	}
 
-	public void spawnPierceParticleFrom(World world, double x, double y, double z, double offsetX, double offsetY, double offsetZ)
+	public void spawnPierceParticleFrom(
+			final World world, final double x, final double y, final double z, final double offsetX, final double offsetY, final double offsetZ)
 	{
 
 	}
 
-	public void spawnImpactParticleFrom(World world, double x, double y, double z, double offsetX, double offsetY, double offsetZ)
+	public void spawnImpactParticleFrom(
+			final World world, final double x, final double y, final double z, final double offsetX, final double offsetY, final double offsetZ)
 	{
 
 	}
@@ -211,7 +217,7 @@ public class CommonProxy implements IAetherServices
 				/** Strange flag that needs to be set to prevent the NetHandlerPlayServer instances from resetting your position **/
 				player.invulnerableDimensionChange = true;
 
-				PostAetherTravelEvent event = new PostAetherTravelEvent(entity);
+				final PostAetherTravelEvent event = new PostAetherTravelEvent(entity);
 				MinecraftForge.EVENT_BUS.post(event);
 			}
 
