@@ -40,6 +40,8 @@ public class ContentRegistry implements IContentRegistry, IOrbisServicesListener
 
 	private final DialogManager dialogManager = new DialogManager(true);
 
+	private final TGManager tgManager = new TGManager();
+
 	private final RecipeIndexRegistry craftableItemsIndex = new RecipeIndexRegistry();
 
 	private final SimpleCraftingRegistry simpleCraftingRegistry = new SimpleCraftingRegistry();
@@ -108,15 +110,21 @@ public class ContentRegistry implements IContentRegistry, IOrbisServicesListener
 	{
 		this.craftableItemsIndex.clearRegistrations();
 
-		for (IRecipe recipe : ForgeRegistries.RECIPES)
+		for (final IRecipe recipe : ForgeRegistries.RECIPES)
 		{
-			ResourceLocation loc = Item.REGISTRY.getNameForObject(recipe.getRecipeOutput().getItem());
+			final ResourceLocation loc = Item.REGISTRY.getNameForObject(recipe.getRecipeOutput().getItem());
 
 			if (loc != null && loc.getNamespace().equals(AetherCore.MOD_ID))
 			{
 				this.craftableItemsIndex.registerRecipe(new RecipeWrapper(recipe));
 			}
 		}
+	}
+
+	@Override
+	public ITGManager tgManager()
+	{
+		return this.tgManager;
 	}
 
 	@Override
@@ -186,7 +194,7 @@ public class ContentRegistry implements IContentRegistry, IOrbisServicesListener
 	}
 
 	@Override
-	public void onStartProjectManager(IProjectManager projectManager)
+	public void onStartProjectManager(final IProjectManager projectManager)
 	{
 		BlueprintsAether.load(projectManager);
 	}
