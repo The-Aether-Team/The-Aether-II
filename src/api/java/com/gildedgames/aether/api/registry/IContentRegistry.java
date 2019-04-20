@@ -8,6 +8,7 @@ import com.gildedgames.aether.api.registry.recipes.IRecipeIndexRegistry;
 import com.gildedgames.aether.api.registry.tab.ITabRegistry;
 import com.gildedgames.aether.api.shop.ICurrencyRegistry;
 import com.gildedgames.aether.api.shop.IShopManager;
+import com.gildedgames.aether.api.travellers_guidebook.ITGManager;
 import com.gildedgames.aether.api.world.generation.ITemplateRegistry;
 
 /**
@@ -15,6 +16,11 @@ import com.gildedgames.aether.api.world.generation.ITemplateRegistry;
  */
 public interface IContentRegistry
 {
+	/**
+	 * @return The {@link ITGManager} provider for the Aether.
+	 */
+	ITGManager tgManager();
+
 	/**
 	 * @return The {@link IShopManager} provider for the Aether.
 	 */

@@ -29,27 +29,30 @@ import java.util.Random;
 public class ClientProxy extends CommonProxy
 {
 	@Override
-	public void spawnSlashParticleFrom(World world, double x, double y, double z, double offsetX, double offsetY, double offsetZ)
+	public void spawnSlashParticleFrom(
+			final World world, final double x, final double y, final double z, final double offsetX, final double offsetY, final double offsetZ)
 	{
-		ParticleSlash effect = new ParticleSlash(Minecraft.getMinecraft().getTextureManager(), world, x,
+		final ParticleSlash effect = new ParticleSlash(Minecraft.getMinecraft().getTextureManager(), world, x,
 				y, z, offsetX, 0.0D, offsetZ);
 
 		Minecraft.getMinecraft().effectRenderer.addEffect(effect);
 	}
 
 	@Override
-	public void spawnPierceParticleFrom(World world, double x, double y, double z, double offsetX, double offsetY, double offsetZ)
+	public void spawnPierceParticleFrom(
+			final World world, final double x, final double y, final double z, final double offsetX, final double offsetY, final double offsetZ)
 	{
-		ParticlePierce effect = new ParticlePierce(Minecraft.getMinecraft().getTextureManager(), world, x,
+		final ParticlePierce effect = new ParticlePierce(Minecraft.getMinecraft().getTextureManager(), world, x,
 				y, z, offsetX, 0.0D, offsetZ);
 
 		Minecraft.getMinecraft().effectRenderer.addEffect(effect);
 	}
 
 	@Override
-	public void spawnImpactParticleFrom(World world, double x, double y, double z, double offsetX, double offsetY, double offsetZ)
+	public void spawnImpactParticleFrom(
+			final World world, final double x, final double y, final double z, final double offsetX, final double offsetY, final double offsetZ)
 	{
-		ParticleImpact effect = new ParticleImpact(Minecraft.getMinecraft().getTextureManager(), world, x,
+		final ParticleImpact effect = new ParticleImpact(Minecraft.getMinecraft().getTextureManager(), world, x,
 				y, z, offsetX, 0.0D, offsetZ);
 
 		Minecraft.getMinecraft().effectRenderer.addEffect(effect);
@@ -110,6 +113,7 @@ public class ClientProxy extends CommonProxy
 		AetherAPI.content().tabs().getInventoryGroup().registerClientTab(new TabLoreTome.Client());
 
 		AetherAPI.content().dialog().attachReloadListener();
+		AetherAPI.content().tgManager().attachReloadListener();
 	}
 
 	@Override
@@ -134,13 +138,13 @@ public class ClientProxy extends CommonProxy
 	}
 
 	@Override
-	public void spawnCampfireStartParticles(World world, double x, double y, double z)
+	public void spawnCampfireStartParticles(final World world, final double x, final double y, final double z)
 	{
-		Random r = world.rand;
+		final Random r = world.rand;
 
 		for (int i = 0; i < 50; i++)
 		{
-			double range = r.nextDouble() * 0.9;
+			final double range = r.nextDouble() * 0.9;
 
 			if (r.nextInt(10) == 0)
 			{
@@ -169,13 +173,13 @@ public class ClientProxy extends CommonProxy
 	}
 
 	@Override
-	public void spawnCampfireParticles(World world, double x, double y, double z)
+	public void spawnCampfireParticles(final World world, final double x, final double y, final double z)
 	{
-		Random r = world.rand;
+		final Random r = world.rand;
 
 		for (int i = 0; i < 10; i++)
 		{
-			double range = r.nextDouble() * 0.75;
+			final double range = r.nextDouble() * 0.75;
 
 			if (r.nextInt(800) == 0)
 			{

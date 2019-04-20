@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.registry;
 
 import com.gildedgames.aether.api.patron.PatronRewardRegistry;
 import com.gildedgames.aether.api.registry.IContentRegistry;
-import com.gildedgames.aether.common.tab.guidebook.TabGuidebook;
+import com.gildedgames.aether.api.travellers_guidebook.ITGManager;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.CapabilityManagerAether;
 import com.gildedgames.aether.common.capabilities.item.EffectRegistry;
@@ -15,6 +15,8 @@ import com.gildedgames.aether.common.recipes.simple.RecipeIndexRegistry;
 import com.gildedgames.aether.common.recipes.simple.RecipeWrapper;
 import com.gildedgames.aether.common.registry.content.*;
 import com.gildedgames.aether.common.shop.ShopManager;
+import com.gildedgames.aether.common.tab.guidebook.TabGuidebook;
+import com.gildedgames.aether.common.travellers_guidebook.TGManager;
 import com.gildedgames.aether.common.util.helpers.PerfHelper;
 import com.gildedgames.orbis.lib.IOrbisServicesListener;
 import com.gildedgames.orbis.lib.OrbisLib;
@@ -39,6 +41,8 @@ public class ContentRegistry implements IContentRegistry, IOrbisServicesListener
 	private final EffectRegistry effectRegistry = new EffectRegistry();
 
 	private final DialogManager dialogManager = new DialogManager(true);
+
+	private final TGManager tgManager = new TGManager();
 
 	private final RecipeIndexRegistry craftableItemsIndex = new RecipeIndexRegistry();
 
@@ -108,15 +112,21 @@ public class ContentRegistry implements IContentRegistry, IOrbisServicesListener
 	{
 		this.craftableItemsIndex.clearRegistrations();
 
-		for (IRecipe recipe : ForgeRegistries.RECIPES)
+		for (final IRecipe recipe : ForgeRegistries.RECIPES)
 		{
-			ResourceLocation loc = Item.REGISTRY.getNameForObject(recipe.getRecipeOutput().getItem());
+			final ResourceLocation loc = Item.REGISTRY.getNameForObject(recipe.getRecipeOutput().getItem());
 
 			if (loc != null && loc.getNamespace().equals(AetherCore.MOD_ID))
 			{
 				this.craftableItemsIndex.registerRecipe(new RecipeWrapper(recipe));
 			}
 		}
+	}
+
+	@Override
+	public ITGManager tgManager()
+	{
+		return this.tgManager;
 	}
 
 	@Override
@@ -186,7 +196,7 @@ public class ContentRegistry implements IContentRegistry, IOrbisServicesListener
 	}
 
 	@Override
-	public void onStartProjectManager(IProjectManager projectManager)
+	public void onStartProjectManager(final IProjectManager projectManager)
 	{
 		BlueprintsAether.load(projectManager);
 	}
