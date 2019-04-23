@@ -59,7 +59,8 @@ The Aether II project makes use of crowd sourced translations. The Aether is ava
 
 - :cn: **Simplified Chinese**: Contributed by ETStareak
 
-If your name is missing from the list above, please contact us. Unfortunately, if you're wanting to submit additional translations, you will need to open a merge request to this repository. We plan to bring back our crowd-sourced translation center soon, but no ETA has been made yet.
+The above list is incomplete, and as such, if your name is missing from it, please contact us. **You can help translate The Aether II Mod to additional languages by joining our team of avid translators [here](https://aether.oneskyapp.com/collaboration/project?id=158537).**
+
 
 ### :nut_and_bolt: Open-source projects used
 
