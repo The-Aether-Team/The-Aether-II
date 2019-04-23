@@ -66,39 +66,53 @@ sourceSets {
     }
 }
 
+// This is an ugly hack to make Phosphor appear before Orbis-Lib
+// If we don't do this, then Forge will explode for some unknown reason and not be able to handle dependency resolution
+def shadedJars = configurations.shaded.files
+        .findAll { it.name.contains("-universal.jar") }
+        .toList()
+        .reverse()
+
+def genericJarManifest = {
+    attributes "ContainedDeps": shadedJars.collect { it.name }.join(' ')
+    attributes "FMLAT": "aether_at.cfg"
+}
+
 jar {
     from sourceSets.api.output
     from sourceSets.main.output
 
-    manifest.mainAttributes(
-            "FMLAT": "aether_at.cfg"
-    )
-
-    dependsOn ":orbis-lib:build"
-
-    gradle.projectsEvaluated({
-        // This is an ugly hack to make Phosphor appear before Orbis-Lib
-        // If we don't do this, then Forge will explode for some unknown reason and not be able to handle dependency resolution
-        def artifacts = configurations.shaded.files
-                .findAll { it.name.contains("-universal.jar") }
-                .toList()
-                .reverse()
-
-        from(artifacts)
-
-        manifest.mainAttributes(
-                "ContainedDeps": artifacts.collect { it.name }.join(' '),
-                "FMLAT": "aether_at.cfg"
-        )
-    })
-
     classifier "universal"
+
+    from shadedJars
+
+    manifest genericJarManifest
 }
 
 task apiJar(type: Jar) {
     classifier = "api"
 
     from sourceSets.api.output
+}
+
+task serverJar(type: Jar) {
+    classifier = "server"
+
+    from sourceSets.api.output
+    from (sourceSets.main.output) {
+        // Exclude client assets
+        exclude 'assets/*/blockstates/**'
+        exclude 'assets/*/sounds/**'
+        exclude 'assets/*/textures/**'
+        exclude 'assets/*/models/**'
+
+        // Exclude client code
+        exclude 'com/gildedgames/aether/client/**'
+    }
+
+    from shadedJars
+
+    manifest genericJarManifest
 }
 
 minecraft {
@@ -147,7 +161,7 @@ if (System.getenv("JARSIGN_SECRETS_FILE") != null) {
     def secrets = new Properties()
     secrets.load(secretsFile.newReader())
 
-    [jar, apiJar].each { jarTask ->
+    [jar, apiJar, serverJar].each { jarTask ->
         def task = task(jarTask.name + 'Sign', type: SignJar) {
             keyStore = System.getenv("JARSIGN_KEYSTORE_FILE")
             alias = secrets.alias
@@ -162,4 +176,7 @@ if (System.getenv("JARSIGN_SECRETS_FILE") != null) {
     }
 }
 
+build.dependsOn ":orbis-lib:build"
+
 build.dependsOn apiJar
+build.dependsOn serverJar
