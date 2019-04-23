@@ -18,14 +18,29 @@ public class QuicksoilProcessor
 	{
 		final EntityLivingBase entity = event.getEntityLiving();
 
+		// Do not scan blocks beneath a player if they are not on the ground
 		if (!entity.onGround)
 		{
 			return;
 		}
 
+		// Do not affect entities in water
+		if (entity.isInWater())
+		{
+			return;
+		}
+
+		// Do not scan blocks beneath "sleeping" entities (entities which are not moving)
+		// Due to floating point inaccuracy, we use an epsilon of 0.001
+		if (Math.abs(entity.motionX + entity.motionY + entity.motionZ) < 0.001D)
+		{
+			return;
+		}
+
+		// Spectators should not be affected by quicksoil
 		if (entity instanceof EntityPlayer)
 		{
-			if (((EntityPlayer) entity).isSpectator() || entity.isInWater())
+			if (((EntityPlayer) entity).isSpectator())
 			{
 				return;
 			}
@@ -33,11 +48,12 @@ public class QuicksoilProcessor
 
 		AxisAlignedBB bb = entity.getEntityBoundingBox();
 
-		// Set height of bounding box to 0.5, offset 0.5 into ground
-		// Prevents scanning of all the blocks above an entity... performance optimizations
-		AxisAlignedBB bbBelow = new AxisAlignedBB(bb.minX, bb.minY - 0.5D, bb.minZ, bb.maxX, bb.minY, bb.maxZ);
+		// Set height of bounding box to 0.3, offset 0.3 into ground
+		// Prevents scanning of all the blocks above an entity
+		AxisAlignedBB bbBelow = new AxisAlignedBB(bb.minX - 0.1D, bb.minY - 0.3D, bb.minZ - 0.1D, bb.maxX + 0.1D, bb.minY, bb.maxZ + 0.1D);
 
-		if (WorldUtil.isBlockInAABB(bbBelow, entity.getEntityWorld(), BlocksAether.quicksoil.getDefaultState()))
+		// We assume the blocks under an entity are always loaded
+		if (WorldUtil.isBlockInAABB(bbBelow, entity.getEntityWorld(), BlocksAether.quicksoil.getDefaultState(), false))
 		{
 			AetherCore.PROXY.modifyEntityQuicksoil(entity);
 		}
