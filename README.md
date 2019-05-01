@@ -1,3 +1,5 @@
+![Banner image](https://gitea.gildedgames.com/GildedGames/The-Aether-II/raw/branch/1.12.2/doc/banner.webp)
+
 # The Aether II
 [![Code license (GNU GPL 3.0)](https://img.shields.io/badge/license-GNU%20GPLv3-green.svg?style=flat-square)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 [![Asset license (CC BY-SA 4.0)](https://img.shields.io/badge/license-CC%20BY--SA%204.0-blue.svg?style=flat-square)](https://creativecommons.org/licenses/by-sa/4.0/)
