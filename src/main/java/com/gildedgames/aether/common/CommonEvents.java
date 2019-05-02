@@ -1,20 +1,15 @@
 package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.api.effects_system.EEffectIntensity;
-import com.gildedgames.aether.api.effects_system.IAetherStatusEffectIntensity;
-import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
 import com.gildedgames.aether.api.entity.EntityNPC;
 import com.gildedgames.aether.api.items.IItemProperties;
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
-import com.gildedgames.aether.common.capabilities.entity.effects.EffectsDamageSource;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTradeModule;
 import com.gildedgames.aether.common.containers.ContainerLoadingScreen;
-import com.gildedgames.aether.common.entities.effects.StatusEffectBleed;
 import com.gildedgames.aether.common.entities.living.mobs.EntityAechorPlant;
 import com.gildedgames.aether.common.entities.living.passive.EntityCarrionSprout;
 import com.gildedgames.aether.common.events.PostAetherTravelEvent;
@@ -457,20 +452,6 @@ public class CommonEvents
 	@SubscribeEvent
 	public static void onEntityAttacked(final LivingAttackEvent event)
 	{
-		DamageSource source = event.getEntityLiving().getLastDamageSource();
-
-		if (!(source instanceof EffectsDamageSource) && source != null)
-		{
-			if (source instanceof EntityDamageSource)
-			{
-				if (!event.getEntityLiving().isActiveItemStackBlocking())
-				{
-					int buildup = IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectBleed(event.getEntityLiving()), EEffectIntensity.MINOR);
-					IAetherStatusEffects.applyStatusEffect(event.getEntityLiving(), IAetherStatusEffects.effectTypes.BLEED, buildup);
-				}
-			}
-		}
-
 		if (!(event.getEntityLiving() instanceof EntityPlayer))
 		{
 			return;

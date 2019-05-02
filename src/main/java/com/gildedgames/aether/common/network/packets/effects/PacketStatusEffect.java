@@ -1,10 +1,13 @@
 package com.gildedgames.aether.common.network.packets.effects;
 
 import com.gildedgames.aether.api.AetherCapabilities;
+import com.gildedgames.aether.api.effects_system.IAetherStatusEffectPool;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -146,9 +149,18 @@ public class PacketStatusEffect implements IMessage
 
 			final Entity entity = player.world.getEntityByID(message.entityID);
 
-			if (entity != null && entity.hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
+			if (!(entity instanceof EntityLivingBase))
 			{
-				HashMap<String, IAetherStatusEffects> map = entity.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).getPool();
+				AetherCore.LOGGER.warn("Tried to set effects for non-living entity with ID " + message.entityID);
+
+				return null;
+			}
+
+			final EntityLivingBase entityLiving = (EntityLivingBase) entity;
+
+			if (entityLiving != null && entityLiving.hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
+			{
+				IAetherStatusEffectPool map = entityLiving.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null);
 
 				if (map != null)
 				{
@@ -156,7 +168,7 @@ public class PacketStatusEffect implements IMessage
 					{
 						for (StatusEffectData data : message.statusEffectData)
 						{
-							IAetherStatusEffects effect = map.get(IAetherStatusEffects.effectTypes.getEffectFromNumericValue(data.effectId).name);
+							IAetherStatusEffects effect = map.createEffect(IAetherStatusEffects.effectTypes.getEffectFromNumericValue(data.effectId).name, entityLiving);
 							effect.setBuildup(data.buildup);
 							effect.setApplied(data.isApplied);
 							effect.addResistance(data.resistance - 1.0);

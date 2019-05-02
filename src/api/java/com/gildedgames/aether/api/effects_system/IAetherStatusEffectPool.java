@@ -1,5 +1,7 @@
 package com.gildedgames.aether.api.effects_system;
 
+import net.minecraft.entity.EntityLivingBase;
+
 import javax.annotation.Nonnegative;
 import java.util.HashMap;
 
@@ -85,6 +87,8 @@ public interface IAetherStatusEffectPool
 	 * Cures all active effects by modifying their active effect time to 0.
 	 */
 	void cureAllActiveEffects();
+
+	IAetherStatusEffects createEffect(String name, EntityLivingBase entity);
 
 	HashMap<String, IAetherStatusEffects> getPool();
 }

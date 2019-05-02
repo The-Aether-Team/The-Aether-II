@@ -258,7 +258,8 @@ public class StatusEffectPool implements IAetherStatusEffectPool
 		return this.activeEffects.get(name);
 	}
 
-	private IAetherStatusEffects createEffect(String name, EntityLivingBase entity)
+	@Override
+	public IAetherStatusEffects createEffect(String name, EntityLivingBase entity)
 	{
 		return this.activeEffects.computeIfAbsent(name, (key) -> {
 			StatusEffectFactory factory = types.get(name);
