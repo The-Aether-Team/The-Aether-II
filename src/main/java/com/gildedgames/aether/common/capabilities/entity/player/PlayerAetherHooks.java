@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.capabilities.entity.player;
 
 import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
+import com.gildedgames.aether.api.effects_system.IAetherStatusEffectPool;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.AetherCore;
@@ -346,9 +347,11 @@ public class PlayerAetherHooks
 		{
 			if (event.getAmount() <= 1.5)
 			{
-				if (event.getEntityLiving().hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
+				IAetherStatusEffectPool statusEffectPool = event.getEntityLiving().getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null);
+
+				if (statusEffectPool != null)
 				{
-					if (event.getEntityLiving().getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).isEffectApplied(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING))
+					if (statusEffectPool.isEffectApplied(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING))
 					{
 						event.setCanceled(true);
 					}

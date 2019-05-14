@@ -119,9 +119,12 @@ public interface IAetherStatusEffects extends NBT
 	 */
 	static boolean applyStatusEffect(EntityLivingBase livingBase, effectTypes effectType, @Nonnegative int buildup)
 	{
-		if (livingBase.hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
+		IAetherStatusEffectPool effects = livingBase.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null);
+
+		if (effects != null)
 		{
-			livingBase.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).applyStatusEffect(effectType, buildup);
+			effects.applyStatusEffect(effectType, buildup);
+
 			return true;
 		}
 
@@ -130,9 +133,11 @@ public interface IAetherStatusEffects extends NBT
 
 	static boolean isEffectApplying(EntityLivingBase livingBase, effectTypes effectType)
 	{
-		if (livingBase.hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
+		IAetherStatusEffectPool effects = livingBase.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null);
+
+		if (effects != null)
 		{
-			return livingBase.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).isEffectApplied(effectType);
+			return effects.isEffectApplied(effectType);
 		}
 
 		return false;
@@ -140,9 +145,11 @@ public interface IAetherStatusEffects extends NBT
 
 	static boolean doesEffectHaveBuildup(EntityLivingBase livingBase, effectTypes effectType)
 	{
-		if (livingBase.hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
+		IAetherStatusEffectPool effects = livingBase.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null);
+
+		if (effects != null)
 		{
-			return (livingBase.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).getBuildupFromEffect(effectType) > 0);
+			return effects.getBuildupFromEffect(effectType) > 0;
 		}
 
 		return false;

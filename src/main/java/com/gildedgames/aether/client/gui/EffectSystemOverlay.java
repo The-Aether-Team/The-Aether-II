@@ -33,62 +33,58 @@ public class EffectSystemOverlay extends Gui
 	{
 		ScaledResolution res = new ScaledResolution(mc);
 
-		if (mc.player.hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
+		IAetherStatusEffectPool statusEffectPool = mc.player.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null);
+
+		if (statusEffectPool != null)
 		{
-			IAetherStatusEffectPool statusEffectPool = mc.player.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null);
 
-			if (statusEffectPool != null)
+			int numOfEffectsApplied = 0;
+
+			for (IAetherStatusEffects effect : statusEffectPool.getPool().values())
 			{
-
-				int numOfEffectsApplied = 0;
-
-				for (IAetherStatusEffects effect : statusEffectPool.getPool().values())
+				if (effect != null)
 				{
-					if (effect != null)
-					{
-						if (effect.getBuildup() > 0)
-						{
-							numOfEffectsApplied++;
-						}
-					}
-				}
-
-				float xPos = (res.getScaledWidth() / 2.0F) - (12.f * numOfEffectsApplied) + 4f;
-				float yPos = 2f;
-				int barWidth = 0;
-				float yPosShift = 6.0F;
-
-				int i = 0;
-
-				for (IAetherStatusEffects effect : statusEffectPool.getPool().values())
-				{
-					if (effect == null)
-					{
-						continue;
-					}
-
 					if (effect.getBuildup() > 0)
 					{
-						if (!effect.getIsEffectApplied())
-						{
-							this.renderBar(mc, BAR_OUTLINE, 22, 5, this.BAR_OUTLINE_TEXTURE_WIDTH, this.BAR_OUTLINE_TEXTURE_HEIGHT, xPos + (i * 23.f), yPos,
-									false, effect);
+						numOfEffectsApplied++;
+					}
+				}
+			}
 
-							barWidth = effect.getBuildup() / 5;
+			float xPos = (res.getScaledWidth() / 2.0F) - (12.f * numOfEffectsApplied) + 4f;
+			float yPos = 2f;
+			int barWidth = 0;
+			float yPosShift = 6.0F;
 
-							this.renderBar(mc, BAR_BUILDUP, barWidth, 3, this.BAR_TEXTURE_WIDTH, this.BAR_TEXTURE_HEIGHT, (xPos + 1F) + (i * 23.f), (yPos + 1F),
-									true, effect);
+			int i = 0;
 
-							yPosShift = 6.0F;
-						}
-						else {
-							yPosShift = 2.0f;
-						}
+			for (IAetherStatusEffects effect : statusEffectPool.getPool().values())
+			{
+				if (effect == null)
+				{
+					continue;
+				}
 
-						this.renderIcon(mc, this.getEffectIconFromType(effect.getEffectType()), 16,16,16,16,xPos + 2f + (i * 23.f),yPos+yPosShift);
-						i++;
+				if (effect.getBuildup() > 0)
+				{
+					if (!effect.getIsEffectApplied())
+					{
+						this.renderBar(mc, BAR_OUTLINE, 22, 5, this.BAR_OUTLINE_TEXTURE_WIDTH, this.BAR_OUTLINE_TEXTURE_HEIGHT, xPos + (i * 23.f), yPos,
+								false, effect);
+
+						barWidth = effect.getBuildup() / 5;
+
+						this.renderBar(mc, BAR_BUILDUP, barWidth, 3, this.BAR_TEXTURE_WIDTH, this.BAR_TEXTURE_HEIGHT, (xPos + 1F) + (i * 23.f), (yPos + 1F),
+								true, effect);
+
+						yPosShift = 6.0F;
+					}
+					else {
+						yPosShift = 2.0f;
 					}
 
+					this.renderIcon(mc, this.getEffectIconFromType(effect.getEffectType()), 16,16,16,16,xPos + 2f + (i * 23.f),yPos+yPosShift);
+					i++;
 				}
 
 			}

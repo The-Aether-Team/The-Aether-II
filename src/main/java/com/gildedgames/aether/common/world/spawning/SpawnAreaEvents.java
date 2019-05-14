@@ -16,16 +16,13 @@ public class SpawnAreaEvents
 	{
 		final EntityLivingBase entity = event.getEntityLiving();
 
-		if (entity.hasCapability(AetherCapabilities.ENTITY_SPAWNING_INFO, null))
-		{
-			final ISpawnSystem system = entity.getCapability(AetherCapabilities.SPAWN_SYSTEM, null);
+		final ISpawnSystem system = entity.getCapability(AetherCapabilities.SPAWN_SYSTEM, null);
 
-			if (system != null)
+		if (system != null)
+		{
+			for (ISpawnHandler handler : system.getSpawnHandlers())
 			{
-				for (ISpawnHandler handler : system.getSpawnHandlers())
-				{
-					handler.onLivingDeath(event);
-				}
+				handler.onLivingDeath(event);
 			}
 		}
 	}

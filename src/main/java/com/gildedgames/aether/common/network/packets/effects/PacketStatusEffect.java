@@ -158,21 +158,18 @@ public class PacketStatusEffect implements IMessage
 
 			final EntityLivingBase entityLiving = (EntityLivingBase) entity;
 
-			if (entityLiving != null && entityLiving.hasCapability(AetherCapabilities.STATUS_EFFECT_POOL, null))
-			{
-				IAetherStatusEffectPool map = entityLiving.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null);
+			IAetherStatusEffectPool map = entityLiving.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null);
 
-				if (map != null)
+			if (map != null)
+			{
+				if (message.statusEffectData != null)
 				{
-					if (message.statusEffectData != null)
+					for (StatusEffectData data : message.statusEffectData)
 					{
-						for (StatusEffectData data : message.statusEffectData)
-						{
-							IAetherStatusEffects effect = map.createEffect(IAetherStatusEffects.effectTypes.getEffectFromNumericValue(data.effectId).name, entityLiving);
-							effect.setBuildup(data.buildup);
-							effect.setApplied(data.isApplied);
-							effect.addResistance(data.resistance - 1.0);
-						}
+						IAetherStatusEffects effect = map.createEffect(IAetherStatusEffects.effectTypes.getEffectFromNumericValue(data.effectId).name, entityLiving);
+						effect.setBuildup(data.buildup);
+						effect.setApplied(data.isApplied);
+						effect.addResistance(data.resistance - 1.0);
 					}
 				}
 			}
