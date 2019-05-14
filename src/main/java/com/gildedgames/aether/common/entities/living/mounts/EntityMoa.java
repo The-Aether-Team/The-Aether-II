@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.entities.living.mounts;
 
 import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
+import com.gildedgames.aether.api.entity.IEntityEyesComponent;
 import com.gildedgames.aether.api.entity.IMount;
 import com.gildedgames.aether.api.entity.IMountProcessor;
 import com.gildedgames.aether.common.entities.ai.AetherNavigateGround;
@@ -45,7 +46,8 @@ import javax.annotation.Nullable;
 import javax.vecmath.Point3d;
 import java.util.Set;
 
-public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements EntityGroupMember, IMount, IFlyingMountData, IEntityMultiPart
+public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
+		implements EntityGroupMember, IMount, IFlyingMountData, IEntityMultiPart, IEntityEyesComponentProvider
 {
 
 	private static final Set<Item> TEMPTATION_ITEMS = Sets
@@ -85,6 +87,8 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	private final AetherMultiPartEntity body = new AetherMultiPartMount(this, "body", 1.1F, 1.325F);
 
 	private final AetherMultiPartEntity tail = new AetherMultiPartMount(this, "tail", 1.1F, 0.6F);
+
+	private final IEntityEyesComponent eyes = new EntityEyesComponent(this);
 
 	public float wingRotation, destPos, prevDestPos, prevWingRotation;
 
@@ -270,6 +274,8 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 	public void onUpdate()
 	{
 		super.onUpdate();
+
+		this.eyes.update();
 
 		if (this.isJumping)
 		{
@@ -860,4 +866,9 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool> implements Entit
 		return stack != null && TEMPTATION_ITEMS.contains(stack.getItem());
 	}
 
+	@Override
+	public IEntityEyesComponent getEyes()
+	{
+		return this.eyes;
+	}
 }

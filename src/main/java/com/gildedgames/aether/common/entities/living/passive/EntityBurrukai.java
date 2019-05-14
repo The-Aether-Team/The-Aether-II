@@ -4,10 +4,13 @@ import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
 import com.gildedgames.aether.api.effects_system.EEffectIntensity;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffectIntensity;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
+import com.gildedgames.aether.api.entity.IEntityEyesComponent;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.entities.ai.*;
 import com.gildedgames.aether.common.entities.effects.StatusEffectFracture;
+import com.gildedgames.aether.common.entities.util.EntityEyesComponent;
+import com.gildedgames.aether.common.entities.util.IEntityEyesComponentProvider;
 import com.gildedgames.aether.common.entities.util.multipart.AetherMultiPartEntity;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
@@ -32,7 +35,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.Set;
 
-public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPart
+public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPart, IEntityEyesComponentProvider
 {
 
 	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(ItemsAether.brettl_grass);
@@ -42,6 +45,8 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 	private final MultiPartEntityPart head = new AetherMultiPartEntity(this, "head", .8F, 1.1F);
 
 	private EntityAIRamAttack ramAttack;
+
+	private final IEntityEyesComponent eyes = new EntityEyesComponent(this);
 
 	public EntityBurrukai(final World world)
 	{
@@ -104,6 +109,8 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 	public void onLivingUpdate()
 	{
 		super.onLivingUpdate();
+
+		this.eyes.update();
 
 		double prevHeadX = this.head.posX;
 		double prevHeadY = this.head.posY;
@@ -282,4 +289,9 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 		}
 	}
 
+	@Override
+	public IEntityEyesComponent getEyes()
+	{
+		return this.eyes;
+	}
 }

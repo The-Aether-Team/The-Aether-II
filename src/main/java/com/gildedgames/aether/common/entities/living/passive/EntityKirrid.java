@@ -1,12 +1,15 @@
 package com.gildedgames.aether.common.entities.living.passive;
 
 import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
+import com.gildedgames.aether.api.entity.IEntityEyesComponent;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.entities.ai.AetherNavigateGround;
 import com.gildedgames.aether.common.entities.ai.EntityAIHideFromRain;
 import com.gildedgames.aether.common.entities.ai.EntityAIRestrictRain;
 import com.gildedgames.aether.common.entities.ai.EntityAIUnstuckBlueAercloud;
 import com.gildedgames.aether.common.entities.ai.kirrid.EntityAIEatAetherGrass;
+import com.gildedgames.aether.common.entities.util.EntityEyesComponent;
+import com.gildedgames.aether.common.entities.util.IEntityEyesComponentProvider;
 import com.gildedgames.aether.common.entities.util.multipart.AetherMultiPartShearable;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
@@ -36,7 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class EntityKirrid extends EntitySheep implements IEntityMultiPart
+public class EntityKirrid extends EntitySheep implements IEntityMultiPart, IEntityEyesComponentProvider
 {
 	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(ItemsAether.valkyrie_wings);
 
@@ -47,6 +50,8 @@ public class EntityKirrid extends EntitySheep implements IEntityMultiPart
 	private final MultiPartEntityPart head = new AetherMultiPartShearable(this, "head", 0.7F, 0.8F);
 
 	private final MultiPartEntityPart back = new AetherMultiPartShearable(this, "back", 0.8F, 1.5F);
+
+	private final IEntityEyesComponent eyes = new EntityEyesComponent(this);
 
 	protected EntityAIEatAetherGrass entityAIEatGrass;
 
@@ -91,6 +96,8 @@ public class EntityKirrid extends EntitySheep implements IEntityMultiPart
 	public void onLivingUpdate()
 	{
 		super.onLivingUpdate();
+
+		this.eyes.update();
 
 		for (int i = 0; i < this.parts.length; i++)
 		{
@@ -247,4 +254,9 @@ public class EntityKirrid extends EntitySheep implements IEntityMultiPart
 		return ret;
 	}
 
+	@Override
+	public IEntityEyesComponent getEyes()
+	{
+		return this.eyes;
+	}
 }

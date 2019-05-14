@@ -2,7 +2,6 @@ package com.gildedgames.aether.common.capabilities;
 
 import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffectPool;
-import com.gildedgames.aether.api.entity.IEntityInfo;
 import com.gildedgames.aether.api.entity.spawning.ISpawningInfo;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.world.ISpawnSystem;
@@ -10,8 +9,6 @@ import com.gildedgames.aether.api.world.islands.precipitation.IPrecipitationMana
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.effects.StatusEffectPool;
 import com.gildedgames.aether.common.capabilities.entity.effects.StatusEffectPoolProvider;
-import com.gildedgames.aether.common.capabilities.entity.info.EntityInfo;
-import com.gildedgames.aether.common.capabilities.entity.info.EntityInfoProvider;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherProvider;
 import com.gildedgames.aether.common.capabilities.entity.spawning.EntitySpawningInfo;
@@ -38,7 +35,6 @@ public class CapabilityManagerAether
 		CapabilityManager.INSTANCE.register(IPlayerAether.class, new PlayerAether.Storage(), PlayerAether::new);
 		CapabilityManager.INSTANCE.register(ISpawningInfo.class, new EntitySpawningInfo.Storage(), EntitySpawningInfo::new);
 		CapabilityManager.INSTANCE.register(ISpawnSystem.class, new SpawnSystem.Storage(), SpawnSystem::new);
-		CapabilityManager.INSTANCE.register(IEntityInfo.class, new EntityInfo.Storage(), EntityInfo::new);
 		CapabilityManager.INSTANCE.register(IPlacementFlagCapability.class, new PlacementFlagCapability.Storage(), PlacementFlagCapability::new);
 		CapabilityManager.INSTANCE.register(IPrecipitationManager.class, new PrecipitationManagerImpl.Storage(), PrecipitationManagerImpl::new);
 		CapabilityManager.INSTANCE.register(IAetherStatusEffectPool.class, new StatusEffectPool.Storage(), StatusEffectPool::new);
@@ -48,13 +44,6 @@ public class CapabilityManagerAether
 	@SubscribeEvent
 	public static void onUpdate(LivingEvent.LivingUpdateEvent event)
 	{
-		IEntityInfo info = EntityInfo.get(event.getEntityLiving());
-
-		if (info != null)
-		{
-			info.update();
-		}
-
 		IAetherStatusEffectPool statusEffectPool = StatusEffectPool.get(event.getEntityLiving());
 
 		if (statusEffectPool != null)
@@ -68,17 +57,17 @@ public class CapabilityManagerAether
 	{
 		if (event.getObject() instanceof EntityLivingBase)
 		{
-			EntityLivingBase living = (EntityLivingBase) event.getObject();
-
-			event.addCapability(AetherCore.getResource("Info"), new EntityInfoProvider((EntityLivingBase) event.getObject()));
 			event.addCapability(AetherCore.getResource("StatusEffects"), new StatusEffectPoolProvider((EntityLivingBase) event.getObject()));
 		}
-
-		event.addCapability(AetherCore.getResource("EntityInfo"), new EntitySpawningInfoProvider());
 
 		if (event.getObject() instanceof EntityPlayer)
 		{
 			event.addCapability(AetherCore.getResource("PlayerData"), new PlayerAetherProvider(new PlayerAether((EntityPlayer) event.getObject())));
+		}
+		else
+		{
+			// Only attach to non-players
+			event.addCapability(AetherCore.getResource("EntityInfo"), new EntitySpawningInfoProvider());
 		}
 	}
 

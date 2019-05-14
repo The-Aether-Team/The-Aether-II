@@ -1,7 +1,7 @@
 package com.gildedgames.aether.client.renderer;
 
-import com.gildedgames.aether.api.entity.IEntityInfo;
-import com.gildedgames.aether.common.capabilities.entity.info.EntityInfo;
+import com.gildedgames.aether.api.entity.IEntityEyesComponent;
+import com.gildedgames.aether.common.entities.util.IEntityEyesComponentProvider;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import com.google.common.collect.Lists;
 import net.minecraft.client.model.ModelBase;
@@ -67,10 +67,10 @@ public class EyeUtil
 			}
 		}
 
-		IEntityInfo info = EntityInfo.get(entity);
-
-		if (info != null)
+		if (entity instanceof IEntityEyesComponentProvider)
 		{
+			IEntityEyesComponent info = ((IEntityEyesComponentProvider) entity).getEyes();
+
 			if (info.getTicksEyesClosed() <= 0)
 			{
 				leftEye.isHidden = false;
@@ -147,6 +147,10 @@ public class EyeUtil
 
 				GlStateManager.popMatrix();
 			}
+		}
+		else
+		{
+			throw new IllegalStateException("Entity " + entity + " does not implement IEntityEyesComponent");
 		}
 
 		for (ModelRenderer box : boxesToUnhide)

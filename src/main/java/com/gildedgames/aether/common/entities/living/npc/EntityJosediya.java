@@ -1,11 +1,15 @@
 package com.gildedgames.aether.common.entities.living.npc;
 
 import com.gildedgames.aether.api.entity.EntityNPC;
+import com.gildedgames.aether.api.entity.IEntityEyesComponent;
 import com.gildedgames.aether.api.shop.IShopInstanceGroup;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.entities.util.EntityEyesComponent;
+import com.gildedgames.aether.common.entities.util.IEntityEyesComponentProvider;
 import com.gildedgames.orbis.lib.util.mc.NBTHelper;
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,9 +21,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EntityJosediya extends EntityNPC
+public class EntityJosediya extends EntityNPC implements IEntityEyesComponentProvider
 {
 	public static final ResourceLocation SPEAKER = AetherCore.getResource("josediya");
+
+	private final IEntityEyesComponent eyes = new EntityEyesComponent(this);
 
 	private BlockPos spawned;
 
@@ -106,6 +112,8 @@ public class EntityJosediya extends EntityNPC
 
 		super.onUpdate();
 
+		this.eyes.update();
+
 		this.posX = this.prevPosX;
 		this.posZ = this.prevPosZ;
 	}
@@ -152,4 +160,9 @@ public class EntityJosediya extends EntityNPC
 		return false;
 	}
 
+	@Override
+	public IEntityEyesComponent getEyes()
+	{
+		return this.eyes;
+	}
 }

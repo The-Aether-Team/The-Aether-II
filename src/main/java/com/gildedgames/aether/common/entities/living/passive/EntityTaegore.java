@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
 import com.gildedgames.aether.api.effects_system.EEffectIntensity;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffectIntensity;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
+import com.gildedgames.aether.api.entity.IEntityEyesComponent;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.entities.ai.AetherNavigateGround;
@@ -11,6 +12,8 @@ import com.gildedgames.aether.common.entities.ai.EntityAIHideFromRain;
 import com.gildedgames.aether.common.entities.ai.EntityAIRestrictRain;
 import com.gildedgames.aether.common.entities.ai.EntityAIUnstuckBlueAercloud;
 import com.gildedgames.aether.common.entities.effects.StatusEffectFracture;
+import com.gildedgames.aether.common.entities.util.EntityEyesComponent;
+import com.gildedgames.aether.common.entities.util.IEntityEyesComponentProvider;
 import com.gildedgames.aether.common.entities.util.multipart.AetherMultiPartEntity;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.LootTablesAether;
@@ -35,7 +38,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.Set;
 
-public class EntityTaegore extends EntityAetherAnimal implements IEntityMultiPart
+public class EntityTaegore extends EntityAetherAnimal implements IEntityMultiPart, IEntityEyesComponentProvider
 {
 
 	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(ItemsAether.wyndberry);
@@ -47,6 +50,8 @@ public class EntityTaegore extends EntityAetherAnimal implements IEntityMultiPar
 	private final MultiPartEntityPart[] parts;
 
 	private final MultiPartEntityPart head = new AetherMultiPartEntity(this, "head", .8F, .8F);
+
+	private final IEntityEyesComponent eyes = new EntityEyesComponent(this);
 
 	private double prevHeadX, prevHeadY, prevHeadZ;
 
@@ -182,6 +187,8 @@ public class EntityTaegore extends EntityAetherAnimal implements IEntityMultiPar
 	{
 		super.onLivingUpdate();
 
+		this.eyes.update();
+
 		this.prevHeadX = this.head.posX;
 		this.prevHeadY = this.head.posY;
 		this.prevHeadZ = this.head.posZ;
@@ -260,4 +267,9 @@ public class EntityTaegore extends EntityAetherAnimal implements IEntityMultiPar
 		}
 	}
 
+	@Override
+	public IEntityEyesComponent getEyes()
+	{
+		return this.eyes;
+	}
 }

@@ -1,15 +1,10 @@
-package com.gildedgames.aether.common.capabilities.entity.info;
+package com.gildedgames.aether.common.entities.util;
 
-import com.gildedgames.aether.api.AetherCapabilities;
-import com.gildedgames.aether.api.entity.IEntityInfo;
+import com.gildedgames.aether.api.entity.IEntityEyesComponent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
-import net.minecraftforge.common.capabilities.Capability;
 
-public class EntityInfo implements IEntityInfo
+public class EntityEyesComponent implements IEntityEyesComponent
 {
 
 	private Entity lookingAtEntity;
@@ -20,19 +15,9 @@ public class EntityInfo implements IEntityInfo
 
 	private int ticksLooking, ticksUntilLook;
 
-	public EntityInfo()
-	{
-
-	}
-
-	public EntityInfo(EntityLivingBase entity)
+	public EntityEyesComponent(EntityLivingBase entity)
 	{
 		this.entity = entity;
-	}
-
-	public static IEntityInfo get(EntityLivingBase entity)
-	{
-		return entity.getCapability(AetherCapabilities.ENTITY_INFO, null);
 	}
 
 	private void closeEyes()
@@ -102,20 +87,4 @@ public class EntityInfo implements IEntityInfo
 			this.lookingAtEntity = null;
 		}
 	}
-
-	public static class Storage implements Capability.IStorage<IEntityInfo>
-	{
-		@Override
-		public NBTBase writeNBT(Capability<IEntityInfo> capability, IEntityInfo instance, EnumFacing side)
-		{
-			return new NBTTagCompound();
-		}
-
-		@Override
-		public void readNBT(Capability<IEntityInfo> capability, IEntityInfo instance, EnumFacing side, NBTBase nbt)
-		{
-			NBTTagCompound tag = (NBTTagCompound) nbt;
-		}
-	}
-
 }

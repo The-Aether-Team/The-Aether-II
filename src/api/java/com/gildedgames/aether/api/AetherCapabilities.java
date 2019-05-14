@@ -2,7 +2,7 @@ package com.gildedgames.aether.api;
 
 import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffectPool;
-import com.gildedgames.aether.api.entity.IEntityInfo;
+import com.gildedgames.aether.api.entity.IEntityEyesComponent;
 import com.gildedgames.aether.api.entity.spawning.ISpawningInfo;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.world.ISpawnSystem;
@@ -24,8 +24,8 @@ public class AetherCapabilities
 	@CapabilityInject(ISpawnSystem.class)
 	public static final Capability<ISpawnSystem> SPAWN_SYSTEM = null;
 
-	@CapabilityInject(IEntityInfo.class)
-	public static final Capability<IEntityInfo> ENTITY_INFO = null;
+	@CapabilityInject(IEntityEyesComponent.class)
+	public static final Capability<IEntityEyesComponent> ENTITY_INFO = null;
 
 	@CapabilityInject(IPrecipitationManager.class)
 	public static final Capability<IPrecipitationManager> PRECIPITATION_MANAGER = null;

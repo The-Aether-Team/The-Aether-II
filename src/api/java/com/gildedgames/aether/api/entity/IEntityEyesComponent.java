@@ -2,7 +2,7 @@ package com.gildedgames.aether.api.entity;
 
 import net.minecraft.entity.Entity;
 
-public interface IEntityInfo
+public interface IEntityEyesComponent
 {
 	Entity lookingAtEntity();
 

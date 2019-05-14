@@ -2,12 +2,15 @@ package com.gildedgames.aether.common.entities.living.npc;
 
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.entity.EntityNPC;
+import com.gildedgames.aether.api.entity.IEntityEyesComponent;
 import com.gildedgames.aether.api.shop.IShopDefinition;
 import com.gildedgames.aether.api.shop.IShopInstance;
 import com.gildedgames.aether.api.shop.IShopInstanceGroup;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.entities.util.EntityBodyHelperNoRotation;
+import com.gildedgames.aether.common.entities.util.EntityEyesComponent;
+import com.gildedgames.aether.common.entities.util.IEntityEyesComponentProvider;
 import com.gildedgames.aether.common.shop.ShopInstanceGroup;
 import com.gildedgames.orbis.lib.util.mc.NBTHelper;
 import net.minecraft.block.Block;
@@ -26,11 +29,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.Optional;
 import java.util.Random;
 
-public class EntityEdison extends EntityNPC
+public class EntityEdison extends EntityNPC implements IEntityEyesComponentProvider
 {
 	public static final ResourceLocation SPEAKER = AetherCore.getResource("edison");
 
 	public static final ResourceLocation HOLIDAY_SHOP = AetherCore.getResource("edison_holiday");
+
+	private final IEntityEyesComponent eyes = new EntityEyesComponent(this);
 
 	private BlockPos spawned;
 
@@ -145,6 +150,8 @@ public class EntityEdison extends EntityNPC
 
 		super.onUpdate();
 
+		this.eyes.update();
+
 		this.posX = this.prevPosX;
 		this.posZ = this.prevPosZ;
 	}
@@ -215,4 +222,9 @@ public class EntityEdison extends EntityNPC
 		return false;
 	}
 
+	@Override
+	public IEntityEyesComponent getEyes()
+	{
+		return this.eyes;
+	}
 }
