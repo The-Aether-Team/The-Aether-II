@@ -176,7 +176,7 @@ if (System.getenv("JARSIGN_SECRETS_FILE") != null) {
     }
 }
 
-build.dependsOn ":orbis-lib:build"
-
 build.dependsOn apiJar
 build.dependsOn serverJar
+
+jar.dependsOn ":orbis-lib:build"
