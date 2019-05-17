@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.network.packets;
 
-import com.gildedgames.aether.client.renderer.particles.AetherParticles;
+import com.gildedgames.aether.common.registry.content.ParticlesAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
@@ -9,9 +9,9 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 public class PacketParticles implements IMessage
 {
-	private static final AetherParticles[] PARTICLES = AetherParticles.values();
+	private static final ParticlesAether[] PARTICLES = ParticlesAether.values();
 
-	private AetherParticles particle;
+	private ParticlesAether particle;
 
 	private double x, y, z, offsetX, offsetY, offsetZ;
 
@@ -20,7 +20,7 @@ public class PacketParticles implements IMessage
 
 	}
 
-	public PacketParticles(AetherParticles particle, double x, double y, double z, double offsetX, double offsetY, double offsetZ)
+	public PacketParticles(ParticlesAether particle, double x, double y, double z, double offsetX, double offsetY, double offsetZ)
 	{
 		this.particle = particle;
 

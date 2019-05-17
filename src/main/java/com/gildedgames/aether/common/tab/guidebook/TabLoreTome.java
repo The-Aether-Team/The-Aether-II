@@ -1,11 +1,10 @@
-package com.gildedgames.aether.client.gui.tab.guidebook;
+package com.gildedgames.aether.common.tab.guidebook;
 
 import com.gildedgames.aether.api.registry.tab.ITab;
 import com.gildedgames.aether.api.registry.tab.ITabClient;
 import com.gildedgames.aether.client.gui.container.guidebook.AbstractGuidebookPage;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,12 +13,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TabGuidebook implements ITab
+public class TabLoreTome implements ITab
 {
 	@Override
 	public String getUnlocalizedName()
 	{
-		return "tab.guidebook";
+		return "tab.guidebook.loretome";
 	}
 
 	@Override
@@ -27,13 +26,14 @@ public class TabGuidebook implements ITab
 	{
 		BlockPos pos = player.getPosition();
 
-		player.openGui(AetherCore.MOD_ID, AetherGuiHandler.INVENTORY_ID, player.world, pos.getX(), pos.getY(), pos.getZ());
+		player.openGui(AetherCore.MOD_ID, AetherGuiHandler.LORE_TOME_ID, player.world, pos.getX(), pos.getY(), pos.getZ());
 	}
 
 	@Override
 	public boolean isEnabled()
 	{
-		return !(Minecraft.getMinecraft().currentScreen instanceof AbstractGuidebookPage);
+		//return Minecraft.getMinecraft().currentScreen instanceof AbstractGuidebookPage;
+		return false;
 	}
 
 	@Override
@@ -43,9 +43,9 @@ public class TabGuidebook implements ITab
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static class Client extends TabGuidebook implements ITabClient
+	public static class Client extends TabLoreTome implements ITabClient
 	{
-		private static final ResourceLocation ICON = AetherCore.getResource("textures/gui/tabs/equipment.png");
+		private static final ResourceLocation ICON = AetherCore.getResource("textures/gui/tabs/guidebook_loretome.png");
 
 		@Override
 		public boolean isTabValid(GuiScreen gui)
@@ -61,7 +61,7 @@ public class TabGuidebook implements ITab
 		@Override
 		public ResourceLocation getIcon()
 		{
-			return TabGuidebook.Client.ICON;
+			return Client.ICON;
 		}
 	}
 }

@@ -1,10 +1,8 @@
-package com.gildedgames.aether.client.gui.tab;
+package com.gildedgames.aether.common.tab.guidebook;
 
 import com.gildedgames.aether.api.registry.tab.ITab;
 import com.gildedgames.aether.api.registry.tab.ITabClient;
 import com.gildedgames.aether.client.gui.container.guidebook.AbstractGuidebookPage;
-import com.gildedgames.aether.client.gui.container.guidebook.GuiGuidebookInventory;
-import com.gildedgames.aether.client.gui.misc.GuiPatronRewards;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
 import net.minecraft.client.gui.GuiScreen;
@@ -15,12 +13,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TabPatronRewards implements ITab
+public class TabStatus implements ITab
 {
 	@Override
 	public String getUnlocalizedName()
 	{
-		return "tab.patron_rewards";
+		return "tab.guidebook.status";
 	}
 
 	@Override
@@ -28,30 +26,31 @@ public class TabPatronRewards implements ITab
 	{
 		BlockPos pos = player.getPosition();
 
-		player.openGui(AetherCore.MOD_ID, AetherGuiHandler.PATRON_REWARDS_ID, player.world, pos.getX(), pos.getY(), pos.getZ());
+		player.openGui(AetherCore.MOD_ID, AetherGuiHandler.STATUS_ID, player.world, pos.getX(), pos.getY(), pos.getZ());
 	}
 
 	@Override
 	public boolean isEnabled()
 	{
-		return true;
+		//return Minecraft.getMinecraft().currentScreen instanceof AbstractGuidebookPage;
+		return false;
 	}
 
 	@Override
 	public boolean isRemembered()
 	{
-		return false;
+		return true;
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static class Client extends TabPatronRewards implements ITabClient
+	public static class Client extends TabStatus implements ITabClient
 	{
-		private static final ResourceLocation ICON = AetherCore.getResource("textures/gui/tabs/patron_rewards.png");
+		private static final ResourceLocation ICON = AetherCore.getResource("textures/gui/tabs/guidebook_status.png");
 
 		@Override
 		public boolean isTabValid(GuiScreen gui)
 		{
-			return gui instanceof GuiInventory || gui instanceof AbstractGuidebookPage || gui instanceof GuiPatronRewards;
+			return gui instanceof GuiInventory || gui instanceof AbstractGuidebookPage;
 		}
 
 		@Override

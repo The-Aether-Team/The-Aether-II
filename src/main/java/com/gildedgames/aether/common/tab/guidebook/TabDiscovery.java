@@ -1,4 +1,4 @@
-package com.gildedgames.aether.client.gui.tab.guidebook;
+package com.gildedgames.aether.common.tab.guidebook;
 
 import com.gildedgames.aether.api.registry.tab.ITab;
 import com.gildedgames.aether.api.registry.tab.ITabClient;

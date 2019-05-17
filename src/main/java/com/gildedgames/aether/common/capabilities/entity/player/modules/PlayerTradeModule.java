@@ -21,6 +21,8 @@ import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PlayerTradeModule extends PlayerAetherModule
 {
@@ -272,6 +274,7 @@ public class PlayerTradeModule extends PlayerAetherModule
 		}
 	}
 
+	@SideOnly(Side.CLIENT)
 	public void updateClientState(int state)
 	{
 		Minecraft mc = Minecraft.getMinecraft();
@@ -298,18 +301,23 @@ public class PlayerTradeModule extends PlayerAetherModule
 
 		if (this.getWorld().isRemote)
 		{
-			GuiScreen currentScreen = Minecraft.getMinecraft().currentScreen;
-
-			if (currentScreen instanceof GuiTrade)
-			{
-				ContainerTrade tradeContainer = (ContainerTrade) ((GuiTrade) currentScreen).inventorySlots;
-
-				tradeContainer.updateSlots(size);
-			}
+			this.setTradeSlotsClient(size);
 		}
 		else if (this.getEntity().openContainer instanceof ContainerTrade)
 		{
 			ContainerTrade tradeContainer = (ContainerTrade) this.getEntity().openContainer;
+
+			tradeContainer.updateSlots(size);
+		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	private void setTradeSlotsClient(int size) {
+		GuiScreen currentScreen = Minecraft.getMinecraft().currentScreen;
+
+		if (currentScreen instanceof GuiTrade)
+		{
+			ContainerTrade tradeContainer = (ContainerTrade) ((GuiTrade) currentScreen).inventorySlots;
 
 			tradeContainer.updateSlots(size);
 		}

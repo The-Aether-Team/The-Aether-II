@@ -2,7 +2,7 @@ package com.gildedgames.aether.client;
 
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.client.gui.misc.CustomLoadingRenderer;
-import com.gildedgames.aether.client.gui.tab.guidebook.*;
+import com.gildedgames.aether.common.tab.guidebook.*;
 import com.gildedgames.aether.client.renderer.AetherRenderers;
 import com.gildedgames.aether.client.renderer.ClientRenderHandler;
 import com.gildedgames.aether.client.renderer.particles.ParticleImpact;

@@ -1,38 +1,39 @@
-package com.gildedgames.aether.client.gui.tab;
+package com.gildedgames.aether.common.tab.guidebook;
 
 import com.gildedgames.aether.api.registry.tab.ITab;
 import com.gildedgames.aether.api.registry.tab.ITabClient;
+import com.gildedgames.aether.client.gui.container.guidebook.AbstractGuidebookPage;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.network.AetherGuiHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-/**
- * The {@link ITab} representation of the Minecraft's vanilla Inventory {@link GuiScreen}
- * @author Brandon Pearce
- */
-public class TabBackpack implements ITab
+public class TabEquipment implements ITab
 {
 	@Override
 	public String getUnlocalizedName()
 	{
-		return "tab.backpack.name";
+		return "tab.guidebook.equipment";
 	}
 
 	@Override
 	public void onOpen(EntityPlayer player)
 	{
+		BlockPos pos = player.getPosition();
+
+		player.openGui(AetherCore.MOD_ID, AetherGuiHandler.INVENTORY_ID, player.world, pos.getX(), pos.getY(), pos.getZ());
 	}
 
 	@Override
 	public boolean isEnabled()
 	{
-		return true;
+		return Minecraft.getMinecraft().currentScreen instanceof AbstractGuidebookPage;
 	}
 
 	@Override
@@ -42,21 +43,14 @@ public class TabBackpack implements ITab
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static class Client extends TabBackpack implements ITabClient
+	public static class Client extends TabEquipment implements ITabClient
 	{
-		private static final ResourceLocation ICON = AetherCore.getResource("textures/gui/tabs/backpack.png");
+		private static final ResourceLocation ICON = AetherCore.getResource("textures/gui/tabs/guidebook_equipment.png");
 
 		@Override
 		public boolean isTabValid(GuiScreen gui)
 		{
-			Class<? extends GuiScreen> clazz = gui.getClass();
-			return clazz == GuiInventory.class || clazz == GuiContainerCreative.class;
-		}
-
-		@Override
-		public void onOpen(EntityPlayer player)
-		{
-			Minecraft.getMinecraft().displayGuiScreen(new GuiInventory(player));
+			return gui instanceof GuiInventory || gui instanceof AbstractGuidebookPage;
 		}
 
 		@Override
@@ -67,7 +61,7 @@ public class TabBackpack implements ITab
 		@Override
 		public ResourceLocation getIcon()
 		{
-			return TabBackpack.Client.ICON;
+			return Client.ICON;
 		}
 	}
 }

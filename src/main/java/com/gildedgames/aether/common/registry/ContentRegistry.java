@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.registry;
 
 import com.gildedgames.aether.api.patron.PatronRewardRegistry;
 import com.gildedgames.aether.api.registry.IContentRegistry;
-import com.gildedgames.aether.client.gui.tab.guidebook.TabGuidebook;
+import com.gildedgames.aether.common.tab.guidebook.TabGuidebook;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.CapabilityManagerAether;
 import com.gildedgames.aether.common.capabilities.item.EffectRegistry;

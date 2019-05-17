@@ -1,4 +1,4 @@
-package com.gildedgames.aether.client.gui.tab.guidebook;
+package com.gildedgames.aether.common.tab.guidebook;
 
 import com.gildedgames.aether.api.registry.tab.ITab;
 import com.gildedgames.aether.api.registry.tab.ITabClient;
@@ -14,12 +14,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TabEquipment implements ITab
+public class TabGuidebook implements ITab
 {
 	@Override
 	public String getUnlocalizedName()
 	{
-		return "tab.guidebook.equipment";
+		return "tab.guidebook";
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class TabEquipment implements ITab
 	@Override
 	public boolean isEnabled()
 	{
-		return Minecraft.getMinecraft().currentScreen instanceof AbstractGuidebookPage;
+		return !(Minecraft.getMinecraft().currentScreen instanceof AbstractGuidebookPage);
 	}
 
 	@Override
@@ -43,9 +43,9 @@ public class TabEquipment implements ITab
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static class Client extends TabEquipment implements ITabClient
+	public static class Client extends TabGuidebook implements ITabClient
 	{
-		private static final ResourceLocation ICON = AetherCore.getResource("textures/gui/tabs/guidebook_equipment.png");
+		private static final ResourceLocation ICON = AetherCore.getResource("textures/gui/tabs/equipment.png");
 
 		@Override
 		public boolean isTabValid(GuiScreen gui)
@@ -61,7 +61,7 @@ public class TabEquipment implements ITab
 		@Override
 		public ResourceLocation getIcon()
 		{
-			return Client.ICON;
+			return TabGuidebook.Client.ICON;
 		}
 	}
 }

@@ -1,4 +1,4 @@
-package com.gildedgames.aether.client.gui.tab;
+package com.gildedgames.aether.common.tab;
 
 import com.gildedgames.aether.api.registry.tab.ITab;
 import com.gildedgames.aether.api.registry.tab.ITabClient;

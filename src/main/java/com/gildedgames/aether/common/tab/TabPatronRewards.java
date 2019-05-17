@@ -1,8 +1,9 @@
-package com.gildedgames.aether.client.gui.tab.guidebook;
+package com.gildedgames.aether.common.tab;
 
 import com.gildedgames.aether.api.registry.tab.ITab;
 import com.gildedgames.aether.api.registry.tab.ITabClient;
 import com.gildedgames.aether.client.gui.container.guidebook.AbstractGuidebookPage;
+import com.gildedgames.aether.client.gui.misc.GuiPatronRewards;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
 import net.minecraft.client.gui.GuiScreen;
@@ -13,12 +14,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TabLoreTome implements ITab
+public class TabPatronRewards implements ITab
 {
 	@Override
 	public String getUnlocalizedName()
 	{
-		return "tab.guidebook.loretome";
+		return "tab.patron_rewards";
 	}
 
 	@Override
@@ -26,31 +27,30 @@ public class TabLoreTome implements ITab
 	{
 		BlockPos pos = player.getPosition();
 
-		player.openGui(AetherCore.MOD_ID, AetherGuiHandler.LORE_TOME_ID, player.world, pos.getX(), pos.getY(), pos.getZ());
+		player.openGui(AetherCore.MOD_ID, AetherGuiHandler.PATRON_REWARDS_ID, player.world, pos.getX(), pos.getY(), pos.getZ());
 	}
 
 	@Override
 	public boolean isEnabled()
 	{
-		//return Minecraft.getMinecraft().currentScreen instanceof AbstractGuidebookPage;
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isRemembered()
 	{
-		return true;
+		return false;
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static class Client extends TabLoreTome implements ITabClient
+	public static class Client extends TabPatronRewards implements ITabClient
 	{
-		private static final ResourceLocation ICON = AetherCore.getResource("textures/gui/tabs/guidebook_loretome.png");
+		private static final ResourceLocation ICON = AetherCore.getResource("textures/gui/tabs/patron_rewards.png");
 
 		@Override
 		public boolean isTabValid(GuiScreen gui)
 		{
-			return gui instanceof GuiInventory || gui instanceof AbstractGuidebookPage;
+			return gui instanceof GuiInventory || gui instanceof AbstractGuidebookPage || gui instanceof GuiPatronRewards;
 		}
 
 		@Override

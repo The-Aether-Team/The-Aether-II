@@ -1,8 +1,6 @@
 package com.gildedgames.aether.common.containers;
 
 import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.api.shop.IShopCurrency;
-import com.gildedgames.aether.client.gui.GuiUtils;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTradeModule;
 import com.gildedgames.aether.common.containers.slots.SlotDynamic;
@@ -14,7 +12,10 @@ import com.gildedgames.aether.common.shop.ShopCurrencyGilt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.*;
+import net.minecraft.inventory.ClickType;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.InventoryBasic;
+import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 import java.util.LinkedList;
@@ -76,7 +77,7 @@ public class ContainerTrade extends Container
 
 			while ((cur = this.queue.poll()) != null)
 			{
-				if (!playerIn.isEntityAlive() || playerIn instanceof EntityPlayerMP && ((EntityPlayerMP)playerIn).hasDisconnected())
+				if (!playerIn.isEntityAlive() || playerIn instanceof EntityPlayerMP && ((EntityPlayerMP) playerIn).hasDisconnected())
 				{
 					playerIn.dropItem(cur.item, false);
 				}
@@ -298,7 +299,8 @@ public class ContainerTrade extends Container
 
 			if (index < 36)
 			{
-				if (this.tradeModule.getTradeSlots() == 0 || !this.mergeItemStack(itemStack1, 36, (this.tradeModule.getTradeSlots() < 16 ? 36 + this.tradeModule.getTradeSlots() : 52), false))
+				if (this.tradeModule.getTradeSlots() == 0 || !this
+						.mergeItemStack(itemStack1, 36, (this.tradeModule.getTradeSlots() < 16 ? 36 + this.tradeModule.getTradeSlots() : 52), false))
 				{
 					return ItemStack.EMPTY;
 				}

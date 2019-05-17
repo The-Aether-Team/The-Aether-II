@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.capabilities;
 import com.gildedgames.aether.api.damage_system.DamageSystemTables;
 import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
 import com.gildedgames.aether.api.damage_system.IDamageLevelsHolder;
-import com.gildedgames.aether.client.renderer.particles.AetherParticles;
+import com.gildedgames.aether.common.registry.content.ParticlesAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketParticles;
 import net.minecraft.entity.Entity;
@@ -122,19 +122,19 @@ public class DamageSystem
 
 		if (slashDamageLevel > 0)
 		{
-			NetworkingAether.sendPacketToDimension(new PacketParticles(AetherParticles.SLASH, x, y, z, offsetX, 0.0D, offsetZ), entitySource.dimension);
+			NetworkingAether.sendPacketToDimension(new PacketParticles(ParticlesAether.SLASH, x, y, z, offsetX, 0.0D, offsetZ), entitySource.dimension);
 		}
 
 		if (pierceDamageLevel > 0)
 		{
 			NetworkingAether
-					.sendPacketToDimension(new PacketParticles(AetherParticles.PIERCE, x, y, z, offsetX, 0.0D, offsetZ), entitySource.dimension);
+					.sendPacketToDimension(new PacketParticles(ParticlesAether.PIERCE, x, y, z, offsetX, 0.0D, offsetZ), entitySource.dimension);
 		}
 
 		if (impactDamageLevel > 0)
 		{
 			NetworkingAether
-					.sendPacketToDimension(new PacketParticles(AetherParticles.IMPACT, x, y, z, offsetX, 0.0D, offsetZ), entitySource.dimension);
+					.sendPacketToDimension(new PacketParticles(ParticlesAether.IMPACT, x, y, z, offsetX, 0.0D, offsetZ), entitySource.dimension);
 		}
 	}
 }
