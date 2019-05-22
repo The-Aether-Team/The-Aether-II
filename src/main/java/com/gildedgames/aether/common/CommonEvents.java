@@ -424,7 +424,8 @@ public class CommonEvents
 				PlayerUtil.fillBucketInHand(event.getEntityPlayer(), event.getHand(), item, new ItemStack(ItemsAether.skyroot_milk_bucket));
 			}
 		}
-		else if (event.getSide().isServer() && event.getTarget() instanceof EntityPlayer && event.getHand() == EnumHand.MAIN_HAND && event.getItemStack().isEmpty())
+		else if (event.getSide().isServer() && event.getTarget() instanceof EntityPlayer && event.getHand() == EnumHand.MAIN_HAND && event.getItemStack()
+				.isEmpty())
 		{
 			PlayerTradeModule me = PlayerAether.getPlayer(event.getEntityPlayer()).getTradingModule();
 			PlayerTradeModule other = PlayerAether.getPlayer(event.getTarget()).getTradingModule();
@@ -435,7 +436,8 @@ public class CommonEvents
 				{
 					me.setTrading(other);
 					other.accept();
-					AetherCore.LOGGER.info(event.getTarget().getDisplayName().getFormattedText() + " is now trading with " + event.getEntity().getDisplayName().getFormattedText());
+					AetherCore.LOGGER.info(event.getTarget().getDisplayName().getFormattedText() + " is now trading with " + event.getEntity().getDisplayName()
+							.getFormattedText());
 				}
 				else if (!other.isTrading() && me.canRequest())
 				{
@@ -511,29 +513,6 @@ public class CommonEvents
 		if (EntityNPC.class.isAssignableFrom(event.getEntityMounting().getClass()))
 		{
 			event.setCanceled(true);
-		}
-	}
-
-	@SubscribeEvent(priority = EventPriority.LOWEST)
-	public static void onWorldLoad(final WorldEvent.Load event)
-	{
-		if (event.getWorld().provider.getDimensionType() == DimensionsAether.AETHER)
-		{
-			IPrepManager manager = PrepHelper.getManager(event.getWorld());
-
-			if (manager == null)
-			{
-				return;
-			}
-
-			try
-			{
-				manager.getAccess().provideSectorForChunk(0, 0, false).get();
-			}
-			catch (InterruptedException | ExecutionException e)
-			{
-				throw new RuntimeException("Failed to generate spawn chunk sector", e);
-			}
 		}
 	}
 }
