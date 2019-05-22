@@ -23,7 +23,6 @@ repositories {
 
 configurations {
     shaded
-    shaded.extendsFrom runtimeShaded, compileShaded
     shaded.exclude group: "org.spongepowered"
 }
 
