@@ -14,8 +14,6 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'maven-publish'
 
-def isPhosphorSubmodule = findProject(":Phosphor") != null
-
 repositories {
     mavenCentral()
 
@@ -24,26 +22,17 @@ repositories {
 }
 
 configurations {
-    compileShaded
-    compile.extendsFrom compileShaded
-
-    runtimeShaded
-    runtime.extendsFrom runtimeShaded
-
     shaded
     shaded.extendsFrom runtimeShaded, compileShaded
     shaded.exclude group: "org.spongepowered"
 }
 
 dependencies {
-    if (isPhosphorSubmodule) {
-        runtime project(':phosphor')
-    } else {
-        runtime "me.jellysquid.mods:phosphor:${phosphor_version}:dev"
-        shaded  "me.jellysquid.mods:phosphor:${phosphor_version}:universal"
-    }
+    runtime "me.jellysquid.mods:phosphor:${phosphor_version}:dev"
+    shaded  "me.jellysquid.mods:phosphor:${phosphor_version}:universal"
 
-    compileShaded project(":orbis-lib")
+    compile "com.gildedgames:orbis-lib:${orbis_version}:dev"
+    shaded "com.gildedgames:orbis-lib:${orbis_version}:universal"
 }
 
 allprojects {
@@ -178,5 +167,5 @@ if (System.getenv("JARSIGN_SECRETS_FILE") != null) {
 
 build.dependsOn apiJar
 build.dependsOn serverJar
+build.dependsOn gradle.includedBuilds*.task(':build')
 
-jar.dependsOn ":orbis-lib:build"

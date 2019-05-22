@@ -1,13 +1,11 @@
 rootProject.name = 'aether-ii'
 
-include 'orbis-lib'
+def orbisSubmodule = file("lib/orbis-lib")
 
-project(':orbis-lib').projectDir = file("lib/orbis-lib")
-
-def phosphorSubmodule = file("lib/Phosphor")
-
-if (phosphorSubmodule.exists()) {
-    include 'phosphor'
-
-    project(":phosphor").projectDir = phosphorSubmodule
+if (orbisSubmodule.exists()) {
+    includeBuild('lib/orbis-lib') {
+        dependencySubstitution {
+            substitute module('com.gildedgames:orbis-lib') with project(':')
+        }
+    }
 }
