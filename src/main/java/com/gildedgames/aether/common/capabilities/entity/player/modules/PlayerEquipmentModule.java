@@ -129,9 +129,12 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 			}
 		}
 
-		if (!this.getEntity().world.isRemote)
+		if (!updates.isEmpty())
 		{
-			NetworkingAether.sendPacketToWatching(new PacketEquipment(this.getEntity(), updates), this.getEntity(), true);
+			if (!this.getEntity().world.isRemote)
+			{
+				NetworkingAether.sendPacketToWatching(new PacketEquipment(this.getEntity(), updates), this.getEntity(), true);
+			}
 		}
 
 		this.pools.values().forEach(EquipmentEffectPool::update);
