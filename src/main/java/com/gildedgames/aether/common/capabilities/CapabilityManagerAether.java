@@ -37,7 +37,9 @@ public class CapabilityManagerAether
 		CapabilityManager.INSTANCE.register(ISpawnSystem.class, new SpawnSystem.Storage(), SpawnSystem::new);
 		CapabilityManager.INSTANCE.register(IPlacementFlagCapability.class, new PlacementFlagCapability.Storage(), PlacementFlagCapability::new);
 		CapabilityManager.INSTANCE.register(IPrecipitationManager.class, new PrecipitationManagerImpl.Storage(), PrecipitationManagerImpl::new);
-		CapabilityManager.INSTANCE.register(IAetherStatusEffectPool.class, new StatusEffectPool.Storage(), StatusEffectPool::new);
+
+		// UNCOMMENT TO ENABLE STATUS EFFECT SYSTEM!!
+		//CapabilityManager.INSTANCE.register(IAetherStatusEffectPool.class, new StatusEffectPool.Storage(), StatusEffectPool::new);
 
 	}
 
@@ -55,10 +57,14 @@ public class CapabilityManagerAether
 	@SubscribeEvent
 	public static void onEntityLoad(final AttachCapabilitiesEvent<Entity> event)
 	{
+		// UNCOMMENT TO ENABLE STATUS EFFECT SYSTEM!!
+
+		/*
 		if (event.getObject() instanceof EntityLivingBase)
 		{
 			event.addCapability(AetherCore.getResource("StatusEffects"), new StatusEffectPoolProvider((EntityLivingBase) event.getObject()));
 		}
+		*/
 
 		if (event.getObject() instanceof EntityPlayer)
 		{
