@@ -37,9 +37,7 @@ public class PacketSetShouldRespawnAtCampfire implements IMessage
 			}
 
 			PlayerAether playerAether = PlayerAether.getPlayer(player);
-
 			playerAether.getCampfiresModule().setShouldRespawnAtCampfire(true);
-			player.respawnPlayer();
 
 			return null;
 		}
