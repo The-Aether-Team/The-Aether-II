@@ -3,6 +3,7 @@ package com.gildedgames.aether.api.registry.tab;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.Vec2f;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -28,4 +29,12 @@ public interface ITabClient extends ITab
 	 */
 	@SideOnly(Side.CLIENT)
 	ResourceLocation getIcon();
+
+	/**
+	 * Default tabs use Minecraft's default tab texture with an icon drawn over it.
+	 * A custom tab means instead of using the default tab texture, a custom tab texture should be used.
+	 * @return 2D Vector of the tab's texture x and y.
+	 */
+	@SideOnly(Side.CLIENT)
+	Vec2f getCustomTabVec2();
 }

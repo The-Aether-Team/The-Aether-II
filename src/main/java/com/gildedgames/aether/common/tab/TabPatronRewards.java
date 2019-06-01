@@ -11,6 +11,7 @@ import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec2f;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -62,6 +63,12 @@ public class TabPatronRewards implements ITab
 		public ResourceLocation getIcon()
 		{
 			return Client.ICON;
+		}
+
+		@Override
+		public Vec2f getCustomTabVec2()
+		{
+			return null;
 		}
 	}
 }

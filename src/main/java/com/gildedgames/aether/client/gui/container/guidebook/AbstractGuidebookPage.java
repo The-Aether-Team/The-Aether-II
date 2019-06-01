@@ -6,14 +6,13 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.util.ResourceLocation;
 
 public abstract class AbstractGuidebookPage extends GuiContainer
 {
 	private static final ResourceLocation TEXTURE_BASE = AetherCore.getResource("textures/gui/guidebook/guidebook_base.png");
 
-	protected static final ResourceLocation TEXTURE_GUI = AetherCore.getResource("textures/gui/guidebook/guidebook_gui.png");
+	public static final ResourceLocation TEXTURE_GUI = AetherCore.getResource("textures/gui/guidebook/guidebook_gui.png");
 
 	protected final int TEXTURE_WIDTH = 512; // size of entire texture width.
 

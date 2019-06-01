@@ -3,12 +3,14 @@ package com.gildedgames.aether.client.gui.tab;
 import com.gildedgames.aether.api.registry.tab.ITab;
 import com.gildedgames.aether.api.registry.tab.ITabClient;
 import com.gildedgames.aether.api.registry.tab.ITabGroup;
+import com.gildedgames.aether.client.gui.container.guidebook.AbstractGuidebookPage;
 import com.gildedgames.aether.common.containers.tab.util.TabGroupHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.Vec2f;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -86,22 +88,42 @@ public class RenderTabGroup extends Gui
 		{
 			if (tab != null && tab.isEnabled())
 			{
-				mc.getTextureManager().bindTexture(TEXTURE_TABS);
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-				int u = 28;
-
-				if (tab == tabGroup.getSelectedTab())
+				if (tab.getCustomTabVec2() != null)
 				{
-					int v = 3 * 32;
-					this.drawTexturedModalRect(xPosition, yPosition - 3, u, v, 28, 14);
-					this.drawTexturedModalRect(xPosition, yPosition + 10, u, v + 22, 28, 10);
+					mc.getTextureManager().bindTexture(AbstractGuidebookPage.TEXTURE_GUI);
+
+					Vec2f vec = tab.getCustomTabVec2();
+					int v = 0;
+					int height = 31;
+					int width = 25;
+					if (tab == tabGroup.getSelectedTab())
+					{
+						v = 34;
+						height = 36;
+					}
+
+					this.drawTexturedModalRect(xPosition, yPosition, (int)vec.x, (int)vec.y + v, width, height);
 				}
 				else
 				{
-					int v = 2 * 32;
-					this.drawTexturedModalRect(xPosition, yPosition, u, v, 28, 11);
-					this.drawTexturedModalRect(xPosition, yPosition + 10, u, v + 20, 28, 12);
+					mc.getTextureManager().bindTexture(TEXTURE_TABS);
+
+					int u = 28;
+
+					if (tab == tabGroup.getSelectedTab())
+					{
+						int v = 3 * 32;
+						this.drawTexturedModalRect(xPosition, yPosition - 3, u, v, 28, 14);
+						this.drawTexturedModalRect(xPosition, yPosition + 10, u, v + 22, 28, 10);
+					}
+					else
+					{
+						int v = 2 * 32;
+						this.drawTexturedModalRect(xPosition, yPosition, u, v, 28, 11);
+						this.drawTexturedModalRect(xPosition, yPosition + 10, u, v + 20, 28, 12);
+					}
 				}
 
 				if (tab.getIcon() != null)

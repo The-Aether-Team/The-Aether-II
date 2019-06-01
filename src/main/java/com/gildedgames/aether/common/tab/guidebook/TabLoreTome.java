@@ -5,11 +5,13 @@ import com.gildedgames.aether.api.registry.tab.ITabClient;
 import com.gildedgames.aether.client.gui.container.guidebook.AbstractGuidebookPage;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec2f;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -61,7 +63,13 @@ public class TabLoreTome implements ITab
 		@Override
 		public ResourceLocation getIcon()
 		{
-			return Client.ICON;
+			return null;
+		}
+
+		@Override
+		public Vec2f getCustomTabVec2()
+		{
+			return new Vec2f(78.f, 0.f);
 		}
 	}
 }

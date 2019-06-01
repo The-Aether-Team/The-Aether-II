@@ -11,6 +11,7 @@ import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec2f;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -45,7 +46,6 @@ public class TabEquipment implements ITab
 	@SideOnly(Side.CLIENT)
 	public static class Client extends TabEquipment implements ITabClient
 	{
-		private static final ResourceLocation ICON = AetherCore.getResource("textures/gui/tabs/guidebook_equipment.png");
 
 		@Override
 		public boolean isTabValid(GuiScreen gui)
@@ -61,7 +61,13 @@ public class TabEquipment implements ITab
 		@Override
 		public ResourceLocation getIcon()
 		{
-			return Client.ICON;
+			return null;
+		}
+
+		@Override
+		public Vec2f getCustomTabVec2()
+		{
+			return new Vec2f(0.f, 0.f);
 		}
 	}
 }

@@ -8,6 +8,7 @@ import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.Vec2f;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -58,6 +59,12 @@ public class TabChat implements ITab
 		public ResourceLocation getIcon()
 		{
 			return TabChat.Client.ICON;
+		}
+
+		@Override
+		public Vec2f getCustomTabVec2()
+		{
+			return null;
 		}
 	}
 }
