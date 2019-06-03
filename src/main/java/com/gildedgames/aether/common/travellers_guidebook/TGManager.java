@@ -143,6 +143,15 @@ public class TGManager implements ITGManager
 	}
 
 	@Override
+	public void unload()
+	{
+		this.tagToEntries.clear();
+		this.idToEntries.clear();
+
+		this.playerConditionTracker.unload();
+	}
+
+	@Override
 	public List<ITGEntry> getEntriesWithTag(final String tag)
 	{
 		if (this.tagToEntries.containsKey(tag))
@@ -188,10 +197,7 @@ public class TGManager implements ITGManager
 		@Override
 		public void onResourceManagerReload(final IResourceManager resourceManager)
 		{
-			this.manager.tagToEntries.clear();
-			this.manager.idToEntries.clear();
-
-			this.manager.playerConditionTracker.unload();
+			this.manager.unload();
 			this.manager.load();
 		}
 	}
