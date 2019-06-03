@@ -184,7 +184,7 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 
 		properties.getEffectProviders().forEach(provider -> {
 			EquipmentEffectPool<IEffectProvider> pool = this.pools.get(provider.getFactory());
-			pool.removeInstance(inventoryIndexPair);
+			pool.removeInstances(inventoryIndexPair);
 
 			if (pool.isEmpty())
 			{
