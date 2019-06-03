@@ -27,7 +27,7 @@ public interface IPlayerCondition
 	void unlisten(IPlayerConditionListener listener);
 
 	/**
-	 * Called when this condition is no longer tracked by the
+	 * Called when this condition is tracked by the
 	 * {@link IPlayerConditionTracker}
 	 *
 	 * Should subscribe to any events needed.
@@ -35,7 +35,7 @@ public interface IPlayerCondition
 	void onTracked();
 
 	/**
-	 * Called when this condition is tracked by the
+	 * Called when this condition is no longer tracked by the
 	 * {@link IPlayerConditionTracker}
 	 *
 	 * Should unsubscribe from any events needed.
