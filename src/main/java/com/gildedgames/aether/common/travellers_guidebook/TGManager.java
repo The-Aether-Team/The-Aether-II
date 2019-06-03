@@ -4,7 +4,7 @@ import com.gildedgames.aether.api.player.conditions.IPlayerCondition;
 import com.gildedgames.aether.api.player.conditions.IPlayerConditionTracker;
 import com.gildedgames.aether.api.player.conditions.PlayerConditionUtils;
 import com.gildedgames.aether.api.travellers_guidebook.ITGDefinition;
-import com.gildedgames.aether.api.travellers_guidebook.ITGEntryDefinition;
+import com.gildedgames.aether.api.travellers_guidebook.ITGEntry;
 import com.gildedgames.aether.api.travellers_guidebook.ITGManager;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.player_conditions.PlayerConditionDeserializer;
@@ -38,9 +38,9 @@ public class TGManager implements ITGManager
 {
 	private final Gson gson;
 
-	private final Map<String, List<ITGEntryDefinition>> tagToEntries = Maps.newHashMap();
+	private final Map<String, List<ITGEntry>> tagToEntries = Maps.newHashMap();
 
-	private final Map<String, ITGEntryDefinition> idToEntries = Maps.newHashMap();
+	private final Map<String, ITGEntry> idToEntries = Maps.newHashMap();
 
 	private final List<ResourceLocation> definitionsToLoad = Lists.newArrayList();
 
@@ -57,7 +57,7 @@ public class TGManager implements ITGManager
 		final GsonBuilder builder = new GsonBuilder();
 
 		builder.registerTypeAdapter(IPlayerCondition.class, new PlayerConditionDeserializer());
-		builder.registerTypeAdapter(ITGEntryDefinition.class, new TGEntryDeserializer());
+		builder.registerTypeAdapter(ITGEntry.class, new TGEntryDeserializer());
 
 		builder.registerTypeAdapter(PlayerConditionSeeEntity.class, new PlayerConditionSeeEntity.Deserializer());
 		builder.registerTypeAdapter(PlayerConditionFeedEntity.class, new PlayerConditionFeedEntity.Deserializer());
@@ -98,9 +98,9 @@ public class TGManager implements ITGManager
 							final Collection<String> conditionIDs = PlayerConditionUtils.getIDs(def.conditions());
 							this.playerConditionTracker.trackConditions(def.conditions());
 
-							for (final Map.Entry<String, ITGEntryDefinition> e : def.entries().entrySet())
+							for (final Map.Entry<String, ITGEntry> e : def.entries().entrySet())
 							{
-								final ITGEntryDefinition entryDef = e.getValue();
+								final ITGEntry entryDef = e.getValue();
 								final String entryId = e.getKey();
 
 								if (this.idToEntries.containsKey(entryId))
@@ -127,7 +127,7 @@ public class TGManager implements ITGManager
 									this.tagToEntries.put(tag, Lists.newArrayList());
 								}
 
-								final List<ITGEntryDefinition> tagList = this.tagToEntries.get(tag);
+								final List<ITGEntry> tagList = this.tagToEntries.get(tag);
 
 								tagList.add(entryDef);
 							}
@@ -143,7 +143,7 @@ public class TGManager implements ITGManager
 	}
 
 	@Override
-	public List<ITGEntryDefinition> getEntriesWithTag(final String tag)
+	public List<ITGEntry> getEntriesWithTag(final String tag)
 	{
 		if (this.tagToEntries.containsKey(tag))
 		{
@@ -154,7 +154,7 @@ public class TGManager implements ITGManager
 	}
 
 	@Override
-	public <T extends ITGEntryDefinition> Optional<T> getEntry(final String entryId, final Class<T> clazzType)
+	public <T extends ITGEntry> Optional<T> getEntry(final String entryId, final Class<T> clazzType)
 	{
 		if (this.idToEntries.containsKey(entryId))
 		{

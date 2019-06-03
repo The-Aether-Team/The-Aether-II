@@ -2,18 +2,18 @@ package com.gildedgames.aether.common.travellers_guidebook;
 
 import com.gildedgames.aether.api.player.conditions.ConditionResolution;
 import com.gildedgames.aether.api.player.conditions.IPlayerCondition;
-import com.gildedgames.aether.api.travellers_guidebook.ITGEntryDefinition;
+import com.gildedgames.aether.api.travellers_guidebook.ITGEntry;
 
 import java.util.Collection;
 import java.util.Collections;
 
-public abstract class TGEntryDefinitionBase implements ITGEntryDefinition
+public abstract class TGEntryBase implements ITGEntry
 {
 	private Collection<String> conditionIDs;
 
 	private ConditionResolution conditionResolution;
 
-	public TGEntryDefinitionBase()
+	public TGEntryBase()
 	{
 
 	}

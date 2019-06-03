@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
 import com.gildedgames.aether.api.player.IPlayerConditionModule;
 import com.gildedgames.aether.api.player.conditions.ConditionResolution;
-import com.gildedgames.aether.api.travellers_guidebook.ITGEntryDefinition;
+import com.gildedgames.aether.api.travellers_guidebook.ITGEntry;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.orbis.lib.util.io.NBTFunnel;
@@ -45,7 +45,7 @@ public class PlayerConditionModule extends PlayerAetherModule implements IPlayer
 		return conditionResolution.areConditionsMet(conditionUniqueIdentifiers, this.isConditionMet);
 	}
 
-	public boolean isEntryUnlocked(final ITGEntryDefinition entry)
+	public boolean isEntryUnlocked(final ITGEntry entry)
 	{
 		return this.areConditionsFlagged(entry.getConditionResolution(), entry.getConditionIDs().toArray(new String[0]));
 	}
