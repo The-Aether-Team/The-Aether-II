@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.travellers_guidebook;
 
-import com.gildedgames.aether.api.travellers_guidebook.ITGCondition;
+import com.gildedgames.aether.api.player.conditions.ConditionResolution;
+import com.gildedgames.aether.api.player.conditions.IPlayerCondition;
 import com.gildedgames.aether.api.travellers_guidebook.ITGDefinition;
 import com.gildedgames.aether.api.travellers_guidebook.ITGEntryDefinition;
 import com.google.gson.annotations.SerializedName;
@@ -12,22 +13,34 @@ import java.util.Map;
 public class TGDefinition implements ITGDefinition
 {
 	@SerializedName("conditions")
-	private final Collection<ITGCondition> conditions;
+	private final Collection<IPlayerCondition> conditions;
+
+	@SerializedName("conditionResolution")
+	private final ConditionResolution conditionResolution;
 
 	@SerializedName("entries")
 	private final Map<String, ITGEntryDefinition> entries;
 
-	public TGDefinition(final Collection<ITGCondition> conditions, final Map<String, ITGEntryDefinition> entries)
+	public TGDefinition(final Collection<IPlayerCondition> conditions, final ConditionResolution conditionResolution,
+			final Map<String, ITGEntryDefinition> entries)
 	{
 		this.conditions = conditions;
+		this.conditionResolution = conditionResolution;
 		this.entries = entries;
 	}
 
 	@Nonnull
 	@Override
-	public Collection<ITGCondition> conditions()
+	public Collection<IPlayerCondition> conditions()
 	{
 		return this.conditions;
+	}
+
+	@Nonnull
+	@Override
+	public ConditionResolution conditionResolution()
+	{
+		return this.conditionResolution;
 	}
 
 	@Nonnull

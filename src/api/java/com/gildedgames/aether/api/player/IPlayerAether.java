@@ -11,6 +11,11 @@ import net.minecraft.nbt.NBTTagCompound;
 public interface IPlayerAether
 {
 	/**
+	 * @return The player's {@link IPlayerConditionModule} that is responsible for tracking conditions for the player.
+	 */
+	IPlayerConditionModule getPlayerConditionModule();
+
+	/**
 	 * @return The player's {@link ICurrencyModule} that is responsible for managing the Gilt currency of the player.
 	 */
 	ICurrencyModule getCurrencyModule();

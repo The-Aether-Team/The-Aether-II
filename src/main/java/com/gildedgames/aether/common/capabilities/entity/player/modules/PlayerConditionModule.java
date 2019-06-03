@@ -1,5 +1,7 @@
 package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
+import com.gildedgames.aether.api.player.IPlayerConditionModule;
+import com.gildedgames.aether.api.player.conditions.ConditionResolution;
 import com.gildedgames.aether.api.travellers_guidebook.ITGEntryDefinition;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
@@ -9,40 +11,43 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.HashSet;
+import java.util.function.Function;
 
 /**
  * Event's System for the Travellers Guidebook
  */
-public class PlayerTGModule extends PlayerAetherModule
+public class PlayerConditionModule extends PlayerAetherModule implements IPlayerConditionModule
 {
 	private HashSet<String> conditionsMet = Sets.newHashSet();
 
-	public PlayerTGModule(final PlayerAether playerAether)
+	private final Function<String, Boolean> isConditionMet = this::isConditionFlagged;
+
+	public PlayerConditionModule(final PlayerAether playerAether)
 	{
 		super(playerAether);
 	}
 
+	@Override
 	public void flagCondition(final String conditionUniqueIdentifier)
 	{
 		this.conditionsMet.add(conditionUniqueIdentifier);
 	}
 
+	@Override
 	public boolean isConditionFlagged(final String conditionUniqueIdentifier)
 	{
 		return this.conditionsMet.contains(conditionUniqueIdentifier);
 	}
 
+	@Override
+	public boolean areConditionsFlagged(final ConditionResolution conditionResolution, final String... conditionUniqueIdentifiers)
+	{
+		return conditionResolution.areConditionsMet(conditionUniqueIdentifiers, this.isConditionMet);
+	}
+
 	public boolean isEntryUnlocked(final ITGEntryDefinition entry)
 	{
-		for (final String condition : entry.getConditionIDs())
-		{
-			if (!this.isConditionFlagged(condition))
-			{
-				return false;
-			}
-		}
-
-		return true;
+		return this.areConditionsFlagged(entry.getConditionResolution(), entry.getConditionIDs().toArray(new String[0]));
 	}
 
 	@Override

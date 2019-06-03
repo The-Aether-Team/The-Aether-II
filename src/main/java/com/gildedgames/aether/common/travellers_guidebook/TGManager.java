@@ -1,21 +1,25 @@
 package com.gildedgames.aether.common.travellers_guidebook;
 
-import com.gildedgames.aether.api.travellers_guidebook.*;
+import com.gildedgames.aether.api.player.conditions.IPlayerCondition;
+import com.gildedgames.aether.api.player.conditions.IPlayerConditionTracker;
+import com.gildedgames.aether.api.player.conditions.PlayerConditionUtils;
+import com.gildedgames.aether.api.travellers_guidebook.ITGDefinition;
+import com.gildedgames.aether.api.travellers_guidebook.ITGEntryDefinition;
+import com.gildedgames.aether.api.travellers_guidebook.ITGManager;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
-import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTGModule;
-import com.gildedgames.aether.common.travellers_guidebook.conditions.TGConditionSeeEntity;
+import com.gildedgames.aether.common.player_conditions.PlayerConditionDeserializer;
+import com.gildedgames.aether.common.player_conditions.types.PlayerConditionFeedEntity;
+import com.gildedgames.aether.common.player_conditions.types.PlayerConditionKillEntity;
+import com.gildedgames.aether.common.player_conditions.types.PlayerConditionSeeEntity;
 import com.gildedgames.aether.common.travellers_guidebook.entries.TGEntryBestiaryPage;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.client.resources.IResourceManagerReloadListener;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -30,7 +34,7 @@ import java.util.*;
  * Manages all data serialization and deserialization of traveller's guidebook
  * entries. This also acts as an entry point to retrieve entries with keys/tags.
  */
-public class TGManager implements ITGManager, ITGConditionListener
+public class TGManager implements ITGManager
 {
 	private final Gson gson;
 
@@ -38,23 +42,27 @@ public class TGManager implements ITGManager, ITGConditionListener
 
 	private final Map<String, ITGEntryDefinition> idToEntries = Maps.newHashMap();
 
-	private final HashSet<ITGCondition> conditions = Sets.newHashSet();
-
 	private final List<ResourceLocation> definitionsToLoad = Lists.newArrayList();
 
-	public TGManager()
+	private final IPlayerConditionTracker playerConditionTracker;
+
+	public TGManager(final IPlayerConditionTracker playerConditionTracker)
 	{
 		this.gson = this.buildDeserializer().create();
+		this.playerConditionTracker = playerConditionTracker;
 	}
 
 	private GsonBuilder buildDeserializer()
 	{
 		final GsonBuilder builder = new GsonBuilder();
 
-		builder.registerTypeAdapter(ITGCondition.class, new TGConditionDeserializer());
+		builder.registerTypeAdapter(IPlayerCondition.class, new PlayerConditionDeserializer());
 		builder.registerTypeAdapter(ITGEntryDefinition.class, new TGEntryDeserializer());
 
-		builder.registerTypeAdapter(TGConditionSeeEntity.class, new TGConditionSeeEntity.Deserializer());
+		builder.registerTypeAdapter(PlayerConditionSeeEntity.class, new PlayerConditionSeeEntity.Deserializer());
+		builder.registerTypeAdapter(PlayerConditionFeedEntity.class, new PlayerConditionFeedEntity.Deserializer());
+		builder.registerTypeAdapter(PlayerConditionKillEntity.class, new PlayerConditionKillEntity.Deserializer());
+
 		builder.registerTypeAdapter(TGEntryBestiaryPage.class, new TGEntryBestiaryPage.Deserializer());
 
 		return builder;
@@ -87,23 +95,8 @@ public class TGManager implements ITGManager, ITGConditionListener
 
 						for (final ITGDefinition def : definitions)
 						{
-							/**
-							 * Assemble all ids of conditions and set them to each
-							 * entry definition so that the manager can look up if
-							 * those conditions have been met.
-							 */
-							final List<String> conditionIDs = Lists.newArrayList();
-
-							for (final ITGCondition condition : def.conditions())
-							{
-								if (!this.conditions.contains(condition))
-								{
-									condition.subscribe(this);
-									this.conditions.add(condition);
-								}
-
-								conditionIDs.add(condition.getUniqueIdentifier());
-							}
+							final Collection<String> conditionIDs = PlayerConditionUtils.getIDs(def.conditions());
+							this.playerConditionTracker.trackConditions(def.conditions());
 
 							for (final Map.Entry<String, ITGEntryDefinition> e : def.entries().entrySet())
 							{
@@ -115,9 +108,28 @@ public class TGManager implements ITGManager, ITGConditionListener
 									throw new RuntimeException("An entry with an existing id is trying to be registered: " + entryId);
 								}
 
+								// Provide player conditions required by its sub data
+								this.playerConditionTracker.trackConditions(entryDef.providePlayerConditions());
 								entryDef.setConditionIDs(conditionIDs);
 
 								this.idToEntries.put(entryId, entryDef);
+
+								final String tag = entryDef.tag();
+
+								// If tag doesn't exist, don't add to tag list
+								if (tag == null || tag.isEmpty())
+								{
+									continue;
+								}
+
+								if (!this.tagToEntries.containsKey(tag))
+								{
+									this.tagToEntries.put(tag, Lists.newArrayList());
+								}
+
+								final List<ITGEntryDefinition> tagList = this.tagToEntries.get(tag);
+
+								tagList.add(entryDef);
 							}
 						}
 					}
@@ -163,15 +175,6 @@ public class TGManager implements ITGManager, ITGConditionListener
 		}
 	}
 
-	@Override
-	public void onTriggered(final ITGCondition condition, final EntityPlayer player)
-	{
-		final PlayerAether playerAether = PlayerAether.getPlayer(player);
-		final PlayerTGModule module = playerAether.getTGModule();
-
-		module.flagCondition(condition.getUniqueIdentifier());
-	}
-
 	@SideOnly(Side.CLIENT)
 	public static class ReloadListener implements IResourceManagerReloadListener
 	{
@@ -186,9 +189,9 @@ public class TGManager implements ITGManager, ITGConditionListener
 		public void onResourceManagerReload(final IResourceManager resourceManager)
 		{
 			this.manager.tagToEntries.clear();
-			this.manager.conditions.clear();
 			this.manager.idToEntries.clear();
 
+			this.manager.playerConditionTracker.unload();
 			this.manager.load();
 		}
 	}

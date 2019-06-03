@@ -1,39 +1,60 @@
 package com.gildedgames.aether.common.travellers_guidebook.entries;
 
+import com.gildedgames.aether.api.cache.IEntityStats;
+import com.gildedgames.aether.api.player.IPlayerAether;
+import com.gildedgames.aether.api.player.conditions.ConditionResolution;
+import com.gildedgames.aether.api.player.conditions.IPlayerCondition;
 import com.gildedgames.aether.api.travellers_guidebook.entries.ITGEntryBestiaryPage;
+import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.player_conditions.types.PlayerConditionFeedEntity;
+import com.gildedgames.aether.common.player_conditions.types.PlayerConditionKillEntity;
 import com.gildedgames.aether.common.travellers_guidebook.TGEntryDefinitionBase;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
+import com.google.common.collect.Lists;
+import com.google.gson.*;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 
 import java.lang.reflect.Type;
+import java.util.Collection;
 
 public class TGEntryBestiaryPage extends TGEntryDefinitionBase implements ITGEntryBestiaryPage
 {
-	private final String tag, entityId, descriptionEntryId, statsEntryId, movesEntryId, nameEntryId;
+	private final ResourceLocation entityId;
+
+	private final String tag;
 
 	private final ResourceLocation silhouetteTexture, discoveredTexture;
 
-	protected TGEntryBestiaryPage(final String tag, final String entityId, final String descriptionEntryId,
-			final String statsEntryId, final String movesEntryId,
-			final String nameEntryId, final ResourceLocation silhouetteTexture, final ResourceLocation discoveredTexture)
+	private final ITextComponent description;
+
+	protected TGEntryBestiaryPage(final String tag, final ResourceLocation entityId, final String description, final ResourceLocation silhouetteTexture,
+			final ResourceLocation discoveredTexture)
 	{
 		this.tag = tag;
 
 		this.entityId = entityId;
-		this.descriptionEntryId = descriptionEntryId;
-		this.statsEntryId = statsEntryId;
-		this.movesEntryId = movesEntryId;
-		this.nameEntryId = nameEntryId;
+
+		this.description = new TextComponentTranslation(description);
 
 		this.silhouetteTexture = silhouetteTexture;
 		this.discoveredTexture = discoveredTexture;
 	}
 
 	@Override
-	public String getEntityId()
+	public Collection<IPlayerCondition> providePlayerConditions()
+	{
+		final Collection<IPlayerCondition> conditions = Lists.newArrayList();
+
+		conditions.add(new PlayerConditionFeedEntity(this.entityId));
+		conditions.add(new PlayerConditionKillEntity(this.entityId));
+
+		return conditions;
+	}
+
+	@Override
+	public ResourceLocation getEntityId()
 	{
 		return this.entityId;
 	}
@@ -51,27 +72,41 @@ public class TGEntryBestiaryPage extends TGEntryDefinitionBase implements ITGEnt
 	}
 
 	@Override
-	public String getDescriptionEntryId()
+	public IEntityStats getEntityStats()
 	{
-		return this.descriptionEntryId;
+		return AetherCore.PROXY.content().entityStatsCache().getStats(this.entityId);
 	}
 
 	@Override
-	public String getStatsEntryId()
+	public ITextComponent getDescription()
 	{
-		return this.statsEntryId;
+		return this.description;
 	}
 
 	@Override
-	public String getMovesEntryId()
+	public String getEntityName()
 	{
-		return this.movesEntryId;
+		return I18n.format("entity." + this.getEntityId().getNamespace() + "." + this.getEntityId().getPath() + ".name");
 	}
 
 	@Override
-	public String getNameEntryId()
+	public boolean hasUnlockedStats(final IPlayerAether playerAether)
 	{
-		return this.nameEntryId;
+		return playerAether.getPlayerConditionModule().areConditionsFlagged(ConditionResolution.REQUIRE_ANY,
+				"feedEntity:" + this.entityId,
+				"killEntity:" + this.entityId);
+	}
+
+	@Override
+	public boolean hasUnlockedCompleteOverview(final IPlayerAether playerAether)
+	{
+		return this.hasUnlockedName(playerAether); // TODO: Need to have conditions for each move
+	}
+
+	@Override
+	public boolean hasUnlockedName(final IPlayerAether playerAether)
+	{
+		return this.hasUnlockedStats(playerAether);
 	}
 
 	@Override
@@ -86,14 +121,13 @@ public class TGEntryBestiaryPage extends TGEntryDefinitionBase implements ITGEnt
 		public TGEntryBestiaryPage deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
 				throws JsonParseException
 		{
-			return new TGEntryBestiaryPage(json.getAsJsonObject().get("tag").getAsString(),
-					json.getAsJsonObject().get("entityId").getAsString(),
-					json.getAsJsonObject().get("descriptionEntryId").getAsString(),
-					json.getAsJsonObject().get("statsEntryId").getAsString(),
-					json.getAsJsonObject().get("movesEntryId").getAsString(),
-					json.getAsJsonObject().get("nameEntryId").getAsString(),
-					new ResourceLocation(json.getAsJsonObject().get("silhouetteTexture").getAsString()),
-					new ResourceLocation(json.getAsJsonObject().get("discoveredTexture").getAsString()));
+			final JsonObject obj = json.getAsJsonObject();
+
+			return new TGEntryBestiaryPage(obj.get("tag").getAsString(),
+					new ResourceLocation(obj.get("entityId").getAsString()),
+					obj.get("description").getAsString(),
+					new ResourceLocation(obj.get("silhouetteTexture").getAsString()),
+					new ResourceLocation(obj.get("discoveredTexture").getAsString()));
 		}
 	}
 }

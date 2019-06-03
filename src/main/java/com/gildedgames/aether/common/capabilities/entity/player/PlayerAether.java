@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.capabilities.entity.player;
 import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.dialog.IDialogController;
 import com.gildedgames.aether.api.player.IPlayerAether;
+import com.gildedgames.aether.api.player.IPlayerConditionModule;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.*;
 import com.gildedgames.aether.common.network.NetworkingAether;
@@ -78,7 +79,7 @@ public class PlayerAether implements IPlayerAether
 
 	private final CaveSpawnModule caveSpawnModule;
 
-	private final PlayerTGModule tgModule;
+	private final PlayerConditionModule tgModule;
 
 	private final List<PlayerAetherObserver> observers = Lists.newArrayList();
 
@@ -135,7 +136,7 @@ public class PlayerAether implements IPlayerAether
 		this.sectorModule = new PlayerSectorModule(this);
 		this.tradingModule = new PlayerTradeModule(this);
 		this.caveSpawnModule = new CaveSpawnModule(this);
-		this.tgModule = new PlayerTGModule(this);
+		this.tgModule = new PlayerConditionModule(this);
 
 		final Collection<PlayerAetherModule> modules = new ArrayList<>();
 
@@ -186,7 +187,7 @@ public class PlayerAether implements IPlayerAether
 		return this.lastDestroyedStack;
 	}
 
-	public void setLastDestroyedStack(ItemStack lastDestroyedStack)
+	public void setLastDestroyedStack(final ItemStack lastDestroyedStack)
 	{
 		this.lastDestroyedStack = lastDestroyedStack;
 	}
@@ -242,7 +243,7 @@ public class PlayerAether implements IPlayerAether
 		}
 	}
 
-	public void onPlayerTick(TickEvent.PlayerTickEvent event)
+	public void onPlayerTick(final TickEvent.PlayerTickEvent event)
 	{
 		this.onUpdate();
 
@@ -265,7 +266,7 @@ public class PlayerAether implements IPlayerAether
 	{
 		this.sendFullUpdate();
 
-		for (PlayerAetherModule module : this.modules)
+		for (final PlayerAetherModule module : this.modules)
 		{
 			module.onRespawn(event);
 		}
@@ -277,7 +278,7 @@ public class PlayerAether implements IPlayerAether
 
 	public void onDeath(final LivingDeathEvent event)
 	{
-		for (PlayerAetherModule module : this.modules)
+		for (final PlayerAetherModule module : this.modules)
 		{
 			module.onDeath(event);
 		}
@@ -285,7 +286,7 @@ public class PlayerAether implements IPlayerAether
 
 	public void onDrops(final PlayerDropsEvent event)
 	{
-		for (PlayerAetherModule module : this.modules)
+		for (final PlayerAetherModule module : this.modules)
 		{
 			module.onDrops(event);
 		}
@@ -360,7 +361,7 @@ public class PlayerAether implements IPlayerAether
 	@Override
 	public void write(final NBTTagCompound tag)
 	{
-		NBTFunnel funnel = new NBTFunnel(tag);
+		final NBTFunnel funnel = new NBTFunnel(tag);
 
 		final NBTTagList modules = new NBTTagList();
 
@@ -377,7 +378,7 @@ public class PlayerAether implements IPlayerAether
 	@Override
 	public void read(final NBTTagCompound tag)
 	{
-		NBTFunnel funnel = new NBTFunnel(tag);
+		final NBTFunnel funnel = new NBTFunnel(tag);
 
 		final NBTTagList modules = tag.getTagList("Modules", 10);
 
@@ -388,7 +389,7 @@ public class PlayerAether implements IPlayerAether
 			module.read(modules.getCompoundTagAt(i));
 		}
 
-		NecromancerTowerInstance inst = funnel.get("towerInstance");
+		final NecromancerTowerInstance inst = funnel.get("towerInstance");
 
 		if (inst != null)
 		{
@@ -399,7 +400,7 @@ public class PlayerAether implements IPlayerAether
 	@Override
 	public void onEntityJoinWorld()
 	{
-		for (PlayerAetherModule module : this.modules)
+		for (final PlayerAetherModule module : this.modules)
 		{
 			module.onEntityJoinWorld();
 		}
@@ -467,7 +468,8 @@ public class PlayerAether implements IPlayerAether
 		return this.tradingModule;
 	}
 
-	public PlayerTGModule getTGModule()
+	@Override
+	public IPlayerConditionModule getPlayerConditionModule()
 	{
 		return this.tgModule;
 	}

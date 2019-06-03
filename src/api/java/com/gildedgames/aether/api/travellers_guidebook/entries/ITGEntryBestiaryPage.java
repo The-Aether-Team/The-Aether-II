@@ -1,21 +1,35 @@
 package com.gildedgames.aether.api.travellers_guidebook.entries;
 
-import com.gildedgames.aether.api.travellers_guidebook.ITGEntryDefinition;
+import com.gildedgames.aether.api.cache.IEntityStats;
+import com.gildedgames.aether.api.player.IPlayerAether;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
 
-public interface ITGEntryBestiaryPage extends ITGEntryDefinition
+public interface ITGEntryBestiaryPage extends ITGEntryEntity
 {
-	String getEntityId();
-
 	ResourceLocation getSilhouetteTexture();
 
 	ResourceLocation getDiscoveredTexture();
 
-	String getDescriptionEntryId();
+	IEntityStats getEntityStats();
 
-	String getStatsEntryId();
+	ITextComponent getDescription();
 
-	String getMovesEntryId();
+	String getEntityName();
 
-	String getNameEntryId();
+	boolean hasUnlockedStats(IPlayerAether playerAether);
+
+	/**
+	 * The complete overview of the bestiary page includes
+	 * the description of the creature as well as a visible
+	 * pixel art portrait of the creature.
+	 *
+	 * @return Whether or not the complete overview has been unlocked.
+	 */
+	boolean hasUnlockedCompleteOverview(IPlayerAether playerAether);
+
+	/**
+	 * @return Whether or not the name has been unlocked.
+	 */
+	boolean hasUnlockedName(IPlayerAether playerAether);
 }
