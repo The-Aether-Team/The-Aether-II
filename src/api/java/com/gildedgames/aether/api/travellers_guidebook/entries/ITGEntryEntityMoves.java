@@ -1,8 +1,6 @@
 package com.gildedgames.aether.api.travellers_guidebook.entries;
 
-import com.gildedgames.aether.api.travellers_guidebook.ITGEntryDefinition;
-
-public interface ITGEntryEntityMoves extends ITGEntryDefinition
+public interface ITGEntryEntityMoves extends ITGEntryEntity
 {
-	String getEntityId();
+
 }

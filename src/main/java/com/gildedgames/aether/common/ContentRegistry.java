@@ -1,11 +1,15 @@
 package com.gildedgames.aether.common;
 
+import com.gildedgames.aether.api.cache.IEntityStatsCache;
 import com.gildedgames.aether.api.patron.PatronRewardRegistry;
+import com.gildedgames.aether.api.player.conditions.IPlayerConditionTracker;
+import com.gildedgames.aether.api.player.conditions.events.SeeEntityEvents;
 import com.gildedgames.aether.api.registrar.*;
 import com.gildedgames.aether.api.registry.IContentRegistry;
 import com.gildedgames.aether.api.world.preparation.IPrepRegistry;
 import com.gildedgames.aether.api.travellers_guidebook.ITGManager;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.cache.EntityStatsCache;
 import com.gildedgames.aether.common.capabilities.CapabilityManagerAether;
 import com.gildedgames.aether.common.capabilities.item.EffectRegistry;
 import com.gildedgames.aether.common.containers.overlays.TabRegistry;
@@ -16,6 +20,7 @@ import com.gildedgames.aether.common.items.properties.ItemPropertiesRegistry;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.patron.PatronRewards;
 import com.gildedgames.aether.common.recipes.altar.AltarRecipeRegistry;
+import com.gildedgames.aether.common.player_conditions.PlayerConditionTracker;
 import com.gildedgames.aether.common.recipes.simple.RecipeIndexRegistry;
 import com.gildedgames.aether.common.recipes.simple.RecipeWrapper;
 import com.gildedgames.aether.common.recipes.simple.SimpleCraftingRegistry;
@@ -35,6 +40,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.capabilities.Capability;
@@ -56,7 +62,9 @@ public class ContentRegistry implements IContentRegistry, IOrbisServicesListener
 
 	private final DialogManager dialogManager = new DialogManager(true);
 
-	private final TGManager tgManager = new TGManager();
+	private final IPlayerConditionTracker playerConditionTracker = new PlayerConditionTracker();
+
+	private final TGManager tgManager = new TGManager(this.playerConditionTracker);
 
 	private final RecipeIndexRegistry craftableItemsIndex = new RecipeIndexRegistry();
 
@@ -65,6 +73,10 @@ public class ContentRegistry implements IContentRegistry, IOrbisServicesListener
 	private final PatronRewardRegistry patronRewardRegistry = new PatronRewardRegistry();
 
 	private final ShopManager shopManager = new ShopManager(true);
+
+	private final SeeEntityEvents seeEntityEvents = new SeeEntityEvents();
+
+	private final IEntityStatsCache entityStatsCache = new EntityStatsCache();
 
 	private final IPrepRegistry prepRegistry = new PrepRegistry();
 
@@ -124,6 +136,7 @@ public class ContentRegistry implements IContentRegistry, IOrbisServicesListener
 	{
 		PerfHelper.measure("Verify Orbis project manager", OrbisLib.services()::verifyProjectManagerStarted);
 		PerfHelper.measure("Load generation", GenerationAether::load);
+		PerfHelper.measure("Register SeeEntityEvents", () -> MinecraftForge.EVENT_BUS.register(this.seeEntityEvents));
 	}
 
 	public void onServerStarting()
@@ -146,6 +159,24 @@ public class ContentRegistry implements IContentRegistry, IOrbisServicesListener
 				this.craftableItemsIndex.registerRecipe(new RecipeWrapper(recipe));
 			}
 		}
+	}
+
+	@Override
+	public SeeEntityEvents seeEntityEvents()
+	{
+		return this.seeEntityEvents;
+	}
+
+	@Override
+	public IEntityStatsCache entityStatsCache()
+	{
+		return this.entityStatsCache;
+	}
+
+	@Override
+	public IPlayerConditionTracker playerConditionTracker()
+	{
+		return this.playerConditionTracker;
 	}
 
 	@Override

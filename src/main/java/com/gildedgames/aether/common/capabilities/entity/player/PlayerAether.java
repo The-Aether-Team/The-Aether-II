@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.capabilities.entity.player;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.player.IPlayerAetherModule;
 import com.gildedgames.aether.api.registrar.CapabilitiesAether;
+import com.gildedgames.aether.api.player.IPlayerConditionModule;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.*;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.guidebook.PlayerTGModule;
@@ -145,7 +146,7 @@ public class PlayerAether implements IPlayerAether
 		return this.lastDestroyedStack;
 	}
 
-	public void setLastDestroyedStack(ItemStack lastDestroyedStack)
+	public void setLastDestroyedStack(final ItemStack lastDestroyedStack)
 	{
 		this.lastDestroyedStack = lastDestroyedStack;
 	}
@@ -187,7 +188,7 @@ public class PlayerAether implements IPlayerAether
 		}
 	}
 
-	public void onPlayerTick(TickEvent.PlayerTickEvent event)
+	public void onPlayerTick(final TickEvent.PlayerTickEvent event)
 	{
 		this.onUpdate();
 
@@ -292,7 +293,7 @@ public class PlayerAether implements IPlayerAether
 	@Override
 	public void write(final NBTTagCompound tag)
 	{
-		NBTFunnel funnel = new NBTFunnel(tag);
+		final NBTFunnel funnel = new NBTFunnel(tag);
 
 		final NBTTagCompound modules = new NBTTagCompound();
 
@@ -309,7 +310,7 @@ public class PlayerAether implements IPlayerAether
 	@Override
 	public void read(final NBTTagCompound tag)
 	{
-		NBTFunnel funnel = new NBTFunnel(tag);
+		final NBTFunnel funnel = new NBTFunnel(tag);
 
 		NBTTagCompound modules = tag.getCompoundTag("Modules");
 
@@ -323,7 +324,7 @@ public class PlayerAether implements IPlayerAether
 			}
 		}
 
-		NecromancerTowerInstance inst = funnel.get("towerInstance");
+		final NecromancerTowerInstance inst = funnel.get("towerInstance");
 
 		if (inst != null)
 		{
