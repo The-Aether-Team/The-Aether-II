@@ -13,6 +13,8 @@ public interface ITGManager
 
 	void load();
 
+	void unload();
+
 	List<ITGEntry> getEntriesWithTag(String tag);
 
 	<T extends ITGEntry> Optional<T> getEntry(String entryId, Class<T> clazzType);
