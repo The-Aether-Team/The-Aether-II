@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.player.IPlayerConditionModule;
 import com.gildedgames.aether.api.player.conditions.types.IPlayerConditionFeedEntity;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.player_conditions.PlayerConditionBase;
+import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -83,19 +84,20 @@ public class PlayerConditionFeedEntity extends PlayerConditionBase implements IP
 	{
 		Entity entity = event.getTarget();
 
+		if (!EntityUtil.checkEntityClass(entity, this.entityEntry.getEntityClass()))
+		{
+			return;
+		}
+		
 		// Some entities use this, need to check for cast to get parent
 		if (entity instanceof MultiPartEntityPart)
 		{
 			final MultiPartEntityPart multi = (MultiPartEntityPart) entity;
 
-			if (multi.parent.getClass() != this.entityEntry.getEntityClass() || !(multi.parent instanceof EntityAnimal))
-			{
-				return;
-			}
-
 			entity = (Entity) multi.parent;
 		}
-		else if (entity.getClass() != this.entityEntry.getEntityClass() || !(entity instanceof EntityAnimal))
+
+		if (!(entity instanceof EntityAnimal))
 		{
 			return;
 		}

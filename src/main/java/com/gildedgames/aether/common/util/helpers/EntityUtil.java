@@ -6,6 +6,7 @@ import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.MultiPartEntityPart;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumParticleTypes;
@@ -20,6 +21,22 @@ import java.util.UUID;
 
 public class EntityUtil
 {
+	public static boolean checkEntityClass(final Entity entity, final Class<?> clazz)
+	{
+		// Some entities use this, need to check for cast to get parent
+		if (entity instanceof MultiPartEntityPart)
+		{
+			final MultiPartEntityPart multi = (MultiPartEntityPart) entity;
+
+			if (multi.parent.getClass() != clazz)
+			{
+				return false;
+			}
+		}
+
+		return entity.getClass() == clazz;
+	}
+
 	@SuppressWarnings("unchecked")
 	public static <T extends Entity> T clone(final T entity)
 	{
@@ -88,7 +105,7 @@ public class EntityUtil
 		facePos(entity, pos.getX(), pos.getY(), pos.getZ(), maxYawIncrease, maxPitchIncrease);
 	}
 
-	public static double getYawFacingPosition(Entity entity, double posX, double posZ)
+	public static double getYawFacingPosition(final Entity entity, final double posX, final double posZ)
 	{
 		final double x = posX - entity.posX;
 		final double z = posZ - entity.posZ;
@@ -96,7 +113,8 @@ public class EntityUtil
 		return (MathHelper.atan2(z, x) * (180D / Math.PI)) - 90.0D;
 	}
 
-	public static void facePos(final Entity entity, double posX, double posY, double posZ, final float maxYawIncrease, final float maxPitchIncrease)
+	public static void facePos(final Entity entity, final double posX, final double posY, final double posZ, final float maxYawIncrease,
+			final float maxPitchIncrease)
 	{
 		final double x = posX - entity.posX;
 		final double y = posY - entity.posY;
@@ -186,7 +204,7 @@ public class EntityUtil
 		}
 	}
 
-	public static String getSkin(EntityPlayer player)
+	public static String getSkin(final EntityPlayer player)
 	{
 		String skinType = DefaultPlayerSkin.getSkinType(player.getUniqueID());
 
@@ -198,12 +216,12 @@ public class EntityUtil
 		return skinType;
 	}
 
-	public static IBlockState getBlockBelow(Entity entity)
+	public static IBlockState getBlockBelow(final Entity entity)
 	{
 		return getBlockBelow(entity.world, entity.getPosition());
 	}
 
-	public static IBlockState getBlockBelow(World world, BlockPos pos)
+	public static IBlockState getBlockBelow(final World world, BlockPos pos)
 	{
 		IBlockState state;
 
