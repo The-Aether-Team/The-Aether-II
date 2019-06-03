@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.player_conditions.types;
 
 import com.gildedgames.aether.api.player.IPlayerConditionModule;
-import com.gildedgames.aether.api.player.conditions.types.IPlayerConditionKillEntity;
+import com.gildedgames.aether.api.player.conditions.types.IPlayerConditionEntity;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.player_conditions.PlayerConditionBase;
 import com.google.gson.JsonDeserializationContext;
@@ -21,7 +21,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.lang.reflect.Type;
 
-public class PlayerConditionKillEntity extends PlayerConditionBase implements IPlayerConditionKillEntity
+public class PlayerConditionKillEntity extends PlayerConditionBase implements IPlayerConditionEntity
 {
 	private final ResourceLocation entityId;
 

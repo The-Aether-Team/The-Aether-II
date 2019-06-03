@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.player_conditions.types;
 
 import com.gildedgames.aether.api.player.IPlayerConditionModule;
 import com.gildedgames.aether.api.player.conditions.events.ISeeEntityEventsListener;
-import com.gildedgames.aether.api.player.conditions.types.IPlayerConditionSeeEntity;
+import com.gildedgames.aether.api.player.conditions.types.IPlayerConditionEntity;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.player_conditions.PlayerConditionBase;
@@ -20,7 +20,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.lang.reflect.Type;
 
-public class PlayerConditionSeeEntity extends PlayerConditionBase implements IPlayerConditionSeeEntity, ISeeEntityEventsListener
+public class PlayerConditionSeeEntity extends PlayerConditionBase implements IPlayerConditionEntity, ISeeEntityEventsListener
 {
 	private final ResourceLocation entityId;
 

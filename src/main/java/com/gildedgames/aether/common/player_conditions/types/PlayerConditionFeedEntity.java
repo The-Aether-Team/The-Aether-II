@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.player_conditions.types;
 
 import com.gildedgames.aether.api.player.IPlayerConditionModule;
-import com.gildedgames.aether.api.player.conditions.types.IPlayerConditionFeedEntity;
+import com.gildedgames.aether.api.player.conditions.types.IPlayerConditionEntity;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.player_conditions.PlayerConditionBase;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
@@ -24,7 +24,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.lang.reflect.Type;
 
-public class PlayerConditionFeedEntity extends PlayerConditionBase implements IPlayerConditionFeedEntity
+public class PlayerConditionFeedEntity extends PlayerConditionBase implements IPlayerConditionEntity
 {
 	private final ResourceLocation entityId;
 
@@ -88,7 +88,7 @@ public class PlayerConditionFeedEntity extends PlayerConditionBase implements IP
 		{
 			return;
 		}
-		
+
 		// Some entities use this, need to check for cast to get parent
 		if (entity instanceof MultiPartEntityPart)
 		{
