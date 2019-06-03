@@ -8,7 +8,7 @@ import com.gildedgames.aether.api.travellers_guidebook.entries.ITGEntryBestiaryP
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.player_conditions.types.PlayerConditionFeedEntity;
 import com.gildedgames.aether.common.player_conditions.types.PlayerConditionKillEntity;
-import com.gildedgames.aether.common.travellers_guidebook.TGEntryDefinitionBase;
+import com.gildedgames.aether.common.travellers_guidebook.TGEntryBase;
 import com.google.common.collect.Lists;
 import com.google.gson.*;
 import net.minecraft.client.resources.I18n;
@@ -19,7 +19,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import java.lang.reflect.Type;
 import java.util.Collection;
 
-public class TGEntryBestiaryPage extends TGEntryDefinitionBase implements ITGEntryBestiaryPage
+public class TGEntryBestiaryPage extends TGEntryBase implements ITGEntryBestiaryPage
 {
 	private final ResourceLocation entityId;
 

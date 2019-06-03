@@ -13,9 +13,9 @@ public interface ITGManager
 
 	void load();
 
-	List<ITGEntryDefinition> getEntriesWithTag(String tag);
+	List<ITGEntry> getEntriesWithTag(String tag);
 
-	<T extends ITGEntryDefinition> Optional<T> getEntry(String entryId, Class<T> clazzType);
+	<T extends ITGEntry> Optional<T> getEntry(String entryId, Class<T> clazzType);
 
 	@SideOnly(Side.CLIENT)
 	void attachReloadListener();

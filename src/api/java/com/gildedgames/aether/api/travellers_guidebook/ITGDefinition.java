@@ -16,5 +16,5 @@ public interface ITGDefinition
 	ConditionResolution conditionResolution();
 
 	@Nonnull
-	Map<String, ITGEntryDefinition> entries();
+	Map<String, ITGEntry> entries();
 }

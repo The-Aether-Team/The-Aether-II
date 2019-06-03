@@ -1,15 +1,15 @@
 package com.gildedgames.aether.common.travellers_guidebook;
 
-import com.gildedgames.aether.api.travellers_guidebook.ITGEntryDefinition;
+import com.gildedgames.aether.api.travellers_guidebook.ITGEntry;
 import com.gildedgames.aether.common.travellers_guidebook.entries.TGEntryBestiaryPage;
 import com.google.gson.*;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
 
-public class TGEntryDeserializer implements JsonDeserializer<ITGEntryDefinition>
+public class TGEntryDeserializer implements JsonDeserializer<ITGEntry>
 {
-	private final HashMap<String, Class<? extends ITGEntryDefinition>> entryDefinitions = new HashMap<>();
+	private final HashMap<String, Class<? extends ITGEntry>> entryDefinitions = new HashMap<>();
 
 	public TGEntryDeserializer()
 	{
@@ -17,7 +17,7 @@ public class TGEntryDeserializer implements JsonDeserializer<ITGEntryDefinition>
 	}
 
 	@Override
-	public ITGEntryDefinition deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context) throws JsonParseException
+	public ITGEntry deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context) throws JsonParseException
 	{
 		final JsonObject root = json.getAsJsonObject();
 

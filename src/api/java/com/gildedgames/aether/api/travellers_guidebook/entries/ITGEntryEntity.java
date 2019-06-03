@@ -1,9 +1,9 @@
 package com.gildedgames.aether.api.travellers_guidebook.entries;
 
-import com.gildedgames.aether.api.travellers_guidebook.ITGEntryDefinition;
+import com.gildedgames.aether.api.travellers_guidebook.ITGEntry;
 import net.minecraft.util.ResourceLocation;
 
-public interface ITGEntryEntity extends ITGEntryDefinition
+public interface ITGEntryEntity extends ITGEntry
 {
 	ResourceLocation getEntityId();
 }

@@ -5,7 +5,7 @@ import com.gildedgames.aether.api.player.conditions.IPlayerCondition;
 
 import java.util.Collection;
 
-public interface ITGEntryDefinition
+public interface ITGEntry
 {
 	/**
 	 * Called by the TGManager giving this entry the opportunity to
