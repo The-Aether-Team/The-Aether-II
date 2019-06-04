@@ -1,6 +1,6 @@
 package com.gildedgames.aether.api.travellers_guidebook;
 
-import com.gildedgames.aether.api.player.conditions.ConditionResolution;
+import com.gildedgames.aether.api.player.conditions.IConditionResolution;
 import com.gildedgames.aether.api.player.conditions.IPlayerCondition;
 
 import java.util.Collection;
@@ -25,9 +25,9 @@ public interface ITGEntry
 
 	String tag();
 
-	ConditionResolution getConditionResolution();
+	IConditionResolution getConditionResolution();
 
-	void setConditionResolution(ConditionResolution conditionResolution);
+	void setConditionResolution(IConditionResolution conditionResolution);
 
 	Collection<String> getConditionIDs();
 

@@ -1,6 +1,6 @@
 package com.gildedgames.aether.api.player;
 
-import com.gildedgames.aether.api.player.conditions.ConditionResolution;
+import com.gildedgames.aether.api.player.conditions.IConditionResolution;
 
 public interface IPlayerConditionModule
 {
@@ -8,5 +8,5 @@ public interface IPlayerConditionModule
 
 	boolean isConditionFlagged(String conditionUniqueIdentifier);
 
-	boolean areConditionsFlagged(final ConditionResolution conditionResolution, String... conditionUniqueIdentifiers);
+	boolean areConditionsFlagged(final IConditionResolution conditionResolution, String... conditionUniqueIdentifiers);
 }

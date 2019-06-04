@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.travellers_guidebook;
 
-import com.gildedgames.aether.api.player.conditions.ConditionResolution;
+import com.gildedgames.aether.api.player.conditions.IConditionResolution;
 import com.gildedgames.aether.api.player.conditions.IPlayerCondition;
 import com.gildedgames.aether.api.travellers_guidebook.ITGDefinition;
 import com.gildedgames.aether.api.travellers_guidebook.ITGEntry;
@@ -16,12 +16,12 @@ public class TGDefinition implements ITGDefinition
 	private final Collection<IPlayerCondition> conditions;
 
 	@SerializedName("conditionResolution")
-	private final ConditionResolution conditionResolution;
+	private final IConditionResolution conditionResolution;
 
 	@SerializedName("entries")
 	private final Map<String, ITGEntry> entries;
 
-	public TGDefinition(final Collection<IPlayerCondition> conditions, final ConditionResolution conditionResolution,
+	public TGDefinition(final Collection<IPlayerCondition> conditions, final IConditionResolution conditionResolution,
 			final Map<String, ITGEntry> entries)
 	{
 		this.conditions = conditions;
@@ -38,7 +38,7 @@ public class TGDefinition implements ITGDefinition
 
 	@Nonnull
 	@Override
-	public ConditionResolution conditionResolution()
+	public IConditionResolution conditionResolution()
 	{
 		return this.conditionResolution;
 	}

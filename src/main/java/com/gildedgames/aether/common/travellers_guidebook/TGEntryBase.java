@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.travellers_guidebook;
 
-import com.gildedgames.aether.api.player.conditions.ConditionResolution;
+import com.gildedgames.aether.api.player.conditions.IConditionResolution;
 import com.gildedgames.aether.api.player.conditions.IPlayerCondition;
 import com.gildedgames.aether.api.travellers_guidebook.ITGEntry;
 
@@ -11,7 +11,7 @@ public abstract class TGEntryBase implements ITGEntry
 {
 	private Collection<String> conditionIDs;
 
-	private ConditionResolution conditionResolution;
+	private IConditionResolution conditionResolution;
 
 	public TGEntryBase()
 	{
@@ -37,13 +37,13 @@ public abstract class TGEntryBase implements ITGEntry
 	}
 
 	@Override
-	public ConditionResolution getConditionResolution()
+	public IConditionResolution getConditionResolution()
 	{
 		return this.conditionResolution;
 	}
 
 	@Override
-	public void setConditionResolution(final ConditionResolution conditionResolution)
+	public void setConditionResolution(final IConditionResolution conditionResolution)
 	{
 		this.conditionResolution = conditionResolution;
 	}
