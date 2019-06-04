@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.travellers_guidebook.entries;
 
 import com.gildedgames.aether.api.cache.IEntityStats;
 import com.gildedgames.aether.api.player.IPlayerAether;
-import com.gildedgames.aether.api.player.conditions.ConditionResolution;
+import com.gildedgames.aether.api.player.conditions.IConditionResolution;
 import com.gildedgames.aether.api.player.conditions.IPlayerCondition;
 import com.gildedgames.aether.api.travellers_guidebook.entries.ITGEntryBestiaryPage;
 import com.gildedgames.aether.common.AetherCore;
@@ -92,7 +92,7 @@ public class TGEntryBestiaryPage extends TGEntryBase implements ITGEntryBestiary
 	@Override
 	public boolean hasUnlockedStats(final IPlayerAether playerAether)
 	{
-		return playerAether.getPlayerConditionModule().areConditionsFlagged(ConditionResolution.REQUIRE_ANY,
+		return playerAether.getPlayerConditionModule().areConditionsFlagged(IConditionResolution.REQUIRE_ANY,
 				"feedEntity:" + this.entityId,
 				"killEntity:" + this.entityId);
 	}

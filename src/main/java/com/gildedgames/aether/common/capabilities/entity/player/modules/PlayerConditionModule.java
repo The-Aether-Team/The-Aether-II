@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
 import com.gildedgames.aether.api.player.IPlayerConditionModule;
-import com.gildedgames.aether.api.player.conditions.ConditionResolution;
+import com.gildedgames.aether.api.player.conditions.IConditionResolution;
 import com.gildedgames.aether.api.travellers_guidebook.ITGEntry;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
@@ -40,7 +40,7 @@ public class PlayerConditionModule extends PlayerAetherModule implements IPlayer
 	}
 
 	@Override
-	public boolean areConditionsFlagged(final ConditionResolution conditionResolution, final String... conditionUniqueIdentifiers)
+	public boolean areConditionsFlagged(final IConditionResolution conditionResolution, final String... conditionUniqueIdentifiers)
 	{
 		return conditionResolution.areConditionsMet(conditionUniqueIdentifiers, this.isConditionMet);
 	}

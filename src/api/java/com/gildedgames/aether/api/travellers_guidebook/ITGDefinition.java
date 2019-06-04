@@ -1,6 +1,6 @@
 package com.gildedgames.aether.api.travellers_guidebook;
 
-import com.gildedgames.aether.api.player.conditions.ConditionResolution;
+import com.gildedgames.aether.api.player.conditions.IConditionResolution;
 import com.gildedgames.aether.api.player.conditions.IPlayerCondition;
 
 import javax.annotation.Nonnull;
@@ -13,7 +13,7 @@ public interface ITGDefinition
 	Collection<IPlayerCondition> conditions();
 
 	@Nonnull
-	ConditionResolution conditionResolution();
+	IConditionResolution conditionResolution();
 
 	@Nonnull
 	Map<String, ITGEntry> entries();
