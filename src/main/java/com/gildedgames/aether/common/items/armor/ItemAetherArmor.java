@@ -31,7 +31,7 @@ public class ItemAetherArmor extends ItemArmor
 
 		this.setCreativeTab(CreativeTabsAether.ARMOR);
 
-		this.damageReduceAmount = 0;
+		this.damageReduceAmount = material.getDamageReductionAmount(armorType);
 	}
 
 	public <T extends ItemAetherArmor> T slashDefense(int level)
