@@ -28,6 +28,11 @@ public class RenderWorldSkybox extends IRenderHandler
 	@Override
 	public void render(float partialTicks, WorldClient world, Minecraft mc)
 	{
+		if (!AetherCore.CONFIG.isSkyboxRenderEnabled())
+		{
+			return;
+		}
+
 		this.prevUpdateTimeMillis = this.nowUpdateTimeMillis;
 		this.nowUpdateTimeMillis = System.nanoTime() / 1_000_000;
 

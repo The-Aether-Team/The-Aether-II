@@ -14,7 +14,7 @@ import java.io.File;
 @Mod.EventBusSubscriber
 public class ConfigAether
 {
-	public final ConfigCategory general, dimensions, controls, gameplay, misc;
+	public final ConfigCategory general, dimensions, controls, gameplay, misc, client;
 
 	private final Configuration configuration;
 
@@ -40,6 +40,8 @@ public class ConfigAether
 
 	private boolean hideXPBarInAether;
 
+	private boolean enableSkybox = true;
+
 	public ConfigAether(final File file)
 	{
 		this.configuration = new Configuration(file, true);
@@ -49,6 +51,7 @@ public class ConfigAether
 		this.dimensions = this.configuration.getCategory("Dimension IDs");
 		this.gameplay = this.configuration.getCategory("Gameplay");
 		this.misc = this.configuration.getCategory("Miscellaneous");
+		this.client = this.configuration.getCategory("Client");
 
 		this.dimensions.setRequiresMcRestart(true);
 
@@ -77,6 +80,8 @@ public class ConfigAether
 		this.acknowledgeFingerprintViolation = this.getBoolean(this.misc, "Acknowledge Fingerprint Violation", false);
 
 		this.getBoolean(this.gameplay, "Rideable Aerwhales", false);
+
+		this.enableSkybox = this.getBoolean(this.client, "Enable Aether Skybox", true);
 
 		if (this.configuration.hasChanged())
 		{
@@ -171,6 +176,11 @@ public class ConfigAether
 	public boolean hasAckFingerprintViolation()
 	{
 		return this.acknowledgeFingerprintViolation;
+	}
+
+	public boolean isSkyboxRenderEnabled()
+	{
+		return this.enableSkybox;
 	}
 
 	public void markFingerprintViolationAck()

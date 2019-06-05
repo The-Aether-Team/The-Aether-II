@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.effects;
 
+import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
@@ -12,15 +13,15 @@ public class InventoryProvider
 {
 	private ResourceLocation uniqueId;
 
-	private Function<PlayerAether, IInventory> inventoryFunction;
+	private Function<IPlayerAether, IInventory> inventoryFunction;
 
-	public InventoryProvider(ResourceLocation uniqueId, Function<PlayerAether, IInventory> inventoryFunction)
+	public InventoryProvider(ResourceLocation uniqueId, Function<IPlayerAether, IInventory> inventoryFunction)
 	{
 		this.uniqueId = uniqueId;
 		this.inventoryFunction = inventoryFunction;
 	}
 
-	public IInventory provide(PlayerAether playerAether)
+	public IInventory provide(IPlayerAether playerAether)
 	{
 		return this.inventoryFunction.apply(playerAether);
 	}

@@ -6,18 +6,20 @@ import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import net.minecraft.item.ItemStack;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Optional;
+import java.util.*;
 
 public class EquipmentEffectPool<T extends IEffectProvider> implements IEffectPool<T>
 {
 	private final IPlayerAether player;
 
-	private final BiMap<T, Pair<Integer, InventoryProvider>> providers = HashBiMap.create();
+	private final Multimap<Pair<Integer, InventoryProvider>, T> providers = HashMultimap.create();
+
+	private final Map<T, Pair<Integer, InventoryProvider>> providersInverse = new HashMap<>();
 
 	private final HashSet<T> active = new HashSet<>();
 
@@ -50,7 +52,7 @@ public class EquipmentEffectPool<T extends IEffectProvider> implements IEffectPo
 		this.rebuildInstance();
 	}
 
-	private void updateProvider(T provider, Pair<Integer, InventoryProvider> inventoryIndexPair)
+	private void updateProvider(Pair<Integer, InventoryProvider> inventoryIndexPair, T provider)
 	{
 		PlayerAether playerAether = PlayerAether.getPlayer(this.player.getEntity());
 
@@ -83,12 +85,16 @@ public class EquipmentEffectPool<T extends IEffectProvider> implements IEffectPo
 	 * Removes an provider from this pool, and rebuilds the state as needed.
 	 * @param inventoryIndexPair The index and inventory of the provider's {@link ItemStack}
 	 */
-	public void removeInstance(Pair<Integer, InventoryProvider> inventoryIndexPair)
+	public void removeInstances(Pair<Integer, InventoryProvider> inventoryIndexPair)
 	{
-		T provider = this.providers.inverse().remove(inventoryIndexPair);
+		Collection<T> provider = this.providers.removeAll(inventoryIndexPair);
 
-		this.providers.remove(provider);
-		this.active.remove(provider);
+		for (T inst : provider)
+		{
+			this.active.remove(inst);
+
+			this.providersInverse.remove(inst);
+		}
 
 		this.rebuildInstance();
 	}
@@ -100,9 +106,10 @@ public class EquipmentEffectPool<T extends IEffectProvider> implements IEffectPo
 	 */
 	public void addInstance(Pair<Integer, InventoryProvider> inventoryIndexPair, T provider)
 	{
-		this.providers.put(provider, inventoryIndexPair);
+		this.providers.put(inventoryIndexPair, provider);
+		this.providersInverse.put(provider, inventoryIndexPair);
 
-		this.updateProvider(provider, inventoryIndexPair);
+		this.updateProvider(inventoryIndexPair, provider);
 	}
 
 	/**
@@ -132,15 +139,10 @@ public class EquipmentEffectPool<T extends IEffectProvider> implements IEffectPo
 	@Override
 	public ItemStack getProvider(T provider)
 	{
-		if (!this.providers.containsKey(provider))
-		{
-			return ItemStack.EMPTY;
-		}
+		Pair<Integer, InventoryProvider> inventoryIndexPair = this.providersInverse.get(provider);
 
-		PlayerAether playerAether = PlayerAether.getPlayer(this.player.getEntity());
-		Pair<Integer, InventoryProvider> inventoryIndexPair = this.providers.get(provider);
-
-		return inventoryIndexPair.getValue().provide(playerAether).getStackInSlot(inventoryIndexPair.getKey());
+		return inventoryIndexPair.getValue().provide(this.player)
+				.getStackInSlot(inventoryIndexPair.getKey());
 	}
 
 	@Override

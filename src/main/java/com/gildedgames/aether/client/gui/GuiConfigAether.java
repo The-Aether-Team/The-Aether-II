@@ -25,6 +25,8 @@ public class GuiConfigAether extends GuiConfig
 		list.addAll(new ConfigElement(AetherCore.CONFIG.controls).getChildElements());
 		list.addAll(new ConfigElement(AetherCore.CONFIG.general).getChildElements());
 		list.addAll(new ConfigElement(AetherCore.CONFIG.dimensions).getChildElements());
+		list.addAll(new ConfigElement(AetherCore.CONFIG.misc).getChildElements());
+		list.addAll(new ConfigElement(AetherCore.CONFIG.client).getChildElements());
 
 		return list;
 	}
