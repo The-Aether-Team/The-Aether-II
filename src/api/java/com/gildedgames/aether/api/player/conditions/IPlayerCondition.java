@@ -2,10 +2,6 @@ package com.gildedgames.aether.api.player.conditions;
 
 import com.gildedgames.aether.api.player.conditions.types.IPlayerConditionListener;
 
-/**
- * This MUST implement hashCode() as it is heavily
- * used in maps.
- */
 public interface IPlayerCondition
 {
 	/**
