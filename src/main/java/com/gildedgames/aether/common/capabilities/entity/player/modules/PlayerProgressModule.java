@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
 import com.gildedgames.aether.api.player.IPlayerAetherModule;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.client.gui.container.guidebook.discovery.DiscoveryTab;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.network.NetworkingAether;
@@ -18,8 +19,9 @@ import java.util.Map;
 
 public class PlayerProgressModule extends PlayerAetherModule implements IPlayerAetherModule.Serializable
 {
-
 	public boolean hasDiedInAether;
+
+	private DiscoveryTab.DiscoveryTabType openedDiscoveryTabType = DiscoveryTab.DiscoveryTabType.BESTIARY;
 
 	private Map<ResourceLocation, Boolean> hasTalkedTo = Maps.newHashMap();
 
@@ -29,12 +31,22 @@ public class PlayerProgressModule extends PlayerAetherModule implements IPlayerA
 
 	private BlockPos beforeReturnToBed;
 
-	public PlayerProgressModule(PlayerAether playerAether)
+	public PlayerProgressModule(final PlayerAether playerAether)
 	{
 		super(playerAether);
 	}
 
-	public void setBoolean(String key, Boolean bool)
+	public DiscoveryTab.DiscoveryTabType getOpenedDiscoveryTabType()
+	{
+		return this.openedDiscoveryTabType;
+	}
+
+	public void setOpenedDiscoveryTabType(final DiscoveryTab.DiscoveryTabType type)
+	{
+		this.openedDiscoveryTabType = type;
+	}
+
+	public void setBoolean(final String key, final Boolean bool)
 	{
 		this.booleanData.put(key, bool);
 
@@ -114,6 +126,7 @@ public class PlayerProgressModule extends PlayerAetherModule implements IPlayerA
 		funnel.setMap("hasTalkedTo", this.hasTalkedTo, NBTFunnel.LOC_SETTER, NBTFunnel.BOOLEAN_SETTER);
 		funnel.setPos("beforeReturnToBed", this.beforeReturnToBed);
 		funnel.setMap("booleanData", this.booleanData, NBTFunnel.STRING_SETTER, NBTFunnel.BOOLEAN_SETTER);
+		tag.setString("openedDiscoveryTabType", this.openedDiscoveryTabType.toString());
 	}
 
 	@Override
@@ -126,6 +139,11 @@ public class PlayerProgressModule extends PlayerAetherModule implements IPlayerA
 		this.hasTalkedTo = funnel.getMap("hasTalkedTo", NBTFunnel.LOC_GETTER, NBTFunnel.BOOLEAN_GETTER);
 		this.beforeReturnToBed = funnel.getPos("beforeReturnToBed");
 		this.booleanData = funnel.getMap("booleanData", NBTFunnel.STRING_GETTER, NBTFunnel.BOOLEAN_GETTER);
+
+		if (tag.hasKey("openedDiscoveryTabType"))
+		{
+			this.openedDiscoveryTabType = DiscoveryTab.DiscoveryTabType.valueOf(tag.getString("openedDiscoveryTabType"));
+		}
 	}
 
 	@Override

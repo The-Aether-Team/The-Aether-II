@@ -14,6 +14,11 @@ public abstract class GuiAbstractButton extends GuiButton
 		super(elementId, x, y, "");
 	}
 
+	public GuiAbstractButton(final int elementId, final int x, final int y, final int width, final int height)
+	{
+		super(elementId, x, y, width, height, "");
+	}
+
 	@Override
 	public final void drawButton(final Minecraft mc, final int mouseX, final int mouseY, final float partialTicks)
 	{
