@@ -173,6 +173,27 @@ public class TGManager implements ITGManager
 	}
 
 	@Override
+	public <T extends ITGEntry> List<T> getEntriesWithTagAndClass(final String tag, final Class<T> clazzType)
+	{
+		if (this.tagToEntries.containsKey(tag))
+		{
+			final List<T> entries = Lists.newArrayList();
+
+			for (final ITGEntry entry : this.tagToEntries.get(tag))
+			{
+				if (entry.getClass().isAssignableFrom(clazzType))
+				{
+					entries.add((T) entry);
+				}
+			}
+
+			return entries;
+		}
+
+		return Collections.emptyList();
+	}
+
+	@Override
 	public <T extends ITGEntry> Optional<T> getEntry(final String entryId, final Class<T> clazzType)
 	{
 		if (this.idToEntries.containsKey(entryId))
