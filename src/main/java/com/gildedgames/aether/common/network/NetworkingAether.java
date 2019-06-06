@@ -48,6 +48,7 @@ public class NetworkingAether
 		instance.registerMessage(PacketChangeCoinAmount.HandlerServer.class, PacketChangeCoinAmount.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketTradeState.HandlerServer.class, PacketTradeState.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketTradeMessage.HandlerServer.class, PacketTradeMessage.class, discriminant++, Side.SERVER);
+		instance.registerMessage(PacketDiscoveryTabType.HandlerServer.class, PacketDiscoveryTabType.class, discriminant++, Side.SERVER);
 
 		// C L I E N T
 		instance.registerMessage(PacketEquipment.HandlerClient.class, PacketEquipment.class, discriminant++, Side.CLIENT);
