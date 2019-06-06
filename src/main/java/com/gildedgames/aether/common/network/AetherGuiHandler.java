@@ -152,29 +152,29 @@ public class AetherGuiHandler implements IGuiHandler
 			case CUSTOM_WORKBENCH_ID:
 				return new GuiCrafting(player.inventory, world, pos);
 			case INVENTORY_ID:
-				return new GuiGuidebookInventory(playerAether);
+				return new GuiGuidebookInventory(null, playerAether);
 			case STATUS_ID:
-				return new GuiGuidebookStatus(playerAether);
+				return new GuiGuidebookStatus(null, playerAether);
 			case LORE_TOME_ID:
-				return new GuiGuidebookLoreTome(playerAether);
+				return new GuiGuidebookLoreTome(null, playerAether);
 			case DISCOVERY_ID:
 				switch (playerAether.getProgressModule().getOpenedDiscoveryTabType())
 				{
 					case BESTIARY:
 					{
-						return new GuiGuidebookDiscoveryBestiary(playerAether);
+						return new GuiGuidebookDiscoveryBestiary(null, playerAether);
 					}
 					case CHARACTERS:
 					{
-						return new GuiGuidebookDiscoveryCharacters(playerAether);
+						return new GuiGuidebookDiscoveryCharacters(null, playerAether);
 					}
 					case BIOMES:
 					{
-						return new GuiGuidebookDiscoveryBiomes(playerAether);
+						return new GuiGuidebookDiscoveryBiomes(null, playerAether);
 					}
 					case STRUCTURES:
 					{
-						return new GuiGuidebookDiscoveryStructures(playerAether);
+						return new GuiGuidebookDiscoveryStructures(null, playerAether);
 					}
 				}
 

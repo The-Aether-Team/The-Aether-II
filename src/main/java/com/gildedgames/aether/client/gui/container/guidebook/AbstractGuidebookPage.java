@@ -2,34 +2,59 @@ package com.gildedgames.aether.client.gui.container.guidebook;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.GlStateManager;
+import com.gildedgames.orbis.lib.client.gui.util.GuiTexture;
+import com.gildedgames.orbis.lib.client.gui.util.gui_library.*;
+import com.gildedgames.orbis.lib.client.rect.Dim2D;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
-public abstract class AbstractGuidebookPage extends GuiContainer
-{
-	private static final ResourceLocation TEXTURE_BASE = AetherCore.getResource("textures/gui/guidebook/guidebook_base.png");
+import java.util.List;
 
+public abstract class AbstractGuidebookPage extends GuiViewer
+{
 	public static final ResourceLocation TEXTURE_GUI = AetherCore.getResource("textures/gui/guidebook/guidebook_gui.png");
+
+	private static final ResourceLocation TEXTURE_BASE = AetherCore.getResource("textures/gui/guidebook/guidebook_base.png");
 
 	protected final int TEXTURE_WIDTH = 512; // size of entire texture width.
 
 	protected final int TEXTURE_HEIGHT = 256; // size of entire texture height.
 
-	protected final int PAGE_WIDTH = 188; // width of page in texture.
+	protected final int PAGE_WIDTH = 176; // width of page in texture.
 
 	protected final int PAGE_HEIGHT = 185; // height of page in texture.
 
 	protected final PlayerAether aePlayer;
 
-	public AbstractGuidebookPage(final PlayerAether aePlayer, Container container)
+	public AbstractGuidebookPage(final IGuiViewer prevViewer, final PlayerAether aePlayer, final Container container)
 	{
-		super(container);
+		super(new GuiElement(Dim2D.flush(), false), prevViewer, container);
 
 		this.allowUserInput = true;
 		this.aePlayer = aePlayer;
+	}
+
+	@Override
+	public void build(final IGuiContext context)
+	{
+		final GuiTexture baseBook = new GuiTexture(
+				Dim2D.build().x((this.width / 2) - 176 - 11).y(this.height / 2 - 185 / 2).width(375).height(198).flush(),
+				TEXTURE_BASE);
+
+		context.addChildren(baseBook);
+
+		final List<IGuiElement> leftPageElements = this.createLeftPage((this.width / 2) - this.PAGE_WIDTH + 1, (this.height / 2) - (185 / 2), 0, 0);
+		final List<IGuiElement> rightPageElements = this.createRightPage(this.width / 2, (this.height / 2) - (185 / 2), this.PAGE_WIDTH - 13, 0);
+
+		for (final IGuiElement e : leftPageElements)
+		{
+			context.addChildren(e);
+		}
+
+		for (final IGuiElement e : rightPageElements)
+		{
+			context.addChildren(e);
+		}
 	}
 
 	@Override
@@ -37,38 +62,11 @@ public abstract class AbstractGuidebookPage extends GuiContainer
 	{
 		super.initGui();
 
-		this.guiLeft = (this.width/2) - 153 - 11;
-		this.guiTop = (this.height/2) - 69;
+		this.guiLeft = (this.width / 2) - 153 - 11;
+		this.guiTop = (this.height / 2) - 69;
 
-		this.xSize = 176*2;
+		this.xSize = 176 * 2;
 		this.ySize = 169;
-	}
-
-	@Override
-	public void drawScreen(final int mouseX, final int mouseY, final float partialTick)
-	{
-		super.drawScreen(mouseX,mouseY, partialTick);
-	}
-
-	@Override
-	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
-	{
-		this.drawWorldBackground(0);
-
-		this.mc.renderEngine.bindTexture(TEXTURE_BASE);
-
-		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
-
-		Gui.drawModalRectWithCustomSizedTexture((this.width/2) - 176 - 11, this.height/2 - 185/2, 0, 0, 376, 256, 512, 256);
-
-		/* Draw abstract methods to render left and right pages.
-		 *  Note that these calls have predetermined parameters which should align properly to the screen.
-		 *  Proper page texture parameters can be seen in this class' instance variables.
-		 */
-
-		this.drawLeftPage((this.width/2) - 176 - 11, (this.height/2) - (185/2), 0, 0);
-
-		this.drawRightPage((this.width/2) - 12, (this.height/2) - (185/2), this.PAGE_WIDTH-13, 0);
 	}
 
 	/**
@@ -80,7 +78,7 @@ public abstract class AbstractGuidebookPage extends GuiContainer
 	 * @param u texture x.
 	 * @param v texture y.
 	 */
-	abstract protected void drawLeftPage(int screenX, int screenY, float u, float v);
+	abstract protected List<IGuiElement> createLeftPage(int screenX, int screenY, float u, float v);
 
 	/**
 	 * Called by #drawGuiContainerBackgroundLayer
@@ -91,5 +89,5 @@ public abstract class AbstractGuidebookPage extends GuiContainer
 	 * @param u texture x.
 	 * @param v texture y.
 	 */
-	abstract protected void drawRightPage(int screenX, int screenY, float u, float v);
+	abstract protected List<IGuiElement> createRightPage(int screenX, int screenY, float u, float v);
 }

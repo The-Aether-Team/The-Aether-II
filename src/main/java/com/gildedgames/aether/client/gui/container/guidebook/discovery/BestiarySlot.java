@@ -3,12 +3,14 @@ package com.gildedgames.aether.client.gui.container.guidebook.discovery;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.travellers_guidebook.entries.TGEntryBestiaryPage;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiButton;
+import com.gildedgames.orbis.lib.client.gui.util.GuiAbstractButton;
+import com.gildedgames.orbis.lib.client.gui.util.GuiTexture;
+import com.gildedgames.orbis.lib.client.gui.util.gui_library.GuiElement;
+import com.gildedgames.orbis.lib.client.rect.Dim2D;
+import com.gildedgames.orbis.lib.client.rect.Pos2D;
 import net.minecraft.util.ResourceLocation;
 
-public class BestiarySlot extends GuiButton
+public class BestiarySlot extends GuiAbstractButton
 {
 	private static final ResourceLocation DARK_OVERLAY = AetherCore.getResource("textures/gui/inventory/dark_slot_overlay.png");
 
@@ -18,9 +20,11 @@ public class BestiarySlot extends GuiButton
 
 	private final PlayerAether playerAether;
 
-	public BestiarySlot(final PlayerAether playerAether, final int x, final int y, final TGEntryBestiaryPage page)
+	private GuiTexture icon;
+
+	public BestiarySlot(final PlayerAether playerAether, final Pos2D pos, final TGEntryBestiaryPage page)
 	{
-		super(-1, x, y, 18, 18, "");
+		super(Dim2D.build().width(18).height(18).pos(pos).flush(), new GuiTexture(Dim2D.build().width(18).height(18).flush(), DARK_OVERLAY));
 
 		this.playerAether = playerAether;
 		this.page = page;
@@ -28,25 +32,31 @@ public class BestiarySlot extends GuiButton
 		this.silhouette = page.getSilhouetteSlotTexture();
 	}
 
-	public TGEntryBestiaryPage getPage()
+	@Override
+	public void build()
 	{
-		return this.page;
+		super.build();
+
+		final ResourceLocation texture = this.page.isUnlocked(this.playerAether) ? this.discovered : this.silhouette;
+
+		this.icon = new GuiTexture(Dim2D.build().width(16).height(16).x(1).y(1).flush(), texture);
+
+		this.context().addChildren(this.icon);
 	}
 
 	@Override
-	public void drawButton(final Minecraft mc, final int mouseX, final int mouseY, final float partialTicks)
+	public void onDraw(final GuiElement element)
 	{
-		//super.drawButton(mc, mouseX, mouseY);
+		super.onDraw(element);
 
-		if (this.visible)
-		{
-			this.hovered =
-					mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
+		final ResourceLocation texture = this.page.isUnlocked(this.playerAether) ? this.discovered : this.silhouette;
 
-			mc.getTextureManager().bindTexture(this.page.isUnlocked(this.playerAether) ? this.discovered : this.silhouette);
+		this.icon.setResourceLocation(texture);
+	}
 
-			Gui.drawScaledCustomSizeModalRect(this.x, this.y, 0, 0, 16, 16, 16, 16, 16, 16);
-		}
+	public TGEntryBestiaryPage getPage()
+	{
+		return this.page;
 	}
 
 }

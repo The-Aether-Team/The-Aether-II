@@ -1,11 +1,10 @@
 package com.gildedgames.aether.client.gui.container.guidebook.discovery;
 
-import com.gildedgames.aether.client.gui.dialog.GuiAbstractButton;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.Gui;
+import com.gildedgames.orbis.lib.client.gui.util.GuiAbstractButton;
+import com.gildedgames.orbis.lib.client.gui.util.GuiTexture;
+import com.gildedgames.orbis.lib.client.rect.Dim2D;
+import com.gildedgames.orbis.lib.client.rect.Pos2D;
 import net.minecraft.util.ResourceLocation;
 
 public class DiscoveryTab extends GuiAbstractButton
@@ -14,46 +13,26 @@ public class DiscoveryTab extends GuiAbstractButton
 
 	private static final ResourceLocation TEXTURE_PRESSED = AetherCore.getResource("textures/gui/guidebook/discovery/guidebook_discovery_tab_pressed.png");
 
-	public static DiscoveryTabType focusedType;
-
 	private final DiscoveryTabType type;
 
-	private final PlayerAether playerAether;
-
-	public DiscoveryTab(final PlayerAether playerAether, final int buttonId, final int x, final int y, final DiscoveryTabType type)
+	public DiscoveryTab(final Pos2D pos, final DiscoveryTabType type, final DiscoveryTabType selectedType)
 	{
-		super(buttonId, x, y, 32, 20);
+		super(Dim2D.build().width(32).height(20).pos(pos).flush(),
+				new GuiTexture(Dim2D.build().width(32).height(20).flush(), TEXTURE),
+				new GuiTexture(Dim2D.build().width(32).height(20).flush(), TEXTURE_PRESSED),
+				new GuiTexture(Dim2D.build().width(32).height(20).flush(), TEXTURE));
 
-		this.playerAether = playerAether;
 		this.type = type;
+
+		if (type == selectedType)
+		{
+			this.setSelected(true);
+		}
 	}
 
-	public boolean isFocused()
+	public DiscoveryTabType getType()
 	{
-		return focusedType == this.type;
-	}
-
-	public void setFocused()
-	{
-		focusedType = this.type;
-		this.playerAether.getProgressModule().setOpenedDiscoveryTabType(this.type);
-	}
-
-	@Override
-	public void init(final FontRenderer fontRenderer)
-	{
-
-	}
-
-	@Override
-	public void draw(final FontRenderer fontRenderer)
-	{
-		final Minecraft mc = Minecraft.getMinecraft();
-		mc.getTextureManager().bindTexture(this.isFocused() ? TEXTURE_PRESSED : TEXTURE);
-
-		final int height = this.isFocused() ? 20 : 17;
-
-		Gui.drawScaledCustomSizeModalRect(this.x, this.y + (this.isFocused() ? 1 : 3), 0, 0, 32, height, 32, height, 32, height);
+		return this.type;
 	}
 
 	public enum DiscoveryTabType

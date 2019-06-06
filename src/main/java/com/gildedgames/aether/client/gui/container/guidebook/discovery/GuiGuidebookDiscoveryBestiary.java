@@ -4,13 +4,19 @@ import com.gildedgames.aether.api.travellers_guidebook.ITGManager;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.travellers_guidebook.entries.TGEntryBestiaryPage;
+import com.gildedgames.orbis.lib.client.gui.data.Text;
+import com.gildedgames.orbis.lib.client.gui.util.GuiText;
+import com.gildedgames.orbis.lib.client.gui.util.GuiTexture;
+import com.gildedgames.orbis.lib.client.gui.util.gui_library.IGuiContext;
+import com.gildedgames.orbis.lib.client.gui.util.gui_library.IGuiElement;
+import com.gildedgames.orbis.lib.client.gui.util.gui_library.IGuiViewer;
+import com.gildedgames.orbis.lib.client.rect.Dim2D;
+import com.gildedgames.orbis.lib.client.rect.Pos2D;
 import com.google.common.collect.Lists;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 
-import java.io.IOException;
 import java.util.List;
 
 public class GuiGuidebookDiscoveryBestiary extends GuiGuidebookDiscovery
@@ -21,19 +27,19 @@ public class GuiGuidebookDiscoveryBestiary extends GuiGuidebookDiscovery
 
 	private List<BestiarySlot> slots;
 
-	private ResourceLocation bestiaryFrame;
+	private GuiTexture beastFrame;
 
-	private String beastTitle;
+	private GuiText beastTitle;
 
-	public GuiGuidebookDiscoveryBestiary(final PlayerAether aePlayer)
+	public GuiGuidebookDiscoveryBestiary(final IGuiViewer prevViewer, final PlayerAether aePlayer)
 	{
-		super(aePlayer);
+		super(prevViewer, aePlayer);
 	}
 
 	@Override
-	public void initGui()
+	public void build(final IGuiContext context)
 	{
-		super.initGui();
+		super.build(context);
 
 		final ITGManager tgManager = AetherCore.PROXY.content().tgManager();
 
@@ -44,47 +50,37 @@ public class GuiGuidebookDiscoveryBestiary extends GuiGuidebookDiscovery
 		{
 			final TGEntryBestiaryPage page = this.bestiaryEntries.get(i);
 
-			final int x = 96 + ((i % 6) * 18);
-			final int y = 95 + ((i / 6) * 18);
+			final int x = 95 + ((i % 6) * 18);
+			final int y = 94 + ((i / 6) * 18);
 
-			this.slots.add(this.addButton(new BestiarySlot(this.aePlayer, x, y, page)));
+			final BestiarySlot slot = new BestiarySlot(this.aePlayer, Pos2D.flush(x, y), page);
+
+			slot.addClickEvent(() -> {
+				final boolean isUnderstood = page.isUnderstood(this.aePlayer);
+
+				this.beastFrame.setResourceLocation(isUnderstood ? page.getDiscoveredTexture() : page.getSilhouetteTexture());
+				this.beastFrame.state().setVisible(true);
+
+				this.beastTitle.setText(new Text(new TextComponentTranslation(isUnderstood ? page.getEntityName() : "???"), 1.0F));
+			});
+
+			this.slots.add(slot);
+			context.addChildren(slot);
 		}
 	}
 
 	@Override
-	protected void actionPerformed(final GuiButton button) throws IOException
+	protected List<IGuiElement> createRightPage(final int screenX, final int screenY, final float u, final float v)
 	{
-		super.actionPerformed(button);
+		this.beastFrame = new GuiTexture(Dim2D.build().x(screenX + 25).y(screenY + 27).width(58).height(71).flush(), null);
+		this.beastFrame.state().setVisible(false);
 
-		if (button instanceof BestiarySlot)
-		{
-			final BestiarySlot slot = (BestiarySlot) button;
-			final TGEntryBestiaryPage page = slot.getPage();
-			final boolean isUnderstood = page.isUnderstood(this.aePlayer);
+		this.beastTitle = new GuiText(Dim2D.build().x(screenX + 88).y(screenY + 10).flush(), new Text(new TextComponentString(""), 1.0F));
+		this.beastTitle.dim().mod().centerX(true).flush();
 
-			this.bestiaryFrame = isUnderstood ? page.getDiscoveredTexture() : page.getSilhouetteTexture();
-			this.beastTitle = isUnderstood ? page.getEntityName() : "???";
-		}
-	}
+		final GuiTexture rightPage = new GuiTexture(Dim2D.build().width(this.PAGE_WIDTH).height(this.PAGE_HEIGHT).x(screenX).y(screenY).flush(),
+				RIGHT_PAGE_MOB);
 
-	@Override
-	protected void drawRightPage(final int screenX, final int screenY, final float u, final float v)
-	{
-		this.mc.renderEngine.bindTexture(RIGHT_PAGE_MOB);
-
-		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
-
-		Gui.drawModalRectWithCustomSizedTexture(screenX, screenY, u, v, this.PAGE_WIDTH, this.PAGE_HEIGHT, this.TEXTURE_WIDTH, this.TEXTURE_HEIGHT);
-
-		if (this.bestiaryFrame != null)
-		{
-			this.mc.renderEngine.bindTexture(this.bestiaryFrame);
-			Gui.drawModalRectWithCustomSizedTexture(screenX + 37, screenY + 27, 0, 0, 58, 71, 58, 71);
-		}
-
-		if (this.beastTitle != null)
-		{
-			this.drawCenteredString(this.mc.fontRenderer, this.beastTitle, screenX + 100, screenY + 10, 0xFFFFFF);
-		}
+		return Lists.newArrayList(rightPage, this.beastFrame, this.beastTitle);
 	}
 }

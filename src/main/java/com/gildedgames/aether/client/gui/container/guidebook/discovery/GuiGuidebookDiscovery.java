@@ -4,14 +4,18 @@ import com.gildedgames.aether.client.gui.container.guidebook.AbstractGuidebookPa
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.containers.guidebook.EmptyContainer;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.renderer.GlStateManager;
+import com.gildedgames.orbis.lib.client.gui.util.GuiTexture;
+import com.gildedgames.orbis.lib.client.gui.util.gui_library.IGuiContext;
+import com.gildedgames.orbis.lib.client.gui.util.gui_library.IGuiElement;
+import com.gildedgames.orbis.lib.client.gui.util.gui_library.IGuiViewer;
+import com.gildedgames.orbis.lib.client.rect.Dim2D;
+import com.gildedgames.orbis.lib.client.rect.Pos2D;
+import com.google.common.collect.Lists;
 import net.minecraft.util.ResourceLocation;
 
-import java.io.IOException;
+import java.util.List;
 
-public abstract class GuiGuidebookDiscovery extends AbstractGuidebookPage
+public class GuiGuidebookDiscovery extends AbstractGuidebookPage
 {
 	private static final ResourceLocation LEFT_PAGE = AetherCore.getResource("textures/gui/guidebook/discovery/guidebook_discovery_left.png");
 
@@ -25,74 +29,81 @@ public abstract class GuiGuidebookDiscovery extends AbstractGuidebookPage
 
 	private DiscoveryTab characterTab;
 
-	public GuiGuidebookDiscovery(final PlayerAether aePlayer)
+	public GuiGuidebookDiscovery(final IGuiViewer prevViewer, final PlayerAether aePlayer)
 	{
-		super(aePlayer, new EmptyContainer());
+		super(prevViewer, aePlayer, new EmptyContainer());
 	}
 
 	@Override
-	public void initGui()
+	public void build(final IGuiContext context)
 	{
-		this.bestiaryTab = this.addButton(new DiscoveryTab(this.aePlayer, 0, 89, 60, DiscoveryTab.DiscoveryTabType.BESTIARY));
-		this.structureTab = this.addButton(new DiscoveryTab(this.aePlayer, 1, 121, 60, DiscoveryTab.DiscoveryTabType.STRUCTURES));
-		this.characterTab = this.addButton(new DiscoveryTab(this.aePlayer, 2, 153, 60, DiscoveryTab.DiscoveryTabType.CHARACTERS));
-		this.biomeTab = this.addButton(new DiscoveryTab(this.aePlayer, 3, 185, 60, DiscoveryTab.DiscoveryTabType.BIOMES));
+		super.build(context);
 
-		DiscoveryTab.focusedType = this.aePlayer.getProgressModule().getOpenedDiscoveryTabType();
+		final DiscoveryTab.DiscoveryTabType openedTab = this.aePlayer.getProgressModule().getOpenedDiscoveryTabType();
+
+		this.bestiaryTab = new DiscoveryTab(Pos2D.build().x(89).y(61).flush(), DiscoveryTab.DiscoveryTabType.BESTIARY, openedTab);
+		this.structureTab = new DiscoveryTab(Pos2D.build().x(121).y(61).flush(), DiscoveryTab.DiscoveryTabType.STRUCTURES, openedTab);
+		this.characterTab = new DiscoveryTab(Pos2D.build().x(153).y(61).flush(), DiscoveryTab.DiscoveryTabType.CHARACTERS, openedTab);
+		this.biomeTab = new DiscoveryTab(Pos2D.build().x(185).y(61).flush(), DiscoveryTab.DiscoveryTabType.BIOMES, openedTab);
+
+		this.bestiaryTab.addAdvancedClickEvent(this::onClickTab);
+		this.structureTab.addAdvancedClickEvent(this::onClickTab);
+		this.characterTab.addAdvancedClickEvent(this::onClickTab);
+		this.biomeTab.addAdvancedClickEvent(this::onClickTab);
+
+		context.addChildren(this.bestiaryTab, this.structureTab, this.characterTab, this.biomeTab);
 	}
 
-	@Override
-	protected void actionPerformed(final GuiButton button) throws IOException
+	private void onClickTab(final DiscoveryTab tab)
 	{
-		if (button.enabled)
+		this.bestiaryTab.setSelected(false);
+		this.structureTab.setSelected(false);
+		this.characterTab.setSelected(false);
+		this.biomeTab.setSelected(false);
+
+		this.aePlayer.getProgressModule().setOpenedDiscoveryTabType(tab.getType());
+
+		tab.setSelected(true);
+
+		switch (tab.getType())
 		{
-			switch (button.id)
+			case BESTIARY:
 			{
-				case (0):
-				{
-					this.bestiaryTab.setFocused();
-					this.mc.displayGuiScreen(new GuiGuidebookDiscoveryBestiary(this.aePlayer));
-					break;
-				}
-				case (1):
-				{
-					this.structureTab.setFocused();
-					this.mc.displayGuiScreen(new GuiGuidebookDiscoveryStructures(this.aePlayer));
-					break;
-				}
-				case (2):
-				{
-					this.characterTab.setFocused();
-					this.mc.displayGuiScreen(new GuiGuidebookDiscoveryCharacters(this.aePlayer));
-					break;
-				}
-				case (3):
-				{
-					this.biomeTab.setFocused();
-					this.mc.displayGuiScreen(new GuiGuidebookDiscoveryBiomes(this.aePlayer));
-					break;
-				}
+				this.mc.displayGuiScreen(new GuiGuidebookDiscoveryBestiary(this, this.aePlayer));
+				break;
+			}
+			case STRUCTURES:
+			{
+				this.mc.displayGuiScreen(new GuiGuidebookDiscoveryStructures(this, this.aePlayer));
+				break;
+			}
+			case CHARACTERS:
+			{
+				this.mc.displayGuiScreen(new GuiGuidebookDiscoveryCharacters(this, this.aePlayer));
+				break;
+			}
+			case BIOMES:
+			{
+				this.mc.displayGuiScreen(new GuiGuidebookDiscoveryBiomes(this, this.aePlayer));
+				break;
 			}
 		}
 	}
 
 	@Override
-	protected void drawLeftPage(final int screenX, final int screenY, final float u, final float v)
+	protected List<IGuiElement> createLeftPage(final int screenX, final int screenY, final float u, final float v)
 	{
-		this.mc.renderEngine.bindTexture(LEFT_PAGE);
+		final GuiTexture leftPage = new GuiTexture(Dim2D.build().width(this.PAGE_WIDTH).height(this.PAGE_HEIGHT).x(screenX).y(screenY).flush(), LEFT_PAGE);
 
-		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
-
-		Gui.drawModalRectWithCustomSizedTexture(screenX, screenY, u, v, this.PAGE_WIDTH, this.PAGE_HEIGHT, this.TEXTURE_WIDTH, this.TEXTURE_HEIGHT);
+		return Lists.newArrayList(leftPage);
 	}
 
 	@Override
-	protected void drawRightPage(final int screenX, final int screenY, final float u, final float v)
+	protected List<IGuiElement> createRightPage(final int screenX, final int screenY, final float u, final float v)
 	{
-		this.mc.renderEngine.bindTexture(RIGHT_PAGE_GENERAL);
+		final GuiTexture rightPage = new GuiTexture(Dim2D.build().width(this.PAGE_WIDTH).height(this.PAGE_HEIGHT).x(screenX).y(screenY).flush(),
+				RIGHT_PAGE_GENERAL);
 
-		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
-
-		Gui.drawModalRectWithCustomSizedTexture(screenX, screenY, u, v, this.PAGE_WIDTH, this.PAGE_HEIGHT, this.TEXTURE_WIDTH, this.TEXTURE_HEIGHT);
+		return Lists.newArrayList(rightPage);
 	}
 }
