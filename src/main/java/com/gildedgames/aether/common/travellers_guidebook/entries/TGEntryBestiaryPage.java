@@ -25,12 +25,12 @@ public class TGEntryBestiaryPage extends TGEntryBase implements ITGEntryBestiary
 
 	private final String tag;
 
-	private final ResourceLocation silhouetteTexture, discoveredTexture;
+	private final ResourceLocation silhouetteTexture, discoveredTexture, silhouetteSlotTexture, discoveredSlotTexture;
 
 	private final ITextComponent description;
 
 	protected TGEntryBestiaryPage(final String tag, final ResourceLocation entityId, final String description, final ResourceLocation silhouetteTexture,
-			final ResourceLocation discoveredTexture)
+			final ResourceLocation discoveredTexture, final ResourceLocation silhouetteSlotTexture, final ResourceLocation discoveredSlotTexture)
 	{
 		this.tag = tag;
 
@@ -40,6 +40,8 @@ public class TGEntryBestiaryPage extends TGEntryBase implements ITGEntryBestiary
 
 		this.silhouetteTexture = silhouetteTexture;
 		this.discoveredTexture = discoveredTexture;
+		this.silhouetteSlotTexture = silhouetteSlotTexture;
+		this.discoveredSlotTexture = discoveredSlotTexture;
 	}
 
 	@Override
@@ -72,6 +74,18 @@ public class TGEntryBestiaryPage extends TGEntryBase implements ITGEntryBestiary
 	}
 
 	@Override
+	public ResourceLocation getDiscoveredSlotTexture()
+	{
+		return this.discoveredSlotTexture;
+	}
+
+	@Override
+	public ResourceLocation getSilhouetteSlotTexture()
+	{
+		return this.silhouetteSlotTexture;
+	}
+
+	@Override
 	public IEntityStats getEntityStats()
 	{
 		return AetherCore.PROXY.content().entityStatsCache().getStats(this.entityId);
@@ -90,7 +104,7 @@ public class TGEntryBestiaryPage extends TGEntryBase implements ITGEntryBestiary
 	}
 
 	@Override
-	public boolean hasUnlockedStats(final IPlayerAether playerAether)
+	public boolean isUnderstood(final IPlayerAether playerAether)
 	{
 		return playerAether.getPlayerConditionModule().areConditionsFlagged(IConditionResolution.REQUIRE_ANY,
 				AetherCore.getResource("feedEntity:" + this.entityId),
@@ -100,13 +114,7 @@ public class TGEntryBestiaryPage extends TGEntryBase implements ITGEntryBestiary
 	@Override
 	public boolean hasUnlockedCompleteOverview(final IPlayerAether playerAether)
 	{
-		return this.hasUnlockedName(playerAether); // TODO: Need to have conditions for each move
-	}
-
-	@Override
-	public boolean hasUnlockedName(final IPlayerAether playerAether)
-	{
-		return this.hasUnlockedStats(playerAether);
+		return this.isUnderstood(playerAether); // TODO: Need to have conditions for each move
 	}
 
 	@Override
@@ -127,7 +135,9 @@ public class TGEntryBestiaryPage extends TGEntryBase implements ITGEntryBestiary
 					new ResourceLocation(obj.get("entityId").getAsString()),
 					obj.get("description").getAsString(),
 					new ResourceLocation(obj.get("silhouetteTexture").getAsString()),
-					new ResourceLocation(obj.get("discoveredTexture").getAsString()));
+					new ResourceLocation(obj.get("discoveredTexture").getAsString()),
+					new ResourceLocation(obj.get("silhouetteSlotTexture").getAsString()),
+					new ResourceLocation(obj.get("discoveredSlotTexture").getAsString()));
 		}
 	}
 }

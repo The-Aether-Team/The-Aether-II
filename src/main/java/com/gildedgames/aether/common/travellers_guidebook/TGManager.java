@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.travellers_guidebook;
 
-import com.gildedgames.aether.api.player.conditions.IPlayerCondition;
-import com.gildedgames.aether.api.player.conditions.IPlayerConditionTracker;
-import com.gildedgames.aether.api.player.conditions.PlayerConditionUtils;
+import com.gildedgames.aether.api.player.conditions.*;
+import com.gildedgames.aether.api.player.conditions.resolutions.ConditionResolutionRequireAll;
+import com.gildedgames.aether.api.player.conditions.resolutions.ConditionResolutionRequireAny;
 import com.gildedgames.aether.api.travellers_guidebook.ITGDefinition;
 import com.gildedgames.aether.api.travellers_guidebook.ITGEntry;
 import com.gildedgames.aether.api.travellers_guidebook.ITGManager;
@@ -57,11 +57,15 @@ public class TGManager implements ITGManager
 		final GsonBuilder builder = new GsonBuilder();
 
 		builder.registerTypeAdapter(IPlayerCondition.class, new PlayerConditionDeserializer());
+		builder.registerTypeAdapter(IConditionResolution.class, new ConditionResolutionDeserializer());
 		builder.registerTypeAdapter(ITGEntry.class, new TGEntryDeserializer());
 
 		builder.registerTypeAdapter(PlayerConditionSeeEntity.class, new PlayerConditionSeeEntity.Deserializer());
 		builder.registerTypeAdapter(PlayerConditionFeedEntity.class, new PlayerConditionFeedEntity.Deserializer());
 		builder.registerTypeAdapter(PlayerConditionKillEntity.class, new PlayerConditionKillEntity.Deserializer());
+
+		builder.registerTypeAdapter(ConditionResolutionRequireAll.class, new ConditionResolutionRequireAll.Deserializer());
+		builder.registerTypeAdapter(ConditionResolutionRequireAny.class, new ConditionResolutionRequireAny.Deserializer());
 
 		builder.registerTypeAdapter(TGEntryBestiaryPage.class, new TGEntryBestiaryPage.Deserializer());
 
@@ -126,6 +130,8 @@ public class TGManager implements ITGManager
 			{
 				throw new RuntimeException("An entry with an existing id is trying to be registered: " + entryId);
 			}
+
+			entryDef.setConditionResolution(def.conditionResolution());
 
 			// Provide player conditions required by its sub data
 			this.playerConditionTracker.trackConditions(entryDef.providePlayerConditions());

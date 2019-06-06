@@ -220,6 +220,7 @@ public class PlayerAether implements IPlayerAether
 	{
 		NetworkingAether.sendPacketToPlayer(new PacketCurrencyModule(this.getCurrencyModule()), (EntityPlayerMP) this.getEntity());
 		NetworkingAether.sendPacketToPlayer(new PacketProgressModule(this.getProgressModule()), (EntityPlayerMP) this.getEntity());
+		NetworkingAether.sendPacketToPlayer(new PacketPlayerConditionModule(this.getPlayerConditionModule()), (EntityPlayerMP) this.getEntity());
 		NetworkingAether.sendPacketToPlayer(new PacketSetPlayedIntro(this.getTeleportingModule().hasPlayedIntro()), (EntityPlayerMP) this.getEntity());
 		NetworkingAether.sendPacketToPlayer(new PacketCampfires(this.getCampfiresModule().getCampfiresActivated()), (EntityPlayerMP) this.getEntity());
 		NetworkingAether.sendPacketToPlayer(new PacketPreventDropsInventories(this.preventDropsModule), (EntityPlayerMP) this.getEntity());
