@@ -24,9 +24,9 @@ public class TabDiscovery implements ITab
 	}
 
 	@Override
-	public void onOpen(EntityPlayer player)
+	public void onOpen(final EntityPlayer player)
 	{
-		BlockPos pos = player.getPosition();
+		final BlockPos pos = player.getPosition();
 
 		player.openGui(AetherCore.MOD_ID, AetherGuiHandler.DISCOVERY_ID, player.world, pos.getX(), pos.getY(), pos.getZ());
 	}
@@ -34,8 +34,7 @@ public class TabDiscovery implements ITab
 	@Override
 	public boolean isEnabled()
 	{
-		//return (Minecraft.getMinecraft().currentScreen instanceof AbstractGuidebookPage);
-		return false;
+		return (Minecraft.getMinecraft().currentScreen instanceof AbstractGuidebookPage);
 	}
 
 	@Override
@@ -48,13 +47,13 @@ public class TabDiscovery implements ITab
 	public static class Client extends TabDiscovery implements ITabClient
 	{
 		@Override
-		public boolean isTabValid(GuiScreen gui)
+		public boolean isTabValid(final GuiScreen gui)
 		{
 			return gui instanceof GuiInventory || gui instanceof AbstractGuidebookPage;
 		}
 
 		@Override
-		public void onClose(EntityPlayer player)
+		public void onClose(final EntityPlayer player)
 		{
 		}
 

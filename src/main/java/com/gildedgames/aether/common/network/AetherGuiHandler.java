@@ -4,12 +4,15 @@ import com.gildedgames.aether.api.dialog.IDialogSlide;
 import com.gildedgames.aether.api.dialog.IDialogSlideRenderer;
 import com.gildedgames.aether.api.shop.IShopInstance;
 import com.gildedgames.aether.api.shop.IShopInstanceGroup;
-import com.gildedgames.aether.client.gui.container.guidebook.GuiGuidebookDiscovery;
-import com.gildedgames.aether.client.gui.container.guidebook.GuiGuidebookInventory;
 import com.gildedgames.aether.client.gui.container.GuiIcestoneCooler;
 import com.gildedgames.aether.client.gui.container.GuiIncubator;
+import com.gildedgames.aether.client.gui.container.guidebook.GuiGuidebookInventory;
 import com.gildedgames.aether.client.gui.container.guidebook.GuiGuidebookLoreTome;
 import com.gildedgames.aether.client.gui.container.guidebook.GuiGuidebookStatus;
+import com.gildedgames.aether.client.gui.container.guidebook.discovery.GuiGuidebookDiscoveryBestiary;
+import com.gildedgames.aether.client.gui.container.guidebook.discovery.GuiGuidebookDiscoveryBiomes;
+import com.gildedgames.aether.client.gui.container.guidebook.discovery.GuiGuidebookDiscoveryCharacters;
+import com.gildedgames.aether.client.gui.container.guidebook.discovery.GuiGuidebookDiscoveryStructures;
 import com.gildedgames.aether.client.gui.container.simple_crafting.GuiMasonryBench;
 import com.gildedgames.aether.client.gui.dialog.GuiDialogViewer;
 import com.gildedgames.aether.client.gui.dialog.GuiShop;
@@ -33,7 +36,6 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.event.world.NoteBlockEvent;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.fml.relauncher.Side;
@@ -74,7 +76,7 @@ public class AetherGuiHandler implements IGuiHandler
 	public Container getServerGuiElement(final int id, final EntityPlayer player, final World world, final int x, final int y, final int z)
 	{
 		final BlockPos pos = new BlockPos(x, y, z);
-		PlayerAether playerAether = PlayerAether.getPlayer(player);
+		final PlayerAether playerAether = PlayerAether.getPlayer(player);
 
 		switch (id)
 		{
@@ -103,16 +105,16 @@ public class AetherGuiHandler implements IGuiHandler
 					return null;
 				}
 
-				IShopInstanceGroup group = playerAether.getDialogController().getTalkingNPC().getShopInstanceGroup();
+				final IShopInstanceGroup group = playerAether.getDialogController().getTalkingNPC().getShopInstanceGroup();
 
 				if (group == null)
 				{
 					return null;
 				}
 
-				int shopIndex = pos.getX();
+				final int shopIndex = pos.getX();
 
-				IShopInstance shopInstance = group.getShopInstance(shopIndex);
+				final IShopInstance shopInstance = group.getShopInstance(shopIndex);
 
 				if (shopInstance == null)
 				{
@@ -135,20 +137,39 @@ public class AetherGuiHandler implements IGuiHandler
 	public GuiContainer getClientGuiElement(final int id, final EntityPlayer player, final World world, final int x, final int y, final int z)
 	{
 		final BlockPos pos = new BlockPos(x, y, z);
-		PlayerAether playerAether = PlayerAether.getPlayer(player);
+		final PlayerAether playerAether = PlayerAether.getPlayer(player);
 
 		switch (id)
 		{
 			case CUSTOM_WORKBENCH_ID:
 				return new GuiCrafting(player.inventory, world, pos);
 			case INVENTORY_ID:
-				return new GuiGuidebookInventory(PlayerAether.getPlayer(player));
+				return new GuiGuidebookInventory(playerAether);
 			case STATUS_ID:
-				return new GuiGuidebookStatus(PlayerAether.getPlayer(player));
+				return new GuiGuidebookStatus(playerAether);
 			case LORE_TOME_ID:
-				return new GuiGuidebookLoreTome(PlayerAether.getPlayer(player));
+				return new GuiGuidebookLoreTome(playerAether);
 			case DISCOVERY_ID:
-				return new GuiGuidebookDiscovery(PlayerAether.getPlayer(player));
+				switch (playerAether.getProgressModule().getOpenedDiscoveryTabType())
+				{
+					case BESTIARY:
+					{
+						return new GuiGuidebookDiscoveryBestiary(playerAether);
+					}
+					case CHARACTERS:
+					{
+						return new GuiGuidebookDiscoveryCharacters(playerAether);
+					}
+					case BIOMES:
+					{
+						return new GuiGuidebookDiscoveryBiomes(playerAether);
+					}
+					case STRUCTURES:
+					{
+						return new GuiGuidebookDiscoveryStructures(playerAether);
+					}
+				}
+
 			case FROSTPINE_COOLER_ID:
 				return new GuiIcestoneCooler(player.inventory, (IInventory) world.getTileEntity(pos));
 			case INCUBATOR_ID:
@@ -168,18 +189,18 @@ public class AetherGuiHandler implements IGuiHandler
 					return null;
 				}
 
-				IDialogSlide slide = DialogUtil.getSlide(playerAether.getDialogController());
+				final IDialogSlide slide = DialogUtil.getSlide(playerAether.getDialogController());
 
-				IShopInstanceGroup group = playerAether.getDialogController().getTalkingNPC().getShopInstanceGroup();
+				final IShopInstanceGroup group = playerAether.getDialogController().getTalkingNPC().getShopInstanceGroup();
 
 				if (group == null)
 				{
 					return null;
 				}
 
-				int shopIndex = pos.getX();
+				final int shopIndex = pos.getX();
 
-				IShopInstance shopInstance = group.getShopInstance(shopIndex);
+				final IShopInstance shopInstance = group.getShopInstance(shopIndex);
 
 				if (shopInstance == null || slide == null)
 				{
@@ -197,7 +218,7 @@ public class AetherGuiHandler implements IGuiHandler
 
 				if (slide.getRenderer().isPresent())
 				{
-					IDialogSlideRenderer renderer = DialogUtil.getRenderer(slide);
+					final IDialogSlideRenderer renderer = DialogUtil.getRenderer(slide);
 
 					return new GuiShop(prevViewer, player, slide, renderer, shopInstance, shopIndex);
 				}

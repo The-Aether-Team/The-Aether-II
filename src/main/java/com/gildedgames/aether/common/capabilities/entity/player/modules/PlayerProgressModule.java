@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
+import com.gildedgames.aether.client.gui.container.guidebook.discovery.DiscoveryTab;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.network.NetworkingAether;
@@ -17,8 +18,9 @@ import java.util.Map;
 
 public class PlayerProgressModule extends PlayerAetherModule
 {
-
 	public boolean hasDiedInAether;
+
+	private DiscoveryTab.DiscoveryTabType openedDiscoveryTabType = DiscoveryTab.DiscoveryTabType.BESTIARY;
 
 	private Map<ResourceLocation, Boolean> hasTalkedTo = Maps.newHashMap();
 
@@ -28,12 +30,22 @@ public class PlayerProgressModule extends PlayerAetherModule
 
 	private BlockPos beforeReturnToBed;
 
-	public PlayerProgressModule(PlayerAether playerAether)
+	public PlayerProgressModule(final PlayerAether playerAether)
 	{
 		super(playerAether);
 	}
 
-	public void setBoolean(String key, Boolean bool)
+	public DiscoveryTab.DiscoveryTabType getOpenedDiscoveryTabType()
+	{
+		return this.openedDiscoveryTabType;
+	}
+
+	public void setOpenedDiscoveryTabType(final DiscoveryTab.DiscoveryTabType type)
+	{
+		this.openedDiscoveryTabType = type;
+	}
+
+	public void setBoolean(final String key, final Boolean bool)
 	{
 		this.booleanData.put(key, bool);
 
@@ -43,7 +55,7 @@ public class PlayerProgressModule extends PlayerAetherModule
 		}
 	}
 
-	public boolean getBoolean(String key)
+	public boolean getBoolean(final String key)
 	{
 		if (!this.booleanData.containsKey(key))
 		{
@@ -58,12 +70,12 @@ public class PlayerProgressModule extends PlayerAetherModule
 		return this.hasDiedInAether;
 	}
 
-	public void setHasDiedInAether(boolean flag)
+	public void setHasDiedInAether(final boolean flag)
 	{
 		this.hasDiedInAether = flag;
 	}
 
-	public void setHasTalkedTo(ResourceLocation speaker, boolean flag)
+	public void setHasTalkedTo(final ResourceLocation speaker, final boolean flag)
 	{
 		this.hasTalkedTo.put(speaker, flag);
 
@@ -73,7 +85,7 @@ public class PlayerProgressModule extends PlayerAetherModule
 		}
 	}
 
-	public boolean hasTalkedTo(ResourceLocation speaker)
+	public boolean hasTalkedTo(final ResourceLocation speaker)
 	{
 		if (!this.hasTalkedTo.containsKey(speaker))
 		{
@@ -88,7 +100,7 @@ public class PlayerProgressModule extends PlayerAetherModule
 		return this.returnedToBed;
 	}
 
-	public void setHasReturnedToBed(boolean flag)
+	public void setHasReturnedToBed(final boolean flag)
 	{
 		this.returnedToBed = flag;
 	}
@@ -98,19 +110,19 @@ public class PlayerProgressModule extends PlayerAetherModule
 		return this.beforeReturnToBed;
 	}
 
-	public void setBeforeReturnToBed(BlockPos blockPos)
+	public void setBeforeReturnToBed(final BlockPos blockPos)
 	{
 		this.beforeReturnToBed = blockPos;
 	}
 
 	@Override
-	public void tickStart(TickEvent.PlayerTickEvent event)
+	public void tickStart(final TickEvent.PlayerTickEvent event)
 	{
 
 	}
 
 	@Override
-	public void tickEnd(TickEvent.PlayerTickEvent event)
+	public void tickEnd(final TickEvent.PlayerTickEvent event)
 	{
 
 	}
@@ -122,26 +134,32 @@ public class PlayerProgressModule extends PlayerAetherModule
 	}
 
 	@Override
-	public void write(NBTTagCompound tag)
+	public void write(final NBTTagCompound tag)
 	{
-		NBTFunnel funnel = new NBTFunnel(tag);
+		final NBTFunnel funnel = new NBTFunnel(tag);
 
 		tag.setBoolean("hasDiedInAether", this.hasDiedInAether);
 		tag.setBoolean("returnedToBed", this.returnedToBed);
 		funnel.setMap("hasTalkedTo", this.hasTalkedTo, NBTFunnel.LOC_SETTER, NBTFunnel.BOOLEAN_SETTER);
 		funnel.setPos("beforeReturnToBed", this.beforeReturnToBed);
 		funnel.setMap("booleanData", this.booleanData, NBTFunnel.STRING_SETTER, NBTFunnel.BOOLEAN_SETTER);
+		tag.setString("openedDiscoveryTabType", this.openedDiscoveryTabType.toString());
 	}
 
 	@Override
-	public void read(NBTTagCompound tag)
+	public void read(final NBTTagCompound tag)
 	{
-		NBTFunnel funnel = new NBTFunnel(tag);
+		final NBTFunnel funnel = new NBTFunnel(tag);
 
 		this.hasDiedInAether = tag.getBoolean("hasDiedInAether");
 		this.returnedToBed = tag.getBoolean("returnedToBed");
 		this.hasTalkedTo = funnel.getMap("hasTalkedTo", NBTFunnel.LOC_GETTER, NBTFunnel.BOOLEAN_GETTER);
 		this.beforeReturnToBed = funnel.getPos("beforeReturnToBed");
 		this.booleanData = funnel.getMap("booleanData", NBTFunnel.STRING_GETTER, NBTFunnel.BOOLEAN_GETTER);
+
+		if (tag.hasKey("openedDiscoveryTabType"))
+		{
+			this.openedDiscoveryTabType = DiscoveryTab.DiscoveryTabType.valueOf(tag.getString("openedDiscoveryTabType"));
+		}
 	}
 }
