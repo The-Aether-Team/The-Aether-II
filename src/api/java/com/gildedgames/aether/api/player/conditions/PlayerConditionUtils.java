@@ -15,7 +15,7 @@ public class PlayerConditionUtils
 	{
 		final List<ResourceLocation> conditionIDs = Lists.newArrayList();
 
-		conditions.forEach(c ->
+		for (final IPlayerCondition c : conditions)
 		{
 			final ResourceLocation id = c.getUniqueIdentifier();
 
@@ -23,7 +23,7 @@ public class PlayerConditionUtils
 			{
 				conditionIDs.add(c.getUniqueIdentifier());
 			}
-		});
+		}
 
 		return conditionIDs;
 	}
