@@ -11,13 +11,22 @@ public interface ITGEntryBestiaryPage extends ITGEntryEntity
 
 	ResourceLocation getDiscoveredTexture();
 
+	ResourceLocation getDiscoveredSlotTexture();
+
+	ResourceLocation getSilhouetteSlotTexture();
+
 	IEntityStats getEntityStats();
 
 	ITextComponent getDescription();
 
 	String getEntityName();
 
-	boolean hasUnlockedStats(IPlayerAether playerAether);
+	/**
+	 * Whether or not the player has killed or fed the beast.
+	 * @param playerAether
+	 * @return Whether or not the player has killed or fed the beast.
+	 */
+	boolean isUnderstood(IPlayerAether playerAether);
 
 	/**
 	 * The complete overview of the bestiary page includes
@@ -27,9 +36,4 @@ public interface ITGEntryBestiaryPage extends ITGEntryEntity
 	 * @return Whether or not the complete overview has been unlocked.
 	 */
 	boolean hasUnlockedCompleteOverview(IPlayerAether playerAether);
-
-	/**
-	 * @return Whether or not the name has been unlocked.
-	 */
-	boolean hasUnlockedName(IPlayerAether playerAether);
 }

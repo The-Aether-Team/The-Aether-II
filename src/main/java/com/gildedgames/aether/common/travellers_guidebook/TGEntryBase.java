@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.travellers_guidebook;
 
+import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.player.conditions.IConditionResolution;
 import com.gildedgames.aether.api.player.conditions.IPlayerCondition;
 import com.gildedgames.aether.api.travellers_guidebook.ITGEntry;
@@ -47,5 +48,11 @@ public abstract class TGEntryBase implements ITGEntry
 	public void setConditionResolution(final IConditionResolution conditionResolution)
 	{
 		this.conditionResolution = conditionResolution;
+	}
+
+	@Override
+	public boolean isUnlocked(final IPlayerAether playerAether)
+	{
+		return playerAether.getPlayerConditionModule().isEntryUnlocked(this);
 	}
 }

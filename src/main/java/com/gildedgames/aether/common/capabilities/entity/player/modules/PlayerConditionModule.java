@@ -5,8 +5,11 @@ import com.gildedgames.aether.api.player.conditions.IConditionResolution;
 import com.gildedgames.aether.api.travellers_guidebook.ITGEntry;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
+import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.network.packets.PacketFlagPlayerCondition;
 import com.gildedgames.orbis.lib.util.io.NBTFunnel;
 import com.google.common.collect.Sets;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -32,6 +35,11 @@ public class PlayerConditionModule extends PlayerAetherModule implements IPlayer
 	public void flagCondition(final ResourceLocation conditionUniqueIdentifier)
 	{
 		this.conditionsMet.add(conditionUniqueIdentifier);
+
+		if (!this.getWorld().isRemote)
+		{
+			NetworkingAether.sendPacketToPlayer(new PacketFlagPlayerCondition(conditionUniqueIdentifier), (EntityPlayerMP) this.getEntity());
+		}
 	}
 
 	@Override
@@ -46,6 +54,7 @@ public class PlayerConditionModule extends PlayerAetherModule implements IPlayer
 		return conditionResolution.areConditionsMet(conditionUniqueIdentifiers, this.isConditionMet);
 	}
 
+	@Override
 	public boolean isEntryUnlocked(final ITGEntry entry)
 	{
 		return this.areConditionsFlagged(entry.getConditionResolution(), entry.getConditionIDs().toArray(new ResourceLocation[0]));

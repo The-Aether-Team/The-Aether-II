@@ -178,6 +178,7 @@ public class PlayerAether implements IPlayerAether
 		NetworkingAether.sendPacketToPlayer(new PacketSetPlayedIntro(this.getModule(PlayerTeleportingModule.class).hasPlayedIntro()), player);
 		NetworkingAether.sendPacketToPlayer(new PacketCampfires(this.getModule(PlayerCampfiresModule.class).getCampfiresActivated()), player);
 		NetworkingAether.sendPacketToPlayer(new PacketPreventDropsInventories(this.getModule(PlayerPreventDropsModule.class)), player);
+		NetworkingAether.sendPacketToPlayer(new PacketPlayerConditionModule(this.getModule(PlayerConditionModule.class)), player);
 	}
 
 	public void onUpdate()
