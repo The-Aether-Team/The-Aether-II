@@ -79,66 +79,76 @@ public class TGManager implements ITGManager
 	{
 		for (final ResourceLocation location : this.definitionsToLoad)
 		{
-			try
+			this.loadDefinitions(location);
+		}
+	}
+
+	private void loadDefinitions(final ResourceLocation location)
+	{
+		try
+		{
+			final String path = location.getPath();
+
+			final String definitionPath = "/assets/" + location.getNamespace() + "/travellers_guidebook/definitions/" + path + ".json";
+
+			AetherCore.LOGGER.info("Loading definitions from file {}", definitionPath);
+
+			try (final InputStream stream = MinecraftServer.class.getResourceAsStream(definitionPath))
 			{
-				final String path = location.getPath();
-
-				final String definitionPath = "/assets/" + location.getNamespace() + "/travellers_guidebook/definitions/" + path + ".json";
-
-				AetherCore.LOGGER.info("Loading definitions from file {}", definitionPath);
-
-				try (final InputStream stream = MinecraftServer.class.getResourceAsStream(definitionPath))
+				try (final InputStreamReader reader = new InputStreamReader(stream))
 				{
-					try (final InputStreamReader reader = new InputStreamReader(stream))
+					final TGDefinition[] definitions = this.gson.fromJson(reader, TGDefinition[].class);
+
+					for (final ITGDefinition def : definitions)
 					{
-						final TGDefinition[] definitions = this.gson.fromJson(reader, TGDefinition[].class);
-
-						for (final ITGDefinition def : definitions)
-						{
-							final Collection<ResourceLocation> conditionIDs = PlayerConditionUtils.getIDs(def.conditions());
-							this.playerConditionTracker.trackConditions(def.conditions());
-
-							for (final Map.Entry<String, ITGEntry> e : def.entries().entrySet())
-							{
-								final ITGEntry entryDef = e.getValue();
-								final String entryId = e.getKey();
-
-								if (this.idToEntries.containsKey(entryId))
-								{
-									throw new RuntimeException("An entry with an existing id is trying to be registered: " + entryId);
-								}
-
-								// Provide player conditions required by its sub data
-								this.playerConditionTracker.trackConditions(entryDef.providePlayerConditions());
-								entryDef.setConditionIDs(conditionIDs);
-
-								this.idToEntries.put(entryId, entryDef);
-
-								final String tag = entryDef.tag();
-
-								// If tag doesn't exist, don't add to tag list
-								if (tag == null || tag.isEmpty())
-								{
-									continue;
-								}
-
-								if (!this.tagToEntries.containsKey(tag))
-								{
-									this.tagToEntries.put(tag, Lists.newArrayList());
-								}
-
-								final List<ITGEntry> tagList = this.tagToEntries.get(tag);
-
-								tagList.add(entryDef);
-							}
-						}
+						this.registerDefinition(def);
 					}
 				}
 			}
-			catch (final IOException e)
+		}
+		catch (final IOException e)
+		{
+			AetherCore.LOGGER.error("Failed to load definitions: {}", location, e);
+		}
+	}
+
+	private void registerDefinition(final ITGDefinition def)
+	{
+		final Collection<ResourceLocation> conditionIDs = PlayerConditionUtils.getIDs(def.conditions());
+		this.playerConditionTracker.trackConditions(def.conditions());
+
+		for (final Map.Entry<String, ITGEntry> e : def.entries().entrySet())
+		{
+			final ITGEntry entryDef = e.getValue();
+			final String entryId = e.getKey();
+
+			if (this.idToEntries.containsKey(entryId))
 			{
-				AetherCore.LOGGER.error("Failed to load definitions: {}", location, e);
+				throw new RuntimeException("An entry with an existing id is trying to be registered: " + entryId);
 			}
+
+			// Provide player conditions required by its sub data
+			this.playerConditionTracker.trackConditions(entryDef.providePlayerConditions());
+			entryDef.setConditionIDs(conditionIDs);
+
+			this.idToEntries.put(entryId, entryDef);
+
+			final String tag = entryDef.tag();
+
+			// If tag doesn't exist, don't add to tag list
+			if (tag == null || tag.isEmpty())
+			{
+				continue;
+			}
+
+			if (!this.tagToEntries.containsKey(tag))
+			{
+				this.tagToEntries.put(tag, Lists.newArrayList());
+			}
+
+			final List<ITGEntry> tagList = this.tagToEntries.get(tag);
+
+			tagList.add(entryDef);
 		}
 	}
 
