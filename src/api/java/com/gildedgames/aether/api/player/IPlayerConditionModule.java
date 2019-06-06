@@ -1,12 +1,13 @@
 package com.gildedgames.aether.api.player;
 
 import com.gildedgames.aether.api.player.conditions.IConditionResolution;
+import net.minecraft.util.ResourceLocation;
 
 public interface IPlayerConditionModule
 {
-	void flagCondition(String conditionUniqueIdentifier);
+	void flagCondition(ResourceLocation conditionUniqueIdentifier);
 
-	boolean isConditionFlagged(String conditionUniqueIdentifier);
+	boolean isConditionFlagged(ResourceLocation conditionUniqueIdentifier);
 
-	boolean areConditionsFlagged(final IConditionResolution conditionResolution, String... conditionUniqueIdentifiers);
+	boolean areConditionsFlagged(final IConditionResolution conditionResolution, ResourceLocation... conditionUniqueIdentifiers);
 }

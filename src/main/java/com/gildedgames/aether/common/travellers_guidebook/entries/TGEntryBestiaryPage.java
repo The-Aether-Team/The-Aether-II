@@ -93,8 +93,8 @@ public class TGEntryBestiaryPage extends TGEntryBase implements ITGEntryBestiary
 	public boolean hasUnlockedStats(final IPlayerAether playerAether)
 	{
 		return playerAether.getPlayerConditionModule().areConditionsFlagged(IConditionResolution.REQUIRE_ANY,
-				"feedEntity:" + this.entityId,
-				"killEntity:" + this.entityId);
+				AetherCore.getResource("feedEntity:" + this.entityId),
+				AetherCore.getResource("killEntity:" + this.entityId));
 	}
 
 	@Override

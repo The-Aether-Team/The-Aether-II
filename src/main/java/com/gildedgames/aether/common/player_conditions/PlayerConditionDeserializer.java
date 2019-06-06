@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.player_conditions;
 
 import com.gildedgames.aether.api.player.conditions.IPlayerCondition;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.player_conditions.types.PlayerConditionFeedEntity;
 import com.gildedgames.aether.common.player_conditions.types.PlayerConditionKillEntity;
 import com.gildedgames.aether.common.player_conditions.types.PlayerConditionSeeEntity;
@@ -15,9 +16,9 @@ public class PlayerConditionDeserializer implements JsonDeserializer<IPlayerCond
 
 	public PlayerConditionDeserializer()
 	{
-		this.conditions.put("seeEntity", PlayerConditionSeeEntity.class);
-		this.conditions.put("feedEntity", PlayerConditionFeedEntity.class);
-		this.conditions.put("killEntity", PlayerConditionKillEntity.class);
+		this.conditions.put(AetherCore.MOD_ID + ":seeEntity", PlayerConditionSeeEntity.class);
+		this.conditions.put(AetherCore.MOD_ID + ":feedEntity", PlayerConditionFeedEntity.class);
+		this.conditions.put(AetherCore.MOD_ID + ":killEntity", PlayerConditionKillEntity.class);
 	}
 
 	@Override

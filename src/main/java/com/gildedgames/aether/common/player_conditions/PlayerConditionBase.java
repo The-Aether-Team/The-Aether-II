@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.player_conditions;
 import com.gildedgames.aether.api.player.conditions.IPlayerCondition;
 import com.gildedgames.aether.api.player.conditions.types.IPlayerConditionListener;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 
 public abstract class PlayerConditionBase implements IPlayerCondition
 {
@@ -19,7 +20,7 @@ public abstract class PlayerConditionBase implements IPlayerCondition
 	}
 
 	@Override
-	public String getUniqueIdentifier()
+	public ResourceLocation getUniqueIdentifier()
 	{
 		return null;
 	}

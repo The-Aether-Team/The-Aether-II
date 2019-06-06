@@ -26,6 +26,8 @@ public class PlayerConditionSeeEntity extends PlayerConditionBase implements IPl
 
 	private final EntityEntry entityEntry;
 
+	private final ResourceLocation uniqueId;
+
 	public PlayerConditionSeeEntity(final ResourceLocation entityId)
 	{
 		Validate.notNull(entityId, "entityId cannot be null.");
@@ -37,12 +39,14 @@ public class PlayerConditionSeeEntity extends PlayerConditionBase implements IPl
 		{
 			throw new RuntimeException("Entity entry cannot be found with given entityId: " + this.entityId);
 		}
+
+		this.uniqueId = AetherCore.getResource("seeEntity:" + this.entityId);
 	}
 
 	@Override
-	public String getUniqueIdentifier()
+	public ResourceLocation getUniqueIdentifier()
 	{
-		return "seeEntity:" + this.entityId;
+		return this.uniqueId;
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package com.gildedgames.aether.api.player.conditions;
 
 import com.gildedgames.aether.api.player.conditions.types.IPlayerConditionListener;
+import net.minecraft.util.ResourceLocation;
 
 public interface IPlayerCondition
 {
@@ -16,7 +17,7 @@ public interface IPlayerCondition
 	 * seeEntity:entity.pig
 	 * @return The unique identifier for this condition and its sub data.
 	 */
-	String getUniqueIdentifier();
+	ResourceLocation getUniqueIdentifier();
 
 	void listen(IPlayerConditionListener listener);
 

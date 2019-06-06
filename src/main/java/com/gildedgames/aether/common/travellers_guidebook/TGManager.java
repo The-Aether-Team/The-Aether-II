@@ -95,7 +95,7 @@ public class TGManager implements ITGManager
 
 						for (final ITGDefinition def : definitions)
 						{
-							final Collection<String> conditionIDs = PlayerConditionUtils.getIDs(def.conditions());
+							final Collection<ResourceLocation> conditionIDs = PlayerConditionUtils.getIDs(def.conditions());
 							this.playerConditionTracker.trackConditions(def.conditions());
 
 							for (final Map.Entry<String, ITGEntry> e : def.entries().entrySet())

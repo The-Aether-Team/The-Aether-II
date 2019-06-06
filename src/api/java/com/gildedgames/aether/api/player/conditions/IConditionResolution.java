@@ -1,11 +1,13 @@
 package com.gildedgames.aether.api.player.conditions;
 
+import net.minecraft.util.ResourceLocation;
+
 import java.util.function.Function;
 
 public interface IConditionResolution
 {
 	IConditionResolution REQUIRE_ALL = (conditionIDs, isConditionMet) -> {
-		for (final String condition : conditionIDs)
+		for (final ResourceLocation condition : conditionIDs)
 		{
 			if (!isConditionMet.apply(condition))
 			{
@@ -17,7 +19,7 @@ public interface IConditionResolution
 	};
 
 	IConditionResolution REQUIRE_ANY = (conditionIDs, isConditionMet) -> {
-		for (final String condition : conditionIDs)
+		for (final ResourceLocation condition : conditionIDs)
 		{
 			if (isConditionMet.apply(condition))
 			{
@@ -28,5 +30,5 @@ public interface IConditionResolution
 		return false;
 	};
 
-	boolean areConditionsMet(String[] conditionIDs, Function<String, Boolean> isConditionMet);
+	boolean areConditionsMet(ResourceLocation[] conditionIDs, Function<ResourceLocation, Boolean> isConditionMet);
 }
