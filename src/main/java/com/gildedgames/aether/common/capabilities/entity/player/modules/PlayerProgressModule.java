@@ -6,6 +6,7 @@ import com.gildedgames.aether.client.gui.container.guidebook.discovery.Discovery
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.network.packets.PacketDiscoveryTabType;
 import com.gildedgames.aether.common.network.packets.PacketProgressBooleanData;
 import com.gildedgames.aether.common.network.packets.PacketTalkedTo;
 import com.gildedgames.orbis.lib.util.io.NBTFunnel;
@@ -44,6 +45,11 @@ public class PlayerProgressModule extends PlayerAetherModule implements IPlayerA
 	public void setOpenedDiscoveryTabType(final DiscoveryTab.DiscoveryTabType type)
 	{
 		this.openedDiscoveryTabType = type;
+
+		if (this.getWorld().isRemote)
+		{
+			NetworkingAether.sendPacketToServer(new PacketDiscoveryTabType(type));
+		}
 	}
 
 	public void setBoolean(final String key, final Boolean bool)
