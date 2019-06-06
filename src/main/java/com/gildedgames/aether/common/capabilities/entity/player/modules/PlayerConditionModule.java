@@ -8,6 +8,7 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModu
 import com.gildedgames.orbis.lib.util.io.NBTFunnel;
 import com.google.common.collect.Sets;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.HashSet;
@@ -18,9 +19,9 @@ import java.util.function.Function;
  */
 public class PlayerConditionModule extends PlayerAetherModule implements IPlayerConditionModule
 {
-	private HashSet<String> conditionsMet = Sets.newHashSet();
+	private HashSet<ResourceLocation> conditionsMet = Sets.newHashSet();
 
-	private final Function<String, Boolean> isConditionMet = this::isConditionFlagged;
+	private final Function<ResourceLocation, Boolean> isConditionMet = this::isConditionFlagged;
 
 	public PlayerConditionModule(final PlayerAether playerAether)
 	{
@@ -28,26 +29,26 @@ public class PlayerConditionModule extends PlayerAetherModule implements IPlayer
 	}
 
 	@Override
-	public void flagCondition(final String conditionUniqueIdentifier)
+	public void flagCondition(final ResourceLocation conditionUniqueIdentifier)
 	{
 		this.conditionsMet.add(conditionUniqueIdentifier);
 	}
 
 	@Override
-	public boolean isConditionFlagged(final String conditionUniqueIdentifier)
+	public boolean isConditionFlagged(final ResourceLocation conditionUniqueIdentifier)
 	{
 		return this.conditionsMet.contains(conditionUniqueIdentifier);
 	}
 
 	@Override
-	public boolean areConditionsFlagged(final IConditionResolution conditionResolution, final String... conditionUniqueIdentifiers)
+	public boolean areConditionsFlagged(final IConditionResolution conditionResolution, final ResourceLocation... conditionUniqueIdentifiers)
 	{
 		return conditionResolution.areConditionsMet(conditionUniqueIdentifiers, this.isConditionMet);
 	}
 
 	public boolean isEntryUnlocked(final ITGEntry entry)
 	{
-		return this.areConditionsFlagged(entry.getConditionResolution(), entry.getConditionIDs().toArray(new String[0]));
+		return this.areConditionsFlagged(entry.getConditionResolution(), entry.getConditionIDs().toArray(new ResourceLocation[0]));
 	}
 
 	@Override
@@ -73,7 +74,7 @@ public class PlayerConditionModule extends PlayerAetherModule implements IPlayer
 	{
 		final NBTFunnel funnel = new NBTFunnel(tag);
 
-		funnel.setSet("conditionsMet", this.conditionsMet, NBTFunnel.STRING_SETTER);
+		funnel.setSet("conditionsMet", this.conditionsMet, NBTFunnel.RESOURCE_SETTER);
 	}
 
 	@Override
@@ -81,6 +82,6 @@ public class PlayerConditionModule extends PlayerAetherModule implements IPlayer
 	{
 		final NBTFunnel funnel = new NBTFunnel(tag);
 
-		this.conditionsMet = Sets.newHashSet(funnel.getSet("conditionsMet", NBTFunnel.STRING_GETTER));
+		this.conditionsMet = Sets.newHashSet(funnel.getSet("conditionsMet", NBTFunnel.RESOURCE_GETTER));
 	}
 }

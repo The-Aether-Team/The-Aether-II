@@ -1,20 +1,20 @@
 [
-   {
-      "conditions":[
-         {
-            "type":"seeEntity",
-            "entityId":"aether:taegore"
-         }
-      ],
-      "entries":{
-         "aether.taegore.discovery": {
-            "tag":"discovery",
-            "type":"bestiary_page",
-            "entityId":"aether:taegore",
-            "silhouetteTexture":"aether:textures/discoveries/sillhouettes/taegore.png",
-            "discoveredTexture":"aether:texture/discoveries/discovered/taegore.png",
-            "description": "aether.taegore.discovery.description"
-         }
-      }
-   }
+	{
+		"conditions": [
+			{
+				"type": "aether:seeEntity",
+				"entityId": "aether:taegore"
+			}
+		],
+		"entries": {
+			"aether.taegore.discovery": {
+				"tag": "discovery",
+				"type": "bestiary_page",
+				"entityId": "aether:taegore",
+				"silhouetteTexture": "aether:textures/discoveries/sillhouettes/taegore.png",
+				"discoveredTexture": "aether:texture/discoveries/discovered/taegore.png",
+				"description": "aether.taegore.discovery.description"
+			}
+		}
+	}
 ]

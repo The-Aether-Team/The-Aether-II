@@ -2,6 +2,7 @@ package com.gildedgames.aether.api.travellers_guidebook;
 
 import com.gildedgames.aether.api.player.conditions.IConditionResolution;
 import com.gildedgames.aether.api.player.conditions.IPlayerCondition;
+import net.minecraft.util.ResourceLocation;
 
 import java.util.Collection;
 
@@ -29,7 +30,7 @@ public interface ITGEntry
 
 	void setConditionResolution(IConditionResolution conditionResolution);
 
-	Collection<String> getConditionIDs();
+	Collection<ResourceLocation> getConditionIDs();
 
-	void setConditionIDs(Collection<String> conditionIDs);
+	void setConditionIDs(Collection<ResourceLocation> conditionIDs);
 }

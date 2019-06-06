@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.player_conditions.types;
 
 import com.gildedgames.aether.api.player.IPlayerConditionModule;
 import com.gildedgames.aether.api.player.conditions.types.IPlayerConditionEntity;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.player_conditions.PlayerConditionBase;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
@@ -30,6 +31,8 @@ public class PlayerConditionFeedEntity extends PlayerConditionBase implements IP
 
 	private final EntityEntry entityEntry;
 
+	private final ResourceLocation uniqueId;
+
 	public PlayerConditionFeedEntity(final ResourceLocation entityId)
 	{
 		Validate.notNull(entityId, "entityId cannot be null.");
@@ -41,12 +44,14 @@ public class PlayerConditionFeedEntity extends PlayerConditionBase implements IP
 		{
 			throw new RuntimeException("Entity entry cannot be found with given entityId: " + this.entityId);
 		}
+
+		this.uniqueId = AetherCore.getResource("feedEntity:" + this.entityId);
 	}
 
 	@Override
-	public String getUniqueIdentifier()
+	public ResourceLocation getUniqueIdentifier()
 	{
-		return "feedEntity:" + this.entityId;
+		return this.uniqueId;
 	}
 
 	@Override
