@@ -17,6 +17,8 @@ public interface ITGManager
 
 	List<ITGEntry> getEntriesWithTag(String tag);
 
+	<T extends ITGEntry> List<T> getEntriesWithTagAndClass(String tag, Class<T> clazzType);
+
 	<T extends ITGEntry> Optional<T> getEntry(String entryId, Class<T> clazzType);
 
 	@SideOnly(Side.CLIENT)
