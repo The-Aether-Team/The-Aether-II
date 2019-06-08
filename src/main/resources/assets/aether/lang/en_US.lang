@@ -846,6 +846,9 @@ gui.aether.hover.npc=Talk to %s
 gui.aether.hover.campfire=Return to Overworld
 gui.aether.hover.teleporter=Enter the Aether
 
+gui.guidebook.discovery.stats=Stats:
+gui.guidebook.discovery.moves=Moves:
+
 # Death messages
 
 death.attack.aether.effect.bleed=Bleed
@@ -1266,3 +1269,7 @@ mysterious_figure.shop.orange_lollipop=Tastes like oranges! P.S: This candy cont
 mysterious_figure.shop.icestone_poprocks=Not actually made with Icestone.
 mysterious_figure.shop.ginger_bread_man=I once heard a story of a man made gingerbread. Legend says, on the eve of this sacred month, they ate gingerbread in the shape of a man and turned into the very thing they consumed. Feeling lucky?
 mysterious_figure.shop.candy_cane=Try using this as walking cane. Go on, I dare you.
+
+# Discovery descriptions:
+
+aether.taegore.discovery.description=Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mattis elit sem, sed rutrum velit porta ut. Phasellus venenatis nisi sed mi eleifend fermentum. Morbi est ex, eleifend volutpat ipsum sed, eleifend consequat augue. Cras ac placerat sapien. Morbi et turpis id diam condimentum mollis. Ut ipsum sem, laoreet quis euismod nec, tempor eget tellus. Nam congue molestie accumsan.

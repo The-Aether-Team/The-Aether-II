@@ -3,7 +3,6 @@ package com.gildedgames.aether.api.travellers_guidebook.entries;
 import com.gildedgames.aether.api.cache.IEntityStats;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
 
 public interface ITGEntryBestiaryPage extends ITGEntryEntity
 {
@@ -17,7 +16,7 @@ public interface ITGEntryBestiaryPage extends ITGEntryEntity
 
 	IEntityStats getEntityStats();
 
-	ITextComponent getDescription();
+	String getUnlocalizedDescription();
 
 	String getEntityName();
 

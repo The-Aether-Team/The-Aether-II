@@ -13,8 +13,6 @@ import com.google.common.collect.Lists;
 import com.google.gson.*;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
 
 import java.lang.reflect.Type;
 import java.util.Collection;
@@ -27,16 +25,17 @@ public class TGEntryBestiaryPage extends TGEntryBase implements ITGEntryBestiary
 
 	private final ResourceLocation silhouetteTexture, discoveredTexture, silhouetteSlotTexture, discoveredSlotTexture;
 
-	private final ITextComponent description;
+	private final String unlocalizedDescription;
 
-	protected TGEntryBestiaryPage(final String tag, final ResourceLocation entityId, final String description, final ResourceLocation silhouetteTexture,
+	protected TGEntryBestiaryPage(final String tag, final ResourceLocation entityId, final String unlocalizedDescription,
+			final ResourceLocation silhouetteTexture,
 			final ResourceLocation discoveredTexture, final ResourceLocation silhouetteSlotTexture, final ResourceLocation discoveredSlotTexture)
 	{
 		this.tag = tag;
 
 		this.entityId = entityId;
 
-		this.description = new TextComponentTranslation(description);
+		this.unlocalizedDescription = unlocalizedDescription;
 
 		this.silhouetteTexture = silhouetteTexture;
 		this.discoveredTexture = discoveredTexture;
@@ -92,9 +91,9 @@ public class TGEntryBestiaryPage extends TGEntryBase implements ITGEntryBestiary
 	}
 
 	@Override
-	public ITextComponent getDescription()
+	public String getUnlocalizedDescription()
 	{
-		return this.description;
+		return this.unlocalizedDescription;
 	}
 
 	@Override
@@ -114,7 +113,7 @@ public class TGEntryBestiaryPage extends TGEntryBase implements ITGEntryBestiary
 	@Override
 	public boolean hasUnlockedCompleteOverview(final IPlayerAether playerAether)
 	{
-		return this.isUnderstood(playerAether); // TODO: Need to have conditions for each move
+		return false;//this.isUnderstood(playerAether); // TODO: Need to have conditions for each move
 	}
 
 	@Override
