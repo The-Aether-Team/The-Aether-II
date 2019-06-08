@@ -14,6 +14,8 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'maven-publish'
 
+def isPhosphorSubmodule = findProject(":Phosphor") != null
+
 repositories {
     mavenCentral()
 
@@ -27,11 +29,15 @@ configurations {
 }
 
 dependencies {
-    runtime "me.jellysquid.mods:phosphor:${phosphor_version}:dev"
-    shaded  "me.jellysquid.mods:phosphor:${phosphor_version}:universal"
+    if (isPhosphorSubmodule) {
+        runtime project(':phosphor')
+    } else {
+        runtime "me.jellysquid.mods:phosphor:${phosphor_version}:dev"
+        shaded  "me.jellysquid.mods:phosphor:${phosphor_version}:universal"
+    }
 
-    compile "com.gildedgames:orbis-lib:${orbis_version}:dev"
-    shaded "com.gildedgames:orbis-lib:${orbis_version}:universal"
+    compile project(":orbis-lib")
+    shaded project(":orbis-lib")
 }
 
 allprojects {
@@ -54,53 +60,31 @@ sourceSets {
     }
 }
 
-// This is an ugly hack to make Phosphor appear before Orbis-Lib
-// If we don't do this, then Forge will explode for some unknown reason and not be able to handle dependency resolution
-def shadedJars = configurations.shaded.files
-        .findAll { it.name.contains("-universal.jar") }
-        .toList()
-        .reverse()
-
-def genericJarManifest = {
-    attributes "ContainedDeps": shadedJars.collect { it.name }.join(' ')
-    attributes "FMLAT": "aether_at.cfg"
-}
-
 jar {
     from sourceSets.api.output
     from sourceSets.main.output
 
     classifier "universal"
 
-    from shadedJars
+    gradle.projectsEvaluated({
+        def artifacts = configurations.shaded.files
+                .findAll { it.name.contains("-universal.jar") }
+                .toList()
+                .reverse()
 
-    manifest genericJarManifest
+        from(artifacts)
+
+        manifest {
+            attributes "ContainedDeps": artifacts.collect { it.name }.join(' ')
+            attributes "FMLAT": "aether_at.cfg"
+        }
+    })
 }
 
 task apiJar(type: Jar) {
     classifier = "api"
 
     from sourceSets.api.output
-}
-
-task serverJar(type: Jar) {
-    classifier = "server"
-
-    from sourceSets.api.output
-    from (sourceSets.main.output) {
-        // Exclude client assets
-        exclude 'assets/*/blockstates/**'
-        exclude 'assets/*/sounds/**'
-        exclude 'assets/*/textures/**'
-        exclude 'assets/*/models/**'
-
-        // Exclude client code
-        exclude 'com/gildedgames/aether/client/**'
-    }
-
-    from shadedJars
-
-    manifest genericJarManifest
 }
 
 minecraft {
@@ -149,7 +133,7 @@ if (System.getenv("JARSIGN_SECRETS_FILE") != null) {
     def secrets = new Properties()
     secrets.load(secretsFile.newReader())
 
-    [jar, apiJar, serverJar].each { jarTask ->
+    [jar, apiJar].each { jarTask ->
         def task = task(jarTask.name + 'Sign', type: SignJar) {
             keyStore = System.getenv("JARSIGN_KEYSTORE_FILE")
             alias = secrets.alias
@@ -165,6 +149,5 @@ if (System.getenv("JARSIGN_SECRETS_FILE") != null) {
 }
 
 build.dependsOn apiJar
-build.dependsOn serverJar
-build.dependsOn gradle.includedBuilds*.task(':build')
 
+jar.dependsOn ":orbis-lib:build"

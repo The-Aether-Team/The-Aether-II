@@ -99,7 +99,7 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 			}
 		}
 
-		final List<Pair<Integer, ItemStack>> updates = this.getEntity().world.isRemote ? Collections.emptyList() : new ArrayList<>();
+		final List<Pair<Integer, ItemStack>> updates = this.getEntity().world.isRemote ? null : new ArrayList<>();
 
 		// Checks what items have been changed in the staging inventory, records them, and then
 		// fires off to the effect manager
@@ -120,7 +120,7 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 					this.activateEquipmentEffects(newStack, Pair.of(i, EQUIPMENT_INV_PROVIDER), EffectActivator.WHEN_EQUIPPED);
 				}
 
-				if (!this.getEntity().world.isRemote)
+				if (updates != null)
 				{
 					updates.add(Pair.of(i, newStack));
 				}
@@ -129,15 +129,13 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 			}
 		}
 
-		if (!updates.isEmpty())
+		if (updates != null && !updates.isEmpty())
 		{
-			if (!this.getEntity().world.isRemote)
-			{
-				NetworkingAether.sendPacketToWatching(new PacketEquipment(this.getEntity(), updates), this.getEntity(), true);
-			}
+			NetworkingAether.sendPacketToWatching(new PacketEquipment(this.getEntity(), updates), this.getEntity(), true);
 		}
 
 		this.pools.values().forEach(EquipmentEffectPool::update);
+
 		this.lastHeldStack = this.getEntity().getHeldItemMainhand();
 		this.lastHeldStackIndex = this.getEntity().inventory.currentItem;
 	}
@@ -182,14 +180,11 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 			return;
 		}
 
-		properties.getEffectProviders().forEach(provider -> {
-			EquipmentEffectPool<IEffectProvider> pool = this.pools.get(provider.getFactory());
+		this.pools.entrySet().removeIf(pair -> {
+			EquipmentEffectPool<IEffectProvider> pool = pair.getValue();
 			pool.removeInstances(inventoryIndexPair);
 
-			if (pool.isEmpty())
-			{
-				this.pools.remove(provider.getFactory());
-			}
+			return pool.isEmpty();
 		});
 	}
 
