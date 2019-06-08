@@ -89,6 +89,11 @@ public class EquipmentEffectPool<T extends IEffectProvider> implements IEffectPo
 	{
 		Collection<T> provider = this.providers.removeAll(inventoryIndexPair);
 
+		if (provider == null || provider.isEmpty())
+		{
+			return;
+		}
+
 		for (T inst : provider)
 		{
 			this.active.remove(inst);
