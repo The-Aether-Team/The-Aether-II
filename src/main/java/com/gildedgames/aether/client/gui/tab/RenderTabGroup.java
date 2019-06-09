@@ -97,11 +97,11 @@ public class RenderTabGroup extends Gui
 					Vec2f vec = tab.getCustomTabVec2();
 					int v = 0;
 					int height = 31;
-					int width = 25;
+					int width = 26;
 					if (tab == tabGroup.getSelectedTab())
 					{
-						v = 34;
-						height = 36;
+						v = 35;
+						height = 35;
 					}
 
 					this.drawTexturedModalRect(xPosition, yPosition, (int)vec.x, (int)vec.y + v, width, height);
