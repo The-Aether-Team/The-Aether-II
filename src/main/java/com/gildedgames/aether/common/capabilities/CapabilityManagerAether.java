@@ -37,10 +37,7 @@ public class CapabilityManagerAether
 		CapabilityManager.INSTANCE.register(ISpawnSystem.class, new SpawnSystem.Storage(), SpawnSystem::new);
 		CapabilityManager.INSTANCE.register(IPlacementFlagCapability.class, new PlacementFlagCapability.Storage(), PlacementFlagCapability::new);
 		CapabilityManager.INSTANCE.register(IPrecipitationManager.class, new PrecipitationManagerImpl.Storage(), PrecipitationManagerImpl::new);
-
-		// UNCOMMENT TO ENABLE STATUS EFFECT SYSTEM!!
-		//CapabilityManager.INSTANCE.register(IAetherStatusEffectPool.class, new StatusEffectPool.Storage(), StatusEffectPool::new);
-
+		CapabilityManager.INSTANCE.register(IAetherStatusEffectPool.class, new StatusEffectPool.Storage(), StatusEffectPool::new);
 	}
 
 	@SubscribeEvent
