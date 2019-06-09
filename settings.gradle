@@ -1,9 +1,4 @@
 rootProject.name = 'aether-ii'
 
-if (file("lib/orbis-lib/build.gradle").exists()) {
-    includeBuild('lib/orbis-lib') {
-        dependencySubstitution {
-            substitute module('com.gildedgames:orbis-lib') with project(':')
-        }
-    }
-}
+include 'orbis-lib'
+project(':orbis-lib').projectDir = file("lib/orbis-lib")

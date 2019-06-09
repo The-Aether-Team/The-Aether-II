@@ -139,11 +139,6 @@ public class TabClientEvents
 	@SubscribeEvent
 	public static void tickEnd(final TickEvent.RenderTickEvent event)
 	{
-		if (Minecraft.getMinecraft().world == null || Minecraft.getMinecraft().world.provider.getDimensionType() != DimensionsAether.AETHER)
-		{
-			return;
-		}
-
 		if (event.phase == TickEvent.Phase.END)
 		{
 			final EntityPlayer player = Minecraft.getMinecraft().player;
