@@ -20,8 +20,14 @@ public abstract class BlockNaturalLeaves extends BlockAetherLeaves
 
 		if (!worldIn.isRemote && state.getValue(DECAYABLE) && worldIn.rand.nextInt(15) == 0)
 		{
-			EntitySkyrootLizard lizard = new EntitySkyrootLizard(worldIn);
+			EntitySkyrootLizard.Type type = EntitySkyrootLizard.Type.getFromWoodType(this.getWoodBlock());
 
+			if (type == null)
+			{
+				return;
+			}
+
+			EntitySkyrootLizard lizard = new EntitySkyrootLizard(worldIn);
 			lizard.setPosition(pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f);
 
 			this.applyLizardProperties(lizard);
@@ -32,7 +38,7 @@ public abstract class BlockNaturalLeaves extends BlockAetherLeaves
 
 	protected void applyLizardProperties(EntitySkyrootLizard lizard)
 	{
-		lizard.setLizardType(this.getWoodBlock().getAetherWoodType());
+
 	}
 
 	public abstract BlockAetherLog getWoodBlock();

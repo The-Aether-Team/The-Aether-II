@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
 import com.gildedgames.aether.common.blocks.natural.leaves.BlockColoredLeaves.Color;
 import com.gildedgames.aether.common.blocks.natural.wood.AetherWoodType;
+import com.gildedgames.aether.common.blocks.natural.wood.BlockAetherLog;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import net.minecraft.entity.EntityAgeable;
@@ -21,6 +22,8 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
@@ -30,8 +33,8 @@ public class EntitySkyrootLizard extends EntityAetherAnimal
 
 	private static final DataParameter<Byte> LIZARD_COLOR = EntityDataManager.createKey(EntitySkyrootLizard.class, DataSerializers.BYTE);
 
-	private static final AetherWoodType[] RANDOM_TYPES = new AetherWoodType[] { AetherWoodType.AMBERROOT, AetherWoodType.SKYROOT,
-			AetherWoodType.WISPROOT, AetherWoodType.GREATROOT };
+	private static final Type[] RANDOM_TYPES = new Type[] { Type.AMBERROOT, Type.SKYROOT,
+			Type.WISPROOT, Type.GREATROOT };
 
 	public EntitySkyrootLizard(World world)
 	{
@@ -49,7 +52,7 @@ public class EntitySkyrootLizard extends EntityAetherAnimal
 	{
 		super.entityInit();
 
-		AetherWoodType type = RANDOM_TYPES[this.rand.nextInt(RANDOM_TYPES.length)];
+		Type type = RANDOM_TYPES[this.rand.nextInt(RANDOM_TYPES.length)];
 		Color color = Color.VALUES[this.rand.nextInt(Color.VALUES.length)];
 
 		this.dataManager.register(LIZARD_TYPE, (byte) type.ordinal());
@@ -78,16 +81,16 @@ public class EntitySkyrootLizard extends EntityAetherAnimal
 		}
 	}
 
-	public AetherWoodType getLeafType()
+	public Type getLeafType()
 	{
 		int ordinal = this.dataManager.get(LIZARD_TYPE);
 
-		if (ordinal < 0 || ordinal >= AetherWoodType.VALUES.length)
+		if (ordinal < 0 || ordinal >= Type.VALUES.length)
 		{
-			return AetherWoodType.SKYROOT;
+			return Type.SKYROOT;
 		}
 
-		return AetherWoodType.VALUES[ordinal];
+		return Type.VALUES[ordinal];
 	}
 
 	public Color getLeafColor()
@@ -114,7 +117,7 @@ public class EntitySkyrootLizard extends EntityAetherAnimal
 		this.dataManager.set(LIZARD_COLOR, (byte) ordinal);
 	}
 
-	public void setLizardType(AetherWoodType type)
+	public void setLizardType(Type type)
 	{
 		this.dataManager.set(LIZARD_TYPE, (byte) type.ordinal());
 	}
@@ -172,18 +175,19 @@ public class EntitySkyrootLizard extends EntityAetherAnimal
 		this.dataManager.set(LIZARD_TYPE, (byte) nbt.getInteger("type"));
 	}
 
+	@SideOnly(Side.CLIENT)
 	public int getLizardAccentColor()
 	{
-		AetherWoodType type = this.getLeafType();
+		Type type = this.getLeafType();
 
-		if (type == AetherWoodType.AMBERROOT)
+		if (type == Type.AMBERROOT)
 		{
 			return Integer.MIN_VALUE;
 		}
 
 		Color color = this.getLeafColor();
 
-		if (type == AetherWoodType.SKYROOT)
+		if (type == Type.SKYROOT)
 		{
 			switch (color)
 			{
@@ -195,7 +199,7 @@ public class EntitySkyrootLizard extends EntityAetherAnimal
 					return 0x3B4E9F;
 			}
 		}
-		else if (type == AetherWoodType.WISPROOT)
+		else if (type == Type.WISPROOT)
 		{
 			switch (color)
 			{
@@ -207,7 +211,7 @@ public class EntitySkyrootLizard extends EntityAetherAnimal
 					return 0x6670AA;
 			}
 		}
-		else if (type == AetherWoodType.GREATROOT)
+		else if (type == Type.GREATROOT)
 		{
 			switch (color)
 			{
@@ -228,5 +232,34 @@ public class EntitySkyrootLizard extends EntityAetherAnimal
 	public EntityAgeable createChild(EntityAgeable ageable)
 	{
 		return null;
+	}
+
+	public enum Type
+	{
+		SKYROOT,
+		GREATROOT,
+		WISPROOT,
+		AMBERROOT;
+
+		public static final Type[] VALUES = Type.values();
+
+		public static Type getFromWoodType(BlockAetherLog block)
+		{
+			AetherWoodType type = block.getAetherWoodType();
+
+			switch (type)
+			{
+				case SKYROOT:
+					return SKYROOT;
+				case GREATROOT:
+					return GREATROOT;
+				case WISPROOT:
+					return WISPROOT;
+				case AMBERROOT:
+					return AMBERROOT;
+			}
+
+			return null;
+		}
 	}
 }

@@ -14,8 +14,7 @@ public abstract class BlockColoredLeaves extends BlockNaturalLeaves
 	@Override
 	protected void applyLizardProperties(EntitySkyrootLizard lizard)
 	{
-		super.applyLizardProperties(lizard);
-
+		lizard.setLizardType(EntitySkyrootLizard.Type.SKYROOT);
 		lizard.setLizardColor(this.getLeafColor());
 	}
 
