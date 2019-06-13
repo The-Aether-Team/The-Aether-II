@@ -17,6 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -29,18 +30,22 @@ import java.util.Arrays;
 
 public class EntityAechorPlant extends EntityAetherMob
 {
+	private static final int MAX_PETALS = 8;
+
 	private static final DataParameter<Boolean> CAN_SEE_PREY = new DataParameter<>(16, DataSerializers.BOOLEAN);
 
 	private static final DataParameter<Byte> PLANT_SIZE = new DataParameter<>(17, DataSerializers.BYTE);
 
-	private final boolean[] petalPresent = new boolean[4];
+	private static final DataParameter<Byte> PLANT_PETALS = new DataParameter<>(18, DataSerializers.BYTE);
+
+	private boolean[] petals;
 
 	@SideOnly(Side.CLIENT)
 	public float sinage, prevSinage;
 
 	private int poisonLeft;
 
-	private int petalsLeft = 4, lastPetalsLeft = 4;
+	private int petalGrowTimer = 3000;
 
 	public EntityAechorPlant(World world)
 	{
@@ -60,12 +65,12 @@ public class EntityAechorPlant extends EntityAetherMob
 
 		this.experienceValue = 3;
 
-		Arrays.fill(this.petalPresent, true);
+		Arrays.fill(this.petals, true);
 	}
 
 	public boolean[] getPetalsPresent()
 	{
-		return this.petalPresent;
+		return this.petals;
 	}
 
 	@Override
@@ -73,8 +78,13 @@ public class EntityAechorPlant extends EntityAetherMob
 	{
 		super.entityInit();
 
+		this.petals = new boolean[MAX_PETALS];
+
+		Arrays.fill(this.petals, true);
+
 		this.dataManager.register(EntityAechorPlant.CAN_SEE_PREY, Boolean.FALSE);
 		this.dataManager.register(EntityAechorPlant.PLANT_SIZE, (byte) 0);
+		this.dataManager.register(EntityAechorPlant.PLANT_PETALS, this.serializePlantPetals());
 	}
 
 	@Override
@@ -100,34 +110,22 @@ public class EntityAechorPlant extends EntityAetherMob
 		this.motionX = 0.0D;
 		this.motionZ = 0.0D;
 
-		if (this.getHealth() <= 20)
+		if (!this.world.isRemote)
 		{
-			if (((this.getHealth() - 2) / 6) + 1 < this.petalsLeft && this.petalsLeft == this.lastPetalsLeft)
-			{
-				this.petalsLeft--;
-			}
+			this.petalGrowTimer--;
 
-			if (this.petalsLeft != this.lastPetalsLeft)
+			if (this.petalGrowTimer <= 0)
 			{
-				boolean found = false;
+				this.petalGrowTimer = 2400 + this.getRNG().nextInt(1600);
 
-				while (!found)
+				int remainingPetals = this.getPetalCountInState(true);
+
+				if (remainingPetals < MAX_PETALS)
 				{
-					int index = this.getRNG().nextInt(this.petalPresent.length);
-
-					if (this.petalPresent[index])
-					{
-						found = true;
-
-						this.petalPresent[index] = false;
-
-						ItemStack petal = new ItemStack(ItemsAether.aechor_petal);
-
-						Block.spawnAsEntity(this.world, this.getPosition(), petal);
-					}
+					this.setPetalState(this.getRandomPetal(false), true);
 				}
 
-				this.lastPetalsLeft = this.petalsLeft;
+				this.heal((float) (Math.round((this.getMaxHealth() / MAX_PETALS) * 2.0) / 2.0));
 			}
 		}
 
@@ -149,6 +147,89 @@ public class EntityAechorPlant extends EntityAetherMob
 		{
 			this.setHealth(0);
 		}
+	}
+
+	@Override
+	protected void damageEntity(DamageSource damageSrc, float damageAmount)
+	{
+		float prevHealth = this.getHealth();
+
+		super.damageEntity(damageSrc, damageAmount);
+
+		if (this.getHealth() != prevHealth)
+		{
+			this.petalGrowTimer = 6000;
+
+			if (!this.world.isRemote)
+			{
+				int targetPetals = (int) Math.floor((this.getHealth() / this.getMaxHealth()) * MAX_PETALS);
+				int remainingPetals = this.getPetalCountInState(true);
+
+				int damage = remainingPetals - targetPetals;
+
+				Block.spawnAsEntity(this.world, this.getPosition(), new ItemStack(ItemsAether.aechor_petal, damage));
+
+				while (remainingPetals > targetPetals)
+				{
+					this.setPetalState(this.getRandomPetal(true), false);
+
+					remainingPetals--;
+				}
+			}
+		}
+	}
+
+	private int getRandomPetal(boolean state)
+	{
+		int total = this.getPetalCountInState(state);
+		int nth = this.rand.nextInt(total);
+
+		int selected = -1;
+
+		for (int i = 0, k = 0; i < this.petals.length; i++)
+		{
+			boolean present = this.petals[i];
+
+			if (present == state)
+			{
+				if (k == nth)
+				{
+					selected = i;
+
+					break;
+				}
+
+				k++;
+			}
+		}
+
+		return selected;
+	}
+
+	private void setPetalState(int index, boolean state)
+	{
+		this.petals[index] = state;
+		this.sendPetalUpdate();
+	}
+
+	private void sendPetalUpdate()
+	{
+		this.dataManager.set(PLANT_PETALS, this.serializePlantPetals());
+	}
+
+	private int getPetalCountInState(boolean state)
+	{
+		int i = 0;
+
+		for (boolean a : this.petals)
+		{
+			if (a == state)
+			{
+				i++;
+			}
+		}
+
+		return i;
 	}
 
 	private boolean canStayHere(final BlockPos pos)
@@ -237,13 +318,9 @@ public class EntityAechorPlant extends EntityAetherMob
 		tagCompound.setInteger("plantSize", this.getPlantSize());
 		tagCompound.setInteger("poisonLeft", this.getPoisonLeft());
 
-		tagCompound.setBoolean("petal0", this.petalPresent[0]);
-		tagCompound.setBoolean("petal1", this.petalPresent[1]);
-		tagCompound.setBoolean("petal2", this.petalPresent[2]);
-		tagCompound.setBoolean("petal3", this.petalPresent[3]);
+		tagCompound.setByte("petals", this.serializePlantPetals());
 
-		tagCompound.setInteger("petalsLeft", this.petalsLeft);
-		tagCompound.setInteger("lastPetalsLeft", this.lastPetalsLeft);
+		tagCompound.setInteger("petalGrowTimer", this.petalGrowTimer);
 	}
 
 	@Override
@@ -254,13 +331,16 @@ public class EntityAechorPlant extends EntityAetherMob
 		this.setPlantSize(tagCompound.getInteger("plantSize"));
 		this.setPoisonLeft(tagCompound.getInteger("poisonLeft"));
 
-		this.petalPresent[0] = tagCompound.getBoolean("petal0");
-		this.petalPresent[1] = tagCompound.getBoolean("petal1");
-		this.petalPresent[2] = tagCompound.getBoolean("petal2");
-		this.petalPresent[3] = tagCompound.getBoolean("petal3");
+		if (tagCompound.hasKey("petals"))
+		{
+			this.deserializePlantPetals(tagCompound.getByte("petals"));
+		}
+		else
+		{
+			Arrays.fill(this.petals, true);
+		}
 
-		this.petalsLeft = tagCompound.getInteger("petalsLeft");
-		this.lastPetalsLeft = tagCompound.getInteger("lastPetalsLeft");
+		this.petalGrowTimer = tagCompound.getInteger("petalGrowTimer");
 	}
 
 	@Override
@@ -297,5 +377,37 @@ public class EntityAechorPlant extends EntityAetherMob
 	public void setPoisonLeft(int poisonLeft)
 	{
 		this.poisonLeft = poisonLeft;
+	}
+
+	@Override
+	public void notifyDataManagerChange(DataParameter<?> key)
+	{
+		if (key == PLANT_PETALS)
+		{
+			this.deserializePlantPetals(this.dataManager.get(PLANT_PETALS));
+		}
+	}
+
+	private void deserializePlantPetals(byte val)
+	{
+		for (int i = 0; i < this.petals.length; i++)
+		{
+			this.petals[i] = ((val >>> i) & 1) == 1;
+		}
+	}
+
+	private byte serializePlantPetals()
+	{
+		byte val = 0;
+
+		for (int i = 0; i < this.petals.length; i++)
+		{
+			if (this.petals[i])
+			{
+				val |= (1 << i);
+			}
+		}
+
+		return val;
 	}
 }
