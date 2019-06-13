@@ -2,14 +2,12 @@ package com.gildedgames.aether.client.renderer.entities.living;
 
 import com.gildedgames.aether.client.models.entities.living.ModelSkyrootLizard;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.entities.living.passive.EntitySkyrootLizard;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
-import java.awt.Color;
 
 public class RenderSkyrootLizard extends RenderLiving<EntitySkyrootLizard>
 {
@@ -32,39 +30,40 @@ public class RenderSkyrootLizard extends RenderLiving<EntitySkyrootLizard>
 	{
 		ModelSkyrootLizard model = (ModelSkyrootLizard) this.mainModel;
 
-		int logType = entity.getLogType();
-
-		if (logType == 0)
+		switch (entity.getLeafType())
 		{
-			this.renderManager.renderEngine.bindTexture(AMBERROOT);
-		}
-		else if (logType == 1)
-		{
-			this.renderManager.renderEngine.bindTexture(GREATROOT);
-		}
-		else if (logType == 2)
-		{
-			this.renderManager.renderEngine.bindTexture(SKYROOT);
-		}
-		else if (logType == 3)
-		{
-			this.renderManager.renderEngine.bindTexture(WISPROOT);
+			case SKYROOT:
+				this.renderManager.renderEngine.bindTexture(SKYROOT);
+				break;
+			case WISPROOT:
+				this.renderManager.renderEngine.bindTexture(WISPROOT);
+				break;
+			case GREATROOT:
+				this.renderManager.renderEngine.bindTexture(GREATROOT);
+				break;
+			case AMBERROOT:
+				this.renderManager.renderEngine.bindTexture(AMBERROOT);
+				break;
+			default:
+				return;
 		}
 
 		model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
-		if (logType != 0)
+		int color = entity.getLizardAccentColor();
+
+		if (color != Integer.MIN_VALUE)
 		{
 			this.renderManager.renderEngine.bindTexture(LEAF_LAYER);
 
-			GlStateManager.pushMatrix();
+			int red = (color >> 16) & 0xFF;
+			int green = (color >> 8) & 0xFF;
+			int blue = color & 0xFF;
 
-			Color color = entity.getColor(entity.getLeafType());
-
-			GlStateManager.color(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, 1f);
-			model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-			GlStateManager.popMatrix();
+			GlStateManager.color(red / 255f, green / 255f, blue / 255f, 1f);
 		}
+
+		model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 	}
 
 	@Override

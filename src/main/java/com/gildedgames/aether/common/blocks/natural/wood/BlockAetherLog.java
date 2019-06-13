@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.blocks.natural;
+package com.gildedgames.aether.common.blocks.natural.wood;
 
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.SoundType;
@@ -15,9 +15,13 @@ public class BlockAetherLog extends BlockLog
 {
 	public static final PropertyEnum<BlockLog.EnumAxis> PROPERTY_LOG_AXIS = PropertyEnum.create("axis", BlockLog.EnumAxis.class);
 
-	public BlockAetherLog()
+	private final AetherWoodType type;
+
+	public BlockAetherLog(AetherWoodType type)
 	{
 		super();
+
+		this.type = type;
 
 		this.setSoundType(SoundType.WOOD);
 
@@ -136,5 +140,10 @@ public class BlockAetherLog extends BlockLog
 	protected BlockStateContainer createBlockState()
 	{
 		return new BlockStateContainer(this, PROPERTY_LOG_AXIS);
+	}
+
+	public AetherWoodType getAetherWoodType()
+	{
+		return this.type;
 	}
 }

@@ -2,8 +2,8 @@ package com.gildedgames.aether.common.entities.living.passive;
 
 import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
-import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.natural.BlockAetherLeaves;
+import com.gildedgames.aether.common.blocks.natural.leaves.BlockColoredLeaves.Color;
+import com.gildedgames.aether.common.blocks.natural.wood.AetherWoodType;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import net.minecraft.entity.EntityAgeable;
@@ -22,21 +22,21 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
-import java.awt.Color;
-
 import javax.annotation.Nullable;
-import java.util.HashMap;
 
 public class EntitySkyrootLizard extends EntityAetherAnimal
 {
+	private static final DataParameter<Byte> LIZARD_TYPE = EntityDataManager.createKey(EntitySkyrootLizard.class, DataSerializers.BYTE);
 
-	private static final DataParameter<Integer> LIZARD_TYPE = EntityDataManager.createKey(EntitySkyrootLizard.class, DataSerializers.VARINT);
+	private static final DataParameter<Byte> LIZARD_COLOR = EntityDataManager.createKey(EntitySkyrootLizard.class, DataSerializers.BYTE);
 
-	public static final SkyrootLizardVarieties VARIETIES = new SkyrootLizardVarieties();
+	private static final AetherWoodType[] RANDOM_TYPES = new AetherWoodType[] { AetherWoodType.AMBERROOT, AetherWoodType.SKYROOT,
+			AetherWoodType.WISPROOT, AetherWoodType.GREATROOT };
 
 	public EntitySkyrootLizard(World world)
 	{
 		super(world);
+
 		this.setSize(.8f, .3f);
 
 		this.tasks.addTask(1, new EntityAIWander(this, 0.5D, 10));
@@ -48,9 +48,13 @@ public class EntitySkyrootLizard extends EntityAetherAnimal
 	public void entityInit()
 	{
 		super.entityInit();
-		this.dataManager.register(LIZARD_TYPE, this.getEntityWorld().rand.nextInt(10));
-	}
 
+		AetherWoodType type = RANDOM_TYPES[this.rand.nextInt(RANDOM_TYPES.length)];
+		Color color = Color.VALUES[this.rand.nextInt(Color.VALUES.length)];
+
+		this.dataManager.register(LIZARD_TYPE, (byte) type.ordinal());
+		this.dataManager.register(LIZARD_COLOR, (byte) color.ordinal());
+	}
 
 	@Override
 	protected void applyEntityAttributes()
@@ -74,30 +78,45 @@ public class EntitySkyrootLizard extends EntityAetherAnimal
 		}
 	}
 
-	public int getLogType()
+	public AetherWoodType getLeafType()
 	{
-		int type = this.dataManager.get(LIZARD_TYPE);
+		int ordinal = this.dataManager.get(LIZARD_TYPE);
 
-		return type == 0 ? 0 : (type + 2) / 3;
+		if (ordinal < 0 || ordinal >= AetherWoodType.VALUES.length)
+		{
+			return AetherWoodType.SKYROOT;
+		}
+
+		return AetherWoodType.VALUES[ordinal];
 	}
 
-	public int getLeafType()
+	public Color getLeafColor()
 	{
-		return this.dataManager.get(LIZARD_TYPE);
+		int ordinal = this.dataManager.get(LIZARD_COLOR);
+
+		if (ordinal < 0 || ordinal > Color.VALUES.length)
+		{
+			return Color.GREEN;
+		}
+
+		return Color.VALUES[ordinal];
 	}
 
-	public void setLizardType(BlockAetherLeaves leaf)
+	public void setLizardColor(Color color)
 	{
-		if (leaf.equals(BlocksAether.amberoot_leaves))
-		{
-			this.dataManager.set(LIZARD_TYPE, 0);
-		}
-		else
-		{
-			int val = VARIETIES.table.get(leaf.getTranslationKey().substring(12));
+		int ordinal = -1;
 
-			this.dataManager.set(LIZARD_TYPE, val);
+		if (color != null)
+		{
+			ordinal = color.ordinal();
 		}
+
+		this.dataManager.set(LIZARD_COLOR, (byte) ordinal);
+	}
+
+	public void setLizardType(AetherWoodType type)
+	{
+		this.dataManager.set(LIZARD_TYPE, (byte) type.ordinal());
 	}
 
 	@Override
@@ -109,7 +128,7 @@ public class EntitySkyrootLizard extends EntityAetherAnimal
 
 		if (!itemStack.isEmpty())
 		{
-			if (itemStack.getItem() ==  ItemsAether.skyroot_stick || itemStack.getItem() == Items.STICK)
+			if (itemStack.getItem() == ItemsAether.skyroot_stick || itemStack.getItem() == Items.STICK)
 			{
 				this.consumeItemFromStack(player, itemStack);
 
@@ -119,7 +138,7 @@ public class EntitySkyrootLizard extends EntityAetherAnimal
 
 				if (player.isServerWorld())
 				{
-					player.playSound(SoundsAether.aerbunny_hurt,1F, 0.3F);
+					player.playSound(SoundsAether.aerbunny_hurt, 1F, 0.3F);
 				}
 
 				this.world.removeEntity(this);
@@ -150,12 +169,58 @@ public class EntitySkyrootLizard extends EntityAetherAnimal
 	{
 		super.readEntityFromNBT(nbt);
 
-		this.dataManager.set(LIZARD_TYPE, nbt.getInteger("type"));
+		this.dataManager.set(LIZARD_TYPE, (byte) nbt.getInteger("type"));
 	}
 
-	public Color getColor(int leafType)
+	public int getLizardAccentColor()
 	{
-		return SkyrootLizardVarieties.colors[leafType - 1];
+		AetherWoodType type = this.getLeafType();
+
+		if (type == AetherWoodType.AMBERROOT)
+		{
+			return Integer.MIN_VALUE;
+		}
+
+		Color color = this.getLeafColor();
+
+		if (type == AetherWoodType.SKYROOT)
+		{
+			switch (color)
+			{
+				case GREEN:
+					return 0x6B9157;
+				case BLUE:
+					return 0x5D8B9A;
+				case DARK_BLUE:
+					return 0x3B4E9F;
+			}
+		}
+		else if (type == AetherWoodType.WISPROOT)
+		{
+			switch (color)
+			{
+				case GREEN:
+					return 0x82A16E;
+				case BLUE:
+					return 0x659094;
+				case DARK_BLUE:
+					return 0x6670AA;
+			}
+		}
+		else if (type == AetherWoodType.GREATROOT)
+		{
+			switch (color)
+			{
+				case GREEN:
+					return 0x4C6732;
+				case BLUE:
+					return 0x3E5E67;
+				case DARK_BLUE:
+					return 0x1D2A5D;
+			}
+		}
+
+		return 0xFFFFFF;
 	}
 
 	@Nullable
@@ -163,28 +228,5 @@ public class EntitySkyrootLizard extends EntityAetherAnimal
 	public EntityAgeable createChild(EntityAgeable ageable)
 	{
 		return null;
-	}
-
-	static class SkyrootLizardVarieties
-	{
-		public HashMap<String, Integer> table;
-
-		public static final Color[] colors = new Color[] { new Color(0x1D2A5D), new Color(0x3E5E67), new Color(0x4C6732), new Color(0x5D8B9A),
-				new Color(0x3B4E9F), new Color(0x6B9157), new Color(0x659094), new Color(0x6670AA), new Color(0x82A16E)};
-
-		public SkyrootLizardVarieties()
-		{
-			this.table = new HashMap<>();
-
-			this.table.put("dark_blue_dark_skyroot_leaves", 1);
-			this.table.put("blue_dark_skyroot_leaves", 2);
-			this.table.put("green_dark_skyroot_leaves", 3);
-			this.table.put("blue_skyroot_leaves", 4);
-			this.table.put("dark_blue_skyroot_leaves", 5);
-			this.table.put("green_skyroot_leaves", 6);
-			this.table.put("blue_light_skyroot_leaves", 7);
-			this.table.put("dark_blue_light_skyroot_leaves", 8);
-			this.table.put("green_light_skyroot_leaves", 9);
-		}
 	}
 }

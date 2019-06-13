@@ -17,12 +17,16 @@ import com.gildedgames.aether.common.blocks.decorative.*;
 import com.gildedgames.aether.common.blocks.multiblock.BlockMultiDummy;
 import com.gildedgames.aether.common.blocks.multiblock.BlockMultiDummyHalf;
 import com.gildedgames.aether.common.blocks.natural.*;
+import com.gildedgames.aether.common.blocks.natural.leaves.*;
 import com.gildedgames.aether.common.blocks.natural.ores.*;
 import com.gildedgames.aether.common.blocks.natural.plants.*;
 import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherGreatrootSapling;
 import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherSkyrootSapling;
 import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherUniqueSapling;
 import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherWisprootSapling;
+import com.gildedgames.aether.common.blocks.natural.wood.AetherWoodType;
+import com.gildedgames.aether.common.blocks.natural.wood.BlockAetherLog;
+import com.gildedgames.aether.common.blocks.natural.wood.BlockAmberLog;
 import com.gildedgames.aether.common.blocks.util.*;
 import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.blocks.ItemBlockMultiName;
@@ -56,7 +60,7 @@ public class BlocksAether
 	public static final Block therastone_pillar = new BlockCustomPillar(Material.ROCK)
 			.setSoundType(SoundType.STONE).setHardness(2.0f);
 
-	public static final BlockAetherLog therawood_log = new BlockAetherLog();
+	public static final BlockAetherLog therawood_log = new BlockAetherLog(AetherWoodType.THERA);
 
 	public static final BlockAetherLeaves therawood_leaves = new BlockAetherLeaves();
 
@@ -158,37 +162,38 @@ public class BlocksAether
 
 	public static final BlockArkeniumOre arkenium_ore = new BlockArkeniumOre();
 
-	public static final BlockAetherLog skyroot_log = new BlockAetherLog();
+	public static final BlockAetherLog skyroot_log = new BlockAetherLog(AetherWoodType.SKYROOT);
 
-	public static final BlockAetherLeaves blue_skyroot_leaves = new BlockAetherLeaves(BlockAetherSkyrootSapling.BLUE_SKYROOT.getMeta());
+	public static final BlockSkyrootLeaves blue_skyroot_leaves = new BlockSkyrootLeaves(BlockColoredLeaves.Color.BLUE);
 
-	public static final BlockAetherLeaves green_skyroot_leaves = new BlockAetherLeaves(BlockAetherSkyrootSapling.GREEN_SKYROOT.getMeta());
+	public static final BlockSkyrootLeaves green_skyroot_leaves = new BlockSkyrootLeaves(BlockColoredLeaves.Color.GREEN);
 
-	public static final BlockAetherLeaves dark_blue_skyroot_leaves = new BlockAetherLeaves(BlockAetherSkyrootSapling.DARK_BLUE_SKYROOT.getMeta());
+	public static final BlockSkyrootLeaves dark_blue_skyroot_leaves = new BlockSkyrootLeaves(BlockColoredLeaves.Color.DARK_BLUE);
 
-	public static final BlockAetherLog dark_skyroot_log = new BlockAetherLog();
+	public static final BlockAetherLog dark_skyroot_log = new BlockAetherLog(AetherWoodType.GREATROOT);
 
-	public static final BlockAetherLeaves blue_dark_skyroot_leaves = new BlockAetherLeaves(BlockAetherGreatrootSapling.BLUE_GREATROOT.getMeta());
+	public static final BlockGreatrootLeaves blue_dark_skyroot_leaves = new BlockGreatrootLeaves(BlockColoredLeaves.Color.BLUE);
 
-	public static final BlockAetherLeaves green_dark_skyroot_leaves = new BlockAetherLeaves(BlockAetherGreatrootSapling.GREEN_GREATROOT.getMeta());
+	public static final BlockGreatrootLeaves green_dark_skyroot_leaves = new BlockGreatrootLeaves(BlockColoredLeaves.Color.GREEN);
 
-	public static final BlockAetherLeaves dark_blue_dark_skyroot_leaves = new BlockAetherLeaves(BlockAetherGreatrootSapling.DARK_BLUE_GREATROOT.getMeta());
+	public static final BlockGreatrootLeaves dark_blue_dark_skyroot_leaves = new BlockGreatrootLeaves(BlockColoredLeaves.Color.DARK_BLUE);
 
-	public static final BlockAetherLog light_skyroot_log = new BlockAetherLog();
+	public static final BlockAetherLog light_skyroot_log = new BlockAetherLog(AetherWoodType.WISPROOT);
 
-	public static final BlockAetherLeaves blue_light_skyroot_leaves = new BlockAetherLeaves(BlockAetherWisprootSapling.BLUE_WISPROOT.getMeta());
+	public static final BlockWisprootLeaves blue_light_skyroot_leaves = new BlockWisprootLeaves(BlockColoredLeaves.Color.BLUE);
 
-	public static final BlockAetherLeaves green_light_skyroot_leaves = new BlockAetherLeaves(BlockAetherWisprootSapling.GREEN_WISPROOT.getMeta());
+	public static final BlockWisprootLeaves green_light_skyroot_leaves = new BlockWisprootLeaves(BlockColoredLeaves.Color.GREEN);
 
-	public static final BlockAetherLeaves dark_blue_light_skyroot_leaves = new BlockAetherLeaves(BlockAetherWisprootSapling.DARK_BLUE_WISPROOT.getMeta());
+	public static final BlockWisprootLeaves dark_blue_light_skyroot_leaves = new BlockWisprootLeaves(BlockColoredLeaves.Color.DARK_BLUE);
 
-	public static final BlockAetherLeaves mutant_tree_leaves = new BlockAetherLeaves(BlockAetherUniqueSapling.MUTANT_TREE.getMeta());
+	public static final BlockAetherLeaves mutant_tree_leaves = new BlockUniqueLeaves(AetherWoodType.MUTANT);
 
-	public static final Block mutant_tree_leaves_decorated = new BlockAetherLeaves(BlockAetherUniqueSapling.MUTANT_TREE.getMeta()).setLightLevel(1f);
+	public static final Block mutant_tree_leaves_decorated = new BlockUniqueLeaves(AetherWoodType.MUTANT)
+			.setLightLevel(1f);
 
-	public static final BlockAetherLog golden_oak_log = new BlockGoldenOakLog();
+	public static final BlockAmberLog golden_oak_log = new BlockAmberLog(AetherWoodType.AMBERROOT);
 
-	public static final BlockAetherLeaves amberoot_leaves = new BlockAetherLeaves(BlockAetherUniqueSapling.AMBEROOT.getMeta());
+	public static final BlockUniqueLeaves amberoot_leaves = new BlockUniqueLeaves(AetherWoodType.AMBERROOT);
 
 	public static final BlockAetherPortal aether_portal = new BlockAetherPortal();
 

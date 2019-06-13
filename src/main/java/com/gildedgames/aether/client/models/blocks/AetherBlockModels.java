@@ -8,7 +8,7 @@ import com.gildedgames.aether.common.blocks.containers.BlockAltar;
 import com.gildedgames.aether.common.blocks.containers.BlockIcestoneCooler;
 import com.gildedgames.aether.common.blocks.containers.BlockMasonryBench;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
-import com.gildedgames.aether.common.blocks.natural.BlockAetherLeaves;
+import com.gildedgames.aether.common.blocks.natural.leaves.BlockAetherLeaves;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBrettlPlant;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockOrangeTree;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockValkyrieGrass;

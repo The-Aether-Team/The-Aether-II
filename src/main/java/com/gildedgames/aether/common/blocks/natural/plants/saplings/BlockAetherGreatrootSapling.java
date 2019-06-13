@@ -10,12 +10,12 @@ import net.minecraft.util.math.BlockPos;
 public class BlockAetherGreatrootSapling extends BlockAetherSapling
 {
 	public static final BlockVariant
-			GREEN_GREATROOT = new BlockVariant(0, "green_greatroot"),
-			BLUE_GREATROOT = new BlockVariant(1, "blue_greatroot"),
-			DARK_BLUE_GREATROOT = new BlockVariant(2, "dark_blue_greatroot");
+			GREEN = new BlockVariant(0, "green_greatroot"),
+			BLUE = new BlockVariant(1, "blue_greatroot"),
+			DARK_BLUE = new BlockVariant(2, "dark_blue_greatroot");
 
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant
-			.create("variant", GREEN_GREATROOT, BLUE_GREATROOT, DARK_BLUE_GREATROOT);
+			.create("variant", GREEN, BLUE, DARK_BLUE);
 
 	@Override
 	public PropertyVariant getPropertyVariant()
@@ -28,15 +28,15 @@ public class BlockAetherGreatrootSapling extends BlockAetherSapling
 	{
 		final BlockVariant variant = state.getValue(PROPERTY_VARIANT);
 
-		if (variant == BlockAetherGreatrootSapling.GREEN_GREATROOT)
+		if (variant == BlockAetherGreatrootSapling.GREEN)
 		{
 			return GenerationAether.GREATROOT_TREE;
 		}
-		else if (variant == BlockAetherGreatrootSapling.BLUE_GREATROOT)
+		else if (variant == BlockAetherGreatrootSapling.BLUE)
 		{
 			return GenerationAether.GREATROOT_TREE;
 		}
-		else if (variant == BlockAetherGreatrootSapling.DARK_BLUE_GREATROOT)
+		else if (variant == BlockAetherGreatrootSapling.DARK_BLUE)
 		{
 			return GenerationAether.GREATROOT_TREE;
 		}

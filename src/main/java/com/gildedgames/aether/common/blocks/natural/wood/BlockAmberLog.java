@@ -1,6 +1,7 @@
-package com.gildedgames.aether.common.blocks.natural;
+package com.gildedgames.aether.common.blocks.natural.wood;
 
 import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.natural.wood.BlockAetherLog;
 import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
@@ -12,9 +13,14 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class BlockGoldenOakLog extends BlockAetherLog
+public class BlockAmberLog extends BlockAetherLog
 {
 	private static final Random RANDOM = new Random();
+
+	public BlockAmberLog(AetherWoodType type)
+	{
+		super(type);
+	}
 
 	@Override
 	public void getDrops(NonNullList<ItemStack> list, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)

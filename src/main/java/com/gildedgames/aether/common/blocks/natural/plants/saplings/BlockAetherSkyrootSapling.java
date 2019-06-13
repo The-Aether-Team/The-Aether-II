@@ -10,27 +10,27 @@ import net.minecraft.util.math.BlockPos;
 public class BlockAetherSkyrootSapling extends BlockAetherSapling
 {
 	public static final BlockVariant
-			GREEN_SKYROOT = new BlockVariant(0, "green_skyroot"),
-			BLUE_SKYROOT = new BlockVariant(1, "blue_skyroot"),
-			DARK_BLUE_SKYROOT = new BlockVariant(2, "dark_blue_skyroot");
+			GREEN = new BlockVariant(0, "green_skyroot"),
+			BLUE = new BlockVariant(1, "blue_skyroot"),
+			DARK_BLUE = new BlockVariant(2, "dark_blue_skyroot");
 
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant
-			.create("variant", GREEN_SKYROOT, BLUE_SKYROOT, DARK_BLUE_SKYROOT);
+			.create("variant", GREEN, BLUE, DARK_BLUE);
 
 	@Override
 	public BlueprintDefinition getBlueprint(IBlockState state)
 	{
 		BlockVariant variant = state.getValue(PROPERTY_VARIANT);
 
-		if (variant == BlockAetherSkyrootSapling.GREEN_SKYROOT)
+		if (variant == BlockAetherSkyrootSapling.GREEN)
 		{
 			return GenerationAether.SKYROOT_OAK_GREEN;
 		}
-		else if (variant == BlockAetherSkyrootSapling.BLUE_SKYROOT)
+		else if (variant == BlockAetherSkyrootSapling.BLUE)
 		{
 			return GenerationAether.SKYROOT_OAK_BLUE;
 		}
-		else if (variant == BlockAetherSkyrootSapling.DARK_BLUE_SKYROOT)
+		else if (variant == BlockAetherSkyrootSapling.DARK_BLUE)
 		{
 			return GenerationAether.SKYROOT_OAK_DARK_BLUE;
 		}

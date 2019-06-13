@@ -1,9 +1,9 @@
-package com.gildedgames.aether.common.blocks.natural;
+package com.gildedgames.aether.common.blocks.natural.leaves;
 
 import com.gildedgames.aether.client.renderer.particles.ParticleGolden;
 import com.gildedgames.aether.client.renderer.particles.ParticleLeaf;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherSapling;
+import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherSkyrootSapling;
 import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherUniqueSapling;
 import com.gildedgames.aether.common.entities.living.passive.EntitySkyrootLizard;
 import net.minecraft.block.Block;
@@ -14,7 +14,9 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -26,33 +28,21 @@ import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class BlockAetherLeaves extends BlockLeaves implements IShearable
 {
-
 	public static final PropertyBool PROPERTY_DECAYABLE = PropertyBool.create("decayable");
 
 	public static final PropertyBool PROPERTY_CHECK_DECAY = PropertyBool.create("check_decay");
 
-	private final int saplingMeta;
-
 	private int[] surroundings;
 
-	/**
-	 * Used for when a leaf block doesn't have saplings.
-	 */
 	public BlockAetherLeaves()
 	{
-		this(-1);
-	}
-
-	public BlockAetherLeaves(final int saplingMeta)
-	{
-		this.saplingMeta = saplingMeta;
-
 		this.setHardness(0.2f);
 		this.setTickRandomly(true);
 
@@ -164,16 +154,6 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 					}
 				}
 			}
-		}
-
-		if (!worldIn.isRemote && state.getValue(DECAYABLE) && worldIn.rand.nextInt(15) == 0)
-		{
-			EntitySkyrootLizard lizard = new EntitySkyrootLizard(worldIn);
-
-			lizard.setPosition(pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f);
-			lizard.setLizardType(this);
-
-			worldIn.spawnEntity(lizard);
 		}
 	}
 
@@ -428,37 +408,28 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 	{
 		final List<ItemStack> stacks = new ArrayList<>();
 
-		if (this.saplingMeta >= 0)
+		final Random rand = world instanceof World ? ((World) world).rand : new Random();
+
+		if (rand.nextInt(20) == 0)
 		{
-			final Random rand = world instanceof World ? ((World) world).rand : new Random();
+			ItemStack stack = this.getSaplingItem();
 
-			if (rand.nextInt(20) == 0)
+			if (stack != null)
 			{
-				if (this != BlocksAether.mutant_tree_leaves || this != BlocksAether.mutant_tree_leaves_decorated)
-				{
-					if (this == BlocksAether.blue_skyroot_leaves || this == BlocksAether.green_skyroot_leaves || this == BlocksAether.dark_blue_skyroot_leaves)
-					{
-						stacks.add(new ItemStack(BlocksAether.aether_skyroot_sapling, 1, this.saplingMeta));
-					}
-
-					if (this == BlocksAether.amberoot_leaves)
-					{
-						stacks.add(new ItemStack(BlocksAether.aether_unique_sapling, 1, this.saplingMeta));
-					}
-
-					if (this == BlocksAether.blue_light_skyroot_leaves || this == BlocksAether.green_light_skyroot_leaves || this == BlocksAether.dark_blue_light_skyroot_leaves)
-					{
-						stacks.add(new ItemStack(BlocksAether.aether_wisproot_sapling, 1, this.saplingMeta));
-					}
-					if (this == BlocksAether.green_dark_skyroot_leaves || this == BlocksAether.blue_dark_skyroot_leaves || this == BlocksAether.dark_blue_dark_skyroot_leaves)
-					{
-						stacks.add(new ItemStack(BlocksAether.aether_greatroot_sapling, 1, this.saplingMeta));
-					}
-				}
+				stacks.add(stack);
 			}
 		}
-
 		return stacks;
+	}
+
+	protected ItemStack getSaplingItem()
+	{
+		if (this == BlocksAether.amberoot_leaves)
+		{
+			return new ItemStack(BlocksAether.aether_unique_sapling, 1, BlockAetherUniqueSapling.AMBEROOT.getMeta());
+		}
+
+		return null;
 	}
 
 	@Override

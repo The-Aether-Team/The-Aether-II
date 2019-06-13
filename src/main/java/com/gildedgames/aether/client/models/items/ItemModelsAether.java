@@ -165,23 +165,23 @@ public class ItemModelsAether
 		registerSnowyFlower(BlocksAether.stoneshroom, "stoneshroom");
 
 		registerItemModels(BlocksAether.aether_skyroot_sapling, new ItemModelBuilder("saplings/")
-				.add(BlockAetherSkyrootSapling.GREEN_SKYROOT.getMeta(), "green_skyroot_sapling")
-				.add(BlockAetherSkyrootSapling.BLUE_SKYROOT.getMeta(), "blue_skyroot_sapling")
-				.add(BlockAetherSkyrootSapling.DARK_BLUE_SKYROOT.getMeta(), "dark_blue_skyroot_sapling"));
+				.add(BlockAetherSkyrootSapling.GREEN.getMeta(), "green_skyroot_sapling")
+				.add(BlockAetherSkyrootSapling.BLUE.getMeta(), "blue_skyroot_sapling")
+				.add(BlockAetherSkyrootSapling.DARK_BLUE.getMeta(), "dark_blue_skyroot_sapling"));
 
 		registerItemModels(BlocksAether.aether_unique_sapling, new ItemModelBuilder("saplings/")
 				.add(BlockAetherUniqueSapling.AMBEROOT.getMeta(), "amberoot_sapling")
 				.add(BlockAetherUniqueSapling.MUTANT_TREE.getMeta(), "mutant_tree_sapling"));
 
 		registerItemModels(BlocksAether.aether_wisproot_sapling, new ItemModelBuilder("saplings/")
-				.add(BlockAetherWisprootSapling.GREEN_WISPROOT.getMeta(), "green_wisproot_sapling")
-				.add(BlockAetherWisprootSapling.BLUE_WISPROOT.getMeta(), "blue_wisproot_sapling")
-				.add(BlockAetherWisprootSapling.DARK_BLUE_WISPROOT.getMeta(), "dark_blue_wisproot_sapling"));
+				.add(BlockAetherWisprootSapling.GREEN.getMeta(), "green_wisproot_sapling")
+				.add(BlockAetherWisprootSapling.BLUE.getMeta(), "blue_wisproot_sapling")
+				.add(BlockAetherWisprootSapling.DARK_BLUE.getMeta(), "dark_blue_wisproot_sapling"));
 
 		registerItemModels(BlocksAether.aether_greatroot_sapling, new ItemModelBuilder("saplings/")
-				.add(BlockAetherGreatrootSapling.GREEN_GREATROOT.getMeta(), "green_greatroot_sapling")
-				.add(BlockAetherGreatrootSapling.BLUE_GREATROOT.getMeta(), "blue_greatroot_sapling")
-				.add(BlockAetherGreatrootSapling.DARK_BLUE_GREATROOT.getMeta(), "dark_blue_greatroot_sapling"));
+				.add(BlockAetherGreatrootSapling.GREEN.getMeta(), "green_greatroot_sapling")
+				.add(BlockAetherGreatrootSapling.BLUE.getMeta(), "blue_greatroot_sapling")
+				.add(BlockAetherGreatrootSapling.DARK_BLUE.getMeta(), "dark_blue_greatroot_sapling"));
 
 		registerItemModels(BlocksAether.holystone_furnace, new ItemModelBuilder("holystone_furnace/")
 				.add(BlockHolystoneFurnace.LIT_META, "holystone_furnace_lit")

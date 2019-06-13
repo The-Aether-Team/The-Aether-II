@@ -10,27 +10,27 @@ import net.minecraft.util.math.BlockPos;
 public class BlockAetherWisprootSapling extends BlockAetherSapling
 {
 	public static final BlockVariant
-			GREEN_WISPROOT = new BlockVariant(0, "wisproot_green"),
-			BLUE_WISPROOT = new BlockVariant(1, "wisproot_blue"),
-			DARK_BLUE_WISPROOT = new BlockVariant(2, "wisproot_dark_blue");
+			GREEN = new BlockVariant(0, "wisproot_green"),
+			BLUE = new BlockVariant(1, "wisproot_blue"),
+			DARK_BLUE = new BlockVariant(2, "wisproot_dark_blue");
 
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant
-			.create("variant", GREEN_WISPROOT, BLUE_WISPROOT, DARK_BLUE_WISPROOT);
+			.create("variant", GREEN, BLUE, DARK_BLUE);
 
 	@Override
 	public BlueprintDefinition getBlueprint(IBlockState state)
 	{
 		BlockVariant variant = state.getValue(PROPERTY_VARIANT);
 
-		if (variant == BlockAetherWisprootSapling.GREEN_WISPROOT)
+		if (variant == BlockAetherWisprootSapling.GREEN)
 		{
 			return GenerationAether.WISPROOT_GREEN;
 		}
-		else if (variant == BlockAetherWisprootSapling.BLUE_WISPROOT)
+		else if (variant == BlockAetherWisprootSapling.BLUE)
 		{
 			return GenerationAether.WISPROOT_BLUE;
 		}
-		else if (variant == BlockAetherWisprootSapling.DARK_BLUE_WISPROOT)
+		else if (variant == BlockAetherWisprootSapling.DARK_BLUE)
 		{
 			return GenerationAether.WISPROOT_DARK_BLUE;
 		}
