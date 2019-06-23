@@ -43,7 +43,7 @@ public class EntityEdison extends EntityNPC implements IEntityEyesComponentProvi
 	{
 		super(worldIn);
 
-		this.setSize(1.0F, 1.0F);
+		this.setSize(0.9F, 1.35F);
 
 		this.rotationYaw = 0.3F;
 	}

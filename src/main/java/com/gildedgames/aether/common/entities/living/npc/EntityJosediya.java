@@ -33,7 +33,7 @@ public class EntityJosediya extends EntityNPC implements IEntityEyesComponentPro
 	{
 		super(worldIn);
 
-		this.setSize(1.0F, 2.0F);
+		this.setSize(0.7F, 2.0F);
 	}
 
 	@Override

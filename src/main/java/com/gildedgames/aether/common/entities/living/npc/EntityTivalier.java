@@ -24,7 +24,7 @@ public class EntityTivalier extends EntityNPC
 	{
 		super(worldIn);
 
-		this.setSize(1.0F, 1.0F);
+		this.setSize(1.6F, 1.6F);
 	}
 
 	@Override
