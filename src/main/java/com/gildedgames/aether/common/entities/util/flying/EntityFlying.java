@@ -8,6 +8,7 @@ import net.minecraft.entity.EntityBodyHelper;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.network.datasync.DataParameter;
@@ -41,17 +42,24 @@ public class EntityFlying extends EntityCreature
 		this.clientSideTailAnimationO = this.clientSideTailAnimation;
 	}
 
+	protected EntityAIBase createWanderTask()
+	{
+		final EntityAIWander wander = new EntityAIForcedWander(this, 0.4D, 5);
+
+		wander.setMutexBits(1);
+
+		return wander;
+	}
+
 	@Override
 	protected void initEntityAI()
 	{
 		final EntityAIMoveTowardsRestriction moveTowardsRestriction = new EntityAIMoveTowardsRestriction(this, 0.4D);
-		final EntityAIWander wander = new EntityAIForcedWander(this, 0.4D, 5);
 
-		wander.setMutexBits(3);
-		moveTowardsRestriction.setMutexBits(3);
+		moveTowardsRestriction.setMutexBits(1);
 
 		this.tasks.addTask(1, moveTowardsRestriction);
-		this.tasks.addTask(2, wander);
+		this.tasks.addTask(2, this.createWanderTask());
 	}
 
 	@Override
@@ -214,7 +222,7 @@ public class EntityFlying extends EntityCreature
 	}
 
 	@Override
-	public void travel(float strafe, float vertical, float forward)
+	public void travel(final float strafe, final float vertical, final float forward)
 	{
 		if (this.isServerWorld())
 		{

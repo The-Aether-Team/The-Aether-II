@@ -10,20 +10,20 @@ import javax.annotation.Nullable;
 
 public class EntityAIForcedWander extends EntityAIWander
 {
-	private final EntityCreature entity;
+	protected final EntityCreature entity;
 
-	private final int chance;
+	protected final int chance;
 
-	private final int xScatter;
+	protected final int xScatter;
 
-	private final int yScatter;
+	protected final int yScatter;
 
-	public EntityAIForcedWander(EntityCreature entity, double speedIn, int chance)
+	public EntityAIForcedWander(final EntityCreature entity, final double speedIn, final int chance)
 	{
 		this(entity, speedIn, chance, 10, 7);
 	}
 
-	public EntityAIForcedWander(EntityCreature entity, double speedIn, int chance, int xScatter, int yScatter)
+	public EntityAIForcedWander(final EntityCreature entity, final double speedIn, final int chance, final int xScatter, final int yScatter)
 	{
 		super(entity, speedIn, chance);
 
@@ -53,7 +53,7 @@ public class EntityAIForcedWander extends EntityAIWander
 	@Nullable
 	protected Vec3d getPosition()
 	{
-		Vec3d pos = RandomPositionGenerator.findRandomTarget(this.entity, this.xScatter, this.yScatter);
+		final Vec3d pos = RandomPositionGenerator.findRandomTarget(this.entity, this.xScatter, this.yScatter);
 
 		if (pos != null)
 		{

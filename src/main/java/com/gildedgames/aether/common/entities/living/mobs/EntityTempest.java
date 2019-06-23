@@ -1,13 +1,17 @@
 package com.gildedgames.aether.common.entities.living.mobs;
 
 import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
+import com.gildedgames.aether.common.entities.ai.EntityAIForcedWanderAvoidLight;
+import com.gildedgames.aether.common.entities.ai.EntityAIHideFromLight;
 import com.gildedgames.aether.common.entities.ai.tempest.AIElectricShock;
 import com.gildedgames.aether.common.entities.util.flying.EntityFlyingMob;
 import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
@@ -24,6 +28,16 @@ public class EntityTempest extends EntityFlyingMob
 		this.setSize(1.0F, 1.0F);
 
 		this.experienceValue = 10;
+	}
+
+	@Override
+	protected EntityAIBase createWanderTask()
+	{
+		final EntityAIWander wander = new EntityAIForcedWanderAvoidLight(this, 0.4D, 5, 5);
+
+		wander.setMutexBits(1);
+
+		return wander;
 	}
 
 	@Override
@@ -54,7 +68,12 @@ public class EntityTempest extends EntityFlyingMob
 	{
 		super.initEntityAI();
 
+		final EntityAIBase avoidLight = new EntityAIHideFromLight(this, 0.8F, 5);
+
+		avoidLight.setMutexBits(1);
+
 		this.tasks.addTask(2, new AIElectricShock(this));
+		this.tasks.addTask(0, avoidLight);
 
 		this.targetTasks.addTask(0, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
 	}

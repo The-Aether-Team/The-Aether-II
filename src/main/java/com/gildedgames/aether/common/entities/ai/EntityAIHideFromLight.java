@@ -4,6 +4,7 @@ import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -15,17 +16,17 @@ public class EntityAIHideFromLight extends EntityAIBase
 
 	private final EntityCreature entity;
 
+	private final int lightLevel;
+
 	private double shelterX;
 
 	private double shelterY;
 
 	private double shelterZ;
 
-	private final int lightLevel;
-
 	private boolean enabled;
 
-	public EntityAIHideFromLight(EntityCreature entity, float movementSpeed, int lightLevel)
+	public EntityAIHideFromLight(final EntityCreature entity, final float movementSpeed, final int lightLevel)
 	{
 		this.entity = entity;
 		this.movementSpeed = movementSpeed;
@@ -43,14 +44,25 @@ public class EntityAIHideFromLight extends EntityAIBase
 			return false;
 		}
 
-		BlockPos entityPos = new BlockPos(this.entity.posX, this.entity.getEntityBoundingBox().minY, this.entity.posZ);
+		final World world = this.entity.world;
+
+		if (!world.isDaytime())
+		{
+			return false;
+		}
+		else if (!world.canSeeSky(new BlockPos(this.entity.posX, this.entity.getEntityBoundingBox().minY, this.entity.posZ)))
+		{
+			return false;
+		}
+
+		final BlockPos entityPos = new BlockPos(this.entity.posX, this.entity.getEntityBoundingBox().minY, this.entity.posZ);
 
 		if (this.entity.world.getLightFromNeighbors(entityPos) <= this.lightLevel)
 		{
 			return false;
 		}
 
-		Vec3d vec3d = this.findPossibleShelter();
+		final Vec3d vec3d = this.findPossibleShelter();
 
 		if (vec3d == null)
 		{
@@ -81,12 +93,12 @@ public class EntityAIHideFromLight extends EntityAIBase
 	@Nullable
 	private Vec3d findPossibleShelter()
 	{
-		Random random = this.entity.getRNG();
-		BlockPos blockpos = new BlockPos(this.entity.posX, this.entity.getEntityBoundingBox().minY, this.entity.posZ);
+		final Random random = this.entity.getRNG();
+		final BlockPos blockpos = new BlockPos(this.entity.posX, this.entity.getEntityBoundingBox().minY, this.entity.posZ);
 
 		for (int i = 0; i < 10; ++i)
 		{
-			BlockPos blockpos1 = blockpos.add(random.nextInt(20) - 10, random.nextInt(6) - 3, random.nextInt(20) - 10);
+			final BlockPos blockpos1 = blockpos.add(random.nextInt(20) - 10, random.nextInt(6) - 3, random.nextInt(20) - 10);
 
 			if (this.entity.world.getLightFromNeighbors(blockpos1) <= this.lightLevel)
 			{
@@ -98,7 +110,7 @@ public class EntityAIHideFromLight extends EntityAIBase
 		return null;
 	}
 
-	public void setEnabled(boolean b)
+	public void setEnabled(final boolean b)
 	{
 		this.enabled = b;
 	}
