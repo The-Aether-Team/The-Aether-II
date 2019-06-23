@@ -8,10 +8,10 @@ import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -35,34 +35,41 @@ public class EntityUtil
 
 	public static void despawnEntityDuringDaytime(final EntityLivingBase entity)
 	{
-		if (entity.ticksExisted % 400 == 0)
+		if (entity.ticksExisted % 20 == 0)
 		{
 			final BlockPos blockpos = new BlockPos(entity.posX, entity.getEntityBoundingBox().minY, entity.posZ);
 
 			if (!entity.world.isRemote && entity.world.getLightFor(EnumSkyBlock.SKY, blockpos) - entity.world.getSkylightSubtracted() >= 15 && entity.world
 					.canBlockSeeSky(blockpos))
 			{
-				boolean canSee = false;
+				entity.attackEntityFrom(DamageSource.OUT_OF_WORLD, 1.0F);
 
-				final Vec3d vec3d = entity.getPositionVector();
+				final double x = entity.posX;
+				final double y = (entity.getEntityBoundingBox().maxY - entity.getEntityBoundingBox().minY) / 2 + entity.getEntityBoundingBox().minY;
+				final double z = entity.posZ;
 
-				for (final EntityPlayer player : entity.world.playerEntities)
+				final double motionX = 0;
+				final double motionY = 0;
+				final double motionZ = 0;
+
+				for (int i = 0; i < 15; i++)
 				{
-					final Vec3d look = player.getLook(1.0F);
+					final EnumParticleTypes type = entity.getRNG().nextBoolean() ? EnumParticleTypes.SMOKE_LARGE : EnumParticleTypes.SMOKE_NORMAL;
+					final double radius = 0.3;
 
-					Vec3d reverse = vec3d.subtractReverse(new Vec3d(player.posX, player.posY, player.posZ)).normalize();
-					reverse = new Vec3d(reverse.x, 0.0D, reverse.z);
+					final double randX = entity.getRNG().nextDouble() * (entity.getRNG().nextBoolean() ? 1.0 : -1.0) * radius;
+					final double randZ = entity.getRNG().nextDouble() * (entity.getRNG().nextBoolean() ? 1.0 : -1.0) * radius;
 
-					if (reverse.dotProduct(look) < 0.0D && player.getDistance(entity) < 64.0D)
+					if (entity.world.isRemote)
 					{
-						canSee = true;
-						break;
+						entity.world.spawnParticle(type, x + randX, y, z + randZ, motionX, motionY, motionZ);
 					}
-				}
-
-				if (!canSee)
-				{
-					entity.setDead();
+					else if (entity.world instanceof WorldServer)
+					{
+						final WorldServer worldServer = (WorldServer) entity.world;
+						worldServer.spawnParticle(type,
+								x + randX, y, z + randZ, 1, motionX, motionY, motionZ, (entity.world.rand.nextBoolean() ? 0.01D : -0.01D));
+					}
 				}
 			}
 		}
@@ -88,7 +95,7 @@ public class EntityUtil
 		facePos(entity, pos.getX(), pos.getY(), pos.getZ(), maxYawIncrease, maxPitchIncrease);
 	}
 
-	public static double getYawFacingPosition(Entity entity, double posX, double posZ)
+	public static double getYawFacingPosition(final Entity entity, final double posX, final double posZ)
 	{
 		final double x = posX - entity.posX;
 		final double z = posZ - entity.posZ;
@@ -96,7 +103,8 @@ public class EntityUtil
 		return (MathHelper.atan2(z, x) * (180D / Math.PI)) - 90.0D;
 	}
 
-	public static void facePos(final Entity entity, double posX, double posY, double posZ, final float maxYawIncrease, final float maxPitchIncrease)
+	public static void facePos(final Entity entity, final double posX, final double posY, final double posZ, final float maxYawIncrease,
+			final float maxPitchIncrease)
 	{
 		final double x = posX - entity.posX;
 		final double y = posY - entity.posY;
@@ -186,7 +194,7 @@ public class EntityUtil
 		}
 	}
 
-	public static String getSkin(EntityPlayer player)
+	public static String getSkin(final EntityPlayer player)
 	{
 		String skinType = DefaultPlayerSkin.getSkinType(player.getUniqueID());
 
@@ -198,12 +206,12 @@ public class EntityUtil
 		return skinType;
 	}
 
-	public static IBlockState getBlockBelow(Entity entity)
+	public static IBlockState getBlockBelow(final Entity entity)
 	{
 		return getBlockBelow(entity.world, entity.getPosition());
 	}
 
-	public static IBlockState getBlockBelow(World world, BlockPos pos)
+	public static IBlockState getBlockBelow(final World world, BlockPos pos)
 	{
 		IBlockState state;
 
