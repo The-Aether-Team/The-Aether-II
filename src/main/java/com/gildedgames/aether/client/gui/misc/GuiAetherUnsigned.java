@@ -31,12 +31,12 @@ public class GuiAetherUnsigned extends GuiScreen
 	{
 		ScaledResolution sr = new ScaledResolution(this.mc);
 
-		this.checkbox = new GuiCheckBox(0, (sr.getScaledWidth() / 2) - 140, 180, "I understand that this version won't receive support.", false);
+		this.checkbox = new GuiCheckBox(0, (sr.getScaledWidth() / 2) - 172, 180, "Yes, I understand this installation will not receive official support.", false);
 
-		this.ackButton = new GuiButton(1, (sr.getScaledWidth() / 2) - 60, 200, 120, 20, "Acknowledge");
+		this.ackButton = new GuiButton(1, (sr.getScaledWidth() / 2) - 60, 204, 120, 20, "Acknowledge");
 		this.ackButton.enabled = false;
 
-		this.dlButton = new GuiButton(10, (sr.getScaledWidth() / 2) - 90, 108, 180, 20, "Download from CurseForge");
+		this.dlButton = new GuiButton(10, (sr.getScaledWidth() / 2) - 90, 104, 180, 20, "Download from CurseForge");
 
 		this.buttonList.add(this.checkbox);
 		this.buttonList.add(this.ackButton);
@@ -48,24 +48,26 @@ public class GuiAetherUnsigned extends GuiScreen
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks)
 	{
-		String text1 = "Integrity check failed!";
-		String[] desc = ("You have downloaded a corrupted or unofficial release of the Aether II!\n\n"
-				+ "If you weren't expecting this warning, you should immediately re-download\n"
-				+ "the Aether II from our official CurseForge page. Otherwise, you may\n"
-				+ "run into game-breaking bugs or other cryptic issues.\n\n\n\n\n\n"
-				+ "If you are a developer hacking on the code or otherwise know what\n"
-				+ "you're doing, then you can safely ignore this warning.").split("\n");
+		String text1 = String.valueOf(TextFormatting.RED) + TextFormatting.BOLD + "Panic!" + TextFormatting.RESET + " An integrity check has failed!";
+
+		String[] desc = (TextFormatting.RED + "You have obtained a corrupted or unofficial download of the Aether II.\n\n"
+				+ "If you were not expecting this warning, you should immediately re-download\n"
+				+ "the Aether II from our official CurseForge page. " + TextFormatting.RED + "Otherwise, you may run into\n"
+				+ TextFormatting.RED + "severe issues which cause instability, break your game, or corrupt your worlds.\n\n\n\n\n\n"
+				+ "If you are a developer hacking on the code or otherwise know what you're\n"
+				+ "doing, then you can ignore this warning at your risk. " + TextFormatting.RED + "We will not provide\n"
+				+ TextFormatting.RED + "support if you choose not to heed this warning.").split("\n");
 
 		ScaledResolution sr = new ScaledResolution(this.mc);
 
 		this.drawDefaultBackground();
-		this.drawString(this.fontRenderer, text1, (sr.getScaledWidth() / 2) - (this.fontRenderer.getStringWidth(text1) / 2), 30, 0xFF0000);
+		this.drawString(this.fontRenderer, text1, (sr.getScaledWidth() / 2) - (this.fontRenderer.getStringWidth(text1) / 2), 20, 0xFFFFFF);
 
 		for (int i = 0; i < desc.length; i++)
 		{
 			String str = desc[i];
 
-			this.drawString(this.fontRenderer, str, (sr.getScaledWidth() / 2) - (this.fontRenderer.getStringWidth(str) / 2), 50 + (i * 10), 0xFFFFFF);
+			this.drawString(this.fontRenderer, str, (sr.getScaledWidth() / 2) - (this.fontRenderer.getStringWidth(str) / 2), 40 + (i * 10), 0xFFFFFF);
 		}
 
 		super.drawScreen(mouseX, mouseY, partialTicks);
