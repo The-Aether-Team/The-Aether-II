@@ -2,6 +2,7 @@ package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.common.analytics.GAReporter;
+import com.gildedgames.aether.common.util.JarValidator;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -80,6 +81,13 @@ public class AetherCore
 	{
 		AetherCore.CONFIG = new ConfigAether(event.getSuggestedConfigurationFile());
 
+		if (!AetherCore.isInsideDevEnvironment() && !JarValidator.validate(event.getSourceFile()))
+		{
+			AetherCore.LOGGER.warn("Failed to validate extended properties for the file located at " + event.getSourceFile());
+
+			AetherCore.IS_SIGNED = false;
+		}
+
 		AetherCore.PROXY.preInit(event);
 	}
 
@@ -110,14 +118,16 @@ public class AetherCore
 	@EventHandler
 	public void onFingerprintViolation(final FMLFingerprintViolationEvent event)
 	{
-		AetherCore.IS_SIGNED = false;
-
 		if (AetherCore.isInsideDevEnvironment())
 		{
+			AetherCore.LOGGER.warn("Ignoring missing certificate for the Aether II because we are in a de-obfuscated workspace...");
+
 			return;
 		}
 
-		AetherCore.LOGGER.warn("Heads up! Forge has failed to validate the integrity of the Aether.");
-		AetherCore.LOGGER.warn("The Aether may be packaged unofficially, tampered with, or corrupted. As a result, this build will not receive support.");
+		AetherCore.IS_SIGNED = false;
+
+		AetherCore.LOGGER.warn("No valid certificates could be found for the file located at: " + event.getSource());
+		AetherCore.LOGGER.warn("You have downloaded a release of the Aether II which does not contain a valid code signing certificate. This release will not receive support from Gilded Games.");
 	}
 }

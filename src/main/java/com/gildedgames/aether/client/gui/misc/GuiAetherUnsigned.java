@@ -50,13 +50,13 @@ public class GuiAetherUnsigned extends GuiScreen
 	{
 		String text1 = String.valueOf(TextFormatting.RED) + TextFormatting.BOLD + "Panic!" + TextFormatting.RESET + " An integrity check has failed!";
 
-		String[] desc = (TextFormatting.RED + "You have obtained a corrupted or unofficial download of the Aether II.\n\n"
+		String[] desc = (TextFormatting.RED + "It appears you have downloaded the Aether II from an unofficial source.\n\n"
 				+ "If you were not expecting this warning, you should immediately re-download\n"
 				+ "the Aether II from our official CurseForge page. " + TextFormatting.RED + "Otherwise, you may run into\n"
-				+ TextFormatting.RED + "severe issues which cause instability, break your game, or corrupt your worlds.\n\n\n\n\n\n"
+				+ TextFormatting.RED + "issues which could cause instability, break your game, or corrupt your worlds.\n\n\n\n\n\n"
 				+ "If you are a developer hacking on the code or otherwise know what you're\n"
-				+ "doing, then you can ignore this warning at your risk. " + TextFormatting.RED + "We will not provide\n"
-				+ TextFormatting.RED + "support if you choose not to heed this warning.").split("\n");
+				+ "doing, then you can ignore this warning at your risk. " + TextFormatting.RED + "Gilded Games will not\n"
+				+ TextFormatting.RED + "provide support if you choose not to heed this warning.").split("\n");
 
 		ScaledResolution sr = new ScaledResolution(this.mc);
 
