@@ -46,17 +46,14 @@ public class PacketTradeState implements IMessage
 		{
 			PlayerAether aePlayer = PlayerAether.getPlayer(player);
 
-			if (aePlayer != null)
+			PlayerTradeModule tradeModule = aePlayer.getModule(PlayerTradeModule.class);
+
+			if (message.state == -1)
 			{
-				PlayerTradeModule tradeModule = aePlayer.getModule(PlayerTradeModule.class);
-
-				if (message.state == -1)
-				{
-					tradeModule.clear();
-				}
-
-				tradeModule.updateClientState(message.state);
+				tradeModule.clear();
 			}
+
+			tradeModule.updateClientState(message.state);
 
 			return null;
 		}
@@ -69,84 +66,81 @@ public class PacketTradeState implements IMessage
 		{
 			PlayerAether aePlayer = PlayerAether.getPlayer(player);
 
-			if (aePlayer != null)
+			PlayerTradeModule tradeModule = aePlayer.getModule(PlayerTradeModule.class);
+			PlayerTradeModule targetTrade = tradeModule.getTarget().getModule(PlayerTradeModule.class);
+
+			if (tradeModule.isTrading())
 			{
-				PlayerTradeModule tradeModule = aePlayer.getModule(PlayerTradeModule.class);
-				PlayerTradeModule targetTrade = tradeModule.getTarget().getModule(PlayerTradeModule.class);
+				String statusMessage = "";
 
-				if (tradeModule.isTrading())
+				if (message.state == 0)
 				{
-					String statusMessage = "";
+					tradeModule.setLockedIn(true);
+					targetTrade.sendState(0);
+					statusMessage = "targetlock";
+				}
+				else if (message.state == 1)
+				{
+					tradeModule.setLockedIn(false);
 
-					if (message.state == 0)
+					if (targetTrade.isLockedIn())
 					{
-						tradeModule.setLockedIn(true);
-						targetTrade.sendState(0);
-						statusMessage = "targetlock";
+						targetTrade.setLockedIn(false);
+						tradeModule.sendState(0);
+						statusMessage = "unlockwarn";
 					}
-					else if (message.state == 1)
+					else
 					{
-						tradeModule.setLockedIn(false);
-
-						if (targetTrade.isLockedIn())
-						{
-							targetTrade.setLockedIn(false);
-							tradeModule.sendState(0);
-							statusMessage = "unlockwarn";
-						}
-						else
-						{
-							statusMessage = "unlocksafe";
-						}
-
-						targetTrade.sendState(0);
+						statusMessage = "unlocksafe";
 					}
-					else if (message.state == 2 && tradeModule.isLockedIn() && targetTrade.isLockedIn())
+
+					targetTrade.sendState(0);
+				}
+				else if (message.state == 2 && tradeModule.isLockedIn() && targetTrade.isLockedIn())
+				{
+					if (targetTrade.isConfirmed())
 					{
-						if (targetTrade.isConfirmed())
+						if (tradeModule.getEntity().openContainer instanceof ContainerTrade && targetTrade.getEntity().openContainer instanceof ContainerTrade)
 						{
-							if (tradeModule.getEntity().openContainer instanceof ContainerTrade && targetTrade.getEntity().openContainer instanceof ContainerTrade)
+							ContainerTrade hostContainer = (ContainerTrade) tradeModule.getEntity().openContainer;
+							ContainerTrade otherContainer = (ContainerTrade) targetTrade.getEntity().openContainer;
+
+							aePlayer.getModule(PlayerCurrencyModule.class).add((long) (targetTrade.getCoinAmount() - tradeModule.getCoinAmount()));
+							tradeModule.getTarget().getModule(PlayerCurrencyModule.class).add((long) (tradeModule.getCoinAmount() - targetTrade.getCoinAmount()));
+
+							for (int i = 0; i < 16; i++)
 							{
-								ContainerTrade hostContainer = (ContainerTrade) tradeModule.getEntity().openContainer;
-								ContainerTrade otherContainer = (ContainerTrade) targetTrade.getEntity().openContainer;
+								Slot slotA = hostContainer.getSlot(36 + i);
+								Slot slotB = otherContainer.getSlot(36 + i);
 
-								aePlayer.getModule(PlayerCurrencyModule.class).add((long) (targetTrade.getCoinAmount() - tradeModule.getCoinAmount()));
-								tradeModule.getTarget().getModule(PlayerCurrencyModule.class).add((long) (tradeModule.getCoinAmount() - targetTrade.getCoinAmount()));
-
-								for (int i = 0; i < 16; i++)
+								if (!slotB.getStack().isEmpty())
 								{
-									Slot slotA = hostContainer.getSlot(36 + i);
-									Slot slotB = otherContainer.getSlot(36 + i);
+									tradeModule.getEntity().addItemStackToInventory(slotB.getStack().copy());
+									slotB.putStack(ItemStack.EMPTY);
+								}
 
-									if (!slotB.getStack().isEmpty())
-									{
-										tradeModule.getEntity().addItemStackToInventory(slotB.getStack().copy());
-										slotB.putStack(ItemStack.EMPTY);
-									}
-
-									if (!slotA.getStack().isEmpty())
-									{
-										targetTrade.getEntity().addItemStackToInventory(slotA.getStack().copy());
-										slotA.putStack(ItemStack.EMPTY);
-									}
+								if (!slotA.getStack().isEmpty())
+								{
+									targetTrade.getEntity().addItemStackToInventory(slotA.getStack().copy());
+									slotA.putStack(ItemStack.EMPTY);
 								}
 							}
+						}
 
-							tradeModule.closeGui();
-							targetTrade.closeGui();
-						}
-						else
-						{
-							tradeModule.setConfirmed(true);
-							targetTrade.sendState(3);
-							statusMessage = "targetconfirm";
-						}
+						tradeModule.closeGui();
+						targetTrade.closeGui();
 					}
-
-					if (!statusMessage.isEmpty())
+					else
 					{
-						NetworkingAether.sendPacketToPlayer(new PacketTradeMessage("aether.trade.message." + statusMessage), targetTrade.getPlayerMP());
+						tradeModule.setConfirmed(true);
+						targetTrade.sendState(3);
+						statusMessage = "targetconfirm";
 					}
+				}
+
+				if (!statusMessage.isEmpty())
+				{
+					NetworkingAether.sendPacketToPlayer(new PacketTradeMessage("aether.trade.message." + statusMessage), targetTrade.getPlayerMP());
 				}
 			}
 

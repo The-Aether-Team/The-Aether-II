@@ -532,31 +532,28 @@ public class ClientEventHandler
 		{
 			final PlayerAether aePlayer = PlayerAether.getPlayer(player);
 
-			if (aePlayer != null)
+			PlayerAbilitiesModule abilitiesModule = aePlayer.getModule(PlayerAbilitiesModule.class);
+
+			if (abilitiesModule.getMidAirJumpsAllowed() > 0)
 			{
-				PlayerAbilitiesModule abilitiesModule = aePlayer.getModule(PlayerAbilitiesModule.class);
-
-				if (abilitiesModule.getMidAirJumpsAllowed() > 0)
+				if (mc.gameSettings.keyBindJump.isKeyDown() && !PREV_JUMP_BIND_STATE)
 				{
-					if (mc.gameSettings.keyBindJump.isKeyDown() && !PREV_JUMP_BIND_STATE)
+					if (!player.isInWater() && abilitiesModule.getTicksAirborne() > 2 && !player.capabilities.isCreativeMode)
 					{
-						if (!player.isInWater() && abilitiesModule.getTicksAirborne() > 2 && !player.capabilities.isCreativeMode)
+						if (abilitiesModule.performMidAirJump())
 						{
-							if (abilitiesModule.performMidAirJump())
-							{
-								NetworkingAether.sendPacketToServer(new PacketSpecialMovement(PacketSpecialMovement.Action.EXTRA_JUMP));
+							NetworkingAether.sendPacketToServer(new PacketSpecialMovement(PacketSpecialMovement.Action.EXTRA_JUMP));
 
-								world.playSound(player.posX, player.posY, player.posZ, SoundsAether.generic_wing_flap, SoundCategory.PLAYERS, 0.4f,
-										0.8f + (world.rand.nextFloat() * 0.6f), false);
-							}
+							world.playSound(player.posX, player.posY, player.posZ, SoundsAether.generic_wing_flap, SoundCategory.PLAYERS, 0.4f,
+									0.8f + (world.rand.nextFloat() * 0.6f), false);
 						}
 					}
 				}
-
-				PREV_JUMP_BIND_STATE = mc.gameSettings.keyBindJump.isKeyDown();
-
-				AetherMusicManager.INSTANCE.update(aePlayer);
 			}
+
+			PREV_JUMP_BIND_STATE = mc.gameSettings.keyBindJump.isKeyDown();
+
+			AetherMusicManager.INSTANCE.update(aePlayer);
 		}
 	}
 

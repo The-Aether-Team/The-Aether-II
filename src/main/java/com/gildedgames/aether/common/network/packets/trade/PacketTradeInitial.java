@@ -39,23 +39,22 @@ public class PacketTradeInitial implements IMessage
 		@Override
 		public IMessage onMessage(PacketTradeInitial message, EntityPlayer player)
 		{
+			Entity entity = player.world.getEntityByID(message.entityId);
+
+			if (!(entity instanceof EntityPlayer))
+			{
+				throw new IllegalArgumentException("Entity is not a player");
+			}
+
 			PlayerAether aePlayer = PlayerAether.getPlayer(player);
 
-			if (aePlayer != null)
-			{
-				PlayerTradeModule tradeModule = aePlayer.getModule(PlayerTradeModule.class);
-				Entity entity = player.world.getEntityByID(message.entityId);
+			PlayerTradeModule tradeModule = aePlayer.getModule(PlayerTradeModule.class);
+			tradeModule.clear();
 
-				tradeModule.clear();
+			PlayerAether target = PlayerAether.getPlayer((EntityPlayer) entity);
+			target.getModule(PlayerTradeModule.class).clear();
 
-				if (entity instanceof EntityPlayer)
-				{
-					PlayerAether target = PlayerAether.getPlayer(entity);
-					target.getModule(PlayerTradeModule.class).clear();
-
-					tradeModule.setTarget(target);
-				}
-			}
+			tradeModule.setTarget(target);
 
 			return null;
 		}

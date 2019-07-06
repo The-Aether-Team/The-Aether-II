@@ -32,6 +32,7 @@ import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.IdentityHashMap;
 import java.util.List;
@@ -115,14 +116,22 @@ public class PlayerAether implements IPlayerAether
 		return ret;
 	}
 
-	public static PlayerAether getPlayer(final Entity player)
+	@Nonnull
+	public static PlayerAether getPlayer(final EntityPlayer player)
 	{
 		if (player == null)
 		{
-			return null;
+			throw new NullPointerException("Player entity is null");
 		}
 
-		return (PlayerAether) player.getCapability(AetherCapabilities.PLAYER_DATA, null);
+		PlayerAether ret = (PlayerAether) player.getCapability(AetherCapabilities.PLAYER_DATA, null);
+
+		if (ret == null)
+		{
+			throw new NullPointerException("Player does not contain capability");
+		}
+
+		return ret;
 	}
 
 	public static boolean hasCapability(final Entity entity)
@@ -228,18 +237,13 @@ public class PlayerAether implements IPlayerAether
 
 	public void onHurt(final LivingHurtEvent event)
 	{
-		final PlayerAether aePlayer = PlayerAether.getPlayer(event.getEntity());
+		PlayerEquipmentModule equipmentModule = this.getModule(PlayerEquipmentModule.class);
 
-		if (aePlayer != null)
+		if (equipmentModule.getEffectPool(new ResourceLocation(AetherCore.MOD_ID, "fire_immunity")).isPresent())
 		{
-			PlayerEquipmentModule equipmentModule = this.getModule(PlayerEquipmentModule.class);
-
-			if (equipmentModule.getEffectPool(new ResourceLocation(AetherCore.MOD_ID, "fire_immunity")).isPresent())
+			if (event.getSource() == DamageSource.ON_FIRE || event.getSource() == DamageSource.IN_FIRE || event.getSource() == DamageSource.LAVA)
 			{
-				if (event.getSource() == DamageSource.ON_FIRE || event.getSource() == DamageSource.IN_FIRE || event.getSource() == DamageSource.LAVA)
-				{
-					event.setCanceled(true);
-				}
+				event.setCanceled(true);
 			}
 		}
 
@@ -323,15 +327,6 @@ public class PlayerAether implements IPlayerAether
 		if (inst != null)
 		{
 			this.towerInstance = inst;
-		}
-	}
-
-	@Override
-	public void onEntityJoinWorld()
-	{
-		for (IPlayerAetherModule module : this.modules)
-		{
-			module.onEntityJoinWorld();
 		}
 	}
 

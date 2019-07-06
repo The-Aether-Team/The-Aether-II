@@ -11,8 +11,6 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 public interface IPlayerAetherModule
 {
-	void onEntityJoinWorld();
-
 	void onDrops(PlayerDropsEvent event);
 
 	void onDeath(LivingDeathEvent event);

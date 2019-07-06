@@ -74,11 +74,11 @@ public class CommonEvents
 	@SubscribeEvent
 	public static void onEvent(EntityTravelToDimensionEvent event)
 	{
-		if (AetherHelper.isEnabled(event.getDimension()))
+		if (AetherHelper.isEnabled(event.getDimension()) && AetherHelper.isEnabled(event.getDimension()))
 		{
-			PlayerAether playerAether = PlayerAether.getPlayer(event.getEntity());
+			PlayerAether playerAether = PlayerAether.getPlayer((EntityPlayer) event.getEntity());
 
-			if (playerAether != null && !AetherHelper.isNecromancerTower(event.getEntity().dimension))
+			if (!AetherHelper.isNecromancerTower(event.getEntity().dimension))
 			{
 				playerAether.getModule(PlayerTeleportingModule.class)
 						.setNonAetherPos(new BlockPosDimension(event.getEntity().getPosition(), event.getEntity().dimension));
@@ -298,7 +298,7 @@ public class CommonEvents
 	{
 		final IPlayerAether aePlayer = PlayerAether.getPlayer(event.getEntityPlayer());
 
-		if (event.getItemStack().isEmpty() || aePlayer == null)
+		if (event.getItemStack().isEmpty())
 		{
 			return;
 		}
@@ -368,7 +368,7 @@ public class CommonEvents
 				.isEmpty())
 		{
 			PlayerTradeModule me = PlayerAether.getPlayer(event.getEntityPlayer()).getModule(PlayerTradeModule.class);
-			PlayerTradeModule other = PlayerAether.getPlayer(event.getTarget()).getModule(PlayerTradeModule.class);
+			PlayerTradeModule other = PlayerAether.getPlayer((EntityPlayer) event.getTarget()).getModule(PlayerTradeModule.class);
 
 			if (me.getPlayer().equals(other.getTarget()) && other.canAccept(event.getEntity().getPosition()))
 			{

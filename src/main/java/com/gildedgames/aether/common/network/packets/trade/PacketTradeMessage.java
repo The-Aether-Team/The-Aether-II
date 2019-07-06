@@ -87,14 +87,11 @@ public class PacketTradeMessage implements IMessage
 		{
 			PlayerAether aePlayer = PlayerAether.getPlayer(player);
 
-			if (aePlayer != null)
-			{
-				PlayerTradeModule tradeModule = aePlayer.getModule(PlayerTradeModule.class);
+			PlayerTradeModule tradeModule = aePlayer.getModule(PlayerTradeModule.class);
 
-				if(tradeModule.isTrading() && message.text.length() <= 256)
-				{
-					NetworkingAether.sendPacketToPlayer(new PacketTradeMessage(message.text, player), tradeModule.getTargetMP());
-				}
+			if(tradeModule.isTrading() && message.text.length() <= 256)
+			{
+				NetworkingAether.sendPacketToPlayer(new PacketTradeMessage(message.text, player), tradeModule.getTargetMP());
 			}
 
 			return null;

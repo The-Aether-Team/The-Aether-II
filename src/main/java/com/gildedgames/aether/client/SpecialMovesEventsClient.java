@@ -7,6 +7,7 @@ import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketSpecialMovement;
 import com.gildedgames.aether.common.util.helpers.AetherHelper;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.Mod;
@@ -30,12 +31,12 @@ public class SpecialMovesEventsClient
 	@SubscribeEvent
 	public static void onEvent(EntityViewRenderEvent.FOVModifier event)
 	{
-		PlayerAether playerAether = PlayerAether.getPlayer(event.getEntity());
-
-		if (playerAether == null)
+		if (!(event.getEntity() instanceof EntityPlayer))
 		{
 			return;
 		}
+
+		PlayerAether playerAether = PlayerAether.getPlayer((EntityPlayer) event.getEntity());
 
 		PlayerRollMovementModule module = playerAether.getModule(PlayerRollMovementModule.class);
 
@@ -66,12 +67,12 @@ public class SpecialMovesEventsClient
 	@SubscribeEvent
 	public static void onEvent(EntityViewRenderEvent.CameraSetup event)
 	{
-		PlayerAether playerAether = PlayerAether.getPlayer(event.getEntity());
-
-		if (playerAether == null)
+		if (!(event.getEntity() instanceof EntityPlayer))
 		{
 			return;
 		}
+
+		PlayerAether playerAether = PlayerAether.getPlayer((EntityPlayer) event.getEntity());
 
 		PlayerRollMovementModule module = playerAether.getModule(PlayerRollMovementModule.class);
 

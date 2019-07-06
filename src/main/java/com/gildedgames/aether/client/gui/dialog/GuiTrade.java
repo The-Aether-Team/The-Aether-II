@@ -327,21 +327,18 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 			return;
 		}
 
-		if (this.playerAether != null)
+		long currency = this.playerAether.getModule(PlayerCurrencyModule.class).getCurrencyValue();
+
+		this.transferCoins += val;
+
+		if (this.transferCoins > currency)
 		{
-			long currency = this.playerAether.getModule(PlayerCurrencyModule.class).getCurrencyValue();
+			this.transferCoins = currency;
+		}
 
-			this.transferCoins += val;
-
-			if (this.transferCoins > currency)
-			{
-				this.transferCoins = currency;
-			}
-
-			if (this.transferCoins < 0)
-			{
-				this.transferCoins = 0;
-			}
+		if (this.transferCoins < 0)
+		{
+			this.transferCoins = 0;
 		}
 
 		NetworkingAether.sendPacketToServer(new PacketChangeCoinAmount(this.transferCoins));
@@ -463,19 +460,16 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 			}
 		}
 
-		if (this.playerAether != null)
+		long currency = this.playerAether.getModule(PlayerCurrencyModule.class).getCurrencyValue();
+
+		if (this.coinTab != null)
 		{
-			long currency = this.playerAether.getModule(PlayerCurrencyModule.class).getCurrencyValue();
+			this.coinTab.setCurrencyValue(currency - this.transferCoins);
+		}
 
-			if (this.coinTab != null)
-			{
-				this.coinTab.setCurrencyValue(currency - this.transferCoins);
-			}
-
-			if (this.tradeTab != null)
-			{
-				this.tradeTab.setCurrencyValue(this.transferCoins);
-			}
+		if (this.tradeTab != null)
+		{
+			this.tradeTab.setCurrencyValue(this.transferCoins);
 		}
 
 		Gui.drawRect(2, this.height - 14, this.width - 102, this.height - 2, Integer.MIN_VALUE);

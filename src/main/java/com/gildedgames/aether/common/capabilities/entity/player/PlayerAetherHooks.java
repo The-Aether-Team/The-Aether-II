@@ -34,7 +34,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
@@ -54,33 +53,18 @@ public class PlayerAetherHooks
 	private static final ResourceLocation TELEPORTER_RECIPE = AetherCore.getResource("misc/aether_teleporter");
 
 	@SubscribeEvent
-	public static void onPlayerAddedToWorld(final EntityJoinWorldEvent event)
-	{
-		final PlayerAether aePlayer = PlayerAether.getPlayer(event.getEntity());
-
-		if (aePlayer != null)
-		{
-			aePlayer.onEntityJoinWorld();
-		}
-	}
-
-	@SubscribeEvent
 	public static void onPlayerJoined(final PlayerLoggedInEvent event)
 	{
+		NetworkingAether.sendPacketToPlayer(new PacketRequestClientInfo(), (EntityPlayerMP) event.player);
+
 		final PlayerAether aePlayer = PlayerAether.getPlayer(event.player);
+		aePlayer.sendFullUpdate();
 
-		if (aePlayer != null)
+		IRecipe recipe = ForgeRegistries.RECIPES.getValue(TELEPORTER_RECIPE);
+
+		if (recipe != null)
 		{
-			NetworkingAether.sendPacketToPlayer(new PacketRequestClientInfo(), (EntityPlayerMP) event.player);
-
-			aePlayer.sendFullUpdate();
-
-			IRecipe teleporterRecipe = ForgeRegistries.RECIPES.getValue(TELEPORTER_RECIPE);
-
-			if (teleporterRecipe != null)
-			{
-				event.player.unlockRecipes(Lists.newArrayList(teleporterRecipe));
-			}
+			event.player.unlockRecipes(Lists.newArrayList(recipe));
 		}
 	}
 
@@ -88,82 +72,79 @@ public class PlayerAetherHooks
 	public static void onPlayerLoggedOut(final PlayerLoggedOutEvent event)
 	{
 		final PlayerAether aePlayer = PlayerAether.getPlayer(event.player);
-
-		if (aePlayer != null)
-		{
-			aePlayer.onLoggedOut();
-		}
+		aePlayer.onLoggedOut();
 	}
 
 	@SubscribeEvent
 	public static void onDeath(final LivingDeathEvent event)
 	{
-		final PlayerAether aePlayer = PlayerAether.getPlayer(event.getEntity());
-
-		if (aePlayer != null)
+		if (!(event.getEntity() instanceof EntityPlayer))
 		{
-			aePlayer.onDeath(event);
+			return;
+		}
 
-			if (aePlayer.getEntity().world.provider.getDimensionType() == DimensionsAether.AETHER)
-			{
-				aePlayer.getModule(PlayerCampfiresModule.class).setDeathPos(new BlockPosDimension(event.getEntity().getPosition(), aePlayer.getEntity().dimension));
-			}
+		final PlayerAether aePlayer = PlayerAether.getPlayer((EntityPlayer) event.getEntity());
+		aePlayer.onDeath(event);
+
+		if (aePlayer.getEntity().world.provider.getDimensionType() == DimensionsAether.AETHER)
+		{
+			aePlayer.getModule(PlayerCampfiresModule.class).setDeathPos(new BlockPosDimension(event.getEntity().getPosition(), aePlayer.getEntity().dimension));
 		}
 	}
 
 	@SubscribeEvent
 	public static void onDrops(final PlayerDropsEvent event)
 	{
-		final PlayerAether aePlayer = PlayerAether.getPlayer(event.getEntity());
-
-		if (aePlayer != null)
+		if (!(event.getEntity() instanceof EntityPlayer))
 		{
-			aePlayer.onDrops(event);
+			return;
 		}
+
+		final PlayerAether aePlayer = PlayerAether.getPlayer((EntityPlayer) event.getEntity());
+		aePlayer.onDrops(event);
 	}
 
 	@SubscribeEvent
 	public static void onPlayerTick(TickEvent.PlayerTickEvent event)
 	{
 		final PlayerAether aePlayer = PlayerAether.getPlayer(event.player);
-
-		if (aePlayer != null)
-		{
-			aePlayer.onPlayerTick(event);
-		}
+		aePlayer.onPlayerTick(event);
 	}
 
 	@SubscribeEvent
 	public static void onFall(final LivingFallEvent event)
 	{
-		final PlayerAether aePlayer = PlayerAether.getPlayer(event.getEntity());
-
-		if (aePlayer != null)
+		if (!(event.getEntity() instanceof EntityPlayer))
 		{
-			aePlayer.onFall(event);
+			return;
 		}
+
+		final PlayerAether aePlayer = PlayerAether.getPlayer((EntityPlayer) event.getEntity());
+		aePlayer.onFall(event);
 	}
 
 	@SubscribeEvent
 	public static void onCalculateBreakSpeed(final PlayerEvent.BreakSpeed event)
 	{
-		final PlayerAether aePlayer = PlayerAether.getPlayer(event.getEntity());
-
-		if (aePlayer != null)
+		if (!(event.getEntity() instanceof EntityPlayer))
 		{
-			event.setNewSpeed(event.getOriginalSpeed() * aePlayer.getMiningSpeedMultiplier());
+			return;
 		}
+
+		final PlayerAether aePlayer = PlayerAether.getPlayer((EntityPlayer) event.getEntity());
+		event.setNewSpeed(event.getOriginalSpeed() * aePlayer.getMiningSpeedMultiplier());
 	}
 
 	@SubscribeEvent
 	public static void onLivingEntityHurt(final LivingHurtEvent event)
 	{
-		final PlayerAether aePlayer = PlayerAether.getPlayer(event.getEntity());
-
-		if (aePlayer != null)
+		if (!(event.getEntity() instanceof EntityPlayer))
 		{
-			aePlayer.onHurt(event);
+			return;
 		}
+
+		final PlayerAether aePlayer = PlayerAether.getPlayer((EntityPlayer) event.getEntity());
+		aePlayer.onHurt(event);
 
 		// TODO: remove this dumb debug effect
 		final EntityLivingBase entity = event.getEntityLiving();
@@ -219,37 +200,31 @@ public class PlayerAetherHooks
 			}
 		}
 
-		if (aePlayer != null)
-		{
-			aePlayer.onPlaceBlock(event);
-		}
+		aePlayer.onPlaceBlock(event);
 	}
 
 	@SubscribeEvent
 	public static void onPlayerClone(final PlayerEvent.Clone event)
 	{
-		final PlayerAether oldPlayer = PlayerAether.getPlayer(event.getOriginal());
-
-		if (oldPlayer != null)
+		if (!(event.getEntity() instanceof EntityPlayer))
 		{
-			final PlayerAether newPlayer = PlayerAether.getPlayer(event.getEntity());
-
-			final IStorage<IPlayerAether> storage = AetherCapabilities.PLAYER_DATA.getStorage();
-
-			final NBTBase state = storage.writeNBT(AetherCapabilities.PLAYER_DATA, oldPlayer, null);
-			storage.readNBT(AetherCapabilities.PLAYER_DATA, newPlayer, null, state);
+			return;
 		}
+
+		final PlayerAether oldPlayer = PlayerAether.getPlayer(event.getOriginal());
+		final PlayerAether newPlayer = PlayerAether.getPlayer((EntityPlayer) event.getEntity());
+
+		final IStorage<IPlayerAether> storage = AetherCapabilities.PLAYER_DATA.getStorage();
+
+		final NBTBase state = storage.writeNBT(AetherCapabilities.PLAYER_DATA, oldPlayer, null);
+		storage.readNBT(AetherCapabilities.PLAYER_DATA, newPlayer, null, state);
 	}
 
 	@SubscribeEvent
 	public static void onPlayerChangedDimension(final PlayerChangedDimensionEvent event)
 	{
 		final PlayerAether aePlayer = PlayerAether.getPlayer(event.player);
-
-		if (aePlayer != null)
-		{
-			aePlayer.onTeleport(event);
-		}
+		aePlayer.onTeleport(event);
 	}
 
 	@SubscribeEvent
@@ -316,26 +291,25 @@ public class PlayerAetherHooks
 	@SubscribeEvent
 	public static void onBeginWatching(final PlayerEvent.StartTracking event)
 	{
-		final PlayerAether aeSourcePlayer = PlayerAether.getPlayer(event.getEntityPlayer());
-		final PlayerAether aeTargetPlayer = PlayerAether.getPlayer(event.getTarget());
-
-		if (aeSourcePlayer != null && aeTargetPlayer != null)
+		if (!(event.getTarget() instanceof EntityPlayer))
 		{
-			aeTargetPlayer.onPlayerBeginWatching(aeSourcePlayer);
+			return;
 		}
+
+		final PlayerAether aeSourcePlayer = PlayerAether.getPlayer(event.getEntityPlayer());
+		final PlayerAether aeTargetPlayer = PlayerAether.getPlayer((EntityPlayer) event.getTarget());
+
+		aeTargetPlayer.onPlayerBeginWatching(aeSourcePlayer);
 	}
 
 	@SubscribeEvent
 	public static void onPlayerPickUpItem(final ItemPickupEvent event)
 	{
-		final PlayerAether aePlayer = PlayerAether.getPlayer(event.player);
-
 		if (event.player.openContainer instanceof ContainerTrade)
 		{
 			((ContainerTrade) event.player.openContainer).addItemToQueue(event.getStack());
 		}
 	}
-
 
 	@SubscribeEvent
 	public static void onLivingHeal(final LivingHealEvent event)

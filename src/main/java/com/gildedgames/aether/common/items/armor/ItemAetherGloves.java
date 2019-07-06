@@ -34,14 +34,11 @@ public class ItemAetherGloves extends Item
 
 		PlayerAether playerAether = PlayerAether.getPlayer(player);
 
-		if (playerAether != null)
-		{
-			PatronRewardArmor armorChoice = playerAether.getModule(PlayerPatronRewardModule.class).getChoices().getArmorChoice();
+		PatronRewardArmor armorChoice = playerAether.getModule(PlayerPatronRewardModule.class).getChoices().getArmorChoice();
 
-			if (armorChoice != null)
-			{
-				return armorChoice.getArmorGloveTexture(slim);
-			}
+		if (armorChoice != null)
+		{
+			return armorChoice.getArmorGloveTexture(slim);
 		}
 
 		return slim ? this.gloveType.getTextureSlim() : this.gloveType.getTexture();

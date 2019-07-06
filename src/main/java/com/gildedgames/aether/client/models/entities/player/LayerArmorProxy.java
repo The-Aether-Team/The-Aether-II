@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -32,20 +33,25 @@ public class LayerArmorProxy extends LayerBipedArmor
 	}
 
 	@Override
-	public void doRenderLayer(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks,
+	public void doRenderLayer(EntityLivingBase entity, float limbSwing, float limbSwingAmount, float partialTicks,
 			float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
+		if (!(entity instanceof EntityPlayer))
+		{
+			return;
+		}
+
 		if (this.previewArmor != null)
 		{
 			return;
 		}
 
-		PlayerAether aePlayer = PlayerAether.getPlayer(entitylivingbaseIn);
+		PlayerAether aePlayer = PlayerAether.getPlayer((EntityPlayer) entity);
 		PatronRewardArmor armor = aePlayer.getModule(PlayerPatronRewardModule.class).getChoices().getArmorChoice();
 
 		if (armor == null || armor.getArmorTextureName() == null)
 		{
-			this.proxy.doRenderLayer(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale);
+			this.proxy.doRenderLayer(entity, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale);
 		}
 	}
 

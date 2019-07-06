@@ -5,6 +5,7 @@ import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerSw
 import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
@@ -50,7 +51,14 @@ public class PacketDetachSwet implements IMessage
 				return null;
 			}
 
-			final PlayerAether playerAether = PlayerAether.getPlayer(player.world.getEntityByID(message.id));
+			Entity entity = player.world.getEntityByID(message.id);
+
+			if (!(entity instanceof EntityPlayer))
+			{
+				throw new IllegalArgumentException("Entity is not a player");
+			}
+
+			final PlayerAether playerAether = PlayerAether.getPlayer((EntityPlayer) entity);
 
 			EntitySwet remove = null;
 

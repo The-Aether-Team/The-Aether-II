@@ -18,7 +18,6 @@ public interface IPlayerAether
 
 	void registerModule(@Nonnull IPlayerAetherModule module);
 
-	@SuppressWarnings("unchecked")
 	@Nonnull
 	<T extends IPlayerAetherModule> T getModule(@Nonnull Class<T> clazz);
 
@@ -38,9 +37,4 @@ public interface IPlayerAether
 	 * @param tag The {@link NBTTagCompound} to read from
 	 */
 	void read(NBTTagCompound tag);
-
-	/**
-	 * Called when a player logs in.
-	 */
-	void onEntityJoinWorld();
 }

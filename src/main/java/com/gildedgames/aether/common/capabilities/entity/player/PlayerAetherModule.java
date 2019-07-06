@@ -19,12 +19,6 @@ public abstract class PlayerAetherModule implements IPlayerAetherModule
 	}
 
 	@Override
-	public void onEntityJoinWorld()
-	{
-
-	}
-
-	@Override
 	public void onDrops(PlayerDropsEvent event)
 	{
 

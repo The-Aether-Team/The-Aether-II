@@ -6,7 +6,6 @@ import com.gildedgames.aether.api.effects_system.IAetherStatusEffectIntensity;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
 import com.gildedgames.aether.api.entity.IEntityEyesComponent;
 import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.entities.ai.*;
 import com.gildedgames.aether.common.entities.effects.StatusEffectFracture;
 import com.gildedgames.aether.common.entities.util.EntityEyesComponent;
@@ -213,18 +212,17 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 			return;
 		}
 
-		if (this.getAttackTarget() != null)
-		{
-			if (this.getAttackTarget() instanceof EntityPlayer)
-			{
-				final PlayerAether player = PlayerAether.getPlayer(this.getAttackTarget());
+//		if (this.getAttackTarget() != null)
+//		{
+//			if (this.getAttackTarget() instanceof EntityPlayer)
+//			{
+//				final PlayerAether player = PlayerAether.getPlayer(this.getAttackTarget());
 //				if (player.getEntity().isCreative())
 //				{
 //					return;
 //				}
-			}
-
-		}
+//			}
+//		}
 
 		this.ramAttack.update();
 

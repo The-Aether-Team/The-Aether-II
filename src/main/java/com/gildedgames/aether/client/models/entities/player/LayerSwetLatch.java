@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 
 import java.util.List;
 
@@ -33,7 +34,10 @@ public class LayerSwetLatch extends LayerBipedArmor
 	public void doRenderLayer(EntityLivingBase entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks,
 			float netHeadYaw, float headPitch, float scale)
 	{
-		this.renderSwet(PlayerAether.getPlayer(entity), limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale);
+		if (entity instanceof EntityPlayer)
+		{
+			this.renderSwet(PlayerAether.getPlayer((EntityPlayer) entity), limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale);
+		}
 	}
 
 	private void renderSwet(PlayerAether player, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks,

@@ -50,12 +50,17 @@ public class LayerHeadShadow extends LayerBipedArmor
 	public void doRenderLayer(EntityLivingBase entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks,
 			float netHeadYaw, float headPitch, float scale)
 	{
+		if (!(entity instanceof EntityPlayer))
+		{
+			return;
+		}
+
 		if (!AetherCore.CONFIG.hasHelmetShadow())
 		{
 			return;
 		}
 
-		PlayerAether player = PlayerAether.getPlayer(entity);
+		PlayerAether player = PlayerAether.getPlayer((EntityPlayer) entity);
 
 		ItemStack helm = player.getEntity().getItemStackFromSlot(EntityEquipmentSlot.HEAD);
 

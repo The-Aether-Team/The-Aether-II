@@ -144,13 +144,13 @@ public class AetherGuiHandler implements IGuiHandler
 			case CUSTOM_WORKBENCH_ID:
 				return new GuiCrafting(player.inventory, world, pos);
 			case INVENTORY_ID:
-				return new GuiGuidebookInventory(PlayerAether.getPlayer(player));
+				return new GuiGuidebookInventory(playerAether);
 			case STATUS_ID:
-				return new GuiGuidebookStatus(PlayerAether.getPlayer(player));
+				return new GuiGuidebookStatus(playerAether);
 			case LORE_TOME_ID:
-				return new GuiGuidebookLoreTome(PlayerAether.getPlayer(player));
+				return new GuiGuidebookLoreTome(playerAether);
 			case DISCOVERY_ID:
-				return new GuiGuidebookDiscovery(PlayerAether.getPlayer(player));
+				return new GuiGuidebookDiscovery(playerAether);
 			case FROSTPINE_COOLER_ID:
 				return new GuiIcestoneCooler(player.inventory, (IInventory) world.getTileEntity(pos));
 			case INCUBATOR_ID:

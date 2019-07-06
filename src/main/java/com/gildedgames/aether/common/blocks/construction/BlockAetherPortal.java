@@ -166,7 +166,7 @@ public class BlockAetherPortal extends BlockBreakable
 	{
 		if (entity instanceof EntityPlayer)
 		{
-			PlayerAether playerAether = PlayerAether.getPlayer(entity);
+			PlayerAether playerAether = PlayerAether.getPlayer((EntityPlayer) entity);
 			playerAether.getModule(PlayerTeleportingModule.class).processTeleporting();
 		}
 	}

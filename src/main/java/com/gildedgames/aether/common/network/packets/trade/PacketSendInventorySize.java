@@ -40,11 +40,8 @@ public class PacketSendInventorySize implements IMessage
 		{
 			PlayerAether aePlayer = PlayerAether.getPlayer(player);
 
-			if (aePlayer != null)
-			{
-				PlayerTradeModule tradeModule = aePlayer.getModule(PlayerTradeModule.class);
-				tradeModule.setTradeSlots(message.size);
-			}
+			PlayerTradeModule tradeModule = aePlayer.getModule(PlayerTradeModule.class);
+			tradeModule.setTradeSlots(message.size);
 
 			return null;
 		}

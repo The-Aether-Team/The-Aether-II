@@ -215,7 +215,7 @@ public class EntityTaegore extends EntityAetherAnimal implements IEntityMultiPar
 		{
 			if (this.getAttackingEntity() instanceof EntityPlayer)
 			{
-				final PlayerAether player = PlayerAether.getPlayer(this.getAttackingEntity());
+				final PlayerAether player = PlayerAether.getPlayer((EntityPlayer) this.getAttackingEntity());
 				if (player.getEntity().isCreative())
 				{
 					return;

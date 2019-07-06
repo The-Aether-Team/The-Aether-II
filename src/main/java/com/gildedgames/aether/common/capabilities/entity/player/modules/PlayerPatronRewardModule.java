@@ -20,6 +20,8 @@ public class PlayerPatronRewardModule extends PlayerAetherModule
 
 	private Future<UserFeatures> featuresFuture;
 
+	private boolean firstTick = true;
+
 	public PlayerPatronRewardModule(PlayerAether playerAether)
 	{
 		super(playerAether);
@@ -38,17 +40,18 @@ public class PlayerPatronRewardModule extends PlayerAetherModule
 	}
 
 	@Override
-	public void onEntityJoinWorld()
-	{
-		this.featuresFuture = AetherAPI.services().gildedGamesAccountApi().retrieveUserFeatures(this.getEntity().getGameProfile().getId());
-	}
-
-	@Override
 	public void tickStart(TickEvent.PlayerTickEvent event)
 	{
 		if (!ENABLED)
 		{
 			return;
+		}
+
+		if (this.firstTick)
+		{
+			this.firstTick = false;
+
+			this.featuresFuture = AetherAPI.services().gildedGamesAccountApi().retrieveUserFeatures(this.getEntity().getGameProfile().getId());
 		}
 
 		if (this.featuresFuture != null && this.featuresFuture.isDone())
