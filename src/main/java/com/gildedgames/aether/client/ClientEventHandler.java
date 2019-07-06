@@ -12,7 +12,6 @@ import com.gildedgames.aether.api.items.equipment.effects.IEffectPool;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 import com.gildedgames.aether.client.gui.DamageSystemOverlay;
 import com.gildedgames.aether.client.gui.EffectSystemOverlay;
-import com.gildedgames.aether.client.gui.GuiUtils;
 import com.gildedgames.aether.client.gui.PerformanceIngame;
 import com.gildedgames.aether.client.gui.misc.*;
 import com.gildedgames.aether.client.gui.util.ToolTipCurrencyHelper;
@@ -56,6 +55,7 @@ import net.minecraftforge.client.event.RenderTooltipEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.client.config.GuiUtils;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -180,11 +180,6 @@ public class ClientEventHandler
 		{
 			CustomLoadingRenderer.CURRENT = null;
 		}
-	}
-
-	protected static void drawGradientRect(final int left, final int top, final int right, final int bottom, final int startColor, final int endColor)
-	{
-		GuiUtils.drawGradientRect(left, top, right, bottom, startColor, endColor);
 	}
 
 	@SubscribeEvent
@@ -326,7 +321,7 @@ public class ClientEventHandler
 				GlStateManager.disableDepth();
 			}
 
-			GuiUtils.drawGradientRect(0, 0, MathHelper.floor(InputHelper.getScreenWidth()),
+			GuiUtils.drawGradientRect(0, 0, 0, MathHelper.floor(InputHelper.getScreenWidth()),
 					MathHelper.floor(InputHelper.getScreenHeight()), bg, bg);
 
 			if (disableDepth)
@@ -399,7 +394,7 @@ public class ClientEventHandler
 
 				GlStateManager.disableDepth();
 
-				GuiUtils.drawGradientRect(0, 0, MathHelper.floor(InputHelper.getScreenWidth()),
+				GuiUtils.drawGradientRect(0, 0, 0, MathHelper.floor(InputHelper.getScreenWidth()),
 						MathHelper.floor(InputHelper.getScreenHeight()), 0xFF000000, 0xFF000000);
 
 				GlStateManager.enableDepth();

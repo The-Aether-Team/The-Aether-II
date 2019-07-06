@@ -1,7 +1,7 @@
 package com.gildedgames.aether.client.gui.container.simple_crafting;
 
 import com.gildedgames.aether.api.recipes.simple.ISimpleRecipe;
-import com.gildedgames.aether.client.gui.IExtendedGui;
+import com.gildedgames.aether.client.gui.container.IExtendedContainer;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.util.helpers.RecipeUtil;
 import net.minecraft.client.Minecraft;
@@ -61,9 +61,9 @@ public class GuiCraftingOption extends GuiButton
 			{
 				GuiScreen gui = Minecraft.getMinecraft().currentScreen;
 
-				if (gui instanceof IExtendedGui)
+				if (gui instanceof IExtendedContainer)
 				{
-					IExtendedGui extendedGui = (IExtendedGui) gui;
+					IExtendedContainer extendedGui = (IExtendedContainer) gui;
 
 					extendedGui.setHoveredDescription(this.recipe.getResult(),
 							this.recipe.getResult().getTooltip(Minecraft.getMinecraft().player, Minecraft.getMinecraft().gameSettings.advancedItemTooltips ?

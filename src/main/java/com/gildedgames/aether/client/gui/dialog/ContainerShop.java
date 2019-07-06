@@ -4,13 +4,11 @@ import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.dialog.IDialogSlide;
 import com.gildedgames.aether.api.dialog.IDialogSlideRenderer;
 import com.gildedgames.aether.api.shop.*;
-import com.gildedgames.aether.client.gui.GuiUtils;
-import com.gildedgames.aether.client.gui.IExtendedGui;
+import com.gildedgames.aether.client.gui.container.IExtendedContainer;
 import com.gildedgames.aether.client.gui.util.GuiItemStack;
 import com.gildedgames.aether.common.AetherCelebrations;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
-import com.gildedgames.aether.common.containers.ContainerShop;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketShopBack;
 import com.gildedgames.aether.common.network.packets.PacketShopBuy;
@@ -39,6 +37,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.client.config.GuiUtils;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
@@ -46,7 +45,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
-public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGui
+public class ContainerShop extends GuiViewer implements ICurrencyListener, IExtendedContainer
 {
 	private static final ResourceLocation INVENTORY = AetherCore.getResource("textures/gui/shop/inventory.png");
 
@@ -82,7 +81,7 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 
 	private final List<GuiShopBuy> buys = Lists.newArrayList();
 
-	private final ContainerShop container;
+	private final com.gildedgames.aether.common.containers.ContainerShop container;
 
 	private final PlayerAether playerAether;
 
@@ -126,15 +125,15 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 
 	private com.gildedgames.orbis.lib.client.gui.util.GuiTextBox holidayNoticeText;
 
-	public GuiShop(GuiViewer prevViewer, EntityPlayer player, IDialogSlide slide, IDialogSlideRenderer renderer, IShopInstance shopInstance, int shopIndex)
+	public ContainerShop(GuiViewer prevViewer, EntityPlayer player, IDialogSlide slide, IDialogSlideRenderer renderer, IShopInstance shopInstance, int shopIndex)
 	{
-		super(new GuiElement(Dim2D.flush(), false), prevViewer, new ContainerShop(player.inventory, shopInstance));
+		super(new GuiElement(Dim2D.flush(), false), prevViewer, new com.gildedgames.aether.common.containers.ContainerShop(player.inventory, shopInstance));
 
 		this.shopIndex = shopIndex;
 
 		this.setDrawDefaultBackground(false);
 
-		this.container = (ContainerShop) this.inventorySlots;
+		this.container = (com.gildedgames.aether.common.containers.ContainerShop) this.inventorySlots;
 
 		this.slide = slide;
 		this.renderer = renderer;
@@ -287,12 +286,12 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 	{
 		if (isCountLocked)
 		{
-			GuiShop.buyCount = MathHelper.clamp(GuiShop.buyCount + buyCount, 1, 64);
+			ContainerShop.buyCount = MathHelper.clamp(ContainerShop.buyCount + buyCount, 1, 64);
 
 			if (this.getSelectedBuy() != null)
 			{
 				int count = (int) Math
-						.min(this.getSelectedBuy().getStock(), Math.min(GuiShop.buyCount, Math.min(this.getSelectedBuy().getItemStack().getMaxStackSize(),
+						.min(this.getSelectedBuy().getStock(), Math.min(ContainerShop.buyCount, Math.min(this.getSelectedBuy().getItemStack().getMaxStackSize(),
 								this.shopInstance.getCurrencyType().getValue(this.playerAether) / ShopUtil
 										.getFilteredPrice(this.shopInstance, this.getSelectedBuy()))));
 
@@ -415,19 +414,21 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 		{
 			if (this.hoveredStack != null)
 			{
-				net.minecraftforge.fml.client.config.GuiUtils.preItemToolTip(this.hoveredStack);
-				GuiUtils.drawHoveringText(this.hoverDescription, mouseX, mouseY, Minecraft.getMinecraft().fontRenderer);
-				net.minecraftforge.fml.client.config.GuiUtils.postItemToolTip();
+				GuiUtils.preItemToolTip(this.hoveredStack);
+				GuiUtils.drawHoveringText(this.hoverDescription, mouseX, mouseY, width, height, -1,
+						Minecraft.getMinecraft().fontRenderer);
+				GuiUtils.postItemToolTip();
 			}
 			else
 			{
-				GuiUtils.drawHoveringText(this.hoverDescription, mouseX, mouseY, Minecraft.getMinecraft().fontRenderer);
+				GuiUtils.drawHoveringText(this.hoverDescription, mouseX, mouseY, width, height, -1,
+						Minecraft.getMinecraft().fontRenderer);
 			}
 		}
 
 		if (InputHelper.isHovered(this.lockButton))
 		{
-			net.minecraftforge.fml.client.config.GuiUtils
+			GuiUtils
 					.drawHoveringText(Lists.newArrayList(I18n.format("aether.shop.lockTooltip")), mouseX, mouseY, this.width, this.height, 120,
 							Minecraft.getMinecraft().fontRenderer);
 		}
@@ -516,7 +517,7 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 			this.prevBuy = this.selectedBuy;
 
 			int count = (int) Math
-					.min(isCountLocked ? GuiShop.buyCount : this.buyCountUnlocked, Math.min(this.getSelectedBuy().getItemStack().getMaxStackSize(),
+					.min(isCountLocked ? ContainerShop.buyCount : this.buyCountUnlocked, Math.min(this.getSelectedBuy().getItemStack().getMaxStackSize(),
 							this.shopInstance.getCurrencyType().getValue(this.playerAether) / ShopUtil
 									.getFilteredPrice(this.shopInstance, this.getSelectedBuy())));
 
@@ -586,7 +587,7 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 				if (this.getSelectedBuy() != null)
 				{
 					int count = (int) Math
-							.min(this.getSelectedBuy().getStock(), Math.min(GuiShop.buyCount, Math.min(this.getSelectedBuy().getItemStack().getMaxStackSize(),
+							.min(this.getSelectedBuy().getStock(), Math.min(ContainerShop.buyCount, Math.min(this.getSelectedBuy().getItemStack().getMaxStackSize(),
 									this.shopInstance.getCurrencyType().getValue(this.playerAether) / ShopUtil
 											.getFilteredPrice(this.shopInstance, this.getSelectedBuy()))));
 
@@ -766,12 +767,6 @@ public class GuiShop extends GuiViewer implements ICurrencyListener, IExtendedGu
 				this.addBuyCount(scroll);
 			}
 		}
-	}
-
-	@Override
-	public List<String> getHoveredDescription()
-	{
-		return this.hoverDescription;
 	}
 
 	@Override

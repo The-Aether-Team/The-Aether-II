@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client.gui.util;
 
-import com.gildedgames.aether.client.gui.IExtendedGui;
+import com.gildedgames.aether.client.gui.container.IExtendedContainer;
 import com.gildedgames.orbis.lib.client.gui.util.gui_library.GuiElement;
 import com.gildedgames.orbis.lib.client.rect.Rect;
 import com.gildedgames.orbis.lib.util.InputHelper;
@@ -92,9 +92,9 @@ public class GuiItemStack extends GuiElement
 		{
 			GuiScreen gui = Minecraft.getMinecraft().currentScreen;
 
-			if (gui instanceof IExtendedGui)
+			if (gui instanceof IExtendedContainer)
 			{
-				IExtendedGui extendedGui = (IExtendedGui) gui;
+				IExtendedContainer extendedGui = (IExtendedContainer) gui;
 				extendedGui.setHoveredDescription(this.stack, this.stack.getTooltip(Minecraft.getMinecraft().player,
 						Minecraft.getMinecraft().gameSettings.advancedItemTooltips ?
 								ITooltipFlag.TooltipFlags.ADVANCED :

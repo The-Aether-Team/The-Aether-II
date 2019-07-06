@@ -103,6 +103,5 @@ public class AetherRenderers
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMasonryBench.class, new TileEntityMasonryBenchRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityOutpostCampfire.class, new TileEntityOutpostCampfireRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTeleporter.class, new TileEntityTeleporterRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySkyrootBed.class, new TileEntityNOOPRenderer<>());
 	}
 }

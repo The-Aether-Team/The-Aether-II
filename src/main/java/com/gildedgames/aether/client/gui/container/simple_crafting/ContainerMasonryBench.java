@@ -3,10 +3,8 @@ package com.gildedgames.aether.client.gui.container.simple_crafting;
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.recipes.simple.ISimpleRecipe;
 import com.gildedgames.aether.api.recipes.simple.ISimpleRecipeGroup;
-import com.gildedgames.aether.client.gui.GuiUtils;
-import com.gildedgames.aether.client.gui.IExtendedGui;
+import com.gildedgames.aether.client.gui.container.IExtendedContainer;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.containers.tiles.ContainerMasonryBench;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketMasonryRecipeChanged;
 import com.gildedgames.aether.common.recipes.simple.OreDictionaryRequirement;
@@ -28,6 +26,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.client.config.GuiUtils;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
@@ -40,7 +39,7 @@ import java.util.Collections;
 import java.util.List;
 
 @SideOnly(Side.CLIENT)
-public class GuiMasonryBench extends GuiContainer implements IExtendedGui
+public class ContainerMasonryBench extends GuiContainer implements IExtendedContainer
 {
 
 	private static final ResourceLocation MASONRY_BENCH = AetherCore.getResource("textures/gui/inventory/masonry_bench.png");
@@ -87,16 +86,16 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 
 	private GuiCounterButton up, down;
 
-	private final ContainerMasonryBench container;
+	private final com.gildedgames.aether.common.containers.tiles.ContainerMasonryBench container;
 
-	public GuiMasonryBench(EntityPlayer player, BlockPos blockPosition)
+	public ContainerMasonryBench(EntityPlayer player, BlockPos blockPosition)
 	{
-		super(new ContainerMasonryBench(player, blockPosition));
+		super(new com.gildedgames.aether.common.containers.tiles.ContainerMasonryBench(player, blockPosition));
 
 		this.playerInventory = player.inventory;
 		this.allowUserInput = true;
 
-		this.container = (ContainerMasonryBench) this.inventorySlots;
+		this.container = (com.gildedgames.aether.common.containers.tiles.ContainerMasonryBench) this.inventorySlots;
 	}
 
 	@Override
@@ -185,7 +184,7 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 
 				this.currentRecipe = option.getRecipe();
 
-				ContainerMasonryBench container = (ContainerMasonryBench) this.inventorySlots;
+				com.gildedgames.aether.common.containers.tiles.ContainerMasonryBench container = (com.gildedgames.aether.common.containers.tiles.ContainerMasonryBench) this.inventorySlots;
 
 				container.onNewRecipe(this.currentRecipe);
 
@@ -418,13 +417,15 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 		{
 			if (this.hoveredStack != null)
 			{
-				net.minecraftforge.fml.client.config.GuiUtils.preItemToolTip(this.hoveredStack);
-				GuiUtils.drawHoveringText(this.hoverDescription, mouseX, mouseY, Minecraft.getMinecraft().fontRenderer);
-				net.minecraftforge.fml.client.config.GuiUtils.postItemToolTip();
+				GuiUtils.preItemToolTip(this.hoveredStack);
+				GuiUtils.drawHoveringText(this.hoverDescription, mouseX, mouseY, width, height, -1,
+						Minecraft.getMinecraft().fontRenderer);
+				GuiUtils.postItemToolTip();
 			}
 			else
 			{
-				GuiUtils.drawHoveringText(this.hoverDescription, mouseX, mouseY, Minecraft.getMinecraft().fontRenderer);
+				GuiUtils.drawHoveringText(this.hoverDescription, mouseX, mouseY, width, height, -1,
+						Minecraft.getMinecraft().fontRenderer);
 			}
 		}
 
@@ -557,12 +558,6 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedGui
 				this.scrollTo(this.currentScroll);
 			}
 		}
-	}
-
-	@Override
-	public List<String> getHoveredDescription()
-	{
-		return this.hoverDescription;
 	}
 
 	@Override

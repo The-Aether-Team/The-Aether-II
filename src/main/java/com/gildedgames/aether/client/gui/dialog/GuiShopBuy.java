@@ -3,7 +3,7 @@ package com.gildedgames.aether.client.gui.dialog;
 import com.gildedgames.aether.api.shop.IShopBuy;
 import com.gildedgames.aether.api.shop.IShopInstance;
 import com.gildedgames.aether.api.shop.ShopUtil;
-import com.gildedgames.aether.client.gui.IExtendedGui;
+import com.gildedgames.aether.client.gui.container.IExtendedContainer;
 import com.gildedgames.aether.client.gui.util.ToolTipCurrencyHelper;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
@@ -114,11 +114,11 @@ public class GuiShopBuy extends GuiElement
 				{
 					GuiScreen gui = Minecraft.getMinecraft().currentScreen;
 
-					if (gui instanceof IExtendedGui)
+					if (gui instanceof IExtendedContainer)
 					{
 						ItemStack stack = GuiShopBuy.this.getShopBuy().getItemStack();
 
-						IExtendedGui extendedGui = (IExtendedGui) gui;
+						IExtendedContainer extendedGui = (IExtendedContainer) gui;
 						extendedGui.setHoveredDescription(stack, stack.getTooltip(Minecraft.getMinecraft().player,
 								Minecraft.getMinecraft().gameSettings.advancedItemTooltips ?
 										ITooltipFlag.TooltipFlags.ADVANCED :

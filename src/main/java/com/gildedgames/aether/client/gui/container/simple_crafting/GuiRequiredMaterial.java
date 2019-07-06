@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client.gui.container.simple_crafting;
 
-import com.gildedgames.aether.client.gui.IExtendedGui;
+import com.gildedgames.aether.client.gui.container.IExtendedContainer;
 import com.gildedgames.aether.common.recipes.simple.OreDictionaryRequirement;
 import com.gildedgames.aether.common.util.helpers.RecipeUtil;
 import net.minecraft.client.Minecraft;
@@ -104,9 +104,9 @@ public class GuiRequiredMaterial extends GuiButton
 			{
 				GuiScreen gui = Minecraft.getMinecraft().currentScreen;
 
-				if (gui instanceof IExtendedGui)
+				if (gui instanceof IExtendedContainer)
 				{
-					IExtendedGui extendedGui = (IExtendedGui) gui;
+					IExtendedContainer extendedGui = (IExtendedContainer) gui;
 					extendedGui.setHoveredDescription(this.displayStack, this.displayStack.getTooltip(Minecraft.getMinecraft().player,
 							Minecraft.getMinecraft().gameSettings.advancedItemTooltips ?
 									ITooltipFlag.TooltipFlags.ADVANCED :
