@@ -45,16 +45,6 @@ public class PlayerTradeModule extends PlayerAetherModule
 	@Override
 	public void tickStart(TickEvent.PlayerTickEvent event)
 	{
-	}
-
-	@Override
-	public void tickEnd(TickEvent.PlayerTickEvent event)
-	{
-	}
-
-	@Override
-	public void onUpdate()
-	{
 		if (this.requestedTime > 0)
 		{
 			this.requestedTime--;
@@ -72,6 +62,11 @@ public class PlayerTradeModule extends PlayerAetherModule
 		{
 			this.failTime--;
 		}
+	}
+
+	@Override
+	public void tickEnd(TickEvent.PlayerTickEvent event)
+	{
 	}
 
 	@Override

@@ -70,12 +70,6 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 
 	}
 
-	@Override
-	public void onUpdate()
-	{
-
-	}
-
 	protected void updateListeners()
 	{
 		for (final IDialogChangeListener listener : this.listeners)

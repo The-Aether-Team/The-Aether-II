@@ -41,8 +41,6 @@ public abstract class PlayerAetherModule implements NBT
 
 	public abstract void tickEnd(TickEvent.PlayerTickEvent event);
 
-	public abstract void onUpdate();
-
 	public final PlayerAether getPlayer()
 	{
 		return this.playerAether;

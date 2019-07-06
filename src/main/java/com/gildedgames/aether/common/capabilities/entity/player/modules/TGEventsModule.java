@@ -37,12 +37,6 @@ public class TGEventsModule extends PlayerAetherModule
 
 	}
 
-	@Override
-	public void onUpdate()
-	{
-
-	}
-
 	/**
 	 * Add an event into list of achieved events; handles duplicate events.
 	 *

@@ -37,12 +37,6 @@ public class PlayerConfigModule extends PlayerAetherModule
 	}
 
 	@Override
-	public void onUpdate()
-	{
-
-	}
-
-	@Override
 	public void write(final NBTTagCompound compound)
 	{
 

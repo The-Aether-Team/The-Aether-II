@@ -116,12 +116,6 @@ public class PlayerProgressModule extends PlayerAetherModule
 	}
 
 	@Override
-	public void onUpdate()
-	{
-
-	}
-
-	@Override
 	public void write(NBTTagCompound tag)
 	{
 		NBTFunnel funnel = new NBTFunnel(tag);

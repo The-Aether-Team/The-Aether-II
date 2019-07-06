@@ -79,12 +79,6 @@ public class PlayerPatronRewards extends PlayerAetherModule
 	}
 
 	@Override
-	public void onUpdate()
-	{
-
-	}
-
-	@Override
 	public void write(NBTTagCompound nbtTagCompound)
 	{
 

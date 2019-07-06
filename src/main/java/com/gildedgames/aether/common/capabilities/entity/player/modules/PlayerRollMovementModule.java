@@ -116,33 +116,6 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 	@Override
 	public void tickStart(TickEvent.PlayerTickEvent event)
 	{
-
-	}
-
-	@Override
-	public void tickEnd(TickEvent.PlayerTickEvent event)
-	{
-		if (this.isRolling)
-		{
-			if (this.ticksRolling <= MAX_ROLLING_TICKS)
-			{
-				float newHeight = MathHelper
-						.clamp(this.prevHeight / 4F + this.prevHeight * (Math.abs(this.ticksRolling / (float) (MAX_ROLLING_TICKS) - 0.5F)),
-								this.prevHeight / 2F, this.prevHeight);
-
-				this.setEntityHeight(newHeight);
-			}
-			else
-			{
-				this.setEntityHeight(this.prevHeight);
-				this.getEntity().eyeHeight = this.prevEyeHeight;
-			}
-		}
-	}
-
-	@Override
-	public void onUpdate()
-	{
 		if (this.isRolling)
 		{
 			if (this.ticksRolling <= MAX_ROLLING_TICKS)
@@ -185,6 +158,27 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 		else if (this.rollCooldown > 0)
 		{
 			this.rollCooldown--;
+		}
+	}
+
+	@Override
+	public void tickEnd(TickEvent.PlayerTickEvent event)
+	{
+		if (this.isRolling)
+		{
+			if (this.ticksRolling <= MAX_ROLLING_TICKS)
+			{
+				float newHeight = MathHelper
+						.clamp(this.prevHeight / 4F + this.prevHeight * (Math.abs(this.ticksRolling / (float) (MAX_ROLLING_TICKS) - 0.5F)),
+								this.prevHeight / 2F, this.prevHeight);
+
+				this.setEntityHeight(newHeight);
+			}
+			else
+			{
+				this.setEntityHeight(this.prevHeight);
+				this.getEntity().eyeHeight = this.prevEyeHeight;
+			}
 		}
 	}
 

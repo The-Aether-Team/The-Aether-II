@@ -80,18 +80,6 @@ public class PlayerSwetTracker extends PlayerAetherModule
 	@Override
 	public void tickStart(TickEvent.PlayerTickEvent event)
 	{
-
-	}
-
-	@Override
-	public void tickEnd(TickEvent.PlayerTickEvent event)
-	{
-
-	}
-
-	@Override
-	public void onUpdate()
-	{
 		final EntityPlayer player = this.getEntity();
 
 		if (player.isInWater())
@@ -111,6 +99,12 @@ public class PlayerSwetTracker extends PlayerAetherModule
 				this.spawnSwet(swet);
 			}
 		}
+	}
+
+	@Override
+	public void tickEnd(TickEvent.PlayerTickEvent event)
+	{
+
 	}
 
 	@Override

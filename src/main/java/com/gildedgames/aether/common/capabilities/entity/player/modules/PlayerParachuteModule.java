@@ -32,18 +32,6 @@ public class PlayerParachuteModule extends PlayerAetherModule
 	@Override
 	public void tickStart(TickEvent.PlayerTickEvent event)
 	{
-
-	}
-
-	@Override
-	public void tickEnd(TickEvent.PlayerTickEvent event)
-	{
-
-	}
-
-	@Override
-	public void onUpdate()
-	{
 		if (this.isParachuting)
 		{
 			final int x = MathHelper.floor(this.getEntity().posX);
@@ -77,6 +65,12 @@ public class PlayerParachuteModule extends PlayerAetherModule
 				this.setParachuting(false, this.type);
 			}
 		}
+	}
+
+	@Override
+	public void tickEnd(TickEvent.PlayerTickEvent event)
+	{
+
 	}
 
 	public void setParachuting(final boolean isParachuting, final EntityParachute.Type type)

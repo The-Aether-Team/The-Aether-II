@@ -3,7 +3,10 @@ package com.gildedgames.aether.common.capabilities.entity.player.modules;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
-import com.gildedgames.aether.common.entities.living.mobs.*;
+import com.gildedgames.aether.common.entities.living.mobs.EntityCockatrice;
+import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
+import com.gildedgames.aether.common.entities.living.mobs.EntityTempest;
+import com.gildedgames.aether.common.entities.living.mobs.EntityVaranys;
 import com.gildedgames.aether.common.registry.content.BiomesAether;
 import com.gildedgames.aether.common.util.helpers.AetherHelper;
 import com.gildedgames.aether.common.world.spawning.SpawnHandler;
@@ -158,11 +161,6 @@ public class CaveSpawnModule extends PlayerAetherModule
 			this.timer = (this.timerMax * yTranslation);
 			this.hasSpawned = false;
 		}
-	}
-
-	@Override
-	public void onUpdate()
-	{
 	}
 
 	@Override

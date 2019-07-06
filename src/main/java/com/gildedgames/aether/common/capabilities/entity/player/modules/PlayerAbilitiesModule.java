@@ -35,18 +35,6 @@ public class PlayerAbilitiesModule extends PlayerAetherModule
 	@Override
 	public void tickStart(TickEvent.PlayerTickEvent event)
 	{
-
-	}
-
-	@Override
-	public void tickEnd(TickEvent.PlayerTickEvent event)
-	{
-
-	}
-
-	@Override
-	public void onUpdate()
-	{
 		if (this.getEntity().onGround)
 		{
 			this.jumpsSoFar = 0;
@@ -56,6 +44,12 @@ public class PlayerAbilitiesModule extends PlayerAetherModule
 		{
 			this.ticksAirborne++;
 		}
+	}
+
+	@Override
+	public void tickEnd(TickEvent.PlayerTickEvent event)
+	{
+
 	}
 
 	public void onFall(LivingFallEvent event)

@@ -71,12 +71,6 @@ public class PlayerHungerDisableModule extends PlayerAetherModule
 	}
 
 	@Override
-	public void onUpdate()
-	{
-
-	}
-
-	@Override
 	public void write(NBTTagCompound nbtTagCompound)
 	{
 

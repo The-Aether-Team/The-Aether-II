@@ -134,12 +134,6 @@ public class PlayerCurrencyModule extends PlayerAetherModule implements ICurrenc
 	}
 
 	@Override
-	public void onUpdate()
-	{
-
-	}
-
-	@Override
 	public void write(NBTTagCompound tag)
 	{
 		tag.setLong("currencyValue", this.currencyValue);

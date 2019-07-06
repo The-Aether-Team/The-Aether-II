@@ -10,7 +10,6 @@ import com.gildedgames.aether.common.network.packets.*;
 import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstance;
 import com.gildedgames.orbis.lib.util.io.NBTFunnel;
 import com.gildedgames.orbis.lib.util.mc.NBTHelper;
-import com.google.common.collect.Lists;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -36,7 +35,6 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 public class PlayerAether implements IPlayerAether
 {
@@ -79,8 +77,6 @@ public class PlayerAether implements IPlayerAether
 	private final CaveSpawnModule caveSpawnModule;
 
 	private final TGEventsModule tgEventsModule;
-
-	private final List<PlayerAetherObserver> observers = Lists.newArrayList();
 
 	private NecromancerTowerInstance towerInstance;
 
@@ -229,16 +225,6 @@ public class PlayerAether implements IPlayerAether
 		if (this.ticksWithEggnogEffect > 0)
 		{
 			this.ticksWithEggnogEffect--;
-		}
-
-		for (final PlayerAetherModule module : this.modules)
-		{
-			module.onUpdate();
-		}
-
-		for (final PlayerAetherObserver observer : this.observers)
-		{
-			observer.onUpdate(this);
 		}
 	}
 
@@ -470,21 +456,6 @@ public class PlayerAether implements IPlayerAether
 	public TGEventsModule getTGEventsModule()
 	{
 		return this.tgEventsModule;
-	}
-
-	public boolean containsObserver(final PlayerAetherObserver observer)
-	{
-		return this.observers.contains(observer);
-	}
-
-	public void addObserver(final PlayerAetherObserver observer)
-	{
-		this.observers.add(observer);
-	}
-
-	public boolean removeObserver(final PlayerAetherObserver observer)
-	{
-		return this.observers.remove(observer);
 	}
 
 	public static class Storage implements IStorage<IPlayerAether>

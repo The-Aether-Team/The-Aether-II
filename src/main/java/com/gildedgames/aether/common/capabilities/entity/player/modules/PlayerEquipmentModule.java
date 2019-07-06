@@ -54,36 +54,6 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 	@Override
 	public void tickStart(TickEvent.PlayerTickEvent event)
 	{
-
-	}
-
-	@Override
-	public void tickEnd(TickEvent.PlayerTickEvent event)
-	{
-
-	}
-
-	@Override
-	public void write(NBTTagCompound compound)
-	{
-		NBTTagCompound equipment = new NBTTagCompound();
-		compound.setTag("EquipmentInventory", equipment);
-
-		this.stagingInv.write(equipment);
-	}
-
-	@Override
-	public void read(NBTTagCompound compound)
-	{
-		if (compound.hasKey("EquipmentInventory"))
-		{
-			this.stagingInv.read(compound.getCompoundTag("EquipmentInventory"));
-		}
-	}
-
-	@Override
-	public void onUpdate()
-	{
 		if (!ItemStack.areItemStacksEqual(this.lastHeldStack, this.getEntity().getHeldItemMainhand()))
 		{
 			int mainHandIndex = this.getEntity().inventory.currentItem;
@@ -138,6 +108,30 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 
 		this.lastHeldStack = this.getEntity().getHeldItemMainhand();
 		this.lastHeldStackIndex = this.getEntity().inventory.currentItem;
+	}
+
+	@Override
+	public void tickEnd(TickEvent.PlayerTickEvent event)
+	{
+
+	}
+
+	@Override
+	public void write(NBTTagCompound compound)
+	{
+		NBTTagCompound equipment = new NBTTagCompound();
+		compound.setTag("EquipmentInventory", equipment);
+
+		this.stagingInv.write(equipment);
+	}
+
+	@Override
+	public void read(NBTTagCompound compound)
+	{
+		if (compound.hasKey("EquipmentInventory"))
+		{
+			this.stagingInv.read(compound.getCompoundTag("EquipmentInventory"));
+		}
 	}
 
 	/**

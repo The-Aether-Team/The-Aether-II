@@ -103,12 +103,6 @@ public class PlayerCampfiresModule extends PlayerAetherModule
 	}
 
 	@Override
-	public void onUpdate()
-	{
-
-	}
-
-	@Override
 	public void write(final NBTTagCompound compound)
 	{
 		NBTFunnel funnel = new NBTFunnel(compound);

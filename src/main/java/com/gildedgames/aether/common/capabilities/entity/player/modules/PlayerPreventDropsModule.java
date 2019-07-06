@@ -117,12 +117,6 @@ public class PlayerPreventDropsModule extends PlayerAetherModule
 	}
 
 	@Override
-	public void onUpdate()
-	{
-
-	}
-
-	@Override
 	public void write(NBTTagCompound nbtTagCompound)
 	{
 		NBTFunnel funnel = new NBTFunnel(nbtTagCompound);

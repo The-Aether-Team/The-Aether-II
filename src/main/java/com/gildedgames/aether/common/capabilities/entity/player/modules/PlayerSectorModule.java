@@ -30,18 +30,6 @@ public class PlayerSectorModule extends PlayerAetherModule
 	@Override
 	public void tickStart(TickEvent.PlayerTickEvent event)
 	{
-
-	}
-
-	@Override
-	public void tickEnd(TickEvent.PlayerTickEvent event)
-	{
-
-	}
-
-	@Override
-	public void onUpdate()
-	{
 		if (this.getWorld().isRemote)
 		{
 			return;
@@ -49,6 +37,12 @@ public class PlayerSectorModule extends PlayerAetherModule
 
 		this.update();
 		this.processNext();
+	}
+
+	@Override
+	public void tickEnd(TickEvent.PlayerTickEvent event)
+	{
+
 	}
 
 	private void update()

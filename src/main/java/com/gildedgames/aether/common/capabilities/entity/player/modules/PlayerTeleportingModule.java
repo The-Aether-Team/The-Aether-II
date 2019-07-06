@@ -118,12 +118,6 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 	@Override
 	public void tickEnd(TickEvent.PlayerTickEvent event)
 	{
-
-	}
-
-	@Override
-	public void onUpdate()
-	{
 		if (this.getWorld().isRemote)
 		{
 			this.onUpdateClient();
@@ -198,6 +192,7 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 		{
 			--this.getEntity().timeUntilPortal;
 		}
+
 	}
 
 	public void processTeleporting()
