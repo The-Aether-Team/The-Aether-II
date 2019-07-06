@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.capabilities;
 
+import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffectPool;
 import com.gildedgames.aether.api.entity.spawning.ISpawningInfo;
@@ -8,7 +9,6 @@ import com.gildedgames.aether.api.world.ISpawnSystem;
 import com.gildedgames.aether.api.world.islands.precipitation.IPrecipitationManager;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.effects.StatusEffectPool;
-import com.gildedgames.aether.common.capabilities.entity.effects.StatusEffectPoolProvider;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherProvider;
 import com.gildedgames.aether.common.capabilities.entity.spawning.EntitySpawningInfo;
@@ -18,7 +18,6 @@ import com.gildedgames.aether.common.capabilities.world.chunk.PlacementFlagProvi
 import com.gildedgames.aether.common.capabilities.world.precipitation.PrecipitationManagerImpl;
 import com.gildedgames.aether.common.world.spawning.SpawnSystem;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.capabilities.CapabilityManager;
@@ -38,6 +37,8 @@ public class CapabilityManagerAether
 		CapabilityManager.INSTANCE.register(IPlacementFlagCapability.class, new PlacementFlagCapability.Storage(), PlacementFlagCapability::new);
 		CapabilityManager.INSTANCE.register(IPrecipitationManager.class, new PrecipitationManagerImpl.Storage(), PrecipitationManagerImpl::new);
 		CapabilityManager.INSTANCE.register(IAetherStatusEffectPool.class, new StatusEffectPool.Storage(), StatusEffectPool::new);
+
+		AetherCapabilities.validateInjections();
 	}
 
 	@SubscribeEvent
