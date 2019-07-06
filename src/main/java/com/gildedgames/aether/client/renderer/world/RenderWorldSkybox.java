@@ -2,6 +2,7 @@ package com.gildedgames.aether.client.renderer.world;
 
 import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.world.islands.precipitation.IPrecipitationManager;
+import com.gildedgames.aether.client.renderer.textures.SimpleDXT1Texture;
 import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
@@ -21,6 +22,8 @@ public class RenderWorldSkybox extends IRenderHandler
 
 	private static final ResourceLocation TEXTURE_SKYBOX = AetherCore.getResource("textures/environment/skybox/skybox_clouds.png");
 
+	private SimpleDXT1Texture texture;
+
 	private long prevUpdateTimeMillis, nowUpdateTimeMillis;
 
 	private float skyDarkness;
@@ -31,6 +34,11 @@ public class RenderWorldSkybox extends IRenderHandler
 		if (!AetherCore.CONFIG.isSkyboxRenderEnabled())
 		{
 			return;
+		}
+
+		if (this.texture == null)
+		{
+			mc.getTextureManager().loadTexture(TEXTURE_SKYBOX, this.texture = new SimpleDXT1Texture(TEXTURE_SKYBOX));
 		}
 
 		this.prevUpdateTimeMillis = this.nowUpdateTimeMillis;
@@ -74,34 +82,34 @@ public class RenderWorldSkybox extends IRenderHandler
 
 		builder.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_LMAP_COLOR);
 
-		builder.pos(-0.5f * f, -0.5f * f, 0.5f * f).tex(0.5f, 0.75f).lightmap(h, k).color(b, b, b, a).endVertex();
+		builder.pos(-0.5f * f, -0.5f * f, 0.5f * f).tex(0.5f, 1.0f).lightmap(h, k).color(b, b, b, a).endVertex();
 		builder.pos(0.5f * f, -0.5f * f, 0.5f * f).tex(0.5f, 0.5f).lightmap(h, k).color(b, b, b, a).endVertex();
 		builder.pos(0.5f * f, -0.5f * f, -0.5f * f).tex(0.25f, 0.5f).lightmap(h, k).color(b, b, b, a).endVertex();
-		builder.pos(-0.5f * f, -0.5f * f, -0.5f * f).tex(0.25f, 0.75f).lightmap(h, k).color(b, b, b, a).endVertex();
+		builder.pos(-0.5f * f, -0.5f * f, -0.5f * f).tex(0.25f, 1.0f).lightmap(h, k).color(b, b, b, a).endVertex();
 
-		builder.pos(0.5f * f, 0.5f * f, 0.5f * f).tex(0.5f, 0.25f).lightmap(h, k).color(b, b, b, a).endVertex();
+		builder.pos(0.5f * f, 0.5f * f, 0.5f * f).tex(0.5f, 0.0f).lightmap(h, k).color(b, b, b, a).endVertex();
 		builder.pos(-0.5f * f, 0.5f * f, 0.5f * f).tex(0.5f, 0.0f).lightmap(h, k).color(b, b, b, a).endVertex();
 		builder.pos(-0.5f * f, 0.5f * f, -0.5f * f).tex(0.25f, 0.0f).lightmap(h, k).color(b, b, b, a).endVertex();
-		builder.pos(0.5f * f, 0.5f * f, -0.5f * f).tex(0.25f, 0.25f).lightmap(h, k).color(b, b, b, a).endVertex();
+		builder.pos(0.5f * f, 0.5f * f, -0.5f * f).tex(0.25f, 0.0f).lightmap(h, k).color(b, b, b, a).endVertex();
 
 		builder.pos(0.5f * f, -0.5f * f, -0.5f * f).tex(0.25f, 0.50f).lightmap(h, k).color(b, b, b, a).endVertex();
-		builder.pos(0.5f * f, 0.5f * f, -0.5f * f).tex(0.25f, 0.25f).lightmap(h, k).color(b, b, b, a).endVertex();
-		builder.pos(-0.5f * f, 0.5f * f, -0.5f * f).tex(0.0f, 0.25f).lightmap(h, k).color(b, b, b, a).endVertex();
+		builder.pos(0.5f * f, 0.5f * f, -0.5f * f).tex(0.25f, 0.0f).lightmap(h, k).color(b, b, b, a).endVertex();
+		builder.pos(-0.5f * f, 0.5f * f, -0.5f * f).tex(0.0f, 0.0f).lightmap(h, k).color(b, b, b, a).endVertex();
 		builder.pos(-0.5f * f, -0.5f * f, -0.5f * f).tex(0.0f, 0.50f).lightmap(h, k).color(b, b, b, a).endVertex();
 
 		builder.pos(-0.5f * f, -0.5f * f, 0.5f * f).tex(0.75f, 0.50f).lightmap(h, k).color(b, b, b, a).endVertex();
-		builder.pos(-0.5f * f, 0.5f * f, 0.5f * f).tex(0.75f, 0.25f).lightmap(h, k).color(b, b, b, a).endVertex();
-		builder.pos(0.5f * f, 0.5f * f, 0.5f * f).tex(0.5f, 0.25f).lightmap(h, k).color(b, b, b, a).endVertex();
+		builder.pos(-0.5f * f, 0.5f * f, 0.5f * f).tex(0.75f, 0.0f).lightmap(h, k).color(b, b, b, a).endVertex();
+		builder.pos(0.5f * f, 0.5f * f, 0.5f * f).tex(0.5f, 0.0f).lightmap(h, k).color(b, b, b, a).endVertex();
 		builder.pos(0.5f * f, -0.5f * f, 0.5f * f).tex(0.5f, 0.50f).lightmap(h, k).color(b, b, b, a).endVertex();
 
 		builder.pos(-0.5f * f, -0.5f * f, -0.5f * f).tex(1.0f, 0.50f).lightmap(h, k).color(b, b, b, a).endVertex();
-		builder.pos(-0.5f * f, 0.5f * f, -0.5f * f).tex(1.0f, 0.25f).lightmap(h, k).color(b, b, b, a).endVertex();
-		builder.pos(-0.5f * f, 0.5f * f, 0.5f * f).tex(0.75f, 0.25f).lightmap(h, k).color(b, b, b, a).endVertex();
+		builder.pos(-0.5f * f, 0.5f * f, -0.5f * f).tex(1.0f, 0.0f).lightmap(h, k).color(b, b, b, a).endVertex();
+		builder.pos(-0.5f * f, 0.5f * f, 0.5f * f).tex(0.75f, 0.0f).lightmap(h, k).color(b, b, b, a).endVertex();
 		builder.pos(-0.5f * f, -0.5f * f, 0.5f * f).tex(0.75f, 0.50f).lightmap(h, k).color(b, b, b, a).endVertex();
 
 		builder.pos(0.5f * f, -0.5f * f, 0.5f * f).tex(0.5f, 0.5f).lightmap(h, k).color(b, b, b, a).endVertex();
-		builder.pos(0.5f * f, 0.5f * f, 0.5f * f).tex(0.5f, 0.25f).lightmap(h, k).color(b, b, b, a).endVertex();
-		builder.pos(0.5f * f, 0.5f * f, -0.5f * f).tex(0.25f, 0.25f).lightmap(h, k).color(b, b, b, a).endVertex();
+		builder.pos(0.5f * f, 0.5f * f, 0.5f * f).tex(0.5f, 0.0f).lightmap(h, k).color(b, b, b, a).endVertex();
+		builder.pos(0.5f * f, 0.5f * f, -0.5f * f).tex(0.25f, 0.0f).lightmap(h, k).color(b, b, b, a).endVertex();
 		builder.pos(0.5f * f, -0.5f * f, -0.5f * f).tex(0.25f, 0.5f).lightmap(h, k).color(b, b, b, a).endVertex();
 
 		tessellator.draw();
