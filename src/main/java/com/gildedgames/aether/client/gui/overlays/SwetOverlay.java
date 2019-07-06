@@ -96,13 +96,11 @@ public class SwetOverlay implements IOverlay
 		GlStateManager.disableAlpha();
 
 		GlStateManager.depthMask(true);
-		GlStateManager.disableLighting();
 
 		final double width = 64;
 		final double height = 64;
 
 		GlStateManager.translate(x, y, 0);
-
 		GlStateManager.translate(0, -((height * scale) - height), 0);
 
 		GlStateManager.scale(scale, scale, 0);
@@ -113,7 +111,6 @@ public class SwetOverlay implements IOverlay
 
 		Gui.drawModalRectWithCustomSizedTexture(0, 0, 0, 0, 64, 64, 64, 64);
 
-		GlStateManager.enableLighting();
 		GlStateManager.disableBlend();
 		GlStateManager.enableAlpha();
 
