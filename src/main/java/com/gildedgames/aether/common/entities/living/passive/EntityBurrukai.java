@@ -148,7 +148,6 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(15.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
-		this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(8.0);
 		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
 
 		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(8);
@@ -293,5 +292,11 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 	public IEntityEyesComponent getEyes()
 	{
 		return this.eyes;
+	}
+
+	@Override
+	public void knockBack(Entity entityIn, float strength, double xRatio, double zRatio)
+	{
+		super.knockBack(entityIn, strength * 0.2f, xRatio, zRatio);
 	}
 }
