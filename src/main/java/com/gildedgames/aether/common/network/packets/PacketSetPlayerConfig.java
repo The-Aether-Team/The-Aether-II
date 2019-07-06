@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.network.packets;
 
 import com.gildedgames.aether.common.ConfigAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerConfigModule;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
@@ -45,8 +46,7 @@ public class PacketSetPlayerConfig implements IMessage
 			}
 
 			PlayerAether playerAether = PlayerAether.getPlayer(player);
-
-			playerAether.getConfigModule().setSkipIntro(message.skipIntro);
+			playerAether.getModule(PlayerConfigModule.class).setSkipIntro(message.skipIntro);
 
 			return null;
 		}

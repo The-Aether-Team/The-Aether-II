@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.network.packets;
 
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerSwetTrackerModule;
 import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
@@ -56,7 +57,7 @@ public class PacketLatchSwet implements IMessage
 			swet.setPosition(player.posX, player.posY, player.posZ);
 			swet.setType(message.type);
 
-			playerAether.getSwetTracker().latchSwet(swet);
+			playerAether.getModule(PlayerSwetTrackerModule.class).latchSwet(swet);
 
 			return null;
 		}

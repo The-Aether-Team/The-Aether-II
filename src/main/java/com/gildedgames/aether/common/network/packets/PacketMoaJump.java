@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.network.packets;
 
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerAbilitiesModule;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,8 +40,7 @@ public class PacketMoaJump implements IMessage
 		public PacketMoaJump onMessage(final PacketMoaJump message, final EntityPlayer player)
 		{
 			final PlayerAether playerAether = PlayerAether.getPlayer(player);
-
-			playerAether.getAbilitiesModule().setMidAirJumpsAllowed(message.midAirJumpsAllowed);
+			playerAether.getModule(PlayerAbilitiesModule.class).setMidAirJumpsAllowed(message.midAirJumpsAllowed);
 
 			return null;
 		}

@@ -35,12 +35,8 @@ public class PacketAdvance implements IMessage
 		{
 			final IPlayerAether aePlayer = PlayerAether.getPlayer(player);
 
-			if (aePlayer.getDialogController() instanceof PlayerDialogModule)
-			{
-				PlayerDialogModule module = (PlayerDialogModule) aePlayer.getDialogController();
-
-				module.advanceClient();
-			}
+			final PlayerDialogModule dialogModule = aePlayer.getModule(PlayerDialogModule.class);
+			dialogModule.advanceClient();
 
 			return null;
 		}
@@ -53,7 +49,8 @@ public class PacketAdvance implements IMessage
 		{
 			final IPlayerAether aePlayer = PlayerAether.getPlayer(player);
 
-			aePlayer.getDialogController().advance();
+			final PlayerDialogModule dialogModule = aePlayer.getModule(PlayerDialogModule.class);
+			dialogModule.advance();
 
 			return null;
 		}

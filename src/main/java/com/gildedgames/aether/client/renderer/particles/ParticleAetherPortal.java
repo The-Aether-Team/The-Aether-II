@@ -13,6 +13,6 @@ public class ParticleAetherPortal extends ParticlePortal
 
 		this.particleRed = this.particleGreen = this.particleBlue = 1.0F * colorMultiplier;
 		this.particleRed *= 0.2F;
-		this.particleGreen *= 0.2F;
+		this.particleGreen *= 0.4F;
 	}
 }

@@ -4,7 +4,7 @@ import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.patron.IPatronReward;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
-import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerPatronRewards;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerPatronRewardModule;
 import com.gildedgames.aether.common.patron.PatronChoices;
 import com.gildedgames.aether.common.patron.PatronRewards;
 import com.gildedgames.aether.common.patron.armor.PatronRewardArmor;
@@ -59,7 +59,7 @@ public class GuiPatronRewards extends GuiViewer implements IListNavigatorListene
 
 	private GuiText useText;
 
-	private final PlayerPatronRewards patronRewards;
+	private final PlayerPatronRewardModule patronRewards;
 
 	private final Text useString = new Text(new TextComponentTranslation("gui.aether.patreon.rewards.button.use"), 1.0F);
 
@@ -71,7 +71,7 @@ public class GuiPatronRewards extends GuiViewer implements IListNavigatorListene
 
 		PlayerAether playerAether = PlayerAether.getPlayer(Minecraft.getMinecraft().player);
 
-		this.patronRewards = playerAether.getPatronRewardsModule();
+		this.patronRewards = playerAether.getModule(PlayerPatronRewardModule.class);
 
 		this.allowUserInput = true;
 	}

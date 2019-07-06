@@ -53,8 +53,7 @@ public class PacketCurrencyModule implements IMessage
 			}
 
 			final PlayerAether playerAether = PlayerAether.getPlayer(player);
-
-			playerAether.getCurrencyModule().read(message.tag);
+			playerAether.getModule(PlayerCurrencyModule.class).read(message.tag);
 
 			return null;
 		}

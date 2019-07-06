@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.network.packets;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerDialogModule;
 import com.gildedgames.aether.common.containers.ContainerShop;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
@@ -44,7 +45,9 @@ public class PacketShopBack implements IMessage
 			{
 				PlayerAether playerAether = PlayerAether.getPlayer(player);
 
-				playerAether.getDialogController().navigateNode(playerAether.getDialogController().getCurrentScene().getStartingNode().getIdentifier());
+				PlayerDialogModule dialogModule = playerAether.getModule(PlayerDialogModule.class);
+				dialogModule.navigateNode(dialogModule.getCurrentScene().getStartingNode().getIdentifier());
+
 				BlockPos pos = player.getPosition();
 
 				player.openGui(AetherCore.MOD_ID, AetherGuiHandler.DIALOG_VIEWER_ID, player.world, pos.getX(), pos.getY(), pos.getZ());

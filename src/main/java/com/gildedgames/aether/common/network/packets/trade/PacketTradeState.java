@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.network.packets.trade;
 
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerCurrencyModule;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTradeModule;
 import com.gildedgames.aether.common.containers.ContainerTrade;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
@@ -47,7 +48,7 @@ public class PacketTradeState implements IMessage
 
 			if (aePlayer != null)
 			{
-				PlayerTradeModule tradeModule = aePlayer.getTradingModule();
+				PlayerTradeModule tradeModule = aePlayer.getModule(PlayerTradeModule.class);
 
 				if (message.state == -1)
 				{
@@ -70,8 +71,8 @@ public class PacketTradeState implements IMessage
 
 			if (aePlayer != null)
 			{
-				PlayerTradeModule tradeModule = aePlayer.getTradingModule();
-				PlayerTradeModule targetTrade = tradeModule.getTarget().getTradingModule();
+				PlayerTradeModule tradeModule = aePlayer.getModule(PlayerTradeModule.class);
+				PlayerTradeModule targetTrade = tradeModule.getTarget().getModule(PlayerTradeModule.class);
 
 				if (tradeModule.isTrading())
 				{
@@ -109,8 +110,8 @@ public class PacketTradeState implements IMessage
 								ContainerTrade hostContainer = (ContainerTrade) tradeModule.getEntity().openContainer;
 								ContainerTrade otherContainer = (ContainerTrade) targetTrade.getEntity().openContainer;
 
-								aePlayer.getCurrencyModule().add((long) (targetTrade.getCoinAmount() - tradeModule.getCoinAmount()));
-								tradeModule.getTarget().getCurrencyModule().add((long) (tradeModule.getCoinAmount() - targetTrade.getCoinAmount()));
+								aePlayer.getModule(PlayerCurrencyModule.class).add((long) (targetTrade.getCoinAmount() - tradeModule.getCoinAmount()));
+								tradeModule.getTarget().getModule(PlayerCurrencyModule.class).add((long) (tradeModule.getCoinAmount() - targetTrade.getCoinAmount()));
 
 								for (int i = 0; i < 16; i++)
 								{

@@ -1,7 +1,9 @@
 package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
 import com.gildedgames.aether.api.player.ICurrencyModule;
+import com.gildedgames.aether.api.player.IPlayerAetherModule;
 import com.gildedgames.aether.api.shop.ICurrencyListener;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.network.NetworkingAether;
@@ -10,11 +12,11 @@ import com.gildedgames.aether.common.registry.content.CurrencyAether;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraft.util.ResourceLocation;
 
 import java.util.List;
 
-public class PlayerCurrencyModule extends PlayerAetherModule implements ICurrencyModule
+public class PlayerCurrencyModule extends PlayerAetherModule implements ICurrencyModule, IPlayerAetherModule.Serializable
 {
 	private static final int[] DENOMINATIONS = { CurrencyAether.GILTAENI, CurrencyAether.GILTAEN, CurrencyAether.GILTAE, CurrencyAether.GILT };
 
@@ -122,18 +124,6 @@ public class PlayerCurrencyModule extends PlayerAetherModule implements ICurrenc
 	}
 
 	@Override
-	public void tickStart(TickEvent.PlayerTickEvent event)
-	{
-
-	}
-
-	@Override
-	public void tickEnd(TickEvent.PlayerTickEvent event)
-	{
-
-	}
-
-	@Override
 	public void write(NBTTagCompound tag)
 	{
 		tag.setLong("currencyValue", this.currencyValue);
@@ -149,5 +139,11 @@ public class PlayerCurrencyModule extends PlayerAetherModule implements ICurrenc
 		this.refreshDenominators();
 
 		this.listeners.forEach((l) -> l.onCurrencyChange(prevCurrency, this.currencyValue));
+	}
+
+	@Override
+	public ResourceLocation getIdentifier()
+	{
+		return AetherCore.getResource("currency");
 	}
 }

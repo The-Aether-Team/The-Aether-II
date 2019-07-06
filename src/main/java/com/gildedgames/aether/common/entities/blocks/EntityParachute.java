@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.entities.blocks;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerParachuteModule;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -97,7 +98,7 @@ public class EntityParachute extends Entity
 
 			final PlayerAether playerAether = PlayerAether.getPlayer(player);
 
-			if (!playerAether.getParachuteModule().isParachuting())
+			if (!playerAether.getModule(PlayerParachuteModule.class).isParachuting())
 			{
 				this.setDead();
 			}

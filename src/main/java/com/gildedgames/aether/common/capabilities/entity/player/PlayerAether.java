@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.capabilities.entity.player;
 
 import com.gildedgames.aether.api.AetherCapabilities;
-import com.gildedgames.aether.api.dialog.IDialogController;
 import com.gildedgames.aether.api.player.IPlayerAether;
+import com.gildedgames.aether.api.player.IPlayerAetherModule;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.*;
 import com.gildedgames.aether.common.network.NetworkingAether;
@@ -19,7 +19,6 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -34,53 +33,21 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.IdentityHashMap;
+import java.util.List;
 
 public class PlayerAether implements IPlayerAether
 {
-	private final PlayerAetherModule[] modules;
-
 	private final EntityPlayer entity;
-
-	private final PlayerAbilitiesModule abilitiesModule;
-
-	private final PlayerBlockLevitateModule gravititeAbilityModule;
-
-	private final PlayerTeleportingModule teleportingModule;
-
-	private final PlayerParachuteModule parachuteModule;
-
-	private final PlayerEquipmentModule equipmentModule;
-
-	private final PlayerDialogModule dialogModule;
-
-	private final PlayerSwetTracker swetTracker;
-
-	private final PlayerCampfiresModule campfiresModule;
-
-	private final PlayerPreventDropsModule preventDropsModule;
-
-	private final PlayerPatronRewards patronRewardsModule;
-
-	private final PlayerRollMovementModule rollMovementModule;
-
-	private final PlayerConfigModule configModule;
-
-	private final PlayerProgressModule progressModule;
-
-	private final PlayerCurrencyModule currencyModule;
-
-	private final PlayerSectorModule sectorModule;
-
-	private final PlayerTradeModule tradingModule;
-
-	private final CaveSpawnModule caveSpawnModule;
-
-	private final TGEventsModule tgEventsModule;
 
 	private NecromancerTowerInstance towerInstance;
 
 	private ItemStack lastDestroyedStack;
+
+	private final IdentityHashMap<Class<? extends IPlayerAetherModule>, IPlayerAetherModule> modulesKeyed = new IdentityHashMap<>();
+
+	private final List<IPlayerAetherModule> modules = new ArrayList<>();
+	private final List<IPlayerAetherModule.Serializable> modulesSerializable = new ArrayList<>();
 
 	private int ticksWithEggnogEffect;
 
@@ -88,73 +55,64 @@ public class PlayerAether implements IPlayerAether
 
 	public PlayerAether()
 	{
-		this.modules = new PlayerAetherModule[0];
 		this.entity = null;
-		this.abilitiesModule = null;
-		this.gravititeAbilityModule = null;
-		this.teleportingModule = null;
-		this.parachuteModule = null;
-		this.equipmentModule = null;
-		this.dialogModule = null;
-		this.swetTracker = null;
-		this.campfiresModule = null;
-		this.preventDropsModule = null;
-		this.patronRewardsModule = null;
-		this.rollMovementModule = null;
-		this.configModule = null;
-		this.progressModule = null;
-		this.currencyModule = null;
-		this.sectorModule = null;
-		this.tradingModule = null;
-		this.caveSpawnModule = null;
-		this.tgEventsModule = null;
 	}
 
 	public PlayerAether(final EntityPlayer entity)
 	{
 		this.entity = entity;
 
-		this.abilitiesModule = new PlayerAbilitiesModule(this);
-		this.gravititeAbilityModule = new PlayerBlockLevitateModule(this);
-		this.teleportingModule = new PlayerTeleportingModule(this);
-		this.parachuteModule = new PlayerParachuteModule(this);
-		this.equipmentModule = new PlayerEquipmentModule(this);
-		this.dialogModule = new PlayerDialogModule(this);
-		this.swetTracker = new PlayerSwetTracker(this);
-		this.campfiresModule = new PlayerCampfiresModule(this);
-		this.preventDropsModule = new PlayerPreventDropsModule(this);
-		this.patronRewardsModule = new PlayerPatronRewards(this);
-		this.rollMovementModule = new PlayerRollMovementModule(this);
-		this.configModule = new PlayerConfigModule(this);
-		this.progressModule = new PlayerProgressModule(this);
-		this.currencyModule = new PlayerCurrencyModule(this);
-		this.sectorModule = new PlayerSectorModule(this);
-		this.tradingModule = new PlayerTradeModule(this);
-		this.caveSpawnModule = new CaveSpawnModule(this);
-		this.tgEventsModule = new TGEventsModule(this);
+		this.registerModule(new PlayerAbilitiesModule(this));
+		this.registerModule(new PlayerBlockLevitateModule(this));
+		this.registerModule(new PlayerTeleportingModule(this));
+		this.registerModule(new PlayerParachuteModule(this));
+		this.registerModule(new PlayerEquipmentModule(this));
+		this.registerModule(new PlayerDialogModule(this));
+		this.registerModule(new PlayerSwetTrackerModule(this));
+		this.registerModule(new PlayerCampfiresModule(this));
+		this.registerModule(new PlayerPreventDropsModule(this));
+		this.registerModule(new PlayerPatronRewardModule(this));
+		this.registerModule(new PlayerRollMovementModule(this));
+		this.registerModule(new PlayerConfigModule(this));
+		this.registerModule(new PlayerProgressModule(this));
+		this.registerModule(new PlayerCurrencyModule(this));
+		this.registerModule(new PlayerSectorModule(this));
+		this.registerModule(new PlayerTradeModule(this));
+		this.registerModule(new PlayerCaveSpawnModule(this));
+		this.registerModule(new PlayerTGEventsModule(this));
+	}
 
-		final Collection<PlayerAetherModule> modules = new ArrayList<>();
+	@Override
+	public void registerModule(IPlayerAetherModule module)
+	{
+		Class<? extends IPlayerAetherModule> clazz = module.getClass();
 
-		modules.add(this.abilitiesModule);
-		modules.add(this.gravititeAbilityModule);
-		modules.add(this.teleportingModule);
-		modules.add(this.parachuteModule);
-		modules.add(this.equipmentModule);
-		modules.add(this.dialogModule);
-		modules.add(this.swetTracker);
-		modules.add(this.campfiresModule);
-		modules.add(this.preventDropsModule);
-		modules.add(this.patronRewardsModule);
-		modules.add(this.rollMovementModule);
-		modules.add(this.configModule);
-		modules.add(this.progressModule);
-		modules.add(this.currencyModule);
-		modules.add(this.sectorModule);
-		modules.add(this.tradingModule);
-		modules.add(this.caveSpawnModule);
-		modules.add(this.tgEventsModule);
+		if (this.modulesKeyed.containsKey(clazz))
+		{
+			throw new IllegalStateException("Module is already registered for class: " + clazz);
+		}
 
-		this.modules = modules.toArray(new PlayerAetherModule[0]);
+		this.modulesKeyed.put(clazz, module);
+		this.modules.add(module);
+
+		if (module instanceof IPlayerAetherModule.Serializable)
+		{
+			this.modulesSerializable.add((IPlayerAetherModule.Serializable) module);
+		}
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public <T extends IPlayerAetherModule> T getModule(Class<T> clazz)
+	{
+		T ret = (T) this.modulesKeyed.get(clazz);
+
+		if (ret == null)
+		{
+			throw new NullPointerException("No module registered for class: " + clazz);
+		}
+
+		return ret;
 	}
 
 	public static PlayerAether getPlayer(final Entity player)
@@ -170,11 +128,6 @@ public class PlayerAether implements IPlayerAether
 	public static boolean hasCapability(final Entity entity)
 	{
 		return entity.hasCapability(AetherCapabilities.PLAYER_DATA, null);
-	}
-
-	public PlayerRollMovementModule getRollMovementModule()
-	{
-		return this.rollMovementModule;
 	}
 
 	public ItemStack getLastDestroyedStack()
@@ -197,15 +150,9 @@ public class PlayerAether implements IPlayerAether
 		return this.ticksWithEggnogEffect > 0;
 	}
 
-	@Override
-	public PlayerCurrencyModule getCurrencyModule()
-	{
-		return this.currencyModule;
-	}
-
 	public void onLoggedOut()
 	{
-		this.sectorModule.releaseAll();
+		this.getModule(PlayerSectorModule.class).releaseAll();
 	}
 
 	/**
@@ -213,11 +160,13 @@ public class PlayerAether implements IPlayerAether
 	 */
 	public void sendFullUpdate()
 	{
-		NetworkingAether.sendPacketToPlayer(new PacketCurrencyModule(this.getCurrencyModule()), (EntityPlayerMP) this.getEntity());
-		NetworkingAether.sendPacketToPlayer(new PacketProgressModule(this.getProgressModule()), (EntityPlayerMP) this.getEntity());
-		NetworkingAether.sendPacketToPlayer(new PacketSetPlayedIntro(this.getTeleportingModule().hasPlayedIntro()), (EntityPlayerMP) this.getEntity());
-		NetworkingAether.sendPacketToPlayer(new PacketCampfires(this.getCampfiresModule().getCampfiresActivated()), (EntityPlayerMP) this.getEntity());
-		NetworkingAether.sendPacketToPlayer(new PacketPreventDropsInventories(this.preventDropsModule), (EntityPlayerMP) this.getEntity());
+		EntityPlayerMP player = (EntityPlayerMP) this.getEntity();
+
+		NetworkingAether.sendPacketToPlayer(new PacketCurrencyModule(this.getModule(PlayerCurrencyModule.class)), player);
+		NetworkingAether.sendPacketToPlayer(new PacketProgressModule(this.getModule(PlayerProgressModule.class)), player);
+		NetworkingAether.sendPacketToPlayer(new PacketSetPlayedIntro(this.getModule(PlayerTeleportingModule.class).hasPlayedIntro()), player);
+		NetworkingAether.sendPacketToPlayer(new PacketCampfires(this.getModule(PlayerCampfiresModule.class).getCampfiresActivated()), player);
+		NetworkingAether.sendPacketToPlayer(new PacketPreventDropsInventories(this.getModule(PlayerPreventDropsModule.class)), player);
 	}
 
 	public void onUpdate()
@@ -232,7 +181,7 @@ public class PlayerAether implements IPlayerAether
 	{
 		this.onUpdate();
 
-		for (final PlayerAetherModule module : this.modules)
+		for (final IPlayerAetherModule module : this.modules)
 		{
 			if (event.phase == TickEvent.Phase.START)
 			{
@@ -251,7 +200,7 @@ public class PlayerAether implements IPlayerAether
 	{
 		this.sendFullUpdate();
 
-		for (PlayerAetherModule module : this.modules)
+		for (IPlayerAetherModule module : this.modules)
 		{
 			module.onRespawn(event);
 		}
@@ -263,7 +212,7 @@ public class PlayerAether implements IPlayerAether
 
 	public void onDeath(final LivingDeathEvent event)
 	{
-		for (PlayerAetherModule module : this.modules)
+		for (IPlayerAetherModule module : this.modules)
 		{
 			module.onDeath(event);
 		}
@@ -271,7 +220,7 @@ public class PlayerAether implements IPlayerAether
 
 	public void onDrops(final PlayerDropsEvent event)
 	{
-		for (PlayerAetherModule module : this.modules)
+		for (IPlayerAetherModule module : this.modules)
 		{
 			module.onDrops(event);
 		}
@@ -283,7 +232,9 @@ public class PlayerAether implements IPlayerAether
 
 		if (aePlayer != null)
 		{
-			if (aePlayer.getEquipmentModule().getEffectPool(new ResourceLocation(AetherCore.MOD_ID, "fire_immunity")).isPresent())
+			PlayerEquipmentModule equipmentModule = this.getModule(PlayerEquipmentModule.class);
+
+			if (equipmentModule.getEffectPool(new ResourceLocation(AetherCore.MOD_ID, "fire_immunity")).isPresent())
 			{
 				if (event.getSource() == DamageSource.ON_FIRE || event.getSource() == DamageSource.IN_FIRE || event.getSource() == DamageSource.LAVA)
 				{
@@ -292,40 +243,30 @@ public class PlayerAether implements IPlayerAether
 			}
 		}
 
-		if (this.rollMovementModule.isRolling())
+		PlayerRollMovementModule movementModule = this.getModule(PlayerRollMovementModule.class);
+
+		if (movementModule.isRolling())
 		{
-			event.setAmount(this.rollMovementModule.getDamageReduction(event.getAmount()));
+			event.setAmount(movementModule.getDamageReduction(event.getAmount()));
 		}
 	}
 
 	public void onFall(final LivingFallEvent event)
 	{
-		this.abilitiesModule.onFall(event);
+		this.getModule(PlayerAbilitiesModule.class).onFall(event);
 	}
 
 	public void onTeleport(final PlayerEvent.PlayerChangedDimensionEvent event)
 	{
-		this.sectorModule.releaseAll();
+		this.getModule(PlayerSectorModule.class).releaseAll();
+		this.getModule(PlayerEquipmentModule.class).onTeleport();
 
 		this.sendFullUpdate();
-
-		this.equipmentModule.onTeleport();
 	}
 
 	public void onPlayerBeginWatching(final IPlayerAether other)
 	{
 		NetworkingAether.sendPacketToPlayer(new PacketEquipment(this), (EntityPlayerMP) other.getEntity());
-	}
-
-	public PlayerProgressModule getProgressModule()
-	{
-		return this.progressModule;
-	}
-
-	@Override
-	public IDialogController getDialogController()
-	{
-		return this.dialogModule;
 	}
 
 	@Override
@@ -348,11 +289,11 @@ public class PlayerAether implements IPlayerAether
 	{
 		NBTFunnel funnel = new NBTFunnel(tag);
 
-		final NBTTagList modules = new NBTTagList();
+		final NBTTagCompound modules = new NBTTagCompound();
 
-		for (final PlayerAetherModule module : this.modules)
+		for (final IPlayerAetherModule.Serializable module : this.modulesSerializable)
 		{
-			modules.appendTag(NBTHelper.writeRaw(module));
+			modules.setTag(module.getIdentifier().toString(), NBTHelper.writeRaw(module));
 		}
 
 		tag.setTag("Modules", modules);
@@ -365,13 +306,16 @@ public class PlayerAether implements IPlayerAether
 	{
 		NBTFunnel funnel = new NBTFunnel(tag);
 
-		final NBTTagList modules = tag.getTagList("Modules", 10);
+		NBTTagCompound modules = tag.getCompoundTag("Modules");
 
-		for (int i = 0; i < this.modules.length; i++)
+		for (final IPlayerAetherModule.Serializable module : this.modulesSerializable)
 		{
-			final PlayerAetherModule module = this.modules[i];
+			String key = module.getIdentifier().toString();
 
-			module.read(modules.getCompoundTagAt(i));
+			if (modules.hasKey(key))
+			{
+				module.read(modules.getCompoundTag(key));
+			}
 		}
 
 		NecromancerTowerInstance inst = funnel.get("towerInstance");
@@ -385,7 +329,7 @@ public class PlayerAether implements IPlayerAether
 	@Override
 	public void onEntityJoinWorld()
 	{
-		for (PlayerAetherModule module : this.modules)
+		for (IPlayerAetherModule module : this.modules)
 		{
 			module.onEntityJoinWorld();
 		}
@@ -395,67 +339,6 @@ public class PlayerAether implements IPlayerAether
 	public EntityPlayer getEntity()
 	{
 		return this.entity;
-	}
-
-	public PlayerConfigModule getConfigModule()
-	{
-		return this.configModule;
-	}
-
-	public PlayerBlockLevitateModule getGravititeAbility()
-	{
-		return this.gravititeAbilityModule;
-	}
-
-	public PlayerTeleportingModule getTeleportingModule()
-	{
-		return this.teleportingModule;
-	}
-
-	public PlayerParachuteModule getParachuteModule()
-	{
-		return this.parachuteModule;
-	}
-
-	public PlayerAbilitiesModule getAbilitiesModule()
-	{
-		return this.abilitiesModule;
-	}
-
-	public PlayerSwetTracker getSwetTracker()
-	{
-		return this.swetTracker;
-	}
-
-	public PlayerCampfiresModule getCampfiresModule()
-	{
-		return this.campfiresModule;
-	}
-
-	public PlayerPatronRewards getPatronRewardsModule()
-	{
-		return this.patronRewardsModule;
-	}
-
-	@Override
-	public PlayerEquipmentModule getEquipmentModule()
-	{
-		return this.equipmentModule;
-	}
-
-	public PlayerPreventDropsModule getPreventDropsModule()
-	{
-		return this.preventDropsModule;
-	}
-
-	public PlayerTradeModule getTradingModule()
-	{
-		return this.tradingModule;
-	}
-
-	public TGEventsModule getTGEventsModule()
-	{
-		return this.tgEventsModule;
 	}
 
 	public static class Storage implements IStorage<IPlayerAether>

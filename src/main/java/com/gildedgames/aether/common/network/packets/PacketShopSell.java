@@ -6,6 +6,7 @@ import com.gildedgames.aether.api.shop.IShopInstance;
 import com.gildedgames.aether.api.shop.IShopInstanceGroup;
 import com.gildedgames.aether.api.shop.ShopUtil;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerDialogModule;
 import com.gildedgames.aether.common.containers.ContainerShop;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import com.gildedgames.aether.common.util.helpers.ItemHelper;
@@ -53,12 +54,13 @@ public class PacketShopSell implements IMessage
 			}
 
 			PlayerAether playerAether = PlayerAether.getPlayer(player);
+			PlayerDialogModule dialogModule = playerAether.getModule(PlayerDialogModule.class);
 
 			if (player.openContainer instanceof ContainerShop)
 			{
-				if (playerAether.getDialogController().getTalkingNPC() != null)
+				if (dialogModule.getTalkingNPC() != null)
 				{
-					IShopInstanceGroup group = playerAether.getDialogController().getTalkingNPC().getShopInstanceGroup();
+					IShopInstanceGroup group = dialogModule.getTalkingNPC().getShopInstanceGroup();
 
 					if (group == null)
 					{

@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.network.packets;
 
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTeleportingModule;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import io.netty.buffer.ByteBuf;
@@ -45,8 +46,7 @@ public class PacketSetPlayedIntro implements IMessage
 			}
 
 			final PlayerAether playerAether = PlayerAether.getPlayer(player);
-
-			playerAether.getTeleportingModule().setPlayedIntro(message.flag);
+			playerAether.getModule(PlayerTeleportingModule.class).setPlayedIntro(message.flag);
 
 			return null;
 		}
@@ -63,8 +63,7 @@ public class PacketSetPlayedIntro implements IMessage
 			}
 
 			final PlayerAether playerAether = PlayerAether.getPlayer(player);
-
-			playerAether.getTeleportingModule().setPlayedIntro(message.flag);
+			playerAether.getModule(PlayerTeleportingModule.class).setPlayedIntro(message.flag);
 
 			return null;
 		}

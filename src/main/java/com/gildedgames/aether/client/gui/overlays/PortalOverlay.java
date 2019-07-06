@@ -38,9 +38,9 @@ public class PortalOverlay implements IOverlay
 		if (!this.mc.player.isPotionActive(MobEffects.NAUSEA))
 		{
 			final PlayerAether playerAether = PlayerAether.getPlayer(this.mc.player);
-			final PlayerTeleportingModule teleporter = playerAether.getTeleportingModule();
+			final PlayerTeleportingModule teleportModule = playerAether.getModule(PlayerTeleportingModule.class);
 
-			float timeInPortal = (teleporter.getPrevTicksInTeleporter() + ((teleporter.getTicksInTeleporter() - teleporter.getPrevTicksInTeleporter())) * this.timer.renderPartialTicks)
+			float timeInPortal = (teleportModule.getPrevTicksInTeleporter() + ((teleportModule.getTicksInTeleporter() - teleportModule.getPrevTicksInTeleporter())) * this.timer.renderPartialTicks)
 					/ (float) PlayerTeleportingModule.TELEPORT_DELAY;
 			timeInPortal *= 0.8f;
 

@@ -1,5 +1,7 @@
 package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
+import com.gildedgames.aether.api.player.IPlayerAetherModule;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.items.IDropOnDeath;
@@ -14,6 +16,7 @@ import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
@@ -21,7 +24,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.List;
 
-public class PlayerPreventDropsModule extends PlayerAetherModule
+public class PlayerPreventDropsModule extends PlayerAetherModule implements IPlayerAetherModule.Serializable
 {
 
 	public final NonNullList<ItemStack> mainInventory = NonNullList.withSize(36, ItemStack.EMPTY);
@@ -138,5 +141,11 @@ public class PlayerPreventDropsModule extends PlayerAetherModule
 		this.setIfShouldKeep(mainInventory, this.mainInventory, false);
 		this.setIfShouldKeep(armorInventory, this.armorInventory, false);
 		this.setIfShouldKeep(offHandInventory, this.offHandInventory, false);
+	}
+
+	@Override
+	public ResourceLocation getIdentifier()
+	{
+		return AetherCore.getResource("drops");
 	}
 }

@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.items.tools.handlers;
 
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerBlockLevitateModule;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -42,7 +43,7 @@ public class ItemGravititeToolHandler implements IToolEventHandler
 
 		ItemStack stack = player.getHeldItem(hand);
 
-		if (aePlayer.getGravititeAbility().getHeldBlock() == null && player.isSneaking())
+		if (aePlayer.getModule(PlayerBlockLevitateModule.class).getHeldBlock() == null && player.isSneaking())
 		{
 			IBlockState state = world.getBlockState(pos);
 
@@ -58,7 +59,7 @@ public class ItemGravititeToolHandler implements IToolEventHandler
 
 			if (!world.isRemote)
 			{
-				if (aePlayer.getGravititeAbility().pickupBlock(pos, world))
+				if (aePlayer.getModule(PlayerBlockLevitateModule.class).pickupBlock(pos, world))
 				{
 					stack.damageItem(2, player);
 				}
@@ -87,10 +88,11 @@ public class ItemGravititeToolHandler implements IToolEventHandler
 		if (hand == EnumHand.MAIN_HAND && !player.world.isRemote)
 		{
 			PlayerAether aePlayer = PlayerAether.getPlayer(player);
+			PlayerBlockLevitateModule blockLevitateModule = aePlayer.getModule(PlayerBlockLevitateModule.class);
 
-			if (aePlayer.getGravititeAbility().getHeldBlock() != null && aePlayer.getGravititeAbility().getHeldBlock().ticksExisted > 1)
+			if (blockLevitateModule.getHeldBlock() != null && blockLevitateModule.getHeldBlock().ticksExisted > 1)
 			{
-				aePlayer.getGravititeAbility().dropHeldBlock();
+				blockLevitateModule.dropHeldBlock();
 			}
 		}
 	}

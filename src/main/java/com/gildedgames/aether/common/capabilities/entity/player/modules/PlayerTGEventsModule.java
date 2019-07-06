@@ -1,12 +1,12 @@
 package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
+import com.gildedgames.aether.api.player.IPlayerAetherModule;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.capabilities.entity.player.TravelersGuidebook.TGEvent;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.ArrayList;
 
@@ -14,27 +14,15 @@ import java.util.ArrayList;
  * Event's System for the Travellers Guidebook
  */
 
-public class TGEventsModule extends PlayerAetherModule
+public class PlayerTGEventsModule extends PlayerAetherModule implements IPlayerAetherModule.Serializable
 {
 	ArrayList<TGEvent> eventsLangKeys;
 
-	public TGEventsModule(PlayerAether playerAether)
+	public PlayerTGEventsModule(PlayerAether playerAether)
 	{
 		super(playerAether);
 
 		this.eventsLangKeys = new ArrayList<>();
-	}
-
-	@Override
-	public void tickStart(TickEvent.PlayerTickEvent event)
-	{
-
-	}
-
-	@Override
-	public void tickEnd(TickEvent.PlayerTickEvent event)
-	{
-
 	}
 
 	/**
@@ -118,4 +106,11 @@ public class TGEventsModule extends PlayerAetherModule
 			this.eventsLangKeys.add(new TGEvent(titleKey,descKey,image));
 		}
 	}
+
+	@Override
+	public ResourceLocation getIdentifier()
+	{
+		return AetherCore.getResource("tgevents");
+	}
+
 }

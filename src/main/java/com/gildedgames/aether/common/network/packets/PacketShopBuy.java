@@ -1,10 +1,12 @@
 package com.gildedgames.aether.common.network.packets;
 
+import com.gildedgames.aether.api.entity.EntityNPC;
 import com.gildedgames.aether.api.shop.IShopBuy;
 import com.gildedgames.aether.api.shop.IShopInstance;
 import com.gildedgames.aether.api.shop.IShopInstanceGroup;
 import com.gildedgames.aether.api.shop.ShopUtil;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerDialogModule;
 import com.gildedgames.aether.common.containers.ContainerShop;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import com.gildedgames.aether.common.util.helpers.ItemHelper;
@@ -60,10 +62,13 @@ public class PacketShopBuy implements IMessage
 			if (player.openContainer instanceof ContainerShop)
 			{
 				PlayerAether playerAether = PlayerAether.getPlayer(player);
+				PlayerDialogModule dialogModule = playerAether.getModule(PlayerDialogModule.class);
 
-				if (playerAether.getDialogController().getTalkingNPC() != null)
+				EntityNPC talking = dialogModule.getTalkingNPC();
+
+				if (talking != null)
 				{
-					IShopInstanceGroup group = playerAether.getDialogController().getTalkingNPC().getShopInstanceGroup();
+					IShopInstanceGroup group = talking.getShopInstanceGroup();
 
 					if (group == null)
 					{

@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.network.packets;
 
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerProgressModule;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
@@ -49,9 +50,8 @@ public class PacketProgressBooleanData implements IMessage
 				return null;
 			}
 
-			final PlayerAether playerAether = PlayerAether.getPlayer(player);
-
-			playerAether.getProgressModule().setBoolean(message.key, message.flag);
+			final PlayerAether aePlayer = PlayerAether.getPlayer(player);
+			aePlayer.getModule(PlayerProgressModule.class).setBoolean(message.key, message.flag);
 
 			return null;
 		}

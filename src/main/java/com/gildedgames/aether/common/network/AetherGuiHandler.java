@@ -4,10 +4,10 @@ import com.gildedgames.aether.api.dialog.IDialogSlide;
 import com.gildedgames.aether.api.dialog.IDialogSlideRenderer;
 import com.gildedgames.aether.api.shop.IShopInstance;
 import com.gildedgames.aether.api.shop.IShopInstanceGroup;
-import com.gildedgames.aether.client.gui.container.guidebook.GuiGuidebookDiscovery;
-import com.gildedgames.aether.client.gui.container.guidebook.GuiGuidebookInventory;
 import com.gildedgames.aether.client.gui.container.GuiIcestoneCooler;
 import com.gildedgames.aether.client.gui.container.GuiIncubator;
+import com.gildedgames.aether.client.gui.container.guidebook.GuiGuidebookDiscovery;
+import com.gildedgames.aether.client.gui.container.guidebook.GuiGuidebookInventory;
 import com.gildedgames.aether.client.gui.container.guidebook.GuiGuidebookLoreTome;
 import com.gildedgames.aether.client.gui.container.guidebook.GuiGuidebookStatus;
 import com.gildedgames.aether.client.gui.container.simple_crafting.GuiMasonryBench;
@@ -18,6 +18,7 @@ import com.gildedgames.aether.client.gui.misc.GuiAetherLoading;
 import com.gildedgames.aether.client.gui.misc.GuiAetherTeleporterNotice;
 import com.gildedgames.aether.client.gui.misc.GuiPatronRewards;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerDialogModule;
 import com.gildedgames.aether.common.containers.*;
 import com.gildedgames.aether.common.containers.guidebook.ContainerGuidebookInventory;
 import com.gildedgames.aether.common.containers.guidebook.EmptyContainer;
@@ -33,7 +34,6 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.event.world.NoteBlockEvent;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.fml.relauncher.Side;
@@ -98,12 +98,14 @@ public class AetherGuiHandler implements IGuiHandler
 				return new ContainerLoadingScreen();
 			case DIALOG_SHOP_ID:
 			{
-				if (playerAether.getDialogController().getTalkingNPC() == null)
+				PlayerDialogModule dialogModule = playerAether.getModule(PlayerDialogModule.class);
+
+				if (dialogModule.getTalkingNPC() == null)
 				{
 					return null;
 				}
 
-				IShopInstanceGroup group = playerAether.getDialogController().getTalkingNPC().getShopInstanceGroup();
+				IShopInstanceGroup group = dialogModule.getTalkingNPC().getShopInstanceGroup();
 
 				if (group == null)
 				{
@@ -163,14 +165,16 @@ public class AetherGuiHandler implements IGuiHandler
 				return new GuiAetherTeleporterNotice();
 			case DIALOG_SHOP_ID:
 			{
-				if (playerAether.getDialogController().getTalkingNPC() == null)
+				PlayerDialogModule dialogModule = playerAether.getModule(PlayerDialogModule.class);
+
+				if (dialogModule.getTalkingNPC() == null)
 				{
 					return null;
 				}
 
-				IDialogSlide slide = DialogUtil.getSlide(playerAether.getDialogController());
+				IDialogSlide slide = DialogUtil.getSlide(dialogModule);
 
-				IShopInstanceGroup group = playerAether.getDialogController().getTalkingNPC().getShopInstanceGroup();
+				IShopInstanceGroup group = dialogModule.getTalkingNPC().getShopInstanceGroup();
 
 				if (group == null)
 				{
@@ -207,7 +211,9 @@ public class AetherGuiHandler implements IGuiHandler
 				}
 			}
 			case DIALOG_VIEWER_ID:
-				return new GuiDialogViewer(player, playerAether.getDialogController(), playerAether.getDialogController().getCurrentSceneInstance());
+				PlayerDialogModule dialogModule = playerAether.getModule(PlayerDialogModule.class);
+
+				return new GuiDialogViewer(player, dialogModule, dialogModule.getCurrentSceneInstance());
 			case TRADE_ID:
 				GuiViewer prevViewerA = null;
 

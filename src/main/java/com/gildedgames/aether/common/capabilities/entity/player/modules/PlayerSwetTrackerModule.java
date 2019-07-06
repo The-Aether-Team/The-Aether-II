@@ -1,5 +1,7 @@
 package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
+import com.gildedgames.aether.api.player.IPlayerAetherModule;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
@@ -8,19 +10,20 @@ import com.google.common.collect.Lists;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.Iterator;
 import java.util.List;
 
-public class PlayerSwetTracker extends PlayerAetherModule
+public class PlayerSwetTrackerModule extends PlayerAetherModule implements IPlayerAetherModule.Serializable
 {
 
 	public static final int MAX_SWET_COUNT = 3;
 
 	private final List<EntitySwet> swets = Lists.newArrayList();
 
-	public PlayerSwetTracker(final PlayerAether playerAether)
+	public PlayerSwetTrackerModule(final PlayerAether playerAether)
 	{
 		super(playerAether);
 	}
@@ -62,7 +65,7 @@ public class PlayerSwetTracker extends PlayerAetherModule
 
 	public boolean canLatchOn()
 	{
-		return this.swets.size() < PlayerSwetTracker.MAX_SWET_COUNT;
+		return this.swets.size() < PlayerSwetTrackerModule.MAX_SWET_COUNT;
 	}
 
 	public void latchSwet(final EntitySwet swet)
@@ -140,4 +143,9 @@ public class PlayerSwetTracker extends PlayerAetherModule
 		}
 	}
 
+	@Override
+	public ResourceLocation getIdentifier()
+	{
+		return AetherCore.getResource("swet");
+	}
 }

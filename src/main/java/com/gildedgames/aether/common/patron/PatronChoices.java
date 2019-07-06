@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.patron;
 
 import com.gildedgames.aether.api.patron.PatronRewardRegistry;
-import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerPatronRewards;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerPatronRewardModule;
 import com.gildedgames.aether.common.patron.armor.PatronRewardArmor;
 import com.gildedgames.orbis.lib.util.mc.NBT;
 import net.minecraft.nbt.NBTTagCompound;
@@ -10,11 +10,11 @@ public class PatronChoices implements NBT
 {
 	private PatronRewardArmor armorChoice;
 
-	private final PlayerPatronRewards parent;
+	private final PlayerPatronRewardModule parent;
 
 	private final PatronRewardRegistry registry;
 
-	public PatronChoices(PlayerPatronRewards parent, PatronRewardRegistry registry)
+	public PatronChoices(PlayerPatronRewardModule parent, PatronRewardRegistry registry)
 	{
 		this.parent = parent;
 		this.registry = registry;

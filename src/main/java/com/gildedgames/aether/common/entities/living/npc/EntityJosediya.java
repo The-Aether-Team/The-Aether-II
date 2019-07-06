@@ -5,11 +5,12 @@ import com.gildedgames.aether.api.entity.IEntityEyesComponent;
 import com.gildedgames.aether.api.shop.IShopInstanceGroup;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerDialogModule;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerProgressModule;
 import com.gildedgames.aether.common.entities.util.EntityEyesComponent;
 import com.gildedgames.aether.common.entities.util.IEntityEyesComponentProvider;
 import com.gildedgames.orbis.lib.util.mc.NBTHelper;
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.player.EntityPlayer;
@@ -126,15 +127,18 @@ public class EntityJosediya extends EntityNPC implements IEntityEyesComponentPro
 			if (!player.world.isRemote)
 			{
 				final PlayerAether playerAether = PlayerAether.getPlayer(player);
-				boolean talkedBefore = playerAether.getProgressModule().hasTalkedTo(EntityJosediya.SPEAKER);
+				final PlayerDialogModule dialogModule = playerAether.getModule(PlayerDialogModule.class);
+				final PlayerProgressModule progressModule = playerAether.getModule(PlayerProgressModule.class);
+
+				boolean talkedBefore = progressModule.hasTalkedTo(EntityJosediya.SPEAKER);
 
 				String node = talkedBefore ? "start" : "start_not_introduced";
 
-				playerAether.getDialogController().openScene(AetherCore.getResource("josediya/outpost_greet"), node);
+				dialogModule.openScene(AetherCore.getResource("josediya/outpost_greet"), node);
 
 				if (!talkedBefore)
 				{
-					playerAether.getProgressModule().setHasTalkedTo(EntityJosediya.SPEAKER, true);
+					progressModule.setHasTalkedTo(EntityJosediya.SPEAKER, true);
 				}
 			}
 		}

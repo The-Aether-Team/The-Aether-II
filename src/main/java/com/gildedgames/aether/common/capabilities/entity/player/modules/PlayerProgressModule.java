@@ -1,5 +1,7 @@
 package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
+import com.gildedgames.aether.api.player.IPlayerAetherModule;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.network.NetworkingAether;
@@ -11,11 +13,10 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.Map;
 
-public class PlayerProgressModule extends PlayerAetherModule
+public class PlayerProgressModule extends PlayerAetherModule implements IPlayerAetherModule.Serializable
 {
 
 	public boolean hasDiedInAether;
@@ -104,18 +105,6 @@ public class PlayerProgressModule extends PlayerAetherModule
 	}
 
 	@Override
-	public void tickStart(TickEvent.PlayerTickEvent event)
-	{
-
-	}
-
-	@Override
-	public void tickEnd(TickEvent.PlayerTickEvent event)
-	{
-
-	}
-
-	@Override
 	public void write(NBTTagCompound tag)
 	{
 		NBTFunnel funnel = new NBTFunnel(tag);
@@ -137,5 +126,11 @@ public class PlayerProgressModule extends PlayerAetherModule
 		this.hasTalkedTo = funnel.getMap("hasTalkedTo", NBTFunnel.LOC_GETTER, NBTFunnel.BOOLEAN_GETTER);
 		this.beforeReturnToBed = funnel.getPos("beforeReturnToBed");
 		this.booleanData = funnel.getMap("booleanData", NBTFunnel.STRING_GETTER, NBTFunnel.BOOLEAN_GETTER);
+	}
+
+	@Override
+	public ResourceLocation getIdentifier()
+	{
+		return AetherCore.getResource("progress");
 	}
 }

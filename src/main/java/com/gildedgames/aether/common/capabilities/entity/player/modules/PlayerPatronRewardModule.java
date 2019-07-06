@@ -6,12 +6,11 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.patron.PatronChoices;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.concurrent.Future;
 
-public class PlayerPatronRewards extends PlayerAetherModule
+public class PlayerPatronRewardModule extends PlayerAetherModule
 {
 	private static final boolean ENABLED = false;
 
@@ -21,7 +20,7 @@ public class PlayerPatronRewards extends PlayerAetherModule
 
 	private Future<UserFeatures> featuresFuture;
 
-	public PlayerPatronRewards(PlayerAether playerAether)
+	public PlayerPatronRewardModule(PlayerAether playerAether)
 	{
 		super(playerAether);
 
@@ -70,23 +69,5 @@ public class PlayerPatronRewards extends PlayerAetherModule
 
 			this.featuresFuture = null;
 		}
-	}
-
-	@Override
-	public void tickEnd(TickEvent.PlayerTickEvent event)
-	{
-
-	}
-
-	@Override
-	public void write(NBTTagCompound nbtTagCompound)
-	{
-
-	}
-
-	@Override
-	public void read(NBTTagCompound nbtTagCompound)
-	{
-
 	}
 }

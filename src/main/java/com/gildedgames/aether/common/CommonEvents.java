@@ -7,6 +7,8 @@ import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerEquipmentModule;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTeleportingModule;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTradeModule;
 import com.gildedgames.aether.common.containers.ContainerLoadingScreen;
 import com.gildedgames.aether.common.entities.living.mobs.EntityAechorPlant;
@@ -78,7 +80,8 @@ public class CommonEvents
 
 			if (playerAether != null && !AetherHelper.isNecromancerTower(event.getEntity().dimension))
 			{
-				playerAether.getTeleportingModule().setNonAetherPos(new BlockPosDimension(event.getEntity().getPosition(), event.getEntity().dimension));
+				playerAether.getModule(PlayerTeleportingModule.class)
+						.setNonAetherPos(new BlockPosDimension(event.getEntity().getPosition(), event.getEntity().dimension));
 			}
 		}
 	}
@@ -110,6 +113,8 @@ public class CommonEvents
 			{
 				return;
 			}
+
+			PlayerTeleportingModule teleportingModule = playerAether.getModule(PlayerTeleportingModule.class);
 
 			if (player.openContainer instanceof ContainerLoadingScreen)
 			{
@@ -166,9 +171,9 @@ public class CommonEvents
 
 						float percent = ((float) count / (diam * diam)) * 100.0F;
 
-						if (!MathUtil.epsilonEquals(playerAether.getTeleportingModule().getLastPercent(), percent))
+						if (!MathUtil.epsilonEquals(teleportingModule.getLastPercent(), percent))
 						{
-							playerAether.getTeleportingModule().setLastPercent(percent);
+							teleportingModule.setLastPercent(percent);
 
 							NetworkingAether.sendPacketToPlayer(new PacketLoadingScreenPercent(percent), (EntityPlayerMP) player);
 						}
@@ -317,7 +322,7 @@ public class CommonEvents
 
 	private static boolean tryEquipEquipment(final IPlayerAether player, final ItemStack stack, final EnumHand hand)
 	{
-		final IInventoryEquipment inventory = player.getEquipmentModule().getInventory();
+		final IInventoryEquipment inventory = player.getModule(PlayerEquipmentModule.class).getInventory();
 
 		final IItemProperties equipment = AetherAPI.content().items().getProperties(stack.getItem());
 
@@ -362,26 +367,23 @@ public class CommonEvents
 		else if (event.getSide().isServer() && event.getTarget() instanceof EntityPlayer && event.getHand() == EnumHand.MAIN_HAND && event.getItemStack()
 				.isEmpty())
 		{
-			PlayerTradeModule me = PlayerAether.getPlayer(event.getEntityPlayer()).getTradingModule();
-			PlayerTradeModule other = PlayerAether.getPlayer(event.getTarget()).getTradingModule();
+			PlayerTradeModule me = PlayerAether.getPlayer(event.getEntityPlayer()).getModule(PlayerTradeModule.class);
+			PlayerTradeModule other = PlayerAether.getPlayer(event.getTarget()).getModule(PlayerTradeModule.class);
 
-			if (me != null && other != null)
+			if (me.getPlayer().equals(other.getTarget()) && other.canAccept(event.getEntity().getPosition()))
 			{
-				if (me.getPlayer().equals(other.getTarget()) && other.canAccept(event.getEntity().getPosition()))
-				{
-					me.setTrading(other);
-					other.accept();
-					AetherCore.LOGGER.info(event.getTarget().getDisplayName().getFormattedText() + " is now trading with " + event.getEntity().getDisplayName()
-							.getFormattedText());
-				}
-				else if (!other.isTrading() && me.canRequest())
-				{
-					me.request(other.getPlayer());
-				}
-				else if (me.getFailTime() == 0)
-				{
-					me.failRequest(other);
-				}
+				me.setTrading(other);
+				other.accept();
+				AetherCore.LOGGER.info(event.getTarget().getDisplayName().getFormattedText() + " is now trading with " + event.getEntity().getDisplayName()
+						.getFormattedText());
+			}
+			else if (!other.isTrading() && me.canRequest())
+			{
+				me.request(other.getPlayer());
+			}
+			else if (me.getFailTime() == 0)
+			{
+				me.failRequest(other);
 			}
 		}
 	}

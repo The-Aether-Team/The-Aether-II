@@ -43,7 +43,7 @@ public class PacketTradeInitial implements IMessage
 
 			if (aePlayer != null)
 			{
-				PlayerTradeModule tradeModule = aePlayer.getTradingModule();
+				PlayerTradeModule tradeModule = aePlayer.getModule(PlayerTradeModule.class);
 				Entity entity = player.world.getEntityByID(message.entityId);
 
 				tradeModule.clear();
@@ -51,8 +51,8 @@ public class PacketTradeInitial implements IMessage
 				if (entity instanceof EntityPlayer)
 				{
 					PlayerAether target = PlayerAether.getPlayer(entity);
+					target.getModule(PlayerTradeModule.class).clear();
 
-					target.getTradingModule().clear();
 					tradeModule.setTarget(target);
 				}
 			}

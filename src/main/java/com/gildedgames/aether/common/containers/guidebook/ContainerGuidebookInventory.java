@@ -5,6 +5,7 @@ import com.gildedgames.aether.api.items.IItemProperties;
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerEquipmentModule;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.*;
@@ -18,6 +19,7 @@ public class ContainerGuidebookInventory extends ContainerPlayer
 
 	private final IInventoryEquipment inventoryEquipment;
 
+
 	private Slot binSlot;
 
 	public ContainerGuidebookInventory(IPlayerAether aePlayer)
@@ -25,7 +27,7 @@ public class ContainerGuidebookInventory extends ContainerPlayer
 		super(aePlayer.getEntity().inventory, false, aePlayer.getEntity());
 
 		this.aePlayer = aePlayer;
-		this.inventoryEquipment = aePlayer.getEquipmentModule().getInventory();
+		this.inventoryEquipment = aePlayer.getModule(PlayerEquipmentModule.class).getInventory();
 
 		this.createSlots();
 	}
@@ -195,7 +197,8 @@ public class ContainerGuidebookInventory extends ContainerPlayer
 		if (slotNumber == this.binSlot.slotNumber && this.aePlayer.getEntity().capabilities.isCreativeMode)
 		{
 			this.aePlayer.getEntity().inventory.clear();
-			this.aePlayer.getEquipmentModule().getInventory().clear();
+
+			this.inventoryEquipment.clear();
 		}
 
 		if (slot != null && slot.getHasStack())

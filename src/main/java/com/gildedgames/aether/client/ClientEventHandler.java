@@ -19,6 +19,7 @@ import com.gildedgames.aether.client.gui.util.ToolTipCurrencyHelper;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerAbilitiesModule;
 import com.gildedgames.aether.common.containers.slots.SlotAmbrosium;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
 import com.gildedgames.aether.common.containers.slots.SlotFlintAndSteel;
@@ -36,7 +37,10 @@ import com.gildedgames.orbis.lib.util.InputHelper;
 import net.minecraft.client.LoadingScreenRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.client.gui.*;
+import net.minecraft.client.gui.GuiDownloadTerrain;
+import net.minecraft.client.gui.GuiMainMenu;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiEditSign;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.GlStateManager;
@@ -59,7 +63,9 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Optional;
 
 @Mod.EventBusSubscriber(Side.CLIENT)
 public class ClientEventHandler
@@ -528,14 +534,15 @@ public class ClientEventHandler
 
 			if (aePlayer != null)
 			{
-				if (aePlayer.getAbilitiesModule().getMidAirJumpsAllowed() > 0)
+				PlayerAbilitiesModule abilitiesModule = aePlayer.getModule(PlayerAbilitiesModule.class);
+
+				if (abilitiesModule.getMidAirJumpsAllowed() > 0)
 				{
 					if (mc.gameSettings.keyBindJump.isKeyDown() && !PREV_JUMP_BIND_STATE)
 					{
-						if (!player.isInWater() && aePlayer.getAbilitiesModule().getTicksAirborne() > 2
-								&& !player.capabilities.isCreativeMode)
+						if (!player.isInWater() && abilitiesModule.getTicksAirborne() > 2 && !player.capabilities.isCreativeMode)
 						{
-							if (aePlayer.getAbilitiesModule().performMidAirJump())
+							if (abilitiesModule.performMidAirJump())
 							{
 								NetworkingAether.sendPacketToServer(new PacketSpecialMovement(PacketSpecialMovement.Action.EXTRA_JUMP));
 

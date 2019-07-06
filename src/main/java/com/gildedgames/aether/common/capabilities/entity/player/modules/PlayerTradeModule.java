@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
+import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.client.gui.dialog.GuiTrade;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
@@ -13,7 +14,6 @@ import com.gildedgames.aether.common.network.packets.trade.PacketTradeState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.text.ITextComponent;
@@ -27,7 +27,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class PlayerTradeModule extends PlayerAetherModule
 {
 
-	private PlayerAether target;
+	private IPlayerAether target;
 
 	private int requestedTime, failTime, openSlots, tradeSlots;
 
@@ -64,29 +64,14 @@ public class PlayerTradeModule extends PlayerAetherModule
 		}
 	}
 
-	@Override
-	public void tickEnd(TickEvent.PlayerTickEvent event)
-	{
-	}
-
-	@Override
-	public void write(final NBTTagCompound output)
-	{
-	}
-
-	@Override
-	public void read(final NBTTagCompound input)
-	{
-	}
-
-	public PlayerAether getTarget()
+	public IPlayerAether getTarget()
 	{
 		return this.target;
 	}
 
 	public boolean isTrading()
 	{
-		return this.isTrading && this.target != null && this.getPlayer().equals(this.target.getTradingModule().target);
+		return this.isTrading && this.target != null && this.getPlayer().equals(this.target.getModule(PlayerTradeModule.class).target);
 	}
 
 	public void setConfirmed(boolean confirmed)
@@ -136,7 +121,7 @@ public class PlayerTradeModule extends PlayerAetherModule
 	{
 		if (!this.getWorld().isRemote)
 		{
-			PlayerTradeModule targetTrade = this.target.getTradingModule();
+			PlayerTradeModule targetTrade = this.target.getModule(PlayerTradeModule.class);
 
 			if (this.error)
 			{
@@ -174,7 +159,7 @@ public class PlayerTradeModule extends PlayerAetherModule
 		}
 	}
 
-	public void request(PlayerAether other)
+	public void request(IPlayerAether other)
 	{
 		this.target = other;
 		this.requestedTime = 20 * 20;
@@ -253,7 +238,7 @@ public class PlayerTradeModule extends PlayerAetherModule
 		this.failTime = 30;
 	}
 
-	public void endTrade(PlayerAether aePlayer)
+	public void endTrade(IPlayerAether aePlayer)
 	{
 		if (this.isTrading() && aePlayer.equals(this.getTarget()))
 		{

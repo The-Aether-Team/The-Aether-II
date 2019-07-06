@@ -8,7 +8,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -63,24 +62,6 @@ public class PlayerBlockLevitateModule extends PlayerAetherModule
 				}
 			}
 		}
-	}
-
-	@Override
-	public void tickEnd(TickEvent.PlayerTickEvent event)
-	{
-
-	}
-
-	@Override
-	public void write(final NBTTagCompound compound)
-	{
-
-	}
-
-	@Override
-	public void read(final NBTTagCompound compound)
-	{
-
 	}
 
 	@Override

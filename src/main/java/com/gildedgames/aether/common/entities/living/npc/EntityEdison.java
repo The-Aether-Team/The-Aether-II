@@ -8,6 +8,8 @@ import com.gildedgames.aether.api.shop.IShopInstance;
 import com.gildedgames.aether.api.shop.IShopInstanceGroup;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerDialogModule;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerProgressModule;
 import com.gildedgames.aether.common.entities.util.EntityBodyHelperNoRotation;
 import com.gildedgames.aether.common.entities.util.EntityEyesComponent;
 import com.gildedgames.aether.common.entities.util.IEntityEyesComponentProvider;
@@ -162,40 +164,41 @@ public class EntityEdison extends EntityNPC implements IEntityEyesComponentProvi
 		if (!super.processInteract(player, hand))
 		{
 			final PlayerAether playerAether = PlayerAether.getPlayer(player);
+			final PlayerDialogModule dialogModule = playerAether.getModule(PlayerDialogModule.class);
+			final PlayerProgressModule progressModule = playerAether.getModule(PlayerProgressModule.class);
 
-			playerAether.getDialogController().setTalkingEntity(this);
+			dialogModule.setTalkingEntity(this);
 
 			if (!player.world.isRemote)
 			{
-				boolean hasDied = playerAether.getProgressModule().hasDiedInAether();
+				boolean hasDied = progressModule.hasDiedInAether();
 
-				if (playerAether.getProgressModule().hasTalkedTo(EntityEdison.SPEAKER))
+				if (progressModule.hasTalkedTo(EntityEdison.SPEAKER))
 				{
 					String node = "start";
 
-					if (hasDied && !playerAether.getProgressModule().getBoolean("talkToEdisonAfterDying"))
+					if (hasDied && !progressModule.getBoolean("talkToEdisonAfterDying"))
 					{
 						node = "start_respawn";
 					}
 
-					playerAether.getDialogController().openScene(AetherCore.getResource("edison/outpost_greet"), node);
+					dialogModule.openScene(AetherCore.getResource("edison/outpost_greet"), node);
 
 					if (hasDied)
 					{
-						playerAether.getProgressModule().setBoolean("talkToEdisonAfterDying", true);
+						progressModule.setBoolean("talkToEdisonAfterDying", true);
 					}
 				}
 				else
 				{
 					String node = hasDied ? "start_respawn_not_introduced" : "start_not_introduced";
 
-					playerAether.getDialogController().openScene(AetherCore.getResource("edison/outpost_greet"), node);
-
-					playerAether.getProgressModule().setHasTalkedTo(EntityEdison.SPEAKER, true);
+					dialogModule.openScene(AetherCore.getResource("edison/outpost_greet"), node);
+					progressModule.setHasTalkedTo(EntityEdison.SPEAKER, true);
 
 					if (hasDied)
 					{
-						playerAether.getProgressModule().setBoolean("talkToEdisonAfterDying", true);
+						progressModule.setBoolean("talkToEdisonAfterDying", true);
 					}
 				}
 			}

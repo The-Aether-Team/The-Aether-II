@@ -5,7 +5,6 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModu
 import com.gildedgames.aether.common.network.packets.PacketSpecialMovement;
 import com.gildedgames.aether.common.util.helpers.AetherHelper;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -180,18 +179,6 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 				this.getEntity().eyeHeight = this.prevEyeHeight;
 			}
 		}
-	}
-
-	@Override
-	public void write(final NBTTagCompound compound)
-	{
-
-	}
-
-	@Override
-	public void read(final NBTTagCompound compound)
-	{
-
 	}
 
 }

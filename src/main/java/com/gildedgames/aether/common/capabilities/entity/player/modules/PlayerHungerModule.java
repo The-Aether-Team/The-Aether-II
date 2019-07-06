@@ -3,18 +3,17 @@ package com.gildedgames.aether.common.capabilities.entity.player.modules;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.FoodStats;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
-public class PlayerHungerDisableModule extends PlayerAetherModule
+public class PlayerHungerModule extends PlayerAetherModule
 {
 
 	private int startHunger;
 
-	public PlayerHungerDisableModule(PlayerAether playerAether)
+	public PlayerHungerModule(PlayerAether playerAether)
 	{
 		super(playerAether);
 	}
@@ -68,17 +67,5 @@ public class PlayerHungerDisableModule extends PlayerAetherModule
 
 			this.setFoodData(this.getEntity().getFoodStats(), this.calcBaselineHunger(), 1);
 		}
-	}
-
-	@Override
-	public void write(NBTTagCompound nbtTagCompound)
-	{
-
-	}
-
-	@Override
-	public void read(NBTTagCompound nbtTagCompound)
-	{
-
 	}
 }

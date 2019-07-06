@@ -38,7 +38,7 @@ public class ContainerTrade extends Container
 	public ContainerTrade(final InventoryPlayer playerInventory)
 	{
 		this.playerInventory = playerInventory;
-		this.tradeModule = PlayerAether.getPlayer(playerInventory.player).getTradingModule();
+		this.tradeModule = PlayerAether.getPlayer(playerInventory.player).getModule(PlayerTradeModule.class);
 
 		for (int i = 0; i < 3; ++i)
 		{
@@ -89,7 +89,7 @@ public class ContainerTrade extends Container
 
 			if (this.tradeModule.isTrading())
 			{
-				PlayerTradeModule otherTrade = this.tradeModule.getTarget().getTradingModule();
+				PlayerTradeModule otherTrade = this.tradeModule.getTarget().getModule(PlayerTradeModule.class);
 
 				otherTrade.endTrade(this.tradeModule.getPlayer());
 
@@ -207,7 +207,7 @@ public class ContainerTrade extends Container
 			}
 
 			this.tradeModule.setOpenSlots(totalSlots);
-			this.tradeModule.getTarget().getTradingModule().setTradeSlots(totalSlots);
+			this.tradeModule.getTarget().getModule(PlayerTradeModule.class).setTradeSlots(totalSlots);
 		}
 
 		this.tradeModule.setOpenSlots(totalSlots);
@@ -243,7 +243,7 @@ public class ContainerTrade extends Container
 			if (error && !this.sentError)
 			{
 				this.tradeModule.sizeError(true);
-				this.tradeModule.getTarget().getTradingModule().sizeError(true);
+				this.tradeModule.getTarget().getModule(PlayerTradeModule.class).sizeError(true);
 				NetworkingAether.sendPacketToPlayer(new PacketTradeMessage("aether.trade.message.tradewarn"), this.tradeModule.getPlayerMP());
 				NetworkingAether.sendPacketToPlayer(new PacketTradeMessage("aether.trade.message.inventorywarn"), this.tradeModule.getTargetMP());
 				error = true;
@@ -251,7 +251,7 @@ public class ContainerTrade extends Container
 			else if (!error && this.sentError)
 			{
 				this.tradeModule.sizeError(false);
-				this.tradeModule.getTarget().getTradingModule().sizeError(false);
+				this.tradeModule.getTarget().getModule(PlayerTradeModule.class).sizeError(false);
 			}
 		}
 

@@ -1,7 +1,9 @@
 package com.gildedgames.aether.common.network.packets.dialog;
 
+import com.gildedgames.aether.api.dialog.IDialogController;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerDialogModule;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import com.gildedgames.orbis.lib.util.io.NBTFunnel;
 import io.netty.buffer.ByteBuf;
@@ -64,9 +66,10 @@ public class PacketOpenDialog implements IMessage
 			Map<String, Boolean> conditionsMet = message.funnel.getMap("c", NBTFunnel.STRING_GETTER, NBTFunnel.BOOLEAN_GETTER);
 
 			final IPlayerAether aePlayer = PlayerAether.getPlayer(player);
+			final IDialogController controller = aePlayer.getModule(PlayerDialogModule.class);
 
-			aePlayer.getDialogController().setConditionsMetData(conditionsMet);
-			aePlayer.getDialogController().openScene(message.name, message.startingNodeId);
+			controller.setConditionsMetData(conditionsMet);
+			controller.openScene(message.name, message.startingNodeId);
 
 			return null;
 		}

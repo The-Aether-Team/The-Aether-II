@@ -2,6 +2,7 @@ package com.gildedgames.aether.client.models.entities.player;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerPatronRewardModule;
 import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
 import com.gildedgames.aether.common.patron.armor.PatronRewardArmor;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
@@ -62,7 +63,7 @@ public class LayerHeadShadow extends LayerBipedArmor
 
 		if (armor == null)
 		{
-			armor = player.getPatronRewardsModule().getChoices().getArmorChoice();
+			armor = player.getModule(PlayerPatronRewardModule.class).getChoices().getArmorChoice();
 		}
 
 		if (armor != null || helm.isEmpty() || !(helm.getItem() instanceof ItemAetherArmor))
@@ -72,22 +73,21 @@ public class LayerHeadShadow extends LayerBipedArmor
 
 		GameProfile profile = player.getEntity().getGameProfile();
 
-		ResourceLocation texture = DefaultPlayerSkin.getDefaultSkinLegacy();
+		Minecraft minecraft = Minecraft.getMinecraft();
 
-		if (profile != null)
+		Map<MinecraftProfileTexture.Type, MinecraftProfileTexture> map = minecraft.getSkinManager().loadSkinFromCache(profile);
+
+		ResourceLocation texture;
+
+		if (map.containsKey(MinecraftProfileTexture.Type.SKIN))
 		{
-			Minecraft minecraft = Minecraft.getMinecraft();
-			Map<MinecraftProfileTexture.Type, MinecraftProfileTexture> map = minecraft.getSkinManager().loadSkinFromCache(profile);
+			texture = minecraft.getSkinManager().loadSkin(map.get(MinecraftProfileTexture.Type.SKIN), MinecraftProfileTexture.Type.SKIN);
+		}
+		else
+		{
+			UUID uuid = EntityPlayer.getUUID(profile);
 
-			if (map.containsKey(MinecraftProfileTexture.Type.SKIN))
-			{
-				texture = minecraft.getSkinManager().loadSkin(map.get(MinecraftProfileTexture.Type.SKIN), MinecraftProfileTexture.Type.SKIN);
-			}
-			else
-			{
-				UUID uuid = EntityPlayer.getUUID(profile);
-				texture = DefaultPlayerSkin.getDefaultSkin(uuid);
-			}
+			texture = DefaultPlayerSkin.getDefaultSkin(uuid);
 		}
 
 		String skinType = EntityUtil.getSkin(player.getEntity());

@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.entities.ai.swet;
 
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerSwetTrackerModule;
 import com.gildedgames.aether.common.entities.ai.EntityAI;
 import com.gildedgames.aether.common.entities.ai.hopping.HoppingMoveHelper;
 import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
@@ -62,7 +63,7 @@ public class AILatchOn extends EntityAI<EntitySwet>
 			this.entity().setSucking(0);
 
 			NetworkingAether.sendPacketToWatching(new PacketLatchSwet(this.entity().getType(), player.getEntityId()), player, true);
-			PlayerAether.getPlayer(player).getSwetTracker().latchSwet(this.entity());
+			PlayerAether.getPlayer(player).getModule(PlayerSwetTrackerModule.class).latchSwet(this.entity());
 
 			this.entity().playSound(SoundEvents.ENTITY_SLIME_ATTACK, 1.0F,
 					(this.entity().getRNG().nextFloat() - this.entity().getRNG().nextFloat()) * 0.2F + 1.0F);

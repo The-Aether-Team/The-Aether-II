@@ -8,6 +8,7 @@ import com.gildedgames.aether.api.shop.IShopInstanceGroup;
 import com.gildedgames.aether.common.AetherCelebrations;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerDialogModule;
 import com.gildedgames.aether.common.shop.ShopInstanceGroup;
 import com.gildedgames.orbis.lib.util.mc.NBTHelper;
 import net.minecraft.block.Block;
@@ -176,12 +177,13 @@ public class EntityMysteriousFigure extends EntityNPC
 		if (!super.processInteract(player, hand))
 		{
 			final PlayerAether playerAether = PlayerAether.getPlayer(player);
+			final PlayerDialogModule dialogModule = playerAether.getModule(PlayerDialogModule.class);
 
-			playerAether.getDialogController().setTalkingEntity(this);
+			dialogModule.setTalkingEntity(this);
 
 			if (!player.world.isRemote)
 			{
-				playerAether.getDialogController().openScene(AetherCore.getResource("mysterious_figure/start"), "start");
+				dialogModule.openScene(AetherCore.getResource("mysterious_figure/start"), "start");
 			}
 		}
 

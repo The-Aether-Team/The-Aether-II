@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.network.packets;
 
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerCampfiresModule;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import com.gildedgames.orbis.lib.util.io.NBTFunnel;
 import com.gildedgames.orbis.lib.util.mc.BlockPosDimension;
@@ -57,9 +58,8 @@ public class PacketCampfires implements IMessage
 
 			Set<BlockPosDimension> campfires = message.funnel.getSet("c");
 
-			final PlayerAether playerAether = PlayerAether.getPlayer(player);
-
-			playerAether.getCampfiresModule().setCampfiresActivated(campfires);
+			final PlayerAether aePlayer = PlayerAether.getPlayer(player);
+			aePlayer.getModule(PlayerCampfiresModule.class).setCampfiresActivated(campfires);
 
 			return null;
 		}

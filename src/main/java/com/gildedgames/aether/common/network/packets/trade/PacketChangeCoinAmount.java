@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.network.packets.trade;
 
 import com.gildedgames.aether.client.gui.dialog.GuiTrade;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerCurrencyModule;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTradeModule;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
@@ -44,9 +45,9 @@ public class PacketChangeCoinAmount implements IMessage
 		public IMessage onMessage(PacketChangeCoinAmount message, EntityPlayer player)
 		{
 			PlayerAether aePlayer = PlayerAether.getPlayer(player);
-			PlayerTradeModule tradeModule = aePlayer.getTradingModule();
+			PlayerTradeModule tradeModule = aePlayer.getModule(PlayerTradeModule.class);
 
-			double val = aePlayer.getCurrencyModule().getCurrencyValue();
+			double val = aePlayer.getModule(PlayerCurrencyModule.class).getCurrencyValue();
 
 			if (message.coinCount <= val && tradeModule.isTrading() && !tradeModule.isLockedIn())
 			{

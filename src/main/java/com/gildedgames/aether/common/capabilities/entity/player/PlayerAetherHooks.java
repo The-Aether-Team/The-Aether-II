@@ -7,6 +7,8 @@ import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.IBlockSnowy;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerCampfiresModule;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerProgressModule;
 import com.gildedgames.aether.common.containers.ContainerTrade;
 import com.gildedgames.aether.common.entities.util.shared.SharedAetherAttributes;
 import com.gildedgames.aether.common.network.NetworkingAether;
@@ -104,7 +106,7 @@ public class PlayerAetherHooks
 
 			if (aePlayer.getEntity().world.provider.getDimensionType() == DimensionsAether.AETHER)
 			{
-				aePlayer.getCampfiresModule().setDeathPos(new BlockPosDimension(event.getEntity().getPosition(), aePlayer.getEntity().dimension));
+				aePlayer.getModule(PlayerCampfiresModule.class).setDeathPos(new BlockPosDimension(event.getEntity().getPosition(), aePlayer.getEntity().dimension));
 			}
 		}
 	}
@@ -254,11 +256,7 @@ public class PlayerAetherHooks
 	public static void onPlayerRespawn(final PlayerRespawnEvent event)
 	{
 		final PlayerAether aePlayer = PlayerAether.getPlayer(event.player);
-
-		if (aePlayer != null)
-		{
-			aePlayer.onRespawn(event);
-		}
+		aePlayer.onRespawn(event);
 
 		if (event.player instanceof EntityPlayerMP && ((EntityPlayerMP) event.player).world.provider.getDimensionType() == DimensionsAether.AETHER)
 		{
@@ -270,13 +268,14 @@ public class PlayerAetherHooks
 				bedPos = EntityPlayer.getBedSpawnLocation(mp.getServerWorld(), bedPos, mp.isSpawnForced(mp.dimension));
 			}
 
-			BlockPos closestCampfire = aePlayer.getCampfiresModule().getClosestCampfire();
+			PlayerCampfiresModule campfiresModule = aePlayer.getModule(PlayerCampfiresModule.class);
+			BlockPos closestCampfire = campfiresModule.getClosestCampfire();
 			BlockPos islandSpawn = IslandHelper.getOutpostPos(mp.getServerWorld(), mp.getPosition());
 
 			final BlockPos respawnPoint = closestCampfire != null ? closestCampfire.add(-1, 0, -1) : islandSpawn;
 			boolean obstructed = false;
 
-			if (aePlayer.getCampfiresModule().shouldRespawnAtCampfire() || bedPos == null)
+			if (campfiresModule.shouldRespawnAtCampfire() || bedPos == null)
 			{
 				BlockPos pos = mp.world.getTopSolidOrLiquidBlock(respawnPoint);
 
@@ -294,15 +293,17 @@ public class PlayerAetherHooks
 				{
 					mp.connection.setPlayerLocation(pos.getX(), pos.getY() + 1, pos.getZ(), 0, 0);
 
-					if (!aePlayer.getProgressModule().hasDiedInAether())
-					{
-						aePlayer.getProgressModule().setHasDiedInAether(true);
+					PlayerProgressModule progressModule = aePlayer.getModule(PlayerProgressModule.class);
 
-						NetworkingAether.sendPacketToPlayer(new PacketMarkPlayerDeath(aePlayer.getProgressModule().hasDiedInAether()), mp);
+					if (!progressModule.hasDiedInAether())
+					{
+						progressModule.setHasDiedInAether(true);
+
+						NetworkingAether.sendPacketToPlayer(new PacketMarkPlayerDeath(progressModule.hasDiedInAether()), mp);
 					}
 				}
 
-				aePlayer.getCampfiresModule().setShouldRespawnAtCampfire(false);
+				campfiresModule.setShouldRespawnAtCampfire(false);
 			}
 
 			if (obstructed)

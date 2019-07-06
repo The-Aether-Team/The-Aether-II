@@ -42,8 +42,7 @@ public class PacketSendInventorySize implements IMessage
 
 			if (aePlayer != null)
 			{
-				PlayerTradeModule tradeModule = aePlayer.getTradingModule();
-
+				PlayerTradeModule tradeModule = aePlayer.getModule(PlayerTradeModule.class);
 				tradeModule.setTradeSlots(message.size);
 			}
 

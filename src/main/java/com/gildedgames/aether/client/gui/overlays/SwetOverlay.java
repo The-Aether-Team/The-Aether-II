@@ -1,6 +1,7 @@
 package com.gildedgames.aether.client.gui.overlays;
 
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerSwetTrackerModule;
 import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -31,7 +32,7 @@ public class SwetOverlay implements IOverlay
 
 		final PlayerAether player = PlayerAether.getPlayer(this.mc.player);
 
-		for (final EntitySwet swet : player.getSwetTracker().getLatchedSwets())
+		for (final EntitySwet swet : player.getModule(PlayerSwetTrackerModule.class).getLatchedSwets())
 		{
 			switch (swet.getType())
 			{

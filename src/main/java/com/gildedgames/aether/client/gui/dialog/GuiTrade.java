@@ -1,10 +1,12 @@
 package com.gildedgames.aether.client.gui.dialog;
 
 import com.gildedgames.aether.api.AetherAPI;
+import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.client.gui.util.IRemoteClose;
 import com.gildedgames.aether.client.gui.util.ToolTipCurrencyHelper;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerCurrencyModule;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTradeModule;
 import com.gildedgames.aether.common.containers.ContainerTrade;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
@@ -91,7 +93,7 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 		super(new GuiElement(Dim2D.flush(), false), prevViewer, new ContainerTrade(player.inventory));
 
 		this.playerAether = PlayerAether.getPlayer(player);
-		this.module = this.playerAether.getTradingModule();
+		this.module = this.playerAether.getModule(PlayerTradeModule.class);
 		this.offeredContents = NonNullList.withSize(16, ItemStack.EMPTY);
 		this.lockinLocalText = I18n.format("aether.trade.gui.lock");
 		this.unlockLocalText = I18n.format("aether.trade.gui.unlock");
@@ -327,7 +329,7 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 
 		if (this.playerAether != null)
 		{
-			long currency = this.playerAether.getCurrencyModule().getCurrencyValue();
+			long currency = this.playerAether.getModule(PlayerCurrencyModule.class).getCurrencyValue();
 
 			this.transferCoins += val;
 
@@ -463,7 +465,7 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 
 		if (this.playerAether != null)
 		{
-			long currency = this.playerAether.getCurrencyModule().getCurrencyValue();
+			long currency = this.playerAether.getModule(PlayerCurrencyModule.class).getCurrencyValue();
 
 			if (this.coinTab != null)
 			{
@@ -659,7 +661,7 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 
 	private void updateTraderLabel()
 	{
-		PlayerAether target = this.module.getTarget();
+		IPlayerAether target = this.module.getTarget();
 
 		if (target != null)
 		{

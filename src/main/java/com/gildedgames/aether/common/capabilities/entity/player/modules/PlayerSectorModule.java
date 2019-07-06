@@ -8,7 +8,6 @@ import com.gildedgames.orbis.lib.preparation.IPrepSector;
 import com.gildedgames.orbis.lib.preparation.impl.util.PrepHelper;
 import com.gildedgames.orbis.lib.util.ChunkMap;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.ArrayList;
@@ -37,12 +36,6 @@ public class PlayerSectorModule extends PlayerAetherModule
 
 		this.update();
 		this.processNext();
-	}
-
-	@Override
-	public void tickEnd(TickEvent.PlayerTickEvent event)
-	{
-
 	}
 
 	private void update()
@@ -210,18 +203,6 @@ public class PlayerSectorModule extends PlayerAetherModule
 				this.waiting = null;
 			}
 		}
-	}
-
-	@Override
-	public void write(NBTTagCompound tag)
-	{
-
-	}
-
-	@Override
-	public void read(NBTTagCompound tag)
-	{
-
 	}
 
 	private class WatchedSector

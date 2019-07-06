@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.items.consumables;
 
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerParachuteModule;
 import com.gildedgames.aether.common.entities.blocks.EntityParachute;
 import com.gildedgames.aether.common.items.IDropOnDeath;
 import net.minecraft.client.resources.I18n;
@@ -58,7 +59,7 @@ public class ItemCloudParachute extends Item implements IDropOnDeath
 		final EntityParachute parachute = new EntityParachute(world, player, EntityParachute.Type.fromOrdinal(stack.getMetadata()));
 
 		final PlayerAether playerAether = PlayerAether.getPlayer(player);
-		playerAether.getParachuteModule().setParachuting(true, EntityParachute.Type.fromOrdinal(stack.getMetadata()));
+		playerAether.getModule(PlayerParachuteModule.class).setParachuting(true, EntityParachute.Type.fromOrdinal(stack.getMetadata()));
 
 		world.spawnEntity(parachute);
 

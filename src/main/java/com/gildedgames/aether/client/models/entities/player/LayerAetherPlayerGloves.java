@@ -1,6 +1,8 @@
 package com.gildedgames.aether.client.models.entities.player;
 
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerEquipmentModule;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerPatronRewardModule;
 import com.gildedgames.aether.common.items.armor.ItemAetherGloves;
 import com.gildedgames.aether.common.patron.armor.PatronRewardArmor;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
@@ -51,14 +53,14 @@ public class LayerAetherPlayerGloves extends LayerBipedArmor
 
 		if (armor == null)
 		{
-			armor = player.getPatronRewardsModule().getChoices().getArmorChoice();
+			armor = player.getModule(PlayerPatronRewardModule.class).getChoices().getArmorChoice();
 		}
 
 		ResourceLocation texture = null;
 
 		if (armor == null)
 		{
-			ItemStack stack = player.getEquipmentModule().getInventory().getStackInSlot(2);
+			ItemStack stack = player.getModule(PlayerEquipmentModule.class).getInventory().getStackInSlot(2);
 
 			if (stack.getItem() instanceof ItemAetherGloves)
 			{

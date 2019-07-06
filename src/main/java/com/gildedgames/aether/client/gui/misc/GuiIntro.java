@@ -5,6 +5,7 @@ import com.gildedgames.aether.client.gui.dialog.GuiNextArrow;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTeleportingModule;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketCancelIntro;
 import com.gildedgames.aether.common.network.packets.PacketSetPlayedIntro;
@@ -219,7 +220,7 @@ public class GuiIntro extends GuiViewerNoContainer
 
 				Minecraft.getMinecraft().getSoundHandler().stopSounds();
 
-				PlayerAether.getPlayer(this.mc.player).getTeleportingModule().setPlayedIntro(true);
+				PlayerAether.getPlayer(this.mc.player).getModule(PlayerTeleportingModule.class).setPlayedIntro(true);
 				NetworkingAether.sendPacketToServer(new PacketSetPlayedIntro(true));
 
 				ClientEventHandler.setDrawBlackScreen(false);
@@ -313,7 +314,7 @@ public class GuiIntro extends GuiViewerNoContainer
 
 		if (this.getSecondsSinceStart() >= 60)
 		{
-			PlayerAether.getPlayer(this.mc.player).getTeleportingModule().setPlayedIntro(true);
+			PlayerAether.getPlayer(this.mc.player).getModule(PlayerTeleportingModule.class).setPlayedIntro(true);
 			NetworkingAether.sendPacketToServer(new PacketSetPlayedIntro(true));
 
 			ClientEventHandler.setDrawBlackScreen(false);

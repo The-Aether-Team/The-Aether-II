@@ -32,13 +32,9 @@ public class PacketNavigateBack implements IMessage
 		public PacketNavigateBack onMessage(final PacketNavigateBack message, final EntityPlayer player)
 		{
 			final IPlayerAether aePlayer = PlayerAether.getPlayer(player);
+			final PlayerDialogModule module = aePlayer.getModule(PlayerDialogModule.class);
 
-			if (aePlayer.getDialogController() instanceof PlayerDialogModule)
-			{
-				PlayerDialogModule module = (PlayerDialogModule) aePlayer.getDialogController();
-
-				module.navigateBackClient();
-			}
+			module.navigateBackClient();
 
 			return null;
 		}

@@ -6,6 +6,8 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.containers.BlockAltar;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerConfigModule;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTeleportingModule;
 import com.gildedgames.aether.common.entities.tiles.multiblock.TileEntityMultiblockController;
 import com.gildedgames.aether.common.events.PostAetherTravelEvent;
 import com.gildedgames.aether.common.network.NetworkingAether;
@@ -116,11 +118,12 @@ public class TileEntityTeleporter extends TileEntityMultiblockController impleme
 				final EntityPlayerMP playerMP = (EntityPlayerMP) player;
 
 				final PlayerAether playerAether = PlayerAether.getPlayer(player);
+				final PlayerTeleportingModule teleportingModule = playerAether.getModule(PlayerTeleportingModule.class);
 
-				playerAether.getTeleportingModule()
+				teleportingModule
 						.setAetherPos(new BlockPosDimension((int) player.posX, (int) player.posY, (int) player.posZ, player.dimension));
 
-				final BlockPosDimension nonAetherPos = playerAether.getTeleportingModule().getNonAetherPos();
+				final BlockPosDimension nonAetherPos = teleportingModule.getNonAetherPos();
 
 				final MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
 
@@ -138,14 +141,15 @@ public class TileEntityTeleporter extends TileEntityMultiblockController impleme
 		if (this.world.isRemote)
 		{
 			final PlayerAether playerAether = PlayerAether.getPlayer(player);
+			final PlayerTeleportingModule teleportingModule = playerAether.getModule(PlayerTeleportingModule.class);
 
 			if (AetherCore.CONFIG.skipIntro())
 			{
-				playerAether.getTeleportingModule().setPlayedIntro(true);
+				teleportingModule.setPlayedIntro(true);
 				NetworkingAether.sendPacketToServer(new PacketSetPlayedIntro(true));
 			}
 
-			if (!playerAether.getTeleportingModule().hasPlayedIntro())
+			if (!teleportingModule.hasPlayedIntro())
 			{
 				ClientEventHandler.setDrawBlackScreen(true);
 			}
@@ -161,12 +165,14 @@ public class TileEntityTeleporter extends TileEntityMultiblockController impleme
 			final NecromancerTowerInstanceHelper handler = InstancesAether.NECROMANCER_TOWER_HANDLER;
 
 			final PlayerAether playerAether = PlayerAether.getPlayer(player);
+			final PlayerTeleportingModule teleportingModule = playerAether.getModule(PlayerTeleportingModule.class);
+
 			final IPlayerInstances hook = OrbisLib.instances().getPlayer(player);
 
-			if (playerAether.getTeleportingModule().getAetherPos() != null)
+			if (teleportingModule.getAetherPos() != null)
 			{
 				final EntityPlayerMP playerMP = (EntityPlayerMP) player;
-				final BlockPosDimension p = playerAether.getTeleportingModule().getAetherPos();
+				final BlockPosDimension p = teleportingModule.getAetherPos();
 
 				final MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
 
@@ -202,9 +208,9 @@ public class TileEntityTeleporter extends TileEntityMultiblockController impleme
 			}
 			else
 			{
-				if (playerAether.getConfigModule().skipIntro())
+				if (playerAether.getModule(PlayerConfigModule.class).skipIntro())
 				{
-					playerAether.getTeleportingModule().teleportToAether();
+					teleportingModule.teleportToAether();
 				}
 				else
 				{

@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.dialog.data.conditions;
 import com.gildedgames.aether.api.dialog.IDialogCondition;
 import com.gildedgames.aether.api.dialog.IDialogController;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerProgressModule;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -46,7 +47,7 @@ public class DialogConditionReturningToOutpost implements IDialogCondition
 			return false;
 		}
 
-		return playerAether.getProgressModule().hasReturnedToBed() == this.validate;
+		return playerAether.getModule(PlayerProgressModule.class).hasReturnedToBed() == this.validate;
 	}
 
 	public static class Deserializer implements JsonDeserializer<DialogConditionReturningToOutpost>

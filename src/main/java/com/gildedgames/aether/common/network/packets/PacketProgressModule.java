@@ -53,8 +53,7 @@ public class PacketProgressModule implements IMessage
 			}
 
 			final PlayerAether playerAether = PlayerAether.getPlayer(player);
-
-			playerAether.getProgressModule().read(message.tag);
+			playerAether.getModule(PlayerProgressModule.class).read(message.tag);
 
 			return null;
 		}

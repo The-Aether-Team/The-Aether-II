@@ -4,6 +4,8 @@ import com.gildedgames.aether.api.world.IWorldObjectHoverable;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerCampfiresModule;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTeleportingModule;
 import com.gildedgames.aether.common.entities.tiles.multiblock.TileEntityMultiblockController;
 import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.orbis.lib.util.TeleporterGeneric;
@@ -50,9 +52,10 @@ public class TileEntityOutpostCampfire extends TileEntityMultiblockController im
 
 			final PlayerAether playerAether = PlayerAether.getPlayer(player);
 
-			playerAether.getTeleportingModule().setAetherPos(new BlockPosDimension((int) player.posX, (int) player.posY, (int) player.posZ, player.dimension));
+			final PlayerTeleportingModule teleportingModule = playerAether.getModule(PlayerTeleportingModule.class);
+			teleportingModule.setAetherPos(new BlockPosDimension((int) player.posX, (int) player.posY, (int) player.posZ, player.dimension));
 
-			final BlockPosDimension pos = playerAether.getTeleportingModule().getNonAetherPos();
+			final BlockPosDimension pos = teleportingModule.getNonAetherPos();
 
 			if (pos != null)
 			{
@@ -83,7 +86,9 @@ public class TileEntityOutpostCampfire extends TileEntityMultiblockController im
 	{
 		PlayerAether playerAether = PlayerAether.getPlayer(Minecraft.getMinecraft().player);
 
-		if (playerAether.getCampfiresModule().hasCampfire(this.posDim))
+		PlayerCampfiresModule campfiresModule = playerAether.getModule(PlayerCampfiresModule.class);
+
+		if (campfiresModule.hasCampfire(this.posDim))
 		{
 			AetherCore.PROXY.spawnCampfireParticles(this.world, this.pos.getX() + 1.0D, this.pos.getY(), this.pos.getZ() + 1.0D);
 		}
@@ -114,9 +119,11 @@ public class TileEntityOutpostCampfire extends TileEntityMultiblockController im
 		{
 			PlayerAether playerAether = PlayerAether.getPlayer(player);
 
-			if (!playerAether.getCampfiresModule().hasCampfire(this.posDim))
+			PlayerCampfiresModule campfiresModule = playerAether.getModule(PlayerCampfiresModule.class);
+
+			if (!campfiresModule.hasCampfire(this.posDim))
 			{
-				playerAether.getCampfiresModule().addActivatedCampfire(this.posDim);
+				campfiresModule.addActivatedCampfire(this.posDim);
 
 				AetherCore.PROXY.spawnCampfireStartParticles(this.world, this.pos.getX() + 1.0D, this.pos.getY(), this.pos.getZ() + 1.0D);
 			}

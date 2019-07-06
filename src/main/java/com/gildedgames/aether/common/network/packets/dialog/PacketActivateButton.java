@@ -2,8 +2,10 @@ package com.gildedgames.aether.common.network.packets.dialog;
 
 import com.gildedgames.aether.api.dialog.IDialogAction;
 import com.gildedgames.aether.api.dialog.IDialogButton;
+import com.gildedgames.aether.api.dialog.IDialogController;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerDialogModule;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import com.google.common.base.Objects;
@@ -45,15 +47,16 @@ public class PacketActivateButton implements IMessage
 		public PacketActivateButton onMessage(final PacketActivateButton message, final EntityPlayer player)
 		{
 			final IPlayerAether aePlayer = PlayerAether.getPlayer(player);
+			final IDialogController dialogController = aePlayer.getModule(PlayerDialogModule.class);
 
-			if (aePlayer.getDialogController().getCurrentSceneInstance() == null)
+			if (dialogController.getCurrentSceneInstance() == null)
 			{
 				return null;
 			}
 
 			IDialogButton found = null;
 
-			for (final IDialogButton b : aePlayer.getDialogController().getCurrentNode().getButtons())
+			for (final IDialogButton b : dialogController.getCurrentNode().getButtons())
 			{
 				if (Objects.equal(message.label, b.getLabel()))
 				{
@@ -62,13 +65,13 @@ public class PacketActivateButton implements IMessage
 				}
 			}
 
-			if (found != null && aePlayer.getDialogController().conditionsMet(found))
+			if (found != null && dialogController.conditionsMet(found))
 			{
 				final Collection<IDialogAction> actions = found.getActions();
 
 				for (final IDialogAction action : actions)
 				{
-					action.performAction(aePlayer.getDialogController());
+					action.performAction(dialogController);
 				}
 			}
 
@@ -82,15 +85,16 @@ public class PacketActivateButton implements IMessage
 		public PacketActivateButton onMessage(final PacketActivateButton message, final EntityPlayer player)
 		{
 			final IPlayerAether aePlayer = PlayerAether.getPlayer(player);
+			final IDialogController dialogController = aePlayer.getModule(PlayerDialogModule.class);
 
-			if (aePlayer.getDialogController().getCurrentSceneInstance() == null)
+			if (dialogController.getCurrentSceneInstance() == null)
 			{
 				return null;
 			}
 
 			IDialogButton found = null;
 
-			for (final IDialogButton b : aePlayer.getDialogController().getCurrentNode().getButtons())
+			for (final IDialogButton b : dialogController.getCurrentNode().getButtons())
 			{
 				if (Objects.equal(message.label, b.getLabel()))
 				{
@@ -101,7 +105,7 @@ public class PacketActivateButton implements IMessage
 
 			if (found != null)
 			{
-				aePlayer.getDialogController().activateButton(found);
+				dialogController.activateButton(found);
 			}
 
 			return null;

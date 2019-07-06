@@ -13,7 +13,6 @@ import com.gildedgames.aether.common.world.spawning.SpawnHandler;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -23,7 +22,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class CaveSpawnModule extends PlayerAetherModule
+public class PlayerCaveSpawnModule extends PlayerAetherModule
 {
 	private int playerYPos;
 	private Biome currentPlayerBiome;
@@ -36,7 +35,7 @@ public class CaveSpawnModule extends PlayerAetherModule
 	private final int minimumYPos = 10;
 	private final int maxLightLevel = 8;
 
-	public CaveSpawnModule(PlayerAether playerAether)
+	public PlayerCaveSpawnModule(PlayerAether playerAether)
 	{
 		super(playerAether);
 		this.playerYPos = 0;
@@ -147,7 +146,7 @@ public class CaveSpawnModule extends PlayerAetherModule
 						mobToSpawn.rotationYawHead = mobToSpawn.rotationYaw;
 						mobToSpawn.renderYawOffset = mobToSpawn.rotationYaw;
 						this.getWorld().spawnEntity(mobToSpawn);
-						AetherCore.LOGGER.info("CaveSpawnModule spawned " + mobToSpawn.toString());
+						AetherCore.LOGGER.info("PlayerCaveSpawnModule spawned " + mobToSpawn.toString());
 						break;
 					}
 				}
@@ -161,18 +160,6 @@ public class CaveSpawnModule extends PlayerAetherModule
 			this.timer = (this.timerMax * yTranslation);
 			this.hasSpawned = false;
 		}
-	}
-
-	@Override
-	public void write(NBTTagCompound tag)
-	{
-
-	}
-
-	@Override
-	public void read(NBTTagCompound tag)
-	{
-
 	}
 
 	private void updateEntityList(Biome biome, World world)

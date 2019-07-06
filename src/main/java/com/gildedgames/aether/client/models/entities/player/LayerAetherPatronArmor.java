@@ -2,6 +2,7 @@ package com.gildedgames.aether.client.models.entities.player;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerPatronRewardModule;
 import com.gildedgames.aether.common.patron.armor.PatronRewardArmor;
 import com.google.common.collect.Maps;
 import net.minecraft.client.model.ModelBiped;
@@ -47,7 +48,7 @@ public class LayerAetherPatronArmor implements LayerRenderer<EntityLivingBase>
 		if (armor == null)
 		{
 			PlayerAether aePlayer = PlayerAether.getPlayer(entity);
-			armor = aePlayer.getPatronRewardsModule().getChoices().getArmorChoice();
+			armor = aePlayer.getModule(PlayerPatronRewardModule.class).getChoices().getArmorChoice();
 		}
 
 		if (armor != null && armor.getArmorTextureName() != null)

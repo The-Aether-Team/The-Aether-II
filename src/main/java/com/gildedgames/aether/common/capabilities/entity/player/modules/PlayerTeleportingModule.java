@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
+import com.gildedgames.aether.api.player.IPlayerAetherModule;
 import com.gildedgames.aether.client.gui.misc.GuiIntro;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
@@ -14,6 +15,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.WorldServer;
@@ -22,7 +24,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class PlayerTeleportingModule extends PlayerAetherModule
+public class PlayerTeleportingModule extends PlayerAetherModule implements IPlayerAetherModule.Serializable
 {
 	public static final int TELEPORT_DELAY = 80;
 
@@ -182,20 +184,22 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 			final int transferToID = AetherCore.CONFIG.getAetherDimID();
 
 			AetherCore.PROXY.teleportEntity(this.getEntity(), worldServer, new TeleporterGeneric(worldServer), transferToID, () -> {
-				final PlayerAether playerAether = PlayerAether.getPlayer(player);
 
-				if (playerAether.getTeleportingModule().getAetherPos() == null)
+				final PlayerAether playerAether = PlayerAether.getPlayer(player);
+				final PlayerTeleportingModule teleportingModule = playerAether.getModule(PlayerTeleportingModule.class);
+
+				if (teleportingModule.getAetherPos() == null)
 				{
 					final BlockPos pos = new BlockPos(100, 0, 100);
 
 					final BlockPos respawn = IslandHelper.getOutpostPos(player.world, pos);
 
-					playerAether.getTeleportingModule()
+					teleportingModule
 							.setAetherPos(new BlockPosDimension(respawn.getX(), respawn.getY(), respawn.getZ(),
 									AetherCore.CONFIG.getAetherDimID()));
 				}
 
-				return playerAether.getTeleportingModule().getAetherPos();
+				return teleportingModule.getAetherPos();
 			});
 		}
 	}
@@ -220,5 +224,11 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 		this.aetherPos = funnel.get("aetherPos");
 
 		this.playedIntro = input.getBoolean("playedIntro");
+	}
+
+	@Override
+	public ResourceLocation getIdentifier()
+	{
+		return AetherCore.getResource("teleport");
 	}
 }

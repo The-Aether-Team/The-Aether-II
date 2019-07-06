@@ -1,10 +1,11 @@
 package com.gildedgames.aether.client.renderer.entities.living;
 
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerEquipmentModule;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerPatronRewardModule;
 import com.gildedgames.aether.common.items.armor.ItemAetherGloves;
 import com.gildedgames.aether.common.patron.armor.PatronRewardArmor;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBiped;
@@ -19,9 +20,9 @@ import net.minecraftforge.client.event.RenderSpecificHandEvent;
 
 public class RenderPlayerHelper {
     public static void renderFirstPersonHand(RenderSpecificHandEvent event, PlayerAether player) {
-        final ItemStack stack = player.getEquipmentModule().getInventory().getStackInSlot(2);
+        final ItemStack stack = player.getModule(PlayerEquipmentModule.class).getInventory().getStackInSlot(2);
 
-        final PatronRewardArmor armor = player.getPatronRewardsModule().getChoices().getArmorChoice();
+        final PatronRewardArmor armor = player.getModule(PlayerPatronRewardModule.class).getChoices().getArmorChoice();
 
         if (armor != null && armor.getArmorGloveTexture(EntityUtil.getSkin(player.getEntity()).equals("slim")) != null) {
             RenderPlayerHelper.renderGloves(armor.getArmorGloveTexture(EntityUtil.getSkin(player.getEntity()).equals("slim")), stack, event.getPartialTicks(),

@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.network.packets;
 
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerEquipmentModule;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
@@ -30,7 +31,7 @@ public class PacketEquipment implements IMessage
 	{
 		this.entityId = aePlayer.getEntity().getEntityId();
 
-		final IInventory inventory = aePlayer.getEquipmentModule().getInventory();
+		final IInventory inventory = aePlayer.getModule(PlayerEquipmentModule.class).getInventory();
 
 		for (int i = 0; i < inventory.getSizeInventory(); i++)
 		{
@@ -92,7 +93,7 @@ public class PacketEquipment implements IMessage
 			{
 				final IPlayerAether aePlayer = PlayerAether.getPlayer(player);
 
-				final IInventory inventory = aePlayer.getEquipmentModule().getInventory();
+				final IInventory inventory = aePlayer.getModule(PlayerEquipmentModule.class).getInventory();
 
 				for (final Pair<Integer, ItemStack> pair : message.changes)
 				{

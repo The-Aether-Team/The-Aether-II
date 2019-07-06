@@ -8,6 +8,7 @@ import com.gildedgames.aether.client.models.entities.player.LayerAetherPlayerGlo
 import com.gildedgames.aether.client.models.entities.player.LayerArmorProxy;
 import com.gildedgames.aether.client.models.entities.player.LayerHeadShadow;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerEquipmentModule;
 import com.gildedgames.aether.common.patron.armor.PatronRewardArmor;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import com.gildedgames.orbis.lib.util.InputHelper;
@@ -50,7 +51,7 @@ public class PatronRewardArmorRenderer implements IPatronRewardRenderer
 
 	private ItemStack getGloves()
 	{
-		IInventoryEquipment inventory = this.playerAether.getEquipmentModule().getInventory();
+		IInventoryEquipment inventory = this.playerAether.getModule(PlayerEquipmentModule.class).getInventory();
 
 		final int slot = inventory.getNextEmptySlotForType(ItemEquipmentSlot.HANDWEAR);
 
@@ -64,7 +65,7 @@ public class PatronRewardArmorRenderer implements IPatronRewardRenderer
 
 	private void setGloves(ItemStack stack)
 	{
-		IInventoryEquipment inventory = this.playerAether.getEquipmentModule().getInventory();
+		IInventoryEquipment inventory = this.playerAether.getModule(PlayerEquipmentModule.class).getInventory();
 
 		inventory.setInventorySlotContents(2, stack);
 	}

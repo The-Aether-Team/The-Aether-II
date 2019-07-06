@@ -1,5 +1,7 @@
 package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
+import com.gildedgames.aether.api.player.IPlayerAetherModule;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.entities.blocks.EntityParachute;
@@ -7,13 +9,14 @@ import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
-public class PlayerParachuteModule extends PlayerAetherModule
+public class PlayerParachuteModule extends PlayerAetherModule implements IPlayerAetherModule.Serializable
 {
 
 	private boolean isParachuting;
@@ -65,12 +68,6 @@ public class PlayerParachuteModule extends PlayerAetherModule
 				this.setParachuting(false, this.type);
 			}
 		}
-	}
-
-	@Override
-	public void tickEnd(TickEvent.PlayerTickEvent event)
-	{
-
 	}
 
 	public void setParachuting(final boolean isParachuting, final EntityParachute.Type type)
@@ -149,4 +146,9 @@ public class PlayerParachuteModule extends PlayerAetherModule
 		this.prevAllowFlying = input.getBoolean("prevAllowFlying");
 	}
 
+	@Override
+	public ResourceLocation getIdentifier()
+	{
+		return AetherCore.getResource("parachute");
+	}
 }

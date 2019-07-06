@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.network.packets.dialog;
 
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerDialogModule;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,7 +32,9 @@ public class PacketCloseScene implements IMessage
 		public PacketCloseScene onMessage(final PacketCloseScene message, final EntityPlayer player)
 		{
 			final IPlayerAether aePlayer = PlayerAether.getPlayer(player);
-			aePlayer.getDialogController().closeScene(aePlayer.getDialogController().getCurrentSceneInstance());
+
+			final PlayerDialogModule dialogModule = aePlayer.getModule(PlayerDialogModule.class);
+			dialogModule.closeCurrentScene();
 
 			return null;
 		}

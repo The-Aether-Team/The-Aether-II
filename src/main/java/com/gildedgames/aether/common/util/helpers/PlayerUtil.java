@@ -1,22 +1,30 @@
 package com.gildedgames.aether.common.util.helpers;
 
 import com.gildedgames.aether.api.player.IPlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerEquipmentModule;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 
 public class PlayerUtil
 {
 	public static boolean isWearingEquipment(IPlayerAether aePlayer, Item... items)
 	{
+		PlayerEquipmentModule equipmentModule = aePlayer.getModule(PlayerEquipmentModule.class);
+
+		IInventory equipmentInventory = equipmentModule.getInventory();
+		NonNullList<ItemStack> armorInventory = aePlayer.getEntity().inventory.armorInventory;
+
 		for (Item item : items)
 		{
 			boolean found = false;
 
-			for (int i = 0; i < aePlayer.getEquipmentModule().getInventory().getSizeInventory(); i++)
+			for (int i = 0; i < equipmentInventory.getSizeInventory(); i++)
 			{
-				ItemStack stack = aePlayer.getEquipmentModule().getInventory().getStackInSlot(i);
+				ItemStack stack = equipmentInventory.getStackInSlot(i);
 
 				if (stack.getItem() == item)
 				{
@@ -26,7 +34,7 @@ public class PlayerUtil
 				}
 			}
 
-			for (ItemStack stack : aePlayer.getEntity().inventory.armorInventory)
+			for (ItemStack stack : armorInventory)
 			{
 				if (stack.getItem() == item)
 				{

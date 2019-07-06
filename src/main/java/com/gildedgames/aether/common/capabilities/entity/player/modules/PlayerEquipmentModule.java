@@ -7,6 +7,7 @@ import com.gildedgames.aether.api.items.equipment.effects.IEffectFactory;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectPool;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 import com.gildedgames.aether.api.player.IEquipmentModule;
+import com.gildedgames.aether.api.player.IPlayerAetherModule;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
@@ -25,10 +26,10 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 
-public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipmentModule
+public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipmentModule, IPlayerAetherModule.Serializable
 {
 	private static final InventoryProvider EQUIPMENT_INV_PROVIDER = new InventoryProvider(AetherCore.getResource("equipmentInv"),
-			(playerAether -> playerAether.getEquipmentModule().getInventory()));
+			(playerAether -> playerAether.getModule(PlayerEquipmentModule.class).getInventory()));
 
 	private static final InventoryProvider NORMAL_INV_PROVIDER = new InventoryProvider(AetherCore.getResource("normalInv"),
 			(playerAether -> playerAether.getEntity().inventory));
@@ -108,12 +109,6 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 
 		this.lastHeldStack = this.getEntity().getHeldItemMainhand();
 		this.lastHeldStackIndex = this.getEntity().inventory.currentItem;
-	}
-
-	@Override
-	public void tickEnd(TickEvent.PlayerTickEvent event)
-	{
-
 	}
 
 	@Override
@@ -219,5 +214,11 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 		Optional<IEffectPool<IEffectProvider>> pool = this.getEffectPool(effect.getIdentifier());
 
 		return pool.isPresent() && !pool.get().isEmpty();
+	}
+
+	@Override
+	public ResourceLocation getIdentifier()
+	{
+		return AetherCore.getResource("equipment");
 	}
 }

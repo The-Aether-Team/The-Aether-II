@@ -40,13 +40,9 @@ public class PacketNavigateNode implements IMessage
 		public PacketNavigateNode onMessage(final PacketNavigateNode message, final EntityPlayer player)
 		{
 			final IPlayerAether aePlayer = PlayerAether.getPlayer(player);
+			final PlayerDialogModule module = aePlayer.getModule(PlayerDialogModule.class);
 
-			if (aePlayer.getDialogController() instanceof PlayerDialogModule)
-			{
-				PlayerDialogModule module = (PlayerDialogModule) aePlayer.getDialogController();
-
-				module.navigateNodeClient(message.nodeId);
-			}
+			module.navigateNodeClient(message.nodeId);
 
 			return null;
 		}

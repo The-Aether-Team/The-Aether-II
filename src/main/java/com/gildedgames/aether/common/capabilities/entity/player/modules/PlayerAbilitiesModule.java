@@ -1,14 +1,16 @@
 package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
+import com.gildedgames.aether.api.player.IPlayerAetherModule;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
-public class PlayerAbilitiesModule extends PlayerAetherModule
+public class PlayerAbilitiesModule extends PlayerAetherModule implements IPlayerAetherModule.Serializable
 {
 
 	private int jumpsSoFar;
@@ -44,12 +46,6 @@ public class PlayerAbilitiesModule extends PlayerAetherModule
 		{
 			this.ticksAirborne++;
 		}
-	}
-
-	@Override
-	public void tickEnd(TickEvent.PlayerTickEvent event)
-	{
-
 	}
 
 	public void onFall(LivingFallEvent event)
@@ -104,4 +100,9 @@ public class PlayerAbilitiesModule extends PlayerAetherModule
 		this.jumpsSoFar = root.getInteger("jumpsSoFar");
 	}
 
+	@Override
+	public ResourceLocation getIdentifier()
+	{
+		return AetherCore.getResource("abilities");
+	}
 }

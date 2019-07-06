@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.network.packets;
 
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerSwetTrackerModule;
 import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
@@ -53,7 +54,7 @@ public class PacketDetachSwet implements IMessage
 
 			EntitySwet remove = null;
 
-			for (final EntitySwet swet : playerAether.getSwetTracker().getLatchedSwets())
+			for (final EntitySwet swet : playerAether.getModule(PlayerSwetTrackerModule.class).getLatchedSwets())
 			{
 				if (swet.getType() == message.type)
 				{
@@ -63,7 +64,7 @@ public class PacketDetachSwet implements IMessage
 
 			if (remove != null)
 			{
-				playerAether.getSwetTracker().detachSwet(remove);
+				playerAether.getModule(PlayerSwetTrackerModule.class).detachSwet(remove);
 			}
 
 			return null;

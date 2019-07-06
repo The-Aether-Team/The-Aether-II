@@ -53,8 +53,7 @@ public class PacketPreventDropsInventories implements IMessage
 			}
 
 			final PlayerAether playerAether = PlayerAether.getPlayer(player);
-
-			playerAether.getPreventDropsModule().read(message.tag);
+			playerAether.getModule(PlayerPreventDropsModule.class).read(message.tag);
 
 			return null;
 		}

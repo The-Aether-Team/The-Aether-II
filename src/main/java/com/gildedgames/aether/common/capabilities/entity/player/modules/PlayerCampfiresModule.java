@@ -1,17 +1,19 @@
 package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
+import com.gildedgames.aether.api.player.IPlayerAetherModule;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.orbis.lib.util.io.NBTFunnel;
 import com.gildedgames.orbis.lib.util.mc.BlockPosDimension;
 import com.google.common.collect.Sets;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.Set;
 
-public class PlayerCampfiresModule extends PlayerAetherModule
+public class PlayerCampfiresModule extends PlayerAetherModule implements IPlayerAetherModule.Serializable
 {
 
 	public Set<BlockPosDimension> campfiresActivated = Sets.newHashSet();
@@ -91,18 +93,6 @@ public class PlayerCampfiresModule extends PlayerAetherModule
 	}
 
 	@Override
-	public void tickStart(TickEvent.PlayerTickEvent event)
-	{
-
-	}
-
-	@Override
-	public void tickEnd(TickEvent.PlayerTickEvent event)
-	{
-
-	}
-
-	@Override
 	public void write(final NBTTagCompound compound)
 	{
 		NBTFunnel funnel = new NBTFunnel(compound);
@@ -120,5 +110,11 @@ public class PlayerCampfiresModule extends PlayerAetherModule
 		this.campfiresActivated = funnel.getSet("campfiresActivated");
 		this.deathPos = funnel.get("deathPos");
 		this.shouldRespawnAtCampfire = compound.getBoolean("shouldRespawnAtCampfire");
+	}
+
+	@Override
+	public ResourceLocation getIdentifier()
+	{
+		return AetherCore.getResource("campfires");
 	}
 }

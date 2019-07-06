@@ -5,6 +5,7 @@ import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.shop.IShopInstanceGroup;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerDialogModule;
 import com.gildedgames.orbis.lib.util.mc.NBTHelper;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -102,8 +103,10 @@ public class EntityNecromancer extends EntityNPC
 			if (!player.world.isRemote)
 			{
 				final IPlayerAether aePlayer = PlayerAether.getPlayer(player);
-				aePlayer.getDialogController().setTalkingEntity(this);
-				aePlayer.getDialogController().openScene(AetherCore.getResource("necromancer/start"), "#start");
+				final PlayerDialogModule dialogModule = aePlayer.getModule(PlayerDialogModule.class);
+
+				dialogModule.setTalkingEntity(this);
+				dialogModule.openScene(AetherCore.getResource("necromancer/start"), "#start");
 			}
 		}
 

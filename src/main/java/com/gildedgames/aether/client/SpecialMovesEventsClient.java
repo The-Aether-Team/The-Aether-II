@@ -37,7 +37,7 @@ public class SpecialMovesEventsClient
 			return;
 		}
 
-		PlayerRollMovementModule module = playerAether.getRollMovementModule();
+		PlayerRollMovementModule module = playerAether.getModule(PlayerRollMovementModule.class);
 
 		if (module.isRolling())
 		{
@@ -73,7 +73,7 @@ public class SpecialMovesEventsClient
 			return;
 		}
 
-		PlayerRollMovementModule module = playerAether.getRollMovementModule();
+		PlayerRollMovementModule module = playerAether.getModule(PlayerRollMovementModule.class);
 
 		if (module.isRolling())
 		{
@@ -152,7 +152,7 @@ public class SpecialMovesEventsClient
 
 				if (action != null)
 				{
-					playerAether.getRollMovementModule().startRolling(action);
+					playerAether.getModule(PlayerRollMovementModule.class).startRolling(action);
 					NetworkingAether.sendPacketToServer(new PacketSpecialMovement(action));
 
 					sneakKeyDownTimeStamp = 0;
@@ -175,7 +175,7 @@ public class SpecialMovesEventsClient
 
 		if (forward || left || back || right)
 		{
-			if (!playerAether.getRollMovementModule().isRolling() && key == lastKey && time - sneakKeyDownTimeStamp < sneakTimeRequired)
+			if (!playerAether.getModule(PlayerRollMovementModule.class).isRolling() && key == lastKey && time - sneakKeyDownTimeStamp < sneakTimeRequired)
 			{
 				rollKeyDownTimeStamp = System.currentTimeMillis();
 			}

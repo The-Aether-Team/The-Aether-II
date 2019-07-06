@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.network.packets.dialog;
 
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerDialogModule;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import com.gildedgames.orbis.lib.util.io.NBTFunnel;
 import io.netty.buffer.ByteBuf;
@@ -55,7 +56,7 @@ public class PacketConditionsMetData implements IMessage
 
 			if (conditionsMet != null)
 			{
-				aePlayer.getDialogController().setConditionsMetData(conditionsMet);
+				aePlayer.getModule(PlayerDialogModule.class).setConditionsMetData(conditionsMet);
 			}
 
 			return null;

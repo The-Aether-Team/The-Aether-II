@@ -89,7 +89,7 @@ public class PacketTradeMessage implements IMessage
 
 			if (aePlayer != null)
 			{
-				PlayerTradeModule tradeModule = aePlayer.getTradingModule();
+				PlayerTradeModule tradeModule = aePlayer.getModule(PlayerTradeModule.class);
 
 				if(tradeModule.isTrading() && message.text.length() <= 256)
 				{

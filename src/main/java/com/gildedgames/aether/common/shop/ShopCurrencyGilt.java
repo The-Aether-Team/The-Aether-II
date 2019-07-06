@@ -5,6 +5,7 @@ import com.gildedgames.aether.api.shop.ICurrencyListener;
 import com.gildedgames.aether.api.shop.IGuiCurrencyValue;
 import com.gildedgames.aether.api.shop.IShopCurrency;
 import com.gildedgames.aether.client.gui.dialog.GuiCoinsContainer;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerCurrencyModule;
 import com.gildedgames.orbis.lib.client.rect.Rect;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -18,19 +19,19 @@ public class ShopCurrencyGilt implements IShopCurrency
 	@Override
 	public long getValue(IPlayerAether playerAether)
 	{
-		return playerAether.getCurrencyModule().getCurrencyValue();
+		return playerAether.getModule(PlayerCurrencyModule.class).getCurrencyValue();
 	}
 
 	@Override
 	public void addValue(long value, IPlayerAether playerAether)
 	{
-		playerAether.getCurrencyModule().add(value);
+		playerAether.getModule(PlayerCurrencyModule.class).add(value);
 	}
 
 	@Override
 	public void removeValue(long value, IPlayerAether playerAether)
 	{
-		playerAether.getCurrencyModule().take(value);
+		playerAether.getModule(PlayerCurrencyModule.class).take(value);
 	}
 
 	@Override
@@ -54,13 +55,13 @@ public class ShopCurrencyGilt implements IShopCurrency
 	@Override
 	public void listenForCurrency(IPlayerAether playerAether, ICurrencyListener listener)
 	{
-		playerAether.getCurrencyModule().listen(listener);
+		playerAether.getModule(PlayerCurrencyModule.class).listen(listener);
 	}
 
 	@Override
 	public boolean unlistenForCurrency(IPlayerAether playerAether, ICurrencyListener listener)
 	{
-		return playerAether.getCurrencyModule().unlisten(listener);
+		return playerAether.getModule(PlayerCurrencyModule.class).unlisten(listener);
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package com.gildedgames.aether.client.models.entities.player;
 
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerPatronRewardModule;
 import com.gildedgames.aether.common.patron.armor.PatronRewardArmor;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
@@ -40,7 +41,7 @@ public class LayerArmorProxy extends LayerBipedArmor
 		}
 
 		PlayerAether aePlayer = PlayerAether.getPlayer(entitylivingbaseIn);
-		PatronRewardArmor armor = aePlayer.getPatronRewardsModule().getChoices().getArmorChoice();
+		PatronRewardArmor armor = aePlayer.getModule(PlayerPatronRewardModule.class).getChoices().getArmorChoice();
 
 		if (armor == null || armor.getArmorTextureName() == null)
 		{

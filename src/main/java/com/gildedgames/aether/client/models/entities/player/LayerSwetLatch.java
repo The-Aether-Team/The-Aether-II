@@ -3,6 +3,7 @@ package com.gildedgames.aether.client.models.entities.player;
 import com.gildedgames.aether.client.models.entities.living.ModelSwetHead;
 import com.gildedgames.aether.client.models.entities.living.ModelSwetJelly;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerSwetTrackerModule;
 import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
@@ -38,7 +39,7 @@ public class LayerSwetLatch extends LayerBipedArmor
 	private void renderSwet(PlayerAether player, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks,
 			float netHeadYaw, float headPitch, float scale)
 	{
-		List<EntitySwet> swets = player.getSwetTracker().getLatchedSwets();
+		List<EntitySwet> swets = player.getModule(PlayerSwetTrackerModule.class).getLatchedSwets();
 
 		for (int i = 0; i < swets.size(); i++)
 		{

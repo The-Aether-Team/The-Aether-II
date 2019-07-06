@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.dialog.IDialogAction;
 import com.gildedgames.aether.api.dialog.IDialogController;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerProgressModule;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -42,11 +43,12 @@ public class DialogActionTravelToBed implements IDialogAction
 
 		if (bedPos != null)
 		{
-			playerAether.getProgressModule().setBeforeReturnToBed(player.getPosition());
+			PlayerProgressModule progressModule = playerAether.getModule(PlayerProgressModule.class);
+
+			progressModule.setBeforeReturnToBed(player.getPosition());
+			progressModule.setHasReturnedToBed(true);
 
 			player.connection.setPlayerLocation(bedPos.getX(), bedPos.getY(), bedPos.getZ(), 0, 0);
-
-			playerAether.getProgressModule().setHasReturnedToBed(true);
 		}
 	}
 

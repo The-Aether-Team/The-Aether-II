@@ -1,14 +1,13 @@
 package com.gildedgames.aether.common.entities.living.mobs;
 
-import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
 import com.gildedgames.aether.api.effects_system.EEffectIntensity;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffectIntensity;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
-import com.gildedgames.aether.api.items.loot.Loot;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerSwetTrackerModule;
 import com.gildedgames.aether.common.entities.ai.EntityAIRestrictRain;
 import com.gildedgames.aether.common.entities.ai.hopping.*;
 import com.gildedgames.aether.common.entities.ai.swet.AILatchOn;
@@ -96,7 +95,7 @@ public class EntitySwet extends EntityExtendedMob
 
 	public static boolean canLatch(final EntitySwet swet, final EntityPlayer player)
 	{
-		return !player.isInWater() && swet.getFoodSaturation() == 3 && PlayerAether.getPlayer(player).getSwetTracker()
+		return !player.isInWater() && swet.getFoodSaturation() == 3 && PlayerAether.getPlayer(player).getModule(PlayerSwetTrackerModule.class)
 				.canLatchOn() && player.getFoodStats().getFoodLevel() > 4;
 	}
 

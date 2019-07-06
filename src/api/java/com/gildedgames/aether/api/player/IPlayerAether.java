@@ -1,8 +1,9 @@
 package com.gildedgames.aether.api.player;
 
-import com.gildedgames.aether.api.dialog.IDialogController;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+
+import javax.annotation.Nonnull;
 
 /**
  * The Aether's extended player capability that manages all Aether-related additions
@@ -11,26 +12,15 @@ import net.minecraft.nbt.NBTTagCompound;
 public interface IPlayerAether
 {
 	/**
-	 * @return The player's {@link ICurrencyModule} that is responsible for managing the Gilt currency of the player.
-	 */
-	ICurrencyModule getCurrencyModule();
-
-	/**
-	 * @return The player's {@link IEquipmentModule} that is responsible for updating and managing it's
-	 * equipment.
-	 */
-	IEquipmentModule getEquipmentModule();
-
-	/**
-	 * @return The player's {@link IDialogController} that is responsible for managing the player's
-	 * dialog state.
-	 */
-	IDialogController getDialogController();
-
-	/**
 	 * @return The {@link EntityPlayer} entity this capability belongs to.
 	 */
 	EntityPlayer getEntity();
+
+	void registerModule(@Nonnull IPlayerAetherModule module);
+
+	@SuppressWarnings("unchecked")
+	@Nonnull
+	<T extends IPlayerAetherModule> T getModule(@Nonnull Class<T> clazz);
 
 	/**
 	 * @return This player's mining speed modifier.

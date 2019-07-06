@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.items.armor;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerPatronRewardModule;
 import com.gildedgames.aether.common.patron.armor.PatronRewardArmor;
 import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
@@ -35,7 +36,7 @@ public class ItemAetherGloves extends Item
 
 		if (playerAether != null)
 		{
-			PatronRewardArmor armorChoice = playerAether.getPatronRewardsModule().getChoices().getArmorChoice();
+			PatronRewardArmor armorChoice = playerAether.getModule(PlayerPatronRewardModule.class).getChoices().getArmorChoice();
 
 			if (armorChoice != null)
 			{
