@@ -146,7 +146,7 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 						Minecraft.getMinecraft().player.playSound(SoundsAether.glowstone_portal_trigger, 1.0F, 1.0F);
 					}
 				}
-				else if (!this.getWorld().isRemote && this.getTicksInTeleporter() >= TELEPORT_DELAY)
+				else if (!this.getWorld().isRemote && (this.getTicksInTeleporter() >= TELEPORT_DELAY || this.getEntity().isCreative()))
 				{
 					this.ticksInTeleporter = 0;
 
@@ -205,10 +205,6 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 	{
 		final NBTFunnel funnel = new NBTFunnel(output);
 
-		final NBTTagCompound root = new NBTTagCompound();
-
-		output.setTag("Teleport", root);
-
 		funnel.set("nonAetherPos", this.nonAetherPos);
 		funnel.set("aetherPos", this.aetherPos);
 
@@ -219,8 +215,6 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 	public void read(final NBTTagCompound input)
 	{
 		final NBTFunnel funnel = new NBTFunnel(input);
-
-		final NBTTagCompound root = input.getCompoundTag("Teleport");
 
 		this.nonAetherPos = funnel.get("nonAetherPos");
 		this.aetherPos = funnel.get("aetherPos");
