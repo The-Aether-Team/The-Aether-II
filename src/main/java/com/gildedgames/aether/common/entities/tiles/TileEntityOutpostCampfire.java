@@ -63,7 +63,7 @@ public class TileEntityOutpostCampfire extends TileEntityMultiblockController im
 				playerList.transferPlayerToDimension(playerMP, pos.getDim(), teleporter);
 				player.timeUntilPortal = player.getPortalCooldown();
 
-				playerMP.connection.setPlayerLocation(pos.getX(), pos.getY(), pos.getZ(), 0, 0);
+				playerMP.connection.setPlayerLocation(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 0, 0);
 			}
 
 			return true;

@@ -202,13 +202,13 @@ public class CommonProxy implements IAetherServices
 
 				if (optionalLoc == null)
 				{
-					player.connection.setPlayerLocation(player.posX, player.posY, player.posZ, 0, 0);
+					player.connection.setPlayerLocation(player.posX + 0.5, player.posY, player.posZ + 0.5, 0, 0);
 				}
 				else
 				{
 					final BlockPos loc = optionalLoc.get();
 
-					player.connection.setPlayerLocation(loc.getX(), loc.getY(), loc.getZ(), 225, 0);
+					player.connection.setPlayerLocation(loc.getX() + 0.5, loc.getY(), loc.getZ() + 0.5, 225, 0);
 				}
 
 				/** Strange flag that needs to be set to prevent the NetHandlerPlayServer instances from resetting your position **/
