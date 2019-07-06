@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
-import com.gildedgames.aether.client.ClientEventHandler;
 import com.gildedgames.aether.client.gui.misc.GuiIntro;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
@@ -95,8 +94,6 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 		{
 			if (!this.playedIntro && Minecraft.getMinecraft().currentScreen == null)
 			{
-				ClientEventHandler.setDrawBlackScreen(false);
-
 				Minecraft.getMinecraft().displayGuiScreen(new GuiIntro());
 			}
 		}
@@ -159,22 +156,6 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 				{
 					this.timeStartedFade = System.currentTimeMillis();
 				}
-
-				if (AetherCore.isClient())
-				{
-					if (!ClientEventHandler.isFadingIn())
-					{
-						ClientEventHandler.drawBlackFadeIn(2.0D, () ->
-						{
-							ClientEventHandler.setChangeFromBlackToLoad(true);
-							ClientEventHandler.setDrawBlackScreen(true);
-						});
-					}
-				}
-
-				this.getEntity().setPositionAndUpdate(this.getEntity().prevPosX, this.getEntity().prevPosY, this.getEntity().prevPosZ);
-
-				this.getEntity().motionX = this.getEntity().motionY = this.getEntity().motionZ = 0;
 
 				if (this.getSecondsSinceStart() >= 2.0D)
 				{
