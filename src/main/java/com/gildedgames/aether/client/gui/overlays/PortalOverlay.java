@@ -40,18 +40,12 @@ public class PortalOverlay implements IOverlay
 			final PlayerAether playerAether = PlayerAether.getPlayer(this.mc.player);
 			final PlayerTeleportingModule teleporter = playerAether.getTeleportingModule();
 
-			float timeInPortal =
-					teleporter.getPrevTimeInPortal() + (teleporter.getTimeInPortal() - teleporter.getPrevTimeInPortal()) * this.timer.renderPartialTicks;
+			float timeInPortal = (teleporter.getPrevTicksInTeleporter() + ((teleporter.getTicksInTeleporter() - teleporter.getPrevTicksInTeleporter())) * this.timer.renderPartialTicks)
+					/ (float) PlayerTeleportingModule.TELEPORT_DELAY;
+			timeInPortal *= 0.8f;
 
 			if (timeInPortal > 0.0F)
 			{
-				if (timeInPortal < 1.0F)
-				{
-					timeInPortal = timeInPortal * timeInPortal;
-					timeInPortal = timeInPortal * timeInPortal;
-					timeInPortal = timeInPortal * 0.8F + 0.2F;
-				}
-
 				final ScaledResolution scaledRes = new ScaledResolution(this.mc);
 
 				GlStateManager.enableBlend();

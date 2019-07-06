@@ -12,7 +12,6 @@ import com.gildedgames.orbis.lib.util.io.NBTFunnel;
 import com.gildedgames.orbis.lib.util.mc.BlockPosDimension;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
@@ -24,10 +23,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PlayerTeleportingModule extends PlayerAetherModule
 {
+	public static final int TELEPORT_DELAY = 80;
 
-	private float prevTimeInPortal, timeInPortal, timeCharged;
-
-	private boolean teleported, teleporting;
+	private boolean isTeleportCharging;
 
 	private BlockPosDimension nonAetherPos, aetherPos;
 
@@ -35,21 +33,11 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 
 	private float lastPercent;
 
-	private double timeStartedFade = -1;
+	private int ticksInTeleporter, prevTicksInTeleporter;
 
 	public PlayerTeleportingModule(final PlayerAether playerAether)
 	{
 		super(playerAether);
-	}
-
-	public float getPrevTimeInPortal()
-	{
-		return this.prevTimeInPortal;
-	}
-
-	public float getTimeInPortal()
-	{
-		return this.timeInPortal;
 	}
 
 	public BlockPosDimension getNonAetherPos()
@@ -82,9 +70,14 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 		this.playedIntro = playedIntro;
 	}
 
-	private double getSecondsSinceStart()
+	public int getTicksInTeleporter()
 	{
-		return (System.currentTimeMillis() - this.timeStartedFade) / 1000.0D;
+		return this.ticksInTeleporter;
+	}
+
+	public int getPrevTicksInTeleporter()
+	{
+		return this.prevTicksInTeleporter;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -112,7 +105,7 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 	@Override
 	public void tickStart(TickEvent.PlayerTickEvent event)
 	{
-		this.teleporting = false;
+		this.isTeleportCharging = false;
 	}
 
 	@Override
@@ -123,87 +116,44 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 			this.onUpdateClient();
 		}
 
-		this.prevTimeInPortal = this.timeInPortal;
+		this.prevTicksInTeleporter = this.ticksInTeleporter;
 
-		if (this.teleporting)
+		if (!this.isTeleportCharging)
 		{
-			if (this.getEntity().world.isRemote && this.timeCharged == 0 && !this.teleported)
+			this.ticksInTeleporter -= 3;
+
+			if (this.ticksInTeleporter < 0)
 			{
-				if (Minecraft.getMinecraft().player.getEntityId() == this.getEntity().getEntityId())
-				{
-					Minecraft.getMinecraft().player.playSound(SoundsAether.glowstone_portal_trigger, 1.0F, 1.0F);
-				}
-
-				this.timeCharged = 70.0F;
-			}
-
-			this.timeInPortal += 0.0125F;
-
-			if (this.timeInPortal >= 1.0F)
-			{
-				this.timeInPortal = 1.0F;
-			}
-
-			if (!this.teleported && (this.timeInPortal >= 0.5F))
-			{
-				if (this.timeStartedFade == -1)
-				{
-					this.timeStartedFade = System.currentTimeMillis();
-				}
-
-				if (this.getSecondsSinceStart() >= 2.0D)
-				{
-					this.timeStartedFade = -1;
-					this.teleportToAether();
-				}
+				this.ticksInTeleporter = 0;
 			}
 		}
-		else if (this.getEntity().isPotionActive(MobEffects.NAUSEA)
-				&& this.getEntity().getActivePotionEffect(MobEffects.NAUSEA).getDuration() > 60)
-		{
-			this.timeInPortal += 0.006666667F;
 
-			if (this.timeInPortal > 1.0F)
-			{
-				this.timeInPortal = 1.0F;
-			}
-		}
-		else
+		if (this.isTeleportCharging)
 		{
-			if (this.timeInPortal > 0.0F)
+			this.ticksInTeleporter++;
+
+			if (this.getTicksInTeleporter() >= TELEPORT_DELAY)
 			{
-				this.timeInPortal -= 0.05F;
+				this.ticksInTeleporter = 0;
+
+				this.teleportToAether();
 			}
 
-			if (this.timeInPortal < 0.0F)
+			if (this.ticksInTeleporter == 1 && this.getWorld().isRemote && Minecraft.getMinecraft().player.getEntityId() == this.getEntity().getEntityId())
 			{
-				this.timeInPortal = 0.0F;
+				Minecraft.getMinecraft().player.playSound(SoundsAether.glowstone_portal_trigger, 1.0F, 1.0F);
 			}
-
-			this.teleported = false;
 		}
-
-		if (this.timeCharged > 0)
-		{
-			--this.timeCharged;
-		}
-
-		if (this.getEntity().timeUntilPortal > 0)
-		{
-			--this.getEntity().timeUntilPortal;
-		}
-
 	}
 
 	public void processTeleporting()
 	{
-		this.teleporting = true;
+		this.isTeleportCharging = true;
 	}
 
 	public void teleportToAether()
 	{
 		this.getEntity().timeUntilPortal = this.getEntity().getPortalCooldown();
-		this.teleported = true;
 
 		if (this.getEntity().world.isRemote && Minecraft.getMinecraft().player.getEntityId() == this.getEntity().getEntityId())
 		{
@@ -236,8 +186,6 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 				return playerAether.getTeleportingModule().getAetherPos();
 			});
 		}
-
-		this.timeInPortal = 0.0F;
 	}
 
 	@Override
@@ -248,7 +196,6 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 		final NBTTagCompound root = new NBTTagCompound();
 
 		output.setTag("Teleport", root);
-		root.setFloat("timeCharged", this.timeCharged);
 
 		funnel.set("nonAetherPos", this.nonAetherPos);
 		funnel.set("aetherPos", this.aetherPos);
@@ -262,7 +209,6 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 		final NBTFunnel funnel = new NBTFunnel(input);
 
 		final NBTTagCompound root = input.getCompoundTag("Teleport");
-		this.timeCharged = root.getFloat("timeCharged");
 
 		this.nonAetherPos = funnel.get("nonAetherPos");
 		this.aetherPos = funnel.get("aetherPos");
