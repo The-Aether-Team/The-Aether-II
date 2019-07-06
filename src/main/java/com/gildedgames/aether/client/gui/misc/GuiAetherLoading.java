@@ -50,12 +50,12 @@ public class GuiAetherLoading extends GuiViewer implements CustomLoadingRenderer
 
 		final Pos2D center = InputHelper.getCenter();
 
-		this.highlands = new GuiTexture(Dim2D.build().scale(0.45F).width(512).height(235).center(true).pos(center).flush(), HIGHLANDS);
+		this.highlands = new GuiTexture(Dim2D.build().scale(0.5F).width(512).height(235).center(true).pos(center).flush(), HIGHLANDS);
 
-		this.loading = new GuiText(Dim2D.build().center(true).pos(center).addY(70).flush(),
+		this.loading = new GuiText(Dim2D.build().pos(InputHelper.getBottomLeft()).addY(-16).addX(8).flush(),
 				new Text(new TextComponentTranslation("gui.aether.loading.indeterminate"), 1.0F));
 
-		this.spinner = new GuiText(Dim2D.build().center(true).pos(center).addY(85).flush(),
+		this.spinner = new GuiText(Dim2D.build().pos(InputHelper.getBottomRight()).addY(-16).addX(-24).flush(),
 				new Text(new TextComponentString(SPINNER_STATES[0]), 1.0f));
 
 		context.addChildren(this.highlands, this.loading, this.spinner);
