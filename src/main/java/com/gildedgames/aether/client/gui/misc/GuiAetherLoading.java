@@ -16,11 +16,14 @@ import com.gildedgames.orbis.lib.util.InputHelper;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import org.lwjgl.opengl.GL11;
 
 public class GuiAetherLoading extends GuiViewer implements CustomLoadingRenderer.ICustomLoading
 {
+	private static final String[] SPINNER_STATES = new String[] { "0oo", "o0o", "oo0" };
+
 	private static final ResourceLocation HIGHLANDS = AetherCore.getResource("textures/gui/intro/highlands.png");
 
 	private static final ResourceLocation HUE_BACKGROUND = AetherCore.getResource("textures/gui/intro/hue_background.png");
@@ -29,9 +32,11 @@ public class GuiAetherLoading extends GuiViewer implements CustomLoadingRenderer
 
 	private GuiTexture highlands;
 
-	private GuiText loading;
+	private GuiText loading, spinner;
 
 	private float lastPercent;
+
+	private long millis;
 
 	public GuiAetherLoading()
 	{
@@ -50,7 +55,12 @@ public class GuiAetherLoading extends GuiViewer implements CustomLoadingRenderer
 		this.loading = new GuiText(Dim2D.build().center(true).pos(center).addY(70).flush(),
 				new Text(new TextComponentTranslation("gui.aether.loading.indeterminate"), 1.0F));
 
-		context.addChildren(this.highlands, this.loading);
+		this.spinner = new GuiText(Dim2D.build().center(true).pos(center).addY(85).flush(),
+				new Text(new TextComponentString(SPINNER_STATES[0]), 1.0f));
+
+		context.addChildren(this.highlands, this.loading, this.spinner);
+
+		this.millis = System.currentTimeMillis();
 	}
 
 	@Override
@@ -98,6 +108,10 @@ public class GuiAetherLoading extends GuiViewer implements CustomLoadingRenderer
 				this.loading.setText(new Text(new TextComponentTranslation("gui.aether.loading.progress", percentString), 1.0F));
 			}
 		}
+
+		int spinnerStateIndex = (int) ((System.currentTimeMillis() - this.millis) / 150) % SPINNER_STATES.length;
+
+		this.spinner.setText(new Text(new TextComponentString(SPINNER_STATES[spinnerStateIndex]), 1.0F));
 
 		super.drawElements();
 	}
