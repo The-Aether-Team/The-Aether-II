@@ -15,6 +15,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -130,20 +131,31 @@ public class PlayerTeleportingModule extends PlayerAetherModule
 
 		if (this.isTeleportCharging)
 		{
-			this.ticksInTeleporter++;
-
-			if (this.getTicksInTeleporter() >= TELEPORT_DELAY)
+			if (this.getEntity().timeUntilPortal > 0)
 			{
-				this.ticksInTeleporter = 0;
-
-				this.teleportToAether();
+				this.getEntity().timeUntilPortal = this.getEntity().getPortalCooldown();
 			}
-
-			if (this.ticksInTeleporter == 1 && this.getWorld().isRemote && Minecraft.getMinecraft().player.getEntityId() == this.getEntity().getEntityId())
+			else
 			{
-				Minecraft.getMinecraft().player.playSound(SoundsAether.glowstone_portal_trigger, 1.0F, 1.0F);
+				this.ticksInTeleporter++;
+
+				if (this.ticksInTeleporter == 1)
+				{
+					if (this.getWorld().isRemote && Minecraft.getMinecraft().player.getEntityId() == this.getEntity().getEntityId())
+					{
+						Minecraft.getMinecraft().player.playSound(SoundsAether.glowstone_portal_trigger, 1.0F, 1.0F);
+					}
+				}
+				else if (!this.getWorld().isRemote && this.getTicksInTeleporter() >= TELEPORT_DELAY)
+				{
+					this.ticksInTeleporter = 0;
+
+					this.teleportToAether();
+				}
 			}
 		}
+
+		this.ticksInTeleporter = MathHelper.clamp(this.ticksInTeleporter, 0, TELEPORT_DELAY);
 	}
 
 	public void processTeleporting()
