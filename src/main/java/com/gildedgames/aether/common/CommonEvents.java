@@ -6,7 +6,6 @@ import com.gildedgames.aether.api.items.IItemProperties;
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
-import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTradeModule;
 import com.gildedgames.aether.common.containers.ContainerLoadingScreen;
@@ -23,7 +22,6 @@ import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.util.helpers.AetherHelper;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
 import com.gildedgames.aether.common.util.helpers.PlayerUtil;
-import com.gildedgames.orbis.lib.preparation.IPrepManager;
 import com.gildedgames.orbis.lib.preparation.impl.util.PrepHelper;
 import com.gildedgames.orbis.lib.util.mc.BlockPosDimension;
 import com.google.common.collect.Lists;
@@ -34,16 +32,19 @@ import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.*;
-import net.minecraft.util.math.*;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
@@ -54,23 +55,15 @@ import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
-import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.event.world.WorldEvent;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidUtil;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 @Mod.EventBusSubscriber
 public class CommonEvents
@@ -293,64 +286,6 @@ public class CommonEvents
 				}
 			}
 		}
-	}
-
-	@SubscribeEvent
-	public static void onPlayerUseBucket(final FillBucketEvent event)
-	{
-		if (CompatabilityAether.isAetherLegacyInstalled())
-		{
-			return;
-		}
-
-		if (event.getTarget() != null && event.getTarget().typeOfHit == RayTraceResult.Type.BLOCK)
-		{
-			FluidStack fluidStack = null;
-
-			if (event.getEmptyBucket().hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null))
-			{
-				fluidStack = FluidUtil.getFluidContained(event.getEmptyBucket());
-			}
-
-			final EntityPlayer player = event.getEntityPlayer();
-
-			final BlockPos pos = event.getTarget().getBlockPos().offset(event.getTarget().sideHit);
-
-			final boolean hasWaterFluid = fluidStack != null && fluidStack.getFluid().getName().equals(FluidRegistry.WATER.getName());
-
-			if (hasWaterFluid || event.getEmptyBucket().getItem() == Items.WATER_BUCKET
-					|| event.getEmptyBucket().getItem() == ItemsAether.skyroot_water_bucket)
-			{
-				if (event.getWorld().getBlockState(event.getTarget().getBlockPos()).getBlock() == Blocks.GLOWSTONE && isPortalFrame(event.getWorld(),
-						event.getTarget().getBlockPos(), pos))
-				{
-					event.setCanceled(true);
-
-					player.openGui(AetherCore.MOD_ID, AetherGuiHandler.TELEPORTER_NOTICE_ID, player.world, pos.getX(), pos.getY(), pos.getZ());
-				}
-			}
-		}
-	}
-
-	private static boolean isPortalFrame(final World world, final BlockPos target, final BlockPos pos)
-	{
-		if (world.getBlockState(target).getBlock() == Blocks.GLOWSTONE)
-		{
-			BlockAetherPortal.Size size = new BlockAetherPortal.Size(world, pos, EnumFacing.Axis.X);
-
-			if (size.isWithinSizeBounds() && size.getPortalBlocks() == 0)
-			{
-				return true;
-			}
-			else
-			{
-				size = new BlockAetherPortal.Size(world, pos, EnumFacing.Axis.Z);
-
-				return size.isWithinSizeBounds() && size.getPortalBlocks() == 0;
-			}
-		}
-
-		return false;
 	}
 
 	@SubscribeEvent

@@ -45,7 +45,7 @@ public class BlockAetherPortal extends BlockBreakable
 		this.setSoundType(SoundType.GLASS);
 
 		this.setHardness(-1.0F);
-		this.setLightLevel(0.3F);
+		this.setLightLevel(0.75F);
 
 		this.setTickRandomly(true);
 
@@ -297,11 +297,11 @@ public class BlockAetherPortal extends BlockBreakable
 
 			if (this.portalPos != null)
 			{
-				this.height = this.func_150858_a();
+				this.height = this.getHeight();
 			}
 		}
 
-		protected int getWidth(BlockPos pos, EnumFacing facing)
+		private int getWidth(BlockPos pos, EnumFacing facing)
 		{
 			int x;
 
@@ -310,17 +310,17 @@ public class BlockAetherPortal extends BlockBreakable
 				final BlockPos offsetPos = pos.offset(facing, x);
 
 				if (!this.isBlockSuitable(this.world.getBlockState(offsetPos))
-						|| this.world.getBlockState(offsetPos.down()).getBlock() != Blocks.GLOWSTONE)
+						|| !this.isBlockValidFrame(this.world.getBlockState(offsetPos.down())))
 				{
 					break;
 				}
 			}
 
-			final Block block = this.world.getBlockState(pos.offset(facing, x)).getBlock();
-			return block == Blocks.GLOWSTONE ? x : 0;
+			final IBlockState state = this.world.getBlockState(pos.offset(facing, x));
+			return this.isBlockValidFrame(state) ? x : 0;
 		}
 
-		protected int func_150858_a()
+		private int getHeight()
 		{
 			int x;
 			loop:
@@ -346,7 +346,7 @@ public class BlockAetherPortal extends BlockBreakable
 					{
 						state = this.world.getBlockState(blockpos.offset(this.leftSideFacing));
 
-						if (state.getBlock() != Blocks.GLOWSTONE)
+						if (!this.isBlockValidFrame(state))
 						{
 							break loop;
 						}
@@ -355,7 +355,7 @@ public class BlockAetherPortal extends BlockBreakable
 					{
 						state = this.world.getBlockState(blockpos.offset(this.rightSideFacing));
 
-						if (state.getBlock() != Blocks.GLOWSTONE)
+						if (!this.isBlockValidFrame(state))
 						{
 							break loop;
 						}
@@ -365,7 +365,7 @@ public class BlockAetherPortal extends BlockBreakable
 
 			for (x = 0; x < this.width; ++x)
 			{
-				if (this.world.getBlockState(this.portalPos.offset(this.rightSideFacing, x).up(this.height)).getBlock() != Blocks.GLOWSTONE)
+				if (!this.isBlockValidFrame(this.world.getBlockState(this.portalPos.offset(this.rightSideFacing, x).up(this.height))))
 				{
 					this.height = 0;
 					break;
@@ -385,7 +385,7 @@ public class BlockAetherPortal extends BlockBreakable
 			}
 		}
 
-		protected boolean isBlockSuitable(IBlockState state)
+		private boolean isBlockSuitable(IBlockState state)
 		{
 			return state.getMaterial() == Material.AIR || state.getBlock() == Blocks.WATER
 					|| state.getBlock() == BlocksAether.aether_portal;
@@ -399,6 +399,25 @@ public class BlockAetherPortal extends BlockBreakable
 		public int getPortalBlocks()
 		{
 			return this.portalBlocks;
+		}
+
+		private boolean isBlockValidFrame(IBlockState state)
+		{
+			return state.getBlock() == Blocks.GLOWSTONE || state.getBlock() == Blocks.QUARTZ_BLOCK;
+		}
+
+		public void createPortal()
+		{
+			for (int i = 0; i < this.width; ++i)
+			{
+				final BlockPos blockpos = this.portalPos.offset(this.rightSideFacing, i);
+
+				for (int j = 0; j < this.height; ++j)
+				{
+					this.world.setBlockState(blockpos.up(j),
+							BlocksAether.aether_portal.getDefaultState().withProperty(BlockAetherPortal.PROPERTY_AXIS, this.axis), 2);
+				}
+			}
 		}
 	}
 }
