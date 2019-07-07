@@ -24,4 +24,5 @@ public class DimensionsAether
 		// Register dimensions
 		DimensionManager.registerDimension(AetherCore.CONFIG.getAetherDimID(), DimensionsAether.AETHER);
 	}
+
 }

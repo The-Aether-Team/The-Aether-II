@@ -3,7 +3,7 @@ package com.gildedgames.aether.common;
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.IAetherServices;
 import com.gildedgames.aether.api.net.IGildedGamesAccountApi;
-import com.gildedgames.aether.common.listeners.PostAetherTravelEvent;
+import com.gildedgames.aether.common.events.PostAetherTravelEvent;
 import com.gildedgames.aether.common.network.api.GildedGamesAccountApiImpl;
 import com.gildedgames.aether.common.shop.*;
 import com.gildedgames.aether.common.shop.filters.ShopFilterNewYearsEdisonSale;
@@ -49,7 +49,7 @@ public class CommonProxy implements IAetherServices
 
 	public void preInit(final FMLPreInitializationEvent event)
 	{
-		CompatabilityAether.locateInstalledMods();
+		CompatibilityAether.locateInstalledMods();
 
 		this.configDir = new File(event.getModConfigurationDirectory(), "Aether/");
 

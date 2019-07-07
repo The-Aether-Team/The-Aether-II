@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.items.tools;
 
+import com.gildedgames.aether.common.events.listeners.items.ItemToolListener;
 import com.gildedgames.aether.common.init.CreativeTabsAether;
 import com.gildedgames.aether.common.init.MaterialsAether;
 import net.minecraft.entity.EntityLivingBase;
@@ -22,7 +23,7 @@ public class ItemAetherPickaxe extends ItemPickaxe
 	{
 		super.hitEntity(stack, target, attacker);
 
-		return ItemToolHandler.onEntityHit(stack, this.toolMaterial, target, attacker);
+		return ItemToolListener.onEntityHit(stack, this.toolMaterial, target, attacker);
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.entities.effects;
 
 import com.gildedgames.aether.api.effects_system.EEffectIntensity;
+import com.gildedgames.aether.common.events.listeners.player.PlayerAetherListener;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.text.TextFormatting;
@@ -24,7 +25,7 @@ public class StatusEffectAmbrosiumPoisoning extends StatusEffect
 		 * @see com.gildedgames.aether.common.capabilities.entity.effects.StatusEffectPool#applyStatusEffect(effectTypes, int)
 		 *
 		 * Negate weak player HP regeneration.
-		 * @see com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherHooks#onLivingHeal(LivingHealEvent)
+		 * @see PlayerAetherListener#onLivingHeal(LivingHealEvent)
 		 */
 	}
 

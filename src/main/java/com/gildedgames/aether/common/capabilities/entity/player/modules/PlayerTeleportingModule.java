@@ -231,4 +231,6 @@ public class PlayerTeleportingModule extends PlayerAetherModule implements IPlay
 	{
 		return AetherCore.getResource("teleport");
 	}
+
+
 }

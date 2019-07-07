@@ -14,6 +14,8 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.EntityMountEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -167,5 +169,14 @@ public abstract class EntityNPC extends EntityCreature implements NPC, IWorldObj
 	public ITextComponent getHoverText(World world, RayTraceResult result)
 	{
 		return new TextComponentTranslation("gui.aether.hover.npc", this.getName());
+	}
+
+	@SubscribeEvent
+	public static void onEntityMounted(final EntityMountEvent event)
+	{
+		if (EntityNPC.class.isAssignableFrom(event.getEntityMounting().getClass()))
+		{
+			event.setCanceled(true);
+		}
 	}
 }

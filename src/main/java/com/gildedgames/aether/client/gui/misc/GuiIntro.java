@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client.gui.misc;
 
-import com.gildedgames.aether.client.ClientEventHandler;
+import com.gildedgames.aether.client.events.listeners.gui.GuiLoadingListener;
 import com.gildedgames.aether.client.gui.dialog.GuiNextArrow;
 import com.gildedgames.aether.client.sound.AetherMusicManager;
 import com.gildedgames.aether.common.AetherCore;
@@ -215,7 +215,7 @@ public class GuiIntro extends GuiViewerNoContainer
 
 			if (this.holding && this.getSecondsSinceHoldSkip() >= 2.5)
 			{
-				ClientEventHandler.drawBlackFade(10.0D);
+				GuiLoadingListener.drawBlackFade(10.0D);
 				Minecraft.getMinecraft().displayGuiScreen(null);
 
 				Minecraft.getMinecraft().getSoundHandler().stopSounds();
@@ -223,7 +223,7 @@ public class GuiIntro extends GuiViewerNoContainer
 				PlayerAether.getPlayer(this.mc.player).getModule(PlayerTeleportingModule.class).setPlayedIntro(true);
 				NetworkingAether.sendPacketToServer(new PacketSetPlayedIntro(true));
 
-				ClientEventHandler.setDrawBlackScreen(false);
+				GuiLoadingListener.setDrawBlackScreen(false);
 
 				return;
 			}
@@ -317,9 +317,9 @@ public class GuiIntro extends GuiViewerNoContainer
 			PlayerAether.getPlayer(this.mc.player).getModule(PlayerTeleportingModule.class).setPlayedIntro(true);
 			NetworkingAether.sendPacketToServer(new PacketSetPlayedIntro(true));
 
-			ClientEventHandler.setDrawBlackScreen(false);
+			GuiLoadingListener.setDrawBlackScreen(false);
 
-			ClientEventHandler.drawBlackFade(10.0D);
+			GuiLoadingListener.drawBlackFade(10.0D);
 			Minecraft.getMinecraft().displayGuiScreen(null);
 		}
 
@@ -357,7 +357,7 @@ public class GuiIntro extends GuiViewerNoContainer
 				NetworkingAether.sendPacketToServer(new PacketCancelIntro());
 				Minecraft.getMinecraft().displayGuiScreen(new GuiBlackScreen());
 
-				ClientEventHandler.setDrawBlackScreen(false);
+				GuiLoadingListener.setDrawBlackScreen(false);
 
 				return;
 			}

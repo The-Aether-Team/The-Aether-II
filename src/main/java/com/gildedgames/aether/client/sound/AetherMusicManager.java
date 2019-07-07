@@ -1,7 +1,7 @@
 package com.gildedgames.aether.client.sound;
 
 import com.gildedgames.aether.api.player.IPlayerAether;
-import com.gildedgames.aether.client.ClientEventHandler;
+import com.gildedgames.aether.client.events.listeners.gui.GuiLoadingListener;
 import com.gildedgames.aether.client.sound.generators.AetherMusicGenerator;
 import com.gildedgames.aether.client.sound.generators.IMusicGenerator;
 import com.gildedgames.aether.common.AetherCore;
@@ -141,7 +141,7 @@ public class AetherMusicManager
 	// Lowest priority is important, so we can ensure the sound will actually be played
 	public static void onPlaySound(final PlaySoundEvent event)
 	{
-		if (ClientEventHandler.isLoadingScreen())
+		if (GuiLoadingListener.isLoadingScreen())
 		{
 			event.setResultSound(null);
 			return;

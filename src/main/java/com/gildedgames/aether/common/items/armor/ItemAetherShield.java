@@ -67,4 +67,5 @@ public class ItemAetherShield extends Item
 
 		return super.getItemBurnTime(itemStack);
 	}
+
 }

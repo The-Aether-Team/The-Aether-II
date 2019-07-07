@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.entities.tiles;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.world.IWorldObjectHoverable;
-import com.gildedgames.aether.client.ClientEventHandler;
+import com.gildedgames.aether.client.events.listeners.gui.GuiLoadingListener;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.containers.BlockAltar;
 import com.gildedgames.aether.common.blocks.multiblock.BlockMultiController;
@@ -10,9 +10,9 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerConfigModule;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTeleportingModule;
 import com.gildedgames.aether.common.entities.tiles.multiblock.TileEntityMultiblockController;
+import com.gildedgames.aether.common.events.PostAetherTravelEvent;
 import com.gildedgames.aether.common.init.DimensionsAether;
 import com.gildedgames.aether.common.init.InstancesAether;
-import com.gildedgames.aether.common.listeners.PostAetherTravelEvent;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketSetPlayedIntro;
 import com.gildedgames.aether.common.util.helpers.AetherHelper;
@@ -152,11 +152,11 @@ public class TileEntityTeleporter extends TileEntityMultiblockController impleme
 
 			if (!teleportingModule.hasPlayedIntro())
 			{
-				ClientEventHandler.setDrawBlackScreen(true);
+				GuiLoadingListener.setDrawBlackScreen(true);
 			}
 			else
 			{
-				ClientEventHandler.setDrawLoading(true);
+				GuiLoadingListener.setDrawLoading(true);
 			}
 
 			return true;

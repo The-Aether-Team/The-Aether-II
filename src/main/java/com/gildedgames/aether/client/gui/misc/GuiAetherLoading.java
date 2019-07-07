@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client.gui.misc;
 
-import com.gildedgames.aether.client.ClientEventHandler;
+import com.gildedgames.aether.client.events.listeners.gui.GuiLoadingListener;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
 import com.gildedgames.orbis.lib.client.PartialTicks;
@@ -121,7 +121,7 @@ public class GuiAetherLoading extends GuiViewer implements CustomLoadingRenderer
 	{
 		super.drawScreen(mouseX, mouseY, partialTicks);
 
-		ClientEventHandler.drawFade(false);
+		GuiLoadingListener.drawFade(false);
 	}
 
 	@Override
