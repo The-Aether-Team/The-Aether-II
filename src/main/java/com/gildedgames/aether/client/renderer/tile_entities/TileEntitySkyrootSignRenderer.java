@@ -102,8 +102,6 @@ public class TileEntitySkyrootSignRenderer extends TileEntitySpecialRenderer<Til
 
 		if (destroyStage < 0)
 		{
-			GlStateManager.disableLighting();
-
 			for (int i = 0; i < te.signText.length; ++i)
 			{
 				if (te.signText[i] != null)
@@ -126,8 +124,6 @@ public class TileEntitySkyrootSignRenderer extends TileEntitySpecialRenderer<Til
 					}
 				}
 			}
-
-			GlStateManager.enableLighting();
 		}
 
 		GlStateManager.depthMask(true);
