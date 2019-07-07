@@ -26,6 +26,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -56,19 +57,21 @@ public class TileEntityOutpostCampfire extends TileEntityMultiblockController im
 			final PlayerTeleportingModule teleportingModule = playerAether.getModule(PlayerTeleportingModule.class);
 			teleportingModule.setAetherPos(new BlockPosDimension((int) player.posX, (int) player.posY, (int) player.posZ, player.dimension));
 
-			final BlockPosDimension pos = teleportingModule.getNonAetherPos();
+			BlockPosDimension pos = teleportingModule.getNonAetherPos();
 
-			if (pos != null)
+			if (pos == null)
 			{
-				final MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
-
-				final Teleporter teleporter = new TeleporterGeneric(server.getWorld(player.dimension));
-				PlayerList playerList = server.getPlayerList();
-				playerList.transferPlayerToDimension(playerMP, pos.getDim(), teleporter);
-				player.timeUntilPortal = player.getPortalCooldown();
-
-				playerMP.connection.setPlayerLocation(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 0, 0);
+				pos = new BlockPosDimension(DimensionManager.getWorld(0).getSpawnPoint(), 0);
 			}
+
+			final MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
+
+			final Teleporter teleporter = new TeleporterGeneric(server.getWorld(player.dimension));
+			PlayerList playerList = server.getPlayerList();
+			playerList.transferPlayerToDimension(playerMP, pos.getDim(), teleporter);
+			player.timeUntilPortal = player.getPortalCooldown();
+
+			playerMP.connection.setPlayerLocation(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 0, 0);
 
 			return true;
 		}
