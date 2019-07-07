@@ -1,5 +1,6 @@
 package com.gildedgames.aether.client.renderer;
 
+import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.client.renderer.entities.RenderFloatingBlock;
 import com.gildedgames.aether.client.renderer.entities.RenderMovingBlock;
 import com.gildedgames.aether.client.renderer.entities.attachments.RenderParachute;
@@ -24,7 +25,6 @@ import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
 import com.gildedgames.aether.common.entities.projectiles.EntityDaggerfrostSnowball;
 import com.gildedgames.aether.common.entities.projectiles.EntityDart;
 import com.gildedgames.aether.common.entities.tiles.*;
-import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -42,7 +42,7 @@ public class AetherRenderers
 		registerTESRs();
 
 		final ItemColors itemColors = Minecraft.getMinecraft().getItemColors();
-		itemColors.registerItemColorHandler(new ItemMoaEggColorHandler(), ItemsAether.moa_egg);
+		itemColors.registerItemColorHandler(new ItemMoaEggColorHandler(), ItemsAether.moa_egg_item);
 		itemColors.registerItemColorHandler(new WrappingPaperColorHandler(), ItemsAether.wrapping_paper);
 		itemColors.registerItemColorHandler(new MoaFeatherColorHandler(), ItemsAether.moa_feather);
 	}

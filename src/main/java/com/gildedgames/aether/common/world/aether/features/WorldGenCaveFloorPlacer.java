@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world.aether.features;
 
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.world.generation.WorldDecorationGenerator;
-import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.orbis.lib.util.ArrayHelper;
 import com.gildedgames.orbis.lib.world.WorldSlice;
 import net.minecraft.block.state.IBlockState;

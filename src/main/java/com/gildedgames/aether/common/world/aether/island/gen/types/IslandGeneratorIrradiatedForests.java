@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.world.aether.island.gen.types;
 
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.util.NoiseUtil;
 import com.gildedgames.aether.api.util.OpenSimplexNoise;
 import com.gildedgames.aether.api.world.IAetherChunkColumnInfo;
@@ -10,7 +11,6 @@ import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.api.world.noise.IChunkNoiseBuffer2D;
 import com.gildedgames.aether.api.world.noise.INoiseGenerator2D;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.CrackLineSegment;
 import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.IrradiatedForestsData;

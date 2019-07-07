@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.items.tools;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemShears;

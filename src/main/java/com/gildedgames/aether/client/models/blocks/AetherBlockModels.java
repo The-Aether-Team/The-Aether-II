@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client.models.blocks;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.blocks.construction.signs.BlockStandingSkyrootSign;
 import com.gildedgames.aether.common.blocks.construction.signs.BlockWallSkyrootSign;
 import com.gildedgames.aether.common.blocks.construction.walls.BlockSkyrootWall;
@@ -59,14 +59,14 @@ public class AetherBlockModels
 		ModelLoader.setCustomStateMapper(BlocksAether.blue_light_skyroot_leaves, leavesMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.green_light_skyroot_leaves, leavesMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.dark_blue_light_skyroot_leaves, leavesMapper);
-		ModelLoader.setCustomStateMapper(BlocksAether.mutant_tree_leaves, leavesMapper);
-		ModelLoader.setCustomStateMapper(BlocksAether.mutant_tree_leaves_decorated, leavesMapper);
+		ModelLoader.setCustomStateMapper(BlocksAether.mutant_leaves, leavesMapper);
+		ModelLoader.setCustomStateMapper(BlocksAether.mutant_leaves_decorated, leavesMapper);
 		ModelLoader.setCustomStateMapper(BlocksAether.highlands_bush, leavesMapper);
 
-		ModelLoader.setCustomStateMapper(BlocksAether.aether_skyroot_sapling, new StateMap.Builder().ignore(BlockAetherSapling.PROPERTY_STAGE).build());
-		ModelLoader.setCustomStateMapper(BlocksAether.aether_unique_sapling, new StateMap.Builder().ignore(BlockAetherSapling.PROPERTY_STAGE).build());
-		ModelLoader.setCustomStateMapper(BlocksAether.aether_wisproot_sapling, new StateMap.Builder().ignore(BlockAetherSapling.PROPERTY_STAGE).build());
-		ModelLoader.setCustomStateMapper(BlocksAether.aether_greatroot_sapling, new StateMap.Builder().ignore(BlockAetherSapling.PROPERTY_STAGE).build());
+		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_sapling, new StateMap.Builder().ignore(BlockAetherSapling.PROPERTY_STAGE).build());
+		ModelLoader.setCustomStateMapper(BlocksAether.unique_sapling, new StateMap.Builder().ignore(BlockAetherSapling.PROPERTY_STAGE).build());
+		ModelLoader.setCustomStateMapper(BlocksAether.wisproot_sapling, new StateMap.Builder().ignore(BlockAetherSapling.PROPERTY_STAGE).build());
+		ModelLoader.setCustomStateMapper(BlocksAether.greatroot_sapling, new StateMap.Builder().ignore(BlockAetherSapling.PROPERTY_STAGE).build());
 
 		ModelLoader.setCustomStateMapper(BlocksAether.tall_aether_grass, new StateMap.Builder().ignore().build());
 

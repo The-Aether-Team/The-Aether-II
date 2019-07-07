@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.containers.slots;
 
-import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.api.registrar.ItemsAether;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 

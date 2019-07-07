@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.entities.living.passive;
 
 import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
-import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.registry.content.LootTablesAether;
+import com.gildedgames.aether.api.registrar.BlocksAether;
+import com.gildedgames.aether.common.init.LootTablesAether;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;

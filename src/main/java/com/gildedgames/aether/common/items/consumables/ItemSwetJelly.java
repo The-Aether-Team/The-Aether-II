@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.items.consumables;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherDirt;
 import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
 import com.gildedgames.aether.common.items.misc.ItemAetherFood;

@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world.necromancer_tower;
 
-import com.gildedgames.aether.common.registry.content.BiomesAether;
-import com.gildedgames.aether.common.registry.content.DimensionsAether;
+import com.gildedgames.aether.api.registrar.BiomesAether;
+import com.gildedgames.aether.common.init.DimensionsAether;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;

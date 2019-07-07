@@ -1,9 +1,9 @@
 package com.gildedgames.aether.client.renderer.particles;
 
-import com.gildedgames.aether.api.AetherCapabilities;
+import com.gildedgames.aether.api.registrar.BlocksAether;
+import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.api.world.islands.precipitation.IPrecipitationManager;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.blocks.BlocksAether;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
@@ -109,7 +109,7 @@ public class ParticleLeaf extends Particle
 			this.particleGreen = 0.512f;
 			this.particleBlue = 0.301f;
 		}
-		else if (block == BlocksAether.mutant_tree_leaves || block == BlocksAether.mutant_tree_leaves_decorated)
+		else if (block == BlocksAether.mutant_leaves || block == BlocksAether.mutant_leaves_decorated)
 		{
 			this.particleRed = 0.569f;
 			this.particleGreen = 0.533f;
@@ -122,7 +122,7 @@ public class ParticleLeaf extends Particle
 
 		if (worldIn.isRaining())
 		{
-			IPrecipitationManager precipitation = worldIn.getCapability(AetherCapabilities.PRECIPITATION_MANAGER, null);
+			IPrecipitationManager precipitation = worldIn.getCapability(CapabilitiesAether.PRECIPITATION_MANAGER, null);
 
 			if (precipitation != null)
 			{

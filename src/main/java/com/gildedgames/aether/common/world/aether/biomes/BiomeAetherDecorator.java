@@ -1,16 +1,16 @@
 package com.gildedgames.aether.common.world.aether.biomes;
 
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.world.generation.TemplateLoc;
 import com.gildedgames.aether.api.world.generation.WorldDecorationUtil;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherDirt;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBlueberryBush;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockValkyrieGrass;
-import com.gildedgames.aether.common.registry.content.GenerationAether;
+import com.gildedgames.aether.common.init.GenerationAether;
 import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import com.gildedgames.aether.common.world.aether.WorldProviderAether;
 import com.gildedgames.aether.common.world.aether.features.WorldGenAetherMinable;

@@ -1,13 +1,10 @@
 package com.gildedgames.aether.common.blocks.natural.plants;
 
-import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.blocks.IBlockMultiName;
 import com.gildedgames.aether.common.blocks.IBlockSnowy;
-import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
-import com.gildedgames.aether.common.registry.content.BiomesAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSnow;
 import net.minecraft.block.SoundType;
@@ -26,7 +23,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.IShearable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -52,18 +48,6 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 
 	private static final AxisAlignedBB GRASS_LONG_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.9D, 0.9D);
 
-	private static final IBlockState ARCTIC_GRASS = BlocksAether.aether_grass.getDefaultState()
-			.withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.ARCTIC);
-
-	private static final IBlockState MAGNETIC_GRASS = BlocksAether.aether_grass.getDefaultState()
-			.withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.MAGNETIC);
-
-	private static final IBlockState ENCHANTED_GRASS = BlocksAether.aether_grass.getDefaultState()
-			.withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.ENCHANTED);
-
-	private static final IBlockState IRRADIATED_GRASS = BlocksAether.aether_grass.getDefaultState()
-			.withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.IRRADIATED);
-
 	public BlockTallAetherGrass()
 	{
 		super(Material.PLANTS);
@@ -72,40 +56,6 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, SHORT).withProperty(TYPE, Type.HIGHLANDS)
 				.withProperty(PROPERTY_SNOWY, Boolean.FALSE));
-	}
-
-	@Override
-	public IBlockState getActualState(final IBlockState state, final IBlockAccess worldIn, final BlockPos pos)
-	{
-		final IBlockState downState = worldIn.getBlockState(pos.down());
-		boolean emptyDown = downState.getBlock() != BlocksAether.aether_grass;
-
-		final Type type;
-
-		Biome biome = AetherCore.isClient() ? worldIn.getBiome(pos) : null;
-
-		if (downState == ARCTIC_GRASS || (emptyDown && biome == BiomesAether.ARCTIC_PEAKS))
-		{
-			type = Type.ARCTIC;
-		}
-		else if (downState == MAGNETIC_GRASS || (emptyDown && biome == BiomesAether.MAGNETIC_HILLS))
-		{
-			type = Type.MAGNETIC;
-		}
-		else if (downState == ENCHANTED_GRASS)
-		{
-			type = Type.ENCHANTED;
-		}
-		else if (downState == IRRADIATED_GRASS || (emptyDown && biome == BiomesAether.IRRADIATED_FORESTS))
-		{
-			type = Type.IRRADIATED;
-		}
-		else
-		{
-			type = Type.HIGHLANDS;
-		}
-
-		return state.withProperty(TYPE, type);
 	}
 
 	@Override

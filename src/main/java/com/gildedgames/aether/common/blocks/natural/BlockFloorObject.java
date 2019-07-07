@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.blocks.util.BlockBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;

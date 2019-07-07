@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.world.necromancer_tower;
 
-import com.gildedgames.aether.common.registry.content.InstancesAether;
+import com.gildedgames.aether.common.init.InstancesAether;
 import com.gildedgames.orbis.lib.data.region.IRegion;
 import com.gildedgames.orbis.lib.data.region.Region;
 import com.gildedgames.orbis.lib.preparation.impl.ChunkDataContainer;

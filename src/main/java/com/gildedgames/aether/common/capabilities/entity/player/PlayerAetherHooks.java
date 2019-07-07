@@ -1,20 +1,20 @@
 package com.gildedgames.aether.common.capabilities.entity.player;
 
-import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffectPool;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
 import com.gildedgames.aether.api.player.IPlayerAether;
+import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.IBlockSnowy;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerCampfiresModule;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerProgressModule;
 import com.gildedgames.aether.common.containers.ContainerTrade;
 import com.gildedgames.aether.common.entities.util.shared.SharedAetherAttributes;
+import com.gildedgames.aether.common.init.DimensionsAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketMarkPlayerDeath;
 import com.gildedgames.aether.common.network.packets.PacketRequestClientInfo;
-import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import com.gildedgames.orbis.lib.util.mc.BlockPosDimension;
 import com.gildedgames.orbis.lib.util.mc.BlockUtil;
@@ -170,7 +170,7 @@ public class PlayerAetherHooks
 	public static void onPlaceBlockEvent(final BlockEvent.PlaceEvent event)
 	{
 		final IPlacementFlagCapability data = event.getWorld().getChunk(event.getPos())
-				.getCapability(AetherCapabilities.CHUNK_PLACEMENT_FLAG, EnumFacing.UP);
+				.getCapability(CapabilitiesAether.CHUNK_PLACEMENT_FLAG, EnumFacing.UP);
 
 		if (data != null)
 		{
@@ -214,10 +214,10 @@ public class PlayerAetherHooks
 		final PlayerAether oldPlayer = PlayerAether.getPlayer(event.getOriginal());
 		final PlayerAether newPlayer = PlayerAether.getPlayer((EntityPlayer) event.getEntity());
 
-		final IStorage<IPlayerAether> storage = AetherCapabilities.PLAYER_DATA.getStorage();
+		final IStorage<IPlayerAether> storage = CapabilitiesAether.PLAYER_DATA.getStorage();
 
-		final NBTBase state = storage.writeNBT(AetherCapabilities.PLAYER_DATA, oldPlayer, null);
-		storage.readNBT(AetherCapabilities.PLAYER_DATA, newPlayer, null, state);
+		final NBTBase state = storage.writeNBT(CapabilitiesAether.PLAYER_DATA, oldPlayer, null);
+		storage.readNBT(CapabilitiesAether.PLAYER_DATA, newPlayer, null, state);
 	}
 
 	@SubscribeEvent
@@ -318,7 +318,7 @@ public class PlayerAetherHooks
 		{
 			if (event.getAmount() <= 1.5)
 			{
-				IAetherStatusEffectPool statusEffectPool = event.getEntityLiving().getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null);
+				IAetherStatusEffectPool statusEffectPool = event.getEntityLiving().getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
 
 				if (statusEffectPool != null)
 				{

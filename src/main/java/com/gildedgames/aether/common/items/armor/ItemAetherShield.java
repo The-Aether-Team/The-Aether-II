@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.items.armor;
 
-import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
+import com.gildedgames.aether.api.registrar.ItemsAether;
+import com.gildedgames.aether.common.init.CreativeTabsAether;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -33,7 +33,7 @@ public class ItemAetherShield extends Item
 
 		BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, ItemArmor.DISPENSER_BEHAVIOR);
 
-		this.setCreativeTab(CreativeTabsAether.ARMOR);
+		this.setCreativeTab(CreativeTabsAether.TAB_ARMOR);
 	}
 
 	@Override

@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.capabilities.entity.effects;
 
-import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffectPool;
+import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
@@ -37,7 +37,7 @@ public class StatusEffectPoolProvider implements ICapabilitySerializable<NBTBase
 	@Override
 	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing)
 	{
-		return capability == AetherCapabilities.STATUS_EFFECT_POOL;
+		return capability == CapabilitiesAether.STATUS_EFFECT_POOL;
 	}
 
 	@Nullable
@@ -55,12 +55,12 @@ public class StatusEffectPoolProvider implements ICapabilitySerializable<NBTBase
 	@Override
 	public NBTBase serializeNBT()
 	{
-		return this.storage.writeNBT(AetherCapabilities.STATUS_EFFECT_POOL, this.fetchCapability(), null);
+		return this.storage.writeNBT(CapabilitiesAether.STATUS_EFFECT_POOL, this.fetchCapability(), null);
 	}
 
 	@Override
 	public void deserializeNBT(NBTBase nbt)
 	{
-		this.storage.readNBT(AetherCapabilities.STATUS_EFFECT_POOL, this.fetchCapability(), null, nbt);
+		this.storage.readNBT(CapabilitiesAether.STATUS_EFFECT_POOL, this.fetchCapability(), null, nbt);
 	}
 }

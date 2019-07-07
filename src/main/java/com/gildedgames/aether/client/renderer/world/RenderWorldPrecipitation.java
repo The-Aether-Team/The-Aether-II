@@ -1,10 +1,9 @@
 package com.gildedgames.aether.client.renderer.world;
 
-import com.gildedgames.aether.api.AetherCapabilities;
+import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.api.world.islands.precipitation.IPrecipitationManager;
 import com.gildedgames.aether.api.world.islands.precipitation.PrecipitationStrength;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.registry.content.SoundsAether;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -116,7 +115,7 @@ public class RenderWorldPrecipitation extends IRenderHandler
 
 		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
 
-		IPrecipitationManager precipitation = world.getCapability(AetherCapabilities.PRECIPITATION_MANAGER, null);
+		IPrecipitationManager precipitation = world.getCapability(CapabilitiesAether.PRECIPITATION_MANAGER, null);
 
 		Vector2f velocity = precipitation.getWindVector();
 
@@ -312,7 +311,7 @@ public class RenderWorldPrecipitation extends IRenderHandler
 
 		BlockPos pos = mc.player.getPosition();
 
-		IPrecipitationManager precipitation = mc.player.world.getCapability(AetherCapabilities.PRECIPITATION_MANAGER, null);
+		IPrecipitationManager precipitation = mc.player.world.getCapability(CapabilitiesAether.PRECIPITATION_MANAGER, null);
 
 		if (!mc.world.isRaining() || mc.world.getRainStrength(mc.getRenderPartialTicks()) <= 0.3f)
 		{
@@ -342,7 +341,7 @@ public class RenderWorldPrecipitation extends IRenderHandler
 				{
 					if (precipitation.getStrength() == PrecipitationStrength.STORM)
 					{
-						event = SoundsAether.environment_snow_wind;
+						event = new SoundEvent(AetherCore.getResource("environment.snow.wind"));
 						volume = 0.6f;
 					}
 				}
@@ -350,12 +349,12 @@ public class RenderWorldPrecipitation extends IRenderHandler
 				{
 					if (precipitation.getStrength() == PrecipitationStrength.LIGHT)
 					{
-						event = SoundsAether.environment_rain_light;
+						event = new SoundEvent(AetherCore.getResource("environment.rain.light"));
 						volume = 0.6f;
 					}
 					else
 					{
-						event = SoundsAether.environment_rain_heavy;
+						event = new SoundEvent(AetherCore.getResource("environment.rain.heavy"));
 						volume = 0.7f;
 					}
 				}

@@ -1,17 +1,16 @@
 package com.gildedgames.aether.common.entities.living.mobs;
 
-import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
 import com.gildedgames.aether.api.effects_system.EEffectIntensity;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffectIntensity;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.ai.EntityAIUnstuckBlueAercloud;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceHide;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceSneakAttack;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceWander;
 import com.gildedgames.aether.common.entities.effects.StatusEffectCockatriceVenom;
-import com.gildedgames.aether.common.registry.content.LootTablesAether;
-import com.gildedgames.aether.common.registry.content.SoundsAether;
+import com.gildedgames.aether.common.init.LootTablesAether;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -135,19 +134,19 @@ public class EntityCockatrice extends EntityAetherMob
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return SoundsAether.cockatrice_ambient;
+		return new SoundEvent(AetherCore.getResource("mob.cockatrice.ambient"));
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(final DamageSource damageSourceIn)
 	{
-		return SoundsAether.cockatrice_hurt;
+		return new SoundEvent(AetherCore.getResource("mob.cockatrice.hurt"));
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return SoundsAether.cockatrice_death;
+		return new SoundEvent(AetherCore.getResource("mob.cockatrice.death"));
 	}
 
 	public boolean isHiding()

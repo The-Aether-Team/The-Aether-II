@@ -1,8 +1,7 @@
 package com.gildedgames.aether.common.world.spawning.util;
 
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.world.PositionSelector;
-import com.gildedgames.aether.common.blocks.BlocksAether;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;

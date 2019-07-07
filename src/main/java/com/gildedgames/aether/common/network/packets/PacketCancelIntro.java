@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.network.packets;
 
+import com.gildedgames.aether.common.init.InstancesAether;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
-import com.gildedgames.aether.common.registry.content.InstancesAether;
 import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstanceHelper;
 import com.gildedgames.orbis.lib.OrbisLib;
 import com.gildedgames.orbis.lib.world.instances.IInstance;

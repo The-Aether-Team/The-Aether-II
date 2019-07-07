@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.items.tools;
 
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.init.MaterialsAether;
 import com.gildedgames.aether.common.items.tools.handlers.*;
-import com.gildedgames.aether.common.registry.content.MaterialsAether;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

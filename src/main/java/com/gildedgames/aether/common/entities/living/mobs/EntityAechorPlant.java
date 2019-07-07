@@ -1,10 +1,10 @@
 package com.gildedgames.aether.common.entities.living.mobs;
 
 import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
-import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.api.registrar.BlocksAether;
+import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.entities.ai.EntityAIAechorPlantAttack;
-import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.registry.content.LootTablesAether;
+import com.gildedgames.aether.common.init.LootTablesAether;
 import com.gildedgames.aether.common.util.helpers.PlayerUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

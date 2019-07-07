@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.events;
 
+import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.CompatabilityAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
-import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

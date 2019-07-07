@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.capabilities.entity.player;
 
-import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.player.IPlayerAether;
+import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
@@ -21,7 +21,7 @@ public class PlayerAetherProvider implements ICapabilitySerializable<NBTBase>
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing)
 	{
-		return capability == AetherCapabilities.PLAYER_DATA && this.aePlayer != null;
+		return capability == CapabilitiesAether.PLAYER_DATA && this.aePlayer != null;
 	}
 
 	@Override
@@ -39,12 +39,12 @@ public class PlayerAetherProvider implements ICapabilitySerializable<NBTBase>
 	@Override
 	public NBTBase serializeNBT()
 	{
-		return this.storage.writeNBT(AetherCapabilities.PLAYER_DATA, this.aePlayer, null);
+		return this.storage.writeNBT(CapabilitiesAether.PLAYER_DATA, this.aePlayer, null);
 	}
 
 	@Override
 	public void deserializeNBT(NBTBase nbt)
 	{
-		this.storage.readNBT(AetherCapabilities.PLAYER_DATA, this.aePlayer, null, nbt);
+		this.storage.readNBT(CapabilitiesAether.PLAYER_DATA, this.aePlayer, null, nbt);
 	}
 }

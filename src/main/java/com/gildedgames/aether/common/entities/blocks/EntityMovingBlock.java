@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.entities.blocks;
 
-import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
+import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -91,7 +91,7 @@ public class EntityMovingBlock extends Entity
 			if (this.world.getBlockState(pos).getBlock() == this.getBlockState().getBlock())
 			{
 				final IPlacementFlagCapability data = this.world.getChunk(pos)
-						.getCapability(AetherCapabilities.CHUNK_PLACEMENT_FLAG, EnumFacing.UP);
+						.getCapability(CapabilitiesAether.CHUNK_PLACEMENT_FLAG, EnumFacing.UP);
 
 				if (data != null)
 				{
@@ -200,7 +200,7 @@ public class EntityMovingBlock extends Entity
 						if (!this.allowDoubleDrops)
 						{
 							final IPlacementFlagCapability data = this.world.getChunk(pos)
-									.getCapability(AetherCapabilities.CHUNK_PLACEMENT_FLAG, EnumFacing.UP);
+									.getCapability(CapabilitiesAether.CHUNK_PLACEMENT_FLAG, EnumFacing.UP);
 
 							if (data != null)
 							{

@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.recipes;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.api.registrar.BlocksAether;
+import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.items.blocks.ItemBlockPresent;
 import com.gildedgames.aether.common.items.misc.ItemWrappingPaper;
 import net.minecraft.inventory.InventoryCrafting;

@@ -1,10 +1,10 @@
 package com.gildedgames.aether.common.blocks.containers;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.api.registrar.BlocksAether;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.IBlockWithItem;
 import com.gildedgames.aether.common.entities.tiles.TileEntityPresent;
 import com.gildedgames.aether.common.items.blocks.ItemBlockPresent;
-import com.gildedgames.aether.common.registry.content.SoundsAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
@@ -18,10 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
@@ -106,7 +103,7 @@ public class BlockPresent extends BlockContainer implements IBlockWithItem
 				world.spawnParticle(EnumParticleTypes.CLOUD, x2, y2, z2, 0.0D, 0.0D, 0.0D);
 			}
 
-			world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundsAether.present_unwrap, SoundCategory.NEUTRAL, 0.5f,
+			world.playSound(pos.getX(), pos.getY(), pos.getZ(), new SoundEvent(AetherCore.getResource("random.present_unwrap")), SoundCategory.NEUTRAL, 0.5f,
 					0.8f + (world.rand.nextFloat() * 0.5f), false);
 
 			return true;

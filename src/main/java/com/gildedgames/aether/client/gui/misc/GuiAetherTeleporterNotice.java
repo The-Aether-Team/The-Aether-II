@@ -1,7 +1,7 @@
 package com.gildedgames.aether.client.gui.misc;
 
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.orbis.lib.client.gui.data.Text;
 import com.gildedgames.orbis.lib.client.gui.util.GuiText;
 import com.gildedgames.orbis.lib.client.gui.util.GuiTextBox;

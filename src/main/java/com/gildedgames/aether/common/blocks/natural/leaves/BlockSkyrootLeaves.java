@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.blocks.natural.leaves;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherSkyrootSapling;
 import com.gildedgames.aether.common.blocks.natural.wood.BlockAetherLog;
 import net.minecraft.item.ItemStack;
@@ -18,11 +18,11 @@ public class BlockSkyrootLeaves extends BlockColoredLeaves
 		switch (this.getLeafColor())
 		{
 			case GREEN:
-				return new ItemStack(BlocksAether.aether_skyroot_sapling, 1, BlockAetherSkyrootSapling.GREEN.getMeta());
+				return new ItemStack(BlocksAether.skyroot_sapling, 1, BlockAetherSkyrootSapling.GREEN.getMeta());
 			case BLUE:
-				return new ItemStack(BlocksAether.aether_skyroot_sapling, 1, BlockAetherSkyrootSapling.BLUE.getMeta());
+				return new ItemStack(BlocksAether.skyroot_sapling, 1, BlockAetherSkyrootSapling.BLUE.getMeta());
 			case DARK_BLUE:
-				return new ItemStack(BlocksAether.aether_skyroot_sapling, 1, BlockAetherSkyrootSapling.DARK_BLUE.getMeta());
+				return new ItemStack(BlocksAether.skyroot_sapling, 1, BlockAetherSkyrootSapling.DARK_BLUE.getMeta());
 		}
 
 		return null;
@@ -31,6 +31,6 @@ public class BlockSkyrootLeaves extends BlockColoredLeaves
 	@Override
 	public BlockAetherLog getWoodBlock()
 	{
-		return BlocksAether.skyroot_log;
+		return (BlockAetherLog) BlocksAether.skyroot_log;
 	}
 }

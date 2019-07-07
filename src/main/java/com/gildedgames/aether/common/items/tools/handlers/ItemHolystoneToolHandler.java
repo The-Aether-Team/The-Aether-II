@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.items.tools.handlers;
 
-import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.swords.ItemHolystoneSword;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;

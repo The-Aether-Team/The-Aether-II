@@ -1,11 +1,11 @@
 package com.gildedgames.aether.common.shop;
 
 import com.gildedgames.aether.api.player.IPlayerAether;
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.shop.ICurrencyListener;
 import com.gildedgames.aether.api.shop.IGuiCurrencyValue;
 import com.gildedgames.aether.api.shop.IShopCurrency;
 import com.gildedgames.aether.client.gui.dialog.GuiPumpkinCurrency;
-import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockPlumproot;
 import com.gildedgames.orbis.lib.client.rect.Rect;
 import com.google.common.collect.Lists;

@@ -1,12 +1,13 @@
 package com.gildedgames.aether.common.world.aether.prep;
 
+import com.gildedgames.aether.api.registrar.BiomesAether;
 import com.gildedgames.aether.api.world.IAetherChunkColumnInfo;
 import com.gildedgames.aether.api.world.islands.IIslandBounds;
 import com.gildedgames.aether.api.world.islands.IIslandChunkColumnInfo;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.registry.content.BiomesAether;
-import com.gildedgames.aether.common.registry.content.DimensionsAether;
+import com.gildedgames.aether.common.init.BiomesAetherInit;
+import com.gildedgames.aether.common.init.DimensionsAether;
 import com.gildedgames.aether.common.world.aether.ChunkGeneratorAether;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.chunk.AetherChunkColumnInfo;
@@ -97,11 +98,11 @@ public class PrepAether implements IPrepRegistryEntry<IAetherChunkColumnInfo>
 
 		if (sectorX == 0 && sectorY == 0)
 		{
-			chosen = BiomesAether.HIGHLANDS;
+			chosen = (BiomeAetherBase) BiomesAether.HIGHLANDS;
 		}
 		else
 		{
-			chosen = BiomesAether.fetchRandomBiome(rand);
+			chosen = BiomesAetherInit.fetchRandomBiome(rand);
 		}
 
 		final PrepSectorDataAether data = new PrepSectorDataAether(world, sectorX, sectorY);

@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.world.aether.biomes;
 
-import com.gildedgames.aether.common.registry.content.BiomesAether;
+import com.gildedgames.aether.api.registrar.BiomesAether;
 import com.gildedgames.aether.common.world.aether.prep.PrepSectorDataAether;
 import com.gildedgames.orbis.lib.preparation.IPrepManager;
 import com.gildedgames.orbis.lib.preparation.IPrepSector;

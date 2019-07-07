@@ -1,13 +1,14 @@
 package com.gildedgames.aether.common.entities.tiles;
 
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.world.IWorldObjectHoverable;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.common.blocks.multiblock.BlockMultiController;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerCampfiresModule;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTeleportingModule;
 import com.gildedgames.aether.common.entities.tiles.multiblock.TileEntityMultiblockController;
-import com.gildedgames.aether.common.registry.content.DimensionsAether;
+import com.gildedgames.aether.common.init.DimensionsAether;
 import com.gildedgames.orbis.lib.util.TeleporterGeneric;
 import com.gildedgames.orbis.lib.util.mc.BlockPosDimension;
 import net.minecraft.block.state.IBlockState;
@@ -40,7 +41,7 @@ public class TileEntityOutpostCampfire extends TileEntityMultiblockController im
 
 	public TileEntityOutpostCampfire()
 	{
-		super(BlocksAether.outpost_campfire, BlocksAether.multiblock_dummy_half);
+		super((BlockMultiController) BlocksAether.outpost_campfire, BlocksAether.multiblock_dummy_half);
 	}
 
 	@Override

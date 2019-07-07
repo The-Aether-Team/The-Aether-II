@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.entities.util;
 
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.util.helpers.WorldUtil;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;

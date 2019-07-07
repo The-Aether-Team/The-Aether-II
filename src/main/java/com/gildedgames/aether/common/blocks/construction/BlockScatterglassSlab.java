@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.blocks.construction;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.blocks.util.BlockCustomSlab;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

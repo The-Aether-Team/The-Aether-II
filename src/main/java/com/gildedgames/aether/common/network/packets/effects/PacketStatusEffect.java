@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.network.packets.effects;
 
-import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffectPool;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
+import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
@@ -31,7 +31,7 @@ public class PacketStatusEffect implements IMessage
 	{
 		this.entityID = entity.getEntityId();
 
-		HashMap<String, IAetherStatusEffects> map =  entity.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null).getPool();
+		HashMap<String, IAetherStatusEffects> map =  entity.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null).getPool();
 		this.statusEffectData = new ArrayList<>();
 
 		for (IAetherStatusEffects effect : map.values())
@@ -158,7 +158,7 @@ public class PacketStatusEffect implements IMessage
 
 			final EntityLivingBase entityLiving = (EntityLivingBase) entity;
 
-			IAetherStatusEffectPool map = entityLiving.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null);
+			IAetherStatusEffectPool map = entityLiving.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
 
 			if (map != null)
 			{

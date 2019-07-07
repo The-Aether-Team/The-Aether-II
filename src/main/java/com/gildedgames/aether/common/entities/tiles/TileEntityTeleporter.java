@@ -1,19 +1,20 @@
 package com.gildedgames.aether.common.entities.tiles;
 
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.world.IWorldObjectHoverable;
 import com.gildedgames.aether.client.ClientEventHandler;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.containers.BlockAltar;
+import com.gildedgames.aether.common.blocks.multiblock.BlockMultiController;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerConfigModule;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTeleportingModule;
 import com.gildedgames.aether.common.entities.tiles.multiblock.TileEntityMultiblockController;
-import com.gildedgames.aether.common.events.PostAetherTravelEvent;
+import com.gildedgames.aether.common.init.DimensionsAether;
+import com.gildedgames.aether.common.init.InstancesAether;
+import com.gildedgames.aether.common.listeners.PostAetherTravelEvent;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketSetPlayedIntro;
-import com.gildedgames.aether.common.registry.content.DimensionsAether;
-import com.gildedgames.aether.common.registry.content.InstancesAether;
 import com.gildedgames.aether.common.util.helpers.AetherHelper;
 import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstanceHelper;
 import com.gildedgames.orbis.lib.OrbisLib;
@@ -50,7 +51,7 @@ public class TileEntityTeleporter extends TileEntityMultiblockController impleme
 
 	public TileEntityTeleporter()
 	{
-		super(BlocksAether.aether_teleporter, BlocksAether.multiblock_dummy);
+		super((BlockMultiController) BlocksAether.aether_teleporter, BlocksAether.multiblock_dummy);
 	}
 
 	public EnumFacing getFacing()

@@ -2,11 +2,11 @@ package com.gildedgames.aether.common.entities.living.passive;
 
 import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
+import com.gildedgames.aether.api.registrar.ItemsAether;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.natural.leaves.BlockColoredLeaves.Color;
 import com.gildedgames.aether.common.blocks.natural.wood.AetherWoodType;
 import com.gildedgames.aether.common.blocks.natural.wood.BlockAetherLog;
-import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.registry.content.SoundsAether;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
@@ -141,7 +141,7 @@ public class EntitySkyrootLizard extends EntityAetherAnimal
 
 				if (player.isServerWorld())
 				{
-					player.playSound(SoundsAether.aerbunny_hurt, 1F, 0.3F);
+					player.playSound(new SoundEvent(AetherCore.getResource("mob.aerbunny.hurt")), 1F, 0.3F);
 				}
 
 				this.world.removeEntity(this);
@@ -156,7 +156,7 @@ public class EntitySkyrootLizard extends EntityAetherAnimal
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return SoundsAether.aerbunny_death;
+		return new SoundEvent(AetherCore.getResource("mob.aerbunny.death"));
 	}
 
 	@Override

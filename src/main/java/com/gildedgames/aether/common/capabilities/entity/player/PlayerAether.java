@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.capabilities.entity.player;
 
-import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.player.IPlayerAetherModule;
+import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.*;
 import com.gildedgames.aether.common.network.NetworkingAether;
@@ -124,7 +124,7 @@ public class PlayerAether implements IPlayerAether
 			throw new NullPointerException("Player entity is null");
 		}
 
-		PlayerAether ret = (PlayerAether) player.getCapability(AetherCapabilities.PLAYER_DATA, null);
+		PlayerAether ret = (PlayerAether) player.getCapability(CapabilitiesAether.PLAYER_DATA, null);
 
 		if (ret == null)
 		{
@@ -136,7 +136,7 @@ public class PlayerAether implements IPlayerAether
 
 	public static boolean hasCapability(final Entity entity)
 	{
-		return entity.hasCapability(AetherCapabilities.PLAYER_DATA, null);
+		return entity.hasCapability(CapabilitiesAether.PLAYER_DATA, null);
 	}
 
 	public ItemStack getLastDestroyedStack()

@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.world.aether.features;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBrettlPlant;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -41,11 +41,11 @@ public class WorldGenBrettlPlant extends WorldGenerator
 
 				if (growthStage == 0)
 				{
-					BlocksAether.brettl_plant.fullyGrowPlant(worldIn, randomPos.up(2), this.brettlState);
+					((BlockBrettlPlant) BlocksAether.brettl_plant).fullyGrowPlant(worldIn, randomPos.up(2), this.brettlState);
 				}
 				else if (growthStage > 0 && growthStage <= 3)
 				{
-					BlocksAether.brettl_plant.fullyPrunePlant(worldIn, randomPos.up(2), this.brettlState);
+					((BlockBrettlPlant) BlocksAether.brettl_plant).fullyPrunePlant(worldIn, randomPos.up(2), this.brettlState);
 				}
 				else if (growthStage > 4 && growthStage <= 8)
 				{

@@ -1,8 +1,8 @@
 package com.gildedgames.aether.client;
 
+import com.gildedgames.aether.common.init.DimensionsAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketSetShouldRespawnAtCampfire;
-import com.gildedgames.aether.common.registry.content.DimensionsAether;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiGameOver;
 import net.minecraft.client.gui.GuiScreen;

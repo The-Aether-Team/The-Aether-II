@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.items.consumables;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBrettlPlant;
 import com.gildedgames.aether.common.items.IDropOnDeath;
 import net.minecraft.block.state.IBlockState;

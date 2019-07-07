@@ -1,8 +1,9 @@
 package com.gildedgames.aether.client.models.items;
 
+import com.gildedgames.aether.api.registrar.BlocksAether;
+import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.client.util.ItemModelBuilder;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
 import com.gildedgames.aether.common.blocks.containers.BlockIncubator;
 import com.gildedgames.aether.common.blocks.decorative.*;
@@ -15,7 +16,6 @@ import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherW
 import com.gildedgames.aether.common.entities.blocks.EntityParachute;
 import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
 import com.gildedgames.aether.common.entities.tiles.*;
-import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
 import net.minecraft.block.Block;
@@ -134,8 +134,8 @@ public class ItemModelsAether
 
 		registerItemModels(BlocksAether.highlands_bush, "bushes/highlands_bush");
 
-		registerItemModels(BlocksAether.mutant_tree_leaves, "leaves/mutant_leaves");
-		registerItemModels(BlocksAether.mutant_tree_leaves_decorated, "leaves/mutant_leaves_decorated");
+		registerItemModels(BlocksAether.mutant_leaves, "leaves/mutant_leaves");
+		registerItemModels(BlocksAether.mutant_leaves_decorated, "leaves/mutant_leaves_decorated");
 
 		registerItemModels(BlocksAether.blueberry_bush, new ItemModelBuilder("bushes/")
 				.add(BlockBlueberryBush.BERRY_BUSH_STEM, "blueberry_bush_stem")
@@ -164,21 +164,21 @@ public class ItemModelsAether
 		registerSnowyFlower(BlocksAether.quickshoot, "quickshoot");
 		registerSnowyFlower(BlocksAether.stoneshroom, "stoneshroom");
 
-		registerItemModels(BlocksAether.aether_skyroot_sapling, new ItemModelBuilder("saplings/")
+		registerItemModels(BlocksAether.skyroot_sapling, new ItemModelBuilder("saplings/")
 				.add(BlockAetherSkyrootSapling.GREEN.getMeta(), "green_skyroot_sapling")
 				.add(BlockAetherSkyrootSapling.BLUE.getMeta(), "blue_skyroot_sapling")
 				.add(BlockAetherSkyrootSapling.DARK_BLUE.getMeta(), "dark_blue_skyroot_sapling"));
 
-		registerItemModels(BlocksAether.aether_unique_sapling, new ItemModelBuilder("saplings/")
+		registerItemModels(BlocksAether.unique_sapling, new ItemModelBuilder("saplings/")
 				.add(BlockAetherUniqueSapling.AMBEROOT.getMeta(), "amberoot_sapling")
 				.add(BlockAetherUniqueSapling.MUTANT_TREE.getMeta(), "mutant_tree_sapling"));
 
-		registerItemModels(BlocksAether.aether_wisproot_sapling, new ItemModelBuilder("saplings/")
+		registerItemModels(BlocksAether.wisproot_sapling, new ItemModelBuilder("saplings/")
 				.add(BlockAetherWisprootSapling.GREEN.getMeta(), "green_wisproot_sapling")
 				.add(BlockAetherWisprootSapling.BLUE.getMeta(), "blue_wisproot_sapling")
 				.add(BlockAetherWisprootSapling.DARK_BLUE.getMeta(), "dark_blue_wisproot_sapling"));
 
-		registerItemModels(BlocksAether.aether_greatroot_sapling, new ItemModelBuilder("saplings/")
+		registerItemModels(BlocksAether.greatroot_sapling, new ItemModelBuilder("saplings/")
 				.add(BlockAetherGreatrootSapling.GREEN.getMeta(), "green_greatroot_sapling")
 				.add(BlockAetherGreatrootSapling.BLUE.getMeta(), "blue_greatroot_sapling")
 				.add(BlockAetherGreatrootSapling.DARK_BLUE.getMeta(), "dark_blue_greatroot_sapling"));
@@ -253,7 +253,7 @@ public class ItemModelsAether
 
 		registerItemModels(BlocksAether.aether_crafting_table, "crafting_tables/skyroot_crafting_table");
 
-		registerItemModels(ItemsAether.skyroot_bed, "skyroot_bed");
+		registerItemModels(ItemsAether.skyroot_bed_item, "skyroot_bed");
 
 		registerItemModels(BlocksAether.tall_aether_grass, new ItemModelBuilder("tall_grass/")
 				.add(BlockTallAetherGrass.SHORT.getMeta(), "short_aether")
@@ -532,9 +532,9 @@ public class ItemModelsAether
 				.add(ItemBoltType.GRAVITITE.ordinal(), "gravitite_bolt")
 				.add(ItemBoltType.ARKENIUM.ordinal(), "arkenium_bolt"));
 
-		registerItemModels(ItemsAether.skyroot_door, "skyroot_door");
-		registerItemModels(ItemsAether.secret_skyroot_door, "secret_skyroot_door");
-		registerItemModels(ItemsAether.arkenium_door, "arkenium_door");
+		registerItemModels(ItemsAether.skyroot_door_item, "skyroot_door");
+		registerItemModels(ItemsAether.secret_skyroot_door_item, "secret_skyroot_door");
+		registerItemModels(ItemsAether.arkenium_door_item, "arkenium_door");
 
 		registerItemModels(BlocksAether.skyroot_trapdoor, "skyroot_trapdoor");
 		registerItemModels(BlocksAether.secret_skyroot_trapdoor, "secret_skyroot_trapdoor");
@@ -627,7 +627,7 @@ public class ItemModelsAether
 		registerItemModels(BlocksAether.woven_sticks, new ItemModelBuilder("woven_sticks/")
 				.add(BlockWovenSticks.SKYROOT.getMeta(), "woven_skyroot_sticks"));
 
-		registerItemModels(ItemsAether.moa_egg, "moa_egg/moa_egg");
+		registerItemModels(ItemsAether.moa_egg_item, "moa_egg/moa_egg");
 		registerItemModels(ItemsAether.rainbow_moa_egg, "rainbow_moa_egg");
 
 		registerItemModels(BlocksAether.moa_egg, "moa_egg/moa_egg");
@@ -666,7 +666,7 @@ public class ItemModelsAether
 		registerItemModels(ItemsAether.kirrid_cutlet, "kirrid_cutlet");
 		registerItemModels(ItemsAether.valkyrie_wings, "valkyrie_wings");
 
-		registerItemModels(BlocksAether.ice_crystal, "crystals/highlands_ice_crystal");
+		registerItemModels(BlocksAether.highlands_ice_crystal, "crystals/highlands_ice_crystal");
 		registerItemModels(BlocksAether.candy_cane_block, "candy_cane_block");
 		registerItemModels(BlocksAether.candy_cane_wall, "aether_wall/candy_cane_wall");
 		registerItemModels(ItemsAether.winter_hat, "miscellaneous/winter_hat");

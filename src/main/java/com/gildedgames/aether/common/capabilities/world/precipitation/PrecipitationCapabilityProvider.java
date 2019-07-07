@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.capabilities.world.precipitation;
 
-import com.gildedgames.aether.api.AetherCapabilities;
+import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.api.world.islands.precipitation.IPrecipitationManager;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
@@ -24,7 +24,7 @@ public class PrecipitationCapabilityProvider implements ICapabilitySerializable<
 	@Override
 	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing)
 	{
-		return this.capability != null && capability == AetherCapabilities.PRECIPITATION_MANAGER;
+		return this.capability != null && capability == CapabilitiesAether.PRECIPITATION_MANAGER;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -43,12 +43,12 @@ public class PrecipitationCapabilityProvider implements ICapabilitySerializable<
 	@Override
 	public NBTBase serializeNBT()
 	{
-		return this.storage.writeNBT(AetherCapabilities.PRECIPITATION_MANAGER, this.capability, null);
+		return this.storage.writeNBT(CapabilitiesAether.PRECIPITATION_MANAGER, this.capability, null);
 	}
 
 	@Override
 	public void deserializeNBT(NBTBase nbt)
 	{
-		this.storage.readNBT(AetherCapabilities.PRECIPITATION_MANAGER, this.capability, null, nbt);
+		this.storage.readNBT(CapabilitiesAether.PRECIPITATION_MANAGER, this.capability, null, nbt);
 	}
 }

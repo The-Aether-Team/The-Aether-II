@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.capabilities.entity.spawning;
 
-import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.entity.spawning.ISpawningInfo;
+import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
@@ -32,7 +32,7 @@ public class EntitySpawningInfoProvider implements ICapabilitySerializable<NBTBa
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing)
 	{
-		return capability == AetherCapabilities.ENTITY_SPAWNING_INFO;
+		return capability == CapabilitiesAether.ENTITY_SPAWNING_INFO;
 	}
 
 	@Override
@@ -50,13 +50,13 @@ public class EntitySpawningInfoProvider implements ICapabilitySerializable<NBTBa
 	@Override
 	public NBTBase serializeNBT()
 	{
-		return this.storage.writeNBT(AetherCapabilities.ENTITY_SPAWNING_INFO, this.fetchCapability(), null);
+		return this.storage.writeNBT(CapabilitiesAether.ENTITY_SPAWNING_INFO, this.fetchCapability(), null);
 	}
 
 	@Override
 	public void deserializeNBT(NBTBase nbt)
 	{
-		this.storage.readNBT(AetherCapabilities.ENTITY_SPAWNING_INFO, this.fetchCapability(), null, nbt);
+		this.storage.readNBT(CapabilitiesAether.ENTITY_SPAWNING_INFO, this.fetchCapability(), null, nbt);
 	}
 
 }

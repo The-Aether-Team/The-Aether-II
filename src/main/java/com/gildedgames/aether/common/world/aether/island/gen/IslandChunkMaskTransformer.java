@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.world.aether.island.gen;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
 import com.gildedgames.orbis.lib.preparation.IChunkMaskTransformer;
 import com.gildedgames.orbis.lib.preparation.impl.ChunkMask;

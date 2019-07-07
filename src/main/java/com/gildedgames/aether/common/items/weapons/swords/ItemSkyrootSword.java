@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.items.weapons.swords;
 
+import com.gildedgames.aether.api.registrar.ItemsAether;
+import com.gildedgames.aether.common.init.MaterialsAether;
 import com.gildedgames.aether.common.items.ItemAbilityType;
-import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.registry.content.MaterialsAether;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;

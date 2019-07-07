@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.world.spawning;
 
-import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.entity.spawning.EntitySpawn;
 import com.gildedgames.aether.api.entity.spawning.ISpawningInfo;
+import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.api.world.ISpawnArea;
 import com.gildedgames.aether.api.world.ISpawnAreaManager;
 import com.gildedgames.aether.api.world.ISpawnHandler;
@@ -220,7 +220,7 @@ public class SpawnAreaManager implements ISpawnAreaManager
 	@Override
 	public void onLivingDeath(LivingDeathEvent event)
 	{
-		final ISpawningInfo spawningInfo = event.getEntityLiving().getCapability(AetherCapabilities.ENTITY_SPAWNING_INFO, null);
+		final ISpawningInfo spawningInfo = event.getEntityLiving().getCapability(CapabilitiesAether.ENTITY_SPAWNING_INFO, null);
 
 		final EntitySpawn area = spawningInfo.getSpawnArea();
 

@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.items.weapons.crossbow;
 
+import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt.BoltAbility;
-import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
+import com.gildedgames.aether.common.init.CreativeTabsAether;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.resources.I18n;
@@ -48,7 +48,7 @@ public class ItemCrossbow extends Item
 		this.knockBackValue = 0;
 		this.durationInTicks = 20.0F;
 
-		this.setCreativeTab(CreativeTabsAether.WEAPONS);
+		this.setCreativeTab(CreativeTabsAether.TAB_WEAPONS);
 
 		this.addPropertyOverride(new ResourceLocation("pull"), new IItemPropertyGetter()
 		{

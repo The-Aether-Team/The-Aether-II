@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.network.packets;
 
-import com.gildedgames.aether.api.AetherCapabilities;
+import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.api.world.islands.precipitation.IPrecipitationManager;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
@@ -62,7 +62,7 @@ public class PacketUpdatePrecipitation implements IMessage
 		@Override
 		public IMessage onMessage(PacketUpdatePrecipitation message, EntityPlayer player)
 		{
-			IPrecipitationManager precip = player.world.getCapability(AetherCapabilities.PRECIPITATION_MANAGER, null);
+			IPrecipitationManager precip = player.world.getCapability(CapabilitiesAether.PRECIPITATION_MANAGER, null);
 
 			if (precip != null)
 			{

@@ -4,6 +4,8 @@ import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
 import com.gildedgames.aether.api.entity.IEntityEyesComponent;
 import com.gildedgames.aether.api.entity.IMount;
 import com.gildedgames.aether.api.entity.IMountProcessor;
+import com.gildedgames.aether.api.registrar.ItemsAether;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.ai.AetherNavigateGround;
 import com.gildedgames.aether.common.entities.ai.EntityAIUnstuckBlueAercloud;
 import com.gildedgames.aether.common.entities.ai.moa.*;
@@ -14,10 +16,8 @@ import com.gildedgames.aether.common.entities.util.mounts.FlyingMount;
 import com.gildedgames.aether.common.entities.util.mounts.IFlyingMountData;
 import com.gildedgames.aether.common.entities.util.multipart.AetherMultiPartEntity;
 import com.gildedgames.aether.common.entities.util.multipart.AetherMultiPartMount;
-import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
 import com.gildedgames.aether.common.items.misc.ItemMoaFeather;
-import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
 import com.gildedgames.orbis.lib.client.PartialTicks;
 import com.google.common.collect.Sets;
@@ -388,7 +388,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 
 			if (this.ticksUntilFlap == 0)
 			{
-				this.world.playSound(this.posX, this.posY, this.posZ, SoundsAether.generic_wing_flap, SoundCategory.NEUTRAL, 0.4f,
+				this.world.playSound(this.posX, this.posY, this.posZ, new SoundEvent(AetherCore.getResource("mob.generic.wings.flap")), SoundCategory.NEUTRAL, 0.4f,
 						0.8f + (this.getRNG().nextFloat() * 0.6f), false);
 
 				this.ticksUntilFlap = 11;
@@ -767,7 +767,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 	@Override
 	public ItemStack getPickedResult(final RayTraceResult target)
 	{
-		final ItemStack moaEgg = new ItemStack(ItemsAether.moa_egg);
+		final ItemStack moaEgg = new ItemStack(ItemsAether.moa_egg_item);
 
 		final MoaGenePool stackGenes = ItemMoaEgg.getGenePool(moaEgg);
 
@@ -782,19 +782,19 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return SoundsAether.moa_ambient;
+		return new SoundEvent(AetherCore.getResource("mob.moa.ambient"));
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(final DamageSource src)
 	{
-		return SoundsAether.moa_hurt;
+		return new SoundEvent(AetherCore.getResource("mob.moa.hurt"));
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return SoundsAether.moa_hurt;
+		return new SoundEvent(AetherCore.getResource("mob.moa.hurt"));
 	}
 
 	public boolean isSaddled()

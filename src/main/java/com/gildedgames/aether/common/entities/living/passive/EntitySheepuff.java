@@ -1,14 +1,14 @@
 package com.gildedgames.aether.common.entities.living.passive;
 
 import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
-import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.api.registrar.BlocksAether;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.ai.EntityAIHideFromRain;
 import com.gildedgames.aether.common.entities.ai.EntityAIRestrictRain;
 import com.gildedgames.aether.common.entities.ai.EntityAIUnstuckBlueAercloud;
 import com.gildedgames.aether.common.entities.ai.kirrid.EntityAIEatAetherGrass;
 import com.gildedgames.aether.common.entities.util.multipart.AetherMultiPartShearable;
-import com.gildedgames.aether.common.registry.content.LootTablesAether;
-import com.gildedgames.aether.common.registry.content.SoundsAether;
+import com.gildedgames.aether.common.init.LootTablesAether;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
 import net.minecraft.entity.*;
 import net.minecraft.entity.passive.EntitySheep;
@@ -221,19 +221,19 @@ public class EntitySheepuff extends EntitySheep implements IEntityMultiPart
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return SoundsAether.kirrid_ambient;
+		return new SoundEvent(AetherCore.getResource("mob.kirrid.ambient"));
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource source)
 	{
-		return SoundsAether.kirrid_hurt;
+		return new SoundEvent(AetherCore.getResource("mob.kirrid.hurt"));
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return SoundsAether.kirrid_death;
+		return new SoundEvent(AetherCore.getResource("mob.kirrid.death"));
 	}
 
 	@Override

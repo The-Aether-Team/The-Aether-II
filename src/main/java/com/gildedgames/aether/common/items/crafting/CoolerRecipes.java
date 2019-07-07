@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.items.crafting;
 
+import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.items.ItemsAether;
 import com.google.common.collect.Maps;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

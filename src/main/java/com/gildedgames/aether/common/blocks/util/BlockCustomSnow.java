@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.blocks.util;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.blocks.IBlockWithItem;
 import com.gildedgames.aether.common.items.blocks.ItemBlockCustomSnow;
 import net.minecraft.block.Block;

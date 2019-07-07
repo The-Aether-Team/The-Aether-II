@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world.aether.features;
 
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.world.generation.WorldDecorationGenerator;
-import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockIceCrystal;
 import com.gildedgames.orbis.lib.world.WorldSlice;
 import com.google.common.collect.Lists;
@@ -22,7 +22,7 @@ public class WorldGenIceCrystals implements WorldDecorationGenerator
 
 	public WorldGenIceCrystals(final int max)
 	{
-		this.crystalState = BlocksAether.ice_crystal.getDefaultState();
+		this.crystalState = BlocksAether.highlands_ice_crystal.getDefaultState();
 		this.max = max;
 	}
 

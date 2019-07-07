@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.world.spawning;
 
-import com.gildedgames.aether.api.AetherCapabilities;
+import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.api.world.ISpawnHandler;
 import com.gildedgames.aether.api.world.ISpawnSystem;
 import net.minecraft.entity.EntityLivingBase;
@@ -16,7 +16,7 @@ public class SpawnAreaEvents
 	{
 		final EntityLivingBase entity = event.getEntityLiving();
 
-		final ISpawnSystem system = entity.getCapability(AetherCapabilities.SPAWN_SYSTEM, null);
+		final ISpawnSystem system = entity.getCapability(CapabilitiesAether.SPAWN_SYSTEM, null);
 
 		if (system != null)
 		{

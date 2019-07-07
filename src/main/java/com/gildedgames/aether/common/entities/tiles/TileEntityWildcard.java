@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.entities.tiles;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.orbis.lib.processing.IBlockAccessExtended;
 import com.gildedgames.orbis.lib.util.mc.BlockUtil;
 import net.minecraft.block.Block;

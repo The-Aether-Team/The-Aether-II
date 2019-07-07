@@ -1,17 +1,17 @@
 package com.gildedgames.aether.common.entities.ai.tempest;
 
-import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.effects_system.EEffectIntensity;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffectIntensity;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.ai.EntityAI;
 import com.gildedgames.aether.common.entities.effects.StatusEffectStun;
 import com.gildedgames.aether.common.entities.living.mobs.EntityTempest;
-import com.gildedgames.aether.common.registry.content.SoundsAether;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.util.SoundEvent;
 
 public class AIElectricShock extends EntityAI<EntityTempest>
 {
@@ -68,7 +68,7 @@ public class AIElectricShock extends EntityAI<EntityTempest>
 			{
 				if (this.attackTimer == 0)
 				{
-					this.entity().playSound(SoundsAether.zephyr_puff, 1.0F,
+					this.entity().playSound(new SoundEvent(AetherCore.getResource("mob.zephyr.puff")), 1.0F,
 							(this.entity().getRNG().nextFloat() - this.entity().getRNG().nextFloat()) * 0.2F + 1.0F);
 				}
 
@@ -78,12 +78,12 @@ public class AIElectricShock extends EntityAI<EntityTempest>
 
 				if (this.attackTimer >= 40)
 				{
-					this.entity().playSound(SoundsAether.tempest_electric_shock, 1.0F,
+					this.entity().playSound(new SoundEvent(AetherCore.getResource("mob.tempest.electric_shock")), 1.0F,
 							(this.entity().getRNG().nextFloat() - this.entity().getRNG().nextFloat()) * 0.2F + 1.0F);
 
 					if (this.entity().getRNG().nextInt(8) == 0)
 					{
-						this.entity().playSound(SoundsAether.tempest_angry, 1.0F,
+						this.entity().playSound(new SoundEvent(AetherCore.getResource("mob.tempest.angry")), 1.0F,
 								(this.entity().getRNG().nextFloat() - this.entity().getRNG().nextFloat()) * 0.2F + 1.0F);
 					}
 

@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.network.packets;
 
-import com.gildedgames.aether.common.registry.content.ParticlesAether;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.init.ParticlesAether;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;

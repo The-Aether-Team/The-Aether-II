@@ -25,10 +25,9 @@ import com.gildedgames.aether.common.containers.slots.SlotFlintAndSteel;
 import com.gildedgames.aether.common.containers.slots.SlotMoaEgg;
 import com.gildedgames.aether.common.entities.tiles.TileEntitySkyrootSign;
 import com.gildedgames.aether.common.entities.util.mounts.FlyingMount;
+import com.gildedgames.aether.common.init.DimensionsAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketSpecialMovement;
-import com.gildedgames.aether.common.registry.content.DimensionsAether;
-import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.gildedgames.aether.common.shop.ShopCurrencyGilt;
 import com.gildedgames.orbis.lib.client.PartialTicks;
 import com.gildedgames.orbis.lib.client.gui.util.GuiFrameUtils;
@@ -46,6 +45,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.client.GuiIngameForge;
@@ -539,7 +539,7 @@ public class ClientEventHandler
 						{
 							NetworkingAether.sendPacketToServer(new PacketSpecialMovement(PacketSpecialMovement.Action.EXTRA_JUMP));
 
-							world.playSound(player.posX, player.posY, player.posZ, SoundsAether.generic_wing_flap, SoundCategory.PLAYERS, 0.4f,
+							world.playSound(player.posX, player.posY, player.posZ, new SoundEvent(AetherCore.getResource("mob.generic.wings.flap")), SoundCategory.PLAYERS, 0.4f,
 									0.8f + (world.rand.nextFloat() * 0.6f), false);
 						}
 					}

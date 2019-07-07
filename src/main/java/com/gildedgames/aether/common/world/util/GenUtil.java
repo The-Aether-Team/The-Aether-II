@@ -1,10 +1,10 @@
 package com.gildedgames.aether.common.world.util;
 
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.world.generation.WorldDecoration;
 import com.gildedgames.aether.api.world.generation.WorldDecorationSimple;
 import com.gildedgames.aether.api.world.generation.positioners.PositionerLevels;
 import com.gildedgames.aether.api.world.generation.positioners.PositionerSurface;
-import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.world.aether.features.WorldGenCaveFloorPlacer;
 import com.gildedgames.aether.common.world.aether.features.WorldGenFloorPlacer;

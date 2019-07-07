@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.entities.ai;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.pathfinding.PathNavigateGround;

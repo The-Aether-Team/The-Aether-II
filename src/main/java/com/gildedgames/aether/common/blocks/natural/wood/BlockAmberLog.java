@@ -1,8 +1,7 @@
 package com.gildedgames.aether.common.blocks.natural.wood;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.natural.wood.BlockAetherLog;
-import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.api.registrar.BlocksAether;
+import com.gildedgames.aether.api.registrar.ItemsAether;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

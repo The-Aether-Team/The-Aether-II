@@ -1,10 +1,10 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.api.registrar.BlocksAether;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.IBlockMultiName;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
-import com.gildedgames.aether.common.registry.content.SoundsAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -123,7 +123,7 @@ public class BlockAercloud extends Block implements IBlockMultiName
 		{
 			if (entity.world.isRemote)
 			{
-				world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundsAether.aercloud_bounce, SoundCategory.BLOCKS, 0.8f,
+				world.playSound(pos.getX(), pos.getY(), pos.getZ(), new SoundEvent(AetherCore.getResource("block.aercloud.bounce")), SoundCategory.BLOCKS, 0.8f,
 						0.9f + (world.rand.nextFloat() * 0.2f), false);
 
 				for (int i = 0; i < 50; i++)

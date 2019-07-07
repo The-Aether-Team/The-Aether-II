@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.containers.tiles;
 
 import com.gildedgames.aether.api.recipes.simple.ISimpleRecipe;
-import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.containers.inventory.InventoryCraftResultSimple;
 import com.gildedgames.aether.common.containers.slots.SlotSimpleCrafting;
 import com.gildedgames.aether.common.network.NetworkingAether;

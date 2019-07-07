@@ -6,9 +6,9 @@ import com.gildedgames.aether.api.shop.ICurrencyListener;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
+import com.gildedgames.aether.common.init.CurrencyAetherInit;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketCurrencyModule;
-import com.gildedgames.aether.common.registry.content.CurrencyAether;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
@@ -18,7 +18,7 @@ import java.util.List;
 
 public class PlayerCurrencyModule extends PlayerAetherModule implements ICurrencyModule, IPlayerAetherModule.Serializable
 {
-	private static final int[] DENOMINATIONS = { CurrencyAether.GILTAENI, CurrencyAether.GILTAEN, CurrencyAether.GILTAE, CurrencyAether.GILT };
+	private static final int[] DENOMINATIONS = { CurrencyAetherInit.GILTAENI, CurrencyAetherInit.GILTAEN, CurrencyAetherInit.GILTAE, CurrencyAetherInit.GILT };
 
 	private long currencyValue = 0;
 

@@ -1,6 +1,6 @@
 package com.gildedgames.aether.api.effects_system;
 
-import com.gildedgames.aether.api.AetherCapabilities;
+import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.orbis.lib.util.mc.NBT;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -119,7 +119,7 @@ public interface IAetherStatusEffects extends NBT
 	 */
 	static boolean applyStatusEffect(EntityLivingBase livingBase, effectTypes effectType, @Nonnegative int buildup)
 	{
-		IAetherStatusEffectPool effects = livingBase.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null);
+		IAetherStatusEffectPool effects = livingBase.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
 
 		if (effects != null)
 		{
@@ -133,7 +133,7 @@ public interface IAetherStatusEffects extends NBT
 
 	static boolean isEffectApplying(EntityLivingBase livingBase, effectTypes effectType)
 	{
-		IAetherStatusEffectPool effects = livingBase.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null);
+		IAetherStatusEffectPool effects = livingBase.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
 
 		if (effects != null)
 		{
@@ -145,7 +145,7 @@ public interface IAetherStatusEffects extends NBT
 
 	static boolean doesEffectHaveBuildup(EntityLivingBase livingBase, effectTypes effectType)
 	{
-		IAetherStatusEffectPool effects = livingBase.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null);
+		IAetherStatusEffectPool effects = livingBase.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
 
 		if (effects != null)
 		{

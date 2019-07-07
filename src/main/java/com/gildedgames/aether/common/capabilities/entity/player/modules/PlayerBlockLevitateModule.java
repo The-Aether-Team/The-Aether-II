@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.capabilities.entity.player.modules;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
-import com.gildedgames.aether.common.registry.content.MaterialsAether;
+import com.gildedgames.aether.common.init.MaterialsAether;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;

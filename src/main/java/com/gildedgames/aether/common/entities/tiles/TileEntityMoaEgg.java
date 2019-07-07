@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.entities.tiles;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.genes.util.SimpleGeneStorage;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;

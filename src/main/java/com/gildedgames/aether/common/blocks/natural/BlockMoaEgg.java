@@ -1,12 +1,12 @@
 package com.gildedgames.aether.common.blocks.natural;
 
+import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.blocks.IInternalBlock;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.entities.tiles.TileEntityMoaEgg;
 import com.gildedgames.aether.common.entities.util.EntityGroup;
 import com.gildedgames.aether.common.entities.util.MoaNest;
-import com.gildedgames.aether.common.items.ItemsAether;
 import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -84,7 +84,7 @@ public class BlockMoaEgg extends BlockContainer implements IInternalBlock
 					}
 				}
 
-				ItemStack eggStack = new ItemStack(ItemsAether.moa_egg, 1, 0);
+				ItemStack eggStack = new ItemStack(ItemsAether.moa_egg_item, 1, 0);
 
 				MoaGenePool stackGenes = ItemMoaEgg.getGenePool(eggStack);
 
@@ -147,7 +147,7 @@ public class BlockMoaEgg extends BlockContainer implements IInternalBlock
 	@Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
 	{
-		ItemStack eggStack = new ItemStack(ItemsAether.moa_egg);
+		ItemStack eggStack = new ItemStack(ItemsAether.moa_egg_item);
 		TileEntityMoaEgg egg = (TileEntityMoaEgg) world.getTileEntity(pos);
 
 		if (egg != null)

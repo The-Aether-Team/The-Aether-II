@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.entities.projectiles;
 
 import com.gildedgames.aether.api.damage_system.IDamageLevelsHolder;
-import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityArrow;

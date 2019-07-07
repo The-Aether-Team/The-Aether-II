@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.capabilities;
 import com.gildedgames.aether.api.damage_system.DamageSystemTables;
 import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
 import com.gildedgames.aether.api.damage_system.IDamageLevelsHolder;
-import com.gildedgames.aether.common.registry.content.ParticlesAether;
+import com.gildedgames.aether.common.init.ParticlesAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketParticles;
 import net.minecraft.entity.Entity;

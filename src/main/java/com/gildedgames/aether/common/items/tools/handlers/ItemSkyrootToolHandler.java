@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.items.tools.handlers;
 
-import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
+import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -33,7 +33,7 @@ public class ItemSkyrootToolHandler implements IToolEventHandler
 				return;
 			}
 
-			final IPlacementFlagCapability data = world.getChunk(pos).getCapability(AetherCapabilities.CHUNK_PLACEMENT_FLAG, EnumFacing.UP);
+			final IPlacementFlagCapability data = world.getChunk(pos).getCapability(CapabilitiesAether.CHUNK_PLACEMENT_FLAG, EnumFacing.UP);
 
 			if (data.isModified(pos))
 			{

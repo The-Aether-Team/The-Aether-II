@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.capabilities.world.chunk;
 
-import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
+import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -22,7 +22,7 @@ public class PlacementFlagProvider implements ICapabilitySerializable<NBTBase>
 	@Override
 	public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing)
 	{
-		return capability == AetherCapabilities.CHUNK_PLACEMENT_FLAG && this.capability != null;
+		return capability == CapabilitiesAether.CHUNK_PLACEMENT_FLAG && this.capability != null;
 	}
 
 	@Override

@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client.renderer;
 
-import com.gildedgames.aether.api.AetherCapabilities;
+import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.api.world.IWorldObjectHoverable;
 import com.gildedgames.aether.api.world.islands.precipitation.IPrecipitationManager;
 import com.gildedgames.aether.client.gui.overlays.IOverlay;
@@ -191,7 +191,7 @@ public class ClientRenderHandler
 
 		if (Minecraft.getMinecraft().world.getWorldInfo().isRaining())
 		{
-			IPrecipitationManager precipitation = Minecraft.getMinecraft().world.getCapability(AetherCapabilities.PRECIPITATION_MANAGER, null);
+			IPrecipitationManager precipitation = Minecraft.getMinecraft().world.getCapability(CapabilitiesAether.PRECIPITATION_MANAGER, null);
 
 			if (precipitation != null)
 			{

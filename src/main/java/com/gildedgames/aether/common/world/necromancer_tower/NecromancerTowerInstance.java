@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.world.necromancer_tower;
 
-import com.gildedgames.aether.common.registry.content.DimensionsAether;
-import com.gildedgames.aether.common.registry.content.GenerationAether;
-import com.gildedgames.aether.common.registry.content.InstancesAether;
+import com.gildedgames.aether.common.init.DimensionsAether;
+import com.gildedgames.aether.common.init.GenerationAether;
+import com.gildedgames.aether.common.init.InstancesAether;
 import com.gildedgames.orbis.lib.core.CreationData;
 import com.gildedgames.orbis.lib.core.PlacedBlueprint;
 import com.gildedgames.orbis.lib.core.baking.BakedBlueprint;

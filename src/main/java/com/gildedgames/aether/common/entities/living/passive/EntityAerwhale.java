@@ -1,10 +1,9 @@
 package com.gildedgames.aether.common.entities.living.passive;
 
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.ai.EntityAIForcedWander;
 import com.gildedgames.aether.common.entities.util.flying.EntityFlying;
-import com.gildedgames.aether.common.entities.util.flying.advanced.EntityFlyingAdvanced;
 import com.gildedgames.aether.common.entities.util.flying.PathNavigateFlyer;
-import com.gildedgames.aether.common.registry.content.SoundsAether;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
 import net.minecraft.pathfinding.PathNavigate;
@@ -69,19 +68,19 @@ public class EntityAerwhale extends EntityFlying
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return SoundsAether.aerwhale_ambient;
+		return new SoundEvent(AetherCore.getResource("mob.aerwhale.ambient"));
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(final DamageSource src)
 	{
-		return SoundsAether.aerwhale_ambient;
+		return new SoundEvent(AetherCore.getResource("mob.aerwhale.ambient"));
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return SoundsAether.aerwhale_death;
+		return new SoundEvent(AetherCore.getResource("mob.aerwhale.death"));
 	}
 
 	@Override

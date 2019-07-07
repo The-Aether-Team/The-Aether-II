@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.items.tools;
 
+import com.gildedgames.aether.api.registrar.ItemsAether;
+import com.gildedgames.aether.common.init.CreativeTabsAether;
 import com.gildedgames.aether.common.items.IDropOnDeath;
-import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
@@ -34,7 +34,7 @@ public class ItemSkyrootBucket extends ItemBucket implements IDropOnDeath
 			this.setMaxStackSize(16);
 		}
 
-		this.setCreativeTab(CreativeTabsAether.MISCELLANEOUS);
+		this.setCreativeTab(CreativeTabsAether.TAB_MISCELLANEOUS);
 	}
 
 	@Override

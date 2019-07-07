@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client.renderer.tile_entities;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.entities.tiles.TileEntitySkyrootSign;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.FontRenderer;

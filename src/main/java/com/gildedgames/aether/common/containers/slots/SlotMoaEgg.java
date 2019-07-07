@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.containers.slots;
 
+import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.tiles.TileEntityIncubator;
-import com.gildedgames.aether.common.items.ItemsAether;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -35,7 +35,7 @@ public class SlotMoaEgg extends Slot
 	{
 		if (this.inventory instanceof TileEntityIncubator)
 		{
-			if (stack.getItem() == ItemsAether.moa_egg || stack.getItem() == ItemsAether.rainbow_moa_egg)
+			if (stack.getItem() == ItemsAether.moa_egg_item || stack.getItem() == ItemsAether.rainbow_moa_egg)
 			{
 				// Check if incubator is ready before allowing transfer
 				return this.inventory.getField(0) > TileEntityIncubator.REQ_TEMPERATURE_THRESHOLD - 500;

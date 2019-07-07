@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client.renderer.world;
 
-import com.gildedgames.aether.api.AetherCapabilities;
+import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.api.world.islands.precipitation.IPrecipitationManager;
 import com.gildedgames.aether.client.renderer.textures.SimpleDXT1Texture;
 import com.gildedgames.aether.common.AetherCore;
@@ -140,7 +140,7 @@ public class RenderWorldSkybox extends IRenderHandler
 
 	private void updateLightmap(Minecraft mc, float partialTicks)
 	{
-		IPrecipitationManager precipitation = Minecraft.getMinecraft().world.getCapability(AetherCapabilities.PRECIPITATION_MANAGER, null);
+		IPrecipitationManager precipitation = Minecraft.getMinecraft().world.getCapability(CapabilitiesAether.PRECIPITATION_MANAGER, null);
 
 		if (precipitation == null)
 		{

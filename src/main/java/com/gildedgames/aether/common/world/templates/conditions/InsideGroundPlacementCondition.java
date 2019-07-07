@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world.templates.conditions;
 
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.world.generation.PlacementConditionTemplate;
-import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.orbis.lib.processing.IBlockAccessExtended;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;

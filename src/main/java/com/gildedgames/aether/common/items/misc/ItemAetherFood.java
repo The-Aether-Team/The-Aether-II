@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.items.misc;
 
+import com.gildedgames.aether.common.init.CreativeTabsAether;
 import com.gildedgames.aether.common.items.IDropOnDeath;
-import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 
@@ -13,14 +13,14 @@ public class ItemAetherFood extends ItemFood implements IDropOnDeath
 	{
 		super(amount, isWolfFood);
 
-		this.setCreativeTab(CreativeTabsAether.CONSUMABLES);
+		this.setCreativeTab(CreativeTabsAether.TAB_CONSUMABLES);
 	}
 
 	public ItemAetherFood(int amount, float saturation, boolean isWolfFood)
 	{
 		super(amount, saturation, isWolfFood);
 
-		this.setCreativeTab(CreativeTabsAether.CONSUMABLES);
+		this.setCreativeTab(CreativeTabsAether.TAB_CONSUMABLES);
 	}
 
 	public ItemAetherFood setConsumptionDuration(int duration)

@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client.renderer.particles;
 
-import com.gildedgames.aether.api.AetherCapabilities;
+import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.api.world.islands.precipitation.IPrecipitationManager;
 import com.gildedgames.aether.common.util.helpers.AetherHelper;
 import net.minecraft.client.particle.Particle;
@@ -23,7 +23,7 @@ public class ParticleRainProxyFactory extends ParticleRain.Factory
 			return particle;
 		}
 
-		IPrecipitationManager precipitationManager = worldIn.getCapability(AetherCapabilities.PRECIPITATION_MANAGER, null);
+		IPrecipitationManager precipitationManager = worldIn.getCapability(CapabilitiesAether.PRECIPITATION_MANAGER, null);
 
 		if (precipitationManager == null)
 		{

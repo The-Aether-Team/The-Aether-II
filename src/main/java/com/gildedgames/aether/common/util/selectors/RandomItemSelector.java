@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.util.selectors;
 
 import com.gildedgames.aether.api.items.loot.Loot;
-import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.init.ItemsAetherInit;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -28,7 +28,7 @@ public class RandomItemSelector implements Loot
 		{
 			this.validStackCache = new ArrayList<>();
 
-			for (Item item : ItemsAether.getRegisteredItems())
+			for (Item item : ItemsAetherInit.getRegisteredItems())
 			{
 				if (item == null)
 				{

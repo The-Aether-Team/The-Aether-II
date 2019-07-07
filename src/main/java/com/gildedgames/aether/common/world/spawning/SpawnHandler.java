@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.world.spawning;
 
-import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.entity.spawning.EntitySpawn;
 import com.gildedgames.aether.api.entity.spawning.ISpawningInfo;
+import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.api.world.*;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis.lib.OrbisLib;
@@ -318,7 +318,7 @@ public class SpawnHandler implements ISpawnHandler
 							}
 						}
 
-						ISpawningInfo info = entity.getCapability(AetherCapabilities.ENTITY_SPAWNING_INFO, null);
+						ISpawningInfo info = entity.getCapability(CapabilitiesAether.ENTITY_SPAWNING_INFO, null);
 						info.setSpawnArea(new EntitySpawn(this.uniqueID, manager.getWorld().provider.getDimension(), area.getAreaX(), area.getAreaZ()));
 
 						area.addToEntityCount(1);

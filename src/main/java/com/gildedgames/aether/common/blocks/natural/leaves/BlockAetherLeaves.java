@@ -1,11 +1,9 @@
 package com.gildedgames.aether.common.blocks.natural.leaves;
 
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.client.renderer.particles.ParticleGolden;
 import com.gildedgames.aether.client.renderer.particles.ParticleLeaf;
-import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherSkyrootSapling;
 import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherUniqueSapling;
-import com.gildedgames.aether.common.entities.living.passive.EntitySkyrootLizard;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
@@ -14,9 +12,7 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -28,7 +24,6 @@ import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -426,7 +421,7 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 	{
 		if (this == BlocksAether.amberoot_leaves)
 		{
-			return new ItemStack(BlocksAether.aether_unique_sapling, 1, BlockAetherUniqueSapling.AMBEROOT.getMeta());
+			return new ItemStack(BlocksAether.unique_sapling, 1, BlockAetherUniqueSapling.AMBEROOT.getMeta());
 		}
 
 		return null;

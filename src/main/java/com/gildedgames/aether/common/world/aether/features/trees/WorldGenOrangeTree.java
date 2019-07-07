@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.world.aether.features.trees;
 
-import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockOrangeTree;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -13,7 +13,7 @@ public class WorldGenOrangeTree extends WorldGenerator
 {
 	private static final int COUNT = 10;
 
-	private final BlockOrangeTree treeBlock = BlocksAether.orange_tree;
+	private final BlockOrangeTree treeBlock = (BlockOrangeTree) BlocksAether.orange_tree;
 
 	@Override
 	public boolean generate(final World world, final Random rand, final BlockPos position)

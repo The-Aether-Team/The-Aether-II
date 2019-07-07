@@ -5,8 +5,7 @@ import com.gildedgames.aether.client.gui.misc.GuiIntro;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
-import com.gildedgames.aether.common.registry.content.DimensionsAether;
-import com.gildedgames.aether.common.registry.content.SoundsAether;
+import com.gildedgames.aether.common.init.DimensionsAether;
 import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import com.gildedgames.orbis.lib.util.TeleporterGeneric;
 import com.gildedgames.orbis.lib.util.io.NBTFunnel;
@@ -16,6 +15,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.WorldServer;
@@ -145,7 +145,7 @@ public class PlayerTeleportingModule extends PlayerAetherModule implements IPlay
 				{
 					if (this.getWorld().isRemote && Minecraft.getMinecraft().player.getEntityId() == this.getEntity().getEntityId())
 					{
-						Minecraft.getMinecraft().player.playSound(SoundsAether.glowstone_portal_trigger, 1.0F, 1.0F);
+						Minecraft.getMinecraft().player.playSound(new SoundEvent(AetherCore.getResource("portal.glowstone.trigger")), 1.0F, 1.0F);
 					}
 				}
 				else if (!this.getWorld().isRemote && (this.getTicksInTeleporter() >= TELEPORT_DELAY || this.getEntity().isCreative()))
@@ -171,7 +171,7 @@ public class PlayerTeleportingModule extends PlayerAetherModule implements IPlay
 
 		if (this.getEntity().world.isRemote && Minecraft.getMinecraft().player.getEntityId() == this.getEntity().getEntityId())
 		{
-			Minecraft.getMinecraft().player.playSound(SoundsAether.glowstone_portal_travel, 1.0F, 1.0F);
+			Minecraft.getMinecraft().player.playSound(new SoundEvent(AetherCore.getResource("portal.glowstone.travel")), 1.0F, 1.0F);
 		}
 
 		if (this.getEntity().world instanceof WorldServer)

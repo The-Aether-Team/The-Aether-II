@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.items.armor;
 import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.item.effects.stats.StatEffectFactory;
-import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
+import com.gildedgames.aether.common.init.CreativeTabsAether;
 import com.google.common.collect.Multimap;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -29,7 +29,7 @@ public class ItemAetherArmor extends ItemArmor
 
 		this.name = name;
 
-		this.setCreativeTab(CreativeTabsAether.ARMOR);
+		this.setCreativeTab(CreativeTabsAether.TAB_ARMOR);
 
 		this.damageReduceAmount = material.getDamageReductionAmount(armorType);
 	}

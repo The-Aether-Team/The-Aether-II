@@ -1,12 +1,12 @@
 package com.gildedgames.aether.common.world.aether;
 
-import com.gildedgames.aether.api.AetherCapabilities;
+import com.gildedgames.aether.api.registrar.BlocksAether;
+import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.api.util.OpenSimplexNoise;
 import com.gildedgames.aether.api.world.islands.precipitation.IPrecipitationManager;
 import com.gildedgames.aether.client.renderer.world.RenderWorldPrecipitation;
 import com.gildedgames.aether.client.renderer.world.RenderWorldSkybox;
-import com.gildedgames.aether.common.blocks.BlocksAether;
-import com.gildedgames.aether.common.registry.content.DimensionsAether;
+import com.gildedgames.aether.common.init.DimensionsAether;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeProviderAether;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -29,7 +29,7 @@ public class WorldProviderAether extends WorldProviderSurface
 	@Override
 	public void updateWeather()
 	{
-		IPrecipitationManager precip = this.world.getCapability(AetherCapabilities.PRECIPITATION_MANAGER, null);
+		IPrecipitationManager precip = this.world.getCapability(CapabilitiesAether.PRECIPITATION_MANAGER, null);
 
 		if (precip != null)
 		{

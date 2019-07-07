@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.world.templates;
 
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.util.TemplateUtil;
 import com.gildedgames.aether.api.world.generation.*;
-import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.multiblock.BlockMultiDummy;
 import com.gildedgames.aether.common.blocks.multiblock.BlockMultiDummyHalf;
 import com.gildedgames.aether.common.entities.tiles.TileEntityWildcard;

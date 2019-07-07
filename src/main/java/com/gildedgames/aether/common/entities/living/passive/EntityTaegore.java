@@ -5,7 +5,9 @@ import com.gildedgames.aether.api.effects_system.EEffectIntensity;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffectIntensity;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
 import com.gildedgames.aether.api.entity.IEntityEyesComponent;
-import com.gildedgames.aether.common.blocks.BlocksAether;
+import com.gildedgames.aether.api.registrar.BlocksAether;
+import com.gildedgames.aether.api.registrar.ItemsAether;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.entities.ai.AetherNavigateGround;
 import com.gildedgames.aether.common.entities.ai.EntityAIHideFromRain;
@@ -15,9 +17,7 @@ import com.gildedgames.aether.common.entities.effects.StatusEffectFracture;
 import com.gildedgames.aether.common.entities.util.EntityEyesComponent;
 import com.gildedgames.aether.common.entities.util.IEntityEyesComponentProvider;
 import com.gildedgames.aether.common.entities.util.multipart.AetherMultiPartEntity;
-import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.registry.content.LootTablesAether;
-import com.gildedgames.aether.common.registry.content.SoundsAether;
+import com.gildedgames.aether.common.init.LootTablesAether;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
 import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
@@ -155,19 +155,19 @@ public class EntityTaegore extends EntityAetherAnimal implements IEntityMultiPar
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return SoundsAether.taegore_ambient;
+		return new SoundEvent(AetherCore.getResource("mob.taegore.ambient"));
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(final DamageSource src)
 	{
-		return SoundsAether.taegore_hurt;
+		return new SoundEvent(AetherCore.getResource("mob.taegore.hurt"));
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return SoundsAether.taegore_death;
+		return new SoundEvent(AetherCore.getResource("mob.taegore.death"));
 	}
 
 	@Override
@@ -243,7 +243,7 @@ public class EntityTaegore extends EntityAetherAnimal implements IEntityMultiPar
 
 		this.applyStatusEffectOnAttack(entityIn);
 
-		this.playSound(SoundsAether.taegore_attack, 0.5F, 1.0F);
+		this.playSound(new SoundEvent(AetherCore.getResource("mob.taegore.attack")), 0.5F, 1.0F);
 		return true;
 	}
 

@@ -3,8 +3,8 @@ package com.gildedgames.aether.common.items.armor;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerPatronRewardModule;
+import com.gildedgames.aether.common.init.CreativeTabsAether;
 import com.gildedgames.aether.common.patron.armor.PatronRewardArmor;
-import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -22,7 +22,7 @@ public class ItemAetherGloves extends Item
 
 		this.setMaxStackSize(1);
 
-		this.setCreativeTab(CreativeTabsAether.ARMOR);
+		this.setCreativeTab(CreativeTabsAether.TAB_ARMOR);
 	}
 
 	@SideOnly(Side.CLIENT)

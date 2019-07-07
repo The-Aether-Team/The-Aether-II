@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.capabilities.entity.effects;
 
-import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffectPool;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
+import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.common.entities.effects.*;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -216,7 +216,7 @@ public class StatusEffectPool implements IAetherStatusEffectPool
 
 	public static IAetherStatusEffectPool get(EntityLivingBase livingBase)
 	{
-		return livingBase.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null);
+		return livingBase.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
 	}
 
 	public static class Storage implements Capability.IStorage<IAetherStatusEffectPool>

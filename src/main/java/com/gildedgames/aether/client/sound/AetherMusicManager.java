@@ -5,7 +5,7 @@ import com.gildedgames.aether.client.ClientEventHandler;
 import com.gildedgames.aether.client.sound.generators.AetherMusicGenerator;
 import com.gildedgames.aether.client.sound.generators.IMusicGenerator;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.registry.content.DimensionsAether;
+import com.gildedgames.aether.common.init.DimensionsAether;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.PositionedSoundRecord;

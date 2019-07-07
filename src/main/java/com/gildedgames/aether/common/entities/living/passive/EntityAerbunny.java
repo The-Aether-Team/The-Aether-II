@@ -1,14 +1,13 @@
 package com.gildedgames.aether.common.entities.living.passive;
 
 import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
+import com.gildedgames.aether.api.registrar.BlocksAether;
+import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.entities.ai.*;
-import com.gildedgames.aether.common.items.ItemsAether;
+import com.gildedgames.aether.common.init.LootTablesAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketAerbunnySetRiding;
-import com.gildedgames.aether.common.registry.content.LootTablesAether;
-import com.gildedgames.aether.common.registry.content.SoundsAether;
 import com.google.common.collect.Sets;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -194,19 +193,19 @@ public class EntityAerbunny extends EntityAetherAnimal
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return SoundsAether.aerbunny_ambient;
+		return new SoundEvent(AetherCore.getResource("mob.aerbunny.ambient"));
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(final DamageSource src)
 	{
-		return SoundsAether.aerbunny_hurt;
+		return new SoundEvent(AetherCore.getResource("mob.aerbunny.hurt"));
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return SoundsAether.aerbunny_death;
+		return new SoundEvent(AetherCore.getResource("mob.aerbunny.death"));
 	}
 
 	@Override

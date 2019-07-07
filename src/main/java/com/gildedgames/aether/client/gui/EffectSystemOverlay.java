@@ -1,8 +1,8 @@
 package com.gildedgames.aether.client.gui;
 
-import com.gildedgames.aether.api.AetherCapabilities;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffectPool;
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
+import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -33,7 +33,7 @@ public class EffectSystemOverlay extends Gui
 	{
 		ScaledResolution res = new ScaledResolution(mc);
 
-		IAetherStatusEffectPool statusEffectPool = mc.player.getCapability(AetherCapabilities.STATUS_EFFECT_POOL, null);
+		IAetherStatusEffectPool statusEffectPool = mc.player.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
 
 		if (statusEffectPool != null)
 		{

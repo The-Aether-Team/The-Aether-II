@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.items.consumables;
 
+import com.gildedgames.aether.api.registrar.ItemsAether;
+import com.gildedgames.aether.common.init.CreativeTabsAether;
 import com.gildedgames.aether.common.items.IDropOnDeath;
-import com.gildedgames.aether.common.items.ItemsAether;
-import com.gildedgames.aether.common.registry.content.CreativeTabsAether;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -23,7 +23,7 @@ public class ItemSkyrootConsumableBucket extends Item implements IDropOnDeath
 	{
 		this.setMaxStackSize(1);
 
-		this.setCreativeTab(CreativeTabsAether.MISCELLANEOUS);
+		this.setCreativeTab(CreativeTabsAether.TAB_MISCELLANEOUS);
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.world.aether.biomes.forgotten_highlands;
 
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.world.generation.BlueprintWorldGen;
 import com.gildedgames.aether.api.world.generation.WorldDecoration;
 import com.gildedgames.aether.api.world.generation.WorldDecorationSimple;
@@ -7,9 +8,8 @@ import com.gildedgames.aether.api.world.generation.positioners.PositionerLevels;
 import com.gildedgames.aether.api.world.generation.positioners.PositionerSurface;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
-import com.gildedgames.aether.common.blocks.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
-import com.gildedgames.aether.common.registry.content.GenerationAether;
+import com.gildedgames.aether.common.init.GenerationAether;
 import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandGenerators;
 import com.gildedgames.aether.common.world.util.GenUtil;

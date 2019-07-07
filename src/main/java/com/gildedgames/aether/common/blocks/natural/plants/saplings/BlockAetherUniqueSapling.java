@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.blocks.natural.plants.saplings;
 
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
-import com.gildedgames.aether.common.registry.content.GenerationAether;
+import com.gildedgames.aether.common.init.GenerationAether;
 import com.gildedgames.orbis.lib.core.BlueprintDefinition;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
