@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.events.listeners.items;
 
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.init.MaterialsAether;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -18,7 +19,6 @@ import java.util.Objects;
 @Mod.EventBusSubscriber
 public class ItemSkyrootSwordListener
 {
-
 	@SubscribeEvent
 	public static void dropLoot(final LivingDropsEvent event)
 	{
@@ -50,9 +50,11 @@ public class ItemSkyrootSwordListener
 					stacks.add(item.getItem());
 				}
 
+				Entity origin = event.getEntity();
+
 				for (final ItemStack stack : stacks)
 				{
-					final EntityItem item = new EntityItem(player.getEntityWorld(), player.posX, player.posY, player.posZ, stack);
+					final EntityItem item = new EntityItem(player.getEntityWorld(), origin.posX, origin.posY, origin.posZ, stack);
 
 					player.getEntityWorld().spawnEntity(item);
 				}
