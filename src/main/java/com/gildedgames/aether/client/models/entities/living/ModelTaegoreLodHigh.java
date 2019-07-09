@@ -1,133 +1,12 @@
 package com.gildedgames.aether.client.models.entities.living;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.math.MathHelper;
 
-public class ModelTaegore extends ModelBase
+public class ModelTaegoreLodHigh extends ModelTaegoreBase
 {
-	public final ModelRenderer Tail;
 
-	public final ModelRenderer HeadMain;
-
-	public final ModelRenderer HeadThroat;
-
-	public final ModelRenderer HeadSnoutRight;
-
-	public final ModelRenderer HeadSnoutLeft;
-
-	public final ModelRenderer HeadSnout;
-
-	public final ModelRenderer HeadJawBack;
-
-	public final ModelRenderer HeadSnoutRidge;
-
-	public final ModelRenderer HeadBrowLeft;
-
-	public final ModelRenderer HeadBrowRight;
-
-	public final ModelRenderer HeadEyeLeft;
-
-	public final ModelRenderer HeadEyeRight;
-
-	public final ModelRenderer HeadCrestMiddle;
-
-	public final ModelRenderer HeadCrestLeft;
-
-	public final ModelRenderer HeadCrestRight;
-
-	public final ModelRenderer HeadCrestBase;
-
-	public final ModelRenderer HeadTuskLeft;
-
-	public final ModelRenderer HeadTuskRight;
-
-	public final ModelRenderer HeadBeardMiddle;
-
-	public final ModelRenderer HeadBeardRight;
-
-	public final ModelRenderer HeadBeardLeft;
-
-	public final ModelRenderer HeadEarLeft;
-
-	public final ModelRenderer HeadEarRight;
-
-	public final ModelRenderer HeadRuffTop;
-
-	public final ModelRenderer HeadRuffLeft;
-
-	public final ModelRenderer HeadRuffRight;
-
-	public final ModelRenderer HeadJawFront;
-
-	public final ModelRenderer TorsoNeck;
-
-	public final ModelRenderer TorsoBack;
-
-	public final ModelRenderer TorsoSpine;
-
-	public final ModelRenderer TorsoBelly;
-
-	public final ModelRenderer TorsoFront;
-
-	public final ModelRenderer TorsoShoulderPlateLeft1;
-
-	public final ModelRenderer TorsoShoulderPlateRight1;
-
-	public final ModelRenderer TorsoShoulderPlateLeft2;
-
-	public final ModelRenderer TorsoShoulderPlateRight2;
-
-	public final ModelRenderer TorsoBackPlateRight;
-
-	public final ModelRenderer TorsoBackPlateLeft;
-
-	public final ModelRenderer FrontLegLeftUpper;
-
-	public final ModelRenderer FrontLegLeftLower;
-
-	public final ModelRenderer FrontLegLeftToeMiddle;
-
-	public final ModelRenderer FrontLegLeftToeOut;
-
-	public final ModelRenderer FrontLegLeftToeIn;
-
-	public final ModelRenderer FrontLegRightUpper;
-
-	public final ModelRenderer FrontLegRightLower;
-
-	public final ModelRenderer FrontLegRightToeMiddle;
-
-	public final ModelRenderer FrontLegRightToeOut;
-
-	public final ModelRenderer FrontLegRightToeIn;
-
-	public final ModelRenderer HindLegLeftCalf;
-
-	public final ModelRenderer HindLegLeftKnee;
-
-	public final ModelRenderer HindLegLeftShin;
-
-	public final ModelRenderer HindLegLeftToeMiddle;
-
-	public final ModelRenderer HindLegLeftToeOut;
-
-	public final ModelRenderer HindLegLeftToeIn;
-
-	public final ModelRenderer HindLegRightCalf;
-
-	public final ModelRenderer HindLegRightKnee;
-
-	public final ModelRenderer HindLegRightShin;
-
-	public final ModelRenderer HindLegRightToeMiddle;
-
-	public final ModelRenderer HindLegRightToeOut;
-
-	public final ModelRenderer HindLegRightToeIn;
-
-	public ModelTaegore()
+	public ModelTaegoreLodHigh()
 	{
 		this.textureWidth = 128;
 		this.textureHeight = 256;
@@ -423,47 +302,5 @@ public class ModelTaegore extends ModelBase
 		this.TorsoBackPlateLeft.render(f5);
 		this.HindLegRightShin.render(f5);
 		this.TorsoBackPlateRight.render(f5);
-	}
-
-	/**
-	 * This is a helper function from Tabula to set the rotation of model parts
-	 */
-	public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
-	{
-		modelRenderer.rotateAngleX = x;
-		modelRenderer.rotateAngleY = y;
-		modelRenderer.rotateAngleZ = z;
-	}
-
-	@Override
-	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch,
-			float scaleFactor, Entity entity)
-	{
-		super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entity);
-
-		this.Tail.rotateAngleZ = -0.5096392150483358F + (MathHelper.cos(ageInTicks * 0.1662F) * 0.2F);
-
-		float pitch = headPitch * 0.017453292F;
-		float yaw = netHeadYaw * 0.017453292F;
-
-		this.HeadMain.rotateAngleX = pitch;
-		this.HeadMain.rotateAngleY = yaw;
-
-		float leftSwingX = (MathHelper.cos(limbSwing * 0.6662F) * 0.75F * limbSwingAmount);
-		float rightSwingX = (MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.75F * limbSwingAmount);
-
-		this.FrontLegLeftUpper.rotateAngleX = 0.17453292012214658F + leftSwingX;
-		this.FrontLegLeftLower.rotateAngleX = leftSwingX;
-
-		this.FrontLegRightUpper.rotateAngleX = 0.17453292012214658F + rightSwingX;
-		this.FrontLegRightLower.rotateAngleX = rightSwingX;
-
-		this.HindLegRightShin.rotateAngleX = leftSwingX;
-		this.HindLegRightKnee.rotateAngleX = -0.17453292012214658F + leftSwingX;
-		this.HindLegRightCalf.rotateAngleX = -0.34906584024429316F + leftSwingX;
-
-		this.HindLegLeftShin.rotateAngleX = rightSwingX;
-		this.HindLegLeftKnee.rotateAngleX = -0.17453292012214658F + rightSwingX;
-		this.HindLegLeftCalf.rotateAngleX = -0.34906584024429316F + rightSwingX;
 	}
 }
