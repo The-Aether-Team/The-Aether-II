@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.entity.IEntityEyesComponent;
 import com.gildedgames.aether.common.entities.util.IEntityEyesComponentProvider;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import com.google.common.collect.Lists;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -159,5 +160,82 @@ public class EyeUtil
 		}
 
 		boxesToUnhide.clear();
+	}
+
+	public static <T extends ModelBaseAether> void renderEyesFast(T model, ModelRendererAether leftEye, ModelRendererAether rightEye,
+			EntityLivingBase entity, float scale, ResourceLocation pupilLeft, ResourceLocation pupilRight, ResourceLocation eyesClosed,
+			ResourceLocation beforeTexture, boolean eyeTracking)
+	{
+		RenderManager renderManager = Minecraft.getMinecraft().getRenderManager();
+
+		if (entity instanceof IEntityEyesComponentProvider)
+		{
+			IEntityEyesComponent info = ((IEntityEyesComponentProvider) entity).getEyes();
+
+			if (info.getTicksEyesClosed() <= 0)
+			{
+				float eyeTranslate = 0.0F;
+				float eyeCentering = eyeTracking ? 0.03F : 0.0F;
+
+				if (info.lookingAtEntity() != null && eyeTracking)
+				{
+					double yawBetweenLookingEntity = EntityUtil.getYawFacingPosition(entity, info.lookingAtEntity().posX, info.lookingAtEntity().posZ);
+					double yawDif = MathHelper.wrapDegrees(yawBetweenLookingEntity - entity.rotationYawHead);
+
+					double clampYawDif = MathHelper.clamp(yawDif, -45.0, 45.0);
+
+					float percent = (float) ((clampYawDif) / 90.0F);
+
+					eyeTranslate = -0.05F * percent;
+				}
+
+				renderManager.renderEngine.bindTexture(pupilLeft);
+
+				float oldOffsetX = leftEye.offsetX;
+				float oldOffsetZ = leftEye.offsetZ;
+
+				leftEye.offsetX = -eyeCentering + eyeTranslate;
+				leftEye.offsetZ = -0.0001F;
+
+				leftEye.render(scale, true);
+
+				leftEye.offsetX = oldOffsetX;
+				leftEye.offsetZ = oldOffsetZ;
+
+				renderManager.renderEngine.bindTexture(pupilRight);
+
+				oldOffsetX = rightEye.offsetX;
+				oldOffsetZ = rightEye.offsetZ;
+
+				rightEye.offsetX = eyeCentering + eyeTranslate;
+				rightEye.offsetZ = -0.0001F;
+
+				//				model.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entity);
+
+				rightEye.render(scale, true);
+
+				rightEye.offsetX = oldOffsetX;
+				rightEye.offsetZ = oldOffsetZ;
+			}
+			else
+			{
+				renderManager.renderEngine.bindTexture(eyesClosed);
+
+				float oldOffsetZ = rightEye.offsetZ;
+				float oldOffsetZLeft = leftEye.offsetZ;
+
+				rightEye.offsetZ = -0.0001F;
+				leftEye.offsetZ = -0.0001F;
+
+				leftEye.render(scale, true);
+				rightEye.render(scale, true);
+			}
+
+			renderManager.renderEngine.bindTexture(beforeTexture);
+		}
+		else
+		{
+			throw new IllegalStateException("Entity " + entity + " does not implement IEntityEyesComponent");
+		}
 	}
 }

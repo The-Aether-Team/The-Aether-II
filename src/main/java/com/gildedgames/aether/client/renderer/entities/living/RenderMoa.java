@@ -1,6 +1,8 @@
 package com.gildedgames.aether.client.renderer.entities.living;
 
-import com.gildedgames.aether.client.models.entities.living.ModelMoa;
+import com.gildedgames.aether.client.models.entities.living.ModelMoaBase;
+import com.gildedgames.aether.client.models.entities.living.ModelMoaLodHigh;
+import com.gildedgames.aether.client.models.entities.living.ModelMoaLodLow;
 import com.gildedgames.aether.client.renderer.EyeUtil;
 import com.gildedgames.aether.client.util.SpriteGeneric;
 import com.gildedgames.aether.common.AetherCore;
@@ -8,11 +10,9 @@ import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.entities.util.AnimalGender;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -22,7 +22,7 @@ import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 
-public class RenderMoa extends RenderLiving<EntityMoa>
+public class RenderMoa extends RenderLivingLOD<EntityMoa>
 {
 
 	private static final ResourceLocation AECHOR_PETAL_TEXTURE = AetherCore.getResource("textures/items/consumables/aechor_petal.png");
@@ -49,34 +49,22 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 
 	public RenderMoa(RenderManager manager)
 	{
-		super(manager, new ModelMoa(), 0.5F);
+		super(manager, new ModelMoaLodHigh(), new ModelMoaLodLow(), 0.5F);
 
 		SPRITE.initSprite(16, 16, 0, 0, false);
-	}
-
-	private void scaleMoa(EntityMoa entityMoa)
-	{
-		float moaScale = entityMoa.isChild() ? 0.5f : 0.85f;
-		moaScale += entityMoa.isGroupLeader() ? 0.15F : 0.0F;
-
-		GL11.glScalef(moaScale, moaScale, moaScale);
 	}
 
 	@Override
 	protected void preRenderCallback(EntityMoa entityliving, float partialTicks)
 	{
-		this.scaleMoa(entityliving);
+		float moaScale = entityliving.isChild() ? 0.5f : 0.85f;
+		moaScale += entityliving.isGroupLeader() ? 0.15F : 0.0F;
+
+		GL11.glScalef(moaScale, moaScale, moaScale);
 	}
 
 	private void renderMoa(EntityLivingBase entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
-		ModelMoa model = (ModelMoa) this.mainModel;
-
-		for (ModelRenderer renderer : model.boxList)
-		{
-			renderer.showModel = true;
-		}
-
 		EntityMoa moa = ((EntityMoa) entity);
 
 		MoaGenePool genePool = moa.getGenePool();
@@ -93,53 +81,75 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 		Color.RGBtoHSB(base.getRed(), base.getGreen(), base.getBlue(), hsb);
 		Color highlight = Color.getHSBColor(hsb[0] + 13f / 255f, hsb[1] + 26f / 255f, hsb[2] + .001f);
 
-		model.JawMain.showModel = false;
-		model.HeadBeakMain.showModel = false;
+		GlStateManager.color(base.getRed() / 255f, base.getGreen() / 255f, base.getBlue() / 255f);
 
-		GL11.glColor3f(highlight.getRed() / 255f, highlight.getGreen() / 255f, highlight.getBlue() / 255f);
+		ModelMoaBase model = (ModelMoaBase) this.mainModel;
+		model.LegL2.isHidden = true;
+		model.LegR2.isHidden = true;
+		model.JawMain.isHidden = true;
+		model.HeadBeakMain.isHidden = true;
 
 		this.renderManager.renderEngine.bindTexture(BODY);
 		model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
-		EyeUtil.renderEyes(this.renderManager, model, model.HeadFront, entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale,
-				PUPIL_LEFT,
-				PUPIL_RIGHT, EYES_CLOSED, false);
-
-		GlStateManager.color(base.getRed() / 255f, base.getGreen() / 255f, base.getBlue() / 255f);
+		model.LegL2.isHidden = false;
+		model.LegR2.isHidden = false;
+		model.JawMain.isHidden = false;
+		model.HeadBeakMain.isHidden = false;
 
 		this.renderManager.renderEngine.bindTexture(BODY_HIGHLIGHT);
+		GL11.glColor3f(highlight.getRed() / 255f, highlight.getGreen() / 255f, highlight.getBlue() / 255f);
+
+		model.setDefaultDisplayState(false);
+
+		model.HeadFeatherL1.forceDisplayFlag = true;
+		model.HeadFeatherL2.forceDisplayFlag = true;
+		model.HeadFeatherR1.forceDisplayFlag = true;
+		model.HeadFeatherR2.forceDisplayFlag = true;
+
+		model.WingLFeatherInt1.forceDisplayFlag = true;
+		model.WingLFeatherInt2.forceDisplayFlag = true;
+		model.WingLFeatherExt1.forceDisplayFlag = true;
+		model.WingLFeatherExt2.forceDisplayFlag = true;
+		model.WingLFeatherExt3.forceDisplayFlag = true;
+
+		model.WingRFeatherInt1.forceDisplayFlag = true;
+		model.WingRFeatherInt2.forceDisplayFlag = true;
+		model.WingRFeatherExt1.forceDisplayFlag = true;
+		model.WingRFeatherExt2.forceDisplayFlag = true;
+		model.WingRFeatherExt3.forceDisplayFlag = true;
+
+		if (!this.isLowDetail)
+		{
+			model.LegLTalonL.forceDisplayFlag = true;
+			model.LegLTalonR.forceDisplayFlag = true;
+			model.LegLTalonM.forceDisplayFlag = true;
+
+			model.LegRTalonL.forceDisplayFlag = true;
+			model.LegRTalonR.forceDisplayFlag = true;
+			model.LegRTalonM.forceDisplayFlag = true;
+		}
+
+		model.TailFeatherL.forceDisplayFlag = true;
+		model.TailFeatherR.forceDisplayFlag = true;
+		model.TailFeatherM.forceDisplayFlag = true;
+
+		model.BodyMain.forceDisplayFlag = true;
+		model.BodyFront.forceDisplayFlag = true;
+
 		model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
-		model.JawMain.showModel = true;
-		model.HeadBeakMain.showModel = true;
+		model.setDefaultDisplayState(true);
 
-		double distance = Minecraft.getMinecraft().player.getDistance(entity);
-
-		if (distance < 32.0D)
+		if (!this.isLowDetail)
 		{
-			model.BodyBack.showModel = false;
-			model.TailBase.showModel = false;
-			model.LegL1.showModel = false;
-			model.LegR1.showModel = false;
-			model.ShoulderL.showModel = false;
-			model.ShoulderR.showModel = false;
-			model.HeadBack.showModel = false;
-			model.HeadBeakMain.showModel = false;
-			model.HeadBrow.showModel = false;
-			model.HeadFeatherL1.showModel = false;
-			model.HeadFeatherR1.showModel = false;
-			model.HeadFeatherL2.showModel = false;
-			model.HeadFeatherR2.showModel = false;
-			model.HeadBeakIntL.showModel = false;
-			model.HeadBeakIntR.showModel = false;
-
 			GlStateManager.color(1.0f, 1.0f, 1.0f);
 
 			this.renderManager.renderEngine.bindTexture(TONGUE);
 
+			model.setDefaultDisplayState(false);
+			model.JawMain.forceDisplayFlag = true;
 			model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-
-			model.JawMain.showModel = false;
 
 			Color eyesC = genePool.getEyes().gene().data();
 
@@ -147,66 +157,71 @@ public class RenderMoa extends RenderLiving<EntityMoa>
 
 			this.renderManager.renderEngine.bindTexture(EYES);
 
+			model.HeadFront.forceDisplayFlag = true;
+			model.HeadMain.callback = () -> {
+				EyeUtil.renderEyesFast(model, model.HeadFront, model.HeadFront, entity,
+						scale, PUPIL_LEFT, PUPIL_RIGHT, EYES_CLOSED, EYES, false);
+			};
+
 			model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-
-			model.BodyBack.showModel = true;
-			model.TailBase.showModel = true;
-			model.LegL1.showModel = true;
-			model.LegR1.showModel = true;
-			model.ShoulderL.showModel = true;
-			model.ShoulderR.showModel = true;
-			model.HeadBack.showModel = true;
-			model.HeadBeakMain.showModel = true;
-			model.JawMain.showModel = true;
-			model.HeadBrow.showModel = true;
-			model.HeadFeatherL1.showModel = true;
-			model.HeadFeatherR1.showModel = true;
-			model.HeadFeatherL2.showModel = true;
-			model.HeadFeatherR2.showModel = true;
-			model.HeadBeakIntL.showModel = true;
-			model.HeadBeakIntR.showModel = true;
+			model.setDefaultDisplayState(true);
 		}
-
-		model.BodyBack.showModel = false;
-		model.TailBase.showModel = false;
-		model.ShoulderL.showModel = false;
-		model.ShoulderR.showModel = false;
-		model.HeadBack.showModel = false;
-		model.HeadFeatherL1.showModel = false;
-		model.HeadFeatherR1.showModel = false;
-		model.HeadFeatherL2.showModel = false;
-		model.HeadFeatherR2.showModel = false;
-		model.HeadBeakIntL.showModel = false;
-		model.HeadBeakIntR.showModel = false;
 
 		Color beakColor = genePool.getKeratin().gene().data();
 
 		GlStateManager.color(beakColor.getRed() / 255f, beakColor.getGreen() / 255f, beakColor.getBlue() / 255f);
 
 		this.renderManager.renderEngine.bindTexture(BEAK);
+
+		model.setDefaultDisplayState(false);
+
+		model.HeadBrow.forceDisplayFlag = true;
+		model.JawMain.forceDisplayFlag = true;
+
+		if (!this.isLowDetail)
+		{
+			model.JawFrontL.forceDisplayFlag = true;
+			model.JawFrontR.forceDisplayFlag = true;
+			model.JawBack.forceDisplayFlag = true;
+
+			model.JawToothL1.forceDisplayFlag = true;
+			model.JawToothL2.forceDisplayFlag = true;
+			model.JawToothL3.forceDisplayFlag = true;
+			model.JawToothL1_1.forceDisplayFlag = true;
+			model.JawToothR2.forceDisplayFlag = true;
+			model.JawToothR3.forceDisplayFlag = true;
+
+			model.HeadBeakFrontL.forceDisplayFlag = true;
+			model.HeadBeakFrontR.forceDisplayFlag = true;
+		}
+
+		model.HeadBeakMain.forceDisplayFlag = true;
+
+		model.LegL2.forceDisplayFlag = true;
+		model.LegL3.forceDisplayFlag = true;
+		model.LegLAnkle.forceDisplayFlag = true;
+		model.LegLToeL.forceDisplayFlag = true;
+		model.LegLToeM.forceDisplayFlag = true;
+		model.LegLToeR.forceDisplayFlag = true;
+
+		model.LegR2.forceDisplayFlag = true;
+		model.LegR3.forceDisplayFlag = true;
+		model.LegRAnkle.forceDisplayFlag = true;
+		model.LegRToeL.forceDisplayFlag = true;
+		model.LegRToeM.forceDisplayFlag = true;
+		model.LegRToeR.forceDisplayFlag = true;
+
 		model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
-		model.BodyBack.showModel = true;
-		model.TailBase.showModel = true;
-		model.ShoulderL.showModel = true;
-		model.ShoulderR.showModel = true;
-		model.HeadBack.showModel = true;
-		model.HeadFeatherL1.showModel = true;
-		model.HeadFeatherR1.showModel = true;
-		model.HeadFeatherL2.showModel = true;
-		model.HeadFeatherR2.showModel = true;
-		model.HeadBeakIntL.showModel = true;
-		model.HeadBeakIntR.showModel = true;
+		model.setDefaultDisplayState(true);
 
 		if (moa.isSaddled())
 		{
 			GL11.glColor3f(1.0f, 1.0f, 1.0f);
+			GL11.glTranslatef(0.0F, 0.001F, 0.0F);
 
 			this.renderManager.renderEngine.bindTexture(SADDLE);
 			model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-
-			GL11.glScalef(1.001F, 1.001F, 1.001F);
-			GL11.glTranslatef(0.0F, 0.001F, 0.0F);
 		}
 	}
 
