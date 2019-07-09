@@ -1,24 +1,24 @@
 package com.gildedgames.aether.client.renderer.entities.living;
 
-import com.gildedgames.aether.client.models.entities.living.ModelCarrionSprout;
+import com.gildedgames.aether.client.models.entities.living.ModelCarrionSproutLodHigh;
+import com.gildedgames.aether.client.models.entities.living.ModelCarrionSproutLodLow;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.living.passive.EntityCarrionSprout;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class RenderCarrionSprout extends RenderLiving<EntityCarrionSprout>
+public class RenderCarrionSprout extends RenderLivingLOD<EntityCarrionSprout>
 {
 	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/entities/carrion_sprout/carrion_sprout.png");
 
-	private final ModelCarrionSprout plantModel;
+	private final ModelCarrionSproutLodHigh plantModel;
 
 	public RenderCarrionSprout(final RenderManager manager)
 	{
-		super(manager, new ModelCarrionSprout(), 0.75f);
+		super(manager, new ModelCarrionSproutLodHigh(), new ModelCarrionSproutLodLow(), 0.75f);
 
-		this.plantModel = (ModelCarrionSprout) this.mainModel;
+		this.plantModel = (ModelCarrionSproutLodHigh) this.mainModel;
 	}
 
 	@Override
@@ -57,5 +57,11 @@ public class RenderCarrionSprout extends RenderLiving<EntityCarrionSprout>
 	protected ResourceLocation getEntityTexture(final EntityCarrionSprout entity)
 	{
 		return TEXTURE;
+	}
+
+	@Override
+	protected double getHighLODMinDistanceSq()
+	{
+		return 8.0f * 8.0f;
 	}
 }
