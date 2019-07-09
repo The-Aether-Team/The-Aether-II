@@ -197,7 +197,7 @@ public class EyeUtil
 				leftEye.offsetX = -eyeCentering + eyeTranslate;
 				leftEye.offsetZ = -0.0001F;
 
-				leftEye.render(scale, true);
+				leftEye.render(scale, true, false);
 
 				leftEye.offsetX = oldOffsetX;
 				leftEye.offsetZ = oldOffsetZ;
@@ -212,7 +212,7 @@ public class EyeUtil
 
 				//				model.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entity);
 
-				rightEye.render(scale, true);
+				rightEye.render(scale, true, false);
 
 				rightEye.offsetX = oldOffsetX;
 				rightEye.offsetZ = oldOffsetZ;
@@ -227,8 +227,8 @@ public class EyeUtil
 				rightEye.offsetZ = -0.0001F;
 				leftEye.offsetZ = -0.0001F;
 
-				leftEye.render(scale, true);
-				rightEye.render(scale, true);
+				leftEye.render(scale, true, false);
+				rightEye.render(scale, true, false);
 			}
 
 			renderManager.renderEngine.bindTexture(beforeTexture);

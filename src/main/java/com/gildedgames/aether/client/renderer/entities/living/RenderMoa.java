@@ -89,6 +89,27 @@ public class RenderMoa extends RenderLivingLOD<EntityMoa>
 		model.JawMain.isHidden = true;
 		model.HeadBeakMain.isHidden = true;
 
+		if (!this.isLowDetail)
+		{
+			Color eyesC = genePool.getEyes().gene().data();
+
+			// Re-render the head with our eyes texture and then draw the pupils
+			model.HeadMain.callback = () -> {
+				GlStateManager.color(eyesC.getRed() / 255f, eyesC.getGreen() / 255f, eyesC.getBlue() / 255f);
+
+				this.renderManager.renderEngine.bindTexture(EYES);
+
+				model.HeadFront.render(scale, true, false);
+
+				GlStateManager.color(base.getRed() / 255f, base.getGreen() / 255f, base.getBlue() / 255f);
+
+				EyeUtil.renderEyesFast(model, model.HeadFront, model.HeadFront, entity,
+						scale, PUPIL_LEFT, PUPIL_RIGHT, EYES_CLOSED, EYES, false);
+
+				this.renderManager.renderEngine.bindTexture(BODY);
+			};
+		}
+
 		this.renderManager.renderEngine.bindTexture(BODY);
 		model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
@@ -140,32 +161,6 @@ public class RenderMoa extends RenderLivingLOD<EntityMoa>
 		model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
 		model.setDefaultDisplayState(true);
-
-		if (!this.isLowDetail)
-		{
-			GlStateManager.color(1.0f, 1.0f, 1.0f);
-
-			this.renderManager.renderEngine.bindTexture(TONGUE);
-
-			model.setDefaultDisplayState(false);
-			model.JawMain.forceDisplayFlag = true;
-			model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-
-			Color eyesC = genePool.getEyes().gene().data();
-
-			GlStateManager.color(eyesC.getRed() / 255f, eyesC.getGreen() / 255f, eyesC.getBlue() / 255f);
-
-			this.renderManager.renderEngine.bindTexture(EYES);
-
-			model.HeadFront.forceDisplayFlag = true;
-			model.HeadMain.callback = () -> {
-				EyeUtil.renderEyesFast(model, model.HeadFront, model.HeadFront, entity,
-						scale, PUPIL_LEFT, PUPIL_RIGHT, EYES_CLOSED, EYES, false);
-			};
-
-			model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-			model.setDefaultDisplayState(true);
-		}
 
 		Color beakColor = genePool.getKeratin().gene().data();
 

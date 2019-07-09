@@ -4,6 +4,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL11;
 
 public class ModelRendererAether extends ModelRenderer
 {
@@ -40,10 +41,16 @@ public class ModelRendererAether extends ModelRenderer
 	@SideOnly(Side.CLIENT)
 	public void render(float scale)
 	{
-		this.render(scale, false);
+		this.render(scale, false, false);
 	}
 
-	public void render(float scale, boolean single)
+	/**
+	 *
+	 * @param scale The scale factor of the model
+	 * @param single Whether or not to render child models
+	 * @param isOnlyChild Whether or not this is the only child of the parent drawing it. Optimization hint
+	 */
+	public void render(float scale, boolean single, boolean isOnlyChild)
 	{
 		if (!this.isHidden)
 		{
@@ -70,35 +77,33 @@ public class ModelRendererAether extends ModelRenderer
 					}
 				}
 
-				GlStateManager.pushMatrix();
-
-				GlStateManager.translate(this.offsetX, this.offsetY, this.offsetZ);
-
-				if (this.rotateAngleX == 0.0F && this.rotateAngleY == 0.0F && this.rotateAngleZ == 0.0F)
+				if (!isOnlyChild)
 				{
-					if (this.rotationPointX != 0.0F || this.rotationPointY != 0.0F || this.rotationPointZ != 0.0F)
-					{
-						GlStateManager.translate(this.rotationPointX * scale, this.rotationPointY * scale, this.rotationPointZ * scale);
-					}
+					GL11.glPushMatrix();
 				}
-				else
+
+				float translateX = this.offsetX + (this.rotationPointX * scale);
+				float translateY = this.offsetY + (this.rotationPointY * scale);
+				float translateZ = this.offsetZ + (this.rotationPointZ * scale);
+
+				if (translateX != 0.0F || translateY != 0.0F || translateZ != 0.0F)
 				{
-					GlStateManager.translate(this.rotationPointX * scale, this.rotationPointY * scale, this.rotationPointZ * scale);
+					GlStateManager.translate(translateX, translateY, translateZ);
+				}
 
-					if (this.rotateAngleZ != 0.0F)
-					{
-						GlStateManager.rotate(this.rotateAngleZ * (180F / (float)Math.PI), 0.0F, 0.0F, 1.0F);
-					}
+				if (this.rotateAngleZ != 0.0F)
+				{
+					GlStateManager.rotate(this.rotateAngleZ * (180F / (float)Math.PI), 0.0F, 0.0F, 1.0F);
+				}
 
-					if (this.rotateAngleY != 0.0F)
-					{
-						GlStateManager.rotate(this.rotateAngleY * (180F / (float)Math.PI), 0.0F, 1.0F, 0.0F);
-					}
+				if (this.rotateAngleY != 0.0F)
+				{
+					GlStateManager.rotate(this.rotateAngleY * (180F / (float)Math.PI), 0.0F, 1.0F, 0.0F);
+				}
 
-					if (this.rotateAngleX != 0.0F)
-					{
-						GlStateManager.rotate(this.rotateAngleX * (180F / (float)Math.PI), 1.0F, 0.0F, 0.0F);
-					}
+				if (this.rotateAngleX != 0.0F)
+				{
+					GlStateManager.rotate(this.rotateAngleX * (180F / (float)Math.PI), 1.0F, 0.0F, 0.0F);
 				}
 
 				boolean drawSelf = single || this.consumeDisplayFlag();
@@ -112,7 +117,7 @@ public class ModelRendererAether extends ModelRenderer
 				{
 					for (ModelRenderer childModel : this.childModels)
 					{
-						childModel.render(scale);
+						((ModelRendererAether) childModel).render(scale, false, this.callback == null && this.childModels.size() == 1);
 					}
 				}
 
@@ -124,7 +129,10 @@ public class ModelRendererAether extends ModelRenderer
 					this.callback = null;
 				}
 
-				GlStateManager.popMatrix();
+				if (!isOnlyChild)
+				{
+					GL11.glPopMatrix();
+				}
 			}
 		}
 	}
