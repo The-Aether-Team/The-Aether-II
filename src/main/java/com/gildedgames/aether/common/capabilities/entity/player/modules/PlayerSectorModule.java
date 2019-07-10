@@ -5,7 +5,7 @@ import com.gildedgames.aether.api.world.preparation.IPrepRegistryEntry;
 import com.gildedgames.aether.api.world.preparation.IPrepSector;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
-import com.gildedgames.aether.common.world.preparation.util.PrepHelper;
+import com.gildedgames.aether.common.world.preparation.PrepHelper;
 import com.gildedgames.orbis.lib.util.ChunkMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.gameevent.TickEvent;

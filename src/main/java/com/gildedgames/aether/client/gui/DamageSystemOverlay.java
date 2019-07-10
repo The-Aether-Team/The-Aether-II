@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client.gui;
 
-import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
+import com.gildedgames.aether.api.entity.damage.DamageTypeAttributes;
 import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;

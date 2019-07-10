@@ -4,7 +4,7 @@ import com.gildedgames.aether.client.models.entities.living.ModelTaegoreLodHigh;
 import com.gildedgames.aether.client.models.entities.living.ModelTaegoreLodLow;
 import com.gildedgames.aether.client.renderer.EyeUtil;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.entities.living.passive.EntityTaegore;
+import com.gildedgames.aether.common.entities.animals.EntityTaegore;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderManager;

@@ -5,7 +5,7 @@ import net.minecraft.world.World;
 /**
  * Actually manages the chunks within a world.
  */
-public interface IPrepChunkManager<T extends IChunkColumnInfo>
+public interface IPrepChunkManager<T extends IChunkInfo>
 {
 	World getWorld();
 

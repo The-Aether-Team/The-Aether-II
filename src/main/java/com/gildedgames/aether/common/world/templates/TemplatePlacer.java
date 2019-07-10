@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.world.templates;
 
 import com.gildedgames.aether.api.util.TemplateUtil;
-import com.gildedgames.aether.api.world.generation.PostPlacementTemplate;
-import com.gildedgames.aether.api.world.generation.TemplateDefinition;
-import com.gildedgames.aether.api.world.generation.TemplateLoc;
+import com.gildedgames.aether.api.world.templates.PostPlacementTemplate;
+import com.gildedgames.aether.api.world.templates.TemplateDefinition;
+import com.gildedgames.aether.api.world.templates.TemplateLoc;
 import com.gildedgames.orbis.lib.processing.BlockAccessExtendedWrapper;
 import com.gildedgames.orbis.lib.processing.IBlockAccessExtended;
 import com.google.common.collect.Lists;

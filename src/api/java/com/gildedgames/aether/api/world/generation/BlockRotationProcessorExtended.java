@@ -1,5 +1,6 @@
 package com.gildedgames.aether.api.world.generation;
 
+import com.gildedgames.aether.api.world.templates.ITemplateProcessorExtended;
 import com.gildedgames.orbis.lib.processing.IBlockAccessExtended;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

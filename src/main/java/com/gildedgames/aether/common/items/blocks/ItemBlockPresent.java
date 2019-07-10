@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.items.blocks;
 
-import com.gildedgames.aether.common.items.misc.ItemWrappingPaper;
+import com.gildedgames.aether.common.items.other.ItemWrappingPaper;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;

@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.entities.ai.glactrix;
 
-import com.gildedgames.aether.common.entities.living.mobs.EntityAetherMob;
-import com.gildedgames.aether.common.entities.living.passive.EntityGlactrix;
+import com.gildedgames.aether.common.entities.animals.EntityGlactrix;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.player.EntityPlayer;

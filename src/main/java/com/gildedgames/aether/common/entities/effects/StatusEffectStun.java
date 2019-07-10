@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.entities.effects;
 
-import com.gildedgames.aether.api.effects_system.EEffectIntensity;
+import com.gildedgames.aether.api.entity.effects.EEffectIntensity;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;

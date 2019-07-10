@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world.templates.post;
 
-import com.gildedgames.aether.api.world.generation.PostPlacementTemplate;
-import com.gildedgames.aether.api.world.generation.TemplateLoc;
+import com.gildedgames.aether.api.world.templates.PostPlacementTemplate;
+import com.gildedgames.aether.api.world.templates.TemplateLoc;
 import com.gildedgames.aether.common.world.util.GenUtil;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.math.BlockPos;

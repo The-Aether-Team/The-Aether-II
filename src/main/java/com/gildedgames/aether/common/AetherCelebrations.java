@@ -2,7 +2,7 @@ package com.gildedgames.aether.common;
 
 import com.gildedgames.aether.api.shop.IShopBuy;
 import com.gildedgames.aether.api.shop.IShopInstance;
-import com.gildedgames.aether.common.entities.living.npc.EntityEdison;
+import com.gildedgames.aether.common.entities.characters.EntityEdison;
 import com.gildedgames.aether.common.items.consumables.ItemEggnog;
 
 import java.time.LocalDateTime;

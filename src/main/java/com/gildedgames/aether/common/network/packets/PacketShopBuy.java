@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.network.packets;
 
-import com.gildedgames.aether.api.entity.EntityNPC;
+import com.gildedgames.aether.api.entity.EntityCharacter;
 import com.gildedgames.aether.api.shop.IShopBuy;
 import com.gildedgames.aether.api.shop.IShopInstance;
 import com.gildedgames.aether.api.shop.IShopInstanceGroup;
@@ -64,7 +64,7 @@ public class PacketShopBuy implements IMessage
 				PlayerAether playerAether = PlayerAether.getPlayer(player);
 				PlayerDialogModule dialogModule = playerAether.getModule(PlayerDialogModule.class);
 
-				EntityNPC talking = dialogModule.getTalkingNPC();
+				EntityCharacter talking = dialogModule.getTalkingCharacter();
 
 				if (talking != null)
 				{

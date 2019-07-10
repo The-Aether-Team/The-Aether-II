@@ -3,7 +3,7 @@ package com.gildedgames.aether.client.renderer.entities.living.layers;
 import com.gildedgames.aether.client.models.entities.living.ModelSheepuffWool;
 import com.gildedgames.aether.client.renderer.entities.living.RenderSheepuff;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.entities.living.passive.EntitySheepuff;
+import com.gildedgames.aether.common.entities.animals.EntitySheepuff;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.util.ResourceLocation;

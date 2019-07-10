@@ -3,14 +3,12 @@ package com.gildedgames.aether.client.renderer.entities.living.layers;
 import com.gildedgames.aether.client.models.entities.living.ModelGlactrixCrystals;
 import com.gildedgames.aether.client.renderer.entities.living.RenderGlactrix;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.entities.living.passive.EntityGlactrix;
+import com.gildedgames.aether.common.entities.animals.EntityGlactrix;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
-
-import javax.swing.text.html.parser.Entity;
 
 public class LayerGlactrixCrystals implements LayerRenderer<EntityGlactrix>
 {

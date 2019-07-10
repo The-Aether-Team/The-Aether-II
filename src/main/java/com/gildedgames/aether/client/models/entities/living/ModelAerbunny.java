@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client.models.entities.living;
 
-import com.gildedgames.aether.common.entities.living.passive.EntityAerbunny;
+import com.gildedgames.aether.common.entities.animals.EntityAerbunny;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;

@@ -1,6 +1,6 @@
 package com.gildedgames.aether.api.world.generation.positioners;
 
-import com.gildedgames.aether.api.world.generation.WorldDecorationPositioner;
+import com.gildedgames.aether.api.world.decoration.WorldDecorationPositioner;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 

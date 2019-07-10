@@ -3,7 +3,7 @@ package com.gildedgames.aether.client.renderer.entities.living;
 import com.gildedgames.aether.client.models.entities.living.ModelCarrionSproutLodHigh;
 import com.gildedgames.aether.client.models.entities.living.ModelCarrionSproutLodLow;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.entities.living.passive.EntityCarrionSprout;
+import com.gildedgames.aether.common.entities.animals.EntityCarrionSprout;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;

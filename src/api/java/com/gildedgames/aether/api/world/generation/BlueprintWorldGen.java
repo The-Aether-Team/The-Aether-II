@@ -1,5 +1,6 @@
 package com.gildedgames.aether.api.world.generation;
 
+import com.gildedgames.aether.api.world.decoration.WorldDecorationGenerator;
 import com.gildedgames.orbis.lib.core.BlueprintDefinition;
 import com.gildedgames.orbis.lib.core.CreationData;
 import com.gildedgames.orbis.lib.core.ICreationData;

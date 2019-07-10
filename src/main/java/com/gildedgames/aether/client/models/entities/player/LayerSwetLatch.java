@@ -4,7 +4,7 @@ import com.gildedgames.aether.client.models.entities.living.ModelSwetHead;
 import com.gildedgames.aether.client.models.entities.living.ModelSwetJelly;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerSwetTrackerModule;
-import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
+import com.gildedgames.aether.common.entities.monsters.EntitySwet;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;

@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.events.listeners;
 
-import com.gildedgames.aether.api.effects_system.IAetherStatusEffectPool;
-import com.gildedgames.aether.api.world.ISpawnSystem;
+import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectPool;
 import com.gildedgames.aether.api.world.preparation.IPrepRegistryEntry;
+import com.gildedgames.aether.api.world.spawn.ISpawnSystem;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.effects.StatusEffectPool;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;

@@ -4,7 +4,7 @@ import com.gildedgames.aether.common.containers.slots.SlotCoolerOutput;
 import com.gildedgames.aether.common.containers.slots.SlotCoolingItem;
 import com.gildedgames.aether.common.containers.slots.SlotIrradiatedItem;
 import com.gildedgames.aether.common.entities.tiles.TileEntityIcestoneCooler;
-import com.gildedgames.aether.common.items.crafting.CoolerRecipes;
+import com.gildedgames.aether.common.recipes.CoolerRecipes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

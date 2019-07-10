@@ -27,9 +27,9 @@ public class DialogActionOpenShop implements IDialogAction
 	{
 		EntityPlayer player = controller.getDialogPlayer();
 
-		if (!player.world.isRemote && controller.getTalkingNPC() != null && controller.getTalkingNPC().getShopInstanceGroup() != null)
+		if (!player.world.isRemote && controller.getTalkingCharacter() != null && controller.getTalkingCharacter().getShopInstanceGroup() != null)
 		{
-			IShopInstance shopInstance = controller.getTalkingNPC().getShopInstanceGroup().getShopInstance(this.shopIndex);
+			IShopInstance shopInstance = controller.getTalkingCharacter().getShopInstanceGroup().getShopInstance(this.shopIndex);
 
 			if (shopInstance != null)
 			{

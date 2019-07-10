@@ -2,7 +2,7 @@ package com.gildedgames.aether.client.renderer.entities.living;
 
 import com.gildedgames.aether.client.models.entities.living.ModelGlitterwing;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.entities.living.passive.EntityGlitterwing;
+import com.gildedgames.aether.common.entities.animals.EntityGlitterwing;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;

@@ -2,7 +2,7 @@ package com.gildedgames.aether.client.gui.overlays;
 
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerSwetTrackerModule;
-import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
+import com.gildedgames.aether.common.entities.monsters.EntitySwet;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;

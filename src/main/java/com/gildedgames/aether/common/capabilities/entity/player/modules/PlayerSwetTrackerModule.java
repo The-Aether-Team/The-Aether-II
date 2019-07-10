@@ -4,7 +4,7 @@ import com.gildedgames.aether.api.player.IPlayerAetherModule;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
-import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
+import com.gildedgames.aether.common.entities.monsters.EntitySwet;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.player.EntityPlayer;

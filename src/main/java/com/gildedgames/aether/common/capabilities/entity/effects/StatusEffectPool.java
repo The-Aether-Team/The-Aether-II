@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.capabilities.entity.effects;
 
-import com.gildedgames.aether.api.effects_system.IAetherStatusEffectPool;
-import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
+import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectPool;
+import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.common.entities.effects.*;
 import net.minecraft.entity.EntityLivingBase;

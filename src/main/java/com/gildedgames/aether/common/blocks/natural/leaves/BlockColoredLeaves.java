@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.blocks.natural.leaves;
 
-import com.gildedgames.aether.common.entities.living.passive.EntitySkyrootLizard;
+import com.gildedgames.aether.common.entities.animals.EntitySkyrootLizard;
 
 public abstract class BlockColoredLeaves extends BlockNaturalLeaves
 {

@@ -1,7 +1,7 @@
 package com.gildedgames.aether.client.renderer;
 
 import com.gildedgames.aether.api.entity.IEntityEyesComponent;
-import com.gildedgames.aether.common.entities.util.IEntityEyesComponentProvider;
+import com.gildedgames.aether.common.entities.util.eyes.IEntityEyesComponentProvider;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;

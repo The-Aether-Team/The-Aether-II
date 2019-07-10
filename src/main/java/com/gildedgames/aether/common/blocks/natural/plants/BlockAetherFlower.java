@@ -5,7 +5,7 @@ import com.gildedgames.aether.common.blocks.IBlockMultiName;
 import com.gildedgames.aether.common.blocks.IBlockSnowy;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
-import com.gildedgames.aether.common.entities.living.mobs.EntityAechorPlant;
+import com.gildedgames.aether.common.entities.monsters.EntityAechorPlant;
 import net.minecraft.block.BlockSnow;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

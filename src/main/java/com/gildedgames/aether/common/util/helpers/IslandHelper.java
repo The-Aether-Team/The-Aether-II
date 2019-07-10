@@ -3,8 +3,8 @@ package com.gildedgames.aether.common.util.helpers;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.preparation.IPrepSector;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.world.aether.prep.PrepSectorDataAether;
-import com.gildedgames.aether.common.world.preparation.util.PrepHelper;
+import com.gildedgames.aether.common.world.aether.PrepSectorDataAether;
+import com.gildedgames.aether.common.world.preparation.PrepHelper;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 

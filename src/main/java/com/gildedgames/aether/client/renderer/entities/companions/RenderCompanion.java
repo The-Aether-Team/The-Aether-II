@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client.renderer.entities.companions;
 
-import com.gildedgames.aether.common.entities.living.companions.EntityCompanion;
+import com.gildedgames.aether.common.entities.companions.EntityCompanion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;

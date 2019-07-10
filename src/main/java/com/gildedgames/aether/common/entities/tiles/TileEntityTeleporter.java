@@ -16,7 +16,7 @@ import com.gildedgames.aether.common.init.InstancesAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketSetPlayedIntro;
 import com.gildedgames.aether.common.util.helpers.AetherHelper;
-import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstanceHelper;
+import com.gildedgames.aether.common.world.instances.necromancer_tower.NecromancerTowerInstanceHelper;
 import com.gildedgames.orbis.lib.OrbisLib;
 import com.gildedgames.orbis.lib.util.TeleporterGeneric;
 import com.gildedgames.orbis.lib.util.mc.BlockPosDimension;

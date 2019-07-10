@@ -1,6 +1,6 @@
 package com.gildedgames.aether.api.world.islands;
 
-import com.gildedgames.aether.api.world.generation.WorldDecoration;
+import com.gildedgames.aether.api.world.decoration.WorldDecoration;
 import com.gildedgames.aether.api.world.generation.caves.ICaveSystemGenerator;
 import com.gildedgames.aether.api.world.preparation.IPrepSectorData;
 import com.gildedgames.orbis.lib.core.PlacedBlueprint;

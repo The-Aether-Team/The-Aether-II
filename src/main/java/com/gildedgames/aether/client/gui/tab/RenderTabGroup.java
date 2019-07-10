@@ -4,7 +4,7 @@ import com.gildedgames.aether.api.registry.tab.ITab;
 import com.gildedgames.aether.api.registry.tab.ITabClient;
 import com.gildedgames.aether.api.registry.tab.ITabGroup;
 import com.gildedgames.aether.client.gui.container.guidebook.AbstractGuidebookPage;
-import com.gildedgames.aether.common.containers.tab.util.TabGroupHandler;
+import com.gildedgames.aether.common.containers.overlays.TabGroupHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;

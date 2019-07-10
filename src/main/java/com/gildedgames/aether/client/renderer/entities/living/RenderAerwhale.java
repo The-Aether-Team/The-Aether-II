@@ -1,19 +1,13 @@
 package com.gildedgames.aether.client.renderer.entities.living;
 
 import com.gildedgames.aether.client.models.entities.living.ModelAerwhale;
-import com.gildedgames.aether.client.util.QuaternionUtil;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.entities.living.passive.EntityAerwhale;
-import com.gildedgames.aether.common.util.helpers.MathUtil;
-import net.minecraft.client.Minecraft;
+import com.gildedgames.aether.common.entities.animals.EntityAerwhale;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.Vec3d;
-
-import javax.vecmath.Point3d;
 
 public class RenderAerwhale extends RenderLiving<EntityLiving>
 {

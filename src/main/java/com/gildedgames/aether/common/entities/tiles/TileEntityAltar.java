@@ -5,7 +5,6 @@ import com.gildedgames.aether.api.recipes.altar.IAltarRecipe;
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.blocks.containers.BlockAltar;
-import com.gildedgames.aether.common.entities.tiles.util.TileEntitySynced;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;

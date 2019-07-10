@@ -1,17 +1,17 @@
 package com.gildedgames.aether.common.world.aether;
 
 import com.gildedgames.aether.api.util.OpenSimplexNoise;
-import com.gildedgames.aether.api.world.IAetherChunkColumnInfo;
-import com.gildedgames.aether.api.world.islands.IIslandChunkColumnInfo;
+import com.gildedgames.aether.api.world.IChunkInfoAether;
+import com.gildedgames.aether.api.world.islands.IIslandChunkInfo;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.api.world.noise.IChunkNoiseBuffer2D;
 import com.gildedgames.aether.api.world.preparation.IChunkMask;
-import com.gildedgames.aether.common.world.aether.biomes.arctic_peaks.BiomeArcticPeaks;
-import com.gildedgames.aether.common.world.aether.features.WorldGenUndergroundVeins;
-import com.gildedgames.aether.common.world.aether.features.caves.WorldGenAetherCaves;
-import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
-import com.gildedgames.aether.common.world.preparation.ChunkMask;
+import com.gildedgames.aether.common.world.biomes.arctic_peaks.BiomeArcticPeaks;
+import com.gildedgames.aether.common.world.decorations.WorldGenUndergroundVeins;
+import com.gildedgames.aether.common.world.decorations.caves.WorldGenAetherCaves;
+import com.gildedgames.aether.common.world.island.IslandBlockType;
+import com.gildedgames.aether.common.world.preparation.mask.ChunkMask;
 import com.gildedgames.orbis.lib.processing.BlockAccessExtendedWrapper;
 import com.gildedgames.orbis.lib.processing.IBlockAccessExtended;
 import net.minecraft.world.World;
@@ -38,7 +38,7 @@ public class WorldPreparationAether
 		this.veinGenerator = new WorldGenUndergroundVeins();
 	}
 
-	public void generateFull(IAetherChunkColumnInfo info, ChunkMask mask, IIslandData island, int chunkX, int chunkZ, long seed)
+	public void generateFull(IChunkInfoAether info, ChunkMask mask, IIslandData island, int chunkX, int chunkZ, long seed)
 	{
 		this.generateCloudLayer(info, mask);
 
@@ -57,12 +57,12 @@ public class WorldPreparationAether
 		}
 	}
 
-	private void generateCloudLayer(IAetherChunkColumnInfo info, final ChunkMask mask)
+	private void generateCloudLayer(IChunkInfoAether info, final ChunkMask mask)
 	{
 		int maxDepth = 8;
 		int levelY = 70;
 
-		IIslandChunkColumnInfo chunkInfo = info.getIslandData(0, IIslandChunkColumnInfo.class);
+		IIslandChunkInfo chunkInfo = info.getIslandData(0, IIslandChunkInfo.class);
 
 		IChunkNoiseBuffer2D cloudBuffer = chunkInfo.getCloudDepthBuffer();
 
@@ -88,9 +88,9 @@ public class WorldPreparationAether
 	}
 
 	// Calculate max penetration depth
-	private void replaceBiomeBlocks(IAetherChunkColumnInfo info, final IChunkMask mask, final byte[] heightmap)
+	private void replaceBiomeBlocks(IChunkInfoAether info, final IChunkMask mask, final byte[] heightmap)
 	{
-		IIslandChunkColumnInfo chunkInfo = info.getIslandData(0, IIslandChunkColumnInfo.class);
+		IIslandChunkInfo chunkInfo = info.getIslandData(0, IIslandChunkInfo.class);
 
 		int i = 0;
 
@@ -157,7 +157,7 @@ public class WorldPreparationAether
 		return heightmap;
 	}
 
-	public void generateBaseTerrain(IAetherChunkColumnInfo info, IChunkMask mask, IIslandData island, int chunkX, int chunkZ, long seed)
+	public void generateBaseTerrain(IChunkInfoAether info, IChunkMask mask, IIslandData island, int chunkX, int chunkZ, long seed)
 	{
 		island.getGenerator().generateChunkSegment(info, mask, island, chunkX, chunkZ);
 
@@ -166,7 +166,7 @@ public class WorldPreparationAether
 		this.replaceBiomeBlocks(info, mask, heightmap);
 	}
 
-	public IIslandChunkColumnInfo generateChunkColumnInfo(IIslandData island, int chunkX, int chunkZ)
+	public IIslandChunkInfo generateChunkColumnInfo(IIslandData island, int chunkX, int chunkZ)
 	{
 		return island.getGenerator().generateColumnInfo(this.noise, island, chunkX, chunkZ);
 	}

@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.entities.ai.companion;
 
-import com.gildedgames.aether.common.entities.living.companions.EntityCompanion;
+import com.gildedgames.aether.common.entities.companions.EntityCompanion;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAITarget;
 

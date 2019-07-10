@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.world.templates;
 
-import com.gildedgames.aether.api.world.generation.TemplateDefinition;
-import com.gildedgames.aether.api.world.generation.TemplateLoc;
-import com.gildedgames.aether.api.world.generation.WorldDecorationGenerator;
+import com.gildedgames.aether.api.world.decoration.WorldDecorationGenerator;
+import com.gildedgames.aether.api.world.templates.TemplateDefinition;
+import com.gildedgames.aether.api.world.templates.TemplateLoc;
 import com.gildedgames.orbis.lib.world.WorldSlice;
 import net.minecraft.util.math.BlockPos;
 

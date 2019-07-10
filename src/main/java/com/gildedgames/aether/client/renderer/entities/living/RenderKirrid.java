@@ -4,7 +4,7 @@ import com.gildedgames.aether.client.models.entities.living.ModelKirrid;
 import com.gildedgames.aether.client.renderer.EyeUtil;
 import com.gildedgames.aether.client.renderer.entities.living.layers.LayerKirridWool;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.entities.living.passive.EntityKirrid;
+import com.gildedgames.aether.common.entities.animals.EntityKirrid;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;

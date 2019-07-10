@@ -1,19 +1,14 @@
 package com.gildedgames.aether.client.renderer.entities.living;
 
 import com.gildedgames.aether.client.models.entities.living.ModelGlactrix;
-import com.gildedgames.aether.client.renderer.EyeUtil;
 import com.gildedgames.aether.client.renderer.entities.living.layers.LayerGlactrixCrystals;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.entities.living.passive.EntityGlactrix;
-import io.netty.handler.codec.spdy.SpdyHeaderBlockRawDecoder;
-import net.minecraft.client.Minecraft;
+import com.gildedgames.aether.common.entities.animals.EntityGlactrix;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RenderGlactrix extends RenderLiving<EntityGlactrix>
 {

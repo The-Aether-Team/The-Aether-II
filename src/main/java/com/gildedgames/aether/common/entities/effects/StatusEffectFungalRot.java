@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.entities.effects;
 
-import com.gildedgames.aether.api.effects_system.EEffectIntensity;
+import com.gildedgames.aether.api.entity.effects.EEffectIntensity;
 import com.gildedgames.aether.common.capabilities.entity.effects.EffectsDamageSource;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;

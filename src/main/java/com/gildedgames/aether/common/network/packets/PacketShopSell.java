@@ -58,9 +58,9 @@ public class PacketShopSell implements IMessage
 
 			if (player.openContainer instanceof ContainerShop)
 			{
-				if (dialogModule.getTalkingNPC() != null)
+				if (dialogModule.getTalkingCharacter() != null)
 				{
-					IShopInstanceGroup group = dialogModule.getTalkingNPC().getShopInstanceGroup();
+					IShopInstanceGroup group = dialogModule.getTalkingCharacter().getShopInstanceGroup();
 
 					if (group == null)
 					{

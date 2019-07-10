@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.world.spawning;
 
-import com.gildedgames.aether.api.world.ISpawnArea;
+import com.gildedgames.aether.api.world.spawn.ISpawnArea;
 import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.ChunkPos;

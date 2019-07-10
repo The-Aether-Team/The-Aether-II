@@ -4,7 +4,7 @@ import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.blocks.containers.BlockIcestoneCooler;
 import com.gildedgames.aether.common.containers.tiles.ContainerIcestoneCooler;
-import com.gildedgames.aether.common.items.crafting.CoolerRecipes;
+import com.gildedgames.aether.common.recipes.CoolerRecipes;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

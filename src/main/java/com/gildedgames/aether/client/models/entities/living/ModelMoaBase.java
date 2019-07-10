@@ -3,7 +3,7 @@ package com.gildedgames.aether.client.models.entities.living;
 import com.gildedgames.aether.api.util.NoiseUtil;
 import com.gildedgames.aether.client.renderer.ModelBaseAether;
 import com.gildedgames.aether.client.renderer.ModelRendererAether;
-import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
+import com.gildedgames.aether.common.entities.animals.EntityMoa;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;

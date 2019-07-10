@@ -3,11 +3,11 @@ package com.gildedgames.aether.common.events.listeners.world;
 import com.gildedgames.aether.api.registrar.BiomesAether;
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.registrar.CapabilitiesAether;
-import com.gildedgames.aether.api.world.ISpawnHandler;
-import com.gildedgames.aether.api.world.ISpawnSystem;
-import com.gildedgames.aether.api.world.PosCondition;
-import com.gildedgames.aether.common.entities.living.mobs.*;
-import com.gildedgames.aether.common.entities.living.passive.*;
+import com.gildedgames.aether.api.world.spawn.ISpawnHandler;
+import com.gildedgames.aether.api.world.spawn.ISpawnSystem;
+import com.gildedgames.aether.api.world.spawn.conditions.IConditionPosition;
+import com.gildedgames.aether.common.entities.animals.*;
+import com.gildedgames.aether.common.entities.monsters.*;
 import com.gildedgames.aether.common.init.DimensionsAether;
 import com.gildedgames.aether.common.world.spawning.SpawnEntry;
 import com.gildedgames.aether.common.world.spawning.SpawnHandler;
@@ -38,14 +38,14 @@ public class WorldTickListener
 			return Collections.emptyList();
 		}
 
-		final PosCondition grassCheck = new CheckBlockUnderneath(BlocksAether.aether_grass);
-		final PosCondition iceCheck = new CheckBlockUnderneath(BlocksAether.highlands_packed_ice, BlocksAether.highlands_ice, BlocksAether.aether_grass);
-		final PosCondition groundCheck = new CheckBlockUnderneath(BlocksAether.aether_grass, BlocksAether.holystone);
-		final PosCondition stoneCheck = new CheckBlockUnderneath(BlocksAether.holystone);
-		final PosCondition isUnderground = new CheckIsUnderground();
-		final PosCondition arcticPeaks = new CheckBiome(BiomesAether.ARCTIC_PEAKS);
-		final PosCondition notForgot = new CheckBannedBiomes(BiomesAether.FORGOTTEN_HIGHLANDS);
-		final PosCondition forgottenHighlands = new CheckBiome(BiomesAether.FORGOTTEN_HIGHLANDS);
+		final IConditionPosition grassCheck = new CheckBlockUnderneath(BlocksAether.aether_grass);
+		final IConditionPosition iceCheck = new CheckBlockUnderneath(BlocksAether.highlands_packed_ice, BlocksAether.highlands_ice, BlocksAether.aether_grass);
+		final IConditionPosition groundCheck = new CheckBlockUnderneath(BlocksAether.aether_grass, BlocksAether.holystone);
+		final IConditionPosition stoneCheck = new CheckBlockUnderneath(BlocksAether.holystone);
+		final IConditionPosition isUnderground = new CheckIsUnderground();
+		final IConditionPosition arcticPeaks = new CheckBiome(BiomesAether.ARCTIC_PEAKS);
+		final IConditionPosition notForgot = new CheckBannedBiomes(BiomesAether.FORGOTTEN_HIGHLANDS);
+		final IConditionPosition forgottenHighlands = new CheckBiome(BiomesAether.FORGOTTEN_HIGHLANDS);
 
 		/** PASSIVE **/
 		final SpawnHandler animals = new SpawnHandler("aether_animals").chunkArea(4).targetEntityCountPerArea(9).updateFrequencyInTicks(200);

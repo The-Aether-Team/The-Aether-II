@@ -4,7 +4,7 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerSwetTrackerModule;
 import com.gildedgames.aether.common.entities.ai.EntityAI;
 import com.gildedgames.aether.common.entities.ai.hopping.HoppingMoveHelper;
-import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
+import com.gildedgames.aether.common.entities.monsters.EntitySwet;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketLatchSwet;
 import net.minecraft.entity.player.EntityPlayer;

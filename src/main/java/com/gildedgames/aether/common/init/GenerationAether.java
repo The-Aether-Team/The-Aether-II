@@ -1,14 +1,14 @@
 package com.gildedgames.aether.common.init;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
-import com.gildedgames.aether.api.world.generation.TemplateDefinition;
-import com.gildedgames.aether.api.world.generation.TemplateDefinitionPool;
+import com.gildedgames.aether.api.world.templates.TemplateDefinition;
+import com.gildedgames.aether.api.world.templates.TemplateDefinitionPool;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockTallAetherGrass;
-import com.gildedgames.aether.common.world.aether.features.WorldGenFloorPlacer;
-import com.gildedgames.aether.common.world.aether.features.WorldGenIceCrystals;
-import com.gildedgames.aether.common.world.aether.features.aerclouds.WorldGenAercloud;
+import com.gildedgames.aether.common.world.decorations.WorldGenFloorPlacer;
+import com.gildedgames.aether.common.world.decorations.WorldGenIceCrystals;
+import com.gildedgames.aether.common.world.decorations.aerclouds.WorldGenAercloud;
 import com.gildedgames.aether.common.world.templates.conditions.TemplateConditions;
 import com.gildedgames.aether.common.world.templates.post.PostPlacementMoaFamily;
 import com.gildedgames.aether.common.world.util.GenUtil;

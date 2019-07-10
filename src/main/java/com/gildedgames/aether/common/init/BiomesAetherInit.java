@@ -1,14 +1,14 @@
 package com.gildedgames.aether.common.init;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
-import com.gildedgames.aether.common.world.aether.biomes.BiomeVoid;
-import com.gildedgames.aether.common.world.aether.biomes.arctic_peaks.BiomeArcticPeaks;
-import com.gildedgames.aether.common.world.aether.biomes.forgotten_highlands.BiomeForgottenHighlands;
-import com.gildedgames.aether.common.world.aether.biomes.highlands.BiomeHighlands;
-import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.BiomeIrradiatedForests;
-import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.BiomeMagneticHills;
-import com.gildedgames.aether.common.world.util.BiomeInstancedZone;
+import com.gildedgames.aether.common.world.biomes.BiomeAetherBase;
+import com.gildedgames.aether.common.world.biomes.BiomeInstancedZone;
+import com.gildedgames.aether.common.world.biomes.BiomeVoid;
+import com.gildedgames.aether.common.world.biomes.arctic_peaks.BiomeArcticPeaks;
+import com.gildedgames.aether.common.world.biomes.forgotten_highlands.BiomeForgottenHighlands;
+import com.gildedgames.aether.common.world.biomes.highlands.BiomeHighlands;
+import com.gildedgames.aether.common.world.biomes.irradiated_forests.BiomeIrradiatedForests;
+import com.gildedgames.aether.common.world.biomes.magnetic_hills.BiomeMagneticHills;
 import com.google.common.collect.Lists;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;

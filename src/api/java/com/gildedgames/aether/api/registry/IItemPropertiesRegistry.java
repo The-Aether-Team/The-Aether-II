@@ -1,6 +1,7 @@
 package com.gildedgames.aether.api.registry;
 
-import com.gildedgames.aether.api.items.IItemProperties;
+import com.gildedgames.aether.api.items.properties.IItemProperties;
+import com.gildedgames.aether.api.items.properties.ItemPropertiesBuilder;
 import net.minecraft.item.Item;
 
 import javax.annotation.Nonnull;
@@ -19,9 +20,8 @@ public interface IItemPropertiesRegistry
 	/**
 	 * Registers an item with the registry, throwing an {@link IllegalArgumentException} if
 	 * it is already registered.
-	 *
-	 * @param item The item to register
+	 *  @param item The item to register
 	 * @param def The {@link IItemProperties} to register
 	 */
-	void registerItem(Item item, IItemProperties def);
+	void registerItem(Item item, ItemPropertiesBuilder def);
 }

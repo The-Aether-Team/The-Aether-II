@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.events.listeners.entity;
 
 import com.gildedgames.aether.api.registrar.CapabilitiesAether;
-import com.gildedgames.aether.api.world.ISpawnHandler;
-import com.gildedgames.aether.api.world.ISpawnSystem;
+import com.gildedgames.aether.api.world.spawn.ISpawnHandler;
+import com.gildedgames.aether.api.world.spawn.ISpawnSystem;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.fml.common.Mod;

@@ -5,8 +5,8 @@ import com.gildedgames.aether.api.world.islands.precipitation.PrecipitationStren
 import com.gildedgames.aether.common.blocks.IBlockSnowy;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketUpdatePrecipitation;
-import com.gildedgames.aether.common.world.aether.biomes.BiomeAetherBase;
-import com.gildedgames.aether.common.world.aether.biomes.ISnowyBiome;
+import com.gildedgames.aether.common.world.biomes.BiomeAetherBase;
+import com.gildedgames.aether.common.world.biomes.ISnowyBiome;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;

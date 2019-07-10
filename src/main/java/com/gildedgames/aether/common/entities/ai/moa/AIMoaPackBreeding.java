@@ -2,10 +2,10 @@ package com.gildedgames.aether.common.entities.ai.moa;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockWovenSticks;
+import com.gildedgames.aether.common.entities.animals.EntityMoa;
+import com.gildedgames.aether.common.entities.genes.AnimalGender;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
-import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
 import com.gildedgames.aether.common.entities.tiles.TileEntityMoaEgg;
-import com.gildedgames.aether.common.entities.util.AnimalGender;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.init.SoundEvents;

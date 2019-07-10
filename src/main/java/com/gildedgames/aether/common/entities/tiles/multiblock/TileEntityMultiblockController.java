@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.entities.tiles.multiblock;
 
 import com.gildedgames.aether.common.blocks.multiblock.BlockMultiController;
-import com.gildedgames.aether.common.entities.tiles.util.TileEntitySynced;
+import com.gildedgames.aether.common.entities.tiles.TileEntitySynced;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;

@@ -2,7 +2,7 @@ package com.gildedgames.aether.client.events.listeners.render;
 
 import com.gildedgames.aether.api.entity.IMount;
 import com.gildedgames.aether.api.entity.IMountProcessor;
-import com.gildedgames.aether.common.entities.util.mounts.FlyingMount;
+import com.gildedgames.aether.common.entities.mounts.FlyingMount;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;

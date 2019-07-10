@@ -2,10 +2,10 @@ package com.gildedgames.aether.common.entities.genes.moa;
 
 import com.gildedgames.aether.api.entity.genes.GeneRegion;
 import com.gildedgames.aether.api.entity.genes.IGeneStorage;
-import com.gildedgames.aether.common.entities.genes.util.DataGene;
-import com.gildedgames.aether.common.entities.genes.util.GenePool;
-import com.gildedgames.aether.common.entities.genes.util.GeneUtil;
-import com.gildedgames.aether.common.entities.genes.util.SimpleGeneStorage;
+import com.gildedgames.aether.common.entities.genes.DataGene;
+import com.gildedgames.aether.common.entities.genes.GenePool;
+import com.gildedgames.aether.common.entities.genes.GeneUtil;
+import com.gildedgames.aether.common.entities.genes.SimpleGeneStorage;
 import com.gildedgames.orbis.lib.util.mc.NBT;
 import com.google.common.collect.Lists;
 import net.minecraft.nbt.NBTTagCompound;

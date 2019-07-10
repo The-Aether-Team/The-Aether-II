@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.world.spawning;
 
-import com.gildedgames.aether.api.world.ISpawnEntry;
-import com.gildedgames.aether.api.world.PosCondition;
-import com.gildedgames.aether.api.world.PositionSelector;
+import com.gildedgames.aether.api.world.spawn.IPositionSelector;
+import com.gildedgames.aether.api.world.spawn.ISpawnEntry;
+import com.gildedgames.aether.api.world.spawn.conditions.IConditionPosition;
 import com.gildedgames.aether.common.world.spawning.util.GroundPositionSelector;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.Entity;
@@ -14,7 +14,7 @@ import java.util.List;
 public class SpawnEntry implements ISpawnEntry
 {
 
-	private final PositionSelector positionSelector;
+	private final IPositionSelector positionSelector;
 
 	private final EntityLiving.SpawnPlacementType placementType;
 
@@ -24,7 +24,7 @@ public class SpawnEntry implements ISpawnEntry
 
 	private final float rarityWeight;
 
-	private final List<PosCondition> conditions = Lists.newArrayList();
+	private final List<IConditionPosition> conditions = Lists.newArrayList();
 
 	public SpawnEntry(EntityLiving.SpawnPlacementType placementType, Class<? extends Entity> clazz, float rarityWeight, int minGroupSize, int maxGroupSize)
 	{
@@ -32,7 +32,7 @@ public class SpawnEntry implements ISpawnEntry
 	}
 
 	public SpawnEntry(EntityLiving.SpawnPlacementType placementType, Class<? extends Entity> clazz, float rarityWeight, int minGroupSize, int maxGroupSize,
-			PositionSelector heightSelector)
+			IPositionSelector heightSelector)
 	{
 		this.placementType = placementType;
 		this.clazz = clazz;
@@ -49,7 +49,7 @@ public class SpawnEntry implements ISpawnEntry
 	}
 
 	@Override
-	public SpawnEntry addCondition(PosCondition condition)
+	public SpawnEntry addCondition(IConditionPosition condition)
 	{
 		this.conditions.add(condition);
 
@@ -57,7 +57,7 @@ public class SpawnEntry implements ISpawnEntry
 	}
 
 	@Override
-	public List<PosCondition> getConditions()
+	public List<IConditionPosition> getConditions()
 	{
 		return Collections.unmodifiableList(this.conditions);
 	}
@@ -87,7 +87,7 @@ public class SpawnEntry implements ISpawnEntry
 	}
 
 	@Override
-	public PositionSelector getPositionSelector()
+	public IPositionSelector getPositionSelector()
 	{
 		return this.positionSelector;
 	}

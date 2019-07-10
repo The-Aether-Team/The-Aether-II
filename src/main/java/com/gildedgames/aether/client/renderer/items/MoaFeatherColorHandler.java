@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client.renderer.items;
 
-import com.gildedgames.aether.common.items.misc.ItemMoaFeather;
+import com.gildedgames.aether.common.items.other.ItemMoaFeather;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.ItemStack;
 

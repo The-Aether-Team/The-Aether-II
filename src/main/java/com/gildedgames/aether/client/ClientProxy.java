@@ -10,7 +10,7 @@ import com.gildedgames.aether.client.renderer.particles.ParticleSlash;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.CommonProxy;
 import com.gildedgames.aether.common.analytics.GameAnalytics;
-import com.gildedgames.aether.common.tab.guidebook.*;
+import com.gildedgames.aether.common.containers.overlays.tabs.guidebook.*;
 import com.gildedgames.aether.common.util.helpers.PerfHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;

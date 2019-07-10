@@ -14,7 +14,7 @@ import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherS
 import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherUniqueSapling;
 import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherWisprootSapling;
 import com.gildedgames.aether.common.entities.blocks.EntityParachute;
-import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
+import com.gildedgames.aether.common.entities.monsters.EntitySwet;
 import com.gildedgames.aether.common.entities.tiles.*;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;

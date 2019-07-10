@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world.spawning;
 
 import com.gildedgames.aether.api.registrar.CapabilitiesAether;
-import com.gildedgames.aether.api.world.ISpawnSystem;
+import com.gildedgames.aether.api.world.spawn.ISpawnSystem;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;

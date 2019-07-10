@@ -1,7 +1,7 @@
 package com.gildedgames.aether.api.util;
 
-import com.gildedgames.aether.api.world.generation.TemplateDefinition;
-import com.gildedgames.aether.api.world.generation.TemplateLoc;
+import com.gildedgames.aether.api.world.templates.TemplateDefinition;
+import com.gildedgames.aether.api.world.templates.TemplateLoc;
 import com.gildedgames.orbis.lib.processing.IBlockAccessExtended;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

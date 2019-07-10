@@ -102,12 +102,12 @@ public class AetherGuiHandler implements IGuiHandler
 			{
 				PlayerDialogModule dialogModule = playerAether.getModule(PlayerDialogModule.class);
 
-				if (dialogModule.getTalkingNPC() == null)
+				if (dialogModule.getTalkingCharacter() == null)
 				{
 					return null;
 				}
 
-				IShopInstanceGroup group = dialogModule.getTalkingNPC().getShopInstanceGroup();
+				IShopInstanceGroup group = dialogModule.getTalkingCharacter().getShopInstanceGroup();
 
 				if (group == null)
 				{
@@ -169,14 +169,14 @@ public class AetherGuiHandler implements IGuiHandler
 			{
 				PlayerDialogModule dialogModule = playerAether.getModule(PlayerDialogModule.class);
 
-				if (dialogModule.getTalkingNPC() == null)
+				if (dialogModule.getTalkingCharacter() == null)
 				{
 					return null;
 				}
 
 				IDialogSlide slide = DialogUtil.getSlide(dialogModule);
 
-				IShopInstanceGroup group = dialogModule.getTalkingNPC().getShopInstanceGroup();
+				IShopInstanceGroup group = dialogModule.getTalkingCharacter().getShopInstanceGroup();
 
 				if (group == null)
 				{

@@ -2,11 +2,11 @@ package com.gildedgames.aether.common.entities.tiles;
 
 import com.gildedgames.aether.common.blocks.containers.BlockIncubator;
 import com.gildedgames.aether.common.containers.tiles.ContainerIncubator;
+import com.gildedgames.aether.common.entities.animals.EntityMoa;
+import com.gildedgames.aether.common.entities.genes.AnimalGender;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
-import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
-import com.gildedgames.aether.common.entities.util.AnimalGender;
-import com.gildedgames.aether.common.entities.util.MoaNest;
-import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
+import com.gildedgames.aether.common.entities.genes.moa.MoaNest;
+import com.gildedgames.aether.common.items.other.ItemMoaEgg;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

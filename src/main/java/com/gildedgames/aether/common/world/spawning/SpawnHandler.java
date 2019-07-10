@@ -3,7 +3,12 @@ package com.gildedgames.aether.common.world.spawning;
 import com.gildedgames.aether.api.entity.spawning.EntitySpawn;
 import com.gildedgames.aether.api.entity.spawning.ISpawningInfo;
 import com.gildedgames.aether.api.registrar.CapabilitiesAether;
-import com.gildedgames.aether.api.world.*;
+import com.gildedgames.aether.api.world.spawn.ISpawnArea;
+import com.gildedgames.aether.api.world.spawn.ISpawnAreaManager;
+import com.gildedgames.aether.api.world.spawn.ISpawnEntry;
+import com.gildedgames.aether.api.world.spawn.ISpawnHandler;
+import com.gildedgames.aether.api.world.spawn.conditions.IConditionPosition;
+import com.gildedgames.aether.api.world.spawn.conditions.IConditionWorld;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis.lib.OrbisLib;
 import com.google.common.collect.Lists;
@@ -26,9 +31,9 @@ public class SpawnHandler implements ISpawnHandler
 {
 	private final String uniqueID;
 
-	private final List<WorldCondition> worldConditions = Lists.newArrayList();
+	private final List<IConditionWorld> worldConditions = Lists.newArrayList();
 
-	private final List<PosCondition> posConditions = Lists.newArrayList();
+	private final List<IConditionPosition> posConditions = Lists.newArrayList();
 
 	private final List<ISpawnEntry> entries = Lists.newArrayList();
 
@@ -88,7 +93,7 @@ public class SpawnHandler implements ISpawnHandler
 	}
 
 	@Override
-	public <T extends WorldCondition> SpawnHandler addWorldCondition(final T condition)
+	public <T extends IConditionWorld> SpawnHandler addWorldCondition(final T condition)
 	{
 		this.worldConditions.add(condition);
 
@@ -96,7 +101,7 @@ public class SpawnHandler implements ISpawnHandler
 	}
 
 	@Override
-	public <T extends PosCondition> SpawnHandler condition(final T condition)
+	public <T extends IConditionPosition> SpawnHandler condition(final T condition)
 	{
 		this.posConditions.add(condition);
 
@@ -121,7 +126,7 @@ public class SpawnHandler implements ISpawnHandler
 			return;
 		}
 
-		for (final WorldCondition condition : this.worldConditions)
+		for (final IConditionWorld condition : this.worldConditions)
 		{
 			if (!condition.isMet(world))
 			{
@@ -265,7 +270,7 @@ public class SpawnHandler implements ISpawnHandler
 						continue;
 					}
 
-					for (PosCondition condition : this.posConditions)
+					for (IConditionPosition condition : this.posConditions)
 					{
 						if (!condition.isMet(manager.getWorld(), spawnAt, spawnAt.down()))
 						{
@@ -279,7 +284,7 @@ public class SpawnHandler implements ISpawnHandler
 						}
 					}
 
-					for (PosCondition condition : entry.getConditions())
+					for (IConditionPosition condition : entry.getConditions())
 					{
 						if (!condition.isMet(manager.getWorld(), spawnAt, spawnAt.down()))
 						{

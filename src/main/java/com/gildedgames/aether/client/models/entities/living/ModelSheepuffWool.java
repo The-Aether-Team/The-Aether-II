@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client.models.entities.living;
 
-import com.gildedgames.aether.common.entities.living.passive.EntitySheepuff;
+import com.gildedgames.aether.common.entities.animals.EntitySheepuff;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;

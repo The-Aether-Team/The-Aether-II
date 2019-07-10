@@ -1,11 +1,11 @@
 package com.gildedgames.aether.common.world.spawning.conditions;
 
-import com.gildedgames.aether.api.world.PosCondition;
+import com.gildedgames.aether.api.world.spawn.conditions.IConditionPosition;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
-public class CheckBannedBiomes implements PosCondition
+public class CheckBannedBiomes implements IConditionPosition
 {
 
 	private final Biome[] bannedBiomes;

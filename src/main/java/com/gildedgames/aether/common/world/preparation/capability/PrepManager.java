@@ -4,8 +4,8 @@ import com.gildedgames.aether.api.world.preparation.IPrepManager;
 import com.gildedgames.aether.api.world.preparation.IPrepRegistryEntry;
 import com.gildedgames.aether.api.world.preparation.IPrepSectorAccess;
 import com.gildedgames.aether.api.world.preparation.IPrepSectorData;
-import com.gildedgames.aether.common.world.preparation.PrepSectorAccessClientImpl;
-import com.gildedgames.aether.common.world.preparation.PrepSectorAccessServerImpl;
+import com.gildedgames.aether.common.world.preparation.access.PrepSectorAccessClient;
+import com.gildedgames.aether.common.world.preparation.access.PrepSectorAccessServer;
 import com.gildedgames.orbis.lib.OrbisLib;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
@@ -35,11 +35,11 @@ public class PrepManager implements IPrepManager
 
 		if (world.isRemote)
 		{
-			this.access = new PrepSectorAccessClientImpl(this.world, this.registry);
+			this.access = new PrepSectorAccessClient(this.world, this.registry);
 		}
 		else
 		{
-			this.access = new PrepSectorAccessServerImpl(this.world, this.registry, this, OrbisLib.services().getWorldDataManager(world));
+			this.access = new PrepSectorAccessServer(this.world, this.registry, this, OrbisLib.services().getWorldDataManager(world));
 		}
 	}
 

@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.dialog.*;
-import com.gildedgames.aether.api.entity.EntityNPC;
+import com.gildedgames.aether.api.entity.EntityCharacter;
 import com.gildedgames.aether.client.gui.dialog.GuiDialogViewer;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
@@ -30,7 +30,7 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 
 	private String lastNodeId;
 
-	private EntityNPC talkingEntity;
+	private EntityCharacter talkingEntity;
 
 	private Map<String, Boolean> conditionsMet;
 
@@ -66,13 +66,13 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 
 	@Nullable
 	@Override
-	public EntityNPC getTalkingNPC()
+	public EntityCharacter getTalkingCharacter()
 	{
 		return this.talkingEntity;
 	}
 
 	@Override
-	public void setTalkingEntity(final EntityNPC entity)
+	public void setTalkingEntity(final EntityCharacter entity)
 	{
 		this.talkingEntity = entity;
 	}

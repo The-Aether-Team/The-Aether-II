@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.events.listeners.player;
 
 import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.api.items.IItemProperties;
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
+import com.gildedgames.aether.api.items.properties.IItemProperties;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;

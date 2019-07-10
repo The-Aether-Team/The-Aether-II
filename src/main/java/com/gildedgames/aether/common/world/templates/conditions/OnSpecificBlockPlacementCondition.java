@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.world.templates.conditions;
 
-import com.gildedgames.aether.api.world.generation.PlacementConditionTemplate;
+import com.gildedgames.aether.api.world.templates.PlacementConditionTemplate;
 import com.gildedgames.orbis.lib.processing.IBlockAccessExtended;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;

@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.entities.projectiles;
 
-import com.gildedgames.aether.api.damage_system.IDamageLevelsHolder;
-import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
+import com.gildedgames.aether.api.entity.damage.IDamageLevelsHolder;
+import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import net.minecraft.entity.EntityLivingBase;

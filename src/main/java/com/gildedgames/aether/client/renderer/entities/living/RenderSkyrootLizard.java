@@ -2,7 +2,7 @@ package com.gildedgames.aether.client.renderer.entities.living;
 
 import com.gildedgames.aether.client.models.entities.living.ModelSkyrootLizard;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.entities.living.passive.EntitySkyrootLizard;
+import com.gildedgames.aether.common.entities.animals.EntitySkyrootLizard;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;

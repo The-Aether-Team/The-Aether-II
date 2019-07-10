@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.items.armor;
 
-import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
+import com.gildedgames.aether.api.entity.damage.DamageTypeAttributes;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.item.effects.stats.StatEffectFactory;
 import com.gildedgames.aether.common.init.CreativeTabsAether;

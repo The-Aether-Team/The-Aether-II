@@ -9,7 +9,7 @@ import com.gildedgames.aether.common.items.armor.*;
 import com.gildedgames.aether.common.items.consumables.*;
 import com.gildedgames.aether.common.items.irradiated.ItemIrradiated;
 import com.gildedgames.aether.common.items.irradiated.ItemIrradiatedVisuals;
-import com.gildedgames.aether.common.items.misc.*;
+import com.gildedgames.aether.common.items.other.*;
 import com.gildedgames.aether.common.items.tools.*;
 import com.gildedgames.aether.common.items.weapons.ItemDart;
 import com.gildedgames.aether.common.items.weapons.ItemDartShooter;

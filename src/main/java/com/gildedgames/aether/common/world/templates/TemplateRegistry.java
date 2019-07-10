@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world.templates;
 
-import com.gildedgames.aether.api.world.generation.ITemplateRegistry;
-import com.gildedgames.aether.api.world.generation.TemplateDefinition;
+import com.gildedgames.aether.api.world.templates.ITemplateRegistry;
+import com.gildedgames.aether.api.world.templates.TemplateDefinition;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 

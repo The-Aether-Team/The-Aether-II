@@ -2,10 +2,10 @@ package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.items.EffectActivator;
-import com.gildedgames.aether.api.items.IItemProperties;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectFactory;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectPool;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
+import com.gildedgames.aether.api.items.properties.IItemProperties;
 import com.gildedgames.aether.api.player.IEquipmentModule;
 import com.gildedgames.aether.api.player.IPlayerAetherModule;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;

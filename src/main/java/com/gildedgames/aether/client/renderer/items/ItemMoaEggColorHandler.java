@@ -1,7 +1,7 @@
 package com.gildedgames.aether.client.renderer.items;
 
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
-import com.gildedgames.aether.common.items.misc.ItemMoaEgg;
+import com.gildedgames.aether.common.items.other.ItemMoaEgg;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.ItemStack;
 

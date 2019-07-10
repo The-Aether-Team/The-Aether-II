@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.entities.ai.necromancer;
 
 import com.gildedgames.aether.common.entities.ai.EntityAIMoveToBlockYSensitive;
-import com.gildedgames.aether.common.entities.living.npc.EntityNecromancer;
+import com.gildedgames.aether.common.entities.characters.EntityNecromancer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 

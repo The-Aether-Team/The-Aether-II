@@ -1,12 +1,12 @@
 package com.gildedgames.aether.common.capabilities;
 
 import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
-import com.gildedgames.aether.api.effects_system.IAetherStatusEffectPool;
+import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectPool;
 import com.gildedgames.aether.api.entity.spawning.ISpawningInfo;
 import com.gildedgames.aether.api.player.IPlayerAether;
-import com.gildedgames.aether.api.world.ISpawnSystem;
 import com.gildedgames.aether.api.world.islands.precipitation.IPrecipitationManager;
 import com.gildedgames.aether.api.world.preparation.IPrepManager;
+import com.gildedgames.aether.api.world.spawn.ISpawnSystem;
 import com.gildedgames.aether.common.capabilities.entity.effects.StatusEffectPool;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.spawning.EntitySpawningInfo;

@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client.renderer.items;
 
-import com.gildedgames.aether.common.items.misc.ItemWrappingPaper;
+import com.gildedgames.aether.common.items.other.ItemWrappingPaper;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;

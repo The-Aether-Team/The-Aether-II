@@ -3,7 +3,7 @@ package com.gildedgames.aether.client.renderer.entities.living;
 import com.gildedgames.aether.client.models.entities.living.ModelCockatrice;
 import com.gildedgames.aether.client.renderer.entities.living.layers.LayerGlowing;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.entities.living.mobs.EntityCockatrice;
+import com.gildedgames.aether.common.entities.monsters.EntityCockatrice;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;

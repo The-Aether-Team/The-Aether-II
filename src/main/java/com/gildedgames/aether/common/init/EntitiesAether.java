@@ -1,14 +1,13 @@
 package com.gildedgames.aether.common.init;
 
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.entities.animals.*;
 import com.gildedgames.aether.common.entities.blocks.EntityFloatingBlock;
 import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
 import com.gildedgames.aether.common.entities.blocks.EntityParachute;
-import com.gildedgames.aether.common.entities.living.companions.*;
-import com.gildedgames.aether.common.entities.living.mobs.*;
-import com.gildedgames.aether.common.entities.living.mounts.EntityMoa;
-import com.gildedgames.aether.common.entities.living.npc.*;
-import com.gildedgames.aether.common.entities.living.passive.*;
+import com.gildedgames.aether.common.entities.characters.*;
+import com.gildedgames.aether.common.entities.companions.*;
+import com.gildedgames.aether.common.entities.monsters.*;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
 import com.gildedgames.aether.common.entities.projectiles.EntityDaggerfrostSnowball;
 import com.gildedgames.aether.common.entities.projectiles.EntityDart;

@@ -1,8 +1,7 @@
 package com.gildedgames.aether.common.entities.effects;
 
-import com.gildedgames.aether.api.effects_system.EEffectIntensity;
-import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
-import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.api.entity.effects.EEffectIntensity;
+import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.effects.PacketStatusEffect;
 import net.minecraft.entity.EntityLivingBase;
@@ -12,7 +11,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
 
 import java.util.Collection;
 

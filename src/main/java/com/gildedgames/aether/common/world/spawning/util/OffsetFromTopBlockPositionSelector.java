@@ -1,10 +1,10 @@
 package com.gildedgames.aether.common.world.spawning.util;
 
-import com.gildedgames.aether.api.world.PositionSelector;
+import com.gildedgames.aether.api.world.spawn.IPositionSelector;
 import com.gildedgames.orbis.lib.util.mc.BlockUtil;
 import net.minecraft.world.World;
 
-public class OffsetFromTopBlockPositionSelector implements PositionSelector
+public class OffsetFromTopBlockPositionSelector implements IPositionSelector
 {
 	private final int offset;
 

@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.init;
 
-import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstanceFactory;
-import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstanceHelper;
+import com.gildedgames.aether.common.world.instances.necromancer_tower.NecromancerTowerInstanceFactory;
+import com.gildedgames.aether.common.world.instances.necromancer_tower.NecromancerTowerInstanceHelper;
 import com.gildedgames.orbis.lib.OrbisLib;
 
 public class InstancesAether

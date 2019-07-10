@@ -1,13 +1,13 @@
 package com.gildedgames.aether.client.events.listeners.tooltip;
 
 import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.api.items.IItemProperties;
-import com.gildedgames.aether.api.items.ItemRarity;
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.api.items.equipment.effects.EffectInstance;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectFactory;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectPool;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
+import com.gildedgames.aether.api.items.properties.IItemProperties;
+import com.gildedgames.aether.api.items.properties.ItemRarity;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;

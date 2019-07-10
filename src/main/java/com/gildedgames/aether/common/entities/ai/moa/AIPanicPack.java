@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.entities.ai.moa;
 
-import com.gildedgames.aether.common.entities.util.EntityGroupMember;
+import com.gildedgames.aether.common.entities.util.groups.EntityGroupMember;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIPanic;
 

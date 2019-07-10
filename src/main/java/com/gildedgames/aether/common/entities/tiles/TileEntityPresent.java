@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.entities.tiles;
 
 import com.gildedgames.aether.common.items.blocks.ItemBlockPresent;
-import com.gildedgames.aether.common.items.misc.ItemWrappingPaper;
+import com.gildedgames.aether.common.items.other.ItemWrappingPaper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;

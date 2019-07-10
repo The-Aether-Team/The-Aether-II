@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.blocks.natural.leaves;
 
 import com.gildedgames.aether.common.blocks.natural.wood.BlockAetherLog;
-import com.gildedgames.aether.common.entities.living.passive.EntitySkyrootLizard;
+import com.gildedgames.aether.common.entities.animals.EntitySkyrootLizard;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

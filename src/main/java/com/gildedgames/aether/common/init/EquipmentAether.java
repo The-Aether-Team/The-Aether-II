@@ -1,17 +1,17 @@
 package com.gildedgames.aether.common.init;
 
 import com.gildedgames.aether.api.AetherAPI;
-import com.gildedgames.aether.api.damage_system.DamageTypeAttributes;
+import com.gildedgames.aether.api.entity.damage.DamageTypeAttributes;
 import com.gildedgames.aether.api.items.EffectActivator;
-import com.gildedgames.aether.api.items.ItemPropertiesBuilder;
-import com.gildedgames.aether.api.items.ItemRarity;
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
+import com.gildedgames.aether.api.items.properties.ItemPropertiesBuilder;
+import com.gildedgames.aether.api.items.properties.ItemRarity;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.capabilities.item.effects.*;
 import com.gildedgames.aether.common.capabilities.item.effects.CompanionEffectFactory.CompanionEffectProvider;
 import com.gildedgames.aether.common.capabilities.item.effects.stats.StatEffectFactory;
-import com.gildedgames.aether.common.entities.living.companions.EntityCompanion;
+import com.gildedgames.aether.common.entities.companions.EntityCompanion;
 import com.gildedgames.aether.common.items.companions.ItemCompanion;
 import net.minecraft.item.Item;
 
@@ -99,7 +99,7 @@ public class EquipmentAether
 
 		builder.withEffectActivators(effectActivators);
 
-		AetherAPI.content().items().registerItem(item, builder.build());
+		AetherAPI.content().items().registerItem(item, builder);
 	}
 
 	private static void createCompanionItem(final Item item, final ItemEquipmentSlot slot, final ItemRarity rarity,
@@ -117,6 +117,6 @@ public class EquipmentAether
 			builder.withEffect(provider);
 		}
 
-		AetherAPI.content().items().registerItem(item, builder.build());
+		AetherAPI.content().items().registerItem(item, builder);
 	}
 }

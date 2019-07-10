@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.init;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.world.aether.WorldProviderAether;
-import com.gildedgames.aether.common.world.necromancer_tower.WorldProviderNecromancerTower;
+import com.gildedgames.aether.common.world.WorldProviderAether;
+import com.gildedgames.aether.common.world.WorldProviderNecromancerTower;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.DimensionManager;
 

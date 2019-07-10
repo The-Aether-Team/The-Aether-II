@@ -1,12 +1,12 @@
 package com.gildedgames.aether.common.entities.ai.tempest;
 
-import com.gildedgames.aether.api.effects_system.EEffectIntensity;
-import com.gildedgames.aether.api.effects_system.IAetherStatusEffectIntensity;
-import com.gildedgames.aether.api.effects_system.IAetherStatusEffects;
+import com.gildedgames.aether.api.entity.effects.EEffectIntensity;
+import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectIntensity;
+import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.ai.EntityAI;
 import com.gildedgames.aether.common.entities.effects.StatusEffectStun;
-import com.gildedgames.aether.common.entities.living.mobs.EntityTempest;
+import com.gildedgames.aether.common.entities.monsters.EntityTempest;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;

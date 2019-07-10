@@ -2,8 +2,7 @@ package com.gildedgames.aether.common.items.consumables;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherDirt;
-import com.gildedgames.aether.common.entities.living.mobs.EntitySwet;
-import com.gildedgames.aether.common.items.misc.ItemAetherFood;
+import com.gildedgames.aether.common.entities.monsters.EntitySwet;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
