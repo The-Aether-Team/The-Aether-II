@@ -3,15 +3,16 @@ package com.gildedgames.aether.common.world.aether;
 import com.gildedgames.aether.api.world.IAetherChunkColumnInfo;
 import com.gildedgames.aether.api.world.islands.IIslandChunkColumnInfo;
 import com.gildedgames.aether.api.world.islands.IIslandData;
+import com.gildedgames.aether.api.world.preparation.IChunkMask;
+import com.gildedgames.aether.api.world.preparation.IChunkMaskTransformer;
 import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import com.gildedgames.aether.common.world.aether.chunk.AetherChunkColumnInfo;
+import com.gildedgames.aether.common.world.preparation.ChunkDataContainer;
+import com.gildedgames.aether.common.world.preparation.ChunkMask;
+import com.gildedgames.aether.common.world.util.BlockAccessChunkDataContainer;
 import com.gildedgames.orbis.lib.core.PlacedBlueprint;
 import com.gildedgames.orbis.lib.data.region.IRegion;
 import com.gildedgames.orbis.lib.data.region.Region;
-import com.gildedgames.orbis.lib.preparation.IChunkMaskTransformer;
-import com.gildedgames.orbis.lib.preparation.impl.ChunkDataContainer;
-import com.gildedgames.orbis.lib.preparation.impl.ChunkMask;
-import com.gildedgames.orbis.lib.processing.BlockAccessChunkDataContainer;
 import com.gildedgames.orbis.lib.processing.DataPrimer;
 import com.gildedgames.orbis.lib.util.random.XoRoShiRoRandom;
 import net.minecraft.entity.EnumCreatureType;
@@ -162,7 +163,7 @@ public class ChunkGeneratorAether implements IChunkGenerator
 		return null;
 	}
 
-	public void generateBaseTerrain(IAetherChunkColumnInfo info, ChunkMask mask, IIslandData islandData, int x, int z)
+	public void generateBaseTerrain(IAetherChunkColumnInfo info, IChunkMask mask, IIslandData islandData, int x, int z)
 	{
 		this.preparation.generateBaseTerrain(info, mask, islandData, x, z, this.world.getSeed());
 	}

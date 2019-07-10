@@ -11,7 +11,6 @@ import com.gildedgames.aether.common.world.aether.biomes.irradiated_forests.Irra
 import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.MagneticHillPillar;
 import com.gildedgames.aether.common.world.aether.biomes.magnetic_hills.MagneticHillsData;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandVariables;
-import com.gildedgames.aether.common.world.aether.prep.PrepAether;
 import com.gildedgames.aether.common.world.necromancer_tower.NecromancerTowerInstance;
 import com.gildedgames.orbis.lib.OrbisLib;
 import com.gildedgames.orbis.lib.util.io.IClassSerializer;
@@ -81,8 +80,6 @@ public class CommonProxy implements IAetherServices
 
 	public void init(final FMLInitializationEvent event)
 	{
-		OrbisLib.sectors().register(new PrepAether());
-
 		this.contentRegistry.init();
 
 		MinecraftForge.EVENT_BUS.register(AetherCore.CONFIG);

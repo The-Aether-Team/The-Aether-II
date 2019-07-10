@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.events.listeners;
 
 import com.gildedgames.aether.api.effects_system.IAetherStatusEffectPool;
 import com.gildedgames.aether.api.world.ISpawnSystem;
+import com.gildedgames.aether.api.world.preparation.IPrepRegistryEntry;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.effects.StatusEffectPool;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
@@ -12,6 +13,7 @@ import com.gildedgames.aether.common.capabilities.world.chunk.PlacementFlagProvi
 import com.gildedgames.aether.common.capabilities.world.precipitation.PrecipitationCapabilityProvider;
 import com.gildedgames.aether.common.capabilities.world.precipitation.PrecipitationManagerImpl;
 import com.gildedgames.aether.common.events.listeners.world.WorldTickListener;
+import com.gildedgames.aether.common.world.preparation.capability.PrepManagerStorageProvider;
 import com.gildedgames.aether.common.world.spawning.SpawnSystem;
 import com.gildedgames.aether.common.world.spawning.SpawnSystemProvider;
 import net.minecraft.entity.Entity;
@@ -83,5 +85,15 @@ public class CapabilityAttachListener
 		final ISpawnSystem spawnSystem = new SpawnSystem(world, WorldTickListener.getSpawnHandlers(world));
 
 		event.addCapability(AetherCore.getResource("SpawnSystem"), new SpawnSystemProvider(spawnSystem));
+
+		for (IPrepRegistryEntry entry : AetherCore.PROXY.content().prep().getEntries())
+		{
+			if (entry.shouldAttachTo(world))
+			{
+				event.addCapability(AetherCore.getResource("PrepManagerPool"), new PrepManagerStorageProvider(world, entry));
+
+				break;
+			}
+		}
 	}
 }

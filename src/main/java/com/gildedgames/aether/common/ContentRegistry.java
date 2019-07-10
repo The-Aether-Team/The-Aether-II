@@ -3,6 +3,7 @@ package com.gildedgames.aether.common;
 import com.gildedgames.aether.api.patron.PatronRewardRegistry;
 import com.gildedgames.aether.api.registrar.*;
 import com.gildedgames.aether.api.registry.IContentRegistry;
+import com.gildedgames.aether.api.world.preparation.IPrepRegistry;
 import com.gildedgames.aether.common.capabilities.CapabilityManagerAether;
 import com.gildedgames.aether.common.capabilities.item.EffectRegistry;
 import com.gildedgames.aether.common.containers.tab.TabRegistry;
@@ -20,6 +21,8 @@ import com.gildedgames.aether.common.shop.ShopManager;
 import com.gildedgames.aether.common.tab.guidebook.TabGuidebook;
 import com.gildedgames.aether.common.util.ObjectHolderHelper;
 import com.gildedgames.aether.common.util.helpers.PerfHelper;
+import com.gildedgames.aether.common.world.aether.prep.PrepAether;
+import com.gildedgames.aether.common.world.preparation.PrepRegistry;
 import com.gildedgames.aether.common.world.templates.TemplateRegistry;
 import com.gildedgames.orbis.lib.IOrbisServicesListener;
 import com.gildedgames.orbis.lib.OrbisLib;
@@ -57,6 +60,8 @@ public class ContentRegistry implements IContentRegistry, IOrbisServicesListener
 
 	private final ShopManager shopManager = new ShopManager(true);
 
+	private final IPrepRegistry prepRegistry = new PrepRegistry();
+
 	/**
 	 * Called when the game engine is initializing content.
 	 */
@@ -82,6 +87,8 @@ public class ContentRegistry implements IContentRegistry, IOrbisServicesListener
 	 */
 	public void init()
 	{
+		this.prepRegistry.register(new PrepAether());
+
 		PerfHelper.measure("Initialize blocks", BlocksAetherInit::init);
 		PerfHelper.measure("Initialize equipment", EquipmentAether::init);
 		PerfHelper.measure("Initialize capabilities", CapabilityManagerAether::init);
@@ -199,6 +206,12 @@ public class ContentRegistry implements IContentRegistry, IOrbisServicesListener
 	public PatronRewardRegistry patronRewards()
 	{
 		return this.patronRewardRegistry;
+	}
+
+	@Override
+	public IPrepRegistry prep()
+	{
+		return this.prepRegistry;
 	}
 
 	@Override

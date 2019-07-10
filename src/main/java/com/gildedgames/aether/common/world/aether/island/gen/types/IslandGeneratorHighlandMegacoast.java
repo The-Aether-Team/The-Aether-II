@@ -9,14 +9,14 @@ import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.api.world.noise.IChunkNoiseBuffer2D;
 import com.gildedgames.aether.api.world.noise.INoiseGenerator2D;
+import com.gildedgames.aether.api.world.preparation.IChunkMask;
+import com.gildedgames.aether.api.world.preparation.IChunkMaskTransformer;
 import com.gildedgames.aether.common.world.aether.chunk.ChunkDataGenerator2D;
 import com.gildedgames.aether.common.world.aether.chunk.NoiseSampleData2D;
 import com.gildedgames.aether.common.world.aether.island.gen.AbstractIslandChunkColumnInfo;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandChunkMaskTransformer;
 import com.gildedgames.aether.common.world.aether.noise.NoiseGeneratorIslandTerrain;
-import com.gildedgames.orbis.lib.preparation.IChunkMaskTransformer;
-import com.gildedgames.orbis.lib.preparation.impl.ChunkMask;
 
 public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 {
@@ -37,7 +37,7 @@ public class IslandGeneratorHighlandMegacoast implements IIslandGenerator
 	private static final double ISLAND_EDGE = 0.75;
 
 	@Override
-	public void generateChunkSegment(IAetherChunkColumnInfo info, ChunkMask mask, IIslandData island, int chunkX, int chunkZ)
+	public void generateChunkSegment(IAetherChunkColumnInfo info, IChunkMask mask, IIslandData island, int chunkX, int chunkZ)
 	{
 		HighlandMegacostChunkColumnInfo column = info.getIslandData(0, HighlandMegacostChunkColumnInfo.class);
 

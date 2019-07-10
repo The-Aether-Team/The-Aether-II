@@ -5,6 +5,10 @@ import com.gildedgames.aether.api.world.IAetherChunkColumnInfo;
 import com.gildedgames.aether.api.world.islands.IIslandBounds;
 import com.gildedgames.aether.api.world.islands.IIslandChunkColumnInfo;
 import com.gildedgames.aether.api.world.islands.IIslandData;
+import com.gildedgames.aether.api.world.preparation.IChunkMask;
+import com.gildedgames.aether.api.world.preparation.IChunkMaskTransformer;
+import com.gildedgames.aether.api.world.preparation.IPrepRegistryEntry;
+import com.gildedgames.aether.api.world.preparation.IPrepSectorData;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.init.BiomesAetherInit;
 import com.gildedgames.aether.common.init.DimensionsAether;
@@ -15,10 +19,6 @@ import com.gildedgames.aether.common.world.aether.island.data.BlockAccessIsland;
 import com.gildedgames.aether.common.world.aether.island.data.IslandBounds;
 import com.gildedgames.aether.common.world.aether.island.data.IslandData;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandChunkMaskTransformer;
-import com.gildedgames.orbis.lib.preparation.IChunkMaskTransformer;
-import com.gildedgames.orbis.lib.preparation.IPrepRegistryEntry;
-import com.gildedgames.orbis.lib.preparation.IPrepSectorData;
-import com.gildedgames.orbis.lib.preparation.impl.ChunkMask;
 import com.gildedgames.orbis.lib.util.random.XoRoShiRoRandom;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
@@ -120,7 +120,7 @@ public class PrepAether implements IPrepRegistryEntry<IAetherChunkColumnInfo>
 	}
 
 	@Override
-	public void threadSafeGenerateMask(IAetherChunkColumnInfo info, World world, IPrepSectorData sectorData, ChunkMask mask, int x, int z)
+	public void threadSafeGenerateMask(IAetherChunkColumnInfo info, World world, IPrepSectorData sectorData, IChunkMask mask, int x, int z)
 	{
 		IChunkGenerator generator = world.provider.createChunkGenerator();
 

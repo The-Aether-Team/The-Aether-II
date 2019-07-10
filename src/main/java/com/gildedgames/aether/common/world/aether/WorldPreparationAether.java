@@ -6,11 +6,12 @@ import com.gildedgames.aether.api.world.islands.IIslandChunkColumnInfo;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.api.world.noise.IChunkNoiseBuffer2D;
+import com.gildedgames.aether.api.world.preparation.IChunkMask;
 import com.gildedgames.aether.common.world.aether.biomes.arctic_peaks.BiomeArcticPeaks;
 import com.gildedgames.aether.common.world.aether.features.WorldGenUndergroundVeins;
 import com.gildedgames.aether.common.world.aether.features.caves.WorldGenAetherCaves;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
-import com.gildedgames.orbis.lib.preparation.impl.ChunkMask;
+import com.gildedgames.aether.common.world.preparation.ChunkMask;
 import com.gildedgames.orbis.lib.processing.BlockAccessExtendedWrapper;
 import com.gildedgames.orbis.lib.processing.IBlockAccessExtended;
 import net.minecraft.world.World;
@@ -87,7 +88,7 @@ public class WorldPreparationAether
 	}
 
 	// Calculate max penetration depth
-	private void replaceBiomeBlocks(IAetherChunkColumnInfo info, final ChunkMask mask, final byte[] heightmap)
+	private void replaceBiomeBlocks(IAetherChunkColumnInfo info, final IChunkMask mask, final byte[] heightmap)
 	{
 		IIslandChunkColumnInfo chunkInfo = info.getIslandData(0, IIslandChunkColumnInfo.class);
 
@@ -137,7 +138,7 @@ public class WorldPreparationAether
 		}
 	}
 
-	private byte[] createHeightmap(final ChunkMask mask)
+	private byte[] createHeightmap(final IChunkMask mask)
 	{
 		byte[] heightmap = new byte[256];
 
@@ -156,7 +157,7 @@ public class WorldPreparationAether
 		return heightmap;
 	}
 
-	public void generateBaseTerrain(IAetherChunkColumnInfo info, ChunkMask mask, IIslandData island, int chunkX, int chunkZ, long seed)
+	public void generateBaseTerrain(IAetherChunkColumnInfo info, IChunkMask mask, IIslandData island, int chunkX, int chunkZ, long seed)
 	{
 		island.getGenerator().generateChunkSegment(info, mask, island, chunkX, chunkZ);
 

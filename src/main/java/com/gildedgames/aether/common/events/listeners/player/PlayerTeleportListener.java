@@ -12,7 +12,7 @@ import com.gildedgames.aether.common.network.packets.PacketCloseLoadingScreen;
 import com.gildedgames.aether.common.network.packets.PacketLoadingScreenPercent;
 import com.gildedgames.aether.common.util.helpers.AetherHelper;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
-import com.gildedgames.orbis.lib.preparation.impl.util.PrepHelper;
+import com.gildedgames.aether.common.world.preparation.util.PrepHelper;
 import com.gildedgames.orbis.lib.util.mc.BlockPosDimension;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.player.EntityPlayer;

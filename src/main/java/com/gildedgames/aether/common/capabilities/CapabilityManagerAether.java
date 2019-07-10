@@ -6,11 +6,13 @@ import com.gildedgames.aether.api.entity.spawning.ISpawningInfo;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.world.ISpawnSystem;
 import com.gildedgames.aether.api.world.islands.precipitation.IPrecipitationManager;
+import com.gildedgames.aether.api.world.preparation.IPrepManager;
 import com.gildedgames.aether.common.capabilities.entity.effects.StatusEffectPool;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.spawning.EntitySpawningInfo;
 import com.gildedgames.aether.common.capabilities.world.chunk.PlacementFlagCapability;
 import com.gildedgames.aether.common.capabilities.world.precipitation.PrecipitationManagerImpl;
+import com.gildedgames.aether.common.world.preparation.capability.PrepManager;
 import com.gildedgames.aether.common.world.spawning.SpawnSystem;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.Mod;
@@ -26,5 +28,6 @@ public class CapabilityManagerAether
 		CapabilityManager.INSTANCE.register(IPlacementFlagCapability.class, new PlacementFlagCapability.Storage(), PlacementFlagCapability::new);
 		CapabilityManager.INSTANCE.register(IPrecipitationManager.class, new PrecipitationManagerImpl.Storage(), PrecipitationManagerImpl::new);
 		CapabilityManager.INSTANCE.register(IAetherStatusEffectPool.class, new StatusEffectPool.Storage(), StatusEffectPool::new);
+		CapabilityManager.INSTANCE.register(IPrepManager.class, new PrepManager.Storage(), PrepManager::new);
 	}
 }

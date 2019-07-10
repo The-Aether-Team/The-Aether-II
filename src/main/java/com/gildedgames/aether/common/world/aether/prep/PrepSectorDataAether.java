@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.world.aether.prep;
 
 import com.gildedgames.aether.api.world.islands.IIslandData;
+import com.gildedgames.aether.api.world.preparation.IPrepSectorData;
 import com.gildedgames.aether.common.world.aether.island.data.IslandData;
-import com.gildedgames.orbis.lib.preparation.IPrepSectorData;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 

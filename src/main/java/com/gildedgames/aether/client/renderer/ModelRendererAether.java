@@ -117,7 +117,7 @@ public class ModelRendererAether extends ModelRenderer
 				{
 					for (ModelRenderer childModel : this.childModels)
 					{
-						((ModelRendererAether) childModel).render(scale, false, this.callback == null && this.childModels.size() == 1);
+						((ModelRendererAether) childModel).render(scale, false, false);
 					}
 				}
 

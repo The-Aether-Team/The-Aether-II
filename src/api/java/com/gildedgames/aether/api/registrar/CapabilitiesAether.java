@@ -6,6 +6,7 @@ import com.gildedgames.aether.api.entity.spawning.ISpawningInfo;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.world.ISpawnSystem;
 import com.gildedgames.aether.api.world.islands.precipitation.IPrecipitationManager;
+import com.gildedgames.aether.api.world.preparation.IPrepManager;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 
@@ -28,4 +29,7 @@ public class CapabilitiesAether extends AbstractRegistrar
 
 	@CapabilityInject(IAetherStatusEffectPool.class)
 	public static final Capability<IAetherStatusEffectPool> STATUS_EFFECT_POOL = getDefault();
+
+	@CapabilityInject(IPrepManager.class)
+	public static final Capability<IPrepManager> PREP_MANAGER = getDefault();
 }

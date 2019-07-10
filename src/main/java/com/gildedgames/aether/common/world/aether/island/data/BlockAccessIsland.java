@@ -1,11 +1,11 @@
 package com.gildedgames.aether.common.world.aether.island.data;
 
 import com.gildedgames.aether.api.world.islands.IIslandData;
+import com.gildedgames.aether.api.world.preparation.IChunkMask;
+import com.gildedgames.aether.api.world.preparation.IPrepRegistryEntry;
+import com.gildedgames.aether.api.world.preparation.IPrepSectorData;
+import com.gildedgames.aether.common.world.preparation.util.BlockAccessPrep;
 import com.gildedgames.orbis.lib.core.PlacedBlueprint;
-import com.gildedgames.orbis.lib.preparation.IPrepRegistryEntry;
-import com.gildedgames.orbis.lib.preparation.IPrepSectorData;
-import com.gildedgames.orbis.lib.preparation.impl.ChunkMask;
-import com.gildedgames.orbis.lib.preparation.impl.util.BlockAccessPrep;
 import com.gildedgames.orbis.lib.util.mc.BlockUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -71,7 +71,7 @@ public class BlockAccessIsland extends BlockAccessPrep
 			}
 		}
 
-		ChunkMask chunk = this.getChunk(chunkX, chunkZ);
+		IChunkMask chunk = this.getChunk(chunkX, chunkZ);
 
 		return this.transformer.getBlockState(chunk.getBlock(pos.getX() & 15, pos.getY(), pos.getZ() & 15));
 	}

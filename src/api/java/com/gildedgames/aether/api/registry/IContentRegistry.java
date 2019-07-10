@@ -9,6 +9,7 @@ import com.gildedgames.aether.api.registry.tab.ITabRegistry;
 import com.gildedgames.aether.api.shop.ICurrencyRegistry;
 import com.gildedgames.aether.api.shop.IShopManager;
 import com.gildedgames.aether.api.world.generation.ITemplateRegistry;
+import com.gildedgames.aether.api.world.preparation.IPrepRegistry;
 
 /**
  * Provider for Aether content interfaces.
@@ -63,4 +64,6 @@ public interface IContentRegistry
 	ISimpleCraftingRegistry masonry();
 
 	PatronRewardRegistry patronRewards();
+
+	IPrepRegistry prep();
 }

@@ -1,10 +1,10 @@
 package com.gildedgames.aether.common.world.necromancer_tower;
 
 import com.gildedgames.aether.common.init.InstancesAether;
+import com.gildedgames.aether.common.world.preparation.ChunkDataContainer;
+import com.gildedgames.aether.common.world.util.BlockAccessChunkDataContainer;
 import com.gildedgames.orbis.lib.data.region.IRegion;
 import com.gildedgames.orbis.lib.data.region.Region;
-import com.gildedgames.orbis.lib.preparation.impl.ChunkDataContainer;
-import com.gildedgames.orbis.lib.processing.BlockAccessChunkDataContainer;
 import com.gildedgames.orbis.lib.processing.DataPrimer;
 import com.gildedgames.orbis.lib.util.random.XoRoShiRoRandom;
 import net.minecraft.entity.EnumCreatureType;

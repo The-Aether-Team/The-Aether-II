@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world.aether.features;
 
 import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
-import com.gildedgames.orbis.lib.preparation.impl.ChunkMask;
+import com.gildedgames.aether.common.world.preparation.ChunkMask;
 import com.gildedgames.orbis.lib.util.random.XoRoShiRoRandom;
 import net.minecraft.util.math.MathHelper;
 

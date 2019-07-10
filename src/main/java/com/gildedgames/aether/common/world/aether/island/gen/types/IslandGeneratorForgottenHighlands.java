@@ -7,13 +7,13 @@ import com.gildedgames.aether.api.world.islands.IIslandChunkColumnInfo;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.api.world.noise.IChunkNoiseBuffer3D;
+import com.gildedgames.aether.api.world.preparation.IChunkMask;
+import com.gildedgames.aether.api.world.preparation.IChunkMaskTransformer;
 import com.gildedgames.aether.common.world.aether.chunk.ChunkDataGenerator3D;
 import com.gildedgames.aether.common.world.aether.chunk.NoiseSampleData3D;
 import com.gildedgames.aether.common.world.aether.island.gen.AbstractIslandChunkColumnInfo;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandBlockType;
 import com.gildedgames.aether.common.world.aether.island.gen.IslandChunkMaskTransformer;
-import com.gildedgames.orbis.lib.preparation.IChunkMaskTransformer;
-import com.gildedgames.orbis.lib.preparation.impl.ChunkMask;
 
 import javax.annotation.Nonnull;
 
@@ -109,7 +109,7 @@ public class IslandGeneratorForgottenHighlands implements IIslandGenerator
 	}
 
 	@Override
-	public void generateChunkSegment(IAetherChunkColumnInfo info, ChunkMask mask, IIslandData island, int chunkX, int chunkZ)
+	public void generateChunkSegment(IAetherChunkColumnInfo info, IChunkMask mask, IIslandData island, int chunkX, int chunkZ)
 	{
 		ForgottenHighlandsColumnInfo column = info.getIslandData(0, ForgottenHighlandsColumnInfo.class);
 

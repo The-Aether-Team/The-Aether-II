@@ -1,11 +1,11 @@
 package com.gildedgames.aether.common.world.aether.biomes;
 
 import com.gildedgames.aether.api.registrar.BiomesAether;
+import com.gildedgames.aether.api.world.preparation.IPrepManager;
+import com.gildedgames.aether.api.world.preparation.IPrepSector;
+import com.gildedgames.aether.api.world.preparation.IPrepSectorAccess;
 import com.gildedgames.aether.common.world.aether.prep.PrepSectorDataAether;
-import com.gildedgames.orbis.lib.preparation.IPrepManager;
-import com.gildedgames.orbis.lib.preparation.IPrepSector;
-import com.gildedgames.orbis.lib.preparation.IPrepSectorAccess;
-import com.gildedgames.orbis.lib.preparation.impl.util.PrepHelper;
+import com.gildedgames.aether.common.world.preparation.util.PrepHelper;
 import com.google.common.collect.Lists;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

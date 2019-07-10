@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.world.aether.island.gen;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
+import com.gildedgames.aether.api.world.preparation.IChunkMaskTransformer;
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
-import com.gildedgames.orbis.lib.preparation.IChunkMaskTransformer;
-import com.gildedgames.orbis.lib.preparation.impl.ChunkMask;
+import com.gildedgames.aether.common.world.preparation.ChunkMask;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 
