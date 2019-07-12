@@ -2,9 +2,10 @@ package com.gildedgames.aether.api.registrar;
 
 import net.minecraft.block.Block;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.registries.ObjectHolder;
 
 @SuppressWarnings("SpellCheckingInspection")
-@GameRegistry.ObjectHolder("aether")
+@ObjectHolder("aether")
 public class BlocksAether extends AbstractRegistrar
 {
 	public static final Block aercloud = getDefault();

@@ -1,6 +1,6 @@
 package com.gildedgames.aether.api.world.islands;
 
-import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.INBT;
 
 public interface IIslandBounds
 {
@@ -104,7 +104,7 @@ public interface IIslandBounds
 	/**
 	 * Serializes this bounding box to NBT.
 	 *
-	 * @return A {@link NBTBase} representing this bounding box
+	 * @return A {@link INBT} representing this bounding box
 	 */
-	NBTBase serialize();
+	INBT serialize();
 }

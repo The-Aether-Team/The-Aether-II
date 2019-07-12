@@ -2,7 +2,7 @@ package com.gildedgames.aether.api.world.templates;
 
 import com.gildedgames.orbis.lib.processing.CenterOffsetProcessor;
 import com.google.common.collect.Lists;
-import net.minecraft.world.gen.structure.template.Template;
+import net.minecraft.world.gen.feature.template.Template;
 
 import java.util.List;
 

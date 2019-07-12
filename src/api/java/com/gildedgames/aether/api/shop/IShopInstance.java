@@ -1,7 +1,7 @@
 package com.gildedgames.aether.api.shop;
 
 import com.gildedgames.orbis.lib.util.mc.NBT;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
 
@@ -17,7 +17,7 @@ public interface IShopInstance extends NBT
 
 	void tick();
 
-	IInventory getInventory(EntityPlayer player);
+	IInventory getInventory(PlayerEntity player);
 
 	boolean isDirty();
 

@@ -2,26 +2,26 @@ package com.gildedgames.aether.api.util;
 
 import com.gildedgames.aether.api.world.templates.TemplateDefinition;
 import com.gildedgames.aether.api.world.templates.TemplateLoc;
-import com.gildedgames.orbis.lib.processing.IBlockAccessExtended;
+import com.gildedgames.orbis.lib.processing.IBlockAccess;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraft.world.gen.structure.StructureBoundingBox;
+import net.minecraft.util.math.MutableBoundingBox;
 
 import java.util.Random;
 
 public class TemplateUtil
 {
 
-	public static StructureBoundingBox getBoundingBoxFromTemplate(final TemplateDefinition def, final TemplateLoc loc)
+	public static MutableBoundingBox getBoundingBoxFromTemplate(final TemplateDefinition def, final TemplateLoc loc)
 	{
 		final Rotation rotation = loc.getSettings().getRotation();
 		final BlockPos size = def.getTemplate().transformedSize(rotation);
 
-		final StructureBoundingBox bb = new StructureBoundingBox(0, 0, 0, size.getX(), size.getY() - 1, size.getZ());
+		final MutableBoundingBox bb = new MutableBoundingBox(0, 0, 0, size.getX(), size.getY() - 1, size.getZ());
 
 		switch (rotation)
 		{
@@ -83,7 +83,7 @@ public class TemplateUtil
 
 	public static ChunkPos[] getChunksInsideTemplate(final TemplateDefinition template, final TemplateLoc loc)
 	{
-		final StructureBoundingBox bb = TemplateUtil.getBoundingBoxFromTemplate(template, loc);
+		final MutableBoundingBox bb = TemplateUtil.getBoundingBoxFromTemplate(template, loc);
 
 		final int startChunkX = bb.minX >> 4;
 		final int startChunkY = bb.minZ >> 4;
@@ -114,12 +114,11 @@ public class TemplateUtil
 		return material == Material.AIR || material == Material.LEAVES || material == Material.PLANTS || material == Material.SNOW;
 	}
 
-	public static boolean isReplaceable(final IBlockAccessExtended world, final BlockPos pos)
+	public static boolean isReplaceable(final IBlockAccess world, final BlockPos pos)
 	{
-		final IBlockState state = world.getBlockState(pos);
+		final BlockState state = world.getBlockState(pos);
 
-		return state.getBlock().isAir(state, world, pos) || state.getBlock().isLeaves(state, world, pos)
-				|| TemplateUtil.canGrowInto(state.getBlock());
+		return state.getBlock().isAir(state, world, pos) || TemplateUtil.canGrowInto(state.getBlock());
 	}
 
 	@SafeVarargs

@@ -2,10 +2,10 @@ package com.gildedgames.aether.api.entity.effects;
 
 import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.orbis.lib.util.mc.NBT;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nullable;
@@ -20,14 +20,14 @@ public interface IAetherStatusEffects extends NBT
 	 * Handle's applying and managing effects and reducing buildup.
 	 * @param livingBase EntityLivingBase being updated.
 	 */
-	void tick(EntityLivingBase livingBase);
+	void tick(LivingEntity livingBase);
 
 	/**
 	 * Apply the status effect.
 	 * @param livingBase EntityLivingBase to apply effect to.
 	 * @param timer Current state of the timer.
 	 */
-	void applyEffect(EntityLivingBase livingBase, int timer);
+	void applyEffect(LivingEntity livingBase, int timer);
 
 	/**
 	 * Called when the effect ends/wears off.
@@ -100,7 +100,7 @@ public interface IAetherStatusEffects extends NBT
 	 * Add information about the effect (it's name) from lang file, to provided collection.
 	 * @param label Collection to add information too.
 	 */
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	void addInformation(Collection<String> label);
 
 	/**
@@ -115,44 +115,25 @@ public interface IAetherStatusEffects extends NBT
 	 * @param livingBase living to apply effect buildup to.
 	 * @param effectType effect to apply buildup for.
 	 * @param buildup amount of buildup to add.
-	 * @return boolean if successful.
 	 */
-	static boolean applyStatusEffect(EntityLivingBase livingBase, effectTypes effectType, @Nonnegative int buildup)
+	static void applyStatusEffect(LivingEntity livingBase, effectTypes effectType, @Nonnegative int buildup)
 	{
-		IAetherStatusEffectPool effects = livingBase.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
-
-		if (effects != null)
-		{
-			effects.applyStatusEffect(effectType, buildup);
-
-			return true;
-		}
-
-		return false;
+		livingBase.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null)
+				.ifPresent((effects) -> effects.applyStatusEffect(effectType, buildup));
 	}
 
-	static boolean isEffectApplying(EntityLivingBase livingBase, effectTypes effectType)
+	static boolean isEffectApplying(LivingEntity livingBase, effectTypes effectType)
 	{
-		IAetherStatusEffectPool effects = livingBase.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
-
-		if (effects != null)
-		{
-			return effects.isEffectApplied(effectType);
-		}
-
-		return false;
+		return livingBase.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null)
+				.map((effects) -> effects.isEffectApplied(effectType))
+				.orElse(false);
 	}
 
-	static boolean doesEffectHaveBuildup(EntityLivingBase livingBase, effectTypes effectType)
+	static boolean doesEffectHaveBuildup(LivingEntity livingBase, effectTypes effectType)
 	{
-		IAetherStatusEffectPool effects = livingBase.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
-
-		if (effects != null)
-		{
-			return effects.getBuildupFromEffect(effectType) > 0;
-		}
-
-		return false;
+		return livingBase.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null)
+				.map((effects) -> effects.getBuildupFromEffect(effectType) > 0)
+				.orElse(false);
 	}
 
 	boolean isDirty();

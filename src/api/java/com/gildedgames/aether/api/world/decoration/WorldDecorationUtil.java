@@ -5,7 +5,6 @@ import com.gildedgames.orbis.lib.world.WorldSlice;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
-import net.minecraftforge.event.terraingen.TerrainGen;
 
 import java.util.List;
 import java.util.Random;
@@ -23,7 +22,7 @@ public class WorldDecorationUtil
 		{
 			for (int count = 0; count < decoration.getGenerationCount(); count++)
 			{
-				if (decoration.shouldGenerate(rand) && TerrainGen.decorate(world, rand, chunkPos, decoration.getDecorateType()))
+				if (decoration.shouldGenerate(rand)/* && TerrainGen.decorate(world, rand, chunkPos, decoration.getDecorateType())*/)
 				{
 					final BlockPos placeAt = decoration.findPositionToPlace(world, rand, pos);
 
@@ -44,7 +43,7 @@ public class WorldDecorationUtil
 		{
 			for (int count = 0; count < decoration.getGenerationCount() * clumpedDecorationCountModifier; count++)
 			{
-				if (decoration.shouldGenerate(rand) && TerrainGen.decorate(world, rand, chunkPos, decoration.getDecorateType()))
+				if (decoration.shouldGenerate(rand)/* && TerrainGen.decorate(world, rand, chunkPos, decoration.getDecorateType())*/)
 				{
 					final BlockPos placeAt = decoration.findPositionToPlace(world, rand, pos);
 

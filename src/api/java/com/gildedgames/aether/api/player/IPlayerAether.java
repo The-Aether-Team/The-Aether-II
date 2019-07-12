@@ -1,7 +1,7 @@
 package com.gildedgames.aether.api.player;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 
 import javax.annotation.Nonnull;
 
@@ -12,9 +12,9 @@ import javax.annotation.Nonnull;
 public interface IPlayerAether
 {
 	/**
-	 * @return The {@link EntityPlayer} entity this capability belongs to.
+	 * @return The {@link PlayerEntity} entity this capability belongs to.
 	 */
-	EntityPlayer getEntity();
+	PlayerEntity getEntity();
 
 	void registerModule(@Nonnull IPlayerAetherModule module);
 
@@ -28,13 +28,13 @@ public interface IPlayerAether
 
 	/**
 	 * Writes this capability to {@param tag}.
-	 * @param tag The {@link NBTTagCompound} to write to
+	 * @param tag The {@link CompoundNBT} to write to
 	 */
-	void write(NBTTagCompound tag);
+	void write(CompoundNBT tag);
 
 	/**
 	 * Updates this capability from {@param tag}.
-	 * @param tag The {@link NBTTagCompound} to read from
+	 * @param tag The {@link CompoundNBT} to read from
 	 */
-	void read(NBTTagCompound tag);
+	void read(CompoundNBT tag);
 }

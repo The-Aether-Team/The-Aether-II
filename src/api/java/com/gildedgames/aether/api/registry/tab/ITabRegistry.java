@@ -1,6 +1,6 @@
 package com.gildedgames.aether.api.registry.tab;
 
-import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.screen.Screen;
 
 import java.util.Map;
 
@@ -8,7 +8,7 @@ public interface ITabRegistry
 {
 	/**
 	 * This method is used to register a {@link ITabGroupHandler} to the {@link ITabRegistry}. A registered {@link ITabGroupHandler} will be rendered
-	 * onto the associated {@link GuiScreen}s and all functionality will be handled by the {@link ITabRegistry}. Note that if a
+	 * onto the associated {@link Screen}s and all functionality will be handled by the {@link ITabRegistry}. Note that if a
 	 * {@link ITabGroupHandler} is not registered, it will not function in-game.
 	 * @param tabGroup The {@link ITabGroupHandler} you'd like to register to the {@link ITabRegistry}
 	 */

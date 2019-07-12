@@ -4,62 +4,62 @@ import com.gildedgames.aether.api.shop.IShopInstance;
 import com.gildedgames.aether.api.shop.IShopInstanceGroup;
 import com.gildedgames.aether.api.world.IWorldObjectHoverable;
 import com.gildedgames.orbis.lib.util.io.NBTFunnel;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.EntityMountEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import javax.annotation.Nullable;
 
-public abstract class EntityCharacter extends EntityCreature implements Character, IWorldObjectHoverable
+public abstract class EntityCharacter extends CreatureEntity implements Character, IWorldObjectHoverable
 {
-	private static final DataParameter<NBTTagCompound> SHOP_INSTANCE_GROUP_TAG = new DataParameter<>(16, DataSerializers.COMPOUND_TAG);
+	private static final DataParameter<CompoundNBT> SHOP_INSTANCE_GROUP_TAG = new DataParameter<>(16, DataSerializers.COMPOUND_NBT);
 
 	private IShopInstanceGroup shopInstanceGroup;
 
 	private boolean startupSynced;
 
-	private NBTTagCompound prevShopInstanceTag;
+	private CompoundNBT prevShopInstanceTag;
 
-	public EntityCharacter(final World worldIn)
+	public EntityCharacter(final EntityType<? extends EntityCharacter> type, final World worldIn)
 	{
-		super(worldIn);
+		super(type, worldIn);
 
-		this.isImmuneToFire = true;
 		this.shopInstanceGroup = this.createShopInstanceGroup();
 	}
 
 	@Override
-	public boolean isEntityInvulnerable(final DamageSource source)
+	public boolean isInvulnerableTo(final DamageSource source)
 	{
 		return !source.canHarmInCreative();
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public boolean canRenderOnFire()
 	{
 		return false;
 	}
 
 	@Override
-	protected boolean canDespawn()
+	public boolean canDespawn(double distance)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean canBeLeashedTo(final EntityPlayer player)
+	public boolean canBeLeashedTo(final PlayerEntity player)
 	{
 		return false;
 	}
@@ -67,22 +67,22 @@ public abstract class EntityCharacter extends EntityCreature implements Characte
 	@Nullable
 	public abstract IShopInstanceGroup createShopInstanceGroup();
 
-	public NBTTagCompound getShopInstanceGroupTag()
+	public CompoundNBT getShopInstanceGroupTag()
 	{
 		return this.dataManager.get(SHOP_INSTANCE_GROUP_TAG);
 	}
 
-	public void setShopInstanceGroupTag(NBTTagCompound tag)
+	public void setShopInstanceGroupTag(CompoundNBT tag)
 	{
 		this.dataManager.set(SHOP_INSTANCE_GROUP_TAG, tag);
 	}
 
 	@Override
-	protected void entityInit()
+	protected void registerData()
 	{
-		super.entityInit();
+		super.registerData();
 
-		this.dataManager.register(SHOP_INSTANCE_GROUP_TAG, new NBTTagCompound());
+		this.dataManager.register(SHOP_INSTANCE_GROUP_TAG, new CompoundNBT());
 	}
 
 	@Override
@@ -91,7 +91,7 @@ public abstract class EntityCharacter extends EntityCreature implements Characte
 		return this.shopInstanceGroup;
 	}
 
-	private void onClientUpdate()
+	private void onClientLivingTick()
 	{
 		if (this.getShopInstanceGroup() != null)
 		{
@@ -104,7 +104,7 @@ public abstract class EntityCharacter extends EntityCreature implements Characte
 		}
 	}
 
-	private void onServerUpdate()
+	private void onServerLivingTick()
 	{
 		if (this.getShopInstanceGroup() != null)
 		{
@@ -118,7 +118,7 @@ public abstract class EntityCharacter extends EntityCreature implements Characte
 					{
 						this.startupSynced = true;
 
-						NBTTagCompound tag = new NBTTagCompound();
+						CompoundNBT tag = new CompoundNBT();
 						this.getShopInstanceGroup().write(tag);
 
 						this.setShopInstanceGroupTag(tag);
@@ -131,34 +131,34 @@ public abstract class EntityCharacter extends EntityCreature implements Characte
 	}
 
 	@Override
-	public void onUpdate()
+	public void livingTick()
 	{
-		super.onUpdate();
+		super.livingTick();
 
 		if (!this.world.isRemote)
 		{
-			this.onServerUpdate();
+			this.onServerLivingTick();
 		}
 		else
 		{
-			this.onClientUpdate();
+			this.onClientLivingTick();
 		}
 	}
 
 	@Override
-	public void writeEntityToNBT(final NBTTagCompound compound)
+	public CompoundNBT serializeNBT()
 	{
-		super.writeEntityToNBT(compound);
+		CompoundNBT nbt = super.serializeNBT();
 
-		NBTFunnel funnel = new NBTFunnel(compound);
+		new NBTFunnel(nbt).set("shopInstanceGroup", this.shopInstanceGroup);
 
-		funnel.set("shopInstanceGroup", this.shopInstanceGroup);
+		return nbt;
 	}
 
 	@Override
-	public void readEntityFromNBT(final NBTTagCompound compound)
+	public void deserializeNBT(final CompoundNBT compound)
 	{
-		super.readEntityFromNBT(compound);
+		super.deserializeNBT(compound);
 
 		NBTFunnel funnel = new NBTFunnel(compound);
 
@@ -168,7 +168,7 @@ public abstract class EntityCharacter extends EntityCreature implements Characte
 	@Override
 	public ITextComponent getHoverText(World world, RayTraceResult result)
 	{
-		return new TextComponentTranslation("gui.aether.hover.npc", this.getName());
+		return new TranslationTextComponent("gui.aether.hover.npc", this.getName());
 	}
 
 	@SubscribeEvent

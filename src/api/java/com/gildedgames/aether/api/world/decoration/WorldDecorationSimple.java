@@ -2,7 +2,7 @@ package com.gildedgames.aether.api.world.decoration;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType;
+import net.minecraftforge.event.terraingen.WorldTypeEvent;
 
 import java.util.Random;
 
@@ -15,15 +15,11 @@ public class WorldDecorationSimple implements WorldDecoration
 
 	private final float percentRequired;
 
-	private final EventType decorateType;
-
 	private final WorldDecorationPositioner positioner;
 
-	public WorldDecorationSimple(final int count, final float percentRequired, EventType decorateType,
+	public WorldDecorationSimple(final int count, final float percentRequired,
 			WorldDecorationPositioner positioner, final WorldDecorationGenerator... generators)
 	{
-		this.decorateType = decorateType;
-
 		for (final WorldDecorationGenerator generator : generators)
 		{
 			if (generator == null)
@@ -36,12 +32,6 @@ public class WorldDecorationSimple implements WorldDecoration
 		this.generators = generators;
 		this.percentRequired = percentRequired;
 		this.positioner = positioner;
-	}
-
-	@Override
-	public EventType getDecorateType()
-	{
-		return this.decorateType;
 	}
 
 	@Override

@@ -1,11 +1,11 @@
 package com.gildedgames.aether.api.registry.tab;
 
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.entity.player.PlayerEntity;
 
 /**
  * This is the interface you should use to construct a Tab and its functionality. With two or more {@link ITab}s,
- * you can develop a whole {@link ITabGroupHandler} to link to a {@link GuiScreen}'s interface.
+ * you can develop a whole {@link ITabGroupHandler} to link to a {@link Screen}'s interface.
  * @author Brandon Pearce
  */
 public interface ITab
@@ -21,7 +21,7 @@ public interface ITab
 	 * Called when the player selects this {@link ITab} within its parent {@link ITabGroupHandler}. This includes
 	 * when the {@link ITabGroupHandler} is opened up again and this {@link ITab} was its last-remembered tab.
 	 */
-	void onOpen(EntityPlayer player);
+	void onOpen(PlayerEntity player);
 
 	/**
 	 * When an {@link ITab} is enabled, it will render as normal within its parent {@link ITabGroupHandler}. However,

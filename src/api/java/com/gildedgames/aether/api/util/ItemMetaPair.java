@@ -11,7 +11,7 @@ public class ItemMetaPair
 
 	public ItemMetaPair(ItemStack stack)
 	{
-		this(stack.getItem(), stack.isItemStackDamageable() ? stack.getItemDamage() : 0);
+		this(stack.getItem(), stack.isDamageable() ? stack.getDamage() : 0);
 	}
 
 	public ItemMetaPair(Item item, int meta)

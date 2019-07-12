@@ -2,8 +2,8 @@ package com.gildedgames.aether.api.patron;
 
 import com.gildedgames.aether.api.net.data.UserFeatures;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public interface IPatronReward
 {
@@ -21,7 +21,7 @@ public interface IPatronReward
 
 	void onRemove();
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	IPatronRewardRenderer getPreviewRenderer();
 
 }

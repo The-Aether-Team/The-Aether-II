@@ -1,10 +1,10 @@
 package com.gildedgames.aether.api.world.spawn;
 
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraftforge.common.util.INBTSerializable;
 
-public interface ISpawnArea extends INBTSerializable<NBTTagCompound>
+public interface ISpawnArea extends INBTSerializable<CompoundNBT>
 {
 	ChunkPos getMinChunkPos();
 

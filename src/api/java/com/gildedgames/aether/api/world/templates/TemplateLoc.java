@@ -2,10 +2,10 @@ package com.gildedgames.aether.api.world.templates;
 
 import com.gildedgames.orbis.lib.util.mc.NBT;
 import com.gildedgames.orbis.lib.util.mc.NBTHelper;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.gen.structure.template.PlacementSettings;
+import net.minecraft.world.gen.feature.template.PlacementSettings;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -20,11 +20,12 @@ public class TemplateLoc implements NBT
 
 	public TemplateLoc()
 	{
-		this.pos = BlockPos.ORIGIN;
-		this.settings = new PlacementSettings().setMirror(Mirror.NONE).setIgnoreEntities(false).setIgnoreStructureBlock(false);
+		this.pos = BlockPos.ZERO;
+		// TODO: 1.14 - Flag is no longer available
+		this.settings = new PlacementSettings().setMirror(Mirror.NONE).setIgnoreEntities(false)/*.setIgnoreStructureBlock(false)*/;
 	}
 
-	public TemplateLoc(final NBTTagCompound tag)
+	public TemplateLoc(final CompoundNBT tag)
 	{
 		this.read(tag);
 	}
@@ -106,23 +107,24 @@ public class TemplateLoc implements NBT
 	}
 
 	@Override
-	public void write(final NBTTagCompound tag)
+	public void write(final CompoundNBT tag)
 	{
-		tag.setTag("pos", NBTHelper.writeBlockPos(this.pos));
+		tag.put("pos", NBTHelper.writeBlockPos(this.pos));
 
 		//TODO: Write settings somehow
 
-		tag.setBoolean("isCentered", this.isCentered);
+		tag.putBoolean("isCentered", this.isCentered);
 	}
 
 	@Override
-	public void read(final NBTTagCompound tag)
+	public void read(final CompoundNBT tag)
 	{
-		this.pos = NBTHelper.readBlockPos(tag.getCompoundTag("pos"));
+		this.pos = NBTHelper.readBlockPos(tag.getCompound("pos"));
 
 		//TODO: Read settings back instead of creating new settings
 
-		this.settings = new PlacementSettings().setMirror(Mirror.NONE).setIgnoreEntities(false).setIgnoreStructureBlock(false);
+		// TODO: 1.14 - Flag is no longer available
+		this.settings = new PlacementSettings().setMirror(Mirror.NONE).setIgnoreEntities(false)/*.setIgnoreStructureBlock(false)*/;
 
 		this.isCentered = tag.getBoolean("isCentered");
 	}

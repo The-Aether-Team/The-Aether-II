@@ -1,8 +1,8 @@
 package com.gildedgames.aether.api.items.equipment.effects;
 
 import com.gildedgames.aether.api.player.IPlayerAether;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.api.distmarker.Dist;
 
 import java.util.Collection;
 
@@ -50,6 +50,6 @@ public abstract class EffectInstance
 	 *
 	 * @param label The {@link Collection} to add to
 	 */
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public abstract void addInformation(Collection<String> label);
 }

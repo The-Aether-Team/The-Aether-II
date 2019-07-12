@@ -1,7 +1,7 @@
 package com.gildedgames.aether.api.registry.tab;
 
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.inventory.Container;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.inventory.container.Container;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ public interface ITabGroup<T extends ITab>
 
 	/**
 	 * This adds an {@link ITab} to this {@link ITabGroupHandler}, allowing it to render. If this {@link ITabGroupHandler} only
-	 * contains one {@link ITab}, it will not render over the {@link GuiScreen} interface.
+	 * contains one {@link ITab}, it will not render over the {@link Screen} interface.
 	 * @param tab The {@link ITab} you'd like added to this {@link ITabGroupHandler}
 	 */
 	void add(T tab);
@@ -46,14 +46,14 @@ public interface ITabGroup<T extends ITab>
 	void setRememberSelectedTab(boolean rememberSelectedTab);
 
 	/**
-	 * The selected {@link ITab} in a {@link ITabGroupHandler} will display its associated {@link GuiScreen}
+	 * The selected {@link ITab} in a {@link ITabGroupHandler} will display its associated {@link Screen}
 	 * and {@link Container} to the player.
 	 * @return The selected {@link ITab} in this {@link ITabGroupHandler}
 	 */
 	T getSelectedTab();
 
 	/**
-	 * The selected {@link ITab} in a {@link ITabGroupHandler} will display its associated {@link GuiScreen}
+	 * The selected {@link ITab} in a {@link ITabGroupHandler} will display its associated {@link Screen}
 	 * and {@link Container} to the player.
 	 * @param tab The {@link ITab} you'd like selected within this {@link ITabGroupHandler}
 	 */

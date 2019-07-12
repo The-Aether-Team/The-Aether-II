@@ -2,15 +2,11 @@ package com.gildedgames.aether.api.world.decoration;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 
 import java.util.Random;
 
 public interface WorldDecoration
 {
-
-	DecorateBiomeEvent.Decorate.EventType getDecorateType();
-
 	boolean shouldGenerate(Random random);
 
 	/**

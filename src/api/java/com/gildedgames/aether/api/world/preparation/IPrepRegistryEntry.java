@@ -1,6 +1,6 @@
 package com.gildedgames.aether.api.world.preparation;
 
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
@@ -24,7 +24,7 @@ public interface IPrepRegistryEntry<T>
 
 	IPrepSectorData createData(World world, long seed, int sectorX, int sectorY);
 
-	IPrepSectorData createDataAndRead(World world, NBTTagCompound tag);
+	IPrepSectorData createDataAndRead(World world, CompoundNBT tag);
 
 	void threadSafeGenerateMask(T info, World world, IPrepSectorData sectorData, IChunkMask mask, int x, int z);
 

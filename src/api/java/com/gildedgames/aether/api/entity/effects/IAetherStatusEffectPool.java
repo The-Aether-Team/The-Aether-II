@@ -1,6 +1,6 @@
 package com.gildedgames.aether.api.entity.effects;
 
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 
 import javax.annotation.Nonnegative;
 import java.util.HashMap;
@@ -88,7 +88,7 @@ public interface IAetherStatusEffectPool
 	 */
 	void cureAllActiveEffects();
 
-	IAetherStatusEffects createEffect(String name, EntityLivingBase entity);
+	IAetherStatusEffects createEffect(String name, LivingEntity entity);
 
 	HashMap<String, IAetherStatusEffects> getPool();
 }

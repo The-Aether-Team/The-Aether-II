@@ -1,7 +1,7 @@
 package com.gildedgames.aether.api.dialog;
 
 import com.gildedgames.aether.api.entity.EntityCharacter;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
@@ -21,7 +21,7 @@ public interface IDialogController
 	 */
 	boolean conditionsMet(IDialogButton button);
 
-	EntityPlayer getDialogPlayer();
+	PlayerEntity getDialogPlayer();
 
 	@Nullable
 	EntityCharacter getTalkingCharacter();

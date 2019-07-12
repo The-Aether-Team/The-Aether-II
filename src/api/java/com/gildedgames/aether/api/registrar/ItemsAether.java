@@ -2,8 +2,9 @@ package com.gildedgames.aether.api.registrar;
 
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.registries.ObjectHolder;
 
-@GameRegistry.ObjectHolder("aether")
+@ObjectHolder("aether")
 public class ItemsAether extends AbstractRegistrar
 {
 	public static final Item aechor_petal = getDefault();

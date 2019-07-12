@@ -4,7 +4,7 @@ import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.util.TemplateUtil;
 import com.gildedgames.orbis.lib.util.mc.NBT;
 import com.gildedgames.orbis.lib.util.mc.NBTHelper;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.math.ChunkPos;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -30,7 +30,7 @@ public class TemplateInstance implements NBT
 		this.chunksOccupied = TemplateUtil.getChunksInsideTemplate(this.getDef(), this.getLoc());
 	}
 
-	public TemplateInstance(final NBTTagCompound tag)
+	public TemplateInstance(final CompoundNBT tag)
 	{
 		this.read(tag);
 
@@ -99,18 +99,18 @@ public class TemplateInstance implements NBT
 	}
 
 	@Override
-	public void write(final NBTTagCompound tag)
+	public void write(final CompoundNBT tag)
 	{
-		tag.setInteger("id", this.templateID);
-		tag.setTag("loc", NBTHelper.writeRaw(this.loc));
-		tag.setBoolean("hasGeneratedAChunk", this.hasGeneratedAChunk);
+		tag.putInt("id", this.templateID);
+		tag.put("loc", NBTHelper.writeRaw(this.loc));
+		tag.putBoolean("hasGeneratedAChunk", this.hasGeneratedAChunk);
 	}
 
 	@Override
-	public void read(final NBTTagCompound tag)
+	public void read(final CompoundNBT tag)
 	{
-		this.def = AetherAPI.content().templates().get(tag.getInteger("id"));
-		this.loc = new TemplateLoc(tag.getCompoundTag("loc"));
+		this.def = AetherAPI.content().templates().get(tag.getInt("id"));
+		this.loc = new TemplateLoc(tag.getCompound("loc"));
 		this.hasGeneratedAChunk = tag.getBoolean("hasGeneratedAChunk");
 	}
 }
