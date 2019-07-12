@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.init;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.world.WorldProviderAether;
 import com.gildedgames.aether.common.world.WorldProviderNecromancerTower;
-import net.minecraft.world.DimensionType;
+import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.common.DimensionManager;
 
 public class DimensionsAether

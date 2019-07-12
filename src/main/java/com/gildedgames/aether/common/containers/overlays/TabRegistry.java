@@ -5,13 +5,13 @@ import com.gildedgames.aether.api.registry.tab.ITabGroupHandler;
 import com.gildedgames.aether.api.registry.tab.ITabRegistry;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.containers.overlays.tabs.TabBackpack;
-import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.screen.Screen;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * This is used to implement Tab functionality within various {@link GuiScreen} interfaces.
+ * This is used to implement Tab functionality within various {@link Screen} interfaces.
  * @author Brandon Pearce
  */
 public class TabRegistry implements ITabRegistry

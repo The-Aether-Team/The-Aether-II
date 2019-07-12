@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.entities.tiles;
 
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.block.BlockState;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -11,7 +11,7 @@ public abstract class TileEntitySynced extends TileEntity
 
 	public void sendUpdatesToClients()
 	{
-		IBlockState state = this.world.getBlockState(this.pos);
+		BlockState state = this.world.getBlockState(this.pos);
 
 		this.world.notifyBlockUpdate(this.pos, state, state, 3);
 
@@ -19,9 +19,9 @@ public abstract class TileEntitySynced extends TileEntity
 	}
 
 	@Override
-	public NBTTagCompound getUpdateTag()
+	public CompoundNBT getUpdateTag()
 	{
-		NBTTagCompound tag = super.getUpdateTag();
+		CompoundNBT tag = super.getUpdateTag();
 
 		this.writeToNBT(tag);
 
@@ -31,7 +31,7 @@ public abstract class TileEntitySynced extends TileEntity
 	@Override
 	public SPacketUpdateTileEntity getUpdatePacket()
 	{
-		NBTTagCompound compound = this.getUpdateTag();
+		CompoundNBT compound = this.getUpdateTag();
 
 		return new SPacketUpdateTileEntity(this.pos, 1, compound);
 	}

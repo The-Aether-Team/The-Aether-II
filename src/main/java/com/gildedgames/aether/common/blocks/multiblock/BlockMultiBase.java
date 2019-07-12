@@ -2,20 +2,20 @@ package com.gildedgames.aether.common.blocks.multiblock;
 
 import com.gildedgames.aether.api.world.IWorldObjectHoverable;
 import com.gildedgames.aether.common.entities.tiles.multiblock.ITileEntityMultiblock;
-import net.minecraft.block.BlockContainer;
+import net.minecraft.block.ContainerBlock;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 
-public abstract class BlockMultiBase extends BlockContainer implements IWorldObjectHoverable
+public abstract class BlockMultiBase extends ContainerBlock implements IWorldObjectHoverable
 {
 	public BlockMultiBase(Material material)
 	{
@@ -23,7 +23,7 @@ public abstract class BlockMultiBase extends BlockContainer implements IWorldObj
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing,
+	public boolean onBlockActivated(World worldIn, BlockPos pos, BlockState state, PlayerEntity playerIn, Hand hand, Direction facing,
 			float hitX, float hitY, float hitZ)
 	{
 		if (worldIn.isRemote)
@@ -42,7 +42,7 @@ public abstract class BlockMultiBase extends BlockContainer implements IWorldObj
 	}
 
 	@Override
-	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+	public void breakBlock(World worldIn, BlockPos pos, BlockState state)
 	{
 		TileEntity te = worldIn.getTileEntity(pos);
 
@@ -57,7 +57,7 @@ public abstract class BlockMultiBase extends BlockContainer implements IWorldObj
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(BlockState state)
 	{
 		return false;
 	}
@@ -66,7 +66,7 @@ public abstract class BlockMultiBase extends BlockContainer implements IWorldObj
 	public abstract TileEntity createNewTileEntity(World worldIn, int meta);
 
 	@Override
-	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
+	public ItemStack getPickBlock(BlockState state, RayTraceResult target, World world, BlockPos pos, PlayerEntity player)
 	{
 		TileEntity te = world.getTileEntity(pos);
 

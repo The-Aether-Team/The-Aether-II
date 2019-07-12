@@ -4,7 +4,7 @@ import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.world.decoration.WorldDecorationGenerator;
 import com.gildedgames.orbis.lib.util.ArrayHelper;
 import com.gildedgames.orbis.lib.world.WorldSlice;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 
 import java.util.Random;
@@ -13,19 +13,19 @@ import java.util.function.Function;
 public class WorldGenCaveFloorPlacer implements WorldDecorationGenerator
 {
 
-	private final Function<Random, IBlockState> statesToPlace;
+	private final Function<Random, BlockState> statesToPlace;
 
 	private final int max;
 
-	private IBlockState[] statesCanPlaceOn = new IBlockState[] { BlocksAether.holystone.getDefaultState() };
+	private BlockState[] statesCanPlaceOn = new BlockState[] { BlocksAether.holystone.getDefaultState() };
 
-	public WorldGenCaveFloorPlacer(Function<Random, IBlockState> statesToPlace, final int max)
+	public WorldGenCaveFloorPlacer(Function<Random, BlockState> statesToPlace, final int max)
 	{
 		this.statesToPlace = statesToPlace;
 		this.max = max;
 	}
 
-	public void setStatesToPlaceOn(final IBlockState... states)
+	public void setStatesToPlaceOn(final BlockState... states)
 	{
 		this.statesCanPlaceOn = states;
 	}
@@ -47,11 +47,11 @@ public class WorldGenCaveFloorPlacer implements WorldDecorationGenerator
 
 			if (slice.isAirBlock(randomPos))
 			{
-				final IBlockState below = slice.getBlockState(randomPos.down());
+				final BlockState below = slice.getBlockState(randomPos.down());
 
 				if (ArrayHelper.contains(this.statesCanPlaceOn, below))
 				{
-					final IBlockState toPlace = this.statesToPlace.apply(rand);
+					final BlockState toPlace = this.statesToPlace.apply(rand);
 
 					slice.setBlockState(randomPos, toPlace);
 

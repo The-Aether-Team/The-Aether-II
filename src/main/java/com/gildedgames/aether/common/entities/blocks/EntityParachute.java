@@ -4,8 +4,8 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerParachuteModule;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -13,15 +13,15 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.api.distmarker.Dist;
 
 public class EntityParachute extends Entity
 {
 
 	private static final DataParameter<Integer> TYPE = EntityDataManager.createKey(EntityParachute.class, DataSerializers.VARINT);
 
-	private EntityPlayer parachutingPlayer;
+	private PlayerEntity parachutingPlayer;
 
 	public EntityParachute(final World world)
 	{
@@ -30,7 +30,7 @@ public class EntityParachute extends Entity
 		this.setDead();
 	}
 
-	public EntityParachute(final World world, final EntityPlayer player, final Type type)
+	public EntityParachute(final World world, final PlayerEntity player, final Type type)
 	{
 		super(world);
 
@@ -41,24 +41,24 @@ public class EntityParachute extends Entity
 	}
 
 	@Override
-	public void entityInit()
+	public void registerData()
 	{
 		this.dataManager.register(EntityParachute.TYPE, 0);
 	}
 
 	@Override
-	public void onUpdate()
+	public void livingTick()
 	{
-		super.onUpdate();
+		super.livingTick();
 
 		if (this.getRidingEntity() == null)
 		{
 			this.startRiding(this.parachutingPlayer, true);
 		}
 
-		if (this.getRidingEntity() instanceof EntityPlayer)
+		if (this.getRidingEntity() instanceof PlayerEntity)
 		{
-			final EntityPlayer player = (EntityPlayer) this.getRidingEntity();
+			final PlayerEntity player = (PlayerEntity) this.getRidingEntity();
 			final Vec3d vec3 = player.getLookVec();
 
 			if (this.getType() == Type.COLD)
@@ -106,7 +106,7 @@ public class EntityParachute extends Entity
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public boolean canRenderOnFire()
 	{
 		return false;
@@ -128,21 +128,21 @@ public class EntityParachute extends Entity
 		this.dataManager.set(EntityParachute.TYPE, type.ordinal());
 	}
 
-	public EntityPlayer getParachutingPlayer()
+	public PlayerEntity getParachutingPlayer()
 	{
 		return this.parachutingPlayer;
 	}
 
 	@Override
-	public void readEntityFromNBT(final NBTTagCompound tag)
+	public void readEntityFromNBT(final CompoundNBT tag)
 	{
-		this.setType(Type.fromOrdinal(tag.getInteger("type")));
+		this.setType(Type.fromOrdinal(tag.getInt("type")));
 	}
 
 	@Override
-	public void writeEntityToNBT(final NBTTagCompound tag)
+	public void writeEntityToNBT(final CompoundNBT tag)
 	{
-		tag.setInteger("type", this.getType().ordinal());
+		tag.putInt("type", this.getType().ordinal());
 	}
 
 	@Override

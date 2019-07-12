@@ -1,352 +1,352 @@
 package com.gildedgames.aether.client.models.entities.living;
 
 import com.gildedgames.aether.common.entities.monsters.EntityCockatrice;
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
-public class ModelCockatrice extends ModelBase
+public class ModelCockatrice extends EntityModel<EntityCockatrice>
 {
 
-	final ModelRenderer LegTopRight;
+	final RendererModel LegTopRight;
 
-	final ModelRenderer LegTopLeft;
+	final RendererModel LegTopLeft;
 
-	final ModelRenderer LegMidRight;
+	final RendererModel LegMidRight;
 
-	final ModelRenderer LegMidLeft;
+	final RendererModel LegMidLeft;
 
-	final ModelRenderer LegBottomRight;
+	final RendererModel LegBottomRight;
 
-	final ModelRenderer LegBottomLeft;
+	final RendererModel LegBottomLeft;
 
-	final ModelRenderer FootRight;
+	final RendererModel FootRight;
 
-	final ModelRenderer FootLeft;
+	final RendererModel FootLeft;
 
-	final ModelRenderer LegFeatheredRight;
+	final RendererModel LegFeatheredRight;
 
-	final ModelRenderer LegFeatheredLeft;
+	final RendererModel LegFeatheredLeft;
 
-	final ModelRenderer BodyFront;
+	final RendererModel BodyFront;
 
-	final ModelRenderer BodyBack;
+	final RendererModel BodyBack;
 
-	final ModelRenderer ShoulderRight;
+	final RendererModel ShoulderRight;
 
-	final ModelRenderer ShoulderLeft;
+	final RendererModel ShoulderLeft;
 
-	final ModelRenderer WingBaseRight;
+	final RendererModel WingBaseRight;
 
-	final ModelRenderer WingBaseLeft;
+	final RendererModel WingBaseLeft;
 
-	final ModelRenderer WingRight;
+	final RendererModel WingRight;
 
-	final ModelRenderer WingLeft;
+	final RendererModel WingLeft;
 
-	final ModelRenderer TailMiddle;
+	final RendererModel TailMiddle;
 
-	final ModelRenderer TailLeft;
+	final RendererModel TailLeft;
 
-	final ModelRenderer TailRight;
+	final RendererModel TailRight;
 
-	final ModelRenderer NeckBase;
+	final RendererModel NeckBase;
 
-	final ModelRenderer NeckTop;
+	final RendererModel NeckTop;
 
-	final ModelRenderer Head;
+	final RendererModel Head;
 
-	final ModelRenderer BeakJaw;
+	final RendererModel BeakJaw;
 
-	final ModelRenderer Teeth;
+	final RendererModel Teeth;
 
-	final ModelRenderer FeatherRight;
+	final RendererModel FeatherRight;
 
-	final ModelRenderer FeatherLeft;
+	final RendererModel FeatherLeft;
 
-	final ModelRenderer FeatherTop;
+	final RendererModel FeatherTop;
 
-	final ModelRenderer ToeLeftRight;
+	final RendererModel ToeLeftRight;
 
-	final ModelRenderer ToeMidRight;
+	final RendererModel ToeMidRight;
 
-	final ModelRenderer ToeRightRight;
+	final RendererModel ToeRightRight;
 
-	final ModelRenderer ToeLeftLeft;
+	final RendererModel ToeLeftLeft;
 
-	final ModelRenderer ToeMidLeft;
+	final RendererModel ToeMidLeft;
 
-	final ModelRenderer ToeRightLeft;
+	final RendererModel ToeRightLeft;
 
-	final ModelRenderer Dart1;
+	final RendererModel Dart1;
 
-	final ModelRenderer Dart2;
+	final RendererModel Dart2;
 
-	final ModelRenderer Dart3;
+	final RendererModel Dart3;
 
-	final ModelRenderer Dart4;
+	final RendererModel Dart4;
 
-	final ModelRenderer Dart5;
+	final RendererModel Dart5;
 
-	final ModelRenderer Dart6;
+	final RendererModel Dart6;
 
 	public ModelCockatrice()
 	{
 		this.textureWidth = 128;
 		this.textureHeight = 64;
 
-		this.LegTopRight = new ModelRenderer(this, 50, 0);
+		this.LegTopRight = new RendererModel(this, 50, 0);
 		this.LegTopRight.addBox(-1F, 2F, 0.7F, 2, 4, 2);
 		this.LegTopRight.setRotationPoint(-3F, 7F, -2F);
 		this.LegTopRight.setTextureSize(128, 64);
 		this.LegTopRight.mirror = true;
 		this.setRotation(this.LegTopRight, -0.2094395F, 0F, 0F);
 		this.LegTopRight.mirror = false;
-		this.LegTopLeft = new ModelRenderer(this, 50, 0);
+		this.LegTopLeft = new RendererModel(this, 50, 0);
 		this.LegTopLeft.addBox(-1F, 2F, 0.7F, 2, 4, 2);
 		this.LegTopLeft.setRotationPoint(3F, 7F, -2F);
 		this.LegTopLeft.setTextureSize(128, 64);
 		this.LegTopLeft.mirror = true;
 		this.setRotation(this.LegTopLeft, -0.2094395F, 0F, 0F);
-		this.LegMidRight = new ModelRenderer(this, 58, 0);
+		this.LegMidRight = new RendererModel(this, 58, 0);
 		this.LegMidRight.addBox(-1F, 3.5F, -5F, 2, 8, 2);
 		this.LegMidRight.setRotationPoint(-3F, 7F, -2F);
 		this.LegMidRight.setTextureSize(128, 64);
 		this.LegMidRight.mirror = true;
 		this.setRotation(this.LegMidRight, 0.8726646F, 0F, 0F);
 		this.LegMidRight.mirror = false;
-		this.LegMidLeft = new ModelRenderer(this, 58, 0);
+		this.LegMidLeft = new RendererModel(this, 58, 0);
 		this.LegMidLeft.addBox(-1F, 3.5F, -5F, 2, 8, 2);
 		this.LegMidLeft.setRotationPoint(3F, 7F, -2F);
 		this.LegMidLeft.setTextureSize(128, 64);
 		this.LegMidLeft.mirror = true;
 		this.setRotation(this.LegMidLeft, 0.8726646F, 0F, 0F);
-		this.LegBottomRight = new ModelRenderer(this, 58, 10);
+		this.LegBottomRight = new RendererModel(this, 58, 10);
 		this.LegBottomRight.addBox(-1F, 3.1F, 9.5F, 2, 9, 2);
 		this.LegBottomRight.setRotationPoint(-3F, 7F, -2F);
 		this.LegBottomRight.setTextureSize(128, 64);
 		this.LegBottomRight.mirror = true;
 		this.setRotation(this.LegBottomRight, -0.6981317F, 0F, 0F);
 		this.LegBottomRight.mirror = false;
-		this.LegBottomLeft = new ModelRenderer(this, 58, 10);
+		this.LegBottomLeft = new RendererModel(this, 58, 10);
 		this.LegBottomLeft.addBox(-1F, 3.1F, 9.5F, 2, 9, 2);
 		this.LegBottomLeft.setRotationPoint(3F, 7F, -2F);
 		this.LegBottomLeft.setTextureSize(128, 64);
 		this.LegBottomLeft.mirror = true;
 		this.setRotation(this.LegBottomLeft, -0.6981317F, 0F, 0F);
-		this.FootRight = new ModelRenderer(this, 38, 12);
+		this.FootRight = new RendererModel(this, 38, 12);
 		this.FootRight.addBox(-1F, 15F, -2F, 2, 2, 8);
 		this.FootRight.setRotationPoint(-3F, 7F, -2F);
 		this.FootRight.setTextureSize(128, 64);
 		this.FootRight.mirror = true;
 		this.setRotation(this.FootRight, 0F, 0F, 0F);
 		this.FootRight.mirror = false;
-		this.FootLeft = new ModelRenderer(this, 38, 12);
+		this.FootLeft = new RendererModel(this, 38, 12);
 		this.FootLeft.addBox(-1F, 15F, -2F, 2, 2, 8);
 		this.FootLeft.setRotationPoint(3F, 7F, -2F);
 		this.FootLeft.setTextureSize(128, 64);
 		this.FootLeft.mirror = true;
 		this.setRotation(this.FootLeft, 0F, 0F, 0F);
-		this.LegFeatheredRight = new ModelRenderer(this, 58, 21);
+		this.LegFeatheredRight = new RendererModel(this, 58, 21);
 		this.LegFeatheredRight.addBox(-2F, 0F, -2F, 4, 4, 6);
 		this.LegFeatheredRight.setRotationPoint(-3F, 7F, -2F);
 		this.LegFeatheredRight.setTextureSize(128, 64);
 		this.LegFeatheredRight.mirror = true;
 		this.setRotation(this.LegFeatheredRight, -0.2094395F, 0F, 0.1745329F);
 		this.LegFeatheredRight.mirror = false;
-		this.LegFeatheredLeft = new ModelRenderer(this, 58, 21);
+		this.LegFeatheredLeft = new RendererModel(this, 58, 21);
 		this.LegFeatheredLeft.addBox(-2F, 0F, -2F, 4, 4, 6);
 		this.LegFeatheredLeft.setRotationPoint(3F, 7F, -2F);
 		this.LegFeatheredLeft.setTextureSize(128, 64);
 		this.LegFeatheredLeft.mirror = true;
 		this.setRotation(this.LegFeatheredLeft, -0.2094395F, 0F, -0.1745329F);
-		this.BodyFront = new ModelRenderer(this, 74, 0);
+		this.BodyFront = new RendererModel(this, 74, 0);
 		this.BodyFront.addBox(-3F, 0F, -8F, 6, 5, 8);
 		this.BodyFront.setRotationPoint(0F, 3F, 0F);
 		this.BodyFront.setTextureSize(128, 64);
 		this.BodyFront.mirror = true;
 		this.setRotation(this.BodyFront, 0.0872665F, 0F, 0F);
-		this.BodyBack = new ModelRenderer(this, 94, 5);
+		this.BodyBack = new RendererModel(this, 94, 5);
 		this.BodyBack.addBox(-4F, 0F, 0F, 8, 6, 8);
 		this.BodyBack.setRotationPoint(0F, 3F, 0F);
 		this.BodyBack.setTextureSize(128, 64);
 		this.BodyBack.mirror = true;
 		this.setRotation(this.BodyBack, -0.1396263F, 0F, 0F);
-		this.ShoulderRight = new ModelRenderer(this, 29, 0);
+		this.ShoulderRight = new RendererModel(this, 29, 0);
 		this.ShoulderRight.addBox(-5F, -0.8F, -2F, 6, 3, 3);
 		this.ShoulderRight.setRotationPoint(-2F, 4.5F, -3F);
 		this.ShoulderRight.setTextureSize(128, 64);
 		this.ShoulderRight.mirror = true;
 		this.setRotation(this.ShoulderRight, 0F, 0.1745329F, -0.1745329F);
 		this.ShoulderRight.mirror = false;
-		this.ShoulderLeft = new ModelRenderer(this, 29, 0);
+		this.ShoulderLeft = new RendererModel(this, 29, 0);
 		this.ShoulderLeft.addBox(-1F, -0.8F, -2F, 6, 3, 3);
 		this.ShoulderLeft.setRotationPoint(2F, 4.5F, -3F);
 		this.ShoulderLeft.setTextureSize(128, 64);
 		this.ShoulderLeft.mirror = true;
 		this.setRotation(this.ShoulderLeft, 0F, -0.1745329F, 0.1745329F);
-		this.WingBaseRight = new ModelRenderer(this, 66, 0);
+		this.WingBaseRight = new RendererModel(this, 66, 0);
 		this.WingBaseRight.addBox(-5F, 0.2F, -1F, 2, 6, 2);
 		this.WingBaseRight.setRotationPoint(-2F, 4.5F, -3F);
 		this.WingBaseRight.setTextureSize(128, 64);
 		this.WingBaseRight.mirror = true;
 		this.setRotation(this.WingBaseRight, 0F, 0F, 0F);
 		this.WingBaseRight.mirror = false;
-		this.WingBaseLeft = new ModelRenderer(this, 66, 0);
+		this.WingBaseLeft = new RendererModel(this, 66, 0);
 		this.WingBaseLeft.addBox(3F, 0.2F, -1F, 2, 6, 2);
 		this.WingBaseLeft.setRotationPoint(2F, 4.5F, -3F);
 		this.WingBaseLeft.setTextureSize(128, 64);
 		this.WingBaseLeft.mirror = true;
 		this.setRotation(this.WingBaseLeft, 0F, 0F, 0F);
-		this.WingRight = new ModelRenderer(this, 0, 20);
+		this.WingRight = new RendererModel(this, 0, 20);
 		this.WingRight.addBox(-5F, 2F, 0F, 1, 8, 15);
 		this.WingRight.setRotationPoint(-2F, 4.5F, -3F);
 		this.WingRight.setTextureSize(128, 64);
 		this.WingRight.mirror = true;
 		this.setRotation(this.WingRight, -0.1745329F, 0F, 0F);
-		this.WingLeft = new ModelRenderer(this, 0, 20);
+		this.WingLeft = new RendererModel(this, 0, 20);
 		this.WingLeft.addBox(4F, 2F, 0F, 1, 8, 15);
 		this.WingLeft.setRotationPoint(2F, 4.5F, -3F);
 		this.WingLeft.setTextureSize(128, 64);
 		this.WingLeft.mirror = true;
 		this.setRotation(this.WingLeft, -0.1745329F, 0F, 0F);
-		this.TailMiddle = new ModelRenderer(this, 17, 20);
+		this.TailMiddle = new RendererModel(this, 17, 20);
 		this.TailMiddle.addBox(-1.5F, 0F, 0F, 3, 1, 14);
 		this.TailMiddle.setRotationPoint(0F, 5F, 7F);
 		this.TailMiddle.setTextureSize(128, 64);
 		this.TailMiddle.mirror = true;
 		this.setRotation(this.TailMiddle, 0.3490659F, 0F, 0F);
-		this.TailLeft = new ModelRenderer(this, 20, 35);
+		this.TailLeft = new RendererModel(this, 20, 35);
 		this.TailLeft.addBox(0F, 0F, 0F, 3, 1, 12);
 		this.TailLeft.setRotationPoint(0F, 5F, 7F);
 		this.TailLeft.setTextureSize(128, 64);
 		this.TailLeft.mirror = true;
 		this.setRotation(this.TailLeft, 0F, 0.3490659F, 0.1745329F);
-		this.TailRight = new ModelRenderer(this, 20, 35);
+		this.TailRight = new RendererModel(this, 20, 35);
 		this.TailRight.addBox(-3F, 0F, 0F, 3, 1, 12);
 		this.TailRight.setRotationPoint(0F, 5F, 7F);
 		this.TailRight.setTextureSize(128, 64);
 		this.TailRight.mirror = true;
 		this.setRotation(this.TailRight, 0F, -0.3490659F, -0.1745329F);
-		this.NeckBase = new ModelRenderer(this, 66, 13);
+		this.NeckBase = new RendererModel(this, 66, 13);
 		this.NeckBase.addBox(-3F, -4F, -4F, 6, 4, 4);
 		this.NeckBase.setRotationPoint(0F, 8.7F, -7.5F);
 		this.NeckBase.setTextureSize(128, 64);
 		this.NeckBase.mirror = true;
 		this.setRotation(this.NeckBase, -0.669215F, 0F, 0F);
-		this.NeckTop = new ModelRenderer(this, 44, 6);
+		this.NeckTop = new RendererModel(this, 44, 6);
 		this.NeckTop.addBox(-2F, -3F, -3F, 4, 3, 3);
 		this.NeckTop.setRotationPoint(0F, 6F, -10F);
 		this.NeckTop.setTextureSize(128, 64);
 		this.NeckTop.mirror = true;
 		this.setRotation(this.NeckTop, -0.9599311F, 0F, 0F);
-		this.Head = new ModelRenderer(this, 0, 0);
+		this.Head = new RendererModel(this, 0, 0);
 		this.Head.addBox(-4F, -6F, -8F, 8, 7, 13);
 		this.Head.setRotationPoint(0F, 3.5F, -10F);
 		this.Head.setTextureSize(128, 64);
 		this.Head.mirror = true;
 		this.setRotation(this.Head, 0.0872665F, 0F, 0F);
-		this.BeakJaw = new ModelRenderer(this, 80, 15);
+		this.BeakJaw = new RendererModel(this, 80, 15);
 		this.BeakJaw.addBox(-2F, 1.2F, -5.2F, 4, 1, 6);
 		this.BeakJaw.setRotationPoint(0F, 3.5F, -10F);
 		this.BeakJaw.setTextureSize(128, 64);
 		this.BeakJaw.mirror = true;
 		this.setRotation(this.BeakJaw, 0.1745329F, 0F, 0F);
-		this.Teeth = new ModelRenderer(this, 44, 25);
+		this.Teeth = new RendererModel(this, 44, 25);
 		this.Teeth.addBox(-2F, 0.2F, -5.2F, 4, 1, 6);
 		this.Teeth.setRotationPoint(0F, 3.5F, -10F);
 		this.Teeth.setTextureSize(128, 64);
 		this.Teeth.mirror = true;
 		this.setRotation(this.Teeth, 0.1745329F, 0F, 0F);
-		this.FeatherRight = new ModelRenderer(this, 78, 22);
+		this.FeatherRight = new RendererModel(this, 78, 22);
 		this.FeatherRight.addBox(-3.5F, -4.6F, 1F, 1, 5, 5);
 		this.FeatherRight.setRotationPoint(0F, 3.5F, -10F);
 		this.FeatherRight.setTextureSize(128, 64);
 		this.FeatherRight.mirror = true;
 		this.setRotation(this.FeatherRight, 0F, -0.4363323F, 0.0523599F);
-		this.FeatherLeft = new ModelRenderer(this, 78, 22);
+		this.FeatherLeft = new RendererModel(this, 78, 22);
 		this.FeatherLeft.addBox(2.533333F, -4.6F, 1F, 1, 5, 5);
 		this.FeatherLeft.setRotationPoint(0F, 3.5F, -10F);
 		this.FeatherLeft.setTextureSize(128, 64);
 		this.FeatherLeft.mirror = true;
 		this.setRotation(this.FeatherLeft, 0F, 0.4363323F, -0.0523599F);
 		this.FeatherLeft.mirror = false;
-		this.FeatherTop = new ModelRenderer(this, 43, 32);
+		this.FeatherTop = new RendererModel(this, 43, 32);
 		this.FeatherTop.addBox(-3F, -6.5F, -2F, 6, 1, 8);
 		this.FeatherTop.setRotationPoint(0F, 3.5F, -10F);
 		this.FeatherTop.setTextureSize(128, 64);
 		this.FeatherTop.mirror = true;
 		this.setRotation(this.FeatherTop, 0.3490659F, 0F, 0F);
-		this.ToeLeftRight = new ModelRenderer(this, 7, 0);
+		this.ToeLeftRight = new RendererModel(this, 7, 0);
 		this.ToeLeftRight.addBox(0F, 15F, -3F, 1, 2, 2);
 		this.ToeLeftRight.setRotationPoint(-3F, 7F, -2F);
 		this.ToeLeftRight.setTextureSize(128, 64);
 		this.ToeLeftRight.mirror = true;
 		this.setRotation(this.ToeLeftRight, 0F, -0.2617994F, 0F);
-		this.ToeMidRight = new ModelRenderer(this, 7, 0);
+		this.ToeMidRight = new RendererModel(this, 7, 0);
 		this.ToeMidRight.addBox(-0.5F, 15F, -4F, 1, 2, 2);
 		this.ToeMidRight.setRotationPoint(-3F, 7F, -2F);
 		this.ToeMidRight.setTextureSize(128, 64);
 		this.ToeMidRight.mirror = true;
 		this.setRotation(this.ToeMidRight, 0F, 0F, 0F);
-		this.ToeRightRight = new ModelRenderer(this, 7, 0);
+		this.ToeRightRight = new RendererModel(this, 7, 0);
 		this.ToeRightRight.addBox(-1F, 15F, -3F, 1, 2, 2);
 		this.ToeRightRight.setRotationPoint(-3F, 7F, -2F);
 		this.ToeRightRight.setTextureSize(128, 64);
 		this.ToeRightRight.mirror = true;
 		this.setRotation(this.ToeRightRight, 0F, 0.2617994F, 0F);
-		this.ToeLeftLeft = new ModelRenderer(this, 7, 0);
+		this.ToeLeftLeft = new RendererModel(this, 7, 0);
 		this.ToeLeftLeft.addBox(0F, 15F, -3F, 1, 2, 2);
 		this.ToeLeftLeft.setRotationPoint(3F, 7F, -2F);
 		this.ToeLeftLeft.setTextureSize(128, 64);
 		this.ToeLeftLeft.mirror = true;
 		this.setRotation(this.ToeLeftLeft, 0F, -0.2617994F, 0F);
-		this.ToeMidLeft = new ModelRenderer(this, 7, 0);
+		this.ToeMidLeft = new RendererModel(this, 7, 0);
 		this.ToeMidLeft.addBox(-0.5F, 15F, -4F, 1, 2, 2);
 		this.ToeMidLeft.setRotationPoint(3F, 7F, -2F);
 		this.ToeMidLeft.setTextureSize(128, 64);
 		this.ToeMidLeft.mirror = true;
 		this.setRotation(this.ToeMidLeft, 0F, 0F, 0F);
-		this.ToeRightLeft = new ModelRenderer(this, 7, 0);
+		this.ToeRightLeft = new RendererModel(this, 7, 0);
 		this.ToeRightLeft.addBox(-1F, 15F, -3F, 1, 2, 2);
 		this.ToeRightLeft.setRotationPoint(3F, 7F, -2F);
 		this.ToeRightLeft.setTextureSize(128, 64);
 		this.ToeRightLeft.mirror = true;
 		this.setRotation(this.ToeRightLeft, 0F, 0.2617994F, 0F);
-		this.Dart1 = new ModelRenderer(this, 0, 0);
+		this.Dart1 = new RendererModel(this, 0, 0);
 		this.Dart1.addBox(-0.5F, -6F, -0.5F, 1, 6, 1);
 		this.Dart1.setRotationPoint(-2F, 4F, 1F);
 		this.Dart1.setTextureSize(128, 64);
 		this.Dart1.mirror = true;
 		this.setRotation(this.Dart1, 0.5235988F, 0F, 0F);
-		this.Dart2 = new ModelRenderer(this, 0, 0);
+		this.Dart2 = new RendererModel(this, 0, 0);
 		this.Dart2.addBox(-0.5F, -6F, -0.5F, 1, 6, 1);
 		this.Dart2.setRotationPoint(2F, 4F, 1F);
 		this.Dart2.setTextureSize(128, 64);
 		this.Dart2.mirror = true;
 		this.setRotation(this.Dart2, 0.5235988F, 0F, 0F);
 		this.Dart2.mirror = false;
-		this.Dart3 = new ModelRenderer(this, 0, 0);
+		this.Dart3 = new RendererModel(this, 0, 0);
 		this.Dart3.addBox(-0.5F, -6F, -0.5F, 1, 6, 1);
 		this.Dart3.setRotationPoint(2F, 5F, 4F);
 		this.Dart3.setTextureSize(128, 64);
 		this.Dart3.mirror = true;
 		this.setRotation(this.Dart3, 0.5235988F, -0.1745329F, 0F);
 		this.Dart3.mirror = false;
-		this.Dart4 = new ModelRenderer(this, 0, 0);
+		this.Dart4 = new RendererModel(this, 0, 0);
 		this.Dart4.addBox(-0.5F, -6F, -0.5F, 1, 6, 1);
 		this.Dart4.setRotationPoint(-2F, 5F, 4F);
 		this.Dart4.setTextureSize(128, 64);
 		this.Dart4.mirror = true;
 		this.setRotation(this.Dart4, 0.5235988F, 0.1745329F, 0F);
-		this.Dart5 = new ModelRenderer(this, 0, 0);
+		this.Dart5 = new RendererModel(this, 0, 0);
 		this.Dart5.addBox(-0.5F, -6F, -0.5F, 1, 6, 1);
 		this.Dart5.setRotationPoint(-2F, 6F, 7F);
 		this.Dart5.setTextureSize(128, 64);
 		this.Dart5.mirror = true;
 		this.setRotation(this.Dart5, 0.5235988F, 0.3490659F, 0F);
-		this.Dart6 = new ModelRenderer(this, 0, 0);
+		this.Dart6 = new RendererModel(this, 0, 0);
 		this.Dart6.addBox(-0.5F, -6F, -0.5F, 1, 6, 1);
 		this.Dart6.setRotationPoint(2F, 6F, 7F);
 		this.Dart6.setTextureSize(128, 64);
@@ -404,7 +404,7 @@ public class ModelCockatrice extends ModelBase
 		this.Dart6.render(f5);
 	}
 
-	private void setRotation(final ModelRenderer model, final float x, final float y, final float z)
+	private void setRotation(final RendererModel model, final float x, final float y, final float z)
 	{
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;

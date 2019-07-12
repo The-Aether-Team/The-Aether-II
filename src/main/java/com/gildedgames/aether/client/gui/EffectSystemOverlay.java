@@ -4,13 +4,13 @@ import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectPool;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.common.AetherCore;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 
-public class EffectSystemOverlay extends Gui
+public class EffectSystemOverlay extends AbstractGui
 {
 	private static final ResourceLocation BAR_OUTLINE = AetherCore.getResource("textures/gui/overlay/effects/bar_outline.png");
 	private static final ResourceLocation BAR_BUILDUP = AetherCore.getResource("textures/gui/overlay/effects/buildup_bar.png");
@@ -99,7 +99,7 @@ public class EffectSystemOverlay extends Gui
 		GlStateManager.disableRescaleNormal();
 
 		mc.getTextureManager().bindTexture(texture);
-		GlStateManager.translate(x,y,0.0f);
+		GlStateManager.translatef(x,y,0.0f);
 
 		if (doColor)
 		{
@@ -114,7 +114,7 @@ public class EffectSystemOverlay extends Gui
 			GlStateManager.color(r,g,b,a);
 		}
 
-		Gui.drawModalRectWithCustomSizedTexture(0,0,0, 0, width, height, textureWidth, textureHeight);
+		AbstractGui.drawModalRectWithCustomSizedTexture(0,0,0, 0, width, height, textureWidth, textureHeight);
 
 		GlStateManager.color(1,1,1,1);
 
@@ -129,9 +129,9 @@ public class EffectSystemOverlay extends Gui
 		GlStateManager.disableRescaleNormal();
 
 		mc.getTextureManager().bindTexture(texture);
-		GlStateManager.translate(x,y,0.0f);
+		GlStateManager.translatef(x,y,0.0f);
 
-		Gui.drawModalRectWithCustomSizedTexture(0,0,0, 0, width, height, textureWidth, textureHeight);
+		AbstractGui.drawModalRectWithCustomSizedTexture(0,0,0, 0, width, height, textureWidth, textureHeight);
 
 		GlStateManager.popMatrix();
 	}

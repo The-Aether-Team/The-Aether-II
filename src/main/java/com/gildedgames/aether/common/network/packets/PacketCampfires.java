@@ -6,8 +6,8 @@ import com.gildedgames.aether.common.network.MessageHandlerClient;
 import com.gildedgames.orbis.lib.util.io.NBTFunnel;
 import com.gildedgames.orbis.lib.util.mc.BlockPosDimension;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
@@ -39,7 +39,7 @@ public class PacketCampfires implements IMessage
 	@Override
 	public void toBytes(final ByteBuf buf)
 	{
-		NBTFunnel funnel = new NBTFunnel(new NBTTagCompound());
+		NBTFunnel funnel = new NBTFunnel(new CompoundNBT());
 
 		funnel.setSet("c", this.campfires);
 
@@ -49,7 +49,7 @@ public class PacketCampfires implements IMessage
 	public static class HandlerClient extends MessageHandlerClient<PacketCampfires, IMessage>
 	{
 		@Override
-		public IMessage onMessage(final PacketCampfires message, final EntityPlayer player)
+		public IMessage onMessage(final PacketCampfires message, final PlayerEntity player)
 		{
 			if (player == null || player.world == null)
 			{

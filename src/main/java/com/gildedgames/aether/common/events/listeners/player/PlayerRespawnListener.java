@@ -8,13 +8,13 @@ import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketMarkPlayerDeath;
 import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import com.gildedgames.orbis.lib.util.mc.BlockUtil;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.Blocks;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 @Mod.EventBusSubscriber
@@ -27,14 +27,14 @@ public class PlayerRespawnListener
 		final PlayerAether aePlayer = PlayerAether.getPlayer(event.player);
 		aePlayer.onRespawn(event);
 
-		if (event.player instanceof EntityPlayerMP && ((EntityPlayerMP) event.player).world.provider.getDimensionType() == DimensionsAether.AETHER)
+		if (event.player instanceof ServerPlayerEntity && ((ServerPlayerEntity) event.player).world.provider.getDimensionType() == DimensionsAether.AETHER)
 		{
-			BlockPos bedPos = event.player.getBedLocation(((EntityPlayerMP) event.player).dimension);
-			final EntityPlayerMP mp = (EntityPlayerMP) event.player;
+			BlockPos bedPos = event.player.getBedLocation(((ServerPlayerEntity) event.player).dimension);
+			final ServerPlayerEntity mp = (ServerPlayerEntity) event.player;
 
 			if (bedPos != null)
 			{
-				bedPos = EntityPlayer.getBedSpawnLocation(mp.getServerWorld(), bedPos, mp.isSpawnForced(mp.dimension));
+				bedPos = PlayerEntity.getBedSpawnLocation(mp.getServerWorld(), bedPos, mp.isSpawnForced(mp.dimension));
 			}
 
 			PlayerCampfiresModule campfiresModule = aePlayer.getModule(PlayerCampfiresModule.class);
@@ -77,7 +77,7 @@ public class PlayerRespawnListener
 
 			if (obstructed)
 			{
-				mp.sendMessage(new TextComponentString("The nearest Outpost was obstructed with blocks - you could not respawn there."));
+				mp.sendMessage(new StringTextComponent("The nearest Outpost was obstructed with blocks - you could not respawn there."));
 			}
 		}
 	}

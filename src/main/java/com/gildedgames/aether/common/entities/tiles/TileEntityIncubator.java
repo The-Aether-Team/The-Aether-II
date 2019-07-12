@@ -7,25 +7,25 @@ import com.gildedgames.aether.common.entities.genes.AnimalGender;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.genes.moa.MoaNest;
 import com.gildedgames.aether.common.items.other.ItemMoaEgg;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntityLockable;
-import net.minecraft.util.ITickable;
+import net.minecraft.tileentity.LockableTileEntity;
+import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.util.NonNullList;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class TileEntityIncubator extends TileEntityLockable implements ITickable, IInventory
+public class TileEntityIncubator extends LockableTileEntity implements ITickableTileEntity, IInventory
 {
 
 	public static final int REQ_TEMPERATURE_THRESHOLD = 3000;
@@ -65,7 +65,7 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 			return;
 		}
 
-		final IBlockState state = this.world.getBlockState(this.pos);
+		final BlockState state = this.world.getBlockState(this.pos);
 
 		if (!this.isHeating() && this.currentHeatingProgress > 0)
 		{
@@ -254,7 +254,7 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 	}
 
 	@Override
-	public boolean isUsableByPlayer(EntityPlayer player)
+	public boolean isUsableByPlayer(PlayerEntity player)
 	{
 		return this.world.getTileEntity(this.pos) == this
 				&& player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D)
@@ -262,12 +262,12 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 	}
 
 	@Override
-	public void openInventory(EntityPlayer player)
+	public void openInventory(PlayerEntity player)
 	{
 	}
 
 	@Override
-	public void closeInventory(EntityPlayer player)
+	public void closeInventory(PlayerEntity player)
 	{
 	}
 
@@ -331,7 +331,7 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 
 	public void sync()
 	{
-		IBlockState state = this.world.getBlockState(this.pos);
+		BlockState state = this.world.getBlockState(this.pos);
 
 		this.world.notifyBlockUpdate(this.pos, state, state, 3);
 
@@ -339,9 +339,9 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 	}
 
 	@Override
-	public NBTTagCompound getUpdateTag()
+	public CompoundNBT getUpdateTag()
 	{
-		NBTTagCompound tag = super.getUpdateTag();
+		CompoundNBT tag = super.getUpdateTag();
 
 		this.writeToNBT(tag);
 
@@ -351,7 +351,7 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 	@Override
 	public SPacketUpdateTileEntity getUpdatePacket()
 	{
-		NBTTagCompound compound = this.getUpdateTag();
+		CompoundNBT compound = this.getUpdateTag();
 
 		return new SPacketUpdateTileEntity(this.pos, 1, compound);
 	}
@@ -363,7 +363,7 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 	}
 
 	@Override
-	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
+	public Container createContainer(PlayerInventory playerInventory, PlayerEntity playerIn)
 	{
 		return new ContainerIncubator(playerInventory, this);
 	}
@@ -375,19 +375,19 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound compound)
+	public CompoundNBT writeToNBT(CompoundNBT compound)
 	{
 		super.writeToNBT(compound);
 
-		NBTTagList stackList = new NBTTagList();
+		ListNBT stackList = new ListNBT();
 
 		for (int i = 0; i < this.inventory.size(); ++i)
 		{
 			if (!this.inventory.get(i).isEmpty())
 			{
-				NBTTagCompound stackNBT = new NBTTagCompound();
+				CompoundNBT stackNBT = new CompoundNBT();
 
-				stackNBT.setByte("slot", (byte) i);
+				stackNBT.putByte("slot", (byte) i);
 
 				this.inventory.get(i).writeToNBT(stackNBT);
 
@@ -395,27 +395,27 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 			}
 		}
 
-		compound.setTag("inventory", stackList);
+		compound.put("inventory", stackList);
 
-		compound.setFloat("currentHeatingProgress", this.currentHeatingProgress);
-		compound.setInteger("ambroTimer", this.ambroTimer);
-		compound.setInteger("eggTimer", this.eggTimer);
+		compound.putFloat("currentHeatingProgress", this.currentHeatingProgress);
+		compound.putInt("ambroTimer", this.ambroTimer);
+		compound.putInt("eggTimer", this.eggTimer);
 
 		return compound;
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound compound)
+	public void readFromNBT(CompoundNBT compound)
 	{
 		super.readFromNBT(compound);
 
 		this.inventory = NonNullList.withSize(INVENTORY_SIZE, ItemStack.EMPTY);
 
-		NBTTagList stackList = compound.getTagList("inventory", 10);
+		ListNBT stackList = compound.getTagList("inventory", 10);
 
 		for (int i = 0; i < stackList.tagCount(); ++i)
 		{
-			NBTTagCompound stack = stackList.getCompoundTagAt(i);
+			CompoundNBT stack = stackList.getCompoundAt(i);
 
 			byte slotPos = stack.getByte("slot");
 
@@ -425,9 +425,9 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 			}
 		}
 
-		this.currentHeatingProgress = compound.getInteger("currentHeatingProgress");
-		this.ambroTimer = compound.getInteger("ambroTimer");
-		this.eggTimer = compound.getInteger("eggTimer");
+		this.currentHeatingProgress = compound.getInt("currentHeatingProgress");
+		this.ambroTimer = compound.getInt("ambroTimer");
+		this.eggTimer = compound.getInt("eggTimer");
 	}
 
 	@Override

@@ -6,7 +6,7 @@ import com.gildedgames.aether.common.init.DimensionsAether;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.FoodStats;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 
 public class PlayerHungerModule extends PlayerAetherModule
 {
@@ -55,7 +55,7 @@ public class PlayerHungerModule extends PlayerAetherModule
 	{
 		if (this.getEntity().world.provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER)
 		{
-			if (event.side == Side.SERVER)
+			if (event.side == Dist.SERVER)
 			{
 				int foodDiff = this.getEntity().getFoodStats().getFoodLevel() - this.startHunger;
 

@@ -1,14 +1,14 @@
 package com.gildedgames.aether.common.entities.ai;
 
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.util.math.Vec3d;
 
-public class EntityAILongDistanceWander extends EntityAIBase
+public class EntityAILongDistanceWander extends Goal
 {
 
-	private final EntityCreature entity;
+	private final CreatureEntity entity;
 
 	private final double speed;
 
@@ -24,12 +24,12 @@ public class EntityAILongDistanceWander extends EntityAIBase
 
 	private Vec3d longDistanceTarget;
 
-	public EntityAILongDistanceWander(final EntityCreature creatureIn, final double speedIn)
+	public EntityAILongDistanceWander(final CreatureEntity creatureIn, final double speedIn)
 	{
 		this(creatureIn, speedIn, 120);
 	}
 
-	public EntityAILongDistanceWander(final EntityCreature creatureIn, final double speedIn, final int chance)
+	public EntityAILongDistanceWander(final CreatureEntity creatureIn, final double speedIn, final int chance)
 	{
 		this.entity = creatureIn;
 		this.speed = speedIn;

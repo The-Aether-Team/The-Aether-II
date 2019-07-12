@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.entities.flying;
 
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.pathfinding.PathFinder;
-import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.pathfinding.PathPoint;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -10,13 +10,13 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-public class PathNavigateFlyer extends PathNavigate
+public class PathNavigateFlyer extends PathNavigator
 {
 	private boolean shouldAvoidSun;
 
 	private boolean shouldAvoidGround;
 
-	public PathNavigateFlyer(final EntityLiving entitylivingIn, final World worldIn)
+	public PathNavigateFlyer(final MobEntity entitylivingIn, final World worldIn)
 	{
 		super(entitylivingIn, worldIn);
 	}
@@ -28,7 +28,7 @@ public class PathNavigateFlyer extends PathNavigate
 
 		if (this.shouldAvoidSun)
 		{
-			BlockPos entityPos = new BlockPos(MathHelper.floor(this.entity.posX), (int) (this.entity.getEntityBoundingBox().minY + 0.5D),
+			BlockPos entityPos = new BlockPos(MathHelper.floor(this.entity.posX), (int) (this.entity.getBoundingBox().minY + 0.5D),
 					MathHelper.floor(this.entity.posZ));
 
 			if (!(this.world.getTopSolidOrLiquidBlock(entityPos).getY() > entityPos.getY()))
@@ -52,7 +52,7 @@ public class PathNavigateFlyer extends PathNavigate
 		if (this.shouldAvoidGround)
 		{
 			//TODO: Make this work better
-			/*BlockPos entityPos = new BlockPos(MathHelper.floor(this.entity.posX), (int) (this.entity.getEntityBoundingBox().minY + 0.5D),
+			/*BlockPos entityPos = new BlockPos(MathHelper.floor(this.entity.posX), (int) (this.entity.getBoundingBox().minY + 0.5D),
 					MathHelper.floor(this.entity.posZ));
 
 			if (Math.abs(this.world.getHeight(entityPos).getY() - entityPos.getY()) <= 10)

@@ -1,21 +1,21 @@
 package com.gildedgames.aether.common.entities.ai.glactrix;
 
 import com.gildedgames.aether.common.entities.animals.EntityGlactrix;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.player.PlayerEntity;
 
 import java.util.List;
 
-public class GlactrixAIHideFromEntity extends EntityAIBase
+public class GlactrixAIHideFromEntity extends Goal
 {
 
 	static final int maxDist = 12;
 	private final EntityGlactrix glactrix;
-	protected Class<? extends EntityLivingBase> hideFromClass;
-	protected EntityLivingBase hideFrom;
+	protected Class<? extends LivingEntity> hideFromClass;
+	protected LivingEntity hideFrom;
 
-	public GlactrixAIHideFromEntity(final EntityGlactrix glactrix, final Class<? extends EntityLivingBase> clazz)
+	public GlactrixAIHideFromEntity(final EntityGlactrix glactrix, final Class<? extends LivingEntity> clazz)
 	{
 		this.glactrix = glactrix;
 		this.hideFromClass = clazz;
@@ -25,20 +25,20 @@ public class GlactrixAIHideFromEntity extends EntityAIBase
 	@Override
 	public boolean shouldExecute()
 	{
-		final List entities = this.glactrix.world.getEntitiesWithinAABB(this.hideFromClass, this.glactrix.getEntityBoundingBox().expand(maxDist, maxDist, maxDist));
+		final List entities = this.glactrix.world.getEntitiesWithinAABB(this.hideFromClass, this.glactrix.getBoundingBox().expand(maxDist, maxDist, maxDist));
 
 		if (entities.isEmpty())
 		{
 			return false;
 		}
 
-		EntityLivingBase threat = null;
+		LivingEntity threat = null;
 
 		for (final Object o : entities)
 		{
-			if (o instanceof EntityLivingBase && !(o instanceof EntityPlayer && ((EntityPlayer) o).isCreative()))
+			if (o instanceof LivingEntity && !(o instanceof PlayerEntity && ((PlayerEntity) o).isCreative()))
 			{
-				threat = (EntityLivingBase) o;
+				threat = (LivingEntity) o;
 			}
 		}
 

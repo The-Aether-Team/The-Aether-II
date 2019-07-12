@@ -11,8 +11,7 @@ import com.gildedgames.aether.common.entities.effects.StatusEffectBleed;
 import com.gildedgames.aether.common.entities.multipart.AetherMultiPartEntity;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -20,7 +19,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import javax.vecmath.Point3d;
 
-public class EntityVaranys extends EntityAetherMob implements IEntityMultiPart
+public class EntityVaranys extends EntityAetherMonster implements IEntityMultiPart
 {
 	private final MultiPartEntityPart[] parts;
 
@@ -41,16 +40,16 @@ public class EntityVaranys extends EntityAetherMob implements IEntityMultiPart
 		this.lightAI = new EntityAIHideFromLight(this, 0.8F, 5);
 		this.parts = new MultiPartEntityPart[] { this.head, this.tail1, this.tail2 };
 
-		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(0, new EntityAIUnstuckBlueAercloud(this));
-		this.tasks.addTask(1, this.lightAI);
-		this.tasks.addTask(1, new EntityAIWanderAvoidLight(this, 0.8D, 5));
-		this.tasks.addTask(2, new EntityAILeapAtTarget(this, 0.4F));
-		this.tasks.addTask(3, new EntityAIFleeSun(this, 1.0D));
-		this.tasks.addTask(3, new EntityAIAttackMelee(this, 1D, false));
-		this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
+		this.goalSelector.addGoal(0, new EntityAISwimming(this));
+		this.goalSelector.addGoal(0, new EntityAIUnstuckBlueAercloud(this));
+		this.goalSelector.addGoal(1, this.lightAI);
+		this.goalSelector.addGoal(1, new EntityAIWanderAvoidLight(this, 0.8D, 5));
+		this.goalSelector.addGoal(2, new EntityAILeapAtTarget(this, 0.4F));
+		this.goalSelector.addGoal(3, new EntityAIFleeSun(this, 1.0D));
+		this.goalSelector.addGoal(3, new EntityAIAttackMelee(this, 1D, false));
+		this.goalSelector.addGoal(4, new EntityAIWatchClosest(this, PlayerEntity.class, 6.0F));
+		this.targetSelector.addGoal(1, new EntityAIHurtByTarget(this, false));
+		this.targetSelector.addGoal(2, new EntityAINearestAttackableTarget<>(this, PlayerEntity.class, true));
 
 		this.setSize(1.4F, 1F);
 
@@ -70,18 +69,18 @@ public class EntityVaranys extends EntityAetherMob implements IEntityMultiPart
 	}
 
 	@Override
-	protected void applyEntityAttributes()
+	protected void registerAttributes()
 	{
-		super.applyEntityAttributes();
+		super.registerAttributes();
 
-		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.5D);
-		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2.0D);
+		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
+		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.5D);
+		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2.0D);
 
-		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(15);
-		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(8);
-		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(4);
+		this.getAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(15);
+		this.getAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(8);
+		this.getAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(4);
 	}
 
 	@Override
@@ -126,7 +125,7 @@ public class EntityVaranys extends EntityAetherMob implements IEntityMultiPart
 	{
 		final boolean flag = super.attackEntityAsMob(entity);
 
-		if (flag && entity instanceof EntityLivingBase)
+		if (flag && entity instanceof LivingEntity)
 		{
 			this.applyStatusEffectOnAttack(entity);
 		}
@@ -137,9 +136,9 @@ public class EntityVaranys extends EntityAetherMob implements IEntityMultiPart
 	@Override
 	protected void applyStatusEffectOnAttack(final Entity target)
 	{
-		if (target instanceof EntityLivingBase)
+		if (target instanceof LivingEntity)
 		{
-			final EntityLivingBase living = (EntityLivingBase) target;
+			final LivingEntity living = (LivingEntity) target;
 
 			if (!living.isActiveItemStackBlocking())
 			{

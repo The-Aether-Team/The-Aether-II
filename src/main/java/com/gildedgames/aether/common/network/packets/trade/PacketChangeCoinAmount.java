@@ -9,9 +9,9 @@ import com.gildedgames.aether.common.network.MessageHandlerServer;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 public class PacketChangeCoinAmount implements IMessage
@@ -42,7 +42,7 @@ public class PacketChangeCoinAmount implements IMessage
 	public static class HandlerServer extends MessageHandlerServer<PacketChangeCoinAmount, IMessage>
 	{
 		@Override
-		public IMessage onMessage(PacketChangeCoinAmount message, EntityPlayer player)
+		public IMessage onMessage(PacketChangeCoinAmount message, PlayerEntity player)
 		{
 			PlayerAether aePlayer = PlayerAether.getPlayer(player);
 			PlayerTradeModule tradeModule = aePlayer.getModule(PlayerTradeModule.class);
@@ -52,7 +52,7 @@ public class PacketChangeCoinAmount implements IMessage
 			if (message.coinCount <= val && tradeModule.isTrading() && !tradeModule.isLockedIn())
 			{
 				tradeModule.setCoinAmount(message.coinCount);
-				NetworkingAether.sendPacketToPlayer(new PacketChangeCoinAmount(message.coinCount), (EntityPlayerMP) tradeModule.getTarget().getEntity());
+				NetworkingAether.sendPacketToPlayer(new PacketChangeCoinAmount(message.coinCount), (ServerPlayerEntity) tradeModule.getTarget().getEntity());
 			}
 
 			return null;
@@ -62,9 +62,9 @@ public class PacketChangeCoinAmount implements IMessage
 	public static class HandlerClient extends MessageHandlerClient<PacketChangeCoinAmount, IMessage>
 	{
 		@Override
-		public IMessage onMessage(PacketChangeCoinAmount message, EntityPlayer player)
+		public IMessage onMessage(PacketChangeCoinAmount message, PlayerEntity player)
 		{
-			GuiScreen screen = Minecraft.getMinecraft().currentScreen;
+			Screen screen = Minecraft.getInstance().currentScreen;
 
 			if (screen instanceof GuiTrade)
 			{

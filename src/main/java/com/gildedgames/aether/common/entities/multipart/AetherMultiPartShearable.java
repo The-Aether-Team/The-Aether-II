@@ -1,15 +1,15 @@
 package com.gildedgames.aether.common.entities.multipart;
 
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.IEntityMultiPart;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.common.IShearable;
 
@@ -25,16 +25,16 @@ public class AetherMultiPartShearable extends AetherMultiPartEntity
 	}
 
 	@Override
-	public EnumActionResult applyPlayerInteraction(EntityPlayer player, Vec3d vec, EnumHand hand)
+	public ActionResultType applyPlayerInteraction(PlayerEntity player, Vec3d vec, Hand hand)
 	{
 		ItemStack held = player.getHeldItem(hand);
 
 		if (held.isEmpty() || !(held.getItem() instanceof ItemShears))
 		{
-			return EnumActionResult.FAIL;
+			return ActionResultType.FAIL;
 		}
 
-		EntityLiving entity = (EntityLiving) this.parent;
+		MobEntity entity = (MobEntity) this.parent;
 		IShearable shearable = (IShearable) this.parent;
 
 		if (shearable.isShearable(held, player.world, entity.getPosition()) && !this.world.isRemote)
@@ -46,7 +46,7 @@ public class AetherMultiPartShearable extends AetherMultiPartEntity
 
 			for (ItemStack stack : drops)
 			{
-				EntityItem ent = this.entityDropItem(stack, 1.0F);
+				ItemEntity ent = this.entityDropItem(stack, 1.0F);
 
 				ent.motionY += rand.nextFloat() * 0.05F;
 				ent.motionX += (rand.nextFloat() - rand.nextFloat()) * 0.1F;
@@ -55,7 +55,7 @@ public class AetherMultiPartShearable extends AetherMultiPartEntity
 
 			held.damageItem(1, entity);
 
-			return EnumActionResult.SUCCESS;
+			return ActionResultType.SUCCESS;
 		}
 
 		return super.applyPlayerInteraction(player, vec, hand);

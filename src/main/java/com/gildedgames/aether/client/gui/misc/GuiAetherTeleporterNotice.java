@@ -13,15 +13,15 @@ import com.gildedgames.orbis.lib.client.gui.util.vanilla.GuiButtonVanilla;
 import com.gildedgames.orbis.lib.client.rect.Dim2D;
 import com.gildedgames.orbis.lib.client.rect.Pos2D;
 import com.gildedgames.orbis.lib.util.InputHelper;
+import com.mojang.blaze3d.platform.GlStateManager;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import net.minecraft.item.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 
 import java.io.IOException;
 
@@ -72,10 +72,10 @@ public class GuiAetherTeleporterNotice extends GuiViewer
 		this.matrix = new GuiTexture(Dim2D.build().width(111).height(68).pos(this.center).addX(170).center(true).flush(), MATRIX);
 
 		this.title = new GuiText(Dim2D.build().pos(this.center).addX(-67).addY(-83).flush(),
-				new Text(new TextComponentTranslation("notice.holdUp"), 2.0F));
+				new Text(new TranslationTextComponent("notice.holdUp"), 2.0F));
 
 		this.body = new GuiTextBox(Dim2D.build().pos(this.center).width(180).height(60).addX(-84).addY(-44).flush(),
-				false, new Text(new TextComponentTranslation(
+				false, new Text(new TranslationTextComponent(
 				"notice.body"),
 				1.0F));
 
@@ -96,22 +96,22 @@ public class GuiAetherTeleporterNotice extends GuiViewer
 		RenderHelper.enableGUIStandardItemLighting();
 		GlStateManager.enableDepth();
 
-		GlStateManager.translate(0.5F, 0.5F, 0.0F);
+		GlStateManager.translatef(0.5F, 0.5F, 0.0F);
 
 		int x = (int) this.center.x() + 140;
 		int y = (int) this.center.y() - 8;
 
-		Minecraft.getMinecraft().getRenderItem().renderItemIntoGUI(this.teleporter, x + 57, y);
+		Minecraft.getInstance().getRenderItem().renderItemIntoGUI(this.teleporter, x + 57, y);
 
-		Minecraft.getMinecraft().getRenderItem().renderItemIntoGUI(this.stone, x + 18, y - 18);
-		Minecraft.getMinecraft().getRenderItem().renderItemIntoGUI(this.stone, x - 18, y + 18);
-		Minecraft.getMinecraft().getRenderItem().renderItemIntoGUI(this.stone, x + 18, y + 18);
-		Minecraft.getMinecraft().getRenderItem().renderItemIntoGUI(this.stone, x - 18, y - 18);
+		Minecraft.getInstance().getRenderItem().renderItemIntoGUI(this.stone, x + 18, y - 18);
+		Minecraft.getInstance().getRenderItem().renderItemIntoGUI(this.stone, x - 18, y + 18);
+		Minecraft.getInstance().getRenderItem().renderItemIntoGUI(this.stone, x + 18, y + 18);
+		Minecraft.getInstance().getRenderItem().renderItemIntoGUI(this.stone, x - 18, y - 18);
 
-		Minecraft.getMinecraft().getRenderItem().renderItemIntoGUI(this.iron_ingot, x - 18, y);
-		Minecraft.getMinecraft().getRenderItem().renderItemIntoGUI(this.iron_ingot, x + 18, y);
-		Minecraft.getMinecraft().getRenderItem().renderItemIntoGUI(this.iron_ingot, x, y - 18);
-		Minecraft.getMinecraft().getRenderItem().renderItemIntoGUI(this.iron_ingot, x, y + 18);
+		Minecraft.getInstance().getRenderItem().renderItemIntoGUI(this.iron_ingot, x - 18, y);
+		Minecraft.getInstance().getRenderItem().renderItemIntoGUI(this.iron_ingot, x + 18, y);
+		Minecraft.getInstance().getRenderItem().renderItemIntoGUI(this.iron_ingot, x, y - 18);
+		Minecraft.getInstance().getRenderItem().renderItemIntoGUI(this.iron_ingot, x, y + 18);
 
 		RenderHelper.disableStandardItemLighting();
 		GlStateManager.disableRescaleNormal();

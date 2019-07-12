@@ -3,9 +3,9 @@ package com.gildedgames.aether.common.items.other;
 import com.gildedgames.aether.common.init.CreativeTabsAether;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.api.distmarker.Dist;
 
 public class ItemAetherRecord extends ItemRecord
 {
@@ -17,10 +17,10 @@ public class ItemAetherRecord extends ItemRecord
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public String getRecordNameLocal()
 	{
-		return new TextComponentTranslation(this.getTranslationKey() + ".desc").getFormattedText();
+		return new TranslationTextComponent(this.getTranslationKey() + ".desc").getFormattedText();
 	}
 
 	//TODO: Reimplement for 1.12.2?

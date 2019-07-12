@@ -2,9 +2,9 @@ package com.gildedgames.aether.client.gui.dialog;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.widget.button.Button;
 
-public abstract class GuiAbstractButton extends GuiButton
+public abstract class GuiAbstractButton extends Button
 {
 
 	protected boolean hasInit;
@@ -17,7 +17,7 @@ public abstract class GuiAbstractButton extends GuiButton
 	@Override
 	public final void drawButton(final Minecraft mc, final int mouseX, final int mouseY, final float partialTicks)
 	{
-		final FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
+		final FontRenderer fontRenderer = Minecraft.getInstance().fontRenderer;
 
 		if (!this.hasInit)
 		{

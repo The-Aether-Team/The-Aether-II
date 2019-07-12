@@ -2,8 +2,8 @@ package com.gildedgames.aether.common.world.spawning;
 
 import com.gildedgames.aether.api.world.spawn.ISpawnHandler;
 import com.gildedgames.aether.api.world.spawn.ISpawnSystem;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.nbt.INBT;
+import net.minecraft.util.Direction;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 
@@ -61,13 +61,13 @@ public class SpawnSystem implements ISpawnSystem
 	{
 		@Nullable
 		@Override
-		public NBTBase writeNBT(Capability<ISpawnSystem> capability, ISpawnSystem instance, EnumFacing side)
+		public INBT writeNBT(Capability<ISpawnSystem> capability, ISpawnSystem instance, Direction side)
 		{
 			return null;
 		}
 
 		@Override
-		public void readNBT(Capability<ISpawnSystem> capability, ISpawnSystem instance, EnumFacing side, NBTBase nbt)
+		public void readNBT(Capability<ISpawnSystem> capability, ISpawnSystem instance, Direction side, INBT nbt)
 		{
 
 		}

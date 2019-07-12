@@ -1,21 +1,21 @@
 package com.gildedgames.aether.common.entities.ai;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class EntityAIBreakBlocks extends EntityAIBase
+public class EntityAIBreakBlocks extends Goal
 {
 
 	private final float movementSpeed;
 
-	private final EntityCreature entity;
+	private final CreatureEntity entity;
 
 	private double targetX;
 
@@ -27,7 +27,7 @@ public class EntityAIBreakBlocks extends EntityAIBase
 
 	private final Block[] blocks;
 
-	public EntityAIBreakBlocks(EntityCreature entity, float movementSpeed, Block[] blocks)
+	public EntityAIBreakBlocks(CreatureEntity entity, float movementSpeed, Block[] blocks)
 	{
 		this.entity = entity;
 		this.movementSpeed = movementSpeed;
@@ -45,7 +45,7 @@ public class EntityAIBreakBlocks extends EntityAIBase
 			return false;
 		}
 
-		BlockPos entityPos = new BlockPos(this.entity.posX, this.entity.getEntityBoundingBox().minY, this.entity.posZ);
+		BlockPos entityPos = new BlockPos(this.entity.posX, this.entity.getBoundingBox().minY, this.entity.posZ);
 
 		Vec3d vec3d = this.findBlocks();
 
@@ -94,7 +94,7 @@ public class EntityAIBreakBlocks extends EntityAIBase
 	private Vec3d findBlocks()
 	{
 		Random random = this.entity.getRNG();
-		BlockPos blockpos = new BlockPos(this.entity.posX, this.entity.getEntityBoundingBox().minY, this.entity.posZ);
+		BlockPos blockpos = new BlockPos(this.entity.posX, this.entity.getBoundingBox().minY, this.entity.posZ);
 
 		final int rad = 5;
 
@@ -108,7 +108,7 @@ public class EntityAIBreakBlocks extends EntityAIBase
 
 					if (!this.entity.getEntityWorld().isAirBlock(pos2))
 					{
-						IBlockState block = this.entity.getEntityWorld().getBlockState(pos2);
+						BlockState block = this.entity.getEntityWorld().getBlockState(pos2);
 
 						for (Block bs : this.blocks)
 						{

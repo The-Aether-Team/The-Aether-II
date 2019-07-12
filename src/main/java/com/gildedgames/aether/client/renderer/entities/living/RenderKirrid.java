@@ -6,11 +6,11 @@ import com.gildedgames.aether.client.renderer.entities.living.layers.LayerKirrid
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.animals.EntityKirrid;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.LivingRenderer;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderKirrid extends RenderLiving<EntityKirrid>
+public class RenderKirrid extends LivingRenderer<EntityKirrid, ModelKirrid>
 {
 	private static final ResourceLocation texture = AetherCore.getResource("textures/entities/kirrid/kirrid.png");
 
@@ -20,7 +20,7 @@ public class RenderKirrid extends RenderLiving<EntityKirrid>
 
 	private static final ResourceLocation EYES_CLOSED = AetherCore.getResource("textures/entities/kirrid/eyes_closed.png");
 
-	public RenderKirrid(RenderManager renderManager)
+	public RenderKirrid(EntityRendererManager renderManager)
 	{
 		super(renderManager, new ModelKirrid(), 0.75f);
 
@@ -38,10 +38,10 @@ public class RenderKirrid extends RenderLiving<EntityKirrid>
 	{
 		super.renderModel(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
-		ModelKirrid model = (ModelKirrid) this.mainModel;
+		ModelKirrid model = this.getEntityModel();
 
 		boolean globalInvisible = !entity.isInvisible() || this.renderOutlines;
-		boolean playerInvisible = !globalInvisible && !entity.isInvisibleToPlayer(Minecraft.getMinecraft().player);
+		boolean playerInvisible = !globalInvisible && !entity.isInvisibleToPlayer(Minecraft.getInstance().player);
 
 		if (globalInvisible || playerInvisible)
 		{

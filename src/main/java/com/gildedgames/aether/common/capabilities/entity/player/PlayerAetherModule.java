@@ -2,10 +2,10 @@ package com.gildedgames.aether.common.capabilities.entity.player;
 
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.player.IPlayerAetherModule;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.player.PlayerDropsEvent;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
@@ -19,7 +19,7 @@ public abstract class PlayerAetherModule implements IPlayerAetherModule
 	}
 
 	@Override
-	public void onDrops(PlayerDropsEvent event)
+	public void onDrops(LivingDropsEvent event)
 	{
 
 	}
@@ -55,7 +55,7 @@ public abstract class PlayerAetherModule implements IPlayerAetherModule
 	}
 
 	@Override
-	public final EntityPlayer getEntity()
+	public final PlayerEntity getEntity()
 	{
 		return this.playerAether.getEntity();
 	}

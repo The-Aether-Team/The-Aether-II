@@ -4,10 +4,10 @@ import com.gildedgames.aether.api.world.IWorldObjectHoverable;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.tiles.TileEntitySynced;
 import com.gildedgames.orbis.lib.util.mc.NBTHelper;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -19,7 +19,7 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements ITile
 	private BlockPos controllerPosOffset;
 
 	@Override
-	public boolean onInteract(final EntityPlayer player)
+	public boolean onInteract(final PlayerEntity player)
 	{
 		if (this.hasLinkedController())
 		{
@@ -63,7 +63,7 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements ITile
 	}
 
 	@Override
-	public ItemStack getPickedStack(final World world, final BlockPos pos, final IBlockState state)
+	public ItemStack getPickedStack(final World world, final BlockPos pos, final BlockState state)
 	{
 		if (!this.hasLinkedController())
 		{
@@ -101,22 +101,22 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements ITile
 	}
 
 	@Override
-	public void readFromNBT(final NBTTagCompound compound)
+	public void readFromNBT(final CompoundNBT compound)
 	{
 		super.readFromNBT(compound);
 
-		if (compound.hasKey("controller"))
+		if (compound.contains("controller"))
 		{
-			this.controllerPosOffset = NBTHelper.readBlockPos(compound.getCompoundTag("controller"));
+			this.controllerPosOffset = NBTHelper.readBlockPos(compound.getCompound("controller"));
 		}
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(final NBTTagCompound compound)
+	public CompoundNBT writeToNBT(final CompoundNBT compound)
 	{
 		super.writeToNBT(compound);
 
-		compound.setTag("controller", NBTHelper.writeBlockPos(this.controllerPosOffset));
+		compound.put("controller", NBTHelper.writeBlockPos(this.controllerPosOffset));
 
 		return compound;
 	}

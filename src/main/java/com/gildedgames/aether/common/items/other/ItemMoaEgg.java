@@ -8,23 +8,23 @@ import com.gildedgames.aether.common.entities.genes.GeneUtil;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.tiles.TileEntityMoaEgg;
 import com.gildedgames.aether.common.items.IDropOnDeath;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -55,14 +55,14 @@ public class ItemMoaEgg extends Item implements IDropOnDeath
 	{
 		if (stack.getTagCompound() == null)
 		{
-			stack.setTagCompound(new NBTTagCompound());
+			stack.setTagCompound(new CompoundNBT());
 		}
 
-		final NBTTagCompound poolTag = new NBTTagCompound();
+		final CompoundNBT poolTag = new CompoundNBT();
 
 		pool.write(poolTag);
 
-		stack.getTagCompound().setTag("pool", poolTag);
+		stack.getTagCompound().put("pool", poolTag);
 	}
 
 	public static MoaGenePool getGenePool(final ItemStack stack)
@@ -72,7 +72,7 @@ public class ItemMoaEgg extends Item implements IDropOnDeath
 			ItemMoaEgg.setGenePool(stack, new MoaGenePool());
 		}
 
-		final NBTTagCompound poolTag = stack.getTagCompound().getCompoundTag("pool");
+		final CompoundNBT poolTag = stack.getTagCompound().getCompound("pool");
 
 		final MoaGenePool pool = new MoaGenePool();
 
@@ -82,7 +82,7 @@ public class ItemMoaEgg extends Item implements IDropOnDeath
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void addInformation(final ItemStack stack, final World world, final List<String> creativeList, final ITooltipFlag flag)
 	{
 		final MoaGenePool genePool = ItemMoaEgg.getGenePool(stack);
@@ -101,12 +101,12 @@ public class ItemMoaEgg extends Item implements IDropOnDeath
 	}
 
 	@Override
-	public EnumActionResult onItemUse(final EntityPlayer player, final World world, final BlockPos pos, final EnumHand hand, final EnumFacing facing,
+	public ActionResultType onItemUse(final PlayerEntity player, final World world, final BlockPos pos, final Hand hand, final Direction facing,
 			final float hitX, final float hitY, final float hitZ)
 	{
 		final ItemStack stack = player.getHeldItem(hand);
 
-		final IBlockState state = world.getBlockState(pos);
+		final BlockState state = world.getBlockState(pos);
 
 		final boolean replaceable = state.getBlock().isReplaceable(world, pos);
 
@@ -114,16 +114,16 @@ public class ItemMoaEgg extends Item implements IDropOnDeath
 
 		if (stack.getCount() == 0)
 		{
-			return EnumActionResult.FAIL;
+			return ActionResultType.FAIL;
 		}
 		else if (!player.canPlayerEdit(pos, facing, stack))
 		{
-			return EnumActionResult.FAIL;
+			return ActionResultType.FAIL;
 		}
 		else if ((world.isAirBlock(pos.add(0, yOffset, 0)) || replaceable)
 				&& BlocksAether.moa_egg.canPlaceBlockAt(world, pos.add(0, yOffset, 0)))
 		{
-			if (player.capabilities.isCreativeMode || this.creativeEgg)
+			if (player.isCreative() || this.creativeEgg)
 			{
 				if (!world.isRemote)
 				{
@@ -151,7 +151,7 @@ public class ItemMoaEgg extends Item implements IDropOnDeath
 
 				stack.shrink(1);
 
-				return EnumActionResult.SUCCESS;
+				return ActionResultType.SUCCESS;
 			}
 			else if (world.checkNoEntityCollision(BlockMoaEgg.BOUNDING_BOX.offset(pos.getX(), pos.getY() + 1, pos.getZ())) &&
 					world.setBlockState(pos.add(0, yOffset, 0), BlocksAether.moa_egg.getDefaultState()))
@@ -175,11 +175,11 @@ public class ItemMoaEgg extends Item implements IDropOnDeath
 
 				stack.shrink(1);
 
-				return EnumActionResult.SUCCESS;
+				return ActionResultType.SUCCESS;
 			}
 		}
 
-		return EnumActionResult.PASS;
+		return ActionResultType.PASS;
 	}
 
 	private boolean checkCollision(BlockPos pos, World world, float yOffset)
@@ -216,8 +216,8 @@ public class ItemMoaEgg extends Item implements IDropOnDeath
 		}
 
 		@Override
-		@SideOnly(Side.CLIENT)
-		public float apply(final ItemStack stack, @Nullable final World worldIn, @Nullable final EntityLivingBase entityIn)
+		@OnlyIn(Dist.CLIENT)
+		public float apply(final ItemStack stack, @Nullable final World worldIn, @Nullable final LivingEntity entityIn)
 		{
 			final MoaGenePool genePool = ItemMoaEgg.getGenePool(stack);
 

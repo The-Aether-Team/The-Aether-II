@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.entities.ai;
 
-import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -12,12 +12,12 @@ public class EntityAIForcedWanderAvoidLight extends EntityAIForcedWander
 {
 	protected final int lightLevel;
 
-	public EntityAIForcedWanderAvoidLight(final EntityCreature entity, final double speedIn, final int chance, final int lightLevel)
+	public EntityAIForcedWanderAvoidLight(final CreatureEntity entity, final double speedIn, final int chance, final int lightLevel)
 	{
 		this(entity, speedIn, chance, 10, 7, lightLevel);
 	}
 
-	public EntityAIForcedWanderAvoidLight(final EntityCreature entity, final double speedIn, final int chance, final int xScatter, final int yScatter,
+	public EntityAIForcedWanderAvoidLight(final CreatureEntity entity, final double speedIn, final int chance, final int xScatter, final int yScatter,
 			final int lightLevel)
 	{
 		super(entity, speedIn, chance, xScatter, yScatter);
@@ -30,11 +30,11 @@ public class EntityAIForcedWanderAvoidLight extends EntityAIForcedWander
 	{
 		final World world = this.entity.world;
 
-		final BlockPos entityPos = new BlockPos(this.entity.posX, this.entity.getEntityBoundingBox().minY, this.entity.posZ);
+		final BlockPos entityPos = new BlockPos(this.entity.posX, this.entity.getBoundingBox().minY, this.entity.posZ);
 
 		if (world.isDaytime())
 		{
-			if (!world.canSeeSky(new BlockPos(this.entity.posX, this.entity.getEntityBoundingBox().minY, this.entity.posZ)))
+			if (!world.canSeeSky(new BlockPos(this.entity.posX, this.entity.getBoundingBox().minY, this.entity.posZ)))
 			{
 				return false;
 			}

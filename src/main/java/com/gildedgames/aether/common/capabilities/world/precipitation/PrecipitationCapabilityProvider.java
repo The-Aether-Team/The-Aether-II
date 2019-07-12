@@ -2,15 +2,15 @@ package com.gildedgames.aether.common.capabilities.world.precipitation;
 
 import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.api.world.islands.precipitation.IPrecipitationManager;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.nbt.INBT;
+import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class PrecipitationCapabilityProvider implements ICapabilitySerializable<NBTBase>
+public class PrecipitationCapabilityProvider implements ICapabilitySerializable<INBT>
 {
 	private final PrecipitationManagerImpl.Storage storage = new PrecipitationManagerImpl.Storage();
 
@@ -22,7 +22,7 @@ public class PrecipitationCapabilityProvider implements ICapabilitySerializable<
 	}
 
 	@Override
-	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing)
+	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable Direction facing)
 	{
 		return this.capability != null && capability == CapabilitiesAether.PRECIPITATION_MANAGER;
 	}
@@ -30,7 +30,7 @@ public class PrecipitationCapabilityProvider implements ICapabilitySerializable<
 	@SuppressWarnings("unchecked")
 	@Nullable
 	@Override
-	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing)
+	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable Direction facing)
 	{
 		if (this.hasCapability(capability, facing))
 		{
@@ -41,13 +41,13 @@ public class PrecipitationCapabilityProvider implements ICapabilitySerializable<
 	}
 
 	@Override
-	public NBTBase serializeNBT()
+	public INBT serializeNBT()
 	{
 		return this.storage.writeNBT(CapabilitiesAether.PRECIPITATION_MANAGER, this.capability, null);
 	}
 
 	@Override
-	public void deserializeNBT(NBTBase nbt)
+	public void deserializeNBT(INBT nbt)
 	{
 		this.storage.readNBT(CapabilitiesAether.PRECIPITATION_MANAGER, this.capability, null, nbt);
 	}

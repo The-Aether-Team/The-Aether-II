@@ -13,7 +13,7 @@ import com.gildedgames.aether.common.world.decorations.caves.WorldGenAetherCaves
 import com.gildedgames.aether.common.world.island.IslandBlockType;
 import com.gildedgames.aether.common.world.preparation.mask.ChunkMask;
 import com.gildedgames.orbis.lib.processing.BlockAccessExtendedWrapper;
-import com.gildedgames.orbis.lib.processing.IBlockAccessExtended;
+import com.gildedgames.orbis.lib.processing.IBlockAccess;
 import net.minecraft.world.World;
 
 /**
@@ -22,7 +22,7 @@ import net.minecraft.world.World;
  */
 public class WorldPreparationAether
 {
-	private final IBlockAccessExtended access;
+	private final IBlockAccess access;
 
 	private final OpenSimplexNoise noise;
 

@@ -7,8 +7,8 @@ import com.gildedgames.aether.common.entities.ai.hopping.HoppingMoveHelper;
 import com.gildedgames.aether.common.entities.monsters.EntitySwet;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketLatchSwet;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.SoundEvents;
 
 public class AILatchOn extends EntityAI<EntitySwet>
 {
@@ -33,10 +33,10 @@ public class AILatchOn extends EntityAI<EntitySwet>
 	@Override
 	public boolean shouldExecute()
 	{
-		return this.entity().getAttackTarget() instanceof EntityPlayer && this.entity().getAttackTarget() != null && this.entity()
+		return this.entity().getAttackTarget() instanceof PlayerEntity && this.entity().getAttackTarget() != null && this.entity()
 				.canEntityBeSeen(this.entity().getAttackTarget())
 				&& this.entity().getDistance(this.entity().getAttackTarget()) <= 1.5D && EntitySwet
-				.canLatch(this.entity(), (EntityPlayer) this.entity().getAttackTarget());
+				.canLatch(this.entity(), (PlayerEntity) this.entity().getAttackTarget());
 	}
 
 	@Override
@@ -56,9 +56,9 @@ public class AILatchOn extends EntityAI<EntitySwet>
 	{
 		this.entity().faceEntity(this.entity().getAttackTarget(), 10.0F, 10.0F);
 
-		if (this.entity().getAttackTarget() instanceof EntityPlayer)
+		if (this.entity().getAttackTarget() instanceof PlayerEntity)
 		{
-			final EntityPlayer player = (EntityPlayer) this.entity().getAttackTarget();
+			final PlayerEntity player = (PlayerEntity) this.entity().getAttackTarget();
 
 			this.entity().setSucking(0);
 

@@ -3,18 +3,18 @@ package com.gildedgames.aether.client.renderer.entities.living;
 import com.gildedgames.aether.client.models.entities.living.ModelZephyr;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.monsters.EntityZephyr;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.EntityLiving;
+import com.mojang.blaze3d.platform.GlStateManager;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.LivingRenderer;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderZephyr extends RenderLiving<EntityLiving>
+public class RenderZephyr extends LivingRenderer<EntityZephyr, ModelZephyr>
 {
 
 	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/entities/zephyr/zephyr.png");
 
-	public RenderZephyr(final RenderManager manager)
+	public RenderZephyr(final EntityRendererManager manager)
 	{
 		super(manager, new ModelZephyr(), 1.0F);
 	}
@@ -22,34 +22,32 @@ public class RenderZephyr extends RenderLiving<EntityLiving>
 	private float partialTicks;
 
 	@Override
-	protected void preRenderCallback(final EntityLiving entity, final float partialTicks)
+	protected void preRenderCallback(final EntityZephyr entity, final float partialTicks)
 	{
 		this.partialTicks = partialTicks;
 	}
 
 	@Override
-	protected void renderModel(EntityLiving entitylivingbaseIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor)
+	protected void renderModel(EntityZephyr entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor)
 	{
 		GlStateManager.pushMatrix();
 
-		EntityZephyr zephyr = (EntityZephyr) entitylivingbaseIn;
-
-		GlStateManager.translate(0, 1.1f, 0);
+		GlStateManager.translatef(0, 1.1f, 0);
 
 		/*if (zephyr.getFlightPath() != null)
 		{
-			Vec3d pos = entitylivingbaseIn.getPositionVector();
+			Vec3d pos = entity.getPositionVector();
 
 			Point3d cur = zephyr.getPoint(this.partialTicks);
 
 			GlStateManager.pushMatrix();
 
-			GlStateManager.translate(-pos.x, pos.y, pos.z);
+			GlStateManager.translatef(-pos.x, pos.y, pos.z);
 			Point3d last = null, last2 = null;
 
-			if (Minecraft.getMinecraft().gameSettings.showDebugInfo)
+			if (Minecraft.getInstance().gameSettings.showDebugInfo)
 			{
-				float scale = 20f / Minecraft.getMinecraft().player.getDistance(entitylivingbaseIn);
+				float scale = 20f / Minecraft.getInstance().player.getDistance(entity);
 
 				for (float t = 0; t <= 1.2f; t += 0.03f)
 				{
@@ -101,16 +99,16 @@ public class RenderZephyr extends RenderLiving<EntityLiving>
 
 			Point3d v2 = MathUtil.getPoints(zephyr.getFlightPath(), zephyr.getTime() - 0.001f);
 
-			GlStateManager.rotate(QuaternionUtil.lookAt(new Vec3d(cur.x, -cur.y, -cur.z), new Vec3d(v2.x, -v2.y, -v2.z)));
+			GlStateManager.rotatef(QuaternionUtil.lookAt(new Vec3d(cur.x, -cur.y, -cur.z), new Vec3d(v2.x, -v2.y, -v2.z)));
 		}*/
 
-		super.renderModel(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);
+		super.renderModel(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);
 
 		GlStateManager.popMatrix();
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(final EntityLiving entity)
+	protected ResourceLocation getEntityTexture(final EntityZephyr entity)
 	{
 		return TEXTURE;
 	}

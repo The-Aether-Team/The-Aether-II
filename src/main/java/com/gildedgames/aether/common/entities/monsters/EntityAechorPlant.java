@@ -7,28 +7,28 @@ import com.gildedgames.aether.common.entities.ai.EntityAIAechorPlantAttack;
 import com.gildedgames.aether.common.init.LootTablesAether;
 import com.gildedgames.aether.common.util.helpers.PlayerUtil;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Arrays;
 
-public class EntityAechorPlant extends EntityAetherMob
+public class EntityAechorPlant extends EntityAetherMonster
 {
 	private static final int MAX_PETALS = 8;
 
@@ -40,7 +40,7 @@ public class EntityAechorPlant extends EntityAetherMob
 
 	private boolean[] petals;
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public float sinage, prevSinage;
 
 	private int poisonLeft;
@@ -51,8 +51,8 @@ public class EntityAechorPlant extends EntityAetherMob
 	{
 		super(world);
 
-		this.tasks.addTask(0, new EntityAIAechorPlantAttack(this));
-		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
+		this.goalSelector.addGoal(0, new EntityAIAechorPlantAttack(this));
+		this.targetSelector.addGoal(1, new EntityAINearestAttackableTarget<>(this, PlayerEntity.class, true));
 
 		this.setSize(0.8F, 0.6F);
 
@@ -76,7 +76,7 @@ public class EntityAechorPlant extends EntityAetherMob
 	@Override
 	protected void entityInit()
 	{
-		super.entityInit();
+		super.registerData();
 
 		this.petals = new boolean[MAX_PETALS];
 
@@ -88,24 +88,24 @@ public class EntityAechorPlant extends EntityAetherMob
 	}
 
 	@Override
-	protected void applyEntityAttributes()
+	protected void registerAttributes()
 	{
-		super.applyEntityAttributes();
+		super.registerAttributes();
 
 		this.setPlantSize(this.rand.nextInt(3) + 1);
 
-		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(3.0F);
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(15.0D);
+		this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(3.0F);
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(15.0D);
 
-		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(4);
-		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(8);
-		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(8);
+		this.getAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(4);
+		this.getAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(8);
+		this.getAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(8);
 	}
 
 	@Override
-	public void onUpdate()
+	public void livingTick()
 	{
-		super.onUpdate();
+		super.livingTick();
 
 		this.motionX = 0.0D;
 		this.motionZ = 0.0D;
@@ -239,7 +239,7 @@ public class EntityAechorPlant extends EntityAetherMob
 			return false;
 		}
 
-		final IBlockState rootBlock = this.world.getBlockState(pos.down());
+		final BlockState rootBlock = this.world.getBlockState(pos.down());
 
 		return rootBlock.getBlock() == BlocksAether.aether_grass
 				|| rootBlock.getBlock() == BlocksAether.aether_dirt
@@ -268,11 +268,11 @@ public class EntityAechorPlant extends EntityAetherMob
 	}
 
 	@Override
-	public boolean processInteract(EntityPlayer player, EnumHand hand)
+	public boolean processInteract(PlayerEntity player, Hand hand)
 	{
 		ItemStack stack = player.getHeldItem(hand);
 
-		if (!player.capabilities.isCreativeMode && stack.getItem() == ItemsAether.skyroot_bucket)
+		if (!player.isCreative() && stack.getItem() == ItemsAether.skyroot_bucket)
 		{
 			if (this.getPoisonLeft() > 0)
 			{
@@ -287,7 +287,7 @@ public class EntityAechorPlant extends EntityAetherMob
 		return false;
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	private void tickAnimation()
 	{
 		this.prevSinage = this.sinage;
@@ -311,27 +311,27 @@ public class EntityAechorPlant extends EntityAetherMob
 	}
 
 	@Override
-	public void writeEntityToNBT(NBTTagCompound tagCompound)
+	public void writeEntityToNBT(CompoundNBT tagCompound)
 	{
 		super.writeEntityToNBT(tagCompound);
 
-		tagCompound.setInteger("plantSize", this.getPlantSize());
-		tagCompound.setInteger("poisonLeft", this.getPoisonLeft());
+		tagCompound.putInt("plantSize", this.getPlantSize());
+		tagCompound.putInt("poisonLeft", this.getPoisonLeft());
 
-		tagCompound.setByte("petals", this.serializePlantPetals());
+		tagCompound.putByte("petals", this.serializePlantPetals());
 
-		tagCompound.setInteger("petalGrowTimer", this.petalGrowTimer);
+		tagCompound.putInt("petalGrowTimer", this.petalGrowTimer);
 	}
 
 	@Override
-	public void readEntityFromNBT(NBTTagCompound tagCompound)
+	public void readEntityFromNBT(CompoundNBT tagCompound)
 	{
 		super.readEntityFromNBT(tagCompound);
 
-		this.setPlantSize(tagCompound.getInteger("plantSize"));
-		this.setPoisonLeft(tagCompound.getInteger("poisonLeft"));
+		this.setPlantSize(tagCompound.getInt("plantSize"));
+		this.setPoisonLeft(tagCompound.getInt("poisonLeft"));
 
-		if (tagCompound.hasKey("petals"))
+		if (tagCompound.contains("petals"))
 		{
 			this.deserializePlantPetals(tagCompound.getByte("petals"));
 		}
@@ -340,7 +340,7 @@ public class EntityAechorPlant extends EntityAetherMob
 			Arrays.fill(this.petals, true);
 		}
 
-		this.petalGrowTimer = tagCompound.getInteger("petalGrowTimer");
+		this.petalGrowTimer = tagCompound.getInt("petalGrowTimer");
 	}
 
 	@Override

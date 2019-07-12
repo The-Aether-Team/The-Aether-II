@@ -2,25 +2,25 @@ package com.gildedgames.aether.common.entities.flying;
 
 import com.gildedgames.aether.common.entities.ai.EntityAIForcedWander;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityBodyHelper;
-import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class EntityFlying extends EntityCreature
+public class EntityFlying extends CreatureEntity
 {
 
 	private static final DataParameter<Boolean> IS_MOVING = EntityDataManager.createKey(EntityFlying.class, DataSerializers.BOOLEAN);
@@ -42,9 +42,9 @@ public class EntityFlying extends EntityCreature
 		this.clientSideTailAnimationO = this.clientSideTailAnimation;
 	}
 
-	protected EntityAIBase createWanderTask()
+	protected Goal createWanderTask()
 	{
-		final EntityAIWander wander = new EntityAIForcedWander(this, 0.4D, 5);
+		final RandomWalkingGoal wander = new EntityAIForcedWander(this, 0.4D, 5);
 
 		wander.setMutexBits(1);
 
@@ -52,14 +52,14 @@ public class EntityFlying extends EntityCreature
 	}
 
 	@Override
-	protected void initEntityAI()
+	protected void registerGoals()
 	{
 		final EntityAIMoveTowardsRestriction moveTowardsRestriction = new EntityAIMoveTowardsRestriction(this, 0.4D);
 
 		moveTowardsRestriction.setMutexBits(1);
 
-		this.tasks.addTask(1, moveTowardsRestriction);
-		this.tasks.addTask(2, this.createWanderTask());
+		this.goalSelector.addGoal(1, moveTowardsRestriction);
+		this.goalSelector.addGoal(2, this.createWanderTask());
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class EntityFlying extends EntityCreature
 		return new EntityBodyHelperFlying(this);
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public float getTailAnimation(final float deltaTime)
 	{
 		return this.clientSideTailAnimationO + (this.clientSideTailAnimation - this.clientSideTailAnimationO) * deltaTime;
@@ -89,10 +89,10 @@ public class EntityFlying extends EntityCreature
 	@Override
 	public boolean getCanSpawnHere()
 	{
-		final IBlockState state = this.world.getBlockState((new BlockPos(this)).down());
+		final BlockState state = this.world.getBlockState((new BlockPos(this)).down());
 
 		return state.canEntitySpawn(this)
-				&& this.getBlockPathWeight(this.world.getTopSolidOrLiquidBlock(new BlockPos(this.posX, this.getEntityBoundingBox().minY, this.posZ))) >= 0.0F;
+				&& this.getBlockPathWeight(this.world.getTopSolidOrLiquidBlock(new BlockPos(this.posX, this.getBoundingBox().minY, this.posZ))) >= 0.0F;
 	}
 
 	@Override
@@ -114,7 +114,7 @@ public class EntityFlying extends EntityCreature
 	}
 
 	@Override
-	protected void updateFallState(final double y, final boolean onGroundIn, final IBlockState state, final BlockPos pos)
+	protected void updateFallState(final double y, final boolean onGroundIn, final BlockState state, final BlockPos pos)
 	{
 
 	}
@@ -122,23 +122,23 @@ public class EntityFlying extends EntityCreature
 	@Override
 	protected void entityInit()
 	{
-		super.entityInit();
+		super.registerData();
 
 		this.dataManager.register(EntityFlying.IS_MOVING, false);
 	}
 
 	@Override
-	protected void applyEntityAttributes()
+	protected void registerAttributes()
 	{
-		super.applyEntityAttributes();
+		super.registerAttributes();
 
-		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
+		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
 	}
 
 	@Override
-	public void onUpdate()
+	public void livingTick()
 	{
-		super.onUpdate();
+		super.livingTick();
 
 		this.fallDistance = 0.0F;
 
@@ -181,7 +181,7 @@ public class EntityFlying extends EntityCreature
 	}
 
 	@Override
-	protected PathNavigate createNavigator(final World worldIn)
+	protected PathNavigator createNavigator(final World worldIn)
 	{
 		return new PathNavigateFlyer(this, worldIn);
 	}
@@ -205,8 +205,8 @@ public class EntityFlying extends EntityCreature
 	@Override
 	public boolean isNotColliding()
 	{
-		return this.world.checkNoEntityCollision(this.getEntityBoundingBox(), this)
-				&& this.world.getCollisionBoxes(this, this.getEntityBoundingBox()).isEmpty();
+		return this.world.checkNoEntityCollision(this.getBoundingBox(), this)
+				&& this.world.getCollisionBoxes(this, this.getBoundingBox()).isEmpty();
 	}
 
 	@Override

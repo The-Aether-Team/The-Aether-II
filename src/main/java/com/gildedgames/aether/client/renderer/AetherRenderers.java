@@ -40,7 +40,7 @@ public class AetherRenderers
 	{
 		registerTESRs();
 
-		final ItemColors itemColors = Minecraft.getMinecraft().getItemColors();
+		final ItemColors itemColors = Minecraft.getInstance().getItemColors();
 		itemColors.registerItemColorHandler(new ItemMoaEggColorHandler(), ItemsAether.moa_egg_item);
 		itemColors.registerItemColorHandler(new WrappingPaperColorHandler(), ItemsAether.wrapping_paper);
 		itemColors.registerItemColorHandler(new MoaFeatherColorHandler(), ItemsAether.moa_feather);

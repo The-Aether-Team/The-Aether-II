@@ -6,8 +6,8 @@ import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerDi
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import com.gildedgames.orbis.lib.util.io.NBTFunnel;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
@@ -37,7 +37,7 @@ public class PacketConditionsMetData implements IMessage
 	@Override
 	public void toBytes(final ByteBuf buf)
 	{
-		NBTTagCompound tag = new NBTTagCompound();
+		CompoundNBT tag = new CompoundNBT();
 		NBTFunnel funnel = new NBTFunnel(tag);
 
 		funnel.setMap("c", this.conditionsMet, NBTFunnel.STRING_SETTER, NBTFunnel.BOOLEAN_SETTER);
@@ -48,7 +48,7 @@ public class PacketConditionsMetData implements IMessage
 	public static class HandlerClient extends MessageHandlerClient<PacketConditionsMetData, PacketConditionsMetData>
 	{
 		@Override
-		public PacketConditionsMetData onMessage(final PacketConditionsMetData message, final EntityPlayer player)
+		public PacketConditionsMetData onMessage(final PacketConditionsMetData message, final PlayerEntity player)
 		{
 			final IPlayerAether aePlayer = PlayerAether.getPlayer(player);
 

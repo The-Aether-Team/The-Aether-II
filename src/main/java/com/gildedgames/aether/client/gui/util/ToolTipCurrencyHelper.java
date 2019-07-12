@@ -1,19 +1,15 @@
 package com.gildedgames.aether.client.gui.util;
 
-import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.client.gui.dialog.GuiCoins;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerCurrencyModule;
-import com.gildedgames.aether.common.shop.ShopCurrencyGilt;
 import com.google.common.collect.Lists;
-import com.mojang.authlib.yggdrasil.response.MinecraftTexturesPayload;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.ResourceLocation;
 
-import java.awt.*;
 import java.util.List;
 
 public class ToolTipCurrencyHelper
@@ -67,10 +63,10 @@ public class ToolTipCurrencyHelper
 		{
 			if (fontRenderer == null)
 			{
-				fontRenderer = Minecraft.getMinecraft().fontRenderer;
+				fontRenderer = Minecraft.getInstance().fontRenderer;
 			}
 
-			TextureManager textureManager = Minecraft.getMinecraft().getTextureManager();
+			TextureManager textureManager = Minecraft.getInstance().getTextureManager();
 			int[] brokenUp = PlayerCurrencyModule.breakUpCurrency((long) value);
 
 			final int size = this.cachedText.size();
@@ -90,7 +86,7 @@ public class ToolTipCurrencyHelper
 					GlStateManager.color(1, 1, 1, 1);
 
 					textureManager.bindTexture(resourceMap[i]);
-					Gui.drawModalRectWithCustomSizedTexture(x2, y2, 0, 0, 7, 7, 7, 7);
+					AbstractGui.drawModalRectWithCustomSizedTexture(x2, y2, 0, 0, 7, 7, 7, 7);
 
 					GlStateManager.popMatrix();
 

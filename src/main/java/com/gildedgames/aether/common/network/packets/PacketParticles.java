@@ -4,7 +4,7 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.init.ParticlesAether;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 public class PacketParticles implements IMessage
@@ -64,7 +64,7 @@ public class PacketParticles implements IMessage
 	public static class HandlerClient extends MessageHandlerClient<PacketParticles, PacketParticles>
 	{
 		@Override
-		public PacketParticles onMessage(final PacketParticles message, final EntityPlayer player)
+		public PacketParticles onMessage(final PacketParticles message, final PlayerEntity player)
 		{
 			switch (message.particle)
 			{

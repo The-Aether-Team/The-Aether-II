@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.world.spawning;
 
 import com.gildedgames.aether.api.world.spawn.ISpawnArea;
 import com.gildedgames.aether.common.AetherCore;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.math.ChunkPos;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -154,17 +154,17 @@ public class SpawnArea implements ISpawnArea
 	}
 
 	@Override
-	public NBTTagCompound serializeNBT()
+	public CompoundNBT serializeNBT()
 	{
-		NBTTagCompound nbt = new NBTTagCompound();
-		nbt.setInteger("EntityCount", this.entityCount);
+		CompoundNBT nbt = new CompoundNBT();
+		nbt.putInt("EntityCount", this.entityCount);
 
 		return nbt;
 	}
 
 	@Override
-	public void deserializeNBT(NBTTagCompound nbt)
+	public void deserializeNBT(CompoundNBT nbt)
 	{
-		this.entityCount = nbt.getInteger("EntityCount");
+		this.entityCount = nbt.getInt("EntityCount");
 	}
 }

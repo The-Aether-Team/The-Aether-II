@@ -3,15 +3,15 @@ package com.gildedgames.aether.client.renderer.entities.companions;
 import com.gildedgames.aether.client.models.entities.companions.ModelShadeOfArkenzus;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.companions.EntityShadeOfArkenzus;
-import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class RenderShadeOfArkenzus extends RenderCompanion<EntityShadeOfArkenzus>
+public class RenderShadeOfArkenzus extends RenderCompanion<EntityShadeOfArkenzus, ModelShadeOfArkenzus>
 {
 	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/entities/companions/shade_of_arkenzus.png");
 
-	public RenderShadeOfArkenzus(RenderManager renderManager)
+	public RenderShadeOfArkenzus(EntityRendererManager renderManager)
 	{
 		super(renderManager, new ModelShadeOfArkenzus(), 0.3f, 1.5D);
 	}

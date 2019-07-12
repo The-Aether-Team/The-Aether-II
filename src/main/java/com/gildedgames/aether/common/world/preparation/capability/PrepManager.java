@@ -7,8 +7,8 @@ import com.gildedgames.aether.api.world.preparation.IPrepSectorData;
 import com.gildedgames.aether.common.world.preparation.access.PrepSectorAccessClient;
 import com.gildedgames.aether.common.world.preparation.access.PrepSectorAccessServer;
 import com.gildedgames.orbis.lib.OrbisLib;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.nbt.INBT;
+import net.minecraft.util.Direction;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 
@@ -73,13 +73,13 @@ public class PrepManager implements IPrepManager
 	{
 		@Nullable
 		@Override
-		public NBTBase writeNBT(final Capability<IPrepManager> capability, final IPrepManager instance, final EnumFacing side)
+		public INBT writeNBT(final Capability<IPrepManager> capability, final IPrepManager instance, final Direction side)
 		{
 			return null;
 		}
 
 		@Override
-		public void readNBT(final Capability<IPrepManager> capability, final IPrepManager instance, final EnumFacing side, final NBTBase nbt)
+		public void readNBT(final Capability<IPrepManager> capability, final IPrepManager instance, final Direction side, final INBT nbt)
 		{
 
 		}

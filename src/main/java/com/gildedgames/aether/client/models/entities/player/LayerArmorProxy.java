@@ -7,9 +7,9 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -33,10 +33,10 @@ public class LayerArmorProxy extends LayerBipedArmor
 	}
 
 	@Override
-	public void doRenderLayer(EntityLivingBase entity, float limbSwing, float limbSwingAmount, float partialTicks,
+	public void doRenderLayer(LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks,
 			float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
-		if (!(entity instanceof EntityPlayer))
+		if (!(entity instanceof PlayerEntity))
 		{
 			return;
 		}
@@ -46,7 +46,7 @@ public class LayerArmorProxy extends LayerBipedArmor
 			return;
 		}
 
-		PlayerAether aePlayer = PlayerAether.getPlayer((EntityPlayer) entity);
+		PlayerAether aePlayer = PlayerAether.getPlayer((PlayerEntity) entity);
 		PatronRewardArmor armor = aePlayer.getModule(PlayerPatronRewardModule.class).getChoices().getArmorChoice();
 
 		if (armor == null || armor.getArmorTextureName() == null)
@@ -62,13 +62,13 @@ public class LayerArmorProxy extends LayerBipedArmor
 	}
 
 	@Override
-	public ModelBiped getModelFromSlot(EntityEquipmentSlot slotIn)
+	public ModelBiped getModelFromSlot(EquipmentSlotType slotIn)
 	{
 		return this.proxy.getModelFromSlot(slotIn);
 	}
 
 	@Override
-	public ResourceLocation getArmorResource(Entity entity, ItemStack stack, EntityEquipmentSlot slot, String type)
+	public ResourceLocation getArmorResource(Entity entity, ItemStack stack, EquipmentSlotType slot, String type)
 	{
 		return this.proxy.getArmorResource(entity, stack, slot, type);
 	}

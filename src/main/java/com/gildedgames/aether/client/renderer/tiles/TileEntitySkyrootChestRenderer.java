@@ -3,11 +3,11 @@ package com.gildedgames.aether.client.renderer.tiles;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.containers.BlockSkyrootChest;
 import com.gildedgames.aether.common.entities.tiles.TileEntitySkyrootChest;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockChest;
+import net.minecraft.block.ChestBlock;
 import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.model.ModelLargeChest;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
@@ -47,7 +47,7 @@ public class TileEntitySkyrootChestRenderer extends TileEntitySpecialRenderer<Ti
 
 			if (block instanceof BlockSkyrootChest && metadata == 0)
 			{
-				((BlockChest) block).checkForSurroundingChests(chest.getWorld(), chest.getPos(), chest.getWorld().getBlockState(chest.getPos()));
+				((ChestBlock) block).checkForSurroundingChests(chest.getWorld(), chest.getPos(), chest.getWorld().getBlockState(chest.getPos()));
 
 				metadata = chest.getBlockMetadata();
 			}
@@ -69,8 +69,8 @@ public class TileEntitySkyrootChestRenderer extends TileEntitySpecialRenderer<Ti
 
 					GlStateManager.matrixMode(5890);
 					GlStateManager.pushMatrix();
-					GlStateManager.scale(4.0F, 4.0F, 1.0F);
-					GlStateManager.translate(0.0625F, 0.0625F, 0.0625F);
+					GlStateManager.scalef(4.0F, 4.0F, 1.0F);
+					GlStateManager.translatef(0.0625F, 0.0625F, 0.0625F);
 					GlStateManager.matrixMode(5888);
 				}
 				else
@@ -89,8 +89,8 @@ public class TileEntitySkyrootChestRenderer extends TileEntitySpecialRenderer<Ti
 					GlStateManager.matrixMode(GL11.GL_TEXTURE);
 
 					GlStateManager.pushMatrix();
-					GlStateManager.scale(8.0F, 4.0F, 1.0F);
-					GlStateManager.translate(0.0625F, 0.0625F, 0.0625F);
+					GlStateManager.scalef(8.0F, 4.0F, 1.0F);
+					GlStateManager.translatef(0.0625F, 0.0625F, 0.0625F);
 					GlStateManager.matrixMode(GL11.GL_MODELVIEW);
 				}
 				else
@@ -107,9 +107,9 @@ public class TileEntitySkyrootChestRenderer extends TileEntitySpecialRenderer<Ti
 				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 			}
 
-			GlStateManager.translate((float) x, (float) y + 1.0F, (float) z + 1.0F);
-			GlStateManager.scale(1.0F, -1.0F, -1.0F);
-			GlStateManager.translate(0.5F, 0.5F, 0.5F);
+			GlStateManager.translatef((float) x, (float) y + 1.0F, (float) z + 1.0F);
+			GlStateManager.scalef(1.0F, -1.0F, -1.0F);
+			GlStateManager.translatef(0.5F, 0.5F, 0.5F);
 
 			float angle = 0;
 
@@ -131,16 +131,16 @@ public class TileEntitySkyrootChestRenderer extends TileEntitySpecialRenderer<Ti
 
 			if (metadata == 2 && chest.adjacentChestXPos != null)
 			{
-				GlStateManager.translate(1.0F, 0.0F, 0.0F);
+				GlStateManager.translatef(1.0F, 0.0F, 0.0F);
 			}
 
 			if (metadata == 5 && chest.adjacentChestZPos != null)
 			{
-				GlStateManager.translate(0.0F, 0.0F, -1.0F);
+				GlStateManager.translatef(0.0F, 0.0F, -1.0F);
 			}
 
-			GlStateManager.rotate(angle, 0.0F, 1.0F, 0.0F);
-			GlStateManager.translate(-0.5F, -0.5F, -0.5F);
+			GlStateManager.rotatef(angle, 0.0F, 1.0F, 0.0F);
+			GlStateManager.translatef(-0.5F, -0.5F, -0.5F);
 
 			float lidAngle = chest.prevLidAngle + (chest.lidAngle - chest.prevLidAngle) * partialTicks;
 			float adjacentLidAngle;

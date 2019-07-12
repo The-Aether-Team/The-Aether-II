@@ -1,24 +1,21 @@
 package com.gildedgames.aether.client.renderer.entities.living;
 
+import com.gildedgames.aether.client.models.entities.living.ModelCarrionSproutBase;
 import com.gildedgames.aether.client.models.entities.living.ModelCarrionSproutLodHigh;
 import com.gildedgames.aether.client.models.entities.living.ModelCarrionSproutLodLow;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.animals.EntityCarrionSprout;
-import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class RenderCarrionSprout extends RenderLivingLOD<EntityCarrionSprout>
+public class RenderCarrionSprout extends RenderLivingLOD<EntityCarrionSprout, ModelCarrionSproutBase>
 {
 	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/entities/carrion_sprout/carrion_sprout.png");
 
-	private final ModelCarrionSproutLodHigh plantModel;
-
-	public RenderCarrionSprout(final RenderManager manager)
+	public RenderCarrionSprout(final EntityRendererManager manager)
 	{
 		super(manager, new ModelCarrionSproutLodHigh(), new ModelCarrionSproutLodLow(), 0.75f);
-
-		this.plantModel = (ModelCarrionSproutLodHigh) this.mainModel;
 	}
 
 	@Override
@@ -47,8 +44,10 @@ public class RenderCarrionSprout extends RenderLivingLOD<EntityCarrionSprout>
 			f2 = 1.75F + ((float) Math.sin(sinage + 2.0F) * 1.5F);
 		}
 
-		this.plantModel.sinage = f1;
-		this.plantModel.sinage2 = f2;
+		ModelCarrionSproutBase model = this.getEntityModel();
+
+		model.sinage = f1;
+		model.sinage2 = f2;
 
 		this.shadowSize = 0.10f * sprout.getSproutSize();
 	}

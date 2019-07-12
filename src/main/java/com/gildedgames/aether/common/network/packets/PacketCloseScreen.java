@@ -4,8 +4,8 @@ import com.gildedgames.aether.client.gui.util.IRemoteClose;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 public class PacketCloseScreen implements IMessage
@@ -38,10 +38,10 @@ public class PacketCloseScreen implements IMessage
 	public static class HandlerClient extends MessageHandlerClient<PacketCloseScreen, IMessage>
 	{
 		@Override
-		public IMessage onMessage(PacketCloseScreen message, EntityPlayer player)
+		public IMessage onMessage(PacketCloseScreen message, PlayerEntity player)
 		{
-			Minecraft mc = Minecraft.getMinecraft();
-			GuiScreen screen = mc.currentScreen;
+			Minecraft mc = Minecraft.getInstance();
+			Screen screen = mc.currentScreen;
 
 			if (screen instanceof IRemoteClose && message.guiID == ((IRemoteClose) screen).getConfirmID())
 			{

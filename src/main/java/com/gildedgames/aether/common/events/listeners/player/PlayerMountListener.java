@@ -5,12 +5,12 @@ import com.gildedgames.aether.api.entity.IMountProcessor;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.mounts.IFlyingMountData;
 import com.gildedgames.aether.common.entities.multipart.AetherMultiPartMount;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.entity.EntityMountEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
@@ -18,7 +18,7 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.Event;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 @Mod.EventBusSubscriber
 public class PlayerMountListener
@@ -66,18 +66,18 @@ public class PlayerMountListener
 	@SubscribeEvent
 	public static void onLivingEntityUpdate(final LivingEvent.LivingUpdateEvent event)
 	{
-		if (event.getEntity() instanceof EntityPlayer)
+		if (event.getEntity() instanceof PlayerEntity)
 		{
-			final EntityPlayer player = (EntityPlayer) event.getEntity();
+			final PlayerEntity player = (PlayerEntity) event.getEntity();
 
 			final Entity riding = player.getRidingEntity();
 
-			if (riding instanceof IMount && riding instanceof EntityLivingBase)
+			if (riding instanceof IMount && riding instanceof LivingEntity)
 			{
 				final IMount mount = (IMount) riding;
 				final IMountProcessor processor = mount.getMountProcessor();
 
-				final EntityLivingBase livingMount = (EntityLivingBase) riding;
+				final LivingEntity livingMount = (LivingEntity) riding;
 
 				livingMount.renderYawOffset = player.renderYawOffset;
 				livingMount.setJumping(false);
@@ -121,13 +121,13 @@ public class PlayerMountListener
 		}
 	}
 
-	private static void processSteering(final IMount mountImpl, final EntityLivingBase mount, final EntityPlayer rider)
+	private static void processSteering(final IMount mountImpl, final LivingEntity mount, final PlayerEntity rider)
 	{
 		final IMountProcessor processor = mountImpl.getMountProcessor();
 
-		if (mount instanceof EntityCreature)
+		if (mount instanceof CreatureEntity)
 		{
-			((EntityCreature) mount).getNavigator().clearPath();
+			((CreatureEntity) mount).getNavigator().clearPath();
 		}
 
 		mount.setAIMoveSpeed((float) mount.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
@@ -181,11 +181,11 @@ public class PlayerMountListener
 
 		float f6 = 0.91F;
 		BlockPos.PooledMutableBlockPos blockpos$pooledmutableblockpos = BlockPos.PooledMutableBlockPos
-				.retain(mount.posX, mount.getEntityBoundingBox().minY - 1.0D, mount.posZ);
+				.retain(mount.posX, mount.getBoundingBox().minY - 1.0D, mount.posZ);
 
 		if (mount.onGround)
 		{
-			IBlockState underState = mount.world.getBlockState(blockpos$pooledmutableblockpos);
+			BlockState underState = mount.world.getBlockState(blockpos$pooledmutableblockpos);
 			f6 = underState.getBlock().getSlipperiness(underState, mount.world, blockpos$pooledmutableblockpos, mount) * 0.91F;
 		}
 

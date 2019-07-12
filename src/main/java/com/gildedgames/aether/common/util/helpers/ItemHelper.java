@@ -17,9 +17,9 @@ public class ItemHelper
 
 		int hash = (id & 0xFFFF) << 16;
 
-		if (!stack.isItemStackDamageable() && stack.getItemDamage() != OreDictionary.WILDCARD_VALUE && hashDamage)
+		if (!stack.isDamageable() && stack.getDamage() != OreDictionary.WILDCARD_VALUE && hashDamage)
 		{
-			hash = hash | (stack.getItemDamage() & 0xFFFF);
+			hash = hash | (stack.getDamage() & 0xFFFF);
 		}
 
 		return hash;

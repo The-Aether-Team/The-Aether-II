@@ -9,10 +9,10 @@ import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerDi
 import com.gildedgames.orbis.lib.util.mc.NBTHelper;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumHand;
+import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -37,38 +37,38 @@ public class EntityNecromancer extends EntityCharacter
 	}
 
 	@Override
-	protected void initEntityAI()
+	protected void registerGoals()
 	{
-		super.initEntityAI();
+		super.registerGoals();
 
-		this.tasks.addTask(3, new EntityAILookIdle(this));
-		this.tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 50.0F, 1.0F));
+		this.goalSelector.addGoal(3, new EntityAILookIdle(this));
+		this.goalSelector.addGoal(2, new LookAtGoal(this, PlayerEntity.class, 50.0F, 1.0F));
 	}
 
 	@Override
-	protected void applyEntityAttributes()
+	protected void registerAttributes()
 	{
-		super.applyEntityAttributes();
+		super.registerAttributes();
 
-		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.45D);
-		this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(250);
+		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.45D);
+		this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
+		this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(250);
 	}
 
 	@Override
-	public void writeEntityToNBT(final NBTTagCompound compound)
+	public void writeEntityToNBT(final CompoundNBT compound)
 	{
 		super.writeEntityToNBT(compound);
 
-		compound.setTag("spawned", NBTHelper.writeBlockPos(this.spawned));
+		compound.put("spawned", NBTHelper.writeBlockPos(this.spawned));
 	}
 
 	@Override
-	public void readEntityFromNBT(final NBTTagCompound compound)
+	public void readEntityFromNBT(final CompoundNBT compound)
 	{
 		super.readEntityFromNBT(compound);
 
-		this.spawned = NBTHelper.readBlockPos(compound.getCompoundTag("spawned"));
+		this.spawned = NBTHelper.readBlockPos(compound.getCompound("spawned"));
 
 		if (this.spawned != null)
 		{
@@ -77,13 +77,13 @@ public class EntityNecromancer extends EntityCharacter
 	}
 
 	@Override
-	public void entityInit()
+	public void registerData()
 	{
-		super.entityInit();
+		super.registerData();
 	}
 
 	@Override
-	public void onUpdate()
+	public void livingTick()
 	{
 		this.setHomePosAndDistance(this.getPosition(), 500);
 
@@ -92,11 +92,11 @@ public class EntityNecromancer extends EntityCharacter
 			this.spawned = this.getPosition();
 		}
 
-		super.onUpdate();
+		super.livingTick();
 	}
 
 	@Override
-	public boolean processInteract(final EntityPlayer player, final EnumHand hand)
+	public boolean processInteract(final PlayerEntity player, final Hand hand)
 	{
 		if (!super.processInteract(player, hand))
 		{

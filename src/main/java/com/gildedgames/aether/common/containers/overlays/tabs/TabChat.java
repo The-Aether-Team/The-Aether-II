@@ -5,12 +5,12 @@ import com.gildedgames.aether.api.registry.tab.ITabClient;
 import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiChat;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec2f;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class TabChat implements ITab
 {
@@ -21,9 +21,9 @@ public class TabChat implements ITab
 	}
 
 	@Override
-	public void onOpen(EntityPlayer player)
+	public void onOpen(PlayerEntity player)
 	{
-		Minecraft.getMinecraft().displayGuiScreen(new GuiChat(""));
+		Minecraft.getInstance().displayGuiScreen(new GuiChat(""));
 	}
 
 	@Override
@@ -38,19 +38,19 @@ public class TabChat implements ITab
 		return true;
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static class Client extends TabChat implements ITabClient
 	{
 		private static final ResourceLocation ICON = AetherCore.getResource("textures/gui/tabs/chat.png");
 
 		@Override
-		public void onClose(EntityPlayer player)
+		public void onClose(PlayerEntity player)
 		{
 
 		}
 
 		@Override
-		public boolean isTabValid(GuiScreen gui)
+		public boolean isTabValid(Screen gui)
 		{
 			return gui instanceof GuiChat;
 		}

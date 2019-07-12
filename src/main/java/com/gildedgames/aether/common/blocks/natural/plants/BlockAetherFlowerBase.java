@@ -3,19 +3,19 @@ package com.gildedgames.aether.common.blocks.natural.plants;
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.blocks.IBlockSnowy;
 import net.minecraft.block.BlockSnow;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -36,7 +36,7 @@ public class BlockAetherFlowerBase extends BlockAetherPlant implements IBlockSno
 	}
 
 	@Override
-	public void updateTick(final World worldIn, final BlockPos pos, final IBlockState state, final Random rand)
+	public void updateTick(final World worldIn, final BlockPos pos, final BlockState state, final Random rand)
 	{
 		super.updateTick(worldIn, pos, state, rand);
 
@@ -53,13 +53,13 @@ public class BlockAetherFlowerBase extends BlockAetherPlant implements IBlockSno
 	}
 
 	@Override
-	public int getLightValue(final IBlockState state)
+	public int getLightValue(final BlockState state)
 	{
 		return this.lightValue;
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX,
+	public boolean onBlockActivated(World worldIn, BlockPos pos, BlockState state, PlayerEntity playerIn, Hand hand, Direction facing, float hitX,
 			float hitY, float hitZ)
 	{
 		ItemStack main = playerIn.getHeldItemMainhand();
@@ -69,15 +69,15 @@ public class BlockAetherFlowerBase extends BlockAetherPlant implements IBlockSno
 
 		if (!state.getValue(PROPERTY_SNOWY))
 		{
-			if (main != null && main.getItem() instanceof ItemBlock)
+			if (main != null && main.getItem() instanceof BlockItem)
 			{
-				if (((ItemBlock) main.getItem()).getBlock() instanceof BlockSnow)
+				if (((BlockItem) main.getItem()).getBlock() instanceof BlockSnow)
 				{
 					addSnow = true;
 					main.shrink(1);
 				}
 			}
-			else if (offhand != null && offhand.getItem() instanceof ItemBlock && ((ItemBlock) offhand.getItem()).getBlock() instanceof BlockSnow)
+			else if (offhand != null && offhand.getItem() instanceof BlockItem && ((BlockItem) offhand.getItem()).getBlock() instanceof BlockSnow)
 			{
 				addSnow = true;
 				offhand.shrink(1);
@@ -93,7 +93,7 @@ public class BlockAetherFlowerBase extends BlockAetherPlant implements IBlockSno
 	}
 
 	@Override
-	public void onPlayerDestroy(World worldIn, BlockPos pos, IBlockState state)
+	public void onPlayerDestroy(World worldIn, BlockPos pos, BlockState state)
 	{
 		if (state.getValue(PROPERTY_SNOWY))
 		{
@@ -105,13 +105,13 @@ public class BlockAetherFlowerBase extends BlockAetherPlant implements IBlockSno
 	}
 
 	@Override
-	public IBlockState getStateFromMeta(final int meta)
+	public BlockState getStateFromMeta(final int meta)
 	{
 		return this.getDefaultState().withProperty(PROPERTY_SNOWY, meta == SNOWY_META);
 	}
 
 	@Override
-	public int getMetaFromState(final IBlockState state)
+	public int getMetaFromState(final BlockState state)
 	{
 		return state.getValue(PROPERTY_SNOWY) ? SNOWY_META : NORMAL_META;
 	}
@@ -129,7 +129,7 @@ public class BlockAetherFlowerBase extends BlockAetherPlant implements IBlockSno
 	}
 
 	@Override
-	public Vec3d getOffset(final IBlockState state, final IBlockAccess access, final BlockPos pos)
+	public Vec3d getOffset(final BlockState state, final IBlockReader access, final BlockPos pos)
 	{
 		if (state.getValue(PROPERTY_SNOWY))
 		{
@@ -140,7 +140,7 @@ public class BlockAetherFlowerBase extends BlockAetherPlant implements IBlockSno
 	}
 
 	@Override
-	public boolean canUseBonemeal(final World worldIn, final Random rand, final BlockPos pos, final IBlockState state)
+	public boolean canUseBonemeal(final World worldIn, final Random rand, final BlockPos pos, final BlockState state)
 	{
 		return false;
 	}

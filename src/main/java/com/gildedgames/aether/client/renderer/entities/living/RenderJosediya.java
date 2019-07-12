@@ -5,11 +5,11 @@ import com.gildedgames.aether.client.renderer.EyeUtil;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.characters.EntityJosediya;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.LivingRenderer;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderJosediya extends RenderLiving<EntityJosediya>
+public class RenderJosediya extends LivingRenderer<EntityJosediya, ModelJosediya>
 {
 
 	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/entities/npcs/josediya/josediya.png");
@@ -20,7 +20,7 @@ public class RenderJosediya extends RenderLiving<EntityJosediya>
 
 	private static final ResourceLocation PUPIL_RIGHT = AetherCore.getResource("textures/entities/npcs/josediya/josediya_pupil_right.png");
 
-	public RenderJosediya(final RenderManager renderManager)
+	public RenderJosediya(final EntityRendererManager renderManager)
 	{
 		super(renderManager, new ModelJosediya(), 0.5f);
 	}
@@ -36,10 +36,10 @@ public class RenderJosediya extends RenderLiving<EntityJosediya>
 	{
 		super.renderModel(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
-		ModelJosediya model = (ModelJosediya) this.mainModel;
+		ModelJosediya model = this.getEntityModel();
 
 		boolean globalInvisible = !entity.isInvisible() || this.renderOutlines;
-		boolean playerInvisible = !globalInvisible && !entity.isInvisibleToPlayer(Minecraft.getMinecraft().player);
+		boolean playerInvisible = !globalInvisible && !entity.isInvisibleToPlayer(Minecraft.getInstance().player);
 
 		if (globalInvisible || playerInvisible)
 		{

@@ -1,18 +1,18 @@
 package com.gildedgames.aether.common.entities.companions;
 
 import com.gildedgames.aether.common.entities.ai.companion.EntityAICompanionFollow;
-import com.google.common.base.Optional;
+import java.util.Optional;
 import net.minecraft.block.Block;
+import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.util.DamageSource;
@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public abstract class EntityCompanion extends EntityCreature
+public abstract class EntityCompanion extends CreatureEntity
 {
 	private static final DataParameter<Optional<UUID>> OWNER_UUID = new DataParameter<>(20, DataSerializers.OPTIONAL_UNIQUE_ID);
 
@@ -36,7 +36,7 @@ public abstract class EntityCompanion extends EntityCreature
 	}
 
 	@Override
-	public void setAttackTarget(@Nullable final EntityLivingBase target)
+	public void setAttackTarget(@Nullable final LivingEntity target)
 	{
 		if (target == this.getOwner())
 		{
@@ -47,30 +47,30 @@ public abstract class EntityCompanion extends EntityCreature
 	}
 
 	@Override
-	protected void initEntityAI()
+	protected void registerGoals()
 	{
-		final EntityAIBase follow = new EntityAICompanionFollow(this);
+		final Goal follow = new EntityAICompanionFollow(this);
 
 		follow.setMutexBits(1);
 
-		this.tasks.addTask(1, follow);
-		this.tasks.addTask(2, new EntityAISwimming(this));
-		this.tasks.addTask(3, new EntityAILookIdle(this));
-		this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 10.0F));
+		this.goalSelector.addGoal(1, follow);
+		this.goalSelector.addGoal(2, new SwimGoal(this));
+		this.goalSelector.addGoal(3, new EntityAILookIdle(this));
+		this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 10.0F));
 	}
 
 	@Override
-	protected void applyEntityAttributes()
+	protected void registerAttributes()
 	{
-		super.applyEntityAttributes();
+		super.registerAttributes();
 
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
 	}
 
 	@Override
 	protected void entityInit()
 	{
-		super.entityInit();
+		super.registerData();
 
 		this.dataManager.register(OWNER_UUID, Optional.absent());
 	}
@@ -97,7 +97,7 @@ public abstract class EntityCompanion extends EntityCreature
 	}
 
 	@Override
-	public void onUpdate()
+	public void livingTick()
 	{
 		if (!this.world.isRemote && (this.getOwner() == null || this.getOwner().isDead))
 		{
@@ -106,7 +106,7 @@ public abstract class EntityCompanion extends EntityCreature
 			this.wasDespawned = true;
 		}
 
-		super.onUpdate();
+		super.livingTick();
 
 		this.fallDistance = 0.0f;
 	}
@@ -134,7 +134,7 @@ public abstract class EntityCompanion extends EntityCreature
 	}
 
 	@Override
-	public boolean writeToNBTOptional(final NBTTagCompound compound)
+	public boolean writeToNBTOptional(final CompoundNBT compound)
 	{
 		// Never save Companions to disk...
 		return false;
@@ -146,7 +146,7 @@ public abstract class EntityCompanion extends EntityCreature
 		// Never teleport the companion...
 	}
 
-	public EntityPlayer getOwner()
+	public PlayerEntity getOwner()
 	{
 		final Optional<UUID> uuid = this.dataManager.get(OWNER_UUID);
 
@@ -158,7 +158,7 @@ public abstract class EntityCompanion extends EntityCreature
 		return this.world.getPlayerEntityByUUID(uuid.get());
 	}
 
-	public void setOwner(final EntityPlayer owner)
+	public void setOwner(final PlayerEntity owner)
 	{
 		this.dataManager.set(OWNER_UUID, owner == null ? Optional.absent() : Optional.of(owner.getUniqueID()));
 	}

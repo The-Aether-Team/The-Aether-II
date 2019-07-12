@@ -10,24 +10,24 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
-import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.api.distmarker.Dist;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-@Mod.EventBusSubscriber(Side.CLIENT)
+@Mod.EventBusSubscriber(Dist.CLIENT)
 public class GuiOverlayListener
 {
 	private static final List<IOverlay> overlays = Lists.newArrayList();
 
 	public static void init()
 	{
-		for (RenderLivingBase<?> playerRender : new HashSet<>(Minecraft.getMinecraft().getRenderManager().getSkinMap().values()))
+		for (RenderLivingBase<?> playerRender : new HashSet<>(Minecraft.getInstance().getRenderManager().getSkinMap().values()))
 		{
 			List<LayerRenderer<?>> original = new ArrayList<>(playerRender.layerRenderers);
 			List<LayerRenderer<?>> updated = new ArrayList<>();
@@ -57,7 +57,7 @@ public class GuiOverlayListener
 		overlays.add(new SwetOverlay());
 
 		// See documentation of ParticleRainProxyFactory. Ugly hack.
-		Minecraft.getMinecraft().effectRenderer.registerParticle(EnumParticleTypes.WATER_DROP.getParticleID(), new ParticleRainProxyFactory());
+		Minecraft.getInstance().effectRenderer.registerParticle(ParticleTypes.WATER_DROP.getParticleID(), new ParticleRainProxyFactory());
 	}
 
 	@SubscribeEvent

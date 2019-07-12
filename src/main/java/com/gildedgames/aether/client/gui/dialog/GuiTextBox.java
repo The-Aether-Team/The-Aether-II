@@ -2,8 +2,8 @@ package com.gildedgames.aether.client.gui.dialog;
 
 import com.google.common.collect.Lists;
 import net.minecraft.client.audio.SoundHandler;
+import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiUtilRenderComponents;
 import net.minecraft.util.text.ITextComponent;
 
@@ -86,13 +86,13 @@ public class GuiTextBox extends GuiAbstractButton
 			{
 				if (this.bottomToTop)
 				{
-					Gui.drawRect(this.x,
+					AbstractGui.drawRect(this.x,
 							this.y + this.height - (splitCount * fontRenderer.FONT_HEIGHT) - 10,
 							this.x + this.width, this.y + this.height, Integer.MIN_VALUE);
 				}
 				else
 				{
-					Gui.drawRect(this.x, this.y,
+					AbstractGui.drawRect(this.x, this.y,
 							this.x + this.width, this.y + this.height, Integer.MIN_VALUE);
 				}
 			}

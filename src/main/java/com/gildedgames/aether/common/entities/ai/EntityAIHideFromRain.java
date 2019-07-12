@@ -1,19 +1,19 @@
 package com.gildedgames.aether.common.entities.ai;
 
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class EntityAIHideFromRain extends EntityAIBase
+public class EntityAIHideFromRain extends Goal
 {
 
 	private final double movementSpeed;
 
-	private final EntityCreature entity;
+	private final CreatureEntity entity;
 
 	private double shelterX;
 
@@ -21,7 +21,7 @@ public class EntityAIHideFromRain extends EntityAIBase
 
 	private double shelterZ;
 
-	public EntityAIHideFromRain(EntityCreature entity, double movementSpeed)
+	public EntityAIHideFromRain(CreatureEntity entity, double movementSpeed)
 	{
 		this.entity = entity;
 		this.movementSpeed = movementSpeed;
@@ -37,7 +37,7 @@ public class EntityAIHideFromRain extends EntityAIBase
 			return false;
 		}
 
-		if (!this.entity.world.canSeeSky(new BlockPos(this.entity.posX, this.entity.getEntityBoundingBox().minY, this.entity.posZ)))
+		if (!this.entity.world.canSeeSky(new BlockPos(this.entity.posX, this.entity.getBoundingBox().minY, this.entity.posZ)))
 		{
 			return false;
 		}
@@ -79,7 +79,7 @@ public class EntityAIHideFromRain extends EntityAIBase
 	private Vec3d findPossibleShelter()
 	{
 		Random random = this.entity.getRNG();
-		BlockPos blockpos = new BlockPos(this.entity.posX, this.entity.getEntityBoundingBox().minY, this.entity.posZ);
+		BlockPos blockpos = new BlockPos(this.entity.posX, this.entity.getBoundingBox().minY, this.entity.posZ);
 
 		for (int i = 0; i < 10; ++i)
 		{

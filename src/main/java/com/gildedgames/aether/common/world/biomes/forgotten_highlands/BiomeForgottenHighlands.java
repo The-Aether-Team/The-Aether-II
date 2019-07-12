@@ -15,11 +15,11 @@ import com.gildedgames.aether.common.world.island.generators.IslandGeneratorForg
 import com.gildedgames.aether.common.world.util.GenUtil;
 import com.gildedgames.orbis.lib.util.mc.NBT;
 import com.google.common.collect.Lists;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType;
+
 
 import java.util.Collection;
 import java.util.Collections;
@@ -37,7 +37,7 @@ public class BiomeForgottenHighlands extends BiomeAetherBase
 	}
 
 	@Override
-	public IBlockState getCoastalBlock()
+	public BlockState getCoastalBlock()
 	{
 		return BlocksAether.quicksoil.getDefaultState();
 	}
@@ -72,21 +72,21 @@ public class BiomeForgottenHighlands extends BiomeAetherBase
 		List<WorldDecoration> decorations = Lists.newArrayList();
 
 		decorations
-				.add(new WorldDecorationSimple(6, 0.0F, EventType.GRASS, new PositionerSurface(), GenerationAether.short_aether_grass,
+				.add(new WorldDecorationSimple(6, 0.0F, new PositionerSurface(), GenerationAether.short_aether_grass,
 						GenerationAether.aether_grass, GenerationAether.long_aether_grass));
-		decorations.add(new WorldDecorationSimple(1, 0.2F, EventType.GRASS, new PositionerSurface(), GenerationAether.skyroot_twigs));
+		decorations.add(new WorldDecorationSimple(1, 0.2F, f.GRASS, new PositionerSurface(), GenerationAether.skyroot_twigs));
 
 
-        List<IBlockState> flowers = Lists.newArrayList();
+        List<BlockState> flowers = Lists.newArrayList();
 
         flowers.addAll(GenUtil.GENERAL_FLOWER_STATES);
 
         decorations.add(GenUtil.createFlowerDecorations(rand, flowers, Lists.newArrayList(BlocksAether.forgotten_rose.getDefaultState())));
         decorations.add(GenUtil.createShroomDecorations(GenUtil.SHROOM_STATES));
 
-        decorations.add(new WorldDecorationSimple(6, 0.0F, EventType.GRASS, new PositionerLevels(0, 128), GenerationAether.holystone_rocks));
+        decorations.add(new WorldDecorationSimple(6, 0.0F, f.GRASS, new PositionerLevels(0, 128), GenerationAether.holystone_rocks));
 
-		decorations.add(new WorldDecorationSimple(1, 0.06F, EventType.CUSTOM, new PositionerLevels(90, 130), GenerationAether.golden_aercloud));
+		decorations.add(new WorldDecorationSimple(1, 0.06F, f.CUSTOM, new PositionerLevels(90, 130), GenerationAether.golden_aercloud));
 
 		return decorations;
 	}
@@ -96,8 +96,8 @@ public class BiomeForgottenHighlands extends BiomeAetherBase
 	{
 		List<WorldDecoration> treeDecorations = Lists.newArrayList();
 
-		treeDecorations.add(new WorldDecorationSimple(6, 0.0F, EventType.TREE, new PositionerSurface(), new BlueprintWorldGen(GenerationAether.SKYROOT_OAK_GREEN)));
-		treeDecorations.add(new WorldDecorationSimple(1, 0.0F, EventType.TREE, new PositionerSurface(), new BlueprintWorldGen(GenerationAether.AMBEROOT_TREE)));
+		treeDecorations.add(new WorldDecorationSimple(6, 0.0F, f.TREE, new PositionerSurface(), new BlueprintWorldGen(GenerationAether.SKYROOT_OAK_GREEN)));
+		treeDecorations.add(new WorldDecorationSimple(1, 0.0F, f.TREE, new PositionerSurface(), new BlueprintWorldGen(GenerationAether.AMBEROOT_TREE)));
 
 		return treeDecorations;
 	}

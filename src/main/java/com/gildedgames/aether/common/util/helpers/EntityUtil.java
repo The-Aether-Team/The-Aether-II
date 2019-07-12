@@ -1,20 +1,22 @@
 package com.gildedgames.aether.common.util.helpers;
 
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.entity.AbstractClientPlayer;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.particles.IParticleData;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.EnumSkyBlock;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.LightType;
+import net.minecraft.world.ServerWorld;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 
 import java.util.UUID;
 
@@ -33,19 +35,19 @@ public class EntityUtil
 		return newEnt;
 	}
 
-	public static void despawnEntityDuringDaytime(final EntityLivingBase entity)
+	public static void despawnEntityDuringDaytime(final LivingEntity entity)
 	{
 		if (entity.ticksExisted % 20 == 0)
 		{
-			final BlockPos blockpos = new BlockPos(entity.posX, entity.getEntityBoundingBox().minY, entity.posZ);
+			final BlockPos blockpos = new BlockPos(entity.posX, entity.getBoundingBox().minY, entity.posZ);
 
-			if (!entity.world.isRemote && entity.world.getLightFor(EnumSkyBlock.SKY, blockpos) - entity.world.getSkylightSubtracted() >= 15 && entity.world
+			if (!entity.world.isRemote && entity.world.getLightFor(LightType.SKY, blockpos) - entity.world.getSkylightSubtracted() >= 15 && entity.world
 					.canBlockSeeSky(blockpos))
 			{
 				entity.attackEntityFrom(DamageSource.OUT_OF_WORLD, 1.0F);
 
 				final double x = entity.posX;
-				final double y = (entity.getEntityBoundingBox().maxY - entity.getEntityBoundingBox().minY) / 2 + entity.getEntityBoundingBox().minY;
+				final double y = (entity.getBoundingBox().maxY - entity.getBoundingBox().minY) / 2 + entity.getBoundingBox().minY;
 				final double z = entity.posZ;
 
 				final double motionX = 0;
@@ -54,7 +56,7 @@ public class EntityUtil
 
 				for (int i = 0; i < 15; i++)
 				{
-					final EnumParticleTypes type = entity.getRNG().nextBoolean() ? EnumParticleTypes.SMOKE_LARGE : EnumParticleTypes.SMOKE_NORMAL;
+					final IParticleData type = entity.getRNG().nextBoolean() ? ParticleTypes.LARGE_SMOKE : ParticleTypes.SMOKE;
 					final double radius = 0.3;
 
 					final double randX = entity.getRNG().nextDouble() * (entity.getRNG().nextBoolean() ? 1.0 : -1.0) * radius;
@@ -62,11 +64,11 @@ public class EntityUtil
 
 					if (entity.world.isRemote)
 					{
-						entity.world.spawnParticle(type, x + randX, y, z + randZ, motionX, motionY, motionZ);
+						entity.world.addParticle(type, x + randX, y, z + randZ, motionX, motionY, motionZ);
 					}
-					else if (entity.world instanceof WorldServer)
+					else if (entity.world instanceof ServerWorld)
 					{
-						final WorldServer worldServer = (WorldServer) entity.world;
+						final ServerWorld worldServer = (ServerWorld) entity.world;
 						worldServer.spawnParticle(type,
 								x + randX, y, z + randZ, 1, motionX, motionY, motionZ, (entity.world.rand.nextBoolean() ? 0.01D : -0.01D));
 					}
@@ -135,22 +137,22 @@ public class EntityUtil
 		return angle + f;
 	}
 
-	public static void spawnParticleLineBetween(final Entity e1, final Entity e2, final double density, final EnumParticleTypes type, final int... parameters)
+	public static void spawnParticleLineBetween(final Entity e1, final Entity e2, final double density, final ParticleTypes type, final int... parameters)
 	{
 		for (int k = 0; k < 1; ++k)
 		{
 			final World world = e1.world;
 
 			double currentX = e2.posX;
-			double currentY = (e2.getEntityBoundingBox().maxY - e2.getEntityBoundingBox().minY) / 2 + e2.getEntityBoundingBox().minY;
+			double currentY = (e2.getBoundingBox().maxY - e2.getBoundingBox().minY) / 2 + e2.getBoundingBox().minY;
 			double currentZ = e2.posZ;
 
-			final double width = e1.getEntityBoundingBox().maxX - e1.getEntityBoundingBox().minX;
-			final double length1 = e1.getEntityBoundingBox().maxZ - e1.getEntityBoundingBox().minZ;
+			final double width = e1.getBoundingBox().maxX - e1.getBoundingBox().minX;
+			final double length1 = e1.getBoundingBox().maxZ - e1.getBoundingBox().minZ;
 
-			final double targetX = e1.getEntityBoundingBox().minX + (width / 2);
+			final double targetX = e1.getBoundingBox().minX + (width / 2);
 			final double targetY = e1.posY;
-			final double targetZ = e1.getEntityBoundingBox().minZ + (length1 / 2);
+			final double targetZ = e1.getBoundingBox().minZ + (length1 / 2);
 
 			final double difXt = targetX - e2.posX;
 			double difY = targetY - e2.posY;
@@ -170,17 +172,18 @@ public class EntityUtil
 
 			while (Math.signum(difX) == 1 ? currentX < targetX : currentX > targetX)
 			{
-				final double motionX = e2.motionX * velcur;
-				final double motionY = e2.motionY * velcur;
-				final double motionZ = e2.motionZ * velcur;
+				Vec3d motion = e2.getMotion();
+				final double motionX = motion.x * velcur;
+				final double motionY = motion.y * velcur;
+				final double motionZ = motion.z * velcur;
 
 				if (e1.world.isRemote)
 				{
 					e1.world.spawnParticle(type, currentX + randX, currentY, currentZ + randZ, motionX, motionY, motionZ, parameters);
 				}
-				else if (e1.world instanceof WorldServer)
+				else if (e1.world instanceof ServerWorld)
 				{
-					final WorldServer worldServer = (WorldServer) e1.world;
+					final ServerWorld worldServer = (ServerWorld) e1.world;
 					worldServer.spawnParticle(type,
 							currentX + randX, currentY,
 							currentZ + randZ, 1, motionX, motionY, motionZ, (world.rand.nextBoolean() ? 0.01D : -0.01D), parameters);
@@ -194,26 +197,26 @@ public class EntityUtil
 		}
 	}
 
-	public static String getSkin(final EntityPlayer player)
+	public static String getSkin(final PlayerEntity player)
 	{
 		String skinType = DefaultPlayerSkin.getSkinType(player.getUniqueID());
 
-		if (player instanceof AbstractClientPlayer)
+		if (player instanceof AbstractClientPlayerEntity)
 		{
-			skinType = ((AbstractClientPlayer) player).getSkinType();
+			skinType = ((AbstractClientPlayerEntity) player).getSkinType();
 		}
 
 		return skinType;
 	}
 
-	public static IBlockState getBlockBelow(final Entity entity)
+	public static BlockState getBlockBelow(final Entity entity)
 	{
 		return getBlockBelow(entity.world, entity.getPosition());
 	}
 
-	public static IBlockState getBlockBelow(final World world, BlockPos pos)
+	public static BlockState getBlockBelow(final World world, BlockPos pos)
 	{
-		IBlockState state;
+		BlockState state;
 
 		state = world.getBlockState(pos);
 

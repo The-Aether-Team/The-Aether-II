@@ -2,14 +2,14 @@ package com.gildedgames.aether.common.blocks.construction;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.blocks.util.BlockCustomSlab;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.world.IBlockReader;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class BlockScatterglassSlab extends BlockCustomSlab
 {
@@ -21,16 +21,16 @@ public class BlockScatterglassSlab extends BlockCustomSlab
 	}
 
 	@Override
-	public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face)
+	public boolean doesSideBlockRendering(BlockState state, IBlockReader world, BlockPos pos, Direction face)
 	{
 		return false;
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side)
+	@OnlyIn(Dist.CLIENT)
+	public boolean shouldSideBeRendered(BlockState state, IBlockReader world, BlockPos pos, Direction side)
 	{
-		IBlockState neighborState = world.getBlockState(pos.offset(side));
+		BlockState neighborState = world.getBlockState(pos.offset(side));
 		if (neighborState.getBlock() == BlocksAether.scatterglass_slab)
 		{
 			if (state.getValue(PROPERTY_SLAB_STATE) == EnumSlabPart.FULL_BLOCK)
@@ -43,20 +43,20 @@ public class BlockScatterglassSlab extends BlockCustomSlab
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public BlockRenderLayer getRenderLayer()
 	{
 		return BlockRenderLayer.TRANSLUCENT;
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(BlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState state)
+	public boolean isFullCube(BlockState state)
 	{
 		return false;
 	}

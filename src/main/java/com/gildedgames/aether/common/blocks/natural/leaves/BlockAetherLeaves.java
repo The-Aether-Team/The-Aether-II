@@ -7,22 +7,22 @@ import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherU
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.state.BooleanProperty;
 import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.IShearable;
 import net.minecraftforge.fml.client.FMLClientHandler;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +30,9 @@ import java.util.Random;
 
 public class BlockAetherLeaves extends BlockLeaves implements IShearable
 {
-	public static final PropertyBool PROPERTY_DECAYABLE = PropertyBool.create("decayable");
+	public static final BooleanProperty PROPERTY_DECAYABLE = BooleanProperty.create("decayable");
 
-	public static final PropertyBool PROPERTY_CHECK_DECAY = PropertyBool.create("check_decay");
+	public static final BooleanProperty PROPERTY_CHECK_DECAY = BooleanProperty.create("check_decay");
 
 	private int[] surroundings;
 
@@ -48,25 +48,25 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 	}
 
 	@Override
-	public boolean isOpaqueCube(final IBlockState state)
+	public boolean isOpaqueCube(final BlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isShearable(final ItemStack item, final IBlockAccess world, final BlockPos pos)
+	public boolean isShearable(final ItemStack item, final IBlockReader world, final BlockPos pos)
 	{
 		return true;
 	}
 
 	@Override
-	public boolean isLeaves(final IBlockState state, final IBlockAccess world, final BlockPos pos)
+	public boolean isLeaves(final BlockState state, final IBlockReader world, final BlockPos pos)
 	{
 		return true;
 	}
 
 	@Override
-	public boolean causesSuffocation(final IBlockState state)
+	public boolean causesSuffocation(final BlockState state)
 	{
 		return false;
 	}
@@ -78,10 +78,10 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(final IBlockState state, final World world, final BlockPos pos, final Random rand)
+	@OnlyIn(Dist.CLIENT)
+	public void randomDisplayTick(final BlockState state, final World world, final BlockPos pos, final Random rand)
 	{
-		if (Minecraft.getMinecraft().gameSettings.particleSetting != 0)
+		if (Minecraft.getInstance().gameSettings.particleSetting != 0)
 		{
 			return;
 		}
@@ -122,7 +122,7 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 	}
 
 	@Override
-	public void breakBlock(final World worldIn, final BlockPos pos, final IBlockState state)
+	public void breakBlock(final World worldIn, final BlockPos pos, final BlockState state)
 	{
 		final byte start = 1;
 
@@ -140,7 +140,7 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 					for (int z2 = -start; z2 <= start; ++z2)
 					{
 						final BlockPos newPos = pos.add(x2, y2, z2);
-						final IBlockState newState = worldIn.getBlockState(newPos);
+						final BlockState newState = worldIn.getBlockState(newPos);
 
 						if (newState.getBlock().isLeaves(state, worldIn, newPos))
 						{
@@ -153,7 +153,7 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 	}
 
 	@Override
-	public void updateTick(final World world, final BlockPos pos, final IBlockState state, final Random rand)
+	public void updateTick(final World world, final BlockPos pos, final BlockState state, final Random rand)
 	{
 		if (!world.isRemote)
 		{
@@ -290,7 +290,7 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 	}
 
 	@Override
-	public void beginLeavesDecay(final IBlockState state, final World world, final BlockPos pos)
+	public void beginLeavesDecay(final BlockState state, final World world, final BlockPos pos)
 	{
 		if (!state.getValue(PROPERTY_CHECK_DECAY))
 		{
@@ -299,7 +299,7 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public BlockRenderLayer getRenderLayer()
 	{
 		return BlockRenderLayer.CUTOUT_MIPPED;
@@ -319,7 +319,7 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 	}
 
 	@Override
-	public List<ItemStack> onSheared(final ItemStack item, final IBlockAccess world, final BlockPos pos, final int fortune)
+	public List<ItemStack> onSheared(final ItemStack item, final IBlockReader world, final BlockPos pos, final int fortune)
 	{
 		final ArrayList<ItemStack> stacks = new ArrayList<>();
 		stacks.add(new ItemStack(this));
@@ -328,14 +328,14 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(final IBlockState blockState, final IBlockAccess blockAccess, final BlockPos pos, final EnumFacing side)
+	@OnlyIn(Dist.CLIENT)
+	public boolean shouldSideBeRendered(final BlockState blockState, final IBlockReader blockAccess, final BlockPos pos, final Direction side)
 	{
 		return this.superShouldSideBeRendered(blockState, blockAccess, pos, side);
 	}
 
-	@SideOnly(Side.CLIENT)
-	private boolean superShouldSideBeRendered(final IBlockState blockState, final IBlockAccess blockAccess, final BlockPos pos, final EnumFacing side)
+	@OnlyIn(Dist.CLIENT)
+	private boolean superShouldSideBeRendered(final BlockState blockState, final IBlockReader blockAccess, final BlockPos pos, final Direction side)
 	{
 		final AxisAlignedBB axisalignedbb = blockState.getBoundingBox(blockAccess, pos);
 
@@ -393,13 +393,13 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 	}
 
 	@Override
-	public int damageDropped(final IBlockState state)
+	public int damageDropped(final BlockState state)
 	{
 		return 0;
 	}
 
 	@Override
-	public List<ItemStack> getDrops(final IBlockAccess world, final BlockPos pos, final IBlockState state, final int fortune)
+	public List<ItemStack> getDrops(final IBlockReader world, final BlockPos pos, final BlockState state, final int fortune)
 	{
 		final List<ItemStack> stacks = new ArrayList<>();
 
@@ -428,14 +428,14 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 	}
 
 	@Override
-	public IBlockState getStateFromMeta(final int meta)
+	public BlockState getStateFromMeta(final int meta)
 	{
 		return this.getDefaultState().withProperty(PROPERTY_DECAYABLE, (meta & 4) == 4)
 				.withProperty(PROPERTY_CHECK_DECAY, (meta & 8) == 8);
 	}
 
 	@Override
-	public int getMetaFromState(final IBlockState state)
+	public int getMetaFromState(final BlockState state)
 	{
 		int meta = 0;
 

@@ -7,24 +7,24 @@ import com.gildedgames.aether.common.init.DimensionsAether;
 import com.gildedgames.orbis.lib.client.PartialTicks;
 import com.gildedgames.orbis.lib.client.gui.util.GuiFrameUtils;
 import com.gildedgames.orbis.lib.util.InputHelper;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.LoadingScreenRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiDownloadTerrain;
 import net.minecraft.client.gui.inventory.GuiInventory;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.fml.client.config.GuiUtils;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
-import net.minecraftforge.fml.relauncher.Side;
 
-@Mod.EventBusSubscriber(Side.CLIENT)
+@Mod.EventBusSubscriber(Dist.CLIENT)
 public class GuiLoadingListener
 {
-	private static final Minecraft mc = Minecraft.getMinecraft();
+	private static final Minecraft mc = Minecraft.getInstance();
 
 	private static boolean DRAW_BLACK_SCREEN = false;
 
@@ -102,7 +102,7 @@ public class GuiLoadingListener
 		{
 			LOADING = new GuiAetherLoading();
 
-			LOADING.setWorldAndResolution(Minecraft.getMinecraft(), MathHelper.floor(InputHelper.getScreenWidth()),
+			LOADING.setWorldAndResolution(Minecraft.getInstance(), MathHelper.floor(InputHelper.getScreenWidth()),
 					MathHelper.floor(InputHelper.getScreenHeight()));
 			LOADING.initGui();
 
@@ -194,9 +194,9 @@ public class GuiLoadingListener
 
 		if (DRAW_LOADING_SCREEN)
 		{
-			if (Minecraft.getMinecraft().world != null)
+			if (Minecraft.getInstance().world != null)
 			{
-				Minecraft.getMinecraft().getSoundHandler().stopSounds();
+				Minecraft.getInstance().getSoundHandler().stopSounds();
 			}
 
 			setChangeFromBlackToLoad(false);
@@ -255,9 +255,9 @@ public class GuiLoadingListener
 	{
 		if (event.phase == TickEvent.Phase.END)
 		{
-			if (Minecraft.getMinecraft().loadingScreen.getClass() == LoadingScreenRenderer.class)
+			if (Minecraft.getInstance().loadingScreen.getClass() == LoadingScreenRenderer.class)
 			{
-				Minecraft.getMinecraft().loadingScreen = new CustomLoadingRenderer(Minecraft.getMinecraft(), Minecraft.getMinecraft().loadingScreen);
+				Minecraft.getInstance().loadingScreen = new CustomLoadingRenderer(Minecraft.getInstance(), Minecraft.getInstance().loadingScreen);
 			}
 		}
 	}

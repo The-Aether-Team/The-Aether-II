@@ -12,11 +12,11 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 
-@Mod.EventBusSubscriber(Side.CLIENT)
+@Mod.EventBusSubscriber(Dist.CLIENT)
 public class ClientTickSpecialInputListener
 {
 	private static boolean PREV_JUMP_BIND_STATE;
@@ -45,7 +45,7 @@ public class ClientTickSpecialInputListener
 			{
 				if (mc.gameSettings.keyBindJump.isKeyDown() && !PREV_JUMP_BIND_STATE)
 				{
-					if (!player.isInWater() && abilitiesModule.getTicksAirborne() > 2 && !player.capabilities.isCreativeMode)
+					if (!player.isInWater() && abilitiesModule.getTicksAirborne() > 2 && !player.isCreative())
 					{
 						if (abilitiesModule.performMidAirJump())
 						{

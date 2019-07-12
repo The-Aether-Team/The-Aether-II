@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.entities.ai;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.pathfinding.Path;
 import net.minecraft.pathfinding.PathPoint;
@@ -12,9 +12,9 @@ import net.minecraft.util.math.Vec3d;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 
-public class EntityAIWanderFavorBlocks extends EntityAIBase
+public class EntityAIWanderFavorBlocks extends Goal
 {
-	protected final EntityCreature entity;
+	protected final CreatureEntity entity;
 
 	protected double x;
 	protected double y;
@@ -27,12 +27,12 @@ public class EntityAIWanderFavorBlocks extends EntityAIBase
 	protected boolean mustUpdate;
 
 
-	public EntityAIWanderFavorBlocks(EntityCreature creatureIn, double speedIn, ArrayList<Block> favoriteBlocks)
+	public EntityAIWanderFavorBlocks(CreatureEntity creatureIn, double speedIn, ArrayList<Block> favoriteBlocks)
 	{
 		this(creatureIn, speedIn, 60, favoriteBlocks);
 	}
 
-	public EntityAIWanderFavorBlocks(EntityCreature creatureIn, double speedIn, int chance, ArrayList<Block> favoriteBlocks)
+	public EntityAIWanderFavorBlocks(CreatureEntity creatureIn, double speedIn, int chance, ArrayList<Block> favoriteBlocks)
 	{
 		this.entity = creatureIn;
 		this.speed = speedIn;

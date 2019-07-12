@@ -7,9 +7,9 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModu
 import com.gildedgames.aether.common.entities.monsters.EntitySwet;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import com.google.common.collect.Lists;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
@@ -83,7 +83,7 @@ public class PlayerSwetTrackerModule extends PlayerAetherModule implements IPlay
 	@Override
 	public void tickStart(TickEvent.PlayerTickEvent event)
 	{
-		final EntityPlayer player = this.getEntity();
+		final PlayerEntity player = this.getEntity();
 
 		if (player.isInWater())
 		{
@@ -111,30 +111,30 @@ public class PlayerSwetTrackerModule extends PlayerAetherModule implements IPlay
 	}
 
 	@Override
-	public void write(final NBTTagCompound output)
+	public void write(final CompoundNBT output)
 	{
-		final NBTTagList list = new NBTTagList();
+		final ListNBT list = new ListNBT();
 
 		for (final EntitySwet swet : this.swets)
 		{
-			final NBTTagCompound tag = new NBTTagCompound();
+			final CompoundNBT tag = new CompoundNBT();
 
 			swet.writeEntityToNBT(tag);
 
 			list.appendTag(tag);
 		}
 
-		output.setTag("swets", list);
+		output.put("swets", list);
 	}
 
 	@Override
-	public void read(final NBTTagCompound input)
+	public void read(final CompoundNBT input)
 	{
-		final NBTTagList list = input.getTagList("swets", 10);
+		final ListNBT list = input.getTagList("swets", 10);
 
 		for (int i = 0; i < list.tagCount(); i++)
 		{
-			final NBTTagCompound compound = list.getCompoundTagAt(i);
+			final CompoundNBT compound = list.getCompoundAt(i);
 
 			final EntitySwet swet = new EntitySwet(this.getEntity().getEntityWorld());
 			swet.readEntityFromNBT(compound);

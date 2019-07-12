@@ -4,11 +4,11 @@ import com.gildedgames.aether.api.registrar.BiomesAether;
 import com.gildedgames.aether.common.init.DimensionsAether;
 import com.gildedgames.aether.common.world.generators.ChunkGeneratorNecromancerTower;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.DimensionType;
+import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.WorldProviderSurface;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeProviderSingle;
@@ -60,7 +60,7 @@ public class WorldProviderNecromancerTower extends WorldProviderSurface
 	}
 
 	@Override
-	public int getRespawnDimension(final EntityPlayerMP player)
+	public int getRespawnDimension(final ServerPlayerEntity player)
 	{
 		return 0;
 	}
@@ -119,11 +119,11 @@ public class WorldProviderNecromancerTower extends WorldProviderSurface
 	}
 
 	@Override
-	public boolean canMineBlock(final EntityPlayer player, final BlockPos pos)
+	public boolean canMineBlock(final PlayerEntity player, final BlockPos pos)
 	{
 		// Doing this will prevent buckets from being used when not GM1, but will not affect block
 		// placement/destruction (only called in World#isBlockModifiable(EntityPlayer, Blockpos) )
-		return (player.capabilities.isCreativeMode);
+		return (player.isCreative());
 	}
 
 	@Override

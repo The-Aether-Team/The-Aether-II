@@ -8,7 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.GlStateManager;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
@@ -158,7 +158,7 @@ public class ParticleLeaf extends Particle
 	public void renderParticle(BufferBuilder buffer, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY,
 			float rotationXZ)
 	{
-		Minecraft.getMinecraft().renderEngine.bindTexture(this.sprite);
+		Minecraft.getInstance().getTextureManager().bindTexture(this.sprite);
 
 		GlStateManager.disableLighting();
 

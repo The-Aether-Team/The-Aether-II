@@ -4,18 +4,18 @@ import com.gildedgames.aether.client.renderer.world.RenderWorldPrecipitation;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
 import net.minecraftforge.client.IRenderHandler;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 
-@Mod.EventBusSubscriber(Side.CLIENT)
+@Mod.EventBusSubscriber(Dist.CLIENT)
 public class RenderWorldPrecipitationListener
 {
 	@SubscribeEvent
 	public static void onClientRenderTick(TickEvent.ClientTickEvent event)
 	{
-		World world = Minecraft.getMinecraft().world;
+		World world = Minecraft.getInstance().world;
 
 		if (world == null || !world.isRemote)
 		{

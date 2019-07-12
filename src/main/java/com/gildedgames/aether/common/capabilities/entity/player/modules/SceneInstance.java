@@ -4,7 +4,7 @@ import com.gildedgames.aether.api.dialog.*;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.dialog.PacketConditionsMetData;
 import com.google.common.collect.Maps;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import org.apache.commons.lang3.Validate;
 
 import java.util.Collection;
@@ -81,7 +81,7 @@ public class SceneInstance implements ISceneInstance
 				this.conditionsMet.put(button.getLabel(), this.controller.conditionsMet(button));
 			}
 
-			NetworkingAether.sendPacketToPlayer(new PacketConditionsMetData(this.conditionsMet), (EntityPlayerMP) this.controller.getEntity());
+			NetworkingAether.sendPacketToPlayer(new PacketConditionsMetData(this.conditionsMet), (ServerPlayerEntity) this.controller.getEntity());
 		}
 	}
 

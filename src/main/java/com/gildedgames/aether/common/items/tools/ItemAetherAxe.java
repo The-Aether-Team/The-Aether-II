@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.items.tools;
 import com.gildedgames.aether.common.events.listeners.items.ItemToolListener;
 import com.gildedgames.aether.common.init.CreativeTabsAether;
 import com.gildedgames.aether.common.init.MaterialsAether;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 
@@ -25,7 +25,7 @@ public class ItemAetherAxe extends ItemAxe
 	}
 
 	@Override
-	public boolean hitEntity(final ItemStack stack, final EntityLivingBase target, final EntityLivingBase attacker)
+	public boolean hitEntity(final ItemStack stack, final LivingEntity target, final LivingEntity attacker)
 	{
 		super.hitEntity(stack, target, attacker);
 

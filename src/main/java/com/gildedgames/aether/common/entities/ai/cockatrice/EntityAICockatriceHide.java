@@ -2,14 +2,14 @@ package com.gildedgames.aether.common.entities.ai.cockatrice;
 
 import com.gildedgames.aether.common.entities.ai.EntityAIHideFromTarget;
 import com.gildedgames.aether.common.entities.monsters.EntityCockatrice;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 
 public class EntityAICockatriceHide extends EntityAIHideFromTarget
 {
 
 	final EntityCockatrice cockatrice;
 
-	public EntityAICockatriceHide(EntityCockatrice entity, Class<? extends EntityLivingBase> clazz, double movementSpeed)
+	public EntityAICockatriceHide(EntityCockatrice entity, Class<? extends LivingEntity> clazz, double movementSpeed)
 	{
 		super(entity, clazz, movementSpeed);
 

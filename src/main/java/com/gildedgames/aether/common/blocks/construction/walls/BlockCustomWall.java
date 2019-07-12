@@ -1,22 +1,22 @@
 package com.gildedgames.aether.common.blocks.construction.walls;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWall;
 import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.IBlockReader;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.api.distmarker.Dist;
 
 public class BlockCustomWall extends BlockWall
 {
 
-	public BlockCustomWall(final IBlockState state, final float hardness, final float resistance)
+	public BlockCustomWall(final BlockState state, final float hardness, final float resistance)
 	{
 		super(state.getBlock());
 
@@ -42,24 +42,24 @@ public class BlockCustomWall extends BlockWall
 	@Override
 	public String getLocalizedName()
 	{
-		return new TextComponentTranslation(this.getTranslationKey() + ".name").getFormattedText();
+		return new TranslationTextComponent(this.getTranslationKey() + ".name").getFormattedText();
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(final CreativeTabs tab, final NonNullList<ItemStack> list)
+	@OnlyIn(Dist.CLIENT)
+	public void getSubBlocks(final ItemGroup tab, final NonNullList<ItemStack> list)
 	{
 		list.add(new ItemStack(this, 1, 0));
 	}
 
 	@Override
-	public IBlockState getStateFromMeta(final int meta)
+	public BlockState getStateFromMeta(final int meta)
 	{
 		return this.getDefaultState();
 	}
 
 	@Override
-	public int getMetaFromState(final IBlockState state)
+	public int getMetaFromState(final BlockState state)
 	{
 		return 0;
 	}
@@ -72,7 +72,7 @@ public class BlockCustomWall extends BlockWall
 	}
 
 	@Override
-	public boolean canPlaceTorchOnTop(final IBlockState state, final IBlockAccess world, final BlockPos pos)
+	public boolean canPlaceTorchOnTop(final BlockState state, final IBlockReader world, final BlockPos pos)
 	{
 		return true;
 	}

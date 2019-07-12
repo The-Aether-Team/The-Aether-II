@@ -2,13 +2,13 @@ package com.gildedgames.aether.common.blocks.multiblock;
 
 import com.gildedgames.aether.common.blocks.IInternalBlock;
 import com.gildedgames.aether.common.entities.tiles.multiblock.TileEntityMultiblockDummy;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.block.BlockRenderType;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class BlockMultiDummy extends BlockMultiBase implements IInternalBlock
 {
@@ -21,10 +21,10 @@ public class BlockMultiDummy extends BlockMultiBase implements IInternalBlock
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public EnumBlockRenderType getRenderType(IBlockState state)
+	@OnlyIn(Dist.CLIENT)
+	public BlockRenderType getRenderType(BlockState state)
 	{
-		return EnumBlockRenderType.INVISIBLE;
+		return BlockRenderType.INVISIBLE;
 	}
 
 	@Override

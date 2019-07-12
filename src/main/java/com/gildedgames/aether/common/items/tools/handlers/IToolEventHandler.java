@@ -1,12 +1,12 @@
 package com.gildedgames.aether.common.items.tools.handlers;
 
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -14,15 +14,15 @@ import java.util.List;
 
 public interface IToolEventHandler
 {
-	void onHarvestBlock(ItemStack stack, World world, IBlockState state, BlockPos pos, EntityPlayer entity, List<ItemStack> drops);
+	void onHarvestBlock(ItemStack stack, World world, BlockState state, BlockPos pos, PlayerEntity entity, List<ItemStack> drops);
 
-	boolean onRightClickBlock(World world, BlockPos pos, EntityPlayer player, EnumHand hand, EnumFacing facing);
+	boolean onRightClickBlock(World world, BlockPos pos, PlayerEntity player, Hand hand, Direction facing);
 
-	void onRightClickItem(EntityPlayer player, EnumHand hand);
+	void onRightClickItem(PlayerEntity player, Hand hand);
 
 	void addInformation(ItemStack stack, List<String> tooltip);
 
-	void onEntityHit(ItemStack stack, Entity target, EntityLivingBase attacker);
+	void onEntityHit(ItemStack stack, Entity target, LivingEntity attacker);
 
-	float getBreakSpeed(ItemStack stack, World world, IBlockState state, BlockPos pos, EntityPlayer player, float original);
+	float getBreakSpeed(ItemStack stack, World world, BlockState state, BlockPos pos, PlayerEntity player, float original);
 }

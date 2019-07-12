@@ -18,9 +18,9 @@ public class EntityNexSpirit extends EntityCompanion
 	}
 
 	@Override
-	public void onUpdate()
+	public void livingTick()
 	{
-		super.onUpdate();
+		super.livingTick();
 
 		//		if (this.getOwner() != null)
 		//		{
@@ -42,7 +42,7 @@ public class EntityNexSpirit extends EntityCompanion
 	@Override
 	protected void entityInit()
 	{
-		super.entityInit();
+		super.registerData();
 
 		this.dataManager.register(IS_BROKEN, false);
 	}

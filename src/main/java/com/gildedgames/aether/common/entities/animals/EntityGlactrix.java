@@ -11,15 +11,15 @@ import com.gildedgames.aether.common.entities.ai.glactrix.GlactrixAIHideFromEnti
 import com.gildedgames.aether.common.init.LootTablesAether;
 import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.AgeableEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -27,7 +27,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 
@@ -44,8 +44,8 @@ public class EntityGlactrix extends EntityAetherAnimal implements IShearable
 	private ArrayList<Block> favoriteBlocks = new ArrayList<>();
 
 	private EntityAIWanderFavorBlocks wanderAI = new EntityAIWanderFavorBlocks(this, 0.3D, this.favoriteBlocks);
-	private EntityAIHideFromTarget runeAndHideAI = new EntityAIHideFromTarget(this, EntityPlayer.class, 0.8D);
-	private GlactrixAIHideFromEntity glactrixHideAI = new GlactrixAIHideFromEntity(this, EntityPlayer.class);
+	private EntityAIHideFromTarget runeAndHideAI = new EntityAIHideFromTarget(this, PlayerEntity.class, 0.8D);
+	private GlactrixAIHideFromEntity glactrixHideAI = new GlactrixAIHideFromEntity(this, PlayerEntity.class);
 
 
 	private final int wanderAIPriority = 5;
@@ -74,30 +74,30 @@ public class EntityGlactrix extends EntityAetherAnimal implements IShearable
 	@Override
 	protected void entityInit()
 	{
-		super.entityInit();
+		super.registerData();
 		this.dataManager.register(IS_HIDING, Boolean.FALSE);
 		this.dataManager.register(IS_TOPPLED, Boolean.FALSE);
 		this.dataManager.register(IS_SHEARED, Boolean.FALSE);
 	}
 
 	@Override
-	protected void initEntityAI()
+	protected void registerGoals()
 	{
-		//this.tasks.addTask(this.hideAIPriority, this.glactrixHideAI);
-		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+		//this.goalSelector.addGoal(this.hideAIPriority, this.glactrixHideAI);
+		this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 6.0F));
 	}
 
 	@Override
-	protected void applyEntityAttributes()
+	protected void registerAttributes()
 	{
-		super.applyEntityAttributes();
+		super.registerAttributes();
 
-		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(.5D);
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
+		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(.5D);
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
 
-		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(6);
-		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(6);
-		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(4);
+		this.getAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(6);
+		this.getAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(6);
+		this.getAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(4);
 	}
 
 	public void setHiding(boolean isHiding)
@@ -136,7 +136,7 @@ public class EntityGlactrix extends EntityAetherAnimal implements IShearable
 			{
 				this.setEntityInvulnerable(false);
 
-				this.tasks.addTask(this.wanderAIPriority, this.wanderAI);
+				this.goalSelector.addGoal(this.wanderAIPriority, this.wanderAI);
 
 				// apply status effect on injury.
 				if (this.hurtTime > 0)
@@ -169,13 +169,13 @@ public class EntityGlactrix extends EntityAetherAnimal implements IShearable
 				this.timer = 0;
 			}
 
-			this.tasks.addTask(this.hideAIPriority, this.runeAndHideAI);
+			this.goalSelector.addGoal(this.hideAIPriority, this.runeAndHideAI);
 			this.tasks.removeTask(this.glactrixHideAI);
 		}
 		else
 		{
 			this.tasks.removeTask(this.runeAndHideAI);
-			this.tasks.addTask(this.hideAIPriority, this.glactrixHideAI);
+			this.goalSelector.addGoal(this.hideAIPriority, this.glactrixHideAI);
 		}
 	}
 
@@ -202,13 +202,13 @@ public class EntityGlactrix extends EntityAetherAnimal implements IShearable
 
 	@Nullable
 	@Override
-	public EntityAgeable createChild(EntityAgeable ageable)
+	public AgeableEntity createChild(AgeableEntity ageable)
 	{
 		return new EntityGlactrix(this.world);
 	}
 
 	@Override
-	public void setAttackTarget(@Nullable final EntityLivingBase entitylivingbaseIn)
+	public void setAttackTarget(@Nullable final LivingEntity entitylivingbaseIn)
 	{
 		super.setAttackTarget(entitylivingbaseIn);
 	}
@@ -250,14 +250,14 @@ public class EntityGlactrix extends EntityAetherAnimal implements IShearable
 	}
 
 	@Override
-	public boolean isShearable(@Nonnull ItemStack item, IBlockAccess world, BlockPos pos)
+	public boolean isShearable(@Nonnull ItemStack item, IBlockReader world, BlockPos pos)
 	{
 		return !(this.getIsSheared()) && this.getIsToppled();
 	}
 
 	@Nonnull
 	@Override
-	public List<ItemStack> onSheared(@Nonnull ItemStack item, IBlockAccess world, BlockPos pos, int fortune)
+	public List<ItemStack> onSheared(@Nonnull ItemStack item, IBlockReader world, BlockPos pos, int fortune)
 	{
 		this.setSheared(true);
 		this.setToppled(false);
@@ -277,18 +277,18 @@ public class EntityGlactrix extends EntityAetherAnimal implements IShearable
 	}
 
 	@Override
-	public void writeEntityToNBT(NBTTagCompound compound)
+	public void writeEntityToNBT(CompoundNBT compound)
 	{
 		super.writeEntityToNBT(compound);
-		compound.setInteger("glactrix_refreeze", this.timer);
-		compound.setBoolean("glactrix_sheared", this.getIsSheared());
+		compound.putInt("glactrix_refreeze", this.timer);
+		compound.putBoolean("glactrix_sheared", this.getIsSheared());
 	}
 
 	@Override
-	public void readEntityFromNBT(NBTTagCompound compound)
+	public void readEntityFromNBT(CompoundNBT compound)
 	{
 		super.readEntityFromNBT(compound);
-		this.timer = compound.getInteger("glactrix_refreeze");
+		this.timer = compound.getInt("glactrix_refreeze");
 		this.setSheared(compound.getBoolean("glactrix_sheared"));
 	}
 }

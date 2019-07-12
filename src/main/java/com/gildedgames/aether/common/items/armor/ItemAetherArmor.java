@@ -7,7 +7,7 @@ import com.gildedgames.aether.common.init.CreativeTabsAether;
 import com.google.common.collect.Multimap;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 
@@ -23,7 +23,7 @@ public class ItemAetherArmor extends ItemArmor
 
 	private int slashLevel, pierceLevel, impactLevel;
 
-	public ItemAetherArmor(final ArmorMaterial material, final String name, final EntityEquipmentSlot armorType)
+	public ItemAetherArmor(final ArmorMaterial material, final String name, final EquipmentSlotType armorType)
 	{
 		super(material, 0, armorType);
 
@@ -72,14 +72,14 @@ public class ItemAetherArmor extends ItemArmor
 	}
 
 	@Override
-	public String getArmorTexture(final ItemStack stack, final Entity entity, final EntityEquipmentSlot slot, final String type)
+	public String getArmorTexture(final ItemStack stack, final Entity entity, final EquipmentSlotType slot, final String type)
 	{
-		return AetherCore.getResourcePath("textures/armor/" + this.name + "_layer_" + (slot == EntityEquipmentSlot.LEGS ? 2 :
+		return AetherCore.getResourcePath("textures/armor/" + this.name + "_layer_" + (slot == EquipmentSlotType.LEGS ? 2 :
 				1 + (AetherCore.CONFIG.hasCutoutHelmets() ? "b" : "")) + ".png");
 	}
 
 	@Override
-	public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot)
+	public Multimap<String, AttributeModifier> getItemAttributeModifiers(EquipmentSlotType equipmentSlot)
 	{
 		Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);
 

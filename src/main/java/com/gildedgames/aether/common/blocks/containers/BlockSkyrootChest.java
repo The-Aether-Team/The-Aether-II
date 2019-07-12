@@ -2,13 +2,13 @@ package com.gildedgames.aether.common.blocks.containers;
 
 import com.gildedgames.aether.common.entities.tiles.TileEntitySkyrootChest;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockChest;
+import net.minecraft.block.ChestBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ILockableContainer;
@@ -17,9 +17,9 @@ import net.minecraftforge.common.util.EnumHelper;
 
 import java.util.Iterator;
 
-public class BlockSkyrootChest extends BlockChest
+public class BlockSkyrootChest extends ChestBlock
 {
-	private static final BlockChest.Type TYPE = EnumHelper.addEnum(BlockChest.Type.class, "AETHER_SKYROOT", new Class<?>[0]);
+	private static final ChestBlock.Type TYPE = EnumHelper.addEnum(ChestBlock.Type.class, "AETHER_SKYROOT", new Class<?>[0]);
 
 	public BlockSkyrootChest()
 	{
@@ -41,7 +41,7 @@ public class BlockSkyrootChest extends BlockChest
 
 			if (!this.isBlocked(worldIn, pos))
 			{
-				for (EnumFacing facing : EnumFacing.Plane.HORIZONTAL)
+				for (Direction facing : Direction.Plane.HORIZONTAL)
 				{
 					BlockPos adjPos = pos.offset(facing);
 					Block adjBlock = worldIn.getBlockState(adjPos).getBlock();
@@ -57,7 +57,7 @@ public class BlockSkyrootChest extends BlockChest
 
 						if (adjTileEntity instanceof TileEntityChest)
 						{
-							if (facing != EnumFacing.WEST && facing != EnumFacing.NORTH)
+							if (facing != Direction.WEST && facing != Direction.NORTH)
 							{
 								container = new InventoryLargeChest("container.skyroot_double_chest", container, (ILockableContainer) adjTileEntity);
 							}
@@ -83,7 +83,7 @@ public class BlockSkyrootChest extends BlockChest
 
 	private boolean isBelowSolidBlock(World worldIn, BlockPos pos)
 	{
-		return worldIn.isSideSolid(pos.up(), EnumFacing.DOWN, false);
+		return worldIn.isSideSolid(pos.up(), Direction.DOWN, false);
 	}
 
 	private boolean isOcelotSittingOnChest(World worldIn, BlockPos pos)

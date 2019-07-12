@@ -2,22 +2,22 @@ package com.gildedgames.aether.common.entities.flying;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.EnumDifficulty;
-import net.minecraft.world.EnumSkyBlock;
+import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 
 public class EntityFlyingMob extends EntityFlying implements IMob
@@ -31,7 +31,7 @@ public class EntityFlyingMob extends EntityFlying implements IMob
 	}
 
 	@Override
-	protected PathNavigate createNavigator(final World worldIn)
+	protected PathNavigator createNavigator(final World worldIn)
 	{
 		PathNavigateFlyer navigateFlyer = new PathNavigateFlyer(this, worldIn);
 
@@ -46,9 +46,9 @@ public class EntityFlyingMob extends EntityFlying implements IMob
 	}
 
 	@Override
-	public void onUpdate()
+	public void livingTick()
 	{
-		super.onUpdate();
+		super.livingTick();
 
 		if (this.hasAttacked() && this.world.isRemote)
 		{
@@ -66,7 +66,7 @@ public class EntityFlyingMob extends EntityFlying implements IMob
 	@Override
 	protected void entityInit()
 	{
-		super.entityInit();
+		super.registerData();
 
 		this.dataManager.register(EntityFlyingMob.ATTACKED, Boolean.FALSE);
 	}
@@ -95,12 +95,12 @@ public class EntityFlyingMob extends EntityFlying implements IMob
 	{
 		this.setAttacked(true);
 
-		float f = (float) this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue();
+		float f = (float) this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue();
 		int i = 0;
 
-		if (entityIn instanceof EntityLivingBase)
+		if (entityIn instanceof LivingEntity)
 		{
-			f += EnchantmentHelper.getModifierForCreature(this.getHeldItemMainhand(), ((EntityLivingBase) entityIn).getCreatureAttribute());
+			f += EnchantmentHelper.getModifierForCreature(this.getHeldItemMainhand(), ((LivingEntity) entityIn).getCreatureAttribute());
 			i += EnchantmentHelper.getKnockbackModifier(this);
 		}
 
@@ -110,7 +110,7 @@ public class EntityFlyingMob extends EntityFlying implements IMob
 		{
 			if (i > 0)
 			{
-				((EntityLivingBase) entityIn).knockBack(this,
+				((LivingEntity) entityIn).knockBack(this,
 						(float) i * 0.5F, (double) MathHelper.sin(this.rotationYaw * 0.017453292F), (double) (-MathHelper.cos(
 								this.rotationYaw * 0.017453292F)));
 				this.motionX *= 0.6D;
@@ -124,9 +124,9 @@ public class EntityFlyingMob extends EntityFlying implements IMob
 				entityIn.setFire(j * 4);
 			}
 
-			if (entityIn instanceof EntityPlayer)
+			if (entityIn instanceof PlayerEntity)
 			{
-				final EntityPlayer entityplayer = (EntityPlayer) entityIn;
+				final PlayerEntity entityplayer = (PlayerEntity) entityIn;
 				final ItemStack itemstack = this.getHeldItemMainhand();
 				final ItemStack itemstack1 = entityplayer.isHandActive() ? entityplayer.getActiveItemStack() : ItemStack.EMPTY;
 
@@ -149,9 +149,9 @@ public class EntityFlyingMob extends EntityFlying implements IMob
 	}
 
 	@Override
-	protected void applyEntityAttributes()
+	protected void registerAttributes()
 	{
-		super.applyEntityAttributes();
+		super.registerAttributes();
 		this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
 	}
 
@@ -173,9 +173,9 @@ public class EntityFlyingMob extends EntityFlying implements IMob
 
 	protected boolean isValidLightLevel()
 	{
-		final BlockPos blockpos = new BlockPos(this.posX, this.getEntityBoundingBox().minY, this.posZ);
+		final BlockPos blockpos = new BlockPos(this.posX, this.getBoundingBox().minY, this.posZ);
 
-		if (this.world.getLightFor(EnumSkyBlock.SKY, blockpos) > this.rand.nextInt(32))
+		if (this.world.getLightFor(LightType.SKY, blockpos) > this.rand.nextInt(32))
 		{
 			return false;
 		}

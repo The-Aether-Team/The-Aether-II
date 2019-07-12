@@ -5,7 +5,7 @@ import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTe
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 public class PacketSetPlayedIntro implements IMessage
@@ -38,7 +38,7 @@ public class PacketSetPlayedIntro implements IMessage
 	public static class HandlerClient extends MessageHandlerClient<PacketSetPlayedIntro, IMessage>
 	{
 		@Override
-		public IMessage onMessage(final PacketSetPlayedIntro message, final EntityPlayer player)
+		public IMessage onMessage(final PacketSetPlayedIntro message, final PlayerEntity player)
 		{
 			if (player == null || player.world == null)
 			{
@@ -55,7 +55,7 @@ public class PacketSetPlayedIntro implements IMessage
 	public static class HandlerServer extends MessageHandlerServer<PacketSetPlayedIntro, IMessage>
 	{
 		@Override
-		public IMessage onMessage(final PacketSetPlayedIntro message, final EntityPlayer player)
+		public IMessage onMessage(final PacketSetPlayedIntro message, final PlayerEntity player)
 		{
 			if (player == null || player.world == null)
 			{

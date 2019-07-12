@@ -8,8 +8,8 @@ import com.gildedgames.aether.common.entities.util.groups.EntityGroup;
 import com.gildedgames.orbis.lib.util.mc.NBTHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.block.BlockState;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -50,7 +50,7 @@ public class MoaNest
 
 	public boolean isReplaceable(final World world, final BlockPos pos)
 	{
-		final IBlockState state = world.getBlockState(pos);
+		final BlockState state = world.getBlockState(pos);
 		final Block block = state.getBlock();
 
 		return world.isAirBlock(pos) ||
@@ -97,22 +97,22 @@ public class MoaNest
 		return this.pack;
 	}
 
-	public void writeToNBT(final NBTTagCompound nbt)
+	public void writeToNBT(final CompoundNBT nbt)
 	{
-		nbt.setTag("pos", NBTHelper.writeBlockPos(this.pos));
+		nbt.put("pos", NBTHelper.writeBlockPos(this.pos));
 
-		nbt.setInteger("familyGeneticSeed", this.familyGeneticSeed);
+		nbt.putInt("familyGeneticSeed", this.familyGeneticSeed);
 
-		nbt.setBoolean("hasInitialized", this.hasInitialized);
+		nbt.putBoolean("hasInitialized", this.hasInitialized);
 
 		this.pack.writeToNBT(nbt);
 	}
 
-	public void readFromNBT(final NBTTagCompound nbt)
+	public void readFromNBT(final CompoundNBT nbt)
 	{
-		this.pos = NBTHelper.readBlockPos(nbt.getCompoundTag("pos"));
+		this.pos = NBTHelper.readBlockPos(nbt.getCompound("pos"));
 
-		this.familyGeneticSeed = nbt.getInteger("familyGeneticSeed");
+		this.familyGeneticSeed = nbt.getInt("familyGeneticSeed");
 
 		this.hasInitialized = nbt.getBoolean("hasInitialized");
 

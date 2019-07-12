@@ -4,28 +4,29 @@ import com.gildedgames.aether.api.entity.EntityCharacter;
 import com.gildedgames.aether.client.models.entities.living.ModelMysteriousFigure;
 import com.gildedgames.aether.common.AetherCelebrations;
 import com.gildedgames.aether.common.AetherCore;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.entity.RenderManager;
+import com.gildedgames.aether.common.entities.characters.EntityMysteriousFigure;
+import net.minecraft.client.renderer.entity.LivingRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderMysteriousFigure extends RenderLiving<EntityCharacter>
+public class RenderMysteriousFigure extends LivingRenderer<EntityMysteriousFigure, ModelMysteriousFigure>
 {
 
 	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/entities/npcs/mysterious_figure/mysterious_figure.png");
 
-	public RenderMysteriousFigure(final RenderManager renderManager)
+	public RenderMysteriousFigure(final EntityRendererManager renderManager)
 	{
 		super(renderManager, new ModelMysteriousFigure(), 0.5f);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(final EntityCharacter entity)
+	protected ResourceLocation getEntityTexture(final EntityMysteriousFigure entity)
 	{
 		return TEXTURE;
 	}
 
 	@Override
-	protected void renderModel(EntityCharacter entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
+	protected void renderModel(EntityMysteriousFigure entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
 		if (AetherCelebrations.isHalloweenEvent())
 		{

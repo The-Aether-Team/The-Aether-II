@@ -2,11 +2,11 @@ package com.gildedgames.aether.common.util.helpers;
 
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerEquipmentModule;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.util.NonNullList;
 
 public class PlayerUtil
@@ -53,9 +53,9 @@ public class PlayerUtil
 		return true;
 	}
 
-	public static void fillBucketInHand(EntityPlayer player, EnumHand hand, ItemStack emptyBucket, ItemStack fillBucket)
+	public static void fillBucketInHand(PlayerEntity player, Hand hand, ItemStack emptyBucket, ItemStack fillBucket)
 	{
-		final int invSlot = hand == EnumHand.MAIN_HAND ? player.inventory.currentItem : 40;
+		final int invSlot = hand == Hand.MAIN_HAND ? player.inventory.currentItem : 40;
 
 		if (emptyBucket.getCount() == 1)
 		{

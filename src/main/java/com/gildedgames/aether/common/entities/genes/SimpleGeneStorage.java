@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.entities.genes;
 
 import com.gildedgames.aether.api.entity.genes.IGeneStorage;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 
 public class SimpleGeneStorage implements IGeneStorage
 {
@@ -56,18 +56,18 @@ public class SimpleGeneStorage implements IGeneStorage
 	}
 
 	@Override
-	public void write(NBTTagCompound tag)
+	public void write(CompoundNBT tag)
 	{
-		tag.setInteger("seed", this.getSeed());
-		tag.setInteger("fatherSeed", this.getFatherSeed());
-		tag.setInteger("motherSeed", this.getMotherSeed());
+		tag.putInt("seed", this.getSeed());
+		tag.putInt("fatherSeed", this.getFatherSeed());
+		tag.putInt("motherSeed", this.getMotherSeed());
 	}
 
 	@Override
-	public void read(NBTTagCompound tag)
+	public void read(CompoundNBT tag)
 	{
-		this.setSeed(tag.getInteger("seed"));
-		this.setFatherSeed(tag.getInteger("fatherSeed"));
-		this.setMotherSeed(tag.getInteger("motherSeed"));
+		this.setSeed(tag.getInt("seed"));
+		this.setFatherSeed(tag.getInt("fatherSeed"));
+		this.setMotherSeed(tag.getInt("motherSeed"));
 	}
 }

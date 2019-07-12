@@ -2,13 +2,13 @@ package com.gildedgames.aether.common.recipes;
 
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.items.other.ItemWrappingPaper;
-import net.minecraft.init.Items;
+import net.minecraft.item.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
@@ -93,7 +93,7 @@ public class RecipeWrappingPaper extends IForgeRegistryEntry.Impl<IRecipe> imple
 
 		final ItemStack output = new ItemStack(ItemsAether.wrapping_paper, 8);
 
-		output.setTagCompound(new NBTTagCompound());
+		output.setTagCompound(new CompoundNBT());
 		data.writeToNBT(output.getTagCompound());
 
 		return output;

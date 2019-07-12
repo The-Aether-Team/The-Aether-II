@@ -11,18 +11,18 @@ import com.gildedgames.orbis.lib.util.TeleporterGeneric;
 import com.gildedgames.orbis.lib.util.io.NBTFunnel;
 import com.gildedgames.orbis.lib.util.mc.BlockPosDimension;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.WorldServer;
+import net.minecraft.world.ServerWorld;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PlayerTeleportingModule extends PlayerAetherModule implements IPlayerAetherModule.Serializable
 {
@@ -83,14 +83,14 @@ public class PlayerTeleportingModule extends PlayerAetherModule implements IPlay
 		return this.prevTicksInTeleporter;
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	private void onUpdateClient()
 	{
 		if (this.getWorld().provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER)
 		{
-			if (!this.playedIntro && Minecraft.getMinecraft().currentScreen == null)
+			if (!this.playedIntro && Minecraft.getInstance().currentScreen == null)
 			{
-				Minecraft.getMinecraft().displayGuiScreen(new GuiIntro());
+				Minecraft.getInstance().displayGuiScreen(new GuiIntro());
 			}
 		}
 	}
@@ -143,9 +143,9 @@ public class PlayerTeleportingModule extends PlayerAetherModule implements IPlay
 
 				if (this.ticksInTeleporter == 1)
 				{
-					if (this.getWorld().isRemote && Minecraft.getMinecraft().player.getEntityId() == this.getEntity().getEntityId())
+					if (this.getWorld().isRemote && Minecraft.getInstance().player.getEntityId() == this.getEntity().getEntityId())
 					{
-						Minecraft.getMinecraft().player.playSound(new SoundEvent(AetherCore.getResource("portal.glowstone.trigger")), 1.0F, 1.0F);
+						Minecraft.getInstance().player.playSound(new SoundEvent(AetherCore.getResource("portal.glowstone.trigger")), 1.0F, 1.0F);
 					}
 				}
 				else if (!this.getWorld().isRemote && (this.getTicksInTeleporter() >= TELEPORT_DELAY || this.getEntity().isCreative()))
@@ -169,17 +169,17 @@ public class PlayerTeleportingModule extends PlayerAetherModule implements IPlay
 	{
 		this.getEntity().timeUntilPortal = this.getEntity().getPortalCooldown();
 
-		if (this.getEntity().world.isRemote && Minecraft.getMinecraft().player.getEntityId() == this.getEntity().getEntityId())
+		if (this.getEntity().world.isRemote && Minecraft.getInstance().player.getEntityId() == this.getEntity().getEntityId())
 		{
-			Minecraft.getMinecraft().player.playSound(new SoundEvent(AetherCore.getResource("portal.glowstone.travel")), 1.0F, 1.0F);
+			Minecraft.getInstance().player.playSound(new SoundEvent(AetherCore.getResource("portal.glowstone.travel")), 1.0F, 1.0F);
 		}
 
-		if (this.getEntity().world instanceof WorldServer)
+		if (this.getEntity().world instanceof ServerWorld)
 		{
 			final MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
-			final WorldServer worldServer = server.getWorld(this.getEntity().dimension);
+			final ServerWorld worldServer = server.getWorld(this.getEntity().dimension);
 
-			final EntityPlayer player = this.getEntity();
+			final PlayerEntity player = this.getEntity();
 
 			final int transferToID = AetherCore.CONFIG.getAetherDimID();
 
@@ -205,18 +205,18 @@ public class PlayerTeleportingModule extends PlayerAetherModule implements IPlay
 	}
 
 	@Override
-	public void write(final NBTTagCompound output)
+	public void write(final CompoundNBT output)
 	{
 		final NBTFunnel funnel = new NBTFunnel(output);
 
 		funnel.set("nonAetherPos", this.nonAetherPos);
 		funnel.set("aetherPos", this.aetherPos);
 
-		output.setBoolean("playedIntro", this.playedIntro);
+		output.putBoolean("playedIntro", this.playedIntro);
 	}
 
 	@Override
-	public void read(final NBTTagCompound input)
+	public void read(final CompoundNBT input)
 	{
 		final NBTFunnel funnel = new NBTFunnel(input);
 

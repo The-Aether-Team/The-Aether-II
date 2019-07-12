@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.items.consumables;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -13,7 +13,7 @@ public class ItemStomperPop extends ItemAetherFood
 	}
 
 	@Override
-	public void onCreated(ItemStack stack, World worldIn, EntityPlayer player)
+	public void onCreated(ItemStack stack, World worldIn, PlayerEntity player)
 	{
 		//Play scary sound
 	}

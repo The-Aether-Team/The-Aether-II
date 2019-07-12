@@ -4,7 +4,7 @@ import com.gildedgames.aether.api.entity.effects.EEffectIntensity;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.effects.EffectsDamageSource;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.text.TextFormatting;
 
 import java.util.Collection;
@@ -14,13 +14,13 @@ public class StatusEffectToxin extends StatusEffect
 	private int NumOfHeartsEffected = 0;
 	private final int MAX_HEARTS = 6;
 
-	public StatusEffectToxin(EntityLivingBase livingBase)
+	public StatusEffectToxin(LivingEntity livingBase)
 	{
 		super(effectTypes.TOXIN, null, livingBase);
 	}
 
 	@Override
-	public void applyEffect(EntityLivingBase livingBase, int timer)
+	public void applyEffect(LivingEntity livingBase, int timer)
 	{
 		if (this.isEffectApplied)
 		{

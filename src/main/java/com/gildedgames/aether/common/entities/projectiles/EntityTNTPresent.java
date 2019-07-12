@@ -2,8 +2,8 @@ package com.gildedgames.aether.common.entities.projectiles;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MoverType;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
@@ -58,7 +58,7 @@ public class EntityTNTPresent extends Entity
 	}
 
 	@Override
-	public void onUpdate()
+	public void livingTick()
 	{
 		this.prevPosX = this.posX;
 		this.prevPosY = this.posY;
@@ -86,7 +86,7 @@ public class EntityTNTPresent extends Entity
 		}
 		else
 		{
-			this.world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.posX, this.posY + 0.5D, this.posZ, 0.0D, 0.0D, 0.0D);
+			this.world.spawnParticle(ParticleTypes.SMOKE_NORMAL, this.posX, this.posY + 0.5D, this.posZ, 0.0D, 0.0D, 0.0D);
 		}
 	}
 
@@ -97,13 +97,13 @@ public class EntityTNTPresent extends Entity
 	}
 
 	@Override
-	protected void writeEntityToNBT(NBTTagCompound nbttagcompound)
+	protected void writeEntityToNBT(CompoundNBT nbttagcompound)
 	{
-		nbttagcompound.setByte("Fuse", (byte) this.fuse);
+		nbttagcompound.putByte("Fuse", (byte) this.fuse);
 	}
 
 	@Override
-	protected void readEntityFromNBT(NBTTagCompound nbttagcompound)
+	protected void readEntityFromNBT(CompoundNBT nbttagcompound)
 	{
 		this.fuse = nbttagcompound.getByte("Fuse");
 	}

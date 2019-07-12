@@ -1,29 +1,29 @@
 package com.gildedgames.aether.common.entities.tiles;
 
 import com.gildedgames.orbis.lib.processing.BlockAccessExtendedWrapper;
-import com.gildedgames.orbis.lib.processing.IBlockAccessExtended;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
+import com.gildedgames.orbis.lib.processing.IBlockAccess;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.ContainerChest;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntityLockable;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.ITickable;
+import net.minecraft.particles.ParticleTypes;
+import net.minecraft.tileentity.ITickableTileEntity;
+import net.minecraft.tileentity.LockableTileEntity;
 import net.minecraft.util.NonNullList;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public abstract class TileEntitySchematicBlock extends TileEntityLockable implements ITickable, IInventory
+public abstract class TileEntitySchematicBlock extends LockableTileEntity implements ITickableTileEntity, IInventory
 {
 
 	protected NonNullList<ItemStack> contents = NonNullList.withSize(27, ItemStack.EMPTY);
@@ -61,7 +61,7 @@ public abstract class TileEntitySchematicBlock extends TileEntityLockable implem
 				final double motionY = (this.world.rand.nextBoolean() ? 1.0D : -1.0D) * this.world.rand.nextFloat() * 0.01F;
 				final double motionZ = (this.world.rand.nextBoolean() ? 1.0D : -1.0D) * this.world.rand.nextFloat() * 0.01F;
 
-				this.world.spawnParticle(EnumParticleTypes.SPELL_MOB,
+				this.world.spawnParticle(ParticleTypes.SPELL_MOB,
 						this.getPos().getX() + 0.5D + motionX,
 						this.getPos().getY() + 0.5D + motionY, this.getPos().getZ() + 0.5D + motionZ, 0.0D, 0.0D, 0.0D);
 			}
@@ -83,18 +83,18 @@ public abstract class TileEntitySchematicBlock extends TileEntityLockable implem
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(final NBTTagCompound compound)
+	public CompoundNBT writeToNBT(final CompoundNBT compound)
 	{
 		super.writeToNBT(compound);
 
-		final NBTTagList nbttaglist = new NBTTagList();
+		final ListNBT nbttaglist = new ListNBT();
 
 		for (int i = 0; i < this.contents.size(); ++i)
 		{
 			if (!this.contents.get(i).isEmpty())
 			{
-				final NBTTagCompound nbttagcompound = new NBTTagCompound();
-				nbttagcompound.setByte("Slot", (byte) i);
+				final CompoundNBT nbttagcompound = new CompoundNBT();
+				nbttagcompound.putByte("Slot", (byte) i);
 
 				this.contents.get(i).writeToNBT(nbttagcompound);
 
@@ -102,24 +102,24 @@ public abstract class TileEntitySchematicBlock extends TileEntityLockable implem
 			}
 		}
 
-		compound.setTag("Items", nbttaglist);
+		compound.put("Items", nbttaglist);
 
-		compound.setBoolean("markedForGeneration", this.isMarkedForGeneration());
+		compound.putBoolean("markedForGeneration", this.isMarkedForGeneration());
 
 		return compound;
 	}
 
 	@Override
-	public void readFromNBT(final NBTTagCompound compound)
+	public void readFromNBT(final CompoundNBT compound)
 	{
 		super.readFromNBT(compound);
 
-		final NBTTagList nbttaglist = compound.getTagList("Items", 10);
+		final ListNBT nbttaglist = compound.getTagList("Items", 10);
 		this.contents = NonNullList.withSize(27, ItemStack.EMPTY);
 
 		for (int i = 0; i < nbttaglist.tagCount(); ++i)
 		{
-			final NBTTagCompound nbttagcompound = nbttaglist.getCompoundTagAt(i);
+			final CompoundNBT nbttagcompound = nbttaglist.getCompoundAt(i);
 			final int j = nbttagcompound.getByte("Slot") & 255;
 
 			if (j >= 0 && j < this.contents.size())
@@ -136,7 +136,7 @@ public abstract class TileEntitySchematicBlock extends TileEntityLockable implem
 	 * provided block access object.
 	 * @param blockAccess
 	 */
-	public abstract void onSchematicGeneration(IBlockAccessExtended blockAccess, Random rand);
+	public abstract void onSchematicGeneration(IBlockAccess blockAccess, Random rand);
 
 	public abstract boolean shouldInvalidateTEOnGen();
 
@@ -154,7 +154,7 @@ public abstract class TileEntitySchematicBlock extends TileEntityLockable implem
 	}
 
 	@Override
-	public Container createContainer(final InventoryPlayer playerInventory, final EntityPlayer playerIn)
+	public Container createContainer(final PlayerInventory playerInventory, final PlayerEntity playerIn)
 	{
 		return new ContainerChest(playerInventory, this, playerIn);
 	}
@@ -217,21 +217,21 @@ public abstract class TileEntitySchematicBlock extends TileEntityLockable implem
 	}
 
 	@Override
-	public boolean isUsableByPlayer(final EntityPlayer player)
+	public boolean isUsableByPlayer(final PlayerEntity player)
 	{
 		return this.world.getTileEntity(this.pos) == this && (
 				player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D)
-						<= 64.0D && player.capabilities.isCreativeMode);
+						<= 64.0D && player.isCreative());
 	}
 
 	@Override
-	public void openInventory(final EntityPlayer player)
+	public void openInventory(final PlayerEntity player)
 	{
 
 	}
 
 	@Override
-	public void closeInventory(final EntityPlayer player)
+	public void closeInventory(final PlayerEntity player)
 	{
 
 	}
@@ -239,7 +239,7 @@ public abstract class TileEntitySchematicBlock extends TileEntityLockable implem
 	@Override
 	public boolean isItemValidForSlot(final int index, final ItemStack stack)
 	{
-		return stack.getItem() instanceof ItemBlock;
+		return stack.getItem() instanceof BlockItem;
 	}
 
 	@Override
@@ -267,7 +267,7 @@ public abstract class TileEntitySchematicBlock extends TileEntityLockable implem
 
 	public void sync()
 	{
-		final IBlockState state = this.world.getBlockState(this.pos);
+		final BlockState state = this.world.getBlockState(this.pos);
 
 		this.world.notifyBlockUpdate(this.pos, state, state, 3);
 
@@ -275,9 +275,9 @@ public abstract class TileEntitySchematicBlock extends TileEntityLockable implem
 	}
 
 	@Override
-	public NBTTagCompound getUpdateTag()
+	public CompoundNBT getUpdateTag()
 	{
-		final NBTTagCompound tag = super.getUpdateTag();
+		final CompoundNBT tag = super.getUpdateTag();
 
 		this.writeToNBT(tag);
 
@@ -287,7 +287,7 @@ public abstract class TileEntitySchematicBlock extends TileEntityLockable implem
 	@Override
 	public SPacketUpdateTileEntity getUpdatePacket()
 	{
-		final NBTTagCompound compound = this.getUpdateTag();
+		final CompoundNBT compound = this.getUpdateTag();
 
 		return new SPacketUpdateTileEntity(this.pos, 1, compound);
 	}

@@ -2,22 +2,22 @@ package com.gildedgames.aether.common.entities.tiles;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.blocks.containers.BlockMasonryBench;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.block.BlockState;
+import net.minecraft.util.Direction;
 
 public class TileEntityMasonryBench extends TileEntitySynced
 {
 
-	public EnumFacing getFacing()
+	public Direction getFacing()
 	{
-		IBlockState state = this.world.getBlockState(this.pos);
+		BlockState state = this.world.getBlockState(this.pos);
 
 		if (state.getBlock() == BlocksAether.masonry_bench)
 		{
 			return state.getValue(BlockMasonryBench.PROPERTY_FACING);
 		}
 
-		return EnumFacing.NORTH;
+		return Direction.NORTH;
 	}
 
 }

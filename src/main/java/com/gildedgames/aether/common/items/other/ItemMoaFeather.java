@@ -3,15 +3,15 @@ package com.gildedgames.aether.common.items.other;
 import com.gildedgames.aether.common.items.IDropOnDeath;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
 import java.util.List;
@@ -28,15 +28,15 @@ public class ItemMoaFeather extends Item implements IDropOnDeath
 	{
 		if (stack.getTagCompound() == null)
 		{
-			stack.setTagCompound(new NBTTagCompound());
+			stack.setTagCompound(new CompoundNBT());
 		}
 
-		final NBTTagCompound tag = new NBTTagCompound();
+		final CompoundNBT tag = new CompoundNBT();
 
-		tag.setString("colorName", colorName);
-		tag.setInteger("color", color);
+		tag.putString("colorName", colorName);
+		tag.putInt("color", color);
 
-		stack.getTagCompound().setTag("featherColor", tag);
+		stack.getTagCompound().put("featherColor", tag);
 	}
 
 	public static int getColor(final ItemStack stack)
@@ -46,12 +46,12 @@ public class ItemMoaFeather extends Item implements IDropOnDeath
 			ItemMoaFeather.setColor(stack, "", 0xFFFFFF);
 		}
 
-		final NBTTagCompound tag = stack.getTagCompound().getCompoundTag("featherColor");
+		final CompoundNBT tag = stack.getTagCompound().getCompound("featherColor");
 
-		return tag.getInteger("color");
+		return tag.getInt("color");
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static String getColorName(final ItemStack stack)
 	{
 		if (stack.getTagCompound() == null)
@@ -59,14 +59,14 @@ public class ItemMoaFeather extends Item implements IDropOnDeath
 			ItemMoaFeather.setColor(stack, "", 0xFFFFFF);
 		}
 
-		final NBTTagCompound tag = stack.getTagCompound().getCompoundTag("featherColor");
+		final CompoundNBT tag = stack.getTagCompound().getCompound("featherColor");
 
 		return tag.getString("colorName");
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void getSubItems(final CreativeTabs tab, final NonNullList<ItemStack> subItems)
+	@OnlyIn(Dist.CLIENT)
+	public void getSubItems(final ItemGroup tab, final NonNullList<ItemStack> subItems)
 	{
 		if (!this.isInCreativeTab(tab))
 		{
@@ -80,7 +80,7 @@ public class ItemMoaFeather extends Item implements IDropOnDeath
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void addInformation(final ItemStack stack, final World world, final List<String> tooltip, final ITooltipFlag flag)
 	{
 		final String colorName = ItemMoaFeather.getColorName(stack);

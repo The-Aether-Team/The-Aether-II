@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.entities.util.groups;
 
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.nbt.CompoundNBT;
 
 import java.util.*;
 
@@ -102,7 +102,7 @@ public class EntityGroup
 		this.refresh();
 	}
 
-	public void addOrRenewAggressor(final EntityLivingBase entity)
+	public void addOrRenewAggressor(final LivingEntity entity)
 	{
 		final Iterator iterator = this.agressors.iterator();
 		EntityGroupAggressor agressor;
@@ -122,7 +122,7 @@ public class EntityGroup
 		agressor.time = this.tickCounter;
 	}
 
-	public EntityLivingBase findNearestAggressor(final EntityLivingBase entity)
+	public LivingEntity findNearestAggressor(final LivingEntity entity)
 	{
 		double d0 = Double.MAX_VALUE;
 		EntityGroupAggressor agressor = null;
@@ -149,7 +149,7 @@ public class EntityGroup
 		{
 			final EntityGroupAggressor agressor = (EntityGroupAggressor) iterator.next();
 
-			if (!agressor.agressor.isEntityAlive() || (this.tickCounter - agressor.time) > 2200)
+			if (!agressor.agressor.isAlive() || (this.tickCounter - agressor.time) > 2200)
 			{
 				iterator.remove();
 			}
@@ -174,24 +174,24 @@ public class EntityGroup
 		return pack.getID() == this.getID();
 	}
 
-	public void writeToNBT(final NBTTagCompound nbt)
+	public void writeToNBT(final CompoundNBT nbt)
 	{
-		nbt.setInteger("packID", this.id);
-		nbt.setInteger("optimalPackSize", this.optimalSize);
-		nbt.setInteger("size", this.size);
-		nbt.setInteger("nextPackID", EntityGroup.nextPackID);
-		nbt.setInteger("tickCounter", this.tickCounter);
-		nbt.setBoolean("hasLeader", this.hasLeader);
+		nbt.putInt("packID", this.id);
+		nbt.putInt("optimalPackSize", this.optimalSize);
+		nbt.putInt("size", this.size);
+		nbt.putInt("nextPackID", EntityGroup.nextPackID);
+		nbt.putInt("tickCounter", this.tickCounter);
+		nbt.putBoolean("hasLeader", this.hasLeader);
 	}
 
-	public void readFromNBT(final NBTTagCompound nbt)
+	public void readFromNBT(final CompoundNBT nbt)
 	{
-		this.id = nbt.getInteger("packID");
-		this.optimalSize = nbt.getInteger("optimalPackSize");
-		this.size = nbt.getInteger("size");
-		EntityGroup.nextPackID = nbt.getInteger("nextPackID");
+		this.id = nbt.getInt("packID");
+		this.optimalSize = nbt.getInt("optimalPackSize");
+		this.size = nbt.getInt("size");
+		EntityGroup.nextPackID = nbt.getInt("nextPackID");
 		this.hasLeader = nbt.getBoolean("hasLeader");
-		this.tickCounter = nbt.getInteger("tickCounter");
+		this.tickCounter = nbt.getInt("tickCounter");
 
 		this.refresh();
 	}

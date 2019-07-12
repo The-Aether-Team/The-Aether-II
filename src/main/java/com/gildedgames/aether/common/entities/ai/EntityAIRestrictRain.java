@@ -1,14 +1,14 @@
 package com.gildedgames.aether.common.entities.ai;
 
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.pathfinding.PathNavigateGround;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.pathfinding.GroundPathNavigator;
 
-public class EntityAIRestrictRain extends EntityAIBase
+public class EntityAIRestrictRain extends Goal
 {
-	private final EntityCreature entity;
+	private final CreatureEntity entity;
 
-	public EntityAIRestrictRain(EntityCreature creature)
+	public EntityAIRestrictRain(CreatureEntity creature)
 	{
 		this.entity = creature;
 	}
@@ -28,7 +28,7 @@ public class EntityAIRestrictRain extends EntityAIBase
 	@Override
 	public void startExecuting()
 	{
-		((PathNavigateGround) this.entity.getNavigator()).setAvoidSun(true);
+		((GroundPathNavigator) this.entity.getNavigator()).setAvoidSun(true);
 	}
 
 	/**
@@ -37,6 +37,6 @@ public class EntityAIRestrictRain extends EntityAIBase
 	@Override
 	public void resetTask()
 	{
-		((PathNavigateGround) this.entity.getNavigator()).setAvoidSun(false);
+		((GroundPathNavigator) this.entity.getNavigator()).setAvoidSun(false);
 	}
 }

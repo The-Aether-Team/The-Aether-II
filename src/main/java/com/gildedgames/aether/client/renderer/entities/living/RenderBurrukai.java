@@ -5,12 +5,12 @@ import com.gildedgames.aether.client.renderer.EyeUtil;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.animals.EntityBurrukai;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.entity.RenderManager;
+import com.mojang.blaze3d.platform.GlStateManager;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.LivingRenderer;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderBurrukai extends RenderLiving<EntityBurrukai>
+public class RenderBurrukai extends LivingRenderer<EntityBurrukai, ModelBurrukai>
 {
 	private static final ResourceLocation texture = AetherCore.getResource("textures/entities/burrukai/burrukai.png");
 
@@ -20,7 +20,7 @@ public class RenderBurrukai extends RenderLiving<EntityBurrukai>
 
 	private static final ResourceLocation EYES_CLOSED = AetherCore.getResource("textures/entities/burrukai/burrukai_eyes_closed.png");
 
-	public RenderBurrukai(RenderManager renderManager)
+	public RenderBurrukai(EntityRendererManager renderManager)
 	{
 		super(renderManager, new ModelBurrukai(), 1.0f);
 	}
@@ -30,8 +30,8 @@ public class RenderBurrukai extends RenderLiving<EntityBurrukai>
 	{
 		float scale = 1.0F;
 
-		GlStateManager.scale(scale, scale, scale);
-		GlStateManager.translate(0.0F, 0.0F, -0.8F);
+		GlStateManager.scalef(scale, scale, scale);
+		GlStateManager.translatef(0.0F, 0.0F, -0.8F);
 	}
 
 	@Override
@@ -45,10 +45,10 @@ public class RenderBurrukai extends RenderLiving<EntityBurrukai>
 	{
 		super.renderModel(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
-		ModelBurrukai model = (ModelBurrukai) this.mainModel;
+		ModelBurrukai model = this.getEntityModel();
 
 		boolean globalInvisible = !entity.isInvisible() || this.renderOutlines;
-		boolean playerInvisible = !globalInvisible && !entity.isInvisibleToPlayer(Minecraft.getMinecraft().player);
+		boolean playerInvisible = !globalInvisible && !entity.isInvisibleToPlayer(Minecraft.getInstance().player);
 
 		if (globalInvisible || playerInvisible)
 		{

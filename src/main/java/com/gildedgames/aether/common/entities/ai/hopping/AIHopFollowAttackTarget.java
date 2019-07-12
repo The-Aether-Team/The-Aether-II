@@ -1,11 +1,11 @@
 package com.gildedgames.aether.common.entities.ai.hopping;
 
 import com.gildedgames.aether.common.entities.ai.EntityAI;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.player.PlayerEntity;
 
-public class AIHopFollowAttackTarget extends EntityAI<EntityLiving>
+public class AIHopFollowAttackTarget extends EntityAI<MobEntity>
 {
 
 	private final HoppingMoveHelper hoppingMoveHelper;
@@ -14,7 +14,7 @@ public class AIHopFollowAttackTarget extends EntityAI<EntityLiving>
 
 	private int growTieredTimer;
 
-	public AIHopFollowAttackTarget(final EntityLiving entity, final HoppingMoveHelper hoppingMoveHelper, final double speed)
+	public AIHopFollowAttackTarget(final MobEntity entity, final HoppingMoveHelper hoppingMoveHelper, final double speed)
 	{
 		super(entity);
 
@@ -30,9 +30,9 @@ public class AIHopFollowAttackTarget extends EntityAI<EntityLiving>
 	@Override
 	public boolean shouldExecute()
 	{
-		final EntityLivingBase entitylivingbase = this.entity().getAttackTarget();
-		return entitylivingbase != null && (entitylivingbase.isEntityAlive() && (!(entitylivingbase instanceof EntityPlayer)
-				|| !((EntityPlayer) entitylivingbase).capabilities.disableDamage));
+		final LivingEntity entitylivingbase = this.entity().getAttackTarget();
+		return entitylivingbase != null && (entitylivingbase.isAlive() && (!(entitylivingbase instanceof PlayerEntity)
+				|| !((PlayerEntity) entitylivingbase).capabilities.disableDamage));
 	}
 
 	/**
@@ -51,9 +51,9 @@ public class AIHopFollowAttackTarget extends EntityAI<EntityLiving>
 	@Override
 	public boolean shouldContinueExecuting()
 	{
-		final EntityLivingBase entitylivingbase = this.entity().getAttackTarget();
-		return entitylivingbase != null && (entitylivingbase.isEntityAlive() && (
-				!(entitylivingbase instanceof EntityPlayer && ((EntityPlayer) entitylivingbase).capabilities.disableDamage)
+		final LivingEntity entitylivingbase = this.entity().getAttackTarget();
+		return entitylivingbase != null && (entitylivingbase.isAlive() && (
+				!(entitylivingbase instanceof PlayerEntity && ((PlayerEntity) entitylivingbase).capabilities.disableDamage)
 						&& --this.growTieredTimer > 0));
 	}
 

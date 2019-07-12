@@ -29,9 +29,9 @@ import com.gildedgames.orbis.lib.core.baking.BakedBlueprint;
 import com.gildedgames.orbis.lib.core.util.BlueprintPlacer;
 import com.gildedgames.orbis.lib.data.schedules.ScheduleRegion;
 import com.gildedgames.orbis.lib.processing.DataPrimer;
-import com.gildedgames.orbis.lib.processing.IBlockAccessExtended;
+import com.gildedgames.orbis.lib.processing.IBlockAccess;
 import com.gildedgames.orbis.lib.world.WorldSlice;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -67,8 +67,8 @@ public class BiomeAetherDecorator
 
 	public BiomeAetherDecorator()
 	{
-        final IBlockState[] dirtStates = new IBlockState[] { BlocksAether.aether_dirt.getDefaultState() };
-        final IBlockState[] holystoneStates = new IBlockState[] { BlocksAether.holystone.getDefaultState() };
+        final BlockState[] dirtStates = new BlockState[] { BlocksAether.aether_dirt.getDefaultState() };
+        final BlockState[] holystoneStates = new BlockState[] { BlocksAether.holystone.getDefaultState() };
 
 		this.genAmbrosium = new WorldGenAetherMinable(BlocksAether.ambrosium_ore.getDefaultState(), 16, holystoneStates);
 
@@ -180,7 +180,7 @@ public class BiomeAetherDecorator
 
 	private void generate(
 			final BlueprintDefinition def, final int tries, final int maxGenerated, final IIslandData island,
-			final IBlockAccessExtended access, final DataPrimer primer, final World world, final Random rand)
+			final IBlockAccess access, final DataPrimer primer, final World world, final Random rand)
 	{
 		if (maxGenerated <= 0)
 		{
@@ -236,7 +236,7 @@ public class BiomeAetherDecorator
 	}
 
 	private void generate(final BlueprintDefinitionPool pool, final int tries, final int maxGenerated, final IIslandData island,
-			final IBlockAccessExtended access, final DataPrimer primer, final World world, final Random rand)
+			final IBlockAccess access, final DataPrimer primer, final World world, final Random rand)
 	{
 		if (maxGenerated <= 0)
 		{
@@ -532,7 +532,7 @@ public class BiomeAetherDecorator
 		for (blockpos = new BlockPos(pos.getX(), lowestSection, pos.getZ()); blockpos.getY() <= 255; blockpos = blockpos1)
 		{
 			blockpos1 = blockpos.up();
-			IBlockState state = chunk.getBlockState(blockpos1);
+			BlockState state = chunk.getBlockState(blockpos1);
 
 			if (state.getMaterial().blocksMovement() && !state.getBlock().isLeaves(state, world, blockpos1) && !state.getBlock().isFoliage(world, blockpos1))
 			{

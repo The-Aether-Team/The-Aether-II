@@ -1,11 +1,12 @@
 package com.gildedgames.aether.client.models.entities.living;
 
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelRenderer;
+import com.gildedgames.aether.common.entities.monsters.EntityAechorPlant;
+import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.Entity;
 import org.lwjgl.opengl.GL11;
 
-public class ModelAechorPlant extends ModelBase
+public class ModelAechorPlant extends EntityModel<EntityAechorPlant>
 {
 	private static final int petals = 10;
 
@@ -13,38 +14,38 @@ public class ModelAechorPlant extends ModelBase
 
 	private static final int stamens = 3;
 
-	public final ModelRenderer[] petal;
+	public final RendererModel[] petal;
 
-	public final ModelRenderer[] leaf;
+	public final RendererModel[] leaf;
 
-	public final ModelRenderer[] thorn;
+	public final RendererModel[] thorn;
 
-	public final ModelRenderer[] stamen;
+	public final RendererModel[] stamen;
 
-	public final ModelRenderer[] stamen2;
+	public final RendererModel[] stamen2;
 
 	public float sinage, sinage2;
 
 	public float size;
 
-	private final ModelRenderer stem;
+	private final RendererModel stem;
 
-	private final ModelRenderer head;
+	private final RendererModel head;
 
 	public ModelAechorPlant()
 	{
 		this.size = 1.0F;
 
-		this.petal = new ModelRenderer[petals];
-		this.leaf = new ModelRenderer[petals];
+		this.petal = new RendererModel[petals];
+		this.leaf = new RendererModel[petals];
 
 		for (int i = 0; i < petals; i++)
 		{
-			this.petal[i] = new ModelRenderer(this, 0, 0);
+			this.petal[i] = new RendererModel(this, 0, 0);
 
 			if (i % 2 == 0)
 			{
-				this.petal[i] = new ModelRenderer(this, 29, 3);
+				this.petal[i] = new RendererModel(this, 29, 3);
 				this.petal[i].addBox(-4F, -1F, -12F, 8, 1, 9, 0.25F);
 				this.petal[i].setRotationPoint(0.0F, 1.0F, 0.0F);
 			}
@@ -54,41 +55,41 @@ public class ModelAechorPlant extends ModelBase
 				this.petal[i].setRotationPoint(0.0F, 1.0F, 0.0F);
 			}
 
-			this.leaf[i] = new ModelRenderer(this, 38, 13);
+			this.leaf[i] = new RendererModel(this, 38, 13);
 			this.leaf[i].addBox(-2F, -1F, -9.5F, 4, 1, 8, 0.15F);
 			this.leaf[i].setRotationPoint(0.0F, 1.0F, 0.0F);
 		}
 
-		this.stamen = new ModelRenderer[stamens];
-		this.stamen2 = new ModelRenderer[stamens];
+		this.stamen = new RendererModel[stamens];
+		this.stamen2 = new RendererModel[stamens];
 
 		for (int i = 0; i < stamens; i++)
 		{
-			this.stamen[i] = new ModelRenderer(this, 36, 13);
+			this.stamen[i] = new RendererModel(this, 36, 13);
 			this.stamen[i].addBox(0F, -9F, -1.5F, 1, 6, 1, 0.25F);
 			this.stamen[i].setRotationPoint(0.0F, 1.0F, 0.0F);
 		}
 
 		for (int i = 0; i < stamens; i++)
 		{
-			this.stamen2[i] = new ModelRenderer(this, 32, 15);
+			this.stamen2[i] = new RendererModel(this, 32, 15);
 			this.stamen2[i].addBox(0F, -10F, -1.5F, 1, 1, 1, 0.125F);
 			this.stamen2[i].setRotationPoint(0.0F, 1.0F, 0.0F);
 		}
 
-		this.head = new ModelRenderer(this, 0, 12);
+		this.head = new RendererModel(this, 0, 12);
 		this.head.addBox(-3F, -3F, -3F, 6, 2, 6, 0.75F);
 		this.head.setRotationPoint(0.0F, 1.0F, 0.0F);
 
-		this.stem = new ModelRenderer(this, 24, 13);
+		this.stem = new RendererModel(this, 24, 13);
 		this.stem.addBox(-1F, 0F, -1F, 2, 6, 2, 0);
 		this.stem.setRotationPoint(0.0F, 1.0F, 0.0F);
 
-		this.thorn = new ModelRenderer[thorns];
+		this.thorn = new RendererModel[thorns];
 
 		for (int i = 0; i < thorns; i++)
 		{
-			this.thorn[i] = new ModelRenderer(this, 32, 13);
+			this.thorn[i] = new RendererModel(this, 32, 13);
 			this.thorn[i].setRotationPoint(0.0F, 1.0F, 0.0F);
 		}
 
@@ -99,7 +100,7 @@ public class ModelAechorPlant extends ModelBase
 	}
 
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+	public void render(EntityAechorPlant entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
 		this.setRotationAngles(f4, f5);
 

@@ -3,14 +3,14 @@ package com.gildedgames.aether.common.events.listeners.items;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.init.MaterialsAether;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTool;
-import net.minecraft.util.EnumHand;
+import net.minecraft.item.ToolItem;
+import net.minecraft.util.Hand;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +22,11 @@ public class ItemSkyrootSwordListener
 	@SubscribeEvent
 	public static void dropLoot(final LivingDropsEvent event)
 	{
-		if (event.getSource().getTrueSource() instanceof EntityPlayer)
+		if (event.getSource().getTrueSource() instanceof PlayerEntity)
 		{
-			final EntityPlayer player = (EntityPlayer) event.getSource().getTrueSource();
+			final PlayerEntity player = (PlayerEntity) event.getSource().getTrueSource();
 
-			final ItemStack held = player.getHeldItem(EnumHand.MAIN_HAND);
+			final ItemStack held = player.getHeldItem(Hand.MAIN_HAND);
 
 			boolean providesDrops = false;
 
@@ -34,9 +34,9 @@ public class ItemSkyrootSwordListener
 			{
 				providesDrops = true;
 			}
-			else if (held.getItem() instanceof ItemTool)
+			else if (held.getItem() instanceof ToolItem)
 			{
-				final String material = ((ItemTool) held.getItem()).getToolMaterialName();
+				final String material = ((ToolItem) held.getItem()).getToolMaterialName();
 
 				providesDrops = Objects.equals(material, MaterialsAether.SKYROOT_TOOL.name());
 			}
@@ -45,7 +45,7 @@ public class ItemSkyrootSwordListener
 			{
 				final List<ItemStack> stacks = new ArrayList<>();
 
-				for (final EntityItem item : event.getDrops())
+				for (final ItemEntity item : event.getDrops())
 				{
 					stacks.add(item.getItem());
 				}
@@ -54,7 +54,7 @@ public class ItemSkyrootSwordListener
 
 				for (final ItemStack stack : stacks)
 				{
-					final EntityItem item = new EntityItem(player.getEntityWorld(), origin.posX, origin.posY, origin.posZ, stack);
+					final ItemEntity item = new ItemEntity(player.getEntityWorld(), origin.posX, origin.posY, origin.posZ, stack);
 
 					player.getEntityWorld().spawnEntity(item);
 				}

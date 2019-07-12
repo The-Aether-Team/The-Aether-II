@@ -3,16 +3,16 @@ package com.gildedgames.aether.common.items.tools.handlers;
 import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import net.minecraft.block.IGrowable;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -23,7 +23,7 @@ import java.util.List;
 public class ItemSkyrootToolHandler implements IToolEventHandler
 {
 	@Override
-	public void onHarvestBlock(final ItemStack stack, final World world, final IBlockState state, final BlockPos pos, final EntityPlayer entity,
+	public void onHarvestBlock(final ItemStack stack, final World world, final BlockState state, final BlockPos pos, final PlayerEntity entity,
 			final List<ItemStack> drops)
 	{
 		if (!world.isRemote)
@@ -33,7 +33,7 @@ public class ItemSkyrootToolHandler implements IToolEventHandler
 				return;
 			}
 
-			final IPlacementFlagCapability data = world.getChunk(pos).getCapability(CapabilitiesAether.CHUNK_PLACEMENT_FLAG, EnumFacing.UP);
+			final IPlacementFlagCapability data = world.getChunk(pos).getCapability(CapabilitiesAether.CHUNK_PLACEMENT_FLAG, Direction.UP);
 
 			if (data.isModified(pos))
 			{
@@ -55,13 +55,13 @@ public class ItemSkyrootToolHandler implements IToolEventHandler
 	}
 
 	@Override
-	public boolean onRightClickBlock(final World world, final BlockPos pos, final EntityPlayer player, final EnumHand hand, final EnumFacing facing)
+	public boolean onRightClickBlock(final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final Direction facing)
 	{
 		return false;
 	}
 
 	@Override
-	public void onRightClickItem(final EntityPlayer player, final EnumHand hand)
+	public void onRightClickItem(final PlayerEntity player, final Hand hand)
 	{
 
 	}
@@ -75,13 +75,13 @@ public class ItemSkyrootToolHandler implements IToolEventHandler
 	}
 
 	@Override
-	public void onEntityHit(final ItemStack stack, final Entity target, final EntityLivingBase attacker)
+	public void onEntityHit(final ItemStack stack, final Entity target, final LivingEntity attacker)
 	{
 
 	}
 
 	@Override
-	public float getBreakSpeed(final ItemStack stack, final World world, final IBlockState state, final BlockPos pos, final EntityPlayer player,
+	public float getBreakSpeed(final ItemStack stack, final World world, final BlockState state, final BlockPos pos, final PlayerEntity player,
 			final float original)
 	{
 		return original;

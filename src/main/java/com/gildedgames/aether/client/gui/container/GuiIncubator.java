@@ -3,32 +3,32 @@ package com.gildedgames.aether.client.gui.container;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.containers.tiles.ContainerIncubator;
 import com.gildedgames.aether.common.entities.tiles.TileEntityIncubator;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.api.distmarker.Dist;
 
 //TODO: Adding/Removing ambrosium chunks freezes the GUI which requires to close and reopen GUI.
 
-@SideOnly(Side.CLIENT)
-public class GuiIncubator extends GuiContainer
+@OnlyIn(Dist.CLIENT)
+public class GuiIncubator extends ContainerScreen
 {
 	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/gui/inventory/incubator.png");
 
-	private final InventoryPlayer playerInventory;
+	private final PlayerInventory playerInventory;
 
 	private final IInventory tileIncubator;
 
 	private final BlockPos incubatorPos;
 
-	public GuiIncubator(InventoryPlayer playerInv, IInventory incubatorInv, BlockPos incubatorPos)
+	public GuiIncubator(PlayerInventory playerInv, IInventory incubatorInv, BlockPos incubatorPos)
 	{
 		super(new ContainerIncubator(playerInv, incubatorInv));
 
@@ -40,7 +40,7 @@ public class GuiIncubator extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
-		TileEntity tile = Minecraft.getMinecraft().world.getTileEntity(this.incubatorPos);
+		TileEntity tile = Minecraft.getInstance().world.getTileEntity(this.incubatorPos);
 
 		String name = tile.getDisplayName().getUnformattedText();
 		this.fontRenderer.drawString(name, this.xSize / 2 - this.fontRenderer.getStringWidth(name) / 2, 6, 4210752);
@@ -124,7 +124,7 @@ public class GuiIncubator extends GuiContainer
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
 	{
-		TileEntity tile = Minecraft.getMinecraft().world.getTileEntity(this.incubatorPos);
+		TileEntity tile = Minecraft.getInstance().world.getTileEntity(this.incubatorPos);
 
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		this.mc.getTextureManager().bindTexture(TEXTURE);

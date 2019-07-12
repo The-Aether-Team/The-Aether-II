@@ -19,7 +19,7 @@ import com.gildedgames.aether.common.world.island.IslandBounds;
 import com.gildedgames.aether.common.world.island.IslandChunkMaskTransformer;
 import com.gildedgames.aether.common.world.island.IslandData;
 import com.gildedgames.orbis.lib.util.random.XoRoShiRoRandom;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -113,7 +113,7 @@ public class PrepAether implements IPrepRegistryEntry<IChunkInfoAether>
 	}
 
 	@Override
-	public IPrepSectorData createDataAndRead(World world, NBTTagCompound tag)
+	public IPrepSectorData createDataAndRead(World world, CompoundNBT tag)
 	{
 		return new PrepSectorDataAether(world, tag);
 	}

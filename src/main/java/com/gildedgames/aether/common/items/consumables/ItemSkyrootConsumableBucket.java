@@ -3,18 +3,17 @@ package com.gildedgames.aether.common.items.consumables;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.init.CreativeTabsAether;
 import com.gildedgames.aether.common.items.IDropOnDeath;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.init.MobEffects;
-import net.minecraft.item.EnumAction;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
+import net.minecraft.potion.Effects;
+import net.minecraft.item.*;
+import net.minecraft.item.UseAction;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
 public class ItemSkyrootConsumableBucket extends Item implements IDropOnDeath
@@ -27,22 +26,22 @@ public class ItemSkyrootConsumableBucket extends Item implements IDropOnDeath
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand hand)
 	{
 		ItemStack stack = playerIn.getHeldItem(hand);
 		playerIn.setActiveHand(hand);
 
-		return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+		return new ActionResult<>(ActionResultType.SUCCESS, stack);
 	}
 
 	@Override
-	public ItemStack onItemUseFinish(ItemStack stack, World world, EntityLivingBase living)
+	public ItemStack onItemUseFinish(ItemStack stack, World world, LivingEntity living)
 	{
-		if (living instanceof EntityPlayer)
+		if (living instanceof PlayerEntity)
 		{
-			EntityPlayer player = (EntityPlayer) living;
+			PlayerEntity player = (PlayerEntity) living;
 
-			if (!((EntityPlayer) living).capabilities.isCreativeMode)
+			if (!((PlayerEntity) living).isCreative())
 			{
 				stack.shrink(1);
 			}
@@ -58,7 +57,7 @@ public class ItemSkyrootConsumableBucket extends Item implements IDropOnDeath
 		return stack.getCount() <= 0 ? new ItemStack(ItemsAether.skyroot_bucket) : stack;
 	}
 
-	private void applyEffect(ItemStack stack, World world, EntityLivingBase player)
+	private void applyEffect(ItemStack stack, World world, LivingEntity player)
 	{
 		if (stack.getItem() == ItemsAether.skyroot_milk_bucket)
 		{
@@ -66,14 +65,14 @@ public class ItemSkyrootConsumableBucket extends Item implements IDropOnDeath
 		}
 		else if (stack.getItem() == ItemsAether.skyroot_poison_bucket)
 		{
-			player.addPotionEffect(new PotionEffect(MobEffects.POISON, 100, 3));
+			player.addPotionEffect(new PotionEffect(Effects.POISON, 100, 3));
 		}
 	}
 
 	@Override
-	public EnumAction getItemUseAction(ItemStack stack)
+	public UseAction getItemUseAction(ItemStack stack)
 	{
-		return EnumAction.DRINK;
+		return UseAction.DRINK;
 	}
 
 	@Override

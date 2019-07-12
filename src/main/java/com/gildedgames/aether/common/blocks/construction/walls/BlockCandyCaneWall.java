@@ -1,14 +1,14 @@
 package com.gildedgames.aether.common.blocks.construction.walls;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.block.material.MapColor;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -16,7 +16,7 @@ import java.util.Random;
 public class BlockCandyCaneWall extends BlockCustomWall
 {
 
-	public BlockCandyCaneWall(IBlockState state, float hardness, float resistance)
+	public BlockCandyCaneWall(BlockState state, float hardness, float resistance)
 	{
 		super(state, hardness, resistance);
 	}
@@ -34,7 +34,7 @@ public class BlockCandyCaneWall extends BlockCustomWall
 	}
 
 	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
+	public Item getItemDropped(BlockState state, Random rand, int fortune)
 	{
 		return Items.SUGAR;
 	}
@@ -52,19 +52,19 @@ public class BlockCandyCaneWall extends BlockCustomWall
 	}
 
 	@Override
-	public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player)
+	public boolean canSilkHarvest(World world, BlockPos pos, BlockState state, PlayerEntity player)
 	{
 		return true;
 	}
 
 	@Override
-	public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune)
+	public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, BlockState state, float chance, int fortune)
 	{
 		super.dropBlockAsItemWithChance(worldIn, pos, state, chance, fortune);
 	}
 
 	@Override
-	public MapColor getMapColor(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+	public MapColor getMapColor(BlockState state, IBlockReader worldIn, BlockPos pos)
 	{
 		return MapColor.getBlockColor(EnumDyeColor.RED);
 	}

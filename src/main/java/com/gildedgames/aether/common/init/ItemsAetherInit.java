@@ -17,13 +17,13 @@ import com.gildedgames.aether.common.items.weapons.crossbow.ItemBolt;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemCrossbow;
 import com.gildedgames.aether.common.items.weapons.swords.*;
 import com.gildedgames.aether.common.util.selectors.RandomItemSelector;
-import net.minecraft.init.Blocks;
-import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.block.Blocks;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.ArrayList;
@@ -46,13 +46,13 @@ public class ItemsAetherInit
 		r.register("ambrosium_shard", new ItemAmbrosiumShard().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("arkenium", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("arkenium_axe", new ItemAetherAxe(MaterialsAether.ARKENIUM_TOOL, 7.0F, -3.3F));
-		r.register("arkenium_boots", new ItemArkeniumArmor(EntityEquipmentSlot.FEET).pierceDefense(1).<ItemArkeniumArmor>impactDefense(1));
-		r.register("arkenium_chestplate", new ItemArkeniumArmor(EntityEquipmentSlot.CHEST).slashDefense(2).<ItemArkeniumArmor>impactDefense(1));
+		r.register("arkenium_boots", new ItemArkeniumArmor(EquipmentSlotType.FEET).pierceDefense(1).<ItemArkeniumArmor>impactDefense(1));
+		r.register("arkenium_chestplate", new ItemArkeniumArmor(EquipmentSlotType.CHEST).slashDefense(2).<ItemArkeniumArmor>impactDefense(1));
 		r.register("arkenium_crossbow", new ItemCrossbow().setDurationInTicks(35).setKnockBackValue(0.5F).setType(ItemCrossbow.crossBowTypes.ARKENIUM));
 		r.register("arkenium_door_item", new ItemDoor(BlocksAether.arkenium_door).setCreativeTab(CreativeTabsAether.TAB_CONSTRUCTION));
 		r.register("arkenium_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.ARKENIUM));
-		r.register("arkenium_helmet", new ItemArkeniumArmor(EntityEquipmentSlot.HEAD).<ItemArkeniumArmor>impactDefense(1));
-		r.register("arkenium_leggings", new ItemArkeniumArmor(EntityEquipmentSlot.LEGS).pierceDefense(2).<ItemArkeniumArmor>impactDefense(1));
+		r.register("arkenium_helmet", new ItemArkeniumArmor(EquipmentSlotType.HEAD).<ItemArkeniumArmor>impactDefense(1));
+		r.register("arkenium_leggings", new ItemArkeniumArmor(EquipmentSlotType.LEGS).pierceDefense(2).<ItemArkeniumArmor>impactDefense(1));
 		r.register("arkenium_pickaxe", new ItemAetherPickaxe(MaterialsAether.ARKENIUM_TOOL));
 		r.register("arkenium_shears", new ItemArkeniumShears().setCreativeTab(CreativeTabsAether.TAB_TOOLS));
 		r.register("arkenium_shield", new ItemAetherShield());
@@ -82,12 +82,12 @@ public class ItemsAetherInit
 		r.register("ginger_bread_man", new ItemAetherFood(6, 0.2F, false).setConsumptionDuration(8).setCreativeTab(CreativeTabsAether.TAB_CONSUMABLES));
 		r.register("golden_amber", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("gravitite_axe", new ItemAetherAxe(MaterialsAether.GRAVITITE_TOOL));
-		r.register("gravitite_boots", new ItemGravititeArmor(EntityEquipmentSlot.FEET).<ItemGravititeArmor>pierceDefense(2));
-		r.register("gravitite_chestplate", new ItemGravititeArmor(EntityEquipmentSlot.CHEST).<ItemGravititeArmor>slashDefense(3));
+		r.register("gravitite_boots", new ItemGravititeArmor(EquipmentSlotType.FEET).<ItemGravititeArmor>pierceDefense(2));
+		r.register("gravitite_chestplate", new ItemGravititeArmor(EquipmentSlotType.CHEST).<ItemGravititeArmor>slashDefense(3));
 		r.register("gravitite_crossbow", new ItemCrossbow().setDurationInTicks(25).setKnockBackValue(1.2F).setType(ItemCrossbow.crossBowTypes.GRAVETITE));
 		r.register("gravitite_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.GRAVITITE));
-		r.register("gravitite_helmet", new ItemGravititeArmor(EntityEquipmentSlot.HEAD).<ItemGravititeArmor>impactDefense(3));
-		r.register("gravitite_leggings", new ItemGravititeArmor(EntityEquipmentSlot.LEGS).<ItemGravititeArmor>pierceDefense(3));
+		r.register("gravitite_helmet", new ItemGravititeArmor(EquipmentSlotType.HEAD).<ItemGravititeArmor>impactDefense(3));
+		r.register("gravitite_leggings", new ItemGravititeArmor(EquipmentSlotType.LEGS).<ItemGravititeArmor>pierceDefense(3));
 		r.register("gravitite_pickaxe", new ItemAetherPickaxe(MaterialsAether.GRAVITITE_TOOL));
 		r.register("gravitite_plate", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("gravitite_shield", new ItemAetherShield());
@@ -120,7 +120,7 @@ public class ItemsAetherInit
 		r.register("irradiated_sword",
 				new ItemIrradiated(new RandomItemSelector(item -> item.getTranslationKey().contains("sword") && !(item instanceof ItemIrradiated)))
 						.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
-		r.register("irradiated_tool", new ItemIrradiated(new RandomItemSelector(item -> item instanceof ItemTool)).setMaxStackSize(1)
+		r.register("irradiated_tool", new ItemIrradiated(new RandomItemSelector(item -> item instanceof ToolItem)).setMaxStackSize(1)
 				.setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("jelly_plumproot", new ItemAetherFood(6, 0.25F, false).setConsumptionDuration(15));
 		r.register("kirrid_cutlet", new ItemAetherFood(12, 0.5F, true));
@@ -160,11 +160,11 @@ public class ItemsAetherInit
 		r.register("swet_jelly", new ItemSwetJelly());
 		r.register("swet_sugar", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("taegore_hide", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
-		r.register("taegore_hide_boots", new ItemTaegoreHideArmor(EntityEquipmentSlot.FEET).<ItemTaegoreHideArmor>slashDefense(1));
-		r.register("taegore_hide_chestplate", new ItemTaegoreHideArmor(EntityEquipmentSlot.CHEST).<ItemTaegoreHideArmor>slashDefense(2));
+		r.register("taegore_hide_boots", new ItemTaegoreHideArmor(EquipmentSlotType.FEET).<ItemTaegoreHideArmor>slashDefense(1));
+		r.register("taegore_hide_chestplate", new ItemTaegoreHideArmor(EquipmentSlotType.CHEST).<ItemTaegoreHideArmor>slashDefense(2));
 		r.register("taegore_hide_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.TAEGOREHIDE));
-		r.register("taegore_hide_helmet", new ItemTaegoreHideArmor(EntityEquipmentSlot.HEAD).<ItemTaegoreHideArmor>impactDefense(2));
-		r.register("taegore_hide_leggings", new ItemTaegoreHideArmor(EntityEquipmentSlot.LEGS).<ItemTaegoreHideArmor>pierceDefense(2));
+		r.register("taegore_hide_helmet", new ItemTaegoreHideArmor(EquipmentSlotType.HEAD).<ItemTaegoreHideArmor>impactDefense(2));
+		r.register("taegore_hide_leggings", new ItemTaegoreHideArmor(EquipmentSlotType.LEGS).<ItemTaegoreHideArmor>pierceDefense(2));
 		r.register("taegore_steak", new ItemAetherFood(12, 0.5F, true));
 		r.register("valkyrie_music_disc", new ItemAetherRecord("valkyrie", new SoundEvent(AetherCore.getResource("records.valkyrie"))));
 		r.register("valkyrie_wings", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
@@ -174,13 +174,13 @@ public class ItemsAetherInit
 		r.register("wyndberry", new ItemAetherFood(4, false).setConsumptionDuration(22));
 		r.register("yule_log", new ItemAetherFood(10, 0.25F, false).setConsumptionDuration(50).setCreativeTab(CreativeTabsAether.TAB_CONSUMABLES));
 		r.register("zanite_axe", new ItemAetherAxe(MaterialsAether.ZANITE_TOOL));
-		r.register("zanite_boots", new ItemZaniteArmor(EntityEquipmentSlot.FEET).<ItemZaniteArmor>pierceDefense(2));
-		r.register("zanite_chestplate", new ItemZaniteArmor(EntityEquipmentSlot.CHEST).<ItemZaniteArmor>slashDefense(2));
+		r.register("zanite_boots", new ItemZaniteArmor(EquipmentSlotType.FEET).<ItemZaniteArmor>pierceDefense(2));
+		r.register("zanite_chestplate", new ItemZaniteArmor(EquipmentSlotType.CHEST).<ItemZaniteArmor>slashDefense(2));
 		r.register("zanite_crossbow", new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(0.5F).setType(ItemCrossbow.crossBowTypes.ZANITE));
 		r.register("zanite_gemstone", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("zanite_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.ZANITE));
-		r.register("zanite_helmet", new ItemZaniteArmor(EntityEquipmentSlot.HEAD).<ItemZaniteArmor>impactDefense(2));
-		r.register("zanite_leggings", new ItemZaniteArmor(EntityEquipmentSlot.LEGS).<ItemZaniteArmor>pierceDefense(2));
+		r.register("zanite_helmet", new ItemZaniteArmor(EquipmentSlotType.HEAD).<ItemZaniteArmor>impactDefense(2));
+		r.register("zanite_leggings", new ItemZaniteArmor(EquipmentSlotType.LEGS).<ItemZaniteArmor>pierceDefense(2));
 		r.register("zanite_pickaxe", new ItemAetherPickaxe(MaterialsAether.ZANITE_TOOL));
 		r.register("zanite_shield", new ItemAetherShield());
 		r.register("zanite_shovel", new ItemAetherShovel(MaterialsAether.ZANITE_TOOL));

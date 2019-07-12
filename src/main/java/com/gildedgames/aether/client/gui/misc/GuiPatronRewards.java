@@ -22,11 +22,11 @@ import com.gildedgames.orbis.lib.client.gui.util.list.GuiListViewer;
 import com.gildedgames.orbis.lib.client.rect.Dim2D;
 import com.gildedgames.orbis.lib.client.rect.Pos2D;
 import com.gildedgames.orbis.lib.util.InputHelper;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
 import java.io.IOException;
 import java.util.Comparator;
@@ -61,15 +61,15 @@ public class GuiPatronRewards extends GuiViewer implements IListNavigatorListene
 
 	private final PlayerPatronRewardModule patronRewards;
 
-	private final Text useString = new Text(new TextComponentTranslation("gui.aether.patreon.rewards.button.use"), 1.0F);
+	private final Text useString = new Text(new TranslationTextComponent("gui.aether.patreon.rewards.button.use"), 1.0F);
 
-	private final Text lockedString = new Text(new TextComponentTranslation("gui.aether.patreon.rewards.button.locked"), 1.0F);
+	private final Text lockedString = new Text(new TranslationTextComponent("gui.aether.patreon.rewards.button.locked"), 1.0F);
 
 	public GuiPatronRewards()
 	{
 		super(new GuiElement(Dim2D.flush(), false));
 
-		PlayerAether playerAether = PlayerAether.getPlayer(Minecraft.getMinecraft().player);
+		PlayerAether playerAether = PlayerAether.getPlayer(Minecraft.getInstance().player);
 
 		this.patronRewards = playerAether.getModule(PlayerPatronRewardModule.class);
 
@@ -96,7 +96,7 @@ public class GuiPatronRewards extends GuiViewer implements IListNavigatorListene
 		this.backdrop = new GuiTexture(Dim2D.build().width(256).height(213).pos(center).center(true).flush(), BACKDROP);
 
 		this.patronRewardText = new GuiText(Dim2D.build().pos(center).addX(-83).addY(-89).flush(),
-				new Text(new TextComponentString("Cosmetic Patron Rewards"), 1.0F));
+				new Text(new StringTextComponent("Cosmetic Patron Rewards"), 1.0F));
 
 		this.use = new GuiAbstractButton(Dim2D.build().pos(center).addX(16).addY(61).width(70).height(21).flush(),
 				new GuiTexture(Dim2D.build().width(70).height(21).flush(), USE),

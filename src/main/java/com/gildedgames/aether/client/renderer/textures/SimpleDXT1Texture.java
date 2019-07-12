@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client.renderer.textures;
 
-import net.minecraft.client.renderer.GlStateManager;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.renderer.texture.AbstractTexture;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.resources.IResource;
@@ -40,7 +40,8 @@ public class SimpleDXT1Texture extends AbstractTexture
 			int textureId = this.getGlTextureId();
 
 			GlStateManager.bindTexture(textureId);
-			GlStateManager.glTexImage2D(GL11.GL_TEXTURE_2D, 0, EXTTextureCompressionS3TC.GL_COMPRESSED_RGBA_S3TC_DXT1_EXT, image.getWidth(), image.getHeight(), 0, GL12.GL_BGRA,
+			GlStateManager
+					.glTexImage2D(GL11.GL_TEXTURE_2D, 0, EXTTextureCompressionS3TC.GL_COMPRESSED_RGBA_S3TC_DXT1_EXT, image.getWidth(), image.getHeight(), 0, GL12.GL_BGRA,
 					GL12.GL_UNSIGNED_INT_8_8_8_8_REV, null);
 
 			TextureUtil.uploadTextureImageSub(textureId, image, 0, 0, false, false);

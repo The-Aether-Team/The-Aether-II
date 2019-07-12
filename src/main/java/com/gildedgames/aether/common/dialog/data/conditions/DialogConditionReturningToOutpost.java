@@ -8,8 +8,8 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 
 import java.lang.reflect.Type;
@@ -31,15 +31,15 @@ public class DialogConditionReturningToOutpost implements IDialogCondition
 			return false;
 		}
 
-		EntityPlayer player = controller.getDialogPlayer();
+		PlayerEntity player = controller.getDialogPlayer();
 		PlayerAether playerAether = PlayerAether.getPlayer(player);
 
-		BlockPos bedPos = player.getBedLocation(((EntityPlayerMP) player).dimension);
-		final EntityPlayerMP mp = (EntityPlayerMP) player;
+		BlockPos bedPos = player.getBedLocation(((ServerPlayerEntity) player).dimension);
+		final ServerPlayerEntity mp = (ServerPlayerEntity) player;
 
 		if (bedPos != null)
 		{
-			bedPos = EntityPlayer.getBedSpawnLocation(mp.getServerWorld(), bedPos, mp.isSpawnForced(mp.dimension));
+			bedPos = PlayerEntity.getBedSpawnLocation(mp.getServerWorld(), bedPos, mp.isSpawnForced(mp.dimension));
 		}
 
 		if (bedPos == null && this.validate)

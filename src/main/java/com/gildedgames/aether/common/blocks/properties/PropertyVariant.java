@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.blocks.properties;
 
-import com.google.common.base.Optional;
-import net.minecraft.block.properties.IProperty;
+import java.util.Optional;
+import net.minecraft.state.IProperty;
 
 import java.util.ArrayList;
 import java.util.Collection;

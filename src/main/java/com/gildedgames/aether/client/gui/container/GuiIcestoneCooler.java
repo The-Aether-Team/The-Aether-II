@@ -3,24 +3,24 @@ package com.gildedgames.aether.client.gui.container;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.containers.tiles.ContainerIcestoneCooler;
 import com.gildedgames.aether.common.entities.tiles.TileEntityIcestoneCooler;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import com.mojang.blaze3d.platform.GlStateManager;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
-@SideOnly(Side.CLIENT)
-public class GuiIcestoneCooler extends GuiContainer
+@OnlyIn(Dist.CLIENT)
+public class GuiIcestoneCooler extends ContainerScreen
 {
 	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/gui/inventory/icestone_cooler.png");
 
 	private final IInventory tileCooler;
 
-	private final InventoryPlayer playerInventory;
+	private final PlayerInventory playerInventory;
 
-	public GuiIcestoneCooler(InventoryPlayer playerInv, IInventory coolerInv)
+	public GuiIcestoneCooler(PlayerInventory playerInv, IInventory coolerInv)
 	{
 		super(new ContainerIcestoneCooler(playerInv, coolerInv));
 		this.tileCooler = coolerInv;

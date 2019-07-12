@@ -4,7 +4,7 @@ import com.gildedgames.aether.api.player.IPlayerAetherModule;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.ArrayList;
@@ -71,30 +71,30 @@ public class PlayerTGEventsModule extends PlayerAetherModule implements IPlayerA
 	}
 
 	@Override
-	public void write(NBTTagCompound tag)
+	public void write(CompoundNBT tag)
 	{
 		int i = 0;
-		NBTTagCompound root = new NBTTagCompound();
-		tag.setTag("TravelersGuidebook_events", root);
+		CompoundNBT root = new CompoundNBT();
+		tag.put("TravelersGuidebook_events", root);
 
-		tag.setInteger("TravelersGuidebook_event_size", this.eventsLangKeys.size());
+		tag.putInt("TravelersGuidebook_event_size", this.eventsLangKeys.size());
 
 		for (TGEvent event : this.eventsLangKeys)
 		{
-			tag.setString("TravelersGuidebook_event_title" + i, event.getTitleKey());
-			tag.setString("TravelersGuidebook_event_desc" + i, event.getDescriptionKey());
-			tag.setString("TravelersGuidebook_event_imagePath" + i, event.getImagePath());
+			tag.putString("TravelersGuidebook_event_title" + i, event.getTitleKey());
+			tag.putString("TravelersGuidebook_event_desc" + i, event.getDescriptionKey());
+			tag.putString("TravelersGuidebook_event_imagePath" + i, event.getImagePath());
 
 			i++;
 		}
 	}
 
 	@Override
-	public void read(NBTTagCompound tag)
+	public void read(CompoundNBT tag)
 	{
-		NBTTagCompound root = tag.getCompoundTag("TravelersGuidebook_events");
+		CompoundNBT root = tag.getCompound("TravelersGuidebook_events");
 
-		int size = root.getInteger("TravelersGuidebook_event_size");
+		int size = root.getInt("TravelersGuidebook_event_size");
 
 		for (int i = 0; i < size; i++)
 		{

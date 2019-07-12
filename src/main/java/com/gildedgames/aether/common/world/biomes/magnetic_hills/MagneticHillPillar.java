@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.world.biomes.magnetic_hills;
 
 import com.gildedgames.orbis.lib.util.io.NBTFunnel;
 import com.gildedgames.orbis.lib.util.mc.NBT;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.math.BlockPos;
 
 public class MagneticHillPillar implements NBT
@@ -49,23 +49,23 @@ public class MagneticHillPillar implements NBT
 	}
 
 	@Override
-	public void write(final NBTTagCompound tag)
+	public void write(final CompoundNBT tag)
 	{
 		final NBTFunnel funnel = new NBTFunnel(tag);
 
-		tag.setFloat("elongationMod", this.elongationMod);
-		tag.setInteger("topHeight", this.topHeight);
+		tag.putFloat("elongationMod", this.elongationMod);
+		tag.putInt("topHeight", this.topHeight);
 		funnel.setPos("pos", this.pos);
-		tag.setDouble("radius", this.radius);
+		tag.putDouble("radius", this.radius);
 	}
 
 	@Override
-	public void read(final NBTTagCompound tag)
+	public void read(final CompoundNBT tag)
 	{
 		final NBTFunnel funnel = new NBTFunnel(tag);
 
 		this.elongationMod = tag.getFloat("elongationMod");
-		this.topHeight = tag.getInteger("topHeight");
+		this.topHeight = tag.getInt("topHeight");
 		this.pos = funnel.getPos("pos");
 		this.radius = tag.getDouble("radius");
 	}

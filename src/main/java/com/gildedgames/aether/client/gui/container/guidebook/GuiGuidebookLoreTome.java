@@ -3,8 +3,8 @@ package com.gildedgames.aether.client.gui.container.guidebook;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.containers.guidebook.EmptyContainer;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.gui.AbstractGui;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiGuidebookLoreTome extends AbstractGuidebookPage
@@ -24,7 +24,7 @@ public class GuiGuidebookLoreTome extends AbstractGuidebookPage
 
 		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 
-		Gui.drawModalRectWithCustomSizedTexture(screenX, screenY, u, v, this.PAGE_WIDTH, this.PAGE_HEIGHT, this.TEXTURE_WIDTH, this.TEXTURE_HEIGHT);
+		AbstractGui.drawModalRectWithCustomSizedTexture(screenX, screenY, u, v, this.PAGE_WIDTH, this.PAGE_HEIGHT, this.TEXTURE_WIDTH, this.TEXTURE_HEIGHT);
 	}
 
 	@Override
@@ -34,6 +34,6 @@ public class GuiGuidebookLoreTome extends AbstractGuidebookPage
 
 		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 
-		Gui.drawModalRectWithCustomSizedTexture(screenX, screenY, u ,v, this.PAGE_WIDTH, this.PAGE_HEIGHT,this.TEXTURE_WIDTH, this.TEXTURE_HEIGHT);
+		AbstractGui.drawModalRectWithCustomSizedTexture(screenX, screenY, u ,v, this.PAGE_WIDTH, this.PAGE_HEIGHT,this.TEXTURE_WIDTH, this.TEXTURE_HEIGHT);
 	}
 }

@@ -4,14 +4,14 @@ import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.shop.IShopBuy;
 import com.gildedgames.aether.common.util.helpers.ItemHelper;
 import com.gildedgames.orbis.lib.util.mc.NBT;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 
 public class ShopInventory implements IInventory, NBT
 {
@@ -103,19 +103,19 @@ public class ShopInventory implements IInventory, NBT
 	}
 
 	@Override
-	public boolean isUsableByPlayer(EntityPlayer player)
+	public boolean isUsableByPlayer(PlayerEntity player)
 	{
 		return true;
 	}
 
 	@Override
-	public void openInventory(EntityPlayer player)
+	public void openInventory(PlayerEntity player)
 	{
 
 	}
 
 	@Override
-	public void closeInventory(EntityPlayer player)
+	public void closeInventory(PlayerEntity player)
 	{
 
 	}
@@ -177,17 +177,17 @@ public class ShopInventory implements IInventory, NBT
 	@Override
 	public ITextComponent getDisplayName()
 	{
-		return new TextComponentTranslation(this.getName());
+		return new TranslationTextComponent(this.getName());
 	}
 
 	@Override
-	public void write(NBTTagCompound tag)
+	public void write(CompoundNBT tag)
 	{
 		ItemStackHelper.saveAllItems(tag, this.stacks);
 	}
 
 	@Override
-	public void read(NBTTagCompound tag)
+	public void read(CompoundNBT tag)
 	{
 		ItemStackHelper.loadAllItems(tag, this.stacks);
 	}

@@ -3,8 +3,8 @@ package com.gildedgames.aether.common.items.weapons.swords;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.entities.companions.EntityCompanion;
 import com.gildedgames.aether.common.items.ItemAbilityType;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 
 public class ItemCandyCaneSword extends ItemAetherSword
@@ -17,14 +17,14 @@ public class ItemCandyCaneSword extends ItemAetherSword
 	}
 
 	@Override
-	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
+	public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker)
 	{
 		if (target instanceof EntityCompanion)
 		{
 			return true;
 		}
 
-		if (!attacker.world.isRemote && target != null && attacker instanceof EntityPlayer)
+		if (!attacker.world.isRemote && target != null && attacker instanceof PlayerEntity)
 		{
 			if (attacker.world.rand.nextInt(3) == 0)
 			{

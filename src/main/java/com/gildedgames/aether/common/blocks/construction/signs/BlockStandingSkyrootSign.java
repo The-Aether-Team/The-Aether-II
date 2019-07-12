@@ -1,15 +1,15 @@
 package com.gildedgames.aether.common.blocks.construction.signs;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.state.IntegerProperty;
 import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class BlockStandingSkyrootSign extends BlockSkyrootSign
 {
-	public static final PropertyInteger ROTATION = PropertyInteger.create("rotation", 0, 15);
+	public static final IntegerProperty ROTATION = IntegerProperty.create("rotation", 0, 15);
 
 	public BlockStandingSkyrootSign()
 	{
@@ -18,7 +18,7 @@ public class BlockStandingSkyrootSign extends BlockSkyrootSign
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block neighborBlock, BlockPos fromPos)
+	public void neighborChanged(BlockState state, World world, BlockPos pos, Block neighborBlock, BlockPos fromPos)
 	{
 		if (!world.getBlockState(pos.down()).getMaterial().isSolid())
 		{
@@ -31,13 +31,13 @@ public class BlockStandingSkyrootSign extends BlockSkyrootSign
 	}
 
 	@Override
-	public IBlockState getStateFromMeta(int meta)
+	public BlockState getStateFromMeta(int meta)
 	{
 		return this.getDefaultState().withProperty(BlockStandingSkyrootSign.ROTATION, meta);
 	}
 
 	@Override
-	public int getMetaFromState(IBlockState state)
+	public int getMetaFromState(BlockState state)
 	{
 		return state.getValue(BlockStandingSkyrootSign.ROTATION);
 	}

@@ -5,20 +5,20 @@ import com.gildedgames.aether.api.recipes.altar.IAltarRecipe;
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.blocks.containers.BlockAltar;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.item.EntityItem;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.Direction;
+import net.minecraft.tileentity.ITickableTileEntity;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
 
-public class TileEntityAltar extends TileEntitySynced implements ITickable
+public class TileEntityAltar extends TileEntitySynced implements ITickableTileEntity
 {
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public double animationTicks, prevAnimationTicks;
 
 	private ItemStack stackOnAltar = ItemStack.EMPTY;
@@ -112,51 +112,51 @@ public class TileEntityAltar extends TileEntitySynced implements ITickable
 		this.setStackOnAltar(ItemStack.EMPTY);
 	}
 
-	public EntityItem createEntityItemAboveAltar(ItemStack stack)
+	public ItemEntity createEntityItemAboveAltar(ItemStack stack)
 	{
-		return new EntityItem(this.getWorld(),
+		return new ItemEntity(this.getWorld(),
 				this.getPos().getX() + 0.5D, this.getPos().getY() + 1.1D, this.getPos().getZ() + 0.5D, stack);
 	}
 
-	public EnumFacing getFacing()
+	public Direction getFacing()
 	{
-		IBlockState state = this.world.getBlockState(this.pos);
+		BlockState state = this.world.getBlockState(this.pos);
 
 		if (state.getBlock() == BlocksAether.altar)
 		{
 			return state.getValue(BlockAltar.PROPERTY_FACING);
 		}
 
-		return EnumFacing.NORTH;
+		return Direction.NORTH;
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound compound)
+	public CompoundNBT writeToNBT(CompoundNBT compound)
 	{
 		super.writeToNBT(compound);
 
-		NBTTagCompound itemCompound = new NBTTagCompound();
+		CompoundNBT itemCompound = new CompoundNBT();
 
 		if (this.stackOnAltar != null)
 		{
 			this.stackOnAltar.writeToNBT(itemCompound);
 		}
 
-		compound.setTag("StackOnAltar", itemCompound);
-		compound.setInteger("AmbrosiumCount", this.ambrosiumCount);
+		compound.put("StackOnAltar", itemCompound);
+		compound.putInt("AmbrosiumCount", this.ambrosiumCount);
 
 		return compound;
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound compound)
+	public void readFromNBT(CompoundNBT compound)
 	{
 		super.readFromNBT(compound);
 
-		NBTTagCompound itemCompound = compound.getCompoundTag("StackOnAltar");
+		CompoundNBT itemCompound = compound.getCompound("StackOnAltar");
 		this.stackOnAltar = itemCompound.isEmpty() ? null : new ItemStack(itemCompound);
 
-		this.ambrosiumCount = compound.getInteger("AmbrosiumCount");
+		this.ambrosiumCount = compound.getInt("AmbrosiumCount");
 	}
 
 }

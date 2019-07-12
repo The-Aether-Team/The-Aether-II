@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.items.weapons.swords;
 
 import com.gildedgames.aether.common.items.ItemAbilityType;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 
 public class ItemGravititeSword extends ItemAetherSword
@@ -12,7 +12,7 @@ public class ItemGravititeSword extends ItemAetherSword
 	}
 
 	@Override
-	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
+	public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker)
 	{
 		if (attacker.isSneaking())
 		{

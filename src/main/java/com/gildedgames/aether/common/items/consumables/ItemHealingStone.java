@@ -2,15 +2,15 @@ package com.gildedgames.aether.common.items.consumables;
 
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.items.IDropOnDeath;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumAction;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.UseAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
@@ -36,9 +36,9 @@ public class ItemHealingStone extends Item implements IDropOnDeath
 
 	private static void initTagCompound(ItemStack stack)
 	{
-		NBTTagCompound tag = new NBTTagCompound();
+		CompoundNBT tag = new CompoundNBT();
 
-		tag.setInteger("usesLeft", MAX_USES);
+		tag.putInt("usesLeft", MAX_USES);
 
 		stack.setTagCompound(tag);
 	}
@@ -55,7 +55,7 @@ public class ItemHealingStone extends Item implements IDropOnDeath
 			initTagCompound(stack);
 		}
 
-		return stack.getTagCompound().getInteger("usesLeft");
+		return stack.getTagCompound().getInt("usesLeft");
 	}
 
 	public static void setUsesLeft(ItemStack stack, int usesLeft)
@@ -70,25 +70,25 @@ public class ItemHealingStone extends Item implements IDropOnDeath
 			initTagCompound(stack);
 		}
 
-		stack.getTagCompound().setInteger("usesLeft", usesLeft);
+		stack.getTagCompound().putInt("usesLeft", usesLeft);
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity player, Hand hand)
 	{
 		ItemStack stack = player.getHeldItem(hand);
 
 		if (getUsesLeft(stack) > 0 && player.getAbsorptionAmount() < 20.0F)
 		{
-			player.setActiveHand(EnumHand.MAIN_HAND);
-			return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+			player.setActiveHand(Hand.MAIN_HAND);
+			return new ActionResult<>(ActionResultType.SUCCESS, stack);
 		}
 
-		return new ActionResult<>(EnumActionResult.FAIL, stack);
+		return new ActionResult<>(ActionResultType.FAIL, stack);
 	}
 
 	@Override
-	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entity)
+	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entity)
 	{
 		setUsesLeft(stack, getUsesLeft(stack) - 1);
 
@@ -124,9 +124,9 @@ public class ItemHealingStone extends Item implements IDropOnDeath
 	}
 
 	@Override
-	public EnumAction getItemUseAction(ItemStack stack)
+	public UseAction getItemUseAction(ItemStack stack)
 	{
-		return EnumAction.DRINK;
+		return UseAction.DRINK;
 	}
 
 	@Override

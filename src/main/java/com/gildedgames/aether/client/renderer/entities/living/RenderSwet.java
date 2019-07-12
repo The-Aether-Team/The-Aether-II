@@ -3,15 +3,15 @@ package com.gildedgames.aether.client.renderer.entities.living;
 import com.gildedgames.aether.client.models.entities.living.ModelSwetHead;
 import com.gildedgames.aether.client.renderer.entities.living.layers.LayerSwetJelly;
 import com.gildedgames.aether.common.entities.monsters.EntitySwet;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.entity.RenderManager;
+import com.mojang.blaze3d.platform.GlStateManager;
+import net.minecraft.client.renderer.entity.LivingRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderSwet extends RenderLiving<EntitySwet>
+public class RenderSwet extends LivingRenderer<EntitySwet, ModelSwetHead>
 {
 
-	public RenderSwet(final RenderManager renderManagerIn)
+	public RenderSwet(final EntityRendererManager renderManagerIn)
 	{
 		super(renderManagerIn, new ModelSwetHead(), 0.78F);
 
@@ -27,20 +27,20 @@ public class RenderSwet extends RenderLiving<EntitySwet>
 
 		if (entity.getFoodSaturation() == 0)
 		{
-			GlStateManager.translate(0.0, 0.18, 0.0);
+			GlStateManager.translatef(0.0f, 0.18f, 0.0f);
 		}
 		else
 		{
-			GlStateManager.translate(0.0, 0.1, 0.0);
+			GlStateManager.translatef(0.0f, 0.1f, 0.0f);
 		}
 
-		GlStateManager.scale(0.35F, 0.35F, 0.35F);
+		GlStateManager.scalef(0.35F, 0.35F, 0.35F);
 
 		final float f1 = 2.0F;
 		final float f2 = (entity.prevSquishFactor + (entity.squishFactor - entity.prevSquishFactor) * partialTickTime) / (f1 * 0.5F + 1.0F);
 		final float f3 = 1.0F / (f2 + 1.0F);
 
-		GlStateManager.scale(f3 * f1, 1.0F / f3 * f1, f3 * f1);
+		GlStateManager.scalef(f3 * f1, 1.0F / f3 * f1, f3 * f1);
 	}
 
 	@Override

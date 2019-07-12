@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world.decorations;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class WorldGenQuicksoil extends WorldGenerator
 {
-	private final IBlockState quicksoil;
+	private final BlockState quicksoil;
 
 	public WorldGenQuicksoil()
 	{

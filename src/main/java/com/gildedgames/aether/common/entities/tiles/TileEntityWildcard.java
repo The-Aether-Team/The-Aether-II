@@ -1,12 +1,12 @@
 package com.gildedgames.aether.common.entities.tiles;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
-import com.gildedgames.orbis.lib.processing.IBlockAccessExtended;
+import com.gildedgames.orbis.lib.processing.IBlockAccess;
 import com.gildedgames.orbis.lib.util.mc.BlockUtil;
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.Items;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 
 import java.util.Random;
@@ -15,13 +15,13 @@ public class TileEntityWildcard extends TileEntitySchematicBlock
 {
 
 	@Override
-	public void onSchematicGeneration(final IBlockAccessExtended blockAccess, final Random rand)
+	public void onSchematicGeneration(final IBlockAccess blockAccess, final Random rand)
 	{
 		int contentSize = 0;
 
 		for (final ItemStack stack : this.contents)
 		{
-			if (stack != null && (stack.getItem() instanceof ItemBlock || stack.getItem() == Items.STRING))
+			if (stack != null && (stack.getItem() instanceof BlockItem || stack.getItem() == Items.STRING))
 			{
 				contentSize += stack.getCount();
 			}
@@ -46,7 +46,7 @@ public class TileEntityWildcard extends TileEntitySchematicBlock
 		{
 			if (!stack.isEmpty())
 			{
-				if (stack.getItem() instanceof ItemBlock || stack.getItem() == Items.STRING)
+				if (stack.getItem() instanceof BlockItem || stack.getItem() == Items.STRING)
 				{
 					if (stack.getCount() > currentIndex)
 					{
@@ -71,10 +71,10 @@ public class TileEntityWildcard extends TileEntitySchematicBlock
 		}
 		else
 		{
-			final ItemBlock itemBlock = (ItemBlock) chosenStack.getItem();
+			final BlockItem itemBlock = (BlockItem) chosenStack.getItem();
 
 			block = itemBlock.getBlock();
-			damage = chosenStack.getItemDamage();
+			damage = chosenStack.getDamage();
 		}
 
 		if (block == Blocks.AIR)

@@ -1,12 +1,11 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.*;
 import net.minecraft.block.BlockLiquid;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -25,7 +24,7 @@ public class BlockIcestoneBricks extends Block
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+	public void onBlockPlacedBy(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack)
 	{
 		for (int x = pos.getX() - EFFECT_RADIUS; x <= (pos.getX() + EFFECT_RADIUS); x++)
 		{
@@ -34,9 +33,9 @@ public class BlockIcestoneBricks extends Block
 				for (int z = pos.getZ() - EFFECT_RADIUS; z <= (pos.getZ() + EFFECT_RADIUS); z++)
 				{
 					BlockPos newPos = new BlockPos(x, y, z);
-					IBlockState newState = world.getBlockState(newPos);
+					BlockState newState = world.getBlockState(newPos);
 
-					IBlockState frozenState = this.getFrozenBlock(newState);
+					BlockState frozenState = this.getFrozenBlock(newState);
 
 					if (frozenState != null)
 					{
@@ -47,7 +46,7 @@ public class BlockIcestoneBricks extends Block
 		}
 	}
 
-	private IBlockState getFrozenBlock(IBlockState state)
+	private BlockState getFrozenBlock(BlockState state)
 	{
 		Block block = state.getBlock();
 

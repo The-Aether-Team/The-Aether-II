@@ -7,23 +7,23 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.natural.leaves.BlockColoredLeaves.Color;
 import com.gildedgames.aether.common.blocks.natural.wood.AetherWoodType;
 import com.gildedgames.aether.common.blocks.natural.wood.BlockAetherLog;
-import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAvoidEntity;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
+import net.minecraft.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.ai.goal.RandomWalkingGoal;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 
@@ -42,15 +42,15 @@ public class EntitySkyrootLizard extends EntityAetherAnimal
 
 		this.setSize(.8f, .3f);
 
-		this.tasks.addTask(1, new EntityAIWander(this, 0.5D, 10));
-		this.tasks.addTask(2, new EntityAIAvoidEntity<>(this, EntityPlayer.class, 20.0F, .7D, .85D));
-		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+		this.goalSelector.addGoal(1, new RandomWalkingGoal(this, 0.5D, 10));
+		this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, PlayerEntity.class, 20.0F, .7D, .85D));
+		this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 6.0F));
 	}
 
 	@Override
-	public void entityInit()
+	public void registerData()
 	{
-		super.entityInit();
+		super.registerData();
 
 		Type type = RANDOM_TYPES[this.rand.nextInt(RANDOM_TYPES.length)];
 		Color color = Color.VALUES[this.rand.nextInt(Color.VALUES.length)];
@@ -60,16 +60,16 @@ public class EntitySkyrootLizard extends EntityAetherAnimal
 	}
 
 	@Override
-	protected void applyEntityAttributes()
+	protected void registerAttributes()
 	{
-		super.applyEntityAttributes();
+		super.registerAttributes();
 
-		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(.7D);
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(22.0D);
+		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(.7D);
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(22.0D);
 
-		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(2);
-		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(4);
-		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(4);
+		this.getAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(2);
+		this.getAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(4);
+		this.getAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(4);
 	}
 
 	@Override
@@ -123,7 +123,7 @@ public class EntitySkyrootLizard extends EntityAetherAnimal
 	}
 
 	@Override
-	public boolean processInteract(EntityPlayer player, EnumHand hand)
+	public boolean processInteract(PlayerEntity player, Hand hand)
 	{
 		super.processInteract(player, hand);
 
@@ -160,22 +160,21 @@ public class EntitySkyrootLizard extends EntityAetherAnimal
 	}
 
 	@Override
-	public void writeEntityToNBT(final NBTTagCompound nbt)
+	public CompoundNBT serializeNBT()
 	{
-		super.writeEntityToNBT(nbt);
+		CompoundNBT nbt = super.serializeNBT();
+		nbt.putInt("type", this.dataManager.get(LIZARD_TYPE));
 
-		nbt.setInteger("type", this.dataManager.get(LIZARD_TYPE));
+		return nbt;
 	}
 
 	@Override
-	public void readEntityFromNBT(final NBTTagCompound nbt)
+	public void deserializeNBT(CompoundNBT nbt)
 	{
-		super.readEntityFromNBT(nbt);
-
-		this.dataManager.set(LIZARD_TYPE, (byte) nbt.getInteger("type"));
+		this.dataManager.set(LIZARD_TYPE, (byte) nbt.getInt("type"));
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public int getLizardAccentColor()
 	{
 		Type type = this.getLeafType();
@@ -229,7 +228,7 @@ public class EntitySkyrootLizard extends EntityAetherAnimal
 
 	@Nullable
 	@Override
-	public EntityAgeable createChild(EntityAgeable ageable)
+	public AgeableEntity createChild(AgeableEntity ageable)
 	{
 		return null;
 	}

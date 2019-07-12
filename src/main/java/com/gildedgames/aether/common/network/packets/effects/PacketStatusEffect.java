@@ -7,8 +7,8 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
@@ -140,7 +140,7 @@ public class PacketStatusEffect implements IMessage
 	{
 
 		@Override
-		public IMessage onMessage(PacketStatusEffect message, EntityPlayer player)
+		public IMessage onMessage(PacketStatusEffect message, PlayerEntity player)
 		{
 			if (player == null || player.world == null)
 			{
@@ -149,14 +149,14 @@ public class PacketStatusEffect implements IMessage
 
 			final Entity entity = player.world.getEntityByID(message.entityID);
 
-			if (!(entity instanceof EntityLivingBase))
+			if (!(entity instanceof LivingEntity))
 			{
 				AetherCore.LOGGER.warn("Tried to set effects for non-living entity with ID " + message.entityID);
 
 				return null;
 			}
 
-			final EntityLivingBase entityLiving = (EntityLivingBase) entity;
+			final LivingEntity entityLiving = (LivingEntity) entity;
 
 			IAetherStatusEffectPool map = entityLiving.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
 

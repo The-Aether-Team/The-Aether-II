@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.entities.companions;
 
 import com.gildedgames.aether.common.entities.ai.hopping.HoppingMoveHelper;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 
 public class EntityPinkBabySwet extends EntityCompanion
@@ -25,7 +25,7 @@ public class EntityPinkBabySwet extends EntityCompanion
 	}
 
 	@Override
-	public void onUpdate()
+	public void livingTick()
 	{
 		if (this.getOwner() != null)
 		{
@@ -37,7 +37,7 @@ public class EntityPinkBabySwet extends EntityCompanion
 		this.squishFactor += (this.squishAmount - this.squishFactor) * 0.5F;
 		this.prevSquishFactor = this.squishFactor;
 
-		super.onUpdate();
+		super.livingTick();
 
 		if (this.onGround && !this.wasOnGround)
 		{

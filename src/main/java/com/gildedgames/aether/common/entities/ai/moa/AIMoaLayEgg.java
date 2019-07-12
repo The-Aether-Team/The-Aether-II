@@ -7,11 +7,11 @@ import com.gildedgames.aether.common.entities.genes.GeneUtil;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.genes.moa.MoaNest;
 import com.gildedgames.aether.common.entities.tiles.TileEntityMoaEgg;
-import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 
-public class AIMoaLayEgg extends EntityAIBase
+public class AIMoaLayEgg extends Goal
 {
 
 	public final World world;

@@ -3,12 +3,12 @@ package com.gildedgames.aether.client.events.listeners.gui;
 import com.gildedgames.aether.client.gui.misc.GuiAetherUnsigned;
 import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.client.gui.GuiMainMenu;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-@Mod.EventBusSubscriber(Side.CLIENT)
+@Mod.EventBusSubscriber(Dist.CLIENT)
 public class GuiMenuListener
 {
 	@SubscribeEvent

@@ -5,7 +5,7 @@ import com.gildedgames.aether.api.recipes.simple.ISimpleRecipe;
 import com.gildedgames.aether.common.containers.tiles.ContainerMasonryBench;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
@@ -43,7 +43,7 @@ public class PacketMasonryRecipeChanged implements IMessage
 	public static class HandlerServer extends MessageHandlerServer<PacketMasonryRecipeChanged, IMessage>
 	{
 		@Override
-		public IMessage onMessage(PacketMasonryRecipeChanged message, EntityPlayer player)
+		public IMessage onMessage(PacketMasonryRecipeChanged message, PlayerEntity player)
 		{
 			if (player == null || player.world == null)
 			{

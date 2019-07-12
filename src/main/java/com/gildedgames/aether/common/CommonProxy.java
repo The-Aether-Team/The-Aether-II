@@ -17,18 +17,18 @@ import com.gildedgames.orbis.lib.util.io.IClassSerializer;
 import com.gildedgames.orbis.lib.util.io.Instantiator;
 import com.gildedgames.orbis.lib.util.io.SimpleSerializer;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.PlayerList;
-import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.IThreadListener;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
+import net.minecraft.world.ServerWorld;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.event.*;
@@ -110,7 +110,7 @@ public class CommonProxy implements IAetherServices
 			final double y2 = y + (random.nextDouble() * 0.4D);
 			final double z2 = z + (random.nextDouble() * radius) - (radius * 0.5D);
 
-			world.spawnParticle(EnumParticleTypes.CLOUD, x2, y2, z2, 0.0D, random.nextDouble() * 0.03D, 0.0D);
+			world.spawnParticle(ParticleTypes.CLOUD, x2, y2, z2, 0.0D, random.nextDouble() * 0.03D, 0.0D);
 		}
 	}
 
@@ -144,7 +144,7 @@ public class CommonProxy implements IAetherServices
 		return this.configDir;
 	}
 
-	public void displayDismountMessage(final EntityPlayer player)
+	public void displayDismountMessage(final PlayerEntity player)
 	{
 
 	}
@@ -154,7 +154,7 @@ public class CommonProxy implements IAetherServices
 
 	}
 
-	public void modifyEntityQuicksoil(final EntityLivingBase entity)
+	public void modifyEntityQuicksoil(final LivingEntity entity)
 	{
 		entity.motionX *= 1.7D;
 		entity.motionZ *= 1.7D;
@@ -171,7 +171,7 @@ public class CommonProxy implements IAetherServices
 	 *
 	 * @return A newsystem entity if {@param entity} wasn't a player, or the same entity if it was a player
 	 */
-	public Entity teleportEntity(final Entity entity, final WorldServer toWorld, final Teleporter teleporter, final int dimension,
+	public Entity teleportEntity(final Entity entity, final ServerWorld toWorld, final Teleporter teleporter, final int dimension,
 			@Nullable final Supplier<BlockPos> optionalLoc)
 	{
 		if (entity == null)
@@ -179,7 +179,7 @@ public class CommonProxy implements IAetherServices
 			return null;
 		}
 
-		if (entity instanceof EntityPlayer)
+		if (entity instanceof PlayerEntity)
 		{
 			if (!net.minecraftforge.common.ForgeHooks.onTravelToDimension(entity, dimension))
 			{
@@ -192,7 +192,7 @@ public class CommonProxy implements IAetherServices
 				final MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
 				final PlayerList playerList = server.getPlayerList();
 
-				final EntityPlayerMP player = (EntityPlayerMP) entity;
+				final ServerPlayerEntity player = (ServerPlayerEntity) entity;
 
 				playerList.transferPlayerToDimension(player, dimension, teleporter);
 				player.timeUntilPortal = player.getPortalCooldown();

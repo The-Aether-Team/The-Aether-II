@@ -3,11 +3,11 @@ package com.gildedgames.aether.client.renderer.entities.projectiles;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
@@ -29,7 +29,7 @@ public class RenderBolt extends Render<EntityBolt>
 		boltTextures.put(ItemBoltType.GRAVITITE, AetherCore.getResource("textures/entities/bolts/gravitite_bolt.png"));
 	}
 
-	public RenderBolt(final RenderManager renderManager)
+	public RenderBolt(final EntityRendererManager renderManager)
 	{
 		super(renderManager);
 	}
@@ -42,9 +42,9 @@ public class RenderBolt extends Render<EntityBolt>
 
 		GlStateManager.pushMatrix();
 		GlStateManager.disableLighting();
-		GlStateManager.translate((float) posX, (float) posY, (float) posZ);
-		GlStateManager.rotate(bolt.prevRotationYaw + (bolt.rotationYaw - bolt.prevRotationYaw) * partialTicks - 90.0F, 0.0F, 1.0F, 0.0F);
-		GlStateManager.rotate(bolt.prevRotationPitch + (bolt.rotationPitch - bolt.prevRotationPitch) * partialTicks, 0.0F, 0.0F, 1.0F);
+		GlStateManager.translatef((float) posX, (float) posY, (float) posZ);
+		GlStateManager.rotatef(bolt.prevRotationYaw + (bolt.rotationYaw - bolt.prevRotationYaw) * partialTicks - 90.0F, 0.0F, 1.0F, 0.0F);
+		GlStateManager.rotatef(bolt.prevRotationPitch + (bolt.rotationPitch - bolt.prevRotationPitch) * partialTicks, 0.0F, 0.0F, 1.0F);
 
 		final Tessellator tessellator = Tessellator.getInstance();
 		final BufferBuilder renderer = tessellator.getBuffer();
@@ -67,12 +67,12 @@ public class RenderBolt extends Render<EntityBolt>
 		{
 			final float f10 = -MathHelper.sin(f9 * 3.0F) * f9;
 
-			GlStateManager.rotate(f10, 0.0F, 0.0F, 1.0F);
+			GlStateManager.rotatef(f10, 0.0F, 0.0F, 1.0F);
 		}
 
-		GlStateManager.rotate(45.0F, 1.0F, 0.0F, 0.0F);
-		GlStateManager.scale(f8, f8, f8);
-		GlStateManager.translate(-4.0F, 0.0F, 0.0F);
+		GlStateManager.rotatef(45.0F, 1.0F, 0.0F, 0.0F);
+		GlStateManager.scalef(f8, f8, f8);
+		GlStateManager.translatef(-4.0F, 0.0F, 0.0F);
 
 		if (this.renderOutlines)
 		{
@@ -99,7 +99,7 @@ public class RenderBolt extends Render<EntityBolt>
 
 		for (int j = 0; j < 4; ++j)
 		{
-			GlStateManager.rotate(90.0F, 1.0F, 0.0F, 0.0F);
+			GlStateManager.rotatef(90.0F, 1.0F, 0.0F, 0.0F);
 			GL11.glNormal3f(0.0F, 0.0F, f8);
 
 			renderer.begin(7, DefaultVertexFormats.POSITION_TEX);

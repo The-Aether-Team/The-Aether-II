@@ -8,13 +8,13 @@ import com.gildedgames.aether.common.entities.animals.EntityCarrionSprout;
 import com.gildedgames.aether.common.entities.monsters.EntityAechorPlant;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSnow;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.List;
 
@@ -24,9 +24,9 @@ public class PlayerPlaceBlockListener
 	@SubscribeEvent
 	public static void onBlockPlaced(final BlockEvent.PlaceEvent event)
 	{
-		final List<EntityLiving> entities = event.getWorld().getEntitiesWithinAABB(EntityLiving.class, new AxisAlignedBB(event.getPos()));
+		final List<MobEntity> entities = event.getWorld().getEntitiesWithinAABB(MobEntity.class, new AxisAlignedBB(event.getPos()));
 
-		for (final EntityLiving entity : entities)
+		for (final MobEntity entity : entities)
 		{
 			if (entity instanceof EntityAechorPlant || entity instanceof EntityCarrionSprout)
 			{
@@ -41,7 +41,7 @@ public class PlayerPlaceBlockListener
 	public static void onPlaceBlockEvent(final BlockEvent.PlaceEvent event)
 	{
 		final IPlacementFlagCapability data = event.getWorld().getChunk(event.getPos())
-				.getCapability(CapabilitiesAether.CHUNK_PLACEMENT_FLAG, EnumFacing.UP);
+				.getCapability(CapabilitiesAether.CHUNK_PLACEMENT_FLAG, Direction.UP);
 
 		if (data != null)
 		{
@@ -50,7 +50,7 @@ public class PlayerPlaceBlockListener
 
 		final PlayerAether aePlayer = PlayerAether.getPlayer(event.getPlayer());
 
-		IBlockState replaced = event.getBlockSnapshot().getReplacedBlock(), placed = event.getPlacedBlock();
+		BlockState replaced = event.getBlockSnapshot().getReplacedBlock(), placed = event.getPlacedBlock();
 		Block block = placed.getBlock();
 
 		if (replaced.getBlock() instanceof BlockSnow && replaced.getValue(BlockSnow.LAYERS) == 1 && block instanceof IBlockSnowy)

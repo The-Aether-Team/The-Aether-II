@@ -2,11 +2,11 @@ package com.gildedgames.aether.client.renderer.tiles;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.entities.tiles.TileEntitySkyrootSign;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiUtilRenderComponents;
 import net.minecraft.client.model.ModelSign;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
@@ -35,8 +35,8 @@ public class TileEntitySkyrootSignRenderer extends TileEntitySpecialRenderer<Til
 		{
 			final float direction = (te.getBlockMetadata() * 360) / 16.0F;
 
-			GlStateManager.translate(x + 0.5F, y + 0.75F * modelScale, z + 0.5F);
-			GlStateManager.rotate(-direction, 0.0F, 1.0F, 0.0F);
+			GlStateManager.translatef(x + 0.5F, y + 0.75F * modelScale, z + 0.5F);
+			GlStateManager.rotatef(-direction, 0.0F, 1.0F, 0.0F);
 
 			this.model.signStick.showModel = true;
 		}
@@ -61,9 +61,9 @@ public class TileEntitySkyrootSignRenderer extends TileEntitySpecialRenderer<Til
 				angle = -90.0F;
 			}
 
-			GlStateManager.translate(x + 0.5F, y + 0.75F * modelScale, z + 0.5F);
-			GlStateManager.rotate(-angle, 0.0F, 1.0F, 0.0F);
-			GlStateManager.translate(0.0F, -0.3125F, -0.4375F);
+			GlStateManager.translatef(x + 0.5F, y + 0.75F * modelScale, z + 0.5F);
+			GlStateManager.rotatef(-angle, 0.0F, 1.0F, 0.0F);
+			GlStateManager.translatef(0.0F, -0.3125F, -0.4375F);
 
 			this.model.signStick.showModel = false;
 		}
@@ -74,8 +74,8 @@ public class TileEntitySkyrootSignRenderer extends TileEntitySpecialRenderer<Til
 
 			GlStateManager.matrixMode(GL11.GL_TEXTURE);
 			GlStateManager.pushMatrix();
-			GlStateManager.scale(4.0F, 2.0F, 1.0F);
-			GlStateManager.translate(0.0625F, 0.0625F, 0.0625F);
+			GlStateManager.scalef(4.0F, 2.0F, 1.0F);
+			GlStateManager.translatef(0.0625F, 0.0625F, 0.0625F);
 			GlStateManager.matrixMode(GL11.GL_MODELVIEW);
 		}
 		else
@@ -85,7 +85,7 @@ public class TileEntitySkyrootSignRenderer extends TileEntitySpecialRenderer<Til
 
 		GlStateManager.enableRescaleNormal();
 		GlStateManager.pushMatrix();
-		GlStateManager.scale(modelScale, -modelScale, -modelScale);
+		GlStateManager.scalef(modelScale, -modelScale, -modelScale);
 
 		this.model.renderSign();
 
@@ -94,8 +94,8 @@ public class TileEntitySkyrootSignRenderer extends TileEntitySpecialRenderer<Til
 		final FontRenderer fontrenderer = this.getFontRenderer();
 
 		final float textScale = 0.015625F * modelScale;
-		GlStateManager.translate(0.0F, 0.5F * modelScale, 0.07F * modelScale);
-		GlStateManager.scale(textScale, -textScale, textScale);
+		GlStateManager.translatef(0.0F, 0.5F * modelScale, 0.07F * modelScale);
+		GlStateManager.scalef(textScale, -textScale, textScale);
 		GL11.glNormal3f(0.0F, 0.0F, -1.0F * textScale);
 		GlStateManager.depthMask(false);
 		final int fontColor = 0xFFFFFFFF;

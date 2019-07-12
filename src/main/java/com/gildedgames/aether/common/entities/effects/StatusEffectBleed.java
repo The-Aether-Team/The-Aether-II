@@ -3,20 +3,20 @@ package com.gildedgames.aether.common.entities.effects;
 import com.gildedgames.aether.api.entity.effects.EEffectIntensity;
 import com.gildedgames.aether.common.capabilities.entity.effects.EffectsDamageSource;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.text.TextFormatting;
 
 import java.util.Collection;
 
 public class StatusEffectBleed extends StatusEffect
 {
-	public StatusEffectBleed(EntityLivingBase livingBase)
+	public StatusEffectBleed(LivingEntity livingBase)
 	{
 		super(effectTypes.BLEED, null, livingBase);
 	}
 
 	@Override
-	public void applyEffect(EntityLivingBase livingBase, int timer)
+	public void applyEffect(LivingEntity livingBase, int timer)
 	{
 		if (this.isEffectApplied)
 		{

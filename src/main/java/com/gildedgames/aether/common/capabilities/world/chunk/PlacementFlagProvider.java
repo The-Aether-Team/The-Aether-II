@@ -2,15 +2,15 @@ package com.gildedgames.aether.common.capabilities.world.chunk;
 
 import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.api.registrar.CapabilitiesAether;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.INBT;
+import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 import javax.annotation.Nullable;
 
-public class PlacementFlagProvider implements ICapabilitySerializable<NBTBase>
+public class PlacementFlagProvider implements ICapabilitySerializable<INBT>
 {
 	private final IPlacementFlagCapability capability;
 
@@ -20,27 +20,27 @@ public class PlacementFlagProvider implements ICapabilitySerializable<NBTBase>
 	}
 
 	@Override
-	public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing)
+	public boolean hasCapability(Capability<?> capability, @Nullable Direction facing)
 	{
 		return capability == CapabilitiesAether.CHUNK_PLACEMENT_FLAG && this.capability != null;
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing)
+	public <T> T getCapability(Capability<T> capability, @Nullable Direction facing)
 	{
 		return this.hasCapability(capability, facing) ? (T) this.capability : null;
 	}
 
 	@Override
-	public NBTBase serializeNBT()
+	public INBT serializeNBT()
 	{
 		if (this.capability == null)
 		{
 			return null;
 		}
 
-		NBTTagCompound tag = new NBTTagCompound();
+		CompoundNBT tag = new CompoundNBT();
 
 		this.capability.write(tag);
 
@@ -48,13 +48,13 @@ public class PlacementFlagProvider implements ICapabilitySerializable<NBTBase>
 	}
 
 	@Override
-	public void deserializeNBT(NBTBase nbt)
+	public void deserializeNBT(INBT nbt)
 	{
 		if (this.capability == null)
 		{
 			return;
 		}
 
-		this.capability.read((NBTTagCompound) nbt);
+		this.capability.read((CompoundNBT) nbt);
 	}
 }

@@ -9,20 +9,20 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.animals.EntityMoa;
 import com.gildedgames.aether.common.entities.genes.AnimalGender;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 
-public class RenderMoa extends RenderLivingLOD<EntityMoa>
+public class RenderMoa extends RenderLivingLOD<EntityMoa, ModelMoaBase>
 {
 
 	private static final ResourceLocation AECHOR_PETAL_TEXTURE = AetherCore.getResource("textures/items/consumables/aechor_petal.png");
@@ -47,11 +47,12 @@ public class RenderMoa extends RenderLivingLOD<EntityMoa>
 
 	private static final ResourceLocation PUPIL_RIGHT = AetherCore.getResource("textures/entities/moa/pupil_right.png");
 
-	public RenderMoa(RenderManager manager)
+	public RenderMoa(EntityRendererManager manager)
 	{
 		super(manager, new ModelMoaLodHigh(), new ModelMoaLodLow(), 0.5F);
 
-		SPRITE.initSprite(16, 16, 0, 0, false);
+		// TODO: 1.14
+//		SPRITE.initSprite(16, 16, 0, 0, false);
 	}
 
 	@Override
@@ -63,11 +64,9 @@ public class RenderMoa extends RenderLivingLOD<EntityMoa>
 		GL11.glScalef(moaScale, moaScale, moaScale);
 	}
 
-	private void renderMoa(EntityLivingBase entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
+	private void renderMoa(EntityMoa entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
-		EntityMoa moa = ((EntityMoa) entity);
-
-		MoaGenePool genePool = moa.getGenePool();
+		MoaGenePool genePool = entity.getGenePool();
 
 		if (genePool == null || genePool.getFeathers() == null)
 		{
@@ -81,9 +80,9 @@ public class RenderMoa extends RenderLivingLOD<EntityMoa>
 		Color.RGBtoHSB(base.getRed(), base.getGreen(), base.getBlue(), hsb);
 		Color highlight = Color.getHSBColor(hsb[0] + 13f / 255f, hsb[1] + 26f / 255f, hsb[2] + .001f);
 
-		GlStateManager.color(base.getRed() / 255f, base.getGreen() / 255f, base.getBlue() / 255f);
+		GlStateManager.color3f(base.getRed() / 255f, base.getGreen() / 255f, base.getBlue() / 255f);
 
-		ModelMoaBase model = (ModelMoaBase) this.mainModel;
+		ModelMoaBase model = this.getEntityModel();
 		model.LegL2.isHidden = true;
 		model.LegR2.isHidden = true;
 		model.JawMain.isHidden = true;
@@ -95,22 +94,22 @@ public class RenderMoa extends RenderLivingLOD<EntityMoa>
 
 			// Re-render the head with our eyes texture and then draw the pupils
 			model.HeadMain.callback = () -> {
-				GlStateManager.color(eyesC.getRed() / 255f, eyesC.getGreen() / 255f, eyesC.getBlue() / 255f);
+				GlStateManager.color3f(eyesC.getRed() / 255f, eyesC.getGreen() / 255f, eyesC.getBlue() / 255f);
 
-				this.renderManager.renderEngine.bindTexture(EYES);
+				this.renderManager.textureManager.bindTexture(EYES);
 
 				model.HeadFront.render(scale, true, false);
 
-				GlStateManager.color(base.getRed() / 255f, base.getGreen() / 255f, base.getBlue() / 255f);
+				GlStateManager.color3f(base.getRed() / 255f, base.getGreen() / 255f, base.getBlue() / 255f);
 
 				EyeUtil.renderEyesFast(model, model.HeadFront, model.HeadFront, entity,
 						scale, PUPIL_LEFT, PUPIL_RIGHT, EYES_CLOSED, EYES, false);
 
-				this.renderManager.renderEngine.bindTexture(BODY);
+				this.renderManager.textureManager.bindTexture(BODY);
 			};
 		}
 
-		this.renderManager.renderEngine.bindTexture(BODY);
+		this.renderManager.textureManager.bindTexture(BODY);
 		model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
 		model.LegL2.isHidden = false;
@@ -118,7 +117,7 @@ public class RenderMoa extends RenderLivingLOD<EntityMoa>
 		model.JawMain.isHidden = false;
 		model.HeadBeakMain.isHidden = false;
 
-		this.renderManager.renderEngine.bindTexture(BODY_HIGHLIGHT);
+		this.renderManager.textureManager.bindTexture(BODY_HIGHLIGHT);
 		GL11.glColor3f(highlight.getRed() / 255f, highlight.getGreen() / 255f, highlight.getBlue() / 255f);
 
 		model.setDefaultDisplayState(false);
@@ -164,9 +163,9 @@ public class RenderMoa extends RenderLivingLOD<EntityMoa>
 
 		Color beakColor = genePool.getKeratin().gene().data();
 
-		GlStateManager.color(beakColor.getRed() / 255f, beakColor.getGreen() / 255f, beakColor.getBlue() / 255f);
+		GlStateManager.color3f(beakColor.getRed() / 255f, beakColor.getGreen() / 255f, beakColor.getBlue() / 255f);
 
-		this.renderManager.renderEngine.bindTexture(BEAK);
+		this.renderManager.textureManager.bindTexture(BEAK);
 
 		model.setDefaultDisplayState(false);
 
@@ -210,12 +209,12 @@ public class RenderMoa extends RenderLivingLOD<EntityMoa>
 
 		model.setDefaultDisplayState(true);
 
-		if (moa.isSaddled())
+		if (entity.isSaddled())
 		{
 			GL11.glColor3f(1.0f, 1.0f, 1.0f);
 			GL11.glTranslatef(0.0F, 0.001F, 0.0F);
 
-			this.renderManager.renderEngine.bindTexture(SADDLE);
+			this.renderManager.textureManager.bindTexture(SADDLE);
 			model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 		}
 	}
@@ -224,7 +223,7 @@ public class RenderMoa extends RenderLivingLOD<EntityMoa>
 	protected void renderModel(EntityMoa entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
 		boolean globalInvisible = !entity.isInvisible() || this.renderOutlines;
-		boolean playerInvisible = !globalInvisible && !entity.isInvisibleToPlayer(Minecraft.getMinecraft().player);
+		boolean playerInvisible = !globalInvisible && !entity.isInvisibleToPlayer(Minecraft.getInstance().player);
 
 		if (globalInvisible || playerInvisible)
 		{
@@ -239,7 +238,7 @@ public class RenderMoa extends RenderLivingLOD<EntityMoa>
 		{
 			this.renderLivingLabel(entity, "Hungry", x, y + 0.15D + (entity.getGender() == AnimalGender.MALE ? 0.0D : -0.35D), z, 64);
 
-			this.drawAechorPetal(x, y + entity.height + 0.8D + (entity.getGender() == AnimalGender.MALE ? 0.0D : -0.35D), z, 0.5D);
+			this.drawAechorPetal(x, y + entity.getHeight() + 0.8D + (entity.getGender() == AnimalGender.MALE ? 0.0D : -0.35D), z, 0.5D);
 		}
 
 		super.doRender(entity, x, y, z, entityYaw, partialTicks);
@@ -276,7 +275,7 @@ public class RenderMoa extends RenderLivingLOD<EntityMoa>
 		float f2 = icon.getMinV();
 		float f3 = icon.getMaxV();
 
-		GL11.glRotatef(180f + Minecraft.getMinecraft().getRenderManager().playerViewY, 0.0F, -1.0F, 0.0F);
+		GL11.glRotatef(180f + Minecraft.getInstance().getRenderManager().playerViewY, 0.0F, -1.0F, 0.0F);
 
 		renderer.begin(7, DefaultVertexFormats.POSITION_TEX_NORMAL);
 

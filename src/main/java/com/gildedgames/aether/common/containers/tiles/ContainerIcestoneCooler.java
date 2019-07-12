@@ -5,15 +5,15 @@ import com.gildedgames.aether.common.containers.slots.SlotCoolingItem;
 import com.gildedgames.aether.common.containers.slots.SlotIrradiatedItem;
 import com.gildedgames.aether.common.entities.tiles.TileEntityIcestoneCooler;
 import com.gildedgames.aether.common.recipes.CoolerRecipes;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.api.distmarker.Dist;
 
 public class ContainerIcestoneCooler extends Container
 {
@@ -27,24 +27,24 @@ public class ContainerIcestoneCooler extends Container
 
 	private int currentItemCoolTime;
 
-	public ContainerIcestoneCooler(final InventoryPlayer playerInventory, final IInventory coolerInventory)
+	public ContainerIcestoneCooler(final PlayerInventory playerInventory, final IInventory coolerInventory)
 	{
 		this.tileCooler = coolerInventory;
-		this.addSlotToContainer(new SlotIrradiatedItem(coolerInventory, 0, 56, 17, 0));
-		this.addSlotToContainer(new SlotCoolingItem(coolerInventory, 1, 56, 53, 1));
-		this.addSlotToContainer(new SlotCoolerOutput(coolerInventory, 2, 116, 35, 2));
+		this.addSlot(new SlotIrradiatedItem(coolerInventory, 0, 56, 17, 0));
+		this.addSlot(new SlotCoolingItem(coolerInventory, 1, 56, 53, 1));
+		this.addSlot(new SlotCoolerOutput(coolerInventory, 2, 116, 35, 2));
 
 		for (int i = 0; i < 3; ++i)
 		{
 			for (int j = 0; j < 9; ++j)
 			{
-				this.addSlotToContainer(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+				this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
 			}
 		}
 
 		for (int k = 0; k < 9; ++k)
 		{
-			this.addSlotToContainer(new Slot(playerInventory, k, 8 + k * 18, 142));
+			this.addSlot(new Slot(playerInventory, k, 8 + k * 18, 142));
 		}
 	}
 
@@ -90,20 +90,20 @@ public class ContainerIcestoneCooler extends Container
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void updateProgressBar(final int id, final int data)
 	{
 		this.tileCooler.setField(id, data);
 	}
 
 	@Override
-	public boolean canInteractWith(final EntityPlayer playerIn)
+	public boolean canInteractWith(final PlayerEntity playerIn)
 	{
 		return this.tileCooler.isUsableByPlayer(playerIn);
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(final EntityPlayer playerIn, final int index)
+	public ItemStack transferStackInSlot(final PlayerEntity playerIn, final int index)
 	{
 		ItemStack itemstack = ItemStack.EMPTY;
 		final Slot slot = this.inventorySlots.get(index);

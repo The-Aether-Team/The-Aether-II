@@ -9,12 +9,12 @@ import com.gildedgames.aether.common.entities.flying.EntityFlyingMob;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.ai.goal.RandomWalkingGoal;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
@@ -31,9 +31,9 @@ public class EntityTempest extends EntityFlyingMob
 	}
 
 	@Override
-	protected EntityAIBase createWanderTask()
+	protected Goal createWanderTask()
 	{
-		final EntityAIWander wander = new EntityAIForcedWanderAvoidLight(this, 0.4D, 5, 5);
+		final RandomWalkingGoal wander = new EntityAIForcedWanderAvoidLight(this, 0.4D, 5, 5);
 
 		wander.setMutexBits(1);
 
@@ -52,45 +52,45 @@ public class EntityTempest extends EntityFlyingMob
 
 		this.faceEntity(target, 10.0F, 10.0F);
 
-		EntityUtil.spawnParticleLineBetween(this, target, 4D, EnumParticleTypes.SPELL_INSTANT);
+		EntityUtil.spawnParticleLineBetween(this, target, 4D, ParticleTypes.SPELL_INSTANT);
 	}
 
 	@Override
-	public void onUpdate()
+	public void livingTick()
 	{
-		super.onUpdate();
+		super.livingTick();
 
 		EntityUtil.despawnEntityDuringDaytime(this);
 	}
 
 	@Override
-	protected void initEntityAI()
+	protected void registerGoals()
 	{
-		super.initEntityAI();
+		super.registerGoals();
 
-		final EntityAIBase avoidLight = new EntityAIHideFromLight(this, 0.8F, 5);
+		final Goal avoidLight = new EntityAIHideFromLight(this, 0.8F, 5);
 
 		avoidLight.setMutexBits(1);
 
-		this.tasks.addTask(2, new AIElectricShock(this));
-		this.tasks.addTask(0, avoidLight);
+		this.goalSelector.addGoal(2, new AIElectricShock(this));
+		this.goalSelector.addGoal(0, avoidLight);
 
-		this.targetTasks.addTask(0, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
+		this.targetSelector.addGoal(0, new EntityAINearestAttackableTarget<>(this, PlayerEntity.class, true));
 	}
 
 	@Override
-	protected void applyEntityAttributes()
+	protected void registerAttributes()
 	{
-		super.applyEntityAttributes();
+		super.registerAttributes();
 
-		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(22.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(60);
+		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D);
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(22.0D);
+		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
+		this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(60);
 
-		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(10);
-		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(10);
-		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(5);
+		this.getAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(10);
+		this.getAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(10);
+		this.getAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(5);
 	}
 
 	@Override

@@ -10,8 +10,8 @@ import com.gildedgames.aether.common.init.CurrencyAetherInit;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketCurrencyModule;
 import com.google.common.collect.Lists;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.List;
@@ -91,7 +91,7 @@ public class PlayerCurrencyModule extends PlayerAetherModule implements ICurrenc
 
 		if (!this.getWorld().isRemote)
 		{
-			NetworkingAether.sendPacketToPlayer(new PacketCurrencyModule(this), (EntityPlayerMP) this.getEntity());
+			NetworkingAether.sendPacketToPlayer(new PacketCurrencyModule(this), (ServerPlayerEntity) this.getEntity());
 		}
 
 		this.listeners.forEach((l) -> l.onCurrencyChange(prevCurrency, this.currencyValue));
@@ -124,13 +124,13 @@ public class PlayerCurrencyModule extends PlayerAetherModule implements ICurrenc
 	}
 
 	@Override
-	public void write(NBTTagCompound tag)
+	public void write(CompoundNBT tag)
 	{
-		tag.setLong("currencyValue", this.currencyValue);
+		tag.putLong("currencyValue", this.currencyValue);
 	}
 
 	@Override
-	public void read(NBTTagCompound tag)
+	public void read(CompoundNBT tag)
 	{
 		long prevCurrency = this.currencyValue;
 

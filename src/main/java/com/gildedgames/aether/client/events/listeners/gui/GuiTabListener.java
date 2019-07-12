@@ -9,32 +9,32 @@ import com.gildedgames.aether.common.init.DimensionsAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketOpenTab;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.GuiScreenEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Mouse;
 
-@Mod.EventBusSubscriber(Side.CLIENT)
+@Mod.EventBusSubscriber(Dist.CLIENT)
 public class GuiTabListener
 {
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	private final static RenderTabGroup tabGroupRenderer = new RenderTabGroup();
 
 	@SubscribeEvent
 	public static void onGuiOpen(final GuiOpenEvent event)
 	{
-		if (Minecraft.getMinecraft().world == null || Minecraft.getMinecraft().world.provider.getDimensionType() != DimensionsAether.AETHER)
+		if (Minecraft.getInstance().world == null || Minecraft.getInstance().world.provider.getDimensionType() != DimensionsAether.AETHER)
 		{
 			return;
 		}
 
-		final GuiScreen gui = event.getGui();
+		final Screen gui = event.getGui();
 
 		final ITabGroupHandler groupHandler = AetherAPI.content().tabs().getActiveGroup();
 
@@ -71,7 +71,7 @@ public class GuiTabListener
 
 					if (gui == null)
 					{
-						tabGroup.getSelectedTab().onOpen(Minecraft.getMinecraft().player);
+						tabGroup.getSelectedTab().onOpen(Minecraft.getInstance().player);
 						NetworkingAether.sendPacketToServer(new PacketOpenTab(tabGroup.getSelectedTab()));
 
 						event.setCanceled(true);
@@ -86,12 +86,12 @@ public class GuiTabListener
 	@SubscribeEvent
 	public static void onGuiMouseEvent(final GuiScreenEvent.MouseInputEvent.Pre event)
 	{
-		if (Minecraft.getMinecraft().world == null || Minecraft.getMinecraft().world.provider.getDimensionType() != DimensionsAether.AETHER)
+		if (Minecraft.getInstance().world == null || Minecraft.getInstance().world.provider.getDimensionType() != DimensionsAether.AETHER)
 		{
 			return;
 		}
 
-		final EntityPlayer player = Minecraft.getMinecraft().player;
+		final PlayerEntity player = Minecraft.getInstance().player;
 
 		if (player == null || !player.inventory.getItemStack().isEmpty())
 		{
@@ -114,20 +114,20 @@ public class GuiTabListener
 				{
 					if (hoveredTab != activeGroup.getSelectedTab())
 					{
-						activeGroup.getSelectedTab().onClose(Minecraft.getMinecraft().player);
+						activeGroup.getSelectedTab().onClose(Minecraft.getInstance().player);
 						activeGroup.setSelectedTab(hoveredTab);
 
 						if (hoveredTab != activeGroup.getRememberedTab() && hoveredTab.isRemembered())
 						{
 							if (activeGroup.getRememberedTab() != null)
 							{
-								activeGroup.getRememberedTab().onClose(Minecraft.getMinecraft().player);
+								activeGroup.getRememberedTab().onClose(Minecraft.getInstance().player);
 							}
 
 							activeGroup.setRememberedTab(hoveredTab);
 						}
 
-						hoveredTab.onOpen(Minecraft.getMinecraft().player);
+						hoveredTab.onOpen(Minecraft.getInstance().player);
 						NetworkingAether.sendPacketToServer(new PacketOpenTab(hoveredTab));
 
 						event.setCanceled(true);
@@ -142,7 +142,7 @@ public class GuiTabListener
 	{
 		if (event.phase == TickEvent.Phase.END)
 		{
-			final EntityPlayer player = Minecraft.getMinecraft().player;
+			final PlayerEntity player = Minecraft.getInstance().player;
 
 			if (player == null || !player.inventory.getItemStack().isEmpty())
 			{

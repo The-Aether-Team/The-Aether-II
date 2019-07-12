@@ -8,7 +8,7 @@ import com.gildedgames.aether.common.entities.genes.GeneUtil;
 import com.gildedgames.aether.common.entities.genes.SimpleGeneStorage;
 import com.gildedgames.orbis.lib.util.mc.NBT;
 import com.google.common.collect.Lists;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 
 import java.awt.*;
 import java.util.List;
@@ -117,13 +117,13 @@ public class MoaGenePool extends GenePool implements NBT
 	}
 
 	@Override
-	public void write(final NBTTagCompound output)
+	public void write(final CompoundNBT output)
 	{
 		this.getStorage().write(output);
 	}
 
 	@Override
-	public void read(final NBTTagCompound input)
+	public void read(final CompoundNBT input)
 	{
 		this.getStorage().read(input);
 

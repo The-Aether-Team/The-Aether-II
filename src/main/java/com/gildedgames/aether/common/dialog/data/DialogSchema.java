@@ -4,7 +4,7 @@ import com.gildedgames.aether.api.dialog.*;
 import com.google.gson.annotations.SerializedName;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 
 import javax.annotation.Nonnull;
 import java.util.Collection;
@@ -129,7 +129,7 @@ public class DialogSchema implements IDialogScene
 		@Override
 		public ITextComponent getLocalizedLabel()
 		{
-			return new TextComponentTranslation(this.label);
+			return new TranslationTextComponent(this.label);
 		}
 
 		@Nonnull
@@ -151,7 +151,7 @@ public class DialogSchema implements IDialogScene
 		@Override
 		public ITextComponent getLocalizedBody()
 		{
-			return new TextComponentTranslation(this.text);
+			return new TranslationTextComponent(this.text);
 		}
 
 		@Override

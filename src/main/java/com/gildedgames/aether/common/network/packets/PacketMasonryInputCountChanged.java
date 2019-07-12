@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.network.packets;
 import com.gildedgames.aether.common.containers.tiles.ContainerMasonryBench;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 public class PacketMasonryInputCountChanged implements IMessage
@@ -36,7 +36,7 @@ public class PacketMasonryInputCountChanged implements IMessage
 	public static class HandlerServer extends MessageHandlerServer<PacketMasonryInputCountChanged, IMessage>
 	{
 		@Override
-		public IMessage onMessage(PacketMasonryInputCountChanged message, EntityPlayer player)
+		public IMessage onMessage(PacketMasonryInputCountChanged message, PlayerEntity player)
 		{
 			if (player == null || player.world == null)
 			{

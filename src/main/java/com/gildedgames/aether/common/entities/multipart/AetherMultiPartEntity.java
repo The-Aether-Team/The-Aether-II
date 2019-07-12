@@ -3,10 +3,10 @@ package com.gildedgames.aether.common.entities.multipart;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IEntityMultiPart;
 import net.minecraft.entity.MultiPartEntityPart;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.RayTraceResult;
 
 public class AetherMultiPartEntity extends MultiPartEntityPart
@@ -23,11 +23,11 @@ public class AetherMultiPartEntity extends MultiPartEntityPart
 	}
 
 	@Override
-	public boolean processInitialInteract(EntityPlayer player, EnumHand hand)
+	public boolean processInitialInteract(PlayerEntity player, Hand hand)
 	{
-		if (this.parent instanceof EntityAnimal)
+		if (this.parent instanceof AnimalEntity)
 		{
-			return ((EntityAnimal) this.parent).processInitialInteract(player, hand);
+			return ((AnimalEntity) this.parent).processInitialInteract(player, hand);
 		}
 
 		return false;

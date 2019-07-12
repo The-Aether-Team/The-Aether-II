@@ -7,24 +7,24 @@ import com.gildedgames.aether.common.init.ParticlesAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketParticles;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Mod.EventBusSubscriber
 public class DamageSystem
 {
-	public static boolean usesDamageSystem(EntityLivingBase living)
+	public static boolean usesDamageSystem(LivingEntity living)
 	{
 		return living.getEntityAttribute(DamageTypeAttributes.SLASH_DAMAGE_LEVEL).getAttributeValue() > 0
 				|| living.getEntityAttribute(DamageTypeAttributes.PIERCE_DAMAGE_LEVEL).getAttributeValue() > 0
 				|| living.getEntityAttribute(DamageTypeAttributes.IMPACT_DAMAGE_LEVEL).getAttributeValue() > 0;
 	}
 
-	public static boolean hasDefenseLevels(EntityLivingBase living)
+	public static boolean hasDefenseLevels(LivingEntity living)
 	{
 		return living.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).getAttributeValue() > 0
 				|| living.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).getAttributeValue() > 0
@@ -34,9 +34,9 @@ public class DamageSystem
 	@SubscribeEvent
 	public static void onEntityLoad(final AttachCapabilitiesEvent<Entity> event)
 	{
-		if (event.getObject() instanceof EntityLivingBase)
+		if (event.getObject() instanceof LivingEntity)
 		{
-			EntityLivingBase living = (EntityLivingBase) event.getObject();
+			LivingEntity living = (LivingEntity) event.getObject();
 
 			living.getAttributeMap().registerAttribute(DamageTypeAttributes.SLASH_DAMAGE_LEVEL);
 			living.getAttributeMap().registerAttribute(DamageTypeAttributes.PIERCE_DAMAGE_LEVEL);
@@ -51,7 +51,7 @@ public class DamageSystem
 	@SubscribeEvent
 	public static void onLivingEntityHurt(LivingHurtEvent event)
 	{
-		if (event.getSource().getTrueSource() instanceof EntityLivingBase)
+		if (event.getSource().getTrueSource() instanceof LivingEntity)
 		{
 			Entity immediateSource = event.getSource().getImmediateSource();
 
@@ -73,7 +73,7 @@ public class DamageSystem
 			}
 			else if (immediateSource != null)
 			{
-				if (!(immediateSource instanceof EntityLivingBase) || !usesDamageSystem((EntityLivingBase) immediateSource))
+				if (!(immediateSource instanceof LivingEntity) || !usesDamageSystem((LivingEntity) immediateSource))
 				{
 					if (hasDefenseLevels(event.getEntityLiving()))
 					{
@@ -83,7 +83,7 @@ public class DamageSystem
 					return;
 				}
 
-				EntityLivingBase entitySource = (EntityLivingBase) event.getSource().getImmediateSource();
+				LivingEntity entitySource = (LivingEntity) event.getSource().getImmediateSource();
 
 				baseSlashDamageLevel = entitySource.getEntityAttribute(DamageTypeAttributes.SLASH_DAMAGE_LEVEL).getAttributeValue();
 				baseImpactDamageLevel = entitySource.getEntityAttribute(DamageTypeAttributes.IMPACT_DAMAGE_LEVEL).getAttributeValue();
@@ -95,7 +95,7 @@ public class DamageSystem
 	}
 
 	private static void processTotalDamage(LivingHurtEvent event, Entity entitySource, double slashDamageLevel, double pierceDamageLevel,
-			double impactDamageLevel, EntityLivingBase receiving)
+			double impactDamageLevel, LivingEntity receiving)
 	{
 		double slashDefenseLevel = receiving.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).getAttributeValue();
 		double impactDefenseLevel = receiving.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).getAttributeValue();

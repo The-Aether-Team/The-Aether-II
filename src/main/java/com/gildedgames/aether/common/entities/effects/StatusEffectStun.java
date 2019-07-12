@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.entities.effects;
 
 import com.gildedgames.aether.api.entity.effects.EEffectIntensity;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
@@ -12,13 +12,13 @@ import java.util.Collection;
 
 public class StatusEffectStun extends StatusEffect
 {
-	public StatusEffectStun(EntityLivingBase livingBase)
+	public StatusEffectStun(LivingEntity livingBase)
 	{
 		super(effectTypes.STUN, new AttributeModifier("aether.statusEffectStun", -1D, 1).setSaved(false), livingBase);
 	}
 
 	@Override
-	public void applyEffect(EntityLivingBase livingBase, int timer)
+	public void applyEffect(LivingEntity livingBase, int timer)
 	{
 		IAttributeInstance iAttributeInstance = livingBase.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
 

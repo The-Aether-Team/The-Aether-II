@@ -7,8 +7,9 @@ import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerEquipmentModule;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.*;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.container.ClickType;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 
 public class ContainerGuidebookInventory extends ContainerPlayer
@@ -89,9 +90,9 @@ public class ContainerGuidebookInventory extends ContainerPlayer
 
 		this.binSlot = new Slot(ContainerGuidebookInventory.dumbInventory, this.inventorySlots.size(), 197, 27);
 
-		if (this.aePlayer.getEntity().capabilities.isCreativeMode)
+		if (this.aePlayer.getEntity().isCreative())
 		{
-			this.addSlotToContainer(this.binSlot);
+			this.addSlot(this.binSlot);
 
 			craftResult.xPos -= 27;
 
@@ -126,23 +127,23 @@ public class ContainerGuidebookInventory extends ContainerPlayer
 
 		int inventorySlotId = 0;
 
-		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.RELIC, inventorySlotId++,
+		this.addSlot(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.RELIC, inventorySlotId++,
 				13, 3));
-		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.RELIC, inventorySlotId++,
+		this.addSlot(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.RELIC, inventorySlotId++,
 				49, 3));
 
-		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.HANDWEAR, inventorySlotId++,
+		this.addSlot(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.HANDWEAR, inventorySlotId++,
 				49, 21));
 
-		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.RING, inventorySlotId++,
+		this.addSlot(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.RING, inventorySlotId++,
 				13, 39));
-		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.RING, inventorySlotId++,
+		this.addSlot(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.RING, inventorySlotId++,
 				13, 57));
 
-		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.NECKWEAR, inventorySlotId++,
+		this.addSlot(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.NECKWEAR, inventorySlotId++,
 				13, 21));
 
-		this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.COMPANION, inventorySlotId++,
+		this.addSlot(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.COMPANION, inventorySlotId++,
 				49, 39));
 
 		for (int x = 0; x < 6; x++)
@@ -150,15 +151,15 @@ public class ContainerGuidebookInventory extends ContainerPlayer
 			int x1 = 24 + (x * 18);
 			int y1 = 127;
 
-			this.addSlotToContainer(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.CHARM, inventorySlotId, x1, y1));
+			this.addSlot(new SlotEquipment(this.inventoryEquipment, ItemEquipmentSlot.CHARM, inventorySlotId, x1, y1));
 			inventorySlotId++;
 		}
 	}
 
 	@Override
-	public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player)
+	public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, PlayerEntity player)
 	{
-		if (slotId == this.binSlot.slotNumber && player.capabilities.isCreativeMode)
+		if (slotId == this.binSlot.slotNumber && player.isCreative())
 		{
 			this.aePlayer.getEntity().inventory.setItemStack(ItemStack.EMPTY);
 		}
@@ -190,11 +191,11 @@ public class ContainerGuidebookInventory extends ContainerPlayer
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int slotNumber)
+	public ItemStack transferStackInSlot(PlayerEntity player, int slotNumber)
 	{
 		Slot slot = this.inventorySlots.get(slotNumber);
 
-		if (slotNumber == this.binSlot.slotNumber && this.aePlayer.getEntity().capabilities.isCreativeMode)
+		if (slotNumber == this.binSlot.slotNumber && this.aePlayer.getEntity().isCreative())
 		{
 			this.aePlayer.getEntity().inventory.clear();
 
@@ -232,7 +233,7 @@ public class ContainerGuidebookInventory extends ContainerPlayer
 	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer playerIn)
+	public boolean canInteractWith(PlayerEntity playerIn)
 	{
 		return true;
 	}

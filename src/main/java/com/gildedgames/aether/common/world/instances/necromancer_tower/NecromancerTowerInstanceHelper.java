@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world.instances.necromancer_tower;
 
 import com.gildedgames.orbis.lib.world.instances.IInstanceHandler;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.ServerPlayerEntity;
 
 public class NecromancerTowerInstanceHelper
 {
@@ -17,7 +17,7 @@ public class NecromancerTowerInstanceHelper
 		return this.handler.getInstanceForDimension(dimId);
 	}
 
-	public void teleportToInst(final EntityPlayerMP player)
+	public void teleportToInst(final ServerPlayerEntity player)
 	{
 		NecromancerTowerInstance inst = this.handler.createNew();
 
@@ -31,7 +31,7 @@ public class NecromancerTowerInstanceHelper
 		this.handler.teleportPlayerToInstance(inst, player);
 	}
 
-	public void teleportBack(final EntityPlayerMP player)
+	public void teleportBack(final ServerPlayerEntity player)
 	{
 		this.handler.returnPlayerFromInstance(player);
 	}

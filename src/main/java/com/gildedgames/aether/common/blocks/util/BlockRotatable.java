@@ -1,30 +1,30 @@
 package com.gildedgames.aether.common.blocks.util;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.state.EnumProperty;
 import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class BlockRotatable extends Block
 {
-	public static final PropertyEnum<EnumFacing.Axis> PROPERTY_AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class);
+	public static final EnumProperty<Direction.Axis> PROPERTY_AXIS = EnumProperty.create("axis", Direction.Axis.class);
 
 	public BlockRotatable(Material material)
 	{
 		super(material);
 
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_AXIS, EnumFacing.Axis.Y));
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_AXIS, Direction.Axis.Y));
 	}
 
 	@Override
-	public IBlockState withRotation(IBlockState state, Rotation rot)
+	public BlockState withRotation(BlockState state, Rotation rot)
 	{
 		switch (rot)
 		{
@@ -33,9 +33,9 @@ public class BlockRotatable extends Block
 				switch (state.getValue(PROPERTY_AXIS))
 				{
 					case X:
-						return state.withProperty(PROPERTY_AXIS, EnumFacing.Axis.Z);
+						return state.withProperty(PROPERTY_AXIS, Direction.Axis.Z);
 					case Z:
-						return state.withProperty(PROPERTY_AXIS, EnumFacing.Axis.X);
+						return state.withProperty(PROPERTY_AXIS, Direction.Axis.X);
 					default:
 						return state;
 				}
@@ -45,27 +45,27 @@ public class BlockRotatable extends Block
 	}
 
 	@Override
-	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer,
-			EnumHand hand)
+	public BlockState getStateForPlacement(World world, BlockPos pos, Direction facing, float hitX, float hitY, float hitZ, int meta, LivingEntity placer,
+			Hand hand)
 	{
 		return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand).withProperty(PROPERTY_AXIS, facing.getAxis());
 	}
 
 	@Override
-	public IBlockState getStateFromMeta(int meta)
+	public BlockState getStateFromMeta(int meta)
 	{
-		EnumFacing.Axis axis;
+		Direction.Axis axis;
 
 		switch (meta & 7)
 		{
 			case 1:
-				axis = EnumFacing.Axis.X;
+				axis = Direction.Axis.X;
 				break;
 			case 2:
-				axis = EnumFacing.Axis.Z;
+				axis = Direction.Axis.Z;
 				break;
 			default:
-				axis = EnumFacing.Axis.Y;
+				axis = Direction.Axis.Y;
 				break;
 		}
 
@@ -73,7 +73,7 @@ public class BlockRotatable extends Block
 	}
 
 	@Override
-	public int getMetaFromState(IBlockState state)
+	public int getMetaFromState(BlockState state)
 	{
 		int meta = 0;
 
@@ -94,7 +94,7 @@ public class BlockRotatable extends Block
 	}
 
 	@Override
-	public int damageDropped(IBlockState state)
+	public int damageDropped(BlockState state)
 	{
 		return 0;
 	}

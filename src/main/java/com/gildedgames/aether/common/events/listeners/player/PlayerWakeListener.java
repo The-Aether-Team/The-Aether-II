@@ -3,11 +3,11 @@ package com.gildedgames.aether.common.events.listeners.player;
 import com.gildedgames.aether.common.init.DimensionsAether;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
+import net.minecraft.world.ServerWorld;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 @Mod.EventBusSubscriber
 public class PlayerWakeListener
@@ -21,7 +21,7 @@ public class PlayerWakeListener
 		{
 			final MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
 
-			final WorldServer worldServer = server.getWorld(0);
+			final ServerWorld worldServer = server.getWorld(0);
 
 			if (world.getGameRules().getBoolean("doDaylightCycle") && event.getEntityPlayer().isPlayerFullyAsleep())
 			{

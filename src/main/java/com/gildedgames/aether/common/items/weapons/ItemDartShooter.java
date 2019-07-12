@@ -3,20 +3,20 @@ package com.gildedgames.aether.common.items.weapons;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.projectiles.EntityDart;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.item.EnumAction;
+import net.minecraft.item.UseAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class ItemDartShooter extends Item
 {
@@ -28,8 +28,8 @@ public class ItemDartShooter extends Item
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void getSubItems(final CreativeTabs tab, final NonNullList<ItemStack> subItems)
+	@OnlyIn(Dist.CLIENT)
+	public void getSubItems(final ItemGroup tab, final NonNullList<ItemStack> subItems)
 	{
 		if (!this.isInCreativeTab(tab))
 		{
@@ -49,13 +49,13 @@ public class ItemDartShooter extends Item
 	}
 
 	@Override
-	public EnumAction getItemUseAction(final ItemStack stack)
+	public UseAction getItemUseAction(final ItemStack stack)
 	{
-		return EnumAction.BOW;
+		return UseAction.BOW;
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(final World worldIn, final EntityPlayer player, final EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(final World worldIn, final PlayerEntity player, final Hand hand)
 	{
 		final ItemStack stack = player.getHeldItem(hand);
 
@@ -63,34 +63,34 @@ public class ItemDartShooter extends Item
 
 		final int ammoSlot = this.getMatchingAmmoSlot(player.inventory, dartType.getAmmoItem());
 
-		if (ammoSlot > 0 || player.capabilities.isCreativeMode)
+		if (ammoSlot > 0 || player.isCreative())
 		{
 			player.setActiveHand(hand);
 		}
 
-		return new ActionResult<>(EnumActionResult.PASS, stack);
+		return new ActionResult<>(ActionResultType.PASS, stack);
 	}
 
 	@Override
-	public void onPlayerStoppedUsing(final ItemStack stack, final World world, final EntityLivingBase entity, final int timeLeft)
+	public void onPlayerStoppedUsing(final ItemStack stack, final World world, final LivingEntity entity, final int timeLeft)
 	{
-		if (!(entity instanceof EntityPlayer))
+		if (!(entity instanceof PlayerEntity))
 		{
 			return;
 		}
 
-		final EntityPlayer player = (EntityPlayer) entity;
+		final PlayerEntity player = (PlayerEntity) entity;
 
 		final ItemDartType dartType = ItemDartType.fromOrdinal(stack.getMetadata());
 
 		final int inventorySlot = this.getMatchingAmmoSlot(player.inventory, dartType.getAmmoItem());
 
-		if (inventorySlot < 0 && !player.capabilities.isCreativeMode)
+		if (inventorySlot < 0 && !player.isCreative())
 		{
 			return;
 		}
 
-		final boolean isInfiniteArrow = player.capabilities.isCreativeMode
+		final boolean isInfiniteArrow = player.isCreative()
 				|| EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByLocation("infinity"), stack) > 0;
 
 		final int duration = this.getMaxItemUseDuration(stack) - timeLeft - 5;
@@ -126,7 +126,7 @@ public class ItemDartShooter extends Item
 				world.spawnEntity(dart);
 			}
 
-			if (inventorySlot >= 0 && !player.capabilities.isCreativeMode)
+			if (inventorySlot >= 0 && !player.isCreative())
 			{
 				final ItemStack ammoStack = player.inventory.getStackInSlot(inventorySlot);
 				ammoStack.shrink(1);
@@ -139,7 +139,7 @@ public class ItemDartShooter extends Item
 		}
 	}
 
-	private int getMatchingAmmoSlot(final InventoryPlayer inventory, final ItemDartType ammo)
+	private int getMatchingAmmoSlot(final PlayerInventory inventory, final ItemDartType ammo)
 	{
 		final int searchMeta = ammo.ordinal();
 

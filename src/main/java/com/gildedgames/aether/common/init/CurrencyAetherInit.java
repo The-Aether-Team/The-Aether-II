@@ -13,7 +13,7 @@ import com.gildedgames.aether.common.recipes.simple.OreDictionaryRequirement;
 import com.gildedgames.aether.common.shop.ShopCurrencyGilt;
 import com.gildedgames.aether.common.util.helpers.ItemHelper;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
@@ -155,7 +155,7 @@ public class CurrencyAetherInit
 	{
 		boolean doneDefaultMeta = false;
 
-		for (IBlockState state : block.getBlockState().getValidStates())
+		for (BlockState state : block.getBlockState().getValidStates())
 		{
 			int meta = block.getMetaFromState(state);
 

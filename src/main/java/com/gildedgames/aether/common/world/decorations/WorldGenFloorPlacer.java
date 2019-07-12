@@ -4,7 +4,7 @@ import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.world.decoration.WorldDecorationGenerator;
 import com.gildedgames.orbis.lib.util.ArrayHelper;
 import com.gildedgames.orbis.lib.world.WorldSlice;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 
 import java.util.List;
@@ -15,25 +15,25 @@ public class WorldGenFloorPlacer implements WorldDecorationGenerator
 {
 	private final StateFetcher stateFetcher;
 
-	private final Function<Random, List<IBlockState>> stateDefiner;
+	private final Function<Random, List<BlockState>> stateDefiner;
 
 	private final int amount;
 
-	private IBlockState[] statesCanPlaceOn = new IBlockState[] { BlocksAether.aether_grass.getDefaultState() };
+	private BlockState[] statesCanPlaceOn = new BlockState[] { BlocksAether.aether_grass.getDefaultState() };
 
-	public WorldGenFloorPlacer(StateFetcher stateFetcher, Function<Random, List<IBlockState>> stateDefiner)
+	public WorldGenFloorPlacer(StateFetcher stateFetcher, Function<Random, List<BlockState>> stateDefiner)
 	{
 		this(-1, stateFetcher, stateDefiner);
 	}
 
-	public WorldGenFloorPlacer(final int amount, final StateFetcher stateFetcher, Function<Random, List<IBlockState>> stateDefiner)
+	public WorldGenFloorPlacer(final int amount, final StateFetcher stateFetcher, Function<Random, List<BlockState>> stateDefiner)
 	{
 		this.stateFetcher = stateFetcher;
 		this.stateDefiner = stateDefiner;
 		this.amount = amount;
 	}
 
-	public void setStatesToPlaceOn(final IBlockState... states)
+	public void setStatesToPlaceOn(final BlockState... states)
 	{
 		this.statesCanPlaceOn = states;
 	}
@@ -45,7 +45,7 @@ public class WorldGenFloorPlacer implements WorldDecorationGenerator
 
 		BlockPos.MutableBlockPos randomPos = new BlockPos.MutableBlockPos();
 
-		final List<IBlockState> states = this.stateDefiner.apply(rand);
+		final List<BlockState> states = this.stateDefiner.apply(rand);
 
 		for (int attempts = 0; attempts < 128; attempts++)
 		{
@@ -60,11 +60,11 @@ public class WorldGenFloorPlacer implements WorldDecorationGenerator
 				continue;
 			}
 
-			final IBlockState below = slice.getBlockState(randomPos.down());
+			final BlockState below = slice.getBlockState(randomPos.down());
 
             if (ArrayHelper.contains(this.statesCanPlaceOn, below))
             {
-                final IBlockState chosen = this.stateFetcher.fetch(rand, states);
+                final BlockState chosen = this.stateFetcher.fetch(rand, states);
 
                 slice.setBlockState(randomPos, chosen);
 
@@ -87,6 +87,6 @@ public class WorldGenFloorPlacer implements WorldDecorationGenerator
 
 	public interface StateFetcher
 	{
-		IBlockState fetch(Random rand, List<IBlockState> states);
+		BlockState fetch(Random rand, List<BlockState> states);
 	}
 }

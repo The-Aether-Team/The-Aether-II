@@ -6,11 +6,11 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerEquipmentModule;
 import com.gildedgames.aether.common.containers.guidebook.ContainerGuidebookInventory;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
-import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.inventory.GuiInventory;
-import net.minecraft.client.renderer.GlStateManager;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import org.apache.commons.lang3.StringUtils;
@@ -51,17 +51,17 @@ public class GuiGuidebookInventory extends AbstractGuidebookPage
 
 		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 
-		Gui.drawModalRectWithCustomSizedTexture(screenX, screenY, u, v, this.PAGE_WIDTH, this.PAGE_HEIGHT, this.TEXTURE_WIDTH, this.TEXTURE_HEIGHT);
+		AbstractGui.drawModalRectWithCustomSizedTexture(screenX, screenY, u, v, this.PAGE_WIDTH, this.PAGE_HEIGHT, this.TEXTURE_WIDTH, this.TEXTURE_HEIGHT);
 	}
 
 	@Override
 	protected void drawRightPage(int screenX, int screenY, float u, float v)
 	{
-		this.mc.renderEngine.bindTexture(this.aePlayer.getEntity().capabilities.isCreativeMode ? RIGHT_PAGE_CREATIVE : RIGHT_PAGE_SURVIVAL);
+		this.mc.renderEngine.bindTexture(this.aePlayer.getEntity().isCreative() ? RIGHT_PAGE_CREATIVE : RIGHT_PAGE_SURVIVAL);
 
 		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 
-		Gui.drawModalRectWithCustomSizedTexture(screenX, screenY, u ,v, this.PAGE_WIDTH, this.PAGE_HEIGHT,this.TEXTURE_WIDTH, this.TEXTURE_HEIGHT);
+		AbstractGui.drawModalRectWithCustomSizedTexture(screenX, screenY, u ,v, this.PAGE_WIDTH, this.PAGE_HEIGHT,this.TEXTURE_WIDTH, this.TEXTURE_HEIGHT);
 	}
 
 	private void drawPlayer(final int mouseX, final int mouseY)

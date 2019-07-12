@@ -2,11 +2,11 @@ package com.gildedgames.aether.common.events.listeners.world;
 
 import com.gildedgames.aether.common.init.DimensionsAether;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 @Mod.EventBusSubscriber
 public class WorldFallListener
@@ -21,9 +21,9 @@ public class WorldFallListener
 		{
 			if (!entity.world.isRemote)
 			{
-				if (entity instanceof EntityPlayer)
+				if (entity instanceof PlayerEntity)
 				{
-					final EntityPlayer player = (EntityPlayer) entity;
+					final PlayerEntity player = (PlayerEntity) entity;
 
 					player.attackEntityFrom(DamageSource.OUT_OF_WORLD, 200.0F);
 

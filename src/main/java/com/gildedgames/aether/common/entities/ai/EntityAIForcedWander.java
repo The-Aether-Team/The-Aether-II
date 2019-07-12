@@ -1,16 +1,16 @@
 package com.gildedgames.aether.common.entities.ai;
 
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
 import javax.annotation.Nullable;
 
-public class EntityAIForcedWander extends EntityAIWander
+public class EntityAIForcedWander extends RandomWalkingGoal
 {
-	protected final EntityCreature entity;
+	protected final CreatureEntity entity;
 
 	protected final int chance;
 
@@ -18,12 +18,12 @@ public class EntityAIForcedWander extends EntityAIWander
 
 	protected final int yScatter;
 
-	public EntityAIForcedWander(final EntityCreature entity, final double speedIn, final int chance)
+	public EntityAIForcedWander(final CreatureEntity entity, final double speedIn, final int chance)
 	{
 		this(entity, speedIn, chance, 10, 7);
 	}
 
-	public EntityAIForcedWander(final EntityCreature entity, final double speedIn, final int chance, final int xScatter, final int yScatter)
+	public EntityAIForcedWander(final CreatureEntity entity, final double speedIn, final int chance, final int xScatter, final int yScatter)
 	{
 		super(entity, speedIn, chance);
 

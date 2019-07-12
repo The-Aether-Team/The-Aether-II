@@ -12,17 +12,17 @@ import com.gildedgames.aether.common.network.packets.PacketCloseScreen;
 import com.gildedgames.aether.common.network.packets.trade.PacketTradeInitial;
 import com.gildedgames.aether.common.network.packets.trade.PacketTradeState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class PlayerTradeModule extends PlayerAetherModule
 {
@@ -51,7 +51,7 @@ public class PlayerTradeModule extends PlayerAetherModule
 
 			if (!this.getWorld().isRemote && this.requestedTime == 0 && this.target != null)
 			{
-				ITextComponent message = new TextComponentTranslation("aether.trade.chat.failexpired", this.target.getEntity().getDisplayName().getFormattedText());
+				ITextComponent message = new TranslationTextComponent("aether.trade.chat.failexpired", this.target.getEntity().getDisplayName().getFormattedText());
 
 				message.setStyle(new Style().setColor(TextFormatting.RED).setItalic(true));
 				this.getEntity().sendMessage(message);
@@ -165,7 +165,7 @@ public class PlayerTradeModule extends PlayerAetherModule
 		this.requestedTime = 20 * 20;
 		this.requestPosition = this.getEntity().getPosition();
 
-		ITextComponent message = new TextComponentTranslation("aether.trade.chat.request", this.getEntity().getDisplayName().getFormattedText());
+		ITextComponent message = new TranslationTextComponent("aether.trade.chat.request", this.getEntity().getDisplayName().getFormattedText());
 
 		message.setStyle(new Style().setColor(TextFormatting.AQUA).setItalic(true));
 		other.getEntity().sendMessage(message);
@@ -215,7 +215,7 @@ public class PlayerTradeModule extends PlayerAetherModule
 
 	public void closeGui()
 	{
-		NetworkingAether.sendPacketToPlayer(new PacketCloseScreen(AetherGuiHandler.TRADE_ID), (EntityPlayerMP) this.getEntity());
+		NetworkingAether.sendPacketToPlayer(new PacketCloseScreen(AetherGuiHandler.TRADE_ID), (ServerPlayerEntity) this.getEntity());
 	}
 
 	public boolean canRequest()
@@ -230,7 +230,7 @@ public class PlayerTradeModule extends PlayerAetherModule
 
 	public void failRequest(PlayerTradeModule other)
 	{
-		ITextComponent message = new TextComponentTranslation("aether.trade.chat.fail" + (other.isTrading() ? "trade" : "sent"), other.getEntity().getDisplayName().getFormattedText());
+		ITextComponent message = new TranslationTextComponent("aether.trade.chat.fail" + (other.isTrading() ? "trade" : "sent"), other.getEntity().getDisplayName().getFormattedText());
 		message.setStyle(new Style().setColor(TextFormatting.RED).setItalic(true));
 
 		this.getEntity().sendMessage(message);
@@ -246,7 +246,7 @@ public class PlayerTradeModule extends PlayerAetherModule
 
 			if (!this.getWorld().isRemote)
 			{
-				EntityPlayerMP entityPlayerMP = (EntityPlayerMP) this.getPlayer().getEntity();
+				ServerPlayerEntity entityPlayerMP = (ServerPlayerEntity) this.getPlayer().getEntity();
 
 				entityPlayerMP.closeContainer();
 				NetworkingAether.sendPacketToPlayer(new PacketCloseScreen(AetherGuiHandler.TRADE_ID), entityPlayerMP);
@@ -254,10 +254,10 @@ public class PlayerTradeModule extends PlayerAetherModule
 		}
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void updateClientState(int state)
 	{
-		Minecraft mc = Minecraft.getMinecraft();
+		Minecraft mc = Minecraft.getInstance();
 
 		this.lockedIn = state >= 2;
 
@@ -291,9 +291,9 @@ public class PlayerTradeModule extends PlayerAetherModule
 		}
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	private void setTradeSlotsClient(int size) {
-		GuiScreen currentScreen = Minecraft.getMinecraft().currentScreen;
+		Screen currentScreen = Minecraft.getInstance().currentScreen;
 
 		if (currentScreen instanceof GuiTrade)
 		{
@@ -303,15 +303,15 @@ public class PlayerTradeModule extends PlayerAetherModule
 		}
 	}
 
-	public EntityPlayerMP getPlayerMP()
+	public ServerPlayerEntity getPlayerMP()
 	{
-		return (EntityPlayerMP) this.getEntity();
+		return (ServerPlayerEntity) this.getEntity();
 	}
 
 
-	public EntityPlayerMP getTargetMP()
+	public ServerPlayerEntity getTargetMP()
 	{
-		return (EntityPlayerMP) this.getTarget().getEntity();
+		return (ServerPlayerEntity) this.getTarget().getEntity();
 	}
 
 	public int getOpenSlots()

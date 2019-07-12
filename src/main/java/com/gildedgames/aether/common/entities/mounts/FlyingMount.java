@@ -2,9 +2,9 @@ package com.gildedgames.aether.common.entities.mounts;
 
 import com.gildedgames.aether.api.entity.IMountProcessor;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 
 public class FlyingMount implements IMountProcessor
@@ -62,9 +62,9 @@ public class FlyingMount implements IMountProcessor
 	@Override
 	public boolean canProcessMountInteraction(Entity mount, Entity rider)
 	{
-		if (rider instanceof EntityPlayer)
+		if (rider instanceof PlayerEntity)
 		{
-			EntityPlayer player = (EntityPlayer) rider;
+			PlayerEntity player = (PlayerEntity) rider;
 			ItemStack stack = player.getHeldItemMainhand();
 
 			return this.data.canProcessMountInteraction(player, stack);
@@ -76,18 +76,18 @@ public class FlyingMount implements IMountProcessor
 	@Override
 	public void onMountedBy(Entity mount, Entity rider)
 	{
-		if (mount instanceof EntityLivingBase)
+		if (mount instanceof LivingEntity)
 		{
-			((EntityLivingBase) mount).getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.6D);
+			((LivingEntity) mount).getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.6D);
 		}
 	}
 
 	@Override
 	public void onDismountedBy(Entity mount, Entity rider)
 	{
-		if (mount instanceof EntityLivingBase)
+		if (mount instanceof LivingEntity)
 		{
-			((EntityLivingBase) mount).getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
+			((LivingEntity) mount).getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
 		}
 	}
 

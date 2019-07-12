@@ -7,11 +7,11 @@ import com.gildedgames.aether.common.containers.slots.SlotSimpleCrafting;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketMasonryInputCountChanged;
 import com.gildedgames.aether.common.util.helpers.RecipeUtil;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -26,9 +26,9 @@ public class ContainerMasonryBench extends Container
 
 	public SlotSimpleCrafting craftingResult;
 
-	private final EntityPlayer player;
+	private final PlayerEntity player;
 
-	private final InventoryPlayer inventory;
+	private final PlayerInventory inventory;
 
 	private final World world;
 
@@ -36,7 +36,7 @@ public class ContainerMasonryBench extends Container
 
 	private int inputCount = 1;
 
-	public ContainerMasonryBench(EntityPlayer player, BlockPos pos)
+	public ContainerMasonryBench(PlayerEntity player, BlockPos pos)
 	{
 		this.player = player;
 		this.inventory = player.inventory;
@@ -77,20 +77,20 @@ public class ContainerMasonryBench extends Container
 		{
 			for (int i1 = 0; i1 < 9; ++i1)
 			{
-				this.addSlotToContainer(new Slot(this.inventory, i1 + k * 9 + 9, 8 + i1 * 18, 88 + (k * 18)));
+				this.addSlot(new Slot(this.inventory, i1 + k * 9 + 9, 8 + i1 * 18, 88 + (k * 18)));
 			}
 		}
 
 		for (int l = 0; l < 9; ++l)
 		{
-			this.addSlotToContainer(new Slot(this.inventory, l, 8 + l * 18, 146));
+			this.addSlot(new Slot(this.inventory, l, 8 + l * 18, 146));
 		}
 
 		this.craftingResult = new SlotSimpleCrafting(this.player, null, this.craftResult, 37, 106, 37, this);
 
 		this.craftingResult.setSimpleCrafting(true);
 
-		this.addSlotToContainer(this.craftingResult);
+		this.addSlot(this.craftingResult);
 	}
 
 	public void onNewRecipe(ISimpleRecipe recipe)
@@ -110,7 +110,7 @@ public class ContainerMasonryBench extends Container
 	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer player)
+	public boolean canInteractWith(PlayerEntity player)
 	{
 		return this.world.getBlockState(this.pos).getBlock() == BlocksAether.masonry_bench
 				&& player.getDistanceSq(this.pos.getX() + 0.5D, this.pos.getY() + 0.5D, this.pos.getZ() + 0.5D) <= 64.0D;
@@ -124,7 +124,7 @@ public class ContainerMasonryBench extends Container
 
 	@Override
 	@Nullable
-	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
+	public ItemStack transferStackInSlot(PlayerEntity playerIn, int index)
 	{
 		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = this.inventorySlots.get(index);

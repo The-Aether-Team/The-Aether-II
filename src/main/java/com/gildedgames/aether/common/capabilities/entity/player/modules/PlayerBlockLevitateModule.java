@@ -4,10 +4,10 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
 import com.gildedgames.aether.common.init.MaterialsAether;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.block.BlockState;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTool;
+import net.minecraft.item.ToolItem;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -41,10 +41,10 @@ public class PlayerBlockLevitateModule extends PlayerAetherModule
 			}
 			else
 			{
-				final ItemStack stack = this.getEntity().getItemStackFromSlot(EntityEquipmentSlot.MAINHAND);
+				final ItemStack stack = this.getEntity().getItemStackFromSlot(EquipmentSlotType.MAINHAND);
 
-				if (!stack.isEmpty() && stack.getItem() instanceof ItemTool
-						&& Objects.equals(((ItemTool) stack.getItem()).getToolMaterialName(), MaterialsAether.GRAVITITE_TOOL.name()))
+				if (!stack.isEmpty() && stack.getItem() instanceof ToolItem
+						&& Objects.equals(((ToolItem) stack.getItem()).getToolMaterialName(), MaterialsAether.GRAVITITE_TOOL.name()))
 				{
 					if (this.heldBlock.ticksExisted % 20 == 0)
 					{
@@ -76,7 +76,7 @@ public class PlayerBlockLevitateModule extends PlayerAetherModule
 		{
 			if (world.isBlockModifiable(this.getEntity(), pos))
 			{
-				final IBlockState state = world.getBlockState(pos);
+				final BlockState state = world.getBlockState(pos);
 
 				final EntityMovingBlock movingBlock = new EntityMovingBlock(world, pos.getX() + 0.5D, pos.getY() + 0.1D, pos.getZ() + 0.5D, state);
 				world.spawnEntity(movingBlock);

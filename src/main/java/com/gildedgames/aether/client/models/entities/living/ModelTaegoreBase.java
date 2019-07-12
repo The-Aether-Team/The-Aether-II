@@ -1,137 +1,138 @@
 package com.gildedgames.aether.client.models.entities.living;
 
 import com.gildedgames.aether.client.renderer.ModelBaseAether;
-import net.minecraft.client.model.ModelRenderer;
+import com.gildedgames.aether.common.entities.animals.EntityTaegore;
+import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
-public class ModelTaegoreBase extends ModelBaseAether
+public class ModelTaegoreBase extends ModelBaseAether<EntityTaegore>
 {
-	public ModelRenderer Tail;
+	public RendererModel Tail;
 
-	public ModelRenderer HeadMain;
+	public RendererModel HeadMain;
 
-	public ModelRenderer HeadThroat;
+	public RendererModel HeadThroat;
 
-	public ModelRenderer HeadSnoutRight;
+	public RendererModel HeadSnoutRight;
 
-	public ModelRenderer HeadSnoutLeft;
+	public RendererModel HeadSnoutLeft;
 
-	public ModelRenderer HeadSnout;
+	public RendererModel HeadSnout;
 
-	public ModelRenderer HeadJawBack;
+	public RendererModel HeadJawBack;
 
-	public ModelRenderer HeadSnoutRidge;
+	public RendererModel HeadSnoutRidge;
 
-	public ModelRenderer HeadBrowLeft;
+	public RendererModel HeadBrowLeft;
 
-	public ModelRenderer HeadBrowRight;
+	public RendererModel HeadBrowRight;
 
-	public ModelRenderer HeadEyeLeft;
+	public RendererModel HeadEyeLeft;
 
-	public ModelRenderer HeadEyeRight;
+	public RendererModel HeadEyeRight;
 
-	public ModelRenderer HeadCrestMiddle;
+	public RendererModel HeadCrestMiddle;
 
-	public ModelRenderer HeadCrestLeft;
+	public RendererModel HeadCrestLeft;
 
-	public ModelRenderer HeadCrestRight;
+	public RendererModel HeadCrestRight;
 
-	public ModelRenderer HeadCrestBase;
+	public RendererModel HeadCrestBase;
 
-	public ModelRenderer HeadTuskLeft;
+	public RendererModel HeadTuskLeft;
 
-	public ModelRenderer HeadTuskRight;
+	public RendererModel HeadTuskRight;
 
-	public ModelRenderer HeadBeardMiddle;
+	public RendererModel HeadBeardMiddle;
 
-	public ModelRenderer HeadBeardRight;
+	public RendererModel HeadBeardRight;
 
-	public ModelRenderer HeadBeardLeft;
+	public RendererModel HeadBeardLeft;
 
-	public ModelRenderer HeadEarLeft;
+	public RendererModel HeadEarLeft;
 
-	public ModelRenderer HeadEarRight;
+	public RendererModel HeadEarRight;
 
-	public ModelRenderer HeadRuffTop;
+	public RendererModel HeadRuffTop;
 
-	public ModelRenderer HeadRuffLeft;
+	public RendererModel HeadRuffLeft;
 
-	public ModelRenderer HeadRuffRight;
+	public RendererModel HeadRuffRight;
 
-	public ModelRenderer HeadJawFront;
+	public RendererModel HeadJawFront;
 
-	public ModelRenderer TorsoNeck;
+	public RendererModel TorsoNeck;
 
-	public ModelRenderer TorsoBack;
+	public RendererModel TorsoBack;
 
-	public ModelRenderer TorsoSpine;
+	public RendererModel TorsoSpine;
 
-	public ModelRenderer TorsoBelly;
+	public RendererModel TorsoBelly;
 
-	public ModelRenderer TorsoFront;
+	public RendererModel TorsoFront;
 
-	public ModelRenderer TorsoShoulderPlateLeft1;
+	public RendererModel TorsoShoulderPlateLeft1;
 
-	public ModelRenderer TorsoShoulderPlateRight1;
+	public RendererModel TorsoShoulderPlateRight1;
 
-	public ModelRenderer TorsoShoulderPlateLeft2;
+	public RendererModel TorsoShoulderPlateLeft2;
 
-	public ModelRenderer TorsoShoulderPlateRight2;
+	public RendererModel TorsoShoulderPlateRight2;
 
-	public ModelRenderer TorsoBackPlateRight;
+	public RendererModel TorsoBackPlateRight;
 
-	public ModelRenderer TorsoBackPlateLeft;
+	public RendererModel TorsoBackPlateLeft;
 
-	public ModelRenderer FrontLegLeftUpper;
+	public RendererModel FrontLegLeftUpper;
 
-	public ModelRenderer FrontLegLeftLower;
+	public RendererModel FrontLegLeftLower;
 
-	public ModelRenderer FrontLegLeftToeMiddle;
+	public RendererModel FrontLegLeftToeMiddle;
 
-	public ModelRenderer FrontLegLeftToeOut;
+	public RendererModel FrontLegLeftToeOut;
 
-	public ModelRenderer FrontLegLeftToeIn;
+	public RendererModel FrontLegLeftToeIn;
 
-	public ModelRenderer FrontLegRightUpper;
+	public RendererModel FrontLegRightUpper;
 
-	public ModelRenderer FrontLegRightLower;
+	public RendererModel FrontLegRightLower;
 
-	public ModelRenderer FrontLegRightToeMiddle;
+	public RendererModel FrontLegRightToeMiddle;
 
-	public ModelRenderer FrontLegRightToeOut;
+	public RendererModel FrontLegRightToeOut;
 
-	public ModelRenderer FrontLegRightToeIn;
+	public RendererModel FrontLegRightToeIn;
 
-	public ModelRenderer HindLegLeftCalf;
+	public RendererModel HindLegLeftCalf;
 
-	public ModelRenderer HindLegLeftKnee;
+	public RendererModel HindLegLeftKnee;
 
-	public ModelRenderer HindLegLeftShin;
+	public RendererModel HindLegLeftShin;
 
-	public ModelRenderer HindLegLeftToeMiddle;
+	public RendererModel HindLegLeftToeMiddle;
 
-	public ModelRenderer HindLegLeftToeOut;
+	public RendererModel HindLegLeftToeOut;
 
-	public ModelRenderer HindLegLeftToeIn;
+	public RendererModel HindLegLeftToeIn;
 
-	public ModelRenderer HindLegRightCalf;
+	public RendererModel HindLegRightCalf;
 
-	public ModelRenderer HindLegRightKnee;
+	public RendererModel HindLegRightKnee;
 
-	public ModelRenderer HindLegRightShin;
+	public RendererModel HindLegRightShin;
 
-	public ModelRenderer HindLegRightToeMiddle;
+	public RendererModel HindLegRightToeMiddle;
 
-	public ModelRenderer HindLegRightToeOut;
+	public RendererModel HindLegRightToeOut;
 
-	public ModelRenderer HindLegRightToeIn;
+	public RendererModel HindLegRightToeIn;
 
 	@Override
-	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch,
-			float scaleFactor, Entity entity)
+	public void setRotationAngles(EntityTaegore entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch,
+			float scaleFactor)
 	{
-		super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entity);
+		super.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);
 
 		float pitch = headPitch * 0.017453292F;
 		float yaw = netHeadYaw * 0.017453292F;

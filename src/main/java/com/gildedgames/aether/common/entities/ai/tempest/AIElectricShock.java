@@ -8,7 +8,7 @@ import com.gildedgames.aether.common.entities.ai.EntityAI;
 import com.gildedgames.aether.common.entities.effects.StatusEffectStun;
 import com.gildedgames.aether.common.entities.monsters.EntityTempest;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.util.SoundEvent;
@@ -56,7 +56,7 @@ public class AIElectricShock extends EntityAI<EntityTempest>
 	@Override
 	public void updateTask()
 	{
-		final EntityLivingBase prey = this.entity().getAttackTarget();
+		final LivingEntity prey = this.entity().getAttackTarget();
 
 		final double distanceToAttackTarget = this.entity().getDistance(prey);
 
@@ -106,9 +106,9 @@ public class AIElectricShock extends EntityAI<EntityTempest>
 
 	private void applyStatusEffectOnAttack(final Entity target)
 	{
-		if (target instanceof EntityLivingBase)
+		if (target instanceof LivingEntity)
 		{
-			final EntityLivingBase living = (EntityLivingBase) target;
+			final LivingEntity living = (LivingEntity) target;
 
 			if (!living.isActiveItemStackBlocking())
 			{

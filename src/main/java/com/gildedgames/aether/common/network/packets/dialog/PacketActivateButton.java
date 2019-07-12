@@ -10,7 +10,7 @@ import com.gildedgames.aether.common.network.MessageHandlerClient;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import com.google.common.base.Objects;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
@@ -44,7 +44,7 @@ public class PacketActivateButton implements IMessage
 	public static class HandlerClient extends MessageHandlerClient<PacketActivateButton, PacketActivateButton>
 	{
 		@Override
-		public PacketActivateButton onMessage(final PacketActivateButton message, final EntityPlayer player)
+		public PacketActivateButton onMessage(final PacketActivateButton message, final PlayerEntity player)
 		{
 			final IPlayerAether aePlayer = PlayerAether.getPlayer(player);
 			final IDialogController dialogController = aePlayer.getModule(PlayerDialogModule.class);
@@ -82,7 +82,7 @@ public class PacketActivateButton implements IMessage
 	public static class HandlerServer extends MessageHandlerServer<PacketActivateButton, PacketActivateButton>
 	{
 		@Override
-		public PacketActivateButton onMessage(final PacketActivateButton message, final EntityPlayer player)
+		public PacketActivateButton onMessage(final PacketActivateButton message, final PlayerEntity player)
 		{
 			final IPlayerAether aePlayer = PlayerAether.getPlayer(player);
 			final IDialogController dialogController = aePlayer.getModule(PlayerDialogModule.class);

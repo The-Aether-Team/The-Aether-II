@@ -1,17 +1,17 @@
 package com.gildedgames.aether.common.entities.ai;
 
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.ai.goal.Goal;
 
 import java.util.List;
 import java.util.Random;
 
-public class EntityAIRamAttack extends EntityAIBase
+public class EntityAIRamAttack extends Goal
 {
-	private EntityLiving entity;
+	private MobEntity entity;
 
-	private EntityLivingBase target;
+	private LivingEntity target;
 
 	private double maxDistance, chargeSpeed;
 
@@ -23,7 +23,7 @@ public class EntityAIRamAttack extends EntityAIBase
 
 	private Random rand;
 
-	public EntityAIRamAttack(EntityLiving entity, double chargeSpeed, float minChargeTime, float maxChargeTime, double maxDistance)
+	public EntityAIRamAttack(MobEntity entity, double chargeSpeed, float minChargeTime, float maxChargeTime, double maxDistance)
 	{
 		this.rand = new Random();
 		this.entity = entity;
@@ -43,7 +43,7 @@ public class EntityAIRamAttack extends EntityAIBase
 				this.entity.getLookHelper().setLookPositionWithEntity(this.target, (float)this.entity.getHorizontalFaceSpeed(), (float)this.entity.getVerticalFaceSpeed());
 				this.entity.faceEntity(this.target, 180f, 180f);
 
-				List<EntityLivingBase> entities = this.entity.world.getEntitiesWithinAABB(EntityLivingBase.class, this.entity.getEntityBoundingBox().expand(1, 1, 1));
+				List<LivingEntity> entities = this.entity.world.getEntitiesWithinAABB(LivingEntity.class, this.entity.getBoundingBox().expand(1, 1, 1));
 
 				if (entities.contains(this.target))
 				{
@@ -65,7 +65,7 @@ public class EntityAIRamAttack extends EntityAIBase
 		return this.target != null && this.entity.getDistance(this.target) < this.maxDistance;
 	}
 
-	public void setTarget(EntityLivingBase target)
+	public void setTarget(LivingEntity target)
 	{
 		if (this.target == null || this.currentCharge <= 0)
 		{
@@ -87,7 +87,7 @@ public class EntityAIRamAttack extends EntityAIBase
 
 		if (this.ramming)
 		{
-			EntityLivingBase target = this.target;
+			LivingEntity target = this.target;
 
 			double ang = Math.atan2(target.posZ - this.entity.posZ, target.posX - this.entity.posX);
 			this.entity.motionX = (float) Math.cos(ang) * this.chargeSpeed;

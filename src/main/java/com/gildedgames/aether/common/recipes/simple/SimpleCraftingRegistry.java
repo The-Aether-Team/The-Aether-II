@@ -177,9 +177,9 @@ public class SimpleCraftingRegistry implements ISimpleCraftingRegistry
 	{
 		int hash = (Item.getIdFromItem(stack.getItem()) & 0xFFFF) << 16;
 
-		if (!stack.isItemStackDamageable() && stack.getItemDamage() != OreDictionary.WILDCARD_VALUE)
+		if (!stack.isDamageable() && stack.getDamage() != OreDictionary.WILDCARD_VALUE)
 		{
-			hash = hash | (stack.getItemDamage() & 0xFFFF);
+			hash = hash | (stack.getDamage() & 0xFFFF);
 		}
 
 		return hash;

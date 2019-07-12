@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.world.decorations.plants;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockVine;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.block.Blocks;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -13,9 +13,9 @@ import java.util.Random;
 public class WorldGenCustomVines extends WorldGenerator
 {
 
-	private final IBlockState vines;
+	private final BlockState vines;
 
-	public WorldGenCustomVines(final IBlockState vines)
+	public WorldGenCustomVines(final BlockState vines)
 	{
 		this.vines = vines;
 	}
@@ -27,14 +27,14 @@ public class WorldGenCustomVines extends WorldGenerator
 		{
 			if (world.isAirBlock(pos))
 			{
-				for (final EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL.facings())
+				for (final Direction enumfacing : Direction.Plane.HORIZONTAL.facings())
 				{
 					if (Blocks.VINE.canPlaceBlockOnSide(world, pos, enumfacing))
 					{
-						final IBlockState iblockstate = this.vines.withProperty(BlockVine.NORTH,
-								enumfacing == EnumFacing.NORTH).withProperty(BlockVine.EAST,
-								enumfacing == EnumFacing.EAST).withProperty(BlockVine.SOUTH,
-								enumfacing == EnumFacing.SOUTH).withProperty(BlockVine.WEST, enumfacing == EnumFacing.WEST);
+						final BlockState iblockstate = this.vines.withProperty(BlockVine.NORTH,
+								enumfacing == Direction.NORTH).withProperty(BlockVine.EAST,
+								enumfacing == Direction.EAST).withProperty(BlockVine.SOUTH,
+								enumfacing == Direction.SOUTH).withProperty(BlockVine.WEST, enumfacing == Direction.WEST);
 						world.setBlockState(pos, iblockstate, 2 | 16);
 
 						break;

@@ -6,23 +6,23 @@ import com.gildedgames.aether.common.blocks.IBlockMultiName;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.state.BooleanProperty;
+import net.minecraft.state.IntegerProperty;
 import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -39,9 +39,9 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", BASE, MID, TOP, BASE_G, MID_G, TOP_G);
 
-	public static final PropertyBool PROPERTY_HARVESTABLE = PropertyBool.create("harvestable");
+	public static final BooleanProperty PROPERTY_HARVESTABLE = BooleanProperty.create("harvestable");
 
-	public static final PropertyInteger PROPERTY_AGE = PropertyInteger.create("age", 0, 10);
+	public static final IntegerProperty PROPERTY_AGE = IntegerProperty.create("age", 0, 10);
 
 	protected static final AxisAlignedBB BRETTL_AABB = new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 1.25D, 0.75D);
 
@@ -69,13 +69,13 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 	}
 
 	@Override
-	public int getMetaFromState(IBlockState state)
+	public int getMetaFromState(BlockState state)
 	{
 		return state.getValue(PROPERTY_VARIANT).getMeta();
 	}
 
 	@Override
-	public IBlockState getStateFromMeta(int meta)
+	public BlockState getStateFromMeta(int meta)
 	{
 		if (meta <= 2)
 		{
@@ -88,13 +88,13 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 	}
 
 	@Override
-	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
+	public ItemStack getPickBlock(BlockState state, RayTraceResult target, World world, BlockPos pos, PlayerEntity player)
 	{
 		return new ItemStack(ItemsAether.brettl_cane);
 	}
 
 	@Override
-	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
+	public void updateTick(World world, BlockPos pos, BlockState state, Random rand)
 	{
 		if (!state.getValue(PROPERTY_HARVESTABLE))
 		{
@@ -149,7 +149,7 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 	}
 
 	@Override
-	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient)
+	public boolean canGrow(World worldIn, BlockPos pos, BlockState state, boolean isClient)
 	{
 		if (state.getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_BASE)
 		{
@@ -181,13 +181,13 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 	}
 
 	@Override
-	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state)
+	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state)
 	{
 		return !state.getValue(PROPERTY_HARVESTABLE);
 	}
 
 	@Override
-	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state)
+	public void grow(World worldIn, Random rand, BlockPos pos, BlockState state)
 	{
 		if (state.getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_BASE)
 		{
@@ -219,17 +219,17 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 	}
 
 	@Override
-	public int damageDropped(IBlockState state)
+	public int damageDropped(BlockState state)
 	{
 		return BRETTL_PLANT_BASE;
 	}
 
 	@Override
-	public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest)
+	public boolean removedByPlayer(BlockState state, World world, BlockPos pos, PlayerEntity player, boolean willHarvest)
 	{
 		if (state.getValue(PROPERTY_HARVESTABLE))
 		{
-			if (player.capabilities.isCreativeMode)
+			if (player.isCreative())
 			{
 				world.setBlockToAir(pos);
 
@@ -262,7 +262,7 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 	}
 
 	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
+	public Item getItemDropped(BlockState state, Random rand, int fortune)
 	{
 		if (state.getValue(PROPERTY_VARIANT).getMeta() != BRETTL_PLANT_TOP && state.getValue(PROPERTY_VARIANT).getMeta() != BRETTL_PLANT_TOP_G)
 		{
@@ -281,20 +281,20 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 	@Override
 	public boolean canPlaceBlockAt(World world, BlockPos pos)
 	{
-		IBlockState downBlock = world.getBlockState(pos);
+		BlockState downBlock = world.getBlockState(pos);
 
 		return this.isSuitableSoilBlock(world, pos, downBlock);
 	}
 
 	@Override
-	public boolean isSuitableSoilBlock(World world, BlockPos pos, IBlockState state)
+	public boolean isSuitableSoilBlock(World world, BlockPos pos, BlockState state)
 	{
 		return state.getBlock() == BlocksAether.quicksoil || state.getBlock() == BlocksAether.brettl_plant;
 	}
 
 	@Override
-	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-			EntityLivingBase placer)
+	public BlockState getStateForPlacement(World worldIn, BlockPos pos, Direction facing, float hitX, float hitY, float hitZ, int meta,
+			LivingEntity placer)
 	{
 		if (this.canPlaceBlockAt(worldIn, pos))
 		{
@@ -305,7 +305,7 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	public AxisAlignedBB getBoundingBox(BlockState state, IBlockReader source, BlockPos pos)
 	{
 		if (state.getValue(PROPERTY_HARVESTABLE))
 		{
@@ -337,7 +337,7 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
+	public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
 	{
 		if (worldIn.isAirBlock(pos.down()))
 		{
@@ -371,7 +371,7 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 	}
 
 	// pos should be set to the middle of the 3 states.
-	public void fullyGrowPlant(World worldIn, BlockPos pos, IBlockState state)
+	public void fullyGrowPlant(World worldIn, BlockPos pos, BlockState state)
 	{
 		worldIn.setBlockState(pos.down(),
 				this.getDefaultState().withProperty(PROPERTY_VARIANT, BASE_G).withProperty(PROPERTY_HARVESTABLE, true).withProperty(PROPERTY_AGE, 0));
@@ -382,7 +382,7 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 
 	}
 
-	public void fullyPrunePlant(World worldIn, BlockPos pos, IBlockState state)
+	public void fullyPrunePlant(World worldIn, BlockPos pos, BlockState state)
 	{
 		worldIn.setBlockState(pos.down(),
 				this.getDefaultState().withProperty(PROPERTY_VARIANT, BASE).withProperty(PROPERTY_HARVESTABLE, false).withProperty(PROPERTY_AGE, 0));

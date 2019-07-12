@@ -4,12 +4,12 @@ import com.gildedgames.aether.api.entity.damage.IDamageLevelsHolder;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.world.World;
 
 public class EntityDart extends EntityArrow implements IDamageLevelsHolder
@@ -21,7 +21,7 @@ public class EntityDart extends EntityArrow implements IDamageLevelsHolder
 		super(worldIn);
 	}
 
-	public EntityDart(World worldIn, EntityLivingBase shooter)
+	public EntityDart(World worldIn, LivingEntity shooter)
 	{
 		super(worldIn, shooter);
 	}
@@ -33,21 +33,21 @@ public class EntityDart extends EntityArrow implements IDamageLevelsHolder
 	}
 
 	@Override
-	public void onUpdate()
+	public void livingTick()
 	{
-		super.onUpdate();
+		super.livingTick();
 
 		if (this.world.isRemote && this.world.getWorldTime() % 3 == 0)
 		{
 			if (this.getDartType() == ItemDartType.ENCHANTED)
 			{
-				this.world.spawnParticle(EnumParticleTypes.CRIT_MAGIC, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
+				this.world.spawnParticle(ParticleTypes.CRIT_MAGIC, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
 			}
 		}
 	}
 
 	@Override
-	protected void arrowHit(EntityLivingBase entity)
+	protected void arrowHit(LivingEntity entity)
 	{
 		if (this.getDartType() == ItemDartType.POISON)
 		{
@@ -58,7 +58,7 @@ public class EntityDart extends EntityArrow implements IDamageLevelsHolder
 	@Override
 	protected void entityInit()
 	{
-		super.entityInit();
+		super.registerData();
 
 		this.dataManager.register(TYPE, (byte) 0);
 	}

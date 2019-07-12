@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.world.island;
 
 import com.gildedgames.aether.api.world.noise.INoiseTransformer;
 import com.gildedgames.orbis.lib.util.mc.NBT;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 
 public class IslandVariables implements NBT
 {
@@ -270,29 +270,29 @@ public class IslandVariables implements NBT
 	}
 
 	@Override
-	public void write(NBTTagCompound tag)
+	public void write(CompoundNBT tag)
 	{
-		tag.setInteger("coastHeight", this.coastHeight);
-		tag.setDouble("coastSpread", this.coastSpread);
-		tag.setDouble("lakeScale", this.lakeScale);
-		tag.setDouble("lakeBlendRange", this.lakeBlendRange);
-		tag.setDouble("lakeThreshold", this.lakeThreshold);
-		tag.setInteger("maxTerrainHeight", this.maxTerrainHeight);
-		tag.setBoolean("terraces", this.terraces);
-		tag.setInteger("lakeDepth", this.lakeDepth);
+		tag.putInt("coastHeight", this.coastHeight);
+		tag.putDouble("coastSpread", this.coastSpread);
+		tag.putDouble("lakeScale", this.lakeScale);
+		tag.putDouble("lakeBlendRange", this.lakeBlendRange);
+		tag.putDouble("lakeThreshold", this.lakeThreshold);
+		tag.putInt("maxTerrainHeight", this.maxTerrainHeight);
+		tag.putBoolean("terraces", this.terraces);
+		tag.putInt("lakeDepth", this.lakeDepth);
 	}
 
 	@Override
-	public void read(NBTTagCompound tag)
+	public void read(CompoundNBT tag)
 	{
-		this.coastHeight = tag.getInteger("coastHeight");
+		this.coastHeight = tag.getInt("coastHeight");
 		this.coastSpread = tag.getDouble("coastSpread");
 		this.lakeScale = tag.getDouble("lakeScale");
 		this.lakeBlendRange = tag.getDouble("lakeBlendRange");
 		this.lakeThreshold = tag.getDouble("lakeThreshold");
-		this.maxTerrainHeight = tag.getInteger("maxTerrainHeight");
+		this.maxTerrainHeight = tag.getInt("maxTerrainHeight");
 		this.terraces = tag.getBoolean("terraces");
-		this.lakeDepth = tag.getInteger("lakeDepth");
+		this.lakeDepth = tag.getInt("lakeDepth");
 	}
 
 	public interface MaxYFilter

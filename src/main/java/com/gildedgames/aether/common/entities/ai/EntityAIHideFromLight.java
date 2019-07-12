@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.entities.ai;
 
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -9,12 +9,12 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class EntityAIHideFromLight extends EntityAIBase
+public class EntityAIHideFromLight extends Goal
 {
 
 	private final float movementSpeed;
 
-	private final EntityCreature entity;
+	private final CreatureEntity entity;
 
 	private final int lightLevel;
 
@@ -26,7 +26,7 @@ public class EntityAIHideFromLight extends EntityAIBase
 
 	private boolean enabled;
 
-	public EntityAIHideFromLight(final EntityCreature entity, final float movementSpeed, final int lightLevel)
+	public EntityAIHideFromLight(final CreatureEntity entity, final float movementSpeed, final int lightLevel)
 	{
 		this.entity = entity;
 		this.movementSpeed = movementSpeed;
@@ -50,12 +50,12 @@ public class EntityAIHideFromLight extends EntityAIBase
 		{
 			return false;
 		}
-		else if (!world.canSeeSky(new BlockPos(this.entity.posX, this.entity.getEntityBoundingBox().minY, this.entity.posZ)))
+		else if (!world.canSeeSky(new BlockPos(this.entity.posX, this.entity.getBoundingBox().minY, this.entity.posZ)))
 		{
 			return false;
 		}
 
-		final BlockPos entityPos = new BlockPos(this.entity.posX, this.entity.getEntityBoundingBox().minY, this.entity.posZ);
+		final BlockPos entityPos = new BlockPos(this.entity.posX, this.entity.getBoundingBox().minY, this.entity.posZ);
 
 		if (this.entity.world.getLightFromNeighbors(entityPos) <= this.lightLevel)
 		{
@@ -94,7 +94,7 @@ public class EntityAIHideFromLight extends EntityAIBase
 	private Vec3d findPossibleShelter()
 	{
 		final Random random = this.entity.getRNG();
-		final BlockPos blockpos = new BlockPos(this.entity.posX, this.entity.getEntityBoundingBox().minY, this.entity.posZ);
+		final BlockPos blockpos = new BlockPos(this.entity.posX, this.entity.getBoundingBox().minY, this.entity.posZ);
 
 		for (int i = 0; i < 10; ++i)
 		{

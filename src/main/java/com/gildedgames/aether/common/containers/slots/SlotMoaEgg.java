@@ -4,13 +4,13 @@ import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.tiles.TileEntityIncubator;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.TextureStitchEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
 
 import javax.annotation.Nonnull;
 
@@ -24,7 +24,7 @@ public class SlotMoaEgg extends Slot
 		super(inventoryIn, index, xPosition, yPosition);
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static void registerIcons(TextureStitchEvent.Pre event)
 	{
 		sprite = event.getMap().registerSprite(AetherCore.getResource("gui/slots/slot_moa_egg"));
@@ -51,13 +51,13 @@ public class SlotMoaEgg extends Slot
 	}
 
 	@Override
-	public boolean canTakeStack(EntityPlayer playerIn)
+	public boolean canTakeStack(PlayerEntity playerIn)
 	{
 		return false;
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public TextureAtlasSprite getBackgroundSprite()
 	{
 		return sprite;

@@ -4,7 +4,7 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTradeModule;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 public class PacketSendInventorySize implements IMessage
@@ -36,7 +36,7 @@ public class PacketSendInventorySize implements IMessage
 	public static class HandlerClient extends MessageHandlerClient<PacketSendInventorySize, IMessage>
 	{
 		@Override
-		public IMessage onMessage(PacketSendInventorySize message, EntityPlayer player)
+		public IMessage onMessage(PacketSendInventorySize message, PlayerEntity player)
 		{
 			PlayerAether aePlayer = PlayerAether.getPlayer(player);
 

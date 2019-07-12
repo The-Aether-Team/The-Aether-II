@@ -1,16 +1,16 @@
 package com.gildedgames.aether.common.world.spawning.conditions;
 
 import com.gildedgames.aether.api.world.spawn.conditions.IConditionPosition;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class CheckBlockStateUnderneath implements IConditionPosition
 {
 
-	private final IBlockState[] statesToCheckFor;
+	private final BlockState[] statesToCheckFor;
 
-	public CheckBlockStateUnderneath(IBlockState... statesToCheckFor)
+	public CheckBlockStateUnderneath(BlockState... statesToCheckFor)
 	{
 		this.statesToCheckFor = statesToCheckFor;
 	}
@@ -18,9 +18,9 @@ public class CheckBlockStateUnderneath implements IConditionPosition
 	@Override
 	public boolean isMet(World world, BlockPos spawnAt, BlockPos underneath)
 	{
-		for (IBlockState state : this.statesToCheckFor)
+		for (BlockState state : this.statesToCheckFor)
 		{
-			IBlockState check = world.getBlockState(underneath);
+			BlockState check = world.getBlockState(underneath);
 
 			if (state == check)
 			{

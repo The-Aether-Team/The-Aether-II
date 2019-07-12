@@ -5,7 +5,7 @@ import com.gildedgames.aether.api.world.decoration.WorldDecoration;
 import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.orbis.lib.util.mc.NBT;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -41,7 +41,7 @@ public abstract class BiomeAetherBase extends Biome
 		return this.biomeDecorator;
 	}
 
-	public abstract IBlockState getCoastalBlock();
+	public abstract BlockState getCoastalBlock();
 
 	@Override
 	public final WorldGenAbstractTree getRandomTreeFeature(final Random random)

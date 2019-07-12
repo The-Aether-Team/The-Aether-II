@@ -6,14 +6,14 @@ import com.gildedgames.aether.client.gui.container.guidebook.AbstractGuidebookPa
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.inventory.GuiInventory;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec2f;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class TabGuidebook implements ITab
 {
@@ -24,7 +24,7 @@ public class TabGuidebook implements ITab
 	}
 
 	@Override
-	public void onOpen(EntityPlayer player)
+	public void onOpen(PlayerEntity player)
 	{
 		BlockPos pos = player.getPosition();
 
@@ -34,7 +34,7 @@ public class TabGuidebook implements ITab
 	@Override
 	public boolean isEnabled()
 	{
-		return !(Minecraft.getMinecraft().currentScreen instanceof AbstractGuidebookPage);
+		return !(Minecraft.getInstance().currentScreen instanceof AbstractGuidebookPage);
 	}
 
 	@Override
@@ -43,19 +43,19 @@ public class TabGuidebook implements ITab
 		return true;
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static class Client extends TabGuidebook implements ITabClient
 	{
 		private static final ResourceLocation ICON = AetherCore.getResource("textures/gui/tabs/equipment.png");
 
 		@Override
-		public boolean isTabValid(GuiScreen gui)
+		public boolean isTabValid(Screen gui)
 		{
 			return gui instanceof GuiInventory || gui instanceof AbstractGuidebookPage;
 		}
 
 		@Override
-		public void onClose(EntityPlayer player)
+		public void onClose(PlayerEntity player)
 		{
 		}
 

@@ -10,21 +10,21 @@ import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemCrossbow;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
-import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.potion.Effects;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 
-@Mod.EventBusSubscriber(Side.CLIENT)
+@Mod.EventBusSubscriber(Dist.CLIENT)
 public class GuiHudListener
 {
-	private static final Minecraft mc = Minecraft.getMinecraft();
+	private static final Minecraft mc = Minecraft.getInstance();
 
 	private static final DamageSystemOverlay DAMAGE_SYSTEM_OVERLAY = new DamageSystemOverlay();
 
@@ -42,15 +42,15 @@ public class GuiHudListener
 	{
 		if (event.phase == TickEvent.Phase.END)
 		{
-			Minecraft mc = Minecraft.getMinecraft();
+			Minecraft mc = Minecraft.getInstance();
 
 			if (mc.world != null && mc.player != null)
 			{
-				final ItemStack ammoStack = mc.player.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND);
+				final ItemStack ammoStack = mc.player.getItemStackFromSlot(EquipmentSlotType.OFFHAND);
 
 				if (ammoStack.getItem() == ItemsAether.bolt && ammoStack.getCount() > 0 && mc.player.getHeldItemMainhand().getItem() instanceof ItemCrossbow)
 				{
-					ItemBoltType type = ItemCrossbow.BOLT_TYPES[ammoStack.getItemDamage()];
+					ItemBoltType type = ItemCrossbow.BOLT_TYPES[ammoStack.getDamage()];
 
 					DAMAGE_SYSTEM_OVERLAY.setSlashModifier(type.getSlashDamageLevel());
 					DAMAGE_SYSTEM_OVERLAY.setPierceModifier(type.getPierceDamageLevel());
@@ -58,7 +58,7 @@ public class GuiHudListener
 				}
 				else if (mc.player.getHeldItemMainhand().getItem() == ItemsAether.dart_shooter && mc.player.getHeldItemMainhand().getCount() > 0)
 				{
-					ItemDartType type = ItemDart.ITEM_VARIANTS[mc.player.getHeldItemMainhand().getItemDamage()];
+					ItemDartType type = ItemDart.ITEM_VARIANTS[mc.player.getHeldItemMainhand().getDamage()];
 
 					DAMAGE_SYSTEM_OVERLAY.setSlashModifier(type.getSlashDamageLevel());
 					DAMAGE_SYSTEM_OVERLAY.setPierceModifier(type.getPierceDamageLevel());
@@ -135,9 +135,9 @@ public class GuiHudListener
 	{
 		if (event.getType() == RenderGameOverlayEvent.ElementType.AIR)
 		{
-			final EntityPlayer player = Minecraft.getMinecraft().player;
+			final PlayerEntity player = Minecraft.getInstance().player;
 
-			if (player.getAir() == 300 && player.isPotionActive(MobEffects.WATER_BREATHING))
+			if (player.getAir() == 300 && player.isPotionActive(Effects.WATER_BREATHING))
 			{
 				event.setCanceled(true);
 			}

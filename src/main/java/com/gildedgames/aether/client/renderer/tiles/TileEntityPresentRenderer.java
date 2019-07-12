@@ -4,7 +4,7 @@ import com.gildedgames.aether.client.models.entities.tile.ModelPresent;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.tiles.TileEntityPresent;
 import com.gildedgames.aether.common.items.blocks.ItemBlockPresent;
-import net.minecraft.client.renderer.GlStateManager;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
 
@@ -56,7 +56,7 @@ public class TileEntityPresentRenderer extends TileEntitySpecialRenderer<TileEnt
 
 		GlStateManager.enableRescaleNormal();
 
-		GlStateManager.translate((float) x + 0.5f, (float) y, (float) z + 0.5f);
+		GlStateManager.translatef((float) x + 0.5f, (float) y, (float) z + 0.5f);
 
 		if (present != null)
 		{
@@ -66,15 +66,15 @@ public class TileEntityPresentRenderer extends TileEntitySpecialRenderer<TileEnt
 			final float scale = 1f + ((this.random.nextFloat() * 0.1f) - 0.1f);
 			final float rotate = this.random.nextFloat() * 180f;
 
-			GlStateManager.translate(offset, 0, offset);
-			GlStateManager.rotate(180f, 1f, 0f, 1f);
-			GlStateManager.rotate(rotate, 0f, 1f, 0f);
-			GlStateManager.scale(scale, scale, scale);
+			GlStateManager.translatef(offset, 0, offset);
+			GlStateManager.rotatef(180f, 1f, 0f, 1f);
+			GlStateManager.rotatef(rotate, 0f, 1f, 0f);
+			GlStateManager.scalef(scale, scale, scale);
 		}
 		else
 		{
-			GlStateManager.rotate(180f, 1.0f, 0f, 0.4f);
-			GlStateManager.scale(1.5F, 1.5F, 1.5F);
+			GlStateManager.rotatef(180f, 1.0f, 0f, 0.4f);
+			GlStateManager.scalef(1.5F, 1.5F, 1.5F);
 		}
 
 		this.bindTexture(boxTextures[boxColor]);

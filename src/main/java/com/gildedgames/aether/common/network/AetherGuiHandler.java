@@ -29,17 +29,17 @@ import com.gildedgames.aether.common.containers.tiles.ContainerIcestoneCooler;
 import com.gildedgames.aether.common.containers.tiles.ContainerIncubator;
 import com.gildedgames.aether.common.dialog.DialogUtil;
 import com.gildedgames.orbis.lib.client.gui.util.gui_library.GuiViewer;
-import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.inventory.GuiCrafting;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.network.IGuiHandler;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class AetherGuiHandler implements IGuiHandler
 {
@@ -73,7 +73,7 @@ public class AetherGuiHandler implements IGuiHandler
 	public static final int TRADE_ID = 14;
 
 	@Override
-	public Container getServerGuiElement(final int id, final EntityPlayer player, final World world, final int x, final int y, final int z)
+	public Container getServerGuiElement(final int id, final PlayerEntity player, final World world, final int x, final int y, final int z)
 	{
 		final BlockPos pos = new BlockPos(x, y, z);
 		PlayerAether playerAether = PlayerAether.getPlayer(player);
@@ -135,8 +135,8 @@ public class AetherGuiHandler implements IGuiHandler
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public GuiContainer getClientGuiElement(final int id, final EntityPlayer player, final World world, final int x, final int y, final int z)
+	@OnlyIn(Dist.CLIENT)
+	public ContainerScreen getClientGuiElement(final int id, final PlayerEntity player, final World world, final int x, final int y, final int z)
 	{
 		final BlockPos pos = new BlockPos(x, y, z);
 		PlayerAether playerAether = PlayerAether.getPlayer(player);

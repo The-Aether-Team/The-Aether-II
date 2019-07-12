@@ -4,12 +4,12 @@ import com.gildedgames.aether.api.entity.IEntityEyesComponent;
 import com.gildedgames.aether.common.entities.util.eyes.IEntityEyesComponentProvider;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import com.google.common.collect.Lists;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.entity.model.RendererModel;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 
@@ -17,10 +17,10 @@ import java.util.List;
 
 public class EyeUtil
 {
-	private static final List<ModelRenderer> boxesToUnhide = Lists.newArrayList();
+	private static final List<RendererModel> boxesToUnhide = Lists.newArrayList();
 
-	public static <T extends ModelBase> void renderEyes(RenderManager renderManager, T model, ModelRenderer eyeModel,
-			EntityLivingBase entity, float limbSwing,
+	public static <T extends EntityModel> void renderEyes(EntityRendererManager renderManager, T model, RendererModel eyeModel,
+			LivingEntity entity, float limbSwing,
 			float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale, ResourceLocation pupilLeft, ResourceLocation pupilRight,
 			ResourceLocation eyesClosed, boolean eyeTracking)
 	{
@@ -29,11 +29,11 @@ public class EyeUtil
 				eyesClosed, eyeTracking);
 	}
 
-	public static boolean modelContains(ModelRenderer model, ModelRenderer part)
+	public static boolean modelContains(RendererModel model, RendererModel part)
 	{
 		if (model.childModels != null)
 		{
-			for (ModelRenderer child : model.childModels)
+			for (RendererModel child : model.childModels)
 			{
 				if (child == part)
 				{
@@ -50,12 +50,12 @@ public class EyeUtil
 		return false;
 	}
 
-	public static <T extends ModelBase> void renderEyes(RenderManager renderManager, T model, ModelRenderer leftEye, ModelRenderer rightEye,
-			EntityLivingBase entity, float limbSwing,
+	public static <T extends EntityModel> void renderEyes(EntityRendererManager renderManager, T model, RendererModel leftEye, RendererModel rightEye,
+			LivingEntity entity, float limbSwing,
 			float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale, ResourceLocation pupilLeft, ResourceLocation pupilRight,
 			ResourceLocation eyesClosed, boolean eyeTracking)
 	{
-		for (ModelRenderer box : model.boxList)
+		for (RendererModel box : model.boxList)
 		{
 			if (!box.isHidden)
 			{
@@ -154,7 +154,7 @@ public class EyeUtil
 			throw new IllegalStateException("Entity " + entity + " does not implement IEntityEyesComponent");
 		}
 
-		for (ModelRenderer box : boxesToUnhide)
+		for (RendererModel box : boxesToUnhide)
 		{
 			box.isHidden = false;
 		}
@@ -163,10 +163,10 @@ public class EyeUtil
 	}
 
 	public static <T extends ModelBaseAether> void renderEyesFast(T model, ModelRendererAether leftEye, ModelRendererAether rightEye,
-			EntityLivingBase entity, float scale, ResourceLocation pupilLeft, ResourceLocation pupilRight, ResourceLocation eyesClosed,
+			LivingEntity entity, float scale, ResourceLocation pupilLeft, ResourceLocation pupilRight, ResourceLocation eyesClosed,
 			ResourceLocation beforeTexture, boolean eyeTracking)
 	{
-		RenderManager renderManager = Minecraft.getMinecraft().getRenderManager();
+		EntityRendererManager renderManager = Minecraft.getInstance().getRenderManager();
 
 		if (entity instanceof IEntityEyesComponentProvider)
 		{

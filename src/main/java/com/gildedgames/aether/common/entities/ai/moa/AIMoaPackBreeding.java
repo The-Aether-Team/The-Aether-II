@@ -6,21 +6,21 @@ import com.gildedgames.aether.common.entities.animals.EntityMoa;
 import com.gildedgames.aether.common.entities.genes.AnimalGender;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.tiles.TileEntityMoaEgg;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.pathfinding.Path;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class AIMoaPackBreeding extends EntityAIBase
+public class AIMoaPackBreeding extends Goal
 {
 
 	public final World world;
 
 	public final EntityMoa moa;
 
-	public EntityLiving packLeader;
+	public MobEntity packLeader;
 
 	public final float moveSpeed;
 

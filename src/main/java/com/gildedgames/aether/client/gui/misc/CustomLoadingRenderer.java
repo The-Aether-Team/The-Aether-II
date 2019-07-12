@@ -1,9 +1,9 @@
 package com.gildedgames.aether.client.gui.misc;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.LoadingScreenRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.shader.Framebuffer;
 
@@ -122,7 +122,7 @@ public class CustomLoadingRenderer extends LoadingScreenRenderer
 			GlStateManager.ortho(0.0D, scaledresolution.getScaledWidth_double(), scaledresolution.getScaledHeight_double(), 0.0D, 100.0D, 300.0D);
 			GlStateManager.matrixMode(5888);
 			GlStateManager.loadIdentity();
-			GlStateManager.translate(0.0F, 0.0F, -200.0F);
+			GlStateManager.translatef(0.0F, 0.0F, -200.0F);
 
 			if (!OpenGlHelper.isFramebufferEnabled())
 			{

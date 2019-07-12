@@ -4,19 +4,19 @@ import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.blocks.decorative.BlockSkyrootDecorative;
 import com.gildedgames.aether.common.blocks.decorative.BlockTherastoneDecorative;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.*;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemMonsterPlacer;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class CreativeTabsAether
 {
-	public static final CreativeTabs TAB_NATURAL_BLOCKS = new CreativeTabs("aether.natural_blocks")
+	public static final ItemGroup TAB_NATURAL_BLOCKS = new ItemGroup("aether.natural_blocks")
 	{
 		@Override
 		public ItemStack createIcon()
@@ -25,7 +25,7 @@ public class CreativeTabsAether
 		}
 	};
 
-	public static final CreativeTabs TAB_CONSTRUCTION = new CreativeTabs("aether.construction")
+	public static final ItemGroup TAB_CONSTRUCTION = new ItemGroup("aether.construction")
 	{
 		@Override
 		public ItemStack createIcon()
@@ -34,7 +34,7 @@ public class CreativeTabsAether
 		}
 	};
 
-	public static final CreativeTabs TAB_UTILITY = new CreativeTabs("aether.utility_blocks")
+	public static final ItemGroup TAB_UTILITY = new ItemGroup("aether.utility_blocks")
 	{
 		@Override
 		public ItemStack createIcon()
@@ -43,7 +43,7 @@ public class CreativeTabsAether
 		}
 	};
 
-	public static final CreativeTabs TAB_DECORATIVE_BLOCKS = new CreativeTabs("aether.visual_variants")
+	public static final ItemGroup TAB_DECORATIVE_BLOCKS = new ItemGroup("aether.visual_variants")
 	{
 		@Override
 		public ItemStack createIcon()
@@ -52,7 +52,7 @@ public class CreativeTabsAether
 		}
 	};
 
-	public static final CreativeTabs TAB_MISCELLANEOUS = new CreativeTabsMisc("aether.miscellaneous")
+	public static final ItemGroup TAB_MISCELLANEOUS = new CreativeTabsMisc("aether.miscellaneous")
 	{
 		@Override
 		public ItemStack createIcon()
@@ -61,7 +61,7 @@ public class CreativeTabsAether
 		}
 	};
 
-	public static final CreativeTabs TAB_MATERIALS = new CreativeTabs("aether.materials")
+	public static final ItemGroup TAB_MATERIALS = new ItemGroup("aether.materials")
 	{
 		@Override
 		public ItemStack createIcon()
@@ -70,7 +70,7 @@ public class CreativeTabsAether
 		}
 	};
 
-	public static final CreativeTabs TAB_CONSUMABLES = new CreativeTabs("aether.consumables")
+	public static final ItemGroup TAB_CONSUMABLES = new ItemGroup("aether.consumables")
 	{
 		@Override
 		public ItemStack createIcon()
@@ -79,7 +79,7 @@ public class CreativeTabsAether
 		}
 	};
 
-	public static final CreativeTabs TAB_TOOLS = new CreativeTabs("aether.tools")
+	public static final ItemGroup TAB_TOOLS = new ItemGroup("aether.tools")
 	{
 		@Override
 		public ItemStack createIcon()
@@ -88,7 +88,7 @@ public class CreativeTabsAether
 		}
 	};
 
-	public static final CreativeTabs TAB_WEAPONS = new CreativeTabs("aether.weapons")
+	public static final ItemGroup TAB_WEAPONS = new ItemGroup("aether.weapons")
 	{
 		@Override
 		public ItemStack createIcon()
@@ -97,7 +97,7 @@ public class CreativeTabsAether
 		}
 	};
 
-	public static final CreativeTabs TAB_ARMOR = new CreativeTabs("aether.armor")
+	public static final ItemGroup TAB_ARMOR = new ItemGroup("aether.armor")
 	{
 		@Override
 		public ItemStack createIcon()
@@ -106,7 +106,7 @@ public class CreativeTabsAether
 		}
 	};
 
-	public static final CreativeTabs TAB_THERA = new CreativeTabs("aether.thera")
+	public static final ItemGroup TAB_THERA = new ItemGroup("aether.thera")
 	{
 		@Override
 		public ItemStack createIcon()
@@ -115,7 +115,7 @@ public class CreativeTabsAether
 		}
 	};
 
-	private static abstract class CreativeTabsMisc extends CreativeTabs
+	private static abstract class CreativeTabsMisc extends ItemGroup
 	{
 		private CreativeTabsMisc(final String unlocalizedName)
 		{
@@ -123,14 +123,14 @@ public class CreativeTabsAether
 		}
 
 		@Override
-		@SideOnly(Side.CLIENT)
+		@OnlyIn(Dist.CLIENT)
 		public void displayAllRelevantItems(final NonNullList<ItemStack> list)
 		{
 			super.displayAllRelevantItems(list);
 
 			list.sort((o1, o2) -> {
-				final boolean b1 = o1.getItem() instanceof ItemBlock;
-				final boolean b2 = o2.getItem() instanceof ItemBlock;
+				final boolean b1 = o1.getItem() instanceof BlockItem;
+				final boolean b2 = o2.getItem() instanceof BlockItem;
 
 				return (b2 == b1 ? 0 : (b1 ? 1 : -1));
 			});

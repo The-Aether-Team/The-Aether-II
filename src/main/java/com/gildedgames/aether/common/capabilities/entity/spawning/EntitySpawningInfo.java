@@ -2,9 +2,9 @@ package com.gildedgames.aether.common.capabilities.entity.spawning;
 
 import com.gildedgames.aether.api.entity.spawning.EntitySpawn;
 import com.gildedgames.aether.api.entity.spawning.ISpawningInfo;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.nbt.INBT;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 
 public class EntitySpawningInfo implements ISpawningInfo
@@ -32,33 +32,33 @@ public class EntitySpawningInfo implements ISpawningInfo
 	public static class Storage implements Capability.IStorage<ISpawningInfo>
 	{
 		@Override
-		public NBTBase writeNBT(Capability<ISpawningInfo> capability, ISpawningInfo instance, EnumFacing side)
+		public INBT writeNBT(Capability<ISpawningInfo> capability, ISpawningInfo instance, Direction side)
 		{
-			NBTTagCompound tag = new NBTTagCompound();
+			CompoundNBT tag = new CompoundNBT();
 
 			boolean hasSpawnArea = instance.getSpawnArea() != null;
 
-			tag.setBoolean("hasSpawnArea", hasSpawnArea);
+			tag.putBoolean("hasSpawnArea", hasSpawnArea);
 
 			if (hasSpawnArea)
 			{
-				tag.setString("uniqueID", instance.getSpawnArea().getSpawnHandlerUniqueID());
-				tag.setInteger("dim", instance.getSpawnArea().getDim());
-				tag.setInteger("areaX", instance.getSpawnArea().getAreaX());
-				tag.setInteger("areaZ", instance.getSpawnArea().getAreaZ());
+				tag.putString("uniqueID", instance.getSpawnArea().getSpawnHandlerUniqueID());
+				tag.putInt("dim", instance.getSpawnArea().getDim());
+				tag.putInt("areaX", instance.getSpawnArea().getAreaX());
+				tag.putInt("areaZ", instance.getSpawnArea().getAreaZ());
 			}
 
 			return tag;
 		}
 
 		@Override
-		public void readNBT(Capability<ISpawningInfo> capability, ISpawningInfo instance, EnumFacing side, NBTBase nbt)
+		public void readNBT(Capability<ISpawningInfo> capability, ISpawningInfo instance, Direction side, INBT nbt)
 		{
-			NBTTagCompound tag = (NBTTagCompound) nbt;
+			CompoundNBT tag = (CompoundNBT) nbt;
 
 			if (tag.getBoolean("hasSpawnArea"))
 			{
-				EntitySpawn spawnArea = new EntitySpawn(tag.getString("uniqueID"), tag.getInteger("dim"), tag.getInteger("areaX"), tag.getInteger("areaZ"));
+				EntitySpawn spawnArea = new EntitySpawn(tag.getString("uniqueID"), tag.getInt("dim"), tag.getInt("areaX"), tag.getInt("areaZ"));
 
 				instance.setSpawnArea(spawnArea);
 			}

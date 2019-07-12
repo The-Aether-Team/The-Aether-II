@@ -8,8 +8,8 @@ import com.gildedgames.aether.common.network.MessageHandlerClient;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Slot;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
@@ -42,7 +42,7 @@ public class PacketTradeState implements IMessage
 	public static class HandlerClient extends MessageHandlerClient<PacketTradeState, IMessage>
 	{
 		@Override
-		public IMessage onMessage(PacketTradeState message, EntityPlayer player)
+		public IMessage onMessage(PacketTradeState message, PlayerEntity player)
 		{
 			PlayerAether aePlayer = PlayerAether.getPlayer(player);
 
@@ -62,7 +62,7 @@ public class PacketTradeState implements IMessage
 	public static class HandlerServer extends MessageHandlerServer<PacketTradeState, IMessage>
 	{
 		@Override
-		public IMessage onMessage(PacketTradeState message, EntityPlayer player)
+		public IMessage onMessage(PacketTradeState message, PlayerEntity player)
 		{
 			PlayerAether aePlayer = PlayerAether.getPlayer(player);
 

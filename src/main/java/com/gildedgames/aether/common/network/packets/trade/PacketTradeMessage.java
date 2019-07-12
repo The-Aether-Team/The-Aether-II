@@ -9,7 +9,7 @@ import com.gildedgames.aether.common.network.NetworkingAether;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.*;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -25,7 +25,7 @@ public class PacketTradeMessage implements IMessage
 
 	}
 
-	public PacketTradeMessage(String message, EntityPlayer player)
+	public PacketTradeMessage(String message, PlayerEntity player)
 	{
 		this.text = message;
 		this.entityId = player.getEntityId();
@@ -53,22 +53,22 @@ public class PacketTradeMessage implements IMessage
 	public static class HandlerClient extends MessageHandlerClient<PacketTradeMessage, IMessage>
 	{
 		@Override
-		public IMessage onMessage(PacketTradeMessage message, EntityPlayer player)
+		public IMessage onMessage(PacketTradeMessage message, PlayerEntity player)
 		{
-			Minecraft mc = Minecraft.getMinecraft();
+			Minecraft mc = Minecraft.getInstance();
 
 			if (mc.currentScreen instanceof GuiTrade)
 			{
 				GuiTrade tradeGui = (GuiTrade) mc.currentScreen;
 				Entity entity = player.world.getEntityByID(message.entityId);
 
-				if (message.entityId != 0 && entity instanceof EntityPlayer)
+				if (message.entityId != 0 && entity instanceof PlayerEntity)
 				{
-					tradeGui.sendTradeMessage((EntityPlayer) entity, new TextComponentString(message.text));
+					tradeGui.sendTradeMessage((PlayerEntity) entity, new StringTextComponent(message.text));
 				}
 				else
 				{
-					ITextComponent comp = new TextComponentTranslation(message.text, tradeGui.getTrader());
+					ITextComponent comp = new TranslationTextComponent(message.text, tradeGui.getTrader());
 
 					comp.setStyle(new Style().setColor(message.text.endsWith("warn") ? TextFormatting.RED : message.text.endsWith("safe") ? TextFormatting.YELLOW : TextFormatting.AQUA));
 
@@ -83,7 +83,7 @@ public class PacketTradeMessage implements IMessage
 	public static class HandlerServer extends MessageHandlerServer<PacketTradeMessage, IMessage>
 	{
 		@Override
-		public IMessage onMessage(PacketTradeMessage message, EntityPlayer player)
+		public IMessage onMessage(PacketTradeMessage message, PlayerEntity player)
 		{
 			PlayerAether aePlayer = PlayerAether.getPlayer(player);
 

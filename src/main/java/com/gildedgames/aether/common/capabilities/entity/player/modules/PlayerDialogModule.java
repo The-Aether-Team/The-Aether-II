@@ -9,11 +9,11 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModu
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.dialog.*;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.apache.commons.lang3.Validate;
 
 import javax.annotation.Nullable;
@@ -51,7 +51,7 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 	}
 
 	@Override
-	public EntityPlayer getDialogPlayer()
+	public PlayerEntity getDialogPlayer()
 	{
 		return this.getEntity();
 	}
@@ -115,12 +115,12 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 		return this.sceneInstance;
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	private void openSceneClient(final ResourceLocation res, final IDialogScene scene, Map<String, Boolean> conditionsMet)
 	{
 		this.sceneInstance = new SceneInstance(this, scene, conditionsMet);
 
-		Minecraft.getMinecraft().displayGuiScreen(new GuiDialogViewer(Minecraft.getMinecraft().player, this, this.sceneInstance));
+		Minecraft.getInstance().displayGuiScreen(new GuiDialogViewer(Minecraft.getInstance().player, this, this.sceneInstance));
 	}
 
 	private void openSceneServer(final ResourceLocation res, final IDialogScene scene)
@@ -128,10 +128,10 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 		this.sceneInstance = new SceneInstance(this, scene);
 
 		NetworkingAether.sendPacketToPlayer(new PacketOpenDialog(res, scene.getStartingNode().getIdentifier(), this.sceneInstance.getConditionsMet()),
-				(EntityPlayerMP) this.getPlayer().getEntity());
+				(ServerPlayerEntity) this.getPlayer().getEntity());
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void navigateNodeClient(String nodeId)
 	{
 		if (this.sceneInstance.getNode() != null)
@@ -142,7 +142,7 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 		this.sceneInstance.navigate(nodeId);
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void navigateBackClient()
 	{
 		if (this.lastNodeId != null)
@@ -168,7 +168,7 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 
 			this.sceneInstance.navigate(nodeId);
 
-			NetworkingAether.sendPacketToPlayer(new PacketNavigateNode(nodeId), (EntityPlayerMP) this.getDialogPlayer());
+			NetworkingAether.sendPacketToPlayer(new PacketNavigateNode(nodeId), (ServerPlayerEntity) this.getDialogPlayer());
 		}
 	}
 
@@ -177,7 +177,7 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 	{
 		if (!this.getWorld().isRemote)
 		{
-			NetworkingAether.sendPacketToPlayer(new PacketNavigateBack(), (EntityPlayerMP) this.getDialogPlayer());
+			NetworkingAether.sendPacketToPlayer(new PacketNavigateBack(), (ServerPlayerEntity) this.getDialogPlayer());
 
 			if (this.lastNodeId != null)
 			{
@@ -254,7 +254,7 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 
 		if (!this.getWorld().isRemote)
 		{
-			NetworkingAether.sendPacketToPlayer(new PacketActivateButton(button.getLabel()), (EntityPlayerMP) this.getEntity());
+			NetworkingAether.sendPacketToPlayer(new PacketActivateButton(button.getLabel()), (ServerPlayerEntity) this.getEntity());
 
 			final Collection<IDialogAction> actions = button.getActions();
 
@@ -282,7 +282,7 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 		}
 		else
 		{
-			NetworkingAether.sendPacketToPlayer(new PacketAdvance(), (EntityPlayerMP) this.getDialogPlayer());
+			NetworkingAether.sendPacketToPlayer(new PacketAdvance(), (ServerPlayerEntity) this.getDialogPlayer());
 
 			if (this.sceneInstance != null)
 			{

@@ -16,7 +16,7 @@ import com.gildedgames.orbis.lib.util.io.NBTFunnel;
 import com.gildedgames.orbis.lib.util.mc.NBT;
 import com.gildedgames.orbis.lib.util.mc.NBTHelper;
 import com.google.common.collect.Lists;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -66,7 +66,7 @@ public class IslandData implements IIslandData
 		this.initProperties(new Random(seed));
 	}
 
-	public IslandData(final IPrepSectorData parent, NBTTagCompound tag)
+	public IslandData(final IPrepSectorData parent, CompoundNBT tag)
 	{
 		this.parent = parent;
 
@@ -210,12 +210,12 @@ public class IslandData implements IIslandData
 	}
 
 	@Override
-	public void write(final NBTTagCompound tag)
+	public void write(final CompoundNBT tag)
 	{
-		tag.setTag("Bounds", this.bounds.serialize());
-		tag.setString("BiomeID", this.biome.getRegistryName().toString());
-		tag.setLong("Seed", this.seed);
-		tag.setTag("RespawnPoint", NBTHelper.writeBlockPos(this.respawnPoint));
+		tag.put("Bounds", this.bounds.serialize());
+		tag.putString("BiomeID", this.biome.getRegistryName().toString());
+		tag.putLong("Seed", this.seed);
+		tag.put("RespawnPoint", NBTHelper.writeBlockPos(this.respawnPoint));
 
 		NBTFunnel funnel = new NBTFunnel(tag);
 
@@ -224,18 +224,18 @@ public class IslandData implements IIslandData
 	}
 
 	@Override
-	public void read(final NBTTagCompound tag)
+	public void read(final CompoundNBT tag)
 	{
-		this.bounds = new IslandBounds(tag.getCompoundTag("Bounds"));
+		this.bounds = new IslandBounds(tag.getCompound("Bounds"));
 		this.biome = (BiomeAetherBase) Biome.REGISTRY.getObject(new ResourceLocation(tag.getString("BiomeID")));
 
 		final NBTFunnel funnel = new NBTFunnel(tag);
 
 		this.seed = tag.getLong("Seed");
 
-		if (tag.hasKey("RespawnPoint"))
+		if (tag.contains("RespawnPoint"))
 		{
-			this.respawnPoint = NBTHelper.readBlockPos(tag.getCompoundTag("RespawnPoint"));
+			this.respawnPoint = NBTHelper.readBlockPos(tag.getCompound("RespawnPoint"));
 		}
 
 		this.placedBlueprints = ChunkMap.createFrom(funnel.getLongMap("placedBlueprints", NBTFunnel.listGetter()));

@@ -2,18 +2,18 @@ package com.gildedgames.aether.common.blocks.multiblock;
 
 import com.gildedgames.aether.common.blocks.IInternalBlock;
 import com.gildedgames.aether.common.entities.tiles.multiblock.TileEntityMultiblockDummy;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.BlockFaceShape;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumBlockRenderType;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
+import net.minecraft.block.BlockRenderType;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class BlockMultiDummyHalf extends BlockMultiBase implements IInternalBlock
 {
@@ -30,10 +30,10 @@ public class BlockMultiDummyHalf extends BlockMultiBase implements IInternalBloc
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public EnumBlockRenderType getRenderType(final IBlockState state)
+	@OnlyIn(Dist.CLIENT)
+	public BlockRenderType getRenderType(final BlockState state)
 	{
-		return EnumBlockRenderType.INVISIBLE;
+		return BlockRenderType.INVISIBLE;
 	}
 
 	@Override
@@ -43,40 +43,40 @@ public class BlockMultiDummyHalf extends BlockMultiBase implements IInternalBloc
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(final IBlockState state, final IBlockAccess source, final BlockPos pos)
+	public AxisAlignedBB getBoundingBox(final BlockState state, final IBlockReader source, final BlockPos pos)
 	{
 		return AABB;
 	}
 
 	@Override
 	@Deprecated
-	public boolean isFullBlock(final IBlockState state)
+	public boolean isFullBlock(final BlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube(final IBlockState state)
+	public boolean isFullCube(final BlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isOpaqueCube(final IBlockState state)
+	public boolean isOpaqueCube(final BlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean doesSideBlockRendering(final IBlockState state, final IBlockAccess world, final BlockPos pos, final EnumFacing face)
+	public boolean doesSideBlockRendering(final BlockState state, final IBlockReader world, final BlockPos pos, final Direction face)
 	{
 		return false;
 	}
 
 	@Override
-	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
+	public VoxelShape getBlockFaceShape(IBlockReader worldIn, BlockState state, BlockPos pos, Direction face)
 	{
-		return BlockFaceShape.UNDEFINED;
+		return VoxelShape.UNDEFINED;
 	}
 
 }

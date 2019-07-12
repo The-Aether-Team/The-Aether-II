@@ -4,18 +4,18 @@ import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import com.gildedgames.aether.common.util.helpers.WorldUtil;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class EntityAIUnstuckBlueAercloud extends EntityAIBase
+public class EntityAIUnstuckBlueAercloud extends Goal
 {
 
-	private final EntityCreature entity;
+	private final CreatureEntity entity;
 
 	private double targetX;
 
@@ -23,7 +23,7 @@ public class EntityAIUnstuckBlueAercloud extends EntityAIBase
 
 	private double targetZ;
 
-	public EntityAIUnstuckBlueAercloud(EntityCreature entity)
+	public EntityAIUnstuckBlueAercloud(CreatureEntity entity)
 	{
 		this.entity = entity;
 
@@ -38,7 +38,7 @@ public class EntityAIUnstuckBlueAercloud extends EntityAIBase
 			return false;
 		}
 
-		if (!WorldUtil.isBlockBelowAABB(this.entity.getEntityBoundingBox(), this.entity.world,
+		if (!WorldUtil.isBlockBelowAABB(this.entity.getBoundingBox(), this.entity.world,
 				BlocksAether.aercloud.getStateFromMeta(BlockAercloud.BLUE_AERCLOUD.getMeta())))
 		{
 			return false;
@@ -63,7 +63,7 @@ public class EntityAIUnstuckBlueAercloud extends EntityAIBase
 	@Override
 	public boolean shouldContinueExecuting()
 	{
-		return WorldUtil.isBlockBelowAABB(this.entity.getEntityBoundingBox(), this.entity.world,
+		return WorldUtil.isBlockBelowAABB(this.entity.getBoundingBox(), this.entity.world,
 				BlocksAether.aercloud.getStateFromMeta(BlockAercloud.BLUE_AERCLOUD.getMeta()));
 	}
 
@@ -78,7 +78,7 @@ public class EntityAIUnstuckBlueAercloud extends EntityAIBase
 	private Vec3d findPossibleEscape()
 	{
 		Random random = this.entity.getRNG();
-		BlockPos blockpos = new BlockPos(this.entity.posX, this.entity.getEntityBoundingBox().minY, this.entity.posZ);
+		BlockPos blockpos = new BlockPos(this.entity.posX, this.entity.getBoundingBox().minY, this.entity.posZ);
 
 		for (int i = 0; i < 10; ++i)
 		{

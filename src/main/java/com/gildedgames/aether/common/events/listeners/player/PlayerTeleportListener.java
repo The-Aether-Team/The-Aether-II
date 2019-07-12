@@ -15,16 +15,16 @@ import com.gildedgames.aether.common.util.helpers.MathUtil;
 import com.gildedgames.aether.common.world.preparation.PrepHelper;
 import com.gildedgames.orbis.lib.util.mc.BlockPosDimension;
 import com.google.common.collect.Lists;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import java.util.List;
@@ -38,7 +38,7 @@ public class PlayerTeleportListener
 	{
 		if (AetherHelper.isEnabled(event.getDimension()) && AetherHelper.isEnabled(event.getDimension()))
 		{
-			PlayerAether playerAether = PlayerAether.getPlayer((EntityPlayer) event.getEntity());
+			PlayerAether playerAether = PlayerAether.getPlayer((PlayerEntity) event.getEntity());
 
 			if (!AetherHelper.isNecromancerTower(event.getEntity().dimension))
 			{
@@ -53,9 +53,9 @@ public class PlayerTeleportListener
 	{
 		if (!event.getEntity().getEntityWorld().isRemote)
 		{
-			if (event.getEntity() instanceof EntityPlayer)
+			if (event.getEntity() instanceof PlayerEntity)
 			{
-				EntityPlayer player = (EntityPlayer) event.getEntity();
+				PlayerEntity player = (PlayerEntity) event.getEntity();
 
 				player.openGui(AetherCore.INSTANCE, AetherGuiHandler.AETHER_LOADING_ID, player.getEntityWorld(), player.getPosition().getX(),
 						player.getPosition().getY(), player.getPosition().getZ());
@@ -66,9 +66,9 @@ public class PlayerTeleportListener
 	@SubscribeEvent
 	public static void onEvent(LivingEvent.LivingUpdateEvent event)
 	{
-		if (!event.getEntity().getEntityWorld().isRemote && event.getEntity() instanceof EntityPlayer)
+		if (!event.getEntity().getEntityWorld().isRemote && event.getEntity() instanceof PlayerEntity)
 		{
-			EntityPlayer player = (EntityPlayer) event.getEntity();
+			PlayerEntity player = (PlayerEntity) event.getEntity();
 			PlayerAether playerAether = PlayerAether.getPlayer(player);
 
 			if (player.getEntityWorld().provider.getDimensionType() != DimensionsAether.AETHER)
@@ -109,9 +109,9 @@ public class PlayerTeleportListener
 					{
 						player.closeScreen();
 
-						NetworkingAether.sendPacketToPlayer(new PacketCloseLoadingScreen(), (EntityPlayerMP) player);
+						NetworkingAether.sendPacketToPlayer(new PacketCloseLoadingScreen(), (ServerPlayerEntity) player);
 
-						NetworkingAether.sendPacketToPlayer(new PacketLoadingScreenPercent(0.0F), (EntityPlayerMP) player);
+						NetworkingAether.sendPacketToPlayer(new PacketLoadingScreenPercent(0.0F), (ServerPlayerEntity) player);
 
 						List<IRecipe> toUnlock = Lists.newArrayList();
 
@@ -137,7 +137,7 @@ public class PlayerTeleportListener
 						{
 							teleportingModule.setLastPercent(percent);
 
-							NetworkingAether.sendPacketToPlayer(new PacketLoadingScreenPercent(percent), (EntityPlayerMP) player);
+							NetworkingAether.sendPacketToPlayer(new PacketLoadingScreenPercent(percent), (ServerPlayerEntity) player);
 						}
 					}
 				}

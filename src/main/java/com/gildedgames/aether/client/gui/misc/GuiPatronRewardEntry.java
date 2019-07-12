@@ -9,7 +9,7 @@ import com.gildedgames.orbis.lib.client.gui.util.gui_library.GuiElement;
 import com.gildedgames.orbis.lib.client.rect.Dim2D;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.StringTextComponent;
 
 public class GuiPatronRewardEntry extends GuiElement
 {
@@ -54,7 +54,7 @@ public class GuiPatronRewardEntry extends GuiElement
 
 		GuiText text = new GuiText(
 				Dim2D.build().centerY(true).x(25).y(this.dim().originalState().height() / 2).addY(2).flush(),
-				new Text(new TextComponentString(I18n.format(this.name)), 1.0F));
+				new Text(new StringTextComponent(I18n.format(this.name)), 1.0F));
 
 		this.context().addChildren(this.button, text, icon);
 	}

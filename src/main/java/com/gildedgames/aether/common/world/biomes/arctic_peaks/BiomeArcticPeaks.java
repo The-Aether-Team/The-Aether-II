@@ -26,13 +26,13 @@ import com.gildedgames.orbis.lib.core.BlueprintDefinition;
 import com.gildedgames.orbis.lib.util.mc.NBT;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -50,7 +50,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase implements ISnowyBiome
 	}
 
 	@Override
-	public IBlockState getCoastalBlock()
+	public BlockState getCoastalBlock()
 	{
 		return BlocksAether.highlands_packed_ice.getDefaultState();
 	}
@@ -161,7 +161,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase implements ISnowyBiome
 
 					if (heightSample > 0.5)
 					{
-						final IBlockState state = world.getBlockState(blockpos1);
+						final BlockState state = world.getBlockState(blockpos1);
 						final Block block = state.getBlock();
 
 						if (world.canSnowAt(blockpos1, true))
@@ -170,7 +170,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase implements ISnowyBiome
 						}
 						else if (block instanceof IBlockSnowy)
 						{
-							final IBlockState newState = state.withProperty(IBlockSnowy.PROPERTY_SNOWY, Boolean.TRUE);
+							final BlockState newState = state.withProperty(IBlockSnowy.PROPERTY_SNOWY, Boolean.TRUE);
 
 							world.setBlockState(blockpos1, newState, 2 | 16);
 						}
@@ -185,21 +185,21 @@ public class BiomeArcticPeaks extends BiomeAetherBase implements ISnowyBiome
 	{
 		List<WorldDecoration> decorations = Lists.newArrayList();
 
-		decorations.add(new WorldDecorationSimple(2, 0.0F, EventType.GRASS, new PositionerSurface(), GenerationAether.short_aether_grass));
-		decorations.add(new WorldDecorationSimple(1, 0.2F, EventType.GRASS, new PositionerSurface(), GenerationAether.skyroot_twigs));
+		decorations.add(new WorldDecorationSimple(2, 0.0F, f.GRASS, new PositionerSurface(), GenerationAether.short_aether_grass));
+		decorations.add(new WorldDecorationSimple(1, 0.2F, f.GRASS, new PositionerSurface(), GenerationAether.skyroot_twigs));
 
-		List<IBlockState> flowers = Lists.newArrayList();
+		List<BlockState> flowers = Lists.newArrayList();
 
 		flowers.addAll(GenUtil.GENERAL_FLOWER_STATES);
 
 		decorations.add(GenUtil.createFlowerDecorations(rand, flowers, Lists.newArrayList(BlocksAether.arctic_spikespring.getDefaultState())));
 		decorations.add(GenUtil.createShroomDecorations(GenUtil.SHROOM_STATES));
 
-		decorations.add(new WorldDecorationSimple(6, 0.0F, EventType.GRASS, new PositionerLevels(0, 128), GenerationAether.holystone_rocks));
+		decorations.add(new WorldDecorationSimple(6, 0.0F, f.GRASS, new PositionerLevels(0, 128), GenerationAether.holystone_rocks));
 
-		decorations.add(new WorldDecorationSimple(1, 0.06F, EventType.CUSTOM, new PositionerLevels(90, 130), GenerationAether.storm_aercloud));
+		decorations.add(new WorldDecorationSimple(1, 0.06F, f.CUSTOM, new PositionerLevels(90, 130), GenerationAether.storm_aercloud));
 
-		decorations.add(new WorldDecorationSimple(2, 0.5f, EventType.CUSTOM, new PositionerLevels(26, 90), GenerationAether.ice_crystals));
+		decorations.add(new WorldDecorationSimple(2, 0.5f, f.CUSTOM, new PositionerLevels(26, 90), GenerationAether.ice_crystals));
 
 		return decorations;
 	}
@@ -226,11 +226,11 @@ public class BiomeArcticPeaks extends BiomeAetherBase implements ISnowyBiome
 
 		for (int i = 0; i < amountOfTreeTypes; i++)
 		{
-			treeDecorations.add(new WorldDecorationSimple(15, 0.0F, EventType.TREE, new PositionerSurface(),
+			treeDecorations.add(new WorldDecorationSimple(15, 0.0F, f.TREE, new PositionerSurface(),
 					new BlueprintWorldGen(chosen[rand.nextInt(chosen.length)])));
 		}
 
-		treeDecorations.add(new WorldDecorationSimple(20, 0.0F, EventType.TREE, new PositionerSurface(), new BlueprintWorldGen(GenerationAether.GREATROOT_TREE)));
+		treeDecorations.add(new WorldDecorationSimple(20, 0.0F, f.TREE, new PositionerSurface(), new BlueprintWorldGen(GenerationAether.GREATROOT_TREE)));
 
 		return treeDecorations;
 	}
@@ -253,7 +253,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase implements ISnowyBiome
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public int getSkyColorByTemp(final float currentTemperature)
 	{
 		return 0xcbe4eb;

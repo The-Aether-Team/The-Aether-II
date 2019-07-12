@@ -3,9 +3,9 @@ package com.gildedgames.aether.common.world.instances.necromancer_tower;
 import com.gildedgames.orbis.lib.util.TeleporterGeneric;
 import com.gildedgames.orbis.lib.world.instances.IInstanceFactory;
 import com.gildedgames.orbis.lib.world.instances.IInstanceHandler;
-import net.minecraft.world.DimensionType;
+import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.Teleporter;
-import net.minecraft.world.WorldServer;
+import net.minecraft.world.ServerWorld;
 
 public class NecromancerTowerInstanceFactory implements IInstanceFactory<NecromancerTowerInstance>
 {
@@ -30,7 +30,7 @@ public class NecromancerTowerInstanceFactory implements IInstanceFactory<Necroma
 	}
 
 	@Override
-	public Teleporter getTeleporter(final WorldServer worldIn)
+	public Teleporter getTeleporter(final ServerWorld worldIn)
 	{
 		return new TeleporterGeneric(worldIn);
 	}

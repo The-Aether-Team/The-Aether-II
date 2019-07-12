@@ -2,15 +2,15 @@ package com.gildedgames.aether.common.entities.ai;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.pathfinding.PathNavigateGround;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.pathfinding.GroundPathNavigator;
 import net.minecraft.pathfinding.PathPoint;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class AetherNavigateGround extends PathNavigateGround
+public class AetherNavigateGround extends GroundPathNavigator
 {
-	public AetherNavigateGround(EntityLiving entitylivingIn, World worldIn)
+	public AetherNavigateGround(MobEntity entitylivingIn, World worldIn)
 	{
 		super(entitylivingIn, worldIn);
 	}

@@ -3,15 +3,15 @@ package com.gildedgames.aether.common.items.tools.handlers;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerBlockLevitateModule;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.particles.ParticleTypes;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -21,15 +21,15 @@ import java.util.List;
 public class ItemGravititeToolHandler implements IToolEventHandler
 {
 	@Override
-	public void onHarvestBlock(ItemStack stack, World world, IBlockState state, BlockPos pos, EntityPlayer entity, List<ItemStack> drops)
+	public void onHarvestBlock(ItemStack stack, World world, BlockState state, BlockPos pos, PlayerEntity entity, List<ItemStack> drops)
 	{
 
 	}
 
 	@Override
-	public boolean onRightClickBlock(World world, BlockPos pos, EntityPlayer player, EnumHand hand, EnumFacing facing)
+	public boolean onRightClickBlock(World world, BlockPos pos, PlayerEntity player, Hand hand, Direction facing)
 	{
-		if (hand != EnumHand.MAIN_HAND)
+		if (hand != Hand.MAIN_HAND)
 		{
 			return false;
 		}
@@ -45,7 +45,7 @@ public class ItemGravititeToolHandler implements IToolEventHandler
 
 		if (aePlayer.getModule(PlayerBlockLevitateModule.class).getHeldBlock() == null && player.isSneaking())
 		{
-			IBlockState state = world.getBlockState(pos);
+			BlockState state = world.getBlockState(pos);
 
 			if (state.getBlock().hasTileEntity(state))
 			{
@@ -68,7 +68,7 @@ public class ItemGravititeToolHandler implements IToolEventHandler
 			{
 				for (int i = 0; i < 15; i++)
 				{
-					world.spawnParticle(EnumParticleTypes.BLOCK_DUST,
+					world.spawnParticle(ParticleTypes.BLOCK_DUST,
 							pos.getX() + (world.rand.nextDouble() * 1.2D),
 							pos.getY() + (world.rand.nextDouble()),
 							pos.getZ() + (world.rand.nextDouble() * 1.2D), 0.0D, 0.0D, 0.0D,
@@ -83,9 +83,9 @@ public class ItemGravititeToolHandler implements IToolEventHandler
 	}
 
 	@Override
-	public void onRightClickItem(EntityPlayer player, EnumHand hand)
+	public void onRightClickItem(PlayerEntity player, Hand hand)
 	{
-		if (hand == EnumHand.MAIN_HAND && !player.world.isRemote)
+		if (hand == Hand.MAIN_HAND && !player.world.isRemote)
 		{
 			PlayerAether aePlayer = PlayerAether.getPlayer(player);
 			PlayerBlockLevitateModule blockLevitateModule = aePlayer.getModule(PlayerBlockLevitateModule.class);
@@ -110,13 +110,13 @@ public class ItemGravititeToolHandler implements IToolEventHandler
 	}
 
 	@Override
-	public void onEntityHit(ItemStack stack, Entity target, EntityLivingBase attacker)
+	public void onEntityHit(ItemStack stack, Entity target, LivingEntity attacker)
 	{
 
 	}
 
 	@Override
-	public float getBreakSpeed(ItemStack stack, World world, IBlockState state, BlockPos pos, EntityPlayer player, float original)
+	public float getBreakSpeed(ItemStack stack, World world, BlockState state, BlockPos pos, PlayerEntity player, float original)
 	{
 		return original;
 	}

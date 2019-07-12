@@ -1,9 +1,9 @@
 package com.gildedgames.aether.client.gui.misc;
 
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.GlStateManager;
+import com.mojang.blaze3d.platform.GlStateManager;
+import net.minecraft.client.gui.screen.Screen;
 
-public class GuiBlackScreen extends GuiScreen
+public class GuiBlackScreen extends Screen
 {
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks)

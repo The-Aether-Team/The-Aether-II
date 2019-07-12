@@ -6,24 +6,24 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.api.distmarker.Dist;
 
-@Mod.EventBusSubscriber(Side.CLIENT)
+@Mod.EventBusSubscriber(Dist.CLIENT)
 public class RenderDebugOverlayListener
 {
 
 	@SubscribeEvent
 	public static void onRenderDebugInfo(RenderGameOverlayEvent.Text event)
 	{
-		if (!Minecraft.getMinecraft().gameSettings.showDebugInfo)
+		if (!Minecraft.getInstance().gameSettings.showDebugInfo)
 		{
 			return;
 		}
 
-		if (Minecraft.getMinecraft().world.getWorldInfo().isRaining())
+		if (Minecraft.getInstance().world.getWorldInfo().isRaining())
 		{
-			IPrecipitationManager precipitation = Minecraft.getMinecraft().world.getCapability(CapabilitiesAether.PRECIPITATION_MANAGER, null);
+			IPrecipitationManager precipitation = Minecraft.getInstance().world.getCapability(CapabilitiesAether.PRECIPITATION_MANAGER, null);
 
 			if (precipitation != null)
 			{

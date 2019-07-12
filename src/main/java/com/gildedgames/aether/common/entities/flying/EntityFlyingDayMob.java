@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.entities.flying;
 
-import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.world.World;
 
 public class EntityFlyingDayMob extends EntityFlyingMob
@@ -12,7 +12,7 @@ public class EntityFlyingDayMob extends EntityFlyingMob
 	}
 
 	@Override
-	protected PathNavigate createNavigator(final World worldIn)
+	protected PathNavigator createNavigator(final World worldIn)
 	{
 		return new PathNavigateFlyer(this, worldIn);
 	}

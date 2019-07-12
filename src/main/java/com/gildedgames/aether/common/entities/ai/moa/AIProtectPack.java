@@ -2,8 +2,8 @@ package com.gildedgames.aether.common.entities.ai.moa;
 
 import com.gildedgames.aether.common.entities.util.groups.EntityGroup;
 import com.gildedgames.aether.common.entities.util.groups.EntityGroupMember;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.EntityAITarget;
 
 public class AIProtectPack extends EntityAITarget
@@ -11,9 +11,9 @@ public class AIProtectPack extends EntityAITarget
 
 	EntityGroupMember animal;
 
-	EntityLivingBase agressor;
+	LivingEntity agressor;
 
-	public AIProtectPack(EntityCreature par1EntityCreature)
+	public AIProtectPack(CreatureEntity par1EntityCreature)
 	{
 		super(par1EntityCreature, false, true);
 		if (par1EntityCreature instanceof EntityGroupMember)

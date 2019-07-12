@@ -5,7 +5,7 @@ import com.gildedgames.aether.common.entities.animals.EntityAerbunny;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -16,7 +16,7 @@ public class PacketAerbunnySetRiding implements IMessage
 
 	private int playerId;
 
-	public PacketAerbunnySetRiding(EntityPlayer player, EntityAerbunny bunny)
+	public PacketAerbunnySetRiding(PlayerEntity player, EntityAerbunny bunny)
 	{
 		if (player != null)
 		{
@@ -52,7 +52,7 @@ public class PacketAerbunnySetRiding implements IMessage
 	public static class HandlerClient extends MessageHandlerClient<PacketAerbunnySetRiding, IMessage>
 	{
 		@Override
-		public IMessage onMessage(PacketAerbunnySetRiding message, EntityPlayer player)
+		public IMessage onMessage(PacketAerbunnySetRiding message, PlayerEntity player)
 		{
 			Entity aerbunny = player.world.getEntityByID(message.entityId);
 

@@ -5,7 +5,7 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerDialogModule;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 public class PacketCloseScene implements IMessage
@@ -29,7 +29,7 @@ public class PacketCloseScene implements IMessage
 	public static class HandlerServer extends MessageHandlerServer<PacketCloseScene, PacketCloseScene>
 	{
 		@Override
-		public PacketCloseScene onMessage(final PacketCloseScene message, final EntityPlayer player)
+		public PacketCloseScene onMessage(final PacketCloseScene message, final PlayerEntity player)
 		{
 			final IPlayerAether aePlayer = PlayerAether.getPlayer(player);
 

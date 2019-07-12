@@ -1,11 +1,11 @@
 package com.gildedgames.aether.common.network;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public abstract class MessageHandlerClient<REQ extends IMessage, RES extends IMessage> extends MessageHandler<REQ, RES>
 {
@@ -28,10 +28,10 @@ public abstract class MessageHandlerClient<REQ extends IMessage, RES extends IMe
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public RES onMessage(final REQ message, final MessageContext ctx)
 	{
-		final Minecraft mc = Minecraft.getMinecraft();
+		final Minecraft mc = Minecraft.getInstance();
 
 		if (this.executesOnGameThread)
 		{
@@ -44,17 +44,17 @@ public abstract class MessageHandlerClient<REQ extends IMessage, RES extends IMe
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public abstract RES onMessage(REQ message, EntityPlayer player);
+	@OnlyIn(Dist.CLIENT)
+	public abstract RES onMessage(REQ message, PlayerEntity player);
 
 	/**
 	 * This is needed to prevent a crash on dedicated servers. It seems that
-	 * {@link SideOnly} annotations don't apply to lambdas inside a method, causing
+	 * {@link OnlyIn} annotations don't apply to lambdas inside a method, causing
 	 * client code to be loaded on the server. It's unfortunate, but it is what it is.
 	 *
 	 * @param <REQ> The original {@link IMessage} type
 	 */
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	private static class FutureMessage<REQ extends IMessage> implements Runnable
 	{
 		private final MessageHandlerClient<REQ, ?> handler;
@@ -70,7 +70,7 @@ public abstract class MessageHandlerClient<REQ extends IMessage, RES extends IMe
 		@Override
 		public void run()
 		{
-			this.handler.onMessage(this.message, Minecraft.getMinecraft().player);
+			this.handler.onMessage(this.message, Minecraft.getInstance().player);
 		}
 	}
 }

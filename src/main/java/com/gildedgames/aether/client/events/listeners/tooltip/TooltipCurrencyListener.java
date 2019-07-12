@@ -3,13 +3,13 @@ package com.gildedgames.aether.client.events.listeners.tooltip;
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.client.gui.util.ToolTipCurrencyHelper;
 import com.gildedgames.aether.common.shop.ShopCurrencyGilt;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderTooltipEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
 
-@Mod.EventBusSubscriber(Side.CLIENT)
+@Mod.EventBusSubscriber(Dist.CLIENT)
 public class TooltipCurrencyListener
 {
 	private static final ToolTipCurrencyHelper toolTipHelper = new ToolTipCurrencyHelper();

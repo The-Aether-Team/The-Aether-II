@@ -2,13 +2,13 @@ package com.gildedgames.aether.client.gui;
 
 import com.gildedgames.aether.api.entity.damage.DamageTypeAttributes;
 import com.gildedgames.aether.common.AetherCore;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 
-public class DamageSystemOverlay extends Gui
+public class DamageSystemOverlay extends AbstractGui
 {
 	private static final ResourceLocation SLASH_ICON = AetherCore.getResource("textures/gui/overlay/slash_damage.png");
 
@@ -81,9 +81,9 @@ public class DamageSystemOverlay extends Gui
 
 		mc.getTextureManager().bindTexture(texture);
 
-		GlStateManager.translate(x - 7, y, 0.0f);
+		GlStateManager.translatef(x - 7, y, 0.0f);
 
-		Gui.drawModalRectWithCustomSizedTexture(0, 0, 0, 0, 14, 14, 14, 14);
+		AbstractGui.drawModalRectWithCustomSizedTexture(0, 0, 0, 0, 14, 14, 14, 14);
 
 		GlStateManager.popMatrix();
 

@@ -6,17 +6,17 @@ import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerPa
 import com.gildedgames.aether.common.patron.armor.PatronRewardArmor;
 import com.google.common.collect.Maps;
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.renderer.GlStateManager;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.Map;
 
-public class LayerAetherPatronArmor implements LayerRenderer<EntityLivingBase>
+public class LayerAetherPatronArmor implements LayerRenderer<LivingEntity>
 {
 	private static final Map<String, ResourceLocation> ARMOR_TEXTURE_RES_MAP = Maps.newHashMap();
 
@@ -41,10 +41,10 @@ public class LayerAetherPatronArmor implements LayerRenderer<EntityLivingBase>
 	}
 
 	@Override
-	public void doRenderLayer(EntityLivingBase entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks,
+	public void doRenderLayer(LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks,
 			float netHeadYaw, float headPitch, float scale)
 	{
-		if (!(entity instanceof EntityPlayer))
+		if (!(entity instanceof PlayerEntity))
 		{
 			return;
 		}
@@ -53,20 +53,20 @@ public class LayerAetherPatronArmor implements LayerRenderer<EntityLivingBase>
 
 		if (armor == null)
 		{
-			PlayerAether aePlayer = PlayerAether.getPlayer((EntityPlayer) entity);
+			PlayerAether aePlayer = PlayerAether.getPlayer((PlayerEntity) entity);
 
 			armor = aePlayer.getModule(PlayerPatronRewardModule.class).getChoices().getArmorChoice();
 		}
 
 		if (armor != null && armor.getArmorTextureName() != null)
 		{
-			this.renderArmorLayer(entity, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale, EntityEquipmentSlot.CHEST,
+			this.renderArmorLayer(entity, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale, EquipmentSlotType.CHEST,
 					armor.getArmorTextureName());
-			this.renderArmorLayer(entity, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale, EntityEquipmentSlot.LEGS,
+			this.renderArmorLayer(entity, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale, EquipmentSlotType.LEGS,
 					armor.getArmorTextureName());
-			this.renderArmorLayer(entity, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale, EntityEquipmentSlot.FEET,
+			this.renderArmorLayer(entity, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale, EquipmentSlotType.FEET,
 					armor.getArmorTextureName());
-			this.renderArmorLayer(entity, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale, EntityEquipmentSlot.HEAD,
+			this.renderArmorLayer(entity, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale, EquipmentSlotType.HEAD,
 					armor.getArmorTextureName());
 		}
 	}
@@ -77,11 +77,11 @@ public class LayerAetherPatronArmor implements LayerRenderer<EntityLivingBase>
 		return false;
 	}
 
-	protected void renderArmorLayer(EntityLivingBase entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks,
-			float netHeadYaw, float headPitch, float scale, EntityEquipmentSlot slot, String res)
+	protected void renderArmorLayer(LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks,
+			float netHeadYaw, float headPitch, float scale, EquipmentSlotType slot, String res)
 	{
 		ResourceLocation texture = ARMOR_TEXTURE_RES_MAP
-				.computeIfAbsent(AetherCore.getResourcePath("textures/armor/" + res + "_layer_" + (slot == EntityEquipmentSlot.LEGS ? 2 : 1) + ".png"),
+				.computeIfAbsent(AetherCore.getResourcePath("textures/armor/" + res + "_layer_" + (slot == EquipmentSlotType.LEGS ? 2 : 1) + ".png"),
 						ResourceLocation::new);
 
 		ModelBiped model = this.getModelFromSlot(slot);
@@ -101,14 +101,14 @@ public class LayerAetherPatronArmor implements LayerRenderer<EntityLivingBase>
 		model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 	}
 
-	private ModelBiped getModelFromSlot(EntityEquipmentSlot slotIn)
+	private ModelBiped getModelFromSlot(EquipmentSlotType slotIn)
 	{
 		return (this.isLegSlot(slotIn) ? this.modelLeggings : this.modelArmor);
 	}
 
-	private boolean isLegSlot(EntityEquipmentSlot slotIn)
+	private boolean isLegSlot(EquipmentSlotType slotIn)
 	{
-		return slotIn == EntityEquipmentSlot.LEGS;
+		return slotIn == EquipmentSlotType.LEGS;
 	}
 
 	private void initArmor()
@@ -117,7 +117,7 @@ public class LayerAetherPatronArmor implements LayerRenderer<EntityLivingBase>
 		this.modelArmor = new ModelBiped(1.0F);
 	}
 
-	private void setModelSlotVisible(ModelBiped model, EntityEquipmentSlot slot)
+	private void setModelSlotVisible(ModelBiped model, EquipmentSlotType slot)
 	{
 		this.setModelVisible(model);
 

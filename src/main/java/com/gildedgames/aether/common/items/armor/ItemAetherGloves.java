@@ -6,11 +6,11 @@ import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerPa
 import com.gildedgames.aether.common.init.CreativeTabsAether;
 import com.gildedgames.aether.common.patron.armor.PatronRewardArmor;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.api.distmarker.Dist;
 
 public class ItemAetherGloves extends Item
 {
@@ -25,8 +25,8 @@ public class ItemAetherGloves extends Item
 		this.setCreativeTab(CreativeTabsAether.TAB_ARMOR);
 	}
 
-	@SideOnly(Side.CLIENT)
-	public ResourceLocation getGloveTexture(EntityPlayer player)
+	@OnlyIn(Dist.CLIENT)
+	public ResourceLocation getGloveTexture(PlayerEntity player)
 	{
 		String skinType = EntityUtil.getSkin(player);
 

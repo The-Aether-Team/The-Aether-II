@@ -5,11 +5,11 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class ItemWrappingPaper extends Item implements IDropOnDeath
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void addInformation(final ItemStack stack, final World world, final List<String> tooltip, final ITooltipFlag flag)
 	{
 		final PresentDyeData data = ItemWrappingPaper.getDyeData(stack);
@@ -45,7 +45,7 @@ public class ItemWrappingPaper extends Item implements IDropOnDeath
 
 		private byte bowColor = 1, boxColor = 15;
 
-		public static PresentDyeData readFromNBT(final NBTTagCompound compound)
+		public static PresentDyeData readFromNBT(final CompoundNBT compound)
 		{
 			final PresentDyeData data = new PresentDyeData();
 
@@ -60,10 +60,10 @@ public class ItemWrappingPaper extends Item implements IDropOnDeath
 			return data;
 		}
 
-		public NBTTagCompound writeToNBT(final NBTTagCompound compound)
+		public CompoundNBT writeToNBT(final CompoundNBT compound)
 		{
-			compound.setByte("boxColor", this.getBoxColor());
-			compound.setByte("bowColor", this.getBowColor());
+			compound.putByte("boxColor", this.getBoxColor());
+			compound.putByte("bowColor", this.getBowColor());
 
 			return compound;
 		}

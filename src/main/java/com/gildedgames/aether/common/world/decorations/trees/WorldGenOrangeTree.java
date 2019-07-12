@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.world.decorations.trees;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockOrangeTree;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -43,7 +43,7 @@ public class WorldGenOrangeTree extends WorldGenerator
 			{
 				final int stage = 1 + rand.nextInt(4);
 
-				final IBlockState state = BlocksAether.orange_tree.getDefaultState().withProperty(BlockOrangeTree.PROPERTY_STAGE, stage);
+				final BlockState state = BlocksAether.orange_tree.getDefaultState().withProperty(BlockOrangeTree.PROPERTY_STAGE, stage);
 
 				if (stage >= 3)
 				{

@@ -4,7 +4,7 @@ import com.gildedgames.aether.api.player.IPlayerAetherModule;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
@@ -82,22 +82,22 @@ public class PlayerAbilitiesModule extends PlayerAetherModule implements IPlayer
 	}
 
 	@Override
-	public void write(NBTTagCompound tag)
+	public void write(CompoundNBT tag)
 	{
-		NBTTagCompound root = new NBTTagCompound();
-		tag.setTag("Abilities", root);
+		CompoundNBT root = new CompoundNBT();
+		tag.put("Abilities", root);
 
-		tag.setInteger("midAirJumpsAllowed", this.midAirJumpsAllowed);
-		tag.setInteger("jumpsSoFar", this.jumpsSoFar);
+		tag.putInt("midAirJumpsAllowed", this.midAirJumpsAllowed);
+		tag.putInt("jumpsSoFar", this.jumpsSoFar);
 	}
 
 	@Override
-	public void read(NBTTagCompound tag)
+	public void read(CompoundNBT tag)
 	{
-		NBTTagCompound root = tag.getCompoundTag("Abilities");
+		CompoundNBT root = tag.getCompound("Abilities");
 
-		this.midAirJumpsAllowed = root.getInteger("midAirJumpsAllowed");
-		this.jumpsSoFar = root.getInteger("jumpsSoFar");
+		this.midAirJumpsAllowed = root.getInt("midAirJumpsAllowed");
+		this.jumpsSoFar = root.getInt("jumpsSoFar");
 	}
 
 	@Override

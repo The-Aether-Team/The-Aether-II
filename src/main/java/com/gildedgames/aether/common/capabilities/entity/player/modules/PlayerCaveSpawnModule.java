@@ -10,9 +10,9 @@ import com.gildedgames.aether.common.entities.monsters.EntityTempest;
 import com.gildedgames.aether.common.entities.monsters.EntityVaranys;
 import com.gildedgames.aether.common.util.helpers.AetherHelper;
 import com.gildedgames.aether.common.world.spawning.SpawnHandler;
-import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -26,7 +26,7 @@ public class PlayerCaveSpawnModule extends PlayerAetherModule
 {
 	private int playerYPos;
 	private Biome currentPlayerBiome;
-	private ArrayList<Class<? extends EntityCreature>> spawnableMobs;
+	private ArrayList<Class<? extends CreatureEntity>> spawnableMobs;
 	private boolean hasSpawned;			// stops things from trying to spawn every update, resets from timer.
 	private int timer;
 
@@ -96,8 +96,8 @@ public class PlayerCaveSpawnModule extends PlayerAetherModule
 						break;
 					}
 					BlockPos spawnPos;
-					EntityCreature mobToSpawn = (EntityCreature)EntityList.newEntity(this.spawnableMobs.get(mobInList), this.getWorld());
-					EntityLiving.SpawnPlacementType placementType;
+					CreatureEntity mobToSpawn = (CreatureEntity)EntityList.newEntity(this.spawnableMobs.get(mobInList), this.getWorld());
+					MobEntity.SpawnPlacementType placementType;
 					double distanceToSpawn = 16.0D;
 					int yController = 16;
 
@@ -110,7 +110,7 @@ public class PlayerCaveSpawnModule extends PlayerAetherModule
 						}
 					}
 
-					placementType = EntityLiving.SpawnPlacementType.ON_GROUND;
+					placementType = MobEntity.SpawnPlacementType.ON_GROUND;
 					for (int j = 0; j < 100; j++)
 					{
 						spawnPos = this.getPosToSpawn(
@@ -134,7 +134,7 @@ public class PlayerCaveSpawnModule extends PlayerAetherModule
 						{
 							continue;
 						}
-						if (this.getWorld().collidesWithAnyBlock(mobToSpawn.getEntityBoundingBox()))
+						if (this.getWorld().collidesWithAnyBlock(mobToSpawn.getBoundingBox()))
 						{
 							continue;
 						}
@@ -213,7 +213,7 @@ public class PlayerCaveSpawnModule extends PlayerAetherModule
 		return new BlockPos(x,y,z);
 	}
 
-	private boolean isGroundBelowPosition(final BlockPos position, final EntityCreature entity)
+	private boolean isGroundBelowPosition(final BlockPos position, final CreatureEntity entity)
 	{
 		if (entity instanceof EntityTempest)
 		{

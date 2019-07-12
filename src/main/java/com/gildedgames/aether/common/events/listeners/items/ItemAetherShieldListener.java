@@ -1,17 +1,17 @@
 package com.gildedgames.aether.common.events.listeners.items;
 
 import com.gildedgames.aether.common.items.armor.ItemAetherShield;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.SoundEvents;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 @Mod.EventBusSubscriber
 public class ItemAetherShieldListener
@@ -20,12 +20,12 @@ public class ItemAetherShieldListener
 	@SubscribeEvent
 	public static void onEntityAttacked(final LivingAttackEvent event)
 	{
-		if (!(event.getEntityLiving() instanceof EntityPlayer))
+		if (!(event.getEntityLiving() instanceof PlayerEntity))
 		{
 			return;
 		}
 
-		final EntityPlayer player = (EntityPlayer) event.getEntityLiving();
+		final PlayerEntity player = (PlayerEntity) event.getEntityLiving();
 
 		if (!event.getSource().isUnblockable() && player.isActiveItemStackBlocking())
 		{
@@ -50,17 +50,17 @@ public class ItemAetherShieldListener
 
 						if (player.getActiveItemStack().getCount() <= 0)
 						{
-							final EnumHand hand = player.getActiveHand();
+							final Hand hand = player.getActiveHand();
 
 							ForgeEventFactory.onPlayerDestroyItem(player, player.getActiveItemStack(), hand);
 
-							if (hand == EnumHand.MAIN_HAND)
+							if (hand == Hand.MAIN_HAND)
 							{
-								player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);
+								player.setItemStackToSlot(EquipmentSlotType.MAINHAND, ItemStack.EMPTY);
 							}
 							else
 							{
-								player.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, ItemStack.EMPTY);
+								player.setItemStackToSlot(EquipmentSlotType.OFFHAND, ItemStack.EMPTY);
 							}
 
 							player.setHeldItem(player.getActiveHand(), ItemStack.EMPTY);

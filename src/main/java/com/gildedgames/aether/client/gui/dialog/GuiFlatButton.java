@@ -1,13 +1,13 @@
 package com.gildedgames.aether.client.gui.dialog;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.widget.button.Button;
 
 import java.awt.*;
 
-public class GuiFlatButton extends GuiButton
+public class GuiFlatButton extends Button
 {
 
 	public GuiFlatButton(final int buttonId, final int x, final int y, int widthIn, int heightIn, String displayString)
@@ -33,13 +33,13 @@ public class GuiFlatButton extends GuiButton
 			this.hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width
 					&& mouseY < this.y + this.height;
 
-			Gui.drawRect(this.x, this.y,
+			AbstractGui.drawRect(this.x, this.y,
 					this.x + this.width, this.y + this.height, this.enabled ? (this.hovered ? Integer.MAX_VALUE : Integer.MIN_VALUE) : new Color(100, 100, 100, 100).getRGB());
 
 			this.hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width
 					&& mouseY < this.y + this.height;
 
-			final FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
+			final FontRenderer fontRenderer = Minecraft.getInstance().fontRenderer;
 
 			final String label = this.getText();
 

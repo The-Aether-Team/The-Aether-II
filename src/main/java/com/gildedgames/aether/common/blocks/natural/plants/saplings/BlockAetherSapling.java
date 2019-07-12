@@ -8,29 +8,29 @@ import com.gildedgames.orbis.lib.core.BlueprintDefinition;
 import com.gildedgames.orbis.lib.core.CreationData;
 import com.gildedgames.orbis.lib.core.baking.BakedBlueprint;
 import com.gildedgames.orbis.lib.core.util.BlueprintPlacer;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.state.IntegerProperty;
 import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.terraingen.TerrainGen;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
 
 import java.util.Random;
 
 public abstract class BlockAetherSapling extends BlockAetherPlant implements IGrowable, IBlockMultiName
 {
-	public static final PropertyInteger PROPERTY_STAGE = PropertyInteger.create("growth_stage",0,1);
+	public static final IntegerProperty PROPERTY_STAGE = IntegerProperty.create("growth_stage",0,1);
 
 	private static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.8D, 0.9D);
 
@@ -43,7 +43,7 @@ public abstract class BlockAetherSapling extends BlockAetherPlant implements IGr
 	}
 
 	@Override
-	public void updateTick(final World worldIn, final BlockPos pos, final IBlockState state, final Random rand)
+	public void updateTick(final World worldIn, final BlockPos pos, final BlockState state, final Random rand)
 	{
 		if (!worldIn.isRemote)
 		{
@@ -57,7 +57,7 @@ public abstract class BlockAetherSapling extends BlockAetherPlant implements IGr
 	}
 
 	@Override
-	public void grow(final World world, final Random rand, final BlockPos pos, final IBlockState state)
+	public void grow(final World world, final Random rand, final BlockPos pos, final BlockState state)
 	{
 		if (state.getValue(PROPERTY_STAGE) == 0)
 		{
@@ -76,7 +76,7 @@ public abstract class BlockAetherSapling extends BlockAetherPlant implements IGr
 
 				world.setBlockState(pos, Blocks.AIR.getDefaultState(), 4);
 
-				BakedBlueprint baked = new BakedBlueprint(tree, new CreationData(world).pos(BlockPos.ORIGIN).placesAir(false).placesVoid(false));
+				BakedBlueprint baked = new BakedBlueprint(tree, new CreationData(world).pos(BlockPos.ZERO).placesAir(false).placesVoid(false));
 
 				if (!BlueprintPlacer.place(world, baked, adjustedPos))
 				{
@@ -87,8 +87,8 @@ public abstract class BlockAetherSapling extends BlockAetherPlant implements IGr
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(final CreativeTabs tab, final NonNullList<ItemStack> list)
+	@OnlyIn(Dist.CLIENT)
+	public void getSubBlocks(final ItemGroup tab, final NonNullList<ItemStack> list)
 	{
 		for (final BlockVariant variant : this.getPropertyVariant().getAllowedValues())
 		{
@@ -103,20 +103,20 @@ public abstract class BlockAetherSapling extends BlockAetherPlant implements IGr
 	}
 
 	@Override
-	public int damageDropped(final IBlockState state)
+	public int damageDropped(final BlockState state)
 	{
 		return state.getValue(this.getPropertyVariant()).getMeta();
 	}
 
 	@Override
-	public IBlockState getStateFromMeta(final int meta)
+	public BlockState getStateFromMeta(final int meta)
 	{
 		return this.getDefaultState().withProperty(this.getPropertyVariant(), this.getPropertyVariant().fromMeta(meta & 7))
 				.withProperty(PROPERTY_STAGE, (meta & 8) >> 3);
 	}
 
 	@Override
-	public int getMetaFromState(final IBlockState state)
+	public int getMetaFromState(final BlockState state)
 	{
 		return state.getValue(this.getPropertyVariant()).getMeta() | (state.getValue(PROPERTY_STAGE) << 3);
 	}
@@ -128,19 +128,19 @@ public abstract class BlockAetherSapling extends BlockAetherPlant implements IGr
 	}
 
 	@Override
-	public boolean canGrow(final World world, final BlockPos pos, final IBlockState state, final boolean isClient)
+	public boolean canGrow(final World world, final BlockPos pos, final BlockState state, final boolean isClient)
 	{
 		return true;
 	}
 
 	@Override
-	public boolean canUseBonemeal(final World world, final Random rand, final BlockPos pos, final IBlockState state)
+	public boolean canUseBonemeal(final World world, final Random rand, final BlockPos pos, final BlockState state)
 	{
 		return rand.nextFloat() < 0.45f;
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(final IBlockState state, final IBlockAccess source, final BlockPos pos)
+	public AxisAlignedBB getBoundingBox(final BlockState state, final IBlockReader source, final BlockPos pos)
 	{
 		return SAPLING_AABB;
 	}
@@ -151,9 +151,9 @@ public abstract class BlockAetherSapling extends BlockAetherPlant implements IGr
 		return EnumOffsetType.XZ;
 	}
 
-	public abstract BlueprintDefinition getBlueprint(IBlockState state);
+	public abstract BlueprintDefinition getBlueprint(BlockState state);
 
-	public abstract BlockPos getBlueprintOffset(IBlockState state);
+	public abstract BlockPos getBlueprintOffset(BlockState state);
 
 	public abstract PropertyVariant getPropertyVariant();
 

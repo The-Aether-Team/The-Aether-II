@@ -4,7 +4,7 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.network.packets.PacketSpecialMovement;
 import com.gildedgames.aether.common.util.helpers.AetherHelper;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -44,7 +44,7 @@ public class PlayerRollMovementModule extends PlayerAetherModule
 
 	private void setEntityHeight(float height)
 	{
-		EntityPlayer p = this.getEntity();
+		PlayerEntity p = this.getEntity();
 
 		float w = p.width / 2f;
 

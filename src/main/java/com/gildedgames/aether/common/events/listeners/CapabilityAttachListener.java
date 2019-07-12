@@ -17,13 +17,13 @@ import com.gildedgames.aether.common.world.preparation.capability.PrepManagerSto
 import com.gildedgames.aether.common.world.spawning.SpawnSystem;
 import com.gildedgames.aether.common.world.spawning.SpawnSystemProvider;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Mod.EventBusSubscriber
 public class CapabilityAttachListener
@@ -52,9 +52,9 @@ public class CapabilityAttachListener
 		}
 		*/
 
-		if (event.getObject() instanceof EntityPlayer)
+		if (event.getObject() instanceof PlayerEntity)
 		{
-			event.addCapability(AetherCore.getResource("PlayerData"), new PlayerAetherProvider(new PlayerAether((EntityPlayer) event.getObject())));
+			event.addCapability(AetherCore.getResource("PlayerData"), new PlayerAetherProvider(new PlayerAether((PlayerEntity) event.getObject())));
 		}
 		else
 		{

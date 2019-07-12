@@ -6,8 +6,8 @@ import com.gildedgames.orbis.lib.client.rect.Rect;
 import com.gildedgames.orbis.lib.util.InputHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.gui.screen.Screen;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.RenderItem;
@@ -90,13 +90,13 @@ public class GuiItemStack extends GuiElement
 
 		if (InputHelper.isHovered(this))
 		{
-			GuiScreen gui = Minecraft.getMinecraft().currentScreen;
+			Screen gui = Minecraft.getInstance().currentScreen;
 
 			if (gui instanceof IExtendedContainer)
 			{
 				IExtendedContainer extendedGui = (IExtendedContainer) gui;
-				extendedGui.setHoveredDescription(this.stack, this.stack.getTooltip(Minecraft.getMinecraft().player,
-						Minecraft.getMinecraft().gameSettings.advancedItemTooltips ?
+				extendedGui.setHoveredDescription(this.stack, this.stack.getTooltip(Minecraft.getInstance().player,
+						Minecraft.getInstance().gameSettings.advancedItemTooltips ?
 								ITooltipFlag.TooltipFlags.ADVANCED :
 								ITooltipFlag.TooltipFlags.NORMAL));
 			}

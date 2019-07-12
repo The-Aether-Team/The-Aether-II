@@ -22,29 +22,29 @@ import com.gildedgames.orbis.lib.util.TeleporterGeneric;
 import com.gildedgames.orbis.lib.util.mc.BlockPosDimension;
 import com.gildedgames.orbis.lib.world.instances.IInstance;
 import com.gildedgames.orbis.lib.world.instances.IPlayerInstances;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.PlayerList;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
+import net.minecraft.util.Direction;
+import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class TileEntityTeleporter extends TileEntityMultiblockController implements ITickable, IWorldObjectHoverable
+public class TileEntityTeleporter extends TileEntityMultiblockController implements ITickableTileEntity, IWorldObjectHoverable
 {
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public int animationTicks, prevAnimationTicks;
 
 	private int buildTime;
@@ -54,16 +54,16 @@ public class TileEntityTeleporter extends TileEntityMultiblockController impleme
 		super((BlockMultiController) BlocksAether.aether_teleporter, BlocksAether.multiblock_dummy);
 	}
 
-	public EnumFacing getFacing()
+	public Direction getFacing()
 	{
-		IBlockState state = this.world.getBlockState(this.pos);
+		BlockState state = this.world.getBlockState(this.pos);
 
 		if (state.getBlock() == BlocksAether.aether_teleporter)
 		{
 			return state.getValue(BlockAltar.PROPERTY_FACING);
 		}
 
-		return EnumFacing.NORTH;
+		return Direction.NORTH;
 	}
 
 	@Override
@@ -87,19 +87,19 @@ public class TileEntityTeleporter extends TileEntityMultiblockController impleme
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound compound)
+	public void readFromNBT(CompoundNBT compound)
 	{
 		super.readFromNBT(compound);
 
-		this.buildTime = compound.getInteger("BuildTime");
+		this.buildTime = compound.getInt("BuildTime");
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound compound)
+	public CompoundNBT writeToNBT(CompoundNBT compound)
 	{
 		super.writeToNBT(compound);
 
-		compound.setInteger("BuildTime", (short) this.buildTime);
+		compound.putInt("BuildTime", (short) this.buildTime);
 
 		return compound;
 	}
@@ -110,13 +110,13 @@ public class TileEntityTeleporter extends TileEntityMultiblockController impleme
 	}
 
 	@Override
-	public boolean onInteract(EntityPlayer player)
+	public boolean onInteract(PlayerEntity player)
 	{
 		if (player.world.provider.getDimensionType() == DimensionsAether.AETHER)
 		{
-			if (player instanceof EntityPlayerMP)
+			if (player instanceof ServerPlayerEntity)
 			{
-				final EntityPlayerMP playerMP = (EntityPlayerMP) player;
+				final ServerPlayerEntity playerMP = (ServerPlayerEntity) player;
 
 				final PlayerAether playerAether = PlayerAether.getPlayer(player);
 				final PlayerTeleportingModule teleportingModule = playerAether.getModule(PlayerTeleportingModule.class);
@@ -172,7 +172,7 @@ public class TileEntityTeleporter extends TileEntityMultiblockController impleme
 
 			if (teleportingModule.getAetherPos() != null)
 			{
-				final EntityPlayerMP playerMP = (EntityPlayerMP) player;
+				final ServerPlayerEntity playerMP = (ServerPlayerEntity) player;
 				final BlockPosDimension p = teleportingModule.getAetherPos();
 
 				final MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
@@ -198,13 +198,13 @@ public class TileEntityTeleporter extends TileEntityMultiblockController impleme
 
 				if (player.dimension == instance.getDimensionId())
 				{
-					handler.teleportBack((EntityPlayerMP) player);
+					handler.teleportBack((ServerPlayerEntity) player);
 				}
 				else
 				{
 					hook.setInstance(null);
 
-					handler.teleportToInst((EntityPlayerMP) player);
+					handler.teleportToInst((ServerPlayerEntity) player);
 				}
 			}
 			else
@@ -215,7 +215,7 @@ public class TileEntityTeleporter extends TileEntityMultiblockController impleme
 				}
 				else
 				{
-					handler.teleportToInst((EntityPlayerMP) player);
+					handler.teleportToInst((ServerPlayerEntity) player);
 				}
 			}
 
@@ -224,7 +224,7 @@ public class TileEntityTeleporter extends TileEntityMultiblockController impleme
 	}
 
 	@Override
-	public ItemStack getPickedStack(World world, BlockPos pos, IBlockState state)
+	public ItemStack getPickedStack(World world, BlockPos pos, BlockState state)
 	{
 		return new ItemStack(BlocksAether.aether_teleporter);
 	}
@@ -232,6 +232,6 @@ public class TileEntityTeleporter extends TileEntityMultiblockController impleme
 	@Override
 	public ITextComponent getHoverText(World world, RayTraceResult result)
 	{
-		return new TextComponentTranslation(AetherHelper.isAether(world) ? "gui.aether.hover.campfire" : "gui.aether.hover.teleporter");
+		return new TranslationTextComponent(AetherHelper.isAether(world) ? "gui.aether.hover.campfire" : "gui.aether.hover.teleporter");
 	}
 }

@@ -1,17 +1,17 @@
 package com.gildedgames.aether.common.blocks.util;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.BlockFaceShape;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.api.distmarker.Dist;
 
 public class BlockCustomCarpet extends Block
 {
@@ -27,25 +27,25 @@ public class BlockCustomCarpet extends Block
 	}
 
 	@Override
-	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
+	public VoxelShape getBlockFaceShape(IBlockReader worldIn, BlockState state, BlockPos pos, Direction face)
 	{
-		return BlockFaceShape.UNDEFINED;
+		return VoxelShape.UNDEFINED;
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	public AxisAlignedBB getBoundingBox(BlockState state, IBlockReader source, BlockPos pos)
 	{
 		return CARPET_AABB;
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(BlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState state)
+	public boolean isFullCube(BlockState state)
 	{
 		return false;
 	}
@@ -57,12 +57,12 @@ public class BlockCustomCarpet extends Block
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
+	public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
 	{
 		this.checkForDrop(worldIn, pos, state);
 	}
 
-	private void checkForDrop(World worldIn, BlockPos pos, IBlockState state)
+	private void checkForDrop(World worldIn, BlockPos pos, BlockState state)
 	{
 		if (!this.canBlockStay(worldIn, pos))
 		{
@@ -77,10 +77,10 @@ public class BlockCustomCarpet extends Block
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
+	@OnlyIn(Dist.CLIENT)
+	public boolean shouldSideBeRendered(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side)
 	{
-		return side == EnumFacing.UP || blockAccess.getBlockState(pos.offset(side)).getBlock() == this
+		return side == Direction.UP || blockAccess.getBlockState(pos.offset(side)).getBlock() == this
 				|| super.shouldSideBeRendered(blockState, blockAccess, pos, side);
 	}
 }

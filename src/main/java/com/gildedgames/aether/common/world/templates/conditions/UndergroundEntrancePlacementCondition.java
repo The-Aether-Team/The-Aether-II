@@ -3,12 +3,12 @@ package com.gildedgames.aether.common.world.templates.conditions;
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.util.TemplateUtil;
 import com.gildedgames.aether.api.world.templates.PlacementConditionTemplate;
-import com.gildedgames.orbis.lib.processing.IBlockAccessExtended;
+import com.gildedgames.orbis.lib.processing.IBlockAccess;
 import com.google.common.collect.Lists;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.gen.structure.template.Template;
+import net.minecraft.world.gen.feature.template.Template;
 
 import java.util.List;
 
@@ -16,13 +16,13 @@ public class UndergroundEntrancePlacementCondition implements PlacementCondition
 {
 
 	@Override
-	public boolean canPlace(final Template template, final IBlockAccessExtended world, final BlockPos placedAt, final Template.BlockInfo block)
+	public boolean canPlace(final Template template, final IBlockAccess world, final BlockPos placedAt, final Template.BlockInfo block)
 	{
 		return true;
 	}
 
 	@Override
-	public boolean canPlaceCheckAll(final Template template, final IBlockAccessExtended world, final BlockPos placedAt, final List<Template.BlockInfo> blocks)
+	public boolean canPlaceCheckAll(final Template template, final IBlockAccess world, final BlockPos placedAt, final List<Template.BlockInfo> blocks)
 	{
 		final List<BlockPos> posToDelete = Lists.newArrayList();
 
@@ -48,7 +48,7 @@ public class UndergroundEntrancePlacementCondition implements PlacementCondition
 
 				if (block.blockState.getBlock() != Blocks.AIR)
 				{
-					final IBlockState state = world.getBlockState(block.pos);
+					final BlockState state = world.getBlockState(block.pos);
 
 					if (state.getBlock() != BlocksAether.aether_grass)
 					{

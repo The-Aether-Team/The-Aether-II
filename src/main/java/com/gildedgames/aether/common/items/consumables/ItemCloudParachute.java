@@ -6,16 +6,16 @@ import com.gildedgames.aether.common.entities.blocks.EntityParachute;
 import com.gildedgames.aether.common.items.IDropOnDeath;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.api.distmarker.Dist;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -28,8 +28,8 @@ public class ItemCloudParachute extends Item implements IDropOnDeath
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void getSubItems(final CreativeTabs tab, final NonNullList<ItemStack> subItems)
+	@OnlyIn(Dist.CLIENT)
+	public void getSubItems(final ItemGroup tab, final NonNullList<ItemStack> subItems)
 	{
 		if (!this.isInCreativeTab(tab))
 		{
@@ -43,7 +43,7 @@ public class ItemCloudParachute extends Item implements IDropOnDeath
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void addInformation(final ItemStack stack, @Nullable final World worldIn, final List<String> tooltip, final ITooltipFlag flagIn)
 	{
 		tooltip.add(I18n.format("cloudParachute.ability") + "\247r" + I18n.format(
@@ -52,7 +52,7 @@ public class ItemCloudParachute extends Item implements IDropOnDeath
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(final World world, final EntityPlayer player, final EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(final World world, final PlayerEntity player, final Hand hand)
 	{
 		final ItemStack stack = player.getHeldItem(hand);
 
@@ -63,7 +63,7 @@ public class ItemCloudParachute extends Item implements IDropOnDeath
 
 		world.spawnEntity(parachute);
 
-		if (!player.capabilities.isCreativeMode)
+		if (!player.isCreative())
 		{
 			stack.shrink(1);
 		}

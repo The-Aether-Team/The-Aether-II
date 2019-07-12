@@ -8,20 +8,20 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.util.SoundEvents;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.*;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -53,8 +53,8 @@ public class ItemCrossbow extends Item
 		this.addPropertyOverride(new ResourceLocation("pull"), new IItemPropertyGetter()
 		{
 			@Override
-			@SideOnly(Side.CLIENT)
-			public float apply(final ItemStack stack, @Nullable final World worldIn, @Nullable final EntityLivingBase entityIn)
+			@OnlyIn(Dist.CLIENT)
+			public float apply(final ItemStack stack, @Nullable final World worldIn, @Nullable final LivingEntity entityIn)
 			{
 				if (entityIn == null)
 				{
@@ -79,8 +79,8 @@ public class ItemCrossbow extends Item
 		this.addPropertyOverride(new ResourceLocation("pulling"), new IItemPropertyGetter()
 		{
 			@Override
-			@SideOnly(Side.CLIENT)
-			public float apply(final ItemStack stack, @Nullable final World worldIn, @Nullable final EntityLivingBase entityIn)
+			@OnlyIn(Dist.CLIENT)
+			public float apply(final ItemStack stack, @Nullable final World worldIn, @Nullable final LivingEntity entityIn)
 			{
 				return entityIn != null && (entityIn.isHandActive() && entityIn.getActiveItemStack() == stack)
 						|| ItemCrossbow.isLoaded(stack) ? 1.0F : 0.0F;
@@ -92,7 +92,7 @@ public class ItemCrossbow extends Item
 	{
 		if (stack.getTagCompound() == null)
 		{
-			stack.setTagCompound(new NBTTagCompound());
+			stack.setTagCompound(new CompoundNBT());
 		}
 	}
 
@@ -117,7 +117,7 @@ public class ItemCrossbow extends Item
 
 		checkTag(stack);
 
-		stack.getTagCompound().setBoolean("loaded", loaded);
+		stack.getTagCompound().putBoolean("loaded", loaded);
 	}
 
 	public static ItemBoltType getLoadedBoltType(final ItemStack stack)
@@ -129,7 +129,7 @@ public class ItemCrossbow extends Item
 
 		checkTag(stack);
 
-		return ItemCrossbow.BOLT_TYPES[stack.getTagCompound().getInteger("boltType")];
+		return ItemCrossbow.BOLT_TYPES[stack.getTagCompound().getInt("boltType")];
 	}
 
 	public static void setLoadedBoltType(final ItemStack stack, final ItemBoltType type)
@@ -141,24 +141,24 @@ public class ItemCrossbow extends Item
 
 		checkTag(stack);
 
-		stack.getTagCompound().setInteger("boltType", type.ordinal());
+		stack.getTagCompound().putInt("boltType", type.ordinal());
 	}
 
-	private boolean hasAmmo(final EntityPlayer player)
+	private boolean hasAmmo(final PlayerEntity player)
 	{
-		final ItemStack boltStack = player.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND);
+		final ItemStack boltStack = player.getItemStackFromSlot(EquipmentSlotType.OFFHAND);
 
 		return boltStack.getItem() == ItemsAether.bolt && boltStack.getCount() > 0;
 	}
 
 	@Override
-	public boolean onEntitySwing(final EntityLivingBase entityLiving, final ItemStack stack)
+	public boolean onEntitySwing(final LivingEntity entityLiving, final ItemStack stack)
 	{
 		if (ItemCrossbow.isLoaded(stack))
 		{
 			if (entityLiving.world.isRemote)
 			{
-				final ItemRenderer renderer = Minecraft.getMinecraft().getItemRenderer();
+				final ItemRenderer renderer = Minecraft.getInstance().getItemRenderer();
 				renderer.equippedProgressMainHand = 1.5F;
 			}
 
@@ -178,7 +178,7 @@ public class ItemCrossbow extends Item
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(final World worldIn, final EntityPlayer playerIn, final EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(final World worldIn, final PlayerEntity playerIn, final Hand hand)
 	{
 		final ItemStack stack = playerIn.getHeldItem(hand);
 
@@ -186,14 +186,14 @@ public class ItemCrossbow extends Item
 		{
 			if (this.hasAmmo(playerIn))
 			{
-				playerIn.setActiveHand(EnumHand.MAIN_HAND);
+				playerIn.setActiveHand(Hand.MAIN_HAND);
 			}
 		}
 
-		return new ActionResult<>(EnumActionResult.PASS, stack);
+		return new ActionResult<>(ActionResultType.PASS, stack);
 	}
 
-	private void shootBolt(final EntityLivingBase entityLiving, final ItemStack stack)
+	private void shootBolt(final LivingEntity entityLiving, final ItemStack stack)
 	{
 		if (!entityLiving.world.isRemote)
 		{
@@ -253,11 +253,11 @@ public class ItemCrossbow extends Item
 				bolt0 = this.createBolt(entityLiving, speed, 0, 0, 0, this.cBType.damageMultiplier, boltType);
 			}
 
-			if (entityLiving instanceof EntityPlayer)
+			if (entityLiving instanceof PlayerEntity)
 			{
-				final EntityPlayer player = (EntityPlayer) entityLiving;
+				final PlayerEntity player = (PlayerEntity) entityLiving;
 
-				if (player.capabilities.isCreativeMode)
+				if (player.isCreative())
 				{
 					if (bolt0 != null)
 					{
@@ -313,7 +313,7 @@ public class ItemCrossbow extends Item
 		}
 	}
 
-	private EntityBolt createBolt(EntityLivingBase entityLiving, float speed, float addRotationYaw, float addRotationPitch, float addInaccuracy,
+	private EntityBolt createBolt(LivingEntity entityLiving, float speed, float addRotationYaw, float addRotationPitch, float addInaccuracy,
 			float damageMultiplier, ItemBoltType boltType)
 	{
 		if (!entityLiving.world.isRemote)
@@ -335,12 +335,12 @@ public class ItemCrossbow extends Item
 	}
 
 	@Override
-	public void onUsingTick(final ItemStack stack, final EntityLivingBase living, final int count)
+	public void onUsingTick(final ItemStack stack, final LivingEntity living, final int count)
 	{
-		if (living instanceof EntityPlayer)
+		if (living instanceof PlayerEntity)
 		{
-			final EntityPlayer player = (EntityPlayer) living;
-			final ItemStack boltStack = player.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND);
+			final PlayerEntity player = (PlayerEntity) living;
+			final ItemStack boltStack = player.getItemStackFromSlot(EquipmentSlotType.OFFHAND);
 
 			if (this.hasAmmo(player))
 			{
@@ -349,12 +349,12 @@ public class ItemCrossbow extends Item
 				{
 					if (!living.getEntityWorld().isRemote)
 					{
-						ItemCrossbow.setLoadedBoltType(stack, ItemCrossbow.BOLT_TYPES[boltStack.getItemDamage()]);
+						ItemCrossbow.setLoadedBoltType(stack, ItemCrossbow.BOLT_TYPES[boltStack.getDamage()]);
 						ItemCrossbow.setLoaded(stack, true);
 
 						this.isSpecialLoaded = player.isSneaking();
 
-						if (!player.capabilities.isCreativeMode)
+						if (!player.isCreative())
 						{
 							int shrinkQuantity = 1;
 							if (this.isSpecialLoaded)
@@ -382,7 +382,7 @@ public class ItemCrossbow extends Item
 	}
 
 	@Override
-	public void onPlayerStoppedUsing(final ItemStack stack, final World worldIn, final EntityLivingBase entityLiving, final int timeLeft)
+	public void onPlayerStoppedUsing(final ItemStack stack, final World worldIn, final LivingEntity entityLiving, final int timeLeft)
 	{
 
 	}
@@ -424,7 +424,7 @@ public class ItemCrossbow extends Item
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void addInformation(final ItemStack stack, final World world, final List<String> tooltip, final ITooltipFlag flag)
 	{
 		final float seconds = this.durationInTicks / 20.0F;

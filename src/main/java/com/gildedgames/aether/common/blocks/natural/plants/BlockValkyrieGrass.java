@@ -9,21 +9,21 @@ import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.state.BooleanProperty;
 import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Random;
 
@@ -39,7 +39,7 @@ public class BlockValkyrieGrass extends BlockAetherPlant implements IBlockMultiN
 
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", SPROUT, MID, FULL);
 
-	public static final PropertyBool PROPERTY_HARVESTABLE = PropertyBool.create("harvestable");
+	public static final BooleanProperty PROPERTY_HARVESTABLE = BooleanProperty.create("harvestable");
 
 	private static final AxisAlignedBB GRASS_SHORT_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.3D, 0.9D);
 
@@ -66,20 +66,20 @@ public class BlockValkyrieGrass extends BlockAetherPlant implements IBlockMultiN
 	}
 
 	@Override
-	public int getMetaFromState(final IBlockState state)
+	public int getMetaFromState(final BlockState state)
 	{
 		return state.getValue(PROPERTY_VARIANT).getMeta();
 	}
 
 	@Override
-	public IBlockState getStateFromMeta(final int meta)
+	public BlockState getStateFromMeta(final int meta)
 	{
 		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta));
 	}
 
 	@Override
-	public IBlockState getStateForPlacement(final World worldIn, final BlockPos pos, final EnumFacing facing, final float hitX, final float hitY,
-			final float hitZ, final int meta, final EntityLivingBase placer)
+	public BlockState getStateForPlacement(final World worldIn, final BlockPos pos, final Direction facing, final float hitX, final float hitY,
+			final float hitZ, final int meta, final LivingEntity placer)
 	{
 		if (placer.getHeldItemMainhand().getMetadata() == VALKYRIE_GRASS_FULL)
 		{
@@ -95,19 +95,19 @@ public class BlockValkyrieGrass extends BlockAetherPlant implements IBlockMultiN
 	}
 
 	@Override
-	public boolean canGrow(final World worldIn, final BlockPos pos, final IBlockState state, final boolean isClient)
+	public boolean canGrow(final World worldIn, final BlockPos pos, final BlockState state, final boolean isClient)
 	{
 		return !state.getValue(PROPERTY_HARVESTABLE);
 	}
 
 	@Override
-	public boolean canUseBonemeal(final World worldIn, final Random rand, final BlockPos pos, final IBlockState state)
+	public boolean canUseBonemeal(final World worldIn, final Random rand, final BlockPos pos, final BlockState state)
 	{
 		return !state.getValue(PROPERTY_HARVESTABLE);
 	}
 
 	@Override
-	public void updateTick(final World world, final BlockPos pos, final IBlockState state, final Random rand)
+	public void updateTick(final World world, final BlockPos pos, final BlockState state, final Random rand)
 	{
 		if (!state.getValue(PROPERTY_HARVESTABLE))
 		{
@@ -123,7 +123,7 @@ public class BlockValkyrieGrass extends BlockAetherPlant implements IBlockMultiN
 
 	// called when the plant grows.
 	@Override
-	public void grow(final World worldIn, final Random rand, final BlockPos pos, final IBlockState state)
+	public void grow(final World worldIn, final Random rand, final BlockPos pos, final BlockState state)
 	{
 		// if kirrid grass is anything but fully grown.
 		if (!state.getValue(PROPERTY_HARVESTABLE))
@@ -142,13 +142,13 @@ public class BlockValkyrieGrass extends BlockAetherPlant implements IBlockMultiN
 	}
 
 	@Override
-	public int damageDropped(final IBlockState state)
+	public int damageDropped(final BlockState state)
 	{
 		return VALKYRIE_GRASS_SPROUT;
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(final IBlockState state, final IBlockAccess source, final BlockPos pos)
+	public AxisAlignedBB getBoundingBox(final BlockState state, final IBlockReader source, final BlockPos pos)
 	{
 		if (state.getValue(PROPERTY_VARIANT) == SPROUT)
 		{
@@ -167,11 +167,11 @@ public class BlockValkyrieGrass extends BlockAetherPlant implements IBlockMultiN
 	}
 
 	@Override
-	public boolean removedByPlayer(final IBlockState state, final World world, final BlockPos pos, final EntityPlayer player, final boolean willHarvest)
+	public boolean removedByPlayer(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final boolean willHarvest)
 	{
 		if (state.getValue(PROPERTY_HARVESTABLE))
 		{
-			if (player.capabilities.isCreativeMode)
+			if (player.isCreative())
 			{
 				world.setBlockToAir(pos);
 
@@ -200,8 +200,8 @@ public class BlockValkyrieGrass extends BlockAetherPlant implements IBlockMultiN
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(final CreativeTabs tab, final NonNullList<ItemStack> list)
+	@OnlyIn(Dist.CLIENT)
+	public void getSubBlocks(final ItemGroup tab, final NonNullList<ItemStack> list)
 	{
 		for (final BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
 		{
@@ -214,7 +214,7 @@ public class BlockValkyrieGrass extends BlockAetherPlant implements IBlockMultiN
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public Block.EnumOffsetType getOffsetType()
 	{
 		return EnumOffsetType.XZ;

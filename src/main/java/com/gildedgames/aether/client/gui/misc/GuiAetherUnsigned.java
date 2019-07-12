@@ -1,8 +1,8 @@
 package com.gildedgames.aether.client.gui.misc;
 
 import com.gildedgames.aether.common.AetherCore;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.widget.button.Button;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.client.config.GuiCheckBox;
@@ -11,17 +11,17 @@ import javax.annotation.Nullable;
 import java.io.IOException;
 import java.net.URI;
 
-public class GuiAetherUnsigned extends GuiScreen
+public class GuiAetherUnsigned extends Screen
 {
 	private static final String CURSEFORGE_URL = "https://go.aetherii.com/curseforge";
 
-	private final GuiScreen parent;
+	private final Screen parent;
 
 	private GuiCheckBox checkbox;
 
-	private GuiButton dlButton, ackButton;
+	private Button dlButton, ackButton;
 
-	public GuiAetherUnsigned(@Nullable GuiScreen parent)
+	public GuiAetherUnsigned(@Nullable Screen parent)
 	{
 		this.parent = parent;
 	}
@@ -33,10 +33,10 @@ public class GuiAetherUnsigned extends GuiScreen
 
 		this.checkbox = new GuiCheckBox(0, (sr.getScaledWidth() / 2) - 172, 180, "Yes, I understand this installation will not receive official support.", false);
 
-		this.ackButton = new GuiButton(1, (sr.getScaledWidth() / 2) - 60, 204, 120, 20, "Acknowledge");
+		this.ackButton = new Button(1, (sr.getScaledWidth() / 2) - 60, 204, 120, 20, "Acknowledge");
 		this.ackButton.enabled = false;
 
-		this.dlButton = new GuiButton(10, (sr.getScaledWidth() / 2) - 90, 104, 180, 20, "Download from CurseForge");
+		this.dlButton = new Button(10, (sr.getScaledWidth() / 2) - 90, 104, 180, 20, "Download from CurseForge");
 
 		this.buttonList.add(this.checkbox);
 		this.buttonList.add(this.ackButton);
@@ -80,7 +80,7 @@ public class GuiAetherUnsigned extends GuiScreen
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton button) throws IOException
+	protected void actionPerformed(Button button) throws IOException
 	{
 		if (button.id == this.checkbox.id)
 		{

@@ -1,140 +1,140 @@
 package com.gildedgames.aether.client.models.entities.tile;
 
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.Entity;
 
-public class ModelMasonryBench extends ModelBase
+public class ModelMasonryBench extends EntityModel
 {
 	//fields
-	final ModelRenderer MainBottom;
+	final RendererModel MainBottom;
 
-	final ModelRenderer Pedal;
+	final RendererModel Pedal;
 
-	final ModelRenderer MainLeft;
+	final RendererModel MainLeft;
 
-	final ModelRenderer MainBack;
+	final RendererModel MainBack;
 
-	final ModelRenderer MainRight;
+	final RendererModel MainRight;
 
-	final ModelRenderer MainTop;
+	final RendererModel MainTop;
 
-	final ModelRenderer TopRight;
+	final RendererModel TopRight;
 
-	final ModelRenderer TopBack;
+	final RendererModel TopBack;
 
-	final ModelRenderer TopLeft;
+	final RendererModel TopLeft;
 
-	final ModelRenderer Workslab;
+	final RendererModel Workslab;
 
-	final ModelRenderer SawRotor;
+	final RendererModel SawRotor;
 
-	final ModelRenderer SawRight;
+	final RendererModel SawRight;
 
-	final ModelRenderer SawLeft;
+	final RendererModel SawLeft;
 
-	final ModelRenderer RimRight;
+	final RendererModel RimRight;
 
-	final ModelRenderer RimBack;
+	final RendererModel RimBack;
 
-	final ModelRenderer RimLeft;
+	final RendererModel RimLeft;
 
 	public ModelMasonryBench()
 	{
 		this.textureWidth = 128;
 		this.textureHeight = 256;
 
-		this.MainBottom = new ModelRenderer(this, 33, 91);
+		this.MainBottom = new RendererModel(this, 33, 91);
 		this.MainBottom.addBox(-8F, 22F, -8F, 16, 2, 16);
 		this.MainBottom.setRotationPoint(0F, 0F, 0F);
 		this.MainBottom.setTextureSize(128, 256);
 		this.MainBottom.mirror = true;
 		this.setRotation(this.MainBottom, 0F, 0F, 0F);
-		this.Pedal = new ModelRenderer(this, 97, 91);
+		this.Pedal = new RendererModel(this, 97, 91);
 		this.Pedal.addBox(-2F, 0F, -5F, 4, 2, 5);
 		this.Pedal.setRotationPoint(3.5F, 19F, -2F);
 		this.Pedal.setTextureSize(128, 256);
 		this.Pedal.mirror = true;
 		this.setRotation(this.Pedal, 0.1745329F, 0F, 0F);
-		this.MainLeft = new ModelRenderer(this, 0, 67);
+		this.MainLeft = new RendererModel(this, 0, 67);
 		this.MainLeft.addBox(-8F, 14F, -8F, 9, 8, 16);
 		this.MainLeft.setRotationPoint(0F, 0F, 0F);
 		this.MainLeft.setTextureSize(128, 256);
 		this.MainLeft.mirror = true;
 		this.setRotation(this.MainLeft, 0F, 0F, 0F);
-		this.MainBack = new ModelRenderer(this, 50, 73);
+		this.MainBack = new RendererModel(this, 50, 73);
 		this.MainBack.addBox(1F, 14F, -2F, 5, 8, 10);
 		this.MainBack.setRotationPoint(0F, 0F, 0F);
 		this.MainBack.setTextureSize(128, 256);
 		this.MainBack.mirror = true;
 		this.setRotation(this.MainBack, 0F, 0F, 0F);
-		this.MainRight = new ModelRenderer(this, 80, 67);
+		this.MainRight = new RendererModel(this, 80, 67);
 		this.MainRight.addBox(6F, 14F, -8F, 2, 8, 16);
 		this.MainRight.setRotationPoint(0F, 0F, 0F);
 		this.MainRight.setTextureSize(128, 256);
 		this.MainRight.mirror = true;
 		this.setRotation(this.MainRight, 0F, 0F, 0F);
-		this.MainTop = new ModelRenderer(this, 33, 49);
+		this.MainTop = new RendererModel(this, 33, 49);
 		this.MainTop.addBox(-8F, 12F, -8F, 16, 2, 16);
 		this.MainTop.setRotationPoint(0F, 0F, 0F);
 		this.MainTop.setTextureSize(128, 256);
 		this.MainTop.mirror = true;
 		this.setRotation(this.MainTop, 0F, 0F, 0F);
-		this.TopRight = new ModelRenderer(this, 0, 31);
+		this.TopRight = new RendererModel(this, 0, 31);
 		this.TopRight.addBox(-8F, 10F, -8F, 10, 2, 16);
 		this.TopRight.setRotationPoint(0F, 0F, 0F);
 		this.TopRight.setTextureSize(128, 256);
 		this.TopRight.mirror = true;
 		this.setRotation(this.TopRight, 0F, 0F, 0F);
-		this.TopBack = new ModelRenderer(this, 52, 44);
+		this.TopBack = new RendererModel(this, 52, 44);
 		this.TopBack.addBox(2F, 10F, 5F, 3, 2, 3);
 		this.TopBack.setRotationPoint(0F, 0F, 0F);
 		this.TopBack.setTextureSize(128, 256);
 		this.TopBack.mirror = true;
 		this.setRotation(this.TopBack, 0F, 0F, 0F);
-		this.TopLeft = new ModelRenderer(this, 64, 31);
+		this.TopLeft = new RendererModel(this, 64, 31);
 		this.TopLeft.addBox(5F, 10F, -8F, 3, 2, 16);
 		this.TopLeft.setRotationPoint(0F, 0F, 0F);
 		this.TopLeft.setTextureSize(128, 256);
 		this.TopLeft.mirror = true;
 		this.setRotation(this.TopLeft, 0F, 0F, 0F);
-		this.Workslab = new ModelRenderer(this, 0, 17);
+		this.Workslab = new RendererModel(this, 0, 17);
 		this.Workslab.addBox(-6F, 9.5F, -7F, 7, 1, 13);
 		this.Workslab.setRotationPoint(0F, 0F, 0F);
 		this.Workslab.setTextureSize(128, 256);
 		this.Workslab.mirror = true;
 		this.setRotation(this.Workslab, 0F, 0F, 0F);
-		this.SawRotor = new ModelRenderer(this, 40, 29);
+		this.SawRotor = new RendererModel(this, 40, 29);
 		this.SawRotor.addBox(0F, -0.5F, -0.5F, 3, 1, 1);
 		this.SawRotor.setRotationPoint(2F, 11F, 0F);
 		this.SawRotor.setTextureSize(128, 256);
 		this.SawRotor.mirror = true;
 		this.setRotation(this.SawRotor, 0.7853982F, 0F, 0F);
-		this.SawRight = new ModelRenderer(this, 48, 21);
+		this.SawRight = new RendererModel(this, 48, 21);
 		this.SawRight.addBox(0.9F, -2.5F, -2.5F, 1, 5, 5);
 		this.SawRight.setRotationPoint(2F, 11F, 0F);
 		this.SawRight.setTextureSize(128, 256);
 		this.SawRight.mirror = true;
 		this.setRotation(this.SawRight, 0F, 0F, 0F);
-		this.SawLeft = new ModelRenderer(this, 60, 21);
+		this.SawLeft = new RendererModel(this, 60, 21);
 		this.SawLeft.addBox(1.1F, -2.5F, -2.5F, 1, 5, 5);
 		this.SawLeft.setRotationPoint(2F, 11F, 0F);
 		this.SawLeft.setTextureSize(128, 256);
 		this.SawLeft.mirror = true;
 		this.setRotation(this.SawLeft, 0.7853982F, 0F, 0F);
-		this.RimRight = new ModelRenderer(this, 0, 0);
+		this.RimRight = new RendererModel(this, 0, 0);
 		this.RimRight.addBox(-8F, 8F, -8F, 1, 2, 15);
 		this.RimRight.setRotationPoint(0F, 0F, 0F);
 		this.RimRight.setTextureSize(128, 256);
 		this.RimRight.mirror = true;
 		this.setRotation(this.RimRight, 0F, 0F, 0F);
-		this.RimBack = new ModelRenderer(this, 32, 14);
+		this.RimBack = new RendererModel(this, 32, 14);
 		this.RimBack.addBox(-8F, 8F, 7F, 16, 2, 1);
 		this.RimBack.setRotationPoint(0F, 0F, 0F);
 		this.RimBack.setTextureSize(128, 256);
 		this.RimBack.mirror = true;
 		this.setRotation(this.RimBack, 0F, 0F, 0F);
-		this.RimLeft = new ModelRenderer(this, 66, 0);
+		this.RimLeft = new RendererModel(this, 66, 0);
 		this.RimLeft.addBox(7F, 8F, -8F, 1, 2, 15);
 		this.RimLeft.setRotationPoint(0F, 0F, 0F);
 		this.RimLeft.setTextureSize(128, 256);
@@ -170,7 +170,7 @@ public class ModelMasonryBench extends ModelBase
 		this.RimLeft.render(f5);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
+	private void setRotation(RendererModel model, float x, float y, float z)
 	{
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;

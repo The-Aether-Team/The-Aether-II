@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.capabilities.world.chunk;
 
 import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.INBT;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 
@@ -39,15 +39,15 @@ public class PlacementFlagCapability implements IPlacementFlagCapability
 	}
 
 	@Override
-	public void write(NBTTagCompound output)
+	public void write(CompoundNBT output)
 	{
 		output.setByteArray("bits", this.bits.toByteArray());
 	}
 
 	@Override
-	public void read(NBTTagCompound input)
+	public void read(CompoundNBT input)
 	{
-		if (input.hasKey("bits"))
+		if (input.contains("bits"))
 		{
 			this.bits = BitSet.valueOf(input.getByteArray("bits"));
 		}
@@ -61,19 +61,19 @@ public class PlacementFlagCapability implements IPlacementFlagCapability
 	public static class Storage implements Capability.IStorage<IPlacementFlagCapability>
 	{
 		@Override
-		public NBTBase writeNBT(Capability<IPlacementFlagCapability> capability, IPlacementFlagCapability instance, EnumFacing side)
+		public INBT writeNBT(Capability<IPlacementFlagCapability> capability, IPlacementFlagCapability instance, Direction side)
 		{
-			NBTTagCompound out = new NBTTagCompound();
+			CompoundNBT out = new CompoundNBT();
 			instance.write(out);
 
 			return out;
 		}
 
 		@Override
-		public void readNBT(Capability<IPlacementFlagCapability> capability, IPlacementFlagCapability instance, EnumFacing side,
-				NBTBase nbt)
+		public void readNBT(Capability<IPlacementFlagCapability> capability, IPlacementFlagCapability instance, Direction side,
+				INBT nbt)
 		{
-			NBTTagCompound input = (NBTTagCompound) nbt;
+			CompoundNBT input = (CompoundNBT) nbt;
 			instance.read(input);
 		}
 	}

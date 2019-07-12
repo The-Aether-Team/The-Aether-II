@@ -3,14 +3,14 @@ package com.gildedgames.aether.common.items.weapons;
 import com.gildedgames.aether.common.items.IDropOnDeath;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
 
@@ -25,8 +25,8 @@ public class ItemDart extends Item implements IDropOnDeath
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void getSubItems(final CreativeTabs tab, final NonNullList<ItemStack> subItems)
+	@OnlyIn(Dist.CLIENT)
+	public void getSubItems(final ItemGroup tab, final NonNullList<ItemStack> subItems)
 	{
 		if (!this.isInCreativeTab(tab))
 		{
@@ -40,10 +40,10 @@ public class ItemDart extends Item implements IDropOnDeath
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void addInformation(final ItemStack stack, final World world, final List<String> tooltip, final ITooltipFlag flag)
 	{
-		final ItemDartType type = ITEM_VARIANTS[stack.getItemDamage()];
+		final ItemDartType type = ITEM_VARIANTS[stack.getDamage()];
 
 		final int slashDamageLevel = type.getSlashDamageLevel();
 		final int pierceDamageLevel = type.getPierceDamageLevel();

@@ -6,7 +6,9 @@ import com.gildedgames.aether.api.world.spawn.conditions.IConditionPosition;
 import com.gildedgames.aether.common.world.spawning.util.GroundPositionSelector;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntitySpawnPlacementRegistry;
+import net.minecraft.entity.EntitySpawnPlacementRegistry.PlacementType;
+import net.minecraft.entity.MobEntity;
 
 import java.util.Collections;
 import java.util.List;
@@ -16,7 +18,7 @@ public class SpawnEntry implements ISpawnEntry
 
 	private final IPositionSelector positionSelector;
 
-	private final EntityLiving.SpawnPlacementType placementType;
+	private final PlacementType placementType;
 
 	private final Class<? extends Entity> clazz;
 
@@ -26,12 +28,12 @@ public class SpawnEntry implements ISpawnEntry
 
 	private final List<IConditionPosition> conditions = Lists.newArrayList();
 
-	public SpawnEntry(EntityLiving.SpawnPlacementType placementType, Class<? extends Entity> clazz, float rarityWeight, int minGroupSize, int maxGroupSize)
+	public SpawnEntry(PlacementType placementType, Class<? extends Entity> clazz, float rarityWeight, int minGroupSize, int maxGroupSize)
 	{
 		this(placementType, clazz, rarityWeight, minGroupSize, maxGroupSize, new GroundPositionSelector());
 	}
 
-	public SpawnEntry(EntityLiving.SpawnPlacementType placementType, Class<? extends Entity> clazz, float rarityWeight, int minGroupSize, int maxGroupSize,
+	public SpawnEntry(PlacementType placementType, Class<? extends Entity> clazz, float rarityWeight, int minGroupSize, int maxGroupSize,
 			IPositionSelector heightSelector)
 	{
 		this.placementType = placementType;
@@ -43,7 +45,7 @@ public class SpawnEntry implements ISpawnEntry
 	}
 
 	@Override
-	public EntityLiving.SpawnPlacementType getPlacementType()
+	public PlacementType getPlacementType()
 	{
 		return this.placementType;
 	}

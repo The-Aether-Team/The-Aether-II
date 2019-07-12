@@ -15,9 +15,9 @@ import com.gildedgames.aether.common.util.helpers.PerfHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.IThreadListener;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -31,34 +31,34 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void spawnSlashParticleFrom(World world, double x, double y, double z, double offsetX, double offsetY, double offsetZ)
 	{
-		ParticleSlash effect = new ParticleSlash(Minecraft.getMinecraft().getTextureManager(), world, x,
+		ParticleSlash effect = new ParticleSlash(Minecraft.getInstance().getTextureManager(), world, x,
 				y, z, offsetX, 0.0D, offsetZ);
 
-		Minecraft.getMinecraft().effectRenderer.addEffect(effect);
+		Minecraft.getInstance().effectRenderer.addEffect(effect);
 	}
 
 	@Override
 	public void spawnPierceParticleFrom(World world, double x, double y, double z, double offsetX, double offsetY, double offsetZ)
 	{
-		ParticlePierce effect = new ParticlePierce(Minecraft.getMinecraft().getTextureManager(), world, x,
+		ParticlePierce effect = new ParticlePierce(Minecraft.getInstance().getTextureManager(), world, x,
 				y, z, offsetX, 0.0D, offsetZ);
 
-		Minecraft.getMinecraft().effectRenderer.addEffect(effect);
+		Minecraft.getInstance().effectRenderer.addEffect(effect);
 	}
 
 	@Override
 	public void spawnImpactParticleFrom(World world, double x, double y, double z, double offsetX, double offsetY, double offsetZ)
 	{
-		ParticleImpact effect = new ParticleImpact(Minecraft.getMinecraft().getTextureManager(), world, x,
+		ParticleImpact effect = new ParticleImpact(Minecraft.getInstance().getTextureManager(), world, x,
 				y, z, offsetX, 0.0D, offsetZ);
 
-		Minecraft.getMinecraft().effectRenderer.addEffect(effect);
+		Minecraft.getInstance().effectRenderer.addEffect(effect);
 	}
 
 	@Override
 	public void turnOffScreen()
 	{
-		Minecraft.getMinecraft().displayGuiScreen(null);
+		Minecraft.getInstance().displayGuiScreen(null);
 	}
 
 	@Override
@@ -66,7 +66,7 @@ public class ClientProxy extends CommonProxy
 	{
 		super.preInit(event);
 
-		Minecraft.getMinecraft().loadingScreen = new CustomLoadingRenderer(Minecraft.getMinecraft(), Minecraft.getMinecraft().loadingScreen);
+		Minecraft.getInstance().loadingScreen = new CustomLoadingRenderer(Minecraft.getInstance(), Minecraft.getInstance().loadingScreen);
 
 		MinecraftForge.EVENT_BUS.register(this);
 
@@ -83,7 +83,7 @@ public class ClientProxy extends CommonProxy
 			AetherCore.ANALYTICS = AetherCore.isInsideDevEnvironment() ? new GameAnalytics() :
 					new GameAnalytics("c8e4d94251ce253e138ae8a702e20301", "1ba3cb91e03cbb578b97c26f872e812dd05f5bbb");
 
-			if (Minecraft.getMinecraft().isSnooperEnabled() && AetherCore.CONFIG.isAnalyticsEnabled())
+			if (Minecraft.getInstance().isSnooperEnabled() && AetherCore.CONFIG.isAnalyticsEnabled())
 			{
 				AetherCore.ANALYTICS.setup();
 			}
@@ -113,21 +113,21 @@ public class ClientProxy extends CommonProxy
 	}
 
 	@Override
-	public void displayDismountMessage(final EntityPlayer player)
+	public void displayDismountMessage(final PlayerEntity player)
 	{
-		if (player == Minecraft.getMinecraft().player)
+		if (player == Minecraft.getInstance().player)
 		{
-			Minecraft.getMinecraft().ingameGUI
-					.setOverlayMessage(I18n.format("mount.onboard", Minecraft.getMinecraft().gameSettings.keyBindSneak.getDisplayName()), false);
+			Minecraft.getInstance().ingameGUI
+					.setOverlayMessage(I18n.format("mount.onboard", Minecraft.getInstance().gameSettings.keyBindSneak.getDisplayName()), false);
 		}
 	}
 
 	@Override
-	public void modifyEntityQuicksoil(final EntityLivingBase entity)
+	public void modifyEntityQuicksoil(final LivingEntity entity)
 	{
-		if (entity == Minecraft.getMinecraft().player)
+		if (entity == Minecraft.getInstance().player)
 		{
-			KeyBinding.setKeyBindState(Minecraft.getMinecraft().gameSettings.keyBindSneak.getKeyCode(), false);
+			KeyBinding.setKeyBindState(Minecraft.getInstance().gameSettings.keyBindSneak.getKeyCode(), false);
 		}
 
 		super.modifyEntityQuicksoil(entity);
@@ -144,7 +144,7 @@ public class ClientProxy extends CommonProxy
 
 			if (r.nextInt(10) == 0)
 			{
-				world.spawnParticle(EnumParticleTypes.LAVA, x + (r.nextDouble() * (r.nextBoolean() ? range : -range)), y,
+				world.spawnParticle(ParticleTypes.LAVA, x + (r.nextDouble() * (r.nextBoolean() ? range : -range)), y,
 						z + (r.nextDouble() * (r.nextBoolean() ? range : -range)),
 						(r.nextDouble() * (r.nextBoolean() ? range : -range)) * 0.2, 0.075 * r.nextDouble(),
 						(r.nextDouble() * (r.nextBoolean() ? range : -range)) * 0.2);
@@ -152,7 +152,7 @@ public class ClientProxy extends CommonProxy
 
 			if (r.nextInt(4) == 0)
 			{
-				world.spawnParticle(EnumParticleTypes.FLAME, x + (r.nextDouble() * (r.nextBoolean() ? range : -range)), y,
+				world.spawnParticle(ParticleTypes.FLAME, x + (r.nextDouble() * (r.nextBoolean() ? range : -range)), y,
 						z + (r.nextDouble() * (r.nextBoolean() ? range : -range)),
 						(r.nextDouble() * (r.nextBoolean() ? range : -range)) * 0.1, 0.1 * r.nextDouble(),
 						(r.nextDouble() * (r.nextBoolean() ? range : -range)) * 0.1);
@@ -160,7 +160,7 @@ public class ClientProxy extends CommonProxy
 
 			if (r.nextInt(4) == 0)
 			{
-				world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x + (r.nextDouble() * (r.nextBoolean() ? range : -range)), y,
+				world.spawnParticle(ParticleTypes.SMOKE_NORMAL, x + (r.nextDouble() * (r.nextBoolean() ? range : -range)), y,
 						z + (r.nextDouble() * (r.nextBoolean() ? range : -range)),
 						(r.nextDouble() * (r.nextBoolean() ? range : -range)) * 0.1, 0.1 * r.nextDouble(),
 						(r.nextDouble() * (r.nextBoolean() ? range : -range)) * 0.1);
@@ -179,7 +179,7 @@ public class ClientProxy extends CommonProxy
 
 			if (r.nextInt(800) == 0)
 			{
-				world.spawnParticle(EnumParticleTypes.LAVA, (r.nextDouble() * (r.nextBoolean() ? range : -range)), y,
+				world.spawnParticle(ParticleTypes.LAVA, (r.nextDouble() * (r.nextBoolean() ? range : -range)), y,
 						z + (r.nextDouble() * (r.nextBoolean() ? range : -range)),
 						(r.nextDouble() * (r.nextBoolean() ? range : -range)) * 0.001, 0.075 * r.nextDouble(),
 						(r.nextDouble() * (r.nextBoolean() ? range : -range)) * 0.001);
@@ -187,7 +187,7 @@ public class ClientProxy extends CommonProxy
 
 			if (r.nextInt(4) == 0)
 			{
-				world.spawnParticle(EnumParticleTypes.FLAME, x + (r.nextDouble() * (r.nextBoolean() ? range : -range)), y,
+				world.spawnParticle(ParticleTypes.FLAME, x + (r.nextDouble() * (r.nextBoolean() ? range : -range)), y,
 						z + (r.nextDouble() * (r.nextBoolean() ? range : -range)),
 						(r.nextDouble() * (r.nextBoolean() ? range : -range)) * 0.001, 0.04 * r.nextDouble(),
 						(r.nextDouble() * (r.nextBoolean() ? range : -range)) * 0.001);
@@ -195,7 +195,7 @@ public class ClientProxy extends CommonProxy
 
 			if (r.nextInt(4) == 0)
 			{
-				world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x + (r.nextDouble() * (r.nextBoolean() ? range : -range)), y,
+				world.spawnParticle(ParticleTypes.SMOKE_NORMAL, x + (r.nextDouble() * (r.nextBoolean() ? range : -range)), y,
 						z + (r.nextDouble() * (r.nextBoolean() ? range : -range)),
 						(r.nextDouble() * (r.nextBoolean() ? range : -range)) * 0.001, 0.075 * r.nextDouble(),
 						(r.nextDouble() * (r.nextBoolean() ? range : -range)) * 0.001);
@@ -206,6 +206,6 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public IThreadListener getMinecraftThread()
 	{
-		return Minecraft.getMinecraft();
+		return Minecraft.getInstance();
 	}
 }

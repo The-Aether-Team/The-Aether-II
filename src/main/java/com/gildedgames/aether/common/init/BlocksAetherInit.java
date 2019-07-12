@@ -35,14 +35,14 @@ import com.gildedgames.aether.common.blocks.natural.wood.BlockAmberLog;
 import com.gildedgames.aether.common.blocks.util.*;
 import com.gildedgames.aether.common.items.blocks.ItemBlockMultiName;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.BlockItem;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.Collection;
@@ -272,7 +272,7 @@ public class BlocksAetherInit
 	{
 		for (final Block block : registeredBlocks)
 		{
-			final ItemBlock item;
+			final BlockItem item;
 
 			if (block instanceof IInternalBlock)
 			{
@@ -288,7 +288,7 @@ public class BlocksAetherInit
 			}
 			else
 			{
-				item = new ItemBlock(block);
+				item = new BlockItem(block);
 			}
 
 			if (block.getRegistryName() == null)

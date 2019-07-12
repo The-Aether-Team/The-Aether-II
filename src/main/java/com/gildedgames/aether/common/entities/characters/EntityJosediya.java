@@ -13,14 +13,14 @@ import com.gildedgames.orbis.lib.util.mc.NBTHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumHand;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class EntityJosediya extends EntityCharacter implements IEntityEyesComponentProvider
 {
@@ -44,35 +44,35 @@ public class EntityJosediya extends EntityCharacter implements IEntityEyesCompon
 	}
 
 	@Override
-	protected void initEntityAI()
+	protected void registerGoals()
 	{
-		this.tasks.addTask(3, new EntityAILookIdle(this));
-		//this.tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 50.0F, 1.0F));
+		this.goalSelector.addGoal(3, new EntityAILookIdle(this));
+		//this.goalSelector.addGoal(2, new EntityAIWatchClosest(this, EntityPlayer.class, 50.0F, 1.0F));
 	}
 
 	@Override
-	protected void applyEntityAttributes()
+	protected void registerAttributes()
 	{
-		super.applyEntityAttributes();
+		super.registerAttributes();
 
-		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
-		this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
+		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
+		this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
 	}
 
 	@Override
-	public void writeEntityToNBT(final NBTTagCompound compound)
+	public void writeEntityToNBT(final CompoundNBT compound)
 	{
 		super.writeEntityToNBT(compound);
 
-		compound.setTag("spawned", NBTHelper.writeBlockPos(this.spawned));
+		compound.put("spawned", NBTHelper.writeBlockPos(this.spawned));
 	}
 
 	@Override
-	public void readEntityFromNBT(final NBTTagCompound compound)
+	public void readEntityFromNBT(final CompoundNBT compound)
 	{
 		super.readEntityFromNBT(compound);
 
-		this.spawned = NBTHelper.readBlockPos(compound.getCompoundTag("spawned"));
+		this.spawned = NBTHelper.readBlockPos(compound.getCompound("spawned"));
 
 		if (this.spawned != null)
 		{
@@ -81,9 +81,9 @@ public class EntityJosediya extends EntityCharacter implements IEntityEyesCompon
 	}
 
 	@Override
-	public void entityInit()
+	public void registerData()
 	{
-		super.entityInit();
+		super.registerData();
 	}
 
 	@Override
@@ -93,14 +93,14 @@ public class EntityJosediya extends EntityCharacter implements IEntityEyesCompon
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void turn(final float yaw, final float pitch)
 	{
 
 	}
 
 	@Override
-	public void onUpdate()
+	public void livingTick()
 	{
 		this.posX = this.prevPosX;
 		this.posZ = this.prevPosZ;
@@ -111,7 +111,7 @@ public class EntityJosediya extends EntityCharacter implements IEntityEyesCompon
 			this.setHomePosAndDistance(this.spawned, 3);
 		}
 
-		super.onUpdate();
+		super.livingTick();
 
 		this.eyes.update();
 
@@ -120,7 +120,7 @@ public class EntityJosediya extends EntityCharacter implements IEntityEyesCompon
 	}
 
 	@Override
-	public boolean processInteract(final EntityPlayer player, final EnumHand hand)
+	public boolean processInteract(final PlayerEntity player, final Hand hand)
 	{
 		if (!super.processInteract(player, hand))
 		{

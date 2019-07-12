@@ -5,19 +5,19 @@ import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.state.BooleanProperty;
+import net.minecraft.state.IntegerProperty;
 import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -26,11 +26,11 @@ import java.util.Random;
 
 public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 {
-	public static final PropertyBool PROPERTY_IS_TOP_BLOCK = PropertyBool.create("is_top_block");
+	public static final BooleanProperty PROPERTY_IS_TOP_BLOCK = BooleanProperty.create("is_top_block");
 
 	private static final int STAGE_COUNT = 5;
 
-	public static final PropertyInteger PROPERTY_STAGE = PropertyInteger.create("stage", 1, STAGE_COUNT);
+	public static final IntegerProperty PROPERTY_STAGE = IntegerProperty.create("stage", 1, STAGE_COUNT);
 
 	public BlockOrangeTree()
 	{
@@ -46,7 +46,7 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	}
 
 	@Override
-	public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos)
+	public float getBlockHardness(BlockState blockState, World worldIn, BlockPos pos)
 	{
 		if (blockState.getValue(PROPERTY_STAGE) >= STAGE_COUNT)
 		{
@@ -59,7 +59,7 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	@Override
 	public boolean canPlaceBlockAt(World world, BlockPos pos)
 	{
-		IBlockState soilBlock = world.getBlockState(pos.down());
+		BlockState soilBlock = world.getBlockState(pos.down());
 
 		if (soilBlock.getBlock() == this && soilBlock.getValue(PROPERTY_IS_TOP_BLOCK))
 		{
@@ -70,12 +70,12 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	}
 
 	@Override
-	public void updateTick(World world, BlockPos pos, IBlockState state, Random random)
+	public void updateTick(World world, BlockPos pos, BlockState state, Random random)
 	{
 		BlockPos topBlock = state.getValue(PROPERTY_IS_TOP_BLOCK) ? pos : pos.up();
 		BlockPos bottomBlock = state.getValue(PROPERTY_IS_TOP_BLOCK) ? pos.down() : pos;
 
-		IBlockState soilState = world.getBlockState(bottomBlock.down());
+		BlockState soilState = world.getBlockState(bottomBlock.down());
 
 		int chance = 10;
 
@@ -92,11 +92,11 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	}
 
 	@Override
-	public boolean validatePosition(World world, BlockPos pos, IBlockState state)
+	public boolean validatePosition(World world, BlockPos pos, BlockState state)
 	{
 		if (state.getValue(PROPERTY_STAGE) >= 3)
 		{
-			IBlockState adj = world.getBlockState(state.getValue(PROPERTY_IS_TOP_BLOCK) ? pos.down() : pos.up());
+			BlockState adj = world.getBlockState(state.getValue(PROPERTY_IS_TOP_BLOCK) ? pos.down() : pos.up());
 
 			if (adj.getBlock() != this)
 			{
@@ -108,7 +108,7 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	}
 
 	@Override
-	public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack)
+	public void harvestBlock(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack)
 	{
 		this.destroyTree(worldIn, pos, state);
 
@@ -116,7 +116,7 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	}
 
 	@Override
-	public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest)
+	public boolean removedByPlayer(BlockState state, World world, BlockPos pos, PlayerEntity player, boolean willHarvest)
 	{
 		boolean isRoot = !state.getValue(PROPERTY_IS_TOP_BLOCK);
 
@@ -124,7 +124,7 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 
 		if (state.getValue(PROPERTY_STAGE) == STAGE_COUNT)
 		{
-			if (player.capabilities.isCreativeMode)
+			if (player.isCreative())
 			{
 				this.destroyTree(world, pos, state);
 
@@ -138,7 +138,7 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 				}
 			}
 
-			IBlockState adjState = world.getBlockState(adjPos);
+			BlockState adjState = world.getBlockState(adjPos);
 
 			if (adjState.getBlock() == this)
 			{
@@ -156,7 +156,7 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	}
 
 	@Override
-	public IBlockState getStateFromMeta(int meta)
+	public BlockState getStateFromMeta(int meta)
 	{
 		int isTop = (meta / STAGE_COUNT);
 		int stage = ((meta - (STAGE_COUNT * isTop)) % STAGE_COUNT) + 1;
@@ -165,7 +165,7 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	}
 
 	@Override
-	public int getMetaFromState(IBlockState state)
+	public int getMetaFromState(BlockState state)
 	{
 		int top = state.getValue(PROPERTY_IS_TOP_BLOCK) ? STAGE_COUNT : 0;
 		int stage = state.getValue(PROPERTY_STAGE);
@@ -180,7 +180,7 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	}
 
 	@Override
-	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient)
+	public boolean canGrow(World worldIn, BlockPos pos, BlockState state, boolean isClient)
 	{
 		int stage = state.getValue(PROPERTY_STAGE);
 
@@ -188,7 +188,7 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	}
 
 	@Override
-	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state)
+	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state)
 	{
 		int stage = state.getValue(PROPERTY_STAGE);
 
@@ -196,13 +196,13 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	}
 
 	@Override
-	public boolean isSuitableSoilBlock(World world, BlockPos pos, IBlockState state)
+	public boolean isSuitableSoilBlock(World world, BlockPos pos, BlockState state)
 	{
 		return (state.getBlock() == this && !state.getValue(PROPERTY_IS_TOP_BLOCK) && state.getValue(PROPERTY_STAGE) >= 3) || super
 				.isSuitableSoilBlock(world, pos, state);
 	}
 
-	private ArrayList<ItemStack> getFruitDrops(IBlockAccess world, IBlockState state)
+	private ArrayList<ItemStack> getFruitDrops(IBlockReader world, BlockState state)
 	{
 		Random rand = world instanceof World ? ((World) world).rand : new Random();
 
@@ -216,7 +216,7 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 		return Lists.newArrayList(new ItemStack(ItemsAether.orange, count));
 	}
 
-	private void destroyTree(World world, BlockPos pos, IBlockState state)
+	private void destroyTree(World world, BlockPos pos, BlockState state)
 	{
 		world.setBlockToAir(pos);
 
@@ -229,7 +229,7 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	}
 
 	@Override
-	protected void invalidateBlock(World world, BlockPos pos, IBlockState state)
+	protected void invalidateBlock(World world, BlockPos pos, BlockState state)
 	{
 		if (world.getBlockState(state.getValue(PROPERTY_IS_TOP_BLOCK) ? pos.down() : pos.up()).getBlock() == this)
 		{
@@ -240,7 +240,7 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	}
 
 	@Override
-	public void getDrops(NonNullList<ItemStack> list, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
+	public void getDrops(NonNullList<ItemStack> list, IBlockReader world, BlockPos pos, BlockState state, int fortune)
 	{
 		super.getDrops(list, world, pos, state, fortune);
 
@@ -251,7 +251,7 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	}
 
 	@Override
-	public void grow(World world, Random rand, BlockPos pos, IBlockState state)
+	public void grow(World world, Random rand, BlockPos pos, BlockState state)
 	{
 		BlockPos topBlock = state.getValue(PROPERTY_IS_TOP_BLOCK) ? pos : pos.up();
 		BlockPos bottomBlock = state.getValue(PROPERTY_IS_TOP_BLOCK) ? pos.down() : pos;
@@ -261,8 +261,8 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 
 	private void growTree(World world, BlockPos topPos, BlockPos bottomPos, int amount)
 	{
-		IBlockState topState = world.getBlockState(bottomPos);
-		IBlockState bottomState = world.getBlockState(bottomPos);
+		BlockState topState = world.getBlockState(bottomPos);
+		BlockState bottomState = world.getBlockState(bottomPos);
 
 		if (topState.getBlock() == this && bottomState.getBlock() == this)
 		{

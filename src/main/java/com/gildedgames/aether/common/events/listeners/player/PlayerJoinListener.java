@@ -5,11 +5,11 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketRequestClientInfo;
 import com.google.common.collect.Lists;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
@@ -21,7 +21,7 @@ public class PlayerJoinListener
 	@SubscribeEvent
 	public static void onPlayerJoined(final PlayerEvent.PlayerLoggedInEvent event)
 	{
-		NetworkingAether.sendPacketToPlayer(new PacketRequestClientInfo(), (EntityPlayerMP) event.player);
+		NetworkingAether.sendPacketToPlayer(new PacketRequestClientInfo(), (ServerPlayerEntity) event.player);
 
 		final PlayerAether aePlayer = PlayerAether.getPlayer(event.player);
 		aePlayer.sendFullUpdate();

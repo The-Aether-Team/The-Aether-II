@@ -2,30 +2,30 @@ package com.gildedgames.aether.common.blocks.decorative;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import net.minecraft.block.BlockRotatedPillar;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.state.EnumProperty;
 import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Items;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 import java.util.Random;
 
 public class BlockCandyCane extends BlockRotatedPillar
 {
-	public static final PropertyEnum<BlockCandyCane.EnumAxis> BLOCK_AXIS = PropertyEnum.create("axis", BlockCandyCane.EnumAxis.class);
+	public static final EnumProperty<EnumAxis> BLOCK_AXIS = EnumProperty.create("axis", BlockCandyCane.EnumAxis.class);
 
 	public BlockCandyCane()
 	{
@@ -35,8 +35,8 @@ public class BlockCandyCane extends BlockRotatedPillar
 	}
 
 	@Override
-	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
-			EntityLivingBase placer)
+	public BlockState getStateForPlacement(World worldIn, BlockPos pos, Direction facing, float hitX, float hitY, float hitZ, int meta,
+			LivingEntity placer)
 	{
 		return this.getStateFromMeta(meta).withProperty(BLOCK_AXIS, BlockCandyCane.EnumAxis.fromFacingAxis(facing.getAxis()));
 	}
@@ -54,7 +54,7 @@ public class BlockCandyCane extends BlockRotatedPillar
 	}
 
 	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
+	public Item getItemDropped(BlockState state, Random rand, int fortune)
 	{
 		return Items.SUGAR;
 	}
@@ -72,25 +72,25 @@ public class BlockCandyCane extends BlockRotatedPillar
 	}
 
 	@Override
-	public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune)
+	public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, BlockState state, float chance, int fortune)
 	{
 		super.dropBlockAsItemWithChance(worldIn, pos, state, chance, fortune);
 	}
 
 	@Override
-	protected ItemStack getSilkTouchDrop(IBlockState state)
+	protected ItemStack getSilkTouchDrop(BlockState state)
 	{
 		return new ItemStack(BlocksAether.candy_cane_block);
 	}
 
 	@Override
-	public MapColor getMapColor(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+	public MapColor getMapColor(BlockState state, IBlockReader worldIn, BlockPos pos)
 	{
 		return MapColor.getBlockColor(EnumDyeColor.RED);
 	}
 
 	@Override
-	public IBlockState withRotation(IBlockState state, Rotation rot)
+	public BlockState withRotation(BlockState state, Rotation rot)
 	{
 		switch (rot)
 		{
@@ -113,7 +113,7 @@ public class BlockCandyCane extends BlockRotatedPillar
 	}
 
 	@Override
-	public IBlockState getStateFromMeta(int meta)
+	public BlockState getStateFromMeta(int meta)
 	{
 		BlockCandyCane.EnumAxis axis = BlockCandyCane.EnumAxis.NONE;
 
@@ -134,7 +134,7 @@ public class BlockCandyCane extends BlockRotatedPillar
 	}
 
 	@Override
-	public int getMetaFromState(IBlockState state)
+	public int getMetaFromState(BlockState state)
 	{
 		int meta = 0;
 
@@ -179,7 +179,7 @@ public class BlockCandyCane extends BlockRotatedPillar
 			return this.name;
 		}
 
-		public static BlockCandyCane.EnumAxis fromFacingAxis(EnumFacing.Axis axis)
+		public static BlockCandyCane.EnumAxis fromFacingAxis(Direction.Axis axis)
 		{
 			switch (axis)
 			{

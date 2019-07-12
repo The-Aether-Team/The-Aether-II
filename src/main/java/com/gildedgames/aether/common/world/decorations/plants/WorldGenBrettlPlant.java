@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.world.decorations.plants;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockBrettlPlant;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -12,7 +12,7 @@ import java.util.Random;
 public class WorldGenBrettlPlant extends WorldGenerator
 {
 
-	private final IBlockState brettlState;
+	private final BlockState brettlState;
 
 	public WorldGenBrettlPlant()
 	{

@@ -2,7 +2,7 @@ package com.gildedgames.aether.api.world.decoration;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.event.terraingen.WorldTypeEvent;
+
 
 import java.util.Random;
 

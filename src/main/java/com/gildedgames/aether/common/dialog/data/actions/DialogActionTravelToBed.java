@@ -9,8 +9,8 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 
 import java.lang.reflect.Type;
@@ -31,14 +31,14 @@ public class DialogActionTravelToBed implements IDialogAction
 			return;
 		}
 
-		EntityPlayerMP player = (EntityPlayerMP) controller.getDialogPlayer();
+		ServerPlayerEntity player = (ServerPlayerEntity) controller.getDialogPlayer();
 		PlayerAether playerAether = PlayerAether.getPlayer(player);
 
 		BlockPos bedPos = player.getBedLocation(player.dimension);
 
 		if (bedPos != null)
 		{
-			bedPos = EntityPlayer.getBedSpawnLocation(player.getServerWorld(), bedPos, player.isSpawnForced(player.dimension));
+			bedPos = PlayerEntity.getBedSpawnLocation(player.getServerWorld(), bedPos, player.isSpawnForced(player.dimension));
 		}
 
 		if (bedPos != null)

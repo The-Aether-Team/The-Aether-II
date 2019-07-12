@@ -4,11 +4,11 @@ import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.TextureStitchEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 
@@ -22,7 +22,7 @@ public class SlotAmbrosiumChunk extends Slot
 		super(inventoryIn, index, xPosition, yPosition);
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static void registerIcons(TextureStitchEvent.Pre event)
 	{
 		sprite = event.getMap().registerSprite(AetherCore.getResource("gui/slots/slot_moa_egg"));
@@ -35,7 +35,7 @@ public class SlotAmbrosiumChunk extends Slot
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public TextureAtlasSprite getBackgroundSprite()
 	{
 		return sprite;

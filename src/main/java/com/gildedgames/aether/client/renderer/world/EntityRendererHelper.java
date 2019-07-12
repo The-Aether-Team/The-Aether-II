@@ -2,8 +2,8 @@ package com.gildedgames.aether.client.renderer.world;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.DynamicTexture;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.MobEffects;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
@@ -61,7 +61,7 @@ public class EntityRendererHelper
 				f9 = MathHelper.clamp(f9, 0f, 1f);
 				f10 = MathHelper.clamp(f10, 0f, 1f);
 
-				if (mc.player.isPotionActive(MobEffects.NIGHT_VISION))
+				if (mc.player.isPotionActive(Effects.NIGHT_VISION))
 				{
 					float f15 = getNightVisionBrightness(mc.player, partialTicks);
 					float f12 = 1.0F / f8;
@@ -154,9 +154,9 @@ public class EntityRendererHelper
 		}
 	}
 
-	private static float getNightVisionBrightness(EntityLivingBase entitylivingbaseIn, float partialTicks)
+	private static float getNightVisionBrightness(LivingEntity entitylivingbaseIn, float partialTicks)
 	{
-		int i = entitylivingbaseIn.getActivePotionEffect(MobEffects.NIGHT_VISION).getDuration();
+		int i = entitylivingbaseIn.getActivePotionEffect(Effects.NIGHT_VISION).getDuration();
 
 		return i > 200 ? 1.0F : 0.7F + MathHelper.sin(((float) i - partialTicks) * (float) Math.PI * 0.2F) * 0.3F;
 	}

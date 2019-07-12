@@ -8,17 +8,18 @@ import com.gildedgames.aether.common.init.DimensionsAether;
 import com.gildedgames.aether.common.items.IDropOnDeath;
 import com.gildedgames.orbis.lib.util.io.NBTFunnel;
 import com.google.common.collect.Lists;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemDoor;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.GameRules;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.player.PlayerDropsEvent;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
@@ -40,16 +41,16 @@ public class PlayerPreventDropsModule extends PlayerAetherModule implements IPla
 
 	public static boolean shouldKeepOnDeath(ItemStack stack)
 	{
-		return !(stack.getItem() instanceof ItemBlock) && !(stack.getItem() instanceof ItemDoor) && !(stack.getItem() instanceof ItemFood) && !(stack
+		return !(stack.getItem() instanceof BlockItem) && !(stack.getItem() instanceof ItemDoor) && !(stack.getItem() instanceof ItemFood) && !(stack
 				.getItem() instanceof IDropOnDeath);
 	}
 
 	@Override
 	public void onDeath(LivingDeathEvent event)
 	{
-		EntityPlayer player = (EntityPlayer) event.getEntity();
+		PlayerEntity player = (PlayerEntity) event.getEntity();
 
-		if (player.world.provider.getDimensionType() == DimensionsAether.AETHER && !player.getEntityWorld().getGameRules().getBoolean("keepInventory"))
+		if (player.world.getDimension().getType() == DimensionsAether.AETHER && !player.getEntityWorld().getGameRules().func_223586_b(GameRules.field_223600_c))
 		{
 			this.setIfShouldKeep(player.inventory.mainInventory, this.mainInventory, true);
 			this.setIfShouldKeep(player.inventory.armorInventory, this.armorInventory, true);
@@ -71,14 +72,14 @@ public class PlayerPreventDropsModule extends PlayerAetherModule implements IPla
 	}
 
 	@Override
-	public void onDrops(PlayerDropsEvent event)
+	public void onDrops(LivingDropsEvent event)
 	{
-		if (event.getEntityPlayer().world.provider.getDimensionType() == DimensionsAether.AETHER && !event.getEntityPlayer().getEntityWorld().getGameRules()
-				.getBoolean("keepInventory"))
+		if (event.getEntityLiving().world.getDimension().getType() == DimensionsAether.AETHER &&
+				!event.getEntityLiving().getEntityWorld().getGameRules().func_223586_b(GameRules.field_223600_c))
 		{
-			List<EntityItem> toRemove = Lists.newArrayList();
+			List<ItemEntity> toRemove = Lists.newArrayList();
 
-			for (EntityItem item : event.getDrops())
+			for (ItemEntity item : event.getDrops())
 			{
 				if (item != null && shouldKeepOnDeath(item.getItem()))
 				{
@@ -93,9 +94,9 @@ public class PlayerPreventDropsModule extends PlayerAetherModule implements IPla
 	@Override
 	public void onRespawn(PlayerEvent.PlayerRespawnEvent event)
 	{
-		EntityPlayer player = event.player;
+		PlayerEntity player = event.getPlayer();
 
-		if (player.world.provider.getDimensionType() == DimensionsAether.AETHER && !player.getEntityWorld().getGameRules().getBoolean("keepInventory"))
+		if (player.world.getDimension().getType() == DimensionsAether.AETHER && !player.getEntityWorld().getGameRules().func_223586_b(GameRules.field_223600_c))
 		{
 			this.setIfShouldKeep(this.mainInventory, player.inventory.mainInventory, false);
 			this.setIfShouldKeep(this.armorInventory, player.inventory.armorInventory, false);
@@ -120,7 +121,7 @@ public class PlayerPreventDropsModule extends PlayerAetherModule implements IPla
 	}
 
 	@Override
-	public void write(NBTTagCompound nbtTagCompound)
+	public void write(CompoundNBT nbtTagCompound)
 	{
 		NBTFunnel funnel = new NBTFunnel(nbtTagCompound);
 
@@ -130,7 +131,7 @@ public class PlayerPreventDropsModule extends PlayerAetherModule implements IPla
 	}
 
 	@Override
-	public void read(NBTTagCompound nbtTagCompound)
+	public void read(CompoundNBT nbtTagCompound)
 	{
 		NBTFunnel funnel = new NBTFunnel(nbtTagCompound);
 

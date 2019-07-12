@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.shop;
 import com.gildedgames.aether.api.shop.IShopBuy;
 import com.gildedgames.orbis.lib.util.io.NBTFunnel;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 
 import java.util.List;
 
@@ -124,30 +124,30 @@ public class ShopBuy implements IShopBuy
 	}
 
 	@Override
-	public void write(NBTTagCompound tag)
+	public void write(CompoundNBT tag)
 	{
 		NBTFunnel funnel = new NBTFunnel(tag);
 
 		funnel.setStack("stack", this.stack);
 		funnel.setStringList("descriptions", this.descriptions);
-		tag.setInteger("price", this.price);
-		tag.setDouble("sellingPrice", this.sellingPrice);
-		tag.setInteger("maxStock", this.maxStock);
-		tag.setInteger("ticksUntilRestock", this.ticksUntilRestock);
-		tag.setInteger("stock", this.stock);
+		tag.putInt("price", this.price);
+		tag.putDouble("sellingPrice", this.sellingPrice);
+		tag.putInt("maxStock", this.maxStock);
+		tag.putInt("ticksUntilRestock", this.ticksUntilRestock);
+		tag.putInt("stock", this.stock);
 	}
 
 	@Override
-	public void read(NBTTagCompound tag)
+	public void read(CompoundNBT tag)
 	{
 		NBTFunnel funnel = new NBTFunnel(tag);
 
 		this.stack = funnel.getStack("stack");
 		this.descriptions = funnel.getStringList("descriptions");
-		this.price = tag.getInteger("price");
+		this.price = tag.getInt("price");
 		this.sellingPrice = tag.getDouble("sellingPrice");
-		this.maxStock = tag.getInteger("maxStock");
-		this.ticksUntilRestock = tag.getInteger("ticksUntilRestock");
-		this.stock = tag.getInteger("stock");
+		this.maxStock = tag.getInt("maxStock");
+		this.ticksUntilRestock = tag.getInt("ticksUntilRestock");
+		this.stock = tag.getInt("stock");
 	}
 }

@@ -2,8 +2,6 @@ package com.gildedgames.aether.common.world.templates;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.util.TemplateUtil;
-import com.gildedgames.aether.api.world.generation.BlockRotationProcessorExtended;
-import com.gildedgames.aether.api.world.templates.ITemplateProcessorExtended;
 import com.gildedgames.aether.api.world.templates.PlacementConditionTemplate;
 import com.gildedgames.aether.api.world.templates.TemplateDefinition;
 import com.gildedgames.aether.api.world.templates.TemplateLoc;
@@ -11,26 +9,26 @@ import com.gildedgames.aether.common.blocks.multiblock.BlockMultiDummy;
 import com.gildedgames.aether.common.blocks.multiblock.BlockMultiDummyHalf;
 import com.gildedgames.aether.common.entities.tiles.TileEntityWildcard;
 import com.gildedgames.aether.common.entities.tiles.multiblock.TileEntityMultiblockController;
-import com.gildedgames.orbis.lib.processing.IBlockAccessExtended;
+import com.gildedgames.orbis.lib.processing.IBlockAccess;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.Blocks;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.nbt.NBTTagDouble;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.structure.StructureBoundingBox;
-import net.minecraft.world.gen.structure.template.PlacementSettings;
-import net.minecraft.world.gen.structure.template.Template;
+import net.minecraft.world.gen.feature.template.PlacementSettings;
+import net.minecraft.world.gen.feature.template.Template;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -38,7 +36,7 @@ import java.util.UUID;
 
 public class TemplatePrimer
 {
-	public static boolean canGenerate(final IBlockAccessExtended blockAccess, final TemplateDefinition def, final TemplateLoc loc)
+	public static boolean canGenerate(final IBlockAccess blockAccess, final TemplateDefinition def, final TemplateLoc loc)
 	{
 		BlockPos pos = loc.getPos();
 
@@ -47,7 +45,7 @@ public class TemplatePrimer
 			pos = TemplateUtil.getCenteredPos(def, loc);
 		}
 
-		final StructureBoundingBox bb = TemplateUtil.getBoundingBoxFromTemplate(def, loc);
+		final MutableBoundingBox bb = TemplateUtil.getBoundingBoxFromTemplate(def, loc);
 
 		if (bb.maxY > 256)
 		{
@@ -80,7 +78,7 @@ public class TemplatePrimer
 		return true;
 	}
 
-	public static void generateTemplate(final IBlockAccessExtended blockAccess, final TemplateDefinition def, final TemplateLoc loc)
+	public static void generateTemplate(final IBlockAccess blockAccess, final TemplateDefinition def, final TemplateLoc loc)
 	{
 		BlockPos pos = loc.getPos();
 
@@ -89,8 +87,7 @@ public class TemplatePrimer
 			pos = TemplateUtil.getCenteredPos(def, loc);
 		}
 
-		final ITemplateProcessorExtended processor = new BlockRotationProcessorExtended(pos, loc.getSettings());
-		TemplatePrimer.populateAll(def.getTemplate(), blockAccess, pos, processor, loc.getSettings());
+		TemplatePrimer.populateAll(def.getTemplate(), blockAccess, pos, loc.getSettings());
 	}
 
 	public static List<Template.BlockInfo> getBlocks(final List<Template.BlockInfo> blockInfo, final BlockPos pos, final PlacementSettings settings,
@@ -122,96 +119,87 @@ public class TemplatePrimer
 		return blockPos;
 	}
 
-	public static void populateAll(final Template template, final IBlockAccessExtended blockAccess, final BlockPos pos,
-			@Nullable final ITemplateProcessorExtended processor,
-			final PlacementSettings settings)
+	public static void populateAll(final Template template, final IBlockAccess blockAccess, final BlockPos pos, final PlacementSettings settings)
 	{
 		final List<Template.BlockInfo> blocks = template.blocks;
 
 		if (!blocks.isEmpty() && template.getSize().getX() >= 1 && template.getSize().getY() >= 1 && template.getSize().getZ() >= 1)
 		{
 			final Block block = settings.getReplacedBlock();
-			final StructureBoundingBox bb = settings.getBoundingBox();
+			final MutableBoundingBox bb = settings.getBoundingBox();
 
-			for (final Template.BlockInfo template$blockinfo : blocks)
+			for (final Template.BlockInfo info : blocks)
 			{
-				final BlockPos blockpos = Template.transformedBlockPos(settings, template$blockinfo.pos).add(pos);
+				final BlockPos blockpos = Template.transformedBlockPos(settings, info.pos).add(pos);
 
-				final Template.BlockInfo template$blockinfo1 =
-						processor != null ? processor.processBlock(blockAccess, blockpos, template$blockinfo) : template$blockinfo;
+				final Block block1 = info.state.getBlock();
 
-				if (template$blockinfo1 != null)
+				if ((block == null || block != block1) && (!settings.getIgnoreStructureBlock() || block1 != Blocks.STRUCTURE_BLOCK) && (
+						bb == null || bb.isVecInside(blockpos)))
 				{
-					final Block block1 = template$blockinfo1.blockState.getBlock();
+					final BlockState state = info.state.mirror(settings.getMirror()).rotate(settings.getRotation());
 
-					if ((block == null || block != block1) && (!settings.getIgnoreStructureBlock() || block1 != Blocks.STRUCTURE_BLOCK) && (
-							bb == null || bb.isVecInside(blockpos)))
+					if (state.getBlock() instanceof BlockMultiDummy || state.getBlock() instanceof BlockMultiDummyHalf)
 					{
-						final IBlockState iblockstate = template$blockinfo1.blockState.withMirror(settings.getMirror());
-						final IBlockState iblockstate1 = iblockstate.withRotation(settings.getRotation());
+						continue;
+					}
 
-						if (iblockstate1.getBlock() instanceof BlockMultiDummy || iblockstate1.getBlock() instanceof BlockMultiDummyHalf)
+					if (state.getBlock() == BlocksAether.wildcard)
+					{
+						final TileEntityWildcard wildcard = new TileEntityWildcard();
+
+						if (blockAccess.getWorld() != null)
 						{
-							continue;
+							final World world = blockAccess.getWorld();
+
+							wildcard.setWorld(world);
+
+							info.nbt.putInt("x", blockpos.getX());
+							info.nbt.putInt("y", blockpos.getY());
+							info.nbt.putInt("z", blockpos.getZ());
+							wildcard.read(info.nbt);
+							wildcard.mirror(settings.getMirror());
+							wildcard.rotate(settings.getRotation());
+
+							wildcard.onSchematicGeneration(blockAccess, world.rand);
 						}
 
-						if (iblockstate1.getBlock() == BlocksAether.wildcard)
+						continue;
+					}
+
+					if (info.nbt != null)
+					{
+						final TileEntity te = blockAccess.getTileEntity(blockpos);
+
+						if (te != null)
 						{
-							final TileEntityWildcard wildcard = new TileEntityWildcard();
-
-							if (blockAccess.getWorld() != null)
+							if (te instanceof IInventory)
 							{
-								final World world = blockAccess.getWorld();
-
-								wildcard.setWorld(world);
-
-								template$blockinfo1.tileentityData.setInteger("x", blockpos.getX());
-								template$blockinfo1.tileentityData.setInteger("y", blockpos.getY());
-								template$blockinfo1.tileentityData.setInteger("z", blockpos.getZ());
-								wildcard.readFromNBT(template$blockinfo1.tileentityData);
-								wildcard.mirror(settings.getMirror());
-								wildcard.rotate(settings.getRotation());
-
-								wildcard.onSchematicGeneration(blockAccess, world.rand);
-							}
-
-							continue;
-						}
-
-						if (template$blockinfo1.tileentityData != null)
-						{
-							final TileEntity tileentity = blockAccess.getTileEntity(blockpos);
-
-							if (tileentity != null)
-							{
-								if (tileentity instanceof IInventory)
-								{
-									((IInventory) tileentity).clear();
-								}
+								((IInventory) te).clear();
 							}
 						}
+					}
 
-						if (blockAccess.setBlockState(blockpos, iblockstate1, 2 | 16) && template$blockinfo1.tileentityData != null)
+					if (blockAccess.setBlockState(blockpos, state, 2 | 16) && info.nbt != null)
+					{
+						final TileEntity te = blockAccess.getTileEntity(blockpos);
+
+						if (te != null)
 						{
-							final TileEntity tileentity2 = blockAccess.getTileEntity(blockpos);
+							info.nbt.putInt("x", blockpos.getX());
+							info.nbt.putInt("y", blockpos.getY());
+							info.nbt.putInt("z", blockpos.getZ());
+							te.read(info.nbt);
+							te.mirror(settings.getMirror());
+							te.rotate(settings.getRotation());
 
-							if (tileentity2 != null)
+							te.markDirty();
+
+							if (te instanceof TileEntityMultiblockController)
 							{
-								template$blockinfo1.tileentityData.setInteger("x", blockpos.getX());
-								template$blockinfo1.tileentityData.setInteger("y", blockpos.getY());
-								template$blockinfo1.tileentityData.setInteger("z", blockpos.getZ());
-								tileentity2.readFromNBT(template$blockinfo1.tileentityData);
-								tileentity2.mirror(settings.getMirror());
-								tileentity2.rotate(settings.getRotation());
+								final TileEntityMultiblockController controller = (TileEntityMultiblockController) te;
 
-								tileentity2.markDirty();
-
-								if (tileentity2 instanceof TileEntityMultiblockController)
-								{
-									final TileEntityMultiblockController controller = (TileEntityMultiblockController) tileentity2;
-
-									controller.rebuild();
-								}
+								controller.rebuild();
 							}
 						}
 					}
@@ -255,7 +243,7 @@ public class TemplatePrimer
 	}
 
 	private static void addEntitiesToWorld(final Template template, final World worldIn, final BlockPos pos, final Mirror mirrorIn, final Rotation rotationIn,
-			@Nullable final StructureBoundingBox aabb)
+			@Nullable final MutableBoundingBox aabb)
 	{
 		final List<Template.EntityInfo> entities = template.entities;
 
@@ -265,14 +253,14 @@ public class TemplatePrimer
 
 			if (aabb == null || aabb.isVecInside(blockpos))
 			{
-				final NBTTagCompound nbttagcompound = template$entityinfo.entityData;
+				final CompoundNBT nbttagcompound = template$entityinfo.entityData;
 				final Vec3d vec3d = transformedVec3d(template$entityinfo.pos, mirrorIn, rotationIn);
 				final Vec3d vec3d1 = vec3d.add((double) pos.getX(), (double) pos.getY(), (double) pos.getZ());
-				final NBTTagList nbttaglist = new NBTTagList();
+				final ListNBT nbttaglist = new ListNBT();
 				nbttaglist.appendTag(new NBTTagDouble(vec3d1.x));
 				nbttaglist.appendTag(new NBTTagDouble(vec3d1.y));
 				nbttaglist.appendTag(new NBTTagDouble(vec3d1.z));
-				nbttagcompound.setTag("Pos", nbttaglist);
+				nbttagcompound.put("Pos", nbttaglist);
 				nbttagcompound.setUniqueId("UUID", UUID.randomUUID());
 				Entity entity;
 

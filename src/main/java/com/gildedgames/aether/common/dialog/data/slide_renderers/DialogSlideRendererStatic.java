@@ -6,9 +6,9 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.ResourceLocation;
 
@@ -70,19 +70,19 @@ public class DialogSlideRendererStatic implements IDialogSlideRenderer
 			return;
 		}
 
-		TextureManager textureManager = Minecraft.getMinecraft().renderEngine;
+		TextureManager textureManager = Minecraft.getInstance().renderEngine;
 
 		double scaledWidth = this.width * this.scale;
 		double scaledHeight = this.height * this.scale;
 
 		GlStateManager.pushMatrix();
 
-		GlStateManager.translate((screenWidth / 2) - (scaledWidth / 2), screenHeight - 90 - scaledHeight, 0);
-		GlStateManager.scale(this.scale, this.scale, this.scale);
+		GlStateManager.translatef((screenWidth / 2) - (scaledWidth / 2), screenHeight - 90 - scaledHeight, 0);
+		GlStateManager.scalef(this.scale, this.scale, this.scale);
 
 		textureManager.bindTexture(this.slideTexture);
 
-		Gui.drawModalRectWithCustomSizedTexture(0, 0, 0, 0, this.width, this.height, this.width, this.height);
+		AbstractGui.drawModalRectWithCustomSizedTexture(0, 0, 0, 0, this.width, this.height, this.width, this.height);
 		GlStateManager.popMatrix();
 	}
 

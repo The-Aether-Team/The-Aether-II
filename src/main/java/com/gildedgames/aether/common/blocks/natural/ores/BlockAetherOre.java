@@ -1,11 +1,11 @@
 package com.gildedgames.aether.common.blocks.natural.ores;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -37,7 +37,7 @@ public class BlockAetherOre extends Block
 	}
 
 	@Override
-	public int getExpDrop(IBlockState state, IBlockAccess world, BlockPos pos, int fortune)
+	public int getExpDrop(BlockState state, IBlockReader world, BlockPos pos, int fortune)
 	{
 		Random rand = world instanceof World ? ((World) world).rand : new Random();
 

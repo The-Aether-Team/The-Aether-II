@@ -2,13 +2,13 @@ package com.gildedgames.aether.client.gui.container.guidebook;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.inventory.Container;
+import com.mojang.blaze3d.platform.GlStateManager;
+import net.minecraft.client.gui.AbstractGui;
+import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import net.minecraft.inventory.container.Container;
 import net.minecraft.util.ResourceLocation;
 
-public abstract class AbstractGuidebookPage extends GuiContainer
+public abstract class AbstractGuidebookPage extends ContainerScreen
 {
 	private static final ResourceLocation TEXTURE_BASE = AetherCore.getResource("textures/gui/guidebook/guidebook_base.png");
 
@@ -59,7 +59,7 @@ public abstract class AbstractGuidebookPage extends GuiContainer
 
 		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 
-		Gui.drawModalRectWithCustomSizedTexture((this.width/2) - 176 - 11, this.height/2 - 185/2, 0, 0, 376, 256, 512, 256);
+		AbstractGui.drawModalRectWithCustomSizedTexture((this.width/2) - 176 - 11, this.height/2 - 185/2, 0, 0, 376, 256, 512, 256);
 
 		/* Draw abstract methods to render left and right pages.
 		 *  Note that these calls have predetermined parameters which should align properly to the screen.

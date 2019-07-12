@@ -3,12 +3,12 @@ package com.gildedgames.aether.common.events.listeners.player;
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.util.helpers.WorldUtil;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 @Mod.EventBusSubscriber
 public class PlayerMovementListener
@@ -16,7 +16,7 @@ public class PlayerMovementListener
 	@SubscribeEvent
 	public static void onLivingEntityUpdate(LivingEvent.LivingUpdateEvent event)
 	{
-		final EntityLivingBase entity = event.getEntityLiving();
+		final LivingEntity entity = event.getEntityLiving();
 
 		// Do not scan blocks beneath a player if they are not on the ground
 		if (!entity.onGround)
@@ -38,15 +38,15 @@ public class PlayerMovementListener
 		}
 
 		// Spectators should not be affected by quicksoil
-		if (entity instanceof EntityPlayer)
+		if (entity instanceof PlayerEntity)
 		{
-			if (((EntityPlayer) entity).isSpectator())
+			if (((PlayerEntity) entity).isSpectator())
 			{
 				return;
 			}
 		}
 
-		AxisAlignedBB bb = entity.getEntityBoundingBox();
+		AxisAlignedBB bb = entity.getBoundingBox();
 
 		// Set height of bounding box to 0.3, offset 0.3 into ground
 		// Prevents scanning of all the blocks above an entity

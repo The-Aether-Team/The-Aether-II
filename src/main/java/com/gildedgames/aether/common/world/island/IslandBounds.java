@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.world.island;
 
 import com.gildedgames.aether.api.world.islands.IIslandBounds;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.INBT;
 
 public class IslandBounds implements IIslandBounds
 {
@@ -21,9 +21,9 @@ public class IslandBounds implements IIslandBounds
 		this.z2 = z2;
 	}
 
-	public IslandBounds(NBTBase nbt)
+	public IslandBounds(INBT nbt)
 	{
-		NBTTagCompound tag = (NBTTagCompound) nbt;
+		CompoundNBT tag = (CompoundNBT) nbt;
 
 		int[] min = tag.getIntArray("Min");
 		int[] max = tag.getIntArray("Max");
@@ -128,9 +128,9 @@ public class IslandBounds implements IIslandBounds
 	}
 
 	@Override
-	public NBTBase serialize()
+	public INBT serialize()
 	{
-		NBTTagCompound tag = new NBTTagCompound();
+		CompoundNBT tag = new CompoundNBT();
 		tag.setIntArray("Min", new int[] { this.x1, this.y1, this.z1 });
 		tag.setIntArray("Max", new int[] { this.x2, this.y2, this.z2 });
 

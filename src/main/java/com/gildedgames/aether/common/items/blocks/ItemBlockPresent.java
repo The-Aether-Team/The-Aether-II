@@ -4,19 +4,19 @@ import com.gildedgames.aether.common.items.other.ItemWrappingPaper;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.EnumRarity;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemBlockPresent extends ItemBlock
+public class ItemBlockPresent extends BlockItem
 {
 
 	public ItemBlockPresent(final Block block)
@@ -42,7 +42,7 @@ public class ItemBlockPresent extends ItemBlock
 		return EnumRarity.RARE;
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	@Override
 	public void addInformation(final ItemStack stack, @Nullable final World worldIn, final List<String> tooltip, final ITooltipFlag flagIn)
 	{
@@ -64,33 +64,33 @@ public class ItemBlockPresent extends ItemBlock
 
 		private ItemWrappingPaper.PresentDyeData dye = new ItemWrappingPaper.PresentDyeData();
 
-		public static PresentData readFromNBT(final NBTTagCompound compound)
+		public static PresentData readFromNBT(final CompoundNBT compound)
 		{
 			final PresentData data = new PresentData();
 
-			if (compound.hasKey("item"))
+			if (compound.contains("item"))
 			{
-				data.stack = new ItemStack(compound.getCompoundTag("item"));
+				data.stack = new ItemStack(compound.getCompound("item"));
 			}
 
-			if (compound.hasKey("dye"))
+			if (compound.contains("dye"))
 			{
-				data.dye = ItemWrappingPaper.PresentDyeData.readFromNBT(compound.getCompoundTag("dye"));
+				data.dye = ItemWrappingPaper.PresentDyeData.readFromNBT(compound.getCompound("dye"));
 			}
 
 			return data;
 		}
 
-		public NBTTagCompound writeToNBT(final NBTTagCompound compound)
+		public CompoundNBT writeToNBT(final CompoundNBT compound)
 		{
 			if (this.stack != null)
 			{
-				compound.setTag("item", this.stack.writeToNBT(new NBTTagCompound()));
+				compound.put("item", this.stack.writeToNBT(new CompoundNBT()));
 			}
 
 			if (this.dye != null)
 			{
-				compound.setTag("dye", this.dye.writeToNBT(new NBTTagCompound()));
+				compound.put("dye", this.dye.writeToNBT(new CompoundNBT()));
 			}
 
 			return compound;

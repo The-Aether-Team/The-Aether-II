@@ -9,7 +9,7 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.world.decorations.WorldGenCaveFloorPlacer;
 import com.gildedgames.aether.common.world.decorations.WorldGenFloorPlacer;
 import com.google.common.collect.Lists;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
@@ -20,7 +20,7 @@ import java.util.function.Function;
 
 public class GenUtil
 {
-	public static List<IBlockState> GENERAL_FLOWER_STATES = Lists.newArrayList(
+	public static List<BlockState> GENERAL_FLOWER_STATES = Lists.newArrayList(
 			BlocksAether.pink_swingtip.getDefaultState(),
 			BlocksAether.green_swingtip.getDefaultState(),
 			BlocksAether.neverbloom.getDefaultState(),
@@ -30,21 +30,21 @@ public class GenUtil
 			BlocksAether.quickshoot.getDefaultState(),
 			BlocksAether.blue_swingtip.getDefaultState());
 
-	public static List<IBlockState> SHROOM_STATES = Lists.newArrayList(
+	public static List<BlockState> SHROOM_STATES = Lists.newArrayList(
 			BlocksAether.barkshroom.getDefaultState(),
 			BlocksAether.stoneshroom.getDefaultState());
 
-	public static WorldDecoration createShroomDecorations(List<IBlockState> toPickFrom)
+	public static WorldDecoration createShroomDecorations(List<BlockState> toPickFrom)
 	{
 		WorldGenCaveFloorPlacer shroomPlacer = new WorldGenCaveFloorPlacer((random) -> toPickFrom.get(random.nextInt(toPickFrom.size())), 7);
 
 		return new WorldDecorationSimple(2, 0.2f, DecorateBiomeEvent.Decorate.EventType.CUSTOM, new PositionerLevels(26, 90), shroomPlacer);
 	}
 
-	public static WorldDecoration createFlowerDecorations(Random rand, List<IBlockState> toPickFrom, List<IBlockState> mustHave)
+	public static WorldDecoration createFlowerDecorations(Random rand, List<BlockState> toPickFrom, List<BlockState> mustHave)
 	{
 		final int amountOfFlowerTypes = 2 + rand.nextInt(4);
-		List<IBlockState> flowerStates = Lists.newArrayList();
+		List<BlockState> flowerStates = Lists.newArrayList();
 
 		for (int i = 0; i < amountOfFlowerTypes; i++)
 		{
@@ -54,7 +54,7 @@ public class GenUtil
 		WorldGenFloorPlacer flowers = new WorldGenFloorPlacer(4, GenUtil.equalStateFetcher(),
 				(random) ->
 				{
-					List<IBlockState> returned = Lists.newArrayList();
+					List<BlockState> returned = Lists.newArrayList();
 
 					for (int i = 0; i < 1 + random.nextInt(amountOfFlowerTypes); i++)
 					{
@@ -93,7 +93,7 @@ public class GenUtil
 		return (random, states) -> states.get(random.nextInt(states.size()));
 	}
 
-	public static Function<Random, List<IBlockState>> standardStateDefiner(IBlockState... states)
+	public static Function<Random, List<BlockState>> standardStateDefiner(BlockState... states)
 	{
 		return (random) -> Lists.newArrayList(states);
 	}

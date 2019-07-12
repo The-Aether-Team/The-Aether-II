@@ -1,233 +1,233 @@
 package com.gildedgames.aether.client.models.entities.tile;
 
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.Entity;
 
-public class ModelTeleporter extends ModelBase
+public class ModelTeleporter extends EntityModel
 {
-	public final ModelRenderer BlockBase;
+	public final RendererModel BlockBase;
 
-	public final ModelRenderer ShardFront1;
+	public final RendererModel ShardFront1;
 
-	public final ModelRenderer ShardLeft1;
+	public final RendererModel ShardLeft1;
 
-	public final ModelRenderer ShardLeft2;
+	public final RendererModel ShardLeft2;
 
-	public final ModelRenderer ShardLeft3;
+	public final RendererModel ShardLeft3;
 
-	public final ModelRenderer ShardLeft4;
+	public final RendererModel ShardLeft4;
 
-	public final ModelRenderer ShardLeft5;
+	public final RendererModel ShardLeft5;
 
-	public final ModelRenderer ShardBack;
+	public final RendererModel ShardBack;
 
-	public final ModelRenderer ShardRight1;
+	public final RendererModel ShardRight1;
 
-	public final ModelRenderer ShardFront2;
+	public final RendererModel ShardFront2;
 
-	public final ModelRenderer ShardFront3;
+	public final RendererModel ShardFront3;
 
-	public final ModelRenderer ShardRight2;
+	public final RendererModel ShardRight2;
 
-	public final ModelRenderer ShardRight3;
+	public final RendererModel ShardRight3;
 
-	public final ModelRenderer ShardRight4;
+	public final RendererModel ShardRight4;
 
-	public final ModelRenderer ShardRight5;
+	public final RendererModel ShardRight5;
 
-	public final ModelRenderer PedestalPlatform;
+	public final RendererModel PedestalPlatform;
 
-	public final ModelRenderer PedestalBase;
+	public final RendererModel PedestalBase;
 
-	public final ModelRenderer PortalFramebase;
+	public final RendererModel PortalFramebase;
 
-	public final ModelRenderer PedestalFrameHolder;
+	public final RendererModel PedestalFrameHolder;
 
-	public final ModelRenderer Core1;
+	public final RendererModel Core1;
 
-	public final ModelRenderer Core2;
+	public final RendererModel Core2;
 
-	public final ModelRenderer Core3;
+	public final RendererModel Core3;
 
-	public final ModelRenderer Core4;
+	public final RendererModel Core4;
 
-	public final ModelRenderer WingRightBase;
+	public final RendererModel WingRightBase;
 
-	public final ModelRenderer WingLeftBase;
+	public final RendererModel WingLeftBase;
 
-	public final ModelRenderer WingRightArm;
+	public final RendererModel WingRightArm;
 
-	public final ModelRenderer WingRightFeather1;
+	public final RendererModel WingRightFeather1;
 
-	public final ModelRenderer WingRightFeather2;
+	public final RendererModel WingRightFeather2;
 
-	public final ModelRenderer WingRightFeather3;
+	public final RendererModel WingRightFeather3;
 
-	public final ModelRenderer WingLeftArm;
+	public final RendererModel WingLeftArm;
 
-	public final ModelRenderer WingLeftFeather1;
+	public final RendererModel WingLeftFeather1;
 
-	public final ModelRenderer WingLeftFeather2;
+	public final RendererModel WingLeftFeather2;
 
-	public final ModelRenderer WingLeftFeather3;
+	public final RendererModel WingLeftFeather3;
 
-	public final ModelRenderer PortalFrameRight;
+	public final RendererModel PortalFrameRight;
 
-	public final ModelRenderer PortalFrameLeft;
+	public final RendererModel PortalFrameLeft;
 
-	public final ModelRenderer PortalFrameTop;
+	public final RendererModel PortalFrameTop;
 
-	public final ModelRenderer PortalCorner1;
+	public final RendererModel PortalCorner1;
 
-	public final ModelRenderer PortalCorner2;
+	public final RendererModel PortalCorner2;
 
-	public final ModelRenderer PortalCorner3;
+	public final RendererModel PortalCorner3;
 
-	public final ModelRenderer PortalCorner4;
+	public final RendererModel PortalCorner4;
 
-	public final ModelRenderer PortalVortex;
+	public final RendererModel PortalVortex;
 
 	public ModelTeleporter()
 	{
 		this.textureWidth = 128;
 		this.textureHeight = 64;
-		this.BlockBase = new ModelRenderer(this, 0, 15);
+		this.BlockBase = new RendererModel(this, 0, 15);
 		this.BlockBase.setRotationPoint(0.0F, 9.0F, 0.0F);
 		this.BlockBase.addBox(-5.0F, 0.0F, -5.0F, 10, 4, 10, 0.0F);
-		this.Core3 = new ModelRenderer(this, 20, 0);
+		this.Core3 = new RendererModel(this, 20, 0);
 		this.Core3.setRotationPoint(0.0F, -0.5F, -1.0F);
 		this.Core3.addBox(-2.5F, 0.0F, -1.0F, 5, 10, 1, 0.0F);
-		this.WingLeftArm = new ModelRenderer(this, 70, 54);
+		this.WingLeftArm = new RendererModel(this, 70, 54);
 		this.WingLeftArm.mirror = true;
 		this.WingLeftArm.setRotationPoint(-1.8F, -1.4F, -0.2F);
 		this.WingLeftArm.addBox(-2.0F, -6.0F, 0.0F, 2, 9, 1, 0.0F);
 		this.setRotateAngle(this.WingLeftArm, 0.0F, 0.0F, -0.17453292519943295F);
-		this.ShardLeft5 = new ModelRenderer(this, 20, 34);
+		this.ShardLeft5 = new RendererModel(this, 20, 34);
 		this.ShardLeft5.setRotationPoint(-5.0F, 5.0F, 3.0F);
 		this.ShardLeft5.addBox(0.0F, 0.0F, 0.0F, 1, 1, 2, 0.0F);
-		this.ShardFront1 = new ModelRenderer(this, 0, 30);
+		this.ShardFront1 = new RendererModel(this, 0, 30);
 		this.ShardFront1.setRotationPoint(-4.0F, 4.0F, -5.0F);
 		this.ShardFront1.addBox(0.0F, 0.0F, 0.0F, 2, 4, 1, 0.0F);
-		this.ShardLeft2 = new ModelRenderer(this, 12, 30);
+		this.ShardLeft2 = new RendererModel(this, 12, 30);
 		this.ShardLeft2.setRotationPoint(-5.0F, 5.0F, -5.0F);
 		this.ShardLeft2.addBox(0.0F, 0.0F, 0.0F, 1, 1, 3, 0.0F);
-		this.PedestalBase = new ModelRenderer(this, 24, 44);
+		this.PedestalBase = new RendererModel(this, 24, 44);
 		this.PedestalBase.setRotationPoint(0.0F, -10.0F, 4.0F);
 		this.PedestalBase.addBox(-5.0F, 0.0F, -9.0F, 10, 10, 10, 0.0F);
-		this.WingRightFeather1 = new ModelRenderer(this, 64, 45);
+		this.WingRightFeather1 = new RendererModel(this, 64, 45);
 		this.WingRightFeather1.setRotationPoint(1.6F, -3.5F, 0.0F);
 		this.WingRightFeather1.addBox(0.0F, -2.0F, -0.5F, 7, 2, 1, 0.0F);
 		this.setRotateAngle(this.WingRightFeather1, 0.0F, 0.0F, -0.436F);
-		this.WingLeftFeather1 = new ModelRenderer(this, 64, 45);
+		this.WingLeftFeather1 = new RendererModel(this, 64, 45);
 		this.WingLeftFeather1.mirror = true;
 		this.WingLeftFeather1.setRotationPoint(-1.6F, -3.5F, 0.0F);
 		this.WingLeftFeather1.addBox(-7.0F, -2.0F, -0.5F, 7, 2, 1, 0.0F);
 		this.setRotateAngle(this.WingLeftFeather1, 0.0F, 0.0F, 0.436F);
-		this.ShardRight1 = new ModelRenderer(this, 22, 30);
+		this.ShardRight1 = new RendererModel(this, 22, 30);
 		this.ShardRight1.setRotationPoint(4.0F, 4.0F, -5.0F);
 		this.ShardRight1.addBox(0.0F, 0.0F, 0.0F, 1, 1, 10, 0.0F);
-		this.WingRightFeather3 = new ModelRenderer(this, 64, 51);
+		this.WingRightFeather3 = new RendererModel(this, 64, 51);
 		this.WingRightFeather3.setRotationPoint(1.6F, 0.0F, 0.0F);
 		this.WingRightFeather3.addBox(0.0F, 0.0F, -0.5F, 5, 2, 1, 0.0F);
 		this.setRotateAngle(this.WingRightFeather3, 0.0F, 0.0F, 0.08726646259971647F);
-		this.ShardLeft3 = new ModelRenderer(this, 12, 34);
+		this.ShardLeft3 = new RendererModel(this, 12, 34);
 		this.ShardLeft3.setRotationPoint(-5.0F, 5.0F, -1.0F);
 		this.ShardLeft3.addBox(0.0F, 0.0F, 0.0F, 1, 1, 3, 0.0F);
-		this.ShardRight4 = new ModelRenderer(this, 0, 51);
+		this.ShardRight4 = new RendererModel(this, 0, 51);
 		this.ShardRight4.setRotationPoint(4.0F, 6.0F, -3.0F);
 		this.ShardRight4.addBox(0.0F, 0.0F, 0.0F, 1, 2, 2, 0.0F);
-		this.ShardRight3 = new ModelRenderer(this, 0, 55);
+		this.ShardRight3 = new RendererModel(this, 0, 55);
 		this.ShardRight3.setRotationPoint(4.0F, 5.0F, 2.0F);
 		this.ShardRight3.addBox(0.0F, 0.0F, 0.0F, 1, 1, 2, 0.0F);
-		this.WingRightArm = new ModelRenderer(this, 70, 54);
+		this.WingRightArm = new RendererModel(this, 70, 54);
 		this.WingRightArm.setRotationPoint(1.8F, -1.4F, -0.2F);
 		this.WingRightArm.addBox(0.0F, -6.0F, 0.0F, 2, 9, 1, 0.0F);
 		this.setRotateAngle(this.WingRightArm, 0.0F, 0.0F, 0.17453292519943295F);
-		this.Core2 = new ModelRenderer(this, 0, 12);
+		this.Core2 = new RendererModel(this, 0, 12);
 		this.Core2.setRotationPoint(0.0F, 10.0F, 0.0F);
 		this.Core2.addBox(-3.0F, 0.0F, -1.0F, 6, 1, 2, 0.0F);
-		this.PortalFrameRight = new ModelRenderer(this, 83, 2);
+		this.PortalFrameRight = new RendererModel(this, 83, 2);
 		this.PortalFrameRight.setRotationPoint(2.0F, 0.0F, 1.0F);
 		this.PortalFrameRight.addBox(0.0F, 0.0F, 0.0F, 1, 1, 6, 0.0F);
-		this.PortalCorner3 = new ModelRenderer(this, 77, 4);
+		this.PortalCorner3 = new RendererModel(this, 77, 4);
 		this.PortalCorner3.setRotationPoint(-4.0F, 0.0F, 6.0F);
 		this.PortalCorner3.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
-		this.PortalCorner2 = new ModelRenderer(this, 69, 4);
+		this.PortalCorner2 = new RendererModel(this, 69, 4);
 		this.PortalCorner2.setRotationPoint(1.0F, 0.0F, 1.0F);
 		this.PortalCorner2.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
-		this.PortalFrameTop = new ModelRenderer(this, 69, 0);
+		this.PortalFrameTop = new RendererModel(this, 69, 0);
 		this.PortalFrameTop.setRotationPoint(0.0F, 0.0F, 7.0F);
 		this.PortalFrameTop.addBox(-4.0F, 0.0F, 0.0F, 8, 1, 1, 0.0F);
-		this.PortalCorner1 = new ModelRenderer(this, 69, 2);
+		this.PortalCorner1 = new RendererModel(this, 69, 2);
 		this.PortalCorner1.setRotationPoint(-2.0F, 0.0F, 1.0F);
 		this.PortalCorner1.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
-		this.Core1 = new ModelRenderer(this, 0, 0);
+		this.Core1 = new RendererModel(this, 0, 0);
 		this.Core1.setRotationPoint(0.0F, 3.0F, 0.0F);
 		this.Core1.addBox(-4.0F, 0.0F, -1.0F, 8, 10, 2, 0.0F);
-		this.PortalVortex = new ModelRenderer(this, 85, 0);
+		this.PortalVortex = new RendererModel(this, 85, 0);
 		this.PortalVortex.setRotationPoint(0.0F, 0.5F, 1.0F);
 		this.PortalVortex.addBox(-2.0F, 0.0F, 0.0F, 4, 0, 6, 0.0F);
-		this.ShardBack = new ModelRenderer(this, 0, 41);
+		this.ShardBack = new RendererModel(this, 0, 41);
 		this.ShardBack.setRotationPoint(-4.0F, 4.0F, 4.0F);
 		this.ShardBack.addBox(0.0F, 0.0F, 0.0F, 8, 4, 1, 0.0F);
-		this.WingRightBase = new ModelRenderer(this, 64, 60);
+		this.WingRightBase = new RendererModel(this, 64, 60);
 		this.WingRightBase.setRotationPoint(5.0F, -3.5F, 2.0F);
 		this.WingRightBase.addBox(0.0F, -1.5F, 0.0F, 2, 3, 1, 0.0F);
-		this.PortalFrameLeft = new ModelRenderer(this, 69, 2);
+		this.PortalFrameLeft = new RendererModel(this, 69, 2);
 		this.PortalFrameLeft.setRotationPoint(-3.0F, 0.0F, 1.0F);
 		this.PortalFrameLeft.addBox(0.0F, 0.0F, 0.0F, 1, 1, 6, 0.0F);
-		this.PortalCorner4 = new ModelRenderer(this, 77, 2);
+		this.PortalCorner4 = new RendererModel(this, 77, 2);
 		this.PortalCorner4.setRotationPoint(3.0F, 0.0F, 6.0F);
 		this.PortalCorner4.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
-		this.ShardFront3 = new ModelRenderer(this, 0, 37);
+		this.ShardFront3 = new RendererModel(this, 0, 37);
 		this.ShardFront3.setRotationPoint(0.0F, 5.0F, -5.0F);
 		this.ShardFront3.addBox(0.0F, 0.0F, 0.0F, 2, 1, 1, 0.0F);
-		this.ShardRight5 = new ModelRenderer(this, 0, 58);
+		this.ShardRight5 = new RendererModel(this, 0, 58);
 		this.ShardRight5.setRotationPoint(4.0F, 6.0F, 2.0F);
 		this.ShardRight5.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
-		this.WingLeftFeather3 = new ModelRenderer(this, 64, 51);
+		this.WingLeftFeather3 = new RendererModel(this, 64, 51);
 		this.WingLeftFeather3.mirror = true;
 		this.WingLeftFeather3.setRotationPoint(-1.6F, 0.0F, 0.0F);
 		this.WingLeftFeather3.addBox(-5.0F, 0.0F, -0.5F, 5, 2, 1, 0.0F);
 		this.setRotateAngle(this.WingLeftFeather3, 0.0F, 0.0F, -0.08726646259971647F);
-		this.Core4 = new ModelRenderer(this, 20, 0);
+		this.Core4 = new RendererModel(this, 20, 0);
 		this.Core4.setRotationPoint(0.0F, -0.5F, 1.0F);
 		this.Core4.addBox(-2.5F, 0.0F, -1.0F, 5, 10, 1, 0.0F);
 		this.setRotateAngle(this.Core4, 0.0F, 3.141592653589793F, 0.0F);
-		this.ShardLeft4 = new ModelRenderer(this, 20, 30);
+		this.ShardLeft4 = new RendererModel(this, 20, 30);
 		this.ShardLeft4.setRotationPoint(-5.0F, 6.0F, 0.0F);
 		this.ShardLeft4.addBox(0.0F, 0.0F, 0.0F, 1, 2, 2, 0.0F);
-		this.ShardRight2 = new ModelRenderer(this, 0, 46);
+		this.ShardRight2 = new RendererModel(this, 0, 46);
 		this.ShardRight2.setRotationPoint(4.0F, 5.0F, -4.0F);
 		this.ShardRight2.addBox(0.0F, 0.0F, 0.0F, 1, 1, 4, 0.0F);
-		this.ShardLeft1 = new ModelRenderer(this, 0, 30);
+		this.ShardLeft1 = new RendererModel(this, 0, 30);
 		this.ShardLeft1.setRotationPoint(-5.0F, 4.0F, -5.0F);
 		this.ShardLeft1.addBox(0.0F, 0.0F, 0.0F, 1, 1, 10, 0.0F);
-		this.ShardFront2 = new ModelRenderer(this, 0, 35);
+		this.ShardFront2 = new RendererModel(this, 0, 35);
 		this.ShardFront2.setRotationPoint(0.0F, 4.0F, -5.0F);
 		this.ShardFront2.addBox(0.0F, 0.0F, 0.0F, 3, 1, 1, 0.0F);
-		this.PedestalPlatform = new ModelRenderer(this, 30, 0);
+		this.PedestalPlatform = new RendererModel(this, 30, 0);
 		this.PedestalPlatform.setRotationPoint(0.0F, 0.0F, -6.0F);
 		this.PedestalPlatform.addBox(-6.0F, 0.0F, 0.4F, 12, 1, 15, 0.0F);
 		this.setRotateAngle(this.PedestalPlatform, 0.7853981633974483F, 0.0F, 0.0F);
-		this.PedestalFrameHolder = new ModelRenderer(this, 30, 16);
+		this.PedestalFrameHolder = new RendererModel(this, 30, 16);
 		this.PedestalFrameHolder.setRotationPoint(0.0F, 1000.0F, 0.0F);
 		this.PedestalFrameHolder.addBox(-6.0F, -2.0F, 0.4F, 12, 2, 1, 0.0F);
-		this.WingRightFeather2 = new ModelRenderer(this, 64, 48);
+		this.WingRightFeather2 = new RendererModel(this, 64, 48);
 		this.WingRightFeather2.setRotationPoint(1.6F, -2.0F, 0.0F);
 		this.WingRightFeather2.addBox(0.0F, -1.0F, -0.5F, 6, 2, 1, 0.0F);
 		this.setRotateAngle(this.WingRightFeather2, 0.0F, 0.0F, -0.17453292519943295F);
-		this.WingLeftFeather2 = new ModelRenderer(this, 64, 48);
+		this.WingLeftFeather2 = new RendererModel(this, 64, 48);
 		this.WingLeftFeather2.mirror = true;
 		this.WingLeftFeather2.setRotationPoint(-1.6F, -2.0F, 0.0F);
 		this.WingLeftFeather2.addBox(-6.0F, -1.0F, -0.5F, 6, 2, 1, 0.0F);
 		this.setRotateAngle(this.WingLeftFeather2, 0.0F, 0.0F, 0.17453292519943295F);
-		this.PortalFramebase = new ModelRenderer(this, 69, 9);
+		this.PortalFramebase = new RendererModel(this, 69, 9);
 		this.PortalFramebase.setRotationPoint(0.0F, -3.6F, -4.1F);
 		this.PortalFramebase.addBox(-2.0F, 0.0F, 0.0F, 4, 1, 1, 0.0F);
 		this.setRotateAngle(this.PortalFramebase, 0.7853981633974483F, 0.0F, 0.0F);
-		this.WingLeftBase = new ModelRenderer(this, 64, 60);
+		this.WingLeftBase = new RendererModel(this, 64, 60);
 		this.WingLeftBase.mirror = true;
 		this.WingLeftBase.setRotationPoint(-5.0F, -3.5F, 2.0F);
 		this.WingLeftBase.addBox(-2.0F, -1.5F, 0.0F, 2, 3, 1, 0.0F);
@@ -333,7 +333,7 @@ public class ModelTeleporter extends ModelBase
 	/**
 	 * This is a helper function from Tabula to set the rotation of model parts
 	 */
-	public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
+	public void setRotateAngle(RendererModel modelRenderer, float x, float y, float z)
 	{
 		modelRenderer.rotateAngleX = x;
 		modelRenderer.rotateAngleY = y;

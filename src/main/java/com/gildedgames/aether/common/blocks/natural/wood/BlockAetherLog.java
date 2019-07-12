@@ -1,19 +1,19 @@
 package com.gildedgames.aether.common.blocks.natural.wood;
 
 import net.minecraft.block.BlockLog;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.state.EnumProperty;
 import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 public class BlockAetherLog extends BlockLog
 {
-	public static final PropertyEnum<BlockLog.EnumAxis> PROPERTY_LOG_AXIS = PropertyEnum.create("axis", BlockLog.EnumAxis.class);
+	public static final EnumProperty<BlockLog.EnumAxis> PROPERTY_LOG_AXIS = EnumProperty.create("axis", BlockLog.EnumAxis.class);
 
 	private final AetherWoodType type;
 
@@ -33,7 +33,7 @@ public class BlockAetherLog extends BlockLog
 	}
 
 	@Override
-	public IBlockState withRotation(IBlockState state, Rotation rot)
+	public BlockState withRotation(BlockState state, Rotation rot)
 	{
 		switch (rot)
 		{
@@ -56,7 +56,7 @@ public class BlockAetherLog extends BlockLog
 	}
 
 	@Override
-	public void breakBlock(World world, BlockPos pos, IBlockState state)
+	public void breakBlock(World world, BlockPos pos, BlockState state)
 	{
 		byte size = 4;
 
@@ -66,7 +66,7 @@ public class BlockAetherLog extends BlockLog
 		{
 			for (BlockPos neighborPos : BlockPos.getAllInBox(pos.add(-size, -size, -size), pos.add(size, size, size)))
 			{
-				IBlockState neighborState = world.getBlockState(neighborPos);
+				BlockState neighborState = world.getBlockState(neighborPos);
 
 				if (neighborState.getBlock().isLeaves(neighborState, world, neighborPos))
 				{
@@ -77,7 +77,7 @@ public class BlockAetherLog extends BlockLog
 	}
 
 	@Override
-	public IBlockState getStateFromMeta(int meta)
+	public BlockState getStateFromMeta(int meta)
 	{
 		BlockLog.EnumAxis axis = BlockLog.EnumAxis.NONE;
 
@@ -98,7 +98,7 @@ public class BlockAetherLog extends BlockLog
 	}
 
 	@Override
-	public int getMetaFromState(IBlockState state)
+	public int getMetaFromState(BlockState state)
 	{
 		int meta = 0;
 
@@ -119,19 +119,19 @@ public class BlockAetherLog extends BlockLog
 	}
 
 	@Override
-	public boolean canSustainLeaves(IBlockState state, IBlockAccess world, BlockPos pos)
+	public boolean canSustainLeaves(BlockState state, IBlockReader world, BlockPos pos)
 	{
 		return true;
 	}
 
 	@Override
-	public boolean isWood(IBlockAccess world, BlockPos pos)
+	public boolean isWood(IBlockReader world, BlockPos pos)
 	{
 		return true;
 	}
 
 	@Override
-	public int damageDropped(IBlockState state)
+	public int damageDropped(BlockState state)
 	{
 		return 0;
 	}

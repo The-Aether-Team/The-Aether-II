@@ -4,17 +4,17 @@ import com.gildedgames.aether.client.models.entities.living.ModelGlactrix;
 import com.gildedgames.aether.client.renderer.entities.living.layers.LayerGlactrixCrystals;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.animals.EntityGlactrix;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.entity.RenderManager;
+import com.mojang.blaze3d.platform.GlStateManager;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.LivingRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 
-public class RenderGlactrix extends RenderLiving<EntityGlactrix>
+public class RenderGlactrix extends LivingRenderer<EntityGlactrix, ModelGlactrix>
 {
 	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/entities/glactrix/glactrix.png");
 
-	public RenderGlactrix(RenderManager renderManager)
+	public RenderGlactrix(EntityRendererManager renderManager)
 	{
 		super(renderManager, new ModelGlactrix(), 0.4f);
 
@@ -26,7 +26,7 @@ public class RenderGlactrix extends RenderLiving<EntityGlactrix>
 	{
 		float scale = 1F;
 
-		GlStateManager.scale(scale, scale, scale);
+		GlStateManager.scalef(scale, scale, scale);
 	}
 
 	@Override
@@ -42,10 +42,10 @@ public class RenderGlactrix extends RenderLiving<EntityGlactrix>
 
 		if (entity.getIsToppled())
 		{
-			GlStateManager.rotate(180F , 0, 0, 1F);
-			GlStateManager.translate(0, -2.3F, 0);
-			GlStateManager.rotate(MathHelper.cos((ageInTicks % 100) / 4) * 10, 0, 0F, 1.0F);
-			GlStateManager.rotate((ageInTicks % 100) / 100f * 360, 0, 1.0F, 0F);
+			GlStateManager.rotatef(180F , 0, 0, 1F);
+			GlStateManager.translatef(0, -2.3F, 0);
+			GlStateManager.rotatef(MathHelper.cos((ageInTicks % 100) / 4) * 10, 0, 0F, 1.0F);
+			GlStateManager.rotatef((ageInTicks % 100) / 100f * 360, 0, 1.0F, 0F);
 		}
 
 		super.renderModel(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);

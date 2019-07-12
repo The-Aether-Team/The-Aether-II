@@ -4,7 +4,7 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerProgressModule;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -44,7 +44,7 @@ public class PacketTalkedTo implements IMessage
 	public static class HandlerClient extends MessageHandlerClient<PacketTalkedTo, IMessage>
 	{
 		@Override
-		public IMessage onMessage(final PacketTalkedTo message, final EntityPlayer player)
+		public IMessage onMessage(final PacketTalkedTo message, final PlayerEntity player)
 		{
 			if (player == null || player.world == null)
 			{

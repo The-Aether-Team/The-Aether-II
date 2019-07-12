@@ -5,7 +5,7 @@ import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerAb
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerRollMovementModule;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 public class PacketSpecialMovement implements IMessage
@@ -46,7 +46,7 @@ public class PacketSpecialMovement implements IMessage
 	public static class HandlerServer extends MessageHandlerServer<PacketSpecialMovement, PacketSpecialMovement>
 	{
 		@Override
-		public PacketSpecialMovement onMessage(final PacketSpecialMovement message, final EntityPlayer player)
+		public PacketSpecialMovement onMessage(final PacketSpecialMovement message, final PlayerEntity player)
 		{
 			final PlayerAether aePlayer = PlayerAether.getPlayer(player);
 

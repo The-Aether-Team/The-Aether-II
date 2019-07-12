@@ -30,19 +30,19 @@ import com.gildedgames.orbis.lib.client.PartialTicks;
 import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
+import net.minecraft.pathfinding.PathNavigator;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.MathHelper;
@@ -167,27 +167,27 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 	}
 
 	@Override
-	protected PathNavigate createNavigator(final World worldIn)
+	protected PathNavigator createNavigator(final World worldIn)
 	{
 		return new AetherNavigateGround(this, worldIn);
 	}
 
 	private void initAI()
 	{
-		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(0, new AIMoaPackBreeding(this, 0.25F));
-		this.tasks.addTask(1, new AIPanicPack(this, 0.55F));
-		this.tasks.addTask(3, new EntityAIUnstuckBlueAercloud(this));
-		this.tasks.addTask(3, new EntityAIWander(this, 0.50F));
-		this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		this.tasks.addTask(5, new EntityAILookIdle(this));
-		this.tasks.addTask(8, new AIAnimalPack(this, 0.55F));
-		this.tasks.addTask(12, new AIAvoidEntityAsChild(this, EntityPlayer.class, 5.0F, 0.3D, 0.3D));
-		this.tasks.addTask(14, new EntityAIAttackMelee(this, 0.7D, true));
-		this.tasks.addTask(15, new AIStayNearNest(this, 8, 0.55F));
-		this.tasks.addTask(16, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
+		this.goalSelector.addGoal(0, new SwimGoal(this));
+		this.goalSelector.addGoal(0, new AIMoaPackBreeding(this, 0.25F));
+		this.goalSelector.addGoal(1, new AIPanicPack(this, 0.55F));
+		this.goalSelector.addGoal(3, new EntityAIUnstuckBlueAercloud(this));
+		this.goalSelector.addGoal(3, new RandomWalkingGoal(this, 0.50F));
+		this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 6.0F));
+		this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
+		this.goalSelector.addGoal(8, new AIAnimalPack(this, 0.55F));
+		this.goalSelector.addGoal(12, new AIAvoidEntityAsChild(this, PlayerEntity.class, 5.0F, 0.3D, 0.3D));
+		this.goalSelector.addGoal(14, new MeleeAttackGoal(this, 0.7D, true));
+		this.goalSelector.addGoal(15, new AIStayNearNest(this, 8, 0.55F));
+		this.goalSelector.addGoal(16, new TemptGoal(this, 1.2D, false, TEMPTATION_ITEMS));
 
-		this.targetTasks.addTask(1, new AIProtectPack(this));
+		this.targetSelector.addGoal(1, new AIProtectPack(this));
 	}
 
 	@Override
@@ -197,22 +197,22 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 	}
 
 	@Override
-	protected void applyEntityAttributes()
+	protected void registerAttributes()
 	{
-		super.applyEntityAttributes();
+		super.registerAttributes();
 
-		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(22.0D);
+		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(22.0D);
 
-		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(8);
-		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(8);
-		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(9);
+		this.getAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(8);
+		this.getAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(8);
+		this.getAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(9);
 	}
 
 	@Override
-	public void entityInit()
+	public void registerData()
 	{
-		super.entityInit();
+		super.registerData();
 
 		this.dataManager.register(EntityMoa.REMAINING_JUMPS, 0);
 		this.dataManager.register(EntityMoa.EGG_STOLEN, Boolean.FALSE);
@@ -226,7 +226,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 	}
 
 	@Override
-	public boolean processInteract(final EntityPlayer player, final EnumHand hand)
+	public boolean processInteract(final PlayerEntity player, final Hand hand)
 	{
 		if (super.processInteract(player, hand))
 		{
@@ -249,7 +249,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 
 				this.setFoodEaten(this.getFoodEaten() + 1);
 
-				if (!player.capabilities.isCreativeMode)
+				if (!player.isCreative())
 				{
 					stack.shrink(1);
 				}
@@ -265,7 +265,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 
 				this.world.playSound(player, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_PIG_SADDLE, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 
-				if (!player.capabilities.isCreativeMode)
+				if (!player.isCreative())
 				{
 					stack.shrink(1);
 				}
@@ -278,9 +278,9 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 	}
 
 	@Override
-	public void onUpdate()
+	public void livingTick()
 	{
-		super.onUpdate();
+		super.livingTick();
 
 		this.eyes.update();
 
@@ -431,11 +431,11 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 	@Override
 	public boolean attackEntityAsMob(final Entity entity)
 	{
-		if (entity instanceof EntityPlayer)
+		if (entity instanceof PlayerEntity)
 		{
-			final EntityPlayer player = (EntityPlayer) entity;
+			final PlayerEntity player = (PlayerEntity) entity;
 
-			if (player.capabilities.isCreativeMode)
+			if (player.isCreative())
 			{
 				return super.attackEntityAsMob(entity);
 			}
@@ -452,57 +452,57 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 	}
 
 	@Override
-	public void writeEntityToNBT(final NBTTagCompound nbt)
+	public void writeEntityToNBT(final CompoundNBT nbt)
 	{
 		super.writeEntityToNBT(nbt);
 
-		nbt.setBoolean("playerGrown", this.isRaisedByPlayer());
+		nbt.putBoolean("playerGrown", this.isRaisedByPlayer());
 
 		if (this.getGender() != null)
 		{
-			nbt.setString("creatureGender", this.getGender().name());
+			nbt.putString("creatureGender", this.getGender().name());
 		}
 
-		nbt.setInteger("remainingJumps", this.getRemainingJumps());
+		nbt.putInt("remainingJumps", this.getRemainingJumps());
 
 		this.familyNest.writeToNBT(nbt);
 
-		nbt.setBoolean("isSaddled", this.isSaddled());
-		nbt.setBoolean("isHungry", this.isHungry());
-		nbt.setInteger("foodRequired", this.getFoodRequired());
-		nbt.setInteger("foodEaten", this.getFoodEaten());
+		nbt.putBoolean("isSaddled", this.isSaddled());
+		nbt.putBoolean("isHungry", this.isHungry());
+		nbt.putInt("foodRequired", this.getFoodRequired());
+		nbt.putInt("foodEaten", this.getFoodEaten());
 
-		nbt.setInteger("hungryTimer", this.hungryTimer);
-		nbt.setInteger("dropFeatherTimer", this.dropFeatherTimer);
+		nbt.putInt("hungryTimer", this.hungryTimer);
+		nbt.putInt("dropFeatherTimer", this.dropFeatherTimer);
 
-		nbt.setInteger("timeUntilDropFeather", this.timeUntilDropFeather);
+		nbt.putInt("timeUntilDropFeather", this.timeUntilDropFeather);
 	}
 
 	@Override
-	public void readEntityFromNBT(final NBTTagCompound nbt)
+	public void readEntityFromNBT(final CompoundNBT nbt)
 	{
 		super.readEntityFromNBT(nbt);
 
 		this.setRaisedByPlayer(nbt.getBoolean("playerGrown"));
 
-		if (nbt.hasKey("creatureGender"))
+		if (nbt.contains("creatureGender"))
 		{
 			this.setGender(AnimalGender.get(nbt.getString("creatureGender")));
 		}
 
-		this.setRemainingJumps(nbt.getInteger("remainingJumps"));
+		this.setRemainingJumps(nbt.getInt("remainingJumps"));
 
 		this.familyNest.readFromNBT(nbt);
 
 		this.setIsSaddled(nbt.getBoolean("isSaddled"));
 		this.setIsHungry(nbt.getBoolean("isHungry"));
-		this.setFoodRequired(nbt.getInteger("foodRequired"));
-		this.setFoodEaten(nbt.getInteger("foodEaten"));
+		this.setFoodRequired(nbt.getInt("foodRequired"));
+		this.setFoodEaten(nbt.getInt("foodEaten"));
 
-		this.hungryTimer = nbt.getInteger("hungryTimer");
-		this.dropFeatherTimer = nbt.getInteger("dropFeatherTimer");
+		this.hungryTimer = nbt.getInt("hungryTimer");
+		this.dropFeatherTimer = nbt.getInt("dropFeatherTimer");
 
-		this.timeUntilDropFeather = nbt.getInteger("timeUntilDropFeather");
+		this.timeUntilDropFeather = nbt.getInt("timeUntilDropFeather");
 	}
 
 	@Override
@@ -643,7 +643,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 	}
 
 	@Override
-	public void setRevengeTarget(final EntityLivingBase entity)
+	public void setRevengeTarget(final LivingEntity entity)
 	{
 		super.setRevengeTarget(entity);
 
@@ -766,7 +766,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 	}
 
 	@Override
-	public EntityAgeable createChild(final EntityAgeable matingAnimal)
+	public AgeableEntity createChild(final AgeableEntity matingAnimal)
 	{
 		return new EntityMoa(this.world);
 	}
@@ -851,7 +851,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 	}
 
 	@Override
-	public boolean canProcessMountInteraction(final EntityPlayer rider, final ItemStack stack)
+	public boolean canProcessMountInteraction(final PlayerEntity rider, final ItemStack stack)
 	{
 		return !this.isBreedingItem(stack) && (stack == null || stack.getItem() != Items.LEAD);
 	}

@@ -1,13 +1,13 @@
 package com.gildedgames.aether.common.entities.util;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.world.World;
 
-public class EntityExtendedMob extends EntityMob
+public class EntityExtendedMob extends MonsterEntity
 {
 
 	private static final DataParameter<Boolean> ATTACKED = EntityDataManager.createKey(EntityExtendedMob.class, DataSerializers.BOOLEAN);
@@ -43,9 +43,9 @@ public class EntityExtendedMob extends EntityMob
 	}
 
 	@Override
-	public void onUpdate()
+	public void livingTick()
 	{
-		super.onUpdate();
+		super.livingTick();
 
 		if (this.hasAttacked() && this.world.isRemote)
 		{
@@ -58,7 +58,7 @@ public class EntityExtendedMob extends EntityMob
 	@Override
 	protected void entityInit()
 	{
-		super.entityInit();
+		super.registerData();
 
 		this.dataManager.register(EntityExtendedMob.ATTACKED, Boolean.FALSE);
 	}

@@ -6,8 +6,8 @@ import com.gildedgames.aether.api.registry.tab.ITabGroup;
 import com.gildedgames.aether.api.registry.tab.ITabGroupHandler;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 import java.util.Map;
@@ -66,9 +66,9 @@ public class PacketOpenTab implements IMessage
 	public static class HandlerServer extends MessageHandlerServer<PacketOpenTab, PacketOpenTab>
 	{
 		@Override
-		public PacketOpenTab onMessage(final PacketOpenTab message, final EntityPlayer player)
+		public PacketOpenTab onMessage(final PacketOpenTab message, final PlayerEntity player)
 		{
-			if (player instanceof EntityPlayerMP)
+			if (player instanceof ServerPlayerEntity)
 			{
 				if (message.tabGroupIndex < AetherAPI.content().tabs().getRegisteredTabGroups().size())
 				{

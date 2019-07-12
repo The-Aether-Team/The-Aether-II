@@ -6,7 +6,7 @@ import com.gildedgames.aether.common.world.aether.PrepAether;
 import com.gildedgames.aether.common.world.aether.PrepSectorDataAether;
 import com.gildedgames.aether.common.world.preparation.PrepHelper;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 @Mod.EventBusSubscriber

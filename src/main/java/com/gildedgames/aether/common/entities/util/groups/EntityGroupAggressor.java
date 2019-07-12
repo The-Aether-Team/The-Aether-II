@@ -1,17 +1,17 @@
 package com.gildedgames.aether.common.entities.util.groups;
 
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 
 public class EntityGroupAggressor
 {
 
 	final EntityGroup pack;
 
-	public final EntityLivingBase agressor;
+	public final LivingEntity agressor;
 
 	public int time;
 
-	public EntityGroupAggressor(EntityGroup pack, EntityLivingBase agressor, int time)
+	public EntityGroupAggressor(EntityGroup pack, LivingEntity agressor, int time)
 	{
 		this.agressor = agressor;
 		this.time = time;

@@ -20,12 +20,12 @@ import com.gildedgames.orbis.lib.client.gui.util.vanilla.GuiButtonVanilla;
 import com.gildedgames.orbis.lib.client.rect.Dim2D;
 import com.gildedgames.orbis.lib.client.rect.Pos2D;
 import com.gildedgames.orbis.lib.util.InputHelper;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
@@ -96,37 +96,37 @@ public class GuiIntro extends GuiViewerNoContainer
 		this.highlands = new GuiTexture(Dim2D.build().scale(0.45F).width(512).height(235).center(true).pos(center).flush(), HIGHLANDS);
 
 		this.proudlyPresents = new GuiText(Dim2D.build().center(true).pos(center).addY(70).flush(),
-				new Text(new TextComponentTranslation("intro.proudlyPresents"), 1.0F));
+				new Text(new TranslationTextComponent("intro.proudlyPresents"), 1.0F));
 
 		this.holdToSkip = new GuiText(Dim2D.build().pos(this.width - 65, this.height - 17).flush(),
-				new Text(new TextComponentTranslation("intro.holdToSkip"), 1.0F));
+				new Text(new TranslationTextComponent("intro.holdToSkip"), 1.0F));
 
 		this.holdToSkip.build(this);
 
 		this.holdToSkip.state().setVisible(false);
 
 		this.prologue = new GuiTextBox(Dim2D.build().center(true).pos(center).width(300).addY(30).flush(), false,
-				new Text(new TextComponentTranslation(
+				new Text(new TranslationTextComponent(
 						"intro.prologue"),
 						1.0F));
 
 		this.tip1 = new GuiTextBox(Dim2D.build().center(true).pos(center).width(300).flush(), false,
-				new Text(new TextComponentTranslation(
+				new Text(new TranslationTextComponent(
 						"intro.tip1"),
 						1.0F));
 
 		this.tip2 = new GuiTextBox(Dim2D.build().center(true).pos(center).width(300).flush(), false,
-				new Text(new TextComponentTranslation(
+				new Text(new TranslationTextComponent(
 						"intro.tip2"),
 						1.0F));
 
 		this.tip3 = new GuiTextBox(Dim2D.build().center(true).pos(center).width(300).flush(), false,
-				new Text(new TextComponentTranslation(
+				new Text(new TranslationTextComponent(
 						"intro.tip3"),
 						1.0F));
 
 		this.tip4 = new GuiTextBox(Dim2D.build().center(true).pos(center).width(300).flush(), false,
-				new Text(new TextComponentTranslation(
+				new Text(new TranslationTextComponent(
 						"intro.tip4"),
 						1.0F));
 
@@ -216,9 +216,9 @@ public class GuiIntro extends GuiViewerNoContainer
 			if (this.holding && this.getSecondsSinceHoldSkip() >= 2.5)
 			{
 				GuiLoadingListener.drawBlackFade(10.0D);
-				Minecraft.getMinecraft().displayGuiScreen(null);
+				Minecraft.getInstance().displayGuiScreen(null);
 
-				Minecraft.getMinecraft().getSoundHandler().stopSounds();
+				Minecraft.getInstance().getSoundHandler().stopSounds();
 
 				PlayerAether.getPlayer(this.mc.player).getModule(PlayerTeleportingModule.class).setPlayedIntro(true);
 				NetworkingAether.sendPacketToServer(new PacketSetPlayedIntro(true));
@@ -299,7 +299,7 @@ public class GuiIntro extends GuiViewerNoContainer
 
 			GL11.glEnable(GL11.GL_ALPHA_TEST);
 
-			GlStateManager.enableAlpha();
+			GlStateManager.enableAlphaTest();
 
 			GlStateManager.color(1.0F, 1.0F, 1.0F, alpha);
 
@@ -320,12 +320,12 @@ public class GuiIntro extends GuiViewerNoContainer
 			GuiLoadingListener.setDrawBlackScreen(false);
 
 			GuiLoadingListener.drawBlackFade(10.0D);
-			Minecraft.getMinecraft().displayGuiScreen(null);
+			Minecraft.getInstance().displayGuiScreen(null);
 		}
 
 		if (!this.playedMusic)
 		{
-			Minecraft.getMinecraft().getSoundHandler().stopSounds();
+			Minecraft.getInstance().getSoundHandler().stopSounds();
 			AetherMusicManager.INSTANCE.playMusic(new SoundEvent(AetherCore.getResource("music.intro")));
 			this.playedMusic = true;
 		}
@@ -355,7 +355,7 @@ public class GuiIntro extends GuiViewerNoContainer
 			if (InputHelper.isHovered(this.no))
 			{
 				NetworkingAether.sendPacketToServer(new PacketCancelIntro());
-				Minecraft.getMinecraft().displayGuiScreen(new GuiBlackScreen());
+				Minecraft.getInstance().displayGuiScreen(new GuiBlackScreen());
 
 				GuiLoadingListener.setDrawBlackScreen(false);
 

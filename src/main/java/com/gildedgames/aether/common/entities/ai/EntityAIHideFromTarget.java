@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.entities.ai;
 
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.pathfinding.Path;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -14,22 +14,22 @@ import net.minecraft.world.World;
 import java.util.List;
 import java.util.Random;
 
-public class EntityAIHideFromTarget extends EntityAIBase
+public class EntityAIHideFromTarget extends Goal
 {
 
 	static final int maxDist = 12, minDist = 4;
 
 	private final double movementSpeed;
 
-	protected EntityLivingBase hideFrom;
+	protected LivingEntity hideFrom;
 
-	final EntityCreature entity;
+	final CreatureEntity entity;
 
-	final Class<? extends EntityLivingBase> hideFromClass;
+	final Class<? extends LivingEntity> hideFromClass;
 
 	private BlockPos hidingPos;
 
-	public EntityAIHideFromTarget(final EntityCreature entity, final Class<? extends EntityLivingBase> clazz, final double movementSpeed)
+	public EntityAIHideFromTarget(final CreatureEntity entity, final Class<? extends LivingEntity> clazz, final double movementSpeed)
 	{
 		this.entity = entity;
 		this.hideFromClass = clazz;
@@ -44,20 +44,20 @@ public class EntityAIHideFromTarget extends EntityAIBase
 			return true;
 		}
 
-		final List entities = this.entity.world.getEntitiesWithinAABB(this.hideFromClass, this.entity.getEntityBoundingBox().expand(maxDist, maxDist, maxDist));
+		final List entities = this.entity.world.getEntitiesWithinAABB(this.hideFromClass, this.entity.getBoundingBox().expand(maxDist, maxDist, maxDist));
 
 		if (entities.isEmpty())
 		{
 			return false;
 		}
 
-		EntityLivingBase toHideFrom = null;
+		LivingEntity toHideFrom = null;
 
 		for (final Object o : entities)
 		{
-			if (o instanceof EntityLivingBase && !(o instanceof EntityPlayer && ((EntityPlayer) o).isCreative()))
+			if (o instanceof LivingEntity && !(o instanceof PlayerEntity && ((PlayerEntity) o).isCreative()))
 			{
-				toHideFrom = (EntityLivingBase) o;
+				toHideFrom = (LivingEntity) o;
 			}
 		}
 		if (toHideFrom == null)
@@ -117,7 +117,7 @@ public class EntityAIHideFromTarget extends EntityAIBase
 		for (int i = 0; i < 13; ++i)
 		{
 			final int j = MathHelper.floor(this.entity.posX + random.nextInt(20) - 10.0D);
-			final int k = MathHelper.floor(this.entity.getEntityBoundingBox().minY + random.nextInt(6) - 3.0D);
+			final int k = MathHelper.floor(this.entity.getBoundingBox().minY + random.nextInt(6) - 3.0D);
 			final int l = MathHelper.floor(this.entity.posZ + random.nextInt(20) - 10.0D);
 
 			final RayTraceResult raytrace = world.rayTraceBlocks(new Vec3d(j, k + this.entity.getEyeHeight(), l), new Vec3d(this.hideFrom.posX,

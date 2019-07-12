@@ -8,13 +8,13 @@ import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerEquipmentModule;
 import net.minecraft.client.Minecraft;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Mod.EventBusSubscriber
 public class PlayerEquipItemListener
@@ -37,7 +37,7 @@ public class PlayerEquipItemListener
 			// Unfortunately we have to play the equip animation manually...
 			if (event.getEntityPlayer().world.isRemote)
 			{
-				Minecraft.getMinecraft().getItemRenderer().resetEquippedProgress(EnumHand.MAIN_HAND);
+				Minecraft.getInstance().getItemRenderer().resetEquippedProgress(Hand.MAIN_HAND);
 			}
 
 			event.getEntityPlayer().world
@@ -47,7 +47,7 @@ public class PlayerEquipItemListener
 		}
 	}
 
-	private static boolean tryEquipEquipment(final IPlayerAether player, final ItemStack stack, final EnumHand hand)
+	private static boolean tryEquipEquipment(final IPlayerAether player, final ItemStack stack, final Hand hand)
 	{
 		final IInventoryEquipment inventory = player.getModule(PlayerEquipmentModule.class).getInventory();
 
@@ -64,7 +64,7 @@ public class PlayerEquipItemListener
 
 				inventory.setInventorySlotContents(slot, newStack);
 
-				if (!player.getEntity().capabilities.isCreativeMode)
+				if (!player.getEntity().isCreative())
 				{
 					// Technically, there should never be STACKABLE equipment, but in case there is, we need to handle it.
 					stack.shrink(1);

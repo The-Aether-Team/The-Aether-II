@@ -9,13 +9,13 @@ import com.gildedgames.aether.common.network.packets.trade.PacketSendInventorySi
 import com.gildedgames.aether.common.network.packets.trade.PacketTradeInventory;
 import com.gildedgames.aether.common.network.packets.trade.PacketTradeMessage;
 import com.gildedgames.aether.common.shop.ShopCurrencyGilt;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.ClickType;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.InventoryBasic;
-import net.minecraft.inventory.Slot;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.container.ClickType;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 
 import java.util.LinkedList;
@@ -23,9 +23,9 @@ import java.util.Queue;
 
 public class ContainerTrade extends Container
 {
-	private final InventoryBasic tradeInventory = new InventoryBasic("Trade", false, 16);
+	private final Inventory tradeInventory = new Inventory(16);
 
-	private final InventoryPlayer playerInventory;
+	private final PlayerInventory playerInventory;
 
 	private final PlayerTradeModule tradeModule;
 
@@ -35,7 +35,7 @@ public class ContainerTrade extends Container
 
 	private boolean sentError = false;
 
-	public ContainerTrade(final InventoryPlayer playerInventory)
+	public ContainerTrade(final PlayerInventory playerInventory)
 	{
 		this.playerInventory = playerInventory;
 		this.tradeModule = PlayerAether.getPlayer(playerInventory.player).getModule(PlayerTradeModule.class);
@@ -44,20 +44,20 @@ public class ContainerTrade extends Container
 		{
 			for (int j = 0; j < 9; ++j)
 			{
-				this.addSlotToContainer(new Slot(playerInventory, j + i * 9 + 9, 3 + j * 18, 28 + i * 18));
+				this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 3 + j * 18, 28 + i * 18));
 			}
 		}
 
 		for (int k = 0; k < 9; ++k)
 		{
-			this.addSlotToContainer(new Slot(playerInventory, k, 3 + k * 18, 86));
+			this.addSlot(new Slot(playerInventory, k, 3 + k * 18, 86));
 		}
 
 		for (int i = 0; i < 4; ++i)
 		{
 			for (int j = 0; j < 4; ++j)
 			{
-				this.addSlotToContainer(new SlotDynamic(this.tradeInventory, j + i * 4, 200 + j * 18, 30 + i * 18));
+				this.addSlot(new SlotDynamic(this.tradeInventory, j + i * 4, 200 + j * 18, 30 + i * 18));
 			}
 		}
 
@@ -65,7 +65,7 @@ public class ContainerTrade extends Container
 	}
 
 	@Override
-	public void onContainerClosed(EntityPlayer playerIn)
+	public void onContainerClosed(PlayerEntity playerIn)
 	{
 		super.onContainerClosed(playerIn);
 
@@ -77,7 +77,7 @@ public class ContainerTrade extends Container
 
 			while ((cur = this.queue.poll()) != null)
 			{
-				if (!playerIn.isEntityAlive() || playerIn instanceof EntityPlayerMP && ((EntityPlayerMP) playerIn).hasDisconnected())
+				if (!playerIn.isAlive() || playerIn instanceof ServerPlayerEntity && ((ServerPlayerEntity) playerIn).hasDisconnected())
 				{
 					playerIn.dropItem(cur.item, false);
 				}
@@ -99,7 +99,7 @@ public class ContainerTrade extends Container
 	}
 
 	@Override
-	public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player)
+	public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, PlayerEntity player)
 	{
 		ItemStack returnStack;
 
@@ -122,7 +122,7 @@ public class ContainerTrade extends Container
 
 				if (dragType == 1)
 				{
-					this.queue.add(new ConfirmationQueueItem(stack.splitStack(1), false));
+					this.queue.add(new ConfirmationQueueItem(stack.split(1), false));
 				}
 			}
 
@@ -281,13 +281,13 @@ public class ContainerTrade extends Container
 	}
 
 	@Override
-	public boolean canInteractWith(final EntityPlayer playerIn)
+	public boolean canInteractWith(final PlayerEntity playerIn)
 	{
 		return playerIn.equals(this.playerInventory.player);
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(final EntityPlayer playerIn, final int index)
+	public ItemStack transferStackInSlot(final PlayerEntity playerIn, final int index)
 	{
 		ItemStack itemstack = ItemStack.EMPTY;
 		final Slot slot = this.inventorySlots.get(index);

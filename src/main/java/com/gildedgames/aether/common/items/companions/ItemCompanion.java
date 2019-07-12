@@ -4,11 +4,11 @@ import com.gildedgames.aether.common.items.InformationProvider;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.text.DecimalFormat;
@@ -35,21 +35,21 @@ public class ItemCompanion extends Item
 
 	public static void setRespawnTimer(final ItemStack stack, final World world, final int timer)
 	{
-		NBTTagCompound compound = stack.getTagCompound();
+		CompoundNBT compound = stack.getTagCompound();
 
 		if (compound == null)
 		{
-			stack.setTagCompound(compound = new NBTTagCompound());
+			stack.setTagCompound(compound = new CompoundNBT());
 		}
 
-		compound.setLong("respawnTimer", world.getTotalWorldTime() + timer);
+		compound.putLong("respawnTimer", world.getTotalWorldTime() + timer);
 	}
 
 	public static long getTicksUntilRespawn(final ItemStack stack, final World world)
 	{
-		final NBTTagCompound compound = stack.getTagCompound();
+		final CompoundNBT compound = stack.getTagCompound();
 
-		if (compound == null || !compound.hasKey("respawnTimer"))
+		if (compound == null || !compound.contains("respawnTimer"))
 		{
 			return 0;
 		}
@@ -58,7 +58,7 @@ public class ItemCompanion extends Item
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void addInformation(final ItemStack stack, @Nullable final World worldIn, final List<String> tooltip, final ITooltipFlag flagIn)
 	{
 		final long respawn = ItemCompanion.getTicksUntilRespawn(stack, worldIn);

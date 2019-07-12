@@ -1,14 +1,14 @@
 package com.gildedgames.aether.client.gui;
 
 import com.gildedgames.aether.common.AetherCore;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
-public class PerformanceIngame extends Gui
+public class PerformanceIngame extends AbstractGui
 {
 	private static final ResourceLocation SERVER_STALL_ICON = AetherCore.getResource("textures/gui/overlay/server_stall.png");
 
@@ -28,7 +28,7 @@ public class PerformanceIngame extends Gui
 
 	public void renderIcon()
 	{
-		Minecraft mc = Minecraft.getMinecraft();
+		Minecraft mc = Minecraft.getInstance();
 
 		this.update(mc);
 
@@ -92,8 +92,8 @@ public class PerformanceIngame extends Gui
 			GlStateManager.pushMatrix();
 			GlStateManager.enableRescaleNormal();
 
-			GlStateManager.translate(res.getScaledWidth() - 24.0f, 8.0f, 0.0f);
-			GlStateManager.scale(0.25f, 0.25f, 0.25f);
+			GlStateManager.translatef(res.getScaledWidth() - 24.0f, 8.0f, 0.0f);
+			GlStateManager.scalef(0.25f, 0.25f, 0.25f);
 
 			this.drawTexturedModalRect(0, 0, 0, 64 * (int) this.iconFrame, 64, 64);
 

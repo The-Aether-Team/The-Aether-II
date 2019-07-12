@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.containers;
 
 import net.minecraft.block.BlockWorkbench;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.ContainerWorkbench;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -13,7 +13,7 @@ public class ContainerCustomWorkbench extends ContainerWorkbench
 
 	private final BlockPos pos;
 
-	public ContainerCustomWorkbench(final InventoryPlayer playerInventory, final World worldIn,
+	public ContainerCustomWorkbench(final PlayerInventory playerInventory, final World worldIn,
 			final BlockPos posIn)
 	{
 		super(playerInventory, worldIn, posIn);
@@ -26,7 +26,7 @@ public class ContainerCustomWorkbench extends ContainerWorkbench
 	 * Determines whether supplied player can use this container
 	 */
 	@Override
-	public boolean canInteractWith(final EntityPlayer playerIn)
+	public boolean canInteractWith(final PlayerEntity playerIn)
 	{
 		if (!(this.world.getBlockState(this.pos).getBlock() instanceof BlockWorkbench))
 		{

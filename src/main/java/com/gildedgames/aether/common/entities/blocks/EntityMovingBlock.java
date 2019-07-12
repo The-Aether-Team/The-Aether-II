@@ -3,22 +3,22 @@ package com.gildedgames.aether.common.entities.blocks;
 import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MoverType;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class EntityMovingBlock extends Entity
 {
@@ -26,7 +26,7 @@ public class EntityMovingBlock extends Entity
 
 	private static final DataParameter<Byte> BLOCK_METADATA = new DataParameter<>(21, DataSerializers.BYTE);
 
-	private EntityPlayer holdingPlayer;
+	private PlayerEntity holdingPlayer;
 
 	private boolean hasActivated = false;
 
@@ -45,7 +45,7 @@ public class EntityMovingBlock extends Entity
 		this.motionZ = 0.0D;
 	}
 
-	public EntityMovingBlock(final World world, final double x, final double y, final double z, final IBlockState state)
+	public EntityMovingBlock(final World world, final double x, final double y, final double z, final BlockState state)
 	{
 		this(world);
 
@@ -66,9 +66,9 @@ public class EntityMovingBlock extends Entity
 	}
 
 	@Override
-	public void onUpdate()
+	public void livingTick()
 	{
-		super.onUpdate();
+		super.livingTick();
 
 		this.prevRotationYaw = this.rotationYaw;
 		this.prevRotationPitch = this.rotationPitch;
@@ -91,7 +91,7 @@ public class EntityMovingBlock extends Entity
 			if (this.world.getBlockState(pos).getBlock() == this.getBlockState().getBlock())
 			{
 				final IPlacementFlagCapability data = this.world.getChunk(pos)
-						.getCapability(CapabilitiesAether.CHUNK_PLACEMENT_FLAG, EnumFacing.UP);
+						.getCapability(CapabilitiesAether.CHUNK_PLACEMENT_FLAG, Direction.UP);
 
 				if (data != null)
 				{
@@ -138,7 +138,7 @@ public class EntityMovingBlock extends Entity
 		}
 	}
 
-	public void setHoldingPlayer(final EntityPlayer player)
+	public void setHoldingPlayer(final PlayerEntity player)
 	{
 		this.holdingPlayer = player;
 	}
@@ -166,7 +166,7 @@ public class EntityMovingBlock extends Entity
 				this.motionX += (pos.getX() - this.posX + 0.45D) * 0.15D;
 				this.motionZ += (pos.getZ() - this.posZ + 0.45D) * 0.15D;
 
-				final IBlockState state = this.world.getBlockState(pos);
+				final BlockState state = this.world.getBlockState(pos);
 
 				// We won't be able to land, reject and try to throw ourselves somewhere!
 				if (state.getBlock() != Blocks.AIR && !state.isNormalCube() && !state.getBlock().isReplaceable(this.world, pos))
@@ -183,7 +183,7 @@ public class EntityMovingBlock extends Entity
 					// We've stopped moving
 					if (!this.world.isRemote)
 					{
-						final IBlockState replacingState = this.world.getBlockState(pos);
+						final BlockState replacingState = this.world.getBlockState(pos);
 
 						if (!replacingState.getBlock().isReplaceable(this.world, pos))
 						{
@@ -200,7 +200,7 @@ public class EntityMovingBlock extends Entity
 						if (!this.allowDoubleDrops)
 						{
 							final IPlacementFlagCapability data = this.world.getChunk(pos)
-									.getCapability(CapabilitiesAether.CHUNK_PLACEMENT_FLAG, EnumFacing.UP);
+									.getCapability(CapabilitiesAether.CHUNK_PLACEMENT_FLAG, Direction.UP);
 
 							if (data != null)
 							{
@@ -257,7 +257,7 @@ public class EntityMovingBlock extends Entity
 
 		final BlockPos pos = new BlockPos(this);
 
-		final IBlockState state = this.getBlockState();
+		final BlockState state = this.getBlockState();
 
 		final NonNullList<ItemStack> drops = NonNullList.create();
 
@@ -275,7 +275,7 @@ public class EntityMovingBlock extends Entity
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public boolean canRenderOnFire()
 	{
 		return false;
@@ -294,31 +294,31 @@ public class EntityMovingBlock extends Entity
 	}
 
 	@Override
-	protected void readEntityFromNBT(final NBTTagCompound compound)
+	protected void readEntityFromNBT(final CompoundNBT compound)
 	{
-		final Block block = Block.getBlockById(compound.getInteger("Block"));
+		final Block block = Block.getBlockById(compound.getInt("Block"));
 
 		this.setBlockState(block.getStateFromMeta(compound.getByte("BlockMeta")));
-		this.ticksFalling = compound.getInteger("TicksFalling");
+		this.ticksFalling = compound.getInt("TicksFalling");
 		this.allowDoubleDrops = compound.getBoolean("AllowDoubleDrops");
 
 		this.hasActivated = this.ticksExisted > 1;
 	}
 
 	@Override
-	protected void writeEntityToNBT(final NBTTagCompound compound)
+	protected void writeEntityToNBT(final CompoundNBT compound)
 	{
-		final IBlockState state = this.getBlockState();
+		final BlockState state = this.getBlockState();
 
 		final Block block = state.getBlock();
 
-		compound.setInteger("Block", Block.REGISTRY.getIDForObject(block));
-		compound.setByte("BlockMeta", (byte) block.getMetaFromState(state));
-		compound.setInteger("TicksFalling", this.ticksFalling);
-		compound.setBoolean("AllowDoubleDrops", this.allowDoubleDrops);
+		compound.putInt("Block", Block.REGISTRY.getIDForObject(block));
+		compound.putByte("BlockMeta", (byte) block.getMetaFromState(state));
+		compound.putInt("TicksFalling", this.ticksFalling);
+		compound.putBoolean("AllowDoubleDrops", this.allowDoubleDrops);
 	}
 
-	public IBlockState getBlockState()
+	public BlockState getBlockState()
 	{
 		final Block block = Block.getBlockById(this.dataManager.get(BLOCK_NAME));
 
@@ -327,7 +327,7 @@ public class EntityMovingBlock extends Entity
 		return block.getStateFromMeta(meta);
 	}
 
-	public void setBlockState(final IBlockState state)
+	public void setBlockState(final BlockState state)
 	{
 		final Block block = state.getBlock();
 

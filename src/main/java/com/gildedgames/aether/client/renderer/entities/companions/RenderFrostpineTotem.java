@@ -3,16 +3,16 @@ package com.gildedgames.aether.client.renderer.entities.companions;
 import com.gildedgames.aether.client.models.entities.companions.ModelFrostpineTotem;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.companions.EntityFrostpineTotem;
-import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import org.lwjgl.opengl.GL11;
 
-public class RenderFrostpineTotem extends RenderCompanion<EntityFrostpineTotem>
+public class RenderFrostpineTotem extends RenderCompanion<EntityFrostpineTotem, ModelFrostpineTotem>
 {
 	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/entities/companions/frostpine_totem.png");
 
-	public RenderFrostpineTotem(RenderManager renderManager)
+	public RenderFrostpineTotem(EntityRendererManager renderManager)
 	{
 		super(renderManager, new ModelFrostpineTotem(), 0.5f, 2.5D);
 	}

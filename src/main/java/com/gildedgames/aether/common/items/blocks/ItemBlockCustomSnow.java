@@ -5,20 +5,20 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSnow;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.util.*;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class ItemBlockCustomSnow extends ItemBlock
+public class ItemBlockCustomSnow extends BlockItem
 {
 	public ItemBlockCustomSnow(Block block)
 	{
@@ -26,18 +26,18 @@ public class ItemBlockCustomSnow extends ItemBlock
 	}
 
 	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	public ActionResultType onItemUse(PlayerEntity player, World world, BlockPos pos, Hand hand, Direction facing, float hitX, float hitY, float hitZ)
 	{
 		ItemStack heldStack = player.getHeldItem(hand);
 
 		if (!heldStack.isEmpty() && player.canPlayerEdit(pos, facing, heldStack))
 		{
-			IBlockState state = world.getBlockState(pos);
+			BlockState state = world.getBlockState(pos);
 			Block block = state.getBlock();
 
 			BlockPos otherPos = pos;
 
-			if ((facing != EnumFacing.UP || block != this.block) && !block.isReplaceable(world, pos))
+			if ((facing != Direction.UP || block != this.block) && !block.isReplaceable(world, pos))
 			{
 				otherPos = pos.offset(facing);
 
@@ -51,7 +51,7 @@ public class ItemBlockCustomSnow extends ItemBlock
 
 				if (i < 8)
 				{
-					IBlockState modifiedState = state.withProperty(BlockSnow.LAYERS, i + 1);
+					BlockState modifiedState = state.withProperty(BlockSnow.LAYERS, i + 1);
 
 					AxisAlignedBB aabb = modifiedState.getCollisionBoundingBox(world, otherPos);
 
@@ -61,14 +61,14 @@ public class ItemBlockCustomSnow extends ItemBlock
 						world.playSound(player, otherPos, soundtype.getPlaceSound(), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F,
 								soundtype.getPitch() * 0.8F);
 
-						if (player instanceof EntityPlayerMP)
+						if (player instanceof ServerPlayerEntity)
 						{
-							CriteriaTriggers.PLACED_BLOCK.trigger((EntityPlayerMP) player, pos, heldStack);
+							CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayerEntity) player, pos, heldStack);
 						}
 
 						heldStack.shrink(1);
 
-						return EnumActionResult.SUCCESS;
+						return ActionResultType.SUCCESS;
 					}
 				}
 			}
@@ -77,7 +77,7 @@ public class ItemBlockCustomSnow extends ItemBlock
 		}
 		else
 		{
-			return EnumActionResult.FAIL;
+			return ActionResultType.FAIL;
 		}
 	}
 
@@ -88,9 +88,9 @@ public class ItemBlockCustomSnow extends ItemBlock
 	}
 
 	@Override
-	public boolean canPlaceBlockOnSide(World world, BlockPos pos, EnumFacing side, EntityPlayer player, ItemStack stack)
+	public boolean canPlaceBlockOnSide(World world, BlockPos pos, Direction side, PlayerEntity player, ItemStack stack)
 	{
-		IBlockState state = world.getBlockState(pos);
+		BlockState state = world.getBlockState(pos);
 
 		return (state.getBlock() == BlocksAether.highlands_snow_layer && state.getValue(BlockSnow.LAYERS) <= 7) || super
 				.canPlaceBlockOnSide(world, pos, side, player, stack);

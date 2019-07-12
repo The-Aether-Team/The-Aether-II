@@ -17,20 +17,21 @@ import com.gildedgames.aether.common.init.LootTablesAether;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
 import com.google.common.collect.Sets;
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.EntityAITempt;
+import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.passive.EntitySheep;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.entity.passive.SheepEntity;
+import net.minecraft.pathfinding.PathNavigator;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -39,7 +40,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class EntityKirrid extends EntitySheep implements IEntityMultiPart, IEntityEyesComponentProvider
+public class EntityKirrid extends SheepEntity implements IEntityMultiPart, IEntityEyesComponentProvider
 {
 	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(ItemsAether.valkyrie_wings);
 
@@ -73,17 +74,17 @@ public class EntityKirrid extends EntitySheep implements IEntityMultiPart, IEnti
 	}
 
 	@Override
-	protected void initEntityAI()
+	protected void registerGoals()
 	{
-		super.initEntityAI();
+		super.registerGoals();
 
 		this.entityAIEatGrass = new EntityAIEatAetherGrass(this, this.getEatChance());
 
-		this.tasks.addTask(2, new EntityAIRestrictRain(this));
-		this.tasks.addTask(3, new EntityAIUnstuckBlueAercloud(this));
-		this.tasks.addTask(3, new EntityAIHideFromRain(this, 1.3D));
-		this.tasks.addTask(3, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
-		this.tasks.addTask(9, this.entityAIEatGrass);
+		this.goalSelector.addGoal(2, new EntityAIRestrictRain(this));
+		this.goalSelector.addGoal(3, new EntityAIUnstuckBlueAercloud(this));
+		this.goalSelector.addGoal(3, new EntityAIHideFromRain(this, 1.3D));
+		this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, false, TEMPTATION_ITEMS));
+		this.goalSelector.addGoal(9, this.entityAIEatGrass);
 	}
 
 	@Override
@@ -147,7 +148,7 @@ public class EntityKirrid extends EntitySheep implements IEntityMultiPart, IEnti
 	}
 
 	@Override
-	protected PathNavigate createNavigator(final World worldIn)
+	protected PathNavigator createNavigator(final World worldIn)
 	{
 		return new AetherNavigateGround(this, worldIn);
 	}
@@ -159,15 +160,15 @@ public class EntityKirrid extends EntitySheep implements IEntityMultiPart, IEnti
 	}
 
 	@Override
-	protected void applyEntityAttributes()
+	protected void registerAttributes()
 	{
-		super.applyEntityAttributes();
+		super.registerAttributes();
 
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
 
-		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(8);
-		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(2);
-		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(5);
+		this.getAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(8);
+		this.getAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(2);
+		this.getAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(5);
 	}
 
 	@Override
@@ -212,7 +213,7 @@ public class EntityKirrid extends EntitySheep implements IEntityMultiPart, IEnti
 	}
 
 	@Override
-	public EntityKirrid createChild(EntityAgeable ageable)
+	public EntityKirrid createChild(AgeableEntity ageable)
 	{
 		return new EntityKirrid(this.world);
 	}
@@ -236,7 +237,7 @@ public class EntityKirrid extends EntitySheep implements IEntityMultiPart, IEnti
 	}
 
 	@Override
-	public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune)
+	public List<ItemStack> onSheared(ItemStack item, IBlockReader world, BlockPos pos, int fortune)
 	{
 		this.setSheared(true);
 

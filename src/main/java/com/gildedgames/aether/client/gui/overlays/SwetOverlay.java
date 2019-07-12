@@ -3,16 +3,16 @@ package com.gildedgames.aether.client.gui.overlays;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerSwetTrackerModule;
 import com.gildedgames.aether.common.entities.monsters.EntitySwet;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 
 public class SwetOverlay implements IOverlay
 {
 
-	private final Minecraft mc = Minecraft.getMinecraft();
+	private final Minecraft mc = Minecraft.getInstance();
 
 	public SwetOverlay()
 	{
@@ -93,26 +93,26 @@ public class SwetOverlay implements IOverlay
 		GlStateManager.pushMatrix();
 
 		GlStateManager.enableBlend();
-		GlStateManager.disableAlpha();
+		GlStateManager.disableAlphaTest();
 
 		GlStateManager.depthMask(true);
 
 		final double width = 64;
 		final double height = 64;
 
-		GlStateManager.translate(x, y, 0);
-		GlStateManager.translate(0, -((height * scale) - height), 0);
+		GlStateManager.translatef(x, y, 0);
+		GlStateManager.translatef(0, -((height * scale) - height), 0);
 
-		GlStateManager.scale(scale, scale, 0);
+		GlStateManager.scalef(scale, scale, 0);
 
 		GlStateManager.color(1.0F, 1.0F, 1.0F, alpha);
 
 		this.mc.getTextureManager().bindTexture(texture);
 
-		Gui.drawModalRectWithCustomSizedTexture(0, 0, 0, 0, 64, 64, 64, 64);
+		AbstractGui.drawModalRectWithCustomSizedTexture(0, 0, 0, 0, 64, 64, 64, 64);
 
 		GlStateManager.disableBlend();
-		GlStateManager.enableAlpha();
+		GlStateManager.enableAlphaTest();
 
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 

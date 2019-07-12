@@ -13,11 +13,11 @@ import com.gildedgames.orbis.lib.client.gui.util.gui_library.IGuiContext;
 import com.gildedgames.orbis.lib.client.rect.Dim2D;
 import com.gildedgames.orbis.lib.client.rect.Pos2D;
 import com.gildedgames.orbis.lib.util.InputHelper;
-import net.minecraft.client.renderer.GlStateManager;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import org.lwjgl.opengl.GL11;
 
 public class GuiAetherLoading extends GuiViewer implements CustomLoadingRenderer.ICustomLoading
@@ -53,10 +53,10 @@ public class GuiAetherLoading extends GuiViewer implements CustomLoadingRenderer
 		this.highlands = new GuiTexture(Dim2D.build().scale(0.5F).width(512).height(235).center(true).pos(center).flush(), HIGHLANDS);
 
 		this.loading = new GuiText(Dim2D.build().pos(InputHelper.getBottomLeft()).addY(-16).addX(8).flush(),
-				new Text(new TextComponentTranslation("gui.aether.loading.indeterminate"), 1.0F));
+				new Text(new TranslationTextComponent("gui.aether.loading.indeterminate"), 1.0F));
 
 		this.spinner = new GuiText(Dim2D.build().pos(InputHelper.getBottomRight()).addY(-16).addX(-24).flush(),
-				new Text(new TextComponentString(SPINNER_STATES[0]), 1.0f));
+				new Text(new StringTextComponent(SPINNER_STATES[0]), 1.0f));
 
 		context.addChildren(this.highlands, this.loading, this.spinner);
 
@@ -81,7 +81,7 @@ public class GuiAetherLoading extends GuiViewer implements CustomLoadingRenderer
 
 		GL11.glEnable(GL11.GL_ALPHA_TEST);
 
-		GlStateManager.enableAlpha();
+		GlStateManager.enableAlphaTest();
 
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
@@ -105,13 +105,13 @@ public class GuiAetherLoading extends GuiViewer implements CustomLoadingRenderer
 
 				String percentString = String.valueOf(MathHelper.floor(PERCENT));
 
-				this.loading.setText(new Text(new TextComponentTranslation("gui.aether.loading.progress", percentString), 1.0F));
+				this.loading.setText(new Text(new TranslationTextComponent("gui.aether.loading.progress", percentString), 1.0F));
 			}
 		}
 
 		int spinnerStateIndex = (int) ((System.currentTimeMillis() - this.millis) / 150) % SPINNER_STATES.length;
 
-		this.spinner.setText(new Text(new TextComponentString(SPINNER_STATES[spinnerStateIndex]), 1.0F));
+		this.spinner.setText(new Text(new StringTextComponent(SPINNER_STATES[spinnerStateIndex]), 1.0F));
 
 		super.drawElements();
 	}

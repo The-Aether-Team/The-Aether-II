@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.blocks;
 
-import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.state.BooleanProperty;
 
 public interface IBlockSnowy
 {
-	PropertyBool PROPERTY_SNOWY = PropertyBool.create("snowy");
+	BooleanProperty PROPERTY_SNOWY = BooleanProperty.create("snowy");
 }

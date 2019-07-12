@@ -4,7 +4,7 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerProgressModule;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
@@ -43,7 +43,7 @@ public class PacketProgressBooleanData implements IMessage
 	public static class HandlerClient extends MessageHandlerClient<PacketProgressBooleanData, IMessage>
 	{
 		@Override
-		public IMessage onMessage(final PacketProgressBooleanData message, final EntityPlayer player)
+		public IMessage onMessage(final PacketProgressBooleanData message, final PlayerEntity player)
 		{
 			if (player == null || player.world == null)
 			{
@@ -51,7 +51,7 @@ public class PacketProgressBooleanData implements IMessage
 			}
 
 			final PlayerAether aePlayer = PlayerAether.getPlayer(player);
-			aePlayer.getModule(PlayerProgressModule.class).setBoolean(message.key, message.flag);
+			aePlayer.getModule(PlayerProgressModule.class).putBoolean(message.key, message.flag);
 
 			return null;
 		}

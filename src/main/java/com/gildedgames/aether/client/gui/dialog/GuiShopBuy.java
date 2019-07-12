@@ -13,10 +13,10 @@ import com.gildedgames.orbis.lib.client.gui.util.gui_library.GuiElement;
 import com.gildedgames.orbis.lib.client.rect.Dim2D;
 import com.gildedgames.orbis.lib.client.rect.Rect;
 import com.gildedgames.orbis.lib.util.InputHelper;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.RenderItem;
@@ -100,7 +100,7 @@ public class GuiShopBuy extends GuiElement
 				renderitem.zLevel = 0.0F;
 
 				boolean hasEnough =
-						GuiShopBuy.this.shopInstance.getCurrencyType().getValue(PlayerAether.getPlayer(Minecraft.getMinecraft().player)) >= ShopUtil
+						GuiShopBuy.this.shopInstance.getCurrencyType().getValue(PlayerAether.getPlayer(Minecraft.getInstance().player)) >= ShopUtil
 								.getFilteredPrice(GuiShopBuy.this.shopInstance, GuiShopBuy.this
 										.getShopBuy());
 
@@ -112,15 +112,15 @@ public class GuiShopBuy extends GuiElement
 
 				if (InputHelper.isHovered(GuiShopBuy.this))
 				{
-					GuiScreen gui = Minecraft.getMinecraft().currentScreen;
+					Screen gui = Minecraft.getInstance().currentScreen;
 
 					if (gui instanceof IExtendedContainer)
 					{
 						ItemStack stack = GuiShopBuy.this.getShopBuy().getItemStack();
 
 						IExtendedContainer extendedGui = (IExtendedContainer) gui;
-						extendedGui.setHoveredDescription(stack, stack.getTooltip(Minecraft.getMinecraft().player,
-								Minecraft.getMinecraft().gameSettings.advancedItemTooltips ?
+						extendedGui.setHoveredDescription(stack, stack.getTooltip(Minecraft.getInstance().player,
+								Minecraft.getInstance().gameSettings.advancedItemTooltips ?
 										ITooltipFlag.TooltipFlags.ADVANCED :
 										ITooltipFlag.TooltipFlags.NORMAL));
 					}

@@ -6,7 +6,7 @@ import com.gildedgames.aether.api.world.islands.IIslandData;
 import com.gildedgames.aether.api.world.islands.IIslandGenerator;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis.lib.util.mc.NBT;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -25,7 +25,7 @@ public class BiomeVoid extends BiomeAetherBase
 	}
 
 	@Override
-	public IBlockState getCoastalBlock()
+	public BlockState getCoastalBlock()
 	{
 		return BlocksAether.quicksoil.getDefaultState();
 	}

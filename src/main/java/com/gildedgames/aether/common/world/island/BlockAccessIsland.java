@@ -7,7 +7,7 @@ import com.gildedgames.aether.api.world.preparation.IPrepSectorData;
 import com.gildedgames.aether.common.world.access.BlockAccessPrep;
 import com.gildedgames.orbis.lib.core.PlacedBlueprint;
 import com.gildedgames.orbis.lib.util.mc.BlockUtil;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -43,7 +43,7 @@ public class BlockAccessIsland extends BlockAccessPrep
 	}
 
 	@Override
-	public IBlockState getBlockState(BlockPos pos)
+	public BlockState getBlockState(BlockPos pos)
 	{
 		int chunkX = pos.getX() >> 4;
 		int chunkZ = pos.getZ() >> 4;
@@ -59,7 +59,7 @@ public class BlockAccessIsland extends BlockAccessPrep
 
 			BlockPos min = placed.getRegion().getMin();
 
-			IBlockState state = placed.getBaked().getBlockData().getBlockState(
+			BlockState state = placed.getBaked().getBlockData().getBlockState(
 					pos.getX() - min.getX(),
 					pos.getY() - min.getY(),
 					pos.getZ() - min.getZ()

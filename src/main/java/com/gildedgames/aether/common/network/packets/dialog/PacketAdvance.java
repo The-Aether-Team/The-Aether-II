@@ -6,7 +6,7 @@ import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerDi
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 public class PacketAdvance implements IMessage
@@ -31,7 +31,7 @@ public class PacketAdvance implements IMessage
 	public static class HandlerClient extends MessageHandlerClient<PacketAdvance, PacketAdvance>
 	{
 		@Override
-		public PacketAdvance onMessage(final PacketAdvance message, final EntityPlayer player)
+		public PacketAdvance onMessage(final PacketAdvance message, final PlayerEntity player)
 		{
 			final IPlayerAether aePlayer = PlayerAether.getPlayer(player);
 
@@ -45,7 +45,7 @@ public class PacketAdvance implements IMessage
 	public static class HandlerServer extends MessageHandlerServer<PacketAdvance, PacketAdvance>
 	{
 		@Override
-		public PacketAdvance onMessage(final PacketAdvance message, final EntityPlayer player)
+		public PacketAdvance onMessage(final PacketAdvance message, final PlayerEntity player)
 		{
 			final IPlayerAether aePlayer = PlayerAether.getPlayer(player);
 

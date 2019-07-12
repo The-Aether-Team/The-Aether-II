@@ -8,16 +8,16 @@ import com.gildedgames.aether.common.patron.armor.PatronRewardArmor;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelPlayer;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
 import net.minecraft.client.resources.DefaultPlayerSkin;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -47,10 +47,10 @@ public class LayerHeadShadow extends LayerBipedArmor
 	}
 
 	@Override
-	public void doRenderLayer(EntityLivingBase entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks,
+	public void doRenderLayer(LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks,
 			float netHeadYaw, float headPitch, float scale)
 	{
-		if (!(entity instanceof EntityPlayer))
+		if (!(entity instanceof PlayerEntity))
 		{
 			return;
 		}
@@ -60,9 +60,9 @@ public class LayerHeadShadow extends LayerBipedArmor
 			return;
 		}
 
-		PlayerAether player = PlayerAether.getPlayer((EntityPlayer) entity);
+		PlayerAether player = PlayerAether.getPlayer((PlayerEntity) entity);
 
-		ItemStack helm = player.getEntity().getItemStackFromSlot(EntityEquipmentSlot.HEAD);
+		ItemStack helm = player.getEntity().getItemStackFromSlot(EquipmentSlotType.HEAD);
 
 		PatronRewardArmor armor = this.previewArmor;
 
@@ -78,7 +78,7 @@ public class LayerHeadShadow extends LayerBipedArmor
 
 		GameProfile profile = player.getEntity().getGameProfile();
 
-		Minecraft minecraft = Minecraft.getMinecraft();
+		Minecraft minecraft = Minecraft.getInstance();
 
 		Map<MinecraftProfileTexture.Type, MinecraftProfileTexture> map = minecraft.getSkinManager().loadSkinFromCache(profile);
 
@@ -90,7 +90,7 @@ public class LayerHeadShadow extends LayerBipedArmor
 		}
 		else
 		{
-			UUID uuid = EntityPlayer.getUUID(profile);
+			UUID uuid = PlayerEntity.getUUID(profile);
 
 			texture = DefaultPlayerSkin.getDefaultSkin(uuid);
 		}

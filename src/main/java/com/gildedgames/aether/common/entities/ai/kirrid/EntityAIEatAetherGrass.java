@@ -2,15 +2,15 @@ package com.gildedgames.aether.common.entities.ai.kirrid;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import net.minecraft.block.Block;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class EntityAIEatAetherGrass extends EntityAIBase
+public class EntityAIEatAetherGrass extends Goal
 {
 	/** The entity owner of this AITask */
-	private final EntityLiving entity;
+	private final MobEntity entity;
 
 	/** The world the grass eater entity is eating from */
 	private final World world;
@@ -21,7 +21,7 @@ public class EntityAIEatAetherGrass extends EntityAIBase
 	/** Chance of executing **/
 	private int chance;
 
-	public EntityAIEatAetherGrass(final EntityLiving grassEaterEntityIn, int chance)
+	public EntityAIEatAetherGrass(final MobEntity grassEaterEntityIn, int chance)
 	{
 		this.entity = grassEaterEntityIn;
 		this.world = grassEaterEntityIn.world;
@@ -30,7 +30,7 @@ public class EntityAIEatAetherGrass extends EntityAIBase
 	}
 
 
-	public EntityAIEatAetherGrass(final EntityLiving grassEaterEntityIn)
+	public EntityAIEatAetherGrass(final MobEntity grassEaterEntityIn)
 	{
 		this(grassEaterEntityIn, 1000);
 	}

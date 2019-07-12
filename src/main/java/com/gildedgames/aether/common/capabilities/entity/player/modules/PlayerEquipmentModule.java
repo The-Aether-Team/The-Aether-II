@@ -18,7 +18,7 @@ import com.gildedgames.aether.common.entities.effects.InventoryProvider;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketEquipment;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.apache.commons.lang3.Validate;
@@ -112,20 +112,20 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 	}
 
 	@Override
-	public void write(NBTTagCompound compound)
+	public void write(CompoundNBT compound)
 	{
-		NBTTagCompound equipment = new NBTTagCompound();
-		compound.setTag("EquipmentInventory", equipment);
+		CompoundNBT equipment = new CompoundNBT();
+		compound.put("EquipmentInventory", equipment);
 
 		this.stagingInv.write(equipment);
 	}
 
 	@Override
-	public void read(NBTTagCompound compound)
+	public void read(CompoundNBT compound)
 	{
-		if (compound.hasKey("EquipmentInventory"))
+		if (compound.contains("EquipmentInventory"))
 		{
-			this.stagingInv.read(compound.getCompoundTag("EquipmentInventory"));
+			this.stagingInv.read(compound.getCompound("EquipmentInventory"));
 		}
 	}
 

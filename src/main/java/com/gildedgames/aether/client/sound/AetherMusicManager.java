@@ -10,18 +10,18 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundHandler;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.api.distmarker.Dist;
 
 import java.util.ArrayList;
 
-@Mod.EventBusSubscriber(Side.CLIENT)
+@Mod.EventBusSubscriber(Dist.CLIENT)
 public class AetherMusicManager
 {
 	public static final AetherMusicManager INSTANCE = new AetherMusicManager();
@@ -128,13 +128,13 @@ public class AetherMusicManager
 
 	private boolean canPlayMusic()
 	{
-		return !Minecraft.getMinecraft().isGamePaused() && (this.currentRecord == null
+		return !Minecraft.getInstance().isGamePaused() && (this.currentRecord == null
 				|| !this.getSoundHandler().isSoundPlaying(this.currentRecord));
 	}
 
 	private SoundHandler getSoundHandler()
 	{
-		return Minecraft.getMinecraft().getSoundHandler();
+		return Minecraft.getInstance().getSoundHandler();
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
@@ -151,7 +151,7 @@ public class AetherMusicManager
 		{
 			if (!event.getSound().getSoundLocation().getNamespace().equals(AetherCore.MOD_ID))
 			{
-				final EntityPlayer player = Minecraft.getMinecraft().player;
+				final PlayerEntity player = Minecraft.getInstance().player;
 
 				if (player != null && (player.world.provider.getDimensionType() == DimensionsAether.AETHER
 						|| player.world.provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER))

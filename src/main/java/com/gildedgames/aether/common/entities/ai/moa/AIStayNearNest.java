@@ -1,10 +1,10 @@
 package com.gildedgames.aether.common.entities.ai.moa;
 
 import com.gildedgames.aether.common.entities.animals.EntityMoa;
-import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.world.World;
 
-public class AIStayNearNest extends EntityAIBase
+public class AIStayNearNest extends Goal
 {
 
 	public final World world;

@@ -3,18 +3,18 @@ package com.gildedgames.aether.client.gui.container.simple_crafting;
 import com.gildedgames.aether.client.gui.container.IExtendedContainer;
 import com.gildedgames.aether.common.recipes.simple.OreDictionaryRequirement;
 import com.gildedgames.aether.common.util.helpers.RecipeUtil;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SoundHandler;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.gui.widget.button.Button;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class GuiRequiredMaterial extends GuiButton
+public class GuiRequiredMaterial extends Button
 {
 
 	public boolean resultStack;
@@ -41,7 +41,7 @@ public class GuiRequiredMaterial extends GuiButton
 		{
 			ItemStack stack = (ItemStack) obj;
 
-			if (stack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
+			if (stack.getDamage() == OreDictionary.WILDCARD_VALUE)
 			{
 				this.required = stack;
 				this.displayStack = new ItemStack(stack.getItem(), stack.getCount());
@@ -82,33 +82,33 @@ public class GuiRequiredMaterial extends GuiButton
 			RenderHelper.enableGUIStandardItemLighting();
 			GlStateManager.enableDepth();
 
-			Minecraft.getMinecraft().getRenderItem().renderItemIntoGUI(this.displayStack, this.x + 1, this.y + 1);
+			Minecraft.getInstance().getRenderItem().renderItemIntoGUI(this.displayStack, this.x + 1, this.y + 1);
 
 			RenderHelper.disableStandardItemLighting();
 			GlStateManager.disableRescaleNormal();
 
 			GlStateManager.pushMatrix();
-			GlStateManager.translate(0.0F, 0.0F, 300.0F);
+			GlStateManager.translatef(0.0F, 0.0F, 300.0F);
 
 			if (!this.resultStack || this.displayStack.getCount() > 1)
 			{
-				boolean hasEnough = RecipeUtil.hasEnoughOfMaterial(Minecraft.getMinecraft().player, this.required) || this.resultStack;
+				boolean hasEnough = RecipeUtil.hasEnoughOfMaterial(Minecraft.getInstance().player, this.required) || this.resultStack;
 
 				int xOffset = (Math.max(String.valueOf(this.displayStack.getCount()).length() - 1, 0)) * -6;
 
-				this.drawString(Minecraft.getMinecraft().fontRenderer, (!hasEnough ? TextFormatting.RED : "") + String.valueOf(this.displayStack.getCount()),
+				this.drawString(Minecraft.getInstance().fontRenderer, (!hasEnough ? TextFormatting.RED : "") + String.valueOf(this.displayStack.getCount()),
 						this.x + 12 + xOffset, this.y + this.height - 8, 0xFFFFFF);
 			}
 
 			if (this.hovered)
 			{
-				GuiScreen gui = Minecraft.getMinecraft().currentScreen;
+				Screen gui = Minecraft.getInstance().currentScreen;
 
 				if (gui instanceof IExtendedContainer)
 				{
 					IExtendedContainer extendedGui = (IExtendedContainer) gui;
-					extendedGui.setHoveredDescription(this.displayStack, this.displayStack.getTooltip(Minecraft.getMinecraft().player,
-							Minecraft.getMinecraft().gameSettings.advancedItemTooltips ?
+					extendedGui.setHoveredDescription(this.displayStack, this.displayStack.getTooltip(Minecraft.getInstance().player,
+							Minecraft.getInstance().gameSettings.advancedItemTooltips ?
 									ITooltipFlag.TooltipFlags.ADVANCED :
 									ITooltipFlag.TooltipFlags.NORMAL));
 				}

@@ -3,15 +3,15 @@ package com.gildedgames.aether.client.gui.overlays;
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTeleportingModule;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.init.MobEffects;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.Timer;
 
 public class PortalOverlay implements IOverlay
@@ -19,7 +19,7 @@ public class PortalOverlay implements IOverlay
 
 	private final Timer timer = new Timer(20.0F);
 
-	private final Minecraft mc = Minecraft.getMinecraft();
+	private final Minecraft mc = Minecraft.getInstance();
 
 	public PortalOverlay()
 	{
@@ -29,13 +29,13 @@ public class PortalOverlay implements IOverlay
 	@Override
 	public boolean isEnabled()
 	{
-		return Minecraft.getMinecraft().world != null;
+		return Minecraft.getInstance().world != null;
 	}
 
 	@Override
 	public void draw()
 	{
-		if (!this.mc.player.isPotionActive(MobEffects.NAUSEA))
+		if (!this.mc.player.isPotionActive(Effects.NAUSEA))
 		{
 			final PlayerAether playerAether = PlayerAether.getPlayer(this.mc.player);
 			final PlayerTeleportingModule teleportModule = playerAether.getModule(PlayerTeleportingModule.class);
@@ -49,7 +49,7 @@ public class PortalOverlay implements IOverlay
 				final ScaledResolution scaledRes = new ScaledResolution(this.mc);
 
 				GlStateManager.enableBlend();
-				GlStateManager.disableAlpha();
+				GlStateManager.disableAlphaTest();
 				GlStateManager.disableDepth();
 				GlStateManager.depthMask(false);
 				GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
@@ -72,7 +72,7 @@ public class PortalOverlay implements IOverlay
 				tessellator.draw();
 				GlStateManager.depthMask(true);
 				GlStateManager.enableDepth();
-				GlStateManager.enableAlpha();
+				GlStateManager.enableAlphaTest();
 				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 			}
 		}

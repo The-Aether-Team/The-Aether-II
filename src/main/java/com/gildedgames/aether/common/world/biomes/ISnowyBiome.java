@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.world.biomes;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 
 /**
  * If implemented for a biome, snowfall and ice-freezing will occur with
@@ -9,12 +9,12 @@ import net.minecraft.block.state.IBlockState;
  */
 public interface ISnowyBiome
 {
-	default IBlockState getFrozenWaterBlock()
+	default BlockState getFrozenWaterBlock()
 	{
 		return BlocksAether.highlands_ice.getDefaultState();
 	}
 
-	default IBlockState getSnowBlock()
+	default BlockState getSnowBlock()
 	{
 		return BlocksAether.highlands_snow_layer.getDefaultState();
 	}

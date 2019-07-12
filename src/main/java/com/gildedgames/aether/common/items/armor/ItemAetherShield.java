@@ -3,16 +3,16 @@ package com.gildedgames.aether.common.items.armor;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.init.CreativeTabsAether;
 import net.minecraft.block.BlockDispenser;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.api.distmarker.Dist;
 
 public class ItemAetherShield extends Item
 {
@@ -24,8 +24,8 @@ public class ItemAetherShield extends Item
 		this.addPropertyOverride(new ResourceLocation("blocking"), new IItemPropertyGetter()
 		{
 			@Override
-			@SideOnly(Side.CLIENT)
-			public float apply(ItemStack stack, World worldIn, EntityLivingBase entity)
+			@OnlyIn(Dist.CLIENT)
+			public float apply(ItemStack stack, World worldIn, LivingEntity entity)
 			{
 				return entity != null && entity.isHandActive() && entity.getActiveItemStack() == stack ? 1.0F : 0.0F;
 			}
@@ -37,9 +37,9 @@ public class ItemAetherShield extends Item
 	}
 
 	@Override
-	public EnumAction getItemUseAction(ItemStack stack)
+	public UseAction getItemUseAction(ItemStack stack)
 	{
-		return EnumAction.BLOCK;
+		return UseAction.BLOCK;
 	}
 
 	@Override
@@ -49,12 +49,12 @@ public class ItemAetherShield extends Item
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn)
 	{
 		ItemStack stack = playerIn.getHeldItem(handIn);
 		playerIn.setActiveHand(handIn);
 
-		return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+		return new ActionResult<>(ActionResultType.SUCCESS, stack);
 	}
 
 	@Override

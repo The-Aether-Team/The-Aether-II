@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.world.spawning;
 
 import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.api.world.spawn.ISpawnSystem;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
@@ -19,7 +19,7 @@ public class SpawnSystemProvider implements ICapabilityProvider
 	}
 
 	@Override
-	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing)
+	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable Direction facing)
 	{
 		return capability == CapabilitiesAether.SPAWN_SYSTEM;
 	}
@@ -27,7 +27,7 @@ public class SpawnSystemProvider implements ICapabilityProvider
 	@SuppressWarnings("unchecked")
 	@Nullable
 	@Override
-	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing)
+	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable Direction facing)
 	{
 		if (this.hasCapability(capability, facing))
 		{

@@ -6,12 +6,12 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTradeModule;
 import com.gildedgames.aether.common.util.helpers.PlayerUtil;
 import net.minecraft.entity.passive.EntityCow;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Mod.EventBusSubscriber
 public class TradeInteractListener
@@ -29,11 +29,11 @@ public class TradeInteractListener
 				PlayerUtil.fillBucketInHand(event.getEntityPlayer(), event.getHand(), item, new ItemStack(ItemsAether.skyroot_milk_bucket));
 			}
 		}
-		else if (event.getSide().isServer() && event.getTarget() instanceof EntityPlayer && event.getHand() == EnumHand.MAIN_HAND && event.getItemStack()
+		else if (event.getSide().isServer() && event.getTarget() instanceof PlayerEntity && event.getHand() == Hand.MAIN_HAND && event.getItemStack()
 				.isEmpty())
 		{
 			PlayerTradeModule me = PlayerAether.getPlayer(event.getEntityPlayer()).getModule(PlayerTradeModule.class);
-			PlayerTradeModule other = PlayerAether.getPlayer((EntityPlayer) event.getTarget()).getModule(PlayerTradeModule.class);
+			PlayerTradeModule other = PlayerAether.getPlayer((PlayerEntity) event.getTarget()).getModule(PlayerTradeModule.class);
 
 			if (me.getPlayer().equals(other.getTarget()) && other.canAccept(event.getEntity().getPosition()))
 			{

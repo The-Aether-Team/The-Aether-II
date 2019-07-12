@@ -3,8 +3,8 @@ package com.gildedgames.aether.client.renderer.entities.attachments;
 import com.gildedgames.aether.client.models.entities.attachments.ModelParachute;
 import com.gildedgames.aether.common.entities.blocks.EntityParachute;
 import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
@@ -13,7 +13,7 @@ public class RenderParachute extends Render<EntityParachute>
 
 	private final ModelParachute model = new ModelParachute();
 
-	public RenderParachute(RenderManager renderManager)
+	public RenderParachute(EntityRendererManager renderManager)
 	{
 		super(renderManager);
 
@@ -32,13 +32,13 @@ public class RenderParachute extends Render<EntityParachute>
 
 		if (entity.getParachutingPlayer() != null)
 		{
-			EntityPlayer player = entity.getParachutingPlayer();
+			PlayerEntity player = entity.getParachutingPlayer();
 			float f2 = player.prevRenderYawOffset + ((player.renderYawOffset - player.prevRenderYawOffset));
 			GL11.glRotatef(f2, 0F, Math.abs(player.rotationYaw), 0F);
 		}
 
 		GL11.glTranslatef(0.028f, -2f, -0.40f);
-		this.renderManager.renderEngine.bindTexture(entity.getType().texture);
+		this.renderManager.textureManager.bindTexture(entity.getType().texture);
 
 		this.model.Cloud1.render(f);
 		this.model.Cloud2.render(f);

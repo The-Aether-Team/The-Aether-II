@@ -8,7 +8,7 @@ import com.gildedgames.orbis.lib.world.data.IWorldData;
 import com.gildedgames.orbis.lib.world.data.IWorldDataManager;
 import com.google.common.util.concurrent.*;
 import net.minecraft.nbt.CompressedStreamTools;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
@@ -332,7 +332,7 @@ public class PrepSectorAccessServer implements IPrepSectorAccess, IWorldData
 	 */
 	private IPrepSectorData readSectorDataFromStream(final InputStream stream) throws IOException
 	{
-		final NBTTagCompound tag = CompressedStreamTools.readCompressed(stream);
+		final CompoundNBT tag = CompressedStreamTools.readCompressed(stream);
 
 		return this.registry.createDataAndRead(this.world, tag);
 	}
@@ -361,7 +361,7 @@ public class PrepSectorAccessServer implements IPrepSectorAccess, IWorldData
 	 */
 	private void writeSectorDataToStream(final IPrepSectorData sector, final OutputStream out) throws IOException
 	{
-		final NBTTagCompound tag = new NBTTagCompound();
+		final CompoundNBT tag = new CompoundNBT();
 		sector.write(tag);
 
 		CompressedStreamTools.writeCompressed(tag, out);

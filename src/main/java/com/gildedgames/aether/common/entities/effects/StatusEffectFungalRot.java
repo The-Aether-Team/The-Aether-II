@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.entities.effects;
 import com.gildedgames.aether.api.entity.effects.EEffectIntensity;
 import com.gildedgames.aether.common.capabilities.entity.effects.EffectsDamageSource;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
@@ -13,13 +13,13 @@ import java.util.Collection;
 
 public class StatusEffectFungalRot extends StatusEffect
 {
-	public StatusEffectFungalRot(EntityLivingBase livingBase)
+	public StatusEffectFungalRot(LivingEntity livingBase)
 	{
 		super(effectTypes.FUNGAL_ROT, new AttributeModifier("aether.statusEffectFungalRot", -0.5D, 1).setSaved(false), livingBase);
 	}
 
 	@Override
-	public void applyEffect(EntityLivingBase livingBase, int timer)
+	public void applyEffect(LivingEntity livingBase, int timer)
 	{
 		IAttributeInstance iAttributeInstance = livingBase.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
 

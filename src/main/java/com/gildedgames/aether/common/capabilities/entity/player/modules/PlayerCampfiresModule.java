@@ -7,7 +7,7 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModu
 import com.gildedgames.orbis.lib.util.io.NBTFunnel;
 import com.gildedgames.orbis.lib.util.mc.BlockPosDimension;
 import com.google.common.collect.Sets;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 
@@ -93,17 +93,17 @@ public class PlayerCampfiresModule extends PlayerAetherModule implements IPlayer
 	}
 
 	@Override
-	public void write(final NBTTagCompound compound)
+	public void write(final CompoundNBT compound)
 	{
 		NBTFunnel funnel = new NBTFunnel(compound);
 
 		funnel.setSet("campfiresActivated", this.campfiresActivated);
 		funnel.set("deathPos", this.deathPos);
-		compound.setBoolean("shouldRespawnAtCampfire", this.shouldRespawnAtCampfire);
+		compound.putBoolean("shouldRespawnAtCampfire", this.shouldRespawnAtCampfire);
 	}
 
 	@Override
-	public void read(final NBTTagCompound compound)
+	public void read(final CompoundNBT compound)
 	{
 		NBTFunnel funnel = new NBTFunnel(compound);
 

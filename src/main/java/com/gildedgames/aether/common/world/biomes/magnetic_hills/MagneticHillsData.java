@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.world.biomes.magnetic_hills;
 import com.gildedgames.orbis.lib.util.io.NBTFunnel;
 import com.gildedgames.orbis.lib.util.mc.NBT;
 import com.google.common.collect.Lists;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.math.BlockPos;
 
 import java.util.Collection;
@@ -64,24 +64,24 @@ public class MagneticHillsData implements NBT
 	}
 
 	@Override
-	public void write(final NBTTagCompound tag)
+	public void write(final CompoundNBT tag)
 	{
 		final NBTFunnel funnel = new NBTFunnel(tag);
 
 		funnel.setPos("center", this.center);
-		tag.setLong("seed", this.seed);
-		tag.setInteger("shaftCount", this.shaftCount);
-		tag.setInteger("spawnRadius", this.spawnRadius);
+		tag.putLong("seed", this.seed);
+		tag.putInt("shaftCount", this.shaftCount);
+		tag.putInt("spawnRadius", this.spawnRadius);
 	}
 
 	@Override
-	public void read(final NBTTagCompound tag)
+	public void read(final CompoundNBT tag)
 	{
 		final NBTFunnel funnel = new NBTFunnel(tag);
 
 		this.center = funnel.getPos("center");
 		this.seed = tag.getLong("seed");
-		this.shaftCount = tag.getInteger("shaftCount");
-		this.spawnRadius = tag.getInteger("spawnRadius");
+		this.shaftCount = tag.getInt("shaftCount");
+		this.spawnRadius = tag.getInt("spawnRadius");
 	}
 }

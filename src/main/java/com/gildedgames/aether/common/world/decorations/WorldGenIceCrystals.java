@@ -5,7 +5,7 @@ import com.gildedgames.aether.api.world.decoration.WorldDecorationGenerator;
 import com.gildedgames.aether.common.blocks.natural.BlockIceCrystal;
 import com.gildedgames.orbis.lib.world.WorldSlice;
 import com.google.common.collect.Lists;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 
 import java.util.List;
@@ -14,9 +14,9 @@ import java.util.Random;
 public class WorldGenIceCrystals implements WorldDecorationGenerator
 {
 
-	private final IBlockState crystalState;
+	private final BlockState crystalState;
 
-	private List<IBlockState> statesCanPlaceOn = Lists.newArrayList();
+	private List<BlockState> statesCanPlaceOn = Lists.newArrayList();
 
 	private final int max;
 
@@ -26,7 +26,7 @@ public class WorldGenIceCrystals implements WorldDecorationGenerator
 		this.max = max;
 	}
 
-	public void setStatesToPlaceOn(final IBlockState... states)
+	public void setStatesToPlaceOn(final BlockState... states)
 	{
 		this.statesCanPlaceOn = Lists.newArrayList(states);
 	}
@@ -44,8 +44,8 @@ public class WorldGenIceCrystals implements WorldDecorationGenerator
 					rand.nextInt(8) - rand.nextInt(8));
 
 
-			final IBlockState above = slice.getBlockState(randomPos.up());
-			final IBlockState below = slice.getBlockState(randomPos.down());
+			final BlockState above = slice.getBlockState(randomPos.up());
+			final BlockState below = slice.getBlockState(randomPos.down());
 
 			if (slice.isAirBlock(randomPos))
 			{

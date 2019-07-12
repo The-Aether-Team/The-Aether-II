@@ -6,7 +6,7 @@ import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerEq
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
@@ -80,7 +80,7 @@ public class PacketEquipment implements IMessage
 	public static class HandlerClient extends MessageHandlerClient<PacketEquipment, IMessage>
 	{
 		@Override
-		public IMessage onMessage(final PacketEquipment message, final EntityPlayer player)
+		public IMessage onMessage(final PacketEquipment message, final PlayerEntity player)
 		{
 			if (player == null || player.world == null)
 			{

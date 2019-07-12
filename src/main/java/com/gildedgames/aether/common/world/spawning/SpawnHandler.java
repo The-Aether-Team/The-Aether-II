@@ -13,14 +13,14 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis.lib.OrbisLib;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.ServerWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEntitySpawner;
-import net.minecraft.world.WorldServer;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
@@ -46,12 +46,12 @@ public class SpawnHandler implements ISpawnHandler
 		this.uniqueID = uniqueID;
 	}
 
-	public static boolean isNotColliding(EntityLiving.SpawnPlacementType placementType, final World world, final Entity entity)
+	public static boolean isNotColliding(MobEntity.SpawnPlacementType placementType, final World world, final Entity entity)
 	{
-		return (placementType == EntityLiving.SpawnPlacementType.IN_AIR || WorldEntitySpawner
+		return (placementType == MobEntity.SpawnPlacementType.IN_AIR || WorldEntitySpawner
 				.canCreatureTypeSpawnAtLocation(placementType, world, entity.getPosition()))
-				&& world.getCollisionBoxes(entity, entity.getEntityBoundingBox()).isEmpty()
-				&& world.checkNoEntityCollision(entity.getEntityBoundingBox(), entity);
+				&& world.getCollisionBoxes(entity, entity.getBoundingBox()).isEmpty()
+				&& world.checkNoEntityCollision(entity.getBoundingBox(), entity);
 	}
 
 	@Override
@@ -303,9 +303,9 @@ public class SpawnHandler implements ISpawnHandler
 					Entity entity = (Entity) constructor.newInstance(manager.getWorld());
 					entity.setLocationAndAngles(posX + 0.5F, posY, posZ + 0.5F, manager.getWorld().rand.nextFloat() * 360.0F, 0.0F);
 
-					if (entity instanceof EntityLivingBase)
+					if (entity instanceof LivingEntity)
 					{
-						EntityLivingBase entityliving = (EntityLivingBase) entity;
+						LivingEntity entityliving = (LivingEntity) entity;
 
 						entityliving.rotationYawHead = entityliving.rotationYaw;
 						entityliving.renderYawOffset = entityliving.rotationYaw;
@@ -313,9 +313,9 @@ public class SpawnHandler implements ISpawnHandler
 
 					if (SpawnHandler.isNotColliding(entry.getPlacementType(), manager.getWorld(), entity))
 					{
-						if (entity instanceof EntityLiving)
+						if (entity instanceof MobEntity)
 						{
-							EntityLiving living = (EntityLiving) entity;
+							MobEntity living = (MobEntity) entity;
 
 							if (!ForgeEventFactory.doSpecialSpawn(living, manager.getWorld(), posX, posY, posZ, null))
 							{
@@ -330,14 +330,14 @@ public class SpawnHandler implements ISpawnHandler
 
 						manager.getWorld().spawnEntity(entity);
 
-						if (manager.getWorld() instanceof WorldServer)
+						if (manager.getWorld() instanceof ServerWorld)
 						{
 							manager.getWorld().updateEntityWithOptionalForce(entity, true);
 						}
 
-						if (entity instanceof EntityLiving)
+						if (entity instanceof MobEntity)
 						{
-							livingData = ((EntityLiving) entity).onInitialSpawn(manager.getWorld().getDifficultyForLocation(new BlockPos(entity)), livingData);
+							livingData = ((MobEntity) entity).onInitialSpawn(manager.getWorld().getDifficultyForLocation(new BlockPos(entity)), livingData);
 						}
 					}
 					else

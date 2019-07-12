@@ -10,13 +10,13 @@ import com.gildedgames.orbis.lib.util.io.NBTFunnel;
 import com.gildedgames.orbis.lib.util.mc.BlockPosDimension;
 import com.gildedgames.orbis.lib.world.instances.IInstance;
 import com.google.common.collect.Lists;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.DimensionType;
+import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.GameType;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -27,7 +27,7 @@ import java.util.List;
 public class NecromancerTowerInstance implements IInstance
 {
 
-	private final List<EntityPlayer> players = Lists.newArrayList();
+	private final List<PlayerEntity> players = Lists.newArrayList();
 
 	private BlockPos insideEntrance;
 
@@ -62,7 +62,7 @@ public class NecromancerTowerInstance implements IInstance
 			return false;
 		}
 
-		BakedBlueprint baked = new BakedBlueprint(GenerationAether.NECROMANCER_TOWER, new CreationData(world).pos(BlockPos.ORIGIN));
+		BakedBlueprint baked = new BakedBlueprint(GenerationAether.NECROMANCER_TOWER, new CreationData(world).pos(BlockPos.ZERO));
 
 		this.tower = new PlacedBlueprint(baked, baked.getCreationData());
 
@@ -87,37 +87,37 @@ public class NecromancerTowerInstance implements IInstance
 	}
 
 	@Override
-	public void write(final NBTTagCompound output)
+	public void write(final CompoundNBT output)
 	{
 		final NBTFunnel funnel = new NBTFunnel(output);
 
-		output.setTag("spawn", NBTUtil.createPosTag(this.insideEntrance));
+		output.put("spawn", NBTUtil.createPosTag(this.insideEntrance));
 
-		output.setInteger("dim", this.dimensionId);
+		output.putInt("dim", this.dimensionId);
 
 		funnel.set("tower", this.tower);
 	}
 
 	@Override
-	public void read(final NBTTagCompound input)
+	public void read(final CompoundNBT input)
 	{
 		final NBTFunnel funnel = new NBTFunnel(input);
 
-		this.insideEntrance = NBTUtil.getPosFromTag(input.getCompoundTag("spawn"));
+		this.insideEntrance = NBTUtil.getPosFromTag(input.getCompound("spawn"));
 
-		this.dimensionId = input.getInteger("dim");
+		this.dimensionId = input.getInt("dim");
 
 		this.tower = funnel.get("tower");
 	}
 
 	@Override
-	public void onJoin(final EntityPlayer player)
+	public void onJoin(final PlayerEntity player)
 	{
 		this.players.add(player);
 
-		if (player instanceof EntityPlayerMP)
+		if (player instanceof ServerPlayerEntity)
 		{
-			final EntityPlayerMP playerMP = (EntityPlayerMP) player;
+			final ServerPlayerEntity playerMP = (ServerPlayerEntity) player;
 
 			if (playerMP.interactionManager.getGameType() == GameType.SURVIVAL)
 			{
@@ -130,13 +130,13 @@ public class NecromancerTowerInstance implements IInstance
 	}
 
 	@Override
-	public void onLeave(final EntityPlayer player)
+	public void onLeave(final PlayerEntity player)
 	{
 		this.players.remove(player);
 
-		if (player instanceof EntityPlayerMP)
+		if (player instanceof ServerPlayerEntity)
 		{
-			final EntityPlayerMP playerMP = (EntityPlayerMP) player;
+			final ServerPlayerEntity playerMP = (ServerPlayerEntity) player;
 
 			if (playerMP.interactionManager.getGameType() == GameType.ADVENTURE)
 			{
@@ -152,18 +152,18 @@ public class NecromancerTowerInstance implements IInstance
 	}
 
 	@Override
-	public void onRespawn(EntityPlayer player)
+	public void onRespawn(PlayerEntity player)
 	{
 		this.teleportPlayerToSpawn(player);
 	}
 
-	private void teleportPlayerToSpawn(EntityPlayer player)
+	private void teleportPlayerToSpawn(PlayerEntity player)
 	{
 		BlockPos spawn = this.getSpawnPosition();
 
 		if (spawn != null)
 		{
-			((EntityPlayerMP) player).connection.setPlayerLocation(spawn.getX() + 0.5D, spawn.getY() + 0.5D, spawn.getZ() + 0.5D, 215, 0);
+			((ServerPlayerEntity) player).connection.setPlayerLocation(spawn.getX() + 0.5D, spawn.getY() + 0.5D, spawn.getZ() + 0.5D, 215, 0);
 		}
 	}
 
@@ -173,7 +173,7 @@ public class NecromancerTowerInstance implements IInstance
 	}
 
 	@Override
-	public List<EntityPlayer> getPlayers()
+	public List<PlayerEntity> getPlayers()
 	{
 		return this.players;
 	}

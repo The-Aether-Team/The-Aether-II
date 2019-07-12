@@ -2,16 +2,16 @@ package com.gildedgames.aether.common.containers;
 
 import com.gildedgames.aether.api.shop.IShopInstance;
 import com.gildedgames.aether.common.containers.slots.SlotSell;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class ContainerShop extends Container
 {
@@ -19,24 +19,24 @@ public class ContainerShop extends Container
 
 	private final IShopInstance shopInstance;
 
-	public ContainerShop(final InventoryPlayer playerInventory, IShopInstance shopInstance)
+	public ContainerShop(final PlayerInventory playerInventory, IShopInstance shopInstance)
 	{
 		this.shopInstance = shopInstance;
 		this.shopInventory = shopInstance.getInventory(playerInventory.player);
 
-		this.addSlotToContainer(new SlotSell(this.shopInventory, 0, 257, 7));
+		this.addSlot(new SlotSell(this.shopInventory, 0, 257, 7));
 
 		for (int i = 0; i < 3; ++i)
 		{
 			for (int j = 0; j < 9; ++j)
 			{
-				this.addSlotToContainer(new Slot(playerInventory, j + i * 9 + 9, 186 + 7 + j * 18, 19 + 14 + i * 18));
+				this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 186 + 7 + j * 18, 19 + 14 + i * 18));
 			}
 		}
 
 		for (int k = 0; k < 9; ++k)
 		{
-			this.addSlotToContainer(new Slot(playerInventory, k, 186 + 7 + k * 18, 77 + 14));
+			this.addSlot(new Slot(playerInventory, k, 186 + 7 + k * 18, 77 + 14));
 		}
 	}
 
@@ -46,13 +46,13 @@ public class ContainerShop extends Container
 	}
 
 	@Override
-	public void onContainerClosed(EntityPlayer playerIn)
+	public void onContainerClosed(PlayerEntity playerIn)
 	{
 		super.onContainerClosed(playerIn);
 
 		if (!playerIn.world.isRemote)
 		{
-			if (!playerIn.isEntityAlive() || playerIn instanceof EntityPlayerMP && ((EntityPlayerMP)playerIn).hasDisconnected())
+			if (!playerIn.isAlive() || playerIn instanceof ServerPlayerEntity && ((ServerPlayerEntity)playerIn).hasDisconnected())
 			{
 				playerIn.dropItem(this.shopInventory.removeStackFromSlot(0), false);
 			}
@@ -71,20 +71,20 @@ public class ContainerShop extends Container
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void updateProgressBar(final int id, final int data)
 	{
 		this.shopInventory.setField(id, data);
 	}
 
 	@Override
-	public boolean canInteractWith(final EntityPlayer playerIn)
+	public boolean canInteractWith(final PlayerEntity playerIn)
 	{
 		return this.shopInventory.isUsableByPlayer(playerIn);
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(final EntityPlayer playerIn, final int index)
+	public ItemStack transferStackInSlot(final PlayerEntity playerIn, final int index)
 	{
 		ItemStack itemstack = ItemStack.EMPTY;
 		final Slot slot = this.inventorySlots.get(index);

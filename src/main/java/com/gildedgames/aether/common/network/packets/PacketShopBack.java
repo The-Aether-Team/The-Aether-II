@@ -7,7 +7,7 @@ import com.gildedgames.aether.common.containers.ContainerShop;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
@@ -34,7 +34,7 @@ public class PacketShopBack implements IMessage
 	public static class HandlerServer extends MessageHandlerServer<PacketShopBack, IMessage>
 	{
 		@Override
-		public IMessage onMessage(final PacketShopBack message, final EntityPlayer player)
+		public IMessage onMessage(final PacketShopBack message, final PlayerEntity player)
 		{
 			if (player == null || player.world == null)
 			{

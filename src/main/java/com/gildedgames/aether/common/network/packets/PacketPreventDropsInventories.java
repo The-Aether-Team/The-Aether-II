@@ -4,8 +4,8 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerPreventDropsModule;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
@@ -14,7 +14,7 @@ public class PacketPreventDropsInventories implements IMessage
 
 	private PlayerPreventDropsModule module;
 
-	private NBTTagCompound tag;
+	private CompoundNBT tag;
 
 	public PacketPreventDropsInventories()
 	{
@@ -35,7 +35,7 @@ public class PacketPreventDropsInventories implements IMessage
 	@Override
 	public void toBytes(final ByteBuf buf)
 	{
-		NBTTagCompound tag = new NBTTagCompound();
+		CompoundNBT tag = new CompoundNBT();
 
 		this.module.write(tag);
 
@@ -45,7 +45,7 @@ public class PacketPreventDropsInventories implements IMessage
 	public static class HandlerClient extends MessageHandlerClient<PacketPreventDropsInventories, IMessage>
 	{
 		@Override
-		public IMessage onMessage(final PacketPreventDropsInventories message, final EntityPlayer player)
+		public IMessage onMessage(final PacketPreventDropsInventories message, final PlayerEntity player)
 		{
 			if (player == null || player.world == null)
 			{

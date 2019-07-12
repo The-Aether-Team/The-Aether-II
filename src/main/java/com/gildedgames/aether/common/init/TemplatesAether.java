@@ -3,8 +3,8 @@ package com.gildedgames.aether.common.init;
 import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.datafix.DataFixesManager;
-import net.minecraft.world.gen.structure.template.Template;
-import net.minecraft.world.gen.structure.template.TemplateManager;
+import net.minecraft.world.gen.feature.template.Template;
+import net.minecraft.world.gen.feature.template.TemplateManager;
 
 public class TemplatesAether
 {

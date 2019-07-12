@@ -9,8 +9,8 @@ import com.gildedgames.aether.common.network.packets.PacketProgressBooleanData;
 import com.gildedgames.aether.common.network.packets.PacketTalkedTo;
 import com.gildedgames.orbis.lib.util.io.NBTFunnel;
 import com.google.common.collect.Maps;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 
@@ -40,7 +40,7 @@ public class PlayerProgressModule extends PlayerAetherModule implements IPlayerA
 
 		if (!this.getWorld().isRemote)
 		{
-			NetworkingAether.sendPacketToPlayer(new PacketProgressBooleanData(key, bool), (EntityPlayerMP) this.getEntity());
+			NetworkingAether.sendPacketToPlayer(new PacketProgressBooleanData(key, bool), (ServerPlayerEntity) this.getEntity());
 		}
 	}
 
@@ -70,7 +70,7 @@ public class PlayerProgressModule extends PlayerAetherModule implements IPlayerA
 
 		if (!this.getWorld().isRemote)
 		{
-			NetworkingAether.sendPacketToPlayer(new PacketTalkedTo(speaker, flag), (EntityPlayerMP) this.getEntity());
+			NetworkingAether.sendPacketToPlayer(new PacketTalkedTo(speaker, flag), (ServerPlayerEntity) this.getEntity());
 		}
 	}
 
@@ -105,19 +105,19 @@ public class PlayerProgressModule extends PlayerAetherModule implements IPlayerA
 	}
 
 	@Override
-	public void write(NBTTagCompound tag)
+	public void write(CompoundNBT tag)
 	{
 		NBTFunnel funnel = new NBTFunnel(tag);
 
-		tag.setBoolean("hasDiedInAether", this.hasDiedInAether);
-		tag.setBoolean("returnedToBed", this.returnedToBed);
+		tag.putBoolean("hasDiedInAether", this.hasDiedInAether);
+		tag.putBoolean("returnedToBed", this.returnedToBed);
 		funnel.setMap("hasTalkedTo", this.hasTalkedTo, NBTFunnel.LOC_SETTER, NBTFunnel.BOOLEAN_SETTER);
 		funnel.setPos("beforeReturnToBed", this.beforeReturnToBed);
 		funnel.setMap("booleanData", this.booleanData, NBTFunnel.STRING_SETTER, NBTFunnel.BOOLEAN_SETTER);
 	}
 
 	@Override
-	public void read(NBTTagCompound tag)
+	public void read(CompoundNBT tag)
 	{
 		NBTFunnel funnel = new NBTFunnel(tag);
 

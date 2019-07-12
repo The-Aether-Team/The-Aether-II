@@ -1,14 +1,14 @@
 package com.gildedgames.aether.common.blocks.multiblock;
 
 import com.gildedgames.aether.common.entities.tiles.multiblock.TileEntityMultiblockController;
+import net.minecraft.block.BlockRenderType;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public abstract class BlockMultiController extends BlockMultiBase
 {
@@ -24,7 +24,7 @@ public abstract class BlockMultiController extends BlockMultiBase
 	{
 		for (BlockPos pos : this.getMultiblockVolumeIterator(placePos, world))
 		{
-			IBlockState state = world.getBlockState(pos);
+			BlockState state = world.getBlockState(pos);
 
 			if (!state.getBlock().isReplaceable(world, pos))
 			{
@@ -36,7 +36,7 @@ public abstract class BlockMultiController extends BlockMultiBase
 	}
 
 	@Override
-	public void onBlockAdded(World world, BlockPos pos, IBlockState state)
+	public void onBlockAdded(World world, BlockPos pos, BlockState state)
 	{
 		TileEntity te = world.getTileEntity(pos);
 
@@ -49,9 +49,9 @@ public abstract class BlockMultiController extends BlockMultiBase
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public EnumBlockRenderType getRenderType(IBlockState state)
+	@OnlyIn(Dist.CLIENT)
+	public BlockRenderType getRenderType(BlockState state)
 	{
-		return EnumBlockRenderType.INVISIBLE;
+		return BlockRenderType.INVISIBLE;
 	}
 }

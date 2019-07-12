@@ -1,13 +1,13 @@
 package com.gildedgames.aether.common.entities.ai;
 
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public abstract class EntityAIMoveToBlockYSensitive extends EntityAIBase
+public abstract class EntityAIMoveToBlockYSensitive extends Goal
 {
-	private final EntityCreature creature;
+	private final CreatureEntity creature;
 
 	private final double movementSpeed;
 
@@ -25,7 +25,7 @@ public abstract class EntityAIMoveToBlockYSensitive extends EntityAIBase
 
 	private boolean isAboveDestination;
 
-	public EntityAIMoveToBlockYSensitive(final EntityCreature creature, final double speedIn, final int length)
+	public EntityAIMoveToBlockYSensitive(final CreatureEntity creature, final double speedIn, final int length)
 	{
 		this.creature = creature;
 		this.movementSpeed = speedIn;

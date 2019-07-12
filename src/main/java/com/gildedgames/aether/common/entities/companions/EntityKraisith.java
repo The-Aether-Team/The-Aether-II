@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.entities.companions;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.init.MobEffects;
+import net.minecraft.potion.Effects;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
@@ -16,28 +16,28 @@ public class EntityKraisith extends EntityCombatCompanion
 	}
 
 	@Override
-	protected void applyEntityAttributes()
+	protected void registerAttributes()
 	{
-		super.applyEntityAttributes();
+		super.registerAttributes();
 
-		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0D);
+		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0D);
 	}
 
 	@Override
 	public boolean attackEntityAsMob(Entity entity)
 	{
 		boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this),
-				(float) ((int) this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue()));
+				(float) ((int) this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue()));
 
 		if (flag)
 		{
 			this.applyEnchantments(this, entity);
 
-			if (entity instanceof EntityLivingBase)
+			if (entity instanceof LivingEntity)
 			{
-				EntityLivingBase living = (EntityLivingBase) entity;
+				LivingEntity living = (LivingEntity) entity;
 
-				living.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 20, 3));
+				living.addPotionEffect(new PotionEffect(Effects.SLOWNESS, 20, 3));
 			}
 		}
 

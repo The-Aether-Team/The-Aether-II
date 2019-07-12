@@ -5,7 +5,7 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerDialogModule;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 public class PacketNavigateBack implements IMessage
@@ -29,7 +29,7 @@ public class PacketNavigateBack implements IMessage
 	public static class HandlerClient extends MessageHandlerClient<PacketNavigateBack, PacketNavigateBack>
 	{
 		@Override
-		public PacketNavigateBack onMessage(final PacketNavigateBack message, final EntityPlayer player)
+		public PacketNavigateBack onMessage(final PacketNavigateBack message, final PlayerEntity player)
 		{
 			final IPlayerAether aePlayer = PlayerAether.getPlayer(player);
 			final PlayerDialogModule module = aePlayer.getModule(PlayerDialogModule.class);

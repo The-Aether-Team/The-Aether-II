@@ -1,14 +1,14 @@
 package com.gildedgames.aether.common.entities.genes;
 
 import com.gildedgames.aether.api.entity.genes.IGenePool;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.world.World;
 
-public abstract class EntityGeneticAnimal<T extends IGenePool> extends EntityAnimal
+public abstract class EntityGeneticAnimal<T extends IGenePool> extends AnimalEntity
 {
 
 	private static final DataParameter<Integer> SEED = EntityDataManager.createKey(EntityGeneticAnimal.class, DataSerializers.VARINT);
@@ -36,9 +36,9 @@ public abstract class EntityGeneticAnimal<T extends IGenePool> extends EntityAni
 	}
 
 	@Override
-	public void entityInit()
+	public void registerData()
 	{
-		super.entityInit();
+		super.registerData();
 
 		this.dataManager.register(SEED, 0);
 		this.dataManager.register(FATHER_SEED, 0);
@@ -47,9 +47,9 @@ public abstract class EntityGeneticAnimal<T extends IGenePool> extends EntityAni
 	}
 
 	@Override
-	public void onUpdate()
+	public void livingTick()
 	{
-		super.onUpdate();
+		super.livingTick();
 
 		if (this.shouldRetransform() && this.world.isRemote)
 		{
@@ -107,23 +107,23 @@ public abstract class EntityGeneticAnimal<T extends IGenePool> extends EntityAni
 	}
 
 	@Override
-	public void writeEntityToNBT(NBTTagCompound tag)
+	public void writeEntityToNBT(CompoundNBT tag)
 	{
 		super.writeEntityToNBT(tag);
 
-		tag.setInteger("seed", this.getSeed());
-		tag.setInteger("fatherSeed", this.getFatherSeed());
-		tag.setInteger("motherSeed", this.getMotherSeed());
+		tag.putInt("seed", this.getSeed());
+		tag.putInt("fatherSeed", this.getFatherSeed());
+		tag.putInt("motherSeed", this.getMotherSeed());
 	}
 
 	@Override
-	public void readEntityFromNBT(NBTTagCompound tag)
+	public void readEntityFromNBT(CompoundNBT tag)
 	{
 		super.readEntityFromNBT(tag);
 
-		int seed = tag.getInteger("seed");
-		int fatherSeed = tag.getInteger("fatherSeed");
-		int motherSeed = tag.getInteger("motherSeed");
+		int seed = tag.getInt("seed");
+		int fatherSeed = tag.getInt("fatherSeed");
+		int motherSeed = tag.getInt("motherSeed");
 
 		if (seed == fatherSeed && seed == motherSeed)
 		{

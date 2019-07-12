@@ -7,7 +7,7 @@ import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.io.File;
 
@@ -96,7 +96,7 @@ public class ConfigAether
 		{
 			this.loadAndSync();
 
-			if (AetherCore.isClient() && Minecraft.getMinecraft().world != null)
+			if (AetherCore.isClient() && Minecraft.getInstance().world != null)
 			{
 				NetworkingAether.sendPacketToServer(new PacketSetPlayerConfig(this));
 			}

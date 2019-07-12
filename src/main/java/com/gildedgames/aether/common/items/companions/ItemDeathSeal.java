@@ -3,11 +3,11 @@ package com.gildedgames.aether.common.items.companions;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -16,23 +16,23 @@ public class ItemDeathSeal extends ItemCompanion
 {
 	public static void setDisabledTimer(final ItemStack stack, final World world, final int timer)
 	{
-		NBTTagCompound compound = stack.getTagCompound();
+		CompoundNBT compound = stack.getTagCompound();
 
 		if (compound == null)
 		{
-			stack.setTagCompound(compound = new NBTTagCompound());
+			stack.setTagCompound(compound = new CompoundNBT());
 		}
 
-		compound.setLong("disabledTimer", world.getTotalWorldTime() + timer);
+		compound.putLong("disabledTimer", world.getTotalWorldTime() + timer);
 
 		stack.setItemDamage(1);
 	}
 
 	public static long getTicksUntilEnabled(final ItemStack stack, final World world)
 	{
-		final NBTTagCompound compound = stack.getTagCompound();
+		final CompoundNBT compound = stack.getTagCompound();
 
-		if (compound == null || !compound.hasKey("disabledTimer"))
+		if (compound == null || !compound.contains("disabledTimer"))
 		{
 			return 0;
 		}
@@ -56,7 +56,7 @@ public class ItemDeathSeal extends ItemCompanion
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void addInformation(final ItemStack stack, @Nullable final World worldIn, final List<String> tooltip, final ITooltipFlag flagIn)
 	{
 		super.addInformation(stack, worldIn, tooltip, flagIn);

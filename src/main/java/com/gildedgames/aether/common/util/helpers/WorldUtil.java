@@ -1,25 +1,22 @@
 package com.gildedgames.aether.common.util.helpers;
 
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 
-import java.util.List;
-
 public class WorldUtil
 {
 
-	public static boolean isBlockInAABB(AxisAlignedBB bb, World world, IBlockState state)
+	public static boolean isBlockInAABB(AxisAlignedBB bb, World world, BlockState state)
 	{
 		return isBlockInAABB(bb, world, state, true);
 	}
 
-	public static boolean isBlockInAABB(AxisAlignedBB bb, World world, IBlockState state, boolean checkLoaded)
+	public static boolean isBlockInAABB(AxisAlignedBB bb, World world, BlockState state, boolean checkLoaded)
 	{
 		int minX = MathHelper.floor(bb.minX);
 		int minY = MathHelper.floor(bb.minY);
@@ -69,7 +66,7 @@ public class WorldUtil
 		return false;
 	}
 
-	public static boolean isBlockBelowAABB(AxisAlignedBB bb, World world, IBlockState block)
+	public static boolean isBlockBelowAABB(AxisAlignedBB bb, World world, BlockState block)
 	{
 		int minX = MathHelper.floor(bb.minX);
 		int maxX = MathHelper.floor(bb.maxX);
@@ -91,7 +88,7 @@ public class WorldUtil
 			{
 				for (int y = maxY; y >= 0; y--)
 				{
-					IBlockState state = world.getBlockState(pos.setPos(x, y, z));
+					BlockState state = world.getBlockState(pos.setPos(x, y, z));
 
 					if (state == block)
 					{

@@ -11,24 +11,24 @@ import com.gildedgames.aether.common.recipes.simple.OreDictionaryRequirement;
 import com.gildedgames.aether.common.util.helpers.RecipeUtil;
 import com.gildedgames.orbis.lib.util.InputHelper;
 import com.google.common.collect.Lists;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.gui.AbstractGui;
+import net.minecraft.client.gui.widget.button.Button;
+import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.ClickType;
-import net.minecraft.inventory.Slot;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.ClickType;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.client.config.GuiUtils;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
@@ -38,8 +38,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-@SideOnly(Side.CLIENT)
-public class ContainerMasonryBench extends GuiContainer implements IExtendedContainer
+@OnlyIn(Dist.CLIENT)
+public class ContainerMasonryBench extends ContainerScreen implements IExtendedContainer
 {
 
 	private static final ResourceLocation MASONRY_BENCH = AetherCore.getResource("textures/gui/inventory/masonry_bench.png");
@@ -55,7 +55,7 @@ public class ContainerMasonryBench extends GuiContainer implements IExtendedCont
 	private static final ResourceLocation DOWN_ARROW = AetherCore.getResource("textures/gui/inventory/down_arrow.png");
 
 	/** The player inventory bound to this GUI. */
-	private final InventoryPlayer playerInventory;
+	private final PlayerInventory playerInventory;
 
 	private final List<GuiCraftingOption> options = new ArrayList<>(24);
 
@@ -88,7 +88,7 @@ public class ContainerMasonryBench extends GuiContainer implements IExtendedCont
 
 	private final com.gildedgames.aether.common.containers.tiles.ContainerMasonryBench container;
 
-	public ContainerMasonryBench(EntityPlayer player, BlockPos blockPosition)
+	public ContainerMasonryBench(PlayerEntity player, BlockPos blockPosition)
 	{
 		super(new com.gildedgames.aether.common.containers.tiles.ContainerMasonryBench(player, blockPosition));
 
@@ -123,7 +123,7 @@ public class ContainerMasonryBench extends GuiContainer implements IExtendedCont
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton button)
+	protected void actionPerformed(Button button)
 	{
 		if (button.id == 31)
 		{
@@ -195,7 +195,7 @@ public class ContainerMasonryBench extends GuiContainer implements IExtendedCont
 					this.container.setInputCount(64);
 				}
 
-				if (!RecipeUtil.canCraft(Minecraft.getMinecraft().player, option.getRecipe()) && option.getRecipe() != null)
+				if (!RecipeUtil.canCraft(Minecraft.getInstance().player, option.getRecipe()) && option.getRecipe() != null)
 				{
 					this.result.setRequiredObject(option.getRecipe().getResult());
 				}
@@ -267,7 +267,7 @@ public class ContainerMasonryBench extends GuiContainer implements IExtendedCont
 			}
 		}
 
-		EntityPlayer p = Minecraft.getMinecraft().player;
+		PlayerEntity p = Minecraft.getInstance().player;
 
 		this.recipes.sort((o1, o2) ->
 		{
@@ -373,7 +373,7 @@ public class ContainerMasonryBench extends GuiContainer implements IExtendedCont
 		if (this.currentRecipe != null)
 		{
 			if (!RecipeUtil.areEqual(this.result.getRequiredObject(), this.currentRecipe.getResult()) && !RecipeUtil
-					.canCraft(Minecraft.getMinecraft().player, this.currentRecipe))
+					.canCraft(Minecraft.getInstance().player, this.currentRecipe))
 			{
 				this.result.setRequiredObject(this.currentRecipe.getResult());
 			}
@@ -419,13 +419,13 @@ public class ContainerMasonryBench extends GuiContainer implements IExtendedCont
 			{
 				GuiUtils.preItemToolTip(this.hoveredStack);
 				GuiUtils.drawHoveringText(this.hoverDescription, mouseX, mouseY, width, height, -1,
-						Minecraft.getMinecraft().fontRenderer);
+						Minecraft.getInstance().fontRenderer);
 				GuiUtils.postItemToolTip();
 			}
 			else
 			{
 				GuiUtils.drawHoveringText(this.hoverDescription, mouseX, mouseY, width, height, -1,
-						Minecraft.getMinecraft().fontRenderer);
+						Minecraft.getInstance().fontRenderer);
 			}
 		}
 
@@ -501,7 +501,7 @@ public class ContainerMasonryBench extends GuiContainer implements IExtendedCont
 							GlStateManager.DestFactor.ZERO);
 			GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 
-			Gui.drawModalRectWithCustomSizedTexture(this.guiLeft - 126, this.guiTop + 21, 0, 0, 72, 108, 72, 126);
+			AbstractGui.drawModalRectWithCustomSizedTexture(this.guiLeft - 126, this.guiTop + 21, 0, 0, 72, 108, 72, 126);
 		}
 	}
 

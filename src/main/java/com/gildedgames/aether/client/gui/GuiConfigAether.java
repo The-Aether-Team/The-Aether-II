@@ -1,7 +1,7 @@
 package com.gildedgames.aether.client.gui;
 
 import com.gildedgames.aether.common.AetherCore;
-import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraftforge.common.config.ConfigElement;
 import net.minecraftforge.fml.client.config.GuiConfig;
 import net.minecraftforge.fml.client.config.IConfigElement;
@@ -12,7 +12,7 @@ import java.util.List;
 public class GuiConfigAether extends GuiConfig
 {
 
-	public GuiConfigAether(GuiScreen parent)
+	public GuiConfigAether(Screen parent)
 	{
 		super(parent, GuiConfigAether.getConfigElements(), AetherCore.MOD_ID, false, false, "Aether II Options");
 	}

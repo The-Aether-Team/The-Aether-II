@@ -6,14 +6,14 @@ import com.gildedgames.aether.client.gui.container.guidebook.AbstractGuidebookPa
 import com.gildedgames.aether.client.gui.misc.GuiPatronRewards;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
-import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.inventory.GuiInventory;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec2f;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class TabPatronRewards implements ITab
 {
@@ -24,7 +24,7 @@ public class TabPatronRewards implements ITab
 	}
 
 	@Override
-	public void onOpen(EntityPlayer player)
+	public void onOpen(PlayerEntity player)
 	{
 		BlockPos pos = player.getPosition();
 
@@ -43,19 +43,19 @@ public class TabPatronRewards implements ITab
 		return false;
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static class Client extends TabPatronRewards implements ITabClient
 	{
 		private static final ResourceLocation ICON = AetherCore.getResource("textures/gui/tabs/patron_rewards.png");
 
 		@Override
-		public boolean isTabValid(GuiScreen gui)
+		public boolean isTabValid(Screen gui)
 		{
 			return gui instanceof GuiInventory || gui instanceof AbstractGuidebookPage || gui instanceof GuiPatronRewards;
 		}
 
 		@Override
-		public void onClose(EntityPlayer player)
+		public void onClose(PlayerEntity player)
 		{
 		}
 

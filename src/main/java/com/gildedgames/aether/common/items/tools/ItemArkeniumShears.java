@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.items.tools;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
 
@@ -10,7 +10,7 @@ public class ItemArkeniumShears extends ItemShears
 {
 
 	@Override
-	public float getDestroySpeed(ItemStack stack, IBlockState state)
+	public float getDestroySpeed(ItemStack stack, BlockState state)
 	{
 		Block block = state.getBlock();
 

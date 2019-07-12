@@ -5,16 +5,17 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.CompatibilityAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fluids.FluidActionResult;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -22,7 +23,6 @@ import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Mod.EventBusSubscriber
 public class ItemBucketEventListener
@@ -44,7 +44,7 @@ public class ItemBucketEventListener
 				fluidStack = FluidUtil.getFluidContained(event.getEmptyBucket());
 			}
 
-			final EntityPlayer player = event.getEntityPlayer();
+			final PlayerEntity player = event.getEntityPlayer();
 
 			final BlockPos pos = event.getTarget().getBlockPos().offset(event.getTarget().sideHit);
 
@@ -53,7 +53,7 @@ public class ItemBucketEventListener
 			if (hasWaterFluid || event.getEmptyBucket().getItem() == Items.WATER_BUCKET
 					|| event.getEmptyBucket().getItem() == ItemsAether.skyroot_water_bucket)
 			{
-				IBlockState targetState = event.getWorld().getBlockState(event.getTarget().getBlockPos());
+				BlockState targetState = event.getWorld().getBlockState(event.getTarget().getBlockPos());
 
 				if (targetState.getBlock() == Blocks.GLOWSTONE && isPortalFrame(event.getWorld(), event.getTarget().getBlockPos(), pos))
 				{
@@ -71,11 +71,11 @@ public class ItemBucketEventListener
 
 	private static boolean isPortalFrame(final World world, final BlockPos target, final BlockPos pos)
 	{
-		IBlockState state = world.getBlockState(target);
+		BlockState state = world.getBlockState(target);
 
 		if (state.getBlock() == Blocks.QUARTZ_BLOCK || state.getBlock() == Blocks.GLOWSTONE)
 		{
-			BlockAetherPortal.Size size = new BlockAetherPortal.Size(world, pos, EnumFacing.Axis.X);
+			BlockAetherPortal.Size size = new BlockAetherPortal.Size(world, pos, Direction.Axis.X);
 
 			if (size.isWithinSizeBounds() && size.getPortalBlocks() == 0)
 			{
@@ -83,7 +83,7 @@ public class ItemBucketEventListener
 			}
 			else
 			{
-				size = new BlockAetherPortal.Size(world, pos, EnumFacing.Axis.Z);
+				size = new BlockAetherPortal.Size(world, pos, Direction.Axis.Z);
 
 				return size.isWithinSizeBounds() && size.getPortalBlocks() == 0;
 			}
@@ -92,11 +92,11 @@ public class ItemBucketEventListener
 		return false;
 	}
 
-	private static void onPlayerAttemptPortalCreation(final FillBucketEvent event, final EntityPlayer player, final BlockPos pos)
+	private static void onPlayerAttemptPortalCreation(final FillBucketEvent event, final PlayerEntity player, final BlockPos pos)
 	{
 		if (ItemBucketEventListener.createPortal(event.getWorld(), event.getTarget().getBlockPos(), pos))
 		{
-			if (!event.getEntityPlayer().capabilities.isCreativeMode)
+			if (!event.getEntityPlayer().isCreative())
 			{
 				final IFluidHandler fluidHandler = FluidUtil.getFluidHandler(event.getEmptyBucket());
 
@@ -130,7 +130,7 @@ public class ItemBucketEventListener
 
 	private static boolean createPortal(final World world, final BlockPos target, final BlockPos pos)
 	{
-		BlockAetherPortal.Size size = new BlockAetherPortal.Size(world, pos, EnumFacing.Axis.X);
+		BlockAetherPortal.Size size = new BlockAetherPortal.Size(world, pos, Direction.Axis.X);
 
 		if (size.isWithinSizeBounds() && size.getPortalBlocks() == 0)
 		{
@@ -140,7 +140,7 @@ public class ItemBucketEventListener
 		}
 		else
 		{
-			size = new BlockAetherPortal.Size(world, pos, EnumFacing.Axis.Z);
+			size = new BlockAetherPortal.Size(world, pos, Direction.Axis.Z);
 
 			if (size.isWithinSizeBounds() && size.getPortalBlocks() == 0)
 			{

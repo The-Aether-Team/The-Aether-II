@@ -2,15 +2,15 @@ package com.gildedgames.aether.common.entities.tiles;
 
 import com.gildedgames.aether.common.items.blocks.ItemBlockPresent;
 import com.gildedgames.aether.common.items.other.ItemWrappingPaper;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.item.EntityTNTPrimed;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemMonsterPlacer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -64,7 +64,7 @@ public class TileEntityPresent extends TileEntity
 		}
 		else
 		{
-			EntityItem item = new EntityItem(this.world, x2, y2, z2, stack);
+			ItemEntity item = new ItemEntity(this.world, x2, y2, z2, stack);
 			item.setPickupDelay(10)
 			;
 			entity = item;
@@ -74,29 +74,29 @@ public class TileEntityPresent extends TileEntity
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound compound)
+	public CompoundNBT writeToNBT(CompoundNBT compound)
 	{
 		super.writeToNBT(compound);
-		compound.setTag("data", this.getPresentData().writeToNBT(new NBTTagCompound()));
+		compound.put("data", this.getPresentData().writeToNBT(new CompoundNBT()));
 
 		return compound;
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound compound)
+	public void readFromNBT(CompoundNBT compound)
 	{
 		super.readFromNBT(compound);
-		this.presentData = ItemBlockPresent.PresentData.readFromNBT(compound.getCompoundTag("data"));
+		this.presentData = ItemBlockPresent.PresentData.readFromNBT(compound.getCompound("data"));
 	}
 
 	// Do not sync what items the present contains to the client!
 
 	@Override
-	public NBTTagCompound getUpdateTag()
+	public CompoundNBT getUpdateTag()
 	{
-		NBTTagCompound tag = super.getUpdateTag();
+		CompoundNBT tag = super.getUpdateTag();
 
-		tag.setTag("dye", this.getPresentData().getDye().writeToNBT(new NBTTagCompound()));
+		tag.put("dye", this.getPresentData().getDye().writeToNBT(new CompoundNBT()));
 
 		return tag;
 	}
@@ -104,7 +104,7 @@ public class TileEntityPresent extends TileEntity
 	@Override
 	public SPacketUpdateTileEntity getUpdatePacket()
 	{
-		NBTTagCompound compound = this.getUpdateTag();
+		CompoundNBT compound = this.getUpdateTag();
 
 		return new SPacketUpdateTileEntity(this.pos, 1, compound);
 	}
@@ -112,13 +112,13 @@ public class TileEntityPresent extends TileEntity
 	@Override
 	public void onDataPacket(NetworkManager networkManager, SPacketUpdateTileEntity packet)
 	{
-		NBTTagCompound nbt = packet.getNbtCompound();
-		this.getPresentData().setDye(ItemWrappingPaper.PresentDyeData.readFromNBT(nbt.getCompoundTag("dye")));
+		CompoundNBT nbt = packet.getNbtCompound();
+		this.getPresentData().setDye(ItemWrappingPaper.PresentDyeData.readFromNBT(nbt.getCompound("dye")));
 	}
 
 	public void sync()
 	{
-		IBlockState state = this.world.getBlockState(this.pos);
+		BlockState state = this.world.getBlockState(this.pos);
 
 		this.world.notifyBlockUpdate(this.pos, state, state, 3);
 

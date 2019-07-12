@@ -2,12 +2,12 @@ package com.gildedgames.aether.client.events.listeners.network;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.analytics.GAUser;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 
-@Mod.EventBusSubscriber(Side.CLIENT)
+@Mod.EventBusSubscriber(Dist.CLIENT)
 public class ClientNetworkStateListener
 {
 	@SubscribeEvent

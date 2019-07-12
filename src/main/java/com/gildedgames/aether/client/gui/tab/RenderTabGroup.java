@@ -7,24 +7,24 @@ import com.gildedgames.aether.client.gui.container.guidebook.AbstractGuidebookPa
 import com.gildedgames.aether.common.containers.overlays.TabGroupHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec2f;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.api.distmarker.Dist;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
-public class RenderTabGroup extends Gui
+public class RenderTabGroup extends AbstractGui
 {
 
 	private static final ResourceLocation TEXTURE_TAB_ITEMS = new ResourceLocation("textures/gui/container/creative_inventory/tab_items.png");
 
 	private static final ResourceLocation TEXTURE_TABS = new ResourceLocation("textures/gui/container/creative_inventory/tabs.png");
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	protected void drawHoveringText(String text, int x, int y, FontRenderer font)
 	{
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
@@ -66,7 +66,7 @@ public class RenderTabGroup extends Gui
 			return;
 		}
 
-		Minecraft mc = Minecraft.getMinecraft();
+		Minecraft mc = Minecraft.getInstance();
 		ScaledResolution scaledresolution = new ScaledResolution(mc);
 
 		int xPosition = (scaledresolution.getScaledWidth() - 28 * tabGroup.getEnabledTabs().size()) / 2;
@@ -130,7 +130,7 @@ public class RenderTabGroup extends Gui
 				{
 					mc.renderEngine.bindTexture(tab.getIcon());
 
-					Gui.drawModalRectWithCustomSizedTexture(xPosition + 6, yPosition - 1, 0, 0, 16, 16, 16, 16);
+					AbstractGui.drawModalRectWithCustomSizedTexture(xPosition + 6, yPosition - 1, 0, 0, 16, 16, 16, 16);
 				}
 
 				xPosition += 27;
@@ -141,7 +141,7 @@ public class RenderTabGroup extends Gui
 
 		if (hoveredTab != null)
 		{
-			this.drawHoveringText(new TextComponentTranslation(hoveredTab.getUnlocalizedName()).getFormattedText(),
+			this.drawHoveringText(new TranslationTextComponent(hoveredTab.getUnlocalizedName()).getFormattedText(),
 					Mouse.getX() * scaledresolution.getScaledWidth() / mc.displayWidth,
 					scaledresolution.getScaledHeight() - (Mouse.getY() - 42) * scaledresolution.getScaledHeight() / mc.displayHeight
 							- 1, mc.fontRenderer);
@@ -153,7 +153,7 @@ public class RenderTabGroup extends Gui
 	 */
 	public ITabClient getHoveredTab(ITabGroup<ITabClient> tabGroup)
 	{
-		Minecraft mc = Minecraft.getMinecraft();
+		Minecraft mc = Minecraft.getInstance();
 		ScaledResolution scaledresolution = new ScaledResolution(mc);
 
 		int x = Mouse.getX() * scaledresolution.getScaledWidth() / mc.displayWidth;

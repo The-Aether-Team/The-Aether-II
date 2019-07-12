@@ -3,13 +3,13 @@ package com.gildedgames.aether.client.renderer.entities.living;
 import com.gildedgames.aether.client.models.entities.living.ModelSkyrootLizard;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.animals.EntitySkyrootLizard;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.LivingRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderSkyrootLizard extends RenderLiving<EntitySkyrootLizard>
+public class RenderSkyrootLizard extends LivingRenderer<EntitySkyrootLizard>
 {
 	private static final ResourceLocation AMBERROOT = AetherCore.getResource("textures/entities/skyroot_lizard/skyroot_lizard_amberoot.png");
 
@@ -21,7 +21,7 @@ public class RenderSkyrootLizard extends RenderLiving<EntitySkyrootLizard>
 
 	private static final ResourceLocation LEAF_LAYER = AetherCore.getResource("textures/entities/skyroot_lizard/skyroot_lizard_leaf.png");
 
-	public RenderSkyrootLizard(final RenderManager renderManager)
+	public RenderSkyrootLizard(final EntityRendererManager renderManager)
 	{
 		super(renderManager, new ModelSkyrootLizard(), 0.4f);
 	}
@@ -33,16 +33,16 @@ public class RenderSkyrootLizard extends RenderLiving<EntitySkyrootLizard>
 		switch (entity.getLeafType())
 		{
 			case SKYROOT:
-				this.renderManager.renderEngine.bindTexture(SKYROOT);
+				this.renderManager.textureManager.bindTexture(SKYROOT);
 				break;
 			case WISPROOT:
-				this.renderManager.renderEngine.bindTexture(WISPROOT);
+				this.renderManager.textureManager.bindTexture(WISPROOT);
 				break;
 			case GREATROOT:
-				this.renderManager.renderEngine.bindTexture(GREATROOT);
+				this.renderManager.textureManager.bindTexture(GREATROOT);
 				break;
 			case AMBERROOT:
-				this.renderManager.renderEngine.bindTexture(AMBERROOT);
+				this.renderManager.textureManager.bindTexture(AMBERROOT);
 				break;
 			default:
 				return;
@@ -54,7 +54,7 @@ public class RenderSkyrootLizard extends RenderLiving<EntitySkyrootLizard>
 
 		if (color != Integer.MIN_VALUE)
 		{
-			this.renderManager.renderEngine.bindTexture(LEAF_LAYER);
+			this.renderManager.textureManager.bindTexture(LEAF_LAYER);
 
 			int red = (color >> 16) & 0xFF;
 			int green = (color >> 8) & 0xFF;
@@ -70,7 +70,7 @@ public class RenderSkyrootLizard extends RenderLiving<EntitySkyrootLizard>
 	protected void renderModel(EntitySkyrootLizard entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
 		boolean globalInvisible = !entity.isInvisible() || this.renderOutlines;
-		boolean playerInvisible = !globalInvisible && !entity.isInvisibleToPlayer(Minecraft.getMinecraft().player);
+		boolean playerInvisible = !globalInvisible && !entity.isInvisibleToPlayer(Minecraft.getInstance().player);
 
 		if (globalInvisible || playerInvisible)
 		{

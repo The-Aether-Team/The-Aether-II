@@ -1,21 +1,22 @@
 package com.gildedgames.aether.client.renderer.entities.companions;
 
 import com.gildedgames.aether.common.entities.companions.EntityCompanion;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.entity.LivingRenderer;
+import net.minecraft.client.renderer.entity.model.RendererModel;
+import net.minecraft.entity.player.PlayerEntity;
 import org.lwjgl.opengl.GL11;
 
-public abstract class RenderCompanion<T extends EntityCompanion> extends RenderLiving<T>
+public abstract class RenderCompanion<T extends EntityCompanion, M extends EntityModel<T>> extends LivingRenderer<T, M>
 {
 	public static final boolean RENDER_FADE_ON_NEAR = true;
 
 	private final double distanceLimit;
 
-	public RenderCompanion(final RenderManager renderManager, final ModelBase model, final float shadowSize, final double distanceLimit)
+	public RenderCompanion(final EntityRendererManager renderManager, final M model, final float shadowSize, final double distanceLimit)
 	{
 		super(renderManager, model, shadowSize);
 
@@ -28,7 +29,7 @@ public abstract class RenderCompanion<T extends EntityCompanion> extends RenderL
 			final float scaleFactor)
 	{
 		final boolean renderOutlines = !entity.isInvisible() || this.renderOutlines;
-		final boolean isInvisible = !renderOutlines && !entity.isInvisibleToPlayer(Minecraft.getMinecraft().player);
+		final boolean isInvisible = !renderOutlines && !entity.isInvisibleToPlayer(Minecraft.getInstance().player);
 
 		if (renderOutlines || isInvisible)
 		{
@@ -42,7 +43,7 @@ public abstract class RenderCompanion<T extends EntityCompanion> extends RenderL
 				GlStateManager.enableBlendProfile(GlStateManager.Profile.TRANSPARENT_MODEL);
 			}
 
-			final EntityPlayer owner = entity.getOwner();
+			final PlayerEntity owner = entity.getOwner();
 
 			float opacity = 1.0f;
 
@@ -63,7 +64,7 @@ public abstract class RenderCompanion<T extends EntityCompanion> extends RenderL
 				GL11.glColor4f(1.0f, 1.0f, 1.0f, opacity);
 			}
 
-			this.mainModel.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);
+			this.field_77045_g.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);
 
 			this.renderExtra(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, opacity);
 

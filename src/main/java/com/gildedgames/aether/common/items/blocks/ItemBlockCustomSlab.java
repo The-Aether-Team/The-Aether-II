@@ -3,19 +3,19 @@ package com.gildedgames.aether.common.items.blocks;
 import com.gildedgames.aether.common.blocks.util.BlockCustomSlab;
 import com.gildedgames.aether.common.blocks.util.BlockCustomSlab.EnumSlabPart;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class ItemBlockCustomSlab extends ItemBlock
+public class ItemBlockCustomSlab extends BlockItem
 {
 	public ItemBlockCustomSlab(Block block)
 	{
@@ -23,29 +23,29 @@ public class ItemBlockCustomSlab extends ItemBlock
 	}
 
 	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing,
+	public ActionResultType onItemUse(PlayerEntity player, World world, BlockPos pos, Hand hand, Direction facing,
 			float hitX, float hitY, float hitZ)
 	{
 		ItemStack stack = player.getHeldItem(hand);
 
 		BlockPos target = pos;
 
-		IBlockState state = world.getBlockState(pos);
+		BlockState state = world.getBlockState(pos);
 
 		if (state.getBlock() == this.block && state.getValue(BlockCustomSlab.PROPERTY_SLAB_STATE) != EnumSlabPart.FULL_BLOCK)
 		{
 			EnumSlabPart part = state.getValue(BlockCustomSlab.PROPERTY_SLAB_STATE);
 
-			if ((part == EnumSlabPart.BOTTOM_HALF && facing == EnumFacing.UP) ||
-					(part == EnumSlabPart.TOP_HALF && facing == EnumFacing.DOWN))
+			if ((part == EnumSlabPart.BOTTOM_HALF && facing == Direction.UP) ||
+					(part == EnumSlabPart.TOP_HALF && facing == Direction.DOWN))
 			{
-				IBlockState newState = state.withProperty(BlockCustomSlab.PROPERTY_SLAB_STATE, EnumSlabPart.FULL_BLOCK);
+				BlockState newState = state.withProperty(BlockCustomSlab.PROPERTY_SLAB_STATE, EnumSlabPart.FULL_BLOCK);
 
 				if (player.canPlayerEdit(target, facing, stack) && world.setBlockState(target, newState, 11))
 				{
 					stack.shrink(1);
 
-					return EnumActionResult.SUCCESS;
+					return ActionResultType.SUCCESS;
 				}
 			}
 		}
@@ -60,13 +60,13 @@ public class ItemBlockCustomSlab extends ItemBlock
 
 				if (part != EnumSlabPart.FULL_BLOCK)
 				{
-					IBlockState newState = state.withProperty(BlockCustomSlab.PROPERTY_SLAB_STATE, EnumSlabPart.FULL_BLOCK);
+					BlockState newState = state.withProperty(BlockCustomSlab.PROPERTY_SLAB_STATE, EnumSlabPart.FULL_BLOCK);
 
 					if (player.canPlayerEdit(target, facing, stack) && world.setBlockState(target, newState, 11))
 					{
 						stack.shrink(1);
 
-						return EnumActionResult.SUCCESS;
+						return ActionResultType.SUCCESS;
 					}
 				}
 			}
@@ -76,18 +76,18 @@ public class ItemBlockCustomSlab extends ItemBlock
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean canPlaceBlockOnSide(World world, BlockPos pos, EnumFacing side, EntityPlayer player, ItemStack stack)
+	@OnlyIn(Dist.CLIENT)
+	public boolean canPlaceBlockOnSide(World world, BlockPos pos, Direction side, PlayerEntity player, ItemStack stack)
 	{
 		BlockPos blockpos = pos;
 
-		IBlockState state = world.getBlockState(pos);
+		BlockState state = world.getBlockState(pos);
 
 		if (state.getBlock() == this.block && state.getValue(BlockCustomSlab.PROPERTY_SLAB_STATE) != EnumSlabPart.FULL_BLOCK)
 		{
 			boolean flag = state.getValue(BlockCustomSlab.PROPERTY_SLAB_STATE) == EnumSlabPart.TOP_HALF;
 
-			if ((side == EnumFacing.UP && !flag || side == EnumFacing.DOWN && flag) && state.getBlock() == this.block)
+			if ((side == Direction.UP && !flag || side == Direction.DOWN && flag) && state.getBlock() == this.block)
 			{
 				return true;
 			}
@@ -95,7 +95,7 @@ public class ItemBlockCustomSlab extends ItemBlock
 
 		pos = pos.offset(side);
 
-		IBlockState offsetState = world.getBlockState(pos);
+		BlockState offsetState = world.getBlockState(pos);
 
 		return offsetState.getBlock() == this.block || super.canPlaceBlockOnSide(world, blockpos, side, player, stack);
 	}

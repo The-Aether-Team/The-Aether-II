@@ -13,13 +13,14 @@ import com.gildedgames.aether.common.entities.effects.StatusEffectCockatriceVeno
 import com.gildedgames.aether.common.init.LootTablesAether;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.controller.JumpController;
+import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.EntityJumpHelper;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.potion.Effects;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.potion.PotionEffect;
@@ -28,7 +29,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
-public class EntityCockatrice extends EntityAetherMob
+public class EntityCockatrice extends EntityAetherMonster
 {
 
 	private static final DataParameter<Boolean> IS_HIDING = new DataParameter<>(16, DataSerializers.BOOLEAN);
@@ -41,14 +42,14 @@ public class EntityCockatrice extends EntityAetherMob
 	{
 		super(world);
 
-		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(0, new EntityAIUnstuckBlueAercloud(this));
-		this.tasks.addTask(1, new EntityAICockatriceHide(this, EntityPlayer.class, 0.9D));
-		this.tasks.addTask(2, new EntityAICockatriceWander(this, 0.35D));
+		this.goalSelector.addGoal(0, new SwimGoal(this));
+		this.goalSelector.addGoal(0, new EntityAIUnstuckBlueAercloud(this));
+		this.goalSelector.addGoal(1, new EntityAICockatriceHide(this, PlayerEntity.class, 0.9D));
+		this.goalSelector.addGoal(2, new EntityAICockatriceWander(this, 0.35D));
 
-		this.targetTasks.addTask(0, new EntityAICockatriceSneakAttack(this, EntityPlayer.class));
+		this.targetSelector.addGoal(0, new EntityAICockatriceSneakAttack(this, PlayerEntity.class));
 
-		this.jumpHelper = new JumpHelperDisable(this);
+		this.jumpController = new JumpHelperDisable(this);
 
 		this.setSize(1.0F, 2.0F);
 		this.stepHeight = 1.0F;
@@ -65,7 +66,7 @@ public class EntityCockatrice extends EntityAetherMob
 	@Override
 	protected void entityInit()
 	{
-		super.entityInit();
+		super.registerData();
 
 		this.dataManager.register(EntityCockatrice.IS_HIDING, Boolean.FALSE);
 		this.dataManager.register(EntityCockatrice.IS_HIDDEN, Boolean.FALSE);
@@ -73,24 +74,24 @@ public class EntityCockatrice extends EntityAetherMob
 	}
 
 	@Override
-	protected void applyEntityAttributes()
+	protected void registerAttributes()
 	{
-		super.applyEntityAttributes();
+		super.registerAttributes();
 
-		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(18.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2.0D);
+		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(18.0D);
+		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
+		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2.0D);
 
-		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(8);
-		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(10);
-		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(4);
+		this.getAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(8);
+		this.getAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(10);
+		this.getAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(4);
 	}
 
 	@Override
 	public boolean isPotionApplicable(final PotionEffect potionEffect)
 	{
-		return potionEffect.getPotion() != MobEffects.POISON && super.isPotionApplicable(potionEffect);
+		return potionEffect.getPotion() != Effects.POISON && super.isPotionApplicable(potionEffect);
 	}
 
 	@Override
@@ -98,9 +99,9 @@ public class EntityCockatrice extends EntityAetherMob
 	{
 		final boolean flag = super.attackEntityAsMob(entity);
 
-		if (flag && entity instanceof EntityLivingBase)
+		if (flag && entity instanceof LivingEntity)
 		{
-			final EntityLivingBase living = (EntityLivingBase) entity;
+			final LivingEntity living = (LivingEntity) entity;
 
 			this.applyStatusEffectOnAttack(entity);
 		}
@@ -111,9 +112,9 @@ public class EntityCockatrice extends EntityAetherMob
 	@Override
 	protected void applyStatusEffectOnAttack(final Entity target)
 	{
-		if (target instanceof EntityLivingBase)
+		if (target instanceof LivingEntity)
 		{
-			final EntityLivingBase living = (EntityLivingBase) target;
+			final LivingEntity living = (LivingEntity) target;
 
 			if (!living.isActiveItemStackBlocking())
 			{
@@ -124,9 +125,9 @@ public class EntityCockatrice extends EntityAetherMob
 	}
 
 	@Override
-	public void onUpdate()
+	public void livingTick()
 	{
-		super.onUpdate();
+		super.livingTick();
 
 		EntityUtil.despawnEntityDuringDaytime(this);
 	}
@@ -185,10 +186,10 @@ public class EntityCockatrice extends EntityAetherMob
 		return LootTablesAether.ENTITY_COCKATRICE;
 	}
 
-	public static class JumpHelperDisable extends EntityJumpHelper
+	public static class JumpHelperDisable extends JumpController
 	{
 
-		public JumpHelperDisable(final EntityLiving entityIn)
+		public JumpHelperDisable(final MobEntity entityIn)
 		{
 			super(entityIn);
 		}

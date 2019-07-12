@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.world.preparation.mask;
 
 import com.gildedgames.aether.api.world.preparation.IChunkMaskTransformer;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BitArray;
 import net.minecraft.util.math.BlockPos;
@@ -35,12 +35,12 @@ public class ChunkDataContainer
 		this.hasSkylight = hasSkylight;
 	}
 
-	public IBlockState getBlockState(final BlockPos pos)
+	public BlockState getBlockState(final BlockPos pos)
 	{
 		return this.getBlockState(pos.getX(), pos.getY(), pos.getZ());
 	}
 
-	public IBlockState getBlockState(final int x, final int y, final int z)
+	public BlockState getBlockState(final int x, final int y, final int z)
 	{
 		SegmentStorage segment = this.segments[y >> 4];
 
@@ -52,7 +52,7 @@ public class ChunkDataContainer
 		return segment.blockStorage.get(x, y & 15, z);
 	}
 
-	public void setBlockState(final int x, final int y, final int z, final IBlockState state)
+	public void setBlockState(final int x, final int y, final int z, final BlockState state)
 	{
 		SegmentStorage segment = this.segments[y >> 4];
 
@@ -78,7 +78,7 @@ public class ChunkDataContainer
 		return Byte.toUnsignedInt(segment.opacity[x << 8 | z << 4 | (y & 15)]);
 	}
 
-	public void setBlockState(final BlockPos pos, final IBlockState state)
+	public void setBlockState(final BlockPos pos, final BlockState state)
 	{
 		this.setBlockState(pos.getX(), pos.getY(), pos.getZ(), state);
 	}

@@ -9,7 +9,7 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 
 import java.lang.reflect.Type;
 
@@ -25,7 +25,7 @@ public class DialogActionOpenShop implements IDialogAction
 	@Override
 	public void performAction(IDialogController controller)
 	{
-		EntityPlayer player = controller.getDialogPlayer();
+		PlayerEntity player = controller.getDialogPlayer();
 
 		if (!player.world.isRemote && controller.getTalkingCharacter() != null && controller.getTalkingCharacter().getShopInstanceGroup() != null)
 		{

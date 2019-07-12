@@ -1,9 +1,10 @@
 package com.gildedgames.aether.client.renderer;
 
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.entity.model.RendererModel;
+import net.minecraft.entity.Entity;
 
-public class ModelBaseAether extends ModelBase
+public class ModelBaseAether<T extends Entity> extends EntityModel<T>
 {
 	private boolean displayState;
 
@@ -20,7 +21,7 @@ public class ModelBaseAether extends ModelBase
 	/**
 	 * This is a helper function from Tabula to set the rotation of model parts
 	 */
-	public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
+	public void setRotateAngle(RendererModel modelRenderer, float x, float y, float z)
 	{
 		modelRenderer.rotateAngleX = x;
 		modelRenderer.rotateAngleY = y;

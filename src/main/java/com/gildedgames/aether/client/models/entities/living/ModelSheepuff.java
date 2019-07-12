@@ -1,199 +1,199 @@
 package com.gildedgames.aether.client.models.entities.living;
 
 import com.gildedgames.aether.common.entities.animals.EntitySheepuff;
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
 
-public class ModelSheepuff extends ModelBase
+public class ModelSheepuff extends EntityModel<EntitySheepuff>
 {
-	public ModelRenderer mainBody;
-	public ModelRenderer legFrontLeftThigh;
-	public ModelRenderer legFrontRightThigh;
-	public ModelRenderer legBackLeftThigh;
-	public ModelRenderer legBackRightThigh;
-	public ModelRenderer bodyBack;
-	public ModelRenderer neckFluff;
-	public ModelRenderer legFrontLeftFoot;
-	public ModelRenderer legFrontRightFoot;
-	public ModelRenderer legBackLeftFoot;
-	public ModelRenderer legBackRightFoot;
-	public ModelRenderer tail;
-	public ModelRenderer headMain;
-	public ModelRenderer earLeftTop;
-	public ModelRenderer earRightTop;
-	public ModelRenderer headJaw;
-	public ModelRenderer headSnout;
-	public ModelRenderer hornLeft;
-	public ModelRenderer hornRight;
-	public ModelRenderer headPlatingBack;
-	public ModelRenderer headPlatingMid;
-	public ModelRenderer headPlatingTop;
-	public ModelRenderer eyeRight;
-	public ModelRenderer eyeLeft;
-	public ModelRenderer headCheekRight;
-	public ModelRenderer headCheekLeft;
-	public ModelRenderer clothBaseRight;
-	public ModelRenderer clothBaseLeft;
-	public ModelRenderer earLeftBottom;
-	public ModelRenderer earRightBottom;
-	public ModelRenderer hornLeftCurl;
-	public ModelRenderer hornLeftCurlBase;
-	public ModelRenderer hornLeftPointTip;
-	public ModelRenderer hornRightCurl;
-	public ModelRenderer hornRightCurlBase;
-	public ModelRenderer hornRightPoint;
-	public ModelRenderer clothRightConnect1;
-	public ModelRenderer clothRightConnect2;
-	public ModelRenderer clothRightConnect3;
-	public ModelRenderer clothLeftConnect1;
-	public ModelRenderer clothLeftConnect2;
-	public ModelRenderer clothLeftConnect3;
+	public RendererModel mainBody;
+	public RendererModel legFrontLeftThigh;
+	public RendererModel legFrontRightThigh;
+	public RendererModel legBackLeftThigh;
+	public RendererModel legBackRightThigh;
+	public RendererModel bodyBack;
+	public RendererModel neckFluff;
+	public RendererModel legFrontLeftFoot;
+	public RendererModel legFrontRightFoot;
+	public RendererModel legBackLeftFoot;
+	public RendererModel legBackRightFoot;
+	public RendererModel tail;
+	public RendererModel headMain;
+	public RendererModel earLeftTop;
+	public RendererModel earRightTop;
+	public RendererModel headJaw;
+	public RendererModel headSnout;
+	public RendererModel hornLeft;
+	public RendererModel hornRight;
+	public RendererModel headPlatingBack;
+	public RendererModel headPlatingMid;
+	public RendererModel headPlatingTop;
+	public RendererModel eyeRight;
+	public RendererModel eyeLeft;
+	public RendererModel headCheekRight;
+	public RendererModel headCheekLeft;
+	public RendererModel clothBaseRight;
+	public RendererModel clothBaseLeft;
+	public RendererModel earLeftBottom;
+	public RendererModel earRightBottom;
+	public RendererModel hornLeftCurl;
+	public RendererModel hornLeftCurlBase;
+	public RendererModel hornLeftPointTip;
+	public RendererModel hornRightCurl;
+	public RendererModel hornRightCurlBase;
+	public RendererModel hornRightPoint;
+	public RendererModel clothRightConnect1;
+	public RendererModel clothRightConnect2;
+	public RendererModel clothRightConnect3;
+	public RendererModel clothLeftConnect1;
+	public RendererModel clothLeftConnect2;
+	public RendererModel clothLeftConnect3;
 
 	public ModelSheepuff()
 	{
 		this.textureWidth = 150;
 		this.textureHeight = 230;
-		this.clothBaseRight = new ModelRenderer(this, 59, 28);
+		this.clothBaseRight = new RendererModel(this, 59, 28);
 		this.clothBaseRight.setRotationPoint(-3.5F, -6.7F, -2.3F);
 		this.clothBaseRight.addBox(0.0F, 0.0F, 0.0F, 1, 3, 3, 0.0F);
-		this.clothBaseLeft = new ModelRenderer(this, 85, 28);
+		this.clothBaseLeft = new RendererModel(this, 85, 28);
 		this.clothBaseLeft.setRotationPoint(2.5F, -6.7F, -2.3F);
 		this.clothBaseLeft.addBox(0.0F, 0.0F, 0.0F, 1, 3, 3, 0.0F);
-		this.legFrontRightFoot = new ModelRenderer(this, 106, 66);
+		this.legFrontRightFoot = new RendererModel(this, 106, 66);
 		this.legFrontRightFoot.setRotationPoint(0.0F, 2.9F, 0.0F);
 		this.legFrontRightFoot.addBox(-1.0F, 0.0F, -1.0F, 2, 6, 2, 0.0F);
-		this.hornRight = new ModelRenderer(this, 47, 38);
+		this.hornRight = new RendererModel(this, 47, 38);
 		this.hornRight.setRotationPoint(-5.8F, -6.8F, -2.2F);
 		this.hornRight.addBox(-2.0F, 0.6F, -2.0F, 4, 4, 4, 0.0F);
 		this.setRotateAngle(hornRight, 0.0F, 0.0F, -0.27314402793711257F);
-		this.headCheekRight = new ModelRenderer(this, 59, 34);
+		this.headCheekRight = new RendererModel(this, 59, 34);
 		this.headCheekRight.setRotationPoint(-0.3F, -0.8F, -5.0F);
 		this.headCheekRight.addBox(-2.0F, 0.0F, -2.0F, 1, 3, 4, 0.0F);
 		this.setRotateAngle(headCheekRight, 0.0F, -0.36425021489121656F, 0.0F);
-		this.legBackLeftFoot = new ModelRenderer(this, 47, 99);
+		this.legBackLeftFoot = new RendererModel(this, 47, 99);
 		this.legBackLeftFoot.setRotationPoint(0.0F, 2.9F, 0.0F);
 		this.legBackLeftFoot.addBox(-1.0F, 0.0F, -1.0F, 2, 6, 2, 0.0F);
-		this.legFrontLeftThigh = new ModelRenderer(this, 34, 74);
+		this.legFrontLeftThigh = new RendererModel(this, 34, 74);
 		this.legFrontLeftThigh.setRotationPoint(4.0F, 9.0F, -4.0F);
 		this.legFrontLeftThigh.addBox(-1.5F, -3.0F, -2.5F, 3, 6, 5, 0.0F);
-		this.headJaw = new ModelRenderer(this, 54, 21);
+		this.headJaw = new RendererModel(this, 54, 21);
 		this.headJaw.setRotationPoint(0.0F, 1.8F, -3.0F);
 		this.headJaw.addBox(-1.5F, -1.0F, -5.0F, 3, 2, 5, 0.0F);
-		this.headPlatingTop = new ModelRenderer(this, 70, 21);
+		this.headPlatingTop = new RendererModel(this, 70, 21);
 		this.headPlatingTop.setRotationPoint(0.0F, -5.0F, -3.1F);
 		this.headPlatingTop.addBox(-1.5F, -1.5F, -0.5F, 3, 3, 3, 0.0F);
 		this.setRotateAngle(headPlatingTop, -0.8196066167365371F, 0.0F, 0.0F);
-		this.neckFluff = new ModelRenderer(this, 64, 48);
+		this.neckFluff = new RendererModel(this, 64, 48);
 		this.neckFluff.setRotationPoint(0.0F, 1.9F, -3.6F);
 		this.neckFluff.addBox(-3.0F, -3.0F, -6.0F, 6, 6, 6, 0.0F);
-		this.headPlatingMid = new ModelRenderer(this, 67, 27);
+		this.headPlatingMid = new RendererModel(this, 67, 27);
 		this.headPlatingMid.setRotationPoint(0.0F, -3.5F, -4.7F);
 		this.headPlatingMid.addBox(-2.5F, 0.0F, 0.0F, 5, 1, 4, 0.0F);
 		this.setRotateAngle(headPlatingMid, 0.8651597102135892F, 0.0F, 0.0F);
-		this.headCheekLeft = new ModelRenderer(this, 83, 34);
+		this.headCheekLeft = new RendererModel(this, 83, 34);
 		this.headCheekLeft.setRotationPoint(3.2F, -0.7F, -6.1F);
 		this.headCheekLeft.addBox(-2.0F, 0.0F, -2.0F, 1, 3, 4, 0.0F);
 		this.setRotateAngle(headCheekLeft, 0.0F, 0.37472219040318255F, 0.0F);
-		this.eyeRight = new ModelRenderer(this, 56, 34);
+		this.eyeRight = new RendererModel(this, 56, 34);
 		this.eyeRight.setRotationPoint(-1.6F, -1.1F, -4.4F);
 		this.eyeRight.addBox(-0.5F, -1.0F, -1.0F, 1, 2, 2, 0.0F);
 		this.setRotateAngle(eyeRight, 0.0F, -0.5918411493512771F, 0.0F);
-		this.earLeftBottom = new ModelRenderer(this, 90, 53);
+		this.earLeftBottom = new RendererModel(this, 90, 53);
 		this.earLeftBottom.setRotationPoint(0.0F, 5.0F, 0.0F);
 		this.earLeftBottom.addBox(-0.5F, 0.0F, -1.0F, 1, 5, 2, 0.0F);
-		this.earRightBottom = new ModelRenderer(this, 56, 53);
+		this.earRightBottom = new RendererModel(this, 56, 53);
 		this.earRightBottom.setRotationPoint(0.0F, 5.0F, 0.0F);
 		this.earRightBottom.addBox(-0.5F, 0.0F, -1.0F, 1, 5, 2, 0.0F);
-		this.clothRightConnect1 = new ModelRenderer(this, 30, 123);
+		this.clothRightConnect1 = new RendererModel(this, 30, 123);
 		this.clothRightConnect1.setRotationPoint(-0.2F, 3.1F, 2.9F);
 		this.clothRightConnect1.addBox(0.0F, -3.0F, 0.0F, 0, 11, 9, 0.0F);
 		this.setRotateAngle(clothRightConnect1, 0.0F, -0.9105382707654417F, 0.0F);
-		this.bodyBack = new ModelRenderer(this, 59, 85);
+		this.bodyBack = new RendererModel(this, 59, 85);
 		this.bodyBack.setRotationPoint(0.0F, 0.1F, 4.4F);
 		this.bodyBack.addBox(-4.5F, 0.0F, 0.0F, 9, 6, 8, 0.0F);
 		this.setRotateAngle(bodyBack, -0.18203784098300857F, 0.0F, 0.0F);
-		this.mainBody = new ModelRenderer(this, 50, 60);
+		this.mainBody = new RendererModel(this, 50, 60);
 		this.mainBody.setRotationPoint(0.0F, 6.1F, 0.0F);
 		this.mainBody.addBox(-5.0F, 0.0F, -7.5F, 10, 9, 16, 0.0F);
-		this.earLeftTop = new ModelRenderer(this, 90, 46);
+		this.earLeftTop = new RendererModel(this, 90, 46);
 		this.earLeftTop.setRotationPoint(3.8F, -3.4F, -1.5F);
 		this.earLeftTop.addBox(-0.5F, 0.0F, -1.0F, 1, 5, 2, 0.0F);
-		this.eyeLeft = new ModelRenderer(this, 90, 34);
+		this.eyeLeft = new RendererModel(this, 90, 34);
 		this.eyeLeft.setRotationPoint(1.6F, -1.1F, -4.5F);
 		this.eyeLeft.addBox(-0.5F, -1.0F, -1.0F, 1, 2, 2, 0.0F);
 		this.setRotateAngle(eyeLeft, 0.0F, 0.5918411493512771F, 0.0F);
-		this.hornLeftPointTip = new ModelRenderer(this, 102, 38);
+		this.hornLeftPointTip = new RendererModel(this, 102, 38);
 		this.hornLeftPointTip.setRotationPoint(0.0F, -1.0F, 0.0F);
 		this.hornLeftPointTip.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
-		this.legFrontRightThigh = new ModelRenderer(this, 102, 74);
+		this.legFrontRightThigh = new RendererModel(this, 102, 74);
 		this.legFrontRightThigh.setRotationPoint(-4.0F, 9.0F, -4.0F);
 		this.legFrontRightThigh.addBox(-1.5F, -3.0F, -2.5F, 3, 6, 5, 0.0F);
-		this.hornLeft = new ModelRenderer(this, 89, 38);
+		this.hornLeft = new RendererModel(this, 89, 38);
 		this.hornLeft.setRotationPoint(5.8F, -6.8F, -2.2F);
 		this.hornLeft.addBox(-2.0F, 0.6F, -2.0F, 4, 4, 4, 0.0F);
 		this.setRotateAngle(hornLeft, 0.0F, 0.0F, 0.27314402793711257F);
-		this.clothRightConnect2 = new ModelRenderer(this, 48, 124);
+		this.clothRightConnect2 = new RendererModel(this, 48, 124);
 		this.clothRightConnect2.setRotationPoint(0.0F, 3.0F, 9.0F);
 		this.clothRightConnect2.addBox(0.0F, -3.0F, 0.0F, 0, 8, 11, 0.0F);
 		this.setRotateAngle(clothRightConnect2, 0.0F, 0.8651597102135892F, 0.0F);
-		this.hornRightCurl = new ModelRenderer(this, 35, 40);
+		this.hornRightCurl = new RendererModel(this, 35, 40);
 		this.hornRightCurl.setRotationPoint(-2.5F, 3.0F, -3.0F);
 		this.hornRightCurl.addBox(0.0F, 0.0F, 0.0F, 3, 1, 3, 0.0F);
-		this.headSnout = new ModelRenderer(this, 82, 20);
+		this.headSnout = new RendererModel(this, 82, 20);
 		this.headSnout.setRotationPoint(0.0F, 0.0F, 0.0F);
 		this.headSnout.addBox(-1.5F, -4.9F, -7.5F, 3, 2, 6, 0.0F);
 		this.setRotateAngle(headSnout, 0.5918411493512771F, 0.0F, 0.0F);
-		this.hornLeftCurl = new ModelRenderer(this, 105, 40);
+		this.hornLeftCurl = new RendererModel(this, 105, 40);
 		this.hornLeftCurl.setRotationPoint(-0.4F, 3.0F, -3.0F);
 		this.hornLeftCurl.addBox(0.0F, 0.0F, 0.0F, 3, 1, 3, 0.0F);
-		this.hornRightCurlBase = new ModelRenderer(this, 37, 44);
+		this.hornRightCurlBase = new RendererModel(this, 37, 44);
 		this.hornRightCurlBase.setRotationPoint(-2.51F, 2.51F, 0.0F);
 		this.hornRightCurlBase.addBox(0.0F, -1.5F, -1.5F, 1, 3, 3, 0.0F);
-		this.headPlatingBack = new ModelRenderer(this, 69, 32);
+		this.headPlatingBack = new RendererModel(this, 69, 32);
 		this.headPlatingBack.setRotationPoint(0.0F, -5.7F, 0.5F);
 		this.headPlatingBack.addBox(-2.5F, 0.0F, -2.5F, 5, 3, 2, 0.0F);
-		this.hornRightPoint = new ModelRenderer(this, 46, 38);
+		this.hornRightPoint = new RendererModel(this, 46, 38);
 		this.hornRightPoint.setRotationPoint(2.0F, -1.0F, 0.0F);
 		this.hornRightPoint.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
-		this.clothLeftConnect3 = new ModelRenderer(this, 70, 118);
+		this.clothLeftConnect3 = new RendererModel(this, 70, 118);
 		this.clothLeftConnect3.setRotationPoint(0.0F, 0.0F, 11.0F);
 		this.clothLeftConnect3.addBox(0.0F, -3.0F, 0.0F, 0, 8, 4, 0.0F);
-		this.legBackRightFoot = new ModelRenderer(this, 97, 99);
+		this.legBackRightFoot = new RendererModel(this, 97, 99);
 		this.legBackRightFoot.setRotationPoint(0.0F, 2.9F, 0.0F);
 		this.legBackRightFoot.addBox(-1.0F, 0.0F, -1.0F, 2, 6, 2, 0.0F);
-		this.headMain = new ModelRenderer(this, 62, 40);
+		this.headMain = new RendererModel(this, 62, 40);
 		this.headMain.setRotationPoint(0.0F, -1.7F, -6.1F);
 		this.headMain.addBox(-3.5F, -3.5F, -4.0F, 7, 7, 7, 0.0F);
-		this.legFrontLeftFoot = new ModelRenderer(this, 38, 66);
+		this.legFrontLeftFoot = new RendererModel(this, 38, 66);
 		this.legFrontLeftFoot.setRotationPoint(0.0F, 2.9F, 0.0F);
 		this.legFrontLeftFoot.addBox(-1.0F, 0.0F, -1.0F, 2, 6, 2, 0.0F);
-		this.legBackRightThigh = new ModelRenderer(this, 93, 88);
+		this.legBackRightThigh = new RendererModel(this, 93, 88);
 		this.legBackRightThigh.setRotationPoint(-3.7F, 9.0F, 7.0F);
 		this.legBackRightThigh.addBox(-1.5F, -3.0F, -2.5F, 3, 6, 5, 0.0F);
-		this.tail = new ModelRenderer(this, 73, 99);
+		this.tail = new RendererModel(this, 73, 99);
 		this.tail.setRotationPoint(0.0F, 0.7F, 7.2F);
 		this.tail.addBox(-1.0F, 0.0F, 0.0F, 2, 3, 1, 0.0F);
 		this.setRotateAngle(tail, 0.5918411493512771F, 0.0F, 0.0F);
-		this.clothRightConnect3 = new ModelRenderer(this, 70, 131);
+		this.clothRightConnect3 = new RendererModel(this, 70, 131);
 		this.clothRightConnect3.setRotationPoint(0.0F, 0.0F, 11.0F);
 		this.clothRightConnect3.addBox(0.0F, -3.0F, 0.0F, 0, 8, 4, 0.0F);
-		this.legBackLeftThigh = new ModelRenderer(this, 43, 88);
+		this.legBackLeftThigh = new RendererModel(this, 43, 88);
 		this.legBackLeftThigh.setRotationPoint(3.7F, 9.0F, 7.0F);
 		this.legBackLeftThigh.addBox(-1.5F, -3.0F, -2.5F, 3, 6, 5, 0.0F);
-		this.earRightTop = new ModelRenderer(this, 56, 46);
+		this.earRightTop = new RendererModel(this, 56, 46);
 		this.earRightTop.setRotationPoint(-3.8F, -3.4F, -1.5F);
 		this.earRightTop.addBox(-0.5F, 0.0F, -1.0F, 1, 5, 2, 0.0F);
-		this.hornLeftCurlBase = new ModelRenderer(this, 107, 44);
+		this.hornLeftCurlBase = new RendererModel(this, 107, 44);
 		this.hornLeftCurlBase.setRotationPoint(1.61F, 2.51F, 0.0F);
 		this.hornLeftCurlBase.addBox(0.0F, -1.5F, -1.5F, 1, 3, 3, 0.0F);
-		this.clothLeftConnect2 = new ModelRenderer(this, 48, 111);
+		this.clothLeftConnect2 = new RendererModel(this, 48, 111);
 		this.clothLeftConnect2.setRotationPoint(0.0F, 3.0F, 9.0F);
 		this.clothLeftConnect2.addBox(0.0F, -3.0F, 0.0F, 0, 8, 11, 0.0F);
 		this.setRotateAngle(clothLeftConnect2, 0.0F, -0.8651597102135892F, 0.0F);
-		this.clothLeftConnect1 = new ModelRenderer(this, 30, 110);
+		this.clothLeftConnect1 = new RendererModel(this, 30, 110);
 		this.clothLeftConnect1.setRotationPoint(1.1F, 3.1F, 2.9F);
 		this.clothLeftConnect1.addBox(0.0F, -3.0F, 0.0F, 0, 11, 9, 0.0F);
 		this.setRotateAngle(clothLeftConnect1, 0.0F, 0.9105382707654417F, 0.0F);
@@ -241,12 +241,12 @@ public class ModelSheepuff extends ModelBase
 	}
 
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+	public void render(EntitySheepuff entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
 		this.mainBody.render(f5);
 	}
 
-	public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
+	public void setRotateAngle(RendererModel modelRenderer, float x, float y, float z)
 	{
 		modelRenderer.rotateAngleX = x;
 		modelRenderer.rotateAngleY = y;
@@ -254,11 +254,8 @@ public class ModelSheepuff extends ModelBase
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor,
-			Entity entityIn)
+	public void setRotationAngles(EntitySheepuff entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor)
 	{
-		EntitySheepuff sheepuff = (EntitySheepuff) entityIn;
-
 		float headRotY = netHeadYaw * 0.017453292F;
 		float headRotX = headPitch * 0.017453292F;
 
@@ -268,7 +265,7 @@ public class ModelSheepuff extends ModelBase
 		this.clothLeftConnect1.rotateAngleY = 0.91f -headRotY;
 		this.clothRightConnect1.rotateAngleY = -0.91f -headRotY;
 
-		float puffiness = sheepuff.getPuffiness();
+		float puffiness = entityIn.getPuffiness();
 
 		float swing =  MathHelper.cos(limbSwing * 0.6662F) * limbSwingAmount;
 		float swing180 =  MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * limbSwingAmount;
@@ -306,7 +303,7 @@ public class ModelSheepuff extends ModelBase
 			this.legFrontRightThigh.rotateAngleZ = 0;
 		}
 
-		if (!sheepuff.getSheared())
+		if (!entityIn.getSheared())
 		{
 			this.tail.isHidden = false;
 			this.tail.rotateAngleZ = (MathHelper.cos(ageInTicks * 0.1662F) * 0.2F);
@@ -319,13 +316,13 @@ public class ModelSheepuff extends ModelBase
 	}
 
 	@Override
-	public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float p_78086_2_, float p_78086_3_, float partialTickTime)
+	public void setLivingAnimations(EntitySheepuff entity, float p_78086_2_, float p_78086_3_, float partialTickTime)
 	{
-		super.setLivingAnimations(entitylivingbaseIn, p_78086_2_, p_78086_3_, partialTickTime);
+		super.setLivingAnimations(entity, p_78086_2_, p_78086_3_, partialTickTime);
 
-		float perc = ((EntitySheepuff) entitylivingbaseIn).getHeadRotationPointY(partialTickTime);
+		float perc = entity.getHeadRotationPointY(partialTickTime);
 		float rotationPointY = 1.9F + perc * 4.1F;
-		float headAng = ((EntitySheepuff) entitylivingbaseIn).getHeadRotationAngleX(partialTickTime);
+		float headAng = entity.getHeadRotationAngleX(partialTickTime);
 
 		this.headMain.rotateAngleX = headAng / 2f;
 		this.neckFluff.rotateAngleX = headAng / 2f;

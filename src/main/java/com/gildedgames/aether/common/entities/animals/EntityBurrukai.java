@@ -18,12 +18,12 @@ import com.gildedgames.aether.common.util.helpers.MathUtil;
 import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.pathfinding.PathNavigator;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -58,24 +58,24 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 	}
 
 	@Override
-	protected void initEntityAI()
+	protected void registerGoals()
 	{
-		super.initEntityAI();
+		super.registerGoals();
 
 		this.ramAttack = new EntityAIRamAttack(this, 0.5D, 0.5f, 2, 16.0f);
 
-		this.tasks.addTask(2, this.ramAttack);
-		this.tasks.addTask(2, new EntityAIRestrictRain(this));
-		this.tasks.addTask(3, new EntityAIHideFromRain(this, 1.3D));
-		this.tasks.addTask(3, new EntityAIUnstuckBlueAercloud(this));
-		this.tasks.addTask(3, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
-		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
-		this.tasks.addTask(3, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
-		this.tasks.addTask(4, new EntityAIFollowParent(this, 1.25D));
-		this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
-		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		this.tasks.addTask(7, new EntityAILookIdle(this));
+		this.goalSelector.addGoal(2, this.ramAttack);
+		this.goalSelector.addGoal(2, new EntityAIRestrictRain(this));
+		this.goalSelector.addGoal(3, new EntityAIHideFromRain(this, 1.3D));
+		this.goalSelector.addGoal(3, new EntityAIUnstuckBlueAercloud(this));
+		this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, false, TEMPTATION_ITEMS));
+		this.goalSelector.addGoal(0, new SwimGoal(this));
+		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
+		this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, false, TEMPTATION_ITEMS));
+		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
+		this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 1.0D));
+		this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 6.0F));
+		this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
 	}
 
 	@Override
@@ -129,7 +129,7 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 	}
 
 	@Override
-	protected PathNavigate createNavigator(final World worldIn)
+	protected PathNavigator createNavigator(final World worldIn)
 	{
 		return new AetherNavigateGround(this, worldIn);
 	}
@@ -141,21 +141,21 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 	}
 
 	@Override
-	protected void applyEntityAttributes()
+	protected void registerAttributes()
 	{
-		super.applyEntityAttributes();
+		super.registerAttributes();
 
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(15.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
-		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(15.0D);
+		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
+		this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
 
-		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(8);
-		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(4);
-		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(8);
+		this.getAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(8);
+		this.getAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(4);
+		this.getAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(8);
 	}
 
 	@Override
-	public EntityBurrukai createChild(final EntityAgeable ageable)
+	public EntityBurrukai createChild(final AgeableEntity ageable)
 	{
 		return new EntityBurrukai(this.world);
 	}
@@ -232,13 +232,13 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float amount)
 	{
-		if (source.getTrueSource() instanceof EntityLivingBase)
+		if (source.getTrueSource() instanceof LivingEntity)
 		{
-			EntityLivingBase attacker = (EntityLivingBase) source.getTrueSource();
+			LivingEntity attacker = (LivingEntity) source.getTrueSource();
 
 			this.setAttackTarget(attacker);
 
-			if (this.ramAttack != null && (!(attacker instanceof EntityPlayer) || !((EntityPlayer) attacker).isCreative()))
+			if (this.ramAttack != null && (!(attacker instanceof PlayerEntity) || !((PlayerEntity) attacker).isCreative()))
 			{
 				this.ramAttack.setTarget(attacker);
 			}
@@ -250,9 +250,9 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 	@Override
 	public boolean attackEntityAsMob(final Entity entityIn)
 	{
-		if (entityIn instanceof EntityLivingBase)
+		if (entityIn instanceof LivingEntity)
 		{
-			final EntityLivingBase living = (EntityLivingBase) entityIn;
+			final LivingEntity living = (LivingEntity) entityIn;
 
 			living.attackEntityFrom(DamageSource.causeMobDamage(this), 5.0F);
 			this.playSound(new SoundEvent(AetherCore.getResource("mob.burrukai.attack")), 0.5F, 1.0F);
@@ -269,9 +269,9 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 	@Override
 	protected void applyStatusEffectOnAttack(final Entity target)
 	{
-		if (target instanceof EntityLivingBase)
+		if (target instanceof LivingEntity)
 		{
-			final EntityLivingBase living = (EntityLivingBase) target;
+			final LivingEntity living = (LivingEntity) target;
 
 			if (!living.isActiveItemStackBlocking())
 			{

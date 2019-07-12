@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.entities.projectiles;
 import com.gildedgames.aether.api.entity.damage.IDamageLevelsHolder;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
@@ -11,8 +11,8 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class EntityBolt extends EntityArrow implements IDamageLevelsHolder
 {
@@ -25,7 +25,7 @@ public class EntityBolt extends EntityArrow implements IDamageLevelsHolder
 		super(worldIn);
 	}
 
-	public EntityBolt(final World worldIn, final EntityLivingBase shooter)
+	public EntityBolt(final World worldIn, final LivingEntity shooter)
 	{
 		super(worldIn, shooter);
 	}
@@ -37,20 +37,20 @@ public class EntityBolt extends EntityArrow implements IDamageLevelsHolder
 	}
 
 	@Override
-	protected void arrowHit(final EntityLivingBase living)
+	protected void arrowHit(final LivingEntity living)
 	{
 	}
 
 	@Override
 	protected void entityInit()
 	{
-		super.entityInit();
+		super.registerData();
 
 		this.dataManager.register(TYPE, (byte) 0);
 		this.dataManager.register(ABILITY, (byte) 0);
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	@Override
 	public int getBrightnessForRender()
 	{

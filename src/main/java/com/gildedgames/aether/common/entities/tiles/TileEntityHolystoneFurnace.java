@@ -2,25 +2,26 @@ package com.gildedgames.aether.common.entities.tiles;
 
 import com.gildedgames.aether.common.blocks.containers.BlockHolystoneFurnace;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.item.Items;
 import net.minecraft.inventory.*;
 import net.minecraft.item.*;
 import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntityLockable;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.tileentity.ITickableTileEntity;
+import net.minecraft.tileentity.LockableTileEntity;
+import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
-public class TileEntityHolystoneFurnace extends TileEntityLockable implements ITickable, ISidedInventory
+public class TileEntityHolystoneFurnace extends LockableTileEntity implements ITickableTileEntity, ISidedInventory
 {
 	private static final int[] SLOTS_TOP = new int[] { 0 };
 
@@ -40,11 +41,11 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 
 	private String furnaceCustomName;
 
-	private final IItemHandler handlerTop = new SidedInvWrapper(this, net.minecraft.util.EnumFacing.UP);
+	private final IItemHandler handlerTop = new SidedInvWrapper(this, Direction.UP);
 
-	private final IItemHandler handlerBottom = new SidedInvWrapper(this, net.minecraft.util.EnumFacing.DOWN);
+	private final IItemHandler handlerBottom = new SidedInvWrapper(this, Direction.DOWN);
 
-	private final IItemHandler handlerSide = new SidedInvWrapper(this, net.minecraft.util.EnumFacing.WEST);
+	private final IItemHandler handlerSide = new SidedInvWrapper(this, Direction.WEST);
 
 	public static int getItemBurnTime(ItemStack stack)
 	{
@@ -56,7 +57,7 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 		{
 			Item item = stack.getItem();
 
-			if (item instanceof ItemBlock && Block.getBlockFromItem(item) != Blocks.AIR)
+			if (item instanceof BlockItem && Block.getBlockFromItem(item) != Blocks.AIR)
 			{
 				Block block = Block.getBlockFromItem(item);
 
@@ -76,7 +77,7 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 				}
 			}
 
-			if (item instanceof ItemTool && "WOOD".equals(((ItemTool) item).getToolMaterialName()))
+			if (item instanceof ToolItem && "WOOD".equals(((ToolItem) item).getToolMaterialName()))
 			{
 				return 200;
 			}
@@ -194,7 +195,7 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound compound)
+	public void readFromNBT(CompoundNBT compound)
 	{
 		super.readFromNBT(compound);
 
@@ -202,31 +203,31 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 
 		ItemStackHelper.loadAllItems(compound, this.furnaceItemStacks);
 
-		this.furnaceBurnTime = compound.getInteger("BurnTime");
-		this.cookTime = compound.getInteger("CookTime");
-		this.totalCookTime = compound.getInteger("CookTimeTotal");
+		this.furnaceBurnTime = compound.getInt("BurnTime");
+		this.cookTime = compound.getInt("CookTime");
+		this.totalCookTime = compound.getInt("CookTimeTotal");
 		this.currentItemBurnTime = getItemBurnTime(this.furnaceItemStacks.get(1));
 
-		if (compound.hasKey("CustomName", 8))
+		if (compound.contains("CustomName", 8))
 		{
 			this.furnaceCustomName = compound.getString("CustomName");
 		}
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound compound)
+	public CompoundNBT writeToNBT(CompoundNBT compound)
 	{
 		super.writeToNBT(compound);
 
-		compound.setInteger("BurnTime", (short) this.furnaceBurnTime);
-		compound.setInteger("CookTime", (short) this.cookTime);
-		compound.setInteger("CookTimeTotal", (short) this.totalCookTime);
+		compound.putInt("BurnTime", (short) this.furnaceBurnTime);
+		compound.putInt("CookTime", (short) this.cookTime);
+		compound.putInt("CookTimeTotal", (short) this.totalCookTime);
 
 		ItemStackHelper.saveAllItems(compound, this.furnaceItemStacks);
 
 		if (this.hasCustomName())
 		{
-			compound.setString("CustomName", this.furnaceCustomName);
+			compound.putString("CustomName", this.furnaceCustomName);
 		}
 
 		return compound;
@@ -391,19 +392,19 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 	}
 
 	@Override
-	public boolean isUsableByPlayer(EntityPlayer player)
+	public boolean isUsableByPlayer(PlayerEntity player)
 	{
 		return this.world.getTileEntity(this.pos) == this
 				&& player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override
-	public void openInventory(EntityPlayer player)
+	public void openInventory(PlayerEntity player)
 	{
 	}
 
 	@Override
-	public void closeInventory(EntityPlayer player)
+	public void closeInventory(PlayerEntity player)
 	{
 	}
 
@@ -426,21 +427,21 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 	}
 
 	@Override
-	public int[] getSlotsForFace(EnumFacing side)
+	public int[] getSlotsForFace(Direction side)
 	{
-		return side == EnumFacing.DOWN ? SLOTS_BOTTOM : (side == EnumFacing.UP ? SLOTS_TOP : SLOTS_SIDES);
+		return side == Direction.DOWN ? SLOTS_BOTTOM : (side == Direction.UP ? SLOTS_TOP : SLOTS_SIDES);
 	}
 
 	@Override
-	public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction)
+	public boolean canInsertItem(int index, ItemStack itemStackIn, Direction direction)
 	{
 		return this.isItemValidForSlot(index, itemStackIn);
 	}
 
 	@Override
-	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction)
+	public boolean canExtractItem(int index, ItemStack stack, Direction direction)
 	{
-		if (direction == EnumFacing.DOWN && index == 1)
+		if (direction == Direction.DOWN && index == 1)
 		{
 			Item item = stack.getItem();
 
@@ -457,7 +458,7 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 	}
 
 	@Override
-	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
+	public Container createContainer(PlayerInventory playerInventory, PlayerEntity playerIn)
 	{
 		return new ContainerFurnace(playerInventory, this);
 	}
@@ -513,15 +514,15 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public <T> T getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, @javax.annotation.Nullable net.minecraft.util.EnumFacing facing)
+	public <T> T getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, @javax.annotation.Nullable Direction facing)
 	{
 		if (facing != null && capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 		{
-			if (facing == EnumFacing.DOWN)
+			if (facing == Direction.DOWN)
 			{
 				return (T) this.handlerBottom;
 			}
-			else if (facing == EnumFacing.UP)
+			else if (facing == Direction.UP)
 			{
 				return (T) this.handlerTop;
 			}

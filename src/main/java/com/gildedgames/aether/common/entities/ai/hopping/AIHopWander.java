@@ -1,10 +1,10 @@
 package com.gildedgames.aether.common.entities.ai.hopping;
 
 import com.gildedgames.aether.common.entities.ai.EntityAI;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.init.MobEffects;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.potion.Effects;
 
-public class AIHopWander extends EntityAI<EntityLiving>
+public class AIHopWander extends EntityAI<MobEntity>
 {
 
 	private final HoppingMoveHelper hoppingMoveHelper;
@@ -13,7 +13,7 @@ public class AIHopWander extends EntityAI<EntityLiving>
 
 	private int nextRandomizeTime;
 
-	public AIHopWander(final EntityLiving entity, final HoppingMoveHelper hoppingMoveHelper)
+	public AIHopWander(final MobEntity entity, final HoppingMoveHelper hoppingMoveHelper)
 	{
 		super(entity);
 
@@ -29,7 +29,7 @@ public class AIHopWander extends EntityAI<EntityLiving>
 	public boolean shouldExecute()
 	{
 		return this.entity().getAttackTarget() == null && (this.entity().onGround || this.entity().isInWater() || this.entity().isInLava()
-				|| this.entity().isPotionActive(MobEffects.LEVITATION));
+				|| this.entity().isPotionActive(Effects.LEVITATION));
 	}
 
 	/**

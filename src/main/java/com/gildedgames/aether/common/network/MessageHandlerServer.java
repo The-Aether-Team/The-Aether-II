@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.network;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
@@ -38,5 +38,5 @@ public abstract class MessageHandlerServer<REQ extends IMessage, RES extends IMe
 	}
 
 	@Override
-	public abstract RES onMessage(REQ message, EntityPlayer player);
+	public abstract RES onMessage(REQ message, PlayerEntity player);
 }

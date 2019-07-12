@@ -4,17 +4,17 @@ import com.gildedgames.aether.client.util.SpriteGeneric;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.projectiles.EntityDaggerfrostSnowball;
 import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.GlStateManager;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
-@SideOnly(Side.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class RenderDaggerfrostSnowball extends Render<EntityDaggerfrostSnowball>
 {
 
@@ -22,7 +22,7 @@ public class RenderDaggerfrostSnowball extends Render<EntityDaggerfrostSnowball>
 
 	public static final SpriteGeneric SPRITE = new SpriteGeneric("daggerfrost_snowball.png", 16, 16);
 
-	public RenderDaggerfrostSnowball(final RenderManager renderManager)
+	public RenderDaggerfrostSnowball(final EntityRendererManager renderManager)
 	{
 		super(renderManager);
 
@@ -35,12 +35,12 @@ public class RenderDaggerfrostSnowball extends Render<EntityDaggerfrostSnowball>
 	{
 		GlStateManager.pushMatrix();
 		this.bindEntityTexture(entity);
-		GlStateManager.translate((float) posX, (float) posY, (float) posZ);
+		GlStateManager.translatef((float) posX, (float) posY, (float) posZ);
 		GlStateManager.enableRescaleNormal();
 
 		final float scale = 0.5F;
 
-		GlStateManager.scale(scale, scale, scale);
+		GlStateManager.scalef(scale, scale, scale);
 
 		this.bindEntityTexture(entity);
 
@@ -64,8 +64,8 @@ public class RenderDaggerfrostSnowball extends Render<EntityDaggerfrostSnowball>
 		final float f2 = icon.getMinV();
 		final float f3 = icon.getMaxV();
 
-		GlStateManager.rotate(180.0F - this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
-		GlStateManager.rotate(-this.renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
+		GlStateManager.rotatef(180.0F - this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
+		GlStateManager.rotatef(-this.renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
 
 		renderer.begin(7, DefaultVertexFormats.POSITION_TEX_NORMAL);
 

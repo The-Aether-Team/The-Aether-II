@@ -6,7 +6,7 @@ import com.gildedgames.aether.common.entities.monsters.EntitySwet;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 public class PacketDetachSwet implements IMessage
@@ -44,7 +44,7 @@ public class PacketDetachSwet implements IMessage
 	public static class HandlerClient extends MessageHandlerClient<PacketDetachSwet, IMessage>
 	{
 		@Override
-		public IMessage onMessage(final PacketDetachSwet message, final EntityPlayer player)
+		public IMessage onMessage(final PacketDetachSwet message, final PlayerEntity player)
 		{
 			if (player == null || player.world == null)
 			{
@@ -53,12 +53,12 @@ public class PacketDetachSwet implements IMessage
 
 			Entity entity = player.world.getEntityByID(message.id);
 
-			if (!(entity instanceof EntityPlayer))
+			if (!(entity instanceof PlayerEntity))
 			{
 				throw new IllegalArgumentException("Entity is not a player");
 			}
 
-			final PlayerAether playerAether = PlayerAether.getPlayer((EntityPlayer) entity);
+			final PlayerAether playerAether = PlayerAether.getPlayer((PlayerEntity) entity);
 
 			EntitySwet remove = null;
 

@@ -1,26 +1,26 @@
 package com.gildedgames.aether.common.entities.ai.moa;
 
 import com.gildedgames.aether.common.entities.util.groups.EntityGroupMember;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.pathfinding.Path;
 import net.minecraft.world.World;
 
 import java.util.List;
 
-public class AIAnimalPack extends EntityAIBase
+public class AIAnimalPack extends Goal
 {
 
 	public final World world;
 
-	public EntityLiving animal;
+	public MobEntity animal;
 
-	public EntityLiving packLeader;
+	public MobEntity packLeader;
 
 	public final float moveSpeed;
 
-	public AIAnimalPack(final EntityLiving animal, final float moveSpeed)
+	public AIAnimalPack(final MobEntity animal, final float moveSpeed)
 	{
 		this.world = animal.world;
 		this.moveSpeed = moveSpeed;
@@ -39,13 +39,13 @@ public class AIAnimalPack extends EntityAIBase
 			return false;
 		}
 
-		final List list = this.animal.world.getEntitiesWithinAABB(this.animal.getClass(), this.animal.getEntityBoundingBox().expand(12.0D, 4.0D, 12.0D));
-		EntityAnimal potentialLeader = null;
+		final List list = this.animal.world.getEntitiesWithinAABB(this.animal.getClass(), this.animal.getBoundingBox().expand(12.0D, 4.0D, 12.0D));
+		AnimalEntity potentialLeader = null;
 		double d0 = Double.MAX_VALUE;
 
 		for (final Object aList : list)
 		{
-			final EntityAnimal animal = (EntityAnimal) aList;
+			final AnimalEntity animal = (AnimalEntity) aList;
 
 			if (animal instanceof EntityGroupMember)
 			{

@@ -4,7 +4,7 @@ import com.gildedgames.aether.api.recipes.simple.ISimpleRecipe;
 import com.gildedgames.aether.common.containers.tiles.ContainerMasonryBench;
 import com.gildedgames.aether.common.recipes.simple.OreDictionaryRequirement;
 import com.gildedgames.aether.common.util.helpers.RecipeUtil;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.SlotCrafting;
@@ -20,7 +20,7 @@ public class SlotSimpleCrafting extends SlotCrafting
 
 	private final ContainerMasonryBench container;
 
-	public SlotSimpleCrafting(EntityPlayer player, InventoryCrafting craftingInventory, IInventory inventoryIn, int slotIndex, int xPosition, int yPosition,
+	public SlotSimpleCrafting(PlayerEntity player, InventoryCrafting craftingInventory, IInventory inventoryIn, int slotIndex, int xPosition, int yPosition,
 			ContainerMasonryBench container)
 	{
 		super(player, craftingInventory, inventoryIn, slotIndex, xPosition, yPosition);
@@ -48,7 +48,7 @@ public class SlotSimpleCrafting extends SlotCrafting
 		this.recipe = recipe;
 	}
 
-	public int getActualAmountOfReq(EntityPlayer player)
+	public int getActualAmountOfReq(PlayerEntity player)
 	{
 		Object req = this.recipe.getRequired()[0];
 
@@ -68,7 +68,7 @@ public class SlotSimpleCrafting extends SlotCrafting
 	}
 
 	@Override
-	public boolean canTakeStack(EntityPlayer player)
+	public boolean canTakeStack(PlayerEntity player)
 	{
 		if (!this.isSimpleCrafting())
 		{
@@ -86,7 +86,7 @@ public class SlotSimpleCrafting extends SlotCrafting
 	}
 
 	@Override
-	public ItemStack onTake(EntityPlayer player, ItemStack stack)
+	public ItemStack onTake(PlayerEntity player, ItemStack stack)
 	{
 		if (!this.isSimpleCrafting())
 		{

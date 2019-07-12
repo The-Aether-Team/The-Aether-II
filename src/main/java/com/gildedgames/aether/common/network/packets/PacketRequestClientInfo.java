@@ -4,7 +4,7 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 public class PacketRequestClientInfo implements IMessage
@@ -29,7 +29,7 @@ public class PacketRequestClientInfo implements IMessage
 	public static class HandlerClient extends MessageHandlerClient<PacketRequestClientInfo, PacketRequestClientInfo>
 	{
 		@Override
-		public PacketRequestClientInfo onMessage(final PacketRequestClientInfo message, final EntityPlayer player)
+		public PacketRequestClientInfo onMessage(final PacketRequestClientInfo message, final PlayerEntity player)
 		{
 			NetworkingAether.sendPacketToServer(new PacketSetPlayerConfig(AetherCore.CONFIG));
 

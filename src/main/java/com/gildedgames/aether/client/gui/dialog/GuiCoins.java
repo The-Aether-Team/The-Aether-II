@@ -10,7 +10,7 @@ import com.gildedgames.orbis.lib.client.rect.Dim2D;
 import com.gildedgames.orbis.lib.client.rect.Pos2D;
 import com.gildedgames.orbis.lib.client.rect.Rect;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 
 public class GuiCoins extends GuiElement
@@ -174,7 +174,7 @@ public class GuiCoins extends GuiElement
 			String text = count < 1 && count > 0 ? TextFormatting.GRAY + String.format("%.2f", count) : String.valueOf((int) count);
 
 			this.count.setText(
-					new Text(new TextComponentString(text), 1.0F));
+					new Text(new StringTextComponent(text), 1.0F));
 
 			this.dim().mod().width(9 + (this.viewer().fontRenderer().getStringWidth(text))).height(8).flush();
 		}
@@ -184,7 +184,7 @@ public class GuiCoins extends GuiElement
 		{
 			this.icon = new GuiTexture(Dim2D.build().width(7).height(7).addX(0).addY(0).flush(), this.iconResource);
 			this.count = new GuiText(Dim2D.build().addX(9).addY(0).flush(),
-					new Text(new TextComponentString(String.valueOf(0)), 1.0F));
+					new Text(new StringTextComponent(String.valueOf(0)), 1.0F));
 
 			this.context().addChildren(this.icon, this.count);
 		}

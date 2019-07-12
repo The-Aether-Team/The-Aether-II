@@ -30,7 +30,7 @@ public class IslandHelper
 
 		AetherCore.LOGGER.info("SOMETHING IS VERY WRONG - AN ISLAND DIDN'T HAVE A RESPAWN POINT, PLAYER WILL SPAWN AT ORIGIN NOW");
 
-		return BlockPos.ORIGIN;
+		return BlockPos.ZERO;
 	}
 
 	public static IIslandData get(World world, int chunkX, int chunkZ)

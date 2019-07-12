@@ -15,27 +15,26 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockValkyrieGrass;
 import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherSapling;
 import com.gildedgames.aether.common.blocks.util.BlockCustomDoor;
 import com.google.common.collect.Maps;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockBed;
-import net.minecraft.block.BlockChest;
-import net.minecraft.block.BlockFenceGate;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.block.*;
+import net.minecraft.block.ChestBlock;
+import net.minecraft.block.FenceGateBlock;
+import net.minecraft.client.renderer.model.ModelResourceLocation;
+import net.minecraft.state.IProperty;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.LinkedHashMap;
 
-@SideOnly(Side.CLIENT)
-@Mod.EventBusSubscriber(Side.CLIENT)
+@OnlyIn(Dist.CLIENT)
+@Mod.EventBusSubscriber(Dist.CLIENT)
 public class BlockModelsAetherInit
 {
 	@SubscribeEvent()
@@ -74,14 +73,14 @@ public class BlockModelsAetherInit
 		ModelLoader.setCustomStateMapper(BlocksAether.secret_skyroot_door, new StateMap.Builder().ignore(BlockCustomDoor.POWERED).build());
 		ModelLoader.setCustomStateMapper(BlocksAether.arkenium_door, new StateMap.Builder().ignore(BlockCustomDoor.POWERED).build());
 
-		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_chest, new StateMap.Builder().ignore(BlockChest.FACING).build());
+		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_chest, new StateMap.Builder().ignore(ChestBlock.FACING).build());
 
 		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_log_wall, new StateMap.Builder().ignore(BlockSkyrootWall.PROPERTY_GENERATED).build());
 
 		ModelLoader.setCustomStateMapper(BlocksAether.aercloud, new StateMapperBase()
 		{
 			@Override
-			protected ModelResourceLocation getModelResourceLocation(final IBlockState state)
+			protected ModelResourceLocation getModelResourceLocation(final BlockState state)
 			{
 				final LinkedHashMap<IProperty<?>, Comparable<?>> mappings = Maps.newLinkedHashMap(state.getProperties());
 
@@ -99,7 +98,7 @@ public class BlockModelsAetherInit
 		ModelLoader.setCustomStateMapper(BlocksAether.orange_tree, new StateMapperBase()
 		{
 			@Override
-			protected ModelResourceLocation getModelResourceLocation(final IBlockState state)
+			protected ModelResourceLocation getModelResourceLocation(final BlockState state)
 			{
 				final LinkedHashMap<IProperty<?>, Comparable<?>> mappings = Maps.newLinkedHashMap(state.getProperties());
 
@@ -129,10 +128,10 @@ public class BlockModelsAetherInit
 
 		ModelLoader.setCustomStateMapper(BlocksAether.standing_skyroot_sign, new StateMap.Builder().ignore(BlockStandingSkyrootSign.ROTATION).build());
 		ModelLoader.setCustomStateMapper(BlocksAether.wall_skyroot_sign, new StateMap.Builder().ignore(BlockWallSkyrootSign.FACING).build());
-		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_fence_gate, new StateMap.Builder().ignore(BlockFenceGate.POWERED).build());
-		ModelLoader.setCustomStateMapper(BlocksAether.wisproot_fence_gate, new StateMap.Builder().ignore(BlockFenceGate.POWERED).build());
-		ModelLoader.setCustomStateMapper(BlocksAether.greatroot_fence_gate, new StateMap.Builder().ignore(BlockFenceGate.POWERED).build());
-		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_bed, new StateMap.Builder().ignore(BlockBed.OCCUPIED).build());
+		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_fence_gate, new StateMap.Builder().ignore(FenceGateBlock.POWERED).build());
+		ModelLoader.setCustomStateMapper(BlocksAether.wisproot_fence_gate, new StateMap.Builder().ignore(FenceGateBlock.POWERED).build());
+		ModelLoader.setCustomStateMapper(BlocksAether.greatroot_fence_gate, new StateMap.Builder().ignore(FenceGateBlock.POWERED).build());
+		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_bed, new StateMap.Builder().ignore(BedBlock.OCCUPIED).build());
 
 		ModelLoader.setCustomStateMapper(BlocksAether.moa_egg, new StateMap.Builder().ignore().build());
 	}

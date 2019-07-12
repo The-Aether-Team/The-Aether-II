@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.entities.util.eyes;
 
 import com.gildedgames.aether.api.entity.IEntityEyesComponent;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 
 public class EntityEyesComponent implements IEntityEyesComponent
 {
@@ -11,11 +11,11 @@ public class EntityEyesComponent implements IEntityEyesComponent
 
 	private int ticksClosed, ticksUntilClose;
 
-	private EntityLivingBase entity;
+	private LivingEntity entity;
 
 	private int ticksLooking, ticksUntilLook;
 
-	public EntityEyesComponent(EntityLivingBase entity)
+	public EntityEyesComponent(LivingEntity entity)
 	{
 		this.entity = entity;
 	}

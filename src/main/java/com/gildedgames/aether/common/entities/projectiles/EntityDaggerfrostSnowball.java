@@ -1,10 +1,10 @@
 package com.gildedgames.aether.common.entities.projectiles;
 
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.projectile.EntitySnowball;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
@@ -16,7 +16,7 @@ public class EntityDaggerfrostSnowball extends EntitySnowball
 		super(world);
 	}
 
-	public EntityDaggerfrostSnowball(World world, EntityLivingBase thrower)
+	public EntityDaggerfrostSnowball(World world, LivingEntity thrower)
 	{
 		super(world, thrower);
 	}
@@ -43,7 +43,7 @@ public class EntityDaggerfrostSnowball extends EntitySnowball
 
 		for (int i = 0; i < 8; ++i)
 		{
-			this.world.spawnParticle(EnumParticleTypes.SNOWBALL, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
+			this.world.spawnParticle(ParticleTypes.SNOWBALL, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
 		}
 
 		if (!this.world.isRemote)

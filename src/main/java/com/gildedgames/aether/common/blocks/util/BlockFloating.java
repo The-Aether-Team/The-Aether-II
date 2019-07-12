@@ -3,9 +3,9 @@ package com.gildedgames.aether.common.blocks.util;
 import com.gildedgames.aether.common.entities.blocks.EntityFloatingBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSand;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -25,7 +25,7 @@ public class BlockFloating extends Block
 			return true;
 		}
 
-		IBlockState state = world.getBlockState(pos);
+		BlockState state = world.getBlockState(pos);
 
 		Material material = state.getMaterial();
 
@@ -33,19 +33,19 @@ public class BlockFloating extends Block
 	}
 
 	@Override
-	public void onBlockAdded(World world, BlockPos pos, IBlockState state)
+	public void onBlockAdded(World world, BlockPos pos, BlockState state)
 	{
 		world.scheduleUpdate(pos, this, this.tickRate(world));
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos)
+	public void neighborChanged(BlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos)
 	{
 		world.scheduleUpdate(pos, this, this.tickRate(world));
 	}
 
 	@Override
-	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
+	public void updateTick(World world, BlockPos pos, BlockState state, Random rand)
 	{
 		if (!world.isRemote)
 		{

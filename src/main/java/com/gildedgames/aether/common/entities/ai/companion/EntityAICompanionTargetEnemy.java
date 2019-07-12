@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.entities.ai.companion;
 
 import com.gildedgames.aether.common.entities.companions.EntityCompanion;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.EntityAITarget;
 
 public class EntityAICompanionTargetEnemy extends EntityAITarget
@@ -9,7 +9,7 @@ public class EntityAICompanionTargetEnemy extends EntityAITarget
 
 	private final EntityCompanion entity;
 
-	private EntityLivingBase target;
+	private LivingEntity target;
 
 	private int timestamp;
 
@@ -23,7 +23,7 @@ public class EntityAICompanionTargetEnemy extends EntityAITarget
 	@Override
 	public boolean shouldExecute()
 	{
-		final EntityLivingBase owner = this.entity.getOwner();
+		final LivingEntity owner = this.entity.getOwner();
 
 		if (owner == null)
 		{
@@ -46,7 +46,7 @@ public class EntityAICompanionTargetEnemy extends EntityAITarget
 		}
 
 		this.taskOwner.setAttackTarget(this.target);
-		final EntityLivingBase owner = this.entity.getOwner();
+		final LivingEntity owner = this.entity.getOwner();
 
 		if (owner != null)
 		{

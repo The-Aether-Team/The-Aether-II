@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.entities.ai.hopping;
 
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityMoveHelper;
 import net.minecraft.util.SoundEvent;
@@ -10,7 +10,7 @@ import java.util.function.Supplier;
 public class HoppingMoveHelper extends EntityMoveHelper
 {
 
-	private final EntityLiving entity;
+	private final MobEntity entity;
 
 	private float yRot;
 
@@ -22,7 +22,7 @@ public class HoppingMoveHelper extends EntityMoveHelper
 
 	private boolean active;
 
-	public HoppingMoveHelper(EntityLiving entity, Supplier<SoundEvent> hoppingSound, HopTimer hopTimer)
+	public HoppingMoveHelper(MobEntity entity, Supplier<SoundEvent> hoppingSound, HopTimer hopTimer)
 	{
 		super(entity);
 
@@ -33,7 +33,7 @@ public class HoppingMoveHelper extends EntityMoveHelper
 		this.active = true;
 	}
 
-	public HoppingMoveHelper(final EntityLiving entity, Supplier<SoundEvent> hoppingSound)
+	public HoppingMoveHelper(final MobEntity entity, Supplier<SoundEvent> hoppingSound)
 	{
 		this(entity, hoppingSound, () -> entity.getRNG().nextInt(20) + 10);
 	}

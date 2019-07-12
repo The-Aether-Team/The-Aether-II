@@ -1,33 +1,35 @@
 package com.gildedgames.aether.common.blocks.containers;
 
 import com.gildedgames.aether.common.entities.tiles.TileEntityHolystoneFurnace;
-import net.minecraft.block.BlockContainer;
+import net.minecraft.block.ContainerBlock;
+import net.minecraft.block.BlockRenderType;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.particles.ParticleTypes;
+import net.minecraft.state.BooleanProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Random;
 
-public class BlockHolystoneFurnace extends BlockContainer
+public class BlockHolystoneFurnace extends ContainerBlock
 {
-	public static final PropertyBool PROPERTY_IS_LIT = PropertyBool.create("is_lit");
+	public static final BooleanProperty PROPERTY_IS_LIT = BooleanProperty.create("is_lit");
 
-	public static final PropertyDirection PROPERTY_FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
+	public static final PropertyDirection PROPERTY_FACING = PropertyDirection.create("facing", Direction.Plane.HORIZONTAL);
 
 	public static final int UNLIT_META = 0, LIT_META = 1;
 
@@ -39,17 +41,17 @@ public class BlockHolystoneFurnace extends BlockContainer
 
 		this.setDefaultState(this.getBlockState().getBaseState()
 				.withProperty(PROPERTY_IS_LIT, Boolean.FALSE)
-				.withProperty(PROPERTY_FACING, EnumFacing.NORTH));
+				.withProperty(PROPERTY_FACING, Direction.NORTH));
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+	public void onBlockPlacedBy(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack)
 	{
 		world.setBlockState(pos, state.withProperty(PROPERTY_FACING, placer.getHorizontalFacing()), 2);
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing,
+	public boolean onBlockActivated(World world, BlockPos pos, BlockState state, PlayerEntity player, Hand hand, Direction facing,
 			float hitX, float hitY, float hitZ)
 	{
 		if (!world.isRemote)
@@ -66,7 +68,7 @@ public class BlockHolystoneFurnace extends BlockContainer
 	}
 
 	@Override
-	public void breakBlock(World world, BlockPos pos, IBlockState state)
+	public void breakBlock(World world, BlockPos pos, BlockState state)
 	{
 		TileEntity tileEntity = world.getTileEntity(pos);
 
@@ -79,12 +81,12 @@ public class BlockHolystoneFurnace extends BlockContainer
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand)
+	@OnlyIn(Dist.CLIENT)
+	public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random rand)
 	{
 		if (state.getValue(PROPERTY_IS_LIT))
 		{
-			EnumFacing facing = state.getValue(PROPERTY_FACING).getOpposite();
+			Direction facing = state.getValue(PROPERTY_FACING).getOpposite();
 
 			double x = pos.getX() + 0.5D;
 			double y = pos.getY() + rand.nextDouble() * 6.0D / 16.0D + 0.125D;
@@ -102,50 +104,50 @@ public class BlockHolystoneFurnace extends BlockContainer
 			switch (facing)
 			{
 				case WEST:
-					world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x - xOffset, y, z + zOffset, 0.0D, 0.0D, 0.0D);
-					world.spawnParticle(EnumParticleTypes.FLAME, x - xOffset, y, z + zOffset, 0.0D, 0.0D, 0.0D);
+					world.spawnParticle(ParticleTypes.SMOKE_NORMAL, x - xOffset, y, z + zOffset, 0.0D, 0.0D, 0.0D);
+					world.spawnParticle(ParticleTypes.FLAME, x - xOffset, y, z + zOffset, 0.0D, 0.0D, 0.0D);
 					break;
 				case EAST:
-					world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x + xOffset, y, z + zOffset, 0.0D, 0.0D, 0.0D);
-					world.spawnParticle(EnumParticleTypes.FLAME, x + xOffset, y, z + zOffset, 0.0D, 0.0D, 0.0D);
+					world.spawnParticle(ParticleTypes.SMOKE_NORMAL, x + xOffset, y, z + zOffset, 0.0D, 0.0D, 0.0D);
+					world.spawnParticle(ParticleTypes.FLAME, x + xOffset, y, z + zOffset, 0.0D, 0.0D, 0.0D);
 					break;
 				case NORTH:
-					world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x + zOffset, y, z - xOffset, 0.0D, 0.0D, 0.0D);
-					world.spawnParticle(EnumParticleTypes.FLAME, x + zOffset, y, z - xOffset, 0.0D, 0.0D, 0.0D);
+					world.spawnParticle(ParticleTypes.SMOKE_NORMAL, x + zOffset, y, z - xOffset, 0.0D, 0.0D, 0.0D);
+					world.spawnParticle(ParticleTypes.FLAME, x + zOffset, y, z - xOffset, 0.0D, 0.0D, 0.0D);
 					break;
 				case SOUTH:
-					world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x + zOffset, y, z + xOffset, 0.0D, 0.0D, 0.0D);
-					world.spawnParticle(EnumParticleTypes.FLAME, x + zOffset, y, z + xOffset, 0.0D, 0.0D, 0.0D);
+					world.spawnParticle(ParticleTypes.SMOKE_NORMAL, x + zOffset, y, z + xOffset, 0.0D, 0.0D, 0.0D);
+					world.spawnParticle(ParticleTypes.FLAME, x + zOffset, y, z + xOffset, 0.0D, 0.0D, 0.0D);
 			}
 		}
 	}
 
 	@Override
-	public EnumBlockRenderType getRenderType(IBlockState state)
+	public BlockRenderType getRenderType(BlockState state)
 	{
-		return EnumBlockRenderType.MODEL;
+		return BlockRenderType.MODEL;
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
-	{
-		return true;
-	}
-
-	@Override
-	public boolean isFullCube(IBlockState state)
+	public boolean isOpaqueCube(BlockState state)
 	{
 		return true;
 	}
 
 	@Override
-	public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos)
+	public boolean isFullCube(BlockState state)
+	{
+		return true;
+	}
+
+	@Override
+	public int getLightValue(BlockState state, IBlockReader world, BlockPos pos)
 	{
 		return state.getValue(PROPERTY_IS_LIT) ? 13 : 0;
 	}
 
 	@Override
-	public int getMetaFromState(IBlockState state)
+	public int getMetaFromState(BlockState state)
 	{
 		int meta = state.getValue(PROPERTY_FACING).getIndex();
 
@@ -158,9 +160,9 @@ public class BlockHolystoneFurnace extends BlockContainer
 	}
 
 	@Override
-	public IBlockState getStateFromMeta(int meta)
+	public BlockState getStateFromMeta(int meta)
 	{
-		EnumFacing facing = EnumFacing.byHorizontalIndex(meta & 7);
+		Direction facing = Direction.byHorizontalIndex(meta & 7);
 
 		boolean isLit = (meta & 8) == 8;
 
@@ -174,7 +176,7 @@ public class BlockHolystoneFurnace extends BlockContainer
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public BlockRenderLayer getRenderLayer()
 	{
 		return BlockRenderLayer.CUTOUT;

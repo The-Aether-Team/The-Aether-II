@@ -17,23 +17,23 @@ import com.gildedgames.aether.common.init.LootTablesAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketDetachSwet;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.SoundEvents;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -71,14 +71,14 @@ public class EntitySwet extends EntityExtendedMob
 
 		this.moveHelper = hoppingMoveHelper;
 
-		this.tasks.addTask(2, new EntityAIRestrictRain(this));
-		this.tasks.addTask(3, new AIHopHideFromRain(this, hoppingMoveHelper, 1.3D));
-		this.tasks.addTask(0, new AILatchOn(this, hoppingMoveHelper));
-		this.tasks.addTask(1, new AIHopWander(this, hoppingMoveHelper));
-		this.tasks.addTask(2, new AIHopFloat(this, hoppingMoveHelper));
-		this.tasks.addTask(3, new AIHopFollowAttackTarget(this, hoppingMoveHelper, 1.0D));
+		this.goalSelector.addGoal(2, new EntityAIRestrictRain(this));
+		this.goalSelector.addGoal(3, new AIHopHideFromRain(this, hoppingMoveHelper, 1.3D));
+		this.goalSelector.addGoal(0, new AILatchOn(this, hoppingMoveHelper));
+		this.goalSelector.addGoal(1, new AIHopWander(this, hoppingMoveHelper));
+		this.goalSelector.addGoal(2, new AIHopFloat(this, hoppingMoveHelper));
+		this.goalSelector.addGoal(3, new AIHopFollowAttackTarget(this, hoppingMoveHelper, 1.0D));
 
-		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, 10, true, false,
+		this.targetSelector.addGoal(1, new EntityAINearestAttackableTarget<>(this, PlayerEntity.class, 10, true, false,
 				e -> EntitySwet.canLatch(EntitySwet.this, e)));
 
 		this.setSize(1.0F, 1.0F);
@@ -93,7 +93,7 @@ public class EntitySwet extends EntityExtendedMob
 		this.setDayMob(true);
 	}
 
-	public static boolean canLatch(final EntitySwet swet, final EntityPlayer player)
+	public static boolean canLatch(final EntitySwet swet, final PlayerEntity player)
 	{
 		return !player.isInWater() && swet.getFoodSaturation() == 3 && PlayerAether.getPlayer(player).getModule(PlayerSwetTrackerModule.class)
 				.canLatchOn() && player.getFoodStats().getFoodLevel() > 4;
@@ -124,7 +124,7 @@ public class EntitySwet extends EntityExtendedMob
 		}
 	}
 
-	public boolean processSucking(final EntityPlayer player)
+	public boolean processSucking(final PlayerEntity player)
 	{
 		PotionEffect slowness = new PotionEffect(Potion.getPotionById(2), 3, this.timeSinceSucking / 80, true, false);
 
@@ -200,9 +200,9 @@ public class EntitySwet extends EntityExtendedMob
 
 	private void applyStatusEffectOnAttack(final Entity target)
 	{
-		if (target instanceof EntityLivingBase)
+		if (target instanceof LivingEntity)
 		{
-			final EntityLivingBase living = (EntityLivingBase) target;
+			final LivingEntity living = (LivingEntity) target;
 
 			int buildup = IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectToxin(living), EEffectIntensity.MINOR)/2;
 			IAetherStatusEffects.applyStatusEffect(living, IAetherStatusEffects.effectTypes.TOXIN, buildup);
@@ -210,27 +210,27 @@ public class EntitySwet extends EntityExtendedMob
 	}
 
 	@Override
-	public void entityInit()
+	public void registerData()
 	{
-		super.entityInit();
+		super.registerData();
 
 		this.dataManager.register(EntitySwet.TYPE, 0);
 		this.dataManager.register(EntitySwet.FOOD_SATURATION, 1);
 	}
 
 	@Override
-	protected void applyEntityAttributes()
+	protected void registerAttributes()
 	{
-		super.applyEntityAttributes();
+		super.registerAttributes();
 
-		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16);
+		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0D);
+		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
+		this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16);
 
-		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(3);
-		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(9);
-		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(3);
+		this.getAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(3);
+		this.getAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(9);
+		this.getAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(3);
 	}
 
 	@Override
@@ -252,10 +252,10 @@ public class EntitySwet extends EntityExtendedMob
 	}
 
 	@Override
-	public void onUpdate()
+	public void livingTick()
 	{
 		if (this.isInWater() || (this.world.isRaining() && this.world
-				.canSeeSky(new BlockPos(this.posX, this.getEntityBoundingBox().minY, this.posZ))))
+				.canSeeSky(new BlockPos(this.posX, this.getBoundingBox().minY, this.posZ))))
 		{
 			this.timeStarved = -this.rand.nextInt(60);
 
@@ -265,10 +265,10 @@ public class EntitySwet extends EntityExtendedMob
 		this.squishFactor += (this.squishAmount - this.squishFactor) * 0.5F;
 		this.prevSquishFactor = this.squishFactor;
 
-		super.onUpdate();
+		super.livingTick();
 
-		if (this.getAttackTarget() != null && this.getAttackTarget() instanceof EntityPlayer
-				&& ((EntityPlayer) this.getAttackTarget()).getFoodStats().getFoodLevel() < 5)
+		if (this.getAttackTarget() != null && this.getAttackTarget() instanceof PlayerEntity
+				&& ((PlayerEntity) this.getAttackTarget()).getFoodStats().getFoodLevel() < 5)
 		{
 			this.setAttackTarget(null);
 		}
@@ -340,7 +340,7 @@ public class EntitySwet extends EntityExtendedMob
 
 				for (int i = 0; i < 5 + this.rand.nextInt(5); i++)
 				{
-					this.world.spawnParticle(EnumParticleTypes.REDSTONE, this.posX - f1 + this.rand.nextFloat() * f1 * 2f,
+					this.world.spawnParticle(ParticleTypes.REDSTONE, this.posX - f1 + this.rand.nextFloat() * f1 * 2f,
 							this.posY - f1 + this.rand.nextFloat() * f1 * 2f, this.posZ - f1 + this.rand.nextFloat() * f1 * 2f, redColors[type],
 							greenColors[type],
 							blueColors[type]);
@@ -411,24 +411,24 @@ public class EntitySwet extends EntityExtendedMob
 	}
 
 	@Override
-	public void readFromNBT(final NBTTagCompound tag)
+	public void readFromNBT(final CompoundNBT tag)
 	{
 		super.readFromNBT(tag);
 
-		this.setType(Type.fromOrdinal(tag.getInteger("type")));
-		this.timeSinceSucking = tag.getInteger("timeSinceSucking");
-		this.setFoodSaturation(tag.getInteger("foodSaturation"));
+		this.setType(Type.fromOrdinal(tag.getInt("type")));
+		this.timeSinceSucking = tag.getInt("timeSinceSucking");
+		this.setFoodSaturation(tag.getInt("foodSaturation"));
 		this.actualSaturation = this.getFoodSaturation();
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(final NBTTagCompound tag)
+	public CompoundNBT writeToNBT(final CompoundNBT tag)
 	{
 		super.writeToNBT(tag);
 
-		tag.setInteger("type", this.getType().ordinal());
-		tag.setInteger("timeSinceSucking", this.timeSinceSucking);
-		tag.setInteger("foodSaturation", this.getFoodSaturation());
+		tag.putInt("type", this.getType().ordinal());
+		tag.putInt("timeSinceSucking", this.timeSinceSucking);
+		tag.putInt("foodSaturation", this.getFoodSaturation());
 
 		return tag;
 	}
@@ -454,13 +454,13 @@ public class EntitySwet extends EntityExtendedMob
 		return null;
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public float getSquishPool()
 	{
 		return this.squishPoolSize;
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public float getActualSaturation()
 	{
 		return this.actualSaturation;

@@ -6,9 +6,9 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.entities.blocks.EntityParachute;
-import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -85,7 +85,7 @@ public class PlayerParachuteModule extends PlayerAetherModule implements IPlayer
 		{
 			if (!this.getEntity().getEntityWorld().isRemote)
 			{
-				final EntityItem block = new EntityItem(this.getEntity().getEntityWorld(), this.getEntity().posX, this.getEntity().posY, this.getEntity().posZ,
+				final ItemEntity block = new ItemEntity(this.getEntity().getEntityWorld(), this.getEntity().posX, this.getEntity().posY, this.getEntity().posZ,
 						new ItemStack(ItemsAether.cloud_parachute, 1, type.ordinal()));
 
 				this.getEntity().getEntityWorld().spawnEntity(block);
@@ -97,7 +97,7 @@ public class PlayerParachuteModule extends PlayerAetherModule implements IPlayer
 
 	private boolean isUnderABlock(final int y)
 	{
-		final AxisAlignedBB boundingBox = this.getEntity().getEntityBoundingBox();
+		final AxisAlignedBB boundingBox = this.getEntity().getBoundingBox();
 
 		final BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
 
@@ -126,23 +126,23 @@ public class PlayerParachuteModule extends PlayerAetherModule implements IPlayer
 	}
 
 	@Override
-	public void write(final NBTTagCompound output)
+	public void write(final CompoundNBT output)
 	{
-		final NBTTagCompound root = new NBTTagCompound();
-		output.setTag("Parachute", root);
+		final CompoundNBT root = new CompoundNBT();
+		output.put("Parachute", root);
 
-		root.setBoolean("parachuting", this.isParachuting);
-		root.setInteger("type", this.type.ordinal());
-		root.setBoolean("prevAllowFlying", this.prevAllowFlying);
+		root.putBoolean("parachuting", this.isParachuting);
+		root.putInt("type", this.type.ordinal());
+		root.putBoolean("prevAllowFlying", this.prevAllowFlying);
 	}
 
 	@Override
-	public void read(final NBTTagCompound input)
+	public void read(final CompoundNBT input)
 	{
-		final NBTTagCompound root = input.getCompoundTag("Parachute");
+		final CompoundNBT root = input.getCompound("Parachute");
 
 		this.isParachuting = input.getBoolean("parachuting");
-		this.type = EntityParachute.Type.fromOrdinal(input.getInteger("type"));
+		this.type = EntityParachute.Type.fromOrdinal(input.getInt("type"));
 		this.prevAllowFlying = input.getBoolean("prevAllowFlying");
 	}
 

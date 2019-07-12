@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.items.irradiated;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -9,8 +9,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class ItemIrradiatedVisuals extends Item
 {
@@ -18,7 +18,7 @@ public class ItemIrradiatedVisuals extends Item
 
 	static
 	{
-		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
+		if (FMLCommonHandler.instance().getEffectiveSide() == Dist.CLIENT)
 		{
 			RES_ITEM_GLINT = new ResourceLocation("textures/misc/enchanted_item_glint.png");
 		}
@@ -27,9 +27,9 @@ public class ItemIrradiatedVisuals extends Item
 	@Override
 	public boolean hasEffect(ItemStack stack)
 	{
-		final RenderItem itemRenderer = Minecraft.getMinecraft().getRenderItem();
+		final RenderItem itemRenderer = Minecraft.getInstance().getRenderItem();
 
-		Minecraft mc = Minecraft.getMinecraft();
+		Minecraft mc = Minecraft.getInstance();
 
 		GlStateManager.pushMatrix();
 
@@ -48,10 +48,10 @@ public class ItemIrradiatedVisuals extends Item
 		return false;
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	private void renderEffect(IBakedModel model)
 	{
-		Minecraft mc = Minecraft.getMinecraft();
+		Minecraft mc = Minecraft.getInstance();
 
 		GlStateManager.depthMask(false);
 		GlStateManager.depthFunc(514);
@@ -62,23 +62,23 @@ public class ItemIrradiatedVisuals extends Item
 
 		GlStateManager.matrixMode(5890);
 		GlStateManager.pushMatrix();
-		GlStateManager.scale(8.0F, 8.0F, 8.0F);
+		GlStateManager.scalef(8.0F, 8.0F, 8.0F);
 
 		float f = (float) (Minecraft.getSystemTime() % 10000L) / 10000.0F / 8.0F;
 
-		GlStateManager.translate(f, 0.0F, 0.0F);
-		GlStateManager.rotate(-50.0F, 0.0F, 0.0F, 1.0F);
+		GlStateManager.translatef(f, 0.0F, 0.0F);
+		GlStateManager.rotatef(-50.0F, 0.0F, 0.0F, 1.0F);
 
 		mc.getRenderItem().renderModel(model, -999999992);
 
 		GlStateManager.popMatrix();
 		GlStateManager.pushMatrix();
-		GlStateManager.scale(8.0F, 8.0F, 8.0F);
+		GlStateManager.scalef(8.0F, 8.0F, 8.0F);
 
 		float f1 = (float) (Minecraft.getSystemTime() % 12873L) / 12873.0F / 8.0F;
 
-		GlStateManager.translate(-f1, 0.0F, 0.0F);
-		GlStateManager.rotate(10.0F, 0.0F, 0.0F, 1.0F);
+		GlStateManager.translatef(-f1, 0.0F, 0.0F);
+		GlStateManager.rotatef(10.0F, 0.0F, 0.0F, 1.0F);
 
 		mc.getRenderItem().renderModel(model, -999999992);
 

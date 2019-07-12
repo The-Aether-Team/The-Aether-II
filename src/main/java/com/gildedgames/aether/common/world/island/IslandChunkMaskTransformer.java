@@ -4,8 +4,8 @@ import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.world.preparation.IChunkMaskTransformer;
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
 import com.gildedgames.aether.common.world.preparation.mask.ChunkMask;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 
 /**
  * Transforms generic blocks in a {@link ChunkMask} into real-world blocks for usage by block accessors or
@@ -13,11 +13,11 @@ import net.minecraft.init.Blocks;
  */
 public class IslandChunkMaskTransformer implements IChunkMaskTransformer
 {
-	private final IBlockState[] states;
+	private final BlockState[] states;
 
 	public IslandChunkMaskTransformer()
 	{
-		this.states = new IBlockState[IslandBlockType.VALUES.length];
+		this.states = new BlockState[IslandBlockType.VALUES.length];
 
 		this.setMaskValue(IslandBlockType.AIR_BLOCK, Blocks.AIR.getDefaultState());
 		this.setMaskValue(IslandBlockType.WATER_BLOCK, Blocks.WATER.getDefaultState());
@@ -37,7 +37,7 @@ public class IslandChunkMaskTransformer implements IChunkMaskTransformer
 		this.setMaskValue(IslandBlockType.VEIN_BLOCK, BlocksAether.highlands_ice.getDefaultState());
 	}
 
-	public void setMaskValue(IslandBlockType type, IBlockState state)
+	public void setMaskValue(IslandBlockType type, BlockState state)
 	{
 		int key = type.ordinal();
 
@@ -45,7 +45,7 @@ public class IslandChunkMaskTransformer implements IChunkMaskTransformer
 	}
 
 	@Override
-	public IBlockState getBlockState(int key)
+	public BlockState getBlockState(int key)
 	{
 		return this.states[key];
 	}

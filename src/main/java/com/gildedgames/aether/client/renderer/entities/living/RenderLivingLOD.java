@@ -1,18 +1,18 @@
 package com.gildedgames.aether.client.renderer.entities.living;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.entity.LivingRenderer;
+import net.minecraft.entity.MobEntity;
 
-public abstract class RenderLivingLOD<T extends EntityLiving> extends RenderLiving<T>
+public abstract class RenderLivingLOD<T extends MobEntity, M extends EntityModel<T>> extends LivingRenderer<T, M>
 {
-	private final ModelBase lowDetailModel;
+	private final EntityModel lowDetailModel;
 
 	protected boolean isLowDetail;
 
-	public RenderLivingLOD(RenderManager rendermanagerIn, ModelBase highDetailModel, ModelBase lowDetailModel, float shadowsizeIn)
+	public RenderLivingLOD(EntityRendererManager rendermanagerIn, M highDetailModel, M lowDetailModel, float shadowsizeIn)
 	{
 		super(rendermanagerIn, highDetailModel, shadowsizeIn);
 
@@ -23,11 +23,11 @@ public abstract class RenderLivingLOD<T extends EntityLiving> extends RenderLivi
 	public void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks)
 	{
 		boolean forceLowDetail = false;
-		boolean lowDetail =  forceLowDetail || Minecraft.getMinecraft().player.getDistanceSq(entity) > this.getHighLODMinDistanceSq();
+		boolean lowDetail =  forceLowDetail || Minecraft.getInstance().player.getDistanceSq(entity) > this.getHighLODMinDistanceSq();
 
 		this.isLowDetail = lowDetail;
 
-		ModelBase prev = this.mainModel;
+		M prev = this.getEntityModel();
 
 		if (lowDetail)
 		{

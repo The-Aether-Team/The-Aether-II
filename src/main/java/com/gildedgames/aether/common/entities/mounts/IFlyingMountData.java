@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.entities.mounts;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 
 public interface IFlyingMountData
@@ -8,7 +8,7 @@ public interface IFlyingMountData
 
 	boolean canBeMounted();
 
-	boolean canProcessMountInteraction(EntityPlayer rider, ItemStack stack);
+	boolean canProcessMountInteraction(PlayerEntity rider, ItemStack stack);
 
 	void resetRemainingAirborneTime();
 

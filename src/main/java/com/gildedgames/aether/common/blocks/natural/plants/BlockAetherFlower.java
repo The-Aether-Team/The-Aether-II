@@ -7,24 +7,24 @@ import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
 import com.gildedgames.aether.common.entities.monsters.EntityAechorPlant;
 import net.minecraft.block.BlockSnow;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Random;
 
@@ -50,7 +50,7 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 	}
 
 	@Override
-	public void updateTick(final World worldIn, final BlockPos pos, final IBlockState state, final Random rand)
+	public void updateTick(final World worldIn, final BlockPos pos, final BlockState state, final Random rand)
 	{
 		super.updateTick(worldIn, pos, state, rand);
 
@@ -61,13 +61,13 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 	}
 
 	@Override
-	public int getLightValue(final IBlockState state)
+	public int getLightValue(final BlockState state)
 	{
 		return this.lightValue;
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX,
+	public boolean onBlockActivated(World worldIn, BlockPos pos, BlockState state, PlayerEntity playerIn, Hand hand, Direction facing, float hitX,
 			float hitY, float hitZ)
 	{
 		ItemStack main = playerIn.getHeldItemMainhand();
@@ -77,15 +77,15 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 
 		if (!state.getValue(PROPERTY_SNOWY))
 		{
-			if (main != null && main.getItem() instanceof ItemBlock)
+			if (main != null && main.getItem() instanceof BlockItem)
 			{
-				if (((ItemBlock) main.getItem()).getBlock() instanceof BlockSnow)
+				if (((BlockItem) main.getItem()).getBlock() instanceof BlockSnow)
 				{
 					addSnow = true;
 					main.shrink(1);
 				}
 			}
-			else if (offhand != null && offhand.getItem() instanceof ItemBlock && ((ItemBlock) offhand.getItem()).getBlock() instanceof BlockSnow)
+			else if (offhand != null && offhand.getItem() instanceof BlockItem && ((BlockItem) offhand.getItem()).getBlock() instanceof BlockSnow)
 			{
 				addSnow = true;
 				offhand.shrink(1);
@@ -101,7 +101,7 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 	}
 
 	@Override
-	public void onPlayerDestroy(World worldIn, BlockPos pos, IBlockState state)
+	public void onPlayerDestroy(World worldIn, BlockPos pos, BlockState state)
 	{
 		if (state.getValue(PROPERTY_SNOWY))
 		{
@@ -113,8 +113,8 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(final CreativeTabs tab, final NonNullList<ItemStack> list)
+	@OnlyIn(Dist.CLIENT)
+	public void getSubBlocks(final ItemGroup tab, final NonNullList<ItemStack> list)
 	{
 		for (final BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
 		{
@@ -123,13 +123,13 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 	}
 
 	@Override
-	public int damageDropped(final IBlockState state)
+	public int damageDropped(final BlockState state)
 	{
 		return state.getValue(PROPERTY_VARIANT).getMeta();
 	}
 
 	@Override
-	public IBlockState getStateFromMeta(final int meta)
+	public BlockState getStateFromMeta(final int meta)
 	{
 		final boolean snowy = meta >= PROPERTY_VARIANT.getAllowedValues().size();
 
@@ -138,7 +138,7 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 	}
 
 	@Override
-	public int getMetaFromState(final IBlockState state)
+	public int getMetaFromState(final BlockState state)
 	{
 		return state.getValue(PROPERTY_VARIANT).getMeta() + (state.getValue(PROPERTY_SNOWY) ? PROPERTY_VARIANT.getAllowedValues().size() : 0);
 	}
@@ -156,7 +156,7 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 	}
 
 	@Override
-	public Vec3d getOffset(final IBlockState state, final IBlockAccess access, final BlockPos pos)
+	public Vec3d getOffset(final BlockState state, final IBlockReader access, final BlockPos pos)
 	{
 		if (state.getValue(PROPERTY_SNOWY))
 		{
@@ -173,7 +173,7 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 	}
 
 	@Override
-	public boolean canGrow(final World worldIn, final BlockPos pos, final IBlockState state, final boolean isClient)
+	public boolean canGrow(final World worldIn, final BlockPos pos, final BlockState state, final boolean isClient)
 	{
 		BlockVariant variant = state.getValue(PROPERTY_VARIANT);
 
@@ -181,13 +181,13 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 	}
 
 	@Override
-	public boolean canUseBonemeal(final World worldIn, final Random rand, final BlockPos pos, final IBlockState state)
+	public boolean canUseBonemeal(final World worldIn, final Random rand, final BlockPos pos, final BlockState state)
 	{
 		return true;
 	}
 
 	@Override
-	public void grow(final World worldIn, final Random rand, final BlockPos pos, final IBlockState state)
+	public void grow(final World worldIn, final Random rand, final BlockPos pos, final BlockState state)
 	{
 		if (worldIn.getLightFromNeighbors(pos.up()) >= 9 && worldIn.rand.nextInt(7) == 0)
 		{

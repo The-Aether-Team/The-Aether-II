@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.util.helpers;
 
 import com.gildedgames.aether.api.recipes.simple.ISimpleRecipe;
 import com.gildedgames.aether.common.recipes.simple.OreDictionaryRequirement;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -26,7 +26,7 @@ public class RecipeUtil
 			ItemStack stack1 = (ItemStack) obj1;
 			ItemStack stack2 = (ItemStack) obj2;
 
-			if (stack1.getItemDamage() == OreDictionary.WILDCARD_VALUE || stack2.getItemDamage() == OreDictionary.WILDCARD_VALUE)
+			if (stack1.getDamage() == OreDictionary.WILDCARD_VALUE || stack2.getDamage() == OreDictionary.WILDCARD_VALUE)
 			{
 				return stack2.getItem() == stack1.getItem();
 			}
@@ -48,7 +48,7 @@ public class RecipeUtil
 		{
 			ItemStack otherStack = (ItemStack) obj;
 
-			if (otherStack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
+			if (otherStack.getDamage() == OreDictionary.WILDCARD_VALUE)
 			{
 				return otherStack.getItem() == stack.getItem();
 			}
@@ -78,7 +78,7 @@ public class RecipeUtil
 		return false;
 	}
 
-	public static boolean hasEnoughOfMaterial(EntityPlayer player, Object req)
+	public static boolean hasEnoughOfMaterial(PlayerEntity player, Object req)
 	{
 		if (req == null)
 		{
@@ -114,7 +114,7 @@ public class RecipeUtil
 		return false;
 	}
 
-	public static boolean canCraft(EntityPlayer player, ISimpleRecipe recipe)
+	public static boolean canCraft(PlayerEntity player, ISimpleRecipe recipe)
 	{
 		if (recipe == null)
 		{
@@ -161,7 +161,7 @@ public class RecipeUtil
 		return true;
 	}
 
-	public static int getTotalTimesCanCraft(EntityPlayer player, ISimpleRecipe recipe)
+	public static int getTotalTimesCanCraft(PlayerEntity player, ISimpleRecipe recipe)
 	{
 		if (recipe == null)
 		{

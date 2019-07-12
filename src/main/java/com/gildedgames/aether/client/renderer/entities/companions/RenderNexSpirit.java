@@ -4,18 +4,18 @@ import com.gildedgames.aether.client.models.entities.companions.ModelNexSpirit;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.companions.EntityNexSpirit;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import org.lwjgl.opengl.GL11;
 
-public class RenderNexSpirit extends RenderCompanion<EntityNexSpirit>
+public class RenderNexSpirit extends RenderCompanion<EntityNexSpirit, ModelNexSpirit>
 {
 	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/entities/companions/nex_spirit.png");
 
 	private static final ResourceLocation TEXTURE_BROKEN = AetherCore.getResource("textures/entities/companions/nex_spirit_broken.png");
 
-	public RenderNexSpirit(RenderManager renderManager)
+	public RenderNexSpirit(EntityRendererManager renderManager)
 	{
 		super(renderManager, new ModelNexSpirit(), 0.2f, 1.2D);
 	}
@@ -33,7 +33,7 @@ public class RenderNexSpirit extends RenderCompanion<EntityNexSpirit>
 	protected void renderExtra(EntityNexSpirit entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
 			float headPitch, float scaleFactor, float opacity)
 	{
-		float partialTicks = Minecraft.getMinecraft().getRenderPartialTicks();
+		float partialTicks = Minecraft.getInstance().getRenderPartialTicks();
 
 		float wave = MathHelper.cos((entity.ticksExisted + partialTicks) / 4);
 		float wave1 = MathHelper.cos((entity.ticksExisted + partialTicks + 4) / 4);

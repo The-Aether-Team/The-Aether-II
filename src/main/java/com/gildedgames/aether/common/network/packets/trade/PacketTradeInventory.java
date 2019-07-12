@@ -4,8 +4,8 @@ import com.gildedgames.aether.client.gui.dialog.GuiTrade;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
@@ -76,9 +76,9 @@ public class PacketTradeInventory implements IMessage
 	public static class HandlerClient extends MessageHandlerClient<PacketTradeInventory, IMessage>
 	{
 		@Override
-		public IMessage onMessage(PacketTradeInventory message, EntityPlayer player)
+		public IMessage onMessage(PacketTradeInventory message, PlayerEntity player)
 		{
-			GuiScreen screen = Minecraft.getMinecraft().currentScreen;
+			Screen screen = Minecraft.getInstance().currentScreen;
 
 			if (screen instanceof GuiTrade)
 			{

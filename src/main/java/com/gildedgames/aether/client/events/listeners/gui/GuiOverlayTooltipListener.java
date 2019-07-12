@@ -3,19 +3,19 @@ package com.gildedgames.aether.client.events.listeners.gui;
 import com.gildedgames.aether.api.world.IWorldObjectHoverable;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
 
-@Mod.EventBusSubscriber(Side.CLIENT)
+@Mod.EventBusSubscriber(Dist.CLIENT)
 public class GuiOverlayTooltipListener
 {
 	@SubscribeEvent
@@ -23,7 +23,7 @@ public class GuiOverlayTooltipListener
 	{
 		if (event.getType() == RenderGameOverlayEvent.ElementType.CROSSHAIRS)
 		{
-			Minecraft minecraft = Minecraft.getMinecraft();
+			Minecraft minecraft = Minecraft.getInstance();
 
 			if (minecraft.currentScreen == null && minecraft.objectMouseOver != null)
 			{
@@ -73,7 +73,7 @@ public class GuiOverlayTooltipListener
 					int x = (resolution.getScaledWidth() / 2) - (width / 2);
 					int y = resolution.getScaledHeight() - 70;
 
-					Gui.drawRect(x - 3, y - 3, x + width + 3, y + 10, Integer.MIN_VALUE);
+					AbstractGui.drawRect(x - 3, y - 3, x + width + 3, y + 10, Integer.MIN_VALUE);
 
 					minecraft.fontRenderer.drawString(label, x, y, 0xFFFFFF);
 				}

@@ -4,11 +4,11 @@ import com.gildedgames.aether.api.util.NoiseUtil;
 import com.gildedgames.aether.client.renderer.ModelBaseAether;
 import com.gildedgames.aether.client.renderer.ModelRendererAether;
 import com.gildedgames.aether.common.entities.animals.EntityMoa;
-import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
-public class ModelMoaBase extends ModelBaseAether
+public class ModelMoaBase extends ModelBaseAether<EntityMoa>
 {
 	public ModelRendererAether BodyMain;
 
@@ -153,13 +153,11 @@ public class ModelMoaBase extends ModelBaseAether
 	public ModelRendererAether LegRTalonL;
 
 	@Override
-	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch, float scaleFactor, Entity entity)
+	public void setRotationAngles(EntityMoa entity, float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch, float scaleFactor)
 	{
 		boolean flying = !entity.onGround;
 
-		EntityMoa moa = (EntityMoa) entity;
-
-		super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, headYaw, headPitch, scaleFactor, entity);
+		super.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, headYaw, headPitch, scaleFactor);
 
 		float pitch = headPitch * 0.017453292F;
 		float yaw = headYaw * 0.017453292F;
@@ -240,7 +238,7 @@ public class ModelMoaBase extends ModelBaseAether
 
 		float wingSwayRange = 0.05F;
 
-		float ageDif = ageInTicks - moa.getAgeSinceOffGround();
+		float ageDif = ageInTicks - entity.getAgeSinceOffGround();
 
 		float unfoldTimeInSeconds = 0.3F;
 		float foldTimeInSeconds = 0.6F;
@@ -293,7 +291,7 @@ public class ModelMoaBase extends ModelBaseAether
 		{
 			float foldTime = (foldTimeInSeconds * 20.0F);
 
-			ageDif = Math.abs(moa.getAgeSinceOffGround() - ageInTicks);
+			ageDif = Math.abs(entity.getAgeSinceOffGround() - ageInTicks);
 
 			float wingAlpha = Math.min(1.0F, ageDif / foldTime);
 
@@ -331,7 +329,8 @@ public class ModelMoaBase extends ModelBaseAether
 	/**
 	 * This is a helper function from Tabula to set the rotation of model parts
 	 */
-	public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
+	@Override
+	public void setRotateAngle(RendererModel modelRenderer, float x, float y, float z)
 	{
 		modelRenderer.rotateAngleX = x;
 		modelRenderer.rotateAngleY = y;

@@ -10,20 +10,20 @@ import com.gildedgames.aether.common.init.DimensionsAether;
 import com.gildedgames.aether.common.world.biomes.BiomeProviderAether;
 import com.gildedgames.aether.common.world.generators.ChunkGeneratorAether;
 import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.DimensionType;
+import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProviderSurface;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class WorldProviderAether extends WorldProviderSurface
 {
@@ -44,7 +44,7 @@ public class WorldProviderAether extends WorldProviderSurface
 
 	public WorldProviderAether()
 	{
-		if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
+		if (FMLCommonHandler.instance().getSide() == Dist.CLIENT)
 		{
 			this.setupClientRenderer();
 		}
@@ -60,7 +60,7 @@ public class WorldProviderAether extends WorldProviderSurface
 		return this.noise;
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	private void setupClientRenderer()
 	{
 		this.setSkyRenderer(new RenderWorldSkybox());
@@ -93,7 +93,7 @@ public class WorldProviderAether extends WorldProviderSurface
 
 		while (!this.world.isAirBlock(testPos.up()))
 		{
-			testPos = testPos.move(EnumFacing.UP);
+			testPos = testPos.move(Direction.UP);
 		}
 
 		return testPos;
@@ -126,7 +126,7 @@ public class WorldProviderAether extends WorldProviderSurface
 	}
 
 	@Override
-	public int getRespawnDimension(final EntityPlayerMP player)
+	public int getRespawnDimension(final ServerPlayerEntity player)
 	{
 		return 0;
 	}
@@ -170,7 +170,7 @@ public class WorldProviderAether extends WorldProviderSurface
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public Vec3d getFogColor(final float angle, final float partialTicks)
 	{
 		final int color = 0x8080a0;
@@ -198,14 +198,14 @@ public class WorldProviderAether extends WorldProviderSurface
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public boolean doesXZShowFog(final int x, final int z)
 	{
 		return false;
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public float[] calcSunriseSunsetColors(final float angle, final float partialTicks)
 	{
 		final float f2 = 0.4F;
@@ -232,14 +232,14 @@ public class WorldProviderAether extends WorldProviderSurface
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public double getVoidFogYFactor()
 	{
 		return 0.03125D;
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public float getCloudHeight()
 	{
 		return 200;

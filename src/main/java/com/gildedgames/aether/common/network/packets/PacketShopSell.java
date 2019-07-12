@@ -11,7 +11,7 @@ import com.gildedgames.aether.common.containers.ContainerShop;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import com.gildedgames.aether.common.util.helpers.ItemHelper;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -46,7 +46,7 @@ public class PacketShopSell implements IMessage
 	public static class HandlerServer extends MessageHandlerServer<PacketShopSell, IMessage>
 	{
 		@Override
-		public IMessage onMessage(final PacketShopSell message, final EntityPlayer player)
+		public IMessage onMessage(final PacketShopSell message, final PlayerEntity player)
 		{
 			if (player == null || player.world == null)
 			{

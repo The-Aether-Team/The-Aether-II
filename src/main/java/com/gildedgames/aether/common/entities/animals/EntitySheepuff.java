@@ -12,7 +12,8 @@ import com.gildedgames.aether.common.init.LootTablesAether;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
 import net.minecraft.entity.*;
 import net.minecraft.entity.passive.EntitySheep;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.entity.passive.SheepEntity;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
@@ -24,7 +25,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -32,7 +33,7 @@ import javax.vecmath.Point3d;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EntitySheepuff extends EntitySheep implements IEntityMultiPart
+public class EntitySheepuff extends SheepEntity implements IEntityMultiPart
 {
 
 	public static final DataParameter<Float> PUFFINESS = EntityDataManager.createKey(EntitySheepuff.class, DataSerializers.FLOAT);
@@ -57,41 +58,41 @@ public class EntitySheepuff extends EntitySheep implements IEntityMultiPart
 	}
 
 	@Override
-	protected void initEntityAI()
+	protected void registerGoals()
 	{
-		super.initEntityAI();
+		super.registerGoals();
 
 		this.entityAIEatGrass = new EntityAIEatAetherGrass(this, 350);
 
-		this.tasks.addTask(2, new EntityAIRestrictRain(this));
-		this.tasks.addTask(3, new EntityAIUnstuckBlueAercloud(this));
-		this.tasks.addTask(3, new EntityAIHideFromRain(this, 1.3D));
-		//		this.tasks.addTask(3, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
-		this.tasks.addTask(9, this.entityAIEatGrass);
+		this.goalSelector.addGoal(2, new EntityAIRestrictRain(this));
+		this.goalSelector.addGoal(3, new EntityAIUnstuckBlueAercloud(this));
+		this.goalSelector.addGoal(3, new EntityAIHideFromRain(this, 1.3D));
+		//		this.goalSelector.addGoal(3, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
+		this.goalSelector.addGoal(9, this.entityAIEatGrass);
 	}
 
 	@Override
 	protected void entityInit()
 	{
-		super.entityInit();
+		super.registerData();
 
 		this.dataManager.register(PUFFINESS, 0f);
 	}
 
 	@Override
-	protected void applyEntityAttributes()
+	protected void registerAttributes()
 	{
-		super.applyEntityAttributes();
+		super.registerAttributes();
 
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
 
-		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(8);
-		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(2);
-		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(5);
+		this.getAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(8);
+		this.getAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(2);
+		this.getAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(5);
 	}
 
 	@Override
-	public EntitySheepuff createChild(EntityAgeable ageable)
+	public EntitySheepuff createChild(AgeableEntity ageable)
 	{
 		return new EntitySheepuff(this.world);
 	}
@@ -155,9 +156,9 @@ public class EntitySheepuff extends EntitySheep implements IEntityMultiPart
 	}
 
 	@Override
-	public void onUpdate()
+	public void livingTick()
 	{
-		super.onUpdate();
+		super.livingTick();
 
 		if (this.motionY < -0.1d && !this.getSheared())
 		{
@@ -182,7 +183,7 @@ public class EntitySheepuff extends EntitySheep implements IEntityMultiPart
 	}
 
 	@Override
-	public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune)
+	public List<ItemStack> onSheared(ItemStack item, IBlockReader world, BlockPos pos, int fortune)
 	{
 		this.motionY = 0;
 		this.setSheared(true);

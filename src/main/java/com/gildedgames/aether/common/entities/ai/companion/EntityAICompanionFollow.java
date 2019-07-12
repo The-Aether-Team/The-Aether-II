@@ -2,17 +2,17 @@ package com.gildedgames.aether.common.entities.ai.companion;
 
 import com.gildedgames.aether.common.entities.companions.EntityCompanion;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 
-public class EntityAICompanionFollow extends EntityAIBase
+public class EntityAICompanionFollow extends Goal
 {
-	private final PathNavigate navigator;
+	private final PathNavigator navigator;
 
 	private final EntityCompanion entity;
 
@@ -66,7 +66,7 @@ public class EntityAICompanionFollow extends EntityAIBase
 
 	private boolean isEmptyBlock(final BlockPos pos)
 	{
-		final IBlockState state = this.entity.world.getBlockState(pos);
+		final BlockState state = this.entity.world.getBlockState(pos);
 
 		return state.getMaterial() == Material.AIR || !state.isFullCube();
 	}
@@ -74,7 +74,7 @@ public class EntityAICompanionFollow extends EntityAIBase
 	@Override
 	public void updateTask()
 	{
-		final EntityPlayer owner = this.entity.getOwner();
+		final PlayerEntity owner = this.entity.getOwner();
 
 		if (owner == null)
 		{
@@ -91,7 +91,7 @@ public class EntityAICompanionFollow extends EntityAIBase
 			{
 				final int i = MathHelper.floor(owner.posX) - 2;
 				final int j = MathHelper.floor(owner.posZ) - 2;
-				final int k = MathHelper.floor(owner.getEntityBoundingBox().minY);
+				final int k = MathHelper.floor(owner.getBoundingBox().minY);
 
 				for (int l = 0; l <= 4; ++l)
 				{

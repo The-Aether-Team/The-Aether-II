@@ -3,8 +3,8 @@ package com.gildedgames.aether.common.world.preparation;
 import com.gildedgames.aether.api.world.preparation.IPrepManager;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.ChunkEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 @Mod.EventBusSubscriber

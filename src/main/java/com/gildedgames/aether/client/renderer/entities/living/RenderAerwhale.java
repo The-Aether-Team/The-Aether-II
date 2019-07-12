@@ -3,17 +3,17 @@ package com.gildedgames.aether.client.renderer.entities.living;
 import com.gildedgames.aether.client.models.entities.living.ModelAerwhale;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.animals.EntityAerwhale;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.EntityLiving;
+import com.mojang.blaze3d.platform.GlStateManager;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.LivingRenderer;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderAerwhale extends RenderLiving<EntityLiving>
+public class RenderAerwhale extends LivingRenderer<EntityAerwhale, ModelAerwhale>
 {
 	private static final ResourceLocation texture = AetherCore.getResource("textures/entities/aerwhale/aerwhale.png");
 
-	public RenderAerwhale(RenderManager renderManager)
+	public RenderAerwhale(EntityRendererManager renderManager)
 	{
 		super(renderManager, new ModelAerwhale(), 2.0F);
 	}
@@ -21,19 +21,19 @@ public class RenderAerwhale extends RenderLiving<EntityLiving>
 	float partialTicks;
 
 	@Override
-	protected void preRenderCallback(EntityLiving entity, float f)
+	protected void preRenderCallback(EntityAerwhale entity, float f)
 	{
-		GlStateManager.scale(2.0D, 2.0D, 2.0D);
-		GlStateManager.translate(0.0D, 1.0D, 0);
+		GlStateManager.scalef(2.0f, 2.0f, 2.0f);
+		GlStateManager.translatef(0.0f, 1.0f, 0.0f);
 
 		this.partialTicks = f;
 	}
 
 	@Override
-	protected void renderModel(EntityLiving entitylivingbaseIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch,
+	protected void renderModel(EntityAerwhale entitylivingbaseIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch,
 			float scaleFactor)
 	{
-		EntityAerwhale aerwhale = (EntityAerwhale) entitylivingbaseIn;
+		EntityAerwhale aerwhale = entitylivingbaseIn;
 
 		/*if (aerwhale.getFlightPath() != null)
 		{
@@ -41,14 +41,14 @@ public class RenderAerwhale extends RenderLiving<EntityLiving>
 
 			Point3d cur = aerwhale.getPoint(this.partialTicks);
 
-			if (Minecraft.getMinecraft().gameSettings.showDebugInfo)
+			if (Minecraft.getInstance().gameSettings.showDebugInfo)
 			{
 				GlStateManager.pushMatrix();
 
-				GlStateManager.translate(-pos.x, pos.y, pos.z);
+				GlStateManager.translatef(-pos.x, pos.y, pos.z);
 				Point3d last = null, last2 = null;
 
-				float scale = 20f / Minecraft.getMinecraft().player.getDistance(entitylivingbaseIn);
+				float scale = 20f / Minecraft.getInstance().player.getDistance(entitylivingbaseIn);
 
 				for (float i = 0; i <= 1.2f; i += 0.03f)
 				{
@@ -80,7 +80,7 @@ public class RenderAerwhale extends RenderLiving<EntityLiving>
 			}
 
 			boolean flag = this.isVisible(entitylivingbaseIn);
-			boolean flag1 = !flag && !entitylivingbaseIn.isInvisibleToPlayer(Minecraft.getMinecraft().player);
+			boolean flag1 = !flag && !entitylivingbaseIn.isInvisibleToPlayer(Minecraft.getInstance().player);
 
 			if (flag || flag1)
 			{
@@ -101,7 +101,7 @@ public class RenderAerwhale extends RenderLiving<EntityLiving>
 					Point3d v2 = MathUtil.getPoints(aerwhale.getFlightPath(), aerwhale.getTime() - 0.001f );
 					Vec3d cur2 = new Vec3d(v2.x, -v2.y, -v2.z);
 
-					GlStateManager.rotate(QuaternionUtil.lookAt(last, cur2));
+					GlStateManager.rotatef(QuaternionUtil.lookAt(last, cur2));
 
 					ModelAerwhale model = (ModelAerwhale) this.mainModel;
 
@@ -115,7 +115,7 @@ public class RenderAerwhale extends RenderLiving<EntityLiving>
 					}
 					else
 					{
-						GlStateManager.translate(0.0D, -0.1D, 1);
+						GlStateManager.translatef(0.0D, -0.1D, 1);
 						model.BackBody.render(scaleFactor);
 					}
 
@@ -136,7 +136,7 @@ public class RenderAerwhale extends RenderLiving<EntityLiving>
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(EntityLiving entity)
+	protected ResourceLocation getEntityTexture(EntityAerwhale entity)
 	{
 		return texture;
 	}

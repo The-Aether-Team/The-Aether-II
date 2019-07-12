@@ -9,10 +9,10 @@ import com.gildedgames.aether.client.gui.dialog.GuiPumpkinCurrency;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockPlumproot;
 import com.gildedgames.orbis.lib.client.rect.Rect;
 import com.google.common.collect.Lists;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 
 import java.util.List;
 
@@ -53,7 +53,7 @@ public class ShopCurrencyPlumproot implements IShopCurrency
 	@Override
 	public void removeValue(long value, IPlayerAether playerAether)
 	{
-		EntityPlayer player = playerAether.getEntity();
+		PlayerEntity player = playerAether.getEntity();
 
 		long count = value;
 
@@ -66,9 +66,9 @@ public class ShopCurrencyPlumproot implements IShopCurrency
 
 			ItemStack stack = player.inventory.mainInventory.get(i);
 
-			if (stack.getItem() instanceof ItemBlock)
+			if (stack.getItem() instanceof BlockItem)
 			{
-				ItemBlock block = (ItemBlock) stack.getItem();
+				BlockItem block = (BlockItem) stack.getItem();
 
 				if (block.getBlock() instanceof BlockPlumproot)
 				{
@@ -123,7 +123,7 @@ public class ShopCurrencyPlumproot implements IShopCurrency
 	@Override
 	public void update(IPlayerAether playerAether)
 	{
-		EntityPlayer player = playerAether.getEntity();
+		PlayerEntity player = playerAether.getEntity();
 
 		long count = 0;
 
@@ -131,9 +131,9 @@ public class ShopCurrencyPlumproot implements IShopCurrency
 		{
 			ItemStack stack = player.inventory.mainInventory.get(i);
 
-			if (stack.getItem() instanceof ItemBlock)
+			if (stack.getItem() instanceof BlockItem)
 			{
-				ItemBlock block = (ItemBlock) stack.getItem();
+				BlockItem block = (BlockItem) stack.getItem();
 
 				if (block.getBlock() instanceof BlockPlumproot)
 				{
@@ -154,13 +154,13 @@ public class ShopCurrencyPlumproot implements IShopCurrency
 	}
 
 	@Override
-	public void write(NBTTagCompound tag)
+	public void write(CompoundNBT tag)
 	{
 
 	}
 
 	@Override
-	public void read(NBTTagCompound tag)
+	public void read(CompoundNBT tag)
 	{
 
 	}

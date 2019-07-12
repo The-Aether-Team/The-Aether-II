@@ -1,12 +1,12 @@
 package com.gildedgames.aether.client.renderer;
 
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import com.mojang.blaze3d.platform.GlStateManager;
+import net.minecraft.client.renderer.entity.model.RendererModel;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.lwjgl.opengl.GL11;
 
-public class ModelRendererAether extends ModelRenderer
+public class ModelRendererAether extends RendererModel
 {
 	private final ModelBaseAether model;
 
@@ -38,7 +38,7 @@ public class ModelRendererAether extends ModelRenderer
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void render(float scale)
 	{
 		this.render(scale, false, false);
@@ -69,7 +69,7 @@ public class ModelRendererAether extends ModelRenderer
 					{
 						if (this.childModels != null)
 						{
-							for (ModelRenderer childModel : this.childModels)
+							for (RendererModel childModel : this.childModels)
 							{
 								((ModelRendererAether) childModel).consumeDisplayFlag();
 							}
@@ -88,22 +88,22 @@ public class ModelRendererAether extends ModelRenderer
 
 				if (translateX != 0.0F || translateY != 0.0F || translateZ != 0.0F)
 				{
-					GlStateManager.translate(translateX, translateY, translateZ);
+					GlStateManager.translatef(translateX, translateY, translateZ);
 				}
 
 				if (this.rotateAngleZ != 0.0F)
 				{
-					GlStateManager.rotate(this.rotateAngleZ * (180F / (float)Math.PI), 0.0F, 0.0F, 1.0F);
+					GlStateManager.rotatef(this.rotateAngleZ * (180F / (float)Math.PI), 0.0F, 0.0F, 1.0F);
 				}
 
 				if (this.rotateAngleY != 0.0F)
 				{
-					GlStateManager.rotate(this.rotateAngleY * (180F / (float)Math.PI), 0.0F, 1.0F, 0.0F);
+					GlStateManager.rotatef(this.rotateAngleY * (180F / (float)Math.PI), 0.0F, 1.0F, 0.0F);
 				}
 
 				if (this.rotateAngleX != 0.0F)
 				{
-					GlStateManager.rotate(this.rotateAngleX * (180F / (float)Math.PI), 1.0F, 0.0F, 0.0F);
+					GlStateManager.rotatef(this.rotateAngleX * (180F / (float)Math.PI), 1.0F, 0.0F, 0.0F);
 				}
 
 				boolean drawSelf = single || this.consumeDisplayFlag();
@@ -115,7 +115,7 @@ public class ModelRendererAether extends ModelRenderer
 
 				if (displayChildren && this.childModels != null)
 				{
-					for (ModelRenderer childModel : this.childModels)
+					for (RendererModel childModel : this.childModels)
 					{
 						((ModelRendererAether) childModel).render(scale, false, false);
 					}
@@ -150,7 +150,7 @@ public class ModelRendererAether extends ModelRenderer
 	{
 		if (this.childModels != null)
 		{
-			for (ModelRenderer childModel : this.childModels)
+			for (RendererModel childModel : this.childModels)
 			{
 				if (((ModelRendererAether) childModel).isBranchNecessary())
 				{
@@ -171,7 +171,7 @@ public class ModelRendererAether extends ModelRenderer
 
 		if (this.childModels != null)
 		{
-			for (ModelRenderer childModel : this.childModels)
+			for (RendererModel childModel : this.childModels)
 			{
 				if (((ModelRendererAether) childModel).isBranchNecessary())
 				{

@@ -7,8 +7,8 @@ import com.gildedgames.orbis.lib.OrbisLib;
 import com.gildedgames.orbis.lib.world.instances.IInstance;
 import com.gildedgames.orbis.lib.world.instances.IPlayerInstances;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 public class PacketCancelIntro implements IMessage
@@ -34,7 +34,7 @@ public class PacketCancelIntro implements IMessage
 	public static class HandlerServer extends MessageHandlerServer<PacketCancelIntro, IMessage>
 	{
 		@Override
-		public IMessage onMessage(final PacketCancelIntro message, final EntityPlayer player)
+		public IMessage onMessage(final PacketCancelIntro message, final PlayerEntity player)
 		{
 			if (player == null || player.world == null)
 			{
@@ -51,7 +51,7 @@ public class PacketCancelIntro implements IMessage
 
 				if (player.dimension == instance.getDimensionId())
 				{
-					handler.teleportBack((EntityPlayerMP) player);
+					handler.teleportBack((ServerPlayerEntity) player);
 				}
 			}
 

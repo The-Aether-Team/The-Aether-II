@@ -3,11 +3,11 @@ package com.gildedgames.aether.client.renderer.entities.projectiles;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.projectiles.EntityDart;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
@@ -26,7 +26,7 @@ public class RenderDart extends Render<EntityDart>
 		dartTextures.put(ItemDartType.POISON, AetherCore.getResource("textures/entities/darts/poison_dart.png"));
 	}
 
-	public RenderDart(final RenderManager renderManager)
+	public RenderDart(final EntityRendererManager renderManager)
 	{
 		super(renderManager);
 	}
@@ -39,9 +39,9 @@ public class RenderDart extends Render<EntityDart>
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		GlStateManager.pushMatrix();
 
-		GlStateManager.translate((float) posX, (float) posY, (float) posZ);
-		GlStateManager.rotate(dart.prevRotationYaw + (dart.rotationYaw - dart.prevRotationYaw) * partialTicks - 90.0F, 0.0F, 1.0F, 0.0F);
-		GlStateManager.rotate(dart.prevRotationPitch + (dart.rotationPitch - dart.prevRotationPitch) * partialTicks, 0.0F, 0.0F, 1.0F);
+		GlStateManager.translatef((float) posX, (float) posY, (float) posZ);
+		GlStateManager.rotatef(dart.prevRotationYaw + (dart.rotationYaw - dart.prevRotationYaw) * partialTicks - 90.0F, 0.0F, 1.0F, 0.0F);
+		GlStateManager.rotatef(dart.prevRotationPitch + (dart.rotationPitch - dart.prevRotationPitch) * partialTicks, 0.0F, 0.0F, 1.0F);
 
 		final Tessellator tessellator = Tessellator.getInstance();
 		final BufferBuilder renderer = tessellator.getBuffer();
@@ -64,12 +64,12 @@ public class RenderDart extends Render<EntityDart>
 		{
 			final float f10 = -MathHelper.sin(f9 * 3.0F) * f9;
 
-			GlStateManager.rotate(f10, 0.0F, 0.0F, 1.0F);
+			GlStateManager.rotatef(f10, 0.0F, 0.0F, 1.0F);
 		}
 
-		GlStateManager.rotate(45.0F, 1.0F, 0.0F, 0.0F);
-		GlStateManager.scale(f8, f8, f8);
-		GlStateManager.translate(-4.0F, 0.0F, 0.0F);
+		GlStateManager.rotatef(45.0F, 1.0F, 0.0F, 0.0F);
+		GlStateManager.scalef(f8, f8, f8);
+		GlStateManager.translatef(-4.0F, 0.0F, 0.0F);
 
 		GL11.glNormal3f(f8, 0.0F, 0.0F);
 		renderer.begin(7, DefaultVertexFormats.POSITION_TEX);
@@ -90,7 +90,7 @@ public class RenderDart extends Render<EntityDart>
 
 		for (int j = 0; j < 4; ++j)
 		{
-			GlStateManager.rotate(90.0F, 1.0F, 0.0F, 0.0F);
+			GlStateManager.rotatef(90.0F, 1.0F, 0.0F, 0.0F);
 			GL11.glNormal3f(0.0F, 0.0F, f8);
 
 			renderer.begin(7, DefaultVertexFormats.POSITION_TEX);

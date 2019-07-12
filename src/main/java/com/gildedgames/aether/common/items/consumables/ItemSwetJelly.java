@@ -4,25 +4,24 @@ import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherDirt;
 import com.gildedgames.aether.common.entities.monsters.EntitySwet;
 import net.minecraft.block.BlockDirt;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.NonNullList;
+import net.minecraft.util.*;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.HashMap;
 
 public class ItemSwetJelly extends ItemAetherFood
 {
-	private static final HashMap<IBlockState, IBlockState> growables = new HashMap<>();
+	private static final HashMap<BlockState, BlockState> growables = new HashMap<>();
 
 	static
 	{
@@ -39,8 +38,8 @@ public class ItemSwetJelly extends ItemAetherFood
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void getSubItems(final CreativeTabs tab, final NonNullList<ItemStack> subItems)
+	@OnlyIn(Dist.CLIENT)
+	public void getSubItems(final ItemGroup tab, final NonNullList<ItemStack> subItems)
 	{
 		if (!this.isInCreativeTab(tab))
 		{
@@ -54,14 +53,14 @@ public class ItemSwetJelly extends ItemAetherFood
 	}
 
 	@Override
-	public EnumActionResult onItemUse(final EntityPlayer player, final World world, final BlockPos pos, final EnumHand hand, final EnumFacing facing,
+	public ActionResultType onItemUse(final PlayerEntity player, final World world, final BlockPos pos, final Hand hand, final Direction facing,
 			final float hitX, final float hitY, final float hitZ)
 	{
-		final IBlockState state = world.getBlockState(pos);
+		final BlockState state = world.getBlockState(pos);
 
 		if (ItemSwetJelly.growables.containsKey(state))
 		{
-			final IBlockState nState = ItemSwetJelly.growables.get(state);
+			final BlockState nState = ItemSwetJelly.growables.get(state);
 
 			final int radius = 1;
 
@@ -78,10 +77,10 @@ public class ItemSwetJelly extends ItemAetherFood
 				}
 			}
 
-			return EnumActionResult.SUCCESS;
+			return ActionResultType.SUCCESS;
 		}
 
-		return EnumActionResult.FAIL;
+		return ActionResultType.FAIL;
 	}
 
 	@Override

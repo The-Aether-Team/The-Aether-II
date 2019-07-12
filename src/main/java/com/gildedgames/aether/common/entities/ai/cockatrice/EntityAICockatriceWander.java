@@ -1,9 +1,9 @@
 package com.gildedgames.aether.common.entities.ai.cockatrice;
 
 import com.gildedgames.aether.common.entities.monsters.EntityCockatrice;
-import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 
-public class EntityAICockatriceWander extends EntityAIWander
+public class EntityAICockatriceWander extends RandomWalkingGoal
 {
 
 	final EntityCockatrice cockatrice;

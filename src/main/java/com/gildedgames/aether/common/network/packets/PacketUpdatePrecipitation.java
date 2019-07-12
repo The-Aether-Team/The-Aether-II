@@ -6,16 +6,16 @@ import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
 import io.netty.buffer.ByteBufOutputStream;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.CompressedStreamTools;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 import java.io.IOException;
 
 public class PacketUpdatePrecipitation implements IMessage
 {
-	private NBTTagCompound tag;
+	private CompoundNBT tag;
 
 	private IPrecipitationManager precipitation;
 
@@ -45,7 +45,7 @@ public class PacketUpdatePrecipitation implements IMessage
 	@Override
 	public void toBytes(ByteBuf buf)
 	{
-		NBTTagCompound tag = this.precipitation.serializeNBT();
+		CompoundNBT tag = this.precipitation.serializeNBT();
 
 		try (ByteBufOutputStream stream = new ByteBufOutputStream(buf))
 		{
@@ -60,7 +60,7 @@ public class PacketUpdatePrecipitation implements IMessage
 	public static class HandlerClient extends MessageHandlerClient<PacketUpdatePrecipitation, IMessage>
 	{
 		@Override
-		public IMessage onMessage(PacketUpdatePrecipitation message, EntityPlayer player)
+		public IMessage onMessage(PacketUpdatePrecipitation message, PlayerEntity player)
 		{
 			IPrecipitationManager precip = player.world.getCapability(CapabilitiesAether.PRECIPITATION_MANAGER, null);
 

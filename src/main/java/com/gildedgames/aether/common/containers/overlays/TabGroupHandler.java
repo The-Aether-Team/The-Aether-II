@@ -7,19 +7,19 @@ import com.gildedgames.aether.api.registry.tab.ITabGroupHandler;
 import com.gildedgames.aether.common.AetherCore;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.api.distmarker.Dist;
 
 /**
- * This is what contains {@link ITab}s for a {@link GuiScreen}'s tab interface.
+ * This is what contains {@link ITab}s for a {@link Screen}'s tab interface.
  * @author Brandon Pearce
  */
 public class TabGroupHandler implements ITabGroupHandler
 {
 	public final BiMap<Integer, String> idMappings = HashBiMap.create();
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public TabGroup<ITabClient> clientGroup;
 
 	public final TabGroup<ITab> serverGroup;

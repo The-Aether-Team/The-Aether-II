@@ -9,25 +9,25 @@ import com.gildedgames.aether.common.entities.tiles.TileEntityMoaEgg;
 import com.gildedgames.aether.common.entities.util.groups.EntityGroup;
 import com.gildedgames.aether.common.items.other.ItemMoaEgg;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
+import net.minecraft.block.ContainerBlock;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class BlockMoaEgg extends BlockContainer implements IInternalBlock
+public class BlockMoaEgg extends ContainerBlock implements IInternalBlock
 {
 
 	public static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.2F, 0.0F, 0.2F, 0.8F, 0.75F, 0.8F);
@@ -40,13 +40,13 @@ public class BlockMoaEgg extends BlockContainer implements IInternalBlock
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	public AxisAlignedBB getBoundingBox(BlockState state, IBlockReader source, BlockPos pos)
 	{
 		return BOUNDING_BOX;
 	}
 
 	@Override
-	public void onBlockAdded(World world, BlockPos pos, IBlockState state)
+	public void onBlockAdded(World world, BlockPos pos, BlockState state)
 	{
 		super.onBlockAdded(world, pos, state);
 
@@ -61,9 +61,9 @@ public class BlockMoaEgg extends BlockContainer implements IInternalBlock
 	}
 
 	@Override
-	public void onBlockClicked(World world, BlockPos pos, EntityPlayer player)
+	public void onBlockClicked(World world, BlockPos pos, PlayerEntity player)
 	{
-		if (!player.capabilities.isCreativeMode)
+		if (!player.isCreative())
 		{
 			TileEntityMoaEgg egg = (TileEntityMoaEgg) world.getTileEntity(pos);
 
@@ -101,7 +101,7 @@ public class BlockMoaEgg extends BlockContainer implements IInternalBlock
 	}
 
 	@Override
-	public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest)
+	public boolean removedByPlayer(BlockState state, World world, BlockPos pos, PlayerEntity player, boolean willHarvest)
 	{
 		this.onBlockClicked(world, pos, player);
 
@@ -109,31 +109,31 @@ public class BlockMoaEgg extends BlockContainer implements IInternalBlock
 	}
 
 	@Override
-	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
+	public List<ItemStack> getDrops(IBlockReader world, BlockPos pos, BlockState state, int fortune)
 	{
 		return Collections.emptyList();
 	}
 
 	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
+	public Item getItemDropped(BlockState state, Random rand, int fortune)
 	{
 		return null;
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(BlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState state)
+	public boolean isFullCube(BlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullBlock(IBlockState state)
+	public boolean isFullBlock(BlockState state)
 	{
 		return false;
 	}
@@ -145,7 +145,7 @@ public class BlockMoaEgg extends BlockContainer implements IInternalBlock
 	}
 
 	@Override
-	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
+	public ItemStack getPickBlock(BlockState state, RayTraceResult target, World world, BlockPos pos, PlayerEntity player)
 	{
 		ItemStack eggStack = new ItemStack(ItemsAether.moa_egg_item);
 		TileEntityMoaEgg egg = (TileEntityMoaEgg) world.getTileEntity(pos);

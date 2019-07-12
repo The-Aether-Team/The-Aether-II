@@ -2,12 +2,12 @@ package com.gildedgames.aether.common.blocks.natural.wood;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -22,7 +22,7 @@ public class BlockAmberLog extends BlockAetherLog
 	}
 
 	@Override
-	public void getDrops(NonNullList<ItemStack> list, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
+	public void getDrops(NonNullList<ItemStack> list, IBlockReader world, BlockPos pos, BlockState state, int fortune)
 	{
 		super.getDrops(list, world, pos, state, fortune);
 
@@ -33,7 +33,7 @@ public class BlockAmberLog extends BlockAetherLog
 	}
 
 	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
+	public Item getItemDropped(BlockState state, Random rand, int fortune)
 	{
 		return Item.getItemFromBlock(BlocksAether.skyroot_log);
 	}

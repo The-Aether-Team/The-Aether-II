@@ -4,13 +4,13 @@ import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.client.models.entities.tile.ModelAltar;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.tiles.TileEntityAltar;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -31,24 +31,24 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer<TileEntit
 		GlStateManager.pushMatrix();
 		GlStateManager.enableRescaleNormal();
 
-		GlStateManager.translate((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
-		GlStateManager.rotate(180f, 1f, 0f, 1f);
+		GlStateManager.translatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
+		GlStateManager.rotatef(180f, 1f, 0f, 1f);
 
 		if (altar != null)
 		{
 			switch (altar.getFacing())
 			{
 				case NORTH:
-					GlStateManager.rotate(270.0f, 0.0f, 1.0f, 0.0f);
+					GlStateManager.rotatef(270.0f, 0.0f, 1.0f, 0.0f);
 					break;
 				case WEST:
-					GlStateManager.rotate(0.0f, 0.0f, 1.0f, 0.0f);
+					GlStateManager.rotatef(0.0f, 0.0f, 1.0f, 0.0f);
 					break;
 				case SOUTH:
-					GlStateManager.rotate(90.0f, 0.0f, 1.0f, 0.0f);
+					GlStateManager.rotatef(90.0f, 0.0f, 1.0f, 0.0f);
 					break;
 				case EAST:
-					GlStateManager.rotate(180.0f, 0.0f, 1.0f, 0.0f);
+					GlStateManager.rotatef(180.0f, 0.0f, 1.0f, 0.0f);
 					break;
 			}
 		}
@@ -61,9 +61,9 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer<TileEntit
 		{
 			final ItemStack stack = altar.getStackOnAltar();
 
-			GlStateManager.rotate(180f, 1f, 0f, 1f);
+			GlStateManager.rotatef(180f, 1f, 0f, 1f);
 
-			GlStateManager.translate(0.0f, -0.32f, 0.0f);
+			GlStateManager.translatef(0.0f, -0.32f, 0.0f);
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
 			this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
@@ -73,17 +73,17 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer<TileEntit
 				GlStateManager.pushMatrix();
 				GlStateManager.pushAttrib();
 
-				if (stack.getItem() instanceof ItemBlock)
+				if (stack.getItem() instanceof BlockItem)
 				{
-					GlStateManager.scale(0.25F, 0.25F, 0.25F);
-					GlStateManager.translate(0.0f, -0.05f, 0.0f);
+					GlStateManager.scalef(0.25F, 0.25F, 0.25F);
+					GlStateManager.translatef(0.0f, -0.05f, 0.0f);
 				}
 				else
 				{
-					GlStateManager.scale(0.5F, 0.5F, 0.5F);
-					GlStateManager.translate(0.0f, -0.13f, 0.0f);
-					GlStateManager.rotate(90.0f, 90.0f, 0.0f, 0.0f);
-					GlStateManager.rotate(90.0f, 0.0f, 0.0f, 90.0f);
+					GlStateManager.scalef(0.5F, 0.5F, 0.5F);
+					GlStateManager.translatef(0.0f, -0.13f, 0.0f);
+					GlStateManager.rotatef(90.0f, 90.0f, 0.0f, 0.0f);
+					GlStateManager.rotatef(90.0f, 0.0f, 0.0f, 90.0f);
 				}
 
 				this.renderItem(stack);
@@ -105,13 +105,13 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer<TileEntit
 	{
 		GlStateManager.pushMatrix();
 
-		final RenderItem itemRenderer = Minecraft.getMinecraft().getRenderItem();
+		final RenderItem itemRenderer = Minecraft.getInstance().getRenderItem();
 
 		if (stack != null)
 		{
 			if (!itemRenderer.shouldRenderItemIn3D(stack))
 			{
-				GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
+				GlStateManager.rotatef(180.0F, 0.0F, 1.0F, 0.0F);
 			}
 
 			final IBakedModel model = itemRenderer.getItemModelMesher().getItemModel(stack);
@@ -135,10 +135,10 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer<TileEntit
 			final double deltaX = z * Math.cos(alpha) - x * Math.sin(alpha);
 			final double deltaZ = x * Math.cos(alpha) + z * Math.sin(alpha);
 
-			GlStateManager.translate(deltaX, 0, deltaZ);
+			GlStateManager.translatef(deltaX, 0, deltaZ);
 
-			GlStateManager.scale(0.25f, 0.25f, 0.25f);
-			GlStateManager.rotate(90.0f, 0.0f, -90.0f, 0.0f);
+			GlStateManager.scalef(0.25f, 0.25f, 0.25f);
+			GlStateManager.rotatef(90.0f, 0.0f, -90.0f, 0.0f);
 
 			this.renderItem(new ItemStack(ItemsAether.ambrosium_shard));
 

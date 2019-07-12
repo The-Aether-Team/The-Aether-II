@@ -1,29 +1,29 @@
 package com.gildedgames.aether.common.blocks.containers;
 
 import com.gildedgames.aether.common.entities.tiles.TileEntityWildcard;
-import net.minecraft.block.BlockContainer;
+import net.minecraft.block.ContainerBlock;
+import net.minecraft.block.BlockRenderType;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumBlockRenderType;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.api.distmarker.Dist;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class BlockWildcard extends BlockContainer
+public class BlockWildcard extends ContainerBlock
 {
 
 	public BlockWildcard()
@@ -36,25 +36,25 @@ public class BlockWildcard extends BlockContainer
 	}
 
 	@Override
-	public EnumBlockRenderType getRenderType(final IBlockState state)
+	public BlockRenderType getRenderType(final BlockState state)
 	{
-		return EnumBlockRenderType.MODEL;
+		return BlockRenderType.MODEL;
 	}
 
 	@Override
-	public boolean isOpaqueCube(final IBlockState state)
+	public boolean isOpaqueCube(final BlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube(final IBlockState state)
+	public boolean isFullCube(final BlockState state)
 	{
 		return true;
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public BlockRenderLayer getRenderLayer()
 	{
 		return BlockRenderLayer.CUTOUT;
@@ -68,7 +68,7 @@ public class BlockWildcard extends BlockContainer
 
 	@Override
 	public boolean onBlockActivated(
-			final World world, final BlockPos pos, final IBlockState state, final EntityPlayer player, final EnumHand hand, final EnumFacing side,
+			final World world, final BlockPos pos, final BlockState state, final PlayerEntity player, final Hand hand, final Direction side,
 			final float hitX, final float hitY, final float hitZ)
 	{
 		if (world.isRemote)
@@ -94,7 +94,7 @@ public class BlockWildcard extends BlockContainer
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void addInformation(final ItemStack stack, @Nullable final World player, final List<String> tooltip, final ITooltipFlag advanced)
 	{
 		tooltip.add(I18n.format("aether.warning.deprecated_item"));

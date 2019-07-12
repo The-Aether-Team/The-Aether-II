@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.world.spawning.conditions;
 import com.gildedgames.aether.api.world.spawn.conditions.IConditionPosition;
 import com.gildedgames.aether.api.world.spawn.conditions.IConditionWorld;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.DimensionType;
+import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.World;
 
 public class CheckDimension implements IConditionPosition, IConditionWorld

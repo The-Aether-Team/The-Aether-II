@@ -9,17 +9,17 @@ import com.gildedgames.orbis.lib.client.gui.util.gui_library.GuiViewer;
 import com.gildedgames.orbis.lib.client.gui.util.gui_library.IGuiContext;
 import com.gildedgames.orbis.lib.client.rect.Dim2D;
 import com.google.common.collect.Lists;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.gui.AbstractGui;
+import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import org.lwjgl.Sys;
 import org.lwjgl.input.Mouse;
@@ -58,7 +58,7 @@ public class GuiDialogViewer extends GuiViewer implements IDialogChangeListener
 
 	private ISceneInstance sceneInstance;
 
-	public GuiDialogViewer(final EntityPlayer player, final IDialogController controller, ISceneInstance sceneInstance)
+	public GuiDialogViewer(final PlayerEntity player, final IDialogController controller, ISceneInstance sceneInstance)
 	{
 		super(new GuiElement(Dim2D.flush(), false), null, new ContainerDialogController(player));
 
@@ -80,7 +80,7 @@ public class GuiDialogViewer extends GuiViewer implements IDialogChangeListener
 
 		GlStateManager.disableDepth();
 
-		GlStateManager.translate(0, 0, 100F);
+		GlStateManager.translatef(0, 0, 100F);
 		GlStateManager.color(1.0F, 1.0F, 1.0F);
 
 		if (this.slide != null && this.renderer != null)
@@ -88,9 +88,9 @@ public class GuiDialogViewer extends GuiViewer implements IDialogChangeListener
 			this.renderer.draw(this.slide, this.width, this.height, mouseX, mouseY, partialTicks);
 		}
 
-		GlStateManager.translate(0, 0, 100F);
+		GlStateManager.translatef(0, 0, 100F);
 
-		Gui.drawRect(0, this.height - 90, this.width, this.height, Integer.MIN_VALUE);
+		AbstractGui.drawRect(0, this.height - 90, this.width, this.height, Integer.MIN_VALUE);
 
 		if (this.maxScroll > 0 && this.controller.isNodeFinished() && this.controller.getCurrentNode().getButtons().size() > 0)
 		{
@@ -98,11 +98,11 @@ public class GuiDialogViewer extends GuiViewer implements IDialogChangeListener
 			int x = (this.width / 2) - (baseBoxSize / 2);
 			int y = this.height - 85;
 
-			Gui.drawRect(x - 17, this.height - 85, x - 7, this.height - 10, Integer.MIN_VALUE);
+			AbstractGui.drawRect(x - 17, this.height - 85, x - 7, this.height - 10, Integer.MIN_VALUE);
 
 			int scrollYOffset = this.currentScroll == 0 ? 0 : MathHelper.floor((float) this.currentScroll * (55.0F / (float) this.maxScroll));
 
-			Gui.drawRect(x - 17, y + scrollYOffset, x - 7, y + 20 + scrollYOffset, 0x96FFFFFF);
+			AbstractGui.drawRect(x - 17, y + scrollYOffset, x - 7, y + 20 + scrollYOffset, 0x96FFFFFF);
 		}
 
 		super.drawScreen(mouseX, mouseY, partialTicks);
@@ -135,27 +135,27 @@ public class GuiDialogViewer extends GuiViewer implements IDialogChangeListener
 
 			if (this.nextArrowAnim < 500.0)
 			{
-				GlStateManager.translate(0, anim / 500.0, 0);
+				GlStateManager.translatef(0, anim / 500.0, 0);
 			}
 			else if (this.nextArrowAnim >= 500.0)
 			{
-				GlStateManager.translate(0, -((anim - 500.0) / 500.0), 0);
+				GlStateManager.translatef(0, -((anim - 500.0) / 500.0), 0);
 			}
 
-			GlStateManager.translate(0, 0, 302F);
+			GlStateManager.translatef(0, 0, 302F);
 			GlStateManager.color(1.0F, 1.0F, 1.0F);
 
-			Minecraft.getMinecraft().renderEngine.bindTexture(NEXT_ARROW);
+			Minecraft.getInstance().getTextureManager().bindTexture(NEXT_ARROW);
 
 			if (this.controller.isNodeFinished() && this.controller.getCurrentNode().getButtons().size() > 0)
 			{
-				Gui.drawModalRectWithCustomSizedTexture(
+				AbstractGui.drawModalRectWithCustomSizedTexture(
 						this.topTextBox.x + this.topTextBox.width + 5,
 						this.topTextBox.y + this.topTextBox.height - 20, 0, 0, 13, 12, 13, 12);
 			}
 			else
 			{
-				Gui.drawModalRectWithCustomSizedTexture(
+				AbstractGui.drawModalRectWithCustomSizedTexture(
 						this.bottomTextBox.x + this.bottomTextBox.width,
 						this.bottomTextBox.y + this.bottomTextBox.height - 20, 0, 0, 13, 12, 13, 12);
 			}
@@ -179,7 +179,7 @@ public class GuiDialogViewer extends GuiViewer implements IDialogChangeListener
 	}
 
 	@Override
-	protected void actionPerformed(final GuiButton button)
+	protected void actionPerformed(final Button button)
 	{
 		if (button instanceof GuiDialogButton)
 		{
@@ -189,7 +189,7 @@ public class GuiDialogViewer extends GuiViewer implements IDialogChangeListener
 
 			if (this.controller.getCurrentScene() == null)
 			{
-				Minecraft.getMinecraft().displayGuiScreen(null);
+				Minecraft.getInstance().displayGuiScreen(null);
 			}
 		}
 	}
@@ -319,7 +319,7 @@ public class GuiDialogViewer extends GuiViewer implements IDialogChangeListener
 				this.renderer.setup(this.slide);
 			}
 
-			this.fontRenderer = Minecraft.getMinecraft().fontRenderer;
+			this.fontRenderer = Minecraft.getInstance().fontRenderer;
 
 			final boolean topText = this.controller.isNodeFinished() && this.controller.getCurrentNode().getButtons().size() > 0;
 
@@ -331,7 +331,7 @@ public class GuiDialogViewer extends GuiViewer implements IDialogChangeListener
 					this.height - (topText ? 122 + this.topTextBox.getTextHeight(this.fontRenderer) : 107),
 					this.fontRenderer.getStringWidth(name + 10), 20);
 
-			final ITextComponent textComponent = new TextComponentTranslation(name);
+			final ITextComponent textComponent = new TranslationTextComponent(name);
 			textComponent.setStyle(new Style().setColor(TextFormatting.YELLOW).setItalic(true));
 
 			this.namePlate.setText(textComponent);

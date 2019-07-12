@@ -6,14 +6,14 @@ import com.gildedgames.aether.common.items.weapons.swords.ItemAetherSword;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraft.item.ItemTool;
+import net.minecraft.item.ToolItem;
 
 public class AltarRepairRecipe implements IAltarRecipe
 {
 	@Override
 	public boolean matchesInput(final ItemStack stack)
 	{
-		return (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemTool || stack.getItem() instanceof ItemArmor)
+		return (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ToolItem || stack.getItem() instanceof ItemArmor)
 				&& stack.isItemDamaged();
 	}
 
@@ -30,9 +30,9 @@ public class AltarRepairRecipe implements IAltarRecipe
 		{
 			return 6;
 		}
-		else if (stack.getItem() instanceof ItemTool)
+		else if (stack.getItem() instanceof ToolItem)
 		{
-			final ItemTool tool = (ItemTool) stack.getItem();
+			final ToolItem tool = (ToolItem) stack.getItem();
 
 			switch (tool.getToolMaterialName())
 			{

@@ -21,13 +21,15 @@ import com.gildedgames.orbis.lib.client.rect.Dim2D;
 import com.gildedgames.orbis.lib.client.rect.Pos2D;
 import com.gildedgames.orbis.lib.util.InputHelper;
 import com.google.common.collect.Lists;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.gui.*;
-import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.gui.widget.TextFieldWidget;
+import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Slot;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
@@ -80,7 +82,7 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 
 	private GuiFlatButton lockStateButton, confirmButton;
 
-	private GuiTextField textField;
+	private TextFieldWidget textField;
 
 	private boolean pressLongEnough, rightArrowHeld, leftArrowHeld, labelUpdated;
 
@@ -88,7 +90,7 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 
 	private double transferCoins, viewValue;
 
-	public GuiTrade(GuiViewer prevViewer, EntityPlayer player)
+	public GuiTrade(GuiViewer prevViewer, PlayerEntity player)
 	{
 		super(new GuiElement(Dim2D.flush(), false), prevViewer, new ContainerTrade(player.inventory));
 
@@ -134,7 +136,8 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 
 				for (int i = GuiTrade.this.module.getTradeSlots(); i < 16; i++)
 				{
-					Gui.drawModalRectWithCustomSizedTexture(GuiTrade.this.guiLeft + 199 + (i % 4) * 18, GuiTrade.this.height - 183 + (i / 4) * 18, 0, 0, 18, 18, 18, 18);
+					AbstractGui
+							.drawModalRectWithCustomSizedTexture(GuiTrade.this.guiLeft + 199 + (i % 4) * 18, GuiTrade.this.height - 183 + (i / 4) * 18, 0, 0, 18, 18, 18, 18);
 				}
 
 				GlStateManager.popMatrix();
@@ -154,7 +157,8 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 
 				for (int i = GuiTrade.this.module.getOpenSlots(); i < 16; i++)
 				{
-					Gui.drawModalRectWithCustomSizedTexture(GuiTrade.this.guiLeft + 292 + (i % 4) * 18, GuiTrade.this.height - 183 + (i / 4) * 18, 0, 0, 18, 18, 18, 18);
+					AbstractGui
+							.drawModalRectWithCustomSizedTexture(GuiTrade.this.guiLeft + 292 + (i % 4) * 18, GuiTrade.this.height - 183 + (i / 4) * 18, 0, 0, 18, 18, 18, 18);
 				}
 
 				GlStateManager.popMatrix();
@@ -181,9 +185,9 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 		final String nameOther = I18n.format("aether.trade.gui.thirdtrade", "");
 		final String status = I18n.format("aether.trade.status.waitingboth");
 
-		final ITextComponent clientTextComp = new TextComponentTranslation(name);
-		final ITextComponent traderTextComp = new TextComponentTranslation(nameOther);
-		final ITextComponent statusComp = new TextComponentTranslation(status);
+		final ITextComponent clientTextComp = new TranslationTextComponent(name);
+		final ITextComponent traderTextComp = new TranslationTextComponent(nameOther);
+		final ITextComponent statusComp = new TranslationTextComponent(status);
 
 		this.tradePlate = new GuiTextBox(0, (int) center.x() + 104, this.height - 229, 86, 15);
 		this.tradeStatus = new GuiTextBox(0, this.width - 88, this.height - 60, 76, 40);
@@ -213,7 +217,7 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 		this.confirmButton = new GuiFlatButton(2, this.width - 88, this.height - 17, 37, 15, unlockText);
 		this.confirmButton.enabled = false;
 
-		this.textField = new GuiTextField(0, this.fontRenderer, 4, this.height - 12, this.width - 104, 12);
+		this.textField = new TextFieldWidget(0, this.fontRenderer, 4, this.height - 12, this.width - 104, 12);
 		this.textField.setMaxStringLength(256);
 		this.textField.setEnableBackgroundDrawing(false);
 
@@ -235,14 +239,14 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 
 			NetworkingAether.sendPacketToServer(new PacketTradeMessage(text));
 
-			this.sendTradeMessage(this.playerAether.getEntity(), new TextComponentString(this.textField.getText()));
+			this.sendTradeMessage(this.playerAether.getEntity(), new StringTextComponent(this.textField.getText()));
 			this.textField.setText("");
 		}
 	}
 
-	public void sendTradeMessage(EntityPlayer sender, ITextComponent textComponent)
+	public void sendTradeMessage(PlayerEntity sender, ITextComponent textComponent)
 	{
-		ITextComponent name = new TextComponentString("<" + sender.getDisplayNameString() + "> ");
+		ITextComponent name = new StringTextComponent("<" + sender.getDisplayNameString() + "> ");
 
 		this.sendMessage(name.appendSibling(textComponent));
 	}
@@ -399,7 +403,7 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 	@Override
 	public void drawScreen(final int mouseX, final int mouseY, final float partialTicks)
 	{
-		Gui.drawRect(0, this.height - 90, this.width, this.height, Integer.MIN_VALUE);
+		AbstractGui.drawRect(0, this.height - 90, this.width, this.height, Integer.MIN_VALUE);
 
 		if (!this.labelUpdated)
 		{
@@ -472,8 +476,8 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 			this.tradeTab.setCurrencyValue(this.transferCoins);
 		}
 
-		Gui.drawRect(2, this.height - 14, this.width - 102, this.height - 2, Integer.MIN_VALUE);
-		Gui.drawRect(2, this.height - 80, this.width - 102, this.height - 16, Integer.MIN_VALUE);
+		AbstractGui.drawRect(2, this.height - 14, this.width - 102, this.height - 2, Integer.MIN_VALUE);
+		AbstractGui.drawRect(2, this.height - 80, this.width - 102, this.height - 16, Integer.MIN_VALUE);
 
 		this.textField.drawTextBox();
 
@@ -546,7 +550,7 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 
 	private void drawItemStack(ItemStack stack, int x, int y)
 	{
-		GlStateManager.translate(0.0F, 0.0F, 32.0F);
+		GlStateManager.translatef(0.0F, 0.0F, 32.0F);
 
 		this.zLevel = 200.0F;
 		this.itemRender.zLevel = 200.0F;
@@ -572,7 +576,7 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton button)
+	protected void actionPerformed(Button button)
 	{
 		boolean locked = this.module.isLockedIn();
 
@@ -646,7 +650,7 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 		this.confirmButton.enabled = state >= 3 && state < 5;
 
 		final String status = I18n.format("aether.trade.status." + append);
-		final ITextComponent statusComp = new TextComponentTranslation(status);
+		final ITextComponent statusComp = new TranslationTextComponent(status);
 
 		statusComp.setStyle(new Style().setColor(state == -1 ? TextFormatting.RED : TextFormatting.YELLOW));
 
@@ -660,7 +664,7 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 		if (target != null)
 		{
 			final String nameOther = I18n.format("aether.trade.gui.thirdtrade", target.getEntity().getDisplayNameString());
-			final ITextComponent traderTextComp = new TextComponentTranslation(nameOther);
+			final ITextComponent traderTextComp = new TranslationTextComponent(nameOther);
 
 			traderTextComp.setStyle(new Style().setColor(TextFormatting.YELLOW).setItalic(true));
 

@@ -26,15 +26,15 @@ import com.gildedgames.orbis.lib.client.rect.Dim2D;
 import com.gildedgames.orbis.lib.client.rect.Pos2D;
 import com.gildedgames.orbis.lib.util.InputHelper;
 import com.google.common.collect.Lists;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.config.GuiUtils;
@@ -125,7 +125,7 @@ public class ContainerShop extends GuiViewer implements ICurrencyListener, IExte
 
 	private com.gildedgames.orbis.lib.client.gui.util.GuiTextBox holidayNoticeText;
 
-	public ContainerShop(GuiViewer prevViewer, EntityPlayer player, IDialogSlide slide, IDialogSlideRenderer renderer, IShopInstance shopInstance, int shopIndex)
+	public ContainerShop(GuiViewer prevViewer, PlayerEntity player, IDialogSlide slide, IDialogSlideRenderer renderer, IShopInstance shopInstance, int shopIndex)
 	{
 		super(new GuiElement(Dim2D.flush(), false), prevViewer, new com.gildedgames.aether.common.containers.ContainerShop(player.inventory, shopInstance));
 
@@ -179,7 +179,7 @@ public class ContainerShop extends GuiViewer implements ICurrencyListener, IExte
 		this.holidayIcon = new GuiTexture(Dim2D.build().width(14).height(16).x(8).y(18).flush(), HOLIDAY_ICON);
 
 		this.holidayNoticeText = new com.gildedgames.orbis.lib.client.gui.util.GuiTextBox(Dim2D.build().width(80).height(40).x(27).y(17).flush(), false,
-				new Text(new TextComponentTranslation("edison.shop.holiday_notice"), 1.0F));
+				new Text(new TranslationTextComponent("edison.shop.holiday_notice"), 1.0F));
 
 		this.sellCoins = this.shopInstance.getCurrencyType()
 				.createSellItemCurrencyValueGui(Dim2D.build().center(true).pos(center).y(this.height).addX(23).addY(-197).flush());
@@ -233,7 +233,7 @@ public class ContainerShop extends GuiViewer implements ICurrencyListener, IExte
 
 		String greeting = MathUtil.getRandomElement(this.shopInstance.getUnlocalizedGreetings(), new Random());
 
-		this.npcGreeting.setText(new TextComponentTranslation(greeting));
+		this.npcGreeting.setText(new TranslationTextComponent(greeting));
 
 		this.buyTitle = new com.gildedgames.orbis.lib.client.gui.util.GuiTextBox(
 				Dim2D.build().centerX(true).pos(center).width(60).height(50).y(this.height).addX(-178).addY(-40).flush(), true);
@@ -387,22 +387,22 @@ public class ContainerShop extends GuiViewer implements ICurrencyListener, IExte
 
 		GlStateManager.disableDepth();
 
-		GlStateManager.translate(0, 0, 100F);
+		GlStateManager.translatef(0, 0, 100F);
 		GlStateManager.color(1.0F, 1.0F, 1.0F);
 
 		if (this.slide != null && this.renderer != null)
 		{
 			GlStateManager.pushMatrix();
 
-			GlStateManager.translate(-100F, 0F, 0F);
+			GlStateManager.translatef(-100F, 0F, 0F);
 
 			this.renderer.draw(this.slide, this.width, this.height, mouseX, mouseY, partialTicks);
 			GlStateManager.popMatrix();
 		}
 
-		GlStateManager.translate(0, 0, 100F);
+		GlStateManager.translatef(0, 0, 100F);
 
-		Gui.drawRect(0, this.height - 90, this.width, this.height, Integer.MIN_VALUE);
+		AbstractGui.drawRect(0, this.height - 90, this.width, this.height, Integer.MIN_VALUE);
 
 		super.drawScreen(mouseX, mouseY, partialTicks);
 
@@ -416,13 +416,13 @@ public class ContainerShop extends GuiViewer implements ICurrencyListener, IExte
 			{
 				GuiUtils.preItemToolTip(this.hoveredStack);
 				GuiUtils.drawHoveringText(this.hoverDescription, mouseX, mouseY, width, height, -1,
-						Minecraft.getMinecraft().fontRenderer);
+						Minecraft.getInstance().fontRenderer);
 				GuiUtils.postItemToolTip();
 			}
 			else
 			{
 				GuiUtils.drawHoveringText(this.hoverDescription, mouseX, mouseY, width, height, -1,
-						Minecraft.getMinecraft().fontRenderer);
+						Minecraft.getInstance().fontRenderer);
 			}
 		}
 
@@ -430,7 +430,7 @@ public class ContainerShop extends GuiViewer implements ICurrencyListener, IExte
 		{
 			GuiUtils
 					.drawHoveringText(Lists.newArrayList(I18n.format("aether.shop.lockTooltip")), mouseX, mouseY, this.width, this.height, 120,
-							Minecraft.getMinecraft().fontRenderer);
+							Minecraft.getInstance().fontRenderer);
 		}
 
 		this.hoverDescription = null;
@@ -512,7 +512,7 @@ public class ContainerShop extends GuiViewer implements ICurrencyListener, IExte
 
 			String chosenDesc = MathUtil.getRandomElement(this.getSelectedBuy().getUnlocalizedDescriptions(), new Random());
 
-			this.npcDialogue.setText(new TextComponentTranslation(chosenDesc));
+			this.npcDialogue.setText(new TranslationTextComponent(chosenDesc));
 
 			this.prevBuy = this.selectedBuy;
 

@@ -7,16 +7,16 @@ import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketSpecialMovement;
 import com.gildedgames.aether.common.util.helpers.AetherHelper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.api.distmarker.Dist;
 import org.lwjgl.input.Keyboard;
 
-@Mod.EventBusSubscriber(Side.CLIENT)
+@Mod.EventBusSubscriber(Dist.CLIENT)
 public class RenderCameraSetupListener
 {
 
@@ -31,12 +31,12 @@ public class RenderCameraSetupListener
 	@SubscribeEvent
 	public static void onEvent(EntityViewRenderEvent.FOVModifier event)
 	{
-		if (!(event.getEntity() instanceof EntityPlayer))
+		if (!(event.getEntity() instanceof PlayerEntity))
 		{
 			return;
 		}
 
-		PlayerAether playerAether = PlayerAether.getPlayer((EntityPlayer) event.getEntity());
+		PlayerAether playerAether = PlayerAether.getPlayer((PlayerEntity) event.getEntity());
 
 		PlayerRollMovementModule module = playerAether.getModule(PlayerRollMovementModule.class);
 
@@ -67,12 +67,12 @@ public class RenderCameraSetupListener
 	@SubscribeEvent
 	public static void onEvent(EntityViewRenderEvent.CameraSetup event)
 	{
-		if (!(event.getEntity() instanceof EntityPlayer))
+		if (!(event.getEntity() instanceof PlayerEntity))
 		{
 			return;
 		}
 
-		PlayerAether playerAether = PlayerAether.getPlayer((EntityPlayer) event.getEntity());
+		PlayerAether playerAether = PlayerAether.getPlayer((PlayerEntity) event.getEntity());
 
 		PlayerRollMovementModule module = playerAether.getModule(PlayerRollMovementModule.class);
 

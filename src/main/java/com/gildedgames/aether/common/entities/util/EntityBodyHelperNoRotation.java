@@ -1,13 +1,13 @@
 package com.gildedgames.aether.common.entities.util;
 
 import net.minecraft.entity.EntityBodyHelper;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 
 public class EntityBodyHelperNoRotation extends EntityBodyHelper
 {
-	private final EntityLivingBase living;
+	private final LivingEntity living;
 
-	public EntityBodyHelperNoRotation(EntityLivingBase livingIn)
+	public EntityBodyHelperNoRotation(LivingEntity livingIn)
 	{
 		super(livingIn);
 

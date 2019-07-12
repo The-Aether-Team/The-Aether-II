@@ -3,8 +3,8 @@ package com.gildedgames.aether.common.world.preparation;
 import com.gildedgames.aether.api.world.preparation.*;
 import com.gildedgames.aether.common.world.preparation.mask.ChunkMask;
 import com.gildedgames.orbis.lib.util.ChunkMap;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.nbt.INBT;
+import net.minecraft.util.Direction;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 
@@ -67,13 +67,13 @@ public class PrepChunkManager<T extends IChunkInfo> implements IPrepChunkManager
 	{
 		@Nullable
 		@Override
-		public NBTBase writeNBT(final Capability<IPrepChunkManager> capability, final IPrepChunkManager instance, final EnumFacing side)
+		public INBT writeNBT(final Capability<IPrepChunkManager> capability, final IPrepChunkManager instance, final Direction side)
 		{
 			return null;
 		}
 
 		@Override
-		public void readNBT(final Capability<IPrepChunkManager> capability, final IPrepChunkManager instance, final EnumFacing side, final NBTBase nbt)
+		public void readNBT(final Capability<IPrepChunkManager> capability, final IPrepChunkManager instance, final Direction side, final INBT nbt)
 		{
 
 		}

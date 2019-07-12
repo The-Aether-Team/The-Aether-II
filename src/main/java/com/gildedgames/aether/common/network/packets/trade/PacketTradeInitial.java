@@ -5,7 +5,7 @@ import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTr
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 public class PacketTradeInitial implements IMessage
@@ -37,11 +37,11 @@ public class PacketTradeInitial implements IMessage
 	public static class HandlerClient extends MessageHandlerClient<PacketTradeInitial, IMessage>
 	{
 		@Override
-		public IMessage onMessage(PacketTradeInitial message, EntityPlayer player)
+		public IMessage onMessage(PacketTradeInitial message, PlayerEntity player)
 		{
 			Entity entity = player.world.getEntityByID(message.entityId);
 
-			if (!(entity instanceof EntityPlayer))
+			if (!(entity instanceof PlayerEntity))
 			{
 				throw new IllegalArgumentException("Entity is not a player");
 			}
@@ -51,7 +51,7 @@ public class PacketTradeInitial implements IMessage
 			PlayerTradeModule tradeModule = aePlayer.getModule(PlayerTradeModule.class);
 			tradeModule.clear();
 
-			PlayerAether target = PlayerAether.getPlayer((EntityPlayer) entity);
+			PlayerAether target = PlayerAether.getPlayer((PlayerEntity) entity);
 			target.getModule(PlayerTradeModule.class).clear();
 
 			tradeModule.setTarget(target);

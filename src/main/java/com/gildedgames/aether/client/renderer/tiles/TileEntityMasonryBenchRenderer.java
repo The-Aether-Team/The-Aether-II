@@ -3,7 +3,7 @@ package com.gildedgames.aether.client.renderer.tiles;
 import com.gildedgames.aether.client.models.entities.tile.ModelMasonryBench;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.tiles.TileEntityMasonryBench;
-import net.minecraft.client.renderer.GlStateManager;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
@@ -23,30 +23,30 @@ public class TileEntityMasonryBenchRenderer extends TileEntitySpecialRenderer<Ti
 		GlStateManager.pushMatrix();
 		GlStateManager.enableRescaleNormal();
 
-		GlStateManager.translate((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
-		GlStateManager.rotate(180f, 1f, 0f, 1f);
+		GlStateManager.translatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
+		GlStateManager.rotatef(180f, 1f, 0f, 1f);
 
 		if (te != null)
 		{
 			switch (te.getFacing())
 			{
 				case NORTH:
-					GlStateManager.rotate(270.0f, 0.0f, 1.0f, 0.0f);
+					GlStateManager.rotatef(270.0f, 0.0f, 1.0f, 0.0f);
 					break;
 				case WEST:
-					GlStateManager.rotate(180.0f, 0.0f, 1.0f, 0.0f);
+					GlStateManager.rotatef(180.0f, 0.0f, 1.0f, 0.0f);
 					break;
 				case SOUTH:
-					GlStateManager.rotate(90.0f, 0.0f, 1.0f, 0.0f);
+					GlStateManager.rotatef(90.0f, 0.0f, 1.0f, 0.0f);
 					break;
 				case EAST:
-					GlStateManager.rotate(0.0f, 0.0f, 1.0f, 0.0f);
+					GlStateManager.rotatef(0.0f, 0.0f, 1.0f, 0.0f);
 					break;
 			}
 		}
 		else
 		{
-			GlStateManager.rotate(180.0f, 0.0f, 1.0f, 0.0f);
+			GlStateManager.rotatef(180.0f, 0.0f, 1.0f, 0.0f);
 		}
 
 		if (destroyStage >= 0)
@@ -55,8 +55,8 @@ public class TileEntityMasonryBenchRenderer extends TileEntitySpecialRenderer<Ti
 
 			GlStateManager.matrixMode(5890);
 			GlStateManager.pushMatrix();
-			GlStateManager.scale(4.0F, 4.0F, 1.0F);
-			GlStateManager.translate(0.0625F, 0.0625F, 0.0625F);
+			GlStateManager.scalef(4.0F, 4.0F, 1.0F);
+			GlStateManager.translatef(0.0625F, 0.0625F, 0.0625F);
 			GlStateManager.matrixMode(5888);
 		}
 		else

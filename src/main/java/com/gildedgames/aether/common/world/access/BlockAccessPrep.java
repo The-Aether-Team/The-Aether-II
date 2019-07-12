@@ -2,12 +2,12 @@ package com.gildedgames.aether.common.world.access;
 
 import com.gildedgames.aether.api.world.preparation.*;
 import com.gildedgames.aether.common.world.preparation.PrepChunkManager;
-import com.gildedgames.orbis.lib.processing.IBlockAccessExtended;
-import net.minecraft.block.state.IBlockState;
+import com.gildedgames.orbis.lib.processing.IBlockAccess;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.Blocks;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
@@ -15,7 +15,7 @@ import net.minecraft.world.biome.Biome;
 
 import javax.annotation.Nullable;
 
-public abstract class BlockAccessPrep implements IBlockAccessExtended
+public abstract class BlockAccessPrep implements IBlockAccess
 {
 	protected IChunkMaskTransformer transformer;
 
@@ -72,13 +72,13 @@ public abstract class BlockAccessPrep implements IBlockAccessExtended
 	}
 
 	@Override
-	public boolean setBlockState(BlockPos pos, IBlockState state)
+	public boolean setBlockState(BlockPos pos, BlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean setBlockState(BlockPos pos, IBlockState state, int flags)
+	public boolean setBlockState(BlockPos pos, BlockState state, int flags)
 	{
 		return false;
 	}
@@ -109,7 +109,7 @@ public abstract class BlockAccessPrep implements IBlockAccessExtended
 	}
 
 	@Override
-	public IBlockState getBlockState(BlockPos pos)
+	public BlockState getBlockState(BlockPos pos)
 	{
 		IChunkMask chunk = this.getChunk(pos.getX() >> 4, pos.getZ() >> 4);
 
@@ -129,7 +129,7 @@ public abstract class BlockAccessPrep implements IBlockAccessExtended
 	}
 
 	@Override
-	public int getStrongPower(BlockPos pos, EnumFacing direction)
+	public int getStrongPower(BlockPos pos, Direction direction)
 	{
 		return 0;
 	}
@@ -141,7 +141,7 @@ public abstract class BlockAccessPrep implements IBlockAccessExtended
 	}
 
 	@Override
-	public boolean isSideSolid(BlockPos pos, EnumFacing side, boolean _default)
+	public boolean isSideSolid(BlockPos pos, Direction side, boolean _default)
 	{
 		return false;
 	}

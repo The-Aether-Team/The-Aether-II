@@ -22,12 +22,11 @@ import com.gildedgames.aether.common.util.helpers.MathUtil;
 import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.pathfinding.PathNavigator;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -66,21 +65,21 @@ public class EntityTaegore extends EntityAetherAnimal implements IEntityMultiPar
 	}
 
 	@Override
-	protected void initEntityAI()
+	protected void registerGoals()
 	{
-		super.initEntityAI();
+		super.registerGoals();
 
-		this.tasks.addTask(2, new EntityAIRestrictRain(this));
-		this.tasks.addTask(3, new EntityAIUnstuckBlueAercloud(this));
-		this.tasks.addTask(3, new EntityAIHideFromRain(this, 1.3D));
-		this.tasks.addTask(3, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
-		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
-		this.tasks.addTask(3, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
-		this.tasks.addTask(4, new EntityAIFollowParent(this, 1.25D));
-		this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
-		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		this.tasks.addTask(7, new EntityAILookIdle(this));
+		this.goalSelector.addGoal(2, new EntityAIRestrictRain(this));
+		this.goalSelector.addGoal(3, new EntityAIUnstuckBlueAercloud(this));
+		this.goalSelector.addGoal(3, new EntityAIHideFromRain(this, 1.3D));
+		this.goalSelector.addGoal(3, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
+		this.goalSelector.addGoal(0, new EntityAISwimming(this));
+		this.goalSelector.addGoal(2, new EntityAIMate(this, 1.0D));
+		this.goalSelector.addGoal(3, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
+		this.goalSelector.addGoal(4, new EntityAIFollowParent(this, 1.25D));
+		this.goalSelector.addGoal(5, new EntityAIWander(this, 1.0D));
+		this.goalSelector.addGoal(6, new EntityAIWatchClosest(this, PlayerEntity.class, 6.0F));
+		this.goalSelector.addGoal(7, new EntityAILookIdle(this));
 	}
 
 	@Override
@@ -110,7 +109,7 @@ public class EntityTaegore extends EntityAetherAnimal implements IEntityMultiPar
 	}
 
 	@Override
-	protected PathNavigate createNavigator(final World worldIn)
+	protected PathNavigator createNavigator(final World worldIn)
 	{
 		return new AetherNavigateGround(this, worldIn);
 	}
@@ -122,26 +121,26 @@ public class EntityTaegore extends EntityAetherAnimal implements IEntityMultiPar
 	}
 
 	@Override
-	protected void applyEntityAttributes()
+	protected void registerAttributes()
 	{
-		super.applyEntityAttributes();
+		super.registerAttributes();
 
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
+		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
 
-		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(8);
-		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(5);
-		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(2);
+		this.getAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(8);
+		this.getAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(5);
+		this.getAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(2);
 	}
 
 	@Override
-	public void setAttackTarget(@Nullable final EntityLivingBase entitylivingbaseIn)
+	public void setAttackTarget(@Nullable final LivingEntity entitylivingbaseIn)
 	{
 		super.setAttackTarget(entitylivingbaseIn);
 	}
 
 	@Override
-	public EntityTaegore createChild(final EntityAgeable ageable)
+	public EntityTaegore createChild(final AgeableEntity ageable)
 	{
 		return new EntityTaegore(this.world);
 	}
@@ -213,22 +212,22 @@ public class EntityTaegore extends EntityAetherAnimal implements IEntityMultiPar
 
 		if (this.getAttackingEntity() != null)
 		{
-			if (this.getAttackingEntity() instanceof EntityPlayer)
+			if (this.getAttackingEntity() instanceof PlayerEntity)
 			{
-				final PlayerAether player = PlayerAether.getPlayer((EntityPlayer) this.getAttackingEntity());
+				final PlayerAether player = PlayerAether.getPlayer((PlayerEntity) this.getAttackingEntity());
 				if (player.getEntity().isCreative())
 				{
 					return;
 				}
 			}
-			this.tasks.addTask(3, this.AIAttackMelee);
+			this.goalSelector.addGoal(3, this.AIAttackMelee);
 			this.updateAITasks();
 		}
 		this.setAttackTarget(this.getAttackingEntity());
 
 		if (this.getHealth() < 4F)
 		{
-			this.tasks.addTask(0, this.AIPanic);
+			this.goalSelector.addGoal(0, this.AIPanic);
 			this.tasks.removeTask(this.AIAttackMelee);
 			this.updateAITasks();
 		}
@@ -250,9 +249,9 @@ public class EntityTaegore extends EntityAetherAnimal implements IEntityMultiPar
 	@Override
 	protected void applyStatusEffectOnAttack(final Entity target)
 	{
-		if (target instanceof EntityLivingBase)
+		if (target instanceof LivingEntity)
 		{
-			final EntityLivingBase living = (EntityLivingBase) target;
+			final LivingEntity living = (LivingEntity) target;
 
 			if (!living.isActiveItemStackBlocking())
 			{

@@ -7,20 +7,20 @@ import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketUpdatePrecipitation;
 import com.gildedgames.aether.common.world.biomes.BiomeAetherBase;
 import com.gildedgames.aether.common.world.biomes.ISnowyBiome;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.block.BlockState;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.INBT;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
+import net.minecraft.world.ServerWorld;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.storage.WorldInfo;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -178,7 +178,7 @@ public class PrecipitationManagerImpl implements IPrecipitationManager
 			return;
 		}
 
-		Iterator<Chunk> iterator = this.world.getPersistentChunkIterable(((WorldServer) this.world).getPlayerChunkMap().getChunkIterator());
+		Iterator<Chunk> iterator = this.world.getPersistentChunkIterable(((ServerWorld) this.world).getPlayerChunkMap().getChunkIterator());
 
 		while (iterator.hasNext())
 		{
@@ -226,11 +226,11 @@ public class PrecipitationManagerImpl implements IPrecipitationManager
 				}
 				else
 				{
-					IBlockState topState = this.world.getBlockState(topBlockPos);
+					BlockState topState = this.world.getBlockState(topBlockPos);
 
 					if (topState.getBlock() instanceof IBlockSnowy)
 					{
-						final IBlockState newState = topState.withProperty(IBlockSnowy.PROPERTY_SNOWY, Boolean.TRUE);
+						final BlockState newState = topState.withProperty(IBlockSnowy.PROPERTY_SNOWY, Boolean.TRUE);
 
 						this.world.setBlockState(topBlockPos, newState, 2);
 					}
@@ -273,7 +273,7 @@ public class PrecipitationManagerImpl implements IPrecipitationManager
 		this.sendUpdates();
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	@Override
 	public float getSkyDarkness()
 	{
@@ -319,19 +319,19 @@ public class PrecipitationManagerImpl implements IPrecipitationManager
 	}
 
 	@Override
-	public NBTTagCompound serializeNBT()
+	public CompoundNBT serializeNBT()
 	{
-		NBTTagCompound tag = new NBTTagCompound();
-		tag.setString("Strength", this.strength.name());
-		tag.setLong("TicksUntilStrengthChange", this.ticksUntilStrengthChange);
-		tag.setFloat("WindX", this.windVector.x);
-		tag.setFloat("WindY", this.windVector.y);
+		CompoundNBT tag = new CompoundNBT();
+		tag.putString("Strength", this.strength.name());
+		tag.putLong("TicksUntilStrengthChange", this.ticksUntilStrengthChange);
+		tag.putFloat("WindX", this.windVector.x);
+		tag.putFloat("WindY", this.windVector.y);
 
 		return tag;
 	}
 
 	@Override
-	public void deserializeNBT(NBTTagCompound nbt)
+	public void deserializeNBT(CompoundNBT nbt)
 	{
 		this.strength = PrecipitationStrength.lookup(nbt.getString("Strength"));
 		this.ticksUntilStrengthChange = nbt.getLong("TicksUntilStrengthChange");
@@ -342,15 +342,15 @@ public class PrecipitationManagerImpl implements IPrecipitationManager
 	{
 		@Nullable
 		@Override
-		public NBTBase writeNBT(Capability<IPrecipitationManager> capability, IPrecipitationManager instance, EnumFacing side)
+		public INBT writeNBT(Capability<IPrecipitationManager> capability, IPrecipitationManager instance, Direction side)
 		{
 			return instance.serializeNBT();
 		}
 
 		@Override
-		public void readNBT(Capability<IPrecipitationManager> capability, IPrecipitationManager instance, EnumFacing side, NBTBase nbt)
+		public void readNBT(Capability<IPrecipitationManager> capability, IPrecipitationManager instance, Direction side, INBT nbt)
 		{
-			instance.deserializeNBT((NBTTagCompound) nbt);
+			instance.deserializeNBT((CompoundNBT) nbt);
 		}
 	}
 }

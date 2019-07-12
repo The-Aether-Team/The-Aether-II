@@ -9,25 +9,27 @@ import com.gildedgames.aether.common.init.LootTablesAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketAerbunnySetRiding;
 import com.google.common.collect.Sets;
+import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
+import net.minecraft.entity.ai.controller.JumpController;
+import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.Set;
@@ -38,31 +40,31 @@ public class EntityAerbunny extends EntityAetherAnimal
 			.newHashSet(Items.CARROT, Items.POTATO, Items.BEETROOT, ItemsAether.blueberries, ItemsAether.orange, ItemsAether.enchanted_blueberry,
 					ItemsAether.enchanted_wyndberry, ItemsAether.wyndberry);
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	private double prevMotionY;
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	private int puffiness;
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	private float curRotation;
 
 	public EntityAerbunny(final World world)
 	{
 		super(world);
 
-		this.tasks.addTask(2, new EntityAIRestrictRain(this));
-		this.tasks.addTask(3, new EntityAIUnstuckBlueAercloud(this));
-		this.tasks.addTask(3, new EntityAIHideFromRain(this, 1.3D));
-		this.tasks.addTask(1, new EntityAISwimming(this));
-		this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
-		this.tasks.addTask(3, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
-		this.tasks.addTask(3, new EntityAIEggnogTempt(this, 2.2D));
-		this.tasks.addTask(4, new EntityAIAvoidEntity<>(this, EntityPlayer.class, 12.0F, 1.2F, 1.8F));
-		this.tasks.addTask(5, new EntityAIWander(this, 1.0D, 10));
-		this.tasks.addTask(11, new EntityAIWatchClosest(this, EntityPlayer.class, 10.0F));
+		this.goalSelector.addGoal(2, new EntityAIRestrictRain(this));
+		this.goalSelector.addGoal(3, new EntityAIUnstuckBlueAercloud(this));
+		this.goalSelector.addGoal(3, new EntityAIHideFromRain(this, 1.3D));
+		this.goalSelector.addGoal(1, new SwimGoal(this));
+		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
+		this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, false, TEMPTATION_ITEMS));
+		this.goalSelector.addGoal(3, new EntityAIEggnogTempt(this, 2.2D));
+		this.goalSelector.addGoal(4, new AvoidEntityGoal<>(this, PlayerEntity.class, 12.0F, 1.2F, 1.8F));
+		this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 1.0D, 10));
+		this.goalSelector.addGoal(11, new LookAtGoal(this, PlayerEntity.class, 10.0F));
 
-		this.jumpHelper = new AerbunnyJumpHelper(this);
+		this.jumpController = new AerbunnyJumpHelper(this);
 
 		this.spawnableBlock = BlocksAether.aether_grass;
 
@@ -76,27 +78,27 @@ public class EntityAerbunny extends EntityAetherAnimal
 	}
 
 	@Override
-	protected void applyEntityAttributes()
+	protected void registerAttributes()
 	{
-		super.applyEntityAttributes();
+		super.registerAttributes();
 
-		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(3.0D);
+		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(3.0D);
 
-		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(2);
-		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(4);
-		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(4);
+		this.getAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(2);
+		this.getAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(4);
+		this.getAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(4);
 	}
 
 	@Override
-	public void onUpdate()
+	public void livingTick()
 	{
 		if (this.motionX != 0 || this.motionZ != 0)
 		{
 			this.setJumping(true);
 		}
 
-		super.onUpdate();
+		super.livingTick();
 
 		if (this.world.isRemote)
 		{
@@ -152,7 +154,7 @@ public class EntityAerbunny extends EntityAetherAnimal
 	}
 
 	@Override
-	public boolean processInteract(final EntityPlayer player, final EnumHand hand)
+	public boolean processInteract(final PlayerEntity player, final Hand hand)
 	{
 		final ItemStack stack = player.getHeldItem(hand);
 
@@ -209,24 +211,24 @@ public class EntityAerbunny extends EntityAetherAnimal
 	}
 
 	@Override
-	protected PathNavigate createNavigator(final World worldIn)
+	protected PathNavigator createNavigator(final World worldIn)
 	{
 		return new AerbunnyNavigator(this, worldIn);
 	}
 
 	@Override
-	public EntityAgeable createChild(final EntityAgeable ageable)
+	public AgeableEntity createChild(final AgeableEntity ageable)
 	{
 		return new EntityAerbunny(this.world);
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public int getPuffiness()
 	{
 		return this.puffiness;
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public float getRotation()
 	{
 		if (this.motionY > 0)
@@ -266,9 +268,9 @@ public class EntityAerbunny extends EntityAetherAnimal
 		return !this.isRiding() && super.isEntityInsideOpaqueBlock();
 	}
 
-	private class AerbunnyJumpHelper extends EntityJumpHelper
+	private class AerbunnyJumpHelper extends JumpController
 	{
-		private final EntityLiving entity;
+		private final MobEntity entity;
 
 		public AerbunnyJumpHelper(final EntityAerbunny entity)
 		{
@@ -292,7 +294,7 @@ public class EntityAerbunny extends EntityAetherAnimal
 
 	private class AerbunnyNavigator extends AetherNavigateGround
 	{
-		public AerbunnyNavigator(final EntityLiving entity, final World world)
+		public AerbunnyNavigator(final MobEntity entity, final World world)
 		{
 			super(entity, world);
 		}

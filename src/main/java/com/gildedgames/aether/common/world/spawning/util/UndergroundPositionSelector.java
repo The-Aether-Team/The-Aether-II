@@ -2,8 +2,8 @@ package com.gildedgames.aether.common.world.spawning.util;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.world.spawn.IPositionSelector;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.block.BlockState;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -36,7 +36,7 @@ public class UndergroundPositionSelector implements IPositionSelector
 
 			if (blockFlag && airFlag)
 			{
-				IBlockState state = world.getBlockState(pos);
+				BlockState state = world.getBlockState(pos);
 
 				if (state.isFullBlock() && state.getBlock() != BlocksAether.aether_grass)
 				{
@@ -44,7 +44,7 @@ public class UndergroundPositionSelector implements IPositionSelector
 				}
 			}
 
-			pos.move(EnumFacing.DOWN);
+			pos.move(Direction.DOWN);
 		}
 
 		return pos.getY() + 1;

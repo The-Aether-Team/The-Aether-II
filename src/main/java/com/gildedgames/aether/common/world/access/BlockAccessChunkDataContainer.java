@@ -1,12 +1,12 @@
 package com.gildedgames.aether.common.world.access;
 
 import com.gildedgames.aether.common.world.preparation.mask.ChunkDataContainer;
-import com.gildedgames.orbis.lib.processing.IBlockAccessExtended;
-import net.minecraft.block.state.IBlockState;
+import com.gildedgames.orbis.lib.processing.IBlockAccess;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
@@ -14,7 +14,7 @@ import net.minecraft.world.biome.Biome;
 
 import javax.annotation.Nullable;
 
-public class BlockAccessChunkDataContainer implements IBlockAccessExtended
+public class BlockAccessChunkDataContainer implements IBlockAccess
 {
 	private final World world;
 
@@ -85,7 +85,7 @@ public class BlockAccessChunkDataContainer implements IBlockAccessExtended
 	}
 
 	@Override
-	public boolean setBlockState(final BlockPos pos, final IBlockState state)
+	public boolean setBlockState(final BlockPos pos, final BlockState state)
 	{
 		this.container.setBlockState(pos.getX() - this.offsetX, pos.getY(), pos.getZ() - this.offsetZ, state);
 
@@ -93,7 +93,7 @@ public class BlockAccessChunkDataContainer implements IBlockAccessExtended
 	}
 
 	@Override
-	public boolean setBlockState(final BlockPos pos, final IBlockState state, final int flags)
+	public boolean setBlockState(final BlockPos pos, final BlockState state, final int flags)
 	{
 		this.container.setBlockState(pos.getX() - this.offsetX, pos.getY(), pos.getZ() - this.offsetZ, state);
 
@@ -126,7 +126,7 @@ public class BlockAccessChunkDataContainer implements IBlockAccessExtended
 	}
 
 	@Override
-	public IBlockState getBlockState(final BlockPos pos)
+	public BlockState getBlockState(final BlockPos pos)
 	{
 		return this.container.getBlockState(pos.getX() - this.offsetX, pos.getY(), pos.getZ() - this.offsetZ);
 	}
@@ -144,7 +144,7 @@ public class BlockAccessChunkDataContainer implements IBlockAccessExtended
 	}
 
 	@Override
-	public int getStrongPower(final BlockPos pos, final EnumFacing direction)
+	public int getStrongPower(final BlockPos pos, final Direction direction)
 	{
 		return this.world.getStrongPower(pos, direction);
 	}
@@ -156,7 +156,7 @@ public class BlockAccessChunkDataContainer implements IBlockAccessExtended
 	}
 
 	@Override
-	public boolean isSideSolid(final BlockPos pos, final EnumFacing side, final boolean _default)
+	public boolean isSideSolid(final BlockPos pos, final Direction side, final boolean _default)
 	{
 		return this.world.isSideSolid(pos, side, _default);
 	}

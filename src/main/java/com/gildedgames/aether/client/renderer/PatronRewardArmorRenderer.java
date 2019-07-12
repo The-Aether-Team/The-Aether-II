@@ -12,15 +12,15 @@ import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerEq
 import com.gildedgames.aether.common.patron.armor.PatronRewardArmor;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import com.gildedgames.orbis.lib.util.InputHelper;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.AbstractClientPlayer;
-import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
-import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class PatronRewardArmorRenderer implements IPatronRewardRenderer
 {
 	private final PatronRewardArmor reward;
 
-	private AbstractClientPlayer player;
+	private AbstractClientPlayerEntity player;
 
 	private PlayerAether playerAether;
 
@@ -73,10 +73,10 @@ public class PatronRewardArmorRenderer implements IPatronRewardRenderer
 	@Override
 	public void renderInit()
 	{
-		this.player = Minecraft.getMinecraft().player;
+		this.player = Minecraft.getInstance().player;
 		this.playerAether = PlayerAether.getPlayer(this.player);
 
-		this.renderPlayer = new RenderPlayer(Minecraft.getMinecraft().getRenderManager(), EntityUtil.getSkin(this.player).equals("slim"));
+		this.renderPlayer = new RenderPlayer(Minecraft.getInstance().getRenderManager(), EntityUtil.getSkin(this.player).equals("slim"));
 
 		List<LayerRenderer<?>> original = new ArrayList<>(this.renderPlayer.layerRenderers);
 		List<LayerRenderer<?>> updated = new ArrayList<>();
@@ -111,11 +111,11 @@ public class PatronRewardArmorRenderer implements IPatronRewardRenderer
 		double mouseX = posX - InputHelper.getMouseX();
 		double mouseY = posY - InputHelper.getMouseY() - 42;
 
-		GlStateManager.translate((float) posX, (float) posY, 50.0F);
+		GlStateManager.translatef((float) posX, (float) posY, 50.0F);
 
-		GlStateManager.scale(4.0, 4.0, 4.0);
+		GlStateManager.scalef(4.0f, 4.0f, 4.0f);
 
-		GlStateManager.rotate(180.0F, 0.0F, 0.0F, 1.0F);
+		GlStateManager.rotatef(180.0F, 0.0F, 0.0F, 1.0F);
 
 		float f = this.player.renderYawOffset;
 		float f1 = this.player.rotationYaw;
@@ -123,12 +123,12 @@ public class PatronRewardArmorRenderer implements IPatronRewardRenderer
 		float f3 = this.player.prevRotationYawHead;
 		float f4 = this.player.rotationYawHead;
 
-		GlStateManager.rotate(135.0F, 0.0F, 1.0F, 0.0F);
+		GlStateManager.rotatef(135.0F, 0.0F, 1.0F, 0.0F);
 
 		RenderHelper.enableStandardItemLighting();
 
-		GlStateManager.rotate(-135.0F, 0.0F, 1.0F, 0.0F);
-		GlStateManager.rotate(-((float) Math.atan(mouseY / 40.0F)) * 20.0F, 1.0F, 0.0F, 0.0F);
+		GlStateManager.rotatef(-135.0F, 0.0F, 1.0F, 0.0F);
+		GlStateManager.rotatef(-((float) Math.atan(mouseY / 40.0F)) * 20.0F, 1.0F, 0.0F, 0.0F);
 
 		this.player.renderYawOffset = (float) Math.atan(mouseX / 40.0F) * 20.0F;
 		this.player.rotationYaw = (float) Math.atan(mouseX / 40.0F) * 40.0F;
@@ -136,8 +136,8 @@ public class PatronRewardArmorRenderer implements IPatronRewardRenderer
 		this.player.rotationYawHead = this.player.rotationYaw;
 		this.player.prevRotationYawHead = this.player.rotationYaw;
 
-		GlStateManager.translate(0.0F, 0.0F, 0.0F);
-		GlStateManager.scale(-10.0, 10.0, 10.0);
+		GlStateManager.translatef(0.0F, 0.0F, 0.0F);
+		GlStateManager.scalef(-10.0f, 10.0f, 10.0f);
 
 		this.armorPreviewLayer.setPreviewArmor(this.reward);
 		this.glovePreviewLayer.setPreviewArmor(this.reward);
@@ -162,17 +162,17 @@ public class PatronRewardArmorRenderer implements IPatronRewardRenderer
 		GlStateManager.popMatrix();
 	}
 
-	public void setItemStackToSlot(EntityEquipmentSlot slotIn, ItemStack stack)
+	public void setItemStackToSlot(EquipmentSlotType slotIn, ItemStack stack)
 	{
-		if (slotIn == EntityEquipmentSlot.MAINHAND)
+		if (slotIn == EquipmentSlotType.MAINHAND)
 		{
 			this.player.inventory.mainInventory.set(this.player.inventory.currentItem, stack);
 		}
-		else if (slotIn == EntityEquipmentSlot.OFFHAND)
+		else if (slotIn == EquipmentSlotType.OFFHAND)
 		{
 			this.player.inventory.offHandInventory.set(0, stack);
 		}
-		else if (slotIn.getSlotType() == EntityEquipmentSlot.Type.ARMOR)
+		else if (slotIn.getSlotType() == EquipmentSlotType.Type.ARMOR)
 		{
 			this.player.inventory.armorInventory.set(slotIn.getIndex(), stack);
 		}

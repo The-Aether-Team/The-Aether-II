@@ -9,7 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
@@ -72,7 +72,7 @@ public class RecipePresentCrafting extends IForgeRegistryEntry.Impl<IRecipe> imp
 		data.setDye(dye);
 
 		final ItemStack present = new ItemStack(BlocksAether.present);
-		present.setTagCompound(data.writeToNBT(new NBTTagCompound()));
+		present.setTagCompound(data.writeToNBT(new CompoundNBT()));
 
 		return present;
 	}

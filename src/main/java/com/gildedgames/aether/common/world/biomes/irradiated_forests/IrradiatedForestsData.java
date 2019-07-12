@@ -10,7 +10,7 @@ import com.gildedgames.orbis.lib.util.ChunkMap;
 import com.gildedgames.orbis.lib.util.io.NBTFunnel;
 import com.gildedgames.orbis.lib.util.mc.NBT;
 import com.google.common.collect.Lists;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.math.BlockPos;
 
 import java.util.*;
@@ -180,26 +180,26 @@ public class IrradiatedForestsData implements NBT
 	}
 
 	@Override
-	public void write(final NBTTagCompound tag)
+	public void write(final CompoundNBT tag)
 	{
 		final NBTFunnel funnel = new NBTFunnel(tag);
 
-		tag.setLong("seed", this.seed);
-		tag.setInteger("crackPoints", this.crackPoints);
-		tag.setInteger("width", this.islandWidth);
-		tag.setInteger("length", this.islandLength);
+		tag.putLong("seed", this.seed);
+		tag.putInt("crackPoints", this.crackPoints);
+		tag.putInt("width", this.islandWidth);
+		tag.putInt("length", this.islandLength);
 		funnel.setPos("min", this.min);
 	}
 
 	@Override
-	public void read(final NBTTagCompound tag)
+	public void read(final CompoundNBT tag)
 	{
 		final NBTFunnel funnel = new NBTFunnel(tag);
 
 		this.seed = tag.getLong("seed");
-		this.crackPoints = tag.getInteger("crackPoints");
-		this.islandWidth = tag.getInteger("width");
-		this.islandLength = tag.getInteger("length");
+		this.crackPoints = tag.getInt("crackPoints");
+		this.islandWidth = tag.getInt("width");
+		this.islandLength = tag.getInt("length");
 		this.min = funnel.getPos("min");
 	}
 

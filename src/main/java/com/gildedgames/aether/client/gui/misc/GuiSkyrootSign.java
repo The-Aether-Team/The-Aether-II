@@ -1,20 +1,20 @@
 package com.gildedgames.aether.client.gui.misc;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.block.Block;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.widget.button.Button;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.network.NetHandlerPlayClient;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.network.play.client.CPacketUpdateSign;
 import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.util.ChatAllowedCharacters;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.StringTextComponent;
 import org.lwjgl.input.Keyboard;
 
-public class GuiSkyrootSign extends GuiScreen
+public class GuiSkyrootSign extends Screen
 {
 	/** Reference to the sign object. */
 	private final TileEntitySign tileSign;
@@ -26,7 +26,7 @@ public class GuiSkyrootSign extends GuiScreen
 	private int editLine;
 
 	/** "Done" button for the GUI. */
-	private GuiButton doneBtn;
+	private Button doneBtn;
 
 	public GuiSkyrootSign(TileEntitySign teSign)
 	{
@@ -42,7 +42,7 @@ public class GuiSkyrootSign extends GuiScreen
 	{
 		this.buttonList.clear();
 		Keyboard.enableRepeatEvents(true);
-		this.doneBtn = this.addButton(new GuiButton(0, this.width / 2 - 100, this.height / 4 + 120, I18n.format("gui.done")));
+		this.doneBtn = this.addButton(new Button(0, this.width / 2 - 100, this.height / 4 + 120, I18n.format("gui.done")));
 		this.tileSign.setEditable(false);
 	}
 
@@ -76,7 +76,7 @@ public class GuiSkyrootSign extends GuiScreen
 	 * Called by the controls from the buttonList when activated. (Mouse pressed for buttons)
 	 */
 	@Override
-	protected void actionPerformed(GuiButton button)
+	protected void actionPerformed(Button button)
 	{
 		if (button.enabled)
 		{
@@ -117,7 +117,7 @@ public class GuiSkyrootSign extends GuiScreen
 			s = s + typedChar;
 		}
 
-		this.tileSign.signText[this.editLine] = new TextComponentString(s);
+		this.tileSign.signText[this.editLine] = new StringTextComponent(s);
 
 		if (keyCode == 1)
 		{
@@ -135,17 +135,17 @@ public class GuiSkyrootSign extends GuiScreen
 		this.drawCenteredString(this.fontRenderer, I18n.format("sign.edit"), this.width / 2, 40, 16777215);
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		GlStateManager.pushMatrix();
-		GlStateManager.translate((float) (this.width / 2), 0.0F, 50.0F);
+		GlStateManager.translatef((float) (this.width / 2), 0.0F, 50.0F);
 		float f = 93.75F;
-		GlStateManager.scale(-93.75F, -93.75F, -93.75F);
-		GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
+		GlStateManager.scalef(-93.75F, -93.75F, -93.75F);
+		GlStateManager.rotatef(180.0F, 0.0F, 1.0F, 0.0F);
 		Block block = this.tileSign.getBlockType();
 
 		if (block == BlocksAether.standing_skyroot_sign)
 		{
 			float f1 = (float) (this.tileSign.getBlockMetadata() * 360) / 16.0F;
-			GlStateManager.rotate(f1, 0.0F, 1.0F, 0.0F);
-			GlStateManager.translate(0.0F, -1.0625F, 0.0F);
+			GlStateManager.rotatef(f1, 0.0F, 1.0F, 0.0F);
+			GlStateManager.translatef(0.0F, -1.0625F, 0.0F);
 		}
 		else
 		{
@@ -167,8 +167,8 @@ public class GuiSkyrootSign extends GuiScreen
 				f2 = -90.0F;
 			}
 
-			GlStateManager.rotate(f2, 0.0F, 1.0F, 0.0F);
-			GlStateManager.translate(0.0F, -1.0625F, 0.0F);
+			GlStateManager.rotatef(f2, 0.0F, 1.0F, 0.0F);
+			GlStateManager.translatef(0.0F, -1.0625F, 0.0F);
 		}
 
 		if (this.updateCounter / 6 % 2 == 0)

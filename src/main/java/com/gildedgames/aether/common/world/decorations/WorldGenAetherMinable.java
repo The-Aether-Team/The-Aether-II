@@ -2,7 +2,7 @@ package com.gildedgames.aether.common.world.decorations;
 
 import com.gildedgames.orbis.lib.util.ArrayHelper;
 import com.gildedgames.orbis.lib.world.WorldSlice;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 
@@ -10,16 +10,16 @@ import java.util.Random;
 
 public class WorldGenAetherMinable
 {
-	private final IBlockState oreBlock;
+	private final BlockState oreBlock;
 
 	/** The number of blocks to generate. */
 	private final int numberOfBlocks;
 
-	private final IBlockState[] predicate;
+	private final BlockState[] predicate;
 
 	private boolean emitsLight, isFloating;
 
-	public WorldGenAetherMinable(final IBlockState state, final int blockCount, final IBlockState[] replaceableStates)
+	public WorldGenAetherMinable(final BlockState state, final int blockCount, final BlockState[] replaceableStates)
 	{
 		this.oreBlock = state;
 		this.numberOfBlocks = blockCount;
@@ -109,7 +109,7 @@ public class WorldGenAetherMinable
 
 								if (xDistSq + yDistSq + zDistSq < 1.0f)
 								{
-									final IBlockState state = slice.getBlockState(x, y, z);
+									final BlockState state = slice.getBlockState(x, y, z);
 
 									if (ArrayHelper.contains(this.predicate, state))
 									{

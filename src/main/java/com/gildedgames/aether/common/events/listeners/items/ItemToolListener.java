@@ -3,18 +3,18 @@ package com.gildedgames.aether.common.events.listeners.items;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.init.MaterialsAether;
 import com.gildedgames.aether.common.items.tools.handlers.*;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTool;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
+import net.minecraft.item.ToolItem;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,13 +33,13 @@ public class ItemToolListener
 		handlers.put(MaterialsAether.GRAVITITE_TOOL.name(), new ItemGravititeToolHandler());
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public static void onTooltip(final ItemTooltipEvent event)
 	{
-		if (event.getItemStack().getItem() instanceof ItemTool)
+		if (event.getItemStack().getItem() instanceof ToolItem)
 		{
-			final String material = ((ItemTool) event.getItemStack().getItem()).getToolMaterialName();
+			final String material = ((ToolItem) event.getItemStack().getItem()).getToolMaterialName();
 
 			final IToolEventHandler handler = handlers.get(material);
 
@@ -55,9 +55,9 @@ public class ItemToolListener
 	@SubscribeEvent
 	public static void onRightClickItem(final PlayerInteractEvent.RightClickItem event)
 	{
-		if (event.getItemStack().getItem() instanceof ItemTool)
+		if (event.getItemStack().getItem() instanceof ToolItem)
 		{
-			final String material = ((ItemTool) event.getItemStack().getItem()).getToolMaterialName();
+			final String material = ((ToolItem) event.getItemStack().getItem()).getToolMaterialName();
 
 			final IToolEventHandler handler = handlers.get(material);
 
@@ -73,9 +73,9 @@ public class ItemToolListener
 	@SubscribeEvent
 	public static void onBlockActivated(final PlayerInteractEvent.RightClickBlock event)
 	{
-		if (event.getItemStack().getItem() instanceof ItemTool)
+		if (event.getItemStack().getItem() instanceof ToolItem)
 		{
-			final String material = ((ItemTool) event.getItemStack().getItem()).getToolMaterialName();
+			final String material = ((ToolItem) event.getItemStack().getItem()).getToolMaterialName();
 
 			final IToolEventHandler handler = handlers.get(material);
 
@@ -89,7 +89,7 @@ public class ItemToolListener
 			if (result)
 			{
 				event.setCanceled(true);
-				event.setCancellationResult(EnumActionResult.SUCCESS);
+				event.setCancellationResult(ActionResultType.SUCCESS);
 			}
 		}
 	}
@@ -104,7 +104,7 @@ public class ItemToolListener
 
 		PlayerAether playerAether = PlayerAether.getPlayer(event.getHarvester());
 
-		ItemStack stack = event.getHarvester().getHeldItem(EnumHand.MAIN_HAND);
+		ItemStack stack = event.getHarvester().getHeldItem(Hand.MAIN_HAND);
 
 		if (stack.isEmpty() && playerAether.getLastDestroyedStack() != null)
 		{
@@ -112,9 +112,9 @@ public class ItemToolListener
 			playerAether.setLastDestroyedStack(null);
 		}
 
-		if (stack.getItem() instanceof ItemTool)
+		if (stack.getItem() instanceof ToolItem)
 		{
-			final String material = ((ItemTool) stack.getItem()).getToolMaterialName();
+			final String material = ((ToolItem) stack.getItem()).getToolMaterialName();
 
 			final IToolEventHandler handler = handlers.get(material);
 
@@ -137,7 +137,7 @@ public class ItemToolListener
 
 		PlayerAether playerAether = PlayerAether.getPlayer(event.getEntityPlayer());
 
-		if (event.getOriginal().getItem() instanceof ItemTool)
+		if (event.getOriginal().getItem() instanceof ToolItem)
 		{
 			playerAether.setLastDestroyedStack(event.getOriginal());
 		}
@@ -146,11 +146,11 @@ public class ItemToolListener
 	@SubscribeEvent
 	public static void onCalculateBreakSpeed(final PlayerEvent.BreakSpeed event)
 	{
-		final ItemStack stack = event.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND);
+		final ItemStack stack = event.getEntityPlayer().getHeldItem(Hand.MAIN_HAND);
 
-		if (stack.getItem() instanceof ItemTool)
+		if (stack.getItem() instanceof ToolItem)
 		{
-			final String material = ((ItemTool) stack.getItem()).getToolMaterialName();
+			final String material = ((ToolItem) stack.getItem()).getToolMaterialName();
 
 			final IToolEventHandler handler = handlers.get(material);
 
@@ -167,11 +167,11 @@ public class ItemToolListener
 	@SubscribeEvent
 	public static void onEntityHit(final AttackEntityEvent event)
 	{
-		final ItemStack stack = event.getEntityLiving().getHeldItem(EnumHand.MAIN_HAND);
+		final ItemStack stack = event.getEntityLiving().getHeldItem(Hand.MAIN_HAND);
 
-		if (stack.getItem() instanceof ItemTool)
+		if (stack.getItem() instanceof ToolItem)
 		{
-			final String material = ((ItemTool) stack.getItem()).getToolMaterialName();
+			final String material = ((ToolItem) stack.getItem()).getToolMaterialName();
 
 			final IToolEventHandler handler = handlers.get(material);
 
@@ -184,7 +184,7 @@ public class ItemToolListener
 		}
 	}
 
-	public static boolean onEntityHit(final ItemStack stack, final Item.ToolMaterial material, final EntityLivingBase target, final EntityLivingBase attacker)
+	public static boolean onEntityHit(final ItemStack stack, final Item.ToolMaterial material, final LivingEntity target, final LivingEntity attacker)
 	{
 		final IToolEventHandler handler = handlers.get(material.name());
 

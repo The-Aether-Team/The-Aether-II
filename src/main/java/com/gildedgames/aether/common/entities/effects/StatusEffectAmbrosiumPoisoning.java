@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.entities.effects;
 import com.gildedgames.aether.api.entity.effects.EEffectIntensity;
 import com.gildedgames.aether.common.events.listeners.player.PlayerAetherListener;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
 
@@ -11,13 +11,13 @@ import java.util.Collection;
 
 public class StatusEffectAmbrosiumPoisoning extends StatusEffect
 {
-	public StatusEffectAmbrosiumPoisoning(EntityLivingBase livingBase)
+	public StatusEffectAmbrosiumPoisoning(LivingEntity livingBase)
 	{
 		super(effectTypes.AMBROSIUM_POISONING, null, livingBase);
 	}
 
 	@Override
-	public void applyEffect(EntityLivingBase livingBase, int timer)
+	public void applyEffect(LivingEntity livingBase, int timer)
 	{
 		/**
 		 * Ambrosium Poisoning has a unique effect, and is handled elsewhere.

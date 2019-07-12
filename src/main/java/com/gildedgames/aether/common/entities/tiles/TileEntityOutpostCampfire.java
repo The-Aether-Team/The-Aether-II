@@ -11,29 +11,29 @@ import com.gildedgames.aether.common.entities.tiles.multiblock.TileEntityMultibl
 import com.gildedgames.aether.common.init.DimensionsAether;
 import com.gildedgames.orbis.lib.util.TeleporterGeneric;
 import com.gildedgames.orbis.lib.util.mc.BlockPosDimension;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.PlayerList;
-import net.minecraft.util.ITickable;
+import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
 
-public class TileEntityOutpostCampfire extends TileEntityMultiblockController implements ITickable, IWorldObjectHoverable
+public class TileEntityOutpostCampfire extends TileEntityMultiblockController implements ITickableTileEntity, IWorldObjectHoverable
 {
 
 	private static final int PLAYER_SEARCHING_RADIUS = 2;
@@ -46,11 +46,11 @@ public class TileEntityOutpostCampfire extends TileEntityMultiblockController im
 	}
 
 	@Override
-	public boolean onInteract(final EntityPlayer player)
+	public boolean onInteract(final PlayerEntity player)
 	{
-		if (player instanceof EntityPlayerMP && player.world.provider.getDimensionType() == DimensionsAether.AETHER)
+		if (player instanceof ServerPlayerEntity && player.world.provider.getDimensionType() == DimensionsAether.AETHER)
 		{
-			final EntityPlayerMP playerMP = (EntityPlayerMP) player;
+			final ServerPlayerEntity playerMP = (ServerPlayerEntity) player;
 
 			final PlayerAether playerAether = PlayerAether.getPlayer(player);
 
@@ -80,15 +80,15 @@ public class TileEntityOutpostCampfire extends TileEntityMultiblockController im
 	}
 
 	@Override
-	public ItemStack getPickedStack(final World world, final BlockPos pos, final IBlockState state)
+	public ItemStack getPickedStack(final World world, final BlockPos pos, final BlockState state)
 	{
 		return new ItemStack(BlocksAether.outpost_campfire);
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void clientUpdate()
 	{
-		PlayerAether playerAether = PlayerAether.getPlayer(Minecraft.getMinecraft().player);
+		PlayerAether playerAether = PlayerAether.getPlayer(Minecraft.getInstance().player);
 
 		PlayerCampfiresModule campfiresModule = playerAether.getModule(PlayerCampfiresModule.class);
 
@@ -112,14 +112,14 @@ public class TileEntityOutpostCampfire extends TileEntityMultiblockController im
 				new BlockPos(this.pos.getX() + PLAYER_SEARCHING_RADIUS + 2.0F, this.pos.getY() + PLAYER_SEARCHING_RADIUS,
 						this.pos.getZ() + PLAYER_SEARCHING_RADIUS + 2.0F));
 
-		List<EntityPlayer> players = this.world.getEntitiesWithinAABB(EntityPlayer.class, searchingBB);
+		List<PlayerEntity> players = this.world.getEntitiesWithinAABB(PlayerEntity.class, searchingBB);
 
 		if (this.world.isRemote)
 		{
 			this.clientUpdate();
 		}
 
-		for (EntityPlayer player : players)
+		for (PlayerEntity player : players)
 		{
 			PlayerAether playerAether = PlayerAether.getPlayer(player);
 
@@ -137,6 +137,6 @@ public class TileEntityOutpostCampfire extends TileEntityMultiblockController im
 	@Override
 	public ITextComponent getHoverText(World world, RayTraceResult result)
 	{
-		return new TextComponentTranslation("gui.aether.hover.campfire");
+		return new TranslationTextComponent("gui.aether.hover.campfire");
 	}
 }

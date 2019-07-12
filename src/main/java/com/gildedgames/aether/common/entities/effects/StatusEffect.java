@@ -4,13 +4,13 @@ import com.gildedgames.aether.api.entity.effects.EEffectIntensity;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.effects.PacketStatusEffect;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.math.MathHelper;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Collection;
 
@@ -35,9 +35,9 @@ public abstract class StatusEffect implements IAetherStatusEffects
 
 	protected int potentialBuildup;
 
-	private final EntityLivingBase livingEffected;
+	private final LivingEntity livingEffected;
 
-	public StatusEffect(IAetherStatusEffects.effectTypes effectType, AttributeModifier attributeModifier, EntityLivingBase living)
+	public StatusEffect(IAetherStatusEffects.effectTypes effectType, AttributeModifier attributeModifier, LivingEntity living)
 	{
 		this.effectType = effectType;
 		this.isEffectApplied = false;
@@ -54,7 +54,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	}
 
 	@Override
-	public void tick(EntityLivingBase livingBase)
+	public void tick(LivingEntity livingBase)
 	{
 		if (this.effectBuildup < this.potentialBuildup)
 		{
@@ -104,9 +104,9 @@ public abstract class StatusEffect implements IAetherStatusEffects
 
 		if (this.isDirty)
 		{
-			if (livingBase instanceof EntityPlayerMP)
+			if (livingBase instanceof ServerPlayerEntity)
 			{
-				NetworkingAether.sendPacketToPlayer(new PacketStatusEffect(livingBase), (EntityPlayerMP) livingBase);
+				NetworkingAether.sendPacketToPlayer(new PacketStatusEffect(livingBase), (ServerPlayerEntity) livingBase);
 
 				this.markClean();
 			}
@@ -119,7 +119,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	}
 
 	@Override
-	abstract public void applyEffect(EntityLivingBase livingBase, int timer);
+	abstract public void applyEffect(LivingEntity livingBase, int timer);
 
 	@Override
 	abstract public void onEffectEnd();
@@ -304,24 +304,24 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public abstract void addInformation(Collection<String> label);
 
 	@Override
-	public void write(NBTTagCompound compound)
+	public void write(CompoundNBT compound)
 	{
-		compound.setInteger(this.NAME + ".effectBuildup", this.effectBuildup);
-		compound.setBoolean(this.NAME + ".effectIsApplied", this.isEffectApplied);
-		compound.setInteger(this.NAME + ".effectTimer", this.effectTimer);
-		compound.setDouble(this.NAME + ".effectActiveTimeModifier", this.activeEffectTimeModifier);
+		compound.putInt(this.NAME + ".effectBuildup", this.effectBuildup);
+		compound.putBoolean(this.NAME + ".effectIsApplied", this.isEffectApplied);
+		compound.putInt(this.NAME + ".effectTimer", this.effectTimer);
+		compound.putDouble(this.NAME + ".effectActiveTimeModifier", this.activeEffectTimeModifier);
 	}
 
 	@Override
-	public void read(NBTTagCompound compound)
+	public void read(CompoundNBT compound)
 	{
-		this.effectBuildup = compound.getInteger(this.NAME + ".effectBuildup");
+		this.effectBuildup = compound.getInt(this.NAME + ".effectBuildup");
 		this.isEffectApplied = compound.getBoolean(this.NAME + ".effectIsApplied");
-		this.effectTimer = compound.getInteger(this.NAME + ".effectTimer");
-		this.activeEffectTimeModifier =  compound.getInteger(this.NAME + ".effectActiveTimeModifier");
+		this.effectTimer = compound.getInt(this.NAME + ".effectTimer");
+		this.activeEffectTimeModifier =  compound.getInt(this.NAME + ".effectActiveTimeModifier");
 	}
 }

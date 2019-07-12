@@ -14,21 +14,21 @@ import com.gildedgames.orbis.lib.util.mc.NBTHelper;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.MobEffects;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.potion.Effects;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.INBT;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -40,7 +40,7 @@ import java.util.List;
 
 public class PlayerAether implements IPlayerAether
 {
-	private final EntityPlayer entity;
+	private final PlayerEntity entity;
 
 	private NecromancerTowerInstance towerInstance;
 
@@ -60,7 +60,7 @@ public class PlayerAether implements IPlayerAether
 		this.entity = null;
 	}
 
-	public PlayerAether(final EntityPlayer entity)
+	public PlayerAether(final PlayerEntity entity)
 	{
 		this.entity = entity;
 
@@ -118,26 +118,20 @@ public class PlayerAether implements IPlayerAether
 	}
 
 	@Nonnull
-	public static PlayerAether getPlayer(final EntityPlayer player)
+	public static PlayerAether getPlayer(final PlayerEntity player)
 	{
 		if (player == null)
 		{
 			throw new NullPointerException("Player entity is null");
 		}
 
-		PlayerAether ret = (PlayerAether) player.getCapability(CapabilitiesAether.PLAYER_DATA, null);
-
-		if (ret == null)
-		{
-			throw new NullPointerException("Player does not contain capability");
-		}
-
-		return ret;
+		return (PlayerAether) player.getCapability(CapabilitiesAether.PLAYER_DATA, null)
+				.orElseThrow(() -> new NullPointerException("Player does not contain capability"));
 	}
 
 	public static boolean hasCapability(final Entity entity)
 	{
-		return entity.hasCapability(CapabilitiesAether.PLAYER_DATA, null);
+		return entity.getCapability(CapabilitiesAether.PLAYER_DATA, null).isPresent();
 	}
 
 	public ItemStack getLastDestroyedStack()
@@ -170,7 +164,7 @@ public class PlayerAether implements IPlayerAether
 	 */
 	public void sendFullUpdate()
 	{
-		EntityPlayerMP player = (EntityPlayerMP) this.getEntity();
+		ServerPlayerEntity player = (ServerPlayerEntity) this.getEntity();
 
 		NetworkingAether.sendPacketToPlayer(new PacketCurrencyModule(this.getModule(PlayerCurrencyModule.class)), player);
 		NetworkingAether.sendPacketToPlayer(new PacketProgressModule(this.getModule(PlayerProgressModule.class)), player);
@@ -216,7 +210,7 @@ public class PlayerAether implements IPlayerAether
 		}
 	}
 
-	public void onPlaceBlock(final BlockEvent.PlaceEvent event)
+	public void onPlaceBlock(final BlockEvent.EntityPlaceEvent event)
 	{
 	}
 
@@ -228,7 +222,7 @@ public class PlayerAether implements IPlayerAether
 		}
 	}
 
-	public void onDrops(final PlayerDropsEvent event)
+	public void onDrops(final LivingDropsEvent event)
 	{
 		for (IPlayerAetherModule module : this.modules)
 		{
@@ -271,15 +265,15 @@ public class PlayerAether implements IPlayerAether
 
 	public void onPlayerBeginWatching(final IPlayerAether other)
 	{
-		NetworkingAether.sendPacketToPlayer(new PacketEquipment(this), (EntityPlayerMP) other.getEntity());
+		NetworkingAether.sendPacketToPlayer(new PacketEquipment(this), (ServerPlayerEntity) other.getEntity());
 	}
 
 	@Override
 	public float getMiningSpeedMultiplier()
 	{
-		if (this.getEntity().getAir() == 300 && this.getEntity().isPotionActive(MobEffects.WATER_BREATHING))
+		if (this.getEntity().getAir() == 300 && this.getEntity().isPotionActive(Effects.WATER_BREATHING))
 		{
-			if (!EnchantmentHelper.getAquaAffinityModifier(this.entity) &&
+			if (!EnchantmentHelper.hasAquaAffinity(this.entity) &&
 					this.entity.isInsideOfMaterial(Material.WATER))
 			{
 				return 5.0f;
@@ -290,36 +284,36 @@ public class PlayerAether implements IPlayerAether
 	}
 
 	@Override
-	public void write(final NBTTagCompound tag)
+	public void write(final CompoundNBT tag)
 	{
 		NBTFunnel funnel = new NBTFunnel(tag);
 
-		final NBTTagCompound modules = new NBTTagCompound();
+		final CompoundNBT modules = new CompoundNBT();
 
 		for (final IPlayerAetherModule.Serializable module : this.modulesSerializable)
 		{
-			modules.setTag(module.getIdentifier().toString(), NBTHelper.writeRaw(module));
+			modules.put(module.getIdentifier().toString(), NBTHelper.writeRaw(module));
 		}
 
-		tag.setTag("Modules", modules);
+		tag.put("Modules", modules);
 
 		funnel.set("towerInstance", this.towerInstance);
 	}
 
 	@Override
-	public void read(final NBTTagCompound tag)
+	public void read(final CompoundNBT tag)
 	{
 		NBTFunnel funnel = new NBTFunnel(tag);
 
-		NBTTagCompound modules = tag.getCompoundTag("Modules");
+		CompoundNBT modules = tag.getCompound("Modules");
 
 		for (final IPlayerAetherModule.Serializable module : this.modulesSerializable)
 		{
 			String key = module.getIdentifier().toString();
 
-			if (modules.hasKey(key))
+			if (modules.contains(key))
 			{
-				module.read(modules.getCompoundTag(key));
+				module.read(modules.getCompound(key));
 			}
 		}
 
@@ -332,7 +326,7 @@ public class PlayerAether implements IPlayerAether
 	}
 
 	@Override
-	public EntityPlayer getEntity()
+	public PlayerEntity getEntity()
 	{
 		return this.entity;
 	}
@@ -340,18 +334,18 @@ public class PlayerAether implements IPlayerAether
 	public static class Storage implements IStorage<IPlayerAether>
 	{
 		@Override
-		public NBTBase writeNBT(final Capability<IPlayerAether> capability, final IPlayerAether instance, final EnumFacing side)
+		public INBT writeNBT(final Capability<IPlayerAether> capability, final IPlayerAether instance, final Direction side)
 		{
-			final NBTTagCompound compound = new NBTTagCompound();
+			final CompoundNBT compound = new CompoundNBT();
 			instance.write(compound);
 
 			return compound;
 		}
 
 		@Override
-		public void readNBT(final Capability<IPlayerAether> capability, final IPlayerAether instance, final EnumFacing side, final NBTBase nbt)
+		public void readNBT(final Capability<IPlayerAether> capability, final IPlayerAether instance, final Direction side, final INBT nbt)
 		{
-			final NBTTagCompound compound = (NBTTagCompound) nbt;
+			final CompoundNBT compound = (CompoundNBT) nbt;
 
 			instance.read(compound);
 		}

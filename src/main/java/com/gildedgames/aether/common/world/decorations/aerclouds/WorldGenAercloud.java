@@ -2,8 +2,8 @@ package com.gildedgames.aether.common.world.decorations.aerclouds;
 
 import com.gildedgames.aether.api.world.decoration.WorldDecorationGenerator;
 import com.gildedgames.orbis.lib.world.WorldSlice;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
@@ -13,20 +13,20 @@ import java.util.Random;
 
 public class WorldGenAercloud implements WorldDecorationGenerator
 {
-	protected final IBlockState state;
+	protected final BlockState state;
 
 	protected final int numberOfBlocks;
 
 	protected final boolean isFlat;
 
-	public WorldGenAercloud(final IBlockState state, final int numberOfBlocks, final boolean isFlat)
+	public WorldGenAercloud(final BlockState state, final int numberOfBlocks, final boolean isFlat)
 	{
 		this.state = state;
 		this.numberOfBlocks = numberOfBlocks;
 		this.isFlat = isFlat;
 	}
 
-	public IBlockState getAercloudState(final Random random)
+	public BlockState getAercloudState(final Random random)
 	{
 		return this.state;
 	}
@@ -38,7 +38,7 @@ public class WorldGenAercloud implements WorldDecorationGenerator
 		// TODO: Use WorldSlice
 		World world = slice.getWorld();
 
-		final IBlockState state = this.getAercloudState(rand);
+		final BlockState state = this.getAercloudState(rand);
 
 		final BlockPos.MutableBlockPos posMut = new BlockPos.MutableBlockPos(pos.getX(), pos.getY(), pos.getZ());
 

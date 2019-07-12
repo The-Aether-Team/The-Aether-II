@@ -1,10 +1,10 @@
 package com.gildedgames.aether.common.blocks.construction;
 
-import net.minecraft.block.BlockFenceGate;
+import net.minecraft.block.FenceGateBlock;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.SoundType;
 
-public class BlockSkyrootFenceGate extends BlockFenceGate
+public class BlockSkyrootFenceGate extends FenceGateBlock
 {
 	public BlockSkyrootFenceGate()
 	{

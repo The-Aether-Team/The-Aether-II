@@ -7,8 +7,8 @@ import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerDi
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import com.gildedgames.orbis.lib.util.io.NBTFunnel;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -50,7 +50,7 @@ public class PacketOpenDialog implements IMessage
 		ByteBufUtils.writeUTF8String(buf, this.name.toString());
 		ByteBufUtils.writeUTF8String(buf, this.startingNodeId);
 
-		NBTTagCompound tag = new NBTTagCompound();
+		CompoundNBT tag = new CompoundNBT();
 		NBTFunnel funnel = new NBTFunnel(tag);
 
 		funnel.setMap("c", this.conditionsMet, NBTFunnel.STRING_SETTER, NBTFunnel.BOOLEAN_SETTER);
@@ -61,7 +61,7 @@ public class PacketOpenDialog implements IMessage
 	public static class HandlerClient extends MessageHandlerClient<PacketOpenDialog, PacketOpenDialog>
 	{
 		@Override
-		public PacketOpenDialog onMessage(final PacketOpenDialog message, final EntityPlayer player)
+		public PacketOpenDialog onMessage(final PacketOpenDialog message, final PlayerEntity player)
 		{
 			Map<String, Boolean> conditionsMet = message.funnel.getMap("c", NBTFunnel.STRING_GETTER, NBTFunnel.BOOLEAN_GETTER);
 

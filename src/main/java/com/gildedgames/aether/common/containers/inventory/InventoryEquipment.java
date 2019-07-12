@@ -4,14 +4,14 @@ import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.text.TextComponentBase;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
 import javax.annotation.Nonnull;
 
@@ -127,18 +127,18 @@ public class InventoryEquipment implements IInventoryEquipment
 	}
 
 	@Override
-	public boolean isUsableByPlayer(final EntityPlayer player)
+	public boolean isUsableByPlayer(final PlayerEntity player)
 	{
 		return !this.aePlayer.getEntity().isDead && player.getDistanceSq(this.aePlayer.getEntity()) <= 64.0D;
 	}
 
 	@Override
-	public void openInventory(final EntityPlayer player)
+	public void openInventory(final PlayerEntity player)
 	{
 	}
 
 	@Override
-	public void closeInventory(@Nonnull final EntityPlayer player)
+	public void closeInventory(@Nonnull final PlayerEntity player)
 	{
 	}
 
@@ -186,15 +186,15 @@ public class InventoryEquipment implements IInventoryEquipment
 	}
 
 	@Override
-	public TextComponentBase getDisplayName()
+	public TextComponent getDisplayName()
 	{
-		return new TextComponentTranslation(this.getName());
+		return new TranslationTextComponent(this.getName());
 	}
 
 	@Override
-	public void write(final NBTTagCompound output)
+	public void write(final CompoundNBT output)
 	{
-		final NBTTagList list = new NBTTagList();
+		final ListNBT list = new ListNBT();
 
 		for (int i = 0; i < this.inventory.size(); ++i)
 		{
@@ -202,8 +202,8 @@ public class InventoryEquipment implements IInventoryEquipment
 
 			if (!stack.isEmpty())
 			{
-				final NBTTagCompound stackCompound = new NBTTagCompound();
-				stackCompound.setByte("Slot", (byte) i);
+				final CompoundNBT stackCompound = new CompoundNBT();
+				stackCompound.putByte("Slot", (byte) i);
 
 				stack.writeToNBT(stackCompound);
 
@@ -211,17 +211,17 @@ public class InventoryEquipment implements IInventoryEquipment
 			}
 		}
 
-		output.setTag("Items", list);
+		output.put("Items", list);
 	}
 
 	@Override
-	public void read(final NBTTagCompound input)
+	public void read(final CompoundNBT input)
 	{
-		final NBTTagList list = input.getTagList("Items", 10);
+		final ListNBT list = input.getTagList("Items", 10);
 
 		for (int i = 0; i < list.tagCount(); i++)
 		{
-			final NBTTagCompound compound = list.getCompoundTagAt(i);
+			final CompoundNBT compound = list.getCompoundAt(i);
 
 			final int slot = compound.getByte("Slot") & 255;
 

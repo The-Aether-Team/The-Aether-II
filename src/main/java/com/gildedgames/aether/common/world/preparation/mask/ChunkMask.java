@@ -1,14 +1,14 @@
 package com.gildedgames.aether.common.world.preparation.mask;
 
 import com.gildedgames.aether.api.world.preparation.IChunkMask;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.world.chunk.ChunkPrimer;
 
 /**
  * Very minimal alternative to chunks for terrain generation.
  *
  * This allows mods with very expensive terrain generation to quickly compose the general structure of blocks
- * inside a chunk without referring to specific block types or performing costly {@link IBlockState} operations.
+ * inside a chunk without referring to specific block types or performing costly {@link BlockState} operations.
  *
  * After the general structure has been created, a very quick conversion of the blocks contained in the mask can
  * be performed to create a {@link ChunkPrimer}.

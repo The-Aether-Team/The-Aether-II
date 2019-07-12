@@ -4,11 +4,11 @@ import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectPool;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.common.entities.effects.*;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.INBT;
+import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 
 import javax.annotation.Nullable;
@@ -35,7 +35,7 @@ public class StatusEffectPool implements IAetherStatusEffectPool
 		types.put(IAetherStatusEffects.effectTypes.TOXIN.name, new StatusEffectFactory(StatusEffectToxin.class));
 	}
 
-	private EntityLivingBase livingBase;
+	private LivingEntity livingBase;
 
 	private HashMap<String, IAetherStatusEffects> activeEffects = new HashMap<>();
 
@@ -44,7 +44,7 @@ public class StatusEffectPool implements IAetherStatusEffectPool
 		throw new InstantiationException("Do not use default constructor to instantiate pool!");
 	}
 
-	public StatusEffectPool(EntityLivingBase livingBase)
+	public StatusEffectPool(LivingEntity livingBase)
 	{
 		this.livingBase = livingBase;
 	}
@@ -54,7 +54,7 @@ public class StatusEffectPool implements IAetherStatusEffectPool
 	{
 		Iterator<Map.Entry<String, IAetherStatusEffects>> it = this.activeEffects.entrySet().iterator();
 
-		boolean creative = this.livingBase instanceof EntityPlayerMP && ((EntityPlayerMP) this.livingBase).isCreative();
+		boolean creative = this.livingBase instanceof ServerPlayerEntity && ((ServerPlayerEntity) this.livingBase).isCreative();
 
 		while (it.hasNext())
 		{
@@ -214,7 +214,7 @@ public class StatusEffectPool implements IAetherStatusEffectPool
 		return this.activeEffects;
 	}
 
-	public static IAetherStatusEffectPool get(EntityLivingBase livingBase)
+	public static IAetherStatusEffectPool get(LivingEntity livingBase)
 	{
 		return livingBase.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
 	}
@@ -224,9 +224,9 @@ public class StatusEffectPool implements IAetherStatusEffectPool
 
 		@Nullable
 		@Override
-		public NBTBase writeNBT(Capability<IAetherStatusEffectPool> capability, IAetherStatusEffectPool instance, EnumFacing side)
+		public INBT writeNBT(Capability<IAetherStatusEffectPool> capability, IAetherStatusEffectPool instance, Direction side)
 		{
-			NBTTagCompound compound = new NBTTagCompound();
+			CompoundNBT compound = new CompoundNBT();
 
 			for (IAetherStatusEffects effect : instance.getPool().values())
 			{
@@ -237,9 +237,9 @@ public class StatusEffectPool implements IAetherStatusEffectPool
 		}
 
 		@Override
-		public void readNBT(Capability<IAetherStatusEffectPool> capability, IAetherStatusEffectPool instance, EnumFacing side, NBTBase nbt)
+		public void readNBT(Capability<IAetherStatusEffectPool> capability, IAetherStatusEffectPool instance, Direction side, INBT nbt)
 		{
-			NBTTagCompound tag = (NBTTagCompound) nbt;
+			CompoundNBT tag = (CompoundNBT) nbt;
 
 			for (IAetherStatusEffects effect : instance.getPool().values())
 			{
@@ -259,7 +259,7 @@ public class StatusEffectPool implements IAetherStatusEffectPool
 	}
 
 	@Override
-	public IAetherStatusEffects createEffect(String name, EntityLivingBase entity)
+	public IAetherStatusEffects createEffect(String name, LivingEntity entity)
 	{
 		return this.activeEffects.computeIfAbsent(name, (key) -> {
 			StatusEffectFactory factory = types.get(name);
@@ -281,7 +281,7 @@ public class StatusEffectPool implements IAetherStatusEffectPool
 		{
 			try
 			{
-				this.constructor = clazz.getConstructor(EntityLivingBase.class);
+				this.constructor = clazz.getConstructor(LivingEntity.class);
 			}
 			catch (NoSuchMethodException e)
 			{
@@ -289,7 +289,7 @@ public class StatusEffectPool implements IAetherStatusEffectPool
 			}
 		}
 
-		public IAetherStatusEffects create(EntityLivingBase entity)
+		public IAetherStatusEffects create(LivingEntity entity)
 		{
 			try
 			{

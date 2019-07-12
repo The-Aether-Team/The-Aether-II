@@ -9,7 +9,7 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 
 import java.lang.reflect.Type;
@@ -30,7 +30,7 @@ public class DialogActionTravelToLastOutpost implements IDialogAction
 			return;
 		}
 
-		EntityPlayerMP player = (EntityPlayerMP) controller.getDialogPlayer();
+		ServerPlayerEntity player = (ServerPlayerEntity) controller.getDialogPlayer();
 		PlayerAether playerAether = PlayerAether.getPlayer(player);
 		PlayerProgressModule progressModule = playerAether.getModule(PlayerProgressModule.class);
 

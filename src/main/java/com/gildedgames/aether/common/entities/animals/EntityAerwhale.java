@@ -6,7 +6,8 @@ import com.gildedgames.aether.common.entities.flying.EntityFlying;
 import com.gildedgames.aether.common.entities.flying.PathNavigateFlyer;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.entity.ai.goal.MoveTowardsRestrictionGoal;
+import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
@@ -22,16 +23,16 @@ public class EntityAerwhale extends EntityFlying
 	}
 
 	@Override
-	protected void applyEntityAttributes()
+	protected void registerAttributes()
 	{
-		super.applyEntityAttributes();
+		super.registerAttributes();
 
-		this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(250);
+		this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
+		this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(250);
 	}
 
 	@Override
-	protected PathNavigate createNavigator(final World worldIn)
+	protected PathNavigator createNavigator(final World worldIn)
 	{
 		PathNavigateFlyer navigateFlyer = new PathNavigateFlyer(this, worldIn);
 
@@ -41,16 +42,16 @@ public class EntityAerwhale extends EntityFlying
 	}
 
 	@Override
-	protected void initEntityAI()
+	protected void registerGoals()
 	{
-		final EntityAIMoveTowardsRestriction moveTowardsRestriction = new EntityAIMoveTowardsRestriction(this, 0.4D);
+		final MoveTowardsRestrictionGoal moveTowardsRestriction = new MoveTowardsRestrictionGoal(this, 0.4D);
 		final EntityAIForcedWander wander = new EntityAIForcedWander(this, 0.4D, 10, 12, 7);
 
 		wander.setMutexBits(3);
 		moveTowardsRestriction.setMutexBits(3);
 
-		this.tasks.addTask(1, moveTowardsRestriction);
-		this.tasks.addTask(2, wander);
+		this.goalSelector.addGoal(1, moveTowardsRestriction);
+		this.goalSelector.addGoal(2, wander);
 	}
 
 	@Override

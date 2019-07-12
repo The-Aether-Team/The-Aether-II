@@ -6,10 +6,10 @@ import com.gildedgames.aether.common.entities.genes.AnimalGender;
 import com.gildedgames.aether.common.entities.genes.SimpleGeneStorage;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.genes.moa.MoaNest;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ITickable;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.tileentity.ITickableTileEntity;
 
-public class TileEntityMoaEgg extends TileEntitySynced implements ITickable
+public class TileEntityMoaEgg extends TileEntitySynced implements ITickableTileEntity
 {
 
 	public int ticksExisted, secondsUntilHatch = -1;
@@ -108,13 +108,13 @@ public class TileEntityMoaEgg extends TileEntitySynced implements ITickable
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbt)
+	public void readFromNBT(CompoundNBT nbt)
 	{
 		super.readFromNBT(nbt);
 
-		this.genePool.read(nbt.getCompoundTag("genePool"));
+		this.genePool.read(nbt.getCompound("genePool"));
 
-		this.secondsUntilHatch = nbt.getInteger("secondsUntilHatch");
+		this.secondsUntilHatch = nbt.getInt("secondsUntilHatch");
 
 		this.gender = AnimalGender.get(nbt.getString("creatureGender"));
 
@@ -124,26 +124,26 @@ public class TileEntityMoaEgg extends TileEntitySynced implements ITickable
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound nbt)
+	public CompoundNBT writeToNBT(CompoundNBT nbt)
 	{
 		super.writeToNBT(nbt);
 
-		NBTTagCompound genePoolTag = new NBTTagCompound();
+		CompoundNBT genePoolTag = new CompoundNBT();
 
 		this.genePool.write(genePoolTag);
 
-		nbt.setTag("genePool", genePoolTag);
+		nbt.put("genePool", genePoolTag);
 
-		nbt.setInteger("secondsUntilHatch", this.secondsUntilHatch);
+		nbt.putInt("secondsUntilHatch", this.secondsUntilHatch);
 
 		if (this.gender != null)
 		{
-			nbt.setString("creatureGender", this.gender.name());
+			nbt.putString("creatureGender", this.gender.name());
 		}
 
 		this.familyNest.writeToNBT(nbt);
 
-		nbt.setBoolean("playerPlaced", this.playerPlaced);
+		nbt.putBoolean("playerPlaced", this.playerPlaced);
 
 		return nbt;
 	}

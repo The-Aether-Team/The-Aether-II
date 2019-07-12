@@ -2,18 +2,18 @@ package com.gildedgames.aether.common.entities.blocks;
 
 import com.gildedgames.aether.common.blocks.util.BlockFloating;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MoverType;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.api.distmarker.Dist;
 
 public class EntityFloatingBlock extends Entity
 {
@@ -33,7 +33,7 @@ public class EntityFloatingBlock extends Entity
 		this.motionZ = 0.0D;
 	}
 
-	public EntityFloatingBlock(World world, double x, double y, double z, IBlockState state)
+	public EntityFloatingBlock(World world, double x, double y, double z, BlockState state)
 	{
 		this(world);
 
@@ -54,7 +54,7 @@ public class EntityFloatingBlock extends Entity
 	}
 
 	@Override
-	public void onUpdate()
+	public void livingTick()
 	{
 		// Destroys the source block, since deleting a neighboring block in the actual block class
 		// causes a infinite loop of updates.
@@ -120,7 +120,7 @@ public class EntityFloatingBlock extends Entity
 
 				for (int i = 0; i < count; i++)
 				{
-					this.world.spawnParticle(EnumParticleTypes.BLOCK_DUST,
+					this.world.spawnParticle(ParticleTypes.BLOCK_DUST,
 							this.posX - 0.5D + (this.world.rand.nextDouble()),
 							this.posY - 0.5D,
 							this.posZ - 0.5D + (this.world.rand.nextDouble()), 0.0D, 0.0D, 0.0D,
@@ -131,7 +131,7 @@ public class EntityFloatingBlock extends Entity
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public boolean canRenderOnFire()
 	{
 		return false;
@@ -150,29 +150,29 @@ public class EntityFloatingBlock extends Entity
 	}
 
 	@Override
-	protected void readEntityFromNBT(NBTTagCompound compound)
+	protected void readEntityFromNBT(CompoundNBT compound)
 	{
 		Block block = Block.getBlockFromName(compound.getString("Block"));
 
 		this.setBlockState(block.getStateFromMeta(compound.getByte("BlockState")));
-		this.ticksExisted = compound.getInteger("TicksExisted");
+		this.ticksExisted = compound.getInt("TicksExisted");
 
 		this.hasActivated = this.ticksExisted > 1;
 	}
 
 	@Override
-	protected void writeEntityToNBT(NBTTagCompound compound)
+	protected void writeEntityToNBT(CompoundNBT compound)
 	{
-		IBlockState state = this.getBlockState();
+		BlockState state = this.getBlockState();
 
 		Block block = state.getBlock();
 
-		compound.setString("Block", Block.REGISTRY.getNameForObject(block).toString());
-		compound.setByte("BlockState", (byte) block.getMetaFromState(state));
-		compound.setInteger("TicksExisted", this.ticksExisted);
+		compound.putString("Block", Block.REGISTRY.getNameForObject(block).toString());
+		compound.putByte("BlockState", (byte) block.getMetaFromState(state));
+		compound.putInt("TicksExisted", this.ticksExisted);
 	}
 
-	public IBlockState getBlockState()
+	public BlockState getBlockState()
 	{
 		Block block = Block.getBlockById(this.dataManager.get(BLOCK_NAME));
 		int meta = (int) this.dataManager.get(BLOCK_METADATA);
@@ -180,7 +180,7 @@ public class EntityFloatingBlock extends Entity
 		return block.getStateFromMeta(meta);
 	}
 
-	public void setBlockState(IBlockState state)
+	public void setBlockState(BlockState state)
 	{
 		Block block = state.getBlock();
 

@@ -6,28 +6,29 @@ import com.gildedgames.aether.common.blocks.IBlockWithItem;
 import com.gildedgames.aether.common.entities.tiles.TileEntityPresent;
 import com.gildedgames.aether.common.items.blocks.ItemBlockPresent;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
+import net.minecraft.block.ContainerBlock;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class BlockPresent extends BlockContainer implements IBlockWithItem
+public class BlockPresent extends ContainerBlock implements IBlockWithItem
 {
 
 	private static final AxisAlignedBB BOUNDS = new AxisAlignedBB(0.15f, 0f, 0.15f, 0.85f, 0.7f, 0.85f);
@@ -42,20 +43,20 @@ public class BlockPresent extends BlockContainer implements IBlockWithItem
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState state)
+	public boolean isFullCube(BlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullBlock(IBlockState state)
+	public boolean isFullBlock(BlockState state)
 	{
 		return false;
 	}
 
 	@Override
 	@Deprecated
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	public AxisAlignedBB getBoundingBox(BlockState state, IBlockReader source, BlockPos pos)
 	{
 		return BOUNDS;
 	}
@@ -67,7 +68,7 @@ public class BlockPresent extends BlockContainer implements IBlockWithItem
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+	public void onBlockPlacedBy(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack)
 	{
 		if (stack.getItem() instanceof ItemBlockPresent)
 		{
@@ -77,8 +78,8 @@ public class BlockPresent extends BlockContainer implements IBlockWithItem
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,
-			EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World world, BlockPos pos, BlockState state, PlayerEntity player, Hand hand,
+			Direction side, float hitX, float hitY, float hitZ)
 	{
 		if (!world.isRemote)
 		{
@@ -100,7 +101,7 @@ public class BlockPresent extends BlockContainer implements IBlockWithItem
 				double y2 = pos.getY() + (world.rand.nextFloat() * 1.1f) - 0.05f;
 				double z2 = pos.getZ() + (world.rand.nextFloat() * 1.1f) - 0.05f;
 
-				world.spawnParticle(EnumParticleTypes.CLOUD, x2, y2, z2, 0.0D, 0.0D, 0.0D);
+				world.spawnParticle(ParticleTypes.CLOUD, x2, y2, z2, 0.0D, 0.0D, 0.0D);
 			}
 
 			world.playSound(pos.getX(), pos.getY(), pos.getZ(), new SoundEvent(AetherCore.getResource("random.present_unwrap")), SoundCategory.NEUTRAL, 0.5f,
@@ -111,7 +112,7 @@ public class BlockPresent extends BlockContainer implements IBlockWithItem
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos)
+	public void neighborChanged(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos)
 	{
 		if (!this.canPlaceBlockAt(world, pos))
 		{
@@ -132,7 +133,7 @@ public class BlockPresent extends BlockContainer implements IBlockWithItem
 	}
 
 	@Override
-	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+	public void breakBlock(World worldIn, BlockPos pos, BlockState state)
 	{
 	}
 
@@ -148,7 +149,7 @@ public class BlockPresent extends BlockContainer implements IBlockWithItem
 		ItemBlockPresent.PresentData data = ((TileEntityPresent) tileEntity).getPresentData();
 		ItemStack present = new ItemStack(BlocksAether.present);
 
-		present.setTagCompound(new NBTTagCompound());
+		present.setTagCompound(new CompoundNBT());
 
 		data.writeToNBT(present.getTagCompound());
 		Block.spawnAsEntity(world, pos, present);
@@ -157,13 +158,13 @@ public class BlockPresent extends BlockContainer implements IBlockWithItem
 	}
 
 	@Override
-	public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player)
+	public void onBlockHarvested(World world, BlockPos pos, BlockState state, PlayerEntity player)
 	{
 		this.destroyPresent(world, pos);
 	}
 
 	@Override
-	public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te,
+	public void harvestBlock(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te,
 			@Nullable ItemStack stack)
 	{
 		player.addStat(StatList.getBlockStats(this));
@@ -179,7 +180,7 @@ public class BlockPresent extends BlockContainer implements IBlockWithItem
 
 	@Override
 	@Deprecated
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(BlockState state)
 	{
 		return false;
 	}
@@ -191,7 +192,7 @@ public class BlockPresent extends BlockContainer implements IBlockWithItem
 	}
 
 	@Override
-	public ItemBlock createItemBlock()
+	public BlockItem createItemBlock()
 	{
 		return new ItemBlockPresent(this);
 	}

@@ -4,7 +4,7 @@ import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
 import com.gildedgames.aether.common.init.GenerationAether;
 import com.gildedgames.orbis.lib.core.BlueprintDefinition;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 
 public class BlockAetherSkyrootSapling extends BlockAetherSapling
@@ -18,7 +18,7 @@ public class BlockAetherSkyrootSapling extends BlockAetherSapling
 			.create("variant", GREEN, BLUE, DARK_BLUE);
 
 	@Override
-	public BlueprintDefinition getBlueprint(IBlockState state)
+	public BlueprintDefinition getBlueprint(BlockState state)
 	{
 		BlockVariant variant = state.getValue(PROPERTY_VARIANT);
 
@@ -39,7 +39,7 @@ public class BlockAetherSkyrootSapling extends BlockAetherSapling
 	}
 
 	@Override
-	public BlockPos getBlueprintOffset(IBlockState state)
+	public BlockPos getBlueprintOffset(BlockState state)
 	{
 		return new BlockPos(-4, 0, -4);
 	}

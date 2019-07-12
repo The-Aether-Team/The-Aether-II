@@ -1,20 +1,20 @@
 package com.gildedgames.aether.common.entities.ai;
 
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.pathfinding.PathNavigateGround;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.pathfinding.GroundPathNavigator;
 
-public class EntityAIEggnogTempt extends EntityAIBase
+public class EntityAIEggnogTempt extends Goal
 {
 	/** The entity using this AI that is tempted by the player. */
-	private final EntityCreature temptedEntity;
+	private final CreatureEntity temptedEntity;
 
 	private final double speed;
 
 	/** The player that is tempting the entity that is using this AI. */
-	private EntityPlayer temptingPlayer;
+	private PlayerEntity temptingPlayer;
 
 	/**
 	 * A counter that is decremented each time the shouldExecute method is called. The shouldExecute method will always
@@ -25,13 +25,13 @@ public class EntityAIEggnogTempt extends EntityAIBase
 	/** True if this EntityAITempt task is running */
 	private boolean isRunning;
 
-	public EntityAIEggnogTempt(EntityCreature temptedEntityIn, double speedIn)
+	public EntityAIEggnogTempt(CreatureEntity temptedEntityIn, double speedIn)
 	{
 		this.temptedEntity = temptedEntityIn;
 		this.speed = speedIn;
 		this.setMutexBits(3);
 
-		if (!(temptedEntityIn.getNavigator() instanceof PathNavigateGround))
+		if (!(temptedEntityIn.getNavigator() instanceof GroundPathNavigator))
 		{
 			throw new IllegalArgumentException("Unsupported mob type for TemptGoal");
 		}
@@ -63,7 +63,7 @@ public class EntityAIEggnogTempt extends EntityAIBase
 		}
 	}
 
-	protected boolean isTempting(EntityPlayer player)
+	protected boolean isTempting(PlayerEntity player)
 	{
 		PlayerAether playerAether = PlayerAether.getPlayer(player);
 

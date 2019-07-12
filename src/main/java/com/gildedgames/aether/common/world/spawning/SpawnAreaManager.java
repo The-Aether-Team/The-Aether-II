@@ -11,11 +11,11 @@ import com.gildedgames.orbis.lib.OrbisLib;
 import com.gildedgames.orbis.lib.util.ChunkMap;
 import com.gildedgames.orbis.lib.world.data.IWorldDataManager;
 import com.google.common.collect.Lists;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.CompressedStreamTools;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.nbt.INBT;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -92,7 +92,7 @@ public class SpawnAreaManager implements ISpawnAreaManager
 				{
 					try (DataInputStream dataIn = new DataInputStream(in))
 					{
-						NBTTagCompound tag = CompressedStreamTools.read(dataIn);
+						CompoundNBT tag = CompressedStreamTools.read(dataIn);
 
 						SpawnArea area = new SpawnArea(this.handler.getChunkArea(), areaX, areaZ);
 						area.deserializeNBT(tag);
@@ -124,7 +124,7 @@ public class SpawnAreaManager implements ISpawnAreaManager
 			area.setInPlayersRenderDistance(false);
 		}
 
-		for (final EntityPlayer player : this.world.playerEntities)
+		for (final PlayerEntity player : this.world.playerEntities)
 		{
 			final int chunkX = MathHelper.floor(player.posX) >> 4;
 			final int chunkZ = MathHelper.floor(player.posZ) >> 4;
@@ -187,7 +187,7 @@ public class SpawnAreaManager implements ISpawnAreaManager
 		{
 			final String areaID = this.createAreaID(area.getAreaX(), area.getAreaZ());
 
-			final NBTTagCompound tag = area.serializeNBT();
+			final CompoundNBT tag = area.serializeNBT();
 
 			try (ByteArrayOutputStream stream = new ByteArrayOutputStream())
 			{
@@ -240,13 +240,13 @@ public class SpawnAreaManager implements ISpawnAreaManager
 	{
 		@Nullable
 		@Override
-		public NBTBase writeNBT(Capability<SpawnAreaManager> capability, SpawnAreaManager instance, EnumFacing side)
+		public INBT writeNBT(Capability<SpawnAreaManager> capability, SpawnAreaManager instance, Direction side)
 		{
 			return null;
 		}
 
 		@Override
-		public void readNBT(Capability<SpawnAreaManager> capability, SpawnAreaManager instance, EnumFacing side, NBTBase nbt)
+		public void readNBT(Capability<SpawnAreaManager> capability, SpawnAreaManager instance, Direction side, INBT nbt)
 		{
 
 		}

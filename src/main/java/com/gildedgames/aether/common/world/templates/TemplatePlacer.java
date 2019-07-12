@@ -5,7 +5,7 @@ import com.gildedgames.aether.api.world.templates.PostPlacementTemplate;
 import com.gildedgames.aether.api.world.templates.TemplateDefinition;
 import com.gildedgames.aether.api.world.templates.TemplateLoc;
 import com.gildedgames.orbis.lib.processing.BlockAccessExtendedWrapper;
-import com.gildedgames.orbis.lib.processing.IBlockAccessExtended;
+import com.gildedgames.orbis.lib.processing.IBlockAccess;
 import com.google.common.collect.Lists;
 import net.minecraft.util.Rotation;
 import net.minecraft.world.World;
@@ -20,7 +20,7 @@ public class TemplatePlacer
 
 	/** Filled with block access instances for each world
 	 */
-	private static final List<IBlockAccessExtended> blockAccessList = Lists.newArrayList();
+	private static final List<IBlockAccess> blockAccessList = Lists.newArrayList();
 
 	public static Rotation getRandomRotation(final Random rand)
 	{
@@ -29,9 +29,9 @@ public class TemplatePlacer
 
 	public static boolean place(final World placeWith, final TemplateDefinition def, final TemplateLoc loc, final Random rand)
 	{
-		IBlockAccessExtended chosen = null;
+		IBlockAccess chosen = null;
 
-		for (final IBlockAccessExtended access : TemplatePlacer.blockAccessList)
+		for (final IBlockAccess access : TemplatePlacer.blockAccessList)
 		{
 			if (access.getWorld() == placeWith)
 			{
@@ -50,7 +50,7 @@ public class TemplatePlacer
 		return TemplatePlacer.place(chosen, def, loc, rand);
 	}
 
-	public static boolean place(final IBlockAccessExtended placeWith, final TemplateDefinition def, final TemplateLoc loc, final Random rand)
+	public static boolean place(final IBlockAccess placeWith, final TemplateDefinition def, final TemplateLoc loc, final Random rand)
 	{
 		final Rotation rotation = def.hasRandomRotation() ? ROTATIONS[rand.nextInt(ROTATIONS.length)] : ROTATIONS[0];
 
@@ -81,7 +81,7 @@ public class TemplatePlacer
 		return result;
 	}
 
-	public static boolean canPlace(final IBlockAccessExtended placeWith, final TemplateDefinition def, final TemplateLoc loc, final Random rand)
+	public static boolean canPlace(final IBlockAccess placeWith, final TemplateDefinition def, final TemplateLoc loc, final Random rand)
 	{
 		final Rotation rotation = def.hasRandomRotation() ? ROTATIONS[rand.nextInt(ROTATIONS.length)] : ROTATIONS[0];
 

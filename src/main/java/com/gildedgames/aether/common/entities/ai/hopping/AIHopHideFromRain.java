@@ -1,16 +1,16 @@
 package com.gildedgames.aether.common.entities.ai.hopping;
 
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.init.MobEffects;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class AIHopHideFromRain extends EntityAIBase
+public class AIHopHideFromRain extends Goal
 {
 
 	private final HoppingMoveHelper hoppingMoveHelper;
@@ -21,7 +21,7 @@ public class AIHopHideFromRain extends EntityAIBase
 
 	private int nextRandomizeTime;
 
-	private final EntityCreature entity;
+	private final CreatureEntity entity;
 
 	private double shelterX;
 
@@ -31,7 +31,7 @@ public class AIHopHideFromRain extends EntityAIBase
 
 	private int growTieredTimer;
 
-	public AIHopHideFromRain(EntityCreature entity, final HoppingMoveHelper hoppingMoveHelper, double movementSpeed)
+	public AIHopHideFromRain(CreatureEntity entity, final HoppingMoveHelper hoppingMoveHelper, double movementSpeed)
 	{
 		this.entity = entity;
 		this.movementSpeed = movementSpeed;
@@ -51,7 +51,7 @@ public class AIHopHideFromRain extends EntityAIBase
 
 		boolean executes = this.entity.world.isRaining() && this.entity.getAttackTarget() == null && (
 				this.entity.onGround || this.entity.isInWater() || this.entity.isInLava()
-						|| this.entity.isPotionActive(MobEffects.LEVITATION));
+						|| this.entity.isPotionActive(Effects.LEVITATION));
 
 		if (executes)
 		{
@@ -102,7 +102,7 @@ public class AIHopHideFromRain extends EntityAIBase
 	private Vec3d findPossibleShelter()
 	{
 		Random random = this.entity.getRNG();
-		BlockPos blockpos = new BlockPos(this.entity.posX, this.entity.getEntityBoundingBox().minY, this.entity.posZ);
+		BlockPos blockpos = new BlockPos(this.entity.posX, this.entity.getBoundingBox().minY, this.entity.posZ);
 
 		for (int i = 0; i < 10; ++i)
 		{

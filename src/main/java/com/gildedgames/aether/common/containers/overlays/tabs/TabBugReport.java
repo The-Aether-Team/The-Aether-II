@@ -4,13 +4,13 @@ import com.gildedgames.aether.api.registry.tab.ITab;
 import com.gildedgames.aether.api.registry.tab.ITabClient;
 import com.gildedgames.aether.client.gui.container.guidebook.AbstractGuidebookPage;
 import com.gildedgames.aether.common.AetherCore;
-import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.inventory.GuiInventory;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec2f;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class TabBugReport implements ITab
 {
@@ -21,7 +21,7 @@ public class TabBugReport implements ITab
 	}
 
 	@Override
-	public void onOpen(EntityPlayer player)
+	public void onOpen(PlayerEntity player)
 	{
 		// TODO: Re-implement
 		//		if (player.worldObj.isRemote)
@@ -42,19 +42,19 @@ public class TabBugReport implements ITab
 		return false;
 	}
 
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static class Client extends TabBugReport implements ITabClient
 	{
 		private static final ResourceLocation ICON = AetherCore.getResource("textures/gui/tabs/bug_report.png");
 
 		@Override
-		public boolean isTabValid(GuiScreen gui)
+		public boolean isTabValid(Screen gui)
 		{
 			return gui instanceof GuiInventory || gui instanceof AbstractGuidebookPage;
 		}
 
 		@Override
-		public void onClose(EntityPlayer player)
+		public void onClose(PlayerEntity player)
 		{
 		}
 

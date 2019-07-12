@@ -4,7 +4,7 @@ import com.gildedgames.aether.api.dialog.IDialogAction;
 import com.gildedgames.aether.api.dialog.IDialogButton;
 import com.gildedgames.aether.api.dialog.IDialogCondition;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.StringTextComponent;
 import org.apache.commons.lang3.Validate;
 
 import javax.annotation.Nonnull;
@@ -58,7 +58,7 @@ public class DialogButton implements IDialogButton
 	@Override
 	public ITextComponent getLocalizedLabel()
 	{
-		return new TextComponentString(this.label);
+		return new StringTextComponent(this.label);
 	}
 
 	@Nonnull

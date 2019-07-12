@@ -2,19 +2,19 @@ package com.gildedgames.aether.client.events.listeners;
 
 import com.gildedgames.aether.common.util.helpers.AetherHelper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.util.SoundEvents;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.api.distmarker.Dist;
 
-@Mod.EventBusSubscriber(Side.CLIENT)
+@Mod.EventBusSubscriber(Dist.CLIENT)
 public class PlaySoundListener
 {
 	@SubscribeEvent
 	public void onSoundEvent(PlaySoundEvent event)
 	{
-		if (AetherHelper.isAether(Minecraft.getMinecraft().world))
+		if (AetherHelper.isAether(Minecraft.getInstance().world))
 		{
 			if (event.getName().equals(SoundEvents.WEATHER_RAIN.getSoundName().getPath()) ||
 					event.getName().equals(SoundEvents.WEATHER_RAIN_ABOVE.getSoundName().getPath()))

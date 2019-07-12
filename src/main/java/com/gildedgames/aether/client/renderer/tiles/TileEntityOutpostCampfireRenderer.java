@@ -3,7 +3,7 @@ package com.gildedgames.aether.client.renderer.tiles;
 import com.gildedgames.aether.client.models.entities.tile.ModelOutpostCampfire;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.tiles.TileEntityOutpostCampfire;
-import net.minecraft.client.renderer.GlStateManager;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
 
@@ -22,14 +22,14 @@ public class TileEntityOutpostCampfireRenderer extends TileEntitySpecialRenderer
 		GlStateManager.pushMatrix();
 		GlStateManager.enableRescaleNormal();
 
-		GlStateManager.translate((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
-		GlStateManager.rotate(180f, 1f, 0f, 1f);
+		GlStateManager.translatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
+		GlStateManager.rotatef(180f, 1f, 0f, 1f);
 
 		// Rendering as item... ?
 		if (te == null)
 		{
-			GlStateManager.scale(0.6f, 0.6f, 0.6f);
-			GlStateManager.translate(-1.0f, 0.2f, 0.0f);
+			GlStateManager.scalef(0.6f, 0.6f, 0.6f);
+			GlStateManager.translatef(-1.0f, 0.2f, 0.0f);
 		}
 
 		this.bindTexture(TEXTURE);

@@ -2,10 +2,10 @@ package com.gildedgames.aether.common.items.blocks;
 
 import com.gildedgames.aether.common.blocks.IBlockMultiName;
 import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 
-public class ItemBlockMultiName extends ItemBlock
+public class ItemBlockMultiName extends BlockItem
 {
 	private final IBlockMultiName blockWithVariants;
 

@@ -4,10 +4,10 @@ import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.api.world.islands.precipitation.IPrecipitationManager;
 import com.gildedgames.aether.api.world.islands.precipitation.PrecipitationStrength;
 import com.gildedgames.aether.common.AetherCore;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
@@ -16,7 +16,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.EnumSkyBlock;
+import net.minecraft.world.LightType;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.IRenderHandler;
 
@@ -60,7 +60,7 @@ public class RenderWorldPrecipitation extends IRenderHandler
 	// Called every 20th of a second
 	public void tick()
 	{
-		if (!Minecraft.getMinecraft().isGamePaused())
+		if (!Minecraft.getInstance().isGamePaused())
 		{
 			this.renderTicks++;
 			this.renderTicksSinceSound++;
@@ -330,7 +330,7 @@ public class RenderWorldPrecipitation extends IRenderHandler
 
 			int y = mc.world.getTopSolidOrLiquidBlock(new BlockPos(x, 255, z)).getY() + 1;
 
-			if (mc.world.getLightFor(EnumSkyBlock.SKY, new BlockPos(x, y, z)) >= 15)
+			if (mc.world.getLightFor(LightType.SKY, new BlockPos(x, y, z)) >= 15)
 			{
 				SoundEvent event = null;
 				float volume = 1.0f;

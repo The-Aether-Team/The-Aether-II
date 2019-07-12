@@ -6,7 +6,7 @@ import com.gildedgames.aether.api.items.equipment.effects.IEffectPool;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.AetherCore;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 
@@ -49,7 +49,7 @@ public class InvisiblityEffectFactory implements IEffectFactory<InvisiblityEffec
 		@Override
 		public void onEntityUpdate(IPlayerAether player)
 		{
-			EntityPlayer p = player.getEntity();
+			PlayerEntity p = player.getEntity();
 			p.setInvisible(true);
 		}
 
