@@ -158,7 +158,7 @@ public class EntityFlying extends CreatureEntity
 			this.motionZ += (this.rand.nextBoolean() ? 1.0F : -1.0F) * (double) ((this.rand.nextFloat() * 2.0F - 1.0F) * 0.2F);
 		}
 
-		if (this.world.isRemote)
+		if (this.world.isRemote())
 		{
 			if (this.isMoving())
 			{

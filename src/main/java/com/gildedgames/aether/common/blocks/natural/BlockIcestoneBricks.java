@@ -1,11 +1,12 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import net.minecraft.block.*;
-import net.minecraft.block.BlockLiquid;
-import net.minecraft.block.material.Material;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.Fluids;
+import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -29,9 +30,8 @@ public class BlockIcestoneBricks extends Block
 				for (int z = pos.getZ() - EFFECT_RADIUS; z <= (pos.getZ() + EFFECT_RADIUS); z++)
 				{
 					BlockPos newPos = new BlockPos(x, y, z);
-					BlockState newState = world.getBlockState(newPos);
 
-					BlockState frozenState = this.getFrozenBlock(newState);
+					BlockState frozenState = this.getFrozenBlock(world.getFluidState(newPos));
 
 					if (frozenState != null)
 					{
@@ -42,19 +42,19 @@ public class BlockIcestoneBricks extends Block
 		}
 	}
 
-	private BlockState getFrozenBlock(BlockState state)
+	private BlockState getFrozenBlock(IFluidState state)
 	{
-		Block block = state.getBlock();
+		Fluid fluid = state.getFluid();
 
-		if (block == Blocks.WATER)
+		if (fluid == Fluids.WATER)
 		{
-			return state.get(BlockLiquid.LEVEL) == 0 ? Blocks.ICE.getDefaultState() : null;
+			return state.getLevel() == 0 ? Blocks.ICE.getDefaultState() : null;
 		}
-		else if (block == Blocks.LAVA)
+		else if (fluid == Fluids.LAVA)
 		{
 			return Blocks.OBSIDIAN.getDefaultState();
 		}
-		else if (block == Blocks.FLOWING_LAVA || block == Blocks.FLOWING_WATER)
+		else if (fluid == Fluids.FLOWING_LAVA || fluid == Fluids.FLOWING_WATER)
 		{
 			return Blocks.AIR.getDefaultState();
 		}

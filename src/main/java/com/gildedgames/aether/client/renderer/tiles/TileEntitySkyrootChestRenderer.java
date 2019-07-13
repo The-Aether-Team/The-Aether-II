@@ -1,188 +1,108 @@
 package com.gildedgames.aether.client.renderer.tiles;
 
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.blocks.containers.BlockSkyrootChest;
 import com.gildedgames.aether.common.entities.tiles.TileEntitySkyrootChest;
 import com.mojang.blaze3d.platform.GlStateManager;
-import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.ChestBlock;
-import net.minecraft.client.model.ModelChest;
-import net.minecraft.client.model.ModelLargeChest;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
+import net.minecraft.client.renderer.tileentity.model.ChestModel;
+import net.minecraft.client.renderer.tileentity.model.LargeChestModel;
+import net.minecraft.state.properties.ChestType;
+import net.minecraft.tileentity.IChestLid;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
 
-public class TileEntitySkyrootChestRenderer extends TileEntitySpecialRenderer<TileEntitySkyrootChest>
+public class TileEntitySkyrootChestRenderer extends TileEntityRenderer<TileEntitySkyrootChest>
 {
-	private static final ResourceLocation textureSingle = AetherCore.getResource("textures/tile_entities/skyroot_chest_large.png");
+	private static final ResourceLocation TEXTURE_SINGLE = AetherCore.getResource("textures/tile_entities/skyroot_chest_large.png");
 
-	private static final ResourceLocation textureDouble = AetherCore.getResource("textures/tile_entities/skyroot_chest.png");
+	private static final ResourceLocation TEXTURE_DOUBLE = AetherCore.getResource("textures/tile_entities/skyroot_chest.png");
 
 	// This is a stupid hack. See TileEntityItemStackRenderer.
 	private static final TileEntitySkyrootChest nullChest = new TileEntitySkyrootChest();
 
-	private final ModelChest simpleChest = new ModelChest();
+	private final ChestModel simpleChest = new ChestModel();
 
-	private final ModelChest largeChest = new ModelLargeChest();
+	private final ChestModel largeChest = new LargeChestModel();
 
 	@Override
-	public void render(TileEntitySkyrootChest chest, final double x, final double y, final double z, final float partialTicks, final int destroyStage,
-			final float alpha)
+	public void render(TileEntitySkyrootChest entity, final double x, final double y, final double z, final float partialTicks, final int destroyStage)
 	{
-		int metadata;
+		GlStateManager.enableDepthTest();
+		GlStateManager.depthFunc(515);
+		GlStateManager.depthMask(true);
 
-		if (chest == null)
-		{
-			chest = nullChest;
-		}
+		BlockState state = entity.hasWorld() ? entity.getBlockState() : Blocks.CHEST.getDefaultState().with(ChestBlock.FACING, Direction.SOUTH);
 
-		if (!chest.hasWorld())
-		{
-			metadata = 0;
-		}
-		else
-		{
-			final Block block = chest.getBlockType();
-			metadata = chest.getBlockMetadata();
+		ChestType type = state.has(ChestBlock.TYPE) ? state.get(ChestBlock.TYPE) : ChestType.SINGLE;
 
-			if (block instanceof BlockSkyrootChest && metadata == 0)
+		if (type != ChestType.LEFT)
+		{
+			boolean flag = type != ChestType.SINGLE;
+
+			ChestModel model = this.prepareChestModel(entity, flag);
+
+			if (destroyStage >= 0)
 			{
-				((ChestBlock) block).checkForSurroundingChests(chest.getWorld(), chest.getPos(), chest.getWorld().getBlockState(chest.getPos()));
-
-				metadata = chest.getBlockMetadata();
-			}
-
-			chest.checkForAdjacentChests();
-		}
-
-		if (chest.adjacentChestZNeg == null && chest.adjacentChestXNeg == null)
-		{
-			final ModelChest modelchest;
-
-			if (chest.adjacentChestXPos == null && chest.adjacentChestZPos == null)
-			{
-				modelchest = this.simpleChest;
-
-				if (destroyStage >= 0)
-				{
-					this.bindTexture(DESTROY_STAGES[destroyStage]);
-
-					GlStateManager.matrixMode(5890);
-					GlStateManager.pushMatrix();
-					GlStateManager.scalef(4.0F, 4.0F, 1.0F);
-					GlStateManager.translatef(0.0625F, 0.0625F, 0.0625F);
-					GlStateManager.matrixMode(5888);
-				}
-				else
-				{
-					this.bindTexture(textureDouble);
-				}
+				GlStateManager.matrixMode(5890);
+				GlStateManager.pushMatrix();
+				GlStateManager.scalef(flag ? 8.0F : 4.0F, 4.0F, 1.0F);
+				GlStateManager.translatef(0.0625F, 0.0625F, 0.0625F);
+				GlStateManager.matrixMode(5888);
 			}
 			else
 			{
-				modelchest = this.largeChest;
-
-				if (destroyStage >= 0)
-				{
-					this.bindTexture(DESTROY_STAGES[destroyStage]);
-
-					GlStateManager.matrixMode(GL11.GL_TEXTURE);
-
-					GlStateManager.pushMatrix();
-					GlStateManager.scalef(8.0F, 4.0F, 1.0F);
-					GlStateManager.translatef(0.0625F, 0.0625F, 0.0625F);
-					GlStateManager.matrixMode(GL11.GL_MODELVIEW);
-				}
-				else
-				{
-					this.bindTexture(textureSingle);
-				}
+				GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 			}
 
 			GlStateManager.pushMatrix();
 			GlStateManager.enableRescaleNormal();
-
-			if (destroyStage < 0)
-			{
-				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-			}
-
 			GlStateManager.translatef((float) x, (float) y + 1.0F, (float) z + 1.0F);
 			GlStateManager.scalef(1.0F, -1.0F, -1.0F);
-			GlStateManager.translatef(0.5F, 0.5F, 0.5F);
 
-			float angle = 0;
+			float f = state.get(ChestBlock.FACING).getHorizontalAngle();
 
-			switch (metadata)
+			if ((double) Math.abs(f) > 1.0E-5D)
 			{
-				case 2:
-					angle = 180;
-					break;
-				case 3:
-					angle = 0;
-					break;
-				case 4:
-					angle = 90;
-					break;
-				case 5:
-					angle = -90;
-					break;
+				GlStateManager.translatef(0.5F, 0.5F, 0.5F);
+				GlStateManager.rotatef(f, 0.0F, 1.0F, 0.0F);
+				GlStateManager.translatef(-0.5F, -0.5F, -0.5F);
 			}
 
-			if (metadata == 2 && chest.adjacentChestXPos != null)
-			{
-				GlStateManager.translatef(1.0F, 0.0F, 0.0F);
-			}
+			this.applyLidRotation(entity, partialTicks, model);
 
-			if (metadata == 5 && chest.adjacentChestZPos != null)
-			{
-				GlStateManager.translatef(0.0F, 0.0F, -1.0F);
-			}
-
-			GlStateManager.rotatef(angle, 0.0F, 1.0F, 0.0F);
-			GlStateManager.translatef(-0.5F, -0.5F, -0.5F);
-
-			float lidAngle = chest.prevLidAngle + (chest.lidAngle - chest.prevLidAngle) * partialTicks;
-			float adjacentLidAngle;
-
-			if (chest.adjacentChestZNeg != null)
-			{
-				adjacentLidAngle = chest.adjacentChestZNeg.prevLidAngle
-						+ (chest.adjacentChestZNeg.lidAngle - chest.adjacentChestZNeg.prevLidAngle) * partialTicks;
-
-				if (adjacentLidAngle > lidAngle)
-				{
-					lidAngle = adjacentLidAngle;
-				}
-			}
-
-			if (chest.adjacentChestXNeg != null)
-			{
-				adjacentLidAngle = chest.adjacentChestXNeg.prevLidAngle
-						+ (chest.adjacentChestXNeg.lidAngle - chest.adjacentChestXNeg.prevLidAngle) * partialTicks;
-
-				if (adjacentLidAngle > lidAngle)
-				{
-					lidAngle = adjacentLidAngle;
-				}
-			}
-
-			lidAngle = 1.0F - lidAngle;
-			lidAngle = 1.0F - lidAngle * lidAngle * lidAngle;
-
-			modelchest.chestLid.rotateAngleX = -(lidAngle * (float) Math.PI / 2.0F);
-			modelchest.renderAll();
+			model.renderAll();
 
 			GlStateManager.disableRescaleNormal();
 			GlStateManager.popMatrix();
-			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+			GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 
 			if (destroyStage >= 0)
 			{
-				GlStateManager.matrixMode(GL11.GL_TEXTURE);
+				GlStateManager.matrixMode(5890);
 				GlStateManager.popMatrix();
-				GlStateManager.matrixMode(GL11.GL_MODELVIEW);
+				GlStateManager.matrixMode(5888);
 			}
+
 		}
+	}
+
+	private ChestModel prepareChestModel(TileEntitySkyrootChest te, boolean isDoubleChest)
+	{
+		ResourceLocation resourcelocation = isDoubleChest ? TEXTURE_DOUBLE : TEXTURE_SINGLE;
+
+		this.bindTexture(resourcelocation);
+		return isDoubleChest ? this.largeChest : this.simpleChest;
+	}
+
+	private void applyLidRotation(TileEntitySkyrootChest te, float partialTicks, ChestModel model)
+	{
+		float angle = ((IChestLid) te).getLidAngle(partialTicks);
+		angle = 1.0F - angle;
+		angle = 1.0F - angle * angle * angle;
+
+		model.getLid().rotateAngleX = -(angle * ((float) Math.PI / 2F));
 	}
 }

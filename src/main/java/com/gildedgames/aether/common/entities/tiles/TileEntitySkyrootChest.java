@@ -1,16 +1,19 @@
 package com.gildedgames.aether.common.entities.tiles;
 
+import net.minecraft.tileentity.ChestTileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class TileEntitySkyrootChest extends TileEntityChest
+public class TileEntitySkyrootChest extends ChestTileEntity
 {
 	@Override
-	public String getName()
+	protected ITextComponent getDefaultName()
 	{
-		return this.hasCustomName() ? super.getName() : "container.skyroot_chest";
+		return new TranslationTextComponent("container.skyroot_chest");
 	}
 
 	@Override

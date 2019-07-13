@@ -18,23 +18,4 @@ public class BlockCustomBookshelf extends Block
 	{
 		super(properties);
 	}
-
-	@Override
-	public int quantityDropped(Random random)
-	{
-		return 3;
-	}
-
-	@Override
-	public float getEnchantPowerBonus(World world, BlockPos pos)
-	{
-		return 1;
-	}
-
-	@Override
-	@Nullable
-	public Item getItemDropped(BlockState state, Random rand, int fortune)
-	{
-		return Items.BOOK;
-	}
 }

@@ -1,22 +1,13 @@
 package com.gildedgames.aether.common.blocks.construction.walls;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.material.MapColor;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Items;
-import net.minecraft.item.DyeColor;
-import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-
-import java.util.Random;
 
 public class BlockCandyCaneWall extends BlockCustomWall
 {
-
 	public BlockCandyCaneWall(Block.Properties properties)
 	{
 		super(properties);
@@ -29,44 +20,8 @@ public class BlockCandyCaneWall extends BlockCustomWall
 
 		if (world.isRaining())
 		{
-			entity.motionX *= 0.1D;
-			entity.motionZ *= 0.1D;
+			Vec3d motion = entity.getMotion();
+			entity.setMotion(motion.mul(0.1D, 1.0D, 0.1D));
 		}
-	}
-
-	@Override
-	public Item getItemDropped(BlockState state, Random rand, int fortune)
-	{
-		return Items.SUGAR;
-	}
-
-	@Override
-	public int quantityDroppedWithBonus(int fortune, Random random)
-	{
-		return this.quantityDropped(random) + random.nextInt(fortune + 1);
-	}
-
-	@Override
-	public int quantityDropped(Random random)
-	{
-		return 6 + random.nextInt(3);
-	}
-
-	@Override
-	public boolean canSilkHarvest(World world, BlockPos pos, BlockState state, PlayerEntity player)
-	{
-		return true;
-	}
-
-	@Override
-	public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, BlockState state, float chance, int fortune)
-	{
-		super.dropBlockAsItemWithChance(worldIn, pos, state, chance, fortune);
-	}
-
-	@Override
-	public MapColor getMapColor(BlockState state, IBlockReader worldIn, BlockPos pos)
-	{
-		return MapColor.getBlockColor(DyeColor.RED);
 	}
 }

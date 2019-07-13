@@ -298,7 +298,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 
 		this.fallSlowly();
 
-		if (!this.world.isRemote)
+		if (!this.world.isRemote())
 		{
 			if (!this.isRaisedByPlayer() && this.getGender() == AnimalGender.MALE)
 			{
@@ -405,7 +405,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 				this.ticksUntilFlap--;
 			}
 		}
-		else if (this.world.isRemote)
+		else if (this.world.isRemote())
 		{
 			if (!this.wasOnGround)
 			{

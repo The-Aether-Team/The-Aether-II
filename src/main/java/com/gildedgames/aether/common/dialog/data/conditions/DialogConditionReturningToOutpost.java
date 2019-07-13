@@ -26,7 +26,7 @@ public class DialogConditionReturningToOutpost implements IDialogCondition
 	@Override
 	public boolean isMet(IDialogController controller)
 	{
-		if (controller.getDialogPlayer().world.isRemote)
+		if (controller.getDialogPlayer().world.isRemote())
 		{
 			return false;
 		}

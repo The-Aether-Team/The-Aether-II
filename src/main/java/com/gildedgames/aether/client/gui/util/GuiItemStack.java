@@ -10,7 +10,7 @@ import net.minecraft.client.gui.screen.Screen;
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.RenderItem;
+import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 
@@ -71,7 +71,7 @@ public class GuiItemStack extends GuiElement
 			font = this.viewer().fontRenderer();
 		}
 
-		RenderItem renderitem = this.viewer().mc().getRenderItem();
+		ItemRenderer renderitem = this.viewer().mc().getItemRenderer();
 		renderitem.zLevel = 200.0F;
 		renderitem.renderItemAndEffectIntoGUI(this.viewer().mc().player, this.stack, (int) this.dim().x() + 1, (int) this.dim().y() + 1);
 

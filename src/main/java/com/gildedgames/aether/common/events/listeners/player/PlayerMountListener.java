@@ -112,7 +112,7 @@ public class PlayerMountListener
 	{
 		final Entity entity = event.getEntityBeingMounted();
 
-		if (event.isDismounting() && entity instanceof IMount && !entity.world.isRemote)
+		if (event.isDismounting() && entity instanceof IMount && !entity.world.isRemote())
 		{
 			if (!entity.onGround || (entity instanceof IFlyingMountData && ((IFlyingMountData) entity).isFastFalling()))
 			{

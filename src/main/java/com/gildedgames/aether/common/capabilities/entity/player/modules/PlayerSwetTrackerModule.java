@@ -35,7 +35,7 @@ public class PlayerSwetTrackerModule extends PlayerAetherModule implements IPlay
 
 	public void detachSwets()
 	{
-		if (!this.getEntity().world.isRemote)
+		if (!this.getEntity().world.isRemote())
 		{
 			for (final EntitySwet swet : this.swets)
 			{
@@ -55,7 +55,7 @@ public class PlayerSwetTrackerModule extends PlayerAetherModule implements IPlay
 
 	public void spawnSwet(final EntitySwet swet)
 	{
-		if (!this.getEntity().world.isRemote)
+		if (!this.getEntity().world.isRemote())
 		{
 			swet.setPosition(this.getEntity().posX, this.getEntity().posY, this.getEntity().posZ);
 

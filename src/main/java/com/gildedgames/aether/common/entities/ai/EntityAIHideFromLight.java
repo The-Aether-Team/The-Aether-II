@@ -57,7 +57,7 @@ public class EntityAIHideFromLight extends Goal
 
 		final BlockPos entityPos = new BlockPos(this.entity.posX, this.entity.getBoundingBox().minY, this.entity.posZ);
 
-		if (this.entity.world.getLightFromNeighbors(entityPos) <= this.lightLevel)
+		if (this.entity.world.getBrightness(entityPos) <= this.lightLevel)
 		{
 			return false;
 		}
@@ -100,7 +100,7 @@ public class EntityAIHideFromLight extends Goal
 		{
 			final BlockPos blockpos1 = blockpos.add(random.nextInt(20) - 10, random.nextInt(6) - 3, random.nextInt(20) - 10);
 
-			if (this.entity.world.getLightFromNeighbors(blockpos1) <= this.lightLevel)
+			if (this.entity.world.getBrightness(blockpos1) <= this.lightLevel)
 			{
 
 				return new Vec3d((double) blockpos1.getX(), (double) blockpos1.getY(), (double) blockpos1.getZ());

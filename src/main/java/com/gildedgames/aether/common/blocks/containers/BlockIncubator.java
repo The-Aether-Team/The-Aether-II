@@ -3,24 +3,27 @@ package com.gildedgames.aether.common.blocks.containers;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.tiles.TileEntityIncubator;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
-import net.minecraft.block.*;
-import net.minecraft.block.material.Material;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.DirectionProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockRenderType;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.ContainerBlock;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
+import net.minecraft.state.BooleanProperty;
+import net.minecraft.state.DirectionProperty;
+import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
@@ -35,23 +38,17 @@ public class BlockIncubator extends ContainerBlock
 
 	public static final int UNLIT_META = 0, LIT_META = 1;
 
-	protected static final AxisAlignedBB BOUNDS = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.8D, 1.0D);
+	protected static final VoxelShape BOUNDS = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 1.0D, 0.8D, 1.0D);
 
 	public BlockIncubator(Block.Properties properties)
 	{
 		super(properties);
 
-		this.setDefaultState(this.stateContainer.getBaseState().with(PROPERTY_IS_LIT, Boolean.FALSE).with(PROPERTY_FACING, Direction.NORTH));
+		this.setDefaultState(this.getStateContainer().getBaseState().with(PROPERTY_IS_LIT, Boolean.FALSE).with(PROPERTY_FACING, Direction.NORTH));
 	}
 
 	@Override
-	public VoxelShape getBlockFaceShape(IBlockReader worldIn, BlockState state, BlockPos pos, Direction face)
-	{
-		return VoxelShape.UNDEFINED;
-	}
-
-	@Override
-	public void breakBlock(World world, BlockPos pos, BlockState state)
+	public void onReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean isMoving)
 	{
 		TileEntity tileEntity = world.getTileEntity(pos);
 
@@ -60,19 +57,7 @@ public class BlockIncubator extends ContainerBlock
 			InventoryHelper.dropInventoryItems(world, pos, (IInventory) tileEntity);
 		}
 
-		super.breakBlock(world, pos, state);
-	}
-
-	@Override
-	public boolean isOpaqueCube(BlockState state)
-	{
-		return false;
-	}
-
-	@Override
-	public boolean isFullCube(BlockState state)
-	{
-		return false;
+		super.onReplaced(state, world, pos, newState, isMoving);
 	}
 
 	@Override
@@ -83,7 +68,7 @@ public class BlockIncubator extends ContainerBlock
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(BlockState state, IBlockReader source, BlockPos pos)
+	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
 	{
 		return BOUNDS;
 	}
@@ -107,10 +92,9 @@ public class BlockIncubator extends ContainerBlock
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, BlockState state, PlayerEntity player, Hand hand, Direction side,
-			float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit)
 	{
-		if (!world.isRemote)
+		if (!world.isRemote())
 		{
 			player.openGui(AetherCore.INSTANCE, AetherGuiHandler.INCUBATOR_ID, world, pos.getX(), pos.getY(), pos.getZ());
 		}
@@ -119,32 +103,9 @@ public class BlockIncubator extends ContainerBlock
 	}
 
 	@Override
-	public int getLightValue(BlockState state, IBlockReader world, BlockPos pos)
+	public int getLightValue(BlockState state)
 	{
 		return state.get(PROPERTY_IS_LIT) ? 13 : 0;
-	}
-
-	@Override
-	public int getMetaFromState(BlockState state)
-	{
-		int meta = state.get(PROPERTY_FACING).getIndex();
-
-		if (state.get(PROPERTY_IS_LIT))
-		{
-			meta |= 8;
-		}
-
-		return meta;
-	}
-
-	@Override
-	public BlockState getStateFromMeta(int meta)
-	{
-		Direction facing = Direction.byHorizontalIndex(meta & 7);
-
-		boolean isLit = (meta & 8) == 8;
-
-		return this.getDefaultState().with(PROPERTY_FACING, facing).with(PROPERTY_IS_LIT, isLit);
 	}
 
 	@Override

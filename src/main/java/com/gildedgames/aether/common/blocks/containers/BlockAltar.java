@@ -4,22 +4,22 @@ import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.entities.tiles.TileEntityAltar;
 import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.state.DirectionProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.state.DirectionProperty;
+import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 public class BlockAltar extends Block implements ITileEntityProvider
@@ -30,50 +30,39 @@ public class BlockAltar extends Block implements ITileEntityProvider
 	{
 		super(properties);
 
-		this.setDefaultState(this.stateContainer.getBaseState().with(PROPERTY_FACING, Direction.NORTH));
+		this.setDefaultState(this.getStateContainer().getBaseState().with(PROPERTY_FACING, Direction.NORTH));
 	}
 
 	@Override
-	public VoxelShape getBlockFaceShape(IBlockReader worldIn, BlockState state, BlockPos pos, Direction face)
-	{
-		return VoxelShape.UNDEFINED;
-	}
-
-	@Override
-	public void breakBlock(World world, BlockPos pos, BlockState state)
+	public void onPlayerDestroy(IWorld world, BlockPos pos, BlockState state)
 	{
 		TileEntityAltar altar = (TileEntityAltar) world.getTileEntity(pos);
-		altar.dropContents();
 
-		super.breakBlock(world, pos, state);
+		if (altar != null)
+		{
+			altar.dropContents();
+		}
+
+		super.onPlayerDestroy(world, pos, state);
 	}
 
 	@Override
-	public BlockState getStateForPlacement(World world, BlockPos pos, Direction facing, float hitX, float hitY, float hitZ, int meta,
-			LivingEntity placer)
+	public BlockState getStateForPlacement(BlockItemUseContext context)
 	{
-		return this.getDefaultState().with(PROPERTY_FACING, placer.getHorizontalFacing());
+		return this.getDefaultState().with(PROPERTY_FACING, context.getPlacementHorizontalFacing());
 	}
 
 	@Override
-	public BlockState getStateFromMeta(int meta)
+	public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
 	{
-		return this.getDefaultState().with(PROPERTY_FACING, Direction.byHorizontalIndex(meta));
-	}
-
-	@Override
-	public int getMetaFromState(BlockState state)
-	{
-		return state.get(PROPERTY_FACING).getIndex();
-	}
-
-	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, BlockState state, PlayerEntity player, Hand hand, Direction side,
-			float hitX, float hitY, float hitZ)
-	{
-		if (!world.isRemote)
+		if (!world.isRemote())
 		{
 			TileEntityAltar altar = (TileEntityAltar) world.getTileEntity(pos);
+
+			if (altar == null)
+			{
+				return false;
+			}
 
 			ItemStack heldStack = player.inventory.getCurrentItem();
 
@@ -100,7 +89,7 @@ public class BlockAltar extends Block implements ITileEntityProvider
 
 				if (!altar.getStackOnAltar().isEmpty())
 				{
-					world.spawnEntity(altar.createEntityItemAboveAltar(altar.getStackOnAltar()));
+					world.addEntity(altar.createEntityItemAboveAltar(altar.getStackOnAltar()));
 				}
 
 				altar.setStackOnAltar(stack);
@@ -133,20 +122,8 @@ public class BlockAltar extends Block implements ITileEntityProvider
 
 		if (stack != null)
 		{
-			world.spawnEntity(altar.createEntityItemAboveAltar(stack));
+			world.addEntity(altar.createEntityItemAboveAltar(stack));
 		}
-	}
-
-	@Override
-	public boolean isOpaqueCube(BlockState state)
-	{
-		return false;
-	}
-
-	@Override
-	public boolean isFullCube(BlockState state)
-	{
-		return false;
 	}
 
 	@Override

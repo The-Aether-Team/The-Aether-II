@@ -4,7 +4,7 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.init.MaterialsAether;
 import com.gildedgames.aether.common.items.tools.handlers.*;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.Item;
+import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolItem;
 import net.minecraft.util.ActionResultType;
@@ -17,20 +17,21 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import java.util.HashMap;
+import java.util.IdentityHashMap;
 import java.util.Map;
 
 @Mod.EventBusSubscriber
 public class ItemToolListener
 {
-	private static final Map<String, IToolEventHandler> handlers = new HashMap<>();
+	private static final Map<IItemTier, IToolEventHandler> handlers = new IdentityHashMap<>();
 
 	static
 	{
-		handlers.put(MaterialsAether.SKYROOT_TOOL.name(), new ItemSkyrootToolHandler());
-		handlers.put(MaterialsAether.HOLYSTONE_TOOL.name(), new ItemHolystoneToolHandler());
-		handlers.put(MaterialsAether.ARKENIUM_TOOL.name(), new ItemArkeniumToolHandler());
-		handlers.put(MaterialsAether.ZANITE_TOOL.name(), new ItemZaniteToolHandler());
-		handlers.put(MaterialsAether.GRAVITITE_TOOL.name(), new ItemGravititeToolHandler());
+		handlers.put(MaterialsAether.SKYROOT_TOOL, new ItemSkyrootToolHandler());
+		handlers.put(MaterialsAether.HOLYSTONE_TOOL, new ItemHolystoneToolHandler());
+		handlers.put(MaterialsAether.ARKENIUM_TOOL, new ItemArkeniumToolHandler());
+		handlers.put(MaterialsAether.ZANITE_TOOL, new ItemZaniteToolHandler());
+		handlers.put(MaterialsAether.GRAVITITE_TOOL, new ItemGravititeToolHandler());
 	}
 
 	@OnlyIn(Dist.CLIENT)
@@ -39,7 +40,7 @@ public class ItemToolListener
 	{
 		if (event.getItemStack().getItem() instanceof ToolItem)
 		{
-			final String material = ((ToolItem) event.getItemStack().getItem()).getToolMaterialName();
+			final IItemTier material = ((ToolItem) event.getItemStack().getItem()).getTier();
 
 			final IToolEventHandler handler = handlers.get(material);
 
@@ -57,7 +58,7 @@ public class ItemToolListener
 	{
 		if (event.getItemStack().getItem() instanceof ToolItem)
 		{
-			final String material = ((ToolItem) event.getItemStack().getItem()).getToolMaterialName();
+			final IItemTier material = ((ToolItem) event.getItemStack().getItem()).getTier();
 
 			final IToolEventHandler handler = handlers.get(material);
 
@@ -75,7 +76,7 @@ public class ItemToolListener
 	{
 		if (event.getItemStack().getItem() instanceof ToolItem)
 		{
-			final String material = ((ToolItem) event.getItemStack().getItem()).getToolMaterialName();
+			final IItemTier material = ((ToolItem) event.getItemStack().getItem()).getTier();
 
 			final IToolEventHandler handler = handlers.get(material);
 
@@ -114,7 +115,7 @@ public class ItemToolListener
 
 		if (stack.getItem() instanceof ToolItem)
 		{
-			final String material = ((ToolItem) stack.getItem()).getToolMaterialName();
+			final IItemTier material = ((ToolItem) stack.getItem()).getTier();
 
 			final IToolEventHandler handler = handlers.get(material);
 
@@ -150,7 +151,7 @@ public class ItemToolListener
 
 		if (stack.getItem() instanceof ToolItem)
 		{
-			final String material = ((ToolItem) stack.getItem()).getToolMaterialName();
+			final IItemTier material = ((ToolItem) stack.getItem()).getTier();
 
 			final IToolEventHandler handler = handlers.get(material);
 
@@ -171,7 +172,7 @@ public class ItemToolListener
 
 		if (stack.getItem() instanceof ToolItem)
 		{
-			final String material = ((ToolItem) stack.getItem()).getToolMaterialName();
+			final IItemTier material = ((ToolItem) stack.getItem()).getTier();
 
 			final IToolEventHandler handler = handlers.get(material);
 
@@ -184,9 +185,9 @@ public class ItemToolListener
 		}
 	}
 
-	public static boolean onEntityHit(final ItemStack stack, final Item.ToolMaterial material, final LivingEntity target, final LivingEntity attacker)
+	public static boolean onEntityHit(final ItemStack stack, final IItemTier material, final LivingEntity target, final LivingEntity attacker)
 	{
-		final IToolEventHandler handler = handlers.get(material.name());
+		final IToolEventHandler handler = handlers.get(material);
 
 		if (handler != null)
 		{

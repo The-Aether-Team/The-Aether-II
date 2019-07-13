@@ -181,7 +181,7 @@ public class EntityMysteriousFigure extends EntityCharacter
 
 			dialogModule.setTalkingEntity(this);
 
-			if (!player.world.isRemote)
+			if (!player.world.isRemote())
 			{
 				dialogModule.openScene(AetherCore.getResource("mysterious_figure/start"), "start");
 			}

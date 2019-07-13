@@ -7,18 +7,17 @@ import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.IGrowable;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.IFluidState;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.IntegerProperty;
-import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorld;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -37,26 +36,26 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	{
 		super(properties);
 
-		this.setDefaultState(this.stateContainer.getBaseState().with(PROPERTY_IS_TOP_BLOCK, false).with(PROPERTY_STAGE, 1));
+		this.setDefaultState(this.getStateContainer().getBaseState().with(PROPERTY_IS_TOP_BLOCK, false).with(PROPERTY_STAGE, 1));
 	}
 
 	@Override
-	public float getBlockHardness(BlockState blockState, World worldIn, BlockPos pos)
+	public float getBlockHardness(BlockState blockState, IBlockReader world, BlockPos pos)
 	{
-		if (blockState.getValue(PROPERTY_STAGE) >= STAGE_COUNT)
+		if (blockState.get(PROPERTY_STAGE) >= STAGE_COUNT)
 		{
 			return 0.0f;
 		}
 
-		return super.getBlockHardness(blockState, worldIn, pos);
+		return super.getBlockHardness(blockState, world, pos);
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World world, BlockPos pos)
+	public boolean isValidPosition(BlockState state, IWorldReader world, BlockPos pos)
 	{
 		BlockState soilBlock = world.getBlockState(pos.down());
 
-		if (soilBlock.getBlock() == this && soilBlock.getValue(PROPERTY_IS_TOP_BLOCK))
+		if (soilBlock.getBlock() == this && soilBlock.get(PROPERTY_IS_TOP_BLOCK))
 		{
 			return false;
 		}
@@ -75,7 +74,7 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 		int chance = 10;
 
 		if (soilState.getBlock() == BlocksAether.aether_grass
-				&& soilState.getValue(BlockAetherGrass.PROPERTY_VARIANT) == BlockAetherGrass.ENCHANTED)
+				&& soilState.get(BlockAetherGrass.PROPERTY_VARIANT) == BlockAetherGrass.ENCHANTED)
 		{
 			chance /= 2;
 		}
@@ -111,7 +110,7 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	}
 
 	@Override
-	public boolean removedByPlayer(BlockState state, World world, BlockPos pos, PlayerEntity player, boolean willHarvest)
+	public boolean removedByPlayer(BlockState state, World world, BlockPos pos, PlayerEntity player, boolean willHarvest, IFluidState fluid)
 	{
 		boolean isRoot = !state.get(PROPERTY_IS_TOP_BLOCK);
 
@@ -151,31 +150,13 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	}
 
 	@Override
-	public BlockState getStateFromMeta(int meta)
-	{
-		int isTop = (meta / STAGE_COUNT);
-		int stage = ((meta - (STAGE_COUNT * isTop)) % STAGE_COUNT) + 1;
-
-		return this.getDefaultState().with(PROPERTY_IS_TOP_BLOCK, isTop > 0).with(PROPERTY_STAGE, stage);
-	}
-
-	@Override
-	public int getMetaFromState(BlockState state)
-	{
-		int top = state.get(PROPERTY_IS_TOP_BLOCK) ? STAGE_COUNT : 0;
-		int stage = state.get(PROPERTY_STAGE);
-
-		return top + stage;
-	}
-
-	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
 		builder.add(PROPERTY_IS_TOP_BLOCK, PROPERTY_STAGE);
 	}
 
 	@Override
-	public boolean canGrow(World worldIn, BlockPos pos, BlockState state, boolean isClient)
+	public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient)
 	{
 		int stage = state.get(PROPERTY_STAGE);
 
@@ -191,7 +172,7 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	}
 
 	@Override
-	public boolean isSuitableSoilBlock(World world, BlockPos pos, BlockState state)
+	public boolean isSuitableSoilBlock(IWorldReader world, BlockPos pos, BlockState state)
 	{
 		return (state.getBlock() == this && !state.get(PROPERTY_IS_TOP_BLOCK) && state.get(PROPERTY_STAGE) >= 3) || super
 				.isSuitableSoilBlock(world, pos, state);
@@ -224,28 +205,6 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	}
 
 	@Override
-	protected void invalidateBlock(World world, BlockPos pos, BlockState state)
-	{
-		if (world.getBlockState(state.get(PROPERTY_IS_TOP_BLOCK) ? pos.down() : pos.up()).getBlock() == this)
-		{
-			this.dropBlockAsItem(world, pos, state, 0);
-		}
-
-		this.destroyTree(world, pos, state);
-	}
-
-	@Override
-	public void getDrops(NonNullList<ItemStack> list, IBlockReader world, BlockPos pos, BlockState state, int fortune)
-	{
-		super.getDrops(list, world, pos, state, fortune);
-
-		if (state.get(PROPERTY_STAGE) == STAGE_COUNT)
-		{
-			list.addAll(this.getFruitDrops(world, state));
-		}
-	}
-
-	@Override
 	public void grow(World world, Random rand, BlockPos pos, BlockState state)
 	{
 		BlockPos topBlock = state.get(PROPERTY_IS_TOP_BLOCK) ? pos : pos.up();
@@ -261,7 +220,7 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 
 		if (topState.getBlock() == this && bottomState.getBlock() == this)
 		{
-			int nextStage = topState.getValue(PROPERTY_STAGE) + amount;
+			int nextStage = topState.get(PROPERTY_STAGE) + amount;
 
 			if (nextStage <= STAGE_COUNT)
 			{

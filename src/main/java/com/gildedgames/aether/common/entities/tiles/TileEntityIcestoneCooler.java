@@ -237,7 +237,7 @@ public class TileEntityIcestoneCooler extends LockableTileEntity implements ITic
 			--this.coolerCoolTime;
 		}
 
-		if (!this.world.isRemote)
+		if (!this.world.isRemote())
 		{
 			ItemStack itemstack = this.coolerItemStacks.get(1);
 

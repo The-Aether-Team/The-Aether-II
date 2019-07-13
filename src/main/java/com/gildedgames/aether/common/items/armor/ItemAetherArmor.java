@@ -2,57 +2,49 @@ package com.gildedgames.aether.common.items.armor;
 
 import com.gildedgames.aether.api.entity.damage.DamageTypeAttributes;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.capabilities.item.effects.stats.StatEffectFactory;
-import com.gildedgames.aether.common.init.CreativeTabsAether;
 import com.google.common.collect.Multimap;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.IArmorMaterial;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import java.util.UUID;
 
-public class ItemAetherArmor extends ItemArmor
+public class ItemAetherArmor extends ArmorItem
 {
 	private static final UUID[] ARMOR_MODIFIERS = new UUID[] { UUID.fromString("a8896424-20ea-4d0a-b0d1-d961dbdcb309"),
 			UUID.fromString("48712e68-2b7e-4c3e-95ae-dba24d7e9e84"), UUID.fromString("13552bc9-9a27-4b8f-879b-0d7e68417486"),
 			UUID.fromString("fbaef69d-8d56-43e4-ac35-af3a25b28330") };
 
-	private final String name;
+	private double slashLevel, pierceLevel, impactLevel;
 
-	private int slashLevel, pierceLevel, impactLevel;
-
-	public ItemAetherArmor(final ArmorMaterial material, final String name, final EquipmentSlotType armorType)
+	public ItemAetherArmor(final IArmorMaterial material, final EquipmentSlotType slot, final Item.Properties builder)
 	{
-		super(material, 0, armorType);
-
-		this.name = name;
-
-		this.setCreativeTab(CreativeTabsAether.TAB_ARMOR);
-
-		this.damageReduceAmount = material.getDamageReductionAmount(armorType);
+		super(material, slot, builder);
 	}
 
-	public <T extends ItemAetherArmor> T slashDefense(int level)
+	public ItemAetherArmor setSlashDefense(int level)
 	{
 		this.slashLevel = level;
 
-		return (T) this;
+		return this;
 	}
 
-	public <T extends ItemAetherArmor> T pierceDefense(int level)
+	public ItemAetherArmor setPierceDefense(int level)
 	{
 		this.pierceLevel = level;
 
-		return (T) this;
+		return this;
 	}
 
-	public <T extends ItemAetherArmor> T impactDefense(int level)
+	public ItemAetherArmor setImpactDefense(int level)
 	{
 		this.impactLevel = level;
 
-		return (T) this;
+		return this;
 	}
 
 	@Override
@@ -74,27 +66,23 @@ public class ItemAetherArmor extends ItemArmor
 	@Override
 	public String getArmorTexture(final ItemStack stack, final Entity entity, final EquipmentSlotType slot, final String type)
 	{
-		return AetherCore.getResourcePath("textures/armor/" + this.name + "_layer_" + (slot == EquipmentSlotType.LEGS ? 2 :
+		return AetherCore.getResourcePath("textures/armor/" + this.material.getName() + "_layer_" + (slot == EquipmentSlotType.LEGS ? 2 :
 				1 + (AetherCore.CONFIG.hasCutoutHelmets() ? "b" : "")) + ".png");
 	}
 
 	@Override
-	public Multimap<String, AttributeModifier> getItemAttributeModifiers(EquipmentSlotType equipmentSlot)
+	public Multimap<String, AttributeModifier> getAttributeModifiers(EquipmentSlotType equipmentSlot)
 	{
-		Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);
+		Multimap<String, AttributeModifier> multimap = super.getAttributeModifiers(equipmentSlot);
 
-		if (equipmentSlot == this.armorType)
+		int index = equipmentSlot.getIndex();
+		String suffix = " defense level modifier";
+
+		if (this.slot == equipmentSlot)
 		{
-			multimap.put(
-					DamageTypeAttributes.SLASH_DEFENSE_LEVEL.getName(),
-					new AttributeModifier(ARMOR_MODIFIERS[equipmentSlot.getIndex()], "Slash defense level modifier", (double) this.slashLevel,
-							StatEffectFactory.StatProvider.OP_ADD));
-			multimap.put(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL.getName(),
-					new AttributeModifier(ARMOR_MODIFIERS[equipmentSlot.getIndex()], "Pierce defense level modifier", (double) this.pierceLevel,
-							StatEffectFactory.StatProvider.OP_ADD));
-			multimap.put(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL.getName(),
-					new AttributeModifier(ARMOR_MODIFIERS[equipmentSlot.getIndex()], "Impact defense level modifier", (double) this.impactLevel,
-							StatEffectFactory.StatProvider.OP_ADD));
+			multimap.put(DamageTypeAttributes.SLASH_DEFENSE_LEVEL.getName(), new AttributeModifier(ARMOR_MODIFIERS[index], "Slash" + suffix, this.slashLevel, AttributeModifier.Operation.ADDITION));
+			multimap.put(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL.getName(), new AttributeModifier(ARMOR_MODIFIERS[index], "Pierce" + suffix, this.pierceLevel, AttributeModifier.Operation.ADDITION));
+			multimap.put(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL.getName(), new AttributeModifier(ARMOR_MODIFIERS[index], "Impact" + suffix, this.impactLevel, AttributeModifier.Operation.ADDITION));
 		}
 
 		return multimap;

@@ -8,19 +8,21 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 import java.util.List;
 
 public interface IToolEventHandler
 {
-	void onHarvestBlock(ItemStack stack, World world, BlockState state, BlockPos pos, PlayerEntity entity, List<ItemStack> drops);
+	void onHarvestBlock(ItemStack stack, IWorld world, BlockState state, BlockPos pos, PlayerEntity entity, List<ItemStack> drops);
 
 	boolean onRightClickBlock(World world, BlockPos pos, PlayerEntity player, Hand hand, Direction facing);
 
 	void onRightClickItem(PlayerEntity player, Hand hand);
 
-	void addInformation(ItemStack stack, List<String> tooltip);
+	void addInformation(ItemStack stack, List<ITextComponent> tooltip);
 
 	void onEntityHit(ItemStack stack, Entity target, LivingEntity attacker);
 

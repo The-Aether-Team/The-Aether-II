@@ -10,6 +10,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUseContext;
 import net.minecraft.util.*;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
@@ -26,7 +27,7 @@ public class ItemBlockCustomSnow extends BlockItem
 	}
 
 	@Override
-	public ActionResultType onItemUse(PlayerEntity player, World world, BlockPos pos, Hand hand, Direction facing, float hitX, float hitY, float hitZ)
+	public ActionResultType onItemUse(ItemUseContext context)
 	{
 		ItemStack heldStack = player.getHeldItem(hand);
 

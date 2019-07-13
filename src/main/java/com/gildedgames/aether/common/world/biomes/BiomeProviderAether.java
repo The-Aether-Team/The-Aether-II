@@ -63,7 +63,7 @@ public class BiomeProviderAether extends BiomeProvider
 		Arrays.fill(biomes, BiomesAether.VOID);
 
 		// We can't do anything on the client. Don't waste time.
-		if (this.world.isRemote)
+		if (this.world.isRemote())
 		{
 			return biomes;
 		}

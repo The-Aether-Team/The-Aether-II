@@ -70,7 +70,7 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 			}
 		}
 
-		final List<Pair<Integer, ItemStack>> updates = this.getEntity().world.isRemote ? null : new ArrayList<>();
+		final List<Pair<Integer, ItemStack>> updates = this.getEntity().world.isRemote() ? null : new ArrayList<>();
 
 		// Checks what items have been changed in the staging inventory, records them, and then
 		// fires off to the effect manager

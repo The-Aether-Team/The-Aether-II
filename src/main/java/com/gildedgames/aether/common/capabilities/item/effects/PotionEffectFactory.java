@@ -8,7 +8,6 @@ import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 
@@ -93,7 +92,7 @@ public class PotionEffectFactory implements IEffectFactory<PotionEffectFactory.P
 
 		private void addPotions(IPlayerAether player)
 		{
-			this.potions.stream().map(provider -> new PotionEffect(provider.potion, 1000, provider.strength, true, false))
+			this.potions.stream().map(provider -> new net.minecraft.potion.EffectInstance(provider.potion, 1000, provider.strength, true, false))
 					.forEach(player.getEntity()::addPotionEffect);
 		}
 

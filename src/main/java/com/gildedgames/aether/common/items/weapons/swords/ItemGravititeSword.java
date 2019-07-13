@@ -2,13 +2,16 @@ package com.gildedgames.aether.common.items.weapons.swords;
 
 import com.gildedgames.aether.common.items.ItemAbilityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
 
 public class ItemGravititeSword extends ItemAetherSword
 {
-	public ItemGravititeSword()
+
+	public ItemGravititeSword(IItemTier tier, ItemAbilityType abilityType, int attackDamageIn, float attackSpeedIn,
+			Properties builder)
 	{
-		super(ToolMaterial.DIAMOND, ItemAbilityType.ACTIVE);
+		super(tier, abilityType, attackDamageIn, attackSpeedIn, builder);
 	}
 
 	@Override

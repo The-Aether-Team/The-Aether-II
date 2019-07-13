@@ -1,29 +1,18 @@
 package com.gildedgames.aether.common.blocks.decorative;
 
-import com.gildedgames.aether.api.registrar.BlocksAether;
 import net.minecraft.block.Block;
-import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.MapColor;
-import net.minecraft.block.material.Material;
-import net.minecraft.item.DyeColor;
-import net.minecraft.state.EnumProperty;
-import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-
-import java.util.Random;
 
 public class BlockCandyCane extends RotatedPillarBlock
 {
@@ -35,10 +24,9 @@ public class BlockCandyCane extends RotatedPillarBlock
 	}
 
 	@Override
-	public BlockState getStateForPlacement(World worldIn, BlockPos pos, Direction facing, float hitX, float hitY, float hitZ, int meta,
-			LivingEntity placer)
+	public BlockState getStateForPlacement(BlockItemUseContext context)
 	{
-		return this.getStateFromMeta(meta).with(BLOCK_AXIS, BlockCandyCane.EnumAxis.fromFacingAxis(facing.getAxis()));
+		return this.getDefaultState().with(BLOCK_AXIS, BlockCandyCane.EnumAxis.fromFacingAxis(context.getFace().getAxis()));
 	}
 
 	@Override
@@ -48,49 +36,13 @@ public class BlockCandyCane extends RotatedPillarBlock
 
 		if (world.isRaining())
 		{
-			entity.motionX *= 0.1D;
-			entity.motionZ *= 0.1D;
+			Vec3d motion = entity.getMotion();
+			entity.setMotion(motion.mul(0.1D, 1.0D, 0.1D));
 		}
 	}
 
 	@Override
-	public Item getItemDropped(BlockState state, Random rand, int fortune)
-	{
-		return Items.SUGAR;
-	}
-
-	@Override
-	public int quantityDroppedWithBonus(int fortune, Random random)
-	{
-		return this.quantityDropped(random) + random.nextInt(fortune + 1);
-	}
-
-	@Override
-	public int quantityDropped(Random random)
-	{
-		return 6 + random.nextInt(3);
-	}
-
-	@Override
-	public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, BlockState state, float chance, int fortune)
-	{
-		super.dropBlockAsItemWithChance(worldIn, pos, state, chance, fortune);
-	}
-
-	@Override
-	protected ItemStack getSilkTouchDrop(BlockState state)
-	{
-		return new ItemStack(BlocksAether.candy_cane_block);
-	}
-
-	@Override
-	public MapColor getMapColor(BlockState state, IBlockReader worldIn, BlockPos pos)
-	{
-		return MapColor.getBlockColor(DyeColor.RED);
-	}
-
-	@Override
-	public BlockState withRotation(BlockState state, Rotation rot)
+	public BlockState rotate(BlockState state, Rotation rot)
 	{
 		switch (rot)
 		{
@@ -110,48 +62,6 @@ public class BlockCandyCane extends RotatedPillarBlock
 			default:
 				return state;
 		}
-	}
-
-	@Override
-	public BlockState getStateFromMeta(int meta)
-	{
-		BlockCandyCane.EnumAxis axis = BlockCandyCane.EnumAxis.NONE;
-
-		switch (meta & 7)
-		{
-			case 1:
-				axis = BlockCandyCane.EnumAxis.Y;
-				break;
-			case 2:
-				axis = BlockCandyCane.EnumAxis.X;
-				break;
-			case 3:
-				axis = BlockCandyCane.EnumAxis.Z;
-				break;
-		}
-
-		return this.getDefaultState().with(BLOCK_AXIS, axis);
-	}
-
-	@Override
-	public int getMetaFromState(BlockState state)
-	{
-		int meta = 0;
-
-		switch (state.get(BLOCK_AXIS))
-		{
-			case Y:
-				meta |= 1;
-				break;
-			case X:
-				meta |= 2;
-				break;
-			case Z:
-				meta |= 3;
-				break;
-		}
-
-		return meta;
 	}
 
 	@Override

@@ -17,7 +17,7 @@ public class RenderWorldPrecipitationListener
 	{
 		World world = Minecraft.getInstance().world;
 
-		if (world == null || !world.isRemote)
+		if (world == null || !world.isRemote())
 		{
 			return;
 		}

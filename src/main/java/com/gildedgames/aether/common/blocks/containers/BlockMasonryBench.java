@@ -4,20 +4,22 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.tiles.TileEntityIcestoneCooler;
 import com.gildedgames.aether.common.entities.tiles.TileEntityMasonryBench;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
-import net.minecraft.block.*;
-import net.minecraft.block.material.Material;
-import net.minecraft.state.DirectionProperty;
-import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockRenderType;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.ContainerBlock;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
+import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
@@ -30,7 +32,7 @@ public class BlockMasonryBench extends ContainerBlock
 	{
 		super(properties);
 
-		this.setDefaultState(this.stateContainer.getBaseState().with(PROPERTY_FACING, Direction.NORTH));
+		this.setDefaultState(this.getStateContainer().getBaseState().with(PROPERTY_FACING, Direction.NORTH));
 	}
 
 	@Override
@@ -46,29 +48,14 @@ public class BlockMasonryBench extends ContainerBlock
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, BlockState state, PlayerEntity player, Hand hand, Direction facing,
-			float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit)
 	{
-		if (!world.isRemote)
+		if (!world.isRemote())
 		{
 			player.openGui(AetherCore.INSTANCE, AetherGuiHandler.MASONRY_BENCH_ID, world, pos.getX(), pos.getY(), pos.getZ());
 		}
 
 		return true;
-	}
-
-	@Override
-	public int getMetaFromState(BlockState state)
-	{
-		return state.get(PROPERTY_FACING).getIndex();
-	}
-
-	@Override
-	public BlockState getStateFromMeta(int meta)
-	{
-		Direction facing = Direction.byHorizontalIndex(meta);
-
-		return this.getDefaultState().with(PROPERTY_FACING, facing);
 	}
 
 	@Override
@@ -84,7 +71,7 @@ public class BlockMasonryBench extends ContainerBlock
 	}
 
 	@Override
-	public void breakBlock(World world, BlockPos pos, BlockState state)
+	public void onReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean isMoving)
 	{
 		TileEntity tileEntity = world.getTileEntity(pos);
 
@@ -93,19 +80,6 @@ public class BlockMasonryBench extends ContainerBlock
 			InventoryHelper.dropInventoryItems(world, pos, (IInventory) tileEntity);
 		}
 
-		super.breakBlock(world, pos, state);
+		super.onReplaced(state, world, pos, newState, isMoving);
 	}
-
-	@Override
-	public boolean isOpaqueCube(BlockState state)
-	{
-		return false;
-	}
-
-	@Override
-	public boolean isFullCube(BlockState state)
-	{
-		return false;
-	}
-
 }

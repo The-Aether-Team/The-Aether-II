@@ -4,18 +4,17 @@ import com.gildedgames.aether.client.models.entities.tile.ModelTeleporter;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.tiles.TileEntityTeleporter;
 import com.mojang.blaze3d.platform.GlStateManager;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.util.ResourceLocation;
 
-public class TileEntityTeleporterRenderer extends TileEntitySpecialRenderer<TileEntityTeleporter>
+public class TileEntityTeleporterRenderer extends TileEntityRenderer<TileEntityTeleporter>
 {
 	private final ModelTeleporter model = new ModelTeleporter();
 
 	private final ResourceLocation texture = AetherCore.getResource("textures/tile_entities/teleporter/pedestal.png");
 
 	@Override
-	public void render(final TileEntityTeleporter teleporter, final double x, final double y, final double z, final float partialTicks, final int destroyStage,
-			final float alpha)
+	public void render(final TileEntityTeleporter teleporter, final double x, final double y, final double z, final float partialTicks, final int destroyStage)
 	{
 		GlStateManager.pushMatrix();
 		GlStateManager.enableRescaleNormal();

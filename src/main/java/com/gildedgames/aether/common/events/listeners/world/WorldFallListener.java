@@ -19,7 +19,7 @@ public class WorldFallListener
 		// Checks whether or not an entity is in the Aether's void
 		if (entity.world.provider.getDimensionType() == DimensionsAether.AETHER && entity.posY < -10)
 		{
-			if (!entity.world.isRemote)
+			if (!entity.world.isRemote())
 			{
 				if (entity instanceof PlayerEntity)
 				{

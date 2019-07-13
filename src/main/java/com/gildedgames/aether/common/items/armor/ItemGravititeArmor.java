@@ -2,14 +2,15 @@ package com.gildedgames.aether.common.items.armor;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class ItemGravititeArmor extends ItemAetherArmor
 {
-	public ItemGravititeArmor(EquipmentSlotType armorType)
+	public ItemGravititeArmor(EquipmentSlotType slot, Item.Properties properties)
 	{
-		super(ArmorMaterial.DIAMOND, "gravitite", armorType);
+		super(ArmorMaterial.DIAMOND, slot, properties);
 	}
 
 	@Override

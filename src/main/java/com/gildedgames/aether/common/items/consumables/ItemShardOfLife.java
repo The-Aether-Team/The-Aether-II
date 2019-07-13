@@ -1,24 +1,23 @@
 package com.gildedgames.aether.common.items.consumables;
 
-import com.gildedgames.aether.common.items.IDropOnDeath;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.item.UseAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
-public class ItemShardOfLife extends Item implements IDropOnDeath
+public class ItemShardOfLife extends Item
 {
 
-	public ItemShardOfLife()
+	public ItemShardOfLife(Properties properties)
 	{
-		super();
+		super(properties);
 	}
 
 	@Override
@@ -35,7 +34,7 @@ public class ItemShardOfLife extends Item implements IDropOnDeath
 	{
 		if (!worldIn.isRemote)
 		{
-			entity.addPotionEffect(new PotionEffect(Effects.REGENERATION, 600, 0));
+			entity.addPotionEffect(new EffectInstance(Effects.REGENERATION, 600, 0));
 		}
 
 		boolean decreaseStackSize = true;
@@ -59,13 +58,13 @@ public class ItemShardOfLife extends Item implements IDropOnDeath
 	}
 
 	@Override
-	public UseAction getItemUseAction(ItemStack stack)
+	public UseAction getUseAction(ItemStack stack)
 	{
 		return UseAction.DRINK;
 	}
 
 	@Override
-	public int getMaxItemUseDuration(ItemStack stack)
+	public int getUseDuration(ItemStack stack)
 	{
 		return 32;
 	}

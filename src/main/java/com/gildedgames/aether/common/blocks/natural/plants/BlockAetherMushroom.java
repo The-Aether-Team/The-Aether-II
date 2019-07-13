@@ -5,14 +5,19 @@ import net.minecraft.block.BlockState;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.world.IWorldReader;
 import net.minecraftforge.common.PlantType;
 import net.minecraftforge.common.IPlantable;
 
 public class BlockAetherMushroom extends BlockAetherFlowerBase implements IPlantable
 {
+	public BlockAetherMushroom(Properties properties)
+	{
+		super(properties);
+	}
+
 	@Override
-	public boolean isSuitableSoilBlock(World world, BlockPos pos, final BlockState state)
+	public boolean isSuitableSoilBlock(IWorldReader world, BlockPos pos, final BlockState state)
 	{
 		if (state.getBlock() == BlocksAether.aether_dirt)
 		{

@@ -5,6 +5,7 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.IParticleFactory;
 import net.minecraft.client.particle.Particle;
+import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
@@ -51,8 +52,7 @@ public class ParticleImpact extends Particle
 	 * Renders the particle
 	 */
 	@Override
-	public void renderParticle(BufferBuilder buffer, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY,
-			float rotationXZ)
+	public void renderParticle(BufferBuilder buffer, ActiveRenderInfo entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ)
 	{
 		int i = (int) (((float) this.life + partialTicks) * 3.0F / (float) this.lifeTime);
 
@@ -97,7 +97,7 @@ public class ParticleImpact extends Particle
 	}
 
 	@Override
-	public void onUpdate()
+	public void tick()
 	{
 		this.prevPosX = this.posX;
 		this.prevPosY = this.posY;

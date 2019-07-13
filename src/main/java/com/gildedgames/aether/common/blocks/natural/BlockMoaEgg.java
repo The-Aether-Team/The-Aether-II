@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.blocks.natural;
 
 import com.gildedgames.aether.api.registrar.ItemsAether;
-import com.gildedgames.aether.common.blocks.IInternalBlock;
 import com.gildedgames.aether.common.entities.animals.EntityMoa;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.genes.moa.MoaNest;
@@ -9,28 +8,25 @@ import com.gildedgames.aether.common.entities.tiles.TileEntityMoaEgg;
 import com.gildedgames.aether.common.entities.util.groups.EntityGroup;
 import com.gildedgames.aether.common.items.other.ItemMoaEgg;
 import net.minecraft.block.Block;
-import net.minecraft.block.ContainerBlock;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
+import net.minecraft.block.ContainerBlock;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
+import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
-public class BlockMoaEgg extends ContainerBlock implements IInternalBlock
+public class BlockMoaEgg extends ContainerBlock
 {
 
-	public static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.2F, 0.0F, 0.2F, 0.8F, 0.75F, 0.8F);
+	public static final VoxelShape BOUNDING_BOX = Block.makeCuboidShape(0.2F, 0.0F, 0.2F, 0.8F, 0.75F, 0.8F);
 
 	public BlockMoaEgg(Block.Properties properties)
 	{
@@ -38,15 +34,15 @@ public class BlockMoaEgg extends ContainerBlock implements IInternalBlock
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(BlockState state, IBlockReader source, BlockPos pos)
+	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
 	{
 		return BOUNDING_BOX;
 	}
 
 	@Override
-	public void onBlockAdded(World world, BlockPos pos, BlockState state)
+	public void onBlockAdded(BlockState state1, World world, BlockPos pos, BlockState state2, boolean isMoving)
 	{
-		super.onBlockAdded(world, pos, state);
+		super.onBlockAdded(state1, world, pos, state2, isMoving);
 
 		TileEntity te = world.getTileEntity(pos);
 
@@ -59,7 +55,7 @@ public class BlockMoaEgg extends ContainerBlock implements IInternalBlock
 	}
 
 	@Override
-	public void onBlockClicked(World world, BlockPos pos, PlayerEntity player)
+	public void onBlockClicked(BlockState state, World world, BlockPos pos, PlayerEntity player)
 	{
 		if (!player.isCreative())
 		{
@@ -69,20 +65,18 @@ public class BlockMoaEgg extends ContainerBlock implements IInternalBlock
 			{
 				EntityGroup pack = egg.familyNest.getAnimalPack();
 				pack.addOrRenewAggressor(player);
-				List moas = world.getEntitiesWithinAABB(EntityMoa.class, new AxisAlignedBB(
+				List<EntityMoa> list = world.getEntitiesWithinAABB(EntityMoa.class, new AxisAlignedBB(
 						pos.getX() - 12, pos.getY() - 8, pos.getZ() - 12, pos.getX() + 12, pos.getY() + 8, pos.getZ() + 12));
 
-				for (Object moa : moas)
+				for (EntityMoa moa : list)
 				{
-					EntityMoa moa1 = (EntityMoa) moa;
-
-					if (moa1.getGroup().getID() == pack.getID())
+					if (moa.getGroup().getID() == pack.getID())
 					{
-						moa1.setEggStolen(true);
+						moa.setEggStolen(true);
 					}
 				}
 
-				ItemStack eggStack = new ItemStack(ItemsAether.moa_egg_item, 1, 0);
+				ItemStack eggStack = new ItemStack(ItemsAether.moa_egg_item, 1);
 
 				MoaGenePool stackGenes = ItemMoaEgg.getGenePool(eggStack);
 
@@ -99,41 +93,11 @@ public class BlockMoaEgg extends ContainerBlock implements IInternalBlock
 	}
 
 	@Override
-	public boolean removedByPlayer(BlockState state, World world, BlockPos pos, PlayerEntity player, boolean willHarvest)
+	public boolean removedByPlayer(BlockState state, World world, BlockPos pos, PlayerEntity player, boolean willHarvest, IFluidState fluid)
 	{
-		this.onBlockClicked(world, pos, player);
+		this.onBlockClicked(state, world, pos, player);
 
-		return super.removedByPlayer(state, world, pos, player, willHarvest);
-	}
-
-	@Override
-	public List<ItemStack> getDrops(IBlockReader world, BlockPos pos, BlockState state, int fortune)
-	{
-		return Collections.emptyList();
-	}
-
-	@Override
-	public Item getItemDropped(BlockState state, Random rand, int fortune)
-	{
-		return null;
-	}
-
-	@Override
-	public boolean isOpaqueCube(BlockState state)
-	{
-		return false;
-	}
-
-	@Override
-	public boolean isFullCube(BlockState state)
-	{
-		return false;
-	}
-
-	@Override
-	public boolean isFullBlock(BlockState state)
-	{
-		return false;
+		return super.removedByPlayer(state, world, pos, player, willHarvest, fluid);
 	}
 
 	@Override
@@ -143,7 +107,7 @@ public class BlockMoaEgg extends ContainerBlock implements IInternalBlock
 	}
 
 	@Override
-	public ItemStack getPickBlock(BlockState state, RayTraceResult target, World world, BlockPos pos, PlayerEntity player)
+	public ItemStack getItem(IBlockReader world, BlockPos pos, BlockState state)
 	{
 		ItemStack eggStack = new ItemStack(ItemsAether.moa_egg_item);
 		TileEntityMoaEgg egg = (TileEntityMoaEgg) world.getTileEntity(pos);

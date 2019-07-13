@@ -5,12 +5,12 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.tiles.TileEntityPresent;
 import com.gildedgames.aether.common.items.blocks.ItemBlockPresent;
 import com.mojang.blaze3d.platform.GlStateManager;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.Random;
 
-public class TileEntityPresentRenderer extends TileEntitySpecialRenderer<TileEntityPresent>
+public class TileEntityPresentRenderer extends TileEntityRenderer<TileEntityPresent>
 {
 
 	public static final ResourceLocation[] boxTextures = new ResourceLocation[16];
@@ -34,9 +34,7 @@ public class TileEntityPresentRenderer extends TileEntitySpecialRenderer<TileEnt
 	private final Random random = new Random();
 
 	@Override
-	public void render(
-			final TileEntityPresent present, final double x, final double y, final double z, final float partialTicks, final int destroyStage,
-			final float alpha)
+	public void render(final TileEntityPresent present, final double x, final double y, final double z, final float partialTicks, final int destroyStage)
 	{
 		GlStateManager.pushMatrix();
 

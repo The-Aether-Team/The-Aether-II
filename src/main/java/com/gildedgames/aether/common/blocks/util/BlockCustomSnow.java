@@ -1,18 +1,14 @@
 package com.gildedgames.aether.common.blocks.util;
 
-import com.gildedgames.aether.api.registrar.BlocksAether;
-import com.gildedgames.aether.common.blocks.IBlockWithItem;
-import com.gildedgames.aether.common.items.blocks.ItemBlockCustomSnow;
-import net.minecraft.block.*;
-import net.minecraft.block.BlockSnow;
-import net.minecraft.block.material.Material;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.item.BlockItem;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.SnowBlock;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.IWorldReader;
 
-public class BlockCustomSnow extends SnowBlock implements IBlockWithItem
+public class BlockCustomSnow extends SnowBlock
 {
 	public BlockCustomSnow(Block.Properties properties)
 	{
@@ -20,26 +16,16 @@ public class BlockCustomSnow extends SnowBlock implements IBlockWithItem
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
+	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos)
 	{
-		BlockState iblockstate = worldIn.getBlockState(pos.down());
-		Block block = iblockstate.getBlock();
+		BlockState belowState = worldIn.getBlockState(pos.down());
+		Block belowBlock = belowState.getBlock();
 
-		if (block != BlocksAether.highlands_ice && block != BlocksAether.highlands_packed_ice && block != Blocks.BARRIER)
+		if (belowBlock != Blocks.ICE && belowBlock != Blocks.PACKED_ICE && belowBlock != Blocks.BARRIER)
 		{
-			VoxelShape blockfaceshape = iblockstate.getBlockFaceShape(worldIn, pos.down(), Direction.UP);
-			return blockfaceshape == VoxelShape.SOLID || iblockstate.getBlock().isLeaves(iblockstate, worldIn, pos.down())
-					|| block == this && iblockstate.get(LAYERS) == 8;
+			return Block.doesSideFillSquare(belowState.getCollisionShape(worldIn, pos.down()), Direction.UP) || belowBlock == this && belowState.get(LAYERS) == 8;
 		}
-		else
-		{
-			return false;
-		}
-	}
 
-	@Override
-	public BlockItem createItemBlock()
-	{
-		return new ItemBlockCustomSnow(this);
+		return false;
 	}
 }

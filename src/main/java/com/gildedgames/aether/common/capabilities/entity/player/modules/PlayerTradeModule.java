@@ -49,7 +49,7 @@ public class PlayerTradeModule extends PlayerAetherModule
 		{
 			this.requestedTime--;
 
-			if (!this.getWorld().isRemote && this.requestedTime == 0 && this.target != null)
+			if (!this.getWorld().isRemote() && this.requestedTime == 0 && this.target != null)
 			{
 				ITextComponent message = new TranslationTextComponent("aether.trade.chat.failexpired", this.target.getEntity().getDisplayName().getFormattedText());
 

@@ -6,10 +6,10 @@ import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.block.model.IBakedModel;
+import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -30,7 +30,7 @@ public class RenderFloatingBlock extends Render<EntityFloatingBlock>
 	{
 		if (floatingBlock.getBlockState() != null)
 		{
-			this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+			this.bindTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE);
 
 			final BlockState state = floatingBlock.getBlockState();
 
@@ -92,6 +92,6 @@ public class RenderFloatingBlock extends Render<EntityFloatingBlock>
 	@Override
 	protected ResourceLocation getEntityTexture(final EntityFloatingBlock entity)
 	{
-		return TextureMap.LOCATION_BLOCKS_TEXTURE;
+		return AtlasTexture.LOCATION_BLOCKS_TEXTURE;
 	}
 }

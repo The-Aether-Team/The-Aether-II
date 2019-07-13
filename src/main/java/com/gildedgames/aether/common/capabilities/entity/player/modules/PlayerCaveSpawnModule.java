@@ -70,7 +70,7 @@ public class PlayerCaveSpawnModule extends PlayerAetherModule
 	@Override
 	public void tickEnd(TickEvent.PlayerTickEvent event)
 	{
-		if (this.getEntity().world.isRemote || !AetherHelper.isAether(this.getWorld()))
+		if (this.getEntity().world.isRemote() || !AetherHelper.isAether(this.getWorld()))
 		{
 			return;
 		}

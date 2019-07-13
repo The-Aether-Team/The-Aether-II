@@ -52,7 +52,7 @@ public class GuiCraftingOption extends Button
 			RenderHelper.enableGUIStandardItemLighting();
 			GlStateManager.enableDepth();
 
-			Minecraft.getInstance().getRenderItem().renderItemIntoGUI(this.recipe.getResult(), this.x + 1, this.y + 1);
+			Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(this.recipe.getResult(), this.x + 1, this.y + 1);
 
 			RenderHelper.disableStandardItemLighting();
 			GlStateManager.disableRescaleNormal();
@@ -91,7 +91,7 @@ public class GuiCraftingOption extends Button
 				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
 				GlStateManager.enableBlend();
-				GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
+				GlStateManager.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
 						GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 				GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 				AbstractGui.drawModalRectWithCustomSizedTexture(this.x + 1, this.y + 1, 0, 0, 16, 16, 16, 16);

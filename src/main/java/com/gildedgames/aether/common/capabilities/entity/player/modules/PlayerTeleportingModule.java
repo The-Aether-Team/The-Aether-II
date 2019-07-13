@@ -143,12 +143,12 @@ public class PlayerTeleportingModule extends PlayerAetherModule implements IPlay
 
 				if (this.ticksInTeleporter == 1)
 				{
-					if (this.getWorld().isRemote && Minecraft.getInstance().player.getEntityId() == this.getEntity().getEntityId())
+					if (this.getWorld().isRemote() && Minecraft.getInstance().player.getEntityId() == this.getEntity().getEntityId())
 					{
 						Minecraft.getInstance().player.playSound(new SoundEvent(AetherCore.getResource("portal.glowstone.trigger")), 1.0F, 1.0F);
 					}
 				}
-				else if (!this.getWorld().isRemote && (this.getTicksInTeleporter() >= TELEPORT_DELAY || this.getEntity().isCreative()))
+				else if (!this.getWorld().isRemote() && (this.getTicksInTeleporter() >= TELEPORT_DELAY || this.getEntity().isCreative()))
 				{
 					this.ticksInTeleporter = 0;
 
@@ -169,7 +169,7 @@ public class PlayerTeleportingModule extends PlayerAetherModule implements IPlay
 	{
 		this.getEntity().timeUntilPortal = this.getEntity().getPortalCooldown();
 
-		if (this.getEntity().world.isRemote && Minecraft.getInstance().player.getEntityId() == this.getEntity().getEntityId())
+		if (this.getEntity().world.isRemote() && Minecraft.getInstance().player.getEntityId() == this.getEntity().getEntityId())
 		{
 			Minecraft.getInstance().player.playSound(new SoundEvent(AetherCore.getResource("portal.glowstone.travel")), 1.0F, 1.0F);
 		}

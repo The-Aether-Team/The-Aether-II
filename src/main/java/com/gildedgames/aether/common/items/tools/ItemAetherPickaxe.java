@@ -1,21 +1,18 @@
 package com.gildedgames.aether.common.items.tools;
 
 import com.gildedgames.aether.common.events.listeners.items.ItemToolListener;
-import com.gildedgames.aether.common.init.CreativeTabsAether;
 import com.gildedgames.aether.common.init.MaterialsAether;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.PickaxeItem;
 
-public class ItemAetherPickaxe extends ItemPickaxe
+public class ItemAetherPickaxe extends PickaxeItem
 {
-	public ItemAetherPickaxe(final ToolMaterial material)
+
+	public ItemAetherPickaxe(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builder)
 	{
-		super(material);
-
-		this.setHarvestLevel("pickaxe", material.getHarvestLevel());
-
-		this.setCreativeTab(CreativeTabsAether.TAB_TOOLS);
+		super(tier, attackDamageIn, attackSpeedIn, builder);
 	}
 
 	@Override
@@ -23,17 +20,17 @@ public class ItemAetherPickaxe extends ItemPickaxe
 	{
 		super.hitEntity(stack, target, attacker);
 
-		return ItemToolListener.onEntityHit(stack, this.toolMaterial, target, attacker);
+		return ItemToolListener.onEntityHit(stack, this.getTier(), target, attacker);
 	}
 
 	@Override
-	public int getItemBurnTime(ItemStack itemStack)
+	public int getBurnTime(ItemStack itemStack)
 	{
-		if (this.toolMaterial == MaterialsAether.SKYROOT_TOOL)
+		if (this.getTier() == MaterialsAether.SKYROOT_TOOL)
 		{
 			return 100;
 		}
 
-		return super.getItemBurnTime(itemStack);
+		return super.getBurnTime(itemStack);
 	}
 }

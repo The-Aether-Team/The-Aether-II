@@ -23,7 +23,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.Effects;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -89,7 +89,7 @@ public class EntityCockatrice extends EntityAetherMonster
 	}
 
 	@Override
-	public boolean isPotionApplicable(final PotionEffect potionEffect)
+	public boolean isPotionApplicable(final EffectInstance potionEffect)
 	{
 		return potionEffect.getPotion() != Effects.POISON && super.isPotionApplicable(potionEffect);
 	}

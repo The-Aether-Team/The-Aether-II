@@ -100,7 +100,7 @@ public class EntityNecromancer extends EntityCharacter
 	{
 		if (!super.processInteract(player, hand))
 		{
-			if (!player.world.isRemote)
+			if (!player.world.isRemote())
 			{
 				final IPlayerAether aePlayer = PlayerAether.getPlayer(player);
 				final PlayerDialogModule dialogModule = aePlayer.getModule(PlayerDialogModule.class);

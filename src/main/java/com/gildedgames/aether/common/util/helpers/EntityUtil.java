@@ -41,7 +41,7 @@ public class EntityUtil
 		{
 			final BlockPos blockpos = new BlockPos(entity.posX, entity.getBoundingBox().minY, entity.posZ);
 
-			if (!entity.world.isRemote && entity.world.getLightFor(LightType.SKY, blockpos) - entity.world.getSkylightSubtracted() >= 15 && entity.world
+			if (!entity.world.isRemote() && entity.world.getLightFor(LightType.SKY, blockpos) - entity.world.getSkylightSubtracted() >= 15 && entity.world
 					.canBlockSeeSky(blockpos))
 			{
 				entity.attackEntityFrom(DamageSource.OUT_OF_WORLD, 1.0F);
@@ -62,7 +62,7 @@ public class EntityUtil
 					final double randX = entity.getRNG().nextDouble() * (entity.getRNG().nextBoolean() ? 1.0 : -1.0) * radius;
 					final double randZ = entity.getRNG().nextDouble() * (entity.getRNG().nextBoolean() ? 1.0 : -1.0) * radius;
 
-					if (entity.world.isRemote)
+					if (entity.world.isRemote())
 					{
 						entity.world.addParticle(type, x + randX, y, z + randZ, motionX, motionY, motionZ);
 					}
@@ -177,7 +177,7 @@ public class EntityUtil
 				final double motionY = motion.y * velcur;
 				final double motionZ = motion.z * velcur;
 
-				if (e1.world.isRemote)
+				if (e1.world.isRemote())
 				{
 					e1.world.spawnParticle(type, currentX + randX, currentY, currentZ + randZ, motionX, motionY, motionZ, parameters);
 				}

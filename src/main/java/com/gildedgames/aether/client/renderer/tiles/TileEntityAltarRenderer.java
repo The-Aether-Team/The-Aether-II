@@ -6,15 +6,15 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.tiles.TileEntityAltar;
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderItem;
-import net.minecraft.client.renderer.block.model.IBakedModel;
-import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.client.renderer.ItemRenderer;
+import net.minecraft.client.renderer.model.IBakedModel;
+import net.minecraft.client.renderer.texture.AtlasTexture;
+import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-public class TileEntityAltarRenderer extends TileEntitySpecialRenderer<TileEntityAltar>
+public class TileEntityAltarRenderer extends TileEntityRenderer<TileEntityAltar>
 {
 	private final ModelAltar model = new ModelAltar();
 
@@ -25,8 +25,7 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer<TileEntit
 	private final double theta = 5.0D;
 
 	@Override
-	public void render(
-			final TileEntityAltar altar, final double x, final double y, final double z, final float partialTicks, final int destroyStage, final float alpha)
+	public void render(final TileEntityAltar altar, final double x, final double y, final double z, final float partialTicks, final int destroyStage)
 	{
 		GlStateManager.pushMatrix();
 		GlStateManager.enableRescaleNormal();
@@ -64,14 +63,13 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer<TileEntit
 			GlStateManager.rotatef(180f, 1f, 0f, 1f);
 
 			GlStateManager.translatef(0.0f, -0.32f, 0.0f);
-			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+			GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-			this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+			this.bindTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE);
 
-			if (stack != null)
+			if (!stack.isEmpty())
 			{
 				GlStateManager.pushMatrix();
-				GlStateManager.pushAttrib();
 
 				if (stack.getItem() instanceof BlockItem)
 				{
@@ -88,7 +86,6 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer<TileEntit
 
 				this.renderItem(stack);
 
-				GlStateManager.popAttrib();
 				GlStateManager.popMatrix();
 			}
 
@@ -105,7 +102,7 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer<TileEntit
 	{
 		GlStateManager.pushMatrix();
 
-		final RenderItem itemRenderer = Minecraft.getInstance().getRenderItem();
+		final ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
 
 		if (stack != null)
 		{
@@ -132,10 +129,10 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer<TileEntit
 			final double dist = (Math.PI * i) / amount * 2;
 			final double x = this.radius * Math.cos(this.theta + dist);
 			final double z = this.radius * Math.sin(this.theta + dist);
-			final double deltaX = z * Math.cos(alpha) - x * Math.sin(alpha);
-			final double deltaZ = x * Math.cos(alpha) + z * Math.sin(alpha);
+			final float deltaX = (float) (z * Math.cos(alpha) - x * Math.sin(alpha));
+			final float deltaZ = (float) (x * Math.cos(alpha) + z * Math.sin(alpha));
 
-			GlStateManager.translatef(deltaX, 0, deltaZ);
+			GlStateManager.translatef(deltaX, 0.0f, deltaZ);
 
 			GlStateManager.scalef(0.25f, 0.25f, 0.25f);
 			GlStateManager.rotatef(90.0f, 0.0f, -90.0f, 0.0f);

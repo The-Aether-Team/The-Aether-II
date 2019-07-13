@@ -6,7 +6,7 @@ import com.gildedgames.aether.client.renderer.textures.SimpleDXT1Texture;
 import com.gildedgames.aether.common.AetherCore;
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.WorldClient;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -29,7 +29,7 @@ public class RenderWorldSkybox extends IRenderHandler
 	private float skyDarkness;
 
 	@Override
-	public void render(float partialTicks, WorldClient world, Minecraft mc)
+	public void render(int ticks, float partialTicks, ClientWorld world, Minecraft mc)
 	{
 		if (!AetherCore.CONFIG.isSkyboxRenderEnabled())
 		{
@@ -62,8 +62,8 @@ public class RenderWorldSkybox extends IRenderHandler
 
 		mc.getTextureManager().bindTexture(TEXTURE_SKYBOX);
 
-		GlStateManager.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST);
-		GlStateManager.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST);
+		GlStateManager.texParameter(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST);
+		GlStateManager.texParameter(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST);
 
 		int k2 = 15 << 20;
 		int h = k2 >> 16 & 65535;

@@ -78,7 +78,7 @@ public class EntityTNTPresent extends Entity
 
 		if (this.fuse-- <= 0)
 		{
-			if (!this.world.isRemote)
+			if (!this.world.isRemote())
 			{
 				this.remove();
 				this.explode();

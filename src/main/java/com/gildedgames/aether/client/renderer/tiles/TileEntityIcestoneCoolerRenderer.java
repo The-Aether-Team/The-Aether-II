@@ -4,11 +4,11 @@ import com.gildedgames.aether.client.models.entities.tile.ModelIcestoneCooler;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.tiles.TileEntityIcestoneCooler;
 import com.mojang.blaze3d.platform.GlStateManager;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class TileEntityIcestoneCoolerRenderer extends TileEntitySpecialRenderer<TileEntityIcestoneCooler>
+public class TileEntityIcestoneCoolerRenderer extends TileEntityRenderer<TileEntityIcestoneCooler>
 {
 
 	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/tile_entities/icestone_cooler.png");
@@ -16,8 +16,7 @@ public class TileEntityIcestoneCoolerRenderer extends TileEntitySpecialRenderer<
 	private final ModelIcestoneCooler model = new ModelIcestoneCooler();
 
 	@Override
-	public void render(final TileEntityIcestoneCooler te, final double x, final double y, final double z, final float partialTicks, final int destroyStage,
-			final float alpha)
+	public void render(final TileEntityIcestoneCooler te, final double x, final double y, final double z, final float partialTicks, final int destroyStage)
 	{
 		GlStateManager.pushMatrix();
 		GlStateManager.enableRescaleNormal();

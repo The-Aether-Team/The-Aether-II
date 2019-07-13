@@ -24,7 +24,7 @@ public class DialogActionTravelToBed implements IDialogAction
 	@Override
 	public void performAction(IDialogController controller)
 	{
-		if (controller.getDialogPlayer().world.isRemote)
+		if (controller.getDialogPlayer().world.isRemote())
 		{
 			AetherCore.PROXY.turnOffScreen();
 

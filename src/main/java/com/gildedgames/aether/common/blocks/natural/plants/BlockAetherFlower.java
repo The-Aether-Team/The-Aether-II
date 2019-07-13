@@ -1,36 +1,29 @@
 package com.gildedgames.aether.common.blocks.natural.plants;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
-import com.gildedgames.aether.common.blocks.IBlockMultiName;
 import com.gildedgames.aether.common.blocks.IBlockSnowy;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
 import com.gildedgames.aether.common.entities.monsters.EntityAechorPlant;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockSnow;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.SnowBlock;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateContainer;
-import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Random;
 
-public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiName, IBlockSnowy
+public class BlockAetherFlower extends BlockAetherPlant implements IBlockSnowy
 {
 	public static final BlockVariant
 			WHITE_ROSE = new BlockVariant(0, "white_rose"),
@@ -44,7 +37,7 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 	{
 		super(properties);
 
-		this.setDefaultState(this.stateContainer.getBaseState().with(PROPERTY_VARIANT, WHITE_ROSE).with(PROPERTY_SNOWY, Boolean.FALSE));
+		this.setDefaultState(this.getStateContainer().getBaseState().with(PROPERTY_VARIANT, WHITE_ROSE).with(PROPERTY_SNOWY, Boolean.FALSE));
 	}
 
 	@Override
@@ -52,38 +45,31 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 	{
 		super.tick(state, world, pos, rand);
 
-		if (!world.isRemote && this.canGrow(world, pos, state, false))
+		if (!world.isRemote() && this.canGrow(world, pos, state, false))
 		{
 			this.grow(world, rand, pos, state);
 		}
 	}
 
 	@Override
-	public int getLightValue(final BlockState state)
+	public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit)
 	{
-		return this.lightValue;
-	}
-
-	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, BlockState state, PlayerEntity playerIn, Hand hand, Direction facing, float hitX,
-			float hitY, float hitZ)
-	{
-		ItemStack main = playerIn.getHeldItemMainhand();
-		ItemStack offhand = playerIn.getHeldItemOffhand();
+		ItemStack main = player.getHeldItemMainhand();
+		ItemStack offhand = player.getHeldItemOffhand();
 
 		boolean addSnow = false;
 
 		if (!state.get(PROPERTY_SNOWY))
 		{
-			if (main != null && main.getItem() instanceof BlockItem)
+			if (!main.isEmpty() && main.getItem() instanceof BlockItem)
 			{
-				if (((BlockItem) main.getItem()).getBlock() instanceof BlockSnow)
+				if (((BlockItem) main.getItem()).getBlock() instanceof SnowBlock)
 				{
 					addSnow = true;
 					main.shrink(1);
 				}
 			}
-			else if (offhand != null && offhand.getItem() instanceof BlockItem && ((BlockItem) offhand.getItem()).getBlock() instanceof BlockSnow)
+			else if (!offhand.isEmpty() && offhand.getItem() instanceof BlockItem && ((BlockItem) offhand.getItem()).getBlock() instanceof SnowBlock)
 			{
 				addSnow = true;
 				offhand.shrink(1);
@@ -92,53 +78,22 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 
 		if (addSnow)
 		{
-			worldIn.setBlockState(pos, state.with(PROPERTY_SNOWY, Boolean.TRUE), 2);
+			world.setBlockState(pos, state.with(PROPERTY_SNOWY, Boolean.TRUE), 2);
 		}
 
 		return addSnow;
 	}
 
 	@Override
-	public void onPlayerDestroy(World worldIn, BlockPos pos, BlockState state)
+	public void onPlayerDestroy(IWorld worldIn, BlockPos pos, BlockState state)
 	{
 		if (state.get(PROPERTY_SNOWY))
 		{
 			if (worldIn.getBlockState(pos.down()) != Blocks.AIR.getDefaultState())
 			{
-				worldIn.setBlockState(pos, BlocksAether.highlands_snow_layer.getDefaultState().with(BlockSnow.LAYERS, 1), 2);
+				worldIn.setBlockState(pos, BlocksAether.highlands_snow_layer.getDefaultState().with(SnowBlock.LAYERS, 1), 2);
 			}
 		}
-	}
-
-	@Override
-	@OnlyIn(Dist.CLIENT)
-	public void getSubBlocks(final ItemGroup tab, final NonNullList<ItemStack> list)
-	{
-		for (final BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
-		{
-			list.add(new ItemStack(this, 1, variant.getMeta()));
-		}
-	}
-
-	@Override
-	public int damageDropped(final BlockState state)
-	{
-		return state.get(PROPERTY_VARIANT).getMeta();
-	}
-
-	@Override
-	public BlockState getStateFromMeta(final int meta)
-	{
-		final boolean snowy = meta >= PROPERTY_VARIANT.getAllowedValues().size();
-
-		return this.getDefaultState().with(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta - (snowy ? PROPERTY_VARIANT.getAllowedValues().size() : 0)))
-				.with(PROPERTY_SNOWY, snowy);
-	}
-
-	@Override
-	public int getMetaFromState(final BlockState state)
-	{
-		return state.get(PROPERTY_VARIANT).getMeta() + (state.get(PROPERTY_SNOWY) ? PROPERTY_VARIANT.getAllowedValues().size() : 0);
 	}
 
 	@Override
@@ -148,9 +103,9 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 	}
 
 	@Override
-	public EnumOffsetType getOffsetType()
+	public OffsetType getOffsetType()
 	{
-		return EnumOffsetType.XZ;
+		return OffsetType.XZ;
 	}
 
 	@Override
@@ -162,12 +117,6 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 		}
 
 		return super.getOffset(state, access, pos);
-	}
-
-	@Override
-	public String getTranslationKey(final ItemStack stack)
-	{
-		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
 	}
 
 	@Override
@@ -187,7 +136,7 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 	@Override
 	public void grow(final World worldIn, final Random rand, final BlockPos pos, final BlockState state)
 	{
-		if (worldIn.getLightFromNeighbors(pos.up()) >= 9 && worldIn.rand.nextInt(7) == 0)
+		if (worldIn.getBrightness(pos.up()) >= 9 && worldIn.rand.nextInt(7) == 0)
 		{
 			worldIn.destroyBlock(pos, false);
 
@@ -197,7 +146,7 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 			aechorPlant.posY = pos.getY();
 			aechorPlant.posZ = pos.getZ() + .5f;
 
-			worldIn.spawnEntity(aechorPlant);
+			worldIn.addEntity(aechorPlant);
 		}
 	}
 

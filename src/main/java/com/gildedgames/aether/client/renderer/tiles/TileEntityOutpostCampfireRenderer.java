@@ -4,10 +4,10 @@ import com.gildedgames.aether.client.models.entities.tile.ModelOutpostCampfire;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.tiles.TileEntityOutpostCampfire;
 import com.mojang.blaze3d.platform.GlStateManager;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.util.ResourceLocation;
 
-public class TileEntityOutpostCampfireRenderer extends TileEntitySpecialRenderer<TileEntityOutpostCampfire>
+public class TileEntityOutpostCampfireRenderer extends TileEntityRenderer<TileEntityOutpostCampfire>
 {
 	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/tile_entities/outpost_campfire.png");
 
@@ -16,8 +16,7 @@ public class TileEntityOutpostCampfireRenderer extends TileEntitySpecialRenderer
 	private final ModelOutpostCampfire model = new ModelOutpostCampfire();
 
 	@Override
-	public void render(final TileEntityOutpostCampfire te, final double x, final double y, final double z, final float partialTicks, final int destroyStage,
-			final float alpha)
+	public void render(final TileEntityOutpostCampfire te, final double x, final double y, final double z, final float partialTicks, final int destroyStage)
 	{
 		GlStateManager.pushMatrix();
 		GlStateManager.enableRescaleNormal();

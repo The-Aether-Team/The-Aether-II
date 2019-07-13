@@ -6,16 +6,20 @@ import net.minecraft.block.IGrowable;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,24 +27,25 @@ import java.util.List;
 public class ItemSkyrootToolHandler implements IToolEventHandler
 {
 	@Override
-	public void onHarvestBlock(final ItemStack stack, final World world, final BlockState state, final BlockPos pos, final PlayerEntity entity,
+	public void onHarvestBlock(final ItemStack stack, final IWorld world, final BlockState state, final BlockPos pos, final PlayerEntity entity,
 			final List<ItemStack> drops)
 	{
-		if (!world.isRemote)
+		if (!world.isRemote())
 		{
 			if (state.getBlock() instanceof IGrowable)
 			{
 				return;
 			}
 
-			final IPlacementFlagCapability data = world.getChunk(pos).getCapability(CapabilitiesAether.CHUNK_PLACEMENT_FLAG, Direction.UP);
+			final IPlacementFlagCapability data = ((Chunk) world.getChunk(pos)).getCapability(CapabilitiesAether.CHUNK_PLACEMENT_FLAG, Direction.UP)
+					.orElseThrow(NullPointerException::new);
 
 			if (data.isModified(pos))
 			{
 				return;
 			}
 
-			if (state.getBlock().canHarvestBlock(world, pos, entity))
+			if (state.canHarvestBlock(world, pos, entity))
 			{
 				final int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack);
 
@@ -67,11 +72,11 @@ public class ItemSkyrootToolHandler implements IToolEventHandler
 	}
 
 	@Override
-	public void addInformation(final ItemStack stack, final List<String> tooltip)
+	public void addInformation(final ItemStack stack, final List<ITextComponent> tooltip)
 	{
-		tooltip.add(1, String.format("%s: %s",
+		tooltip.add(1, new StringTextComponent(String.format("%s: %s",
 				TextFormatting.BLUE + I18n.format("item.aether.tooltip.ability"),
-				TextFormatting.WHITE + I18n.format("item.aether.tool.skyroot.ability.desc")));
+				TextFormatting.WHITE + I18n.format("item.aether.tool.skyroot.ability.desc"))));
 	}
 
 	@Override

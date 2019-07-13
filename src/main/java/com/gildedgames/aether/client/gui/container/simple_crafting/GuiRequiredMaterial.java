@@ -82,7 +82,7 @@ public class GuiRequiredMaterial extends Button
 			RenderHelper.enableGUIStandardItemLighting();
 			GlStateManager.enableDepth();
 
-			Minecraft.getInstance().getRenderItem().renderItemIntoGUI(this.displayStack, this.x + 1, this.y + 1);
+			Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(this.displayStack, this.x + 1, this.y + 1);
 
 			RenderHelper.disableStandardItemLighting();
 			GlStateManager.disableRescaleNormal();

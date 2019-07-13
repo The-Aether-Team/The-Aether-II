@@ -1,21 +1,17 @@
 package com.gildedgames.aether.common.items.tools;
 
 import com.gildedgames.aether.common.events.listeners.items.ItemToolListener;
-import com.gildedgames.aether.common.init.CreativeTabsAether;
 import com.gildedgames.aether.common.init.MaterialsAether;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemSpade;
+import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ShovelItem;
 
-public class ItemAetherShovel extends ItemSpade
+public class ItemAetherShovel extends ShovelItem
 {
-	public ItemAetherShovel(final ToolMaterial material)
+	public ItemAetherShovel(IItemTier tier, float attackDamageIn, float attackSpeedIn, Properties builder)
 	{
-		super(material);
-
-		this.setHarvestLevel("shovel", material.getHarvestLevel());
-
-		this.setCreativeTab(CreativeTabsAether.TAB_TOOLS);
+		super(tier, attackDamageIn, attackSpeedIn, builder);
 	}
 
 	@Override
@@ -23,17 +19,17 @@ public class ItemAetherShovel extends ItemSpade
 	{
 		super.hitEntity(stack, target, attacker);
 
-		return ItemToolListener.onEntityHit(stack, this.toolMaterial, target, attacker);
+		return ItemToolListener.onEntityHit(stack, this.getTier(), target, attacker);
 	}
 
 	@Override
-	public int getItemBurnTime(ItemStack itemStack)
+	public int getBurnTime(ItemStack itemStack)
 	{
-		if (this.toolMaterial == MaterialsAether.SKYROOT_TOOL)
+		if (this.getTier() == MaterialsAether.SKYROOT_TOOL)
 		{
 			return 100;
 		}
 
-		return super.getItemBurnTime(itemStack);
+		return super.getBurnTime(itemStack);
 	}
 }

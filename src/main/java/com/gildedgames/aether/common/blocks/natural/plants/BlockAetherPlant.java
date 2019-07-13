@@ -5,37 +5,37 @@ import com.gildedgames.aether.api.registrar.ItemsAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.IGrowable;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-import javax.annotation.Nullable;
 import java.util.Random;
 
 public class BlockAetherPlant extends Block implements IGrowable
 {
-	protected static final AxisAlignedBB PLANT_AABB = new AxisAlignedBB(0.3D, 0.0D, 0.3D, 0.7D, 0.6D, 0.7D);
+	protected static final VoxelShape PLANT_AABB = Block.makeCuboidShape(0.3D, 0.0D, 0.3D, 0.7D, 0.6D, 0.7D);
 
 	public BlockAetherPlant(final Properties properties)
 	{
-		super(properties);
+		super(properties.doesNotBlockMovement());
 	}
 
-	public boolean isSuitableSoilBlock(World world, BlockPos pos, final BlockState blockUnderneath)
+	public boolean isSuitableSoilBlock(IWorldReader world, BlockPos pos, final BlockState blockUnderneath)
 	{
 		return blockUnderneath.getBlock() == BlocksAether.aether_grass || blockUnderneath.getBlock() == BlocksAether.aether_dirt;
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(final World world, final BlockPos pos)
+	public boolean isValidPosition(BlockState state, IWorldReader world, BlockPos pos)
 	{
 		final BlockState soilBlock = world.getBlockState(pos.down());
 
@@ -47,51 +47,19 @@ public class BlockAetherPlant extends Block implements IGrowable
 	{
 		if (!this.validatePosition(world, pos, state))
 		{
-			this.invalidateBlock(world, pos, state);
+			world.destroyBlock(pos, true);
 		}
 	}
 
 	public boolean validatePosition(final World world, final BlockPos pos, final BlockState state)
 	{
-		return this.canPlaceBlockAt(world, pos);
-	}
-
-	protected void invalidateBlock(final World world, final BlockPos pos, final BlockState state)
-	{
-		this.dropBlockAsItem(world, pos, state, 0);
-
-		world.removeBlock(pos, false);
+		return this.isValidPosition(state, world, pos);
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(final BlockState state, final IBlockReader source, final BlockPos pos)
+	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
 	{
 		return PLANT_AABB;
-	}
-
-	@Override
-	@Nullable
-	public AxisAlignedBB getCollisionBoundingBox(final BlockState blockState, final IBlockReader worldIn, final BlockPos pos)
-	{
-		return NULL_AABB;
-	}
-
-	@Override
-	public boolean isOpaqueCube(final BlockState state)
-	{
-		return false;
-	}
-
-	@Override
-	public boolean isFullCube(final BlockState state)
-	{
-		return false;
-	}
-
-	@Override
-	public boolean isFullBlock(final BlockState state)
-	{
-		return false;
 	}
 
 	@Override
@@ -102,7 +70,7 @@ public class BlockAetherPlant extends Block implements IGrowable
 	}
 
 	@Override
-	public boolean canGrow(final World worldIn, final BlockPos pos, final BlockState state, final boolean isClient)
+	public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient)
 	{
 		return false;
 	}
@@ -120,29 +88,21 @@ public class BlockAetherPlant extends Block implements IGrowable
 	}
 
 	@Override
-	public boolean onBlockActivated(
-			final World worldIn, final BlockPos pos, final BlockState state, final PlayerEntity playerIn, final Hand hand, final Direction facing,
-			final float hitX, final float hitY, final float hitZ)
+	public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit)
 	{
-		if (playerIn.getHeldItemMainhand().getItem() == ItemsAether.swet_jelly)
+		if (player.getHeldItemMainhand().getItem() == ItemsAether.swet_jelly)
 		{
-			if (!this.canGrow(worldIn, pos, state, true))
+			if (!this.canGrow(world, pos, state, true))
 			{
 				return false;
 			}
-			if (!playerIn.isCreative())
+			if (!player.isCreative())
 			{
-				playerIn.getHeldItemMainhand().shrink(1);
+				player.getHeldItemMainhand().shrink(1);
 			}
-			this.grow(worldIn, new Random(), pos, state);
+			this.grow(world, new Random(), pos, state);
 			return true;
 		}
 		return false;
-	}
-
-	@Override
-	public VoxelShape getBlockFaceShape(IBlockReader worldIn, BlockState state, BlockPos pos, Direction face)
-	{
-		return VoxelShape.UNDEFINED;
 	}
 }

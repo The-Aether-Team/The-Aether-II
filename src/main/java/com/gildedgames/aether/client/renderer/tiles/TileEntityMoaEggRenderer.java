@@ -4,12 +4,12 @@ import com.gildedgames.aether.client.models.entities.tile.ModelMoaEgg;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.tiles.TileEntityMoaEgg;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-public class TileEntityMoaEggRenderer extends TileEntitySpecialRenderer<TileEntityMoaEgg>
+public class TileEntityMoaEggRenderer extends TileEntityRenderer<TileEntityMoaEgg>
 {
 
 	private static final ResourceLocation TEXTURE_BASE = AetherCore.getResource("textures/tile_entities/moa_egg/base.png");
@@ -19,8 +19,7 @@ public class TileEntityMoaEggRenderer extends TileEntitySpecialRenderer<TileEnti
 	public final ModelMoaEgg model = new ModelMoaEgg();
 
 	@Override
-	public void render(final TileEntityMoaEgg egg, final double x, final double y, final double z, final float partialTicks, final int destroyStage,
-			final float alpha)
+	public void render(final TileEntityMoaEgg egg, final double x, final double y, final double z, final float partialTicks, final int destroyStage)
 	{
 		final MoaGenePool genePool = egg.getGenePool();
 

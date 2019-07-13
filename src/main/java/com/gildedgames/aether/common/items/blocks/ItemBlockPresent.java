@@ -2,13 +2,16 @@ package com.gildedgames.aether.common.items.blocks;
 
 import com.gildedgames.aether.common.items.other.ItemWrappingPaper;
 import net.minecraft.block.Block;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.BlockItem;
-import net.minecraft.item.EnumRarity;
+import net.minecraft.item.Item;
+import net.minecraft.item.Rarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -19,9 +22,9 @@ import java.util.List;
 public class ItemBlockPresent extends BlockItem
 {
 
-	public ItemBlockPresent(final Block block)
+	public ItemBlockPresent(final Block block, final Item.Properties properties)
 	{
-		super(block);
+		super(block, properties);
 
 		this.setMaxStackSize(1);
 	}
@@ -37,24 +40,24 @@ public class ItemBlockPresent extends BlockItem
 	}
 
 	@Override
-	public EnumRarity getRarity(final ItemStack stack)
+	public Rarity getRarity(final ItemStack stack)
 	{
-		return EnumRarity.RARE;
+		return Rarity.RARE;
 	}
 
 	@OnlyIn(Dist.CLIENT)
 	@Override
-	public void addInformation(final ItemStack stack, @Nullable final World worldIn, final List<String> tooltip, final ITooltipFlag flagIn)
+	public void addInformation(final ItemStack stack, @Nullable final World worldIn, final List<ITextComponent> tooltip, final ITooltipFlag flagIn)
 	{
 		final PresentData data = ItemBlockPresent.getData(stack);
 
 		if (data.getStack() != null)
 		{
-			tooltip.add(TextFormatting.GRAY + "" + TextFormatting.ITALIC + I18n.format("item.aether.present.tooltip.hasitem"));
+			tooltip.add(new TranslationTextComponent("item.aether.present.tooltip.hasitem").setStyle(new Style().setColor(TextFormatting.GRAY).setItalic(true)));
 		}
 		else
 		{
-			tooltip.add(TextFormatting.DARK_GRAY + "" + TextFormatting.ITALIC + I18n.format("item.aether.present.tooltip.empty"));
+			tooltip.add(new TranslationTextComponent("item.aether.present.tooltip.empty").setStyle(new Style().setColor(TextFormatting.DARK_GRAY).setItalic(true)));
 		}
 	}
 
@@ -70,7 +73,7 @@ public class ItemBlockPresent extends BlockItem
 
 			if (compound.contains("item"))
 			{
-				data.stack = new ItemStack(compound.getCompound("item"));
+				data.stack = ItemStack.read(compound.getCompound("item"));
 			}
 
 			if (compound.contains("dye"))
@@ -85,7 +88,7 @@ public class ItemBlockPresent extends BlockItem
 		{
 			if (this.stack != null)
 			{
-				compound.put("item", this.stack.writeToNBT(new CompoundNBT()));
+				compound.put("item", this.stack.serializeNBT());
 			}
 
 			if (this.dye != null)

@@ -1,9 +1,13 @@
 package com.gildedgames.aether.common.items.companions;
 
+import com.gildedgames.aether.common.items.InformationProvider;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
@@ -14,6 +18,16 @@ import java.util.List;
 
 public class ItemDeathSeal extends ItemCompanion
 {
+	public ItemDeathSeal(Properties properties)
+	{
+		super(properties);
+	}
+
+	public ItemDeathSeal(Properties properties, InformationProvider informationProvider)
+	{
+		super(properties, informationProvider);
+	}
+
 	public static void setDisabledTimer(final ItemStack stack, final World world, final int timer)
 	{
 		CompoundNBT compound = stack.getTag();
@@ -23,9 +37,9 @@ public class ItemDeathSeal extends ItemCompanion
 			stack.setTag(compound = new CompoundNBT());
 		}
 
-		compound.putLong("disabledTimer", world.getTotalWorldTime() + timer);
+		compound.putLong("disabledTimer", world.getGameTime() + timer);
 
-		stack.setItemDamage(1);
+		stack.setDamage(1);
 	}
 
 	public static long getTicksUntilEnabled(final ItemStack stack, final World world)
@@ -37,27 +51,27 @@ public class ItemDeathSeal extends ItemCompanion
 			return 0;
 		}
 
-		return compound.getLong("disabledTimer") - world.getTotalWorldTime();
+		return compound.getLong("disabledTimer") - world.getGameTime();
 	}
 
 	@Override
-	public void onUpdate(final ItemStack stack, final World worldIn, final Entity entityIn, final int itemSlot, final boolean isSelected)
+	public void inventoryTick(final ItemStack stack, final World worldIn, final Entity entityIn, final int itemSlot, final boolean isSelected)
 	{
 		final long disabledTime = ItemDeathSeal.getTicksUntilEnabled(stack, worldIn);
 
 		if (disabledTime <= 0)
 		{
-			stack.setItemDamage(0);
+			stack.setDamage(0);
 		}
 		else
 		{
-			stack.setItemDamage(1);
+			stack.setDamage(1);
 		}
 	}
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public void addInformation(final ItemStack stack, @Nullable final World worldIn, final List<String> tooltip, final ITooltipFlag flagIn)
+	public void addInformation(final ItemStack stack, @Nullable final World worldIn, final List<ITextComponent> tooltip, final ITooltipFlag flagIn)
 	{
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 
@@ -65,7 +79,7 @@ public class ItemDeathSeal extends ItemCompanion
 
 		if (disabledTime > 0)
 		{
-			tooltip.add(TextFormatting.RED + "" + TextFormatting.ITALIC + "Disabled! Ready in " + this.parseTicks(disabledTime));
+			tooltip.add(new StringTextComponent("Disabled! Ready in " + this.parseTicks(disabledTime)).setStyle(new Style().setColor(TextFormatting.RED).setItalic(true)));
 		}
 	}
 }

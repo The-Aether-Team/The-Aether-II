@@ -69,7 +69,7 @@ public class ContainerTrade extends Container
 	{
 		super.onContainerClosed(playerIn);
 
-		if (!playerIn.world.isRemote)
+		if (!playerIn.world.isRemote())
 		{
 			this.clearContainer(playerIn, playerIn.world, this.tradeInventory);
 

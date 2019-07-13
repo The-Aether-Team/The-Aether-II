@@ -169,7 +169,7 @@ public class EntityEdison extends EntityCharacter implements IEntityEyesComponen
 
 			dialogModule.setTalkingEntity(this);
 
-			if (!player.world.isRemote)
+			if (!player.world.isRemote())
 			{
 				boolean hasDied = progressModule.hasDiedInAether();
 

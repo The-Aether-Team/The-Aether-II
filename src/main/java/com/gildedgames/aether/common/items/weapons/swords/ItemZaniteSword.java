@@ -3,14 +3,20 @@ package com.gildedgames.aether.common.items.weapons.swords;
 import com.gildedgames.aether.common.items.ItemAbilityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTier;
 import net.minecraft.util.DamageSource;
+
+import java.util.function.Consumer;
 
 public class ItemZaniteSword extends ItemAetherSword
 {
-	public ItemZaniteSword()
+
+	public ItemZaniteSword(IItemTier tier, ItemAbilityType abilityType, int attackDamageIn, float attackSpeedIn,
+			Properties builder)
 	{
-		super(ToolMaterial.IRON, ItemAbilityType.PASSIVE);
+		super(tier, abilityType, attackDamageIn, attackSpeedIn, builder);
 	}
 
 	@Override
@@ -37,7 +43,8 @@ public class ItemZaniteSword extends ItemAetherSword
 			target.attackEntityFrom(DamageSource.causeMobDamage(attacker), damage);
 		}
 
-		stack.damageItem(1, attacker);
+		// TODO: What is this last arg
+		stack.damageItem(1, attacker, (item) -> { });
 
 		return false;
 	}

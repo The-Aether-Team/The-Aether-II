@@ -3,21 +3,19 @@ package com.gildedgames.aether.common.blocks.natural.plants;
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.blocks.IBlockSnowy;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockSnow;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.SnowBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateContainer;
-import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -30,7 +28,7 @@ public class BlockAetherFlowerBase extends BlockAetherPlant implements IBlockSno
 	{
 		super(properties);
 
-		this.setDefaultState(this.stateContainer.getBaseState().with(PROPERTY_SNOWY, Boolean.FALSE));
+		this.setDefaultState(this.getStateContainer().getBaseState().with(PROPERTY_SNOWY, Boolean.FALSE));
 	}
 
 	@Override
@@ -38,44 +36,31 @@ public class BlockAetherFlowerBase extends BlockAetherPlant implements IBlockSno
 	{
 		super.tick(state, world, pos, rand);
 
-		if (!world.isRemote && this.canGrow(world, pos, state, false))
+		if (!world.isRemote() && this.canGrow(world, pos, state, false))
 		{
 			this.grow(world, rand, pos, state);
 		}
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(final World world, final BlockPos pos)
+	public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit)
 	{
-		return super.canPlaceBlockAt(world, pos);
-	}
-
-	@Override
-	public int getLightValue(final BlockState state)
-	{
-		return this.lightValue;
-	}
-
-	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, BlockState state, PlayerEntity playerIn, Hand hand, Direction facing, float hitX,
-			float hitY, float hitZ)
-	{
-		ItemStack main = playerIn.getHeldItemMainhand();
-		ItemStack offhand = playerIn.getHeldItemOffhand();
+		ItemStack main = player.getHeldItemMainhand();
+		ItemStack offhand = player.getHeldItemOffhand();
 
 		boolean addSnow = false;
 
 		if (!state.get(PROPERTY_SNOWY))
 		{
-			if (main != null && main.getItem() instanceof BlockItem)
+			if (!main.isEmpty() && main.getItem() instanceof BlockItem)
 			{
-				if (((BlockItem) main.getItem()).getBlock() instanceof BlockSnow)
+				if (((BlockItem) main.getItem()).getBlock() instanceof SnowBlock)
 				{
 					addSnow = true;
 					main.shrink(1);
 				}
 			}
-			else if (offhand != null && offhand.getItem() instanceof BlockItem && ((BlockItem) offhand.getItem()).getBlock() instanceof BlockSnow)
+			else if (!offhand.isEmpty() && offhand.getItem() instanceof BlockItem && ((BlockItem) offhand.getItem()).getBlock() instanceof SnowBlock)
 			{
 				addSnow = true;
 				offhand.shrink(1);
@@ -84,34 +69,22 @@ public class BlockAetherFlowerBase extends BlockAetherPlant implements IBlockSno
 
 		if (addSnow)
 		{
-			worldIn.setBlockState(pos, state.with(PROPERTY_SNOWY, Boolean.TRUE), 2);
+			world.setBlockState(pos, state.with(PROPERTY_SNOWY, Boolean.TRUE), 2);
 		}
 
 		return addSnow;
 	}
 
 	@Override
-	public void onPlayerDestroy(World worldIn, BlockPos pos, BlockState state)
+	public void onPlayerDestroy(IWorld worldIn, BlockPos pos, BlockState state)
 	{
 		if (state.get(PROPERTY_SNOWY))
 		{
 			if (worldIn.getBlockState(pos.down()) != Blocks.AIR.getDefaultState())
 			{
-				worldIn.setBlockState(pos, BlocksAether.highlands_snow_layer.getDefaultState().with(BlockSnow.LAYERS, 1), 2);
+				worldIn.setBlockState(pos, BlocksAether.highlands_snow_layer.getDefaultState().with(SnowBlock.LAYERS, 1), 2);
 			}
 		}
-	}
-
-	@Override
-	public BlockState getStateFromMeta(final int meta)
-	{
-		return this.getDefaultState().with(PROPERTY_SNOWY, meta == SNOWY_META);
-	}
-
-	@Override
-	public int getMetaFromState(final BlockState state)
-	{
-		return state.get(PROPERTY_SNOWY) ? SNOWY_META : NORMAL_META;
 	}
 
 	@Override
@@ -121,9 +94,9 @@ public class BlockAetherFlowerBase extends BlockAetherPlant implements IBlockSno
 	}
 
 	@Override
-	public EnumOffsetType getOffsetType()
+	public OffsetType getOffsetType()
 	{
-		return EnumOffsetType.XZ;
+		return OffsetType.XZ;
 	}
 
 	@Override

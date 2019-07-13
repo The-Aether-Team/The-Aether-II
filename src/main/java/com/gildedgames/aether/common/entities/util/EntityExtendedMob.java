@@ -47,7 +47,7 @@ public class EntityExtendedMob extends MonsterEntity
 	{
 		super.livingTick();
 
-		if (this.hasAttacked() && this.world.isRemote)
+		if (this.hasAttacked() && this.world.isRemote())
 		{
 			this.handleClientAttack();
 

@@ -35,6 +35,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
@@ -69,7 +70,7 @@ public class TileEntityTeleporter extends TileEntityMultiblockController impleme
 	@Override
 	public void update()
 	{
-		if (this.world.isRemote)
+		if (this.world.isRemote())
 		{
 			this.prevAnimationTicks = this.animationTicks;
 
@@ -139,7 +140,7 @@ public class TileEntityTeleporter extends TileEntityMultiblockController impleme
 			return false;
 		}
 
-		if (this.world.isRemote)
+		if (this.world.isRemote())
 		{
 			final PlayerAether playerAether = PlayerAether.getPlayer(player);
 			final PlayerTeleportingModule teleportingModule = playerAether.getModule(PlayerTeleportingModule.class);
@@ -224,7 +225,7 @@ public class TileEntityTeleporter extends TileEntityMultiblockController impleme
 	}
 
 	@Override
-	public ItemStack getPickedStack(World world, BlockPos pos, BlockState state)
+	public ItemStack getPickedStack(IBlockReader world, BlockPos pos, BlockState state)
 	{
 		return new ItemStack(BlocksAether.aether_teleporter);
 	}

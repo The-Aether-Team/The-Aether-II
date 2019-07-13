@@ -63,7 +63,7 @@ public class PropertyVariant implements IProperty<BlockVariant>
 	@Override
 	public Optional<BlockVariant> parseValue(String value)
 	{
-		return Optional.fromNullable(this.entries.get(value));
+		return Optional.ofNullable(this.entries.get(value));
 	}
 
 	@Override

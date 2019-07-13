@@ -1,27 +1,18 @@
 package com.gildedgames.aether.common.items.tools;
 
 import com.gildedgames.aether.common.events.listeners.items.ItemToolListener;
-import com.gildedgames.aether.common.init.CreativeTabsAether;
 import com.gildedgames.aether.common.init.MaterialsAether;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemAxe;
+import net.minecraft.item.AxeItem;
+import net.minecraft.item.IItemTier;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class ItemAetherAxe extends ItemAxe
+public class ItemAetherAxe extends AxeItem
 {
-	public ItemAetherAxe(final ToolMaterial material)
+	public ItemAetherAxe(final IItemTier tier, final float damageVsEntity, final float attackSpeed, Item.Properties properties)
 	{
-		// The parent constructor will crash trying to set parameters, we need to do it here
-		this(material, 6.0F, -3.2F);
-	}
-
-	public ItemAetherAxe(final ToolMaterial material, final float damageVsEntity, final float attackSpeed)
-	{
-		super(material, damageVsEntity, attackSpeed);
-
-		this.setHarvestLevel("axe", material.getHarvestLevel());
-
-		this.setCreativeTab(CreativeTabsAether.TAB_TOOLS);
+		super(tier, damageVsEntity, attackSpeed, properties);
 	}
 
 	@Override
@@ -29,17 +20,17 @@ public class ItemAetherAxe extends ItemAxe
 	{
 		super.hitEntity(stack, target, attacker);
 
-		return ItemToolListener.onEntityHit(stack, this.toolMaterial, target, attacker);
+		return ItemToolListener.onEntityHit(stack, this.getTier(), target, attacker);
 	}
 
 	@Override
-	public int getItemBurnTime(ItemStack itemStack)
+	public int getBurnTime(ItemStack itemStack)
 	{
-		if (this.toolMaterial == MaterialsAether.SKYROOT_TOOL)
+		if (this.getTier() == MaterialsAether.SKYROOT_TOOL)
 		{
 			return 100;
 		}
 
-		return super.getItemBurnTime(itemStack);
+		return super.getBurnTime(itemStack);
 	}
 }

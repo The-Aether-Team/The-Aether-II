@@ -88,7 +88,7 @@ public class EntityAIWanderAvoidLight extends Goal
 			{
 				BlockPos blockPos = new BlockPos(pos);
 
-				if (this.entity.world.getLightFromNeighbors(blockPos) <= this.lightLevel && !(this.entity.world.isDaytime() && this.entity.world.canSeeSky(blockPos)))
+				if (this.entity.world.getBrightness(blockPos) <= this.lightLevel && !(this.entity.world.isDaytime() && this.entity.world.canSeeSky(blockPos)))
 				{
 					return pos;
 				}
@@ -124,7 +124,7 @@ public class EntityAIWanderAvoidLight extends Goal
 				PathPoint pp = path.getPathPointFromIndex(i);
 				BlockPos blockPos = new BlockPos(pp.x, pp.y, pp.z);
 
-				if (this.entity.world.getLightFromNeighbors(blockPos) > this.lightLevel || (this.entity.world.isDaytime() && this.entity.world.canSeeSky(blockPos)))
+				if (this.entity.world.getBrightness(blockPos) > this.lightLevel || (this.entity.world.isDaytime() && this.entity.world.canSeeSky(blockPos)))
 				{
 					this.entity.getNavigator().clearPath();
 				}

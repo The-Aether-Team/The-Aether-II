@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.recipes.altar;
 import com.gildedgames.aether.api.recipes.altar.IAltarRecipe;
 import com.gildedgames.aether.common.init.MaterialsAether;
 import com.gildedgames.aether.common.items.weapons.swords.ItemAetherSword;
-import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.item.ToolItem;
@@ -13,7 +13,7 @@ public class AltarRepairRecipe implements IAltarRecipe
 	@Override
 	public boolean matchesInput(final ItemStack stack)
 	{
-		return (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ToolItem || stack.getItem() instanceof ItemArmor)
+		return (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ToolItem || stack.getItem() instanceof ArmorItem)
 				&& stack.isItemDamaged();
 	}
 
@@ -48,9 +48,9 @@ public class AltarRepairRecipe implements IAltarRecipe
 					return 3;
 			}
 		}
-		else if (stack.getItem() instanceof ItemArmor)
+		else if (stack.getItem() instanceof ArmorItem)
 		{
-			final ItemArmor armor = (ItemArmor) stack.getItem();
+			final ArmorItem armor = (ArmorItem) stack.getItem();
 
 			switch (armor.getArmorMaterial())
 			{
@@ -77,7 +77,7 @@ public class AltarRepairRecipe implements IAltarRecipe
 	@Override
 	public ItemStack getOutput(final ItemStack stack)
 	{
-		stack.setItemDamage(0);
+		stack.setDamage(0);
 
 		return stack;
 	}

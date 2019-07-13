@@ -59,7 +59,7 @@ public class EntityFloatingBlock extends Entity
 		// Destroys the source block, since deleting a neighboring block in the actual block class
 		// causes a infinite loop of updates.
 
-		if (!this.world.isRemote && !this.hasActivated)
+		if (!this.world.isRemote() && !this.hasActivated)
 		{
 			BlockPos pos = new BlockPos(this);
 
@@ -97,7 +97,7 @@ public class EntityFloatingBlock extends Entity
 
 			if (!BlockFloating.canFallInto(this.world, pos.up()))
 			{
-				if (!this.world.isRemote)
+				if (!this.world.isRemote())
 				{
 					this.world.setBlockState(pos, this.getBlockState());
 
@@ -109,7 +109,7 @@ public class EntityFloatingBlock extends Entity
 				this.posZ = pos.getZ() + 0.5D;
 			}
 
-			if (this.world.isAirBlock(pos.down()) && this.world.isRemote)
+			if (this.world.isAirBlock(pos.down()) && this.world.isRemote())
 			{
 				int count = MathHelper.floor(this.motionY / 0.15D);
 

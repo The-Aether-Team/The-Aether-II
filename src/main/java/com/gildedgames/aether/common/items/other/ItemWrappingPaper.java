@@ -1,20 +1,26 @@
 package com.gildedgames.aether.common.items.other;
 
-import com.gildedgames.aether.common.items.IDropOnDeath;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
 
-public class ItemWrappingPaper extends Item implements IDropOnDeath
+public class ItemWrappingPaper extends Item
 {
+
+	public ItemWrappingPaper(Properties properties)
+	{
+		super(properties);
+	}
 
 	public static PresentDyeData getDyeData(final ItemStack stack)
 	{
@@ -23,7 +29,7 @@ public class ItemWrappingPaper extends Item implements IDropOnDeath
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public void addInformation(final ItemStack stack, final World world, final List<String> tooltip, final ITooltipFlag flag)
+	public void addInformation(final ItemStack stack, final World world, final List<ITextComponent> tooltip, final ITooltipFlag flag)
 	{
 		final PresentDyeData data = ItemWrappingPaper.getDyeData(stack);
 
@@ -32,10 +38,10 @@ public class ItemWrappingPaper extends Item implements IDropOnDeath
 			return;
 		}
 
-		tooltip.add(TextFormatting.YELLOW + I18n.format(data.getBoxColorName()));
-		tooltip.add(TextFormatting.YELLOW + I18n.format(data.getBowColorName()));
+		tooltip.add(new TranslationTextComponent(data.getBoxColorName()).setStyle(new Style().setColor(TextFormatting.YELLOW)));
+		tooltip.add(new TranslationTextComponent(data.getBowColorName()).setStyle(new Style().setColor(TextFormatting.YELLOW)));
 
-		tooltip.add(TextFormatting.GRAY + I18n.format("item.aether.wrapping_paper.tooltip.craft"));
+		tooltip.add(new TranslationTextComponent("item.aether.wrapping_paper.tooltip.craft").setStyle(new Style().setColor(TextFormatting.GRAY)));
 	}
 
 	public static class PresentDyeData

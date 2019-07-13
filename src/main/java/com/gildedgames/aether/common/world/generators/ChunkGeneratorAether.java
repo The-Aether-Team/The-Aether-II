@@ -43,7 +43,7 @@ public class ChunkGeneratorAether implements IChunkGenerator
 	{
 		this.world = world;
 
-		if (!this.world.isRemote)
+		if (!this.world.isRemote())
 		{
 			this.world.setSeaLevel(0);
 		}

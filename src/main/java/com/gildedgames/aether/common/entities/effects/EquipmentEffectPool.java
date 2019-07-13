@@ -34,7 +34,7 @@ public class EquipmentEffectPool<T extends IEffectProvider> implements IEffectPo
 		this.player = player;
 		this.factory = factory;
 
-		this.isRemote = player.getEntity().getEntityWorld().isRemote;
+		this.isRemote() = player.getEntity().getEntityWorld().isRemote;
 	}
 
 	public void update()

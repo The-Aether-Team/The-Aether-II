@@ -12,6 +12,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 public class TileEntityMultiblockDummy extends TileEntitySynced implements ITileEntityMultiblock, IWorldObjectHoverable
@@ -63,7 +64,7 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements ITile
 	}
 
 	@Override
-	public ItemStack getPickedStack(final World world, final BlockPos pos, final BlockState state)
+	public ItemStack getPickedStack(final IBlockReader world, final BlockPos pos, final BlockState state)
 	{
 		if (!this.hasLinkedController())
 		{

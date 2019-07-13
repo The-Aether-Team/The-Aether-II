@@ -24,6 +24,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
@@ -80,7 +81,7 @@ public class TileEntityOutpostCampfire extends TileEntityMultiblockController im
 	}
 
 	@Override
-	public ItemStack getPickedStack(final World world, final BlockPos pos, final BlockState state)
+	public ItemStack getPickedStack(final IBlockReader world, final BlockPos pos, final BlockState state)
 	{
 		return new ItemStack(BlocksAether.outpost_campfire);
 	}
@@ -114,7 +115,7 @@ public class TileEntityOutpostCampfire extends TileEntityMultiblockController im
 
 		List<PlayerEntity> players = this.world.getEntitiesWithinAABB(PlayerEntity.class, searchingBB);
 
-		if (this.world.isRemote)
+		if (this.world.isRemote())
 		{
 			this.clientUpdate();
 		}

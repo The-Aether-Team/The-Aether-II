@@ -25,8 +25,6 @@ public class BlockRockGlassDecorative extends BlockDecorative
 	public BlockRockGlassDecorative(Block.Properties properties)
 	{
 		super(properties);
-
-		this.setLightOpacity(3);
 	}
 
 	@Nonnull
@@ -41,27 +39,5 @@ public class BlockRockGlassDecorative extends BlockDecorative
 	public BlockRenderLayer getRenderLayer()
 	{
 		return BlockRenderLayer.TRANSLUCENT;
-	}
-
-	@Override
-	public boolean isOpaqueCube(BlockState state)
-	{
-		return false;
-	}
-
-	@Override
-	public boolean isFullCube(BlockState state)
-	{
-		return false;
-	}
-
-	@Override
-	@OnlyIn(Dist.CLIENT)
-	public boolean shouldSideBeRendered(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side)
-	{
-		BlockState iblockstate = blockAccess.getBlockState(pos.offset(side));
-		Block block = iblockstate.getBlock();
-
-		return block != this && super.shouldSideBeRendered(blockState, blockAccess, pos, side);
 	}
 }

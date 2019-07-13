@@ -37,7 +37,7 @@ public class EntityDart extends ArrowEntity implements IDamageLevelsHolder
 	{
 		super.livingTick();
 
-		if (this.world.isRemote && this.world.getWorldTime() % 3 == 0)
+		if (this.world.isRemote() && this.world.getWorldTime() % 3 == 0)
 		{
 			if (this.getDartType() == ItemDartType.ENCHANTED)
 			{

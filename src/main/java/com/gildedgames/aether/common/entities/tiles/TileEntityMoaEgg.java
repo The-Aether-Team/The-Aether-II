@@ -35,7 +35,7 @@ public class TileEntityMoaEgg extends TileEntitySynced implements ITickableTileE
 	@Override
 	public void update()
 	{
-		if (this.world.isRemote)
+		if (this.world.isRemote())
 		{
 			return;
 		}

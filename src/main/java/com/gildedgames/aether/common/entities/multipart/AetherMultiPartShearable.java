@@ -5,7 +5,7 @@ import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.IEntityMultiPart;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.init.Enchantments;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResultType;
@@ -37,7 +37,7 @@ public class AetherMultiPartShearable extends AetherMultiPartEntity
 		MobEntity entity = (MobEntity) this.parent;
 		IShearable shearable = (IShearable) this.parent;
 
-		if (shearable.isShearable(held, player.world, entity.getPosition()) && !this.world.isRemote)
+		if (shearable.isShearable(held, player.world, entity.getPosition()) && !this.world.isRemote())
 		{
 			List<ItemStack> drops = shearable.onSheared(held, entity.world, entity.getPosition(),
 					EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, held));

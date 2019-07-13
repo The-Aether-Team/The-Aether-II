@@ -7,21 +7,25 @@ import com.gildedgames.aether.common.entities.animals.EntityMoa;
 import com.gildedgames.aether.common.entities.genes.GeneUtil;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.tiles.TileEntityMoaEgg;
-import com.gildedgames.aether.common.items.IDropOnDeath;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUseContext;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Direction;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -29,20 +33,16 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemMoaEgg extends Item implements IDropOnDeath
+public class ItemMoaEgg extends Item
 {
 
 	private final boolean creativeEgg;
 
-	public ItemMoaEgg(final boolean creativeEgg)
+	public ItemMoaEgg(final boolean creativeEgg, Item.Properties properties)
 	{
-		super();
+		super(properties);
 
 		this.creativeEgg = creativeEgg;
-
-		this.setHasSubtypes(true);
-
-		this.maxStackSize = 1;
 
 		this.addPropertyOverride(new ResourceLocation("circles"), new ModelProperty("circles"));
 		this.addPropertyOverride(new ResourceLocation("curves"), new ModelProperty("curves"));
@@ -83,32 +83,38 @@ public class ItemMoaEgg extends Item implements IDropOnDeath
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public void addInformation(final ItemStack stack, final World world, final List<String> creativeList, final ITooltipFlag flag)
+	public void addInformation(final ItemStack stack, final World world, final List<ITextComponent> creativeList, final ITooltipFlag flag)
 	{
 		final MoaGenePool genePool = ItemMoaEgg.getGenePool(stack);
 
 		if (genePool.getFeathers() != null && stack.getItem() != ItemsAether.rainbow_moa_egg)
 		{
-			creativeList.add("\u2022 " + I18n.format("moa.feathers", genePool.getFeathers().gene().localizedName()));
-			creativeList.add("\u2022 " + I18n.format("moa.keratin", genePool.getKeratin().gene().localizedName()));
-			creativeList.add("\u2022 " + I18n.format("moa.eyes", genePool.getEyes().gene().localizedName()));
-
-			creativeList.add("");
-
-			creativeList.add(TextFormatting.YELLOW + "" + TextFormatting.ITALIC + "" + I18n
-					.format("moa.wing_strength", genePool.getWingStrength().gene().localizedName()));
+			creativeList.add(new TranslationTextComponent("moa.feathers", genePool.getFeathers().gene().localizedName()));
+			creativeList.add(new TranslationTextComponent("moa.keratin", genePool.getKeratin().gene().localizedName()));
+			creativeList.add(new TranslationTextComponent("moa.eyes", genePool.getEyes().gene().localizedName()));
+			creativeList.add(new TranslationTextComponent("moa.wing_strength", genePool.getWingStrength().gene().localizedName())
+					.setStyle(new Style().setColor(TextFormatting.YELLOW).setItalic(true)));
 		}
 	}
 
 	@Override
-	public ActionResultType onItemUse(final PlayerEntity player, final World world, final BlockPos pos, final Hand hand, final Direction facing,
-			final float hitX, final float hitY, final float hitZ)
+	public ActionResultType onItemUse(ItemUseContext context)
 	{
-		final ItemStack stack = player.getHeldItem(hand);
+		final PlayerEntity player = context.getPlayer();
+
+		if (player == null)
+		{
+			return ActionResultType.FAIL;
+		}
+
+		final World world = context.getWorld();
+		final ItemStack stack = context.getItem();
+		final BlockPos pos = context.getPos();
+		final Direction facing = context.getFace();
 
 		final BlockState state = world.getBlockState(pos);
 
-		final boolean replaceable = state.getBlock().isReplaceable(world, pos);
+		final boolean replaceable = state.getMaterial().isReplaceable();
 
 		final int yOffset = replaceable ? 0 : 1;
 
@@ -121,20 +127,20 @@ public class ItemMoaEgg extends Item implements IDropOnDeath
 			return ActionResultType.FAIL;
 		}
 		else if ((world.isAirBlock(pos.add(0, yOffset, 0)) || replaceable)
-				&& BlocksAether.moa_egg.canPlaceBlockAt(world, pos.add(0, yOffset, 0)))
+				&& BlocksAether.moa_egg.getDefaultState().isValidPosition(world, pos.add(0, yOffset, 0)))
 		{
 			if (player.isCreative() || this.creativeEgg)
 			{
-				if (!world.isRemote)
+				if (!world.isRemote())
 				{
 					final EntityMoa moa = new EntityMoa(world, GeneUtil.getRandomSeed(world));
-					moa.setPosition(pos.getX() + 0.5F, pos.getY() + (moa.height / 2), pos.getZ() + 0.5F);
+					moa.setPosition(pos.getX() + 0.5F, pos.getY() + (moa.getHeight() / 2), pos.getZ() + 0.5F);
 
 					final MoaGenePool stackGenePool = ItemMoaEgg.getGenePool(stack);
 
 					moa.setRaisedByPlayer(true);
 
-					world.spawnEntity(moa);
+					world.addEntity(moa);
 
 					final MoaGenePool genePool = moa.getGenePool();
 
@@ -153,7 +159,7 @@ public class ItemMoaEgg extends Item implements IDropOnDeath
 
 				return ActionResultType.SUCCESS;
 			}
-			else if (world.checkNoEntityCollision(BlockMoaEgg.BOUNDING_BOX.offset(pos.getX(), pos.getY() + 1, pos.getZ())) &&
+			else if (world.checkBlockCollision(BlockMoaEgg.BOUNDING_BOX.withOffset(pos.getX(), pos.getY() + 1, pos.getZ()).getBoundingBox()) &&
 					world.setBlockState(pos.add(0, yOffset, 0), BlocksAether.moa_egg.getDefaultState()))
 			{
 				final SoundType soundtype = world.getBlockState(pos).getBlock().getSoundType(world.getBlockState(pos), world, pos, player);
@@ -188,36 +194,22 @@ public class ItemMoaEgg extends Item implements IDropOnDeath
 	}
 
 	@Override
-	public String getItemStackDisplayName(final ItemStack stack)
-	{
-		return this.creativeEgg ? super.getItemStackDisplayName(stack) : super.getItemStackDisplayName(stack);
-	}
-
-	@Override
-	public boolean getShareTag()
+	public boolean shouldSyncTag()
 	{
 		return true;
 	}
 
-	@Override
-	public void onUpdate(final ItemStack stack, final World worldIn, final Entity entityIn, final int itemSlot, final boolean isSelected)
-	{
-
-	}
-
 	private static class ModelProperty implements IItemPropertyGetter
 	{
-
 		private final String propertyName;
 
-		public ModelProperty(final String propertyName)
+		ModelProperty(final String propertyName)
 		{
 			this.propertyName = propertyName;
 		}
 
 		@Override
-		@OnlyIn(Dist.CLIENT)
-		public float apply(final ItemStack stack, @Nullable final World worldIn, @Nullable final LivingEntity entityIn)
+		public float call(ItemStack stack, @Nullable World world, @Nullable LivingEntity entity)
 		{
 			final MoaGenePool genePool = ItemMoaEgg.getGenePool(stack);
 
@@ -233,7 +225,6 @@ public class ItemMoaEgg extends Item implements IDropOnDeath
 
 			return 0.0F;
 		}
-
 	}
 
 }

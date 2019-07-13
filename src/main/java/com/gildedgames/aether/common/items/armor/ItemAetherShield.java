@@ -1,49 +1,35 @@
 package com.gildedgames.aether.common.items.armor;
 
 import com.gildedgames.aether.api.registrar.ItemsAether;
-import com.gildedgames.aether.common.init.CreativeTabsAether;
-import net.minecraft.block.BlockDispenser;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ShieldItem;
+import net.minecraft.item.UseAction;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.api.distmarker.Dist;
 
-public class ItemAetherShield extends Item
+public class ItemAetherShield extends ShieldItem
 {
-	public ItemAetherShield()
+	public ItemAetherShield(Item.Properties properties)
 	{
-		this.setMaxStackSize(1);
-		this.setMaxDamage(336);
+		super(properties);
 
-		this.addPropertyOverride(new ResourceLocation("blocking"), new IItemPropertyGetter()
-		{
-			@Override
-			@OnlyIn(Dist.CLIENT)
-			public float apply(ItemStack stack, World worldIn, LivingEntity entity)
-			{
-				return entity != null && entity.isHandActive() && entity.getActiveItemStack() == stack ? 1.0F : 0.0F;
-			}
-		});
-
-		BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, ItemArmor.DISPENSER_BEHAVIOR);
-
-		this.setCreativeTab(CreativeTabsAether.TAB_ARMOR);
+		this.addPropertyOverride(new ResourceLocation("blocking"), (stack, world, entity) ->
+				entity != null && entity.isHandActive() && entity.getActiveItemStack() == stack ? 1.0F : 0.0F);
 	}
 
 	@Override
-	public UseAction getItemUseAction(ItemStack stack)
+	public UseAction getUseAction(ItemStack stack)
 	{
 		return UseAction.BLOCK;
 	}
 
 	@Override
-	public int getMaxItemUseDuration(ItemStack stack)
+	public int getUseDuration(ItemStack stack)
 	{
 		return 72000;
 	}
@@ -58,14 +44,14 @@ public class ItemAetherShield extends Item
 	}
 
 	@Override
-	public int getItemBurnTime(ItemStack itemStack)
+	public int getBurnTime(ItemStack itemStack)
 	{
 		if (itemStack.getItem() == ItemsAether.skyroot_shield)
 		{
 			return 100;
 		}
 
-		return super.getItemBurnTime(itemStack);
+		return super.getBurnTime(itemStack);
 	}
 
 }

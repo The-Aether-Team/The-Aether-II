@@ -50,14 +50,14 @@ public class EntityFlyingMob extends EntityFlying implements IMob
 	{
 		super.livingTick();
 
-		if (this.hasAttacked() && this.world.isRemote)
+		if (this.hasAttacked() && this.world.isRemote())
 		{
 			this.handleClientAttack();
 
 			this.setAttacked(false);
 		}
 
-		if (!this.world.isRemote && this.world.getDifficulty() == EnumDifficulty.PEACEFUL)
+		if (!this.world.isRemote() && this.world.getDifficulty() == EnumDifficulty.PEACEFUL)
 		{
 			this.remove();
 		}
@@ -152,7 +152,7 @@ public class EntityFlyingMob extends EntityFlying implements IMob
 	protected void registerAttributes()
 	{
 		super.registerAttributes();
-		this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
+		this.getAttributes().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
 	}
 
 	protected void ageInSunlight()
@@ -181,13 +181,13 @@ public class EntityFlyingMob extends EntityFlying implements IMob
 		}
 		else
 		{
-			int i = this.world.getLightFromNeighbors(blockpos);
+			int i = this.world.getBrightness(blockpos);
 
 			if (this.world.isThundering())
 			{
 				final int j = this.world.getSkylightSubtracted();
 				this.world.setSkylightSubtracted(10);
-				i = this.world.getLightFromNeighbors(blockpos);
+				i = this.world.getBrightness(blockpos);
 				this.world.setSkylightSubtracted(j);
 			}
 

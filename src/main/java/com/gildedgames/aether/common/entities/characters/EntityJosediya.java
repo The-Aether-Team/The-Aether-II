@@ -124,7 +124,7 @@ public class EntityJosediya extends EntityCharacter implements IEntityEyesCompon
 	{
 		if (!super.processInteract(player, hand))
 		{
-			if (!player.world.isRemote)
+			if (!player.world.isRemote())
 			{
 				final PlayerAether playerAether = PlayerAether.getPlayer(player);
 				final PlayerDialogModule dialogModule = playerAether.getModule(PlayerDialogModule.class);

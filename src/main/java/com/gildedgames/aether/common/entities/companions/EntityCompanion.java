@@ -99,7 +99,7 @@ public abstract class EntityCompanion extends CreatureEntity
 	@Override
 	public void livingTick()
 	{
-		if (!this.world.isRemote && (this.getOwner() == null || this.getOwner().isDead))
+		if (!this.world.isRemote() && (this.getOwner() == null || this.getOwner().isDead))
 		{
 			this.remove();
 

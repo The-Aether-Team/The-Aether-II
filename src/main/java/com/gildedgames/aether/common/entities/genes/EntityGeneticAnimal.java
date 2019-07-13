@@ -51,7 +51,7 @@ public abstract class EntityGeneticAnimal<T extends IGenePool> extends AnimalEnt
 	{
 		super.livingTick();
 
-		if (this.shouldRetransform() && this.world.isRemote)
+		if (this.shouldRetransform() && this.world.isRemote())
 		{
 			if (this.getSeed() == this.getFatherSeed() && this.getSeed() == this.getMotherSeed())
 			{

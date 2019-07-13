@@ -4,7 +4,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.IBlockReader;
 
 public interface ITileEntityMultiblock
 {
@@ -20,6 +20,6 @@ public interface ITileEntityMultiblock
 	 */
 	void onDestroyed();
 
-	ItemStack getPickedStack(World world, BlockPos pos, BlockState state);
+	ItemStack getPickedStack(IBlockReader world, BlockPos pos, BlockState state);
 
 }

@@ -2,13 +2,17 @@ package com.gildedgames.aether.common.init;
 
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.blocks.IBlockMultiName;
-import com.gildedgames.aether.common.blocks.IBlockWithItem;
-import com.gildedgames.aether.common.blocks.IInternalBlock;
 import com.gildedgames.aether.common.blocks.construction.*;
-import com.gildedgames.aether.common.blocks.construction.redstone.*;
-import com.gildedgames.aether.common.blocks.construction.signs.*;
-import com.gildedgames.aether.common.blocks.construction.walls.*;
+import com.gildedgames.aether.common.blocks.construction.redstone.BlockHolystoneButton;
+import com.gildedgames.aether.common.blocks.construction.redstone.BlockHolystonePressurePlate;
+import com.gildedgames.aether.common.blocks.construction.redstone.BlockSkyrootButton;
+import com.gildedgames.aether.common.blocks.construction.redstone.BlockSkyrootPressurePlate;
+import com.gildedgames.aether.common.blocks.construction.signs.BlockStandingSkyrootSign;
+import com.gildedgames.aether.common.blocks.construction.signs.BlockWallSkyrootSign;
+import com.gildedgames.aether.common.blocks.construction.walls.BlockCandyCaneWall;
+import com.gildedgames.aether.common.blocks.construction.walls.BlockCustomWall;
+import com.gildedgames.aether.common.blocks.construction.walls.BlockScatterglassWall;
+import com.gildedgames.aether.common.blocks.construction.walls.BlockSkyrootWall;
 import com.gildedgames.aether.common.blocks.containers.*;
 import com.gildedgames.aether.common.blocks.decorative.*;
 import com.gildedgames.aether.common.blocks.multiblock.BlockMultiDummy;
@@ -17,17 +21,18 @@ import com.gildedgames.aether.common.blocks.natural.*;
 import com.gildedgames.aether.common.blocks.natural.leaves.*;
 import com.gildedgames.aether.common.blocks.natural.ores.*;
 import com.gildedgames.aether.common.blocks.natural.plants.*;
-import com.gildedgames.aether.common.blocks.natural.plants.saplings.*;
-import com.gildedgames.aether.common.blocks.natural.wood.*;
+import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherGreatrootSapling;
+import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherSkyrootSapling;
+import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherUniqueSapling;
+import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherWisprootSapling;
+import com.gildedgames.aether.common.blocks.natural.wood.AetherWoodType;
+import com.gildedgames.aether.common.blocks.natural.wood.BlockAetherLog;
 import com.gildedgames.aether.common.blocks.util.*;
-import com.gildedgames.aether.common.items.blocks.ItemBlockMultiName;
 import net.minecraft.block.Block;
 import net.minecraft.block.FenceBlock;
 import net.minecraft.block.FenceGateBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -85,12 +90,12 @@ public class BlocksAetherInit
 		r.register("agiosite_stairs", new BlockCustomStairs(agiosite.getDefaultState(), Block.Properties.from(agiosite)));
 		r.register("altar", new BlockAltar(Block.Properties.from(holystone)));
 		r.register("amberoot_leaves", new BlockUniqueLeaves(Block.Properties.from(skyroot_leaves), AetherWoodType.AMBERROOT));
-		r.register("ambrosium_ore", new BlockAmbrosiumOre(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0f, 5.0f).harvestTool(ToolType.PICKAXE).harvestLevel(0).lightValue(6).sound(SoundType.STONE)));
+		r.register("ambrosium_ore", new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0f, 5.0f).harvestTool(ToolType.PICKAXE).harvestLevel(0).lightValue(6).sound(SoundType.STONE)));
 		r.register("ambrosium_torch", new BlockAmbrosiumTorch(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.0f).lightValue(14).sound(SoundType.WOOD)));
 		r.register("arctic_spikespring", new BlockAetherFlowerBase(Block.Properties.from(aether_flower)));
 		r.register("arkenium_door", new BlockCustomDoor(Block.Properties.create(Material.IRON).hardnessAndResistance(3.0f).sound(SoundType.METAL), () -> ItemsAether.arkenium_door_item));
-		r.register("arkenium_ore", new BlockAetherOre(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0f, 5.0f).harvestTool(ToolType.PICKAXE).harvestLevel(2).sound(SoundType.STONE)));
-		r.register("barkshroom", new BlockAetherMushroom());
+		r.register("arkenium_ore", new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0f, 5.0f).harvestTool(ToolType.PICKAXE).harvestLevel(2).sound(SoundType.STONE)));
+		r.register("barkshroom", new BlockAetherMushroom(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().sound(SoundType.PLANT)));
 		r.register("blue_dark_skyroot_leaves", new BlockGreatrootLeaves(Block.Properties.from(skyroot_leaves), BlockColoredLeaves.Color.BLUE));
 		r.register("blue_light_skyroot_leaves", new BlockWisprootLeaves(Block.Properties.from(skyroot_leaves), BlockColoredLeaves.Color.BLUE));
 		r.register("blue_skyroot_leaves", new BlockSkyrootLeaves(Block.Properties.from(skyroot_leaves), BlockColoredLeaves.Color.BLUE));
@@ -120,7 +125,7 @@ public class BlocksAetherInit
 		r.register("ferrosite", new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(1.5f).sound(SoundType.STONE)));
 		r.register("ferrosite_sand", new Block(Block.Properties.create(Material.SAND).hardnessAndResistance(0.5f).sound(SoundType.SAND)));
 		r.register("forgotten_rose", new BlockAetherFlowerBase(Block.Properties.from(aether_flower)));
-		r.register("golden_oak_log", new BlockAmberLog(Block.Properties.from(skyroot_log), AetherWoodType.AMBERROOT));
+		r.register("golden_oak_log", new BlockAetherLog(Block.Properties.from(skyroot_log), AetherWoodType.AMBERROOT));
 		r.register("gravitite_block", new Block(Block.Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(5.0f).harvestTool(ToolType.PICKAXE).harvestLevel(2)));
 		r.register("gravitite_ore", new BlockFloating(Block.Properties.from(holystone).hardnessAndResistance(3.0f, 5.0f).harvestTool(ToolType.PICKAXE).harvestLevel(2)));
 		r.register("greatroot_button", new BlockSkyrootButton(Block.Properties.from(skyroot_planks)));
@@ -140,7 +145,7 @@ public class BlocksAetherInit
 		r.register("hellfirestone_pillar", new BlockRotatable(Block.Properties.from(holystone)));
 		r.register("highlands_bush", new BlockAetherLeaves(Block.Properties.from(skyroot_leaves)));
 		r.register("highlands_ice", highlands_ice.setLightOpacity(3));
-		r.register("highlands_ice_crystal", new BlockIceCrystal(Block.Properties.from(highlands_ice)));
+		r.register("highlands_ice_crystal", new BlockIceCrystal(Block.Properties.from(highlands_ice).doesNotBlockMovement()));
 		r.register("highlands_packed_ice", new Block(Block.Properties.from(highlands_ice)));
 		r.register("highlands_snow", highlands_snow);
 		r.register("highlands_snow_layer", new BlockCustomSnow(Block.Properties.from(highlands_snow)));
@@ -164,7 +169,7 @@ public class BlocksAetherInit
 		r.register("icestone_bricks", icestone_bricks);
 		r.register("icestone_bricks_decorative", new BlockIcestoneBricksDecorative(Block.Properties.from(icestone_bricks)));
 		r.register("icestone_cooler", new BlockIcestoneCooler(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.5f).sound(SoundType.WOOD).harvestTool(ToolType.PICKAXE).harvestLevel(0)));
-		r.register("icestone_ore", new BlockIcestoneOre(Block.Properties.from(holystone).hardnessAndResistance(3.0f).harvestTool(ToolType.PICKAXE).harvestLevel(1)));
+		r.register("icestone_ore", new Block(Block.Properties.from(holystone).hardnessAndResistance(3.0f).harvestTool(ToolType.PICKAXE).harvestLevel(1)));
 		r.register("icestone_pillar", new BlockRotatable(Block.Properties.from(icestone_bricks)));
 		r.register("icestone_slab", new BlockCustomSlab(Block.Properties.from(icestone_bricks)));
 		r.register("icestone_wall", new BlockCustomWall(Block.Properties.from(icestone_bricks)));
@@ -174,7 +179,7 @@ public class BlocksAetherInit
 		r.register("light_skyroot_decorative", new BlockLightSkyrootDecorative(Block.Properties.from(skyroot_planks)));
 		r.register("light_skyroot_log", new BlockAetherLog(Block.Properties.from(skyroot_log), AetherWoodType.WISPROOT));
 		r.register("light_skyroot_planks", new Block(Block.Properties.from(skyroot_planks)));
-		r.register("magnetic_shroom", new BlockAetherMushroom());
+		r.register("magnetic_shroom", new BlockAetherMushroom(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().sound(SoundType.PLANT)));
 		r.register("masonry_bench", new BlockMasonryBench(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.5f).sound(SoundType.WOOD).harvestTool(ToolType.PICKAXE).harvestLevel(0)));
 		r.register("moa_egg", new BlockMoaEgg(Block.Properties.create(Material.ORGANIC).sound(SoundType.STONE).hardnessAndResistance(0.1f)));
 		r.register("mossy_holystone_slab", new BlockCustomSlab(Block.Properties.from(holystone)));
@@ -231,7 +236,7 @@ public class BlocksAetherInit
 		r.register("skyroot_trapdoor", new BlockSkyrootTrapDoor(Block.Properties.from(skyroot_planks)));
 		r.register("skyroot_twigs", new BlockFloorObject(Block.Properties.from(skyroot_planks)));
 		r.register("standing_skyroot_sign", new BlockStandingSkyrootSign(Block.Properties.from(skyroot_planks)));
-		r.register("stoneshroom", new BlockAetherMushroom());
+		r.register("stoneshroom", new BlockAetherMushroom(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().sound(SoundType.PLANT)));
 		r.register("tall_aether_grass", new BlockTallAetherGrass(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().sound(SoundType.PLANT)));
 		r.register("thera_dirt", new BlockTheraDirt(Block.Properties.from(aether_dirt)));
 		r.register("thera_grass", new BlockTheraGrass(Block.Properties.from(aether_grass)));
@@ -260,43 +265,8 @@ public class BlocksAetherInit
 		r.register("wisproot_stairs", new BlockCustomStairs(skyroot_planks.getDefaultState(), Block.Properties.from(skyroot_planks)));
 		r.register("woven_sticks", new BlockWovenSticks(Block.Properties.create(Material.WOOD).sound(SoundType.GROUND).hardnessAndResistance(0.5F).harvestTool(ToolType.AXE).harvestLevel(0)));
 		r.register("zanite_block", new Block(Block.Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(5.0f).harvestTool(ToolType.PICKAXE).harvestLevel(1)));
-		r.register("zanite_ore", new BlockZaniteOre(Block.Properties.from(holystone).hardnessAndResistance(3.0f, 5.0f).harvestLevel(1)));
+		r.register("zanite_ore", new Block(Block.Properties.from(holystone).hardnessAndResistance(3.0f, 5.0f).harvestLevel(1)));
 
-	}
-
-	@SubscribeEvent
-	public static void onRegisterItems(final RegistryEvent.Register<Item> event)
-	{
-		for (final Block block : registeredBlocks)
-		{
-			final BlockItem item;
-
-			if (block instanceof IInternalBlock)
-			{
-				continue;
-			}
-			else if (block instanceof IBlockWithItem)
-			{
-				item = ((IBlockWithItem) block).createItemBlock();
-			}
-			else if (block instanceof IBlockMultiName)
-			{
-				item = new ItemBlockMultiName(block);
-			}
-			else
-			{
-				item = new BlockItem(block);
-			}
-
-			if (block.getRegistryName() == null)
-			{
-				throw new RuntimeException("Registry name of block cannot be null");
-			}
-
-			item.setRegistryName(block.getRegistryName());
-
-			event.getRegistry().register(item);
-		}
 	}
 
 	public static Collection<Block> getRegisteredBlocks()

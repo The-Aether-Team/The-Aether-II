@@ -172,7 +172,7 @@ public class WorldTickListener
 		{
 			final World world = event.world;
 
-			if (!world.isRemote)
+			if (!world.isRemote())
 			{
 				final ISpawnSystem system = event.world.getCapability(CapabilitiesAether.SPAWN_SYSTEM, null);
 

@@ -1,38 +1,35 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import com.gildedgames.aether.common.blocks.IBlockMultiName;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.state.StateContainer;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.state.StateContainer;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.LightType;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Random;
 
-public class BlockIceCrystal extends Block implements IBlockMultiName
+public class BlockIceCrystal extends Block
 {
 	public static final int CRYSTAL_META = 0;
+
 	public static final int CRYSTAL_A_META = 1;
+
 	public static final int CRYSTAL_B_META = 2;
 
 	public static final BlockVariant
@@ -46,36 +43,17 @@ public class BlockIceCrystal extends Block implements IBlockMultiName
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant",
 			STALAGMITE, STALAGMITE_A, STALAGMITE_B, STALACTITE, STALACTITE_A, STALACTITE_B);
 
-	private static final AxisAlignedBB STALACTITE_BB = new AxisAlignedBB(0.25D, 0.25D, 0.25D, 0.75D, 1D, 0.75D);
+	private static final VoxelShape STALACTITE_BB = Block.makeCuboidShape(0.25D, 0.25D, 0.25D, 0.75D, 1D, 0.75D);
 
-	private static final AxisAlignedBB STALACTITE_SHORT_BB = new AxisAlignedBB(0.25D, 0.5D, 0.25F, 0.75D, 1D, 0.75D);
+	private static final VoxelShape STALACTITE_SHORT_BB = Block.makeCuboidShape(0.25D, 0.5D, 0.25F, 0.75D, 1D, 0.75D);
 
-	private static final AxisAlignedBB STALAGMITE_BB = new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 1D, 0.75D);
+	private static final VoxelShape STALAGMITE_BB = Block.makeCuboidShape(0.25D, 0.0D, 0.25D, 0.75D, 1D, 0.75D);
 
-	private static final AxisAlignedBB STALAGMITE_SHORT_BB = new AxisAlignedBB(0.25D, 0.0D, 0.25F, 0.75D, 0.5D, 0.75D);
+	private static final VoxelShape STALAGMITE_SHORT_BB = Block.makeCuboidShape(0.25D, 0.0D, 0.25F, 0.75D, 0.5D, 0.75D);
 
 	public BlockIceCrystal(Block.Properties properties)
 	{
 		super(properties);
-	}
-
-	@Override
-	public int damageDropped(final BlockState state)
-	{
-		return STALAGMITE.getMeta();
-	}
-
-	@Override
-	public BlockState getStateFromMeta(final int meta)
-	{
-		final BlockVariant variant = PROPERTY_VARIANT.fromMeta(meta);
-		return this.getDefaultState().with(PROPERTY_VARIANT, variant);
-	}
-
-	@Override
-	public int getMetaFromState(final BlockState state)
-	{
-		return state.get(PROPERTY_VARIANT).getMeta();
 	}
 
 	@Override
@@ -87,22 +65,10 @@ public class BlockIceCrystal extends Block implements IBlockMultiName
 	@Override
 	public void tick(BlockState state, World world, BlockPos pos, Random rand)
 	{
-		if (world.getLightFor(LightType.BLOCK, pos) > 11 - this.getDefaultState().getLightOpacity(world, pos))
+		if (world.getLightFor(LightType.BLOCK, pos) > 11 - this.getDefaultState().getOpacity(world, pos))
 		{
 			world.removeBlock(pos, false);
 		}
-	}
-
-	@Override
-	public int quantityDropped(Random random)
-	{
-		return 0;
-	}
-
-	@Override
-	public Item getItemDropped(BlockState state, Random rand, int fortune)
-	{
-		return null;
 	}
 
 	@Override
@@ -110,8 +76,9 @@ public class BlockIceCrystal extends Block implements IBlockMultiName
 	{
 		if (entityIn instanceof PlayerEntity)
 		{
-			worldIn.getBlockState(pos).getBlock().removedByPlayer(worldIn.getBlockState(pos), worldIn, pos, (PlayerEntity) entityIn, false);
-			if (entityIn.world.isRemote)
+			worldIn.removeBlock(pos, false);
+
+			if (entityIn.world.isRemote())
 			{
 				entityIn.playSound(SoundEvents.BLOCK_GLASS_BREAK, 1f, 1f);
 
@@ -121,18 +88,18 @@ public class BlockIceCrystal extends Block implements IBlockMultiName
 					final double y = pos.getY() + 1.0D;
 					final double z = pos.getZ() + worldIn.rand.nextDouble();
 
-					worldIn.spawnParticle(ParticleTypes.WATER_SPLASH, x, y, z, 0.0D, 0.0D, 0.0D);
+					worldIn.addParticle(ParticleTypes.SPLASH, x, y, z, 0.0D, 0.0D, 0.0D);
 				}
 			}
 		}
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, BlockState state, PlayerEntity playerIn, Hand hand, Direction facing, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit)
 	{
-		if (playerIn.isCreative())
+		if (player.isCreative())
 		{
-			worldIn.setBlockState(pos, state.cycle(PROPERTY_VARIANT));
+			world.setBlockState(pos, state.cycle(PROPERTY_VARIANT));
 			return true;
 		}
 		return false;
@@ -159,71 +126,24 @@ public class BlockIceCrystal extends Block implements IBlockMultiName
 	}
 
 	@Override
-	public BlockState getStateForPlacement(World worldIn, BlockPos pos, Direction facing, float hitX, float hitY, float hitZ, int meta,
-			LivingEntity placer)
-	{
-		if (hitY == 0)
-		{
-			return this.getDefaultState().with(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta+3));
-		}
-
-		return this.getDefaultState().with(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta));
-	}
-
-	@Override
-	public AxisAlignedBB getBoundingBox(BlockState state, IBlockReader source, BlockPos pos)
+	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
 	{
 		int meta = state.get(PROPERTY_VARIANT).getMeta();
 
 		if (meta == STALAGMITE.getMeta() || meta == STALAGMITE_A.getMeta() || meta == STALAGMITE_B.getMeta())
 		{
-			if (meta == STALAGMITE_B.getMeta()) {
+			if (meta == STALAGMITE_B.getMeta())
+			{
 				return STALAGMITE_SHORT_BB;
 			}
 			return STALAGMITE_BB;
 		}
 
-		if (meta == STALACTITE_B.getMeta()) {
+		if (meta == STALACTITE_B.getMeta())
+		{
 			return STALACTITE_SHORT_BB;
 		}
 		return STALACTITE_BB;
-	}
-
-	@Override
-	public String getTranslationKey(ItemStack stack)
-	{
-		return PROPERTY_VARIANT.fromMeta(CRYSTAL_META).getName();
-	}
-
-	@Override
-	@OnlyIn(Dist.CLIENT)
-	public boolean isTranslucent(BlockState state)
-	{
-		return true;
-	}
-
-	@Override
-	public boolean isFullBlock(BlockState state)
-	{
-		return false;
-	}
-
-	@Override
-	public boolean isFullCube(BlockState state)
-	{
-		return false;
-	}
-
-	@Override
-	public boolean isOpaqueCube(BlockState state)
-	{
-		return false;
-	}
-
-	@Override
-	public VoxelShape getBlockFaceShape(IBlockReader worldIn, BlockState state, BlockPos pos, Direction face)
-	{
-		return VoxelShape.UNDEFINED;
 	}
 
 	@Override
@@ -235,8 +155,8 @@ public class BlockIceCrystal extends Block implements IBlockMultiName
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public Block.EnumOffsetType getOffsetType()
+	public OffsetType getOffsetType()
 	{
-		return EnumOffsetType.XZ;
+		return OffsetType.XZ;
 	}
 }

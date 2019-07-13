@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.items.other;
 
-import com.gildedgames.aether.common.items.IDropOnDeath;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemGroup;
@@ -8,6 +7,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
@@ -16,12 +17,11 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.awt.*;
 import java.util.List;
 
-public class ItemMoaFeather extends Item implements IDropOnDeath
+public class ItemMoaFeather extends Item
 {
-
-	public ItemMoaFeather()
+	public ItemMoaFeather(Properties properties)
 	{
-		this.setHasSubtypes(true);
+		super(properties);
 	}
 
 	public static void setColor(final ItemStack stack, final String colorName, final int color)
@@ -66,9 +66,9 @@ public class ItemMoaFeather extends Item implements IDropOnDeath
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public void getSubItems(final ItemGroup tab, final NonNullList<ItemStack> subItems)
+	public void fillItemGroup(final ItemGroup tab, final NonNullList<ItemStack> subItems)
 	{
-		if (!this.isInCreativeTab(tab))
+		if (!this.isInGroup(tab))
 		{
 			return;
 		}
@@ -81,18 +81,18 @@ public class ItemMoaFeather extends Item implements IDropOnDeath
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public void addInformation(final ItemStack stack, final World world, final List<String> tooltip, final ITooltipFlag flag)
+	public void addInformation(final ItemStack stack, final World world, final List<ITextComponent> tooltip, final ITooltipFlag flag)
 	{
 		final String colorName = ItemMoaFeather.getColorName(stack);
 
 		if (!colorName.isEmpty())
 		{
-			tooltip.add(TextFormatting.GRAY + "" + TextFormatting.ITALIC + "Color: " + I18n.format(colorName));
+			tooltip.add(new StringTextComponent(TextFormatting.GRAY + "" + TextFormatting.ITALIC + "Color: " + I18n.format(colorName)));
 		}
 	}
 
 	@Override
-	public boolean getShareTag()
+	public boolean shouldSyncTag()
 	{
 		return true;
 	}

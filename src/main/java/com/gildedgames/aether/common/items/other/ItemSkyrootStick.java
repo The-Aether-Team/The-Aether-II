@@ -1,12 +1,17 @@
 package com.gildedgames.aether.common.items.other;
 
-import com.gildedgames.aether.common.items.ItemDropOnDeath;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class ItemSkyrootStick extends ItemDropOnDeath
+public class ItemSkyrootStick extends Item
 {
+	public ItemSkyrootStick(Properties properties)
+	{
+		super(properties);
+	}
+
 	@Override
-	public int getItemBurnTime(ItemStack itemStack)
+	public int getBurnTime(ItemStack itemStack)
 	{
 		return 100;
 	}

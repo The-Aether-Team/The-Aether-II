@@ -17,8 +17,6 @@ public class BlockRockGlassTranslucent extends BreakableBlock
 	public BlockRockGlassTranslucent(Block.Properties properties)
 	{
 		super(properties);
-
-		this.setLightOpacity(3);
 	}
 
 	@Override
@@ -26,21 +24,5 @@ public class BlockRockGlassTranslucent extends BreakableBlock
 	public BlockRenderLayer getRenderLayer()
 	{
 		return BlockRenderLayer.TRANSLUCENT;
-	}
-
-	@Override
-	public boolean isFullCube(BlockState state)
-	{
-		return true;
-	}
-
-	@Override
-	@OnlyIn(Dist.CLIENT)
-	public boolean shouldSideBeRendered(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side)
-	{
-		BlockPos offset = pos.offset(side);
-		BlockState iblockstate = blockAccess.getBlockState(offset);
-
-		return iblockstate.getBlock() != this && (iblockstate.getBlock().isAir(iblockstate, blockAccess, offset) || !iblockstate.isFullCube());
 	}
 }

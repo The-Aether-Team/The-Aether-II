@@ -1,55 +1,41 @@
 package com.gildedgames.aether.common.items.weapons;
 
-import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.projectiles.EntityDart;
-import net.minecraft.entity.projectile.ArrowEntity;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.UseAction;
+import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
+import net.minecraft.item.UseAction;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class ItemDartShooter extends Item
 {
-	public ItemDartShooter()
-	{
-		this.setHasSubtypes(true);
+	private final ItemDartType type;
 
-		this.setMaxStackSize(1);
+	public ItemDartShooter(ItemDartType type, Item.Properties properties)
+	{
+		super(properties);
+
+		this.type = type;
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
-	public void getSubItems(final ItemGroup tab, final NonNullList<ItemStack> subItems)
-	{
-		if (!this.isInCreativeTab(tab))
-		{
-			return;
-		}
-
-		for (final ItemDartType type : ItemDartType.values())
-		{
-			subItems.add(new ItemStack(this, 1, type.ordinal()));
-		}
-	}
-
-	@Override
-	public int getMaxItemUseDuration(final ItemStack stack)
+	public int getUseDuration(final ItemStack stack)
 	{
 		return 72000;
 	}
 
 	@Override
-	public UseAction getItemUseAction(final ItemStack stack)
+	public UseAction getUseAction(final ItemStack stack)
 	{
 		return UseAction.BOW;
 	}
@@ -59,9 +45,7 @@ public class ItemDartShooter extends Item
 	{
 		final ItemStack stack = player.getHeldItem(hand);
 
-		final ItemDartType dartType = ItemDartType.fromOrdinal(stack.getMetadata());
-
-		final int ammoSlot = this.getMatchingAmmoSlot(player.inventory, dartType.getAmmoItem());
+		final int ammoSlot = this.getMatchingAmmoSlot(player.inventory, this.type.getAmmoItem());
 
 		if (ammoSlot > 0 || player.isCreative())
 		{
@@ -81,9 +65,7 @@ public class ItemDartShooter extends Item
 
 		final PlayerEntity player = (PlayerEntity) entity;
 
-		final ItemDartType dartType = ItemDartType.fromOrdinal(stack.getMetadata());
-
-		final int inventorySlot = this.getMatchingAmmoSlot(player.inventory, dartType.getAmmoItem());
+		final int inventorySlot = this.getMatchingAmmoSlot(player.inventory, this.type.getAmmoItem());
 
 		if (inventorySlot < 0 && !player.isCreative())
 		{
@@ -91,9 +73,9 @@ public class ItemDartShooter extends Item
 		}
 
 		final boolean isInfiniteArrow = player.isCreative()
-				|| EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByLocation("infinity"), stack) > 0;
+				|| EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0;
 
-		final int duration = this.getMaxItemUseDuration(stack) - timeLeft - 5;
+		final int duration = this.getUseDuration(stack) - timeLeft - 5;
 
 		if (duration > 3)
 		{
@@ -107,7 +89,7 @@ public class ItemDartShooter extends Item
 
 			final EntityDart dart = new EntityDart(world, player);
 			dart.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, speed * 3.0F, 1.0F);
-			dart.setDartType(dartType);
+			dart.setDartType(this.type);
 
 			if (speed >= 0.8f)
 			{
@@ -119,11 +101,11 @@ public class ItemDartShooter extends Item
 				dart.pickupStatus = ArrowEntity.PickupStatus.CREATIVE_ONLY;
 			}
 
-			player.playSound(new SoundEvent(AetherCore.getResource("random.dart_shooter.fire")), 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + speed * 0.5F);
+			player.playSound(new SoundEvent(AetherCore.getResource("random.dart_shooter.fire")), 1.0F, 1.0F / (world.getRandom().nextFloat() * 0.4F + 1.2F) + speed * 0.5F);
 
-			if (!world.isRemote)
+			if (!world.isRemote())
 			{
-				world.spawnEntity(dart);
+				world.addEntity(dart);
 			}
 
 			if (inventorySlot >= 0 && !player.isCreative())
@@ -147,21 +129,12 @@ public class ItemDartShooter extends Item
 		{
 			final ItemStack stack = inventory.mainInventory.get(i);
 
-			if (stack.getItem() == ItemsAether.dart)
+			if (stack.getItem() == this)
 			{
-				if (stack.getMetadata() == searchMeta)
-				{
-					return i;
-				}
+				return i;
 			}
 		}
 
 		return -1;
-	}
-
-	@Override
-	public String getTranslationKey(final ItemStack stack)
-	{
-		return super.getTranslationKey(stack) + "." + ItemDartType.fromOrdinal(stack.getMetadata()).getID();
 	}
 }

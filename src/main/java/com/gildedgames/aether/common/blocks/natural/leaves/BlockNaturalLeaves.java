@@ -23,7 +23,7 @@ public abstract class BlockNaturalLeaves extends BlockAetherLeaves
 	{
 		super.harvestBlock(worldIn, player, pos, state, te, stack);
 
-		if (!worldIn.isRemote && state.get(DECAYABLE) && worldIn.rand.nextInt(15) == 0)
+		if (!worldIn.isRemote() && state.get(DECAYABLE) && worldIn.rand.nextInt(15) == 0)
 		{
 			EntitySkyrootLizard.Type type = EntitySkyrootLizard.Type.getFromWoodType(this.getWoodBlock());
 

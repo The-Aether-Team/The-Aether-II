@@ -3,59 +3,42 @@ package com.gildedgames.aether.common.items.consumables;
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherDirt;
 import com.gildedgames.aether.common.entities.monsters.EntitySwet;
-import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemUseContext;
 import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.HashMap;
 
-public class ItemSwetJelly extends ItemAetherFood
+public class ItemSwetJelly extends Item
 {
 	private static final HashMap<BlockState, BlockState> growables = new HashMap<>();
 
 	static
 	{
-		ItemSwetJelly.growables.put(Blocks.DIRT.getDefaultState().with(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT), Blocks.GRASS.getDefaultState());
+		ItemSwetJelly.growables.put(Blocks.DIRT.getDefaultState(), Blocks.GRASS.getDefaultState());
 		ItemSwetJelly.growables.put(BlocksAether.aether_dirt.getDefaultState().with(BlockAetherDirt.PROPERTY_VARIANT, BlockAetherDirt.DIRT),
 				BlocksAether.aether_grass.getDefaultState());
 	}
 
-	public ItemSwetJelly()
-	{
-		super(5, false);
+	private final EntitySwet.Type type;
 
-		this.setHasSubtypes(true);
+	public ItemSwetJelly(EntitySwet.Type type, Properties properties)
+	{
+		super(properties);
+
+		this.type = type;
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
-	public void getSubItems(final ItemGroup tab, final NonNullList<ItemStack> subItems)
+	public ActionResultType onItemUse(final ItemUseContext context)
 	{
-		if (!this.isInCreativeTab(tab))
-		{
-			return;
-		}
+		World world = context.getWorld();
+		BlockPos pos = context.getPos();
 
-		for (final EntitySwet.Type types : EntitySwet.Type.values())
-		{
-			subItems.add(new ItemStack(this, 1, types.ordinal()));
-		}
-	}
-
-	@Override
-	public ActionResultType onItemUse(final PlayerEntity player, final World world, final BlockPos pos, final Hand hand, final Direction facing,
-			final float hitX, final float hitY, final float hitZ)
-	{
 		final BlockState state = world.getBlockState(pos);
 
 		if (ItemSwetJelly.growables.containsKey(state))
@@ -70,7 +53,7 @@ public class ItemSwetJelly extends ItemAetherFood
 				{
 					final BlockPos nPos = new BlockPos(x, pos.getY(), z);
 
-					if (world.getBlockState(nPos) == state && !world.getBlockState(nPos.up()).isNormalCube())
+					if (world.getBlockState(nPos) == state && !world.getBlockState(nPos.up()).isNormalCube(world, nPos.up()))
 					{
 						world.setBlockState(nPos, nState);
 					}
@@ -81,11 +64,5 @@ public class ItemSwetJelly extends ItemAetherFood
 		}
 
 		return ActionResultType.FAIL;
-	}
-
-	@Override
-	public String getTranslationKey(final ItemStack stack)
-	{
-		return "item.aether.swet_jelly." + EntitySwet.Type.fromOrdinal(stack.getMetadata()).name;
 	}
 }

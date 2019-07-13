@@ -1,15 +1,17 @@
 package com.gildedgames.aether.common.items.irradiated;
 
 import com.gildedgames.aether.api.items.loot.Loot;
-import com.gildedgames.aether.common.items.IDropOnDeath;
+import net.minecraft.item.Item;
 
-public class ItemIrradiated extends ItemIrradiatedVisuals implements IDropOnDeath
+public class ItemIrradiated extends ItemIrradiatedVisuals
 {
 
 	private final Loot itemSelector;
 
-	public ItemIrradiated(Loot itemSelector)
+	public ItemIrradiated(Loot itemSelector, Item.Properties properties)
 	{
+		super(properties);
+
 		this.itemSelector = itemSelector;
 	}
 

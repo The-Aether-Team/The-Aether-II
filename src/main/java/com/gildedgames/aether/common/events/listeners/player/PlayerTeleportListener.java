@@ -66,7 +66,7 @@ public class PlayerTeleportListener
 	@SubscribeEvent
 	public static void onEvent(LivingEvent.LivingUpdateEvent event)
 	{
-		if (!event.getEntity().getEntityWorld().isRemote && event.getEntity() instanceof PlayerEntity)
+		if (!event.getEntity().getEntityWorld().isRemote() && event.getEntity() instanceof PlayerEntity)
 		{
 			PlayerEntity player = (PlayerEntity) event.getEntity();
 			PlayerAether playerAether = PlayerAether.getPlayer(player);

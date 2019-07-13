@@ -17,8 +17,6 @@ public class BlockRockGlassPane extends PaneBlock
 		super(properties);
 
 		this.block = block;
-
-		this.setLightOpacity(0);
 	}
 
 	@Override

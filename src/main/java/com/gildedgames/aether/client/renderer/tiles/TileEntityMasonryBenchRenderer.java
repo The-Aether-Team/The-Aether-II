@@ -4,11 +4,11 @@ import com.gildedgames.aether.client.models.entities.tile.ModelMasonryBench;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.tiles.TileEntityMasonryBench;
 import com.mojang.blaze3d.platform.GlStateManager;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class TileEntityMasonryBenchRenderer extends TileEntitySpecialRenderer<TileEntityMasonryBench>
+public class TileEntityMasonryBenchRenderer extends TileEntityRenderer<TileEntityMasonryBench>
 {
 
 	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/tile_entities/masonry_bench.png");
@@ -16,9 +16,7 @@ public class TileEntityMasonryBenchRenderer extends TileEntitySpecialRenderer<Ti
 	private final ModelMasonryBench model = new ModelMasonryBench();
 
 	@Override
-	public void render(
-			final TileEntityMasonryBench te, final double x, final double y, final double z, final float partialTicks, final int destroyStage,
-			final float alpha)
+	public void render(final TileEntityMasonryBench te, final double x, final double y, final double z, final float partialTicks, final int destroyStage)
 	{
 		GlStateManager.pushMatrix();
 		GlStateManager.enableRescaleNormal();

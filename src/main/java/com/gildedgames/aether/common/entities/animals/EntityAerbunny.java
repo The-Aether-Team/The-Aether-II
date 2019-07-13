@@ -100,7 +100,7 @@ public class EntityAerbunny extends EntityAetherAnimal
 
 		super.livingTick();
 
-		if (this.world.isRemote)
+		if (this.world.isRemote())
 		{
 			if (this.puffiness > 0)
 			{
@@ -127,7 +127,7 @@ public class EntityAerbunny extends EntityAetherAnimal
 		{
 			final Entity entity = this.getRidingEntity();
 
-			if (!this.world.isRemote && entity.isSneaking() && entity.onGround)
+			if (!this.world.isRemote() && entity.isSneaking() && entity.onGround)
 			{
 				NetworkingAether.sendPacketToWatching(new PacketAerbunnySetRiding(null, this), this, false);
 
@@ -162,7 +162,7 @@ public class EntityAerbunny extends EntityAetherAnimal
 		{
 			if (!this.isRiding() && player.getPassengers().size() <= 0)
 			{
-				if (!this.world.isRemote)
+				if (!this.world.isRemote())
 				{
 					this.startRiding(player, true);
 

@@ -5,12 +5,12 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.potion.Effects;
-import net.minecraft.item.UseAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.stats.StatList;
+import net.minecraft.item.UseAction;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
+import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
@@ -18,9 +18,9 @@ import net.minecraft.world.World;
 
 public class ItemEggnog extends Item
 {
-	public ItemEggnog()
+	public ItemEggnog(Item.Properties properties)
 	{
-		this.setMaxStackSize(1);
+		super(properties);
 	}
 
 	@Override
@@ -40,26 +40,26 @@ public class ItemEggnog extends Item
 
 		if (!worldIn.isRemote)
 		{
-			entityLiving.addPotionEffect(new PotionEffect(Effects.REGENERATION, 200, 0));
+			entityLiving.addPotionEffect(new EffectInstance(Effects.REGENERATION, 200, 0));
 			PlayerAether.getPlayer(entityplayer).setDrankEggnog();
 		}
 
 		if (entityplayer != null)
 		{
-			entityplayer.addStat(StatList.getObjectUseStats(this));
+			entityplayer.addStat(Stats.ITEM_USED.get(this));
 		}
 
 		return stack;
 	}
 
 	@Override
-	public int getMaxItemUseDuration(ItemStack stack)
+	public int getUseDuration(ItemStack stack)
 	{
 		return 32;
 	}
 
 	@Override
-	public UseAction getItemUseAction(ItemStack stack)
+	public UseAction getUseAction(ItemStack stack)
 	{
 		return UseAction.DRINK;
 	}
@@ -68,6 +68,7 @@ public class ItemEggnog extends Item
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn)
 	{
 		playerIn.setActiveHand(handIn);
-		return new ActionResult<ItemStack>(ActionResultType.SUCCESS, playerIn.getHeldItem(handIn));
+
+		return new ActionResult<>(ActionResultType.SUCCESS, playerIn.getHeldItem(handIn));
 	}
 }

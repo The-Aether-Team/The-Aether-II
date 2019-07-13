@@ -5,6 +5,7 @@ import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -16,16 +17,16 @@ public abstract class BlockMultiController extends BlockMultiBase
 		super(properties);
 	}
 
-	public abstract Iterable<BlockPos.MutableBlockPos> getMultiblockVolumeIterator(BlockPos pos, World world);
+	public abstract Iterable<BlockPos> getMultiblockVolumeIterator(BlockPos pos, IWorldReader world);
 
 	@Override
-	public boolean canPlaceBlockAt(World world, BlockPos placePos)
+	public boolean isValidPosition(BlockState state, IWorldReader world, BlockPos pos)
 	{
-		for (BlockPos pos : this.getMultiblockVolumeIterator(placePos, world))
+		for (BlockPos otherPos : this.getMultiblockVolumeIterator(pos, world))
 		{
-			BlockState state = world.getBlockState(pos);
+			BlockState otherState = world.getBlockState(otherPos);
 
-			if (!state.getBlock().isReplaceable(world, pos))
+			if (!otherState.getMaterial().isReplaceable())
 			{
 				return false;
 			}
@@ -35,7 +36,7 @@ public abstract class BlockMultiController extends BlockMultiBase
 	}
 
 	@Override
-	public void onBlockAdded(World world, BlockPos pos, BlockState state)
+	public void onBlockAdded(BlockState state1, World world, BlockPos pos, BlockState state2, boolean isMoving)
 	{
 		TileEntity te = world.getTileEntity(pos);
 

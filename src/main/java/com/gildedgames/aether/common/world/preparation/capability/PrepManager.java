@@ -33,7 +33,7 @@ public class PrepManager implements IPrepManager
 		this.world = world;
 		this.registry = registry;
 
-		if (world.isRemote)
+		if (world.isRemote())
 		{
 			this.access = new PrepSectorAccessClient(this.world, this.registry);
 		}

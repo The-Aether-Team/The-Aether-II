@@ -2,24 +2,38 @@ package com.gildedgames.aether.common.items.consumables;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
-import com.gildedgames.aether.common.items.IDropOnDeath;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUseContext;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class ItemAmbrosiumChunk extends Item implements IDropOnDeath
+public class ItemAmbrosiumChunk extends Item
 {
-	@Override
-	public ActionResultType onItemUse(PlayerEntity player, World world, BlockPos pos, Hand hand, Direction side,
-			float hitX, float hitY, float hitZ)
+	public ItemAmbrosiumChunk(Properties properties)
 	{
-		ItemStack stack = player.getHeldItem(hand);
+		super(properties);
+	}
+
+	@Override
+	public ActionResultType onItemUse(ItemUseContext context)
+	{
+		PlayerEntity player = context.getPlayer();
+
+		if (player == null)
+		{
+			return ActionResultType.FAIL;
+		}
+
+		BlockPos pos = context.getPos();
+		ItemStack stack = context.getItem();
+		Direction side = context.getFace();
+
+		World world = context.getWorld();
 
 		BlockState state = world.getBlockState(pos);
 
@@ -43,7 +57,7 @@ public class ItemAmbrosiumChunk extends Item implements IDropOnDeath
 	}
 
 	@Override
-	public int getItemBurnTime(ItemStack itemStack)
+	public int getBurnTime(ItemStack itemStack)
 	{
 		return 20000;
 	}

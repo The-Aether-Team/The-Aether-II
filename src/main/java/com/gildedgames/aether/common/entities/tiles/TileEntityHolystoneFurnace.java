@@ -255,7 +255,7 @@ public class TileEntityHolystoneFurnace extends LockableTileEntity implements IT
 			--this.furnaceBurnTime;
 		}
 
-		if (!this.world.isRemote)
+		if (!this.world.isRemote())
 		{
 			ItemStack fuelStack = this.furnaceItemStacks.get(1);
 
@@ -305,7 +305,7 @@ public class TileEntityHolystoneFurnace extends LockableTileEntity implements IT
 				this.cookTime = MathHelper.clamp(this.cookTime - 2, 0, this.totalCookTime);
 			}
 
-			if (prevBurning != this.isBurning() && !this.world.isRemote)
+			if (prevBurning != this.isBurning() && !this.world.isRemote())
 			{
 				isBurning = true;
 

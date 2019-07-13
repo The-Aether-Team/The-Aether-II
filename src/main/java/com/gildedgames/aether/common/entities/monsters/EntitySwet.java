@@ -21,13 +21,13 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -118,7 +118,7 @@ public class EntitySwet extends EntityExtendedMob
 
 	public void setFoodSaturation(final int foodSaturation)
 	{
-		if (!this.world.isRemote)
+		if (!this.world.isRemote())
 		{
 			this.dataManager.set(EntitySwet.FOOD_SATURATION, foodSaturation);
 		}
@@ -126,7 +126,7 @@ public class EntitySwet extends EntityExtendedMob
 
 	public boolean processSucking(final PlayerEntity player)
 	{
-		PotionEffect slowness = new PotionEffect(Potion.getPotionById(2), 3, this.timeSinceSucking / 80, true, false);
+		EffectInstance slowness = new EffectInstance(Potion.getPotionById(2), 3, this.timeSinceSucking / 80, true, false);
 
 		player.addPotionEffect(slowness);
 
@@ -134,17 +134,17 @@ public class EntitySwet extends EntityExtendedMob
 
 		if (this.timeSinceSucking % 40 == 0)
 		{
-			if (!this.world.isRemote)
+			if (!this.world.isRemote())
 			{
 				player.getFoodStats().setFoodLevel((int) (player.getFoodStats().getFoodLevel() * 0.95F));
 
-				Collection<PotionEffect> effects = player.getActivePotionEffects();
+				Collection<EffectInstance> effects = player.getActivePotionEffects();
 
 				if (!effects.isEmpty())
 				{
-					ArrayList<PotionEffect> negEffects = new ArrayList<>();
+					ArrayList<EffectInstance> negEffects = new ArrayList<>();
 
-					for (PotionEffect p : effects)
+					for (EffectInstance p : effects)
 					{
 						if (p.getPotion().isBadEffect())
 						{
@@ -155,7 +155,7 @@ public class EntitySwet extends EntityExtendedMob
 					/*
 						Due to how potions work; give the swet the same potion, and add a new one to the player with 3/4th of time and amplifier to make it be removed with time
 					 */
-					for (PotionEffect p : negEffects)
+					for (EffectInstance p : negEffects)
 					{
 						if (!p.getPotion().equals(Potion.getPotionById(2)))
 						{
@@ -164,11 +164,11 @@ public class EntitySwet extends EntityExtendedMob
 
 							if (p.getAmplifier() - 1 >= 0)
 							{
-								player.addPotionEffect(new PotionEffect(p.getPotion(), (int) (p.getDuration() * .75), p.getAmplifier() - 1));
+								player.addPotionEffect(new EffectInstance(p.getPotion(), (int) (p.getDuration() * .75), p.getAmplifier() - 1));
 							}
 							else if (p.getDuration() > 60)
 							{
-								player.addPotionEffect(new PotionEffect(p.getPotion(), (int) (p.getDuration() * .75), p.getAmplifier()));
+								player.addPotionEffect(new EffectInstance(p.getPotion(), (int) (p.getDuration() * .75), p.getAmplifier()));
 							}
 						}
 					}
@@ -182,7 +182,7 @@ public class EntitySwet extends EntityExtendedMob
 
 		if (this.timeSinceSucking >= 300 || player.getFoodStats().getFoodLevel() <= 0)
 		{
-			if (!this.world.isRemote)
+			if (!this.world.isRemote())
 			{
 				if (this.timeSinceSucking >= 220)
 				{
@@ -328,7 +328,7 @@ public class EntitySwet extends EntityExtendedMob
 				this.actualSaturation = this.getFoodSaturation();
 			}
 
-			if (this.world.isRemote && this.getActualSaturation() != 0)
+			if (this.world.isRemote() && this.getActualSaturation() != 0)
 			{
 				float[] redColors = new float[] { 0.486f, 0.45f, 0.411f };
 				float[] greenColors = new float[] { 0.439f, 0.686f, 0.654f };
@@ -370,7 +370,7 @@ public class EntitySwet extends EntityExtendedMob
 
 		if (this.getFoodSaturation() == 4)
 		{
-			this.addPotionEffect(new PotionEffect(Potion.getPotionById(2), 10, 2, true, false));
+			this.addPotionEffect(new EffectInstance(Potion.getPotionById(2), 10, 2, true, false));
 
 			this.digestTime++;
 

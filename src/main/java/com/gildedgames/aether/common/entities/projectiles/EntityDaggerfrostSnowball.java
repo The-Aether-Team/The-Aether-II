@@ -38,7 +38,7 @@ public class EntityDaggerfrostSnowball extends SnowballEntity
 			entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float) damage);
 		}
 
-		if (!this.world.isRemote)
+		if (!this.world.isRemote())
 		{
 			this.world.setEntityState(this, (byte) 3);
 

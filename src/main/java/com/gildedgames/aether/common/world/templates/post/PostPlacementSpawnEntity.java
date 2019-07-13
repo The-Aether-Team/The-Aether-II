@@ -25,7 +25,7 @@ public class PostPlacementSpawnEntity implements PostPlacementTemplate
 	@Override
 	public void postGenerate(final World world, final Random rand, final TemplateLoc loc)
 	{
-		if (world.isRemote)
+		if (world.isRemote())
 		{
 			return;
 		}

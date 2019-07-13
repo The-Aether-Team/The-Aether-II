@@ -1,28 +1,25 @@
 package com.gildedgames.aether.common.items.consumables;
 
 import com.gildedgames.aether.api.registrar.ItemsAether;
-import com.gildedgames.aether.common.init.CreativeTabsAether;
-import com.gildedgames.aether.common.items.IDropOnDeath;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.potion.Effects;
-import net.minecraft.item.*;
 import net.minecraft.item.UseAction;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.stats.StatList;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
+import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
-public class ItemSkyrootConsumableBucket extends Item implements IDropOnDeath
+public class ItemSkyrootConsumableBucket extends Item
 {
-	public ItemSkyrootConsumableBucket()
+	public ItemSkyrootConsumableBucket(Item.Properties properties)
 	{
-		this.setMaxStackSize(1);
-
-		this.setCreativeTab(CreativeTabsAether.TAB_MISCELLANEOUS);
+		super(properties);
 	}
 
 	@Override
@@ -46,10 +43,10 @@ public class ItemSkyrootConsumableBucket extends Item implements IDropOnDeath
 				stack.shrink(1);
 			}
 
-			player.addStat(StatList.getObjectUseStats(this));
+			player.addStat(Stats.ITEM_USED.get(this));
 		}
 
-		if (!world.isRemote)
+		if (!world.isRemote())
 		{
 			this.applyEffect(stack, world, living);
 		}
@@ -65,18 +62,18 @@ public class ItemSkyrootConsumableBucket extends Item implements IDropOnDeath
 		}
 		else if (stack.getItem() == ItemsAether.skyroot_poison_bucket)
 		{
-			player.addPotionEffect(new PotionEffect(Effects.POISON, 100, 3));
+			player.addPotionEffect(new EffectInstance(Effects.POISON, 100, 3));
 		}
 	}
 
 	@Override
-	public UseAction getItemUseAction(ItemStack stack)
+	public UseAction getUseAction(ItemStack stack)
 	{
 		return UseAction.DRINK;
 	}
 
 	@Override
-	public int getMaxItemUseDuration(ItemStack stack)
+	public int getUseDuration(ItemStack stack)
 	{
 		return 32;
 	}

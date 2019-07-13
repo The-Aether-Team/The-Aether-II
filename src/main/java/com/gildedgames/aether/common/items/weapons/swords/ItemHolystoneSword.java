@@ -5,23 +5,26 @@ import com.gildedgames.aether.common.items.ItemAbilityType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
 
 public class ItemHolystoneSword extends ItemAetherSword
 {
-	public ItemHolystoneSword()
+
+	public ItemHolystoneSword(IItemTier tier, ItemAbilityType abilityType, int attackDamageIn, float attackSpeedIn,
+			Properties builder)
 	{
-		super(ToolMaterial.STONE, ItemAbilityType.PASSIVE);
+		super(tier, abilityType, attackDamageIn, attackSpeedIn, builder);
 	}
 
 	public static void trySpawnAmbrosium(final ItemStack stack, final Entity target, final LivingEntity attacker)
 	{
-		if (!target.world.isRemote && target.world.rand.nextInt(100) <= 3)
+		if (!target.world.isRemote() && target.world.rand.nextInt(100) <= 3)
 		{
 			final ItemEntity entityItem = new ItemEntity(target.world, target.posX, target.posY, target.posZ);
 			entityItem.setItem(new ItemStack(ItemsAether.ambrosium_shard, 1));
 
-			target.world.spawnEntity(entityItem);
+			target.world.addEntity(entityItem);
 		}
 	}
 

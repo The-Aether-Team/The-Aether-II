@@ -35,7 +35,7 @@ public class PlayerEquipItemListener
 		if (result)
 		{
 			// Unfortunately we have to play the equip animation manually...
-			if (event.getEntityPlayer().world.isRemote)
+			if (event.getEntityPlayer().world.isRemote())
 			{
 				Minecraft.getInstance().getItemRenderer().resetEquippedProgress(Hand.MAIN_HAND);
 			}

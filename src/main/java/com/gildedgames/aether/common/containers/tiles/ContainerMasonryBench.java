@@ -58,7 +58,7 @@ public class ContainerMasonryBench extends Container
 	{
 		this.inputCount = MathHelper.clamp(inputCount, 1, this.craftResult.getSizeInventory());
 
-		if (this.world.isRemote)
+		if (this.world.isRemote())
 		{
 			NetworkingAether.sendPacketToServer(new PacketMasonryInputCountChanged(this.inputCount));
 		}

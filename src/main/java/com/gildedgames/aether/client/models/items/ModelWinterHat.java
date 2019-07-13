@@ -1,14 +1,17 @@
 package com.gildedgames.aether.client.models.items;
 
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 
 /**
  * winter_hat - Undefined
  * Created using Tabula 7.0.0
  */
-public class ModelWinterHat extends ModelBiped {
+public class ModelWinterHat<T extends LivingEntity> extends BipedModel<T>
+{
     public RendererModel base;
     public RendererModel main;
     public RendererModel end;

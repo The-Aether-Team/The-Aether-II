@@ -60,7 +60,7 @@ public class TileEntityIncubator extends LockableTileEntity implements ITickable
 	@Override
 	public void update()
 	{
-		if (this.world.isRemote)
+		if (this.world.isRemote())
 		{
 			return;
 		}

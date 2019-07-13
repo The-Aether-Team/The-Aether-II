@@ -28,7 +28,7 @@ public class PlayerBlockLevitateModule extends PlayerAetherModule
 	@Override
 	public void tickStart(TickEvent.PlayerTickEvent event)
 	{
-		if (this.getEntity().world.isRemote || this.getEntity().isDead)
+		if (this.getEntity().world.isRemote() || this.getEntity().isDead)
 		{
 			return;
 		}

@@ -51,7 +51,17 @@ public class ItemsAether extends AbstractRegistrar
 
 	public static final Item blueberry_lollipop = getDefault();
 
-	public static final Item bolt = getDefault();
+	public static final Item skyroot_bolt = getDefault();
+
+	public static final Item holystone_bolt = getDefault();
+
+	public static final Item scatterglass_bolt = getDefault();
+
+	public static final Item zanite_bolt = getDefault();
+
+	public static final Item arkenium_bolt = getDefault();
+
+	public static final Item gravitite_bolt = getDefault();
 
 	public static final Item brettl_cane = getDefault();
 
@@ -77,7 +87,11 @@ public class ItemsAether extends AbstractRegistrar
 
 	public static final Item dart = getDefault();
 
-	public static final Item dart_shooter = getDefault();
+	public static final Item golden_dart_shooter = getDefault();
+
+	public static final Item enchanted_dart_shooter = getDefault();
+
+	public static final Item poison_dart_shooter = getDefault();
 
 	public static final Item eggnog = getDefault();
 
@@ -217,9 +231,17 @@ public class ItemsAether extends AbstractRegistrar
 
 	public static final Item stomper_pop = getDefault();
 
-	public static final Item swet_gel = getDefault();
+	public static final Item blue_swet_gel = getDefault();
 
-	public static final Item swet_jelly = getDefault();
+	public static final Item green_swet_gel = getDefault();
+
+	public static final Item purple_swet_gel = getDefault();
+
+	public static final Item blue_swet_jelly = getDefault();
+
+	public static final Item green_swet_jelly = getDefault();
+
+	public static final Item purple_swet_jelly = getDefault();
 
 	public static final Item swet_sugar = getDefault();
 

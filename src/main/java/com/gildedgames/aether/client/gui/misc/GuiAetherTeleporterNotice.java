@@ -101,17 +101,17 @@ public class GuiAetherTeleporterNotice extends GuiViewer
 		int x = (int) this.center.x() + 140;
 		int y = (int) this.center.y() - 8;
 
-		Minecraft.getInstance().getRenderItem().renderItemIntoGUI(this.teleporter, x + 57, y);
+		Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(this.teleporter, x + 57, y);
 
-		Minecraft.getInstance().getRenderItem().renderItemIntoGUI(this.stone, x + 18, y - 18);
-		Minecraft.getInstance().getRenderItem().renderItemIntoGUI(this.stone, x - 18, y + 18);
-		Minecraft.getInstance().getRenderItem().renderItemIntoGUI(this.stone, x + 18, y + 18);
-		Minecraft.getInstance().getRenderItem().renderItemIntoGUI(this.stone, x - 18, y - 18);
+		Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(this.stone, x + 18, y - 18);
+		Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(this.stone, x - 18, y + 18);
+		Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(this.stone, x + 18, y + 18);
+		Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(this.stone, x - 18, y - 18);
 
-		Minecraft.getInstance().getRenderItem().renderItemIntoGUI(this.iron_ingot, x - 18, y);
-		Minecraft.getInstance().getRenderItem().renderItemIntoGUI(this.iron_ingot, x + 18, y);
-		Minecraft.getInstance().getRenderItem().renderItemIntoGUI(this.iron_ingot, x, y - 18);
-		Minecraft.getInstance().getRenderItem().renderItemIntoGUI(this.iron_ingot, x, y + 18);
+		Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(this.iron_ingot, x - 18, y);
+		Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(this.iron_ingot, x + 18, y);
+		Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(this.iron_ingot, x, y - 18);
+		Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(this.iron_ingot, x, y + 18);
 
 		RenderHelper.disableStandardItemLighting();
 		GlStateManager.disableRescaleNormal();

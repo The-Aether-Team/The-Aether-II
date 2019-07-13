@@ -17,6 +17,6 @@ public class CheckLightLevel implements IConditionPosition
 	@Override
 	public boolean isMet(World world, BlockPos spawnAt, BlockPos underneath)
 	{
-		return world.getLightFromNeighbors(spawnAt) <= this.lightLevel;
+		return world.getBrightness(spawnAt) <= this.lightLevel;
 	}
 }

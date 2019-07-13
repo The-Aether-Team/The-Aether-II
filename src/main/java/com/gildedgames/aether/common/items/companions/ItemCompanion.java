@@ -5,6 +5,9 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
@@ -20,15 +23,14 @@ public class ItemCompanion extends Item
 
 	private InformationProvider informationProvider;
 
-	public ItemCompanion()
+	public ItemCompanion(Item.Properties properties)
 	{
-		this.setMaxStackSize(1);
-		//this.setCreativeTab(CreativeTabsAether.COMPANIONS);
+		this(properties, null);
 	}
 
-	public ItemCompanion(final InformationProvider informationProvider)
+	public ItemCompanion(Properties properties, final InformationProvider informationProvider)
 	{
-		this();
+		super(properties);
 
 		this.informationProvider = informationProvider;
 	}
@@ -42,7 +44,7 @@ public class ItemCompanion extends Item
 			stack.setTag(compound = new CompoundNBT());
 		}
 
-		compound.putLong("respawnTimer", world.getTotalWorldTime() + timer);
+		compound.putLong("respawnTimer", world.getGameTime() + timer);
 	}
 
 	public static long getTicksUntilRespawn(final ItemStack stack, final World world)
@@ -54,18 +56,18 @@ public class ItemCompanion extends Item
 			return 0;
 		}
 
-		return compound.getLong("respawnTimer") - world.getTotalWorldTime();
+		return compound.getLong("respawnTimer") - world.getGameTime();
 	}
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public void addInformation(final ItemStack stack, @Nullable final World worldIn, final List<String> tooltip, final ITooltipFlag flagIn)
+	public void addInformation(final ItemStack stack, @Nullable final World worldIn, final List<ITextComponent> tooltip, final ITooltipFlag flagIn)
 	{
 		final long respawn = ItemCompanion.getTicksUntilRespawn(stack, worldIn);
 
 		if (respawn > 0)
 		{
-			tooltip.add(TextFormatting.RED + "" + TextFormatting.ITALIC + "Disabled! Respawns in " + this.parseTicks(respawn) + ".");
+			tooltip.add(new StringTextComponent("Disabled! Respawns in " + this.parseTicks(respawn) + ".").setStyle(new Style().setColor(TextFormatting.RED).setItalic(true)));
 		}
 
 		if (this.informationProvider != null)

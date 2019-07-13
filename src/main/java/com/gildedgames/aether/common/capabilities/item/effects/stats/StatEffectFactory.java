@@ -40,13 +40,13 @@ public class StatEffectFactory implements IEffectFactory<StatEffectFactory.StatP
 
 		private final double amount;
 
-		private final int opcode;
+		private final AttributeModifier.Operation operation;
 
-		public StatProvider(IAttribute attribute, double amount, int opcode)
+		public StatProvider(IAttribute attribute, double amount, AttributeModifier.Operation operation)
 		{
 			this.attribute = attribute;
 			this.amount = amount;
-			this.opcode = opcode;
+			this.operation = operation;
 		}
 
 		@Override
@@ -58,7 +58,7 @@ public class StatEffectFactory implements IEffectFactory<StatEffectFactory.StatP
 		@Override
 		public IEffectProvider copy()
 		{
-			return new StatProvider(this.attribute, this.amount, this.opcode);
+			return new StatProvider(this.attribute, this.amount, this.operation);
 		}
 	}
 
@@ -72,7 +72,7 @@ public class StatEffectFactory implements IEffectFactory<StatEffectFactory.StatP
 
 			for (StatProvider provider : providers)
 			{
-				AttributeModifier modifier = new AttributeModifier("Equipment modifier", provider.amount, provider.opcode);
+				AttributeModifier modifier = new AttributeModifier("Equipment modifier", provider.amount, provider.operation);
 				modifier.setSaved(false);
 
 				this.attributes.put(provider.attribute.getName(), modifier);
@@ -82,13 +82,13 @@ public class StatEffectFactory implements IEffectFactory<StatEffectFactory.StatP
 		@Override
 		public void onInstanceRemoved(IPlayerAether player)
 		{
-			player.getEntity().getAttributeMap().removeAttributeModifiers(this.attributes);
+			player.getEntity().getAttributes().removeAttributeModifiers(this.attributes);
 		}
 
 		@Override
 		public void onInstanceAdded(IPlayerAether player)
 		{
-			player.getEntity().getAttributeMap().applyAttributeModifiers(this.attributes);
+			player.getEntity().getAttributes().applyAttributeModifiers(this.attributes);
 		}
 
 		@Override
@@ -96,21 +96,21 @@ public class StatEffectFactory implements IEffectFactory<StatEffectFactory.StatP
 		{
 			for (String name : this.attributes.keySet())
 			{
-				Multimap<Integer, AttributeModifier> mods = MultimapBuilder.hashKeys().arrayListValues().build();
+				Multimap<AttributeModifier.Operation, AttributeModifier> mods = MultimapBuilder.hashKeys().arrayListValues().build();
 
 				for (AttributeModifier mod : this.attributes.get(name))
 				{
 					mods.put(mod.getOperation(), mod);
 				}
 
-				for (Integer opcode : mods.keySet())
+				for (AttributeModifier.Operation op : mods.keySet())
 				{
-					double value = EffectHelper.combineDouble(mods.get(opcode), AttributeModifier::getAmount);
+					double value = EffectHelper.combineDouble(mods.get(op), AttributeModifier::getAmount);
 
 					String prefix = value > 0 ? TextFormatting.BLUE + "+" : TextFormatting.RED + "-";
 					String desc = I18n.format("attribute.name." + name);
 
-					if (opcode == 1)
+					if (op == AttributeModifier.Operation.ADDITION)
 					{
 						label.add(prefix + POINT_FORMATTER.format(Math.abs(value) * 100.0D) + "% " + desc);
 					}

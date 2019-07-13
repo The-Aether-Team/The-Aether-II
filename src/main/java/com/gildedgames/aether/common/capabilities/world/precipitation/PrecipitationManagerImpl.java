@@ -58,7 +58,7 @@ public class PrecipitationManagerImpl implements IPrecipitationManager
 	public void tick()
 	{
 		// Clients never update
-		if (this.world.isRemote)
+		if (this.world.isRemote())
 		{
 			return;
 		}
@@ -300,7 +300,7 @@ public class PrecipitationManagerImpl implements IPrecipitationManager
 
 	private void sendUpdates()
 	{
-		if (!this.world.isRemote)
+		if (!this.world.isRemote())
 		{
 			NetworkingAether.sendPacketToDimension(new PacketUpdatePrecipitation(this), this.world.provider.getDimension());
 		}

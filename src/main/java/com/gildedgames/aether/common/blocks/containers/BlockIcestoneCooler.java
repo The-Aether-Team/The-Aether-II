@@ -7,6 +7,7 @@ import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.entity.LivingEntity;
@@ -30,13 +31,7 @@ public class BlockIcestoneCooler extends ContainerBlock
 	{
 		super(properties);
 
-		this.setDefaultState(this.stateContainer.getBaseState().with(PROPERTY_FACING, Direction.NORTH));
-	}
-
-	@Override
-	public VoxelShape getBlockFaceShape(IBlockReader worldIn, BlockState state, BlockPos pos, Direction face)
-	{
-		return VoxelShape.UNDEFINED;
+		this.setDefaultState(this.getStateContainer().getBaseState().with(PROPERTY_FACING, Direction.NORTH));
 	}
 
 	@Override
@@ -52,29 +47,14 @@ public class BlockIcestoneCooler extends ContainerBlock
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, BlockState state, PlayerEntity player, Hand hand, Direction facing,
-			float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit)
 	{
-		if (!world.isRemote)
+		if (!world.isRemote())
 		{
 			player.openGui(AetherCore.INSTANCE, AetherGuiHandler.FROSTPINE_COOLER_ID, world, pos.getX(), pos.getY(), pos.getZ());
 		}
 
 		return true;
-	}
-
-	@Override
-	public int getMetaFromState(BlockState state)
-	{
-		return state.get(PROPERTY_FACING).getIndex();
-	}
-
-	@Override
-	public BlockState getStateFromMeta(int meta)
-	{
-		Direction facing = Direction.byHorizontalIndex(meta);
-
-		return this.getDefaultState().with(PROPERTY_FACING, facing);
 	}
 
 	@Override
@@ -90,7 +70,7 @@ public class BlockIcestoneCooler extends ContainerBlock
 	}
 
 	@Override
-	public void breakBlock(World world, BlockPos pos, BlockState state)
+	public void onReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean isMoving)
 	{
 		TileEntity tileEntity = world.getTileEntity(pos);
 
@@ -99,19 +79,6 @@ public class BlockIcestoneCooler extends ContainerBlock
 			InventoryHelper.dropInventoryItems(world, pos, (IInventory) tileEntity);
 		}
 
-		super.breakBlock(world, pos, state);
+		super.onReplaced(state, world, pos, newState, isMoving);
 	}
-
-	@Override
-	public boolean isOpaqueCube(BlockState state)
-	{
-		return false;
-	}
-
-	@Override
-	public boolean isFullCube(BlockState state)
-	{
-		return false;
-	}
-
 }

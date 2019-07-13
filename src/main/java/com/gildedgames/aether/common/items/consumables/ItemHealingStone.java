@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.items.consumables;
 
 import com.gildedgames.aether.api.registrar.ItemsAether;
-import com.gildedgames.aether.common.items.IDropOnDeath;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.UseAction;
@@ -14,14 +13,14 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class ItemHealingStone extends Item implements IDropOnDeath
+public class ItemHealingStone extends Item
 {
 
 	public static final int MAX_USES = 5;
 
-	public ItemHealingStone()
+	public ItemHealingStone(Item.Properties properties)
 	{
-		super();
+		super(properties);
 
 		this.addPropertyOverride(new ResourceLocation("uses"), (stack, world, entity) ->
 		{
@@ -124,19 +123,19 @@ public class ItemHealingStone extends Item implements IDropOnDeath
 	}
 
 	@Override
-	public UseAction getItemUseAction(ItemStack stack)
+	public UseAction getUseAction(ItemStack stack)
 	{
 		return UseAction.DRINK;
 	}
 
 	@Override
-	public int getMaxItemUseDuration(ItemStack stack)
+	public int getUseDuration(ItemStack stack)
 	{
 		return 32;
 	}
 
 	@Override
-	public boolean getShareTag()
+	public boolean shouldSyncTag()
 	{
 		return true;
 	}

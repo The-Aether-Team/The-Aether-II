@@ -58,7 +58,7 @@ public class EntityAechorPlant extends EntityAetherMonster
 
 		this.setPoisonLeft(2);
 
-		if (world.isRemote)
+		if (world.isRemote())
 		{
 			this.sinage = this.rand.nextFloat() * 6F;
 		}
@@ -110,7 +110,7 @@ public class EntityAechorPlant extends EntityAetherMonster
 		this.motionX = 0.0D;
 		this.motionZ = 0.0D;
 
-		if (!this.world.isRemote)
+		if (!this.world.isRemote())
 		{
 			this.petalGrowTimer--;
 
@@ -129,7 +129,7 @@ public class EntityAechorPlant extends EntityAetherMonster
 			}
 		}
 
-		if (this.world.isRemote)
+		if (this.world.isRemote())
 		{
 			this.tickAnimation();
 
@@ -160,7 +160,7 @@ public class EntityAechorPlant extends EntityAetherMonster
 		{
 			this.petalGrowTimer = 6000;
 
-			if (!this.world.isRemote)
+			if (!this.world.isRemote())
 			{
 				int targetPetals = (int) Math.floor((this.getHealth() / this.getMaxHealth()) * MAX_PETALS);
 				int remainingPetals = this.getPetalCountInState(true);

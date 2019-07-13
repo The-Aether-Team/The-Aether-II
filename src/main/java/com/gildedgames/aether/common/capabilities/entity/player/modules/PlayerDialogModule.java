@@ -91,7 +91,7 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 
 		scene.setStartingNode(startingNodeId);
 
-		if (this.getPlayer().getEntity().world.isRemote)
+		if (this.getPlayer().getEntity().world.isRemote())
 		{
 			this.openSceneClient(path, scene, this.conditionsMet);
 		}

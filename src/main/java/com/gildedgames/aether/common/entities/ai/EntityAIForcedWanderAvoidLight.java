@@ -39,7 +39,7 @@ public class EntityAIForcedWanderAvoidLight extends EntityAIForcedWander
 				return false;
 			}
 
-			if (this.entity.world.getLightFromNeighbors(entityPos) <= this.lightLevel)
+			if (this.entity.world.getBrightness(entityPos) <= this.lightLevel)
 			{
 				return false;
 			}

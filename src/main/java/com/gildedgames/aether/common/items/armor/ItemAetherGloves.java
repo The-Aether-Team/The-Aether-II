@@ -16,13 +16,11 @@ public class ItemAetherGloves extends Item
 {
 	private final GloveType gloveType;
 
-	public ItemAetherGloves(GloveType type)
+	public ItemAetherGloves(GloveType type, Item.Properties properties)
 	{
+		super(properties.maxStackSize(1));
+
 		this.gloveType = type;
-
-		this.setMaxStackSize(1);
-
-		this.setCreativeTab(CreativeTabsAether.TAB_ARMOR);
 	}
 
 	@OnlyIn(Dist.CLIENT)

@@ -1,25 +1,14 @@
 package com.gildedgames.aether.common.blocks.natural;
 
-import com.gildedgames.aether.common.blocks.IBlockMultiName;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
 import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.BlockState;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateContainer;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.ToolType;
 
-public class BlockHolystone extends Block implements IBlockMultiName
+public class BlockHolystone extends Block
 {
 	public static final BlockVariant
 			NORMAL_HOLYSTONE = new BlockVariant(0, "normal"),
@@ -32,20 +21,7 @@ public class BlockHolystone extends Block implements IBlockMultiName
 	{
 		super(properties);
 
-		this.setDefaultState(this.stateContainer.getBaseState().with(PROPERTY_VARIANT, NORMAL_HOLYSTONE));
-	}
-
-	@Override
-	@OnlyIn(Dist.CLIENT)
-	public void getSubBlocks(final ItemGroup tab, final NonNullList<ItemStack> list)
-	{
-		for (final BlockVariant variant : PROPERTY_VARIANT.getAllowedValues())
-		{
-			if (variant != BLOOD_MOSS_HOLYSTONE)
-			{
-				list.add(new ItemStack(this, 1, variant.getMeta()));
-			}
-		}
+		this.setDefaultState(this.getStateContainer().getBaseState().with(PROPERTY_VARIANT, NORMAL_HOLYSTONE));
 	}
 
 	@Override
@@ -55,33 +31,9 @@ public class BlockHolystone extends Block implements IBlockMultiName
 	}
 
 	@Override
-	public BlockState getStateFromMeta(final int meta)
-	{
-		return this.getDefaultState().with(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta & 7));
-	}
-
-	@Override
-	public int getMetaFromState(final BlockState state)
-	{
-		return state.get(PROPERTY_VARIANT).getMeta();
-	}
-
-	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
 		builder.add(PROPERTY_VARIANT);
-	}
-
-	@Override
-	public int damageDropped(final BlockState state)
-	{
-		return state.get(PROPERTY_VARIANT).getMeta();
-	}
-
-	@Override
-	public String getTranslationKey(final ItemStack stack)
-	{
-		return PROPERTY_VARIANT.fromMeta(stack.getMetadata()).getName();
 	}
 
 }

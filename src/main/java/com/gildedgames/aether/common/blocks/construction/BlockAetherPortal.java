@@ -5,26 +5,25 @@ import com.gildedgames.aether.client.renderer.particles.ParticleAetherPortal;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTeleportingModule;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.BreakableBlock;
 import net.minecraft.block.material.Material;
-import net.minecraft.state.EnumProperty;
-import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.BlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.block.Blocks;
+import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.*;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-import javax.annotation.Nullable;
 import java.util.Random;
 
 public class BlockAetherPortal extends BreakableBlock
@@ -32,15 +31,15 @@ public class BlockAetherPortal extends BreakableBlock
 	public static final EnumProperty<Direction.Axis> PROPERTY_AXIS = EnumProperty.create("axis", Direction.Axis.class,
 			Direction.Axis.X, Direction.Axis.Z);
 
-	protected static final AxisAlignedBB X_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.375D, 1.0D, 1.0D, 0.625D),
-			Z_AABB = new AxisAlignedBB(0.375D, 0.0D, 0.0D, 0.625D, 1.0D, 1.0D),
-			Y_AABB = new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 1.0D, 0.625D);
+	protected static final VoxelShape X_AABB = Block.makeCuboidShape(0.0D, 0.0D, 0.375D, 1.0D, 1.0D, 0.625D),
+			Z_AABB = Block.makeCuboidShape(0.375D, 0.0D, 0.0D, 0.625D, 1.0D, 1.0D),
+			Y_AABB = Block.makeCuboidShape(0.375D, 0.0D, 0.375D, 0.625D, 1.0D, 0.625D);
 
 	public BlockAetherPortal(Block.Properties properties)
 	{
 		super(properties);
 
-		this.setDefaultState(this.blockState.getBaseState().with(PROPERTY_AXIS, Direction.Axis.X));
+		this.setDefaultState(this.getStateContainer().getBaseState().with(PROPERTY_AXIS, Direction.Axis.X));
 	}
 
 	public static int getMetaForAxis(Direction.Axis axis)
@@ -49,13 +48,7 @@ public class BlockAetherPortal extends BreakableBlock
 	}
 
 	@Override
-	public boolean isFullCube(BlockState state)
-	{
-		return false;
-	}
-
-	@Override
-	public AxisAlignedBB getBoundingBox(BlockState state, IBlockReader source, BlockPos pos)
+	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
 	{
 		switch (state.get(PROPERTY_AXIS))
 		{
@@ -70,15 +63,8 @@ public class BlockAetherPortal extends BreakableBlock
 	}
 
 	@Override
-	@Nullable
-	public AxisAlignedBB getCollisionBoundingBox(BlockState blockState, IBlockReader worldIn, BlockPos pos)
-	{
-		return NULL_AABB;
-	}
-
-	@Override
 	@OnlyIn(Dist.CLIENT)
-	public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random rand)
+	public void animateTick(BlockState state, World world, BlockPos pos, Random rand)
 	{
 		if (rand.nextInt(150) == 0)
 		{
@@ -112,47 +98,12 @@ public class BlockAetherPortal extends BreakableBlock
 			}
 
 			ParticleAetherPortal effect = new ParticleAetherPortal(world, posX, posY, posZ, motionX, motionY, motionZ);
-			FMLClientHandler.instance().getClient().effectRenderer.addEffect(effect);
+			Minecraft.getInstance().particles.addEffect(effect);
 		}
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
-	public boolean shouldSideBeRendered(BlockState blockState, IBlockReader world, BlockPos pos, Direction side)
-	{
-		Direction.Axis axis = null;
-		final BlockState state = world.getBlockState(pos);
-
-		if (world.getBlockState(pos).getBlock() == this)
-		{
-			axis = state.get(PROPERTY_AXIS);
-
-			if (axis == Direction.Axis.Z && side != Direction.EAST && side != Direction.WEST)
-			{
-				return false;
-			}
-
-			if (axis == Direction.Axis.X && side != Direction.SOUTH && side != Direction.NORTH)
-			{
-				return false;
-			}
-		}
-
-		final boolean westFlag = world.getBlockState(pos.west()).getBlock() == this && world.getBlockState(pos.west(2)).getBlock() != this;
-		final boolean eastFlag = world.getBlockState(pos.east()).getBlock() == this && world.getBlockState(pos.east(2)).getBlock() != this;
-		final boolean northFlag =
-				world.getBlockState(pos.north()).getBlock() == this && world.getBlockState(pos.north(2)).getBlock() != this;
-		final boolean southFlag =
-				world.getBlockState(pos.south()).getBlock() == this && world.getBlockState(pos.south(2)).getBlock() != this;
-		final boolean wexFlag = westFlag || eastFlag || axis == Direction.Axis.X;
-		final boolean nszFlag = northFlag || southFlag || axis == Direction.Axis.Z;
-
-		return wexFlag && side == Direction.WEST || (wexFlag && side == Direction.EAST || (nszFlag && side == Direction.NORTH
-				|| nszFlag && side == Direction.SOUTH));
-	}
-
-	@Override
-	public void onEntityCollision(World world, BlockPos pos, BlockState state, Entity entity)
+	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entity)
 	{
 		if (entity instanceof PlayerEntity)
 		{
@@ -162,7 +113,7 @@ public class BlockAetherPortal extends BreakableBlock
 	}
 
 	@Override
-	public BlockState withRotation(BlockState state, Rotation rot)
+	public BlockState rotate(BlockState state, Rotation rot)
 	{
 		switch (rot)
 		{
@@ -184,18 +135,6 @@ public class BlockAetherPortal extends BreakableBlock
 	}
 
 	@Override
-	public int getMetaFromState(BlockState state)
-	{
-		return getMetaForAxis(state.get(PROPERTY_AXIS));
-	}
-
-	@Override
-	public BlockState getStateFromMeta(int meta)
-	{
-		return this.getDefaultState().with(PROPERTY_AXIS, (meta & 3) == 2 ? Direction.Axis.Z : Direction.Axis.X);
-	}
-
-	@Override
 	public void neighborChanged(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean p_220069_6_)
 	{
 		final Direction.Axis axis = state.get(PROPERTY_AXIS);
@@ -209,12 +148,6 @@ public class BlockAetherPortal extends BreakableBlock
 				world.setBlockState(pos, Blocks.AIR.getDefaultState());
 			}
 		}
-	}
-
-	@Override
-	public int quantityDropped(Random random)
-	{
-		return 0;
 	}
 
 	@Override

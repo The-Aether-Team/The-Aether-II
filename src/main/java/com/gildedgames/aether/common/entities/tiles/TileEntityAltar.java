@@ -28,7 +28,7 @@ public class TileEntityAltar extends TileEntitySynced implements ITickableTileEn
 	@Override
 	public void update()
 	{
-		if (this.world.isRemote)
+		if (this.world.isRemote())
 		{
 			this.prevAnimationTicks = this.animationTicks;
 

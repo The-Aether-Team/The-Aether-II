@@ -84,7 +84,7 @@ public class EntityMovingBlock extends Entity
 		this.rotationYaw *= 0.9f;
 		this.rotationPitch *= 0.9f;
 
-		if (!this.world.isRemote && !this.hasActivated)
+		if (!this.world.isRemote() && !this.hasActivated)
 		{
 			final BlockPos pos = new BlockPos(this);
 
@@ -114,7 +114,7 @@ public class EntityMovingBlock extends Entity
 
 		this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
 
-		if (!this.world.isRemote)
+		if (!this.world.isRemote())
 		{
 			if (this.holdingPlayer != null)
 			{
@@ -181,7 +181,7 @@ public class EntityMovingBlock extends Entity
 				if ((this.motionY + this.motionX + this.motionZ) <= 0.04D && distanceFromCenter <= 2.0D)
 				{
 					// We've stopped moving
-					if (!this.world.isRemote)
+					if (!this.world.isRemote())
 					{
 						final BlockState replacingState = this.world.getBlockState(pos);
 

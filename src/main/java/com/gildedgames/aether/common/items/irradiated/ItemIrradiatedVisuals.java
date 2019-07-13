@@ -2,9 +2,9 @@ package com.gildedgames.aether.common.items.irradiated;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderItem;
-import net.minecraft.client.renderer.block.model.IBakedModel;
-import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.client.renderer.ItemRenderer;
+import net.minecraft.client.renderer.model.IBakedModel;
+import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -24,10 +24,15 @@ public class ItemIrradiatedVisuals extends Item
 		}
 	}
 
+	public ItemIrradiatedVisuals(Properties properties)
+	{
+		super(properties);
+	}
+
 	@Override
 	public boolean hasEffect(ItemStack stack)
 	{
-		final RenderItem itemRenderer = Minecraft.getInstance().getRenderItem();
+		final ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
 
 		Minecraft mc = Minecraft.getInstance();
 
@@ -35,7 +40,7 @@ public class ItemIrradiatedVisuals extends Item
 
 		GlStateManager.disableLighting();
 
-		mc.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+		mc.getTextureManager().bindTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE);
 
 		IBakedModel model = itemRenderer.getItemModelMesher().getItemModel(stack);
 
@@ -69,7 +74,7 @@ public class ItemIrradiatedVisuals extends Item
 		GlStateManager.translatef(f, 0.0F, 0.0F);
 		GlStateManager.rotatef(-50.0F, 0.0F, 0.0F, 1.0F);
 
-		mc.getRenderItem().renderModel(model, -999999992);
+		mc.getItemRenderer().renderModel(model, -999999992);
 
 		GlStateManager.popMatrix();
 		GlStateManager.pushMatrix();
@@ -80,7 +85,7 @@ public class ItemIrradiatedVisuals extends Item
 		GlStateManager.translatef(-f1, 0.0F, 0.0F);
 		GlStateManager.rotatef(10.0F, 0.0F, 0.0F, 1.0F);
 
-		mc.getRenderItem().renderModel(model, -999999992);
+		mc.getItemRenderer().renderModel(model, -999999992);
 
 		GlStateManager.popMatrix();
 		GlStateManager.matrixMode(5888);
@@ -89,7 +94,7 @@ public class ItemIrradiatedVisuals extends Item
 		GlStateManager.depthFunc(515);
 		GlStateManager.depthMask(true);
 
-		mc.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+		mc.getTextureManager().bindTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE);
 	}
 
 }

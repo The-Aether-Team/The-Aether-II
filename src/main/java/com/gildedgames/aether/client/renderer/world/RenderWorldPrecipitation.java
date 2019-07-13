@@ -6,7 +6,7 @@ import com.gildedgames.aether.api.world.islands.precipitation.PrecipitationStren
 import com.gildedgames.aether.common.AetherCore;
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.WorldClient;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -69,7 +69,7 @@ public class RenderWorldPrecipitation extends IRenderHandler
 	}
 
 	@Override
-	public void render(float partialTicks, WorldClient world, Minecraft mc)
+	public void render(float partialTicks, ClientWorld world, Minecraft mc)
 	{
 		this.playSounds(mc);
 
@@ -87,10 +87,10 @@ public class RenderWorldPrecipitation extends IRenderHandler
 
 		GlStateManager.disableCull();
 
-		GlStateManager.glNormal3f(0.0F, 1.0F, 0.0F);
+		GlStateManager.normal3f(0.0F, 1.0F, 0.0F);
 
 		GlStateManager.enableBlend();
-		GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
+		GlStateManager.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
 				GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 		GlStateManager.alphaFunc(516, 0.1F);
 
@@ -337,7 +337,7 @@ public class RenderWorldPrecipitation extends IRenderHandler
 
 				searchPos.setPos(x, y, z);
 
-				if (mc.world.getBiome(searchPos).isSnowyBiome())
+				if (mc.world.getBiome(searchPos).getTempCategory() == Biome.TempCategory.COLD)
 				{
 					if (precipitation.getStrength() == PrecipitationStrength.STORM)
 					{

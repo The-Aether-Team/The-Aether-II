@@ -3,8 +3,8 @@ package com.gildedgames.aether.common.entities.companions;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
@@ -37,7 +37,7 @@ public class EntityKraisith extends EntityCombatCompanion
 			{
 				LivingEntity living = (LivingEntity) entity;
 
-				living.addPotionEffect(new PotionEffect(Effects.SLOWNESS, 20, 3));
+				living.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 20, 3));
 			}
 		}
 

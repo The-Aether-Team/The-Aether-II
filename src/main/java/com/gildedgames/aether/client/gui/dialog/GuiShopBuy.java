@@ -19,7 +19,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.RenderItem;
+import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -88,7 +88,7 @@ public class GuiShopBuy extends GuiElement
 					font = this.viewer().fontRenderer();
 				}
 
-				RenderItem renderitem = this.viewer().mc().getRenderItem();
+				ItemRenderer renderitem = this.viewer().mc().getItemRenderer();
 				renderitem.zLevel = 200.0F;
 
 				renderitem

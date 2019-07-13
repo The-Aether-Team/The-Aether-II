@@ -95,7 +95,7 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 	{
 		super.livingTick();
 
-		if (this.world.isRemote)
+		if (this.world.isRemote())
 		{
 			this.clientUpdate();
 		}

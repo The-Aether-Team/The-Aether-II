@@ -50,7 +50,7 @@ public class ContainerShop extends Container
 	{
 		super.onContainerClosed(playerIn);
 
-		if (!playerIn.world.isRemote)
+		if (!playerIn.world.isRemote())
 		{
 			if (!playerIn.isAlive() || playerIn instanceof ServerPlayerEntity && ((ServerPlayerEntity)playerIn).hasDisconnected())
 			{

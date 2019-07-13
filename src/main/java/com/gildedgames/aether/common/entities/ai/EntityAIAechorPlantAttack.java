@@ -53,7 +53,7 @@ public class EntityAIAechorPlantAttack extends EntityAITarget
 
 			final CreatureEntity predator = this.taskOwner;
 
-			if (!predator.world.isRemote)
+			if (!predator.world.isRemote())
 			{
 				final EntityDart dart = new EntityDart(predator.world, predator);
 				dart.shoot(prey.posX, prey.posY, prey.posZ, 0.6F, 1.0F);

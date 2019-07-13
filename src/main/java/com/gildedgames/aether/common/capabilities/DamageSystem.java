@@ -38,13 +38,13 @@ public class DamageSystem
 		{
 			LivingEntity living = (LivingEntity) event.getObject();
 
-			living.getAttributeMap().registerAttribute(DamageTypeAttributes.SLASH_DAMAGE_LEVEL);
-			living.getAttributeMap().registerAttribute(DamageTypeAttributes.PIERCE_DAMAGE_LEVEL);
-			living.getAttributeMap().registerAttribute(DamageTypeAttributes.IMPACT_DAMAGE_LEVEL);
+			living.getAttributes().registerAttribute(DamageTypeAttributes.SLASH_DAMAGE_LEVEL);
+			living.getAttributes().registerAttribute(DamageTypeAttributes.PIERCE_DAMAGE_LEVEL);
+			living.getAttributes().registerAttribute(DamageTypeAttributes.IMPACT_DAMAGE_LEVEL);
 
-			living.getAttributeMap().registerAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL);
-			living.getAttributeMap().registerAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL);
-			living.getAttributeMap().registerAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL);
+			living.getAttributes().registerAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL);
+			living.getAttributes().registerAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL);
+			living.getAttributes().registerAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL);
 		}
 	}
 

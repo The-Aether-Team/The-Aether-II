@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.Direction;
@@ -20,11 +21,11 @@ public class BlockRotatable extends Block
 	{
 		super(properties);
 
-		this.setDefaultState(this.stateContainer.getBaseState().with(PROPERTY_AXIS, Direction.Axis.Y));
+		this.setDefaultState(this.getStateContainer().getBaseState().with(PROPERTY_AXIS, Direction.Axis.Y));
 	}
 
 	@Override
-	public BlockState withRotation(BlockState state, Rotation rot)
+	public BlockState rotate(BlockState state, Rotation rot)
 	{
 		switch (rot)
 		{
@@ -45,58 +46,9 @@ public class BlockRotatable extends Block
 	}
 
 	@Override
-	public BlockState getStateForPlacement(World world, BlockPos pos, Direction facing, float hitX, float hitY, float hitZ, int meta, LivingEntity placer,
-			Hand hand)
+	public BlockState getStateForPlacement(BlockItemUseContext context)
 	{
-		return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand).with(PROPERTY_AXIS, facing.getAxis());
-	}
-
-	@Override
-	public BlockState getStateFromMeta(int meta)
-	{
-		Direction.Axis axis;
-
-		switch (meta & 7)
-		{
-			case 1:
-				axis = Direction.Axis.X;
-				break;
-			case 2:
-				axis = Direction.Axis.Z;
-				break;
-			default:
-				axis = Direction.Axis.Y;
-				break;
-		}
-
-		return this.getDefaultState().with(PROPERTY_AXIS, axis);
-	}
-
-	@Override
-	public int getMetaFromState(BlockState state)
-	{
-		int meta = 0;
-
-		switch (state.get(PROPERTY_AXIS))
-		{
-			case X:
-				meta |= 1;
-				break;
-			case Z:
-				meta |= 2;
-				break;
-			default:
-				meta |= 0;
-				break;
-		}
-
-		return meta;
-	}
-
-	@Override
-	public int damageDropped(BlockState state)
-	{
-		return 0;
+		return this.getDefaultState().with(PROPERTY_AXIS, context.getFace().getAxis());
 	}
 
 	@Override
