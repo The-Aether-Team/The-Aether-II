@@ -141,13 +141,13 @@ public class GenerationAether
 	{
         short_aether_grass = new WorldGenFloorPlacer(GenUtil.equalStateFetcher(),
                 GenUtil.standardStateDefiner(
-                        BlocksAether.tall_aether_grass.getDefaultState().withProperty(BlockTallAetherGrass.PROPERTY_VARIANT, BlockTallAetherGrass.SHORT)));
+                        BlocksAether.tall_aether_grass.getDefaultState().with(BlockTallAetherGrass.PROPERTY_VARIANT, BlockTallAetherGrass.SHORT)));
         aether_grass = new WorldGenFloorPlacer(GenUtil.equalStateFetcher(),
                 GenUtil.standardStateDefiner(
-                        BlocksAether.tall_aether_grass.getDefaultState().withProperty(BlockTallAetherGrass.PROPERTY_VARIANT, BlockTallAetherGrass.NORMAL)));
+                        BlocksAether.tall_aether_grass.getDefaultState().with(BlockTallAetherGrass.PROPERTY_VARIANT, BlockTallAetherGrass.NORMAL)));
         long_aether_grass = new WorldGenFloorPlacer(GenUtil.equalStateFetcher(),
                 GenUtil.standardStateDefiner(
-                        BlocksAether.tall_aether_grass.getDefaultState().withProperty(BlockTallAetherGrass.PROPERTY_VARIANT, BlockTallAetherGrass.LONG)));
+                        BlocksAether.tall_aether_grass.getDefaultState().with(BlockTallAetherGrass.PROPERTY_VARIANT, BlockTallAetherGrass.LONG)));
 
         skyroot_twigs = new WorldGenFloorPlacer(4, GenUtil.equalStateFetcher(), GenUtil.standardStateDefiner(BlocksAether.skyroot_twigs.getDefaultState(),
                 BlocksAether.holystone_rock.getDefaultState()));

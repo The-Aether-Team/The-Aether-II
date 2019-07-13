@@ -16,11 +16,11 @@ public class ItemDeathSeal extends ItemCompanion
 {
 	public static void setDisabledTimer(final ItemStack stack, final World world, final int timer)
 	{
-		CompoundNBT compound = stack.getTagCompound();
+		CompoundNBT compound = stack.getTag();
 
 		if (compound == null)
 		{
-			stack.setTagCompound(compound = new CompoundNBT());
+			stack.setTag(compound = new CompoundNBT());
 		}
 
 		compound.putLong("disabledTimer", world.getTotalWorldTime() + timer);
@@ -30,7 +30,7 @@ public class ItemDeathSeal extends ItemCompanion
 
 	public static long getTicksUntilEnabled(final ItemStack stack, final World world)
 	{
-		final CompoundNBT compound = stack.getTagCompound();
+		final CompoundNBT compound = stack.getTag();
 
 		if (compound == null || !compound.contains("disabledTimer"))
 		{

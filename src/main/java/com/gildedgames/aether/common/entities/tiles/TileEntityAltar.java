@@ -124,7 +124,7 @@ public class TileEntityAltar extends TileEntitySynced implements ITickableTileEn
 
 		if (state.getBlock() == BlocksAether.altar)
 		{
-			return state.getValue(BlockAltar.PROPERTY_FACING);
+			return state.get(BlockAltar.PROPERTY_FACING);
 		}
 
 		return Direction.NORTH;

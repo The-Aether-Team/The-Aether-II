@@ -10,7 +10,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IItemPropertyGetter;
@@ -90,9 +90,9 @@ public class ItemCrossbow extends Item
 
 	private static void checkTag(final ItemStack stack)
 	{
-		if (stack.getTagCompound() == null)
+		if (stack.getTag() == null)
 		{
-			stack.setTagCompound(new CompoundNBT());
+			stack.setTag(new CompoundNBT());
 		}
 	}
 
@@ -105,7 +105,7 @@ public class ItemCrossbow extends Item
 
 		checkTag(stack);
 
-		return stack.getTagCompound().getBoolean("loaded");
+		return stack.getTag().getBoolean("loaded");
 	}
 
 	public static void setLoaded(final ItemStack stack, final boolean loaded)
@@ -117,7 +117,7 @@ public class ItemCrossbow extends Item
 
 		checkTag(stack);
 
-		stack.getTagCompound().putBoolean("loaded", loaded);
+		stack.getTag().putBoolean("loaded", loaded);
 	}
 
 	public static ItemBoltType getLoadedBoltType(final ItemStack stack)
@@ -129,7 +129,7 @@ public class ItemCrossbow extends Item
 
 		checkTag(stack);
 
-		return ItemCrossbow.BOLT_TYPES[stack.getTagCompound().getInt("boltType")];
+		return ItemCrossbow.BOLT_TYPES[stack.getTag().getInt("boltType")];
 	}
 
 	public static void setLoadedBoltType(final ItemStack stack, final ItemBoltType type)
@@ -141,7 +141,7 @@ public class ItemCrossbow extends Item
 
 		checkTag(stack);
 
-		stack.getTagCompound().putInt("boltType", type.ordinal());
+		stack.getTag().putInt("boltType", type.ordinal());
 	}
 
 	private boolean hasAmmo(final PlayerEntity player)
@@ -261,15 +261,15 @@ public class ItemCrossbow extends Item
 				{
 					if (bolt0 != null)
 					{
-						bolt0.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
+						bolt0.pickupStatus = ArrowEntity.PickupStatus.CREATIVE_ONLY;
 					}
 					if (bolt1 != null)
 					{
-						bolt1.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
+						bolt1.pickupStatus = ArrowEntity.PickupStatus.CREATIVE_ONLY;
 					}
 					if (bolt2 != null)
 					{
-						bolt2.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
+						bolt2.pickupStatus = ArrowEntity.PickupStatus.CREATIVE_ONLY;
 					}
 				}
 				else
@@ -326,7 +326,7 @@ public class ItemCrossbow extends Item
 					0.0F, speed * 2.0F, 1.0F + addInaccuracy);
 			bolt.setBoltAbility(BoltAbility.NORMAL);
 			bolt.setDamage(bolt.getDamage() * damageMultiplier);
-			bolt.pickupStatus = EntityArrow.PickupStatus.ALLOWED;
+			bolt.pickupStatus = ArrowEntity.PickupStatus.ALLOWED;
 
 			return bolt;
 		}

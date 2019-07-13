@@ -3,7 +3,6 @@ package com.gildedgames.aether.common.blocks.multiblock;
 import com.gildedgames.aether.common.entities.tiles.multiblock.TileEntityMultiblockController;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -12,9 +11,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public abstract class BlockMultiController extends BlockMultiBase
 {
-	protected BlockMultiController(Material material)
+	protected BlockMultiController(Properties properties)
 	{
-		super(material);
+		super(properties);
 	}
 
 	public abstract Iterable<BlockPos.MutableBlockPos> getMultiblockVolumeIterator(BlockPos pos, World world);

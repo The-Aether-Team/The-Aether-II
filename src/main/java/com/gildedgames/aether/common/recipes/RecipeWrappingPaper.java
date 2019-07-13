@@ -93,8 +93,8 @@ public class RecipeWrappingPaper extends IForgeRegistryEntry.Impl<IRecipe> imple
 
 		final ItemStack output = new ItemStack(ItemsAether.wrapping_paper, 8);
 
-		output.setTagCompound(new CompoundNBT());
-		data.writeToNBT(output.getTagCompound());
+		output.setTag(new CompoundNBT());
+		data.writeToNBT(output.getTag());
 
 		return output;
 	}

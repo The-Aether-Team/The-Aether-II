@@ -2,8 +2,9 @@ package com.gildedgames.aether.common.blocks.construction.signs;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.state.DirectionProperty;
 import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.state.StateContainer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -12,22 +13,24 @@ import net.minecraft.world.World;
 
 public class BlockWallSkyrootSign extends BlockSkyrootSign
 {
-	public static final PropertyDirection FACING = PropertyDirection.create("facing", Direction.Plane.HORIZONTAL);
+	public static final DirectionProperty FACING = DirectionProperty.create("facing", Direction.Plane.HORIZONTAL);
 
 	protected static final AxisAlignedBB SIGN_EAST_AABB = new AxisAlignedBB(0.0D, 0.28125D, 0.0D, 0.125D, 0.78125D, 1.0D),
 			SIGN_WEST_AABB = new AxisAlignedBB(0.875D, 0.28125D, 0.0D, 1.0D, 0.78125D, 1.0D),
 			SIGN_SOUTH_AABB = new AxisAlignedBB(0.0D, 0.28125D, 0.0D, 1.0D, 0.78125D, 0.125D),
 			SIGN_NORTH_AABB = new AxisAlignedBB(0.0D, 0.28125D, 0.875D, 1.0D, 0.78125D, 1.0D);
 
-	public BlockWallSkyrootSign()
+	public BlockWallSkyrootSign(Block.Properties properties)
 	{
-		this.setDefaultState(this.blockState.getBaseState().withProperty(BlockWallSkyrootSign.FACING, Direction.NORTH));
+		super(properties);
+
+		this.setDefaultState(this.blockState.getBaseState().with(BlockWallSkyrootSign.FACING, Direction.NORTH));
 	}
 
 	@Override
 	public AxisAlignedBB getBoundingBox(BlockState state, IBlockReader source, BlockPos pos)
 	{
-		switch (state.getValue(FACING))
+		switch (state.get(FACING))
 		{
 			case NORTH:
 			default:
@@ -42,18 +45,18 @@ public class BlockWallSkyrootSign extends BlockSkyrootSign
 	}
 
 	@Override
-	public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
+	public void neighborChanged(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean p_220069_6_)
 	{
-		Direction enumfacing = state.getValue(FACING);
+		Direction enumfacing = state.get(FACING);
 
-		if (!worldIn.getBlockState(pos.offset(enumfacing.getOpposite())).getMaterial().isSolid())
+		if (!world.getBlockState(pos.offset(enumfacing.getOpposite())).getMaterial().isSolid())
 		{
-			this.dropBlockAsItem(worldIn, pos, state, 0);
+			this.dropBlockAsItem(world, pos, state, 0);
 
-			worldIn.setBlockToAir(pos);
+			world.removeBlock(pos, false);
 		}
 
-		super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
+		super.neighborChanged(state, world, pos, block, fromPos, p_220069_6_);
 	}
 
 	@Override
@@ -66,18 +69,18 @@ public class BlockWallSkyrootSign extends BlockSkyrootSign
 			facing = Direction.NORTH;
 		}
 
-		return this.getDefaultState().withProperty(BlockWallSkyrootSign.FACING, facing);
+		return this.getDefaultState().with(BlockWallSkyrootSign.FACING, facing);
 	}
 
 	@Override
 	public int getMetaFromState(BlockState state)
 	{
-		return state.getValue(BlockWallSkyrootSign.FACING).getIndex();
+		return state.get(BlockWallSkyrootSign.FACING).getIndex();
 	}
 
 	@Override
-	protected BlockStateContainer createBlockState()
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
-		return new BlockStateContainer(this, BlockWallSkyrootSign.FACING);
+		builder.add(BlockWallSkyrootSign.FACING);
 	}
 }

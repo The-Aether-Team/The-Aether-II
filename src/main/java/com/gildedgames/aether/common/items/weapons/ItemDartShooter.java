@@ -3,13 +3,13 @@ package com.gildedgames.aether.common.items.weapons;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.projectiles.EntityDart;
+import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.UseAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -116,7 +116,7 @@ public class ItemDartShooter extends Item
 
 			if (isInfiniteArrow)
 			{
-				dart.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
+				dart.pickupStatus = ArrowEntity.PickupStatus.CREATIVE_ONLY;
 			}
 
 			player.playSound(new SoundEvent(AetherCore.getResource("random.dart_shooter.fire")), 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + speed * 0.5F);

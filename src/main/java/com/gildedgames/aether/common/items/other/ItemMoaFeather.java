@@ -26,9 +26,9 @@ public class ItemMoaFeather extends Item implements IDropOnDeath
 
 	public static void setColor(final ItemStack stack, final String colorName, final int color)
 	{
-		if (stack.getTagCompound() == null)
+		if (stack.getTag() == null)
 		{
-			stack.setTagCompound(new CompoundNBT());
+			stack.setTag(new CompoundNBT());
 		}
 
 		final CompoundNBT tag = new CompoundNBT();
@@ -36,17 +36,17 @@ public class ItemMoaFeather extends Item implements IDropOnDeath
 		tag.putString("colorName", colorName);
 		tag.putInt("color", color);
 
-		stack.getTagCompound().put("featherColor", tag);
+		stack.getTag().put("featherColor", tag);
 	}
 
 	public static int getColor(final ItemStack stack)
 	{
-		if (stack.getTagCompound() == null)
+		if (stack.getTag() == null)
 		{
 			ItemMoaFeather.setColor(stack, "", 0xFFFFFF);
 		}
 
-		final CompoundNBT tag = stack.getTagCompound().getCompound("featherColor");
+		final CompoundNBT tag = stack.getTag().getCompound("featherColor");
 
 		return tag.getInt("color");
 	}
@@ -54,12 +54,12 @@ public class ItemMoaFeather extends Item implements IDropOnDeath
 	@OnlyIn(Dist.CLIENT)
 	public static String getColorName(final ItemStack stack)
 	{
-		if (stack.getTagCompound() == null)
+		if (stack.getTag() == null)
 		{
 			ItemMoaFeather.setColor(stack, "", 0xFFFFFF);
 		}
 
-		final CompoundNBT tag = stack.getTagCompound().getCompound("featherColor");
+		final CompoundNBT tag = stack.getTag().getCompound("featherColor");
 
 		return tag.getString("colorName");
 	}

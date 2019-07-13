@@ -32,7 +32,7 @@ public class BiomeIrradiatedForests extends BiomeAetherBase
 	{
 		super(properties, registryName);
 
-		this.topBlock = BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.IRRADIATED);
+		this.topBlock = BlocksAether.aether_grass.getDefaultState().with(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.IRRADIATED);
 	}
 
 	@Override

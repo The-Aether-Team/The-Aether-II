@@ -27,8 +27,8 @@ public class ItemBrettlCane extends Item implements IPlantable, IDropOnDeath
 				.isAirBlock(pos.up()) && worldIn.isAirBlock(pos.up(2)) && worldIn.isAirBlock(pos.up(3)))
 		{
 			worldIn.setBlockState(pos.up(), BlocksAether.brettl_plant.getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ, 0, player));
-			worldIn.setBlockState(pos.up(2), BlocksAether.brettl_plant.getDefaultState().withProperty(BlockBrettlPlant.PROPERTY_VARIANT, BlockBrettlPlant.TOP)
-					.withProperty(BlockBrettlPlant.PROPERTY_HARVESTABLE, false));
+			worldIn.setBlockState(pos.up(2), BlocksAether.brettl_plant.getDefaultState().with(BlockBrettlPlant.PROPERTY_VARIANT, BlockBrettlPlant.TOP)
+					.with(BlockBrettlPlant.PROPERTY_HARVESTABLE, false));
 			itemstack.shrink(1);
 			return ActionResultType.SUCCESS;
 		}

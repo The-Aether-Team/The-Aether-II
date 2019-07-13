@@ -310,7 +310,7 @@ public class TileEntityHolystoneFurnace extends LockableTileEntity implements IT
 				isBurning = true;
 
 				this.world.setBlockState(this.pos, this.world.getBlockState(this.pos)
-						.withProperty(BlockHolystoneFurnace.PROPERTY_IS_LIT, this.isBurning()), 3);
+						.with(BlockHolystoneFurnace.PROPERTY_IS_LIT, this.isBurning()), 3);
 
 				this.validate();
 

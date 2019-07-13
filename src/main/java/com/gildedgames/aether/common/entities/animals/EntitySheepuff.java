@@ -13,8 +13,8 @@ import com.gildedgames.aether.common.util.helpers.MathUtil;
 import net.minecraft.entity.*;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.passive.SheepEntity;
+import net.minecraft.item.DyeColor;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -208,7 +208,7 @@ public class EntitySheepuff extends SheepEntity implements IEntityMultiPart
 	{
 		livingdata = super.onInitialSpawn(difficulty, livingdata);
 
-		this.setFleeceColor(EnumDyeColor.WHITE);
+		this.setFleeceColor(DyeColor.WHITE);
 
 		return livingdata;
 	}

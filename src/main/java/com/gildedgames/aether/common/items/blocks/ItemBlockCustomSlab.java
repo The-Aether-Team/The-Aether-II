@@ -32,14 +32,14 @@ public class ItemBlockCustomSlab extends BlockItem
 
 		BlockState state = world.getBlockState(pos);
 
-		if (state.getBlock() == this.block && state.getValue(BlockCustomSlab.PROPERTY_SLAB_STATE) != EnumSlabPart.FULL_BLOCK)
+		if (state.getBlock() == this.block && state.get(BlockCustomSlab.PROPERTY_SLAB_STATE) != EnumSlabPart.FULL_BLOCK)
 		{
-			EnumSlabPart part = state.getValue(BlockCustomSlab.PROPERTY_SLAB_STATE);
+			EnumSlabPart part = state.get(BlockCustomSlab.PROPERTY_SLAB_STATE);
 
 			if ((part == EnumSlabPart.BOTTOM_HALF && facing == Direction.UP) ||
 					(part == EnumSlabPart.TOP_HALF && facing == Direction.DOWN))
 			{
-				BlockState newState = state.withProperty(BlockCustomSlab.PROPERTY_SLAB_STATE, EnumSlabPart.FULL_BLOCK);
+				BlockState newState = state.with(BlockCustomSlab.PROPERTY_SLAB_STATE, EnumSlabPart.FULL_BLOCK);
 
 				if (player.canPlayerEdit(target, facing, stack) && world.setBlockState(target, newState, 11))
 				{
@@ -56,11 +56,11 @@ public class ItemBlockCustomSlab extends BlockItem
 
 			if (state.getBlock() == this.block)
 			{
-				EnumSlabPart part = state.getValue(BlockCustomSlab.PROPERTY_SLAB_STATE);
+				EnumSlabPart part = state.get(BlockCustomSlab.PROPERTY_SLAB_STATE);
 
 				if (part != EnumSlabPart.FULL_BLOCK)
 				{
-					BlockState newState = state.withProperty(BlockCustomSlab.PROPERTY_SLAB_STATE, EnumSlabPart.FULL_BLOCK);
+					BlockState newState = state.with(BlockCustomSlab.PROPERTY_SLAB_STATE, EnumSlabPart.FULL_BLOCK);
 
 					if (player.canPlayerEdit(target, facing, stack) && world.setBlockState(target, newState, 11))
 					{
@@ -83,9 +83,9 @@ public class ItemBlockCustomSlab extends BlockItem
 
 		BlockState state = world.getBlockState(pos);
 
-		if (state.getBlock() == this.block && state.getValue(BlockCustomSlab.PROPERTY_SLAB_STATE) != EnumSlabPart.FULL_BLOCK)
+		if (state.getBlock() == this.block && state.get(BlockCustomSlab.PROPERTY_SLAB_STATE) != EnumSlabPart.FULL_BLOCK)
 		{
-			boolean flag = state.getValue(BlockCustomSlab.PROPERTY_SLAB_STATE) == EnumSlabPart.TOP_HALF;
+			boolean flag = state.get(BlockCustomSlab.PROPERTY_SLAB_STATE) == EnumSlabPart.TOP_HALF;
 
 			if ((side == Direction.UP && !flag || side == Direction.DOWN && flag) && state.getBlock() == this.block)
 			{

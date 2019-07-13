@@ -1,19 +1,21 @@
 package com.gildedgames.aether.common.blocks.decorative;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
-import net.minecraft.block.BlockRotatedPillar;
+import net.minecraft.block.Block;
+import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.DyeColor;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Items;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.state.StateContainer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.Rotation;
@@ -23,22 +25,20 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class BlockCandyCane extends BlockRotatedPillar
+public class BlockCandyCane extends RotatedPillarBlock
 {
 	public static final EnumProperty<EnumAxis> BLOCK_AXIS = EnumProperty.create("axis", BlockCandyCane.EnumAxis.class);
 
-	public BlockCandyCane()
+	public BlockCandyCane(Block.Properties properties)
 	{
-		super(Material.GLASS);
-		this.setHardness(0.5F);
-		this.setSoundType(SoundType.GLASS);
+		super(properties);
 	}
 
 	@Override
 	public BlockState getStateForPlacement(World worldIn, BlockPos pos, Direction facing, float hitX, float hitY, float hitZ, int meta,
 			LivingEntity placer)
 	{
-		return this.getStateFromMeta(meta).withProperty(BLOCK_AXIS, BlockCandyCane.EnumAxis.fromFacingAxis(facing.getAxis()));
+		return this.getStateFromMeta(meta).with(BLOCK_AXIS, BlockCandyCane.EnumAxis.fromFacingAxis(facing.getAxis()));
 	}
 
 	@Override
@@ -86,7 +86,7 @@ public class BlockCandyCane extends BlockRotatedPillar
 	@Override
 	public MapColor getMapColor(BlockState state, IBlockReader worldIn, BlockPos pos)
 	{
-		return MapColor.getBlockColor(EnumDyeColor.RED);
+		return MapColor.getBlockColor(DyeColor.RED);
 	}
 
 	@Override
@@ -97,12 +97,12 @@ public class BlockCandyCane extends BlockRotatedPillar
 			case COUNTERCLOCKWISE_90:
 			case CLOCKWISE_90:
 
-				switch (state.getValue(BLOCK_AXIS))
+				switch (state.get(BLOCK_AXIS))
 				{
 					case X:
-						return state.withProperty(BLOCK_AXIS, BlockCandyCane.EnumAxis.Z);
+						return state.with(BLOCK_AXIS, BlockCandyCane.EnumAxis.Z);
 					case Z:
-						return state.withProperty(BLOCK_AXIS, BlockCandyCane.EnumAxis.X);
+						return state.with(BLOCK_AXIS, BlockCandyCane.EnumAxis.X);
 					default:
 						return state;
 				}
@@ -130,7 +130,7 @@ public class BlockCandyCane extends BlockRotatedPillar
 				break;
 		}
 
-		return this.getDefaultState().withProperty(BLOCK_AXIS, axis);
+		return this.getDefaultState().with(BLOCK_AXIS, axis);
 	}
 
 	@Override
@@ -138,7 +138,7 @@ public class BlockCandyCane extends BlockRotatedPillar
 	{
 		int meta = 0;
 
-		switch (state.getValue(BLOCK_AXIS))
+		switch (state.get(BLOCK_AXIS))
 		{
 			case Y:
 				meta |= 1;
@@ -155,9 +155,9 @@ public class BlockCandyCane extends BlockRotatedPillar
 	}
 
 	@Override
-	protected BlockStateContainer createBlockState()
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
-		return new BlockStateContainer(this, BLOCK_AXIS);
+		builder.add(BLOCK_AXIS);
 	}
 
 	public enum EnumAxis implements IStringSerializable

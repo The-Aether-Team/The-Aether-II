@@ -26,7 +26,7 @@ public class BlockAetherGreatrootSapling extends BlockAetherSapling
 	@Override
 	public BlueprintDefinition getBlueprint(BlockState state)
 	{
-		final BlockVariant variant = state.getValue(PROPERTY_VARIANT);
+		final BlockVariant variant = state.get(PROPERTY_VARIANT);
 
 		if (variant == BlockAetherGreatrootSapling.GREEN)
 		{

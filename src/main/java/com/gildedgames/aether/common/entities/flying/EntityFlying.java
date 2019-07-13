@@ -120,7 +120,7 @@ public class EntityFlying extends CreatureEntity
 	}
 
 	@Override
-	protected void entityInit()
+	protected void registerData()
 	{
 		super.registerData();
 

@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.blocks.multiblock;
 
 import com.gildedgames.aether.common.blocks.IInternalBlock;
 import com.gildedgames.aether.common.entities.tiles.multiblock.TileEntityMultiblockDummy;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -22,10 +23,6 @@ public class BlockMultiDummyHalf extends BlockMultiBase implements IInternalBloc
 
 	public BlockMultiDummyHalf()
 	{
-		super(Material.ROCK);
-
-		this.setBlockUnbreakable();
-		this.setResistance(6000000.0F);
 		this.setLightOpacity(0);
 	}
 
@@ -37,7 +34,7 @@ public class BlockMultiDummyHalf extends BlockMultiBase implements IInternalBloc
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(final World worldIn, final int meta)
+	public TileEntity createNewTileEntity(IBlockReader reader)
 	{
 		return new TileEntityMultiblockDummy();
 	}

@@ -15,6 +15,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.state.StateContainer;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -47,14 +48,12 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 
 	private static final AxisAlignedBB GRASS_LONG_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.9D, 0.9D);
 
-	public BlockTallAetherGrass()
+	public BlockTallAetherGrass(Block.Properties properties)
 	{
-		super(Material.PLANTS);
+		super(properties);
 
-		this.setSoundType(SoundType.PLANT);
-
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, SHORT).withProperty(TYPE, Type.HIGHLANDS)
-				.withProperty(PROPERTY_SNOWY, Boolean.FALSE));
+		this.setDefaultState(this.stateContainer.getBaseState().with(PROPERTY_VARIANT, SHORT).with(TYPE, Type.HIGHLANDS)
+				.with(PROPERTY_SNOWY, Boolean.FALSE));
 	}
 
 	@Override
@@ -85,7 +84,7 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 		final List<ItemStack> drops = new ArrayList<>();
 		BlockState state = world.getBlockState(pos);
 
-		drops.add(new ItemStack(this, 1, this.getMetaFromState(state) - (state.getValue(PROPERTY_SNOWY) ? PROPERTY_VARIANT.getAllowedValues().size() : 0)));
+		drops.add(new ItemStack(this, 1, this.getMetaFromState(state) - (state.get(PROPERTY_SNOWY) ? PROPERTY_VARIANT.getAllowedValues().size() : 0)));
 
 		return drops;
 	}
@@ -93,11 +92,11 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 	@Override
 	public void onPlayerDestroy(World worldIn, BlockPos pos, BlockState state)
 	{
-		if (state.getValue(PROPERTY_SNOWY))
+		if (state.get(PROPERTY_SNOWY))
 		{
 			if (worldIn.getBlockState(pos.down()) != Blocks.AIR.getDefaultState())
 			{
-				worldIn.setBlockState(pos, BlocksAether.highlands_snow_layer.getDefaultState().withProperty(BlockSnow.LAYERS, 1), 2);
+				worldIn.setBlockState(pos, BlocksAether.highlands_snow_layer.getDefaultState().with(BlockSnow.LAYERS, 1), 2);
 			}
 		}
 	}
@@ -112,15 +111,15 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 	@Override
 	public AxisAlignedBB getBoundingBox(final BlockState state, final IBlockReader source, final BlockPos pos)
 	{
-		if (state.getValue(PROPERTY_VARIANT) == SHORT)
+		if (state.get(PROPERTY_VARIANT) == SHORT)
 		{
 			return GRASS_SHORT_AABB;
 		}
-		else if (state.getValue(PROPERTY_VARIANT) == NORMAL)
+		else if (state.get(PROPERTY_VARIANT) == NORMAL)
 		{
 			return GRASS_NORMAL_AABB;
 		}
-		else if (state.getValue(PROPERTY_VARIANT) == LONG)
+		else if (state.get(PROPERTY_VARIANT) == LONG)
 		{
 			return GRASS_LONG_AABB;
 		}
@@ -134,7 +133,7 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 		final boolean snowy = meta >= PROPERTY_VARIANT.getAllowedValues().size();
 		final BlockVariant variant = PROPERTY_VARIANT.fromMeta(meta - (snowy ? PROPERTY_VARIANT.getAllowedValues().size() : 0));
 
-		return this.getDefaultState().withProperty(PROPERTY_VARIANT, variant).withProperty(PROPERTY_SNOWY, snowy);
+		return this.getDefaultState().with(PROPERTY_VARIANT, variant).with(PROPERTY_SNOWY, snowy);
 	}
 
 	@Override
@@ -146,13 +145,13 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 	@Override
 	public int getMetaFromState(final BlockState state)
 	{
-		return state.getValue(PROPERTY_VARIANT).getMeta() + (state.getValue(PROPERTY_SNOWY) ? PROPERTY_VARIANT.getAllowedValues().size() : 0);
+		return state.get(PROPERTY_VARIANT).getMeta() + (state.get(PROPERTY_SNOWY) ? PROPERTY_VARIANT.getAllowedValues().size() : 0);
 	}
 
 	@Override
-	protected BlockStateContainer createBlockState()
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
-		return new BlockStateContainer(this, TYPE, PROPERTY_VARIANT, PROPERTY_SNOWY);
+		builder.add(TYPE, PROPERTY_VARIANT, PROPERTY_SNOWY);
 	}
 
 	@Override
@@ -164,7 +163,7 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 	@Override
 	public Vec3d getOffset(final BlockState state, final IBlockReader access, final BlockPos pos)
 	{
-		if (state.getValue(PROPERTY_SNOWY))
+		if (state.get(PROPERTY_SNOWY))
 		{
 			return Vec3d.ZERO;
 		}
@@ -175,7 +174,7 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 	@Override
 	public int damageDropped(final BlockState state)
 	{
-		return state.getValue(PROPERTY_VARIANT).getMeta();
+		return state.get(PROPERTY_VARIANT).getMeta();
 	}
 
 	public enum Type implements IStringSerializable

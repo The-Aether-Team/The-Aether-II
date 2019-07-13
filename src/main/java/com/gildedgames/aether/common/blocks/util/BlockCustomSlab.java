@@ -7,6 +7,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.state.EnumProperty;
+import net.minecraft.state.StateContainer;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.entity.LivingEntity;
@@ -28,9 +29,9 @@ public class BlockCustomSlab extends Block implements IBlockWithItem
 
 	private static final AxisAlignedBB AABB_TOP_HALF = new AxisAlignedBB(0.0D, 0.5D, 0.0D, 1.0D, 1.0D, 1.0D);
 
-	public BlockCustomSlab(final Material material)
+	public BlockCustomSlab(final Block.Properties properties)
 	{
-		super(material);
+		super(properties);
 
 		this.setLightOpacity(0);
 
@@ -38,17 +39,9 @@ public class BlockCustomSlab extends Block implements IBlockWithItem
 	}
 
 	@Override
-	public BlockCustomSlab setSoundType(final SoundType type)
-	{
-		super.setSoundType(type);
-
-		return this;
-	}
-
-	@Override
 	public int getLightOpacity(final BlockState state)
 	{
-		return state.getValue(PROPERTY_SLAB_STATE) == EnumSlabPart.FULL_BLOCK ? 255 : 0;
+		return state.get(PROPERTY_SLAB_STATE) == EnumSlabPart.FULL_BLOCK ? 255 : 0;
 	}
 
 	@Override
@@ -59,7 +52,7 @@ public class BlockCustomSlab extends Block implements IBlockWithItem
 			return true;
 		}
 
-		final EnumSlabPart slabState = state.getValue(PROPERTY_SLAB_STATE);
+		final EnumSlabPart slabState = state.get(PROPERTY_SLAB_STATE);
 
 		return (slabState == EnumSlabPart.TOP_HALF && face == Direction.UP) || (slabState == EnumSlabPart.BOTTOM_HALF
 				&& face == Direction.DOWN);
@@ -68,44 +61,44 @@ public class BlockCustomSlab extends Block implements IBlockWithItem
 	@Override
 	public BlockState getStateFromMeta(final int meta)
 	{
-		return this.getDefaultState().withProperty(PROPERTY_SLAB_STATE, EnumSlabPart.VALUES[meta]);
+		return this.getDefaultState().with(PROPERTY_SLAB_STATE, EnumSlabPart.VALUES[meta]);
 	}
 
 	@Override
 	public int getMetaFromState(final BlockState state)
 	{
-		return state.getValue(PROPERTY_SLAB_STATE).ordinal();
+		return state.get(PROPERTY_SLAB_STATE).ordinal();
 	}
 
 	@Override
 	@Deprecated
 	public boolean isFullBlock(final BlockState state)
 	{
-		return state.getValue(PROPERTY_SLAB_STATE) == EnumSlabPart.FULL_BLOCK;
+		return state.get(PROPERTY_SLAB_STATE) == EnumSlabPart.FULL_BLOCK;
 	}
 
 	@Override
 	public boolean isFullCube(final BlockState state)
 	{
-		return state.getValue(PROPERTY_SLAB_STATE) == EnumSlabPart.FULL_BLOCK;
+		return state.get(PROPERTY_SLAB_STATE) == EnumSlabPart.FULL_BLOCK;
 	}
 
 	@Override
 	public boolean isOpaqueCube(final BlockState state)
 	{
-		return state.getValue(PROPERTY_SLAB_STATE) == EnumSlabPart.FULL_BLOCK;
+		return state.get(PROPERTY_SLAB_STATE) == EnumSlabPart.FULL_BLOCK;
 	}
 
 	@Override
 	public int quantityDropped(final BlockState state, final int fortune, final Random random)
 	{
-		return state.getValue(PROPERTY_SLAB_STATE) == EnumSlabPart.FULL_BLOCK ? 2 : 1;
+		return state.get(PROPERTY_SLAB_STATE) == EnumSlabPart.FULL_BLOCK ? 2 : 1;
 	}
 
 	@Override
 	public AxisAlignedBB getBoundingBox(final BlockState state, final IBlockReader source, final BlockPos pos)
 	{
-		switch (state.getValue(PROPERTY_SLAB_STATE))
+		switch (state.get(PROPERTY_SLAB_STATE))
 		{
 			case BOTTOM_HALF:
 				return AABB_BOTTOM_HALF;
@@ -121,9 +114,9 @@ public class BlockCustomSlab extends Block implements IBlockWithItem
 			final float hitZ, final int meta,
 			final LivingEntity placer)
 	{
-		final BlockState state = this.getDefaultState().withProperty(PROPERTY_SLAB_STATE, EnumSlabPart.BOTTOM_HALF);
+		final BlockState state = this.getDefaultState().with(PROPERTY_SLAB_STATE, EnumSlabPart.BOTTOM_HALF);
 
-		if (state.getValue(PROPERTY_SLAB_STATE) == EnumSlabPart.FULL_BLOCK)
+		if (state.get(PROPERTY_SLAB_STATE) == EnumSlabPart.FULL_BLOCK)
 		{
 			return state;
 		}
@@ -131,11 +124,11 @@ public class BlockCustomSlab extends Block implements IBlockWithItem
 		{
 			if (facing != Direction.DOWN && (facing == Direction.UP || (double) hitY <= 0.5D))
 			{
-				return state.withProperty(PROPERTY_SLAB_STATE, EnumSlabPart.BOTTOM_HALF);
+				return state.with(PROPERTY_SLAB_STATE, EnumSlabPart.BOTTOM_HALF);
 			}
 			else
 			{
-				return state.withProperty(PROPERTY_SLAB_STATE, EnumSlabPart.TOP_HALF);
+				return state.with(PROPERTY_SLAB_STATE, EnumSlabPart.TOP_HALF);
 			}
 		}
 	}
@@ -143,15 +136,15 @@ public class BlockCustomSlab extends Block implements IBlockWithItem
 	@Override
 	public VoxelShape getBlockFaceShape(IBlockReader worldIn, BlockState state, BlockPos pos, Direction face)
 	{
-		if (state.getValue(PROPERTY_SLAB_STATE) == EnumSlabPart.FULL_BLOCK)
+		if (state.get(PROPERTY_SLAB_STATE) == EnumSlabPart.FULL_BLOCK)
 		{
 			return VoxelShape.SOLID;
 		}
-		else if (face == Direction.UP && state.getValue(PROPERTY_SLAB_STATE) == EnumSlabPart.TOP_HALF)
+		else if (face == Direction.UP && state.get(PROPERTY_SLAB_STATE) == EnumSlabPart.TOP_HALF)
 		{
 			return VoxelShape.SOLID;
 		}
-		else if (face == Direction.DOWN && state.getValue(PROPERTY_SLAB_STATE) == EnumSlabPart.BOTTOM_HALF)
+		else if (face == Direction.DOWN && state.get(PROPERTY_SLAB_STATE) == EnumSlabPart.BOTTOM_HALF)
 		{
 			return VoxelShape.SOLID;
 		}
@@ -162,13 +155,13 @@ public class BlockCustomSlab extends Block implements IBlockWithItem
 	@Override
 	public boolean isTopSolid(BlockState state)
 	{
-		return state.getValue(PROPERTY_SLAB_STATE) == EnumSlabPart.TOP_HALF || state.getValue(PROPERTY_SLAB_STATE) == EnumSlabPart.FULL_BLOCK;
+		return state.get(PROPERTY_SLAB_STATE) == EnumSlabPart.TOP_HALF || state.get(PROPERTY_SLAB_STATE) == EnumSlabPart.FULL_BLOCK;
 	}
 
 	@Override
-	public BlockStateContainer createBlockState()
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
-		return new BlockStateContainer(this, PROPERTY_SLAB_STATE);
+		builder.add(PROPERTY_SLAB_STATE);
 	}
 
 	@Override

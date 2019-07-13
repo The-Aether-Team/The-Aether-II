@@ -13,12 +13,17 @@ import javax.annotation.Nullable;
 
 public abstract class BlockNaturalLeaves extends BlockAetherLeaves
 {
+	public BlockNaturalLeaves(Properties properties)
+	{
+		super(properties);
+	}
+
 	@Override
 	public void harvestBlock(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack)
 	{
 		super.harvestBlock(worldIn, player, pos, state, te, stack);
 
-		if (!worldIn.isRemote && state.getValue(DECAYABLE) && worldIn.rand.nextInt(15) == 0)
+		if (!worldIn.isRemote && state.get(DECAYABLE) && worldIn.rand.nextInt(15) == 0)
 		{
 			EntitySkyrootLizard.Type type = EntitySkyrootLizard.Type.getFromWoodType(this.getWoodBlock());
 

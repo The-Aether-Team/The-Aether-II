@@ -2,13 +2,13 @@ package com.gildedgames.aether.client.renderer.entities.attachments;
 
 import com.gildedgames.aether.client.models.entities.attachments.ModelParachute;
 import com.gildedgames.aether.common.entities.blocks.EntityParachute;
-import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class RenderParachute extends Render<EntityParachute>
+public class RenderParachute extends EntityRenderer<EntityParachute>
 {
 
 	private final ModelParachute model = new ModelParachute();

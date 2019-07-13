@@ -6,7 +6,7 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTeleportingModule;
 import net.minecraft.block.*;
-import net.minecraft.block.BlockBreakable;
+import net.minecraft.block.BreakableBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.block.state.BlockStateContainer;
@@ -14,6 +14,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.block.Blocks;
+import net.minecraft.state.StateContainer;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -26,7 +27,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class BlockAetherPortal extends BlockBreakable
+public class BlockAetherPortal extends BreakableBlock
 {
 	public static final EnumProperty<Direction.Axis> PROPERTY_AXIS = EnumProperty.create("axis", Direction.Axis.class,
 			Direction.Axis.X, Direction.Axis.Z);
@@ -35,18 +36,11 @@ public class BlockAetherPortal extends BlockBreakable
 			Z_AABB = new AxisAlignedBB(0.375D, 0.0D, 0.0D, 0.625D, 1.0D, 1.0D),
 			Y_AABB = new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 1.0D, 0.625D);
 
-	public BlockAetherPortal()
+	public BlockAetherPortal(Block.Properties properties)
 	{
-		super(Material.PORTAL, false);
+		super(properties);
 
-		this.setSoundType(SoundType.GLASS);
-
-		this.setHardness(-1.0F);
-		this.setLightLevel(0.75F);
-
-		this.setTickRandomly(true);
-
-		this.setDefaultState(this.blockState.getBaseState().withProperty(PROPERTY_AXIS, Direction.Axis.X));
+		this.setDefaultState(this.blockState.getBaseState().with(PROPERTY_AXIS, Direction.Axis.X));
 	}
 
 	public static int getMetaForAxis(Direction.Axis axis)
@@ -63,7 +57,7 @@ public class BlockAetherPortal extends BlockBreakable
 	@Override
 	public AxisAlignedBB getBoundingBox(BlockState state, IBlockReader source, BlockPos pos)
 	{
-		switch (state.getValue(PROPERTY_AXIS))
+		switch (state.get(PROPERTY_AXIS))
 		{
 			case X:
 				return X_AABB;
@@ -131,7 +125,7 @@ public class BlockAetherPortal extends BlockBreakable
 
 		if (world.getBlockState(pos).getBlock() == this)
 		{
-			axis = state.getValue(PROPERTY_AXIS);
+			axis = state.get(PROPERTY_AXIS);
 
 			if (axis == Direction.Axis.Z && side != Direction.EAST && side != Direction.WEST)
 			{
@@ -174,12 +168,12 @@ public class BlockAetherPortal extends BlockBreakable
 		{
 			case COUNTERCLOCKWISE_90:
 			case CLOCKWISE_90:
-				switch (state.getValue(PROPERTY_AXIS))
+				switch (state.get(PROPERTY_AXIS))
 				{
 					case X:
-						return state.withProperty(PROPERTY_AXIS, Direction.Axis.Z);
+						return state.with(PROPERTY_AXIS, Direction.Axis.Z);
 					case Z:
-						return state.withProperty(PROPERTY_AXIS, Direction.Axis.X);
+						return state.with(PROPERTY_AXIS, Direction.Axis.X);
 					default:
 						return state;
 				}
@@ -192,19 +186,19 @@ public class BlockAetherPortal extends BlockBreakable
 	@Override
 	public int getMetaFromState(BlockState state)
 	{
-		return getMetaForAxis(state.getValue(PROPERTY_AXIS));
+		return getMetaForAxis(state.get(PROPERTY_AXIS));
 	}
 
 	@Override
 	public BlockState getStateFromMeta(int meta)
 	{
-		return this.getDefaultState().withProperty(PROPERTY_AXIS, (meta & 3) == 2 ? Direction.Axis.Z : Direction.Axis.X);
+		return this.getDefaultState().with(PROPERTY_AXIS, (meta & 3) == 2 ? Direction.Axis.Z : Direction.Axis.X);
 	}
 
 	@Override
-	public void neighborChanged(BlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos)
+	public void neighborChanged(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean p_220069_6_)
 	{
-		final Direction.Axis axis = state.getValue(PROPERTY_AXIS);
+		final Direction.Axis axis = state.get(PROPERTY_AXIS);
 
 		if (axis == Direction.Axis.X || axis == Direction.Axis.Z)
 		{
@@ -224,9 +218,9 @@ public class BlockAetherPortal extends BlockBreakable
 	}
 
 	@Override
-	protected BlockStateContainer createBlockState()
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
-		return new BlockStateContainer(this, PROPERTY_AXIS);
+		builder.add(PROPERTY_AXIS);
 	}
 
 	@Override
@@ -411,7 +405,7 @@ public class BlockAetherPortal extends BlockBreakable
 				for (int j = 0; j < this.height; ++j)
 				{
 					this.world.setBlockState(blockpos.up(j),
-							BlocksAether.aether_portal.getDefaultState().withProperty(BlockAetherPortal.PROPERTY_AXIS, this.axis), 2);
+							BlocksAether.aether_portal.getDefaultState().with(BlockAetherPortal.PROPERTY_AXIS, this.axis), 2);
 				}
 			}
 		}

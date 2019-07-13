@@ -14,7 +14,7 @@ public class TileEntityMasonryBench extends TileEntitySynced
 
 		if (state.getBlock() == BlocksAether.masonry_bench)
 		{
-			return state.getValue(BlockMasonryBench.PROPERTY_FACING);
+			return state.get(BlockMasonryBench.PROPERTY_FACING);
 		}
 
 		return Direction.NORTH;

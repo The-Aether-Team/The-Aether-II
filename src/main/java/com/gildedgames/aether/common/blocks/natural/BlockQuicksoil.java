@@ -10,13 +10,9 @@ import net.minecraft.world.IBlockReader;
 
 public class BlockQuicksoil extends Block
 {
-	public BlockQuicksoil()
+	public BlockQuicksoil(Block.Properties properties)
 	{
-		super(Material.SAND);
-
-		this.setHardness(1.5f);
-
-		this.setSoundType(SoundType.SAND);
+		super(properties);
 	}
 
 	@Override

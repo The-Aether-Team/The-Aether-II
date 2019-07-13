@@ -14,13 +14,9 @@ public class BlockIcestoneBricks extends Block
 {
 	private static final int EFFECT_RADIUS = 3;
 
-	public BlockIcestoneBricks()
+	public BlockIcestoneBricks(Block.Properties properties)
 	{
-		super(Material.ROCK);
-
-		this.setHardness(3f);
-
-		this.setSoundType(SoundType.GLASS);
+		super(properties);
 	}
 
 	@Override
@@ -52,7 +48,7 @@ public class BlockIcestoneBricks extends Block
 
 		if (block == Blocks.WATER)
 		{
-			return state.getValue(BlockLiquid.LEVEL) == 0 ? Blocks.ICE.getDefaultState() : null;
+			return state.get(BlockLiquid.LEVEL) == 0 ? Blocks.ICE.getDefaultState() : null;
 		}
 		else if (block == Blocks.LAVA)
 		{

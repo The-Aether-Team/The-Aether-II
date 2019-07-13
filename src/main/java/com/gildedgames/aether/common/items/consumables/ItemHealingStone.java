@@ -40,7 +40,7 @@ public class ItemHealingStone extends Item implements IDropOnDeath
 
 		tag.putInt("usesLeft", MAX_USES);
 
-		stack.setTagCompound(tag);
+		stack.setTag(tag);
 	}
 
 	public static int getUsesLeft(ItemStack stack)
@@ -50,12 +50,12 @@ public class ItemHealingStone extends Item implements IDropOnDeath
 			return 0;
 		}
 
-		if (stack.getTagCompound() == null)
+		if (stack.getTag() == null)
 		{
 			initTagCompound(stack);
 		}
 
-		return stack.getTagCompound().getInt("usesLeft");
+		return stack.getTag().getInt("usesLeft");
 	}
 
 	public static void setUsesLeft(ItemStack stack, int usesLeft)
@@ -65,12 +65,12 @@ public class ItemHealingStone extends Item implements IDropOnDeath
 			return;
 		}
 
-		if (stack.getTagCompound() == null)
+		if (stack.getTag() == null)
 		{
 			initTagCompound(stack);
 		}
 
-		stack.getTagCompound().putInt("usesLeft", usesLeft);
+		stack.getTag().putInt("usesLeft", usesLeft);
 	}
 
 	@Override

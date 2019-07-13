@@ -6,7 +6,6 @@ import com.gildedgames.aether.api.shop.ICurrencyListener;
 import com.gildedgames.aether.api.shop.IGuiCurrencyValue;
 import com.gildedgames.aether.api.shop.IShopCurrency;
 import com.gildedgames.aether.client.gui.dialog.GuiPumpkinCurrency;
-import com.gildedgames.aether.common.blocks.natural.plants.BlockPlumproot;
 import com.gildedgames.orbis.lib.client.rect.Rect;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.player.PlayerEntity;
@@ -70,7 +69,7 @@ public class ShopCurrencyPlumproot implements IShopCurrency
 			{
 				BlockItem block = (BlockItem) stack.getItem();
 
-				if (block.getBlock() instanceof BlockPlumproot)
+				if (block.getBlock() == BlocksAether.plumproot)
 				{
 					long reduce = Math.min(64, count);
 
@@ -135,7 +134,7 @@ public class ShopCurrencyPlumproot implements IShopCurrency
 			{
 				BlockItem block = (BlockItem) stack.getItem();
 
-				if (block.getBlock() instanceof BlockPlumproot)
+				if (block.getBlock() == BlocksAether.plumproot)
 				{
 					count += stack.getCount();
 				}

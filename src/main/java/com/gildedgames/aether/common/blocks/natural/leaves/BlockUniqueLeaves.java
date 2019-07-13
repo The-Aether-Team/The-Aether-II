@@ -3,14 +3,17 @@ package com.gildedgames.aether.common.blocks.natural.leaves;
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherUniqueSapling;
 import com.gildedgames.aether.common.blocks.natural.wood.AetherWoodType;
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
 public class BlockUniqueLeaves extends BlockAetherLeaves
 {
 	private final AetherWoodType type;
 
-	public BlockUniqueLeaves(AetherWoodType type)
+	public BlockUniqueLeaves(Block.Properties properties, AetherWoodType type)
 	{
+		super(properties);
+
 		this.type = type;
 	}
 

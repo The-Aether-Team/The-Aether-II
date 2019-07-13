@@ -25,8 +25,8 @@ public class ItemSwetJelly extends ItemAetherFood
 
 	static
 	{
-		ItemSwetJelly.growables.put(Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT), Blocks.GRASS.getDefaultState());
-		ItemSwetJelly.growables.put(BlocksAether.aether_dirt.getDefaultState().withProperty(BlockAetherDirt.PROPERTY_VARIANT, BlockAetherDirt.DIRT),
+		ItemSwetJelly.growables.put(Blocks.DIRT.getDefaultState().with(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT), Blocks.GRASS.getDefaultState());
+		ItemSwetJelly.growables.put(BlocksAether.aether_dirt.getDefaultState().with(BlockAetherDirt.PROPERTY_VARIANT, BlockAetherDirt.DIRT),
 				BlocksAether.aether_grass.getDefaultState());
 	}
 

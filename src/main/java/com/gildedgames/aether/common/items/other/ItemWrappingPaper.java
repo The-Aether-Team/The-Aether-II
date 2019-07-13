@@ -18,7 +18,7 @@ public class ItemWrappingPaper extends Item implements IDropOnDeath
 
 	public static PresentDyeData getDyeData(final ItemStack stack)
 	{
-		return PresentDyeData.readFromNBT(stack.getTagCompound());
+		return PresentDyeData.readFromNBT(stack.getTag());
 	}
 
 	@Override

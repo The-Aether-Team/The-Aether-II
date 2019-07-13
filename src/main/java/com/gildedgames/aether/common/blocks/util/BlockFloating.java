@@ -13,9 +13,9 @@ import java.util.Random;
 
 public class BlockFloating extends Block
 {
-	public BlockFloating(Material material)
+	public BlockFloating(Properties properties)
 	{
-		super(material);
+		super(properties);
 	}
 
 	public static boolean canFallInto(World world, BlockPos pos)
@@ -39,13 +39,13 @@ public class BlockFloating extends Block
 	}
 
 	@Override
-	public void neighborChanged(BlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos)
+	public void neighborChanged(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean p_220069_6_)
 	{
 		world.scheduleUpdate(pos, this, this.tickRate(world));
 	}
 
 	@Override
-	public void updateTick(World world, BlockPos pos, BlockState state, Random rand)
+	public void tick(BlockState state, World world, BlockPos pos, Random random)
 	{
 		if (!world.isRemote)
 		{
@@ -72,7 +72,7 @@ public class BlockFloating extends Block
 			}
 			else
 			{
-				world.setBlockToAir(pos);
+				world.removeBlock(pos, false);
 
 				BlockPos bottomPos = pos.down();
 

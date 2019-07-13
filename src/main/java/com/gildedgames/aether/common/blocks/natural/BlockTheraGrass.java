@@ -6,7 +6,7 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
 import net.minecraft.block.*;
-import net.minecraft.block.BlockGrass;
+import net.minecraft.block.GrassBlock;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.BlockState;
@@ -15,6 +15,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.state.StateContainer;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -25,7 +26,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Random;
 
-public class BlockTheraGrass extends BlockGrass implements IBlockMultiName
+public class BlockTheraGrass extends GrassBlock implements IBlockMultiName
 {
 	public static final BlockVariant NORMAL = new BlockVariant(0, "normal");
 
@@ -33,16 +34,11 @@ public class BlockTheraGrass extends BlockGrass implements IBlockMultiName
 
 	public static final BooleanProperty SNOWY = BooleanProperty.create("snowy");
 
-	public BlockTheraGrass()
+	public BlockTheraGrass(Block.Properties properties)
 	{
-		super();
+		super(properties.tickRandomly().doesNotBlockMovement());
 
-		this.setSoundType(SoundType.PLANT);
-
-		this.setHardness(0.5F);
-		this.setTickRandomly(true);
-
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, NORMAL).withProperty(SNOWY, Boolean.FALSE));
+		this.setDefaultState(this.stateContainer.getBaseState().with(PROPERTY_VARIANT, NORMAL).with(SNOWY, Boolean.FALSE));
 	}
 
 	@Override
@@ -60,13 +56,13 @@ public class BlockTheraGrass extends BlockGrass implements IBlockMultiName
 	{
 		final Block block = worldIn.getBlockState(pos.up()).getBlock();
 
-		return state.withProperty(SNOWY, block == Blocks.SNOW || block == Blocks.SNOW_LAYER);
+		return state.with(SNOWY, block == Blocks.SNOW || block == Blocks.SNOW_LAYER);
 	}
 
 	@Override
-	public void updateTick(final World world, final BlockPos pos, final BlockState state, final Random rand)
+	public void tick(BlockState state, World world, BlockPos pos, Random rand)
 	{
-		if (!world.isRemote && state.getValue(PROPERTY_VARIANT) == NORMAL)
+		if (!world.isRemote && state.get(PROPERTY_VARIANT) == NORMAL)
 		{
 			if (world.getLightFromNeighbors(pos.up()) < 4 && world.getBlockState(pos.up()).getLightOpacity(world, pos.up()) > 2)
 			{
@@ -93,7 +89,7 @@ public class BlockTheraGrass extends BlockGrass implements IBlockMultiName
 								world.getLightFromNeighbors(randomNeighbor.up()) >= 4
 								&& aboveState.getLightOpacity(world, randomNeighbor.up()) <= 2)
 						{
-							final BlockState grassState = this.getDefaultState().withProperty(PROPERTY_VARIANT, NORMAL);
+							final BlockState grassState = this.getDefaultState().with(PROPERTY_VARIANT, NORMAL);
 
 							world.setBlockState(randomNeighbor, grassState);
 						}
@@ -114,25 +110,25 @@ public class BlockTheraGrass extends BlockGrass implements IBlockMultiName
 	{
 		final BlockVariant variant = PROPERTY_VARIANT.fromMeta(meta);
 
-		return this.getDefaultState().withProperty(PROPERTY_VARIANT, variant);
+		return this.getDefaultState().with(PROPERTY_VARIANT, variant);
 	}
 
 	@Override
 	public ItemStack getPickBlock(final BlockState state, final RayTraceResult target, final World world, final BlockPos pos, final PlayerEntity player)
 	{
-		return new ItemStack(this, 1, state.getValue(PROPERTY_VARIANT).getMeta());
+		return new ItemStack(this, 1, state.get(PROPERTY_VARIANT).getMeta());
 	}
 
 	@Override
 	public int getMetaFromState(final BlockState state)
 	{
-		return state.getValue(PROPERTY_VARIANT).getMeta();
+		return state.get(PROPERTY_VARIANT).getMeta();
 	}
 
 	@Override
-	protected BlockStateContainer createBlockState()
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
-		return new BlockStateContainer(this, SNOWY, PROPERTY_VARIANT);
+		builder.add(PROPERTY_VARIANT, SNOWY);
 	}
 
 	@Override
@@ -186,12 +182,12 @@ public class BlockTheraGrass extends BlockGrass implements IBlockMultiName
 						if (randFlower >= 2)
 						{
 							worldIn.setBlockState(nextPos, BlocksAether.aether_flower.getDefaultState()
-									.withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.WHITE_ROSE));
+									.with(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.WHITE_ROSE));
 						}
 						else
 						{
 							worldIn.setBlockState(nextPos, BlocksAether.aether_flower.getDefaultState()
-									.withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.PURPLE_FLOWER));
+									.with(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.PURPLE_FLOWER));
 						}
 					}
 					else

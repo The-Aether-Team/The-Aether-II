@@ -33,7 +33,7 @@ public class BiomeForgottenHighlands extends BiomeAetherBase
 	{
 		super(properties, registryName);
 
-		this.topBlock = BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.AETHER);
+		this.topBlock = BlocksAether.aether_grass.getDefaultState().with(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.AETHER);
 	}
 
 	@Override

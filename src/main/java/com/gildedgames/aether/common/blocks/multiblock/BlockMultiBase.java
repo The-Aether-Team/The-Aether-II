@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.blocks.multiblock;
 
 import com.gildedgames.aether.api.world.IWorldObjectHoverable;
 import com.gildedgames.aether.common.entities.tiles.multiblock.ITileEntityMultiblock;
+import net.minecraft.block.Block;
 import net.minecraft.block.ContainerBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
@@ -13,13 +14,14 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 public abstract class BlockMultiBase extends ContainerBlock implements IWorldObjectHoverable
 {
-	public BlockMultiBase(Material material)
+	public BlockMultiBase()
 	{
-		super(material);
+		super(Block.Properties.create(Material.ROCK).hardnessAndResistance(-1.0F, 6000000.0F));
 	}
 
 	@Override
@@ -63,7 +65,7 @@ public abstract class BlockMultiBase extends ContainerBlock implements IWorldObj
 	}
 
 	@Override
-	public abstract TileEntity createNewTileEntity(World worldIn, int meta);
+	public abstract TileEntity createNewTileEntity(IBlockReader reader);
 
 	@Override
 	public ItemStack getPickBlock(BlockState state, RayTraceResult target, World world, BlockPos pos, PlayerEntity player)

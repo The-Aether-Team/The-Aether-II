@@ -20,7 +20,7 @@ public class BlockAetherWisprootSapling extends BlockAetherSapling
 	@Override
 	public BlueprintDefinition getBlueprint(BlockState state)
 	{
-		BlockVariant variant = state.getValue(PROPERTY_VARIANT);
+		BlockVariant variant = state.get(PROPERTY_VARIANT);
 
 		if (variant == BlockAetherWisprootSapling.GREEN)
 		{

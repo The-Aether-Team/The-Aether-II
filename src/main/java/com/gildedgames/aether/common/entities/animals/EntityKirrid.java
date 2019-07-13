@@ -20,9 +20,9 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.passive.SheepEntity;
+import net.minecraft.item.DyeColor;
 import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
@@ -177,7 +177,7 @@ public class EntityKirrid extends SheepEntity implements IEntityMultiPart, IEnti
 	{
 		livingdata = super.onInitialSpawn(difficulty, livingdata);
 
-		this.setFleeceColor(EnumDyeColor.WHITE);
+		this.setFleeceColor(DyeColor.WHITE);
 
 		return livingdata;
 	}

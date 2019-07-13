@@ -10,6 +10,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.state.EnumProperty;
+import net.minecraft.state.StateContainer;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.item.ItemGroup;
@@ -45,21 +46,16 @@ public class BlockAercloud extends Block implements IBlockMultiName
 
 	private static final AxisAlignedBB AERCLOUD_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.3D, 1.0D);
 
-	public BlockAercloud()
+	public BlockAercloud(Block.Properties properties)
 	{
-		super(Material.ICE);
+		super(properties);
 
-		this.setSoundType(SoundType.CLOTH);
-
-		this.setHardness(0.2f);
-		this.setLightOpacity(0);
-
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, COLD_AERCLOUD).withProperty(PROPERTY_FACING, Direction.NORTH));
+		this.setDefaultState(this.stateContainer.getBaseState().with(PROPERTY_VARIANT, COLD_AERCLOUD).with(PROPERTY_FACING, Direction.NORTH));
 	}
 
 	public static BlockState getAercloudState(final BlockVariant variant)
 	{
-		return BlocksAether.aercloud.getDefaultState().withProperty(BlockAercloud.PROPERTY_VARIANT, variant);
+		return BlocksAether.aercloud.getDefaultState().with(BlockAercloud.PROPERTY_VARIANT, variant);
 	}
 
 	@Override
@@ -89,7 +85,7 @@ public class BlockAercloud extends Block implements IBlockMultiName
 
 		if (block == this)
 		{
-			if (state.getValue(PROPERTY_VARIANT) != offsetState.getValue(PROPERTY_VARIANT))
+			if (state.get(PROPERTY_VARIANT) != offsetState.getValue(PROPERTY_VARIANT))
 			{
 				return true;
 			}
@@ -111,7 +107,7 @@ public class BlockAercloud extends Block implements IBlockMultiName
 
 		final boolean canCollide = !entity.isSneaking() && !(entity instanceof PlayerEntity && ((PlayerEntity) entity).capabilities.isFlying);
 
-		final BlockVariant variant = state.getValue(PROPERTY_VARIANT);
+		final BlockVariant variant = state.get(PROPERTY_VARIANT);
 
 		if (!canCollide || variant == COLD_AERCLOUD || variant == STORM_AERCLOUD)
 		{
@@ -141,7 +137,7 @@ public class BlockAercloud extends Block implements IBlockMultiName
 		}
 		else if (variant == GREEN_AERCLOUD || variant == PURPLE_AERCLOUD)
 		{
-			final Direction facing = variant == GREEN_AERCLOUD ? Direction.random(world.rand) : state.getValue(PROPERTY_FACING);
+			final Direction facing = variant == GREEN_AERCLOUD ? Direction.random(world.rand) : state.get(PROPERTY_FACING);
 
 			entity.motionX = facing.getXOffset() * 2.5D;
 			entity.motionZ = facing.getZOffset() * 2.5D;
@@ -156,13 +152,13 @@ public class BlockAercloud extends Block implements IBlockMultiName
 	@OnlyIn(Dist.CLIENT)
 	public void randomDisplayTick(final BlockState state, final World world, final BlockPos pos, final Random rand)
 	{
-		if (state.getValue(PROPERTY_VARIANT) == PURPLE_AERCLOUD)
+		if (state.get(PROPERTY_VARIANT) == PURPLE_AERCLOUD)
 		{
 			final float x = pos.getX() + (rand.nextFloat() * 0.7f) + 0.15f;
 			final float y = pos.getY() + (rand.nextFloat() * 0.7f) + 0.15f;
 			final float z = pos.getZ() + (rand.nextFloat() * 0.7f) + 0.15f;
 
-			final Direction facing = state.getValue(PROPERTY_FACING);
+			final Direction facing = state.get(PROPERTY_FACING);
 
 			final float motionX = facing.getXOffset() * ((rand.nextFloat() * 0.01f) + 0.05f);
 			final float motionZ = facing.getZOffset() * ((rand.nextFloat() * 0.01f) + 0.05f);
@@ -198,7 +194,7 @@ public class BlockAercloud extends Block implements IBlockMultiName
 	@Override
 	public AxisAlignedBB getCollisionBoundingBox(final BlockState state, final IBlockReader world, final BlockPos pos)
 	{
-		final BlockVariant variant = state.getValue(PROPERTY_VARIANT);
+		final BlockVariant variant = state.get(PROPERTY_VARIANT);
 
 		if (variant == BlockAercloud.COLD_AERCLOUD || variant == BlockAercloud.STORM_AERCLOUD)
 		{
@@ -213,34 +209,34 @@ public class BlockAercloud extends Block implements IBlockMultiName
 	{
 		if (meta >= PURPLE_AERCLOUD.getMeta())
 		{
-			return this.getDefaultState().withProperty(PROPERTY_VARIANT, PURPLE_AERCLOUD)
-					.withProperty(PROPERTY_FACING, Direction.byHorizontalIndex(meta - PURPLE_AERCLOUD.getMeta()));
+			return this.getDefaultState().with(PROPERTY_VARIANT, PURPLE_AERCLOUD)
+					.with(PROPERTY_FACING, Direction.byHorizontalIndex(meta - PURPLE_AERCLOUD.getMeta()));
 		}
 
-		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta));
+		return this.getDefaultState().with(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta));
 	}
 
 	@Override
 	public int getMetaFromState(final BlockState state)
 	{
-		if (state.getValue(PROPERTY_VARIANT) == PURPLE_AERCLOUD)
+		if (state.get(PROPERTY_VARIANT) == PURPLE_AERCLOUD)
 		{
-			return PURPLE_AERCLOUD.getMeta() + state.getValue(PROPERTY_FACING).getHorizontalIndex();
+			return PURPLE_AERCLOUD.getMeta() + state.get(PROPERTY_FACING).getHorizontalIndex();
 		}
 
-		return state.getValue(PROPERTY_VARIANT).getMeta();
+		return state.get(PROPERTY_VARIANT).getMeta();
 	}
 
 	@Override
 	public int damageDropped(final BlockState state)
 	{
-		return state.getValue(PROPERTY_VARIANT).getMeta();
+		return state.get(PROPERTY_VARIANT).getMeta();
 	}
 
 	@Override
-	protected BlockStateContainer createBlockState()
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
-		return new BlockStateContainer(this, PROPERTY_VARIANT, PROPERTY_FACING);
+		builder.add(PROPERTY_VARIANT, PROPERTY_FACING);
 	}
 
 	@Override
@@ -248,7 +244,7 @@ public class BlockAercloud extends Block implements IBlockMultiName
 			final float hitZ, final int meta,
 			final LivingEntity placer)
 	{
-		return this.getStateFromMeta(meta).withProperty(PROPERTY_FACING, placer.getHorizontalFacing().getOpposite());
+		return this.getStateFromMeta(meta).with(PROPERTY_FACING, placer.getHorizontalFacing().getOpposite());
 
 	}
 

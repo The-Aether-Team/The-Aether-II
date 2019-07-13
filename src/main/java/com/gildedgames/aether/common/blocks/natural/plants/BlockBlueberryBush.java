@@ -15,6 +15,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.state.StateContainer;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -37,15 +38,9 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IBlockMultiN
 
 	private static final AxisAlignedBB BUSH_AABB = new AxisAlignedBB(0.2D, 0.0D, 0.2D, 0.8D, 0.8D, 0.8D);
 
-	public BlockBlueberryBush()
+	public BlockBlueberryBush(Block.Properties properties)
 	{
-		super(Material.LEAVES);
-
-		this.setHardness(1.0f);
-
-		this.setSoundType(SoundType.PLANT);
-
-		this.setTickRandomly(true);
+		super(properties);
 	}
 
 	@Override
@@ -70,11 +65,11 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IBlockMultiN
 	@Override
 	public boolean removedByPlayer(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final boolean willHarvest)
 	{
-		if (state.getValue(PROPERTY_HARVESTABLE))
+		if (state.get(PROPERTY_HARVESTABLE))
 		{
 			if (player.isCreative())
 			{
-				world.setBlockToAir(pos);
+				world.removeBlock(pos, false);
 
 				return false;
 			}
@@ -87,7 +82,7 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IBlockMultiN
 				}
 			}
 
-			world.setBlockState(pos, state.withProperty(PROPERTY_HARVESTABLE, false));
+			world.setBlockState(pos, state.with(PROPERTY_HARVESTABLE, false));
 
 			return false;
 		}
@@ -114,21 +109,21 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IBlockMultiN
 		final boolean applyBonus = stateUnderneath.getBlock() == BlocksAether.aether_grass
 				&& stateUnderneath.getValue(BlockAetherGrass.PROPERTY_VARIANT) == BlockAetherGrass.ENCHANTED;
 
-		final int count = state.getValue(PROPERTY_HARVESTABLE) ? (rand.nextInt(2) + (applyBonus ? 2 : 1)) : 0;
+		final int count = state.get(PROPERTY_HARVESTABLE) ? (rand.nextInt(2) + (applyBonus ? 2 : 1)) : 0;
 
 		return Lists.newArrayList(new ItemStack(ItemsAether.blueberries, count));
 	}
 
 	@Override
-	public void updateTick(final World world, final BlockPos pos, final BlockState state, final Random random)
+	public void tick(BlockState state, World world, BlockPos pos, Random rand)
 	{
-		if (!state.getValue(PROPERTY_HARVESTABLE))
+		if (!state.get(PROPERTY_HARVESTABLE))
 		{
 			if (world.getLight(pos) >= 9)
 			{
-				if (random.nextInt(60) == 0)
+				if (rand.nextInt(60) == 0)
 				{
-					world.setBlockState(pos, state.withProperty(PROPERTY_HARVESTABLE, true));
+					world.setBlockState(pos, state.with(PROPERTY_HARVESTABLE, true));
 				}
 			}
 		}
@@ -143,56 +138,56 @@ public class BlockBlueberryBush extends BlockAetherPlant implements IBlockMultiN
 	@Override
 	public boolean canGrow(final World worldIn, final BlockPos pos, final BlockState state, final boolean isClient)
 	{
-		return !state.getValue(PROPERTY_HARVESTABLE);
+		return !state.get(PROPERTY_HARVESTABLE);
 	}
 
 	@Override
 	public boolean canUseBonemeal(final World worldIn, final Random rand, final BlockPos pos, final BlockState state)
 	{
-		return !state.getValue(PROPERTY_HARVESTABLE);
+		return !state.get(PROPERTY_HARVESTABLE);
 	}
 
 	@Override
 	public void grow(final World world, final Random rand, final BlockPos pos, final BlockState state)
 	{
-		world.setBlockState(pos, state.withProperty(PROPERTY_HARVESTABLE, true));
+		world.setBlockState(pos, state.with(PROPERTY_HARVESTABLE, true));
 	}
 
 	@Override
 	public boolean isFullBlock(final BlockState state)
 	{
-		return state.getValue(PROPERTY_HARVESTABLE);
+		return state.get(PROPERTY_HARVESTABLE);
 	}
 
 	@Override
 	public BlockState getStateFromMeta(final int meta)
 	{
-		return this.getDefaultState().withProperty(PROPERTY_HARVESTABLE, meta == BERRY_BUSH_RIPE);
+		return this.getDefaultState().with(PROPERTY_HARVESTABLE, meta == BERRY_BUSH_RIPE);
 	}
 
 	@Override
 	public int getMetaFromState(final BlockState state)
 	{
-		return state.getValue(PROPERTY_HARVESTABLE) ? BERRY_BUSH_RIPE : BERRY_BUSH_STEM;
+		return state.get(PROPERTY_HARVESTABLE) ? BERRY_BUSH_RIPE : BERRY_BUSH_STEM;
 	}
 
 	@Override
-	protected BlockStateContainer createBlockState()
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
-		return new BlockStateContainer(this, PROPERTY_HARVESTABLE);
+		builder.add(PROPERTY_HARVESTABLE);
 	}
 
 	@Override
 	public AxisAlignedBB getBoundingBox(final BlockState state, final IBlockReader source, final BlockPos pos)
 	{
-		return state.getValue(PROPERTY_HARVESTABLE) ? FULL_BLOCK_AABB : BUSH_AABB;
+		return state.get(PROPERTY_HARVESTABLE) ? FULL_BLOCK_AABB : BUSH_AABB;
 	}
 
 	@Override
 	@Nullable
 	public AxisAlignedBB getCollisionBoundingBox(final BlockState state, final IBlockReader worldIn, final BlockPos pos)
 	{
-		return state.getValue(PROPERTY_HARVESTABLE) ? FULL_BLOCK_AABB : NULL_AABB;
+		return state.get(PROPERTY_HARVESTABLE) ? FULL_BLOCK_AABB : NULL_AABB;
 	}
 
 	@Override

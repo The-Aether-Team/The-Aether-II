@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.blocks.decorative;
 
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
+import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
@@ -18,16 +19,9 @@ public class BlockHolystoneDecorative extends BlockDecorative
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant
 			.create("variant", BASE_BRICKS, BASE_PILLAR, CAPSTONE_BRICKS, CAPSTONE_PILLAR, FLAGSTONES, HEADSTONE, KEYSTONE);
 
-	public BlockHolystoneDecorative()
+	public BlockHolystoneDecorative(Block.Properties properties)
 	{
-		super(Material.ROCK);
-
-		this.setHardness(2.0F);
-		this.setResistance(10.0F);
-
-		this.setSoundType(SoundType.STONE);
-
-		this.setHarvestLevel("pickaxe", 0);
+		super(properties);
 	}
 
 	@Override

@@ -33,13 +33,11 @@ public class BlockPresent extends ContainerBlock implements IBlockWithItem
 
 	private static final AxisAlignedBB BOUNDS = new AxisAlignedBB(0.15f, 0f, 0.15f, 0.85f, 0.7f, 0.85f);
 
-	public BlockPresent()
+	public BlockPresent(Block.Properties properties)
 	{
-		super(Material.GROUND);
+		super(properties);
 
-		this.setHardness(0.4F);
 		this.setLightOpacity(0);
-		this.setSoundType(SoundType.GROUND);
 	}
 
 	@Override
@@ -112,14 +110,14 @@ public class BlockPresent extends ContainerBlock implements IBlockWithItem
 	}
 
 	@Override
-	public void neighborChanged(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos)
+	public void neighborChanged(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean p_220069_6_)
 	{
 		if (!this.canPlaceBlockAt(world, pos))
 		{
 			this.destroyPresent(world, pos);
 		}
 
-		super.neighborChanged(state, world, pos, block, fromPos);
+		super.neighborChanged(state, world, pos, block, fromPos, p_220069_6_);
 	}
 
 	private void destroyAndDropPresent(World world, TileEntityPresent tileEntity, BlockPos pos)
@@ -129,7 +127,7 @@ public class BlockPresent extends ContainerBlock implements IBlockWithItem
 
 		Block.spawnAsEntity(world, pos, drop);
 		world.removeTileEntity(pos);
-		world.setBlockToAir(pos);
+		world.removeBlock(pos, false);
 	}
 
 	@Override
@@ -149,12 +147,12 @@ public class BlockPresent extends ContainerBlock implements IBlockWithItem
 		ItemBlockPresent.PresentData data = ((TileEntityPresent) tileEntity).getPresentData();
 		ItemStack present = new ItemStack(BlocksAether.present);
 
-		present.setTagCompound(new CompoundNBT());
+		present.setTag(new CompoundNBT());
 
-		data.writeToNBT(present.getTagCompound());
+		data.writeToNBT(present.getTag());
 		Block.spawnAsEntity(world, pos, present);
 		world.removeTileEntity(pos);
-		world.setBlockToAir(pos);
+		world.removeBlock(pos, false);
 	}
 
 	@Override
@@ -175,7 +173,7 @@ public class BlockPresent extends ContainerBlock implements IBlockWithItem
 	public void onExplosionDestroy(World world, BlockPos pos, Explosion explosionIn)
 	{
 		world.removeTileEntity(pos);
-		world.setBlockToAir(pos);
+		world.removeBlock(pos, false);
 	}
 
 	@Override
@@ -186,7 +184,7 @@ public class BlockPresent extends ContainerBlock implements IBlockWithItem
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World worldIn, int meta)
+	public TileEntity createNewTileEntity(IBlockReader reader)
 	{
 		return new TileEntityPresent();
 	}

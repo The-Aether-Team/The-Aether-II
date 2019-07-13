@@ -230,7 +230,7 @@ public class PrecipitationManagerImpl implements IPrecipitationManager
 
 					if (topState.getBlock() instanceof IBlockSnowy)
 					{
-						final BlockState newState = topState.withProperty(IBlockSnowy.PROPERTY_SNOWY, Boolean.TRUE);
+						final BlockState newState = topState.with(IBlockSnowy.PROPERTY_SNOWY, Boolean.TRUE);
 
 						this.world.setBlockState(topBlockPos, newState, 2);
 					}

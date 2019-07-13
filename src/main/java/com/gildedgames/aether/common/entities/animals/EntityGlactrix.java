@@ -72,7 +72,7 @@ public class EntityGlactrix extends EntityAetherAnimal implements IShearable
 	}
 
 	@Override
-	protected void entityInit()
+	protected void registerData()
 	{
 		super.registerData();
 		this.dataManager.register(IS_HIDING, Boolean.FALSE);

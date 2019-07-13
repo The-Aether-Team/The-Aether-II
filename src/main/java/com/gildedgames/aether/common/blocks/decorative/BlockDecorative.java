@@ -3,9 +3,8 @@ package com.gildedgames.aether.common.blocks.decorative;
 import com.gildedgames.aether.common.blocks.IBlockWithItem;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
-import com.gildedgames.aether.common.blocks.util.BlockBuilder;
 import com.gildedgames.aether.common.items.blocks.ItemBlockSubtypes;
-import net.minecraft.block.material.Material;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.resources.I18n;
@@ -13,6 +12,7 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.state.StateContainer;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -23,11 +23,11 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public abstract class BlockDecorative extends BlockBuilder implements IBlockWithItem
+public abstract class BlockDecorative extends Block implements IBlockWithItem
 {
-	public BlockDecorative(final Material material)
+	public BlockDecorative(final Block.Properties properties)
 	{
-		super(material);
+		super(properties);
 	}
 
 	@Nonnull
@@ -36,7 +36,7 @@ public abstract class BlockDecorative extends BlockBuilder implements IBlockWith
 	@Override
 	public int damageDropped(final BlockState state)
 	{
-		return state.getValue(this.getVariantProperty()).getMeta();
+		return state.get(this.getVariantProperty()).getMeta();
 	}
 
 	@Override
@@ -44,19 +44,19 @@ public abstract class BlockDecorative extends BlockBuilder implements IBlockWith
 	{
 		final BlockVariant variant = this.getVariantProperty().fromMeta(meta);
 
-		return this.getDefaultState().withProperty(this.getVariantProperty(), variant);
+		return this.getDefaultState().with(this.getVariantProperty(), variant);
 	}
 
 	@Override
 	public int getMetaFromState(final BlockState state)
 	{
-		return state.getValue(this.getVariantProperty()).getMeta();
+		return state.get(this.getVariantProperty()).getMeta();
 	}
 
 	@Override
-	protected BlockStateContainer createBlockState()
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
-		return new BlockStateContainer(this, this.getVariantProperty());
+		builder.add(this.getVariantProperty());
 	}
 
 	@Override

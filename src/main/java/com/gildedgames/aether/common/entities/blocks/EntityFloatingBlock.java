@@ -47,7 +47,7 @@ public class EntityFloatingBlock extends Entity
 	}
 
 	@Override
-	protected void entityInit()
+	protected void registerData()
 	{
 		this.dataManager.register(BLOCK_NAME, 2);
 		this.dataManager.register(BLOCK_METADATA, (byte) 4);
@@ -65,11 +65,11 @@ public class EntityFloatingBlock extends Entity
 
 			if (this.world.getBlockState(pos).getBlock() == this.getBlockState().getBlock())
 			{
-				this.world.setBlockToAir(pos);
+				this.world.removeBlock(pos, false);
 			}
 			else
 			{
-				this.setDead();
+				this.remove();
 			}
 
 			this.hasActivated = true;
@@ -77,7 +77,7 @@ public class EntityFloatingBlock extends Entity
 
 		if (this.ticksExisted > 200)
 		{
-			this.setDead();
+			this.remove();
 		}
 		else
 		{
@@ -101,7 +101,7 @@ public class EntityFloatingBlock extends Entity
 				{
 					this.world.setBlockState(pos, this.getBlockState());
 
-					this.setDead();
+					this.remove();
 				}
 
 				this.posX = pos.getX() + 0.5D;

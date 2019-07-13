@@ -60,7 +60,7 @@ public class TileEntityTeleporter extends TileEntityMultiblockController impleme
 
 		if (state.getBlock() == BlocksAether.aether_teleporter)
 		{
-			return state.getValue(BlockAltar.PROPERTY_FACING);
+			return state.get(BlockAltar.PROPERTY_FACING);
 		}
 
 		return Direction.NORTH;

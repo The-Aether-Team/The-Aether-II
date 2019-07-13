@@ -67,10 +67,10 @@ public class ItemSkyrootBed extends Item implements IDropOnDeath
 				if (flag2 && flag3 && world.getBlockState(pos.down()).isSideSolid(world, pos.down(), Direction.UP) &&
 						world.getBlockState(adjPos.down()).isSideSolid(world, adjPos.down(), Direction.UP))
 				{
-					BlockState otherBed = BlocksAether.skyroot_bed.getDefaultState().withProperty(BedBlock.OCCUPIED, Boolean.FALSE)
-							.withProperty(BedBlock.FACING, enumfacing).withProperty(BedBlock.PART, BedBlock.EnumPartType.FOOT);
+					BlockState otherBed = BlocksAether.skyroot_bed.getDefaultState().with(BedBlock.OCCUPIED, Boolean.FALSE)
+							.with(BedBlock.FACING, enumfacing).with(BedBlock.PART, BedBlock.EnumPartType.FOOT);
 					world.setBlockState(pos, otherBed, 10);
-					world.setBlockState(adjPos, otherBed.withProperty(BedBlock.PART, BedBlock.EnumPartType.HEAD), 10);
+					world.setBlockState(adjPos, otherBed.with(BedBlock.PART, BedBlock.EnumPartType.HEAD), 10);
 
 					world.notifyNeighborsRespectDebug(pos, block, false);
 					world.notifyNeighborsRespectDebug(adjPos, adjBlock.getBlock(), false);

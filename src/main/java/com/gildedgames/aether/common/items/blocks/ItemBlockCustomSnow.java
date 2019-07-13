@@ -47,11 +47,11 @@ public class ItemBlockCustomSnow extends BlockItem
 
 			if (block == this.block)
 			{
-				int i = state.getValue(BlockSnow.LAYERS);
+				int i = state.get(BlockSnow.LAYERS);
 
 				if (i < 8)
 				{
-					BlockState modifiedState = state.withProperty(BlockSnow.LAYERS, i + 1);
+					BlockState modifiedState = state.with(BlockSnow.LAYERS, i + 1);
 
 					AxisAlignedBB aabb = modifiedState.getCollisionBoundingBox(world, otherPos);
 
@@ -92,7 +92,7 @@ public class ItemBlockCustomSnow extends BlockItem
 	{
 		BlockState state = world.getBlockState(pos);
 
-		return (state.getBlock() == BlocksAether.highlands_snow_layer && state.getValue(BlockSnow.LAYERS) <= 7) || super
+		return (state.getBlock() == BlocksAether.highlands_snow_layer && state.get(BlockSnow.LAYERS) <= 7) || super
 				.canPlaceBlockOnSide(world, pos, side, player, stack);
 	}
 }

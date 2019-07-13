@@ -13,9 +13,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class BlockScatterglassStairs extends BlockCustomStairs
 {
 
-	public BlockScatterglassStairs(BlockState state)
+	public BlockScatterglassStairs(BlockState state, Block.Properties properties)
 	{
-		super(state);
+		super(state, properties);
 
 		this.setLightOpacity(3);
 	}

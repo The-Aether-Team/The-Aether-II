@@ -40,7 +40,7 @@ public class EntityNexSpirit extends EntityCompanion
 	}
 
 	@Override
-	protected void entityInit()
+	protected void registerData()
 	{
 		super.registerData();
 

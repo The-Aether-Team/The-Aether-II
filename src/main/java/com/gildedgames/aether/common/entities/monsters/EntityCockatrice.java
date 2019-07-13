@@ -64,7 +64,7 @@ public class EntityCockatrice extends EntityAetherMonster
 	}
 
 	@Override
-	protected void entityInit()
+	protected void registerData()
 	{
 		super.registerData();
 

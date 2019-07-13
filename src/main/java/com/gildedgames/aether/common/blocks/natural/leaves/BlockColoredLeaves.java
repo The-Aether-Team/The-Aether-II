@@ -1,13 +1,16 @@
 package com.gildedgames.aether.common.blocks.natural.leaves;
 
 import com.gildedgames.aether.common.entities.animals.EntitySkyrootLizard;
+import net.minecraft.block.Block;
 
 public abstract class BlockColoredLeaves extends BlockNaturalLeaves
 {
 	private final Color color;
 
-	public BlockColoredLeaves(Color color)
+	public BlockColoredLeaves(Block.Properties properties, Color color)
 	{
+		super(properties);
+
 		this.color = color;
 	}
 

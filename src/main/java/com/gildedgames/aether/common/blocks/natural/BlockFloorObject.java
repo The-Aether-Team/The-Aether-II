@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.blocks.natural;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
-import com.gildedgames.aether.common.blocks.util.BlockBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -20,16 +19,14 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class BlockFloorObject extends BlockBuilder
+public class BlockFloorObject extends Block
 {
 
 	private static final AxisAlignedBB AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.3D, 0.9D);
 
-	public BlockFloorObject(Material material, SoundType soundType)
+	public BlockFloorObject(Block.Properties properties)
 	{
-		super(material);
-
-		this.setSoundType(soundType);
+		super(properties.doesNotBlockMovement());
 	}
 
 	@Override
@@ -110,7 +107,7 @@ public class BlockFloorObject extends BlockBuilder
 	}
 
 	@Override
-	public void neighborChanged(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos)
+	public void neighborChanged(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean p_220069_6_)
 	{
 		this.validatePosition(world, pos);
 	}
@@ -125,7 +122,7 @@ public class BlockFloorObject extends BlockBuilder
 
 	protected void invalidateBlock(World world, BlockPos pos)
 	{
-		world.setBlockToAir(pos);
+		world.removeBlock(pos, false);
 	}
 
 }

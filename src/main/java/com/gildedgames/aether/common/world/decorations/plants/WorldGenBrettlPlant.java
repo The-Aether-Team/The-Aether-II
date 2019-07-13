@@ -49,19 +49,19 @@ public class WorldGenBrettlPlant extends WorldGenerator
 				}
 				else if (growthStage > 4 && growthStage <= 8)
 				{
-					worldIn.setBlockState(randomPos.up(), this.brettlState.withProperty(BlockBrettlPlant.PROPERTY_HARVESTABLE, false)
-							.withProperty(BlockBrettlPlant.PROPERTY_VARIANT, BlockBrettlPlant.BASE), 2 | 16);
-					worldIn.setBlockState(randomPos.up(2), this.brettlState.withProperty(BlockBrettlPlant.PROPERTY_HARVESTABLE, false)
-							.withProperty(BlockBrettlPlant.PROPERTY_VARIANT, BlockBrettlPlant.MID), 2 | 16);
-					worldIn.setBlockState(randomPos.up(3), this.brettlState.withProperty(BlockBrettlPlant.PROPERTY_HARVESTABLE, false)
-							.withProperty(BlockBrettlPlant.PROPERTY_VARIANT, BlockBrettlPlant.TOP), 2 | 16);
+					worldIn.setBlockState(randomPos.up(), this.brettlState.with(BlockBrettlPlant.PROPERTY_HARVESTABLE, false)
+							.with(BlockBrettlPlant.PROPERTY_VARIANT, BlockBrettlPlant.BASE), 2 | 16);
+					worldIn.setBlockState(randomPos.up(2), this.brettlState.with(BlockBrettlPlant.PROPERTY_HARVESTABLE, false)
+							.with(BlockBrettlPlant.PROPERTY_VARIANT, BlockBrettlPlant.MID), 2 | 16);
+					worldIn.setBlockState(randomPos.up(3), this.brettlState.with(BlockBrettlPlant.PROPERTY_HARVESTABLE, false)
+							.with(BlockBrettlPlant.PROPERTY_VARIANT, BlockBrettlPlant.TOP), 2 | 16);
 				}
 				else
 				{
-					worldIn.setBlockState(randomPos.up(), this.brettlState.withProperty(BlockBrettlPlant.PROPERTY_HARVESTABLE, false)
-							.withProperty(BlockBrettlPlant.PROPERTY_VARIANT, BlockBrettlPlant.BASE), 2 | 16);
-					worldIn.setBlockState(randomPos.up(2), this.brettlState.withProperty(BlockBrettlPlant.PROPERTY_HARVESTABLE, false)
-							.withProperty(BlockBrettlPlant.PROPERTY_VARIANT, BlockBrettlPlant.TOP), 2 | 16);
+					worldIn.setBlockState(randomPos.up(), this.brettlState.with(BlockBrettlPlant.PROPERTY_HARVESTABLE, false)
+							.with(BlockBrettlPlant.PROPERTY_VARIANT, BlockBrettlPlant.BASE), 2 | 16);
+					worldIn.setBlockState(randomPos.up(2), this.brettlState.with(BlockBrettlPlant.PROPERTY_HARVESTABLE, false)
+							.with(BlockBrettlPlant.PROPERTY_VARIANT, BlockBrettlPlant.TOP), 2 | 16);
 				}
 
 				count++;

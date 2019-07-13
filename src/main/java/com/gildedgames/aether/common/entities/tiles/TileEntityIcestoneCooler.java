@@ -70,7 +70,7 @@ public class TileEntityIcestoneCooler extends LockableTileEntity implements ITic
 
 		if (state.getBlock() == BlocksAether.icestone_cooler)
 		{
-			return state.getValue(BlockIcestoneCooler.PROPERTY_FACING);
+			return state.get(BlockIcestoneCooler.PROPERTY_FACING);
 		}
 
 		return Direction.NORTH;

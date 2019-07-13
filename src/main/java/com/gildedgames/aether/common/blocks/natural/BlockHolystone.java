@@ -10,11 +10,14 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.state.StateContainer;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.ToolType;
 
 public class BlockHolystone extends Block implements IBlockMultiName
 {
@@ -25,16 +28,11 @@ public class BlockHolystone extends Block implements IBlockMultiName
 
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", NORMAL_HOLYSTONE, MOSSY_HOLYSTONE, BLOOD_MOSS_HOLYSTONE);
 
-	public BlockHolystone()
+	public BlockHolystone(Block.Properties properties)
 	{
-		super(Material.ROCK);
+		super(properties);
 
-		this.setHardness(2.0F);
-		this.setResistance(10.0F);
-
-		this.setSoundType(SoundType.STONE);
-
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, NORMAL_HOLYSTONE));
+		this.setDefaultState(this.stateContainer.getBaseState().with(PROPERTY_VARIANT, NORMAL_HOLYSTONE));
 	}
 
 	@Override
@@ -51,35 +49,33 @@ public class BlockHolystone extends Block implements IBlockMultiName
 	}
 
 	@Override
-	public float getBlockHardness(final BlockState blockState, final World world, final BlockPos pos)
+	public float getBlockHardness(BlockState state, IBlockReader worldIn, BlockPos pos)
 	{
-		final BlockState state = world.getBlockState(pos);
-
-		return state.getBlock() == this && state.getValue(PROPERTY_VARIANT) == BLOOD_MOSS_HOLYSTONE ? -1.0f : this.blockHardness;
+		return state.getBlock() == this && state.get(PROPERTY_VARIANT) == BLOOD_MOSS_HOLYSTONE ? -1.0f : this.blockHardness;
 	}
 
 	@Override
 	public BlockState getStateFromMeta(final int meta)
 	{
-		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta & 7));
+		return this.getDefaultState().with(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta & 7));
 	}
 
 	@Override
 	public int getMetaFromState(final BlockState state)
 	{
-		return state.getValue(PROPERTY_VARIANT).getMeta();
+		return state.get(PROPERTY_VARIANT).getMeta();
 	}
 
 	@Override
-	protected BlockStateContainer createBlockState()
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
-		return new BlockStateContainer(this, PROPERTY_VARIANT);
+		builder.add(PROPERTY_VARIANT);
 	}
 
 	@Override
 	public int damageDropped(final BlockState state)
 	{
-		return state.getValue(PROPERTY_VARIANT).getMeta();
+		return state.get(PROPERTY_VARIANT).getMeta();
 	}
 
 	@Override

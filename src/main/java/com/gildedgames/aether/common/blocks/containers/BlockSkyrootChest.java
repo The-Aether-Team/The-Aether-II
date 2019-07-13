@@ -11,6 +11,7 @@ import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
@@ -21,13 +22,9 @@ public class BlockSkyrootChest extends ChestBlock
 {
 	private static final ChestBlock.Type TYPE = EnumHelper.addEnum(ChestBlock.Type.class, "AETHER_SKYROOT", new Class<?>[0]);
 
-	public BlockSkyrootChest()
+	public BlockSkyrootChest(Block.Properties properties)
 	{
-		super(BlockSkyrootChest.TYPE);
-
-		this.setHardness(2.5f);
-
-		this.setSoundType(SoundType.WOOD);
+		super(properties.hardnessAndResistance(2.5f));
 	}
 
 	@Override
@@ -107,7 +104,7 @@ public class BlockSkyrootChest extends ChestBlock
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int meta)
+	public TileEntity createNewTileEntity(IBlockReader reader)
 	{
 		return new TileEntitySkyrootChest();
 	}

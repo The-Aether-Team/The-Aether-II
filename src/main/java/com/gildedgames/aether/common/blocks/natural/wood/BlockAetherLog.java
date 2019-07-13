@@ -1,33 +1,31 @@
 package com.gildedgames.aether.common.blocks.natural.wood;
 
-import net.minecraft.block.BlockLog;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
+import net.minecraft.block.LogBlock;
+import net.minecraft.block.material.Material;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.Blocks;
+import net.minecraft.state.StateContainer;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ToolType;
 
-public class BlockAetherLog extends BlockLog
+public class BlockAetherLog extends LogBlock
 {
-	public static final EnumProperty<BlockLog.EnumAxis> PROPERTY_LOG_AXIS = EnumProperty.create("axis", BlockLog.EnumAxis.class);
+	public static final EnumProperty<LogBlock.EnumAxis> PROPERTY_LOG_AXIS = EnumProperty.create("axis", LogBlock.EnumAxis.class);
 
 	private final AetherWoodType type;
 
-	public BlockAetherLog(AetherWoodType type)
+	public BlockAetherLog(Block.Properties properties, AetherWoodType type)
 	{
-		super();
+		super(properties);
 
 		this.type = type;
 
-		this.setSoundType(SoundType.WOOD);
 
-		this.setHardness(2.0f);
-
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_LOG_AXIS, BlockLog.EnumAxis.Y));
+		this.setDefaultState(this.stateContainer.getBaseState().with(PROPERTY_LOG_AXIS, LogBlock.EnumAxis.Y));
 
 		Blocks.FIRE.setFireInfo(this, 5, 5);
 	}
@@ -40,12 +38,12 @@ public class BlockAetherLog extends BlockLog
 			case COUNTERCLOCKWISE_90:
 			case CLOCKWISE_90:
 
-				switch (state.getValue(PROPERTY_LOG_AXIS))
+				switch (state.get(PROPERTY_LOG_AXIS))
 				{
 					case X:
-						return state.withProperty(PROPERTY_LOG_AXIS, BlockLog.EnumAxis.Z);
+						return state.with(PROPERTY_LOG_AXIS, LogBlock.EnumAxis.Z);
 					case Z:
-						return state.withProperty(PROPERTY_LOG_AXIS, BlockLog.EnumAxis.X);
+						return state.with(PROPERTY_LOG_AXIS, LogBlock.EnumAxis.X);
 					default:
 						return state;
 				}
@@ -79,22 +77,22 @@ public class BlockAetherLog extends BlockLog
 	@Override
 	public BlockState getStateFromMeta(int meta)
 	{
-		BlockLog.EnumAxis axis = BlockLog.EnumAxis.NONE;
+		LogBlock.EnumAxis axis = LogBlock.EnumAxis.NONE;
 
 		switch (meta & 7)
 		{
 			case 1:
-				axis = BlockLog.EnumAxis.Y;
+				axis = LogBlock.EnumAxis.Y;
 				break;
 			case 2:
-				axis = BlockLog.EnumAxis.X;
+				axis = LogBlock.EnumAxis.X;
 				break;
 			case 3:
-				axis = BlockLog.EnumAxis.Z;
+				axis = LogBlock.EnumAxis.Z;
 				break;
 		}
 
-		return this.getDefaultState().withProperty(PROPERTY_LOG_AXIS, axis);
+		return this.getDefaultState().with(PROPERTY_LOG_AXIS, axis);
 	}
 
 	@Override
@@ -102,7 +100,7 @@ public class BlockAetherLog extends BlockLog
 	{
 		int meta = 0;
 
-		switch (state.getValue(PROPERTY_LOG_AXIS))
+		switch (state.get(PROPERTY_LOG_AXIS))
 		{
 			case Y:
 				meta |= 1;
@@ -137,9 +135,9 @@ public class BlockAetherLog extends BlockLog
 	}
 
 	@Override
-	protected BlockStateContainer createBlockState()
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
-		return new BlockStateContainer(this, PROPERTY_LOG_AXIS);
+		builder.add(PROPERTY_LOG_AXIS);
 	}
 
 	public AetherWoodType getAetherWoodType()

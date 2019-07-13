@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.blocks.construction;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.blocks.util.BlockCustomSlab;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.BlockRenderLayer;
@@ -13,9 +14,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class BlockScatterglassSlab extends BlockCustomSlab
 {
-	public BlockScatterglassSlab(Material material)
+	public BlockScatterglassSlab(Block.Properties properties)
 	{
-		super(material);
+		super(properties);
 
 		this.setLightOpacity(3);
 	}
@@ -33,7 +34,7 @@ public class BlockScatterglassSlab extends BlockCustomSlab
 		BlockState neighborState = world.getBlockState(pos.offset(side));
 		if (neighborState.getBlock() == BlocksAether.scatterglass_slab)
 		{
-			if (state.getValue(PROPERTY_SLAB_STATE) == EnumSlabPart.FULL_BLOCK)
+			if (state.get(PROPERTY_SLAB_STATE) == EnumSlabPart.FULL_BLOCK)
 			{
 				return neighborState.getValue(PROPERTY_SLAB_STATE) != EnumSlabPart.FULL_BLOCK;
 			}

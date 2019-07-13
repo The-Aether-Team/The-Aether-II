@@ -72,11 +72,11 @@ public class TileEntityIncubator extends LockableTileEntity implements ITickable
 			this.currentHeatingProgress -= this.coolingDecrement;
 		}
 
-		if (state.getBlock() instanceof BlockIncubator && state.getValue(BlockIncubator.PROPERTY_IS_LIT) != this.isHeating())
+		if (state.getBlock() instanceof BlockIncubator && state.get(BlockIncubator.PROPERTY_IS_LIT) != this.isHeating())
 		{
 			this.markDirty();
 
-			this.world.setBlockState(this.pos, state.withProperty(BlockIncubator.PROPERTY_IS_LIT, this.isHeating()));
+			this.world.setBlockState(this.pos, state.with(BlockIncubator.PROPERTY_IS_LIT, this.isHeating()));
 
 			this.validate();
 			this.world.setTileEntity(this.pos, this);
@@ -85,7 +85,7 @@ public class TileEntityIncubator extends LockableTileEntity implements ITickable
 		ItemStack fuelstack = this.inventory.get(AMBRO_CHUNK_INDEX);
 		ItemStack eggstack = this.getMoaEgg();
 
-		if (state.getBlock() instanceof BlockIncubator && state.getValue(BlockIncubator.PROPERTY_IS_LIT))
+		if (state.getBlock() instanceof BlockIncubator && state.get(BlockIncubator.PROPERTY_IS_LIT))
 		{
 			if (this.canEggIncubate())
 			{

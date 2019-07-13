@@ -28,9 +28,9 @@ public class ItemBlockPresent extends BlockItem
 
 	public static PresentData getData(final ItemStack stack)
 	{
-		if (stack != null && stack.getTagCompound() != null)
+		if (stack != null && stack.getTag() != null)
 		{
-			return PresentData.readFromNBT(stack.getTagCompound());
+			return PresentData.readFromNBT(stack.getTag());
 		}
 
 		return new PresentData();

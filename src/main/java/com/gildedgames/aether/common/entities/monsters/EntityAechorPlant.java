@@ -74,7 +74,7 @@ public class EntityAechorPlant extends EntityAetherMonster
 	}
 
 	@Override
-	protected void entityInit()
+	protected void registerData()
 	{
 		super.registerData();
 

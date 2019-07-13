@@ -35,11 +35,11 @@ public class ItemCompanion extends Item
 
 	public static void setRespawnTimer(final ItemStack stack, final World world, final int timer)
 	{
-		CompoundNBT compound = stack.getTagCompound();
+		CompoundNBT compound = stack.getTag();
 
 		if (compound == null)
 		{
-			stack.setTagCompound(compound = new CompoundNBT());
+			stack.setTag(compound = new CompoundNBT());
 		}
 
 		compound.putLong("respawnTimer", world.getTotalWorldTime() + timer);
@@ -47,7 +47,7 @@ public class ItemCompanion extends Item
 
 	public static long getTicksUntilRespawn(final ItemStack stack, final World world)
 	{
-		final CompoundNBT compound = stack.getTagCompound();
+		final CompoundNBT compound = stack.getTag();
 
 		if (compound == null || !compound.contains("respawnTimer"))
 		{

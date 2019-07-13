@@ -1,19 +1,11 @@
 package com.gildedgames.aether.common.blocks.construction;
 
-import net.minecraft.block.BlockTrapDoor;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
+import net.minecraft.block.TrapDoorBlock;
 
-public class BlockSkyrootTrapDoor extends BlockTrapDoor
+public class BlockSkyrootTrapDoor extends TrapDoorBlock
 {
-	public BlockSkyrootTrapDoor()
+	public BlockSkyrootTrapDoor(Properties properties)
 	{
-		super(Material.WOOD);
-
-		this.setSoundType(SoundType.WOOD);
-
-		this.setHardness(3.0f);
-
-		this.disableStats();
+		super(properties);
 	}
 }

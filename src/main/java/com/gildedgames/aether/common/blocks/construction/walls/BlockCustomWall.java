@@ -1,11 +1,14 @@
 package com.gildedgames.aether.common.blocks.construction.walls;
 
+import com.gildedgames.aether.common.blocks.construction.signs.BlockWallSkyrootSign;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWall;
+import net.minecraft.block.WallBlock;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.state.StateContainer;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -13,30 +16,15 @@ import net.minecraft.world.IBlockReader;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.api.distmarker.Dist;
 
-public class BlockCustomWall extends BlockWall
+public class BlockCustomWall extends WallBlock
 {
 
-	public BlockCustomWall(final BlockState state, final float hardness, final float resistance)
+	public BlockCustomWall(final Block.Properties properties)
 	{
-		super(state.getBlock());
+		super(properties);
 
-		final Block block = state.getBlock();
-
-		this.setHarvestLevel(block.getHarvestTool(state), block.getHarvestLevel(state));
-
-		this.setDefaultState(this.blockState.getBaseState().withProperty(UP, Boolean.FALSE).withProperty(NORTH, Boolean.FALSE).withProperty(EAST, Boolean.FALSE)
-				.withProperty(SOUTH, Boolean.FALSE).withProperty(WEST, Boolean.FALSE));
-		this.setResistance(resistance / 3.0f);
-		this.setHardness(hardness);
-		this.setSoundType(state.getBlock().getSoundType());
-
-	}
-
-	public BlockCustomWall setGlows(final boolean glows)
-	{
-		this.setLightLevel(glows ? 0.75f : 0.0f);
-
-		return this;
+		this.setDefaultState(this.getStateContainer().getBaseState().with(UP, Boolean.FALSE).with(NORTH, Boolean.FALSE).with(EAST, Boolean.FALSE)
+				.with(SOUTH, Boolean.FALSE).with(WEST, Boolean.FALSE));
 	}
 
 	@Override
@@ -65,9 +53,9 @@ public class BlockCustomWall extends BlockWall
 	}
 
 	@Override
-	protected BlockStateContainer createBlockState()
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
-		return new BlockStateContainer(this, BlockCustomWall.UP, BlockCustomWall.NORTH, BlockCustomWall.EAST, BlockCustomWall.WEST, BlockCustomWall.SOUTH,
+		builder.add(BlockCustomWall.UP, BlockCustomWall.NORTH, BlockCustomWall.EAST, BlockCustomWall.WEST, BlockCustomWall.SOUTH,
 				BlockWall.VARIANT);
 	}
 

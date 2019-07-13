@@ -60,7 +60,7 @@ public class UndergroundEntrancePlacementCondition implements PlacementCondition
 
 		for (final BlockPos pos : posToDelete)
 		{
-			world.setBlockToAir(pos);
+			world.removeBlock(pos, false);
 		}
 
 		return true;

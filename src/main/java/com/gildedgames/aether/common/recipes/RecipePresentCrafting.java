@@ -41,7 +41,7 @@ public class RecipePresentCrafting extends IForgeRegistryEntry.Impl<IRecipe> imp
 				return false;
 			}
 
-			final ItemWrappingPaper.PresentDyeData dye = ItemWrappingPaper.PresentDyeData.readFromNBT(stack.getTagCompound());
+			final ItemWrappingPaper.PresentDyeData dye = ItemWrappingPaper.PresentDyeData.readFromNBT(stack.getTag());
 
 			if (masterDye != null)
 			{
@@ -72,7 +72,7 @@ public class RecipePresentCrafting extends IForgeRegistryEntry.Impl<IRecipe> imp
 		data.setDye(dye);
 
 		final ItemStack present = new ItemStack(BlocksAether.present);
-		present.setTagCompound(data.writeToNBT(new CompoundNBT()));
+		present.setTag(data.writeToNBT(new CompoundNBT()));
 
 		return present;
 	}

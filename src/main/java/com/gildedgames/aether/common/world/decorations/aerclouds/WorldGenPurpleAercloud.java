@@ -16,7 +16,7 @@ public class WorldGenPurpleAercloud extends WorldGenAercloud
 	@Override
 	public BlockState getAercloudState(final Random random)
 	{
-		return this.state.withProperty(BlockAercloud.PROPERTY_FACING,
+		return this.state.with(BlockAercloud.PROPERTY_FACING,
 				Direction.HORIZONTALS[random.nextInt(Direction.HORIZONTALS.length)]);
 	}
 }

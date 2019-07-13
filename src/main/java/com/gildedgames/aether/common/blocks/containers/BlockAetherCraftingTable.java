@@ -2,9 +2,12 @@ package com.gildedgames.aether.common.blocks.containers;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockWorkbench;
+import net.minecraft.block.CraftingTableBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.Direction;
@@ -12,14 +15,11 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockAetherCraftingTable extends BlockWorkbench
+public class BlockAetherCraftingTable extends CraftingTableBlock
 {
-	public BlockAetherCraftingTable()
+	public BlockAetherCraftingTable(Block.Properties properties)
 	{
-		super();
-
-		this.setHardness(2.5f);
-		this.setSoundType(SoundType.WOOD);
+		super(properties);
 	}
 
 	@Override

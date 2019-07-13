@@ -53,26 +53,26 @@ public class ItemMoaEgg extends Item implements IDropOnDeath
 
 	public static void setGenePool(final ItemStack stack, final MoaGenePool pool)
 	{
-		if (stack.getTagCompound() == null)
+		if (stack.getTag() == null)
 		{
-			stack.setTagCompound(new CompoundNBT());
+			stack.setTag(new CompoundNBT());
 		}
 
 		final CompoundNBT poolTag = new CompoundNBT();
 
 		pool.write(poolTag);
 
-		stack.getTagCompound().put("pool", poolTag);
+		stack.getTag().put("pool", poolTag);
 	}
 
 	public static MoaGenePool getGenePool(final ItemStack stack)
 	{
-		if (stack.getTagCompound() == null)
+		if (stack.getTag() == null)
 		{
 			ItemMoaEgg.setGenePool(stack, new MoaGenePool());
 		}
 
-		final CompoundNBT poolTag = stack.getTagCompound().getCompound("pool");
+		final CompoundNBT poolTag = stack.getTag().getCompound("pool");
 
 		final MoaGenePool pool = new MoaGenePool();
 

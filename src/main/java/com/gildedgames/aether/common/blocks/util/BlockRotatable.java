@@ -3,9 +3,9 @@ package com.gildedgames.aether.common.blocks.util;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
-import net.minecraft.state.EnumProperty;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.state.EnumProperty;
+import net.minecraft.state.StateContainer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Rotation;
@@ -16,11 +16,11 @@ public class BlockRotatable extends Block
 {
 	public static final EnumProperty<Direction.Axis> PROPERTY_AXIS = EnumProperty.create("axis", Direction.Axis.class);
 
-	public BlockRotatable(Material material)
+	public BlockRotatable(Block.Properties properties)
 	{
-		super(material);
+		super(properties);
 
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_AXIS, Direction.Axis.Y));
+		this.setDefaultState(this.stateContainer.getBaseState().with(PROPERTY_AXIS, Direction.Axis.Y));
 	}
 
 	@Override
@@ -30,12 +30,12 @@ public class BlockRotatable extends Block
 		{
 			case COUNTERCLOCKWISE_90:
 			case CLOCKWISE_90:
-				switch (state.getValue(PROPERTY_AXIS))
+				switch (state.get(PROPERTY_AXIS))
 				{
 					case X:
-						return state.withProperty(PROPERTY_AXIS, Direction.Axis.Z);
+						return state.with(PROPERTY_AXIS, Direction.Axis.Z);
 					case Z:
-						return state.withProperty(PROPERTY_AXIS, Direction.Axis.X);
+						return state.with(PROPERTY_AXIS, Direction.Axis.X);
 					default:
 						return state;
 				}
@@ -48,7 +48,7 @@ public class BlockRotatable extends Block
 	public BlockState getStateForPlacement(World world, BlockPos pos, Direction facing, float hitX, float hitY, float hitZ, int meta, LivingEntity placer,
 			Hand hand)
 	{
-		return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand).withProperty(PROPERTY_AXIS, facing.getAxis());
+		return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand).with(PROPERTY_AXIS, facing.getAxis());
 	}
 
 	@Override
@@ -69,7 +69,7 @@ public class BlockRotatable extends Block
 				break;
 		}
 
-		return this.getDefaultState().withProperty(PROPERTY_AXIS, axis);
+		return this.getDefaultState().with(PROPERTY_AXIS, axis);
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class BlockRotatable extends Block
 	{
 		int meta = 0;
 
-		switch (state.getValue(PROPERTY_AXIS))
+		switch (state.get(PROPERTY_AXIS))
 		{
 			case X:
 				meta |= 1;
@@ -100,8 +100,8 @@ public class BlockRotatable extends Block
 	}
 
 	@Override
-	protected BlockStateContainer createBlockState()
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
-		return new BlockStateContainer(this, PROPERTY_AXIS);
+		builder.add(PROPERTY_AXIS);
 	}
 }

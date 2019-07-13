@@ -59,7 +59,7 @@ public class EntityMovingBlock extends Entity
 	}
 
 	@Override
-	protected void entityInit()
+	protected void registerData()
 	{
 		this.dataManager.register(BLOCK_NAME, 2);
 		this.dataManager.register(BLOCK_METADATA, (byte) 4);
@@ -97,12 +97,12 @@ public class EntityMovingBlock extends Entity
 				{
 					this.allowDoubleDrops = !data.isModified(pos);
 
-					this.world.setBlockToAir(pos);
+					this.world.removeBlock(pos, false);
 				}
 			}
 			else
 			{
-				this.setDead();
+				this.remove();
 			}
 
 			this.hasActivated = true;
@@ -208,7 +208,7 @@ public class EntityMovingBlock extends Entity
 							}
 						}
 
-						this.setDead();
+						this.remove();
 
 						return;
 					}
@@ -253,7 +253,7 @@ public class EntityMovingBlock extends Entity
 
 	private void destroy()
 	{
-		this.setDead();
+		this.remove();
 
 		final BlockPos pos = new BlockPos(this);
 

@@ -55,7 +55,7 @@ public class PlayerPlaceBlockListener
 
 		if (replaced.getBlock() instanceof BlockSnow && replaced.getValue(BlockSnow.LAYERS) == 1 && block instanceof IBlockSnowy)
 		{
-			event.getWorld().setBlockState(event.getPos(), placed.withProperty(IBlockSnowy.PROPERTY_SNOWY, Boolean.TRUE), 2);
+			event.getWorld().setBlockState(event.getPos(), placed.with(IBlockSnowy.PROPERTY_SNOWY, Boolean.TRUE), 2);
 		}
 		else if (replaced.getBlock() instanceof IBlockSnowy)
 		{
@@ -63,11 +63,11 @@ public class PlayerPlaceBlockListener
 
 			if (block instanceof IBlockSnowy && snowy)
 			{
-				event.getWorld().setBlockState(event.getPos(), placed.withProperty(IBlockSnowy.PROPERTY_SNOWY, true), 2);
+				event.getWorld().setBlockState(event.getPos(), placed.with(IBlockSnowy.PROPERTY_SNOWY, true), 2);
 			}
 			else if (block instanceof BlockSnow)
 			{
-				event.getWorld().setBlockState(event.getPos(), replaced.withProperty(IBlockSnowy.PROPERTY_SNOWY, Boolean.TRUE), 2);
+				event.getWorld().setBlockState(event.getPos(), replaced.with(IBlockSnowy.PROPERTY_SNOWY, Boolean.TRUE), 2);
 			}
 		}
 

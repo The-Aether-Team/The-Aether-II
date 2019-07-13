@@ -41,7 +41,7 @@ public class EntityTNTPresent extends Entity
 	}
 
 	@Override
-	protected void entityInit()
+	protected void registerData()
 	{
 	}
 
@@ -80,7 +80,7 @@ public class EntityTNTPresent extends Entity
 		{
 			if (!this.world.isRemote)
 			{
-				this.setDead();
+				this.remove();
 				this.explode();
 			}
 		}

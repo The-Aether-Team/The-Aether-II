@@ -54,11 +54,11 @@ public class ItemSkyrootSign extends Item
 				if (side == Direction.UP)
 				{
 					int rotation = MathHelper.floor((double) ((player.rotationYaw + 180.0F) * 16.0F / 360.0F) + 0.5D) & 15;
-					world.setBlockState(pos, BlocksAether.standing_skyroot_sign.getDefaultState().withProperty(BlockStandingSkyrootSign.ROTATION, rotation), 3);
+					world.setBlockState(pos, BlocksAether.standing_skyroot_sign.getDefaultState().with(BlockStandingSkyrootSign.ROTATION, rotation), 3);
 				}
 				else
 				{
-					world.setBlockState(pos, BlocksAether.wall_skyroot_sign.getDefaultState().withProperty(BlockWallSkyrootSign.FACING, side), 3);
+					world.setBlockState(pos, BlocksAether.wall_skyroot_sign.getDefaultState().with(BlockWallSkyrootSign.FACING, side), 3);
 				}
 
 				stack.shrink(1);

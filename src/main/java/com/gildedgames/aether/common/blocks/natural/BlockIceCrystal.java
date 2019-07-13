@@ -3,11 +3,11 @@ package com.gildedgames.aether.common.blocks.natural;
 import com.gildedgames.aether.common.blocks.IBlockMultiName;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
-import com.gildedgames.aether.common.blocks.util.BlockBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.state.StateContainer;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.entity.Entity;
@@ -29,7 +29,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Random;
 
-public class BlockIceCrystal extends BlockBuilder implements IBlockMultiName
+public class BlockIceCrystal extends Block implements IBlockMultiName
 {
 	public static final int CRYSTAL_META = 0;
 	public static final int CRYSTAL_A_META = 1;
@@ -54,13 +54,9 @@ public class BlockIceCrystal extends BlockBuilder implements IBlockMultiName
 
 	private static final AxisAlignedBB STALAGMITE_SHORT_BB = new AxisAlignedBB(0.25D, 0.0D, 0.25F, 0.75D, 0.5D, 0.75D);
 
-	public BlockIceCrystal()
+	public BlockIceCrystal(Block.Properties properties)
 	{
-		super(Material.GLASS);
-		this.setSoundType(SoundType.GLASS);
-		this.setHardness(0.25f);
-		this.setResistance(1f);
-		this.setTickRandomly(true);
+		super(properties);
 	}
 
 	@Override
@@ -73,27 +69,27 @@ public class BlockIceCrystal extends BlockBuilder implements IBlockMultiName
 	public BlockState getStateFromMeta(final int meta)
 	{
 		final BlockVariant variant = PROPERTY_VARIANT.fromMeta(meta);
-		return this.getDefaultState().withProperty(PROPERTY_VARIANT, variant);
+		return this.getDefaultState().with(PROPERTY_VARIANT, variant);
 	}
 
 	@Override
 	public int getMetaFromState(final BlockState state)
 	{
-		return state.getValue(PROPERTY_VARIANT).getMeta();
+		return state.get(PROPERTY_VARIANT).getMeta();
 	}
 
 	@Override
-	protected BlockStateContainer createBlockState()
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
-		return new BlockStateContainer(this, PROPERTY_VARIANT);
+		builder.add(PROPERTY_VARIANT);
 	}
 
 	@Override
-	public void updateTick(World worldIn, BlockPos pos, BlockState state, Random rand)
+	public void tick(BlockState state, World world, BlockPos pos, Random rand)
 	{
-		if (worldIn.getLightFor(LightType.BLOCK, pos) > 11 - this.getDefaultState().getLightOpacity(worldIn, pos))
+		if (world.getLightFor(LightType.BLOCK, pos) > 11 - this.getDefaultState().getLightOpacity(world, pos))
 		{
-			worldIn.setBlockToAir(pos);
+			world.removeBlock(pos, false);
 		}
 	}
 
@@ -136,28 +132,28 @@ public class BlockIceCrystal extends BlockBuilder implements IBlockMultiName
 	{
 		if (playerIn.isCreative())
 		{
-			worldIn.setBlockState(pos, state.cycleProperty(PROPERTY_VARIANT));
+			worldIn.setBlockState(pos, state.cycle(PROPERTY_VARIANT));
 			return true;
 		}
 		return false;
 	}
 
 	@Override
-	public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
+	public void neighborChanged(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean p_220069_6_)
 	{
 
-		if (state.getValue(PROPERTY_VARIANT) == STALACTITE || state.getValue(PROPERTY_VARIANT) == STALACTITE_A || state.getValue(PROPERTY_VARIANT) == STALACTITE_B)
+		if (state.get(PROPERTY_VARIANT) == STALACTITE || state.get(PROPERTY_VARIANT) == STALACTITE_A || state.get(PROPERTY_VARIANT) == STALACTITE_B)
 		{
-			if (worldIn.isAirBlock(pos.up()) || worldIn.getBlockState(pos.up()).getBlock() == Blocks.WATER)
+			if (world.isAirBlock(pos.up()) || world.getBlockState(pos.up()).getBlock() == Blocks.WATER)
 			{
-				worldIn.setBlockToAir(pos);
+				world.removeBlock(pos, false);
 			}
 		}
-		if (state.getValue(PROPERTY_VARIANT) == STALAGMITE || state.getValue(PROPERTY_VARIANT) == STALAGMITE_A || state.getValue(PROPERTY_VARIANT) == STALAGMITE_B)
+		if (state.get(PROPERTY_VARIANT) == STALAGMITE || state.get(PROPERTY_VARIANT) == STALAGMITE_A || state.get(PROPERTY_VARIANT) == STALAGMITE_B)
 		{
-			if (worldIn.isAirBlock(pos.down()) || worldIn.getBlockState(pos.down()).getBlock() == Blocks.WATER)
+			if (world.isAirBlock(pos.down()) || world.getBlockState(pos.down()).getBlock() == Blocks.WATER)
 			{
-				worldIn.setBlockToAir(pos);
+				world.removeBlock(pos, false);
 			}
 		}
 	}
@@ -168,16 +164,16 @@ public class BlockIceCrystal extends BlockBuilder implements IBlockMultiName
 	{
 		if (hitY == 0)
 		{
-			return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta+3));
+			return this.getDefaultState().with(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta+3));
 		}
 
-		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta));
+		return this.getDefaultState().with(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta));
 	}
 
 	@Override
 	public AxisAlignedBB getBoundingBox(BlockState state, IBlockReader source, BlockPos pos)
 	{
-		int meta = state.getValue(PROPERTY_VARIANT).getMeta();
+		int meta = state.get(PROPERTY_VARIANT).getMeta();
 
 		if (meta == STALAGMITE.getMeta() || meta == STALAGMITE_A.getMeta() || meta == STALAGMITE_B.getMeta())
 		{

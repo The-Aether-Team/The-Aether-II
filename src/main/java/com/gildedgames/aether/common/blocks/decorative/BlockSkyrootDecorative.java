@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.blocks.decorative;
 
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
+import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
@@ -19,13 +20,9 @@ public class BlockSkyrootDecorative extends BlockDecorative
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant
 			.create("variant", BASE_PLANKS, BASE_BEAM, TOP_PLANKS, TOP_BEAM, FLOORBOARDS, HIGHLIGHT, TILES, TILES_SMALL);
 
-	public BlockSkyrootDecorative()
+	public BlockSkyrootDecorative(Block.Properties properties)
 	{
-		super(Material.WOOD);
-
-		this.setSoundType(SoundType.WOOD);
-
-		this.setHardness(2f);
+		super(properties);
 	}
 
 	@Override

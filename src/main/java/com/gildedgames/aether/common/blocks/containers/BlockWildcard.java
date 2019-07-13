@@ -1,10 +1,7 @@
 package com.gildedgames.aether.common.blocks.containers;
 
 import com.gildedgames.aether.common.entities.tiles.TileEntityWildcard;
-import net.minecraft.block.ContainerBlock;
-import net.minecraft.block.BlockRenderType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -15,6 +12,7 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -26,13 +24,9 @@ import java.util.List;
 public class BlockWildcard extends ContainerBlock
 {
 
-	public BlockWildcard()
+	public BlockWildcard(Block.Properties properties)
 	{
-		super(Material.ROCK);
-
-		this.setHardness(2.5f);
-
-		this.setSoundType(SoundType.STONE);
+		super(properties);
 	}
 
 	@Override
@@ -61,7 +55,7 @@ public class BlockWildcard extends ContainerBlock
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(final World worldIn, final int meta)
+	public TileEntity createNewTileEntity(IBlockReader reader)
 	{
 		return new TileEntityWildcard();
 	}

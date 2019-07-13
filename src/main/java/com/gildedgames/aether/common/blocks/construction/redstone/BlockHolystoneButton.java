@@ -1,18 +1,15 @@
 package com.gildedgames.aether.common.blocks.construction.redstone;
 
-import net.minecraft.block.BlockButtonStone;
+import net.minecraft.block.Block;
+import net.minecraft.block.StoneButtonBlock;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
+import net.minecraftforge.common.ToolType;
 
-public class BlockHolystoneButton extends BlockButtonStone
+public class BlockHolystoneButton extends StoneButtonBlock
 {
-	public BlockHolystoneButton()
+	public BlockHolystoneButton(Block.Properties properties)
 	{
-		super();
-
-		this.setSoundType(SoundType.STONE);
-
-		this.setHardness(0.5f);
-
-		this.disableStats();
+		super(properties.hardnessAndResistance(0.5f).doesNotBlockMovement());
 	}
 }

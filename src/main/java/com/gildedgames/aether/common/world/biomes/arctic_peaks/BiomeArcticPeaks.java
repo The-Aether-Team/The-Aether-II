@@ -46,7 +46,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase implements ISnowyBiome
 	{
 		super(properties, registryName);
 
-		this.topBlock = BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.ARCTIC);
+		this.topBlock = BlocksAether.aether_grass.getDefaultState().with(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.ARCTIC);
 	}
 
 	@Override
@@ -170,7 +170,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase implements ISnowyBiome
 						}
 						else if (block instanceof IBlockSnowy)
 						{
-							final BlockState newState = state.withProperty(IBlockSnowy.PROPERTY_SNOWY, Boolean.TRUE);
+							final BlockState newState = state.with(IBlockSnowy.PROPERTY_SNOWY, Boolean.TRUE);
 
 							world.setBlockState(blockpos1, newState, 2 | 16);
 						}

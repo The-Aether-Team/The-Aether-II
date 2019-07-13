@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.blocks.construction;
 
 import com.gildedgames.aether.common.blocks.multiblock.BlockMultiController;
 import com.gildedgames.aether.common.entities.tiles.TileEntityOutpostCampfire;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.block.BlockState;
@@ -17,11 +18,10 @@ public class BlockOutpostCampfire extends BlockMultiController
 
 	protected static final AxisAlignedBB AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
 
-	public BlockOutpostCampfire(final Material materialIn)
+	public BlockOutpostCampfire(Block.Properties properties)
 	{
-		super(materialIn);
+		super(properties);
 
-		this.setBlockUnbreakable();
 		this.setLightOpacity(0);
 	}
 
@@ -38,7 +38,7 @@ public class BlockOutpostCampfire extends BlockMultiController
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(final World worldIn, final int meta)
+	public TileEntity createNewTileEntity(IBlockReader reader)
 	{
 		return new TileEntityOutpostCampfire();
 	}

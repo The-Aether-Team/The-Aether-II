@@ -6,6 +6,7 @@ import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -15,7 +16,7 @@ import org.lwjgl.opengl.GL11;
 
 import java.util.HashMap;
 
-public class RenderBolt extends Render<EntityBolt>
+public class RenderBolt extends EntityRenderer<EntityBolt>
 {
 	private static final HashMap<ItemBoltType, ResourceLocation> boltTextures = new HashMap<>();
 

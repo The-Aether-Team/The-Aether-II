@@ -1,19 +1,14 @@
 package com.gildedgames.aether.common.blocks.construction.redstone;
 
-import net.minecraft.block.BlockPressurePlate;
+import net.minecraft.block.Block;
+import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
-public class BlockHolystonePressurePlate extends BlockPressurePlate
+public class BlockHolystonePressurePlate extends PressurePlateBlock
 {
-	public BlockHolystonePressurePlate()
+	public BlockHolystonePressurePlate(Block.Properties properties)
 	{
-		super(Material.ROCK, Sensitivity.EVERYTHING);
-
-		this.setSoundType(SoundType.STONE);
-
-		this.setHardness(0.5f);
-
-		this.disableStats();
+		super(Sensitivity.EVERYTHING, properties.hardnessAndResistance(0.5f).doesNotBlockMovement());
 	}
 }

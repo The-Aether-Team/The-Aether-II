@@ -8,11 +8,6 @@ public class BlockRockGlass extends Block
 {
 	public BlockRockGlass()
 	{
-		super(Material.GLASS);
-
-		this.setHardness(1f);
-		this.setResistance(2000f);
-
-		this.setSoundType(SoundType.GLASS);
+		super();
 	}
 }

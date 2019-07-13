@@ -27,7 +27,7 @@ public class EntityParachute extends Entity
 	{
 		super(world);
 
-		this.setDead();
+		this.remove();
 	}
 
 	public EntityParachute(final World world, final PlayerEntity player, final Type type)
@@ -100,7 +100,7 @@ public class EntityParachute extends Entity
 
 			if (!playerAether.getModule(PlayerParachuteModule.class).isParachuting())
 			{
-				this.setDead();
+				this.remove();
 			}
 		}
 	}

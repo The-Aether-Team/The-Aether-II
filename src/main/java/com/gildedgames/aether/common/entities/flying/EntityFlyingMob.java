@@ -59,12 +59,12 @@ public class EntityFlyingMob extends EntityFlying implements IMob
 
 		if (!this.world.isRemote && this.world.getDifficulty() == EnumDifficulty.PEACEFUL)
 		{
-			this.setDead();
+			this.remove();
 		}
 	}
 
 	@Override
-	protected void entityInit()
+	protected void registerData()
 	{
 		super.registerData();
 

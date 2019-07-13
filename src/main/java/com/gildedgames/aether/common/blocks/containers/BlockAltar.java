@@ -7,7 +7,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.state.DirectionProperty;
+import net.minecraft.state.StateContainer;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.BlockState;
@@ -23,17 +24,13 @@ import net.minecraft.world.World;
 
 public class BlockAltar extends Block implements ITileEntityProvider
 {
-	public static final PropertyDirection PROPERTY_FACING = PropertyDirection.create("facing", Direction.Plane.HORIZONTAL);
+	public static final DirectionProperty PROPERTY_FACING = DirectionProperty.create("facing", Direction.Plane.HORIZONTAL);
 
-	public BlockAltar()
+	public BlockAltar(Block.Properties properties)
 	{
-		super(Material.ROCK);
+		super(properties);
 
-		this.setHardness(2.0f);
-
-		this.setSoundType(SoundType.STONE);
-
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_FACING, Direction.NORTH));
+		this.setDefaultState(this.stateContainer.getBaseState().with(PROPERTY_FACING, Direction.NORTH));
 	}
 
 	@Override
@@ -55,19 +52,19 @@ public class BlockAltar extends Block implements ITileEntityProvider
 	public BlockState getStateForPlacement(World world, BlockPos pos, Direction facing, float hitX, float hitY, float hitZ, int meta,
 			LivingEntity placer)
 	{
-		return this.getDefaultState().withProperty(PROPERTY_FACING, placer.getHorizontalFacing());
+		return this.getDefaultState().with(PROPERTY_FACING, placer.getHorizontalFacing());
 	}
 
 	@Override
 	public BlockState getStateFromMeta(int meta)
 	{
-		return this.getDefaultState().withProperty(PROPERTY_FACING, Direction.byHorizontalIndex(meta));
+		return this.getDefaultState().with(PROPERTY_FACING, Direction.byHorizontalIndex(meta));
 	}
 
 	@Override
 	public int getMetaFromState(BlockState state)
 	{
-		return state.getValue(PROPERTY_FACING).getIndex();
+		return state.get(PROPERTY_FACING).getIndex();
 	}
 
 	@Override
@@ -153,14 +150,15 @@ public class BlockAltar extends Block implements ITileEntityProvider
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int meta)
+	public TileEntity createNewTileEntity(IBlockReader reader)
 	{
 		return new TileEntityAltar();
 	}
 
 	@Override
-	protected BlockStateContainer createBlockState()
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
-		return new BlockStateContainer(this, PROPERTY_FACING);
+		builder.add(PROPERTY_FACING);
 	}
+
 }

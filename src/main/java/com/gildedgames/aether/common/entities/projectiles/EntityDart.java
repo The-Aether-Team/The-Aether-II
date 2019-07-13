@@ -5,14 +5,14 @@ import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.world.World;
 
-public class EntityDart extends EntityArrow implements IDamageLevelsHolder
+public class EntityDart extends ArrowEntity implements IDamageLevelsHolder
 {
 	private static final DataParameter<Byte> TYPE = new DataParameter<>(20, DataSerializers.BYTE);
 
@@ -56,7 +56,7 @@ public class EntityDart extends EntityArrow implements IDamageLevelsHolder
 	}
 
 	@Override
-	protected void entityInit()
+	protected void registerData()
 	{
 		super.registerData();
 

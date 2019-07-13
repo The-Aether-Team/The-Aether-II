@@ -32,11 +32,9 @@ public class BlockMoaEgg extends ContainerBlock implements IInternalBlock
 
 	public static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.2F, 0.0F, 0.2F, 0.8F, 0.75F, 0.8F);
 
-	public BlockMoaEgg()
+	public BlockMoaEgg(Block.Properties properties)
 	{
-		super(Material.GROUND);
-		this.setSoundType(SoundType.STONE);
-		this.setHardness(0.1F);
+		super(properties);
 	}
 
 	@Override
@@ -93,7 +91,7 @@ public class BlockMoaEgg extends ContainerBlock implements IInternalBlock
 
 				ItemMoaEgg.setGenePool(eggStack, stackGenes);
 
-				world.setBlockToAir(pos);
+				world.removeBlock(pos, false);
 
 				Block.spawnAsEntity(world, pos, eggStack);
 			}
@@ -139,7 +137,7 @@ public class BlockMoaEgg extends ContainerBlock implements IInternalBlock
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int meta)
+	public TileEntity createNewTileEntity(IBlockReader reader)
 	{
 		return new TileEntityMoaEgg();
 	}

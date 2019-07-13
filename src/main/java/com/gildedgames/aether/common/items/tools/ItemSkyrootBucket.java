@@ -80,7 +80,7 @@ public class ItemSkyrootBucket extends BucketItem implements IDropOnDeath
 				{
 					BlockState state = worldIn.getBlockState(pos);
 
-					if (state.getMaterial() == Material.WATER && state.getValue(BlockLiquid.LEVEL) == 0)
+					if (state.getMaterial() == Material.WATER && state.get(BlockLiquid.LEVEL) == 0)
 					{
 						worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 11);
 

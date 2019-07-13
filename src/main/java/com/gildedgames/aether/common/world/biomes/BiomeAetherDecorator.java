@@ -81,29 +81,29 @@ public class BiomeAetherDecorator
 		this.genGravitite.setFloating(true);
 
         this.genCoarseAetherDirtOnDirt = new WorldGenAetherMinable(
-                BlocksAether.aether_dirt.getDefaultState().withProperty(BlockAetherDirt.PROPERTY_VARIANT, BlockAetherDirt.COARSE_DIRT), 22, dirtStates);
+                BlocksAether.aether_dirt.getDefaultState().with(BlockAetherDirt.PROPERTY_VARIANT, BlockAetherDirt.COARSE_DIRT), 22, dirtStates);
         this.genCoarseAetherDirtOnHolystone = new WorldGenAetherMinable(
-                BlocksAether.aether_dirt.getDefaultState().withProperty(BlockAetherDirt.PROPERTY_VARIANT, BlockAetherDirt.COARSE_DIRT), 22, holystoneStates);
+                BlocksAether.aether_dirt.getDefaultState().with(BlockAetherDirt.PROPERTY_VARIANT, BlockAetherDirt.COARSE_DIRT), 22, holystoneStates);
 
         this.genCrudeScatterglass = new WorldGenAetherMinable(BlocksAether.crude_scatterglass.getDefaultState(), 16, holystoneStates);
 
 		this.genPurpleFlowers = new WorldGenFoliage(64,
-				BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.PURPLE_FLOWER));
+				BlocksAether.aether_flower.getDefaultState().with(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.PURPLE_FLOWER));
 		this.genWhiteRoses = new WorldGenFoliage(64,
-				BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.WHITE_ROSE));
+				BlocksAether.aether_flower.getDefaultState().with(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.WHITE_ROSE));
 		this.genBurstblossom = new WorldGenFoliage(64,
-				BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.BURSTBLOSSOM));
+				BlocksAether.aether_flower.getDefaultState().with(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.BURSTBLOSSOM));
 		this.genAechorSprout = new WorldGenFoliage(4,
-				BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.AECHOR_SPROUT));
+				BlocksAether.aether_flower.getDefaultState().with(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.AECHOR_SPROUT));
 
 		this.genOrangeTree = new WorldGenOrangeTree();
 
 		this.genBlueberryBushes = new WorldGenFoliage(32,
-				BlocksAether.blueberry_bush.getDefaultState().withProperty(BlockBlueberryBush.PROPERTY_HARVESTABLE, true));
+				BlocksAether.blueberry_bush.getDefaultState().with(BlockBlueberryBush.PROPERTY_HARVESTABLE, true));
 
 		this.genValkyrieGrass = new WorldGenFoliage(64,
-				BlocksAether.valkyrie_grass.getDefaultState().withProperty(BlockValkyrieGrass.PROPERTY_HARVESTABLE, true)
-						.withProperty(BlockValkyrieGrass.PROPERTY_VARIANT, BlockValkyrieGrass.FULL));
+				BlocksAether.valkyrie_grass.getDefaultState().with(BlockValkyrieGrass.PROPERTY_HARVESTABLE, true)
+						.with(BlockValkyrieGrass.PROPERTY_VARIANT, BlockValkyrieGrass.FULL));
 
 		this.genPlumproots = new WorldGenFoliage(64, BlocksAether.plumproot.getDefaultState());
 

@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.blocks.natural.wood;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -16,9 +17,9 @@ public class BlockAmberLog extends BlockAetherLog
 {
 	private static final Random RANDOM = new Random();
 
-	public BlockAmberLog(AetherWoodType type)
+	public BlockAmberLog(Block.Properties properties, AetherWoodType type)
 	{
-		super(type);
+		super(properties, type);
 	}
 
 	@Override

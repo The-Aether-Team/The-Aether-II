@@ -19,7 +19,7 @@ public class BlockAetherUniqueSapling extends BlockAetherSapling
 	@Override
 	public BlueprintDefinition getBlueprint(BlockState state)
 	{
-		final BlockVariant variant = state.getValue(PROPERTY_VARIANT);
+		final BlockVariant variant = state.get(PROPERTY_VARIANT);
 
 		if (variant == BlockAetherUniqueSapling.AMBEROOT)
 		{
@@ -36,7 +36,7 @@ public class BlockAetherUniqueSapling extends BlockAetherSapling
 	@Override
 	public BlockPos getBlueprintOffset(BlockState state)
 	{
-		final BlockVariant variant = state.getValue(PROPERTY_VARIANT);
+		final BlockVariant variant = state.get(PROPERTY_VARIANT);
 
 		if (variant == BlockAetherUniqueSapling.AMBEROOT)
 		{

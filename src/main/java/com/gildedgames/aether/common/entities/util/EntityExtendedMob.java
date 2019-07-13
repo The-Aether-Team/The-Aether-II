@@ -56,7 +56,7 @@ public class EntityExtendedMob extends MonsterEntity
 	}
 
 	@Override
-	protected void entityInit()
+	protected void registerData()
 	{
 		super.registerData();
 

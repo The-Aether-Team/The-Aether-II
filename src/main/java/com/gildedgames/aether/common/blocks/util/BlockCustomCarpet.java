@@ -17,12 +17,10 @@ public class BlockCustomCarpet extends Block
 {
 	private static final AxisAlignedBB CARPET_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0625D, 1.0D);
 
-	public BlockCustomCarpet()
+	public BlockCustomCarpet(Block.Properties properties)
 	{
-		super(Material.CARPET);
+		super(properties);
 
-		this.setHardness(0.1F);
-		this.setSoundType(SoundType.CLOTH);
 		this.setLightOpacity(0);
 	}
 
@@ -57,9 +55,9 @@ public class BlockCustomCarpet extends Block
 	}
 
 	@Override
-	public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
+	public void neighborChanged(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean p_220069_6_)
 	{
-		this.checkForDrop(worldIn, pos, state);
+		this.checkForDrop(world, pos, state);
 	}
 
 	private void checkForDrop(World worldIn, BlockPos pos, BlockState state)
@@ -67,7 +65,7 @@ public class BlockCustomCarpet extends Block
 		if (!this.canBlockStay(worldIn, pos))
 		{
 			this.dropBlockAsItem(worldIn, pos, state, 0);
-			worldIn.setBlockToAir(pos);
+			worldIn.removeBlock(pos, false);
 		}
 	}
 

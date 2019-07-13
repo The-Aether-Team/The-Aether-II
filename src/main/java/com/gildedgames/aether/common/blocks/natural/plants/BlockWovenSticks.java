@@ -10,6 +10,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.state.StateContainer;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.api.distmarker.Dist;
@@ -22,14 +23,11 @@ public class BlockWovenSticks extends Block implements IBlockMultiName
 
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", SKYROOT);
 
-	public BlockWovenSticks()
+	public BlockWovenSticks(Block.Properties properties)
 	{
-		super(Material.WOOD);
+		super(properties);
 
-		this.setSoundType(SoundType.GROUND);
-		this.setHardness(0.5F);
-
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, SKYROOT));
+		this.setDefaultState(this.stateContainer.getBaseState().with(PROPERTY_VARIANT, SKYROOT));
 	}
 
 	@Override
@@ -45,25 +43,25 @@ public class BlockWovenSticks extends Block implements IBlockMultiName
 	@Override
 	public int damageDropped(final BlockState state)
 	{
-		return state.getValue(PROPERTY_VARIANT).getMeta();
+		return state.get(PROPERTY_VARIANT).getMeta();
 	}
 
 	@Override
 	public BlockState getStateFromMeta(final int meta)
 	{
-		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta));
+		return this.getDefaultState().with(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta));
 	}
 
 	@Override
 	public int getMetaFromState(final BlockState state)
 	{
-		return state.getValue(PROPERTY_VARIANT).getMeta();
+		return state.get(PROPERTY_VARIANT).getMeta();
 	}
 
 	@Override
-	protected BlockStateContainer createBlockState()
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
-		return new BlockStateContainer(this, PROPERTY_VARIANT);
+		builder.add(PROPERTY_VARIANT);
 	}
 
 	@Override

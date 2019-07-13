@@ -3,10 +3,10 @@ package com.gildedgames.aether.client.renderer.entities.projectiles;
 import com.gildedgames.aether.client.util.SpriteGeneric;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.projectiles.EntityDaggerfrostSnowball;
-import net.minecraft.client.renderer.BufferBuilder;
 import com.mojang.blaze3d.platform.GlStateManager;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -15,7 +15,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class RenderDaggerfrostSnowball extends Render<EntityDaggerfrostSnowball>
+public class RenderDaggerfrostSnowball extends EntityRenderer<EntityDaggerfrostSnowball>
 {
 
 	public static final ResourceLocation TEXTURE = AetherCore.getResource("textures/entities/projectiles/daggerfrost_snowball.png");
@@ -26,7 +26,8 @@ public class RenderDaggerfrostSnowball extends Render<EntityDaggerfrostSnowball>
 	{
 		super(renderManager);
 
-		SPRITE.initSprite(16, 16, 0, 0, false);
+		// TODO: 1.14
+//		SPRITE.initSprite(16, 16, 0, 0, false);
 	}
 
 	@Override

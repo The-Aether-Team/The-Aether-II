@@ -12,9 +12,9 @@ import java.util.Random;
 
 public class BlockAetherOre extends Block
 {
-	public BlockAetherOre(Material material)
+	public BlockAetherOre(Block.Properties properties)
 	{
-		super(material);
+		super(properties);
 	}
 
 	@Override

@@ -6,6 +6,7 @@ import com.gildedgames.aether.common.blocks.IBlockSnowy;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
 import com.gildedgames.aether.common.entities.monsters.EntityAechorPlant;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockSnow;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
@@ -16,6 +17,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.state.StateContainer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.NonNullList;
@@ -38,25 +40,21 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", WHITE_ROSE, PURPLE_FLOWER, BURSTBLOSSOM, AECHOR_SPROUT);
 
-	public BlockAetherFlower()
+	public BlockAetherFlower(Block.Properties properties)
 	{
-		super(Material.PLANTS);
+		super(properties);
 
-		this.setSoundType(SoundType.PLANT);
-
-		this.setTickRandomly(true);
-
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, WHITE_ROSE).withProperty(PROPERTY_SNOWY, Boolean.FALSE));
+		this.setDefaultState(this.stateContainer.getBaseState().with(PROPERTY_VARIANT, WHITE_ROSE).with(PROPERTY_SNOWY, Boolean.FALSE));
 	}
 
 	@Override
-	public void updateTick(final World worldIn, final BlockPos pos, final BlockState state, final Random rand)
+	public void tick(BlockState state, World world, BlockPos pos, Random rand)
 	{
-		super.updateTick(worldIn, pos, state, rand);
+		super.tick(state, world, pos, rand);
 
-		if (!worldIn.isRemote && this.canGrow(worldIn, pos, state, false))
+		if (!world.isRemote && this.canGrow(world, pos, state, false))
 		{
-			this.grow(worldIn, rand, pos, state);
+			this.grow(world, rand, pos, state);
 		}
 	}
 
@@ -75,7 +73,7 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 
 		boolean addSnow = false;
 
-		if (!state.getValue(PROPERTY_SNOWY))
+		if (!state.get(PROPERTY_SNOWY))
 		{
 			if (main != null && main.getItem() instanceof BlockItem)
 			{
@@ -94,7 +92,7 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 
 		if (addSnow)
 		{
-			worldIn.setBlockState(pos, state.withProperty(PROPERTY_SNOWY, Boolean.TRUE), 2);
+			worldIn.setBlockState(pos, state.with(PROPERTY_SNOWY, Boolean.TRUE), 2);
 		}
 
 		return addSnow;
@@ -103,11 +101,11 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 	@Override
 	public void onPlayerDestroy(World worldIn, BlockPos pos, BlockState state)
 	{
-		if (state.getValue(PROPERTY_SNOWY))
+		if (state.get(PROPERTY_SNOWY))
 		{
 			if (worldIn.getBlockState(pos.down()) != Blocks.AIR.getDefaultState())
 			{
-				worldIn.setBlockState(pos, BlocksAether.highlands_snow_layer.getDefaultState().withProperty(BlockSnow.LAYERS, 1), 2);
+				worldIn.setBlockState(pos, BlocksAether.highlands_snow_layer.getDefaultState().with(BlockSnow.LAYERS, 1), 2);
 			}
 		}
 	}
@@ -125,7 +123,7 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 	@Override
 	public int damageDropped(final BlockState state)
 	{
-		return state.getValue(PROPERTY_VARIANT).getMeta();
+		return state.get(PROPERTY_VARIANT).getMeta();
 	}
 
 	@Override
@@ -133,20 +131,20 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 	{
 		final boolean snowy = meta >= PROPERTY_VARIANT.getAllowedValues().size();
 
-		return this.getDefaultState().withProperty(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta - (snowy ? PROPERTY_VARIANT.getAllowedValues().size() : 0)))
-				.withProperty(PROPERTY_SNOWY, snowy);
+		return this.getDefaultState().with(PROPERTY_VARIANT, PROPERTY_VARIANT.fromMeta(meta - (snowy ? PROPERTY_VARIANT.getAllowedValues().size() : 0)))
+				.with(PROPERTY_SNOWY, snowy);
 	}
 
 	@Override
 	public int getMetaFromState(final BlockState state)
 	{
-		return state.getValue(PROPERTY_VARIANT).getMeta() + (state.getValue(PROPERTY_SNOWY) ? PROPERTY_VARIANT.getAllowedValues().size() : 0);
+		return state.get(PROPERTY_VARIANT).getMeta() + (state.get(PROPERTY_SNOWY) ? PROPERTY_VARIANT.getAllowedValues().size() : 0);
 	}
 
 	@Override
-	protected BlockStateContainer createBlockState()
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
-		return new BlockStateContainer(this, PROPERTY_VARIANT, PROPERTY_SNOWY);
+		builder.add(PROPERTY_VARIANT, PROPERTY_SNOWY);
 	}
 
 	@Override
@@ -158,7 +156,7 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 	@Override
 	public Vec3d getOffset(final BlockState state, final IBlockReader access, final BlockPos pos)
 	{
-		if (state.getValue(PROPERTY_SNOWY))
+		if (state.get(PROPERTY_SNOWY))
 		{
 			return Vec3d.ZERO;
 		}
@@ -175,7 +173,7 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 	@Override
 	public boolean canGrow(final World worldIn, final BlockPos pos, final BlockState state, final boolean isClient)
 	{
-		BlockVariant variant = state.getValue(PROPERTY_VARIANT);
+		BlockVariant variant = state.get(PROPERTY_VARIANT);
 
 		return variant == AECHOR_SPROUT;
 	}

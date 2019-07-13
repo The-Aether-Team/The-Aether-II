@@ -12,9 +12,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 // Only exists because Aerogel walls are translucent.
 public class BlockScatterglassWall extends BlockCustomWall
 {
-	public BlockScatterglassWall(BlockState state, float hardness, float resistance)
+	public BlockScatterglassWall(final Block.Properties properties)
 	{
-		super(state, hardness, resistance);
+		super(properties);
 	}
 
 	@Override

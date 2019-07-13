@@ -4,7 +4,8 @@ import com.gildedgames.aether.common.blocks.IBlockWithItem;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
 import com.gildedgames.aether.common.items.blocks.ItemBlockSubtypes;
-import net.minecraft.block.BlockPane;
+import net.minecraft.block.Block;
+import net.minecraft.block.PaneBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -14,6 +15,7 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.state.StateContainer;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextFormatting;
@@ -25,23 +27,18 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class BlockRockGlassPaneDecorative extends BlockPane implements IBlockWithItem
+public class BlockRockGlassPaneDecorative extends PaneBlock implements IBlockWithItem
 {
 	public static final BlockVariant SKYROOT_FRAME = new BlockVariant(0, "skyroot_frame"),
 			ARKENIUM_FRAME = new BlockVariant(1, "arkenium_frame");
 
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", SKYROOT_FRAME, ARKENIUM_FRAME);
 
-	public BlockRockGlassPaneDecorative()
+	public BlockRockGlassPaneDecorative(Block.Properties properties)
 	{
-		super(Material.ROCK, true);
-
-		this.setHardness(1f);
-		this.setResistance(2000f);
+		super(properties);
 
 		this.setLightOpacity(3);
-
-		this.setSoundType(SoundType.GLASS);
 	}
 
 	@Nonnull
@@ -53,7 +50,7 @@ public class BlockRockGlassPaneDecorative extends BlockPane implements IBlockWit
 	@Override
 	public int damageDropped(final BlockState state)
 	{
-		return state.getValue(this.getVariantProperty()).getMeta();
+		return state.get(this.getVariantProperty()).getMeta();
 	}
 
 	@Override
@@ -61,19 +58,19 @@ public class BlockRockGlassPaneDecorative extends BlockPane implements IBlockWit
 	{
 		final BlockVariant variant = this.getVariantProperty().fromMeta(meta);
 
-		return this.getDefaultState().withProperty(this.getVariantProperty(), variant);
+		return this.getDefaultState().with(this.getVariantProperty(), variant);
 	}
 
 	@Override
 	public int getMetaFromState(final BlockState state)
 	{
-		return state.getValue(this.getVariantProperty()).getMeta();
+		return state.get(this.getVariantProperty()).getMeta();
 	}
 
 	@Override
-	protected BlockStateContainer createBlockState()
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
-		return new BlockStateContainer(this, BlockPane.NORTH, BlockPane.SOUTH, BlockPane.EAST, BlockPane.WEST, this.getVariantProperty());
+		builder.add(PaneBlock.NORTH, PaneBlock.SOUTH, PaneBlock.EAST, PaneBlock.WEST, this.getVariantProperty());
 	}
 
 	@Override

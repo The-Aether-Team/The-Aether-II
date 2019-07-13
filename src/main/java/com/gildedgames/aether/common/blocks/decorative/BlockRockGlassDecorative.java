@@ -22,15 +22,11 @@ public class BlockRockGlassDecorative extends BlockDecorative
 
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", SKYROOT_FRAME, ARKENIUM_FRAME);
 
-	public BlockRockGlassDecorative()
+	public BlockRockGlassDecorative(Block.Properties properties)
 	{
-		super(Material.GLASS);
-
-		this.setHardness(1f);
-		this.setResistance(2000f);
+		super(properties);
 
 		this.setLightOpacity(3);
-		this.setSoundType(SoundType.GLASS);
 	}
 
 	@Nonnull

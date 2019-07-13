@@ -48,7 +48,7 @@ public abstract class TileEntityMultiblockController extends TileEntitySynced im
 			if (this.doesControllerOwn(pos))
 			{
 				this.world.removeTileEntity(pos);
-				this.world.setBlockToAir(pos);
+				this.world.removeBlock(pos, false);
 			}
 		}
 	}

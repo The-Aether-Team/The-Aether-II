@@ -84,7 +84,7 @@ public class BlockModelsAetherInit
 			{
 				final LinkedHashMap<IProperty<?>, Comparable<?>> mappings = Maps.newLinkedHashMap(state.getProperties());
 
-				if (state.getValue(BlockAercloud.PROPERTY_VARIANT) != BlockAercloud.PURPLE_AERCLOUD)
+				if (state.get(BlockAercloud.PROPERTY_VARIANT) != BlockAercloud.PURPLE_AERCLOUD)
 				{
 					mappings.remove(BlockAercloud.PROPERTY_FACING);
 				}
@@ -102,9 +102,9 @@ public class BlockModelsAetherInit
 			{
 				final LinkedHashMap<IProperty<?>, Comparable<?>> mappings = Maps.newLinkedHashMap(state.getProperties());
 
-				if (state.getValue(BlockOrangeTree.PROPERTY_IS_TOP_BLOCK))
+				if (state.get(BlockOrangeTree.PROPERTY_IS_TOP_BLOCK))
 				{
-					if (state.getValue(BlockOrangeTree.PROPERTY_STAGE) < 3)
+					if (state.get(BlockOrangeTree.PROPERTY_STAGE) < 3)
 					{
 						mappings.remove(BlockOrangeTree.PROPERTY_IS_TOP_BLOCK);
 						mappings.remove(BlockOrangeTree.PROPERTY_STAGE);

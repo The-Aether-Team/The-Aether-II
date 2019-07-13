@@ -53,7 +53,7 @@ public class WorldGenIceCrystals implements WorldDecorationGenerator
 				{
 					int type = rand.nextInt(3);
                     slice.setBlockState(randomPos,
-							this.crystalState.withProperty(BlockIceCrystal.PROPERTY_VARIANT, BlockIceCrystal.PROPERTY_VARIANT.fromMeta(type)));
+							this.crystalState.with(BlockIceCrystal.PROPERTY_VARIANT, BlockIceCrystal.PROPERTY_VARIANT.fromMeta(type)));
 					if (this.max > 0)
 					{
 						if (count < this.max)
@@ -72,7 +72,7 @@ public class WorldGenIceCrystals implements WorldDecorationGenerator
 					int type = rand.nextInt(3);
 					type = type + 3;
 					slice.setBlockState(randomPos,
-							this.crystalState.withProperty(BlockIceCrystal.PROPERTY_VARIANT, BlockIceCrystal.PROPERTY_VARIANT.fromMeta(type)));
+							this.crystalState.with(BlockIceCrystal.PROPERTY_VARIANT, BlockIceCrystal.PROPERTY_VARIANT.fromMeta(type)));
 					if (this.max > 0)
 					{
 						if (count < this.max)

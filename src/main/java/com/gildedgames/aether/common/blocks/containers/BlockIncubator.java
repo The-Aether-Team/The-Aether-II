@@ -3,13 +3,11 @@ package com.gildedgames.aether.common.blocks.containers;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.tiles.TileEntityIncubator;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
-import net.minecraft.block.ContainerBlock;
-import net.minecraft.block.BlockRenderType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.state.BooleanProperty;
-import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.state.DirectionProperty;
+import net.minecraft.state.StateContainer;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.entity.LivingEntity;
@@ -33,21 +31,17 @@ public class BlockIncubator extends ContainerBlock
 
 	public static final BooleanProperty PROPERTY_IS_LIT = BooleanProperty.create("is_lit");
 
-	public static final PropertyDirection PROPERTY_FACING = PropertyDirection.create("facing", Direction.Plane.HORIZONTAL);
+	public static final DirectionProperty PROPERTY_FACING = DirectionProperty.create("facing", Direction.Plane.HORIZONTAL);
 
 	public static final int UNLIT_META = 0, LIT_META = 1;
 
 	protected static final AxisAlignedBB BOUNDS = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.8D, 1.0D);
 
-	public BlockIncubator()
+	public BlockIncubator(Block.Properties properties)
 	{
-		super(Material.WOOD);
+		super(properties);
 
-		this.setHardness(2.5f);
-
-		this.setSoundType(SoundType.WOOD);
-
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_IS_LIT, Boolean.FALSE).withProperty(PROPERTY_FACING, Direction.NORTH));
+		this.setDefaultState(this.stateContainer.getBaseState().with(PROPERTY_IS_LIT, Boolean.FALSE).with(PROPERTY_FACING, Direction.NORTH));
 	}
 
 	@Override
@@ -109,7 +103,7 @@ public class BlockIncubator extends ContainerBlock
 	@Override
 	public void onBlockPlacedBy(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack)
 	{
-		world.setBlockState(pos, state.withProperty(PROPERTY_FACING, placer.getHorizontalFacing()), 2);
+		world.setBlockState(pos, state.with(PROPERTY_FACING, placer.getHorizontalFacing()), 2);
 	}
 
 	@Override
@@ -127,15 +121,15 @@ public class BlockIncubator extends ContainerBlock
 	@Override
 	public int getLightValue(BlockState state, IBlockReader world, BlockPos pos)
 	{
-		return state.getValue(PROPERTY_IS_LIT) ? 13 : 0;
+		return state.get(PROPERTY_IS_LIT) ? 13 : 0;
 	}
 
 	@Override
 	public int getMetaFromState(BlockState state)
 	{
-		int meta = state.getValue(PROPERTY_FACING).getIndex();
+		int meta = state.get(PROPERTY_FACING).getIndex();
 
-		if (state.getValue(PROPERTY_IS_LIT))
+		if (state.get(PROPERTY_IS_LIT))
 		{
 			meta |= 8;
 		}
@@ -150,17 +144,17 @@ public class BlockIncubator extends ContainerBlock
 
 		boolean isLit = (meta & 8) == 8;
 
-		return this.getDefaultState().withProperty(PROPERTY_FACING, facing).withProperty(PROPERTY_IS_LIT, isLit);
+		return this.getDefaultState().with(PROPERTY_FACING, facing).with(PROPERTY_IS_LIT, isLit);
 	}
 
 	@Override
-	protected BlockStateContainer createBlockState()
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
-		return new BlockStateContainer(this, PROPERTY_IS_LIT, PROPERTY_FACING);
+		builder.add(PROPERTY_IS_LIT, PROPERTY_FACING);
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int meta)
+	public TileEntity createNewTileEntity(IBlockReader reader)
 	{
 		return new TileEntityIncubator();
 	}

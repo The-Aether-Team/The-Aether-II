@@ -1,14 +1,15 @@
 package com.gildedgames.aether.common.entities.projectiles;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.monster.EntityBlaze;
-import net.minecraft.entity.projectile.EntitySnowball;
-import net.minecraft.particles.ParticleTypes;
+import net.minecraft.entity.monster.BlazeEntity;
+import net.minecraft.entity.projectile.SnowballEntity;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class EntityDaggerfrostSnowball extends EntitySnowball
+public class EntityDaggerfrostSnowball extends SnowballEntity
 {
 
 	public EntityDaggerfrostSnowball(World world)
@@ -29,26 +30,19 @@ public class EntityDaggerfrostSnowball extends EntitySnowball
 	@Override
 	protected void onImpact(RayTraceResult result)
 	{
-		if (result.entityHit != null)
+		if (result.getType() == RayTraceResult.Type.ENTITY)
 		{
-			byte b0 = 2;
+			Entity entity = ((EntityRayTraceResult) result).getEntity();
+			int damage = entity instanceof BlazeEntity ? 3 : 0;
 
-			if (result.entityHit instanceof EntityBlaze)
-			{
-				b0 += 3;
-			}
-
-			result.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float) b0);
-		}
-
-		for (int i = 0; i < 8; ++i)
-		{
-			this.world.spawnParticle(ParticleTypes.SNOWBALL, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
+			entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float) damage);
 		}
 
 		if (!this.world.isRemote)
 		{
-			this.setDead();
+			this.world.setEntityState(this, (byte) 3);
+
+			this.remove();
 		}
 	}
 

@@ -97,7 +97,7 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 	{
 		IslandChunkMaskTransformer transformer = new IslandChunkMaskTransformer();
 		transformer.setMaskValue(IslandBlockType.TOPSOIL_BLOCK,
-				BlocksAether.aether_grass.getDefaultState().withProperty(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.IRRADIATED));
+				BlocksAether.aether_grass.getDefaultState().with(BlockAetherGrass.PROPERTY_VARIANT, BlockAetherGrass.IRRADIATED));
 
 		return transformer;
 	}

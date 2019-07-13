@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.blocks.construction;
 
-import net.minecraft.block.BlockBreakable;
+import net.minecraft.block.Block;
+import net.minecraft.block.BreakableBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -11,18 +12,13 @@ import net.minecraft.world.IBlockReader;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.api.distmarker.Dist;
 
-public class BlockRockGlassTranslucent extends BlockBreakable
+public class BlockRockGlassTranslucent extends BreakableBlock
 {
-	public BlockRockGlassTranslucent()
+	public BlockRockGlassTranslucent(Block.Properties properties)
 	{
-		super(Material.GLASS, false);
-
-		this.setHardness(1f);
-		this.setResistance(2000f);
+		super(properties);
 
 		this.setLightOpacity(3);
-
-		this.setSoundType(SoundType.GLASS);
 	}
 
 	@Override

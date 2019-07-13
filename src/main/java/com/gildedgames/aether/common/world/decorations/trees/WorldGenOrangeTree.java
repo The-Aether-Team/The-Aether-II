@@ -43,14 +43,14 @@ public class WorldGenOrangeTree extends WorldGenerator
 			{
 				final int stage = 1 + rand.nextInt(4);
 
-				final BlockState state = BlocksAether.orange_tree.getDefaultState().withProperty(BlockOrangeTree.PROPERTY_STAGE, stage);
+				final BlockState state = BlocksAether.orange_tree.getDefaultState().with(BlockOrangeTree.PROPERTY_STAGE, stage);
 
 				if (stage >= 3)
 				{
-					world.setBlockState(posUp, state.withProperty(BlockOrangeTree.PROPERTY_IS_TOP_BLOCK, Boolean.TRUE), 2 | 16);
+					world.setBlockState(posUp, state.with(BlockOrangeTree.PROPERTY_IS_TOP_BLOCK, Boolean.TRUE), 2 | 16);
 				}
 
-				world.setBlockState(pos, state.withProperty(BlockOrangeTree.PROPERTY_IS_TOP_BLOCK, Boolean.FALSE), 2 | 16);
+				world.setBlockState(pos, state.with(BlockOrangeTree.PROPERTY_IS_TOP_BLOCK, Boolean.FALSE), 2 | 16);
 			}
 		}
 

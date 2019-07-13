@@ -68,7 +68,7 @@ public abstract class EntityCompanion extends CreatureEntity
 	}
 
 	@Override
-	protected void entityInit()
+	protected void registerData()
 	{
 		super.registerData();
 
@@ -101,7 +101,7 @@ public abstract class EntityCompanion extends CreatureEntity
 	{
 		if (!this.world.isRemote && (this.getOwner() == null || this.getOwner().isDead))
 		{
-			this.setDead();
+			this.remove();
 
 			this.wasDespawned = true;
 		}

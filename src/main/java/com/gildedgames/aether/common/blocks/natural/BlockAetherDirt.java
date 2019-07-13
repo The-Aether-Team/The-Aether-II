@@ -3,18 +3,19 @@ package com.gildedgames.aether.common.blocks.natural;
 import com.gildedgames.aether.common.blocks.IBlockMultiName;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
-import com.gildedgames.aether.common.blocks.util.BlockBuilder;
+import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.state.StateContainer;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class BlockAetherDirt extends BlockBuilder implements IBlockMultiName
+public class BlockAetherDirt extends Block implements IBlockMultiName
 {
 
 	public static final BlockVariant DIRT = new BlockVariant(0, "dirt"),
@@ -22,20 +23,17 @@ public class BlockAetherDirt extends BlockBuilder implements IBlockMultiName
 
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", DIRT, COARSE_DIRT);
 
-	public BlockAetherDirt()
+	public BlockAetherDirt(Block.Properties properties)
 	{
-		super(Material.GROUND);
+		super(properties);
 
-		this.setSoundType(SoundType.GROUND);
-		this.setHardness(0.5f);
-
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, DIRT));
+		this.setDefaultState(this.stateContainer.getBaseState().with(PROPERTY_VARIANT, DIRT));
 	}
 
 	@Override
 	public int damageDropped(final BlockState state)
 	{
-		return state.getValue(PROPERTY_VARIANT).getMeta();
+		return state.get(PROPERTY_VARIANT).getMeta();
 	}
 
 	@Override
@@ -53,19 +51,19 @@ public class BlockAetherDirt extends BlockBuilder implements IBlockMultiName
 	{
 		final BlockVariant variant = PROPERTY_VARIANT.fromMeta(meta);
 
-		return this.getDefaultState().withProperty(PROPERTY_VARIANT, variant);
+		return this.getDefaultState().with(PROPERTY_VARIANT, variant);
 	}
 
 	@Override
 	public int getMetaFromState(final BlockState state)
 	{
-		return state.getValue(PROPERTY_VARIANT).getMeta();
+		return state.get(PROPERTY_VARIANT).getMeta();
 	}
 
 	@Override
-	protected BlockStateContainer createBlockState()
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
-		return new BlockStateContainer(this, PROPERTY_VARIANT);
+		builder.add(PROPERTY_VARIANT);
 	}
 
 	@Override

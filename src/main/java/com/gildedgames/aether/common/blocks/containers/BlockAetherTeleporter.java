@@ -1,11 +1,15 @@
 package com.gildedgames.aether.common.blocks.containers;
 
+import com.gildedgames.aether.common.blocks.construction.walls.BlockCustomWall;
+import com.gildedgames.aether.common.blocks.construction.walls.BlockSkyrootWall;
 import com.gildedgames.aether.common.blocks.multiblock.BlockMultiController;
 import com.gildedgames.aether.common.entities.tiles.TileEntityTeleporter;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.state.DirectionProperty;
+import net.minecraft.state.StateContainer;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.entity.LivingEntity;
@@ -20,15 +24,13 @@ import javax.annotation.Nullable;
 public class BlockAetherTeleporter extends BlockMultiController
 {
 
-	public static final PropertyDirection PROPERTY_FACING = PropertyDirection.create("facing", Direction.Plane.HORIZONTAL);
+	public static final DirectionProperty PROPERTY_FACING = DirectionProperty.create("facing", Direction.Plane.HORIZONTAL);
 
-	public BlockAetherTeleporter()
+	public BlockAetherTeleporter(Block.Properties properties)
 	{
-		super(Material.ROCK);
+		super(properties);
 
-		this.setHardness(2.5f);
-		this.setSoundType(SoundType.STONE);
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_FACING, Direction.NORTH));
+		this.setDefaultState(this.stateContainer.getBaseState().with(PROPERTY_FACING, Direction.NORTH));
 	}
 
 	@Override
@@ -42,19 +44,19 @@ public class BlockAetherTeleporter extends BlockMultiController
 			final float hitZ, final int meta,
 			final LivingEntity placer)
 	{
-		return this.getDefaultState().withProperty(PROPERTY_FACING, placer.getHorizontalFacing());
+		return this.getDefaultState().with(PROPERTY_FACING, placer.getHorizontalFacing());
 	}
 
 	@Override
 	public BlockState getStateFromMeta(final int meta)
 	{
-		return this.getDefaultState().withProperty(PROPERTY_FACING, Direction.byHorizontalIndex(meta));
+		return this.getDefaultState().with(PROPERTY_FACING, Direction.byHorizontalIndex(meta));
 	}
 
 	@Override
 	public int getMetaFromState(final BlockState state)
 	{
-		return state.getValue(PROPERTY_FACING).getIndex();
+		return state.get(PROPERTY_FACING).getIndex();
 	}
 
 	@Override
@@ -71,15 +73,15 @@ public class BlockAetherTeleporter extends BlockMultiController
 
 	@Nullable
 	@Override
-	public TileEntity createNewTileEntity(final World world, final int i)
+	public TileEntity createNewTileEntity(IBlockReader reader)
 	{
 		return new TileEntityTeleporter();
 	}
 
 	@Override
-	protected BlockStateContainer createBlockState()
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
-		return new BlockStateContainer(this, PROPERTY_FACING);
+		builder.add(PROPERTY_FACING);
 	}
 
 	@Override

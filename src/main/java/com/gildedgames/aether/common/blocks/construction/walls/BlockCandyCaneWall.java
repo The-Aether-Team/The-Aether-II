@@ -1,11 +1,12 @@
 package com.gildedgames.aether.common.blocks.construction.walls;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
-import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
@@ -16,9 +17,9 @@ import java.util.Random;
 public class BlockCandyCaneWall extends BlockCustomWall
 {
 
-	public BlockCandyCaneWall(BlockState state, float hardness, float resistance)
+	public BlockCandyCaneWall(Block.Properties properties)
 	{
-		super(state, hardness, resistance);
+		super(properties);
 	}
 
 	@Override
@@ -66,6 +67,6 @@ public class BlockCandyCaneWall extends BlockCustomWall
 	@Override
 	public MapColor getMapColor(BlockState state, IBlockReader worldIn, BlockPos pos)
 	{
-		return MapColor.getBlockColor(EnumDyeColor.RED);
+		return MapColor.getBlockColor(DyeColor.RED);
 	}
 }

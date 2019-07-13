@@ -14,12 +14,9 @@ import java.util.Random;
 
 public class BlockCustomBookshelf extends Block
 {
-	public BlockCustomBookshelf(Material material, SoundType soundType)
+	public BlockCustomBookshelf(Block.Properties properties)
 	{
-		super(material);
-
-		this.setSoundType(soundType);
-		this.setHardness(2.0F);
+		super(properties);
 	}
 
 	@Override

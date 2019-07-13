@@ -4,38 +4,33 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.tiles.TileEntityIcestoneCooler;
 import com.gildedgames.aether.common.entities.tiles.TileEntityMasonryBench;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
-import net.minecraft.block.ContainerBlock;
-import net.minecraft.block.BlockRenderType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.state.DirectionProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
+import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 public class BlockMasonryBench extends ContainerBlock
 {
 
-	public static final PropertyDirection PROPERTY_FACING = PropertyDirection.create("facing", Direction.Plane.HORIZONTAL);
+	public static final DirectionProperty PROPERTY_FACING = DirectionProperty.create("facing", Direction.Plane.HORIZONTAL);
 
-	public BlockMasonryBench()
+	public BlockMasonryBench(Block.Properties properties)
 	{
-		super(Material.WOOD);
+		super(properties);
 
-		this.setHardness(2.5f);
-
-		this.setSoundType(SoundType.WOOD);
-
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_FACING, Direction.NORTH));
+		this.setDefaultState(this.stateContainer.getBaseState().with(PROPERTY_FACING, Direction.NORTH));
 	}
 
 	@Override
@@ -47,7 +42,7 @@ public class BlockMasonryBench extends ContainerBlock
 	@Override
 	public void onBlockPlacedBy(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack)
 	{
-		world.setBlockState(pos, state.withProperty(PROPERTY_FACING, placer.getHorizontalFacing()), 2);
+		world.setBlockState(pos, state.with(PROPERTY_FACING, placer.getHorizontalFacing()), 2);
 	}
 
 	@Override
@@ -65,7 +60,7 @@ public class BlockMasonryBench extends ContainerBlock
 	@Override
 	public int getMetaFromState(BlockState state)
 	{
-		return state.getValue(PROPERTY_FACING).getIndex();
+		return state.get(PROPERTY_FACING).getIndex();
 	}
 
 	@Override
@@ -73,17 +68,17 @@ public class BlockMasonryBench extends ContainerBlock
 	{
 		Direction facing = Direction.byHorizontalIndex(meta);
 
-		return this.getDefaultState().withProperty(PROPERTY_FACING, facing);
+		return this.getDefaultState().with(PROPERTY_FACING, facing);
 	}
 
 	@Override
-	protected BlockStateContainer createBlockState()
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
-		return new BlockStateContainer(this, PROPERTY_FACING);
+		builder.add(PROPERTY_FACING);
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int meta)
+	public TileEntity createNewTileEntity(IBlockReader reader)
 	{
 		return new TileEntityMasonryBench();
 	}

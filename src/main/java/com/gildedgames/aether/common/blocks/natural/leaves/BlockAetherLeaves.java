@@ -5,14 +5,16 @@ import com.gildedgames.aether.client.renderer.particles.ParticleGolden;
 import com.gildedgames.aether.client.renderer.particles.ParticleLeaf;
 import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherUniqueSapling;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
+import net.minecraft.state.StateContainer;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -28,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class BlockAetherLeaves extends BlockLeaves implements IShearable
+public class BlockAetherLeaves extends LeavesBlock implements IShearable
 {
 	public static final BooleanProperty PROPERTY_DECAYABLE = BooleanProperty.create("decayable");
 
@@ -36,15 +38,12 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 
 	private int[] surroundings;
 
-	public BlockAetherLeaves()
+	public BlockAetherLeaves(Block.Properties properties)
 	{
-		this.setHardness(0.2f);
-		this.setTickRandomly(true);
-
-		this.setSoundType(SoundType.PLANT);
+		super(properties);
 
 		this.setDefaultState(
-				this.getBlockState().getBaseState().withProperty(PROPERTY_DECAYABLE, Boolean.TRUE).withProperty(PROPERTY_CHECK_DECAY, Boolean.TRUE));
+				this.getBlockState().getBaseState().with(PROPERTY_DECAYABLE, Boolean.TRUE).with(PROPERTY_CHECK_DECAY, Boolean.TRUE));
 	}
 
 	@Override
@@ -153,12 +152,12 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 	}
 
 	@Override
-	public void updateTick(final World world, final BlockPos pos, final BlockState state, final Random rand)
+	public void tick(BlockState state, World world, BlockPos pos, Random rand)
 	{
 		if (!world.isRemote)
 		{
-			final boolean checkDecay = state.getValue(PROPERTY_CHECK_DECAY);
-			final boolean isDecayable = state.getValue(PROPERTY_DECAYABLE);
+			final boolean checkDecay = state.get(PROPERTY_CHECK_DECAY);
+			final boolean isDecayable = state.get(PROPERTY_DECAYABLE);
 
 			if (checkDecay && isDecayable)
 			{
@@ -279,7 +278,7 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 
 				if (x2 >= 0)
 				{
-					world.setBlockState(pos, world.getBlockState(pos).withProperty(PROPERTY_CHECK_DECAY, false), 4);
+					world.setBlockState(pos, world.getBlockState(pos).with(PROPERTY_CHECK_DECAY, false), 4);
 				}
 				else
 				{
@@ -292,9 +291,9 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 	@Override
 	public void beginLeavesDecay(final BlockState state, final World world, final BlockPos pos)
 	{
-		if (!state.getValue(PROPERTY_CHECK_DECAY))
+		if (!state.get(PROPERTY_CHECK_DECAY))
 		{
-			world.setBlockState(pos, state.withProperty(PROPERTY_CHECK_DECAY, true), 4);
+			world.setBlockState(pos, state.with(PROPERTY_CHECK_DECAY, true), 4);
 		}
 	}
 
@@ -315,7 +314,7 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 	{
 		this.dropBlockAsItem(worldIn, pos, worldIn.getBlockState(pos), 0);
 
-		worldIn.setBlockToAir(pos);
+		worldIn.removeBlock(pos, false);
 	}
 
 	@Override
@@ -430,8 +429,8 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 	@Override
 	public BlockState getStateFromMeta(final int meta)
 	{
-		return this.getDefaultState().withProperty(PROPERTY_DECAYABLE, (meta & 4) == 4)
-				.withProperty(PROPERTY_CHECK_DECAY, (meta & 8) == 8);
+		return this.getDefaultState().with(PROPERTY_DECAYABLE, (meta & 4) == 4)
+				.with(PROPERTY_CHECK_DECAY, (meta & 8) == 8);
 	}
 
 	@Override
@@ -439,12 +438,12 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 	{
 		int meta = 0;
 
-		if (state.getValue(PROPERTY_DECAYABLE))
+		if (state.get(PROPERTY_DECAYABLE))
 		{
 			meta |= 4;
 		}
 
-		if (state.getValue(PROPERTY_CHECK_DECAY))
+		if (state.get(PROPERTY_CHECK_DECAY))
 		{
 			meta |= 8;
 		}
@@ -453,10 +452,11 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 	}
 
 	@Override
-	protected BlockStateContainer createBlockState()
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
-		return new BlockStateContainer(this, PROPERTY_DECAYABLE, PROPERTY_CHECK_DECAY);
+		builder.add(PROPERTY_DECAYABLE, PROPERTY_CHECK_DECAY);
 	}
+
 
 /*	@Override
 	public BlockPlanks.EnumType getWoodType(int meta)

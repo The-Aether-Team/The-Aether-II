@@ -3,13 +3,14 @@ package com.gildedgames.aether.common.blocks.natural.leaves;
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherSkyrootSapling;
 import com.gildedgames.aether.common.blocks.natural.wood.BlockAetherLog;
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
 public class BlockSkyrootLeaves extends BlockColoredLeaves
 {
-	public BlockSkyrootLeaves(Color color)
+	public BlockSkyrootLeaves(Block.Properties properties, Color color)
 	{
-		super(color);
+		super(properties, color);
 	}
 
 	@Override

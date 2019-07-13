@@ -8,15 +8,13 @@ import com.gildedgames.orbis.lib.core.BlueprintDefinition;
 import com.gildedgames.orbis.lib.core.CreationData;
 import com.gildedgames.orbis.lib.core.baking.BakedBlueprint;
 import com.gildedgames.orbis.lib.core.util.BlueprintPlacer;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.IGrowable;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.state.StateContainer;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -36,22 +34,19 @@ public abstract class BlockAetherSapling extends BlockAetherPlant implements IGr
 
 	public BlockAetherSapling()
 	{
-		super(Material.PLANTS);
-
-		this.setSoundType(SoundType.PLANT);
-		this.setTickRandomly(true);
+		super(Block.Properties.create(Material.PLANTS).sound(SoundType.PLANT).doesNotBlockMovement().tickRandomly());
 	}
 
 	@Override
-	public void updateTick(final World worldIn, final BlockPos pos, final BlockState state, final Random rand)
+	public void tick(BlockState state, World world, BlockPos pos, Random rand)
 	{
-		if (!worldIn.isRemote)
+		if (!world.isRemote)
 		{
-			super.updateTick(worldIn, pos, state, rand);
+			super.tick(state, world, pos, rand);
 
-			if (worldIn.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0)
+			if (world.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0)
 			{
-				this.grow(worldIn, rand, pos, state);
+				this.grow(world, rand, pos, state);
 			}
 		}
 	}
@@ -59,9 +54,9 @@ public abstract class BlockAetherSapling extends BlockAetherPlant implements IGr
 	@Override
 	public void grow(final World world, final Random rand, final BlockPos pos, final BlockState state)
 	{
-		if (state.getValue(PROPERTY_STAGE) == 0)
+		if (state.get(PROPERTY_STAGE) == 0)
 		{
-			world.setBlockState(pos, state.cycleProperty(PROPERTY_STAGE), 4);
+			world.setBlockState(pos, state.cycle(PROPERTY_STAGE), 4);
 
 			return;
 		}
@@ -105,26 +100,26 @@ public abstract class BlockAetherSapling extends BlockAetherPlant implements IGr
 	@Override
 	public int damageDropped(final BlockState state)
 	{
-		return state.getValue(this.getPropertyVariant()).getMeta();
+		return state.get(this.getPropertyVariant()).getMeta();
 	}
 
 	@Override
 	public BlockState getStateFromMeta(final int meta)
 	{
-		return this.getDefaultState().withProperty(this.getPropertyVariant(), this.getPropertyVariant().fromMeta(meta & 7))
-				.withProperty(PROPERTY_STAGE, (meta & 8) >> 3);
+		return this.getDefaultState().with(this.getPropertyVariant(), this.getPropertyVariant().fromMeta(meta & 7))
+				.with(PROPERTY_STAGE, (meta & 8) >> 3);
 	}
 
 	@Override
 	public int getMetaFromState(final BlockState state)
 	{
-		return state.getValue(this.getPropertyVariant()).getMeta() | (state.getValue(PROPERTY_STAGE) << 3);
+		return state.get(this.getPropertyVariant()).getMeta() | (state.get(PROPERTY_STAGE) << 3);
 	}
 
 	@Override
-	protected BlockStateContainer createBlockState()
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
-		return new BlockStateContainer(this, this.getPropertyVariant(), PROPERTY_STAGE);
+		builder.add(this.getPropertyVariant(), PROPERTY_STAGE);
 	}
 
 	@Override
