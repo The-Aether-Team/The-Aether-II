@@ -52,6 +52,6 @@ public class RenderSwet extends LivingRenderer<EntitySwet, ModelSwetHead>
 	@Override
 	protected ResourceLocation getEntityTexture(final EntitySwet entity)
 	{
-		return entity.getType().texture_head;
+		return entity.getSwetType().texture_head;
 	}
 }

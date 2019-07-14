@@ -137,7 +137,7 @@ public class EntityUtil
 		return angle + f;
 	}
 
-	public static void spawnParticleLineBetween(final Entity e1, final Entity e2, final double density, final ParticleTypes type, final int... parameters)
+	public static void spawnParticleLineBetween(final Entity e1, final Entity e2, final double density, final IParticleData type)
 	{
 		for (int k = 0; k < 1; ++k)
 		{
@@ -179,14 +179,14 @@ public class EntityUtil
 
 				if (e1.world.isRemote())
 				{
-					e1.world.spawnParticle(type, currentX + randX, currentY, currentZ + randZ, motionX, motionY, motionZ, parameters);
+					e1.world.addParticle(type, currentX + randX, currentY, currentZ + randZ, motionX, motionY, motionZ);
 				}
 				else if (e1.world instanceof ServerWorld)
 				{
 					final ServerWorld worldServer = (ServerWorld) e1.world;
 					worldServer.spawnParticle(type,
 							currentX + randX, currentY,
-							currentZ + randZ, 1, motionX, motionY, motionZ, (world.rand.nextBoolean() ? 0.01D : -0.01D), parameters);
+							currentZ + randZ, 1, motionX, motionY, motionZ, (world.rand.nextBoolean() ? 0.01D : -0.01D));
 				}
 
 				currentX += difX;

@@ -7,6 +7,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.EnumSet;
 import java.util.Random;
 
 public class EntityAIHideFromLight extends Goal
@@ -33,7 +34,7 @@ public class EntityAIHideFromLight extends Goal
 		this.lightLevel = lightLevel;
 		this.enabled = true;
 
-		this.setMutexBits(1);
+		this.setMutexFlags(EnumSet.of(Goal.Flag.MOVE));
 	}
 
 	@Override
@@ -50,7 +51,7 @@ public class EntityAIHideFromLight extends Goal
 		{
 			return false;
 		}
-		else if (!world.canSeeSky(new BlockPos(this.entity.posX, this.entity.getBoundingBox().minY, this.entity.posZ)))
+		else if (!world.canBlockSeeSky(new BlockPos(this.entity.posX, this.entity.getBoundingBox().minY, this.entity.posZ)))
 		{
 			return false;
 		}

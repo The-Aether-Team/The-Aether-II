@@ -10,6 +10,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
 import javax.annotation.Nullable;
+import java.util.EnumSet;
 import java.util.Random;
 
 public class EntityAIUnstuckBlueAercloud extends Goal
@@ -27,7 +28,7 @@ public class EntityAIUnstuckBlueAercloud extends Goal
 	{
 		this.entity = entity;
 
-		this.setMutexBits(1);
+		this.setMutexFlags(EnumSet.of(Goal.Flag.MOVE));
 	}
 
 	@Override
@@ -39,7 +40,7 @@ public class EntityAIUnstuckBlueAercloud extends Goal
 		}
 
 		if (!WorldUtil.isBlockBelowAABB(this.entity.getBoundingBox(), this.entity.world,
-				BlocksAether.aercloud.getStateFromMeta(BlockAercloud.BLUE_AERCLOUD.getMeta())))
+				BlocksAether.aercloud.getDefaultState().with(BlockAercloud.PROPERTY_VARIANT, BlockAercloud.BLUE_AERCLOUD)))
 		{
 			return false;
 		}
@@ -64,13 +65,13 @@ public class EntityAIUnstuckBlueAercloud extends Goal
 	public boolean shouldContinueExecuting()
 	{
 		return WorldUtil.isBlockBelowAABB(this.entity.getBoundingBox(), this.entity.world,
-				BlocksAether.aercloud.getStateFromMeta(BlockAercloud.BLUE_AERCLOUD.getMeta()));
+				BlocksAether.aercloud.getDefaultState().with(BlockAercloud.PROPERTY_VARIANT, BlockAercloud.BLUE_AERCLOUD));
 	}
 
 	@Override
-	public void updateTask()
+	public void tick()
 	{
-		this.entity.moveRelative(0.0F, 0.0F, 0.5F, 0.1F);
+		this.entity.moveRelative(0.0F, new Vec3d(0.0F, 0.5F, 0.1F));
 		EntityUtil.facePos(this.entity, this.targetX, this.targetY, this.targetZ, 10.0F, 10.0F);
 	}
 
@@ -84,7 +85,7 @@ public class EntityAIUnstuckBlueAercloud extends Goal
 		{
 			BlockPos blockpos1 = blockpos.add(random.nextInt(20) - 10, random.nextInt(6) - 3, random.nextInt(20) - 10);
 
-			if (EntityUtil.getBlockBelow(this.entity.world, blockpos1) != BlocksAether.aercloud.getStateFromMeta(BlockAercloud.BLUE_AERCLOUD.getMeta()))
+			if (EntityUtil.getBlockBelow(this.entity.world, blockpos1) != BlocksAether.aercloud.getDefaultState().with(BlockAercloud.PROPERTY_VARIANT, BlockAercloud.BLUE_AERCLOUD))
 			{
 				return new Vec3d((double) blockpos1.getX(), (double) blockpos1.getY(), (double) blockpos1.getZ());
 			}

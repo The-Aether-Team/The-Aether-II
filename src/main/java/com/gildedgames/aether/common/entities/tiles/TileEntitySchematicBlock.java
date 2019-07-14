@@ -14,7 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.LockableTileEntity;
@@ -285,15 +285,15 @@ public abstract class TileEntitySchematicBlock extends LockableTileEntity implem
 	}
 
 	@Override
-	public SPacketUpdateTileEntity getUpdatePacket()
+	public SUpdateTileEntityPacket getUpdatePacket()
 	{
 		final CompoundNBT compound = this.getUpdateTag();
 
-		return new SPacketUpdateTileEntity(this.pos, 1, compound);
+		return new SUpdateTileEntityPacket(this.pos, 1, compound);
 	}
 
 	@Override
-	public void onDataPacket(final NetworkManager networkManager, final SPacketUpdateTileEntity packet)
+	public void onDataPacket(final NetworkManager networkManager, final SUpdateTileEntityPacket packet)
 	{
 		this.readFromNBT(packet.getNbtCompound());
 	}

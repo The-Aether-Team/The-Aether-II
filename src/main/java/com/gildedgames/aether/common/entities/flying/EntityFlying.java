@@ -6,19 +6,27 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityBodyHelper;
 import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.controller.BodyController;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
+import net.minecraft.entity.ai.goal.MoveTowardsRestrictionGoal;
 import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+
+import java.util.EnumSet;
 
 public class EntityFlying extends CreatureEntity
 {
@@ -31,12 +39,9 @@ public class EntityFlying extends CreatureEntity
 
 	private float clientSideTailAnimation;
 
-	public EntityFlying(final World world)
+	protected EntityFlying(EntityType<? extends CreatureEntity> type, World world)
 	{
-		super(world);
-
-		this.setSize(0.85F, 0.85F);
-		this.moveHelper = new FlyingMoveHelper(this);
+		super(type, world);
 
 		this.clientSideTailAnimation = this.rand.nextFloat();
 		this.clientSideTailAnimationO = this.clientSideTailAnimation;
@@ -46,7 +51,7 @@ public class EntityFlying extends CreatureEntity
 	{
 		final RandomWalkingGoal wander = new EntityAIForcedWander(this, 0.4D, 5);
 
-		wander.setMutexBits(1);
+		wander.setMutexFlags(EnumSet.of(Goal.Flag.MOVE));
 
 		return wander;
 	}
@@ -54,16 +59,18 @@ public class EntityFlying extends CreatureEntity
 	@Override
 	protected void registerGoals()
 	{
-		final EntityAIMoveTowardsRestriction moveTowardsRestriction = new EntityAIMoveTowardsRestriction(this, 0.4D);
+		final MoveTowardsRestrictionGoal moveTowardsRestriction = new MoveTowardsRestrictionGoal(this, 0.4D);
 
-		moveTowardsRestriction.setMutexBits(1);
+		moveTowardsRestriction.setMutexFlags(EnumSet.of(Goal.Flag.MOVE));
 
 		this.goalSelector.addGoal(1, moveTowardsRestriction);
 		this.goalSelector.addGoal(2, this.createWanderTask());
+
+		this.moveController = new FlyingMoveHelper(this);
 	}
 
 	@Override
-	protected EntityBodyHelper createBodyHelper()
+	protected BodyController createBodyController()
 	{
 		return new EntityBodyHelperFlying(this);
 	}
@@ -81,22 +88,13 @@ public class EntityFlying extends CreatureEntity
 	}
 
 	@Override
-	public float getBlockPathWeight(final BlockPos pos)
+	public float getBlockPathWeight(BlockPos pos, IWorldReader reader)
 	{
-		return this.world.getBlockState(pos).getMaterial() == Material.AIR ? 10.0F + this.world.getLightBrightness(pos) - 0.5F : super.getBlockPathWeight(pos);
+		return this.world.getBlockState(pos).getMaterial() == Material.AIR ? 10.0F + this.world.getBrightness(pos) - 0.5F : super.getBlockPathWeight(pos);
 	}
 
 	@Override
-	public boolean getCanSpawnHere()
-	{
-		final BlockState state = this.world.getBlockState((new BlockPos(this)).down());
-
-		return state.canEntitySpawn(this)
-				&& this.getBlockPathWeight(this.world.getTopSolidOrLiquidBlock(new BlockPos(this.posX, this.getBoundingBox().minY, this.posZ))) >= 0.0F;
-	}
-
-	@Override
-	protected void playStepSound(final BlockPos pos, final Block blockIn)
+	protected void playStepSound(final BlockPos pos, final BlockState blockIn)
 	{
 
 	}
@@ -136,15 +134,15 @@ public class EntityFlying extends CreatureEntity
 	}
 
 	@Override
-	public void livingTick()
+	public void tick()
 	{
-		super.livingTick();
+		super.tick();
 
 		this.fallDistance = 0.0F;
 
 		if (this.onGround)
 		{
-			this.motionY += 0.10D;
+			this.setMotion(this.getMotion().getX(), this.getMotion().getY() + 0.1D, this.getMotion().getZ());
 			//this.motionX += (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 0.4F);
 			//this.motionZ += (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 0.4F);
 			this.rotationYaw = this.rand.nextFloat() * 360.0F;
@@ -154,8 +152,10 @@ public class EntityFlying extends CreatureEntity
 
 		if (this.collidedHorizontally || this.collidedVertically || !this.isNotColliding())
 		{
-			this.motionX += (this.rand.nextBoolean() ? 1.0F : -1.0F) * (double) ((this.rand.nextFloat() * 2.0F - 1.0F) * 0.2F);
-			this.motionZ += (this.rand.nextBoolean() ? 1.0F : -1.0F) * (double) ((this.rand.nextFloat() * 2.0F - 1.0F) * 0.2F);
+			double motionX = this.getMotion().getX() + (this.rand.nextBoolean() ? 1.0F : -1.0F) * (double) ((this.rand.nextFloat() * 2.0F - 1.0F) * 0.2F);
+			double motionZ = this.getMotion().getZ() + (this.rand.nextBoolean() ? 1.0F : -1.0F) * (double) ((this.rand.nextFloat() * 2.0F - 1.0F) * 0.2F);
+
+			this.setMotion(motionX, this.getMotion().getY(), motionZ);
 		}
 
 		if (this.world.isRemote())
@@ -222,24 +222,23 @@ public class EntityFlying extends CreatureEntity
 	}
 
 	@Override
-	public void travel(final float strafe, final float vertical, final float forward)
+	public void travel(Vec3d vec)
 	{
 		if (this.isServerWorld())
 		{
-			super.moveRelative(strafe, vertical, forward, 0.1F);
-			this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
-			this.motionX *= 0.8999999761581421D;
-			this.motionY *= 0.8999999761581421D;
-			this.motionZ *= 0.8999999761581421D;
+			super.moveRelative(0.1F, vec);
+
+			this.move(MoverType.SELF, this.getMotion());
+			this.setMotion(this.getMotion().mul(0.9D, 0.9D, 0.9D));
 		}
 		else
 		{
-			super.travel(strafe, vertical, forward);
+			super.travel(vec);
 		}
 	}
 
 	@Override
-	protected boolean canDespawn()
+	public boolean canDespawn(double closestDistance)
 	{
 		return false;
 	}

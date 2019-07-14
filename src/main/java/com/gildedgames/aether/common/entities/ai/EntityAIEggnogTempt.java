@@ -6,6 +6,8 @@ import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.pathfinding.GroundPathNavigator;
 
+import java.util.EnumSet;
+
 public class EntityAIEggnogTempt extends Goal
 {
 	/** The entity using this AI that is tempted by the player. */
@@ -29,7 +31,7 @@ public class EntityAIEggnogTempt extends Goal
 	{
 		this.temptedEntity = temptedEntityIn;
 		this.speed = speedIn;
-		this.setMutexBits(3);
+		this.setMutexFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
 
 		if (!(temptedEntityIn.getNavigator() instanceof GroundPathNavigator))
 		{
@@ -50,7 +52,7 @@ public class EntityAIEggnogTempt extends Goal
 		}
 		else
 		{
-			this.temptingPlayer = this.temptedEntity.world.getClosestPlayerToEntity(this.temptedEntity, 10.0D);
+			this.temptingPlayer = this.temptedEntity.world.getClosestPlayer(this.temptedEntity, 10.0D);
 
 			if (this.temptingPlayer == null)
 			{
@@ -104,9 +106,9 @@ public class EntityAIEggnogTempt extends Goal
 	 * Keep ticking a continuous task that has already been started
 	 */
 	@Override
-	public void updateTask()
+	public void tick()
 	{
-		this.temptedEntity.getLookHelper().setLookPositionWithEntity(this.temptingPlayer, (float) (this.temptedEntity.getHorizontalFaceSpeed() + 20),
+		this.temptedEntity.getLookController().setLookPositionWithEntity(this.temptingPlayer, (float) (this.temptedEntity.getHorizontalFaceSpeed() + 20),
 				(float) this.temptedEntity.getVerticalFaceSpeed());
 
 		if (this.temptedEntity.getDistanceSq(this.temptingPlayer) < 6.25D)

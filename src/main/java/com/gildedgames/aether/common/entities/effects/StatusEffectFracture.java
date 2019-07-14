@@ -14,7 +14,7 @@ public class StatusEffectFracture extends StatusEffect
 {
 	public StatusEffectFracture(LivingEntity livingBase)
 	{
-		super(effectTypes.FRACTURE, new AttributeModifier("aether.statusEffectFractureCripple", -0.25, 1).setSaved(false), livingBase);
+		super(effectTypes.FRACTURE, new AttributeModifier("aether.statusEffectFractureCripple", -0.25, AttributeModifier.Operation.MULTIPLY_BASE).setSaved(false), livingBase);
 	}
 
 	@Override
@@ -24,19 +24,19 @@ public class StatusEffectFracture extends StatusEffect
 
 		if (this.isEffectApplied)
 		{
-			iAttributeInstance = livingBase.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
+			iAttributeInstance = livingBase.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
 			if (iAttributeInstance != null && !iAttributeInstance.hasModifier(this.getAttributeModifier()))
 			{
 				iAttributeInstance.applyModifier(this.getAttributeModifier());
 			}
 
-			iAttributeInstance = livingBase.getEntityAttribute(SharedMonsterAttributes.ARMOR);
+			iAttributeInstance = livingBase.getAttribute(SharedMonsterAttributes.ARMOR);
 			if (iAttributeInstance != null && !iAttributeInstance.hasModifier(this.getAttributeModifier()))
 			{
 				iAttributeInstance.applyModifier(this.getAttributeModifier());
 			}
 
-			iAttributeInstance = livingBase.getEntityAttribute(SharedMonsterAttributes.ATTACK_SPEED);
+			iAttributeInstance = livingBase.getAttribute(SharedMonsterAttributes.ATTACK_SPEED);
 			if (iAttributeInstance != null && !iAttributeInstance.hasModifier(this.getAttributeModifier()))
 			{
 				iAttributeInstance.applyModifier(this.getAttributeModifier());
@@ -44,19 +44,19 @@ public class StatusEffectFracture extends StatusEffect
 		}
 		else
 		{
-			iAttributeInstance = livingBase.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
+			iAttributeInstance = livingBase.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
 			if (iAttributeInstance != null && iAttributeInstance.getModifier(this.getAttributeModifier().getID()) != null)
 			{
 				iAttributeInstance.removeModifier(this.getAttributeModifier());
 			}
 
-			iAttributeInstance = livingBase.getEntityAttribute(SharedMonsterAttributes.ARMOR);
+			iAttributeInstance = livingBase.getAttribute(SharedMonsterAttributes.ARMOR);
 			if (iAttributeInstance != null && iAttributeInstance.getModifier(this.getAttributeModifier().getID()) != null)
 			{
 				iAttributeInstance.removeModifier(this.getAttributeModifier());
 			}
 
-			iAttributeInstance = livingBase.getEntityAttribute(SharedMonsterAttributes.ATTACK_SPEED);
+			iAttributeInstance = livingBase.getAttribute(SharedMonsterAttributes.ATTACK_SPEED);
 			if (iAttributeInstance != null && iAttributeInstance.getModifier(this.getAttributeModifier().getID()) != null)
 			{
 				iAttributeInstance.removeModifier(this.getAttributeModifier());

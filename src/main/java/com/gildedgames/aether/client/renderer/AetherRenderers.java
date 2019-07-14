@@ -3,7 +3,6 @@ package com.gildedgames.aether.client.renderer;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.client.renderer.entities.RenderFloatingBlock;
 import com.gildedgames.aether.client.renderer.entities.RenderMovingBlock;
-import com.gildedgames.aether.client.renderer.entities.attachments.RenderParachute;
 import com.gildedgames.aether.client.renderer.entities.companions.*;
 import com.gildedgames.aether.client.renderer.entities.living.*;
 import com.gildedgames.aether.client.renderer.entities.projectiles.RenderBolt;
@@ -16,7 +15,6 @@ import com.gildedgames.aether.client.renderer.tiles.*;
 import com.gildedgames.aether.common.entities.animals.*;
 import com.gildedgames.aether.common.entities.blocks.EntityFloatingBlock;
 import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
-import com.gildedgames.aether.common.entities.blocks.EntityParachute;
 import com.gildedgames.aether.common.entities.characters.*;
 import com.gildedgames.aether.common.entities.companions.*;
 import com.gildedgames.aether.common.entities.monsters.*;
@@ -53,7 +51,6 @@ public class AetherRenderers
 		RenderingRegistry.registerEntityRenderingHandler(EntityDart.class, RenderDart::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityBolt.class, RenderBolt::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityDaggerfrostSnowball.class, RenderDaggerfrostSnowball::new);
-		RenderingRegistry.registerEntityRenderingHandler(EntityParachute.class, RenderParachute::new);
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityAechorPlant.class, RenderAechorPlant::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityAerbunny.class, RenderAerbunny::new);

@@ -39,7 +39,7 @@ public class AIMoaLayEgg extends Goal
 	}
 
 	@Override
-	public boolean isInterruptible()
+	public boolean isPreemptible()
 	{
 		return false;
 	}
@@ -78,9 +78,9 @@ public class AIMoaLayEgg extends Goal
 	}
 
 	@Override
-	public void updateTask()
+	public void tick()
 	{
-		super.updateTask();
+		super.tick();
 
 		MoaNest nest = this.mother.getFamilyNest();
 

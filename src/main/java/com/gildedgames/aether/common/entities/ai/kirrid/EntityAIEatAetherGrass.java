@@ -5,7 +5,10 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
+
+import java.util.EnumSet;
 
 public class EntityAIEatAetherGrass extends Goal
 {
@@ -25,7 +28,7 @@ public class EntityAIEatAetherGrass extends Goal
 	{
 		this.entity = grassEaterEntityIn;
 		this.world = grassEaterEntityIn.world;
-		this.setMutexBits(7);
+		this.setMutexFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK, Goal.Flag.JUMP));
 		this.chance = chance;
 	}
 
@@ -94,7 +97,7 @@ public class EntityAIEatAetherGrass extends Goal
 	 * Updates the task
 	 */
 	@Override
-	public void updateTask()
+	public void tick()
 	{
 		this.timer = Math.max(0, this.timer - 1);
 
@@ -104,7 +107,7 @@ public class EntityAIEatAetherGrass extends Goal
 
 			if (this.world.getBlockState(blockpos).getBlock() == BlocksAether.tall_aether_grass)
 			{
-				if (this.world.getGameRules().getBoolean("mobGriefing"))
+				if (this.world.getGameRules().func_223586_b(GameRules.field_223599_b))
 				{
 					this.world.destroyBlock(blockpos, false);
 				}
@@ -117,9 +120,9 @@ public class EntityAIEatAetherGrass extends Goal
 
 				if (this.world.getBlockState(blockpos1).getBlock() == BlocksAether.aether_grass)
 				{
-					if (this.world.getGameRules().getBoolean("mobGriefing"))
+					if (this.world.getGameRules().func_223586_b(GameRules.field_223599_b))
 					{
-						this.world.playEvent(2001, blockpos1, Block.getIdFromBlock(BlocksAether.aether_grass));
+						this.world.playEvent(2001, blockpos1, Block.getStateId(BlocksAether.aether_grass.getDefaultState()));
 						this.world.setBlockState(blockpos1, BlocksAether.aether_dirt.getDefaultState(), 2);
 					}
 

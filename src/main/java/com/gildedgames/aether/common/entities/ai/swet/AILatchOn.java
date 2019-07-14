@@ -7,8 +7,12 @@ import com.gildedgames.aether.common.entities.ai.hopping.HoppingMoveHelper;
 import com.gildedgames.aether.common.entities.monsters.EntitySwet;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketLatchSwet;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.SoundEvents;
+
+import java.util.EnumSet;
 
 public class AILatchOn extends EntityAI<EntitySwet>
 {
@@ -21,7 +25,7 @@ public class AILatchOn extends EntityAI<EntitySwet>
 
 		this.hoppingMoveHelper = hoppingMoveHelper;
 
-		this.setMutexBits(2);
+		this.setMutexFlags(EnumSet.of(Goal.Flag.LOOK));
 	}
 
 	@Override
@@ -33,40 +37,51 @@ public class AILatchOn extends EntityAI<EntitySwet>
 	@Override
 	public boolean shouldExecute()
 	{
-		return this.entity().getAttackTarget() instanceof PlayerEntity && this.entity().getAttackTarget() != null && this.entity()
-				.canEntityBeSeen(this.entity().getAttackTarget())
-				&& this.entity().getDistance(this.entity().getAttackTarget()) <= 1.5D && EntitySwet
-				.canLatch(this.entity(), (PlayerEntity) this.entity().getAttackTarget());
+		LivingEntity target = this.entity().getAttackTarget();
+
+		if (target instanceof PlayerEntity)
+		{
+			EntitySwet self = this.entity();
+
+			if (self.canEntityBeSeen(target) && self.getDistance(target) <= 1.5D)
+			{
+				return EntitySwet.canLatch(self, (PlayerEntity) target);
+			}
+		}
+
+		return false;
 	}
 
 	@Override
 	public boolean shouldContinueExecuting()
 	{
-		return !this.entity().isDead && this.entity().getHealth() > 0 && this.shouldExecute();
+		return this.entity().isAlive() && this.entity().getHealth() > 0 && this.shouldExecute();
 	}
 
 	@Override
-	public boolean isInterruptible()
+	public boolean isPreemptible()
 	{
 		return false;
 	}
 
 	@Override
-	public void updateTask()
+	public void tick()
 	{
-		this.entity().faceEntity(this.entity().getAttackTarget(), 10.0F, 10.0F);
+		LivingEntity target = this.entity().getAttackTarget();
 
-		if (this.entity().getAttackTarget() instanceof PlayerEntity)
+		if (target instanceof PlayerEntity)
 		{
-			final PlayerEntity player = (PlayerEntity) this.entity().getAttackTarget();
+			final PlayerEntity player = (PlayerEntity) target;
 
-			this.entity().setSucking(0);
+			EntitySwet swet = this.entity();
+			swet.faceEntity(target, 10.0F, 10.0F);
+			swet.setSucking(0);
 
-			NetworkingAether.sendPacketToWatching(new PacketLatchSwet(this.entity().getType(), player.getEntityId()), player, true);
+			NetworkingAether.sendPacketToWatching(new PacketLatchSwet(swet.getSwetType(), player.getEntityId()), player, true);
 			PlayerAether.getPlayer(player).getModule(PlayerSwetTrackerModule.class).latchSwet(this.entity());
 
-			this.entity().playSound(SoundEvents.ENTITY_SLIME_ATTACK, 1.0F,
-					(this.entity().getRNG().nextFloat() - this.entity().getRNG().nextFloat()) * 0.2F + 1.0F);
+			swet.playSound(SoundEvents.ENTITY_SLIME_ATTACK, 1.0F,
+					(swet.getRNG().nextFloat() - swet.getRNG().nextFloat()) * 0.2F + 1.0F);
 		}
 	}
 

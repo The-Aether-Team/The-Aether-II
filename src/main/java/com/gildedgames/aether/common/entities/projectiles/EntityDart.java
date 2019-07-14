@@ -2,29 +2,32 @@ package com.gildedgames.aether.common.entities.projectiles;
 
 import com.gildedgames.aether.api.entity.damage.IDamageLevelsHolder;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
+import com.gildedgames.aether.common.entities.EntityTypesAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.projectile.ArrowEntity;
+import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.world.World;
 
-public class EntityDart extends ArrowEntity implements IDamageLevelsHolder
+public class EntityDart extends AbstractArrowEntity implements IDamageLevelsHolder
 {
 	private static final DataParameter<Byte> TYPE = new DataParameter<>(20, DataSerializers.BYTE);
 
-	public EntityDart(World worldIn)
-	{
-		super(worldIn);
+	public EntityDart(EntityType<? extends EntityDart> type, World world) {
+		super(type, world);
 	}
 
 	public EntityDart(World worldIn, LivingEntity shooter)
 	{
-		super(worldIn, shooter);
+		super(EntityTypesAether.DART, shooter, worldIn);
 	}
+
 
 	@Override
 	protected ItemStack getArrowStack()
@@ -33,9 +36,9 @@ public class EntityDart extends ArrowEntity implements IDamageLevelsHolder
 	}
 
 	@Override
-	public void livingTick()
+	public void tick()
 	{
-		super.livingTick();
+		super.tick();
 
 		if (this.world.isRemote() && this.world.getWorldTime() % 3 == 0)
 		{

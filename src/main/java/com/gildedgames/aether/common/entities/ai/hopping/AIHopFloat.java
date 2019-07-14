@@ -2,7 +2,10 @@ package com.gildedgames.aether.common.entities.ai.hopping;
 
 import com.gildedgames.aether.common.entities.ai.EntityAI;
 import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.pathfinding.GroundPathNavigator;
+
+import java.util.EnumSet;
 
 public class AIHopFloat extends EntityAI<MobEntity>
 {
@@ -15,8 +18,8 @@ public class AIHopFloat extends EntityAI<MobEntity>
 
 		this.hoppingMoveHelper = hoppingMoveHelper;
 
-		this.setMutexBits(5);
-		((GroundPathNavigator) this.entity().getNavigator()).setCanSwim(true);
+		this.setMutexFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.JUMP));
+		this.entity().getNavigator().setCanSwim(true);
 	}
 
 	/**
@@ -32,11 +35,11 @@ public class AIHopFloat extends EntityAI<MobEntity>
 	 * Updates the task
 	 */
 	@Override
-	public void updateTask()
+	public void tick()
 	{
 		if (this.entity().getRNG().nextFloat() < 0.8F)
 		{
-			this.entity().getJumpHelper().setJumping();
+			this.entity().getJumpController().setJumping();
 		}
 
 		this.hoppingMoveHelper.setSpeed(1.2D);

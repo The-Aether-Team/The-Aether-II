@@ -35,7 +35,7 @@ public class LayerSwetJelly extends LayerRenderer<EntitySwet, ModelSwetHead>
 			GlStateManager.translatef(-0.0f, 0.4F + (s * -1.35F), -0.15f);
 			GlStateManager.scalef(0.7F + s, 0.7F + s, 0.7F + s);
 
-			this.render.bindTexture(entity.getType().texture_jelly);
+			this.render.bindTexture(entity.getSwetType().texture_jelly);
 
 			GlStateManager.enableNormalize();
 			GlStateManager.enableBlend();

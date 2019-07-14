@@ -7,27 +7,26 @@ import com.gildedgames.aether.common.entities.ai.EntityAIHideFromLight;
 import com.gildedgames.aether.common.entities.ai.tempest.AIElectricShock;
 import com.gildedgames.aether.common.entities.flying.EntityFlyingMob;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
+import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.DamageSource;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
+import java.util.EnumSet;
+
 public class EntityTempest extends EntityFlyingMob
 {
-
-	public EntityTempest(final World world)
+	public EntityTempest(EntityType<? extends CreatureEntity> type, World world)
 	{
-		super(world);
-
-		this.setSize(1.0F, 1.0F);
-
-		this.experienceValue = 10;
+		super(type, world);
 	}
 
 	@Override
@@ -35,7 +34,7 @@ public class EntityTempest extends EntityFlyingMob
 	{
 		final RandomWalkingGoal wander = new EntityAIForcedWanderAvoidLight(this, 0.4D, 5, 5);
 
-		wander.setMutexBits(1);
+		wander.setMutexFlags(EnumSet.of(Goal.Flag.MOVE));
 
 		return wander;
 	}
@@ -43,7 +42,7 @@ public class EntityTempest extends EntityFlyingMob
 	@Override
 	protected void handleClientAttack()
 	{
-		final Entity target = this.world.getNearestPlayerNotCreative(this, 20D);
+		final Entity target = this.world.getClosestPlayer(this, 20D);
 
 		if (target == null)
 		{
@@ -52,13 +51,13 @@ public class EntityTempest extends EntityFlyingMob
 
 		this.faceEntity(target, 10.0F, 10.0F);
 
-		EntityUtil.spawnParticleLineBetween(this, target, 4D, ParticleTypes.SPELL_INSTANT);
+		EntityUtil.spawnParticleLineBetween(this, target, 4D, ParticleTypes.INSTANT_EFFECT);
 	}
 
 	@Override
-	public void livingTick()
+	public void tick()
 	{
-		super.livingTick();
+		super.tick();
 
 		EntityUtil.despawnEntityDuringDaytime(this);
 	}
@@ -70,12 +69,12 @@ public class EntityTempest extends EntityFlyingMob
 
 		final Goal avoidLight = new EntityAIHideFromLight(this, 0.8F, 5);
 
-		avoidLight.setMutexBits(1);
+		avoidLight.setMutexFlags(EnumSet.of(Goal.Flag.MOVE));
 
 		this.goalSelector.addGoal(2, new AIElectricShock(this));
 		this.goalSelector.addGoal(0, avoidLight);
 
-		this.targetSelector.addGoal(0, new EntityAINearestAttackableTarget<>(this, PlayerEntity.class, true));
+		this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
 	}
 
 	@Override

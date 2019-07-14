@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.entities.monsters;
 
 import com.gildedgames.aether.common.entities.ai.AetherNavigateGround;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.world.World;
@@ -9,9 +10,9 @@ import net.minecraft.world.World;
 public class EntityAetherMonster extends MonsterEntity
 {
 
-	public EntityAetherMonster(World world)
+	public EntityAetherMonster(EntityType<? extends MonsterEntity> type, World world)
 	{
-		super(world);
+		super(type, world);
 	}
 
 	@Override

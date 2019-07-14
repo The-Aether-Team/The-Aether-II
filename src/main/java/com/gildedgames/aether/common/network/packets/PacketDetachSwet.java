@@ -64,7 +64,7 @@ public class PacketDetachSwet implements IMessage
 
 			for (final EntitySwet swet : playerAether.getModule(PlayerSwetTrackerModule.class).getLatchedSwets())
 			{
-				if (swet.getType() == message.type)
+				if (swet.getSwetType() == message.type)
 				{
 					remove = swet;
 				}

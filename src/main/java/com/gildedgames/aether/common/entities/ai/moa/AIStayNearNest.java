@@ -26,7 +26,7 @@ public class AIStayNearNest extends Goal
 		this.world = moa.world;
 		this.moveSpeed = moveSpeed;
 		this.moa = moa;
-		this.stayCloseDist = stayCloseDist;
+		this.stayCloseDist = stayCloseDist * stayCloseDist;
 	}
 
 	@Override
@@ -50,13 +50,13 @@ public class AIStayNearNest extends Goal
 		this.nestY = this.moa.getFamilyNest().pos.getY() + 1;
 		this.nestZ = this.moa.getFamilyNest().pos.getZ();
 
-		return !(this.moa.getDistance(this.nestX, this.nestY, this.nestZ) < this.stayCloseDist);
+		return !(this.moa.getDistanceSq(this.nestX, this.nestY, this.nestZ) < this.stayCloseDist);
 	}
 
 	@Override
-	public void updateTask()
+	public void tick()
 	{
-		super.updateTask();
+		super.tick();
 
 		this.moa.getNavigator().tryMoveToXYZ(this.nestX - 1, this.nestY, this.nestZ - 1, this.moveSpeed);
 	}

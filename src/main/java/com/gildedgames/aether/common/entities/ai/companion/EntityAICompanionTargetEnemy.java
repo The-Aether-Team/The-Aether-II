@@ -1,10 +1,11 @@
 package com.gildedgames.aether.common.entities.ai.companion;
 
 import com.gildedgames.aether.common.entities.companions.EntityCompanion;
+import net.minecraft.entity.EntityPredicate;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.EntityAITarget;
+import net.minecraft.entity.ai.goal.TargetGoal;
 
-public class EntityAICompanionTargetEnemy extends EntityAITarget
+public class EntityAICompanionTargetEnemy extends TargetGoal
 {
 
 	private final EntityCompanion entity;
@@ -33,7 +34,7 @@ public class EntityAICompanionTargetEnemy extends EntityAITarget
 		{
 			this.target = owner.getLastAttackedEntity();
 			final int i = owner.getLastAttackedEntityTime();
-			return i != this.timestamp && this.isSuitableTarget(this.target, false) && this.target != owner;
+			return i != this.timestamp && this.func_220777_a(this.target, EntityPredicate.DEFAULT) && this.target != owner;
 		}
 	}
 
@@ -45,7 +46,7 @@ public class EntityAICompanionTargetEnemy extends EntityAITarget
 			return;
 		}
 
-		this.taskOwner.setAttackTarget(this.target);
+		this.field_75299_d.setAttackTarget(this.target);
 		final LivingEntity owner = this.entity.getOwner();
 
 		if (owner != null)

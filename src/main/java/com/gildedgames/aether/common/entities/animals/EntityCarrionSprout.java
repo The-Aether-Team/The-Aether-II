@@ -3,11 +3,14 @@ package com.gildedgames.aether.common.entities.animals;
 import com.gildedgames.aether.api.entity.damage.DamageTypeAttributes;
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.init.LootTablesAether;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
@@ -27,21 +30,21 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 
 	private int maxSproutSize;
 
-	public EntityCarrionSprout(final World world)
+	public EntityCarrionSprout(EntityType<? extends AnimalEntity> type, World world)
 	{
-		super(world);
-
-		this.setSize(0.5F, 1.5F);
-
-		this.spawnableBlock = BlocksAether.aether_grass;
-
-		this.goalSelector.addGoal(0, new LookAtGoal(this, PlayerEntity.class, 8));
+		super(type, world);
 	}
 
 	@Override
 	public boolean canBeLeashedTo(PlayerEntity player)
 	{
 		return false;
+	}
+
+	@Override
+	protected void registerGoals()
+	{
+		this.goalSelector.addGoal(0, new LookAtGoal(this, PlayerEntity.class, 8));
 	}
 
 	@Override
@@ -71,29 +74,27 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 	}
 
 	@Override
-	public CompoundNBT writeToNBT(final CompoundNBT nbt)
+	public void writeAdditional(CompoundNBT nbt)
 	{
-		super.writeToNBT(nbt);
+		super.writeAdditional(nbt);
 
 		nbt.putInt("size", this.getSproutSize());
 		nbt.putInt("maxSize", this.getMaxSproutSize());
-
-		return nbt;
 	}
 
 	@Override
-	public void readFromNBT(final CompoundNBT nbt)
+	public void readAdditional(CompoundNBT nbt)
 	{
-		super.readFromNBT(nbt);
+		super.readAdditional(nbt);
 
 		this.setSproutSize(nbt.getInt("size"));
 		this.setMaxSproutSize(nbt.getInt("maxSize"));
 	}
 
 	@Override
-	public void livingTick()
+	public void tick()
 	{
-		super.livingTick();
+		super.tick();
 
 		if (this.world.isRemote())
 		{
@@ -110,7 +111,7 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 
 	private boolean canStayHere(final BlockPos pos)
 	{
-		if (this.world.getBlockState(pos).isFullCube())
+		if (!Block.isOpaque(this.world.getBlockState(pos).getShape(this.world, pos)))
 		{
 			return false;
 		}
@@ -124,10 +125,9 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 	}
 
 	@Override
-	public void onLivingUpdate()
+	public void livingTick()
 	{
-		this.motionX = 0.0F;
-		this.motionZ = 0.0F;
+		this.setMotion(0.0D, this.getMotion().getY(), 0.0D);
 
 		if (this.ticksExisted == 0)
 		{
@@ -135,7 +135,7 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 			this.renderYawOffset = this.rotationYaw;
 		}
 
-		super.onLivingUpdate();
+		super.livingTick();
 
 		if (!this.isFullyGrown() && this.ticksExisted % 800 == 0)
 		{
@@ -171,7 +171,7 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 	}
 
 	@Override
-	protected ResourceLocation getLootTable()
+	public ResourceLocation getLootTable()
 	{
 		return LootTablesAether.ENTITY_CARRION_SPROUT;
 	}

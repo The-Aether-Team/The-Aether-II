@@ -34,7 +34,7 @@ public class SwetOverlay implements IOverlay
 
 		for (final EntitySwet swet : player.getModule(PlayerSwetTrackerModule.class).getLatchedSwets())
 		{
-			switch (swet.getType())
+			switch (swet.getSwetType())
 			{
 				case BLUE:
 					hasBlue = true;

@@ -1,6 +1,8 @@
 package com.gildedgames.aether.common.entities.companions;
 
 import com.gildedgames.aether.common.entities.ai.hopping.HoppingMoveHelper;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 
@@ -15,29 +17,32 @@ public class EntityPinkBabySwet extends EntityCompanion
 
 	private boolean wasOnGround;
 
-	public EntityPinkBabySwet(final World worldIn)
+	public EntityPinkBabySwet(EntityType<? extends CreatureEntity> type, World worldIn)
 	{
-		super(worldIn);
+		super(type, worldIn);
 
-		this.moveHelper = new HoppingMoveHelper(this, () -> SoundEvents.ENTITY_SMALL_SLIME_JUMP);
-
-		this.setSize(0.75F, 0.75F);
 	}
 
 	@Override
-	public void livingTick()
+	public void registerGoals()
+	{
+		this.moveController = new HoppingMoveHelper(this, () -> SoundEvents.ENTITY_SLIME_JUMP_SMALL);
+	}
+
+	@Override
+	public void tick()
 	{
 		if (this.getOwner() != null)
 		{
 			this.faceEntity(this.getOwner(), 10.0F, 10.0F);
 		}
 
-		((HoppingMoveHelper) this.moveHelper).setDirection(this.rotationYaw);
+		((HoppingMoveHelper) this.moveController).setDirection(this.rotationYaw);
 
 		this.squishFactor += (this.squishAmount - this.squishFactor) * 0.5F;
 		this.prevSquishFactor = this.squishFactor;
 
-		super.livingTick();
+		super.tick();
 
 		if (this.onGround && !this.wasOnGround)
 		{
@@ -65,7 +70,8 @@ public class EntityPinkBabySwet extends EntityCompanion
 			return;
 		}
 
-		this.motionY = 0.41999998688697815D;
+		this.setMotion(this.getMotion().getX(), 0.42D, this.getMotion().getZ());
+
 		this.isAirBorne = true;
 	}
 

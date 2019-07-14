@@ -2,12 +2,12 @@ package com.gildedgames.aether.common.entities.ai.hopping;
 
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityMoveHelper;
+import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.util.SoundEvent;
 
 import java.util.function.Supplier;
 
-public class HoppingMoveHelper extends EntityMoveHelper
+public class HoppingMoveHelper extends MovementController
 {
 
 	private final MobEntity entity;
@@ -46,7 +46,7 @@ public class HoppingMoveHelper extends EntityMoveHelper
 	public void setSpeed(double speedIn)
 	{
 		this.speed = speedIn;
-		this.action = EntityMoveHelper.Action.MOVE_TO;
+		this.action = Action.MOVE_TO;
 	}
 
 	public void setTime(HopTimer timer)
@@ -60,7 +60,7 @@ public class HoppingMoveHelper extends EntityMoveHelper
 	}
 
 	@Override
-	public void onUpdateMoveHelper()
+	public void tick()
 	{
 		this.entity.rotationYaw = this.limitAngle(this.entity.rotationYaw, this.yRot, 90.0F);
 		this.entity.rotationYawHead = this.entity.rotationYaw;
@@ -82,13 +82,13 @@ public class HoppingMoveHelper extends EntityMoveHelper
 			if (this.entity.onGround)
 			{
 				this.entity.setAIMoveSpeed((float) (this.speed
-						* this.entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()));
+						* this.entity.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getValue()));
 
 				if (this.jumpDelay-- <= 0)
 				{
 					this.jumpDelay = this.hopTimer.jumpDelay();
 
-					this.entity.getJumpHelper().setJumping();
+					this.entity.getJumpController().setJumping();
 
 					this.entity.playSound(this.hoppingSound.get(), 0.5F,
 							((this.entity.getRNG().nextFloat() - this.entity.getRNG().nextFloat()) * 0.2F + 1.0F) * 0.8F);
@@ -103,7 +103,7 @@ public class HoppingMoveHelper extends EntityMoveHelper
 			else
 			{
 				this.entity.setAIMoveSpeed((float) (this.speed
-						* this.entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()));
+						* this.entity.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getValue()));
 			}
 		}
 	}
@@ -117,7 +117,7 @@ public class HoppingMoveHelper extends EntityMoveHelper
 		else
 		{
 			this.entity.setAIMoveSpeed((float) (this.speed
-					* this.entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()));
+					* this.entity.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getValue()));
 		}
 
 		this.active = isActive;

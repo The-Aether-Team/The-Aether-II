@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.entities.util;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -14,9 +15,9 @@ public class EntityExtendedMob extends MonsterEntity
 
 	private boolean isDayMob;
 
-	public EntityExtendedMob(World worldIn)
+	protected EntityExtendedMob(EntityType<? extends MonsterEntity> type, World world)
 	{
-		super(worldIn);
+		super(type, world);
 	}
 
 	protected void handleClientAttack()
@@ -25,11 +26,11 @@ public class EntityExtendedMob extends MonsterEntity
 	}
 
 	@Override
-	public void onLivingUpdate()
+	public void livingTick()
 	{
 		int idleTime = this.idleTime;
 
-		super.onLivingUpdate();
+		super.livingTick();
 
 		if (this.isDayMob)
 		{
@@ -43,9 +44,9 @@ public class EntityExtendedMob extends MonsterEntity
 	}
 
 	@Override
-	public void livingTick()
+	public void tick()
 	{
-		super.livingTick();
+		super.tick();
 
 		if (this.hasAttacked() && this.world.isRemote())
 		{

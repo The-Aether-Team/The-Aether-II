@@ -3,24 +3,28 @@ package com.gildedgames.aether.common.entities.ai.moa;
 import com.gildedgames.aether.common.entities.util.groups.EntityGroup;
 import com.gildedgames.aether.common.entities.util.groups.EntityGroupMember;
 import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.EntityPredicate;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.EntityAITarget;
+import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.ai.goal.TargetGoal;
 
-public class AIProtectPack extends EntityAITarget
+import java.util.EnumSet;
+
+public class AIProtectPack extends TargetGoal
 {
 
-	EntityGroupMember animal;
+	private EntityGroupMember animal;
 
-	LivingEntity agressor;
+	private LivingEntity agressor;
 
-	public AIProtectPack(CreatureEntity par1EntityCreature)
+	public AIProtectPack(CreatureEntity entity)
 	{
-		super(par1EntityCreature, false, true);
-		if (par1EntityCreature instanceof EntityGroupMember)
+		super(entity, false, true);
+		if (entity instanceof EntityGroupMember)
 		{
-			this.animal = (EntityGroupMember) par1EntityCreature;
+			this.animal = (EntityGroupMember) entity;
 		}
-		this.setMutexBits(1);
+		this.setMutexFlags(EnumSet.of(Goal.Flag.MOVE));
 	}
 
 	@Override
@@ -33,20 +37,20 @@ public class AIProtectPack extends EntityAITarget
 			return false;
 		}
 
-		this.agressor = pack.findNearestAggressor(this.taskOwner);
+		this.agressor = pack.findNearestAggressor(this.field_75299_d);
 
 		if (this.agressor == null)
 		{
 			return false;
 		}
 
-		return this.isSuitableTarget(this.agressor, false);
+		return this.func_220777_a(this.agressor, EntityPredicate.DEFAULT);
 	}
 
 	@Override
 	public void startExecuting()
 	{
-		this.taskOwner.setAttackTarget(this.agressor);
+		this.field_75299_d.setAttackTarget(this.agressor);
 		super.startExecuting();
 	}
 

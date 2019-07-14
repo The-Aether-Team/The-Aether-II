@@ -34,13 +34,13 @@ public class EntityAIRamAttack extends Goal
 	}
 
 	@Override
-	public void updateTask()
+	public void tick()
 	{
 		if (this.shouldExecute())
 		{
 			if (this.ramming)
 			{
-				this.entity.getLookHelper().setLookPositionWithEntity(this.target, (float)this.entity.getHorizontalFaceSpeed(), (float)this.entity.getVerticalFaceSpeed());
+				this.entity.getLookController().setLookPositionWithEntity(this.target, (float)this.entity.getHorizontalFaceSpeed(), (float)this.entity.getVerticalFaceSpeed());
 				this.entity.faceEntity(this.target, 180f, 180f);
 
 				List<LivingEntity> entities = this.entity.world.getEntitiesWithinAABB(LivingEntity.class, this.entity.getBoundingBox().expand(1, 1, 1));
@@ -90,10 +90,9 @@ public class EntityAIRamAttack extends Goal
 			LivingEntity target = this.target;
 
 			double ang = Math.atan2(target.posZ - this.entity.posZ, target.posX - this.entity.posX);
-			this.entity.motionX = (float) Math.cos(ang) * this.chargeSpeed;
-			this.entity.motionZ = (float) Math.sin(ang) * this.chargeSpeed;
 
-			this.entity.getLookHelper().setLookPositionWithEntity(this.target, (float)this.entity.getHorizontalFaceSpeed(), (float)this.entity.getVerticalFaceSpeed());
+			this.entity.setMotion((float) Math.cos(ang) * this.chargeSpeed, this.entity.getMotion().getY(), (float) Math.sin(ang) * this.chargeSpeed);
+			this.entity.getLookController().setLookPositionWithEntity(this.target, (float)this.entity.getHorizontalFaceSpeed(), (float)this.entity.getVerticalFaceSpeed());
 			this.entity.faceEntity(this.target, 360f, 360f);
 		}
 		else if (this.currentCharge > 0)

@@ -12,7 +12,7 @@ import net.minecraft.item.ItemMonsterPlacer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityPresent extends TileEntity
@@ -102,15 +102,15 @@ public class TileEntityPresent extends TileEntity
 	}
 
 	@Override
-	public SPacketUpdateTileEntity getUpdatePacket()
+	public SUpdateTileEntityPacket getUpdatePacket()
 	{
 		CompoundNBT compound = this.getUpdateTag();
 
-		return new SPacketUpdateTileEntity(this.pos, 1, compound);
+		return new SUpdateTileEntityPacket(this.pos, 1, compound);
 	}
 
 	@Override
-	public void onDataPacket(NetworkManager networkManager, SPacketUpdateTileEntity packet)
+	public void onDataPacket(NetworkManager networkManager, SUpdateTileEntityPacket packet)
 	{
 		CompoundNBT nbt = packet.getNbtCompound();
 		this.getPresentData().setDye(ItemWrappingPaper.PresentDyeData.readFromNBT(nbt.getCompound("dye")));

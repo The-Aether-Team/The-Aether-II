@@ -91,9 +91,9 @@ public class AIMoaPackBreeding extends Goal
 	}
 
 	@Override
-	public void updateTask()
+	public void tick()
 	{
-		super.updateTask();
+		super.tick();
 
 		final Path path = this.moa.getNavigator().getPath();
 

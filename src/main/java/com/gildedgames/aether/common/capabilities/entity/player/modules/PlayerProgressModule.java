@@ -34,7 +34,7 @@ public class PlayerProgressModule extends PlayerAetherModule implements IPlayerA
 		super(playerAether);
 	}
 
-	public void setBoolean(String key, Boolean bool)
+	public void putBoolean(String key, boolean bool)
 	{
 		this.booleanData.put(key, bool);
 

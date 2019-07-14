@@ -5,7 +5,7 @@ import com.gildedgames.aether.api.registry.tab.ITabClient;
 import com.gildedgames.aether.client.gui.container.guidebook.AbstractGuidebookPage;
 import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.inventory.GuiInventory;
+import net.minecraft.client.gui.screen.inventory.InventoryScreen;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec2f;
@@ -50,7 +50,7 @@ public class TabBugReport implements ITab
 		@Override
 		public boolean isTabValid(Screen gui)
 		{
-			return gui instanceof GuiInventory || gui instanceof AbstractGuidebookPage;
+			return gui instanceof InventoryScreen || gui instanceof AbstractGuidebookPage;
 		}
 
 		@Override

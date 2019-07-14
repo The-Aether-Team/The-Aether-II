@@ -4,7 +4,6 @@ import com.gildedgames.aether.api.entity.IMount;
 import com.gildedgames.aether.api.entity.IMountProcessor;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.mounts.IFlyingMountData;
-import com.gildedgames.aether.common.entities.multipart.AetherMultiPartMount;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
@@ -28,11 +27,6 @@ public class PlayerMountListener
 	public static void onPlayerInteract(final PlayerInteractEvent.EntityInteractSpecific event)
 	{
 		Entity target = event.getTarget();
-
-		if (target instanceof AetherMultiPartMount)
-		{
-			target = ((AetherMultiPartMount) target).getEntity();
-		}
 
 		if (target instanceof IMount)
 		{

@@ -9,9 +9,10 @@ import com.gildedgames.aether.common.util.helpers.PlayerUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -21,7 +22,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.EnumDifficulty;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -47,25 +49,9 @@ public class EntityAechorPlant extends EntityAetherMonster
 
 	private int petalGrowTimer = 3000;
 
-	public EntityAechorPlant(World world)
+	public EntityAechorPlant(EntityType<EntityAechorPlant> type, World world)
 	{
-		super(world);
-
-		this.goalSelector.addGoal(0, new EntityAIAechorPlantAttack(this));
-		this.targetSelector.addGoal(1, new EntityAINearestAttackableTarget<>(this, PlayerEntity.class, true));
-
-		this.setSize(0.8F, 0.6F);
-
-		this.setPoisonLeft(2);
-
-		if (world.isRemote())
-		{
-			this.sinage = this.rand.nextFloat() * 6F;
-		}
-
-		this.experienceValue = 3;
-
-		Arrays.fill(this.petals, true);
+		super(type, world);
 	}
 
 	public boolean[] getPetalsPresent()
@@ -74,17 +60,32 @@ public class EntityAechorPlant extends EntityAetherMonster
 	}
 
 	@Override
+	protected void registerGoals()
+	{
+		this.goalSelector.addGoal(0, new EntityAIAechorPlantAttack(this));
+		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+	}
+
+	@Override
 	protected void registerData()
 	{
+		this.dataManager.register(EntityAechorPlant.CAN_SEE_PREY, Boolean.FALSE);
+		this.dataManager.register(EntityAechorPlant.PLANT_SIZE, (byte) 0);
+		this.dataManager.register(EntityAechorPlant.PLANT_PETALS, this.serializePlantPetals());
+
+		if (this.world.isRemote())
+		{
+			this.sinage = this.rand.nextFloat() * 6F;
+		}
+
 		super.registerData();
 
 		this.petals = new boolean[MAX_PETALS];
 
 		Arrays.fill(this.petals, true);
 
-		this.dataManager.register(EntityAechorPlant.CAN_SEE_PREY, Boolean.FALSE);
-		this.dataManager.register(EntityAechorPlant.PLANT_SIZE, (byte) 0);
-		this.dataManager.register(EntityAechorPlant.PLANT_PETALS, this.serializePlantPetals());
+		this.setPoisonLeft(2);
+
 	}
 
 	@Override
@@ -103,12 +104,11 @@ public class EntityAechorPlant extends EntityAetherMonster
 	}
 
 	@Override
-	public void livingTick()
+	public void tick()
 	{
-		super.livingTick();
+		super.tick();
 
-		this.motionX = 0.0D;
-		this.motionZ = 0.0D;
+		this.setMotion(0.0D, this.getMotion().getY(), 0.0D);
 
 		if (!this.world.isRemote())
 		{
@@ -234,7 +234,7 @@ public class EntityAechorPlant extends EntityAetherMonster
 
 	private boolean canStayHere(final BlockPos pos)
 	{
-		if (this.world.getBlockState(pos).isFullCube())
+		if (!Block.isOpaque(this.world.getBlockState(pos).getShape(this.world, pos)))
 		{
 			return false;
 		}
@@ -253,16 +253,16 @@ public class EntityAechorPlant extends EntityAetherMonster
 	}
 
 	@Override
-	public void move(MoverType type, double x, double y, double z)
+	public void move(MoverType type, Vec3d vec)
 	{
 		if (type == MoverType.PISTON)
 		{
-			super.move(type, x, y, z);
+			super.move(type, vec);
 		}
 	}
 
 	@Override
-	protected ResourceLocation getLootTable()
+	public ResourceLocation getLootTable()
 	{
 		return LootTablesAether.ENTITY_AECHOR_PLANT;
 	}
@@ -311,42 +311,36 @@ public class EntityAechorPlant extends EntityAetherMonster
 	}
 
 	@Override
-	public void writeEntityToNBT(CompoundNBT tagCompound)
+	public void writeAdditional(CompoundNBT nbt)
 	{
-		super.writeEntityToNBT(tagCompound);
+		super.writeAdditional(nbt);
 
-		tagCompound.putInt("plantSize", this.getPlantSize());
-		tagCompound.putInt("poisonLeft", this.getPoisonLeft());
+		nbt.putInt("plantSize", this.getPlantSize());
+		nbt.putInt("poisonLeft", this.getPoisonLeft());
 
-		tagCompound.putByte("petals", this.serializePlantPetals());
+		nbt.putByte("petals", this.serializePlantPetals());
 
-		tagCompound.putInt("petalGrowTimer", this.petalGrowTimer);
+		nbt.putInt("petalGrowTimer", this.petalGrowTimer);
 	}
 
 	@Override
-	public void readEntityFromNBT(CompoundNBT tagCompound)
+	public void readAdditional(CompoundNBT nbt)
 	{
-		super.readEntityFromNBT(tagCompound);
+		super.readAdditional(nbt);
 
-		this.setPlantSize(tagCompound.getInt("plantSize"));
-		this.setPoisonLeft(tagCompound.getInt("poisonLeft"));
+		this.setPlantSize(nbt.getInt("plantSize"));
+		this.setPoisonLeft(nbt.getInt("poisonLeft"));
 
-		if (tagCompound.contains("petals"))
+		if (nbt.contains("petals"))
 		{
-			this.deserializePlantPetals(tagCompound.getByte("petals"));
+			this.deserializePlantPetals(nbt.getByte("petals"));
 		}
 		else
 		{
 			Arrays.fill(this.petals, true);
 		}
 
-		this.petalGrowTimer = tagCompound.getInt("petalGrowTimer");
-	}
-
-	@Override
-	public boolean getCanSpawnHere()
-	{
-		return this.world.getDifficulty() != EnumDifficulty.PEACEFUL;
+		this.petalGrowTimer = nbt.getInt("petalGrowTimer");
 	}
 
 	public boolean canSeePrey()

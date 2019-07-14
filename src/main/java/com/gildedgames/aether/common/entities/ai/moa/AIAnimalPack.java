@@ -81,9 +81,9 @@ public class AIAnimalPack extends Goal
 	}
 
 	@Override
-	public void updateTask()
+	public void tick()
 	{
-		super.updateTask();
+		super.tick();
 
 		final Path path = this.animal.getNavigator().getPathToXYZ(this.packLeader.posX, this.packLeader.posY, this.packLeader.posZ);
 

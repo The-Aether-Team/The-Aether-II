@@ -71,11 +71,11 @@ public class LayerSwetLatch extends LayerBipedArmor
 				GlStateManager.translatef(0.1f, .3f, .2f);
 			}
 
-			this.renderer.bindTexture(swet.getType().texture_head);
+			this.renderer.bindTexture(swet.getSwetType().texture_head);
 
 			this.head.renderRaw(swet, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
-			this.renderer.bindTexture(swet.getType().texture_jelly);
+			this.renderer.bindTexture(swet.getSwetType().texture_jelly);
 
 			GlStateManager.color(1.0F, 1.0F, 1.0F, .7F);
 			GlStateManager.enableNormalize();

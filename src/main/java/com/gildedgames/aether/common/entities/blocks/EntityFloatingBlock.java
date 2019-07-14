@@ -1,13 +1,19 @@
 package com.gildedgames.aether.common.entities.blocks;
 
 import com.gildedgames.aether.common.blocks.util.BlockFloating;
+import com.gildedgames.aether.common.entities.EntityTypesAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MoverType;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.IPacket;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.play.server.SSpawnObjectPacket;
+import net.minecraft.particles.BlockParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -17,28 +23,16 @@ import net.minecraftforge.api.distmarker.Dist;
 
 public class EntityFloatingBlock extends Entity
 {
-	private static final DataParameter<Integer> BLOCK_NAME = new DataParameter<>(20, DataSerializers.VARINT);
-
-	private static final DataParameter<Byte> BLOCK_METADATA = new DataParameter<>(21, DataSerializers.BYTE);
+	private static final DataParameter<Integer> BLOCK_STATE = new DataParameter<>(20, DataSerializers.VARINT);
 
 	private boolean hasActivated = false;
 
-	public EntityFloatingBlock(World world)
-	{
-		super(world);
-
-		this.setSize(0.98F, 0.98F);
-		this.motionX = 0.0D;
-		this.motionY = 0.0D;
-		this.motionZ = 0.0D;
-	}
 
 	public EntityFloatingBlock(World world, double x, double y, double z, BlockState state)
 	{
-		this(world);
+		this(EntityTypesAether.FLOATING_BLOCK, world);
 
 		this.setBlockState(state);
-
 		this.setPosition(x, y, z);
 
 		this.prevPosX = x;
@@ -46,15 +40,19 @@ public class EntityFloatingBlock extends Entity
 		this.prevPosZ = z;
 	}
 
-	@Override
-	protected void registerData()
+	public EntityFloatingBlock(EntityType<? extends EntityFloatingBlock> type, World world)
 	{
-		this.dataManager.register(BLOCK_NAME, 2);
-		this.dataManager.register(BLOCK_METADATA, (byte) 4);
+		super(type, world);
 	}
 
 	@Override
-	public void livingTick()
+	protected void registerData()
+	{
+		this.dataManager.register(BLOCK_STATE, -1);
+	}
+
+	@Override
+	public void tick()
 	{
 		// Destroys the source block, since deleting a neighboring block in the actual block class
 		// causes a infinite loop of updates.
@@ -85,13 +83,11 @@ public class EntityFloatingBlock extends Entity
 			this.prevPosY = this.posY;
 			this.prevPosZ = this.posZ;
 
-			this.motionY += 0.04D;
+			this.setMotion(this.getMotion().getX(), this.getMotion().getY() + 0.04D, this.getMotion().getZ());
 
-			this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
+			this.move(MoverType.SELF, this.getMotion());
 
-			this.motionX *= 0.98D;
-			this.motionY *= 0.98D;
-			this.motionZ *= 0.98D;
+			this.setMotion(this.getMotion().mul(0.98D, 0.98D, 0.98D));
 
 			BlockPos pos = new BlockPos(this);
 
@@ -111,7 +107,7 @@ public class EntityFloatingBlock extends Entity
 
 			if (this.world.isAirBlock(pos.down()) && this.world.isRemote())
 			{
-				int count = MathHelper.floor(this.motionY / 0.15D);
+				int count = MathHelper.floor(this.getMotion().getY() / 0.15D);
 
 				if (count > 5)
 				{
@@ -120,11 +116,10 @@ public class EntityFloatingBlock extends Entity
 
 				for (int i = 0; i < count; i++)
 				{
-					this.world.spawnParticle(ParticleTypes.BLOCK_DUST,
+					this.world.addParticle(new BlockParticleData(ParticleTypes.BLOCK, this.getBlockState()),
 							this.posX - 0.5D + (this.world.rand.nextDouble()),
 							this.posY - 0.5D,
-							this.posZ - 0.5D + (this.world.rand.nextDouble()), 0.0D, 0.0D, 0.0D,
-							Block.getStateId(this.getBlockState()));
+							this.posZ - 0.5D + (this.world.rand.nextDouble()), 0.0D, 0.0D, 0.0D);
 				}
 			}
 		}
@@ -146,45 +141,37 @@ public class EntityFloatingBlock extends Entity
 	@Override
 	public boolean canBeCollidedWith()
 	{
-		return !this.isDead;
+		return this.isAlive();
 	}
 
 	@Override
-	protected void readEntityFromNBT(CompoundNBT compound)
+	public void writeAdditional(CompoundNBT nbt)
 	{
-		Block block = Block.getBlockFromName(compound.getString("Block"));
+		nbt.putInt("State", Block.getStateId(this.getBlockState()));
+		nbt.putInt("TicksExisted", this.ticksExisted);
+	}
 
-		this.setBlockState(block.getStateFromMeta(compound.getByte("BlockState")));
-		this.ticksExisted = compound.getInt("TicksExisted");
+	@Override
+	public void readAdditional(CompoundNBT nbt)
+	{
+		this.setBlockState(Block.getStateById(nbt.getInt("State")));
 
+		this.ticksExisted = nbt.getInt("TicksExisted");
 		this.hasActivated = this.ticksExisted > 1;
-	}
-
-	@Override
-	protected void writeEntityToNBT(CompoundNBT compound)
-	{
-		BlockState state = this.getBlockState();
-
-		Block block = state.getBlock();
-
-		compound.putString("Block", Block.REGISTRY.getNameForObject(block).toString());
-		compound.putByte("BlockState", (byte) block.getMetaFromState(state));
-		compound.putInt("TicksExisted", this.ticksExisted);
 	}
 
 	public BlockState getBlockState()
 	{
-		Block block = Block.getBlockById(this.dataManager.get(BLOCK_NAME));
-		int meta = (int) this.dataManager.get(BLOCK_METADATA);
-
-		return block.getStateFromMeta(meta);
+		return Block.getStateById(this.dataManager.get(BLOCK_STATE));
 	}
 
 	public void setBlockState(BlockState state)
 	{
-		Block block = state.getBlock();
+		this.dataManager.set(BLOCK_STATE, Block.getStateId(state));
+	}
 
-		this.dataManager.set(BLOCK_NAME, Block.REGISTRY.getIDForObject(block));
-		this.dataManager.set(BLOCK_METADATA, (byte) block.getMetaFromState(state));
+	@Override
+	public IPacket<?> createSpawnPacket() {
+		return new SSpawnObjectPacket(this, Block.getStateId(this.getBlockState()));
 	}
 }

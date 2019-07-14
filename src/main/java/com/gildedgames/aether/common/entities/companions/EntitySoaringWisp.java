@@ -1,15 +1,15 @@
 package com.gildedgames.aether.common.entities.companions;
 
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.world.World;
 
 public class EntitySoaringWisp extends EntityCompanion
 {
 
-	public EntitySoaringWisp(World worldIn)
+	public EntitySoaringWisp(EntityType<? extends CreatureEntity> type, World worldIn)
 	{
-		super(worldIn);
-
-		this.setSize(0.75f, 2.0f);
+		super(type, worldIn);
 
 		this.stepHeight = 1.0F;
 		this.isFlying = true;

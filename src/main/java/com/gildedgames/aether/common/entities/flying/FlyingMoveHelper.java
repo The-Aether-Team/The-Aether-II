@@ -1,11 +1,11 @@
 package com.gildedgames.aether.common.entities.flying;
 
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityLookHelper;
-import net.minecraft.entity.ai.EntityMoveHelper;
+import net.minecraft.entity.ai.controller.LookController;
+import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.util.math.MathHelper;
 
-public class FlyingMoveHelper extends EntityMoveHelper
+public class FlyingMoveHelper extends MovementController
 {
 	private final EntityFlying entity;
 
@@ -16,48 +16,58 @@ public class FlyingMoveHelper extends EntityMoveHelper
 	}
 
 	@Override
-	public void onUpdateMoveHelper()
+	public void tick()
 	{
-		if (this.action == EntityMoveHelper.Action.MOVE_TO && !this.entity.getNavigator().noPath())
+		if (this.action == MovementController.Action.MOVE_TO && !this.entity.getNavigator().noPath())
 		{
-			double d0 = this.posX - this.entity.posX;
-			double d1 = this.posY - this.entity.posY;
-			double d2 = this.posZ - this.entity.posZ;
-			double d3 = d0 * d0 + d1 * d1 + d2 * d2;
-			d3 = (double) MathHelper.sqrt(d3);
-			d1 = d1 / d3;
-			float f = (float) (MathHelper.atan2(d2, d0) * (180D / Math.PI)) - 90.0F;
-			this.entity.rotationYaw = this.limitAngle(this.entity.rotationYaw, f, 90.0F);
+			double xDiff = this.posX - this.entity.posX;
+			double yDiff = this.posY - this.entity.posY;
+			double zDiff = this.posZ - this.entity.posZ;
+			double dist = xDiff * xDiff + yDiff * yDiff + zDiff * zDiff;
+			dist = (double) MathHelper.sqrt(dist);
+
+			yDiff = yDiff / dist;
+
+			float angle = (float) (MathHelper.atan2(zDiff, xDiff) * (180D / Math.PI)) - 90.0F;
+
+			this.entity.rotationYaw = this.limitAngle(this.entity.rotationYaw, angle, 90.0F);
 			this.entity.renderYawOffset = this.entity.rotationYaw;
 
-			float f1 = (float) (this.speed * this.entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
-			this.entity.setAIMoveSpeed(this.entity.getAIMoveSpeed() + (f1 - this.entity.getAIMoveSpeed()) * 0.125F);
-			double d4 = 0.007F;
-			double d5 = Math.cos((double) (this.entity.rotationYaw * 0.017453292F));
-			double d6 = Math.sin((double) (this.entity.rotationYaw * 0.017453292F));
-			this.entity.motionX += d4 * d5;
-			this.entity.motionZ += d4 * d6;
+			float speed = (float) (this.speed * this.entity.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getValue());
+			this.entity.setAIMoveSpeed(this.entity.getAIMoveSpeed() + (speed - this.entity.getAIMoveSpeed()) * 0.125F);
+			double motionScale = 0.007F;
+			double motionX = Math.cos((double) (this.entity.rotationYaw * 0.017453292F));
+			double motionZ = Math.sin((double) (this.entity.rotationYaw * 0.017453292F));
+
+			double newMotionX = this.entity.getMotion().getX();
+			double newMotionY = this.entity.getMotion().getY();
+			double newMotionZ = this.entity.getMotion().getZ();
+
+			newMotionX += motionScale * motionX;
+			newMotionZ += motionScale * motionZ;
 			//d4 = Math.sin((double)(this.entity.ticksExisted + this.entity.getEntityId()) * 0.75D) * 0.05D;
-			this.entity.motionY += d4 * (d6 + d5) * 0.25D;
-			this.entity.motionY += (double) this.entity.getAIMoveSpeed() * d1 * 0.1D;
+			newMotionY += motionScale * (motionZ + motionX) * 0.25D;
+			newMotionY += (double) this.entity.getAIMoveSpeed() * yDiff * 0.1D;
 
-			EntityLookHelper entitylookhelper = this.entity.getLookHelper();
-			double d7 = this.entity.posX + d0 / d3 * 2.0D;
-			double d8 = (double) this.entity.getEyeHeight() + this.entity.posY + d1 / d3;
-			double d9 = this.entity.posZ + d2 / d3 * 2.0D;
-			double d10 = entitylookhelper.getLookPosX();
-			double d11 = entitylookhelper.getLookPosY();
-			double d12 = entitylookhelper.getLookPosZ();
+			this.entity.setMotion(newMotionX, newMotionY, newMotionZ);
 
-			if (!entitylookhelper.getIsLooking())
+			LookController controller = this.entity.getLookController();
+			double d7 = this.entity.posX + xDiff / dist * 2.0D;
+			double d8 = (double) this.entity.getEyeHeight() + this.entity.posY + yDiff / dist;
+			double d9 = this.entity.posZ + zDiff / dist * 2.0D;
+			double lookPosX = controller.getLookPosX();
+			double lookPosY = controller.getLookPosY();
+			double lookPosZ = controller.getLookPosZ();
+
+			if (!controller.getIsLooking())
 			{
-				d10 = d7;
-				d11 = d8;
-				d12 = d9;
+				lookPosX = d7;
+				lookPosY = d8;
+				lookPosZ = d9;
 			}
 
-			this.entity.getLookHelper().setLookPosition(
-					d10 + (d7 - d10) * 0.125D, d11 + (d8 - d11) * 0.125D, d12 + (d9 - d12) * 0.125D, 10.0F, 40.0F);
+			this.entity.getLookController().setLookPosition(
+					lookPosX + (d7 - lookPosX) * 0.125D, lookPosY + (d8 - lookPosY) * 0.125D, lookPosZ + (d9 - lookPosZ) * 0.125D, 10.0F, 40.0F);
 			this.entity.setMoving(true);
 		}
 		else

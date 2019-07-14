@@ -4,22 +4,24 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.ai.EntityAIForcedWander;
 import com.gildedgames.aether.common.entities.flying.EntityFlying;
 import com.gildedgames.aether.common.entities.flying.PathNavigateFlyer;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
+import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.goal.MoveTowardsRestrictionGoal;
 import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
+import java.util.EnumSet;
+
 public class EntityAerwhale extends EntityFlying
 {
 
-	public EntityAerwhale(final World world)
+	public EntityAerwhale(EntityType<? extends CreatureEntity> type, World world)
 	{
-		super(world);
-
-		this.setSize(3.0F, 3.0F);
+		super(type, world);
 	}
 
 	@Override
@@ -47,8 +49,8 @@ public class EntityAerwhale extends EntityFlying
 		final MoveTowardsRestrictionGoal moveTowardsRestriction = new MoveTowardsRestrictionGoal(this, 0.4D);
 		final EntityAIForcedWander wander = new EntityAIForcedWander(this, 0.4D, 10, 12, 7);
 
-		wander.setMutexBits(3);
-		moveTowardsRestriction.setMutexBits(3);
+		wander.setMutexFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
+		moveTowardsRestriction.setMutexFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
 
 		this.goalSelector.addGoal(1, moveTowardsRestriction);
 		this.goalSelector.addGoal(2, wander);
@@ -85,7 +87,7 @@ public class EntityAerwhale extends EntityFlying
 	}
 
 	@Override
-	protected boolean canDespawn()
+	public boolean canDespawn(double closestDistance)
 	{
 		return false;
 	}

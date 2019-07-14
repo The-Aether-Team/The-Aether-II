@@ -17,20 +17,23 @@ import com.gildedgames.aether.common.init.LootTablesAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketDetachSwet;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.potion.Potion;
-import net.minecraft.particles.ParticleTypes;
+import net.minecraft.particles.RedstoneParticleData;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -59,17 +62,21 @@ public class EntitySwet extends EntityExtendedMob
 
 	private int timeSinceSucking, digestTime, timeStarved, transitionTime;
 
-	public EntitySwet(final World worldIn)
+	public EntitySwet(EntityType<? extends MonsterEntity> type, World world)
 	{
-		super(worldIn);
+		super(type, world);
+	}
 
+	@Override
+	public void registerGoals()
+	{
 		final HoppingMoveHelper hoppingMoveHelper = new HoppingMoveHelper(this,
 				() -> EntitySwet.this.getFoodSaturation() == 0 ? SoundEvents.ENTITY_SLIME_JUMP : SoundEvents.ENTITY_SLIME_JUMP,
 				() -> EntitySwet.this.getRNG().nextInt(EntitySwet.this.getFoodSaturation() == 3 ? 10 : 60) + (EntitySwet.this.getFoodSaturation() == 3 ?
 						40 :
 						50));
 
-		this.moveHelper = hoppingMoveHelper;
+		this.moveController = hoppingMoveHelper;
 
 		this.goalSelector.addGoal(2, new EntityAIRestrictRain(this));
 		this.goalSelector.addGoal(3, new AIHopHideFromRain(this, hoppingMoveHelper, 1.3D));
@@ -78,18 +85,24 @@ public class EntitySwet extends EntityExtendedMob
 		this.goalSelector.addGoal(2, new AIHopFloat(this, hoppingMoveHelper));
 		this.goalSelector.addGoal(3, new AIHopFollowAttackTarget(this, hoppingMoveHelper, 1.0D));
 
-		this.targetSelector.addGoal(1, new EntityAINearestAttackableTarget<>(this, PlayerEntity.class, 10, true, false,
-				e -> EntitySwet.canLatch(EntitySwet.this, e)));
+		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, 10, true, false,
+				e -> e instanceof PlayerEntity && EntitySwet.canLatch(EntitySwet.this, (PlayerEntity) e)));
 
-		this.setSize(1.0F, 1.0F);
+	}
 
-		this.setType(Type.values()[this.world.rand.nextInt(Type.values().length)]);
+	@Override
+	public void registerData()
+	{
+		super.registerData();
 
-		this.experienceValue = 3;
+		this.dataManager.register(EntitySwet.TYPE, 0);
+		this.dataManager.register(EntitySwet.FOOD_SATURATION, 1);
 
-		this.setFoodSaturation(3);
+		this.setSwetType(Type.values()[this.world.rand.nextInt(Type.values().length)]);
+
 		this.actualSaturation = 3;
 
+		this.setFoodSaturation(3);
 		this.setDayMob(true);
 	}
 
@@ -100,15 +113,9 @@ public class EntitySwet extends EntityExtendedMob
 	}
 
 	@Override
-	public float getBlockPathWeight(BlockPos pos)
+	public float getBlockPathWeight(BlockPos pos, IWorldReader reader)
 	{
-		return this.world.getBlockState(pos.down()).getBlock() == BlocksAether.aether_grass ? 10.0F : this.world.getLightBrightness(pos) - 0.5F;
-	}
-
-	@Override
-	protected boolean isValidLightLevel()
-	{
-		return true;
+		return this.world.getBlockState(pos.down()).getBlock() == BlocksAether.aether_grass ? 10.0F : this.world.getBrightness(pos) - 0.5F;
 	}
 
 	public int getFoodSaturation()
@@ -126,7 +133,7 @@ public class EntitySwet extends EntityExtendedMob
 
 	public boolean processSucking(final PlayerEntity player)
 	{
-		EffectInstance slowness = new EffectInstance(Potion.getPotionById(2), 3, this.timeSinceSucking / 80, true, false);
+		EffectInstance slowness = new EffectInstance(Effects.SLOWNESS, 3, this.timeSinceSucking / 80, true, false);
 
 		player.addPotionEffect(slowness);
 
@@ -146,7 +153,7 @@ public class EntitySwet extends EntityExtendedMob
 
 					for (EffectInstance p : effects)
 					{
-						if (p.getPotion().isBadEffect())
+						if (!p.getPotion().isBeneficial())
 						{
 							negEffects.add(p);
 						}
@@ -157,7 +164,7 @@ public class EntitySwet extends EntityExtendedMob
 					 */
 					for (EffectInstance p : negEffects)
 					{
-						if (!p.getPotion().equals(Potion.getPotionById(2)))
+						if (!p.getPotion().equals(Effects.SLOWNESS))
 						{
 							this.addPotionEffect(p);
 							player.removePotionEffect(p.getPotion());
@@ -189,7 +196,7 @@ public class EntitySwet extends EntityExtendedMob
 					this.setFoodSaturation(4);
 				}
 
-				NetworkingAether.sendPacketToWatching(new PacketDetachSwet(this.getType(), player.getEntityId()), player, true);
+				NetworkingAether.sendPacketToWatching(new PacketDetachSwet(this.getSwetType(), player.getEntityId()), player, true);
 				return true;
 			}
 		}
@@ -197,25 +204,15 @@ public class EntitySwet extends EntityExtendedMob
 		return false;
 	}
 
-
 	private void applyStatusEffectOnAttack(final Entity target)
 	{
 		if (target instanceof LivingEntity)
 		{
 			final LivingEntity living = (LivingEntity) target;
 
-			int buildup = IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectToxin(living), EEffectIntensity.MINOR)/2;
+			int buildup = IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectToxin(living), EEffectIntensity.MINOR) / 2;
 			IAetherStatusEffects.applyStatusEffect(living, IAetherStatusEffects.effectTypes.TOXIN, buildup);
 		}
-	}
-
-	@Override
-	public void registerData()
-	{
-		super.registerData();
-
-		this.dataManager.register(EntitySwet.TYPE, 0);
-		this.dataManager.register(EntitySwet.FOOD_SATURATION, 1);
 	}
 
 	@Override
@@ -241,7 +238,7 @@ public class EntitySwet extends EntityExtendedMob
 			return;
 		}
 
-		this.motionY = 0.41999998688697815D;
+		this.setMotion(this.getMotion().getX(), 0.42D, this.getMotion().getZ());
 		this.isAirBorne = true;
 	}
 
@@ -252,10 +249,10 @@ public class EntitySwet extends EntityExtendedMob
 	}
 
 	@Override
-	public void livingTick()
+	public void tick()
 	{
 		if (this.isInWater() || (this.world.isRaining() && this.world
-				.canSeeSky(new BlockPos(this.posX, this.getBoundingBox().minY, this.posZ))))
+				.canBlockSeeSky(new BlockPos(this.posX, this.getBoundingBox().minY, this.posZ))))
 		{
 			this.timeStarved = -this.rand.nextInt(60);
 
@@ -265,7 +262,7 @@ public class EntitySwet extends EntityExtendedMob
 		this.squishFactor += (this.squishAmount - this.squishFactor) * 0.5F;
 		this.prevSquishFactor = this.squishFactor;
 
-		super.livingTick();
+		super.tick();
 
 		if (this.getAttackTarget() != null && this.getAttackTarget() instanceof PlayerEntity
 				&& ((PlayerEntity) this.getAttackTarget()).getFoodStats().getFoodLevel() < 5)
@@ -334,16 +331,17 @@ public class EntitySwet extends EntityExtendedMob
 				float[] greenColors = new float[] { 0.439f, 0.686f, 0.654f };
 				float[] blueColors = new float[] { 0.67f, 0.819f, 0.525f };
 
-				int type = this.getType().name.equals("purple") ? 0 : (this.getType().name.equals("blue") ? 1 : 2);
+				int type = this.getSwetType().name.equals("purple") ? 0 : (this.getSwetType().name.equals("blue") ? 1 : 2);
 
 				float f1 = this.getActualSaturation() / 5f;
 
 				for (int i = 0; i < 5 + this.rand.nextInt(5); i++)
 				{
-					this.world.spawnParticle(ParticleTypes.REDSTONE, this.posX - f1 + this.rand.nextFloat() * f1 * 2f,
-							this.posY - f1 + this.rand.nextFloat() * f1 * 2f, this.posZ - f1 + this.rand.nextFloat() * f1 * 2f, redColors[type],
-							greenColors[type],
-							blueColors[type]);
+					this.world.addParticle(new RedstoneParticleData(redColors[type], greenColors[type], blueColors[type], 1.0F),
+							this.posX - f1 + this.rand.nextFloat() * f1 * 2f,
+							this.posY - f1 + this.rand.nextFloat() * f1 * 2f,
+							this.posZ - f1 + this.rand.nextFloat() * f1 * 2f,
+							0.0D, 0.0D, 0.0D);
 				}
 			}
 		}
@@ -370,7 +368,7 @@ public class EntitySwet extends EntityExtendedMob
 
 		if (this.getFoodSaturation() == 4)
 		{
-			this.addPotionEffect(new EffectInstance(Potion.getPotionById(2), 10, 2, true, false));
+			this.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 10, 2, true, false));
 
 			this.digestTime++;
 
@@ -400,45 +398,43 @@ public class EntitySwet extends EntityExtendedMob
 		this.squishAmount *= 0.6F;
 	}
 
-	public Type getType()
+	public Type getSwetType()
 	{
 		return Type.fromOrdinal(this.dataManager.get(EntitySwet.TYPE));
 	}
 
-	public void setType(final Type type)
+	public void setSwetType(final Type type)
 	{
 		this.dataManager.set(EntitySwet.TYPE, type.ordinal());
 	}
 
 	@Override
-	public void readFromNBT(final CompoundNBT tag)
+	public void readAdditional(CompoundNBT nbt)
 	{
-		super.readFromNBT(tag);
+		super.readAdditional(nbt);
 
-		this.setType(Type.fromOrdinal(tag.getInt("type")));
-		this.timeSinceSucking = tag.getInt("timeSinceSucking");
-		this.setFoodSaturation(tag.getInt("foodSaturation"));
+		this.setSwetType(Type.fromOrdinal(nbt.getInt("type")));
+		this.timeSinceSucking = nbt.getInt("timeSinceSucking");
+		this.setFoodSaturation(nbt.getInt("foodSaturation"));
 		this.actualSaturation = this.getFoodSaturation();
 	}
 
 	@Override
-	public CompoundNBT writeToNBT(final CompoundNBT tag)
+	public void writeAdditional(CompoundNBT nbt)
 	{
-		super.writeToNBT(tag);
+		super.writeAdditional(nbt);
 
-		tag.putInt("type", this.getType().ordinal());
-		tag.putInt("timeSinceSucking", this.timeSinceSucking);
-		tag.putInt("foodSaturation", this.getFoodSaturation());
-
-		return tag;
+		nbt.putInt("type", this.getSwetType().ordinal());
+		nbt.putInt("timeSinceSucking", this.timeSinceSucking);
+		nbt.putInt("foodSaturation", this.getFoodSaturation());
 	}
 
 	@Override
-	protected ResourceLocation getLootTable()
+	public ResourceLocation getLootTable()
 	{
 		if (this.getFoodSaturation() > 0)
 		{
-			switch (this.getType())
+			switch (this.getSwetType())
 			{
 				case BLUE:
 					return LootTablesAether.ENTITY_SWET_BLUE;

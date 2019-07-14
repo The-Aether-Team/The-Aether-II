@@ -14,11 +14,12 @@ public class ResistanceStorage implements Capability.IStorage<IResistances>
 	public INBT writeNBT(Capability<IResistances> capability, IResistances instance, Direction side)
 	{
 		CompoundNBT tag = new CompoundNBT();
-		for (Map.Entry<String, Float> stringFloatEntry : instance.getResistances().entrySet())
+
+		for (Map.Entry<String, Float> entry : instance.getResistances().entrySet())
 		{
-			Map.Entry pair = stringFloatEntry;
-			tag.putFloat(pair.getKey().toString(), (float) pair.getValue());
+			tag.putFloat(entry.getKey(), entry.getValue());
 		}
+
 		return tag;
 	}
 

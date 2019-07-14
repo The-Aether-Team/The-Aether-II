@@ -3,7 +3,11 @@ package com.gildedgames.aether.common.entities.ai;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+
+import java.util.EnumSet;
 
 public abstract class EntityAIMoveToBlockYSensitive extends Goal
 {
@@ -17,7 +21,7 @@ public abstract class EntityAIMoveToBlockYSensitive extends Goal
 	protected int runDelay;
 
 	/** Block to move to */
-	protected BlockPos destinationBlock = BlockPos.ORIGIN;
+	protected BlockPos destinationBlock = BlockPos.ZERO;
 
 	private int timeoutCounter;
 
@@ -30,7 +34,7 @@ public abstract class EntityAIMoveToBlockYSensitive extends Goal
 		this.creature = creature;
 		this.movementSpeed = speedIn;
 		this.searchLength = length;
-		this.setMutexBits(5);
+		this.setMutexFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.JUMP));
 	}
 
 	/**
@@ -76,9 +80,11 @@ public abstract class EntityAIMoveToBlockYSensitive extends Goal
 	 * Keep ticking a continuous task that has already been started
 	 */
 	@Override
-	public void updateTask()
+	public void tick()
 	{
-		if (this.creature.getDistanceSqToCenter(this.destinationBlock.up()) > 1.0D)
+		Vec3d center = new Vec3d(this.destinationBlock.getX() + 0.5, this.destinationBlock.getY() + 1.0, this.destinationBlock.getZ() + 0.5);
+
+		if (this.creature.getDistanceSq(center) > 1.0D)
 		{
 			this.isAboveDestination = false;
 			++this.timeoutCounter;
@@ -101,11 +107,6 @@ public abstract class EntityAIMoveToBlockYSensitive extends Goal
 		return this.isAboveDestination;
 	}
 
-	/**
-	 * Searches and sets new destination block and returns true if a suitable block (specified in {@link
-	 * net.minecraft.entity.ai.EntityAIMoveToBlock#shouldMoveTo(World, BlockPos) EntityAIMoveToBlockYSensitive#shouldMoveTo(World,
-	 * BlockPos)}) can be found.
-	 */
 	private boolean searchForDestination()
 	{
 		final int i = this.searchLength;

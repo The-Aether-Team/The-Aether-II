@@ -2,14 +2,16 @@ package com.gildedgames.aether.common.entities.flying;
 
 import net.minecraft.entity.EntityBodyHelper;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.ai.controller.BodyController;
 import net.minecraft.util.math.MathHelper;
 
-public class EntityBodyHelperFlying extends EntityBodyHelper
+public class EntityBodyHelperFlying extends BodyController
 {
 
-	private final LivingEntity entity;
+	private final MobEntity entity;
 
-	public EntityBodyHelperFlying(LivingEntity livingIn)
+	public EntityBodyHelperFlying(MobEntity livingIn)
 	{
 		super(livingIn);
 

@@ -4,27 +4,24 @@ import com.gildedgames.aether.api.entity.EntityCharacter;
 import com.gildedgames.aether.api.shop.IShopInstanceGroup;
 import com.gildedgames.aether.common.entities.util.EntityBodyHelperNoRotation;
 import com.gildedgames.orbis.lib.util.mc.NBTHelper;
-import net.minecraft.block.Block;
-import net.minecraft.entity.EntityBodyHelper;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.controller.BodyController;
 import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.api.distmarker.Dist;
 
 public class EntityTivalier extends EntityCharacter
 {
 	private BlockPos spawned;
 
-	public EntityTivalier(final World worldIn)
+	public EntityTivalier(EntityType<? extends EntityCharacter> type, World worldIn)
 	{
-		super(worldIn);
-
-		this.setSize(1.6F, 1.6F);
+		super(type, worldIn);
 	}
 
 	@Override
@@ -34,7 +31,7 @@ public class EntityTivalier extends EntityCharacter
 	}
 
 	@Override
-	protected EntityBodyHelper createBodyHelper()
+	protected BodyController createBodyController()
 	{
 		return new EntityBodyHelperNoRotation(this);
 	}
@@ -55,19 +52,19 @@ public class EntityTivalier extends EntityCharacter
 	}
 
 	@Override
-	public void writeEntityToNBT(final CompoundNBT compound)
+	public void writeAdditional(CompoundNBT nbt)
 	{
-		super.writeEntityToNBT(compound);
+		super.writeAdditional(nbt);
 
-		compound.put("spawned", NBTHelper.writeBlockPos(this.spawned));
+		nbt.put("spawned", NBTHelper.writeBlockPos(this.spawned));
 	}
 
 	@Override
-	public void readEntityFromNBT(final CompoundNBT compound)
+	public void readAdditional(CompoundNBT nbt)
 	{
-		super.readEntityFromNBT(compound);
+		super.readAdditional(nbt);
 
-		this.spawned = NBTHelper.readBlockPos(compound.getCompound("spawned"));
+		this.spawned = NBTHelper.readBlockPos(nbt.getCompound("spawned"));
 
 		if (this.spawned != null)
 		{
@@ -88,14 +85,7 @@ public class EntityTivalier extends EntityCharacter
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
-	public void turn(final float yaw, final float pitch)
-	{
-
-	}
-
-	@Override
-	public void livingTick()
+	public void tick()
 	{
 		this.posX = this.prevPosX;
 		this.posZ = this.prevPosZ;
@@ -106,7 +96,7 @@ public class EntityTivalier extends EntityCharacter
 			this.setHomePosAndDistance(this.spawned, 3);
 		}
 
-		super.livingTick();
+		super.tick();
 
 		this.posX = this.prevPosX;
 		this.posZ = this.prevPosZ;
@@ -125,7 +115,7 @@ public class EntityTivalier extends EntityCharacter
 	}
 
 	@Override
-	protected void playStepSound(final BlockPos pos, final Block blockIn)
+	protected void playStepSound(final BlockPos pos, final BlockState blockIn)
 	{
 
 	}

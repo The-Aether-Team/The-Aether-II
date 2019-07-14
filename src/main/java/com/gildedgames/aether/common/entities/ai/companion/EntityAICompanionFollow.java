@@ -72,7 +72,7 @@ public class EntityAICompanionFollow extends Goal
 	}
 
 	@Override
-	public void updateTask()
+	public void tick()
 	{
 		final PlayerEntity owner = this.entity.getOwner();
 
@@ -81,7 +81,7 @@ public class EntityAICompanionFollow extends Goal
 			return;
 		}
 
-		this.entity.getLookHelper().setLookPositionWithEntity(owner, 10.0F, 40f);
+		this.entity.getLookController().setLookPositionWithEntity(owner, 10.0F, 40f);
 
 		if (this.timeToRecalcPath-- <= 0)
 		{

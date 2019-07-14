@@ -11,6 +11,7 @@ import net.minecraft.util.math.Vec3d;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.EnumSet;
 
 public class EntityAIWanderFavorBlocks extends Goal
 {
@@ -38,7 +39,7 @@ public class EntityAIWanderFavorBlocks extends Goal
 		this.speed = speedIn;
 		this.executionChance = chance;
 		this.favoriteBlocks = favoriteBlocks;
-		this.setMutexBits(1);
+		this.setMutexFlags(EnumSet.of(Goal.Flag.MOVE));
 	}
 
 	@Override
@@ -132,7 +133,7 @@ public class EntityAIWanderFavorBlocks extends Goal
 				PathPoint pp = path.getPathPointFromIndex(i);
 				BlockPos blockPos = new BlockPos(pp.x, pp.y, pp.z);
 
-				if (!this.entity.world.canSeeSky(blockPos))
+				if (!this.entity.world.canBlockSeeSky(blockPos))
 				{
 					//this.entity.getNavigator().clearPath();
 				}

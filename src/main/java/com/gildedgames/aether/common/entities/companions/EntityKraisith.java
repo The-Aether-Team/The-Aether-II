@@ -1,8 +1,6 @@
 package com.gildedgames.aether.common.entities.companions;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
@@ -10,9 +8,10 @@ import net.minecraft.world.World;
 
 public class EntityKraisith extends EntityCombatCompanion
 {
-	public EntityKraisith(World worldIn)
+
+	public EntityKraisith(EntityType<? extends CreatureEntity> type, World worldIn)
 	{
-		super(worldIn);
+		super(type, worldIn);
 	}
 
 	@Override
@@ -27,7 +26,7 @@ public class EntityKraisith extends EntityCombatCompanion
 	public boolean attackEntityAsMob(Entity entity)
 	{
 		boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this),
-				(float) ((int) this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue()));
+				(float) ((int) this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getValue()));
 
 		if (flag)
 		{

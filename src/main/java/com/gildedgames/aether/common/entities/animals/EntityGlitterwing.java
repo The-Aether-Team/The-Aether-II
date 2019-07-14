@@ -2,17 +2,16 @@ package com.gildedgames.aether.common.entities.animals;
 
 import com.gildedgames.aether.api.entity.damage.DamageTypeAttributes;
 import com.gildedgames.aether.common.entities.flying.EntityFlying;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.world.World;
 
 public class EntityGlitterwing extends EntityFlying
 {
-
-	public EntityGlitterwing(World world)
+	public EntityGlitterwing(EntityType<? extends CreatureEntity> type, World world)
 	{
-		super(world);
-
-		this.setSize(0.3F, 0.3F);
+		super(type, world);
 	}
 
 	@Override

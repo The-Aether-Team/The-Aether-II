@@ -16,18 +16,19 @@ public class AetherNavigateGround extends GroundPathNavigator
 	}
 
 	@Override
-	protected void removeSunnyPath()
+	protected void trimPath()
 	{
-		super.removeSunnyPath();
+		super.trimPath();
 
 		for (int i = 0; i < this.currentPath.getCurrentPathLength(); ++i)
 		{
 			PathPoint pathpoint = this.currentPath.getPathPointFromIndex(i);
 
-			if (this.world.getBlockState(new BlockPos(pathpoint.x, pathpoint.y, pathpoint.z)) == BlocksAether.aercloud
-					.getStateFromMeta(BlockAercloud.BLUE_AERCLOUD.getMeta()))
+			if (this.world.getBlockState(new BlockPos(pathpoint.x, pathpoint.y, pathpoint.z)) ==
+					BlocksAether.aercloud.getDefaultState().with(BlockAercloud.PROPERTY_VARIANT, BlockAercloud.BLUE_AERCLOUD))
 			{
-				this.currentPath.setCurrentPathLength(i - 1);
+				this.currentPath.setCurrentPathIndex(i - 1);
+
 				return;
 			}
 		}

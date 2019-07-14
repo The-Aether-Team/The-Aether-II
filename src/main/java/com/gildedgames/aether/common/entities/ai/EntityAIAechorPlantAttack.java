@@ -4,10 +4,11 @@ import com.gildedgames.aether.common.entities.projectiles.EntityDart;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.EntityAITarget;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.ai.goal.TargetGoal;
 import net.minecraft.util.math.MathHelper;
 
-public class EntityAIAechorPlantAttack extends EntityAITarget
+public class EntityAIAechorPlantAttack extends TargetGoal
 {
 	private int ticksUntilAttack = 3;
 
@@ -25,7 +26,7 @@ public class EntityAIAechorPlantAttack extends EntityAITarget
 	@Override
 	public boolean shouldContinueExecuting()
 	{
-		final LivingEntity target = this.taskOwner.getAttackTarget();
+		final LivingEntity target = this.field_75299_d.getAttackTarget();
 
 		if (target == null || !target.isAlive())
 		{
@@ -38,20 +39,20 @@ public class EntityAIAechorPlantAttack extends EntityAITarget
 	}
 
 	@Override
-	public void updateTask()
+	public void tick()
 	{
 		if (this.ticksUntilAttack <= 0)
 		{
 			this.ticksUntilAttack = 45;
 
-			final LivingEntity prey = this.taskOwner.getAttackTarget();
+			final LivingEntity prey = this.field_75299_d.getAttackTarget();
 
 			if (prey == null)
 			{
 				return;
 			}
 
-			final CreatureEntity predator = this.taskOwner;
+			final MobEntity predator = this.field_75299_d;
 
 			if (!predator.world.isRemote())
 			{
@@ -59,7 +60,7 @@ public class EntityAIAechorPlantAttack extends EntityAITarget
 				dart.shoot(prey.posX, prey.posY, prey.posZ, 0.6F, 1.0F);
 
 				final double motionX = prey.posX - predator.posX;
-				final double motionY = prey.getBoundingBox().minY + (double) (prey.height / 3.0F) - dart.posY;
+				final double motionY = prey.getBoundingBox().minY + (double) (prey.getHeight() / 3.0F) - dart.posY;
 				final double motionZ = prey.posZ - predator.posZ;
 
 				final double accel = (double) MathHelper.sqrt(motionX * motionX + motionZ * motionZ);
@@ -69,7 +70,7 @@ public class EntityAIAechorPlantAttack extends EntityAITarget
 
 				dart.setDartType(ItemDartType.POISON);
 
-				dart.world.spawnEntity(dart);
+				dart.world.addEntity(dart);
 			}
 		}
 
@@ -78,7 +79,7 @@ public class EntityAIAechorPlantAttack extends EntityAITarget
 
 	public boolean hasTarget()
 	{
-		final CreatureEntity predator = this.taskOwner;
+		final MobEntity predator = this.field_75299_d;
 
 		final double maxDistance = this.getTargetDistance();
 

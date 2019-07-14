@@ -4,21 +4,21 @@ import com.gildedgames.aether.api.entity.damage.DamageTypeAttributes;
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.entities.EntityTypesAether;
 import com.gildedgames.aether.common.entities.ai.*;
 import com.gildedgames.aether.common.init.LootTablesAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketAerbunnySetRiding;
 import com.google.common.collect.Sets;
-import net.minecraft.entity.AgeableEntity;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.block.Block;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.controller.JumpController;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
@@ -27,6 +27,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -36,8 +37,8 @@ import java.util.Set;
 
 public class EntityAerbunny extends EntityAetherAnimal
 {
-	private static final Set<Item> TEMPTATION_ITEMS = Sets
-			.newHashSet(Items.CARROT, Items.POTATO, Items.BEETROOT, ItemsAether.blueberries, ItemsAether.orange, ItemsAether.enchanted_blueberry,
+	private static final Ingredient TEMPTATION_ITEMS = Ingredient.fromItems(
+			Items.CARROT, Items.POTATO, Items.BEETROOT, ItemsAether.blueberries, ItemsAether.orange, ItemsAether.enchanted_blueberry,
 					ItemsAether.enchanted_wyndberry, ItemsAether.wyndberry);
 
 	@OnlyIn(Dist.CLIENT)
@@ -49,10 +50,20 @@ public class EntityAerbunny extends EntityAetherAnimal
 	@OnlyIn(Dist.CLIENT)
 	private float curRotation;
 
-	public EntityAerbunny(final World world)
+	public EntityAerbunny(EntityType<? extends EntityAerbunny> type, World world)
 	{
-		super(world);
+		super(type, world);
+	}
 
+	@Override
+	public float getBlockPathWeight(BlockPos pos, IWorldReader reader)
+	{
+		return super.getBlockPathWeight(pos);
+	}
+
+	@Override
+	protected void registerGoals()
+	{
 		this.goalSelector.addGoal(2, new EntityAIRestrictRain(this));
 		this.goalSelector.addGoal(3, new EntityAIUnstuckBlueAercloud(this));
 		this.goalSelector.addGoal(3, new EntityAIHideFromRain(this, 1.3D));
@@ -65,16 +76,6 @@ public class EntityAerbunny extends EntityAetherAnimal
 		this.goalSelector.addGoal(11, new LookAtGoal(this, PlayerEntity.class, 10.0F));
 
 		this.jumpController = new AerbunnyJumpHelper(this);
-
-		this.spawnableBlock = BlocksAether.aether_grass;
-
-		this.setSize(0.65F, 0.65F);
-	}
-
-	@Override
-	public float getBlockPathWeight(BlockPos pos)
-	{
-		return super.getBlockPathWeight(pos);
 	}
 
 	@Override
@@ -93,12 +94,14 @@ public class EntityAerbunny extends EntityAetherAnimal
 	@Override
 	public void livingTick()
 	{
-		if (this.motionX != 0 || this.motionZ != 0)
+		if (this.getMotion().getX() != 0 || this.getMotion().getZ() != 0)
 		{
 			this.setJumping(true);
 		}
 
 		super.livingTick();
+
+		double motionY = this.getMotion().getY();
 
 		if (this.world.isRemote())
 		{
@@ -107,12 +110,12 @@ public class EntityAerbunny extends EntityAetherAnimal
 				this.puffiness--;
 			}
 
-			if (this.prevMotionY <= 0 && this.motionY > 0)
+			if (this.prevMotionY <= 0 && this.getMotion().getY() > 0)
 			{
 				final BlockPos pos = this.getPosition();
 
 				// Make sure we only spawn particles when it's jumping off a block
-				if (this.world.isBlockFullCube(pos.down()))
+				if (Block.isOpaque(this.world.getBlockState(pos.down()).getShape(this.world, pos.down())))
 				{
 					AetherCore.PROXY.spawnJumpParticles(this.world, this.posX, pos.getY(), this.posZ, 0.6D, 6);
 				}
@@ -120,35 +123,32 @@ public class EntityAerbunny extends EntityAetherAnimal
 				this.puffiness = 10;
 			}
 
-			this.prevMotionY = this.motionY;
+			this.prevMotionY = motionY;
 		}
 
-		if (this.isRiding())
-		{
-			final Entity entity = this.getRidingEntity();
+		final Entity riding = this.getRidingEntity();
 
-			if (!this.world.isRemote() && entity.isSneaking() && entity.onGround)
+		if (riding != null)
+		{
+			if (!this.world.isRemote() && riding.isSneaking() && riding.onGround)
 			{
 				NetworkingAether.sendPacketToWatching(new PacketAerbunnySetRiding(null, this), this, false);
 
-				this.dismountRidingEntity();
-				this.setPosition(entity.posX, entity.posY + entity.getEyeHeight() + 0.5D, entity.posZ);
+				this.dismountEntity(riding);
+				this.setPosition(riding.posX, riding.posY + riding.getEyeHeight() + 0.5D, riding.posZ);
 			}
 
-			if (entity.motionY < 0)
+			if (motionY < 0.0D)
 			{
-				entity.motionY *= entity.isSneaking() ? 0.9D : 0.7D;
+				motionY *= riding.isSneaking() ? 0.9D : 0.7D;
 
-				entity.fallDistance = 0;
+				riding.fallDistance = 0;
 			}
 
-			this.setRotation(entity.rotationYaw, entity.rotationPitch);
+			this.setRotation(riding.rotationYaw, riding.rotationPitch);
 		}
 
-		if (this.motionY < -0.1D)
-		{
-			this.motionY = -0.1D;
-		}
+		this.setMotion(this.getMotion().getX(), Math.max(motionY, -0.1D), this.getMotion().getZ());
 
 		this.fallDistance = 0.0F;
 	}
@@ -160,7 +160,7 @@ public class EntityAerbunny extends EntityAetherAnimal
 
 		if (!super.processInteract(player, hand) && !this.isBreedingItem(stack))
 		{
-			if (!this.isRiding() && player.getPassengers().size() <= 0)
+			if (!this.isRidingOrBeingRiddenBy(player) && player.getPassengers().size() <= 0)
 			{
 				if (!this.world.isRemote())
 				{
@@ -187,7 +187,7 @@ public class EntityAerbunny extends EntityAetherAnimal
 	}
 
 	@Override
-	protected ResourceLocation getLootTable()
+	public ResourceLocation getLootTable()
 	{
 		return LootTablesAether.ENTITY_AERBUNNY;
 	}
@@ -219,7 +219,7 @@ public class EntityAerbunny extends EntityAetherAnimal
 	@Override
 	public AgeableEntity createChild(final AgeableEntity ageable)
 	{
-		return new EntityAerbunny(this.world);
+		return new EntityAerbunny(EntityTypesAether.AERBUNNY, this.world);
 	}
 
 	@OnlyIn(Dist.CLIENT)
@@ -231,11 +231,11 @@ public class EntityAerbunny extends EntityAetherAnimal
 	@OnlyIn(Dist.CLIENT)
 	public float getRotation()
 	{
-		if (this.motionY > 0)
+		if (this.getMotion().getY() > 0)
 		{
 			this.curRotation += MathHelper.clamp(this.curRotation / 10f, -4f, -2f);
 		}
-		else if (this.motionY < 0)
+		else if (this.getMotion().getY() < 0)
 		{
 			this.curRotation += MathHelper.clamp(this.curRotation / 10f, 2f, 4f);
 		}
@@ -257,15 +257,15 @@ public class EntityAerbunny extends EntityAetherAnimal
 	}
 
 	@Override
-	public boolean isBreedingItem(@Nullable final ItemStack stack)
+	public boolean isBreedingItem(final ItemStack stack)
 	{
-		return stack != null && TEMPTATION_ITEMS.contains(stack.getItem());
+		return TEMPTATION_ITEMS.test(stack);
 	}
 
 	@Override
 	public boolean isEntityInsideOpaqueBlock()
 	{
-		return !this.isRiding() && super.isEntityInsideOpaqueBlock();
+		return !this.isPassenger() && super.isEntityInsideOpaqueBlock();
 	}
 
 	private class AerbunnyJumpHelper extends JumpController
@@ -280,11 +280,13 @@ public class EntityAerbunny extends EntityAetherAnimal
 		}
 
 		@Override
-		public void doJump()
+		public void setJumping()
 		{
 			this.entity.setJumping(true);
 
-			if (this.entity.motionX == 0 && this.entity.motionZ == 0)
+			Vec3d motion = this.entity.getMotion();
+
+			if (motion.getX() == 0 && motion.getZ() == 0)
 			{
 				this.isJumping = false;
 				this.entity.setJumping(false);
@@ -302,7 +304,7 @@ public class EntityAerbunny extends EntityAetherAnimal
 		@Override
 		protected boolean canNavigate()
 		{
-			return !this.entity.isRiding();
+			return !this.entity.isPassenger();
 		}
 	}
 

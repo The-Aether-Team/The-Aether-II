@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.entities.genes;
 
 import com.gildedgames.aether.api.entity.genes.IGenePool;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
@@ -21,9 +22,9 @@ public abstract class EntityGeneticAnimal<T extends IGenePool> extends AnimalEnt
 
 	private final T genePool;
 
-	public EntityGeneticAnimal(World world)
+	protected EntityGeneticAnimal(EntityType<? extends AnimalEntity> type, World worldIn)
 	{
-		super(world);
+		super(type, worldIn);
 
 		this.genePool = this.createNewGenePool();
 	}
@@ -47,9 +48,9 @@ public abstract class EntityGeneticAnimal<T extends IGenePool> extends AnimalEnt
 	}
 
 	@Override
-	public void livingTick()
+	public void tick()
 	{
-		super.livingTick();
+		super.tick();
 
 		if (this.shouldRetransform() && this.world.isRemote())
 		{
@@ -107,23 +108,23 @@ public abstract class EntityGeneticAnimal<T extends IGenePool> extends AnimalEnt
 	}
 
 	@Override
-	public void writeEntityToNBT(CompoundNBT tag)
+	public void writeAdditional(CompoundNBT nbt)
 	{
-		super.writeEntityToNBT(tag);
+		super.writeAdditional(nbt);
 
-		tag.putInt("seed", this.getSeed());
-		tag.putInt("fatherSeed", this.getFatherSeed());
-		tag.putInt("motherSeed", this.getMotherSeed());
+		nbt.putInt("seed", this.getSeed());
+		nbt.putInt("fatherSeed", this.getFatherSeed());
+		nbt.putInt("motherSeed", this.getMotherSeed());
 	}
 
 	@Override
-	public void readEntityFromNBT(CompoundNBT tag)
+	public void readAdditional(CompoundNBT nbt)
 	{
-		super.readEntityFromNBT(tag);
+		super.readAdditional(nbt);
 
-		int seed = tag.getInt("seed");
-		int fatherSeed = tag.getInt("fatherSeed");
-		int motherSeed = tag.getInt("motherSeed");
+		int seed = nbt.getInt("seed");
+		int fatherSeed = nbt.getInt("fatherSeed");
+		int motherSeed = nbt.getInt("motherSeed");
 
 		if (seed == fatherSeed && seed == motherSeed)
 		{

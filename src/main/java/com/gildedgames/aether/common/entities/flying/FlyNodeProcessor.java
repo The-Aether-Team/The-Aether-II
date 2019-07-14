@@ -29,8 +29,14 @@ public class FlyNodeProcessor extends NodeProcessor
 	@Override
 	public PathPoint getPathPointToCoords(final double x, final double y, final double z)
 	{
-		return this.openPoint(MathHelper.floor(x - (double) (this.entity.width / 2.0F)), MathHelper.floor(
-				y + 0.5D), MathHelper.floor(z - (double) (this.entity.width / 2.0F)));
+		return this.openPoint(MathHelper.floor(x - (double) (this.entity.getWidth() / 2.0F)), MathHelper.floor(
+				y + 0.5D), MathHelper.floor(z - (double) (this.entity.getWidth() / 2.0F)));
+	}
+
+	@Override
+	public int func_222859_a(PathPoint[] p_222859_1_, PathPoint p_222859_2_)
+	{
+		return 0;
 	}
 
 	@Override

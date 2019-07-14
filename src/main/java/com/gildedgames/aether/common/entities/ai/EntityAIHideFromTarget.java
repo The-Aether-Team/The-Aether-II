@@ -5,10 +5,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.pathfinding.Path;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.*;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -101,7 +98,7 @@ public class EntityAIHideFromTarget extends Goal
 	}
 
 	@Override
-	public void updateTask()
+	public void tick()
 	{
 		if (this.entity.getNavigator().noPath() && this.hideFrom.canEntityBeSeen(this.entity))
 		{
@@ -120,10 +117,14 @@ public class EntityAIHideFromTarget extends Goal
 			final int k = MathHelper.floor(this.entity.getBoundingBox().minY + random.nextInt(6) - 3.0D);
 			final int l = MathHelper.floor(this.entity.posZ + random.nextInt(20) - 10.0D);
 
-			final RayTraceResult raytrace = world.rayTraceBlocks(new Vec3d(j, k + this.entity.getEyeHeight(), l), new Vec3d(this.hideFrom.posX,
-					this.hideFrom.posY + this.hideFrom.getEyeHeight(), this.hideFrom.posZ));
+			Vec3d a = new Vec3d(j, k + this.entity.getEyeHeight(), l);
+			Vec3d b = new Vec3d(this.hideFrom.posX, this.hideFrom.posY + this.hideFrom.getEyeHeight(), this.hideFrom.posZ);
 
-			if (raytrace != null && raytrace.typeOfHit != null)
+			RayTraceContext context = new RayTraceContext(a, b, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, this.entity);
+
+			final RayTraceResult raytrace = world.rayTraceBlocks(context);
+
+			if (raytrace.hitInfo != null)
 			{
 				return new Vec3d(j, k, l);
 			}

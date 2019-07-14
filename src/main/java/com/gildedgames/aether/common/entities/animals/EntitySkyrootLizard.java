@@ -8,10 +8,12 @@ import com.gildedgames.aether.common.blocks.natural.leaves.BlockColoredLeaves.Co
 import com.gildedgames.aether.common.blocks.natural.wood.AetherWoodType;
 import com.gildedgames.aether.common.blocks.natural.wood.BlockAetherLog;
 import net.minecraft.entity.AgeableEntity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.RandomWalkingGoal;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
 import net.minecraft.item.ItemStack;
@@ -36,12 +38,14 @@ public class EntitySkyrootLizard extends EntityAetherAnimal
 	private static final Type[] RANDOM_TYPES = new Type[] { Type.AMBERROOT, Type.SKYROOT,
 			Type.WISPROOT, Type.GREATROOT };
 
-	public EntitySkyrootLizard(World world)
+	public EntitySkyrootLizard(EntityType<? extends AnimalEntity> type, World world)
 	{
-		super(world);
+		super(type, world);
+	}
 
-		this.setSize(.8f, .3f);
-
+	@Override
+	public void registerGoals()
+	{
 		this.goalSelector.addGoal(1, new RandomWalkingGoal(this, 0.5D, 10));
 		this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, PlayerEntity.class, 20.0F, .7D, .85D));
 		this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 6.0F));
@@ -144,7 +148,7 @@ public class EntitySkyrootLizard extends EntityAetherAnimal
 					player.playSound(new SoundEvent(AetherCore.getResource("mob.aerbunny.hurt")), 1F, 0.3F);
 				}
 
-				this.world.removeEntity(this);
+				this.remove();
 
 				return true;
 			}
@@ -160,17 +164,18 @@ public class EntitySkyrootLizard extends EntityAetherAnimal
 	}
 
 	@Override
-	public CompoundNBT serializeNBT()
+	public void writeAdditional(CompoundNBT nbt)
 	{
-		CompoundNBT nbt = super.serializeNBT();
-		nbt.putInt("type", this.dataManager.get(LIZARD_TYPE));
+		super.writeAdditional(nbt);
 
-		return nbt;
+		nbt.putInt("type", this.dataManager.get(LIZARD_TYPE));
 	}
 
 	@Override
-	public void deserializeNBT(CompoundNBT nbt)
+	public void readAdditional(CompoundNBT nbt)
 	{
+		super.readAdditional(nbt);
+
 		this.dataManager.set(LIZARD_TYPE, (byte) nbt.getInt("type"));
 	}
 

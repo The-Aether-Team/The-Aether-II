@@ -2,29 +2,36 @@ package com.gildedgames.aether.common.entities.blocks;
 
 import com.gildedgames.aether.api.chunk.IPlacementFlagCapability;
 import com.gildedgames.aether.api.registrar.CapabilitiesAether;
+import com.gildedgames.aether.common.entities.EntityTypesAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.IPacket;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.play.server.SSpawnObjectPacket;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.ServerWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.util.LazyOptional;
+
+import java.util.List;
 
 public class EntityMovingBlock extends Entity
 {
-	private static final DataParameter<Integer> BLOCK_NAME = new DataParameter<>(20, DataSerializers.VARINT);
-
-	private static final DataParameter<Byte> BLOCK_METADATA = new DataParameter<>(21, DataSerializers.BYTE);
+	private static final DataParameter<Integer> BLOCK_STATE = new DataParameter<>(20, DataSerializers.VARINT);
 
 	private PlayerEntity holdingPlayer;
 
@@ -34,20 +41,14 @@ public class EntityMovingBlock extends Entity
 
 	private int ticksStuck = 0, ticksFalling = 0;
 
-	public EntityMovingBlock(final World world)
+	public EntityMovingBlock(final EntityType<? extends EntityMovingBlock> type, final World world)
 	{
-		super(world);
-
-		this.setSize(0.9f, 0.9f);
-
-		this.motionX = 0.0D;
-		this.motionY = 0.0D;
-		this.motionZ = 0.0D;
+		super(type, world);
 	}
 
 	public EntityMovingBlock(final World world, final double x, final double y, final double z, final BlockState state)
 	{
-		this(world);
+		this(EntityTypesAether.MOVING_BLOCK, world);
 
 		this.setBlockState(state);
 
@@ -61,14 +62,13 @@ public class EntityMovingBlock extends Entity
 	@Override
 	protected void registerData()
 	{
-		this.dataManager.register(BLOCK_NAME, 2);
-		this.dataManager.register(BLOCK_METADATA, (byte) 4);
+		this.dataManager.register(BLOCK_STATE, -1);
 	}
 
 	@Override
-	public void livingTick()
+	public void tick()
 	{
-		super.livingTick();
+		super.tick();
 
 		this.prevRotationYaw = this.rotationYaw;
 		this.prevRotationPitch = this.rotationPitch;
@@ -78,8 +78,8 @@ public class EntityMovingBlock extends Entity
 			this.rotationYaw -= 360f;
 		}
 
-		this.rotationYaw += this.motionZ * 14f;
-		this.rotationPitch += -this.motionX * 14f;
+		this.rotationYaw += this.getMotion().getZ() * 14f;
+		this.rotationPitch += -this.getMotion().getX() * 14f;
 
 		this.rotationYaw *= 0.9f;
 		this.rotationPitch *= 0.9f;
@@ -90,15 +90,12 @@ public class EntityMovingBlock extends Entity
 
 			if (this.world.getBlockState(pos).getBlock() == this.getBlockState().getBlock())
 			{
-				final IPlacementFlagCapability data = this.world.getChunk(pos)
-						.getCapability(CapabilitiesAether.CHUNK_PLACEMENT_FLAG, Direction.UP);
+				this.allowDoubleDrops = ((Chunk) this.world.getChunk(pos))
+						.getCapability(CapabilitiesAether.CHUNK_PLACEMENT_FLAG, Direction.UP)
+						.map((data) -> !data.isModified(pos))
+						.orElseThrow(IllegalStateException::new);
 
-				if (data != null)
-				{
-					this.allowDoubleDrops = !data.isModified(pos);
-
-					this.world.removeBlock(pos, false);
-				}
+				this.world.removeBlock(pos, false);
 			}
 			else
 			{
@@ -112,14 +109,13 @@ public class EntityMovingBlock extends Entity
 		this.prevPosY = this.posY;
 		this.prevPosZ = this.posZ;
 
-		this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
+		this.move(MoverType.SELF, this.getMotion());
 
 		if (!this.world.isRemote())
 		{
 			if (this.holdingPlayer != null)
 			{
-				if (this.ticksStuck > 30
-						|| this.getDistance(this.holdingPlayer.posX, this.holdingPlayer.posY, this.holdingPlayer.posZ) > 6.0D)
+				if (this.ticksStuck > 30 || this.getDistance(this.holdingPlayer) > 6.0D)
 				{
 					this.setHoldingPlayer(null);
 				}
@@ -158,34 +154,35 @@ public class EntityMovingBlock extends Entity
 				return;
 			}
 
-			this.motionY -= 0.045D;
+			this.setMotion(this.getMotion().getX(), this.getMotion().getY() - 0.045D, this.getMotion().getZ());
 
 			if (this.onGround)
 			{
 				// Try to snap into a coordinate on the ground
-				this.motionX += (pos.getX() - this.posX + 0.45D) * 0.15D;
-				this.motionZ += (pos.getZ() - this.posZ + 0.45D) * 0.15D;
+				this.setMotion(
+						this.getMotion().getX() + (pos.getX() - this.posX + 0.45D) * 0.15D,
+						this.getMotion().getY(),
+						this.getMotion().getZ() + (pos.getZ() - this.posZ + 0.45D) * 0.15D
+				);
 
 				final BlockState state = this.world.getBlockState(pos);
 
 				// We won't be able to land, reject and try to throw ourselves somewhere!
-				if (state.getBlock() != Blocks.AIR && !state.isNormalCube() && !state.getBlock().isReplaceable(this.world, pos))
+				if (state.getBlock() != Blocks.AIR && !state.isNormalCube(this.world, pos) && !state.getMaterial().isReplaceable())
 				{
-					this.motionX = -0.15D + (this.rand.nextDouble() * 0.3D);
-					this.motionY = 0.5D;
-					this.motionZ = -0.15D + (this.rand.nextDouble() * 0.3D);
+					this.setMotion(this.getMotion().mul(-0.15D + (this.rand.nextDouble() * 0.3D), 0.5D,  -0.15D + (this.rand.nextDouble() * 0.3D)));
 				}
 
-				final double distanceFromCenter = pos.distanceSq(this.posX + 0.45D, this.posY, this.posZ + 0.45D);
+				final double distanceFromCenter = pos.distanceSq(this.posX + 0.45D, this.posY, this.posZ + 0.45D, true);
 
-				if ((this.motionY + this.motionX + this.motionZ) <= 0.04D && distanceFromCenter <= 2.0D)
+				if (this.getMotion().length() <= 0.05D && distanceFromCenter <= 2.0D)
 				{
 					// We've stopped moving
 					if (!this.world.isRemote())
 					{
 						final BlockState replacingState = this.world.getBlockState(pos);
 
-						if (!replacingState.getBlock().isReplaceable(this.world, pos))
+						if (!replacingState.getMaterial().isReplaceable())
 						{
 							this.destroy();
 
@@ -195,17 +192,13 @@ public class EntityMovingBlock extends Entity
 						this.world.destroyBlock(pos, true);
 
 						this.world.setBlockState(pos, this.getBlockState());
-						this.world.notifyNeighborsOfStateChange(pos, this.getBlockState().getBlock(), false);
+						this.world.notifyNeighborsOfStateChange(pos, this.getBlockState().getBlock());
 
 						if (!this.allowDoubleDrops)
 						{
-							final IPlacementFlagCapability data = this.world.getChunk(pos)
-									.getCapability(CapabilitiesAether.CHUNK_PLACEMENT_FLAG, Direction.UP);
-
-							if (data != null)
-							{
-								data.markModified(pos);
-							}
+							((Chunk) this.world.getChunk(pos))
+									.getCapability(CapabilitiesAether.CHUNK_PLACEMENT_FLAG, Direction.UP)
+									.ifPresent((data) -> data.markModified(pos));
 						}
 
 						this.remove();
@@ -214,16 +207,12 @@ public class EntityMovingBlock extends Entity
 					}
 				}
 
-				this.motionX *= 0.8D;
-				this.motionZ *= 0.8D;
+				this.setMotion(this.getMotion().mul(0.8D, 0.94D, 0.8D));
 			}
 			else
 			{
-				this.motionX *= 0.95D;
-				this.motionZ *= 0.95D;
+				this.setMotion(this.getMotion().mul(0.8D, 0.94D, 0.8D));
 			}
-
-			this.motionY *= 0.94D;
 		}
 		else
 		{
@@ -240,14 +229,14 @@ public class EntityMovingBlock extends Entity
 			final double toZ = this.holdingPlayer.posZ + (look.z * distance);
 
 			// Slow down our block's movement to simulate weight
-			this.motionX *= 0.8D;
-			this.motionY *= 0.8D;
-			this.motionZ *= 0.8D;
+			this.setMotion(this.getMotion().mul(0.8D, 0.8D, 0.8D));
 
 			// Move the block towards where the player is looking
-			this.motionX += (toX - this.posX) * 0.1D;
-			this.motionY += (toY - this.posY) * 0.1D;
-			this.motionZ += (toZ - this.posZ) * 0.1D;
+			this.setMotion(
+					this.getMotion().getX() + ((toX - this.posX) * 0.1D),
+					this.getMotion().getY() + ((toY - this.posY) * 0.1D),
+					this.getMotion().getZ() + ((toZ - this.posZ) * 0.1D)
+			);
 		}
 	}
 
@@ -255,17 +244,14 @@ public class EntityMovingBlock extends Entity
 	{
 		this.remove();
 
-		final BlockPos pos = new BlockPos(this);
-
-		final BlockState state = this.getBlockState();
-
-		final NonNullList<ItemStack> drops = NonNullList.create();
-
-		state.getBlock().getDrops(drops, this.world, pos, state, 0);
-
-		for (final ItemStack stack : drops)
+		if (!this.world.isRemote())
 		{
-			Block.spawnAsEntity(this.world, pos, stack);
+			final List<ItemStack> drops = Block.getDrops(this.getBlockState(), (ServerWorld) this.world, new BlockPos(this), null, this, ItemStack.EMPTY);
+
+			for (final ItemStack stack : drops)
+			{
+				Block.spawnAsEntity(this.world, new BlockPos(this), stack);
+			}
 		}
 	}
 
@@ -290,48 +276,40 @@ public class EntityMovingBlock extends Entity
 	@Override
 	public boolean canBeCollidedWith()
 	{
-		return !this.isDead;
+		return this.isAlive();
 	}
 
 	@Override
-	protected void readEntityFromNBT(final CompoundNBT compound)
+	protected void readAdditional(CompoundNBT nbt)
 	{
-		final Block block = Block.getBlockById(compound.getInt("Block"));
+		this.setBlockState(Block.getStateById(nbt.getInt("State")));
 
-		this.setBlockState(block.getStateFromMeta(compound.getByte("BlockMeta")));
-		this.ticksFalling = compound.getInt("TicksFalling");
-		this.allowDoubleDrops = compound.getBoolean("AllowDoubleDrops");
+		this.ticksFalling = nbt.getInt("TicksFalling");
+		this.allowDoubleDrops = nbt.getBoolean("AllowDoubleDrops");
 
 		this.hasActivated = this.ticksExisted > 1;
 	}
 
 	@Override
-	protected void writeEntityToNBT(final CompoundNBT compound)
+	protected void writeAdditional(CompoundNBT compound)
 	{
-		final BlockState state = this.getBlockState();
-
-		final Block block = state.getBlock();
-
-		compound.putInt("Block", Block.REGISTRY.getIDForObject(block));
-		compound.putByte("BlockMeta", (byte) block.getMetaFromState(state));
+		compound.putInt("State", Block.getStateId(this.getBlockState()));
 		compound.putInt("TicksFalling", this.ticksFalling);
 		compound.putBoolean("AllowDoubleDrops", this.allowDoubleDrops);
 	}
 
 	public BlockState getBlockState()
 	{
-		final Block block = Block.getBlockById(this.dataManager.get(BLOCK_NAME));
-
-		final int meta = (int) this.dataManager.get(BLOCK_METADATA);
-
-		return block.getStateFromMeta(meta);
+		return Block.getStateById(this.dataManager.get(BLOCK_STATE));
 	}
 
 	public void setBlockState(final BlockState state)
 	{
-		final Block block = state.getBlock();
+		this.dataManager.set(BLOCK_STATE, Block.getStateId(state));
+	}
 
-		this.dataManager.set(BLOCK_NAME, Block.REGISTRY.getIDForObject(block));
-		this.dataManager.set(BLOCK_METADATA, (byte) block.getMetaFromState(state));
+	@Override
+	public IPacket<?> createSpawnPacket() {
+		return new SSpawnObjectPacket(this, Block.getStateId(this.getBlockState()));
 	}
 }

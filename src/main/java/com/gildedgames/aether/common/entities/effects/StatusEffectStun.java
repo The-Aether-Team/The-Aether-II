@@ -14,13 +14,13 @@ public class StatusEffectStun extends StatusEffect
 {
 	public StatusEffectStun(LivingEntity livingBase)
 	{
-		super(effectTypes.STUN, new AttributeModifier("aether.statusEffectStun", -1D, 1).setSaved(false), livingBase);
+		super(effectTypes.STUN, new AttributeModifier("aether.statusEffectStun", -1D, AttributeModifier.Operation.MULTIPLY_BASE).setSaved(false), livingBase);
 	}
 
 	@Override
 	public void applyEffect(LivingEntity livingBase, int timer)
 	{
-		IAttributeInstance iAttributeInstance = livingBase.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
+		IAttributeInstance iAttributeInstance = livingBase.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
 
 		if (this.isEffectApplied)
 		{

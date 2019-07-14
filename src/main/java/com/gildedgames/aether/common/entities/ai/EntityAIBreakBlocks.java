@@ -8,6 +8,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
 import javax.annotation.Nullable;
+import java.util.EnumSet;
 import java.util.Random;
 
 public class EntityAIBreakBlocks extends Goal
@@ -34,7 +35,7 @@ public class EntityAIBreakBlocks extends Goal
 		this.blocks = blocks;
 		this.enabled = true;
 
-		this.setMutexBits(1);
+		this.setMutexFlags(EnumSet.of(Goal.Flag.MOVE));
 	}
 
 	@Override
@@ -66,10 +67,7 @@ public class EntityAIBreakBlocks extends Goal
 	@Override
 	public boolean shouldContinueExecuting()
 	{
-
-		BlockPos destroyPos = new BlockPos(this.targetX, this.targetY, this.targetZ);
-
-		if (this.entity.getDistanceSq(destroyPos) < 15)
+		if (this.entity.getDistanceSq(this.targetX, this.targetY, this.targetZ) < 15)
 		{
 			System.out.println("ATTack");
 		}
@@ -82,9 +80,7 @@ public class EntityAIBreakBlocks extends Goal
 	{
 		this.entity.getNavigator().tryMoveToXYZ(this.targetX, this.targetY, this.targetZ, this.movementSpeed);
 
-		BlockPos destroyPos = new BlockPos(this.targetX, this.targetY, this.targetZ);
-
-		if (this.entity.getDistanceSq(destroyPos) < 15)
+		if (this.entity.getDistanceSq(this.targetX, this.targetY, this.targetZ) < 15)
 		{
 			System.out.println("ATTack");
 		}

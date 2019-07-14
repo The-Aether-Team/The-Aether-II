@@ -8,6 +8,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
 import javax.annotation.Nullable;
+import java.util.EnumSet;
 import java.util.Random;
 
 public class AIHopHideFromRain extends Goal
@@ -23,11 +24,7 @@ public class AIHopHideFromRain extends Goal
 
 	private final CreatureEntity entity;
 
-	private double shelterX;
-
-	private double shelterY;
-
-	private double shelterZ;
+	private BlockPos shelter = BlockPos.ZERO;
 
 	private int growTieredTimer;
 
@@ -38,7 +35,7 @@ public class AIHopHideFromRain extends Goal
 
 		this.hoppingMoveHelper = hoppingMoveHelper;
 
-		this.setMutexBits(2);
+		this.setMutexFlags(EnumSet.of(Goal.Flag.LOOK));
 	}
 
 	@Override
@@ -63,9 +60,7 @@ public class AIHopHideFromRain extends Goal
 			}
 			else
 			{
-				this.shelterX = vec3d.x;
-				this.shelterY = vec3d.y;
-				this.shelterZ = vec3d.z;
+				this.shelter = new BlockPos(vec3d);
 
 				return true;
 			}
@@ -87,13 +82,13 @@ public class AIHopHideFromRain extends Goal
 	@Override
 	public boolean shouldContinueExecuting()
 	{
-		return this.entity.getDistance(this.shelterX, this.shelterY, this.shelterZ) < 1 && --this.growTieredTimer > 0;
+		return this.entity.getDistanceSq(this.shelter.getX(), this.shelter.getY(), this.shelter.getZ()) < 1 && --this.growTieredTimer > 0;
 	}
 
 	@Override
-	public void updateTask()
+	public void tick()
 	{
-		EntityUtil.facePos(this.entity, this.shelterX, this.shelterY, this.shelterZ, 10.0F, 10.0F);
+		EntityUtil.facePos(this.entity, this.shelter, 10.0F, 10.0F);
 		this.hoppingMoveHelper.setSpeed(this.movementSpeed);
 		this.hoppingMoveHelper.setDirection(this.entity.rotationYaw);
 	}
@@ -108,7 +103,7 @@ public class AIHopHideFromRain extends Goal
 		{
 			BlockPos blockpos1 = blockpos.add(random.nextInt(20) - 10, random.nextInt(6) - 3, random.nextInt(20) - 10);
 
-			if (!this.entity.world.canSeeSky(blockpos1) && this.entity.getBlockPathWeight(blockpos1) < 0.0F)
+			if (!this.entity.world.canBlockSeeSky(blockpos1) && this.entity.getBlockPathWeight(blockpos1) < 0.0F)
 			{
 				return new Vec3d((double) blockpos1.getX(), (double) blockpos1.getY(), (double) blockpos1.getZ());
 			}

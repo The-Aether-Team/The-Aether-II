@@ -5,72 +5,46 @@ import com.gildedgames.aether.api.entity.damage.DamageTypeAttributes;
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.entities.EntityTypesAether;
 import com.gildedgames.aether.common.entities.ai.AetherNavigateGround;
 import com.gildedgames.aether.common.entities.ai.EntityAIHideFromRain;
 import com.gildedgames.aether.common.entities.ai.EntityAIRestrictRain;
 import com.gildedgames.aether.common.entities.ai.EntityAIUnstuckBlueAercloud;
 import com.gildedgames.aether.common.entities.ai.kirrid.EntityAIEatAetherGrass;
-import com.gildedgames.aether.common.entities.multipart.AetherMultiPartShearable;
 import com.gildedgames.aether.common.entities.util.eyes.EntityEyesComponent;
 import com.gildedgames.aether.common.entities.util.eyes.IEntityEyesComponentProvider;
 import com.gildedgames.aether.common.init.LootTablesAether;
-import com.gildedgames.aether.common.util.helpers.MathUtil;
-import com.google.common.collect.Sets;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.TemptGoal;
-import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.item.DyeColor;
-import net.minecraft.pathfinding.PathNavigator;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorld;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
-import javax.vecmath.Point3d;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-public class EntityKirrid extends SheepEntity implements IEntityMultiPart, IEntityEyesComponentProvider
+public class EntityKirrid extends SheepEntity implements IEntityEyesComponentProvider
 {
-	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(ItemsAether.valkyrie_wings);
-
-	private final Point3d[] old;
-
-	private final MultiPartEntityPart[] parts;
-
-	private final MultiPartEntityPart head = new AetherMultiPartShearable(this, "head", 0.7F, 0.8F);
-
-	private final MultiPartEntityPart back = new AetherMultiPartShearable(this, "back", 0.8F, 1.5F);
-
 	private final IEntityEyesComponent eyes = new EntityEyesComponent(this);
 
 	protected EntityAIEatAetherGrass entityAIEatGrass;
 
-	public EntityKirrid(World world)
+	public EntityKirrid(EntityType<? extends SheepEntity> type, World worldIn)
 	{
-		super(world);
-
-
-		this.setSize(1.0F, 1.5F);
-
-		this.spawnableBlock = BlocksAether.aether_grass;
-		this.parts = new MultiPartEntityPart[] { this.head, this.back };
-		this.old = new Point3d[this.parts.length];
-
-		for (int i = 0; i < this.old.length; i++)
-		{
-			this.old[i] = new Point3d();
-		}
+		super(type, worldIn);
 	}
 
 	@Override
@@ -83,43 +57,16 @@ public class EntityKirrid extends SheepEntity implements IEntityMultiPart, IEnti
 		this.goalSelector.addGoal(2, new EntityAIRestrictRain(this));
 		this.goalSelector.addGoal(3, new EntityAIUnstuckBlueAercloud(this));
 		this.goalSelector.addGoal(3, new EntityAIHideFromRain(this, 1.3D));
-		this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, false, TEMPTATION_ITEMS));
+		this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, false, Ingredient.fromItems(ItemsAether.valkyrie_wings)));
 		this.goalSelector.addGoal(9, this.entityAIEatGrass);
 	}
 
 	@Override
-	public World getWorld()
+	public void livingTick()
 	{
-		return this.getEntityWorld();
-	}
-
-	@Override
-	public void onLivingUpdate()
-	{
-		super.onLivingUpdate();
+		super.livingTick();
 
 		this.eyes.update();
-
-		for (int i = 0; i < this.parts.length; i++)
-		{
-			this.old[i].set(this.parts[i].posX, this.parts[i].posY, this.parts[i].posZ);
-		}
-
-		float f = MathUtil.interpolateRotation(this.prevRenderYawOffset, this.renderYawOffset, 1);
-		float f1 = MathHelper.cos(-f * 0.017453292F - (float) Math.PI);
-		float f2 = MathHelper.sin(-f * 0.017453292F - (float) Math.PI);
-
-		this.head.setLocationAndAngles(this.posX - f2 * .9f, this.posY + .75f, this.posZ - f1 * .9f, 0F, 0F);
-		this.head.onUpdate();
-		this.back.setLocationAndAngles(this.posX + f2 * .8f, this.posY, this.posZ + f1 * .8f, 0F, 0F);
-		this.back.onUpdate();
-
-		for (int i = 0; i < this.parts.length; i++)
-		{
-			this.parts[i].prevPosX = this.old[i].getX();
-			this.parts[i].prevPosY = this.old[i].getY();
-			this.parts[i].prevPosZ = this.old[i].getZ();
-		}
 	}
 
 	public int getEatChance()
@@ -127,25 +74,6 @@ public class EntityKirrid extends SheepEntity implements IEntityMultiPart, IEnti
 		return 1000;
 	}
 
-	@Override
-	public boolean attackEntityFromPart(MultiPartEntityPart part, DamageSource source, float damage)
-	{
-		if (this.hurtResistantTime <= 10)
-		{
-			return this.attackEntityFrom(source, damage * 1.1f);
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	@Nullable
-	@Override
-	public MultiPartEntityPart[] getParts()
-	{
-		return this.parts;
-	}
 
 	@Override
 	protected PathNavigator createNavigator(final World worldIn)
@@ -154,7 +82,7 @@ public class EntityKirrid extends SheepEntity implements IEntityMultiPart, IEnti
 	}
 
 	@Override
-	public float getBlockPathWeight(BlockPos pos)
+	public float getBlockPathWeight(BlockPos pos, IWorldReader reader)
 	{
 		return super.getBlockPathWeight(pos);
 	}
@@ -173,13 +101,13 @@ public class EntityKirrid extends SheepEntity implements IEntityMultiPart, IEnti
 
 	@Override
 	@Nullable
-	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata)
+	public ILivingEntityData onInitialSpawn(IWorld world, DifficultyInstance difficulty, SpawnReason reason, ILivingEntityData data, CompoundNBT nbt)
 	{
-		livingdata = super.onInitialSpawn(difficulty, livingdata);
+		data = super.onInitialSpawn(world, difficulty, reason, data, nbt);
 
 		this.setFleeceColor(DyeColor.WHITE);
 
-		return livingdata;
+		return data;
 	}
 
 	/*@Override
@@ -215,18 +143,18 @@ public class EntityKirrid extends SheepEntity implements IEntityMultiPart, IEnti
 	@Override
 	public EntityKirrid createChild(AgeableEntity ageable)
 	{
-		return new EntityKirrid(this.world);
+		return EntityTypesAether.KIRRID.create(this.world);
 	}
 
 	@Override
-	public boolean isBreedingItem(@Nullable ItemStack stack)
+	public boolean isBreedingItem(ItemStack stack)
 	{
-		return stack != null && TEMPTATION_ITEMS.contains(stack.getItem());
+		return stack.getItem() == ItemsAether.valkyrie_wings;
 	}
 
 	@Override
 	@Nullable
-	protected ResourceLocation getLootTable()
+	public ResourceLocation getLootTable()
 	{
 		if (this.getSheared())
 		{
@@ -237,7 +165,7 @@ public class EntityKirrid extends SheepEntity implements IEntityMultiPart, IEnti
 	}
 
 	@Override
-	public List<ItemStack> onSheared(ItemStack item, IBlockReader world, BlockPos pos, int fortune)
+	public List<ItemStack> onSheared(ItemStack item, net.minecraft.world.IWorld world, BlockPos pos, int fortune)
 	{
 		this.setSheared(true);
 

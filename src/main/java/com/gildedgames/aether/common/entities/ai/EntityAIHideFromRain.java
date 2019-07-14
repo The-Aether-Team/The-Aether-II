@@ -6,6 +6,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
 import javax.annotation.Nullable;
+import java.util.EnumSet;
 import java.util.Random;
 
 public class EntityAIHideFromRain extends Goal
@@ -26,7 +27,7 @@ public class EntityAIHideFromRain extends Goal
 		this.entity = entity;
 		this.movementSpeed = movementSpeed;
 
-		this.setMutexBits(1);
+		this.setMutexFlags(EnumSet.of(Goal.Flag.MOVE));
 	}
 
 	@Override
@@ -37,7 +38,7 @@ public class EntityAIHideFromRain extends Goal
 			return false;
 		}
 
-		if (!this.entity.world.canSeeSky(new BlockPos(this.entity.posX, this.entity.getBoundingBox().minY, this.entity.posZ)))
+		if (!this.entity.world.canBlockSeeSky(new BlockPos(this.entity.posX, this.entity.getBoundingBox().minY, this.entity.posZ)))
 		{
 			return false;
 		}
@@ -85,7 +86,7 @@ public class EntityAIHideFromRain extends Goal
 		{
 			BlockPos blockpos1 = blockpos.add(random.nextInt(20) - 10, random.nextInt(6) - 3, random.nextInt(20) - 10);
 
-			if (!this.entity.world.canSeeSky(blockpos1) && this.entity.getBlockPathWeight(blockpos1) < 0.0F)
+			if (!this.entity.world.canBlockSeeSky(blockpos1) && this.entity.getBlockPathWeight(blockpos1) < 0.0F)
 			{
 				return new Vec3d((double) blockpos1.getX(), (double) blockpos1.getY(), (double) blockpos1.getZ());
 			}

@@ -3,7 +3,10 @@ package com.gildedgames.aether.common.entities.ai.hopping;
 import com.gildedgames.aether.common.entities.ai.EntityAI;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;
+
+import java.util.EnumSet;
 
 public class AIHopFollowAttackTarget extends EntityAI<MobEntity>
 {
@@ -21,7 +24,7 @@ public class AIHopFollowAttackTarget extends EntityAI<MobEntity>
 		this.hoppingMoveHelper = hoppingMoveHelper;
 		this.speed = speed;
 
-		this.setMutexBits(2);
+		this.setMutexFlags(EnumSet.of(Goal.Flag.LOOK));
 	}
 
 	/**
@@ -32,7 +35,7 @@ public class AIHopFollowAttackTarget extends EntityAI<MobEntity>
 	{
 		final LivingEntity entitylivingbase = this.entity().getAttackTarget();
 		return entitylivingbase != null && (entitylivingbase.isAlive() && (!(entitylivingbase instanceof PlayerEntity)
-				|| !((PlayerEntity) entitylivingbase).capabilities.disableDamage));
+				|| !((PlayerEntity) entitylivingbase).abilities.disableDamage));
 	}
 
 	/**
@@ -53,7 +56,7 @@ public class AIHopFollowAttackTarget extends EntityAI<MobEntity>
 	{
 		final LivingEntity entitylivingbase = this.entity().getAttackTarget();
 		return entitylivingbase != null && (entitylivingbase.isAlive() && (
-				!(entitylivingbase instanceof PlayerEntity && ((PlayerEntity) entitylivingbase).capabilities.disableDamage)
+				!(entitylivingbase instanceof PlayerEntity && ((PlayerEntity) entitylivingbase).abilities.disableDamage)
 						&& --this.growTieredTimer > 0));
 	}
 
@@ -61,7 +64,7 @@ public class AIHopFollowAttackTarget extends EntityAI<MobEntity>
 	 * Updates the task
 	 */
 	@Override
-	public void updateTask()
+	public void tick()
 	{
 		this.entity().faceEntity(this.entity().getAttackTarget(), 10.0F, 10.0F);
 		this.hoppingMoveHelper.setSpeed(this.speed);

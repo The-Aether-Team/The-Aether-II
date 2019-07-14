@@ -146,25 +146,24 @@ public abstract class EntityCharacter extends CreatureEntity implements Characte
 	}
 
 	@Override
-	public CompoundNBT serializeNBT()
+	public void writeAdditional(CompoundNBT nbt)
 	{
-		CompoundNBT nbt = super.serializeNBT();
+		super.writeAdditional(nbt);
 
 		new NBTFunnel(nbt).set("shopInstanceGroup", this.shopInstanceGroup);
-
-		return nbt;
 	}
 
 	@Override
-	public void deserializeNBT(final CompoundNBT compound)
+	public void readAdditional(CompoundNBT nbt)
 	{
-		super.deserializeNBT(compound);
+		super.readAdditional(nbt);
 
-		NBTFunnel funnel = new NBTFunnel(compound);
+		NBTFunnel funnel = new NBTFunnel(nbt);
 
 		this.shopInstanceGroup = funnel.getWithDefault("shopInstanceGroup", () -> this.shopInstanceGroup);
-	}
 
+	}
+	
 	@Override
 	public ITextComponent getHoverText(World world, RayTraceResult result)
 	{

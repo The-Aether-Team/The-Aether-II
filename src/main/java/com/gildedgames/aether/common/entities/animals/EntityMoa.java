@@ -6,6 +6,7 @@ import com.gildedgames.aether.api.entity.IMountProcessor;
 import com.gildedgames.aether.api.entity.damage.DamageTypeAttributes;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.entities.EntityTypesAether;
 import com.gildedgames.aether.common.entities.ai.AetherNavigateGround;
 import com.gildedgames.aether.common.entities.ai.EntityAIUnstuckBlueAercloud;
 import com.gildedgames.aether.common.entities.ai.moa.*;
@@ -17,49 +18,37 @@ import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.genes.moa.MoaNest;
 import com.gildedgames.aether.common.entities.mounts.FlyingMount;
 import com.gildedgames.aether.common.entities.mounts.IFlyingMountData;
-import com.gildedgames.aether.common.entities.multipart.AetherMultiPartEntity;
-import com.gildedgames.aether.common.entities.multipart.AetherMultiPartMount;
 import com.gildedgames.aether.common.entities.util.eyes.EntityEyesComponent;
 import com.gildedgames.aether.common.entities.util.eyes.IEntityEyesComponentProvider;
 import com.gildedgames.aether.common.entities.util.groups.EntityGroup;
 import com.gildedgames.aether.common.entities.util.groups.EntityGroupMember;
 import com.gildedgames.aether.common.items.other.ItemMoaEgg;
 import com.gildedgames.aether.common.items.other.ItemMoaFeather;
-import com.gildedgames.aether.common.util.helpers.MathUtil;
-import com.gildedgames.orbis.lib.client.PartialTicks;
-import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Items;
-import net.minecraft.pathfinding.PathNavigator;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.pathfinding.PathNavigator;
+import net.minecraft.util.*;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
-import javax.vecmath.Point3d;
-import java.util.Set;
 
 public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
-		implements EntityGroupMember, IMount, IFlyingMountData, IEntityMultiPart, IEntityEyesComponentProvider
+		implements EntityGroupMember, IMount, IFlyingMountData, IEntityEyesComponentProvider
 {
 
-	private static final Set<Item> TEMPTATION_ITEMS = Sets
-			.newHashSet(Items.WHEAT, ItemsAether.blueberries, ItemsAether.orange, ItemsAether.enchanted_blueberry, ItemsAether.enchanted_wyndberry,
-					ItemsAether.wyndberry, ItemsAether.skyroot_lizard_stick);
+	private static final Ingredient TEMPTATION_ITEMS = Ingredient.fromItems(
+			Items.WHEAT, ItemsAether.blueberries, ItemsAether.orange, ItemsAether.enchanted_blueberry, ItemsAether.enchanted_wyndberry,
+			ItemsAether.wyndberry, ItemsAether.skyroot_lizard_stick);
 
 	private static final DataParameter<Integer> REMAINING_JUMPS = EntityDataManager.createKey(EntityMoa.class, DataSerializers.VARINT);
 
@@ -81,20 +70,6 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 
 	private final IMountProcessor mountProcessor = new FlyingMount(this);
 
-	private final MultiPartEntityPart[] parts;
-
-	private final Point3d[] old;
-
-	private final AetherMultiPartEntity neck = new AetherMultiPartMount(this, "neck", 0.4F, 0.8F);
-
-	private final AetherMultiPartEntity head = new AetherMultiPartMount(this, "head", 0.8F, 0.6F);
-
-	private final AetherMultiPartEntity beak = new AetherMultiPartMount(this, "beak", 0.4F, 0.5F);
-
-	private final AetherMultiPartEntity body = new AetherMultiPartMount(this, "body", 1.1F, 1.325F);
-
-	private final AetherMultiPartEntity tail = new AetherMultiPartMount(this, "tail", 1.1F, 0.6F);
-
 	private final IEntityEyesComponent eyes = new EntityEyesComponent(this);
 
 	public float wingRotation, destPos, prevDestPos, prevWingRotation;
@@ -113,28 +88,14 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 
 	private MoaNest familyNest;
 
-	public EntityMoa(final World world)
+	public EntityMoa(final EntityType<? extends EntityMoa> type, final World world)
 	{
-		super(world);
-
-		this.initAI();
-
-		this.familyNest = new MoaNest(world);
-
-		this.setSize(1.0F, 2.0F);
-		this.stepHeight = 1.0F;
-		this.parts = new MultiPartEntityPart[] { this.head, this.neck, this.beak, this.body, this.tail };
-		this.old = new Point3d[this.parts.length];
-
-		for (int i = 0; i < this.old.length; i++)
-		{
-			this.old[i] = new Point3d();
-		}
+		super(type, world);
 	}
 
 	public EntityMoa(final World world, final int geneticSeed)
 	{
-		this(world);
+		this(EntityTypesAether.MOA, world);
 
 		this.getGenePool().transformFromSeed(geneticSeed);
 	}
@@ -144,7 +105,6 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 		this(world, familyNest.familyGeneticSeed);
 
 		this.familyNest = familyNest;
-		this.initAI();
 	}
 
 	public EntityMoa(final World world, final MoaNest familyNest, final int fatherSeed, final int motherSeed)
@@ -172,7 +132,8 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 		return new AetherNavigateGround(this, worldIn);
 	}
 
-	private void initAI()
+	@Override
+	protected void registerGoals()
 	{
 		this.goalSelector.addGoal(0, new SwimGoal(this));
 		this.goalSelector.addGoal(0, new AIMoaPackBreeding(this, 0.25F));
@@ -223,6 +184,10 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 		this.dataManager.register(EntityMoa.FOOD_REQUIRED, 0);
 		this.dataManager.register(EntityMoa.FOOD_EATEN, 0);
 		this.dataManager.register(EntityMoa.IS_HUNGRY, false);
+
+		this.familyNest = new MoaNest(world);
+
+		this.stepHeight = 1.0F;
 	}
 
 	@Override
@@ -278,15 +243,15 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 	}
 
 	@Override
-	public void livingTick()
+	public void tick()
 	{
-		super.livingTick();
+		super.tick();
 
 		this.eyes.update();
 
 		if (this.isJumping)
 		{
-			this.motionY += 0.05F;
+			this.setMotion(this.getMotion().getX(), this.getMotion().getY() + 0.05D, this.getMotion().getZ());
 		}
 
 		if (this.pack == null)
@@ -365,9 +330,9 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 			{
 				this.isFastFalling = true;
 			}
-			else if (this.motionY < 0.0D)
+			else if (this.getMotion().getY() < 0.0D)
 			{
-				this.motionY *= 0.63749999999999996D;
+				this.setMotion(this.getMotion().mul(1.0D, 0.6375D, 1.0D));
 			}
 		}
 
@@ -389,13 +354,14 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 		{
 			if (this.wasOnGround)
 			{
-				this.ageSinceOffGround = (float) this.ticksExisted + PartialTicks.get();
+				this.ageSinceOffGround = (float) this.ticksExisted;
 				this.wasOnGround = false;
 			}
 
 			if (this.ticksUntilFlap == 0)
 			{
-				this.world.playSound(this.posX, this.posY, this.posZ, new SoundEvent(AetherCore.getResource("mob.generic.wings.flap")), SoundCategory.NEUTRAL, 0.4f,
+				this.world.playSound(this.posX, this.posY, this.posZ, new SoundEvent(AetherCore.getResource("mob.generic.wings.flap")), SoundCategory.NEUTRAL,
+						0.4f,
 						0.8f + (this.getRNG().nextFloat() * 0.6f), false);
 
 				this.ticksUntilFlap = 11;
@@ -409,7 +375,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 		{
 			if (!this.wasOnGround)
 			{
-				this.ageSinceOffGround = (float) this.ticksExisted + PartialTicks.get();
+				this.ageSinceOffGround = (float) this.ticksExisted;
 				this.wasOnGround = true;
 			}
 		}
@@ -441,9 +407,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 			}
 		}
 
-		entity.motionY = 0.8F;
-		entity.motionZ = this.getLookVec().z;
-		entity.motionX = this.getLookVec().x;
+		this.setMotion(this.getLookVec().getX(), 0.8D, this.getLookVec().getZ());
 		entity.velocityChanged = true;
 
 		entity.attackEntityFrom(DamageSource.causeMobDamage(this), this.isGroupLeader() ? 3 : 2);
@@ -452,9 +416,9 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 	}
 
 	@Override
-	public void writeEntityToNBT(final CompoundNBT nbt)
+	public void writeAdditional(CompoundNBT nbt)
 	{
-		super.writeEntityToNBT(nbt);
+		super.writeAdditional(nbt);
 
 		nbt.putBoolean("playerGrown", this.isRaisedByPlayer());
 
@@ -479,9 +443,9 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 	}
 
 	@Override
-	public void readEntityFromNBT(final CompoundNBT nbt)
+	public void readAdditional(CompoundNBT nbt)
 	{
-		super.readEntityFromNBT(nbt);
+		super.readAdditional(nbt);
 
 		this.setRaisedByPlayer(nbt.getBoolean("playerGrown"));
 
@@ -506,9 +470,9 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 	}
 
 	@Override
-	protected void dropFewItems(final boolean p_70628_1_, final int looting)
+	protected void dropSpecialItems(DamageSource source, int looting, boolean recentlyHitIn)
 	{
-		super.dropFewItems(p_70628_1_, looting);
+		super.dropSpecialItems(source, looting, recentlyHitIn);
 
 		final ItemStack feather = new ItemStack(ItemsAether.moa_feather, this.getRNG().nextInt(3));
 		ItemMoaFeather.setColor(feather, this.getGenePool().getFeathers().gene().unlocalizedName(), this.getGenePool().getFeathers().gene().data().getRGB());
@@ -517,7 +481,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 
 		if (this.isSaddled())
 		{
-			this.dropItem(ItemsAether.aether_saddle, 1);
+			this.entityDropItem(ItemsAether.aether_saddle, 1);
 		}
 	}
 
@@ -567,7 +531,6 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 	public void setGender(final AnimalGender gender)
 	{
 		this.dataManager.set(EntityMoa.GENDER, gender == AnimalGender.MALE);
-		this.updateMultiPart();
 	}
 
 	public int getRemainingJumps()
@@ -658,98 +621,9 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 		}
 	}
 
-	@Override
-	public void onLivingUpdate()
-	{
-		super.onLivingUpdate();
-
-		this.setMultiPartLocations();
-	}
-
 	public float getSize()
 	{
 		return (this.isChild() ? 0.65f : 1) + (this.isGroupLeader() ? 0.15F : 0.0F);
-	}
-
-	@Override
-	protected void onGrowingAdult()
-	{
-		this.updateMultiPart();
-	}
-
-	private void updateMultiPart()
-	{
-		float scale = this.getSize();
-
-		this.neck.updateSize(0.4F * scale, 0.8F * scale);
-		this.head.updateSize(0.8F * scale, 0.6F * scale);
-		this.beak.updateSize(0.4F * scale, 0.5F * scale);
-		this.body.updateSize(1.1F * scale, 1.325F * scale);
-		this.tail.updateSize(1.1F * scale, 0.6F * scale);
-	}
-
-	private void setMultiPartLocations()
-	{
-		float scale = this.getSize();
-
-		for (int i = 0; i < this.parts.length; i++)
-		{
-			this.old[i].set(this.parts[i].posX, this.parts[i].posY, this.parts[i].posZ);
-		}
-
-		this.updateMultiPart();
-
-		float f = MathUtil.interpolateRotation(this.prevRenderYawOffset, this.renderYawOffset, 1);
-		float f1 = MathHelper.cos(-f * 0.017453292F - (float) Math.PI) * scale;
-		float f2 = MathHelper.sin(-f * 0.017453292F - (float) Math.PI) * scale;
-
-		this.head.onUpdate();
-		this.head.setLocationAndAngles(this.posX - f2 * 0.5f, this.posY + 1.45f * scale, this.posZ - f1 * 0.5f, 0F, 0F);
-		this.beak.onUpdate();
-		this.beak.setLocationAndAngles(this.posX - f2 * 1.1f, this.posY + 1.5f * scale, this.posZ - f1 * 1.1f, 0F, 0F);
-		this.neck.onUpdate();
-		this.neck.setLocationAndAngles(this.posX - f2 * 0.6f, this.posY + 0.75f * scale, this.posZ - f1 * 0.6f, 0F, 0F);
-		this.tail.onUpdate();
-		this.tail.setLocationAndAngles(this.posX + f2 * 1.1f, this.posY + 0.5f * scale, this.posZ + f1 * 1.1f, 0F, 0F);
-		this.body.onUpdate();
-		this.body.setLocationAndAngles(this.posX, this.posY, this.posZ, 0F, 0F);
-
-		for (int i = 0; i < this.parts.length; i++)
-		{
-			this.parts[i].prevPosX = this.old[i].getX();
-			this.parts[i].prevPosY = this.old[i].getY();
-			this.parts[i].prevPosZ = this.old[i].getZ();
-		}
-	}
-
-	@Override
-	public boolean attackEntityFromPart(MultiPartEntityPart part, DamageSource source, float damage)
-	{
-		switch (part.partName)
-		{
-			case "head":
-				damage *= 1.3f;
-				break;
-			case "beak":
-				damage *= 1.1f;
-				break;
-			case "tail":
-				damage *= .2f;
-				break;
-		}
-
-		if (this.hurtResistantTime <= 10)
-		{
-			return this.attackEntityFrom(source, damage);
-		}
-
-		return false;
-	}
-
-	@Override
-	public World getWorld()
-	{
-		return this.getEntityWorld();
 	}
 
 	@Override
@@ -758,17 +632,10 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 		return false;
 	}
 
-	@Nullable
-	@Override
-	public MultiPartEntityPart[] getParts()
-	{
-		return this.parts;
-	}
-
 	@Override
 	public AgeableEntity createChild(final AgeableEntity matingAnimal)
 	{
-		return new EntityMoa(this.world);
+		return new EntityMoa(EntityTypesAether.MOA, this.world);
 	}
 
 	@Override
@@ -868,9 +735,9 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 	}
 
 	@Override
-	public boolean isBreedingItem(@Nullable final ItemStack stack)
+	public boolean isBreedingItem(final ItemStack stack)
 	{
-		return stack != null && TEMPTATION_ITEMS.contains(stack.getItem());
+		return TEMPTATION_ITEMS.test(stack);
 	}
 
 	@Override

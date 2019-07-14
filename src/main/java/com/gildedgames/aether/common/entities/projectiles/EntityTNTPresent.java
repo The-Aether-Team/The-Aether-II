@@ -1,6 +1,8 @@
 package com.gildedgames.aether.common.entities.projectiles;
 
+import com.gildedgames.aether.common.entities.EntityTypesAether;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MoverType;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
@@ -12,26 +14,33 @@ public class EntityTNTPresent extends Entity
 
 	public int fuse;
 
-	public EntityTNTPresent(World world)
+	public EntityTNTPresent(EntityType<? extends EntityTNTPresent> type, World world)
 	{
-		super(world);
+		super(type, world);
+
 		this.fuse = 0;
 		this.preventEntitySpawning = true;
-		this.setSize(0.98F, 0.98F);
 	}
 
-	public EntityTNTPresent(World world, double d, double d1, double d2)
+	public EntityTNTPresent(World world, double posX, double posY, double posZ)
 	{
-		this(world);
-		this.setPosition(d, d1, d2);
+		this(EntityTypesAether.TNT_PRESENT, world);
+
+		this.setPosition(posX, posY, posZ);
+
 		float f = (float) (Math.random() * 3.1415927410125732D * 2D);
-		this.motionX = -MathHelper.sin((f * 3.141593F) / 180F) * 0.02F;
-		this.motionY = 0.20000000298023224D;
-		this.motionZ = -MathHelper.cos((f * 3.141593F) / 180F) * 0.02F;
+
+		float motionX = -MathHelper.sin((f * 3.141593F) / 180F) * 0.02F;
+		float motionY = 0.20000000298023224F;
+		float motionZ = -MathHelper.cos((f * 3.141593F) / 180F) * 0.02F;
+
+		this.setMotion(motionX, motionY, motionZ);
+
 		this.fuse = 80;
-		this.prevPosX = d;
-		this.prevPosY = d1;
-		this.prevPosZ = d2;
+
+		this.prevPosX = posX;
+		this.prevPosY = posY;
+		this.prevPosZ = posZ;
 	}
 
 	@Override
@@ -58,7 +67,7 @@ public class EntityTNTPresent extends Entity
 	}
 
 	@Override
-	public void livingTick()
+	public void tick()
 	{
 		this.prevPosX = this.posX;
 		this.prevPosY = this.posY;

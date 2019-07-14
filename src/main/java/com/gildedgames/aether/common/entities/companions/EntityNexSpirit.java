@@ -1,5 +1,7 @@
 package com.gildedgames.aether.common.entities.companions;
 
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.world.World;
@@ -8,19 +10,18 @@ public class EntityNexSpirit extends EntityCompanion
 {
 	private static final DataParameter<Boolean> IS_BROKEN = new DataParameter<>(21, DataSerializers.BOOLEAN);
 
-	public EntityNexSpirit(World worldIn)
+	public EntityNexSpirit(EntityType<? extends CreatureEntity> type, World worldIn)
 	{
-		super(worldIn);
+		super(type, worldIn);
 
-		this.setSize(0.6f, 1.85f);
 		this.stepHeight = 1.0F;
 		this.isFlying = true;
 	}
 
 	@Override
-	public void livingTick()
+	public void tick()
 	{
-		super.livingTick();
+		super.tick();
 
 		//		if (this.getOwner() != null)
 		//		{

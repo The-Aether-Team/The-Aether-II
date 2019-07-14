@@ -15,13 +15,13 @@ public class StatusEffectFungalRot extends StatusEffect
 {
 	public StatusEffectFungalRot(LivingEntity livingBase)
 	{
-		super(effectTypes.FUNGAL_ROT, new AttributeModifier("aether.statusEffectFungalRot", -0.5D, 1).setSaved(false), livingBase);
+		super(effectTypes.FUNGAL_ROT, new AttributeModifier("aether.statusEffectFungalRot", -0.5D, AttributeModifier.Operation.MULTIPLY_BASE).setSaved(false), livingBase);
 	}
 
 	@Override
 	public void applyEffect(LivingEntity livingBase, int timer)
 	{
-		IAttributeInstance iAttributeInstance = livingBase.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
+		IAttributeInstance iAttributeInstance = livingBase.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
 
 		if (this.isEffectApplied && this.effectTimer % (TICKS_PER_SECOND * 2) == 0)
 		{

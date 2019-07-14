@@ -89,9 +89,9 @@ public class EntityAICockatriceSneakAttack extends Goal
 	}
 
 	@Override
-	public void updateTask()
+	public void tick()
 	{
-		this.entity.getLookHelper().setLookPositionWithEntity(this.attack, 30.0F, 30.0F);
+		this.entity.getLookController().setLookPositionWithEntity(this.attack, 30.0F, 30.0F);
 		final double distanceBetweenTarget = this.entity.getDistanceSq(this.attack.posX, this.attack.getBoundingBox().minY, this.attack.posZ);
 
 		this.entity.getNavigator().tryMoveToEntityLiving(this.attack, 1.2D);
@@ -110,7 +110,7 @@ public class EntityAICockatriceSneakAttack extends Goal
 
 	protected double getAttackReachSqr(final LivingEntity attackTarget)
 	{
-		return (double) (this.entity.width * 2.0F * this.entity.width * 2.0F + attackTarget.width);
+		return (double) (this.entity.getWidth() * 2.0F * this.entity.getWidth() * 2.0F + attackTarget.getWidth());
 	}
 
 }

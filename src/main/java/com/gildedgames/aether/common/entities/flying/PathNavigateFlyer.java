@@ -4,11 +4,9 @@ import net.minecraft.entity.MobEntity;
 import net.minecraft.pathfinding.PathFinder;
 import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.pathfinding.PathPoint;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.*;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.Heightmap;
 
 public class PathNavigateFlyer extends PathNavigator
 {
@@ -22,16 +20,16 @@ public class PathNavigateFlyer extends PathNavigator
 	}
 
 	@Override
-	protected void removeSunnyPath()
+	protected void trimPath()
 	{
-		super.removeSunnyPath();
+		super.trimPath();
 
 		if (this.shouldAvoidSun)
 		{
 			BlockPos entityPos = new BlockPos(MathHelper.floor(this.entity.posX), (int) (this.entity.getBoundingBox().minY + 0.5D),
 					MathHelper.floor(this.entity.posZ));
 
-			if (!(this.world.getTopSolidOrLiquidBlock(entityPos).getY() > entityPos.getY()))
+			if (!(this.world.getHeight(Heightmap.Type.WORLD_SURFACE, entityPos).getY() > entityPos.getY()))
 			{
 				return;
 			}
@@ -41,9 +39,9 @@ public class PathNavigateFlyer extends PathNavigator
 				PathPoint pathpoint = this.currentPath.getPathPointFromIndex(i);
 				BlockPos pos = new BlockPos(pathpoint.x, pathpoint.y, pathpoint.z);
 
-				if (!(this.world.getTopSolidOrLiquidBlock(pos).getY() > pos.getY()))
+				if (!(this.world.getHeight(Heightmap.Type.WORLD_SURFACE, pos).getY() > pos.getY()))
 				{
-					this.currentPath.setCurrentPathLength(i - 1);
+					this.currentPath.setCurrentPathIndex(i - 1);
 					return;
 				}
 			}
@@ -75,9 +73,9 @@ public class PathNavigateFlyer extends PathNavigator
 	}
 
 	@Override
-	protected PathFinder getPathFinder()
+	protected PathFinder getPathFinder(int p_179679_1_)
 	{
-		return new PathFinder(new FlyNodeProcessor());
+		return new PathFinder(new FlyNodeProcessor(), p_179679_1_);
 	}
 
 	/**
@@ -92,7 +90,7 @@ public class PathNavigateFlyer extends PathNavigator
 	@Override
 	protected Vec3d getEntityPosition()
 	{
-		return new Vec3d(this.entity.posX, this.entity.posY + (double) this.entity.height * 0.5D, this.entity.posZ);
+		return new Vec3d(this.entity.posX, this.entity.posY + (double) this.entity.getHeight() * 0.5D, this.entity.posZ);
 	}
 
 	@Override
@@ -101,7 +99,7 @@ public class PathNavigateFlyer extends PathNavigator
 		Vec3d vec3d = this.getEntityPosition();
 		Vec3d pathVec = this.currentPath.getVectorFromIndex(this.entity, this.currentPath.getCurrentPathIndex());
 
-		float f = this.entity.width * this.entity.width;
+		float f = this.entity.getWidth() * this.entity.getWidth();
 
 		double sqDistTo = vec3d.squareDistanceTo(pathVec);
 
@@ -131,15 +129,15 @@ public class PathNavigateFlyer extends PathNavigator
 	@Override
 	protected boolean isDirectPathBetweenPoints(final Vec3d posVec31, final Vec3d posVec32, final int sizeX, final int sizeY, final int sizeZ)
 	{
-		RayTraceResult raytraceresult = this.world
-				.rayTraceBlocks(posVec31, new Vec3d(posVec32.x, posVec32.y + (double) this.entity.height * 0.5D, posVec32.z), false, true, false);
-		return raytraceresult == null || raytraceresult.typeOfHit == RayTraceResult.Type.MISS;
+		RayTraceContext context = new RayTraceContext(posVec31, new Vec3d(posVec32.x, posVec32.y + (double) this.entity.getHeight() * 0.5D, posVec32.z), RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.ANY, this.entity);
+		RayTraceResult raytraceresult = this.world.rayTraceBlocks(context);
+		return raytraceresult.getType() == RayTraceResult.Type.MISS;
 	}
 
 	@Override
 	public boolean canEntityStandOnPos(final BlockPos pos)
 	{
-		return !this.world.getBlockState(pos).isFullBlock();
+		return !this.world.getBlockState(pos).func_215682_a(this.world, pos, this.entity);
 	}
 
 	public void setAvoidSun(boolean avoidSun)

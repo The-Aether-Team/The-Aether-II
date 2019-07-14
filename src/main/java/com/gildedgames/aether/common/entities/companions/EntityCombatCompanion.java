@@ -2,17 +2,21 @@ package com.gildedgames.aether.common.entities.companions;
 
 import com.gildedgames.aether.common.entities.ai.companion.EntityAICompanionOwnerHurt;
 import com.gildedgames.aether.common.entities.ai.companion.EntityAICompanionTargetEnemy;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.World;
+
+import java.util.EnumSet;
 
 public abstract class EntityCombatCompanion extends EntityCompanion
 {
 
-	public EntityCombatCompanion(World worldIn)
+	protected EntityCombatCompanion(EntityType<? extends CreatureEntity> type, World worldIn)
 	{
-		super(worldIn);
+		super(type, worldIn);
 	}
 
 	@Override
@@ -20,9 +24,9 @@ public abstract class EntityCombatCompanion extends EntityCompanion
 	{
 		super.registerGoals();
 
-		Goal attack = new EntityAIAttackMelee(this, 0.7D, true);
+		Goal attack = new MeleeAttackGoal(this, 0.7D, true);
 
-		attack.setMutexBits(1);
+		attack.setMutexFlags(EnumSet.of(Goal.Flag.MOVE));
 
 		this.goalSelector.addGoal(0, attack);
 

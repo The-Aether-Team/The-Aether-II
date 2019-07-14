@@ -15,9 +15,10 @@ import com.gildedgames.aether.common.entities.util.eyes.EntityEyesComponent;
 import com.gildedgames.aether.common.entities.util.eyes.IEntityEyesComponentProvider;
 import com.gildedgames.aether.common.shop.ShopInstanceGroup;
 import com.gildedgames.orbis.lib.util.mc.NBTHelper;
-import net.minecraft.block.Block;
-import net.minecraft.entity.EntityBodyHelper;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.controller.BodyController;
 import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
@@ -25,8 +26,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Optional;
 import java.util.Random;
@@ -41,11 +40,9 @@ public class EntityEdison extends EntityCharacter implements IEntityEyesComponen
 
 	private BlockPos spawned;
 
-	public EntityEdison(final World worldIn)
+	public EntityEdison(EntityType<? extends EntityCharacter> type, World worldIn)
 	{
-		super(worldIn);
-
-		this.setSize(0.9F, 1.35F);
+		super(type, worldIn);
 
 		this.rotationYaw = 0.3F;
 	}
@@ -77,7 +74,7 @@ public class EntityEdison extends EntityCharacter implements IEntityEyesComponen
 	}
 
 	@Override
-	protected EntityBodyHelper createBodyHelper()
+	protected BodyController createBodyController()
 	{
 		return new EntityBodyHelperNoRotation(this);
 	}
@@ -99,19 +96,19 @@ public class EntityEdison extends EntityCharacter implements IEntityEyesComponen
 	}
 
 	@Override
-	public void writeEntityToNBT(final CompoundNBT compound)
+	public void writeAdditional(CompoundNBT nbt)
 	{
-		super.writeEntityToNBT(compound);
+		super.writeAdditional(nbt);
 
-		compound.put("spawned", NBTHelper.writeBlockPos(this.spawned));
+		nbt.put("spawned", NBTHelper.writeBlockPos(this.spawned));
 	}
 
 	@Override
-	public void readEntityFromNBT(final CompoundNBT compound)
+	public void readAdditional(CompoundNBT nbt)
 	{
-		super.readEntityFromNBT(compound);
+		super.readAdditional(nbt);
 
-		this.spawned = NBTHelper.readBlockPos(compound.getCompound("spawned"));
+		this.spawned = NBTHelper.readBlockPos(nbt.getCompound("spawned"));
 
 		if (this.spawned != null)
 		{
@@ -132,14 +129,7 @@ public class EntityEdison extends EntityCharacter implements IEntityEyesComponen
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
-	public void turn(final float yaw, final float pitch)
-	{
-
-	}
-
-	@Override
-	public void livingTick()
+	public void tick()
 	{
 		this.posX = this.prevPosX;
 		this.posZ = this.prevPosZ;
@@ -150,7 +140,7 @@ public class EntityEdison extends EntityCharacter implements IEntityEyesComponen
 			this.setHomePosAndDistance(this.spawned, 3);
 		}
 
-		super.livingTick();
+		super.tick();
 
 		this.eyes.update();
 
@@ -214,7 +204,7 @@ public class EntityEdison extends EntityCharacter implements IEntityEyesComponen
 	}
 
 	@Override
-	protected void playStepSound(final BlockPos pos, final Block blockIn)
+	protected void playStepSound(final BlockPos pos, final BlockState blockIn)
 	{
 
 	}

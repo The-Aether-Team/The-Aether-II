@@ -34,7 +34,7 @@ public class EntityAIForcedWanderAvoidLight extends EntityAIForcedWander
 
 		if (world.isDaytime())
 		{
-			if (!world.canSeeSky(new BlockPos(this.entity.posX, this.entity.getBoundingBox().minY, this.entity.posZ)))
+			if (!world.canBlockSeeSky(new BlockPos(this.entity.posX, this.entity.getBoundingBox().minY, this.entity.posZ)))
 			{
 				return false;
 			}
@@ -76,8 +76,7 @@ public class EntityAIForcedWanderAvoidLight extends EntityAIForcedWander
 					continue;
 				}
 
-				if (!(this.entity.world.isDaytime() && this.entity.world
-						.canSeeSky(blockPos)))
+				if (!(this.entity.world.isDaytime() && this.entity.world.canBlockSeeSky(blockPos)))
 				{
 					return pos;
 				}

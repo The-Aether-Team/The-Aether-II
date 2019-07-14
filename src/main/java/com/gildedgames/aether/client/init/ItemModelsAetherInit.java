@@ -632,13 +632,6 @@ public class ItemModelsAetherInit
 
 		registerItemModels(BlocksAether.moa_egg, "moa_egg/moa_egg");
 
-		registerItemModels(ItemsAether.cloud_parachute, new ItemModelBuilder("cloud_parachute/")
-				.add(EntityParachute.Type.COLD.ordinal(), "cold_cloud_parachute")
-				.add(EntityParachute.Type.GOLDEN.ordinal(), "golden_cloud_parachute")
-				.add(EntityParachute.Type.PURPLE.ordinal(), "purple_cloud_parachute")
-				.add(EntityParachute.Type.GREEN.ordinal(), "green_cloud_parachute")
-				.add(EntityParachute.Type.BLUE.ordinal(), "blue_cloud_parachute"));
-
 		registerItemModels(ItemsAether.irradiated_chunk, "irradiated_chunk");
 		registerItemModels(ItemsAether.irradiated_sword, "irradiated_sword");
 		registerItemModels(ItemsAether.irradiated_armor, "irradiated_armor");

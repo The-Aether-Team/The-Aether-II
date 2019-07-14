@@ -63,7 +63,7 @@ public class PacketLatchSwet implements IMessage
 			final EntitySwet swet = new EntitySwet(player.world);
 
 			swet.setPosition(player.posX, player.posY, player.posZ);
-			swet.setType(message.type);
+			swet.setSwetType(message.type);
 
 			playerAether.getModule(PlayerSwetTrackerModule.class).latchSwet(swet);
 

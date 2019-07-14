@@ -2,36 +2,36 @@ package com.gildedgames.aether.common.entities.ai.moa;
 
 import com.gildedgames.aether.common.entities.util.groups.EntityGroupMember;
 import net.minecraft.entity.CreatureEntity;
-import net.minecraft.entity.ai.EntityAIPanic;
+import net.minecraft.entity.ai.goal.PanicGoal;
 
-public class AIPanicPack extends EntityAIPanic
+public class AIPanicPack extends PanicGoal
 {
 
-	EntityGroupMember animal;
+	private EntityGroupMember animal;
 
-	final CreatureEntity theEntityCreature;
+	private final CreatureEntity entity;
 
-	public AIPanicPack(CreatureEntity par1EntityCreature, double par2)
+	public AIPanicPack(CreatureEntity entity, double par2)
 	{
-		super(par1EntityCreature, par2);
+		super(entity, par2);
 
-		if (par1EntityCreature instanceof EntityGroupMember)
+		if (entity instanceof EntityGroupMember)
 		{
-			this.animal = (EntityGroupMember) par1EntityCreature;
+			this.animal = (EntityGroupMember) entity;
 		}
 
-		this.theEntityCreature = par1EntityCreature;
+		this.entity = entity;
 	}
 
 	@Override
 	public boolean shouldExecute()
 	{
-		if (this.animal.isProtective() && !this.theEntityCreature.isBurning())
+		if (this.animal.isProtective() && !this.entity.isBurning())
 		{
 			return false;
 		}
 
-		this.theEntityCreature.setAttackTarget(this.animal.getGroup().findNearestAggressor(this.theEntityCreature));
+		this.entity.setAttackTarget(this.animal.getGroup().findNearestAggressor(this.entity));
 
 		return super.shouldExecute();
 

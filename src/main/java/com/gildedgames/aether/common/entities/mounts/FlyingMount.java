@@ -34,17 +34,21 @@ public class FlyingMount implements IMountProcessor
 	@Override
 	public void onHoldSpaceBar(Entity mount, Entity rider)
 	{
+		double motionY = mount.getMotion().getY();
+
 		if (mount.onGround)
 		{
-			mount.motionY = 0.55D;
+			motionY = 0.55D;
 			this.data.resetRemainingAirborneTime();
 		}
-		else if (mount.motionY < 0.1D && this.data.getRemainingAirborneTime() > 0.0F)
+		else if (motionY < 0.1D && this.data.getRemainingAirborneTime() > 0.0F)
 		{
-			mount.motionY = 0.1D;
+			motionY = 0.1D;
 
 			this.data.addRemainingAirborneTime(-0.1F);
 		}
+
+		mount.setMotion(mount.getMotion().getX(), motionY, mount.getMotion().getZ());
 	}
 
 	@Override
@@ -78,7 +82,7 @@ public class FlyingMount implements IMountProcessor
 	{
 		if (mount instanceof LivingEntity)
 		{
-			((LivingEntity) mount).getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.6D);
+			((LivingEntity) mount).getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.6D);
 		}
 	}
 
@@ -87,7 +91,7 @@ public class FlyingMount implements IMountProcessor
 	{
 		if (mount instanceof LivingEntity)
 		{
-			((LivingEntity) mount).getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
+			((LivingEntity) mount).getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
 		}
 	}
 

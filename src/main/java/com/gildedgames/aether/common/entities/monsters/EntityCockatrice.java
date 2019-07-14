@@ -12,18 +12,15 @@ import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceWa
 import com.gildedgames.aether.common.entities.effects.StatusEffectCockatriceVenom;
 import com.gildedgames.aether.common.init.LootTablesAether;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.controller.JumpController;
 import net.minecraft.entity.ai.goal.SwimGoal;
-import net.minecraft.entity.ai.EntityJumpHelper;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.potion.Effects;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -38,20 +35,10 @@ public class EntityCockatrice extends EntityAetherMonster
 
 	private static final DataParameter<Boolean> IS_ATTACKING = new DataParameter<>(18, DataSerializers.BOOLEAN);
 
-	public EntityCockatrice(final World world)
+	public EntityCockatrice(EntityType<? extends MonsterEntity> type, World world)
 	{
-		super(world);
+		super(type, world);
 
-		this.goalSelector.addGoal(0, new SwimGoal(this));
-		this.goalSelector.addGoal(0, new EntityAIUnstuckBlueAercloud(this));
-		this.goalSelector.addGoal(1, new EntityAICockatriceHide(this, PlayerEntity.class, 0.9D));
-		this.goalSelector.addGoal(2, new EntityAICockatriceWander(this, 0.35D));
-
-		this.targetSelector.addGoal(0, new EntityAICockatriceSneakAttack(this, PlayerEntity.class));
-
-		this.jumpController = new JumpHelperDisable(this);
-
-		this.setSize(1.0F, 2.0F);
 		this.stepHeight = 1.0F;
 
 		this.experienceValue = 7;
@@ -61,6 +48,19 @@ public class EntityCockatrice extends EntityAetherMonster
 	protected void jump()
 	{
 
+	}
+
+	@Override
+	protected void registerGoals()
+	{
+		this.goalSelector.addGoal(0, new SwimGoal(this));
+		this.goalSelector.addGoal(0, new EntityAIUnstuckBlueAercloud(this));
+		this.goalSelector.addGoal(1, new EntityAICockatriceHide(this, PlayerEntity.class, 0.9D));
+		this.goalSelector.addGoal(2, new EntityAICockatriceWander(this, 0.35D));
+
+		this.targetSelector.addGoal(0, new EntityAICockatriceSneakAttack(this, PlayerEntity.class));
+
+		this.jumpController = new JumpHelperDisable(this);
 	}
 
 	@Override
@@ -125,9 +125,9 @@ public class EntityCockatrice extends EntityAetherMonster
 	}
 
 	@Override
-	public void livingTick()
+	public void tick()
 	{
-		super.livingTick();
+		super.tick();
 
 		EntityUtil.despawnEntityDuringDaytime(this);
 	}
@@ -181,7 +181,7 @@ public class EntityCockatrice extends EntityAetherMonster
 	}
 
 	@Override
-	protected ResourceLocation getLootTable()
+	public ResourceLocation getLootTable()
 	{
 		return LootTablesAether.ENTITY_COCKATRICE;
 	}
@@ -199,13 +199,6 @@ public class EntityCockatrice extends EntityAetherMonster
 		{
 
 		}
-
-		@Override
-		public void doJump()
-		{
-
-		}
-
 	}
 
 }

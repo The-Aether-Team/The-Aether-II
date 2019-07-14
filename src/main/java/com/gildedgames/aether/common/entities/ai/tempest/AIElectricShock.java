@@ -28,10 +28,9 @@ public class AIElectricShock extends EntityAI<EntityTempest>
 	@Override
 	public void startExecuting()
 	{
-		final IAttributeInstance movementSpeed = this.entity().getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
+		final IAttributeInstance movementSpeed = this.entity().getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
 
-		this.entity().getNavigator().tryMoveToEntityLiving(this.entity().getAttackTarget(),
-				movementSpeed != null ? movementSpeed.getAttributeValue() : 1.0D);
+		this.entity().getNavigator().tryMoveToEntityLiving(this.entity().getAttackTarget(), movementSpeed != null ? movementSpeed.getValue() : 1.0D);
 	}
 
 	@Override
@@ -41,7 +40,7 @@ public class AIElectricShock extends EntityAI<EntityTempest>
 	}
 
 	@Override
-	public boolean isInterruptible()
+	public boolean isPreemptible()
 	{
 		return false;
 	}
@@ -54,7 +53,7 @@ public class AIElectricShock extends EntityAI<EntityTempest>
 	}
 
 	@Override
-	public void updateTask()
+	public void tick()
 	{
 		final LivingEntity prey = this.entity().getAttackTarget();
 

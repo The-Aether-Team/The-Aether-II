@@ -2,7 +2,10 @@ package com.gildedgames.aether.common.entities.ai.hopping;
 
 import com.gildedgames.aether.common.entities.ai.EntityAI;
 import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.potion.Effects;
+
+import java.util.EnumSet;
 
 public class AIHopWander extends EntityAI<MobEntity>
 {
@@ -19,7 +22,7 @@ public class AIHopWander extends EntityAI<MobEntity>
 
 		this.hoppingMoveHelper = hoppingMoveHelper;
 
-		this.setMutexBits(2);
+		this.setMutexFlags(EnumSet.of(Goal.Flag.LOOK));
 	}
 
 	/**
@@ -36,7 +39,7 @@ public class AIHopWander extends EntityAI<MobEntity>
 	 * Updates the task
 	 */
 	@Override
-	public void updateTask()
+	public void tick()
 	{
 		if (--this.nextRandomizeTime <= 0)
 		{

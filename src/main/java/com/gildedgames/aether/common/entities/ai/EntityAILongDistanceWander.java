@@ -5,6 +5,8 @@ import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.util.math.Vec3d;
 
+import java.util.EnumSet;
+
 public class EntityAILongDistanceWander extends Goal
 {
 
@@ -34,7 +36,7 @@ public class EntityAILongDistanceWander extends Goal
 		this.entity = creatureIn;
 		this.speed = speedIn;
 		this.executionChance = chance;
-		this.setMutexBits(1);
+		this.setMutexFlags(EnumSet.of(Goal.Flag.MOVE));
 	}
 
 	@Override

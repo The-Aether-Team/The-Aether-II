@@ -5,26 +5,22 @@ import com.gildedgames.aether.api.entity.EntityCharacter;
 import com.gildedgames.aether.api.shop.IShopDefinition;
 import com.gildedgames.aether.api.shop.IShopInstance;
 import com.gildedgames.aether.api.shop.IShopInstanceGroup;
-import com.gildedgames.aether.common.AetherCelebrations;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerDialogModule;
 import com.gildedgames.aether.common.shop.ShopInstanceGroup;
 import com.gildedgames.orbis.lib.util.mc.NBTHelper;
-import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityBodyHelper;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.ai.goal.LookRandomlyGoal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -37,11 +33,9 @@ public class EntityMysteriousFigure extends EntityCharacter
 
 	private BlockPos spawned;
 
-	public EntityMysteriousFigure(final World worldIn)
+	public EntityMysteriousFigure(EntityType<? extends EntityCharacter> type, World worldIn)
 	{
-		super(worldIn);
-
-		this.setSize(1.0F, 2.0F);
+		super(type, worldIn);
 	}
 
 	@Override
@@ -62,23 +56,11 @@ public class EntityMysteriousFigure extends EntityCharacter
 	}
 
 	@Override
-	public void applyEntityCollision(Entity entityIn)
-	{
-		super.applyEntityCollision(entityIn);
-	}
-
-	@Override
-	protected EntityBodyHelper createBodyHelper()
-	{
-		return new EntityBodyHelper(this);
-	}
-
-	@Override
 	protected void registerGoals()
 	{
 		super.registerGoals();
 
-		this.goalSelector.addGoal(3, new EntityAILookIdle(this));
+		this.goalSelector.addGoal(3, new LookRandomlyGoal(this));
 		this.goalSelector.addGoal(2, new LookAtGoal(this, PlayerEntity.class, 50.0F, 1.0F));
 	}
 
@@ -92,19 +74,19 @@ public class EntityMysteriousFigure extends EntityCharacter
 	}
 
 	@Override
-	public void writeEntityToNBT(final CompoundNBT compound)
+	public void writeAdditional(CompoundNBT nbt)
 	{
-		super.writeEntityToNBT(compound);
+		super.writeAdditional(nbt);
 
-		compound.put("spawned", NBTHelper.writeBlockPos(this.spawned));
+		nbt.put("spawned", NBTHelper.writeBlockPos(this.spawned));
 	}
 
 	@Override
-	public void readEntityFromNBT(final CompoundNBT compound)
+	public void readAdditional(CompoundNBT nbt)
 	{
-		super.readEntityFromNBT(compound);
+		super.readAdditional(nbt);
 
-		this.spawned = NBTHelper.readBlockPos(compound.getCompound("spawned"));
+		this.spawned = NBTHelper.readBlockPos(nbt.getCompound("spawned"));
 
 		if (this.spawned != null)
 		{
@@ -125,30 +107,8 @@ public class EntityMysteriousFigure extends EntityCharacter
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
-	public void turn(final float yaw, final float pitch)
+	public void tick()
 	{
-		//super.turn(yaw, pitch);
-	}
-
-	@Override
-	public void livingTick()
-	{
-		if (!AetherCelebrations.isHalloweenEvent())
-		{
-			if (this.width > 0 && this.height > 0)
-			{
-				this.setSize(0, 0);
-			}
-		}
-		else
-		{
-			if (this.width == 0 && this.height == 0)
-			{
-				this.setSize(1.0F, 2.0F);
-			}
-		}
-
 		this.posX = this.prevPosX;
 		this.posZ = this.prevPosZ;
 
@@ -158,7 +118,7 @@ public class EntityMysteriousFigure extends EntityCharacter
 			this.setHomePosAndDistance(this.spawned, 3);
 		}
 
-		super.livingTick();
+		super.tick();
 
 		this.posX = this.prevPosX;
 		this.posZ = this.prevPosZ;
@@ -197,7 +157,7 @@ public class EntityMysteriousFigure extends EntityCharacter
 	}
 
 	@Override
-	protected void playStepSound(final BlockPos pos, final Block blockIn)
+	protected void playStepSound(final BlockPos pos, final BlockState blockIn)
 	{
 
 	}

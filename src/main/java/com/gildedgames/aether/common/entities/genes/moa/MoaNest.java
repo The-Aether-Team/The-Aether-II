@@ -52,14 +52,11 @@ public class MoaNest
 	{
 		final BlockState state = world.getBlockState(pos);
 		final Block block = state.getBlock();
+		final Material material = state.getMaterial();
 
-		return world.isAirBlock(pos) ||
-				block.isLeaves(state, world, pos) ||
+		return material.isReplaceable() || material == Material.LEAVES || material == Material.PLANTS ||
 				block == BlocksAether.aether_grass ||
-				block == BlocksAether.aether_dirt ||
-				block.isReplaceable(world, pos) ||
-				state.getMaterial() == Material.PLANTS ||
-				state.getMaterial() == Material.VINE;
+				block == BlocksAether.aether_dirt;
 	}
 
 	public void spawnMoaFamily(final World world, final int initialSize, final int optimalSize)
@@ -88,7 +85,7 @@ public class MoaNest
 
 			moa.setAnimalPack(this.pack);
 
-			world.spawnEntity(moa);
+			world.addEntity(moa);
 		}
 	}
 

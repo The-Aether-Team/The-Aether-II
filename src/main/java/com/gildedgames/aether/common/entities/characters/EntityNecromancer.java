@@ -7,9 +7,10 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerDialogModule;
 import com.gildedgames.orbis.lib.util.mc.NBTHelper;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.ai.goal.LookRandomlyGoal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Hand;
@@ -21,11 +22,9 @@ public class EntityNecromancer extends EntityCharacter
 
 	private BlockPos spawned;
 
-	public EntityNecromancer(final World worldIn)
+	public EntityNecromancer(EntityType<? extends EntityCharacter> type, World worldIn)
 	{
-		super(worldIn);
-
-		this.setSize(1.0F, 2.5F);
+		super(type, worldIn);
 
 		this.rotationYaw = 0.3F;
 	}
@@ -41,7 +40,7 @@ public class EntityNecromancer extends EntityCharacter
 	{
 		super.registerGoals();
 
-		this.goalSelector.addGoal(3, new EntityAILookIdle(this));
+		this.goalSelector.addGoal(3, new LookRandomlyGoal(this));
 		this.goalSelector.addGoal(2, new LookAtGoal(this, PlayerEntity.class, 50.0F, 1.0F));
 	}
 
@@ -56,19 +55,19 @@ public class EntityNecromancer extends EntityCharacter
 	}
 
 	@Override
-	public void writeEntityToNBT(final CompoundNBT compound)
+	public void writeAdditional(CompoundNBT nbt)
 	{
-		super.writeEntityToNBT(compound);
+		super.writeAdditional(nbt);
 
-		compound.put("spawned", NBTHelper.writeBlockPos(this.spawned));
+		nbt.put("spawned", NBTHelper.writeBlockPos(this.spawned));
 	}
 
 	@Override
-	public void readEntityFromNBT(final CompoundNBT compound)
+	public void readAdditional(CompoundNBT nbt)
 	{
-		super.readEntityFromNBT(compound);
+		super.readAdditional(nbt);
 
-		this.spawned = NBTHelper.readBlockPos(compound.getCompound("spawned"));
+		this.spawned = NBTHelper.readBlockPos(nbt.getCompound("spawned"));
 
 		if (this.spawned != null)
 		{
@@ -83,7 +82,7 @@ public class EntityNecromancer extends EntityCharacter
 	}
 
 	@Override
-	public void livingTick()
+	public void tick()
 	{
 		this.setHomePosAndDistance(this.getPosition(), 500);
 
@@ -92,7 +91,7 @@ public class EntityNecromancer extends EntityCharacter
 			this.spawned = this.getPosition();
 		}
 
-		super.livingTick();
+		super.tick();
 	}
 
 	@Override

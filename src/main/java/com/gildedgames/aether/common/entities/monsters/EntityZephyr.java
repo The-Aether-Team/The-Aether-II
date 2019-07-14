@@ -4,6 +4,8 @@ import com.gildedgames.aether.api.entity.damage.DamageTypeAttributes;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.flying.EntityFlying;
 import com.gildedgames.aether.common.init.LootTablesAether;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
@@ -12,17 +14,14 @@ import net.minecraft.world.World;
 
 public class EntityZephyr extends EntityFlying
 {
-	public EntityZephyr(final World world)
+
+	public EntityZephyr(EntityType<? extends CreatureEntity> type, World world)
 	{
-		super(world);
-
-		this.setSize(1.0F, 1.0F);
-
-		this.experienceValue = 3;
+		super(type, world);
 	}
 
 	@Override
-	protected ResourceLocation getLootTable()
+	public ResourceLocation getLootTable()
 	{
 		return LootTablesAether.ENTITY_ZEPHYR;
 	}

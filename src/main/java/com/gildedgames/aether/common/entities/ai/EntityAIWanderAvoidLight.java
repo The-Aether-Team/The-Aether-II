@@ -9,6 +9,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
 import javax.annotation.Nullable;
+import java.util.EnumSet;
 
 public class EntityAIWanderAvoidLight extends Goal
 {
@@ -39,7 +40,7 @@ public class EntityAIWanderAvoidLight extends Goal
 		this.speed = speedIn;
 		this.executionChance = chance;
 		this.lightLevel = lightLevel;
-		this.setMutexBits(1);
+		this.setMutexFlags(EnumSet.of(Goal.Flag.MOVE));
 	}
 
 	/**
@@ -88,7 +89,7 @@ public class EntityAIWanderAvoidLight extends Goal
 			{
 				BlockPos blockPos = new BlockPos(pos);
 
-				if (this.entity.world.getBrightness(blockPos) <= this.lightLevel && !(this.entity.world.isDaytime() && this.entity.world.canSeeSky(blockPos)))
+				if (this.entity.world.getBrightness(blockPos) <= this.lightLevel && !(this.entity.world.isDaytime() && this.entity.world.canBlockSeeSky(blockPos)))
 				{
 					return pos;
 				}
@@ -124,7 +125,7 @@ public class EntityAIWanderAvoidLight extends Goal
 				PathPoint pp = path.getPathPointFromIndex(i);
 				BlockPos blockPos = new BlockPos(pp.x, pp.y, pp.z);
 
-				if (this.entity.world.getBrightness(blockPos) > this.lightLevel || (this.entity.world.isDaytime() && this.entity.world.canSeeSky(blockPos)))
+				if (this.entity.world.getBrightness(blockPos) > this.lightLevel || (this.entity.world.isDaytime() && this.entity.world.canBlockSeeSky(blockPos)))
 				{
 					this.entity.getNavigator().clearPath();
 				}

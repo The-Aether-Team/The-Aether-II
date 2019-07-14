@@ -1,7 +1,6 @@
 package com.gildedgames.aether.common.entities.tiles;
 
 import net.minecraft.tileentity.ChestTileEntity;
-import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;

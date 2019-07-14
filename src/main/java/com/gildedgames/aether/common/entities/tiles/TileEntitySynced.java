@@ -3,11 +3,17 @@ package com.gildedgames.aether.common.entities.tiles;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityType;
 
 public abstract class TileEntitySynced extends TileEntity
 {
+
+	public TileEntitySynced(TileEntityType<?> tileEntityTypeIn)
+	{
+		super(tileEntityTypeIn);
+	}
 
 	public void sendUpdatesToClients()
 	{
@@ -23,23 +29,23 @@ public abstract class TileEntitySynced extends TileEntity
 	{
 		CompoundNBT tag = super.getUpdateTag();
 
-		this.writeToNBT(tag);
+		this.write(tag);
 
 		return tag;
 	}
 
 	@Override
-	public SPacketUpdateTileEntity getUpdatePacket()
+	public SUpdateTileEntityPacket getUpdatePacket()
 	{
 		CompoundNBT compound = this.getUpdateTag();
 
-		return new SPacketUpdateTileEntity(this.pos, 1, compound);
+		return new SUpdateTileEntityPacket(this.pos, 1, compound);
 	}
 
 	@Override
-	public void onDataPacket(NetworkManager networkManager, SPacketUpdateTileEntity packet)
+	public void onDataPacket(NetworkManager networkManager, SUpdateTileEntityPacket packet)
 	{
-		this.readFromNBT(packet.getNbtCompound());
+		this.read(packet.getNbtCompound());
 	}
 
 }
