@@ -10,10 +10,13 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.api.distmarker.Dist;
+
+import javax.annotation.Nullable;
 
 public class ContainerIcestoneCooler extends Container
 {
@@ -27,8 +30,10 @@ public class ContainerIcestoneCooler extends Container
 
 	private int currentItemCoolTime;
 
-	public ContainerIcestoneCooler(final PlayerInventory playerInventory, final IInventory coolerInventory)
+	public ContainerIcestoneCooler(int id, TileEntityIcestoneCooler coolerInventory, PlayerInventory playerInventory)
 	{
+		super(type, id);
+
 		this.tileCooler = coolerInventory;
 		this.addSlot(new SlotIrradiatedItem(coolerInventory, 0, 56, 17, 0));
 		this.addSlot(new SlotCoolingItem(coolerInventory, 1, 56, 53, 1));

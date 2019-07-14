@@ -1,24 +1,33 @@
 package com.gildedgames.aether.common.entities.tiles;
 
+import com.gildedgames.aether.common.entities.TileEntityTypesAether;
 import com.gildedgames.aether.common.items.blocks.ItemBlockPresent;
 import com.gildedgames.aether.common.items.other.ItemWrappingPaper;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.item.EntityTNTPrimed;
+import net.minecraft.entity.item.TNTEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemMonsterPlacer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.SpawnEggItem;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityType;
 
 public class TileEntityPresent extends TileEntity
 {
 
 	private ItemBlockPresent.PresentData presentData = new ItemBlockPresent.PresentData();
+
+	public TileEntityPresent()
+	{
+		super(TileEntityTypesAether.PRESENT);
+	}
 
 	public ItemBlockPresent.PresentData getPresentData()
 	{
@@ -46,9 +55,11 @@ public class TileEntityPresent extends TileEntity
 		double y2 = this.getPos().getY() + ((this.world.rand.nextFloat() * radius) + (1.0F - radius) * 0.5D);
 		double z2 = this.getPos().getZ() + ((this.world.rand.nextFloat() * radius) + (1.0F - radius) * 0.5D);
 
-		if (stack.getItem() instanceof ItemMonsterPlacer)
+		if (stack.getItem() instanceof SpawnEggItem)
 		{
-			ItemMonsterPlacer.spawnCreature(this.world, ItemMonsterPlacer.getNamedIdFrom(stack), x2, y2, z2);
+			EntityType<?> type = ((SpawnEggItem) stack.getItem()).getType(stack.getTag());
+			type.spawn(this.world, null, null, this.pos, SpawnReason.TRIGGERED, true, true);
+
 			return;
 		}
 
@@ -56,7 +67,7 @@ public class TileEntityPresent extends TileEntity
 
 		if (stack.getItem() == Item.getItemFromBlock(Blocks.TNT))
 		{
-			EntityTNTPrimed tnt = new EntityTNTPrimed(this.world,
+			TNTEntity tnt = new TNTEntity(this.world,
 					this.getPos().getX() + 0.5D, this.getPos().getY() + 0.5D, this.getPos().getZ() + 0.5D, null);
 			tnt.setFuse(20);
 
@@ -70,22 +81,22 @@ public class TileEntityPresent extends TileEntity
 			entity = item;
 		}
 
-		this.world.spawnEntity(entity);
+		this.world.addEntity(entity);
 	}
 
 	@Override
-	public CompoundNBT writeToNBT(CompoundNBT compound)
+	public CompoundNBT write(CompoundNBT compound)
 	{
-		super.writeToNBT(compound);
+		super.write(compound);
 		compound.put("data", this.getPresentData().writeToNBT(new CompoundNBT()));
 
 		return compound;
 	}
 
 	@Override
-	public void readFromNBT(CompoundNBT compound)
+	public void read(CompoundNBT compound)
 	{
-		super.readFromNBT(compound);
+		super.read(compound);
 		this.presentData = ItemBlockPresent.PresentData.readFromNBT(compound.getCompound("data"));
 	}
 

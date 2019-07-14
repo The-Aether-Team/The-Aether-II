@@ -7,10 +7,12 @@ import com.gildedgames.aether.common.blocks.multiblock.BlockMultiController;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerCampfiresModule;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTeleportingModule;
+import com.gildedgames.aether.common.entities.TileEntityTypesAether;
 import com.gildedgames.aether.common.entities.tiles.multiblock.TileEntityMultiblockController;
 import com.gildedgames.aether.common.init.DimensionsAether;
 import com.gildedgames.orbis.lib.util.TeleporterGeneric;
 import com.gildedgames.orbis.lib.util.mc.BlockPosDimension;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
@@ -19,6 +21,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.PlayerList;
 import net.minecraft.tileentity.ITickableTileEntity;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -43,13 +46,13 @@ public class TileEntityOutpostCampfire extends TileEntityMultiblockController im
 
 	public TileEntityOutpostCampfire()
 	{
-		super((BlockMultiController) BlocksAether.outpost_campfire, BlocksAether.multiblock_dummy_half);
+		super(TileEntityTypesAether.OUTPOST_CAMPFIRE, (BlockMultiController) BlocksAether.outpost_campfire, BlocksAether.multiblock_dummy_half);
 	}
 
 	@Override
 	public boolean onInteract(final PlayerEntity player)
 	{
-		if (player instanceof ServerPlayerEntity && player.world.provider.getDimensionType() == DimensionsAether.AETHER)
+		if (player instanceof ServerPlayerEntity && player.world.getDimension().getType() == DimensionsAether.AETHER)
 		{
 			final ServerPlayerEntity playerMP = (ServerPlayerEntity) player;
 
@@ -100,11 +103,11 @@ public class TileEntityOutpostCampfire extends TileEntityMultiblockController im
 	}
 
 	@Override
-	public void update()
+	public void tick()
 	{
 		if (this.posDim == null)
 		{
-			this.posDim = new BlockPosDimension(this.pos, this.world.provider.getDimension());
+			this.posDim = new BlockPosDimension(this.pos, this.world.getDimension().getType());
 		}
 
 		AxisAlignedBB searchingBB = new AxisAlignedBB(

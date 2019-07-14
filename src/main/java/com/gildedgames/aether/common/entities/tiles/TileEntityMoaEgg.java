@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.entities.tiles;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
+import com.gildedgames.aether.common.entities.TileEntityTypesAether;
 import com.gildedgames.aether.common.entities.animals.EntityMoa;
 import com.gildedgames.aether.common.entities.genes.AnimalGender;
 import com.gildedgames.aether.common.entities.genes.SimpleGeneStorage;
@@ -8,6 +9,7 @@ import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.genes.moa.MoaNest;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
+import net.minecraft.tileentity.TileEntityType;
 
 public class TileEntityMoaEgg extends TileEntitySynced implements ITickableTileEntity
 {
@@ -24,6 +26,8 @@ public class TileEntityMoaEgg extends TileEntitySynced implements ITickableTileE
 
 	public TileEntityMoaEgg()
 	{
+		super(TileEntityTypesAether.MOA_EGG);
+
 		this.familyNest = new MoaNest(this.world);
 	}
 
@@ -33,7 +37,7 @@ public class TileEntityMoaEgg extends TileEntitySynced implements ITickableTileE
 	}
 
 	@Override
-	public void update()
+	public void tick()
 	{
 		if (this.world.isRemote())
 		{
@@ -82,7 +86,7 @@ public class TileEntityMoaEgg extends TileEntitySynced implements ITickableTileE
 		babyMoa.setGender(this.gender);
 		babyMoa.setAnimalPack(this.familyNest.getAnimalPack());
 
-		this.world.spawnEntity(babyMoa);
+		this.world.addEntity(babyMoa);
 
 		this.world.destroyBlock(this.getPos(), false);
 	}
@@ -108,9 +112,9 @@ public class TileEntityMoaEgg extends TileEntitySynced implements ITickableTileE
 	}
 
 	@Override
-	public void readFromNBT(CompoundNBT nbt)
+	public void read(CompoundNBT nbt)
 	{
-		super.readFromNBT(nbt);
+		super.read(nbt);
 
 		this.genePool.read(nbt.getCompound("genePool"));
 
@@ -124,9 +128,9 @@ public class TileEntityMoaEgg extends TileEntitySynced implements ITickableTileE
 	}
 
 	@Override
-	public CompoundNBT writeToNBT(CompoundNBT nbt)
+	public CompoundNBT write(CompoundNBT nbt)
 	{
-		super.writeToNBT(nbt);
+		super.write(nbt);
 
 		CompoundNBT genePoolTag = new CompoundNBT();
 

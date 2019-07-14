@@ -1,43 +1,36 @@
 package com.gildedgames.aether.common.init;
 
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.entities.tiles.*;
 import com.gildedgames.aether.common.entities.tiles.multiblock.TileEntityMultiblockDummy;
+import net.minecraft.tileentity.TileEntityType;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.registries.IForgeRegistry;
 
+@Mod.EventBusSubscriber
 public class TileEntitiesAether
 {
-
-	public static final String
-			ALTAR_ID = "aether.altar",
-			HOLYSTONE_FURNACE_ID = "aether.holystone_furnace",
-			SKYROOT_CHEST_ID = "aether.skyroot_chest",
-			SKYROOT_SIGN_ID = "aether.skyroot_sign",
-			MULTIBLOCK_DUMMY = "aether.multiblock_dummy",
-			MOA_EGG_ID = "aether.moa_egg",
-			ICESTONE_COOLER_ID = "aether.icestone_cooler",
-			INCUBATOR_ID = "aether.incubator",
-			PRESENT_ID = "aether.present",
-			WILDCARD_ID = "aether.wildcard",
-			MASONRY_BENCH_ID = "aether.masonry_bench",
-			OUTPOST_CAMPFIRE_ID = "aether.outpost_campfire",
-			TELEPORTER_ID = "aether.aether_teleporter",
-			SKYROOT_BED_ID = "aether.skyroot_bed";
-
-	public static void preInit()
+	@SubscribeEvent
+	public static void register(RegistryEvent.Register<TileEntityType<?>> event)
 	{
-		GameRegistry.registerTileEntity(TileEntityAltar.class, ALTAR_ID);
-		GameRegistry.registerTileEntity(TileEntityHolystoneFurnace.class, HOLYSTONE_FURNACE_ID);
-		GameRegistry.registerTileEntity(TileEntitySkyrootChest.class, SKYROOT_CHEST_ID);
-		GameRegistry.registerTileEntity(TileEntitySkyrootSign.class, SKYROOT_SIGN_ID);
-		GameRegistry.registerTileEntity(TileEntityMultiblockDummy.class, MULTIBLOCK_DUMMY);
-		GameRegistry.registerTileEntity(TileEntityMoaEgg.class, MOA_EGG_ID);
-		GameRegistry.registerTileEntity(TileEntityIcestoneCooler.class, ICESTONE_COOLER_ID);
-		GameRegistry.registerTileEntity(TileEntityIncubator.class, INCUBATOR_ID);
-		GameRegistry.registerTileEntity(TileEntityPresent.class, PRESENT_ID);
-		GameRegistry.registerTileEntity(TileEntityWildcard.class, WILDCARD_ID);
-		GameRegistry.registerTileEntity(TileEntityMasonryBench.class, MASONRY_BENCH_ID);
-		GameRegistry.registerTileEntity(TileEntityOutpostCampfire.class, OUTPOST_CAMPFIRE_ID);
-		GameRegistry.registerTileEntity(TileEntityTeleporter.class, TELEPORTER_ID);
+		IForgeRegistry<TileEntityType<?>> registry = event.getRegistry();
+
+		registry.register(TileEntityType.Builder.create(TileEntityAltar::new, BlocksAether.altar).build(null));
+		registry.register(TileEntityType.Builder.create(TileEntityHolystoneFurnace::new, BlocksAether.holystone_furnace).build(null));
+		registry.register(TileEntityType.Builder.create(TileEntitySkyrootChest::new, BlocksAether.skyroot_chest).build(null));
+		registry.register(TileEntityType.Builder.create(TileEntitySkyrootSign::new, BlocksAether.standing_skyroot_sign, BlocksAether.wall_skyroot_sign).build(null));
+		registry.register(TileEntityType.Builder.create(TileEntityMultiblockDummy::new, BlocksAether.multiblock_dummy, BlocksAether.multiblock_dummy_half).build(null));
+		registry.register(TileEntityType.Builder.create(TileEntityMoaEgg::new, BlocksAether.moa_egg).build(null));
+		registry.register(TileEntityType.Builder.create(TileEntityIcestoneCooler::new, BlocksAether.icestone_cooler).build(null));
+		registry.register(TileEntityType.Builder.create(TileEntityIncubator::new, BlocksAether.incubator).build(null));
+		registry.register(TileEntityType.Builder.create(TileEntityPresent::new, BlocksAether.present).build(null));
+		registry.register(TileEntityType.Builder.create(TileEntityWildcard::new, BlocksAether.wildcard).build(null));
+		registry.register(TileEntityType.Builder.create(TileEntityMasonryBench::new, BlocksAether.masonry_bench).build(null));
+		registry.register(TileEntityType.Builder.create(TileEntityOutpostCampfire::new, BlocksAether.outpost_campfire).build(null));
+		registry.register(TileEntityType.Builder.create(TileEntityTeleporter::new, BlocksAether.aether_teleporter).build(null));
 	}
 
 }

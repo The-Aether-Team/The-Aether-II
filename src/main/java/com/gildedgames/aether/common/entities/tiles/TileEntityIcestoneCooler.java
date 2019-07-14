@@ -4,27 +4,31 @@ import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.blocks.containers.BlockIcestoneCooler;
 import com.gildedgames.aether.common.containers.tiles.ContainerIcestoneCooler;
+import com.gildedgames.aether.common.entities.TileEntityTypesAether;
 import com.gildedgames.aether.common.recipes.CoolerRecipes;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ItemStackHelper;
+import net.minecraft.inventory.container.Container;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.LockableTileEntity;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
+import net.minecraft.util.IIntArray;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class TileEntityIcestoneCooler extends LockableTileEntity implements ITickableTileEntity, IInventory
 {
-
 	private final int totalCoolTime = 800;
 
 	private final int itemCoolTime = 1600;
@@ -37,12 +41,58 @@ public class TileEntityIcestoneCooler extends LockableTileEntity implements ITic
 
 	private int coolTime;
 
-	private String coolerCustomeName;
+	protected final IIntArray fields = new IIntArray()
+	{
+		@Override
+		public int get(int id)
+		{
+			switch (id)
+			{
+				case 0:
+					return TileEntityIcestoneCooler.this.coolerCoolTime;
+				case 1:
+					return TileEntityIcestoneCooler.this.currentItemCoolTime;
+				case 2:
+					return TileEntityIcestoneCooler.this.coolTime;
+				case 3:
+					return TileEntityIcestoneCooler.this.totalCoolTime;
+				default:
+					return 0;
+			}
+		}
+
+		@Override
+		public void set(int id, int value)
+		{
+			switch (id)
+			{
+				case 0:
+					TileEntityIcestoneCooler.this.coolerCoolTime = value;
+					break;
+				case 1:
+					TileEntityIcestoneCooler.this.currentItemCoolTime = value;
+					break;
+				case 2:
+					TileEntityIcestoneCooler.this.coolTime = value;
+			}
+		}
+
+		@Override
+		public int size()
+		{
+			return 4;
+		}
+	};
+
+	public TileEntityIcestoneCooler()
+	{
+		super(TileEntityTypesAether.ICESTONE_COOLER);
+	}
 
 	@OnlyIn(Dist.CLIENT)
-	public static boolean isCooling(IInventory inventory)
+	public static boolean isCooling(TileEntityIcestoneCooler tile)
 	{
-		return inventory.getField(0) > 0;
+		return tile.coolerCoolTime > 0;
 	}
 
 	public static boolean isItemCooling(ItemStack stack)
@@ -176,46 +226,6 @@ public class TileEntityIcestoneCooler extends LockableTileEntity implements ITic
 	}
 
 	@Override
-	public int getField(int id)
-	{
-		switch (id)
-		{
-			case 0:
-				return this.coolerCoolTime;
-			case 1:
-				return this.currentItemCoolTime;
-			case 2:
-				return this.coolTime;
-			case 3:
-				return this.totalCoolTime;
-			default:
-				return 0;
-		}
-	}
-
-	@Override
-	public void setField(int id, int value)
-	{
-		switch (id)
-		{
-			case 0:
-				this.coolerCoolTime = value;
-				break;
-			case 1:
-				this.currentItemCoolTime = value;
-				break;
-			case 2:
-				this.coolTime = value;
-		}
-	}
-
-	@Override
-	public int getFieldCount()
-	{
-		return 4;
-	}
-
-	@Override
 	public void clear()
 	{
 		this.coolerItemStacks.clear();
@@ -227,7 +237,7 @@ public class TileEntityIcestoneCooler extends LockableTileEntity implements ITic
 	}
 
 	@Override
-	public void update()
+	public void tick()
 	{
 		boolean flag = this.isCooling();
 		boolean flag1 = false;
@@ -300,56 +310,35 @@ public class TileEntityIcestoneCooler extends LockableTileEntity implements ITic
 	}
 
 	@Override
-	public Container createContainer(PlayerInventory playerInventory, PlayerEntity playerIn)
+	public Container createMenu(int id, PlayerInventory inventory)
 	{
-		return new ContainerIcestoneCooler(playerInventory, this);
+		return new ContainerIcestoneCooler(id,this, inventory);
 	}
 
 	@Override
-	public String getGuiID()
+	public ITextComponent getDefaultName()
 	{
-		return "aether:coooler";
+		return new StringTextComponent("Icestone Cooler");
 	}
 
 	@Override
-	public String getName()
+	public void read(CompoundNBT compound)
 	{
-		return this.hasCustomName() ? this.coolerCustomeName : "Icestone Cooler";
-	}
-
-	@Override
-	public boolean hasCustomName()
-	{
-		return this.coolerCustomeName != null && !this.coolerCustomeName.isEmpty();
-	}
-
-	@Override
-	public void readFromNBT(CompoundNBT compound)
-	{
-		super.readFromNBT(compound);
+		super.read(compound);
 		this.coolerItemStacks = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
 		ItemStackHelper.loadAllItems(compound, this.coolerItemStacks);
 		this.coolerCoolTime = compound.getInt("coolerCoolTime");
 		this.coolTime = compound.getInt("coolTime");
 
-		if (compound.contains("customeName", 8))
-		{
-			this.coolerCustomeName = compound.getString("customName");
-		}
 	}
 
 	@Override
-	public CompoundNBT writeToNBT(CompoundNBT compound)
+	public CompoundNBT write(CompoundNBT compound)
 	{
-		super.writeToNBT(compound);
+		super.write(compound);
 		compound.putInt("coolerCoolTime", (short) this.coolerCoolTime);
 		compound.putInt("coolTime", (short) this.coolTime);
 		ItemStackHelper.saveAllItems(compound, this.coolerItemStacks);
-
-		if (this.hasCustomName())
-		{
-			compound.putString("CustomName", this.coolerCustomeName);
-		}
 
 		return compound;
 	}
@@ -416,4 +405,5 @@ public class TileEntityIcestoneCooler extends LockableTileEntity implements ITic
 			itemstack.shrink(1);
 		}
 	}
+
 }

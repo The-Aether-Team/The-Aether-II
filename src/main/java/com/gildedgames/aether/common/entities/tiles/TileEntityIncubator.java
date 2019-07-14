@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.entities.tiles;
 
 import com.gildedgames.aether.common.blocks.containers.BlockIncubator;
 import com.gildedgames.aether.common.containers.tiles.ContainerIncubator;
+import com.gildedgames.aether.common.entities.TileEntityTypesAether;
 import com.gildedgames.aether.common.entities.animals.EntityMoa;
 import com.gildedgames.aether.common.entities.genes.AnimalGender;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
@@ -20,7 +21,11 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.LockableTileEntity;
 import net.minecraft.tileentity.ITickableTileEntity;
+import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.IIntArray;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
@@ -57,8 +62,49 @@ public class TileEntityIncubator extends LockableTileEntity implements ITickable
 
 	private int eggTimer;
 
+	private final IIntArray fields = new IIntArray()
+	{
+
+		@Override
+		public int get(int id)
+		{
+			switch (id)
+			{
+				case 0:
+					return (int) TileEntityIncubator.this.currentHeatingProgress;
+				case 1:
+					return TileEntityIncubator.this.eggTimer;
+				default:
+					return 0;
+			}
+		}
+
+		@Override
+		public void set(int id, int value)
+		{
+			switch (id)
+			{
+				case 0:
+					TileEntityIncubator.this.currentHeatingProgress = value;
+				case 1:
+					TileEntityIncubator.this.eggTimer = value;
+			}
+		}
+
+		@Override
+		public int size()
+		{
+			return 2;
+		}
+	};
+
+	public TileEntityIncubator()
+	{
+		super(TileEntityTypesAether.INCUBATOR);
+	}
+
 	@Override
-	public void update()
+	public void tick()
 	{
 		if (this.world.isRemote())
 		{
@@ -130,7 +176,7 @@ public class TileEntityIncubator extends LockableTileEntity implements ITickable
 				moa.setGender(rand.nextBoolean() ? AnimalGender.FEMALE : AnimalGender.MALE);
 				moa.setAnimalPack(familyNest.getAnimalPack());
 
-				this.world.spawnEntity(moa);
+				this.world.addEntity(moa);
 
 				eggstack.shrink(1);
 				this.eggTimer = 0;
@@ -262,53 +308,11 @@ public class TileEntityIncubator extends LockableTileEntity implements ITickable
 	}
 
 	@Override
-	public void openInventory(PlayerEntity player)
-	{
-	}
-
-	@Override
-	public void closeInventory(PlayerEntity player)
-	{
-	}
-
-	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack)
 	{
 		// this code never seems to get called, commenting it out for reference in case I missed something during testing.
 		//return stack.getItem() == ItemsAether.ambrosium_chunk || stack.getItem() == ItemsAether.rainbow_moa_egg;
 		return false;
-	}
-
-	@Override
-	public int getField(int id)
-	{
-		switch (id)
-		{
-			case 0:
-				return (int) this.currentHeatingProgress;
-			case 1:
-				return this.eggTimer;
-			default:
-				return 0;
-		}
-	}
-
-	@Override
-	public void setField(int id, int value)
-	{
-		switch (id)
-		{
-			case 0:
-				this.currentHeatingProgress = value;
-			case 1:
-				this.eggTimer = value;
-		}
-	}
-
-	@Override
-	public int getFieldCount()
-	{
-		return 2;
 	}
 
 	@Override
@@ -318,15 +322,15 @@ public class TileEntityIncubator extends LockableTileEntity implements ITickable
 	}
 
 	@Override
-	public String getName()
+	protected ITextComponent getDefaultName()
 	{
-		return "container.incubator";
+		return new TranslationTextComponent( "container.incubator");
 	}
 
 	@Override
-	public boolean hasCustomName()
+	protected Container createMenu(int id, PlayerInventory playerInventory)
 	{
-		return false;
+		return new ContainerIncubator(id, playerInventory, this);
 	}
 
 	public void sync()
@@ -343,7 +347,7 @@ public class TileEntityIncubator extends LockableTileEntity implements ITickable
 	{
 		CompoundNBT tag = super.getUpdateTag();
 
-		this.writeToNBT(tag);
+		this.write(tag);
 
 		return tag;
 	}
@@ -359,25 +363,13 @@ public class TileEntityIncubator extends LockableTileEntity implements ITickable
 	@Override
 	public void onDataPacket(NetworkManager networkManager, SUpdateTileEntityPacket packet)
 	{
-		this.readFromNBT(packet.getNbtCompound());
+		this.read(packet.getNbtCompound());
 	}
 
 	@Override
-	public Container createContainer(PlayerInventory playerInventory, PlayerEntity playerIn)
+	public CompoundNBT write(CompoundNBT compound)
 	{
-		return new ContainerIncubator(playerInventory, this);
-	}
-
-	@Override
-	public String getGuiID()
-	{
-		return "aether:incubator";
-	}
-
-	@Override
-	public CompoundNBT writeToNBT(CompoundNBT compound)
-	{
-		super.writeToNBT(compound);
+		super.write(compound);
 
 		ListNBT stackList = new ListNBT();
 
@@ -389,9 +381,9 @@ public class TileEntityIncubator extends LockableTileEntity implements ITickable
 
 				stackNBT.putByte("slot", (byte) i);
 
-				this.inventory.get(i).writeToNBT(stackNBT);
+				this.inventory.get(i).write(stackNBT);
 
-				stackList.appendTag(stackNBT);
+				stackList.add(stackNBT);
 			}
 		}
 
@@ -405,23 +397,23 @@ public class TileEntityIncubator extends LockableTileEntity implements ITickable
 	}
 
 	@Override
-	public void readFromNBT(CompoundNBT compound)
+	public void read(CompoundNBT compound)
 	{
-		super.readFromNBT(compound);
+		super.read(compound);
 
 		this.inventory = NonNullList.withSize(INVENTORY_SIZE, ItemStack.EMPTY);
 
-		ListNBT stackList = compound.getTagList("inventory", 10);
+		ListNBT stackList = compound.getList("inventory", 10);
 
-		for (int i = 0; i < stackList.tagCount(); ++i)
+		for (int i = 0; i < stackList.size(); ++i)
 		{
-			CompoundNBT stack = stackList.getCompoundAt(i);
+			CompoundNBT stack = stackList.getCompound(i);
 
 			byte slotPos = stack.getByte("slot");
 
 			if (slotPos >= 0 && slotPos < this.inventory.size())
 			{
-				this.inventory.set(slotPos, new ItemStack(stack));
+				this.inventory.set(slotPos, ItemStack.read(stack));
 			}
 		}
 

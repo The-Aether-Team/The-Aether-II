@@ -9,6 +9,7 @@ import com.gildedgames.aether.common.blocks.multiblock.BlockMultiController;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerConfigModule;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTeleportingModule;
+import com.gildedgames.aether.common.entities.TileEntityTypesAether;
 import com.gildedgames.aether.common.entities.tiles.multiblock.TileEntityMultiblockController;
 import com.gildedgames.aether.common.events.PostAetherTravelEvent;
 import com.gildedgames.aether.common.init.DimensionsAether;
@@ -22,6 +23,7 @@ import com.gildedgames.orbis.lib.util.TeleporterGeneric;
 import com.gildedgames.orbis.lib.util.mc.BlockPosDimension;
 import com.gildedgames.orbis.lib.world.instances.IInstance;
 import com.gildedgames.orbis.lib.world.instances.IPlayerInstances;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -29,6 +31,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.PlayerList;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -52,7 +55,7 @@ public class TileEntityTeleporter extends TileEntityMultiblockController impleme
 
 	public TileEntityTeleporter()
 	{
-		super((BlockMultiController) BlocksAether.aether_teleporter, BlocksAether.multiblock_dummy);
+		super(TileEntityTypesAether.TELEPORTER, (BlockMultiController) BlocksAether.aether_teleporter, BlocksAether.multiblock_dummy);
 	}
 
 	public Direction getFacing()
@@ -68,7 +71,7 @@ public class TileEntityTeleporter extends TileEntityMultiblockController impleme
 	}
 
 	@Override
-	public void update()
+	public void tick()
 	{
 		if (this.world.isRemote())
 		{
@@ -85,24 +88,6 @@ public class TileEntityTeleporter extends TileEntityMultiblockController impleme
 		{
 			this.buildTime = 0;
 		}
-	}
-
-	@Override
-	public void readFromNBT(CompoundNBT compound)
-	{
-		super.readFromNBT(compound);
-
-		this.buildTime = compound.getInt("BuildTime");
-	}
-
-	@Override
-	public CompoundNBT writeToNBT(CompoundNBT compound)
-	{
-		super.writeToNBT(compound);
-
-		compound.putInt("BuildTime", (short) this.buildTime);
-
-		return compound;
 	}
 
 	public int getBuildTime()

@@ -16,14 +16,13 @@ public class EntityDeathListener
 	{
 		final LivingEntity entity = event.getEntityLiving();
 
-		final ISpawnSystem system = entity.getCapability(CapabilitiesAether.SPAWN_SYSTEM, null);
-
-		if (system != null)
-		{
-			for (ISpawnHandler handler : system.getSpawnHandlers())
-			{
-				handler.onLivingDeath(event);
-			}
-		}
+		entity.getCapability(CapabilitiesAether.SPAWN_SYSTEM, null)
+				.ifPresent((system) ->
+				{
+					for (ISpawnHandler handler : system.getSpawnHandlers())
+					{
+						handler.onLivingDeath(event);
+					}
+				});
 	}
 }

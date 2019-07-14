@@ -10,9 +10,9 @@ import net.minecraft.tileentity.TileEntityType;
 public abstract class TileEntitySynced extends TileEntity
 {
 
-	public TileEntitySynced(TileEntityType<?> tileEntityTypeIn)
+	public TileEntitySynced(TileEntityType<?> type)
 	{
-		super(tileEntityTypeIn);
+		super(type);
 	}
 
 	public void sendUpdatesToClients()

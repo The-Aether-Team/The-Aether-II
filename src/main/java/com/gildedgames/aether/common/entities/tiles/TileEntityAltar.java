@@ -5,12 +5,14 @@ import com.gildedgames.aether.api.recipes.altar.IAltarRecipe;
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.blocks.containers.BlockAltar;
+import com.gildedgames.aether.common.entities.TileEntityTypesAether;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.Direction;
 import net.minecraft.tileentity.ITickableTileEntity;
+import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.Direction;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -25,8 +27,13 @@ public class TileEntityAltar extends TileEntitySynced implements ITickableTileEn
 
 	private int ambrosiumCount;
 
+	public TileEntityAltar()
+	{
+		super(TileEntityTypesAether.ALTAR);
+	}
+
 	@Override
-	public void update()
+	public void tick()
 	{
 		if (this.world.isRemote())
 		{
@@ -85,7 +92,7 @@ public class TileEntityAltar extends TileEntitySynced implements ITickableTileEn
 				{
 					ItemStack stack = recipe.getOutput(this.getStackOnAltar());
 
-					this.getWorld().spawnEntity(this.createEntityItemAboveAltar(stack));
+					this.getWorld().addEntity(this.createEntityItemAboveAltar(stack));
 
 					this.ambrosiumCount -= cost;
 					this.setStackOnAltar(ItemStack.EMPTY);
@@ -100,12 +107,12 @@ public class TileEntityAltar extends TileEntitySynced implements ITickableTileEn
 		{
 			ItemStack stack = new ItemStack(ItemsAether.ambrosium_shard, this.getAmbrosiumCount());
 
-			this.getWorld().spawnEntity(this.createEntityItemAboveAltar(stack));
+			this.getWorld().addEntity(this.createEntityItemAboveAltar(stack));
 		}
 
 		if (!this.getStackOnAltar().isEmpty())
 		{
-			this.getWorld().spawnEntity(this.createEntityItemAboveAltar(this.getStackOnAltar()));
+			this.getWorld().addEntity(this.createEntityItemAboveAltar(this.getStackOnAltar()));
 		}
 
 		this.setAmbrosiumCount(0);
@@ -131,15 +138,15 @@ public class TileEntityAltar extends TileEntitySynced implements ITickableTileEn
 	}
 
 	@Override
-	public CompoundNBT writeToNBT(CompoundNBT compound)
+	public CompoundNBT write(CompoundNBT compound)
 	{
-		super.writeToNBT(compound);
+		super.write(compound);
 
 		CompoundNBT itemCompound = new CompoundNBT();
 
 		if (this.stackOnAltar != null)
 		{
-			this.stackOnAltar.writeToNBT(itemCompound);
+			this.stackOnAltar.write(itemCompound);
 		}
 
 		compound.put("StackOnAltar", itemCompound);
@@ -149,12 +156,12 @@ public class TileEntityAltar extends TileEntitySynced implements ITickableTileEn
 	}
 
 	@Override
-	public void readFromNBT(CompoundNBT compound)
+	public void read(CompoundNBT compound)
 	{
-		super.readFromNBT(compound);
+		super.read(compound);
 
 		CompoundNBT itemCompound = compound.getCompound("StackOnAltar");
-		this.stackOnAltar = itemCompound.isEmpty() ? null : new ItemStack(itemCompound);
+		this.stackOnAltar = itemCompound.isEmpty() ? null : ItemStack.read(itemCompound);
 
 		this.ambrosiumCount = compound.getInt("AmbrosiumCount");
 	}

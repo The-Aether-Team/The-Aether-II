@@ -5,6 +5,7 @@ import com.gildedgames.aether.common.entities.tiles.TileEntitySynced;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.api.distmarker.Dist;
@@ -17,15 +18,17 @@ public abstract class TileEntityMultiblockController extends TileEntitySynced im
 
 	private final Block dummy;
 
-	public TileEntityMultiblockController(BlockMultiController block, Block dummy)
+	public TileEntityMultiblockController(TileEntityType<?> type, BlockMultiController block, Block dummy)
 	{
+		super(type);
+
 		this.block = block;
 		this.dummy = dummy;
 	}
 
 	public void rebuild()
 	{
-		for (BlockPos.MutableBlockPos pos : this.block.getMultiblockVolumeIterator(this.pos, this.getWorld()))
+		for (BlockPos pos : this.block.getMultiblockVolumeIterator(this.pos, this.getWorld()))
 		{
 			if (this.pos.equals(pos))
 			{
@@ -43,7 +46,7 @@ public abstract class TileEntityMultiblockController extends TileEntitySynced im
 	@Override
 	public void onDestroyed()
 	{
-		for (BlockPos.MutableBlockPos pos : this.block.getMultiblockVolumeIterator(this.pos, this.getWorld()))
+		for (BlockPos pos : this.block.getMultiblockVolumeIterator(this.pos, this.getWorld()))
 		{
 			if (this.doesControllerOwn(pos))
 			{
@@ -75,12 +78,12 @@ public abstract class TileEntityMultiblockController extends TileEntitySynced im
 	@OnlyIn(Dist.CLIENT)
 	public AxisAlignedBB getRenderBoundingBox()
 	{
-		Iterable<BlockPos.MutableBlockPos> itPos = this.block.getMultiblockVolumeIterator(this.pos, this.world);
+		Iterable<BlockPos> itPos = this.block.getMultiblockVolumeIterator(this.pos, this.world);
 
 		BlockPos min = this.pos;
 		BlockPos max = this.pos;
 
-		for (BlockPos.MutableBlockPos pos : itPos)
+		for (BlockPos pos : itPos)
 		{
 			max = pos;
 		}

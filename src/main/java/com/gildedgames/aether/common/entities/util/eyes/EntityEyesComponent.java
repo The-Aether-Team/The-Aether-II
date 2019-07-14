@@ -79,7 +79,7 @@ public class EntityEyesComponent implements IEntityEyesComponent
 		{
 			if (this.lookingAtEntity == null)
 			{
-				this.lookingAtEntity = this.entity.getEntityWorld().getClosestPlayerToEntity(this.entity, 20D);
+				this.lookingAtEntity = this.entity.getEntityWorld().getClosestPlayer(this.entity, 20D);
 			}
 		}
 		else

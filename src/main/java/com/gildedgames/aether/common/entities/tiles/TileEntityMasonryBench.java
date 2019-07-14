@@ -2,11 +2,18 @@ package com.gildedgames.aether.common.entities.tiles;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.blocks.containers.BlockMasonryBench;
+import com.gildedgames.aether.common.entities.TileEntityTypesAether;
 import net.minecraft.block.BlockState;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 
 public class TileEntityMasonryBench extends TileEntitySynced
 {
+
+	public TileEntityMasonryBench()
+	{
+		super(TileEntityTypesAether.MASONRY_BENCH);
+	}
 
 	public Direction getFacing()
 	{

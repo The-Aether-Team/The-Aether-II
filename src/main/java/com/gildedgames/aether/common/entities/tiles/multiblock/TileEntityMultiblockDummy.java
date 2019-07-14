@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.entities.tiles.multiblock;
 
 import com.gildedgames.aether.api.world.IWorldObjectHoverable;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.entities.TileEntityTypesAether;
 import com.gildedgames.aether.common.entities.tiles.TileEntitySynced;
 import com.gildedgames.orbis.lib.util.mc.NBTHelper;
 import net.minecraft.block.BlockState;
@@ -9,6 +10,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.ITextComponent;
@@ -18,6 +20,11 @@ import net.minecraft.world.World;
 public class TileEntityMultiblockDummy extends TileEntitySynced implements ITileEntityMultiblock, IWorldObjectHoverable
 {
 	private BlockPos controllerPosOffset;
+
+	public TileEntityMultiblockDummy()
+	{
+		super(TileEntityTypesAether.MULTIBLOCK_DUMMY);
+	}
 
 	@Override
 	public boolean onInteract(final PlayerEntity player)
@@ -102,9 +109,9 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements ITile
 	}
 
 	@Override
-	public void readFromNBT(final CompoundNBT compound)
+	public void read(final CompoundNBT compound)
 	{
-		super.readFromNBT(compound);
+		super.read(compound);
 
 		if (compound.contains("controller"))
 		{
@@ -113,9 +120,9 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements ITile
 	}
 
 	@Override
-	public CompoundNBT writeToNBT(final CompoundNBT compound)
+	public CompoundNBT write(final CompoundNBT compound)
 	{
-		super.writeToNBT(compound);
+		super.write(compound);
 
 		compound.put("controller", NBTHelper.writeBlockPos(this.controllerPosOffset));
 

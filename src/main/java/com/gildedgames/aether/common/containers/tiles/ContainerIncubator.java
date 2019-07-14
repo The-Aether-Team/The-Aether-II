@@ -7,12 +7,14 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.api.distmarker.Dist;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class ContainerIncubator extends Container
 {
@@ -23,8 +25,10 @@ public class ContainerIncubator extends Container
 
 	private int eggTimer;
 
-	public ContainerIncubator(final PlayerInventory playerInventory, final IInventory coolerInventory)
+	public ContainerIncubator(int id, final PlayerInventory playerInventory, final IInventory coolerInventory)
 	{
+		super(type, id);
+
 		this.tile = coolerInventory;
 
 		this.addSlot(new SlotAmbrosiumChunk(this.tile, 0, 80, 52));
