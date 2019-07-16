@@ -77,7 +77,7 @@ public class LayerSwetLatch extends LayerBipedArmor
 
 			this.renderer.bindTexture(swet.getSwetType().texture_jelly);
 
-			GlStateManager.color(1.0F, 1.0F, 1.0F, .7F);
+			GlStateManager.color4f(1.0F, 1.0F, 1.0F, .7F);
 			GlStateManager.enableNormalize();
 			GlStateManager.enableBlend();
 			GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);

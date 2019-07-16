@@ -43,7 +43,7 @@ public class EntityRendererHelper
 				f9 = f9 * 0.96F + 0.03F;
 				f10 = f10 * 0.96F + 0.03F;
 
-				if (world.provider.getDimensionType().getId() == 1)
+				if (world.getDimension().getType().getId() == 1)
 				{
 					f8 = 0.22F + f3 * 0.75F;
 					f9 = 0.28F + f6 * 0.75F;

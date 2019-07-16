@@ -15,9 +15,11 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.container.ClickType;
 import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 
+import javax.annotation.Nullable;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -35,8 +37,10 @@ public class ContainerTrade extends Container
 
 	private boolean sentError = false;
 
-	public ContainerTrade(final PlayerInventory playerInventory)
+	public ContainerTrade(@Nullable ContainerType<?> type, int id, final PlayerInventory playerInventory)
 	{
+		super(type, id);
+
 		this.playerInventory = playerInventory;
 		this.tradeModule = PlayerAether.getPlayer(playerInventory.player).getModule(PlayerTradeModule.class);
 

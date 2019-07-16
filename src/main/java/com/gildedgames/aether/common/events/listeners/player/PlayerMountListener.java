@@ -33,7 +33,7 @@ public class PlayerMountListener
 			final IMount mount = (IMount) target;
 			final IMountProcessor processor = mount.getMountProcessor();
 
-			if (processor.canBeMounted(target) && !event.getEntityPlayer().isRiding()
+			if (processor.canBeMounted(target) && !event.getEntityPlayer().isPassenger()
 					&& processor.canProcessMountInteraction(event.getTarget(), event.getEntityPlayer()))
 			{
 				if (target.getPassengers().contains(event.getEntityPlayer()))

@@ -9,46 +9,51 @@ import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 
 import java.util.List;
 
 public class ToolTipCurrencyHelper
 {
-	private final List<String> cachedText = Lists.newArrayList();
+	private final List<ITextComponent> cachedText = Lists.newArrayList();
 
 	private double lastValue;
 
 	private static final ResourceLocation[] resourceMap = new ResourceLocation[] { GuiCoins.GILTAENI, GuiCoins.GILTAEN, GuiCoins.GILTAE, GuiCoins.GILT };
 
-	public List<String> getText(double value)
+	public List<ITextComponent> getText(double value)
 	{
 		if (value != this.lastValue)
 		{
 			this.cachedText.clear();
 
 			int[] brokenUp = PlayerCurrencyModule.breakUpCurrency((long) value);
+
 			boolean newLine = false;
-			String curLine = "";
+
+			StringBuilder curLine = new StringBuilder();
 
 			for (int cur : brokenUp)
 			{
 				if (cur > 0)
 				{
-					curLine += (newLine ? "    " : "   ") + cur;
+					curLine.append(newLine ? "    " : "   ").append(cur);
 
 					if (newLine)
 					{
-						this.cachedText.add(curLine);
-						curLine = "";
+						this.cachedText.add(new StringTextComponent(curLine.toString()));
+
+						curLine = new StringBuilder();
 					}
 
 					newLine = !newLine;
 				}
 			}
 
-			if (!curLine.isEmpty() && newLine)
+			if ((curLine.length() > 0) && newLine)
 			{
-				this.cachedText.add(curLine);
+				this.cachedText.add(new StringTextComponent(curLine.toString()));
 			}
 
 			this.lastValue = value;
@@ -83,10 +88,10 @@ public class ToolTipCurrencyHelper
 					GlStateManager.enableBlend();
 					GlStateManager.disableRescaleNormal();
 					GlStateManager.disableLighting();
-					GlStateManager.color(1, 1, 1, 1);
+					GlStateManager.color4f(1, 1, 1, 1);
 
 					textureManager.bindTexture(resourceMap[i]);
-					AbstractGui.drawModalRectWithCustomSizedTexture(x2, y2, 0, 0, 7, 7, 7, 7);
+					AbstractGui.blit(x2, y2, 0, 0, 7, 7, 7, 7);
 
 					GlStateManager.popMatrix();
 

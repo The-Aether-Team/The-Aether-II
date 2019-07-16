@@ -1,4 +1,4 @@
-package com.gildedgames.aether.client.gui;
+package com.gildedgames.aether.client.gui.overlays;
 
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectPool;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
@@ -7,10 +7,9 @@ import com.gildedgames.aether.common.AetherCore;
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
-import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.ResourceLocation;
 
-public class EffectSystemOverlay extends AbstractGui
+public class OverlayEffectSystem extends AbstractGui
 {
 	private static final ResourceLocation BAR_OUTLINE = AetherCore.getResource("textures/gui/overlay/effects/bar_outline.png");
 	private static final ResourceLocation BAR_BUILDUP = AetherCore.getResource("textures/gui/overlay/effects/buildup_bar.png");
@@ -29,76 +28,78 @@ public class EffectSystemOverlay extends AbstractGui
 	private final int BAR_TEXTURE_WIDTH = 20;
 	private final int BAR_TEXTURE_HEIGHT = 3;
 
-	public void render(Minecraft mc)
+	private final Minecraft minecraft;
+
+	public OverlayEffectSystem(Minecraft minecraft)
 	{
-		ScaledResolution res = new ScaledResolution(mc);
+		this.minecraft = minecraft;
+	}
 
-		IAetherStatusEffectPool statusEffectPool = mc.player.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
+	public void render()
+	{
+		IAetherStatusEffectPool statusEffectPool = this.minecraft.player.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null)
+				.orElseThrow(NullPointerException::new);
 
-		if (statusEffectPool != null)
+		int numOfEffectsApplied = 0;
+
+		for (IAetherStatusEffects effect : statusEffectPool.getPool().values())
 		{
-
-			int numOfEffectsApplied = 0;
-
-			for (IAetherStatusEffects effect : statusEffectPool.getPool().values())
+			if (effect != null)
 			{
-				if (effect != null)
-				{
-					if (effect.getBuildup() > 0)
-					{
-						numOfEffectsApplied++;
-					}
-				}
-			}
-
-			float xPos = (res.getScaledWidth() / 2.0F) - (12.f * numOfEffectsApplied) + 4f;
-			float yPos = 2f;
-			int barWidth = 0;
-			float yPosShift = 6.0F;
-
-			int i = 0;
-
-			for (IAetherStatusEffects effect : statusEffectPool.getPool().values())
-			{
-				if (effect == null)
-				{
-					continue;
-				}
-
 				if (effect.getBuildup() > 0)
 				{
-					if (!effect.getIsEffectApplied())
-					{
-						this.renderBar(mc, BAR_OUTLINE, 22, 5, this.BAR_OUTLINE_TEXTURE_WIDTH, this.BAR_OUTLINE_TEXTURE_HEIGHT, xPos + (i * 23.f), yPos,
-								false, effect);
+					numOfEffectsApplied++;
+				}
+			}
+		}
 
-						barWidth = effect.getBuildup() / 5;
+		float xPos = (this.minecraft.mainWindow.getScaledWidth() / 2.0F) - (12.f * numOfEffectsApplied) + 4f;
+		float yPos = 2f;
+		int barWidth;
+		float yPosShift;
 
-						this.renderBar(mc, BAR_BUILDUP, barWidth, 3, this.BAR_TEXTURE_WIDTH, this.BAR_TEXTURE_HEIGHT, (xPos + 1F) + (i * 23.f), (yPos + 1F),
-								true, effect);
+		int i = 0;
 
-						yPosShift = 6.0F;
-					}
-					else {
-						yPosShift = 2.0f;
-					}
+		for (IAetherStatusEffects effect : statusEffectPool.getPool().values())
+		{
+			if (effect == null)
+			{
+				continue;
+			}
 
-					this.renderIcon(mc, this.getEffectIconFromType(effect.getEffectType()), 16,16,16,16,xPos + 2f + (i * 23.f),yPos+yPosShift);
-					i++;
+			if (effect.getBuildup() > 0)
+			{
+				if (!effect.getIsEffectApplied())
+				{
+					this.renderBar(BAR_OUTLINE, 22, 5, this.BAR_OUTLINE_TEXTURE_WIDTH, this.BAR_OUTLINE_TEXTURE_HEIGHT, xPos + (i * 23.f), yPos,
+							false, effect);
+
+					barWidth = effect.getBuildup() / 5;
+
+					this.renderBar(BAR_BUILDUP, barWidth, 3, this.BAR_TEXTURE_WIDTH, this.BAR_TEXTURE_HEIGHT, (xPos + 1F) + (i * 23.f), (yPos + 1F),
+							true, effect);
+
+					yPosShift = 6.0F;
+				}
+				else {
+					yPosShift = 2.0f;
 				}
 
+				this.renderIcon(this.getEffectIconFromType(effect.getEffectType()), 16,16,16,16,xPos + 2f + (i * 23.f),yPos+yPosShift);
+				i++;
 			}
+
 		}
 	}
 
-	private void renderBar(Minecraft mc, ResourceLocation texture, int width, int height, int textureWidth, int textureHeight, float x, float y, boolean doColor, IAetherStatusEffects effect)
+	private void renderBar(ResourceLocation texture, int width, int height, int textureWidth, int textureHeight, float x, float y, boolean doColor, IAetherStatusEffects effect)
 	{
 		GlStateManager.pushMatrix();
 
 		GlStateManager.enableBlend();
 		GlStateManager.disableRescaleNormal();
 
-		mc.getTextureManager().bindTexture(texture);
+		this.minecraft.getTextureManager().bindTexture(texture);
 		GlStateManager.translatef(x,y,0.0f);
 
 		if (doColor)
@@ -111,27 +112,27 @@ public class EffectSystemOverlay extends AbstractGui
 			b = Color.getColorFromEffect(effect.getEffectType()).b / 255.F;
 			a = 1.f;
 
-			GlStateManager.color(r,g,b,a);
+			GlStateManager.color4f(r,g,b,a);
 		}
 
-		AbstractGui.drawModalRectWithCustomSizedTexture(0,0,0, 0, width, height, textureWidth, textureHeight);
+		AbstractGui.blit(0,0,0, 0, width, height, textureWidth, textureHeight);
 
-		GlStateManager.color(1,1,1,1);
+		GlStateManager.color4f(1,1,1,1);
 
 		GlStateManager.popMatrix();
 	}
 
-	private void renderIcon(Minecraft mc, ResourceLocation texture, int width, int height, int textureWidth, int textureHeight, float x, float y)
+	private void renderIcon(ResourceLocation texture, int width, int height, int textureWidth, int textureHeight, float x, float y)
 	{
 		GlStateManager.pushMatrix();
 
 		GlStateManager.enableBlend();
 		GlStateManager.disableRescaleNormal();
 
-		mc.getTextureManager().bindTexture(texture);
+		this.minecraft.getTextureManager().bindTexture(texture);
 		GlStateManager.translatef(x,y,0.0f);
 
-		AbstractGui.drawModalRectWithCustomSizedTexture(0,0,0, 0, width, height, textureWidth, textureHeight);
+		AbstractGui.blit(0,0,0, 0, width, height, textureWidth, textureHeight);
 
 		GlStateManager.popMatrix();
 	}

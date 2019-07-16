@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.containers.tiles;
 
+import com.gildedgames.aether.common.containers.ContainerTypesAether;
 import com.gildedgames.aether.common.containers.slots.SlotCoolerOutput;
 import com.gildedgames.aether.common.containers.slots.SlotCoolingItem;
 import com.gildedgames.aether.common.containers.slots.SlotIrradiatedItem;
@@ -7,98 +8,51 @@ import com.gildedgames.aether.common.entities.tiles.TileEntityIcestoneCooler;
 import com.gildedgames.aether.common.recipes.CoolerRecipes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.container.ContainerType;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.api.distmarker.Dist;
-
-import javax.annotation.Nullable;
+import net.minecraft.util.IIntArray;
+import net.minecraft.util.IntArray;
 
 public class ContainerIcestoneCooler extends Container
 {
 	private final IInventory tileCooler;
 
-	private int coolTime;
+	private final IIntArray fields;
 
-	private int totalCoolTime;
-
-	private int coolerCoolTime;
-
-	private int currentItemCoolTime;
-
-	public ContainerIcestoneCooler(int id, TileEntityIcestoneCooler coolerInventory, PlayerInventory playerInventory)
+	public ContainerIcestoneCooler(int id, PlayerInventory playerInventory, IInventory coolerInventory, IIntArray fields)
 	{
-		super(type, id);
+		super(ContainerTypesAether.ICESTONE_COOLER, id);
+
+		this.fields = fields;
+
+		this.func_216961_a(fields);
 
 		this.tileCooler = coolerInventory;
+
 		this.addSlot(new SlotIrradiatedItem(coolerInventory, 0, 56, 17, 0));
 		this.addSlot(new SlotCoolingItem(coolerInventory, 1, 56, 53, 1));
 		this.addSlot(new SlotCoolerOutput(coolerInventory, 2, 116, 35, 2));
 
-		for (int i = 0; i < 3; ++i)
+		for (int y = 0; y < 3; ++y)
 		{
-			for (int j = 0; j < 9; ++j)
+			for (int x = 0; x < 9; ++x)
 			{
-				this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+				this.addSlot(new Slot(playerInventory, x + y * 9 + 9, 8 + x * 18, 84 + y * 18));
 			}
 		}
 
-		for (int k = 0; k < 9; ++k)
+		for (int i = 0; i < 9; ++i)
 		{
-			this.addSlot(new Slot(playerInventory, k, 8 + k * 18, 142));
+			this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
 		}
 	}
 
-	@Override
-	public void addListener(final IContainerListener listener)
+	public ContainerIcestoneCooler(int id, PlayerInventory playerInventory)
 	{
-		super.addListener(listener);
-		listener.sendAllWindowProperties(this, this.tileCooler);
-	}
-
-	@Override
-	public void detectAndSendChanges()
-	{
-		super.detectAndSendChanges();
-		for (final IContainerListener iContainerListener : this.listeners)
-		{
-			if (this.coolerCoolTime != this.tileCooler.getField(0))
-			{
-				iContainerListener.sendWindowProperty(this, 0, this.tileCooler.getField(0));
-			}
-
-			if (this.currentItemCoolTime != this.tileCooler.getField(1))
-			{
-				iContainerListener.sendWindowProperty(this, 1, this.tileCooler.getField(1));
-			}
-
-			if (this.coolTime != this.tileCooler.getField(2))
-			{
-				iContainerListener.sendWindowProperty(this, 2, this.tileCooler.getField(2));
-			}
-
-			if (this.totalCoolTime != this.tileCooler.getField(3))
-			{
-				iContainerListener.sendWindowProperty(this, 3, this.tileCooler.getField(3));
-			}
-
-			this.coolerCoolTime = this.tileCooler.getField(0);
-			this.currentItemCoolTime = this.tileCooler.getField(1);
-			this.coolTime = this.tileCooler.getField(2);
-			this.totalCoolTime = this.tileCooler.getField(3);
-
-		}
-	}
-
-	@Override
-	@OnlyIn(Dist.CLIENT)
-	public void updateProgressBar(final int id, final int data)
-	{
-		this.tileCooler.setField(id, data);
+		this(id, playerInventory, new Inventory(3), new IntArray(4));
 	}
 
 	@Override
@@ -143,14 +97,14 @@ public class ContainerIcestoneCooler extends Container
 						return ItemStack.EMPTY;
 					}
 				}
-				else if (index >= 3 && index < 30)
+				else if (index < 30)
 				{
 					if (!this.mergeItemStack(itemstack1, 30, 39, false))
 					{
 						return ItemStack.EMPTY;
 					}
 				}
-				else if (index >= 30 && index < 39 && !this.mergeItemStack(itemstack1, 3, 30, false))
+				else if (index < 39 && !this.mergeItemStack(itemstack1, 3, 30, false))
 				{
 					return ItemStack.EMPTY;
 				}
@@ -180,4 +134,28 @@ public class ContainerIcestoneCooler extends Container
 		return itemstack;
 	}
 
+	public boolean isCooling()
+	{
+		return this.getCoolerCoolTime() > 0;
+	}
+
+	public int getCoolerCoolTime()
+	{
+		return this.fields.get(0);
+	}
+
+	public int getCurrentItemCoolTime()
+	{
+		return this.fields.get(1);
+	}
+
+	public int getCoolTime()
+	{
+		return this.fields.get(2);
+	}
+
+	public int getTotalCoolTime()
+	{
+		return this.fields.get(3);
+	}
 }

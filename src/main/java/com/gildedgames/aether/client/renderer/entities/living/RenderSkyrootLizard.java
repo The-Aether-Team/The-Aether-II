@@ -60,7 +60,7 @@ public class RenderSkyrootLizard extends LivingRenderer<EntitySkyrootLizard>
 			int green = (color >> 8) & 0xFF;
 			int blue = color & 0xFF;
 
-			GlStateManager.color(red / 255f, green / 255f, blue / 255f, 1f);
+			GlStateManager.color4f(red / 255f, green / 255f, blue / 255f, 1f);
 		}
 
 		model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);

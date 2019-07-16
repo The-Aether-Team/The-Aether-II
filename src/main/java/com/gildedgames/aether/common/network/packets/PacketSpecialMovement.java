@@ -2,7 +2,6 @@ package com.gildedgames.aether.common.network.packets;
 
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerAbilitiesModule;
-import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerRollMovementModule;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.PlayerEntity;
@@ -54,14 +53,7 @@ public class PacketSpecialMovement implements IMessage
 			{
 				case EXTRA_JUMP:
 					aePlayer.getModule(PlayerAbilitiesModule.class).performMidAirJump();
-				case ROLL_FORWARD:
-					aePlayer.getModule(PlayerRollMovementModule.class).startRolling(message.action);
-				case ROLL_BACK:
-					aePlayer.getModule(PlayerRollMovementModule.class).startRolling(message.action);
-				case ROLL_LEFT:
-					aePlayer.getModule(PlayerRollMovementModule.class).startRolling(message.action);
-				case ROLL_RIGHT:
-					aePlayer.getModule(PlayerRollMovementModule.class).startRolling(message.action);
+					break;
 			}
 
 			return null;

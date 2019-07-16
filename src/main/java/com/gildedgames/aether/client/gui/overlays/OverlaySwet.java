@@ -6,15 +6,14 @@ import com.gildedgames.aether.common.entities.monsters.EntitySwet;
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
-import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.ResourceLocation;
 
-public class SwetOverlay implements IOverlay
+public class OverlaySwet implements IOverlay
 {
 
 	private final Minecraft mc = Minecraft.getInstance();
 
-	public SwetOverlay()
+	public OverlaySwet()
 	{
 
 	}
@@ -68,12 +67,10 @@ public class SwetOverlay implements IOverlay
 
 	private void drawSwet(final EntitySwet.Type type)
 	{
-		final ScaledResolution scaledRes = new ScaledResolution(this.mc);
-
-		final int y = scaledRes.getScaledHeight() - 64;
+		final int y = this.mc.mainWindow.getScaledHeight() - 64;
 
 		this.drawCorner(0, y, type.left1, type.left2, 2.0F);
-		this.drawCorner((int) (scaledRes.getScaledWidth() - (64 * 2.0F)), y, type.right1, type.right2, 2.0F);
+		this.drawCorner((int) (this.mc.mainWindow.getScaledWidth() - (64 * 2.0F)), y, type.right1, type.right2, 2.0F);
 	}
 
 	private void drawCorner(final int x, final int y, final ResourceLocation corner1, final ResourceLocation corner2, final float scale)
@@ -97,24 +94,24 @@ public class SwetOverlay implements IOverlay
 
 		GlStateManager.depthMask(true);
 
-		final double width = 64;
-		final double height = 64;
+		final float width = 64;
+		final float height = 64;
 
 		GlStateManager.translatef(x, y, 0);
 		GlStateManager.translatef(0, -((height * scale) - height), 0);
 
 		GlStateManager.scalef(scale, scale, 0);
 
-		GlStateManager.color(1.0F, 1.0F, 1.0F, alpha);
+		GlStateManager.color4f(1.0F, 1.0F, 1.0F, alpha);
 
 		this.mc.getTextureManager().bindTexture(texture);
 
-		AbstractGui.drawModalRectWithCustomSizedTexture(0, 0, 0, 0, 64, 64, 64, 64);
+		AbstractGui.blit(0, 0, 0, 0, 64, 64, 64, 64);
 
 		GlStateManager.disableBlend();
 		GlStateManager.enableAlphaTest();
 
-		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+		GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 
 		GlStateManager.popMatrix();
 	}

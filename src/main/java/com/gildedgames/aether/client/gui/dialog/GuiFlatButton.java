@@ -10,42 +10,32 @@ import java.awt.*;
 public class GuiFlatButton extends Button
 {
 
-	public GuiFlatButton(final int buttonId, final int x, final int y, int widthIn, int heightIn, String displayString)
+	public GuiFlatButton(final int x, final int y, int widthIn, int heightIn, String displayString, IPressable callback)
 	{
-		super(buttonId, x, y, widthIn, heightIn, displayString);
-	}
-
-	public void setText(String text)
-	{
-		this.displayString = text;
-	}
-
-	public String getText()
-	{
-		return this.displayString;
+		super(x, y, widthIn, heightIn, displayString, callback);
 	}
 
 	@Override
-	public void drawButton(final Minecraft mc, final int mouseX, final int mouseY, final float partialTicks)
+	public void render(final int mouseX, final int mouseY, final float partialTicks)
 	{
 		if (this.visible)
 		{
-			this.hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width
+			this.isHovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width
 					&& mouseY < this.y + this.height;
 
-			AbstractGui.drawRect(this.x, this.y,
-					this.x + this.width, this.y + this.height, this.enabled ? (this.hovered ? Integer.MAX_VALUE : Integer.MIN_VALUE) : new Color(100, 100, 100, 100).getRGB());
+			AbstractGui.fill(this.x, this.y,
+					this.x + this.width, this.y + this.height, this.active ? (this.isHovered ? Integer.MAX_VALUE : Integer.MIN_VALUE) : new Color(100, 100, 100, 100).getRGB());
 
-			this.hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width
+			this.isHovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width
 					&& mouseY < this.y + this.height;
 
 			final FontRenderer fontRenderer = Minecraft.getInstance().fontRenderer;
 
-			final String label = this.getText();
+			final String label = this.getMessage();
 
 			this.width = fontRenderer.getStringWidth(label) + 5;
 
-			this.drawString(fontRenderer, label, this.x + 3, this.y + 3, this.enabled ? 0xFFFFFF : 0x2D2D2D);
+			this.drawString(fontRenderer, label, this.x + 3, this.y + 3, this.active ? 0xFFFFFF : 0x2D2D2D);
 		}
 	}
 

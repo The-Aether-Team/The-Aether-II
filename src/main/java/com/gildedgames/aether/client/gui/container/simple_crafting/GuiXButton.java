@@ -11,21 +11,21 @@ public class GuiXButton extends Button
 
 	private static final ResourceLocation X_BUTTON = AetherCore.getResource("textures/gui/inventory/x_button.png");
 
-	public GuiXButton(int buttonId, int x, int y)
+	public GuiXButton(int x, int y, IPressable pressable)
 	{
-		super(buttonId, x, y, 9, 9, "");
+		super(x, y, 9, 9, "", pressable);
 	}
 
 	@Override
-	public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks)
+	public void render(int mouseX, int mouseY, float partialTicks)
 	{
 		if (this.visible)
 		{
-			this.hovered =
+			this.isHovered =
 					mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
 
 			Minecraft.getInstance().getTextureManager().bindTexture(X_BUTTON);
-			AbstractGui.drawModalRectWithCustomSizedTexture(this.x, this.y, 0, 0, 9, 9, 9, 9);
+			AbstractGui.blit(this.x, this.y, 0, 0, 9, 9, 9, 9);
 		}
 	}
 

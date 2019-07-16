@@ -17,7 +17,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.LockableTileEntity;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.IIntArray;
 import net.minecraft.util.NonNullList;
@@ -41,7 +40,7 @@ public class TileEntityIcestoneCooler extends LockableTileEntity implements ITic
 
 	private int coolTime;
 
-	protected final IIntArray fields = new IIntArray()
+	private final IIntArray fields = new IIntArray()
 	{
 		@Override
 		public int get(int id)
@@ -56,9 +55,9 @@ public class TileEntityIcestoneCooler extends LockableTileEntity implements ITic
 					return TileEntityIcestoneCooler.this.coolTime;
 				case 3:
 					return TileEntityIcestoneCooler.this.totalCoolTime;
-				default:
-					return 0;
 			}
+
+			throw new IndexOutOfBoundsException();
 		}
 
 		@Override
@@ -74,7 +73,10 @@ public class TileEntityIcestoneCooler extends LockableTileEntity implements ITic
 					break;
 				case 2:
 					TileEntityIcestoneCooler.this.coolTime = value;
+					break;
 			}
+
+			throw new IndexOutOfBoundsException();
 		}
 
 		@Override
@@ -87,12 +89,6 @@ public class TileEntityIcestoneCooler extends LockableTileEntity implements ITic
 	public TileEntityIcestoneCooler()
 	{
 		super(TileEntityTypesAether.ICESTONE_COOLER);
-	}
-
-	@OnlyIn(Dist.CLIENT)
-	public static boolean isCooling(TileEntityIcestoneCooler tile)
-	{
-		return tile.coolerCoolTime > 0;
 	}
 
 	public static boolean isItemCooling(ItemStack stack)
@@ -312,7 +308,7 @@ public class TileEntityIcestoneCooler extends LockableTileEntity implements ITic
 	@Override
 	public Container createMenu(int id, PlayerInventory inventory)
 	{
-		return new ContainerIcestoneCooler(id,this, inventory);
+		return new ContainerIcestoneCooler(id, inventory, this, this.fields);
 	}
 
 	@Override

@@ -23,9 +23,9 @@ public class GuiRequiredMaterial extends Button
 
 	private ItemStack displayStack;
 
-	public GuiRequiredMaterial(int buttonId, int x, int y, ItemStack stack)
+	public GuiRequiredMaterial(int x, int y, ItemStack stack, IPressable pressable)
 	{
-		super(buttonId, x, y, 18, 18, "");
+		super(x, y, 18, 18, "", pressable);
 
 		this.setRequiredObject(stack);
 	}
@@ -69,18 +69,18 @@ public class GuiRequiredMaterial extends Button
 	}
 
 	@Override
-	public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks)
+	public void render(int mouseX, int mouseY, float partialTicks)
 	{
 		//super.drawButton(mc, mouseX, mouseY);
 
 		if (this.visible && this.displayStack != null)
 		{
-			this.hovered =
+			this.isHovered =
 					mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
 
 			GlStateManager.enableRescaleNormal();
 			RenderHelper.enableGUIStandardItemLighting();
-			GlStateManager.enableDepth();
+			GlStateManager.enableDepthTest();
 
 			Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(this.displayStack, this.x + 1, this.y + 1);
 
@@ -100,7 +100,7 @@ public class GuiRequiredMaterial extends Button
 						this.x + 12 + xOffset, this.y + this.height - 8, 0xFFFFFF);
 			}
 
-			if (this.hovered)
+			if (this.isHovered)
 			{
 				Screen gui = Minecraft.getInstance().currentScreen;
 
@@ -119,7 +119,7 @@ public class GuiRequiredMaterial extends Button
 	}
 
 	@Override
-	public void playPressSound(SoundHandler soundHandlerIn)
+	public void playDownSound(SoundHandler soundHandlerIn)
 	{
 
 	}

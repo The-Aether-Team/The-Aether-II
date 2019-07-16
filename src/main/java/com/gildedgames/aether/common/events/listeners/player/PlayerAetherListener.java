@@ -54,7 +54,7 @@ public class PlayerAetherListener
 		final PlayerAether aePlayer = PlayerAether.getPlayer((PlayerEntity) event.getEntity());
 		aePlayer.onDeath(event);
 
-		if (aePlayer.getEntity().world.provider.getDimensionType() == DimensionsAether.AETHER)
+		if (aePlayer.getEntity().world.getDimension().getType() == DimensionsAether.AETHER)
 		{
 			aePlayer.getModule(PlayerCampfiresModule.class).setDeathPos(new BlockPosDimension(event.getEntity().getPosition(), aePlayer.getEntity().dimension));
 		}

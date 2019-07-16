@@ -1,9 +1,8 @@
 package com.gildedgames.aether.client.events.listeners.gui;
 
 import com.gildedgames.aether.api.registrar.ItemsAether;
-import com.gildedgames.aether.client.gui.DamageSystemOverlay;
-import com.gildedgames.aether.client.gui.EffectSystemOverlay;
-import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.client.gui.overlays.OverlayDamageSystem;
+import com.gildedgames.aether.client.gui.overlays.OverlayEffectSystem;
 import com.gildedgames.aether.common.init.DimensionsAether;
 import com.gildedgames.aether.common.items.weapons.ItemDart;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
@@ -11,26 +10,23 @@ import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemCrossbow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.potion.Effects;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.GuiIngameForge;
+import net.minecraft.potion.Effects;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.api.distmarker.Dist;
 
 @Mod.EventBusSubscriber(Dist.CLIENT)
 public class GuiHudListener
 {
 	private static final Minecraft mc = Minecraft.getInstance();
 
-	private static final DamageSystemOverlay DAMAGE_SYSTEM_OVERLAY = new DamageSystemOverlay();
+	private static final OverlayDamageSystem DAMAGE_SYSTEM_OVERLAY = new OverlayDamageSystem(mc);
 
-	private static final EffectSystemOverlay EFFECT_SYSTEM_OVERLAY = new EffectSystemOverlay();
-
-	private static int old_left_height, old_right_height;
+	private static final OverlayEffectSystem EFFECT_SYSTEM_OVERLAY = new OverlayEffectSystem(mc);
 
 	/**
 	 * Adds client-side modifiers for the damage system rendering so crossbows
@@ -79,16 +75,7 @@ public class GuiHudListener
 	{
 		if (mc.world != null)
 		{
-			if (AetherCore.CONFIG.hideXPBarInAether() && mc.world.provider.getDimensionType() == DimensionsAether.AETHER)
-			{
-				old_left_height = GuiIngameForge.left_height;
-				old_right_height = GuiIngameForge.right_height;
-
-				GuiIngameForge.left_height = 33;
-				GuiIngameForge.right_height = 33;
-			}
-
-			boolean atNecromancerInstance = mc.world.provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER;
+			boolean atNecromancerInstance = mc.world.getDimension().getType() == DimensionsAether.NECROMANCER_TOWER;
 
 			if (atNecromancerInstance && (event.getType() == RenderGameOverlayEvent.ElementType.AIR
 					|| event.getType() == RenderGameOverlayEvent.ElementType.HEALTH
@@ -105,13 +92,7 @@ public class GuiHudListener
 	{
 		if (mc.world != null)
 		{
-			if (AetherCore.CONFIG.hideXPBarInAether() && mc.world.provider.getDimensionType() == DimensionsAether.AETHER)
-			{
-				GuiIngameForge.left_height = old_left_height;
-				GuiIngameForge.right_height = old_right_height;
-			}
-
-			boolean atNecromancerInstance = mc.world.provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER;
+			boolean atNecromancerInstance = mc.world.getDimension().getType() == DimensionsAether.NECROMANCER_TOWER;
 
 			if (atNecromancerInstance && (event.getType() == RenderGameOverlayEvent.ElementType.AIR
 					|| event.getType() == RenderGameOverlayEvent.ElementType.HEALTH
@@ -122,13 +103,11 @@ public class GuiHudListener
 			}
 			else if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR)
 			{
-				DAMAGE_SYSTEM_OVERLAY.renderIcons(mc);
-				EFFECT_SYSTEM_OVERLAY.render(mc);
+				DAMAGE_SYSTEM_OVERLAY.render();
+				EFFECT_SYSTEM_OVERLAY.render();
 			}
 		}
 	}
-
-
 
 	@SubscribeEvent
 	public static void onRenderIngameOverlay(final RenderGameOverlayEvent.Pre event)

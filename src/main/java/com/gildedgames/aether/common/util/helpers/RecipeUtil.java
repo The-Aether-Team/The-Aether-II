@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.util.helpers;
 import com.gildedgames.aether.api.recipes.simple.ISimpleRecipe;
 import com.gildedgames.aether.common.recipes.simple.OreDictionaryRequirement;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -114,7 +115,7 @@ public class RecipeUtil
 		return false;
 	}
 
-	public static boolean canCraft(PlayerEntity player, ISimpleRecipe recipe)
+	public static boolean canCraft(IInventory playerInventory, ISimpleRecipe recipe)
 	{
 		if (recipe == null)
 		{
@@ -137,9 +138,9 @@ public class RecipeUtil
 				amount = ((OreDictionaryRequirement) req).getCount();
 			}
 
-			for (int i = 0; i < player.inventory.mainInventory.size(); i++)
+			for (int i = 0; i < playerInventory.getSizeInventory(); i++)
 			{
-				ItemStack inventoryStack = player.inventory.mainInventory.get(i);
+				ItemStack inventoryStack = playerInventory.getStackInSlot(i);
 
 				if (RecipeUtil.areEqual(req, inventoryStack))
 				{

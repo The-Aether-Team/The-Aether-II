@@ -6,15 +6,14 @@ import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerAb
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketSpecialMovement;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.client.FMLClientHandler;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 @Mod.EventBusSubscriber(Dist.CLIENT)
 public class ClientTickSpecialInputListener
@@ -29,11 +28,10 @@ public class ClientTickSpecialInputListener
 			return;
 		}
 
-		final Minecraft mc = FMLClientHandler.instance().getClient();
+		final Minecraft mc = Minecraft.getInstance();
 
-		final World world = FMLClientHandler.instance().getWorldClient();
-
-		final EntityPlayerSP player = FMLClientHandler.instance().getClientPlayerEntity();
+		final World world = mc.world;
+		final ClientPlayerEntity player = mc.player;
 
 		if (world != null && player != null)
 		{

@@ -67,14 +67,11 @@ public class PlayerAether implements IPlayerAether
 		this.registerModule(new PlayerAbilitiesModule(this));
 		this.registerModule(new PlayerBlockLevitateModule(this));
 		this.registerModule(new PlayerTeleportingModule(this));
-		this.registerModule(new PlayerParachuteModule(this));
 		this.registerModule(new PlayerEquipmentModule(this));
 		this.registerModule(new PlayerDialogModule(this));
 		this.registerModule(new PlayerSwetTrackerModule(this));
 		this.registerModule(new PlayerCampfiresModule(this));
-		this.registerModule(new PlayerPreventDropsModule(this));
 		this.registerModule(new PlayerPatronRewardModule(this));
-		this.registerModule(new PlayerRollMovementModule(this));
 		this.registerModule(new PlayerConfigModule(this));
 		this.registerModule(new PlayerProgressModule(this));
 		this.registerModule(new PlayerCurrencyModule(this));
@@ -170,7 +167,6 @@ public class PlayerAether implements IPlayerAether
 		NetworkingAether.sendPacketToPlayer(new PacketProgressModule(this.getModule(PlayerProgressModule.class)), player);
 		NetworkingAether.sendPacketToPlayer(new PacketSetPlayedIntro(this.getModule(PlayerTeleportingModule.class).hasPlayedIntro()), player);
 		NetworkingAether.sendPacketToPlayer(new PacketCampfires(this.getModule(PlayerCampfiresModule.class).getCampfiresActivated()), player);
-		NetworkingAether.sendPacketToPlayer(new PacketPreventDropsInventories(this.getModule(PlayerPreventDropsModule.class)), player);
 	}
 
 	public void onUpdate()
@@ -240,13 +236,6 @@ public class PlayerAether implements IPlayerAether
 			{
 				event.setCanceled(true);
 			}
-		}
-
-		PlayerRollMovementModule movementModule = this.getModule(PlayerRollMovementModule.class);
-
-		if (movementModule.isRolling())
-		{
-			event.setAmount(movementModule.getDamageReduction(event.getAmount()));
 		}
 	}
 

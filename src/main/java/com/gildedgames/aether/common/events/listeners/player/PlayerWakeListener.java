@@ -17,7 +17,7 @@ public class PlayerWakeListener
 	{
 		final World world = event.getEntityPlayer().world;
 
-		if (!world.isRemote() && world.provider.getDimensionType() == DimensionsAether.AETHER)
+		if (!world.isRemote() && world.getDimension().getType() == DimensionsAether.AETHER)
 		{
 			final MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
 

@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.network.packets;
 
-import com.gildedgames.aether.client.events.listeners.gui.GuiLoadingListener;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
@@ -38,9 +37,6 @@ public class PacketCloseLoadingScreen implements IMessage
 			}
 
 			Minecraft.getInstance().displayGuiScreen(null);
-
-			GuiLoadingListener.setDrawLoading(false);
-			GuiLoadingListener.setDrawBlackScreen(false);
 
 			return null;
 		}

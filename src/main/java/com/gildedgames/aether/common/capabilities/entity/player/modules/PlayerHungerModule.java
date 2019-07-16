@@ -43,7 +43,7 @@ public class PlayerHungerModule extends PlayerAetherModule
 	@Override
 	public void tickStart(TickEvent.PlayerTickEvent event)
 	{
-		if (this.getEntity().world.provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER)
+		if (this.getEntity().world.getDimension().getType() == DimensionsAether.NECROMANCER_TOWER)
 		{
 			this.setFoodData(this.getEntity().getFoodStats(), this.calcBaselineHunger(), 1);
 			this.startHunger = this.getEntity().getFoodStats().getFoodLevel();
@@ -53,7 +53,7 @@ public class PlayerHungerModule extends PlayerAetherModule
 	@Override
 	public void tickEnd(TickEvent.PlayerTickEvent event)
 	{
-		if (this.getEntity().world.provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER)
+		if (this.getEntity().world.getDimension().getType() == DimensionsAether.NECROMANCER_TOWER)
 		{
 			if (event.side == Dist.SERVER)
 			{

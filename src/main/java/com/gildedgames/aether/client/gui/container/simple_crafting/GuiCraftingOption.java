@@ -21,9 +21,9 @@ public class GuiCraftingOption extends Button
 
 	private ISimpleRecipe recipe;
 
-	public GuiCraftingOption(int buttonId, int x, int y, ISimpleRecipe recipe)
+	public GuiCraftingOption(int x, int y, ISimpleRecipe recipe, IPressable callback)
 	{
-		super(buttonId, x, y, 18, 18, "");
+		super(x, y, 18, 18, "", callback);
 
 		this.recipe = recipe;
 	}
@@ -39,25 +39,25 @@ public class GuiCraftingOption extends Button
 	}
 
 	@Override
-	public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks)
+	public void render(int mouseX, int mouseY, float partialTicks)
 	{
 		//super.drawButton(mc, mouseX, mouseY);
 
 		if (this.visible && this.recipe != null)
 		{
-			this.hovered =
+			this.isHovered =
 					mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
 
 			GlStateManager.enableRescaleNormal();
 			RenderHelper.enableGUIStandardItemLighting();
-			GlStateManager.enableDepth();
+			GlStateManager.enableDepthTest();
 
 			Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(this.recipe.getResult(), this.x + 1, this.y + 1);
 
 			RenderHelper.disableStandardItemLighting();
 			GlStateManager.disableRescaleNormal();
 
-			if (this.hovered)
+			if (this.isHovered)
 			{
 				Screen gui = Minecraft.getInstance().currentScreen;
 
@@ -85,16 +85,16 @@ public class GuiCraftingOption extends Button
 				//this.drawString(Minecraft.getInstance().fontRendererObj, count, this.x + 12 + xOffset, this.y + this.height - 8, 0xFFFFFF);
 			}
 
-			if (!RecipeUtil.canCraft(Minecraft.getInstance().player, this.recipe))
+			if (!RecipeUtil.canCraft(Minecraft.getInstance().player.inventory, this.recipe))
 			{
-				mc.getTextureManager().bindTexture(DARK_OVERLAY);
-				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+				Minecraft.getInstance().getTextureManager().bindTexture(DARK_OVERLAY);
+				GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 
 				GlStateManager.enableBlend();
 				GlStateManager.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
 						GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 				GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-				AbstractGui.drawModalRectWithCustomSizedTexture(this.x + 1, this.y + 1, 0, 0, 16, 16, 16, 16);
+				AbstractGui.blit(this.x + 1, this.y + 1, 0, 0, 16, 16, 16, 16);
 			}
 
 			GlStateManager.popMatrix();

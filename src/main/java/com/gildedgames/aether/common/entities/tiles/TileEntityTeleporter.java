@@ -2,7 +2,6 @@ package com.gildedgames.aether.common.entities.tiles;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.world.IWorldObjectHoverable;
-import com.gildedgames.aether.client.events.listeners.gui.GuiLoadingListener;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.containers.BlockAltar;
 import com.gildedgames.aether.common.blocks.multiblock.BlockMultiController;
@@ -23,15 +22,12 @@ import com.gildedgames.orbis.lib.util.TeleporterGeneric;
 import com.gildedgames.orbis.lib.util.mc.BlockPosDimension;
 import com.gildedgames.orbis.lib.world.instances.IInstance;
 import com.gildedgames.orbis.lib.world.instances.IPlayerInstances;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.PlayerList;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -98,7 +94,7 @@ public class TileEntityTeleporter extends TileEntityMultiblockController impleme
 	@Override
 	public boolean onInteract(PlayerEntity player)
 	{
-		if (player.world.provider.getDimensionType() == DimensionsAether.AETHER)
+		if (player.world.getDimension().getType() == DimensionsAether.AETHER)
 		{
 			if (player instanceof ServerPlayerEntity)
 			{
@@ -134,15 +130,6 @@ public class TileEntityTeleporter extends TileEntityMultiblockController impleme
 			{
 				teleportingModule.setPlayedIntro(true);
 				NetworkingAether.sendPacketToServer(new PacketSetPlayedIntro(true));
-			}
-
-			if (!teleportingModule.hasPlayedIntro())
-			{
-				GuiLoadingListener.setDrawBlackScreen(true);
-			}
-			else
-			{
-				GuiLoadingListener.setDrawLoading(true);
 			}
 
 			return true;

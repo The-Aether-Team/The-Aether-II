@@ -27,7 +27,7 @@ public class PlayerRespawnListener
 		final PlayerAether aePlayer = PlayerAether.getPlayer(event.player);
 		aePlayer.onRespawn(event);
 
-		if (event.player instanceof ServerPlayerEntity && ((ServerPlayerEntity) event.player).world.provider.getDimensionType() == DimensionsAether.AETHER)
+		if (event.player instanceof ServerPlayerEntity && ((ServerPlayerEntity) event.player).world.getDimension().getType() == DimensionsAether.AETHER)
 		{
 			BlockPos bedPos = event.player.getBedLocation(((ServerPlayerEntity) event.player).dimension);
 			final ServerPlayerEntity mp = (ServerPlayerEntity) event.player;

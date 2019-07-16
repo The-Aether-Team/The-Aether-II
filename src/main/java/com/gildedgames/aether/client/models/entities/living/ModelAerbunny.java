@@ -125,7 +125,7 @@ public class ModelAerbunny extends EntityModel<EntityAerbunny>
 		float rotation = entity.getRotation();
 		GlStateManager.translatef(0.0F, 1.1F, -0.2F);
 
-		if (!entity.isRiding())
+		if (!entity.isPassenger())
 		{
 			GlStateManager.rotatef(rotation, 20f, 0f, 0f);
 		}
@@ -144,7 +144,7 @@ public class ModelAerbunny extends EntityModel<EntityAerbunny>
 		Animation for the legs, because the rotation for the bunnie's jump is from -30 to 30, offsetting it allows the feet to be in a preset position,
 		and dividing it by a greater number than it will ever become keeps the value < 1f
 		 */
-		if (!entity.onGround && !entity.isRiding())
+		if (!entity.onGround && !entity.isPassenger())
 		{
 			this.leg_front_right.rotateAngleX = (rotation + 20) / 30f;
 			this.leg_front_left.rotateAngleX = (rotation + 20) / 30f;
@@ -180,7 +180,7 @@ public class ModelAerbunny extends EntityModel<EntityAerbunny>
 		this.head.rotateAngleX = headPitch / 57.29578F;
 		this.head.rotateAngleY = netHeadYaw / 57.29578F;
 
-		if (entity.isRiding())
+		if (entity.isPassenger())
 		{
 			this.head.rotateAngleX = MathHelper.clamp(this.head.rotateAngleX * -1, -1.0f, 1.0f);
 		}

@@ -69,7 +69,7 @@ public class ParticlePierce extends Particle
 			float f6 = (float) (this.prevPosY + (this.posY - this.prevPosY) * (double) partialTicks - interpPosY);
 			float f7 = (float) (this.prevPosZ + (this.posZ - this.prevPosZ) * (double) partialTicks - interpPosZ);
 
-			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+			GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 			GlStateManager.disableLighting();
 			RenderHelper.disableStandardItemLighting();
 			buffer.begin(7, VERTEX_FORMAT);

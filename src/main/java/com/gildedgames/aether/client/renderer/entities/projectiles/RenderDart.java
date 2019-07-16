@@ -36,7 +36,7 @@ public class RenderDart extends Render<EntityDart>
 	{
 		this.bindEntityTexture(dart);
 
-		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+		GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 		GlStateManager.pushMatrix();
 
 		GlStateManager.translatef((float) posX, (float) posY, (float) posZ);

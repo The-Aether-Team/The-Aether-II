@@ -18,7 +18,6 @@ import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import org.lwjgl.input.Mouse;
 
 @Mod.EventBusSubscriber(Dist.CLIENT)
 public class GuiTabListener
@@ -29,7 +28,7 @@ public class GuiTabListener
 	@SubscribeEvent
 	public static void onGuiOpen(final GuiOpenEvent event)
 	{
-		if (Minecraft.getInstance().world == null || Minecraft.getInstance().world.provider.getDimensionType() != DimensionsAether.AETHER)
+		if (Minecraft.getInstance().world == null || Minecraft.getInstance().world.getDimension().getType() != DimensionsAether.AETHER)
 		{
 			return;
 		}
@@ -84,9 +83,9 @@ public class GuiTabListener
 	}
 
 	@SubscribeEvent
-	public static void onGuiMouseEvent(final GuiScreenEvent.MouseInputEvent.Pre event)
+	public static void onGuiMouseEvent(final GuiScreenEvent.MouseInputEvent event)
 	{
-		if (Minecraft.getInstance().world == null || Minecraft.getInstance().world.provider.getDimensionType() != DimensionsAether.AETHER)
+		if (Minecraft.getInstance().world == null || Minecraft.getInstance().world.getDimension().getType() != DimensionsAether.AETHER)
 		{
 			return;
 		}
@@ -110,7 +109,7 @@ public class GuiTabListener
 
 				hoveredTab = tabGroupRenderer.getHoveredTab(activeGroup);
 
-				if (Mouse.getEventButtonState() && hoveredTab != null)
+				if (Minecraft.getInstance().mouseHelper.isLeftDown() && hoveredTab != null)
 				{
 					if (hoveredTab != activeGroup.getSelectedTab())
 					{

@@ -5,13 +5,13 @@ import com.gildedgames.aether.common.containers.tiles.ContainerMasonryBench;
 import com.gildedgames.aether.common.recipes.simple.OreDictionaryRequirement;
 import com.gildedgames.aether.common.util.helpers.RecipeUtil;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.inventory.SlotCrafting;
+import net.minecraft.inventory.container.CraftingResultSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ForgeHooks;
 
-public class SlotSimpleCrafting extends SlotCrafting
+public class SlotSimpleCrafting extends CraftingResultSlot
 {
 
 	private ISimpleRecipe recipe;
@@ -20,7 +20,7 @@ public class SlotSimpleCrafting extends SlotCrafting
 
 	private final ContainerMasonryBench container;
 
-	public SlotSimpleCrafting(PlayerEntity player, InventoryCrafting craftingInventory, IInventory inventoryIn, int slotIndex, int xPosition, int yPosition,
+	public SlotSimpleCrafting(PlayerEntity player, CraftingInventory craftingInventory, IInventory inventoryIn, int slotIndex, int xPosition, int yPosition,
 			ContainerMasonryBench container)
 	{
 		super(player, craftingInventory, inventoryIn, slotIndex, xPosition, yPosition);
@@ -48,15 +48,15 @@ public class SlotSimpleCrafting extends SlotCrafting
 		this.recipe = recipe;
 	}
 
-	public int getActualAmountOfReq(PlayerEntity player)
+	public int getActualAmountOfReq(IInventory inventory)
 	{
 		Object req = this.recipe.getRequired()[0];
 
 		int amountSoFar = 0;
 
-		for (int i = 0; i < player.inventory.mainInventory.size(); i++)
+		for (int i = 0; i < inventory.getSizeInventory(); i++)
 		{
-			ItemStack inventoryStack = player.inventory.mainInventory.get(i);
+			ItemStack inventoryStack = inventory.getStackInSlot(i);
 
 			if (RecipeUtil.areEqual(req, inventoryStack))
 			{

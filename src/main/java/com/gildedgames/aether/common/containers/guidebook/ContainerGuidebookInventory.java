@@ -8,13 +8,16 @@ import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerEquipmentModule;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.container.ClickType;
+import net.minecraft.inventory.container.CraftingResultSlot;
+import net.minecraft.inventory.container.PlayerContainer;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerGuidebookInventory extends ContainerPlayer
+public class ContainerGuidebookInventory extends PlayerContainer
 {
-	private static final InventoryBasic dumbInventory = new InventoryBasic("tmp", true, 52);
+	private static final Inventory dumbInventory = new Inventory(52);
 
 	private final IPlayerAether aePlayer;
 
@@ -44,7 +47,7 @@ public class ContainerGuidebookInventory extends ContainerPlayer
 
 			if (!itemstack.isEmpty())
 			{
-				itemstack.getItem().onUpdate(itemstack, this.aePlayer.getEntity().getEntityWorld(), this.aePlayer.getEntity(), i, false);
+				itemstack.getItem().inventoryTick(itemstack, this.aePlayer.getEntity().getEntityWorld(), this.aePlayer.getEntity(), i, false);
 			}
 		}
 	}
@@ -206,7 +209,7 @@ public class ContainerGuidebookInventory extends ContainerPlayer
 		{
 			ItemStack stack = slot.getStack();
 
-			if (!(slot instanceof SlotEquipment) && !(slot instanceof SlotCrafting))
+			if (!(slot instanceof SlotEquipment) && !(slot instanceof CraftingResultSlot))
 			{
 				int destIndex = -1;
 

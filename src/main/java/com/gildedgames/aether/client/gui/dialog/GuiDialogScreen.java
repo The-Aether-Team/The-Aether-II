@@ -4,32 +4,24 @@ import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.dialog.*;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.containers.ContainerDialogController;
-import com.gildedgames.orbis.lib.client.gui.util.gui_library.GuiElement;
-import com.gildedgames.orbis.lib.client.gui.util.gui_library.GuiViewer;
-import com.gildedgames.orbis.lib.client.gui.util.gui_library.IGuiContext;
-import com.gildedgames.orbis.lib.client.rect.Dim2D;
-import com.google.common.collect.Lists;
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
+import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Util;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.util.text.TextFormatting;
-import org.lwjgl.Sys;
-import org.lwjgl.input.Mouse;
+import net.minecraft.util.text.*;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.Map;
 
-public class GuiDialogViewer extends GuiViewer implements IDialogChangeListener
+public class GuiDialogScreen extends ContainerScreen<ContainerDialogController> implements IDialogChangeListener
 {
 
 	private static final ResourceLocation NEXT_ARROW = AetherCore.getResource("textures/gui/conversation/next_arrow.png");
@@ -37,8 +29,6 @@ public class GuiDialogViewer extends GuiViewer implements IDialogChangeListener
 	public static boolean preventDialogControllerClose;
 
 	private final IDialogController controller;
-
-	private final LinkedList<GuiDialogButton> buttons = Lists.newLinkedList();
 
 	private GuiTextBox topTextBox, bottomTextBox, namePlate;
 
@@ -54,34 +44,32 @@ public class GuiDialogViewer extends GuiViewer implements IDialogChangeListener
 
 	private IDialogSlideRenderer renderer;
 
-	private int currentScroll, maxScroll;
+	private double currentScroll, maxScroll;
 
 	private ISceneInstance sceneInstance;
 
-	public GuiDialogViewer(final PlayerEntity player, final IDialogController controller, ISceneInstance sceneInstance)
+	public GuiDialogScreen(ContainerDialogController container, PlayerInventory playerInventory, IDialogController controller, ISceneInstance sceneInstance)
 	{
-		super(new GuiElement(Dim2D.flush(), false), null, new ContainerDialogController(player));
+		super(container, playerInventory, new StringTextComponent("Dialog"));
 
 		this.sceneInstance = sceneInstance;
 
 		this.controller = controller;
 		this.controller.addListener(this);
-
-		this.setDrawDefaultBackground(false);
 	}
 
 	@Override
-	public void drawScreen(final int mouseX, final int mouseY, final float partialTicks)
+	public void render(final int mouseX, final int mouseY, final float partialTicks)
 	{
-		this.drawWorldBackground(0);
+		this.renderBackground(0);
 		net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.client.event.GuiScreenEvent.BackgroundDrawnEvent(this));
 
 		GlStateManager.pushMatrix();
 
-		GlStateManager.disableDepth();
+		GlStateManager.disableDepthTest();
 
 		GlStateManager.translatef(0, 0, 100F);
-		GlStateManager.color(1.0F, 1.0F, 1.0F);
+		GlStateManager.color3f(1.0F, 1.0F, 1.0F);
 
 		if (this.slide != null && this.renderer != null)
 		{
@@ -90,7 +78,7 @@ public class GuiDialogViewer extends GuiViewer implements IDialogChangeListener
 
 		GlStateManager.translatef(0, 0, 100F);
 
-		AbstractGui.drawRect(0, this.height - 90, this.width, this.height, Integer.MIN_VALUE);
+		AbstractGui.fill(0, this.height - 90, this.width, this.height, Integer.MIN_VALUE);
 
 		if (this.maxScroll > 0 && this.controller.isNodeFinished() && this.controller.getCurrentNode().getButtons().size() > 0)
 		{
@@ -98,26 +86,26 @@ public class GuiDialogViewer extends GuiViewer implements IDialogChangeListener
 			int x = (this.width / 2) - (baseBoxSize / 2);
 			int y = this.height - 85;
 
-			AbstractGui.drawRect(x - 17, this.height - 85, x - 7, this.height - 10, Integer.MIN_VALUE);
+			AbstractGui.fill(x - 17, this.height - 85, x - 7, this.height - 10, Integer.MIN_VALUE);
 
 			int scrollYOffset = this.currentScroll == 0 ? 0 : MathHelper.floor((float) this.currentScroll * (55.0F / (float) this.maxScroll));
 
-			AbstractGui.drawRect(x - 17, y + scrollYOffset, x - 7, y + 20 + scrollYOffset, 0x96FFFFFF);
+			AbstractGui.fill(x - 17, y + scrollYOffset, x - 7, y + 20 + scrollYOffset, 0x96FFFFFF);
 		}
 
-		super.drawScreen(mouseX, mouseY, partialTicks);
+		super.render(mouseX, mouseY, partialTicks);
 
-		GlStateManager.enableDepth();
+		GlStateManager.enableDepthTest();
 
 		GlStateManager.popMatrix();
 
-		if (!this.controller.isNodeFinished() || (this.controller.isNodeFinished() && this.node.getButtons().isEmpty()))
+		if (!this.controller.isNodeFinished() || this.node.getButtons().isEmpty())
 		{
 			GlStateManager.pushMatrix();
 
-			GlStateManager.disableDepth();
+			GlStateManager.disableDepthTest();
 
-			final double time = (Sys.getTime() * 1000) / Sys.getTimerResolution();
+			final double time = Util.milliTime();
 			final double timePassed = time - this.prevTime;
 
 			this.prevTime = time;
@@ -131,36 +119,36 @@ public class GuiDialogViewer extends GuiViewer implements IDialogChangeListener
 				this.nextArrowAnim = 0.0;
 			}
 
-			final double anim = this.nextArrowAnim;
+			final float anim = (float) this.nextArrowAnim;
 
 			if (this.nextArrowAnim < 500.0)
 			{
-				GlStateManager.translatef(0, anim / 500.0, 0);
+				GlStateManager.translatef(0, anim / 500.0f, 0);
 			}
 			else if (this.nextArrowAnim >= 500.0)
 			{
-				GlStateManager.translatef(0, -((anim - 500.0) / 500.0), 0);
+				GlStateManager.translatef(0, -((anim - 500.0f) / 500.0f), 0);
 			}
 
 			GlStateManager.translatef(0, 0, 302F);
-			GlStateManager.color(1.0F, 1.0F, 1.0F);
+			GlStateManager.color3f(1.0F, 1.0F, 1.0F);
 
 			Minecraft.getInstance().getTextureManager().bindTexture(NEXT_ARROW);
 
 			if (this.controller.isNodeFinished() && this.controller.getCurrentNode().getButtons().size() > 0)
 			{
-				AbstractGui.drawModalRectWithCustomSizedTexture(
-						this.topTextBox.x + this.topTextBox.width + 5,
-						this.topTextBox.y + this.topTextBox.height - 20, 0, 0, 13, 12, 13, 12);
+				AbstractGui.blit(
+						this.topTextBox.x + this.topTextBox.getWidth() + 5,
+						this.topTextBox.y + this.topTextBox.getHeight() - 20, 0, 0, 13, 12, 13, 12);
 			}
 			else
 			{
-				AbstractGui.drawModalRectWithCustomSizedTexture(
-						this.bottomTextBox.x + this.bottomTextBox.width,
-						this.bottomTextBox.y + this.bottomTextBox.height - 20, 0, 0, 13, 12, 13, 12);
+				AbstractGui.blit(
+						this.bottomTextBox.x + this.bottomTextBox.getWidth(),
+						this.bottomTextBox.y + this.bottomTextBox.getHeight() - 20, 0, 0, 13, 12, 13, 12);
 			}
 
-			GlStateManager.enableDepth();
+			GlStateManager.enableDepthTest();
 
 			GlStateManager.popMatrix();
 		}
@@ -173,13 +161,12 @@ public class GuiDialogViewer extends GuiViewer implements IDialogChangeListener
 	}
 
 	@Override
-	public void drawDefaultBackground()
+	public void renderBackground()
 	{
 
 	}
 
-	@Override
-	protected void actionPerformed(final Button button)
+	private void onDialogButtonPressed(final Button button)
 	{
 		if (button instanceof GuiDialogButton)
 		{
@@ -195,37 +182,28 @@ public class GuiDialogViewer extends GuiViewer implements IDialogChangeListener
 	}
 
 	@Override
-	public void initGui()
+	public void init()
 	{
-		super.initGui();
+		super.init();
 
-		this.buildGui(this.controller.getCurrentNode());
-	}
+		final IDialogNode node1 = this.controller.getCurrentNode();
 
-	private void resetGui()
-	{
-		this.buttonList.clear();
-	}
-
-	private void buildGui(final IDialogNode node)
-	{
-		if (this.node != node)
+		if (this.node != node1)
 		{
 			this.canApplyNextAction = false;
 		}
 
-		this.node = node;
+		this.node = node1;
 
-		this.resetGui();
-
-		if (this.mc == null)
+		if (this.minecraft == null)
 		{
 			return;
 		}
 
-		final Collection<IDialogButton> beforeConditionButtons = node.getButtons();
+		final Collection<IDialogButton> beforeConditionButtons = node1.getButtons();
 
 		int baseBoxSize = 350;
+
 		final boolean resize = this.width - 40 > baseBoxSize;
 
 		if (!resize)
@@ -239,16 +217,24 @@ public class GuiDialogViewer extends GuiViewer implements IDialogChangeListener
 
 			int index = 0;
 
-			for (final IDialogButton btn : beforeConditionButtons)
+			for (final IDialogButton dialogButton : beforeConditionButtons)
 			{
-				if (this.controller.conditionsMet(btn))
+				if (this.controller.conditionsMet(dialogButton))
 				{
-					GuiDialogButton button = new GuiDialogButton(index, (this.width / 2) - (baseBoxSize / 2), this.height - 85 + (index * 20), btn);
+					GuiDialogButton button = new GuiDialogButton((this.width / 2) - (baseBoxSize / 2), this.height - 85 + (index * 20), dialogButton, (_btn) -> {
+						this.controller.activateButton(dialogButton);
+
+						if (this.controller.getCurrentScene() == null)
+						{
+							Minecraft.getInstance().displayGuiScreen(null);
+						}
+					});
 
 					button.visible = false;
-					button.enabled = false;
+					button.active = false;
 
-					this.buttonList.add(button);
+					this.addButton(button);
+
 					this.buttons.add(button);
 
 					index++;
@@ -258,10 +244,8 @@ public class GuiDialogViewer extends GuiViewer implements IDialogChangeListener
 
 		this.currentScroll = 0;
 
-		this.topTextBox = new GuiTextBox(this.buttons.size(),
-				resize ? (this.width / 2) - (baseBoxSize / 2) : 20, this.height - 175, baseBoxSize, 80);
-		this.bottomTextBox = new GuiTextBox(
-				this.buttons.size() + 1, resize ? (this.width / 2) - (baseBoxSize / 2) : 20, this.height - 85, baseBoxSize, 70);
+		this.topTextBox = new GuiTextBox(resize ? (this.width / 2) - (baseBoxSize / 2) : 20, this.height - 175, baseBoxSize, 80);
+		this.bottomTextBox = new GuiTextBox(resize ? (this.width / 2) - (baseBoxSize / 2) : 20, this.height - 85, baseBoxSize, 70);
 
 		this.topTextBox.showBackdrop = true;
 		this.topTextBox.bottomToTop = true;
@@ -319,28 +303,27 @@ public class GuiDialogViewer extends GuiViewer implements IDialogChangeListener
 				this.renderer.setup(this.slide);
 			}
 
-			this.fontRenderer = Minecraft.getInstance().fontRenderer;
+			this.font = Minecraft.getInstance().fontRenderer;
 
 			final boolean topText = this.controller.isNodeFinished() && this.controller.getCurrentNode().getButtons().size() > 0;
 
 			final String name = I18n.format(this.speaker.getUnlocalizedName());
 
 			this.namePlate = new GuiTextBox(
-					this.buttons.size() + 2,
 					resize ? (this.width / 2) - (baseBoxSize / 2) : 20,
-					this.height - (topText ? 122 + this.topTextBox.getTextHeight(this.fontRenderer) : 107),
-					this.fontRenderer.getStringWidth(name + 10), 20);
+					this.height - (topText ? 122 + this.topTextBox.getTextHeight(this.font) : 107),
+					this.font.getStringWidth(name + 10), 20);
 
 			final ITextComponent textComponent = new TranslationTextComponent(name);
 			textComponent.setStyle(new Style().setColor(TextFormatting.YELLOW).setItalic(true));
 
 			this.namePlate.setText(textComponent);
 
-			this.buttonList.add(this.namePlate);
+			this.addButton(this.namePlate);
 		}
 
-		this.buttonList.add(this.topTextBox);
-		this.buttonList.add(this.bottomTextBox);
+		this.addButton(this.topTextBox);
+		this.addButton(this.bottomTextBox);
 	}
 
 	private void nextAction()
@@ -356,25 +339,31 @@ public class GuiDialogViewer extends GuiViewer implements IDialogChangeListener
 	}
 
 	@Override
-	protected void keyTyped(final char typedChar, final int keyCode) throws IOException
+	public boolean keyPressed(int p_keyPressed_1_, int p_keyPressed_2_, int p_keyPressed_3_)
 	{
-		super.keyTyped(typedChar, keyCode);
+		if (!super.keyPressed(p_keyPressed_1_, p_keyPressed_2_, p_keyPressed_3_))
+		{
+			this.nextAction();
+		}
 
-		this.nextAction();
+		return true;
 	}
 
 	@Override
-	protected void mouseReleased(final int mouseX, final int mouseY, final int state)
+	public boolean mouseReleased(double p_mouseReleased_1_, double p_mouseReleased_3_, int p_mouseReleased_5_)
 	{
-		this.nextAction();
+		if (!super.mouseReleased(p_mouseReleased_1_, p_mouseReleased_3_, p_mouseReleased_5_))
+		{
+			this.nextAction();
+		}
 
-		super.mouseReleased(mouseX, mouseY, state);
+		return true;
 	}
 
 	@Override
 	public void onDialogChanged()
 	{
-		this.buildGui(this.controller.getCurrentNode());
+		this.init();
 	}
 
 	@Override
@@ -383,52 +372,48 @@ public class GuiDialogViewer extends GuiViewer implements IDialogChangeListener
 
 	}
 
-	@Override
-	public void build(IGuiContext context)
-	{
-		this.getViewing().dim().mod().width(this.width).height(this.height).flush();
-	}
-
 	private void refreshButtonsWithScroll()
 	{
 		for (int i = 0; i < this.buttons.size(); i++)
 		{
-			GuiDialogButton button = this.buttons.get(i);
+			Widget button = this.buttons.get(i);
 
 			if (i >= this.currentScroll && i <= this.currentScroll + 3)
 			{
-				button.y = this.height - 85 + ((i - this.currentScroll) * 20);
+				button.y = this.height - 85 + ((i - (int) this.currentScroll) * 20);
 
-				button.enabled = true;
+				button.active = true;
 				button.visible = true;
 			}
 			else
 			{
-				button.enabled = false;
+				button.active = false;
 				button.visible = false;
 			}
 		}
 	}
 
 	@Override
-	public void handleMouseInput() throws IOException
+	public boolean mouseScrolled(double p_mouseScrolled_1_, double p_mouseScrolled_3_, double amount)
 	{
-		super.handleMouseInput();
-
-		int scroll = MathHelper.clamp(Mouse.getEventDWheel(), -1, 1);
-
-		if (scroll != 0)
+		if (!super.mouseScrolled(p_mouseScrolled_1_, p_mouseScrolled_3_, amount))
 		{
-			this.currentScroll = MathHelper.clamp(this.currentScroll - scroll, 0, this.maxScroll);
+			if (amount != 0)
+			{
+				this.currentScroll = MathHelper.clamp(this.currentScroll - amount, 0.0, this.maxScroll);
 
-			this.refreshButtonsWithScroll();
+				this.refreshButtonsWithScroll();
+			}
 		}
+
+		return true;
 	}
 
+
 	@Override
-	public void onGuiClosed()
+	public void onClose()
 	{
-		super.onGuiClosed();
+		super.onClose();
 
 		if (this.controller.getCurrentScene() != null)
 		{

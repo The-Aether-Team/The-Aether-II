@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.GuiUtilRenderComponents;
+import net.minecraft.client.gui.RenderComponentsUtil;
 import net.minecraft.util.text.ITextComponent;
 
 import java.util.List;
@@ -22,12 +22,9 @@ public class GuiTextBox extends GuiAbstractButton
 
 	private List<ITextComponent> cachedSplitText = Lists.newArrayList();
 
-	public GuiTextBox(final int elementId, final int x, final int z, final int width, final int height)
+	public GuiTextBox(final int width, final int height, final int x, final int y)
 	{
-		super(elementId, x, z);
-
-		this.width = width;
-		this.height = height;
+		super(x, y, width, height, btn -> { });
 	}
 
 	public ITextComponent getText()
@@ -65,12 +62,12 @@ public class GuiTextBox extends GuiAbstractButton
 	{
 		if (this.text != null)
 		{
-			this.cachedSplitText = GuiUtilRenderComponents.splitText(this.text, this.width - 6, fontRenderer, true, true);
+			this.cachedSplitText = RenderComponentsUtil.splitText(this.text, this.width - 6, fontRenderer, true, true);
 		}
 	}
 
 	@Override
-	public void playPressSound(final SoundHandler soundHandlerIn)
+	public void playDownSound(final SoundHandler soundHandlerIn)
 	{
 		// NO-OP
 	}
@@ -86,13 +83,13 @@ public class GuiTextBox extends GuiAbstractButton
 			{
 				if (this.bottomToTop)
 				{
-					AbstractGui.drawRect(this.x,
+					AbstractGui.fill(this.x,
 							this.y + this.height - (splitCount * fontRenderer.FONT_HEIGHT) - 10,
 							this.x + this.width, this.y + this.height, Integer.MIN_VALUE);
 				}
 				else
 				{
-					AbstractGui.drawRect(this.x, this.y,
+					AbstractGui.fill(this.x, this.y,
 							this.x + this.width, this.y + this.height, Integer.MIN_VALUE);
 				}
 			}
@@ -104,10 +101,10 @@ public class GuiTextBox extends GuiAbstractButton
 
 				if (this.center)
 				{
-					offset = (this.width - fontRenderer.getStringWidth(text.getUnformattedText())) / 2f;
+					offset = (this.width - fontRenderer.getStringWidth(text.getFormattedText())) / 2f;
 				}
 
-				fontRenderer.drawStringWithShadow(text.getUnformattedText(),
+				fontRenderer.drawStringWithShadow(text.getFormattedText(),
 						this.x + offset,
 						this.y + (this.bottomToTop ? this.height - 5 : 5) + index * fontRenderer.FONT_HEIGHT - (this.bottomToTop ?
 								(splitCount * fontRenderer.FONT_HEIGHT) : 0), 0xFFFFFF);

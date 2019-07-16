@@ -39,7 +39,7 @@ public class RenderBolt extends EntityRenderer<EntityBolt>
 	public void doRender(final EntityBolt bolt, final double posX, final double posY, final double posZ, final float entityYaw, final float partialTicks)
 	{
 		this.bindTexture(boltTextures.get(bolt.getBoltType()));
-		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+		GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 
 		GlStateManager.pushMatrix();
 		GlStateManager.disableLighting();

@@ -4,12 +4,11 @@ import com.gildedgames.aether.api.entity.IMount;
 import com.gildedgames.aether.api.entity.IMountProcessor;
 import com.gildedgames.aether.common.entities.mounts.FlyingMount;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ScaledResolution;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
-import net.minecraftforge.api.distmarker.Dist;
 
 @Mod.EventBusSubscriber(Dist.CLIENT)
 public class RenderMountHotbarListener
@@ -19,11 +18,9 @@ public class RenderMountHotbarListener
 	@SubscribeEvent(priority = EventPriority.NORMAL)
 	public static void onRenderGui(final RenderGameOverlayEvent event)
 	{
-		final ScaledResolution scaledRes = new ScaledResolution(mc);
-
 		if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR)
 		{
-			if (mc.player.isRiding())
+			if (mc.player.isPassenger())
 			{
 				if (mc.player.getRidingEntity() instanceof IMount)
 				{
@@ -35,7 +32,7 @@ public class RenderMountHotbarListener
 						final FlyingMount flyingMount = (FlyingMount) processor;
 
 						mc.ingameGUI.drawCenteredString(mc.fontRenderer, String.valueOf((int) (flyingMount.getData().getRemainingAirborneTime())),
-								scaledRes.getScaledWidth() / 2, scaledRes.getScaledHeight() - 30, 0xFFFFFF);
+								mc.mainWindow.getScaledWidth() / 2, mc.mainWindow.getScaledHeight() - 30, 0xFFFFFF);
 					}
 				}
 			}

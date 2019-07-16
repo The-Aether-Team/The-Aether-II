@@ -4,7 +4,9 @@ import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.recipes.simple.ISimpleRecipe;
 import com.gildedgames.aether.api.recipes.simple.ISimpleRecipeGroup;
 import com.gildedgames.aether.client.gui.container.IExtendedContainer;
+import com.gildedgames.aether.client.gui.util.ButtonCallbacks;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.containers.tiles.ContainerMasonryBench;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketMasonryRecipeChanged;
 import com.gildedgames.aether.common.recipes.simple.OreDictionaryRequirement;
@@ -12,10 +14,9 @@ import com.gildedgames.aether.common.util.helpers.RecipeUtil;
 import com.gildedgames.orbis.lib.util.InputHelper;
 import com.google.common.collect.Lists;
 import com.mojang.blaze3d.platform.GlStateManager;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
-import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -24,22 +25,19 @@ import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraftforge.fml.client.config.GuiUtils;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.input.Mouse;
+import net.minecraftforge.fml.client.config.GuiUtils;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
-public class ContainerMasonryBench extends ContainerScreen implements IExtendedContainer
+public class GuiContainerMasonryBench extends ContainerScreen<ContainerMasonryBench> implements IExtendedContainer
 {
 
 	private static final ResourceLocation MASONRY_BENCH = AetherCore.getResource("textures/gui/inventory/masonry_bench.png");
@@ -54,12 +52,9 @@ public class ContainerMasonryBench extends ContainerScreen implements IExtendedC
 
 	private static final ResourceLocation DOWN_ARROW = AetherCore.getResource("textures/gui/inventory/down_arrow.png");
 
-	/** The player inventory bound to this GUI. */
-	private final PlayerInventory playerInventory;
+	private final GuiCraftingOption[] options = new GuiCraftingOption[24];
 
-	private final List<GuiCraftingOption> options = new ArrayList<>(24);
-
-	private final List<GuiRequiredMaterial> materials = new ArrayList<>(9);
+	private final GuiRequiredMaterial[] materials = new GuiRequiredMaterial[9];
 
 	public final List<ISimpleRecipe> recipes = Lists.newArrayList();
 
@@ -82,33 +77,13 @@ public class ContainerMasonryBench extends ContainerScreen implements IExtendedC
 
 	private GuiXButton xButton;
 
-	private ItemStack lastStack;
+	private ItemStack lastStack = ItemStack.EMPTY;
 
 	private GuiCounterButton up, down;
 
-	private final com.gildedgames.aether.common.containers.tiles.ContainerMasonryBench container;
-
-	public ContainerMasonryBench(PlayerEntity player, BlockPos blockPosition)
+	public GuiContainerMasonryBench(ContainerMasonryBench container, PlayerInventory inventory, ITextComponent name)
 	{
-		super(new com.gildedgames.aether.common.containers.tiles.ContainerMasonryBench(player, blockPosition));
-
-		this.playerInventory = player.inventory;
-		this.allowUserInput = true;
-
-		this.container = (com.gildedgames.aether.common.containers.tiles.ContainerMasonryBench) this.inventorySlots;
-	}
-
-	@Override
-	protected void mouseReleased(int mouseX, int mouseY, int state)
-	{
-		super.mouseReleased(mouseX, mouseY, state);
-
-		if ((this.lastStack == null && this.playerInventory.getItemStack() != null) || (this.lastStack != null && this.playerInventory.getItemStack() == null))
-		{
-			this.updateCraftingOptions();
-		}
-
-		this.lastStack = this.playerInventory.getItemStack();
+		super(container, inventory, name);
 	}
 
 	@Override
@@ -122,32 +97,8 @@ public class ContainerMasonryBench extends ContainerScreen implements IExtendedC
 		}
 	}
 
-	@Override
-	protected void actionPerformed(Button button)
+	private void onRecipeButtonClicked(Button button)
 	{
-		if (button.id == 31)
-		{
-			this.currentRecipe = null;
-
-			this.container.onNewRecipe(null);
-			NetworkingAether.sendPacketToServer(new PacketMasonryRecipeChanged(null));
-
-			for (int i = 0; i < 9; i++)
-			{
-				this.materials.get(i).setRequiredObject(null);
-			}
-		}
-
-		if (button.id == 32)
-		{
-			this.container.setInputCount(this.container.getInputCount() + 1);
-		}
-
-		if (button.id == 33)
-		{
-			this.container.setInputCount(this.container.getInputCount() - 1);
-		}
-
 		if (button instanceof GuiCraftingOption)
 		{
 			GuiCraftingOption option = (GuiCraftingOption) button;
@@ -166,36 +117,34 @@ public class ContainerMasonryBench extends ContainerScreen implements IExtendedC
 
 							if (req instanceof ItemStack)
 							{
-								this.materials.get(index).setRequiredObject(req);
+								this.materials[index].setRequiredObject(req);
 							}
 							else if (req instanceof OreDictionaryRequirement)
 							{
 								OreDictionaryRequirement oreReq = (OreDictionaryRequirement) req;
 
-								this.materials.get(index).setRequiredObject(oreReq);
+								this.materials[index].setRequiredObject(oreReq);
 							}
 						}
 						else
 						{
-							this.materials.get(index).setRequiredObject(null);
+							this.materials[index].setRequiredObject(null);
 						}
 					}
 				}
 
 				this.currentRecipe = option.getRecipe();
 
-				com.gildedgames.aether.common.containers.tiles.ContainerMasonryBench container = (com.gildedgames.aether.common.containers.tiles.ContainerMasonryBench) this.inventorySlots;
-
-				container.onNewRecipe(this.currentRecipe);
+				this.container.onNewRecipe(this.currentRecipe);
 
 				NetworkingAether.sendPacketToServer(new PacketMasonryRecipeChanged(this.currentRecipe));
 
-				if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT))
+				if (hasShiftDown())
 				{
 					this.container.setInputCount(64);
 				}
 
-				if (!RecipeUtil.canCraft(Minecraft.getInstance().player, option.getRecipe()) && option.getRecipe() != null)
+				if (!RecipeUtil.canCraft(this.playerInventory, option.getRecipe()) && option.getRecipe() != null)
 				{
 					this.result.setRequiredObject(option.getRecipe().getResult());
 				}
@@ -225,11 +174,11 @@ public class ContainerMasonryBench extends ContainerScreen implements IExtendedC
 
 				if (i1 >= 0 && i1 < this.recipes.size())
 				{
-					this.options.get(l + k * 4).setRecipe(this.recipes.get(i1));
+					this.options[l + k * 4].setRecipe(this.recipes.get(i1));
 				}
 				else
 				{
-					this.options.get(l + k * 4).setRecipe(null);
+					this.options[l + k * 4].setRecipe(null);
 				}
 			}
 		}
@@ -237,7 +186,7 @@ public class ContainerMasonryBench extends ContainerScreen implements IExtendedC
 
 	private boolean canScroll()
 	{
-		return this.recipes.size() > this.options.size();
+		return this.recipes.size() > this.options.length;
 	}
 
 	private void updateCraftingOptions()
@@ -267,7 +216,7 @@ public class ContainerMasonryBench extends ContainerScreen implements IExtendedC
 			}
 		}
 
-		PlayerEntity p = Minecraft.getInstance().player;
+		PlayerEntity p = this.minecraft.player;
 
 		this.recipes.sort((o1, o2) ->
 		{
@@ -297,9 +246,9 @@ public class ContainerMasonryBench extends ContainerScreen implements IExtendedC
 	}
 
 	@Override
-	public void initGui()
+	public void init()
 	{
-		super.initGui();
+		super.init();
 
 		this.ySize = 170;
 
@@ -310,10 +259,11 @@ public class ContainerMasonryBench extends ContainerScreen implements IExtendedC
 		{
 			for (int j = 0; j < 4; ++j)
 			{
-				GuiCraftingOption option = new GuiCraftingOption(j + i * 4, this.guiLeft - 126 + (j * 18), this.guiTop + (21 + i * 18), null);
+				GuiCraftingOption option = new GuiCraftingOption(this.guiLeft - 126 + (j * 18), this.guiTop + (21 + i * 18), null, this::onRecipeButtonClicked);
 
-				this.buttonList.add(option);
-				this.options.add(j + i * 4, option);
+				this.addButton(option);
+
+				this.options[j + i * 4] = option;
 			}
 		}
 
@@ -321,7 +271,7 @@ public class ContainerMasonryBench extends ContainerScreen implements IExtendedC
 		{
 			for (int j = 0; j < 3; ++j)
 			{
-				GuiRequiredMaterial material = new GuiRequiredMaterial(20 + (j + i * 3), this.guiLeft + 50 + (j * 18), this.guiTop + (36 + i * 18), null);
+				GuiRequiredMaterial material = new GuiRequiredMaterial(this.guiLeft + 50 + (j * 18), this.guiTop + (36 + i * 18), null, ButtonCallbacks.DUMMY);
 
 				material.resultStack = true;
 
@@ -341,39 +291,64 @@ public class ContainerMasonryBench extends ContainerScreen implements IExtendedC
 					}
 				}
 
-				this.buttonList.add(material);
-				this.materials.add(j + i * 3, material);
+				this.addButton(material);
+
+				this.materials[j + i * 3] = material;
 			}
 		}
 
-		this.result = new GuiRequiredMaterial(30, this.guiLeft + 105, this.guiTop + 36, null);
+		this.result = new GuiRequiredMaterial(this.guiLeft + 105, this.guiTop + 36, null, ButtonCallbacks.DUMMY);
 		this.result.resultStack = true;
 
-		this.buttonList.add(this.result);
+		this.addButton(this.result);
 
-		this.xButton = new GuiXButton(31, this.guiLeft + 38, this.guiTop + 36);
+		this.xButton = new GuiXButton(this.guiLeft + 38, this.guiTop + 36, (btn) -> {
+			this.currentRecipe = null;
+
+			this.container.onNewRecipe(null);
+
+			NetworkingAether.sendPacketToServer(new PacketMasonryRecipeChanged(null));
+
+			for (GuiRequiredMaterial material : this.materials)
+			{
+				material.setRequiredObject(null);
+			}
+		});
+
 		this.xButton.visible = false;
 
-		this.buttonList.add(this.xButton);
+		this.addButton(this.xButton);
 
-		this.up = new GuiCounterButton(32, this.guiLeft + 109, this.guiTop + 22, UP_ARROW);
-		this.down = new GuiCounterButton(33, this.guiLeft + 109, this.guiTop + 61, DOWN_ARROW);
+		this.up = new GuiCounterButton(this.guiLeft + 109, this.guiTop + 22, UP_ARROW, (btn) -> {
+			this.container.setInputCount(this.container.getInputCount() + 1);
+		});
 
-		this.buttonList.add(this.up);
-		this.buttonList.add(this.down);
+		this.down = new GuiCounterButton( this.guiLeft + 109, this.guiTop + 61, DOWN_ARROW, (btn) -> {
+			this.container.setInputCount(this.container.getInputCount() - 1);
+		});
+
+		this.addButton(this.up);
+		this.addButton(this.down);
 
 		this.updateCraftingOptions();
 	}
 
 	@Override
-	public void drawScreen(int mouseX, int mouseY, float partialTicks)
+	public void render(int mouseX, int mouseY, float partialTicks)
 	{
-		this.drawDefaultBackground();
+		if (this.lastStack.isEmpty() != this.playerInventory.getItemStack().isEmpty())
+		{
+			this.updateCraftingOptions();
+		}
+
+		this.lastStack = this.playerInventory.getItemStack();
+
+		this.renderBackground();
 
 		if (this.currentRecipe != null)
 		{
-			if (!RecipeUtil.areEqual(this.result.getRequiredObject(), this.currentRecipe.getResult()) && !RecipeUtil
-					.canCraft(Minecraft.getInstance().player, this.currentRecipe))
+			if (!RecipeUtil.areEqual(this.result.getRequiredObject(), this.currentRecipe.getResult()) &&
+					!RecipeUtil.canCraft(this.playerInventory, this.currentRecipe))
 			{
 				this.result.setRequiredObject(this.currentRecipe.getResult());
 			}
@@ -383,7 +358,7 @@ public class ContainerMasonryBench extends ContainerScreen implements IExtendedC
 			this.result.setRequiredObject(null);
 		}
 
-		boolean flag = Mouse.isButtonDown(0);
+		boolean flag = this.minecraft.mouseHelper.isLeftDown();
 		int i = this.guiLeft;
 		int j = this.guiTop;
 		int k = i - 48;
@@ -411,21 +386,19 @@ public class ContainerMasonryBench extends ContainerScreen implements IExtendedC
 			this.scrollTo(this.currentScroll);
 		}
 
-		super.drawScreen(mouseX, mouseY, partialTicks);
+		super.render(mouseX, mouseY, partialTicks);
 
 		if (this.hoverDescription != null && this.hoverDescription.size() > 0)
 		{
 			if (this.hoveredStack != null)
 			{
 				GuiUtils.preItemToolTip(this.hoveredStack);
-				GuiUtils.drawHoveringText(this.hoverDescription, mouseX, mouseY, width, height, -1,
-						Minecraft.getInstance().fontRenderer);
+				GuiUtils.drawHoveringText(this.hoverDescription, mouseX, mouseY, this.width, this.height, -1, this.font);
 				GuiUtils.postItemToolTip();
 			}
 			else
 			{
-				GuiUtils.drawHoveringText(this.hoverDescription, mouseX, mouseY, width, height, -1,
-						Minecraft.getInstance().fontRenderer);
+				GuiUtils.drawHoveringText(this.hoverDescription, mouseX, mouseY, this.width, this.height, -1, this.font);
 			}
 		}
 
@@ -442,10 +415,10 @@ public class ContainerMasonryBench extends ContainerScreen implements IExtendedC
 	{
 		String name = I18n.format("container.masonry_bench");
 
-		this.fontRenderer.drawString(name, 88 - (this.fontRenderer.getStringWidth(name) / 2), 6, 4210752);
-		this.fontRenderer.drawString(I18n.format("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
+		this.font.drawString(name, 88 - (this.font.getStringWidth(name) / 2), 6, 4210752);
+		this.font.drawString(I18n.format("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
 
-		this.fontRenderer.drawString(I18n.format("gui.aether.masonry.label.recipes"), -126, 7, 4210752);
+		this.font.drawString(I18n.format("gui.aether.masonry.label.recipes"), -126, 7, 4210752);
 	}
 
 	/**
@@ -454,26 +427,26 @@ public class ContainerMasonryBench extends ContainerScreen implements IExtendedC
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
 	{
-		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+		GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-		this.mc.getTextureManager().bindTexture(BOOK_RECIPES);
+		this.minecraft.getTextureManager().bindTexture(BOOK_RECIPES);
 		int x = this.guiLeft - 150;
 		int z = this.guiTop - 5;
-		this.drawTexturedModalRect(x, z, 0, 0, 146, 178);
+		this.blit(x, z, 0, 0, 146, 178);
 
-		this.mc.getTextureManager().bindTexture(MASONRY_BENCH);
+		this.minecraft.getTextureManager().bindTexture(MASONRY_BENCH);
 		x = ((this.width - this.xSize) / 2) + 30;
 		z = (this.height - this.ySize) / 2;
-		this.drawTexturedModalRect(x, z, 0, 0, this.xSize, this.ySize);
+		this.blit(x, z, 0, 0, this.xSize, this.ySize);
 
 		int i = this.guiLeft - 48;
 		int j = this.guiTop + 22;
 		int k = j + 108;
-		this.mc.getTextureManager().bindTexture(BOOK_SCROLL_BAR);
+		this.minecraft.getTextureManager().bindTexture(BOOK_SCROLL_BAR);
 
-		this.drawTexturedModalRect(i, j + (int) ((float) (k - j - 17) * this.currentScroll), 232 + (this.needsScrollBars() ? 0 : 12), 0, 12, 15);
+		this.blit(i, j + (int) ((float) (k - j - 17) * this.currentScroll), 232 + (this.needsScrollBars() ? 0 : 12), 0, 12, 15);
 
-		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+		GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 		GlStateManager.disableLighting();
 
 		if (this.currentRecipe != null)
@@ -491,17 +464,16 @@ public class ContainerMasonryBench extends ContainerScreen implements IExtendedC
 
 		if (this.recipes.size() <= 0)
 		{
-			this.mc.getTextureManager().bindTexture(DARK_CRAFTING_OVERLAY);
+			this.minecraft.getTextureManager().bindTexture(DARK_CRAFTING_OVERLAY);
 
-			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+			GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 
 			GlStateManager.enableBlend();
-			GlStateManager
-					.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE,
-							GlStateManager.DestFactor.ZERO);
+			GlStateManager.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
+					GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 			GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 
-			AbstractGui.drawModalRectWithCustomSizedTexture(this.guiLeft - 126, this.guiTop + 21, 0, 0, 72, 108, 72, 126);
+			AbstractGui.blit(this.guiLeft - 126, this.guiTop + 21, 0, 0, 72, 108, 72, 126);
 		}
 	}
 
@@ -511,53 +483,56 @@ public class ContainerMasonryBench extends ContainerScreen implements IExtendedC
 	}
 
 	@Override
-	public void handleMouseInput() throws IOException
+	public boolean mouseScrolled(double p_mouseScrolled_1_, double p_mouseScrolled_3_, double amount)
 	{
-		super.handleMouseInput();
-
-		int i = Mouse.getEventDWheel();
-
-		Slot s = this.container.craftingResult;
-
-		double mouseX = InputHelper.getMouseX();
-		double mouseY = InputHelper.getMouseY();
-
-		if (i != 0)
+		if (!super.mouseScrolled(p_mouseScrolled_1_, p_mouseScrolled_3_, amount))
 		{
-			if (this.isMouseOverSlot(s, (int) mouseX, (int) mouseY) && this.currentRecipe != null)
+			Slot s = this.container.craftingResult;
+
+			double mouseX = InputHelper.getMouseX();
+			double mouseY = InputHelper.getMouseY();
+
+			int i = (int) amount;
+
+			if (i != 0)
 			{
-				if (i > 0)
+				if (this.isMouseOverSlot(s, (int) mouseX, (int) mouseY) && this.currentRecipe != null)
 				{
-					i = 1;
-				}
+					if (i > 0)
+					{
+						i = 1;
+					}
 
-				if (i < 0)
+					if (i < 0)
+					{
+						i = -1;
+					}
+
+					this.container.setInputCount(this.container.getInputCount() + i);
+				}
+				else if (this.needsScrollBars())
 				{
-					i = -1;
+					int j = (this.recipes.size() + 4 - 1) / 4 - 6;
+
+					if (i > 0)
+					{
+						i = 1;
+					}
+
+					if (i < 0)
+					{
+						i = -1;
+					}
+
+					this.currentScroll = (float) ((double) this.currentScroll - (double) i / (double) j);
+					this.currentScroll = MathHelper.clamp(this.currentScroll, 0.0F, 1.0F);
+
+					this.scrollTo(this.currentScroll);
 				}
-
-				this.container.setInputCount(this.container.getInputCount() + i);
-			}
-			else if (this.needsScrollBars())
-			{
-				int j = (this.recipes.size() + 4 - 1) / 4 - 6;
-
-				if (i > 0)
-				{
-					i = 1;
-				}
-
-				if (i < 0)
-				{
-					i = -1;
-				}
-
-				this.currentScroll = (float) ((double) this.currentScroll - (double) i / (double) j);
-				this.currentScroll = MathHelper.clamp(this.currentScroll, 0.0F, 1.0F);
-
-				this.scrollTo(this.currentScroll);
 			}
 		}
+
+		return true;
 	}
 
 	@Override

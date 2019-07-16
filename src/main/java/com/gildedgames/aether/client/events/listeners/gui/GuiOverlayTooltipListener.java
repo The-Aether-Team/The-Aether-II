@@ -4,9 +4,10 @@ import com.gildedgames.aether.api.world.IWorldObjectHoverable;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
-import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -29,9 +30,9 @@ public class GuiOverlayTooltipListener
 			{
 				IWorldObjectHoverable hoverable = null;
 
-				if (minecraft.objectMouseOver.typeOfHit == RayTraceResult.Type.BLOCK)
+				if (minecraft.objectMouseOver.getType() == RayTraceResult.Type.BLOCK)
 				{
-					BlockPos pos = minecraft.objectMouseOver.getBlockPos();
+					BlockPos pos = ((BlockRayTraceResult) minecraft.objectMouseOver).getPos();
 
 					Block block = minecraft.world.getBlockState(pos).getBlock();
 
@@ -42,9 +43,9 @@ public class GuiOverlayTooltipListener
 
 					hoverable = (IWorldObjectHoverable) block;
 				}
-				else if (minecraft.objectMouseOver.typeOfHit == RayTraceResult.Type.ENTITY)
+				else if (minecraft.objectMouseOver.getType() == RayTraceResult.Type.ENTITY)
 				{
-					Entity entity = minecraft.objectMouseOver.entityHit;
+					Entity entity = ((EntityRayTraceResult) minecraft.objectMouseOver).getEntity();
 
 					if (!(entity instanceof IWorldObjectHoverable))
 					{
@@ -63,17 +64,15 @@ public class GuiOverlayTooltipListener
 						return;
 					}
 
-					String button = minecraft.gameSettings.keyBindUseItem.getDisplayName();
+					String button = minecraft.gameSettings.keyBindUseItem.getLocalizedName();
 
 					String label = String.format("%s[%s]%s %s", TextFormatting.YELLOW, button, TextFormatting.WHITE, body.getFormattedText());
 
-					ScaledResolution resolution = new ScaledResolution(minecraft);
-
 					int width = minecraft.fontRenderer.getStringWidth(label);
-					int x = (resolution.getScaledWidth() / 2) - (width / 2);
-					int y = resolution.getScaledHeight() - 70;
+					int x = (minecraft.mainWindow.getScaledWidth() / 2) - (width / 2);
+					int y = minecraft.mainWindow.getScaledHeight() - 70;
 
-					AbstractGui.drawRect(x - 3, y - 3, x + width + 3, y + 10, Integer.MIN_VALUE);
+					AbstractGui.fill(x - 3, y - 3, x + width + 3, y + 10, Integer.MIN_VALUE);
 
 					minecraft.fontRenderer.drawString(label, x, y, 0xFFFFFF);
 				}

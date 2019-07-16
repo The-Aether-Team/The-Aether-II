@@ -116,8 +116,8 @@ public class GuiCoinsContainer extends GuiElement implements IGuiCurrencyValue
 				@Override
 				public void onHovered(IGuiElement element)
 				{
-					float x = -element.dim().x() + InputHelper.getMouseX() + 3;
-					float y = -element.dim().y() + InputHelper.getMouseY() - GuiCoinsContainer.this.originalPrice.dim().height() - 3;
+					float x = -element.dim().x() + (float) InputHelper.getMouseX() + 3;
+					float y = -element.dim().y() + (float) InputHelper.getMouseY() - GuiCoinsContainer.this.originalPrice.dim().height() - 3;
 
 					GuiCoinsContainer.this.originalPrice.dim().mod().pos(x, y).flush();
 					GuiCoinsContainer.this.origPriceBg.dim().mod().pos(x, y).flush();

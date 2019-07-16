@@ -1,40 +1,30 @@
 package com.gildedgames.aether.common.containers;
 
-import net.minecraft.block.BlockWorkbench;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.ContainerWorkbench;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.inventory.container.WorkbenchContainer;
+import net.minecraft.util.IWorldPosCallable;
 
-public class ContainerCustomWorkbench extends ContainerWorkbench
+public class ContainerCustomWorkbench extends WorkbenchContainer
 {
-	private final World world;
+	// Duplicate field since parent has private access
+	// TODO: Use an AT instead to access the field in WorkbenchContainer?
+	private final IWorldPosCallable posCallable;
 
-	private final BlockPos pos;
-
-	public ContainerCustomWorkbench(final PlayerInventory playerInventory, final World worldIn,
-			final BlockPos posIn)
+	public ContainerCustomWorkbench(int id, PlayerInventory playerInventory, IWorldPosCallable posCallable)
 	{
-		super(playerInventory, worldIn, posIn);
+		super(id, playerInventory, posCallable);
 
-		this.world = worldIn;
-		this.pos = posIn;
+		this.posCallable = posCallable;
 	}
 
 	/**
 	 * Determines whether supplied player can use this container
 	 */
 	@Override
-	public boolean canInteractWith(final PlayerEntity playerIn)
+	public boolean canInteractWith(PlayerEntity playerIn)
 	{
-		if (!(this.world.getBlockState(this.pos).getBlock() instanceof BlockWorkbench))
-		{
-			return false;
-		}
-		else
-		{
-			return playerIn.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
-		}
+		return isWithinUsableDistance(this.posCallable, playerIn, Blocks.CRAFTING_TABLE);
 	}
 }

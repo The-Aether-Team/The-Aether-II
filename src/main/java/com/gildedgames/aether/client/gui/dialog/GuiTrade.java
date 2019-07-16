@@ -24,7 +24,6 @@ import com.google.common.collect.Lists;
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.resources.I18n;
@@ -132,12 +131,12 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 			public void onPostDraw(IGuiElement element)
 			{
 				GlStateManager.pushMatrix();
-				GuiTrade.this.mc.getTextureManager().bindTexture(SLOT_BLOCKED);
+				GuiTrade.this.minecraft.getTextureManager().bindTexture(SLOT_BLOCKED);
 
 				for (int i = GuiTrade.this.module.getTradeSlots(); i < 16; i++)
 				{
 					AbstractGui
-							.drawModalRectWithCustomSizedTexture(GuiTrade.this.guiLeft + 199 + (i % 4) * 18, GuiTrade.this.height - 183 + (i / 4) * 18, 0, 0, 18, 18, 18, 18);
+							.blit(GuiTrade.this.guiLeft + 199 + (i % 4) * 18, GuiTrade.this.height - 183 + (i / 4) * 18, 0, 0, 18, 18, 18, 18);
 				}
 
 				GlStateManager.popMatrix();
@@ -153,12 +152,12 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 			public void onPostDraw(IGuiElement element)
 			{
 				GlStateManager.pushMatrix();
-				GuiTrade.this.mc.getTextureManager().bindTexture(SLOT_BLOCKED);
+				GuiTrade.this.minecraft.getTextureManager().bindTexture(SLOT_BLOCKED);
 
 				for (int i = GuiTrade.this.module.getOpenSlots(); i < 16; i++)
 				{
 					AbstractGui
-							.drawModalRectWithCustomSizedTexture(GuiTrade.this.guiLeft + 292 + (i % 4) * 18, GuiTrade.this.height - 183 + (i / 4) * 18, 0, 0, 18, 18, 18, 18);
+							.blit(GuiTrade.this.guiLeft + 292 + (i % 4) * 18, GuiTrade.this.height - 183 + (i / 4) * 18, 0, 0, 18, 18, 18, 18);
 				}
 
 				GlStateManager.popMatrix();
@@ -189,10 +188,10 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 		final ITextComponent traderTextComp = new TranslationTextComponent(nameOther);
 		final ITextComponent statusComp = new TranslationTextComponent(status);
 
-		this.tradePlate = new GuiTextBox(0, (int) center.x() + 104, this.height - 229, 86, 15);
-		this.tradeStatus = new GuiTextBox(0, this.width - 88, this.height - 60, 76, 40);
+		this.tradePlate = new GuiTextBox((int) center.x() + 104, this.height - 229, 86, 15);
+		this.tradeStatus = new GuiTextBox(this.width - 88, this.height - 60, 76, 40);
 
-		GuiTextBox namePlate = new GuiTextBox(0, (int) center.x() + 10, this.height - 229, 86, 15);
+		GuiTextBox namePlate = new GuiTextBox((int) center.x() + 10, this.height - 229, 86, 15);
 
 		clientTextComp.setStyle(new Style().setColor(TextFormatting.YELLOW).setItalic(true));
 		traderTextComp.setStyle(new Style().setColor(TextFormatting.YELLOW).setItalic(true));
@@ -206,23 +205,28 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 		namePlate.setText(clientTextComp);
 		namePlate.setCentered(true);
 
-		this.buttonList.add(this.tradePlate);
-		this.buttonList.add(this.tradeStatus);
-		this.buttonList.add(namePlate);
+		this.addButton(this.tradePlate);
+		this.addButton(this.tradeStatus);
+		this.addButton(namePlate);
 
-		this.lockStateButton = new GuiFlatButton(1, this.width - 88, this.height - 80, 25, 15, this.lockinLocalText);
+		this.lockStateButton = new GuiFlatButton(this.width - 88, this.height - 80, 25, 15, this.lockinLocalText, (btn) -> {
+			this.module.setLockedIn(!this.module.isLockedIn());
+			this.updateLockedButton();
+		});
 
 		final String unlockText = I18n.format("aether.trade.gui.confirm");
 
-		this.confirmButton = new GuiFlatButton(2, this.width - 88, this.height - 17, 37, 15, unlockText);
-		this.confirmButton.enabled = false;
+		this.confirmButton = new GuiFlatButton( this.width - 88, this.height - 17, 37, 15, unlockText, (btn) -> {
+			this.module.setConfirmed(true);
+		});
+		this.confirmButton.active = false;
 
-		this.textField = new TextFieldWidget(0, this.fontRenderer, 4, this.height - 12, this.width - 104, 12);
+		this.textField = new TextFieldWidget(this.font, 4, this.height - 12, this.width - 104, 12, /* TODO */ "");
 		this.textField.setMaxStringLength(256);
 		this.textField.setEnableBackgroundDrawing(false);
 
-		this.buttonList.add(this.lockStateButton);
-		this.buttonList.add(this.confirmButton);
+		this.addButton(this.lockStateButton);
+		this.addButton(this.confirmButton);
 	}
 
 	@Override
@@ -246,14 +250,14 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 
 	public void sendTradeMessage(PlayerEntity sender, ITextComponent textComponent)
 	{
-		ITextComponent name = new StringTextComponent("<" + sender.getDisplayNameString() + "> ");
+		ITextComponent name = new StringTextComponent("<" + sender.getDisplayName().getFormattedText() + "> ");
 
 		this.sendMessage(name.appendSibling(textComponent));
 	}
 
 	public void sendMessage(ITextComponent textComponent)
 	{
-		List<ITextComponent> split = GuiUtilRenderComponents.splitText(textComponent, this.width - 104, this.fontRenderer, true, true);
+		List<ITextComponent> split = RenderComponentsUtil.splitText(textComponent, this.width - 104, this.font, true, true);
 
 		for (ITextComponent text : split)
 		{
@@ -283,7 +287,7 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 			this.rightArrowHeld = true;
 			this.lastBuyCountChangeTime = System.currentTimeMillis();
 
-			if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
+			if (hasShiftDown())
 			{
 				this.addTradeCoins(64);
 			}
@@ -295,7 +299,7 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 			this.addTradeCoins(-1);
 			this.lastBuyCountChangeTime = System.currentTimeMillis();
 
-			if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
+			if (hasShiftDown())
 			{
 				this.addTradeCoins(-64);
 			}
@@ -313,7 +317,7 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 
 		if (scroll != 0 && (InputHelper.isHovered(this.rightArrow) || InputHelper.isHovered(this.leftArrow)))
 		{
-			if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
+			if (hasShiftDown())
 			{
 				this.addTradeCoins(scroll * 64);
 			}
@@ -381,15 +385,15 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 			}
 		}
 
-		if (this.mc.player.inventory.getItemStack().isEmpty() && stack != null)
+		if (this.minecraft.player.inventory.getItemStack().isEmpty() && stack != null)
 		{
 			FontRenderer font = stack.getItem().getFontRenderer(stack);
-			FontRenderer renderer = (font == null ? this.fontRenderer : font);
+			FontRenderer renderer = (font == null ? this.font : font);
 			GuiUtils.preItemToolTip(stack);
 
 			List<String> stackText = this.getItemToolTip(stack);
 
-			this.drawHoveringText(stackText, x, y, renderer);
+			this.renderTooltip(stackText, x, y, renderer);
 			GuiUtils.postItemToolTip();
 		}
 	}
@@ -401,26 +405,26 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 	}
 
 	@Override
-	public void drawScreen(final int mouseX, final int mouseY, final float partialTicks)
+	public void render(final int mouseX, final int mouseY, final float partialTicks)
 	{
-		AbstractGui.drawRect(0, this.height - 90, this.width, this.height, Integer.MIN_VALUE);
+		AbstractGui.fill(0, this.height - 90, this.width, this.height, Integer.MIN_VALUE);
 
 		if (!this.labelUpdated)
 		{
 			this.updateTraderLabel();
 		}
 
-		super.drawScreen(mouseX, mouseY, partialTicks);
+		super.render(mouseX, mouseY, partialTicks);
 
 		GlStateManager.pushMatrix();
 		RenderHelper.enableGUIStandardItemLighting();
 		GlStateManager.disableLighting();
-		GlStateManager.disableDepth();
+		GlStateManager.disableDepthTest();
 		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240.0F, 240.0F);
 
-		if (this.inventorySlots instanceof ContainerTrade)
+		if (this.container instanceof ContainerTrade)
 		{
-			ContainerTrade container = (ContainerTrade) this.inventorySlots;
+			ContainerTrade container = (ContainerTrade) this.container;
 
 			container.updateSlots(this.module.getTradeSlots());
 		}
@@ -438,7 +442,7 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 		this.renderToolTip(mouseX, mouseY);
 		GlStateManager.popMatrix();
 
-		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+		GlStateManager.color4f(1.0f, 1.0f, 1.0f, 1.0f);
 
 		if ((this.rightArrowHeld || this.leftArrowHeld) && !this.pressLongEnough && System.currentTimeMillis() - this.lastBuyCountChangeTime >= 300L)
 		{
@@ -476,24 +480,24 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 			this.tradeTab.setCurrencyValue(this.transferCoins);
 		}
 
-		AbstractGui.drawRect(2, this.height - 14, this.width - 102, this.height - 2, Integer.MIN_VALUE);
-		AbstractGui.drawRect(2, this.height - 80, this.width - 102, this.height - 16, Integer.MIN_VALUE);
+		AbstractGui.fill(2, this.height - 14, this.width - 102, this.height - 2, Integer.MIN_VALUE);
+		AbstractGui.fill(2, this.height - 80, this.width - 102, this.height - 16, Integer.MIN_VALUE);
 
 		this.textField.drawTextBox();
 
 		for (int i = 0; i < Math.min(7, this.chatLines.size()); i++)
 		{
 			TradeChatLine tradeChatLine = this.chatLines.get(this.chatLines.size() - i - 1);
-			int y = this.height - 25 - this.fontRenderer.FONT_HEIGHT * i;
+			int y = this.height - 25 - this.font.FONT_HEIGHT * i;
 
 			if (tradeChatLine instanceof TriggerChatLine)
 			{
-				this.drawString(this.fontRenderer, tradeChatLine.text.getUnformattedText(), 4, y - this.fontRenderer.FONT_HEIGHT / 2, 0xFFFFFF);
+				this.drawString(this.font, tradeChatLine.text.getFormattedText(), 4, y - this.font.FONT_HEIGHT / 2, 0xFFFFFF);
 				i++;
 			}
 			else
 			{
-				this.drawString(this.fontRenderer, tradeChatLine.text.getUnformattedText(), 4, y, 0xFFFFFF);
+				this.drawString(this.font, tradeChatLine.text.getFormattedText(), 4, y, 0xFFFFFF);
 			}
 		}
 
@@ -516,7 +520,7 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 
 			for (String s : text)
 			{
-				int j = this.fontRenderer.getStringWidth(s);
+				int j = this.font.getStringWidth(s);
 
 				if (j > i)
 				{
@@ -543,8 +547,8 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 				i2 = this.height - k - 6;
 			}
 
-			this.drawHoveringText(text, mouseX, mouseY);
-			TOOLTIP_HELPER.render(this.fontRenderer, l1, i2, 8 + (text.size() - 1) * 10, value);
+			this.renderTooltip(text, mouseX, mouseY);
+			TOOLTIP_HELPER.render(this.font, l1, i2, 8 + (text.size() - 1) * 10, value);
 		}
 	}
 
@@ -552,20 +556,19 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 	{
 		GlStateManager.translatef(0.0F, 0.0F, 32.0F);
 
-		this.zLevel = 200.0F;
-		this.itemRender.zLevel = 200.0F;
+		this.itemRenderer.zLevel = 200.0F;
 
 		FontRenderer font = stack.getItem().getFontRenderer(stack);
 
 		if (font == null)
 		{
-			font = this.fontRenderer;
+			font = this.font;
 		}
 
-		this.itemRender.renderItemAndEffectIntoGUI(stack, x, y);
-		this.itemRender.renderItemOverlayIntoGUI(font, stack, x, y, null);
-		this.zLevel = 0.0F;
-		this.itemRender.zLevel = 0.0F;
+		this.itemRenderer.renderItemAndEffectIntoGUI(stack, x, y);
+		this.itemRenderer.renderItemOverlayIntoGUI(font, stack, x, y, null);
+
+		this.itemRenderer.zLevel = 0.0F;
 	}
 
 
@@ -575,25 +578,10 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 		return AetherGuiHandler.TRADE_ID;
 	}
 
-	@Override
-	protected void actionPerformed(Button button)
-	{
-		boolean locked = this.module.isLockedIn();
-
-		if (button.id == 1)
-		{
-			this.module.setLockedIn(!locked);
-			this.updateLockedButton();
-		}
-		else if (button.id == 2 && locked)
-		{
-			this.module.setConfirmed(true);
-		}
-	}
-
 	private void updateLockedButton()
 	{
-		this.lockStateButton.setText(this.module.isLockedIn() ? this.unlockLocalText : this.lockinLocalText);
+		String text = this.module.isLockedIn() ? this.unlockLocalText : this.lockinLocalText;
+		this.lockStateButton.setMessage(text);
 		this.lockStateButton.x = this.width - (this.module.isLockedIn() ? 85 : 88);
 	}
 
@@ -623,13 +611,13 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 
 		if (state == -1)
 		{
-			this.lockStateButton.enabled = false;
+			this.lockStateButton.active = false;
 
 			append = "sizeerror";
 		}
 		else
 		{
-			this.lockStateButton.enabled = true;
+			this.lockStateButton.active = true;
 
 			final int modState = state % 3;
 
@@ -647,7 +635,7 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 			}
 		}
 
-		this.confirmButton.enabled = state >= 3 && state < 5;
+		this.confirmButton.active = state >= 3 && state < 5;
 
 		final String status = I18n.format("aether.trade.status." + append);
 		final ITextComponent statusComp = new TranslationTextComponent(status);
@@ -663,14 +651,14 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 
 		if (target != null)
 		{
-			final String nameOther = I18n.format("aether.trade.gui.thirdtrade", target.getEntity().getDisplayNameString());
+			final String nameOther = I18n.format("aether.trade.gui.thirdtrade", target.getEntity().getDisplayName());
 			final ITextComponent traderTextComp = new TranslationTextComponent(nameOther);
 
 			traderTextComp.setStyle(new Style().setColor(TextFormatting.YELLOW).setItalic(true));
 
-			int count = GuiUtilRenderComponents.splitText(traderTextComp, this.tradePlate.width - 10, this.fontRenderer, true, true).size() - 1;
+			int count = RenderComponentsUtil.splitText(traderTextComp, this.tradePlate.getWidth() - 10, this.font, true, true).size() - 1;
 
-			this.tradePlate.y = this.height - 229 - this.fontRenderer.FONT_HEIGHT * count;
+			this.tradePlate.y = this.height - 229 - this.font.FONT_HEIGHT * count;
 			this.tradePlate.setText(traderTextComp);
 			this.labelUpdated = true;
 		}
@@ -678,7 +666,7 @@ public class GuiTrade extends GuiViewer implements IRemoteClose
 
 	public String getTrader()
 	{
-		return this.module.getTarget().getEntity().getDisplayNameString();
+		return this.module.getTarget().getEntity().getDisplayName().getFormattedText();
 	}
 
 	class TradeChatLine

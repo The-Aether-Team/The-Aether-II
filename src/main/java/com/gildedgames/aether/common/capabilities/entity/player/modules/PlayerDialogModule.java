@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.capabilities.entity.player.modules;
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.dialog.*;
 import com.gildedgames.aether.api.entity.EntityCharacter;
-import com.gildedgames.aether.client.gui.dialog.GuiDialogViewer;
+import com.gildedgames.aether.client.gui.dialog.GuiDialogScreen;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.network.NetworkingAether;
@@ -120,7 +120,7 @@ public class PlayerDialogModule extends PlayerAetherModule implements IDialogCon
 	{
 		this.sceneInstance = new SceneInstance(this, scene, conditionsMet);
 
-		Minecraft.getInstance().displayGuiScreen(new GuiDialogViewer(Minecraft.getInstance().player, this, this.sceneInstance));
+		Minecraft.getInstance().displayGuiScreen(new GuiDialogScreen(Minecraft.getInstance().player, this, this.sceneInstance));
 	}
 
 	private void openSceneServer(final ResourceLocation res, final IDialogScene scene)

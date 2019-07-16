@@ -48,7 +48,7 @@ public class PrepAether implements IPrepRegistryEntry<IChunkInfoAether>
 	@Override
 	public boolean shouldAttachTo(World world)
 	{
-		return world.provider.getDimensionType() == DimensionsAether.AETHER;
+		return world.getDimension().getType() == DimensionsAether.AETHER;
 	}
 
 	@Override

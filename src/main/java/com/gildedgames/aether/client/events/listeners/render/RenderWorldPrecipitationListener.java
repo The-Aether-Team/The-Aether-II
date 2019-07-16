@@ -22,7 +22,7 @@ public class RenderWorldPrecipitationListener
 			return;
 		}
 
-		IRenderHandler handler = world.provider.getWeatherRenderer();
+		IRenderHandler handler = world.getDimension().getWeatherRenderer();
 
 		if (handler instanceof RenderWorldPrecipitation)
 		{

@@ -1,39 +1,36 @@
 package com.gildedgames.aether.common.containers.tiles;
 
+import com.gildedgames.aether.common.containers.ContainerTypesAether;
 import com.gildedgames.aether.common.containers.slots.SlotAmbrosiumChunk;
 import com.gildedgames.aether.common.containers.slots.SlotMoaEgg;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.api.distmarker.Dist;
+import net.minecraft.util.IIntArray;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 public class ContainerIncubator extends Container
 {
+	private final IInventory inventory;
 
-	private final IInventory tile;
+	private final IIntArray fields;
 
-	private float currentHeatingProgress;
-
-	private int eggTimer;
-
-	public ContainerIncubator(int id, final PlayerInventory playerInventory, final IInventory coolerInventory)
+	public ContainerIncubator(int id, PlayerInventory playerInventory, IInventory coolerInventory, IIntArray fields)
 	{
-		super(type, id);
+		super(ContainerTypesAether.INCUBATOR, id);
 
-		this.tile = coolerInventory;
+		this.func_216961_a(fields);
 
-		this.addSlot(new SlotAmbrosiumChunk(this.tile, 0, 80, 52));
+		this.inventory = coolerInventory;
+		this.fields = fields;
 
-		this.addSlot(new SlotMoaEgg(this.tile, 1, 80, 17));
+		this.addSlot(new SlotAmbrosiumChunk(this.inventory, 0, 80, 52));
+
+		this.addSlot(new SlotMoaEgg(this.inventory, 1, 80, 17));
 
 		for (int i = 0; i < 3; ++i)
 		{
@@ -50,24 +47,9 @@ public class ContainerIncubator extends Container
 	}
 
 	@Override
-	public void addListener(final IContainerListener listener)
-	{
-		super.addListener(listener);
-
-		listener.sendAllWindowProperties(this, this.tile);
-	}
-
-	@Override
-	@OnlyIn(Dist.CLIENT)
-	public void updateProgressBar(final int id, final int data)
-	{
-		this.tile.setField(id, data);
-	}
-
-	@Override
 	public boolean canInteractWith(@Nonnull final PlayerEntity playerIn)
 	{
-		return this.tile.isUsableByPlayer(playerIn);
+		return this.inventory.isUsableByPlayer(playerIn);
 	}
 
 	@Override
@@ -92,7 +74,7 @@ public class ContainerIncubator extends Container
 				slot.onSlotChange(itemstack1, itemstack);
 			}
 			// move from inv to container
-			else if (index > 1)
+			else
 			{
 				if (!itemstack1.isEmpty())
 				{
@@ -118,25 +100,18 @@ public class ContainerIncubator extends Container
 		return itemstack;
 	}
 
-	@Override
-	public void detectAndSendChanges()
+	public int getCurrentHeatingProgress()
 	{
-		super.detectAndSendChanges();
+		return this.fields.get(0);
+	}
 
-		for (final IContainerListener iContainerListener : this.listeners)
-		{
-			if (this.currentHeatingProgress != this.tile.getField(0))
-			{
-				iContainerListener.sendWindowProperty(this, 0, this.tile.getField(0));
-			}
+	public int getEggTimer()
+	{
+		return this.fields.get(1);
+	}
 
-			if (this.eggTimer != this.tile.getField(1))
-			{
-				iContainerListener.sendWindowProperty(this, 1, this.tile.getField(1));
-			}
-		}
-
-		this.currentHeatingProgress = this.tile.getField(0);
-		this.eggTimer = this.tile.getField(1);
+	public ItemStack getMoaEggStack()
+	{
+		return this.inventory.getStackInSlot(1);
 	}
 }

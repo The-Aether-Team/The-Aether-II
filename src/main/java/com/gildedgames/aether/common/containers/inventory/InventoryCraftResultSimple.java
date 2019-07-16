@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.containers.inventory;
 
-import net.minecraft.inventory.InventoryCraftResult;
+import net.minecraft.inventory.CraftResultInventory;
 
-public class InventoryCraftResultSimple extends InventoryCraftResult
+public class InventoryCraftResultSimple extends CraftResultInventory
 {
 
 	@Override

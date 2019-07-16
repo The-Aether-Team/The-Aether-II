@@ -17,7 +17,7 @@ public class AetherHelper
 			return false;
 		}
 
-		return world.provider.getDimensionType() == DimensionsAether.AETHER || world.provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER;
+		return world.getDimension().getType() == DimensionsAether.AETHER || world.getDimension().getType() == DimensionsAether.NECROMANCER_TOWER;
 	}
 
 	public static boolean isEnabled(int dimension)
@@ -51,7 +51,7 @@ public class AetherHelper
 			return false;
 		}
 
-		return world.provider.getDimensionType() == DimensionsAether.AETHER;
+		return world.getDimension().getType() == DimensionsAether.AETHER;
 	}
 
 	public static boolean isNecromancerTower(World world)
@@ -61,7 +61,7 @@ public class AetherHelper
 			return false;
 		}
 
-		return world.provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER;
+		return world.getDimension().getType() == DimensionsAether.NECROMANCER_TOWER;
 	}
 
 }

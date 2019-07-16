@@ -21,7 +21,6 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.LockableTileEntity;
 import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.IIntArray;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
@@ -33,7 +32,7 @@ import java.util.Random;
 public class TileEntityIncubator extends LockableTileEntity implements ITickableTileEntity, IInventory
 {
 
-	public static final int REQ_TEMPERATURE_THRESHOLD = 3000;
+	public static final int REQ_TEMPERATURE_THRESHOLD = 2400;
 
 	private static final int INVENTORY_SIZE = 2;
 
@@ -44,19 +43,19 @@ public class TileEntityIncubator extends LockableTileEntity implements ITickable
 	private final int ambroDestroy = 1250; // # of ticks before an ambrosium chunk is destroyed.
 
 	// increment and decrement values that can be adjusted to balance how fast or slow the incubator: heats, incubates, and cools.
-	private final float coolingDecrement = 1.0F;
+	private final int coolingDecrement = 1;
 
-	private final float heatingIncrement = 2.0F;
+	private final int heatingIncrement = 2;
 
 	private final int eggTimerIncrement = 1;
 
-	private final int eggtimerDecrement = 1;
+	private final int eggTimerDecrement = 1;
 
-	private final float ambroTimerIncrement = 2.0F;
+	private final int ambroTimerIncrement = 2;
 
 	private NonNullList<ItemStack> inventory = NonNullList.withSize(INVENTORY_SIZE, ItemStack.EMPTY);
 
-	private float currentHeatingProgress;
+	private int currentHeatingProgress;
 
 	private int ambroTimer;
 
@@ -64,14 +63,13 @@ public class TileEntityIncubator extends LockableTileEntity implements ITickable
 
 	private final IIntArray fields = new IIntArray()
 	{
-
 		@Override
 		public int get(int id)
 		{
 			switch (id)
 			{
 				case 0:
-					return (int) TileEntityIncubator.this.currentHeatingProgress;
+					return TileEntityIncubator.this.currentHeatingProgress;
 				case 1:
 					return TileEntityIncubator.this.eggTimer;
 				default:
@@ -225,14 +223,9 @@ public class TileEntityIncubator extends LockableTileEntity implements ITickable
 		return this.currentHeatingProgress;
 	}
 
-	public int getRequiredTemperatureThreshold()
-	{
-		return (TileEntityIncubator.REQ_TEMPERATURE_THRESHOLD - 500);
-	}
-
 	public boolean canEggIncubate()
 	{
-		return this.getCurrentHeatingProgress() >= this.getRequiredTemperatureThreshold();
+		return this.getCurrentHeatingProgress() >= TileEntityIncubator.REQ_TEMPERATURE_THRESHOLD;
 	}
 
 	public int getEggTimer()

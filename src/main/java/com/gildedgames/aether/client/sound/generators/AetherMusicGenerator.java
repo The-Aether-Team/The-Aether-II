@@ -15,7 +15,7 @@ public class AetherMusicGenerator implements IMusicGenerator
 
 		if ((time > 1000L && time < 8000L) || (time > 13000L && time < 20000L))
 		{
-			return aePlayer.getEntity().world.provider.getDimensionType() == DimensionsAether.AETHER;
+			return aePlayer.getEntity().world.getDimension().getType() == DimensionsAether.AETHER;
 		}
 
 		return false;

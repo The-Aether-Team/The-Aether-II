@@ -24,7 +24,7 @@ public class SlotAmbrosium extends Slot
 	@OnlyIn(Dist.CLIENT)
 	public static void registerIcons(TextureStitchEvent.Pre event)
 	{
-		sprite = event.getMap().registerSprite(AetherCore.getResource("gui/slots/slot_ambrosium"));
+		sprite = event.getMap().loadTexture(AetherCore.getResource("gui/slots/slot_ambrosium"));
 	}
 
 	@Override

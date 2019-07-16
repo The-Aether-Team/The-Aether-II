@@ -10,23 +10,23 @@ public class GuiCounterButton extends Button
 
 	private final ResourceLocation texture;
 
-	public GuiCounterButton(int buttonId, int x, int y, ResourceLocation texture)
+	public GuiCounterButton(int x, int y, ResourceLocation texture, IPressable callback)
 	{
-		super(buttonId, x, y, 10, 7, "");
+		super(x, y, 10, 7, "", callback);
 
 		this.texture = texture;
 	}
 
 	@Override
-	public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks)
+	public void render(int mouseX, int mouseY, float partialTicks)
 	{
 		if (this.visible)
 		{
-			this.hovered =
+			this.isHovered =
 					mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
 
 			Minecraft.getInstance().getTextureManager().bindTexture(this.texture);
-			AbstractGui.drawModalRectWithCustomSizedTexture(this.x, this.y, 0, 0, 10, 7, 10, 7);
+			AbstractGui.blit(this.x, this.y, 0, 0, 10, 7, 10, 7);
 		}
 	}
 

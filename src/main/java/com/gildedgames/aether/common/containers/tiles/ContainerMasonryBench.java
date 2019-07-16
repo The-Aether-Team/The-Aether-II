@@ -2,10 +2,9 @@ package com.gildedgames.aether.common.containers.tiles;
 
 import com.gildedgames.aether.api.recipes.simple.ISimpleRecipe;
 import com.gildedgames.aether.api.registrar.BlocksAether;
+import com.gildedgames.aether.common.containers.ContainerTypesAether;
 import com.gildedgames.aether.common.containers.inventory.InventoryCraftResultSimple;
 import com.gildedgames.aether.common.containers.slots.SlotSimpleCrafting;
-import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.network.packets.PacketMasonryInputCountChanged;
 import com.gildedgames.aether.common.util.helpers.RecipeUtil;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -13,9 +12,8 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.IWorldPosCallable;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
@@ -26,30 +24,41 @@ public class ContainerMasonryBench extends Container
 
 	public SlotSimpleCrafting craftingResult;
 
-	private final PlayerEntity player;
-
 	private final PlayerInventory inventory;
 
-	private final World world;
-
-	private final BlockPos pos;
+	private final IWorldPosCallable posCallable;
 
 	private int inputCount = 1;
 
-	public ContainerMasonryBench(PlayerEntity player, BlockPos pos)
+	protected ContainerMasonryBench(int id, PlayerEntity player, IWorldPosCallable posCallable)
 	{
-		this.player = player;
+		super(ContainerTypesAether.MASONRY_BENCH, id);
+
 		this.inventory = player.inventory;
+		this.posCallable = posCallable;
 
-		this.world = player.getEntityWorld();
-		this.pos = pos;
+		for (int y = 0; y < 3; ++y)
+		{
+			for (int x = 0; x < 9; ++x)
+			{
+				this.addSlot(new Slot(this.inventory, x + y * 9 + 9, 8 + x * 18, 88 + (y * 18)));
+			}
+		}
 
-		this.createSlots();
+		for (int x = 0; x < 9; ++x)
+		{
+			this.addSlot(new Slot(this.inventory, x, 8 + x * 18, 146));
+		}
+
+		this.craftingResult = new SlotSimpleCrafting(player, null, this.craftResult, 37, 106, 37, this);
+		this.craftingResult.setSimpleCrafting(true);
+
+		this.addSlot(this.craftingResult);
 	}
 
 	public int getInputCount()
 	{
-		int actual = this.craftingResult.getRecipe() != null ? this.craftingResult.getActualAmountOfReq(this.player) : this.inputCount;
+		int actual = this.craftingResult.getRecipe() != null ? this.craftingResult.getActualAmountOfReq(this.inventory) : this.inputCount;
 
 		return MathHelper.clamp(this.inputCount, 1, actual);
 	}
@@ -57,11 +66,6 @@ public class ContainerMasonryBench extends Container
 	public void setInputCount(int inputCount)
 	{
 		this.inputCount = MathHelper.clamp(inputCount, 1, this.craftResult.getSizeInventory());
-
-		if (this.world.isRemote())
-		{
-			NetworkingAether.sendPacketToServer(new PacketMasonryInputCountChanged(this.inputCount));
-		}
 
 		ItemStack stack = this.craftResult.getStackInSlot(0);
 
@@ -71,31 +75,9 @@ public class ContainerMasonryBench extends Container
 		}
 	}
 
-	private void createSlots()
-	{
-		for (int k = 0; k < 3; ++k)
-		{
-			for (int i1 = 0; i1 < 9; ++i1)
-			{
-				this.addSlot(new Slot(this.inventory, i1 + k * 9 + 9, 8 + i1 * 18, 88 + (k * 18)));
-			}
-		}
-
-		for (int l = 0; l < 9; ++l)
-		{
-			this.addSlot(new Slot(this.inventory, l, 8 + l * 18, 146));
-		}
-
-		this.craftingResult = new SlotSimpleCrafting(this.player, null, this.craftResult, 37, 106, 37, this);
-
-		this.craftingResult.setSimpleCrafting(true);
-
-		this.addSlot(this.craftingResult);
-	}
-
 	public void onNewRecipe(ISimpleRecipe recipe)
 	{
-		if (!RecipeUtil.canCraft(this.player, recipe))
+		if (!RecipeUtil.canCraft(this.inventory, recipe))
 		{
 			this.craftResult.setInventorySlotContents(0, ItemStack.EMPTY);
 			this.craftingResult.setRecipe(null);
@@ -112,8 +94,7 @@ public class ContainerMasonryBench extends Container
 	@Override
 	public boolean canInteractWith(PlayerEntity player)
 	{
-		return this.world.getBlockState(this.pos).getBlock() == BlocksAether.masonry_bench
-				&& player.getDistanceSq(this.pos.getX() + 0.5D, this.pos.getY() + 0.5D, this.pos.getZ() + 0.5D) <= 64.0D;
+		return isWithinUsableDistance(this.posCallable, player, BlocksAether.masonry_bench);
 	}
 
 	@Override

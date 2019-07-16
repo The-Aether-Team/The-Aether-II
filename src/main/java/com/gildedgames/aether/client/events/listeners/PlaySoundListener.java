@@ -16,8 +16,8 @@ public class PlaySoundListener
 	{
 		if (AetherHelper.isAether(Minecraft.getInstance().world))
 		{
-			if (event.getName().equals(SoundEvents.WEATHER_RAIN.getSoundName().getPath()) ||
-					event.getName().equals(SoundEvents.WEATHER_RAIN_ABOVE.getSoundName().getPath()))
+			if (event.getName().equals(SoundEvents.WEATHER_RAIN.getName().getPath()) ||
+					event.getName().equals(SoundEvents.WEATHER_RAIN_ABOVE.getName().getPath()))
 			{
 				event.setCanceled(true);
 			}

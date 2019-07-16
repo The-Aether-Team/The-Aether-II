@@ -6,19 +6,20 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerEquipmentModule;
 import com.gildedgames.aether.common.containers.guidebook.ContainerGuidebookInventory;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
-import net.minecraft.client.gui.AbstractGui;
-import net.minecraft.client.gui.inventory.GuiInventory;
 import com.mojang.blaze3d.platform.GlStateManager;
+import net.minecraft.client.gui.AbstractGui;
+import net.minecraft.client.gui.screen.inventory.InventoryScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class GuiGuidebookInventory extends AbstractGuidebookPage
+public class GuiGuidebookInventory extends AbstractGuidebookPage<ContainerGuidebookInventory>
 {
 
 	private static final ResourceLocation LEFT_PAGE = AetherCore.getResource("textures/gui/guidebook/inventory/guidebook_inventory_left.png");
@@ -29,17 +30,17 @@ public class GuiGuidebookInventory extends AbstractGuidebookPage
 
 	public GuiGuidebookInventory(final PlayerAether aePlayer)
 	{
-		super(aePlayer, new ContainerGuidebookInventory(aePlayer));
+		super(new ContainerGuidebookInventory(aePlayer), aePlayer, new StringTextComponent("Guidebook Inventory Page"));
 	}
 
 	@Override
-	public void drawScreen(final int mouseX, final int mouseY, final float partialTick)
+	public void render(final int mouseX, final int mouseY, final float partialTick)
 	{
 		this.drawPlayer(mouseX, mouseY);
 
 		this.drawEquipmentEffects();
 
-		super.drawScreen(mouseX,mouseY, partialTick);
+		super.render(mouseX,mouseY, partialTick);
 
 		this.drawSlotName(mouseX, mouseY);
 	}
@@ -47,30 +48,30 @@ public class GuiGuidebookInventory extends AbstractGuidebookPage
 	@Override
 	protected void drawLeftPage(int screenX, int screenY, float u, float v)
 	{
-		this.mc.renderEngine.bindTexture(LEFT_PAGE);
+		this.minecraft.getTextureManager().bindTexture(LEFT_PAGE);
 
-		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+		GlStateManager.color4f(1.0f, 1.0f, 1.0f, 1.0f);
 
-		AbstractGui.drawModalRectWithCustomSizedTexture(screenX, screenY, u, v, this.PAGE_WIDTH, this.PAGE_HEIGHT, this.TEXTURE_WIDTH, this.TEXTURE_HEIGHT);
+		AbstractGui.blit(screenX, screenY, u, v, this.PAGE_WIDTH, this.PAGE_HEIGHT, this.TEXTURE_WIDTH, this.TEXTURE_HEIGHT);
 	}
 
 	@Override
 	protected void drawRightPage(int screenX, int screenY, float u, float v)
 	{
-		this.mc.renderEngine.bindTexture(this.aePlayer.getEntity().isCreative() ? RIGHT_PAGE_CREATIVE : RIGHT_PAGE_SURVIVAL);
+		this.minecraft.getTextureManager().bindTexture(this.aePlayer.getEntity().isCreative() ? RIGHT_PAGE_CREATIVE : RIGHT_PAGE_SURVIVAL);
 
-		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+		GlStateManager.color4f(1.0f, 1.0f, 1.0f, 1.0f);
 
-		AbstractGui.drawModalRectWithCustomSizedTexture(screenX, screenY, u ,v, this.PAGE_WIDTH, this.PAGE_HEIGHT,this.TEXTURE_WIDTH, this.TEXTURE_HEIGHT);
+		AbstractGui.blit(screenX, screenY, u ,v, this.PAGE_WIDTH, this.PAGE_HEIGHT,this.TEXTURE_WIDTH, this.TEXTURE_HEIGHT);
 	}
 
 	private void drawPlayer(final int mouseX, final int mouseY)
 	{
-		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+		GlStateManager.color4f(1.0f, 1.0f, 1.0f, 1.0f);
 
-		GuiInventory.drawEntityOnScreen(
+		InventoryScreen.drawEntityOnScreen(
 				this.width / 2 - 48,
-				this.height / 2, 32, (this.guiLeft + 88) - mouseX, (this.guiTop + 35) - mouseY, this.mc.player);
+				this.height / 2, 32, (this.guiLeft + 88) - mouseX, (this.guiTop + 35) - mouseY, this.minecraft.player);
 	}
 
 	private boolean isMouseOverSlot(final Slot slot, final int mouseX, final int mouseY)
@@ -82,7 +83,7 @@ public class GuiGuidebookInventory extends AbstractGuidebookPage
 	{
 		String unlocalizedTooltip = null;
 
-		for (final Slot slot : this.inventorySlots.inventorySlots)
+		for (final Slot slot : this.container.inventorySlots)
 		{
 			if (slot.isEnabled() && !slot.getHasStack())
 			{
@@ -129,7 +130,7 @@ public class GuiGuidebookInventory extends AbstractGuidebookPage
 
 		if (unlocalizedTooltip != null)
 		{
-			this.drawHoveringText(Collections.singletonList(I18n.format(unlocalizedTooltip)), mouseX, mouseY, this.mc.fontRenderer);
+			this.renderTooltip(Collections.singletonList(I18n.format(unlocalizedTooltip)), mouseX, mouseY, this.font);
 		}
 	}
 
@@ -142,6 +143,6 @@ public class GuiGuidebookInventory extends AbstractGuidebookPage
 
 		final String compiled = StringUtils.join(label, TextFormatting.RESET + ", ");
 
-		this.mc.fontRenderer.drawString(compiled, this.guiLeft, this.guiTop + 160, 0xFFFFFF, true);
+		this.font.drawStringWithShadow(compiled, this.guiLeft, this.guiTop + 160, 0xFFFFFF);
 	}
 }

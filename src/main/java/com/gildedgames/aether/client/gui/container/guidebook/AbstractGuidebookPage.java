@@ -2,13 +2,15 @@ package com.gildedgames.aether.client.gui.container.guidebook;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.containers.guidebook.ContainerGuidebookInventory;
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
 
-public abstract class AbstractGuidebookPage extends ContainerScreen
+public abstract class AbstractGuidebookPage<T extends Container> extends ContainerScreen<T>
 {
 	private static final ResourceLocation TEXTURE_BASE = AetherCore.getResource("textures/gui/guidebook/guidebook_base.png");
 
@@ -24,18 +26,17 @@ public abstract class AbstractGuidebookPage extends ContainerScreen
 
 	protected final PlayerAether aePlayer;
 
-	public AbstractGuidebookPage(final PlayerAether aePlayer, Container container)
+	public AbstractGuidebookPage(T container, PlayerAether aePlayer, ITextComponent title)
 	{
-		super(container);
+		super(container, aePlayer.getEntity().inventory, title);
 
-		this.allowUserInput = true;
 		this.aePlayer = aePlayer;
 	}
 
 	@Override
-	public void initGui()
+	public void init()
 	{
-		super.initGui();
+		super.init();
 
 		this.guiLeft = (this.width/2) - 153 - 11;
 		this.guiTop = (this.height/2) - 69;
@@ -45,21 +46,15 @@ public abstract class AbstractGuidebookPage extends ContainerScreen
 	}
 
 	@Override
-	public void drawScreen(final int mouseX, final int mouseY, final float partialTick)
-	{
-		super.drawScreen(mouseX,mouseY, partialTick);
-	}
-
-	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
 	{
-		this.drawWorldBackground(0);
+		this.renderBackground(0);
 
-		this.mc.renderEngine.bindTexture(TEXTURE_BASE);
+		this.minecraft.getTextureManager().bindTexture(TEXTURE_BASE);
 
-		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+		GlStateManager.color4f(1.0f, 1.0f, 1.0f, 1.0f);
 
-		AbstractGui.drawModalRectWithCustomSizedTexture((this.width/2) - 176 - 11, this.height/2 - 185/2, 0, 0, 376, 256, 512, 256);
+		AbstractGui.blit((this.width/2) - 176 - 11, this.height/2 - 185/2, 0, 0, 376, 256, 512, 256);
 
 		/* Draw abstract methods to render left and right pages.
 		 *  Note that these calls have predetermined parameters which should align properly to the screen.

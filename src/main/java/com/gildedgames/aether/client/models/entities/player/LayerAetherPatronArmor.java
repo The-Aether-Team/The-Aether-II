@@ -97,7 +97,7 @@ public class LayerAetherPatronArmor implements LayerRenderer<LivingEntity>
 		float colorR = 1.0F;
 		float colorG = 1.0F;
 		float colorB = 1.0F;
-		GlStateManager.color(colorR, colorG, colorB, alpha);
+		GlStateManager.color4f(colorR, colorG, colorB, alpha);
 		model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 	}
 

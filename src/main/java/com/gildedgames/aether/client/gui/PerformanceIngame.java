@@ -4,7 +4,7 @@ import com.gildedgames.aether.common.AetherCore;
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
-import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
@@ -40,8 +40,6 @@ public class PerformanceIngame extends AbstractGui
 
 	private void renderIcon(Minecraft mc)
 	{
-		ScaledResolution res = new ScaledResolution(mc);
-
 		long now = System.currentTimeMillis();
 
 		if (now < this.visibleUntil)
@@ -69,15 +67,15 @@ public class PerformanceIngame extends AbstractGui
 
 			if (this.timeSinceLastTick > 800)
 			{
-				GlStateManager.color(255 / 255.0f, 78 / 255.0f, 41 / 255.0f, this.iconAlpha);
+				GlStateManager.color4f(255 / 255.0f, 78 / 255.0f, 41 / 255.0f, this.iconAlpha);
 			}
 			else if (this.timeSinceLastTick > 400)
 			{
-				GlStateManager.color(255 / 255.0f, 137 / 255.0f, 41 / 255.0f, this.iconAlpha);
+				GlStateManager.color4f(255 / 255.0f, 137 / 255.0f, 41 / 255.0f, this.iconAlpha);
 			}
 			else
 			{
-				GlStateManager.color(255 / 255.0f, 198 / 255.0f, 41 / 255.0f, this.iconAlpha);
+				GlStateManager.color4f(255 / 255.0f, 198 / 255.0f, 41 / 255.0f, this.iconAlpha);
 			}
 
 			mc.getTextureManager().bindTexture(SERVER_STALL_ICON);
@@ -92,12 +90,12 @@ public class PerformanceIngame extends AbstractGui
 			GlStateManager.pushMatrix();
 			GlStateManager.enableRescaleNormal();
 
-			GlStateManager.translatef(res.getScaledWidth() - 24.0f, 8.0f, 0.0f);
+			GlStateManager.translatef(mc.mainWindow.getScaledWidth() - 24.0f, 8.0f, 0.0f);
 			GlStateManager.scalef(0.25f, 0.25f, 0.25f);
 
-			this.drawTexturedModalRect(0, 0, 0, 64 * (int) this.iconFrame, 64, 64);
+			this.blit(0, 0, 0, 64 * (int) this.iconFrame, 64, 64);
 
-			GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+			GlStateManager.color4f(1.0f, 1.0f, 1.0f, 1.0f);
 			GlStateManager.popMatrix();
 		}
 
@@ -107,7 +105,7 @@ public class PerformanceIngame extends AbstractGui
 	private void update(Minecraft mc)
 	{
 		// No server to measure...
-		if (FMLCommonHandler.instance().getMinecraftServerInstance() == null)
+		if (Minecraft.getInstance().getIntegratedServer() == null)
 		{
 			this.isDisabled = true;
 
@@ -116,7 +114,7 @@ public class PerformanceIngame extends AbstractGui
 
 		this.isDisabled = false;
 
-		this.timeSinceLastTick = System.currentTimeMillis() - FMLCommonHandler.instance().getMinecraftServerInstance().currentTime;
+		this.timeSinceLastTick = System.currentTimeMillis() - Minecraft.getInstance().getIntegratedServer().currentTime;
 
 		if (this.timeSinceLastTick > 200)
 		{

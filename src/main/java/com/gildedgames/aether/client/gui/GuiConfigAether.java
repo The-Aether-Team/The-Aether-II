@@ -32,7 +32,7 @@ public class GuiConfigAether extends GuiConfig
 	}
 
 	@Override
-	public void drawDefaultBackground()
+	public void renderBackground()
 	{
 
 	}

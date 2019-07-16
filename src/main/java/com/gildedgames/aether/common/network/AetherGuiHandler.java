@@ -10,13 +10,10 @@ import com.gildedgames.aether.client.gui.container.guidebook.GuiGuidebookDiscove
 import com.gildedgames.aether.client.gui.container.guidebook.GuiGuidebookInventory;
 import com.gildedgames.aether.client.gui.container.guidebook.GuiGuidebookLoreTome;
 import com.gildedgames.aether.client.gui.container.guidebook.GuiGuidebookStatus;
-import com.gildedgames.aether.client.gui.container.simple_crafting.ContainerMasonryBench;
-import com.gildedgames.aether.client.gui.dialog.ContainerShop;
-import com.gildedgames.aether.client.gui.dialog.GuiDialogViewer;
+import com.gildedgames.aether.client.gui.container.simple_crafting.GuiContainerMasonryBench;
+import com.gildedgames.aether.client.gui.dialog.GuiContainerShop;
+import com.gildedgames.aether.client.gui.dialog.GuiDialogScreen;
 import com.gildedgames.aether.client.gui.dialog.GuiTrade;
-import com.gildedgames.aether.client.gui.misc.GuiAetherLoading;
-import com.gildedgames.aether.client.gui.misc.GuiAetherTeleporterNotice;
-import com.gildedgames.aether.client.gui.misc.GuiPatronRewards;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerDialogModule;
 import com.gildedgames.aether.common.containers.ContainerCustomWorkbench;
@@ -85,9 +82,7 @@ public class AetherGuiHandler implements IGuiHandler
 			case INVENTORY_ID:
 				return new ContainerGuidebookInventory(playerAether);
 			case STATUS_ID:
-				return new EmptyContainer();
 			case LORE_TOME_ID:
-				return new EmptyContainer();
 			case DISCOVERY_ID:
 				return new EmptyContainer();
 			case FROSTPINE_COOLER_ID:
@@ -123,7 +118,7 @@ public class AetherGuiHandler implements IGuiHandler
 					return null;
 				}
 
-				return new com.gildedgames.aether.common.containers.ContainerShop(player.inventory, shopInstance);
+				return new GuiContainerShop(player.inventory, shopInstance);
 			}
 			case DIALOG_VIEWER_ID:
 				return new ContainerDialogController(player);
@@ -158,13 +153,7 @@ public class AetherGuiHandler implements IGuiHandler
 			case INCUBATOR_ID:
 				return new GuiIncubator(player.inventory, (IInventory) world.getTileEntity(pos), pos);
 			case MASONRY_BENCH_ID:
-				return new ContainerMasonryBench(player, new BlockPos(x, y, z));
-			case AETHER_LOADING_ID:
-				return new GuiAetherLoading();
-			case PATRON_REWARDS_ID:
-				return new GuiPatronRewards();
-			case TELEPORTER_NOTICE_ID:
-				return new GuiAetherTeleporterNotice();
+				return new GuiContainerMasonryBench(player, new BlockPos(x, y, z));
 			case DIALOG_SHOP_ID:
 			{
 				PlayerDialogModule dialogModule = playerAether.getModule(PlayerDialogModule.class);
@@ -199,23 +188,23 @@ public class AetherGuiHandler implements IGuiHandler
 					prevViewer = (GuiViewer) FMLClientHandler.instance().getClient().currentScreen;
 				}
 
-				GuiDialogViewer.preventDialogControllerClose = true;
+				GuiDialogScreen.preventDialogControllerClose = true;
 
 				if (slide.getRenderer().isPresent())
 				{
 					IDialogSlideRenderer renderer = DialogUtil.getRenderer(slide);
 
-					return new ContainerShop(prevViewer, player, slide, renderer, shopInstance, shopIndex);
+					return new GuiContainerShop(prevViewer, player, slide, renderer, shopInstance, shopIndex);
 				}
 				else
 				{
-					return new ContainerShop(prevViewer, player, slide, null, shopInstance, shopIndex);
+					return new GuiContainerShop(prevViewer, player, slide, null, shopInstance, shopIndex);
 				}
 			}
 			case DIALOG_VIEWER_ID:
 				PlayerDialogModule dialogModule = playerAether.getModule(PlayerDialogModule.class);
 
-				return new GuiDialogViewer(player, dialogModule, dialogModule.getCurrentSceneInstance());
+				return new GuiDialogScreen(player, dialogModule, dialogModule.getCurrentSceneInstance());
 			case TRADE_ID:
 				GuiViewer prevViewerA = null;
 

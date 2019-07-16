@@ -9,13 +9,13 @@ public abstract class GuiAbstractButton extends Button
 
 	protected boolean hasInit;
 
-	public GuiAbstractButton(final int elementId, final int x, final int y)
+	public GuiAbstractButton(final int x, final int y, final int width, final int height, IPressable callback)
 	{
-		super(elementId, x, y, "");
+		super(x, y, width, height, "", callback);
 	}
 
 	@Override
-	public final void drawButton(final Minecraft mc, final int mouseX, final int mouseY, final float partialTicks)
+	public final void render(final int mouseX, final int mouseY, final float partialTicks)
 	{
 		final FontRenderer fontRenderer = Minecraft.getInstance().fontRenderer;
 

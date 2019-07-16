@@ -23,17 +23,14 @@ public class RenderDebugOverlayListener
 
 		if (Minecraft.getInstance().world.getWorldInfo().isRaining())
 		{
-			IPrecipitationManager precipitation = Minecraft.getInstance().world.getCapability(CapabilitiesAether.PRECIPITATION_MANAGER, null);
+			Minecraft.getInstance().world.getCapability(CapabilitiesAether.PRECIPITATION_MANAGER, null)
+					.ifPresent((precipitation) -> {
+						event.getLeft().add("");
+						event.getLeft().add(TextFormatting.DARK_AQUA + "[" + TextFormatting.AQUA + "Aether Precipitation" + TextFormatting.DARK_AQUA + "]");
+						event.getLeft().add("- Strength: " + precipitation.getStrength().name());
+						event.getLeft().add("- Wind Velocity: (" + String.format("%.2f, %.2f", precipitation.getWindVector().x, precipitation.getWindVector().y) + ")");
 
-			if (precipitation != null)
-			{
-				event.getLeft().add("");
-				event.getLeft().add(TextFormatting.DARK_AQUA + "[" + TextFormatting.AQUA + "Aether Precipitation" + TextFormatting.DARK_AQUA + "]");
-				event.getLeft().add("- Strength: " + precipitation.getStrength().name());
-				event.getLeft().add("- Wind Velocity: (" + String.format("%.2f, %.2f", precipitation.getWindVector().x, precipitation.getWindVector().y) + ")");
-			}
+					});
 		}
-
-
 	}
 }

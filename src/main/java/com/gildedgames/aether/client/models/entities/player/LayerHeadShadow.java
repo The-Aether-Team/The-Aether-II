@@ -115,7 +115,7 @@ public class LayerHeadShadow extends LayerBipedArmor
 
 		this.renderer.bindTexture(texture);
 
-		GlStateManager.color(0.25F, 0.25F, 0.25F, 1.0F);
+		GlStateManager.color4f(0.25F, 0.25F, 0.25F, 1.0F);
 
 		t.render(player.getEntity(), limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 

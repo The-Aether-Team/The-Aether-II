@@ -1,11 +1,9 @@
 package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
 import com.gildedgames.aether.api.player.IPlayerAetherModule;
-import com.gildedgames.aether.client.gui.misc.GuiIntro;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
-import com.gildedgames.aether.common.init.DimensionsAether;
 import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import com.gildedgames.orbis.lib.util.TeleporterGeneric;
 import com.gildedgames.orbis.lib.util.io.NBTFunnel;
@@ -19,8 +17,6 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.ServerWorld;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
@@ -81,18 +77,6 @@ public class PlayerTeleportingModule extends PlayerAetherModule implements IPlay
 	public int getPrevTicksInTeleporter()
 	{
 		return this.prevTicksInTeleporter;
-	}
-
-	@OnlyIn(Dist.CLIENT)
-	private void onUpdateClient()
-	{
-		if (this.getWorld().provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER)
-		{
-			if (!this.playedIntro && Minecraft.getInstance().currentScreen == null)
-			{
-				Minecraft.getInstance().displayGuiScreen(new GuiIntro());
-			}
-		}
 	}
 
 	public float getLastPercent()

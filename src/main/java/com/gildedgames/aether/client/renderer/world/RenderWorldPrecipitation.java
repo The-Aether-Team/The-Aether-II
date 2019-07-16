@@ -111,7 +111,7 @@ public class RenderWorldPrecipitation extends IRenderHandler
 
 		buffer.setTranslation(-x, -y, -z);
 
-		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+		GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 
 		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
 

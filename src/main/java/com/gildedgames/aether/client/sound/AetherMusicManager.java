@@ -1,7 +1,6 @@
 package com.gildedgames.aether.client.sound;
 
 import com.gildedgames.aether.api.player.IPlayerAether;
-import com.gildedgames.aether.client.events.listeners.gui.GuiLoadingListener;
 import com.gildedgames.aether.client.sound.generators.AetherMusicGenerator;
 import com.gildedgames.aether.client.sound.generators.IMusicGenerator;
 import com.gildedgames.aether.common.AetherCore;
@@ -14,8 +13,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.api.distmarker.Dist;
 
@@ -141,20 +140,14 @@ public class AetherMusicManager
 	// Lowest priority is important, so we can ensure the sound will actually be played
 	public static void onPlaySound(final PlaySoundEvent event)
 	{
-		if (GuiLoadingListener.isLoadingScreen())
-		{
-			event.setResultSound(null);
-			return;
-		}
-
 		if (event.getSound().getCategory() == SoundCategory.MUSIC)
 		{
 			if (!event.getSound().getSoundLocation().getNamespace().equals(AetherCore.MOD_ID))
 			{
 				final PlayerEntity player = Minecraft.getInstance().player;
 
-				if (player != null && (player.world.provider.getDimensionType() == DimensionsAether.AETHER
-						|| player.world.provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER))
+				if (player != null && (player.world.getDimension().getType() == DimensionsAether.AETHER
+						|| player.world.getDimension().getType() == DimensionsAether.NECROMANCER_TOWER))
 				{
 					event.setResultSound(null);
 				}

@@ -9,6 +9,7 @@ import com.gildedgames.aether.client.gui.util.GuiItemStack;
 import com.gildedgames.aether.common.AetherCelebrations;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.containers.ContainerShop;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketShopBack;
 import com.gildedgames.aether.common.network.packets.PacketShopBuy;
@@ -34,6 +35,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -45,7 +47,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
-public class ContainerShop extends GuiViewer implements ICurrencyListener, IExtendedContainer
+public class GuiContainerShop extends GuiViewer<ContainerShop> implements ICurrencyListener, IExtendedContainer
 {
 	private static final ResourceLocation INVENTORY = AetherCore.getResource("textures/gui/shop/inventory.png");
 
@@ -80,8 +82,6 @@ public class ContainerShop extends GuiViewer implements ICurrencyListener, IExte
 	private final IShopInstance shopInstance;
 
 	private final List<GuiShopBuy> buys = Lists.newArrayList();
-
-	private final com.gildedgames.aether.common.containers.ContainerShop container;
 
 	private final PlayerAether playerAether;
 
@@ -125,15 +125,13 @@ public class ContainerShop extends GuiViewer implements ICurrencyListener, IExte
 
 	private com.gildedgames.orbis.lib.client.gui.util.GuiTextBox holidayNoticeText;
 
-	public ContainerShop(GuiViewer prevViewer, PlayerEntity player, IDialogSlide slide, IDialogSlideRenderer renderer, IShopInstance shopInstance, int shopIndex)
+	public GuiContainerShop(GuiViewer prevViewer, PlayerEntity player, IDialogSlide slide, IDialogSlideRenderer renderer, IShopInstance shopInstance, int shopIndex)
 	{
-		super(new GuiElement(Dim2D.flush(), false), prevViewer, new com.gildedgames.aether.common.containers.ContainerShop(player.inventory, shopInstance));
+		super(new GuiElement(Dim2D.flush(), false), prevViewer, new ContainerShop(player.inventory, shopInstance));
 
 		this.shopIndex = shopIndex;
 
 		this.setDrawDefaultBackground(false);
-
-		this.container = (com.gildedgames.aether.common.containers.ContainerShop) this.inventorySlots;
 
 		this.slide = slide;
 		this.renderer = renderer;
@@ -160,9 +158,9 @@ public class ContainerShop extends GuiViewer implements ICurrencyListener, IExte
 	}
 
 	@Override
-	public void onGuiClosed()
+	public void onClose()
 	{
-		super.onGuiClosed();
+		super.onClose();
 
 		this.shopInstance.getCurrencyType().unlistenForCurrency(this.playerAether, this);
 	}
@@ -199,8 +197,8 @@ public class ContainerShop extends GuiViewer implements ICurrencyListener, IExte
 
 		this.sell = new GuiButtonVanilla(Dim2D.build().width(72).height(20).pos(center).y(this.height).addX(84).addY(-207).flush());
 
-		this.sell.getInner().displayString = I18n.format("aether.shop.sell");
-		this.sell.getInner().enabled = false;
+		this.sell.getInner().setMessage(I18n.format("aether.shop.sell"));
+		this.sell.getInner().active = false;
 
 		if (AetherCelebrations.isEdisonNewYearsSale(this.shopInstance))
 		{
@@ -212,24 +210,24 @@ public class ContainerShop extends GuiViewer implements ICurrencyListener, IExte
 		this.stackGui = new GuiItemStack(Dim2D.build().pos(center).y(this.height).addX(-132).addY(-166).scale(1.0F).flush());
 		this.buy = new GuiButtonVanilla(Dim2D.build().width(44).height(20).pos(center).y(this.height).addX(-106).addY(-167).flush());
 
-		this.buy.getInner().displayString = I18n.format("aether.shop.buy", isCountLocked ? buyCount : this.buyCountUnlocked);
+		this.buy.getInner().setMessage(I18n.format("aether.shop.buy", isCountLocked ? buyCount : this.buyCountUnlocked));
 		this.buy.state().setEnabled(false);
 
 		this.back = new GuiButtonVanilla(Dim2D.build().width(20).height(20).pos(center).y(this.height).addX(-236).addY(-125).flush());
 
-		this.back.getInner().displayString = "<";
+		this.back.getInner().setMessage("<");
 
 		context.addChildren(this.stackGui, this.buy, this.back);
 
 		int baseBoxSize = 350;
 		final boolean resize = this.width - 40 > baseBoxSize;
 
-		this.npcDialogue = new GuiTextBox(0, resize ? (this.width / 2) - (baseBoxSize / 2) : 20, this.height - 85, baseBoxSize, 70);
+		this.npcDialogue = new GuiTextBox(resize ? (this.width / 2) - (baseBoxSize / 2) : 20, this.height - 85, baseBoxSize, 70);
 
 		int greetingBoxSize = 350;
 		final boolean greetingResize = this.width - 40 > greetingBoxSize;
 
-		this.npcGreeting = new GuiTextBox(1, greetingResize ? (this.width / 2) - (greetingBoxSize / 2) : 20, this.height - 85, greetingBoxSize, 70);
+		this.npcGreeting = new GuiTextBox(greetingResize ? (this.width / 2) - (greetingBoxSize / 2) : 20, this.height - 85, greetingBoxSize, 70);
 
 		String greeting = MathUtil.getRandomElement(this.shopInstance.getUnlocalizedGreetings(), new Random());
 
@@ -238,8 +236,8 @@ public class ContainerShop extends GuiViewer implements ICurrencyListener, IExte
 		this.buyTitle = new com.gildedgames.orbis.lib.client.gui.util.GuiTextBox(
 				Dim2D.build().centerX(true).pos(center).width(60).height(50).y(this.height).addX(-178).addY(-40).flush(), true);
 
-		this.buttonList.add(this.npcDialogue);
-		this.buttonList.add(this.npcGreeting);
+		this.addButton(this.npcDialogue);
+		this.addButton(this.npcGreeting);
 
 		//this.addChildren(this.buyTitle);
 
@@ -286,12 +284,12 @@ public class ContainerShop extends GuiViewer implements ICurrencyListener, IExte
 	{
 		if (isCountLocked)
 		{
-			ContainerShop.buyCount = MathHelper.clamp(ContainerShop.buyCount + buyCount, 1, 64);
+			GuiContainerShop.buyCount = MathHelper.clamp(GuiContainerShop.buyCount + buyCount, 1, 64);
 
 			if (this.getSelectedBuy() != null)
 			{
 				int count = (int) Math
-						.min(this.getSelectedBuy().getStock(), Math.min(ContainerShop.buyCount, Math.min(this.getSelectedBuy().getItemStack().getMaxStackSize(),
+						.min(this.getSelectedBuy().getStock(), Math.min(GuiContainerShop.buyCount, Math.min(this.getSelectedBuy().getItemStack().getMaxStackSize(),
 								this.shopInstance.getCurrencyType().getValue(this.playerAether) / ShopUtil
 										.getFilteredPrice(this.shopInstance, this.getSelectedBuy()))));
 
@@ -341,7 +339,7 @@ public class ContainerShop extends GuiViewer implements ICurrencyListener, IExte
 	}
 
 	@Override
-	public void drawScreen(final int mouseX, final int mouseY, final float partialTicks)
+	public void render(final int mouseX, final int mouseY, final float partialTicks)
 	{
 		this.shopInstance.getCurrencyType().listenForCurrency(this.playerAether, this);
 		this.shopInstance.getCurrencyType().update(this.playerAether);
@@ -380,15 +378,15 @@ public class ContainerShop extends GuiViewer implements ICurrencyListener, IExte
 			}
 		}
 
-		this.drawWorldBackground(0);
+		this.renderBackground(0);
 		MinecraftForge.EVENT_BUS.post(new GuiScreenEvent.BackgroundDrawnEvent(this));
 
 		GlStateManager.pushMatrix();
 
-		GlStateManager.disableDepth();
+		GlStateManager.disableDepthTest();
 
 		GlStateManager.translatef(0, 0, 100F);
-		GlStateManager.color(1.0F, 1.0F, 1.0F);
+		GlStateManager.color3f(1.0F, 1.0F, 1.0F);
 
 		if (this.slide != null && this.renderer != null)
 		{
@@ -402,11 +400,11 @@ public class ContainerShop extends GuiViewer implements ICurrencyListener, IExte
 
 		GlStateManager.translatef(0, 0, 100F);
 
-		AbstractGui.drawRect(0, this.height - 90, this.width, this.height, Integer.MIN_VALUE);
+		AbstractGui.fill(0, this.height - 90, this.width, this.height, Integer.MIN_VALUE);
 
-		super.drawScreen(mouseX, mouseY, partialTicks);
+		super.render(mouseX, mouseY, partialTicks);
 
-		GlStateManager.enableDepth();
+		GlStateManager.enableDepthTest();
 
 		GlStateManager.popMatrix();
 
@@ -483,17 +481,17 @@ public class ContainerShop extends GuiViewer implements ICurrencyListener, IExte
 		{
 			this.npcGreeting.visible = false;
 
-			int maxAllowedWithHeldStack = this.getSelectedBuy().getItemStack().getMaxStackSize() - this.mc.player.inventory.getItemStack().getCount();
+			int maxAllowedWithHeldStack = this.getSelectedBuy().getItemStack().getMaxStackSize() - this.minecraft.player.inventory.getItemStack().getCount();
 
 			int amount = Math.min(maxAllowedWithHeldStack, Math.min(buyCount, this.getSelectedBuy().getStock()));
 
 			boolean canAfford =
 					this.shopInstance.getCurrencyType().getValue(this.playerAether) >= ShopUtil.getFilteredPrice(this.shopInstance, this.getSelectedBuy());
-			boolean isHandFree = this.mc.player.inventory.getItemStack().isEmpty();
-			boolean isBuyItem = ItemHelper.getKeyForItemStack(this.mc.player.inventory.getItemStack()) == ItemHelper
+			boolean isHandFree = this.minecraft.player.inventory.getItemStack().isEmpty();
+			boolean isBuyItem = ItemHelper.getKeyForItemStack(this.minecraft.player.inventory.getItemStack()) == ItemHelper
 					.getKeyForItemStack(this.getSelectedBuy().getItemStack());
-			boolean canStack = this.mc.player.inventory.getItemStack().isStackable();
-			boolean isAtStackLimit = this.mc.player.inventory.getItemStack().getCount() >= this.mc.player.inventory.getItemStack().getMaxStackSize();
+			boolean canStack = this.minecraft.player.inventory.getItemStack().isStackable();
+			boolean isAtStackLimit = this.minecraft.player.inventory.getItemStack().getCount() >= this.minecraft.player.inventory.getItemStack().getMaxStackSize();
 			boolean hasStock = this.getSelectedBuy().getStock() > 0 && amount > 0;
 
 			this.buy.state()
@@ -517,7 +515,7 @@ public class ContainerShop extends GuiViewer implements ICurrencyListener, IExte
 			this.prevBuy = this.selectedBuy;
 
 			int count = (int) Math
-					.min(isCountLocked ? ContainerShop.buyCount : this.buyCountUnlocked, Math.min(this.getSelectedBuy().getItemStack().getMaxStackSize(),
+					.min(isCountLocked ? GuiContainerShop.buyCount : this.buyCountUnlocked, Math.min(this.getSelectedBuy().getItemStack().getMaxStackSize(),
 							this.shopInstance.getCurrencyType().getValue(this.playerAether) / ShopUtil
 									.getFilteredPrice(this.shopInstance, this.getSelectedBuy())));
 
@@ -537,14 +535,14 @@ public class ContainerShop extends GuiViewer implements ICurrencyListener, IExte
 		{
 			prevBuyCount = buyCount;
 
-			this.buy.getInner().displayString = I18n.format("aether.shop.buy", buyCount);
+			this.buy.getInner().setMessage(I18n.format("aether.shop.buy", buyCount));
 		}
 
 		if (this.buyCountUnlocked != this.prevBuyCountUnlocked && !isCountLocked)
 		{
 			this.prevBuyCountUnlocked = this.buyCountUnlocked;
 
-			this.buy.getInner().displayString = I18n.format("aether.shop.buy", this.buyCountUnlocked);
+			this.buy.getInner().setMessage(I18n.format("aether.shop.buy", this.buyCountUnlocked));
 		}
 	}
 
@@ -555,7 +553,7 @@ public class ContainerShop extends GuiViewer implements ICurrencyListener, IExte
 	}
 
 	@Override
-	public void drawDefaultBackground()
+	public void renderBackground()
 	{
 
 	}
@@ -572,7 +570,7 @@ public class ContainerShop extends GuiViewer implements ICurrencyListener, IExte
 	}
 
 	@Override
-	protected void mouseClicked(final int mouseX, final int mouseY, final int mouseButton) throws IOException
+	protected void mouseClicked(final int mouseX, final int mouseY, final int mouseButton)
 	{
 		super.mouseClicked(mouseX, mouseY, mouseButton);
 
@@ -582,12 +580,12 @@ public class ContainerShop extends GuiViewer implements ICurrencyListener, IExte
 
 			if (isCountLocked)
 			{
-				this.buy.getInner().displayString = I18n.format("aether.shop.buy", buyCount);
+				this.buy.getInner().setMessage(I18n.format("aether.shop.buy", buyCount));
 
 				if (this.getSelectedBuy() != null)
 				{
 					int count = (int) Math
-							.min(this.getSelectedBuy().getStock(), Math.min(ContainerShop.buyCount, Math.min(this.getSelectedBuy().getItemStack().getMaxStackSize(),
+							.min(this.getSelectedBuy().getStock(), Math.min(GuiContainerShop.buyCount, Math.min(this.getSelectedBuy().getItemStack().getMaxStackSize(),
 									this.shopInstance.getCurrencyType().getValue(this.playerAether) / ShopUtil
 											.getFilteredPrice(this.shopInstance, this.getSelectedBuy()))));
 
@@ -607,7 +605,7 @@ public class ContainerShop extends GuiViewer implements ICurrencyListener, IExte
 			}
 			else
 			{
-				this.buy.getInner().displayString = I18n.format("aether.shop.buy", this.buyCountUnlocked);
+				this.buy.getInner().setMessage(I18n.format("aether.shop.buy", this.buyCountUnlocked));
 
 				if (this.stackGui.getItemStack() != null)
 				{
@@ -631,7 +629,7 @@ public class ContainerShop extends GuiViewer implements ICurrencyListener, IExte
 			this.addBuyCount(1);
 			this.lastBuyCountChangeTime = System.currentTimeMillis();
 
-			if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
+			if (hasShiftDown())
 			{
 				this.addBuyCount(64);
 			}
@@ -643,7 +641,7 @@ public class ContainerShop extends GuiViewer implements ICurrencyListener, IExte
 			this.addBuyCount(-1);
 			this.lastBuyCountChangeTime = System.currentTimeMillis();
 
-			if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
+			if (hasShiftDown())
 			{
 				this.addBuyCount(-64);
 			}
@@ -671,12 +669,12 @@ public class ContainerShop extends GuiViewer implements ICurrencyListener, IExte
 
 			NetworkingAether.sendPacketToServer(new PacketShopBuy(index, isCountLocked ? buyCount : this.buyCountUnlocked, this.shopIndex));
 
-			int maxAllowedWithHeldStack = this.getSelectedBuy().getItemStack().getMaxStackSize() - this.mc.player.inventory.getItemStack().getCount();
+			int maxAllowedWithHeldStack = this.getSelectedBuy().getItemStack().getMaxStackSize() - this.minecraft.player.inventory.getItemStack().getCount();
 
 			int amount = Math.min(maxAllowedWithHeldStack, Math.min(isCountLocked ? buyCount : this.buyCountUnlocked, this.getSelectedBuy().getStock()));
 
-			boolean isHandFree = this.mc.player.inventory.getItemStack().isEmpty();
-			boolean isBuyItem = ItemHelper.getKeyForItemStack(this.mc.player.inventory.getItemStack()) == ItemHelper
+			boolean isHandFree = this.minecraft.player.inventory.getItemStack().isEmpty();
+			boolean isBuyItem = ItemHelper.getKeyForItemStack(this.minecraft.player.inventory.getItemStack()) == ItemHelper
 					.getKeyForItemStack(this.getSelectedBuy().getItemStack());
 
 			if (isHandFree)
@@ -686,13 +684,13 @@ public class ContainerShop extends GuiViewer implements ICurrencyListener, IExte
 				ItemStack stack = this.getSelectedBuy().getItemStack().copy();
 				stack.setCount(amount);
 
-				this.mc.player.inventory.setItemStack(stack);
+				this.minecraft.player.inventory.setItemStack(stack);
 			}
 			else if (isBuyItem)
 			{
 				this.getSelectedBuy().addStock(-amount);
 
-				this.mc.player.inventory.getItemStack().setCount(this.mc.player.inventory.getItemStack().getCount() + amount);
+				this.minecraft.player.inventory.getItemStack().setCount(this.minecraft.player.inventory.getItemStack().getCount() + amount);
 			}
 
 			this.addBuyCount(0);
@@ -758,7 +756,7 @@ public class ContainerShop extends GuiViewer implements ICurrencyListener, IExte
 		if (scroll != 0 && (InputHelper.isHovered(this.buy) || InputHelper.isHovered(this.upArrow) || InputHelper.isHovered(this.downArrow) || InputHelper
 				.isHovered(this.lockButton)))
 		{
-			if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
+			if (hasShiftDown())
 			{
 				this.addBuyCount(scroll * 64);
 			}

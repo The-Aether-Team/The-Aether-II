@@ -1,8 +1,8 @@
 package com.gildedgames.aether.client.events.listeners.gui;
 
 import com.gildedgames.aether.client.gui.overlays.IOverlay;
-import com.gildedgames.aether.client.gui.overlays.PortalOverlay;
-import com.gildedgames.aether.client.gui.overlays.SwetOverlay;
+import com.gildedgames.aether.client.gui.overlays.OverlayPortal;
+import com.gildedgames.aether.client.gui.overlays.OverlaySwet;
 import com.gildedgames.aether.client.models.entities.player.*;
 import com.gildedgames.aether.client.renderer.particles.ParticleRainProxyFactory;
 import com.google.common.collect.Lists;
@@ -53,11 +53,11 @@ public class GuiOverlayListener
 			original.addAll(updated);
 		}
 
-		overlays.add(new PortalOverlay());
-		overlays.add(new SwetOverlay());
+		overlays.add(new OverlayPortal());
+		overlays.add(new OverlaySwet());
 
 		// See documentation of ParticleRainProxyFactory. Ugly hack.
-		Minecraft.getInstance().effectRenderer.registerParticle(ParticleTypes.WATER_DROP.getParticleID(), new ParticleRainProxyFactory());
+		Minecraft.getInstance().getRenderManager().registerParticle(ParticleTypes.WATER_DROP.getParticleID(), new ParticleRainProxyFactory());
 	}
 
 	@SubscribeEvent

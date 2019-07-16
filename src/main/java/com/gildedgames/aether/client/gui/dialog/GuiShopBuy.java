@@ -10,9 +10,11 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.orbis.lib.client.gui.util.GuiAbstractButton;
 import com.gildedgames.orbis.lib.client.gui.util.GuiTexture;
 import com.gildedgames.orbis.lib.client.gui.util.gui_library.GuiElement;
+import com.gildedgames.orbis.lib.client.gui.util.gui_library.IGuiElement;
 import com.gildedgames.orbis.lib.client.rect.Dim2D;
 import com.gildedgames.orbis.lib.client.rect.Rect;
 import com.gildedgames.orbis.lib.util.InputHelper;
+import com.mojang.blaze3d.platform.GLX;
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -65,13 +67,13 @@ public class GuiShopBuy extends GuiElement
 		GuiElement itemstack = new GuiElement(Dim2D.flush(), true)
 		{
 			@Override
-			public void onDraw(GuiElement element)
+			public void onDraw(IGuiElement element, int mouseX, int mouseY, float partialTicks)
 			{
 				GlStateManager.pushMatrix();
-				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+				GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 				GlStateManager.enableRescaleNormal();
-				OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240.0F, 240.0F);
-				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+				GLX.glMultiTexCoord2f(GLX.GL_TEXTURE1, 240.0F, 240.0F);
+				GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 
 				GlStateManager.pushMatrix();
 
@@ -128,7 +130,7 @@ public class GuiShopBuy extends GuiElement
 
 				GlStateManager.popMatrix();
 				GlStateManager.enableLighting();
-				GlStateManager.enableDepth();
+				GlStateManager.enableDepthTest();
 				RenderHelper.enableStandardItemLighting();
 			}
 		};

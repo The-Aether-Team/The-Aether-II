@@ -82,7 +82,7 @@ public class DialogSlideRendererStatic implements IDialogSlideRenderer
 
 		textureManager.bindTexture(this.slideTexture);
 
-		AbstractGui.drawModalRectWithCustomSizedTexture(0, 0, 0, 0, this.width, this.height, this.width, this.height);
+		AbstractGui.blit(0, 0, 0, 0, this.width, this.height, this.width, this.height);
 		GlStateManager.popMatrix();
 	}
 

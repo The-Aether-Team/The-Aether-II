@@ -25,6 +25,6 @@ public class CheckDimension implements IConditionPosition, IConditionWorld
 	@Override
 	public boolean isMet(World world)
 	{
-		return world.provider.getDimensionType() == this.dimensionTypeToCheckFor;
+		return world.getDimension().getType() == this.dimensionTypeToCheckFor;
 	}
 }

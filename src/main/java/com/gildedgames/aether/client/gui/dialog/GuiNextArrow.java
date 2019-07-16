@@ -2,18 +2,19 @@ package com.gildedgames.aether.client.gui.dialog;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.orbis.lib.client.gui.util.gui_library.GuiElement;
+import com.gildedgames.orbis.lib.client.gui.util.gui_library.IGuiElement;
 import com.gildedgames.orbis.lib.client.rect.Dim2D;
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.Sys;
+import net.minecraft.util.Util;
 
 public class GuiNextArrow extends GuiElement
 {
 	private static final ResourceLocation NEXT_ARROW = AetherCore.getResource("textures/gui/conversation/next_arrow.png");
 
-	private double nextArrowAnim, prevTime;
+	private float nextArrowAnim, prevTime;
 
 	public GuiNextArrow()
 	{
@@ -21,12 +22,12 @@ public class GuiNextArrow extends GuiElement
 	}
 
 	@Override
-	public void onDraw(GuiElement element)
+	public void onDraw(IGuiElement element, int mouseX, int mouseY, float partialTicks)
 	{
 		GlStateManager.pushMatrix();
 
-		final double time = (Sys.getTime() * 1000) / Sys.getTimerResolution();
-		final double timePassed = time - this.prevTime;
+		final float time = Util.milliTime();
+		final float timePassed = time - this.prevTime;
 
 		this.prevTime = time;
 
@@ -36,26 +37,26 @@ public class GuiNextArrow extends GuiElement
 		}
 		else
 		{
-			this.nextArrowAnim = 0.0;
+			this.nextArrowAnim = 0.0f;
 		}
 
-		final double anim = this.nextArrowAnim;
+		final float anim = this.nextArrowAnim;
 
-		if (this.nextArrowAnim < 500.0)
+		if (this.nextArrowAnim < 500.0f)
 		{
-			GlStateManager.translatef(0, anim / 500.0, 0);
+			GlStateManager.translatef(0, anim / 500.0f, 0);
 		}
-		else if (this.nextArrowAnim >= 500.0)
+		else if (this.nextArrowAnim >= 500.0f)
 		{
-			GlStateManager.translatef(0, -((anim - 500.0) / 500.0), 0);
+			GlStateManager.translatef(0, -((anim - 500.0f) / 500.0f), 0);
 		}
 
 		GlStateManager.translatef(0, 0, 302F);
-		GlStateManager.color(1.0F, 1.0F, 1.0F);
+		GlStateManager.color3f(1.0F, 1.0F, 1.0F);
 
 		Minecraft.getInstance().getTextureManager().bindTexture(NEXT_ARROW);
 
-		AbstractGui.drawModalRectWithCustomSizedTexture((int) this.dim().x(), (int) this.dim().y(), 0, 0, 13, 12, 13, 12);
+		AbstractGui.blit((int) this.dim().x(), (int) this.dim().y(), 0, 0, 13, 12, 13, 12);
 
 		GlStateManager.popMatrix();
 	}

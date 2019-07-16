@@ -6,12 +6,15 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.IContainerListener;
+import net.minecraft.inventory.container.ContainerType;
+import net.minecraft.inventory.container.IContainerListener;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+
+import javax.annotation.Nullable;
 
 public class ContainerShop extends Container
 {
@@ -19,8 +22,10 @@ public class ContainerShop extends Container
 
 	private final IShopInstance shopInstance;
 
-	public ContainerShop(final PlayerInventory playerInventory, IShopInstance shopInstance)
+	public ContainerShop(@Nullable ContainerType<?> type, int id, PlayerInventory playerInventory, IShopInstance shopInstance)
 	{
+		super(type, id);
+
 		this.shopInstance = shopInstance;
 		this.shopInventory = shopInstance.getInventory(playerInventory.player);
 
@@ -58,23 +63,9 @@ public class ContainerShop extends Container
 			}
 			else
 			{
-				playerIn.inventory.placeItemBackInInventory(playerIn.world, shopInventory.removeStackFromSlot(0));
+				playerIn.inventory.placeItemBackInInventory(playerIn.world, this.shopInventory.removeStackFromSlot(0));
 			}
 		}
-	}
-
-	@Override
-	public void addListener(final IContainerListener listener)
-	{
-		super.addListener(listener);
-		listener.sendAllWindowProperties(this, this.shopInventory);
-	}
-
-	@Override
-	@OnlyIn(Dist.CLIENT)
-	public void updateProgressBar(final int id, final int data)
-	{
-		this.shopInventory.setField(id, data);
 	}
 
 	@Override
