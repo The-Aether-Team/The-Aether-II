@@ -3,29 +3,26 @@ package com.gildedgames.aether.common.network.packets;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerEquipmentModule;
+import com.gildedgames.aether.common.network.IMessage;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
-import io.netty.buffer.ByteBuf;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.network.NetworkEvent;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class PacketEquipment implements IMessage
 {
 	private final List<Pair<Integer, ItemStack>> changes = new ArrayList<>();
 
 	private int entityId;
-
-	public PacketEquipment()
-	{
-
-	}
 
 	public PacketEquipment(final PlayerAether aePlayer)
 	{
@@ -47,7 +44,7 @@ public class PacketEquipment implements IMessage
 	}
 
 	@Override
-	public void fromBytes(final ByteBuf buf)
+	public void fromBytes(final PacketBuffer buf)
 	{
 		this.entityId = buf.readInt();
 
@@ -57,14 +54,14 @@ public class PacketEquipment implements IMessage
 		{
 			final int slot = buf.readByte();
 
-			final ItemStack stack = ByteBufUtils.readItemStack(buf);
+			final ItemStack stack = buf.readItemStack();
 
 			this.changes.add(Pair.of(slot, stack));
 		}
 	}
 
 	@Override
-	public void toBytes(final ByteBuf buf)
+	public void toBytes(final PacketBuffer buf)
 	{
 		buf.writeInt(this.entityId);
 		buf.writeByte(this.changes.size());
@@ -72,19 +69,18 @@ public class PacketEquipment implements IMessage
 		for (final Pair<Integer, ItemStack> pair : this.changes)
 		{
 			buf.writeByte(pair.getKey());
-
-			ByteBufUtils.writeItemStack(buf, pair.getValue());
+			buf.writeItemStack(pair.getValue());
 		}
 	}
 
-	public static class HandlerClient extends MessageHandlerClient<PacketEquipment, IMessage>
+	public static class HandlerClient extends MessageHandlerClient<PacketEquipment>
 	{
 		@Override
-		public IMessage onMessage(final PacketEquipment message, final PlayerEntity player)
+		protected void onMessage(PacketEquipment message, ClientPlayerEntity player)
 		{
 			if (player == null || player.world == null)
 			{
-				return null;
+				return;
 			}
 
 			final Entity entity = player.world.getEntityByID(message.entityId);
@@ -100,8 +96,6 @@ public class PacketEquipment implements IMessage
 					inventory.setInventorySlotContents(pair.getKey(), pair.getValue());
 				}
 			}
-
-			return null;
 		}
 	}
 }

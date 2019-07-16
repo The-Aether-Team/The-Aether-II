@@ -4,23 +4,20 @@ import com.gildedgames.aether.client.gui.dialog.GuiTrade;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerCurrencyModule;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTradeModule;
+import com.gildedgames.aether.common.network.IMessage;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraft.network.PacketBuffer;
 
 public class PacketChangeCoinAmount implements IMessage
 {
-
 	private double coinCount;
-
-	public PacketChangeCoinAmount() {
-	}
 
 	public PacketChangeCoinAmount(double coinCount)
 	{
@@ -28,21 +25,21 @@ public class PacketChangeCoinAmount implements IMessage
 	}
 
 	@Override
-	public void fromBytes(final ByteBuf buf)
+	public void fromBytes(final PacketBuffer buf)
 	{
 		this.coinCount = buf.readDouble();
 	}
 
 	@Override
-	public void toBytes(final ByteBuf buf)
+	public void toBytes(final PacketBuffer buf)
 	{
 		buf.writeDouble(this.coinCount);
 	}
 
-	public static class HandlerServer extends MessageHandlerServer<PacketChangeCoinAmount, IMessage>
+	public static class HandlerServer extends MessageHandlerServer<PacketChangeCoinAmount>
 	{
 		@Override
-		public IMessage onMessage(PacketChangeCoinAmount message, PlayerEntity player)
+		protected void onMessage(PacketChangeCoinAmount message, ServerPlayerEntity player)
 		{
 			PlayerAether aePlayer = PlayerAether.getPlayer(player);
 			PlayerTradeModule tradeModule = aePlayer.getModule(PlayerTradeModule.class);
@@ -52,17 +49,16 @@ public class PacketChangeCoinAmount implements IMessage
 			if (message.coinCount <= val && tradeModule.isTrading() && !tradeModule.isLockedIn())
 			{
 				tradeModule.setCoinAmount(message.coinCount);
+
 				NetworkingAether.sendPacketToPlayer(new PacketChangeCoinAmount(message.coinCount), (ServerPlayerEntity) tradeModule.getTarget().getEntity());
 			}
-
-			return null;
 		}
 	}
 
-	public static class HandlerClient extends MessageHandlerClient<PacketChangeCoinAmount, IMessage>
+	public static class HandlerClient extends MessageHandlerClient<PacketChangeCoinAmount>
 	{
 		@Override
-		public IMessage onMessage(PacketChangeCoinAmount message, PlayerEntity player)
+		protected void onMessage(PacketChangeCoinAmount message, ClientPlayerEntity player)
 		{
 			Screen screen = Minecraft.getInstance().currentScreen;
 
@@ -70,8 +66,6 @@ public class PacketChangeCoinAmount implements IMessage
 			{
 				((GuiTrade) screen).setCoinCount(message.coinCount);
 			}
-
-			return null;
 		}
 	}
 }

@@ -6,13 +6,15 @@ import com.gildedgames.aether.api.dialog.IDialogController;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerDialogModule;
+import com.gildedgames.aether.common.network.IMessage;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import com.google.common.base.Objects;
-import io.netty.buffer.ByteBuf;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 import java.util.Collection;
 
@@ -20,38 +22,34 @@ public class PacketActivateButton implements IMessage
 {
 	private String label;
 
-	public PacketActivateButton()
-	{
-	}
-
 	public PacketActivateButton(final String label)
 	{
 		this.label = label;
 	}
 
 	@Override
-	public void fromBytes(final ByteBuf buf)
+	public void fromBytes(final PacketBuffer buf)
 	{
-		this.label = ByteBufUtils.readUTF8String(buf);
+		this.label = buf.readString();
 	}
 
 	@Override
-	public void toBytes(final ByteBuf buf)
+	public void toBytes(final PacketBuffer buf)
 	{
-		ByteBufUtils.writeUTF8String(buf, this.label);
+		buf.writeString(this.label);
 	}
 
-	public static class HandlerClient extends MessageHandlerClient<PacketActivateButton, PacketActivateButton>
+	public static class HandlerClient extends MessageHandlerClient<PacketActivateButton>
 	{
 		@Override
-		public PacketActivateButton onMessage(final PacketActivateButton message, final PlayerEntity player)
+		protected void onMessage(PacketActivateButton message, ClientPlayerEntity player)
 		{
 			final IPlayerAether aePlayer = PlayerAether.getPlayer(player);
 			final IDialogController dialogController = aePlayer.getModule(PlayerDialogModule.class);
 
 			if (dialogController.getCurrentSceneInstance() == null)
 			{
-				return null;
+				return;
 			}
 
 			IDialogButton found = null;
@@ -74,22 +72,20 @@ public class PacketActivateButton implements IMessage
 					action.performAction(dialogController);
 				}
 			}
-
-			return null;
 		}
 	}
 
-	public static class HandlerServer extends MessageHandlerServer<PacketActivateButton, PacketActivateButton>
+	public static class HandlerServer extends MessageHandlerServer<PacketActivateButton>
 	{
 		@Override
-		public PacketActivateButton onMessage(final PacketActivateButton message, final PlayerEntity player)
+		protected void onMessage(PacketActivateButton message, ServerPlayerEntity player)
 		{
 			final IPlayerAether aePlayer = PlayerAether.getPlayer(player);
 			final IDialogController dialogController = aePlayer.getModule(PlayerDialogModule.class);
 
 			if (dialogController.getCurrentSceneInstance() == null)
 			{
-				return null;
+				return;
 			}
 
 			IDialogButton found = null;
@@ -108,7 +104,7 @@ public class PacketActivateButton implements IMessage
 				dialogController.activateButton(found);
 			}
 
-			return null;
+			return;
 		}
 	}
 }

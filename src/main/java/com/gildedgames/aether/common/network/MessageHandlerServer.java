@@ -1,10 +1,12 @@
 package com.gildedgames.aether.common.network;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.world.ServerWorld;
+import net.minecraftforge.fml.network.NetworkEvent;
 
-public abstract class MessageHandlerServer<REQ extends IMessage, RES extends IMessage> extends MessageHandler<REQ, RES>
+import java.util.function.Supplier;
+
+public abstract class MessageHandlerServer<REQ extends IMessage> extends MessageHandler<REQ>
 {
 	private final boolean executesOnGameThread;
 
@@ -15,28 +17,43 @@ public abstract class MessageHandlerServer<REQ extends IMessage, RES extends IMe
 
 	/**
 	 * Creates a message handler for the server-side.
-	 * @param safety True if this packet should process on the main game thread.
+	 * @param mainThread True if this packet should process on the main game thread.
 	 *               You almost always want this unless you need to reply instantly
 	 *               to the packet.
 	 */
-	public MessageHandlerServer(final boolean safety)
+	public MessageHandlerServer(final boolean mainThread)
 	{
-		this.executesOnGameThread = safety;
+		this.executesOnGameThread = mainThread;
 	}
 
 	@Override
-	public RES onMessage(final REQ message, final MessageContext ctx)
+	public void accept(REQ message, Supplier<NetworkEvent.Context> contextSupplier)
 	{
-		if (this.executesOnGameThread)
-		{
-			ctx.getServerHandler().player.getServerWorld().addScheduledTask(() -> this.onMessage(message, ctx.getServerHandler().player));
+		NetworkEvent.Context context = contextSupplier.get();
 
-			return null;
+		if (context == null)
+		{
+			throw new IllegalStateException("Could not obtain network event context");
 		}
 
-		return this.onMessage(message, ctx.getServerHandler().player);
+		ServerPlayerEntity entity = context.getSender();
+
+		if (entity == null)
+		{
+			throw new IllegalStateException("Could not obtain sending entity for network packet");
+		}
+
+		ServerWorld world = entity.getServerWorld();
+
+		if (this.executesOnGameThread)
+		{
+			context.enqueueWork(() -> this.onMessage(message, entity));
+		}
+		else
+		{
+			this.onMessage(message, entity);
+		}
 	}
 
-	@Override
-	public abstract RES onMessage(REQ message, PlayerEntity player);
+	protected abstract void onMessage(REQ message, ServerPlayerEntity player);
 }

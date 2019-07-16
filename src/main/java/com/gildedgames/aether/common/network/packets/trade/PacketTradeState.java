@@ -4,23 +4,20 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerCurrencyModule;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTradeModule;
 import com.gildedgames.aether.common.containers.ContainerTrade;
+import com.gildedgames.aether.common.network.IMessage;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import io.netty.buffer.ByteBuf;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraft.network.PacketBuffer;
 
 public class PacketTradeState implements IMessage
 {
 	private byte state;
-
-	public PacketTradeState()
-	{
-
-	}
 
 	public PacketTradeState(byte state)
 	{
@@ -28,21 +25,21 @@ public class PacketTradeState implements IMessage
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf)
+	public void toBytes(PacketBuffer buf)
 	{
 		buf.writeByte(this.state);
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf)
+	public void fromBytes(PacketBuffer buf)
 	{
 		this.state = buf.readByte();
 	}
 
-	public static class HandlerClient extends MessageHandlerClient<PacketTradeState, IMessage>
+	public static class HandlerClient extends MessageHandlerClient<PacketTradeState>
 	{
 		@Override
-		public IMessage onMessage(PacketTradeState message, PlayerEntity player)
+		protected void onMessage(PacketTradeState message, ClientPlayerEntity player)
 		{
 			PlayerAether aePlayer = PlayerAether.getPlayer(player);
 
@@ -54,15 +51,13 @@ public class PacketTradeState implements IMessage
 			}
 
 			tradeModule.updateClientState(message.state);
-
-			return null;
 		}
 	}
 
-	public static class HandlerServer extends MessageHandlerServer<PacketTradeState, IMessage>
+	public static class HandlerServer extends MessageHandlerServer<PacketTradeState>
 	{
 		@Override
-		public IMessage onMessage(PacketTradeState message, PlayerEntity player)
+		protected void onMessage(PacketTradeState message, ServerPlayerEntity player)
 		{
 			PlayerAether aePlayer = PlayerAether.getPlayer(player);
 
@@ -143,8 +138,6 @@ public class PacketTradeState implements IMessage
 					NetworkingAether.sendPacketToPlayer(new PacketTradeMessage("aether.trade.message." + statusMessage), targetTrade.getPlayerMP());
 				}
 			}
-
-			return null;
 		}
 	}
 }

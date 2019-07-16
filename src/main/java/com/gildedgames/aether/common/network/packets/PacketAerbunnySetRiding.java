@@ -3,12 +3,13 @@ package com.gildedgames.aether.common.network.packets;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.animals.EntityAerbunny;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
-import io.netty.buffer.ByteBuf;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import com.gildedgames.aether.common.network.IMessage;
 
 public class PacketAerbunnySetRiding implements IMessage
 {
@@ -30,38 +31,35 @@ public class PacketAerbunnySetRiding implements IMessage
 		this.entityId = bunny.getEntityId();
 	}
 
-	public PacketAerbunnySetRiding()
-	{
-
-	}
-
 	@Override
-	public void fromBytes(ByteBuf buf)
+	public void fromBytes(PacketBuffer buf)
 	{
 		this.entityId = buf.readInt();
 		this.playerId = buf.readInt();
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf)
+	public void toBytes(PacketBuffer buf)
 	{
 		buf.writeInt(this.entityId);
 		buf.writeInt(this.playerId);
 	}
 
-	public static class HandlerClient extends MessageHandlerClient<PacketAerbunnySetRiding, IMessage>
+	public static class HandlerClient extends MessageHandlerClient<PacketAerbunnySetRiding>
 	{
 		@Override
-		public IMessage onMessage(PacketAerbunnySetRiding message, PlayerEntity player)
+		protected void onMessage(PacketAerbunnySetRiding message, ClientPlayerEntity player)
 		{
 			Entity aerbunny = player.world.getEntityByID(message.entityId);
 
 			if (!(aerbunny instanceof EntityAerbunny))
 			{
-				return null;
+				AetherCore.LOGGER.warn("Received PacketAerbunnySetRiding for invalid entity with identifier " + message.entityId);
+
+				return;
 			}
 
-			aerbunny.dismountRidingEntity();
+			((EntityAerbunny) aerbunny).dismountEntity(player);
 
 			if (message.playerId >= 0)
 			{
@@ -77,8 +75,6 @@ public class PacketAerbunnySetRiding implements IMessage
 					AetherCore.PROXY.displayDismountMessage(player);
 				}
 			}
-
-			return null;
 		}
 	}
 }

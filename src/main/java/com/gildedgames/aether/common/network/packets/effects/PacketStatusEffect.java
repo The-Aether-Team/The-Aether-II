@@ -4,13 +4,13 @@ import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectPool;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.network.IMessage;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
-import io.netty.buffer.ByteBuf;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.math.MathHelper;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,19 +22,16 @@ public class PacketStatusEffect implements IMessage
 	private int entityID;
 	private int numberOfDirtyEffects;
 
-	public PacketStatusEffect()
-	{
-
-	}
-
 	public PacketStatusEffect(final Entity entity)
 	{
 		this.entityID = entity.getEntityId();
 
-		HashMap<String, IAetherStatusEffects> map =  entity.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null).getPool();
+		IAetherStatusEffectPool map =  entity.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null)
+				.orElseThrow(NullPointerException::new);
+
 		this.statusEffectData = new ArrayList<>();
 
-		for (IAetherStatusEffects effect : map.values())
+		for (IAetherStatusEffects effect : map.getPool().values())
 		{
 			if (effect.isDirty())
 			{
@@ -45,7 +42,7 @@ public class PacketStatusEffect implements IMessage
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf)
+	public void fromBytes(PacketBuffer buf)
 	{
 		this.numberOfDirtyEffects = buf.readByte();
 		this.entityID = buf.readInt();
@@ -66,7 +63,7 @@ public class PacketStatusEffect implements IMessage
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf)
+	public void toBytes(PacketBuffer buf)
 	{
 		buf.writeByte(this.numberOfDirtyEffects);
 		buf.writeInt(this.entityID);
@@ -136,15 +133,14 @@ public class PacketStatusEffect implements IMessage
 		}
 	}
 
-	public static class HandlerClient extends MessageHandlerClient<PacketStatusEffect, IMessage>
+	public static class HandlerClient extends MessageHandlerClient<PacketStatusEffect>
 	{
-
 		@Override
-		public IMessage onMessage(PacketStatusEffect message, PlayerEntity player)
+		protected void onMessage(PacketStatusEffect message, ClientPlayerEntity player)
 		{
 			if (player == null || player.world == null)
 			{
-				return null;
+				return;
 			}
 
 			final Entity entity = player.world.getEntityByID(message.entityID);
@@ -153,29 +149,25 @@ public class PacketStatusEffect implements IMessage
 			{
 				AetherCore.LOGGER.warn("Tried to set effects for non-living entity with ID " + message.entityID);
 
-				return null;
+				return;
 			}
 
 			final LivingEntity entityLiving = (LivingEntity) entity;
 
-			IAetherStatusEffectPool map = entityLiving.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
+			IAetherStatusEffectPool map = entityLiving.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null)
+					.orElseThrow(NullPointerException::new);
 
-			if (map != null)
+			if (message.statusEffectData != null)
 			{
-				if (message.statusEffectData != null)
+				for (StatusEffectData data : message.statusEffectData)
 				{
-					for (StatusEffectData data : message.statusEffectData)
-					{
-						IAetherStatusEffects effect = map.createEffect(IAetherStatusEffects.effectTypes.getEffectFromNumericValue(data.effectId).name, entityLiving);
-						effect.setBuildup(data.buildup);
-						effect.setApplied(data.isApplied);
-						effect.addResistance(data.resistance - 1.0);
-					}
+					IAetherStatusEffects effect = map.createEffect(IAetherStatusEffects.effectTypes.getEffectFromNumericValue(data.effectId).name, entityLiving);
+					effect.setBuildup(data.buildup);
+					effect.setApplied(data.isApplied);
+					effect.addResistance(data.resistance - 1.0);
 				}
 			}
 
-			return null;
 		}
-
 	}
 }

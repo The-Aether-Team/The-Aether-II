@@ -1,20 +1,15 @@
 package com.gildedgames.aether.common.network.packets;
 
 import com.gildedgames.aether.common.containers.tiles.ContainerMasonryBench;
+import com.gildedgames.aether.common.network.IMessage;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
-import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.network.PacketBuffer;
 
 public class PacketMasonryInputCountChanged implements IMessage
 {
-
 	private int inputCount;
-
-	public PacketMasonryInputCountChanged()
-	{
-
-	}
 
 	public PacketMasonryInputCountChanged(int inputCount)
 	{
@@ -22,25 +17,25 @@ public class PacketMasonryInputCountChanged implements IMessage
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf)
+	public void fromBytes(PacketBuffer buf)
 	{
 		this.inputCount = buf.readInt();
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf)
+	public void toBytes(PacketBuffer buf)
 	{
 		buf.writeInt(this.inputCount);
 	}
 
-	public static class HandlerServer extends MessageHandlerServer<PacketMasonryInputCountChanged, IMessage>
+	public static class HandlerServer extends MessageHandlerServer<PacketMasonryInputCountChanged>
 	{
 		@Override
-		public IMessage onMessage(PacketMasonryInputCountChanged message, PlayerEntity player)
+		protected void onMessage(PacketMasonryInputCountChanged message, ServerPlayerEntity player)
 		{
 			if (player == null || player.world == null)
 			{
-				return null;
+				return;
 			}
 
 			if (player.openContainer instanceof ContainerMasonryBench)
@@ -49,8 +44,6 @@ public class PacketMasonryInputCountChanged implements IMessage
 
 				container.setInputCount(message.inputCount);
 			}
-
-			return null;
 		}
 	}
 }

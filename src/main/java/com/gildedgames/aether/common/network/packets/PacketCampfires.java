@@ -2,14 +2,13 @@ package com.gildedgames.aether.common.network.packets;
 
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerCampfiresModule;
+import com.gildedgames.aether.common.network.IMessage;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import com.gildedgames.orbis.lib.util.io.NBTFunnel;
 import com.gildedgames.orbis.lib.util.mc.BlockPosDimension;
-import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraftforge.fml.common.network.ByteBufUtils;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraft.network.PacketBuffer;
 
 import java.util.Set;
 
@@ -20,48 +19,40 @@ public class PacketCampfires implements IMessage
 
 	private NBTFunnel funnel;
 
-	public PacketCampfires()
-	{
-
-	}
-
 	public PacketCampfires(Set<BlockPosDimension> campfires)
 	{
 		this.campfires = campfires;
 	}
 
 	@Override
-	public void fromBytes(final ByteBuf buf)
+	public void fromBytes(final PacketBuffer buf)
 	{
-		this.funnel = new NBTFunnel(ByteBufUtils.readTag(buf));
+		this.funnel = new NBTFunnel(buf.readCompoundTag());
 	}
 
 	@Override
-	public void toBytes(final ByteBuf buf)
+	public void toBytes(final PacketBuffer buf)
 	{
 		NBTFunnel funnel = new NBTFunnel(new CompoundNBT());
-
 		funnel.setSet("c", this.campfires);
 
-		ByteBufUtils.writeTag(buf, funnel.getTag());
+		buf.writeCompoundTag(funnel.getTag());
 	}
 
-	public static class HandlerClient extends MessageHandlerClient<PacketCampfires, IMessage>
+	public static class HandlerClient extends MessageHandlerClient<PacketCampfires>
 	{
 		@Override
-		public IMessage onMessage(final PacketCampfires message, final PlayerEntity player)
+		protected void onMessage(PacketCampfires message, ClientPlayerEntity player)
 		{
 			if (player == null || player.world == null)
 			{
-				return null;
+				return;
 			}
 
 			Set<BlockPosDimension> campfires = message.funnel.getSet("c");
 
 			final PlayerAether aePlayer = PlayerAether.getPlayer(player);
 			aePlayer.getModule(PlayerCampfiresModule.class).setCampfiresActivated(campfires);
-
-			return null;
 		}
 	}
 }

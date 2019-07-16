@@ -1,15 +1,16 @@
 package com.gildedgames.aether.common.network.packets.trade;
 
 import com.gildedgames.aether.client.gui.dialog.GuiTrade;
+import com.gildedgames.aether.common.network.IMessage;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
-import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
@@ -21,11 +22,6 @@ public class PacketTradeInventory implements IMessage
 	private final List<Pair<Integer, ItemStack>> changes = new ArrayList<>();
 
 	private int decSlots;
-
-	public PacketTradeInventory()
-	{
-
-	}
 
 	public PacketTradeInventory(IInventory inventory)
 	{
@@ -43,7 +39,7 @@ public class PacketTradeInventory implements IMessage
 	}
 
 	@Override
-	public void fromBytes(final ByteBuf buf)
+	public void fromBytes(final PacketBuffer buf)
 	{
 		this.decSlots = buf.readInt();
 
@@ -53,14 +49,14 @@ public class PacketTradeInventory implements IMessage
 		{
 			final int slot = buf.readByte();
 
-			final ItemStack stack = ByteBufUtils.readItemStack(buf);
+			final ItemStack stack = buf.readItemStack();
 
 			this.changes.add(Pair.of(slot, stack));
 		}
 	}
 
 	@Override
-	public void toBytes(final ByteBuf buf)
+	public void toBytes(final PacketBuffer buf)
 	{
 		buf.writeInt(this.decSlots);
 		buf.writeByte(this.changes.size());
@@ -68,15 +64,14 @@ public class PacketTradeInventory implements IMessage
 		for (final Pair<Integer, ItemStack> pair : this.changes)
 		{
 			buf.writeByte(pair.getKey());
-
-			ByteBufUtils.writeItemStack(buf, pair.getValue());
+			buf.writeItemStack(pair.getValue());
 		}
 	}
 
-	public static class HandlerClient extends MessageHandlerClient<PacketTradeInventory, IMessage>
+	public static class HandlerClient extends MessageHandlerClient<PacketTradeInventory>
 	{
 		@Override
-		public IMessage onMessage(PacketTradeInventory message, PlayerEntity player)
+		protected void onMessage(PacketTradeInventory message, ClientPlayerEntity player)
 		{
 			Screen screen = Minecraft.getInstance().currentScreen;
 
@@ -86,8 +81,6 @@ public class PacketTradeInventory implements IMessage
 
 				trade.setTradeOffer(message.changes);
 			}
-
-			return null;
 		}
 	}
 

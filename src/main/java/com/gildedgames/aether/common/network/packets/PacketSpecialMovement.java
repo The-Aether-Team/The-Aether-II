@@ -2,19 +2,15 @@ package com.gildedgames.aether.common.network.packets;
 
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerAbilitiesModule;
+import com.gildedgames.aether.common.network.IMessage;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
-import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.network.PacketBuffer;
 
 public class PacketSpecialMovement implements IMessage
 {
 	private Action action;
-
-	public PacketSpecialMovement()
-	{
-
-	}
 
 	public PacketSpecialMovement(final Action action)
 	{
@@ -22,13 +18,13 @@ public class PacketSpecialMovement implements IMessage
 	}
 
 	@Override
-	public void fromBytes(final ByteBuf buf)
+	public void fromBytes(final PacketBuffer buf)
 	{
 		this.action = Action.values()[buf.readByte()];
 	}
 
 	@Override
-	public void toBytes(final ByteBuf buf)
+	public void toBytes(final PacketBuffer buf)
 	{
 		buf.writeByte(this.action.ordinal());
 	}
@@ -42,10 +38,10 @@ public class PacketSpecialMovement implements IMessage
 		ROLL_RIGHT
 	}
 
-	public static class HandlerServer extends MessageHandlerServer<PacketSpecialMovement, PacketSpecialMovement>
+	public static class HandlerServer extends MessageHandlerServer<PacketSpecialMovement>
 	{
 		@Override
-		public PacketSpecialMovement onMessage(final PacketSpecialMovement message, final PlayerEntity player)
+		protected void onMessage(PacketSpecialMovement message, ServerPlayerEntity player)
 		{
 			final PlayerAether aePlayer = PlayerAether.getPlayer(player);
 
@@ -55,8 +51,6 @@ public class PacketSpecialMovement implements IMessage
 					aePlayer.getModule(PlayerAbilitiesModule.class).performMidAirJump();
 					break;
 			}
-
-			return null;
 		}
 	}
 }

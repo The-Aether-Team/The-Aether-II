@@ -8,23 +8,19 @@ import com.gildedgames.aether.api.shop.ShopUtil;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerDialogModule;
 import com.gildedgames.aether.common.containers.ContainerShop;
+import com.gildedgames.aether.common.network.IMessage;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import com.gildedgames.aether.common.util.helpers.ItemHelper;
-import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraft.network.PacketBuffer;
 
 public class PacketShopBuy implements IMessage
 {
 	private int stockIndex, buyCount;
 
 	private int shopIndex;
-
-	public PacketShopBuy()
-	{
-
-	}
 
 	public PacketShopBuy(int stockIndex, int buyCount, int shopIndex)
 	{
@@ -34,7 +30,7 @@ public class PacketShopBuy implements IMessage
 	}
 
 	@Override
-	public void fromBytes(final ByteBuf buf)
+	public void fromBytes(final PacketBuffer buf)
 	{
 		this.stockIndex = buf.readInt();
 		this.buyCount = buf.readInt();
@@ -42,21 +38,21 @@ public class PacketShopBuy implements IMessage
 	}
 
 	@Override
-	public void toBytes(final ByteBuf buf)
+	public void toBytes(final PacketBuffer buf)
 	{
 		buf.writeInt(this.stockIndex);
 		buf.writeInt(this.buyCount);
 		buf.writeInt(this.shopIndex);
 	}
 
-	public static class HandlerServer extends MessageHandlerServer<PacketShopBuy, IMessage>
+	public static class HandlerServer extends MessageHandlerServer<PacketShopBuy>
 	{
 		@Override
-		public IMessage onMessage(final PacketShopBuy message, final PlayerEntity player)
+		protected void onMessage(PacketShopBuy message, ServerPlayerEntity player)
 		{
 			if (player == null || player.world == null)
 			{
-				return null;
+				return;
 			}
 
 			if (player.openContainer instanceof ContainerShop)
@@ -72,7 +68,7 @@ public class PacketShopBuy implements IMessage
 
 					if (group == null)
 					{
-						return null;
+						return;
 					}
 
 					IShopInstance shopInstance = group.getShopInstance(message.shopIndex);
@@ -87,7 +83,7 @@ public class PacketShopBuy implements IMessage
 
 							if (buy.getStock() <= 0)
 							{
-								return null;
+								return;
 							}
 
 							int maxAllowedWithHeldStack = buy.getItemStack().getMaxStackSize() - player.inventory.getItemStack().getCount();
@@ -96,7 +92,7 @@ public class PacketShopBuy implements IMessage
 
 							if (amount <= 0)
 							{
-								return null;
+								return;
 							}
 
 							boolean canAfford =
@@ -130,8 +126,6 @@ public class PacketShopBuy implements IMessage
 					}
 				}
 			}
-
-			return null;
 		}
 	}
 

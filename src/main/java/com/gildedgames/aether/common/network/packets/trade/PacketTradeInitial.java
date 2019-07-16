@@ -2,20 +2,16 @@ package com.gildedgames.aether.common.network.packets.trade;
 
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTradeModule;
+import com.gildedgames.aether.common.network.IMessage;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
-import io.netty.buffer.ByteBuf;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraft.network.PacketBuffer;
 
 public class PacketTradeInitial implements IMessage
 {
 	private int entityId;
-
-	public PacketTradeInitial()
-	{
-
-	}
 
 	public PacketTradeInitial(int id)
 	{
@@ -23,21 +19,21 @@ public class PacketTradeInitial implements IMessage
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf)
+	public void toBytes(PacketBuffer buf)
 	{
 		buf.writeInt(this.entityId);
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf)
+	public void fromBytes(PacketBuffer buf)
 	{
 		this.entityId = buf.readInt();
 	}
 
-	public static class HandlerClient extends MessageHandlerClient<PacketTradeInitial, IMessage>
+	public static class HandlerClient extends MessageHandlerClient<PacketTradeInitial>
 	{
 		@Override
-		public IMessage onMessage(PacketTradeInitial message, PlayerEntity player)
+		protected void onMessage(PacketTradeInitial message, ClientPlayerEntity player)
 		{
 			Entity entity = player.world.getEntityByID(message.entityId);
 
@@ -56,7 +52,6 @@ public class PacketTradeInitial implements IMessage
 
 			tradeModule.setTarget(target);
 
-			return null;
 		}
 	}
 }

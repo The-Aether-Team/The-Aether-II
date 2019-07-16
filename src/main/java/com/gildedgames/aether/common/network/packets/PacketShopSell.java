@@ -8,23 +8,18 @@ import com.gildedgames.aether.api.shop.ShopUtil;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerDialogModule;
 import com.gildedgames.aether.common.containers.ContainerShop;
+import com.gildedgames.aether.common.network.IMessage;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import com.gildedgames.aether.common.util.helpers.ItemHelper;
-import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.math.MathHelper;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 public class PacketShopSell implements IMessage
 {
-
 	private int shopIndex;
-
-	public PacketShopSell()
-	{
-
-	}
 
 	public PacketShopSell(int shopIndex)
 	{
@@ -32,25 +27,25 @@ public class PacketShopSell implements IMessage
 	}
 
 	@Override
-	public void fromBytes(final ByteBuf buf)
+	public void fromBytes(final PacketBuffer buf)
 	{
 		this.shopIndex = buf.readInt();
 	}
 
 	@Override
-	public void toBytes(final ByteBuf buf)
+	public void toBytes(final PacketBuffer buf)
 	{
 		buf.writeInt(this.shopIndex);
 	}
 
-	public static class HandlerServer extends MessageHandlerServer<PacketShopSell, IMessage>
+	public static class HandlerServer extends MessageHandlerServer<PacketShopSell>
 	{
 		@Override
-		public IMessage onMessage(final PacketShopSell message, final PlayerEntity player)
+		protected void onMessage(PacketShopSell message, ServerPlayerEntity player)
 		{
 			if (player == null || player.world == null)
 			{
-				return null;
+				return;
 			}
 
 			PlayerAether playerAether = PlayerAether.getPlayer(player);
@@ -64,7 +59,7 @@ public class PacketShopSell implements IMessage
 
 					if (group == null)
 					{
-						return null;
+						return;
 					}
 
 					IShopInstance shopInstance = group.getShopInstance(message.shopIndex);
@@ -145,8 +140,6 @@ public class PacketShopSell implements IMessage
 					}
 				}
 			}
-
-			return null;
 		}
 	}
 

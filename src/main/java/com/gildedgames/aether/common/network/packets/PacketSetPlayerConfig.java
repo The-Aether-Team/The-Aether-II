@@ -4,19 +4,14 @@ import com.gildedgames.aether.common.ConfigAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerConfigModule;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
-import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import com.gildedgames.aether.common.network.IMessage;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.network.PacketBuffer;
 
 public class PacketSetPlayerConfig implements IMessage
 {
-
 	private boolean skipIntro;
-
-	public PacketSetPlayerConfig()
-	{
-
-	}
 
 	public PacketSetPlayerConfig(ConfigAether config)
 	{
@@ -24,31 +19,29 @@ public class PacketSetPlayerConfig implements IMessage
 	}
 
 	@Override
-	public void fromBytes(final ByteBuf buf)
+	public void fromBytes(final PacketBuffer buf)
 	{
 		this.skipIntro = buf.readBoolean();
 	}
 
 	@Override
-	public void toBytes(final ByteBuf buf)
+	public void toBytes(final PacketBuffer buf)
 	{
 		buf.writeBoolean(this.skipIntro);
 	}
 
-	public static class HandlerServer extends MessageHandlerServer<PacketSetPlayerConfig, IMessage>
+	public static class HandlerServer extends MessageHandlerServer<PacketSetPlayerConfig>
 	{
 		@Override
-		public IMessage onMessage(final PacketSetPlayerConfig message, final PlayerEntity player)
+		protected void onMessage(PacketSetPlayerConfig message, ServerPlayerEntity player)
 		{
 			if (player == null || player.world == null)
 			{
-				return null;
+				return;
 			}
 
 			PlayerAether playerAether = PlayerAether.getPlayer(player);
 			playerAether.getModule(PlayerConfigModule.class).setSkipIntro(message.skipIntro);
-
-			return null;
 		}
 	}
 

@@ -1,13 +1,14 @@
 package com.gildedgames.aether.common.network;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.network.NetworkEvent;
 
-public abstract class MessageHandlerClient<REQ extends IMessage, RES extends IMessage> extends MessageHandler<REQ, RES>
+import java.util.function.Supplier;
+
+public abstract class MessageHandlerClient<REQ extends IMessage> extends MessageHandler<REQ>
 {
 	private final boolean executesOnGameThread;
 
@@ -18,34 +19,36 @@ public abstract class MessageHandlerClient<REQ extends IMessage, RES extends IMe
 
 	/**
 	 * Creates a message handler for the client-side.
-	 * @param safety True if this packet should process on the main game thread.
+	 * @param mainThread True if this packet should process on the main game thread.
 	 *               You almost always want this unless you need to reply instantly
 	 *               to the packet.
 	 */
-	public MessageHandlerClient(final boolean safety)
+	public MessageHandlerClient(final boolean mainThread)
 	{
-		this.executesOnGameThread = safety;
+		this.executesOnGameThread = mainThread;
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
-	public RES onMessage(final REQ message, final MessageContext ctx)
+	public final void accept(REQ message, Supplier<NetworkEvent.Context> contextSupplier)
 	{
 		final Minecraft mc = Minecraft.getInstance();
 
 		if (this.executesOnGameThread)
 		{
-			mc.addScheduledTask(new FutureMessage<>(this, message));
-
-			return null;
+			mc.deferTask(new FutureMessage<>(this, message));
 		}
-
-		return this.onMessage(message, mc.player);
+		else
+		{
+			this.handleMessage(message);
+		}
 	}
 
-	@Override
-	@OnlyIn(Dist.CLIENT)
-	public abstract RES onMessage(REQ message, PlayerEntity player);
+	private void handleMessage(REQ message)
+	{
+		this.onMessage(message, Minecraft.getInstance().player);
+	}
+
+	protected abstract void onMessage(REQ message, ClientPlayerEntity player);
 
 	/**
 	 * This is needed to prevent a crash on dedicated servers. It seems that
@@ -57,11 +60,11 @@ public abstract class MessageHandlerClient<REQ extends IMessage, RES extends IMe
 	@OnlyIn(Dist.CLIENT)
 	private static class FutureMessage<REQ extends IMessage> implements Runnable
 	{
-		private final MessageHandlerClient<REQ, ?> handler;
+		private final MessageHandlerClient<REQ> handler;
 
 		private final REQ message;
 
-		private FutureMessage(final MessageHandlerClient<REQ, ?> handler, final REQ message)
+		private FutureMessage(final MessageHandlerClient<REQ> handler, final REQ message)
 		{
 			this.message = message;
 			this.handler = handler;
@@ -70,7 +73,7 @@ public abstract class MessageHandlerClient<REQ extends IMessage, RES extends IMe
 		@Override
 		public void run()
 		{
-			this.handler.onMessage(this.message, Minecraft.getInstance().player);
+			this.handler.handleMessage(this.message);
 		}
 	}
 }

@@ -3,22 +3,17 @@ package com.gildedgames.aether.common.network.packets;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerProgressModule;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
-import io.netty.buffer.ByteBuf;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import com.gildedgames.aether.common.network.IMessage;
 
 public class PacketProgressBooleanData implements IMessage
 {
-
 	private String key;
 
-	private boolean flag = true;
-
-	public PacketProgressBooleanData()
-	{
-
-	}
+	private boolean flag;
 
 	public PacketProgressBooleanData(String key, final boolean flag)
 	{
@@ -27,33 +22,31 @@ public class PacketProgressBooleanData implements IMessage
 	}
 
 	@Override
-	public void fromBytes(final ByteBuf buf)
+	public void fromBytes(final PacketBuffer buf)
 	{
-		this.key = ByteBufUtils.readUTF8String(buf);
+		this.key = buf.readString();
 		this.flag = buf.readBoolean();
 	}
 
 	@Override
-	public void toBytes(final ByteBuf buf)
+	public void toBytes(final PacketBuffer buf)
 	{
-		ByteBufUtils.writeUTF8String(buf, this.key);
+		buf.writeString(this.key);
 		buf.writeBoolean(this.flag);
 	}
 
-	public static class HandlerClient extends MessageHandlerClient<PacketProgressBooleanData, IMessage>
+	public static class HandlerClient extends MessageHandlerClient<PacketProgressBooleanData>
 	{
 		@Override
-		public IMessage onMessage(final PacketProgressBooleanData message, final PlayerEntity player)
+		protected void onMessage(PacketProgressBooleanData message, ClientPlayerEntity player)
 		{
 			if (player == null || player.world == null)
 			{
-				return null;
+				return;
 			}
 
 			final PlayerAether aePlayer = PlayerAether.getPlayer(player);
 			aePlayer.getModule(PlayerProgressModule.class).putBoolean(message.key, message.flag);
-
-			return null;
 		}
 	}
 }

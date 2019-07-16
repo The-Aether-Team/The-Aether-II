@@ -2,16 +2,11 @@ package com.gildedgames.aether.common.network.packets;
 
 import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.api.world.islands.precipitation.IPrecipitationManager;
+import com.gildedgames.aether.common.network.IMessage;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufInputStream;
-import io.netty.buffer.ByteBufOutputStream;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.CompressedStreamTools;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-
-import java.io.IOException;
+import net.minecraft.network.PacketBuffer;
 
 public class PacketUpdatePrecipitation implements IMessage
 {
@@ -19,57 +14,31 @@ public class PacketUpdatePrecipitation implements IMessage
 
 	private IPrecipitationManager precipitation;
 
-	public PacketUpdatePrecipitation()
-	{
-
-	}
-
 	public PacketUpdatePrecipitation(IPrecipitationManager precipitation)
 	{
 		this.precipitation = precipitation;
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf)
+	public void fromBytes(PacketBuffer buf)
 	{
-		try (ByteBufInputStream stream = new ByteBufInputStream(buf))
-		{
-			this.tag = CompressedStreamTools.readCompressed(stream);
-		}
-		catch (IOException e)
-		{
-			throw new RuntimeException(e);
-		}
+		this.tag = buf.readCompoundTag();
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf)
+	public void toBytes(PacketBuffer buf)
 	{
-		CompoundNBT tag = this.precipitation.serializeNBT();
-
-		try (ByteBufOutputStream stream = new ByteBufOutputStream(buf))
-		{
-			CompressedStreamTools.writeCompressed(tag, stream);
-		}
-		catch (IOException e)
-		{
-			throw new RuntimeException(e);
-		}
+		buf.writeCompoundTag(this.precipitation.serializeNBT());
 	}
 
-	public static class HandlerClient extends MessageHandlerClient<PacketUpdatePrecipitation, IMessage>
+	public static class HandlerClient extends MessageHandlerClient<PacketUpdatePrecipitation>
 	{
 		@Override
-		public IMessage onMessage(PacketUpdatePrecipitation message, PlayerEntity player)
+		protected void onMessage(PacketUpdatePrecipitation message, ClientPlayerEntity player)
 		{
-			IPrecipitationManager precip = player.world.getCapability(CapabilitiesAether.PRECIPITATION_MANAGER, null);
-
-			if (precip != null)
-			{
-				precip.deserializeNBT(message.tag);
-			}
-
-			return null;
+			IPrecipitationManager precip = player.world.getCapability(CapabilitiesAether.PRECIPITATION_MANAGER, null)
+					.orElseThrow(NullPointerException::new);
+			precip.deserializeNBT(message.tag);
 		}
 	}
 }

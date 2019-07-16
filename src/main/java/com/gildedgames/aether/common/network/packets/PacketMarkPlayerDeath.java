@@ -2,20 +2,15 @@ package com.gildedgames.aether.common.network.packets;
 
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerProgressModule;
+import com.gildedgames.aether.common.network.IMessage;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
-import io.netty.buffer.ByteBuf;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraft.network.PacketBuffer;
 
 public class PacketMarkPlayerDeath implements IMessage
 {
-
-	private boolean flag = true;
-
-	public PacketMarkPlayerDeath()
-	{
-
-	}
+	private boolean flag;
 
 	public PacketMarkPlayerDeath(final boolean flag)
 	{
@@ -23,31 +18,29 @@ public class PacketMarkPlayerDeath implements IMessage
 	}
 
 	@Override
-	public void fromBytes(final ByteBuf buf)
+	public void fromBytes(final PacketBuffer buf)
 	{
 		this.flag = buf.readBoolean();
 	}
 
 	@Override
-	public void toBytes(final ByteBuf buf)
+	public void toBytes(final PacketBuffer buf)
 	{
 		buf.writeBoolean(this.flag);
 	}
 
-	public static class HandlerClient extends MessageHandlerClient<PacketMarkPlayerDeath, IMessage>
+	public static class HandlerClient extends MessageHandlerClient<PacketMarkPlayerDeath>
 	{
 		@Override
-		public IMessage onMessage(final PacketMarkPlayerDeath message, final PlayerEntity player)
+		protected void onMessage(PacketMarkPlayerDeath message, ClientPlayerEntity player)
 		{
 			if (player == null || player.world == null)
 			{
-				return null;
+				return;
 			}
 
 			final PlayerAether playerAether = PlayerAether.getPlayer(player);
 			playerAether.getModule(PlayerProgressModule.class).setHasDiedInAether(message.flag);
-
-			return null;
 		}
 	}
 }

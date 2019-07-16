@@ -5,21 +5,16 @@ import com.gildedgames.aether.api.registry.tab.ITab;
 import com.gildedgames.aether.api.registry.tab.ITabGroup;
 import com.gildedgames.aether.api.registry.tab.ITabGroupHandler;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
-import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import com.gildedgames.aether.common.network.IMessage;
+import net.minecraft.network.PacketBuffer;
 
 import java.util.Map;
 
 public class PacketOpenTab implements IMessage
 {
-
 	private int tabGroupIndex, tabIndex;
-
-	public PacketOpenTab()
-	{
-	}
 
 	public PacketOpenTab(final ITab tab)
 	{
@@ -50,46 +45,41 @@ public class PacketOpenTab implements IMessage
 	}
 
 	@Override
-	public void fromBytes(final ByteBuf buf)
+	public void fromBytes(final PacketBuffer buf)
 	{
 		this.tabGroupIndex = buf.readInt();
 		this.tabIndex = buf.readInt();
 	}
 
 	@Override
-	public void toBytes(final ByteBuf buf)
+	public void toBytes(final PacketBuffer buf)
 	{
 		buf.writeInt(this.tabGroupIndex);
 		buf.writeInt(this.tabIndex);
 	}
 
-	public static class HandlerServer extends MessageHandlerServer<PacketOpenTab, PacketOpenTab>
+	public static class HandlerServer extends MessageHandlerServer<PacketOpenTab>
 	{
 		@Override
-		public PacketOpenTab onMessage(final PacketOpenTab message, final PlayerEntity player)
+		protected void onMessage(PacketOpenTab message, ServerPlayerEntity player)
 		{
-			if (player instanceof ServerPlayerEntity)
+			if (message.tabGroupIndex < AetherAPI.content().tabs().getRegisteredTabGroups().size())
 			{
-				if (message.tabGroupIndex < AetherAPI.content().tabs().getRegisteredTabGroups().size())
+				final ITabGroupHandler tabGroupHandler = AetherAPI.content().tabs().getRegisteredTabGroups().get(message.tabGroupIndex);
+
+				if (tabGroupHandler == null)
 				{
-					final ITabGroupHandler tabGroupHandler = AetherAPI.content().tabs().getRegisteredTabGroups().get(message.tabGroupIndex);
+					return;
+				}
 
-					if (tabGroupHandler == null)
-					{
-						return null;
-					}
+				final ITabGroup<ITab> tabGroup = tabGroupHandler.getServerGroup();
 
-					final ITabGroup<ITab> tabGroup = tabGroupHandler.getServerGroup();
-
-					if (message.tabIndex < tabGroup.getTabs().size())
-					{
-						final ITab tab = tabGroup.getTabs().get(message.tabIndex);
-						tab.onOpen(player);
-					}
+				if (message.tabIndex < tabGroup.getTabs().size())
+				{
+					final ITab tab = tabGroup.getTabs().get(message.tabIndex);
+					tab.onOpen(player);
 				}
 			}
-
-			return null;
 		}
 	}
 }

@@ -4,14 +4,15 @@ import com.gildedgames.aether.api.dialog.IDialogController;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerDialogModule;
+import com.gildedgames.aether.common.network.IMessage;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import com.gildedgames.orbis.lib.util.io.NBTFunnel;
-import io.netty.buffer.ByteBuf;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 import java.util.Map;
 
@@ -25,10 +26,6 @@ public class PacketOpenDialog implements IMessage
 
 	private NBTFunnel funnel;
 
-	public PacketOpenDialog()
-	{
-	}
-
 	public PacketOpenDialog(final ResourceLocation res, String startingNodeId, Map<String, Boolean> conditionsMet)
 	{
 		this.name = res;
@@ -37,31 +34,31 @@ public class PacketOpenDialog implements IMessage
 	}
 
 	@Override
-	public void fromBytes(final ByteBuf buf)
+	public void fromBytes(final PacketBuffer buf)
 	{
-		this.name = new ResourceLocation(ByteBufUtils.readUTF8String(buf));
-		this.startingNodeId = ByteBufUtils.readUTF8String(buf);
-		this.funnel = new NBTFunnel(ByteBufUtils.readTag(buf));
+		this.name = buf.readResourceLocation();
+		this.startingNodeId = buf.readString();
+		this.funnel = new NBTFunnel(buf.readCompoundTag());
 	}
 
 	@Override
-	public void toBytes(final ByteBuf buf)
+	public void toBytes(final PacketBuffer buf)
 	{
-		ByteBufUtils.writeUTF8String(buf, this.name.toString());
-		ByteBufUtils.writeUTF8String(buf, this.startingNodeId);
+		buf.writeResourceLocation(this.name);
+		buf.writeString(this.startingNodeId);
 
 		CompoundNBT tag = new CompoundNBT();
 		NBTFunnel funnel = new NBTFunnel(tag);
 
 		funnel.setMap("c", this.conditionsMet, NBTFunnel.STRING_SETTER, NBTFunnel.BOOLEAN_SETTER);
 
-		ByteBufUtils.writeTag(buf, tag);
+		buf.writeCompoundTag(tag);
 	}
 
-	public static class HandlerClient extends MessageHandlerClient<PacketOpenDialog, PacketOpenDialog>
+	public static class HandlerClient extends MessageHandlerClient<PacketOpenDialog>
 	{
 		@Override
-		public PacketOpenDialog onMessage(final PacketOpenDialog message, final PlayerEntity player)
+		protected void onMessage(PacketOpenDialog message, ClientPlayerEntity player)
 		{
 			Map<String, Boolean> conditionsMet = message.funnel.getMap("c", NBTFunnel.STRING_GETTER, NBTFunnel.BOOLEAN_GETTER);
 
@@ -70,8 +67,6 @@ public class PacketOpenDialog implements IMessage
 
 			controller.setConditionsMetData(conditionsMet);
 			controller.openScene(message.name, message.startingNodeId);
-
-			return null;
 		}
 	}
 }

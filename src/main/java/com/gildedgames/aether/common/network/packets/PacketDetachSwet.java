@@ -3,23 +3,18 @@ package com.gildedgames.aether.common.network.packets;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerSwetTrackerModule;
 import com.gildedgames.aether.common.entities.monsters.EntitySwet;
+import com.gildedgames.aether.common.network.IMessage;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
-import io.netty.buffer.ByteBuf;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraft.network.PacketBuffer;
 
 public class PacketDetachSwet implements IMessage
 {
-
 	private EntitySwet.Type type;
 
 	private int id;
-
-	public PacketDetachSwet()
-	{
-
-	}
 
 	public PacketDetachSwet(final EntitySwet.Type type, final int id)
 	{
@@ -28,27 +23,27 @@ public class PacketDetachSwet implements IMessage
 	}
 
 	@Override
-	public void fromBytes(final ByteBuf buf)
+	public void fromBytes(final PacketBuffer buf)
 	{
 		this.type = EntitySwet.Type.fromOrdinal(buf.readInt());
 		this.id = buf.readInt();
 	}
 
 	@Override
-	public void toBytes(final ByteBuf buf)
+	public void toBytes(final PacketBuffer buf)
 	{
 		buf.writeInt(this.type.ordinal());
 		buf.writeInt(this.id);
 	}
 
-	public static class HandlerClient extends MessageHandlerClient<PacketDetachSwet, IMessage>
+	public static class HandlerClient extends MessageHandlerClient<PacketDetachSwet>
 	{
 		@Override
-		public IMessage onMessage(final PacketDetachSwet message, final PlayerEntity player)
+		protected void onMessage(PacketDetachSwet message, ClientPlayerEntity player)
 		{
 			if (player == null || player.world == null)
 			{
-				return null;
+				return;
 			}
 
 			Entity entity = player.world.getEntityByID(message.id);
@@ -74,8 +69,6 @@ public class PacketDetachSwet implements IMessage
 			{
 				playerAether.getModule(PlayerSwetTrackerModule.class).detachSwet(remove);
 			}
-
-			return null;
 		}
 	}
 }

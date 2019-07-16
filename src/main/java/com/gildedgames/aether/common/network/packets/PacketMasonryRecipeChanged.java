@@ -3,11 +3,11 @@ package com.gildedgames.aether.common.network.packets;
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.recipes.simple.ISimpleRecipe;
 import com.gildedgames.aether.common.containers.tiles.ContainerMasonryBench;
+import com.gildedgames.aether.common.network.IMessage;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
-import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.PacketBuffer;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 public class PacketMasonryRecipeChanged implements IMessage
 {
@@ -25,7 +25,7 @@ public class PacketMasonryRecipeChanged implements IMessage
 	}
 
 	@Override
-	public void fromBytes(ByteBuf buf)
+	public void fromBytes(PacketBuffer buf)
 	{
 		PacketBuffer pBuf = new PacketBuffer(buf);
 
@@ -33,31 +33,28 @@ public class PacketMasonryRecipeChanged implements IMessage
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf)
+	public void toBytes(PacketBuffer buf)
 	{
 		PacketBuffer pBuf = new PacketBuffer(buf);
 
 		pBuf.writeInt(AetherAPI.content().masonry().getIDFromRecipe(this.recipe));
 	}
 
-	public static class HandlerServer extends MessageHandlerServer<PacketMasonryRecipeChanged, IMessage>
+	public static class HandlerServer extends MessageHandlerServer<PacketMasonryRecipeChanged>
 	{
 		@Override
-		public IMessage onMessage(PacketMasonryRecipeChanged message, PlayerEntity player)
+		protected void onMessage(PacketMasonryRecipeChanged message, ServerPlayerEntity player)
 		{
 			if (player == null || player.world == null)
 			{
-				return null;
+				return;
 			}
 
 			if (player.openContainer instanceof ContainerMasonryBench)
 			{
 				ContainerMasonryBench container = (ContainerMasonryBench) player.openContainer;
-
 				container.onNewRecipe(message.recipe);
 			}
-
-			return null;
 		}
 	}
 }

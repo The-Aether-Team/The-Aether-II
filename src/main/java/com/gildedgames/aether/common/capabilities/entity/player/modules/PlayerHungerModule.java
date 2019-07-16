@@ -55,7 +55,7 @@ public class PlayerHungerModule extends PlayerAetherModule
 	{
 		if (this.getEntity().world.getDimension().getType() == DimensionsAether.NECROMANCER_TOWER)
 		{
-			if (event.side == Dist.SERVER)
+			if (event.side == Dist.DEDICATED_SERVER)
 			{
 				int foodDiff = this.getEntity().getFoodStats().getFoodLevel() - this.startHunger;
 

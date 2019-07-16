@@ -3,13 +3,13 @@ package com.gildedgames.aether.common.network.packets.dialog;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerDialogModule;
+import com.gildedgames.aether.common.network.IMessage;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import com.gildedgames.orbis.lib.util.io.NBTFunnel;
-import io.netty.buffer.ByteBuf;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraftforge.fml.common.network.ByteBufUtils;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraft.network.PacketBuffer;
 
 import java.util.Map;
 
@@ -19,36 +19,32 @@ public class PacketConditionsMetData implements IMessage
 
 	private NBTFunnel funnel;
 
-	public PacketConditionsMetData()
-	{
-	}
-
 	public PacketConditionsMetData(Map<String, Boolean> conditionsMet)
 	{
 		this.conditionsMet = conditionsMet;
 	}
 
 	@Override
-	public void fromBytes(final ByteBuf buf)
+	public void fromBytes(final PacketBuffer buf)
 	{
-		this.funnel = new NBTFunnel(ByteBufUtils.readTag(buf));
+		this.funnel = new NBTFunnel(buf.readCompoundTag());
 	}
 
 	@Override
-	public void toBytes(final ByteBuf buf)
+	public void toBytes(final PacketBuffer buf)
 	{
 		CompoundNBT tag = new CompoundNBT();
 		NBTFunnel funnel = new NBTFunnel(tag);
 
 		funnel.setMap("c", this.conditionsMet, NBTFunnel.STRING_SETTER, NBTFunnel.BOOLEAN_SETTER);
 
-		ByteBufUtils.writeTag(buf, tag);
+		buf.writeCompoundTag(tag);
 	}
 
-	public static class HandlerClient extends MessageHandlerClient<PacketConditionsMetData, PacketConditionsMetData>
+	public static class HandlerClient extends MessageHandlerClient<PacketConditionsMetData>
 	{
 		@Override
-		public PacketConditionsMetData onMessage(final PacketConditionsMetData message, final PlayerEntity player)
+		protected void onMessage(PacketConditionsMetData message, ClientPlayerEntity player)
 		{
 			final IPlayerAether aePlayer = PlayerAether.getPlayer(player);
 
@@ -58,8 +54,6 @@ public class PacketConditionsMetData implements IMessage
 			{
 				aePlayer.getModule(PlayerDialogModule.class).setConditionsMetData(conditionsMet);
 			}
-
-			return null;
 		}
 	}
 
