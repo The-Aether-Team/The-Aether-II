@@ -217,7 +217,7 @@ public class PlayerTeleportingModule extends PlayerAetherModule implements IPlay
 
 		this.nonAetherPos = funnel.get("nonAetherPos");
 
-		if (this.nonAetherPos.getDim() == DimensionsAether.AETHER.getId())
+		if (this.nonAetherPos != null && this.nonAetherPos.getDim() == DimensionsAether.AETHER.getId())
 		{
 		    this.nonAetherPos = null;
         }
