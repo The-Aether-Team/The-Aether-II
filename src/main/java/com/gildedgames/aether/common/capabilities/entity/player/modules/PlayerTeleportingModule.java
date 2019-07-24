@@ -216,6 +216,12 @@ public class PlayerTeleportingModule extends PlayerAetherModule implements IPlay
 		final NBTFunnel funnel = new NBTFunnel(input);
 
 		this.nonAetherPos = funnel.get("nonAetherPos");
+
+		if (this.nonAetherPos.getDim() == DimensionsAether.AETHER.getId())
+		{
+		    this.nonAetherPos = null;
+        }
+
 		this.aetherPos = funnel.get("aetherPos");
 
 		this.playedIntro = input.getBoolean("playedIntro");
