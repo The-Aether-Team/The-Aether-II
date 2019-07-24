@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.CompatibilityAether;
 import com.gildedgames.aether.common.blocks.construction.BlockAetherPortal;
+import com.gildedgames.aether.common.init.DimensionsAether;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -94,6 +95,11 @@ public class ItemBucketEventListener
 
 	private static void onPlayerAttemptPortalCreation(final FillBucketEvent event, final EntityPlayer player, final BlockPos pos)
 	{
+		if (player.world.provider.getDimensionType() == DimensionsAether.AETHER)
+		{
+			return;
+		}
+
 		if (ItemBucketEventListener.createPortal(event.getWorld(), event.getTarget().getBlockPos(), pos))
 		{
 			if (!event.getEntityPlayer().capabilities.isCreativeMode)
