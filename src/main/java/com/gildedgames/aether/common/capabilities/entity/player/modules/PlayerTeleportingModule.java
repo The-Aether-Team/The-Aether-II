@@ -121,14 +121,9 @@ public class PlayerTeleportingModule extends PlayerAetherModule implements IPlay
 
 		this.prevTicksInTeleporter = this.ticksInTeleporter;
 
-		if (!this.isTeleportCharging)
+		if (this.getEntity().getEntityWorld().provider.getDimensionType() == DimensionsAether.AETHER)
 		{
-			this.ticksInTeleporter -= 3;
-
-			if (this.ticksInTeleporter < 0)
-			{
-				this.ticksInTeleporter = 0;
-			}
+			return;
 		}
 
 		if (this.isTeleportCharging)
