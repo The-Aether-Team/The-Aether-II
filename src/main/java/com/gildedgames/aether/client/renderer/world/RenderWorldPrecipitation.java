@@ -1,6 +1,7 @@
 package com.gildedgames.aether.client.renderer.world;
 
 import com.gildedgames.aether.api.registrar.CapabilitiesAether;
+import com.gildedgames.aether.api.registrar.SoundsAether;
 import com.gildedgames.aether.api.world.islands.precipitation.IPrecipitationManager;
 import com.gildedgames.aether.api.world.islands.precipitation.PrecipitationStrength;
 import com.gildedgames.aether.common.AetherCore;
@@ -341,7 +342,7 @@ public class RenderWorldPrecipitation extends IRenderHandler
 				{
 					if (precipitation.getStrength() == PrecipitationStrength.STORM)
 					{
-						event = new SoundEvent(AetherCore.getResource("environment.snow.wind"));
+						event = SoundsAether.environment_snow_wind;
 						volume = 0.6f;
 					}
 				}
@@ -349,12 +350,12 @@ public class RenderWorldPrecipitation extends IRenderHandler
 				{
 					if (precipitation.getStrength() == PrecipitationStrength.LIGHT)
 					{
-						event = new SoundEvent(AetherCore.getResource("environment.rain.light"));
+						event = SoundsAether.environment_rain_light;
 						volume = 0.6f;
 					}
 					else
 					{
-						event = new SoundEvent(AetherCore.getResource("environment.rain.heavy"));
+						event = SoundsAether.environment_rain_heavy;
 						volume = 0.7f;
 					}
 				}

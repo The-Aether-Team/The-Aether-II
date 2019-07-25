@@ -3,6 +3,7 @@ package com.gildedgames.aether.common.entities.animals;
 import com.gildedgames.aether.api.entity.damage.DamageTypeAttributes;
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
+import com.gildedgames.aether.api.registrar.SoundsAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.ai.*;
 import com.gildedgames.aether.common.init.LootTablesAether;
@@ -193,19 +194,19 @@ public class EntityAerbunny extends EntityAetherAnimal
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return new SoundEvent(AetherCore.getResource("mob.aerbunny.ambient"));
+		return SoundsAether.aerbunny_ambient;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(final DamageSource src)
 	{
-		return new SoundEvent(AetherCore.getResource("mob.aerbunny.hurt"));
+		return SoundsAether.aerbunny_hurt;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return new SoundEvent(AetherCore.getResource("mob.aerbunny.death"));
+		return SoundsAether.aerbunny_death;
 	}
 
 	@Override

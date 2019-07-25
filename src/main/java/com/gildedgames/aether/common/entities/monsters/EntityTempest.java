@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.entities.monsters;
 
 import com.gildedgames.aether.api.entity.damage.DamageTypeAttributes;
-import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.api.registrar.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.EntityAIForcedWanderAvoidLight;
 import com.gildedgames.aether.common.entities.ai.EntityAIHideFromLight;
 import com.gildedgames.aether.common.entities.ai.tempest.AIElectricShock;
@@ -96,18 +96,18 @@ public class EntityTempest extends EntityFlyingMob
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return new SoundEvent(AetherCore.getResource("mob.tempest.ambient"));
+		return SoundsAether.tempest_ambient;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(final DamageSource damageSourceIn)
 	{
-		return new SoundEvent(AetherCore.getResource("mob.tempest.hurt"));
+		return SoundsAether.tempest_hurt;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return new SoundEvent(AetherCore.getResource("mob.tempest.death"));
+		return SoundsAether.tempest_death;
 	}
 }

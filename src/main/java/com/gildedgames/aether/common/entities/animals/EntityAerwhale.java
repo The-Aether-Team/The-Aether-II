@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.entities.animals;
 
-import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.api.registrar.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.EntityAIForcedWander;
 import com.gildedgames.aether.common.entities.flying.EntityFlying;
 import com.gildedgames.aether.common.entities.flying.PathNavigateFlyer;
@@ -68,19 +68,19 @@ public class EntityAerwhale extends EntityFlying
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return new SoundEvent(AetherCore.getResource("mob.aerwhale.ambient"));
+		return SoundsAether.aerwhale_ambient;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(final DamageSource src)
 	{
-		return new SoundEvent(AetherCore.getResource("mob.aerwhale.ambient"));
+		return SoundsAether.aerwhale_ambient;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return new SoundEvent(AetherCore.getResource("mob.aerwhale.death"));
+		return SoundsAether.aerwhale_death;
 	}
 
 	@Override

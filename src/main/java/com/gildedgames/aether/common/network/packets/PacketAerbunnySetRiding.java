@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.network.packets;
 
+import com.gildedgames.aether.api.registrar.SoundsAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.animals.EntityAerbunny;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
@@ -7,7 +8,6 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 public class PacketAerbunnySetRiding implements IMessage
@@ -71,7 +71,7 @@ public class PacketAerbunnySetRiding implements IMessage
 				{
 					aerbunny.startRiding(otherPlayer, true);
 
-					player.world.playSound(player, player.getPosition(), new SoundEvent(AetherCore.getResource("mob.aerbunny.lift")), SoundCategory.NEUTRAL, 1.0F,
+					player.world.playSound(player, player.getPosition(), SoundsAether.aerbunny_lift, SoundCategory.NEUTRAL, 1.0F,
 							0.8F + (player.getRNG().nextFloat() * 0.5F));
 
 					AetherCore.PROXY.displayDismountMessage(player);

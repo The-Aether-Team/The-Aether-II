@@ -1,6 +1,6 @@
 package com.gildedgames.aether.client.events.listeners.tick;
 
-import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.api.registrar.SoundsAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerAbilitiesModule;
 import com.gildedgames.aether.common.network.NetworkingAether;
@@ -8,7 +8,6 @@ import com.gildedgames.aether.common.network.packets.PacketSpecialMovement;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.Mod;
@@ -51,7 +50,7 @@ public class ClientTickSpecialInputListener
 						{
 							NetworkingAether.sendPacketToServer(new PacketSpecialMovement(PacketSpecialMovement.Action.EXTRA_JUMP));
 
-							world.playSound(player.posX, player.posY, player.posZ, new SoundEvent(AetherCore.getResource("mob.generic.wings.flap")), SoundCategory.PLAYERS, 0.4f,
+							world.playSound(player.posX, player.posY, player.posZ, SoundsAether.generic_wing_flap, SoundCategory.PLAYERS, 0.4f,
 									0.8f + (world.rand.nextFloat() * 0.6f), false);
 						}
 					}

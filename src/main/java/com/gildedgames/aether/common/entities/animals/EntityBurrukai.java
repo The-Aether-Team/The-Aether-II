@@ -7,7 +7,7 @@ import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectIntensity;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
-import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.api.registrar.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.*;
 import com.gildedgames.aether.common.entities.effects.StatusEffectFracture;
 import com.gildedgames.aether.common.entities.multipart.AetherMultiPartEntity;
@@ -169,19 +169,19 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return new SoundEvent(AetherCore.getResource("mob.burrukai.ambient"));
+		return SoundsAether.burrukai_ambient;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(final DamageSource src)
 	{
-		return new SoundEvent(AetherCore.getResource("mob.burrukai.hurt"));
+		return SoundsAether.burrukai_hurt;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return new SoundEvent(AetherCore.getResource("mob.burrukai.death"));
+		return SoundsAether.burrukai_death;
 	}
 
 	@Override
@@ -255,7 +255,7 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 			final EntityLivingBase living = (EntityLivingBase) entityIn;
 
 			living.attackEntityFrom(DamageSource.causeMobDamage(this), 5.0F);
-			this.playSound(new SoundEvent(AetherCore.getResource("mob.burrukai.attack")), 0.5F, 1.0F);
+			this.playSound(SoundsAether.burrukai_attack, 0.5F, 1.0F);
 			living.knockBack(this, 1.0F, 0.2D, 0.2D);
 
 			this.applyStatusEffectOnAttack(entityIn);

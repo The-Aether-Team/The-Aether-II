@@ -5,7 +5,7 @@ import com.gildedgames.aether.api.entity.IMount;
 import com.gildedgames.aether.api.entity.IMountProcessor;
 import com.gildedgames.aether.api.entity.damage.DamageTypeAttributes;
 import com.gildedgames.aether.api.registrar.ItemsAether;
-import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.api.registrar.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.AetherNavigateGround;
 import com.gildedgames.aether.common.entities.ai.EntityAIUnstuckBlueAercloud;
 import com.gildedgames.aether.common.entities.ai.moa.*;
@@ -395,7 +395,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 
 			if (this.ticksUntilFlap == 0)
 			{
-				this.world.playSound(this.posX, this.posY, this.posZ, new SoundEvent(AetherCore.getResource("mob.generic.wings.flap")), SoundCategory.NEUTRAL, 0.4f,
+				this.world.playSound(this.posX, this.posY, this.posZ, SoundsAether.generic_wing_flap, SoundCategory.NEUTRAL, 0.4f,
 						0.8f + (this.getRNG().nextFloat() * 0.6f), false);
 
 				this.ticksUntilFlap = 11;
@@ -789,19 +789,19 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return new SoundEvent(AetherCore.getResource("mob.moa.ambient"));
+		return SoundsAether.moa_ambient;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(final DamageSource src)
 	{
-		return new SoundEvent(AetherCore.getResource("mob.moa.hurt"));
+		return SoundsAether.moa_hurt;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return new SoundEvent(AetherCore.getResource("mob.moa.hurt"));
+		return SoundsAether.moa_hurt;
 	}
 
 	public boolean isSaddled()

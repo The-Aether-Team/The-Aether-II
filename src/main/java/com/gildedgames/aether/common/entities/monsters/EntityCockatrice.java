@@ -4,7 +4,7 @@ import com.gildedgames.aether.api.entity.damage.DamageTypeAttributes;
 import com.gildedgames.aether.api.entity.effects.EEffectIntensity;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectIntensity;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
-import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.api.registrar.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.EntityAIUnstuckBlueAercloud;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceHide;
 import com.gildedgames.aether.common.entities.ai.cockatrice.EntityAICockatriceSneakAttack;
@@ -134,19 +134,19 @@ public class EntityCockatrice extends EntityAetherMob
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return new SoundEvent(AetherCore.getResource("mob.cockatrice.ambient"));
+		return SoundsAether.cockatrice_ambient;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(final DamageSource damageSourceIn)
 	{
-		return new SoundEvent(AetherCore.getResource("mob.cockatrice.hurt"));
+		return SoundsAether.cockatrice_hurt;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return new SoundEvent(AetherCore.getResource("mob.cockatrice.death"));
+		return SoundsAether.cockatrice_death;
 	}
 
 	public boolean isHiding()

@@ -7,7 +7,7 @@ import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectIntensity;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
-import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.api.registrar.SoundsAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.entities.ai.AetherNavigateGround;
 import com.gildedgames.aether.common.entities.ai.EntityAIHideFromRain;
@@ -155,19 +155,19 @@ public class EntityTaegore extends EntityAetherAnimal implements IEntityMultiPar
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return new SoundEvent(AetherCore.getResource("mob.taegore.ambient"));
+		return SoundsAether.taegore_ambient;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(final DamageSource src)
 	{
-		return new SoundEvent(AetherCore.getResource("mob.taegore.hurt"));
+		return SoundsAether.taegore_hurt;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return new SoundEvent(AetherCore.getResource("mob.taegore.death"));
+		return SoundsAether.taegore_death;
 	}
 
 	@Override
@@ -243,7 +243,7 @@ public class EntityTaegore extends EntityAetherAnimal implements IEntityMultiPar
 
 		this.applyStatusEffectOnAttack(entityIn);
 
-		this.playSound(new SoundEvent(AetherCore.getResource("mob.taegore.attack")), 0.5F, 1.0F);
+		this.playSound(SoundsAether.taegore_attack, 0.5F, 1.0F);
 		return true;
 	}
 

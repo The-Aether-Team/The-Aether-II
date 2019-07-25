@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.entities.monsters;
 
 import com.gildedgames.aether.api.entity.damage.DamageTypeAttributes;
-import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.api.registrar.SoundsAether;
 import com.gildedgames.aether.common.entities.flying.EntityFlying;
 import com.gildedgames.aether.common.init.LootTablesAether;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -30,19 +30,19 @@ public class EntityZephyr extends EntityFlying
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return new SoundEvent(AetherCore.getResource("mob.zephyr.ambient"));
+		return SoundsAether.zephyr_ambient;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(final DamageSource src)
 	{
-		return new SoundEvent(AetherCore.getResource("mob.zephyr.ambient"));
+		return SoundsAether.zephyr_ambient;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return new SoundEvent(AetherCore.getResource("mob.zephyr.ambient"));
+		return SoundsAether.zephyr_ambient;
 	}
 
 	@Override

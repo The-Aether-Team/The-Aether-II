@@ -1,8 +1,8 @@
 package com.gildedgames.aether.common.blocks.construction;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
+import com.gildedgames.aether.api.registrar.SoundsAether;
 import com.gildedgames.aether.client.renderer.particles.ParticleAetherPortal;
-import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTeleportingModule;
 import net.minecraft.block.Block;
@@ -15,7 +15,10 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.*;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Rotation;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -92,7 +95,7 @@ public class BlockAetherPortal extends BlockBreakable
 			world.playSound(
 					pos.getX() + 0.5D,
 					pos.getY() + 0.5D,
-					pos.getZ() + 0.5D, new SoundEvent(AetherCore.getResource("portal.glowstone.hum")), SoundCategory.BLOCKS, 0.2F,
+					pos.getZ() + 0.5D, SoundsAether.glowstone_portal_hum, SoundCategory.BLOCKS, 0.2F,
 					(rand.nextFloat() * 0.2F) + 0.9F, false);
 		}
 
