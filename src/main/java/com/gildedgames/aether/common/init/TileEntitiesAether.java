@@ -38,6 +38,7 @@ public class TileEntitiesAether
 		GameRegistry.registerTileEntity(TileEntityMasonryBench.class, MASONRY_BENCH_ID);
 		GameRegistry.registerTileEntity(TileEntityOutpostCampfire.class, OUTPOST_CAMPFIRE_ID);
 		GameRegistry.registerTileEntity(TileEntityTeleporter.class, TELEPORTER_ID);
+		GameRegistry.registerTileEntity(TileEntitySkyrootBed.class, SKYROOT_BED_ID);
 	}
 
 }
