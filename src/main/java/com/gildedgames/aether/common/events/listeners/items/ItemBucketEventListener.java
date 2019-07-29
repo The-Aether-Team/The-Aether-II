@@ -31,11 +31,6 @@ public class ItemBucketEventListener
 	@SubscribeEvent
 	public static void onPlayerUseBucket(final FillBucketEvent event)
 	{
-		if (CompatibilityAether.isAetherLegacyInstalled())
-		{
-			return;
-		}
-
 		if (event.getTarget() != null && event.getTarget().typeOfHit == RayTraceResult.Type.BLOCK)
 		{
 			FluidStack fluidStack = null;
@@ -56,7 +51,7 @@ public class ItemBucketEventListener
 			{
 				IBlockState targetState = event.getWorld().getBlockState(event.getTarget().getBlockPos());
 
-				if (targetState.getBlock() == Blocks.GLOWSTONE && isPortalFrame(event.getWorld(), event.getTarget().getBlockPos(), pos))
+				if (CompatibilityAether.isAetherLegacyInstalled() && targetState.getBlock() == Blocks.GLOWSTONE && isPortalFrame(event.getWorld(), event.getTarget().getBlockPos(), pos))
 				{
 					event.setCanceled(true);
 
