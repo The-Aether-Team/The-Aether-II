@@ -92,7 +92,7 @@ public class BlockCustomBed extends BlockBed implements IInternalBlock
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta)
 	{
-		return new TileEntitySkyrootBed();
+		return null;
 	}
 
 }
