@@ -9,10 +9,7 @@ import com.gildedgames.aether.client.gui.container.GuiIncubator;
 import com.gildedgames.aether.client.gui.container.guidebook.GuiGuidebookInventory;
 import com.gildedgames.aether.client.gui.container.guidebook.GuiGuidebookLoreTome;
 import com.gildedgames.aether.client.gui.container.guidebook.GuiGuidebookStatus;
-import com.gildedgames.aether.client.gui.container.guidebook.discovery.GuiGuidebookDiscoveryBestiary;
-import com.gildedgames.aether.client.gui.container.guidebook.discovery.GuiGuidebookDiscoveryBiomes;
-import com.gildedgames.aether.client.gui.container.guidebook.discovery.GuiGuidebookDiscoveryCharacters;
-import com.gildedgames.aether.client.gui.container.guidebook.discovery.GuiGuidebookDiscoveryStructures;
+import com.gildedgames.aether.client.gui.container.guidebook.discovery.DiscoveryTab;
 import com.gildedgames.aether.client.gui.dialog.ContainerShop;
 import com.gildedgames.aether.client.gui.dialog.GuiDialogViewer;
 import com.gildedgames.aether.client.gui.dialog.GuiTrade;
@@ -156,26 +153,10 @@ public class AetherGuiHandler implements IGuiHandler
 			case LORE_TOME_ID:
 				return new GuiGuidebookLoreTome(null, playerAether);
 			case DISCOVERY_ID:
-				switch (playerAether.getModule(PlayerProgressModule.class).getOpenedDiscoveryTabType())
-				{
-					case BESTIARY:
-					{
-						return new GuiGuidebookDiscoveryBestiary(null, playerAether);
-					}
-					case CHARACTERS:
-					{
-						return new GuiGuidebookDiscoveryCharacters(null, playerAether);
-					}
-					case BIOMES:
-					{
-						return new GuiGuidebookDiscoveryBiomes(null, playerAether);
-					}
-					case STRUCTURES:
-					{
-						return new GuiGuidebookDiscoveryStructures(null, playerAether);
-					}
-				}
+				final PlayerProgressModule progress = playerAether.getModule(PlayerProgressModule.class);
+				final DiscoveryTab.DiscoveryTabType discoveryTab = progress.getOpenedDiscoveryTabType();
 
+				return discoveryTab.createPageContainer(playerAether);
 			case FROSTPINE_COOLER_ID:
 				return new GuiIcestoneCooler(player.inventory, (IInventory) world.getTileEntity(pos));
 			case INCUBATOR_ID:

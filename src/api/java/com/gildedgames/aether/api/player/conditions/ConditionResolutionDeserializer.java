@@ -24,8 +24,9 @@ public class ConditionResolutionDeserializer implements JsonDeserializer<ICondit
 	public IConditionResolution deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context) throws JsonParseException
 	{
 		final String type = json.getAsString();
+		final Class clazz = this.resolutions.get(type);
 
-		if (!this.resolutions.containsKey(type))
+		if (clazz == null)
 		{
 			throw new JsonParseException("Invalid condition resolution type " + type);
 		}

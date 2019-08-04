@@ -16,11 +16,6 @@ public abstract class TGEntryBase implements ITGEntry
 
 	private IConditionResolution conditionResolution;
 
-	public TGEntryBase()
-	{
-
-	}
-
 	@Override
 	public Collection<ResourceLocation> getConditionIDs()
 	{

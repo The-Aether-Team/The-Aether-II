@@ -1,11 +1,15 @@
 package com.gildedgames.aether.client.gui.container.guidebook.discovery;
 
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.orbis.lib.client.gui.util.GuiAbstractButton;
 import com.gildedgames.orbis.lib.client.gui.util.GuiTexture;
 import com.gildedgames.orbis.lib.client.rect.Dim2D;
 import com.gildedgames.orbis.lib.client.rect.Pos2D;
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class DiscoveryTab extends GuiAbstractButton
 {
@@ -37,6 +41,45 @@ public class DiscoveryTab extends GuiAbstractButton
 
 	public enum DiscoveryTabType
 	{
-		BESTIARY, BIOMES, STRUCTURES, CHARACTERS
+		BESTIARY
+				{
+					@Override
+					public GuiContainer createPageContainer(final PlayerAether playerAether)
+					{
+						return new GuiGuidebookDiscoveryBestiary(null, playerAether);
+					}
+				}, BIOMES
+			{
+				@Override
+				public GuiContainer createPageContainer(final PlayerAether playerAether)
+				{
+					return new GuiGuidebookDiscoveryBiomes(null, playerAether);
+				}
+			}, STRUCTURES
+			{
+				@Override
+				public GuiContainer createPageContainer(final PlayerAether playerAether)
+				{
+					return new GuiGuidebookDiscoveryStructures(null, playerAether);
+				}
+			}, CHARACTERS
+			{
+				@Override
+				public GuiContainer createPageContainer(final PlayerAether playerAether)
+				{
+					return new GuiGuidebookDiscoveryCharacters(null, playerAether);
+				}
+			};
+
+		DiscoveryTabType()
+		{
+
+		}
+
+		@SideOnly(Side.CLIENT)
+		public GuiContainer createPageContainer(final PlayerAether playerAether)
+		{
+			return null;
+		}
 	}
 }

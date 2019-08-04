@@ -118,7 +118,7 @@ public class TGEntryBestiaryPage extends TGEntryBase implements ITGEntryBestiary
 	}
 
 	@Override
-	public String tag()
+	public String getTag()
 	{
 		return this.tag;
 	}

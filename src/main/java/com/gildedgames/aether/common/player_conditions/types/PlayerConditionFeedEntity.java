@@ -22,9 +22,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import org.apache.commons.lang3.Validate;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.lang.reflect.Type;
+import java.util.Objects;
 
 public class PlayerConditionFeedEntity extends PlayerConditionBase implements IPlayerConditionEntity
 {
@@ -68,9 +68,24 @@ public class PlayerConditionFeedEntity extends PlayerConditionBase implements IP
 	}
 
 	@Override
+	public boolean equals(final Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (o == null || this.getClass() != o.getClass())
+		{
+			return false;
+		}
+		final PlayerConditionFeedEntity that = (PlayerConditionFeedEntity) o;
+		return Objects.equals(this.entityId, that.entityId);
+	}
+
+	@Override
 	public int hashCode()
 	{
-		return new HashCodeBuilder().append("feedEntity:").append(this.entityId).toHashCode();
+		return Objects.hash(this.entityId);
 	}
 
 	@Override

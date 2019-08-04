@@ -1,6 +1,6 @@
 package com.gildedgames.aether.api.player.conditions.events;
 
-import com.google.common.collect.Sets;
+import com.google.common.collect.Lists;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,13 +9,12 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.List;
-import java.util.Set;
 
 public class SeeEntityEvents
 {
 	private static final int SEE_ENTITY_RADIUS = 10;
 
-	private final Set<ISeeEntityEventsListener> listeners = Sets.newHashSet();
+	private final List<ISeeEntityEventsListener> listeners = Lists.newArrayList();
 
 	public SeeEntityEvents()
 	{
@@ -24,7 +23,10 @@ public class SeeEntityEvents
 
 	public void listen(final ISeeEntityEventsListener listener)
 	{
-		this.listeners.add(listener);
+		if (!this.listeners.contains(listener))
+		{
+			this.listeners.add(listener);
+		}
 	}
 
 	public void unlisten(final ISeeEntityEventsListener listener)
@@ -57,7 +59,10 @@ public class SeeEntityEvents
 			{
 				if (player.canEntityBeSeen(e))
 				{
-					this.listeners.forEach(l -> l.onSeeEntity(e, player));
+					for (final ISeeEntityEventsListener l : this.listeners)
+					{
+						l.onSeeEntity(e, player);
+					}
 				}
 			}
 		}

@@ -15,8 +15,8 @@ public class TGDefinition implements ITGDefinition
 	@SerializedName("conditions")
 	private final Collection<IPlayerCondition> conditions;
 
-	@SerializedName("conditionResolution")
-	private final IConditionResolution conditionResolution;
+	@SerializedName("resolution")
+	private final IConditionResolution resolution;
 
 	@SerializedName("entries")
 	private final Map<String, ITGEntry> entries;
@@ -25,7 +25,7 @@ public class TGDefinition implements ITGDefinition
 			final Map<String, ITGEntry> entries)
 	{
 		this.conditions = conditions;
-		this.conditionResolution = conditionResolution;
+		this.resolution = conditionResolution;
 		this.entries = entries;
 	}
 
@@ -38,9 +38,9 @@ public class TGDefinition implements ITGDefinition
 
 	@Nonnull
 	@Override
-	public IConditionResolution conditionResolution()
+	public IConditionResolution resolution()
 	{
-		return this.conditionResolution;
+		return this.resolution;
 	}
 
 	@Nonnull

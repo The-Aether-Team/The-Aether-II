@@ -13,7 +13,7 @@ public interface ITGDefinition
 	Collection<IPlayerCondition> conditions();
 
 	@Nonnull
-	IConditionResolution conditionResolution();
+	IConditionResolution resolution();
 
 	@Nonnull
 	Map<String, ITGEntry> entries();

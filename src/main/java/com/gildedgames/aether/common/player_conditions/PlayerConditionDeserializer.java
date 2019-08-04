@@ -6,19 +6,20 @@ import com.gildedgames.aether.common.player_conditions.types.PlayerConditionFeed
 import com.gildedgames.aether.common.player_conditions.types.PlayerConditionKillEntity;
 import com.gildedgames.aether.common.player_conditions.types.PlayerConditionSeeEntity;
 import com.google.gson.*;
+import net.minecraft.util.ResourceLocation;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
 
 public class PlayerConditionDeserializer implements JsonDeserializer<IPlayerCondition>
 {
-	private final HashMap<String, Class<? extends IPlayerCondition>> conditions = new HashMap<>();
+	private final HashMap<ResourceLocation, Class<? extends IPlayerCondition>> conditions = new HashMap<>();
 
 	public PlayerConditionDeserializer()
 	{
-		this.conditions.put(AetherCore.MOD_ID + ":seeEntity", PlayerConditionSeeEntity.class);
-		this.conditions.put(AetherCore.MOD_ID + ":feedEntity", PlayerConditionFeedEntity.class);
-		this.conditions.put(AetherCore.MOD_ID + ":killEntity", PlayerConditionKillEntity.class);
+		this.conditions.put(AetherCore.getResource("seeEntity"), PlayerConditionSeeEntity.class);
+		this.conditions.put(AetherCore.getResource("feedEntity"), PlayerConditionFeedEntity.class);
+		this.conditions.put(AetherCore.getResource("killEntity"), PlayerConditionKillEntity.class);
 	}
 
 	@Override
@@ -31,7 +32,7 @@ public class PlayerConditionDeserializer implements JsonDeserializer<IPlayerCond
 			throw new JsonParseException("Missing required field 'type' for condition");
 		}
 
-		final String type = root.get("type").getAsString();
+		final ResourceLocation type = new ResourceLocation(root.get("type").getAsString());
 
 		if (!this.conditions.containsKey(type))
 		{

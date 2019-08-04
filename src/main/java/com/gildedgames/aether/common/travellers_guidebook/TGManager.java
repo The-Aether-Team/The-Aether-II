@@ -131,7 +131,7 @@ public class TGManager implements ITGManager
 				throw new RuntimeException("An entry with an existing id is trying to be registered: " + entryId);
 			}
 
-			entryDef.setConditionResolution(def.conditionResolution());
+			entryDef.setConditionResolution(def.resolution());
 
 			// Provide player conditions required by its sub data
 			this.playerConditionTracker.trackConditions(entryDef.providePlayerConditions());
@@ -139,7 +139,7 @@ public class TGManager implements ITGManager
 
 			this.idToEntries.put(entryId, entryDef);
 
-			final String tag = entryDef.tag();
+			final String tag = entryDef.getTag();
 
 			// If tag doesn't exist, don't add to tag list
 			if (tag == null || tag.isEmpty())

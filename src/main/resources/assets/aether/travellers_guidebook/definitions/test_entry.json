@@ -6,7 +6,7 @@
 				"entityId": "aether:taegore"
 			}
 		],
-		"conditionResolution": "requireAll",
+		"resolution": "requireAll",
 		"entries": {
 			"aether.taegore.discovery": {
 				"tag": "bestiary",

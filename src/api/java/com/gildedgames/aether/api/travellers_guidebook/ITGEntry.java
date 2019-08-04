@@ -25,7 +25,7 @@ public interface ITGEntry
 	 */
 	Collection<IPlayerCondition> providePlayerConditions();
 
-	String tag();
+	String getTag();
 
 	IConditionResolution getConditionResolution();
 
