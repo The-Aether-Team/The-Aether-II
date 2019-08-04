@@ -1,6 +1,7 @@
 package com.gildedgames.aether.client.gui.container.guidebook.discovery;
 
 import com.gildedgames.aether.api.travellers_guidebook.ITGManager;
+import com.gildedgames.aether.client.gui.container.guidebook.discovery.stats.GuiStat;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.travellers_guidebook.entries.TGEntryBestiaryPage;
@@ -17,6 +18,7 @@ import com.gildedgames.orbis.lib.client.rect.Pos2D;
 import com.gildedgames.orbis.lib.client.rect.Rect;
 import com.google.common.collect.Lists;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 
@@ -25,6 +27,14 @@ import java.util.List;
 public class GuiGuidebookDiscoveryBestiary extends GuiGuidebookDiscovery
 {
 	private static final ResourceLocation RIGHT_PAGE_MOB = AetherCore.getResource("textures/gui/guidebook/discovery/guidebook_discovery_right_mob.png");
+
+	private static final ResourceLocation HEALTH_ICON = AetherCore.getResource("textures/gui/guidebook/icons/heart.png");
+
+	private static final ResourceLocation SLASH_DEFENSE_ICON = AetherCore.getResource("textures/gui/overlay/slash_defense.png");
+
+	private static final ResourceLocation PIERCE_DEFENSE_ICON = AetherCore.getResource("textures/gui/overlay/pierce_defense.png");
+
+	private static final ResourceLocation IMPACT_DEFENSE_ICON = AetherCore.getResource("textures/gui/overlay/impact_defense.png");
 
 	private List<TGEntryBestiaryPage> bestiaryEntries;
 
@@ -64,7 +74,7 @@ public class GuiGuidebookDiscoveryBestiary extends GuiGuidebookDiscovery
 				final boolean isUnderstood = page.isUnderstood(this.aePlayer);
 				final boolean completeOverview = page.hasUnlockedCompleteOverview(this.aePlayer);
 
-				this.beastFrame.setResourceLocation(isUnderstood ? page.getDiscoveredTexture() : page.getSilhouetteTexture());
+				this.beastFrame.setResourceLocation(page.isUnlocked(this.aePlayer) ? page.getDiscoveredTexture() : page.getSilhouetteTexture());
 				this.beastFrame.state().setVisible(true);
 
 				this.beastTitle.setText(new Text(new TextComponentTranslation(page.getEntityName()), 1.0F));
