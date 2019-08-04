@@ -5,6 +5,7 @@ import com.gildedgames.aether.api.player.conditions.IPlayerCondition;
 import com.gildedgames.aether.api.player.conditions.IPlayerConditionTracker;
 import com.gildedgames.aether.api.player.conditions.types.IPlayerConditionListener;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerConditionModule;
 import com.google.common.collect.Sets;
 import net.minecraft.entity.player.EntityPlayer;
 
@@ -45,7 +46,7 @@ public class PlayerConditionTracker implements IPlayerConditionTracker, IPlayerC
 	public void onTriggered(final IPlayerCondition condition, final EntityPlayer player)
 	{
 		final PlayerAether playerAether = PlayerAether.getPlayer(player);
-		final IPlayerConditionModule module = playerAether.getPlayerConditionModule();
+		final IPlayerConditionModule module = playerAether.getModule(PlayerConditionModule.class);
 
 		module.flagCondition(condition.getUniqueIdentifier());
 	}

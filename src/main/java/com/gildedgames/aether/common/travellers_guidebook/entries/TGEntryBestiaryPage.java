@@ -6,6 +6,7 @@ import com.gildedgames.aether.api.player.conditions.IConditionResolution;
 import com.gildedgames.aether.api.player.conditions.IPlayerCondition;
 import com.gildedgames.aether.api.travellers_guidebook.entries.ITGEntryBestiaryPage;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerConditionModule;
 import com.gildedgames.aether.common.player_conditions.types.PlayerConditionFeedEntity;
 import com.gildedgames.aether.common.player_conditions.types.PlayerConditionKillEntity;
 import com.gildedgames.aether.common.travellers_guidebook.TGEntryBase;
@@ -105,7 +106,7 @@ public class TGEntryBestiaryPage extends TGEntryBase implements ITGEntryBestiary
 	@Override
 	public boolean isUnderstood(final IPlayerAether playerAether)
 	{
-		return playerAether.getPlayerConditionModule().areConditionsFlagged(IConditionResolution.REQUIRE_ANY,
+		return playerAether.getModule(PlayerConditionModule.class).areConditionsFlagged(IConditionResolution.REQUIRE_ANY,
 				AetherCore.getResource("feedEntity:" + this.entityId),
 				AetherCore.getResource("killEntity:" + this.entityId));
 	}

@@ -73,12 +73,6 @@ public class PlayerConditionModule extends PlayerAetherModule implements IPlayer
 	}
 
 	@Override
-	public void onUpdate()
-	{
-
-	}
-
-	@Override
 	public void write(final NBTTagCompound tag)
 	{
 		final NBTFunnel funnel = new NBTFunnel(tag);

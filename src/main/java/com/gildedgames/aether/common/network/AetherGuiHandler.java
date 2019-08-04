@@ -6,18 +6,15 @@ import com.gildedgames.aether.api.shop.IShopInstance;
 import com.gildedgames.aether.api.shop.IShopInstanceGroup;
 import com.gildedgames.aether.client.gui.container.GuiIcestoneCooler;
 import com.gildedgames.aether.client.gui.container.GuiIncubator;
-import com.gildedgames.aether.client.gui.container.guidebook.GuiGuidebookDiscovery;
-import com.gildedgames.aether.client.gui.container.guidebook.GuiGuidebookInventory;
 import com.gildedgames.aether.client.gui.container.guidebook.GuiGuidebookInventory;
 import com.gildedgames.aether.client.gui.container.guidebook.GuiGuidebookLoreTome;
 import com.gildedgames.aether.client.gui.container.guidebook.GuiGuidebookStatus;
-import com.gildedgames.aether.client.gui.container.simple_crafting.ContainerMasonryBench;
-import com.gildedgames.aether.client.gui.dialog.ContainerShop;
 import com.gildedgames.aether.client.gui.container.guidebook.discovery.GuiGuidebookDiscoveryBestiary;
 import com.gildedgames.aether.client.gui.container.guidebook.discovery.GuiGuidebookDiscoveryBiomes;
 import com.gildedgames.aether.client.gui.container.guidebook.discovery.GuiGuidebookDiscoveryCharacters;
 import com.gildedgames.aether.client.gui.container.guidebook.discovery.GuiGuidebookDiscoveryStructures;
-import com.gildedgames.aether.client.gui.container.simple_crafting.GuiMasonryBench;
+import com.gildedgames.aether.client.gui.container.simple_crafting.ContainerMasonryBench;
+import com.gildedgames.aether.client.gui.dialog.ContainerShop;
 import com.gildedgames.aether.client.gui.dialog.GuiDialogViewer;
 import com.gildedgames.aether.client.gui.dialog.GuiTrade;
 import com.gildedgames.aether.client.gui.misc.GuiAetherLoading;
@@ -25,6 +22,7 @@ import com.gildedgames.aether.client.gui.misc.GuiAetherTeleporterNotice;
 import com.gildedgames.aether.client.gui.misc.GuiPatronRewards;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerDialogModule;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerProgressModule;
 import com.gildedgames.aether.common.containers.ContainerCustomWorkbench;
 import com.gildedgames.aether.common.containers.ContainerDialogController;
 import com.gildedgames.aether.common.containers.ContainerLoadingScreen;
@@ -106,14 +104,14 @@ public class AetherGuiHandler implements IGuiHandler
 				return new ContainerLoadingScreen();
 			case DIALOG_SHOP_ID:
 			{
-				PlayerDialogModule dialogModule = playerAether.getModule(PlayerDialogModule.class);
+				final PlayerDialogModule dialogModule = playerAether.getModule(PlayerDialogModule.class);
 
 				if (dialogModule.getTalkingCharacter() == null)
 				{
 					return null;
 				}
 
-				IShopInstanceGroup group = dialogModule.getTalkingCharacter().getShopInstanceGroup();
+				final IShopInstanceGroup group = dialogModule.getTalkingCharacter().getShopInstanceGroup();
 
 				if (group == null)
 				{
@@ -158,7 +156,7 @@ public class AetherGuiHandler implements IGuiHandler
 			case LORE_TOME_ID:
 				return new GuiGuidebookLoreTome(null, playerAether);
 			case DISCOVERY_ID:
-				switch (playerAether.getProgressModule().getOpenedDiscoveryTabType())
+				switch (playerAether.getModule(PlayerProgressModule.class).getOpenedDiscoveryTabType())
 				{
 					case BESTIARY:
 					{
@@ -192,16 +190,16 @@ public class AetherGuiHandler implements IGuiHandler
 				return new GuiAetherTeleporterNotice();
 			case DIALOG_SHOP_ID:
 			{
-				PlayerDialogModule dialogModule = playerAether.getModule(PlayerDialogModule.class);
+				final PlayerDialogModule dialogModule = playerAether.getModule(PlayerDialogModule.class);
 
 				if (dialogModule.getTalkingCharacter() == null)
 				{
 					return null;
 				}
 
-				IDialogSlide slide = DialogUtil.getSlide(dialogModule);
+				final IDialogSlide slide = DialogUtil.getSlide(dialogModule);
 
-				IShopInstanceGroup group = dialogModule.getTalkingCharacter().getShopInstanceGroup();
+				final IShopInstanceGroup group = dialogModule.getTalkingCharacter().getShopInstanceGroup();
 
 				if (group == null)
 				{
@@ -238,7 +236,7 @@ public class AetherGuiHandler implements IGuiHandler
 				}
 			}
 			case DIALOG_VIEWER_ID:
-				PlayerDialogModule dialogModule = playerAether.getModule(PlayerDialogModule.class);
+				final PlayerDialogModule dialogModule = playerAether.getModule(PlayerDialogModule.class);
 
 				return new GuiDialogViewer(player, dialogModule, dialogModule.getCurrentSceneInstance());
 			case TRADE_ID:

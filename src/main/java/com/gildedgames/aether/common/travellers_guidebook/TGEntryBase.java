@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.player.conditions.IConditionResolution;
 import com.gildedgames.aether.api.player.conditions.IPlayerCondition;
 import com.gildedgames.aether.api.travellers_guidebook.ITGEntry;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerConditionModule;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.Collection;
@@ -53,6 +54,6 @@ public abstract class TGEntryBase implements ITGEntry
 	@Override
 	public boolean isUnlocked(final IPlayerAether playerAether)
 	{
-		return playerAether.getPlayerConditionModule().isEntryUnlocked(this);
+		return playerAether.getModule(PlayerConditionModule.class).isEntryUnlocked(this);
 	}
 }

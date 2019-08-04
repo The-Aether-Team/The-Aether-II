@@ -6,9 +6,8 @@ import com.gildedgames.aether.api.player.conditions.IPlayerConditionTracker;
 import com.gildedgames.aether.api.player.conditions.events.SeeEntityEvents;
 import com.gildedgames.aether.api.registrar.*;
 import com.gildedgames.aether.api.registry.IContentRegistry;
-import com.gildedgames.aether.api.world.preparation.IPrepRegistry;
 import com.gildedgames.aether.api.travellers_guidebook.ITGManager;
-import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.api.world.preparation.IPrepRegistry;
 import com.gildedgames.aether.common.cache.EntityStatsCache;
 import com.gildedgames.aether.common.capabilities.CapabilityManagerAether;
 import com.gildedgames.aether.common.capabilities.item.EffectRegistry;
@@ -19,16 +18,15 @@ import com.gildedgames.aether.common.init.*;
 import com.gildedgames.aether.common.items.properties.ItemPropertiesRegistry;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.patron.PatronRewards;
-import com.gildedgames.aether.common.recipes.altar.AltarRecipeRegistry;
 import com.gildedgames.aether.common.player_conditions.PlayerConditionTracker;
+import com.gildedgames.aether.common.recipes.altar.AltarRecipeRegistry;
 import com.gildedgames.aether.common.recipes.simple.RecipeIndexRegistry;
 import com.gildedgames.aether.common.recipes.simple.RecipeWrapper;
 import com.gildedgames.aether.common.recipes.simple.SimpleCraftingRegistry;
 import com.gildedgames.aether.common.shop.CurrencyRegistry;
 import com.gildedgames.aether.common.shop.ShopManager;
-import com.gildedgames.aether.common.util.ObjectHolderHelper;
-import com.gildedgames.aether.common.tab.guidebook.TabGuidebook;
 import com.gildedgames.aether.common.travellers_guidebook.TGManager;
+import com.gildedgames.aether.common.util.ObjectHolderHelper;
 import com.gildedgames.aether.common.util.helpers.PerfHelper;
 import com.gildedgames.aether.common.world.aether.PrepAether;
 import com.gildedgames.aether.common.world.preparation.PrepRegistry;
@@ -40,9 +38,9 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
@@ -150,9 +148,9 @@ public class ContentRegistry implements IContentRegistry, IOrbisServicesListener
 	{
 		this.craftableItemsIndex.clearRegistrations();
 
-		for (IRecipe recipe : ForgeRegistries.RECIPES)
+		for (final IRecipe recipe : ForgeRegistries.RECIPES)
 		{
-			ResourceLocation loc = Item.REGISTRY.getNameForObject(recipe.getRecipeOutput().getItem());
+			final ResourceLocation loc = Item.REGISTRY.getNameForObject(recipe.getRecipeOutput().getItem());
 
 			if (loc != null && loc.getNamespace().equals(AetherCore.MOD_ID))
 			{
@@ -258,7 +256,7 @@ public class ContentRegistry implements IContentRegistry, IOrbisServicesListener
 	}
 
 	@Override
-	public void onStartProjectManager(IProjectManager projectManager)
+	public void onStartProjectManager(final IProjectManager projectManager)
 	{
 		BlueprintsAether.load(projectManager);
 	}

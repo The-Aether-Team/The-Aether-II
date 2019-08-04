@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.player.IPlayerConditionModule;
 import com.gildedgames.aether.api.player.conditions.types.IPlayerConditionEntity;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerConditionModule;
 import com.gildedgames.aether.common.player_conditions.PlayerConditionBase;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import com.google.gson.JsonDeserializationContext;
@@ -110,7 +111,7 @@ public class PlayerConditionFeedEntity extends PlayerConditionBase implements IP
 		final EntityPlayer player = event.getEntityPlayer();
 
 		final PlayerAether playerAether = PlayerAether.getPlayer(player);
-		final IPlayerConditionModule module = playerAether.getPlayerConditionModule();
+		final IPlayerConditionModule module = playerAether.getModule(PlayerConditionModule.class);
 
 		// If already flagged condition, stop
 		if (module.isConditionFlagged(this.getUniqueIdentifier()))

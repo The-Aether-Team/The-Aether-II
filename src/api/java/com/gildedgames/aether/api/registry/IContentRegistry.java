@@ -12,7 +12,6 @@ import com.gildedgames.aether.api.registry.tab.ITabRegistry;
 import com.gildedgames.aether.api.shop.ICurrencyRegistry;
 import com.gildedgames.aether.api.shop.IShopManager;
 import com.gildedgames.aether.api.travellers_guidebook.ITGManager;
-import com.gildedgames.aether.api.world.generation.ITemplateRegistry;
 import com.gildedgames.aether.api.world.preparation.IPrepRegistry;
 import com.gildedgames.aether.api.world.templates.ITemplateRegistry;
 

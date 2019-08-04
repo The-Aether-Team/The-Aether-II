@@ -63,21 +63,21 @@ public class EntityStats implements IEntityStats
 			return this;
 		}
 
-		public EntityStatsFactory slashDefenseLevel(final float value)
+		public EntityStatsFactory slashDefenseLevel(final double value)
 		{
 			this.slashDefenseLevel = value;
 
 			return this;
 		}
 
-		public EntityStatsFactory pierceDefenseLevel(final float value)
+		public EntityStatsFactory pierceDefenseLevel(final double value)
 		{
 			this.pierceDefenseLevel = value;
 
 			return this;
 		}
 
-		public EntityStatsFactory impactDefenseLevel(final float value)
+		public EntityStatsFactory impactDefenseLevel(final double value)
 		{
 			this.impactDefenseLevel = value;
 

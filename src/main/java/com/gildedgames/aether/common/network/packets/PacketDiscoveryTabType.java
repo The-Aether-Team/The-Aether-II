@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.network.packets;
 
 import com.gildedgames.aether.client.gui.container.guidebook.discovery.DiscoveryTab;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerProgressModule;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
@@ -49,7 +50,7 @@ public class PacketDiscoveryTabType implements IMessage
 
 			final PlayerAether playerAether = PlayerAether.getPlayer(player);
 
-			playerAether.getProgressModule().setOpenedDiscoveryTabType(message.type);
+			playerAether.getModule(PlayerProgressModule.class).setOpenedDiscoveryTabType(message.type);
 
 			return null;
 		}

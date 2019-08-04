@@ -3,10 +3,8 @@ package com.gildedgames.aether.common.capabilities.entity.player;
 import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.player.IPlayerAetherModule;
 import com.gildedgames.aether.api.registrar.CapabilitiesAether;
-import com.gildedgames.aether.api.player.IPlayerConditionModule;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.*;
-import com.gildedgames.aether.common.capabilities.entity.player.modules.guidebook.PlayerTGModule;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.*;
 import com.gildedgames.aether.common.world.instances.necromancer_tower.NecromancerTowerInstance;
@@ -43,14 +41,15 @@ public class PlayerAether implements IPlayerAether
 {
 	private final EntityPlayer entity;
 
-	private NecromancerTowerInstance towerInstance;
-
-	private ItemStack lastDestroyedStack;
-
 	private final IdentityHashMap<Class<? extends IPlayerAetherModule>, IPlayerAetherModule> modulesKeyed = new IdentityHashMap<>();
 
 	private final List<IPlayerAetherModule> modules = new ArrayList<>();
+
 	private final List<IPlayerAetherModule.Serializable> modulesSerializable = new ArrayList<>();
+
+	private NecromancerTowerInstance towerInstance;
+
+	private ItemStack lastDestroyedStack;
 
 	private int ticksWithEggnogEffect;
 
@@ -82,13 +81,36 @@ public class PlayerAether implements IPlayerAether
 		this.registerModule(new PlayerSectorModule(this));
 		this.registerModule(new PlayerTradeModule(this));
 		this.registerModule(new PlayerCaveSpawnModule(this));
-		this.registerModule(new PlayerTGModule(this));
+		this.registerModule(new PlayerConditionModule(this));
+	}
+
+	@Nonnull
+	public static PlayerAether getPlayer(final EntityPlayer player)
+	{
+		if (player == null)
+		{
+			throw new NullPointerException("Player entity is null");
+		}
+
+		final PlayerAether ret = (PlayerAether) player.getCapability(CapabilitiesAether.PLAYER_DATA, null);
+
+		if (ret == null)
+		{
+			throw new NullPointerException("Player does not contain capability");
+		}
+
+		return ret;
+	}
+
+	public static boolean hasCapability(final Entity entity)
+	{
+		return entity.hasCapability(CapabilitiesAether.PLAYER_DATA, null);
 	}
 
 	@Override
-	public void registerModule(IPlayerAetherModule module)
+	public void registerModule(final IPlayerAetherModule module)
 	{
-		Class<? extends IPlayerAetherModule> clazz = module.getClass();
+		final Class<? extends IPlayerAetherModule> clazz = module.getClass();
 
 		if (this.modulesKeyed.containsKey(clazz))
 		{
@@ -106,9 +128,9 @@ public class PlayerAether implements IPlayerAether
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public <T extends IPlayerAetherModule> T getModule(Class<T> clazz)
+	public <T extends IPlayerAetherModule> T getModule(final Class<T> clazz)
 	{
-		T ret = (T) this.modulesKeyed.get(clazz);
+		final T ret = (T) this.modulesKeyed.get(clazz);
 
 		if (ret == null)
 		{
@@ -116,29 +138,6 @@ public class PlayerAether implements IPlayerAether
 		}
 
 		return ret;
-	}
-
-	@Nonnull
-	public static PlayerAether getPlayer(final EntityPlayer player)
-	{
-		if (player == null)
-		{
-			throw new NullPointerException("Player entity is null");
-		}
-
-		PlayerAether ret = (PlayerAether) player.getCapability(CapabilitiesAether.PLAYER_DATA, null);
-
-		if (ret == null)
-		{
-			throw new NullPointerException("Player does not contain capability");
-		}
-
-		return ret;
-	}
-
-	public static boolean hasCapability(final Entity entity)
-	{
-		return entity.hasCapability(CapabilitiesAether.PLAYER_DATA, null);
 	}
 
 	public ItemStack getLastDestroyedStack()
@@ -171,7 +170,7 @@ public class PlayerAether implements IPlayerAether
 	 */
 	public void sendFullUpdate()
 	{
-		EntityPlayerMP player = (EntityPlayerMP) this.getEntity();
+		final EntityPlayerMP player = (EntityPlayerMP) this.getEntity();
 
 		NetworkingAether.sendPacketToPlayer(new PacketCurrencyModule(this.getModule(PlayerCurrencyModule.class)), player);
 		NetworkingAether.sendPacketToPlayer(new PacketProgressModule(this.getModule(PlayerProgressModule.class)), player);
@@ -212,7 +211,7 @@ public class PlayerAether implements IPlayerAether
 	{
 		this.sendFullUpdate();
 
-		for (IPlayerAetherModule module : this.modules)
+		for (final IPlayerAetherModule module : this.modules)
 		{
 			module.onRespawn(event);
 		}
@@ -224,7 +223,7 @@ public class PlayerAether implements IPlayerAether
 
 	public void onDeath(final LivingDeathEvent event)
 	{
-		for (IPlayerAetherModule module : this.modules)
+		for (final IPlayerAetherModule module : this.modules)
 		{
 			module.onDeath(event);
 		}
@@ -232,7 +231,7 @@ public class PlayerAether implements IPlayerAether
 
 	public void onDrops(final PlayerDropsEvent event)
 	{
-		for (IPlayerAetherModule module : this.modules)
+		for (final IPlayerAetherModule module : this.modules)
 		{
 			module.onDrops(event);
 		}
@@ -240,7 +239,7 @@ public class PlayerAether implements IPlayerAether
 
 	public void onHurt(final LivingHurtEvent event)
 	{
-		PlayerEquipmentModule equipmentModule = this.getModule(PlayerEquipmentModule.class);
+		final PlayerEquipmentModule equipmentModule = this.getModule(PlayerEquipmentModule.class);
 
 		if (equipmentModule.getEffectPool(new ResourceLocation(AetherCore.MOD_ID, "fire_immunity")).isPresent())
 		{
@@ -250,7 +249,7 @@ public class PlayerAether implements IPlayerAether
 			}
 		}
 
-		PlayerRollMovementModule movementModule = this.getModule(PlayerRollMovementModule.class);
+		final PlayerRollMovementModule movementModule = this.getModule(PlayerRollMovementModule.class);
 
 		if (movementModule.isRolling())
 		{
@@ -313,11 +312,11 @@ public class PlayerAether implements IPlayerAether
 	{
 		final NBTFunnel funnel = new NBTFunnel(tag);
 
-		NBTTagCompound modules = tag.getCompoundTag("Modules");
+		final NBTTagCompound modules = tag.getCompoundTag("Modules");
 
 		for (final IPlayerAetherModule.Serializable module : this.modulesSerializable)
 		{
-			String key = module.getIdentifier().toString();
+			final String key = module.getIdentifier().toString();
 
 			if (modules.hasKey(key))
 			{

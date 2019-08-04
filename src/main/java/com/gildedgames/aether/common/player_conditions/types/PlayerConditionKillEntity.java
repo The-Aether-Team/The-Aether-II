@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.player.IPlayerConditionModule;
 import com.gildedgames.aether.api.player.conditions.types.IPlayerConditionEntity;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerConditionModule;
 import com.gildedgames.aether.common.player_conditions.PlayerConditionBase;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
@@ -94,7 +95,7 @@ public class PlayerConditionKillEntity extends PlayerConditionBase implements IP
 		final EntityPlayer player = (EntityPlayer) event.getSource().getTrueSource();
 
 		final PlayerAether playerAether = PlayerAether.getPlayer(player);
-		final IPlayerConditionModule module = playerAether.getPlayerConditionModule();
+		final IPlayerConditionModule module = playerAether.getModule(PlayerConditionModule.class);
 
 		if (module.isConditionFlagged(this.getUniqueIdentifier()))
 		{

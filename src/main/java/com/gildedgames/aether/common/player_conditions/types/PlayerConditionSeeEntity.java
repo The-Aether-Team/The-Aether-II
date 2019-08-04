@@ -5,6 +5,7 @@ import com.gildedgames.aether.api.player.conditions.events.ISeeEntityEventsListe
 import com.gildedgames.aether.api.player.conditions.types.IPlayerConditionEntity;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerConditionModule;
 import com.gildedgames.aether.common.player_conditions.PlayerConditionBase;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
@@ -88,7 +89,7 @@ public class PlayerConditionSeeEntity extends PlayerConditionBase implements IPl
 		}
 
 		final PlayerAether playerAether = PlayerAether.getPlayer(player);
-		final IPlayerConditionModule module = playerAether.getPlayerConditionModule();
+		final IPlayerConditionModule module = playerAether.getModule(PlayerConditionModule.class);
 
 		if (module.isConditionFlagged(this.getUniqueIdentifier()))
 		{

@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.cache;
 
 import com.gildedgames.aether.api.cache.IEntityStats;
 import com.gildedgames.aether.api.cache.IEntityStatsCache;
+import com.gildedgames.aether.api.entity.damage.DamageTypeAttributes;
 import com.google.common.collect.Maps;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -39,7 +40,16 @@ public class EntityStatsCache implements IEntityStatsCache
 			{
 				final EntityLivingBase living = (EntityLivingBase) entity;
 
-				final EntityStats stats = EntityStats.build().maxHealth(living.getMaxHealth()).flush();
+				final double slashDefenseLevel = living.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).getAttributeValue();
+				final double pierceDefenseLevel = living.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).getAttributeValue();
+				final double impactDefenseLevel = living.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).getAttributeValue();
+
+				final EntityStats stats = EntityStats.build()
+						.maxHealth(living.getMaxHealth())
+						.slashDefenseLevel(slashDefenseLevel)
+						.pierceDefenseLevel(pierceDefenseLevel)
+						.impactDefenseLevel(impactDefenseLevel)
+						.flush();
 
 				this.entityIdToStats.put(entityId, stats);
 			}

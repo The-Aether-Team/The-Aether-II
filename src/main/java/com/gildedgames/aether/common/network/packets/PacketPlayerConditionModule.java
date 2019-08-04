@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.network.packets;
 
 import com.gildedgames.aether.api.player.IPlayerConditionModule;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerConditionModule;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
@@ -54,7 +55,7 @@ public class PacketPlayerConditionModule implements IMessage
 
 			final PlayerAether playerAether = PlayerAether.getPlayer(player);
 
-			playerAether.getPlayerConditionModule().read(message.tag);
+			playerAether.getModule(PlayerConditionModule.class).read(message.tag);
 
 			return null;
 		}

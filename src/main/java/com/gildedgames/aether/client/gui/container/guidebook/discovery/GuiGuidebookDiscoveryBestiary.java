@@ -1,5 +1,6 @@
 package com.gildedgames.aether.client.gui.container.guidebook.discovery;
 
+import com.gildedgames.aether.api.cache.IEntityStats;
 import com.gildedgames.aether.api.travellers_guidebook.ITGManager;
 import com.gildedgames.aether.client.gui.container.guidebook.discovery.stats.GuiStat;
 import com.gildedgames.aether.common.AetherCore;
@@ -10,9 +11,7 @@ import com.gildedgames.orbis.lib.client.gui.util.GuiText;
 import com.gildedgames.orbis.lib.client.gui.util.GuiTextBox;
 import com.gildedgames.orbis.lib.client.gui.util.GuiTexture;
 import com.gildedgames.orbis.lib.client.gui.util.decorators.GuiScrollable;
-import com.gildedgames.orbis.lib.client.gui.util.gui_library.IGuiContext;
-import com.gildedgames.orbis.lib.client.gui.util.gui_library.IGuiElement;
-import com.gildedgames.orbis.lib.client.gui.util.gui_library.IGuiViewer;
+import com.gildedgames.orbis.lib.client.gui.util.gui_library.*;
 import com.gildedgames.orbis.lib.client.rect.Dim2D;
 import com.gildedgames.orbis.lib.client.rect.Pos2D;
 import com.gildedgames.orbis.lib.client.rect.Rect;
@@ -45,6 +44,8 @@ public class GuiGuidebookDiscoveryBestiary extends GuiGuidebookDiscovery
 	private GuiText beastTitle;
 
 	private GuiTextBox beastDescription;
+
+	private GuiScrollable statsArea;
 
 	public GuiGuidebookDiscoveryBestiary(final IGuiViewer prevViewer, final PlayerAether aePlayer)
 	{
@@ -90,6 +91,12 @@ public class GuiGuidebookDiscoveryBestiary extends GuiGuidebookDiscovery
 								0.65F));
 
 				this.beastDescription.tryRebuild();
+
+				final IGuiElement statsContent = this.buildStats(page);
+
+				statsContent.dim().mod().pos(this.statsArea.dim().min()).flush();
+
+				this.statsArea.setDecorated(statsContent);
 			});
 
 			this.slots.add(slot);
@@ -99,7 +106,31 @@ public class GuiGuidebookDiscoveryBestiary extends GuiGuidebookDiscovery
 
 	private IGuiElement buildStats(final TGEntryBestiaryPage page)
 	{
-		return null;
+		final IEntityStats stats = page.getEntityStats();
+		final IGuiElement statsElement = new GuiElement(Dim2D.build().width(52).flush(), false);
+
+		final GuiStat healthStat = new GuiStat(
+				new GuiTexture(Dim2D.build().width(14).height(14).flush(), HEALTH_ICON),
+				new Text(new TextComponentString(String.valueOf(MathHelper.floor(stats.getMaxHealth()))), 1.0F));
+		final GuiStat slashStat = new GuiStat(
+				new GuiTexture(Dim2D.build().width(14).height(14).flush(), SLASH_DEFENSE_ICON),
+				new Text(new TextComponentString(String.valueOf(MathHelper.floor(stats.getSlashDefenseLevel()))), 1.0F));
+		final GuiStat pierceStat = new GuiStat(
+				new GuiTexture(Dim2D.build().width(14).height(14).flush(), PIERCE_DEFENSE_ICON),
+				new Text(new TextComponentString(String.valueOf(MathHelper.floor(stats.getPierceDefenseLevel()))), 1.0F));
+		final GuiStat impactStat = new GuiStat(
+				new GuiTexture(Dim2D.build().width(14).height(14).flush(), IMPACT_DEFENSE_ICON),
+				new Text(new TextComponentString(String.valueOf(MathHelper.floor(stats.getImpactDefenseLevel()))), 1.0F));
+
+		statsElement.build(this);
+
+		GuiLibHelper.alignVertically(this, Pos2D.flush(5, 5), 5, healthStat, slashStat, pierceStat, impactStat);
+
+		statsElement.context().addChildren(healthStat, slashStat, pierceStat, impactStat);
+
+		GuiLibHelper.assembleMinMaxArea(statsElement);
+
+		return statsElement;
 	}
 
 	@Override
@@ -114,6 +145,10 @@ public class GuiGuidebookDiscoveryBestiary extends GuiGuidebookDiscovery
 		this.beastDescription = new GuiTextBox(Dim2D.build().x(screenX + 92).y(screenY + 24).width(52).flush(), false,
 				new Text(new TextComponentString(""),
 						0.65F));
+
+		// Empty stats scroll until click on entry
+		this.statsArea = new GuiScrollable(new GuiElement(Dim2D.build().x(screenX + 25).y(screenY + 114).flush(), false),
+				Dim2D.build().width(52 + 15).height(56).flush(), true);
 
 		final Rect beastDescriptionScrollArea = Dim2D.build().width(52 + 15).height(73).flush();
 
@@ -130,6 +165,7 @@ public class GuiGuidebookDiscoveryBestiary extends GuiGuidebookDiscovery
 				this.beastTitle,
 				new GuiScrollable(this.beastDescription, beastDescriptionScrollArea, true),
 				stats,
-				moves);
+				moves,
+				this.statsArea);
 	}
 }

@@ -3,6 +3,7 @@ package com.gildedgames.aether.client.gui.container.guidebook.discovery;
 import com.gildedgames.aether.client.gui.container.guidebook.AbstractGuidebookPage;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerProgressModule;
 import com.gildedgames.aether.common.containers.guidebook.EmptyContainer;
 import com.gildedgames.orbis.lib.client.gui.util.GuiTexture;
 import com.gildedgames.orbis.lib.client.gui.util.gui_library.IGuiContext;
@@ -39,7 +40,7 @@ public class GuiGuidebookDiscovery extends AbstractGuidebookPage
 	{
 		super.build(context);
 
-		final DiscoveryTab.DiscoveryTabType openedTab = this.aePlayer.getProgressModule().getOpenedDiscoveryTabType();
+		final DiscoveryTab.DiscoveryTabType openedTab = this.aePlayer.getModule(PlayerProgressModule.class).getOpenedDiscoveryTabType();
 
 		this.bestiaryTab = new DiscoveryTab(Pos2D.build().x(89).y(61).flush(), DiscoveryTab.DiscoveryTabType.BESTIARY, openedTab);
 		this.structureTab = new DiscoveryTab(Pos2D.build().x(121).y(61).flush(), DiscoveryTab.DiscoveryTabType.STRUCTURES, openedTab);
@@ -61,7 +62,7 @@ public class GuiGuidebookDiscovery extends AbstractGuidebookPage
 		this.characterTab.setSelected(false);
 		this.biomeTab.setSelected(false);
 
-		this.aePlayer.getProgressModule().setOpenedDiscoveryTabType(tab.getType());
+		this.aePlayer.getModule(PlayerProgressModule.class).setOpenedDiscoveryTabType(tab.getType());
 
 		tab.setSelected(true);
 
