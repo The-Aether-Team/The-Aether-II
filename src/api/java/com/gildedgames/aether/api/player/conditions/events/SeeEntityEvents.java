@@ -12,6 +12,8 @@ import java.util.Set;
 
 public class SeeEntityEvents
 {
+	private static final int SEE_ENTITY_RADIUS = 10;
+
 	private final Set<ISeeEntityEventsListener> listeners = Sets.newHashSet();
 
 	public SeeEntityEvents()
@@ -38,15 +40,13 @@ public class SeeEntityEvents
 		{
 			final EntityPlayer player = ((EntityPlayer) entity);
 
-			final float scale = 5;
+			final double minX = entity.posX - SEE_ENTITY_RADIUS;
+			final double minY = entity.posY - SEE_ENTITY_RADIUS;
+			final double minZ = entity.posZ - SEE_ENTITY_RADIUS;
 
-			final double minX = entity.posX - scale;
-			final double minY = entity.posY - scale;
-			final double minZ = entity.posZ - scale;
-
-			final double maxX = entity.posX + scale;
-			final double maxY = entity.posY + scale;
-			final double maxZ = entity.posZ + scale;
+			final double maxX = entity.posX + SEE_ENTITY_RADIUS;
+			final double maxY = entity.posY + SEE_ENTITY_RADIUS;
+			final double maxZ = entity.posZ + SEE_ENTITY_RADIUS;
 
 			final AxisAlignedBB checkingArea = new AxisAlignedBB(minX, minY, minZ, maxX, maxY, maxZ);
 
