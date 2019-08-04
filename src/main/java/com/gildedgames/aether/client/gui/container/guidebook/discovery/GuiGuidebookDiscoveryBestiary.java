@@ -92,11 +92,14 @@ public class GuiGuidebookDiscoveryBestiary extends GuiGuidebookDiscovery
 
 				this.beastDescription.tryRebuild();
 
-				final IGuiElement statsContent = this.buildStats(page);
+				if (isUnderstood)
+				{
+					final IGuiElement statsContent = this.buildStats(page);
 
-				statsContent.dim().mod().pos(this.statsArea.dim().min()).flush();
+					statsContent.dim().mod().pos(this.statsArea.dim().min()).flush();
 
-				this.statsArea.setDecorated(statsContent);
+					this.statsArea.setDecorated(statsContent);
+				}
 			});
 
 			this.slots.add(slot);
