@@ -2,6 +2,7 @@ package com.gildedgames.aether.api.player.conditions.events;
 
 import com.google.common.collect.Sets;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -50,9 +51,9 @@ public class SeeEntityEvents
 
 			final AxisAlignedBB checkingArea = new AxisAlignedBB(minX, minY, minZ, maxX, maxY, maxZ);
 
-			final List<Entity> entitiesInSight = entity.world.getEntitiesWithinAABB(Entity.class, checkingArea);
+			final List<EntityLivingBase> entitiesInSight = entity.world.getEntitiesWithinAABB(EntityLivingBase.class, checkingArea);
 
-			for (final Entity e : entitiesInSight)
+			for (final EntityLivingBase e : entitiesInSight)
 			{
 				if (player.canEntityBeSeen(e))
 				{
