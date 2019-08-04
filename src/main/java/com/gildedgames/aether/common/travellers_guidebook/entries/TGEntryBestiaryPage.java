@@ -113,7 +113,7 @@ public class TGEntryBestiaryPage extends TGEntryBase implements ITGEntryBestiary
 	@Override
 	public boolean hasUnlockedCompleteOverview(final IPlayerAether playerAether)
 	{
-		return false;//this.isUnderstood(playerAether); // TODO: Need to have conditions for each move
+		return this.isUnderstood(playerAether); // TODO: Need to have conditions for each move
 	}
 
 	@Override
