@@ -13,6 +13,7 @@ import com.gildedgames.aether.client.gui.container.guidebook.discovery.GuiGuideb
 import com.gildedgames.aether.client.gui.container.guidebook.discovery.GuiGuidebookDiscoveryBiomes;
 import com.gildedgames.aether.client.gui.container.guidebook.discovery.GuiGuidebookDiscoveryCharacters;
 import com.gildedgames.aether.client.gui.container.guidebook.discovery.GuiGuidebookDiscoveryStructures;
+import com.gildedgames.aether.client.gui.dialog.ContainerShop;
 import com.gildedgames.aether.client.gui.dialog.GuiDialogViewer;
 import com.gildedgames.aether.client.gui.dialog.GuiTrade;
 import com.gildedgames.aether.client.gui.misc.GuiAetherLoading;
@@ -21,7 +22,10 @@ import com.gildedgames.aether.client.gui.misc.GuiPatronRewards;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerDialogModule;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerProgressModule;
-import com.gildedgames.aether.common.containers.*;
+import com.gildedgames.aether.common.containers.ContainerCustomWorkbench;
+import com.gildedgames.aether.common.containers.ContainerDialogController;
+import com.gildedgames.aether.common.containers.ContainerLoadingScreen;
+import com.gildedgames.aether.common.containers.ContainerTrade;
 import com.gildedgames.aether.common.containers.guidebook.ContainerGuidebookInventory;
 import com.gildedgames.aether.common.containers.guidebook.EmptyContainer;
 import com.gildedgames.aether.common.containers.tiles.ContainerIcestoneCooler;
@@ -123,7 +127,7 @@ public class AetherGuiHandler implements IGuiHandler
 					return null;
 				}
 
-				return new ContainerShop(player.inventory, shopInstance);
+				return new com.gildedgames.aether.common.containers.ContainerShop(player.inventory, shopInstance);
 			}
 			case DIALOG_VIEWER_ID:
 				return new ContainerDialogController(player);
