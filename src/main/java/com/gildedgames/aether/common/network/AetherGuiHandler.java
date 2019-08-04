@@ -13,8 +13,6 @@ import com.gildedgames.aether.client.gui.container.guidebook.discovery.GuiGuideb
 import com.gildedgames.aether.client.gui.container.guidebook.discovery.GuiGuidebookDiscoveryBiomes;
 import com.gildedgames.aether.client.gui.container.guidebook.discovery.GuiGuidebookDiscoveryCharacters;
 import com.gildedgames.aether.client.gui.container.guidebook.discovery.GuiGuidebookDiscoveryStructures;
-import com.gildedgames.aether.client.gui.container.simple_crafting.ContainerMasonryBench;
-import com.gildedgames.aether.client.gui.dialog.ContainerShop;
 import com.gildedgames.aether.client.gui.dialog.GuiDialogViewer;
 import com.gildedgames.aether.client.gui.dialog.GuiTrade;
 import com.gildedgames.aether.client.gui.misc.GuiAetherLoading;
@@ -23,14 +21,12 @@ import com.gildedgames.aether.client.gui.misc.GuiPatronRewards;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerDialogModule;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerProgressModule;
-import com.gildedgames.aether.common.containers.ContainerCustomWorkbench;
-import com.gildedgames.aether.common.containers.ContainerDialogController;
-import com.gildedgames.aether.common.containers.ContainerLoadingScreen;
-import com.gildedgames.aether.common.containers.ContainerTrade;
+import com.gildedgames.aether.common.containers.*;
 import com.gildedgames.aether.common.containers.guidebook.ContainerGuidebookInventory;
 import com.gildedgames.aether.common.containers.guidebook.EmptyContainer;
 import com.gildedgames.aether.common.containers.tiles.ContainerIcestoneCooler;
 import com.gildedgames.aether.common.containers.tiles.ContainerIncubator;
+import com.gildedgames.aether.common.containers.tiles.ContainerMasonryBench;
 import com.gildedgames.aether.common.dialog.DialogUtil;
 import com.gildedgames.orbis.lib.client.gui.util.gui_library.GuiViewer;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -99,7 +95,7 @@ public class AetherGuiHandler implements IGuiHandler
 			case INCUBATOR_ID:
 				return new ContainerIncubator(player.inventory, (IInventory) world.getTileEntity(pos));
 			case MASONRY_BENCH_ID:
-				return new com.gildedgames.aether.common.containers.tiles.ContainerMasonryBench(player, new BlockPos(x, y, z));
+				return new ContainerMasonryBench(player, new BlockPos(x, y, z));
 			case AETHER_LOADING_ID:
 				return new ContainerLoadingScreen();
 			case DIALOG_SHOP_ID:
@@ -127,7 +123,7 @@ public class AetherGuiHandler implements IGuiHandler
 					return null;
 				}
 
-				return new com.gildedgames.aether.common.containers.ContainerShop(player.inventory, shopInstance);
+				return new ContainerShop(player.inventory, shopInstance);
 			}
 			case DIALOG_VIEWER_ID:
 				return new ContainerDialogController(player);
@@ -181,7 +177,7 @@ public class AetherGuiHandler implements IGuiHandler
 			case INCUBATOR_ID:
 				return new GuiIncubator(player.inventory, (IInventory) world.getTileEntity(pos), pos);
 			case MASONRY_BENCH_ID:
-				return new ContainerMasonryBench(player, new BlockPos(x, y, z));
+				return new com.gildedgames.aether.client.gui.container.simple_crafting.ContainerMasonryBench(player, new BlockPos(x, y, z));
 			case AETHER_LOADING_ID:
 				return new GuiAetherLoading();
 			case PATRON_REWARDS_ID:
