@@ -51,11 +51,14 @@ public class ItemBucketEventListener
 			{
 				IBlockState targetState = event.getWorld().getBlockState(event.getTarget().getBlockPos());
 
-				if (CompatibilityAether.isAetherLegacyInstalled() && targetState.getBlock() == Blocks.GLOWSTONE && isPortalFrame(event.getWorld(), event.getTarget().getBlockPos(), pos))
+				if (targetState.getBlock() == Blocks.GLOWSTONE)
 				{
-					event.setCanceled(true);
+					if (!CompatibilityAether.isAetherLegacyInstalled() && isPortalFrame(event.getWorld(), event.getTarget().getBlockPos(), pos))
+					{
+						event.setCanceled(true);
 
-					player.openGui(AetherCore.MOD_ID, AetherGuiHandler.TELEPORTER_NOTICE_ID, player.world, pos.getX(), pos.getY(), pos.getZ());
+						player.openGui(AetherCore.MOD_ID, AetherGuiHandler.TELEPORTER_NOTICE_ID, player.world, pos.getX(), pos.getY(), pos.getZ());
+					}
 				}
 				else if (targetState.getBlock() == Blocks.QUARTZ_BLOCK)
 				{
