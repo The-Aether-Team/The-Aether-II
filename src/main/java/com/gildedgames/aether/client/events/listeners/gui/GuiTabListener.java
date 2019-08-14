@@ -5,7 +5,6 @@ import com.gildedgames.aether.api.registry.tab.ITabClient;
 import com.gildedgames.aether.api.registry.tab.ITabGroup;
 import com.gildedgames.aether.api.registry.tab.ITabGroupHandler;
 import com.gildedgames.aether.client.gui.tab.RenderTabGroup;
-import com.gildedgames.aether.common.init.DimensionsAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketOpenTab;
 import net.minecraft.client.Minecraft;
@@ -29,7 +28,7 @@ public class GuiTabListener
 	@SubscribeEvent
 	public static void onGuiOpen(final GuiOpenEvent event)
 	{
-		if (Minecraft.getMinecraft().world == null || Minecraft.getMinecraft().world.provider.getDimensionType() != DimensionsAether.AETHER)
+		if (Minecraft.getMinecraft().world == null)
 		{
 			return;
 		}
@@ -86,7 +85,7 @@ public class GuiTabListener
 	@SubscribeEvent
 	public static void onGuiMouseEvent(final GuiScreenEvent.MouseInputEvent.Pre event)
 	{
-		if (Minecraft.getMinecraft().world == null || Minecraft.getMinecraft().world.provider.getDimensionType() != DimensionsAether.AETHER)
+		if (Minecraft.getMinecraft().world == null)
 		{
 			return;
 		}
