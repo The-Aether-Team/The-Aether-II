@@ -121,12 +121,7 @@ public class PlayerTeleportingModule extends PlayerAetherModule implements IPlay
 
 		this.prevTicksInTeleporter = this.ticksInTeleporter;
 
-		if (this.getEntity().getEntityWorld().provider.getDimensionType() == DimensionsAether.AETHER)
-		{
-			return;
-		}
-
-		if (this.isTeleportCharging)
+		if (this.isTeleportCharging && this.getEntity().getEntityWorld().provider.getDimensionType() != DimensionsAether.AETHER)
 		{
 			if (this.getEntity().timeUntilPortal > 0)
 			{
@@ -150,6 +145,10 @@ public class PlayerTeleportingModule extends PlayerAetherModule implements IPlay
 					this.teleportToAether();
 				}
 			}
+		}
+		else
+		{
+			this.ticksInTeleporter -= 4;
 		}
 
 		this.ticksInTeleporter = MathHelper.clamp(this.ticksInTeleporter, 0, TELEPORT_DELAY);
