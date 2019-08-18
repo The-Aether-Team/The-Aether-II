@@ -10,6 +10,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.Objects;
+
 public abstract class TileEntityMultiblockController extends TileEntitySynced implements ITileEntityMultiblock
 {
 
@@ -53,7 +55,7 @@ public abstract class TileEntityMultiblockController extends TileEntitySynced im
 		}
 	}
 
-	public boolean doesControllerOwn(BlockPos pos)
+	private boolean doesControllerOwn(BlockPos pos)
 	{
 		TileEntity entity = this.world.getTileEntity(pos);
 
@@ -65,7 +67,7 @@ public abstract class TileEntityMultiblockController extends TileEntitySynced im
 		{
 			TileEntityMultiblockDummy dummy = (TileEntityMultiblockDummy) entity;
 
-			return dummy.getLinkedController().equals(this.pos);
+			return Objects.equals(dummy.getLinkedController(), this.pos);
 		}
 
 		return false;

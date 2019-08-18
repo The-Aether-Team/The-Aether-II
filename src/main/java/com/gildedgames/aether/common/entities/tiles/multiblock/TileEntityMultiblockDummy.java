@@ -14,6 +14,8 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+
 public class TileEntityMultiblockDummy extends TileEntitySynced implements ITileEntityMultiblock, IWorldObjectHoverable
 {
 	private BlockPos controllerPosOffset;
@@ -21,9 +23,11 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements ITile
 	@Override
 	public boolean onInteract(final EntityPlayer player)
 	{
-		if (this.hasLinkedController())
+		BlockPos linked = this.getLinkedController();
+
+		if (linked != null)
 		{
-			final TileEntity entity = this.world.getTileEntity(this.getLinkedController());
+			final TileEntity entity = this.world.getTileEntity(linked);
 
 			if (entity instanceof TileEntityMultiblockController)
 			{
@@ -34,7 +38,7 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements ITile
 			else
 			{
 				AetherCore.LOGGER.warn("TileEntityMultiblockDummy at " + this.pos.toString() + ", is missing it's linked controller at "
-						+ this.getLinkedController().toString());
+						+ linked.toString());
 			}
 		}
 
@@ -44,12 +48,14 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements ITile
 	@Override
 	public void onDestroyed()
 	{
-		if (!this.hasLinkedController())
+		BlockPos linked = this.getLinkedController();
+
+		if (linked == null)
 		{
 			return;
 		}
 
-		final TileEntity entity = this.world.getTileEntity(this.getLinkedController());
+		final TileEntity entity = this.world.getTileEntity(linked);
 
 		if (entity instanceof ITileEntityMultiblock)
 		{
@@ -65,12 +71,14 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements ITile
 	@Override
 	public ItemStack getPickedStack(final World world, final BlockPos pos, final IBlockState state)
 	{
-		if (!this.hasLinkedController())
+		BlockPos linked = this.getLinkedController();
+
+		if (linked == null)
 		{
 			return ItemStack.EMPTY;
 		}
 
-		final TileEntity entity = this.world.getTileEntity(this.getLinkedController());
+		final TileEntity entity = this.world.getTileEntity(linked);
 
 		if (entity instanceof ITileEntityMultiblock)
 		{
@@ -85,19 +93,20 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements ITile
 		return ItemStack.EMPTY;
 	}
 
-	public void linkController(final BlockPos controllerPos)
+	protected void linkController(final BlockPos controllerPos)
 	{
 		this.controllerPosOffset = controllerPos.add(-this.pos.getX(), -this.pos.getY(), -this.pos.getZ());
 	}
 
-	public BlockPos getLinkedController()
+	@Nullable
+	protected BlockPos getLinkedController()
 	{
-		return this.getPos().add(this.controllerPosOffset);
-	}
+		if (this.controllerPosOffset == null)
+		{
+			return null;
+		}
 
-	public boolean hasLinkedController()
-	{
-		return this.controllerPosOffset != null;
+		return this.pos.add(this.controllerPosOffset);
 	}
 
 	@Override
@@ -109,6 +118,10 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements ITile
 		{
 			this.controllerPosOffset = NBTHelper.readBlockPos(compound.getCompoundTag("controller"));
 		}
+		else
+		{
+			this.invalidate();
+		}
 	}
 
 	@Override
@@ -116,7 +129,10 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements ITile
 	{
 		super.writeToNBT(compound);
 
-		compound.setTag("controller", NBTHelper.writeBlockPos(this.controllerPosOffset));
+		if (this.controllerPosOffset != null)
+		{
+			compound.setTag("controller", NBTHelper.writeBlockPos(this.controllerPosOffset));
+		}
 
 		return compound;
 	}
@@ -124,7 +140,14 @@ public class TileEntityMultiblockDummy extends TileEntitySynced implements ITile
 	@Override
 	public ITextComponent getHoverText(World world, RayTraceResult result)
 	{
-		TileEntity entity = this.world.getTileEntity(this.getLinkedController());
+		BlockPos linked = this.getLinkedController();
+
+		if (linked == null)
+		{
+			return null;
+		}
+
+		TileEntity entity = this.world.getTileEntity(linked);
 
 		if (entity instanceof IWorldObjectHoverable)
 		{
