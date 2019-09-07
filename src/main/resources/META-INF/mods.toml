@@ -1,0 +1,44 @@
+modLoader="javafml"
+loaderVersion="[26,)"
+issueTrackerURL="https://gitea.gildedgames.com/GildedGames/The-Aether-II/issues"
+
+[[mods]]
+modId="aether"
+version="${version}"
+displayName="Aether II"
+displayURL="https://aether.gildedgames.com"
+logoFile="full-logo.png"
+authors="Oscar Payn, Brandon James Pearce, Hugo Payn, Jaryt Bustard, Christian Peterson, Angeline"
+
+#=======================#
+# CREDITS
+#=======================#
+credits='''
+Designed and developed by Gilded Games with <3.
+
+Made possible thanks to our supporters on Patreon, and with special thanks to our project reporters, contributors, and moderation team.
+
+Contributors: JellySquid, Emile van Krieken, Bluexin, Jonathan Lachney, ETStarLight
+'''
+
+#=======================#
+# DESCRIPTION
+#=======================#
+description='''
+In development by Gilded Games, the Aether II is an extensive mod for Minecraft which implements a remarkable world in the skies. Adventure, danger, and mystery awaits in the depths of the Aether.
+
+The Aether wouldn't be possible without our supporters on Patreon! Consider supporting development at: https://patreon.com/GildedGames
+
+View the source code and contribute to the Aether project on our official GitLab here: https://git.gildedgames.com/GildedGames/Aether-II
+
+We also have an official Discord server! https://aether.gildedgames.com/discord
+
+Running into issues or have a question? Check out our support page here: https://aether.gildedgames.com/support
+'''
+
+[[dependencies.aether]]
+    modId="orbis-lib"
+    mandatory=true
+    versionRange="[0.2.0,)"
+    ordering="AFTER"
+    side="BOTH"
