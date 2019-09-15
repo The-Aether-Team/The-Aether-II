@@ -846,6 +846,9 @@ gui.aether.hover.npc=Talk to %s
 gui.aether.hover.campfire=Return to Overworld
 gui.aether.hover.teleporter=Enter the Aether
 
+gui.guidebook.discovery.stats=Stats:
+gui.guidebook.discovery.moves=Moves:
+
 # Death messages
 
 death.attack.aether.effect.bleed=Bleed
@@ -1266,3 +1269,7 @@ mysterious_figure.shop.orange_lollipop=Tastes like oranges! P.S: This candy cont
 mysterious_figure.shop.icestone_poprocks=Not actually made with Icestone.
 mysterious_figure.shop.ginger_bread_man=I once heard a story of a man made gingerbread. Legend says, on the eve of this sacred month, they ate gingerbread in the shape of a man and turned into the very thing they consumed. Feeling lucky?
 mysterious_figure.shop.candy_cane=Try using this as walking cane. Go on, I dare you.
+
+# Discovery descriptions:
+
+aether.taegore.discovery.description=The Highlands Taegore are very sociable creatures, they roam in small packs usually lead by the eldest parents.\n\nWhile the Taegore can be friendly, they're equipped with robust armor and sharp tusks which can make them difficult to overpower in a fight.\n\nTheir fur is a sturdy material used in clothing

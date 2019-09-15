@@ -1,0 +1,23 @@
+[
+	{
+		"conditions": [
+			{
+				"type": "aether:seeEntity",
+				"entityId": "aether:taegore"
+			}
+		],
+		"resolution": "requireAll",
+		"entries": {
+			"aether.taegore.discovery": {
+				"tag": "bestiary",
+				"type": "bestiary_page",
+				"entityId": "aether:taegore",
+				"silhouetteTexture": "aether:textures/discoveries/bestiary/taegore/silhouette.png",
+				"discoveredTexture": "aether:textures/discoveries/bestiary/taegore/discovered.png",
+				"silhouetteSlotTexture": "aether:textures/discoveries/bestiary/taegore/silhouette_slot.png",
+				"discoveredSlotTexture": "aether:textures/discoveries/bestiary/taegore/discovered_slot.png",
+				"description": "aether.taegore.discovery.description"
+			}
+		}
+	}
+]

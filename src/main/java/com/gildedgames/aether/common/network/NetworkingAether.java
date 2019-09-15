@@ -46,6 +46,7 @@ public class NetworkingAether
 		instance.registerMessage(PacketChangeCoinAmount.HandlerServer.class, PacketChangeCoinAmount.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketTradeState.HandlerServer.class, PacketTradeState.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketTradeMessage.HandlerServer.class, PacketTradeMessage.class, discriminant++, Side.SERVER);
+		instance.registerMessage(PacketDiscoveryTabType.HandlerServer.class, PacketDiscoveryTabType.class, discriminant++, Side.SERVER);
 
 		// C L I E N T
 		instance.registerMessage(PacketEquipment.HandlerClient.class, PacketEquipment.class, discriminant++, Side.CLIENT);
@@ -80,6 +81,8 @@ public class NetworkingAether
 		instance.registerMessage(PacketTradeInventory.HandlerClient.class, PacketTradeInventory.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketTradeMessage.HandlerClient.class, PacketTradeMessage.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketTradeInitial.HandlerClient.class, PacketTradeInitial.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketFlagPlayerCondition.HandlerClient.class, PacketFlagPlayerCondition.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketPlayerConditionModule.HandlerClient.class, PacketPlayerConditionModule.class, discriminant++, Side.CLIENT);
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(AetherCore.INSTANCE, new AetherGuiHandler());
 	}

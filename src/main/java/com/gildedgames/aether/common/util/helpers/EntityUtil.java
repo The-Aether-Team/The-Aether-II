@@ -6,6 +6,7 @@ import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.MultiPartEntityPart;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.DamageSource;
@@ -20,6 +21,22 @@ import java.util.UUID;
 
 public class EntityUtil
 {
+	public static boolean checkEntityClass(final Entity entity, final Class<?> clazz)
+	{
+		// Some entities use this, need to check for cast to get parent
+		if (entity instanceof MultiPartEntityPart)
+		{
+			final MultiPartEntityPart multi = (MultiPartEntityPart) entity;
+
+			if (multi.parent.getClass() != clazz)
+			{
+				return false;
+			}
+		}
+
+		return entity.getClass() == clazz;
+	}
+
 	@SuppressWarnings("unchecked")
 	public static <T extends Entity> T clone(final T entity)
 	{

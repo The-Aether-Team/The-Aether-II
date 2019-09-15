@@ -6,7 +6,11 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerEquipmentModule;
 import com.gildedgames.aether.common.containers.guidebook.ContainerGuidebookInventory;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
-import net.minecraft.client.gui.Gui;
+import com.gildedgames.orbis.lib.client.gui.util.GuiTexture;
+import com.gildedgames.orbis.lib.client.gui.util.gui_library.IGuiElement;
+import com.gildedgames.orbis.lib.client.gui.util.gui_library.IGuiViewer;
+import com.gildedgames.orbis.lib.client.rect.Dim2D;
+import com.google.common.collect.Lists;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
@@ -16,52 +20,60 @@ import net.minecraft.util.text.TextFormatting;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.List;
 
 public class GuiGuidebookInventory extends AbstractGuidebookPage
 {
 
 	private static final ResourceLocation LEFT_PAGE = AetherCore.getResource("textures/gui/guidebook/inventory/guidebook_inventory_left.png");
 
-	private static final ResourceLocation RIGHT_PAGE_CREATIVE = AetherCore.getResource("textures/gui/guidebook/inventory/guidebook_inventory_right_creative.png");
+	private static final ResourceLocation RIGHT_PAGE_CREATIVE = AetherCore
+			.getResource("textures/gui/guidebook/inventory/guidebook_inventory_right_creative.png");
 
-	private static final ResourceLocation RIGHT_PAGE_SURVIVAL = AetherCore.getResource("textures/gui/guidebook/inventory/guidebook_inventory_right_survival.png");
+	private static final ResourceLocation RIGHT_PAGE_SURVIVAL = AetherCore
+			.getResource("textures/gui/guidebook/inventory/guidebook_inventory_right_survival.png");
 
-	public GuiGuidebookInventory(final PlayerAether aePlayer)
+	public GuiGuidebookInventory(final IGuiViewer prevViewer, final PlayerAether aePlayer)
 	{
-		super(aePlayer, new ContainerGuidebookInventory(aePlayer));
+		super(prevViewer, aePlayer, new ContainerGuidebookInventory(aePlayer));
 	}
 
 	@Override
 	public void drawScreen(final int mouseX, final int mouseY, final float partialTick)
 	{
+		super.drawScreen(mouseX, mouseY, partialTick);
+
+		// TODO: Move out into gui element so has proper render order
 		this.drawPlayer(mouseX, mouseY);
 
 		this.drawEquipmentEffects();
 
-		super.drawScreen(mouseX,mouseY, partialTick);
+		final String slotName = this.getSlotName(mouseX, mouseY);
 
-		this.drawSlotName(mouseX, mouseY);
+		if (slotName != null)
+		{
+			this.setHoveredDescription(Lists.newArrayList(slotName));
+		}
+
+		this.renderHoveredToolTip(mouseX, mouseY);
 	}
 
 	@Override
-	protected void drawLeftPage(int screenX, int screenY, float u, float v)
+	protected List<IGuiElement> createLeftPage(final int screenX, final int screenY, final float u, final float v)
 	{
-		this.mc.renderEngine.bindTexture(LEFT_PAGE);
+		final GuiTexture leftPage = new GuiTexture(Dim2D.build().width(this.PAGE_WIDTH).height(this.PAGE_HEIGHT).x(screenX).y(screenY).flush(),
+				LEFT_PAGE);
 
-		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
-
-		Gui.drawModalRectWithCustomSizedTexture(screenX, screenY, u, v, this.PAGE_WIDTH, this.PAGE_HEIGHT, this.TEXTURE_WIDTH, this.TEXTURE_HEIGHT);
+		return Lists.newArrayList(leftPage);
 	}
 
 	@Override
-	protected void drawRightPage(int screenX, int screenY, float u, float v)
+	protected List<IGuiElement> createRightPage(final int screenX, final int screenY, final float u, final float v)
 	{
-		this.mc.renderEngine.bindTexture(this.aePlayer.getEntity().capabilities.isCreativeMode ? RIGHT_PAGE_CREATIVE : RIGHT_PAGE_SURVIVAL);
+		final GuiTexture rightPage = new GuiTexture(Dim2D.build().width(this.PAGE_WIDTH).height(this.PAGE_HEIGHT).x(screenX).y(screenY).flush(),
+				this.aePlayer.getEntity().capabilities.isCreativeMode ? RIGHT_PAGE_CREATIVE : RIGHT_PAGE_SURVIVAL);
 
-		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
-
-		Gui.drawModalRectWithCustomSizedTexture(screenX, screenY, u ,v, this.PAGE_WIDTH, this.PAGE_HEIGHT,this.TEXTURE_WIDTH, this.TEXTURE_HEIGHT);
+		return Lists.newArrayList(rightPage);
 	}
 
 	private void drawPlayer(final int mouseX, final int mouseY)
@@ -78,7 +90,7 @@ public class GuiGuidebookInventory extends AbstractGuidebookPage
 		return this.isPointInRegion(slot.xPos, slot.yPos, 16, 16, mouseX, mouseY);
 	}
 
-	private void drawSlotName(final int mouseX, final int mouseY)
+	private String getSlotName(final int mouseX, final int mouseY)
 	{
 		String unlocalizedTooltip = null;
 
@@ -129,8 +141,10 @@ public class GuiGuidebookInventory extends AbstractGuidebookPage
 
 		if (unlocalizedTooltip != null)
 		{
-			this.drawHoveringText(Collections.singletonList(I18n.format(unlocalizedTooltip)), mouseX, mouseY, this.mc.fontRenderer);
+			return I18n.format(unlocalizedTooltip);
 		}
+
+		return null;
 	}
 
 	private void drawEquipmentEffects()
