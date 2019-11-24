@@ -68,9 +68,11 @@ public class CurrencyAetherInit
 		c.registerValue(new ItemStack(BlocksAether.quicksoil, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(2).flush(), ShopCurrencyGilt.class);
 		c.registerValue(new ItemStack(BlocksAether.aercloud, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(5).flush(), ShopCurrencyGilt.class);
 		c.registerValue(new ItemStack(BlocksAether.ferrosite, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(3).flush(), ShopCurrencyGilt.class);
+		c.registerValue(new ItemStack(BlocksAether.rusted_ferrosite, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(3).flush(), ShopCurrencyGilt.class);
 		c.registerValue(new ItemStack(BlocksAether.skyroot_sapling, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(5).flush(), ShopCurrencyGilt.class);
 		c.registerValue(new ItemStack(BlocksAether.unique_sapling, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(5).flush(), ShopCurrencyGilt.class);
 		c.registerValue(new ItemStack(BlocksAether.wisproot_sapling, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(5).flush(), ShopCurrencyGilt.class);
+		c.registerValue(new ItemStack(BlocksAether.greatroot_sapling, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(5).flush(), ShopCurrencyGilt.class);
 		c.registerValue(new ItemStack(BlocksAether.aether_flower, 1, BlockAetherFlower.WHITE_ROSE.getMeta()), builder.gilt(5).flush(), ShopCurrencyGilt.class);
 		c.registerValue(new ItemStack(BlocksAether.aether_flower, 1, BlockAetherFlower.PURPLE_FLOWER.getMeta()), builder.gilt(5).flush(),
 				ShopCurrencyGilt.class);
@@ -80,11 +82,26 @@ public class CurrencyAetherInit
 				ShopCurrencyGilt.class);
 		c.registerValue(new ItemStack(BlocksAether.plumproot, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(10).flush(),
 				ShopCurrencyGilt.class);
+		c.registerValue(new ItemStack(BlocksAether.quickshoot, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(5).flush(), ShopCurrencyGilt.class);
+		c.registerValue(new ItemStack(BlocksAether.pink_swingtip, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(5).flush(), ShopCurrencyGilt.class);
+		c.registerValue(new ItemStack(BlocksAether.green_swingtip, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(5).flush(), ShopCurrencyGilt.class);
+		c.registerValue(new ItemStack(BlocksAether.blue_swingtip, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(5).flush(), ShopCurrencyGilt.class);
+		c.registerValue(new ItemStack(BlocksAether.neverbloom, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(5).flush(), ShopCurrencyGilt.class);
+		c.registerValue(new ItemStack(BlocksAether.highlands_tulips, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(5).flush(), ShopCurrencyGilt.class);
+		c.registerValue(new ItemStack(BlocksAether.arctic_spikespring, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(5).flush(), ShopCurrencyGilt.class);
+		c.registerValue(new ItemStack(BlocksAether.irradiated_flower, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(5).flush(), ShopCurrencyGilt.class);
+		c.registerValue(new ItemStack(BlocksAether.forgotten_rose, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(5).flush(), ShopCurrencyGilt.class);
+		c.registerValue(new ItemStack(BlocksAether.stoneshroom, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(5).flush(), ShopCurrencyGilt.class);
+		c.registerValue(new ItemStack(BlocksAether.barkshroom, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(5).flush(), ShopCurrencyGilt.class);
+		c.registerValue(new ItemStack(BlocksAether.magnetic_shroom, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(5).flush(), ShopCurrencyGilt.class);
 		c.registerValue(new ItemStack(BlocksAether.orange_tree, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(30).flush(), ShopCurrencyGilt.class);
 		c.registerValue(new ItemStack(BlocksAether.blueberry_bush, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(30).flush(), ShopCurrencyGilt.class);
 		c.registerValue(new ItemStack(BlocksAether.valkyrie_grass, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(5).flush(), ShopCurrencyGilt.class);
 		c.registerValue(new ItemStack(ItemsAether.valkyrie_wings, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(5).flush(), ShopCurrencyGilt.class);
 		c.registerValue(new ItemStack(BlocksAether.skyroot_log, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(3).flush(), ShopCurrencyGilt.class);
+		c.registerValue(new ItemStack(BlocksAether.dark_skyroot_log, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(3).flush(), ShopCurrencyGilt.class);
+		c.registerValue(new ItemStack(BlocksAether.light_skyroot_log, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(3).flush(), ShopCurrencyGilt.class);
+		c.registerValue(new ItemStack(BlocksAether.golden_oak_log, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(5).flush(), ShopCurrencyGilt.class);
 		c.registerValue(new ItemStack(ItemsAether.ambrosium_shard, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(40).flush(), ShopCurrencyGilt.class);
 		c.registerValue(new ItemStack(ItemsAether.zanite_gemstone, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(90).flush(), ShopCurrencyGilt.class);
 		c.registerValue(new ItemStack(ItemsAether.icestone, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(66).flush(), ShopCurrencyGilt.class);
@@ -104,10 +121,12 @@ public class CurrencyAetherInit
 		c.registerValue(new ItemStack(ItemsAether.swet_gel, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(3).flush(), ShopCurrencyGilt.class);
 		c.registerValue(new ItemStack(ItemsAether.swet_sugar, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(6).flush(), ShopCurrencyGilt.class);
 		c.registerValue(new ItemStack(ItemsAether.blueberries, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(2).flush(), ShopCurrencyGilt.class);
+		c.registerValue(new ItemStack(ItemsAether.orange, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(3).flush(), ShopCurrencyGilt.class);
 		c.registerValue(new ItemStack(ItemsAether.wyndberry, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(5).flush(), ShopCurrencyGilt.class);
 		c.registerValue(new ItemStack(ItemsAether.raw_taegore_meat, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(25).flush(), ShopCurrencyGilt.class);
 		c.registerValue(new ItemStack(ItemsAether.burrukai_rib_cut, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(45).flush(), ShopCurrencyGilt.class);
 		c.registerValue(new ItemStack(ItemsAether.kirrid_loin, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(15).flush(), ShopCurrencyGilt.class);
+		c.registerValue(new ItemStack(ItemsAether.skyroot_lizard_stick, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(5).flush(), ShopCurrencyGilt.class);
 		c.registerValue(new ItemStack(ItemsAether.moa_egg_item, 1, OreDictionary.WILDCARD_VALUE), builder.giltae(1).flush(), ShopCurrencyGilt.class);
 		c.registerValue(new ItemStack(ItemsAether.aechor_petal, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(7).flush(), ShopCurrencyGilt.class);
 
