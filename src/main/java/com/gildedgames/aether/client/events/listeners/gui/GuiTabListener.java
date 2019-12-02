@@ -68,13 +68,10 @@ public class GuiTabListener
 
 					AetherAPI.content().tabs().setActiveGroup(tabGroupHandler);
 
-					if (gui == null)
-					{
-						tabGroup.getSelectedTab().onOpen(Minecraft.getMinecraft().player);
-						NetworkingAether.sendPacketToServer(new PacketOpenTab(tabGroup.getSelectedTab()));
+					tabGroup.getSelectedTab().onOpen(Minecraft.getMinecraft().player);
+					NetworkingAether.sendPacketToServer(new PacketOpenTab(tabGroup.getSelectedTab()));
 
-						event.setCanceled(true);
-					}
+					event.setCanceled(true);
 
 					return;
 				}
