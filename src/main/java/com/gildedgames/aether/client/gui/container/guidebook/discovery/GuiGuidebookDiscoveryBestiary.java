@@ -56,55 +56,6 @@ public class GuiGuidebookDiscoveryBestiary extends GuiGuidebookDiscovery
 	public void build(final IGuiContext context)
 	{
 		super.build(context);
-
-		final ITGManager tgManager = AetherCore.PROXY.content().tgManager();
-
-		this.bestiaryEntries = tgManager.getEntriesWithTagAndClass("bestiary", TGEntryBestiaryPage.class);
-		this.slots = Lists.newArrayList();
-
-		for (int i = 0; i < this.bestiaryEntries.size(); i++)
-		{
-			final TGEntryBestiaryPage page = this.bestiaryEntries.get(i);
-
-			final int x = 95 + ((i % 6) * 18);
-			final int y = 94 + ((i / 6) * 18);
-
-			final BestiarySlot slot = new BestiarySlot(this.aePlayer, Pos2D.flush(x, y), page);
-
-			slot.addClickEvent(() -> {
-				final boolean isUnderstood = page.isUnderstood(this.aePlayer);
-				final boolean completeOverview = page.hasUnlockedCompleteOverview(this.aePlayer);
-
-				this.beastFrame.setResourceLocation(page.isUnlocked(this.aePlayer) ? page.getDiscoveredTexture() : page.getSilhouetteTexture());
-				this.beastFrame.state().setVisible(true);
-
-				this.beastTitle.setText(new Text(new TextComponentTranslation(page.getEntityName()), 1.0F));
-
-				if (!isUnderstood)
-				{
-					// Replace beast name with ? characters
-					this.beastTitle.setTextMutator((text) -> text.replaceAll("[^\\s]", "?"));
-				}
-
-				this.beastDescription
-						.setText(new Text(new TextComponentTranslation(completeOverview ? page.getUnlocalizedDescription() : "?"),
-								0.65F));
-
-				this.beastDescription.tryRebuild();
-
-				if (isUnderstood)
-				{
-					final IGuiElement statsContent = this.buildStats(page);
-
-					statsContent.dim().mod().pos(this.statsArea.dim().min()).flush();
-
-					this.statsArea.setDecorated(statsContent);
-				}
-			});
-
-			this.slots.add(slot);
-			context.addChildren(slot);
-		}
 	}
 
 	private IGuiElement buildStats(final TGEntryBestiaryPage page)
@@ -134,6 +85,58 @@ public class GuiGuidebookDiscoveryBestiary extends GuiGuidebookDiscovery
 		GuiLibHelper.assembleMinMaxArea(statsElement);
 
 		return statsElement;
+	}
+
+	@Override
+	protected List<IGuiElement> createLeftPage(final int screenX, final int screenY, final float u, final float v) {
+		List<IGuiElement> elements = super.createLeftPage(screenX, screenY, u, v);
+		final ITGManager tgManager = AetherCore.PROXY.content().tgManager();
+
+		this.bestiaryEntries = tgManager.getEntriesWithTagAndClass("bestiary", TGEntryBestiaryPage.class);
+		this.slots = Lists.newArrayList();
+
+		for (int i = 0; i < this.bestiaryEntries.size(); i++) {
+			final TGEntryBestiaryPage page = this.bestiaryEntries.get(i);
+
+			final int x = screenX + 29 + ((i % 6) * 18);
+			final int y = screenY + 58 + ((i / 6) * 18);
+
+			final BestiarySlot slot = new BestiarySlot(this.aePlayer, Pos2D.flush(x, y), page);
+
+			slot.addClickEvent(() -> {
+				final boolean isUnderstood = page.isUnderstood(this.aePlayer);
+				final boolean completeOverview = page.hasUnlockedCompleteOverview(this.aePlayer);
+
+				this.beastFrame.setResourceLocation(page.isUnlocked(this.aePlayer) ? page.getDiscoveredTexture() : page.getSilhouetteTexture());
+				this.beastFrame.state().setVisible(true);
+
+				this.beastTitle.setText(new Text(new TextComponentTranslation(page.getEntityName()), 1.0F));
+
+				if (!isUnderstood) {
+					// Replace beast name with ? characters
+					this.beastTitle.setTextMutator((text) -> text.replaceAll("[^\\s]", "?"));
+				}
+
+				this.beastDescription
+						.setText(new Text(new TextComponentTranslation(completeOverview ? page.getUnlocalizedDescription() : "?"),
+								0.65F));
+
+				this.beastDescription.tryRebuild();
+
+				if (isUnderstood) {
+					final IGuiElement statsContent = this.buildStats(page);
+
+					statsContent.dim().mod().pos(this.statsArea.dim().min()).flush();
+
+					this.statsArea.setDecorated(statsContent);
+				}
+			});
+
+			this.slots.add(slot);
+			elements.add(slot);
+		}
+
+		return elements;
 	}
 
 	@Override

@@ -39,20 +39,6 @@ public class GuiGuidebookDiscovery extends AbstractGuidebookPage
 	public void build(final IGuiContext context)
 	{
 		super.build(context);
-
-		final DiscoveryTab.DiscoveryTabType openedTab = this.aePlayer.getModule(PlayerProgressModule.class).getOpenedDiscoveryTabType();
-
-		this.bestiaryTab = new DiscoveryTab(Pos2D.build().x(89).y(61).flush(), DiscoveryTab.DiscoveryTabType.BESTIARY, openedTab);
-		this.structureTab = new DiscoveryTab(Pos2D.build().x(121).y(61).flush(), DiscoveryTab.DiscoveryTabType.STRUCTURES, openedTab);
-		this.characterTab = new DiscoveryTab(Pos2D.build().x(153).y(61).flush(), DiscoveryTab.DiscoveryTabType.CHARACTERS, openedTab);
-		this.biomeTab = new DiscoveryTab(Pos2D.build().x(185).y(61).flush(), DiscoveryTab.DiscoveryTabType.BIOMES, openedTab);
-
-		this.bestiaryTab.addAdvancedClickEvent(this::onClickTab);
-		this.structureTab.addAdvancedClickEvent(this::onClickTab);
-		this.characterTab.addAdvancedClickEvent(this::onClickTab);
-		this.biomeTab.addAdvancedClickEvent(this::onClickTab);
-
-		context.addChildren(this.bestiaryTab, this.structureTab, this.characterTab, this.biomeTab);
 	}
 
 	private void onClickTab(final DiscoveryTab tab)
@@ -96,7 +82,21 @@ public class GuiGuidebookDiscovery extends AbstractGuidebookPage
 	{
 		final GuiTexture leftPage = new GuiTexture(Dim2D.build().width(this.PAGE_WIDTH).height(this.PAGE_HEIGHT).x(screenX).y(screenY).flush(), LEFT_PAGE);
 
-		return Lists.newArrayList(leftPage);
+		final DiscoveryTab.DiscoveryTabType openedTab = this.aePlayer.getModule(PlayerProgressModule.class).getOpenedDiscoveryTabType();
+
+		Pos2D screen = Pos2D.flush(screenX, screenY);
+
+		this.bestiaryTab = new DiscoveryTab(screen.clone().addX(24).addY(26).flush(), DiscoveryTab.DiscoveryTabType.BESTIARY, openedTab);
+		this.structureTab = new DiscoveryTab(screen.clone().addX(24 + 32).addY(26).flush(), DiscoveryTab.DiscoveryTabType.STRUCTURES, openedTab);
+		this.characterTab = new DiscoveryTab(screen.clone().addX(24 + 64).addY(26).flush(), DiscoveryTab.DiscoveryTabType.CHARACTERS, openedTab);
+		this.biomeTab = new DiscoveryTab(screen.clone().addX(24 + 96).addY(26).flush(), DiscoveryTab.DiscoveryTabType.BIOMES, openedTab);
+
+		this.bestiaryTab.addAdvancedClickEvent(this::onClickTab);
+		this.structureTab.addAdvancedClickEvent(this::onClickTab);
+		this.characterTab.addAdvancedClickEvent(this::onClickTab);
+		this.biomeTab.addAdvancedClickEvent(this::onClickTab);
+
+		return Lists.newArrayList(leftPage, this.bestiaryTab, this.structureTab, this.characterTab, this.biomeTab);
 	}
 
 	@Override
