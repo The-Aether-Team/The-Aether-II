@@ -19,7 +19,7 @@ public class DungeonGenerator implements IDungeonGenerator {
     @Override
     public IDungeon generate(IDungeonDefinition definition, Random rand) {
         List<DungeonNode> rooms = Lists.newArrayList();
-        int extraRooms =rand.nextInt(definition.getMaxRooms() - definition.getMinRooms());
+        int extraRooms = rand.nextInt(definition.getMaxRooms() - definition.getMinRooms());
         int targetRooms = definition.getMinRooms() + extraRooms;
 
         for (int i = 0; i < targetRooms; i++) {
@@ -44,9 +44,9 @@ public class DungeonGenerator implements IDungeonGenerator {
     public boolean step(DungeonGenStep step, IDungeon soFar) {
         switch (step) {
             case PUSH_ROOMS_APART: {
-                boolean anyIntersect = false;
                 List<AABB> allAABB = soFar.rooms().stream().map(DungeonNode::getAABB).collect(Collectors.toList());
                 Iterator<AABB> it = allAABB.iterator();
+                boolean anyIntersect = false;
 
                 while (it.hasNext()) {
                     AABB room = it.next();
@@ -66,8 +66,6 @@ public class DungeonGenerator implements IDungeonGenerator {
 
                             intersected = true;
                             anyIntersect = true;
-
-                            break;
                         }
                     }
 
