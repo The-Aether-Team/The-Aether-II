@@ -11,6 +11,9 @@ import java.util.List;
 import java.util.Random;
 
 public class DungeonGenerator implements IDungeonGenerator {
+
+    public static final int PAD_SIZE = 3;
+
     @Override
     public IDungeon generate(IDungeonDefinition definition, Random rand) {
         List<BlueprintRegion> rooms = Lists.newArrayList();
@@ -20,6 +23,7 @@ public class DungeonGenerator implements IDungeonGenerator {
         for (int i = 0; i < targetRooms; i++) {
             BlueprintData data = definition.possibleBlueprints().get(rand.nextInt(definition.possibleBlueprints().size()));
             BlueprintRegion room = new BlueprintRegion(getRandomPos(rand), data);
+
             rooms.add(room);
         }
 
@@ -41,7 +45,7 @@ public class DungeonGenerator implements IDungeonGenerator {
                 boolean anyIntersect = false;
                 List<BlueprintRegion> intersecting = Lists.newArrayList();
                 for (BlueprintRegion room : soFar.rooms()) {
-                    RegionHelp.fetchIntersecting2D(room, soFar.rooms(), intersecting);
+                    RegionHelp.fetchIntersecting2D(room, soFar.rooms(), intersecting, this.getCollisionPadding());
                     Iterator<BlueprintRegion> it = intersecting.iterator();
 
                     while (it.hasNext()) {
@@ -73,5 +77,10 @@ public class DungeonGenerator implements IDungeonGenerator {
         }
 
         return false;
+    }
+
+    public int getCollisionPadding()
+    {
+        return PAD_SIZE;
     }
 }
