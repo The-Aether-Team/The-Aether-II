@@ -2,13 +2,14 @@ package com.gildedgames.aether.common.dungeons;
 
 import com.gildedgames.orbis.lib.core.world_objects.BlueprintRegion;
 import com.gildedgames.orbis.lib.data.blueprint.BlueprintData;
-import com.gildedgames.orbis.lib.util.RegionHelp;
 import com.google.common.collect.Lists;
 import net.minecraft.util.math.BlockPos;
-import java.util.Iterator;
 
 import java.util.List;
 import java.util.Random;
+import java.util.Iterator;
+
+
 import java.util.stream.Collectors;
 
 public class DungeonGenerator implements IDungeonGenerator {
@@ -44,32 +45,35 @@ public class DungeonGenerator implements IDungeonGenerator {
         switch (step) {
             case PUSH_ROOMS_APART: {
                 boolean anyIntersect = false;
-                List<AABB> intersecting = Lists.newArrayList();
                 List<AABB> allAABB = soFar.rooms().stream().map(DungeonNode::getAABB).collect(Collectors.toList());
+                Iterator<AABB> it = allAABB.iterator();
 
-                for (AABB room : allAABB) {
-                    AABB.fetchIntersecting(room, allAABB, intersecting, this.getCollisionPadding());
-                    Iterator<AABB> it = intersecting.iterator();
+                while (it.hasNext()) {
+                    AABB room = it.next();
+                    boolean intersected = false;
 
-                    while (it.hasNext()) {
-                        AABB r = it.next();
-
-                        if (r == room) {
+                    for (AABB other : allAABB) {
+                        if (other == room) {
                             continue;
                         }
 
-                        int diffX = room.minX < r.minX ? 1 : -1;
-                        int diffY = room.minY < r.minY ? 1 : -1;
+                        if (room.intersects(other, getCollisionPadding())) {
+                            int diffX = room.minX < other.minX ? 1 : -1;
+                            int diffY = room.minY < other.minY ? 1 : -1;
 
-                        r.add(diffX, diffY);
-                        room.add(-diffX, -diffY);
+                            other.add(diffX, diffY);
+                            room.add(-diffX, -diffY);
 
-                        it.remove();
+                            intersected = true;
+                            anyIntersect = true;
 
-                        anyIntersect = true;
+                            break;
+                        }
                     }
 
-                    intersecting.clear();
+                    if (intersected) {
+                        it.remove();
+                    }
                 }
 
                 return !anyIntersect;
