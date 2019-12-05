@@ -3,6 +3,7 @@ package com.gildedgames.aether.common;
 import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.api.IAetherServices;
 import com.gildedgames.aether.api.net.IGildedGamesAccountApi;
+import com.gildedgames.aether.common.dungeons.DungeonViewer;
 import com.gildedgames.aether.common.events.PostAetherTravelEvent;
 import com.gildedgames.aether.common.network.api.GildedGamesAccountApiImpl;
 import com.gildedgames.aether.common.shop.*;
@@ -91,6 +92,9 @@ public class CommonProxy implements IAetherServices
 	public void postInit(final FMLPostInitializationEvent event)
 	{
 		this.content().postInit();
+
+		DungeonViewer viewer = new DungeonViewer();
+		MinecraftForge.EVENT_BUS.register(viewer);
 	}
 
 	public void onServerAboutToStart(final FMLServerAboutToStartEvent event)

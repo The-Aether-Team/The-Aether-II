@@ -58,6 +58,9 @@ sourceSets {
     api {
         java { srcDir "src/api/java" }
     }
+    test {
+        java { srcDir "src/test/java" }
+    }
 }
 
 jar {
@@ -105,14 +108,12 @@ processResources {
 
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-        exclude 'assets/**'
 
         expand 'version': project.version, 'mcversion': project.minecraft.version
     }
 
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
-        exclude 'assets/**'
     }
 }
 
