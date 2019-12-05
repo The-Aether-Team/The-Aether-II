@@ -9,6 +9,7 @@ import java.util.Iterator;
 
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class DungeonGenerator implements IDungeonGenerator {
 
@@ -16,7 +17,7 @@ public class DungeonGenerator implements IDungeonGenerator {
 
     @Override
     public IDungeon generate(IDungeonDefinition definition, Random rand) {
-        List<BlueprintRegion> rooms = Lists.newArrayList();
+        List<DungeonNode> rooms = Lists.newArrayList();
         int extraRooms =rand.nextInt(definition.getMaxRooms() - definition.getMinRooms());
         int targetRooms = definition.getMinRooms() + extraRooms;
 
@@ -24,7 +25,7 @@ public class DungeonGenerator implements IDungeonGenerator {
             BlueprintData data = definition.possibleBlueprints().get(rand.nextInt(definition.possibleBlueprints().size()));
             BlueprintRegion room = new BlueprintRegion(getRandomPos(rand), data);
 
-            rooms.add(room);
+            rooms.add(new DungeonNode(room));
         }
 
         return new Dungeon(rooms);
@@ -43,26 +44,25 @@ public class DungeonGenerator implements IDungeonGenerator {
         switch (step) {
             case PUSH_ROOMS_APART: {
                 boolean anyIntersect = false;
-                List<BlueprintRegion> intersecting = Lists.newArrayList();
-                for (BlueprintRegion room : soFar.rooms()) {
-                    RegionHelp.fetchIntersecting2D(room, soFar.rooms(), intersecting, this.getCollisionPadding());
-                    Iterator<BlueprintRegion> it = intersecting.iterator();
+                List<AABB> intersecting = Lists.newArrayList();
+                List<AABB> allAABB = soFar.rooms().stream().map(DungeonNode::getAABB).collect(Collectors.toList());
+
+                for (AABB room : allAABB) {
+                    AABB.fetchIntersecting(room, allAABB, intersecting, this.getCollisionPadding());
+                    Iterator<AABB> it = intersecting.iterator();
 
                     while (it.hasNext()) {
-                        BlueprintRegion r = it.next();
+                        AABB r = it.next();
 
                         if (r == room) {
                             continue;
                         }
 
-                        int diffX = room.getMin().getX() < r.getMin().getX() ? 1 : -1;
-                        int diffZ = room.getMin().getZ() < r.getMin().getZ() ? 1 : -1;
+                        int diffX = room.minX < r.minX ? 1 : -1;
+                        int diffY = room.minY < r.minY ? 1 : -1;
 
-                        BlockPos min = r.getMin().add(diffX, 0, diffZ);
-                        BlockPos max = r.getMax().add(diffX, 0, diffZ);
-
-                        r.setBounds(min, max);
-                        room.setBounds(room.getMin().add(-diffX, 0, -diffZ), room.getMax().add(-diffX, 0, -diffZ));
+                        r.add(diffX, diffY);
+                        room.add(-diffX, -diffY);
 
                         it.remove();
 

@@ -53,15 +53,16 @@ public class GuiDungeonViewer extends GuiViewerNoContainer
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
 
-		for (BlueprintRegion room : this.dungeon.rooms()) {
+		for (DungeonNode room : this.dungeon.rooms()) {
+			AABB aabb = room.getAABB();
 			GlStateManager.pushMatrix();
 
 			double scale = 2.0;
 
 			Minecraft.getMinecraft().getTextureManager().bindTexture(TEXTURE_BASE);
-			GlStateManager.translate(room.getMin().getX() + (this.width / 2), room.getMin().getZ() + (this.height / 2), 0);
+			GlStateManager.translate(aabb.minX + (this.width / 2), aabb.minY + (this.height / 2), 0);
 			//GlStateManager.scale(scale, scale, scale);
-			GuiTexture.drawModalRectWithCustomSizedTexture(0, 0, 0, 0, room.getWidth(), room.getLength(), room.getWidth(), room.getLength());
+			GuiTexture.drawModalRectWithCustomSizedTexture(0, 0, 0, 0, aabb.getWidth(), aabb.getHeight(), aabb.getWidth(), aabb.getHeight());
 
 			GlStateManager.popMatrix();
 		}
