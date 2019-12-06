@@ -23,7 +23,7 @@ public class ItemAmbrosiumChunk extends Item implements IDropOnDeath
 
 		IBlockState state = world.getBlockState(pos);
 
-		if (state.getBlock() == BlocksAether.aether_grass && state.getValue(BlockAetherGrass.PROPERTY_VARIANT) == BlockAetherGrass.AETHER)
+		if (state.getBlock() == BlocksAether.aether_grass && state.getValue(BlockAetherGrass.PROPERTY_VARIANT) != BlockAetherGrass.ENCHANTED)
 		{
 			if (player.canPlayerEdit(pos, side, stack))
 			{
