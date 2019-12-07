@@ -345,6 +345,9 @@ public class ModelCockatrice extends ModelBase implements ILayeredModel
 		float leftToeCurlAngle = -rightSwingXLower;
 		float rightToeCurlAngle = -leftSwingXLower;
 
+		this.neck.rotateAngleX = leftSwingX * .5f - 0.261799f;
+		this.head.rotateAngleX = -leftSwingX * .5f + 0.174533f;
+
 		this.thigh_left.offsetY = leftSwingX * 0.05f;
 		this.thigh_right.offsetY = rightSwingX * 0.05f;
 
@@ -392,11 +395,11 @@ public class ModelCockatrice extends ModelBase implements ILayeredModel
 		this.beak_bottom.rotateAngleX = Math.abs(MathHelper.cos( ageInTicks * 0.05662F)) * 0.1f;
 
 
-		this.shoulder_left.rotateAngleX = leftSwingX * 2f;
-		this.shoulder_right.rotateAngleX = rightSwingX * 2f;
+		this.shoulder_left.rotateAngleX = leftSwingX * .1f;
+		this.shoulder_right.rotateAngleX = rightSwingX * .1f;
 
-		this.wing_left.rotateAngleX = leftSwingXLower;
-		this.wing_right.rotateAngleX = rightSwingXLower;
+		this.wing_left.rotateAngleX = leftSwingXLower * .1f;
+		this.wing_right.rotateAngleX = rightSwingXLower * .1f;
 
 
 		float wingSwayRange = 0.05f;

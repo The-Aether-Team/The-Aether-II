@@ -12,7 +12,7 @@ import net.minecraft.util.ResourceLocation;
 public class RenderZephyr extends RenderLiving<EntityLiving>
 {
 
-	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/entities/zephyr/zephyr.png");
+	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/entities/zephyr/zephyr_shell.png");
 
 	public RenderZephyr(final RenderManager manager)
 	{
@@ -32,9 +32,9 @@ public class RenderZephyr extends RenderLiving<EntityLiving>
 	{
 		GlStateManager.pushMatrix();
 
+		GlStateManager.scale(1.5F, 1.5F, 1.5F);
+		GlStateManager.translate(0F, -0.25F, 0F);
 		EntityZephyr zephyr = (EntityZephyr) entitylivingbaseIn;
-
-		GlStateManager.translate(0, 1.1f, 0);
 
 		/*if (zephyr.getFlightPath() != null)
 		{

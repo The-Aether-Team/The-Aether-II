@@ -19,6 +19,14 @@ public class LayerGlowing<T extends EntityLiving> implements LayerRenderer<T>
 
 	private final RenderLiving<T> renderer;
 
+	private ModelBase model;
+
+	public LayerGlowing(final RenderLiving<T> renderer, final ResourceLocation glowingLayer, final ModelBase model)
+	{
+		this(renderer, glowingLayer);
+		this.model = model;
+	}
+
 	public LayerGlowing(final RenderLiving<T> renderer, final ResourceLocation glowingLayer)
 	{
 		this(renderer, () -> glowingLayer);
@@ -28,6 +36,7 @@ public class LayerGlowing<T extends EntityLiving> implements LayerRenderer<T>
 	{
 		this.renderer = renderer;
 		this.glowingLayer = glowingLayer;
+		this.model = this.renderer.getMainModel();
 	}
 
 	@Override
@@ -58,8 +67,6 @@ public class LayerGlowing<T extends EntityLiving> implements LayerRenderer<T>
 		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) j, (float) k);
 
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-
-		ModelBase model = this.renderer.getMainModel();
 
 		if (model instanceof ILayeredModel) {
 			ILayeredModel layered = (ILayeredModel) model;
