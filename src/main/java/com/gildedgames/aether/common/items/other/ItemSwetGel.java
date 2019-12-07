@@ -57,6 +57,8 @@ public class ItemSwetGel extends Item implements IDropOnDeath
 	public EnumActionResult onItemUse(final EntityPlayer player, final World world, final BlockPos pos, final EnumHand hand, final EnumFacing facing,
 			final float hitX, final float hitY, final float hitZ)
 	{
+		ItemStack stack = player.getHeldItem(hand);
+
 		final IBlockState state = world.getBlockState(pos);
 
 		if (ItemSwetGel.growables.containsKey(state.getBlock()))
@@ -76,6 +78,11 @@ public class ItemSwetGel extends Item implements IDropOnDeath
 						world.setBlockState(nPos, nState);
 					}
 				}
+			}
+
+			if (!player.capabilities.isCreativeMode)
+			{
+				stack.shrink(1);
 			}
 
 			return EnumActionResult.SUCCESS;

@@ -239,7 +239,7 @@ public class BlockAetherGrass extends Block implements IBlockMultiName, IGrowabl
 			final World worldIn, final BlockPos pos, final IBlockState state, final EntityPlayer playerIn, final EnumHand hand, final EnumFacing facing,
 			final float hitX, final float hitY, final float hitZ)
 	{
-		if (playerIn.getHeldItemMainhand().getItem() == ItemsAether.swet_jelly)
+		if (playerIn.getHeldItemMainhand().getItem() == ItemsAether.swet_gel)
 		{
 			if (!worldIn.isRemote && hand == EnumHand.MAIN_HAND)
 			{
@@ -255,7 +255,7 @@ public class BlockAetherGrass extends Block implements IBlockMultiName, IGrowabl
 				return true;
 			}
 		}
-		else if (playerIn.getHeldItemOffhand().getItem() == ItemsAether.swet_jelly)
+		else if (playerIn.getHeldItemOffhand().getItem() == ItemsAether.swet_gel)
 		{
 			if (!worldIn.isRemote && hand == EnumHand.OFF_HAND)
 			{
