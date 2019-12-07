@@ -78,4 +78,10 @@ public class BlockQuicksoilGlassDecorative extends BlockDecorative
 
         return block != this && super.shouldSideBeRendered(blockState, blockAccess, pos, side);
     }
+
+    @Override
+    protected boolean canSilkHarvest()
+    {
+        return true;
+    }
 }
