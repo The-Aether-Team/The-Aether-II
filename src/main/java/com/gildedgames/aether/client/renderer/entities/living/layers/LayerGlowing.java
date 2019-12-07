@@ -1,5 +1,6 @@
 package com.gildedgames.aether.client.renderer.entities.living.layers;
 
+import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -58,7 +59,17 @@ public class LayerGlowing<T extends EntityLiving> implements LayerRenderer<T>
 
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
-		this.renderer.getMainModel().render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+		ModelBase model = this.renderer.getMainModel();
+
+		if (model instanceof ILayeredModel) {
+			ILayeredModel layered = (ILayeredModel) model;
+
+			layered.preLayerRender();
+			model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+			layered.postLayerRender();
+		} else {
+			model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+		}
 
 		i = entity.getBrightnessForRender();
 		j = i % 65536;

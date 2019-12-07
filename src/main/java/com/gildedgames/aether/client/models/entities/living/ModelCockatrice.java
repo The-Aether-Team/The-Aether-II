@@ -1,11 +1,12 @@
 package com.gildedgames.aether.client.models.entities.living;
 
+import com.gildedgames.aether.client.renderer.entities.living.layers.ILayeredModel;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
-public class ModelCockatrice extends ModelBase
+public class ModelCockatrice extends ModelBase implements ILayeredModel
 {
 
 	public ModelRenderer body_base;
@@ -425,4 +426,30 @@ public class ModelCockatrice extends ModelBase
 		modelRenderer.rotateAngleZ = z;
 	}
 
+	@Override
+	public void preLayerRender() {
+		this.body_back.isHidden = true;
+		this.shoulder_left.isHidden = true;
+		this.shoulder_right.isHidden = true;
+		this.thigh_right.isHidden = true;
+		this.thigh_left.isHidden = true;
+		this.crest_right.isHidden = true;
+		this.crest_left.isHidden = true;
+		this.beak_bottom.isHidden = true;
+		this.beak_top.isHidden = true;
+	}
+
+	@Override
+	public void postLayerRender() {
+		this.shoulder_left.isHidden = false;
+		this.shoulder_right.isHidden = false;
+		this.body_back.isHidden = false;
+		this.body_top.isHidden = false;
+		this.thigh_right.isHidden = false;
+		this.thigh_left.isHidden = false;
+		this.crest_right.isHidden = false;
+		this.crest_left.isHidden = false;
+		this.beak_bottom.isHidden = false;
+		this.beak_top.isHidden = false;
+	}
 }
