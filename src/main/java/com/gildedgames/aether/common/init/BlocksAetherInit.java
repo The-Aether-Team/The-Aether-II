@@ -66,7 +66,7 @@ public class BlocksAetherInit
 		Block skyroot_planks = new BlockSkyrootPlanks();
 		Block therawood_planks = new BlockTherawoodPlanks();
 		Block icestone_bricks = new BlockIcestoneBricks();
-		Block quicksoil_glass = new BlockRockGlassTranslucent();
+		Block quicksoil_glass = new BlockQuicksoilGlass();
 		Block scatterglass = new BlockRockGlassTranslucent();
 		Block crude_scatterglass = new BlockRockGlass();
 		Block candy_cane = new BlockCandyCane();
@@ -195,10 +195,10 @@ public class BlocksAetherInit
 		r.register("present", new BlockPresent().setCreativeTab(TAB_MISCELLANEOUS));
 		r.register("quickshoot", new BlockAetherFlowerBase().setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("quicksoil", new BlockQuicksoil().setCreativeTab(TAB_NATURAL_BLOCKS));
-		r.register("quicksoil_glass", quicksoil_glass.setLightLevel(1f).setCreativeTab(TAB_CONSTRUCTION));
-		r.register("quicksoil_glass_decorative", new BlockRockGlassDecorative().setLightLevel(1f).setCreativeTab(TAB_DECORATIVE_BLOCKS));
-		r.register("quicksoil_glass_pane", new BlockRockGlassPane(quicksoil_glass).setCreativeTab(TAB_CONSTRUCTION));
-		r.register("quicksoil_glass_pane_decorative", new BlockRockGlassPaneDecorative().setLightLevel(1f).setCreativeTab(TAB_DECORATIVE_BLOCKS));
+		r.register("quicksoil_glass", quicksoil_glass.setCreativeTab(TAB_CONSTRUCTION));
+		r.register("quicksoil_glass_decorative", new BlockQuicksoilGlassDecorative().setCreativeTab(TAB_DECORATIVE_BLOCKS));
+		r.register("quicksoil_glass_pane", new BlockQuicksoilGlassPane().setCreativeTab(TAB_CONSTRUCTION));
+		r.register("quicksoil_glass_pane_decorative", new BlockQuicksoilGlassPaneDecorative().setCreativeTab(TAB_DECORATIVE_BLOCKS));
 		r.register("rusted_ferrosite", new BlockRustedFerrosite().setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("scatterglass", scatterglass.setCreativeTab(TAB_CONSTRUCTION));
 		r.register("scatterglass_decorative", new BlockRockGlassDecorative().setCreativeTab(TAB_DECORATIVE_BLOCKS));
