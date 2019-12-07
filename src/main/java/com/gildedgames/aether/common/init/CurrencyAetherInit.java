@@ -42,6 +42,7 @@ public class CurrencyAetherInit
 		c.registerValue(new ItemStack(BlocksAether.aether_dirt, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(1).flush(), ShopCurrencyGilt.class);
 		c.registerValue(new ItemStack(BlocksAether.aether_grass, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(1).flush(), ShopCurrencyGilt.class);
 		c.registerValue(new ItemStack(BlocksAether.holystone, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(1).flush(), ShopCurrencyGilt.class);
+		c.registerValue(new ItemStack(BlocksAether.agiosite, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(21).flush(), ShopCurrencyGilt.class);
 		c.registerValue(new ItemStack(BlocksAether.amberoot_leaves, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(1).flush(), ShopCurrencyGilt.class);
 		c.registerValue(new ItemStack(BlocksAether.blue_dark_skyroot_leaves, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(1).flush(), ShopCurrencyGilt.class);
 		c.registerValue(new ItemStack(BlocksAether.blue_light_skyroot_leaves, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(1).flush(),
