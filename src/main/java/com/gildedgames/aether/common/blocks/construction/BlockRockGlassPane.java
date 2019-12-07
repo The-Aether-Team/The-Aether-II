@@ -14,7 +14,7 @@ public class BlockRockGlassPane extends BlockPane
 
 	public BlockRockGlassPane(Block block)
 	{
-		super(Material.ROCK, false);
+		super(Material.ROCK, true);
 
 		this.block = block;
 
