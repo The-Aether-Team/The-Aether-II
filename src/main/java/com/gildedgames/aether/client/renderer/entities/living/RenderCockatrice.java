@@ -13,7 +13,7 @@ public class RenderCockatrice extends RenderLiving<EntityCockatrice>
 
 	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/entities/cockatrice/cockatrice.png");
 
-	private static final ResourceLocation TEXTURE_MARKINGS = AetherCore.getResource("textures/entities/cockatrice/markings.png");
+	private static final ResourceLocation TEXTURE_MARKINGS = AetherCore.getResource("textures/entities/cockatrice/cockatrice_glow.png");
 
 	public RenderCockatrice(RenderManager manager)
 	{

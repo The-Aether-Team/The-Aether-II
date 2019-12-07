@@ -16,6 +16,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityJumpHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -45,12 +46,13 @@ public class EntityCockatrice extends EntityAetherMob
 		this.tasks.addTask(0, new EntityAIUnstuckBlueAercloud(this));
 		this.tasks.addTask(1, new EntityAICockatriceHide(this, EntityPlayer.class, 0.9D));
 		this.tasks.addTask(2, new EntityAICockatriceWander(this, 0.35D));
+		this.tasks.addTask(7, new EntityAILookIdle(this));
 
 		this.targetTasks.addTask(0, new EntityAICockatriceSneakAttack(this, EntityPlayer.class));
 
 		this.jumpHelper = new JumpHelperDisable(this);
 
-		this.setSize(1.0F, 2.0F);
+		this.setSize(1.0F, 2.5F);
 		this.stepHeight = 1.0F;
 
 		this.experienceValue = 7;

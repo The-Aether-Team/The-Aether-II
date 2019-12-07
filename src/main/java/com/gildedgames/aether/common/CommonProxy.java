@@ -87,14 +87,14 @@ public class CommonProxy implements IAetherServices
 		this.contentRegistry.tgManager().registerEntry(new ResourceLocation("aether:test_entry"));
 
 		MinecraftForge.EVENT_BUS.register(AetherCore.CONFIG);
-	}
+}
 
 	public void postInit(final FMLPostInitializationEvent event)
 	{
 		this.content().postInit();
 
-		DungeonViewer viewer = new DungeonViewer();
-		MinecraftForge.EVENT_BUS.register(viewer);
+//		DungeonViewer viewer = new DungeonViewer();
+//		MinecraftForge.EVENT_BUS.register(viewer);
 	}
 
 	public void onServerAboutToStart(final FMLServerAboutToStartEvent event)
