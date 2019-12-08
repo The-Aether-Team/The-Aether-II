@@ -21,6 +21,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -57,6 +58,14 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 		if (!worldIn.isRemote && this.canGrow(worldIn, pos, state, false))
 		{
 			this.grow(worldIn, rand, pos, state);
+		}
+
+		if (worldIn.getLightFor(EnumSkyBlock.BLOCK, pos) > 11)
+		{
+			if (state.getValue(PROPERTY_SNOWY))
+			{
+				worldIn.setBlockState(pos, state.withProperty(PROPERTY_SNOWY, Boolean.FALSE), 2);
+			}
 		}
 	}
 
@@ -202,5 +211,4 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 			worldIn.spawnEntity(aechorPlant);
 		}
 	}
-
 }

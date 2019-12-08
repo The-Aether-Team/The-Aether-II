@@ -21,6 +21,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
@@ -54,8 +55,24 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 
 		this.setSoundType(SoundType.PLANT);
 
+		this.setTickRandomly(true);
+
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, SHORT).withProperty(TYPE, Type.HIGHLANDS)
 				.withProperty(PROPERTY_SNOWY, Boolean.FALSE));
+	}
+
+	@Override
+	public void updateTick(final World worldIn, final BlockPos pos, final IBlockState state, final Random rand)
+	{
+		super.updateTick(worldIn, pos, state, rand);
+
+		if (worldIn.getLightFor(EnumSkyBlock.BLOCK, pos) > 11)
+		{
+			if (state.getValue(PROPERTY_SNOWY))
+			{
+				worldIn.setBlockState(pos, state.withProperty(PROPERTY_SNOWY, Boolean.FALSE), 2);
+			}
+		}
 	}
 
 	@Override
