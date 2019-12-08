@@ -231,7 +231,7 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 	@Override
 	protected void invalidateBlock(World world, BlockPos pos, IBlockState state)
 	{
-		if (world.getBlockState(state.getValue(PROPERTY_IS_TOP_BLOCK) ? pos.down() : pos.up()).getBlock() == this)
+		if (world.getBlockState(state.getValue(PROPERTY_IS_TOP_BLOCK) ? pos.down() : pos.up()).getBlock() == this || world.isAirBlock(pos.down()) && state.getValue(PROPERTY_STAGE) <= 2)
 		{
 			this.dropBlockAsItem(world, pos, state, 0);
 		}
