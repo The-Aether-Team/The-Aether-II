@@ -15,6 +15,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -118,6 +119,14 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 
 				FMLClientHandler.instance().getClient().effectRenderer.addEffect(effect);
 			}
+		}
+
+		if (!world.canSnowAt(pos.up(), true) && world.isRaining() && world.canBlockSeeSky(pos.up()) && world.isAirBlock(pos.up()) && !world.getBlockState(pos.down()).isTopSolid() && rand.nextInt(15) == 1)
+		{
+			double d0 = (double)((float)pos.getX() + rand.nextFloat());
+			double d1 = (double)pos.getY() - 0.05D;
+			double d2 = (double)((float)pos.getZ() + rand.nextFloat());
+			world.spawnParticle(EnumParticleTypes.DRIP_WATER, d0, d1, d2, 0.0D, 0.0D, 0.0D);
 		}
 	}
 
