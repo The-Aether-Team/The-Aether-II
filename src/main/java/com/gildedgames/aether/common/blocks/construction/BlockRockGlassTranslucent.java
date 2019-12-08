@@ -35,7 +35,7 @@ public class BlockRockGlassTranslucent extends BlockBreakable
 	@Override
 	public boolean isFullCube(IBlockState state)
 	{
-		return true;
+		return false;
 	}
 
 	@Override

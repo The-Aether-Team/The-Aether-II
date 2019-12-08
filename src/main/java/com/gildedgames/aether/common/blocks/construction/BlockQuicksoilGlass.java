@@ -37,7 +37,7 @@ public class BlockQuicksoilGlass extends BlockGlass
     @Override
     public boolean isFullCube(IBlockState state)
     {
-        return true;
+        return false;
     }
 
     @Override
