@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.dungeons;
 
+import com.gildedgames.orbis.lib.core.util.BlueprintPlacer;
 import com.gildedgames.orbis.lib.core.world_objects.BlueprintRegion;
 import com.gildedgames.orbis.lib.data.blueprint.BlueprintData;
 import com.google.common.collect.Lists;
@@ -24,7 +25,7 @@ public class DungeonGenerator implements IDungeonGenerator {
 
         for (int i = 0; i < targetRooms; i++) {
             BlueprintData data = definition.possibleBlueprints().get(rand.nextInt(definition.possibleBlueprints().size()));
-            BlueprintRegion room = new BlueprintRegion(getRandomPos(rand), data);
+            BlueprintRegion room = new BlueprintRegion(getRandomPos(rand), BlueprintPlacer.getRandomRotation(rand), data);
 
             rooms.add(new DungeonNode(room));
         }
