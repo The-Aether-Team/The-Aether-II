@@ -123,18 +123,18 @@ public class EntityAerbunny extends EntityAetherAnimal
             final Entity entity = this.getRidingEntity();
 
             if (!this.world.isRemote) {
-            	if (entity.isSneaking()) {
-					if (entity.onGround && !this.quickFall) {
-						NetworkingAether.sendPacketToWatching(new PacketAerbunnySetRiding(null, this), this, false);
+                if (entity.isSneaking()) {
+                    if (entity.onGround && !this.quickFall) {
+                        NetworkingAether.sendPacketToWatching(new PacketAerbunnySetRiding(null, this), this, false);
 
-						this.dismountRidingEntity();
-						this.setPosition(entity.posX, entity.posY + entity.getEyeHeight() + 0.5D, entity.posZ);
-					} else {
-						this.quickFall = true;
-					}
-				} else {
-            		this.quickFall = false;
-				}
+                        this.dismountRidingEntity();
+                        this.setPosition(entity.posX, entity.posY + entity.getEyeHeight() + 0.5D, entity.posZ);
+                    } else {
+                        this.quickFall = true;
+                    }
+                } else {
+                    this.quickFall = false;
+                }
             }
 
             if (entity.motionY < 0) {
