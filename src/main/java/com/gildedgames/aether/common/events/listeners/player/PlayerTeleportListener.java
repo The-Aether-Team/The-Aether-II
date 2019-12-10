@@ -36,7 +36,7 @@ public class PlayerTeleportListener
 	@SubscribeEvent
 	public static void onEvent(EntityTravelToDimensionEvent event)
 	{
-		if (AetherHelper.isEnabled(event.getDimension()) && AetherHelper.isEnabled(event.getDimension()))
+		if (AetherHelper.isEnabled(event.getDimension()) && AetherHelper.isEnabled(event.getDimension()) && event.getEntity() instanceof EntityPlayer)
 		{
 			PlayerAether playerAether = PlayerAether.getPlayer((EntityPlayer) event.getEntity());
 
