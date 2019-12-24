@@ -12,6 +12,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -73,6 +75,12 @@ public class EntityTivalier extends EntityCharacter
 		{
 			this.setHomePosAndDistance(this.spawned, 3);
 		}
+	}
+
+	@Override
+	public ITextComponent getHoverText(World world, RayTraceResult result)
+	{
+		return null;
 	}
 
 	@Override
