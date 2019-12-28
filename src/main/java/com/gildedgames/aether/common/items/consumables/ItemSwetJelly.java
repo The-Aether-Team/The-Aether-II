@@ -14,7 +14,7 @@ public class ItemSwetJelly extends ItemAetherFood
 
 	public ItemSwetJelly()
 	{
-		super(5, false);
+		super(4, 0.2F, false);
 
 		this.setHasSubtypes(true);
 	}
