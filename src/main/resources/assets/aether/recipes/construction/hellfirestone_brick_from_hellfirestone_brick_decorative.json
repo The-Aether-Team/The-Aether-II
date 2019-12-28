@@ -1,0 +1,16 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "type": "forge:ore_dict",
+      "ore": "hellfirestone_brick_decorative"
+    }
+  },
+  "result": {
+    "item": "aether:hellfirestone_brick",
+    "count": 1
+  }
+}

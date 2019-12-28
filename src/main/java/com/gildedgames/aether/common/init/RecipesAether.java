@@ -73,6 +73,20 @@ public class RecipesAether
 
 		for (BlockVariant variant : BlockSkyrootDecorative.PROPERTY_VARIANT.getAllowedValues())
 		{
+			OreDictionary.registerOre("wisproot_decorative", new ItemStack(BlocksAether.light_skyroot_decorative, 1, variant.getMeta()));
+		}
+
+		OreDictionary.registerOre("wisproot_decorative", new ItemStack(BlocksAether.light_skyroot_beam, 1));
+
+		for (BlockVariant variant : BlockSkyrootDecorative.PROPERTY_VARIANT.getAllowedValues())
+		{
+			OreDictionary.registerOre("greatroot_decorative", new ItemStack(BlocksAether.dark_skyroot_decorative, 1, variant.getMeta()));
+		}
+
+		OreDictionary.registerOre("greatroot_decorative", new ItemStack(BlocksAether.dark_skyroot_beam, 1));
+
+		for (BlockVariant variant : BlockSkyrootDecorative.PROPERTY_VARIANT.getAllowedValues())
+		{
 			OreDictionary.registerOre("therawood_decorative", new ItemStack(BlocksAether.therawood_decorative, 1, variant.getMeta()));
 		}
 
@@ -98,6 +112,38 @@ public class RecipesAether
 		}
 
 		OreDictionary.registerOre("faded_holystone_brick_decorative", new ItemStack(BlocksAether.faded_holystone_pillar, 1));
+
+		OreDictionary.registerOre("faded_holystone_brick", new ItemStack(BlocksAether.faded_holystone_brick, 1));
+
+		for (BlockVariant variant : BlockIcestoneBricksDecorative.PROPERTY_VARIANT.getAllowedValues())
+		{
+			OreDictionary.registerOre("agiosite_brick_decorative", new ItemStack(BlocksAether.agiosite_brick_decorative, 1, variant.getMeta()));
+		}
+
+		OreDictionary.registerOre("agiosite_brick_decorative", new ItemStack(BlocksAether.agiosite_pillar, 1));
+
+		for (BlockVariant variant : BlockIcestoneBricksDecorative.PROPERTY_VARIANT.getAllowedValues())
+		{
+			OreDictionary.registerOre("sentrystone_brick_decorative", new ItemStack(BlocksAether.sentrystone_brick_decorative, 1, variant.getMeta()));
+		}
+
+		OreDictionary.registerOre("sentrystone_brick_decorative", new ItemStack(BlocksAether.sentrystone_pillar, 1));
+
+		for (BlockVariant variant : BlockIcestoneBricksDecorative.PROPERTY_VARIANT.getAllowedValues())
+		{
+			OreDictionary.registerOre("sentrystone_brick_decorative", new ItemStack(BlocksAether.sentrystone_brick_decorative_lit, 1, variant.getMeta()));
+		}
+
+		OreDictionary.registerOre("sentrystone_brick_decorative", new ItemStack(BlocksAether.sentrystone_pillar_lit, 1));
+
+		for (BlockVariant variant : BlockIcestoneBricksDecorative.PROPERTY_VARIANT.getAllowedValues())
+		{
+			OreDictionary.registerOre("hellfirestone_brick_decorative", new ItemStack(BlocksAether.hellfirestone_brick_decorative, 1, variant.getMeta()));
+		}
+
+		OreDictionary.registerOre("hellfirestone_brick_decorative", new ItemStack(BlocksAether.hellfirestone_pillar, 1));
+
+		OreDictionary.registerOre("hellfirestone_brick_decorative", new ItemStack(BlocksAether.hellfirestone_lantern, 1));
 	}
 
 	@SubscribeEvent
