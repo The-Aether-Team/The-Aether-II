@@ -2,7 +2,6 @@ package com.gildedgames.aether.common.blocks.natural;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.blocks.IBlockMultiName;
-import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
 import net.minecraft.block.Block;
@@ -71,7 +70,7 @@ public class BlockTheraGrass extends BlockGrass implements IBlockMultiName
 		{
 			if (world.getLightFromNeighbors(pos.up()) < 4 && world.getBlockState(pos.up()).getLightOpacity(world, pos.up()) > 2)
 			{
-				world.setBlockState(pos, BlocksAether.aether_dirt.getDefaultState());
+				world.setBlockState(pos, BlocksAether.thera_dirt.getDefaultState());
 			}
 			else
 			{
@@ -89,8 +88,8 @@ public class BlockTheraGrass extends BlockGrass implements IBlockMultiName
 						final IBlockState aboveState = world.getBlockState(randomNeighbor.up());
 						final IBlockState neighborState = world.getBlockState(randomNeighbor);
 
-						if (neighborState.getBlock() == BlocksAether.aether_dirt
-								&& neighborState.getValue(BlockAetherDirt.PROPERTY_VARIANT) == BlockAetherDirt.DIRT &&
+						if (neighborState.getBlock() == BlocksAether.thera_dirt
+								&& neighborState.getValue(BlockTheraDirt.PROPERTY_VARIANT) == BlockTheraDirt.DIRT &&
 								world.getLightFromNeighbors(randomNeighbor.up()) >= 4
 								&& aboveState.getLightOpacity(world, randomNeighbor.up()) <= 2)
 						{
@@ -107,7 +106,7 @@ public class BlockTheraGrass extends BlockGrass implements IBlockMultiName
 	@Override
 	public Item getItemDropped(final IBlockState state, final Random rand, final int fortune)
 	{
-		return Item.getItemFromBlock(BlocksAether.aether_dirt);
+		return Item.getItemFromBlock(BlocksAether.thera_dirt);
 	}
 
 	@Override
@@ -145,71 +144,12 @@ public class BlockTheraGrass extends BlockGrass implements IBlockMultiName
 	@Override
 	public boolean canGrow(final World worldIn, final BlockPos pos, final IBlockState state, final boolean isClient)
 	{
-		return true;
+		return false;
 	}
 
 	@Override
 	public boolean canUseBonemeal(final World worldIn, final Random rand, final BlockPos pos, final IBlockState state)
 	{
-		return true;
+		return false;
 	}
-
-	@Override
-	public void grow(final World worldIn, final Random rand, final BlockPos pos, final IBlockState state)
-	{
-		int count = 0;
-
-		while (count < 128)
-		{
-			BlockPos nextPos = pos.up();
-			int grassCount = 0;
-
-			while (true)
-			{
-				if (grassCount < count / 16)
-				{
-					nextPos = nextPos.add(rand.nextInt(3) - 1, (rand.nextInt(3) - 1) * rand.nextInt(3) / 2, rand.nextInt(3) - 1);
-
-					if (worldIn.getBlockState(nextPos.down()).getBlock() == BlocksAether.thera_grass &&
-							!worldIn.getBlockState(nextPos).isNormalCube())
-					{
-						grassCount++;
-
-						continue;
-					}
-				}
-				else if (worldIn.isAirBlock(nextPos))
-				{
-					if (rand.nextInt(8) == 0 && BlocksAether.aether_flower.canPlaceBlockAt(worldIn, nextPos))
-					{
-						final int randFlower = rand.nextInt(3);
-
-						if (randFlower >= 2)
-						{
-							worldIn.setBlockState(nextPos, BlocksAether.aether_flower.getDefaultState()
-									.withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.WHITE_ROSE));
-						}
-						else
-						{
-							worldIn.setBlockState(nextPos, BlocksAether.aether_flower.getDefaultState()
-									.withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.PURPLE_FLOWER));
-						}
-					}
-					else
-					{
-						final IBlockState nextState = BlocksAether.tall_aether_grass.getDefaultState();
-
-						if (BlocksAether.tall_aether_grass.canPlaceBlockAt(worldIn, nextPos))
-						{
-							worldIn.setBlockState(nextPos, nextState, 3);
-						}
-					}
-				}
-
-				++count;
-				break;
-			}
-		}
-	}
-
 }

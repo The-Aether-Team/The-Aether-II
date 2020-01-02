@@ -1,12 +1,12 @@
 package com.gildedgames.aether.common.blocks.natural;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
-import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.blocks.IBlockMultiName;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockTallAetherGrass;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
+import com.gildedgames.aether.common.world.biomes.forgotten_highlands.BiomeForgottenHighlands;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
@@ -18,9 +18,8 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.WeightedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
@@ -28,6 +27,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.List;
 import java.util.Random;
 
 public class BlockAetherGrass extends Block implements IBlockMultiName, IGrowable
@@ -181,12 +181,12 @@ public class BlockAetherGrass extends Block implements IBlockMultiName, IGrowabl
 		int count = 0;
 
 		while (count < 128)
-		{
+        {
 			BlockPos nextPos = pos.up();
 			int grassCount = 0;
 
 			while (true)
-			{
+            {
 				if (grassCount < count / 16)
 				{
 					nextPos = nextPos.add(rand.nextInt(3) - 1, (rand.nextInt(3) - 1) * rand.nextInt(3) / 2, rand.nextInt(3) - 1);
@@ -201,28 +201,35 @@ public class BlockAetherGrass extends Block implements IBlockMultiName, IGrowabl
 				}
 				else if (worldIn.isAirBlock(nextPos))
 				{
-					if (rand.nextInt(8) == 0 && BlocksAether.aether_flower.canPlaceBlockAt(worldIn, nextPos))
+					if (rand.nextInt(8) == 0)
 					{
-						final int randFlower = rand.nextInt(3);
-
-						if (randFlower >= 2)
-						{
-							worldIn.setBlockState(nextPos, BlocksAether.aether_flower.getDefaultState()
-									.withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.WHITE_ROSE));
-						}
-						else
-						{
-							worldIn.setBlockState(nextPos, BlocksAether.aether_flower.getDefaultState()
-									.withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.PURPLE_FLOWER));
-						}
+						flowersForGrass(worldIn, state, pos);
+						plantFlower(worldIn, rand, nextPos);
+						clearFlower();
 					}
 					else
 					{
-						final IBlockState nextState = BlocksAether.tall_aether_grass.getDefaultState();
+						int grassHeight = rand.nextInt(3);
+
+						final IBlockState nextState1 = (grassHeight == 0)
+								? BlocksAether.tall_aether_grass.getStateFromMeta(0)
+								: ((grassHeight == 1)
+								? BlocksAether.tall_aether_grass.getStateFromMeta(1)
+								: BlocksAether.tall_aether_grass.getStateFromMeta(2)
+						);
+
+						final IBlockState nextState2 = BlocksAether.tall_aether_grass.getDefaultState();
 
 						if (BlocksAether.tall_aether_grass.canPlaceBlockAt(worldIn, nextPos))
 						{
-							worldIn.setBlockState(nextPos, nextState, 3);
+							if (worldIn.getBiome(pos) instanceof BiomeForgottenHighlands && state.getValue(PROPERTY_VARIANT) == AETHER)
+							{
+								worldIn.setBlockState(nextPos, nextState1, 3);
+							}
+							else
+							{
+								worldIn.setBlockState(nextPos, nextState2, 3);
+							}
 						}
 					}
 				}
@@ -233,46 +240,82 @@ public class BlockAetherGrass extends Block implements IBlockMultiName, IGrowabl
 		}
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean onBlockActivated(
-			final World worldIn, final BlockPos pos, final IBlockState state, final EntityPlayer playerIn, final EnumHand hand, final EnumFacing facing,
-			final float hitX, final float hitY, final float hitZ)
-	{
-		if (playerIn.getHeldItemMainhand().getItem() == ItemsAether.swet_gel)
-		{
-			if (!worldIn.isRemote && hand == EnumHand.MAIN_HAND)
-			{
-				if (!this.canGrow(worldIn, pos, state, true))
-				{
-					return false;
-				}
-				if (!playerIn.isCreative())
-				{
-					playerIn.getHeldItemMainhand().shrink(1);
-				}
-				this.grow(worldIn, new Random(), pos, state);
-				return true;
-			}
-		}
-		else if (playerIn.getHeldItemOffhand().getItem() == ItemsAether.swet_gel)
-		{
-			if (!worldIn.isRemote && hand == EnumHand.OFF_HAND)
-			{
-				if (!this.canGrow(worldIn, pos, state, true))
-				{
-					return false;
-				}
-				if (!playerIn.isCreative())
-				{
-					playerIn.getHeldItemOffhand().shrink(1);
-				}
-				this.grow(worldIn, new Random(), pos, state);
-				return true;
-			}
+	private List<FlowerEntry> aetherFlowers = new java.util.ArrayList<>();
 
+	public static class FlowerEntry extends WeightedRandom.Item
+	{
+		public final net.minecraft.block.state.IBlockState state;
+
+		FlowerEntry(net.minecraft.block.state.IBlockState state, int weight)
+        {
+			super(weight);
+			this.state = state;
 		}
-		return false;
 	}
 
+	private void addFlower(IBlockState state, int weight)
+	{
+		this.aetherFlowers.add(new FlowerEntry(state, weight));
+	}
+
+	private void plantFlower(World world, Random rand, BlockPos pos)
+	{
+		if (aetherFlowers.isEmpty()) return;
+		FlowerEntry flower = WeightedRandom.getRandomItem(rand, aetherFlowers);
+		if (flower.state == null)
+		{
+			return;
+		}
+
+		world.setBlockState(pos, flower.state, 3);
+	}
+
+	private void clearFlower()
+	{
+		this.aetherFlowers.clear();
+	}
+
+	private void flowersForGrass(World world, IBlockState state, BlockPos pos)
+	{
+		defaultGrassFlowers();
+		defaultBiomeFlowers(world, state, pos);
+	}
+
+	private void defaultGrassFlowers()
+	{
+		addFlower(BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.PURPLE_FLOWER), 15);
+		addFlower(BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.WHITE_ROSE), 15);
+		addFlower(BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.BURSTBLOSSOM), 15);
+		addFlower(BlocksAether.neverbloom.getDefaultState(), 10);
+		addFlower(BlocksAether.quickshoot.getDefaultState(), 10);
+		addFlower(BlocksAether.pink_swingtip.getDefaultState(), 10);
+		addFlower(BlocksAether.green_swingtip.getDefaultState(), 10);
+		addFlower(BlocksAether.blue_swingtip.getDefaultState(), 10);
+	}
+
+	private void defaultBiomeFlowers(World world, IBlockState state, BlockPos pos)
+	{
+		if (!world.isRemote)
+		{
+			if (state.getValue(PROPERTY_VARIANT) == ARCTIC)
+			{
+				addFlower(BlocksAether.arctic_spikespring.getDefaultState(), 12);
+			}
+			else if (state.getValue(PROPERTY_VARIANT) == IRRADIATED)
+			{
+				addFlower(BlocksAether.irradiated_flower.getDefaultState(), 12);
+			}
+			else if (state.getValue(PROPERTY_VARIANT) == AETHER)
+			{
+				if (world.getBiome(pos) instanceof BiomeForgottenHighlands)
+				{
+					addFlower(BlocksAether.forgotten_rose.getDefaultState(), 12);
+				}
+				else
+				{
+					addFlower(BlocksAether.highlands_tulips.getDefaultState(), 12);
+				}
+			}
+		}
+	}
 }

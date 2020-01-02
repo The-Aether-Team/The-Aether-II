@@ -1,10 +1,15 @@
 package com.gildedgames.aether.common.blocks.natural.plants;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
+import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.blocks.IBlockMultiName;
 import com.gildedgames.aether.common.blocks.IBlockSnowy;
+import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
+import com.gildedgames.aether.common.world.biomes.arctic_peaks.BiomeArcticPeaks;
+import com.gildedgames.aether.common.world.biomes.irradiated_forests.BiomeIrradiatedForests;
+import com.gildedgames.aether.common.world.biomes.magnetic_hills.BiomeMagneticHills;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSnow;
 import net.minecraft.block.SoundType;
@@ -13,7 +18,9 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
@@ -24,15 +31,13 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.IShearable;
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
-public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable, IBlockMultiName, IBlockSnowy
+public class BlockTallAetherGrass extends BlockAetherPlant implements IBlockMultiName, IBlockSnowy
 {
 	public static final BlockVariant SHORT = new BlockVariant(0, "short"),
 			NORMAL = new BlockVariant(1, "normal"),
@@ -86,26 +91,64 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 	}
 
 	@Override
+	public IBlockState getActualState(final IBlockState state, final IBlockAccess worldIn, final BlockPos pos)
+	{
+		final IBlockState down = worldIn.getBlockState(pos.down());
+
+		final Block bottomBlock = down.getBlock();
+
+		final Comparable<?> grassType = down.getProperties().get(BlockAetherGrass.PROPERTY_VARIANT);
+
+		Biome biome = worldIn.getBiome(pos);
+
+		final IBlockState lastVariant = biome instanceof BiomeArcticPeaks
+				? state.withProperty(TYPE, Type.ARCTIC)
+				: (biome instanceof BiomeMagneticHills
+				? state.withProperty(TYPE, Type.MAGNETIC)
+				: (biome instanceof BiomeIrradiatedForests
+				? state.withProperty(TYPE, Type.IRRADIATED)
+				: state.withProperty(TYPE, Type.HIGHLANDS)
+		));
+
+		if (bottomBlock == BlocksAether.aether_grass)
+		{
+			return grassType.equals(BlockAetherGrass.ARCTIC)
+					? state.withProperty(TYPE, Type.ARCTIC)
+					: (grassType.equals(BlockAetherGrass.MAGNETIC)
+					? state.withProperty(TYPE, Type.MAGNETIC)
+					: (grassType.equals(BlockAetherGrass.IRRADIATED)
+					? state.withProperty(TYPE, Type.IRRADIATED)
+					: (grassType.equals(BlockAetherGrass.ENCHANTED)
+					? state.withProperty(TYPE, Type.ENCHANTED)
+					: state.withProperty(TYPE, Type.HIGHLANDS)
+			)));
+		}
+		return lastVariant;
+	}
+
+	@Override
 	public Item getItemDropped(final IBlockState state, final Random rand, final int fortune)
 	{
 		return null;
 	}
 
 	@Override
-	public boolean isShearable(final ItemStack item, final IBlockAccess world, final BlockPos pos)
+	public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player)
 	{
-		return true;
-	}
+		if ((player.getHeldItemMainhand().getItem() == ItemsAether.arkenium_shears || player.getHeldItemMainhand().getItem() == Items.SHEARS) && !player.isCreative())
+		{
+			if (state.getValue(PROPERTY_SNOWY))
+			{
+				worldIn.setBlockState(pos, BlocksAether.highlands_snow_layer.getDefaultState().withProperty(BlockSnow.LAYERS, 1), 2);
 
-	@Override
-	public List<ItemStack> onSheared(final ItemStack item, final IBlockAccess world, final BlockPos pos, final int fortune)
-	{
-		final List<ItemStack> drops = new ArrayList<>();
-		IBlockState state = world.getBlockState(pos);
-
-		drops.add(new ItemStack(this, 1, this.getMetaFromState(state) - (state.getValue(PROPERTY_SNOWY) ? PROPERTY_VARIANT.getAllowedValues().size() : 0)));
-
-		return drops;
+				Block.spawnAsEntity(worldIn, pos, new ItemStack(this, 1,
+						this.getMetaFromState(state) - (state.getValue(PROPERTY_SNOWY) ? PROPERTY_VARIANT.getAllowedValues().size() : 0)));
+			}
+			else
+			{
+				Block.spawnAsEntity(worldIn, pos, new ItemStack(this, 1, this.getMetaFromState(getActualState(state, worldIn, pos))));
+			}
+		}
 	}
 
 	@Override
@@ -214,4 +257,28 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IShearable
 		}
 	}
 
+	@Override
+	public boolean canGrow(final World worldIn, final BlockPos pos, final IBlockState state, final boolean isClient)
+	{
+		return !(state.getValue(PROPERTY_VARIANT) == LONG);
+	}
+
+	@Override
+	public boolean canUseBonemeal(final World worldIn, final Random rand, final BlockPos pos, final IBlockState state)
+	{
+		return !(state.getValue(PROPERTY_VARIANT) == LONG);
+	}
+
+	@Override
+	public void grow(final World world, final Random rand, final BlockPos pos, final IBlockState state)
+	{
+		if (state.getValue(PROPERTY_VARIANT) == SHORT)
+		{
+			world.setBlockState(pos, state.withProperty(PROPERTY_VARIANT, NORMAL));
+		}
+		else if (state.getValue(PROPERTY_VARIANT) == NORMAL)
+		{
+			world.setBlockState(pos, state.withProperty(PROPERTY_VARIANT, LONG));
+		}
+	}
 }

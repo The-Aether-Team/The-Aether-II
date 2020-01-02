@@ -1,16 +1,13 @@
 package com.gildedgames.aether.common.blocks.natural.plants;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
-import com.gildedgames.aether.api.registrar.ItemsAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -59,9 +56,19 @@ public class BlockAetherPlant extends Block implements IGrowable
 
 	protected void invalidateBlock(final World world, final BlockPos pos, final IBlockState state)
 	{
-		this.dropBlockAsItem(world, pos, state, 0);
+		final IBlockState soilBlock = world.getBlockState(pos.down());
 
-		world.setBlockToAir(pos);
+		if (!this.isSuitableSoilBlock(world, pos, soilBlock))
+		{
+			world.setBlockToAir(pos);
+		}
+		else
+		{
+			this.dropBlockAsItem(world, pos, state, 0);
+
+			world.setBlockToAir(pos);
+		}
+
 	}
 
 	@Override
@@ -118,27 +125,6 @@ public class BlockAetherPlant extends Block implements IGrowable
 	public void grow(final World worldIn, final Random rand, final BlockPos pos, final IBlockState state)
 	{
 
-	}
-
-	@Override
-	public boolean onBlockActivated(
-			final World worldIn, final BlockPos pos, final IBlockState state, final EntityPlayer playerIn, final EnumHand hand, final EnumFacing facing,
-			final float hitX, final float hitY, final float hitZ)
-	{
-		if (playerIn.getHeldItemMainhand().getItem() == ItemsAether.swet_jelly)
-		{
-			if (!this.canGrow(worldIn, pos, state, true))
-			{
-				return false;
-			}
-			if (!playerIn.isCreative())
-			{
-				playerIn.getHeldItemMainhand().shrink(1);
-			}
-			this.grow(worldIn, new Random(), pos, state);
-			return true;
-		}
-		return false;
 	}
 
 	@Override
