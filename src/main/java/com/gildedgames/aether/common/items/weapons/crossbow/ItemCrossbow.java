@@ -16,8 +16,10 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -240,7 +242,13 @@ public class ItemCrossbow extends Item
 				}
 				else if (this.cBType == crossBowTypes.GRAVETITE)
 				{
+					//temporary
+					bolt0 = this.createBolt(entityLiving, speed, 0, 0, 0, this.cBType.damageMultiplier, boltType);
 
+					if (bolt0 != null)
+					{
+						bolt0.setNoGravity(true);
+					}
 				}
 				else
 				{
@@ -250,7 +258,19 @@ public class ItemCrossbow extends Item
 			// standard bolts
 			else
 			{
-				bolt0 = this.createBolt(entityLiving, speed, 0, 0, 0, this.cBType.damageMultiplier, boltType);
+				if (this.cBType == crossBowTypes.GRAVETITE)
+				{
+					bolt0 = this.createBolt(entityLiving, speed, 0, 0, 0, this.cBType.damageMultiplier, boltType);
+
+					if (bolt0 != null)
+					{
+						bolt0.setNoGravity(true);
+					}
+				}
+				else
+				{
+					bolt0 = this.createBolt(entityLiving, speed, 0, 0, 0, this.cBType.damageMultiplier, boltType);
+				}
 			}
 
 			if (entityLiving instanceof EntityPlayer)
@@ -421,6 +441,12 @@ public class ItemCrossbow extends Item
 		this.durationInTicks = x;
 
 		return this;
+	}
+
+	@Override
+	public boolean canDestroyBlockInCreative(World world, BlockPos pos, ItemStack stack, EntityPlayer player)
+	{
+		return !isLoaded(stack);
 	}
 
 	@Override
