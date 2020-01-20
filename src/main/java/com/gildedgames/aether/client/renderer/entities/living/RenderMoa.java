@@ -213,7 +213,8 @@ public class RenderMoa extends RenderLivingLOD<EntityMoa>
 		if (moa.isSaddled())
 		{
 			GL11.glColor3f(1.0f, 1.0f, 1.0f);
-			GL11.glTranslatef(0.0F, 0.001F, 0.0F);
+			GL11.glTranslatef(0.0F, -0.001F, 0.0F);
+			GL11.glScalef(1.01F, 1.01F, 1.01F);
 
 			this.renderManager.renderEngine.bindTexture(SADDLE);
 			model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
