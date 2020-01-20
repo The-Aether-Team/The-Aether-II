@@ -1,10 +1,12 @@
 package com.gildedgames.aether.common.entities.blocks;
 
+import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerParachuteModule;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -22,6 +24,8 @@ public class EntityParachute extends Entity
 	private static final DataParameter<Integer> TYPE = EntityDataManager.createKey(EntityParachute.class, DataSerializers.VARINT);
 
 	private EntityPlayer parachutingPlayer;
+
+	private int parachuteTimer;
 
 	public EntityParachute(final World world)
 	{
@@ -56,16 +60,64 @@ public class EntityParachute extends Entity
 			this.startRiding(this.parachutingPlayer, true);
 		}
 
+		if (!this.isDead && (this.getType() == Type.BLUE || this.getType() == Type.PURPLE))
+		{
+			++this.parachuteTimer;
+		}
+
 		if (this.getRidingEntity() instanceof EntityPlayer)
 		{
 			final EntityPlayer player = (EntityPlayer) this.getRidingEntity();
 			final Vec3d vec3 = player.getLookVec();
+
+			final PlayerAether playerAether = PlayerAether.getPlayer(player);
+
+			int blueParachuteAbilityTime = 20;
+			int purpleParachuteAbilityTime = 90;
 
 			if (this.getType() == Type.COLD)
 			{
 				player.motionX *= 0.6;
 				player.motionY = -0.08;
 				player.motionZ *= 0.6;
+			}
+
+			if (this.getType() == Type.BLUE)
+			{
+				if (this.parachuteTimer <= blueParachuteAbilityTime)
+				{
+					player.motionX *= 0.6;
+					player.motionY = 1.08;
+					player.motionZ *= 0.6;
+				}
+				else if (this.parachuteTimer <= (blueParachuteAbilityTime + 18))
+				{
+					player.motionX *= 0.6;
+					player.motionZ *= 0.6;
+				}
+				else
+				{
+					replaceParachute(player, playerAether);
+				}
+			}
+
+			if (this.getType() == Type.PURPLE)
+			{
+				if (this.parachuteTimer <= purpleParachuteAbilityTime)
+				{
+					player.motionX = vec3.x * 0.36;
+					player.motionY = 0.0;
+					player.motionZ = vec3.z * 0.36;
+				}
+				else if (this.parachuteTimer > (purpleParachuteAbilityTime + 2))
+				{
+					replaceParachute(player, playerAether);
+				}
+			}
+
+			if (this.getType() == Type.GREEN)
+			{
+				player.motionY = -0.08f;
 			}
 
 			if (this.getType() == Type.GOLDEN)
@@ -75,34 +127,45 @@ public class EntityParachute extends Entity
 				player.motionZ *= 0.6;
 			}
 
-			if (this.getType() == Type.PURPLE)
-			{
-				player.motionX = vec3.x * 0.18f;
-				player.motionY = -0.08f;
-				player.motionZ = vec3.z * 0.18f;
-			}
-
-			if (this.getType() == Type.GREEN)
-			{
-				player.motionY = -0.08f;
-			}
-
-			if (this.getType() == Type.BLUE)
-			{
-				player.motionX *= 0.6;
-				player.motionY = 1.08;
-				player.motionZ *= 0.6;
-			}
-
 			player.isAirBorne = true;
 
-			final PlayerAether playerAether = PlayerAether.getPlayer(player);
-
-			if (!playerAether.getModule(PlayerParachuteModule.class).isParachuting())
+			if (this.getType() == Type.BLUE && playerAether.getModule(PlayerParachuteModule.class).isUnderABlock((int) player.posY))
 			{
-				this.setDead();
+				replaceParachute(player, playerAether);
+			}
+
+			if (player.onGround && this.getType() != Type.BLUE)
+			{
+				playerAether.getModule(PlayerParachuteModule.class).setParachuting(false, this.getType());
+			}
+
+			if (!playerAether.getModule(PlayerParachuteModule.class).isParachuting() || playerAether.getModule(PlayerParachuteModule.class).getParachuteEquipped())
+			{
+				this.destroyParachute(playerAether);
 			}
 		}
+	}
+
+	public void replaceParachute(EntityPlayer player, PlayerAether playerAether)
+	{
+		if (!player.world.isRemote)
+		{
+			playerAether.getModule(PlayerParachuteModule.class).getParachuteItem().shrink(1);
+
+			player.addItemStackToInventory(new ItemStack(ItemsAether.cloud_parachute));
+		}
+
+		playerAether.getModule(PlayerParachuteModule.class).setParachuting(true, Type.COLD);
+
+		this.setType(Type.COLD);
+	}
+
+	public void destroyParachute(PlayerAether playerAether)
+	{
+		this.parachuteTimer = 0;
+		this.setDead();
+
+		playerAether.getModule(PlayerParachuteModule.class).parachuteEquipped(false);
 	}
 
 	@Override

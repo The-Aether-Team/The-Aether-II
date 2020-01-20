@@ -46,7 +46,7 @@ public class ItemCloudParachute extends Item implements IDropOnDeath
 	@SideOnly(Side.CLIENT)
 	public void addInformation(final ItemStack stack, @Nullable final World worldIn, final List<String> tooltip, final ITooltipFlag flagIn)
 	{
-		tooltip.add(I18n.format("cloudParachute.ability") + "\247r" + I18n.format(
+		tooltip.add(I18n.format("cloudParachute.ability") + " " + "\247r" + I18n.format(
 				"cloudParachute.ability." + EntityParachute.Type.fromOrdinal(stack.getMetadata()).name));
 		tooltip.add(I18n.format("cloudParachute.ability.rightClick"));
 	}
@@ -59,16 +59,39 @@ public class ItemCloudParachute extends Item implements IDropOnDeath
 		final EntityParachute parachute = new EntityParachute(world, player, EntityParachute.Type.fromOrdinal(stack.getMetadata()));
 
 		final PlayerAether playerAether = PlayerAether.getPlayer(player);
-		playerAether.getModule(PlayerParachuteModule.class).setParachuting(true, EntityParachute.Type.fromOrdinal(stack.getMetadata()));
 
-		world.spawnEntity(parachute);
-
-		if (!player.capabilities.isCreativeMode)
+		if (playerAether.getModule(PlayerParachuteModule.class).isParachuting())
 		{
-			stack.shrink(1);
+			if (playerAether.getModule(PlayerParachuteModule.class).getParachuteType() != EntityParachute.Type.BLUE
+					&& playerAether.getModule(PlayerParachuteModule.class).getParachuteType() != EntityParachute.Type.PURPLE)
+			{
+				if (playerAether.getModule(PlayerParachuteModule.class).getParachuteType().ordinal() != stack.getMetadata())
+				{
+					playerAether.getModule(PlayerParachuteModule.class).parachuteEquipped(true);
+
+					spawnParachute(playerAether, world, stack, parachute);
+				}
+				else if (playerAether.getModule(PlayerParachuteModule.class).getParachuteType().ordinal() == stack.getMetadata())
+				{
+					playerAether.getModule(PlayerParachuteModule.class).setParachuting(false, playerAether.getModule(PlayerParachuteModule.class).getParachuteType());
+				}
+			}
+		}
+		else
+		{
+			spawnParachute(playerAether, world, stack, parachute);
 		}
 
 		return super.onItemRightClick(world, player, hand);
+	}
+
+	public void spawnParachute(PlayerAether playerAether, World world, ItemStack stack, EntityParachute parachute)
+	{
+		playerAether.getModule(PlayerParachuteModule.class).setParachuting(true, EntityParachute.Type.fromOrdinal(stack.getMetadata()));
+
+		playerAether.getModule(PlayerParachuteModule.class).parachuteItem(stack);
+
+		world.spawnEntity(parachute);
 	}
 
 	@Override
