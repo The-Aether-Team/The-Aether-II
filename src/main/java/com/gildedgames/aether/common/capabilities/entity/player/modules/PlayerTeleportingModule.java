@@ -2,23 +2,37 @@ package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
 import com.gildedgames.aether.api.player.IPlayerAetherModule;
 import com.gildedgames.aether.api.registrar.SoundsAether;
+import com.gildedgames.aether.client.events.listeners.gui.GuiLoadingListener;
 import com.gildedgames.aether.client.gui.misc.GuiIntro;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
+import com.gildedgames.aether.common.events.PostAetherTravelEvent;
 import com.gildedgames.aether.common.init.DimensionsAether;
+import com.gildedgames.aether.common.init.InstancesAether;
+import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.network.packets.PacketSetPlayedIntro;
 import com.gildedgames.aether.common.util.helpers.IslandHelper;
+import com.gildedgames.aether.common.world.instances.necromancer_tower.NecromancerTowerInstanceHelper;
+import com.gildedgames.orbis.lib.OrbisLib;
 import com.gildedgames.orbis.lib.util.TeleporterGeneric;
 import com.gildedgames.orbis.lib.util.io.NBTFunnel;
 import com.gildedgames.orbis.lib.util.mc.BlockPosDimension;
+import com.gildedgames.orbis.lib.world.instances.IInstance;
+import com.gildedgames.orbis.lib.world.instances.IPlayerInstances;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.management.PlayerList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.Teleporter;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -121,7 +135,33 @@ public class PlayerTeleportingModule extends PlayerAetherModule implements IPlay
 
 		this.prevTicksInTeleporter = this.ticksInTeleporter;
 
-		if (this.isTeleportCharging && this.getEntity().getEntityWorld().provider.getDimensionType() != DimensionsAether.AETHER)
+		if (this.isTeleportCharging && this.getEntity().getEntityWorld().provider.getDimensionType() != DimensionsAether.NECROMANCER_TOWER
+				&& this.getEntity().getEntityWorld().provider.getDimensionType() != DimensionsAether.AETHER)
+		{
+			if (this.getEntity().timeUntilPortal > 0)
+			{
+				this.getEntity().timeUntilPortal = this.getEntity().getPortalCooldown();
+			}
+			else
+			{
+				this.ticksInTeleporter++;
+
+				if (this.ticksInTeleporter == 1)
+				{
+					if (this.getWorld().isRemote && Minecraft.getMinecraft().player.getEntityId() == this.getEntity().getEntityId())
+					{
+						Minecraft.getMinecraft().player.playSound(SoundsAether.glowstone_portal_trigger, 1.0F, 1.0F);
+					}
+				}
+				else if (!this.getWorld().isRemote && (this.getTicksInTeleporter() >= TELEPORT_DELAY || this.getEntity().isCreative()))
+				{
+					this.ticksInTeleporter = 0;
+
+					this.teleportToTower();
+				}
+			}
+		}
+		else if (this.isTeleportCharging && this.getEntity().getEntityWorld().provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER)
 		{
 			if (this.getEntity().timeUntilPortal > 0)
 			{
@@ -157,6 +197,87 @@ public class PlayerTeleportingModule extends PlayerAetherModule implements IPlay
 	public void processTeleporting()
 	{
 		this.isTeleportCharging = true;
+	}
+
+	public void teleportToTower()
+	{
+		final EntityPlayer player = this.getEntity();
+		final PlayerAether playerAether = PlayerAether.getPlayer(player);
+
+		final World world = this.getEntity().getEntityWorld();
+
+		final NecromancerTowerInstanceHelper handler = InstancesAether.NECROMANCER_TOWER_HANDLER;
+
+		final PlayerTeleportingModule teleportingModule = playerAether.getModule(PlayerTeleportingModule.class);
+
+		final IPlayerInstances hook = OrbisLib.instances().getPlayer(player);
+
+		if (world.isRemote)
+		{
+			if (AetherCore.CONFIG.skipIntro())
+			{
+				teleportingModule.setPlayedIntro(true);
+				NetworkingAether.sendPacketToServer(new PacketSetPlayedIntro(true));
+			}
+
+			if (!teleportingModule.hasPlayedIntro())
+			{
+				GuiLoadingListener.setDrawBlackScreen(true);
+			}
+			else
+			{
+				GuiLoadingListener.setDrawLoading(true);
+			}
+		}
+		else
+		{
+			if (teleportingModule.getAetherPos() != null)
+			{
+				final EntityPlayerMP playerMP = (EntityPlayerMP) player;
+				final BlockPosDimension p = teleportingModule.getAetherPos();
+
+				final MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
+
+				if (net.minecraftforge.common.ForgeHooks.onTravelToDimension(playerMP, p.getDim()))
+				{
+					final Teleporter teleporter = new TeleporterGeneric(server.getWorld(player.dimension));
+					final PlayerList playerList = server.getPlayerList();
+					playerList.transferPlayerToDimension(playerMP, p.getDim(), teleporter);
+					player.timeUntilPortal = player.getPortalCooldown();
+
+					playerMP.connection.setPlayerLocation(p.getX(), p.getY(), p.getZ(), 225, 0);
+
+					PostAetherTravelEvent event = new PostAetherTravelEvent(playerMP);
+					MinecraftForge.EVENT_BUS.post(event);
+				}
+			}
+			else if (hook.getInstance() != null)
+			{
+				final IInstance instance = hook.getInstance();
+
+				if (player.dimension == instance.getDimensionId())
+				{
+					handler.teleportBack((EntityPlayerMP) player);
+				}
+				else
+				{
+					hook.setInstance(null);
+
+					handler.teleportToInst((EntityPlayerMP) player);
+				}
+			}
+			else
+			{
+				if (playerAether.getModule(PlayerConfigModule.class).skipIntro())
+				{
+					teleportingModule.teleportToAether();
+				}
+				else
+				{
+					handler.teleportToInst((EntityPlayerMP) player);
+				}
+			}
+		}
 	}
 
 	public void teleportToAether()
