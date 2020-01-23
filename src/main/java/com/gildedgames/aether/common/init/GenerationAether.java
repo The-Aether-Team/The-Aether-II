@@ -156,7 +156,7 @@ public class GenerationAether
 		holystone_rocks.setStatesToPlaceOn(BlocksAether.holystone.getDefaultState());
 
 		ice_crystals = new WorldGenIceCrystals(64);
-		ice_crystals.setStatesToPlaceOn(BlocksAether.holystone.getDefaultState(), BlocksAether.highlands_ice.getDefaultState());
+		ice_crystals.setStatesToPlaceOn(BlocksAether.holystone.getDefaultState(), BlocksAether.highlands_packed_ice.getDefaultState());
 
 		green_aercloud = new WorldGenAercloud(BlockAercloud.getAercloudState(BlockAercloud.GREEN_AERCLOUD), 4, false);
 		golden_aercloud = new WorldGenAercloud(BlockAercloud.getAercloudState(BlockAercloud.GOLDEN_AERCLOUD), 4, false);
