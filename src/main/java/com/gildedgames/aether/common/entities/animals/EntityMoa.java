@@ -228,11 +228,6 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 	@Override
 	public boolean processInteract(final EntityPlayer player, final EnumHand hand)
 	{
-		if (super.processInteract(player, hand))
-		{
-			return true;
-		}
-
 		if (!this.isRaisedByPlayer())
 		{
 			return false;
@@ -272,6 +267,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 
 				return true;
 			}
+			else return super.processInteract(player, hand);
 		}
 
 		return false;
@@ -300,26 +296,23 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 
 		if (!this.world.isRemote)
 		{
-			if (!this.isRaisedByPlayer() && this.getGender() == AnimalGender.MALE)
+			//TODO: When the Moa system is implemented, there should be a check to stop active/tamed Moas from dropping feathers based on it.
+			this.dropFeatherTimer++;
+
+			if (this.timeUntilDropFeather == 0)
 			{
-				this.dropFeatherTimer++;
+				this.timeUntilDropFeather = (120 + this.getRNG().nextInt(80)) * 20;
+			}
 
-				if (this.timeUntilDropFeather == 0)
-				{
-					this.timeUntilDropFeather = (120 + this.getRNG().nextInt(80)) * 20;
-				}
+			if (this.dropFeatherTimer >= this.timeUntilDropFeather)
+			{
+				this.timeUntilDropFeather = 0;
 
-				if (this.dropFeatherTimer >= this.timeUntilDropFeather)
-				{
-					this.timeUntilDropFeather = 0;
+				final ItemStack feather = new ItemStack(ItemsAether.moa_feather);
+				ItemMoaFeather.setColor(feather, this.getGenePool().getFeathers().gene().unlocalizedName(), this.getGenePool().getFeathers().gene().data().getRGB());
 
-					final ItemStack feather = new ItemStack(ItemsAether.moa_feather);
-					ItemMoaFeather.setColor(feather, this.getGenePool().getFeathers().gene().unlocalizedName(),
-							this.getGenePool().getFeathers().gene().data().getRGB());
-
-					Block.spawnAsEntity(this.world, this.getPosition(), feather);
-					this.dropFeatherTimer = 0;
-				}
+				Block.spawnAsEntity(this.world, this.getPosition(), feather);
+				this.dropFeatherTimer = 0;
 			}
 
 			if (this.isChild() && this.isRaisedByPlayer())
