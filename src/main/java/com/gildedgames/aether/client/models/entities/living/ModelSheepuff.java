@@ -306,7 +306,7 @@ public class ModelSheepuff extends ModelBase
 			this.legFrontRightThigh.rotateAngleZ = 0;
 		}
 
-		if (!sheepuff.getSheared())
+		if (sheepuff.getSheared())
 		{
 			this.tail.isHidden = false;
 			this.tail.rotateAngleZ = (MathHelper.cos(ageInTicks * 0.1662F) * 0.2F);
