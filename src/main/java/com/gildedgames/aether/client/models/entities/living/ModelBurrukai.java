@@ -2,6 +2,7 @@ package com.gildedgames.aether.client.models.entities.living;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
@@ -136,6 +137,8 @@ public class ModelBurrukai extends ModelBase
 	public final ModelRenderer FrontLegRightHoofIn;
 
 	public final ModelRenderer FrontLegRightHoofOut;
+
+	public final float childZOffset = 4.0F;
 
 	public ModelBurrukai()
 	{
@@ -433,30 +436,67 @@ public class ModelBurrukai extends ModelBase
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
-		this.TorsoPlate2.render(f5);
-		this.HeadMain.render(f5);
-		this.FrontLegLeftTop.render(f5);
-		this.TorsoFrontFurRight.render(f5);
-		this.TorsoShoulderPlateRightMid.render(f5);
-		this.TorsoShoulderPlateRightBack.render(f5);
-		this.TorsoShoulderPlateLeftBack.render(f5);
-		this.TorsoPlate3.render(f5);
-		this.TorsoShoulderLeft.render(f5);
-		this.TorsoShoulderPlateLeftFront.render(f5);
-		this.FrontLegRightTop.render(f5);
-		this.TorsoChest.render(f5);
-		this.HindLegRightCalfMiddle.render(f5);
-		this.HindLegLeftCalfMiddle.render(f5);
-		this.TorsoCrotch.render(f5);
-		this.TorsoFrontFurLeft.render(f5);
-		this.TorsoShoulderRight.render(f5);
-		this.TorsoBackFur.render(f5);
-		this.TorsoRear.render(f5);
-		this.Tail.render(f5);
-		this.TorsoPlate1.render(f5);
-		this.TorsoNeckJoint.render(f5);
-		this.TorsoShoulderPlateRightFront.render(f5);
-		this.TorsoShoulderPlateLeftMid.render(f5);
+		if (this.isChild)
+		{
+			GlStateManager.pushMatrix();
+			GlStateManager.translate(0.0F, 8.75F * f5, this.childZOffset * f5);
+			this.HeadMain.render(f5);
+			GlStateManager.popMatrix();
+			GlStateManager.pushMatrix();
+			GlStateManager.scale(0.5F, 0.5F, 0.5F);
+			GlStateManager.translate(0.0F, 24.0F * f5, 0.0F);
+			this.TorsoPlate2.render(f5);
+			this.FrontLegLeftTop.render(f5);
+			this.TorsoFrontFurRight.render(f5);
+			this.TorsoShoulderPlateRightMid.render(f5);
+			this.TorsoShoulderPlateRightBack.render(f5);
+			this.TorsoShoulderPlateLeftBack.render(f5);
+			this.TorsoPlate3.render(f5);
+			this.TorsoShoulderLeft.render(f5);
+			this.TorsoShoulderPlateLeftFront.render(f5);
+			this.FrontLegRightTop.render(f5);
+			this.TorsoChest.render(f5);
+			this.HindLegRightCalfMiddle.render(f5);
+			this.HindLegLeftCalfMiddle.render(f5);
+			this.TorsoCrotch.render(f5);
+			this.TorsoFrontFurLeft.render(f5);
+			this.TorsoShoulderRight.render(f5);
+			this.TorsoBackFur.render(f5);
+			this.TorsoRear.render(f5);
+			this.Tail.render(f5);
+			this.TorsoPlate1.render(f5);
+			this.TorsoNeckJoint.render(f5);
+			this.TorsoShoulderPlateRightFront.render(f5);
+			this.TorsoShoulderPlateLeftMid.render(f5);
+			GlStateManager.popMatrix();
+		}
+		else
+		{
+			this.TorsoPlate2.render(f5);
+			this.HeadMain.render(f5);
+			this.FrontLegLeftTop.render(f5);
+			this.TorsoFrontFurRight.render(f5);
+			this.TorsoShoulderPlateRightMid.render(f5);
+			this.TorsoShoulderPlateRightBack.render(f5);
+			this.TorsoShoulderPlateLeftBack.render(f5);
+			this.TorsoPlate3.render(f5);
+			this.TorsoShoulderLeft.render(f5);
+			this.TorsoShoulderPlateLeftFront.render(f5);
+			this.FrontLegRightTop.render(f5);
+			this.TorsoChest.render(f5);
+			this.HindLegRightCalfMiddle.render(f5);
+			this.HindLegLeftCalfMiddle.render(f5);
+			this.TorsoCrotch.render(f5);
+			this.TorsoFrontFurLeft.render(f5);
+			this.TorsoShoulderRight.render(f5);
+			this.TorsoBackFur.render(f5);
+			this.TorsoRear.render(f5);
+			this.Tail.render(f5);
+			this.TorsoPlate1.render(f5);
+			this.TorsoNeckJoint.render(f5);
+			this.TorsoShoulderPlateRightFront.render(f5);
+			this.TorsoShoulderPlateLeftMid.render(f5);
+		}
 	}
 
 	/**

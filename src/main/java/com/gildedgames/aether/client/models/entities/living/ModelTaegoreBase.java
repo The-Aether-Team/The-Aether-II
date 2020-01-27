@@ -127,6 +127,8 @@ public class ModelTaegoreBase extends ModelBaseAether
 
 	public ModelRenderer HindLegRightToeIn;
 
+	public final float childZOffset = 4.0F;
+
 	@Override
 	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch,
 			float scaleFactor, Entity entity)
