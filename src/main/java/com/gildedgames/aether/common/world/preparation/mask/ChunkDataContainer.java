@@ -8,6 +8,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BitArray;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.BlockStateContainer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
@@ -27,6 +28,8 @@ public class ChunkDataContainer
 	private final int chunkX, chunkZ;
 
 	private final boolean hasSkylight;
+
+	private Biome[] biomesForGeneration;
 
 	public ChunkDataContainer(int chunkX, int chunkZ, boolean hasSkylight)
 	{
@@ -182,6 +185,14 @@ public class ChunkDataContainer
 		for (Entity entity : this.entities)
 		{
 			chunk.addEntity(entity);
+		}
+
+		this.biomesForGeneration = world.getBiomeProvider().getBiomes(biomesForGeneration, chunkX * 16, chunkZ * 16, 16, 16);
+
+		byte[] chunkBiomes = chunk.getBiomeArray();
+		for (int i = 0; i < chunkBiomes.length; ++i)
+		{
+			chunkBiomes[i] = (byte) Biome.getIdForBiome(this.biomesForGeneration[i]);
 		}
 
 		this.prepareChunkLighting(world, chunk);
