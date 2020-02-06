@@ -435,8 +435,6 @@ item.aether.dart.enchanted.name=Enchanted Dart
 item.aether.dart.poison.name=Poison Dart
 item.aether.cloud_parachute.cold.name=Cold Cloud Parachute
 item.aether.cloud_parachute.blue.name=Blue Cloud Parachute
-item.aether.cloud_parachute.golden.name=Golden Cloud Parachute
-item.aether.cloud_parachute.green.name=Green Cloud Parachute
 item.aether.cloud_parachute.purple.name=Purple Cloud Parachute
 item.aether.aether_saddle.name=Moa Saddle
 item.aether.skyroot_door_item.name=Skyroot Door
@@ -464,9 +462,7 @@ item.aether.moa_egg_item.name=Moa Egg
 item.aether.rainbow_moa_egg.name=Rainbow Moa Egg
 
 item.aether.cold_cloud_parachute.name=Cold Cloud Parachute
-item.aether.golden_cloud_parachute.name=Golden Cloud Parachute
 item.aether.purple_cloud_parachute.name=Purple Cloud Parachute
-item.aether.green_cloud_parachute.name=Green Cloud Parachute
 item.aether.blue_cloud_parachute.name=Blue Cloud Parachute
 
 item.aether.irradiated_chunk.name=Irradiated Chunk
@@ -547,9 +543,7 @@ tile.aether.aether_portal.name=Aether Portal
 cloudParachute.ability.rightClick=§3Use:§r Right-Click
 cloudParachute.ability=§9Ability:
 cloudParachute.ability.cold=Slow Descent
-cloudParachute.ability.golden=Fast Descent
 cloudParachute.ability.purple=Directional Descent
-cloudParachute.ability.green=Slow Descent
 cloudParachute.ability.blue=Fast Elevation
 
 moa.feathers=Feathers: %s

@@ -115,18 +115,6 @@ public class EntityParachute extends Entity
 				}
 			}
 
-			if (this.getType() == Type.GREEN)
-			{
-				player.motionY = -0.08f;
-			}
-
-			if (this.getType() == Type.GOLDEN)
-			{
-				player.motionX *= 0.6;
-				player.motionY = -1.08;
-				player.motionZ *= 0.6;
-			}
-
 			player.isAirBorne = true;
 
 			if (this.getType() == Type.BLUE && playerAether.getModule(PlayerParachuteModule.class).isUnderABlock((int) player.posY))
@@ -216,7 +204,7 @@ public class EntityParachute extends Entity
 
 	public enum Type
 	{
-		COLD("cold"), GOLDEN("golden"), PURPLE("purple"), GREEN("green"), BLUE("blue");
+		COLD("cold"), PURPLE("purple"), BLUE("blue");
 
 		public final String name, desc;
 
@@ -234,7 +222,7 @@ public class EntityParachute extends Entity
 		{
 			final Type[] type = values();
 
-			return type[ordinal > type.length || ordinal < 0 ? 0 : ordinal];
+			return type[ordinal >= type.length || ordinal < 0 ? 0 : ordinal];
 		}
 	}
 

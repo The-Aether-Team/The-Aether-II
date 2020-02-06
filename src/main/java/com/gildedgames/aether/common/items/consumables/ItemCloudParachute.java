@@ -62,8 +62,7 @@ public class ItemCloudParachute extends Item implements IDropOnDeath
 
 		if (playerAether.getModule(PlayerParachuteModule.class).isParachuting())
 		{
-			if (playerAether.getModule(PlayerParachuteModule.class).getParachuteType() != EntityParachute.Type.BLUE
-					&& playerAether.getModule(PlayerParachuteModule.class).getParachuteType() != EntityParachute.Type.PURPLE)
+			if (playerAether.getModule(PlayerParachuteModule.class).getParachuteType() == EntityParachute.Type.COLD)
 			{
 				if (playerAether.getModule(PlayerParachuteModule.class).getParachuteType().ordinal() != stack.getMetadata())
 				{
