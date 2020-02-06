@@ -34,7 +34,7 @@ public class IslandChunkMaskTransformer implements IChunkMaskTransformer
 		this.setMaskValue(IslandBlockType.COAST_BLOCK, BlocksAether.quicksoil.getDefaultState());
 
 		this.setMaskValue(IslandBlockType.CLOUD_BED_BLOCK, BlocksAether.aercloud.getDefaultState());
-		this.setMaskValue(IslandBlockType.VEIN_BLOCK, BlocksAether.highlands_ice.getDefaultState());
+		this.setMaskValue(IslandBlockType.VEIN_BLOCK, BlocksAether.highlands_packed_ice.getDefaultState());
 	}
 
 	public void setMaskValue(IslandBlockType type, IBlockState state)
