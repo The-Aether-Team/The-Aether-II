@@ -1,6 +1,7 @@
 package com.gildedgames.aether.client.models.entities.living;
 
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 
 public class ModelTaegoreLodLow extends ModelTaegoreBase
@@ -158,46 +159,97 @@ public class ModelTaegoreLodLow extends ModelTaegoreBase
 
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-		this.HindLegRightShin.render(f5);
-		this.HindLegLeftCalf.render(f5);
-		this.TorsoShoulderPlateRight2.render(f5);
-		this.FrontLegRightUpper.render(f5);
-		this.FrontLegLeftUpper.render(f5);
-		this.FrontLegLeftLower.render(f5);
-		this.HeadMain.render(f5);
-		this.TorsoShoulderPlateLeft1.render(f5);
-		this.HeadEyeRight.render(f5);
-		this.HeadThroat.render(f5);
-		this.TorsoBack.render(f5);
-		this.HindLegRightCalf.render(f5);
-		this.TorsoShoulderPlateRight1.render(f5);
-		this.HeadSnoutRight.render(f5);
-		this.HeadJawFront.render(f5);
-		this.HeadSnout.render(f5);
-		this.HeadEyeLeft.render(f5);
-		this.HeadBrowLeft.render(f5);
-		this.FrontLegRightLower.render(f5);
-		this.HeadSnoutLeft.render(f5);
-		this.HeadJawBack.render(f5);
-		this.HeadCrestRight.render(f5);
-		this.TorsoFront.render(f5);
-		this.HindLegLeftKnee.render(f5);
-		this.HeadBrowRight.render(f5);
-		this.TorsoNeck.render(f5);
-		this.TorsoBackPlateLeft.render(f5);
-		this.HeadEarRight.render(f5);
-		this.HindLegLeftShin.render(f5);
-		this.HeadSnoutRidge.render(f5);
-		this.HeadCrestBase.render(f5);
-		this.HeadCrestLeft.render(f5);
-		this.HeadEarLeft.render(f5);
-		this.TorsoShoulderPlateLeft2.render(f5);
-		this.HeadCrestMiddle.render(f5);
-		this.HindLegRightKnee.render(f5);
-		this.TorsoBelly.render(f5);
-		this.TorsoBackPlateRight.render(f5);
-		this.Tail.render(f5);
-
+		if (this.isChild)
+		{
+			GlStateManager.pushMatrix();
+			GlStateManager.translate(0.0F, 8.75F * f5, this.childZOffset * f5);
+			this.HeadMain.render(f5);
+			this.HeadEyeRight.render(f5);
+			this.HeadThroat.render(f5);
+			this.HeadSnoutLeft.render(f5);
+			this.HeadJawBack.render(f5);
+			this.HeadCrestRight.render(f5);
+			this.HeadSnoutRight.render(f5);
+			this.HeadJawFront.render(f5);
+			this.HeadSnout.render(f5);
+			this.HeadEyeLeft.render(f5);
+			this.HeadBrowLeft.render(f5);
+			this.HeadBrowRight.render(f5);
+			this.HeadEarRight.render(f5);
+			this.HeadSnoutRidge.render(f5);
+			this.HeadCrestBase.render(f5);
+			this.HeadCrestLeft.render(f5);
+			this.HeadEarLeft.render(f5);
+			this.HeadCrestMiddle.render(f5);
+			this.TorsoNeck.render(f5);
+			GlStateManager.popMatrix();
+			GlStateManager.pushMatrix();
+			GlStateManager.scale(0.5F, 0.5F, 0.5F);
+			GlStateManager.translate(0.0F, 24.0F * f5, 0.0F);
+			this.HindLegRightShin.render(f5);
+			this.HindLegLeftCalf.render(f5);
+			this.TorsoShoulderPlateRight2.render(f5);
+			this.FrontLegRightUpper.render(f5);
+			this.FrontLegLeftUpper.render(f5);
+			this.FrontLegLeftLower.render(f5);
+			this.TorsoShoulderPlateLeft1.render(f5);
+			this.TorsoBack.render(f5);
+			this.HindLegRightCalf.render(f5);
+			this.TorsoShoulderPlateRight1.render(f5);
+			this.FrontLegRightLower.render(f5);
+			this.TorsoFront.render(f5);
+			this.HindLegLeftKnee.render(f5);
+			this.TorsoBackPlateLeft.render(f5);
+			this.HindLegLeftShin.render(f5);
+			this.TorsoShoulderPlateLeft2.render(f5);
+			this.HindLegRightKnee.render(f5);
+			this.TorsoBelly.render(f5);
+			this.TorsoBackPlateRight.render(f5);
+			this.Tail.render(f5);
+			GlStateManager.popMatrix();
+		}
+		else
+		{
+			this.HindLegRightShin.render(f5);
+			this.HindLegLeftCalf.render(f5);
+			this.TorsoShoulderPlateRight2.render(f5);
+			this.FrontLegRightUpper.render(f5);
+			this.FrontLegLeftUpper.render(f5);
+			this.FrontLegLeftLower.render(f5);
+			this.HeadMain.render(f5);
+			this.TorsoShoulderPlateLeft1.render(f5);
+			this.HeadEyeRight.render(f5);
+			this.HeadThroat.render(f5);
+			this.TorsoBack.render(f5);
+			this.HindLegRightCalf.render(f5);
+			this.TorsoShoulderPlateRight1.render(f5);
+			this.HeadSnoutRight.render(f5);
+			this.HeadJawFront.render(f5);
+			this.HeadSnout.render(f5);
+			this.HeadEyeLeft.render(f5);
+			this.HeadBrowLeft.render(f5);
+			this.FrontLegRightLower.render(f5);
+			this.HeadSnoutLeft.render(f5);
+			this.HeadJawBack.render(f5);
+			this.HeadCrestRight.render(f5);
+			this.TorsoFront.render(f5);
+			this.HindLegLeftKnee.render(f5);
+			this.HeadBrowRight.render(f5);
+			this.TorsoNeck.render(f5);
+			this.TorsoBackPlateLeft.render(f5);
+			this.HeadEarRight.render(f5);
+			this.HindLegLeftShin.render(f5);
+			this.HeadSnoutRidge.render(f5);
+			this.HeadCrestBase.render(f5);
+			this.HeadCrestLeft.render(f5);
+			this.HeadEarLeft.render(f5);
+			this.TorsoShoulderPlateLeft2.render(f5);
+			this.HeadCrestMiddle.render(f5);
+			this.HindLegRightKnee.render(f5);
+			this.TorsoBelly.render(f5);
+			this.TorsoBackPlateRight.render(f5);
+			this.Tail.render(f5);
+		}
 	}
 
 }

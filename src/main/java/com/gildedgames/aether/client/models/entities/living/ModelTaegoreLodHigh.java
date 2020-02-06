@@ -1,6 +1,7 @@
 package com.gildedgames.aether.client.models.entities.living;
 
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 
 public class ModelTaegoreLodHigh extends ModelTaegoreBase
@@ -279,28 +280,64 @@ public class ModelTaegoreLodHigh extends ModelTaegoreBase
 	{
 		this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 
-		this.HindLegLeftShin.render(f5);
-		this.TorsoShoulderPlateLeft1.render(f5);
-		this.HindLegRightKnee.render(f5);
-		this.TorsoBack.render(f5);
-		this.TorsoShoulderPlateRight2.render(f5);
-		this.TorsoFront.render(f5);
-		this.HindLegLeftKnee.render(f5);
-		this.HindLegRightCalf.render(f5);
-		this.FrontLegLeftUpper.render(f5);
-		this.FrontLegLeftLower.render(f5);
-		this.FrontLegRightLower.render(f5);
-		this.FrontLegRightUpper.render(f5);
-		this.TorsoSpine.render(f5);
-		this.TorsoNeck.render(f5);
-		this.Tail.render(f5);
-		this.HeadMain.render(f5);
-		this.HindLegLeftCalf.render(f5);
-		this.TorsoBelly.render(f5);
-		this.TorsoShoulderPlateLeft2.render(f5);
-		this.TorsoShoulderPlateRight1.render(f5);
-		this.TorsoBackPlateLeft.render(f5);
-		this.HindLegRightShin.render(f5);
-		this.TorsoBackPlateRight.render(f5);
+		if (this.isChild)
+		{
+			GlStateManager.pushMatrix();
+			GlStateManager.translate(0.0F, 8.75F * f5, this.childZOffset * f5);
+			this.HeadMain.render(f5);
+			this.TorsoNeck.render(f5);
+			GlStateManager.popMatrix();
+			GlStateManager.pushMatrix();
+			GlStateManager.scale(0.5F, 0.5F, 0.5F);
+			GlStateManager.translate(0.0F, 24.0F * f5, 0.0F);
+			this.HindLegLeftShin.render(f5);
+			this.TorsoShoulderPlateLeft1.render(f5);
+			this.HindLegRightKnee.render(f5);
+			this.TorsoBack.render(f5);
+			this.TorsoShoulderPlateRight2.render(f5);
+			this.TorsoFront.render(f5);
+			this.HindLegLeftKnee.render(f5);
+			this.HindLegRightCalf.render(f5);
+			this.FrontLegLeftUpper.render(f5);
+			this.FrontLegLeftLower.render(f5);
+			this.FrontLegRightLower.render(f5);
+			this.FrontLegRightUpper.render(f5);
+			this.TorsoSpine.render(f5);
+			this.Tail.render(f5);
+			this.HindLegLeftCalf.render(f5);
+			this.TorsoBelly.render(f5);
+			this.TorsoShoulderPlateLeft2.render(f5);
+			this.TorsoShoulderPlateRight1.render(f5);
+			this.TorsoBackPlateLeft.render(f5);
+			this.HindLegRightShin.render(f5);
+			this.TorsoBackPlateRight.render(f5);
+			GlStateManager.popMatrix();
+		}
+		else
+		{
+			this.HindLegLeftShin.render(f5);
+			this.TorsoShoulderPlateLeft1.render(f5);
+			this.HindLegRightKnee.render(f5);
+			this.TorsoBack.render(f5);
+			this.TorsoShoulderPlateRight2.render(f5);
+			this.TorsoFront.render(f5);
+			this.HindLegLeftKnee.render(f5);
+			this.HindLegRightCalf.render(f5);
+			this.FrontLegLeftUpper.render(f5);
+			this.FrontLegLeftLower.render(f5);
+			this.FrontLegRightLower.render(f5);
+			this.FrontLegRightUpper.render(f5);
+			this.TorsoSpine.render(f5);
+			this.TorsoNeck.render(f5);
+			this.Tail.render(f5);
+			this.HeadMain.render(f5);
+			this.HindLegLeftCalf.render(f5);
+			this.TorsoBelly.render(f5);
+			this.TorsoShoulderPlateLeft2.render(f5);
+			this.TorsoShoulderPlateRight1.render(f5);
+			this.TorsoBackPlateLeft.render(f5);
+			this.HindLegRightShin.render(f5);
+			this.TorsoBackPlateRight.render(f5);
+		}
 	}
 }
