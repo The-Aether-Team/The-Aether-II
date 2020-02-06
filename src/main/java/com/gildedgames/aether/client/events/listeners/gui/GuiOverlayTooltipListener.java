@@ -71,7 +71,7 @@ public class GuiOverlayTooltipListener
 
 					int width = minecraft.fontRenderer.getStringWidth(label);
 					int x = (resolution.getScaledWidth() / 2) - (width / 2);
-					int y = resolution.getScaledHeight() - 70;
+					int y = ((resolution.getScaledHeight() / 2) - 1) + 20;
 
 					Gui.drawRect(x - 3, y - 3, x + width + 3, y + 10, Integer.MIN_VALUE);
 
