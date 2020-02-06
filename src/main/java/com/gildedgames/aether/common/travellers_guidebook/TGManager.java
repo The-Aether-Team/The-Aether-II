@@ -211,6 +211,7 @@ public class TGManager implements ITGManager
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void attachReloadListener()
 	{
 		final IResourceManager resManager = Minecraft.getMinecraft().getResourceManager();
