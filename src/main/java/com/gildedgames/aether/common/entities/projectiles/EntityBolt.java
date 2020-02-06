@@ -20,6 +20,8 @@ public class EntityBolt extends EntityArrow implements IDamageLevelsHolder
 
 	private static final DataParameter<Byte> ABILITY = new DataParameter<>(21, DataSerializers.BYTE);
 
+	private int ticksInAir;
+
 	public EntityBolt(final World worldIn)
 	{
 		super(worldIn);
@@ -64,6 +66,24 @@ public class EntityBolt extends EntityArrow implements IDamageLevelsHolder
 		else
 		{
 			return 0;
+		}
+	}
+
+	public void onUpdate()
+	{
+		super.onUpdate();
+
+		if (this.hasNoGravity())
+		{
+			if (this.ticksInAir == 500)
+			{
+				this.setDead();
+			}
+
+			if (!this.onGround)
+			{
+				++this.ticksInAir;
+			}
 		}
 	}
 
