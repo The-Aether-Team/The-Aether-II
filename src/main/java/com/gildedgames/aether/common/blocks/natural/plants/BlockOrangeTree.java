@@ -132,7 +132,7 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 			}
 			else
 			{
-				for (ItemStack item : this.getFruitDrops(world, state))
+				for (ItemStack item : this.getFruitDrops(world, pos, state))
 				{
 					Block.spawnAsEntity(world, pos, item);
 				}
@@ -202,16 +202,18 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 				.isSuitableSoilBlock(world, pos, state);
 	}
 
-	private ArrayList<ItemStack> getFruitDrops(IBlockAccess world, IBlockState state)
+	private ArrayList<ItemStack> getFruitDrops(IBlockAccess world, BlockPos pos, IBlockState state)
 	{
 		Random rand = world instanceof World ? ((World) world).rand : new Random();
 
-		int count = rand.nextInt(3) + 1;
+		BlockPos bottomBlock = state.getValue(PROPERTY_IS_TOP_BLOCK) ? pos.down() : pos;
 
-		if (state.getBlock() == BlocksAether.aether_grass && state.getValue(BlockAetherGrass.PROPERTY_VARIANT) == BlockAetherGrass.ENCHANTED)
-		{
-			count += 1;
-		}
+		IBlockState soilState = world.getBlockState(bottomBlock.down());
+
+		final boolean applyBonus = (soilState.getBlock() == BlocksAether.aether_grass
+				&& soilState.getValue(BlockAetherGrass.PROPERTY_VARIANT) == BlockAetherGrass.ENCHANTED);
+
+		int count = rand.nextInt(3) + (applyBonus ? 2 : 1);
 
 		return Lists.newArrayList(new ItemStack(ItemsAether.orange, count));
 	}
@@ -246,7 +248,7 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 
 		if (state.getValue(PROPERTY_STAGE) == STAGE_COUNT)
 		{
-			list.addAll(this.getFruitDrops(world, state));
+			list.addAll(this.getFruitDrops(world, pos, state));
 		}
 	}
 

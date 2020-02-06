@@ -3,8 +3,10 @@ package com.gildedgames.aether.common.blocks.natural.plants;
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.blocks.IBlockMultiName;
+import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
+import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
@@ -25,6 +27,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.List;
 import java.util.Random;
 
 /*
@@ -180,23 +183,70 @@ public class BlockValkyrieGrass extends BlockAetherPlant implements IBlockMultiN
 
 			if (!world.isRemote)
 			{
-				final Random random = new Random();
-				Block.spawnAsEntity(world, pos, new ItemStack(ItemsAether.valkyrie_wings));
+				for (final ItemStack item : this.getWingDrops(world, pos, state))
+				{
+					final Random random = new Random();
 
-				// randomly spawn a kirrid grass sprout
+					Block.spawnAsEntity(world, pos, item);
+
+					if (random.nextInt(3) == 1)
+					{
+						Block.spawnAsEntity(world, pos, new ItemStack(BlocksAether.valkyrie_grass));
+					}
+				}
+			}
+
+			world.setBlockState(pos, state.withProperty(PROPERTY_HARVESTABLE, false));
+
+			return false;
+		}
+
+		return super.removedByPlayer(state, world, pos, player, willHarvest);
+	}
+
+	@Override
+	protected void invalidateBlock(World world, BlockPos pos, IBlockState state)
+	{
+		if (world.isAirBlock(pos.down()))
+		{
+			world.setBlockToAir(pos);
+
+			Block.spawnAsEntity(world, pos, new ItemStack(BlocksAether.valkyrie_grass));
+
+			for (final ItemStack item : this.getWingDrops(world, pos, state))
+			{
+				final Random random = new Random();
+
+				Block.spawnAsEntity(world, pos, item);
+
 				if (random.nextInt(3) == 1)
 				{
 					Block.spawnAsEntity(world, pos, new ItemStack(BlocksAether.valkyrie_grass));
 				}
 			}
-
-			world.setBlockState(pos, state.withProperty(PROPERTY_HARVESTABLE, false).withProperty(PROPERTY_VARIANT, SPROUT));
-
-			return false;
-
 		}
+	}
 
-		return super.removedByPlayer(state, world, pos, player, willHarvest);
+	@Override
+	public List<ItemStack> getDrops(final IBlockAccess world, final BlockPos pos, final IBlockState state, final int fortune)
+	{
+		final List<ItemStack> items = super.getDrops(world, pos, state, fortune);
+
+		items.addAll(this.getWingDrops(world, pos, state));
+
+		return items;
+	}
+
+	private List<ItemStack> getWingDrops(final IBlockAccess world, final BlockPos pos, final IBlockState state)
+	{
+		final IBlockState stateUnderneath = world.getBlockState(pos.down());
+
+		final boolean applyBonus = stateUnderneath.getBlock() == BlocksAether.aether_grass
+				&& stateUnderneath.getValue(BlockAetherGrass.PROPERTY_VARIANT) == BlockAetherGrass.ENCHANTED;
+
+		final int count = state.getValue(PROPERTY_HARVESTABLE) ? (1 + (applyBonus ? 1 : 0)) : 0;
+
+		return Lists.newArrayList(new ItemStack(ItemsAether.valkyrie_wings, count));
 	}
 
 	@Override
