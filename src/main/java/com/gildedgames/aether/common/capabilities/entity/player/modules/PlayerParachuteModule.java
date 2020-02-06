@@ -1,12 +1,10 @@
 package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
 import com.gildedgames.aether.api.player.IPlayerAetherModule;
-import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.entities.blocks.EntityParachute;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
@@ -20,6 +18,10 @@ public class PlayerParachuteModule extends PlayerAetherModule implements IPlayer
 {
 
 	private boolean isParachuting;
+
+	private boolean parachuteEquipped;
+
+	public ItemStack parachuteItem;
 
 	private EntityParachute.Type type = EntityParachute.Type.COLD;
 
@@ -42,14 +44,6 @@ public class PlayerParachuteModule extends PlayerAetherModule implements IPlayer
 			final int z = MathHelper.floor(this.getEntity().posZ);
 
 			final Vec3d vec3 = this.getEntity().getLookVec();
-
-			if (this.getParachuteType() == EntityParachute.Type.BLUE)
-			{
-				if (this.getEntity().posY >= this.getEntity().world.getActualHeight() || this.isUnderABlock(y))
-				{
-					this.setParachuting(false, this.type);
-				}
-			}
 
 			this.getEntity().fallDistance = 0F;
 
@@ -74,28 +68,9 @@ public class PlayerParachuteModule extends PlayerAetherModule implements IPlayer
 	{
 		this.isParachuting = isParachuting;
 		this.type = type;
-
-		if (isParachuting)
-		{
-			this.prevAllowFlying = this.getEntity().capabilities.allowFlying;
-			this.getEntity().capabilities.allowFlying = true;
-		}
-
-		if (!isParachuting)
-		{
-			if (!this.getEntity().getEntityWorld().isRemote)
-			{
-				final EntityItem block = new EntityItem(this.getEntity().getEntityWorld(), this.getEntity().posX, this.getEntity().posY, this.getEntity().posZ,
-						new ItemStack(ItemsAether.cloud_parachute, 1, type.ordinal()));
-
-				this.getEntity().getEntityWorld().spawnEntity(block);
-			}
-
-			this.getEntity().capabilities.allowFlying = this.prevAllowFlying;
-		}
 	}
 
-	private boolean isUnderABlock(final int y)
+	public boolean isUnderABlock(final int y)
 	{
 		final AxisAlignedBB boundingBox = this.getEntity().getEntityBoundingBox();
 
@@ -113,6 +88,26 @@ public class PlayerParachuteModule extends PlayerAetherModule implements IPlayer
 		}
 
 		return false;
+	}
+
+	public void parachuteEquipped(boolean equipped)
+	{
+		this.parachuteEquipped = equipped;
+	}
+
+	public boolean getParachuteEquipped()
+	{
+		return this.parachuteEquipped;
+	}
+
+	public void parachuteItem(ItemStack stack)
+	{
+		this.parachuteItem = stack;
+	}
+
+	public ItemStack getParachuteItem()
+	{
+		return this.parachuteItem;
 	}
 
 	public EntityParachute.Type getParachuteType()
