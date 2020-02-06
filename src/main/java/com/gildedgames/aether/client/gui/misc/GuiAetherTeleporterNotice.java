@@ -65,21 +65,21 @@ public class GuiAetherTeleporterNotice extends GuiViewer
 
 		this.getViewing().dim().mod().width(this.width).height(this.height).flush();
 
-		this.center = InputHelper.getCenter().clone().addX(-60).flush();
+		this.center = InputHelper.getCenter().clone().addX(-67).flush();
 
-		this.backdrop = new GuiTexture(Dim2D.build().width(200).height(121).pos(this.center).center(true).flush(), BACKDROP);
+		this.backdrop = new GuiTexture(Dim2D.build().width(200).height(134).pos(this.center).center(true).flush(), BACKDROP);
 
 		this.matrix = new GuiTexture(Dim2D.build().width(111).height(68).pos(this.center).addX(170).center(true).flush(), MATRIX);
 
-		this.title = new GuiText(Dim2D.build().pos(this.center).addX(-67).addY(-83).flush(),
+		this.title = new GuiText(Dim2D.build().pos(this.center).addX(-67).addY(-90).flush(),
 				new Text(new TextComponentTranslation("notice.holdUp"), 2.0F));
 
-		this.body = new GuiTextBox(Dim2D.build().pos(this.center).width(180).height(60).addX(-84).addY(-44).flush(),
+		this.body = new GuiTextBox(Dim2D.build().pos(this.center).width(180).height(60).addX(-84).addY(-52).flush(),
 				false, new Text(new TextComponentTranslation(
 				"notice.body"),
 				1.0F));
 
-		this.close = new GuiButtonVanilla(Dim2D.build().width(80).height(20).pos(this.center).addX(-84).addY(27).flush());
+		this.close = new GuiButtonVanilla(Dim2D.build().width(80).height(20).pos(this.center).addX(-84).addY(33).flush());
 
 		this.close.getInner().displayString = I18n.format("notice.gotcha");
 
