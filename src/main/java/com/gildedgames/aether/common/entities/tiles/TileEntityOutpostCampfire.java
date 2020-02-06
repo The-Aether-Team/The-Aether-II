@@ -6,6 +6,7 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.multiblock.BlockMultiController;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerCampfiresModule;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerSwetTrackerModule;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTeleportingModule;
 import com.gildedgames.aether.common.entities.tiles.multiblock.TileEntityMultiblockController;
 import com.gildedgames.aether.common.init.DimensionsAether;
@@ -48,7 +49,8 @@ public class TileEntityOutpostCampfire extends TileEntityMultiblockController im
 	@Override
 	public boolean onInteract(final EntityPlayer player)
 	{
-		if (player instanceof EntityPlayerMP && player.world.provider.getDimensionType() == DimensionsAether.AETHER)
+		if (player instanceof EntityPlayerMP && player.world.provider.getDimensionType() == DimensionsAether.AETHER && !player.isRiding() && !player.isBeingRidden()
+				&& PlayerAether.getPlayer(player).getModule(PlayerSwetTrackerModule.class).getLatchedSwets().isEmpty())
 		{
 			final EntityPlayerMP playerMP = (EntityPlayerMP) player;
 

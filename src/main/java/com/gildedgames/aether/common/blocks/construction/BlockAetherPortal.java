@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.registrar.SoundsAether;
 import com.gildedgames.aether.client.renderer.particles.ParticleAetherPortal;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerSwetTrackerModule;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerTeleportingModule;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBreakable;
@@ -12,6 +13,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -164,7 +166,8 @@ public class BlockAetherPortal extends BlockBreakable
 	@Override
 	public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity)
 	{
-		if (entity instanceof EntityPlayer)
+		if (entity instanceof EntityPlayer && !entity.isRiding() && !entity.isBeingRidden()
+				&& PlayerAether.getPlayer((EntityPlayer) entity).getModule(PlayerSwetTrackerModule.class).getLatchedSwets().isEmpty())
 		{
 			PlayerAether playerAether = PlayerAether.getPlayer((EntityPlayer) entity);
 			playerAether.getModule(PlayerTeleportingModule.class).processTeleporting();
