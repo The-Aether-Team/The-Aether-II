@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -41,7 +42,10 @@ public class ItemBlockCustomSlab extends ItemBlock
 			{
 				IBlockState newState = state.withProperty(BlockCustomSlab.PROPERTY_SLAB_STATE, EnumSlabPart.FULL_BLOCK);
 
-				if (player.canPlayerEdit(target, facing, stack) && world.setBlockState(target, newState, 11))
+				AxisAlignedBB boundingBox = newState.getCollisionBoundingBox(world, pos);
+
+				if (boundingBox != Block.NULL_AABB && world.checkNoEntityCollision(boundingBox.offset(pos))
+						&& player.canPlayerEdit(target, facing, stack) && world.setBlockState(target, newState, 11))
 				{
 					stack.shrink(1);
 
