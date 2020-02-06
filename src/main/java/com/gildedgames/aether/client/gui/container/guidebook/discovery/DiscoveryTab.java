@@ -44,6 +44,7 @@ public class DiscoveryTab extends GuiAbstractButton
 		BESTIARY
 				{
 					@Override
+					@SideOnly(Side.CLIENT)
 					public GuiContainer createPageContainer(final PlayerAether playerAether)
 					{
 						return new GuiGuidebookDiscoveryBestiary(null, playerAether);
@@ -51,6 +52,7 @@ public class DiscoveryTab extends GuiAbstractButton
 				}, BIOMES
 			{
 				@Override
+				@SideOnly(Side.CLIENT)
 				public GuiContainer createPageContainer(final PlayerAether playerAether)
 				{
 					return new GuiGuidebookDiscoveryBiomes(null, playerAether);
@@ -58,6 +60,7 @@ public class DiscoveryTab extends GuiAbstractButton
 			}, STRUCTURES
 			{
 				@Override
+				@SideOnly(Side.CLIENT)
 				public GuiContainer createPageContainer(final PlayerAether playerAether)
 				{
 					return new GuiGuidebookDiscoveryStructures(null, playerAether);
@@ -65,6 +68,7 @@ public class DiscoveryTab extends GuiAbstractButton
 			}, CHARACTERS
 			{
 				@Override
+				@SideOnly(Side.CLIENT)
 				public GuiContainer createPageContainer(final PlayerAether playerAether)
 				{
 					return new GuiGuidebookDiscoveryCharacters(null, playerAether);
