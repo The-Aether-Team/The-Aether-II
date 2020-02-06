@@ -1,0 +1,16 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "X"
+  ],
+  "key": {
+    "X": {
+      "type": "forge:ore_dict",
+      "ore": "greatroot_decorative"
+    }
+  },
+  "result": {
+    "item": "aether:dark_skyroot_planks",
+    "count": 1
+  }
+}
