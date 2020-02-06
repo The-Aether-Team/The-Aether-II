@@ -10,7 +10,7 @@ public class ItemEnchantedWyndberry extends ItemAetherFood
 {
 	public ItemEnchantedWyndberry()
 	{
-		super(8, false);
+		super(5, 0.6F, false);
 	}
 
 	@Override
