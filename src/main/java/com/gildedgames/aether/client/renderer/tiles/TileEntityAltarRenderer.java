@@ -20,7 +20,7 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer<TileEntit
 
 	private final ResourceLocation texture = AetherCore.getResource("textures/tile_entities/altar.png");
 
-	private final double radius = 0.5D;
+	private final double radius = 0.4D;
 
 	private final double theta = 5.0D;
 
