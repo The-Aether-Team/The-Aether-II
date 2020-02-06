@@ -104,10 +104,14 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 				{
 					if (world.getBlockState(pos.up()).getBlock() == BlocksAether.brettl_plant)
 					{
-						if (rand.nextInt(5) == 0)
+						if (world.getBlockState(pos.up(2)).getBlock() == BlocksAether.brettl_plant || world.isAirBlock(pos.up(2)))
 						{
-							this.grow(world, rand, pos, state);
+							if (rand.nextInt(5) == 0)
+							{
+								this.grow(world, rand, pos, state);
+							}
 						}
+
 					}
 				}
 
@@ -115,6 +119,7 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 				{
 					if (world.getBlockState(pos.up()).getBlock() == BlocksAether.brettl_plant && world.getBlockState(pos.up()).getValue(PROPERTY_VARIANT).getMeta() == BRETTL_PLANT_MID)
 					{
+
 						if (rand.nextInt(5) == 0)
 						{
 							this.grow(world, rand, pos, state);
