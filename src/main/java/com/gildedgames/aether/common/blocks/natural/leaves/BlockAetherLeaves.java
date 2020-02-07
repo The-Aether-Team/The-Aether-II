@@ -87,8 +87,6 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 			return;
 		}
 
-		super.randomDisplayTick(state, world, pos, rand);
-
 		if (this == BlocksAether.amberoot_leaves)
 		{
 			if (rand.nextInt(100) > 90)
@@ -121,13 +119,7 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 			}
 		}
 
-		if (!world.canSnowAt(pos.up(), true) && world.isRaining() && world.canBlockSeeSky(pos.up()) && world.isAirBlock(pos.up()) && !world.getBlockState(pos.down()).isTopSolid() && rand.nextInt(15) == 1)
-		{
-			double d0 = (double)((float)pos.getX() + rand.nextFloat());
-			double d1 = (double)pos.getY() - 0.05D;
-			double d2 = (double)((float)pos.getZ() + rand.nextFloat());
-			world.spawnParticle(EnumParticleTypes.DRIP_WATER, d0, d1, d2, 0.0D, 0.0D, 0.0D);
-		}
+		super.randomDisplayTick(state, world, pos, rand);
 	}
 
 	@Override
