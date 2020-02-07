@@ -455,22 +455,28 @@ public class ItemCrossbow extends Item
 	{
 		final float seconds = this.durationInTicks / 20.0F;
 
-		tooltip.add(TextFormatting.BLUE + I18n.format("item.aether.crossbow.desc1"));
+		tooltip.add(String.format("%s: %s",
+				TextFormatting.BLUE + I18n.format("item.aether.crossbow.desc4"),
+				TextFormatting.WHITE + I18n.format("item.aether." + this.cBType.name + ".ability")));
+
+		tooltip.add(String.format("%s: %s",
+				TextFormatting.DARK_AQUA + I18n.format("item.aether.tooltip.use"),
+				TextFormatting.WHITE + I18n.format("item.aether.crossbow.use.desc")));
+
+		tooltip.add("");
 
 		if (seconds == Math.floor(seconds))
 		{
-			tooltip.add(TextFormatting.GRAY + "\u2022 " + (int) Math.floor(seconds) + " " + I18n.format(
-					"item.aether.crossbow.desc" + (seconds < 1 || seconds > 1 ? "2" : "3")));
+			tooltip.add(TextFormatting.GRAY + "" + (int) Math.floor(seconds) + " " + I18n.format(
+					"item.aether.crossbow.desc3") + I18n.format("item.aether.crossbow.desc1"));
 		}
 		else
 		{
-			tooltip.add(TextFormatting.GRAY + "\u2022 " + seconds + " " + I18n.format(
-					"item.aether.crossbow.desc" + (seconds < 1 || seconds > 1 ? "2" : "3")));
+			tooltip.add(TextFormatting.GRAY + "" + seconds + " " + I18n.format(
+					"item.aether.crossbow.desc3") + I18n.format("item.aether.crossbow.desc1"));
 		}
-
-		tooltip.add(TextFormatting.BLUE + I18n.format("item.aether.crossbow.desc4"));
-		tooltip.add(TextFormatting.GRAY + "\u2022 " + I18n.format("item.aether." + this.cBType.name + ".ability"));
 	}
+
 
 	@Override
 	public int getItemBurnTime(ItemStack itemStack)
