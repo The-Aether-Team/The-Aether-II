@@ -2,9 +2,9 @@ package com.gildedgames.aether.common.recipes.altar;
 
 import com.gildedgames.aether.api.recipes.altar.IAltarRecipe;
 import com.gildedgames.aether.common.init.MaterialsAether;
+import com.gildedgames.aether.common.items.armor.ItemAetherShield;
 import com.gildedgames.aether.common.items.tools.ItemArkeniumShears;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemCrossbow;
-import com.gildedgames.aether.common.items.weapons.swords.ItemAetherSword;
 import net.minecraft.item.*;
 
 public class AltarRepairRecipe implements IAltarRecipe
@@ -12,8 +12,15 @@ public class AltarRepairRecipe implements IAltarRecipe
 	@Override
 	public boolean matchesInput(final ItemStack stack)
 	{
-		return (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemTool || stack.getItem() instanceof ItemArmor || stack.getItem() instanceof ItemShears || stack.getItem() instanceof ItemArkeniumShears || stack.getItem() instanceof ItemCrossbow || stack.getItem() instanceof ItemBow)
-				&& stack.isItemDamaged();
+		return (stack.getItem() instanceof ItemSword
+				|| stack.getItem() instanceof ItemTool
+				|| stack.getItem() instanceof ItemArmor
+				|| stack.getItem() instanceof ItemShears
+				|| stack.getItem() instanceof ItemArkeniumShears
+				|| stack.getItem() instanceof ItemCrossbow
+				|| stack.getItem() instanceof ItemBow
+				|| stack.getItem() instanceof ItemAetherShield
+		) && stack.isItemDamaged();
 	}
 
 	@Override
@@ -25,7 +32,7 @@ public class AltarRepairRecipe implements IAltarRecipe
 	@Override
 	public int getAmbrosiumCost(final ItemStack stack)
 	{
-		if (stack.getItem() instanceof ItemAetherSword || stack.getItem() instanceof ItemCrossbow || stack.getItem() instanceof ItemBow)
+		if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemCrossbow || stack.getItem() instanceof ItemBow || stack.getItem() instanceof ItemAetherShield)
 		{
 			return 6;
 		}

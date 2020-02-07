@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.client.models.entities.tile.ModelAltar;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.tiles.TileEntityAltar;
+import com.gildedgames.aether.common.items.armor.ItemAetherShield;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderItem;
@@ -77,6 +78,13 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer<TileEntit
 				{
 					GlStateManager.scale(0.25F, 0.25F, 0.25F);
 					GlStateManager.translate(0.0f, -0.05f, 0.0f);
+				}
+				else if (stack.getItem() instanceof ItemAetherShield)
+				{
+					GlStateManager.scale(0.5F, 0.5F, 0.5F);
+					GlStateManager.translate(0.0f, -0.45f, 0.0f);
+					GlStateManager.rotate(-90.0f, 90.0f, 0.0f, 0.0f);
+					GlStateManager.rotate(0.0f, 0.0f, 0.0f, 90.0f);
 				}
 				else
 				{

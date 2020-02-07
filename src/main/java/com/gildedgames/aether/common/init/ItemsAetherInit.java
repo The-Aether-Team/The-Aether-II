@@ -55,7 +55,7 @@ public class ItemsAetherInit
 		r.register("arkenium_leggings", new ItemArkeniumArmor(EntityEquipmentSlot.LEGS).pierceDefense(2).<ItemArkeniumArmor>impactDefense(1));
 		r.register("arkenium_pickaxe", new ItemAetherPickaxe(MaterialsAether.ARKENIUM_TOOL));
 		r.register("arkenium_shears", new ItemArkeniumShears().setCreativeTab(CreativeTabsAether.TAB_TOOLS));
-		r.register("arkenium_shield", new ItemAetherShield());
+		r.register("arkenium_shield", new ItemAetherShield().setMaxDamage(6154));
 		r.register("arkenium_shovel", new ItemAetherShovel(MaterialsAether.ARKENIUM_TOOL));
 		r.register("arkenium_strip", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("arkenium_sword", new ItemArkeniumSword());
@@ -90,7 +90,7 @@ public class ItemsAetherInit
 		r.register("gravitite_leggings", new ItemGravititeArmor(EntityEquipmentSlot.LEGS).<ItemGravititeArmor>pierceDefense(3));
 		r.register("gravitite_pickaxe", new ItemAetherPickaxe(MaterialsAether.GRAVITITE_TOOL));
 		r.register("gravitite_plate", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
-		r.register("gravitite_shield", new ItemAetherShield());
+		r.register("gravitite_shield", new ItemAetherShield().setMaxDamage(3010));
 		r.register("gravitite_shovel", new ItemAetherShovel(MaterialsAether.GRAVITITE_TOOL));
 		r.register("gravitite_sword", new ItemGravititeSword());
 		r.register("healing_stone", new ItemHealingStone().setMaxStackSize(1).setCreativeTab(CreativeTabsAether.TAB_CONSUMABLES));
@@ -98,7 +98,7 @@ public class ItemsAetherInit
 		r.register("holystone_axe", new ItemAetherAxe(MaterialsAether.HOLYSTONE_TOOL));
 		r.register("holystone_crossbow", new ItemCrossbow().setDurationInTicks(30).setKnockBackValue(0.7F).setType(ItemCrossbow.crossBowTypes.HOLYSTONE));
 		r.register("holystone_pickaxe", new ItemAetherPickaxe(MaterialsAether.HOLYSTONE_TOOL));
-		r.register("holystone_shield", new ItemAetherShield());
+		r.register("holystone_shield", new ItemAetherShield().setMaxDamage(253));
 		r.register("holystone_shovel", new ItemAetherShovel(MaterialsAether.HOLYSTONE_TOOL));
 		r.register("holystone_sword", new ItemHolystoneSword());
 		r.register("icestone", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
@@ -149,7 +149,7 @@ public class ItemsAetherInit
 		r.register("skyroot_milk_bucket", new ItemSkyrootConsumableBucket());
 		r.register("skyroot_pickaxe", new ItemAetherPickaxe(MaterialsAether.SKYROOT_TOOL));
 		r.register("skyroot_poison_bucket", new ItemSkyrootConsumableBucket());
-		r.register("skyroot_shield", new ItemAetherShield());
+		r.register("skyroot_shield", new ItemAetherShield().setMaxDamage(114));
 		r.register("skyroot_shovel", new ItemAetherShovel(MaterialsAether.SKYROOT_TOOL));
 		r.register("skyroot_sign", new ItemSkyrootSign().setCreativeTab(CreativeTabsAether.TAB_CONSTRUCTION));
 		r.register("skyroot_stick", new ItemSkyrootStick().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
@@ -182,7 +182,7 @@ public class ItemsAetherInit
 		r.register("zanite_helmet", new ItemZaniteArmor(EntityEquipmentSlot.HEAD).<ItemZaniteArmor>impactDefense(2));
 		r.register("zanite_leggings", new ItemZaniteArmor(EntityEquipmentSlot.LEGS).<ItemZaniteArmor>pierceDefense(2));
 		r.register("zanite_pickaxe", new ItemAetherPickaxe(MaterialsAether.ZANITE_TOOL));
-		r.register("zanite_shield", new ItemAetherShield());
+		r.register("zanite_shield", new ItemAetherShield().setMaxDamage(482));
 		r.register("zanite_shovel", new ItemAetherShovel(MaterialsAether.ZANITE_TOOL));
 		r.register("zanite_sword", new ItemZaniteSword());
 	}
