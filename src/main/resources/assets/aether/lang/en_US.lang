@@ -539,6 +539,7 @@ item.aether.present.tooltip.hasitem=Contains an item inside!
 
 
 tile.aether.aether_portal.name=Aether Portal
+tile.aether.campfire.mobNotification=You can't bring mobs with you outside of the Aether.
 
 cloudParachute.ability.rightClick=§3Use:§r Right-Click
 cloudParachute.ability=§9Ability:

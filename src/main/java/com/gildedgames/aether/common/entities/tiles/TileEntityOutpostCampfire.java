@@ -49,33 +49,39 @@ public class TileEntityOutpostCampfire extends TileEntityMultiblockController im
 	@Override
 	public boolean onInteract(final EntityPlayer player)
 	{
-		if (player instanceof EntityPlayerMP && player.world.provider.getDimensionType() == DimensionsAether.AETHER && !player.isRiding() && !player.isBeingRidden()
-				&& PlayerAether.getPlayer(player).getModule(PlayerSwetTrackerModule.class).getLatchedSwets().isEmpty())
+		if (player instanceof EntityPlayerMP)
 		{
-			final EntityPlayerMP playerMP = (EntityPlayerMP) player;
-
-			final PlayerAether playerAether = PlayerAether.getPlayer(player);
-
-			final PlayerTeleportingModule teleportingModule = playerAether.getModule(PlayerTeleportingModule.class);
-			teleportingModule.setAetherPos(new BlockPosDimension((int) player.posX, (int) player.posY, (int) player.posZ, player.dimension));
-
-			BlockPosDimension pos = teleportingModule.getNonAetherPos();
-
-			if (pos == null)
+			if (player.world.provider.getDimensionType() == DimensionsAether.AETHER && !player.isRiding() && !player.isBeingRidden()
+					&& PlayerAether.getPlayer(player).getModule(PlayerSwetTrackerModule.class).getLatchedSwets().isEmpty())
 			{
-				pos = new BlockPosDimension(DimensionManager.getWorld(0).getSpawnPoint(), 0);
+				final EntityPlayerMP playerMP = (EntityPlayerMP) player;
+
+				final PlayerAether playerAether = PlayerAether.getPlayer(player);
+
+				final PlayerTeleportingModule teleportingModule = playerAether.getModule(PlayerTeleportingModule.class);
+				teleportingModule.setAetherPos(new BlockPosDimension((int) player.posX, (int) player.posY, (int) player.posZ, player.dimension));
+
+				BlockPosDimension pos = teleportingModule.getNonAetherPos();
+
+				if (pos == null) {
+					pos = new BlockPosDimension(DimensionManager.getWorld(0).getSpawnPoint(), 0);
+				}
+
+				final MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
+
+				final Teleporter teleporter = new TeleporterGeneric(server.getWorld(player.dimension));
+				PlayerList playerList = server.getPlayerList();
+				playerList.transferPlayerToDimension(playerMP, pos.getDim(), teleporter);
+				player.timeUntilPortal = player.getPortalCooldown();
+
+				playerMP.connection.setPlayerLocation(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 0, 0);
+
+				return true;
 			}
-
-			final MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
-
-			final Teleporter teleporter = new TeleporterGeneric(server.getWorld(player.dimension));
-			PlayerList playerList = server.getPlayerList();
-			playerList.transferPlayerToDimension(playerMP, pos.getDim(), teleporter);
-			player.timeUntilPortal = player.getPortalCooldown();
-
-			playerMP.connection.setPlayerLocation(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 0, 0);
-
-			return true;
+			else
+			{
+				player.sendStatusMessage(new TextComponentTranslation("tile.aether.campfire.mobNotification"), true);
+			}
 		}
 
 		return false;
