@@ -59,10 +59,8 @@ public class RecipesAether
 		OreDictionary.registerOre("aerleather", ItemsAether.burrukai_pelt);
 		OreDictionary.registerOre("sugar", ItemsAether.swet_sugar);
 
-		for (BlockVariant variant : BlockHolystone.PROPERTY_VARIANT.getAllowedValues())
-		{
-			OreDictionary.registerOre("holystone", new ItemStack(BlocksAether.holystone, 1, variant.getMeta()));
-		}
+		OreDictionary.registerOre("holystone", new ItemStack(BlocksAether.holystone, 1, 0));
+		OreDictionary.registerOre("holystone", new ItemStack(BlocksAether.holystone, 1, 1));
 
 		for (BlockVariant variant : BlockSkyrootDecorative.PROPERTY_VARIANT.getAllowedValues())
 		{
