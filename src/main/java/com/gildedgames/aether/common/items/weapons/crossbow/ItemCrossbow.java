@@ -501,8 +501,8 @@ public class ItemCrossbow extends Item
 		SKYROOT(1F, 1.f,82, "skyroot_crossbow"),
 		HOLYSTONE(1.2F, 1.f,181, "holystone_crossbow"),
 		ZANITE(1.3F, 1.5f,346, "zanite_crossbow"),
-		ARKENIUM(1.4F, 2.0f,2160, "arkenium_crossbow"),
-		GRAVETITE(1.6F, 1.f,4418, "gravitite_crossbow");
+		ARKENIUM(1.4F, 2.0f,4418, "arkenium_crossbow"),
+		GRAVETITE(1.6F, 1.f,2160, "gravitite_crossbow");
 
 		final float damageMultiplier;
 
