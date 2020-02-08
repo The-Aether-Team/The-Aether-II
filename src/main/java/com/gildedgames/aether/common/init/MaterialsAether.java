@@ -22,6 +22,9 @@ public class MaterialsAether
 	public static final ArmorMaterial LEGENDARY_ARMOR = EnumHelper.addArmorMaterial("AETHER_LEGENDARY", "", 30, new int[] { 2, 6, 5,
 			2 }, 10, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 1.0F);
 
+	public static final ArmorMaterial ARKENIUM_ARMOR = EnumHelper.addArmorMaterial("AETHER_ARKENIUM", "", 44,
+			new int[] { 3, 6, 8, 3 }, 10, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 2.0F);
+
 	public static final ArmorMaterial WINTER_ARMOR = EnumHelper.addArmorMaterial("winter", "", 8,
 			new int[] { 0, 0, 0, 0 }, 25, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0F).setRepairItem(new ItemStack(Blocks.WOOL, 1, OreDictionary.WILDCARD_VALUE));
 
