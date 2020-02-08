@@ -17,10 +17,10 @@ public class BlockRockGlassTranslucent extends BlockBreakable
 	{
 		super(Material.GLASS, false);
 
-		this.setHardness(1f);
+		this.setHardness(0.3f);
 		this.setResistance(2000f);
 
-		this.setLightOpacity(3);
+		this.setLightOpacity(0);
 
 		this.setSoundType(SoundType.GLASS);
 	}

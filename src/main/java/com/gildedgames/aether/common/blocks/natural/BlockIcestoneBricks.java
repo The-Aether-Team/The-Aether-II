@@ -19,7 +19,8 @@ public class BlockIcestoneBricks extends Block
 	{
 		super(Material.ROCK);
 
-		this.setHardness(3f);
+		this.setHardness(2.0f);
+		this.setResistance(10.0f);
 
 		this.setSoundType(SoundType.GLASS);
 	}

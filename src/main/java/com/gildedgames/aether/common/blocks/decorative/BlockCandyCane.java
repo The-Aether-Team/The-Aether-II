@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.blocks.decorative;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
+import com.gildedgames.aether.api.registrar.ItemsAether;
 import net.minecraft.block.BlockRotatedPillar;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
@@ -18,6 +19,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -29,7 +31,7 @@ public class BlockCandyCane extends BlockRotatedPillar
 
 	public BlockCandyCane()
 	{
-		super(Material.GLASS);
+		super(Material.WOOD);
 		this.setHardness(0.5F);
 		this.setSoundType(SoundType.GLASS);
 	}
@@ -56,19 +58,19 @@ public class BlockCandyCane extends BlockRotatedPillar
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
-		return Items.SUGAR;
+		return ItemsAether.candy_cane;
 	}
 
 	@Override
 	public int quantityDroppedWithBonus(int fortune, Random random)
 	{
-		return this.quantityDropped(random) + random.nextInt(fortune + 1);
+		return MathHelper.clamp(this.quantityDropped(random) + random.nextInt(fortune + 1), 1, 4);
 	}
 
 	@Override
 	public int quantityDropped(Random random)
 	{
-		return 6 + random.nextInt(3);
+		return 2 + random.nextInt(3);
 	}
 
 	@Override

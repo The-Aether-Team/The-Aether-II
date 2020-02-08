@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.blocks.construction;
 
 import com.gildedgames.aether.common.blocks.multiblock.BlockMultiController;
 import com.gildedgames.aether.common.entities.tiles.TileEntityOutpostCampfire;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
@@ -20,9 +21,12 @@ public class BlockOutpostCampfire extends BlockMultiController
 	public BlockOutpostCampfire(final Material materialIn)
 	{
 		super(materialIn);
+		this.setSoundType(SoundType.STONE);
 
 		this.setBlockUnbreakable();
+		this.setResistance(6000000f);
 		this.setLightOpacity(0);
+		this.setLightLevel(1f);
 	}
 
 	@Override

@@ -12,16 +12,18 @@ public class BlockRockGlassPane extends BlockPane
 {
 	private final Block block;
 
-	public BlockRockGlassPane(Block block)
+	public BlockRockGlassPane(Block block, Material material)
 	{
-		super(Material.ROCK, true);
+		super(material, true);
 
 		this.block = block;
 
-		this.setHardness(0.3F);
+		this.setHardness(1.0F);
+		this.setResistance(2000f);
+
 		this.setSoundType(SoundType.GLASS);
 
-		this.setLightOpacity(0);
+		this.setLightOpacity(3);
 	}
 
 	@Override

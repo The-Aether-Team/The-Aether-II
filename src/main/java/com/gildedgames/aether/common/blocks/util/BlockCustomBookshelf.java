@@ -19,7 +19,6 @@ public class BlockCustomBookshelf extends Block
 		super(material);
 
 		this.setSoundType(soundType);
-		this.setHardness(2.0F);
 	}
 
 	@Override

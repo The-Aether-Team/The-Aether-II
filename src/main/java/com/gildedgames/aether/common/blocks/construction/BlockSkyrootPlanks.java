@@ -11,6 +11,7 @@ public class BlockSkyrootPlanks extends BlockBuilder
 		super(Material.WOOD);
 
 		this.setSoundType(SoundType.WOOD);
-		this.setHardness(2f);
+		this.setHardness(2.0f);
+		this.setResistance(5.0F);
 	}
 }

@@ -14,7 +14,7 @@ public class BlockCustomLadder extends BlockLadder implements IBlockWithItem
 	{
 		super();
 
-		this.setSoundType(SoundType.WOOD);
+		this.setSoundType(SoundType.LADDER);
 
 		this.setHardness(0.4f);
 
