@@ -1,7 +1,10 @@
 package com.gildedgames.aether.common.blocks.natural;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
+import com.gildedgames.aether.common.blocks.IBlockWithItem;
 import com.gildedgames.aether.common.blocks.util.BlockBuilder;
+import com.gildedgames.aether.common.items.blocks.ItemBlockCustomSapling;
+import com.gildedgames.aether.common.items.blocks.ItemBlockFloorObject;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -9,6 +12,7 @@ import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -20,7 +24,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class BlockFloorObject extends BlockBuilder
+public class BlockFloorObject extends BlockBuilder implements IBlockWithItem
 {
 
 	private static final AxisAlignedBB AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.3D, 0.9D);
@@ -126,6 +130,12 @@ public class BlockFloorObject extends BlockBuilder
 	protected void invalidateBlock(World world, BlockPos pos)
 	{
 		world.setBlockToAir(pos);
+	}
+
+	@Override
+	public ItemBlock createItemBlock()
+	{
+		return new ItemBlockFloorObject(this);
 	}
 
 }

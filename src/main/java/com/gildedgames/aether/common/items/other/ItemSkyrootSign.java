@@ -73,4 +73,10 @@ public class ItemSkyrootSign extends Item
 			}
 		}
 	}
+
+	@Override
+	public int getItemBurnTime(ItemStack itemStack)
+	{
+		return 200;
+	}
 }

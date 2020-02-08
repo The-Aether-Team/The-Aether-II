@@ -7,6 +7,7 @@ import com.gildedgames.aether.api.registrar.SoundsAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.items.ItemDropOnDeath;
 import com.gildedgames.aether.common.items.armor.*;
+import com.gildedgames.aether.common.items.blocks.ItemBlockCustomDoor;
 import com.gildedgames.aether.common.items.consumables.*;
 import com.gildedgames.aether.common.items.irradiated.ItemIrradiated;
 import com.gildedgames.aether.common.items.irradiated.ItemIrradiatedVisuals;
@@ -49,7 +50,7 @@ public class ItemsAetherInit
 		r.register("arkenium_boots", new ItemArkeniumArmor(EntityEquipmentSlot.FEET).pierceDefense(1).<ItemArkeniumArmor>impactDefense(1));
 		r.register("arkenium_chestplate", new ItemArkeniumArmor(EntityEquipmentSlot.CHEST).slashDefense(2).<ItemArkeniumArmor>impactDefense(1));
 		r.register("arkenium_crossbow", new ItemCrossbow().setDurationInTicks(35).setKnockBackValue(0.5F).setType(ItemCrossbow.crossBowTypes.ARKENIUM));
-		r.register("arkenium_door_item", new ItemDoor(BlocksAether.arkenium_door).setCreativeTab(CreativeTabsAether.TAB_CONSTRUCTION));
+		r.register("arkenium_door_item", new ItemBlockCustomDoor(BlocksAether.arkenium_door).setCreativeTab(CreativeTabsAether.TAB_CONSTRUCTION));
 		r.register("arkenium_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.ARKENIUM));
 		r.register("arkenium_helmet", new ItemArkeniumArmor(EntityEquipmentSlot.HEAD).<ItemArkeniumArmor>impactDefense(1));
 		r.register("arkenium_leggings", new ItemArkeniumArmor(EntityEquipmentSlot.LEGS).pierceDefense(2).<ItemArkeniumArmor>impactDefense(1));
@@ -136,13 +137,13 @@ public class ItemsAetherInit
 		r.register("rainbow_moa_egg", new ItemMoaEgg(true).setCreativeTab(CreativeTabsAether.TAB_MISCELLANEOUS));
 		r.register("raw_taegore_meat", new ItemAetherFood(3, 0.3F, true));
 		r.register("recording_892", new ItemAetherRecord("recording_892", SoundsAether.record_recording_892));
-		r.register("secret_skyroot_door_item", new ItemDoor(BlocksAether.secret_skyroot_door).setCreativeTab(CreativeTabsAether.TAB_DECORATIVE_BLOCKS));
+		r.register("secret_skyroot_door_item", new ItemBlockCustomDoor(BlocksAether.secret_skyroot_door).setCreativeTab(CreativeTabsAether.TAB_DECORATIVE_BLOCKS));
 		r.register("shard_of_life", new ItemShardOfLife().setMaxStackSize(4).setCreativeTab(CreativeTabsAether.TAB_CONSUMABLES));
 		r.register("skyroot_axe", new ItemAetherAxe(MaterialsAether.SKYROOT_TOOL));
 		r.register("skyroot_bed_item", new ItemSkyrootBed().setCreativeTab(CreativeTabsAether.TAB_UTILITY));
 		r.register("skyroot_bucket", new ItemSkyrootBucket(Blocks.AIR));
 		r.register("skyroot_crossbow", new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(0.5F).setType(ItemCrossbow.crossBowTypes.SKYROOT));
-		r.register("skyroot_door_item", new ItemDoor(BlocksAether.skyroot_door).setCreativeTab(CreativeTabsAether.TAB_CONSTRUCTION));
+		r.register("skyroot_door_item", new ItemBlockCustomDoor(BlocksAether.skyroot_door).setCreativeTab(CreativeTabsAether.TAB_CONSTRUCTION));
 		r.register("skyroot_lizard_stick", new ItemAetherFood(2, 0.3F, false).setConsumptionDuration(16).setCreativeTab(CreativeTabsAether.TAB_CONSUMABLES));
 		r.register("skyroot_lizard_stick_roasted",
 				new ItemAetherFood(6, 0.6F, false).setConsumptionDuration(24).setCreativeTab(CreativeTabsAether.TAB_CONSUMABLES));

@@ -1,9 +1,12 @@
 package com.gildedgames.aether.common.blocks.natural.plants.saplings;
 
 import com.gildedgames.aether.common.blocks.IBlockMultiName;
+import com.gildedgames.aether.common.blocks.IBlockWithItem;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherPlant;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
+import com.gildedgames.aether.common.items.blocks.ItemBlockCustomSapling;
+import com.gildedgames.aether.common.items.blocks.ItemBlockSkyrootButton;
 import com.gildedgames.orbis.lib.core.BlueprintDefinition;
 import com.gildedgames.orbis.lib.core.CreationData;
 import com.gildedgames.orbis.lib.core.baking.BakedBlueprint;
@@ -16,6 +19,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -28,7 +32,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-public abstract class BlockAetherSapling extends BlockAetherPlant implements IGrowable, IBlockMultiName
+public abstract class BlockAetherSapling extends BlockAetherPlant implements IGrowable, IBlockMultiName, IBlockWithItem
 {
 	public static final PropertyInteger PROPERTY_STAGE = PropertyInteger.create("growth_stage",0,1);
 
@@ -151,10 +155,15 @@ public abstract class BlockAetherSapling extends BlockAetherPlant implements IGr
 		return EnumOffsetType.XZ;
 	}
 
+	@Override
+	public ItemBlock createItemBlock()
+	{
+		return new ItemBlockCustomSapling(this);
+	}
+
 	public abstract BlueprintDefinition getBlueprint(IBlockState state);
 
 	public abstract BlockPos getBlueprintOffset(IBlockState state);
 
 	public abstract PropertyVariant getPropertyVariant();
-
 }
