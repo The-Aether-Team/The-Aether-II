@@ -22,7 +22,7 @@ public class BlockSentrystoneDecorative extends BlockDecorative
 	{
 		super(Material.ROCK);
 
-		this.setHardness(2.0F);
+		this.setHardness(1.5F);
 		this.setResistance(10.0F);
 
 		this.setSoundType(SoundType.STONE);

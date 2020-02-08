@@ -32,14 +32,14 @@ public class BlockRockGlassPaneDecorative extends BlockPane implements IBlockWit
 
 	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", SKYROOT_FRAME, ARKENIUM_FRAME);
 
-	public BlockRockGlassPaneDecorative()
+	public BlockRockGlassPaneDecorative(Material material)
 	{
-		super(Material.ROCK, true);
+		super(material, true);
 
-		this.setHardness(1f);
+		this.setHardness(0.3f);
 		this.setResistance(2000f);
 
-		this.setLightOpacity(3);
+		this.setLightOpacity(0);
 
 		this.setSoundType(SoundType.GLASS);
 	}

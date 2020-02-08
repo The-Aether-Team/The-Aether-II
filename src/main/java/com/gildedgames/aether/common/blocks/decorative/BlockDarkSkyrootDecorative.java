@@ -26,6 +26,7 @@ public class BlockDarkSkyrootDecorative extends BlockDecorative
 		this.setSoundType(SoundType.WOOD);
 
 		this.setHardness(2f);
+		this.setResistance(5.0f);
 	}
 
 	@Override

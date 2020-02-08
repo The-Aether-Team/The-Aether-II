@@ -39,7 +39,7 @@ public class BlockQuicksoilGlassPaneDecorative extends BlockPane implements IBlo
         this.setHardness(0.3f);
         this.setResistance(0.5f);
 
-        this.setLightOpacity(3);
+        this.setLightOpacity(0);
 
         this.setLightLevel(1f);
 
