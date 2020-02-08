@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.blocks.construction.walls;
 
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -19,6 +20,8 @@ public class BlockCandyCaneWall extends BlockCustomWall
 	public BlockCandyCaneWall(IBlockState state, float hardness, float resistance)
 	{
 		super(state, hardness, resistance);
+
+		this.setSoundType(SoundType.WOOD);
 	}
 
 	@Override

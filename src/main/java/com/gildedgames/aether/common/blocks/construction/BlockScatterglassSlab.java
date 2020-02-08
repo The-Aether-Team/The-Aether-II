@@ -17,7 +17,9 @@ public class BlockScatterglassSlab extends BlockCustomSlab
 	{
 		super(material);
 
-		this.setLightOpacity(3);
+		this.setResistance(2000f);
+
+		this.setLightOpacity(0);
 	}
 
 	@Override
