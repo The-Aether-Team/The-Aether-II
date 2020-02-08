@@ -477,11 +477,17 @@ public class ItemCrossbow extends Item
 		}
 	}
 
-
 	@Override
 	public int getItemBurnTime(ItemStack itemStack)
 	{
-		return 100;
+		if (this.cBType == crossBowTypes.SKYROOT)
+		{
+			return 300;
+		}
+		else
+		{
+			return 0;
+		}
 	}
 
 	public crossBowTypes getType()

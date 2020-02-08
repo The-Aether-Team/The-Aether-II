@@ -62,7 +62,7 @@ public class ItemAetherShield extends Item
 	{
 		if (itemStack.getItem() == ItemsAether.skyroot_shield)
 		{
-			return 100;
+			return 200;
 		}
 
 		return super.getItemBurnTime(itemStack);

@@ -15,6 +15,6 @@ public class ItemSkyrootSword extends ItemAetherSword
 	@Override
 	public int getItemBurnTime(ItemStack itemStack)
 	{
-		return 100;
+		return 200;
 	}
 }

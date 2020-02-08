@@ -45,6 +45,6 @@ public class ItemAmbrosiumChunk extends Item implements IDropOnDeath
 	@Override
 	public int getItemBurnTime(ItemStack itemStack)
 	{
-		return 20000;
+		return 6400;
 	}
 }

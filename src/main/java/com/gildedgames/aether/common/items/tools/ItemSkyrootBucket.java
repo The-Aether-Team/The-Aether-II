@@ -144,4 +144,17 @@ public class ItemSkyrootBucket extends ItemBucket implements IDropOnDeath
 			return emptyBucket;
 		}
 	}
+
+	@Override
+	public int getItemBurnTime(ItemStack itemStack)
+	{
+		if (itemStack.getItem() == ItemsAether.skyroot_bucket)
+		{
+			return 200;
+		}
+		else
+		{
+			return 0;
+		}
+	}
 }

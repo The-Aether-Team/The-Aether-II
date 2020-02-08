@@ -31,7 +31,7 @@ public class ItemAetherShovel extends ItemSpade
 	{
 		if (this.toolMaterial == MaterialsAether.SKYROOT_TOOL)
 		{
-			return 100;
+			return 200;
 		}
 
 		return super.getItemBurnTime(itemStack);

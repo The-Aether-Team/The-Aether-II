@@ -64,12 +64,26 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 				{
 					return 150;
 				}
-
+				if (item == Item.getItemFromBlock(Blocks.WOOL))
+				{
+					return 100;
+				}
+				if (item == Item.getItemFromBlock(Blocks.CARPET))
+				{
+					return 67;
+				}
+				if (item == Item.getItemFromBlock(Blocks.LADDER))
+				{
+					return 300;
+				}
+				if (item == Item.getItemFromBlock(Blocks.WOODEN_BUTTON))
+				{
+					return 100;
+				}
 				if (block.getDefaultState().getMaterial() == Material.WOOD)
 				{
 					return 300;
 				}
-
 				if (block == Blocks.COAL_BLOCK)
 				{
 					return 16000;
@@ -92,6 +106,18 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 			{
 				return 100;
 			}
+			if (item == Items.BOW)
+			{
+				return 300;
+			}
+			if (item == Items.FISHING_ROD)
+			{
+				return 300;
+			}
+			if (item == Items.SIGN)
+			{
+				return 200;
+			}
 			if (item == Items.COAL)
 			{
 				return 1600;
@@ -104,9 +130,21 @@ public class TileEntityHolystoneFurnace extends TileEntityLockable implements IT
 			{
 				return 100;
 			}
+			if (item == Items.BOWL)
+			{
+				return 100;
+			}
 			if (item == Items.BLAZE_ROD)
 			{
 				return 2400;
+			}
+			if (item instanceof ItemDoor && item != Items.IRON_DOOR)
+			{
+				return 200;
+			}
+			if (item instanceof ItemBoat)
+			{
+				return 400;
 			}
 
 			return ForgeEventFactory.getItemBurnTime(stack);

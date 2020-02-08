@@ -58,4 +58,10 @@ public class ItemBrettlCane extends Item implements IPlantable, IDropOnDeath
 		}
 		return false;
 	}
+
+	@Override
+	public int getItemBurnTime(ItemStack itemStack)
+	{
+		return 50;
+	}
 }

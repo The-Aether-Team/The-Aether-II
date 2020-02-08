@@ -8,6 +8,6 @@ public class ItemAmbrosiumShard extends ItemDropOnDeath
 	@Override
 	public int getItemBurnTime(ItemStack itemStack)
 	{
-		return 2000;
+		return 1600;
 	}
 }
