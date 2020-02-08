@@ -1,14 +1,11 @@
 {
 	"type": "minecraft:crafting_shaped",
 	"pattern": [
-		"##J",
-		"DJ#",
-		"PD#"
+		"PJP",
+		"DJD",
+		" P "
 	],
 	"key": {
-		"#": {
-			"item": "aether:arkenium_strip"
-		},
 		"J": {
 			"item": "aether:skyroot_planks"
 		},

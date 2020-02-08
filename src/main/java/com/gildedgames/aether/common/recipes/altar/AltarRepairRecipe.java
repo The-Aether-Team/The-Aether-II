@@ -65,6 +65,7 @@ public class AltarRepairRecipe implements IAltarRecipe
 				case IRON:
 					return 3;
 				case GOLD:
+					return 3;
 				case CHAIN:
 					return 3;
 				case DIAMOND:
