@@ -14,7 +14,7 @@ public class BlockQuicksoil extends Block
 	{
 		super(Material.SAND);
 
-		this.setHardness(1.5f);
+		this.setHardness(0.5f);
 
 		this.setSoundType(SoundType.SAND);
 	}

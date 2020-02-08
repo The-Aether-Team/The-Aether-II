@@ -26,7 +26,7 @@ public class BlockWovenSticks extends Block implements IBlockMultiName
 	{
 		super(Material.WOOD);
 
-		this.setSoundType(SoundType.GROUND);
+		this.setSoundType(SoundType.PLANT);
 		this.setHardness(0.5F);
 
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, SKYROOT));

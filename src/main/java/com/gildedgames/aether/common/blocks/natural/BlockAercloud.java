@@ -46,7 +46,7 @@ public class BlockAercloud extends Block implements IBlockMultiName
 
 	public BlockAercloud()
 	{
-		super(Material.ICE);
+		super(Material.SNOW);
 
 		this.setSoundType(SoundType.CLOTH);
 

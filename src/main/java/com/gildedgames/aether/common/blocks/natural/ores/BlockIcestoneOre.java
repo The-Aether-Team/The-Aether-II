@@ -15,7 +15,8 @@ public class BlockIcestoneOre extends BlockAetherOre
 	{
 		super(Material.ROCK);
 
-		this.setHardness(3f);
+		this.setHardness(3.0f);
+		this.setResistance(5.0f);
 
 		this.setSoundType(SoundType.STONE);
 	}

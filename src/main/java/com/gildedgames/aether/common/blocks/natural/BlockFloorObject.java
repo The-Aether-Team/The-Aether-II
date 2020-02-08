@@ -33,6 +33,8 @@ public class BlockFloorObject extends BlockBuilder implements IBlockWithItem
 	{
 		super(material);
 
+		this.setHardness(0.0F);
+
 		this.setSoundType(soundType);
 	}
 
@@ -41,13 +43,6 @@ public class BlockFloorObject extends BlockBuilder implements IBlockWithItem
 	{
 		return BlockFaceShape.UNDEFINED;
 	}
-
-	@Override
-	public void onBlockClicked(World world, BlockPos pos, EntityPlayer player)
-	{
-		this.invalidateBlock(world, pos);
-	}
-
 	@Override
 	public boolean isPassable(IBlockAccess world, BlockPos pos)
 	{
@@ -107,10 +102,7 @@ public class BlockFloorObject extends BlockBuilder implements IBlockWithItem
 	@Override
 	public boolean canPlaceBlockAt(World world, BlockPos pos)
 	{
-		IBlockState state = world.getBlockState(pos.down());
-
-		return state.getBlock() == BlocksAether.aether_grass || state.getBlock() == BlocksAether.aether_dirt
-				|| state.getBlock() == BlocksAether.holystone;
+		return true;
 	}
 
 	@Override
@@ -138,4 +130,9 @@ public class BlockFloorObject extends BlockBuilder implements IBlockWithItem
 		return new ItemBlockFloorObject(this);
 	}
 
+	@Override
+	protected boolean canSilkHarvest()
+	{
+		return true;
+	}
 }

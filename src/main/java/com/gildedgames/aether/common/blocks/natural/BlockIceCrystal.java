@@ -242,4 +242,10 @@ public class BlockIceCrystal extends BlockBuilder implements IBlockMultiName
 	{
 		return EnumOffsetType.XZ;
 	}
+
+	@Override
+	protected boolean canSilkHarvest()
+	{
+		return true;
+	}
 }

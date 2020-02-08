@@ -11,6 +11,7 @@ public class BlockFerrosite extends Block
 		super(Material.ROCK);
 
 		this.setHardness(1.5f);
+		this.setResistance(10.0F);
 
 		this.setSoundType(SoundType.STONE);
 	}

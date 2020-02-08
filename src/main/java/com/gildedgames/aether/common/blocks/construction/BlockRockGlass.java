@@ -21,7 +21,7 @@ public class BlockRockGlass extends BlockBreakable
 		this.setHardness(1f);
 		this.setResistance(2000f);
 
-		this.setLightOpacity(1);
+		this.setLightOpacity(3);
 
 		this.setSoundType(SoundType.GLASS);
 	}

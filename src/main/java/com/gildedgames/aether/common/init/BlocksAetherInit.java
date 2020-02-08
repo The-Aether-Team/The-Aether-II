@@ -177,7 +177,7 @@ public class BlocksAetherInit
 		r.register("light_skyroot_decorative", new BlockLightSkyrootDecorative().setCreativeTab(TAB_DECORATIVE_BLOCKS));
 		r.register("light_skyroot_log", new BlockAetherLog(AetherWoodType.WISPROOT).setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("light_skyroot_planks", new BlockSkyrootPlanks().setCreativeTab(TAB_CONSTRUCTION));
-		r.register("magnetic_shroom", new BlockAetherMushroom().setCreativeTab(TAB_NATURAL_BLOCKS));
+		r.register("magnetic_shroom", new BlockAetherMushroom().setLightLevel(0.5F).setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("masonry_bench", new BlockMasonryBench().setCreativeTab(TAB_UTILITY));
 		r.register("moa_egg", new BlockMoaEgg());
 		r.register("mossy_holystone_slab", new BlockCustomSlab(Material.ROCK).setSoundType(SoundType.STONE).setHardness(2.0f).setCreativeTab(TAB_CONSTRUCTION));
@@ -313,26 +313,22 @@ public class BlocksAetherInit
 
 	private static void registerFireInfo()
 	{
-		Blocks.FIRE.setFireInfo(BlocksAether.plumproot, 60, 100);
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_twigs, 60, 100);
 		Blocks.FIRE.setFireInfo(BlocksAether.tall_aether_grass, 60, 100);
 		Blocks.FIRE.setFireInfo(BlocksAether.aether_flower, 60, 100);
 		Blocks.FIRE.setFireInfo(BlocksAether.arctic_spikespring, 60, 100);
-		Blocks.FIRE.setFireInfo(BlocksAether.barkshroom, 60, 100);
 		Blocks.FIRE.setFireInfo(BlocksAether.blue_swingtip, 60, 100);
 		Blocks.FIRE.setFireInfo(BlocksAether.forgotten_rose, 60, 100);
 		Blocks.FIRE.setFireInfo(BlocksAether.green_swingtip, 60, 100);
 		Blocks.FIRE.setFireInfo(BlocksAether.highlands_tulips, 60, 100);
 		Blocks.FIRE.setFireInfo(BlocksAether.irradiated_flower, 60, 100);
-		Blocks.FIRE.setFireInfo(BlocksAether.magnetic_shroom, 60, 100);
 		Blocks.FIRE.setFireInfo(BlocksAether.neverbloom, 60, 100);
 		Blocks.FIRE.setFireInfo(BlocksAether.pink_swingtip, 60, 100);
 		Blocks.FIRE.setFireInfo(BlocksAether.quickshoot, 60, 100);
-		Blocks.FIRE.setFireInfo(BlocksAether.stoneshroom, 60, 100);
 		Blocks.FIRE.setFireInfo(BlocksAether.orange_tree, 60, 100);
 		Blocks.FIRE.setFireInfo(BlocksAether.blueberry_bush, 60, 100);
 		Blocks.FIRE.setFireInfo(BlocksAether.valkyrie_grass, 60, 100);
-		Blocks.FIRE.setFireInfo(BlocksAether.brettl_plant, 60, 100);
+		Blocks.FIRE.setFireInfo(BlocksAether.brettl_plant, 60, 60);
 		Blocks.FIRE.setFireInfo(BlocksAether.skyroot_log, 5, 5);
 		Blocks.FIRE.setFireInfo(BlocksAether.light_skyroot_log, 5, 5);
 		Blocks.FIRE.setFireInfo(BlocksAether.dark_skyroot_log, 5, 5);
@@ -390,6 +386,7 @@ public class BlocksAetherInit
 		BlocksAether.holystone.setHarvestLevel("pickaxe", 0);
 		BlocksAether.holystone_brick.setHarvestLevel("pickaxe", 0);
 		BlocksAether.quicksoil.setHarvestLevel("shovel", 0);
+		BlocksAether.ferrosite_sand.setHarvestLevel("shovel", 0);
 		BlocksAether.aercloud.setHarvestLevel("shovel", 0);
 		BlocksAether.highlands_snow.setHarvestLevel("shovel", 0);
 		BlocksAether.highlands_snow_layer.setHarvestLevel("shovel", 0);
@@ -399,6 +396,8 @@ public class BlocksAetherInit
 		BlocksAether.golden_oak_log.setHarvestLevel("axe", 0);
 		BlocksAether.skyroot_planks.setHarvestLevel("axe", 0);
 		BlocksAether.woven_sticks.setHarvestLevel("axe", 0);
+		BlocksAether.blueberry_bush.setHarvestLevel("axe", 0);
+		BlocksAether.plumproot.setHarvestLevel("axe", 0);
 		BlocksAether.ambrosium_ore.setHarvestLevel("pickaxe", 0);
 		BlocksAether.zanite_ore.setHarvestLevel("pickaxe", 1);
 		BlocksAether.gravitite_ore.setHarvestLevel("pickaxe", 2);
