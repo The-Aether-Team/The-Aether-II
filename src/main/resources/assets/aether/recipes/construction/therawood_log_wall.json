@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "aether:therawood_log"
+    }
+  },
+  "result": {
+    "item": "aether:therawood_log_wall",
+    "count": 6
+  }
+}

@@ -31,11 +31,15 @@ public class BlocksAether extends AbstractRegistrar
 
 	public static final Block agiosite_brick_stairs = getDefault();
 
+	public static final Block agiosite_brick_wall = getDefault();
+
 	public static final Block agiosite_pillar = getDefault();
 
 	public static final Block agiosite_slab = getDefault();
 
 	public static final Block agiosite_stairs = getDefault();
+
+	public static final Block agiosite_wall = getDefault();
 
 	public static final Block altar = getDefault();
 
@@ -105,6 +109,8 @@ public class BlocksAether extends AbstractRegistrar
 
 	public static final Block faded_holystone_pillar = getDefault();
 
+	public static final Block faded_holystone_brick_wall = getDefault();
+
 	public static final Block ferrosite = getDefault();
 
 	public static final Block ferrosite_sand = getDefault();
@@ -122,6 +128,8 @@ public class BlocksAether extends AbstractRegistrar
 	public static final Block greatroot_fence = getDefault();
 
 	public static final Block greatroot_fence_gate = getDefault();
+
+	public static final Block greatroot_log_wall = getDefault();
 
 	public static final Block greatroot_pressure_plate = getDefault();
 
@@ -146,6 +154,8 @@ public class BlocksAether extends AbstractRegistrar
 	public static final Block hellfirestone_brick_slab = getDefault();
 
 	public static final Block hellfirestone_brick_stairs = getDefault();
+
+	public static final Block hellfirestone_brick_wall = getDefault();
 
 	public static final Block hellfirestone_lantern = getDefault();
 
@@ -297,6 +307,8 @@ public class BlocksAether extends AbstractRegistrar
 
 	public static final Block sentrystone_brick_stairs = getDefault();
 
+	public static final Block sentrystone_brick_wall = getDefault();
+
 	public static final Block sentrystone_pillar = getDefault();
 
 	public static final Block sentrystone_pillar_lit = getDefault();
@@ -357,15 +369,23 @@ public class BlocksAether extends AbstractRegistrar
 
 	public static final Block therastone_brick_stairs = getDefault();
 
+	public static final Block therastone_brick_wall = getDefault();
+
 	public static final Block therastone_pillar = getDefault();
 
 	public static final Block therawood_beam = getDefault();
 
 	public static final Block therawood_decorative = getDefault();
 
+	public static final Block therawood_fence = getDefault();
+
+	public static final Block therawood_fence_gate = getDefault();
+
 	public static final Block therawood_leaves = getDefault();
 
 	public static final Block therawood_log = getDefault();
+
+	public static final Block therawood_log_wall = getDefault();
 
 	public static final Block therawood_planks = getDefault();
 
@@ -386,6 +406,8 @@ public class BlocksAether extends AbstractRegistrar
 	public static final Block wisproot_fence = getDefault();
 
 	public static final Block wisproot_fence_gate = getDefault();
+
+	public static final Block wisproot_log_wall = getDefault();
 
 	public static final Block wisproot_pressure_plate = getDefault();
 

@@ -1,0 +1,6 @@
+{
+  "parent": "block/wall_inventory",
+  "textures": {
+    "wall": "aether:blocks/therastone_bricks/therastone_bricks"
+  }
+}

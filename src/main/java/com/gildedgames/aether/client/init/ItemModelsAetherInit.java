@@ -196,6 +196,9 @@ public class ItemModelsAetherInit
 		registerItemModels(BlocksAether.greatroot_fence, "greatroot_fence");
 		registerItemModels(BlocksAether.greatroot_fence_gate, "greatroot_fence_gate");
 
+		registerItemModels(BlocksAether.therawood_fence, "therawood_fence");
+		registerItemModels(BlocksAether.therawood_fence_gate, "therawood_fence_gate");
+
 		registerItemModels(BlocksAether.ambrosium_ore, "ores/ambrosium_ore");
 		registerItemModels(BlocksAether.zanite_ore, "ores/zanite_ore");
 		registerItemModels(BlocksAether.gravitite_ore, "ores/gravitite_ore");
@@ -566,6 +569,15 @@ public class ItemModelsAetherInit
 		registerItemModels(BlocksAether.skyroot_log_wall, "aether_wall/skyroot_log_wall");
 		registerItemModels(BlocksAether.icestone_wall, "aether_wall/icestone_wall");
 		registerItemModels(BlocksAether.scatterglass_wall, "aether_wall/scatterglass_wall");
+		registerItemModels(BlocksAether.wisproot_log_wall, "aether_wall/wisproot_log_wall");
+		registerItemModels(BlocksAether.greatroot_log_wall, "aether_wall/greatroot_log_wall");
+		registerItemModels(BlocksAether.therawood_log_wall, "aether_wall/therawood_log_wall");
+		registerItemModels(BlocksAether.agiosite_wall, "aether_wall/agiosite_wall");
+		registerItemModels(BlocksAether.agiosite_brick_wall, "aether_wall/agiosite_brick_wall");
+		registerItemModels(BlocksAether.faded_holystone_brick_wall, "aether_wall/faded_holystone_brick_wall");
+		registerItemModels(BlocksAether.sentrystone_brick_wall, "aether_wall/sentrystone_brick_wall");
+		registerItemModels(BlocksAether.hellfirestone_brick_wall, "aether_wall/hellfirestone_brick_wall");
+		registerItemModels(BlocksAether.therastone_brick_wall, "aether_wall/therastone_brick_wall");
 
 		registerItemModels(BlocksAether.altar, "tesr");
 		registerItemModels(BlocksAether.multiblock_dummy, "tesr");

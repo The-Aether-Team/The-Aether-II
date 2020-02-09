@@ -1,0 +1,8 @@
+{
+  "parent": "aether:block/aether_wall/special_models/wall_special_post",
+  "textures": {
+    "wall": "aether:blocks/logs/wisproot_log_side",
+    "bottom": "aether:blocks/logs/wisproot_log_side",
+    "top": "aether:blocks/logs/wisproot_log_top"
+  }
+}

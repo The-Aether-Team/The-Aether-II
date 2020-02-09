@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "aether:sentrystone_brick"
+    }
+  },
+  "result": {
+    "item": "aether:sentrystone_brick_wall",
+    "count": 6
+  }
+}

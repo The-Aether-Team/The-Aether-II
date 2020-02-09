@@ -1,0 +1,6 @@
+{
+  "parent": "block/wall_side",
+  "textures": {
+    "wall": "aether:blocks/logs/wisproot_log_side"
+  }
+}

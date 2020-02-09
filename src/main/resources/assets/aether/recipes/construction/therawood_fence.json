@@ -1,0 +1,19 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "W#W",
+    "W#W"
+  ],
+  "key": {
+    "#": {
+      "item": "aether:skyroot_stick"
+    },
+    "W": {
+      "item": "aether:therawood_planks"
+    }
+  },
+  "result": {
+    "item": "aether:therawood_fence",
+    "count": 3
+  }
+}

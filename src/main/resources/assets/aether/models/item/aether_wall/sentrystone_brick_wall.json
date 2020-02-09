@@ -1,0 +1,6 @@
+{
+  "parent": "block/wall_inventory",
+  "textures": {
+    "wall": "aether:blocks/sentrystone_bricks/sentrystone_brick"
+  }
+}

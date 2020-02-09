@@ -1,0 +1,6 @@
+{
+  "parent": "block/wall_post",
+  "textures": {
+    "wall": "aether:blocks/sentrystone_bricks/sentrystone_brick"
+  }
+}

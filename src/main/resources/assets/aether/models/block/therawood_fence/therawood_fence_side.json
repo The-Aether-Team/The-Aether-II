@@ -1,0 +1,6 @@
+{
+  "parent": "block/fence_side",
+  "textures": {
+    "texture": "aether:blocks/therawood_planks/therawood_planks"
+  }
+}

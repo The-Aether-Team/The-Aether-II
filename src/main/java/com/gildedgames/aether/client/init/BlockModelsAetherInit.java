@@ -77,6 +77,9 @@ public class BlockModelsAetherInit
 		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_chest, new StateMap.Builder().ignore(BlockChest.FACING).build());
 
 		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_log_wall, new StateMap.Builder().ignore(BlockSkyrootWall.PROPERTY_GENERATED).build());
+		ModelLoader.setCustomStateMapper(BlocksAether.wisproot_log_wall, new StateMap.Builder().ignore(BlockSkyrootWall.PROPERTY_GENERATED).build());
+		ModelLoader.setCustomStateMapper(BlocksAether.greatroot_log_wall, new StateMap.Builder().ignore(BlockSkyrootWall.PROPERTY_GENERATED).build());
+		ModelLoader.setCustomStateMapper(BlocksAether.therawood_log_wall, new StateMap.Builder().ignore(BlockSkyrootWall.PROPERTY_GENERATED).build());
 
 		ModelLoader.setCustomStateMapper(BlocksAether.aercloud, new StateMapperBase()
 		{
@@ -132,6 +135,7 @@ public class BlockModelsAetherInit
 		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_fence_gate, new StateMap.Builder().ignore(BlockFenceGate.POWERED).build());
 		ModelLoader.setCustomStateMapper(BlocksAether.wisproot_fence_gate, new StateMap.Builder().ignore(BlockFenceGate.POWERED).build());
 		ModelLoader.setCustomStateMapper(BlocksAether.greatroot_fence_gate, new StateMap.Builder().ignore(BlockFenceGate.POWERED).build());
+		ModelLoader.setCustomStateMapper(BlocksAether.therawood_fence_gate, new StateMap.Builder().ignore(BlockFenceGate.POWERED).build());
 		ModelLoader.setCustomStateMapper(BlocksAether.skyroot_bed, new StateMap.Builder().ignore(BlockBed.OCCUPIED).build());
 
 		ModelLoader.setCustomStateMapper(BlocksAether.moa_egg, new StateMap.Builder().ignore().build());

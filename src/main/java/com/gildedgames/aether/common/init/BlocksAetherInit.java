@@ -83,9 +83,11 @@ public class BlocksAetherInit
 		r.register("agiosite_brick_decorative", new BlockAgiositeDecorative().setCreativeTab(TAB_DECORATIVE_BLOCKS));
 		r.register("agiosite_brick_slab", new BlockCustomSlab(Material.ROCK).setSoundType(SoundType.STONE).setHardness(1.5f).setResistance(10.0f).setCreativeTab(TAB_CONSTRUCTION));
 		r.register("agiosite_brick_stairs", new BlockCustomStairs(holystone.getDefaultState()).setCreativeTab(TAB_CONSTRUCTION));
+		r.register("agiosite_brick_wall", new BlockCustomWall(holystone.getDefaultState(), 1.5f, 10.0f).setCreativeTab(TAB_CONSTRUCTION));
 		r.register("agiosite_pillar", new BlockCustomPillar(Material.ROCK).setSoundType(SoundType.STONE).setHardness(1.5f).setResistance(10.0f).setCreativeTab(TAB_DECORATIVE_BLOCKS));
 		r.register("agiosite_slab", new BlockCustomSlab(Material.ROCK).setSoundType(SoundType.STONE).setHardness(1.5f).setResistance(10.0f).setCreativeTab(TAB_CONSTRUCTION));
 		r.register("agiosite_stairs", new BlockCustomStairs(holystone.getDefaultState()).setCreativeTab(TAB_CONSTRUCTION));
+		r.register("agiosite_wall", new BlockCustomWall(holystone.getDefaultState(), 1.5f, 10.0f).setCreativeTab(TAB_CONSTRUCTION));
 		r.register("altar", new BlockAltar().setCreativeTab(TAB_UTILITY));
 		r.register("amberoot_leaves", new BlockUniqueLeaves(AetherWoodType.AMBERROOT).setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("ambrosium_ore", new BlockAmbrosiumOre().setCreativeTab(TAB_NATURAL_BLOCKS));
@@ -119,6 +121,7 @@ public class BlocksAetherInit
 		r.register("faded_holystone_brick_decorative", new BlockFadedHolystoneDecorative().setCreativeTab(TAB_DECORATIVE_BLOCKS));
 		r.register("faded_holystone_brick_slab", new BlockCustomSlab(Material.ROCK).setSoundType(SoundType.STONE).setHardness(1.5f).setResistance(10.0f).setCreativeTab(TAB_DECORATIVE_BLOCKS));
 		r.register("faded_holystone_brick_stairs", new BlockCustomStairs(holystone.getDefaultState()).setCreativeTab(TAB_DECORATIVE_BLOCKS));
+		r.register("faded_holystone_brick_wall", new BlockCustomWall(holystone.getDefaultState(), 1.5f, 10.0f).setCreativeTab(TAB_CONSTRUCTION));
 		r.register("faded_holystone_pillar", new BlockCustomPillar(Material.ROCK).setSoundType(SoundType.STONE).setHardness(1.5f).setResistance(10.0f).setCreativeTab(TAB_DECORATIVE_BLOCKS));
 		r.register("ferrosite", new BlockFerrosite().setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("ferrosite_sand", new BlockFerrositeSand().setCreativeTab(TAB_NATURAL_BLOCKS));
@@ -129,6 +132,7 @@ public class BlocksAetherInit
 		r.register("greatroot_button", new BlockSkyrootButton().setCreativeTab(TAB_CONSTRUCTION));
 		r.register("greatroot_fence", new BlockSkyrootFence().setCreativeTab(TAB_CONSTRUCTION));
 		r.register("greatroot_fence_gate", new BlockSkyrootFenceGate().setCreativeTab(TAB_CONSTRUCTION));
+		r.register("greatroot_log_wall", new BlockSkyrootWall(new BlockAetherLog(AetherWoodType.GREATROOT).getDefaultState(), 2.0f, 10.0f).setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("greatroot_pressure_plate", new BlockSkyrootPressurePlate().setCreativeTab(TAB_CONSTRUCTION));
 		r.register("greatroot_sapling", new BlockAetherGreatrootSapling().setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("greatroot_slab", new BlockCustomSlab(Material.WOOD).setSoundType(SoundType.WOOD).setHardness(2.0f).setResistance(5.0f).setCreativeTab(TAB_CONSTRUCTION));
@@ -141,6 +145,7 @@ public class BlocksAetherInit
 		r.register("hellfirestone_brick_decorative", new BlockHellfirestoneDecorative().setCreativeTab(TAB_DECORATIVE_BLOCKS));
 		r.register("hellfirestone_brick_slab", new BlockCustomSlab(Material.ROCK).setSoundType(SoundType.STONE).setHardness(1.5f).setResistance(10.0f).setCreativeTab(TAB_CONSTRUCTION));
 		r.register("hellfirestone_brick_stairs", new BlockCustomStairs(holystone.getDefaultState()).setCreativeTab(TAB_CONSTRUCTION));
+		r.register("hellfirestone_brick_wall", new BlockCustomWall(holystone.getDefaultState(), 1.5f, 10.0f).setCreativeTab(TAB_CONSTRUCTION));
 		r.register("hellfirestone_lantern", new BlockBuilder(Material.ROCK).setSoundType(SoundType.STONE).setHardness(1.5f).setResistance(10.0f).setLightLevel(1.0f).setCreativeTab(TAB_DECORATIVE_BLOCKS));
 		r.register("hellfirestone_pillar", new BlockCustomPillar(Material.ROCK).setSoundType(SoundType.STONE).setHardness(1.5f).setResistance(10.0f).setCreativeTab(TAB_DECORATIVE_BLOCKS));
 		r.register("highlands_bush", new BlockAetherLeaves().setCreativeTab(TAB_NATURAL_BLOCKS));
@@ -216,6 +221,7 @@ public class BlocksAetherInit
 		r.register("sentrystone_brick_decorative_lit", new BlockSentrystoneDecorativeLit().setLightLevel(0.5f).setCreativeTab(TAB_DECORATIVE_BLOCKS));
 		r.register("sentrystone_brick_slab", new BlockCustomSlab(Material.ROCK).setSoundType(SoundType.STONE).setHardness(1.5f).setResistance(10.0f).setCreativeTab(TAB_CONSTRUCTION));
 		r.register("sentrystone_brick_stairs", new BlockCustomStairs(holystone.getDefaultState()).setCreativeTab(TAB_CONSTRUCTION));
+		r.register("sentrystone_brick_wall", new BlockCustomWall(holystone.getDefaultState(), 1.5f, 10.0f).setCreativeTab(TAB_CONSTRUCTION));
 		r.register("sentrystone_pillar", new BlockCustomPillar(Material.ROCK).setSoundType(SoundType.STONE).setHardness(1.5f).setResistance(10.0f).setCreativeTab(TAB_DECORATIVE_BLOCKS));
 		r.register("sentrystone_pillar_lit", new BlockCustomPillar(Material.ROCK).setSoundType(SoundType.STONE).setHardness(1.5f).setResistance(10.0f).setLightLevel(0.5f).setCreativeTab(TAB_DECORATIVE_BLOCKS));
 		r.register("skyroot_beam", new BlockCustomPillar(Material.WOOD).setSoundType(SoundType.WOOD).setHardness(2.0f).setResistance(5.0f).setCreativeTab(TAB_DECORATIVE_BLOCKS));
@@ -246,11 +252,15 @@ public class BlocksAetherInit
 		r.register("therastone_brick_decorative", new BlockTherastoneDecorative().setCreativeTab(TAB_THERA));
 		r.register("therastone_brick_slab", new BlockCustomSlab(Material.ROCK).setSoundType(SoundType.STONE).setHardness(1.5f).setResistance(10.0f).setCreativeTab(TAB_THERA));
 		r.register("therastone_brick_stairs", new BlockCustomStairs(holystone.getDefaultState()).setCreativeTab(TAB_THERA));
+		r.register("therastone_brick_wall", new BlockCustomWall(holystone.getDefaultState(), 1.5f, 10.0f).setCreativeTab(TAB_CONSTRUCTION));
 		r.register("therastone_pillar", new BlockCustomPillar(Material.ROCK).setSoundType(SoundType.STONE).setHardness(1.5f).setResistance(10.0f).setCreativeTab(TAB_THERA));
 		r.register("therawood_beam", new BlockCustomPillar(Material.WOOD).setSoundType(SoundType.WOOD).setHardness(2.0f).setResistance(5.0f).setCreativeTab(TAB_THERA));
 		r.register("therawood_decorative", new BlockTherawoodDecorative().setCreativeTab(TAB_THERA));
+		r.register("therawood_fence", new BlockSkyrootFence().setCreativeTab(TAB_CONSTRUCTION));
+		r.register("therawood_fence_gate", new BlockSkyrootFenceGate().setCreativeTab(TAB_CONSTRUCTION));
 		r.register("therawood_leaves", new BlockAetherLeaves().setCreativeTab(TAB_THERA));
 		r.register("therawood_log", new BlockAetherLog(AetherWoodType.THERA).setCreativeTab(TAB_THERA));
+		r.register("therawood_log_wall", new BlockSkyrootWall(new BlockAetherLog(AetherWoodType.THERA).getDefaultState(), 2.0f, 10.0f).setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("therawood_planks", therawood_planks.setCreativeTab(TAB_THERA));
 		r.register("therawood_slab", new BlockCustomSlab(Material.WOOD).setSoundType(SoundType.WOOD).setHardness(2.0f).setCreativeTab(TAB_THERA));
 		r.register("therawood_stairs", new BlockCustomStairs(therawood_planks.getDefaultState()).setCreativeTab(TAB_THERA));
@@ -261,6 +271,7 @@ public class BlocksAetherInit
 		r.register("wisproot_button", new BlockSkyrootButton().setCreativeTab(TAB_CONSTRUCTION));
 		r.register("wisproot_fence", new BlockSkyrootFence().setCreativeTab(TAB_CONSTRUCTION));
 		r.register("wisproot_fence_gate", new BlockSkyrootFenceGate().setCreativeTab(TAB_CONSTRUCTION));
+		r.register("wisproot_log_wall", new BlockSkyrootWall(new BlockAetherLog(AetherWoodType.WISPROOT).getDefaultState(), 2.0f, 10.0f).setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("wisproot_pressure_plate", new BlockSkyrootPressurePlate().setCreativeTab(TAB_CONSTRUCTION));
 		r.register("wisproot_sapling", new BlockAetherWisprootSapling().setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("wisproot_slab", new BlockCustomSlab(Material.WOOD).setSoundType(SoundType.WOOD).setHardness(2.0f).setResistance(5.0f).setCreativeTab(TAB_CONSTRUCTION));

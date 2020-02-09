@@ -1,0 +1,6 @@
+{
+  "parent": "aether:block/therawood_fence_gate/therawood_fence_gate_closed",
+  "textures": {
+    "texture": "aether:blocks/therawood_planks/therawood_planks"
+  }
+}

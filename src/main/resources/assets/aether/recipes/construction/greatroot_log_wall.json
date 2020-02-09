@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "aether:dark_skyroot_log"
+    }
+  },
+  "result": {
+    "item": "aether:greatroot_log_wall",
+    "count": 6
+  }
+}

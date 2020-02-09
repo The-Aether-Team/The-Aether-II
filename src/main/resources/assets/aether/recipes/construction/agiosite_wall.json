@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "aether:agiosite",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "aether:agiosite_wall",
+    "count": 6
+  }
+}
