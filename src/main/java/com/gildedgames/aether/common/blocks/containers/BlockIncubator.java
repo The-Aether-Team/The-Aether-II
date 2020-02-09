@@ -41,11 +41,12 @@ public class BlockIncubator extends BlockContainer
 
 	public BlockIncubator()
 	{
-		super(Material.WOOD);
+		super(Material.ROCK);
 
-		this.setHardness(2.5f);
+		this.setHardness(3.5f);
+		this.setResistance(17.5f);
 
-		this.setSoundType(SoundType.WOOD);
+		this.setSoundType(SoundType.STONE);
 
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_IS_LIT, Boolean.FALSE).withProperty(PROPERTY_FACING, EnumFacing.NORTH));
 	}

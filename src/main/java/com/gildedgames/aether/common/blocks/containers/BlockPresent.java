@@ -38,11 +38,11 @@ public class BlockPresent extends BlockContainer implements IBlockWithItem
 
 	public BlockPresent()
 	{
-		super(Material.GROUND);
+		super(Material.CLOTH);
 
 		this.setHardness(0.4F);
 		this.setLightOpacity(0);
-		this.setSoundType(SoundType.GROUND);
+		this.setSoundType(SoundType.CLOTH);
 	}
 
 	@Override

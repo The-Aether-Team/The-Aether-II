@@ -55,7 +55,7 @@ public class TileEntityMasonryBenchRenderer extends TileEntitySpecialRenderer<Ti
 
 			GlStateManager.matrixMode(5890);
 			GlStateManager.pushMatrix();
-			GlStateManager.scale(4.0F, 4.0F, 1.0F);
+			GlStateManager.scale(8.0F, 8.0F, 1.0F);
 			GlStateManager.translate(0.0625F, 0.0625F, 0.0625F);
 			GlStateManager.matrixMode(5888);
 		}

@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.blocks.containers;
 
 import com.gildedgames.aether.common.entities.tiles.TileEntityHolystoneFurnace;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
@@ -36,6 +37,8 @@ public class BlockHolystoneFurnace extends BlockContainer
 		super(Material.ROCK);
 
 		this.setHardness(3.5f);
+
+		this.setSoundType(SoundType.STONE);
 
 		this.setDefaultState(this.getBlockState().getBaseState()
 				.withProperty(PROPERTY_IS_LIT, Boolean.FALSE)

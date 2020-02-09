@@ -23,6 +23,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockMasonryBench extends BlockContainer
 {
@@ -31,11 +33,12 @@ public class BlockMasonryBench extends BlockContainer
 
 	public BlockMasonryBench()
 	{
-		super(Material.WOOD);
+		super(Material.ROCK);
 
-		this.setHardness(2.5f);
+		this.setHardness(3.5f);
+		this.setResistance(17.5f);
 
-		this.setSoundType(SoundType.WOOD);
+		this.setSoundType(SoundType.STONE);
 
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_FACING, EnumFacing.NORTH));
 	}
@@ -107,6 +110,12 @@ public class BlockMasonryBench extends BlockContainer
 		}
 
 		super.breakBlock(world, pos, state);
+	}
+
+	@SideOnly(Side.CLIENT)
+	public boolean hasCustomBreakingProgress(IBlockState state)
+	{
+		return true;
 	}
 
 	@Override

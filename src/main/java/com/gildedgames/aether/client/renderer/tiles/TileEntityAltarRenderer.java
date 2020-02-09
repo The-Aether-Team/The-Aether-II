@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
 public class TileEntityAltarRenderer extends TileEntitySpecialRenderer<TileEntityAltar>
 {
@@ -54,7 +55,20 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer<TileEntit
 			}
 		}
 
-		this.bindTexture(this.texture);
+		if (destroyStage >= 0)
+		{
+			this.bindTexture(DESTROY_STAGES[destroyStage]);
+
+			GlStateManager.matrixMode(5890);
+			GlStateManager.pushMatrix();
+			GlStateManager.scale(4.0F, 4.0F, 1.0F);
+			GlStateManager.translate(0.0625F, 0.0625F, 0.0625F);
+			GlStateManager.matrixMode(5888);
+		}
+		else
+		{
+			this.bindTexture(texture);
+		}
 
 		this.model.render(0.0625F);
 
@@ -107,6 +121,13 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer<TileEntit
 		GlStateManager.disableRescaleNormal();
 
 		GlStateManager.popMatrix();
+
+		if (destroyStage >= 0)
+		{
+			GlStateManager.matrixMode(GL11.GL_TEXTURE);
+			GlStateManager.popMatrix();
+			GlStateManager.matrixMode(GL11.GL_MODELVIEW);
+		}
 	}
 
 	private void renderItem(final ItemStack stack)

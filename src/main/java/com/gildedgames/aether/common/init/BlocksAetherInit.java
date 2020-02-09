@@ -215,7 +215,7 @@ public class BlocksAetherInit
 		r.register("sentrystone_pillar", new BlockCustomPillar(Material.ROCK).setSoundType(SoundType.STONE).setHardness(2.0f).setCreativeTab(TAB_DECORATIVE_BLOCKS));
 		r.register("sentrystone_pillar_lit", new BlockCustomPillar(Material.ROCK).setSoundType(SoundType.STONE).setHardness(2.0f).setLightLevel(0.5f).setCreativeTab(TAB_DECORATIVE_BLOCKS));
 		r.register("skyroot_beam", new BlockCustomPillar(Material.WOOD).setSoundType(SoundType.WOOD).setHardness(2.0f).setCreativeTab(TAB_DECORATIVE_BLOCKS));
-		r.register("skyroot_bed", new BlockCustomBed(() -> ItemsAether.skyroot_bed_item, SoundType.CLOTH));
+		r.register("skyroot_bed", new BlockCustomBed(() -> ItemsAether.skyroot_bed_item, SoundType.WOOD));
 		r.register("skyroot_bookshelf", new BlockCustomBookshelf(Material.WOOD, SoundType.WOOD).setHardness(1.5f).setCreativeTab(TAB_CONSTRUCTION));
 		r.register("skyroot_button", new BlockSkyrootButton().setCreativeTab(TAB_CONSTRUCTION));
 		r.register("skyroot_chest", new BlockSkyrootChest().setCreativeTab(TAB_UTILITY));

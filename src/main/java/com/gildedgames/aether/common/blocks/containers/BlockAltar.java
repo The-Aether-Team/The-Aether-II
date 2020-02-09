@@ -20,6 +20,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockAltar extends Block implements ITileEntityProvider
 {
@@ -29,7 +31,8 @@ public class BlockAltar extends Block implements ITileEntityProvider
 	{
 		super(Material.ROCK);
 
-		this.setHardness(2.0f);
+		this.setHardness(3.5f);
+		this.setResistance(17.5f);
 
 		this.setSoundType(SoundType.STONE);
 
@@ -138,6 +141,12 @@ public class BlockAltar extends Block implements ITileEntityProvider
 		{
 			world.spawnEntity(altar.createEntityItemAboveAltar(stack));
 		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	public boolean hasCustomBreakingProgress(IBlockState state)
+	{
+		return true;
 	}
 
 	@Override
