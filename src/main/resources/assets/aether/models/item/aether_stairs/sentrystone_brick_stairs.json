@@ -1,0 +1,8 @@
+{
+  "parent": "block/stairs",
+  "textures": {
+    "bottom": "aether:blocks/sentrystone_bricks/sentrystone_brick",
+    "side": "aether:blocks/sentrystone_bricks/sentrystone_brick",
+    "top": "aether:blocks/sentrystone_bricks/sentrystone_brick"
+  }
+}

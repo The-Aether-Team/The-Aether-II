@@ -604,6 +604,8 @@ public class ItemModelsAetherInit
 		registerItemModels(BlocksAether.agiosite_slab, "aether_slab/agiosite_slab");
 		registerItemModels(BlocksAether.agiosite_brick_slab, "aether_slab/agiosite_brick_slab");
 		registerItemModels(BlocksAether.scatterglass_slab, "aether_slab/scatterglass_slab");
+		registerItemModels(BlocksAether.sentrystone_brick_slab, "aether_slab/sentrystone_brick_slab");
+		registerItemModels(BlocksAether.hellfirestone_brick_slab, "aether_slab/hellfirestone_brick_slab");
 
 		registerItemModels(BlocksAether.skyroot_stairs, "aether_stairs/skyroot_stairs");
 		registerItemModels(BlocksAether.wisproot_stairs, "aether_stairs/wisproot_stairs");
@@ -618,6 +620,8 @@ public class ItemModelsAetherInit
 		registerItemModels(BlocksAether.faded_holystone_brick_stairs, "aether_stairs/faded_holystone_brick_stairs");
 		registerItemModels(BlocksAether.agiosite_stairs, "aether_stairs/agiosite_stairs");
 		registerItemModels(BlocksAether.agiosite_brick_stairs, "aether_stairs/agiosite_brick_stairs");
+		registerItemModels(BlocksAether.sentrystone_brick_stairs, "aether_stairs/sentrystone_brick_stairs");
+		registerItemModels(BlocksAether.hellfirestone_brick_stairs, "aether_stairs/hellfirestone_brick_stairs");
 
 		registerItemModels(BlocksAether.highlands_snow, "highlands_snow");
 		registerItemModels(BlocksAether.highlands_snow_layer, "highlands_snow_height2");

@@ -139,6 +139,8 @@ public class BlocksAetherInit
 		r.register("green_swingtip", new BlockAetherFlowerBase().setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("hellfirestone_brick", new BlockBuilder(Material.ROCK).setSoundType(SoundType.STONE).setHardness(1.5f).setResistance(10.0f).setCreativeTab(TAB_CONSTRUCTION));
 		r.register("hellfirestone_brick_decorative", new BlockHellfirestoneDecorative().setCreativeTab(TAB_DECORATIVE_BLOCKS));
+		r.register("hellfirestone_brick_slab", new BlockCustomSlab(Material.ROCK).setSoundType(SoundType.STONE).setHardness(1.5f).setResistance(10.0f).setCreativeTab(TAB_CONSTRUCTION));
+		r.register("hellfirestone_brick_stairs", new BlockCustomStairs(holystone.getDefaultState()).setCreativeTab(TAB_CONSTRUCTION));
 		r.register("hellfirestone_lantern", new BlockBuilder(Material.ROCK).setSoundType(SoundType.STONE).setHardness(1.5f).setResistance(10.0f).setLightLevel(1.0f).setCreativeTab(TAB_DECORATIVE_BLOCKS));
 		r.register("hellfirestone_pillar", new BlockCustomPillar(Material.ROCK).setSoundType(SoundType.STONE).setHardness(1.5f).setResistance(10.0f).setCreativeTab(TAB_DECORATIVE_BLOCKS));
 		r.register("highlands_bush", new BlockAetherLeaves().setCreativeTab(TAB_NATURAL_BLOCKS));
@@ -212,6 +214,8 @@ public class BlocksAetherInit
 		r.register("sentrystone_brick", new BlockBuilder(Material.ROCK).setSoundType(SoundType.STONE).setHardness(1.5f).setResistance(10.0f).setCreativeTab(TAB_CONSTRUCTION));
 		r.register("sentrystone_brick_decorative", new BlockSentrystoneDecorative().setCreativeTab(TAB_DECORATIVE_BLOCKS));
 		r.register("sentrystone_brick_decorative_lit", new BlockSentrystoneDecorativeLit().setLightLevel(0.5f).setCreativeTab(TAB_DECORATIVE_BLOCKS));
+		r.register("sentrystone_brick_slab", new BlockCustomSlab(Material.ROCK).setSoundType(SoundType.STONE).setHardness(1.5f).setResistance(10.0f).setCreativeTab(TAB_CONSTRUCTION));
+		r.register("sentrystone_brick_stairs", new BlockCustomStairs(holystone.getDefaultState()).setCreativeTab(TAB_CONSTRUCTION));
 		r.register("sentrystone_pillar", new BlockCustomPillar(Material.ROCK).setSoundType(SoundType.STONE).setHardness(1.5f).setResistance(10.0f).setCreativeTab(TAB_DECORATIVE_BLOCKS));
 		r.register("sentrystone_pillar_lit", new BlockCustomPillar(Material.ROCK).setSoundType(SoundType.STONE).setHardness(1.5f).setResistance(10.0f).setLightLevel(0.5f).setCreativeTab(TAB_DECORATIVE_BLOCKS));
 		r.register("skyroot_beam", new BlockCustomPillar(Material.WOOD).setSoundType(SoundType.WOOD).setHardness(2.0f).setResistance(5.0f).setCreativeTab(TAB_DECORATIVE_BLOCKS));

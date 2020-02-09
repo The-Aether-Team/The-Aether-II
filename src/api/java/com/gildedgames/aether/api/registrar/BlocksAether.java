@@ -143,6 +143,10 @@ public class BlocksAether extends AbstractRegistrar
 
 	public static final Block hellfirestone_brick_decorative = getDefault();
 
+	public static final Block hellfirestone_brick_slab = getDefault();
+
+	public static final Block hellfirestone_brick_stairs = getDefault();
+
 	public static final Block hellfirestone_lantern = getDefault();
 
 	public static final Block hellfirestone_pillar = getDefault();
@@ -288,6 +292,10 @@ public class BlocksAether extends AbstractRegistrar
 	public static final Block sentrystone_brick_decorative = getDefault();
 
 	public static final Block sentrystone_brick_decorative_lit = getDefault();
+
+	public static final Block sentrystone_brick_slab = getDefault();
+
+	public static final Block sentrystone_brick_stairs = getDefault();
 
 	public static final Block sentrystone_pillar = getDefault();
 
