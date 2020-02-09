@@ -3,7 +3,7 @@
 	"pattern": [
 		"PJP",
 		"DJD",
-		" P "
+		" S "
 	],
 	"key": {
 		"J": {
@@ -13,6 +13,9 @@
 			"item": "aether:cloudtwine"
 		},
 		"P": {
+			"item": "aether:arkenium_strip"
+		},
+		"S": {
 			"item": "aether:skyroot_stick"
 		}
 	},
