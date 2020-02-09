@@ -12,5 +12,6 @@ public class BlockTherawoodPlanks extends BlockBuilder
 
 		this.setSoundType(SoundType.WOOD);
 		this.setHardness(2f);
+		this.setResistance(5.0f);
 	}
 }

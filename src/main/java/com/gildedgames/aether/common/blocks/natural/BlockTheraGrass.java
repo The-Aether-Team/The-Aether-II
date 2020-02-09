@@ -39,7 +39,7 @@ public class BlockTheraGrass extends BlockGrass implements IBlockMultiName
 
 		this.setSoundType(SoundType.PLANT);
 
-		this.setHardness(0.5F);
+		this.setHardness(0.6F);
 		this.setTickRandomly(true);
 
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, NORMAL).withProperty(SNOWY, Boolean.FALSE));
