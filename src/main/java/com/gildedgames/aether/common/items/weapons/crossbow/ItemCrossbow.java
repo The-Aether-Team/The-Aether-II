@@ -459,9 +459,12 @@ public class ItemCrossbow extends Item
 				TextFormatting.BLUE + I18n.format("item.aether.crossbow.desc4"),
 				TextFormatting.WHITE + I18n.format("item.aether." + this.cBType.name + ".ability")));
 
-		tooltip.add(String.format("%s: %s",
-				TextFormatting.DARK_AQUA + I18n.format("item.aether.tooltip.use"),
-				TextFormatting.WHITE + I18n.format("item.aether.crossbow.use.desc")));
+		if (this.cBType != crossBowTypes.ZANITE && this.cBType != crossBowTypes.GRAVETITE)
+		{
+			tooltip.add(String.format("%s: %s",
+					TextFormatting.DARK_AQUA + I18n.format("item.aether.tooltip.use"),
+					TextFormatting.WHITE + I18n.format("item.aether.crossbow.use.desc")));
+		}
 
 		tooltip.add("");
 
