@@ -30,9 +30,6 @@ import java.util.List;
 
 public class ItemCrossbow extends Item
 {
-	//TODO: add Zanite ability (as weapon degrades, weapon fires faster from FAST speed to FASTEST), speed currently assigned in ItemsAether using setDurationInTicks
-	//TODO: add Gravitite ability : No bolt drop & Load blocks as ammo to be fired at long range.
-
 	public static final ItemBoltType[] BOLT_TYPES = ItemBoltType.values();
 
 	private float durationInTicks;
@@ -214,7 +211,7 @@ public class ItemCrossbow extends Item
 
 
 			// calculate bolts that are special is being loaded.
-			if (this.isSpecialLoaded)
+			if (this.isSpecialLoaded && this.cBType != crossBowTypes.ZANITE && this.cBType != crossBowTypes.GRAVETITE)
 			{
 				float specialShotMultiplier = this.cBType.damageMultiplier * this.cBType.specialMultiplier; // bolt damage multiplier gets applied in #creatBolt
 				if (specialShotMultiplier < 1) {
@@ -232,33 +229,26 @@ public class ItemCrossbow extends Item
 					bolt1 = this.createBolt(entityLiving, speed / 2, 10, 0, 0, specialShotMultiplier, boltType);
 					bolt2 = this.createBolt(entityLiving, speed / 2, -10, 0, 0, specialShotMultiplier, boltType);
 				}
-				else if (this.cBType == crossBowTypes.ZANITE)
-				{
-					bolt0 = this.createBolt(entityLiving, speed, 0, 0, 0, specialShotMultiplier, boltType);
-				}
 				else if (this.cBType == crossBowTypes.ARKENIUM)
 				{
 					bolt0 = this.createBolt(entityLiving, speed * 2.5f, 0, -1, 0, specialShotMultiplier, boltType);
-				}
-				else if (this.cBType == crossBowTypes.GRAVETITE)
-				{
-					//temporary
-					bolt0 = this.createBolt(entityLiving, speed, 0, 0, 0, this.cBType.damageMultiplier, boltType);
-
-					if (bolt0 != null)
-					{
-						bolt0.setNoGravity(true);
-					}
-				}
-				else
-				{
-					bolt0 = this.createBolt(entityLiving, speed, 0, 0, -0.5f, specialShotMultiplier, boltType);
 				}
 			}
 			// standard bolts
 			else
 			{
-				if (this.cBType == crossBowTypes.GRAVETITE)
+				if (this.cBType == crossBowTypes.ZANITE)
+				{
+					float damage = ((float) (this.getDamage(stack) * 10) / this.getMaxDamage());
+
+					bolt0 = this.createBolt(entityLiving, speed, 0, 0, 0, this.cBType.damageMultiplier, boltType);
+
+					if (bolt0 != null)
+					{
+						bolt0.setBonusDamage(damage);
+					}
+				}
+				else if (this.cBType == crossBowTypes.GRAVETITE)
 				{
 					bolt0 = this.createBolt(entityLiving, speed, 0, 0, 0, this.cBType.damageMultiplier, boltType);
 

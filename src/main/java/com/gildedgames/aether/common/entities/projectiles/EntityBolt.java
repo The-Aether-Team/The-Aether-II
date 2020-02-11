@@ -4,10 +4,12 @@ import com.gildedgames.aether.api.entity.damage.IDamageLevelsHolder;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -21,6 +23,8 @@ public class EntityBolt extends EntityArrow implements IDamageLevelsHolder
 	private static final DataParameter<Byte> ABILITY = new DataParameter<>(21, DataSerializers.BYTE);
 
 	private int ticksInAir;
+
+	private double bonusDamage = 0;
 
 	public EntityBolt(final World worldIn)
 	{
@@ -41,6 +45,17 @@ public class EntityBolt extends EntityArrow implements IDamageLevelsHolder
 	@Override
 	protected void arrowHit(final EntityLivingBase living)
 	{
+		if (bonusDamage > 0)
+		{
+			if (living instanceof EntityPlayer)
+			{
+				living.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) this.shootingEntity), (float) this.bonusDamage);
+			}
+			else
+			{
+				living.attackEntityFrom(DamageSource.causeMobDamage((EntityLivingBase) this.shootingEntity), (float) this.bonusDamage);
+			}
+		}
 	}
 
 	@Override
@@ -85,6 +100,11 @@ public class EntityBolt extends EntityArrow implements IDamageLevelsHolder
 				++this.ticksInAir;
 			}
 		}
+	}
+
+	public void setBonusDamage(double damageIn)
+	{
+		this.bonusDamage = damageIn;
 	}
 
 	public BoltAbility getBoltAbility()
