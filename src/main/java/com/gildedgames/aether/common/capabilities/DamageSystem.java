@@ -111,7 +111,7 @@ public class DamageSystem
 
 		float totalDamage = (float) (slashDamage + impactDamage + pierceDamage);
 
-		event.setAmount(totalDamage);
+		//event.setAmount(totalDamage);
 
 		double offsetX = (double) (-MathHelper.sin(entitySource.rotationYaw * 0.017453292F));
 		double offsetZ = (double) MathHelper.cos(entitySource.rotationYaw * 0.017453292F);

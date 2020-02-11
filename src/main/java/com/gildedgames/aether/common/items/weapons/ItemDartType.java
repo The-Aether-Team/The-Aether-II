@@ -2,9 +2,9 @@ package com.gildedgames.aether.common.items.weapons;
 
 public enum ItemDartType
 {
-	GOLDEN(0, 3, 0, "golden"),
-	ENCHANTED(0, 6, 0, "enchanted"),
-	POISON(0, 5, 0, "poison");
+	GOLDEN(0, 0, 0, "golden"),
+	ENCHANTED(0, 0, 0, "enchanted"),
+	POISON(0, 0, 0, "poison");
 
 	private final int slashDamageLevel, pierceDamageLevel, impactDamageLevel;
 

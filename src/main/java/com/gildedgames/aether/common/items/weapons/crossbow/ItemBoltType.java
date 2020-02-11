@@ -4,12 +4,12 @@ public enum ItemBoltType
 {
 
 	/* DAMAGES ARE NOT FINAL */
-	SKYROOT(0, 4, 0, "skyroot"),
-	HOLYSTONE(0, 7, 0, "holystone"),
-	SCATTERGLASS(0, 10, 0, "scatterglass"),
-	ZANITE(0, 13, 0, "zanite"),
-	ARKENIUM(0, 20, 0, "arkenium"),
-	GRAVITITE(0, 16, 0, "gravitite");
+	SKYROOT(0, 0, 0, "skyroot"),
+	HOLYSTONE(0, 0, 0, "holystone"),
+	SCATTERGLASS(0, 0, 0, "scatterglass"),
+	ZANITE(0, 0, 0, "zanite"),
+	ARKENIUM(0, 0, 0, "arkenium"),
+	GRAVITITE(0, 0, 0, "gravitite");
 
 	private final int slashDamageLevel, pierceDamageLevel, impactDamageLevel;
 
