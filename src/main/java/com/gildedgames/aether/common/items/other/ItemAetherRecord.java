@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.items.other;
 
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.init.CreativeTabsAether;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.util.SoundEvent;
@@ -9,9 +10,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemAetherRecord extends ItemRecord
 {
-	public ItemAetherRecord(final String recordName, final SoundEvent sound)
+	public ItemAetherRecord(final String recordName, final String sound)
 	{
-		super(recordName, sound);
+		super(recordName, new SoundEvent(AetherCore.getResource(sound)));
 
 		this.setCreativeTab(CreativeTabsAether.TAB_MISCELLANEOUS);
 	}

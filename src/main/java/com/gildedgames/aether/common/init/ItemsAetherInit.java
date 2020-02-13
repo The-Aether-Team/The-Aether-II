@@ -41,7 +41,7 @@ public class ItemsAetherInit
 	{
 		final ItemRegistryHelper r = new ItemRegistryHelper(event.getRegistry());
 		r.register("aechor_petal", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MISCELLANEOUS));
-		r.register("aerwhale_music_disc", new ItemAetherRecord("aerwhale", SoundsAether.record_aerwhale));
+		r.register("aerwhale_music_disc", new ItemAetherRecord("aerwhale", "records.aerwhale"));
 		r.register("aether_saddle", new ItemDropOnDeath().setMaxStackSize(1).setCreativeTab(CreativeTabsAether.TAB_MISCELLANEOUS));
 		r.register("ambrosium_chunk", new ItemAmbrosiumChunk().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("ambrosium_shard", new ItemAmbrosiumShard().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
@@ -126,17 +126,17 @@ public class ItemsAetherInit
 		r.register("jelly_plumproot", new ItemAetherFood(6, 0.6F, false).setConsumptionDuration(32));
 		r.register("kirrid_cutlet", new ItemAetherFood(6, 0.8F, true));
 		r.register("kirrid_loin", new ItemAetherFood(2, 0.3F, true));
-		r.register("labyrinth_music_disc", new ItemAetherRecord("labyrinth", SoundsAether.record_labyrinth));
+		r.register("labyrinth_music_disc", new ItemAetherRecord("labyrinth", "records.labyrinth"));
 		r.register("moa_egg_item", new ItemMoaEgg(false));
 		r.register("moa_feather", new ItemMoaFeather().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
-		r.register("moa_music_disc", new ItemAetherRecord("moa", SoundsAether.record_moa));
+		r.register("moa_music_disc", new ItemAetherRecord("moa", "records.moa"));
 		r.register("orange", new ItemAetherFood(2, 0.3F, false).setConsumptionDuration(24));
 		r.register("orange_lollipop", new ItemAetherFood(7, 0.6F, false));
 		r.register("plumproot_mash", new ItemAetherFood(2, 0.2F, false).setConsumptionDuration(24));
 		r.register("plumproot_pie", new ItemAetherFood(7, 0.3F, false));
 		r.register("rainbow_moa_egg", new ItemMoaEgg(true).setCreativeTab(CreativeTabsAether.TAB_MISCELLANEOUS));
 		r.register("raw_taegore_meat", new ItemAetherFood(3, 0.3F, true));
-		r.register("recording_892", new ItemAetherRecord("recording_892", SoundsAether.record_recording_892));
+		r.register("recording_892", new ItemAetherRecord("recording_892", "records.recording_892"));
 		r.register("secret_skyroot_door_item", new ItemBlockCustomDoor(BlocksAether.secret_skyroot_door).setCreativeTab(CreativeTabsAether.TAB_DECORATIVE_BLOCKS));
 		r.register("shard_of_life", new ItemShardOfLife().setMaxStackSize(4).setCreativeTab(CreativeTabsAether.TAB_CONSUMABLES));
 		r.register("skyroot_axe", new ItemAetherAxe(MaterialsAether.SKYROOT_TOOL));
@@ -167,7 +167,7 @@ public class ItemsAetherInit
 		r.register("taegore_hide_helmet", new ItemTaegoreHideArmor(EntityEquipmentSlot.HEAD));
 		r.register("taegore_hide_leggings", new ItemTaegoreHideArmor(EntityEquipmentSlot.LEGS));
 		r.register("taegore_steak", new ItemAetherFood(8, 0.8F, true));
-		r.register("valkyrie_music_disc", new ItemAetherRecord("valkyrie", SoundsAether.record_valkyrie));
+		r.register("valkyrie_music_disc", new ItemAetherRecord("valkyrie", "records.valkyrie"));
 		r.register("valkyrie_wings", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("winter_hat", new ItemWinterHat().setCreativeTab(CreativeTabsAether.TAB_MISCELLANEOUS));
 		r.register("wrapped_chocolates", new ItemAetherFood(4, 0.3F, false));
