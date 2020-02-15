@@ -47,6 +47,13 @@ public class EquipmentAether
 	private static void registerItems()
 	{
 		// Gloves
+		//TODO: (Replace with Gloves w/ Defense entries).
+		createEquipmentItem(ItemsAether.taegore_hide_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE, WHEN_EQUIPPED);
+		createEquipmentItem(ItemsAether.zanite_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE, WHEN_EQUIPPED);
+		createEquipmentItem(ItemsAether.arkenium_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE, WHEN_EQUIPPED);
+		createEquipmentItem(ItemsAether.gravitite_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE, WHEN_EQUIPPED);
+
+		// Gloves w/ Defense
 		//createEquipmentItem(ItemsAether.taegore_hide_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE, WHEN_EQUIPPED, new StatEffectFactory.StatProvider(
 		//		DamageTypeAttributes.PIERCE_DEFENSE_LEVEL, 1, StatEffectFactory.StatProvider.OP_ADD));
 		//createEquipmentItem(ItemsAether.zanite_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE, WHEN_EQUIPPED, new StatEffectFactory.StatProvider(
