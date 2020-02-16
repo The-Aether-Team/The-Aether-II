@@ -5,6 +5,7 @@ import com.gildedgames.aether.api.world.preparation.IPrepRegistryEntry;
 import com.gildedgames.aether.api.world.spawn.ISpawnSystem;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.effects.StatusEffectPool;
+import com.gildedgames.aether.common.capabilities.entity.effects.StatusEffectPoolProvider;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherProvider;
 import com.gildedgames.aether.common.capabilities.entity.spawning.EntitySpawningInfoProvider;
@@ -17,6 +18,7 @@ import com.gildedgames.aether.common.world.preparation.capability.PrepManagerSto
 import com.gildedgames.aether.common.world.spawning.SpawnSystem;
 import com.gildedgames.aether.common.world.spawning.SpawnSystemProvider;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
@@ -43,14 +45,10 @@ public class CapabilityAttachListener
 	@SubscribeEvent
 	public static void onEntityLoad(final AttachCapabilitiesEvent<Entity> event)
 	{
-		// UNCOMMENT TO ENABLE STATUS EFFECT SYSTEM!!
-
-		/*
 		if (event.getObject() instanceof EntityLivingBase)
 		{
 			event.addCapability(AetherCore.getResource("StatusEffects"), new StatusEffectPoolProvider((EntityLivingBase) event.getObject()));
 		}
-		*/
 
 		if (event.getObject() instanceof EntityPlayer)
 		{

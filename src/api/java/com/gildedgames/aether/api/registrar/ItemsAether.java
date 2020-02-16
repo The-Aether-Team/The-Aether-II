@@ -178,6 +178,8 @@ public class ItemsAether extends AbstractRegistrar
 
 	public static final Item recording_892 = getDefault();
 
+	public static final Item scatterglass_vial = getDefault();
+
 	public static final Item secret_skyroot_door_item = getDefault();
 
 	public static final Item shard_of_life = getDefault();
@@ -239,6 +241,8 @@ public class ItemsAether extends AbstractRegistrar
 	public static final Item valkyrie_music_disc = getDefault();
 
 	public static final Item valkyrie_wings = getDefault();
+
+	public static final Item water_vial = getDefault();
 
 	public static final Item winter_hat = getDefault();
 

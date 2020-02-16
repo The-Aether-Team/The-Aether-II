@@ -471,6 +471,8 @@ item.aether.plumproot_mash.name=Plumproot Mash
 item.aether.plumproot_pie.name=Plumproot Pie
 item.aether.winter_hat.name=Winter Hat
 item.aether.eggnog.name=Eggnog
+item.aether.scatterglass_vial.name=Scatterglass Vial
+item.aether.water_vial.name=Water Vial
 
 item.aether.skyroot_bed_item.name=Skyroot Bed
 item.aether.moa_egg_item.name=Moa Egg

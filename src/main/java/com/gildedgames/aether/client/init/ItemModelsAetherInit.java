@@ -688,6 +688,9 @@ public class ItemModelsAetherInit
 
 		registerItemModels(ItemsAether.skyroot_lizard_stick, "skyroot_lizard_stick");
 		registerItemModels(ItemsAether.skyroot_lizard_stick_roasted, "skyroot_lizard_stick_roasted");
+
+		registerItemModels(ItemsAether.scatterglass_vial, "scatterglass_vial");
+		registerItemModels(ItemsAether.water_vial, "scatterglass_water_vial");
 	}
 
 	private static void registerSnowyFlower(Block block, String name)
