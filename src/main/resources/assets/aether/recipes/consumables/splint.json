@@ -1,0 +1,14 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "aether:skyroot_stick"
+    },
+    {
+      "item": "aether:cloudwool_block"
+    }
+  ],
+  "result": {
+    "item": "aether:splint"
+  }
+}

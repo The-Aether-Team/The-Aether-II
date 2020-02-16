@@ -1,0 +1,18 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "Z",
+    "X"
+  ],
+  "key": {
+    "Z": {
+      "item": "aether:cockatrice_feather"
+    },
+    "X": {
+      "item": "aether:water_vial"
+    }
+  },
+  "result": {
+    "item": "aether:antivenom_vial"
+  }
+}

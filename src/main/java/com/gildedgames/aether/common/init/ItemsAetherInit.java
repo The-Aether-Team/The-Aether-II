@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.init;
 
 import com.gildedgames.aether.api.AetherAPI;
+import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.registrar.SoundsAether;
@@ -45,6 +46,10 @@ public class ItemsAetherInit
 		r.register("aether_saddle", new ItemDropOnDeath().setMaxStackSize(1).setCreativeTab(CreativeTabsAether.TAB_MISCELLANEOUS));
 		r.register("ambrosium_chunk", new ItemAmbrosiumChunk().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("ambrosium_shard", new ItemAmbrosiumShard().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
+		r.register("antitoxin_vial", new ItemCurative(IAetherStatusEffects.effectTypes.TOXIN, true, 32, EnumAction.DRINK)
+				.setCreativeTab(CreativeTabsAether.TAB_CONSUMABLES));
+		r.register("antivenom_vial", new ItemCurative(IAetherStatusEffects.effectTypes.COCKATRICE_VENOM, true, 32, EnumAction.DRINK)
+				.setCreativeTab(CreativeTabsAether.TAB_CONSUMABLES));
 		r.register("arkenium", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("arkenium_axe", new ItemAetherAxe(MaterialsAether.ARKENIUM_TOOL, 7.0F, -3.3F));
 		r.register("arkenium_boots", new ItemArkeniumArmor(EntityEquipmentSlot.FEET));
@@ -60,6 +65,8 @@ public class ItemsAetherInit
 		r.register("arkenium_shovel", new ItemAetherShovel(MaterialsAether.ARKENIUM_TOOL));
 		r.register("arkenium_strip", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("arkenium_sword", new ItemArkeniumSword());
+			r.register("bandage", new ItemCurative(IAetherStatusEffects.effectTypes.BLEED, false, 1, EnumAction.EAT)
+				.setCreativeTab(CreativeTabsAether.TAB_CONSUMABLES));
 		r.register("blueberries", new ItemAetherFood(1,0.2F,false).setConsumptionDuration(16));
 		r.register("blueberry_lollipop", new ItemAetherFood(5, 0.6F, false));
 		r.register("bolt", new ItemBolt().setCreativeTab(CreativeTabsAether.TAB_WEAPONS));
@@ -157,6 +164,8 @@ public class ItemsAetherInit
 		r.register("skyroot_stick", new ItemSkyrootStick().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("skyroot_sword", new ItemSkyrootSword());
 		r.register("skyroot_water_bucket", new ItemSkyrootBucket(Blocks.FLOWING_WATER));
+		r.register("splint", new ItemCurative(IAetherStatusEffects.effectTypes.FRACTURE, false, 1, EnumAction.EAT)
+				.setCreativeTab(CreativeTabsAether.TAB_CONSUMABLES));
 		r.register("stomper_pop", new ItemStomperPop());
 		r.register("swet_gel", new ItemSwetGel().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("swet_jelly", new ItemSwetJelly().setConsumptionDuration(24));

@@ -78,6 +78,13 @@ public interface IAetherStatusEffectPool
 	void modifyAllActiveEffectTimes(double activeEffectTimeModifier);
 
 	/**
+	 * Modifies the buildup value of an effect.
+	 * @param effectType The effect to modify.
+	 * @param activeEffectBuildup The buildup value of the active effect.
+	 */
+	void modifyActiveEffectBuildup(IAetherStatusEffects.effectTypes effectType, int activeEffectBuildup);
+
+	/**
 	 * Cures a specific effect, method essentially modifies the active effect time to 0.
 	 * @param effectType The effect to cure.
 	 */

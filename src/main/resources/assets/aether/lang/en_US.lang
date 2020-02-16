@@ -473,6 +473,10 @@ item.aether.winter_hat.name=Winter Hat
 item.aether.eggnog.name=Eggnog
 item.aether.scatterglass_vial.name=Scatterglass Vial
 item.aether.water_vial.name=Water Vial
+item.aether.antivenom_vial.name=Antivenom Vial
+item.aether.antitoxin_vial.name=Antitoxin Vial
+item.aether.bandage.name=Bandage
+item.aether.splint.name=Splint
 
 item.aether.skyroot_bed_item.name=Skyroot Bed
 item.aether.moa_egg_item.name=Moa Egg
@@ -864,10 +868,11 @@ gui.guidebook.discovery.moves=Moves:
 
 # Death messages
 
-death.attack.aether.effect.bleed=Bleed
-death.attack.aether.effect.toxin=Toxin
-death.attack.aether.effect.cockatriceVenom=Cockatrice Venom
-death.attack.aether.effect.fungalRot=Fungal Rot
+# Temporary messages.
+death.attack.aether.effect.bleed=%1$s bled to death
+death.attack.aether.effect.toxin=%1$s died from toxin
+death.attack.aether.effect.cockatriceVenom=%1$s died from cockatrice venom
+death.attack.aether.effect.fungalRot=%1$s died from fungal rot
 
 # Status Effects
 

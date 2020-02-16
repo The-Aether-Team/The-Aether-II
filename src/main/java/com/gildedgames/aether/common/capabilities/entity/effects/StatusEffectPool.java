@@ -192,6 +192,17 @@ public class StatusEffectPool implements IAetherStatusEffectPool
 	}
 
 	@Override
+	public void modifyActiveEffectBuildup(IAetherStatusEffects.effectTypes effectType, int activeEffectBuildup)
+	{
+		IAetherStatusEffects effect = this.getActiveEffect(effectType.name);
+
+		if (effect != null)
+		{
+			effect.setBuildup(activeEffectBuildup);
+		}
+	}
+
+	@Override
 	public void cureActiveEffect(IAetherStatusEffects.effectTypes effectType)
 	{
 		IAetherStatusEffects effect = this.getActiveEffect(effectType.name);
