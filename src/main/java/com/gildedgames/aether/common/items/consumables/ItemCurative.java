@@ -4,7 +4,6 @@ import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectPool;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
-import com.gildedgames.aether.common.entities.effects.StatusEffect;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -34,7 +33,7 @@ public class ItemCurative extends Item
         this.duration = duration;
         this.action = action;
 
-        this.maxStackSize = 1;
+        this.maxStackSize = 4;
     }
 
     @Override
@@ -62,7 +61,12 @@ public class ItemCurative extends Item
 
             if (statusEffectPool != null)
             {
-                statusEffectPool.modifyActiveEffectBuildup(this.effect, 0);
+                if (statusEffectPool.isEffectApplied(this.effect))
+                {
+                    statusEffectPool.modifyActiveEffectApplication(this.effect, false);
+                }
+
+                statusEffectPool.modifyActiveEffectBuildup(this.effect, statusEffectPool.getBuildupFromEffect(this.effect) - 50);
             }
 
             if (this.returnItem)
