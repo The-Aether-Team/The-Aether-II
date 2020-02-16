@@ -25,7 +25,7 @@ public class AetherCore
 
 	public static final String MOD_VERSION = "0.2.7";
 
-	public static final String MOD_DEPENDENCIES = "required-after:orbis-lib@[0.2.0,)";
+	public static final String MOD_DEPENDENCIES = "required-after:orbis-lib@[0.2.0,);" + "required-after:forge@[14.23.5.2816,)";
 
 	public static final Logger LOGGER = LogManager.getLogger("AetherII");
 
