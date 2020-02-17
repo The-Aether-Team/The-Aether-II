@@ -21,12 +21,14 @@ import java.util.Objects;
 
 public class ItemCurative extends ItemDropOnDeath
 {
-    public boolean returnItem;
-    public int duration;
-    public EnumAction action;
+    private IAetherStatusEffects.effectTypes effect;
+    private boolean returnItem;
+    private int duration;
+    private EnumAction action;
 
-    public ItemCurative(boolean returnItem, int duration, EnumAction action)
+    public ItemCurative(IAetherStatusEffects.effectTypes effect, boolean returnItem, int duration, EnumAction action)
     {
+        this.effect = effect;
         this.returnItem = returnItem;
         this.duration = duration;
         this.action = action;
@@ -59,45 +61,42 @@ public class ItemCurative extends ItemDropOnDeath
 
             if (statusEffectPool != null)
             {
-                if (stack.getItem() == ItemsAether.bandage)
+                if (this.effect == IAetherStatusEffects.effectTypes.BLEED)
                 {
-                    statusEffectPool.modifyActiveEffectBuildup(IAetherStatusEffects.effectTypes.BLEED,
-                            statusEffectPool.getBuildupFromEffect(IAetherStatusEffects.effectTypes.BLEED) - 55);
+                    statusEffectPool.modifyActiveEffectBuildup(this.effect,
+                            statusEffectPool.getBuildupFromEffect(this.effect) - 55);
                 }
-
-                if (stack.getItem() == ItemsAether.splint)
+                else if (this.effect == IAetherStatusEffects.effectTypes.FRACTURE)
                 {
-                    if (statusEffectPool.isEffectApplied(IAetherStatusEffects.effectTypes.FRACTURE))
+                    if (statusEffectPool.isEffectApplied(this.effect))
                     {
-                        statusEffectPool.modifyActiveEffectTime(IAetherStatusEffects.effectTypes.FRACTURE, 0.2);
+                        statusEffectPool.modifyActiveEffectTime(this.effect, 0.2);
                     }
                     else
                     {
-                        statusEffectPool.modifyActiveEffectBuildup(IAetherStatusEffects.effectTypes.FRACTURE,
-                                statusEffectPool.getBuildupFromEffect(IAetherStatusEffects.effectTypes.FRACTURE) - 55);
+                        statusEffectPool.modifyActiveEffectBuildup(this.effect,
+                                statusEffectPool.getBuildupFromEffect(this.effect) - 55);
                     }
                 }
-
-                if (stack.getItem() == ItemsAether.antitoxin_vial)
+                else if (this.effect == IAetherStatusEffects.effectTypes.TOXIN)
                 {
-                    if (statusEffectPool.isEffectApplied(IAetherStatusEffects.effectTypes.TOXIN))
+                    if (statusEffectPool.isEffectApplied(this.effect))
                     {
-                        statusEffectPool.modifyActiveEffectApplication(IAetherStatusEffects.effectTypes.TOXIN, false);
+                        statusEffectPool.modifyActiveEffectApplication(this.effect, false);
                     }
 
-                    statusEffectPool.modifyActiveEffectBuildup(IAetherStatusEffects.effectTypes.TOXIN,
-                            statusEffectPool.getBuildupFromEffect(IAetherStatusEffects.effectTypes.TOXIN) - 55);
+                    statusEffectPool.modifyActiveEffectBuildup(this.effect,
+                            statusEffectPool.getBuildupFromEffect(this.effect) - 55);
                 }
-
-                if (stack.getItem() == ItemsAether.antivenom_vial)
+                else if (this.effect == IAetherStatusEffects.effectTypes.COCKATRICE_VENOM)
                 {
-                    if (statusEffectPool.isEffectApplied(IAetherStatusEffects.effectTypes.COCKATRICE_VENOM))
+                    if (statusEffectPool.isEffectApplied(this.effect))
                     {
-                        statusEffectPool.modifyActiveEffectApplication(IAetherStatusEffects.effectTypes.COCKATRICE_VENOM, false);
+                        statusEffectPool.modifyActiveEffectApplication(this.effect, false);
                     }
 
-                    statusEffectPool.modifyActiveEffectBuildup(IAetherStatusEffects.effectTypes.COCKATRICE_VENOM,
-                            statusEffectPool.getBuildupFromEffect(IAetherStatusEffects.effectTypes.COCKATRICE_VENOM) - 55);
+                    statusEffectPool.modifyActiveEffectBuildup(this.effect,
+                            statusEffectPool.getBuildupFromEffect(this.effect) - 55);
                 }
             }
 

@@ -20,7 +20,7 @@ public class StatusEffectCockatriceVenom extends StatusEffect
 	{
 		if (this.isEffectApplied)
 		{
-			if (this.effectTimer % (TICKS_PER_SECOND * 2) == 0 && livingBase.getHealth() >= 1)
+			if (this.effectTimer % (TICKS_PER_SECOND * 2) == 0 && livingBase.getHealth() >= 2)
 			{
 				livingBase.attackEntityFrom(EffectsDamageSource.COCKATRICE_VENOM, 1f);
 			}

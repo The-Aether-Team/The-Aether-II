@@ -21,7 +21,7 @@ public class StatusEffectToxin extends StatusEffect
 	{
 		if (this.isEffectApplied)
 		{
-			if (timer % TICKS_PER_SECOND == 0 && livingBase.getHealth() >= 6)
+			if (timer % TICKS_PER_SECOND == 0 && livingBase.getHealth() >= 7)
 			{
 				livingBase.attackEntityFrom(EffectsDamageSource.TOXIN, 1f);
 			}
