@@ -114,6 +114,11 @@ public class AIElectricShock extends EntityAI<EntityTempest>
 				int buildup = IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectStun(living), EEffectIntensity.MAJOR);
 				IAetherStatusEffects.applyStatusEffect(living, IAetherStatusEffects.effectTypes.STUN, buildup);
 			}
+			else
+			{
+				int buildup = IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectStun(living), EEffectIntensity.ORDINARY);
+				IAetherStatusEffects.applyStatusEffect(living, IAetherStatusEffects.effectTypes.STUN, buildup);
+			}
 		}
 	}
 }

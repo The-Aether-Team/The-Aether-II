@@ -135,21 +135,6 @@ public class EntityVaranys extends EntityAetherMob implements IEntityMultiPart
 	}
 
 	@Override
-	protected void applyStatusEffectOnAttack(final Entity target)
-	{
-		if (target instanceof EntityLivingBase)
-		{
-			final EntityLivingBase living = (EntityLivingBase) target;
-
-			if (!living.isActiveItemStackBlocking())
-			{
-				int buildup = IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectBleed(living), EEffectIntensity.MINOR);
-				IAetherStatusEffects.applyStatusEffect(living, IAetherStatusEffects.effectTypes.BLEED, buildup);
-			}
-		}
-	}
-
-	@Override
 	public void onLivingUpdate()
 	{
 		super.onLivingUpdate();
