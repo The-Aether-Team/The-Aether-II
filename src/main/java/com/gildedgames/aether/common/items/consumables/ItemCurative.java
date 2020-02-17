@@ -4,12 +4,12 @@ import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectPool;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
+import com.gildedgames.aether.common.items.ItemDropOnDeath;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.EnumAction;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.ActionResult;
@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 
 import java.util.Objects;
 
-public class ItemCurative extends Item
+public class ItemCurative extends ItemDropOnDeath
 {
     public IAetherStatusEffects.effectTypes effect;
     public boolean returnItem;
@@ -61,12 +61,33 @@ public class ItemCurative extends Item
 
             if (statusEffectPool != null)
             {
-                if (statusEffectPool.isEffectApplied(this.effect))
+                if (stack.getItem() == ItemsAether.bandage && this.effect == IAetherStatusEffects.effectTypes.BLEED)
                 {
-                    statusEffectPool.modifyActiveEffectApplication(this.effect, false);
+                    statusEffectPool.modifyActiveEffectBuildup(this.effect, statusEffectPool.getBuildupFromEffect(this.effect) - 55);
                 }
 
-                statusEffectPool.modifyActiveEffectBuildup(this.effect, statusEffectPool.getBuildupFromEffect(this.effect) - 50);
+                if (stack.getItem() == ItemsAether.splint && this.effect == IAetherStatusEffects.effectTypes.FRACTURE)
+                {
+                    if (statusEffectPool.isEffectApplied(this.effect))
+                    {
+                        statusEffectPool.modifyActiveEffectTime(this.effect, 0.2);
+                    }
+                    else
+                    {
+                        statusEffectPool.modifyActiveEffectBuildup(this.effect, statusEffectPool.getBuildupFromEffect(this.effect) - 55);
+                    }
+                }
+
+                if ((stack.getItem() == ItemsAether.antitoxin_vial && this.effect == IAetherStatusEffects.effectTypes.TOXIN)
+                        || (stack.getItem() == ItemsAether.antivenom_vial && this.effect == IAetherStatusEffects.effectTypes.COCKATRICE_VENOM))
+                {
+                    if (statusEffectPool.isEffectApplied(this.effect))
+                    {
+                        statusEffectPool.modifyActiveEffectApplication(this.effect, false);
+                    }
+
+                    statusEffectPool.modifyActiveEffectBuildup(this.effect, statusEffectPool.getBuildupFromEffect(this.effect) - 55);
+                }
             }
 
             if (this.returnItem)

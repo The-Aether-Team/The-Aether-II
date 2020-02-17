@@ -12,26 +12,32 @@ import java.util.Collection;
 
 public class StatusEffectStun extends StatusEffect
 {
+	private EntityLivingBase affectedEntity;
+
 	public StatusEffectStun(EntityLivingBase livingBase)
 	{
-		super(effectTypes.STUN, new AttributeModifier("aether.statusEffectStun", -1D, 1).setSaved(false), livingBase);
+		super(effectTypes.STUN, new AttributeModifier("aether.statusEffectStun", -1.0, 1).setSaved(false), livingBase);
+
+		this.affectedEntity = livingBase;
 	}
 
 	@Override
 	public void applyEffect(EntityLivingBase livingBase, int timer)
 	{
-		IAttributeInstance iAttributeInstance = livingBase.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
+		IAttributeInstance iAttributeInstance;
 
 		if (this.isEffectApplied)
 		{
-			if (!iAttributeInstance.hasModifier(this.getAttributeModifier()))
+			iAttributeInstance = livingBase.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
+			if (iAttributeInstance != null && !iAttributeInstance.hasModifier(this.getAttributeModifier()))
 			{
 				iAttributeInstance.applyModifier(this.getAttributeModifier());
 			}
 		}
 		else
 		{
-			if (iAttributeInstance.getModifier(this.getAttributeModifier().getID()) != null)
+			iAttributeInstance = livingBase.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
+			if (iAttributeInstance != null && iAttributeInstance.getModifier(this.getAttributeModifier().getID()) != null)
 			{
 				iAttributeInstance.removeModifier(this.getAttributeModifier());
 			}
@@ -41,7 +47,15 @@ public class StatusEffectStun extends StatusEffect
 	@Override
 	public void onEffectEnd()
 	{
+		EntityLivingBase livingBase = this.affectedEntity;
 
+		IAttributeInstance iAttributeInstance;
+
+		iAttributeInstance = livingBase.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
+		if (iAttributeInstance != null && iAttributeInstance.getModifier(this.getAttributeModifier().getID()) != null)
+		{
+			iAttributeInstance.removeModifier(this.getAttributeModifier());
+		}
 	}
 
 	@Override

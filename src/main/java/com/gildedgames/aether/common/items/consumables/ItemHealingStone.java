@@ -1,5 +1,8 @@
 package com.gildedgames.aether.common.items.consumables;
 
+import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectPool;
+import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
+import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.items.IDropOnDeath;
 import net.minecraft.entity.EntityLivingBase;
@@ -94,6 +97,21 @@ public class ItemHealingStone extends Item implements IDropOnDeath
 
 		if (!worldIn.isRemote)
 		{
+			IAetherStatusEffectPool statusEffectPool = entity.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
+
+			if (statusEffectPool != null)
+			{
+				if (!statusEffectPool.isEffectApplied(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING))
+				{
+					statusEffectPool.applyStatusEffect(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING, 25);
+				}
+				else
+				{
+					statusEffectPool.modifyActiveEffectBuildup(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING,
+							statusEffectPool.getBuildupFromEffect(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING) + 25);
+				}
+			}
+
 			if (entity.getHealth() < entity.getMaxHealth())
 			{
 				float dif = entity.getMaxHealth() - entity.getHealth();

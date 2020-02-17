@@ -23,7 +23,7 @@ public enum ItemDartType
 	{
 		ItemDartType[] darts = values();
 
-		return darts[ordinal > darts.length || ordinal < 0 ? 0 : ordinal];
+		return darts[ordinal >= darts.length || ordinal < 0 ? 0 : ordinal];
 	}
 
 	public int getSlashDamageLevel()

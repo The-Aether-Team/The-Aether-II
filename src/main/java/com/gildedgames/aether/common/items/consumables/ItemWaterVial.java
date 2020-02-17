@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.items.consumables;
 
 import com.gildedgames.aether.api.registrar.ItemsAether;
+import com.gildedgames.aether.common.items.ItemDropOnDeath;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,7 +17,7 @@ import net.minecraft.world.World;
 
 import java.util.Objects;
 
-public class ItemWaterVial extends Item
+public class ItemWaterVial extends ItemDropOnDeath
 {
     public ItemWaterVial()
     {

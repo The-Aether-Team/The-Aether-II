@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.items.other;
 
 import com.gildedgames.aether.api.registrar.ItemsAether;
+import com.gildedgames.aether.common.items.ItemDropOnDeath;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -20,7 +21,7 @@ import net.minecraft.world.World;
 
 import java.util.Objects;
 
-public class ItemScatterglassVial extends Item
+public class ItemScatterglassVial extends ItemDropOnDeath
 {
     @Override
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)

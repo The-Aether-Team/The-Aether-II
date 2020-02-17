@@ -12,9 +12,13 @@ import java.util.Collection;
 
 public class StatusEffectFracture extends StatusEffect
 {
+	private EntityLivingBase affectedEntity;
+
 	public StatusEffectFracture(EntityLivingBase livingBase)
 	{
 		super(effectTypes.FRACTURE, new AttributeModifier("aether.statusEffectFractureCripple", -0.25, 1).setSaved(false), livingBase);
+
+		this.affectedEntity = livingBase;
 	}
 
 	@Override
@@ -67,7 +71,27 @@ public class StatusEffectFracture extends StatusEffect
 	@Override
 	public void onEffectEnd()
 	{
+		EntityLivingBase livingBase = this.affectedEntity;
 
+		IAttributeInstance iAttributeInstance;
+
+		iAttributeInstance = livingBase.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
+		if (iAttributeInstance != null && iAttributeInstance.getModifier(this.getAttributeModifier().getID()) != null)
+		{
+			iAttributeInstance.removeModifier(this.getAttributeModifier());
+		}
+
+		iAttributeInstance = livingBase.getEntityAttribute(SharedMonsterAttributes.ARMOR);
+		if (iAttributeInstance != null && iAttributeInstance.getModifier(this.getAttributeModifier().getID()) != null)
+		{
+			iAttributeInstance.removeModifier(this.getAttributeModifier());
+		}
+
+		iAttributeInstance = livingBase.getEntityAttribute(SharedMonsterAttributes.ATTACK_SPEED);
+		if (iAttributeInstance != null && iAttributeInstance.getModifier(this.getAttributeModifier().getID()) != null)
+		{
+			iAttributeInstance.removeModifier(this.getAttributeModifier());
+		}
 	}
 
 	@Override

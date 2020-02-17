@@ -11,9 +11,6 @@ import java.util.Collection;
 
 public class StatusEffectToxin extends StatusEffect
 {
-	private int NumOfHeartsEffected = 0;
-	private final int MAX_HEARTS = 6;
-
 	public StatusEffectToxin(EntityLivingBase livingBase)
 	{
 		super(effectTypes.TOXIN, null, livingBase);
@@ -24,10 +21,9 @@ public class StatusEffectToxin extends StatusEffect
 	{
 		if (this.isEffectApplied)
 		{
-			if (timer % TICKS_PER_SECOND == 0 && this.NumOfHeartsEffected < this.MAX_HEARTS)
+			if (timer % TICKS_PER_SECOND == 0 && livingBase.getHealth() >= 6)
 			{
 				livingBase.attackEntityFrom(EffectsDamageSource.TOXIN, 1f);
-				++this.NumOfHeartsEffected;
 			}
 		}
 	}
@@ -35,8 +31,7 @@ public class StatusEffectToxin extends StatusEffect
 	@Override
 	public void onEffectEnd()
 	{
-		this.NumOfHeartsEffected = 0;
-		AetherCore.LOGGER.info(this.NAME + " : Ended");
+
 	}
 
 	@Override
