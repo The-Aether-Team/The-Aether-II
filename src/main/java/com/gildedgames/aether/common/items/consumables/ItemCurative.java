@@ -4,7 +4,6 @@ import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectPool;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
-import com.gildedgames.aether.common.entities.blocks.EntityParachute;
 import com.gildedgames.aether.common.items.ItemDropOnDeath;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.resources.I18n;
@@ -83,8 +82,7 @@ public class ItemCurative extends ItemDropOnDeath
             {
                 if (this.effect == IAetherStatusEffects.effectTypes.BLEED)
                 {
-                    statusEffectPool.modifyActiveEffectBuildup(this.effect,
-                            statusEffectPool.getBuildupFromEffect(this.effect) - 55);
+                    statusEffectPool.modifyActiveEffectBuildup(this.effect,statusEffectPool.getBuildupFromEffect(this.effect) - 55);
                 }
                 else if (this.effect == IAetherStatusEffects.effectTypes.FRACTURE)
                 {
@@ -94,8 +92,7 @@ public class ItemCurative extends ItemDropOnDeath
                     }
                     else
                     {
-                        statusEffectPool.modifyActiveEffectBuildup(this.effect,
-                                statusEffectPool.getBuildupFromEffect(this.effect) - 55);
+                        statusEffectPool.modifyActiveEffectBuildup(this.effect,statusEffectPool.getBuildupFromEffect(this.effect) - 55);
                     }
                 }
                 else if (this.effect == IAetherStatusEffects.effectTypes.TOXIN)
@@ -105,8 +102,7 @@ public class ItemCurative extends ItemDropOnDeath
                         statusEffectPool.modifyActiveEffectApplication(this.effect, false);
                     }
 
-                    statusEffectPool.modifyActiveEffectBuildup(this.effect,
-                            statusEffectPool.getBuildupFromEffect(this.effect) - 55);
+                    statusEffectPool.modifyActiveEffectBuildup(this.effect,statusEffectPool.getBuildupFromEffect(this.effect) - 55);
                 }
                 else if (this.effect == IAetherStatusEffects.effectTypes.COCKATRICE_VENOM)
                 {
@@ -115,8 +111,7 @@ public class ItemCurative extends ItemDropOnDeath
                         statusEffectPool.modifyActiveEffectApplication(this.effect, false);
                     }
 
-                    statusEffectPool.modifyActiveEffectBuildup(this.effect,
-                            statusEffectPool.getBuildupFromEffect(this.effect) - 55);
+                    statusEffectPool.modifyActiveEffectBuildup(this.effect,statusEffectPool.getBuildupFromEffect(this.effect) - 55);
                 }
             }
 
