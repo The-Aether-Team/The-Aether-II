@@ -881,6 +881,16 @@ statusEffect.aether.fungalRot=Fungal Rot
 statusEffect.aether.stun=Stun
 statusEffect.aether.toxin=Toxin
 
+# Curatives
+
+item.aether.antitoxin_vial.reduction.desc=Reduces Toxin Buildup
+item.aether.antitoxin_vial.cure.desc=Cures Toxin
+item.aether.antivenom_vial.reduction.desc=Reduces Cockatrice Venom Buildup
+item.aether.antivenom_vial.cure.desc=Cures Cockatrice Venom
+item.aether.bandage.reduction.desc=Reduces Bleeding Buildup
+item.aether.splint.reduction.desc=Reduces Fracture Buildup
+item.aether.splint.cure.desc=Increases Fracture Healing Time
+
 # Intro
 
 intro.prologue=200 years after a lone adventurer defeated the tyrannical Sun Spirit, Karthuul, a new traveller is about to enter the Aether...

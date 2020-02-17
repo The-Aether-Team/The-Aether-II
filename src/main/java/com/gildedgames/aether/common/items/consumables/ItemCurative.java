@@ -4,8 +4,11 @@ import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectPool;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
+import com.gildedgames.aether.common.entities.blocks.EntityParachute;
 import com.gildedgames.aether.common.items.ItemDropOnDeath;
 import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -15,8 +18,13 @@ import net.minecraft.stats.StatList;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
+import java.util.List;
 import java.util.Objects;
 
 public class ItemCurative extends ItemDropOnDeath
@@ -34,6 +42,18 @@ public class ItemCurative extends ItemDropOnDeath
         this.action = action;
 
         this.maxStackSize = 4;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(final ItemStack stack, @Nullable final World worldIn, final List<String> tooltip, final ITooltipFlag flagIn)
+    {
+        tooltip.add(TextFormatting.DARK_GRAY + I18n.format(this.getTranslationKey() + ".reduction.desc"));
+
+        if (stack.getItem() != ItemsAether.bandage)
+        {
+            tooltip.add(TextFormatting.DARK_GRAY + I18n.format(this.getTranslationKey() + ".cure.desc"));
+        }
     }
 
     @Override
