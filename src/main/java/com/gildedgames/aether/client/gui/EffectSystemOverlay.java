@@ -9,10 +9,12 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class EffectSystemOverlay extends Gui
 {
 	private static final ResourceLocation BAR_OUTLINE = AetherCore.getResource("textures/gui/overlay/effects/bar_outline.png");
+	private static final ResourceLocation BAR_HIGHLIGHT = AetherCore.getResource("textures/gui/overlay/effects/bar_highlight.png");
 	private static final ResourceLocation BAR_BUILDUP = AetherCore.getResource("textures/gui/overlay/effects/buildup_bar.png");
 
 	private static final ResourceLocation AMBROSIUM_ICON = AetherCore.getResource("textures/gui/overlay/effects/ambrosium_poisoning.png");
@@ -79,14 +81,22 @@ public class EffectSystemOverlay extends Gui
 
 						yPosShift = 6.0F;
 					}
-					else {
-						yPosShift = 2.0f;
+					else
+					{
+						this.renderBar(mc, BAR_OUTLINE, 22, 5, this.BAR_OUTLINE_TEXTURE_WIDTH, this.BAR_OUTLINE_TEXTURE_HEIGHT, xPos + (i * 23.f), yPos,
+								false, effect);
+
+						barWidth = 20 - (int) (effect.getTimer() / (effect.getActiveEffectTime() * effect.getActiveEffectTimeModifier()));
+
+						this.renderBar(mc, BAR_BUILDUP, barWidth, 3, this.BAR_TEXTURE_WIDTH, this.BAR_TEXTURE_HEIGHT, (xPos + 1F) + (i * 23.f), (yPos + 1F),
+								true, effect);
+
+						yPosShift = 6.0F;
 					}
 
 					this.renderIcon(mc, this.getEffectIconFromType(effect.getEffectType()), 16,16,16,16,xPos + 2f + (i * 23.f),yPos+yPosShift);
 					i++;
 				}
-
 			}
 		}
 	}
@@ -109,14 +119,14 @@ public class EffectSystemOverlay extends Gui
 			r = Color.getColorFromEffect(effect.getEffectType()).r / 255.F;
 			g = Color.getColorFromEffect(effect.getEffectType()).g / 255.F;
 			b = Color.getColorFromEffect(effect.getEffectType()).b / 255.F;
-			a = 1.f;
+			a = 1.0f;
 
 			GlStateManager.color(r,g,b,a);
 		}
 
 		Gui.drawModalRectWithCustomSizedTexture(0,0,0, 0, width, height, textureWidth, textureHeight);
 
-		GlStateManager.color(1,1,1,1);
+		GlStateManager.color(1,1,1, 1);
 
 		GlStateManager.popMatrix();
 	}

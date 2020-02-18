@@ -162,6 +162,8 @@ public interface IAetherStatusEffects extends NBT
 	int getBuildup();
 	double getResistance();
 	int getTimer();
+	int getActiveEffectTime();
+	double getActiveEffectTimeModifier();
 	boolean getIsEffectApplied();
 	effectTypes getEffectType();
 

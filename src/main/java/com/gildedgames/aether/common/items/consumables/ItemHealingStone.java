@@ -81,10 +81,15 @@ public class ItemHealingStone extends Item implements IDropOnDeath
 	{
 		ItemStack stack = player.getHeldItem(hand);
 
-		if (getUsesLeft(stack) > 0 && player.getAbsorptionAmount() < 20.0F)
+		IAetherStatusEffectPool statusEffectPool = player.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
+
+		if (statusEffectPool != null && !statusEffectPool.isEffectApplied(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING))
 		{
-			player.setActiveHand(EnumHand.MAIN_HAND);
-			return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+			if (getUsesLeft(stack) > 0 && player.getAbsorptionAmount() < 20.0F)
+			{
+				player.setActiveHand(EnumHand.MAIN_HAND);
+				return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+			}
 		}
 
 		return new ActionResult<>(EnumActionResult.FAIL, stack);
