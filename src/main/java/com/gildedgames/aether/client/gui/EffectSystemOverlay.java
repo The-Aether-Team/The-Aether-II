@@ -34,6 +34,9 @@ public class EffectSystemOverlay extends Gui
 	private final int BAR_TEXTURE_WIDTH = 20;
 	private final int BAR_TEXTURE_HEIGHT = 3;
 
+	private float alpha = 0.0f;
+	private boolean increasing = true;
+
 	public void render(Minecraft mc)
 	{
 		ScaledResolution res = new ScaledResolution(mc);
@@ -82,6 +85,9 @@ public class EffectSystemOverlay extends Gui
 						this.renderBar(mc, BAR_BUILDUP, barWidth, 3, this.BAR_TEXTURE_WIDTH, this.BAR_TEXTURE_HEIGHT, (xPos + 1F) + (i * 25.f), (yPos + 1F),
 								true, effect);
 
+						this.alpha = 0.0f;
+						this.increasing = true;
+
 						yPosShift = 6.0F;
 					}
 					else
@@ -89,22 +95,73 @@ public class EffectSystemOverlay extends Gui
 						this.renderBar(mc, BAR_OUTLINE, 22, 5, this.BAR_OUTLINE_TEXTURE_WIDTH, this.BAR_OUTLINE_TEXTURE_HEIGHT, xPos + (i * 25.f), yPos,
 								false, effect);
 
-						this.renderBar(mc, BAR_HIGHLIGHT, 24, 7, this.BAR_HIGHLIGHT_TEXTURE_WIDTH, this.BAR_HIGHLIGHT_TEXTURE_HEIGHT, (xPos - 1) + (i * 25.f), (yPos - 1),
-								true, effect);
-
 						barWidth = 20 - (int) (effect.getTimer() / (effect.getActiveEffectTime() * effect.getActiveEffectTimeModifier()));
 
 						this.renderBar(mc, BAR_BUILDUP, barWidth, 3, this.BAR_TEXTURE_WIDTH, this.BAR_TEXTURE_HEIGHT, (xPos + 1F) + (i * 25.f), (yPos + 1F),
 								true, effect);
 
+						this.renderBar(mc, BAR_HIGHLIGHT, 24, 7, this.BAR_HIGHLIGHT_TEXTURE_WIDTH, this.BAR_HIGHLIGHT_TEXTURE_HEIGHT, (xPos - 1) + (i * 25.f), (yPos - 1),
+								true, effect);
+
+
+						if (this.increasing)
+						{
+							this.alpha += 0.02f;
+
+							if (this.alpha >= 1f)
+							{
+								this.increasing = false;
+							}
+						}
+						else
+						{
+							this.alpha -= 0.02f;
+
+							if (this.alpha <= 0f)
+							{
+								this.increasing = true;
+							}
+						}
+
+						this.renderHighlight(mc, BAR_HIGHLIGHT, 24, 7, this.BAR_HIGHLIGHT_TEXTURE_WIDTH, this.BAR_HIGHLIGHT_TEXTURE_HEIGHT, (xPos - 1) + (i * 25.f), (yPos - 1),
+								true, effect, this.alpha);
+
 						yPosShift = 6.0F;
 					}
 
-					this.renderIcon(mc, this.getEffectIconFromType(effect.getEffectType()), 16,16,16,16,xPos + 2f + (i * 25.f),yPos+yPosShift);
+					this.renderIcon(mc, this.getEffectIconFromType(effect.getEffectType()), 16,16,16,16,xPos + 3f + (i * 25.f),yPos+yPosShift);
 					i++;
 				}
 			}
 		}
+	}
+
+	private void renderHighlight(Minecraft mc, ResourceLocation texture, int width, int height, int textureWidth, int textureHeight, float x, float y, boolean doAlpha, IAetherStatusEffects effect,
+								 float alpha)
+	{
+		GlStateManager.pushMatrix();
+
+		GlStateManager.enableBlend();
+		GlStateManager.disableRescaleNormal();
+
+		mc.getTextureManager().bindTexture(texture);
+		GlStateManager.translate(x,y,0.0f);
+
+		if (doAlpha)
+		{
+			Color color = Color.getColorFromEffect(effect.getEffectType());
+			float a = 0 ;
+
+			a = alpha;
+
+			GlStateManager.color(1,1,1, a);
+		}
+
+		Gui.drawModalRectWithCustomSizedTexture(0,0,0, 0, width, height, textureWidth, textureHeight);
+
+		GlStateManager.color(1,1,1, 1);
+
+		GlStateManager.popMatrix();
 	}
 
 	private void renderBar(Minecraft mc, ResourceLocation texture, int width, int height, int textureWidth, int textureHeight, float x, float y, boolean doColor, IAetherStatusEffects effect)
