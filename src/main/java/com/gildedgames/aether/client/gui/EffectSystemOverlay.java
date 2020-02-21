@@ -8,6 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
@@ -34,8 +35,10 @@ public class EffectSystemOverlay extends Gui
 	private final int BAR_TEXTURE_WIDTH = 20;
 	private final int BAR_TEXTURE_HEIGHT = 3;
 
-	private float alpha = 0.0f;
+	private float highlightAlpha = 0.0f;
 	private boolean increasing = true;
+
+	private float textAlpha = 1.0f;
 
 	public void render(Minecraft mc)
 	{
@@ -45,7 +48,6 @@ public class EffectSystemOverlay extends Gui
 
 		if (statusEffectPool != null)
 		{
-
 			int numOfEffectsApplied = 0;
 
 			for (IAetherStatusEffects effect : statusEffectPool.getPool().values())
@@ -85,8 +87,10 @@ public class EffectSystemOverlay extends Gui
 						this.renderBar(mc, BAR_BUILDUP, barWidth, 3, this.BAR_TEXTURE_WIDTH, this.BAR_TEXTURE_HEIGHT, (xPos + 1F) + (i * 25.f), (yPos + 1F),
 								true, effect);
 
-						this.alpha = 0.0f;
+						this.highlightAlpha = 0.0f;
 						this.increasing = true;
+
+						this.textAlpha = 1.0f;
 
 						yPosShift = 6.0F;
 					}
@@ -103,28 +107,45 @@ public class EffectSystemOverlay extends Gui
 						this.renderBar(mc, BAR_HIGHLIGHT, 24, 7, this.BAR_HIGHLIGHT_TEXTURE_WIDTH, this.BAR_HIGHLIGHT_TEXTURE_HEIGHT, (xPos - 1) + (i * 25.f), (yPos - 1),
 								true, effect);
 
-
 						if (this.increasing)
 						{
-							this.alpha += 0.02f;
+							this.highlightAlpha += 0.02f;
 
-							if (this.alpha >= 1f)
+							if (this.highlightAlpha >= 1f)
 							{
 								this.increasing = false;
 							}
 						}
 						else
 						{
-							this.alpha -= 0.02f;
+							this.highlightAlpha -= 0.02f;
 
-							if (this.alpha <= 0f)
+							if (this.highlightAlpha <= 0f)
 							{
 								this.increasing = true;
 							}
 						}
 
 						this.renderHighlight(mc, BAR_HIGHLIGHT, 24, 7, this.BAR_HIGHLIGHT_TEXTURE_WIDTH, this.BAR_HIGHLIGHT_TEXTURE_HEIGHT, (xPos - 1) + (i * 25.f), (yPos - 1),
-								true, effect, this.alpha);
+								true, effect, this.highlightAlpha);
+
+						if (effect.getTimer() > 5 && effect.getTimer() < 30)
+						{
+							if (this.textAlpha > 0.05f)
+							{
+								this.textAlpha -= 0.04f;
+							}
+							else
+							{
+								this.textAlpha = 0.0f;
+							}
+
+							this.renderText(mc, (xPos + 11) + (i * 25.f), yPos + 22, effect, this.textAlpha);
+						}
+						else if (effect.getTimer() <= 5)
+						{
+							this.renderText(mc, (xPos + 11) + (i * 25.f), yPos + 22, effect, 1.0f);
+						}
 
 						yPosShift = 6.0F;
 					}
@@ -134,6 +155,29 @@ public class EffectSystemOverlay extends Gui
 				}
 			}
 		}
+	}
+
+	private void renderText(Minecraft mc, float x, float y, IAetherStatusEffects effect, float alpha)
+	{
+		GlStateManager.pushMatrix();
+
+		float r = 0, g = 0, b = 0, a = 0 ;
+
+		r = Color.getColorFromEffect(effect.getEffectType()).r / 255.F;
+		g = Color.getColorFromEffect(effect.getEffectType()).g / 255.F;
+		b = Color.getColorFromEffect(effect.getEffectType()).b / 255.F;
+		a = alpha;
+
+		if (alpha > 0)
+		{
+			int rgb = new java.awt.Color(r, g, b, a).getRGB();
+
+			this.drawCenteredString(mc.fontRenderer, I18n.format(effect.getEffectName()), (int) x, (int) y, rgb);
+		}
+
+		GlStateManager.color(1,1,1, 1);
+
+		GlStateManager.popMatrix();
 	}
 
 	private void renderHighlight(Minecraft mc, ResourceLocation texture, int width, int height, int textureWidth, int textureHeight, float x, float y, boolean doAlpha, IAetherStatusEffects effect,

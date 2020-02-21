@@ -1,12 +1,16 @@
 package com.gildedgames.aether.common.entities.effects;
 
 import com.gildedgames.aether.api.entity.effects.EEffectIntensity;
+import com.gildedgames.aether.common.events.listeners.player.PlayerAetherListener;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingHealEvent;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
 
 import java.util.Collection;
 
@@ -25,6 +29,13 @@ public class StatusEffectStun extends StatusEffect
 	public void applyEffect(EntityLivingBase livingBase, int timer)
 	{
 		IAttributeInstance iAttributeInstance;
+
+		/**
+		 * Stun's effect of disabling entity attacks cannot be set in here, so it is handled in a listener.
+		 * @see com.gildedgames.aether.common.events.listeners.entity.EntityAttackListener#onEntityStunned(LivingAttackEvent)
+		 *
+		 * @see com.gildedgames.aether.common.events.listeners.player.PlayerAttackListener#onPlayerStunned(AttackEntityEvent)
+		 */
 
 		if (this.isEffectApplied)
 		{

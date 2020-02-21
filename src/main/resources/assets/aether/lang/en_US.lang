@@ -873,13 +873,13 @@ death.attack.aether.effect.fungalRot=%1$s succumbed to fungal rot
 
 # Status Effects
 
-statusEffect.aether.ambroPoison=Ambrosium Poisoning
-statusEffect.aether.bleed=Bleed
-statusEffect.aether.cockatriceVenom=Cockatrice Venom
-statusEffect.aether.fracture=Fracture
-statusEffect.aether.fungalRot=Fungal Rot
-statusEffect.aether.stun=Stun
-statusEffect.aether.toxin=Toxin
+aether.effect.ambrosium_poisoning=Ambrosium Poisoning
+aether.effect.bleed=Bleed
+aether.effect.cockatrice_venom=Cockatrice Venom
+aether.effect.fracture=Fracture
+aether.effect.fungal_rot=Fungal Rot
+aether.effect.stun=Stun
+aether.effect.toxin=Toxin
 
 # Curatives
 
@@ -889,9 +889,9 @@ item.aether.antivenom_vial.reduction.desc=Reduces Cockatrice Venom Buildup
 item.aether.antivenom_vial.cure.desc=Cures Cockatrice Venom
 item.aether.bandage.reduction.desc=Reduces Bleeding Buildup
 item.aether.splint.reduction.desc=Reduces Fracture Buildup
-item.aether.splint.cure.desc=Increases Fracture Healing Time
+item.aether.splint.cure.desc=Boosts Fracture Healing Time
 
-# Intro
+# Introsat
 
 intro.prologue=200 years after a lone adventurer defeated the tyrannical Sun Spirit, Karthuul, a new traveller is about to enter the Aether...
 intro.tip1=DISCLAIMER:\n\nThis indev build is an UNFINISHED, BUGGY,\n\nPOOR PERFORMANCE iteration of the official Highlands release (date not decided yet).\n\nIF YOU DO NOT WANT TO SPOIL YOUR EXPERIENCE, we HIGHLY RECOMMEND you DO NOT PLAY THIS until the official release.\n\nMany features are missing, some are experimental, etc. We have released these indev builds for those who want to help test and who cannot wait to get their Aether fix.
