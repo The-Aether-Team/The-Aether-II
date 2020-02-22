@@ -329,6 +329,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 		compound.setInteger(this.NAME + ".effectBuildup", this.effectBuildup);
 		compound.setBoolean(this.NAME + ".effectIsApplied", this.isEffectApplied);
 		compound.setInteger(this.NAME + ".effectTimer", this.effectTimer);
+		compound.setInteger(this.NAME + ".decreaseTimer", this.decreaseTimer);
 		compound.setDouble(this.NAME + ".effectActiveTimeModifier", this.activeEffectTimeModifier);
 	}
 
@@ -338,6 +339,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 		this.effectBuildup = compound.getInteger(this.NAME + ".effectBuildup");
 		this.isEffectApplied = compound.getBoolean(this.NAME + ".effectIsApplied");
 		this.effectTimer = compound.getInteger(this.NAME + ".effectTimer");
+		this.decreaseTimer = compound.getInteger(this.NAME + ".decreaseTimer");
 		this.activeEffectTimeModifier =  compound.getInteger(this.NAME + ".effectActiveTimeModifier");
 	}
 }

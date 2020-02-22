@@ -873,13 +873,13 @@ death.attack.aether.effect.fungalRot=%1$s succumbed to fungal rot
 
 # Status Effects
 
-aether.effect.ambrosium_poisoning=Ambrosium Poisoning
-aether.effect.bleed=Bleed
-aether.effect.cockatrice_venom=Cockatrice Venom
-aether.effect.fracture=Fracture
-aether.effect.fungal_rot=Fungal Rot
-aether.effect.stun=Stun
-aether.effect.toxin=Toxin
+effect.aether.ambrosium_poisoning=Ambrosium Poisoning
+effect.aether.bleed=Bleed
+effect.aether.cockatrice_venom=Cockatrice Venom
+effect.aether.fracture=Fracture
+effect.aether.fungal_rot=Fungal Rot
+effect.aether.stun=Stun
+effect.aether.toxin=Toxin
 
 # Curatives
 

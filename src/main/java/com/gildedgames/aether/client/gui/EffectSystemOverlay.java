@@ -39,6 +39,7 @@ public class EffectSystemOverlay extends Gui
 	private boolean increasing = true;
 
 	private float textAlpha = 1.0f;
+	private int textTimer = 0;
 
 	public void render(Minecraft mc)
 	{
@@ -91,6 +92,7 @@ public class EffectSystemOverlay extends Gui
 						this.increasing = true;
 
 						this.textAlpha = 1.0f;
+						this.textTimer = 0;
 
 						yPosShift = 6.0F;
 					}
@@ -129,22 +131,58 @@ public class EffectSystemOverlay extends Gui
 						this.renderHighlight(mc, BAR_HIGHLIGHT, 24, 7, this.BAR_HIGHLIGHT_TEXTURE_WIDTH, this.BAR_HIGHLIGHT_TEXTURE_HEIGHT, (xPos - 1) + (i * 25.f), (yPos - 1),
 								true, effect, this.highlightAlpha);
 
-						if (effect.getTimer() > 15 && effect.getTimer() < 25)
+						/*
+						if (!effect.getTextHasAppeared())
 						{
-							if (this.textAlpha > 0.05f)
+							if (this.textTimer < 60 && this.textTimer >= 0)
 							{
-								this.textAlpha -= 0.04f;
-							}
-							else
-							{
-								this.textAlpha = 0.0f;
-							}
+								this.textTimer++;
 
-							this.renderText(mc, (xPos + 11) + (i * 25.f), yPos + 22, effect, this.textAlpha);
+								if (this.textTimer > 50 && this.textTimer < 60)
+								{
+									if (this.textAlpha > 0.05f)
+									{
+										this.textAlpha -= 0.04f;
+									}
+									else
+									{
+										this.textAlpha = 0.0f;
+									}
+
+									this.renderText(mc, (xPos + 11) + (i * 25.f), yPos + 22, effect, this.textAlpha);
+								}
+								else if (this.textTimer <= 50 & this.textTimer >= 0)
+								{
+									this.renderText(mc, (xPos + 11) + (i * 25.f), yPos + 22, effect, 1.0f);
+								}
+								else
+								{
+									this.textTimer = 0;
+									effect.setTextHasAppeared(true);
+								}
+							}
 						}
-						else if (effect.getTimer() <= 15)
+						 */
+
+						if (effect.getTimer() < 60 && effect.getTimer() > 0)
 						{
-							this.renderText(mc, (xPos + 11) + (i * 25.f), yPos + 22, effect, 1.0f);
+							if (effect.getTimer() > 50 && effect.getTimer() < 60)
+							{
+								if (this.textAlpha > 0.05f)
+								{
+									this.textAlpha -= 0.04f;
+								}
+								else
+								{
+									this.textAlpha = 0.0f;
+								}
+
+								this.renderText(mc, (xPos + 11) + (i * 25.f), yPos + 22, effect, this.textAlpha);
+							}
+							else if (effect.getTimer() <= 50 && effect.getTimer() > 0)
+							{
+								this.renderText(mc, (xPos + 11) + (i * 25.f), yPos + 22, effect, 1.0f);
+							}
 						}
 
 						yPosShift = 6.0F;
