@@ -129,7 +129,7 @@ public class EffectSystemOverlay extends Gui
 						this.renderHighlight(mc, BAR_HIGHLIGHT, 24, 7, this.BAR_HIGHLIGHT_TEXTURE_WIDTH, this.BAR_HIGHLIGHT_TEXTURE_HEIGHT, (xPos - 1) + (i * 25.f), (yPos - 1),
 								true, effect, this.highlightAlpha);
 
-						if (effect.getTimer() > 5 && effect.getTimer() < 30)
+						if (effect.getTimer() > 15 && effect.getTimer() < 25)
 						{
 							if (this.textAlpha > 0.05f)
 							{
@@ -142,7 +142,7 @@ public class EffectSystemOverlay extends Gui
 
 							this.renderText(mc, (xPos + 11) + (i * 25.f), yPos + 22, effect, this.textAlpha);
 						}
-						else if (effect.getTimer() <= 5)
+						else if (effect.getTimer() <= 15)
 						{
 							this.renderText(mc, (xPos + 11) + (i * 25.f), yPos + 22, effect, 1.0f);
 						}
