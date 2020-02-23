@@ -167,6 +167,8 @@ public interface IAetherStatusEffects extends NBT
 	boolean getIsEffectApplied();
 	effectTypes getEffectType();
 
+	float getEffectTextAlpha();
+
 	/**
 	 * @return the effect's name in code, does not refer to how the effect should read on a GUI.
 	 * @see #addInformation(Collection) to get the effect's readable name.

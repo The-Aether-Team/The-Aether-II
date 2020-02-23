@@ -36,6 +36,8 @@ public abstract class StatusEffect implements IAetherStatusEffects
 
 	protected int potentialBuildup;
 
+	protected float textAlpha = 1.0f;
+
 	private final EntityLivingBase livingEffected;
 
 	public StatusEffect(IAetherStatusEffects.effectTypes effectType, AttributeModifier attributeModifier, EntityLivingBase living)
@@ -317,6 +319,32 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	public void markClean()
 	{
 		this.isDirty = false;
+	}
+
+	@Override
+	public float getEffectTextAlpha()
+	{
+		if (this.getTimer() > 50 && this.getTimer() < 60)
+		{
+			if (this.textAlpha > 0.05f)
+			{
+				this.textAlpha -= 0.04f;
+			}
+			else
+			{
+				this.textAlpha = 0.0f;
+			}
+		}
+		else if (this.getTimer() <= 50 & this.getTimer() >= 0)
+		{
+			this.textAlpha = 1.0f;
+		}
+		else
+		{
+			this.textAlpha = 0.0f;
+		}
+
+		return this.textAlpha;
 	}
 
 	@Override

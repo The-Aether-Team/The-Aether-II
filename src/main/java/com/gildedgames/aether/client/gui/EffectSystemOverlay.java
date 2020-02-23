@@ -38,9 +38,6 @@ public class EffectSystemOverlay extends Gui
 	private float highlightAlpha = 0.0f;
 	private boolean increasing = true;
 
-	private float textAlpha = 1.0f;
-	private int textTimer = 0;
-
 	public void render(Minecraft mc)
 	{
 		ScaledResolution res = new ScaledResolution(mc);
@@ -58,6 +55,19 @@ public class EffectSystemOverlay extends Gui
 					if (effect.getBuildup() > 0)
 					{
 						numOfEffectsApplied++;
+					}
+				}
+			}
+
+			int numOfTextsActive = 0;
+
+			for (IAetherStatusEffects effect : statusEffectPool.getPool().values())
+			{
+				if (effect != null)
+				{
+					if (effect.getTimer() < 60 && effect.getTimer() > 0)
+					{
+						numOfTextsActive++;
 					}
 				}
 			}
@@ -90,9 +100,6 @@ public class EffectSystemOverlay extends Gui
 
 						this.highlightAlpha = 0.0f;
 						this.increasing = true;
-
-						this.textAlpha = 1.0f;
-						this.textTimer = 0;
 
 						yPosShift = 6.0F;
 					}
@@ -131,58 +138,20 @@ public class EffectSystemOverlay extends Gui
 						this.renderHighlight(mc, BAR_HIGHLIGHT, 24, 7, this.BAR_HIGHLIGHT_TEXTURE_WIDTH, this.BAR_HIGHLIGHT_TEXTURE_HEIGHT, (xPos - 1) + (i * 25.f), (yPos - 1),
 								true, effect, this.highlightAlpha);
 
-						/*
-						if (!effect.getTextHasAppeared())
+						float yTextPos = 0.0f;
+
+						if (numOfTextsActive > 1)
 						{
-							if (this.textTimer < 60 && this.textTimer >= 0)
-							{
-								this.textTimer++;
-
-								if (this.textTimer > 50 && this.textTimer < 60)
-								{
-									if (this.textAlpha > 0.05f)
-									{
-										this.textAlpha -= 0.04f;
-									}
-									else
-									{
-										this.textAlpha = 0.0f;
-									}
-
-									this.renderText(mc, (xPos + 11) + (i * 25.f), yPos + 22, effect, this.textAlpha);
-								}
-								else if (this.textTimer <= 50 & this.textTimer >= 0)
-								{
-									this.renderText(mc, (xPos + 11) + (i * 25.f), yPos + 22, effect, 1.0f);
-								}
-								else
-								{
-									this.textTimer = 0;
-									effect.setTextHasAppeared(true);
-								}
-							}
+							yTextPos = yPos + ((i + 1) * 10) + 12.f;
 						}
-						 */
-
-						if (effect.getTimer() < 60 && effect.getTimer() > 0)
+						else
 						{
-							if (effect.getTimer() > 50 && effect.getTimer() < 60)
-							{
-								if (this.textAlpha > 0.05f)
-								{
-									this.textAlpha -= 0.04f;
-								}
-								else
-								{
-									this.textAlpha = 0.0f;
-								}
+							yTextPos = yPos + 22.f;
+						}
 
-								this.renderText(mc, (xPos + 11) + (i * 25.f), yPos + 22, effect, this.textAlpha);
-							}
-							else if (effect.getTimer() <= 50 && effect.getTimer() > 0)
-							{
-								this.renderText(mc, (xPos + 11) + (i * 25.f), yPos + 22, effect, 1.0f);
-							}
+						if (effect.getTimer() < 60 && effect.getTimer() >= 0)
+						{
+							this.renderText(mc, (xPos + 11) + (i * 25.f), yTextPos, effect, effect.getEffectTextAlpha());
 						}
 
 						yPosShift = 6.0F;
