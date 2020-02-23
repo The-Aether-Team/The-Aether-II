@@ -818,6 +818,10 @@ subtitles.aether.mob.burrukai.ambient=Burrukai huffs
 subtitles.aether.mob.burrukai.hurt=Burrukai hurts
 subtitles.aether.mob.burrukai.death=Burrukai dies
 subtitles.aether.mob.burrukai.attack=Burrukai attacks
+subtitles.aether.environment.rain.light=Rain drizzles
+subtitles.aether.environment.rain.heavy=Rain pours
+subtitles.aether.environment.snow.wind=Wind blows
+
 
 # Accessory slot names
 gui.aether.slot.none=Not Equippable
