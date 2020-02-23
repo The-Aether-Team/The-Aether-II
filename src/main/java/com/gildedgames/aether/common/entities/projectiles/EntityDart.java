@@ -1,8 +1,11 @@
 package com.gildedgames.aether.common.entities.projectiles;
 
 import com.gildedgames.aether.api.entity.damage.IDamageLevelsHolder;
+import com.gildedgames.aether.api.entity.effects.EEffectIntensity;
+import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectIntensity;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.api.registrar.ItemsAether;
+import com.gildedgames.aether.common.entities.effects.StatusEffectCockatriceVenom;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -51,7 +54,8 @@ public class EntityDart extends EntityArrow implements IDamageLevelsHolder
 	{
 		if (this.getDartType() == ItemDartType.POISON)
 		{
-			IAetherStatusEffects.applyStatusEffect(entity, IAetherStatusEffects.effectTypes.TOXIN, 100);
+			int buildup = IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectCockatriceVenom(entity), EEffectIntensity.MAJOR);
+			IAetherStatusEffects.applyStatusEffect(entity, IAetherStatusEffects.effectTypes.TOXIN, buildup);
 		}
 	}
 

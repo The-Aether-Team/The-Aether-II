@@ -85,6 +85,11 @@ public abstract class StatusEffect implements IAetherStatusEffects
 
 		this.applyEffect(livingBase, this.effectTimer);
 
+		if (this.effectBuildup < 100)
+		{
+			this.decreaseTimer = 0;
+		}
+
 		//manageEffect
 		if (this.isEffectApplied)
 		{
