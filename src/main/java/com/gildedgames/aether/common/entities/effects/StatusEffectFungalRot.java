@@ -13,28 +13,37 @@ import java.util.Collection;
 
 public class StatusEffectFungalRot extends StatusEffect
 {
+	private EntityLivingBase affectedEntity;
+
 	public StatusEffectFungalRot(EntityLivingBase livingBase)
 	{
-		super(effectTypes.FUNGAL_ROT, new AttributeModifier("aether.statusEffectFungalRot", -0.5D, 1).setSaved(false), livingBase);
+		super(effectTypes.FUNGAL_ROT, new AttributeModifier("aether.statusEffectFungalRot", -0.15, 1).setSaved(false), livingBase);
+
+		this.affectedEntity = livingBase;
 	}
 
 	@Override
 	public void applyEffect(EntityLivingBase livingBase, int timer)
 	{
-		IAttributeInstance iAttributeInstance = livingBase.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
+		IAttributeInstance iAttributeInstance;
 
-		if (this.isEffectApplied && this.effectTimer % (TICKS_PER_SECOND * 2) == 0)
+		if (this.isEffectApplied)
 		{
-			livingBase.attackEntityFrom(EffectsDamageSource.FUNGAL_ROT, 1f);
-
-			if (!iAttributeInstance.hasModifier(this.getAttributeModifier()))
+			iAttributeInstance = livingBase.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
+			if (iAttributeInstance != null && !iAttributeInstance.hasModifier(this.getAttributeModifier()))
 			{
 				iAttributeInstance.applyModifier(this.getAttributeModifier());
 			}
+
+			if (this.effectTimer % (TICKS_PER_SECOND * 2) == 0)
+			{
+				livingBase.attackEntityFrom(EffectsDamageSource.FUNGAL_ROT, 1f);
+			}
 		}
-		else if (!this.isEffectApplied)
+		else
 		{
-			if (iAttributeInstance.getModifier(this.getAttributeModifier().getID()) != null)
+			iAttributeInstance = livingBase.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
+			if (iAttributeInstance != null && iAttributeInstance.getModifier(this.getAttributeModifier().getID()) != null)
 			{
 				iAttributeInstance.removeModifier(this.getAttributeModifier());
 			}
@@ -44,7 +53,15 @@ public class StatusEffectFungalRot extends StatusEffect
 	@Override
 	public void onEffectEnd()
 	{
+		EntityLivingBase livingBase = this.affectedEntity;
 
+		IAttributeInstance iAttributeInstance;
+
+		iAttributeInstance = livingBase.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
+		if (iAttributeInstance != null && iAttributeInstance.getModifier(this.getAttributeModifier().getID()) != null)
+		{
+			iAttributeInstance.removeModifier(this.getAttributeModifier());
+		}
 	}
 
 	@Override

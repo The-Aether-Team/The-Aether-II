@@ -1,0 +1,16 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "X X",
+    " X "
+  ],
+  "key": {
+    "X": {
+      "item": "aether:scatterglass"
+    }
+  },
+  "result": {
+    "item": "aether:scatterglass_vial",
+    "count": 4
+  }
+}

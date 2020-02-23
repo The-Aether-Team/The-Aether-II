@@ -26,6 +26,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 
 	protected int effectBuildup;
 	protected int effectTimer;
+	protected int decreaseTimer;
 	protected double effectResistance = 1.0D;
 	protected double tempEffectResistance = 0.0D;
 	protected IAetherStatusEffects.effectTypes effectType;
@@ -34,6 +35,8 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	protected boolean isDirty;
 
 	protected int potentialBuildup;
+
+	protected float textAlpha = 1.0f;
 
 	private final EntityLivingBase livingEffected;
 
@@ -85,7 +88,9 @@ public abstract class StatusEffect implements IAetherStatusEffects
 		//manageEffect
 		if (this.isEffectApplied)
 		{
-			if (this.effectTimer >= (this.ACTIVE_EFFECT_TIME * TICKS_PER_SECOND) * this.activeEffectTimeModifier)
+			++decreaseTimer;
+
+			if (this.decreaseTimer >= (this.ACTIVE_EFFECT_TIME * TICKS_PER_SECOND) * this.activeEffectTimeModifier)
 			{
 				this.resetEffect();
 			}
@@ -241,6 +246,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 		this.activeEffectTimeModifier = 1.0D;
 		this.potentialBuildup = 0;
 		this.tempEffectResistance = 0;
+		this.decreaseTimer = 0;
 		this.markDirty();
 
 //		AetherCore.LOGGER.info("Effect Reset : " + this.NAME + " to : " + this.livingEffected.getName());
@@ -255,7 +261,19 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	@Override
 	public int getTimer()
 	{
-		return this.getTimer();
+		return this.decreaseTimer;
+	}
+
+	@Override
+	public int getActiveEffectTime()
+	{
+		return this.ACTIVE_EFFECT_TIME;
+	}
+
+	@Override
+	public double getActiveEffectTimeModifier()
+	{
+		return this.activeEffectTimeModifier;
 	}
 
 	@Override
@@ -304,6 +322,32 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	}
 
 	@Override
+	public float getEffectTextAlpha()
+	{
+		if (this.getTimer() > 50 && this.getTimer() < 60)
+		{
+			if (this.textAlpha > 0.05f)
+			{
+				this.textAlpha -= 0.04f;
+			}
+			else
+			{
+				this.textAlpha = 0.0f;
+			}
+		}
+		else if (this.getTimer() <= 50 & this.getTimer() >= 0)
+		{
+			this.textAlpha = 1.0f;
+		}
+		else
+		{
+			this.textAlpha = 0.0f;
+		}
+
+		return this.textAlpha;
+	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	public abstract void addInformation(Collection<String> label);
 
@@ -313,6 +357,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 		compound.setInteger(this.NAME + ".effectBuildup", this.effectBuildup);
 		compound.setBoolean(this.NAME + ".effectIsApplied", this.isEffectApplied);
 		compound.setInteger(this.NAME + ".effectTimer", this.effectTimer);
+		compound.setInteger(this.NAME + ".decreaseTimer", this.decreaseTimer);
 		compound.setDouble(this.NAME + ".effectActiveTimeModifier", this.activeEffectTimeModifier);
 	}
 
@@ -322,6 +367,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 		this.effectBuildup = compound.getInteger(this.NAME + ".effectBuildup");
 		this.isEffectApplied = compound.getBoolean(this.NAME + ".effectIsApplied");
 		this.effectTimer = compound.getInteger(this.NAME + ".effectTimer");
+		this.decreaseTimer = compound.getInteger(this.NAME + ".decreaseTimer");
 		this.activeEffectTimeModifier =  compound.getInteger(this.NAME + ".effectActiveTimeModifier");
 	}
 }

@@ -18,9 +18,12 @@ public class StatusEffectCockatriceVenom extends StatusEffect
 	@Override
 	public void applyEffect(EntityLivingBase livingBase, int timer)
 	{
-		if (this.isEffectApplied && livingBase.getHealth() > 1 && this.effectTimer % (TICKS_PER_SECOND * 2) == 0)
+		if (this.isEffectApplied)
 		{
-			livingBase.attackEntityFrom(EffectsDamageSource.COCKATRICE_VENOM, 1f);
+			if (this.effectTimer % (TICKS_PER_SECOND * 2) == 0 && livingBase.getHealth() >= 2)
+			{
+				livingBase.attackEntityFrom(EffectsDamageSource.COCKATRICE_VENOM, 1f);
+			}
 		}
 	}
 

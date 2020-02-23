@@ -12,6 +12,10 @@ public class ItemsAether extends AbstractRegistrar
 
 	public static final Item aether_saddle = getDefault();
 
+	public static final Item antitoxin_vial = getDefault();
+
+	public static final Item antivenom_vial = getDefault();
+
 	public static final Item ambrosium_chunk = getDefault();
 
 	public static final Item ambrosium_shard = getDefault();
@@ -45,6 +49,8 @@ public class ItemsAether extends AbstractRegistrar
 	public static final Item arkenium_strip = getDefault();
 
 	public static final Item arkenium_sword = getDefault();
+
+	public static final Item bandage = getDefault();
 
 	public static final Item blueberries = getDefault();
 
@@ -178,6 +184,8 @@ public class ItemsAether extends AbstractRegistrar
 
 	public static final Item recording_892 = getDefault();
 
+	public static final Item scatterglass_vial = getDefault();
+
 	public static final Item secret_skyroot_door_item = getDefault();
 
 	public static final Item shard_of_life = getDefault();
@@ -214,6 +222,8 @@ public class ItemsAether extends AbstractRegistrar
 
 	public static final Item skyroot_water_bucket = getDefault();
 
+	public static final Item splint = getDefault();
+
 	public static final Item stomper_pop = getDefault();
 
 	public static final Item swet_gel = getDefault();
@@ -239,6 +249,8 @@ public class ItemsAether extends AbstractRegistrar
 	public static final Item valkyrie_music_disc = getDefault();
 
 	public static final Item valkyrie_wings = getDefault();
+
+	public static final Item water_vial = getDefault();
 
 	public static final Item winter_hat = getDefault();
 

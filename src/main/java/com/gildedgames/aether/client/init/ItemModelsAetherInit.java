@@ -688,6 +688,13 @@ public class ItemModelsAetherInit
 
 		registerItemModels(ItemsAether.skyroot_lizard_stick, "skyroot_lizard_stick");
 		registerItemModels(ItemsAether.skyroot_lizard_stick_roasted, "skyroot_lizard_stick_roasted");
+
+		registerItemModels(ItemsAether.scatterglass_vial, "scatterglass_vial");
+		registerItemModels(ItemsAether.water_vial, "scatterglass_water_vial");
+		registerItemModels(ItemsAether.antivenom_vial, "scatterglass_antivenom_vial");
+		registerItemModels(ItemsAether.antitoxin_vial, "scatterglass_antitoxin_vial");
+		registerItemModels(ItemsAether.bandage, "bandage");
+		registerItemModels(ItemsAether.splint, "splint");
 	}
 
 	private static void registerSnowyFlower(Block block, String name)

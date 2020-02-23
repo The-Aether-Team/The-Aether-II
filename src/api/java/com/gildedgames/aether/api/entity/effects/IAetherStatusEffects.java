@@ -162,8 +162,12 @@ public interface IAetherStatusEffects extends NBT
 	int getBuildup();
 	double getResistance();
 	int getTimer();
+	int getActiveEffectTime();
+	double getActiveEffectTimeModifier();
 	boolean getIsEffectApplied();
 	effectTypes getEffectType();
+
+	float getEffectTextAlpha();
 
 	/**
 	 * @return the effect's name in code, does not refer to how the effect should read on a GUI.
@@ -178,13 +182,13 @@ public interface IAetherStatusEffects extends NBT
 
 	enum effectTypes
 	{
-		AMBROSIUM_POISONING("aether.effect.ambrosium_poisoning",0, 1, 1, 120,10),
-		TOXIN("aether.effect.toxin",1, 1, 1, 10,10),
-		COCKATRICE_VENOM("aether.effect.cockatrice_venom",2, 5, 60, 60,10),
-		STUN("aether.effect.stun", 3,5, 1, 5,10),
-		BLEED("aether.effect.bleed", 4,1,10,0,10),
-		FRACTURE("aether.effect.fracture", 5,1, 1, 60*5,10),
-		FUNGAL_ROT("aether.effect.fungal_rot", 6,1, 10, 20,10);
+		AMBROSIUM_POISONING("effect.aether.ambrosium_poisoning",0, 1, 1, 120,10),
+		TOXIN("effect.aether.toxin",1, 1, 1, 10,10),
+		COCKATRICE_VENOM("effect.aether.cockatrice_venom",2, 5, 60, 60,10),
+		STUN("effect.aether.stun", 3,5, 1, 5,10),
+		BLEED("effect.aether.bleed", 4,1,10,0,10),
+		FRACTURE("effect.aether.fracture", 5,1, 1, 60*5,10),
+		FUNGAL_ROT("effect.aether.fungal_rot", 6,1, 10, 20,10);
 
 		public final int numericValue;			// identifier for this effect.
 		public final String name;

@@ -1,13 +1,8 @@
 package com.gildedgames.aether.common.entities.monsters;
 
-import com.gildedgames.aether.api.entity.damage.DamageTypeAttributes;
-import com.gildedgames.aether.api.entity.effects.EEffectIntensity;
-import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectIntensity;
-import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.common.entities.ai.EntityAIHideFromLight;
 import com.gildedgames.aether.common.entities.ai.EntityAIUnstuckBlueAercloud;
 import com.gildedgames.aether.common.entities.ai.EntityAIWanderAvoidLight;
-import com.gildedgames.aether.common.entities.effects.StatusEffectBleed;
 import com.gildedgames.aether.common.entities.multipart.AetherMultiPartEntity;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
 import net.minecraft.entity.*;
@@ -132,21 +127,6 @@ public class EntityVaranys extends EntityAetherMob implements IEntityMultiPart
 		}
 
 		return flag;
-	}
-
-	@Override
-	protected void applyStatusEffectOnAttack(final Entity target)
-	{
-		if (target instanceof EntityLivingBase)
-		{
-			final EntityLivingBase living = (EntityLivingBase) target;
-
-			if (!living.isActiveItemStackBlocking())
-			{
-				int buildup = IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectBleed(living), EEffectIntensity.MINOR);
-				IAetherStatusEffects.applyStatusEffect(living, IAetherStatusEffects.effectTypes.BLEED, buildup);
-			}
-		}
 	}
 
 	@Override

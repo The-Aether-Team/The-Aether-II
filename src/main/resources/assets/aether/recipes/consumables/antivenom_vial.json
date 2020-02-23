@@ -1,0 +1,14 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "aether:cockatrice_feather"
+    },
+    {
+      "item": "aether:water_vial"
+    }
+  ],
+  "result": {
+    "item": "aether:antivenom_vial"
+  }
+}

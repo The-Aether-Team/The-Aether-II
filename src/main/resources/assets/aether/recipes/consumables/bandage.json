@@ -1,0 +1,14 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "aether:cloudtwine"
+    },
+    {
+      "item": "aether:cloudwool_block"
+    }
+  ],
+  "result": {
+    "item": "aether:bandage"
+  }
+}

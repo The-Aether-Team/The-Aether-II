@@ -8,11 +8,14 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class EffectSystemOverlay extends Gui
 {
 	private static final ResourceLocation BAR_OUTLINE = AetherCore.getResource("textures/gui/overlay/effects/bar_outline.png");
+	private static final ResourceLocation BAR_HIGHLIGHT = AetherCore.getResource("textures/gui/overlay/effects/bar_highlight.png");
 	private static final ResourceLocation BAR_BUILDUP = AetherCore.getResource("textures/gui/overlay/effects/buildup_bar.png");
 
 	private static final ResourceLocation AMBROSIUM_ICON = AetherCore.getResource("textures/gui/overlay/effects/ambrosium_poisoning.png");
@@ -26,8 +29,14 @@ public class EffectSystemOverlay extends Gui
 	private final int BAR_OUTLINE_TEXTURE_WIDTH = 22;
 	private final int BAR_OUTLINE_TEXTURE_HEIGHT = 5;
 
+	private final int BAR_HIGHLIGHT_TEXTURE_WIDTH = 24;
+	private final int BAR_HIGHLIGHT_TEXTURE_HEIGHT = 7;
+
 	private final int BAR_TEXTURE_WIDTH = 20;
 	private final int BAR_TEXTURE_HEIGHT = 3;
+
+	private float highlightAlpha = 0.0f;
+	private boolean increasing = true;
 
 	public void render(Minecraft mc)
 	{
@@ -37,7 +46,6 @@ public class EffectSystemOverlay extends Gui
 
 		if (statusEffectPool != null)
 		{
-
 			int numOfEffectsApplied = 0;
 
 			for (IAetherStatusEffects effect : statusEffectPool.getPool().values())
@@ -47,6 +55,19 @@ public class EffectSystemOverlay extends Gui
 					if (effect.getBuildup() > 0)
 					{
 						numOfEffectsApplied++;
+					}
+				}
+			}
+
+			int numOfTextsActive = 0;
+
+			for (IAetherStatusEffects effect : statusEffectPool.getPool().values())
+			{
+				if (effect != null)
+				{
+					if (effect.getTimer() < 60 && effect.getTimer() > 0)
+					{
+						numOfTextsActive++;
 					}
 				}
 			}
@@ -69,26 +90,129 @@ public class EffectSystemOverlay extends Gui
 				{
 					if (!effect.getIsEffectApplied())
 					{
-						this.renderBar(mc, BAR_OUTLINE, 22, 5, this.BAR_OUTLINE_TEXTURE_WIDTH, this.BAR_OUTLINE_TEXTURE_HEIGHT, xPos + (i * 23.f), yPos,
+						this.renderBar(mc, BAR_OUTLINE, 22, 5, this.BAR_OUTLINE_TEXTURE_WIDTH, this.BAR_OUTLINE_TEXTURE_HEIGHT, xPos + (i * 25.f), yPos,
 								false, effect);
 
 						barWidth = effect.getBuildup() / 5;
 
-						this.renderBar(mc, BAR_BUILDUP, barWidth, 3, this.BAR_TEXTURE_WIDTH, this.BAR_TEXTURE_HEIGHT, (xPos + 1F) + (i * 23.f), (yPos + 1F),
+						this.renderBar(mc, BAR_BUILDUP, barWidth, 3, this.BAR_TEXTURE_WIDTH, this.BAR_TEXTURE_HEIGHT, (xPos + 1F) + (i * 25.f), (yPos + 1F),
 								true, effect);
+
+						this.highlightAlpha = 0.0f;
+						this.increasing = true;
 
 						yPosShift = 6.0F;
 					}
-					else {
-						yPosShift = 2.0f;
+					else
+					{
+						this.renderBar(mc, BAR_OUTLINE, 22, 5, this.BAR_OUTLINE_TEXTURE_WIDTH, this.BAR_OUTLINE_TEXTURE_HEIGHT, xPos + (i * 25.f), yPos,
+								false, effect);
+
+						barWidth = 20 - (int) (effect.getTimer() / (effect.getActiveEffectTime() * effect.getActiveEffectTimeModifier()));
+
+						this.renderBar(mc, BAR_BUILDUP, barWidth, 3, this.BAR_TEXTURE_WIDTH, this.BAR_TEXTURE_HEIGHT, (xPos + 1F) + (i * 25.f), (yPos + 1F),
+								true, effect);
+
+						this.renderBar(mc, BAR_HIGHLIGHT, 24, 7, this.BAR_HIGHLIGHT_TEXTURE_WIDTH, this.BAR_HIGHLIGHT_TEXTURE_HEIGHT, (xPos - 1) + (i * 25.f), (yPos - 1),
+								true, effect);
+
+						if (this.increasing)
+						{
+							this.highlightAlpha += 0.02f;
+
+							if (this.highlightAlpha >= 1f)
+							{
+								this.increasing = false;
+							}
+						}
+						else
+						{
+							this.highlightAlpha -= 0.02f;
+
+							if (this.highlightAlpha <= 0f)
+							{
+								this.increasing = true;
+							}
+						}
+
+						this.renderHighlight(mc, BAR_HIGHLIGHT, 24, 7, this.BAR_HIGHLIGHT_TEXTURE_WIDTH, this.BAR_HIGHLIGHT_TEXTURE_HEIGHT, (xPos - 1) + (i * 25.f), (yPos - 1),
+								true, effect, this.highlightAlpha);
+
+						float yTextPos = 0.0f;
+
+						if (numOfTextsActive > 1)
+						{
+							yTextPos = yPos + ((i + 1) * 10) + 12.f;
+						}
+						else
+						{
+							yTextPos = yPos + 22.f;
+						}
+
+						if (effect.getTimer() < 60 && effect.getTimer() >= 0)
+						{
+							this.renderText(mc, (xPos + 11) + (i * 25.f), yTextPos, effect, effect.getEffectTextAlpha());
+						}
+
+						yPosShift = 6.0F;
 					}
 
-					this.renderIcon(mc, this.getEffectIconFromType(effect.getEffectType()), 16,16,16,16,xPos + 2f + (i * 23.f),yPos+yPosShift);
+					this.renderIcon(mc, this.getEffectIconFromType(effect.getEffectType()), 16,16,16,16,xPos + 3f + (i * 25.f),yPos+yPosShift);
 					i++;
 				}
-
 			}
 		}
+	}
+
+	private void renderText(Minecraft mc, float x, float y, IAetherStatusEffects effect, float alpha)
+	{
+		GlStateManager.pushMatrix();
+
+		float r = 0, g = 0, b = 0, a = 0 ;
+
+		r = Color.getColorFromEffect(effect.getEffectType()).r / 255.F;
+		g = Color.getColorFromEffect(effect.getEffectType()).g / 255.F;
+		b = Color.getColorFromEffect(effect.getEffectType()).b / 255.F;
+		a = alpha;
+
+		if (alpha > 0)
+		{
+			int rgb = new java.awt.Color(r, g, b, a).getRGB();
+
+			this.drawCenteredString(mc.fontRenderer, I18n.format(effect.getEffectName()), (int) x, (int) y, rgb);
+		}
+
+		GlStateManager.color(1,1,1, 1);
+
+		GlStateManager.popMatrix();
+	}
+
+	private void renderHighlight(Minecraft mc, ResourceLocation texture, int width, int height, int textureWidth, int textureHeight, float x, float y, boolean doAlpha, IAetherStatusEffects effect,
+								 float alpha)
+	{
+		GlStateManager.pushMatrix();
+
+		GlStateManager.enableBlend();
+		GlStateManager.disableRescaleNormal();
+
+		mc.getTextureManager().bindTexture(texture);
+		GlStateManager.translate(x,y,0.0f);
+
+		if (doAlpha)
+		{
+			Color color = Color.getColorFromEffect(effect.getEffectType());
+			float a = 0 ;
+
+			a = alpha;
+
+			GlStateManager.color(1,1,1, a);
+		}
+
+		Gui.drawModalRectWithCustomSizedTexture(0,0,0, 0, width, height, textureWidth, textureHeight);
+
+		GlStateManager.color(1,1,1, 1);
+
+		GlStateManager.popMatrix();
 	}
 
 	private void renderBar(Minecraft mc, ResourceLocation texture, int width, int height, int textureWidth, int textureHeight, float x, float y, boolean doColor, IAetherStatusEffects effect)
@@ -109,14 +233,14 @@ public class EffectSystemOverlay extends Gui
 			r = Color.getColorFromEffect(effect.getEffectType()).r / 255.F;
 			g = Color.getColorFromEffect(effect.getEffectType()).g / 255.F;
 			b = Color.getColorFromEffect(effect.getEffectType()).b / 255.F;
-			a = 1.f;
+			a = 1.0f;
 
 			GlStateManager.color(r,g,b,a);
 		}
 
 		Gui.drawModalRectWithCustomSizedTexture(0,0,0, 0, width, height, textureWidth, textureHeight);
 
-		GlStateManager.color(1,1,1,1);
+		GlStateManager.color(1,1,1, 1);
 
 		GlStateManager.popMatrix();
 	}
