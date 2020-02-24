@@ -54,8 +54,7 @@ public class EntityDart extends EntityArrow implements IDamageLevelsHolder
 	{
 		if (this.getDartType() == ItemDartType.POISON)
 		{
-			int buildup = IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectCockatriceVenom(entity), EEffectIntensity.MAJOR);
-			IAetherStatusEffects.applyStatusEffect(entity, IAetherStatusEffects.effectTypes.TOXIN, buildup);
+			IAetherStatusEffects.applyStatusEffect(entity, IAetherStatusEffects.effectTypes.TOXIN, 60);
 		}
 	}
 

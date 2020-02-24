@@ -75,6 +75,7 @@ public class EntityTaegore extends EntityAetherAnimal implements IEntityMultiPar
 		this.tasks.addTask(3, new EntityAIHideFromRain(this, 1.3D));
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
 		this.tasks.addTask(0, new EntityAISwimming(this));
+		this.tasks.addTask(1, new EntityAIPanic(this, 1.25D));
 		this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
 		this.tasks.addTask(4, new EntityAIFollowParent(this, 1.25D));
@@ -126,12 +127,12 @@ public class EntityTaegore extends EntityAetherAnimal implements IEntityMultiPar
 	{
 		super.applyEntityAttributes();
 
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(15.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
 
-		//this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(8);
-		//this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(5);
-		//this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(2);
+		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(12);
+		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(25);
+		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(25);
 	}
 
 	@Override
@@ -204,67 +205,6 @@ public class EntityTaegore extends EntityAetherAnimal implements IEntityMultiPar
 		this.head.prevPosX = this.prevHeadX;
 		this.head.prevPosY = this.prevHeadY;
 		this.head.prevPosZ = this.prevHeadZ;
-	}
-
-	@Override
-	public void onEntityUpdate()
-	{
-		super.onEntityUpdate();
-
-		if (this.getAttackingEntity() != null)
-		{
-			if (this.getAttackingEntity() instanceof EntityPlayer)
-			{
-				final PlayerAether player = PlayerAether.getPlayer((EntityPlayer) this.getAttackingEntity());
-				if (player.getEntity().isCreative())
-				{
-					return;
-				}
-			}
-			this.tasks.addTask(3, this.AIAttackMelee);
-			this.updateAITasks();
-		}
-		this.setAttackTarget(this.getAttackingEntity());
-
-		if (this.getHealth() < 4F)
-		{
-			this.tasks.addTask(0, this.AIPanic);
-			this.tasks.removeTask(this.AIAttackMelee);
-			this.updateAITasks();
-		}
-
-	}
-
-	@Override
-	public boolean attackEntityAsMob(final Entity entityIn)
-	{
-		entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 2.0F);
-
-
-		this.applyStatusEffectOnAttack(entityIn);
-
-		this.playSound(SoundsAether.taegore_attack, 0.5F, 1.0F);
-		return true;
-	}
-
-	@Override
-	protected void applyStatusEffectOnAttack(final Entity target)
-	{
-		if (target instanceof EntityLivingBase)
-		{
-			final EntityLivingBase living = (EntityLivingBase) target;
-
-			if (!living.isActiveItemStackBlocking())
-			{
-				int buildup = IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectFracture(living), EEffectIntensity.MINOR);
-				IAetherStatusEffects.applyStatusEffect(living, IAetherStatusEffects.effectTypes.BLEED, buildup);
-			}
-			else
-			{
-				int buildup = IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectFracture(living), EEffectIntensity.MINOR)/3;
-				IAetherStatusEffects.applyStatusEffect(living, IAetherStatusEffects.effectTypes.BLEED, buildup);
-			}
-		}
 	}
 
 	@Override

@@ -109,9 +109,13 @@ public class DamageSystem
 		double impactDamage = DamageSystemTables.getValueFromLevelRange(resultImpactDamageLevel);
 		double pierceDamage = DamageSystemTables.getValueFromLevelRange(resultPierceDamageLevel);
 
-		float totalDamage = (float) (slashDamage + impactDamage + pierceDamage);
+		double trueSlashDamage = slashDamage / 2;
+		double trueImpactDamage = impactDamage / 2;
+		double truePierceDamage = pierceDamage / 2;
 
-		//event.setAmount(totalDamage);
+		float totalDamage = (float) (trueSlashDamage + trueImpactDamage + truePierceDamage);
+
+		event.setAmount(totalDamage);
 
 		double offsetX = (double) (-MathHelper.sin(entitySource.rotationYaw * 0.017453292F));
 		double offsetZ = (double) MathHelper.cos(entitySource.rotationYaw * 0.017453292F);
