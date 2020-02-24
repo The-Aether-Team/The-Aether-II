@@ -90,7 +90,7 @@ public class DamageSystemOverlay extends Gui
 		GlStateManager.pushMatrix();
 
 		this.drawString(mc.fontRenderer, String.valueOf(level),
-				(int) (x - 7) + (!reverseIconAndText ? -10 : 10) + ((reverseIconAndText ? 2 : -1) * textWidth),
+				(int) (x - 7) + (!reverseIconAndText ? -10 : 10) + ((reverseIconAndText ? 12 : -1 * textWidth)),
 				(int) y + 3,
 				0xFFFFFFFF);
 
