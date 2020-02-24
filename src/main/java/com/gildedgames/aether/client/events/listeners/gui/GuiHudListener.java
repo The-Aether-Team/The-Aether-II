@@ -7,7 +7,6 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.init.DimensionsAether;
 import com.gildedgames.aether.common.items.weapons.ItemDart;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
-import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemCrossbow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -46,17 +45,7 @@ public class GuiHudListener
 
 			if (mc.world != null && mc.player != null)
 			{
-				final ItemStack ammoStack = mc.player.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND);
-
-				if (ammoStack.getItem() == ItemsAether.bolt && ammoStack.getCount() > 0 && mc.player.getHeldItemMainhand().getItem() instanceof ItemCrossbow)
-				{
-					ItemBoltType type = ItemCrossbow.BOLT_TYPES[ammoStack.getItemDamage()];
-
-					DAMAGE_SYSTEM_OVERLAY.setSlashModifier(type.getSlashDamageLevel());
-					DAMAGE_SYSTEM_OVERLAY.setPierceModifier(type.getPierceDamageLevel());
-					DAMAGE_SYSTEM_OVERLAY.setImpactModifier(type.getImpactDamageLevel());
-				}
-				else if (mc.player.getHeldItemMainhand().getItem() == ItemsAether.dart_shooter && mc.player.getHeldItemMainhand().getCount() > 0)
+				if (mc.player.getHeldItemMainhand().getItem() == ItemsAether.dart_shooter && mc.player.getHeldItemMainhand().getCount() > 0)
 				{
 					ItemDartType type = ItemDart.ITEM_VARIANTS[mc.player.getHeldItemMainhand().getItemDamage()];
 

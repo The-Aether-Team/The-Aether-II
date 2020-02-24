@@ -2,7 +2,6 @@ package com.gildedgames.aether.client.renderer.entities.projectiles;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
-import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -17,17 +16,7 @@ import java.util.HashMap;
 
 public class RenderBolt extends Render<EntityBolt>
 {
-	private static final HashMap<ItemBoltType, ResourceLocation> boltTextures = new HashMap<>();
-
-	static
-	{
-		boltTextures.put(ItemBoltType.SKYROOT, AetherCore.getResource("textures/entities/bolts/skyroot_bolt.png"));
-		boltTextures.put(ItemBoltType.HOLYSTONE, AetherCore.getResource("textures/entities/bolts/stone_bolt.png"));
-		boltTextures.put(ItemBoltType.SCATTERGLASS, AetherCore.getResource("textures/entities/bolts/scatterglass_bolt.png"));
-		boltTextures.put(ItemBoltType.ZANITE, AetherCore.getResource("textures/entities/bolts/zanite_bolt.png"));
-		boltTextures.put(ItemBoltType.ARKENIUM, AetherCore.getResource("textures/entities/bolts/arkenium_bolt.png"));
-		boltTextures.put(ItemBoltType.GRAVITITE, AetherCore.getResource("textures/entities/bolts/gravitite_bolt.png"));
-	}
+	public static final ResourceLocation BOLT = AetherCore.getResource("textures/entities/bolts/scatterglass_bolt.png");
 
 	public RenderBolt(final RenderManager renderManager)
 	{
@@ -37,7 +26,7 @@ public class RenderBolt extends Render<EntityBolt>
 	@Override
 	public void doRender(final EntityBolt bolt, final double posX, final double posY, final double posZ, final float entityYaw, final float partialTicks)
 	{
-		this.bindTexture(boltTextures.get(bolt.getBoltType()));
+		this.bindTexture(BOLT);
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
 		GlStateManager.pushMatrix();
@@ -127,6 +116,6 @@ public class RenderBolt extends Render<EntityBolt>
 	@Override
 	protected ResourceLocation getEntityTexture(final EntityBolt bolt)
 	{
-		return boltTextures.get(bolt.getBoltType());
+		return BOLT;
 	}
 }

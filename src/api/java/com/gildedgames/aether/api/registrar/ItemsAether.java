@@ -80,6 +80,8 @@ public class ItemsAether extends AbstractRegistrar
 
 	public static final Item cocoatrice = getDefault();
 
+	public static final Item crude_scatterglass_shard = getDefault();
+
 	public static final Item dart = getDefault();
 
 	public static final Item dart_shooter = getDefault();

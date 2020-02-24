@@ -477,6 +477,7 @@ item.aether.antivenom_vial.name=Antivenom Vial
 item.aether.antitoxin_vial.name=Antitoxin Vial
 item.aether.bandage.name=Bandage
 item.aether.splint.name=Splint
+item.aether.crude_scatterglass_shard.name=Scatterglass Shard
 
 item.aether.skyroot_bed_item.name=Skyroot Bed
 item.aether.moa_egg_item.name=Moa Egg
@@ -500,13 +501,7 @@ item.aether.holystone_crossbow.name=Holystone Crossbow
 item.aether.zanite_crossbow.name=Zanite Crossbow
 item.aether.arkenium_crossbow.name=Arkenium Crossbow
 item.aether.gravitite_crossbow.name=Gravitite Crossbow
-item.aether.bolt.skyroot.name=Skyroot Bolt
-item.aether.bolt.holystone.name=Holystone Bolt
-item.aether.bolt.scatterglass.name=Scatterglass Bolt
-item.aether.bolt.boneshard.name=Boneshard Bolt
-item.aether.bolt.zanite.name=Zanite Bolt
-item.aether.bolt.gravitite.name=Gravitite Bolt
-item.aether.bolt.arkenium.name=Arkenium Bolt
+item.aether.bolt.name=Scatterglass Bolt
 item.aether.wrapping_paper.name=Wrapping Paper
 item.aether.fried_moa_egg.name=Fried Moa Egg
 item.aether.aether_spawn_egg.name=Spawn
@@ -661,9 +656,7 @@ item.aether.holystone_crossbow.ability=Spread Shot
 item.aether.zanite_crossbow.ability=Stronger With More Use
 item.aether.arkenium_crossbow.ability=Long Shot
 item.aether.gravitite_crossbow.ability=Straight Shot
-item.aether.bolt.slash=Slash Damage Level
-item.aether.bolt.pierce=Pierce Damage Level
-item.aether.bolt.impact=Impact Damage Level
+item.aether.bolt.desc=Crossbow Ammo
 
 # Tool tooltips
 item.aether.tool.skyroot.ability.desc=Doubles drops from blocks

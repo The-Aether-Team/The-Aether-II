@@ -10,7 +10,7 @@
 			"item": "aether:skyroot_stick"
 		},
 		"Y": {
-			"item": "aether:scatterglass"
+			"item": "aether:crude_scatterglass_shard"
 		},
 		"Z": {
 			"type": "forge:ore_dict",
@@ -19,7 +19,6 @@
 	},
 	"result": {
 		"item": "aether:bolt",
-		"count": 4,
-		"data": 2
+		"count": 4
 	}
 }

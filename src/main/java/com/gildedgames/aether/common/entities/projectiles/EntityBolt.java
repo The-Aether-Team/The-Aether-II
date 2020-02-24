@@ -2,13 +2,10 @@ package com.gildedgames.aether.common.entities.projectiles;
 
 import com.gildedgames.aether.api.entity.damage.IDamageLevelsHolder;
 import com.gildedgames.aether.api.registrar.ItemsAether;
-import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -18,13 +15,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityBolt extends EntityArrow implements IDamageLevelsHolder
 {
-	private static final DataParameter<Byte> TYPE = new DataParameter<>(20, DataSerializers.BYTE);
-
-	private static final DataParameter<Byte> ABILITY = new DataParameter<>(21, DataSerializers.BYTE);
-
 	private int ticksInAir;
 
 	private double bonusDamage = 0;
+
+	private int slashDamageLevel = 0;
+
+	private int pierceDamageLevel = 0;
+
+	private int impactDamageLevel = 0;
 
 	public EntityBolt(final World worldIn)
 	{
@@ -39,7 +38,7 @@ public class EntityBolt extends EntityArrow implements IDamageLevelsHolder
 	@Override
 	protected ItemStack getArrowStack()
 	{
-		return new ItemStack(ItemsAether.bolt, 1, this.getBoltType().ordinal());
+		return new ItemStack(ItemsAether.bolt);
 	}
 
 	@Override
@@ -62,9 +61,6 @@ public class EntityBolt extends EntityArrow implements IDamageLevelsHolder
 	protected void entityInit()
 	{
 		super.entityInit();
-
-		this.dataManager.register(TYPE, (byte) 0);
-		this.dataManager.register(ABILITY, (byte) 0);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -107,46 +103,36 @@ public class EntityBolt extends EntityArrow implements IDamageLevelsHolder
 		this.bonusDamage = damageIn;
 	}
 
-	public BoltAbility getBoltAbility()
+	public void setSlashDamageLevel(int slashDamageLevel)
 	{
-		return BoltAbility.values()[this.dataManager.get(ABILITY)];
+		this.slashDamageLevel = slashDamageLevel;
 	}
 
-	public void setBoltAbility(final BoltAbility ability)
+	public void setPierceDamageLevel(int pierceDamageLevel)
 	{
-		this.dataManager.set(ABILITY, (byte) ability.ordinal());
+		this.pierceDamageLevel = pierceDamageLevel;
 	}
 
-	public ItemBoltType getBoltType()
+	public void setImpactDamageLevel(int impactDamageLevel)
 	{
-		return ItemBoltType.values()[this.dataManager.get(TYPE)];
-	}
-
-	public void setBoltType(final ItemBoltType type)
-	{
-		this.dataManager.set(TYPE, (byte) type.ordinal());
+		this.impactDamageLevel = impactDamageLevel;
 	}
 
 	@Override
 	public int getSlashDamageLevel()
 	{
-		return this.getBoltType().getSlashDamageLevel();
+		return this.slashDamageLevel;
 	}
 
 	@Override
 	public int getPierceDamageLevel()
 	{
-		return this.getBoltType().getPierceDamageLevel();
+		return this.pierceDamageLevel;
 	}
 
 	@Override
 	public int getImpactDamageLevel()
 	{
-		return this.getBoltType().getImpactDamageLevel();
-	}
-
-	public enum BoltAbility
-	{
-		NORMAL
+		return this.impactDamageLevel;
 	}
 }

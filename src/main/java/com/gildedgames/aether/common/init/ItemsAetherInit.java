@@ -81,6 +81,7 @@ public class ItemsAetherInit
 		r.register("cloudtwine", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("cockatrice_feather", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("cocoatrice", new ItemAetherFood(4, 0.3F, false));
+		r.register("crude_scatterglass_shard", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("dart", new ItemDart().setCreativeTab(CreativeTabsAether.TAB_WEAPONS));
 		r.register("dart_shooter", new ItemDartShooter().setCreativeTab(CreativeTabsAether.TAB_WEAPONS));
 		r.register("eggnog", new ItemEggnog().setCreativeTab(CreativeTabsAether.TAB_CONSUMABLES));

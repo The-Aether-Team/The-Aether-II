@@ -17,7 +17,6 @@ import com.gildedgames.aether.common.entities.blocks.EntityParachute;
 import com.gildedgames.aether.common.entities.monsters.EntitySwet;
 import com.gildedgames.aether.common.entities.tiles.*;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
-import com.gildedgames.aether.common.items.weapons.crossbow.ItemBoltType;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -527,13 +526,7 @@ public class ItemModelsAetherInit
 		registerItemModels(ItemsAether.arkenium_crossbow, "crossbow/arkenium_crossbow");
 		registerItemModels(ItemsAether.gravitite_crossbow, "crossbow/gravitite_crossbow");
 
-		registerItemModels(ItemsAether.bolt, new ItemModelBuilder("bolts/")
-				.add(ItemBoltType.SKYROOT.ordinal(), "skyroot_bolt")
-				.add(ItemBoltType.HOLYSTONE.ordinal(), "holystone_bolt")
-				.add(ItemBoltType.SCATTERGLASS.ordinal(), "scatterglass_bolt")
-				.add(ItemBoltType.ZANITE.ordinal(), "zanite_bolt")
-				.add(ItemBoltType.GRAVITITE.ordinal(), "gravitite_bolt")
-				.add(ItemBoltType.ARKENIUM.ordinal(), "arkenium_bolt"));
+		registerItemModels(ItemsAether.bolt, "bolts/scatterglass_bolt");
 
 		registerItemModels(ItemsAether.skyroot_door_item, "skyroot_door");
 		registerItemModels(ItemsAether.secret_skyroot_door_item, "secret_skyroot_door");
@@ -695,6 +688,8 @@ public class ItemModelsAetherInit
 		registerItemModels(ItemsAether.antitoxin_vial, "scatterglass_antitoxin_vial");
 		registerItemModels(ItemsAether.bandage, "bandage");
 		registerItemModels(ItemsAether.splint, "splint");
+
+		registerItemModels(ItemsAether.crude_scatterglass_shard, "crude_scatterglass_shard");
 	}
 
 	private static void registerSnowyFlower(Block block, String name)
