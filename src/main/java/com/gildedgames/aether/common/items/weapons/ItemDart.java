@@ -49,6 +49,8 @@ public class ItemDart extends Item implements IDropOnDeath
 		final int pierceDamageLevel = type.getPierceDamageLevel();
 		final int impactDamageLevel = type.getImpactDamageLevel();
 
+		tooltip.add(TextFormatting.GRAY + I18n.format("item.aether.dart.desc"));
+
 		if (slashDamageLevel > 0)
 		{
 			this.addDamageLevel("slash", slashDamageLevel, tooltip);

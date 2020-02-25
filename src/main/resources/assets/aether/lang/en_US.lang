@@ -657,6 +657,7 @@ item.aether.zanite_crossbow.ability=Stronger With More Use
 item.aether.arkenium_crossbow.ability=Long Shot
 item.aether.gravitite_crossbow.ability=Straight Shot
 item.aether.bolt.desc=Crossbow Ammo
+item.aether.dart.desc=Dart Shooter Ammo
 
 # Tool tooltips
 item.aether.tool.skyroot.ability.desc=Doubles drops from blocks
