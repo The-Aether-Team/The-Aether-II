@@ -187,6 +187,7 @@ public class ItemCrossbow extends Item
 			if (this.hasAmmo(playerIn))
 			{
 				playerIn.setActiveHand(EnumHand.MAIN_HAND);
+				return new ActionResult<>(EnumActionResult.SUCCESS, stack);
 			}
 		}
 		else
@@ -205,6 +206,8 @@ public class ItemCrossbow extends Item
 			}
 
 			playerIn.activeItemStackUseCount = 0;
+
+			return new ActionResult<>(EnumActionResult.SUCCESS, stack);
 		}
 
 		return new ActionResult<>(EnumActionResult.PASS, stack);
