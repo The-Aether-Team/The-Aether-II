@@ -9,6 +9,7 @@ import com.gildedgames.aether.api.items.properties.IItemProperties;
 import com.gildedgames.aether.api.player.IEquipmentModule;
 import com.gildedgames.aether.api.player.IPlayerAetherModule;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
+import com.gildedgames.aether.client.gui.container.guidebook.GuiGuidebookInventory;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
@@ -17,6 +18,7 @@ import com.gildedgames.aether.common.entities.effects.EquipmentEffectPool;
 import com.gildedgames.aether.common.entities.effects.InventoryProvider;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketEquipment;
+import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
@@ -59,7 +61,7 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 		{
 			int mainHandIndex = this.getEntity().inventory.currentItem;
 
-			if (!this.lastHeldStack.isEmpty() && this.lastHeldStackIndex != -1)
+			if ((!this.lastHeldStack.isEmpty() || mainHandIndex != this.getEntity().inventory.getSlotFor(this.lastHeldStack)) && this.lastHeldStackIndex != -1)
 			{
 				this.deactivateEquipmentEffects(this.lastHeldStack, Pair.of(this.lastHeldStackIndex, NORMAL_INV_PROVIDER), EffectActivator.WHEN_HELD);
 			}
