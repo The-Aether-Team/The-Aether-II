@@ -29,7 +29,7 @@
 		{
 			"predicate": {
 				"pulling": 1.0,
-				"pull": 0.0,
+				"pull": 0.1,
 				"charged": 0.0
 			},
 			"model": "aether:item/crossbow/arkenium/loading1"

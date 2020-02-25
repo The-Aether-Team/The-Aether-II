@@ -55,19 +55,12 @@ public class ItemCrossbow extends Item
 			@SideOnly(Side.CLIENT)
 			public float apply(final ItemStack stack, @Nullable final World worldIn, @Nullable final EntityLivingBase entityIn)
 			{
-				if (entityIn == null)
-				{
-					return 0.0F;
-				}
-				else
-				{
-					if (ItemCrossbow.this.finishedLoading)
-					{
-						return 1.0F;
-					}
+				//"pull": The amount that the crossbow has been pulled.
 
-					final ItemStack itemstack = entityIn.getActiveItemStack();
-
+				if (entityIn != null)
+				{
+					final ItemStack activeItemStack = entityIn.getActiveItemStack();
+					final ItemStack heldItemStack = entityIn.getHeldItemMainhand();
 					float duration;
 
 					if (ItemCrossbow.this.isSpecialLoaded)
@@ -79,10 +72,20 @@ public class ItemCrossbow extends Item
 						duration = getDurationInTicks();
 					}
 
-					return itemstack.getItem() == ItemCrossbow.this ?
-							((float) (stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / duration) :
-							0.0F;
+					if (heldItemStack == stack && heldItemStack.getItem() == ItemCrossbow.this)
+					{
+						if (entityIn.isHandActive() && activeItemStack == stack && activeItemStack.getItem() == ItemCrossbow.this)
+						{
+							return ((float) (stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / duration);
+						}
+						else if (((ItemCrossbow) heldItemStack.getItem()).finishedLoading)
+						{
+							return 1.0F;
+						}
+					}
 				}
+
+				return 0.0F;
 			}
 		});
 
@@ -92,7 +95,23 @@ public class ItemCrossbow extends Item
 			@SideOnly(Side.CLIENT)
 			public float apply(final ItemStack stack, @Nullable final World worldIn, @Nullable final EntityLivingBase entityIn)
 			{
-				return entityIn != null && (entityIn.isHandActive() && entityIn.getActiveItemStack() == stack) || ItemCrossbow.this.finishedLoading ? 1.0F : 0.0F;
+				//"pulling": Whether the crossbow is being pulled or not. Basically a boolean in 1.0F and 0.0F form.
+
+				if (entityIn != null)
+				{
+					final ItemStack activeItemStack = entityIn.getActiveItemStack();
+					final ItemStack heldItemStack = entityIn.getHeldItemMainhand();
+
+					if (heldItemStack == stack && heldItemStack.getItem() == ItemCrossbow.this)
+					{
+						if (entityIn.isHandActive() && activeItemStack == stack && activeItemStack.getItem() == ItemCrossbow.this)
+						{
+							return 1.0F;
+						}
+					}
+				}
+
+				return 0.0F;
 			}
 		});
 
@@ -385,6 +404,8 @@ public class ItemCrossbow extends Item
 						{
 							this.isSpecialLoaded = player.isSneaking();
 						}
+
+						this.finishedLoading = false;
 					}
 
 					if (this.isSpecialLoaded)
