@@ -9,7 +9,6 @@ import com.gildedgames.aether.api.items.properties.IItemProperties;
 import com.gildedgames.aether.api.player.IEquipmentModule;
 import com.gildedgames.aether.api.player.IPlayerAetherModule;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
-import com.gildedgames.aether.client.gui.container.guidebook.GuiGuidebookInventory;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
@@ -18,7 +17,7 @@ import com.gildedgames.aether.common.entities.effects.EquipmentEffectPool;
 import com.gildedgames.aether.common.entities.effects.InventoryProvider;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketEquipment;
-import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
@@ -40,6 +39,10 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 
 	private final InventoryEquipment recordedInv;
 
+	private final InventoryPlayer firstInventory;
+
+	private final InventoryPlayer lastInventory;
+
 	private final Map<ResourceLocation, EquipmentEffectPool<IEffectProvider>> pools = new HashMap<>();
 
 	private ItemStack lastHeldStack = ItemStack.EMPTY;
@@ -52,6 +55,9 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 
 		this.stagingInv = new InventoryEquipment(player);
 		this.recordedInv = new InventoryEquipment(player);
+
+		this.firstInventory = new InventoryPlayer(player.getEntity());
+		this.lastInventory = new InventoryPlayer(player.getEntity());
 	}
 
 	@Override
