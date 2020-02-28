@@ -25,6 +25,7 @@ public class EffectSystemOverlay extends Gui
 	private static final ResourceLocation FUNGAL_ROT_ICON = AetherCore.getResource("textures/gui/overlay/effects/fungal_rot.png");
 	private static final ResourceLocation STUN_ICON = AetherCore.getResource("textures/gui/overlay/effects/stun.png");
 	private static final ResourceLocation TOXIN_ICON = AetherCore.getResource("textures/gui/overlay/effects/toxin.png");
+	private static final ResourceLocation FREEZE_ICON = AetherCore.getResource("textures/gui/overlay/effects/freeze.png");
 
 	private final int BAR_OUTLINE_TEXTURE_WIDTH = 22;
 	private final int BAR_OUTLINE_TEXTURE_HEIGHT = 5;
@@ -278,6 +279,8 @@ public class EffectSystemOverlay extends Gui
 				return STUN_ICON;
 			case TOXIN:
 				return TOXIN_ICON;
+			case FREEZE:
+				return FREEZE_ICON;
 		}
 
 		return STUN_ICON;
@@ -291,6 +294,7 @@ public class EffectSystemOverlay extends Gui
 		FUNGAL_ROT(163,130,87),
 		STUN(255,255,255),
 		TOXIN(69,122,65),
+		FREEZE(174,203,209),
 		DEFAULT_COLOR(1,1,1);
 
 		public final int r;
@@ -323,6 +327,8 @@ public class EffectSystemOverlay extends Gui
 					return STUN;
 				case TOXIN:
 					return TOXIN;
+				case FREEZE:
+					return FREEZE;
 					default:
 						return DEFAULT_COLOR;
 			}

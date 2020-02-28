@@ -42,6 +42,6 @@ public class StatusEffectCockatriceVenom extends StatusEffect
 	@Override
 	public void addInformation(Collection<String> label)
 	{
-		label.add(TextFormatting.DARK_PURPLE.toString() + I18n.format("statusEffect.aether.cockatriceVenom"));
+		label.add(TextFormatting.DARK_PURPLE.toString() + I18n.format("effect.aether.cockatrice_venom"));
 	}
 }

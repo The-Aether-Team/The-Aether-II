@@ -33,6 +33,7 @@ public class StatusEffectPool implements IAetherStatusEffectPool
 		types.put(IAetherStatusEffects.effectTypes.FUNGAL_ROT.name, new StatusEffectFactory(StatusEffectFungalRot.class));
 		types.put(IAetherStatusEffects.effectTypes.STUN.name, new StatusEffectFactory(StatusEffectStun.class));
 		types.put(IAetherStatusEffects.effectTypes.TOXIN.name, new StatusEffectFactory(StatusEffectToxin.class));
+		types.put(IAetherStatusEffects.effectTypes.FREEZE.name, new StatusEffectFactory(StatusEffectFreeze.class));
 	}
 
 	private EntityLivingBase livingBase;

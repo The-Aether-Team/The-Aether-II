@@ -28,7 +28,7 @@ import java.util.List;
 
 public class ItemCrossbow extends Item
 {
-	private static final AttributeModifier CROSSBOW_SPECIAL = new AttributeModifier("aether.statusLoadingCrossbowSpecial", -0.75D, 1);
+	private static final AttributeModifier CROSSBOW_SPECIAL = new AttributeModifier("aether.statusLoadingCrossbowSpecial", -1.0D, 1);
 
 	private float durationInTicks;
 

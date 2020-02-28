@@ -8,6 +8,7 @@ public class EffectsDamageSource extends DamageSource
 	public static final DamageSource TOXIN = (new EffectsDamageSource("aether.effect.toxin")).setDamageBypassesArmor();
 	public static final DamageSource COCKATRICE_VENOM = (new EffectsDamageSource("aether.effect.cockatriceVenom")).setDamageBypassesArmor();
 	public static final DamageSource FUNGAL_ROT = (new EffectsDamageSource("aether.effect.fungalRot")).setDamageBypassesArmor();
+	public static final DamageSource FRACTURE = (new EffectsDamageSource("aether.effect.fracture")).setDamageBypassesArmor();
 
 	public EffectsDamageSource(String damageTypeIn)
 	{

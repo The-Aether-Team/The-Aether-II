@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.entities.effects;
 
 import com.gildedgames.aether.api.entity.effects.EEffectIntensity;
+import com.gildedgames.aether.common.capabilities.entity.effects.EffectsDamageSource;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -44,6 +45,14 @@ public class StatusEffectFracture extends StatusEffect
 			if (iAttributeInstance != null && !iAttributeInstance.hasModifier(this.getAttributeModifier()))
 			{
 				iAttributeInstance.applyModifier(this.getAttributeModifier());
+			}
+
+			if (livingBase.isSprinting())
+			{
+				if (timer % TICKS_PER_SECOND == 0)
+				{
+					livingBase.attackEntityFrom(EffectsDamageSource.FRACTURE, 1f);
+				}
 			}
 		}
 		else
@@ -113,7 +122,7 @@ public class StatusEffectFracture extends StatusEffect
 	@Override
 	public void addInformation(Collection<String> label)
 	{
-		label.add(TextFormatting.GRAY.toString() + I18n.format("statusEffect.aether.fracture"));
+		label.add(TextFormatting.GRAY.toString() + I18n.format("effect.aether.fracture"));
 	}
 
 }

@@ -867,6 +867,7 @@ gui.guidebook.discovery.moves=Moves:
 
 death.attack.aether.effect.bleed=%1$s bled to death
 death.attack.aether.effect.fungalRot=%1$s succumbed to fungal rot
+death.attack.aether.effect.fracture=Oof owie %1$s's bones
 
 # Status Effects
 
@@ -874,6 +875,7 @@ effect.aether.ambrosium_poisoning=Ambrosium Poisoning
 effect.aether.bleed=Bleed
 effect.aether.cockatrice_venom=Cockatrice Venom
 effect.aether.fracture=Fracture
+effect.aether.freeze=Freeze
 effect.aether.fungal_rot=Fungal Rot
 effect.aether.stun=Stun
 effect.aether.toxin=Toxin

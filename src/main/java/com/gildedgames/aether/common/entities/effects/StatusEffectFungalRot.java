@@ -83,6 +83,6 @@ public class StatusEffectFungalRot extends StatusEffect
 	@Override
 	public void addInformation(Collection<String> label)
 	{
-		label.add(TextFormatting.DARK_GREEN.toString() + I18n.format("statusEffect.aether.fungalRot"));
+		label.add(TextFormatting.DARK_GREEN.toString() + I18n.format("effect.aether.fungal_rot"));
 	}
 }

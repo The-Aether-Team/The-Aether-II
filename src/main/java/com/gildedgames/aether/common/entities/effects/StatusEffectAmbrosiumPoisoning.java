@@ -54,6 +54,6 @@ public class StatusEffectAmbrosiumPoisoning extends StatusEffect
 	@Override
 	public void addInformation(Collection<String> label)
 	{
-		label.add(TextFormatting.YELLOW.toString() + I18n.format("statusEffect.aether.ambroPoison"));
+		label.add(TextFormatting.YELLOW.toString() + I18n.format("effect.aether.ambrosium_poisoning"));
 	}
 }
