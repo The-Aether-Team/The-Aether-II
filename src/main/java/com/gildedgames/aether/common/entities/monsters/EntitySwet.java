@@ -173,8 +173,6 @@ public class EntitySwet extends EntityExtendedMob
 						}
 					}
 				}
-
-				this.applyStatusEffectOnAttack(player);
 			}
 
 			player.playSound(SoundEvents.ENTITY_SLIME_ATTACK, 1.0F, (player.getRNG().nextFloat() - player.getRNG().nextFloat()) * 0.2F + 1.0F);
@@ -195,18 +193,6 @@ public class EntitySwet extends EntityExtendedMob
 		}
 
 		return false;
-	}
-
-
-	private void applyStatusEffectOnAttack(final Entity target)
-	{
-		if (target instanceof EntityLivingBase)
-		{
-			final EntityLivingBase living = (EntityLivingBase) target;
-
-			int buildup = IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectToxin(living), EEffectIntensity.MINOR)/2;
-			IAetherStatusEffects.applyStatusEffect(living, IAetherStatusEffects.effectTypes.TOXIN, buildup);
-		}
 	}
 
 	@Override
