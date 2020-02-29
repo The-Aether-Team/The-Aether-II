@@ -55,6 +55,8 @@ public class PlayerAether implements IPlayerAether
 
 	private boolean isTrading;
 
+	private boolean isJumping = false;
+
 	public PlayerAether()
 	{
 		this.entity = null;
@@ -160,6 +162,16 @@ public class PlayerAether implements IPlayerAether
 		return this.ticksWithEggnogEffect > 0;
 	}
 
+	public void setJumping(boolean jumping)
+	{
+		this.isJumping = jumping;
+	}
+
+	public boolean getJumping()
+	{
+		return this.isJumping;
+	}
+
 	public void onLoggedOut()
 	{
 		this.getModule(PlayerSectorModule.class).releaseAll();
@@ -185,6 +197,11 @@ public class PlayerAether implements IPlayerAether
 		if (this.ticksWithEggnogEffect > 0)
 		{
 			this.ticksWithEggnogEffect--;
+		}
+
+		if (this.getEntity().motionY < 0)
+		{
+			this.setJumping(false);
 		}
 	}
 

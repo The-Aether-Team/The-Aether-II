@@ -1,7 +1,11 @@
 package com.gildedgames.aether.common.entities.effects;
 
 import com.gildedgames.aether.api.entity.effects.EEffectIntensity;
+import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectPool;
+import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
+import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.common.capabilities.entity.effects.EffectsDamageSource;
+import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -46,6 +50,11 @@ public class StatusEffectFreeze extends StatusEffect
 
                     foodStats.setFoodLevel(foodStats.getFoodLevel() - 1);
                 }
+            }
+
+            if (PlayerAether.getPlayer((EntityPlayer) livingBase).getJumping())
+            {
+                this.decreaseTimer += 5;
             }
         }
         else

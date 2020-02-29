@@ -189,7 +189,7 @@ public interface IAetherStatusEffects extends NBT
 		BLEED("effect.aether.bleed", 4,1,10,0,10),
 		FRACTURE("effect.aether.fracture", 5,1, 1, 60*5,10),
 		FUNGAL_ROT("effect.aether.fungal_rot", 6,1, 10, 20,10),
-		FREEZE("effect.aether.freeze", 7,1, 10, 20,10);
+		FREEZE("effect.aether.freeze", 7,1, 5, 20,10);
 
 		public final int numericValue;			// identifier for this effect.
 		public final String name;
