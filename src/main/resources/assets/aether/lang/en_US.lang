@@ -678,7 +678,17 @@ item.aether.tooltip.heals=Heals
 item.aether.armor.zanite.ability.desc=Becomes Stronger with Wear
 
 # Curative Tooltips
-item.aether.curative.desc=Decreases buildup
+item.aether.curative.desc1=Cures effect
+item.aether.curative.fracture.desc1=Reduces healing time
+item.aether.curative.desc2=Reduces buildup
+
+item.aether.antitoxin_vial.reduction.desc=Reduces Toxin Buildup
+item.aether.antitoxin_vial.cure.desc=Cures Toxin
+item.aether.antivenom_vial.reduction.desc=Reduces Cockatrice Venom Buildup
+item.aether.antivenom_vial.cure.desc=Cures Cockatrice Venom
+item.aether.bandage.reduction.desc=Reduces Bleeding Buildup
+item.aether.splint.reduction.desc=Reduces Fracture Buildup
+item.aether.splint.cure.desc=Boosts Fracture Healing Time
 
 # Records
 item.aether.moa_music_disc.desc=Emile van Krieken - Approaches
@@ -886,7 +896,7 @@ effect.aether.stun=Stun
 effect.aether.toxin=Toxin
 effect.aether.webbing=Webbing
 
-# Damage
+# Damage Attributes
 
 attribute.name.aether.slashDamageLevel=Slash Damage
 attribute.name.aether.pierceDamageLevel=Pierce Damage

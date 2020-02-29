@@ -11,6 +11,7 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
@@ -60,7 +61,16 @@ public class ItemCurative extends ItemDropOnDeath
                     TextFormatting.WHITE + I18n.format(effect.name)));
         }
 
-        tooltip.add(TextFormatting.GRAY + I18n.format("item.aether.curative.desc"));
+        if (stack.getItem() != ItemsAether.bandage && stack.getItem() != ItemsAether.splint)
+        {
+            tooltip.add(TextFormatting.GRAY + I18n.format("item.aether.curative.desc1"));
+        }
+        else if (stack.getItem() == ItemsAether.splint)
+        {
+            tooltip.add(TextFormatting.GRAY + I18n.format("item.aether.curative.fracture.desc1"));
+        }
+
+        tooltip.add(TextFormatting.GRAY + I18n.format("item.aether.curative.desc2"));
     }
 
     @Override
