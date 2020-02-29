@@ -28,7 +28,7 @@ public class EntityJumpListener
 
             if (statusEffectPool != null)
             {
-                if (statusEffectPool.isEffectApplied(IAetherStatusEffects.effectTypes.FREEZE))
+                if (statusEffectPool.isEffectApplied(IAetherStatusEffects.effectTypes.FREEZE) || statusEffectPool.isEffectApplied(IAetherStatusEffects.effectTypes.WEBBING))
                 {
                     event.getEntity().motionY *= 0.5;
                 }

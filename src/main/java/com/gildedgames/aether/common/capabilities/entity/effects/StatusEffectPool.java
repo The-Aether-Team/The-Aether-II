@@ -34,6 +34,7 @@ public class StatusEffectPool implements IAetherStatusEffectPool
 		types.put(IAetherStatusEffects.effectTypes.STUN.name, new StatusEffectFactory(StatusEffectStun.class));
 		types.put(IAetherStatusEffects.effectTypes.TOXIN.name, new StatusEffectFactory(StatusEffectToxin.class));
 		types.put(IAetherStatusEffects.effectTypes.FREEZE.name, new StatusEffectFactory(StatusEffectFreeze.class));
+		types.put(IAetherStatusEffects.effectTypes.WEBBING.name, new StatusEffectFactory(StatusEffectWebbing.class));
 	}
 
 	private EntityLivingBase livingBase;

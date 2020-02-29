@@ -879,6 +879,7 @@ effect.aether.freeze=Freeze
 effect.aether.fungal_rot=Fungal Rot
 effect.aether.stun=Stun
 effect.aether.toxin=Toxin
+effect.aether.webbing=Webbing
 
 # Curatives
 

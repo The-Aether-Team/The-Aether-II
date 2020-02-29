@@ -7,6 +7,7 @@ import com.gildedgames.aether.common.entities.ai.EntityAIHideFromLight;
 import com.gildedgames.aether.common.entities.ai.EntityAIUnstuckBlueAercloud;
 import com.gildedgames.aether.common.entities.ai.EntityAIWanderAvoidLight;
 import com.gildedgames.aether.common.entities.effects.StatusEffectCockatriceVenom;
+import com.gildedgames.aether.common.entities.effects.StatusEffectFreeze;
 import com.gildedgames.aether.common.entities.multipart.AetherMultiPartEntity;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
 import net.minecraft.entity.*;
@@ -142,12 +143,12 @@ public class EntityVaranys extends EntityAetherMob implements IEntityMultiPart
 
 			if (!living.isActiveItemStackBlocking())
 			{
-				int buildup = IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectCockatriceVenom(living), EEffectIntensity.MAJOR);
+				int buildup = IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectFreeze(living), EEffectIntensity.MAJOR);
 				IAetherStatusEffects.applyStatusEffect(living, IAetherStatusEffects.effectTypes.FREEZE, buildup);
 			}
 			else
 			{
-				int buildup = IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectCockatriceVenom(living), EEffectIntensity.ORDINARY);
+				int buildup = IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectFreeze(living), EEffectIntensity.ORDINARY);
 				IAetherStatusEffects.applyStatusEffect(living, IAetherStatusEffects.effectTypes.FREEZE, buildup);
 			}
 		}
