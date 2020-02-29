@@ -632,12 +632,12 @@ item.rarity.mythic.name=§6§oMythic
 item.rarity.godly.name=§o§aG§bo§6d§dl§ey
 
 # Weapon Tooltips
-item.aether.skyroot_sword.ability.desc=Doubles Drops
+item.aether.skyroot_sword.ability.desc=Doubles drops
 item.aether.holystone_sword.ability.desc=Drops Ambrosium
-item.aether.zanite_sword.ability.desc=Stronger With More Use
-item.aether.gravitite_sword.ability.desc=Shifts Gravity
+item.aether.zanite_sword.ability.desc=Stronger with more use
+item.aether.arkenium_sword.ability.desc=Durable but heavy
+item.aether.gravitite_sword.ability.desc=Shifts gravity
 item.aether.gravitite_sword.use.desc=Sneak & Attack
-item.aether.arkenium_sword.ability.desc=Durable & Heavy
 item.aether.holy_sword.ability.desc=Obliterates Undead
 item.aether.lightning_sword.ability.desc=Smites With Lightning
 item.aether.flaming_sword.ability.desc=Ignites Mobs
@@ -651,29 +651,34 @@ item.aether.crossbow.desc2=Seconds
 item.aether.crossbow.desc3=Second
 item.aether.crossbow.desc4=Ability
 item.aether.crossbow.use.desc=Sneak & Reload
-item.aether.skyroot_crossbow.ability=Double Shot
-item.aether.holystone_crossbow.ability=Spread Shot
-item.aether.zanite_crossbow.ability=Stronger With More Use
-item.aether.arkenium_crossbow.ability=Long Shot
-item.aether.gravitite_crossbow.ability=Straight Shot
+item.aether.skyroot_crossbow.ability=Double shot
+item.aether.holystone_crossbow.ability=Spread shot
+item.aether.zanite_crossbow.ability=Stronger with more use
+item.aether.arkenium_crossbow.ability=Long shot
+item.aether.gravitite_crossbow.ability=Straight shot
 item.aether.bolt.desc=Crossbow Ammo
 item.aether.dart.desc=Dart Shooter Ammo
 
 # Tool tooltips
-item.aether.tool.skyroot.ability.desc=Doubles drops from blocks
-item.aether.tool.holystone.ability.desc=Chance to drop Ambrosium Shards while mining
-item.aether.tool.zanite.ability.desc=Mines faster as durability decreases
-item.aether.tool.gravitite.ability.desc=Shifts gravity on blocks
-item.aether.tool.gravitite.use.desc=Right-Click block
-item.aether.tool.arkenium.ability.desc=Extremely durable, but heavy
+item.aether.tool.skyroot.ability.desc=Doubles block drops
+item.aether.tool.holystone.ability.desc=Drops Ambrosium
+item.aether.tool.zanite.ability.desc=Faster with more use
+item.aether.tool.arkenium.ability.desc=Durable but heavy
+item.aether.tool.gravitite.ability.desc=Shifts block gravity
+item.aether.tool.gravitite.use.desc=Sneak & Use
 item.aether.tool.valkyrie.ability.desc=Extended Reach
 
 # Tooltips
 item.aether.tooltip.ability=Ability
 item.aether.tooltip.use=Use
+item.aether.tooltip.cures=Cures
+item.aether.tooltip.heals=Heals
 
 # Armor Tooltips
 item.aether.armor.zanite.ability.desc=Becomes Stronger with Wear
+
+# Curative Tooltips
+item.aether.curative.desc=Decreases buildup
 
 # Records
 item.aether.moa_music_disc.desc=Emile van Krieken - Approaches
@@ -880,16 +885,6 @@ effect.aether.fungal_rot=Fungal Rot
 effect.aether.stun=Stun
 effect.aether.toxin=Toxin
 effect.aether.webbing=Webbing
-
-# Curatives
-
-item.aether.antitoxin_vial.reduction.desc=Reduces Toxin Buildup
-item.aether.antitoxin_vial.cure.desc=Cures Toxin
-item.aether.antivenom_vial.reduction.desc=Reduces Cockatrice Venom Buildup
-item.aether.antivenom_vial.cure.desc=Cures Cockatrice Venom
-item.aether.bandage.reduction.desc=Reduces Bleeding Buildup
-item.aether.splint.reduction.desc=Reduces Fracture Buildup
-item.aether.splint.cure.desc=Boosts Fracture Healing Time
 
 # Damage
 

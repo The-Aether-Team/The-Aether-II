@@ -47,12 +47,20 @@ public class ItemCurative extends ItemDropOnDeath
     @SideOnly(Side.CLIENT)
     public void addInformation(final ItemStack stack, @Nullable final World worldIn, final List<String> tooltip, final ITooltipFlag flagIn)
     {
-        tooltip.add(TextFormatting.DARK_GRAY + I18n.format(this.getTranslationKey() + ".reduction.desc"));
-
-        if (stack.getItem() != ItemsAether.bandage)
+        if (stack.getItem() == ItemsAether.bandage || stack.getItem() == ItemsAether.splint)
         {
-            tooltip.add(TextFormatting.DARK_GRAY + I18n.format(this.getTranslationKey() + ".cure.desc"));
+            tooltip.add(String.format("%s: %s",
+                    TextFormatting.GREEN + I18n.format("item.aether.tooltip.heals"),
+                    TextFormatting.WHITE + I18n.format(effect.name)));
         }
+        else
+        {
+            tooltip.add(String.format("%s: %s",
+                    TextFormatting.GREEN + I18n.format("item.aether.tooltip.cures"),
+                    TextFormatting.WHITE + I18n.format(effect.name)));
+        }
+
+        tooltip.add(TextFormatting.GRAY + I18n.format("item.aether.curative.desc"));
     }
 
     @Override
