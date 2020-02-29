@@ -17,7 +17,6 @@ import com.gildedgames.aether.common.entities.effects.EquipmentEffectPool;
 import com.gildedgames.aether.common.entities.effects.InventoryProvider;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketEquipment;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
@@ -39,10 +38,6 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 
 	private final InventoryEquipment recordedInv;
 
-	private final InventoryPlayer firstInventory;
-
-	private final InventoryPlayer lastInventory;
-
 	private final Map<ResourceLocation, EquipmentEffectPool<IEffectProvider>> pools = new HashMap<>();
 
 	private ItemStack lastHeldStack = ItemStack.EMPTY;
@@ -55,28 +50,43 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 
 		this.stagingInv = new InventoryEquipment(player);
 		this.recordedInv = new InventoryEquipment(player);
-
-		this.firstInventory = new InventoryPlayer(player.getEntity());
-		this.lastInventory = new InventoryPlayer(player.getEntity());
 	}
 
 	@Override
 	public void tickStart(TickEvent.PlayerTickEvent event)
 	{
-		if (!ItemStack.areItemStacksEqual(this.lastHeldStack, this.getEntity().getHeldItemMainhand()))
-		{
-			int mainHandIndex = this.getEntity().inventory.currentItem;
+		ItemStack mainHeldStack = this.getEntity().getHeldItemMainhand();
+		int mainHeldStackIndex = this.getEntity().inventory.getSlotFor(mainHeldStack);
 
-			if ((!this.lastHeldStack.isEmpty() || mainHandIndex != this.getEntity().inventory.getSlotFor(this.lastHeldStack)) && this.lastHeldStackIndex != -1)
+		if (this.lastHeldStackIndex != -1)
+		{
+			if ((this.lastHeldStackIndex != mainHeldStackIndex || !this.lastHeldStack.isEmpty()) && !ItemStack.areItemStacksEqual(this.lastHeldStack, mainHeldStack))
 			{
 				this.deactivateEquipmentEffects(this.lastHeldStack, Pair.of(this.lastHeldStackIndex, NORMAL_INV_PROVIDER), EffectActivator.WHEN_HELD);
 			}
 
-			if (!this.getEntity().getHeldItemMainhand().isEmpty())
+			if (mainHeldStack.isEmpty())
 			{
-				this.activateEquipmentEffects(this.getEntity().getHeldItemMainhand(), Pair.of(mainHandIndex, NORMAL_INV_PROVIDER), EffectActivator.WHEN_HELD);
+				this.deactivateEquipmentEffects(this.lastHeldStack, Pair.of(mainHeldStackIndex, NORMAL_INV_PROVIDER), EffectActivator.WHEN_HELD);
+
+				if (this.lastHeldStackIndex != mainHeldStackIndex)
+				{
+					for (int i = 0; i < this.getEntity().inventory.getSizeInventory(); i++)
+					{
+						this.deactivateEquipmentEffects(this.getEntity().inventory.getStackInSlot(i), Pair.of(this.lastHeldStackIndex, NORMAL_INV_PROVIDER), EffectActivator.WHEN_HELD);
+					}
+				}
 			}
 		}
+
+		if (!mainHeldStack.isEmpty() && !ItemStack.areItemStacksEqual(this.lastHeldStack, mainHeldStack))
+		{
+			this.activateEquipmentEffects(mainHeldStack, Pair.of(mainHeldStackIndex, NORMAL_INV_PROVIDER), EffectActivator.WHEN_HELD);
+		}
+
+		this.lastHeldStack = this.getEntity().getHeldItemMainhand();
+		this.lastHeldStackIndex = this.getEntity().inventory.getSlotFor(this.lastHeldStack);
+
 
 		final List<Pair<Integer, ItemStack>> updates = this.getEntity().world.isRemote ? null : new ArrayList<>();
 
@@ -114,9 +124,6 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 		}
 
 		this.pools.values().forEach(EquipmentEffectPool::update);
-
-		this.lastHeldStack = this.getEntity().getHeldItemMainhand();
-		this.lastHeldStackIndex = this.getEntity().inventory.currentItem;
 	}
 
 	@Override
