@@ -3,11 +3,17 @@ package com.gildedgames.aether.common.capabilities;
 import com.gildedgames.aether.api.entity.damage.DamageSystemTables;
 import com.gildedgames.aether.api.entity.damage.DamageTypeAttributes;
 import com.gildedgames.aether.api.entity.damage.IDamageLevelsHolder;
+import com.gildedgames.aether.api.registrar.ItemsAether;
+import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
 import com.gildedgames.aether.common.init.ParticlesAether;
+import com.gildedgames.aether.common.items.weapons.swords.ItemZaniteSword;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketParticles;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.attributes.IAttribute;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -101,9 +107,33 @@ public class DamageSystem
 		double impactDefenseLevel = receiving.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).getAttributeValue();
 		double pierceDefenseLevel = receiving.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).getAttributeValue();
 
-		double resultSlashDamageLevel = Math.max(slashDamageLevel > 0 ? 1 : 0, slashDamageLevel - slashDefenseLevel);
-		double resultImpactDamageLevel = Math.max(impactDamageLevel > 0 ? 1 : 0, impactDamageLevel - impactDefenseLevel);
-		double resultPierceDamageLevel = Math.max(pierceDamageLevel > 0 ? 1 : 0, pierceDamageLevel - pierceDefenseLevel);
+		System.out.println("damage level: " + pierceDamageLevel);
+
+		double bonusSlashDamage = 0.0;
+		double bonusImpactDamage = 0.0;
+		double bonusPierceDamage = 0.0;
+
+		if (entitySource instanceof EntityLivingBase)
+		{
+			Item item = ((EntityLivingBase) entitySource).getHeldItemMainhand().getItem();
+			if (item instanceof ItemZaniteSword)
+			{
+				bonusSlashDamage = (int) ((ItemZaniteSword) item).bonusDamage;
+			}
+		}
+
+		if (entitySource instanceof EntityBolt)
+		{
+			bonusPierceDamage = (int) ((EntityBolt) entitySource).bonusDamage;
+		}
+
+		System.out.println("bonus slash: " + bonusSlashDamage);
+
+		System.out.println("bonus pierce: " + bonusPierceDamage);
+
+		double resultSlashDamageLevel = Math.max(slashDamageLevel > 0 ? 1 : 0, (slashDamageLevel + bonusSlashDamage) - slashDefenseLevel);
+		double resultImpactDamageLevel = Math.max(impactDamageLevel > 0 ? 1 : 0, (impactDamageLevel + bonusImpactDamage) - impactDefenseLevel);
+		double resultPierceDamageLevel = Math.max(pierceDamageLevel > 0 ? 1 : 0, (pierceDamageLevel + bonusPierceDamage) - pierceDefenseLevel);
 
 		double slashDamage = DamageSystemTables.getValueFromLevelRange(resultSlashDamageLevel);
 		double impactDamage = DamageSystemTables.getValueFromLevelRange(resultImpactDamageLevel);
@@ -112,6 +142,8 @@ public class DamageSystem
 		double trueSlashDamage = slashDamage / 2;
 		double trueImpactDamage = impactDamage / 2;
 		double truePierceDamage = pierceDamage / 2;
+
+		System.out.println("hearts: " + truePierceDamage);
 
 		float totalDamage = (float) (trueSlashDamage + trueImpactDamage + truePierceDamage);
 

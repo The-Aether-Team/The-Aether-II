@@ -17,7 +17,7 @@ public class EntityBolt extends EntityArrow implements IDamageLevelsHolder
 {
 	private int ticksInAir;
 
-	private double bonusDamage = 0;
+	public double bonusDamage = 0.0;
 
 	private int slashDamageLevel = 0;
 
@@ -44,17 +44,7 @@ public class EntityBolt extends EntityArrow implements IDamageLevelsHolder
 	@Override
 	protected void arrowHit(final EntityLivingBase living)
 	{
-		if (bonusDamage > 0)
-		{
-			if (living instanceof EntityPlayer)
-			{
-				living.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) this.shootingEntity), (float) this.bonusDamage);
-			}
-			else
-			{
-				living.attackEntityFrom(DamageSource.causeMobDamage((EntityLivingBase) this.shootingEntity), (float) this.bonusDamage);
-			}
-		}
+
 	}
 
 	@Override

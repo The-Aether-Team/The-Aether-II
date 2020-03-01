@@ -275,13 +275,17 @@ public class ItemCrossbow extends Item
 			{
 				if (this.cBType == crossBowTypes.ZANITE)
 				{
-					float damage = ((float) (this.getDamage(stack) * 10) / this.getMaxDamage());
-
 					bolt0 = this.createBolt(entityLiving, speed, 0, 0, 0, slashDamageLevel, pierceDamageLevel, impactDamageLevel);
 
-					if (bolt0 != null)
+					if (entityLiving.getHeldItemMainhand() == stack)
 					{
-						bolt0.setBonusDamage(damage);
+						//This equals to a bonus of 6 Pierce Damage Levels.
+						float damage = (float) (stack.getItemDamage() * 7) / stack.getItem().getMaxDamage();
+
+						if (bolt0 != null)
+						{
+							bolt0.setBonusDamage(damage);
+						}
 					}
 				}
 				else if (this.cBType == crossBowTypes.GRAVETITE)
