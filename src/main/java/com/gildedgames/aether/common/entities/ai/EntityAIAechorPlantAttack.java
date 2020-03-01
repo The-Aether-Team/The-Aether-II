@@ -56,7 +56,7 @@ public class EntityAIAechorPlantAttack extends EntityAITarget
 			if (!predator.world.isRemote)
 			{
 				final EntityDart dart = new EntityDart(predator.world, predator);
-				dart.shoot(prey.posX, prey.posY, prey.posZ, 0.6F, 1.0F);
+				dart.shoot(predator.posX, predator.posY + 1.0F, predator.posZ, 0.6F, 1.0F);
 
 				final double motionX = prey.posX - predator.posX;
 				final double motionY = prey.getEntityBoundingBox().minY + (double) (prey.height / 3.0F) - dart.posY;
