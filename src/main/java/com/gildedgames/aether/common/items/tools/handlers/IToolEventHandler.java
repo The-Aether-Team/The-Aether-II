@@ -24,5 +24,5 @@ public interface IToolEventHandler
 
 	void onEntityHit(ItemStack stack, Entity target, EntityLivingBase attacker);
 
-	float getBreakSpeed(ItemStack stack, World world, IBlockState state, BlockPos pos, EntityPlayer player, float original);
+	float getBreakSpeed(ItemStack stack, IBlockState state, float original);
 }

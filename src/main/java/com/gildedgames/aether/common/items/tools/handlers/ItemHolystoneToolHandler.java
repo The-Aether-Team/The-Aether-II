@@ -57,7 +57,7 @@ public class ItemHolystoneToolHandler implements IToolEventHandler
 	}
 
 	@Override
-	public float getBreakSpeed(ItemStack stack, World world, IBlockState state, BlockPos pos, EntityPlayer player, float original)
+	public float getBreakSpeed(ItemStack stack, IBlockState state, float original)
 	{
 		return original;
 	}

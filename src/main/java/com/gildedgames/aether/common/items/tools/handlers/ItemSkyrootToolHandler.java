@@ -81,8 +81,7 @@ public class ItemSkyrootToolHandler implements IToolEventHandler
 	}
 
 	@Override
-	public float getBreakSpeed(final ItemStack stack, final World world, final IBlockState state, final BlockPos pos, final EntityPlayer player,
-			final float original)
+	public float getBreakSpeed(ItemStack stack, IBlockState state, float original)
 	{
 		return original;
 	}

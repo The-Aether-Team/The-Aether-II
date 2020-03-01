@@ -3,12 +3,16 @@ package com.gildedgames.aether.common.events.listeners.items;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.init.MaterialsAether;
 import com.gildedgames.aether.common.items.tools.handlers.*;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -143,25 +147,18 @@ public class ItemToolListener
 		}
 	}
 
-	@SubscribeEvent
-	public static void onCalculateBreakSpeed(final PlayerEvent.BreakSpeed event)
+	public static float getBreakSpeed(final ItemStack stack, final IBlockState state, float original)
 	{
-		final ItemStack stack = event.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND);
+		final String material = ((ItemTool) stack.getItem()).getToolMaterialName();
 
-		if (stack.getItem() instanceof ItemTool)
+		final IToolEventHandler handler = handlers.get(material);
+
+		if (handler != null)
 		{
-			final String material = ((ItemTool) stack.getItem()).getToolMaterialName();
-
-			final IToolEventHandler handler = handlers.get(material);
-
-			if (handler == null)
-			{
-				return;
-			}
-
-			event.setNewSpeed(handler.getBreakSpeed(stack, event.getEntityPlayer().getEntityWorld(), event.getState(), event.getPos(), event.getEntityPlayer(),
-					event.getOriginalSpeed()));
+			return handler.getBreakSpeed(stack, state, original);
 		}
+
+		return original;
 	}
 
 	@SubscribeEvent

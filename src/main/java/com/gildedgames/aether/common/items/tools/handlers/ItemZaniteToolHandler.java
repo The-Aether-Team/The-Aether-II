@@ -49,15 +49,10 @@ public class ItemZaniteToolHandler implements IToolEventHandler
 	}
 
 	@Override
-	public float getBreakSpeed(ItemStack stack, World world, IBlockState state, BlockPos pos, EntityPlayer player, float original)
+	public float getBreakSpeed(ItemStack stack, IBlockState state, float original)
 	{
-		if (state.getBlock().canHarvestBlock(world, pos, player))
-		{
-			float scale = ((2.0F * ((float) stack.getItemDamage() / (float) stack.getItem().getMaxDamage())) + 1.0F);
+		float scale = ((2.0F * ((float) stack.getItemDamage() / (float) stack.getItem().getMaxDamage())) + 1.0F);
 
-			return original * scale;
-		}
-
-		return original;
+		return original * scale;
 	}
 }

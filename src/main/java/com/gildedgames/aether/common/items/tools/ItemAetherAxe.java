@@ -3,6 +3,8 @@ package com.gildedgames.aether.common.items.tools;
 import com.gildedgames.aether.common.events.listeners.items.ItemToolListener;
 import com.gildedgames.aether.common.init.CreativeTabsAether;
 import com.gildedgames.aether.common.init.MaterialsAether;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
@@ -30,6 +32,20 @@ public class ItemAetherAxe extends ItemAxe
 		super.hitEntity(stack, target, attacker);
 
 		return ItemToolListener.onEntityHit(stack, this.toolMaterial, target, attacker);
+	}
+
+	@Override
+	public float getDestroySpeed(ItemStack stack, IBlockState state)
+	{
+		Material material = state.getMaterial();
+		float original = this.toolMaterial.getEfficiency();
+
+		if (material == Material.WOOD || material == Material.PLANTS || material == Material.VINE)
+		{
+			return ItemToolListener.getBreakSpeed(stack, state, original);
+		}
+
+		return super.getDestroySpeed(stack, state);
 	}
 
 	@Override
