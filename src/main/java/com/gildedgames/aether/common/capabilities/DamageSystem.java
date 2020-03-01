@@ -104,8 +104,6 @@ public class DamageSystem
 	{
 		if (entitySource instanceof EntityPlayer)
 		{
-			System.out.println(PlayerAether.getPlayer((EntityPlayer) entitySource).getCooldownTracker());
-
 			if (PlayerAether.getPlayer((EntityPlayer) entitySource).getCooldownTracker() < 1.0f)
 			{
 				event.setAmount(0);
