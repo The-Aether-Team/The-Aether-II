@@ -254,9 +254,12 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 		{
 			final EntityLivingBase living = (EntityLivingBase) entityIn;
 
+			double xRatio = this.getLook(1.0F).x * 360;
+			double zRatio = this.getLook(1.0F).z * 360;
+
 			living.attackEntityFrom(DamageSource.causeMobDamage(this), 5.0F);
 			this.playSound(SoundsAether.burrukai_attack, 0.5F, 1.0F);
-			living.knockBack(this, 1.0F, 0.2D, 0.2D);
+			living.knockBack(this, 1.0F, xRatio * -1, zRatio * -1);
 
 			this.applyStatusEffectOnAttack(entityIn);
 			this.ramAttack.setTarget(this.getAttackTarget());
