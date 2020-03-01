@@ -57,6 +57,8 @@ public class PlayerAether implements IPlayerAether
 
 	private boolean isJumping = false;
 
+	private float cooldownTracker = 0.0f;
+
 	public PlayerAether()
 	{
 		this.entity = null;
@@ -172,6 +174,11 @@ public class PlayerAether implements IPlayerAether
 		return this.isJumping;
 	}
 
+	public float getCooldownTracker()
+	{
+		return this.cooldownTracker;
+	}
+
 	public void onLoggedOut()
 	{
 		this.getModule(PlayerSectorModule.class).releaseAll();
@@ -194,6 +201,8 @@ public class PlayerAether implements IPlayerAether
 
 	public void onUpdate()
 	{
+		this.cooldownTracker = this.getEntity().getCooledAttackStrength(0.0f);
+
 		if (this.ticksWithEggnogEffect > 0)
 		{
 			this.ticksWithEggnogEffect--;

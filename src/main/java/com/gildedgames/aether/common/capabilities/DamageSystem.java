@@ -3,7 +3,7 @@ package com.gildedgames.aether.common.capabilities;
 import com.gildedgames.aether.api.entity.damage.DamageSystemTables;
 import com.gildedgames.aether.api.entity.damage.DamageTypeAttributes;
 import com.gildedgames.aether.api.entity.damage.IDamageLevelsHolder;
-import com.gildedgames.aether.api.registrar.ItemsAether;
+import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
 import com.gildedgames.aether.common.init.ParticlesAether;
 import com.gildedgames.aether.common.items.weapons.swords.ItemZaniteSword;
@@ -11,9 +11,8 @@ import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketParticles;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.ai.attributes.IAttribute;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -103,6 +102,17 @@ public class DamageSystem
 	private static void processTotalDamage(LivingHurtEvent event, Entity entitySource, double slashDamageLevel, double pierceDamageLevel,
 			double impactDamageLevel, EntityLivingBase receiving)
 	{
+		if (entitySource instanceof EntityPlayer)
+		{
+			System.out.println(PlayerAether.getPlayer((EntityPlayer) entitySource).getCooldownTracker());
+
+			if (PlayerAether.getPlayer((EntityPlayer) entitySource).getCooldownTracker() < 1.0f)
+			{
+				event.setAmount(0);
+				return;
+			}
+		}
+
 		double slashDefenseLevel = receiving.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).getAttributeValue();
 		double impactDefenseLevel = receiving.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).getAttributeValue();
 		double pierceDefenseLevel = receiving.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).getAttributeValue();

@@ -26,6 +26,11 @@ public class DamageSystemTables
 			LEVEL_RANGES.add(new LevelRange(29, 32, 8));
 			LEVEL_RANGES.add(new LevelRange(33, 36, 9));
 			LEVEL_RANGES.add(new LevelRange(37, 40, 10));
+			LEVEL_RANGES.add(new LevelRange(41, 44, 11));
+			LEVEL_RANGES.add(new LevelRange(45, 48, 12));
+			LEVEL_RANGES.add(new LevelRange(49, 52, 13));
+			LEVEL_RANGES.add(new LevelRange(53, 56, 14));
+			LEVEL_RANGES.add(new LevelRange(57, 60, 15));
 		}
 
 		return LEVEL_RANGES;
