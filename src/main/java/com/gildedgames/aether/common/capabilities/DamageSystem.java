@@ -107,8 +107,6 @@ public class DamageSystem
 		double impactDefenseLevel = receiving.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).getAttributeValue();
 		double pierceDefenseLevel = receiving.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).getAttributeValue();
 
-		System.out.println("damage level: " + pierceDamageLevel);
-
 		double bonusSlashDamage = 0.0;
 		double bonusImpactDamage = 0.0;
 		double bonusPierceDamage = 0.0;
@@ -127,10 +125,6 @@ public class DamageSystem
 			bonusPierceDamage = (int) ((EntityBolt) entitySource).bonusDamage;
 		}
 
-		System.out.println("bonus slash: " + bonusSlashDamage);
-
-		System.out.println("bonus pierce: " + bonusPierceDamage);
-
 		double resultSlashDamageLevel = Math.max(slashDamageLevel > 0 ? 1 : 0, (slashDamageLevel + bonusSlashDamage) - slashDefenseLevel);
 		double resultImpactDamageLevel = Math.max(impactDamageLevel > 0 ? 1 : 0, (impactDamageLevel + bonusImpactDamage) - impactDefenseLevel);
 		double resultPierceDamageLevel = Math.max(pierceDamageLevel > 0 ? 1 : 0, (pierceDamageLevel + bonusPierceDamage) - pierceDefenseLevel);
@@ -142,8 +136,6 @@ public class DamageSystem
 		double trueSlashDamage = slashDamage / 2;
 		double trueImpactDamage = impactDamage / 2;
 		double truePierceDamage = pierceDamage / 2;
-
-		System.out.println("hearts: " + truePierceDamage);
 
 		float totalDamage = (float) (trueSlashDamage + trueImpactDamage + truePierceDamage);
 
