@@ -250,6 +250,8 @@ public class ItemsAether extends AbstractRegistrar
 
 	public static final Item valkyrie_music_disc = getDefault();
 
+	public static final Item valkyrie_tea = getDefault();
+
 	public static final Item valkyrie_wings = getDefault();
 
 	public static final Item water_vial = getDefault();

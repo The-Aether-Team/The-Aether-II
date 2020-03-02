@@ -690,6 +690,8 @@ public class ItemModelsAetherInit
 		registerItemModels(ItemsAether.splint, "splint");
 
 		registerItemModels(ItemsAether.crude_scatterglass_shard, "crude_scatterglass_shard");
+
+		registerItemModels(ItemsAether.valkyrie_tea, "tea/valkyrie_tea");
 	}
 
 	private static void registerSnowyFlower(Block block, String name)

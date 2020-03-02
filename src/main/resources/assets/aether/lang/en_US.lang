@@ -478,6 +478,7 @@ item.aether.antitoxin_vial.name=Antitoxin Vial
 item.aether.bandage.name=Bandage
 item.aether.splint.name=Splint
 item.aether.crude_scatterglass_shard.name=Scatterglass Shard
+item.aether.valkyrie_tea.name=Valkyrie Tea
 
 item.aether.skyroot_bed_item.name=Skyroot Bed
 item.aether.moa_egg_item.name=Moa Egg
@@ -682,13 +683,10 @@ item.aether.curative.desc1=Cures effect
 item.aether.curative.fracture.desc1=Reduces healing time
 item.aether.curative.desc2=Reduces buildup
 
-item.aether.antitoxin_vial.reduction.desc=Reduces Toxin Buildup
-item.aether.antitoxin_vial.cure.desc=Cures Toxin
-item.aether.antivenom_vial.reduction.desc=Reduces Cockatrice Venom Buildup
-item.aether.antivenom_vial.cure.desc=Cures Cockatrice Venom
-item.aether.bandage.reduction.desc=Reduces Bleeding Buildup
-item.aether.splint.reduction.desc=Reduces Fracture Buildup
-item.aether.splint.cure.desc=Boosts Fracture Healing Time
+# Tea Tooltips
+item.aether.tea.applied.desc=When Applied:
+item.aether.valkyrie_tea.number.desc=+100
+item.aether.valkyrie_tea.effect.desc=Saturation
 
 # Records
 item.aether.moa_music_disc.desc=Emile van Krieken - Approaches
@@ -895,6 +893,8 @@ effect.aether.fungal_rot=Fungal Rot
 effect.aether.stun=Stun
 effect.aether.toxin=Toxin
 effect.aether.webbing=Webbing
+
+effect.aether.saturation_boost=Saturation Boost
 
 # Damage Attributes
 

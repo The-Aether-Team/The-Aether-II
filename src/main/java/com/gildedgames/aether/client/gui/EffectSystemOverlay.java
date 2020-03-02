@@ -28,6 +28,8 @@ public class EffectSystemOverlay extends Gui
 	private static final ResourceLocation FREEZE_ICON = AetherCore.getResource("textures/gui/overlay/effects/freeze.png");
 	private static final ResourceLocation WEBBING_ICON = AetherCore.getResource("textures/gui/overlay/effects/webbing.png");
 
+	private static final ResourceLocation SATURATION_BOOST_ICON = AetherCore.getResource("textures/gui/overlay/effects/teas/saturation_boost.png");
+
 	private final int BAR_OUTLINE_TEXTURE_WIDTH = 22;
 	private final int BAR_OUTLINE_TEXTURE_HEIGHT = 5;
 
@@ -284,6 +286,8 @@ public class EffectSystemOverlay extends Gui
 				return FREEZE_ICON;
 			case WEBBING:
 				return WEBBING_ICON;
+			case SATURATION_BOOST:
+				return SATURATION_BOOST_ICON;
 		}
 
 		return STUN_ICON;
@@ -299,6 +303,7 @@ public class EffectSystemOverlay extends Gui
 		TOXIN(69,122,65),
 		FREEZE(174,203,209),
 		WEBBING(199, 197, 187),
+		SATURATION_BOOST(212, 200, 121),
 		DEFAULT_COLOR(1,1,1);
 
 		public final int r;
@@ -335,6 +340,8 @@ public class EffectSystemOverlay extends Gui
 					return FREEZE;
 				case WEBBING:
 					return WEBBING;
+				case SATURATION_BOOST:
+					return SATURATION_BOOST;
 					default:
 						return DEFAULT_COLOR;
 			}

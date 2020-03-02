@@ -180,6 +180,7 @@ public class ItemsAetherInit
 		r.register("taegore_steak", new ItemAetherFood(8, 0.8F, true));
 		r.register("valkyrie_music_disc", new ItemAetherRecord("valkyrie", "records.valkyrie"));
 		r.register("valkyrie_wings", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
+		r.register("valkyrie_tea", new ItemTea(IAetherStatusEffects.effectTypes.SATURATION_BOOST, true).setCreativeTab(CreativeTabsAether.TAB_CONSUMABLES));
 		r.register("water_vial", new ItemWaterVial().setCreativeTab(CreativeTabsAether.TAB_CONSUMABLES));
 		r.register("winter_hat", new ItemWinterHat().setCreativeTab(CreativeTabsAether.TAB_MISCELLANEOUS));
 		r.register("wrapped_chocolates", new ItemAetherFood(4, 0.3F, false));
