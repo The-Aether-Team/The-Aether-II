@@ -6,16 +6,9 @@ import com.gildedgames.aether.common.items.IDropOnDeath;
 public class ItemIrradiated extends ItemIrradiatedVisuals implements IDropOnDeath
 {
 
-	private final Loot itemSelector;
-
-	public ItemIrradiated(Loot itemSelector)
+	public ItemIrradiated()
 	{
-		this.itemSelector = itemSelector;
-	}
 
-	public Loot getItemSelector()
-	{
-		return this.itemSelector;
 	}
 
 }

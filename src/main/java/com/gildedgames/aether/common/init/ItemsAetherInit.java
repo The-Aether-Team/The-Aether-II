@@ -112,25 +112,14 @@ public class ItemsAetherInit
 		r.register("holystone_sword", new ItemHolystoneSword());
 		r.register("icestone", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("icestone_poprocks", new ItemAetherFood(2, 0.1F, false).setConsumptionDuration(16));
-		r.register("irradiated_armor", new ItemIrradiated(new RandomItemSelector(item -> item instanceof ItemArmor)).setMaxStackSize(1)
-				.setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
-		r.register("irradiated_charm", new ItemIrradiated(
-				new RandomItemSelector(item -> AetherAPI.content().items().getProperties(item).getEquipmentSlot() == ItemEquipmentSlot.CHARM))
-				.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
-		r.register("irradiated_chunk", new ItemIrradiated(new RandomItemSelector(stack -> !(stack instanceof ItemIrradiated))).setMaxStackSize(1)
-				.setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
+		r.register("irradiated_armor", new ItemIrradiated().setMaxStackSize(1).setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
+		r.register("irradiated_charm", new ItemIrradiated().setMaxStackSize(1).setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
+		r.register("irradiated_chunk", new ItemIrradiated().setMaxStackSize(1).setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("irradiated_dust", new ItemIrradiatedVisuals().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
-		r.register("irradiated_neckwear", new ItemIrradiated(
-				new RandomItemSelector(item -> AetherAPI.content().items().getProperties(item).getEquipmentSlot() == ItemEquipmentSlot.NECKWEAR))
-				.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
-		r.register("irradiated_ring",
-				new ItemIrradiated(new RandomItemSelector(item -> AetherAPI.content().items().getProperties(item).getEquipmentSlot() == ItemEquipmentSlot.RING))
-						.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
-		r.register("irradiated_sword",
-				new ItemIrradiated(new RandomItemSelector(item -> item.getTranslationKey().contains("sword") && !(item instanceof ItemIrradiated)))
-						.setMaxStackSize(1).setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
-		r.register("irradiated_tool", new ItemIrradiated(new RandomItemSelector(item -> item instanceof ItemTool)).setMaxStackSize(1)
-				.setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
+		r.register("irradiated_neckwear", new ItemIrradiated().setMaxStackSize(1).setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
+		r.register("irradiated_ring", new ItemIrradiated().setMaxStackSize(1).setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
+		r.register("irradiated_sword", new ItemIrradiated().setMaxStackSize(1).setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
+		r.register("irradiated_tool", new ItemIrradiated().setMaxStackSize(1).setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("jelly_plumproot", new ItemAetherFood(6, 0.6F, false).setConsumptionDuration(32));
 		r.register("kirrid_cutlet", new ItemAetherFood(6, 0.8F, true));
 		r.register("kirrid_loin", new ItemAetherFood(2, 0.3F, true));
