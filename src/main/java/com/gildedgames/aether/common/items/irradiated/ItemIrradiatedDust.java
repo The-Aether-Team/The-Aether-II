@@ -1,14 +1,13 @@
 package com.gildedgames.aether.common.items.irradiated;
 
-import com.gildedgames.aether.api.items.loot.Loot;
 import com.gildedgames.aether.common.items.IDropOnDeath;
+import net.minecraft.item.ItemStack;
 
-public class ItemIrradiated extends ItemIrradiatedVisuals implements IDropOnDeath
+public class ItemIrradiatedDust extends ItemIrradiatedVisuals implements IDropOnDeath
 {
-
-	public ItemIrradiated()
+	@Override
+	public int getItemBurnTime(ItemStack itemStack)
 	{
-
+		return 9600;
 	}
-
 }

@@ -684,9 +684,8 @@ item.aether.curative.fracture.desc1=Reduces healing time
 item.aether.curative.desc2=Reduces buildup
 
 # Tea Tooltips
-item.aether.tea.applied.desc=When Applied:
-item.aether.valkyrie_tea.number.desc=+100
-item.aether.valkyrie_tea.effect.desc=Saturation
+item.aether.tea.applied.desc=When Used:
+item.aether.valkyrie_tea.desc=Double Saturation
 
 # Records
 item.aether.moa_music_disc.desc=Emile van Krieken - Approaches

@@ -58,8 +58,7 @@ public class ItemTea extends ItemDropOnDeath
             tooltip.add("");
 
             tooltip.add(TextFormatting.DARK_PURPLE + I18n.format("item.aether.tea.applied.desc"));
-            tooltip.add(TextFormatting.BLUE + I18n.format(this.getTranslationKey() + ".number.desc") + "% "
-                    + I18n.format(this.getTranslationKey() + ".effect.desc"));
+            tooltip.add(TextFormatting.BLUE + I18n.format(this.getTranslationKey() + ".desc"));
         }
     }
 
