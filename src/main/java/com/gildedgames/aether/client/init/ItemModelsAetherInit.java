@@ -452,6 +452,11 @@ public class ItemModelsAetherInit
 		registerItemModels(ItemsAether.taegore_hide_leggings, "armor/taegore_hide_leggings");
 		registerItemModels(ItemsAether.taegore_hide_boots, "armor/taegore_hide_boots");
 
+		registerItemModels(ItemsAether.burrukai_pelt_helmet, "armor/burrukai_pelt_helmet");
+		registerItemModels(ItemsAether.burrukai_pelt_chestplate, "armor/burrukai_pelt_chestplate");
+		registerItemModels(ItemsAether.burrukai_pelt_leggings, "armor/burrukai_pelt_leggings");
+		registerItemModels(ItemsAether.burrukai_pelt_boots, "armor/burrukai_pelt_boots");
+
 		registerItemModels(ItemsAether.zanite_helmet, "armor/zanite_helmet");
 		registerItemModels(ItemsAether.zanite_chestplate, "armor/zanite_chestplate");
 		registerItemModels(ItemsAether.zanite_leggings, "armor/zanite_leggings");
@@ -582,6 +587,7 @@ public class ItemModelsAetherInit
 		registerItemModels(BlocksAether.aether_teleporter, "aether_teleporter");
 
 		registerItemModels(ItemsAether.taegore_hide_gloves, "accessories/taegore_hide_gloves");
+		registerItemModels(ItemsAether.burrukai_pelt_gloves, "accessories/burrukai_pelt_gloves");
 		registerItemModels(ItemsAether.zanite_gloves, "accessories/zanite_gloves");
 		registerItemModels(ItemsAether.arkenium_gloves, "accessories/arkenium_gloves");
 		registerItemModels(ItemsAether.gravitite_gloves, "accessories/gravitite_gloves");

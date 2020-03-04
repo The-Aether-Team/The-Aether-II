@@ -53,6 +53,11 @@ public class EquipmentAether
 				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL, 2, StatEffectFactory.StatProvider.OP_ADD),
 				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DAMAGE_LEVEL, 14, StatEffectFactory.StatProvider.OP_ADD));
 
+		createEquipmentItem(ItemsAether.burrukai_pelt_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE, WHEN_EQUIPPED,
+				new StatEffectFactory.StatProvider(DamageTypeAttributes.SLASH_DEFENSE_LEVEL, 1, StatEffectFactory.StatProvider.OP_ADD),
+				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL, 4, StatEffectFactory.StatProvider.OP_ADD),
+				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DAMAGE_LEVEL, 21, StatEffectFactory.StatProvider.OP_ADD));
+
 		createEquipmentItem(ItemsAether.zanite_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE, WHEN_EQUIPPED,
 				new StatEffectFactory.StatProvider(DamageTypeAttributes.SLASH_DEFENSE_LEVEL, 2, StatEffectFactory.StatProvider.OP_ADD),
 				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL, 4, StatEffectFactory.StatProvider.OP_ADD),

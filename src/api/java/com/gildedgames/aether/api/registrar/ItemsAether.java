@@ -64,6 +64,16 @@ public class ItemsAether extends AbstractRegistrar
 
 	public static final Item burrukai_pelt = getDefault();
 
+	public static final Item burrukai_pelt_boots = getDefault();
+
+	public static final Item burrukai_pelt_chestplate = getDefault();
+
+	public static final Item burrukai_pelt_gloves = getDefault();
+
+	public static final Item burrukai_pelt_helmet = getDefault();
+
+	public static final Item burrukai_pelt_leggings = getDefault();
+
 	public static final Item burrukai_rib_cut = getDefault();
 
 	public static final Item burrukai_ribs = getDefault();

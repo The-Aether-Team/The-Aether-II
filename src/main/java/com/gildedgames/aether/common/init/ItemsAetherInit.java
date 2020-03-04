@@ -69,6 +69,11 @@ public class ItemsAetherInit
 		r.register("brettl_cane", new ItemBrettlCane().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("brettl_grass", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("burrukai_pelt", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
+		r.register("burrukai_pelt_boots", new ItemBurrukaiPeltArmor(EntityEquipmentSlot.FEET).slashDefense(2).impactDefense(4));
+		r.register("burrukai_pelt_chestplate", new ItemBurrukaiPeltArmor(EntityEquipmentSlot.CHEST).slashDefense(9).impactDefense(7));
+		r.register("burrukai_pelt_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.TAEGOREHIDE));
+		r.register("burrukai_pelt_helmet", new ItemBurrukaiPeltArmor(EntityEquipmentSlot.HEAD).pierceDefense(6));
+		r.register("burrukai_pelt_leggings", new ItemBurrukaiPeltArmor(EntityEquipmentSlot.LEGS).slashDefense(3).pierceDefense(9));
 		r.register("burrukai_rib_cut", new ItemAetherFood(4, 0.3F, true).setConsumptionDuration(40));
 		r.register("burrukai_ribs", new ItemAetherFood(9, 0.8F, true).setConsumptionDuration(40));
 		r.register("candy_cane", new ItemAetherFood(2, 0.1F, false).setConsumptionDuration(16).setCreativeTab(CreativeTabsAether.TAB_CONSUMABLES));
