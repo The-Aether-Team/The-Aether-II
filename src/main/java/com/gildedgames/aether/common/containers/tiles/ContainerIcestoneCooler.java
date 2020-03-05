@@ -1,8 +1,6 @@
 package com.gildedgames.aether.common.containers.tiles;
 
-import com.gildedgames.aether.common.containers.slots.SlotCoolerOutput;
-import com.gildedgames.aether.common.containers.slots.SlotCoolingItem;
-import com.gildedgames.aether.common.containers.slots.SlotIrradiatedItem;
+import com.gildedgames.aether.common.containers.slots.*;
 import com.gildedgames.aether.common.entities.tiles.TileEntityIcestoneCooler;
 import com.gildedgames.aether.common.recipes.CoolerRecipes;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,9 +28,11 @@ public class ContainerIcestoneCooler extends Container
 	public ContainerIcestoneCooler(final InventoryPlayer playerInventory, final IInventory coolerInventory)
 	{
 		this.tileCooler = coolerInventory;
-		this.addSlotToContainer(new SlotIrradiatedItem(coolerInventory, 0, 56, 17, 0));
-		this.addSlotToContainer(new SlotCoolingItem(coolerInventory, 1, 56, 53, 1));
-		this.addSlotToContainer(new SlotCoolerOutput(coolerInventory, 2, 116, 35, 2));
+		this.addSlotToContainer(new SlotCoolingInputPrimary(coolerInventory, 0, 49, 17, 0));
+		this.addSlotToContainer(new SlotCoolingItem(coolerInventory, 1, 49, 53, 1));
+		this.addSlotToContainer(new SlotCoolerOutput(coolerInventory, 2, 109, 21, 2));
+		this.addSlotToContainer(new SlotCoolingInputSecondary(coolerInventory, 3, 21, 35, 3));
+		this.addSlotToContainer(new SlotCoolerOutputSecondary(coolerInventory, 4, 109, 53, 4));
 
 		for (int i = 0; i < 3; ++i)
 		{

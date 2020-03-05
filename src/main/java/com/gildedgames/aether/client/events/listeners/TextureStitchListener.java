@@ -1,9 +1,6 @@
 package com.gildedgames.aether.client.events.listeners;
 
-import com.gildedgames.aether.common.containers.slots.SlotAmbrosium;
-import com.gildedgames.aether.common.containers.slots.SlotEquipment;
-import com.gildedgames.aether.common.containers.slots.SlotFlintAndSteel;
-import com.gildedgames.aether.common.containers.slots.SlotMoaEgg;
+import com.gildedgames.aether.common.containers.slots.*;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -19,6 +16,7 @@ public class TextureStitchListener
 		SlotAmbrosium.registerIcons(event);
 		SlotMoaEgg.registerIcons(event);
 		SlotFlintAndSteel.registerIcons(event);
+		SlotCoolingItem.registerIcons(event);
 	}
 
 }

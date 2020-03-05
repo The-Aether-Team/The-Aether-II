@@ -60,12 +60,12 @@ public class GuiIcestoneCooler extends GuiContainer
 
 		if (TileEntityIcestoneCooler.isCooling(this.tileCooler))
 		{
-			int k = this.getCoolLeftScaled(13);
-			this.drawTexturedModalRect(i + 58, j + 36 + 14 - k, 176, 12 - k, 14, k + 1);
+			int k = this.getCoolLeftScaled(16);
+			this.drawTexturedModalRect(i + 51, j + 36 + 14 - k, 176, 15 - k, 14, k + 1);
 		}
 
 		int l = this.getCoolProgressScaled(24);
-		this.drawTexturedModalRect(i + 79, j + 35, 176, 16, l + 1, 16);
+		this.drawTexturedModalRect(i + 72, j + 34, 176, 16, l + 1, 16);
 	}
 
 	private int getCoolProgressScaled(int pixels)

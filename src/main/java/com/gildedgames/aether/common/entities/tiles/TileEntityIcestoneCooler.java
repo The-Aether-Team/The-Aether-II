@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.blocks.containers.BlockIcestoneCooler;
 import com.gildedgames.aether.common.containers.tiles.ContainerIcestoneCooler;
+import com.gildedgames.aether.common.items.irradiated.ItemIrradiatedVisuals;
 import com.gildedgames.aether.common.recipes.CoolerRecipes;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,7 +30,7 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 
 	private final int itemCoolTime = 1600;
 
-	private NonNullList<ItemStack> coolerItemStacks = NonNullList.withSize(3, ItemStack.EMPTY);
+	private NonNullList<ItemStack> coolerItemStacks = NonNullList.withSize(5, ItemStack.EMPTY);
 
 	private int coolerCoolTime;
 
@@ -155,15 +156,15 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack)
 	{
-		if (index == 2)
+		if (index == 2 || index == 4)
 		{
 			return false;
 		}
 		else
 		{
-			if (index == 0)
+			if (index == 0 || index == 3)
 			{
-				return isItemIrradiated(stack);
+				return true;
 			}
 
 			if (index == 1)
@@ -361,33 +362,36 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 
 	private boolean canCool()
 	{
-		if (this.coolerItemStacks.get(0).isEmpty())
+		ItemStack itemstack0 = this.coolerItemStacks.get(0);
+		ItemStack itemstack2 = this.coolerItemStacks.get(2);
+
+		ItemStack itemstackCoolingResult = CoolerRecipes.instance().getCoolingResult(this.coolerItemStacks.get(0));
+
+		if (itemstack0.isEmpty())
 		{
 			return false;
 		}
 		else
 		{
-			ItemStack itemstack = CoolerRecipes.instance().getCoolingResult(this.coolerItemStacks.get(0));
-
-			if (itemstack.isEmpty())
+			if (itemstackCoolingResult.isEmpty())
 			{
 				return false;
 			}
 			else
 			{
-				ItemStack itemstack1 = this.coolerItemStacks.get(2);
-
-				if (itemstack1.isEmpty())
+				if (itemstack2.isEmpty())
 				{
 					return true;
 				}
-				if (!itemstack1.isItemEqual(itemstack))
+
+				if (!itemstack2.isItemEqual(itemstackCoolingResult))
 				{
 					return false;
 				}
-				int result = itemstack1.getCount() + itemstack.getCount();
-				return result <= this.getInventoryStackLimit() && result <= itemstack1.getMaxStackSize();
 			}
+
+			int result = itemstack2.getCount() + itemstackCoolingResult.getCount();
+			return result <= this.getInventoryStackLimit() && result <= itemstack2.getMaxStackSize();
 		}
 	}
 
@@ -403,6 +407,10 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 			ItemStack itemstack = this.coolerItemStacks.get(0);
 			ItemStack itemstack1 = CoolerRecipes.instance().getCoolingResult(itemstack);
 			ItemStack itemStack2 = this.coolerItemStacks.get(2);
+			ItemStack itemStack3 = this.coolerItemStacks.get(3);
+			ItemStack itemStack4 = this.coolerItemStacks.get(4);
+
+			ItemStack secondaryOutput = CoolerRecipes.instance().getOutputResult(itemstack);
 
 			if (itemStack2.isEmpty())
 			{
@@ -411,6 +419,21 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 			else if (itemStack2.getItem() == itemstack1.getItem())
 			{
 				itemStack2.grow(itemstack1.getCount());
+			}
+
+			if (secondaryOutput != null)
+			{
+				if (itemStack4.isEmpty())
+				{
+					this.coolerItemStacks.set(4, secondaryOutput.copy());
+				}
+				else
+				{
+					if (itemStack4 == secondaryOutput)
+					{
+						itemStack4.grow(1);
+					}
+				}
 			}
 
 			itemstack.shrink(1);

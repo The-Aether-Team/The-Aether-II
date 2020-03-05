@@ -3,9 +3,9 @@ package com.gildedgames.aether.common.containers.slots;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
-public class SlotIrradiatedItem extends SlotOffset
+public class SlotCoolingInputPrimary extends SlotOffset
 {
-	public SlotIrradiatedItem(IInventory inventoryIn, int index, int xPosition, int yPosition, int trueIndex)
+	public SlotCoolingInputPrimary(IInventory inventoryIn, int index, int xPosition, int yPosition, int trueIndex)
 	{
 		super(inventoryIn, index, xPosition, yPosition, trueIndex);
 	}
@@ -19,6 +19,6 @@ public class SlotIrradiatedItem extends SlotOffset
 	@Override
 	public int getItemStackLimit(ItemStack stack)
 	{
-		return 1;
+		return 64;
 	}
 }

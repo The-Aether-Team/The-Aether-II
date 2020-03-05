@@ -1,8 +1,10 @@
 package com.gildedgames.aether.common.recipes;
 
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.google.common.collect.Maps;
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -16,10 +18,14 @@ public class CoolerRecipes
 
 	private final Map<ItemStack, ItemStack[]> coolingList = Maps.newHashMap();
 
+	private final Map<ItemStack, ItemStack[]> outputList = Maps.newHashMap();
+
 	private final Random rand = new Random();
 
 	private CoolerRecipes()
 	{
+		//Primary Outputs
+
 		this.addCoolingFromItem(ItemsAether.irradiated_armor,
 				new ItemStack(ItemsAether.arkenium_helmet),
 				new ItemStack(ItemsAether.arkenium_chestplate),
@@ -72,12 +78,24 @@ public class CoolerRecipes
 				new ItemStack(ItemsAether.skyroot_axe),
 				new ItemStack(ItemsAether.skyroot_pickaxe),
 				new ItemStack(ItemsAether.skyroot_shovel));
+
+		//Secondary Outputs
+
+		this.addOutputFromItem(ItemsAether.irradiated_armor, new ItemStack(ItemsAether.irradiated_dust));
+		this.addOutputFromItem(ItemsAether.irradiated_charm, new ItemStack(ItemsAether.irradiated_dust));
+		this.addOutputFromItem(ItemsAether.irradiated_chunk, new ItemStack(ItemsAether.irradiated_dust));
+		this.addOutputFromItem(ItemsAether.irradiated_neckwear, new ItemStack(ItemsAether.irradiated_dust));
+		this.addOutputFromItem(ItemsAether.irradiated_ring, new ItemStack(ItemsAether.irradiated_dust));
+		this.addOutputFromItem(ItemsAether.irradiated_sword, new ItemStack(ItemsAether.irradiated_dust));
+		this.addOutputFromItem(ItemsAether.irradiated_tool, new ItemStack(ItemsAether.irradiated_dust));
 	}
 
 	public static CoolerRecipes instance()
 	{
 		return COOLING_BASE;
 	}
+
+	//Primary Outputs
 
 	public void addCoolingFromItem(Item input, ItemStack... stackList)
 	{
@@ -106,6 +124,37 @@ public class CoolerRecipes
 		}
 		return ItemStack.EMPTY;
 	}
+
+	//Secondary Output
+
+	public void addOutputFromItem(Item input, ItemStack... stackList)
+	{
+		this.addOutputRecipe(new ItemStack(input, 1, 32767), stackList);
+	}
+
+	public void addOutputRecipe(ItemStack input, ItemStack... stackList)
+	{
+		if (this.getOutputResult(input) != ItemStack.EMPTY)
+		{
+			AetherCore.LOGGER.warn("Ignored cooling recipe with conflicting input: " + input + stackList[0]);
+			return;
+		}
+
+		this.outputList.put(input, stackList);
+	}
+
+	public ItemStack getOutputResult(ItemStack stack)
+	{
+		for (Entry<ItemStack, ItemStack[]> entry : this.outputList.entrySet())
+		{
+			if (this.compareItemStacks(stack, entry.getKey()))
+			{
+				return entry.getValue()[this.rand.nextInt(entry.getValue().length)];
+			}
+		}
+		return ItemStack.EMPTY;
+	}
+
 
 	public Map<ItemStack, ItemStack[]> getCoolingList()
 	{

@@ -19,6 +19,12 @@ public class SlotCoolerOutput extends SlotOffset
 	}
 
 	@Override
+	public int getItemStackLimit(ItemStack stack)
+	{
+		return 64;
+	}
+
+	@Override
 	public ItemStack decrStackSize(int amount)
 	{
 		if (this.getHasStack())
