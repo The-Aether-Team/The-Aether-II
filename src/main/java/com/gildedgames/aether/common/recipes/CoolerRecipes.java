@@ -4,7 +4,7 @@ import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.google.common.collect.Maps;
-import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -16,17 +16,15 @@ public class CoolerRecipes
 {
 	private static final CoolerRecipes COOLING_BASE = new CoolerRecipes();
 
-	private final Map<ItemStack, ItemStack[]> coolingList = Maps.newHashMap();
+	private final Map<Map<ItemStack, ItemStack>, ItemStack[]> coolingList = Maps.newHashMap();
 
-	private final Map<ItemStack, ItemStack[]> outputList = Maps.newHashMap();
+	private final Map<Map<ItemStack, ItemStack>, ItemStack> outputList = Maps.newHashMap();
 
 	private final Random rand = new Random();
 
 	private CoolerRecipes()
 	{
-		//Primary Outputs
-
-		this.addCoolingFromItem(ItemsAether.irradiated_armor,
+		this.addCoolingFromItem(ItemsAether.irradiated_armor, Item.getItemFromBlock(Blocks.AIR), new ItemStack(ItemsAether.irradiated_dust),
 				new ItemStack(ItemsAether.arkenium_helmet),
 				new ItemStack(ItemsAether.arkenium_chestplate),
 				new ItemStack(ItemsAether.arkenium_leggings),
@@ -43,26 +41,26 @@ public class CoolerRecipes
 				new ItemStack(ItemsAether.zanite_boots),
 				new ItemStack(ItemsAether.zanite_gloves));
 
-		this.addCoolingFromItem(ItemsAether.irradiated_charm,
+		this.addCoolingFromItem(ItemsAether.irradiated_charm, Item.getItemFromBlock(Blocks.AIR), new ItemStack(ItemsAether.irradiated_dust),
 				new ItemStack(ItemsAether.irradiated_dust));
 
-		this.addCoolingFromItem(ItemsAether.irradiated_chunk,
+		this.addCoolingFromItem(ItemsAether.irradiated_chunk, Item.getItemFromBlock(Blocks.AIR), new ItemStack(ItemsAether.irradiated_dust),
 				new ItemStack(ItemsAether.irradiated_dust));
 
-		this.addCoolingFromItem(ItemsAether.irradiated_neckwear,
+		this.addCoolingFromItem(ItemsAether.irradiated_neckwear, Item.getItemFromBlock(Blocks.AIR), new ItemStack(ItemsAether.irradiated_dust),
 				new ItemStack(ItemsAether.irradiated_dust));
 
-		this.addCoolingFromItem(ItemsAether.irradiated_ring,
+		this.addCoolingFromItem(ItemsAether.irradiated_ring, Item.getItemFromBlock(Blocks.AIR), new ItemStack(ItemsAether.irradiated_dust),
 				new ItemStack(ItemsAether.irradiated_dust));
 
-		this.addCoolingFromItem(ItemsAether.irradiated_sword,
+		this.addCoolingFromItem(ItemsAether.irradiated_sword, Item.getItemFromBlock(Blocks.AIR), new ItemStack(ItemsAether.irradiated_dust),
 				new ItemStack(ItemsAether.arkenium_sword),
 				new ItemStack(ItemsAether.gravitite_sword),
 				new ItemStack(ItemsAether.holystone_sword),
 				new ItemStack(ItemsAether.zanite_sword),
 				new ItemStack(ItemsAether.skyroot_sword));
 
-		this.addCoolingFromItem(ItemsAether.irradiated_tool,
+		this.addCoolingFromItem(ItemsAether.irradiated_tool, Item.getItemFromBlock(Blocks.AIR), new ItemStack(ItemsAether.irradiated_dust),
 				new ItemStack(ItemsAether.arkenium_axe),
 				new ItemStack(ItemsAether.arkenium_pickaxe),
 				new ItemStack(ItemsAether.arkenium_shovel),
@@ -79,15 +77,11 @@ public class CoolerRecipes
 				new ItemStack(ItemsAether.skyroot_pickaxe),
 				new ItemStack(ItemsAether.skyroot_shovel));
 
-		//Secondary Outputs
+		this.addCoolingFromItem(ItemsAether.water_vial, ItemsAether.valkyrie_wings, null,
+				new ItemStack(ItemsAether.valkyrie_tea));
 
-		this.addOutputFromItem(ItemsAether.irradiated_armor, new ItemStack(ItemsAether.irradiated_dust));
-		this.addOutputFromItem(ItemsAether.irradiated_charm, new ItemStack(ItemsAether.irradiated_dust));
-		this.addOutputFromItem(ItemsAether.irradiated_chunk, new ItemStack(ItemsAether.irradiated_dust));
-		this.addOutputFromItem(ItemsAether.irradiated_neckwear, new ItemStack(ItemsAether.irradiated_dust));
-		this.addOutputFromItem(ItemsAether.irradiated_ring, new ItemStack(ItemsAether.irradiated_dust));
-		this.addOutputFromItem(ItemsAether.irradiated_sword, new ItemStack(ItemsAether.irradiated_dust));
-		this.addOutputFromItem(ItemsAether.irradiated_tool, new ItemStack(ItemsAether.irradiated_dust));
+		this.addCoolingFromItem(ItemsAether.skyroot_water_bucket, Item.getItemFromBlock(Blocks.AIR), new ItemStack(ItemsAether.skyroot_bucket),
+				new ItemStack(BlocksAether.highlands_ice));
 	}
 
 	public static CoolerRecipes instance()
@@ -95,68 +89,108 @@ public class CoolerRecipes
 		return COOLING_BASE;
 	}
 
-	//Primary Outputs
-
-	public void addCoolingFromItem(Item input, ItemStack... stackList)
+	public void addCoolingFromItem(Item input, Item inputSecondary, ItemStack outputSecondary, ItemStack... stackList)
 	{
-		this.addCoolingRecipe(new ItemStack(input, 1, 32767), stackList);
+		Map<ItemStack, ItemStack> map = Maps.newHashMap();
+		map.put(new ItemStack(input, 1, 32767), new ItemStack(inputSecondary, 1, 32767));
+
+		this.addCoolingRecipe(map, outputSecondary, stackList);
 	}
 
-	public void addCoolingRecipe(ItemStack input, ItemStack... stackList)
+	public void addCoolingRecipe(Map<ItemStack, ItemStack> inputMap, ItemStack outputSecondary, ItemStack... stackList)
 	{
-		if (this.getCoolingResult(input) != ItemStack.EMPTY)
+		for (Entry<ItemStack, ItemStack> entry : inputMap.entrySet())
 		{
-			AetherCore.LOGGER.warn("Ignored cooling recipe with conflicting input: " + input + stackList[0]);
-			return;
+			if (this.getCoolingResult(entry.getKey(), entry.getValue()) != ItemStack.EMPTY)
+			{
+				AetherCore.LOGGER.warn("Ignored cooling recipe with conflicting input: " + inputMap + stackList[0]);
+				return;
+			}
 		}
 
-		this.coolingList.put(input, stackList);
+		this.outputList.put(inputMap, outputSecondary);
+		this.coolingList.put(inputMap, stackList);
 	}
 
-	public ItemStack getCoolingResult(ItemStack stack)
+	public ItemStack getPrimaryOutput(ItemStack stack)
 	{
-		for (Entry<ItemStack, ItemStack[]> entry : this.coolingList.entrySet())
+		for (Entry<Map<ItemStack, ItemStack>, ItemStack[]> entry : this.coolingList.entrySet())
 		{
-			if (this.compareItemStacks(stack, entry.getKey()))
+			for (Entry<ItemStack, ItemStack> entryInput : entry.getKey().entrySet())
 			{
-				return entry.getValue()[this.rand.nextInt(entry.getValue().length)];
+				if (this.compareItemStacks(stack, entryInput.getKey()))
+				{
+					return entry.getValue()[this.rand.nextInt(entry.getValue().length)];
+				}
 			}
 		}
 		return ItemStack.EMPTY;
 	}
 
-	//Secondary Output
-
-	public void addOutputFromItem(Item input, ItemStack... stackList)
+	public ItemStack getSecondaryOutput(ItemStack stack)
 	{
-		this.addOutputRecipe(new ItemStack(input, 1, 32767), stackList);
-	}
-
-	public void addOutputRecipe(ItemStack input, ItemStack... stackList)
-	{
-		if (this.getOutputResult(input) != ItemStack.EMPTY)
+		for (Entry<Map<ItemStack, ItemStack>, ItemStack> entry : this.outputList.entrySet())
 		{
-			AetherCore.LOGGER.warn("Ignored cooling recipe with conflicting input: " + input + stackList[0]);
-			return;
-		}
-
-		this.outputList.put(input, stackList);
-	}
-
-	public ItemStack getOutputResult(ItemStack stack)
-	{
-		for (Entry<ItemStack, ItemStack[]> entry : this.outputList.entrySet())
-		{
-			if (this.compareItemStacks(stack, entry.getKey()))
+			for (Entry<ItemStack, ItemStack> entryInput : entry.getKey().entrySet())
 			{
-				return entry.getValue()[this.rand.nextInt(entry.getValue().length)];
+				if (this.compareItemStacks(stack, entryInput.getKey()))
+				{
+					return entry.getValue();
+				}
 			}
 		}
 		return ItemStack.EMPTY;
 	}
 
+	public ItemStack getSecondaryInputForSlot(ItemStack stack)
+	{
+		for (Entry<Map<ItemStack, ItemStack>, ItemStack[]> entry : this.coolingList.entrySet())
+		{
+			for (Entry<ItemStack, ItemStack> entryInput : entry.getKey().entrySet())
+			{
+				if (this.compareItemStacks(stack, entryInput.getValue()))
+				{
+					return entryInput.getValue();
+				}
+			}
+		}
+		return ItemStack.EMPTY;
+	}
 
-	public Map<ItemStack, ItemStack[]> getCoolingList()
+	public ItemStack getSecondaryInput(ItemStack stack)
+	{
+		for (Entry<Map<ItemStack, ItemStack>, ItemStack[]> entry : this.coolingList.entrySet())
+		{
+			for (Entry<ItemStack, ItemStack> entryInput : entry.getKey().entrySet())
+			{
+				if (this.compareItemStacks(stack, entryInput.getKey()))
+				{
+					return entryInput.getValue();
+				}
+			}
+		}
+		return ItemStack.EMPTY;
+	}
+
+	public ItemStack getCoolingResult(ItemStack stack, ItemStack stackSecondary)
+	{
+		for (Entry<Map<ItemStack, ItemStack>, ItemStack[]> entry : this.coolingList.entrySet())
+		{
+			for (Entry<ItemStack, ItemStack> entryInput : entry.getKey().entrySet())
+			{
+				if (this.compareItemStacks(stack, entryInput.getKey()))
+				{
+					if (this.compareItemStacks(stackSecondary, entryInput.getValue()))
+					{
+						return entry.getValue()[this.rand.nextInt(entry.getValue().length)];
+					}
+				}
+			}
+		}
+		return ItemStack.EMPTY;
+	}
+
+	public Map<Map<ItemStack, ItemStack>, ItemStack[]> getCoolingList()
 	{
 		return this.coolingList;
 	}

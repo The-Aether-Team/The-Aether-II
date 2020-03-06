@@ -362,36 +362,44 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 
 	private boolean canCool()
 	{
-		ItemStack itemstack0 = this.coolerItemStacks.get(0);
-		ItemStack itemstack2 = this.coolerItemStacks.get(2);
+		ItemStack stackSlot0 = this.coolerItemStacks.get(0);
+		ItemStack stackSlot2 = this.coolerItemStacks.get(2);
+		ItemStack stackSlot3 = this.coolerItemStacks.get(3);
+		ItemStack stackSlot4 = this.coolerItemStacks.get(4);
 
-		ItemStack itemstackCoolingResult = CoolerRecipes.instance().getCoolingResult(this.coolerItemStacks.get(0));
+		ItemStack primaryOutput = CoolerRecipes.instance().getCoolingResult(stackSlot0, stackSlot3);
+		ItemStack secondaryOutput = CoolerRecipes.instance().getSecondaryOutput(stackSlot0);
 
-		if (itemstack0.isEmpty())
+		if (stackSlot0.isEmpty())
 		{
 			return false;
 		}
 		else
 		{
-			if (itemstackCoolingResult.isEmpty())
+			if (primaryOutput.isEmpty())
 			{
 				return false;
 			}
 			else
 			{
-				if (itemstack2.isEmpty())
+				if (!stackSlot4.isEmpty() && stackSlot4.getItem() != secondaryOutput.getItem())
+				{
+					return false;
+				}
+
+				if (stackSlot2.isEmpty())
 				{
 					return true;
 				}
 
-				if (!itemstack2.isItemEqual(itemstackCoolingResult))
+				if (!stackSlot2.isItemEqual(primaryOutput))
 				{
 					return false;
 				}
 			}
 
-			int result = itemstack2.getCount() + itemstackCoolingResult.getCount();
-			return result <= this.getInventoryStackLimit() && result <= itemstack2.getMaxStackSize();
+			int result = stackSlot2.getCount() + primaryOutput.getCount();
+			return result <= this.getInventoryStackLimit() && result <= stackSlot2.getMaxStackSize();
 		}
 	}
 
@@ -404,39 +412,49 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 	{
 		if (this.canCool())
 		{
-			ItemStack itemstack = this.coolerItemStacks.get(0);
-			ItemStack itemstack1 = CoolerRecipes.instance().getCoolingResult(itemstack);
-			ItemStack itemStack2 = this.coolerItemStacks.get(2);
-			ItemStack itemStack3 = this.coolerItemStacks.get(3);
-			ItemStack itemStack4 = this.coolerItemStacks.get(4);
+			ItemStack stackSlot0 = this.coolerItemStacks.get(0);
+			ItemStack stackSlot2 = this.coolerItemStacks.get(2);
+			ItemStack stackSlot3 = this.coolerItemStacks.get(3);
+			ItemStack stackSlot4 = this.coolerItemStacks.get(4);
 
-			ItemStack secondaryOutput = CoolerRecipes.instance().getOutputResult(itemstack);
+			ItemStack secondaryInput = CoolerRecipes.instance().getSecondaryInput(stackSlot0);
 
-			if (itemStack2.isEmpty())
+			ItemStack primaryOutput = CoolerRecipes.instance().getCoolingResult(stackSlot0, stackSlot3);
+			ItemStack secondaryOutput = CoolerRecipes.instance().getSecondaryOutput(stackSlot0);
+
+			if (stackSlot2.isEmpty())
 			{
-				this.coolerItemStacks.set(2, itemstack1.copy());
+				this.coolerItemStacks.set(2, primaryOutput.copy());
 			}
-			else if (itemStack2.getItem() == itemstack1.getItem())
+			else if (stackSlot2.getItem() == primaryOutput.getItem())
 			{
-				itemStack2.grow(itemstack1.getCount());
+				stackSlot2.grow(primaryOutput.getCount());
 			}
 
 			if (secondaryOutput != null)
 			{
-				if (itemStack4.isEmpty())
+				if (stackSlot4.isEmpty())
 				{
 					this.coolerItemStacks.set(4, secondaryOutput.copy());
 				}
 				else
 				{
-					if (itemStack4 == secondaryOutput)
+					if (stackSlot4.getItem() == secondaryOutput.getItem())
 					{
-						itemStack4.grow(1);
+						stackSlot4.grow(1);
 					}
 				}
 			}
 
-			itemstack.shrink(1);
+			if (secondaryInput != ItemStack.EMPTY)
+			{
+				if (stackSlot3.getItem() == secondaryInput.getItem())
+				{
+					stackSlot3.shrink(1);
+				}
+			}
+
+			stackSlot0.shrink(1);
 		}
 	}
 }

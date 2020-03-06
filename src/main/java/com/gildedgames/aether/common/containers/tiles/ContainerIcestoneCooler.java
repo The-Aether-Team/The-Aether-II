@@ -10,6 +10,8 @@ import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -113,18 +115,18 @@ public class ContainerIcestoneCooler extends Container
 			final ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
-			if (index == 2)
+			if (index == 2 || index == 4)
 			{
-				if (!this.mergeItemStack(itemstack1, 3, 39, true))
+				if (!this.mergeItemStack(itemstack1, 5, 41, true))
 				{
 					return ItemStack.EMPTY;
 				}
 
 				slot.onSlotChange(itemstack1, itemstack);
 			}
-			else if (index != 1 && index != 0)
+			else if (index != 3 && index != 1 && index != 0)
 			{
-				if (!CoolerRecipes.instance().getCoolingResult(itemstack1).isEmpty())
+				if (!CoolerRecipes.instance().getPrimaryOutput(itemstack1).isEmpty())
 				{
 					if (!this.mergeItemStack(itemstack1, 0, 1, false))
 					{
@@ -138,19 +140,26 @@ public class ContainerIcestoneCooler extends Container
 						return ItemStack.EMPTY;
 					}
 				}
-				else if (index >= 3 && index < 30)
+				else if (!CoolerRecipes.instance().getSecondaryInputForSlot(itemstack1).isEmpty())
 				{
-					if (!this.mergeItemStack(itemstack1, 30, 39, false))
+					if (!this.mergeItemStack(itemstack1, 3, 4, false))
 					{
 						return ItemStack.EMPTY;
 					}
 				}
-				else if (index >= 30 && index < 39 && !this.mergeItemStack(itemstack1, 3, 30, false))
+				else if (index < 32)
+				{
+					if (!this.mergeItemStack(itemstack1, 32, 41, false))
+					{
+						return ItemStack.EMPTY;
+					}
+				}
+				else if (index < 41 && !this.mergeItemStack(itemstack1, 5, 32, false))
 				{
 					return ItemStack.EMPTY;
 				}
 			}
-			else if (!this.mergeItemStack(itemstack1, 3, 39, false))
+			else if (!this.mergeItemStack(itemstack1, 5, 41, false))
 			{
 				return ItemStack.EMPTY;
 			}
