@@ -84,6 +84,17 @@ public class EquipmentAether
 		createEquipmentItem(ItemsAether.gravitite_sword, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD,
 				new StatEffectFactory.StatProvider(DamageTypeAttributes.SLASH_DAMAGE_LEVEL, 42, StatEffectFactory.StatProvider.OP_ADD));
 
+		createEquipmentItem(ItemsAether.skyroot_crossbow, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD,
+				new StatEffectFactory.StatProvider(DamageTypeAttributes.PIERCE_DAMAGE_LEVEL, 14, StatEffectFactory.StatProvider.OP_ADD));
+		createEquipmentItem(ItemsAether.holystone_crossbow, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD,
+				new StatEffectFactory.StatProvider(DamageTypeAttributes.PIERCE_DAMAGE_LEVEL, 21, StatEffectFactory.StatProvider.OP_ADD));
+		createEquipmentItem(ItemsAether.zanite_crossbow, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD,
+				new StatEffectFactory.StatProvider(DamageTypeAttributes.PIERCE_DAMAGE_LEVEL, 34, StatEffectFactory.StatProvider.OP_ADD));
+		createEquipmentItem(ItemsAether.arkenium_crossbow, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD,
+				new StatEffectFactory.StatProvider(DamageTypeAttributes.PIERCE_DAMAGE_LEVEL, 40, StatEffectFactory.StatProvider.OP_ADD));
+		createEquipmentItem(ItemsAether.gravitite_crossbow, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD,
+				new StatEffectFactory.StatProvider(DamageTypeAttributes.PIERCE_DAMAGE_LEVEL, 42, StatEffectFactory.StatProvider.OP_ADD));
+
 		createEquipmentItem(ItemsAether.skyroot_axe, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD,
 				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DAMAGE_LEVEL, 10, StatEffectFactory.StatProvider.OP_ADD));
 		createEquipmentItem(ItemsAether.holystone_axe, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD,
