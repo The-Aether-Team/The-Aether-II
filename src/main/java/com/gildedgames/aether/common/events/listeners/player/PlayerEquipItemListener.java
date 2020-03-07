@@ -7,11 +7,13 @@ import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerEquipmentModule;
+import com.gildedgames.aether.common.items.armor.ItemAetherGloves;
 import net.minecraft.client.Minecraft;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -40,9 +42,21 @@ public class PlayerEquipItemListener
 				Minecraft.getMinecraft().getItemRenderer().resetEquippedProgress(EnumHand.MAIN_HAND);
 			}
 
-			event.getEntityPlayer().world
-					.playSound(event.getEntityPlayer(), event.getEntityPlayer().getPosition(), SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, SoundCategory.NEUTRAL,
-							1.0f, 1.0f);
+			if (event.getItemStack().getItem() instanceof ItemAetherGloves)
+			{
+				SoundEvent gloveEquipSound = ((ItemAetherGloves) event.getItemStack().getItem()).getGloveSound();
+
+				event.getEntityPlayer().world
+						.playSound(event.getEntityPlayer(), event.getEntityPlayer().getPosition(), gloveEquipSound, SoundCategory.NEUTRAL,
+								1.0f, 1.0f);
+			}
+			else
+			{
+				event.getEntityPlayer().world
+						.playSound(event.getEntityPlayer(), event.getEntityPlayer().getPosition(), SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, SoundCategory.NEUTRAL,
+								1.0f, 1.0f);
+			}
+
 			event.setCanceled(true);
 		}
 	}

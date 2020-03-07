@@ -7,8 +7,10 @@ import com.gildedgames.aether.common.init.CreativeTabsAether;
 import com.gildedgames.aether.common.patron.armor.PatronRewardArmor;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -44,23 +46,32 @@ public class ItemAetherGloves extends Item
 		return slim ? this.gloveType.getTextureSlim() : this.gloveType.getTexture();
 	}
 
+	public SoundEvent getGloveSound()
+	{
+		return this.gloveType.getEquipSound();
+	}
+
 	public enum GloveType
 	{
-		TAEGOREHIDE("taegore_hide_gloves"),
-		ZANITE("zanite_gloves"),
-		ARKENIUM("arkenium_gloves"),
-		GRAVITITE("gravitite_gloves"),
-		VALKYRIE("valkyrie_gloves"),
-		NEPTUNE("neptune_gloves"),
-		PHOENIX("phoenix_gloves"),
-		OBSIDIAN("obsidian_gloves");
+		TAEGOREHIDE("taegore_hide_gloves", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER),
+		BURRUKAIPELT("burrukai_pelt_gloves", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER),
+		ZANITE("zanite_gloves", SoundEvents.ITEM_ARMOR_EQUIP_IRON),
+		ARKENIUM("arkenium_gloves", SoundEvents.ITEM_ARMOR_EQUIP_IRON),
+		GRAVITITE("gravitite_gloves", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND),
+		VALKYRIE("valkyrie_gloves", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND),
+		NEPTUNE("neptune_gloves", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND),
+		PHOENIX("phoenix_gloves", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND),
+		OBSIDIAN("obsidian_gloves", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND);
 
 		private final ResourceLocation texture, textureSlim;
 
-		GloveType(String texture)
+		private final SoundEvent equipSound;
+
+		GloveType(String texture, SoundEvent equipSound)
 		{
 			this.texture = AetherCore.getResource("textures/armor/" + texture + ".png");
 			this.textureSlim = AetherCore.getResource("textures/armor/" + texture + "_slim.png");
+			this.equipSound = equipSound;
 		}
 
 		public ResourceLocation getTextureSlim()
@@ -71,6 +82,11 @@ public class ItemAetherGloves extends Item
 		public ResourceLocation getTexture()
 		{
 			return this.texture;
+		}
+
+		public SoundEvent getEquipSound()
+		{
+			return this.equipSound;
 		}
 	}
 }

@@ -71,7 +71,7 @@ public class ItemsAetherInit
 		r.register("burrukai_pelt", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("burrukai_pelt_boots", new ItemBurrukaiPeltArmor(EntityEquipmentSlot.FEET).slashDefense(2).impactDefense(4));
 		r.register("burrukai_pelt_chestplate", new ItemBurrukaiPeltArmor(EntityEquipmentSlot.CHEST).slashDefense(9).impactDefense(7));
-		r.register("burrukai_pelt_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.TAEGOREHIDE));
+		r.register("burrukai_pelt_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.BURRUKAIPELT));
 		r.register("burrukai_pelt_helmet", new ItemBurrukaiPeltArmor(EntityEquipmentSlot.HEAD).pierceDefense(6));
 		r.register("burrukai_pelt_leggings", new ItemBurrukaiPeltArmor(EntityEquipmentSlot.LEGS).slashDefense(3).pierceDefense(9));
 		r.register("burrukai_rib_cut", new ItemAetherFood(4, 0.3F, true).setConsumptionDuration(40));
