@@ -16,7 +16,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemAetherGloves extends Item
 {
-	private final GloveType gloveType;
+	public final GloveType gloveType;
 
 	public ItemAetherGloves(GloveType type)
 	{
@@ -51,27 +51,47 @@ public class ItemAetherGloves extends Item
 		return this.gloveType.getEquipSound();
 	}
 
+	public int getSlashDamageLevel()
+	{
+		return this.gloveType.getSlashDamageLevel();
+	}
+
+	public int getPierceDamageLevel()
+	{
+		return this.gloveType.getPierceDamageLevel();
+	}
+
+	public int getImpactDamageLevel()
+	{
+		return this.gloveType.getImpactDamageLevel();
+	}
+
 	public enum GloveType
 	{
-		TAEGOREHIDE("taegore_hide_gloves", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER),
-		BURRUKAIPELT("burrukai_pelt_gloves", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER),
-		ZANITE("zanite_gloves", SoundEvents.ITEM_ARMOR_EQUIP_IRON),
-		ARKENIUM("arkenium_gloves", SoundEvents.ITEM_ARMOR_EQUIP_IRON),
-		GRAVITITE("gravitite_gloves", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND),
-		VALKYRIE("valkyrie_gloves", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND),
-		NEPTUNE("neptune_gloves", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND),
-		PHOENIX("phoenix_gloves", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND),
-		OBSIDIAN("obsidian_gloves", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND);
+		TAEGOREHIDE("taegore_hide_gloves", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0, 0, 14),
+		BURRUKAIPELT("burrukai_pelt_gloves", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0, 0, 21),
+		ZANITE("zanite_gloves", SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0, 0, 34),
+		ARKENIUM("arkenium_gloves", SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0, 0, 40),
+		GRAVITITE("gravitite_gloves", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0, 0, 42),
+		VALKYRIE("valkyrie_gloves", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0, 0, 0),
+		NEPTUNE("neptune_gloves", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0, 0, 0),
+		PHOENIX("phoenix_gloves", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0, 0, 0),
+		OBSIDIAN("obsidian_gloves", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0, 0, 0);
 
 		private final ResourceLocation texture, textureSlim;
 
 		private final SoundEvent equipSound;
 
-		GloveType(String texture, SoundEvent equipSound)
+		private final int slashDamageLevel, pierceDamageLevel, impactDamageLevel;
+
+		GloveType(String texture, SoundEvent equipSound, int slashDamageLevel, int pierceDamageLevel, int impactDamageLevel)
 		{
 			this.texture = AetherCore.getResource("textures/armor/" + texture + ".png");
 			this.textureSlim = AetherCore.getResource("textures/armor/" + texture + "_slim.png");
 			this.equipSound = equipSound;
+			this.slashDamageLevel = slashDamageLevel;
+			this.pierceDamageLevel = pierceDamageLevel;
+			this.impactDamageLevel = impactDamageLevel;
 		}
 
 		public ResourceLocation getTextureSlim()
@@ -87,6 +107,21 @@ public class ItemAetherGloves extends Item
 		public SoundEvent getEquipSound()
 		{
 			return this.equipSound;
+		}
+
+		public int getSlashDamageLevel()
+		{
+			return this.slashDamageLevel;
+		}
+
+		public int getPierceDamageLevel()
+		{
+			return this.pierceDamageLevel;
+		}
+
+		public int getImpactDamageLevel()
+		{
+			return this.impactDamageLevel;
 		}
 	}
 }

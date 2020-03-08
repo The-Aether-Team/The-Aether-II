@@ -614,11 +614,7 @@ public class ItemCrossbow extends Item
 		ARKENIUM(0, 40, 0, 4418, "arkenium_crossbow"),
 		GRAVETITE(0, 42, 0, 2160, "gravitite_crossbow");
 
-		final int slashDamageLevel;
-
-		final int pierceDamageLevel;
-
-		final int impactDamageLevel;
+		final int slashDamageLevel, pierceDamageLevel, impactDamageLevel;
 
 		final int maxDurability;
 
