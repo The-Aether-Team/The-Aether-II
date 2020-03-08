@@ -6,23 +6,23 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.EnumHand;
 import net.minecraftforge.client.event.RenderSpecificHandEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
 
+@Mod.EventBusSubscriber(Side.CLIENT)
 public class RenderFirstPersonHandListener
 {
 	@SubscribeEvent
-	public static void onRenderSpecificHandEvent(final RenderSpecificHandEvent event)
+	public static void onRenderSpecificHandEvent(RenderSpecificHandEvent event)
 	{
 		if (event.getHand() == EnumHand.MAIN_HAND && event.getItemStack().isEmpty())
 		{
 			GlStateManager.pushMatrix();
-
-			//GlStateManager.rotate(event.getInterpolatedPitch(), 1f, 0f, 0f);
 
 			RenderPlayerHelper.renderFirstPersonHand(event, PlayerAether.getPlayer(Minecraft.getMinecraft().player));
 
 			GlStateManager.popMatrix();
 		}
 	}
-
 }

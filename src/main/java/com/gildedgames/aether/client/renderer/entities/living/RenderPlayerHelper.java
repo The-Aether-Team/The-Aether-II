@@ -18,31 +18,37 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.client.event.RenderSpecificHandEvent;
 
-public class RenderPlayerHelper {
-    public static void renderFirstPersonHand(RenderSpecificHandEvent event, PlayerAether player) {
+public class RenderPlayerHelper
+{
+    public static void renderFirstPersonHand(RenderSpecificHandEvent event, PlayerAether player)
+    {
         final ItemStack stack = player.getModule(PlayerEquipmentModule.class).getInventory().getStackInSlot(2);
 
         final PatronRewardArmor armor = player.getModule(PlayerPatronRewardModule.class).getChoices().getArmorChoice();
 
-        if (armor != null && armor.getArmorGloveTexture(EntityUtil.getSkin(player.getEntity()).equals("slim")) != null) {
+        if (armor != null && armor.getArmorGloveTexture(EntityUtil.getSkin(player.getEntity()).equals("slim")) != null)
+        {
             RenderPlayerHelper.renderGloves(armor.getArmorGloveTexture(EntityUtil.getSkin(player.getEntity()).equals("slim")), stack, event.getPartialTicks(),
                     event.getInterpolatedPitch(), event.getSwingProgress(), event.getEquipProgress());
         }
 
-        if (stack.getItem() instanceof ItemAetherGloves) {
+        if (stack.getItem() instanceof ItemAetherGloves)
+        {
             RenderPlayerHelper.renderGloves(((ItemAetherGloves) stack.getItem()).getGloveTexture(player.getEntity()), stack, event.getPartialTicks(),
                     event.getInterpolatedPitch(), event.getSwingProgress(), event.getEquipProgress());
         }
     }
 
-    private static void renderGloves(ResourceLocation texture, ItemStack stack, float partialTicks, float pitch, float swingProgress, float equipProgress) {
+    private static void renderGloves(ResourceLocation texture, ItemStack stack, float partialTicks, float pitch, float swingProgress, float equipProgress)
+    {
         GlStateManager.pushMatrix();
 
         Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
 
         final EnumHandSide hand = Minecraft.getMinecraft().gameSettings.mainHand;
 
-        if (hand == EnumHandSide.LEFT) {
+        if (hand == EnumHandSide.LEFT)
+        {
             GlStateManager.scale(-1.0f, 1.0f, 1.0f);
         }
 
@@ -51,7 +57,8 @@ public class RenderPlayerHelper {
         GlStateManager.popMatrix();
     }
 
-    private static void renderArmFirstPerson(final ItemStack stack, final float equipProgress, final float swingProgress, final EnumHandSide hand) {
+    private static void renderArmFirstPerson(final ItemStack stack, final float equipProgress, final float swingProgress, final EnumHandSide hand)
+    {
         final boolean flag = hand != EnumHandSide.LEFT;
         final float f = flag ? 1.0F : -1.0F;
         final float f1 = MathHelper.sqrt(swingProgress);
@@ -84,18 +91,22 @@ public class RenderPlayerHelper {
 
         GlStateManager.translate(-0.03F, 0.04F, -0.04F);
 
-        if (!skinType.equals("slim")) {
+        if (!skinType.equals("slim"))
+        {
             GlStateManager.translate(-0.03F, 0.0F, -0.02F);
-        } else {
+        }
+        else
+        {
             GlStateManager.translate(0.0F, -0.07F, 0.0F);
         }
 
         GlStateManager.disableCull();
 
-        if (flag) {
+        if (flag)
+        {
             final RenderLivingBase<?> playerRender = Minecraft.getMinecraft().getRenderManager().getSkinMap().get(skinType);
 
-            final ModelBiped t = !skinType.equals("slim") ? new ModelBiped(0.5F) : new ModelPlayer(1F, true);
+            final ModelBiped t = !skinType.equals("slim") ? new ModelPlayer(1.0F, false) : new ModelPlayer(1.0F, true);
             t.bipedBody.showModel = true;
             t.bipedRightLeg.showModel = true;
             t.bipedLeftLeg.showModel = true;

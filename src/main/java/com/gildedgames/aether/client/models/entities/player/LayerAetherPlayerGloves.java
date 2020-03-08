@@ -29,7 +29,7 @@ public class LayerAetherPlayerGloves extends LayerBipedArmor
 		super(rendererIn);
 
 		this.renderer = rendererIn;
-		this.modelArmor = new ModelBiped(0.5f);
+		this.modelArmor = new ModelPlayer(0.5f, false);
 		this.modelArmorSlim = new ModelPlayer(0.5f, true);
 	}
 
