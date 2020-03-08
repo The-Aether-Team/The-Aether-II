@@ -46,11 +46,4 @@ public class ItemWinterHat extends ItemArmor
     {
         return HashMultimap.create();
     }
-    @Override
-    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair)
-    {
-        if(repair.isItemEqual(new ItemStack(BlocksAether.cloudwool_block))) return true;
-        return super.getIsRepairable(toRepair, repair);
-    }
-
 }

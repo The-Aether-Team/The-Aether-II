@@ -52,7 +52,7 @@ public class ItemsAetherInit
 		r.register("arkenium_chestplate", new ItemArkeniumArmor(EntityEquipmentSlot.CHEST).slashDefense(22).impactDefense(17));
 		r.register("arkenium_crossbow", new ItemCrossbow().setDurationInTicks(35).setKnockBackValue(0.5F).setType(ItemCrossbow.crossBowTypes.ARKENIUM));
 		r.register("arkenium_door_item", new ItemBlockCustomDoor(BlocksAether.arkenium_door).setCreativeTab(CreativeTabsAether.TAB_CONSTRUCTION));
-		r.register("arkenium_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.ARKENIUM));
+		r.register("arkenium_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.ARKENIUM).setMaxDamage(528));
 		r.register("arkenium_helmet", new ItemArkeniumArmor(EntityEquipmentSlot.HEAD).pierceDefense(13));
 		r.register("arkenium_leggings", new ItemArkeniumArmor(EntityEquipmentSlot.LEGS).slashDefense(7).pierceDefense(22));
 		r.register("arkenium_pickaxe", new ItemAetherPickaxe(MaterialsAether.ARKENIUM_TOOL));
@@ -71,7 +71,7 @@ public class ItemsAetherInit
 		r.register("burrukai_pelt", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("burrukai_pelt_boots", new ItemBurrukaiPeltArmor(EntityEquipmentSlot.FEET).slashDefense(2).impactDefense(4));
 		r.register("burrukai_pelt_chestplate", new ItemBurrukaiPeltArmor(EntityEquipmentSlot.CHEST).slashDefense(9).impactDefense(7));
-		r.register("burrukai_pelt_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.BURRUKAIPELT));
+		r.register("burrukai_pelt_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.BURRUKAIPELT).setMaxDamage(60));
 		r.register("burrukai_pelt_helmet", new ItemBurrukaiPeltArmor(EntityEquipmentSlot.HEAD).pierceDefense(6));
 		r.register("burrukai_pelt_leggings", new ItemBurrukaiPeltArmor(EntityEquipmentSlot.LEGS).slashDefense(3).pierceDefense(9));
 		r.register("burrukai_rib_cut", new ItemAetherFood(4, 0.3F, true).setConsumptionDuration(40));
@@ -95,7 +95,7 @@ public class ItemsAetherInit
 		r.register("gravitite_boots", new ItemGravititeArmor(EntityEquipmentSlot.FEET).slashDefense(4).impactDefense(12));
 		r.register("gravitite_chestplate", new ItemGravititeArmor(EntityEquipmentSlot.CHEST).slashDefense(24).impactDefense(20));
 		r.register("gravitite_crossbow", new ItemCrossbow().setDurationInTicks(25).setKnockBackValue(1.2F).setType(ItemCrossbow.crossBowTypes.GRAVETITE));
-		r.register("gravitite_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.GRAVITITE));
+		r.register("gravitite_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.GRAVITITE).setMaxDamage(396));
 		r.register("gravitite_helmet", new ItemGravititeArmor(EntityEquipmentSlot.HEAD).pierceDefense(16));
 		r.register("gravitite_leggings", new ItemGravititeArmor(EntityEquipmentSlot.LEGS).slashDefense(8).pierceDefense(24));
 		r.register("gravitite_pickaxe", new ItemAetherPickaxe(MaterialsAether.GRAVITITE_TOOL));
@@ -164,7 +164,7 @@ public class ItemsAetherInit
 		r.register("taegore_hide", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("taegore_hide_boots", new ItemTaegoreHideArmor(EntityEquipmentSlot.FEET).slashDefense(1).impactDefense(3));
 		r.register("taegore_hide_chestplate", new ItemTaegoreHideArmor(EntityEquipmentSlot.CHEST).slashDefense(6).impactDefense(5));
-		r.register("taegore_hide_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.TAEGOREHIDE));
+		r.register("taegore_hide_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.TAEGOREHIDE).setMaxDamage(60));
 		r.register("taegore_hide_helmet", new ItemTaegoreHideArmor(EntityEquipmentSlot.HEAD).pierceDefense(4));
 		r.register("taegore_hide_leggings", new ItemTaegoreHideArmor(EntityEquipmentSlot.LEGS).slashDefense(2).pierceDefense(6));
 		r.register("taegore_steak", new ItemAetherFood(8, 0.8F, true));
@@ -182,7 +182,7 @@ public class ItemsAetherInit
 		r.register("zanite_chestplate", new ItemZaniteArmor(EntityEquipmentSlot.CHEST).slashDefense(12).impactDefense(10));
 		r.register("zanite_crossbow", new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(0.5F).setType(ItemCrossbow.crossBowTypes.ZANITE));
 		r.register("zanite_gemstone", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
-		r.register("zanite_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.ZANITE));
+		r.register("zanite_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.ZANITE).setMaxDamage(180));
 		r.register("zanite_helmet", new ItemZaniteArmor(EntityEquipmentSlot.HEAD).pierceDefense(8));
 		r.register("zanite_leggings", new ItemZaniteArmor(EntityEquipmentSlot.LEGS).slashDefense(4).pierceDefense(12));
 		r.register("zanite_pickaxe", new ItemAetherPickaxe(MaterialsAether.ZANITE_TOOL));

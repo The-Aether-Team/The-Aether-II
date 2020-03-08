@@ -11,10 +11,4 @@ public class ItemGravititeArmor extends ItemAetherArmor
 	{
 		super(ArmorMaterial.DIAMOND, "gravitite", armorType);
 	}
-
-	@Override
-	public boolean getIsRepairable(ItemStack target, ItemStack stack)
-	{
-		return stack.getItem() == Item.getItemFromBlock(BlocksAether.gravitite_block);
-	}
 }
