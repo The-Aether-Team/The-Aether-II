@@ -46,8 +46,6 @@ public class EquipmentAether
 
 	private static void registerItems()
 	{
-		// Gloves
-
 		createEquipmentItem(ItemsAether.taegore_hide_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE, WHEN_EQUIPPED,
 				new StatEffectFactory.StatProvider(DamageTypeAttributes.SLASH_DEFENSE_LEVEL, 1, StatEffectFactory.StatProvider.OP_ADD),
 				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL, 2, StatEffectFactory.StatProvider.OP_ADD),

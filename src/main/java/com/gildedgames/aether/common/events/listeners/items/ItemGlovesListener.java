@@ -1,22 +1,14 @@
 package com.gildedgames.aether.common.events.listeners.items;
 
-import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectPool;
-import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
-import com.gildedgames.aether.api.registrar.CapabilitiesAether;
-import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerEquipmentModule;
-import com.gildedgames.aether.common.containers.inventory.InventoryEquipment;
 import com.gildedgames.aether.common.items.armor.ItemAetherGloves;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import net.minecraftforge.event.entity.living.LivingDestroyBlockEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
-import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 

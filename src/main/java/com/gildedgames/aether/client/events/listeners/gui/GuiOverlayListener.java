@@ -8,15 +8,12 @@ import com.gildedgames.aether.client.renderer.particles.ParticleRainProxyFactory
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
-import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
-import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -29,28 +26,10 @@ public class GuiOverlayListener
 	{
 		for (RenderLivingBase<?> playerRender : new HashSet<>(Minecraft.getMinecraft().getRenderManager().getSkinMap().values()))
 		{
-			List<LayerRenderer<?>> original = new ArrayList<>(playerRender.layerRenderers);
-			List<LayerRenderer<?>> updated = new ArrayList<>();
-
-			for (LayerRenderer<?> i : original)
-			{
-				if (i instanceof LayerBipedArmor)
-				{
-					updated.add(new LayerArmorProxy(playerRender, (LayerBipedArmor) i));
-				}
-				else
-				{
-					updated.add(i);
-				}
-			}
-
-			updated.add(new LayerAetherPlayerGloves(playerRender));
-			updated.add(new LayerHeadShadow(playerRender));
-			updated.add(new LayerSwetLatch(playerRender));
-			updated.add(new LayerAetherPatronArmor(playerRender));
-
-			original.clear();
-			original.addAll(updated);
+			playerRender.addLayer(new LayerArmorProxy(playerRender, new LayerAetherPlayerGloves(playerRender)));
+			playerRender.addLayer(new LayerArmorProxy(playerRender, new LayerHeadShadow(playerRender)));
+			playerRender.addLayer(new LayerArmorProxy(playerRender, new LayerSwetLatch(playerRender)));
+			playerRender.addLayer(new LayerAetherPatronArmor(playerRender));
 		}
 
 		overlays.add(new PortalOverlay());
