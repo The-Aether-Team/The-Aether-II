@@ -45,7 +45,7 @@ public class RenderPlayerHelper
 
         Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
 
-        final EnumHandSide hand = Minecraft.getMinecraft().gameSettings.mainHand;
+        final EnumHandSide hand = Minecraft.getMinecraft().player.getPrimaryHand();
 
         if (hand == EnumHandSide.LEFT)
         {
