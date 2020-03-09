@@ -112,7 +112,6 @@ public class RenderPlayerHelper
             t.bipedLeftLeg.showModel = true;
 
             t.setModelAttributes(playerRender.getMainModel());
-            //t.setLivingAnimations(entity, p_177182_2_, p_177182_3_, partialTicks);
             GlStateManager.enableBlend();
             t.swingProgress = 0.0F;
             t.isSneak = false;
@@ -120,10 +119,7 @@ public class RenderPlayerHelper
             t.setRotationAngles(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F, abstractclientplayer);
             t.bipedRightArm.rotateAngleX = 0.0F;
 
-            //GlStateManager.scale(0.75F, 0.75F, 0.75F);
             t.bipedRightArm.render(0.0625F);
-            //t.bipedRightArmwear.rotateAngleX = 0.0F;
-            //t.bipedRightArmwear.render(0.0625F);
             GlStateManager.disableBlend();
 
             GlStateManager.color(1.0F, 1.0F, 1.0F);
