@@ -89,8 +89,6 @@ public class RenderPlayerHelper
 
         GlStateManager.translate(f * 5.6F, 0.0F, 0.0F);
 
-        GlStateManager.translate(-0.03F, 0.04F, -0.04F);
-
         if (!skinType.equals("slim"))
         {
             GlStateManager.translate(-0.03F, 0.0F, -0.02F);
