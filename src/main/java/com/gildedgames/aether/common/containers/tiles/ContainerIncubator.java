@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.containers.tiles;
 
-import com.gildedgames.aether.common.containers.slots.SlotAmbrosiumChunk;
+import com.gildedgames.aether.common.containers.slots.SlotIncubatorFuel;
 import com.gildedgames.aether.common.containers.slots.SlotMoaEgg;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -27,7 +27,7 @@ public class ContainerIncubator extends Container
 	{
 		this.tile = coolerInventory;
 
-		this.addSlotToContainer(new SlotAmbrosiumChunk(this.tile, 0, 80, 52));
+		this.addSlotToContainer(new SlotIncubatorFuel(this.tile, 0, 80, 52));
 
 		this.addSlotToContainer(new SlotMoaEgg(this.tile, 1, 80, 17));
 

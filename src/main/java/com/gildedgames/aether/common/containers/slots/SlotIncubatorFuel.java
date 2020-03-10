@@ -12,26 +12,20 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 
-public class SlotAmbrosiumChunk extends Slot
+public class SlotIncubatorFuel extends Slot
 {
 
 	private static TextureAtlasSprite sprite;
 
-	public SlotAmbrosiumChunk(IInventory inventoryIn, int index, int xPosition, int yPosition)
+	public SlotIncubatorFuel(IInventory inventoryIn, int index, int xPosition, int yPosition)
 	{
 		super(inventoryIn, index, xPosition, yPosition);
-	}
-
-	@SideOnly(Side.CLIENT)
-	public static void registerIcons(TextureStitchEvent.Pre event)
-	{
-		sprite = event.getMap().registerSprite(AetherCore.getResource("gui/slots/slot_moa_egg"));
 	}
 
 	@Override
 	public boolean isItemValid(@Nonnull ItemStack stack)
 	{
-		return stack.getItem() == ItemsAether.ambrosium_chunk;
+		return stack.getItem() == ItemsAether.ambrosium_chunk || stack.getItem() == ItemsAether.irradiated_dust;
 	}
 
 	@Override
