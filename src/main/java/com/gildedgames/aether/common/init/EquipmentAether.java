@@ -48,28 +48,23 @@ public class EquipmentAether
 	{
 		createEquipmentItem(ItemsAether.taegore_hide_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE, WHEN_EQUIPPED,
 				new StatEffectFactory.StatProvider(DamageTypeAttributes.SLASH_DEFENSE_LEVEL, 1, StatEffectFactory.StatProvider.OP_ADD),
-				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL, 2, StatEffectFactory.StatProvider.OP_ADD),
-				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DAMAGE_LEVEL, 14, StatEffectFactory.StatProvider.OP_ADD));
+				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL, 2, StatEffectFactory.StatProvider.OP_ADD));
 
 		createEquipmentItem(ItemsAether.burrukai_pelt_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE, WHEN_EQUIPPED,
 				new StatEffectFactory.StatProvider(DamageTypeAttributes.SLASH_DEFENSE_LEVEL, 1, StatEffectFactory.StatProvider.OP_ADD),
-				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL, 4, StatEffectFactory.StatProvider.OP_ADD),
-				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DAMAGE_LEVEL, 21, StatEffectFactory.StatProvider.OP_ADD));
+				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL, 4, StatEffectFactory.StatProvider.OP_ADD));
 
 		createEquipmentItem(ItemsAether.zanite_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE, WHEN_EQUIPPED,
 				new StatEffectFactory.StatProvider(DamageTypeAttributes.SLASH_DEFENSE_LEVEL, 2, StatEffectFactory.StatProvider.OP_ADD),
-				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL, 4, StatEffectFactory.StatProvider.OP_ADD),
-				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DAMAGE_LEVEL, 34, StatEffectFactory.StatProvider.OP_ADD));
+				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL, 4, StatEffectFactory.StatProvider.OP_ADD));
 
 		createEquipmentItem(ItemsAether.arkenium_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE, WHEN_EQUIPPED,
 				new StatEffectFactory.StatProvider(DamageTypeAttributes.SLASH_DEFENSE_LEVEL, 3, StatEffectFactory.StatProvider.OP_ADD),
-				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL, 7, StatEffectFactory.StatProvider.OP_ADD),
-				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DAMAGE_LEVEL, 40, StatEffectFactory.StatProvider.OP_ADD));
+				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL, 7, StatEffectFactory.StatProvider.OP_ADD));
 
 		createEquipmentItem(ItemsAether.gravitite_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE, WHEN_EQUIPPED,
 				new StatEffectFactory.StatProvider(DamageTypeAttributes.SLASH_DEFENSE_LEVEL, 4, StatEffectFactory.StatProvider.OP_ADD),
-				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL, 8, StatEffectFactory.StatProvider.OP_ADD),
-				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DAMAGE_LEVEL, 42, StatEffectFactory.StatProvider.OP_ADD));
+				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL, 8, StatEffectFactory.StatProvider.OP_ADD));
 
 		createEquipmentItem(ItemsAether.skyroot_sword, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD,
 				new StatEffectFactory.StatProvider(DamageTypeAttributes.SLASH_DAMAGE_LEVEL, 14, StatEffectFactory.StatProvider.OP_ADD));

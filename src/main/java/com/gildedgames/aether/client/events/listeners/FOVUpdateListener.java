@@ -20,7 +20,10 @@ public class FOVUpdateListener
         {
             if (((ItemCrossbow) item).getIsSpecialLoaded())
             {
-                event.setNewfov(0.8f);
+                if (event.getFov() != 1.0f)
+                {
+                    event.setNewfov(event.getFov() + 0.3f);
+                }
             }
         }
     }
