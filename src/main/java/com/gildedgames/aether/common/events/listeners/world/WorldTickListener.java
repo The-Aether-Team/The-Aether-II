@@ -172,11 +172,14 @@ public class WorldTickListener
 
 			if (!world.isRemote)
 			{
-				final ISpawnSystem system = event.world.getCapability(CapabilitiesAether.SPAWN_SYSTEM, null);
-
-				if (system != null)
+				if (world.getGameRules().getBoolean("doMobSpawning"))
 				{
-					system.tick();
+					final ISpawnSystem system = event.world.getCapability(CapabilitiesAether.SPAWN_SYSTEM, null);
+
+					if (system != null)
+					{
+						system.tick();
+					}
 				}
 			}
 		}
