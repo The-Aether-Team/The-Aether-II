@@ -34,14 +34,7 @@ public class WorldFallListener
 				}
 				else
 				{
-					if (!entity.getPassengers().isEmpty())
-					{
-						entity.removePassengers();
-					}
-					else
-					{
-						entity.setDead();
-					}
+					entity.setDead();
 				}
 			}
 		}
