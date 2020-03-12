@@ -92,7 +92,7 @@ public class DamageSystem
 
 				baseSlashDamageLevel = entitySource.getEntityAttribute(DamageTypeAttributes.SLASH_DAMAGE_LEVEL).getAttributeValue();
 				baseImpactDamageLevel = entitySource.getEntityAttribute(DamageTypeAttributes.IMPACT_DAMAGE_LEVEL).getAttributeValue();
-				basePierceDamageLevel = entitySource.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).getAttributeValue();
+				basePierceDamageLevel = entitySource.getEntityAttribute(DamageTypeAttributes.PIERCE_DAMAGE_LEVEL).getAttributeValue();
 
 				processTotalDamage(event, entitySource, baseSlashDamageLevel, basePierceDamageLevel, baseImpactDamageLevel, event.getEntityLiving());
 			}
