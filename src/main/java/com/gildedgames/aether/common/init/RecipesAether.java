@@ -161,14 +161,6 @@ public class RecipesAether
 
 	private static void registerAltarRecipes()
 	{
-		// Enchanted Dart Shooter
-		AetherAPI.content().altar().registerAltarRecipe(new AltarEnchantRecipe(4, new ItemStack(ItemsAether.dart_shooter, 1, ItemDartType.GOLDEN.ordinal()),
-				new ItemStack(ItemsAether.dart_shooter, 1, ItemDartType.ENCHANTED.ordinal())));
-
-		// Enchanted Darts
-		AetherAPI.content().altar().registerAltarRecipe(new AltarEnchantRecipe(1, new ItemStack(ItemsAether.dart, 1, ItemDartType.GOLDEN.ordinal()),
-				new ItemStack(ItemsAether.dart, 1, ItemDartType.ENCHANTED.ordinal())));
-
 		// Enchanted Blueberry
 		AetherAPI.content().altar().registerAltarRecipe(new AltarEnchantRecipe(2, new ItemStack(ItemsAether.blueberries),
 				new ItemStack(ItemsAether.enchanted_blueberry)));
