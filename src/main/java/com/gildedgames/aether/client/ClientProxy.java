@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.client.events.listeners.gui.GuiOverlayListener;
 import com.gildedgames.aether.client.gui.misc.CustomLoadingRenderer;
 import com.gildedgames.aether.client.renderer.AetherRenderers;
+import com.gildedgames.aether.client.renderer.particles.ParticleAetherStatusEffect;
 import com.gildedgames.aether.client.renderer.particles.ParticleImpact;
 import com.gildedgames.aether.client.renderer.particles.ParticlePierce;
 import com.gildedgames.aether.client.renderer.particles.ParticleSlash;
@@ -21,6 +22,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.IThreadListener;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
@@ -56,6 +58,16 @@ public class ClientProxy extends CommonProxy
 				y, z, offsetX, 0.0D, offsetZ);
 
 		Minecraft.getMinecraft().effectRenderer.addEffect(effect);
+	}
+
+	@Override
+	public void spawnEffectParticles(
+			final World world, final double x, final double y, final double z, final double motionX, final double motionY, final double motionZ,
+			final float particleRed, final float particleGreen, final float particleBlue)
+	{
+		final ParticleAetherStatusEffect particle = new ParticleAetherStatusEffect(world, x, y, z, motionX, motionY, motionZ, particleRed, particleGreen, particleBlue);
+
+		Minecraft.getMinecraft().effectRenderer.addEffect(particle);
 	}
 
 	@Override

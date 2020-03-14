@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.entity.effects.EEffectIntensity;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.effects.PacketStatusEffect;
+import com.gildedgames.aether.common.util.helpers.EntityUtil;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -62,6 +63,8 @@ public abstract class StatusEffect implements IAetherStatusEffects
 		if (this.effectBuildup < this.potentialBuildup)
 		{
 			this.effectBuildup += this.BUILDUP_SPEED;
+
+			EntityUtil.spawnEffectParticles(livingBase, this.effectType);
 		}
 
 		if (this.effectBuildup >= this.potentialBuildup)
@@ -94,6 +97,8 @@ public abstract class StatusEffect implements IAetherStatusEffects
 		if (this.isEffectApplied)
 		{
 			++decreaseTimer;
+
+			EntityUtil.spawnEffectParticles(livingBase, this.effectType);
 
 			if (this.decreaseTimer >= (this.ACTIVE_EFFECT_TIME * TICKS_PER_SECOND) * this.activeEffectTimeModifier)
 			{
