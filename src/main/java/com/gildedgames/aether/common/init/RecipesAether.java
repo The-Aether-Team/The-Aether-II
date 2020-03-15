@@ -8,11 +8,14 @@ import com.gildedgames.aether.common.blocks.decorative.*;
 import com.gildedgames.aether.common.blocks.natural.BlockHolystone;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
+import com.gildedgames.aether.common.recipes.CoolerRecipes;
 import com.gildedgames.aether.common.recipes.RecipePresentCrafting;
 import com.gildedgames.aether.common.recipes.RecipeWrappingPaper;
 import com.gildedgames.aether.common.recipes.altar.AltarEnchantRecipe;
 import com.gildedgames.aether.common.recipes.altar.AltarRepairRecipe;
 import com.gildedgames.aether.common.recipes.simple.SimpleRecipe;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.event.RegistryEvent;
@@ -31,6 +34,7 @@ public class RecipesAether
 		registerFurnaceRecipes();
 		registerAltarRecipes();
 		registerMasonryRecipes();
+		registerCoolerRecipes();
 	}
 
 	private static void registerFurnaceRecipes()
@@ -415,6 +419,68 @@ public class RecipesAether
 		addMasonry(new ItemStack(ItemsAether.secret_skyroot_door_item), new ItemStack(ItemsAether.skyroot_door_item, 1, OreDictionary.WILDCARD_VALUE));
 		addMasonry(new ItemStack(BlocksAether.secret_skyroot_trapdoor), new ItemStack(BlocksAether.skyroot_trapdoor, 1, OreDictionary.WILDCARD_VALUE));
 
+	}
+
+	private static void registerCoolerRecipes()
+	{
+		CoolerRecipes.instance().addCoolingFromItem(ItemsAether.irradiated_armor, Item.getItemFromBlock(Blocks.AIR), new ItemStack(ItemsAether.irradiated_dust),
+				new ItemStack(ItemsAether.arkenium_helmet),
+				new ItemStack(ItemsAether.arkenium_chestplate),
+				new ItemStack(ItemsAether.arkenium_leggings),
+				new ItemStack(ItemsAether.arkenium_boots),
+				new ItemStack(ItemsAether.arkenium_gloves),
+				new ItemStack(ItemsAether.gravitite_helmet),
+				new ItemStack(ItemsAether.gravitite_chestplate),
+				new ItemStack(ItemsAether.gravitite_leggings),
+				new ItemStack(ItemsAether.gravitite_boots),
+				new ItemStack(ItemsAether.gravitite_gloves),
+				new ItemStack(ItemsAether.zanite_helmet),
+				new ItemStack(ItemsAether.zanite_chestplate),
+				new ItemStack(ItemsAether.zanite_leggings),
+				new ItemStack(ItemsAether.zanite_boots),
+				new ItemStack(ItemsAether.zanite_gloves));
+
+		CoolerRecipes.instance().addCoolingFromItem(ItemsAether.irradiated_charm, Item.getItemFromBlock(Blocks.AIR), new ItemStack(ItemsAether.irradiated_dust),
+				new ItemStack(ItemsAether.irradiated_dust));
+
+		CoolerRecipes.instance().addCoolingFromItem(ItemsAether.irradiated_chunk, Item.getItemFromBlock(Blocks.AIR), new ItemStack(ItemsAether.irradiated_dust),
+				new ItemStack(ItemsAether.irradiated_dust));
+
+		CoolerRecipes.instance().addCoolingFromItem(ItemsAether.irradiated_neckwear, Item.getItemFromBlock(Blocks.AIR), new ItemStack(ItemsAether.irradiated_dust),
+				new ItemStack(ItemsAether.irradiated_dust));
+
+		CoolerRecipes.instance().addCoolingFromItem(ItemsAether.irradiated_ring, Item.getItemFromBlock(Blocks.AIR), new ItemStack(ItemsAether.irradiated_dust),
+				new ItemStack(ItemsAether.irradiated_dust));
+
+		CoolerRecipes.instance().addCoolingFromItem(ItemsAether.irradiated_sword, Item.getItemFromBlock(Blocks.AIR), new ItemStack(ItemsAether.irradiated_dust),
+				new ItemStack(ItemsAether.arkenium_sword),
+				new ItemStack(ItemsAether.gravitite_sword),
+				new ItemStack(ItemsAether.holystone_sword),
+				new ItemStack(ItemsAether.zanite_sword),
+				new ItemStack(ItemsAether.skyroot_sword));
+
+		CoolerRecipes.instance().addCoolingFromItem(ItemsAether.irradiated_tool, Item.getItemFromBlock(Blocks.AIR), new ItemStack(ItemsAether.irradiated_dust),
+				new ItemStack(ItemsAether.arkenium_axe),
+				new ItemStack(ItemsAether.arkenium_pickaxe),
+				new ItemStack(ItemsAether.arkenium_shovel),
+				new ItemStack(ItemsAether.zanite_axe),
+				new ItemStack(ItemsAether.zanite_pickaxe),
+				new ItemStack(ItemsAether.zanite_shovel),
+				new ItemStack(ItemsAether.gravitite_axe),
+				new ItemStack(ItemsAether.gravitite_pickaxe),
+				new ItemStack(ItemsAether.gravitite_shovel),
+				new ItemStack(ItemsAether.holystone_axe),
+				new ItemStack(ItemsAether.holystone_pickaxe),
+				new ItemStack(ItemsAether.holystone_shovel),
+				new ItemStack(ItemsAether.skyroot_axe),
+				new ItemStack(ItemsAether.skyroot_pickaxe),
+				new ItemStack(ItemsAether.skyroot_shovel));
+
+		CoolerRecipes.instance().addCoolingFromItem(ItemsAether.water_vial, ItemsAether.valkyrie_wings, null,
+				new ItemStack(ItemsAether.valkyrie_tea));
+
+		CoolerRecipes.instance().addCoolingFromItem(ItemsAether.skyroot_water_bucket, Item.getItemFromBlock(Blocks.AIR), new ItemStack(ItemsAether.skyroot_bucket),
+				new ItemStack(BlocksAether.highlands_ice));
 	}
 
 	private static void addMasonry(ItemStack result, Object... required)
