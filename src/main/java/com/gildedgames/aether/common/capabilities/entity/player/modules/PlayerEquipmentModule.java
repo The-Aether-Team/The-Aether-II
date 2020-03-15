@@ -56,7 +56,7 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 	public void tickStart(TickEvent.PlayerTickEvent event)
 	{
 		ItemStack mainHeldStack = this.getEntity().getHeldItemMainhand();
-		int mainHeldStackIndex = this.getEntity().inventory.getSlotFor(mainHeldStack);
+		int mainHeldStackIndex = this.getSlotFor(mainHeldStack);
 
 		if (this.lastHeldStackIndex != -1)
 		{
@@ -85,7 +85,7 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 		}
 
 		this.lastHeldStack = this.getEntity().getHeldItemMainhand();
-		this.lastHeldStackIndex = this.getEntity().inventory.getSlotFor(this.lastHeldStack);
+		this.lastHeldStackIndex = this.getSlotFor(this.lastHeldStack);
 
 
 		final List<Pair<Integer, ItemStack>> updates = this.getEntity().world.isRemote ? null : new ArrayList<>();
@@ -124,6 +124,24 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 		}
 
 		this.pools.values().forEach(EquipmentEffectPool::update);
+	}
+
+	private int getSlotFor(ItemStack stack)
+	{
+		for (int i = 0; i < this.getEntity().inventory.mainInventory.size(); ++i)
+		{
+			if (!(this.getEntity().inventory.mainInventory.get(i)).isEmpty() && this.stackEqualExact(stack, this.getEntity().inventory.mainInventory.get(i)))
+			{
+				return i;
+			}
+		}
+
+		return -1;
+	}
+
+	private boolean stackEqualExact(ItemStack stack1, ItemStack stack2)
+	{
+		return stack1.getItem() == stack2.getItem() && (!stack1.getHasSubtypes() || stack1.getMetadata() == stack2.getMetadata()) && ItemStack.areItemStackTagsEqual(stack1, stack2);
 	}
 
 	@Override
