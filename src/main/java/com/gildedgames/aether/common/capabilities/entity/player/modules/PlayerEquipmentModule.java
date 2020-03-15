@@ -55,8 +55,8 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 	@Override
 	public void tickStart(TickEvent.PlayerTickEvent event)
 	{
-		ItemStack mainHeldStack = this.getEntity().getHeldItemMainhand();
-		int mainHeldStackIndex = this.getEntity().inventory.getSlotFor(mainHeldStack);
+		ItemStack mainHeldStack = event.player.getHeldItemMainhand();
+		int mainHeldStackIndex = event.player.inventory.getSlotFor(mainHeldStack);
 
 		if (this.lastHeldStackIndex != -1)
 		{
