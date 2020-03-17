@@ -27,7 +27,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
-public class TileEntityIcestoneCooler extends TileEntityLockable implements ITickable, IInventory, ISidedInventory
+public class TileEntityIcestoneCooler extends TileEntityLockable implements ITickable, ISidedInventory
 {
 	private static final int[] SLOTS_TOP = new int[] { 0 };
 
@@ -343,12 +343,20 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 		return this.coolerCustomName != null && !this.coolerCustomName.isEmpty();
 	}
 
+	public void setCustomInventoryName(String p_145951_1_)
+	{
+		this.coolerCustomName = p_145951_1_;
+	}
+
 	@Override
 	public void readFromNBT(NBTTagCompound compound)
 	{
 		super.readFromNBT(compound);
+
 		this.coolerItemStacks = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
+
 		ItemStackHelper.loadAllItems(compound, this.coolerItemStacks);
+
 		this.coolerCoolTime = compound.getInteger("coolerCoolTime");
 		this.coolTime = compound.getInteger("coolTime");
 
@@ -362,6 +370,7 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 	public NBTTagCompound writeToNBT(NBTTagCompound compound)
 	{
 		super.writeToNBT(compound);
+
 		compound.setInteger("coolerCoolTime", (short) this.coolerCoolTime);
 		compound.setInteger("coolTime", (short) this.coolTime);
 		ItemStackHelper.saveAllItems(compound, this.coolerItemStacks);

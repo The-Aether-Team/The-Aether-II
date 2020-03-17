@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.blocks.containers;
 
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.tiles.TileEntityIncubator;
+import com.gildedgames.aether.common.entities.tiles.TileEntityMasonryBench;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
@@ -108,12 +109,6 @@ public class BlockIncubator extends BlockContainer
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
-	{
-		world.setBlockState(pos, state.withProperty(PROPERTY_FACING, placer.getHorizontalFacing()), 2);
-	}
-
-	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side,
 			float hitX, float hitY, float hitZ)
 	{
@@ -132,6 +127,29 @@ public class BlockIncubator extends BlockContainer
 	}
 
 	@Override
+	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
+											EntityLivingBase placer)
+	{
+		return this.getDefaultState().withProperty(PROPERTY_FACING, placer.getHorizontalFacing());
+	}
+
+	@Override
+	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+	{
+		worldIn.setBlockState(pos, state.withProperty(PROPERTY_FACING, placer.getHorizontalFacing()));
+
+		if (stack.hasDisplayName())
+		{
+			TileEntity tileentity = worldIn.getTileEntity(pos);
+
+			if (tileentity instanceof TileEntityIncubator)
+			{
+				((TileEntityIncubator)tileentity).setCustomInventoryName(stack.getDisplayName());
+			}
+		}
+	}
+
+	@Override
 	public int getMetaFromState(IBlockState state)
 	{
 		int meta = state.getValue(PROPERTY_FACING).getIndex();
@@ -147,11 +165,9 @@ public class BlockIncubator extends BlockContainer
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		EnumFacing facing = EnumFacing.byHorizontalIndex(meta & 7);
-
 		boolean isLit = (meta & 8) == 8;
 
-		return this.getDefaultState().withProperty(PROPERTY_FACING, facing).withProperty(PROPERTY_IS_LIT, isLit);
+		return this.getDefaultState().withProperty(PROPERTY_FACING, EnumFacing.byHorizontalIndex(meta)).withProperty(PROPERTY_IS_LIT, isLit);
 	}
 
 	@Override

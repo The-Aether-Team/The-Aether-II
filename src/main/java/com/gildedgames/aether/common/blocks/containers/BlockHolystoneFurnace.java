@@ -15,6 +15,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -43,12 +44,6 @@ public class BlockHolystoneFurnace extends BlockContainer
 		this.setDefaultState(this.getBlockState().getBaseState()
 				.withProperty(PROPERTY_IS_LIT, Boolean.FALSE)
 				.withProperty(PROPERTY_FACING, EnumFacing.NORTH));
-	}
-
-	@Override
-	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
-	{
-		world.setBlockState(pos, state.withProperty(PROPERTY_FACING, placer.getHorizontalFacing()), 2);
 	}
 
 	@Override
@@ -148,6 +143,29 @@ public class BlockHolystoneFurnace extends BlockContainer
 	}
 
 	@Override
+	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
+											EntityLivingBase placer)
+	{
+		return this.getDefaultState().withProperty(PROPERTY_FACING, placer.getHorizontalFacing());
+	}
+
+	@Override
+	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+	{
+		worldIn.setBlockState(pos, state.withProperty(PROPERTY_FACING, placer.getHorizontalFacing()));
+
+		if (stack.hasDisplayName())
+		{
+			TileEntity tileentity = worldIn.getTileEntity(pos);
+
+			if (tileentity instanceof TileEntityHolystoneFurnace)
+			{
+				((TileEntityHolystoneFurnace)tileentity).setCustomInventoryName(stack.getDisplayName());
+			}
+		}
+	}
+
+	@Override
 	public int getMetaFromState(IBlockState state)
 	{
 		int meta = state.getValue(PROPERTY_FACING).getIndex();
@@ -163,11 +181,9 @@ public class BlockHolystoneFurnace extends BlockContainer
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		EnumFacing facing = EnumFacing.byHorizontalIndex(meta & 7);
-
 		boolean isLit = (meta & 8) == 8;
 
-		return this.getDefaultState().withProperty(PROPERTY_FACING, facing).withProperty(PROPERTY_IS_LIT, isLit);
+		return this.getDefaultState().withProperty(PROPERTY_FACING, EnumFacing.byHorizontalIndex(meta)).withProperty(PROPERTY_IS_LIT, isLit);
 	}
 
 	@Override

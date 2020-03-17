@@ -57,12 +57,6 @@ public class BlockMasonryBench extends BlockContainer
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
-	{
-		world.setBlockState(pos, state.withProperty(PROPERTY_FACING, placer.getHorizontalFacing()), 2);
-	}
-
-	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing,
 			float hitX, float hitY, float hitZ)
 	{
@@ -75,6 +69,29 @@ public class BlockMasonryBench extends BlockContainer
 	}
 
 	@Override
+	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
+											EntityLivingBase placer)
+	{
+		return this.getDefaultState().withProperty(PROPERTY_FACING, placer.getHorizontalFacing());
+	}
+
+	@Override
+	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+	{
+		worldIn.setBlockState(pos, state.withProperty(PROPERTY_FACING, placer.getHorizontalFacing()));
+
+		if (stack.hasDisplayName())
+		{
+			TileEntity tileentity = worldIn.getTileEntity(pos);
+
+			if (tileentity instanceof TileEntityMasonryBench)
+			{
+				((TileEntityMasonryBench)tileentity).setCustomInventoryName(stack.getDisplayName());
+			}
+		}
+	}
+
+	@Override
 	public int getMetaFromState(IBlockState state)
 	{
 		return state.getValue(PROPERTY_FACING).getIndex();
@@ -83,9 +100,7 @@ public class BlockMasonryBench extends BlockContainer
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		EnumFacing facing = EnumFacing.byHorizontalIndex(meta);
-
-		return this.getDefaultState().withProperty(PROPERTY_FACING, facing);
+		return this.getDefaultState().withProperty(PROPERTY_FACING, EnumFacing.byHorizontalIndex(meta));
 	}
 
 	@Override

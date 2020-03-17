@@ -21,7 +21,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
-public class TileEntityMasonryBench extends TileEntityLockable implements ITickable, IInventory, ISidedInventory
+public class TileEntityMasonryBench extends TileEntityLockable implements ITickable, ISidedInventory
 {
 	private static final int[] SLOTS_TOP = new int[] { 0 };
 
@@ -183,6 +183,11 @@ public class TileEntityMasonryBench extends TileEntityLockable implements ITicka
 	public boolean hasCustomName()
 	{
 		return this.masonryCustomName != null && !this.masonryCustomName.isEmpty();
+	}
+
+	public void setCustomInventoryName(String p_145951_1_)
+	{
+		this.masonryCustomName = p_145951_1_;
 	}
 
 	@Override

@@ -30,7 +30,7 @@ import net.minecraftforge.items.wrapper.SidedInvWrapper;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class TileEntityIncubator extends TileEntityLockable implements ITickable, IInventory, ISidedInventory
+public class TileEntityIncubator extends TileEntityLockable implements ITickable, ISidedInventory
 {
 	private static final int[] SLOTS_EAST = new int[] { 1 };
 
@@ -64,6 +64,8 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 	private int ambroTimer;
 
 	private int eggTimer;
+
+	private String incubatorCustomName;
 
 	private final IItemHandler handlerEast = new SidedInvWrapper(this, net.minecraft.util.EnumFacing.EAST);
 
@@ -338,18 +340,6 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 		this.inventory.clear();
 	}
 
-	@Override
-	public String getName()
-	{
-		return "container.incubator";
-	}
-
-	@Override
-	public boolean hasCustomName()
-	{
-		return false;
-	}
-
 	public void sync()
 	{
 		IBlockState state = this.world.getBlockState(this.pos);
@@ -396,6 +386,23 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 	}
 
 	@Override
+	public String getName()
+	{
+		return this.hasCustomName() ? this.incubatorCustomName : "container.incubator";
+	}
+
+	@Override
+	public boolean hasCustomName()
+	{
+		return this.incubatorCustomName != null && !this.incubatorCustomName.isEmpty();
+	}
+
+	public void setCustomInventoryName(String p_145951_1_)
+	{
+		this.incubatorCustomName = p_145951_1_;
+	}
+
+	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound)
 	{
 		super.writeToNBT(compound);
@@ -421,6 +428,11 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 		compound.setFloat("currentHeatingProgress", this.currentHeatingProgress);
 		compound.setInteger("ambroTimer", this.ambroTimer);
 		compound.setInteger("eggTimer", this.eggTimer);
+
+		if (compound.hasKey("CustomName", 8))
+		{
+			this.incubatorCustomName = compound.getString("CustomName");
+		}
 
 		return compound;
 	}
@@ -449,6 +461,11 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 		this.currentHeatingProgress = compound.getInteger("currentHeatingProgress");
 		this.ambroTimer = compound.getInteger("ambroTimer");
 		this.eggTimer = compound.getInteger("eggTimer");
+
+		if (this.hasCustomName())
+		{
+			compound.setString("CustomName", this.incubatorCustomName);
+		}
 	}
 
 	@Override

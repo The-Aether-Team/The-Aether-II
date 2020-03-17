@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.blocks.containers;
 
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.entities.tiles.TileEntityHolystoneFurnace;
 import com.gildedgames.aether.common.entities.tiles.TileEntityIcestoneCooler;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
 import net.minecraft.block.BlockContainer;
@@ -55,9 +56,26 @@ public class BlockIcestoneCooler extends BlockContainer
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta,
+											EntityLivingBase placer)
 	{
-		world.setBlockState(pos, state.withProperty(PROPERTY_FACING, placer.getHorizontalFacing()), 2);
+		return this.getDefaultState().withProperty(PROPERTY_FACING, placer.getHorizontalFacing());
+	}
+
+	@Override
+	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+	{
+		worldIn.setBlockState(pos, state.withProperty(PROPERTY_FACING, placer.getHorizontalFacing()));
+
+		if (stack.hasDisplayName())
+		{
+			TileEntity tileentity = worldIn.getTileEntity(pos);
+
+			if (tileentity instanceof TileEntityIcestoneCooler)
+			{
+				((TileEntityIcestoneCooler)tileentity).setCustomInventoryName(stack.getDisplayName());
+			}
+		}
 	}
 
 	@Override
@@ -73,17 +91,15 @@ public class BlockIcestoneCooler extends BlockContainer
 	}
 
 	@Override
-	public int getMetaFromState(IBlockState state)
+	public IBlockState getStateFromMeta(int meta)
 	{
-		return state.getValue(PROPERTY_FACING).getIndex();
+		return this.getDefaultState().withProperty(PROPERTY_FACING, EnumFacing.byHorizontalIndex(meta));
 	}
 
 	@Override
-	public IBlockState getStateFromMeta(int meta)
+	public int getMetaFromState(IBlockState state)
 	{
-		EnumFacing facing = EnumFacing.byHorizontalIndex(meta);
-
-		return this.getDefaultState().withProperty(PROPERTY_FACING, facing);
+		return state.getValue(PROPERTY_FACING).getIndex();
 	}
 
 	@Override
