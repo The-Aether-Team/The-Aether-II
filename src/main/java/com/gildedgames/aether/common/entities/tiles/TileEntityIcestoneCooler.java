@@ -38,7 +38,7 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 
 	private int coolTime;
 
-	private String coolerCustomeName;
+	private String coolerCustomName;
 
 	@SideOnly(Side.CLIENT)
 	public static boolean isCooling(IInventory inventory)
@@ -315,13 +315,13 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 	@Override
 	public String getName()
 	{
-		return this.hasCustomName() ? this.coolerCustomeName : "container.icestone_cooler";
+		return this.hasCustomName() ? this.coolerCustomName : "container.icestone_cooler";
 	}
 
 	@Override
 	public boolean hasCustomName()
 	{
-		return this.coolerCustomeName != null && !this.coolerCustomeName.isEmpty();
+		return this.coolerCustomName != null && !this.coolerCustomName.isEmpty();
 	}
 
 	@Override
@@ -333,9 +333,9 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 		this.coolerCoolTime = compound.getInteger("coolerCoolTime");
 		this.coolTime = compound.getInteger("coolTime");
 
-		if (compound.hasKey("customeName", 8))
+		if (compound.hasKey("CustomName", 8))
 		{
-			this.coolerCustomeName = compound.getString("customName");
+			this.coolerCustomName = compound.getString("CustomName");
 		}
 	}
 
@@ -349,7 +349,7 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 
 		if (this.hasCustomName())
 		{
-			compound.setString("CustomName", this.coolerCustomeName);
+			compound.setString("CustomName", this.coolerCustomName);
 		}
 
 		return compound;

@@ -176,9 +176,9 @@ public class TileEntityMasonryBench extends TileEntityLockable implements ITicka
         this.masonryItemStacks = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
         ItemStackHelper.loadAllItems(compound, this.masonryItemStacks);
 
-        if (compound.hasKey("customeName", 8))
+        if (compound.hasKey("CustomName", 8))
         {
-            this.masonryCustomName = compound.getString("customName");
+            this.masonryCustomName = compound.getString("CustomName");
         }
 	}
 
