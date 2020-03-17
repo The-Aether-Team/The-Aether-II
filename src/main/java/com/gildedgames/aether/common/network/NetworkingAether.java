@@ -34,8 +34,6 @@ public class NetworkingAether
 		instance.registerMessage(PacketCloseScene.HandlerServer.class, PacketCloseScene.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketSetPlayedIntro.HandlerServer.class, PacketSetPlayedIntro.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketActivateButton.HandlerServer.class, PacketActivateButton.class, discriminant++, Side.SERVER);
-		instance.registerMessage(PacketMasonryRecipeChanged.HandlerServer.class, PacketMasonryRecipeChanged.class, discriminant++, Side.SERVER);
-		instance.registerMessage(PacketMasonryInputCountChanged.HandlerServer.class, PacketMasonryInputCountChanged.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketCancelIntro.HandlerServer.class, PacketCancelIntro.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketSetShouldRespawnAtCampfire.HandlerServer.class, PacketSetShouldRespawnAtCampfire.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketSetPlayerConfig.HandlerServer.class, PacketSetPlayerConfig.class, discriminant++, Side.SERVER);
@@ -47,6 +45,9 @@ public class NetworkingAether
 		instance.registerMessage(PacketTradeState.HandlerServer.class, PacketTradeState.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketTradeMessage.HandlerServer.class, PacketTradeMessage.class, discriminant++, Side.SERVER);
 		instance.registerMessage(PacketDiscoveryTabType.HandlerServer.class, PacketDiscoveryTabType.class, discriminant++, Side.SERVER);
+		instance.registerMessage(PacketMasonryOutputChanged.HandlerServer.class, PacketMasonryOutputChanged.class, discriminant++, Side.SERVER);
+		instance.registerMessage(PacketMasonryProcessOutput.HandlerServer.class, PacketMasonryProcessOutput.class, discriminant++, Side.SERVER);
+		instance.registerMessage(PacketMasonryProcessOutputShift.HandlerServer.class, PacketMasonryProcessOutputShift.class, discriminant++, Side.SERVER);
 
 		// C L I E N T
 		instance.registerMessage(PacketEquipment.HandlerClient.class, PacketEquipment.class, discriminant++, Side.CLIENT);

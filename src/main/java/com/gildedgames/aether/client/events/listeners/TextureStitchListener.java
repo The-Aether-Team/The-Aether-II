@@ -1,6 +1,8 @@
 package com.gildedgames.aether.client.events.listeners;
 
 import com.gildedgames.aether.common.containers.slots.*;
+import com.gildedgames.aether.common.containers.slots.icestone_cooler.SlotCoolingItem;
+import com.gildedgames.aether.common.containers.slots.incubator.SlotMoaEgg;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;

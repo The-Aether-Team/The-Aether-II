@@ -4,39 +4,41 @@ import com.gildedgames.aether.common.containers.tiles.ContainerMasonryBench;
 import com.gildedgames.aether.common.network.MessageHandlerServer;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-public class PacketMasonryInputCountChanged implements IMessage
+public class PacketMasonryOutputChanged implements IMessage
 {
+	private ItemStack outputStack;
 
-	private int inputCount;
-
-	public PacketMasonryInputCountChanged()
+	public PacketMasonryOutputChanged()
 	{
 
 	}
 
-	public PacketMasonryInputCountChanged(int inputCount)
+	public PacketMasonryOutputChanged(ItemStack stack)
 	{
-		this.inputCount = inputCount;
+		this.outputStack = stack;
 	}
 
 	@Override
 	public void fromBytes(ByteBuf buf)
 	{
-		this.inputCount = buf.readInt();
+		this.outputStack = ByteBufUtils.readItemStack(buf);
 	}
 
 	@Override
 	public void toBytes(ByteBuf buf)
 	{
-		buf.writeInt(this.inputCount);
+		ByteBufUtils.writeItemStack(buf, this.outputStack);
 	}
 
-	public static class HandlerServer extends MessageHandlerServer<PacketMasonryInputCountChanged, IMessage>
+	public static class HandlerServer extends MessageHandlerServer<PacketMasonryOutputChanged, IMessage>
 	{
 		@Override
-		public IMessage onMessage(PacketMasonryInputCountChanged message, EntityPlayer player)
+		public IMessage onMessage(PacketMasonryOutputChanged message, EntityPlayer player)
 		{
 			if (player == null || player.world == null)
 			{
@@ -47,7 +49,7 @@ public class PacketMasonryInputCountChanged implements IMessage
 			{
 				ContainerMasonryBench container = (ContainerMasonryBench) player.openContainer;
 
-				container.setInputCount(message.inputCount);
+				container.setOutput(message.outputStack);
 			}
 
 			return null;

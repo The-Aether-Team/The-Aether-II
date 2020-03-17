@@ -1,7 +1,7 @@
 package com.gildedgames.aether.common.containers.tiles;
 
-import com.gildedgames.aether.common.containers.slots.SlotIncubatorFuel;
-import com.gildedgames.aether.common.containers.slots.SlotMoaEgg;
+import com.gildedgames.aether.common.containers.slots.incubator.SlotIncubatorFuel;
+import com.gildedgames.aether.common.containers.slots.incubator.SlotMoaEgg;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

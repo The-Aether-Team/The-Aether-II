@@ -6,6 +6,7 @@ import com.gildedgames.aether.api.shop.IShopInstance;
 import com.gildedgames.aether.api.shop.IShopInstanceGroup;
 import com.gildedgames.aether.client.gui.container.GuiIcestoneCooler;
 import com.gildedgames.aether.client.gui.container.GuiIncubator;
+import com.gildedgames.aether.client.gui.container.masonry_bench.GuiMasonryBench;
 import com.gildedgames.aether.client.gui.container.guidebook.GuiGuidebookInventory;
 import com.gildedgames.aether.client.gui.container.guidebook.GuiGuidebookLoreTome;
 import com.gildedgames.aether.client.gui.container.guidebook.GuiGuidebookStatus;
@@ -96,7 +97,7 @@ public class AetherGuiHandler implements IGuiHandler
 			case INCUBATOR_ID:
 				return new ContainerIncubator(player.inventory, (IInventory) world.getTileEntity(pos));
 			case MASONRY_BENCH_ID:
-				return new ContainerMasonryBench(player, new BlockPos(x, y, z));
+				return new ContainerMasonryBench(player, player.inventory, (IInventory) world.getTileEntity(pos));
 			case AETHER_LOADING_ID:
 				return new ContainerLoadingScreen();
 			case DIALOG_SHOP_ID:
@@ -162,7 +163,7 @@ public class AetherGuiHandler implements IGuiHandler
 			case INCUBATOR_ID:
 				return new GuiIncubator(player.inventory, (IInventory) world.getTileEntity(pos), pos);
 			case MASONRY_BENCH_ID:
-				return new com.gildedgames.aether.client.gui.container.simple_crafting.ContainerMasonryBench(player, new BlockPos(x, y, z));
+				return new GuiMasonryBench(player, player.inventory, (IInventory) world.getTileEntity(pos));
 			case AETHER_LOADING_ID:
 				return new GuiAetherLoading();
 			case PATRON_REWARDS_ID:

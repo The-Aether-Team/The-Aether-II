@@ -1,13 +1,15 @@
-package com.gildedgames.aether.common.containers.slots;
+package com.gildedgames.aether.common.containers.slots.masonry_bench;
 
+import com.gildedgames.aether.common.containers.slots.SlotOffset;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
-public class SlotCoolerOutputSecondary extends SlotOffset
+public class SlotMasonryOutput extends SlotOffset
 {
     private int removeCount;
 
-    public SlotCoolerOutputSecondary(IInventory inventoryIn, int index, int xPosition, int yPosition, int trueIndex)
+    public SlotMasonryOutput(IInventory inventoryIn, int index, int xPosition, int yPosition, int trueIndex)
     {
         super(inventoryIn, index, xPosition, yPosition, trueIndex);
     }
@@ -25,6 +27,12 @@ public class SlotCoolerOutputSecondary extends SlotOffset
     }
 
     @Override
+    public boolean canTakeStack(EntityPlayer playerIn)
+    {
+        return false;
+    }
+
+    @Override
     public ItemStack decrStackSize(int amount)
     {
         if (this.getHasStack())
@@ -34,5 +42,4 @@ public class SlotCoolerOutputSecondary extends SlotOffset
 
         return super.decrStackSize(amount);
     }
-
 }

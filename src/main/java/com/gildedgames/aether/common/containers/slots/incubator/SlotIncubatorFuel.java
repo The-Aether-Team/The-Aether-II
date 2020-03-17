@@ -1,22 +1,14 @@
-package com.gildedgames.aether.common.containers.slots;
+package com.gildedgames.aether.common.containers.slots.incubator;
 
 import com.gildedgames.aether.api.registrar.ItemsAether;
-import com.gildedgames.aether.common.AetherCore;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.event.TextureStitchEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 
 public class SlotIncubatorFuel extends Slot
 {
-
-	private static TextureAtlasSprite sprite;
-
 	public SlotIncubatorFuel(IInventory inventoryIn, int index, int xPosition, int yPosition)
 	{
 		super(inventoryIn, index, xPosition, yPosition);
@@ -27,12 +19,4 @@ public class SlotIncubatorFuel extends Slot
 	{
 		return stack.getItem() == ItemsAether.ambrosium_chunk || stack.getItem() == ItemsAether.irradiated_dust;
 	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public TextureAtlasSprite getBackgroundSprite()
-	{
-		return sprite;
-	}
-
 }

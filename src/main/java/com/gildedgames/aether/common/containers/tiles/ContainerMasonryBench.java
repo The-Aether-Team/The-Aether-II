@@ -1,129 +1,81 @@
 package com.gildedgames.aether.common.containers.tiles;
 
-import com.gildedgames.aether.api.recipes.simple.ISimpleRecipe;
-import com.gildedgames.aether.api.registrar.BlocksAether;
-import com.gildedgames.aether.common.containers.inventory.InventoryCraftResultSimple;
-import com.gildedgames.aether.common.containers.slots.SlotSimpleCrafting;
+import com.gildedgames.aether.api.registrar.ItemsAether;
+import com.gildedgames.aether.common.containers.slots.masonry_bench.SlotMasonryInput;
+import com.gildedgames.aether.common.containers.slots.masonry_bench.SlotMasonryOutput;
 import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.network.packets.PacketMasonryInputCountChanged;
-import com.gildedgames.aether.common.util.helpers.RecipeUtil;
+import com.gildedgames.aether.common.network.packets.PacketMasonryOutputChanged;
+import com.gildedgames.aether.common.recipes.MasonryRecipes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
-
-import javax.annotation.Nullable;
 
 public class ContainerMasonryBench extends Container
 {
+	private final IInventory tileMasonry;
 
-	public final IInventory craftResult = new InventoryCraftResultSimple();
+	private ItemStack outputStack;
 
-	public SlotSimpleCrafting craftingResult;
+	private EntityPlayer player;
 
-	private final EntityPlayer player;
-
-	private final InventoryPlayer inventory;
-
-	private final World world;
-
-	private final BlockPos pos;
-
-	private int inputCount = 1;
-
-	public ContainerMasonryBench(EntityPlayer player, BlockPos pos)
+	public ItemStack getOutput()
 	{
-		this.player = player;
-		this.inventory = player.inventory;
-
-		this.world = player.getEntityWorld();
-		this.pos = pos;
-
-		this.createSlots();
+		return this.outputStack;
 	}
 
-	public int getInputCount()
+	public void setOutput(ItemStack stack)
 	{
-		int actual = this.craftingResult.getRecipe() != null ? this.craftingResult.getActualAmountOfReq(this.player) : this.inputCount;
+		this.outputStack = stack;
 
-		return MathHelper.clamp(this.inputCount, 1, actual);
-	}
-
-	public void setInputCount(int inputCount)
-	{
-		this.inputCount = MathHelper.clamp(inputCount, 1, this.craftResult.getSizeInventory());
-
-		if (this.world.isRemote)
+		if (this.player.world.isRemote)
 		{
-			NetworkingAether.sendPacketToServer(new PacketMasonryInputCountChanged(this.inputCount));
+			NetworkingAether.sendPacketToServer(new PacketMasonryOutputChanged(this.outputStack));
 		}
 
-		ItemStack stack = this.craftResult.getStackInSlot(0);
-
-		if (!stack.isEmpty())
-		{
-			stack.setCount(this.getInputCount());
-		}
+		this.tileMasonry.setInventorySlotContents(1, getOutput());
 	}
 
-	private void createSlots()
+	public ContainerMasonryBench(final EntityPlayer player, final InventoryPlayer playerInventory, final IInventory masonryInventory)
 	{
-		for (int k = 0; k < 3; ++k)
+		this.tileMasonry = masonryInventory;
+		this.addSlotToContainer(new SlotMasonryInput(masonryInventory, 0, 129, 9, 0));
+		this.addSlotToContainer(new SlotMasonryOutput(masonryInventory, 1, 129, 58, 1));
+
+		for (int i = 0; i < 3; ++i)
 		{
-			for (int i1 = 0; i1 < 9; ++i1)
+			for (int j = 0; j < 9; ++j)
 			{
-				this.addSlotToContainer(new Slot(this.inventory, i1 + k * 9 + 9, 8 + i1 * 18, 88 + (k * 18)));
+				this.addSlotToContainer(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 104 + i * 18));
 			}
 		}
 
-		for (int l = 0; l < 9; ++l)
+		for (int k = 0; k < 9; ++k)
 		{
-			this.addSlotToContainer(new Slot(this.inventory, l, 8 + l * 18, 146));
+			this.addSlotToContainer(new Slot(playerInventory, k, 8 + k * 18, 162));
 		}
 
-		this.craftingResult = new SlotSimpleCrafting(this.player, null, this.craftResult, 37, 106, 37, this);
-
-		this.craftingResult.setSimpleCrafting(true);
-
-		this.addSlotToContainer(this.craftingResult);
-	}
-
-	public void onNewRecipe(ISimpleRecipe recipe)
-	{
-		if (!RecipeUtil.canCraft(this.player, recipe))
-		{
-			this.craftResult.setInventorySlotContents(0, ItemStack.EMPTY);
-			this.craftingResult.setRecipe(null);
-
-			return;
-		}
-
-		recipe.getResult().setCount(this.getInputCount());
-
-		this.craftingResult.setRecipe(recipe);
-		this.craftResult.setInventorySlotContents(0, recipe.getResult());
+		this.player = player;
 	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer player)
+	public void addListener(final IContainerListener listener)
 	{
-		return this.world.getBlockState(this.pos).getBlock() == BlocksAether.masonry_bench
-				&& player.getDistanceSq(this.pos.getX() + 0.5D, this.pos.getY() + 0.5D, this.pos.getZ() + 0.5D) <= 64.0D;
+		super.addListener(listener);
+		listener.sendAllWindowProperties(this, this.tileMasonry);
 	}
 
 	@Override
-	public boolean canMergeSlot(ItemStack stack, Slot slotIn)
+	public boolean canInteractWith(final EntityPlayer playerIn)
 	{
-		return slotIn.inventory != this.craftResult && super.canMergeSlot(stack, slotIn);
+		return this.tileMasonry.isUsableByPlayer(playerIn);
 	}
 
 	@Override
-	@Nullable
 	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
 	{
 		ItemStack itemstack = ItemStack.EMPTY;
@@ -134,35 +86,42 @@ public class ContainerMasonryBench extends Container
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
-			if (index == 36)
+			if (index == 1)
 			{
-				if (!this.mergeItemStack(itemstack1, 0, 36, true))
+				if (!this.mergeItemStack(itemstack1, 2, 38, true))
 				{
-					return null;
+					return ItemStack.EMPTY;
 				}
 
 				slot.onSlotChange(itemstack1, itemstack);
 			}
-			else if (index >= 0 && index < 27)
+			else if (index != 0)
 			{
-				if (!this.mergeItemStack(itemstack1, 27, 36, false))
+				if (MasonryRecipes.instance().getOutput(itemstack1) != null)
 				{
-					return null;
+					if (!this.mergeItemStack(itemstack1, 0, 1, false))
+					{
+						return ItemStack.EMPTY;
+					}
+				}
+				else if (index < 29)
+				{
+					if (!this.mergeItemStack(itemstack1, 30, 38, false))
+					{
+						return ItemStack.EMPTY;
+					}
+				}
+				else if (index < 38 && !this.mergeItemStack(itemstack1, 2, 29, false))
+				{
+					return ItemStack.EMPTY;
 				}
 			}
-			else if (index >= 27 && index < 36)
+			else if (!this.mergeItemStack(itemstack1, 2, 38, false))
 			{
-				if (!this.mergeItemStack(itemstack1, 0, 27, false))
-				{
-					return null;
-				}
-			}
-			else if (!this.mergeItemStack(itemstack1, 0, 36, false))
-			{
-				return null;
+				return ItemStack.EMPTY;
 			}
 
-			if (itemstack1.getCount() == 0)
+			if (itemstack1.isEmpty())
 			{
 				slot.putStack(ItemStack.EMPTY);
 			}
@@ -173,7 +132,7 @@ public class ContainerMasonryBench extends Container
 
 			if (itemstack1.getCount() == itemstack.getCount())
 			{
-				return null;
+				return ItemStack.EMPTY;
 			}
 
 			slot.onTake(playerIn, itemstack1);
@@ -181,5 +140,4 @@ public class ContainerMasonryBench extends Container
 
 		return itemstack;
 	}
-
 }

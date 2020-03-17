@@ -315,7 +315,7 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 	@Override
 	public String getName()
 	{
-		return this.hasCustomName() ? this.coolerCustomeName : "Icestone Cooler";
+		return this.hasCustomName() ? this.coolerCustomeName : "container.icestone_cooler";
 	}
 
 	@Override

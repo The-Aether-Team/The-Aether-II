@@ -1,4 +1,4 @@
-package com.gildedgames.aether.common.containers.slots;
+package com.gildedgames.aether.common.containers.slots.incubator;
 
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.AetherCore;

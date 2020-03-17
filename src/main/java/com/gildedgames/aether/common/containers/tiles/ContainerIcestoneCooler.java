@@ -1,6 +1,6 @@
 package com.gildedgames.aether.common.containers.tiles;
 
-import com.gildedgames.aether.common.containers.slots.*;
+import com.gildedgames.aether.common.containers.slots.icestone_cooler.*;
 import com.gildedgames.aether.common.entities.tiles.TileEntityIcestoneCooler;
 import com.gildedgames.aether.common.recipes.CoolerRecipes;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,8 +10,6 @@ import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 

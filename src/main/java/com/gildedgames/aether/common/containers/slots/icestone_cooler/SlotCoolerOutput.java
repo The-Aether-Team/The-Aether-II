@@ -1,5 +1,6 @@
-package com.gildedgames.aether.common.containers.slots;
+package com.gildedgames.aether.common.containers.slots.icestone_cooler;
 
+import com.gildedgames.aether.common.containers.slots.SlotOffset;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
