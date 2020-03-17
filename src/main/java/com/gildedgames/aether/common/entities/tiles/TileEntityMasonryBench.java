@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.entities.tiles;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
+import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.blocks.containers.BlockMasonryBench;
 import com.gildedgames.aether.common.containers.tiles.ContainerMasonryBench;
 import net.minecraft.block.state.IBlockState;
@@ -8,21 +9,31 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ItemStackHelper;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityLockable;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
-public class TileEntityMasonryBench extends TileEntityLockable implements ITickable, IInventory
+public class TileEntityMasonryBench extends TileEntityLockable implements ITickable, IInventory, ISidedInventory
 {
+	private static final int[] SLOTS_TOP = new int[] { 0 };
+
 	private NonNullList<ItemStack> masonryItemStacks = NonNullList.withSize(2, ItemStack.EMPTY);
 
 	private String masonryCustomName;
 
 	private EntityPlayer player;
+
+	private final IItemHandler handlerTop = new SidedInvWrapper(this, net.minecraft.util.EnumFacing.UP);
+
+	private final IItemHandler handlerNone = new SidedInvWrapper(this, net.minecraft.util.EnumFacing.DOWN);
 
 	@Override
 	public int getSizeInventory()
@@ -112,6 +123,11 @@ public class TileEntityMasonryBench extends TileEntityLockable implements ITicka
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack)
 	{
+		if (index == 0)
+		{
+			return stack.getItem() instanceof ItemBlock || stack.getItem() == ItemsAether.skyroot_door_item;
+		}
+
 		return false;
 	}
 
@@ -194,5 +210,42 @@ public class TileEntityMasonryBench extends TileEntityLockable implements ITicka
         }
 
 		return compound;
+	}
+
+	@Override
+	public int[] getSlotsForFace(EnumFacing side)
+	{
+		return side == EnumFacing.UP ? SLOTS_TOP : new int[] { };
+	}
+
+	@Override
+	public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction)
+	{
+		return this.isItemValidForSlot(index, itemStackIn);
+	}
+
+	@Override
+	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction)
+	{
+		return false;
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public <T> T getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, @javax.annotation.Nullable net.minecraft.util.EnumFacing facing)
+	{
+		if (facing != null && capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+		{
+			if (facing == EnumFacing.UP)
+			{
+				return (T) this.handlerTop;
+			}
+			else
+			{
+				return (T) this.handlerNone;
+			}
+		}
+
+		return super.getCapability(capability, facing);
 	}
 }

@@ -9,8 +9,10 @@ import com.gildedgames.aether.common.recipes.CoolerRecipes;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -22,9 +24,18 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
-public class TileEntityIcestoneCooler extends TileEntityLockable implements ITickable, IInventory
+public class TileEntityIcestoneCooler extends TileEntityLockable implements ITickable, IInventory, ISidedInventory
 {
+	private static final int[] SLOTS_TOP = new int[] { 0 };
+
+	private static final int[] SLOTS_BOTTOM = new int[] { 2, 4 };
+
+	private static final int[] SLOTS_EAST = new int[] { 3 };
+
+	private static final int[] SLOTS_WEST = new int[] { 1 };
 
 	private final int totalCoolTime = 800;
 
@@ -39,6 +50,14 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 	private int coolTime;
 
 	private String coolerCustomName;
+
+	private final IItemHandler handlerTop = new SidedInvWrapper(this, net.minecraft.util.EnumFacing.UP);
+
+	private final IItemHandler handlerBottom = new SidedInvWrapper(this, net.minecraft.util.EnumFacing.DOWN);
+
+	private final IItemHandler handlerEast = new SidedInvWrapper(this, net.minecraft.util.EnumFacing.EAST);
+
+	private final IItemHandler handlerWest = new SidedInvWrapper(this, net.minecraft.util.EnumFacing.WEST);
 
 	@SideOnly(Side.CLIENT)
 	public static boolean isCooling(IInventory inventory)
@@ -456,5 +475,44 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 
 			stackSlot0.shrink(1);
 		}
+	}
+
+	@Override
+	public int[] getSlotsForFace(EnumFacing side)
+	{
+		return side == EnumFacing.DOWN ? SLOTS_BOTTOM : (side == EnumFacing.UP ? SLOTS_TOP : (side == EnumFacing.EAST || side == EnumFacing.SOUTH ? SLOTS_EAST : SLOTS_WEST));
+	}
+
+	@Override
+	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction)
+	{
+		return true;
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public <T> T getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, @javax.annotation.Nullable net.minecraft.util.EnumFacing facing)
+	{
+		if (facing != null && capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+		{
+			if (facing == EnumFacing.DOWN)
+			{
+				return (T) this.handlerBottom;
+			}
+			else if (facing == EnumFacing.UP)
+			{
+				return (T) this.handlerTop;
+			}
+			else if (facing == EnumFacing.EAST || facing == EnumFacing.SOUTH)
+			{
+				return (T) this.handlerEast;
+			}
+			else if (facing == EnumFacing.WEST || facing == EnumFacing.NORTH)
+			{
+				return (T) this.handlerWest;
+			}
+		}
+
+		return super.getCapability(capability, facing);
 	}
 }

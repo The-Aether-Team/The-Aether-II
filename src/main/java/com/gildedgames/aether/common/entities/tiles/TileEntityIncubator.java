@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.tiles;
 
+import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.blocks.containers.BlockIncubator;
 import com.gildedgames.aether.common.containers.tiles.ContainerIncubator;
 import com.gildedgames.aether.common.entities.animals.EntityMoa;
@@ -12,6 +13,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -19,14 +21,20 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntityLockable;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class TileEntityIncubator extends TileEntityLockable implements ITickable, IInventory
+public class TileEntityIncubator extends TileEntityLockable implements ITickable, IInventory, ISidedInventory
 {
+	private static final int[] SLOTS_EAST = new int[] { 1 };
+
+	private static final int[] SLOTS_WEST = new int[] { 0 };
 
 	public static final int REQ_TEMPERATURE_THRESHOLD = 3000;
 
@@ -56,6 +64,12 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 	private int ambroTimer;
 
 	private int eggTimer;
+
+	private final IItemHandler handlerEast = new SidedInvWrapper(this, net.minecraft.util.EnumFacing.EAST);
+
+	private final IItemHandler handlerWest = new SidedInvWrapper(this, net.minecraft.util.EnumFacing.WEST);
+
+	private final IItemHandler handlerNone = new SidedInvWrapper(this, net.minecraft.util.EnumFacing.UP);
 
 	@Override
 	public void update()
@@ -274,8 +288,15 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack)
 	{
-		// this code never seems to get called, commenting it out for reference in case I missed something during testing.
-		//return stack.getItem() == ItemsAether.ambrosium_chunk || stack.getItem() == ItemsAether.rainbow_moa_egg;
+		if (index == 0)
+		{
+			return stack.getItem() == ItemsAether.ambrosium_chunk;
+		}
+		else if (index == 1)
+		{
+			return this.currentHeatingProgress > TileEntityIncubator.REQ_TEMPERATURE_THRESHOLD - 500 && (stack.getItem() == ItemsAether.moa_egg_item || stack.getItem() == ItemsAether.rainbow_moa_egg);
+		}
+
 		return false;
 	}
 
@@ -442,5 +463,45 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 		}
 
 		return true;
+	}
+
+	@Override
+	public int[] getSlotsForFace(EnumFacing side)
+	{
+		return side == EnumFacing.EAST || side == EnumFacing.SOUTH ? SLOTS_EAST : (side == EnumFacing.WEST || side == EnumFacing.NORTH ? SLOTS_WEST : new int[] { });
+	}
+
+	public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction)
+	{
+		return this.isItemValidForSlot(index, itemStackIn);
+	}
+
+	@Override
+	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction)
+	{
+		return false;
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public <T> T getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, @javax.annotation.Nullable net.minecraft.util.EnumFacing facing)
+	{
+		if (facing != null && capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+		{
+			if (facing == EnumFacing.EAST || facing == EnumFacing.SOUTH)
+			{
+				return (T) this.handlerEast;
+			}
+			else if (facing == EnumFacing.WEST || facing == EnumFacing.NORTH)
+			{
+				return (T) this.handlerWest;
+			}
+			else
+			{
+				return (T) this.handlerNone;
+			}
+		}
+
+		return super.getCapability(capability, facing);
 	}
 }
