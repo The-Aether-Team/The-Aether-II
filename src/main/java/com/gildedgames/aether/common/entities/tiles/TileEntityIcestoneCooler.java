@@ -4,12 +4,10 @@ import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.blocks.containers.BlockIcestoneCooler;
 import com.gildedgames.aether.common.containers.tiles.ContainerIcestoneCooler;
-import com.gildedgames.aether.common.items.irradiated.ItemIrradiatedVisuals;
 import com.gildedgames.aether.common.recipes.CoolerRecipes;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
@@ -17,6 +15,8 @@ import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntityLockable;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
@@ -252,6 +252,10 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 		boolean flag = this.isCooling();
 		boolean flag1 = false;
 
+		this.sendUpdatesToClients();
+
+		this.setCustomInventoryName(this.coolerCustomName);
+
 		if (this.isCooling())
 		{
 			--this.coolerCoolTime;
@@ -346,6 +350,39 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 	public void setCustomInventoryName(String p_145951_1_)
 	{
 		this.coolerCustomName = p_145951_1_;
+	}
+
+	public void sendUpdatesToClients()
+	{
+		IBlockState state = this.world.getBlockState(this.pos);
+
+		this.world.notifyBlockUpdate(this.pos, state, state, 3);
+
+		this.markDirty();
+	}
+
+	@Override
+	public NBTTagCompound getUpdateTag()
+	{
+		NBTTagCompound tag = super.getUpdateTag();
+
+		this.writeToNBT(tag);
+
+		return tag;
+	}
+
+	@Override
+	public SPacketUpdateTileEntity getUpdatePacket()
+	{
+		NBTTagCompound compound = this.getUpdateTag();
+
+		return new SPacketUpdateTileEntity(this.pos, 1, compound);
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager networkManager, SPacketUpdateTileEntity packet)
+	{
+		this.readFromNBT(packet.getNbtCompound());
 	}
 
 	@Override

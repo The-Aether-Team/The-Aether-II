@@ -76,6 +76,10 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 	@Override
 	public void update()
 	{
+		this.sync();
+
+		this.setCustomInventoryName(this.incubatorCustomName);
+
 		if (this.world.isRemote)
 		{
 			return;
@@ -403,6 +407,37 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 	}
 
 	@Override
+	public void readFromNBT(NBTTagCompound compound)
+	{
+		super.readFromNBT(compound);
+
+		this.inventory = NonNullList.withSize(INVENTORY_SIZE, ItemStack.EMPTY);
+
+		NBTTagList stackList = compound.getTagList("inventory", 10);
+
+		for (int i = 0; i < stackList.tagCount(); ++i)
+		{
+			NBTTagCompound stack = stackList.getCompoundTagAt(i);
+
+			byte slotPos = stack.getByte("slot");
+
+			if (slotPos >= 0 && slotPos < this.inventory.size())
+			{
+				this.inventory.set(slotPos, new ItemStack(stack));
+			}
+		}
+
+		this.currentHeatingProgress = compound.getInteger("currentHeatingProgress");
+		this.ambroTimer = compound.getInteger("ambroTimer");
+		this.eggTimer = compound.getInteger("eggTimer");
+
+		if (compound.hasKey("CustomName", 8))
+		{
+			this.incubatorCustomName = compound.getString("CustomName");
+		}
+	}
+
+	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound)
 	{
 		super.writeToNBT(compound);
@@ -429,43 +464,12 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 		compound.setInteger("ambroTimer", this.ambroTimer);
 		compound.setInteger("eggTimer", this.eggTimer);
 
-		if (compound.hasKey("CustomName", 8))
-		{
-			this.incubatorCustomName = compound.getString("CustomName");
-		}
-
-		return compound;
-	}
-
-	@Override
-	public void readFromNBT(NBTTagCompound compound)
-	{
-		super.readFromNBT(compound);
-
-		this.inventory = NonNullList.withSize(INVENTORY_SIZE, ItemStack.EMPTY);
-
-		NBTTagList stackList = compound.getTagList("inventory", 10);
-
-		for (int i = 0; i < stackList.tagCount(); ++i)
-		{
-			NBTTagCompound stack = stackList.getCompoundTagAt(i);
-
-			byte slotPos = stack.getByte("slot");
-
-			if (slotPos >= 0 && slotPos < this.inventory.size())
-			{
-				this.inventory.set(slotPos, new ItemStack(stack));
-			}
-		}
-
-		this.currentHeatingProgress = compound.getInteger("currentHeatingProgress");
-		this.ambroTimer = compound.getInteger("ambroTimer");
-		this.eggTimer = compound.getInteger("eggTimer");
-
 		if (this.hasCustomName())
 		{
 			compound.setString("CustomName", this.incubatorCustomName);
 		}
+
+		return compound;
 	}
 
 	@Override

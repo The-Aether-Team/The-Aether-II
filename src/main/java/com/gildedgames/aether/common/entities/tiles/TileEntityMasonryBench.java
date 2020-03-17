@@ -14,6 +14,8 @@ import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntityLockable;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
@@ -158,7 +160,9 @@ public class TileEntityMasonryBench extends TileEntityLockable implements ITicka
 	@Override
 	public void update()
 	{
+		this.sendUpdatesToClients();
 
+		this.setCustomInventoryName(this.masonryCustomName);
 	}
 
 	@Override
@@ -188,6 +192,39 @@ public class TileEntityMasonryBench extends TileEntityLockable implements ITicka
 	public void setCustomInventoryName(String p_145951_1_)
 	{
 		this.masonryCustomName = p_145951_1_;
+	}
+
+	public void sendUpdatesToClients()
+	{
+		IBlockState state = this.world.getBlockState(this.pos);
+
+		this.world.notifyBlockUpdate(this.pos, state, state, 3);
+
+		this.markDirty();
+	}
+
+	@Override
+	public NBTTagCompound getUpdateTag()
+	{
+		NBTTagCompound tag = super.getUpdateTag();
+
+		this.writeToNBT(tag);
+
+		return tag;
+	}
+
+	@Override
+	public SPacketUpdateTileEntity getUpdatePacket()
+	{
+		NBTTagCompound compound = this.getUpdateTag();
+
+		return new SPacketUpdateTileEntity(this.pos, 1, compound);
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager networkManager, SPacketUpdateTileEntity packet)
+	{
+		this.readFromNBT(packet.getNbtCompound());
 	}
 
 	@Override
