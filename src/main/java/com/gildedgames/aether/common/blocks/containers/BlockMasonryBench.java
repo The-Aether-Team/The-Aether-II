@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.blocks.containers;
 
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.entities.tiles.TileEntityHolystoneFurnace;
 import com.gildedgames.aether.common.entities.tiles.TileEntityIcestoneCooler;
 import com.gildedgames.aether.common.entities.tiles.TileEntityMasonryBench;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
@@ -104,7 +105,7 @@ public class BlockMasonryBench extends BlockContainer
 	{
 		TileEntity tileEntity = world.getTileEntity(pos);
 
-		if (tileEntity instanceof TileEntityIcestoneCooler)
+		if (tileEntity instanceof TileEntityMasonryBench)
 		{
 			InventoryHelper.dropInventoryItems(world, pos, (IInventory) tileEntity);
 		}
