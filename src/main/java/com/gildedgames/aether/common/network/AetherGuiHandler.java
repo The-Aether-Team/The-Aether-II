@@ -161,7 +161,7 @@ public class AetherGuiHandler implements IGuiHandler
 			case FROSTPINE_COOLER_ID:
 				return new GuiIcestoneCooler(player.inventory, (IInventory) world.getTileEntity(pos));
 			case INCUBATOR_ID:
-				return new GuiIncubator(player.inventory, (IInventory) world.getTileEntity(pos), pos);
+				return new GuiIncubator(player.inventory, (IInventory) world.getTileEntity(pos));
 			case MASONRY_BENCH_ID:
 				return new GuiMasonryBench(player, player.inventory, (IInventory) world.getTileEntity(pos));
 			case AETHER_LOADING_ID:

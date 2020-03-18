@@ -2,6 +2,9 @@ package com.gildedgames.aether.common.containers.tiles;
 
 import com.gildedgames.aether.common.containers.slots.incubator.SlotIncubatorFuel;
 import com.gildedgames.aether.common.containers.slots.incubator.SlotMoaEgg;
+import com.gildedgames.aether.common.entities.tiles.TileEntityIcestoneCooler;
+import com.gildedgames.aether.common.entities.tiles.TileEntityIncubator;
+import com.gildedgames.aether.common.recipes.CoolerRecipes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -17,19 +20,23 @@ import javax.annotation.Nonnull;
 public class ContainerIncubator extends Container
 {
 
-	private final IInventory tile;
+	private final IInventory tileIncubator;
 
-	private float currentHeatingProgress;
+	private int incubationTimeMax;
 
-	private int eggTimer;
+	private int incubationTime;
 
-	public ContainerIncubator(final InventoryPlayer playerInventory, final IInventory coolerInventory)
+	private int heatingTimeMax;
+
+	private int heatingTime;
+
+	public ContainerIncubator(final InventoryPlayer playerInventory, final IInventory incubatorInventory)
 	{
-		this.tile = coolerInventory;
+		this.tileIncubator = incubatorInventory;
 
-		this.addSlotToContainer(new SlotIncubatorFuel(this.tile, 0, 80, 52));
+		this.addSlotToContainer(new SlotIncubatorFuel(this.tileIncubator, 0, 67, 53));
 
-		this.addSlotToContainer(new SlotMoaEgg(this.tile, 1, 80, 17));
+		this.addSlotToContainer(new SlotMoaEgg(this.tileIncubator, 1, 67, 17));
 
 		for (int i = 0; i < 3; ++i)
 		{
@@ -50,20 +57,54 @@ public class ContainerIncubator extends Container
 	{
 		super.addListener(listener);
 
-		listener.sendAllWindowProperties(this, this.tile);
+		listener.sendAllWindowProperties(this, this.tileIncubator);
+	}
+
+	@Override
+	public void detectAndSendChanges()
+	{
+		super.detectAndSendChanges();
+
+		for (final IContainerListener iContainerListener : this.listeners)
+		{
+			if (this.incubationTimeMax != this.tileIncubator.getField(0))
+			{
+				iContainerListener.sendWindowProperty(this, 0, this.tileIncubator.getField(0));
+			}
+
+			if (this.incubationTime != this.tileIncubator.getField(1))
+			{
+				iContainerListener.sendWindowProperty(this, 1, this.tileIncubator.getField(1));
+			}
+
+			if (this.heatingTimeMax != this.tileIncubator.getField(2))
+			{
+				iContainerListener.sendWindowProperty(this, 2, this.tileIncubator.getField(2));
+			}
+
+			if (this.heatingTime != this.tileIncubator.getField(3))
+			{
+				iContainerListener.sendWindowProperty(this, 3, this.tileIncubator.getField(3));
+			}
+		}
+
+		this.incubationTimeMax = this.tileIncubator.getField(0);
+		this.incubationTime = this.tileIncubator.getField(1);
+		this.heatingTimeMax = this.tileIncubator.getField(2);
+		this.heatingTime = this.tileIncubator.getField(3);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(final int id, final int data)
 	{
-		this.tile.setField(id, data);
+		this.tileIncubator.setField(id, data);
 	}
 
 	@Override
 	public boolean canInteractWith(@Nonnull final EntityPlayer playerIn)
 	{
-		return this.tile.isUsableByPlayer(playerIn);
+		return this.tileIncubator.isUsableByPlayer(playerIn);
 	}
 
 	@Override
@@ -77,26 +118,26 @@ public class ContainerIncubator extends Container
 			final ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
-			// move from container to inv
-			if (index == 0 || index == 1)
+			if (index != 0 && index != 1)
 			{
-				if (!this.mergeItemStack(itemstack1, 2, 38, true))
+				if (TileEntityIncubator.isItemFuel(itemstack1))
 				{
-					return ItemStack.EMPTY;
-				}
-
-				slot.onSlotChange(itemstack1, itemstack);
-			}
-			// move from inv to container
-			else if (index > 1)
-			{
-				if (!itemstack1.isEmpty())
-				{
-					if (!this.mergeItemStack(itemstack1, 0, 2, false))
+					if (!this.mergeItemStack(itemstack1, 0, 1, true))
 					{
 						return ItemStack.EMPTY;
 					}
 				}
+				else if (TileEntityIncubator.isItemEgg(itemstack1))
+				{
+					if (!this.mergeItemStack(itemstack1, 1, 2, true))
+					{
+						return ItemStack.EMPTY;
+					}
+				}
+			}
+			else if (!this.mergeItemStack(itemstack1, 2, 38, false))
+			{
+				return ItemStack.EMPTY;
 			}
 
 			if (itemstack1.isEmpty())
@@ -108,31 +149,14 @@ public class ContainerIncubator extends Container
 				slot.onSlotChanged();
 			}
 
+			if (itemstack1.getCount() == itemstack.getCount())
+			{
+				return ItemStack.EMPTY;
+			}
+
 			slot.onTake(playerIn, itemstack1);
 		}
 
 		return itemstack;
-	}
-
-	@Override
-	public void detectAndSendChanges()
-	{
-		super.detectAndSendChanges();
-
-		for (final IContainerListener iContainerListener : this.listeners)
-		{
-			if (this.currentHeatingProgress != this.tile.getField(0))
-			{
-				iContainerListener.sendWindowProperty(this, 0, this.tile.getField(0));
-			}
-
-			if (this.eggTimer != this.tile.getField(1))
-			{
-				iContainerListener.sendWindowProperty(this, 1, this.tile.getField(1));
-			}
-		}
-
-		this.currentHeatingProgress = this.tile.getField(0);
-		this.eggTimer = this.tile.getField(1);
 	}
 }

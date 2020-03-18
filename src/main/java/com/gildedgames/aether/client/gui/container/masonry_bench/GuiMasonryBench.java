@@ -343,7 +343,10 @@ public class GuiMasonryBench extends GuiContainer implements IExtendedContainer
         {
             ItemStack[] outputStack = MasonryRecipes.instance().getOutput(this.tileMasonry.getStackInSlot(0));
 
-            this.recipes.addAll(Arrays.asList(outputStack));
+            if (outputStack != null)
+            {
+                this.recipes.addAll(Arrays.asList(outputStack));
+            }
         }
 
         this.currentScroll = 0.0F;

@@ -35,12 +35,9 @@ public class SlotMoaEgg extends Slot
 	{
 		if (this.inventory instanceof TileEntityIncubator)
 		{
-			if (stack.getItem() == ItemsAether.moa_egg_item || stack.getItem() == ItemsAether.rainbow_moa_egg)
-			{
-				// Check if incubator is ready before allowing transfer
-				return this.inventory.getField(0) > TileEntityIncubator.REQ_TEMPERATURE_THRESHOLD - 500;
-			}
+			return TileEntityIncubator.isItemEgg(stack);
 		}
+
 		return false;
 	}
 
@@ -48,12 +45,6 @@ public class SlotMoaEgg extends Slot
 	public int getSlotStackLimit()
 	{
 		return 1;
-	}
-
-	@Override
-	public boolean canTakeStack(EntityPlayer playerIn)
-	{
-		return false;
 	}
 
 	@Override

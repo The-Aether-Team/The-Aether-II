@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.containers.slots.incubator;
 
 import com.gildedgames.aether.api.registrar.ItemsAether;
+import com.gildedgames.aether.common.entities.tiles.TileEntityIncubator;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -17,6 +18,11 @@ public class SlotIncubatorFuel extends Slot
 	@Override
 	public boolean isItemValid(@Nonnull ItemStack stack)
 	{
-		return stack.getItem() == ItemsAether.ambrosium_chunk || stack.getItem() == ItemsAether.irradiated_dust;
+		if (this.inventory instanceof TileEntityIncubator)
+		{
+			return TileEntityIncubator.isItemFuel(stack);
+		}
+
+		return false;
 	}
 }
