@@ -115,9 +115,12 @@ public class TileEntityMasonryBench extends TileEntityLockable implements ITicka
 	{
 		this.player = player;
 
-		this.sendUpdatesToClients();
+		if (this.world.isRemote)
+		{
+			this.sendUpdatesToClients();
 
-		this.setCustomInventoryName(this.masonryCustomName);
+			this.setCustomInventoryName(this.masonryCustomName);
+		}
 	}
 
 	@Override

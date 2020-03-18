@@ -158,9 +158,12 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 	@Override
 	public void openInventory(EntityPlayer player)
 	{
-		this.sendUpdatesToClients();
+		if (this.world.isRemote)
+		{
+			this.sendUpdatesToClients();
 
-		this.setCustomInventoryName(this.incubatorCustomName);
+			this.setCustomInventoryName(this.incubatorCustomName);
+		}
 	}
 
 	@Override

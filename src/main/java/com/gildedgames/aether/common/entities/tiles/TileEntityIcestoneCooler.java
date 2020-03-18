@@ -165,7 +165,12 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 	{
 		this.sendUpdatesToClients();
 
-		this.setCustomInventoryName(this.coolerCustomName);
+		if (this.world.isRemote)
+		{
+			this.sendUpdatesToClients();
+
+			this.setCustomInventoryName(this.coolerCustomName);
+		}
 	}
 
 	@Override
