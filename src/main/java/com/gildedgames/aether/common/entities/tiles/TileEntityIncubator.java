@@ -137,7 +137,6 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 
 			if (this.eggTimer >= this.getEggTimerMax())
 			{
-				//TODO: Baby Moas still don't spawn from incubator, but I think this is an issue w/ the Moas not an issue with the incubator
 				Random rand = new Random();
 				MoaGenePool stackGenes = ItemMoaEgg.getGenePool(eggstack);
 				MoaNest familyNest = new MoaNest(this.world);
@@ -149,6 +148,7 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 				moa.setPosition(this.getPos().getX() + 0.5, this.getPos().getY() + 1.5, this.getPos().getZ() + 0.5);
 				moa.setGender(rand.nextBoolean() ? AnimalGender.FEMALE : AnimalGender.MALE);
 				moa.setAnimalPack(familyNest.getAnimalPack());
+				moa.setIsHungry(true);
 
 				this.world.spawnEntity(moa);
 
