@@ -158,7 +158,9 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 	@Override
 	public void openInventory(EntityPlayer player)
 	{
+		this.sendUpdatesToClients();
 
+		this.setCustomInventoryName(this.incubatorCustomName);
 	}
 
 	@Override
@@ -234,10 +236,6 @@ public class TileEntityIncubator extends TileEntityLockable implements ITickable
 	@Override
 	public void update()
 	{
-		this.sendUpdatesToClients();
-
-		this.setCustomInventoryName(this.incubatorCustomName);
-
 		boolean isHeating = this.isHeating();
 		boolean isIncubating = this.isIncubating();
 		boolean flag = false;

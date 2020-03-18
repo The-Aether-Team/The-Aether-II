@@ -114,6 +114,10 @@ public class TileEntityMasonryBench extends TileEntityLockable implements ITicka
 	public void openInventory(EntityPlayer player)
 	{
 		this.player = player;
+
+		this.sendUpdatesToClients();
+
+		this.setCustomInventoryName(this.masonryCustomName);
 	}
 
 	@Override
@@ -160,9 +164,7 @@ public class TileEntityMasonryBench extends TileEntityLockable implements ITicka
 	@Override
 	public void update()
 	{
-		this.sendUpdatesToClients();
 
-		this.setCustomInventoryName(this.masonryCustomName);
 	}
 
 	@Override

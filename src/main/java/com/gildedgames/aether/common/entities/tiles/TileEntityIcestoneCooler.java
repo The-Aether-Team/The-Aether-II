@@ -163,7 +163,9 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 	@Override
 	public void openInventory(EntityPlayer player)
 	{
+		this.sendUpdatesToClients();
 
+		this.setCustomInventoryName(this.coolerCustomName);
 	}
 
 	@Override
