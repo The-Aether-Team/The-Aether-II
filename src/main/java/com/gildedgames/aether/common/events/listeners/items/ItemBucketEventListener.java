@@ -76,7 +76,7 @@ public class ItemBucketEventListener
 		{
 			BlockAetherPortal.Size size = new BlockAetherPortal.Size(world, pos, EnumFacing.Axis.X);
 
-			if (size.isWithinSizeBounds() && size.getPortalBlocks() == 0)
+			if (size.isWithinSizeBounds() && size.getPortalBlocks() == 0 && size.isPortalBase(state))
 			{
 				return true;
 			}
@@ -84,7 +84,7 @@ public class ItemBucketEventListener
 			{
 				size = new BlockAetherPortal.Size(world, pos, EnumFacing.Axis.Z);
 
-				return size.isWithinSizeBounds() && size.getPortalBlocks() == 0;
+				return size.isWithinSizeBounds() && size.getPortalBlocks() == 0 && size.isPortalBase(state);
 			}
 		}
 
@@ -136,7 +136,7 @@ public class ItemBucketEventListener
 	{
 		BlockAetherPortal.Size size = new BlockAetherPortal.Size(world, pos, EnumFacing.Axis.X);
 
-		if (size.isWithinSizeBounds() && size.getPortalBlocks() == 0)
+		if (size.isWithinSizeBounds() && size.getPortalBlocks() == 0 && size.isPortalBase(world.getBlockState(target)))
 		{
 			size.createPortal();
 
@@ -146,7 +146,7 @@ public class ItemBucketEventListener
 		{
 			size = new BlockAetherPortal.Size(world, pos, EnumFacing.Axis.Z);
 
-			if (size.isWithinSizeBounds() && size.getPortalBlocks() == 0)
+			if (size.isWithinSizeBounds() && size.getPortalBlocks() == 0 && size.isPortalBase(world.getBlockState(target)))
 			{
 				size.createPortal();
 

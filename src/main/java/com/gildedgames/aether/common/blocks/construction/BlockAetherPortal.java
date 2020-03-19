@@ -422,5 +422,22 @@ public class BlockAetherPortal extends BlockBreakable
 				}
 			}
 		}
+
+		public boolean isPortalBase(IBlockState state)
+		{
+			IBlockState block = null;
+
+			for (int i = 0; i < this.width; ++i)
+			{
+				final BlockPos blockpos = this.portalPos.offset(this.rightSideFacing, i);
+
+				for (int j = 0; j < 1; ++j)
+				{
+					block = this.world.getBlockState(blockpos.up(j - 1));
+				}
+			}
+
+			return block == state;
+		}
 	}
 }
