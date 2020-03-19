@@ -222,25 +222,19 @@ public class EntityGlactrix extends EntityAetherAnimal implements IShearable
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return SoundsAether.taegore_ambient;
+		return SoundsAether.aerbunny_ambient;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(final DamageSource src)
 	{
-		return SoundsAether.taegore_hurt;
+		return SoundsAether.aerbunny_hurt;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return SoundsAether.taegore_death;
-	}
-
-	@Override
-	protected void playStepSound(final BlockPos pos, final Block blockIn)
-	{
-		this.playSound(SoundEvents.ENTITY_PIG_STEP, 0.15F, 1.0F);
+		return SoundsAether.aerbunny_death;
 	}
 
 	@Override
