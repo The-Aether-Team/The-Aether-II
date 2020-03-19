@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.blocks.natural.leaves;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
+import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.client.renderer.particles.ParticleGolden;
 import com.gildedgames.aether.client.renderer.particles.ParticleLeaf;
 import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherUniqueSapling;
@@ -415,8 +416,30 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 				stacks.add(stack);
 			}
 		}
+
+		if (rand.nextInt(200) == 0)
+		{
+			ItemStack stack = this.getPinecone();
+
+			if (stack != null)
+			{
+				stacks.add(stack);
+			}
+		}
+
 		return stacks;
 	}
+
+	protected ItemStack getPinecone()
+	{
+		if (this != BlocksAether.mutant_leaves && this != BlocksAether.mutant_leaves_decorated)
+		{
+			return new ItemStack(ItemsAether.skyroot_pinecone, 1);
+		}
+
+		return null;
+	}
+
 
 	protected ItemStack getSaplingItem()
 	{

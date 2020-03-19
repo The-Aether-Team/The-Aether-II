@@ -50,6 +50,7 @@ public class ItemsAetherInit
 		r.register("valkyrie_wings", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("brettl_cane", new ItemBrettlCane().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("brettl_grass", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
+		r.register("skyroot_pinecone", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("golden_amber", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("cloudtwine", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("moa_feather", new ItemMoaFeather().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
@@ -185,6 +186,9 @@ public class ItemsAetherInit
 
 		r.register("rainbow_moa_egg", new ItemMoaEgg(true).setCreativeTab(CreativeTabsAether.TAB_MISCELLANEOUS));
 		r.register("aether_saddle", new ItemDropOnDeath().setMaxStackSize(1).setCreativeTab(CreativeTabsAether.TAB_MISCELLANEOUS));
+		r.register("moa_feed", new ItemMoaFeed(ItemMoaFeed.MoaFeedType.BASIC).setCreativeTab(CreativeTabsAether.TAB_MISCELLANEOUS));
+		r.register("moa_feed_blueberries", new ItemMoaFeed(ItemMoaFeed.MoaFeedType.BLUEBERRY).setCreativeTab(CreativeTabsAether.TAB_MISCELLANEOUS));
+		r.register("moa_feed_enchanted_blueberries", new ItemMoaFeed(ItemMoaFeed.MoaFeedType.ENCHANTED_BLUEBERRY).setCreativeTab(CreativeTabsAether.TAB_MISCELLANEOUS));
 		r.register("cloud_parachute", new ItemCloudParachute().setCreativeTab(CreativeTabsAether.TAB_MISCELLANEOUS));
 		r.register("skyroot_bucket", new ItemSkyrootBucket(Blocks.AIR));
 		r.register("skyroot_water_bucket", new ItemSkyrootBucket(Blocks.FLOWING_WATER));

@@ -698,6 +698,11 @@ public class ItemModelsAetherInit
 		registerItemModels(ItemsAether.crude_scatterglass_shard, "crude_scatterglass_shard");
 
 		registerItemModels(ItemsAether.valkyrie_tea, "tea/valkyrie_tea");
+
+		registerItemModels(ItemsAether.skyroot_pinecone, "skyroot_pinecone");
+		registerItemModels(ItemsAether.moa_feed, "feed/moa_feed");
+		registerItemModels(ItemsAether.moa_feed_blueberries, "feed/moa_feed_blueberries");
+		registerItemModels(ItemsAether.moa_feed_enchanted_blueberries, "feed/moa_feed_enchanted_blueberries");
 	}
 
 	private static void registerSnowyFlower(Block block, String name)

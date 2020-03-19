@@ -180,6 +180,12 @@ public class ItemsAether extends AbstractRegistrar
 
 	public static final Item moa_feather = getDefault();
 
+	public static final Item moa_feed = getDefault();
+
+	public static final Item moa_feed_blueberries = getDefault();
+
+	public static final Item moa_feed_enchanted_blueberries = getDefault();
+
 	public static final Item moa_music_disc = getDefault();
 
 	public static final Item orange = getDefault();
@@ -219,6 +225,8 @@ public class ItemsAether extends AbstractRegistrar
 	public static final Item skyroot_milk_bucket = getDefault();
 
 	public static final Item skyroot_pickaxe = getDefault();
+
+	public static final Item skyroot_pinecone = getDefault();
 
 	public static final Item skyroot_poison_bucket = getDefault();
 

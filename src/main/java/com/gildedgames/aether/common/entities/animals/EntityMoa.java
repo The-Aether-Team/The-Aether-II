@@ -25,6 +25,7 @@ import com.gildedgames.aether.common.entities.util.groups.EntityGroup;
 import com.gildedgames.aether.common.entities.util.groups.EntityGroupMember;
 import com.gildedgames.aether.common.items.other.ItemMoaEgg;
 import com.gildedgames.aether.common.items.other.ItemMoaFeather;
+import com.gildedgames.aether.common.items.other.ItemMoaFeed;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
 import com.gildedgames.orbis.lib.client.PartialTicks;
 import com.google.common.collect.Sets;
@@ -234,6 +235,23 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 
 		final ItemStack stack = player.getHeldItem(hand);
 
+		if (stack.getItem() instanceof ItemMoaFeed)
+		{
+			ItemMoaFeed moaFeed = (ItemMoaFeed) stack.getItem();
+
+			float healAmount = (float) moaFeed.getHealingAmount();
+
+			if (healAmount != 0)
+			{
+				this.heal(healAmount);
+
+				if (!player.capabilities.isCreativeMode)
+				{
+					stack.shrink(1);
+				}
+			}
+		}
+
 		if (this.isChild())
 		{
 			if (this.isHungry() && (stack.getItem() == ItemsAether.aechor_petal || stack.getItem() == ItemsAether.skyroot_lizard_stick))
@@ -242,11 +260,6 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 				this.setHealth(this.getMaxHealth());
 
 				this.setFoodEaten(this.getFoodEaten() + 1);
-
-				if (!player.capabilities.isCreativeMode)
-				{
-					stack.shrink(1);
-				}
 
 				return true;
 			}

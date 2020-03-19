@@ -1,0 +1,12 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "aether:skyroot_pinecone"
+    }
+  ],
+  "result": {
+    "item": "aether:moa_feed",
+    "count": 4
+  }
+}

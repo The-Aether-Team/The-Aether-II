@@ -1,0 +1,14 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "aether:moa_feed"
+    },
+    {
+      "item": "aether:blueberries"
+    }
+  ],
+  "result": {
+    "item": "aether:moa_feed_blueberries"
+  }
+}
