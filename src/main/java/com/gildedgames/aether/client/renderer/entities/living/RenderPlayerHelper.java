@@ -95,7 +95,7 @@ public class RenderPlayerHelper
         }
         else
         {
-            GlStateManager.translate(0.0F, -0.07F, 0.0F);
+            GlStateManager.translate(0.0F, 0.03F, 0.0F);
         }
 
         GlStateManager.disableCull();
