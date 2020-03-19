@@ -58,8 +58,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 {
 
 	private static final Set<Item> TEMPTATION_ITEMS = Sets
-			.newHashSet(Items.WHEAT, ItemsAether.blueberries, ItemsAether.orange, ItemsAether.enchanted_blueberry, ItemsAether.enchanted_wyndberry,
-					ItemsAether.wyndberry, ItemsAether.skyroot_lizard_stick);
+			.newHashSet(ItemsAether.blueberries, ItemsAether.skyroot_lizard_stick);
 
 	private static final DataParameter<Integer> REMAINING_JUMPS = EntityDataManager.createKey(EntityMoa.class, DataSerializers.VARINT);
 

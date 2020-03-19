@@ -36,8 +36,7 @@ import java.util.Set;
 public class EntityAerbunny extends EntityAetherAnimal
 {
     private static final Set<Item> TEMPTATION_ITEMS = Sets
-            .newHashSet(Items.CARROT, Items.POTATO, Items.BEETROOT, ItemsAether.blueberries, ItemsAether.orange, ItemsAether.enchanted_blueberry,
-                    ItemsAether.enchanted_wyndberry, ItemsAether.wyndberry);
+            .newHashSet(ItemsAether.blueberries);
 
     @SideOnly(Side.CLIENT)
     private double prevMotionY;
