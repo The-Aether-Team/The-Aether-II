@@ -12,8 +12,6 @@ public class ItemAetherFood extends ItemFood implements IDropOnDeath
 	public ItemAetherFood(int amount, boolean isWolfFood)
 	{
 		super(amount, isWolfFood);
-
-		this.setCreativeTab(CreativeTabsAether.TAB_CONSUMABLES);
 	}
 
 	public ItemAetherFood(int amount, float saturation, boolean isWolfFood)

@@ -37,7 +37,7 @@ public class ItemsAetherInit
 	public static void onRegisterItems(final RegistryEvent.Register<Item> event)
 	{
 		final ItemRegistryHelper r = new ItemRegistryHelper(event.getRegistry());
-		r.register("aechor_petal", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MISCELLANEOUS));
+		r.register("aechor_petal", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("aerwhale_music_disc", new ItemAetherRecord("aerwhale", "records.aerwhale"));
 		r.register("aether_saddle", new ItemDropOnDeath().setMaxStackSize(1).setCreativeTab(CreativeTabsAether.TAB_MISCELLANEOUS));
 		r.register("ambrosium_chunk", new ItemAmbrosiumChunk().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
@@ -63,8 +63,8 @@ public class ItemsAetherInit
 		r.register("arkenium_sword", new ItemArkeniumSword());
 			r.register("bandage", new ItemCurative(IAetherStatusEffects.effectTypes.BLEED, false, 32, EnumAction.DRINK)
 				.setCreativeTab(CreativeTabsAether.TAB_CONSUMABLES));
-		r.register("blueberries", new ItemAetherFood(1,0.2F,false).setConsumptionDuration(16));
-		r.register("blueberry_lollipop", new ItemAetherFood(5, 0.6F, false));
+		r.register("blueberries", new ItemAetherFood(1,0.2F,false).setConsumptionDuration(16).setCreativeTab(CreativeTabsAether.TAB_FOOD));
+		r.register("blueberry_lollipop", new ItemAetherFood(5, 0.6F, false).setCreativeTab(CreativeTabsAether.TAB_FOOD));
 		r.register("bolt", new ItemBolt().setCreativeTab(CreativeTabsAether.TAB_WEAPONS));
 		r.register("brettl_cane", new ItemBrettlCane().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("brettl_grass", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
@@ -74,22 +74,22 @@ public class ItemsAetherInit
 		r.register("burrukai_pelt_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.BURRUKAIPELT).setMaxDamage(60));
 		r.register("burrukai_pelt_helmet", new ItemBurrukaiPeltArmor(EntityEquipmentSlot.HEAD).pierceDefense(6));
 		r.register("burrukai_pelt_leggings", new ItemBurrukaiPeltArmor(EntityEquipmentSlot.LEGS).slashDefense(3).pierceDefense(9));
-		r.register("burrukai_rib_cut", new ItemAetherFood(4, 0.3F, true).setConsumptionDuration(40));
-		r.register("burrukai_ribs", new ItemAetherFood(9, 0.8F, true).setConsumptionDuration(40));
-		r.register("candy_cane", new ItemAetherFood(2, 0.1F, false).setConsumptionDuration(16).setCreativeTab(CreativeTabsAether.TAB_CONSUMABLES));
-		r.register("candy_corn", new ItemAetherFood(3, 0.1F, false).setConsumptionDuration(16));
+		r.register("burrukai_rib_cut", new ItemAetherFood(4, 0.3F, true).setConsumptionDuration(40).setCreativeTab(CreativeTabsAether.TAB_FOOD));
+		r.register("burrukai_ribs", new ItemAetherFood(9, 0.8F, true).setConsumptionDuration(40).setCreativeTab(CreativeTabsAether.TAB_FOOD));
+		r.register("candy_cane", new ItemAetherFood(2, 0.1F, false).setConsumptionDuration(16).setCreativeTab(CreativeTabsAether.TAB_FOOD));
+		r.register("candy_corn", new ItemAetherFood(3, 0.1F, false).setConsumptionDuration(16).setCreativeTab(CreativeTabsAether.TAB_FOOD));
 		r.register("cloud_parachute", new ItemCloudParachute().setCreativeTab(CreativeTabsAether.TAB_MISCELLANEOUS));
 		r.register("cloudtwine", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("cockatrice_feather", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
-		r.register("cocoatrice", new ItemAetherFood(4, 0.3F, false));
+		r.register("cocoatrice", new ItemAetherFood(4, 0.3F, false).setCreativeTab(CreativeTabsAether.TAB_FOOD));
 		r.register("crude_scatterglass_shard", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("dart", new ItemDart().setCreativeTab(CreativeTabsAether.TAB_WEAPONS));
 		r.register("dart_shooter", new ItemDartShooter().setCreativeTab(CreativeTabsAether.TAB_WEAPONS));
-		r.register("eggnog", new ItemEggnog().setCreativeTab(CreativeTabsAether.TAB_CONSUMABLES));
-		r.register("enchanted_blueberry", new ItemAetherFood(3, 0.6F, false).setConsumptionDuration(16));
-		r.register("enchanted_wyndberry", new ItemEnchantedWyndberry());
-		r.register("fried_moa_egg", new ItemFood(5, 0.3F,false).setCreativeTab(CreativeTabsAether.TAB_CONSUMABLES));
-		r.register("ginger_bread_man", new ItemAetherFood(3, 0.2F, false).setConsumptionDuration(24).setCreativeTab(CreativeTabsAether.TAB_CONSUMABLES));
+		r.register("eggnog", new ItemEggnog().setCreativeTab(CreativeTabsAether.TAB_FOOD));
+		r.register("enchanted_blueberry", new ItemAetherFood(3, 0.6F, false).setConsumptionDuration(16).setCreativeTab(CreativeTabsAether.TAB_FOOD));
+		r.register("enchanted_wyndberry", new ItemEnchantedWyndberry().setCreativeTab(CreativeTabsAether.TAB_FOOD));
+		r.register("fried_moa_egg", new ItemFood(5, 0.3F,false).setCreativeTab(CreativeTabsAether.TAB_FOOD));
+		r.register("ginger_bread_man", new ItemAetherFood(3, 0.2F, false).setConsumptionDuration(24).setCreativeTab(CreativeTabsAether.TAB_FOOD));
 		r.register("golden_amber", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("gravitite_axe", new ItemAetherAxe(MaterialsAether.GRAVITITE_TOOL));
 		r.register("gravitite_boots", new ItemGravititeArmor(EntityEquipmentSlot.FEET).slashDefense(4).impactDefense(12));
@@ -112,7 +112,7 @@ public class ItemsAetherInit
 		r.register("holystone_shovel", new ItemAetherShovel(MaterialsAether.HOLYSTONE_TOOL));
 		r.register("holystone_sword", new ItemHolystoneSword());
 		r.register("icestone", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
-		r.register("icestone_poprocks", new ItemAetherFood(2, 0.1F, false).setConsumptionDuration(16));
+		r.register("icestone_poprocks", new ItemAetherFood(2, 0.1F, false).setConsumptionDuration(16).setCreativeTab(CreativeTabsAether.TAB_FOOD));
 		r.register("irradiated_armor", new ItemIrradiatedVisuals().setMaxStackSize(1).setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("irradiated_charm", new ItemIrradiatedVisuals().setMaxStackSize(1).setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("irradiated_chunk", new ItemIrradiatedVisuals().setMaxStackSize(1).setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
@@ -121,19 +121,19 @@ public class ItemsAetherInit
 		r.register("irradiated_ring", new ItemIrradiatedVisuals().setMaxStackSize(1).setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("irradiated_sword", new ItemIrradiatedVisuals().setMaxStackSize(1).setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("irradiated_tool", new ItemIrradiatedVisuals().setMaxStackSize(1).setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
-		r.register("jelly_plumproot", new ItemAetherFood(6, 0.6F, false).setConsumptionDuration(32));
-		r.register("kirrid_cutlet", new ItemAetherFood(6, 0.8F, true));
-		r.register("kirrid_loin", new ItemAetherFood(2, 0.3F, true));
+		r.register("jelly_plumproot", new ItemAetherFood(6, 0.6F, false).setConsumptionDuration(32).setCreativeTab(CreativeTabsAether.TAB_FOOD));
+		r.register("kirrid_cutlet", new ItemAetherFood(6, 0.8F, true).setCreativeTab(CreativeTabsAether.TAB_FOOD));
+		r.register("kirrid_loin", new ItemAetherFood(2, 0.3F, true).setCreativeTab(CreativeTabsAether.TAB_FOOD));
 		r.register("labyrinth_music_disc", new ItemAetherRecord("labyrinth", "records.labyrinth"));
 		r.register("moa_egg_item", new ItemMoaEgg(false));
 		r.register("moa_feather", new ItemMoaFeather().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("moa_music_disc", new ItemAetherRecord("moa", "records.moa"));
-		r.register("orange", new ItemAetherFood(2, 0.3F, false).setConsumptionDuration(24));
-		r.register("orange_lollipop", new ItemAetherFood(7, 0.6F, false));
-		r.register("plumproot_mash", new ItemAetherFood(2, 0.2F, false).setConsumptionDuration(24));
-		r.register("plumproot_pie", new ItemAetherFood(7, 0.3F, false));
+		r.register("orange", new ItemAetherFood(2, 0.3F, false).setConsumptionDuration(24).setCreativeTab(CreativeTabsAether.TAB_FOOD));
+		r.register("orange_lollipop", new ItemAetherFood(7, 0.6F, false).setCreativeTab(CreativeTabsAether.TAB_FOOD));
+		r.register("plumproot_mash", new ItemAetherFood(2, 0.2F, false).setConsumptionDuration(24).setCreativeTab(CreativeTabsAether.TAB_FOOD));
+		r.register("plumproot_pie", new ItemAetherFood(7, 0.3F, false).setCreativeTab(CreativeTabsAether.TAB_FOOD));
 		r.register("rainbow_moa_egg", new ItemMoaEgg(true).setCreativeTab(CreativeTabsAether.TAB_MISCELLANEOUS));
-		r.register("raw_taegore_meat", new ItemAetherFood(3, 0.3F, true));
+		r.register("raw_taegore_meat", new ItemAetherFood(3, 0.3F, true).setCreativeTab(CreativeTabsAether.TAB_FOOD));
 		r.register("recording_892", new ItemAetherRecord("recording_892", "records.recording_892"));
 		r.register("scatterglass_vial", new ItemScatterglassVial().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("secret_skyroot_door_item", new ItemBlockCustomDoor(BlocksAether.secret_skyroot_door).setCreativeTab(CreativeTabsAether.TAB_DECORATIVE_BLOCKS));
@@ -143,9 +143,9 @@ public class ItemsAetherInit
 		r.register("skyroot_bucket", new ItemSkyrootBucket(Blocks.AIR));
 		r.register("skyroot_crossbow", new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(0.5F).setType(ItemCrossbow.crossBowTypes.SKYROOT));
 		r.register("skyroot_door_item", new ItemBlockCustomDoor(BlocksAether.skyroot_door).setCreativeTab(CreativeTabsAether.TAB_CONSTRUCTION));
-		r.register("skyroot_lizard_stick", new ItemAetherFood(2, 0.3F, false).setConsumptionDuration(16).setCreativeTab(CreativeTabsAether.TAB_CONSUMABLES));
+		r.register("skyroot_lizard_stick", new ItemAetherFood(2, 0.3F, false).setConsumptionDuration(16).setCreativeTab(CreativeTabsAether.TAB_FOOD));
 		r.register("skyroot_lizard_stick_roasted",
-				new ItemAetherFood(6, 0.6F, false).setConsumptionDuration(24).setCreativeTab(CreativeTabsAether.TAB_CONSUMABLES));
+				new ItemAetherFood(6, 0.6F, false).setConsumptionDuration(24).setCreativeTab(CreativeTabsAether.TAB_FOOD));
 		r.register("skyroot_milk_bucket", new ItemSkyrootConsumableBucket());
 		r.register("skyroot_pickaxe", new ItemAetherPickaxe(MaterialsAether.SKYROOT_TOOL));
 		r.register("skyroot_poison_bucket", new ItemSkyrootConsumableBucket());
@@ -157,9 +157,9 @@ public class ItemsAetherInit
 		r.register("skyroot_water_bucket", new ItemSkyrootBucket(Blocks.FLOWING_WATER));
 		r.register("splint", new ItemCurative(IAetherStatusEffects.effectTypes.FRACTURE,false, 32, EnumAction.DRINK)
 				.setCreativeTab(CreativeTabsAether.TAB_CONSUMABLES));
-		r.register("stomper_pop", new ItemStomperPop());
+		r.register("stomper_pop", new ItemStomperPop().setCreativeTab(CreativeTabsAether.TAB_FOOD));
 		r.register("swet_gel", new ItemSwetGel().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
-		r.register("swet_jelly", new ItemSwetJelly().setConsumptionDuration(24));
+		r.register("swet_jelly", new ItemSwetJelly().setConsumptionDuration(24).setCreativeTab(CreativeTabsAether.TAB_FOOD));
 		r.register("swet_sugar", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("taegore_hide", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("taegore_hide_boots", new ItemTaegoreHideArmor(EntityEquipmentSlot.FEET).slashDefense(1).impactDefense(3));
@@ -167,16 +167,16 @@ public class ItemsAetherInit
 		r.register("taegore_hide_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.TAEGOREHIDE).setMaxDamage(60));
 		r.register("taegore_hide_helmet", new ItemTaegoreHideArmor(EntityEquipmentSlot.HEAD).pierceDefense(4));
 		r.register("taegore_hide_leggings", new ItemTaegoreHideArmor(EntityEquipmentSlot.LEGS).slashDefense(2).pierceDefense(6));
-		r.register("taegore_steak", new ItemAetherFood(8, 0.8F, true));
+		r.register("taegore_steak", new ItemAetherFood(8, 0.8F, true).setCreativeTab(CreativeTabsAether.TAB_FOOD));
 		r.register("valkyrie_music_disc", new ItemAetherRecord("valkyrie", "records.valkyrie"));
 		r.register("valkyrie_wings", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("valkyrie_tea", new ItemTea(IAetherStatusEffects.effectTypes.SATURATION_BOOST, true).setCreativeTab(CreativeTabsAether.TAB_CONSUMABLES));
 		r.register("water_vial", new ItemWaterVial().setCreativeTab(CreativeTabsAether.TAB_CONSUMABLES));
 		r.register("winter_hat", new ItemWinterHat().setCreativeTab(CreativeTabsAether.TAB_MISCELLANEOUS));
-		r.register("wrapped_chocolates", new ItemAetherFood(4, 0.3F, false));
+		r.register("wrapped_chocolates", new ItemAetherFood(4, 0.3F, false).setCreativeTab(CreativeTabsAether.TAB_FOOD));
 		r.register("wrapping_paper", new ItemWrappingPaper().setCreativeTab(CreativeTabsAether.TAB_MISCELLANEOUS));
-		r.register("wyndberry", new ItemAetherFood(3, 0.3F, false));
-		r.register("yule_log", new ItemAetherFood(8, 0.6F, false).setConsumptionDuration(40).setCreativeTab(CreativeTabsAether.TAB_CONSUMABLES));
+		r.register("wyndberry", new ItemAetherFood(3, 0.3F, false).setCreativeTab(CreativeTabsAether.TAB_FOOD));
+		r.register("yule_log", new ItemAetherFood(8, 0.6F, false).setConsumptionDuration(40).setCreativeTab(CreativeTabsAether.TAB_FOOD));
 		r.register("zanite_axe", new ItemAetherAxe(MaterialsAether.ZANITE_TOOL));
 		r.register("zanite_boots", new ItemZaniteArmor(EntityEquipmentSlot.FEET).slashDefense(2).impactDefense(6));
 		r.register("zanite_chestplate", new ItemZaniteArmor(EntityEquipmentSlot.CHEST).slashDefense(12).impactDefense(10));

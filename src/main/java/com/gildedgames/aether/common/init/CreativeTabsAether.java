@@ -52,15 +52,6 @@ public class CreativeTabsAether
 		}
 	};
 
-	public static final CreativeTabs TAB_MISCELLANEOUS = new CreativeTabsMisc("aether.miscellaneous")
-	{
-		@Override
-		public ItemStack createIcon()
-		{
-			return new ItemStack(ItemsAether.skyroot_poison_bucket);
-		}
-	};
-
 	public static final CreativeTabs TAB_MATERIALS = new CreativeTabs("aether.materials")
 	{
 		@Override
@@ -70,12 +61,21 @@ public class CreativeTabsAether
 		}
 	};
 
-	public static final CreativeTabs TAB_CONSUMABLES = new CreativeTabs("aether.consumables")
+	public static final CreativeTabs TAB_FOOD = new CreativeTabs("aether.food")
 	{
 		@Override
 		public ItemStack createIcon()
 		{
 			return new ItemStack(ItemsAether.orange);
+		}
+	};
+
+	public static final CreativeTabs TAB_CONSUMABLES = new CreativeTabs("aether.consumables")
+	{
+		@Override
+		public ItemStack createIcon()
+		{
+			return new ItemStack(ItemsAether.healing_stone);
 		}
 	};
 
@@ -103,6 +103,15 @@ public class CreativeTabsAether
 		public ItemStack createIcon()
 		{
 			return new ItemStack(ItemsAether.zanite_helmet);
+		}
+	};
+
+	public static final CreativeTabs TAB_MISCELLANEOUS = new CreativeTabsMisc("aether.miscellaneous")
+	{
+		@Override
+		public ItemStack createIcon()
+		{
+			return new ItemStack(ItemsAether.skyroot_poison_bucket);
 		}
 	};
 
