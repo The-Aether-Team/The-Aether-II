@@ -29,9 +29,6 @@ public class TileEntityMoaEggRenderer extends TileEntitySpecialRenderer<TileEnti
 			return;
 		}
 
-		final ResourceLocation BACK_MARKING = genePool.getMarks().gene().getEggBack();
-		final ResourceLocation HEAD_MARKING = genePool.getMarks().gene().getEggHead();
-
 		GL11.glPushMatrix();
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 
@@ -51,14 +48,6 @@ public class TileEntityMoaEggRenderer extends TileEntitySpecialRenderer<TileEnti
 		this.model.renderAll(0.0625F);
 
 		this.renderColor(genePool.getFeathers().gene().data().darker().getRGB());
-
-		this.bindTexture(HEAD_MARKING);
-
-		this.model.renderAll(0.0625F);
-
-		this.bindTexture(BACK_MARKING);
-
-		this.model.renderAll(0.0625F);
 
 		GL11.glPopMatrix();
 
