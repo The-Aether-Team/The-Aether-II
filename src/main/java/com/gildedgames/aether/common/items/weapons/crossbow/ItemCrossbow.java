@@ -115,6 +115,16 @@ public class ItemCrossbow extends Item
 			}
 		});
 
+		this.addPropertyOverride(new ResourceLocation("ready"), new IItemPropertyGetter()
+		{
+			@Override
+			@SideOnly(Side.CLIENT)
+			public float apply(final ItemStack stack, @Nullable final World worldIn, @Nullable final EntityLivingBase entityIn)
+			{
+				return entityIn != null && ItemCrossbow.this.finishedLoading ? 1.0F : 0.0F;
+			}
+		});
+
 		this.addPropertyOverride(new ResourceLocation("charged"), new IItemPropertyGetter()
 		{
 			@Override
@@ -451,6 +461,8 @@ public class ItemCrossbow extends Item
 			final EntityPlayer player = (EntityPlayer) entityLiving;
 			final ItemStack boltStack = findAmmo(player);
 
+			this.finishedLoading = false;
+
 			if (this.hasAmmo(player))
 			{
 				if (!entityLiving.getEntityWorld().isRemote)
@@ -481,6 +493,11 @@ public class ItemCrossbow extends Item
 					if (use >= (duration / 20.0F))
 					{
 						ItemCrossbow.setLoaded(stack, true);
+
+						final World world = entityLiving.world;
+
+						world.playSound(null, entityLiving.posX, entityLiving.posY, entityLiving.posZ, SoundEvents.BLOCK_WOOD_BUTTON_CLICK_OFF, SoundCategory.NEUTRAL, 1.0F,
+								1.0F / (itemRand.nextFloat() * 0.4F + 1.2F));
 
 						if (!player.capabilities.isCreativeMode)
 						{

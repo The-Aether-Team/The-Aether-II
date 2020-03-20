@@ -52,6 +52,15 @@
 		},
 		{
 			"predicate": {
+				"pulling": 1.0,
+				"pull": 1.0,
+				"ready": 1.0,
+				"charged": 0.0
+			},
+			"model": "aether:item/crossbow/holystone/ready"
+		},
+		{
+			"predicate": {
 				"charged": 1.0
 			},
 			"model": "aether:item/crossbow/holystone/loaded"

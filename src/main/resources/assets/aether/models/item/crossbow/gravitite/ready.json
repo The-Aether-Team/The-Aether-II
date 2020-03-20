@@ -1,0 +1,6 @@
+{
+  "parent": "aether:item/crossbow/gravitite_crossbow",
+  "textures": {
+    "layer0": "aether:items/weapons/crossbow/gravitite/loading3"
+  }
+}

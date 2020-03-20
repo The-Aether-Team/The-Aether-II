@@ -1,0 +1,6 @@
+{
+  "parent": "aether:item/crossbow/skyroot_crossbow",
+  "textures": {
+    "layer0": "aether:items/weapons/crossbow/skyroot/loading3"
+  }
+}
