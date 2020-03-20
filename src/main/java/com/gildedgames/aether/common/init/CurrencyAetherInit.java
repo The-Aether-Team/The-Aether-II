@@ -129,6 +129,7 @@ public class CurrencyAetherInit
 		c.registerValue(new ItemStack(ItemsAether.skyroot_lizard_stick, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(5).flush(), ShopCurrencyGilt.class);
 		c.registerValue(new ItemStack(ItemsAether.moa_egg_item, 1, OreDictionary.WILDCARD_VALUE), builder.giltae(1).flush(), ShopCurrencyGilt.class);
 		c.registerValue(new ItemStack(ItemsAether.aechor_petal, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(7).flush(), ShopCurrencyGilt.class);
+		c.registerValue(new ItemStack(ItemsAether.skyroot_pinecone, 1, OreDictionary.WILDCARD_VALUE), builder.gilt(1).flush(), ShopCurrencyGilt.class);
 
 		for (Block block : BlocksAetherInit.getRegisteredBlocks())
 		{
