@@ -9,6 +9,7 @@ import com.gildedgames.aether.common.AetherCore;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
+import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -254,54 +255,62 @@ public class EntityUtil
 		return state;
 	}
 
-	@SideOnly(Side.CLIENT)
 	public static void spawnEffectParticles(final EntityLivingBase entity, final IAetherStatusEffects.effectTypes effect)
 	{
 		IAetherStatusEffectPool statusEffectPool = entity.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
 
-		if (statusEffectPool != null)
+		if (!entity.world.isRemote)
 		{
-			if (effect != null)
+			if (statusEffectPool != null)
 			{
-				float r = 0, g = 0, b = 0;
-				r = EffectSystemOverlay.Color.getColorFromEffect(effect).r / 255.F;
-				g = EffectSystemOverlay.Color.getColorFromEffect(effect).g / 255.F;
-				b = EffectSystemOverlay.Color.getColorFromEffect(effect).b / 255.F;
-
-				final double x = entity.posX;
-				final double y = (entity.getEntityBoundingBox().maxY - entity.getEntityBoundingBox().minY) / 2 + entity.getEntityBoundingBox().minY;
-				final double z = entity.posZ;
-
-				for (int i = 0; i < 2; i++)
+				if (effect != null)
 				{
-					final double radius = 0.4;
+					float r = 0, g = 0, b = 0;
+					r = EffectSystemOverlay.Color.getColorFromEffect(effect).r / 255.F;
+					g = EffectSystemOverlay.Color.getColorFromEffect(effect).g / 255.F;
+					b = EffectSystemOverlay.Color.getColorFromEffect(effect).b / 255.F;
 
-					final double randX = entity.getRNG().nextDouble() * (entity.getRNG().nextBoolean() ? 1.0 : -1.0) * radius;
-					final double randY = entity.getRNG().nextDouble() * (entity.getRNG().nextBoolean() ? 1.0 : -1.0) * (entity.getEntityBoundingBox().maxY - entity.getEntityBoundingBox().minY);
-					final double randZ = entity.getRNG().nextDouble() * (entity.getRNG().nextBoolean() ? 1.0 : -1.0) * radius;
+					final double x = entity.posX;
+					final double y = (entity.getEntityBoundingBox().maxY - entity.getEntityBoundingBox().minY) / 2 + entity.getEntityBoundingBox().minY;
+					final double z = entity.posZ;
 
-					final double randMotionY = entity.getRNG().nextInt(5);
+					for (int i = 0; i < 2; i++)
+					{
+						final double radius = 0.4;
 
-					//if (entity.world.isRemote)
-					//{
-					//	spawnEffectParticlesClient(entity.world, x + randX, y + randY, z + randZ,
-					//			0, randMotionY == 0 ? 0.1 : randMotionY / 50, 0, r, g, b);
-					//}
-					//else
-					//{
-						AetherCore.PROXY.spawnEffectParticles(Minecraft.getMinecraft().world, x + randX, y + randY, z + randZ,
-								0, randMotionY == 0 ? 0.1 : randMotionY / 50, 0, r, g, b);
-					//}
+						final double randX = entity.getRNG().nextDouble() * (entity.getRNG().nextBoolean() ? 1.0 : -1.0) * radius;
+						final double randY = entity.getRNG().nextDouble() * (entity.getRNG().nextBoolean() ? 1.0 : -1.0) * (entity.getEntityBoundingBox().maxY - entity.getEntityBoundingBox().minY);
+						final double randZ = entity.getRNG().nextDouble() * (entity.getRNG().nextBoolean() ? 1.0 : -1.0) * radius;
+
+						final double randMotionY = entity.getRNG().nextInt(5);
+
+						//if (entity.world.isRemote)
+						//{
+							AetherCore.PROXY.spawnEffectParticles(x + randX, y + randY, z + randZ,
+									0, randMotionY == 0 ? 0.1 : randMotionY / 50, 0, r, g, b);
+						//}
+						//else if (entity.world instanceof WorldServer)
+						//{
+						//	final WorldServer worldServer = (WorldServer) entity.world;
+//
+						//	AetherCore.PROXY.spawnEffectParticles(worldServer, x + randX, y + randY, z + randZ,
+						//			0, randMotionY == 0 ? 0.1 : randMotionY / 50, 0, r, g, b);
+						//}
+
+
+						//if (entity.world.isRemote)
+						//{
+						//	spawnEffectParticlesClient(entity.world, x + randX, y + randY, z + randZ,
+						//			0, randMotionY == 0 ? 0.1 : randMotionY / 50, 0, r, g, b);
+						//}
+						//else
+						//{
+						//	AetherCore.PROXY.spawnEffectParticles(Minecraft.getMinecraft().world, x + randX, y + randY, z + randZ,
+						//			0, randMotionY == 0 ? 0.1 : randMotionY / 50, 0, r, g, b);
+						//}
+					}
 				}
 			}
 		}
-	}
-
-	@SideOnly(Side.CLIENT)
-	private static void spawnEffectParticlesClient(
-			final World world, final double x, final double y, final double z, final double motionX, final double motionY, final double motionZ,
-			final float particleRed, final float particleGreen, final float particleBlue)
-	{
-		AetherCore.PROXY.spawnEffectParticles(world, x, y, z, motionX, motionY, motionZ, particleRed, particleGreen, particleBlue);
 	}
 }

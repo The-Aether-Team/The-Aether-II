@@ -61,11 +61,10 @@ public class ClientProxy extends CommonProxy
 	}
 
 	@Override
-	public void spawnEffectParticles(
-			final World world, final double x, final double y, final double z, final double motionX, final double motionY, final double motionZ,
+	public void spawnEffectParticles(final double x, final double y, final double z, final double motionX, final double motionY, final double motionZ,
 			final float particleRed, final float particleGreen, final float particleBlue)
 	{
-		final ParticleAetherStatusEffect particle = new ParticleAetherStatusEffect(world, x, y, z, motionX, motionY, motionZ, particleRed, particleGreen, particleBlue);
+		final ParticleAetherStatusEffect particle = new ParticleAetherStatusEffect(Minecraft.getMinecraft().world, x, y, z, motionX, motionY, motionZ, particleRed, particleGreen, particleBlue);
 
 		Minecraft.getMinecraft().effectRenderer.addEffect(particle);
 	}

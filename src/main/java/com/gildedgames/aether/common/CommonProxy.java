@@ -149,8 +149,7 @@ public class CommonProxy implements IAetherServices
 
 	}
 
-	public void spawnEffectParticles(
-			World world, double posXIn, double posYIn, double posZIn, double motionX, double motionY, double motionZ, float particleRed, float particleGreen, float particleBlue)
+	public void spawnEffectParticles(double posXIn, double posYIn, double posZIn, double motionX, double motionY, double motionZ, float particleRed, float particleGreen, float particleBlue)
 	{
 
 	}
