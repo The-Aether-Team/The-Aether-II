@@ -1,4 +1,4 @@
-package com.gildedgames.aether.client.events.listeners;
+package com.gildedgames.aether.client.events.listeners.sound;
 
 import com.gildedgames.aether.common.util.helpers.AetherHelper;
 import net.minecraft.client.Minecraft;

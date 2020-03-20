@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectPool;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
+import com.gildedgames.aether.common.items.IUsesCustomSound;
 import com.gildedgames.aether.common.items.ItemDropOnDeath;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.resources.I18n;
@@ -12,12 +13,14 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -27,7 +30,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
 
-public class ItemCurative extends ItemDropOnDeath
+public class ItemCurative extends ItemDropOnDeath implements IUsesCustomSound
 {
     private IAetherStatusEffects.effectTypes effect;
     private boolean returnItem;
@@ -169,4 +172,26 @@ public class ItemCurative extends ItemDropOnDeath
         return this.action;
     }
 
+    @Override
+    public boolean usesCustomSound(ItemStack stack)
+    {
+        if (stack.getItem() == ItemsAether.bandage || stack.getItem() == ItemsAether.splint)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public SoundEvent getDefaultSound()
+    {
+        return SoundEvents.ENTITY_GENERIC_DRINK;
+    }
+
+    @Override
+    public SoundEvent getCustomSound()
+    {
+        return null;
+    }
 }

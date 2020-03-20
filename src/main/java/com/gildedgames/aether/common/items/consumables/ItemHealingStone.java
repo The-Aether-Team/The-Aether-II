@@ -5,19 +5,18 @@ import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.items.IDropOnDeath;
+import com.gildedgames.aether.common.items.IUsesCustomSound;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 
-public class ItemHealingStone extends Item implements IDropOnDeath
+public class ItemHealingStone extends Item implements IDropOnDeath, IUsesCustomSound
 {
 
 	public static final int MAX_USES = 5;
@@ -164,4 +163,21 @@ public class ItemHealingStone extends Item implements IDropOnDeath
 		return true;
 	}
 
+	@Override
+	public boolean usesCustomSound(ItemStack stack)
+	{
+		return true;
+	}
+
+	@Override
+	public SoundEvent getDefaultSound()
+	{
+		return SoundEvents.ENTITY_GENERIC_DRINK;
+	}
+
+	@Override
+	public SoundEvent getCustomSound()
+	{
+		return null;
+	}
 }
