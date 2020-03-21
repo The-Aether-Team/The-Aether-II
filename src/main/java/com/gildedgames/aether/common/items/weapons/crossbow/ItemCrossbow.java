@@ -195,7 +195,18 @@ public class ItemCrossbow extends Item
 	{
 		final ItemStack boltStack = this.findAmmo(player);
 
-		return this.isBolt(boltStack) && boltStack.getCount() > 0;
+		boolean hasBolts = boltStack.getCount() >= 1;
+
+		if (this.cBType == crossBowTypes.SKYROOT && player.isSneaking())
+		{
+			hasBolts = boltStack.getCount() >= 2;
+		}
+		else if (this.cBType == crossBowTypes.HOLYSTONE && player.isSneaking())
+		{
+			hasBolts = boltStack.getCount() >= 3;
+		}
+
+		return this.isBolt(boltStack) && hasBolts;
 	}
 
 	private boolean isBolt(ItemStack stack)
