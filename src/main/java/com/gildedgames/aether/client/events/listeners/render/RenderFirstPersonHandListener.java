@@ -16,13 +16,6 @@ public class RenderFirstPersonHandListener
 	@SubscribeEvent
 	public static void onRenderSpecificHandEvent(RenderSpecificHandEvent event)
 	{
-		if (event.getHand() == EnumHand.MAIN_HAND && event.getItemStack().isEmpty())
-		{
-			GlStateManager.pushMatrix();
-
-			RenderPlayerHelper.renderFirstPersonHand(event, PlayerAether.getPlayer(Minecraft.getMinecraft().player));
-
-			GlStateManager.popMatrix();
-		}
+		RenderPlayerHelper.renderItemFirstPerson(Minecraft.getMinecraft().player, event.getPartialTicks(), event.getInterpolatedPitch(), event.getHand(), event.getSwingProgress(), event.getItemStack(), event.getEquipProgress());
 	}
 }

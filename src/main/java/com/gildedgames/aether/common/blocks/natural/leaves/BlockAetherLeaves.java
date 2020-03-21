@@ -53,7 +53,7 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 	@Override
 	public boolean isOpaqueCube(IBlockState state)
 	{
-		return !Minecraft.getMinecraft().gameSettings.fancyGraphics;
+		return false;
 	}
 
 	@Override
