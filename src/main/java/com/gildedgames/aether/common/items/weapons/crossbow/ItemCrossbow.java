@@ -7,9 +7,6 @@ import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.SoundEvents;
@@ -28,15 +25,13 @@ import java.util.List;
 
 public class ItemCrossbow extends Item
 {
-	private static final AttributeModifier CROSSBOW_SPECIAL = new AttributeModifier("aether.statusLoadingCrossbowSpecial", -1.0D, 1);
-
 	private float durationInTicks;
 
 	private float knockBackValue;
 
 	private crossBowTypes cBType;
 
-	private boolean isSpecialLoaded = false;
+	private boolean isSpecialLoaded;
 
 	private boolean finishedLoading = false;
 
@@ -46,6 +41,8 @@ public class ItemCrossbow extends Item
 
 		this.knockBackValue = 0;
 		this.durationInTicks = 20.0F;
+
+		this.isSpecialLoaded = false;
 
 		this.setCreativeTab(CreativeTabsAether.TAB_WEAPONS);
 
@@ -410,7 +407,6 @@ public class ItemCrossbow extends Item
 				{
 					final float use = (float) (this.getMaxItemUseDuration(stack) - living.getItemInUseCount()) / 20.0F;
 					float duration;
-					IAttributeInstance iAttributeInstance = living.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
 
 					if (use == 0)
 					{
@@ -425,23 +421,10 @@ public class ItemCrossbow extends Item
 					if (this.isSpecialLoaded)
 					{
 						duration = getDurationInTicks() * 2;
-
-						if (iAttributeInstance != null && !iAttributeInstance.hasModifier(CROSSBOW_SPECIAL))
-						{
-							iAttributeInstance.applyModifier(CROSSBOW_SPECIAL);
-						}
 					}
 					else
 					{
 						duration = getDurationInTicks();
-					}
-
-					if (!this.isSpecialLoaded || !player.isSneaking())
-					{
-						if (iAttributeInstance != null && iAttributeInstance.getModifier(CROSSBOW_SPECIAL.getID()) != null)
-						{
-							iAttributeInstance.removeModifier(CROSSBOW_SPECIAL);
-						}
 					}
 
 					if (use >= (duration / 20.0F))
@@ -469,12 +452,6 @@ public class ItemCrossbow extends Item
 				{
 					final float use = (float) (this.getMaxItemUseDuration(stack) - entityLiving.getItemInUseCount()) / 20.0F;
 					float duration;
-					IAttributeInstance iAttributeInstance = entityLiving.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
-
-					if (iAttributeInstance != null && iAttributeInstance.getModifier(CROSSBOW_SPECIAL.getID()) != null)
-					{
-						iAttributeInstance.removeModifier(CROSSBOW_SPECIAL);
-					}
 
 					if (!player.isSneaking())
 					{

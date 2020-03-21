@@ -38,7 +38,7 @@ public class FOVUpdateListener
             }
         }
 
-        Item item = player.getHeldItemMainhand().getItem();
+        Item item = player.getActiveItemStack().getItem();
 
         if (item instanceof ItemCrossbow)
         {
