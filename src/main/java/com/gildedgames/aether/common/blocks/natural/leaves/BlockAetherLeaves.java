@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.client.renderer.particles.ParticleGolden;
 import com.gildedgames.aether.client.renderer.particles.ParticleLeaf;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.natural.plants.saplings.BlockAetherUniqueSapling;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
@@ -50,9 +51,9 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 	}
 
 	@Override
-	public boolean isOpaqueCube(final IBlockState state)
+	public boolean isOpaqueCube(IBlockState state)
 	{
-		return false;
+		return !Minecraft.getMinecraft().gameSettings.fancyGraphics;
 	}
 
 	@Override
@@ -302,9 +303,16 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 
 	@Override
 	@SideOnly(Side.CLIENT)
+	public void setGraphicsLevel(boolean fancy)
+	{
+		this.leavesFancy = Minecraft.getMinecraft().gameSettings.fancyGraphics;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getRenderLayer()
 	{
-		return BlockRenderLayer.CUTOUT_MIPPED;
+		return Minecraft.getMinecraft().gameSettings.fancyGraphics ? BlockRenderLayer.CUTOUT_MIPPED : BlockRenderLayer.SOLID;
 	}
 
 	@Override
@@ -333,7 +341,7 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(final IBlockState blockState, final IBlockAccess blockAccess, final BlockPos pos, final EnumFacing side)
 	{
-		return this.superShouldSideBeRendered(blockState, blockAccess, pos, side);
+		return (Minecraft.getMinecraft().gameSettings.fancyGraphics || blockAccess.getBlockState(pos.offset(side)).getBlock() != this) && this.superShouldSideBeRendered(blockState, blockAccess, pos, side);
 	}
 
 	@SideOnly(Side.CLIENT)
