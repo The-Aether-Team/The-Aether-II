@@ -425,7 +425,7 @@ public class BlockAetherLeaves extends BlockLeaves implements IShearable
 			}
 		}
 
-		if (rand.nextInt(200) == 0)
+		if (rand.nextInt(100) == 0)
 		{
 			ItemStack stack = this.getPinecone();
 
