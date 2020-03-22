@@ -6,13 +6,20 @@ import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerPa
 import com.gildedgames.aether.common.init.CreativeTabsAether;
 import com.gildedgames.aether.common.patron.armor.PatronRewardArmor;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 public class ItemAetherGloves extends Item
 {
@@ -44,6 +51,28 @@ public class ItemAetherGloves extends Item
 		}
 
 		return slim ? this.gloveType.getTextureSlim() : this.gloveType.getTexture();
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(final ItemStack stack, final World world, final List<String> tooltip, final ITooltipFlag flag)
+	{
+		tooltip.add("");
+
+		tooltip.add(TextFormatting.GRAY + I18n.format("item.aether.tooltip.modifiers.gloves"));
+
+		if (getSlashDamageLevel() > 0)
+		{
+			tooltip.add(TextFormatting.BLUE + "+" + getSlashDamageLevel() + " " + I18n.format("attribute.name.aether.slashDamageLevel"));
+		}
+		if (getPierceDamageLevel() > 0)
+		{
+			tooltip.add(TextFormatting.BLUE + "+" + getPierceDamageLevel() + " " + I18n.format("attribute.name.aether.pierceDamageLevel"));
+		}
+		if (getImpactDamageLevel() > 0)
+		{
+			tooltip.add(TextFormatting.BLUE + "+" + getImpactDamageLevel() + " " + I18n.format("attribute.name.aether.impactDamageLevel"));
+		}
 	}
 
 	public SoundEvent getGloveSound()

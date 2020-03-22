@@ -679,6 +679,7 @@ item.aether.tool.gravitite.use.desc=Sneak & Use
 item.aether.tool.valkyrie.ability.desc=Extended Reach
 
 # Tooltips
+item.aether.tooltip.modifiers.gloves=When on hands:
 item.aether.tooltip.ability=Ability
 item.aether.tooltip.use=Use
 item.aether.tooltip.cures=Cures
