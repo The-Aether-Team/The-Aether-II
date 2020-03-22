@@ -61,17 +61,17 @@ public class ItemAetherGloves extends Item
 
 		tooltip.add(TextFormatting.GRAY + I18n.format("item.aether.tooltip.modifiers.gloves"));
 
-		if (getSlashDamageLevel() > 0)
+		if (getImpactDamageLevel() > 0)
 		{
-			tooltip.add(TextFormatting.BLUE + "+" + getSlashDamageLevel() + " " + I18n.format("attribute.name.aether.slashDamageLevel"));
+			tooltip.add(TextFormatting.BLUE + "+" + getImpactDamageLevel() + " " + I18n.format("attribute.name.aether.impactDamageLevel"));
 		}
 		if (getPierceDamageLevel() > 0)
 		{
 			tooltip.add(TextFormatting.BLUE + "+" + getPierceDamageLevel() + " " + I18n.format("attribute.name.aether.pierceDamageLevel"));
 		}
-		if (getImpactDamageLevel() > 0)
+		if (getSlashDamageLevel() > 0)
 		{
-			tooltip.add(TextFormatting.BLUE + "+" + getImpactDamageLevel() + " " + I18n.format("attribute.name.aether.impactDamageLevel"));
+			tooltip.add(TextFormatting.BLUE + "+" + getSlashDamageLevel() + " " + I18n.format("attribute.name.aether.slashDamageLevel"));
 		}
 	}
 

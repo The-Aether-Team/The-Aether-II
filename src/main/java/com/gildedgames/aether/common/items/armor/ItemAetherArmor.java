@@ -55,6 +55,21 @@ public class ItemAetherArmor extends ItemArmor
 		return (T) this;
 	}
 
+	public int getSlashLevel()
+	{
+		return this.slashLevel;
+	}
+
+	public int getPierceLevel()
+	{
+		return this.pierceLevel;
+	}
+
+	public int getImpactLevel()
+	{
+		return this.impactLevel;
+	}
+
 	@Override
 	public boolean getIsRepairable(final ItemStack target, final ItemStack stack)
 	{

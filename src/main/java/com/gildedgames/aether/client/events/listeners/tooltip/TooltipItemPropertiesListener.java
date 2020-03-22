@@ -9,6 +9,7 @@ import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 import com.gildedgames.aether.api.items.properties.IItemProperties;
 import com.gildedgames.aether.api.items.properties.ItemRarity;
 import com.gildedgames.aether.client.gui.util.ToolTipCurrencyHelper;
+import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
 import com.gildedgames.aether.common.shop.ShopCurrencyGilt;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -21,6 +22,7 @@ import net.minecraftforge.fml.relauncher.Side;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.Optional;
 
 @Mod.EventBusSubscriber(Side.CLIENT)
@@ -35,6 +37,27 @@ public class TooltipItemPropertiesListener
 		final IItemProperties properties = AetherAPI.content().items().getProperties(event.getItemStack().getItem());
 
 		final double value = AetherAPI.content().currency().getValue(event.getItemStack(), ShopCurrencyGilt.class);
+
+		// Armor Effects
+		if (event.getItemStack().getItem() instanceof ItemAetherArmor)
+		{
+			ItemAetherArmor aetherArmor = (ItemAetherArmor) event.getItemStack().getItem();
+
+			event.getToolTip().removeIf(tooltip -> tooltip.contains("Slash") || tooltip.contains("Pierce") || tooltip.contains("Impact"));
+
+			if (aetherArmor.getImpactLevel() > 0)
+			{
+				event.getToolTip().add(TextFormatting.BLUE + " +" + aetherArmor.getImpactLevel() + " " + I18n.format("attribute.name.aether.impactDefenseLevel"));
+			}
+			if (aetherArmor.getPierceLevel() > 0)
+			{
+				event.getToolTip().add(TextFormatting.BLUE + " +" + aetherArmor.getPierceLevel() + " " + I18n.format("attribute.name.aether.pierceDefenseLevel"));
+			}
+			if (aetherArmor.getSlashLevel() > 0)
+			{
+				event.getToolTip().add(TextFormatting.BLUE + " +" + aetherArmor.getSlashLevel() + " " + I18n.format("attribute.name.aether.slashDefenseLevel"));
+			}
+		}
 
 		// Equipment Effects
 		for (final IEffectProvider provider : properties.getEffectProviders())
@@ -55,12 +78,11 @@ public class TooltipItemPropertiesListener
 			factory.createInstance(pool).addInformation(event.getToolTip(), textFormatting1, textFormatting2);
 		}
 
-		// Equipment Properties
+		// Slot Type
 		if (properties.getEquipmentSlot() != ItemEquipmentSlot.NONE)
 		{
 			final ItemEquipmentSlot slot = properties.getEquipmentSlot();
 
-			// Slot Type
 			event.getToolTip().add("");
 			event.getToolTip().add(I18n.format(slot.getUnlocalizedName()));
 		}
