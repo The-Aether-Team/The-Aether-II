@@ -98,7 +98,7 @@ public class PotionEffectFactory implements IEffectFactory<PotionEffectFactory.P
 		}
 
 		@Override
-		public void addInformation(Collection<String> label)
+		public void addInformation(Collection<String> label, TextFormatting format1, TextFormatting format2)
 		{
 			this.potions.stream()
 					.map(provider -> provider.potion.getName())

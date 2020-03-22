@@ -1,6 +1,7 @@
 package com.gildedgames.aether.api.items.equipment.effects;
 
 import com.gildedgames.aether.api.player.IPlayerAether;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -51,5 +52,5 @@ public abstract class EffectInstance
 	 * @param label The {@link Collection} to add to
 	 */
 	@SideOnly(Side.CLIENT)
-	public abstract void addInformation(Collection<String> label);
+	public abstract void addInformation(Collection<String> label, TextFormatting format1, TextFormatting format2);
 }

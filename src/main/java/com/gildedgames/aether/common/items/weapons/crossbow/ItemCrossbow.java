@@ -574,14 +574,16 @@ public class ItemCrossbow extends Item
 
 		tooltip.add("");
 
+		tooltip.add(TextFormatting.GRAY + I18n.format("item.modifiers.mainhand"));
+
 		if (seconds == Math.floor(seconds))
 		{
-			tooltip.add(TextFormatting.GRAY + "" + (int) Math.floor(seconds) + " " + I18n.format(
+			tooltip.add(TextFormatting.GRAY + " " + (int) Math.floor(seconds) + " " + I18n.format(
 					"item.aether.crossbow.desc3") + I18n.format("item.aether.crossbow.desc1"));
 		}
 		else
 		{
-			tooltip.add(TextFormatting.GRAY + "" + seconds + " " + I18n.format(
+			tooltip.add(TextFormatting.GRAY + " " + seconds + " " + I18n.format(
 					"item.aether.crossbow.desc3") + I18n.format("item.aether.crossbow.desc1"));
 		}
 	}

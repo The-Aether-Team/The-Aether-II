@@ -78,7 +78,7 @@ public class RegenerationEffectFactory implements IEffectFactory<RegenerationEff
 		}
 
 		@Override
-		public void addInformation(Collection<String> label)
+		public void addInformation(Collection<String> label, TextFormatting format1, TextFormatting format2)
 		{
 			label.add(TextFormatting.RED.toString() + TextFormatting.ITALIC.toString() +
 					"+" + FORMATTER.format(this.healAmount) + " Regeneration per Second");

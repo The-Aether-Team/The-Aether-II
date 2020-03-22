@@ -52,7 +52,7 @@ public class FireImmunityEffectFactory implements IEffectFactory<FireImmunityEff
 		}
 
 		@Override
-		public void addInformation(Collection<String> label)
+		public void addInformation(Collection<String> label, TextFormatting format1, TextFormatting format2)
 		{
 			label.add(TextFormatting.RED.toString() + TextFormatting.ITALIC.toString() + "Fire Immunity");
 		}

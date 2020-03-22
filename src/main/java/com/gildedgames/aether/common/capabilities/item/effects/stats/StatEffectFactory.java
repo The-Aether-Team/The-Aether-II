@@ -92,7 +92,7 @@ public class StatEffectFactory implements IEffectFactory<StatEffectFactory.StatP
 		}
 
 		@Override
-		public void addInformation(Collection<String> label)
+		public void addInformation(Collection<String> label, TextFormatting format1, TextFormatting format2)
 		{
 			for (String name : this.attributes.keySet())
 			{
@@ -107,7 +107,13 @@ public class StatEffectFactory implements IEffectFactory<StatEffectFactory.StatP
 				{
 					double value = EffectHelper.combineDouble(mods.get(opcode), AttributeModifier::getAmount);
 
-					String prefix = value > 0 ? TextFormatting.BLUE + "+" : TextFormatting.RED + "-";
+					String prefix = value > 0 ? format1 + "+" : format2 + "-";
+
+					if (format1 == TextFormatting.GRAY && format2 == TextFormatting.GRAY)
+					{
+						prefix = value > 0 ? format1 + " " : format2 + " ";
+					}
+
 					String desc = I18n.format("attribute.name." + name);
 
 					if (opcode == 1)

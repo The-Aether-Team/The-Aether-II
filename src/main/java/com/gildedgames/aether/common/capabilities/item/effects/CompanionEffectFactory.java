@@ -16,6 +16,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import org.apache.commons.lang3.Validate;
 
 import java.util.Collection;
@@ -177,7 +178,7 @@ public class CompanionEffectFactory implements IEffectFactory<CompanionEffectFac
 		}
 
 		@Override
-		public void addInformation(Collection<String> label)
+		public void addInformation(Collection<String> label, TextFormatting color1, TextFormatting color2)
 		{
 
 		}

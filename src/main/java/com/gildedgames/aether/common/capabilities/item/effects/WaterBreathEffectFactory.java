@@ -51,7 +51,7 @@ public class WaterBreathEffectFactory implements IEffectFactory<WaterBreathEffec
 		}
 
 		@Override
-		public void addInformation(Collection<String> label)
+		public void addInformation(Collection<String> label, TextFormatting format1, TextFormatting format2)
 		{
 			label.add(TextFormatting.BLUE.toString() + TextFormatting.ITALIC.toString() + "Water Breathing");
 		}

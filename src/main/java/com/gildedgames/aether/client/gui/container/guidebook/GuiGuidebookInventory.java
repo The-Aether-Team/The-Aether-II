@@ -152,7 +152,7 @@ public class GuiGuidebookInventory extends AbstractGuidebookPage
 		final ArrayList<String> label = new ArrayList<>();
 
 		final PlayerEquipmentModule equipment = this.aePlayer.getModule(PlayerEquipmentModule.class);
-		equipment.getActivePools().forEach((pool) -> pool.getInstance().ifPresent(instance -> instance.addInformation(label)));
+		equipment.getActivePools().forEach((pool) -> pool.getInstance().ifPresent(instance -> instance.addInformation(label, TextFormatting.BLUE, TextFormatting.RED)));
 
 		final String compiled = StringUtils.join(label, TextFormatting.RESET + ", ");
 
