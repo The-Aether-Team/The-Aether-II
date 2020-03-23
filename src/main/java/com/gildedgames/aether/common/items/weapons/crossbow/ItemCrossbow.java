@@ -10,6 +10,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -518,6 +519,12 @@ public class ItemCrossbow extends Item
 	public int getMaxItemUseDuration(final ItemStack stack)
 	{
 		return 72000;
+	}
+
+	@Override
+	public EnumAction getItemUseAction(final ItemStack stack)
+	{
+		return EnumAction.BOW;
 	}
 
 	@Override

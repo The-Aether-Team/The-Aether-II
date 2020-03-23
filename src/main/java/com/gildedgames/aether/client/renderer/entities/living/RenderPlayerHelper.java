@@ -4,15 +4,21 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerEquipmentModule;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerPatronRewardModule;
 import com.gildedgames.aether.common.items.armor.ItemAetherGloves;
+import com.gildedgames.aether.common.items.weapons.crossbow.ItemCrossbow;
 import com.gildedgames.aether.common.patron.armor.PatronRewardArmor;
 import com.gildedgames.aether.common.util.helpers.EntityUtil;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemMap;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.ResourceLocation;
@@ -46,8 +52,71 @@ public class RenderPlayerHelper
                 renderMapFirstPersonSide(player, equipProgress, enumhandside, swingProgress);
             }
         }
+        else if (stack.getItem() instanceof ItemCrossbow)
+        {
+            boolean flag1 = enumhandside == EnumHandSide.RIGHT;
+
+            if (player.isHandActive() && player.getItemInUseCount() > 0 && player.getActiveHand() == hand)
+            {
+                transformSideFirstPerson(enumhandside, equipProgress);
+            }
+            else
+            {
+                float f = -0.4F * MathHelper.sin(MathHelper.sqrt(swingProgress) * (float)Math.PI);
+                float f1 = 0.2F * MathHelper.sin(MathHelper.sqrt(swingProgress) * ((float)Math.PI * 2F));
+                float f2 = -0.2F * MathHelper.sin(swingProgress * (float)Math.PI);
+                int i = flag1 ? 1 : -1;
+                GlStateManager.translate((float)i * f, f1, f2);
+                transformSideFirstPerson(enumhandside, equipProgress);
+                transformFirstPerson(enumhandside, swingProgress);
+            }
+
+            renderItemSide(player, stack, flag1 ? ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND : ItemCameraTransforms.TransformType.FIRST_PERSON_LEFT_HAND, !flag1);
+        }
 
         GlStateManager.popMatrix();
+    }
+
+    private static void transformSideFirstPerson(EnumHandSide hand, float p_187459_2_)
+    {
+        int i = hand == EnumHandSide.RIGHT ? 1 : -1;
+        GlStateManager.translate((float)i * 0.56F, -0.52F + p_187459_2_ * -0.6F, -0.72F);
+    }
+
+    public static void renderItemSide(EntityLivingBase entitylivingbaseIn, ItemStack heldStack, ItemCameraTransforms.TransformType transform, boolean leftHanded)
+    {
+        if (!heldStack.isEmpty())
+        {
+            Item item = heldStack.getItem();
+            Block block = Block.getBlockFromItem(item);
+            GlStateManager.pushMatrix();
+            boolean flag = Minecraft.getMinecraft().getRenderItem().shouldRenderItemIn3D(heldStack) && block.getRenderLayer() == BlockRenderLayer.TRANSLUCENT;
+
+            if (flag)
+            {
+                GlStateManager.depthMask(false);
+            }
+
+            Minecraft.getMinecraft().getRenderItem().renderItem(heldStack, entitylivingbaseIn, transform, leftHanded);
+
+            if (flag)
+            {
+                GlStateManager.depthMask(true);
+            }
+
+            GlStateManager.popMatrix();
+        }
+    }
+
+    private static void transformFirstPerson(EnumHandSide hand, float p_187453_2_)
+    {
+        int i = hand == EnumHandSide.RIGHT ? 1 : -1;
+        float f = MathHelper.sin(p_187453_2_ * p_187453_2_ * (float)Math.PI);
+        GlStateManager.rotate((float)i * (45.0F + f * -20.0F), 0.0F, 1.0F, 0.0F);
+        float f1 = MathHelper.sin(MathHelper.sqrt(p_187453_2_) * (float)Math.PI);
+        GlStateManager.rotate((float)i * f1 * -20.0F, 0.0F, 0.0F, 1.0F);
+        GlStateManager.rotate(f1 * -80.0F, 1.0F, 0.0F, 0.0F);
+        GlStateManager.rotate((float)i * -45.0F, 0.0F, 1.0F, 0.0F);
     }
 
     private static void renderGloves(AbstractClientPlayer player)
