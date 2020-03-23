@@ -57,7 +57,7 @@
 				"ready": 1.0,
 				"charged": 0.0
 			},
-			"model": "aether:item/crossbow/holystone/ready"
+			"model": "aether:item/crossbow/zanite/ready"
 		},
 		{
 			"predicate": {
