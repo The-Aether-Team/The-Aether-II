@@ -11,6 +11,7 @@ import com.gildedgames.aether.api.items.properties.ItemRarity;
 import com.gildedgames.aether.client.gui.util.ToolTipCurrencyHelper;
 import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
 import com.gildedgames.aether.common.shop.ShopCurrencyGilt;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
@@ -20,10 +21,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.Optional;
+import java.util.*;
 
 @Mod.EventBusSubscriber(Side.CLIENT)
 public class TooltipItemPropertiesListener
@@ -37,6 +35,33 @@ public class TooltipItemPropertiesListener
 		final IItemProperties properties = AetherAPI.content().items().getProperties(event.getItemStack().getItem());
 
 		final double value = AetherAPI.content().currency().getValue(event.getItemStack(), ShopCurrencyGilt.class);
+
+		String durability = null;
+		String modID = null;
+		String NBT = null;
+
+		for (String tooltip : event.getToolTip())
+		{
+			{
+				if (tooltip.contains("Durability:"))
+				{
+					durability = tooltip;
+				}
+
+				if (tooltip.contains(event.getItemStack().getItem().getCreatorModId(event.getItemStack()) + ":"))
+				{
+					modID = tooltip;
+				}
+
+				if (tooltip.contains("NBT:"))
+				{
+					NBT = tooltip;
+				}
+			}
+		}
+
+		event.getToolTip().removeIf(tooltip -> tooltip.contains(event.getItemStack().getItem().getCreatorModId(event.getItemStack()) + ":") || tooltip.contains("NBT:")
+				|| tooltip.contains("Durability:"));
 
 		// Armor Effects
 		if (event.getItemStack().getItem() instanceof ItemAetherArmor)
@@ -91,6 +116,27 @@ public class TooltipItemPropertiesListener
 		if (properties.getRarity() != ItemRarity.NONE)
 		{
 			event.getToolTip().add(I18n.format(properties.getRarity().getUnlocalizedName()));
+		}
+
+		if (Minecraft.getMinecraft().gameSettings.advancedItemTooltips)
+		{
+			if (durability != null)
+			{
+				event.getToolTip().add(durability);
+			}
+
+			if (modID != null)
+			{
+				event.getToolTip().add(modID);
+			}
+
+			if (event.getItemStack().hasTagCompound())
+			{
+				if (NBT != null)
+				{
+					event.getToolTip().add(NBT);
+				}
+			}
 		}
 
 		//Currency
