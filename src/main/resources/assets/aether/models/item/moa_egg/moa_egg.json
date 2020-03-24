@@ -9,6 +9,18 @@
 				"curved": 1
 			},
 			"model": "aether:item/moa_egg/moa_egg_curved"
+		},
+		{
+			"predicate": {
+				"flat": 1
+			},
+			"model": "aether:item/moa_egg/moa_egg_flat"
+		},
+		{
+			"predicate": {
+				"pointed": 1
+			},
+			"model": "aether:item/moa_egg/moa_egg_pointed"
 		}
 	]
 }

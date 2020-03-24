@@ -45,6 +45,8 @@ public class ItemMoaEgg extends Item implements IDropOnDeath
 		this.maxStackSize = 1;
 
 		this.addPropertyOverride(new ResourceLocation("curved"), new ModelProperty("curved"));
+		this.addPropertyOverride(new ResourceLocation("flat"), new ModelProperty("flat"));
+		this.addPropertyOverride(new ResourceLocation("pointed"), new ModelProperty("pointed"));
 	}
 
 	public static void setGenePool(final ItemStack stack, final MoaGenePool pool)

@@ -65,6 +65,8 @@ public class MoaGenePoolDataSet<T extends Gene>
 		FEATHERS.genes().add(new DataGene<>("moa.feathers.deep_red", new Color(0x4d2222), new SimpleInheritance(SimpleInheritance.Type.RECESSIVE)));
 		FEATHERS.genes().add(new DataGene<>("moa.feathers.red", new Color(0xf34949), new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
 
+		MARKS.genes().add(new MoaMarkGene("moa.marks.pointed", "pointed", new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
+		MARKS.genes().add(new MoaMarkGene("moa.marks.flat", "flat", new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
 		MARKS.genes().add(new MoaMarkGene("moa.marks.curved", "curved", new SimpleInheritance(SimpleInheritance.Type.DOMINANT)));
 
 		WING_STRENGTH.genes().add(new DataGene<>("moa.wing_strength.weak", 1, new SimpleInheritance(SimpleInheritance.Type.RANDOM)));

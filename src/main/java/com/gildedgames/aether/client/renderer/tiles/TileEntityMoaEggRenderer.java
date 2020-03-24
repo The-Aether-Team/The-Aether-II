@@ -4,6 +4,7 @@ import com.gildedgames.aether.client.models.entities.tile.ModelMoaEgg;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
 import com.gildedgames.aether.common.entities.tiles.TileEntityMoaEgg;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
@@ -15,6 +16,8 @@ public class TileEntityMoaEggRenderer extends TileEntitySpecialRenderer<TileEnti
 	private static final ResourceLocation TEXTURE_BASE = AetherCore.getResource("textures/tile_entities/moa_egg/base.png");
 
 	private static final ResourceLocation TEXTURE_BEAK = AetherCore.getResource("textures/tile_entities/moa_egg/beak.png");
+
+	private static final ResourceLocation TEXTURE_EYES = AetherCore.getResource("textures/tile_entities/moa_egg/head/eyes.png");
 
 	public final ModelMoaEgg model = new ModelMoaEgg();
 
@@ -28,6 +31,8 @@ public class TileEntityMoaEggRenderer extends TileEntitySpecialRenderer<TileEnti
 		{
 			return;
 		}
+
+		final ResourceLocation BACK_MARKING = genePool.getMarks().gene().getEggBack();
 
 		GL11.glPushMatrix();
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
@@ -48,6 +53,21 @@ public class TileEntityMoaEggRenderer extends TileEntitySpecialRenderer<TileEnti
 		this.model.renderAll(0.0625F);
 
 		this.renderColor(genePool.getFeathers().gene().data().darker().getRGB());
+
+		this.bindTexture(BACK_MARKING);
+
+		this.model.renderAll(0.0625F);
+
+		GlStateManager.enableBlend();
+		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+
+		this.renderColor(genePool.getEyes().gene().data().getRGB());
+
+		this.bindTexture(TEXTURE_EYES);
+
+		this.model.renderAll(0.0625F);
+
+		GlStateManager.disableBlend();
 
 		GL11.glPopMatrix();
 
