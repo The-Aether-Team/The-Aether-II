@@ -34,6 +34,10 @@ public class RenderMoa extends RenderLivingLOD<EntityMoa>
 
 	private static final ResourceLocation CURVED_BODY_HIGHLIGHT = AetherCore.getResource("textures/entities/moa/curved_highlight.png");
 
+	private static final ResourceLocation FLAT_BODY = AetherCore.getResource("textures/entities/moa/flat_main.png");
+
+	private static final ResourceLocation FLAT_BODY_HIGHLIGHT = AetherCore.getResource("textures/entities/moa/flat_highlight.png");
+
 	private static final ResourceLocation POINTED_BODY = AetherCore.getResource("textures/entities/moa/pointed_main.png");
 
 	private static final ResourceLocation POINTED_BODY_HIGHLIGHT = AetherCore.getResource("textures/entities/moa/pointed_highlight.png");
@@ -119,6 +123,10 @@ public class RenderMoa extends RenderLivingLOD<EntityMoa>
 					{
 						this.renderManager.renderEngine.bindTexture(CURVED_BODY);
 					}
+					else if (mark.equals("flat"))
+					{
+						this.renderManager.renderEngine.bindTexture(FLAT_BODY);
+					}
 					else
 					{
 						this.renderManager.renderEngine.bindTexture(POINTED_BODY);
@@ -134,6 +142,10 @@ public class RenderMoa extends RenderLivingLOD<EntityMoa>
 			if (mark.equals("curved"))
 			{
 				this.renderManager.renderEngine.bindTexture(CURVED_BODY);
+			}
+			else if (mark.equals("flat"))
+			{
+				this.renderManager.renderEngine.bindTexture(FLAT_BODY);
 			}
 			else
 			{
@@ -154,6 +166,10 @@ public class RenderMoa extends RenderLivingLOD<EntityMoa>
 			if (mark.equals("curved"))
 			{
 				this.renderManager.renderEngine.bindTexture(CURVED_BODY_HIGHLIGHT);
+			}
+			else if (mark.equals("flat"))
+			{
+				this.renderManager.renderEngine.bindTexture(FLAT_BODY_HIGHLIGHT);
 			}
 			else
 			{
