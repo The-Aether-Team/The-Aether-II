@@ -9,6 +9,7 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.animals.EntityMoa;
 import com.gildedgames.aether.common.entities.genes.AnimalGender;
 import com.gildedgames.aether.common.entities.genes.moa.MoaGenePool;
+import com.gildedgames.aether.common.items.other.ItemMoaEgg;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -29,9 +30,13 @@ public class RenderMoa extends RenderLivingLOD<EntityMoa>
 
 	private static final SpriteGeneric SPRITE = new SpriteGeneric("aechor_petal.png", 16, 16);
 
-	private static final ResourceLocation BODY = AetherCore.getResource("textures/entities/moa/curved_main.png");
+	private static final ResourceLocation CURVED_BODY = AetherCore.getResource("textures/entities/moa/curved_main.png");
 
-	private static final ResourceLocation BODY_HIGHLIGHT = AetherCore.getResource("textures/entities/moa/curved_highlight.png");
+	private static final ResourceLocation CURVED_BODY_HIGHLIGHT = AetherCore.getResource("textures/entities/moa/curved_highlight.png");
+
+	private static final ResourceLocation POINTED_BODY = AetherCore.getResource("textures/entities/moa/pointed_main.png");
+
+	private static final ResourceLocation POINTED_BODY_HIGHLIGHT = AetherCore.getResource("textures/entities/moa/pointed_highlight.png");
 
 	private static final ResourceLocation BEAK = AetherCore.getResource("textures/entities/moa/keratin.png");
 
@@ -106,11 +111,35 @@ public class RenderMoa extends RenderLivingLOD<EntityMoa>
 				EyeUtil.renderEyesFast(model, model.HeadFront, model.HeadFront, entity,
 						scale, PUPIL_LEFT, PUPIL_RIGHT, EYES_CLOSED, EYES, false);
 
-				this.renderManager.renderEngine.bindTexture(BODY);
+				if (genePool.getMarks() != null)
+				{
+					final String mark = genePool.getMarks().gene().getResourceName();
+
+					if (mark.equals("curved"))
+					{
+						this.renderManager.renderEngine.bindTexture(CURVED_BODY);
+					}
+					else
+					{
+						this.renderManager.renderEngine.bindTexture(POINTED_BODY);
+					}
+				}
 			};
 		}
 
-		this.renderManager.renderEngine.bindTexture(BODY);
+		if (genePool.getMarks() != null)
+		{
+			final String mark = genePool.getMarks().gene().getResourceName();
+
+			if (mark.equals("curved"))
+			{
+				this.renderManager.renderEngine.bindTexture(CURVED_BODY);
+			}
+			else
+			{
+				this.renderManager.renderEngine.bindTexture(POINTED_BODY);
+			}
+		}
 		model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
 		model.LegL2.isHidden = false;
@@ -118,7 +147,19 @@ public class RenderMoa extends RenderLivingLOD<EntityMoa>
 		model.JawMain.isHidden = false;
 		model.HeadBeakMain.isHidden = false;
 
-		this.renderManager.renderEngine.bindTexture(BODY_HIGHLIGHT);
+		if (genePool.getMarks() != null)
+		{
+			final String mark = genePool.getMarks().gene().getResourceName();
+
+			if (mark.equals("curved"))
+			{
+				this.renderManager.renderEngine.bindTexture(CURVED_BODY_HIGHLIGHT);
+			}
+			else
+			{
+				this.renderManager.renderEngine.bindTexture(POINTED_BODY_HIGHLIGHT);
+			}
+		}
 		GL11.glColor3f(highlight.getRed() / 255f, highlight.getGreen() / 255f, highlight.getBlue() / 255f);
 
 		model.setDefaultDisplayState(false);
