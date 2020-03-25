@@ -58,9 +58,12 @@ public class EntityAechorPlant extends EntityAetherMob
 
 		this.setPoisonLeft(2);
 
-		if (world.isRemote)
+		if (world != null)
 		{
-			this.sinage = this.rand.nextFloat() * 6F;
+			if (world.isRemote)
+			{
+				this.sinage = this.rand.nextFloat() * 6F;
+			}
 		}
 
 		this.experienceValue = 3;

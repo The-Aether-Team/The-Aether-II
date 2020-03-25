@@ -15,11 +15,19 @@ import com.gildedgames.orbis.lib.client.gui.util.gui_library.*;
 import com.gildedgames.orbis.lib.client.rect.Dim2D;
 import com.gildedgames.orbis.lib.client.rect.Pos2D;
 import com.gildedgames.orbis.lib.client.rect.Rect;
+import com.gildedgames.orbis.lib.util.InputHelper;
 import com.google.common.collect.Lists;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.GL11;
 
 import java.util.List;
 
@@ -173,5 +181,64 @@ public class GuiGuidebookDiscoveryBestiary extends GuiGuidebookDiscovery
 				stats,
 				moves,
 				this.statsArea);
+	}
+
+	@Override
+	public void drawScreen(final int mouseX, final int mouseY, final float partialTicks)
+	{
+		super.drawScreen(mouseX, mouseY, partialTicks);
+
+		Minecraft mc = Minecraft.getMinecraft();
+		ScaledResolution scaledresolution = new ScaledResolution(mc);
+
+		for (BestiarySlot slot : this.slots)
+		{
+			String beastName = slot.getPage().getEntityName();
+
+			if (!slot.getPage().isUnderstood(this.aePlayer))
+			{
+				beastName = beastName.replaceAll("[^\\s]", "?");
+			}
+
+			if (InputHelper.isHovered(slot))
+			{
+				this.drawHoveringText(beastName,
+						Mouse.getX() * scaledresolution.getScaledWidth() / mc.displayWidth,
+						scaledresolution.getScaledHeight() - (Mouse.getY() - 42) * scaledresolution.getScaledHeight() / mc.displayHeight
+								- 1, mc.fontRenderer);
+			}
+		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	protected void drawHoveringText(String text, int x, int y, FontRenderer font)
+	{
+		GL11.glDisable(GL11.GL_DEPTH_TEST);
+
+		int k = font.getStringWidth(text);
+
+		int x1 = x + 12;
+		int y1 = y - 12;
+		int z1 = 8;
+
+		this.zLevel = 300.0F;
+		int color1 = -267386864;
+		this.drawGradientRect(x1 - 3, y1 - 4, x1 + k + 3, y1 - 3, color1, color1);
+		this.drawGradientRect(x1 - 3, y1 + z1 + 3, x1 + k + 3, y1 + z1 + 4, color1, color1);
+		this.drawGradientRect(x1 - 3, y1 - 3, x1 + k + 3, y1 + z1 + 3, color1, color1);
+		this.drawGradientRect(x1 - 4, y1 - 3, x1 - 3, y1 + z1 + 3, color1, color1);
+		this.drawGradientRect(x1 + k + 3, y1 - 3, x1 + k + 4, y1 + z1 + 3, color1, color1);
+		int color2 = 1347420415;
+		int color2BG = (color2 & 16711422) >> 1 | color2 & -16777216;
+		this.drawGradientRect(x1 - 3, y1 - 3 + 1, x1 - 3 + 1, y1 + z1 + 3 - 1, color2, color2BG);
+		this.drawGradientRect(x1 + k + 2, y1 - 3 + 1, x1 + k + 3, y1 + z1 + 3 - 1, color2, color2BG);
+		this.drawGradientRect(x1 - 3, y1 - 3, x1 + k + 3, y1 - 3 + 1, color2, color2);
+		this.drawGradientRect(x1 - 3, y1 + z1 + 2, x1 + k + 3, y1 + z1 + 3, color2BG, color2BG);
+
+		font.drawString(text, x1, y1, -1);
+
+		this.zLevel = 0.0F;
+
+		GL11.glEnable(GL11.GL_DEPTH_TEST);
 	}
 }

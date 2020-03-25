@@ -83,11 +83,15 @@ public class EntitySwet extends EntityExtendedMob
 
 		this.setSize(1.0F, 1.0F);
 
-		this.setType(Type.values()[this.world.rand.nextInt(Type.values().length)]);
+		if (world != null)
+		{
+			this.setType(Type.values()[this.world.rand.nextInt(Type.values().length)]);
+
+			this.setFoodSaturation(3);
+		}
 
 		this.experienceValue = 3;
 
-		this.setFoodSaturation(3);
 		this.actualSaturation = 3;
 
 		this.setDayMob(true);

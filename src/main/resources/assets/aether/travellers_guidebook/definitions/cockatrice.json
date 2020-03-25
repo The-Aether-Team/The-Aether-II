@@ -1,0 +1,23 @@
+[
+  {
+    "conditions": [
+      {
+        "type": "aether:seeEntity",
+        "entityId": "aether:cockatrice"
+      }
+    ],
+    "resolution": "requireAll",
+    "entries": {
+      "aether.cockatrice.discovery": {
+        "tag": "bestiary",
+        "type": "bestiary_page",
+        "entityId": "aether:cockatrice",
+        "silhouetteTexture": "aether:textures/discoveries/bestiary/placeholder/silhouette.png",
+        "discoveredTexture": "aether:textures/discoveries/bestiary/placeholder/discovered.png",
+        "silhouetteSlotTexture": "aether:textures/discoveries/bestiary/placeholder/silhouette_slot.png",
+        "discoveredSlotTexture": "aether:textures/discoveries/bestiary/placeholder/discovered_slot.png",
+        "description": "aether.placeholder.discovery.description"
+      }
+    }
+  }
+]
