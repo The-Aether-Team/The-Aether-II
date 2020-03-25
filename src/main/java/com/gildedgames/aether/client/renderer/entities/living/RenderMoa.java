@@ -252,6 +252,7 @@ public class RenderMoa extends RenderLivingLOD<EntityMoa>
 		model.LegL2.forceDisplayFlag = true;
 		model.LegL3.forceDisplayFlag = true;
 		model.LegLAnkle.forceDisplayFlag = true;
+		model.LegLFoot.forceDisplayFlag = true;
 		model.LegLToeL.forceDisplayFlag = true;
 		model.LegLToeM.forceDisplayFlag = true;
 		model.LegLToeR.forceDisplayFlag = true;
@@ -259,6 +260,7 @@ public class RenderMoa extends RenderLivingLOD<EntityMoa>
 		model.LegR2.forceDisplayFlag = true;
 		model.LegR3.forceDisplayFlag = true;
 		model.LegRAnkle.forceDisplayFlag = true;
+		model.LegRFoot.forceDisplayFlag = true;
 		model.LegRToeL.forceDisplayFlag = true;
 		model.LegRToeM.forceDisplayFlag = true;
 		model.LegRToeR.forceDisplayFlag = true;
