@@ -34,13 +34,18 @@ public class ItemAetherPickaxe extends ItemPickaxe
 		return ItemToolListener.onEntityHit(stack, this.toolMaterial, target, attacker);
 	}
 
+	public boolean canMine(IBlockState state)
+	{
+		Material material = state.getMaterial();
+		return material == Material.IRON || material == Material.ANVIL || material == Material.ROCK;
+	}
+
 	@Override
 	public float getDestroySpeed(ItemStack stack, IBlockState state)
 	{
-		Material material = state.getMaterial();
 		float original = this.toolMaterial.getEfficiency();
 
-		if (material == Material.IRON || material == Material.ANVIL || material == Material.ROCK)
+		if (this.canMine(state))
 		{
 			return ItemToolListener.getBreakSpeed(stack, state, original);
 		}

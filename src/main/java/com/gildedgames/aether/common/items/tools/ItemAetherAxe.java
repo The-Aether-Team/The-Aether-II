@@ -40,13 +40,18 @@ public class ItemAetherAxe extends ItemAxe
 		return ItemToolListener.onEntityHit(stack, this.toolMaterial, target, attacker);
 	}
 
+	public boolean canMine(IBlockState state)
+	{
+		Material material = state.getMaterial();
+		return material == Material.WOOD || material == Material.PLANTS || material == Material.VINE;
+	}
+
 	@Override
 	public float getDestroySpeed(ItemStack stack, IBlockState state)
 	{
-		Material material = state.getMaterial();
 		float original = this.toolMaterial.getEfficiency();
 
-		if (material == Material.WOOD || material == Material.PLANTS || material == Material.VINE)
+		if (this.canMine(state))
 		{
 			return ItemToolListener.getBreakSpeed(stack, state, original);
 		}

@@ -36,13 +36,18 @@ public class ItemAetherShovel extends ItemSpade
 		return ItemToolListener.onEntityHit(stack, this.toolMaterial, target, attacker);
 	}
 
+	public boolean canMine(IBlockState state)
+	{
+		Material material = state.getMaterial();
+		return material == Material.CLAY || material == Material.GROUND || material == Material.GRASS || material == Material.SAND || material == Material.SNOW || material == Material.CRAFTED_SNOW;
+	}
+
 	@Override
 	public float getDestroySpeed(ItemStack stack, IBlockState state)
 	{
-		Material material = state.getMaterial();
 		float original = this.toolMaterial.getEfficiency();
 
-		if (material == Material.CLAY || material == Material.GROUND || material == Material.GRASS || material == Material.SAND || material == Material.SNOW || material == Material.CRAFTED_SNOW)
+		if (this.canMine(state))
 		{
 			return ItemToolListener.getBreakSpeed(stack, state, original);
 		}

@@ -2,6 +2,10 @@ package com.gildedgames.aether.common.items.tools.handlers;
 
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerBlockLevitateModule;
+import com.gildedgames.aether.common.items.armor.ItemAetherShield;
+import com.gildedgames.aether.common.items.tools.ItemAetherAxe;
+import com.gildedgames.aether.common.items.tools.ItemAetherPickaxe;
+import com.gildedgames.aether.common.items.tools.ItemAetherShovel;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -26,6 +30,24 @@ public class ItemGravititeToolHandler implements IToolEventHandler
 
 	}
 
+	private boolean canMine(IBlockState state, ItemStack stack)
+	{
+		if (stack.getItem() instanceof ItemAetherAxe)
+		{
+			return ((ItemAetherAxe) stack.getItem()).canMine(state);
+		}
+		else if (stack.getItem() instanceof ItemAetherPickaxe)
+		{
+			return ((ItemAetherPickaxe) stack.getItem()).canMine(state);
+		}
+		else if (stack.getItem() instanceof ItemAetherShovel)
+		{
+			return ((ItemAetherShovel) stack.getItem()).canMine(state);
+		}
+
+		return false;
+	}
+
 	@Override
 	public boolean onRightClickBlock(World world, BlockPos pos, EntityPlayer player, EnumHand hand, EnumFacing facing)
 	{
@@ -47,36 +69,39 @@ public class ItemGravititeToolHandler implements IToolEventHandler
 		{
 			IBlockState state = world.getBlockState(pos);
 
-			if (state.getBlock().hasTileEntity(state))
+			if (this.canMine(state, stack))
 			{
-				return false;
-			}
-
-			if (!state.isFullBlock() || state.getBlockHardness(world, pos) < 0.0f)
-			{
-				return false;
-			}
-
-			if (!world.isRemote)
-			{
-				if (aePlayer.getModule(PlayerBlockLevitateModule.class).pickupBlock(pos, world))
+				if (state.getBlock().hasTileEntity(state))
 				{
-					stack.damageItem(2, player);
+					return false;
 				}
-			}
-			else
-			{
-				for (int i = 0; i < 15; i++)
-				{
-					world.spawnParticle(EnumParticleTypes.BLOCK_DUST,
-							pos.getX() + (world.rand.nextDouble() * 1.2D),
-							pos.getY() + (world.rand.nextDouble()),
-							pos.getZ() + (world.rand.nextDouble() * 1.2D), 0.0D, 0.0D, 0.0D,
-							Block.getStateId(state));
-				}
-			}
 
-			return true;
+				if (!state.isFullBlock() || state.getBlockHardness(world, pos) < 0.0f)
+				{
+					return false;
+				}
+
+				if (!world.isRemote)
+				{
+					if (aePlayer.getModule(PlayerBlockLevitateModule.class).pickupBlock(pos, world))
+					{
+						stack.damageItem(2, player);
+					}
+				}
+				else
+				{
+					for (int i = 0; i < 15; i++)
+					{
+						world.spawnParticle(EnumParticleTypes.BLOCK_DUST,
+								pos.getX() + (world.rand.nextDouble() * 1.2D),
+								pos.getY() + (world.rand.nextDouble()),
+								pos.getZ() + (world.rand.nextDouble() * 1.2D), 0.0D, 0.0D, 0.0D,
+								Block.getStateId(state));
+					}
+				}
+
+				return true;
+			}
 		}
 
 		return false;
