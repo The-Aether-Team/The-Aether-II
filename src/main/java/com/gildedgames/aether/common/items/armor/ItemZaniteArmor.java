@@ -9,10 +9,5 @@ public class ItemZaniteArmor extends ItemAetherArmor
 	{
 		super(ArmorMaterial.IRON, "zanite", armorType);
 	}
-
-	@Override
-	public float getExtraDamageReduction(ItemStack stack)
-	{
-		return ((float) stack.getItemDamage() / (float) stack.getMaxDamage()) * 0.8f;
-	}
+	
 }
