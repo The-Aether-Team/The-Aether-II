@@ -84,7 +84,7 @@ public class RenderMoa extends RenderLivingLOD<EntityMoa>
 		float[] hsb = new float[3];
 
 		Color.RGBtoHSB(base.getRed(), base.getGreen(), base.getBlue(), hsb);
-		Color highlight = Color.getHSBColor(hsb[0] + 13f / 255f, hsb[1] + 26f / 255f, hsb[2] + .001f);
+		Color highlight = genePool.getFeathers().gene().data().brighter().brighter();
 
 		GlStateManager.color(base.getRed() / 255f, base.getGreen() / 255f, base.getBlue() / 255f);
 
