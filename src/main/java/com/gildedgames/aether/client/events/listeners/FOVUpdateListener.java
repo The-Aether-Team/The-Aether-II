@@ -1,5 +1,6 @@
 package com.gildedgames.aether.client.events.listeners;
 
+import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerEquipmentModule;
 import com.gildedgames.aether.common.items.armor.ItemAetherGloves;
@@ -35,6 +36,19 @@ public class FOVUpdateListener
                 {
                     event.setNewfov(event.getFov() + (0.0375f * armorCount));
                 }
+            }
+        }
+
+        final ItemStack gloveStack = PlayerAether.getPlayer(player).getModule(PlayerEquipmentModule.class).getInventory().getStackInSlot(2);
+
+        if (!gloveStack.isEmpty() && gloveStack.getItem() == ItemsAether.arkenium_gloves)
+        {
+            ++armorCount;
+
+            if (event.getNewfov() < 1.0f)
+            {
+                event.setNewfov(event.getFov() + (0.0375f * armorCount));
+                System.out.println(event.getNewfov());
             }
         }
 

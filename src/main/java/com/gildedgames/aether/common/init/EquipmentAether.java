@@ -13,6 +13,7 @@ import com.gildedgames.aether.common.capabilities.item.effects.CompanionEffectFa
 import com.gildedgames.aether.common.capabilities.item.effects.stats.StatEffectFactory;
 import com.gildedgames.aether.common.entities.companions.EntityCompanion;
 import com.gildedgames.aether.common.items.companions.ItemCompanion;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.item.Item;
 
 public class EquipmentAether
@@ -59,6 +60,7 @@ public class EquipmentAether
 				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL, 4, StatEffectFactory.StatProvider.OP_ADD));
 
 		createEquipmentItem(ItemsAether.arkenium_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE, WHEN_EQUIPPED,
+				new StatEffectFactory.StatProvider(SharedMonsterAttributes.MOVEMENT_SPEED, -0.075, StatEffectFactory.StatProvider.OP_MULTIPLY),
 				new StatEffectFactory.StatProvider(DamageTypeAttributes.SLASH_DEFENSE_LEVEL, 3, StatEffectFactory.StatProvider.OP_ADD),
 				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL, 7, StatEffectFactory.StatProvider.OP_ADD));
 
