@@ -74,7 +74,7 @@ public class ToolTipCurrencyHelper
 			int[] brokenUp = PlayerCurrencyModule.breakUpCurrency((long) value);
 
 			final int size = this.cachedText.size();
-			int x2 = x + 1, y2 = y + height - fontRenderer.FONT_HEIGHT * size + (size == 1 ? 1 : 0);
+			int x2 = x + 1, y2 = y + height - fontRenderer.FONT_HEIGHT + 1;
 			boolean newLine = false;
 
 			for (int i = 0; i < brokenUp.length; i++)
@@ -91,6 +91,7 @@ public class ToolTipCurrencyHelper
 
 					textureManager.bindTexture(resourceMap[i]);
 					Gui.drawModalRectWithCustomSizedTexture(x2, y2, 0, 0, 7, 7, 7, 7);
+					fontRenderer.drawStringWithShadow(String.valueOf(currency), (float) (x2 + 9.8), y2, 11184810);
 
 					GlStateManager.popMatrix();
 

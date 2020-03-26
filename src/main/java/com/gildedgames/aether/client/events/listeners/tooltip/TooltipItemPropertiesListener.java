@@ -140,9 +140,9 @@ public class TooltipItemPropertiesListener
 		}
 
 		//Currency
-		if (value != 0)
+		if (value >= 1)
 		{
-			event.getToolTip().addAll(toolTipHelper.getText(value));
+			event.getToolTip().add("");
 		}
 	}
 
