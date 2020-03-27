@@ -6,6 +6,8 @@ import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.client.gui.EffectSystemOverlay;
 import com.gildedgames.aether.client.renderer.particles.ParticleAetherStatusEffect;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.network.packets.PacketStatusParticles;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
@@ -284,30 +286,8 @@ public class EntityUtil
 
 						final double randMotionY = entity.getRNG().nextInt(5);
 
-						//if (entity.world.isRemote)
-						//{
-							AetherCore.PROXY.spawnEffectParticles(x + randX, y + randY, z + randZ,
-									0, randMotionY == 0 ? 0.1 : randMotionY / 50, 0, r, g, b);
-						//}
-						//else if (entity.world instanceof WorldServer)
-						//{
-						//	final WorldServer worldServer = (WorldServer) entity.world;
-//
-						//	AetherCore.PROXY.spawnEffectParticles(worldServer, x + randX, y + randY, z + randZ,
-						//			0, randMotionY == 0 ? 0.1 : randMotionY / 50, 0, r, g, b);
-						//}
-
-
-						//if (entity.world.isRemote)
-						//{
-						//	spawnEffectParticlesClient(entity.world, x + randX, y + randY, z + randZ,
-						//			0, randMotionY == 0 ? 0.1 : randMotionY / 50, 0, r, g, b);
-						//}
-						//else
-						//{
-						//	AetherCore.PROXY.spawnEffectParticles(Minecraft.getMinecraft().world, x + randX, y + randY, z + randZ,
-						//			0, randMotionY == 0 ? 0.1 : randMotionY / 50, 0, r, g, b);
-						//}
+						NetworkingAether.sendPacketToDimension(new PacketStatusParticles(x + randX, y + randY, z + randZ,
+								0, randMotionY == 0 ? 0.1 : randMotionY / 50, 0, r, g, b), entity.dimension);
 					}
 				}
 			}

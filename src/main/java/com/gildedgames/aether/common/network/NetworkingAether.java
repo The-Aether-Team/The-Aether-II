@@ -84,6 +84,7 @@ public class NetworkingAether
 		instance.registerMessage(PacketTradeInitial.HandlerClient.class, PacketTradeInitial.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketFlagPlayerCondition.HandlerClient.class, PacketFlagPlayerCondition.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketPlayerConditionModule.HandlerClient.class, PacketPlayerConditionModule.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketStatusParticles.HandlerClient.class, PacketStatusParticles.class, discriminant++, Side.CLIENT);
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(AetherCore.INSTANCE, new AetherGuiHandler());
 	}
