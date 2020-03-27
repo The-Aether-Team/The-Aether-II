@@ -6,8 +6,7 @@
 	],
 	"key": {
 		"X": {
-			"type": "forge:ore_dict",
-			"ore": "aerleather"
+			"item": "aether:taegore_hide"
 		},
 		"Z": {
 			"item": "aether:cloudtwine"
