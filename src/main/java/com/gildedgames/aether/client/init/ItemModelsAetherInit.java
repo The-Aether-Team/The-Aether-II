@@ -703,6 +703,8 @@ public class ItemModelsAetherInit
 		registerItemModels(ItemsAether.moa_feed, "feed/moa_feed");
 		registerItemModels(ItemsAether.moa_feed_blueberries, "feed/moa_feed_blueberries");
 		registerItemModels(ItemsAether.moa_feed_enchanted_blueberries, "feed/moa_feed_enchanted_blueberries");
+
+		registerItemModels(ItemsAether.brettl_rope, "brettl_rope");
 	}
 
 	private static void registerSnowyFlower(Block block, String name)

@@ -62,6 +62,8 @@ public class ItemsAether extends AbstractRegistrar
 
 	public static final Item brettl_grass = getDefault();
 
+	public static final Item brettl_rope = getDefault();
+
 	public static final Item burrukai_pelt = getDefault();
 
 	public static final Item burrukai_pelt_boots = getDefault();

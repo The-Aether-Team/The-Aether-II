@@ -75,7 +75,7 @@ public class ConfigAether
 		this.rollCameraTilt = this.getDouble(this.controls, "Roll Camera Tilt", 3.5D);
 		this.rollFOV = this.getDouble(this.controls, "Roll FOV", 1.0D);
 
-		this.skipIntro = this.getBoolean(this.gameplay, "Skip Intro", false);
+		this.skipIntro = this.getBoolean(this.gameplay, "Skip Intro", true);
 
 		this.acknowledgeFingerprintViolation = this.getBoolean(this.misc, "Acknowledge Fingerprint Violation", false);
 

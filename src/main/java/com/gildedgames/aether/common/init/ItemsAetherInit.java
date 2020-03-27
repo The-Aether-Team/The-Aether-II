@@ -50,6 +50,7 @@ public class ItemsAetherInit
 		r.register("valkyrie_wings", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("brettl_cane", new ItemBrettlCane().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("brettl_grass", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
+		r.register("brettl_rope", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("skyroot_pinecone", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("golden_amber", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("cloudtwine", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
