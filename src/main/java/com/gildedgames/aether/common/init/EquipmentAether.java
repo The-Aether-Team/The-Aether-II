@@ -75,7 +75,7 @@ public class EquipmentAether
 		createEquipmentItem(ItemsAether.zanite_sword, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD,
 				new StatEffectFactory.StatProvider(DamageTypeAttributes.SLASH_DAMAGE_LEVEL, 34, StatEffectFactory.StatProvider.OP_ADD));
 		createEquipmentItem(ItemsAether.arkenium_sword, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD,
-				new StatEffectFactory.StatProvider(DamageTypeAttributes.SLASH_DAMAGE_LEVEL, 40, StatEffectFactory.StatProvider.OP_ADD));
+				new StatEffectFactory.StatProvider(DamageTypeAttributes.SLASH_DAMAGE_LEVEL, 46, StatEffectFactory.StatProvider.OP_ADD));
 		createEquipmentItem(ItemsAether.gravitite_sword, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD,
 				new StatEffectFactory.StatProvider(DamageTypeAttributes.SLASH_DAMAGE_LEVEL, 42, StatEffectFactory.StatProvider.OP_ADD));
 
@@ -86,7 +86,7 @@ public class EquipmentAether
 		createEquipmentItem(ItemsAether.zanite_crossbow, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD,
 				new StatEffectFactory.StatProvider(DamageTypeAttributes.PIERCE_DAMAGE_LEVEL, 34, StatEffectFactory.StatProvider.OP_ADD));
 		createEquipmentItem(ItemsAether.arkenium_crossbow, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD,
-				new StatEffectFactory.StatProvider(DamageTypeAttributes.PIERCE_DAMAGE_LEVEL, 40, StatEffectFactory.StatProvider.OP_ADD));
+				new StatEffectFactory.StatProvider(DamageTypeAttributes.PIERCE_DAMAGE_LEVEL, 46, StatEffectFactory.StatProvider.OP_ADD));
 		createEquipmentItem(ItemsAether.gravitite_crossbow, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD,
 				new StatEffectFactory.StatProvider(DamageTypeAttributes.PIERCE_DAMAGE_LEVEL, 42, StatEffectFactory.StatProvider.OP_ADD));
 
@@ -97,7 +97,7 @@ public class EquipmentAether
 		createEquipmentItem(ItemsAether.zanite_axe, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD,
 				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DAMAGE_LEVEL, 30, StatEffectFactory.StatProvider.OP_ADD));
 		createEquipmentItem(ItemsAether.arkenium_axe, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD,
-				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DAMAGE_LEVEL, 36, StatEffectFactory.StatProvider.OP_ADD));
+				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DAMAGE_LEVEL, 42, StatEffectFactory.StatProvider.OP_ADD));
 		createEquipmentItem(ItemsAether.gravitite_axe, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD,
 				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DAMAGE_LEVEL, 38, StatEffectFactory.StatProvider.OP_ADD));
 
@@ -108,7 +108,7 @@ public class EquipmentAether
 		createEquipmentItem(ItemsAether.zanite_pickaxe, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD,
 				new StatEffectFactory.StatProvider(DamageTypeAttributes.PIERCE_DAMAGE_LEVEL, 30, StatEffectFactory.StatProvider.OP_ADD));
 		createEquipmentItem(ItemsAether.arkenium_pickaxe, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD,
-				new StatEffectFactory.StatProvider(DamageTypeAttributes.PIERCE_DAMAGE_LEVEL, 36, StatEffectFactory.StatProvider.OP_ADD));
+				new StatEffectFactory.StatProvider(DamageTypeAttributes.PIERCE_DAMAGE_LEVEL, 42, StatEffectFactory.StatProvider.OP_ADD));
 		createEquipmentItem(ItemsAether.gravitite_pickaxe, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD,
 				new StatEffectFactory.StatProvider(DamageTypeAttributes.PIERCE_DAMAGE_LEVEL, 38, StatEffectFactory.StatProvider.OP_ADD));
 
@@ -119,7 +119,7 @@ public class EquipmentAether
 		createEquipmentItem(ItemsAether.zanite_shovel, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD,
 				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DAMAGE_LEVEL, 19, StatEffectFactory.StatProvider.OP_ADD));
 		createEquipmentItem(ItemsAether.arkenium_shovel, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD,
-				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DAMAGE_LEVEL, 24, StatEffectFactory.StatProvider.OP_ADD));
+				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DAMAGE_LEVEL, 30, StatEffectFactory.StatProvider.OP_ADD));
 		createEquipmentItem(ItemsAether.gravitite_shovel, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD,
 				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DAMAGE_LEVEL, 26, StatEffectFactory.StatProvider.OP_ADD));
 	}

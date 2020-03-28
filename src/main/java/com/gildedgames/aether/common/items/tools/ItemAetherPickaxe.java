@@ -19,7 +19,16 @@ public class ItemAetherPickaxe extends ItemPickaxe
 {
 	public ItemAetherPickaxe(final ToolMaterial material)
 	{
+		this(material, 1.0F, -2.8F);
+	}
+
+	public ItemAetherPickaxe(final ToolMaterial material, final float damageVsEntity, final float attackSpeed)
+	{
 		super(material);
+
+		this.attackDamage = damageVsEntity + material.getAttackDamage();
+
+		this.attackSpeed = attackSpeed;
 
 		this.setHarvestLevel("pickaxe", material.getHarvestLevel());
 
@@ -51,22 +60,6 @@ public class ItemAetherPickaxe extends ItemPickaxe
 		}
 
 		return super.getDestroySpeed(stack, state);
-	}
-
-	@Override
-	public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack)
-	{
-		Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(slot);
-
-		if (stack.getItem() == ItemsAether.arkenium_pickaxe)
-		{
-			if (slot == EntityEquipmentSlot.MAINHAND)
-			{
-				multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -2D, 0));
-			}
-		}
-
-		return multimap;
 	}
 
 	@Override

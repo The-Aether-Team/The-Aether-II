@@ -107,7 +107,7 @@ public class StatEffectFactory implements IEffectFactory<StatEffectFactory.StatP
 				{
 					double value = EffectHelper.combineDouble(mods.get(opcode), AttributeModifier::getAmount);
 
-					String prefix = value > 0 ? format1 + "+" : format2 + "-";
+					String prefix = value > 0 ? format1 + " +" : format2 + " -";
 
 					if (format1 == TextFormatting.GRAY && format2 == TextFormatting.GRAY)
 					{

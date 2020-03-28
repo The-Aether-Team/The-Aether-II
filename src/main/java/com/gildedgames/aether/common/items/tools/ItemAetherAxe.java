@@ -60,22 +60,6 @@ public class ItemAetherAxe extends ItemAxe
 	}
 
 	@Override
-	public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack)
-	{
-		Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(slot);
-
-		if (stack.getItem() == ItemsAether.arkenium_axe)
-		{
-			if (slot == EntityEquipmentSlot.MAINHAND)
-			{
-				multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -2D, 0));
-			}
-		}
-
-		return multimap;
-	}
-
-	@Override
 	public int getItemBurnTime(ItemStack itemStack)
 	{
 		if (this.toolMaterial == MaterialsAether.SKYROOT_TOOL)

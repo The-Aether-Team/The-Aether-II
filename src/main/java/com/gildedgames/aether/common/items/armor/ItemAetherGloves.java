@@ -19,6 +19,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class ItemAetherGloves extends Item
@@ -61,17 +62,21 @@ public class ItemAetherGloves extends Item
 
 		tooltip.add(TextFormatting.GRAY + I18n.format("item.aether.tooltip.modifiers.gloves"));
 
+		if (getAttackSpeed() > 0)
+		{
+			tooltip.add(TextFormatting.GRAY + " " + new DecimalFormat("#.#").format(0.2 + getAttackSpeed()) + " " + I18n.format("attribute.name.generic.attackSpeed"));
+		}
 		if (getImpactDamageLevel() > 0)
 		{
-			tooltip.add(TextFormatting.BLUE + "+" + getImpactDamageLevel() + " " + I18n.format("attribute.name.aether.impactDamageLevel"));
+			tooltip.add(TextFormatting.GRAY + " " + getImpactDamageLevel() + " " + I18n.format("attribute.name.aether.impactDamageLevel"));
 		}
 		if (getPierceDamageLevel() > 0)
 		{
-			tooltip.add(TextFormatting.BLUE + "+" + getPierceDamageLevel() + " " + I18n.format("attribute.name.aether.pierceDamageLevel"));
+			tooltip.add(TextFormatting.GRAY + " " + getPierceDamageLevel() + " " + I18n.format("attribute.name.aether.pierceDamageLevel"));
 		}
 		if (getSlashDamageLevel() > 0)
 		{
-			tooltip.add(TextFormatting.BLUE + "+" + getSlashDamageLevel() + " " + I18n.format("attribute.name.aether.slashDamageLevel"));
+			tooltip.add(TextFormatting.GRAY + " " + getSlashDamageLevel() + " " + I18n.format("attribute.name.aether.slashDamageLevel"));
 		}
 	}
 
@@ -95,17 +100,22 @@ public class ItemAetherGloves extends Item
 		return this.gloveType.getImpactDamageLevel();
 	}
 
+	public double getAttackSpeed()
+	{
+		return this.gloveType.getAttackSpeed();
+	}
+
 	public enum GloveType
 	{
-		TAEGOREHIDE("taegore_hide_gloves", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0, 0, 14),
-		BURRUKAIPELT("burrukai_pelt_gloves", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0, 0, 21),
-		ZANITE("zanite_gloves", SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0, 0, 34),
-		ARKENIUM("arkenium_gloves", SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0, 0, 40),
-		GRAVITITE("gravitite_gloves", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0, 0, 42),
-		VALKYRIE("valkyrie_gloves", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0, 0, 0),
-		NEPTUNE("neptune_gloves", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0, 0, 0),
-		PHOENIX("phoenix_gloves", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0, 0, 0),
-		OBSIDIAN("obsidian_gloves", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0, 0, 0);
+		TAEGOREHIDE("taegore_hide_gloves", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0, 0, 14, 1.0D),
+		BURRUKAIPELT("burrukai_pelt_gloves", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0, 0, 21, 1.0D),
+		ZANITE("zanite_gloves", SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0, 0, 34, 1.0D),
+		ARKENIUM("arkenium_gloves", SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0, 0, 46, 0.6D),
+		GRAVITITE("gravitite_gloves", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0, 0, 42, 1.0D),
+		VALKYRIE("valkyrie_gloves", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0, 0, 0, 1.0D),
+		NEPTUNE("neptune_gloves", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0, 0, 0, 1.0D),
+		PHOENIX("phoenix_gloves", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0, 0, 0, 1.0D),
+		OBSIDIAN("obsidian_gloves", SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0, 0, 0, 1.0D);
 
 		private final ResourceLocation texture, textureSlim;
 
@@ -113,7 +123,9 @@ public class ItemAetherGloves extends Item
 
 		private final int slashDamageLevel, pierceDamageLevel, impactDamageLevel;
 
-		GloveType(String texture, SoundEvent equipSound, int slashDamageLevel, int pierceDamageLevel, int impactDamageLevel)
+		private final double attackSpeed;
+
+		GloveType(String texture, SoundEvent equipSound, int slashDamageLevel, int pierceDamageLevel, int impactDamageLevel, double attackSpeed)
 		{
 			this.texture = AetherCore.getResource("textures/armor/" + texture + ".png");
 			this.textureSlim = AetherCore.getResource("textures/armor/" + texture + "_slim.png");
@@ -121,6 +133,7 @@ public class ItemAetherGloves extends Item
 			this.slashDamageLevel = slashDamageLevel;
 			this.pierceDamageLevel = pierceDamageLevel;
 			this.impactDamageLevel = impactDamageLevel;
+			this.attackSpeed = attackSpeed;
 		}
 
 		public ResourceLocation getTextureSlim()
@@ -151,6 +164,11 @@ public class ItemAetherGloves extends Item
 		public int getImpactDamageLevel()
 		{
 			return this.impactDamageLevel;
+		}
+
+		public double getAttackSpeed()
+		{
+			return this.attackSpeed;
 		}
 	}
 }

@@ -132,9 +132,9 @@ public class ItemsAetherInit
 		r.register("zanite_shovel", new ItemAetherShovel(MaterialsAether.ZANITE_TOOL));
 		r.register("zanite_pickaxe", new ItemAetherPickaxe(MaterialsAether.ZANITE_TOOL));
 		r.register("zanite_axe", new ItemAetherAxe(MaterialsAether.ZANITE_TOOL));
-		r.register("arkenium_shovel", new ItemAetherShovel(MaterialsAether.ARKENIUM_TOOL));
-		r.register("arkenium_pickaxe", new ItemAetherPickaxe(MaterialsAether.ARKENIUM_TOOL));
-		r.register("arkenium_axe", new ItemAetherAxe(MaterialsAether.ARKENIUM_TOOL));
+		r.register("arkenium_shovel", new ItemAetherShovel(MaterialsAether.ARKENIUM_TOOL, 1.5F, -3.5F));
+		r.register("arkenium_pickaxe", new ItemAetherPickaxe(MaterialsAether.ARKENIUM_TOOL, 1.0F, -3.3F));
+		r.register("arkenium_axe", new ItemAetherAxe(MaterialsAether.ARKENIUM_TOOL, 6.0F, -3.5F));
 		r.register("gravitite_shovel", new ItemAetherShovel(MaterialsAether.GRAVITITE_TOOL));
 		r.register("gravitite_pickaxe", new ItemAetherPickaxe(MaterialsAether.GRAVITITE_TOOL));
 		r.register("gravitite_axe", new ItemAetherAxe(MaterialsAether.GRAVITITE_TOOL));

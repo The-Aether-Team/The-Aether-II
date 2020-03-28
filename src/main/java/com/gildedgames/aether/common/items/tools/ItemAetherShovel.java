@@ -21,7 +21,16 @@ public class ItemAetherShovel extends ItemSpade
 {
 	public ItemAetherShovel(final ToolMaterial material)
 	{
+		this(material, 1.5F, -3.0F);
+	}
+
+	public ItemAetherShovel(final ToolMaterial material, final float damageVsEntity, final float attackSpeed)
+	{
 		super(material);
+
+		this.attackDamage = damageVsEntity + material.getAttackDamage();
+
+		this.attackSpeed = attackSpeed;
 
 		this.setHarvestLevel("shovel", material.getHarvestLevel());
 
@@ -53,22 +62,6 @@ public class ItemAetherShovel extends ItemSpade
 		}
 
 		return super.getDestroySpeed(stack, state);
-	}
-
-	@Override
-	public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack)
-	{
-		Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(slot);
-
-		if (stack.getItem() == ItemsAether.arkenium_shovel)
-		{
-			if (slot == EntityEquipmentSlot.MAINHAND)
-			{
-				multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -2D, 0));
-			}
-		}
-
-		return multimap;
 	}
 
 	@Override

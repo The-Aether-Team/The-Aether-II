@@ -48,7 +48,6 @@ public class FOVUpdateListener
             if (event.getNewfov() < 1.0f)
             {
                 event.setNewfov(event.getFov() + (0.0375f * armorCount));
-                System.out.println(event.getNewfov());
             }
         }
 
