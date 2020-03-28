@@ -117,7 +117,7 @@ public class EquipmentAether
 		createEquipmentItem(ItemsAether.holystone_shovel, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD,
 				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DAMAGE_LEVEL, 12, StatEffectFactory.StatProvider.OP_ADD));
 		createEquipmentItem(ItemsAether.zanite_shovel, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD,
-				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DAMAGE_LEVEL, 9, StatEffectFactory.StatProvider.OP_ADD));
+				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DAMAGE_LEVEL, 19, StatEffectFactory.StatProvider.OP_ADD));
 		createEquipmentItem(ItemsAether.arkenium_shovel, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD,
 				new StatEffectFactory.StatProvider(DamageTypeAttributes.IMPACT_DAMAGE_LEVEL, 24, StatEffectFactory.StatProvider.OP_ADD));
 		createEquipmentItem(ItemsAether.gravitite_shovel, ItemEquipmentSlot.NONE, ItemRarity.NONE, WHEN_HELD,
