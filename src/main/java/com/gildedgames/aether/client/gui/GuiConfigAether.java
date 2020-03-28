@@ -21,12 +21,17 @@ public class GuiConfigAether extends GuiConfig
 	{
 		List<IConfigElement> list = new ArrayList<>();
 
-		list.addAll(new ConfigElement(AetherCore.CONFIG.gameplay).getChildElements());
-		list.addAll(new ConfigElement(AetherCore.CONFIG.controls).getChildElements());
-		list.addAll(new ConfigElement(AetherCore.CONFIG.general).getChildElements());
-		list.addAll(new ConfigElement(AetherCore.CONFIG.dimensions).getChildElements());
-		list.addAll(new ConfigElement(AetherCore.CONFIG.misc).getChildElements());
-		list.addAll(new ConfigElement(AetherCore.CONFIG.client).getChildElements());
+		list.addAll(new ConfigElement(AetherCore.CONFIG.skipIntroCategory).getChildElements());
+		list.addAll(new ConfigElement(AetherCore.CONFIG.enableSkyboxCategory).getChildElements());
+		list.addAll(new ConfigElement(AetherCore.CONFIG.displayInventoryPatternCategory).getChildElements());
+		list.addAll(new ConfigElement(AetherCore.CONFIG.cutoutHelmetsCategory).getChildElements());
+		list.addAll(new ConfigElement(AetherCore.CONFIG.helmetShadowCategory).getChildElements());
+		list.addAll(new ConfigElement(AetherCore.CONFIG.aetherDimIDCategory).getChildElements());
+		list.addAll(new ConfigElement(AetherCore.CONFIG.necromancerDimIdCategory).getChildElements());
+		list.addAll(new ConfigElement(AetherCore.CONFIG.displayPerformanceIndicatorCategory).getChildElements());
+		list.addAll(new ConfigElement(AetherCore.CONFIG.analyticsEnabledCategory).getChildElements());
+		list.addAll(new ConfigElement(AetherCore.CONFIG.acknowledgeFingerprintViolationCategory).getChildElements());
+		list.addAll(new ConfigElement(AetherCore.CONFIG.aerwhaleCategory).getChildElements());
 
 		return list;
 	}

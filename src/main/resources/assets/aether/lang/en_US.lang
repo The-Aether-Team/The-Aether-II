@@ -1324,3 +1324,17 @@ mysterious_figure.shop.candy_cane=Try using this as walking cane. Go on, I dare 
 
 aether.placeholder.discovery.description=???
 aether.taegore.discovery.description=The Highlands Taegore are very sociable creatures, they roam in small packs usually lead by the eldest parents.\n\nWhile the Taegore can be friendly, they're equipped with robust armor and sharp tusks which can make them difficult to overpower in a fight.\n\nTheir fur is a sturdy material used in clothing
+
+# Config
+
+config.aether.skip_intro.name=Skip Intro
+config.aether.enable_skybox.name=Display Aether Skybox
+config.aether.display_inventory_pattern.name=Display Inventory Pattern
+config.aether.cutout_helmets.name=Transparent Helmets
+config.aether.helmet_shadow.name=Transparent Helmet Shadows
+config.aether.aether_dimension_id.name=Aether Dimension ID
+config.aether.necromancer_dimension_id.name=Necromancer's Tower Dimension ID
+config.aether.display_performance_indicator.name=Display Performance Indicator
+config.aether.analytics_enabled.name=Enable Analytics (client-side only)
+config.aether.fingerprint_violation.name=Acknowledge Fingerprint Violation
+config.aether.aerwhale.name=Rideable Aerwhales
