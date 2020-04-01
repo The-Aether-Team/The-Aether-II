@@ -91,8 +91,8 @@ public class ItemsAetherInit
 		r.register("skyroot_lizard_stick_roasted", new ItemAetherFood(6, 0.6F, false).setConsumptionDuration(24).setCreativeTab(CreativeTabsAether.TAB_FOOD));
 		r.register("kirrid_loin", new ItemAetherFood(2, 0.3F, true).setCreativeTab(CreativeTabsAether.TAB_FOOD));
 		r.register("kirrid_cutlet", new ItemAetherFood(6, 0.8F, true).setCreativeTab(CreativeTabsAether.TAB_FOOD));
-		r.register("raw_taegore_meat", new ItemAetherFood(3, 0.3F, true).setCreativeTab(CreativeTabsAether.TAB_FOOD));
-		r.register("taegore_steak", new ItemAetherFood(8, 0.8F, true).setCreativeTab(CreativeTabsAether.TAB_FOOD));
+		r.register("raw_taegore_meat", new ItemAetherFood(2, 0.3F, true).setCreativeTab(CreativeTabsAether.TAB_FOOD));
+		r.register("taegore_steak", new ItemAetherFood(6, 0.8F, true).setCreativeTab(CreativeTabsAether.TAB_FOOD));
 		r.register("burrukai_rib_cut", new ItemAetherFood(4, 0.3F, true).setConsumptionDuration(40).setCreativeTab(CreativeTabsAether.TAB_FOOD));
 		r.register("burrukai_ribs", new ItemAetherFood(9, 0.8F, true).setConsumptionDuration(40).setCreativeTab(CreativeTabsAether.TAB_FOOD));
 		r.register("swet_jelly", new ItemSwetJelly().setConsumptionDuration(24).setCreativeTab(CreativeTabsAether.TAB_FOOD));
