@@ -68,17 +68,17 @@ public class ConfigAether
 
 	private void loadAndSync()
 	{
-		this.skipIntro = this.getBoolean(this.skipIntroCategory, I18n.format("config.aether.skip_intro.name"), true);
-		this.enableSkybox = this.getBoolean(this.enableSkyboxCategory, "config.aether.enable_skybox.name", true);
-		this.displayInventoryPattern = this.getBoolean(this.displayInventoryPatternCategory, "config.aether.display_inventory_pattern.name", true);
-		this.cutoutHelmets = this.getBoolean(this.cutoutHelmetsCategory, "config.aether.cutout_helmets.name", true);
-		this.helmetShadow = this.getBoolean(this.helmetShadowCategory, "config.aether.helmet_shadow.name", true);
-		this.aetherDimID = this.getInt(this.aetherDimIDCategory, "config.aether.aether_dimension_id.name", 3);
-		this.necromancerDimId = this.getInt(this.necromancerDimIdCategory, "config.aether.necromancer_dimension_id.name", 4);
-		this.displayPerformanceIndicator = this.getBoolean(this.displayPerformanceIndicatorCategory, "config.aether.display_performance_indicator.name", false);
-		this.analyticsEnabled = this.getBoolean(this.analyticsEnabledCategory, "config.aether.analytics_enabled.name", true);
-		this.acknowledgeFingerprintViolation = this.getBoolean(this.acknowledgeFingerprintViolationCategory, "config.aether.fingerprint_violation.name", false);
-		this.getBoolean(this.aerwhaleCategory, "config.aether.aerwhale.name", false);
+		this.skipIntro = this.getBoolean(this.skipIntroCategory, "Skip Intro", true);
+		this.enableSkybox = this.getBoolean(this.enableSkyboxCategory, "Enable Skybox", true);
+		this.displayInventoryPattern = this.getBoolean(this.displayInventoryPatternCategory, "Display Inventory Pattern", true);
+		this.cutoutHelmets = this.getBoolean(this.cutoutHelmetsCategory, "Cutout Helmets", true);
+		this.helmetShadow = this.getBoolean(this.helmetShadowCategory, "Helmet Shadow", true);
+		this.aetherDimID = this.getInt(this.aetherDimIDCategory, "Aether Dimension ID", 3);
+		this.necromancerDimId = this.getInt(this.necromancerDimIdCategory, "Necromancer Dimension ID", 4);
+		this.displayPerformanceIndicator = this.getBoolean(this.displayPerformanceIndicatorCategory, "Display Performance Indicator", false);
+		this.analyticsEnabled = this.getBoolean(this.analyticsEnabledCategory, "Analytics Enabled", true);
+		this.acknowledgeFingerprintViolation = this.getBoolean(this.acknowledgeFingerprintViolationCategory, "Acknowledge Fingerprint Violation", false);
+		this.getBoolean(this.aerwhaleCategory, "Aerwhale", false);
 
 		if (this.configuration.hasChanged())
 		{
