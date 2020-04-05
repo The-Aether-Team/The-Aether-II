@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.blocks.natural.plants;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.IBlockMultiName;
 import com.gildedgames.aether.common.blocks.IBlockSnowy;
 import com.gildedgames.aether.common.blocks.natural.BlockAetherGrass;
@@ -18,6 +19,7 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -93,37 +95,42 @@ public class BlockTallAetherGrass extends BlockAetherPlant implements IBlockMult
 	@Override
 	public IBlockState getActualState(final IBlockState state, final IBlockAccess worldIn, final BlockPos pos)
 	{
-		final IBlockState down = worldIn.getBlockState(pos.down());
-
-		final Block bottomBlock = down.getBlock();
-
-		final Comparable<?> grassType = down.getProperties().get(BlockAetherGrass.PROPERTY_VARIANT);
-
-		Biome biome = worldIn.getBiome(pos);
-
-		final IBlockState lastVariant = biome instanceof BiomeArcticPeaks
-				? state.withProperty(TYPE, Type.ARCTIC)
-				: (biome instanceof BiomeMagneticHills
-				? state.withProperty(TYPE, Type.MAGNETIC)
-				: (biome instanceof BiomeIrradiatedForests
-				? state.withProperty(TYPE, Type.IRRADIATED)
-				: state.withProperty(TYPE, Type.HIGHLANDS)
-		));
-
-		if (bottomBlock == BlocksAether.aether_grass)
+		if (AetherCore.isClient())
 		{
-			return grassType.equals(BlockAetherGrass.ARCTIC)
+			final IBlockState down = worldIn.getBlockState(pos.down());
+
+			final Block bottomBlock = down.getBlock();
+
+			final Comparable<?> grassType = down.getProperties().get(BlockAetherGrass.PROPERTY_VARIANT);
+
+			Biome biome = worldIn.getBiome(pos);
+
+			final IBlockState lastVariant = biome instanceof BiomeArcticPeaks
 					? state.withProperty(TYPE, Type.ARCTIC)
-					: (grassType.equals(BlockAetherGrass.MAGNETIC)
+					: (biome instanceof BiomeMagneticHills
 					? state.withProperty(TYPE, Type.MAGNETIC)
-					: (grassType.equals(BlockAetherGrass.IRRADIATED)
+					: (biome instanceof BiomeIrradiatedForests
 					? state.withProperty(TYPE, Type.IRRADIATED)
-					: (grassType.equals(BlockAetherGrass.ENCHANTED)
-					? state.withProperty(TYPE, Type.ENCHANTED)
 					: state.withProperty(TYPE, Type.HIGHLANDS)
-			)));
+			));
+
+			if (bottomBlock == BlocksAether.aether_grass)
+			{
+				return grassType.equals(BlockAetherGrass.ARCTIC)
+						? state.withProperty(TYPE, Type.ARCTIC)
+						: (grassType.equals(BlockAetherGrass.MAGNETIC)
+						? state.withProperty(TYPE, Type.MAGNETIC)
+						: (grassType.equals(BlockAetherGrass.IRRADIATED)
+						? state.withProperty(TYPE, Type.IRRADIATED)
+						: (grassType.equals(BlockAetherGrass.ENCHANTED)
+						? state.withProperty(TYPE, Type.ENCHANTED)
+						: state.withProperty(TYPE, Type.HIGHLANDS)
+				)));
+			}
+			return lastVariant;
 		}
-		return lastVariant;
+
+		return state;
 	}
 
 	@Override
