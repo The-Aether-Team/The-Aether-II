@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
 import com.gildedgames.aether.api.entity.damage.DamageTypeAttributes;
 import com.gildedgames.aether.client.gui.container.guidebook.GuiGuidebookInventory;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.capabilities.item.effects.stats.StatEffectFactory;
@@ -20,6 +21,8 @@ import java.util.UUID;
 public class PlayerSpecialEquipmentModule extends PlayerAetherModule
 {
     private int abilityDelay = 0;
+
+    public boolean hasOpenScreen = false;
 
     public PlayerSpecialEquipmentModule(PlayerAether playerAether)
     {
@@ -53,6 +56,11 @@ public class PlayerSpecialEquipmentModule extends PlayerAetherModule
         IAttributeInstance pierceDamageLevel = event.player.getEntityAttribute(DamageTypeAttributes.PIERCE_DAMAGE_LEVEL);
         IAttributeInstance impactDamageLevel = event.player.getEntityAttribute(DamageTypeAttributes.IMPACT_DAMAGE_LEVEL);
 
+        if (AetherCore.isClient())
+        {
+            this.hasOpenScreen = Minecraft.getMinecraft().currentScreen != null;
+        }
+
         if (!event.player.getHeldItemMainhand().isEmpty() || gloveStack.isEmpty())
         {
             if (attackSpeed.getModifier(ATTACK_SPEED.getID()) != null)
@@ -65,7 +73,7 @@ public class PlayerSpecialEquipmentModule extends PlayerAetherModule
         {
             double newAttackSpeed = ((ItemAetherGloves) gloveStack.getItem()).getAttackSpeed();
 
-            if (event.player.openContainer != event.player.inventoryContainer)
+            if (this.hasOpenScreen)
             {
                 if (attackSpeed.getModifier(ATTACK_SPEED.getID()) != null)
                 {
