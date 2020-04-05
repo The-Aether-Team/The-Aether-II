@@ -24,6 +24,8 @@ public class PlayerSpecialEquipmentModule extends PlayerAetherModule
 
     public boolean hasOpenScreen = false;
 
+    public ItemAetherGloves.GloveType lastEquippedGloveType = null;
+
     public PlayerSpecialEquipmentModule(PlayerAether playerAether)
     {
         super(playerAether);
@@ -118,6 +120,27 @@ public class PlayerSpecialEquipmentModule extends PlayerAetherModule
         }
         else if (event.player.getHeldItemMainhand().isEmpty() && gloveStack.getItem() instanceof ItemAetherGloves && !gloveStack.isEmpty())
         {
+            ItemAetherGloves.GloveType equippedGloveType = ((ItemAetherGloves) gloveStack.getItem()).gloveType;
+
+            if (equippedGloveType != this.lastEquippedGloveType)
+            {
+                if (slashDamageLevel.getModifier(SLASH_DAMAGE.getID()) != null)
+                {
+                    slashDamageLevel.setBaseValue(0);
+                    slashDamageLevel.removeModifier(SLASH_DAMAGE);
+                }
+                if (pierceDamageLevel.getModifier(PIERCE_DAMAGE.getID()) != null)
+                {
+                    pierceDamageLevel.setBaseValue(0);
+                    pierceDamageLevel.removeModifier(PIERCE_DAMAGE);
+                }
+                if (impactDamageLevel.getModifier(IMPACT_DAMAGE.getID()) != null)
+                {
+                    impactDamageLevel.setBaseValue(0);
+                    impactDamageLevel.removeModifier(IMPACT_DAMAGE);
+                }
+            }
+
             if (this.abilityDelay >= 7)
             {
                 double newSlashDamageLevel = ((ItemAetherGloves) gloveStack.getItem()).getSlashDamageLevel();
@@ -140,6 +163,8 @@ public class PlayerSpecialEquipmentModule extends PlayerAetherModule
                     impactDamageLevel.applyModifier(IMPACT_DAMAGE);
                 }
             }
+
+            this.lastEquippedGloveType = ((ItemAetherGloves) gloveStack.getItem()).gloveType;
         }
     }
 }
