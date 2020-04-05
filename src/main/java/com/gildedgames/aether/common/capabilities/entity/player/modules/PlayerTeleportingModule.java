@@ -214,7 +214,7 @@ public class PlayerTeleportingModule extends PlayerAetherModule implements IPlay
 
 		if (world.isRemote)
 		{
-			if (AetherCore.CONFIG.skipIntro())
+			if (AetherCore.CONFIG.skipIntro)
 			{
 				teleportingModule.setPlayedIntro(true);
 				NetworkingAether.sendPacketToServer(new PacketSetPlayedIntro(true));
@@ -296,7 +296,7 @@ public class PlayerTeleportingModule extends PlayerAetherModule implements IPlay
 
 			final EntityPlayer player = this.getEntity();
 
-			final int transferToID = AetherCore.CONFIG.getAetherDimID();
+			final int transferToID = AetherCore.CONFIG.aetherDimID;
 
 			AetherCore.PROXY.teleportEntity(this.getEntity(), worldServer, new TeleporterGeneric(worldServer), transferToID, () -> {
 
@@ -311,7 +311,7 @@ public class PlayerTeleportingModule extends PlayerAetherModule implements IPlay
 
 					teleportingModule
 							.setAetherPos(new BlockPosDimension(respawn.getX(), respawn.getY(), respawn.getZ(),
-									AetherCore.CONFIG.getAetherDimID()));
+									AetherCore.CONFIG.aetherDimID));
 				}
 
 				return teleportingModule.getAetherPos();

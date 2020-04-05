@@ -55,7 +55,7 @@ public class LayerHeadShadow extends LayerBipedArmor
 			return;
 		}
 
-		if (!AetherCore.CONFIG.hasHelmetShadow())
+		if (!AetherCore.CONFIG.helmetShadow)
 		{
 			return;
 		}

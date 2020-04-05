@@ -97,7 +97,7 @@ public class ClientProxy extends CommonProxy
 			AetherCore.ANALYTICS = AetherCore.isInsideDevEnvironment() ? new GameAnalytics() :
 					new GameAnalytics("c8e4d94251ce253e138ae8a702e20301", "1ba3cb91e03cbb578b97c26f872e812dd05f5bbb");
 
-			if (Minecraft.getMinecraft().isSnooperEnabled() && AetherCore.CONFIG.isAnalyticsEnabled())
+			if (Minecraft.getMinecraft().isSnooperEnabled() && AetherCore.CONFIG.analyticsEnabled)
 			{
 				AetherCore.ANALYTICS.setup();
 			}

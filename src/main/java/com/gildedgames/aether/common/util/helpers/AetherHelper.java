@@ -36,12 +36,12 @@ public class AetherHelper
 	{
 		IInstance instance = InstancesAether.NECROMANCER_TOWER_HANDLER.getFromDimId(dimension);
 
-		return instance != null || dimension == AetherCore.CONFIG.getNecromancerDimID();
+		return instance != null || dimension == AetherCore.CONFIG.necromancerDimId;
 	}
 
 	public static boolean isAether(int dimension)
 	{
-		return dimension == AetherCore.CONFIG.getAetherDimID();
+		return dimension == AetherCore.CONFIG.aetherDimID;
 	}
 
 	public static boolean isAether(World world)

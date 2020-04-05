@@ -32,7 +32,7 @@ public class PerformanceIngame extends Gui
 
 		this.update(mc);
 
-		if (!this.isDisabled && AetherCore.CONFIG.getDisplayPerformanceIndicator())
+		if (!this.isDisabled && AetherCore.CONFIG.displayPerformanceIndicator)
 		{
 			this.renderIcon(mc);
 		}

@@ -90,7 +90,7 @@ public class ItemAetherArmor extends ItemArmor
 	public String getArmorTexture(final ItemStack stack, final Entity entity, final EntityEquipmentSlot slot, final String type)
 	{
 		return AetherCore.getResourcePath("textures/armor/" + this.name + "_layer_" + (slot == EntityEquipmentSlot.LEGS ? 2 :
-				1 + (AetherCore.CONFIG.hasCutoutHelmets() ? "b" : "")) + ".png");
+				1 + (AetherCore.CONFIG.cutoutHelmets ? "b" : "")) + ".png");
 	}
 
 	@Override

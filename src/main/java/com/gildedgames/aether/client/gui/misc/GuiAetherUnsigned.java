@@ -88,7 +88,7 @@ public class GuiAetherUnsigned extends GuiScreen
 		}
 		else if (button.id == this.ackButton.id && this.ackButton.enabled)
 		{
-			AetherCore.CONFIG.markFingerprintViolationAck();
+			AetherCore.CONFIG.acknowledgeFingerprintViolation = true;
 
 			this.mc.displayGuiScreen(this.parent);
 		}

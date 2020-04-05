@@ -15,7 +15,7 @@ public class GuiMenuListener
 	public static void onOpenGui(final GuiOpenEvent event)
 	{
 		if (event.getGui() instanceof GuiMainMenu && !AetherCore.IS_SIGNED && !AetherCore.isInsideDevEnvironment() && !AetherCore.CONFIG
-				.hasAckFingerprintViolation())
+				.acknowledgeFingerprintViolation)
 		{
 			event.setGui(new GuiAetherUnsigned(event.getGui()));
 

@@ -1337,4 +1337,4 @@ config.aether.necromancer_dimension_id.name=Necromancer's Tower Dimension ID
 config.aether.display_performance_indicator.name=Display Performance Indicator
 config.aether.analytics_enabled.name=Enable Analytics (client-side only)
 config.aether.fingerprint_violation.name=Acknowledge Fingerprint Violation
-config.aether.aerwhale.name=Rideable Aerwhales
+config.aether.aerwhale_riding.name=Rideable Aerwhales

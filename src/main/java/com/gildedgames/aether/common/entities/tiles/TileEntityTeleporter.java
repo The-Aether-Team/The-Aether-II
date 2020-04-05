@@ -144,7 +144,7 @@ public class TileEntityTeleporter extends TileEntityMultiblockController impleme
 			final PlayerAether playerAether = PlayerAether.getPlayer(player);
 			final PlayerTeleportingModule teleportingModule = playerAether.getModule(PlayerTeleportingModule.class);
 
-			if (AetherCore.CONFIG.skipIntro())
+			if (AetherCore.CONFIG.skipIntro)
 			{
 				teleportingModule.setPlayedIntro(true);
 				NetworkingAether.sendPacketToServer(new PacketSetPlayedIntro(true));

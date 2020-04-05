@@ -15,7 +15,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @Mod(name = AetherCore.MOD_NAME, modid = AetherCore.MOD_ID, version = AetherCore.MOD_VERSION,
-		certificateFingerprint = AetherCore.MOD_FINGERPRINT, guiFactory = AetherCore.MOD_GUI_FACTORY,
+		certificateFingerprint = AetherCore.MOD_FINGERPRINT,
 		dependencies = AetherCore.MOD_DEPENDENCIES)
 public class AetherCore
 {
@@ -28,8 +28,6 @@ public class AetherCore
 	public static final String MOD_DEPENDENCIES = "required-after:orbis-lib@[0.2.0,);" + "required-after:forge@[14.23.5.2816,)";
 
 	public static final Logger LOGGER = LogManager.getLogger("AetherII");
-
-	public static final String MOD_GUI_FACTORY = "com.gildedgames.aether.client.gui.GuiFactoryAether";
 
 	public static final String MOD_FINGERPRINT = "db341c083b1b8ce9160a769b569ef6737b3f4cdf";
 
@@ -79,7 +77,7 @@ public class AetherCore
 	@EventHandler
 	public void onModPreInit(final FMLPreInitializationEvent event)
 	{
-		AetherCore.CONFIG = new ConfigAether(event.getSuggestedConfigurationFile());
+		AetherCore.CONFIG = new ConfigAether();
 
 		if (!AetherCore.isInsideDevEnvironment() && !JarValidator.validate(event.getSourceFile()))
 		{

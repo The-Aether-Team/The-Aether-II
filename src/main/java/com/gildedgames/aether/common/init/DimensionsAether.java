@@ -16,13 +16,13 @@ public class DimensionsAether
 	{
 		// Register dimension types
 		DimensionsAether.AETHER = DimensionType.register("Aether", "_aether",
-				AetherCore.CONFIG.getAetherDimID(), WorldProviderAether.class, false);
+				AetherCore.CONFIG.aetherDimID, WorldProviderAether.class, false);
 
 		DimensionsAether.NECROMANCER_TOWER = DimensionType.register("NecromancerTower", "_necromancer_tower",
-				AetherCore.CONFIG.getNecromancerDimID(), WorldProviderNecromancerTower.class, false);
+				AetherCore.CONFIG.necromancerDimId, WorldProviderNecromancerTower.class, false);
 
 		// Register dimensions
-		DimensionManager.registerDimension(AetherCore.CONFIG.getAetherDimID(), DimensionsAether.AETHER);
+		DimensionManager.registerDimension(AetherCore.CONFIG.aetherDimID, DimensionsAether.AETHER);
 	}
 
 }

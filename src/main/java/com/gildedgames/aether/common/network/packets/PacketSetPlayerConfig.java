@@ -20,7 +20,7 @@ public class PacketSetPlayerConfig implements IMessage
 
 	public PacketSetPlayerConfig(ConfigAether config)
 	{
-		this.skipIntro = config.skipIntro();
+		this.skipIntro = config.skipIntro;
 	}
 
 	@Override

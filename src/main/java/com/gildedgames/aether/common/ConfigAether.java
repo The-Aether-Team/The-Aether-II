@@ -1,194 +1,68 @@
 package com.gildedgames.aether.common;
 
-import com.gildedgames.aether.common.network.NetworkingAether;
-import com.gildedgames.aether.common.network.packets.PacketSetPlayerConfig;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.I18n;
-import net.minecraftforge.common.config.ConfigCategory;
-import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.config.Config;
+import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import java.io.File;
-
-@Mod.EventBusSubscriber
+@Config(modid = AetherCore.MOD_ID)
 public class ConfigAether
 {
-	public final ConfigCategory skipIntroCategory, enableSkyboxCategory, displayInventoryPatternCategory, cutoutHelmetsCategory, helmetShadowCategory, displayPerformanceIndicatorCategory,
-			analyticsEnabledCategory, acknowledgeFingerprintViolationCategory, aerwhaleCategory, aetherDimIDCategory, necromancerDimIdCategory;
-
-	private final Configuration configuration;
-
-	private int aetherDimID, necromancerDimId;
-
-	private boolean analyticsEnabled;
-
-	private boolean displayInventoryPattern;
-
-	private boolean displayPerformanceIndicator;
-
-	private boolean cutoutHelmets;
-
-	private boolean helmetShadow;
-
-	private double rollCameraTilt;
-
-	private double rollFOV;
-
-	private boolean skipIntro;
-
-	private boolean acknowledgeFingerprintViolation = false;
-
-	private boolean hideXPBarInAether;
-
-	private boolean enableSkybox = true;
-
-	public ConfigAether(final File file)
-	{
-		this.configuration = new Configuration(file, true);
-
-		this.skipIntroCategory = this.configuration.getCategory("Skip Intro");
-		this.enableSkyboxCategory = this.configuration.getCategory("Enable Skybox");
-		this.displayInventoryPatternCategory = this.configuration.getCategory("Display Inventory Pattern");
-		this.cutoutHelmetsCategory = this.configuration.getCategory("Cutout Helmets");
-		this.helmetShadowCategory = this.configuration.getCategory("Helmet Shadow");
-		this.aetherDimIDCategory = this.configuration.getCategory("Aether Dimension ID");
-		this.necromancerDimIdCategory = this.configuration.getCategory("Necromancer Dimension ID");
-		this.displayPerformanceIndicatorCategory = this.configuration.getCategory("Display Performance Indicator");
-		this.analyticsEnabledCategory = this.configuration.getCategory("Analytics Enabled");
-		this.acknowledgeFingerprintViolationCategory = this.configuration.getCategory("Acknowledge Fingerprint Violation");
-		this.aerwhaleCategory = this.configuration.getCategory("Aerwhale");
-
-		this.aetherDimIDCategory.setRequiresMcRestart(true);
-		this.necromancerDimIdCategory.setRequiresMcRestart(true);
-
-		this.loadAndSync();
-	}
-
-	private void loadAndSync()
-	{
-		this.skipIntro = this.getBoolean(this.skipIntroCategory, "Skip Intro", true);
-		this.enableSkybox = this.getBoolean(this.enableSkyboxCategory, "Enable Skybox", true);
-		this.displayInventoryPattern = this.getBoolean(this.displayInventoryPatternCategory, "Display Inventory Pattern", true);
-		this.cutoutHelmets = this.getBoolean(this.cutoutHelmetsCategory, "Cutout Helmets", true);
-		this.helmetShadow = this.getBoolean(this.helmetShadowCategory, "Helmet Shadow", true);
-		this.aetherDimID = this.getInt(this.aetherDimIDCategory, "Aether Dimension ID", 3);
-		this.necromancerDimId = this.getInt(this.necromancerDimIdCategory, "Necromancer Dimension ID", 4);
-		this.displayPerformanceIndicator = this.getBoolean(this.displayPerformanceIndicatorCategory, "Display Performance Indicator", false);
-		this.analyticsEnabled = this.getBoolean(this.analyticsEnabledCategory, "Analytics Enabled", true);
-		this.acknowledgeFingerprintViolation = this.getBoolean(this.acknowledgeFingerprintViolationCategory, "Acknowledge Fingerprint Violation", false);
-		this.getBoolean(this.aerwhaleCategory, "Aerwhale", false);
-
-		if (this.configuration.hasChanged())
-		{
-			this.configuration.save();
-		}
-	}
+	@Config.Ignore
+	private static final String LANG_PREFIX = "config." + AetherCore.MOD_ID + ".";
 
 	@SubscribeEvent
-	public void onConfigChanged(final OnConfigChangedEvent event)
+	public void onConfigChangedEvent(OnConfigChangedEvent event)
 	{
 		if (event.getModID().equals(AetherCore.MOD_ID))
 		{
-			this.loadAndSync();
-
-			if (AetherCore.isClient() && Minecraft.getMinecraft().world != null)
-			{
-				NetworkingAether.sendPacketToServer(new PacketSetPlayerConfig(this));
-			}
+			ConfigManager.sync(AetherCore.MOD_ID, Config.Type.INSTANCE);
 		}
 	}
 
-	private double getDouble(final ConfigCategory category, final String name, final double defaultValue)
-	{
-		return this.configuration.get(category.getName(), name, defaultValue).getDouble();
-	}
+	@Config.LangKey(LANG_PREFIX + "skip_intro." + "name")
+	@Config.Comment("")
+	public static boolean skipIntro = true;
 
-	private int getInt(final ConfigCategory category, final String name, final int defaultValue)
-	{
-		return this.configuration.get(category.getName(), name, defaultValue).getInt();
-	}
+	@Config.LangKey(LANG_PREFIX + "enable_skybox." + "name")
+	@Config.Comment("")
+	public static boolean enableSkybox = true;
 
-	private boolean getBoolean(final ConfigCategory category, final String name, final boolean defaultValue)
-	{
-		return this.configuration.get(category.getName(), name, defaultValue).getBoolean();
-	}
+	@Config.LangKey(LANG_PREFIX + "display_inventory_pattern." + "name")
+	@Config.Comment("")
+	public static boolean displayInventoryPattern = true;
 
-	public boolean hideXPBarInAether()
-	{
-		return this.hideXPBarInAether;
-	}
+	@Config.LangKey(LANG_PREFIX + "cutout_helmets." + "name")
+	@Config.Comment("")
+	public static boolean cutoutHelmets = true;
 
-	public int getAetherDimID()
-	{
-		return this.aetherDimID;
-	}
+	@Config.LangKey(LANG_PREFIX + "helmet_shadow." + "name")
+	@Config.Comment("")
+	public static boolean helmetShadow = true;
 
-	public int getNecromancerDimID()
-	{
-		return this.necromancerDimId;
-	}
+	@Config.LangKey(LANG_PREFIX + "aether_dimension_id." + "name")
+	@Config.Comment("")
+	@Config.RequiresMcRestart
+	public static int aetherDimID = 3;
 
-	public boolean getDisplayInventoryPattern()
-	{
-		return this.displayInventoryPattern;
-	}
+	@Config.LangKey(LANG_PREFIX + "necromancer_dimension_id." + "name")
+	@Config.Comment("")
+	@Config.RequiresMcRestart
+	public static int necromancerDimId = 4;
 
-	public boolean getDisplayPerformanceIndicator()
-	{
-		return this.displayPerformanceIndicator;
-	}
+	@Config.LangKey(LANG_PREFIX + "display_performance_indicator." + "name")
+	@Config.Comment("")
+	public static boolean displayPerformanceIndicator = false;
 
-	public boolean isAnalyticsEnabled()
-	{
-		return this.analyticsEnabled;
-	}
+	@Config.LangKey(LANG_PREFIX + "analytics_enabled." + "name")
+	@Config.Comment("")
+	public static boolean analyticsEnabled = true;
 
-	public boolean hasCutoutHelmets()
-	{
-		return this.cutoutHelmets;
-	}
+	@Config.LangKey(LANG_PREFIX + "fingerprint_violation." + "name")
+	@Config.Comment("")
+	public static boolean acknowledgeFingerprintViolation = false;
 
-	public boolean hasHelmetShadow()
-	{
-		return this.helmetShadow;
-	}
-
-	public double getRollCameraTilt()
-	{
-		return this.rollCameraTilt;
-	}
-
-	public double getRollFOV()
-	{
-		return this.rollFOV;
-	}
-
-	public boolean skipIntro()
-	{
-		return this.skipIntro;
-	}
-
-	public boolean hasAckFingerprintViolation()
-	{
-		return this.acknowledgeFingerprintViolation;
-	}
-
-	public boolean isSkyboxRenderEnabled()
-	{
-		return this.enableSkybox;
-	}
-
-	public void markFingerprintViolationAck()
-	{
-		this.acknowledgeFingerprintViolation = true;
-
-		this.configuration.get(this.acknowledgeFingerprintViolationCategory.getName(), "Acknowledge Fingerprint Violation", false).set(true);
-
-		if (this.configuration.hasChanged())
-		{
-			this.configuration.save();
-		}
-	}
+	@Config.LangKey(LANG_PREFIX + "aerwhale_riding." + "name")
+	@Config.Comment("")
+	public static boolean rideableAerwhale = false;
 }

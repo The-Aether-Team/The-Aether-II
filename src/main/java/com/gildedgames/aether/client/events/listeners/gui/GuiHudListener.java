@@ -68,15 +68,6 @@ public class GuiHudListener
 	{
 		if (mc.world != null)
 		{
-			if (AetherCore.CONFIG.hideXPBarInAether() && mc.world.provider.getDimensionType() == DimensionsAether.AETHER)
-			{
-				old_left_height = GuiIngameForge.left_height;
-				old_right_height = GuiIngameForge.right_height;
-
-				GuiIngameForge.left_height = 33;
-				GuiIngameForge.right_height = 33;
-			}
-
 			boolean atNecromancerInstance = mc.world.provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER;
 
 			if (atNecromancerInstance && (event.getType() == RenderGameOverlayEvent.ElementType.AIR
@@ -95,12 +86,6 @@ public class GuiHudListener
 	{
 		if (mc.world != null)
 		{
-			if (AetherCore.CONFIG.hideXPBarInAether() && mc.world.provider.getDimensionType() == DimensionsAether.AETHER)
-			{
-				GuiIngameForge.left_height = old_left_height;
-				GuiIngameForge.right_height = old_right_height;
-			}
-
 			boolean atNecromancerInstance = mc.world.provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER;
 
 			if (atNecromancerInstance && (event.getType() == RenderGameOverlayEvent.ElementType.AIR
