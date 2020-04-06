@@ -102,7 +102,7 @@ public class ItemSwetGel extends Item implements IDropOnDeath
 				for (int z = pos.getZ() - radius; z <= pos.getZ() + radius; z++)
 				{
 					final BlockPos nPos = new BlockPos(x, pos.getY(), z);
-x
+
 					if (world.getBlockState(nPos) == state && !world.getBlockState(nPos.up()).isNormalCube())
 					{
 						world.setBlockState(nPos, nState);
