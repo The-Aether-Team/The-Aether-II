@@ -102,12 +102,17 @@ public class ItemSwetGel extends Item implements IDropOnDeath
 				for (int z = pos.getZ() - radius; z <= pos.getZ() + radius; z++)
 				{
 					final BlockPos nPos = new BlockPos(x, pos.getY(), z);
-
+x
 					if (world.getBlockState(nPos) == state && !world.getBlockState(nPos.up()).isNormalCube())
 					{
 						world.setBlockState(nPos, nState);
 					}
 				}
+			}
+
+			if (!player.capabilities.isCreativeMode)
+			{
+				stack.shrink(1);
 			}
 
 			return EnumActionResult.SUCCESS;
@@ -154,38 +159,6 @@ public class ItemSwetGel extends Item implements IDropOnDeath
 		}
 
 		return false;
-	}
-
-	@SideOnly(Side.CLIENT)
-	public static void spawnBonemealParticles(World worldIn, BlockPos pos, int amount)
-	{
-		if (amount == 0)
-		{
-			amount = 15;
-		}
-
-		IBlockState iblockstate = worldIn.getBlockState(pos);
-
-		if (iblockstate.getMaterial() != Material.AIR)
-		{
-			for (int i = 0; i < amount; ++i)
-			{
-				double d0 = itemRand.nextGaussian() * 0.02D;
-				double d1 = itemRand.nextGaussian() * 0.02D;
-				double d2 = itemRand.nextGaussian() * 0.02D;
-				worldIn.spawnParticle(EnumParticleTypes.VILLAGER_HAPPY, (pos.getX() + itemRand.nextFloat()), pos.getY() + itemRand.nextFloat() * iblockstate.getBoundingBox(worldIn, pos).maxY, (pos.getZ() + itemRand.nextFloat()), d0, d1, d2);
-			}
-		}
-		else
-		{
-			for (int i1 = 0; i1 < amount; ++i1)
-			{
-				double d0 = itemRand.nextGaussian() * 0.02D;
-				double d1 = itemRand.nextGaussian() * 0.02D;
-				double d2 = itemRand.nextGaussian() * 0.02D;
-				worldIn.spawnParticle(EnumParticleTypes.VILLAGER_HAPPY, (pos.getX() + itemRand.nextFloat()), pos.getY() + itemRand.nextFloat() * 1.0f, (pos.getZ() + itemRand.nextFloat()), d0, d1, d2, new int[0]);
-			}
-		}
 	}
 
 	@Override
