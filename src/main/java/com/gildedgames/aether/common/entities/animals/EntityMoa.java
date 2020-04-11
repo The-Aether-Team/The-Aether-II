@@ -261,6 +261,11 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 
 				this.setFoodEaten(this.getFoodEaten() + 1);
 
+				if (!player.capabilities.isCreativeMode)
+				{
+					stack.shrink(1);
+				}
+
 				return true;
 			}
 		}
