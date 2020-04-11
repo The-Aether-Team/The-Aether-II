@@ -122,11 +122,6 @@ public class EntityCockatrice extends EntityAetherMob
 				int buildup = IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectCockatriceVenom(living), EEffectIntensity.ORDINARY);
 				IAetherStatusEffects.applyStatusEffect(living, IAetherStatusEffects.effectTypes.COCKATRICE_VENOM, buildup);
 			}
-			else
-			{
-				int buildup = IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectCockatriceVenom(living), EEffectIntensity.MINOR);
-				IAetherStatusEffects.applyStatusEffect(living, IAetherStatusEffects.effectTypes.COCKATRICE_VENOM, buildup);
-			}
 		}
 	}
 

@@ -147,11 +147,6 @@ public class EntityVaranys extends EntityAetherMob implements IEntityMultiPart
 				int buildup = IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectFreeze(living), EEffectIntensity.MAJOR);
 				IAetherStatusEffects.applyStatusEffect(living, IAetherStatusEffects.effectTypes.FREEZE, buildup);
 			}
-			else
-			{
-				int buildup = IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectFreeze(living), EEffectIntensity.ORDINARY);
-				IAetherStatusEffects.applyStatusEffect(living, IAetherStatusEffects.effectTypes.FREEZE, buildup);
-			}
 		}
 	}
 
