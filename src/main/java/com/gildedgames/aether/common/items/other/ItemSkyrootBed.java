@@ -21,7 +21,7 @@ public class ItemSkyrootBed extends Item implements IDropOnDeath
 {
 	public ItemSkyrootBed()
 	{
-
+		this.maxStackSize = 1;
 	}
 
 	@Override
