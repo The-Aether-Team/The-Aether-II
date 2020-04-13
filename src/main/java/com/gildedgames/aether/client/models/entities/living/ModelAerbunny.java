@@ -146,7 +146,7 @@ public class ModelAerbunny extends ModelBase
 		Animation for the legs, because the rotation for the bunnie's jump is from -30 to 30, offsetting it allows the feet to be in a preset position,
 		and dividing it by a greater number than it will ever become keeps the value < 1f
 		 */
-		if (!bunny.onGround && !bunny.isRiding())
+		if (!bunny.onGround && !bunny.isRiding() && !bunny.isSitting())
 		{
 			this.leg_front_right.rotateAngleX = (rotation + 20) / 30f;
 			this.leg_front_left.rotateAngleX = (rotation + 20) / 30f;
@@ -155,6 +155,36 @@ public class ModelAerbunny extends ModelBase
 			this.leg_back_right_foot.rotateAngleX = ((rotation + 40) / 50f) * -1.5f;
 			this.leg_back_left_foot.rotateAngleX = ((rotation + 40) / 50f) * -1.5f;
 		}
+
+		if (bunny.isSitting())
+		{
+			this.body.rotateAngleX = ((float)Math.PI / -16F);
+			this.puff.rotateAngleX = ((float)Math.PI / -16F);
+		}
+		else
+		{
+			this.body.rotateAngleX = 0;
+			this.puff.rotateAngleX = 0;
+		}
+
+		this.body.render(scale);
+
+		GlStateManager.pushMatrix();
+
+		final float puffScale = 1.0F + ((bunny.getPuffiness() / 10F) * 0.2F);
+
+		GlStateManager.scale(puffScale, puffScale, puffScale);
+
+		this.puff.render(scale);
+
+		GlStateManager.popMatrix();
+	}
+
+	public void render2(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
+	{
+		final EntityAerbunny bunny = (EntityAerbunny) entity;
+
+		this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entity);
 
 		this.body.render(scale);
 

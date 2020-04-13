@@ -10,15 +10,19 @@ import com.gildedgames.aether.common.init.LootTablesAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketAerbunnySetRiding;
 import com.google.common.collect.Sets;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.passive.EntityTameable;
+import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
@@ -32,11 +36,20 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.Set;
+import java.util.UUID;
 
-public class EntityAerbunny extends EntityAetherAnimal
+public class EntityAerbunny extends EntityTameable
 {
     private static final Set<Item> TEMPTATION_ITEMS = Sets
             .newHashSet(ItemsAether.blueberries);
+
+    private static final Set<Item> TAMING_ITEMS = Sets
+            .newHashSet(ItemsAether.orange);
+
+    private static final Set<Item> HEALING_ITEMS = Sets
+            .newHashSet(ItemsAether.orange);
+
+    private static final DataParameter<Integer> COLLAR_COLOR = EntityDataManager.createKey(EntityAerbunny.class, DataSerializers.VARINT);
 
     @SideOnly(Side.CLIENT)
     private double prevMotionY;
@@ -53,6 +66,8 @@ public class EntityAerbunny extends EntityAetherAnimal
     {
         super(world);
 
+        this.aiSit = new EntityAISit(this);
+        this.tasks.addTask(2, this.aiSit);
         this.tasks.addTask(2, new EntityAIRestrictRain(this));
         this.tasks.addTask(3, new EntityAIUnstuckBlueAercloud(this));
         this.tasks.addTask(3, new EntityAIHideFromRain(this, 1.3D));
@@ -60,8 +75,9 @@ public class EntityAerbunny extends EntityAetherAnimal
         this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
         this.tasks.addTask(3, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
         this.tasks.addTask(3, new EntityAIEggnogTempt(this, 2.2D));
-        this.tasks.addTask(4, new EntityAIAvoidEntity<>(this, EntityPlayer.class, 12.0F, 1.2F, 1.8F));
-        this.tasks.addTask(5, new EntityAIWander(this, 1.0D, 10));
+        this.tasks.addTask(5, new EntityAIFollowOwner(this, 1.5D, 5.0F, 2.0F));
+        this.tasks.addTask(6, new EntityAIWander(this, 1.0D, 10));
+        this.tasks.addTask(8, new EntityAIAvoidEntity<>(this, EntityPlayer.class, 12.0F, 1.2F, 1.8F));
         this.tasks.addTask(11, new EntityAIWatchClosest(this, EntityPlayer.class, 10.0F));
 
         this.jumpHelper = new AerbunnyJumpHelper(this);
@@ -69,12 +85,21 @@ public class EntityAerbunny extends EntityAetherAnimal
         this.spawnableBlock = BlocksAether.aether_grass;
 
         this.setSize(0.65F, 0.65F);
+
+        this.setTamed(false);
+    }
+
+    protected void entityInit()
+    {
+        super.entityInit();
+        this.dataManager.register(COLLAR_COLOR, EnumDyeColor.BLUE.getDyeDamage());
     }
 
     @Override
     public float getBlockPathWeight(BlockPos pos)
     {
-        return super.getBlockPathWeight(pos);
+        return this.world.getBlockState(pos.down()).getBlock() == BlocksAether.aether_grass ? 10.0F :
+                this.world.getLightBrightness(pos) - 0.5F;
     }
 
     @Override
@@ -155,18 +180,98 @@ public class EntityAerbunny extends EntityAetherAnimal
     @Override
     public boolean processInteract(final EntityPlayer player, final EnumHand hand)
     {
-        final ItemStack stack = player.getHeldItem(hand);
+        final ItemStack itemstack = player.getHeldItem(hand);
 
-        if (!super.processInteract(player, hand) && !this.isBreedingItem(stack)) {
-            if (!this.isRiding() && player.getPassengers().size() <= 0) {
-                if (!this.world.isRemote) {
+        if (this.isTamed())
+        {
+            if (!itemstack.isEmpty())
+            {
+                if (itemstack.getItem() instanceof ItemFood)
+                {
+                    ItemFood itemfood = (ItemFood)itemstack.getItem();
+
+                    if (isHealingItem(itemstack) && this.getHealth() < this.getMaxHealth())
+                    {
+                        if (!player.capabilities.isCreativeMode)
+                        {
+                            itemstack.shrink(1);
+                        }
+
+                        this.heal((float) itemfood.getHealAmount(itemstack));
+
+                        return true;
+                    }
+                }
+                /*
+                else if (itemstack.getItem() == Items.DYE)
+                {
+                    EnumDyeColor enumdyecolor = EnumDyeColor.byDyeDamage(itemstack.getMetadata());
+
+                    if (enumdyecolor != this.getCollarColor())
+                    {
+                        this.setCollarColor(enumdyecolor);
+
+                        if (!player.capabilities.isCreativeMode)
+                        {
+                            itemstack.shrink(1);
+                        }
+
+                        return true;
+                    }
+                }
+                 */
+            }
+
+            if (this.isOwner(player) && !this.world.isRemote && !this.isBreedingItem(itemstack) && !this.isTamingItem(itemstack) && !this.isHealingItem(itemstack) && player.isSneaking())
+            {
+                this.aiSit.setSitting(!this.isSitting());
+                this.isJumping = false;
+                this.navigator.clearPath();
+            }
+        }
+        else if (this.isTamingItem(itemstack))
+        {
+            if (!player.capabilities.isCreativeMode)
+            {
+                itemstack.shrink(1);
+            }
+
+            if (!this.world.isRemote)
+            {
+                if (this.rand.nextInt(3) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player))
+                {
+                    this.setTamedBy(player);
+                    this.navigator.clearPath();
+                    this.aiSit.setSitting(true);
+                    this.setHealth(this.getMaxHealth());
+                    this.playTameEffect(true);
+                    this.world.setEntityState(this, (byte)7);
+                }
+                else
+                {
+                    this.playTameEffect(false);
+                    this.world.setEntityState(this, (byte)6);
+                }
+            }
+
+            return true;
+        }
+
+        if (!super.processInteract(player, hand) && !this.isBreedingItem(itemstack) && !this.isTamingItem(itemstack) && !this.isHealingItem(itemstack) && !player.isSneaking() && !this.isSitting())
+        {
+            if (!this.isRiding() && player.getPassengers().size() <= 0)
+            {
+                if (!this.world.isRemote)
+                {
                     this.startRiding(player, true);
 
                     NetworkingAether.sendPacketToWatching(new PacketAerbunnySetRiding(player, this), this, false);
                 }
 
                 return true;
-            } else {
+            }
+            else
+            {
                 return false;
             }
         }
@@ -207,13 +312,22 @@ public class EntityAerbunny extends EntityAetherAnimal
     @Override
     protected PathNavigate createNavigator(final World worldIn)
     {
-        return new AerbunnyNavigator(this, worldIn);
+        return new AetherNavigateGround(this, worldIn);
     }
 
     @Override
     public EntityAgeable createChild(final EntityAgeable ageable)
     {
-        return new EntityAerbunny(this.world);
+        EntityAerbunny entityAerbunny = new EntityAerbunny(this.world);
+        UUID uuid = this.getOwnerId();
+
+        if (uuid != null)
+        {
+            entityAerbunny.setOwnerId(uuid);
+            entityAerbunny.setTamed(true);
+        }
+
+        return entityAerbunny;
     }
 
     @SideOnly(Side.CLIENT)
@@ -241,6 +355,12 @@ public class EntityAerbunny extends EntityAetherAnimal
     }
 
     @Override
+    public int getVerticalFaceSpeed()
+    {
+        return this.isSitting() ? 20 : super.getVerticalFaceSpeed();
+    }
+
+    @Override
     public boolean canRiderInteract()
     {
         return true;
@@ -252,10 +372,46 @@ public class EntityAerbunny extends EntityAetherAnimal
         return stack != null && TEMPTATION_ITEMS.contains(stack.getItem());
     }
 
+    public boolean isTamingItem(@Nullable final ItemStack stack)
+    {
+        return stack != null && TAMING_ITEMS.contains(stack.getItem());
+    }
+
+    public boolean isHealingItem(@Nullable final ItemStack stack)
+    {
+        return stack != null && HEALING_ITEMS.contains(stack.getItem());
+    }
+
+    public EnumDyeColor getCollarColor()
+    {
+        return EnumDyeColor.byDyeDamage(this.dataManager.get(COLLAR_COLOR) & 15);
+    }
+
+    public void setCollarColor(EnumDyeColor collarColor)
+    {
+        this.dataManager.set(COLLAR_COLOR, collarColor.getDyeDamage());
+    }
+
     @Override
     public boolean isEntityInsideOpaqueBlock()
     {
         return !this.isRiding() && super.isEntityInsideOpaqueBlock();
+    }
+
+    public void writeEntityToNBT(NBTTagCompound compound)
+    {
+        super.writeEntityToNBT(compound);
+        compound.setByte("CollarColor", (byte)this.getCollarColor().getDyeDamage());
+    }
+
+    public void readEntityFromNBT(NBTTagCompound compound)
+    {
+        super.readEntityFromNBT(compound);
+
+        if (compound.hasKey("CollarColor", 99))
+        {
+            this.setCollarColor(EnumDyeColor.byDyeDamage(compound.getByte("CollarColor")));
+        }
     }
 
     private class AerbunnyJumpHelper extends EntityJumpHelper

@@ -1,11 +1,13 @@
 package com.gildedgames.aether.client.renderer.entities.living;
 
 import com.gildedgames.aether.client.models.entities.living.ModelAerbunny;
+import com.gildedgames.aether.client.renderer.entities.living.layers.LayerAerbunnyCollar;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.animals.EntityAerbunny;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.layers.LayerWolfCollar;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderAerbunny extends RenderLiving<EntityAerbunny>
@@ -15,6 +17,7 @@ public class RenderAerbunny extends RenderLiving<EntityAerbunny>
 	public RenderAerbunny(final RenderManager renderManager)
 	{
 		super(renderManager, new ModelAerbunny(), 0.4f);
+		this.addLayer(new LayerAerbunnyCollar(this));
 	}
 
 	protected void rotateAerbunny(final EntityAerbunny entity)
