@@ -1,6 +1,8 @@
 package com.gildedgames.aether.common.world.decorations.aerclouds;
 
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.world.decoration.WorldDecorationGenerator;
+import com.gildedgames.aether.common.blocks.natural.BlockAercloud;
 import com.gildedgames.orbis.lib.world.WorldSlice;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -72,7 +74,7 @@ public class WorldGenAercloud implements WorldDecorationGenerator
 
 					int maxY = y + rand.nextInt(1) + 2;
 
-					if (height >= maxY)
+					if (height >= maxY && world.getBlockState(new BlockPos.MutableBlockPos(x1, height - 1, z1)).getBlock() != BlocksAether.aercloud)
 					{
 						return false;
 					}

@@ -63,7 +63,7 @@ public class WorldProviderAether extends WorldProviderSurface
 	@SideOnly(Side.CLIENT)
 	private void setupClientRenderer()
 	{
-		this.setSkyRenderer(new RenderWorldSkybox());
+		//this.setSkyRenderer(new RenderWorldSkybox());
 		this.setWeatherRenderer(new RenderWorldPrecipitation());
 	}
 
@@ -173,7 +173,7 @@ public class WorldProviderAether extends WorldProviderSurface
 	@SideOnly(Side.CLIENT)
 	public Vec3d getFogColor(final float angle, final float partialTicks)
 	{
-		final int color = 0x8080a0;
+		final int color = 0xCED5EB;
 
 		float cos = MathHelper.cos(angle * 3.141593F * 2.0F) * 2.0F + 0.5F;
 
@@ -218,9 +218,9 @@ public class WorldProviderAether extends WorldProviderSurface
 			float f6 = 1.0F - (1.0F - MathHelper.sin(f5 * 3.141593F)) * 0.99F;
 			f6 *= f6;
 
-			this.sunriseSunsetColors[0] = f5 * 0.3F + 0.1F;
+			this.sunriseSunsetColors[0] = f5 * 0.3F + 0.7F;
 			this.sunriseSunsetColors[1] = f5 * f5 * 0.7F + 0.2F;
-			this.sunriseSunsetColors[2] = f5 * f5 * 0.7F + 0.2F;
+			this.sunriseSunsetColors[2] = f5 * f5 * 0.0F + 0.2F;
 			this.sunriseSunsetColors[3] = f6;
 
 			return this.sunriseSunsetColors;

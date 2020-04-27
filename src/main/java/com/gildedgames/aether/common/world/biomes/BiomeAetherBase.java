@@ -52,7 +52,7 @@ public abstract class BiomeAetherBase extends Biome
 	@Override
 	public int getSkyColorByTemp(final float temp)
 	{
-		return 0xC0C0FF;
+		return 0xACBAE6;
 	}
 
 	@Override

@@ -112,8 +112,6 @@ public class BiomeHighlands extends BiomeAetherBase
 
         decorations.add(new WorldDecorationSimple(6, 0.0f, EventType.GRASS, new PositionerLevels(0, 128), GenerationAether.holystone_rocks));
 
-		decorations.add(new WorldDecorationSimple(1, 0.06F, EventType.CUSTOM, new PositionerLevels(90, 130), GenerationAether.golden_aercloud));
-
 		return decorations;
 	}
 

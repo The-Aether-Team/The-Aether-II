@@ -57,7 +57,7 @@ public class BiomeAetherDecorator
 
 	private final WorldGenFoliage genBlueberryBushes, genValkyrieGrass, genPlumproots;
 
-	private final WorldGenAercloud genColdColumbusAercloud, genBlueAercloud;
+	private final WorldGenAercloud genColdColumbusAercloud, genBlueAercloud, genGreenAercloud, genGoldAercloud, genStormAercloud;
 
 	private final WorldGenPurpleAercloud genPurpleAercloud;
 
@@ -111,6 +111,9 @@ public class BiomeAetherDecorator
 
 		this.genColdColumbusAercloud = new WorldGenAercloud(BlockAercloud.getAercloudState(BlockAercloud.COLD_AERCLOUD), 16, false);
 		this.genBlueAercloud = new WorldGenAercloud(BlockAercloud.getAercloudState(BlockAercloud.BLUE_AERCLOUD), 8, false);
+		this.genGreenAercloud = new WorldGenAercloud(BlockAercloud.getAercloudState(BlockAercloud.GREEN_AERCLOUD), 8, false);
+		this.genGoldAercloud = new WorldGenAercloud(BlockAercloud.getAercloudState(BlockAercloud.GOLDEN_AERCLOUD), 8, false);
+		this.genStormAercloud = new WorldGenAercloud(BlockAercloud.getAercloudState(BlockAercloud.STORM_AERCLOUD), 8, false);
 
 		this.genPurpleAercloud = new WorldGenPurpleAercloud(BlockAercloud.getAercloudState(BlockAercloud.PURPLE_AERCLOUD), 4, false);
 	}
@@ -499,10 +502,25 @@ public class BiomeAetherDecorator
 
 	protected void generateClouds(final WorldSlice world, final Random random, final BlockPos pos)
 	{
-		this.generateCloud(this.genBlueAercloud, world, pos, random, 15, 16, 90, 130);
-		this.generateCloud(this.genColdColumbusAercloud, world, pos, random, 30, 16, 90, 130);
+		//TOP
+		this.generateCloud(this.genStormAercloud, world, pos, random, 30, 16, 238, 256);
+		this.generateCloud(this.genPurpleAercloud, world, pos, random, 50, 4, 226, 246);
+		this.generateCloud(this.genBlueAercloud, world, pos, random, 50, 16, 218, 236);
+		this.generateCloud(this.genColdColumbusAercloud, world, pos, random, 15, 16, 190, 230);
+		this.generateCloud(this.genGreenAercloud, world, pos, random, 50, 16, 208, 226);
+		this.generateCloud(this.genGoldAercloud, world, pos, random, 50, 16, 185, 205);
 
-		this.generateCloud(this.genPurpleAercloud, world, pos, random, 50, 4, 90, 130);
+		//MIDDLE
+		this.generateCloud(this.genColdColumbusAercloud, world, pos, random, 15, 16, 110, 150);
+		this.generateCloud(this.genGreenAercloud, world, pos, random, 50, 16, 100, 110);
+		this.generateCloud(this.genPurpleAercloud, world, pos, random, 50, 4, 90, 100);
+		this.generateCloud(this.genBlueAercloud, world, pos, random, 50, 16, 85, 95);
+
+		//BOTTOM
+		this.generateCloud(this.genStormAercloud, world, pos, random, 15, 16, 40, 55);
+		this.generateCloud(this.genGreenAercloud, world, pos, random, 30, 16, 25, 35);
+		this.generateCloud(this.genGoldAercloud, world, pos, random, 30, 16, 12, 24);
+		this.generateCloud(this.genBlueAercloud, world, pos, random, 30, 16, 5, 15);
 	}
 
 	private static BlockPos getBottomSolidOrLiquidBlock(World world, BlockPos pos)
