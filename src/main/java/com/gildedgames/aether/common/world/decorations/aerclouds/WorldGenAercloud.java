@@ -42,9 +42,9 @@ public class WorldGenAercloud implements WorldDecorationGenerator
 
 		final BlockPos.MutableBlockPos posMut = new BlockPos.MutableBlockPos(pos.getX(), pos.getY(), pos.getZ());
 
-		int x = pos.getX();
+		int x = pos.getX() + 8;
 		int y = pos.getY();
-		int z = pos.getZ();
+		int z = pos.getZ() + 8;
 
 		final int xTendency = rand.nextInt(3) - 1;
 		final int zTendency = rand.nextInt(3) - 1;
@@ -68,14 +68,7 @@ public class WorldGenAercloud implements WorldDecorationGenerator
 				{
 					posMut.setPos(x1, 0, z1);
 
-					Chunk chunk = world.getChunkProvider().getLoadedChunk(x1, z1);
-
-					if (chunk == null)
-					{
-						return false;
-					}
-
-					int height = chunk.getHeight(posMut);
+					int height = world.getChunk(posMut).getHeight(posMut);
 
 					int maxY = y + rand.nextInt(1) + 2;
 
