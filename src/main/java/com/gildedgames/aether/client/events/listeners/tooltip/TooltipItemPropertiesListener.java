@@ -140,8 +140,17 @@ public class TooltipItemPropertiesListener
 		}
 
 		//Currency
-		if (value >= 1)
+		if (value >= 1 && value < 100)
 		{
+			event.getToolTip().add("");
+		}
+		else if (value >= 100 && value < 10000)
+		{
+			event.getToolTip().add("            ");
+		}
+		else if (value >= 10000)
+		{
+			event.getToolTip().add("            ");
 			event.getToolTip().add("");
 		}
 	}

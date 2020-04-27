@@ -7,6 +7,7 @@ import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
@@ -46,7 +47,7 @@ public class BlockAercloud extends Block implements IBlockMultiName
 
 	public BlockAercloud()
 	{
-		super(Material.CRAFTED_SNOW);
+		super(Material.CLOTH);
 
 		this.setSoundType(SoundType.CLOTH);
 

@@ -73,8 +73,15 @@ public class ToolTipCurrencyHelper
 			TextureManager textureManager = Minecraft.getMinecraft().getTextureManager();
 			int[] brokenUp = PlayerCurrencyModule.breakUpCurrency((long) value);
 
+			int offset = 0;
+
+			if (value >= 10000)
+			{
+				offset = 10;
+			}
+
 			final int size = this.cachedText.size();
-			int x2 = x + 1, y2 = y + height - fontRenderer.FONT_HEIGHT + 1;
+			int x2 = x + 1, y2 = y + height - fontRenderer.FONT_HEIGHT - offset + 1;
 			boolean newLine = false;
 
 			for (int i = 0; i < brokenUp.length; i++)

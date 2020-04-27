@@ -14,7 +14,7 @@ public class ItemArkeniumShears extends ItemShears
 	{
 		Block block = state.getBlock();
 
-		if (block == BlocksAether.cloudwool_block)
+		if (block == BlocksAether.cloudwool_block || block == BlocksAether.aercloud)
 		{
 			return 5.0f;
 		}

@@ -401,7 +401,6 @@ public class BlocksAetherInit
 		BlocksAether.holystone_brick.setHarvestLevel("pickaxe", 0);
 		BlocksAether.quicksoil.setHarvestLevel("shovel", 0);
 		BlocksAether.ferrosite_sand.setHarvestLevel("shovel", 0);
-		BlocksAether.aercloud.setHarvestLevel("shovel", 0);
 		BlocksAether.highlands_snow.setHarvestLevel("shovel", 0);
 		BlocksAether.highlands_snow_layer.setHarvestLevel("shovel", 0);
 		BlocksAether.skyroot_decorative.setHarvestLevel("axe", 0);
