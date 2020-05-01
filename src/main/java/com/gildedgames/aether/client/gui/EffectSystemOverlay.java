@@ -4,13 +4,15 @@ import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectPool;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.common.AetherCore;
+import com.google.common.collect.Maps;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.FMLCommonHandler;
+
+import java.util.Map;
 
 public class EffectSystemOverlay extends Gui
 {
@@ -30,6 +32,8 @@ public class EffectSystemOverlay extends Gui
 
 	private static final ResourceLocation SATURATION_BOOST_ICON = AetherCore.getResource("textures/gui/overlay/effects/teas/saturation_boost.png");
 
+	private static final ResourceLocation GUARD_BREAK_ICON = AetherCore.getResource("textures/gui/overlay/effects/guard_break.png");
+
 	private final int BAR_OUTLINE_TEXTURE_WIDTH = 22;
 	private final int BAR_OUTLINE_TEXTURE_HEIGHT = 5;
 
@@ -41,6 +45,9 @@ public class EffectSystemOverlay extends Gui
 
 	private float highlightAlpha = 0.0f;
 	private boolean increasing = true;
+
+	private Map<IAetherStatusEffects.effectTypes, Integer> buildup = Maps.newHashMap();
+	private Map<IAetherStatusEffects.effectTypes, Integer> barBuildup = Maps.newHashMap();
 
 	public void render(Minecraft mc)
 	{
@@ -288,6 +295,8 @@ public class EffectSystemOverlay extends Gui
 				return WEBBING_ICON;
 			case SATURATION_BOOST:
 				return SATURATION_BOOST_ICON;
+			case GUARD_BREAK:
+				return GUARD_BREAK_ICON;
 		}
 
 		return STUN_ICON;
@@ -304,6 +313,7 @@ public class EffectSystemOverlay extends Gui
 		FREEZE(174,203,209),
 		WEBBING(199, 197, 187),
 		SATURATION_BOOST(212, 200, 121),
+		GUARD_BREAK(163, 199, 135),
 		DEFAULT_COLOR(1,1,1);
 
 		public final int r;
@@ -342,6 +352,8 @@ public class EffectSystemOverlay extends Gui
 					return WEBBING;
 				case SATURATION_BOOST:
 					return SATURATION_BOOST;
+				case GUARD_BREAK:
+					return GUARD_BREAK;
 					default:
 						return DEFAULT_COLOR;
 			}

@@ -20,7 +20,7 @@ public class StatusEffectStun extends StatusEffect
 
 	public StatusEffectStun(EntityLivingBase livingBase)
 	{
-		super(effectTypes.STUN, new AttributeModifier("aether.statusEffectStun", -1.0, 1).setSaved(false), livingBase);
+		super(effectTypes.STUN, new AttributeModifier("aether.statusEffectStun", -0.25, 1).setSaved(false), livingBase);
 
 		this.affectedEntity = livingBase;
 	}

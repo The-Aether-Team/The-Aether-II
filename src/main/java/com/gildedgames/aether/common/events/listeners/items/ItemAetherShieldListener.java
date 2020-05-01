@@ -1,22 +1,35 @@
 package com.gildedgames.aether.common.events.listeners.items;
 
+import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectPool;
+import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
+import com.gildedgames.aether.api.registrar.CapabilitiesAether;
+import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.items.armor.ItemAetherShield;
+import com.gildedgames.aether.common.items.weapons.crossbow.ItemCrossbow;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
+
+import java.util.UUID;
 
 @Mod.EventBusSubscriber
 public class ItemAetherShieldListener
 {
-
 	@SubscribeEvent
 	public static void onEntityAttacked(final LivingAttackEvent event)
 	{
@@ -42,33 +55,160 @@ public class ItemAetherShieldListener
 				{
 					final float damage = event.getAmount();
 
-					if (damage >= 3.0F && player.getActiveItemStack().getItem() instanceof ItemAetherShield)
+					if (player.getActiveItemStack().getItem() instanceof ItemAetherShield)
 					{
-						final int itemDamage = 1 + MathHelper.floor(damage);
+						ItemAetherShield itemAetherShield = (ItemAetherShield) player.getActiveItemStack().getItem();
 
-						player.getActiveItemStack().damageItem(itemDamage, player);
+						IAetherStatusEffectPool statusEffectPool = player.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
 
-						if (player.getActiveItemStack().getCount() <= 0)
+						int buildup = (int) (((int) damage * 5) * (1 - itemAetherShield.getStunResistance()));
+
+						if (statusEffectPool != null)
 						{
-							final EnumHand hand = player.getActiveHand();
-
-							ForgeEventFactory.onPlayerDestroyItem(player, player.getActiveItemStack(), hand);
-
-							if (hand == EnumHand.MAIN_HAND)
+							if (!statusEffectPool.isEffectApplied(IAetherStatusEffects.effectTypes.GUARD_BREAK))
 							{
-								player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);
+								statusEffectPool.applyStatusEffect(IAetherStatusEffects.effectTypes.GUARD_BREAK, buildup);
 							}
 							else
 							{
-								player.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, ItemStack.EMPTY);
+								statusEffectPool.modifyActiveEffectBuildup(IAetherStatusEffects.effectTypes.GUARD_BREAK,
+										statusEffectPool.getBuildupFromEffect(IAetherStatusEffects.effectTypes.GUARD_BREAK) + buildup);
 							}
+						}
 
-							player.setHeldItem(player.getActiveHand(), ItemStack.EMPTY);
+						if (damage >= 3.0F)
+						{
+							final int itemDamage = 1 + MathHelper.floor(damage);
 
-							player.playSound(SoundEvents.ITEM_SHIELD_BREAK, 0.8F, 0.8F + player.world.rand.nextFloat() * 0.4F);
+							player.getActiveItemStack().damageItem(itemDamage, player);
+
+							if (player.getActiveItemStack().getCount() <= 0)
+							{
+								final EnumHand hand = player.getActiveHand();
+
+								ForgeEventFactory.onPlayerDestroyItem(player, player.getActiveItemStack(), hand);
+
+								if (hand == EnumHand.MAIN_HAND)
+								{
+									player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);
+								}
+								else
+								{
+									player.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, ItemStack.EMPTY);
+								}
+
+								player.setHeldItem(player.getActiveHand(), ItemStack.EMPTY);
+
+								player.playSound(SoundEvents.ITEM_SHIELD_BREAK, 0.8F, 0.8F + player.world.rand.nextFloat() * 0.4F);
+							}
 						}
 					}
 				}
+			}
+		}
+	}
+
+	@SubscribeEvent
+	public static void onPlayerBlockStart(final LivingEntityUseItemEvent.Start event)
+	{
+		if (event.getItem().getItem() instanceof ItemAetherShield)
+		{
+			if (event.getEntityLiving() != null)
+			{
+				IAetherStatusEffectPool statusEffectPool = event.getEntityLiving().getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
+
+				if (statusEffectPool != null)
+				{
+					if (statusEffectPool.isEffectApplied(IAetherStatusEffects.effectTypes.GUARD_BREAK))
+					{
+						event.setCanceled(true);
+					}
+				}
+			}
+		}
+	}
+
+	@SubscribeEvent
+	public static void onPlayerBlock(final LivingEntityUseItemEvent.Tick event)
+	{
+		if (event.getItem().getItem() instanceof ItemAetherShield)
+		{
+			if (event.getEntityLiving() != null)
+			{
+				IAetherStatusEffectPool statusEffectPool = event.getEntityLiving().getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
+
+				if (statusEffectPool != null)
+				{
+					for (IAetherStatusEffects effect : statusEffectPool.getPool().values())
+					{
+						if (effect.getEffectType() == IAetherStatusEffects.effectTypes.GUARD_BREAK)
+						{
+							if (event.getItem().getCount() > 0)
+							{
+								effect.adjustDecrease(0);
+							}
+							else
+							{
+								effect.resetDecrease();
+							}
+						}
+					}
+				}
+
+				ItemAetherShield itemAetherShield = (ItemAetherShield) event.getItem().getItem();
+
+				if (itemAetherShield.getMovementReduction() > 0.0D)
+				{
+					event.getEntityLiving().motionX *= itemAetherShield.getMovementReduction();
+					event.getEntityLiving().motionZ *= itemAetherShield.getMovementReduction();
+				}
+			}
+		}
+	}
+
+	@SubscribeEvent
+	public static void onPlayerBlockStop(final LivingEntityUseItemEvent.Stop event)
+	{
+		if (event.getItem().getItem() instanceof ItemAetherShield)
+		{
+			if (event.getEntityLiving() != null)
+			{
+				IAetherStatusEffectPool statusEffectPool = event.getEntityLiving().getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
+
+				if (statusEffectPool != null)
+				{
+					for (IAetherStatusEffects effect : statusEffectPool.getPool().values())
+					{
+						if (effect.getEffectType() == IAetherStatusEffects.effectTypes.GUARD_BREAK)
+						{
+							effect.resetDecrease();
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@SubscribeEvent
+	public static void onArkeniumBlock(final TickEvent.PlayerTickEvent event)
+	{
+		final UUID SHIELD_UUID = UUID.fromString("CB4C4DF3-B0C6-4156-9793-CF46A1DD6116");
+
+		final AttributeModifier SHIELD_BLOCK = new AttributeModifier(SHIELD_UUID, "aether.statusBlockingArkeniumShield", -1.0D, 1);
+		IAttributeInstance shieldSlowedLevel = event.player.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
+
+		if (event.player.getActiveItemStack().getItem() != ItemsAether.arkenium_shield)
+		{
+			if (shieldSlowedLevel.getModifier(SHIELD_BLOCK.getID()) != null)
+			{
+				shieldSlowedLevel.removeModifier(SHIELD_BLOCK);
+			}
+		}
+		else
+		{
+			if (!shieldSlowedLevel.hasModifier(SHIELD_BLOCK))
+			{
+				shieldSlowedLevel.applyModifier(SHIELD_BLOCK);
 			}
 		}
 	}

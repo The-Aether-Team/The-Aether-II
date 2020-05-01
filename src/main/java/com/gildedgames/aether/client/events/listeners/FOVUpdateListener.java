@@ -11,6 +11,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
 import net.minecraftforge.client.event.FOVUpdateEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -61,6 +62,15 @@ public class FOVUpdateListener
                 {
                     event.setNewfov(event.getNewfov() + 0.3f);
                 }
+            }
+        }
+
+        if ((player.getHeldItem(EnumHand.MAIN_HAND).getItem() == ItemsAether.arkenium_shield && player.getActiveItemStack() != player.getHeldItemOffhand())
+                || (player.getHeldItem(EnumHand.OFF_HAND).getItem() == ItemsAether.arkenium_shield && player.getActiveItemStack() != player.getHeldItemMainhand()))
+        {
+            if (event.getFov() <= 0.5f)
+            {
+                event.setNewfov(event.getNewfov() + 0.5f);
             }
         }
     }

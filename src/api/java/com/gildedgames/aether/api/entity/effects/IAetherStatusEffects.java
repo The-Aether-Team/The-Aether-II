@@ -159,6 +159,10 @@ public interface IAetherStatusEffects extends NBT
 	void markDirty();
 	void markClean();
 
+	void adjustDecrease(int reductionRate);
+
+	void resetDecrease();
+
 	int getBuildup();
 	double getResistance();
 	int getTimer();
@@ -178,7 +182,7 @@ public interface IAetherStatusEffects extends NBT
 	@Nullable
 	AttributeModifier getAttributeModifier();
 
-	int NUMBER_OF_EFFECTS = 10;
+	int NUMBER_OF_EFFECTS = 11;
 
 	enum effectTypes
 	{
@@ -191,7 +195,8 @@ public interface IAetherStatusEffects extends NBT
 		FUNGAL_ROT("effect.aether.fungal_rot", 6,1, 10, 20,10),
 		FREEZE("effect.aether.freeze", 7,1, 5, 20,10),
 		WEBBING("effect.aether.webbing", 8,1, 10, 20,10),
-		SATURATION_BOOST("effect.aether.saturation_boost", 9,1, 1, 60*5,10);
+		SATURATION_BOOST("effect.aether.saturation_boost", 9,1, 1, 60*5,10),
+		GUARD_BREAK("effect.aether.guard_break", 10, 10, 1, 15, 10);
 
 		public final int numericValue;			// identifier for this effect.
 		public final String name;
@@ -233,6 +238,8 @@ public interface IAetherStatusEffects extends NBT
 					return WEBBING;
 				case 9:
 					return SATURATION_BOOST;
+				case 10:
+					return GUARD_BREAK;
 					default:
 						return null;
 			}

@@ -18,12 +18,14 @@ import java.util.Collection;
 public abstract class StatusEffect implements IAetherStatusEffects
 {
 	protected final String NAME;
-	protected final int REDUCTION_RATE;
-	protected final int TIME_TILL_REDUCTION;
-	protected final int ACTIVE_EFFECT_TIME;
-	protected final int BUILDUP_SPEED;
+	protected int REDUCTION_RATE;
+	protected int TIME_TILL_REDUCTION;
+	protected int ACTIVE_EFFECT_TIME;
+	protected int BUILDUP_SPEED;
 
 	private final AttributeModifier ATTRIBUTE_MODIFIER;
+
+	protected boolean stopTimer;
 
 	protected int effectBuildup;
 	protected int effectTimer;
@@ -168,6 +170,16 @@ public abstract class StatusEffect implements IAetherStatusEffects
 		double ret = this.effectResistance + this.tempEffectResistance;
 
 		return MathHelper.clamp(ret, 0.0, 2.0);
+	}
+
+	public void adjustDecrease(int reductionRate)
+	{
+		this.REDUCTION_RATE = reductionRate;
+	}
+
+	public void resetDecrease()
+	{
+		this.REDUCTION_RATE = effectType.reductionRate;
 	}
 
 	@Override

@@ -1,25 +1,28 @@
 package com.gildedgames.aether.common.items.armor;
 
 import com.gildedgames.aether.api.registrar.ItemsAether;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.init.CreativeTabsAether;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.*;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemAetherShield extends Item
 {
-	public ItemAetherShield()
+	public final ShieldType shieldType;
+
+	public ItemAetherShield(ShieldType type)
 	{
 		this.setMaxStackSize(1);
 		this.setMaxDamage(336);
+
+		this.shieldType = type;
 
 		this.addPropertyOverride(new ResourceLocation("blocking"), new IItemPropertyGetter()
 		{
@@ -68,4 +71,40 @@ public class ItemAetherShield extends Item
 		return super.getItemBurnTime(itemStack);
 	}
 
+	public double getStunResistance()
+	{
+		return this.shieldType.getStunResistance();
+	}
+
+	public double getMovementReduction()
+	{
+		return this.shieldType.getMovementReduction();
+	}
+
+	public enum ShieldType
+	{
+		SKYROOT(0.0D, 1.4D),
+		HOLYSTONE(0.1D, 1.0D),
+		ZANITE(0.25D, 1.0D),
+		ARKENIUM(0.6D, 0.0D),
+		GRAVITITE(0.4D, 0.6D);
+
+		private final double stunResistance, movementReduction;
+
+		ShieldType(double stunResistance, double movementReduction)
+		{
+			this.stunResistance = stunResistance;
+			this.movementReduction = movementReduction;
+		}
+
+		public double getStunResistance()
+		{
+			return this.stunResistance;
+		}
+
+		public double getMovementReduction()
+		{
+			return this.movementReduction;
+		}
+	}
 }

@@ -5,6 +5,7 @@ import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.common.entities.effects.*;
 import com.gildedgames.aether.common.entities.effects.teas.StatusEffectSaturationBoost;
+import com.gildedgames.aether.common.entities.effects.unique.StatusEffectGuardBreak;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTBase;
@@ -37,6 +38,7 @@ public class StatusEffectPool implements IAetherStatusEffectPool
 		types.put(IAetherStatusEffects.effectTypes.FREEZE.name, new StatusEffectFactory(StatusEffectFreeze.class));
 		types.put(IAetherStatusEffects.effectTypes.WEBBING.name, new StatusEffectFactory(StatusEffectWebbing.class));
 		types.put(IAetherStatusEffects.effectTypes.SATURATION_BOOST.name, new StatusEffectFactory(StatusEffectSaturationBoost.class));
+		types.put(IAetherStatusEffects.effectTypes.GUARD_BREAK.name, new StatusEffectFactory(StatusEffectGuardBreak.class));
 	}
 
 	private EntityLivingBase livingBase;

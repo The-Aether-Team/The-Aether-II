@@ -907,6 +907,8 @@ effect.aether.webbing=Webbing
 
 effect.aether.saturation_boost=Saturation Boost
 
+effect.aether.guard_break=Guard Break
+
 # Damage Attributes
 
 attribute.name.aether.slashDamageLevel=Slash Damage
