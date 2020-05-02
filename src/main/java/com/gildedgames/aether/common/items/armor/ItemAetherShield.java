@@ -17,6 +17,8 @@ public class ItemAetherShield extends Item
 {
 	public final ShieldType shieldType;
 
+	public boolean isBlocking;
+
 	public ItemAetherShield(ShieldType type)
 	{
 		this.setMaxStackSize(1);
@@ -61,6 +63,20 @@ public class ItemAetherShield extends Item
 	}
 
 	@Override
+	public void onUsingTick(final ItemStack stack, final EntityLivingBase living, final int count)
+	{
+		this.isBlocking = true;
+	}
+
+	@Override
+	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving)
+	{
+		this.isBlocking = false;
+
+		return stack;
+	}
+
+	@Override
 	public int getItemBurnTime(ItemStack itemStack)
 	{
 		if (itemStack.getItem() == ItemsAether.skyroot_shield)
@@ -75,36 +91,24 @@ public class ItemAetherShield extends Item
 	{
 		return this.shieldType.getStunResistance();
 	}
-
-	public double getMovementReduction()
-	{
-		return this.shieldType.getMovementReduction();
-	}
-
 	public enum ShieldType
 	{
-		SKYROOT(0.0D, 1.4D),
-		HOLYSTONE(0.1D, 1.0D),
-		ZANITE(0.25D, 1.0D),
-		ARKENIUM(0.6D, 0.0D),
-		GRAVITITE(0.4D, 0.6D);
+		SKYROOT(0.0D),
+		HOLYSTONE(0.1D),
+		ZANITE(0.25D),
+		ARKENIUM(0.6D),
+		GRAVITITE(0.4D);
 
-		private final double stunResistance, movementReduction;
+		private final double stunResistance;
 
-		ShieldType(double stunResistance, double movementReduction)
+		ShieldType(double stunResistance)
 		{
 			this.stunResistance = stunResistance;
-			this.movementReduction = movementReduction;
 		}
 
 		public double getStunResistance()
 		{
 			return this.stunResistance;
-		}
-
-		public double getMovementReduction()
-		{
-			return this.movementReduction;
 		}
 	}
 }

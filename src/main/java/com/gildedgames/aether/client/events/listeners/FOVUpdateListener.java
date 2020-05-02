@@ -73,5 +73,16 @@ public class FOVUpdateListener
                 event.setNewfov(event.getNewfov() + 0.5f);
             }
         }
+
+        if ((player.getHeldItem(EnumHand.MAIN_HAND).getItem() == ItemsAether.skyroot_shield && player.getActiveItemStack() != player.getHeldItemOffhand())
+                || (player.getHeldItem(EnumHand.OFF_HAND).getItem() == ItemsAether.skyroot_shield && player.getActiveItemStack() != player.getHeldItemMainhand()))
+        {
+            if (event.getFov() >= 1.525f)
+            {
+                event.setNewfov(event.getNewfov() - 0.525f);
+            }
+        }
+
+        System.out.println(event.getFov());
     }
 }

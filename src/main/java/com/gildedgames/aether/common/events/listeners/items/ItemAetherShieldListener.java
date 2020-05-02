@@ -154,14 +154,6 @@ public class ItemAetherShieldListener
 						}
 					}
 				}
-
-				ItemAetherShield itemAetherShield = (ItemAetherShield) event.getItem().getItem();
-
-				if (itemAetherShield.getMovementReduction() > 0.0D)
-				{
-					event.getEntityLiving().motionX *= itemAetherShield.getMovementReduction();
-					event.getEntityLiving().motionZ *= itemAetherShield.getMovementReduction();
-				}
 			}
 		}
 	}
@@ -185,6 +177,30 @@ public class ItemAetherShieldListener
 						}
 					}
 				}
+			}
+		}
+	}
+
+	@SubscribeEvent
+	public static void onSkyrootBlock(final TickEvent.PlayerTickEvent event)
+	{
+		final UUID SHIELD_UUID = UUID.fromString("8A4950B1-D935-4E22-BAEE-0715A104300D");
+
+		final AttributeModifier SHIELD_BLOCK = new AttributeModifier(SHIELD_UUID, "aether.statusBlockingSkyrootShield", 1.05D, 1);
+		IAttributeInstance shieldSlowedLevel = event.player.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
+
+		if (event.player.getActiveItemStack().getItem() != ItemsAether.skyroot_shield)
+		{
+			if (shieldSlowedLevel.getModifier(SHIELD_BLOCK.getID()) != null)
+			{
+				shieldSlowedLevel.removeModifier(SHIELD_BLOCK);
+			}
+		}
+		else
+		{
+			if (!shieldSlowedLevel.hasModifier(SHIELD_BLOCK))
+			{
+				shieldSlowedLevel.applyModifier(SHIELD_BLOCK);
 			}
 		}
 	}
