@@ -161,22 +161,25 @@ public class EntityAechorPlant extends EntityAetherMob
 
 		if (this.getHealth() != prevHealth)
 		{
-			this.petalGrowTimer = 6000;
-
-			if (!this.world.isRemote)
+			if (((this.getMaxHealth() + this.getHealth()) % 3) == 0)
 			{
-				int targetPetals = (int) Math.floor((this.getHealth() / this.getMaxHealth()) * MAX_PETALS);
-				int remainingPetals = this.getPetalCountInState(true);
+				this.petalGrowTimer = 6000;
 
-				int damage = remainingPetals - targetPetals;
-
-				Block.spawnAsEntity(this.world, this.getPosition(), new ItemStack(ItemsAether.aechor_petal, damage));
-
-				while (remainingPetals > targetPetals)
+				if (!this.world.isRemote)
 				{
-					this.setPetalState(this.getRandomPetal(true), false);
+					int targetPetals = (int) Math.floor((this.getHealth() / this.getMaxHealth()) * MAX_PETALS);
+					int remainingPetals = this.getPetalCountInState(true);
 
-					remainingPetals--;
+					//int damage = remainingPetals - targetPetals;
+
+					Block.spawnAsEntity(this.world, this.getPosition(), new ItemStack(ItemsAether.aechor_petal, 1));
+
+					while (remainingPetals > targetPetals)
+					{
+						this.setPetalState(this.getRandomPetal(true), false);
+
+						remainingPetals--;
+					}
 				}
 			}
 		}

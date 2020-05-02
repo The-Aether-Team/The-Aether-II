@@ -151,6 +151,11 @@ public class ItemAetherShieldListener
 							{
 								effect.resetDecrease();
 							}
+
+							if (statusEffectPool.isEffectApplied(IAetherStatusEffects.effectTypes.GUARD_BREAK))
+							{
+								event.setCanceled(true);
+							}
 						}
 					}
 				}

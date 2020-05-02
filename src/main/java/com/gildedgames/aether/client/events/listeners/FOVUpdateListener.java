@@ -68,27 +68,45 @@ public class FOVUpdateListener
         if ((player.getHeldItem(EnumHand.MAIN_HAND).getItem() == ItemsAether.skyroot_shield && player.getActiveItemStack() != player.getHeldItemOffhand())
                 || (player.getHeldItem(EnumHand.OFF_HAND).getItem() == ItemsAether.skyroot_shield && player.getActiveItemStack() != player.getHeldItemMainhand()))
         {
-            if (event.getFov() >= 1.525f)
+            float additional = 0;
+
+            if (event.getNewfov() > 1.0f)
             {
-                event.setNewfov(event.getNewfov() - 0.525f);
+                additional = event.getNewfov() - 1.0f;
             }
+
+            event.setNewfov(event.getNewfov() - additional);
         }
 
         if ((player.getHeldItem(EnumHand.MAIN_HAND).getItem() == ItemsAether.arkenium_shield && player.getActiveItemStack() != player.getHeldItemOffhand())
                 || (player.getHeldItem(EnumHand.OFF_HAND).getItem() == ItemsAether.arkenium_shield && player.getActiveItemStack() != player.getHeldItemMainhand()))
         {
+            float additional = 0;
+
+            if (event.getNewfov() > 1.0f)
+            {
+                additional = event.getNewfov() - 1.0f;
+            }
+
             if (event.getFov() <= 0.5f)
             {
-                event.setNewfov(event.getNewfov() + 0.5f);
+                event.setNewfov(event.getFov() + 0.5f - additional);
             }
         }
 
         if ((player.getHeldItem(EnumHand.MAIN_HAND).getItem() == ItemsAether.gravitite_shield && player.getActiveItemStack() != player.getHeldItemOffhand())
                 || (player.getHeldItem(EnumHand.OFF_HAND).getItem() == ItemsAether.gravitite_shield && player.getActiveItemStack() != player.getHeldItemMainhand()))
         {
+            float additional = 0;
+
+            if (event.getNewfov() > 1.0f)
+            {
+                additional = event.getNewfov() - 1.0f;
+            }
+
             if (event.getFov() <= 0.9f)
             {
-                event.setNewfov(event.getNewfov() + 0.1f);
+                event.setNewfov(event.getFov() + 0.1f - additional);
             }
         }
     }
