@@ -22,7 +22,7 @@ public class LayerKirridWool implements LayerRenderer<EntityKirrid>
 	}
 
 	@Override
-	public void doRenderLayer(EntityKirrid ram, float p_177141_2_, float p_177141_3_, float p_177141_4_, float p_177141_5_, float p_177141_6_, float p_177141_7_, float p_177141_8_)
+	public void doRenderLayer(EntityKirrid ram, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
 		if (!ram.getSheared() && !ram.isInvisible())
 		{
@@ -31,8 +31,9 @@ public class LayerKirridWool implements LayerRenderer<EntityKirrid>
 			this.render.bindTexture(texture);
 
 			this.woolModel.setModelAttributes(this.render.getMainModel());
-			this.woolModel.setLivingAnimations(ram, p_177141_2_, p_177141_3_, p_177141_4_);
-			this.woolModel.render(ram, p_177141_2_, p_177141_3_, p_177141_5_, p_177141_6_, p_177141_7_, p_177141_8_);
+			this.woolModel.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, ram);
+			this.woolModel.setLivingAnimations(ram, limbSwing, limbSwingAmount, partialTicks);
+			this.woolModel.render(ram, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 		}
 	}
 

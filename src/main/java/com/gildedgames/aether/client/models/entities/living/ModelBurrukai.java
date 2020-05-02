@@ -1,15 +1,17 @@
 package com.gildedgames.aether.client.models.entities.living;
 
-		import net.minecraft.client.model.ModelBase;
-		import net.minecraft.client.model.ModelRenderer;
-		import net.minecraft.entity.Entity;
-		import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.math.MathHelper;
 
 /**
  * Burrukai.tcn - TechneToTabulaImporter
  * Created using Tabula 5.1.0
  */
-public class ModelBurrukai extends ModelBase {
+public class ModelBurrukai extends ModelBase
+{
 	public ModelRenderer Tail;
 	public ModelRenderer TorsoNeckJoint;
 	public ModelRenderer TorsoFrontFurRight;
@@ -59,7 +61,10 @@ public class ModelBurrukai extends ModelBase {
 	public ModelRenderer HeadAntlerTopRight1;
 	public ModelRenderer HeadSnout;
 
-	public ModelBurrukai() {
+	public final float childZOffset = 4.0F;
+
+	public ModelBurrukai()
+	{
 		this.textureWidth = 128;
 		this.textureHeight = 512;
 		this.HeadEarLeft = new ModelRenderer(this, 90, 43);
@@ -279,31 +284,64 @@ public class ModelBurrukai extends ModelBase {
 	}
 
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-		this.FrontLegLeftTop.render(f5);
-		this.TorsoBackFur.render(f5);
-		this.HeadMain.render(f5);
-		this.TorsoShoulderPlateLeftMid.render(f5);
-		this.TorsoShoulderPlateLeftFront.render(f5);
-		this.TorsoShoulderPlateRightMid.render(f5);
-		this.HindLegLeftCalfMiddle.render(f5);
-		this.Tail.render(f5);
-		this.TorsoPlate1.render(f5);
-		this.TorsoNeckJoint.render(f5);
-		this.TorsoRear.render(f5);
-		this.FrontLegRightTop.render(f5);
-		this.TorsoShoulderPlateRightFront.render(f5);
-		this.TorsoPlate3.render(f5);
-		this.TorsoFrontFurRight.render(f5);
-		this.TorsoChest.render(f5);
-		this.HindLegRightCalf.render(f5);
-		this.TorsoPlate2.render(f5);
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+	{
+		if (this.isChild)
+		{
+			GlStateManager.pushMatrix();
+			GlStateManager.translate(0.0F, 8.75F * f5, this.childZOffset * f5);
+			this.HeadMain.render(f5);
+			GlStateManager.popMatrix();
+			GlStateManager.pushMatrix();
+			GlStateManager.scale(0.5F, 0.5F, 0.5F);
+			GlStateManager.translate(0.0F, 24.0F * f5, 0.0F);
+			this.TorsoPlate2.render(f5);
+			this.FrontLegLeftTop.render(f5);
+			this.TorsoFrontFurRight.render(f5);
+			this.TorsoShoulderPlateRightMid.render(f5);
+			this.TorsoPlate3.render(f5);
+			this.TorsoShoulderPlateLeftFront.render(f5);
+			this.FrontLegRightTop.render(f5);
+			this.TorsoChest.render(f5);
+			this.HindLegLeftCalfMiddle.render(f5);
+			this.HindLegRightCalf.render(f5);
+			this.TorsoBackFur.render(f5);
+			this.TorsoRear.render(f5);
+			this.Tail.render(f5);
+			this.TorsoPlate1.render(f5);
+			this.TorsoNeckJoint.render(f5);
+			this.TorsoShoulderPlateRightFront.render(f5);
+			this.TorsoShoulderPlateLeftMid.render(f5);
+			GlStateManager.popMatrix();
+		}
+		else
+		{
+			this.TorsoPlate2.render(f5);
+			this.HeadMain.render(f5);
+			this.FrontLegLeftTop.render(f5);
+			this.TorsoFrontFurRight.render(f5);
+			this.TorsoShoulderPlateRightMid.render(f5);
+			this.TorsoPlate3.render(f5);
+			this.TorsoShoulderPlateLeftFront.render(f5);
+			this.FrontLegRightTop.render(f5);
+			this.TorsoChest.render(f5);
+			this.HindLegLeftCalfMiddle.render(f5);
+			this.HindLegRightCalf.render(f5);
+			this.TorsoBackFur.render(f5);
+			this.TorsoRear.render(f5);
+			this.Tail.render(f5);
+			this.TorsoPlate1.render(f5);
+			this.TorsoNeckJoint.render(f5);
+			this.TorsoShoulderPlateRightFront.render(f5);
+			this.TorsoShoulderPlateLeftMid.render(f5);
+		}
 	}
 
 	/**
 	 * This is a helper function from Tabula to set the rotation of model parts
 	 */
-	public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+	public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
+	{
 		modelRenderer.rotateAngleX = x;
 		modelRenderer.rotateAngleY = y;
 		modelRenderer.rotateAngleZ = z;
@@ -348,31 +386,4 @@ public class ModelBurrukai extends ModelBase {
 
 		this.Tail.rotateAngleX = 0.515060975741379F + rightSwingX;
 	}
-
-	/*
-	@Override
-	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entity)
-	{
-		float shinMod = 3f;
-
-		this.HindLegRightKnee.rotateAngleX = -0.17453292519943295F * 2 + leftSwingX * .75f;
-		this.HindLegRightShin.rotateAngleX = 0.5617993877991494F + rightSwingX * shinMod;
-
-		this.HindLegLeftKnee.rotateAngleX = -0.17453292519943295F * 2 + rightSwingX * .75f;
-		this.HindLegLeftShin.rotateAngleX = 0.5617993877991494F + leftSwingX * shinMod;
-
-		this.HindLegLeftCalfMiddle.rotateAngleX = -0.2617993877991494F + leftSwingX * .55f;
-
-		this.HindLegLeftCalfMiddle.offsetY = rightSwingX / 7f - .1f;
-
-		this.TorsoShoulderPlateRightMid.offsetY = rightSwingX * .12f + .01f;
-		this.TorsoShoulderPlateRightFront.offsetY = rightSwingX * .12f + .01f;
-
-		this.TorsoShoulderPlateLeftMid.offsetY = leftSwingX * .12f + .01f;
-		this.TorsoShoulderPlateLeftFront.offsetY = leftSwingX * .12f + .01f;
-
-		this.Tail.rotateAngleX = 0.515060975741379F + rightSwingX;
-	}
-
-	 */
 }

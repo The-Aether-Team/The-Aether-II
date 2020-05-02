@@ -32,6 +32,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import javax.vecmath.Point3d;
@@ -54,6 +56,7 @@ public class EntityKirrid extends EntitySheep implements IEntityMultiPart, IEnti
 	private final IEntityEyesComponent eyes = new EntityEyesComponent(this);
 
 	protected EntityAIEatAetherGrass entityAIEatGrass;
+	private int kirridTimer;
 
 	public EntityKirrid(World world)
 	{
@@ -86,6 +89,12 @@ public class EntityKirrid extends EntitySheep implements IEntityMultiPart, IEnti
 		this.tasks.addTask(9, this.entityAIEatGrass);
 	}
 
+	protected void updateAITasks()
+	{
+		this.kirridTimer = this.entityAIEatGrass.getTimer();
+		super.updateAITasks();
+	}
+
 	@Override
 	public World getWorld()
 	{
@@ -95,6 +104,11 @@ public class EntityKirrid extends EntitySheep implements IEntityMultiPart, IEnti
 	@Override
 	public void onLivingUpdate()
 	{
+		if (this.world.isRemote)
+		{
+			this.kirridTimer = Math.max(0, this.kirridTimer - 1);
+		}
+
 		super.onLivingUpdate();
 
 		this.eyes.update();
@@ -235,6 +249,19 @@ public class EntityKirrid extends EntitySheep implements IEntityMultiPart, IEnti
 		return LootTablesAether.ENTITY_KIRRID;
 	}
 
+	@SideOnly(Side.CLIENT)
+	public void handleStatusUpdate(byte id)
+	{
+		if (id == 10)
+		{
+			this.kirridTimer = 40;
+		}
+		else
+		{
+			super.handleStatusUpdate(id);
+		}
+	}
+
 	@Override
 	public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune)
 	{
@@ -252,6 +279,37 @@ public class EntityKirrid extends EntitySheep implements IEntityMultiPart, IEnti
 		this.playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F);
 
 		return ret;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public float getHeadRotationPointY(float p_70894_1_)
+	{
+		if (this.kirridTimer <= 0)
+		{
+			return 0.0F;
+		}
+		else if (this.kirridTimer >= 4 && this.kirridTimer <= 36)
+		{
+			return 1.0F;
+		}
+		else
+		{
+			return this.kirridTimer < 4 ? ((float)this.kirridTimer - p_70894_1_) / 4.0F : -((float)(this.kirridTimer - 40) - p_70894_1_) / 4.0F;
+		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	public float getHeadRotationAngleX(float p_70890_1_)
+	{
+		if (this.kirridTimer > 4 && this.kirridTimer <= 36)
+		{
+			float f = ((float)(this.kirridTimer - 4) - p_70890_1_) / 32.0F;
+			return ((float)Math.PI / 5F) + ((float)Math.PI * 7F / 100F) * MathHelper.sin(f * 28.7F);
+		}
+		else
+		{
+			return this.kirridTimer > 0 ? ((float)Math.PI / 5F) : this.rotationPitch * 0.017453292F;
+		}
 	}
 
 	@Override

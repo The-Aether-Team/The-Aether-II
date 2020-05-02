@@ -6,439 +6,221 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.util.math.MathHelper;
 
 public class ModelKirrid extends ModelBase
 {
-	public final ModelRenderer BodyMain;
-
-	public final ModelRenderer BodyBack;
-
-	public final ModelRenderer BodyBottom;
-
-	public final ModelRenderer LegFrontLeft1;
-
-	public final ModelRenderer LegFrontLeft2;
-
-	public final ModelRenderer LegFrontLeft3;
-
-	public final ModelRenderer LegFrontRight1;
-
-	public final ModelRenderer LegFrontRight2;
-
-	public final ModelRenderer LegFrontRight3;
-
-	public final ModelRenderer LegBackLeft1;
-
-	public final ModelRenderer LegBackLeft2;
-
-	public final ModelRenderer LegBackLeft3;
-
-	public final ModelRenderer LegBackRight1;
-
-	public final ModelRenderer LegBackRight2;
-
-	public final ModelRenderer LegBackRight3;
-
-	public final ModelRenderer Tail;
-
-	public final ModelRenderer HeadNeck;
-
-	public final ModelRenderer HeadMain;
-
-	public final ModelRenderer HeadSnout;
-
-	public final ModelRenderer HeadCheekLeft;
-
-	public final ModelRenderer HeadCheekRight;
-
-	public final ModelRenderer HeadJaw;
-
-	public final ModelRenderer HeadEyeRight;
-
-	public final ModelRenderer HeadBrowRight;
-
-	public final ModelRenderer HeadEyeLeft;
-
-	public final ModelRenderer HeadBrowLeft;
-
-	public final ModelRenderer HeadPlate;
-
-	public final ModelRenderer HeadTop;
-
-	public final ModelRenderer HeadEarLeft;
-
-	public final ModelRenderer HeadEarRight;
+	public ModelRenderer BodyMain;
+	public ModelRenderer BodyBack;
+	public ModelRenderer Tail;
+	public ModelRenderer HeadNeck;
+	public ModelRenderer LegBackRight1;
+	public ModelRenderer LegBackLeft1;
+	public ModelRenderer LegFrontLeft1;
+	public ModelRenderer LegFrontRight1;
+	public ModelRenderer HeadMain;
+	public ModelRenderer HeadSnout;
+	public ModelRenderer HeadCheekLeft;
+	public ModelRenderer HeadJaw;
+	public ModelRenderer HeadEyeRight;
+	public ModelRenderer HeadCheekRight;
+	public ModelRenderer HeadEyeLeft;
+	public ModelRenderer HeadPlate;
+	public ModelRenderer HeadEarLeft;
+	public ModelRenderer HeadEarRight;
+	public ModelRenderer LegBackRight2;
+	public ModelRenderer LegBacRight3;
+	public ModelRenderer LegBackLeft2;
+	public ModelRenderer LegBackLeft3;
+	public ModelRenderer LegFrontLeft2;
+	public ModelRenderer LegFrontLeft3;
+	public ModelRenderer LegFrontRight2;
+	public ModelRenderer LegFrontRight3;
 
 	public final float childZOffset = 4.0F;
 
 	public ModelKirrid()
 	{
 		this.textureWidth = 128;
-		this.textureHeight = 256;
-
-		this.BodyMain = new ModelRenderer(this, 36, 74);
-		this.BodyMain.addBox(-5F, 0F, -8F, 10, 13, 16);
-		this.BodyMain.setRotationPoint(0F, 0F, 0F);
-		this.BodyMain.setTextureSize(128, 256);
-		this.BodyMain.mirror = true;
-		this.setRotation(this.BodyMain, 0F, 0F, 0F);
-		this.BodyBack = new ModelRenderer(this, 41, 103);
-		this.BodyBack.addBox(-4F, -2F, 7F, 8, 9, 13);
-		this.BodyBack.setRotationPoint(0F, 0F, 0F);
-		this.BodyBack.setTextureSize(128, 256);
-		this.BodyBack.mirror = true;
-		this.setRotation(this.BodyBack, -0.3490659F, 0F, 0F);
-		this.BodyBottom = new ModelRenderer(this, 36, 125);
-		this.BodyBottom.addBox(-3F, 10F, -4F, 6, 5, 20);
-		this.BodyBottom.setRotationPoint(0F, 0F, 0F);
-		this.BodyBottom.setTextureSize(128, 256);
-		this.BodyBottom.mirror = true;
-		this.setRotation(this.BodyBottom, 0F, 0F, 0F);
-		this.LegFrontLeft1 = new ModelRenderer(this, 88, 63);
-		this.LegFrontLeft1.addBox(-3F, -4F, -2F, 5, 6, 5);
-		this.LegFrontLeft1.setRotationPoint(4F, 13F, -5F);
-		this.LegFrontLeft1.setTextureSize(128, 256);
-		this.LegFrontLeft1.mirror = true;
-		this.setRotation(this.LegFrontLeft1, 0F, 0F, 0F);
-		this.LegFrontLeft2 = new ModelRenderer(this, 91, 74);
-		this.LegFrontLeft2.addBox(-2.5F, 0F, -1F, 4, 7, 3);
-		this.LegFrontLeft2.setRotationPoint(4F, 13F, -5F);
-		this.LegFrontLeft2.setTextureSize(128, 256);
-		this.LegFrontLeft2.mirror = true;
-		this.setRotation(this.LegFrontLeft2, 0.0872665F, 0F, 0F);
-		this.LegFrontLeft3 = new ModelRenderer(this, 93, 84);
-		this.LegFrontLeft3.addBox(-2F, 6F, 0F, 3, 5, 2);
-		this.LegFrontLeft3.setRotationPoint(4F, 13F, -5F);
-		this.LegFrontLeft3.setTextureSize(128, 256);
-		this.LegFrontLeft3.mirror = true;
-		this.setRotation(this.LegFrontLeft3, 0F, 0F, 0F);
-		this.LegFrontRight1 = new ModelRenderer(this, 16, 63);
-		this.LegFrontRight1.addBox(-2F, -4F, -2F, 5, 6, 5);
-		this.LegFrontRight1.setRotationPoint(-4F, 13F, -5F);
-		this.LegFrontRight1.setTextureSize(128, 256);
-		this.LegFrontRight1.mirror = true;
-		this.setRotation(this.LegFrontRight1, 0F, 0F, 0F);
-		this.LegFrontRight2 = new ModelRenderer(this, 19, 74);
-		this.LegFrontRight2.addBox(-1.5F, 0F, -1F, 4, 7, 3);
-		this.LegFrontRight2.setRotationPoint(-4F, 13F, -5F);
-		this.LegFrontRight2.setTextureSize(128, 256);
-		this.LegFrontRight2.mirror = true;
-		this.setRotation(this.LegFrontRight2, 0.0872665F, 0F, 0F);
-		this.LegFrontRight3 = new ModelRenderer(this, 21, 84);
-		this.LegFrontRight3.addBox(-1F, 6F, 0F, 3, 5, 2);
-		this.LegFrontRight3.setRotationPoint(-4F, 13F, -5F);
-		this.LegFrontRight3.setTextureSize(128, 256);
-		this.LegFrontRight3.mirror = true;
-		this.setRotation(this.LegFrontRight3, 0F, 0F, 0F);
-		this.LegBackLeft1 = new ModelRenderer(this, 88, 112);
-		this.LegBackLeft1.addBox(-2F, -1F, -1F, 4, 7, 6);
-		this.LegBackLeft1.setRotationPoint(3.5F, 12F, 7F);
-		this.LegBackLeft1.setTextureSize(128, 256);
-		this.LegBackLeft1.mirror = true;
-		this.setRotation(this.LegBackLeft1, 0.6108652F, 0F, 0F);
-		this.LegBackLeft2 = new ModelRenderer(this, 91, 125);
-		this.LegBackLeft2.addBox(-2F, 6F, -1F, 4, 2, 3);
-		this.LegBackLeft2.setRotationPoint(3.5F, 12F, 7F);
-		this.LegBackLeft2.setTextureSize(128, 256);
-		this.LegBackLeft2.mirror = true;
-		this.setRotation(this.LegBackLeft2, 0.6108652F, 0F, 0F);
-		this.LegBackLeft3 = new ModelRenderer(this, 93, 130);
-		this.LegBackLeft3.addBox(-1.5F, 5F, 3.5F, 3, 7, 2);
-		this.LegBackLeft3.setRotationPoint(3.5F, 12F, 7F);
-		this.LegBackLeft3.setTextureSize(128, 256);
-		this.LegBackLeft3.mirror = true;
-		this.setRotation(this.LegBackLeft3, 0F, 0F, 0F);
-		this.LegBackRight1 = new ModelRenderer(this, 16, 112);
-		this.LegBackRight1.addBox(-2F, -1F, -1F, 4, 7, 6);
-		this.LegBackRight1.setRotationPoint(-3.5F, 12F, 7F);
-		this.LegBackRight1.setTextureSize(128, 256);
-		this.LegBackRight1.mirror = true;
-		this.setRotation(this.LegBackRight1, 0.6108652F, 0F, 0F);
-		this.LegBackRight2 = new ModelRenderer(this, 19, 125);
-		this.LegBackRight2.addBox(-2F, 6F, -1F, 4, 2, 3);
-		this.LegBackRight2.setRotationPoint(-3.5F, 12F, 7F);
-		this.LegBackRight2.setTextureSize(128, 256);
-		this.LegBackRight2.mirror = true;
-		this.setRotation(this.LegBackRight2, 0.6108652F, 0F, 0F);
-		this.LegBackRight3 = new ModelRenderer(this, 21, 130);
-		this.LegBackRight3.addBox(-1.5F, 5F, 3.5F, 3, 7, 2);
-		this.LegBackRight3.setRotationPoint(-3.5F, 12F, 7F);
-		this.LegBackRight3.setTextureSize(128, 256);
-		this.LegBackRight3.mirror = true;
-		this.setRotation(this.LegBackRight3, 0F, 0F, 0F);
-		this.Tail = new ModelRenderer(this, 58, 150);
-		this.Tail.addBox(-1.5F, 0F, 0F, 3, 8, 1);
-		this.Tail.setRotationPoint(0F, 5F, 18F);
-		this.Tail.setTextureSize(128, 256);
-		this.Tail.mirror = true;
-		this.setRotation(this.Tail, 0.1745329F, 0F, 0F);
-		this.HeadNeck = new ModelRenderer(this, 49, 61);
-		this.HeadNeck.addBox(-3F, -3F, -2.5F, 6, 6, 7);
-		this.HeadNeck.setRotationPoint(0F, 6F, -9F);
-		this.HeadNeck.setTextureSize(128, 256);
-		this.HeadNeck.mirror = true;
-		this.setRotation(this.HeadNeck, 0F, 0F, 0F);
-		this.HeadMain = new ModelRenderer(this, 49, 31);
-		this.HeadMain.addBox(-4F, -5.133333F, -6F, 8, 10, 5);
-		this.HeadMain.setRotationPoint(0F, 6F, -9F);
-		this.HeadMain.setTextureSize(128, 256);
-		this.HeadMain.mirror = true;
-		this.setRotation(this.HeadMain, 0F, 0F, 0F);
-		this.HeadSnout = new ModelRenderer(this, 48, 17);
-		this.HeadSnout.addBox(-2.5F, -7.5F, -11F, 5, 5, 9);
-		this.HeadSnout.setRotationPoint(0F, 6F, -9F);
-		this.HeadSnout.setTextureSize(128, 256);
-		this.HeadSnout.mirror = true;
-		this.setRotation(this.HeadSnout, 0.6108652F, 0F, 0F);
-		this.HeadCheekLeft = new ModelRenderer(this, 75, 36);
-		this.HeadCheekLeft.addBox(2.3F, 0.5F, -10.5F, 3, 4, 6);
-		this.HeadCheekLeft.setRotationPoint(0F, 6F, -9F);
-		this.HeadCheekLeft.setTextureSize(128, 256);
-		this.HeadCheekLeft.mirror = true;
-		this.setRotation(this.HeadCheekLeft, 0F, 0.2617994F, 0F);
-		this.HeadCheekRight = new ModelRenderer(this, 31, 36);
-		this.HeadCheekRight.addBox(-5.3F, 0.5F, -10.5F, 3, 4, 6);
-		this.HeadCheekRight.setRotationPoint(0F, 6F, -9F);
-		this.HeadCheekRight.setTextureSize(128, 256);
-		this.HeadCheekRight.mirror = true;
-		this.setRotation(this.HeadCheekRight, 0F, -0.2617994F, 0F);
-		this.HeadJaw = new ModelRenderer(this, 47, 46);
-		this.HeadJaw.addBox(-2F, 3F, -11F, 4, 4, 11);
-		this.HeadJaw.setRotationPoint(0F, 6F, -9F);
-		this.HeadJaw.setTextureSize(128, 256);
-		this.HeadJaw.mirror = true;
-		this.setRotation(this.HeadJaw, -0.1745329F, 0F, 0F);
-		this.HeadEyeRight = new ModelRenderer(this, 36, 30);
-		this.HeadEyeRight.addBox(-4.6F, -2F, -7.5F, 1, 3, 3);
-		this.HeadEyeRight.setRotationPoint(0F, 6F, -9F);
-		this.HeadEyeRight.setTextureSize(128, 256);
-		this.HeadEyeRight.mirror = true;
-		this.setRotation(this.HeadEyeRight, 0F, -0.2617994F, 0F);
-		this.HeadBrowRight = new ModelRenderer(this, 35, 26);
-		this.HeadBrowRight.addBox(-5F, -3F, -7.7F, 2, 1, 3);
-		this.HeadBrowRight.setRotationPoint(0F, 6F, -9F);
-		this.HeadBrowRight.setTextureSize(128, 256);
-		this.HeadBrowRight.mirror = true;
-		this.setRotation(this.HeadBrowRight, 0F, -0.2617994F, 0F);
-		this.HeadEyeLeft = new ModelRenderer(this, 80, 30);
-		this.HeadEyeLeft.addBox(3.6F, -2F, -7.5F, 1, 3, 3);
-		this.HeadEyeLeft.setRotationPoint(0F, 6F, -9F);
-		this.HeadEyeLeft.setTextureSize(128, 256);
-		this.HeadEyeLeft.mirror = true;
-		this.setRotation(this.HeadEyeLeft, 0F, 0.2617994F, 0F);
-		this.HeadBrowLeft = new ModelRenderer(this, 79, 26);
-		this.HeadBrowLeft.addBox(3F, -3F, -7.7F, 2, 1, 3);
-		this.HeadBrowLeft.setRotationPoint(0F, 6F, -9F);
-		this.HeadBrowLeft.setTextureSize(128, 256);
-		this.HeadBrowLeft.mirror = true;
-		this.setRotation(this.HeadBrowLeft, 0F, 0.2617994F, 0F);
-		this.HeadPlate = new ModelRenderer(this, 45, 2);
-		this.HeadPlate.addBox(-4.5F, -8.5F, -4F, 9, 2, 8);
-		this.HeadPlate.setRotationPoint(0F, 6F, -9F);
-		this.HeadPlate.setTextureSize(128, 256);
-		this.HeadPlate.mirror = true;
-		this.setRotation(this.HeadPlate, 0.6108652F, 0F, 0F);
-		this.HeadTop = new ModelRenderer(this, 52, 12);
-		this.HeadTop.addBox(-3F, -6F, -4.533333F, 6, 1, 4);
-		this.HeadTop.setRotationPoint(0F, 6F, -9F);
-		this.HeadTop.setTextureSize(128, 256);
-		this.HeadTop.mirror = true;
-		this.setRotation(this.HeadTop, 0.1745329F, 0F, 0F);
+		this.textureHeight = 128;
+		this.LegFrontRight3 = new ModelRenderer(this, 23, 71);
+		this.LegFrontRight3.setRotationPoint(0.0F, 5.0F, 0.5F);
+		this.LegFrontRight3.addBox(-0.5F, 0.0F, -0.9F, 2, 5, 2, 0.0F);
+		this.setRotateAngle(LegFrontRight3, -0.08726646259971647F, -0.0F, 0.0F);
+		this.LegBackLeft2 = new ModelRenderer(this, 92, 96);
+		this.LegBackLeft2.setRotationPoint(0.0F, 0.0F, 0.0F);
+		this.LegBackLeft2.addBox(-1.5F, 6.6F, -6.5F, 3, 4, 4, 0.0F);
+		this.setRotateAngle(LegBackLeft2, 0.5235987755982988F, -0.0F, 0.0F);
+		this.HeadMain = new ModelRenderer(this, 49, 24);
+		this.HeadMain.setRotationPoint(0.0F, 0.0F, 0.0F);
+		this.HeadMain.addBox(-4.0F, -5.13F, -6.0F, 8, 10, 5, 0.0F);
+		this.LegFrontLeft3 = new ModelRenderer(this, 93, 71);
+		this.LegFrontLeft3.setRotationPoint(0.0F, 5.0F, 0.5F);
+		this.LegFrontLeft3.addBox(-1.5F, 0.0F, -0.9F, 2, 5, 2, 0.0F);
+		this.setRotateAngle(LegFrontLeft3, -0.08726646259971647F, -0.0F, 0.0F);
+		this.LegBackLeft1 = new ModelRenderer(this, 88, 79);
+		this.LegBackLeft1.setRotationPoint(3.5F, 7.0F, 9.0F);
+		this.LegBackLeft1.addBox(-2.0F, -1.0F, -3.0F, 4, 10, 7, 0.0F);
+		this.setRotateAngle(LegBackLeft1, 0.22689280275926282F, -0.0F, 0.0F);
+		this.BodyMain = new ModelRenderer(this, 36, 66);
+		this.BodyMain.setRotationPoint(0.0F, 0.0F, 0.0F);
+		this.BodyMain.addBox(-5.0F, 0.0F, -8.0F, 10, 14, 16, 0.0F);
+		this.Tail = new ModelRenderer(this, 57, 117);
+		this.Tail.setRotationPoint(0.0F, 3.5F, 16.8F);
+		this.Tail.addBox(-1.5F, 0.0F, -2.0F, 3, 8, 2, 0.0F);
+		this.setRotateAngle(Tail, 0.4363323129985824F, -0.0F, 0.0F);
 		this.HeadEarLeft = new ModelRenderer(this, 93, 39);
-		this.HeadEarLeft.addBox(4F, -1F, -5F, 1, 4, 3);
-		this.HeadEarLeft.setRotationPoint(0F, 6F, -9F);
-		this.HeadEarLeft.setTextureSize(128, 256);
-		this.HeadEarLeft.mirror = true;
-		this.setRotation(this.HeadEarLeft, 0F, 0F, -0.4363323F);
+		this.HeadEarLeft.setRotationPoint(3.5F, -2.0F, -4.0F);
+		this.HeadEarLeft.addBox(0.0F, -1.0F, -1.0F, 1, 4, 3, 0.0F);
+		this.setRotateAngle(HeadEarLeft, 0.0F, -0.0F, -0.4363323129985824F);
 		this.HeadEarRight = new ModelRenderer(this, 23, 39);
-		this.HeadEarRight.addBox(-5F, -1F, -5F, 1, 4, 3);
-		this.HeadEarRight.setRotationPoint(0F, 6F, -9F);
-		this.HeadEarRight.setTextureSize(128, 256);
-		this.HeadEarRight.mirror = true;
-		this.setRotation(this.HeadEarRight, 0F, 0F, 0.4363323F);
+		this.HeadEarRight.setRotationPoint(-3.5F, -2.0F, -4.0F);
+		this.HeadEarRight.addBox(-1.0F, -1.0F, -1.0F, 1, 4, 3, 0.0F);
+		this.setRotateAngle(HeadEarRight, 0.0F, 0.0F, 0.4363323129985824F);
+		this.HeadNeck = new ModelRenderer(this, 52, 54);
+		this.HeadNeck.setRotationPoint(0.0F, 6.0F, -9.0F);
+		this.HeadNeck.addBox(-2.0F, -3.0F, -2.5F, 4, 6, 6, 0.0F);
+		this.LegBackRight2 = new ModelRenderer(this, 18, 96);
+		this.LegBackRight2.setRotationPoint(0.0F, 0.0F, 0.0F);
+		this.LegBackRight2.addBox(-1.5F, 6.6F, -6.5F, 3, 4, 4, 0.0F);
+		this.setRotateAngle(LegBackRight2, 0.5235987755982988F, -0.0F, 0.0F);
+		this.HeadSnout = new ModelRenderer(this, 48, 10);
+		this.HeadSnout.setRotationPoint(0.0F, 0.0F, 0.0F);
+		this.HeadSnout.addBox(-2.5F, -7.5F, -11.0F, 5, 5, 9, 0.0F);
+		this.setRotateAngle(HeadSnout, 0.6108652381980153F, -0.0F, 0.0F);
+		this.LegFrontRight2 = new ModelRenderer(this, 21, 61);
+		this.LegFrontRight2.setRotationPoint(0.0F, 1.0F, 0.0F);
+		this.LegFrontRight2.addBox(-1.0F, -1.0F, -1.0F, 3, 7, 3, 0.0F);
+		this.setRotateAngle(LegFrontRight2, 0.08726646259971647F, -0.0F, 0.0F);
+		this.LegBackRight1 = new ModelRenderer(this, 14, 79);
+		this.LegBackRight1.setRotationPoint(-3.5F, 7.0F, 9.0F);
+		this.LegBackRight1.addBox(-2.0F, -1.0F, -3.0F, 4, 10, 7, 0.0F);
+		this.setRotateAngle(LegBackRight1, 0.22689280275926282F, -0.0F, 0.0F);
+		this.LegFrontLeft1 = new ModelRenderer(this, 88, 50);
+		this.LegFrontLeft1.setRotationPoint(4.0F, 13.0F, -5.0F);
+		this.LegFrontLeft1.addBox(-2.5F, -4.0F, -2.0F, 4, 6, 5, 0.0F);
+		this.HeadCheekRight = new ModelRenderer(this, 31, 36);
+		this.HeadCheekRight.setRotationPoint(0.0F, 0.0F, 0.0F);
+		this.HeadCheekRight.addBox(-5.3F, 0.8F, -10.5F, 3, 4, 6, 0.0F);
+		this.setRotateAngle(HeadCheekRight, 0.0F, -0.2617993877991494F, 0.0F);
+		this.LegFrontRight1 = new ModelRenderer(this, 18, 50);
+		this.LegFrontRight1.setRotationPoint(-4.0F, 13.0F, -5.0F);
+		this.LegFrontRight1.addBox(-1.5F, -4.0F, -2.0F, 4, 6, 5, 0.0F);
+		this.HeadCheekLeft = new ModelRenderer(this, 75, 36);
+		this.HeadCheekLeft.setRotationPoint(0.0F, 0.0F, 0.0F);
+		this.HeadCheekLeft.addBox(2.3F, 0.8F, -10.5F, 3, 4, 6, 0.0F);
+		this.setRotateAngle(HeadCheekLeft, 0.0F, 0.2617993877991494F, 0.0F);
+		this.LegBackLeft3 = new ModelRenderer(this, 95, 104);
+		this.LegBackLeft3.setRotationPoint(0.0F, 7.5F, 1.0F);
+		this.LegBackLeft3.addBox(-1.0F, 4.5F, -2.1F, 2, 8, 2, 0.0F);
+		this.setRotateAngle(LegBackLeft3, -0.8726646259971648F, -0.0F, 0.0F);
+		this.LegFrontLeft2 = new ModelRenderer(this, 91, 61);
+		this.LegFrontLeft2.setRotationPoint(0.0F, 1.0F, 0.0F);
+		this.LegFrontLeft2.addBox(-2.0F, -1.0F, -1.0F, 3, 7, 3, 0.0F);
+		this.setRotateAngle(LegFrontLeft2, 0.08726646259971647F, -0.0F, 0.0F);
+		this.LegBacRight3 = new ModelRenderer(this, 21, 104);
+		this.LegBacRight3.setRotationPoint(0.0F, 7.5F, 1.0F);
+		this.LegBacRight3.addBox(-1.0F, 4.5F, -2.1F, 2, 8, 2, 0.0F);
+		this.setRotateAngle(LegBacRight3, -0.8726646259971648F, -0.0F, 0.0F);
+		this.HeadPlate = new ModelRenderer(this, 45, 0);
+		this.HeadPlate.setRotationPoint(0.0F, 0.0F, 0.0F);
+		this.HeadPlate.addBox(-4.5F, -8.5F, -4.0F, 9, 2, 8, 0.0F);
+		this.setRotateAngle(HeadPlate, 0.6108652381980153F, -0.0F, 0.0F);
+		this.HeadJaw = new ModelRenderer(this, 47, 39);
+		this.HeadJaw.setRotationPoint(0.0F, 0.0F, 0.0F);
+		this.HeadJaw.addBox(-2.0F, 3.0F, -11.0F, 4, 4, 11, 0.0F);
+		this.setRotateAngle(HeadJaw, -0.12217304763960307F, -0.0F, 0.0F);
+		this.HeadEyeRight = new ModelRenderer(this, 36, 29);
+		this.HeadEyeRight.setRotationPoint(0.0F, 0.0F, 0.0F);
+		this.HeadEyeRight.addBox(-4.6F, -3.0F, -7.5F, 1, 4, 3, 0.0F);
+		this.setRotateAngle(HeadEyeRight, 0.0F, -0.2617993877991494F, 0.0F);
+		this.BodyBack = new ModelRenderer(this, 44, 96);
+		this.BodyBack.setRotationPoint(0.0F, 1.5F, 0.0F);
+		this.BodyBack.addBox(-4.0F, -2.0F, 7.0F, 8, 11, 10, 0.0F);
+		this.setRotateAngle(BodyBack, -0.17453292519943295F, 0.0F, 0.0F);
+		this.HeadEyeLeft = new ModelRenderer(this, 80, 29);
+		this.HeadEyeLeft.setRotationPoint(0.0F, 0.0F, 0.0F);
+		this.HeadEyeLeft.addBox(3.6F, -3.0F, -7.5F, 1, 4, 3, 0.0F);
+		this.setRotateAngle(HeadEyeLeft, 0.0F, 0.2617993877991494F, 0.0F);
+		this.LegFrontRight2.addChild(this.LegFrontRight3);
+		this.LegBackLeft1.addChild(this.LegBackLeft2);
+		this.HeadNeck.addChild(this.HeadMain);
+		this.LegFrontLeft2.addChild(this.LegFrontLeft3);
+		this.BodyMain.addChild(this.LegBackLeft1);
+		this.BodyMain.addChild(this.Tail);
+		this.HeadNeck.addChild(this.HeadEarLeft);
+		this.HeadNeck.addChild(this.HeadEarRight);
+		this.BodyMain.addChild(this.HeadNeck);
+		this.LegBackRight1.addChild(this.LegBackRight2);
+		this.HeadNeck.addChild(this.HeadSnout);
+		this.LegFrontRight1.addChild(this.LegFrontRight2);
+		this.BodyMain.addChild(this.LegBackRight1);
+		this.BodyMain.addChild(this.LegFrontLeft1);
+		this.HeadNeck.addChild(this.HeadCheekRight);
+		this.BodyMain.addChild(this.LegFrontRight1);
+		this.HeadNeck.addChild(this.HeadCheekLeft);
+		this.LegBackLeft2.addChild(this.LegBackLeft3);
+		this.LegFrontLeft1.addChild(this.LegFrontLeft2);
+		this.LegBackRight2.addChild(this.LegBacRight3);
+		this.HeadNeck.addChild(this.HeadPlate);
+		this.HeadNeck.addChild(this.HeadJaw);
+		this.HeadNeck.addChild(this.HeadEyeRight);
+		this.BodyMain.addChild(this.BodyBack);
+		this.HeadNeck.addChild(this.HeadEyeLeft);
 	}
 
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float scale)
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
-		super.render(entity, f, f1, f2, f3, f4, scale);
-		this.setRotationAngles(f, f1, f2, f3, f4, scale, entity);
-
 		if (this.isChild)
 		{
 			GlStateManager.pushMatrix();
-			GlStateManager.translate(0.0F, 8.75F * scale, this.childZOffset * scale);
-			this.HeadNeck.render(scale);
-			this.HeadMain.render(scale);
-			this.HeadSnout.render(scale);
-			this.HeadCheekLeft.render(scale);
-			this.HeadCheekRight.render(scale);
-			this.HeadJaw.render(scale);
-			this.HeadEyeRight.render(scale);
-			this.HeadBrowRight.render(scale);
-			this.HeadEyeLeft.render(scale);
-			this.HeadBrowLeft.render(scale);
-			this.HeadPlate.render(scale);
-			this.HeadTop.render(scale);
-			this.HeadEarLeft.render(scale);
-			this.HeadEarRight.render(scale);
-			GlStateManager.popMatrix();
-			GlStateManager.pushMatrix();
 			GlStateManager.scale(0.5F, 0.5F, 0.5F);
-			GlStateManager.translate(0.0F, 24.0F * scale, 0.0F);
-			this.BodyMain.render(scale);
-			this.BodyBack.render(scale);
-			this.BodyBottom.render(scale);
-			this.LegFrontLeft1.render(scale);
-			this.LegFrontLeft2.render(scale);
-			this.LegFrontLeft3.render(scale);
-			this.LegFrontRight1.render(scale);
-			this.LegFrontRight2.render(scale);
-			this.LegFrontRight3.render(scale);
-			this.LegBackLeft1.render(scale);
-			this.LegBackLeft2.render(scale);
-			this.LegBackLeft3.render(scale);
-			this.LegBackRight1.render(scale);
-			this.LegBackRight2.render(scale);
-			this.LegBackRight3.render(scale);
-			this.Tail.render(scale);
+			GlStateManager.translate(0.0F, 24.0F * f5, 0.0F);
+			this.BodyMain.render(f5);
 			GlStateManager.popMatrix();
 		}
 		else
 		{
-			this.BodyMain.render(scale);
-			this.BodyBack.render(scale);
-			this.BodyBottom.render(scale);
-			this.LegFrontLeft1.render(scale);
-			this.LegFrontLeft2.render(scale);
-			this.LegFrontLeft3.render(scale);
-			this.LegFrontRight1.render(scale);
-			this.LegFrontRight2.render(scale);
-			this.LegFrontRight3.render(scale);
-			this.LegBackLeft1.render(scale);
-			this.LegBackLeft2.render(scale);
-			this.LegBackLeft3.render(scale);
-			this.LegBackRight1.render(scale);
-			this.LegBackRight2.render(scale);
-			this.LegBackRight3.render(scale);
-			this.Tail.render(scale);
-			this.HeadNeck.render(scale);
-			this.HeadMain.render(scale);
-			this.HeadSnout.render(scale);
-			this.HeadCheekLeft.render(scale);
-			this.HeadCheekRight.render(scale);
-			this.HeadJaw.render(scale);
-			this.HeadEyeRight.render(scale);
-			this.HeadBrowRight.render(scale);
-			this.HeadEyeLeft.render(scale);
-			this.HeadBrowLeft.render(scale);
-			this.HeadPlate.render(scale);
-			this.HeadTop.render(scale);
-			this.HeadEarLeft.render(scale);
-			this.HeadEarRight.render(scale);
+			this.BodyMain.render(f5);
 		}
 	}
 
-	public void setRotation(ModelRenderer model, float x, float y, float z)
+	/**
+	 * This is a helper function from Tabula to set the rotation of model parts
+	 */
+	public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
 	{
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
+		modelRenderer.rotateAngleX = x;
+		modelRenderer.rotateAngleY = y;
+		modelRenderer.rotateAngleZ = z;
 	}
 
 	@Override
 	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch,
-			float scaleFactor, Entity entity)
+								  float scaleFactor, Entity entity)
 	{
 		super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entity);
 
 		this.Tail.rotateAngleZ = (MathHelper.cos(ageInTicks * 0.1662F) * 0.2F);
 
-		this.setHeadRotations(headPitch);
-
+		this.HeadNeck.rotateAngleX = headPitch * 0.017453292F;
 		this.HeadNeck.rotateAngleY = netHeadYaw * 0.017453292F;
-		this.HeadMain.rotateAngleY = netHeadYaw * 0.017453292F;
-		this.HeadSnout.rotateAngleY = netHeadYaw * 0.017453292F;
-		this.HeadCheekLeft.rotateAngleY = 0.2617994F + (netHeadYaw * 0.017453292F);
-		this.HeadCheekRight.rotateAngleY = -0.2617994F + (netHeadYaw * 0.017453292F);
-		this.HeadJaw.rotateAngleY = netHeadYaw * 0.017453292F;
-		this.HeadEyeLeft.rotateAngleY = 0.2617994F + (netHeadYaw * 0.017453292F);
-		this.HeadEyeRight.rotateAngleY = -0.2617994F + (netHeadYaw * 0.017453292F);
-		this.HeadBrowLeft.rotateAngleY = 0.2617994F + (netHeadYaw * 0.017453292F);
-		this.HeadBrowRight.rotateAngleY = -0.2617994F + (netHeadYaw * 0.017453292F);
-		this.HeadPlate.rotateAngleY = netHeadYaw * 0.017453292F;
-		this.HeadTop.rotateAngleY = netHeadYaw * 0.017453292F;
-		this.HeadEarLeft.rotateAngleY = netHeadYaw * 0.017453292F;
-		this.HeadEarRight.rotateAngleY = netHeadYaw * 0.017453292F;
 
-		this.LegFrontLeft1.rotateAngleX = 0.0872665F + (MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount);
-		this.LegFrontLeft2.rotateAngleX = 0.0872665F + (MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount);
-		this.LegFrontLeft3.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+		this.LegFrontLeft1.rotateAngleX = 0.08726646259971647F + (MathHelper.cos(limbSwing * 0.6662F) * 1.0F * limbSwingAmount);
+		this.LegFrontRight1.rotateAngleX = 0.08726646259971647F + (MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.0F * limbSwingAmount);
 
-		this.LegFrontRight1.rotateAngleX = 0.0872665F + (MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount);
-		this.LegFrontRight2.rotateAngleX = 0.0872665F + (MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount);
-		this.LegFrontRight3.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
-
-		this.LegBackLeft1.rotateAngleX = 0.6108652F + (MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount);
-		this.LegBackLeft2.rotateAngleX = 0.6108652F + (MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount);
-		this.LegBackLeft3.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
-
-		this.LegBackRight1.rotateAngleX = 0.6108652F + (MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount);
-		this.LegBackRight2.rotateAngleX = 0.6108652F + (MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount);
-		this.LegBackRight3.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-
+		this.LegBackLeft1.rotateAngleX = 0.08726646259971647F + (MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.0F * limbSwingAmount);
+		this.LegBackRight1.rotateAngleX = 0.08726646259971647F + (MathHelper.cos(limbSwing * 0.6662F) * 1.0F * limbSwingAmount);
 	}
 
 	@Override
-	public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float p_78086_2_, float p_78086_3_, float partialTickTime)
+	public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime)
 	{
-		super.setLivingAnimations(entitylivingbaseIn, p_78086_2_, p_78086_3_, partialTickTime);
+		super.setLivingAnimations(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTickTime);
 
-		float rotationPointY = 6.0F + ((EntityKirrid) entitylivingbaseIn).getHeadRotationPointY(partialTickTime) * 9.0F;
-		float headAng = ((EntityKirrid) entitylivingbaseIn).getHeadRotationAngleX(partialTickTime);
-
-		this.HeadNeck.rotationPointY = rotationPointY;
-		this.HeadMain.rotationPointY = rotationPointY;
-		this.HeadSnout.rotationPointY = rotationPointY;
-		this.HeadCheekLeft.rotationPointY = rotationPointY;
-		this.HeadCheekRight.rotationPointY = rotationPointY;
-		this.HeadJaw.rotationPointY = rotationPointY;
-		this.HeadEyeLeft.rotationPointY = rotationPointY;
-		this.HeadEyeRight.rotationPointY = rotationPointY;
-		this.HeadBrowLeft.rotationPointY = rotationPointY;
-		this.HeadBrowRight.rotationPointY = rotationPointY;
-		this.HeadPlate.rotationPointY = rotationPointY;
-		this.HeadTop.rotationPointY = rotationPointY;
-		this.HeadEarLeft.rotationPointY = rotationPointY;
-		this.HeadEarRight.rotationPointY = rotationPointY;
-
-		this.HeadCheekLeft.offsetX =
-				MathHelper.sin(headAng * -0.3662F + (float) Math.PI) * 0.1F * ((EntityKirrid) entitylivingbaseIn).getHeadRotationAngleX(partialTickTime)
-						+ .005f;
-		this.HeadCheekRight.offsetX =
-				MathHelper.sin(headAng * 0.3662F + (float) Math.PI) * 0.1F * ((EntityKirrid) entitylivingbaseIn).getHeadRotationAngleX(partialTickTime) - .001f;
-		this.HeadJaw.offsetY =
-				MathHelper.sin(headAng * 0.6662F + (float) Math.PI) * 0.2F * ((EntityKirrid) entitylivingbaseIn).getHeadRotationAngleX(partialTickTime);
-
-		this.setHeadRotations(headAng * 9.0F);
-	}
-
-	public void setHeadRotations(float headPitch)
-	{
-		this.HeadNeck.rotateAngleX = headPitch * 0.017453292F;
-		this.HeadMain.rotateAngleX = headPitch * 0.017453292F;
-		this.HeadSnout.rotateAngleX = 0.6108652F + (headPitch * 0.017453292F);
-		this.HeadCheekLeft.rotateAngleX = headPitch * 0.017453292F;
-		this.HeadCheekRight.rotateAngleX = headPitch * 0.017453292F;
-		this.HeadJaw.rotateAngleX = -0.1745329F + (headPitch * 0.017453292F);
-		this.HeadEyeLeft.rotateAngleX = headPitch * 0.017453292F;
-		this.HeadEyeRight.rotateAngleX = headPitch * 0.017453292F;
-		this.HeadBrowLeft.rotateAngleX = headPitch * 0.017453292F;
-		this.HeadBrowRight.rotateAngleX = headPitch * 0.017453292F;
-		this.HeadPlate.rotateAngleX = 0.6108652F + (headPitch * 0.017453292F);
-		this.HeadTop.rotateAngleX = 0.1745329F + (headPitch * 0.017453292F);
-		this.HeadEarLeft.rotateAngleX = headPitch * 0.017453292F;
-		this.HeadEarRight.rotateAngleX = headPitch * 0.017453292F;
+		this.HeadNeck.rotationPointY = 6.0F + ((EntityKirrid) entitylivingbaseIn).getHeadRotationPointY(partialTickTime) * 9.0F;
+		this.HeadNeck.rotateAngleX = ((EntityKirrid) entitylivingbaseIn).getHeadRotationAngleX(partialTickTime);
 	}
 }

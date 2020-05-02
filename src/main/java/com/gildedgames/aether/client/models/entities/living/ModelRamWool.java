@@ -8,157 +8,70 @@ import net.minecraft.util.math.MathHelper;
 
 public class ModelRamWool extends ModelBase
 {
-	//fields
-	final ModelRenderer BodyMain;
-
-	final ModelRenderer BodyBack;
-
-	final ModelRenderer BodyBottom;
-
-	final ModelRenderer LegFrontLeft1;
-
-	final ModelRenderer LegFrontRight1;
-
-	final ModelRenderer LegBackLeft1;
-
-	final ModelRenderer LegBackLeft2;
-
-	final ModelRenderer LegBackRight1;
-
-	final ModelRenderer LegBackRight2;
-
-	final ModelRenderer Tail;
+	public ModelRenderer BodyMain;
+	public ModelRenderer BodyBack;
+	public ModelRenderer LegFrontLeft1;
+	public ModelRenderer LegFrontRight1;
 
 	public ModelRamWool()
 	{
-		this.textureWidth = 128;
-		this.textureHeight = 256;
-
-		this.BodyMain = new ModelRenderer(this, 28, 74);
-		this.BodyMain.addBox(-8F, -1F, -10F, 16, 16, 18);
-		this.BodyMain.setRotationPoint(0F, 0F, 0F);
-		this.BodyMain.setTextureSize(128, 256);
-		this.BodyMain.mirror = true;
-		this.setRotation(this.BodyMain, 0F, 0F, 0F);
-		this.BodyBack = new ModelRenderer(this, 35, 108);
-		this.BodyBack.addBox(-7F, -3F, 7F, 14, 11, 13);
-		this.BodyBack.setRotationPoint(0F, 0F, 0F);
-		this.BodyBack.setTextureSize(128, 256);
-		this.BodyBack.mirror = true;
-		this.setRotation(this.BodyBack, -0.3490659F, 0F, 0F);
-		this.BodyBottom = new ModelRenderer(this, 44, 132);
-		this.BodyBottom.addBox(-5F, 10F, 8F, 10, 5, 8);
-		this.BodyBottom.setRotationPoint(0F, 0F, 0F);
-		this.BodyBottom.setTextureSize(128, 256);
-		this.BodyBottom.mirror = true;
-		this.setRotation(this.BodyBottom, 0F, 0F, 0F);
-		this.LegFrontLeft1 = new ModelRenderer(this, 96, 61);
-		this.LegFrontLeft1.addBox(-3F, 0F, -3F, 6, 7, 6);
-		this.LegFrontLeft1.setRotationPoint(4F, 13F, -5F);
-		this.LegFrontLeft1.setTextureSize(128, 256);
+		this.textureWidth = 64;
+		this.textureHeight = 64;
+		this.BodyBack = new ModelRenderer(this, 6, 31);
+		this.BodyBack.setRotationPoint(0.0F, 0.0F, 0.0F);
+		this.BodyBack.addBox(-6.0F, -1.5F, 4.6F, 12, 5, 10, 0.0F);
+		this.setRotateAngle(BodyBack, -0.17453292519943295F, -0.0F, 0.0F);
+		this.LegFrontLeft1 = new ModelRenderer(this, 28, 46);
 		this.LegFrontLeft1.mirror = true;
-		this.setRotation(this.LegFrontLeft1, 0.0872665F, 0F, 0F);
-		this.LegFrontRight1 = new ModelRenderer(this, 4, 61);
-		this.LegFrontRight1.addBox(-3F, 0F, -3F, 6, 7, 6);
-		this.LegFrontRight1.setRotationPoint(-4F, 13F, -5F);
-		this.LegFrontRight1.setTextureSize(128, 256);
-		this.LegFrontRight1.mirror = true;
-		this.setRotation(this.LegFrontRight1, 0.0872665F, 0F, 0F);
-		this.LegBackLeft1 = new ModelRenderer(this, 96, 108);
-		this.LegBackLeft1.addBox(-3F, -1F, -3F, 6, 7, 8);
-		this.LegBackLeft1.setRotationPoint(3.5F, 12F, 7F);
-		this.LegBackLeft1.setTextureSize(128, 256);
-		this.LegBackLeft1.mirror = true;
-		this.setRotation(this.LegBackLeft1, 0.6108652F, 0F, 0F);
-		this.LegBackLeft2 = new ModelRenderer(this, 99, 123);
-		this.LegBackLeft2.addBox(-3F, 6F, -3F, 6, 2, 5);
-		this.LegBackLeft2.setRotationPoint(3.5F, 12F, 7F);
-		this.LegBackLeft2.setTextureSize(128, 256);
-		this.LegBackLeft2.mirror = true;
-		this.setRotation(this.LegBackLeft2, 0.6108652F, 0F, 0F);
-		this.LegBackRight1 = new ModelRenderer(this, 0, 108);
-		this.LegBackRight1.addBox(-3F, -1F, -3F, 6, 7, 8);
-		this.LegBackRight1.setRotationPoint(-3.5F, 12F, 7F);
-		this.LegBackRight1.setTextureSize(128, 256);
-		this.LegBackRight1.mirror = true;
-		this.setRotation(this.LegBackRight1, 0.6108652F, 0F, 0F);
-		this.LegBackRight2 = new ModelRenderer(this, 3, 123);
-		this.LegBackRight2.addBox(-3F, 6F, -3F, 6, 2, 5);
-		this.LegBackRight2.setRotationPoint(-3.5F, 12F, 7F);
-		this.LegBackRight2.setTextureSize(128, 256);
-		this.LegBackRight2.mirror = true;
-		this.setRotation(this.LegBackRight2, 0.6108652F, 0F, 0F);
-		this.Tail = new ModelRenderer(this, 56, 145);
-		this.Tail.addBox(-2F, 0F, -1F, 4, 9, 2);
-		this.Tail.setRotationPoint(0F, 5F, 18F);
-		this.Tail.setTextureSize(128, 256);
-		this.Tail.mirror = true;
-		this.setRotation(this.Tail, 0.1745329F, 0F, 0F);
+		this.LegFrontLeft1.setRotationPoint(4.0F, 13.0F, -5.0F);
+		this.LegFrontLeft1.addBox(-3.0F, -5.0F, -2.5F, 6, 8, 6, 0.0F);
+		this.setRotateAngle(LegFrontLeft1, 0.08726646259971647F, -0.0F, 0.0F);
+		this.LegFrontRight1 = new ModelRenderer(this, 4, 46);
+		this.LegFrontRight1.setRotationPoint(-4.0F, 13.0F, -5.0F);
+		this.LegFrontRight1.addBox(-3.0F, -5.0F, -2.5F, 6, 8, 6, 0.0F);
+		this.setRotateAngle(LegFrontRight1, 0.08726646259971647F, -0.0F, 0.0F);
+		this.BodyMain = new ModelRenderer(this, 0, 0);
+		this.BodyMain.setRotationPoint(0.0F, 0.0F, 0.0F);
+		this.BodyMain.addBox(-6.5F, -1.0F, -10.0F, 13, 16, 15, 0.0F);
+		this.BodyMain.addChild(this.BodyBack);
+		this.BodyMain.addChild(this.LegFrontLeft1);
+		this.BodyMain.addChild(this.LegFrontRight1);
 	}
 
 	@Override
-	public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch,
-			float scale)
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
-		super.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-		this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entity);
-
 		if (this.isChild)
 		{
 			GlStateManager.pushMatrix();
 			GlStateManager.scale(0.5F, 0.5F, 0.5F);
-			GlStateManager.translate(0.0F, 24.0F * scale, 0.0F);
-			this.BodyMain.render(scale);
-			this.BodyBack.render(scale);
-			this.BodyBottom.render(scale);
-			this.LegFrontLeft1.render(scale);
-			this.LegFrontRight1.render(scale);
-			this.LegBackLeft1.render(scale);
-			this.LegBackLeft2.render(scale);
-			this.LegBackRight1.render(scale);
-			this.LegBackRight2.render(scale);
-			this.Tail.render(scale);
+			GlStateManager.translate(0.0F, 24.0F * f5, 0.0F);
+			this.BodyMain.render(f5);
 			GlStateManager.popMatrix();
 		}
 		else
 		{
-			this.BodyMain.render(scale);
-			this.BodyBack.render(scale);
-			this.BodyBottom.render(scale);
-			this.LegFrontLeft1.render(scale);
-			this.LegFrontRight1.render(scale);
-			this.LegBackLeft1.render(scale);
-			this.LegBackLeft2.render(scale);
-			this.LegBackRight1.render(scale);
-			this.LegBackRight2.render(scale);
-			this.Tail.render(scale);
+			this.BodyMain.render(f5);
 		}
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
+	/**
+	 * This is a helper function from Tabula to set the rotation of model parts
+	 */
+	public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
 	{
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
+		modelRenderer.rotateAngleX = x;
+		modelRenderer.rotateAngleY = y;
+		modelRenderer.rotateAngleZ = z;
 	}
 
 	@Override
 	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch,
-			float scaleFactor, Entity entity)
+								  float scaleFactor, Entity entity)
 	{
 		super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entity);
 
-		this.Tail.rotateAngleZ = (MathHelper.cos(ageInTicks * 0.1662F) * 0.2F);
-
-		this.LegFrontLeft1.rotateAngleX = 0.0872665F + (MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount);
-
-		this.LegFrontRight1.rotateAngleX = 0.0872665F + (MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount);
-
-		this.LegBackLeft1.rotateAngleX = 0.6108652F + (MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount);
-		this.LegBackLeft2.rotateAngleX = 0.6108652F + (MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount);
-
-		this.LegBackRight1.rotateAngleX = 0.6108652F + (MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount);
-		this.LegBackRight2.rotateAngleX = 0.6108652F + (MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount);
+		this.LegFrontLeft1.rotateAngleX = 0.08726646259971647F + (MathHelper.cos(limbSwing * 0.6662F) * 1.0F * limbSwingAmount);
+		this.LegFrontRight1.rotateAngleX = 0.08726646259971647F + (MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.0F * limbSwingAmount);
 	}
-
 }
