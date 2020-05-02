@@ -228,4 +228,28 @@ public class ItemAetherShieldListener
 			}
 		}
 	}
+
+	@SubscribeEvent
+	public static void onGravititeBlock(final TickEvent.PlayerTickEvent event)
+	{
+		final UUID SHIELD_UUID = UUID.fromString("21594E31-3DF3-47CE-9263-6D1D4E75CB70");
+
+		final AttributeModifier SHIELD_BLOCK = new AttributeModifier(SHIELD_UUID, "aether.statusBlockingGravititeShield", -0.2D, 1);
+		IAttributeInstance shieldSlowedLevel = event.player.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
+
+		if (event.player.getActiveItemStack().getItem() != ItemsAether.gravitite_shield)
+		{
+			if (shieldSlowedLevel.getModifier(SHIELD_BLOCK.getID()) != null)
+			{
+				shieldSlowedLevel.removeModifier(SHIELD_BLOCK);
+			}
+		}
+		else
+		{
+			if (!shieldSlowedLevel.hasModifier(SHIELD_BLOCK))
+			{
+				shieldSlowedLevel.applyModifier(SHIELD_BLOCK);
+			}
+		}
+	}
 }

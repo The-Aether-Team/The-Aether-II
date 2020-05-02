@@ -65,15 +65,6 @@ public class FOVUpdateListener
             }
         }
 
-        if ((player.getHeldItem(EnumHand.MAIN_HAND).getItem() == ItemsAether.arkenium_shield && player.getActiveItemStack() != player.getHeldItemOffhand())
-                || (player.getHeldItem(EnumHand.OFF_HAND).getItem() == ItemsAether.arkenium_shield && player.getActiveItemStack() != player.getHeldItemMainhand()))
-        {
-            if (event.getFov() <= 0.5f)
-            {
-                event.setNewfov(event.getNewfov() + 0.5f);
-            }
-        }
-
         if ((player.getHeldItem(EnumHand.MAIN_HAND).getItem() == ItemsAether.skyroot_shield && player.getActiveItemStack() != player.getHeldItemOffhand())
                 || (player.getHeldItem(EnumHand.OFF_HAND).getItem() == ItemsAether.skyroot_shield && player.getActiveItemStack() != player.getHeldItemMainhand()))
         {
@@ -83,6 +74,22 @@ public class FOVUpdateListener
             }
         }
 
-        System.out.println(event.getFov());
+        if ((player.getHeldItem(EnumHand.MAIN_HAND).getItem() == ItemsAether.arkenium_shield && player.getActiveItemStack() != player.getHeldItemOffhand())
+                || (player.getHeldItem(EnumHand.OFF_HAND).getItem() == ItemsAether.arkenium_shield && player.getActiveItemStack() != player.getHeldItemMainhand()))
+        {
+            if (event.getFov() <= 0.5f)
+            {
+                event.setNewfov(event.getNewfov() + 0.5f);
+            }
+        }
+
+        if ((player.getHeldItem(EnumHand.MAIN_HAND).getItem() == ItemsAether.gravitite_shield && player.getActiveItemStack() != player.getHeldItemOffhand())
+                || (player.getHeldItem(EnumHand.OFF_HAND).getItem() == ItemsAether.gravitite_shield && player.getActiveItemStack() != player.getHeldItemMainhand()))
+        {
+            if (event.getFov() <= 0.9f)
+            {
+                event.setNewfov(event.getNewfov() + 0.1f);
+            }
+        }
     }
 }
