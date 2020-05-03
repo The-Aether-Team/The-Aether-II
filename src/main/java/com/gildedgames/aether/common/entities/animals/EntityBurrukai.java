@@ -15,6 +15,7 @@ import com.gildedgames.aether.common.entities.util.eyes.EntityEyesComponent;
 import com.gildedgames.aether.common.entities.util.eyes.IEntityEyesComponentProvider;
 import com.gildedgames.aether.common.init.LootTablesAether;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
 import net.minecraft.entity.*;
@@ -32,10 +33,19 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.Map;
 import java.util.Set;
 
 public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPart, IEntityEyesComponentProvider
 {
+	protected Map<String, Float> defenseMap = Maps.newHashMap();
+	{{
+		this.defenseMap.put("Very Weak", 2.0F);
+		this.defenseMap.put("Weak", 1.0F);
+		this.defenseMap.put("Average", 0.0F);
+		this.defenseMap.put("Strong", -1.0F);
+		this.defenseMap.put("Very Strong", -2.0F);
+	}}
 
 	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(ItemsAether.brettl_grass);
 
@@ -150,9 +160,9 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
 		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
 
-		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(25);
-		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(25);
-		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(38);
+		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(0.0f);
+		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(0.0f);
+		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(-1.0f);
 	}
 
 	@Override

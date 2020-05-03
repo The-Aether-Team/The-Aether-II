@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.items.tools;
 
+import com.gildedgames.aether.api.entity.damage.IDamageLevelsHolder;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.events.listeners.items.ItemToolListener;
 import com.gildedgames.aether.common.init.CreativeTabsAether;
@@ -15,8 +16,10 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 
-public class ItemAetherPickaxe extends ItemPickaxe
+public class ItemAetherPickaxe extends ItemPickaxe implements IDamageLevelsHolder
 {
+	private float slashDamageLevel = 0, pierceDamageLevel = 0, impactDamageLevel = 0;
+
 	public ItemAetherPickaxe(final ToolMaterial material)
 	{
 		this(material, 1.0F, -2.8F);
@@ -71,5 +74,41 @@ public class ItemAetherPickaxe extends ItemPickaxe
 		}
 
 		return super.getItemBurnTime(itemStack);
+	}
+
+	public <T extends ItemAetherPickaxe> T setSlashDamageLevel(float level)
+	{
+		this.slashDamageLevel = level;
+
+		return (T) this;
+	}
+
+	public <T extends ItemAetherPickaxe> T setPierceDamageLevel(float level)
+	{
+		this.pierceDamageLevel = level;
+
+		return (T) this;
+	}
+
+	public <T extends ItemAetherPickaxe> T setImpactDamageLevel(float level)
+	{
+		this.impactDamageLevel = level;
+
+		return (T) this;
+	}
+
+	public float getSlashDamageLevel()
+	{
+		return slashDamageLevel;
+	}
+
+	public float getPierceDamageLevel()
+	{
+		return pierceDamageLevel;
+	}
+
+	public float getImpactDamageLevel()
+	{
+		return impactDamageLevel;
 	}
 }

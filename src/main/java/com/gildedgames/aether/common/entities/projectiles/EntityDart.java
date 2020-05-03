@@ -1,6 +1,5 @@
 package com.gildedgames.aether.common.entities.projectiles;
 
-import com.gildedgames.aether.api.entity.damage.IDamageLevelsHolder;
 import com.gildedgames.aether.api.entity.effects.EEffectIntensity;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectIntensity;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
@@ -15,7 +14,7 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 
-public class EntityDart extends EntityArrow implements IDamageLevelsHolder
+public class EntityDart extends EntityArrow
 {
 	private static final DataParameter<Byte> TYPE = new DataParameter<>(20, DataSerializers.BYTE);
 
@@ -74,23 +73,5 @@ public class EntityDart extends EntityArrow implements IDamageLevelsHolder
 	public void setDartType(ItemDartType type)
 	{
 		this.dataManager.set(TYPE, (byte) type.ordinal());
-	}
-
-	@Override
-	public int getSlashDamageLevel()
-	{
-		return this.getDartType().getSlashDamageLevel();
-	}
-
-	@Override
-	public int getPierceDamageLevel()
-	{
-		return this.getDartType().getPierceDamageLevel();
-	}
-
-	@Override
-	public int getImpactDamageLevel()
-	{
-		return this.getDartType().getImpactDamageLevel();
 	}
 }

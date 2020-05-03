@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.entities.genes;
 
+import com.gildedgames.aether.api.entity.damage.IDefenseLevelsHolder;
 import com.gildedgames.aether.api.entity.genes.IGenePool;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.nbt.NBTTagCompound;
@@ -8,7 +9,7 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.world.World;
 
-public abstract class EntityGeneticAnimal<T extends IGenePool> extends EntityAnimal
+public abstract class EntityGeneticAnimal<T extends IGenePool> extends EntityAnimal implements IDefenseLevelsHolder
 {
 
 	private static final DataParameter<Integer> SEED = EntityDataManager.createKey(EntityGeneticAnimal.class, DataSerializers.VARINT);

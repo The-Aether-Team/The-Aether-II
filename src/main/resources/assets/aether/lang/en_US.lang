@@ -911,12 +911,11 @@ effect.aether.guard_break=Guard Break
 
 # Damage Attributes
 
-attribute.name.aether.slashDamageLevel=Slash Damage
-attribute.name.aether.pierceDamageLevel=Pierce Damage
-attribute.name.aether.impactDamageLevel=Impact Damage
-attribute.name.aether.slashDefenseLevel=Slash Defense
-attribute.name.aether.pierceDefenseLevel=Pierce Defense
-attribute.name.aether.impactDefenseLevel=Impact Defense
+attribute.name.aether.slash=Slash
+attribute.name.aether.pierce=Pierce
+attribute.name.aether.impact=Impact
+
+attribute.name.aether.damageLevel=Damage
 
 # Introsat
 

@@ -28,6 +28,7 @@ import com.gildedgames.aether.common.items.other.ItemMoaFeather;
 import com.gildedgames.aether.common.items.other.ItemMoaFeed;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
 import com.gildedgames.orbis.lib.client.PartialTicks;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
 import net.minecraft.entity.*;
@@ -52,11 +53,20 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 import javax.vecmath.Point3d;
+import java.util.Map;
 import java.util.Set;
 
 public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 		implements EntityGroupMember, IMount, IFlyingMountData, IEntityMultiPart, IEntityEyesComponentProvider
 {
+	protected Map<String, Float> defenseMap = Maps.newHashMap();
+	{{
+		this.defenseMap.put("Very Weak", 2.0F);
+		this.defenseMap.put("Weak", 1.0F);
+		this.defenseMap.put("Average", 0.0F);
+		this.defenseMap.put("Strong", -1.0F);
+		this.defenseMap.put("Very Strong", -2.0F);
+	}}
 
 	private static final Set<Item> TEMPTATION_ITEMS = Sets
 			.newHashSet(ItemsAether.blueberries, ItemsAether.skyroot_lizard_stick);
@@ -202,11 +212,11 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 		super.applyEntityAttributes();
 
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
 
-		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(28);
-		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(38);
-		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(25);
+		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(0.0f);
+		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(-1.0f);
+		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(1.0f);
 	}
 
 	@Override

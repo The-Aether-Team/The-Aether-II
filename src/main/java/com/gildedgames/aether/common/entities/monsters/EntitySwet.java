@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.entities.monsters;
 
 import com.gildedgames.aether.api.entity.damage.DamageTypeAttributes;
+import com.gildedgames.aether.api.entity.damage.IDefenseLevelsHolder;
 import com.gildedgames.aether.api.entity.effects.EEffectIntensity;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectIntensity;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
@@ -16,6 +17,7 @@ import com.gildedgames.aether.common.entities.util.EntityExtendedMob;
 import com.gildedgames.aether.common.init.LootTablesAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketDetachSwet;
+import com.google.common.collect.Maps;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -37,9 +39,18 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 
-public class EntitySwet extends EntityExtendedMob
+public class EntitySwet extends EntityExtendedMob implements IDefenseLevelsHolder
 {
+	protected Map<String, Float> defenseMap = Maps.newHashMap();
+	{{
+		this.defenseMap.put("Very Weak", 2.0F);
+		this.defenseMap.put("Weak", 1.0F);
+		this.defenseMap.put("Average", 0.0F);
+		this.defenseMap.put("Strong", -1.0F);
+		this.defenseMap.put("Very Strong", -2.0F);
+	}}
 
 	public static final int FOOD_SATURATION_REQUIRED = 5;
 
@@ -218,9 +229,9 @@ public class EntitySwet extends EntityExtendedMob
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16);
 
-		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(10);
-		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(5);
-		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(1);
+		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(-1.0f);
+		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(0.0f);
+		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(1.0f);
 	}
 
 	@Override

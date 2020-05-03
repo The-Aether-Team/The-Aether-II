@@ -9,6 +9,7 @@ import com.gildedgames.aether.common.entities.ai.EntityAIHideFromTarget;
 import com.gildedgames.aether.common.entities.ai.EntityAIWanderFavorBlocks;
 import com.gildedgames.aether.common.entities.ai.glactrix.GlactrixAIHideFromEntity;
 import com.gildedgames.aether.common.init.LootTablesAether;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
@@ -35,10 +36,20 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class EntityGlactrix extends EntityAetherAnimal implements IShearable
 {
+	protected Map<String, Float> defenseMap = Maps.newHashMap();
+	{{
+		this.defenseMap.put("Very Weak", 2.0F);
+		this.defenseMap.put("Weak", 1.0F);
+		this.defenseMap.put("Average", 0.0F);
+		this.defenseMap.put("Strong", -1.0F);
+		this.defenseMap.put("Very Strong", -2.0F);
+	}}
+
 	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(ItemsAether.wyndberry);
 
 	private ArrayList<Block> favoriteBlocks = new ArrayList<>();
@@ -95,9 +106,9 @@ public class EntityGlactrix extends EntityAetherAnimal implements IShearable
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(.5D);
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
 
-		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(15);
-		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(15);
-		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(1);
+		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(-1.0f);
+		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(-1.0f);
+		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(1.0f);
 	}
 
 	public void setHiding(boolean isHiding)

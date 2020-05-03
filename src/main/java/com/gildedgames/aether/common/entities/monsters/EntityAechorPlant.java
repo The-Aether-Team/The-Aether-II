@@ -6,6 +6,7 @@ import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.entities.ai.EntityAIAechorPlantAttack;
 import com.gildedgames.aether.common.init.LootTablesAether;
 import com.gildedgames.aether.common.util.helpers.PlayerUtil;
+import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -27,10 +28,20 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Arrays;
+import java.util.Map;
 
 public class EntityAechorPlant extends EntityAetherMob
 {
-	private static final int MAX_PETALS = 8;
+	protected Map<String, Float> defenseMap = Maps.newHashMap();
+	{{
+		this.defenseMap.put("Very Weak", 2.0F);
+		this.defenseMap.put("Weak", 1.0F);
+		this.defenseMap.put("Average", 0.0F);
+		this.defenseMap.put("Strong", -1.0F);
+		this.defenseMap.put("Very Strong", -2.0F);
+	}}
+
+	private static final int MAX_PETALS = 10;
 
 	private static final DataParameter<Boolean> CAN_SEE_PREY = new DataParameter<>(16, DataSerializers.BOOLEAN);
 
@@ -98,11 +109,11 @@ public class EntityAechorPlant extends EntityAetherMob
 		this.setPlantSize(this.rand.nextInt(3) + 1);
 
 		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(3.0F);
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(15.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
 
-		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(9);
-		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(20);
-		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(20);
+		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(1.0f);
+		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(0.0f);
+		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(0.0f);
 	}
 
 	@Override
@@ -161,25 +172,22 @@ public class EntityAechorPlant extends EntityAetherMob
 
 		if (this.getHealth() != prevHealth)
 		{
-			if (((this.getMaxHealth() + this.getHealth()) % 3) == 0)
+			this.petalGrowTimer = 6000;
+
+			if (!this.world.isRemote)
 			{
-				this.petalGrowTimer = 6000;
+				int targetPetals = (int) Math.floor((this.getHealth() / this.getMaxHealth()) * MAX_PETALS);
+				int remainingPetals = this.getPetalCountInState(true);
 
-				if (!this.world.isRemote)
+				int amount = this.getHealth() <= prevHealth - 1 ? targetPetals / 2 : 0;
+
+				Block.spawnAsEntity(this.world, this.getPosition(), new ItemStack(ItemsAether.aechor_petal, amount));
+
+				while (remainingPetals > targetPetals)
 				{
-					int targetPetals = (int) Math.floor((this.getHealth() / this.getMaxHealth()) * MAX_PETALS);
-					int remainingPetals = this.getPetalCountInState(true);
+					this.setPetalState(this.getRandomPetal(true), false);
 
-					//int damage = remainingPetals - targetPetals;
-
-					Block.spawnAsEntity(this.world, this.getPosition(), new ItemStack(ItemsAether.aechor_petal, 1));
-
-					while (remainingPetals > targetPetals)
-					{
-						this.setPetalState(this.getRandomPetal(true), false);
-
-						remainingPetals--;
-					}
+					remainingPetals--;
 				}
 			}
 		}

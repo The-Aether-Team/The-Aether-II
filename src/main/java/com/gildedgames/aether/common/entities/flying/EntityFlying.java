@@ -1,6 +1,8 @@
 package com.gildedgames.aether.common.entities.flying;
 
+import com.gildedgames.aether.api.entity.damage.IDefenseLevelsHolder;
 import com.gildedgames.aether.common.entities.ai.EntityAIForcedWander;
+import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -20,9 +22,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EntityFlying extends EntityCreature
-{
+import java.util.Map;
 
+public class EntityFlying extends EntityCreature implements IDefenseLevelsHolder
+{
 	private static final DataParameter<Boolean> IS_MOVING = EntityDataManager.createKey(EntityFlying.class, DataSerializers.BOOLEAN);
 
 	private final float clientSideTailAnimationO;

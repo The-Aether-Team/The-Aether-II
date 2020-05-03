@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.entities.animals;
 
 import com.gildedgames.aether.api.entity.IEntityEyesComponent;
 import com.gildedgames.aether.api.entity.damage.DamageTypeAttributes;
+import com.gildedgames.aether.api.entity.damage.IDefenseLevelsHolder;
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.api.registrar.SoundsAether;
@@ -15,6 +16,7 @@ import com.gildedgames.aether.common.entities.util.eyes.EntityEyesComponent;
 import com.gildedgames.aether.common.entities.util.eyes.IEntityEyesComponentProvider;
 import com.gildedgames.aether.common.init.LootTablesAether;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAITempt;
@@ -39,10 +41,20 @@ import javax.annotation.Nullable;
 import javax.vecmath.Point3d;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
-public class EntityKirrid extends EntitySheep implements IEntityMultiPart, IEntityEyesComponentProvider
+public class EntityKirrid extends EntitySheep implements IEntityMultiPart, IEntityEyesComponentProvider, IDefenseLevelsHolder
 {
+	protected Map<String, Float> defenseMap = Maps.newHashMap();
+	{{
+		this.defenseMap.put("Very Weak", 2.0F);
+		this.defenseMap.put("Weak", 1.0F);
+		this.defenseMap.put("Average", 0.0F);
+		this.defenseMap.put("Strong", -1.0F);
+		this.defenseMap.put("Very Strong", -2.0F);
+	}}
+
 	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(ItemsAether.valkyrie_wings);
 
 	private final Point3d[] old;
@@ -179,9 +191,9 @@ public class EntityKirrid extends EntitySheep implements IEntityMultiPart, IEnti
 
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(15.0D);
 
-		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(12);
-		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(25);
-		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(10);
+		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(0.0f);
+		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(-1.0f);
+		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(1.0f);
 	}
 
 	@Override

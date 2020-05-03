@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.entities.animals;
 
 import com.gildedgames.aether.api.entity.damage.DamageTypeAttributes;
+import com.gildedgames.aether.api.entity.damage.IDefenseLevelsHolder;
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.registrar.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.EntityAIHideFromRain;
@@ -10,6 +11,7 @@ import com.gildedgames.aether.common.entities.ai.kirrid.EntityAIEatAetherGrass;
 import com.gildedgames.aether.common.entities.multipart.AetherMultiPartShearable;
 import com.gildedgames.aether.common.init.LootTablesAether;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
+import com.google.common.collect.Maps;
 import net.minecraft.entity.*;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.init.SoundEvents;
@@ -31,9 +33,18 @@ import javax.annotation.Nullable;
 import javax.vecmath.Point3d;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-public class EntitySheepuff extends EntitySheep implements IEntityMultiPart
+public class EntitySheepuff extends EntitySheep implements IEntityMultiPart, IDefenseLevelsHolder
 {
+	protected Map<String, Float> defenseMap = Maps.newHashMap();
+	{{
+		this.defenseMap.put("Very Weak", 2.0F);
+		this.defenseMap.put("Weak", 1.0F);
+		this.defenseMap.put("Average", 0.0F);
+		this.defenseMap.put("Strong", -1.0F);
+		this.defenseMap.put("Very Strong", -2.0F);
+	}}
 
 	public static final DataParameter<Float> PUFFINESS = EntityDataManager.createKey(EntitySheepuff.class, DataSerializers.FLOAT);
 
@@ -85,9 +96,9 @@ public class EntitySheepuff extends EntitySheep implements IEntityMultiPart
 
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(15.0D);
 
-		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(12);
-		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(25);
-		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(10);
+		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(0.0f);
+		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(-1.0f);
+		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(1.0f);
 	}
 
 	@Override

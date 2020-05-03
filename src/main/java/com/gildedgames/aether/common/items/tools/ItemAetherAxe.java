@@ -1,9 +1,11 @@
 package com.gildedgames.aether.common.items.tools;
 
+import com.gildedgames.aether.api.entity.damage.IDamageLevelsHolder;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.events.listeners.items.ItemToolListener;
 import com.gildedgames.aether.common.init.CreativeTabsAether;
 import com.gildedgames.aether.common.init.MaterialsAether;
+import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.block.material.Material;
@@ -15,8 +17,10 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 
-public class ItemAetherAxe extends ItemAxe
+public class ItemAetherAxe extends ItemAxe implements IDamageLevelsHolder
 {
+	private float slashDamageLevel = 0, pierceDamageLevel = 0, impactDamageLevel = 0;
+
 	public ItemAetherAxe(final ToolMaterial material)
 	{
 		// The parent constructor will crash trying to set parameters, we need to do it here
@@ -68,5 +72,41 @@ public class ItemAetherAxe extends ItemAxe
 		}
 
 		return super.getItemBurnTime(itemStack);
+	}
+
+	public <T extends ItemAetherAxe> T setSlashDamageLevel(float level)
+	{
+		this.slashDamageLevel = level;
+
+		return (T) this;
+	}
+
+	public <T extends ItemAetherAxe> T setPierceDamageLevel(float level)
+	{
+		this.pierceDamageLevel = level;
+
+		return (T) this;
+	}
+
+	public <T extends ItemAetherAxe> T setImpactDamageLevel(float level)
+	{
+		this.impactDamageLevel = level;
+
+		return (T) this;
+	}
+
+	public float getSlashDamageLevel()
+	{
+		return slashDamageLevel;
+	}
+
+	public float getPierceDamageLevel()
+	{
+		return pierceDamageLevel;
+	}
+
+	public float getImpactDamageLevel()
+	{
+		return impactDamageLevel;
 	}
 }

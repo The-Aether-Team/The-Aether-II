@@ -266,27 +266,28 @@ public class ItemCrossbow extends Item
 					bolt1 = null,
 					bolt2 = null;
 
-			int slashDamageLevel = this.cBType.slashDamageLevel;
-			int pierceDamageLevel = this.cBType.pierceDamageLevel;
-			int impactDamageLevel = this.cBType.impactDamageLevel;
+			float slashDamageLevel = this.cBType.slashDamageLevel;
+			float pierceDamageLevel = this.cBType.pierceDamageLevel;
+			float impactDamageLevel = this.cBType.impactDamageLevel;
+			float vanillaDamage = this.cBType.damage;
 
 			// calculate bolts that are special is being loaded.
 			if (this.isSpecialLoaded && this.cBType != crossBowTypes.ZANITE && this.cBType != crossBowTypes.GRAVETITE)
 			{
 				if (this.cBType == crossBowTypes.SKYROOT)
 				{
-					bolt0 = this.createBolt(entityLiving, speed, 0, 0, 0, slashDamageLevel, pierceDamageLevel, impactDamageLevel);
-					bolt1 = this.createBolt(entityLiving, speed, 0, 0, 0, slashDamageLevel, pierceDamageLevel, impactDamageLevel);
+					bolt0 = this.createBolt(entityLiving, speed, 0, 0, 0, slashDamageLevel, pierceDamageLevel, impactDamageLevel, vanillaDamage);
+					bolt1 = this.createBolt(entityLiving, speed, 0, 0, 0, slashDamageLevel, pierceDamageLevel, impactDamageLevel, vanillaDamage);
 				}
 				else if (this.cBType == crossBowTypes.HOLYSTONE)
 				{
-					bolt0 = this.createBolt(entityLiving, speed / 2, 0, 0, 0, slashDamageLevel, pierceDamageLevel, impactDamageLevel);
-					bolt1 = this.createBolt(entityLiving, speed / 2, 10, 0, 0, slashDamageLevel, pierceDamageLevel, impactDamageLevel);
-					bolt2 = this.createBolt(entityLiving, speed / 2, -10, 0, 0, slashDamageLevel, pierceDamageLevel, impactDamageLevel);
+					bolt0 = this.createBolt(entityLiving, speed / 2, 0, 0, 0, slashDamageLevel, pierceDamageLevel, impactDamageLevel, vanillaDamage);
+					bolt1 = this.createBolt(entityLiving, speed / 2, 10, 0, 0, slashDamageLevel, pierceDamageLevel, impactDamageLevel, vanillaDamage);
+					bolt2 = this.createBolt(entityLiving, speed / 2, -10, 0, 0, slashDamageLevel, pierceDamageLevel, impactDamageLevel, vanillaDamage);
 				}
 				else if (this.cBType == crossBowTypes.ARKENIUM)
 				{
-					bolt0 = this.createBolt(entityLiving, speed * 2.5f, 0, -1, 0, slashDamageLevel, pierceDamageLevel, impactDamageLevel);
+					bolt0 = this.createBolt(entityLiving, speed * 2.5f, 0, -1, 0, slashDamageLevel, pierceDamageLevel, impactDamageLevel, vanillaDamage);
 				}
 			}
 			// standard bolts
@@ -294,22 +295,21 @@ public class ItemCrossbow extends Item
 			{
 				if (this.cBType == crossBowTypes.ZANITE)
 				{
-					bolt0 = this.createBolt(entityLiving, speed, 0, 0, 0, slashDamageLevel, pierceDamageLevel, impactDamageLevel);
+					float bonusPierce = 0;
 
 					if (entityLiving.getHeldItemMainhand() == stack)
 					{
-						//This equals to a bonus of 6 Pierce Damage Levels.
-						float damage = (float) (stack.getItemDamage() * 7) / stack.getItem().getMaxDamage();
+						vanillaDamage = 6f + ((float) (stack.getItemDamage() * 4) / stack.getItem().getMaxDamage());
 
-						if (bolt0 != null)
-						{
-							bolt0.setBonusDamage(damage);
-						}
+						bonusPierce = ((float) (stack.getItemDamage() * 4) / stack.getItem().getMaxDamage());
 					}
+
+					bolt0 = this.createBolt(entityLiving, speed, 0, 0, 0, slashDamageLevel, pierceDamageLevel + bonusPierce, impactDamageLevel,
+							vanillaDamage);
 				}
 				else if (this.cBType == crossBowTypes.GRAVETITE)
 				{
-					bolt0 = this.createBolt(entityLiving, speed, 0, 0, 0, slashDamageLevel, pierceDamageLevel, impactDamageLevel);
+					bolt0 = this.createBolt(entityLiving, speed, 0, 0, 0, slashDamageLevel, pierceDamageLevel, impactDamageLevel, vanillaDamage);
 
 					if (bolt0 != null)
 					{
@@ -318,7 +318,7 @@ public class ItemCrossbow extends Item
 				}
 				else
 				{
-					bolt0 = this.createBolt(entityLiving, speed, 0, 0, 0, slashDamageLevel, pierceDamageLevel, impactDamageLevel);
+					bolt0 = this.createBolt(entityLiving, speed, 0, 0, 0, slashDamageLevel, pierceDamageLevel, impactDamageLevel, vanillaDamage);
 				}
 			}
 
@@ -384,7 +384,7 @@ public class ItemCrossbow extends Item
 	}
 
 	private EntityBolt createBolt(EntityLivingBase entityLiving, float speed, float addRotationYaw, float addRotationPitch, float addInaccuracy,
-			int slashDamageLevel, int pierceDamageLevel, int impactDamageLevel)
+			float slashDamageLevel, float pierceDamageLevel, float impactDamageLevel, float damage)
 	{
 		if (!entityLiving.world.isRemote)
 		{
@@ -392,11 +392,11 @@ public class ItemCrossbow extends Item
 
 			bolt.shoot(entityLiving, entityLiving.rotationPitch + addRotationPitch, entityLiving.rotationYaw + addRotationYaw,
 					0.0F, speed * 2.0F, 1.0F + addInaccuracy);
-			bolt.setDamage(1);
 
 			bolt.setSlashDamageLevel(slashDamageLevel);
 			bolt.setPierceDamageLevel(pierceDamageLevel);
 			bolt.setImpactDamageLevel(impactDamageLevel);
+			bolt.setDamage(damage / 2);
 
 			bolt.pickupStatus = EntityArrow.PickupStatus.ALLOWED;
 
@@ -593,6 +593,72 @@ public class ItemCrossbow extends Item
 			tooltip.add(TextFormatting.GRAY + " " + seconds + " " + I18n.format(
 					"item.aether.crossbow.desc3") + I18n.format("item.aether.crossbow.desc1"));
 		}
+
+		if (this.cBType.slashDamageLevel > 0)
+		{
+			String slashValue;
+
+			if (this.cBType.slashDamageLevel % 1 == 0)
+			{
+				int n = Math.round(this.cBType.slashDamageLevel);
+				slashValue = String.valueOf(n);
+			}
+			else
+			{
+				float n = this.cBType.slashDamageLevel;
+				slashValue = String.valueOf(n);
+			}
+
+			tooltip.add(String.format(" %s %s",
+					slashValue,
+					String.format("%s %s",
+							TextFormatting.BLUE + I18n.format("attribute.name.aether.slash"),
+							TextFormatting.GRAY + I18n.format("attribute.name.aether.damageLevel"))));
+		}
+
+		if (this.cBType.pierceDamageLevel > 0)
+		{
+			String pierceValue;
+
+			if (this.cBType.pierceDamageLevel % 1 == 0)
+			{
+				int n = Math.round(this.cBType.pierceDamageLevel);
+				pierceValue = String.valueOf(n);
+			}
+			else
+			{
+				float n = this.cBType.pierceDamageLevel;
+				pierceValue = String.valueOf(n);
+			}
+
+			tooltip.add(String.format(" %s %s",
+					pierceValue,
+					String.format("%s %s",
+							TextFormatting.RED + I18n.format("attribute.name.aether.pierce"),
+							TextFormatting.GRAY + I18n.format("attribute.name.aether.damageLevel"))));
+		}
+
+		if (this.cBType.impactDamageLevel > 0)
+		{
+			String impactValue;
+
+			if (this.cBType.impactDamageLevel % 1 == 0)
+			{
+				int n = Math.round(this.cBType.impactDamageLevel);
+				impactValue = String.valueOf(n);
+			}
+			else
+			{
+				float n = this.cBType.impactDamageLevel;
+				impactValue = String.valueOf(n);
+			}
+
+			tooltip.add(String.format(" %s %s",
+					impactValue,
+					String.format("%s %s",
+							TextFormatting.YELLOW + I18n.format("attribute.name.aether.impact"),
+							TextFormatting.GRAY + I18n.format("attribute.name.aether.damageLevel"))));
+		}
 	}
 
 	@Override
@@ -622,23 +688,24 @@ public class ItemCrossbow extends Item
 
 	public enum crossBowTypes
 	{
-		SKYROOT(0, 14, 0, 82, "skyroot_crossbow"),
-		HOLYSTONE(0, 21, 0, 181, "holystone_crossbow"),
-		ZANITE(0, 34, 0, 346, "zanite_crossbow"),
-		ARKENIUM(0, 40, 0, 4418, "arkenium_crossbow"),
-		GRAVETITE(0, 42, 0, 2160, "gravitite_crossbow");
+		SKYROOT(0, 4, 0, 4, 82, "skyroot_crossbow"),
+		HOLYSTONE(0, 5, 0, 5, 181, "holystone_crossbow"),
+		ZANITE(0, 6, 0, 6, 346, "zanite_crossbow"),
+		ARKENIUM(0, 8, 0, 8, 4418, "arkenium_crossbow"),
+		GRAVETITE(0, 7, 0, 7, 2160, "gravitite_crossbow");
 
-		final int slashDamageLevel, pierceDamageLevel, impactDamageLevel;
+		final float slashDamageLevel, pierceDamageLevel, impactDamageLevel, damage;
 
 		final int maxDurability;
 
 		final String name;
 
-		crossBowTypes(int slashDamageLevel, int pierceDamageLevel, int impactDamageLevel, int maxDurability, String name)
+		crossBowTypes(float slashDamageLevel, float pierceDamageLevel, float impactDamageLevel, float damage, int maxDurability, String name)
 		{
 			this.slashDamageLevel = slashDamageLevel;
 			this.pierceDamageLevel = pierceDamageLevel;
 			this.impactDamageLevel = impactDamageLevel;
+			this.damage = damage;
 			this.maxDurability = maxDurability;
 			this.name = name;
 		}

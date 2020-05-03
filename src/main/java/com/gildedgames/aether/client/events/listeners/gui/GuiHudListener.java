@@ -1,7 +1,6 @@
 package com.gildedgames.aether.client.events.listeners.gui;
 
 import com.gildedgames.aether.api.registrar.ItemsAether;
-import com.gildedgames.aether.client.gui.DamageSystemOverlay;
 import com.gildedgames.aether.client.gui.EffectSystemOverlay;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.init.DimensionsAether;
@@ -25,8 +24,6 @@ public class GuiHudListener
 {
 	private static final Minecraft mc = Minecraft.getMinecraft();
 
-	private static final DamageSystemOverlay DAMAGE_SYSTEM_OVERLAY = new DamageSystemOverlay();
-
 	private static final EffectSystemOverlay EFFECT_SYSTEM_OVERLAY = new EffectSystemOverlay();
 
 	private static int old_left_height, old_right_height;
@@ -36,32 +33,6 @@ public class GuiHudListener
 	 * and dart shooters show the damage they cause with their ammo
 	 * @param event
 	 */
-	@SubscribeEvent
-	public static void onTick(final TickEvent.ClientTickEvent event)
-	{
-		if (event.phase == TickEvent.Phase.END)
-		{
-			Minecraft mc = Minecraft.getMinecraft();
-
-			if (mc.world != null && mc.player != null)
-			{
-				if (mc.player.getHeldItemMainhand().getItem() == ItemsAether.dart_shooter && mc.player.getHeldItemMainhand().getCount() > 0)
-				{
-					ItemDartType type = ItemDart.ITEM_VARIANTS[mc.player.getHeldItemMainhand().getItemDamage()];
-
-					DAMAGE_SYSTEM_OVERLAY.setSlashModifier(type.getSlashDamageLevel());
-					DAMAGE_SYSTEM_OVERLAY.setPierceModifier(type.getPierceDamageLevel());
-					DAMAGE_SYSTEM_OVERLAY.setImpactModifier(type.getImpactDamageLevel());
-				}
-				else
-				{
-					DAMAGE_SYSTEM_OVERLAY.setSlashModifier(0);
-					DAMAGE_SYSTEM_OVERLAY.setPierceModifier(0);
-					DAMAGE_SYSTEM_OVERLAY.setImpactModifier(0);
-				}
-			}
-		}
-	}
 	
 	@SubscribeEvent
 	public static void onRenderGameOverlay(RenderGameOverlayEvent.Pre event)
@@ -98,7 +69,6 @@ public class GuiHudListener
 			}
 			else if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR)
 			{
-				DAMAGE_SYSTEM_OVERLAY.renderIcons(mc);
 				EFFECT_SYSTEM_OVERLAY.render(mc);
 			}
 		}

@@ -1,6 +1,7 @@
 package com.gildedgames.aether.client.events.listeners.tooltip;
 
 import com.gildedgames.aether.api.AetherAPI;
+import com.gildedgames.aether.api.entity.damage.IDamageLevelsHolder;
 import com.gildedgames.aether.api.items.equipment.ItemEquipmentSlot;
 import com.gildedgames.aether.api.items.equipment.effects.EffectInstance;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectFactory;
@@ -63,24 +64,76 @@ public class TooltipItemPropertiesListener
 		event.getToolTip().removeIf(tooltip -> tooltip.contains(event.getItemStack().getItem().getCreatorModId(event.getItemStack()) + ":") || tooltip.contains("NBT:")
 				|| tooltip.contains("Durability:"));
 
-		// Armor Effects
-		if (event.getItemStack().getItem() instanceof ItemAetherArmor)
+		if (event.getItemStack().getItem() instanceof IDamageLevelsHolder)
 		{
-			ItemAetherArmor aetherArmor = (ItemAetherArmor) event.getItemStack().getItem();
+			IDamageLevelsHolder item = (IDamageLevelsHolder) event.getItemStack().getItem();
 
-			event.getToolTip().removeIf(tooltip -> tooltip.contains("Slash") || tooltip.contains("Pierce") || tooltip.contains("Impact"));
+			event.getToolTip().removeIf(tooltip -> tooltip.contains("Attack Damage"));
 
-			if (aetherArmor.getImpactLevel() > 0)
+			if (item.getSlashDamageLevel() > 0)
 			{
-				event.getToolTip().add(TextFormatting.BLUE + " +" + aetherArmor.getImpactLevel() + " " + I18n.format("attribute.name.aether.impactDefenseLevel"));
+				String slashValue;
+
+				if (item.getSlashDamageLevel() % 1 == 0)
+				{
+					int n = Math.round(item.getSlashDamageLevel());
+					slashValue = String.valueOf(n);
+				}
+				else
+				{
+					float n = item.getSlashDamageLevel();
+					slashValue = String.valueOf(n);
+				}
+
+				event.getToolTip().add(String.format(" %s %s",
+						slashValue,
+						String.format("%s %s",
+								TextFormatting.BLUE + I18n.format("attribute.name.aether.slash"),
+								TextFormatting.GRAY + I18n.format("attribute.name.aether.damageLevel"))));
 			}
-			if (aetherArmor.getPierceLevel() > 0)
+
+			if (item.getPierceDamageLevel() > 0)
 			{
-				event.getToolTip().add(TextFormatting.BLUE + " +" + aetherArmor.getPierceLevel() + " " + I18n.format("attribute.name.aether.pierceDefenseLevel"));
+				String pierceValue;
+
+				if (item.getPierceDamageLevel() % 1 == 0)
+				{
+					int n = Math.round(item.getPierceDamageLevel());
+					pierceValue = String.valueOf(n);
+				}
+				else
+				{
+					float n = item.getPierceDamageLevel();
+					pierceValue = String.valueOf(n);
+				}
+
+				event.getToolTip().add(String.format(" %s %s",
+						pierceValue,
+						String.format("%s %s",
+								TextFormatting.RED + I18n.format("attribute.name.aether.pierce"),
+								TextFormatting.GRAY + I18n.format("attribute.name.aether.damageLevel"))));
 			}
-			if (aetherArmor.getSlashLevel() > 0)
+
+			if (item.getImpactDamageLevel() > 0)
 			{
-				event.getToolTip().add(TextFormatting.BLUE + " +" + aetherArmor.getSlashLevel() + " " + I18n.format("attribute.name.aether.slashDefenseLevel"));
+				String impactValue;
+
+				if (item.getImpactDamageLevel() % 1 == 0)
+				{
+					int n = Math.round(item.getImpactDamageLevel());
+					impactValue = String.valueOf(n);
+				}
+				else
+				{
+					float n = item.getImpactDamageLevel();
+					impactValue = String.valueOf(n);
+				}
+
+				event.getToolTip().add(String.format(" %s %s",
+						impactValue,
+						String.format("%s %s",
+								TextFormatting.YELLOW + I18n.format("attribute.name.aether.impact"),
+								TextFormatting.GRAY + I18n.format("attribute.name.aether.damageLevel"))));
 			}
 		}
 

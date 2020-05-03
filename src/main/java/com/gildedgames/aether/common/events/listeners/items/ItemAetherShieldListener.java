@@ -1,10 +1,12 @@
 package com.gildedgames.aether.common.events.listeners.items;
 
+import com.gildedgames.aether.api.entity.damage.IDefenseLevelsHolder;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectPool;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.items.armor.ItemAetherShield;
+import com.gildedgames.aether.common.items.tools.ItemAetherShovel;
 import com.gildedgames.aether.common.items.weapons.crossbow.ItemCrossbow;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -13,6 +15,7 @@ import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
@@ -55,24 +58,38 @@ public class ItemAetherShieldListener
 				{
 					final float damage = event.getAmount();
 
-					if (player.getActiveItemStack().getItem() instanceof ItemAetherShield)
+					if (player.getActiveItemStack().getItem() instanceof ItemShield || player.getActiveItemStack().getItem() instanceof ItemAetherShield)
 					{
-						ItemAetherShield itemAetherShield = (ItemAetherShield) player.getActiveItemStack().getItem();
-
 						IAetherStatusEffectPool statusEffectPool = player.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
 
-						int buildup = (int) (((int) damage * 5) * (1 - itemAetherShield.getStunResistance()));
+						int buildup = 0;
 
-						if (statusEffectPool != null)
+						if (player.getActiveItemStack().getItem() instanceof ItemAetherShield)
 						{
-							if (!statusEffectPool.isEffectApplied(IAetherStatusEffects.effectTypes.GUARD_BREAK))
+							ItemAetherShield itemAetherShield = (ItemAetherShield) player.getActiveItemStack().getItem();
+
+							buildup = (int) (((int) damage * 5) * (1 - itemAetherShield.getStunResistance()));
+						}
+						else if (player.getActiveItemStack().getItem() instanceof ItemShield)
+						{
+							buildup = (int) damage * 5;
+						}
+
+						System.out.println(buildup);
+
+						if (event.getSource().getImmediateSource() instanceof IDefenseLevelsHolder)
+						{
+							if (statusEffectPool != null)
 							{
-								statusEffectPool.applyStatusEffect(IAetherStatusEffects.effectTypes.GUARD_BREAK, buildup);
-							}
-							else
-							{
-								statusEffectPool.modifyActiveEffectBuildup(IAetherStatusEffects.effectTypes.GUARD_BREAK,
-										statusEffectPool.getBuildupFromEffect(IAetherStatusEffects.effectTypes.GUARD_BREAK) + buildup);
+								if (!statusEffectPool.isEffectApplied(IAetherStatusEffects.effectTypes.GUARD_BREAK))
+								{
+									statusEffectPool.applyStatusEffect(IAetherStatusEffects.effectTypes.GUARD_BREAK, buildup);
+								}
+								else
+								{
+									statusEffectPool.modifyActiveEffectBuildup(IAetherStatusEffects.effectTypes.GUARD_BREAK,
+											statusEffectPool.getBuildupFromEffect(IAetherStatusEffects.effectTypes.GUARD_BREAK) + buildup);
+								}
 							}
 						}
 
@@ -111,7 +128,7 @@ public class ItemAetherShieldListener
 	@SubscribeEvent
 	public static void onPlayerBlockStart(final LivingEntityUseItemEvent.Start event)
 	{
-		if (event.getItem().getItem() instanceof ItemAetherShield)
+		if (event.getItem().getItem() instanceof ItemAetherShield || event.getItem().getItem() instanceof ItemShield)
 		{
 			if (event.getEntityLiving() != null)
 			{
@@ -131,7 +148,7 @@ public class ItemAetherShieldListener
 	@SubscribeEvent
 	public static void onPlayerBlock(final LivingEntityUseItemEvent.Tick event)
 	{
-		if (event.getItem().getItem() instanceof ItemAetherShield)
+		if (event.getItem().getItem() instanceof ItemAetherShield || event.getItem().getItem() instanceof ItemShield)
 		{
 			if (event.getEntityLiving() != null)
 			{
@@ -166,7 +183,7 @@ public class ItemAetherShieldListener
 	@SubscribeEvent
 	public static void onPlayerBlockStop(final LivingEntityUseItemEvent.Stop event)
 	{
-		if (event.getItem().getItem() instanceof ItemAetherShield)
+		if (event.getItem().getItem() instanceof ItemAetherShield || event.getItem().getItem() instanceof ItemShield)
 		{
 			if (event.getEntityLiving() != null)
 			{

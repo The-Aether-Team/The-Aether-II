@@ -2,9 +2,9 @@ package com.gildedgames.aether.api.entity.damage;
 
 public interface IDamageLevelsHolder
 {
-	int getSlashDamageLevel();
+	float getSlashDamageLevel();
 
-	int getPierceDamageLevel();
+	float getPierceDamageLevel();
 
-	int getImpactDamageLevel();
+	float getImpactDamageLevel();
 }

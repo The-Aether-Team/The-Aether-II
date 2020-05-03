@@ -1,14 +1,19 @@
 package com.gildedgames.aether.common.entities.animals;
 
+import com.gildedgames.aether.api.entity.damage.IDefenseLevelsHolder;
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.entities.ai.AetherNavigateGround;
+import com.google.common.collect.Maps;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public abstract class EntityAetherAnimal extends EntityAnimal
+import java.util.Map;
+
+public abstract class EntityAetherAnimal extends EntityAnimal implements IDefenseLevelsHolder
 {
 	public EntityAetherAnimal(World world)
 	{

@@ -7,6 +7,7 @@ import com.gildedgames.aether.api.registrar.SoundsAether;
 import com.gildedgames.aether.common.blocks.natural.leaves.BlockColoredLeaves.Color;
 import com.gildedgames.aether.common.blocks.natural.wood.AetherWoodType;
 import com.gildedgames.aether.common.blocks.natural.wood.BlockAetherLog;
+import com.google.common.collect.Maps;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
@@ -26,9 +27,19 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
+import java.util.Map;
 
 public class EntitySkyrootLizard extends EntityAetherAnimal
 {
+	protected Map<String, Float> defenseMap = Maps.newHashMap();
+	{{
+		this.defenseMap.put("Very Weak", 2.0F);
+		this.defenseMap.put("Weak", 1.0F);
+		this.defenseMap.put("Average", 0.0F);
+		this.defenseMap.put("Strong", -1.0F);
+		this.defenseMap.put("Very Strong", -2.0F);
+	}}
+
 	private static final DataParameter<Byte> LIZARD_TYPE = EntityDataManager.createKey(EntitySkyrootLizard.class, DataSerializers.BYTE);
 
 	private static final DataParameter<Byte> LIZARD_COLOR = EntityDataManager.createKey(EntitySkyrootLizard.class, DataSerializers.BYTE);
@@ -65,11 +76,11 @@ public class EntitySkyrootLizard extends EntityAetherAnimal
 		super.applyEntityAttributes();
 
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(.7D);
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(4.0D);
 
-		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(1);
-		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(1);
-		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(1);
+		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(0.0f);
+		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(0.0f);
+		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(0.0f);
 	}
 
 	@Override

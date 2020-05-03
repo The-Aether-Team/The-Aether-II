@@ -21,8 +21,6 @@ public class ItemAetherArmor extends ItemArmor
 
 	private final String name;
 
-	private int slashLevel, pierceLevel, impactLevel;
-
 	public ItemAetherArmor(final ArmorMaterial material, final String name, final EntityEquipmentSlot armorType)
 	{
 		super(material, 0, armorType);
@@ -32,42 +30,6 @@ public class ItemAetherArmor extends ItemArmor
 		this.setCreativeTab(CreativeTabsAether.TAB_ARMOR);
 
 		this.damageReduceAmount = material.getDamageReductionAmount(armorType);
-	}
-
-	public <T extends ItemAetherArmor> T slashDefense(int level)
-	{
-		this.slashLevel = level;
-
-		return (T) this;
-	}
-
-	public <T extends ItemAetherArmor> T pierceDefense(int level)
-	{
-		this.pierceLevel = level;
-
-		return (T) this;
-	}
-
-	public <T extends ItemAetherArmor> T impactDefense(int level)
-	{
-		this.impactLevel = level;
-
-		return (T) this;
-	}
-
-	public int getSlashLevel()
-	{
-		return this.slashLevel;
-	}
-
-	public int getPierceLevel()
-	{
-		return this.pierceLevel;
-	}
-
-	public int getImpactLevel()
-	{
-		return this.impactLevel;
 	}
 
 	@Override
@@ -91,27 +53,5 @@ public class ItemAetherArmor extends ItemArmor
 	{
 		return AetherCore.getResourcePath("textures/armor/" + this.name + "_layer_" + (slot == EntityEquipmentSlot.LEGS ? 2 :
 				1 + (AetherCore.CONFIG.cutoutHelmets ? "b" : "")) + ".png");
-	}
-
-	@Override
-	public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot)
-	{
-		Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);
-
-		if (equipmentSlot == this.armorType)
-		{
-			multimap.put(
-					DamageTypeAttributes.SLASH_DEFENSE_LEVEL.getName(),
-					new AttributeModifier(ARMOR_MODIFIERS[equipmentSlot.getIndex()], "Slash defense level modifier", (double) this.slashLevel,
-							StatEffectFactory.StatProvider.OP_ADD));
-			multimap.put(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL.getName(),
-					new AttributeModifier(ARMOR_MODIFIERS[equipmentSlot.getIndex()], "Pierce defense level modifier", (double) this.pierceLevel,
-							StatEffectFactory.StatProvider.OP_ADD));
-			multimap.put(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL.getName(),
-					new AttributeModifier(ARMOR_MODIFIERS[equipmentSlot.getIndex()], "Impact defense level modifier", (double) this.impactLevel,
-							StatEffectFactory.StatProvider.OP_ADD));
-		}
-
-		return multimap;
 	}
 }

@@ -11,6 +11,7 @@ import com.gildedgames.aether.common.entities.effects.StatusEffectCockatriceVeno
 import com.gildedgames.aether.common.entities.effects.StatusEffectFreeze;
 import com.gildedgames.aether.common.entities.multipart.AetherMultiPartEntity;
 import com.gildedgames.aether.common.util.helpers.MathUtil;
+import com.google.common.collect.Maps;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,9 +21,19 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 import javax.vecmath.Point3d;
+import java.util.Map;
 
 public class EntityVaranys extends EntityAetherMob implements IEntityMultiPart
 {
+	protected Map<String, Float> defenseMap = Maps.newHashMap();
+	{{
+		this.defenseMap.put("Very Weak", 2.0F);
+		this.defenseMap.put("Weak", 1.0F);
+		this.defenseMap.put("Average", 0.0F);
+		this.defenseMap.put("Strong", -1.0F);
+		this.defenseMap.put("Very Strong", -2.0F);
+	}}
+
 	private final MultiPartEntityPart[] parts;
 
 	private final MultiPartEntityPart head = new AetherMultiPartEntity(this, "head", .7F, .7F);
@@ -77,12 +88,11 @@ public class EntityVaranys extends EntityAetherMob implements IEntityMultiPart
 
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(24.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.5D);
 		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2.0D);
 
-		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(25);
-		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(30);
-		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(20);
+		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(0.0f);
+		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(-1.0f);
+		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(1.0f);
 	}
 
 	@Override

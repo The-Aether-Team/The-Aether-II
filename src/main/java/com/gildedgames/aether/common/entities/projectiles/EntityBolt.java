@@ -17,13 +17,7 @@ public class EntityBolt extends EntityArrow implements IDamageLevelsHolder
 {
 	private int ticksInAir;
 
-	public double bonusDamage = 0.0;
-
-	private int slashDamageLevel = 0;
-
-	private int pierceDamageLevel = 0;
-
-	private int impactDamageLevel = 0;
+	private float slashDamageLevel = 0, pierceDamageLevel = 0, impactDamageLevel = 0;
 
 	public EntityBolt(final World worldIn)
 	{
@@ -88,40 +82,35 @@ public class EntityBolt extends EntityArrow implements IDamageLevelsHolder
 		}
 	}
 
-	public void setBonusDamage(double damageIn)
-	{
-		this.bonusDamage = damageIn;
-	}
-
-	public void setSlashDamageLevel(int slashDamageLevel)
+	public void setSlashDamageLevel(float slashDamageLevel)
 	{
 		this.slashDamageLevel = slashDamageLevel;
 	}
 
-	public void setPierceDamageLevel(int pierceDamageLevel)
+	public void setPierceDamageLevel(float pierceDamageLevel)
 	{
 		this.pierceDamageLevel = pierceDamageLevel;
 	}
 
-	public void setImpactDamageLevel(int impactDamageLevel)
+	public void setImpactDamageLevel(float impactDamageLevel)
 	{
 		this.impactDamageLevel = impactDamageLevel;
 	}
 
 	@Override
-	public int getSlashDamageLevel()
+	public float getSlashDamageLevel()
 	{
 		return this.slashDamageLevel;
 	}
 
 	@Override
-	public int getPierceDamageLevel()
+	public float getPierceDamageLevel()
 	{
 		return this.pierceDamageLevel;
 	}
 
 	@Override
-	public int getImpactDamageLevel()
+	public float getImpactDamageLevel()
 	{
 		return this.impactDamageLevel;
 	}
