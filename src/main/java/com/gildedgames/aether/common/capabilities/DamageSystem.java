@@ -154,8 +154,6 @@ public class DamageSystem
                 event.setAmount(event.getAmount() - 2.0F);
             }
         }
-
-        System.out.println(event.getAmount());
     }
 
     @SubscribeEvent
@@ -199,8 +197,6 @@ public class DamageSystem
                     }
 
                     event.setAmount(vanillaDamage);
-
-                    System.out.println(event.getAmount());
                 }
             }
         }
