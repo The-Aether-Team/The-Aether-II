@@ -48,15 +48,18 @@ public class DamageSystem
 
                     if (itemMainhand.getSlashDamageLevel() > 0)
                     {
-                        slashDamage = (float) (itemMainhand.getSlashDamageLevel() + target.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).getAttributeValue() + bonusSlash);
+                        float damageAmount = (float) (itemMainhand.getSlashDamageLevel() + target.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).getAttributeValue() + bonusSlash);
+                        slashDamage = Math.max(damageAmount, 1.0F);
                     }
                     if (itemMainhand.getPierceDamageLevel() > 0)
                     {
-                        pierceDamage = (float) (itemMainhand.getPierceDamageLevel() + target.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).getAttributeValue() + bonusPierce);
+                        float damageAmount = (float) (itemMainhand.getPierceDamageLevel() + target.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).getAttributeValue() + bonusPierce);
+                        pierceDamage = Math.max(damageAmount, 1.0F);
                     }
                     if (itemMainhand.getImpactDamageLevel() > 0)
                     {
-                        impactDamage = (float) (itemMainhand.getImpactDamageLevel() + target.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).getAttributeValue() + bonusImpact);
+                        float damageAmount = (float) (itemMainhand.getImpactDamageLevel() + target.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).getAttributeValue() + bonusImpact);
+                        impactDamage = Math.max(damageAmount, 1.0F);
                     }
 
                     float totalDamage = slashDamage + pierceDamage + impactDamage;
@@ -78,15 +81,18 @@ public class DamageSystem
 
                     if (itemOffhand.getSlashDamageLevel() > 0)
                     {
-                        slashDamage = (float) (itemOffhand.getSlashDamageLevel() + target.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).getAttributeValue() + bonusSlash);
+                        float damageAmount = (float) (itemOffhand.getSlashDamageLevel() + target.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).getAttributeValue() + bonusSlash);
+                        slashDamage = Math.max(damageAmount, 1.0F);
                     }
                     if (itemOffhand.getPierceDamageLevel() > 0)
                     {
-                        pierceDamage = (float) (itemOffhand.getPierceDamageLevel() + target.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).getAttributeValue() + bonusPierce);
+                        float damageAmount = (float) (itemOffhand.getPierceDamageLevel() + target.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).getAttributeValue() + bonusPierce);
+                        pierceDamage = Math.max(damageAmount, 1.0F);
                     }
                     if (itemOffhand.getImpactDamageLevel() > 0)
                     {
-                        impactDamage = (float) (itemOffhand.getImpactDamageLevel() + target.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).getAttributeValue() + bonusImpact);
+                        float damageAmount = (float) (itemOffhand.getImpactDamageLevel() + target.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).getAttributeValue() + bonusImpact);
+                        impactDamage = Math.max(damageAmount, 1.0F);
                     }
 
                     float totalDamage = slashDamage + pierceDamage + impactDamage;
@@ -106,24 +112,28 @@ public class DamageSystem
 
                     if (gloves.getSlashDamageLevel() > 0)
                     {
-                        slashDamage = (float) (gloves.getSlashDamageLevel() + target.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).getAttributeValue() + bonusSlash);
+                        float damageAmount = (float) (gloves.getSlashDamageLevel() + target.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).getAttributeValue() + bonusSlash);
+                        slashDamage = Math.max(damageAmount, 1.0F);
                     }
                     if (gloves.getPierceDamageLevel() > 0)
                     {
-                        pierceDamage = (float) (gloves.getPierceDamageLevel() + target.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).getAttributeValue() + bonusPierce);
+                        float damageAmount = (float) (gloves.getPierceDamageLevel() + target.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).getAttributeValue() + bonusPierce);
+                        pierceDamage = Math.max(damageAmount, 1.0F);
                     }
                     if (gloves.getImpactDamageLevel() > 0)
                     {
-                        impactDamage = (float) (gloves.getImpactDamageLevel() + target.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).getAttributeValue() + bonusImpact);
+                        float damageAmount = (float) (gloves.getImpactDamageLevel() + target.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).getAttributeValue() + bonusImpact);
+                        impactDamage = Math.max(damageAmount, 1.0F);
                     }
 
                     float totalDamage = slashDamage + pierceDamage + impactDamage;
 
                     event.setAmount(totalDamage);
                 }
-                else if (event.getAmount() < 2.0F)
+                else
                 {
-                    event.setAmount(event.getAmount() - 2.0F);
+                    float damageAmount = Math.max(event.getAmount() - 2.0F, 1.0F);
+                    event.setAmount(damageAmount);
                 }
             }
             else if (event.getSource().getImmediateSource() instanceof IDamageLevelsHolder)
@@ -134,25 +144,30 @@ public class DamageSystem
 
                 if (entitySource.getSlashDamageLevel() > 0)
                 {
-                    slashDamage = (float) (entitySource.getSlashDamageLevel() + target.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).getAttributeValue());
+                    float damageAmount = (float) (entitySource.getSlashDamageLevel() + target.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).getAttributeValue());
+                    slashDamage = Math.max(damageAmount, 1.0F);
                 }
                 if (entitySource.getPierceDamageLevel() > 0)
                 {
-                    pierceDamage = (float) (entitySource.getPierceDamageLevel() + target.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).getAttributeValue());
+                    float damageAmount = (float) (entitySource.getPierceDamageLevel() + target.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).getAttributeValue());
+                    pierceDamage = Math.max(damageAmount, 1.0F);
                 }
                 if (entitySource.getImpactDamageLevel() > 0)
                 {
-                    impactDamage = (float) (entitySource.getImpactDamageLevel() + target.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).getAttributeValue());
+                    float damageAmount = (float) (entitySource.getImpactDamageLevel() + target.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).getAttributeValue());
+                    impactDamage = Math.max(damageAmount, 1.0F);
                 }
 
                 float totalDamage = slashDamage + pierceDamage + impactDamage;
 
                 event.setAmount(totalDamage);
             }
-            else if (event.getAmount() < 2.0F)
+            else
             {
-                event.setAmount(event.getAmount() - 2.0F);
+                float damageAmount = Math.max(event.getAmount() - 2.0F, 1.0F);
+                event.setAmount(damageAmount);
             }
+            System.out.println(event.getAmount());
         }
     }
 
