@@ -30,12 +30,13 @@ public class ParticlePierce extends Particle
 
 		float f0 = Math.random() > 0.5 ? 0.5F : -0.5F;
 		float f1 = Math.random() > 0.5 ? 0.5F : -0.5F;
+		float f2 = Math.random() > 0.5 ? 0.5F : -0.5F;
 		this.motionX *= 0.10000000149011612D;
 		this.motionY *= 0.10000000149011612D;
 		this.motionZ *= 0.10000000149011612D;
 		this.motionX += f0 * 0.4D;
-		this.motionY += p_i46285_10_ * 0.4D;
-		this.motionZ += f1 * 0.4D;
+		this.motionY += f1 * 0.4D;
+		this.motionZ += f2 * 0.4D;
 		float f = 1.0F;
 		this.particleRed = f;
 		this.particleGreen = f;
