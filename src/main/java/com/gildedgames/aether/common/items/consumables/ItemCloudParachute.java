@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.items.consumables;
 
+import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerParachuteModule;
 import com.gildedgames.aether.common.entities.blocks.EntityParachute;
@@ -79,6 +80,10 @@ public class ItemCloudParachute extends Item implements IDropOnDeath
 		else
 		{
 			spawnParachute(playerAether, world, stack, parachute);
+
+			playerAether.getModule(PlayerParachuteModule.class).getParachuteItem().shrink(1);
+
+			player.addItemStackToInventory(new ItemStack(ItemsAether.cloud_parachute));
 		}
 
 		return super.onItemRightClick(world, player, hand);

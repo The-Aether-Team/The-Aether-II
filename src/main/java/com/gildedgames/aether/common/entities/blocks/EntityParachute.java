@@ -136,13 +136,6 @@ public class EntityParachute extends Entity
 
 	public void replaceParachute(EntityPlayer player, PlayerAether playerAether)
 	{
-		if (!player.world.isRemote)
-		{
-			playerAether.getModule(PlayerParachuteModule.class).getParachuteItem().shrink(1);
-
-			player.addItemStackToInventory(new ItemStack(ItemsAether.cloud_parachute));
-		}
-
 		playerAether.getModule(PlayerParachuteModule.class).setParachuting(true, Type.COLD);
 
 		this.setType(Type.COLD);
