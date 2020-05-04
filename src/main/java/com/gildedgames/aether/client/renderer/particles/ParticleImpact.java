@@ -13,6 +13,8 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -22,112 +24,117 @@ public class ParticleImpact extends Particle
 {
 	private static final ResourceLocation SLASH_TEXTURE = AetherCore.getResource("textures/particles/impact.png");
 
-	private static final VertexFormat VERTEX_FORMAT = (new VertexFormat()).addElement(DefaultVertexFormats.POSITION_3F).addElement(DefaultVertexFormats.TEX_2F)
-			.addElement(DefaultVertexFormats.COLOR_4UB).addElement(DefaultVertexFormats.TEX_2S).addElement(DefaultVertexFormats.NORMAL_3B)
-			.addElement(DefaultVertexFormats.PADDING_1B);
-
-	private final int lifeTime;
-
-	private final TextureManager textureManager;
-
-	private final float size;
-
-	private int life;
-
-	public ParticleImpact(TextureManager textureManagerIn, World worldIn, double x, double y, double z, double offsetX, double offsetY,
-			double offsetZ)
+	public ParticleImpact(World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double p_i46285_8_, double p_i46285_10_, double p_i46285_12_, float p_i46285_14_)
 	{
-		super(worldIn, x, y, z, 0.0D, 0.0D, 0.0D);
-		this.textureManager = textureManagerIn;
-		this.lifeTime = 4;
-		float f = this.rand.nextFloat() * 0.6F + 0.4F;
+		super(worldIn, xCoordIn, yCoordIn, zCoordIn, 0.0D, 0.0D, 0.0D);
+
+		float f0 = Math.random() > 0.5 ? 0.5F : -0.5F;
+		float f1 = Math.random() > 0.5 ? 0.5F : -0.5F;
+		this.motionX *= 0.10000000149011612D;
+		this.motionY *= 0.10000000149011612D;
+		this.motionZ *= 0.10000000149011612D;
+		this.motionX += f0 * 0.4D;
+		this.motionY += p_i46285_10_ * 0.4D;
+		this.motionZ += f1 * 0.4D;
+		float f = 1.0F;
 		this.particleRed = f;
 		this.particleGreen = f;
 		this.particleBlue = f;
-		this.size = 1.0F - (float) offsetX * 0.5F;
+		this.particleScale *= 0.75F;
+		this.particleScale *= p_i46285_14_;
+		this.particleMaxAge = (int)(6.0D / (Math.random() * 0.8D + 0.6D));
+		this.particleMaxAge = (int)((float)this.particleMaxAge * p_i46285_14_);
+		this.onUpdate();
 	}
 
-	/**
-	 * Renders the particle
-	 */
-	@Override
-	public void renderParticle(BufferBuilder buffer, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY,
-			float rotationXZ)
-	{
-		int i = (int) (((float) this.life + partialTicks) * 3.0F / (float) this.lifeTime);
-
-		if (i <= 7)
-		{
-			this.textureManager.bindTexture(SLASH_TEXTURE);
-
-			float f = (float) (i % 4) / 4.0F;
-			float f1 = f + 0.24975F;
-			float f2 = (float) (i / 2) / 2.0F;
-			float f3 = f2 + 0.4995F;
-			float f4 = 1.0F * this.size;
-			float f5 = (float) (this.prevPosX + (this.posX - this.prevPosX) * (double) partialTicks - interpPosX);
-			float f6 = (float) (this.prevPosY + (this.posY - this.prevPosY) * (double) partialTicks - interpPosY);
-			float f7 = (float) (this.prevPosZ + (this.posZ - this.prevPosZ) * (double) partialTicks - interpPosZ);
-
-			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-			GlStateManager.disableLighting();
-			RenderHelper.disableStandardItemLighting();
-			buffer.begin(7, VERTEX_FORMAT);
-			buffer.pos((double) (f5 - rotationX * f4 - rotationXY * f4), (double) (f6 - rotationZ * f4 * 0.5F),
-					(double) (f7 - rotationYZ * f4 - rotationXZ * f4)).tex((double) f1, (double) f3)
-					.color(this.particleRed, this.particleGreen, this.particleBlue, 1.0F).lightmap(0, 240).normal(0.0F, 1.0F, 0.0F).endVertex();
-			buffer.pos((double) (f5 - rotationX * f4 + rotationXY * f4), (double) (f6 + rotationZ * f4 * 0.5F),
-					(double) (f7 - rotationYZ * f4 + rotationXZ * f4)).tex((double) f1, (double) f2)
-					.color(this.particleRed, this.particleGreen, this.particleBlue, 1.0F).lightmap(0, 240).normal(0.0F, 1.0F, 0.0F).endVertex();
-			buffer.pos((double) (f5 + rotationX * f4 + rotationXY * f4), (double) (f6 + rotationZ * f4 * 0.5F),
-					(double) (f7 + rotationYZ * f4 + rotationXZ * f4)).tex((double) f, (double) f2)
-					.color(this.particleRed, this.particleGreen, this.particleBlue, 1.0F).lightmap(0, 240).normal(0.0F, 1.0F, 0.0F).endVertex();
-			buffer.pos((double) (f5 + rotationX * f4 - rotationXY * f4), (double) (f6 - rotationZ * f4 * 0.5F),
-					(double) (f7 + rotationYZ * f4 - rotationXZ * f4)).tex((double) f, (double) f3)
-					.color(this.particleRed, this.particleGreen, this.particleBlue, 1.0F).lightmap(0, 240).normal(0.0F, 1.0F, 0.0F).endVertex();
-			Tessellator.getInstance().draw();
-			GlStateManager.enableLighting();
-		}
-	}
-
-	@Override
-	public int getBrightnessForRender(float partialTick)
-	{
-		return 61680;
-	}
-
-	@Override
 	public void onUpdate()
 	{
 		this.prevPosX = this.posX;
 		this.prevPosY = this.posY;
 		this.prevPosZ = this.posZ;
-		++this.life;
 
-		if (this.life == this.lifeTime)
+		if (this.particleAge++ >= this.particleMaxAge)
 		{
 			this.setExpired();
 		}
+
+		this.move(this.motionX, this.motionY, this.motionZ);
+		this.motionX *= 0.699999988079071D;
+		this.motionY *= 0.699999988079071D;
+		this.motionZ *= 0.699999988079071D;
+		this.motionY -= 0.019999999552965164D;
+
+		if (this.onGround)
+		{
+			this.motionX *= 0.699999988079071D;
+			this.motionZ *= 0.699999988079071D;
+		}
 	}
 
-	/**
-	 * Retrieve what effect layer (what texture) the particle should be rendered with. 0 for the particle sprite sheet,
-	 * 1 for the main Texture atlas, and 3 for a custom texture
-	 */
+	@Override
+	public void renderParticle(BufferBuilder buffer, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY,
+							   float rotationXZ)
+	{
+		Minecraft.getMinecraft().renderEngine.bindTexture(SLASH_TEXTURE);
+
+		GlStateManager.disableLighting();
+
+		double x = this.prevPosX + (this.posX - this.prevPosX) * (double) partialTicks - interpPosX;
+		double y = this.prevPosY + (this.posY - this.prevPosY) * (double) partialTicks - interpPosY;
+		double z = this.prevPosZ + (this.posZ - this.prevPosZ) * (double) partialTicks - interpPosZ;
+
+		int brightness = this.getBrightnessForRender(partialTicks);
+
+		int j = brightness >> 16 & 65535;
+		int k = brightness & 65535;
+
+		float f = ((float)this.particleAge + partialTicks) / (float)this.particleMaxAge * 32.0F;
+
+		f = MathHelper.clamp(f, 0.0F, 1.0F);
+
+		float scale = 0.1F * this.particleScale * f;
+
+		Vec3d[] avec3d = new Vec3d[] {
+				new Vec3d(
+						(double) (-rotationX * scale - rotationXY * scale),
+						(double) (-rotationZ * scale),
+						(double) (-rotationYZ * scale - rotationXZ * scale)
+				),
+				new Vec3d(
+						(double) (-rotationX * scale + rotationXY * scale),
+						(double) (rotationZ * scale),
+						(double) (-rotationYZ * scale + rotationXZ * scale)
+				),
+				new Vec3d(
+						(double) (rotationX * scale + rotationXY * scale),
+						(double) (rotationZ * scale),
+						(double) (rotationYZ * scale + rotationXZ * scale)
+				),
+				new Vec3d(
+						(double) (rotationX * scale - rotationXY * scale),
+						(double) (-rotationZ * scale),
+						(double) (rotationYZ * scale - rotationXZ * scale)
+				)
+		};
+
+		float a = 1.0f - (Math.max(0.0f, this.particleAge - 70.0f) * 0.03f);
+
+		buffer.begin(7, DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
+		buffer.pos(x + avec3d[0].x, y + avec3d[0].y, z + avec3d[0].z).tex(0.0D, 1.0D).color(this.particleRed, this.particleGreen, this.particleBlue, a)
+				.lightmap(j, k).endVertex();
+		buffer.pos(x + avec3d[1].x, y + avec3d[1].y, z + avec3d[1].z).tex(1.0D, 1.0D).color(this.particleRed, this.particleGreen, this.particleBlue, a)
+				.lightmap(j, k).endVertex();
+		buffer.pos(x + avec3d[2].x, y + avec3d[2].y, z + avec3d[2].z).tex(1.0D, 0.0D).color(this.particleRed, this.particleGreen, this.particleBlue, a)
+				.lightmap(j, k).endVertex();
+		buffer.pos(x + avec3d[3].x, y + avec3d[3].y, z + avec3d[3].z).tex(0.0D, 0.0D).color(this.particleRed, this.particleGreen, this.particleBlue, a)
+				.lightmap(j, k).endVertex();
+
+		Tessellator.getInstance().draw();
+	}
+
 	@Override
 	public int getFXLayer()
 	{
 		return 3;
-	}
-
-	@SideOnly(Side.CLIENT)
-	public static class Factory implements IParticleFactory
-	{
-		@Override
-		public Particle createParticle(int particleID, World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn,
-				double zSpeedIn, int... p_178902_15_)
-		{
-			return new ParticleImpact(Minecraft.getMinecraft().getTextureManager(), worldIn, xCoordIn, yCoordIn, zCoordIn, xSpeedIn, ySpeedIn, zSpeedIn);
-		}
 	}
 }
