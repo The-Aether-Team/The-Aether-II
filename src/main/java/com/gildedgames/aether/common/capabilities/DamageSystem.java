@@ -118,7 +118,9 @@ public class DamageSystem
 
                     float totalDamage = slashDamage + pierceDamage + impactDamage;
 
-                    event.setAmount(totalDamage);
+                    float cooldownTracker = PlayerAether.getPlayer(source).getCooldownTracker();
+
+                    event.setAmount(totalDamage * cooldownTracker);
 
                     spawnParticles(target,
                             itemOffhand.getSlashDamageLevel(),
@@ -165,7 +167,9 @@ public class DamageSystem
 
                     float totalDamage = slashDamage + pierceDamage + impactDamage;
 
-                    event.setAmount(totalDamage);
+                    float cooldownTracker = PlayerAether.getPlayer(source).getCooldownTracker();
+
+                    event.setAmount(totalDamage * cooldownTracker);
 
                     spawnParticles(target,
                             gloves.getSlashDamageLevel(),
