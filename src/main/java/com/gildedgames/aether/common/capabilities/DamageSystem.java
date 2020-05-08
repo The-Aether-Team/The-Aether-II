@@ -7,13 +7,18 @@ import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerEquipmentModule;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
+import com.gildedgames.aether.common.init.ParticlesAether;
 import com.gildedgames.aether.common.items.armor.ItemAetherGloves;
 import com.gildedgames.aether.common.items.weapons.swords.ItemAetherSword;
+import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.network.packets.PacketParticles;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -67,6 +72,22 @@ public class DamageSystem
                     float cooldownTracker = PlayerAether.getPlayer(source).getCooldownTracker();
 
                     event.setAmount(totalDamage * cooldownTracker);
+
+                    spawnParticles(target,
+                            itemMainhand.getSlashDamageLevel(),
+                            itemMainhand.getPierceDamageLevel(),
+                            itemMainhand.getImpactDamageLevel(),
+                            target.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).getAttributeValue(),
+                            target.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).getAttributeValue(),
+                            target.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).getAttributeValue());
+
+                    blockSound(target,
+                            itemMainhand.getSlashDamageLevel(),
+                            itemMainhand.getPierceDamageLevel(),
+                            itemMainhand.getImpactDamageLevel(),
+                            target.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).getAttributeValue(),
+                            target.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).getAttributeValue(),
+                            target.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).getAttributeValue());
                 }
                 else if (source.getHeldItemOffhand().getItem() instanceof IDamageLevelsHolder)
                 {
@@ -97,7 +118,25 @@ public class DamageSystem
 
                     float totalDamage = slashDamage + pierceDamage + impactDamage;
 
-                    event.setAmount(totalDamage);
+                    float cooldownTracker = PlayerAether.getPlayer(source).getCooldownTracker();
+
+                    event.setAmount(totalDamage * cooldownTracker);
+
+                    spawnParticles(target,
+                            itemOffhand.getSlashDamageLevel(),
+                            itemOffhand.getPierceDamageLevel(),
+                            itemOffhand.getImpactDamageLevel(),
+                            target.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).getAttributeValue(),
+                            target.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).getAttributeValue(),
+                            target.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).getAttributeValue());
+
+                    blockSound(target,
+                            itemOffhand.getSlashDamageLevel(),
+                            itemOffhand.getPierceDamageLevel(),
+                            itemOffhand.getImpactDamageLevel(),
+                            target.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).getAttributeValue(),
+                            target.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).getAttributeValue(),
+                            target.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).getAttributeValue());
                 }
                 else if (source.getHeldItemMainhand().isEmpty() && gloveStack.getItem() instanceof ItemAetherGloves && !gloveStack.isEmpty())
                 {
@@ -128,7 +167,25 @@ public class DamageSystem
 
                     float totalDamage = slashDamage + pierceDamage + impactDamage;
 
-                    event.setAmount(totalDamage);
+                    float cooldownTracker = PlayerAether.getPlayer(source).getCooldownTracker();
+
+                    event.setAmount(totalDamage * cooldownTracker);
+
+                    spawnParticles(target,
+                            gloves.getSlashDamageLevel(),
+                            gloves.getPierceDamageLevel(),
+                            gloves.getImpactDamageLevel(),
+                            target.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).getAttributeValue(),
+                            target.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).getAttributeValue(),
+                            target.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).getAttributeValue());
+
+                    blockSound(target,
+                            gloves.getSlashDamageLevel(),
+                            gloves.getPierceDamageLevel(),
+                            gloves.getImpactDamageLevel(),
+                            target.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).getAttributeValue(),
+                            target.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).getAttributeValue(),
+                            target.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).getAttributeValue());
                 }
                 else
                 {
@@ -161,13 +218,28 @@ public class DamageSystem
                 float totalDamage = slashDamage + pierceDamage + impactDamage;
 
                 event.setAmount(totalDamage);
+
+                spawnParticles(target,
+                        entitySource.getSlashDamageLevel(),
+                        entitySource.getPierceDamageLevel(),
+                        entitySource.getImpactDamageLevel(),
+                        target.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).getAttributeValue(),
+                        target.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).getAttributeValue(),
+                        target.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).getAttributeValue());
+
+                blockSound(target,
+                        entitySource.getSlashDamageLevel(),
+                        entitySource.getPierceDamageLevel(),
+                        entitySource.getImpactDamageLevel(),
+                        target.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).getAttributeValue(),
+                        target.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).getAttributeValue(),
+                        target.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).getAttributeValue());
             }
             else
             {
                 float damageAmount = Math.max(event.getAmount() - 2.0F, 1.0F);
                 event.setAmount(damageAmount);
             }
-            System.out.println(event.getAmount());
         }
     }
 
@@ -229,25 +301,44 @@ public class DamageSystem
             living.getAttributeMap().registerAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL);
         }
     }
+
+    public static void spawnParticles(EntityLivingBase target, double slashDamage, double pierceDamage, double impactDamage, double slashDefense, double pierceDefense, double impactDefense)
+    {
+        final double radius = 0.3;
+        final double randX = target.getRNG().nextDouble() * (target.getRNG().nextBoolean() ? 1.0 : -1.0) * radius;
+        final double randZ = target.getRNG().nextDouble() * (target.getRNG().nextBoolean() ? 1.0 : -1.0) * radius;
+
+        double x = target.posX + randX;
+        double y = target.posY + (double) target.height;
+        double z = target.posZ + randZ;
+
+        for (int i = 0; i < 20; i++)
+        {
+            if (slashDamage > 0 && slashDefense > 0.0F)
+            {
+                NetworkingAether
+                        .sendPacketToDimension(new PacketParticles(ParticlesAether.SLASH, x, y, z, randX, 0.0D, randZ), target.dimension);
+            }
+
+            if (pierceDamage > 0 && pierceDefense > 0.0F)
+            {
+                NetworkingAether
+                        .sendPacketToDimension(new PacketParticles(ParticlesAether.PIERCE, x, y, z, randX, 0.0D, randZ), target.dimension);
+            }
+
+            if (impactDamage > 0 && impactDefense > 0.0F)
+            {
+                NetworkingAether
+                        .sendPacketToDimension(new PacketParticles(ParticlesAether.IMPACT, x, y, z, randX, 0.0D, randZ), target.dimension);
+            }
+        }
+    }
+
+    public static void blockSound(EntityLivingBase target, double slashDamage, double pierceDamage, double impactDamage, double slashDefense, double pierceDefense, double impactDefense)
+    {
+        if ((slashDamage > 0 && slashDefense < 0.0F) || (pierceDamage > 0 && pierceDefense < 0.0F) || (impactDamage > 0 && impactDefense < 0.0F))
+        {
+            target.playSound(SoundEvents.ITEM_SHIELD_BLOCK, 0.8F, 0.8F + target.world.rand.nextFloat() * 0.4F);
+        }
+    }
 }
-
-
-    /*
-		if (slashDamageLevel > 0)
-		{
-			NetworkingAether.sendPacketToDimension(new PacketParticles(ParticlesAether.SLASH, x, y, z, offsetX, 0.0D, offsetZ), entitySource.dimension);
-		}
-
-		if (pierceDamageLevel > 0)
-		{
-			NetworkingAether
-					.sendPacketToDimension(new PacketParticles(ParticlesAether.PIERCE, x, y, z, offsetX, 0.0D, offsetZ), entitySource.dimension);
-		}
-
-		if (impactDamageLevel > 0)
-		{
-			NetworkingAether
-					.sendPacketToDimension(new PacketParticles(ParticlesAether.IMPACT, x, y, z, offsetX, 0.0D, offsetZ), entitySource.dimension);
-		}
-	}
-	 */

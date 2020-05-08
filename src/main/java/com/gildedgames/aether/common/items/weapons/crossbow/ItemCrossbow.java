@@ -397,6 +397,7 @@ public class ItemCrossbow extends Item
 			bolt.setPierceDamageLevel(pierceDamageLevel);
 			bolt.setImpactDamageLevel(impactDamageLevel);
 			bolt.setDamage(damage / 2);
+			bolt.setIsCritical(false);
 
 			bolt.pickupStatus = EntityArrow.PickupStatus.ALLOWED;
 

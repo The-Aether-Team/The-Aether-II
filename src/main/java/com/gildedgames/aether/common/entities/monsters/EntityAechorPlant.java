@@ -185,9 +185,9 @@ public class EntityAechorPlant extends EntityAetherMob
 				int targetPetals = (int) Math.floor((this.getHealth() / this.getMaxHealth()) * MAX_PETALS);
 				int remainingPetals = this.getPetalCountInState(true);
 
-				int amount = this.getHealth() <= prevHealth - 1 ? targetPetals / 2 : 0;
+				int damage = remainingPetals - targetPetals;
 
-				Block.spawnAsEntity(this.world, this.getPosition(), new ItemStack(ItemsAether.aechor_petal, amount));
+				Block.spawnAsEntity(this.world, this.getPosition(), new ItemStack(ItemsAether.aechor_petal, damage / 2));
 
 				while (remainingPetals > targetPetals)
 				{

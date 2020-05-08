@@ -34,8 +34,7 @@ public class ClientProxy extends CommonProxy
 	public void spawnSlashParticleFrom(
 			final World world, final double x, final double y, final double z, final double offsetX, final double offsetY, final double offsetZ)
 	{
-		final ParticleSlash effect = new ParticleSlash(Minecraft.getMinecraft().getTextureManager(), world, x,
-				y, z, offsetX, 0.0D, offsetZ);
+		final ParticleSlash effect = new ParticleSlash(world, x, y, z,1.0F, 1.0F, 1.0F, 1.0F);
 
 		Minecraft.getMinecraft().effectRenderer.addEffect(effect);
 	}
@@ -44,8 +43,7 @@ public class ClientProxy extends CommonProxy
 	public void spawnPierceParticleFrom(
 			final World world, final double x, final double y, final double z, final double offsetX, final double offsetY, final double offsetZ)
 	{
-		final ParticlePierce effect = new ParticlePierce(Minecraft.getMinecraft().getTextureManager(), world, x,
-				y, z, offsetX, 0.0D, offsetZ);
+		final ParticlePierce effect = new ParticlePierce(world, x, y, z,1.0F, 1.0F, 1.0F, 1.0F);
 
 		Minecraft.getMinecraft().effectRenderer.addEffect(effect);
 	}
@@ -54,8 +52,7 @@ public class ClientProxy extends CommonProxy
 	public void spawnImpactParticleFrom(
 			final World world, final double x, final double y, final double z, final double offsetX, final double offsetY, final double offsetZ)
 	{
-		final ParticleImpact effect = new ParticleImpact(Minecraft.getMinecraft().getTextureManager(), world, x,
-				y, z, offsetX, 0.0D, offsetZ);
+		final ParticleImpact effect = new ParticleImpact(world, x, y, z,1.0F, 1.0F, 1.0F, 1.0F);
 
 		Minecraft.getMinecraft().effectRenderer.addEffect(effect);
 	}
