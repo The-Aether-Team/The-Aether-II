@@ -88,6 +88,12 @@ public class EntityAechorPlant extends EntityAetherMob
 	}
 
 	@Override
+	protected boolean canDespawn()
+	{
+		return false;
+	}
+
+	@Override
 	protected void entityInit()
 	{
 		super.entityInit();
