@@ -36,11 +36,11 @@ public class EntityCockatrice extends EntityAetherMob
 {
 	protected Map<String, Float> defenseMap = Maps.newHashMap();
 	{{
-		this.defenseMap.put("Very Weak", 2.0F);
-		this.defenseMap.put("Weak", 1.0F);
+		this.defenseMap.put("Very Weak", 4.0F);
+		this.defenseMap.put("Weak", 2.0F);
 		this.defenseMap.put("Average", 0.0F);
-		this.defenseMap.put("Strong", -1.0F);
-		this.defenseMap.put("Very Strong", -2.0F);
+		this.defenseMap.put("Strong", -2.0F);
+		this.defenseMap.put("Very Strong", -4.0F);
 	}}
 
 	private static final DataParameter<Boolean> IS_HIDING = new DataParameter<>(16, DataSerializers.BOOLEAN);
@@ -94,9 +94,9 @@ public class EntityCockatrice extends EntityAetherMob
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(24.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2.0D);
 
-		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(1.0f);
-		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(-1.0f);
-		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(0.0f);
+		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(-4.0f);
+		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(0.0f);
+		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(2.0f);
 	}
 
 	@Override

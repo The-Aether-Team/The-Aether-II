@@ -25,11 +25,11 @@ public class EntityCarrionSprout extends EntityAetherAnimal
 {
 	protected Map<String, Float> defenseMap = Maps.newHashMap();
 	{{
-		this.defenseMap.put("Very Weak", 2.0F);
-		this.defenseMap.put("Weak", 1.0F);
+		this.defenseMap.put("Very Weak", 4.0F);
+		this.defenseMap.put("Weak", 2.0F);
 		this.defenseMap.put("Average", 0.0F);
-		this.defenseMap.put("Strong", -1.0F);
-		this.defenseMap.put("Very Strong", -2.0F);
+		this.defenseMap.put("Strong", -2.0F);
+		this.defenseMap.put("Very Strong", -4.0F);
 	}}
 
 	private static final DataParameter<Integer> SIZE = new DataParameter<>(13, DataSerializers.VARINT);

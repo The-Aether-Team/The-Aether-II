@@ -25,11 +25,11 @@ public class EntityTempest extends EntityFlyingMob
 {
 	protected Map<String, Float> defenseMap = Maps.newHashMap();
 	{{
-		this.defenseMap.put("Very Weak", 2.0F);
-		this.defenseMap.put("Weak", 1.0F);
+		this.defenseMap.put("Very Weak", 4.0F);
+		this.defenseMap.put("Weak", 2.0F);
 		this.defenseMap.put("Average", 0.0F);
-		this.defenseMap.put("Strong", -1.0F);
-		this.defenseMap.put("Very Strong", -2.0F);
+		this.defenseMap.put("Strong", -2.0F);
+		this.defenseMap.put("Very Strong", -4.0F);
 	}}
 
 	public EntityTempest(final World world)
@@ -95,12 +95,12 @@ public class EntityTempest extends EntityFlyingMob
 		super.applyEntityAttributes();
 
 		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(26.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(60);
 
 		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(0.0f);
-		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(1.0f);
-		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(-1.0f);
+		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(2.0f);
+		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(-4.0f);
 	}
 
 	@Override

@@ -37,11 +37,11 @@ public class GuiGuidebookDiscoveryBestiary extends GuiGuidebookDiscovery
 
 	private static final ResourceLocation HEALTH_ICON = AetherCore.getResource("textures/gui/guidebook/icons/heart.png");
 
-	private static final ResourceLocation SLASH_DEFENSE_ICON = AetherCore.getResource("textures/gui/overlay/slash_defense.png");
+	private static final ResourceLocation SLASH_DEFENSE_ICON = AetherCore.getResource("textures/gui/overlay/slash_damage.png");
 
-	private static final ResourceLocation PIERCE_DEFENSE_ICON = AetherCore.getResource("textures/gui/overlay/pierce_defense.png");
+	private static final ResourceLocation PIERCE_DEFENSE_ICON = AetherCore.getResource("textures/gui/overlay/pierce_damage.png");
 
-	private static final ResourceLocation IMPACT_DEFENSE_ICON = AetherCore.getResource("textures/gui/overlay/impact_defense.png");
+	private static final ResourceLocation IMPACT_DEFENSE_ICON = AetherCore.getResource("textures/gui/overlay/impact_damage.png");
 
 	private List<TGEntryBestiaryPage> bestiaryEntries;
 

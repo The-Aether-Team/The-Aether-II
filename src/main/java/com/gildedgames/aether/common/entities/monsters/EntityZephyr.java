@@ -19,11 +19,11 @@ public class EntityZephyr extends EntityFlying
 {
 	protected Map<String, Float> defenseMap = Maps.newHashMap();
 	{{
-		this.defenseMap.put("Very Weak", 2.0F);
-		this.defenseMap.put("Weak", 1.0F);
+		this.defenseMap.put("Very Weak", 4.0F);
+		this.defenseMap.put("Weak", 2.0F);
 		this.defenseMap.put("Average", 0.0F);
-		this.defenseMap.put("Strong", -1.0F);
-		this.defenseMap.put("Very Strong", -2.0F);
+		this.defenseMap.put("Strong", -2.0F);
+		this.defenseMap.put("Very Strong", -4.0F);
 	}}
 
 	public EntityZephyr(final World world)
@@ -64,10 +64,10 @@ public class EntityZephyr extends EntityFlying
 	{
 		super.applyEntityAttributes();
 
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(14.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(16.0D);
 
 		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(0.0F);
-		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(1.0F);
-		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(-1.0F);
+		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(2.0F);
+		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(-2.0F);
 	}
 }
