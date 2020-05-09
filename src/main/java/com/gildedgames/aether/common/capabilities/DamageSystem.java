@@ -6,27 +6,46 @@ import com.gildedgames.aether.api.entity.damage.IDefenseLevelsHolder;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerEquipmentModule;
-import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
 import com.gildedgames.aether.common.init.ParticlesAether;
 import com.gildedgames.aether.common.items.armor.ItemAetherGloves;
-import com.gildedgames.aether.common.items.weapons.swords.ItemAetherSword;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketParticles;
+import com.gildedgames.aether.common.util.helpers.AetherHelper;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 @Mod.EventBusSubscriber
 public class DamageSystem
 {
+    private static boolean blocked;
+
+    private static int timer;
+
+    @SubscribeEvent
+    public static void onTick(TickEvent.WorldTickEvent event)
+    {
+        if (blocked)
+        {
+            timer = timer + 1;
+
+            if (timer > 10)
+            {
+                blocked = false;
+                timer = 0;
+            }
+        }
+    }
+
     @SubscribeEvent
     public static void onLivingEntityHurt(LivingHurtEvent event)
     {
@@ -81,7 +100,7 @@ public class DamageSystem
                             target.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).getAttributeValue(),
                             target.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).getAttributeValue());
 
-                    blockSound(target,
+                    handleSounds(target,
                             itemMainhand.getSlashDamageLevel(),
                             itemMainhand.getPierceDamageLevel(),
                             itemMainhand.getImpactDamageLevel(),
@@ -130,7 +149,7 @@ public class DamageSystem
                             target.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).getAttributeValue(),
                             target.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).getAttributeValue());
 
-                    blockSound(target,
+                    handleSounds(target,
                             itemOffhand.getSlashDamageLevel(),
                             itemOffhand.getPierceDamageLevel(),
                             itemOffhand.getImpactDamageLevel(),
@@ -179,7 +198,7 @@ public class DamageSystem
                             target.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).getAttributeValue(),
                             target.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).getAttributeValue());
 
-                    blockSound(target,
+                    handleSounds(target,
                             gloves.getSlashDamageLevel(),
                             gloves.getPierceDamageLevel(),
                             gloves.getImpactDamageLevel(),
@@ -227,7 +246,7 @@ public class DamageSystem
                         target.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).getAttributeValue(),
                         target.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).getAttributeValue());
 
-                blockSound(target,
+                handleSounds(target,
                         entitySource.getSlashDamageLevel(),
                         entitySource.getPierceDamageLevel(),
                         entitySource.getImpactDamageLevel(),
@@ -314,39 +333,62 @@ public class DamageSystem
 
         for (int i = 0; i < 20; i++)
         {
-            if (slashDamage > 0 && slashDefense > 0.0F)
+            if (slashDamage > 0 && slashDefense > 0.0F || pierceDamage > 0 && pierceDefense > 0.0F || impactDamage > 0 && impactDefense > 0.0F)
             {
-                NetworkingAether
-                        .sendPacketToDimension(new PacketParticles(ParticlesAether.SLASH, x, y, z, randX, 0.0D, randZ), target.dimension);
-                critSound(target);
-            }
+                if (slashDamage > 0 && slashDefense > 0.0F)
+                {
+                    NetworkingAether
+                            .sendPacketToDimension(new PacketParticles(ParticlesAether.SLASH, x, y, z, randX, 0.0D, randZ), target.dimension);
+                }
 
-            if (pierceDamage > 0 && pierceDefense > 0.0F)
-            {
-                NetworkingAether
-                        .sendPacketToDimension(new PacketParticles(ParticlesAether.PIERCE, x, y, z, randX, 0.0D, randZ), target.dimension);
-                critSound(target);
-            }
+                if (pierceDamage > 0 && pierceDefense > 0.0F)
+                {
+                    NetworkingAether
+                            .sendPacketToDimension(new PacketParticles(ParticlesAether.PIERCE, x, y, z, randX, 0.0D, randZ), target.dimension);
+                }
 
-            if (impactDamage > 0 && impactDefense > 0.0F)
-            {
-                NetworkingAether
-                        .sendPacketToDimension(new PacketParticles(ParticlesAether.IMPACT, x, y, z, randX, 0.0D, randZ), target.dimension);
-                critSound(target);
+                if (impactDamage > 0 && impactDefense > 0.0F)
+                {
+                    NetworkingAether
+                            .sendPacketToDimension(new PacketParticles(ParticlesAether.IMPACT, x, y, z, randX, 0.0D, randZ), target.dimension);
+                }
+
+                handleSounds(target, slashDamage, pierceDamage, impactDamage, slashDefense, pierceDefense, impactDefense);
             }
         }
     }
 
-    public static void critSound(EntityLivingBase target)
+    @SubscribeEvent
+    public static void onSoundEvent(final PlaySoundEvent event)
     {
-        target.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, 0.8F, 0.8F + target.world.rand.nextFloat() * 0.4F);
+        if (blocked)
+        {
+            if (event.getName().equals(SoundEvents.ENTITY_PLAYER_ATTACK_CRIT.getSoundName().getPath()) ||
+                    event.getName().equals(SoundEvents.ENTITY_PLAYER_ATTACK_STRONG.getSoundName().getPath()) ||
+                    event.getName().equals(SoundEvents.ENTITY_PLAYER_ATTACK_KNOCKBACK.getSoundName().getPath()) ||
+                    event.getName().equals(SoundEvents.ENTITY_PLAYER_ATTACK_NODAMAGE.getSoundName().getPath()) ||
+                    event.getName().equals(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP.getSoundName().getPath()) ||
+                    event.getName().equals(SoundEvents.ENTITY_PLAYER_ATTACK_WEAK.getSoundName().getPath()))
+            {
+                event.setResultSound(null);
+            }
+        }
     }
 
-    public static void blockSound(EntityLivingBase target, double slashDamage, double pierceDamage, double impactDamage, double slashDefense, double pierceDefense, double impactDefense)
+    public static void handleSounds(EntityLivingBase target, double slashDamage, double pierceDamage, double impactDamage, double slashDefense, double pierceDefense, double impactDefense)
     {
         if ((slashDamage > 0 && slashDefense < 0.0F) || (pierceDamage > 0 && pierceDefense < 0.0F) || (impactDamage > 0 && impactDefense < 0.0F))
         {
+            blocked = true;
             target.playSound(SoundEvents.ITEM_SHIELD_BLOCK, 0.8F, 0.8F + target.world.rand.nextFloat() * 0.4F);
+        }
+        else
+        {
+            blocked = false;
+            if (slashDamage > 0 && slashDefense > 0.0F || pierceDamage > 0 && pierceDefense > 0.0F || impactDamage > 0 && impactDefense > 0.0F)
+            {
+                target.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, 0.8F, 0.8F + target.world.rand.nextFloat() * 0.4F);
+            }
         }
     }
 }
