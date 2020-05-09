@@ -289,7 +289,8 @@ public class ModelBurrukai extends ModelBase
 		if (this.isChild)
 		{
 			GlStateManager.pushMatrix();
-			GlStateManager.translate(0.0F, 8.75F * f5, this.childZOffset * f5);
+			GlStateManager.scale(0.5F, 0.5F, 0.5F);
+			GlStateManager.translate(0.0F, 24.0F * f5, this.childZOffset * f5);
 			this.HeadMain.render(f5);
 			GlStateManager.popMatrix();
 			GlStateManager.pushMatrix();
