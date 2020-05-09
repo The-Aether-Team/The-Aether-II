@@ -338,15 +338,7 @@ public class ModelVaranys extends ModelBase
 		super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entityIn);
 
 		this.head_top.rotateAngleX = headPitch * 0.017453292F;
-
-		float rotValue = netHeadYaw * 0.027453292F + (float) Math.PI / 3f;
-
-		if (rotValue > 1)
-		{
-			rotValue -= 2f;
-		}
-
-		this.head_top.rotateAngleY = rotValue;
+		this.head_top.rotateAngleY = netHeadYaw * 0.017453292F;
 
 		this.leg_front_right_joint.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * .6F * limbSwingAmount;
 		this.leg_front_left_joint.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * .6F * limbSwingAmount;
@@ -356,13 +348,6 @@ public class ModelVaranys extends ModelBase
 		float jawLower = MathHelper.cos(ageInTicks * .1f) / 5f;
 
 		this.head_bottom.rotateAngleX = 0.3490658503988659F - jawLower;
-
-		float bodyVal = (limbSwing) * .5f;
-		float bodySway = MathHelper.cos(bodyVal) / 2.5f;
-		float bodySwaySin = MathHelper.sin(bodyVal) / 5f;
-
-		this.body_front.rotateAngleY = bodySwaySin;
-		this.body_back.rotateAngleY = bodySway;
 
 		float tailVal = (limbSwing * .3f + ageInTicks * .06f);
 		float tailSway = MathHelper.cos(tailVal) / 3f;

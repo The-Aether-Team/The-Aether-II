@@ -283,24 +283,16 @@ public class ModelSkyrootLizard extends ModelBase
 		float swingSin = MathHelper.sin(limbSwing * 0.7662F);
 
 		this.leg_front_right_1.rotateAngleY =  -0.35F + (swingCos -.5f) * .6F * limbSwingAmount;
-		this.leg_front_right_1.rotateAngleZ = swingCos * 1F * limbSwingAmount;
 		this.leg_front_right_2.rotateAngleY =  -0.35F + swingSin * .6F * limbSwingAmount;
-		this.leg_front_right_2.rotateAngleZ =  -0.436F + swingSin* .3F * limbSwingAmount;
 
 		this.leg_back_left_1.rotateAngleY =  -0.35F + (swingCos -.5f) * .3F * limbSwingAmount;
-		this.leg_back_left_1.rotateAngleZ = swingCos * .5F * limbSwingAmount;
 		this.leg_back_left_2.rotateAngleY =  -0.35F + swingSin * .3F * limbSwingAmount;
-		this.leg_back_left_2.rotateAngleZ =  0.436F + swingSin* .15F * limbSwingAmount;
 
 		this.leg_front_left_1.rotateAngleY =  0.35F + (swingSin -.5f) * .6F * limbSwingAmount;
-		this.leg_front_left_1.rotateAngleZ =  swingSin * 1F * limbSwingAmount;
 		this.leg_front_left_2.rotateAngleY =  0.35F + swingCos * .6F * limbSwingAmount;
-		this.leg_front_left_2.rotateAngleZ =  0.436F + swingCos * .3F * limbSwingAmount;
 
 		this.leg_back_right_1.rotateAngleY =  0.35F + (swingSin -.5f) * .3F * limbSwingAmount;
-		this.leg_back_right_1.rotateAngleZ =  swingSin * .5F * limbSwingAmount;
 		this.leg_front_right_2_1.rotateAngleY =  0.35F + swingCos * .3F * limbSwingAmount;
-		this.leg_front_right_2_1.rotateAngleZ =  -0.436F + swingCos * .15F * limbSwingAmount;
 
 		float tailVal = (limbSwing * .3f + ageInTicks * .06f);
 		float tailSway = MathHelper.cos(tailVal) / 3f;
@@ -308,7 +300,6 @@ public class ModelSkyrootLizard extends ModelBase
 
 		this.tail_1.rotateAngleY = tailSway;
 		this.tail_2.rotateAngleY = tailSwaySin;
-		this.tail_3.rotateAngleY = tailSway;
 
 		float tailBase = -0.08726646259971647F;
 		float tailSwing = MathHelper.cos(limbSwing * 0.6662F) * .01F * limbSwingAmount;

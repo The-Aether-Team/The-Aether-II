@@ -334,90 +334,20 @@ public class ModelCockatrice extends ModelBase implements ILayeredModel
 
 		this.head.rotateAngleX = 0.17453292519943295F + pitch;
 		this.head.rotateAngleY = yaw;
-		this.neck.rotateAngleY = yaw / 2f;
 
 		float leftSwingX = MathHelper.cos(limbSwing * 1.2F) * 0.75F * limbSwingAmount;
 		float rightSwingX = MathHelper.cos(limbSwing * 1.2F + (float) Math.PI) * 0.75F * limbSwingAmount;
 
-		float leftSwingXLower = Math.max(-0.5009094953223726F, -rightSwingX * 2f) - 0.1F;
-		float rightSwingXLower = Math.max(-0.5009094953223726F, -leftSwingX * 2f) - 0.1F;
-
-		float leftToeCurlAngle = -rightSwingXLower;
-		float rightToeCurlAngle = -leftSwingXLower;
-
-		this.neck.rotateAngleX = leftSwingX * .5f - 0.261799f;
-		this.head.rotateAngleX = -leftSwingX * .5f + 0.174533f;
-
 		this.thigh_left.offsetY = leftSwingX * 0.05f;
 		this.thigh_right.offsetY = rightSwingX * 0.05f;
 
-		float leftOffsetY = leftSwingX * 0.25f - .05f;
-		float rightOffsetY = rightSwingX * 0.25f - .05f;
-
 		// The left and right are intentionally flipped to make it look like the darts are reacting to legs moving.
-
-		this.dart_left_top.offsetY = rightOffsetY;
-		this.dart_left_middle.offsetY = rightOffsetY;
-		this.dart_left_bottom.offsetY = rightOffsetY;
-		this.dart_right_top.offsetY = leftOffsetY;
-		this.dart_right_middle.offsetY = leftOffsetY;
-		this.dart_right_bottom.offsetY = leftOffsetY;
-
-		float dartRotateRange = 0.08f;
-
-		this.dart_left_top.rotateAngleX = rightSwingX * dartRotateRange;
-		this.dart_left_middle.rotateAngleX =  rightSwingX * dartRotateRange;
-		this.dart_left_bottom.rotateAngleX =  rightSwingX * dartRotateRange;
-		this.dart_right_top.rotateAngleX = leftSwingX * dartRotateRange;
-		this.dart_right_middle.rotateAngleX = leftSwingX * dartRotateRange;
-		this.dart_right_bottom.rotateAngleX = leftSwingX * dartRotateRange;
 
 		this.thigh_left.rotateAngleX = (leftSwingX * 1.2f) + 0.174533f;
 		this.thigh_right.rotateAngleX = (rightSwingX * 1.2f) + 0.174533f;
 
-		this.leg_left.rotateAngleX = (rightSwingXLower * 1.55F) + 0.523599F;
-		this.leg_right.rotateAngleX = (leftSwingXLower * 1.55F) + 0.523599F;
-
-		this.ankle_left.rotateAngleX = (rightSwingXLower * 0.75F) - 1.32645f;
-		this.ankle_right.rotateAngleX = (leftSwingXLower * 0.75F) - 1.32645f;
-
-		this.foot_left.rotateAngleX = -(rightSwingXLower * 3F) + 0.261799f;
-		this.foot_right.rotateAngleX = -(leftSwingXLower * 3F) + 0.261799f;
-
-		this.toe_left_1.rotateAngleX = leftToeCurlAngle - 0.698132F;
-		this.toe_left_2.rotateAngleX = leftToeCurlAngle - 0.698132F;
-		this.toe_left_3.rotateAngleX = leftToeCurlAngle - 0.698132F;
-
-		this.toe_right_1.rotateAngleX = rightToeCurlAngle - 0.698132F;
-		this.toe_right_2.rotateAngleX = rightToeCurlAngle - 0.698132F;
-		this.toe_right_3.rotateAngleX = rightToeCurlAngle - 0.698132F;
-
 		this.beak_bottom.rotateAngleX = Math.abs(MathHelper.cos( ageInTicks * 0.05662F)) * 0.1f;
 
-
-		this.shoulder_left.rotateAngleX = leftSwingX * .1f;
-		this.shoulder_right.rotateAngleX = rightSwingX * .1f;
-
-		this.wing_left.rotateAngleX = leftSwingXLower * .1f;
-		this.wing_right.rotateAngleX = rightSwingXLower * .1f;
-
-
-		float wingSwayRange = 0.05f;
-
-		float crestRotate = MathHelper.cos(ageInTicks * 0.15662F) * wingSwayRange;
-
-		this.crest_left.rotateAngleX = crestRotate;
-		this.crest_right.rotateAngleX = crestRotate;
-		this.crest_left.rotateAngleY = -crestRotate;
-		this.crest_right.rotateAngleY = -crestRotate;
-
-		this.feather_left_1.rotateAngleZ = MathHelper.cos(ageInTicks * 0.15662F) * wingSwayRange;
-		this.feather_left_2.rotateAngleZ = MathHelper.cos((10.0F + ageInTicks) * 0.15662F) * wingSwayRange;
-		this.feather_right_1.rotateAngleZ = MathHelper.cos((20.0F + ageInTicks) * 0.15662F) * wingSwayRange;
-		this.feather_right_2.rotateAngleZ = MathHelper.cos((30.0F + ageInTicks) * 0.15662F) * wingSwayRange;
-
-		this.wing_left_feathers.rotateAngleZ = MathHelper.cos(ageInTicks * 0.15662F) * wingSwayRange;
-		this.wing_right_feathers.rotateAngleZ = MathHelper.cos(ageInTicks * 0.15662F) * wingSwayRange;
 	}
 
 	/**
