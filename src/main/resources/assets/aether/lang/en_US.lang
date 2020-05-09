@@ -577,6 +577,7 @@ cloudParachute.ability.blue=Fast Elevation
 moa.feathers=Feathers: %s
 moa.keratin=Keratin: %s
 moa.eyes=Eyes: %s
+moa.feather_type=Feather Shape: %s
 moa.wing_strength=Wing Strength: %s
 
 moa.keratin.sky_blue=Sky Blue
@@ -623,11 +624,9 @@ moa.feathers.puse=Puse
 moa.feathers.deep_red=Deep Red
 moa.feathers.red=Red
 
-moa.marks.spots=Spotted
-moa.marks.circles=Radial
-moa.marks.curves=Branched
-moa.marks.ladder=Zipline
-moa.marks.lines=Lined
+moa.marks.pointed=Pointed
+moa.marks.flat=Flat
+moa.marks.curved=Curved
 
 moa.wing_strength.weak=Weak
 moa.wing_strength.normal=Normal

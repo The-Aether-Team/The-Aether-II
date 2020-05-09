@@ -90,11 +90,14 @@ public class ItemMoaEgg extends Item implements IDropOnDeath
 			creativeList.add("\u2022 " + I18n.format("moa.feathers", genePool.getFeathers().gene().localizedName()));
 			creativeList.add("\u2022 " + I18n.format("moa.keratin", genePool.getKeratin().gene().localizedName()));
 			creativeList.add("\u2022 " + I18n.format("moa.eyes", genePool.getEyes().gene().localizedName()));
+			creativeList.add("\u2022 " + I18n.format("moa.feather_type", genePool.getMarks().gene().localizedName()));
 
 			creativeList.add("");
 
+			/*
 			creativeList.add(TextFormatting.YELLOW + "" + TextFormatting.ITALIC + "" + I18n
 					.format("moa.wing_strength", genePool.getWingStrength().gene().localizedName()));
+			 */
 		}
 	}
 
