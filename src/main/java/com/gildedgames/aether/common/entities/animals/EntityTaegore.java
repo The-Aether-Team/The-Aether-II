@@ -69,7 +69,7 @@ public class EntityTaegore extends EntityAetherAnimal implements IEntityMultiPar
 	{
 		super(world);
 
-		this.setSize(1.25F, 1.25F);
+		this.setSize(1.15F, 1.6F);
 
 		this.parts = new MultiPartEntityPart[] { this.head };
 		this.spawnableBlock = BlocksAether.aether_grass;

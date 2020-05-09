@@ -62,7 +62,7 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 		super(world);
 
 		this.parts = new MultiPartEntityPart[] { this.head };
-		this.setSize(1.5F, 1.9F);
+		this.setSize(1.25F, 1.9F);
 
 		this.spawnableBlock = BlocksAether.aether_grass;
 	}
