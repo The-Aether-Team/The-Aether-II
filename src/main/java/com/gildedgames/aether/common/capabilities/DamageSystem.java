@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.entity.damage.DamageTypeAttributes;
 import com.gildedgames.aether.api.entity.damage.IDamageLevelsHolder;
 import com.gildedgames.aether.api.entity.damage.IDefenseLevelsHolder;
 import com.gildedgames.aether.api.registrar.ItemsAether;
+import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerEquipmentModule;
 import com.gildedgames.aether.common.init.ParticlesAether;
@@ -27,9 +28,9 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 @Mod.EventBusSubscriber
 public class DamageSystem
 {
-    private static boolean blocked;
+    public static boolean blocked;
 
-    private static int timer;
+    public static int timer;
 
     @SubscribeEvent
     public static void onTick(TickEvent.WorldTickEvent event)
@@ -354,23 +355,6 @@ public class DamageSystem
                 }
 
                 handleSounds(target, slashDamage, pierceDamage, impactDamage, slashDefense, pierceDefense, impactDefense);
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public static void onSoundEvent(final PlaySoundEvent event)
-    {
-        if (blocked)
-        {
-            if (event.getName().equals(SoundEvents.ENTITY_PLAYER_ATTACK_CRIT.getSoundName().getPath()) ||
-                    event.getName().equals(SoundEvents.ENTITY_PLAYER_ATTACK_STRONG.getSoundName().getPath()) ||
-                    event.getName().equals(SoundEvents.ENTITY_PLAYER_ATTACK_KNOCKBACK.getSoundName().getPath()) ||
-                    event.getName().equals(SoundEvents.ENTITY_PLAYER_ATTACK_NODAMAGE.getSoundName().getPath()) ||
-                    event.getName().equals(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP.getSoundName().getPath()) ||
-                    event.getName().equals(SoundEvents.ENTITY_PLAYER_ATTACK_WEAK.getSoundName().getPath()))
-            {
-                event.setResultSound(null);
             }
         }
     }
