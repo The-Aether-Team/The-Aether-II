@@ -10,10 +10,15 @@ import net.minecraft.util.FoodStats;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
+
+import java.lang.reflect.Field;
 
 @Mod.EventBusSubscriber
 public class PlayerEatListener
 {
+    public static final Field saturationLevel = ReflectionHelper.findField(FoodStats.class, "foodSaturationLevel");
+
     @SubscribeEvent
     public static void onPlayerFinishFood(final LivingEntityUseItemEvent.Finish event)
     {
@@ -34,7 +39,11 @@ public class PlayerEatListener
 
                         float saturationValue = Math.min(foodStats.getSaturationLevel() + (float)food.getHealAmount(stack) * food.getSaturationModifier(stack) * 2.0F, (float)foodStats.getFoodLevel());
 
-                        foodStats.setFoodSaturationLevel(saturationValue * 2.0f);
+                        try
+                        {
+                            saturationLevel.set(foodStats, saturationValue);
+                        }
+                        catch (IllegalAccessException ignored) { }
                     }
                 }
             }
