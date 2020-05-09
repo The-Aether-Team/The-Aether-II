@@ -318,20 +318,28 @@ public class DamageSystem
             {
                 NetworkingAether
                         .sendPacketToDimension(new PacketParticles(ParticlesAether.SLASH, x, y, z, randX, 0.0D, randZ), target.dimension);
+                critSound(target);
             }
 
             if (pierceDamage > 0 && pierceDefense > 0.0F)
             {
                 NetworkingAether
                         .sendPacketToDimension(new PacketParticles(ParticlesAether.PIERCE, x, y, z, randX, 0.0D, randZ), target.dimension);
+                critSound(target);
             }
 
             if (impactDamage > 0 && impactDefense > 0.0F)
             {
                 NetworkingAether
                         .sendPacketToDimension(new PacketParticles(ParticlesAether.IMPACT, x, y, z, randX, 0.0D, randZ), target.dimension);
+                critSound(target);
             }
         }
+    }
+
+    public static void critSound(EntityLivingBase target)
+    {
+        target.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, 0.8F, 0.8F + target.world.rand.nextFloat() * 0.4F);
     }
 
     public static void blockSound(EntityLivingBase target, double slashDamage, double pierceDamage, double impactDamage, double slashDefense, double pierceDefense, double impactDefense)
