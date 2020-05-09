@@ -52,10 +52,8 @@ public class RenderBurrukai extends RenderLiving<EntityBurrukai>
 
 		if (globalInvisible || playerInvisible)
 		{
-			EyeUtil.renderEyes(this.renderManager, model, model.HeadEyeRight, model.HeadEyeLeft, entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw,
-					headPitch, scale,
-					PUPIL_LEFT,
-					PUPIL_RIGHT, EYES_CLOSED, false);
+			EyeUtil.renderEyesBasic(this.renderManager, model, entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale,
+					EYES_CLOSED);
 		}
 	}
 }

@@ -1,5 +1,6 @@
 package com.gildedgames.aether.client.models.entities.living;
 
+import com.gildedgames.aether.client.renderer.ModelBaseAether;
 import com.gildedgames.aether.common.entities.animals.EntityKirrid;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -9,7 +10,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.util.math.MathHelper;
 
-public class ModelKirrid extends ModelBase
+public class ModelKirrid extends ModelBaseAether
 {
 	public ModelRenderer BodyMain;
 	public ModelRenderer BodyBack;

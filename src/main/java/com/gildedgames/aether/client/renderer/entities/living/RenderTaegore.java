@@ -42,11 +42,8 @@ public class RenderTaegore extends RenderLiving<EntityTaegore>
 
 		if (globalInvisible || playerInvisible)
 		{
-
-			EyeUtil.renderEyes(this.renderManager, model, model.EyeRight, model.EyeLeft, entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw,
-					headPitch, scale,
-					PUPIL_LEFT,
-					PUPIL_RIGHT, EYES_CLOSED, false);
+			EyeUtil.renderEyesBasic(this.renderManager, model, entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale,
+					EYES_CLOSED);
 		}
 	}
 }

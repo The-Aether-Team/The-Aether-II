@@ -1,5 +1,6 @@
 package com.gildedgames.aether.client.models.entities.living;
 
+import com.gildedgames.aether.client.renderer.ModelBaseAether;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -10,7 +11,7 @@ import net.minecraft.util.math.MathHelper;
  * Burrukai.tcn - TechneToTabulaImporter
  * Created using Tabula 5.1.0
  */
-public class ModelBurrukai extends ModelBase
+public class ModelBurrukai extends ModelBaseAether
 {
 	public ModelRenderer Tail;
 	public ModelRenderer TorsoNeckJoint;

@@ -238,4 +238,44 @@ public class EyeUtil
 			throw new IllegalStateException("Entity " + entity + " does not implement IEntityEyesComponent");
 		}
 	}
+
+	public static <T extends ModelBaseAether> void renderEyesBasic(RenderManager renderManager, T model, EntityLivingBase entity, float limbSwing,
+																   float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale,
+																   ResourceLocation eyesClosed)
+	{
+		if (entity instanceof IEntityEyesComponentProvider)
+		{
+			IEntityEyesComponent info = ((IEntityEyesComponentProvider) entity).getEyes();
+
+			if (info.getTicksEyesClosed() <= 0)
+			{
+				GlStateManager.pushMatrix();
+
+				model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+
+				GlStateManager.popMatrix();
+
+				GlStateManager.pushMatrix();
+
+				model.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entity);
+				model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+
+				GlStateManager.popMatrix();
+			}
+			else
+			{
+				renderManager.renderEngine.bindTexture(eyesClosed);
+
+				GlStateManager.pushMatrix();
+
+				model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+
+				GlStateManager.popMatrix();
+			}
+		}
+		else
+		{
+			throw new IllegalStateException("Entity " + entity + " does not implement IEntityEyesComponent");
+		}
+	}
 }
