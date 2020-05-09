@@ -148,7 +148,10 @@ public class EntitySkyrootLizard extends EntityAetherAnimal
 
 				ItemStack itemStackLizard = new ItemStack(ItemsAether.skyroot_lizard_stick);
 
-				player.addItemStackToInventory(itemStackLizard);
+				if (!player.inventory.addItemStackToInventory(itemStackLizard))
+				{
+					player.dropItem(itemStackLizard, false);
+				}
 
 				if (player.isServerWorld())
 				{
