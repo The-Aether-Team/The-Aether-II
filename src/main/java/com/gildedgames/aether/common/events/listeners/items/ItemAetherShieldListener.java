@@ -75,8 +75,6 @@ public class ItemAetherShieldListener
 							buildup = (int) damage * 5;
 						}
 
-						System.out.println(buildup);
-
 						if (event.getSource().getImmediateSource() instanceof IDefenseLevelsHolder)
 						{
 							if (statusEffectPool != null)
@@ -194,6 +192,32 @@ public class ItemAetherShieldListener
 					for (IAetherStatusEffects effect : statusEffectPool.getPool().values())
 					{
 						if (effect.getEffectType() == IAetherStatusEffects.effectTypes.GUARD_BREAK)
+						{
+							effect.resetDecrease();
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@SubscribeEvent
+	public static void onEffectExist(final TickEvent.PlayerTickEvent event)
+	{
+		if (event.player != null)
+		{
+			IAetherStatusEffectPool statusEffectPool = event.player.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
+
+			if (statusEffectPool != null)
+			{
+				for (IAetherStatusEffects effect : statusEffectPool.getPool().values())
+				{
+					if (effect.getEffectType() == IAetherStatusEffects.effectTypes.GUARD_BREAK)
+					{
+						if (!(event.player.getHeldItemMainhand().getItem() instanceof ItemAetherShield)
+								&& !(event.player.getHeldItemOffhand().getItem() instanceof ItemAetherShield)
+								&& !(event.player.getHeldItemMainhand().getItem() instanceof ItemShield)
+								&& !(event.player.getHeldItemOffhand().getItem() instanceof ItemShield))
 						{
 							effect.resetDecrease();
 						}
