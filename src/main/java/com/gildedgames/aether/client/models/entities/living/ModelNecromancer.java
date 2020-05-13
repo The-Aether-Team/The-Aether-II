@@ -7,311 +7,145 @@ import net.minecraft.util.math.MathHelper;
 
 public class ModelNecromancer extends ModelBase
 {
-	public final ModelRenderer Torso1;
-
-	public final ModelRenderer Torso2;
-
-	public final ModelRenderer RightShoulder;
-
-	public final ModelRenderer LeftShoulder;
-
-	public final ModelRenderer Shoulders;
-
-	public final ModelRenderer Robes7;
-
-	public final ModelRenderer RightLeg1;
-
-	public final ModelRenderer LeftLeg1;
-
-	public final ModelRenderer Robes1;
-
-	public final ModelRenderer RightKnee;
-
-	public final ModelRenderer RightLeg2;
-
-	public final ModelRenderer RightAnkle;
-
-	public final ModelRenderer RightLeg3;
-
-	public final ModelRenderer RightFoot1;
-
-	public final ModelRenderer RightFoot2;
-
-	public final ModelRenderer LeftKnee;
-
-	public final ModelRenderer LeftLeg2;
-
-	public final ModelRenderer LeftAnkle;
-
-	public final ModelRenderer LeftLeg3;
-
-	public final ModelRenderer LeftFoot1;
-
-	public final ModelRenderer LeftFoot2;
-
-	public final ModelRenderer Robes2;
-
-	public final ModelRenderer Robes3;
-
-	public final ModelRenderer Robes4;
-
-	public final ModelRenderer RightArm1;
-
-	public final ModelRenderer RightElbow;
-
-	public final ModelRenderer Robes5;
-
-	public final ModelRenderer RightArm2;
-
-	public final ModelRenderer RightHand1;
-
-	public final ModelRenderer RightHand2;
-
-	public final ModelRenderer RightHand3;
-
-	public final ModelRenderer LeftArm1;
-
-	public final ModelRenderer LeftShoulder_1;
-
-	public final ModelRenderer Robes6;
-
-	public final ModelRenderer LeftArm2;
-
-	public final ModelRenderer LeftHand1;
-
-	public final ModelRenderer LeftHand2;
-
-	public final ModelRenderer Hood1;
-
-	public final ModelRenderer Hood2;
-
-	public final ModelRenderer Neck;
-
-	public final ModelRenderer Head;
-
-	public final ModelRenderer Hood3;
-
-	public final ModelRenderer Mask1;
-
-	public final ModelRenderer Mask2;
+	public ModelRenderer torso_top;
+	public ModelRenderer torso_bottom;
+	public ModelRenderer arm_left;
+	public ModelRenderer arm_right;
+	public ModelRenderer cowl_bottom;
+	public ModelRenderer cape;
+	public ModelRenderer head;
+	public ModelRenderer neck;
+	public ModelRenderer waist;
+	public ModelRenderer thigh_right;
+	public ModelRenderer thigh_left;
+	public ModelRenderer cape_bottom;
+	public ModelRenderer knee_right;
+	public ModelRenderer shin_right;
+	public ModelRenderer foot_right;
+	public ModelRenderer knee_left;
+	public ModelRenderer shin_left;
+	public ModelRenderer foot_left;
+	public ModelRenderer elbow_left;
+	public ModelRenderer arm_left_bottom;
+	public ModelRenderer elbow_right;
+	public ModelRenderer arm_right_bottom;
+	public ModelRenderer mask_bottom;
+	public ModelRenderer mask_top;
 
 	public ModelNecromancer()
 	{
-		this.textureWidth = 128;
-		this.textureHeight = 192;
-		this.Hood3 = new ModelRenderer(this, 0, 12);
-		this.Hood3.setRotationPoint(0.0F, -0.5F, 0.0F);
-		this.Hood3.addBox(-3.5F, -7.5F, -3.5F, 7, 10, 7, 0.0F);
-		this.Mask1 = new ModelRenderer(this, 0, 0);
-		this.Mask1.setRotationPoint(0.0F, -7.0F, -3.0F);
-		this.Mask1.addBox(-3.0F, 0.0F, -1.0F, 6, 4, 1, 0.0F);
-		this.Shoulders = new ModelRenderer(this, 0, 60);
-		this.Shoulders.setRotationPoint(0.0F, 0.7F, 0.0F);
-		this.Shoulders.addBox(-6.0F, -2.9F, -3.5F, 12, 3, 7, 0.0F);
-		this.Hood1 = new ModelRenderer(this, 0, 50);
-		this.Hood1.setRotationPoint(-3.0F, -4.0F, 0.0F);
-		this.Hood1.addBox(-5.0F, -2.0F, -2.3F, 6, 4, 6, 0.0F);
-		this.setRotateAngle(this.Hood1, 0.0F, 0.0F, -0.6108652381980153F);
-		this.Robes5 = new ModelRenderer(this, 0, 70);
-		this.Robes5.setRotationPoint(0.0F, 0.0F, 0.0F);
-		this.Robes5.addBox(-4.0F, -0.5F, -2.0F, 5, 5, 5, 0.0F);
-		this.LeftLeg1 = new ModelRenderer(this, 0, 150);
-		this.LeftLeg1.mirror = true;
-		this.LeftLeg1.setRotationPoint(2.5F, 7.0F, 0.0F);
-		this.LeftLeg1.addBox(-2.0F, -1.0F, -3.0F, 4, 9, 6, 0.0F);
-		this.setRotateAngle(this.LeftLeg1, 0.08726646259971647F, 0.0F, -0.08726646259971647F);
-		this.LeftAnkle = new ModelRenderer(this, 0, 182);
-		this.LeftAnkle.setRotationPoint(0.0F, 8.0F, 1.1F);
-		this.LeftAnkle.addBox(-2.0F, 0.0F, 0.0F, 4, 2, 2, 0.0F);
-		this.setRotateAngle(this.LeftAnkle, 0.0F, 0.0F, 0.08726646259971647F);
-		this.RightHand3 = new ModelRenderer(this, 0, 118);
-		this.RightHand3.setRotationPoint(-1.0F, 3.0F, 0.0F);
-		this.RightHand3.addBox(0.0F, 0.0F, -1.5F, 1, 3, 3, 0.0F);
-		this.setRotateAngle(this.RightHand3, 0.0F, 0.0F, -0.2617993877991494F);
-		this.RightLeg2 = new ModelRenderer(this, 0, 172);
-		this.RightLeg2.mirror = true;
-		this.RightLeg2.setRotationPoint(0.0F, 2.0F, -1.6F);
-		this.RightLeg2.addBox(-1.5F, 0.0F, -1.0F, 3, 7, 3, 0.0F);
-		this.setRotateAngle(this.RightLeg2, 0.3490658503988659F, 0.0F, 0.0F);
-		this.LeftShoulder = new ModelRenderer(this, 20, 80);
-		this.LeftShoulder.mirror = true;
-		this.LeftShoulder.setRotationPoint(4.5F, 0.0F, 0.0F);
-		this.LeftShoulder.addBox(-0.5F, 0.0F, -1.5F, 4, 4, 4, 0.0F);
-		this.setRotateAngle(this.LeftShoulder, 0.0F, 0.0F, -0.17453292519943295F);
-		this.Mask2 = new ModelRenderer(this, 0, 5);
-		this.Mask2.setRotationPoint(0.0F, 0.0F, 0.0F);
-		this.Mask2.addBox(-2.0F, 4.0F, -1.0F, 4, 2, 3, 0.0F);
-		this.Torso2 = new ModelRenderer(this, 0, 136);
-		this.Torso2.setRotationPoint(0.0F, 5.4F, 0.0F);
-		this.Torso2.addBox(-4.5F, -0.7F, -2.5F, 9, 9, 5, 0.0F);
-		this.setRotateAngle(this.Torso2, -0.17453292519943295F, 0.0F, 0.0F);
-		this.RightArm1 = new ModelRenderer(this, 0, 88);
-		this.RightArm1.setRotationPoint(-3.0F, 4.0F, -1.0F);
-		this.RightArm1.addBox(0.0F, 0.0F, 0.0F, 3, 5, 3, 0.0F);
-		this.LeftArm1 = new ModelRenderer(this, 20, 88);
-		this.LeftArm1.mirror = true;
-		this.LeftArm1.setRotationPoint(3.0F, 4.0F, -1.0F);
-		this.LeftArm1.addBox(-3.0F, 0.0F, 0.0F, 3, 5, 3, 0.0F);
-		this.LeftShoulder_1 = new ModelRenderer(this, 20, 97);
-		this.LeftShoulder_1.setRotationPoint(1.5F, 8.0F, 1.1F);
-		this.LeftShoulder_1.addBox(-1.3F, -0.5F, -2.0F, 3, 3, 4, 0.0F);
-		this.setRotateAngle(this.LeftShoulder_1, -0.3490658503988659F, 0.0F, 0.0F);
-		this.RightAnkle = new ModelRenderer(this, 0, 182);
-		this.RightAnkle.mirror = true;
-		this.RightAnkle.setRotationPoint(0.0F, 8.0F, 1.1F);
-		this.RightAnkle.addBox(-2.0F, 0.0F, 0.0F, 4, 2, 2, 0.0F);
-		this.setRotateAngle(this.RightAnkle, 0.0F, 0.0F, -0.08726646259971647F);
-		this.RightFoot1 = new ModelRenderer(this, 0, 186);
-		this.RightFoot1.mirror = true;
-		this.RightFoot1.setRotationPoint(0.0F, 1.6F, 0.3F);
-		this.RightFoot1.addBox(-2.0F, 0.0F, -3.5F, 4, 2, 4, 0.0F);
-		this.RightLeg3 = new ModelRenderer(this, 12, 165);
-		this.RightLeg3.mirror = true;
-		this.RightLeg3.setRotationPoint(0.0F, -0.8F, 3.0F);
-		this.RightLeg3.addBox(-1.3F, -0.0F, -1.5F, 3, 9, 3, 0.0F);
-		this.setRotateAngle(this.RightLeg3, -0.08726646259971647F, 0.0F, 0.0F);
-		this.RightShoulder = new ModelRenderer(this, 0, 80);
-		this.RightShoulder.setRotationPoint(-4.5F, 0.0F, 0.0F);
-		this.RightShoulder.addBox(-3.5F, 0.0F, -1.5F, 4, 4, 4, 0.0F);
-		this.setRotateAngle(this.RightShoulder, 0.0F, 0.0F, 0.17453292519943295F);
-		this.LeftHand2 = new ModelRenderer(this, 20, 113);
-		this.LeftHand2.setRotationPoint(0.0F, 0.0F, 0.0F);
-		this.LeftHand2.addBox(-1.0F, 0.7F, -1.5F, 2, 4, 3, 0.0F);
-		this.setRotateAngle(this.LeftHand2, 0.0F, 0.0F, 0.18203784098300857F);
-		this.LeftLeg2 = new ModelRenderer(this, 0, 172);
-		this.LeftLeg2.setRotationPoint(0.0F, 2.0F, -1.6F);
-		this.LeftLeg2.addBox(-1.5F, 0.0F, -1.0F, 3, 7, 3, 0.0F);
-		this.setRotateAngle(this.LeftLeg2, 0.3490658503988659F, 0.0F, 0.0F);
-		this.LeftArm2 = new ModelRenderer(this, 20, 104);
-		this.LeftArm2.setRotationPoint(0.0F, 2.5F, 0.0F);
-		this.LeftArm2.addBox(-1.5F, 0.0F, -1.4F, 3, 6, 3, 0.0F);
-		this.LeftFoot1 = new ModelRenderer(this, 0, 186);
-		this.LeftFoot1.setRotationPoint(0.0F, 1.6F, 0.3F);
-		this.LeftFoot1.addBox(-2.0F, 0.0F, -3.5F, 4, 2, 4, 0.0F);
-		this.Robes4 = new ModelRenderer(this, 44, 177);
-		this.Robes4.setRotationPoint(0.0F, 3.0F, 3.5F);
-		this.Robes4.addBox(1.0F, 0.0F, 0.0F, 4, 15, 0, 0.0F);
-		this.setRotateAngle(this.Robes4, 0.08726646259971647F, 0.0F, 0.0F);
-		this.Robes1 = new ModelRenderer(this, 26, 166);
-		this.Robes1.setRotationPoint(0.0F, 5.0F, 0.0F);
-		this.Robes1.addBox(-5.0F, 0.0F, -3.5F, 10, 3, 7, 0.0F);
-		this.Head = new ModelRenderer(this, 0, 29);
-		this.Head.setRotationPoint(0.0F, -1.2F, 0.0F);
-		this.Head.addBox(-3.0F, -6.1F, -3.0F, 6, 6, 6, 0.0F);
-		this.Robes7 = new ModelRenderer(this, 21, 0);
-		this.Robes7.setRotationPoint(0.0F, -2.4F, 0.0F);
-		this.Robes7.addBox(-8.5F, 0.0F, -4.0F, 17, 8, 8, 0.0F);
-		this.RightElbow = new ModelRenderer(this, 0, 97);
-		this.RightElbow.setRotationPoint(-1.5F, 8.0F, 1.1F);
-		this.RightElbow.addBox(-1.7F, -0.5F, -2.0F, 3, 3, 4, 0.0F);
-		this.setRotateAngle(this.RightElbow, -0.3490658503988659F, 0.0F, 0.0F);
-		this.Hood2 = new ModelRenderer(this, 24, 50);
-		this.Hood2.setRotationPoint(3.0F, -4.0F, 0.0F);
-		this.Hood2.addBox(-1.0F, -2.0F, -2.3F, 6, 4, 6, 0.0F);
-		this.setRotateAngle(this.Hood2, 0.0F, 0.0F, 0.6108652381980153F);
-		this.Robes6 = new ModelRenderer(this, 20, 70);
-		this.Robes6.setRotationPoint(0.0F, 0.0F, 0.0F);
-		this.Robes6.addBox(-1.0F, -0.5F, -2.0F, 5, 5, 5, 0.0F);
-		this.LeftLeg3 = new ModelRenderer(this, 12, 165);
-		this.LeftLeg3.setRotationPoint(0.0F, -0.8F, 3.0F);
-		this.LeftLeg3.addBox(-1.7F, -0.0F, -1.5F, 3, 9, 3, 0.0F);
-		this.setRotateAngle(this.LeftLeg3, -0.08726646259971647F, 0.0F, 0.0F);
-		this.LeftHand1 = new ModelRenderer(this, 30, 113);
-		this.LeftHand1.setRotationPoint(0.0F, 8.0F, 0.0F);
-		this.LeftHand1.addBox(-0.5F, 0.0F, -2.0F, 1, 1, 4, 0.0F);
-		this.Torso1 = new ModelRenderer(this, 0, 124);
-		this.Torso1.setRotationPoint(0.0F, -7.4F, 0.0F);
-		this.Torso1.addBox(-5.5F, 0.0F, -3.0F, 11, 6, 6, 0.0F);
-		this.setRotateAngle(this.Torso1, 0.08726646259971647F, 0.0F, 0.0F);
-		this.RightKnee = new ModelRenderer(this, 0, 165);
-		this.RightKnee.mirror = true;
-		this.RightKnee.setRotationPoint(0.0F, 7.6F, -1.3F);
-		this.RightKnee.addBox(-1.5F, -2.0F, -2.0F, 3, 4, 3, 0.0F);
-		this.RightFoot2 = new ModelRenderer(this, 16, 188);
-		this.RightFoot2.mirror = true;
-		this.RightFoot2.setRotationPoint(0.0F, 1.0F, 1.0F);
-		this.RightFoot2.addBox(-1.0F, 0.0F, -0.5F, 2, 1, 3, 0.0F);
-		this.RightArm2 = new ModelRenderer(this, 0, 104);
-		this.RightArm2.setRotationPoint(0.0F, 2.5F, 0.0F);
-		this.RightArm2.addBox(-1.0F, 0.0F, -1.5F, 2, 4, 3, 0.0F);
-		this.RightLeg1 = new ModelRenderer(this, 0, 150);
-		this.RightLeg1.setRotationPoint(-2.5F, 7.0F, 0.0F);
-		this.RightLeg1.addBox(-2.0F, -1.0F, -3.0F, 4, 9, 6, 0.0F);
-		this.setRotateAngle(this.RightLeg1, 0.08726646259971647F, 0.0F, 0.08726646259971647F);
-		this.Robes3 = new ModelRenderer(this, 36, 177);
-		this.Robes3.setRotationPoint(0.0F, 3.0F, 3.5F);
-		this.Robes3.addBox(-5.0F, 0.0F, 0.0F, 4, 15, 0, 0.0F);
-		this.setRotateAngle(this.Robes3, 0.08726646259971647F, 0.0F, 0.0F);
-		this.LeftFoot2 = new ModelRenderer(this, 16, 188);
-		this.LeftFoot2.setRotationPoint(0.0F, 1.0F, 1.0F);
-		this.LeftFoot2.addBox(-1.0F, 0.0F, -0.5F, 2, 1, 3, 0.0F);
-		this.LeftKnee = new ModelRenderer(this, 0, 165);
-		this.LeftKnee.setRotationPoint(0.0F, 7.6F, -1.3F);
-		this.LeftKnee.addBox(-1.5F, -2.0F, -2.0F, 3, 4, 3, 0.0F);
-		this.RightHand1 = new ModelRenderer(this, 0, 112);
-		this.RightHand1.setRotationPoint(0.0F, 5.5F, 0.0F);
-		this.RightHand1.addBox(-1.1F, 0.4F, -1.5F, 2, 3, 3, 0.0F);
-		this.setRotateAngle(this.RightHand1, 0.17453292519943295F, 0.08726646259971647F, -0.08726646259971647F);
-		this.RightHand2 = new ModelRenderer(this, 8, 120);
-		this.RightHand2.setRotationPoint(0.0F, 1.0F, -1.5F);
-		this.RightHand2.addBox(0.0F, -0.1F, -0.5F, 1, 3, 1, 0.0F);
-		this.setRotateAngle(this.RightHand2, -0.17453292519943295F, 0.0F, 0.0F);
-		this.Neck = new ModelRenderer(this, 0, 41);
-		this.Neck.setRotationPoint(0.0F, -3.0F, 0.0F);
-		this.Neck.addBox(-2.0F, -5.0F, -2.0F, 4, 5, 4, 0.0F);
-		this.Robes2 = new ModelRenderer(this, 26, 177);
-		this.Robes2.setRotationPoint(0.0F, 3.0F, -3.5F);
-		this.Robes2.addBox(-2.5F, 0.0F, 0.0F, 5, 15, 0, 0.0F);
-		this.setRotateAngle(this.Robes2, 0.08726646259971647F, 0.0F, 0.0F);
-		this.Neck.addChild(this.Hood3);
-		this.Neck.addChild(this.Mask1);
-		this.Torso1.addChild(this.Shoulders);
-		this.Shoulders.addChild(this.Hood1);
-		this.RightShoulder.addChild(this.Robes5);
-		this.Torso2.addChild(this.LeftLeg1);
-		this.LeftKnee.addChild(this.LeftAnkle);
-		this.RightHand1.addChild(this.RightHand3);
-		this.RightKnee.addChild(this.RightLeg2);
-		this.Torso1.addChild(this.LeftShoulder);
-		this.Mask1.addChild(this.Mask2);
-		this.Torso1.addChild(this.Torso2);
-		this.RightShoulder.addChild(this.RightArm1);
-		this.LeftShoulder.addChild(this.LeftArm1);
-		this.LeftShoulder.addChild(this.LeftShoulder_1);
-		this.RightKnee.addChild(this.RightAnkle);
-		this.RightAnkle.addChild(this.RightFoot1);
-		this.RightKnee.addChild(this.RightLeg3);
-		this.Torso1.addChild(this.RightShoulder);
-		this.LeftHand1.addChild(this.LeftHand2);
-		this.LeftKnee.addChild(this.LeftLeg2);
-		this.LeftShoulder_1.addChild(this.LeftArm2);
-		this.LeftAnkle.addChild(this.LeftFoot1);
-		this.Robes1.addChild(this.Robes4);
-		this.Torso2.addChild(this.Robes1);
-		this.Neck.addChild(this.Head);
-		this.Torso1.addChild(this.Robes7);
-		this.RightShoulder.addChild(this.RightElbow);
-		this.Shoulders.addChild(this.Hood2);
-		this.LeftShoulder.addChild(this.Robes6);
-		this.LeftKnee.addChild(this.LeftLeg3);
-		this.LeftShoulder_1.addChild(this.LeftHand1);
-		this.RightLeg1.addChild(this.RightKnee);
-		this.RightFoot1.addChild(this.RightFoot2);
-		this.RightElbow.addChild(this.RightArm2);
-		this.Torso2.addChild(this.RightLeg1);
-		this.Robes1.addChild(this.Robes3);
-		this.LeftFoot1.addChild(this.LeftFoot2);
-		this.LeftLeg1.addChild(this.LeftKnee);
-		this.RightElbow.addChild(this.RightHand1);
-		this.RightHand1.addChild(this.RightHand2);
-		this.Shoulders.addChild(this.Neck);
-		this.Robes1.addChild(this.Robes2);
-	}
+		this.textureWidth = 64;
+		this.textureHeight = 128;
+		this.thigh_right = new ModelRenderer(this, 0, 79);
+		this.thigh_right.setRotationPoint(-2.45F, 3.5F, 0.0F);
+		this.thigh_right.addBox(-2.0F, 0.0F, -2.0F, 4, 7, 4, 0.0F);
+		this.knee_left = new ModelRenderer(this, 0, 90);
+		this.knee_left.mirror = true;
+		this.knee_left.setRotationPoint(0.0F, 7.5F, 0.0F);
+		this.knee_left.addBox(-1.5F, -2.0F, -2.2F, 3, 4, 4, 0.0F);
+		this.waist = new ModelRenderer(this, 0, 70);
+		this.waist.setRotationPoint(0.0F, 4.0F, 0.0F);
+		this.waist.addBox(-4.5F, 0.0F, -2.5F, 9, 4, 5, 0.0F);
+		this.cape = new ModelRenderer(this, 0, 31);
+		this.cape.setRotationPoint(0.0F, 0.0F, 0.0F);
+		this.cape.addBox(-9.5F, -4.7F, -3.0F, 19, 12, 6, 0.0F);
+		this.neck = new ModelRenderer(this, 31, 16);
+		this.neck.setRotationPoint(0.0F, -6.0F, -1.5F);
+		this.neck.addBox(-2.5F, 0.0F, 0.0F, 5, 3, 3, 0.0F);
+		this.torso_top = new ModelRenderer(this, 0, 49);
+		this.torso_top.setRotationPoint(0.0F, -2.0F, 0.0F);
+		this.torso_top.addBox(-5.5F, -4.0F, -2.5F, 11, 8, 5, 0.0F);
+		this.arm_right_bottom = new ModelRenderer(this, 32, 67);
+		this.arm_right_bottom.setRotationPoint(0.0F, 2.0F, 0.5F);
+		this.arm_right_bottom.addBox(-2.0F, -0.5F, -2.0F, 4, 7, 4, 0.0F);
+		this.setRotateAngle(arm_right_bottom, -0.08726646259971647F, 0.0F, 0.0F);
+		this.elbow_right = new ModelRenderer(this, 32, 61);
+		this.elbow_right.setRotationPoint(-2.0F, 6.0F, 0.0F);
+		this.elbow_right.addBox(-1.5F, 0.0F, -0.25F, 3, 3, 3, 0.0F);
+		this.foot_left = new ModelRenderer(this, 0, 109);
+		this.foot_left.mirror = true;
+		this.foot_left.setRotationPoint(0.0F, 7.0F, -1.5F);
+		this.foot_left.addBox(-1.5F, -2.0F, -1.5F, 3, 2, 1, 0.0F);
+		this.torso_bottom = new ModelRenderer(this, 0, 62);
+		this.torso_bottom.setRotationPoint(0.0F, 4.0F, 0.0F);
+		this.torso_bottom.addBox(-4.0F, 0.0F, -2.0F, 8, 4, 4, 0.0F);
+		this.thigh_left = new ModelRenderer(this, 0, 79);
+		this.thigh_left.mirror = true;
+		this.thigh_left.setRotationPoint(2.45F, 3.5F, 0.0F);
+		this.thigh_left.addBox(-2.0F, 0.0F, -2.0F, 4, 7, 4, 0.0F);
+		this.shin_right = new ModelRenderer(this, 0, 98);
+		this.shin_right.setRotationPoint(0.0F, 0.0F, 0.0F);
+		this.shin_right.addBox(-2.01F, 0.0F, -2.0F, 4, 7, 4, 0.0F);
+		this.elbow_left = new ModelRenderer(this, 48, 61);
+		this.elbow_left.setRotationPoint(2.0F, 6.0F, 0.0F);
+		this.elbow_left.addBox(-1.5F, 0.0F, -0.25F, 3, 3, 3, 0.0F);
+		this.mask_bottom = new ModelRenderer(this, 0, 11);
+		this.mask_bottom.setRotationPoint(0.0F, 0.0F, 0.0F);
+		this.mask_bottom.addBox(-3.5F, -2.5F, -4.5F, 7, 3, 5, 0.0F);
+		this.cape_bottom = new ModelRenderer(this, 16, 79);
+		this.cape_bottom.setRotationPoint(0.0F, 4.0F, 0.0F);
+		this.cape_bottom.addBox(-4.5F, 0.0F, -2.5F, 9, 10, 5, 0.0F);
+		this.arm_left_bottom = new ModelRenderer(this, 48, 67);
+		this.arm_left_bottom.setRotationPoint(0.0F, 2.0F, 0.5F);
+		this.arm_left_bottom.addBox(-2.0F, -0.5F, -2.0F, 4, 7, 4, 0.0F);
+		this.setRotateAngle(arm_left_bottom, -0.08726646259971647F, 0.0F, 0.0F);
+		this.arm_left = new ModelRenderer(this, 32, 49);
+		this.arm_left.mirror = true;
+		this.arm_left.setRotationPoint(4.5F, -2.5F, 0.0F);
+		this.arm_left.addBox(0.01F, -1.0F, -2.0F, 4, 8, 4, 0.0F);
+		this.setRotateAngle(arm_left, 0.0F, 0.0F, -0.17453292519943295F);
+		this.cowl_bottom = new ModelRenderer(this, 0, 19);
+		this.cowl_bottom.setRotationPoint(0.0F, -3.5F, -3.5F);
+		this.cowl_bottom.addBox(-5.5F, -2.0F, -0.8F, 11, 3, 9, 0.0F);
+		this.setRotateAngle(cowl_bottom, 0.18203784098300857F, 0.0F, 0.0F);
+		this.shin_left = new ModelRenderer(this, 0, 98);
+		this.shin_left.mirror = true;
+		this.shin_left.setRotationPoint(0.0F, 0.0F, 0.0F);
+		this.shin_left.addBox(-2.0F, 0.0F, -2.0F, 4, 7, 4, 0.0F);
+		this.mask_top = new ModelRenderer(this, 0, 0);
+		this.mask_top.setRotationPoint(0.0F, 0.0F, 0.0F);
+		this.mask_top.addBox(-4.5F, -8.5F, -4.5F, 9, 6, 5, 0.0F);
+		this.arm_right = new ModelRenderer(this, 32, 49);
+		this.arm_right.setRotationPoint(-4.5F, -2.5F, 0.0F);
+		this.arm_right.addBox(-4.01F, -1.0F, -2.0F, 4, 8, 4, 0.0F);
+		this.setRotateAngle(arm_right, 0.0F, 0.0F, 0.17453292519943295F);
+		this.foot_right = new ModelRenderer(this, 0, 109);
+		this.foot_right.setRotationPoint(0.0F, 7.0F, -1.5F);
+		this.foot_right.addBox(-1.5F, -2.0F, -1.5F, 3, 2, 1, 0.0F);
+		this.head = new ModelRenderer(this, 28, 0);
+		this.head.setRotationPoint(0.0F, -5.0F, 0.0F);
+		this.head.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, 0.0F);
+		this.knee_right = new ModelRenderer(this, 0, 90);
+		this.knee_right.setRotationPoint(0.0F, 7.5F, 0.0F);
+		this.knee_right.addBox(-1.5F, -2.0F, -2.2F, 3, 4, 4, 0.0F);
+		this.waist.addChild(this.thigh_right);
+		this.thigh_left.addChild(this.knee_left);
+		this.torso_bottom.addChild(this.waist);
+		this.torso_top.addChild(this.cape);
+		this.torso_top.addChild(this.neck);
+		this.elbow_right.addChild(this.arm_right_bottom);
+		this.arm_right.addChild(this.elbow_right);
+		this.shin_left.addChild(this.foot_left);
+		this.torso_top.addChild(this.torso_bottom);
+		this.waist.addChild(this.thigh_left);
+		this.knee_right.addChild(this.shin_right);
+		this.arm_left.addChild(this.elbow_left);
+		this.head.addChild(this.mask_bottom);
+		this.waist.addChild(this.cape_bottom);
+		this.elbow_left.addChild(this.arm_left_bottom);
+		this.torso_top.addChild(this.arm_left);
+		this.torso_top.addChild(this.cowl_bottom);
+		this.knee_left.addChild(this.shin_left);
+		this.head.addChild(this.mask_top);
+		this.torso_top.addChild(this.arm_right);
+		this.shin_right.addChild(this.foot_right);
+		this.torso_top.addChild(this.head);
+		this.thigh_right.addChild(this.knee_right);	}
 
 	@Override
 	public void render(final Entity entity, final float f, final float f1, final float f2, final float f3, final float f4, final float f5)
 	{
-		this.Torso1.render(f5);
+		this.torso_top.render(f5);
 	}
 
 	/**
@@ -333,18 +167,18 @@ public class ModelNecromancer extends ModelBase
 		final float pitch = headPitch * 0.017453292F;
 		final float yaw = netHeadYaw * 0.017453292F;
 
-		this.Neck.rotateAngleX = pitch;
-		this.Neck.rotateAngleY = yaw;
+		this.head.rotateAngleX = pitch;
+		this.head.rotateAngleY = yaw;
 
 		final float leftSwingX = (MathHelper.cos(limbSwing * 0.6662F) * 0.75F * limbSwingAmount);
 		final float rightSwingX = (MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.75F * limbSwingAmount);
 
-		this.LeftLeg1.rotateAngleX = 0.08726646259971647F + leftSwingX;
+		this.thigh_left.rotateAngleX = 0.08726646259971647F + leftSwingX;
 
-		this.RightLeg1.rotateAngleX = 0.08726646259971647F + rightSwingX;
+		this.thigh_right.rotateAngleX = 0.08726646259971647F + rightSwingX;
 
-		this.LeftShoulder.rotateAngleX = leftSwingX;
+		this.arm_left.rotateAngleX = leftSwingX;
 
-		this.RightShoulder.rotateAngleX = rightSwingX;
+		this.arm_right.rotateAngleX = rightSwingX;
 	}
 }
