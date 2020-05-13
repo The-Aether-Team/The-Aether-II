@@ -406,6 +406,9 @@ public class RecipesAether
 				new ItemStack(ItemsAether.skyroot_pickaxe),
 				new ItemStack(ItemsAether.skyroot_shovel));
 
+		CoolerRecipes.instance().addCoolingFromItem(ItemsAether.skyroot_bucket, Item.getItemFromBlock(BlocksAether.aercloud), null,
+				new ItemStack(ItemsAether.skyroot_water_bucket));
+
 		CoolerRecipes.instance().addCoolingFromItem(ItemsAether.water_vial, ItemsAether.valkyrie_wings, null,
 				new ItemStack(ItemsAether.valkyrie_tea));
 
