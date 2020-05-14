@@ -5,6 +5,7 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerParachuteModule;
 import com.gildedgames.aether.common.entities.blocks.EntityParachute;
 import com.gildedgames.aether.common.items.IDropOnDeath;
+import com.gildedgames.aether.common.util.helpers.ItemHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -69,7 +70,7 @@ public class ItemCloudParachute extends Item implements IDropOnDeath
 				{
 					playerAether.getModule(PlayerParachuteModule.class).parachuteEquipped(true);
 
-					spawnParachute(playerAether, world, stack, parachute);
+					spawnParachute(playerAether, world, stack, parachute, hand);
 				}
 				else if (playerAether.getModule(PlayerParachuteModule.class).getParachuteType().ordinal() == stack.getMetadata())
 				{
@@ -79,23 +80,27 @@ public class ItemCloudParachute extends Item implements IDropOnDeath
 		}
 		else
 		{
-			spawnParachute(playerAether, world, stack, parachute);
-
-			playerAether.getModule(PlayerParachuteModule.class).getParachuteItem().shrink(1);
-
-			player.addItemStackToInventory(new ItemStack(ItemsAether.cloud_parachute));
+			spawnParachute(playerAether, world, stack, parachute, hand);
 		}
 
 		return super.onItemRightClick(world, player, hand);
 	}
 
-	public void spawnParachute(PlayerAether playerAether, World world, ItemStack stack, EntityParachute parachute)
+	public void spawnParachute(PlayerAether playerAether, World world, ItemStack stack, EntityParachute parachute, EnumHand hand)
 	{
+		ItemStack coldParachute = new ItemStack(ItemsAether.cloud_parachute);
+
 		playerAether.getModule(PlayerParachuteModule.class).setParachuting(true, EntityParachute.Type.fromOrdinal(stack.getMetadata()));
 
-		playerAether.getModule(PlayerParachuteModule.class).parachuteItem(stack);
-
 		world.spawnEntity(parachute);
+
+		stack.shrink(1);
+
+		playerAether.getModule(PlayerParachuteModule.class).parachuteItem(coldParachute);
+
+		playerAether.getEntity().replaceItemInInventory(playerAether.getEntity().inventory.currentItem, playerAether.getModule(PlayerParachuteModule.class).getParachuteItem());
+
+		playerAether.getModule(PlayerParachuteModule.class).parachuteItemSlot(playerAether.getEntity().inventory.currentItem);
 	}
 
 	@Override

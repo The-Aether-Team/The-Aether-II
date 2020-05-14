@@ -29,6 +29,8 @@ public class PlayerParachuteModule extends PlayerAetherModule implements IPlayer
 
 	private boolean prevAllowFlying;
 
+	private int parachuteItemSlot = -1;
+
 	public PlayerParachuteModule(final PlayerAether playerAether)
 	{
 		super(playerAether);
@@ -103,6 +105,16 @@ public class PlayerParachuteModule extends PlayerAetherModule implements IPlayer
 	public void parachuteItem(ItemStack stack)
 	{
 		this.parachuteItem = stack;
+	}
+
+	public int getParachuteItemSlot()
+	{
+		return this.parachuteItemSlot;
+	}
+
+	public void parachuteItemSlot(int slot)
+	{
+		this.parachuteItemSlot = slot;
 	}
 
 	public ItemStack getParachuteItem()

@@ -77,23 +77,14 @@ public class EntityParachute extends Entity
 
 			if (this.getType() == Type.COLD)
 			{
-				player.motionX *= 0.6;
 				player.motionY = -0.08;
-				player.motionZ *= 0.6;
 			}
 
 			if (this.getType() == Type.BLUE)
 			{
 				if (this.parachuteTimer <= blueParachuteAbilityTime)
 				{
-					player.motionX *= 0.6;
 					player.motionY = 1.08;
-					player.motionZ *= 0.6;
-				}
-				else if (this.parachuteTimer <= (blueParachuteAbilityTime + 18))
-				{
-					player.motionX *= 0.6;
-					player.motionZ *= 0.6;
 				}
 				else
 				{
@@ -129,6 +120,12 @@ public class EntityParachute extends Entity
 
 			if (!playerAether.getModule(PlayerParachuteModule.class).isParachuting() || playerAether.getModule(PlayerParachuteModule.class).getParachuteEquipped())
 			{
+				this.destroyParachute(playerAether);
+			}
+
+			if (player.inventory.getStackInSlot(playerAether.getModule(PlayerParachuteModule.class).getParachuteItemSlot()).isEmpty())
+			{
+				playerAether.getModule(PlayerParachuteModule.class).setParachuting(false, this.getType());
 				this.destroyParachute(playerAether);
 			}
 		}
