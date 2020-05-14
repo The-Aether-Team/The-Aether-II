@@ -209,7 +209,7 @@ public class DamageSystem
                 }
                 else
                 {
-                    float damageAmount = Math.max(event.getAmount() - 2.0F, 1.0F);
+                    float damageAmount = Math.max(event.getAmount() - 4.0F, 1.0F);
                     event.setAmount(damageAmount);
                 }
             }
@@ -257,7 +257,7 @@ public class DamageSystem
             }
             else
             {
-                float damageAmount = Math.max(event.getAmount() - 2.0F, 1.0F);
+                float damageAmount = Math.max(event.getAmount() - 4.0F, 1.0F);
                 event.setAmount(damageAmount);
             }
         }

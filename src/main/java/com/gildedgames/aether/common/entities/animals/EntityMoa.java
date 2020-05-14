@@ -253,11 +253,14 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 
 			if (healAmount != 0)
 			{
-				this.heal(healAmount);
-
-				if (!player.capabilities.isCreativeMode)
+				if (this.getHealth() < this.getMaxHealth())
 				{
-					stack.shrink(1);
+					this.heal(healAmount);
+
+					if (!player.capabilities.isCreativeMode)
+					{
+						stack.shrink(1);
+					}
 				}
 			}
 		}
@@ -873,7 +876,7 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 	@Override
 	public boolean canProcessMountInteraction(final EntityPlayer rider, final ItemStack stack)
 	{
-		return !this.isBreedingItem(stack) && (stack == null || stack.getItem() != Items.LEAD);
+		return !this.isBreedingItem(stack) && !(stack.getItem() instanceof ItemMoaFeed) && (stack == null || stack.getItem() != Items.LEAD);
 	}
 
 	@Override
