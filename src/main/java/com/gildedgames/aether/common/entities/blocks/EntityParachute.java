@@ -77,7 +77,14 @@ public class EntityParachute extends Entity
 
 			if (this.getType() == Type.COLD)
 			{
-				player.motionY = -0.08;
+				if (!player.isSneaking())
+				{
+					player.motionY = -0.08;
+				}
+				else
+				{
+					player.motionY = -0.24;
+				}
 			}
 
 			if (this.getType() == Type.BLUE)

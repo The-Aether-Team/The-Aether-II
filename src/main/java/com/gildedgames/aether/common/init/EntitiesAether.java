@@ -39,7 +39,7 @@ public class EntitiesAether
 		registerLivingEntityWithEgg(EntityZephyr.class, "zephyr", 0xb8b5ab, 0x988c65);
 		registerLivingEntityWithEgg(EntityTempest.class, "tempest", 0x3c464c, 0xc3e6f0);
 		registerLivingEntityWithEgg(EntitySwet.class, "swet", 0xCCFFFF, 0xCCCCFF);
-		registerLivingEntityWithEgg(EntityTaegore.class, "taegore", 0x607075, 0xbda54a);
+		registerLivingEntityWithEgg(EntityTaegore.class, "taegore", 0xd7e1e6, 0xedcd6e);
 		registerLivingEntityWithEgg(EntityGlitterwing.class, "glitterwing", 0x5368a9, 0x1a2341);
 		registerLivingEntityWithEgg(EntityEdison.class, "edison", 0xedc5b1, 0x788b7e);
 		registerLivingEntityWithEgg(EntityBurrukai.class, "burrukai", 0x435258, 0x548193);
