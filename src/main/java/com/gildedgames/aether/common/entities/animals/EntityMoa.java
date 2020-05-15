@@ -770,6 +770,13 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 	}
 
 	@Override
+	public boolean attackEntityFrom(DamageSource source, float amount)
+	{
+		Entity entity = source.getTrueSource();
+		return (!this.isBeingRidden() || entity == null || !this.isRidingOrBeingRiddenBy(entity)) && super.attackEntityFrom(source, amount);
+	}
+
+	@Override
 	public World getWorld()
 	{
 		return this.getEntityWorld();
