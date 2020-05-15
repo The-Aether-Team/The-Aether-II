@@ -1004,7 +1004,7 @@ ability.setAttackersOnFire.desc2=%s%% Chance
 ability.attackSpeedMod.desc=%s Attack Speed
 
 # Tabs
-tab.guidebook=Traveler's Guidebook
+tab.guidebook=Aether II
 tab.guidebook.equipment=Equipment
 tab.guidebook.status=Status
 tab.guidebook.loretome=Lore Tome
