@@ -12,10 +12,10 @@
         "tag": "bestiary",
         "type": "bestiary_page",
         "entityId": "aether:burrukai",
-        "silhouetteTexture": "aether:textures/discoveries/bestiary/placeholder/silhouette.png",
-        "discoveredTexture": "aether:textures/discoveries/bestiary/placeholder/discovered.png",
-        "silhouetteSlotTexture": "aether:textures/discoveries/bestiary/placeholder/silhouette_slot.png",
-        "discoveredSlotTexture": "aether:textures/discoveries/bestiary/placeholder/discovered_slot.png",
+        "silhouetteTexture": "aether:textures/discoveries/bestiary/burrukai/silhouette.png",
+        "discoveredTexture": "aether:textures/discoveries/bestiary/burrukai/discovered.png",
+        "silhouetteSlotTexture": "aether:textures/discoveries/bestiary/burrukai/silhouette_slot.png",
+        "discoveredSlotTexture": "aether:textures/discoveries/bestiary/burrukai/discovered_slot.png",
         "description": "aether.placeholder.discovery.description"
       }
     }

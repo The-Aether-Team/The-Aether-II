@@ -12,10 +12,10 @@
         "tag": "bestiary",
         "type": "bestiary_page",
         "entityId": "aether:aerbunny",
-        "silhouetteTexture": "aether:textures/discoveries/bestiary/placeholder/silhouette.png",
-        "discoveredTexture": "aether:textures/discoveries/bestiary/placeholder/discovered.png",
-        "silhouetteSlotTexture": "aether:textures/discoveries/bestiary/placeholder/silhouette_slot.png",
-        "discoveredSlotTexture": "aether:textures/discoveries/bestiary/placeholder/discovered_slot.png",
+        "silhouetteTexture": "aether:textures/discoveries/bestiary/aerbunny/silhouette.png",
+        "discoveredTexture": "aether:textures/discoveries/bestiary/aerbunny/discovered.png",
+        "silhouetteSlotTexture": "aether:textures/discoveries/bestiary/aerbunny/silhouette_slot.png",
+        "discoveredSlotTexture": "aether:textures/discoveries/bestiary/aerbunny/discovered_slot.png",
         "description": "aether.placeholder.discovery.description"
       }
     }
