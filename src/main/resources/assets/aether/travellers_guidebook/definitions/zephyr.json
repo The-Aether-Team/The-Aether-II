@@ -14,8 +14,8 @@
         "entityId": "aether:zephyr",
         "silhouetteTexture": "aether:textures/discoveries/bestiary/placeholder/silhouette.png",
         "discoveredTexture": "aether:textures/discoveries/bestiary/placeholder/discovered.png",
-        "silhouetteSlotTexture": "aether:textures/discoveries/bestiary/placeholder/silhouette_slot.png",
-        "discoveredSlotTexture": "aether:textures/discoveries/bestiary/placeholder/discovered_slot.png",
+        "silhouetteSlotTexture": "aether:textures/discoveries/bestiary/zephyr/silhouette_slot.png",
+        "discoveredSlotTexture": "aether:textures/discoveries/bestiary/zephyr/discovered_slot.png",
         "description": "aether.placeholder.discovery.description"
       }
     }
