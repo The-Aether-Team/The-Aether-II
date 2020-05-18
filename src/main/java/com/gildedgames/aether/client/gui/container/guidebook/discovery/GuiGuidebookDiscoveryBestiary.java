@@ -3,6 +3,7 @@ package com.gildedgames.aether.client.gui.container.guidebook.discovery;
 import com.gildedgames.aether.api.cache.IEntityStats;
 import com.gildedgames.aether.api.travellers_guidebook.ITGManager;
 import com.gildedgames.aether.client.gui.container.guidebook.discovery.stats.GuiStat;
+import com.gildedgames.aether.client.gui.misc.GuiScrollableGuidebook;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.travellers_guidebook.entries.TGEntryBestiaryPage;
@@ -10,7 +11,6 @@ import com.gildedgames.orbis.lib.client.gui.data.Text;
 import com.gildedgames.orbis.lib.client.gui.util.GuiText;
 import com.gildedgames.orbis.lib.client.gui.util.GuiTextBox;
 import com.gildedgames.orbis.lib.client.gui.util.GuiTexture;
-import com.gildedgames.orbis.lib.client.gui.util.decorators.GuiScrollable;
 import com.gildedgames.orbis.lib.client.gui.util.gui_library.*;
 import com.gildedgames.orbis.lib.client.rect.Dim2D;
 import com.gildedgames.orbis.lib.client.rect.Pos2D;
@@ -53,7 +53,7 @@ public class GuiGuidebookDiscoveryBestiary extends GuiGuidebookDiscovery
 
 	private GuiTextBox beastDescription;
 
-	private GuiScrollable statsArea;
+	private GuiScrollableGuidebook statsArea;
 
 	public GuiGuidebookDiscoveryBestiary(final IGuiViewer prevViewer, final PlayerAether aePlayer)
 	{
@@ -178,10 +178,10 @@ public class GuiGuidebookDiscoveryBestiary extends GuiGuidebookDiscovery
 						0.65F));
 
 		// Empty stats scroll until click on entry
-		this.statsArea = new GuiScrollable(new GuiElement(Dim2D.build().x(screenX + 25).y(screenY + 114).flush(), false),
-				Dim2D.build().width(52 + 15).height(56).flush(), true);
+		this.statsArea = new GuiScrollableGuidebook(new GuiElement(Dim2D.build().x(screenX + 25).y(screenY + 114).flush(), false),
+				Dim2D.build().width(52 + 8).height(56).flush(), true);
 
-		final Rect beastDescriptionScrollArea = Dim2D.build().width(52 + 15).height(73).flush();
+		final Rect beastDescriptionScrollArea = Dim2D.build().width(52 + 9).height(73).flush();
 
 		final GuiTexture rightPage = new GuiTexture(Dim2D.build().width(this.PAGE_WIDTH).height(this.PAGE_HEIGHT).x(screenX).y(screenY).flush(),
 				RIGHT_PAGE_MOB);
@@ -194,7 +194,7 @@ public class GuiGuidebookDiscoveryBestiary extends GuiGuidebookDiscovery
 		return Lists.newArrayList(rightPage,
 				this.beastFrame,
 				this.beastTitle,
-				new GuiScrollable(this.beastDescription, beastDescriptionScrollArea, true),
+				new GuiScrollableGuidebook(this.beastDescription, beastDescriptionScrollArea, true),
 				stats,
 				moves,
 				this.statsArea);

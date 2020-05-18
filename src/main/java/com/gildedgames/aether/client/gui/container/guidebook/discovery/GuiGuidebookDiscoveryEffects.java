@@ -6,9 +6,9 @@ import net.minecraft.client.gui.GuiButton;
 
 import java.io.IOException;
 
-public class GuiGuidebookDiscoveryStructures extends GuiGuidebookDiscovery
+public class GuiGuidebookDiscoveryEffects extends GuiGuidebookDiscovery
 {
-	public GuiGuidebookDiscoveryStructures(final IGuiViewer prevViewer, final PlayerAether aePlayer)
+	public GuiGuidebookDiscoveryEffects(final IGuiViewer prevViewer, final PlayerAether aePlayer)
 	{
 		super(prevViewer, aePlayer);
 	}

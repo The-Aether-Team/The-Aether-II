@@ -19,7 +19,9 @@ public class DiscoveryTab extends GuiAbstractButton
 
 	private final DiscoveryTabType type;
 
-	public DiscoveryTab(final Pos2D pos, final DiscoveryTabType type, final DiscoveryTabType selectedType)
+	private ResourceLocation icon;
+
+	public DiscoveryTab(final Pos2D pos, final DiscoveryTabType type, final DiscoveryTabType selectedType, final ResourceLocation icon)
 	{
 		super(Dim2D.build().width(32).height(20).pos(pos).flush(),
 				new GuiTexture(Dim2D.build().width(32).height(20).flush(), TEXTURE),
@@ -28,10 +30,22 @@ public class DiscoveryTab extends GuiAbstractButton
 
 		this.type = type;
 
+		this.icon = icon;
+
 		if (type == selectedType)
 		{
 			this.setSelected(true);
 		}
+	}
+
+	@Override
+	public void build()
+	{
+		super.build();
+
+		GuiTexture icon = new GuiTexture(Dim2D.build().width(22).height(16).x(5).y(3).flush(), this.icon);
+
+		this.context().addChildren(icon);
 	}
 
 	public DiscoveryTabType getType()
@@ -49,23 +63,26 @@ public class DiscoveryTab extends GuiAbstractButton
 					{
 						return new GuiGuidebookDiscoveryBestiary(null, playerAether);
 					}
-				}, BIOMES
-			{
-				@Override
-				@SideOnly(Side.CLIENT)
-				public GuiContainer createPageContainer(final PlayerAether playerAether)
+				},
+		EFFECTS
 				{
-					return new GuiGuidebookDiscoveryBiomes(null, playerAether);
-				}
-			}, STRUCTURES
-			{
-				@Override
-				@SideOnly(Side.CLIENT)
-				public GuiContainer createPageContainer(final PlayerAether playerAether)
+					@Override
+					@SideOnly(Side.CLIENT)
+					public GuiContainer createPageContainer(final PlayerAether playerAether)
+					{
+						return new GuiGuidebookDiscoveryEffects(null, playerAether);
+					}
+				},
+		LANDMARKS
 				{
-					return new GuiGuidebookDiscoveryStructures(null, playerAether);
-				}
-			}, CHARACTERS
+					@Override
+					@SideOnly(Side.CLIENT)
+					public GuiContainer createPageContainer(final PlayerAether playerAether)
+					{
+						return new GuiGuidebookDiscoveryLandmarks(null, playerAether);
+					}
+				},
+		CHARACTERS
 			{
 				@Override
 				@SideOnly(Side.CLIENT)

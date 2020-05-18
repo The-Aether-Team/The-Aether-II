@@ -39,7 +39,7 @@ public class BestiarySlot extends GuiAbstractButton
 
 		final ResourceLocation texture = this.page.isUnlocked(this.playerAether) ? this.discovered : this.silhouette;
 
-		this.icon = new GuiTexture(Dim2D.build().width(16).height(16).x(1).y(1).flush(), texture);
+		this.icon = new GuiTexture(Dim2D.build().width(16).height(16).x(2).y(2).flush(), texture);
 
 		this.context().addChildren(this.icon);
 	}

@@ -6,6 +6,8 @@ import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerEquipmentModule;
 import com.gildedgames.aether.common.containers.guidebook.ContainerGuidebookInventory;
 import com.gildedgames.aether.common.containers.slots.SlotEquipment;
+import com.gildedgames.orbis.lib.client.gui.data.Text;
+import com.gildedgames.orbis.lib.client.gui.util.GuiText;
 import com.gildedgames.orbis.lib.client.gui.util.GuiTexture;
 import com.gildedgames.orbis.lib.client.gui.util.gui_library.IGuiElement;
 import com.gildedgames.orbis.lib.client.gui.util.gui_library.IGuiViewer;
@@ -16,6 +18,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Slot;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import org.apache.commons.lang3.StringUtils;
 
@@ -64,7 +67,10 @@ public class GuiGuidebookInventory extends AbstractGuidebookPage
 		final GuiTexture leftPage = new GuiTexture(Dim2D.build().width(this.PAGE_WIDTH).height(this.PAGE_HEIGHT).x(screenX).y(screenY).flush(),
 				LEFT_PAGE);
 
-		return Lists.newArrayList(leftPage);
+		final GuiText header = new GuiText(Dim2D.build().x(screenX + 64).y(screenY + 13).flush(),
+				new Text(new TextComponentTranslation("tab.guidebook.equipment"), 1.0F));
+
+		return Lists.newArrayList(leftPage, header);
 	}
 
 	@Override
