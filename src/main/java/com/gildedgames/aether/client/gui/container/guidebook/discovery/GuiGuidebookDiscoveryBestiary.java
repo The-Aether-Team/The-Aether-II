@@ -95,6 +95,15 @@ public class GuiGuidebookDiscoveryBestiary extends GuiGuidebookDiscovery
 		return statsElement;
 	}
 
+	private IGuiElement resetStats(final TGEntryBestiaryPage page)
+	{
+		final IGuiElement statsElement = new GuiElement(Dim2D.build().width(52).flush(), false);
+
+		statsElement.build(this);
+
+		return statsElement;
+	}
+
 	@Override
 	protected List<IGuiElement> createLeftPage(final int screenX, final int screenY, final float u, final float v) {
 		List<IGuiElement> elements = super.createLeftPage(screenX, screenY, u, v);
@@ -133,6 +142,14 @@ public class GuiGuidebookDiscoveryBestiary extends GuiGuidebookDiscovery
 
 				if (isUnderstood) {
 					final IGuiElement statsContent = this.buildStats(page);
+
+					statsContent.dim().mod().pos(this.statsArea.dim().min()).flush();
+
+					this.statsArea.setDecorated(statsContent);
+				}
+				else
+				{
+					final IGuiElement statsContent = this.resetStats(page);
 
 					statsContent.dim().mod().pos(this.statsArea.dim().min()).flush();
 
