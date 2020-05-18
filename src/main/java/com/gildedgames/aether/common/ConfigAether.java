@@ -24,13 +24,9 @@ public class ConfigAether
 	@Config.Comment("")
 	public static boolean skipIntro = true;
 
-	@Config.LangKey(LANG_PREFIX + "enable_skybox." + "name")
-	@Config.Comment("")
-	public static boolean enableSkybox = true;
-
-	@Config.LangKey(LANG_PREFIX + "display_inventory_pattern." + "name")
-	@Config.Comment("")
-	public static boolean displayInventoryPattern = true;
+	//@Config.LangKey(LANG_PREFIX + "enable_skybox." + "name")
+	//@Config.Comment("")
+	//public static boolean enableSkybox = true;
 
 	@Config.LangKey(LANG_PREFIX + "cutout_helmets." + "name")
 	@Config.Comment("")

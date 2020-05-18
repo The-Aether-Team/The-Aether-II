@@ -31,11 +31,6 @@ public class RenderWorldSkybox extends IRenderHandler
 	@Override
 	public void render(float partialTicks, WorldClient world, Minecraft mc)
 	{
-		if (!AetherCore.CONFIG.enableSkybox)
-		{
-			return;
-		}
-
 		if (this.texture == null)
 		{
 			mc.getTextureManager().loadTexture(TEXTURE_SKYBOX, this.texture = new SimpleDXT1Texture(TEXTURE_SKYBOX));
