@@ -84,23 +84,6 @@ public class CommonProxy implements IAetherServices
 	{
 		this.contentRegistry.init();
 
-		this.contentRegistry.tgManager().registerEntry(new ResourceLocation("aether:aechor_plant"));
-		this.contentRegistry.tgManager().registerEntry(new ResourceLocation("aether:aerbunny"));
-		this.contentRegistry.tgManager().registerEntry(new ResourceLocation("aether:burrukai"));
-		this.contentRegistry.tgManager().registerEntry(new ResourceLocation("aether:carrion_sprout"));
-		this.contentRegistry.tgManager().registerEntry(new ResourceLocation("aether:cockatrice"));
-		this.contentRegistry.tgManager().registerEntry(new ResourceLocation("aether:glactrix"));
-		this.contentRegistry.tgManager().registerEntry(new ResourceLocation("aether:glitterwing"));
-		this.contentRegistry.tgManager().registerEntry(new ResourceLocation("aether:kirrid"));
-		this.contentRegistry.tgManager().registerEntry(new ResourceLocation("aether:moa"));
-		this.contentRegistry.tgManager().registerEntry(new ResourceLocation("aether:sheepuff"));
-		this.contentRegistry.tgManager().registerEntry(new ResourceLocation("aether:skyroot_lizard"));
-		this.contentRegistry.tgManager().registerEntry(new ResourceLocation("aether:swet"));
-		this.contentRegistry.tgManager().registerEntry(new ResourceLocation("aether:taegore"));
-		this.contentRegistry.tgManager().registerEntry(new ResourceLocation("aether:tempest"));
-		this.contentRegistry.tgManager().registerEntry(new ResourceLocation("aether:varanys"));
-		this.contentRegistry.tgManager().registerEntry(new ResourceLocation("aether:zephyr"));
-
 		MinecraftForge.EVENT_BUS.register(AetherCore.CONFIG);
 }
 

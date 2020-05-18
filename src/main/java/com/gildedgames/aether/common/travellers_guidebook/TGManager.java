@@ -214,6 +214,9 @@ public class TGManager implements ITGManager
 	@SideOnly(Side.CLIENT)
 	public void attachReloadListener()
 	{
+		StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
+		System.out.println(Arrays.toString(stackTraceElements));
+
 		final IResourceManager resManager = Minecraft.getMinecraft().getResourceManager();
 
 		if (resManager instanceof IReloadableResourceManager)

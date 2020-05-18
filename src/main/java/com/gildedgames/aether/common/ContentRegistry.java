@@ -91,6 +91,7 @@ public class ContentRegistry implements IContentRegistry, IOrbisServicesListener
 		PerfHelper.measure("Pre-initialize entities", EntitiesAether::preInit);
 		PerfHelper.measure("Pre-initialize networking", NetworkingAether::preInit);
 		PerfHelper.measure("Pre-initialize patron rewards", PatronRewards::preInit);
+		PerfHelper.measure("Pre-initialize definitions", DefinitionsAetherInit::preInit);
 
 		this.tabRegistry.getInventoryGroup().registerServerTab(new TabGuidebook());
 		//this.tabRegistry.getInventoryGroup().registerServerTab(new TabBugReport());
