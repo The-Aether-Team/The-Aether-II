@@ -16,39 +16,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class ItemGlovesListener
 {
     @SubscribeEvent
-    public static void onEntityAttacked(final LivingAttackEvent event)
-    {
-        if (!(event.getEntityLiving() instanceof EntityPlayer))
-        {
-            return;
-        }
-
-        final EntityPlayer player = (EntityPlayer) event.getEntityLiving();
-        final PlayerAether playerAether = PlayerAether.getPlayer(player);
-
-        final IInventoryEquipment equipmentInventory = playerAether.getModule(PlayerEquipmentModule.class).getInventory();
-
-        final ItemStack gloveStack = equipmentInventory.getStackInSlot(2);
-
-        if (gloveStack.getItem() instanceof ItemAetherGloves && !gloveStack.isEmpty())
-        {
-            final float damage = event.getAmount();
-
-            if (!event.getSource().isUnblockable() && damage >= 4.0f)
-            {
-                gloveStack.damageItem(1, player);
-
-                if (gloveStack.getItem().getDamage(gloveStack) < 0)
-                {
-                    equipmentInventory.setInventorySlotContents(2, ItemStack.EMPTY);
-
-                    player.playSound(SoundEvents.ENTITY_ITEM_BREAK, 0.8F, 0.8F + player.world.rand.nextFloat() * 0.4F);
-                }
-            }
-        }
-    }
-
-    @SubscribeEvent
     public static void onPlayerAttack(final AttackEntityEvent event)
     {
         if (!(event.getEntityLiving() instanceof EntityPlayer))
