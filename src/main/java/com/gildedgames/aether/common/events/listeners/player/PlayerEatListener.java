@@ -52,7 +52,5 @@ public class PlayerEatListener
                 }
             }
         }
-
-        System.out.println(((EntityPlayer) Objects.requireNonNull(event.getEntityLiving())).getFoodStats().getSaturationLevel());
     }
 }
