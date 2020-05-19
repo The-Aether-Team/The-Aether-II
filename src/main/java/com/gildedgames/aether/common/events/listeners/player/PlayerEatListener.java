@@ -9,15 +9,17 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.FoodStats;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 import java.lang.reflect.Field;
+import java.util.Objects;
 
 @Mod.EventBusSubscriber
 public class PlayerEatListener
 {
-    public static final Field saturationLevel = ReflectionHelper.findField(FoodStats.class, "foodSaturationLevel");
+    public static final Field saturationLevel = ObfuscationReflectionHelper.findField(FoodStats.class, "foodSaturationLevel");
 
     @SubscribeEvent
     public static void onPlayerFinishFood(final LivingEntityUseItemEvent.Finish event)
@@ -48,5 +50,7 @@ public class PlayerEatListener
                 }
             }
         }
+
+        System.out.println(((EntityPlayer) Objects.requireNonNull(event.getEntityLiving())).getFoodStats().getSaturationLevel());
     }
 }
