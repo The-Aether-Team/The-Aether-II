@@ -34,7 +34,7 @@ public class PlayerEatListener
                 {
                     if (event.getItem().getItem() instanceof ItemFood)
                     {
-                        final Field saturationLevel = ReflectionHelper.findField(FoodStats.class, "foodSaturationLevel", "field_149335_c");
+                        final Field saturationLevel = ReflectionHelper.findField(FoodStats.class, "foodSaturationLevel", "field_75125_b");
 
                         ItemStack stack = event.getItem();
                         EntityPlayer player = (EntityPlayer) event.getEntityLiving();
