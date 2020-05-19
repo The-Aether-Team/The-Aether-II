@@ -19,8 +19,6 @@ import java.util.Objects;
 @Mod.EventBusSubscriber
 public class PlayerEatListener
 {
-    public static final Field saturationLevel = ObfuscationReflectionHelper.findField(FoodStats.class, "foodSaturationLevel");
-
     @SubscribeEvent
     public static void onPlayerFinishFood(final LivingEntityUseItemEvent.Finish event)
     {
@@ -34,6 +32,8 @@ public class PlayerEatListener
                 {
                     if (event.getItem().getItem() instanceof ItemFood)
                     {
+                        final Field saturationLevel = ObfuscationReflectionHelper.findField(FoodStats.class, "foodSaturationLevel");
+
                         ItemStack stack = event.getItem();
                         EntityPlayer player = (EntityPlayer) event.getEntityLiving();
                         FoodStats foodStats = player.getFoodStats();
