@@ -169,6 +169,7 @@ public class EntityAechorPlant extends EntityAetherMob
 		}
 	}
 
+	/*
 	@Override
 	protected void damageEntity(DamageSource damageSrc, float damageAmount)
 	{
@@ -197,6 +198,15 @@ public class EntityAechorPlant extends EntityAetherMob
 				}
 			}
 		}
+	}
+	 */
+
+	@Override
+	public void onDeath(DamageSource cause)
+	{
+		super.onDeath(cause);
+
+		Block.spawnAsEntity(this.world, this.getPosition(), new ItemStack(ItemsAether.aechor_petal, 5));
 	}
 
 	private int getRandomPetal(boolean state)
