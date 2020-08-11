@@ -23,13 +23,29 @@ public class PlayerWakeListener
 
 			final WorldServer worldServer = server.getWorld(0);
 
-			if (world.getGameRules().getBoolean("doDaylightCycle") && event.getEntityPlayer().isPlayerFullyAsleep())
+			if (worldServer.playerEntities.size() > 0)
 			{
-				final long i = worldServer.getWorldInfo().getWorldTime() + 24000L;
-
-				worldServer.getWorldInfo().setWorldTime(i - i % 24000L);
+				if (worldServer.areAllPlayersAsleep())
+				{
+					performTimeSet(event, world, worldServer);
+				}
+			}
+			else
+			{
+				performTimeSet(event, world, worldServer);
 			}
 		}
 	}
+
+	public static void performTimeSet(PlayerWakeUpEvent event, World world, WorldServer worldServer)
+	{
+		if (world.getGameRules().getBoolean("doDaylightCycle") && event.getEntityPlayer().isPlayerFullyAsleep())
+		{
+			final long i = worldServer.getWorldInfo().getWorldTime() + 24000L;
+
+			worldServer.getWorldInfo().setWorldTime(i - i % 24000L);
+		}
+	}
+
 
 }
