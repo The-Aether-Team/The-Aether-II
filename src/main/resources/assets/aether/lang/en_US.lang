@@ -1342,3 +1342,6 @@ config.aether.display_performance_indicator.name=Display Performance Indicator
 config.aether.analytics_enabled.name=Enable Analytics (client-side only)
 config.aether.fingerprint_violation.name=Acknowledge Fingerprint Violation
 config.aether.aerwhale_riding.name=Rideable Aerwhales
+
+lore.aether.splint=Aether II test.
+lore.aether_legacy.sun_altar=compat test.
