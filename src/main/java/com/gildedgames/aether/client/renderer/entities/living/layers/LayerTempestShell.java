@@ -42,6 +42,6 @@ public class LayerTempestShell implements LayerRenderer<EntityTempest> {
 
     @Override
     public boolean shouldCombineTextures() {
-        return false;
+        return true;
     }
 }
