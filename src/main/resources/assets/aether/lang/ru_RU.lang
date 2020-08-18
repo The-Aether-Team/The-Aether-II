@@ -13,10 +13,10 @@ tile.aether.aercloud.cold.name=Холодное эфирное облако
 tile.aether.aercloud.blue.name=Синее эфирное облако
 tile.aether.aercloud.green.name=Зелёное эфирное облако
 tile.aether.aercloud.golden.name=Золотое эфирное облако
-tile.aether.aercloud.storm.name=Грозовая эфирное облако
+tile.aether.aercloud.storm.name=Грозовое эфирное облако
 tile.aether.aercloud.purple.name=Фиолетовое эфирное облако
 tile.aether.skyroot_log.name=Древесина из небесного корня
-tile.aether.dark_skyroot_log.name=Древесина великого корня
+tile.aether.dark_skyroot_log.name=Древесина из великого корня
 tile.aether.light_skyroot_log.name=Древесина из мерцающего корня
 tile.aether.golden_oak_log.name=Древесина из янтарного корня
 tile.aether.ambrosium_ore.name=Амброзиумная руда
@@ -1134,11 +1134,11 @@ edison.greet.expecting3=Тогда... что мне нужно Вам объяс
 
 edison.greet.option.no_we_talked=Нет, мы разговаривали. Вы... Эдисон, верно?
 
-edison.greet.who1=I’m Edison! International entrepreneur, salesman and master of persuasion!
-edison.greet.who2=But to you, due to our little agreement with "you know who”, I am also your contact in these strange lands.
-edison.greet.who3=Basically, that means I’ve got to look after you.
-edison.greet.who4=Now I’m a strong believer in knowledge being the best tool in this world. So in the interest of keeping you from, well, dying...
-edison.greet.who5=Do you have any more questions?
+edison.greet.who1=Я Эдисон! Международный предприниматель, продавец и мастер убеждения!
+edison.greet.who2=Но для вас, благодаря нашему маленькому соглашению с "Вы знаете, с кем", я также ваша связь в этих странных землях.
+edison.greet.who3=В общем, это значит, что я должен заботиться о Вас.
+edison.greet.who4=Я твёрдо верю в то, что знание - лучший инструмент в этом мире. так что в моих интересах удержать Вас от смерти...
+edison.greet.who5=У Вас есть какие-либо вопросы?
 
 edison.greet.option.you_know_who="Вы знаете кто?"
 
@@ -1207,97 +1207,85 @@ edison.shop.thera_dirt=Мой любимый маленький проект, я
 edison.shop.thera_grass=Удалось вырастить что-то похожее на траву Теры. Всегда думал, что трава там зеленее.
 edison.shop.therastone_brick=Эти я сделал, чтобы воссоздать старую высокую тёмную и страшную башню. Они простые Агретиты, но с приличным износом они выглядят примерно так.
 
-edison.shop.holiday_notice=50%% Off Stock!\nHoliday Special
+edison.shop.holiday_notice=50%% скидка!\nРождественский выпуск
 
-edison.shop.greetings_holiday=Welcome to my holiday wares! This stock is only here for a limited time, so catch it while you can. Don't be the fool who didn't take the chance!
+edison.shop.greetings_holiday=Добро пожаловать в мои праздничные изделия! Эти акции здесь только на определённое время, так что берите их, пока можете. Не будьте дураком, который не воспользовался шансом!
 
-edison.shop.candy_cane=Festive treats, those ones. Not to be confused with actual canes, people from far and wide tend to decorate them on my Mutant Trees - and lucky for you, those saplings are on sale!
-edison.shop.candy_cane_block=Have you ever just thought "Wow, I really need to crush up a bunch of candy and make a monstrous slab out of it"? Me neither. Regardless, it's on sale - why not give it a shot while stocks last?
-edison.shop.candy_cane_wall=I guess you could... fend off the non-sweet-tooths of the world? I'm stumped, but these things are all the rage these days. I don't get it, and frankly I don't want to because they sell like crazy.
-edison.shop.mutant_sapling=This brings back memories. Too bad I can't tell you how these wonderous trees were made. Let's just say they're a holiday treat, ones which have a tendency to grow "lightbulbs".
-edison.shop.winter_hat=Townsfolk downstairs love these. Come to think of it, there's not been a festive night where I haven't seen at least one person wearing it. It doesn't do much, but I've heard it's a stylish addition to your wardrobe.
-edison.shop.eggnog=Here's the thing: I like Eggnog, it tastes great - but once I've had a few, those Aerbunnies simply refuse to leave me alone! It's crazy. Am I the only one?
-edison.shop.yule_log=Ever wanted to eat a log? Well you're in luck. This is your one chance to eat a log and not feel bad about it!
+edison.shop.candy_cane=Эти - праздничные угощения. Не путать с настоящими тростниками, люди с дальних и широких склонов, как правило, украшают их на моих Мутантских деревьях - и к счастью для Вас, эти саженцы продаются!
+edison.shop.candy_cane_block=Вы когда-нибудь думали: "Вау, мне действительно нужно разломать кучу конфет и сделать из них чудовищную плиту"? Мне тоже. В любом случае, она продаётся - почему бы не попробовать, пока запасы не закончатся?
+edison.shop.candy_cane_wall=Я думаю, Вы могли бы... отгородиться от несвязанных зубов мира? Я озадачен, но эти вещи в наши дни все ещё в моде. Я не понимаю, и честно говоря, я не хочу, потому что они продаются как сумасшедшие.
+edison.shop.mutant_sapling=Это навевает воспоминания. Жаль, что я не могу рассказать вам, как были сделаны эти чудесные деревья. Скажем так, это праздничное угощение, которое имеет тенденцию выращивать "Лампочки".
+edison.shop.winter_hat=Горожане снизу любят это. Если подумать, не было ни одной праздничной ночи, где я не видел ни одного человека, носящего это. Я слышал, что это стильное дополнение к твоему гардеробу.
+edison.shop.eggnog=Вот в чём дело: мне нравится Эггногг, он вкусный - но как только я попробую несколько, этих Эфирных кроликов просто отказываются оставить меня в покое! Это безумие. Я что, один такой?
+edison.shop.yule_log=Когда-нибудь хотели съесть бревно? Ну, Вам повезло. Это Ваш единственный шанс съесть бревно и не чувствовать себя виноватым!
 
-##=======================##
-###########################
-#                         #
-#  JOSEDIYA DIALOGUE      #
-#                         #
-###########################
-##=======================##
+#  Джоседия диалог
 
-josediya.greet.start_not_introduced=So you’re finally here. I don’t see what’s so important about you, let’s get this over with.
-josediya.greet.start=Is there anything else you need?
+josediya.greet.start_not_introduced=Итак, Вы наконец-то здесь. Давайте покончим с этим.
+josediya.greet.start=Вам больше ничего не нужно?
 
-josediya.greet.option.what=What are you?
-josediya.greet.option.where=Where do you come from?
-josediya.greet.option.take_me=Can you take me there?
+josediya.greet.option.what=Кто Вы такой?
+josediya.greet.option.where=Откуда Вы родом?
+josediya.greet.option.take_me=Вы можете меня туда отвести?
 
-josediya.greet.option.winged_beast=What is that winged beast?
-josediya.greet.option.fly=You fly on him?
-josediya.greet.option.moa=Can I get a Moa?
+josediya.greet.option.winged_beast=Что это за крылатый зверь?
+josediya.greet.option.fly=Вы летаете на нём
+josediya.greet.option.moa=Могу ли я получить Моа?
 
-josediya.greet.option.who=Who are you?
-josediya.greet.option.friends=Are you not friends with "Baldy"?
-josediya.greet.option.paying=Is he paying you to help me?
-josediya.greet.option.white_gold=I don't have any Gilt. What now?
+josediya.greet.option.who=Кто Вы?
+josediya.greet.option.friends=Вы не друзья с "Лысым"?
+josediya.greet.option.paying=Он заплатил Вам, чтобы помочь мне?
+josediya.greet.option.white_gold=У меня нет никаких подарков. Что теперь?
 
 josediya.greet.option.services=What services do you provide?
 josediya.greet.option.home=How do you know where my home is?
 josediya.greet.option.walk_home=Why can't I just walk home?
 
-josediya.greet.what=Wow not very smart are you? I’m a person, like you or that bald idiot over there. Never seen an Angel before? Valkyries save us all.
-josediya.greet.where=I come from a nation far south from here called Veradex. It’s where I get most of my work from.
-josediya.greet.take_me=I don’t think you have the coin, human. Veradex is about 3 weeks of swift travel away from here, dangerous route too. I can’t take you there.
-josediya.greet.winged_beast=That is my friend Tivalier, actually. He’s a Moa, a strong one too; he could fly both of us on his back and not break a sweat.
-josediya.greet.fly=Of course! That’s what he’s been trained for. I raise Moas as part of my work. They’re very friendly creatures if you treat them right.
-josediya.greet.moa=You’d need to raise one yourself for it to trust you enough to ride it, getting an egg isn’t an easy task though; Moas are very defensive of their nests.
-josediya.greet.who=The girl who’s going to be taking you places. My name is Josediya, I run a carriage business and baldy over there has brought me in to help you.
-josediya.greet.friends=Edison and I get along fine, he’s proved helpful over the years I’ve known him, but I still don’t trust him much. It’s just mutually beneficial for us to work together.
-josediya.greet.paying=No this is me repaying a favour. You’re the one who’s gonna pay me. And I don’t take coin from your world, Gilt only.
-josediya.greet.white_gold=That’s your problem. I don’t care how you get it, but I need to be paid for my work. Go help some farmers or something.
-josediya.greet.services=If you ever find yourself setting up shop somewhere, I can take you back to your home from any outpost. I will expect payment though.
-josediya.greet.home=I’m not taking you back to Thera, if that’s what you mean. You’ll have to find a new place to rest here in the Aether first.
-josediya.greet.walk_home=I won’t stop you but the Aether’s islands can be pretty far apart. Travelling in my carriage is going to be a lot faster and a lot smoother for you. The cloud bed is sturdy enough to walk between islands on foot, but it can be pretty dangerous without proper protection.
+josediya.greet.what=Вау, не очень умный Вы? Я человек, как Вы или тот лысый идиот вон там. Никогда не видела раньше Ангела? Валькирии спасают нас всех.
+josediya.greet.where=Я родом из страны, расположенной далеко к югу отсюда под названием Верадекс. Там я получаю большую часть своей работы.
+josediya.greet.take_me=Я не думаю, что у Вас есть монета, человек. Верадекс это примерно З недели быстрого путешествия, опасный маршрут тоже. Я не могу Вас туда отвезти.
+josediya.greet.winged_beast=Это мой друг Тивальер, вообще-то. Он Моа, тоже сильный; Он может летать на нас обоих на спине и не вспотеть.
+josediya.greet.fly=Конечно! Это то, для чего его тренировали. я воспитываю Моаса как часть моей работы. Они очень дружелюбные существа, если обращаться с ними правильно.
+josediya.greet.moa=Вы должны вырастить его сами, чтобы он доверял вам достаточно, чтобы ездить на нём, получить яйцо это не простая задача, хотя Моа очень защищает свои гнёзда.
+josediya.greet.who=Девушка, которая будет водить Вас по местам. Я Джоседия, я управляю бизнесом по перевозке пассажиров и Лысый привёз меня, чтобы помочь Вам.
+josediya.greet.friends=Мы с Эдисоном хорошо ладим, он доказал свою полезность за все годы, что я его знаю, но я все ещё не доверяю ему. Для нас просто взаимовыгодно работать вместе.
+josediya.greet.paying=Нет, это я должна отплатить за услугу. Вы единственный, кто заплатит мне. И я не беру монеты из Вашего мира, только позолота.
+josediya.greet.white_gold=Это Ваша проблема. Мне всё равно, как Вы её получите, но мне нужно платить за мою работу. Идите помогите фермерам или что-то в этом роде.
+josediya.greet.services=Если Вы когда-нибудь обнаружите, что где-то открываете магазин, я могу отвезти Вас домой из любого Аванпоста. Я буду ожидать оплаты.
+josediya.greet.home=Я не отвезу тебя обратно в Теру, если Вы это имеете в виду. Сначала Вам нужно найти новое место, чтобы здесь отдохнуть, в Эфире.
+josediya.greet.walk_home=Я не буду Вас останавливать, но острова Эфира могут быть довольно далеко друг от друга. Путешествие в моей карете будет намного быстрее и намного спокойнее для Вас. Облако достаточно прочное, чтобы ходить между островами пешком, но оно может быть довольно опасным без надлежащей защиты.
 
-josediya.greet.travel=Okay. Where to?
-josediya.greet.option.travel_to=Travel To Bed
-josediya.greet.option.travel_from=Travel Back To Last Outpost
-josediya.greet.option.travel=Travel
+josediya.greet.travel=Ладно. Куда теперь?
+josediya.greet.option.travel_to=Переместить к кровати
+josediya.greet.option.travel_from=Переместить обратно в последний аванпост
+josediya.greet.option.travel=Переместить
 
-##================================##
-####################################
-#                                  #
-#    MYSTERIOUS FIGURE DIALOGUE    #
-#                                  #
-####################################
-##================================##
+# ДИАЛОГ МИСТИЧЕСКОЙ ФИГУРЫ
 
-mysterious_figure.greet.start=A new traveller I see! Welcome, welcome... Behold my wondrous wares from a realm beyond - an assortment of sweets shall correspond!
-mysterious_figure.greet.option.who_are_you=Who are you?
-mysterious_figure.greet.option.why_plumproots=Why are you holding a plumproot over your shoulder?
-mysterious_figure.greet.option.sale=Can I take a look at your wares?
-mysterious_figure.greet.who_are_you=You want a name, ‘tis but a mystery! All forgotten, even through history!
-mysterious_figure.greet.why_plumproots=Do you not know the marvelous things you can do with such beautiful plumproots? You can broth it, you can stew it, for my wares you must pursue it! Has your mouth graced the taste of plumproot pie? It’s something you must have before you die!
-mysterious_figure.greet.sale=Good, good! Plumproots you shall give, candies I shall weave.
-mysterious_figure.shop.greetings=Plumproots, plumproots, plumproots! My candies I will trade for plumproots - anything else as good as gumboots!
-mysterious_figure.shop.candy_corn=You know what goes good with corn? Plumproots! ...and candy too, I guess.
-mysterious_figure.shop.cocoatrice=No Cockatrices were harmed in the making of this product.
-mysterious_figure.shop.wrapped_chocolates=I hand wrap these chocolates myself! Don’t be surprised if you find trace amounts of bones.
-mysterious_figure.shop.jelly_plumproot=I’m not sure if you could tell, but these are by far my favourite supplies.
-mysterious_figure.shop.blueberry_lollipop=Children from far and wide love these little suckers. May or may not turn you into a giant blueberry.
-mysterious_figure.shop.orange_lollipop=Tastes like oranges! P.S: This candy contains zero traces of oranges.
-mysterious_figure.shop.icestone_poprocks=Not actually made with Icestone.
-mysterious_figure.shop.ginger_bread_man=I once heard a story of a man made gingerbread. Legend says, on the eve of this sacred month, they ate gingerbread in the shape of a man and turned into the very thing they consumed. Feeling lucky?
-mysterious_figure.shop.candy_cane=Try using this as walking cane. Go on, I dare you.
+mysterious_figure.greet.start=Новый путешественник, которого я вижу! Добро пожаловать, добро пожаловать... узрите мои удивительные изделия из загробного царства - будет соответствовать ассортимент сладостей!
+mysterious_figure.greet.option.who_are_you=Кто Вы?
+mysterious_figure.greet.option.why_plumproots=Почему Вы держите толстый корень над плечом?
+mysterious_figure.greet.option.sale=Могу я взглянуть на Ваши товары?
+mysterious_figure.greet.who_are_you=Вы хотите моё имя, это просто тайна! Всё забыто, даже в истории!
+mysterious_figure.greet.why_plumproots=Разве Вы не знаете, какие удивительные вещи Вы можешь творить с такими красивыми толстыми корнями? Вы можете их зажарить, Вы можете их приготовить, для моих изделий Вы должны их использовать! Ваш рот задел вкус пирога с пухлым корнем? Это то, что Вы должны иметь перед смертью!
+mysterious_figure.greet.sale=Хорошо, хорошо! Толстые корни, которые Вы дадите, конфеты, которые я сотру.
+mysterious_figure.shop.greetings=Толстые корни, толстые корни, толстые корни! Мои конфеты я обменяю на толстые корни - всё, что угодно, кроме резиновых сапогов!
+mysterious_figure.shop.candy_corn=Знаете, что хорошо сочетается с кукурузой? Толстые корни! ... И конфеты тоже, видимо.
+mysterious_figure.shop.cocoatrice=Василиски не пострадали при изготовлении этого продукта.
+mysterious_figure.shop.wrapped_chocolates=Я сам заворачиваю эти конфеты! Не удивляйтесь, если найдёте следы костей.
+mysterious_figure.shop.jelly_plumproot=Не уверен, что Вы могли бы сказать, но это мои любимые продукты.
+mysterious_figure.shop.blueberry_lollipop=Дети издалека любят этих маленьких сосунков. Может, а может и не превратить Вас в гигантскую чернику.
+mysterious_figure.shop.orange_lollipop=На вкус, как апельсины! P.S: Эти конфеты не содержат никаких следов апельсинов.
+mysterious_figure.shop.icestone_poprocks=На самом деле не из ледяного камня.
+mysterious_figure.shop.ginger_bread_man=Однажды я слышал историю о человеке, который сделал пряник. Легенда гласит, что накануне этого священного месяца они ели пряник в форме человека и превратились в то, что они потребляли. Чувствуя себя счастливыми?
+mysterious_figure.shop.candy_cane=Попробуй использовать это, как трость. Давай, я осмелюсь.
 
 # Описание открытий:
 
 aether.placeholder.discovery.description=???
-aether.taegore.discovery.description=The Highlands Taegore are very sociable creatures, they roam in small packs usually lead by the eldest parents.\n\nWhile the Taegore can be friendly, they're equipped with robust armor and sharp tusks which can make them difficult to overpower in a fight.\n\nTheir fur is a sturdy material used in clothing
+aether.taegore.discovery.description=Таегор высокогорья очень общительные существа, они бродят небольшими стаями, обычно возглавляемыми старшими родителями.\n\nПока Таегор может быть дружелюбным, они оснащены прочной бронёй и острыми бивнями, которые могут затруднить им борьбу.\n\nИх мех - прочный материал, используемый в одежде.
 
-# Конфиг
+# Config
 
 config.aether.skip_intro.name=Пропустить вступление
 config.aether.enable_skybox.name=Отобразить Skybox Эфира
