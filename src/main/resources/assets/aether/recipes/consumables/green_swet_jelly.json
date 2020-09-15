@@ -1,5 +1,6 @@
 {
 	"type": "forge:ore_shapeless",
+	"group": "aether:swet_jelly",
 	"ingredients": [
 		{
 			"item": "aether:swet_gel",
