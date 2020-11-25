@@ -155,21 +155,35 @@ public class EntityAerbunny extends EntityTameable implements IDefenseLevelsHold
             this.prevMotionY = this.motionY;
         }
 
-        if (this.isRiding()) {
+        if (this.isRiding())
+        {
             final Entity entity = this.getRidingEntity();
 
-            if (!this.world.isRemote) {
-                if (entity.isSneaking()) {
-                    if (entity.onGround && !this.quickFall) {
-                        NetworkingAether.sendPacketToWatching(new PacketAerbunnySetRiding(null, this), this, false);
+            if (!this.world.isRemote)
+            {
+                boolean isPlayer = entity instanceof EntityPlayer;
 
-                        this.dismountRidingEntity();
-                        this.setPosition(entity.posX, entity.posY + entity.getEyeHeight() + 0.5D, entity.posZ);
+                if (isPlayer && ((EntityPlayer) entity).isSpectator())
+                {
+                    NetworkingAether.sendPacketToWatching(new PacketAerbunnySetRiding(null, this), this, false);
+
+                    this.dismountRidingEntity();
+                    this.setPosition(entity.posX, entity.posY + entity.getEyeHeight() + 0.5D, entity.posZ);
+                }
+                else if (!isPlayer || !(((EntityPlayer) entity).isSpectator()))
+                {
+                    if (entity.isSneaking()) {
+                        if (entity.onGround && !this.quickFall) {
+                            NetworkingAether.sendPacketToWatching(new PacketAerbunnySetRiding(null, this), this, false);
+
+                            this.dismountRidingEntity();
+                            this.setPosition(entity.posX, entity.posY + entity.getEyeHeight() + 0.5D, entity.posZ);
+                        } else {
+                            this.quickFall = true;
+                        }
                     } else {
-                        this.quickFall = true;
+                        this.quickFall = false;
                     }
-                } else {
-                    this.quickFall = false;
                 }
             }
 
