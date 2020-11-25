@@ -27,20 +27,16 @@ public class ItemCloudParachute extends Item implements IDropOnDeath
 	public ItemCloudParachute()
 	{
 		this.maxStackSize = 1;
+		this.setHasSubtypes(true);
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
 	public void getSubItems(final CreativeTabs tab, final NonNullList<ItemStack> subItems)
 	{
-		if (!this.isInCreativeTab(tab))
-		{
-			return;
-		}
-
-		for (final EntityParachute.Type types : EntityParachute.Type.values())
-		{
-			subItems.add(new ItemStack(this, 1, types.ordinal()));
+		if (this.isInCreativeTab(tab)) {
+			for(int i = 0; i < 3; ++i) {
+				subItems.add(new ItemStack(this, 1, i));
+			}
 		}
 	}
 

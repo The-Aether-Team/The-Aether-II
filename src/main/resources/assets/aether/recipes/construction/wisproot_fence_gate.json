@@ -1,5 +1,6 @@
 {
 	"type": "forge:ore_shaped",
+	"group": "aether:wooden_fence_gate",
 	"pattern": [
 		"#W#",
 		"#W#"

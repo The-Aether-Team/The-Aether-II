@@ -88,7 +88,7 @@ public class RecipesAether
 
 		OreDictionary.registerOre("greatroot_decorative", new ItemStack(BlocksAether.dark_skyroot_beam, 1));
 
-		for (BlockVariant variant : BlockSkyrootDecorative.PROPERTY_VARIANT.getAllowedValues())
+		for (BlockVariant variant : BlockTherawoodDecorative.PROPERTY_VARIANT.getAllowedValues())
 		{
 			OreDictionary.registerOre("therawood_decorative", new ItemStack(BlocksAether.therawood_decorative, 1, variant.getMeta()));
 		}
