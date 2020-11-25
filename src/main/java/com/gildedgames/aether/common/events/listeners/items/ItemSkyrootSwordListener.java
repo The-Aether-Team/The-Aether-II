@@ -43,20 +43,23 @@ public class ItemSkyrootSwordListener
 
 			if (providesDrops)
 			{
-				final List<ItemStack> stacks = new ArrayList<>();
-
-				for (final EntityItem item : event.getDrops())
-				{
-					stacks.add(item.getItem());
-				}
-
 				Entity origin = event.getEntity();
 
-				for (final ItemStack stack : stacks)
+				if (origin.isNonBoss())
 				{
-					final EntityItem item = new EntityItem(player.getEntityWorld(), origin.posX, origin.posY, origin.posZ, stack);
+					final List<ItemStack> stacks = new ArrayList<>();
 
-					player.getEntityWorld().spawnEntity(item);
+					for (final EntityItem item : event.getDrops())
+					{
+						stacks.add(item.getItem());
+					}
+
+					for (final ItemStack stack : stacks)
+					{
+						final EntityItem item = new EntityItem(player.getEntityWorld(), origin.posX, origin.posY, origin.posZ, stack);
+
+						player.getEntityWorld().spawnEntity(item);
+					}
 				}
 			}
 		}
