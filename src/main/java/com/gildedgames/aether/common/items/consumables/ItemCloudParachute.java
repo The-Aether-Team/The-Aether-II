@@ -98,7 +98,12 @@ public class ItemCloudParachute extends Item implements IDropOnDeath
 
 		playerAether.getModule(PlayerParachuteModule.class).parachuteItem(coldParachute);
 
-		playerAether.getEntity().replaceItemInInventory(playerAether.getEntity().inventory.currentItem, playerAether.getModule(PlayerParachuteModule.class).getParachuteItem());
+		ItemStack parachuteStack = playerAether.getModule(PlayerParachuteModule.class).getParachuteItem();
+
+		if (!playerAether.getEntity().inventory.addItemStackToInventory(parachuteStack))
+		{
+			playerAether.getEntity().dropItem(parachuteStack, false);
+		}
 
 		playerAether.getModule(PlayerParachuteModule.class).parachuteItemSlot(playerAether.getEntity().inventory.currentItem);
 	}
