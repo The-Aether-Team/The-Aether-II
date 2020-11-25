@@ -5,6 +5,7 @@ import com.gildedgames.aether.common.init.MaterialsAether;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.util.EnumHand;
@@ -56,9 +57,12 @@ public class ItemSkyrootSwordListener
 
 					for (final ItemStack stack : stacks)
 					{
-						final EntityItem item = new EntityItem(player.getEntityWorld(), origin.posX, origin.posY, origin.posZ, stack);
+						if (stack.getItem() != Items.SKULL && stack.getMetadata() != 1)
+						{
+							final EntityItem item = new EntityItem(player.getEntityWorld(), origin.posX, origin.posY, origin.posZ, stack);
 
-						player.getEntityWorld().spawnEntity(item);
+							player.getEntityWorld().spawnEntity(item);
+						}
 					}
 				}
 			}
