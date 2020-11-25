@@ -15,7 +15,7 @@ public class BlockRockGlassTranslucent extends BlockBreakable
 {
 	public BlockRockGlassTranslucent()
 	{
-		super(Material.GLASS, false);
+		super(Material.ROCK, false);
 
 		this.setHardness(0.3f);
 		this.setResistance(2000f);

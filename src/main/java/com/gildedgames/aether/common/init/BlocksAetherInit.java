@@ -154,7 +154,7 @@ public class BlocksAetherInit
 		r.register("quicksoil_glass", quicksoil_glass.setCreativeTab(TAB_CONSTRUCTION));
 		r.register("quicksoil_glass_pane", new BlockQuicksoilGlassPane().setCreativeTab(TAB_CONSTRUCTION));
 		r.register("scatterglass", scatterglass.setCreativeTab(TAB_CONSTRUCTION));
-		r.register("scatterglass_pane", new BlockRockGlassPane(scatterglass, Material.GLASS).setHardness(0.3f).setLightOpacity(0).setCreativeTab(TAB_CONSTRUCTION));
+		r.register("scatterglass_pane", new BlockRockGlassPane(scatterglass, Material.ROCK).setHardness(0.3f).setLightOpacity(0).setCreativeTab(TAB_CONSTRUCTION));
 		r.register("zanite_block", new BlockOreBlock(Material.IRON).setSoundType(SoundType.METAL).setHardness(5f).setResistance(10f).setCreativeTab(TAB_CONSTRUCTION));
 		r.register("gravitite_block", new BlockOreBlock(Material.IRON).setSoundType(SoundType.METAL).setHardness(5f).setResistance(10f).setCreativeTab(TAB_CONSTRUCTION));
 		r.register("skyroot_ladder", new BlockCustomLadder().setCreativeTab(TAB_CONSTRUCTION));
@@ -232,8 +232,8 @@ public class BlocksAetherInit
 		r.register("crude_scatterglass_pane_decorative", new BlockRockGlassPaneDecorative(Material.ROCK).setCreativeTab(TAB_DECORATIVE_BLOCKS));
 		r.register("quicksoil_glass_decorative", new BlockQuicksoilGlassDecorative().setCreativeTab(TAB_DECORATIVE_BLOCKS));
 		r.register("quicksoil_glass_pane_decorative", new BlockQuicksoilGlassPaneDecorative().setCreativeTab(TAB_DECORATIVE_BLOCKS));
-		r.register("scatterglass_decorative", new BlockRockGlassDecorative(Material.GLASS).setCreativeTab(TAB_DECORATIVE_BLOCKS));
-		r.register("scatterglass_pane_decorative", new BlockRockGlassPaneDecorative(Material.GLASS).setCreativeTab(TAB_DECORATIVE_BLOCKS));
+		r.register("scatterglass_decorative", new BlockRockGlassDecorative(Material.ROCK).setCreativeTab(TAB_DECORATIVE_BLOCKS));
+		r.register("scatterglass_pane_decorative", new BlockRockGlassPaneDecorative(Material.ROCK).setCreativeTab(TAB_DECORATIVE_BLOCKS));
 		r.register("sentrystone_brick_decorative", new BlockSentrystoneDecorative().setCreativeTab(TAB_DECORATIVE_BLOCKS));
 		r.register("sentrystone_pillar", new BlockCustomPillar(Material.ROCK).setSoundType(SoundType.STONE).setHardness(1.5f).setResistance(10.0f).setCreativeTab(TAB_DECORATIVE_BLOCKS));
 		r.register("sentrystone_brick_decorative_lit", new BlockSentrystoneDecorativeLit().setLightLevel(0.5f).setCreativeTab(TAB_DECORATIVE_BLOCKS));
