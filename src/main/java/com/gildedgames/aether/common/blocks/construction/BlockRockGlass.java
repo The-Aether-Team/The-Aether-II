@@ -12,11 +12,11 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockRockGlass extends BlockBreakable
+public class BlockRockGlass extends Block
 {
 	public BlockRockGlass()
 	{
-		super(Material.GLASS, false);
+		super(Material.ROCK);
 
 		this.setHardness(1f);
 		this.setResistance(2000f);
@@ -35,6 +35,12 @@ public class BlockRockGlass extends BlockBreakable
 
 	@Override
 	public boolean isFullCube(IBlockState state)
+	{
+		return false;
+	}
+
+	@Override
+	public boolean isOpaqueCube(IBlockState state)
 	{
 		return false;
 	}

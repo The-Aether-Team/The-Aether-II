@@ -34,7 +34,7 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 
 	public BlockOrangeTree()
 	{
-		super(Material.PLANTS);
+		super(Material.LEAVES);
 
 		this.setHardness(1f);
 
