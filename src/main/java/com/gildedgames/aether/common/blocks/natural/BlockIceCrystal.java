@@ -10,13 +10,17 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Enchantments;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.stats.StatList;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -26,6 +30,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.Random;
 
 public class BlockIceCrystal extends BlockBuilder implements IBlockMultiName
@@ -93,6 +98,37 @@ public class BlockIceCrystal extends BlockBuilder implements IBlockMultiName
 		if (worldIn.getLightFor(EnumSkyBlock.BLOCK, pos) > 11 - this.getDefaultState().getLightOpacity(worldIn, pos))
 		{
 			worldIn.setBlockToAir(pos);
+		}
+	}
+
+	@Override
+	public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack)
+	{
+		player.addStat(StatList.getBlockStats(this));
+		player.addExhaustion(0.005F);
+
+		if (this.canSilkHarvest(worldIn, pos, state, player) && EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, stack) > 0)
+		{
+			java.util.List<ItemStack> items = new java.util.ArrayList<ItemStack>();
+			ItemStack itemstack = new ItemStack(Item.getItemFromBlock(this), 1, 0);
+
+			if (!itemstack.isEmpty())
+			{
+				items.add(itemstack);
+			}
+
+			net.minecraftforge.event.ForgeEventFactory.fireBlockHarvesting(items, worldIn, pos, state, 0, 1.0f, true, player);
+			for (ItemStack item : items)
+			{
+				spawnAsEntity(worldIn, pos, item);
+			}
+		}
+		else
+		{
+			harvesters.set(player);
+			int i = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack);
+			this.dropBlockAsItem(worldIn, pos, state, i);
+			harvesters.set(null);
 		}
 	}
 
