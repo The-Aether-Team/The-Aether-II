@@ -1,5 +1,6 @@
 package com.gildedgames.aether.client.renderer;
 
+import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.client.renderer.entities.RenderFloatingBlock;
 import com.gildedgames.aether.client.renderer.entities.RenderMovingBlock;
@@ -13,6 +14,7 @@ import com.gildedgames.aether.client.renderer.items.ItemMoaEggColorHandler;
 import com.gildedgames.aether.client.renderer.items.MoaFeatherColorHandler;
 import com.gildedgames.aether.client.renderer.items.WrappingPaperColorHandler;
 import com.gildedgames.aether.client.renderer.tiles.*;
+import com.gildedgames.aether.client.renderer.tiles.items.TileEntityPresentItemRenderer;
 import com.gildedgames.aether.common.entities.animals.*;
 import com.gildedgames.aether.common.entities.blocks.EntityFloatingBlock;
 import com.gildedgames.aether.common.entities.blocks.EntityMovingBlock;
@@ -26,6 +28,7 @@ import com.gildedgames.aether.common.entities.projectiles.EntityDart;
 import com.gildedgames.aether.common.entities.tiles.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.ItemColors;
+import net.minecraft.item.Item;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
@@ -44,6 +47,8 @@ public class AetherRenderers
 		itemColors.registerItemColorHandler(new ItemMoaEggColorHandler(), ItemsAether.moa_egg_item);
 		itemColors.registerItemColorHandler(new WrappingPaperColorHandler(), ItemsAether.wrapping_paper);
 		itemColors.registerItemColorHandler(new MoaFeatherColorHandler(), ItemsAether.moa_feather);
+
+		Item.getItemFromBlock(BlocksAether.present).setTileEntityItemStackRenderer(new TileEntityPresentItemRenderer());
 	}
 
 	private static void registerEntityRenderers()

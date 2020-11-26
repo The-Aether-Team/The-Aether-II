@@ -299,15 +299,7 @@ public class BlocksAetherInit
 			}
 			else if (block instanceof IBlockWithItem)
 			{
-				if (block instanceof BlockPresent)
-				{
-					item = ((IBlockWithItem) block).createItemBlock();
-					item.setTileEntityItemStackRenderer(new TileEntityPresentItemRenderer());
-				}
-				else
-				{
-					item = ((IBlockWithItem) block).createItemBlock();
-				}
+				item = ((IBlockWithItem) block).createItemBlock();
 			}
 			else if (block instanceof IBlockMultiName)
 			{
