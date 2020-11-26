@@ -21,6 +21,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -28,6 +29,8 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 @Mod.EventBusSubscriber
 public class DamageSystem
 {
+    public static float modifier;
+
     public static boolean blocked;
 
     public static int timer;
@@ -87,7 +90,7 @@ public class DamageSystem
                         impactDamage = Math.max(damageAmount, 1.0F);
                     }
 
-                    float totalDamage = slashDamage + pierceDamage + impactDamage;
+                    float totalDamage = (slashDamage + pierceDamage + impactDamage) * modifier;
 
                     float cooldownTracker = PlayerAether.getPlayer(source).getCooldownTracker();
 
@@ -136,7 +139,7 @@ public class DamageSystem
                         impactDamage = Math.max(damageAmount, 1.0F);
                     }
 
-                    float totalDamage = slashDamage + pierceDamage + impactDamage;
+                    float totalDamage = (slashDamage + pierceDamage + impactDamage) * modifier;
 
                     float cooldownTracker = PlayerAether.getPlayer(source).getCooldownTracker();
 
@@ -185,7 +188,7 @@ public class DamageSystem
                         impactDamage = Math.max(damageAmount, 1.0F);
                     }
 
-                    float totalDamage = slashDamage + pierceDamage + impactDamage;
+                    float totalDamage = (slashDamage + pierceDamage + impactDamage) * modifier;
 
                     float cooldownTracker = PlayerAether.getPlayer(source).getCooldownTracker();
 
@@ -235,7 +238,7 @@ public class DamageSystem
                     impactDamage = Math.max(damageAmount, 1.0F);
                 }
 
-                float totalDamage = slashDamage + pierceDamage + impactDamage;
+                float totalDamage = (slashDamage + pierceDamage + impactDamage) * modifier;
 
                 event.setAmount(totalDamage);
 
@@ -303,10 +306,16 @@ public class DamageSystem
                         }
                     }
 
-                    event.setAmount(vanillaDamage);
+                    event.setAmount(vanillaDamage * modifier);
                 }
             }
         }
+    }
+
+    @SubscribeEvent
+    public static void checkForCritical(CriticalHitEvent event)
+    {
+        modifier = event.getDamageModifier();
     }
 
     @SubscribeEvent
