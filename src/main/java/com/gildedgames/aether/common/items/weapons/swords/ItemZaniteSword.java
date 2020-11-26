@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.items.weapons.swords;
 
+import com.gildedgames.aether.api.entity.damage.IDefenseLevelsHolder;
 import com.gildedgames.aether.common.items.ItemAbilityType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -27,19 +28,23 @@ public class ItemZaniteSword extends ItemAetherSword
 		 |* point.
 		 |* Also, this item breaks when item damage is 250. Just in case someone wanted to add an added effect or extra damage on that last hit.
 		 */
-		final float damage = 6f + ((float) (stack.getItemDamage() * 4)
-				/ stack.getItem().getMaxDamage()); // on last hit, sword will deal 10 damage (5 hearts)
 
-		if (target instanceof EntityPlayer)
+		if (!(target instanceof IDefenseLevelsHolder))
 		{
-			target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) attacker), damage);
-		}
-		else
-		{
-			target.attackEntityFrom(DamageSource.causeMobDamage(attacker), damage);
-		}
+			final float damage = 6f + ((float) (stack.getItemDamage() * 4)
+					/ stack.getItem().getMaxDamage()); // on last hit, sword will deal 10 damage (5 hearts)
 
-		stack.damageItem(1, attacker);
+			if (target instanceof EntityPlayer)
+			{
+				target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) attacker), damage);
+			}
+			else
+			{
+				target.attackEntityFrom(DamageSource.causeMobDamage(attacker), damage);
+			}
+
+			stack.damageItem(1, attacker);
+		}
 
 		return false;
 	}
