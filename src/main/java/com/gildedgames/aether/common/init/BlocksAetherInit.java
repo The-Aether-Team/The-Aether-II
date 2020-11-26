@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.init;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
+import com.gildedgames.aether.client.renderer.tiles.items.TileEntityPresentItemRenderer;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.blocks.IBlockMultiName;
 import com.gildedgames.aether.common.blocks.IBlockWithItem;
@@ -298,7 +299,15 @@ public class BlocksAetherInit
 			}
 			else if (block instanceof IBlockWithItem)
 			{
-				item = ((IBlockWithItem) block).createItemBlock();
+				if (block instanceof BlockPresent)
+				{
+					item = ((IBlockWithItem) block).createItemBlock();
+					item.setTileEntityItemStackRenderer(new TileEntityPresentItemRenderer());
+				}
+				else
+				{
+					item = ((IBlockWithItem) block).createItemBlock();
+				}
 			}
 			else if (block instanceof IBlockMultiName)
 			{
