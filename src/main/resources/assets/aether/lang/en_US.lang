@@ -9,6 +9,7 @@ tile.aether.aether_grass.irradiated.name=Irradiated Grass
 tile.aether.holystone.normal.name=Holystone
 tile.aether.holystone.mossy.name=Mossy Holystone
 tile.aether.holystone.blood_moss.name=Blood Moss Holystone
+tile.aether.holystone.irradiated.name=Irradiated Holystone
 tile.aether.aercloud.cold.name=Cold Aercloud
 tile.aether.aercloud.blue.name=Blue Aercloud
 tile.aether.aercloud.green.name=Green Aercloud

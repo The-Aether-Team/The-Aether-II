@@ -21,9 +21,10 @@ public class BlockHolystone extends Block implements IBlockMultiName
 	public static final BlockVariant
 			NORMAL_HOLYSTONE = new BlockVariant(0, "normal"),
 			MOSSY_HOLYSTONE = new BlockVariant(1, "mossy"),
-			BLOOD_MOSS_HOLYSTONE = new BlockVariant(2, "blood_moss");
+			BLOOD_MOSS_HOLYSTONE = new BlockVariant(2, "blood_moss"),
+			IRRADIATED_HOLYSTONE = new BlockVariant(3, "irradiated");
 
-	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", NORMAL_HOLYSTONE, MOSSY_HOLYSTONE, BLOOD_MOSS_HOLYSTONE);
+	public static final PropertyVariant PROPERTY_VARIANT = PropertyVariant.create("variant", NORMAL_HOLYSTONE, MOSSY_HOLYSTONE, BLOOD_MOSS_HOLYSTONE, IRRADIATED_HOLYSTONE);
 
 	public BlockHolystone()
 	{

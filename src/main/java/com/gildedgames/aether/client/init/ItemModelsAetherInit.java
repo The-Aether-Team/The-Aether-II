@@ -97,7 +97,8 @@ public class ItemModelsAetherInit
 
 		registerItemModels(BlocksAether.holystone, new ItemModelBuilder("holystone/")
 				.add(BlockHolystone.NORMAL_HOLYSTONE.getMeta(), "holystone")
-				.add(BlockHolystone.MOSSY_HOLYSTONE.getMeta(), "mossy_holystone"));
+				.add(BlockHolystone.MOSSY_HOLYSTONE.getMeta(), "mossy_holystone")
+				.add(BlockHolystone.IRRADIATED_HOLYSTONE.getMeta(), "irradiated_holystone"));
 
 		registerItemModels(BlocksAether.aercloud, new ItemModelBuilder("aercloud/")
 				.add(BlockAercloud.COLD_AERCLOUD.getMeta(), "cold_aercloud")

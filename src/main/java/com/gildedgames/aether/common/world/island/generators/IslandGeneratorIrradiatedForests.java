@@ -85,7 +85,7 @@ public class IslandGeneratorIrradiatedForests implements IIslandGenerator
 
 				for (int y = minY; y <= maxY; y++)
 				{
-					mask.setBlock(x, y, z, mossy ? IslandBlockType.STONE_MOSSY_BLOCK.ordinal() : IslandBlockType.STONE_BLOCK.ordinal());
+					mask.setBlock(x, y, z, mossy ? IslandBlockType.STONE_IRRADIATED_BLOCK.ordinal() : IslandBlockType.STONE_BLOCK.ordinal());
 				}
 			}
 		}

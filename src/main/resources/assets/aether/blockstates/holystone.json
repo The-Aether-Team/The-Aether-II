@@ -8,6 +8,9 @@
 		],
 		"variant=blood_moss": [
 			{ "model": "aether:holystone/blood_moss_holystone" }
+		],
+		"variant=irradiated": [
+			{ "model": "aether:holystone/irradiated_holystone" }
 		]
 	}
 }
