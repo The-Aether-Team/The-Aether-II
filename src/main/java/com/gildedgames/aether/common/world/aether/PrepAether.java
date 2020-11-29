@@ -42,7 +42,7 @@ public class PrepAether implements IPrepRegistryEntry<IChunkInfoAether>
 	@Override
 	public int getSectorChunkArea()
 	{
-		return 60;
+		return 30;
 	}
 
 	@Override
@@ -79,9 +79,9 @@ public class PrepAether implements IPrepRegistryEntry<IChunkInfoAether>
 	{
 		final int sectorArea = this.getSectorChunkArea() * 16;
 
-		final int width = 960;
+		final int width = 480;
 		final int height = 255;
-		final int length = 960;
+		final int length = 480;
 
 		final int x = (sectorArea * sectorX);
 		final int y = 0;

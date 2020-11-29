@@ -58,7 +58,7 @@ public class BiomeHighlands extends BiomeAetherBase
 
 		int coastHeight = 1 + rand.nextInt(3);
 
-		double coastSpread = rand.nextDouble() * 0.6;
+		double coastSpread = rand.nextDouble() * 0.3;
 
 		if (coastHeight == 0)
 		{
@@ -72,7 +72,7 @@ public class BiomeHighlands extends BiomeAetherBase
 				.lakeDepth(rand.nextInt(40) + 5)
 				.lakeScale(40.0D + (rand.nextDouble() * 30.0D))
 				.lakeThreshold(rand.nextDouble() * 0.3)
-				.maxTerrainHeight(firstIsland ? 10 + rand.nextInt(30) : 10 + rand.nextInt(120))
+				.maxTerrainHeight(firstIsland ? 10 + rand.nextInt(15) : 10 + rand.nextInt(60))
 				.terraces(rand.nextBoolean())
 				.lakeConcentrationModifier(0.5 + (rand.nextDouble() * -2.5)));
 	}

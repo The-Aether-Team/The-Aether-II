@@ -59,7 +59,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase implements ISnowyBiome
 	public IIslandGenerator createIslandGenerator(Random rand, IIslandData islandData)
 	{
 		int coastHeight = 1 + rand.nextInt(3);
-		double coastSpread = rand.nextDouble() * 0.6;
+		double coastSpread = rand.nextDouble() * 0.3;
 
 		if (coastHeight == 0)
 		{
@@ -70,7 +70,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase implements ISnowyBiome
 
 		boolean hasTerraces = rand.nextInt(30) == 0;
 
-		int maxTerrainHeight = 80 + rand.nextInt(70);
+		int maxTerrainHeight = 40 + rand.nextInt(35);
 
 		return new IslandGeneratorHighlands(IslandVariables.build()
 				.coastHeight(coastHeight)
