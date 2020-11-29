@@ -409,6 +409,8 @@ public class ItemModelsAetherInit
 
 		registerItemModels(BlocksAether.holystone_bookshelf, "holystone_bookshelf");
 
+		registerItemModels(BlocksAether.irradiated_dust_block, "irradiated_dust_block");
+
 		registerItemModels(ItemsAether.skyroot_stick, "skyroot_stick");
 		registerItemModels(ItemsAether.cloudtwine, "cloudtwine");
 		registerItemModels(ItemsAether.golden_amber, "golden_amber");

@@ -85,6 +85,7 @@ public class BlocksAetherInit
 		r.register("gravitite_ore", new BlockGravititeOre().setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("ferrosite", new BlockFerrosite().setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("rusted_ferrosite", new BlockRustedFerrosite().setCreativeTab(TAB_NATURAL_BLOCKS));
+		r.register("irradiated_dust_block", new BlockIrradiatedDust().setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("crude_scatterglass", crude_scatterglass.setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("aercloud", new BlockAercloud().setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("skyroot_log", new BlockAetherLog(AetherWoodType.SKYROOT).setCreativeTab(TAB_NATURAL_BLOCKS));
@@ -454,6 +455,7 @@ public class BlocksAetherInit
 		BlocksAether.holystone_button.setHarvestLevel("pickaxe", 0);
 		BlocksAether.thera_grass.setHarvestLevel("shovel", 0);
 		BlocksAether.thera_dirt.setHarvestLevel("shovel", 0);
+		BlocksAether.irradiated_dust_block.setHarvestLevel("pickaxe", 2);
 	}
 
 	public static Collection<Block> getRegisteredBlocks()

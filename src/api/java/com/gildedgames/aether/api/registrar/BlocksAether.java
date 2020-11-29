@@ -223,6 +223,8 @@ public class BlocksAether extends AbstractRegistrar
 
 	public static final Block incubator = getDefault();
 
+	public static final Block irradiated_dust_block = getDefault();
+
 	public static final Block irradiated_flower = getDefault();
 
 	public static final Block light_skyroot_beam = getDefault();

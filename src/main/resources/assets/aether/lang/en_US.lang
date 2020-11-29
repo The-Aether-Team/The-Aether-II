@@ -358,6 +358,7 @@ tile.aether.neverbloom.name=Neverbloom
 tile.aether.pink_swingtip.name=Pink Swingtip
 tile.aether.quickshoot.name=Quickshoot
 tile.aether.stoneshroom.name=Stoneshroom
+tile.aether.irradiated_dust_block.name=Irradiated Dust Block
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick
