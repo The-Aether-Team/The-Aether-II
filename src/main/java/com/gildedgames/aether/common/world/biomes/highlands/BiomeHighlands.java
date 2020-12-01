@@ -51,14 +51,14 @@ public class BiomeHighlands extends BiomeAetherBase
 
 		boolean firstIsland = islandData.getBounds().getMinX() == 0 && islandData.getBounds().getMinZ() == 0;
 
-		if (range < 3)
-		{
-			return new IslandGeneratorHighlandMegacoast();
-		}
+//		if (range < 3)
+//		{
+//			return new IslandGeneratorHighlandMegacoast();
+//		}
 
-		int coastHeight = 1 + rand.nextInt(3);
+		int coastHeight = 1 + rand.nextInt(2);
 
-		double coastSpread = rand.nextDouble() * 0.3;
+		double coastSpread = 0.1;
 
 		if (coastHeight == 0)
 		{
@@ -72,7 +72,7 @@ public class BiomeHighlands extends BiomeAetherBase
 				.lakeDepth(rand.nextInt(40) + 5)
 				.lakeScale(40.0D + (rand.nextDouble() * 30.0D))
 				.lakeThreshold(rand.nextDouble() * 0.3)
-				.maxTerrainHeight(firstIsland ? 10 + rand.nextInt(15) : 10 + rand.nextInt(60))
+				.maxTerrainHeight(20 + rand.nextInt(25))
 				.terraces(rand.nextBoolean())
 				.lakeConcentrationModifier(0.5 + (rand.nextDouble() * -2.5)));
 	}

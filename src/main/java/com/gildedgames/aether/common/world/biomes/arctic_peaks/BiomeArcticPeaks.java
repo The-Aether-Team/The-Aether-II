@@ -59,14 +59,14 @@ public class BiomeArcticPeaks extends BiomeAetherBase implements ISnowyBiome
 	public IIslandGenerator createIslandGenerator(Random rand, IIslandData islandData)
 	{
 		int coastHeight = 1 + rand.nextInt(3);
-		double coastSpread = rand.nextDouble() * 0.3;
+		double coastSpread = 0.15;
 
 		if (coastHeight == 0)
 		{
 			coastSpread = 0.0;
 		}
 
-		double mountainAmplitude = 4.0;
+		double mountainAmplitude = 3.75;
 
 		boolean hasTerraces = rand.nextInt(30) == 0;
 
@@ -84,6 +84,7 @@ public class BiomeArcticPeaks extends BiomeAetherBase implements ISnowyBiome
 				.lakeConcentrationModifier(0.5 + (rand.nextDouble() * -2.5))
 				.heightSampleFilter((heightSample) -> Math.min(1.1, Math.pow(heightSample, mountainAmplitude) * 0.55))
 				.snowCaps(!hasTerraces)
+				.maxTerrainHeight(20 + rand.nextInt(25))
 				.maxYFilter((bottomMaxY, filteredSample, cutoffPoint) -> bottomMaxY + ((filteredSample - (hasTerraces ? cutoffPoint : 0.0))
 						* maxTerrainHeight))
 				.lakeBottomValueFilter((lakeBottomValue) -> 0.0));

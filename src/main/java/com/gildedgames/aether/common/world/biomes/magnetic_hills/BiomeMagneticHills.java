@@ -48,7 +48,7 @@ public class BiomeMagneticHills extends BiomeAetherBase
 	public IIslandGenerator createIslandGenerator(Random rand, IIslandData islandData)
 	{
 		int coastHeight = 1 + rand.nextInt(3);
-		double coastSpread = rand.nextDouble() * 0.3;
+		double coastSpread = 0.1;
 
 		if (coastHeight == 0)
 		{
@@ -62,7 +62,7 @@ public class BiomeMagneticHills extends BiomeAetherBase
 				.lakeDepth(rand.nextInt(40) + 5)
 				.lakeScale(40.0D + (rand.nextDouble() * 30.0D))
 				.lakeThreshold(rand.nextDouble() * 0.3)
-				.maxTerrainHeight(10 + rand.nextInt(25))
+				.maxTerrainHeight(20 + rand.nextInt(15))
 				.terraces(rand.nextInt(20) == 0)
 				.lakeConcentrationModifier(0.5 + (rand.nextDouble() * -2.5))
 				.magneticPillars(true));
