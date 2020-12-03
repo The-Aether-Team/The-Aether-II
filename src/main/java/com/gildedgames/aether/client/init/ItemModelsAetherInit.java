@@ -557,6 +557,9 @@ public class ItemModelsAetherInit
 		registerItemModels(BlocksAether.holystone_pressure_plate, "holystone_pressure_plate");
 		registerItemModels(BlocksAether.holystone_button, "holystone_button");
 
+		registerItemModels(BlocksAether.therawood_pressure_plate, "therawood_pressure_plate");
+		registerItemModels(BlocksAether.therawood_button, "therawood_button");
+
 		registerItemModels(BlocksAether.skyroot_chest, "skyroot_chest");
 		registerItemModels(BlocksAether.ambrosium_torch, "ambrosium_torch");
 
@@ -708,6 +711,31 @@ public class ItemModelsAetherInit
 		registerItemModels(ItemsAether.moa_feed_enchanted_blueberries, "feed/moa_feed_enchanted_blueberries");
 
 		registerItemModels(ItemsAether.brettl_rope, "brettl_rope");
+
+		registerItemModels(ItemsAether.charm_arm_01, "accessories/charms/charm_arm_01");
+		registerItemModels(ItemsAether.charm_arm_02, "accessories/charms/charm_arm_02");
+		registerItemModels(ItemsAether.charm_arm_03, "accessories/charms/charm_arm_03");
+		registerItemModels(ItemsAether.charm_arm_tgh_01, "accessories/charms/charm_arm_tgh_01");
+		registerItemModels(ItemsAether.charm_arm_tgh_02, "accessories/charms/charm_arm_tgh_02");
+		registerItemModels(ItemsAether.charm_arm_tgh_03, "accessories/charms/charm_arm_tgh_03");
+		registerItemModels(ItemsAether.charm_atk_dmg_01, "accessories/charms/charm_atk_dmg_01");
+		registerItemModels(ItemsAether.charm_atk_dmg_02, "accessories/charms/charm_atk_dmg_02");
+		registerItemModels(ItemsAether.charm_atk_dmg_03, "accessories/charms/charm_atk_dmg_03");
+		registerItemModels(ItemsAether.charm_atk_spd_01, "accessories/charms/charm_atk_spd_01");
+		registerItemModels(ItemsAether.charm_atk_spd_02, "accessories/charms/charm_atk_spd_02");
+		registerItemModels(ItemsAether.charm_atk_spd_03, "accessories/charms/charm_atk_spd_03");
+		registerItemModels(ItemsAether.charm_kbk_res_01, "accessories/charms/charm_kbk_res_01");
+		registerItemModels(ItemsAether.charm_kbk_res_02, "accessories/charms/charm_kbk_res_02");
+		registerItemModels(ItemsAether.charm_kbk_res_03, "accessories/charms/charm_kbk_res_03");
+		registerItemModels(ItemsAether.charm_lck_01, "accessories/charms/charm_lck_01");
+		registerItemModels(ItemsAether.charm_lck_02, "accessories/charms/charm_lck_02");
+		registerItemModels(ItemsAether.charm_lck_03, "accessories/charms/charm_lck_03");
+		registerItemModels(ItemsAether.charm_max_hlt_01, "accessories/charms/charm_max_hlt_01");
+		registerItemModels(ItemsAether.charm_max_hlt_02, "accessories/charms/charm_max_hlt_02");
+		registerItemModels(ItemsAether.charm_max_hlt_03, "accessories/charms/charm_max_hlt_03");
+		registerItemModels(ItemsAether.charm_mve_spd_01, "accessories/charms/charm_mve_spd_01");
+		registerItemModels(ItemsAether.charm_mve_spd_02, "accessories/charms/charm_mve_spd_02");
+		registerItemModels(ItemsAether.charm_mve_spd_03, "accessories/charms/charm_mve_spd_03");
 	}
 
 	private static void registerSnowyFlower(Block block, String name)

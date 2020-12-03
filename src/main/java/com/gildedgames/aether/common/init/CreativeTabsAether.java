@@ -124,6 +124,15 @@ public class CreativeTabsAether
 		}
 	};
 
+	public static final CreativeTabs TAB_CHARMS = new CreativeTabs("aether.charms")
+	{
+		@Override
+		public ItemStack createIcon()
+		{
+			return new ItemStack(ItemsAether.charm_arm_01);
+		}
+	};
+
 	private static abstract class CreativeTabsMisc extends CreativeTabs
 	{
 		private CreativeTabsMisc(final String unlocalizedName)

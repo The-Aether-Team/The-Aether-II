@@ -359,6 +359,8 @@ tile.aether.pink_swingtip.name=Pink Swingtip
 tile.aether.quickshoot.name=Quickshoot
 tile.aether.stoneshroom.name=Stoneshroom
 tile.aether.irradiated_dust_block.name=Irradiated Dust Block
+tile.aether.therawood_button.name=Therawood Button
+tile.aether.therawood_pressure_plate.name=Therawood Pressure Plate
 
 # Aether Items
 item.aether.skyroot_stick.name=Skyroot Stick
@@ -565,6 +567,31 @@ item.aether.wrapping_paper.box.white.name=White Box
 item.aether.wrapping_paper.tooltip.craft=Craft with items!
 item.aether.present.tooltip.empty=Empty
 item.aether.present.tooltip.hasitem=Contains an item inside!
+
+item.aether.charm_arm_01.name=Lesser Armor Charm
+item.aether.charm_arm_02.name=Armor Charm
+item.aether.charm_arm_03.name=Greater Armor Charm
+item.aether.charm_arm_tgh_01.name=Lesser Armor Toughness Charm
+item.aether.charm_arm_tgh_02.name=Armor Toughness Charm
+item.aether.charm_arm_tgh_03.name=Greater Armor Toughness Charm
+item.aether.charm_atk_dmg_01.name=Lesser Damage Charm
+item.aether.charm_atk_dmg_02.name=Damage Charm
+item.aether.charm_atk_dmg_03.name=Greater Damage Charm
+item.aether.charm_atk_spd_01.name=Lesser Attack Speed Charm
+item.aether.charm_atk_spd_02.name=Attack Speed Charm
+item.aether.charm_atk_spd_03.name=Greater Attack Speed Charm
+item.aether.charm_kbk_res_01.name=Lesser Knockback Resistance Charm
+item.aether.charm_kbk_res_02.name=Knockback Resistance Charm
+item.aether.charm_kbk_res_03.name=Greater Knockback Resistance Charm
+item.aether.charm_lck_01.name=Lesser Luck Charm
+item.aether.charm_lck_02.name=Luck Charm
+item.aether.charm_lck_03.name=Greater Luck Charm
+item.aether.charm_max_hlt_01.name=Lesser Health Charm
+item.aether.charm_max_hlt_02.name=Health Charm
+item.aether.charm_max_hlt_03.name=Greater Health Charm
+item.aether.charm_mve_spd_01.name=Lesser Speed Charm
+item.aether.charm_mve_spd_02.name=Speed Charm
+item.aether.charm_mve_spd_03.name=Greater Speed Charm
 
 
 tile.aether.aether_portal.name=Aether Portal

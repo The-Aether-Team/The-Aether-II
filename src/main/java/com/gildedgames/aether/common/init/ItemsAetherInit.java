@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.items.ItemDropOnDeath;
+import com.gildedgames.aether.common.items.accessories.ItemAccessory;
 import com.gildedgames.aether.common.items.armor.*;
 import com.gildedgames.aether.common.items.blocks.ItemBlockCustomDoor;
 import com.gildedgames.aether.common.items.consumables.*;
@@ -204,6 +205,31 @@ public class ItemsAetherInit
 		r.register("wrapping_paper", new ItemWrappingPaper().setCreativeTab(CreativeTabsAether.TAB_MISCELLANEOUS));
 
 		r.register("moa_egg_item", new ItemMoaEgg(false));
+
+		r.register("charm_arm_01", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_arm_02", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_arm_03", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_arm_tgh_01", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_arm_tgh_02", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_arm_tgh_03", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_atk_dmg_01", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_atk_dmg_02", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_atk_dmg_03", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_atk_spd_01", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_atk_spd_02", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_atk_spd_03", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_kbk_res_01", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_kbk_res_02", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_kbk_res_03", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_lck_01", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_lck_02", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_lck_03", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_max_hlt_01", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_max_hlt_02", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_max_hlt_03", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_mve_spd_01", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_mve_spd_02", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_mve_spd_03", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
 	}
 
 	public static Collection<Item> getRegisteredItems()

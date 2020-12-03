@@ -275,6 +275,8 @@ public class BlocksAetherInit
 		r.register("therastone_brick_stairs", new BlockCustomStairs(holystone.getDefaultState()).setCreativeTab(TAB_THERA));
 		r.register("therastone_brick_slab", new BlockCustomSlab(Material.ROCK).setSoundType(SoundType.STONE).setHardness(1.5f).setResistance(10.0f).setCreativeTab(TAB_THERA));
 		r.register("therastone_brick_wall", new BlockCustomWall(holystone.getDefaultState(), 1.5f, 10.0f).setCreativeTab(TAB_THERA));
+		r.register("therawood_button", new BlockSkyrootButton().setCreativeTab(TAB_THERA));
+		r.register("therawood_pressure_plate", new BlockSkyrootPressurePlate().setCreativeTab(TAB_THERA));
 
 		r.register("present", new BlockPresent().setCreativeTab(TAB_MISCELLANEOUS));
 

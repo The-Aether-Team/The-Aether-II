@@ -26,7 +26,6 @@ public class InventoryEquipment implements IInventoryEquipment
 					ItemEquipmentSlot.RING,
 					ItemEquipmentSlot.NECKWEAR,
 					ItemEquipmentSlot.COMPANION,
-					ItemEquipmentSlot.ARTIFACT,
 					ItemEquipmentSlot.CHARM,
 					ItemEquipmentSlot.CHARM,
 					ItemEquipmentSlot.CHARM,

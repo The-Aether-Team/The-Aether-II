@@ -377,6 +377,8 @@ public class BlocksAether extends AbstractRegistrar
 
 	public static final Block therawood_beam = getDefault();
 
+	public static final Block therawood_button= getDefault();
+
 	public static final Block therawood_decorative = getDefault();
 
 	public static final Block therawood_fence = getDefault();
@@ -390,6 +392,8 @@ public class BlocksAether extends AbstractRegistrar
 	public static final Block therawood_log_wall = getDefault();
 
 	public static final Block therawood_planks = getDefault();
+
+	public static final Block therawood_pressure_plate = getDefault();
 
 	public static final Block therawood_slab = getDefault();
 

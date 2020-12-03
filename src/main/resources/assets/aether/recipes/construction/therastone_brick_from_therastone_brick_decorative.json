@@ -1,0 +1,16 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "type": "forge:ore_dict",
+      "ore": "therastone_brick_decorative"
+    }
+  },
+  "result": {
+    "item": "aether:therastone_brick",
+    "count": 1
+  }
+}

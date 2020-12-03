@@ -1,22 +1,26 @@
 package com.gildedgames.aether.common.blocks.natural;
 
 import com.gildedgames.aether.api.registrar.ItemsAether;
+import com.gildedgames.aether.common.util.selectors.ItemEntry;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.WeightedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ChunkCache;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.Random;
+import java.util.*;
 
 public class BlockIrradiatedDust extends Block
 {
+    private final List<ItemEntry> drops = new ArrayList<>();
+
     public BlockIrradiatedDust()
     {
         super(Material.ROCK);
@@ -32,42 +36,28 @@ public class BlockIrradiatedDust extends Block
     }
 
     @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune)
+    public void getDrops(net.minecraft.util.NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
     {
-        int random = rand.nextInt(50);
+        this.initializeDrops();
 
-        if (random == 49)
+        Random rand = new Random();
+        ItemEntry itemEntry = WeightedRandom.getRandomItem(rand, this.drops);
+        if (itemEntry.getItem() != null)
         {
-            return ItemsAether.irradiated_chunk;
+            drops.add(new ItemStack(itemEntry.getItem()));
         }
-        else if (random == 48)
-        {
-            return ItemsAether.irradiated_tool;
-        }
-        else if (random == 47)
-        {
-            return ItemsAether.irradiated_sword;
-        }
-        else if (random == 46)
-        {
-            return ItemsAether.irradiated_armor;
-        }
-        else if (random == 45)
-        {
-            return ItemsAether.irradiated_ring;
-        }
-        else if (random == 44)
-        {
-            return ItemsAether.irradiated_neckwear;
-        }
-        else if (random == 43)
-        {
-            return ItemsAether.irradiated_charm;
-        }
-        else
-        {
-            return ItemsAether.irradiated_dust;
-        }
+    }
+
+    private void initializeDrops()
+    {
+        this.drops.add(new ItemEntry(ItemsAether.irradiated_dust, 50));
+        this.drops.add(new ItemEntry(ItemsAether.irradiated_chunk, 30));
+        this.drops.add(new ItemEntry(ItemsAether.irradiated_tool, 10));
+        this.drops.add(new ItemEntry(ItemsAether.irradiated_sword, 10));
+        this.drops.add(new ItemEntry(ItemsAether.irradiated_armor, 10));
+        this.drops.add(new ItemEntry(ItemsAether.irradiated_charm, 7));
+        this.drops.add(new ItemEntry(ItemsAether.irradiated_ring, 5));
+        this.drops.add(new ItemEntry(ItemsAether.irradiated_neckwear, 3));
     }
 
     @Override

@@ -13,7 +13,7 @@ import net.minecraft.item.ItemStack;
 
 public class ContainerGuidebookInventory extends ContainerPlayer
 {
-	private static final InventoryBasic dumbInventory = new InventoryBasic("tmp", true, 52);
+	private static final InventoryBasic dumbInventory = new InventoryBasic("tmp", true, 54);
 
 	private final IPlayerAether aePlayer;
 

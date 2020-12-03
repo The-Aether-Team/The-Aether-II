@@ -1,0 +1,6 @@
+{
+  "parent": "block/button_inventory",
+  "textures": {
+    "texture": "aether:blocks/therawood_planks/therawood_planks"
+  }
+}

@@ -113,15 +113,15 @@ public class BlockFloorObject extends BlockBuilder implements IBlockWithItem
 
 	public void validatePosition(World world, BlockPos pos)
 	{
-		if (!this.canPlaceBlockAt(world, pos))
-		{
-			this.invalidateBlock(world, pos);
-		}
+		this.invalidateBlock(world, pos);
 	}
 
 	protected void invalidateBlock(World world, BlockPos pos)
 	{
-		world.setBlockToAir(pos);
+		if (!this.canPlaceBlockAt(world, pos) || world.isAirBlock(pos.down()))
+		{
+			world.setBlockToAir(pos);
+		}
 	}
 
 	@Override

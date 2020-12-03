@@ -84,6 +84,54 @@ public class ItemsAether extends AbstractRegistrar
 
 	public static final Item candy_corn = getDefault();
 
+	public static final Item charm_arm_01 = getDefault();
+
+	public static final Item charm_arm_02 = getDefault();
+
+	public static final Item charm_arm_03 = getDefault();
+
+	public static final Item charm_arm_tgh_01 = getDefault();
+
+	public static final Item charm_arm_tgh_02 = getDefault();
+
+	public static final Item charm_arm_tgh_03 = getDefault();
+
+	public static final Item charm_atk_dmg_01 = getDefault();
+
+	public static final Item charm_atk_dmg_02 = getDefault();
+
+	public static final Item charm_atk_dmg_03 = getDefault();
+
+	public static final Item charm_atk_spd_01 = getDefault();
+
+	public static final Item charm_atk_spd_02 = getDefault();
+
+	public static final Item charm_atk_spd_03 = getDefault();
+
+	public static final Item charm_kbk_res_01 = getDefault();
+
+	public static final Item charm_kbk_res_02 = getDefault();
+
+	public static final Item charm_kbk_res_03 = getDefault();
+
+	public static final Item charm_lck_01 = getDefault();
+
+	public static final Item charm_lck_02 = getDefault();
+
+	public static final Item charm_lck_03 = getDefault();
+
+	public static final Item charm_max_hlt_01 = getDefault();
+
+	public static final Item charm_max_hlt_02 = getDefault();
+
+	public static final Item charm_max_hlt_03 = getDefault();
+
+	public static final Item charm_mve_spd_01 = getDefault();
+
+	public static final Item charm_mve_spd_02 = getDefault();
+
+	public static final Item charm_mve_spd_03 = getDefault();
+
 	public static final Item cloud_parachute = getDefault();
 
 	public static final Item cloudtwine = getDefault();
