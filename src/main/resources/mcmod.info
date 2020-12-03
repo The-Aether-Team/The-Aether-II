@@ -1,14 +1,13 @@
-{
-  "modListVersion": 2,
-  "modList": [{
-    "modid": "aether",
-    "name": "Aether II",
-    "description": "In development by Gilded Games, the Aether II is an extensive mod for Minecraft which implements a remarkable world in the skies. Adventure, danger, and mystery awaits in the depths of the Aether.\n\nThe Aether wouldn't be possible without our supporters on Patreon! Consider supporting development at: https://patreon.com/GildedGames\n\nView the source code and contribute to the Aether project on our official GitLab here: https://git.gildedgames.com/GildedGames/Aether-II\n\nWe also have an official Discord server! https://aether.gildedgames.com/discord\n\nRunning into issues or have a question? Check out our support page here: https://aether.gildedgames.com/support",
-    "version": "${version}",
-    "mcversion": "${mcversion}",
-    "authorList": [ "Oscar Payn", "Brandon James Pearce", "Hugo Payn", "Jaryt Bustard", "Christian Peterson", "Angeline", "bconlon" ],
-    "url": "https://aether.gildedgames.com",
-    "credits": "Designed and developed by Gilded Games with <3. Made possible thanks to our supporters on Patreon, and with special thanks to our project reporters, contributors, and moderation team.\nContributors: JellySquid, Emile van Krieken, Bluexin, Jonathan Lachney, ETStarLight",
-    "logoFile": "/assets/aether/full-logo.png"
-  }]
-}
+[
+    {
+        "modid": "aether",
+        "name": "Aether II",
+        "description": "In development by Gilded Games, the Aether II is an extensive mod for Minecraft which implements a remarkable world in the skies. Adventure, danger, and mystery awaits in the depths of the Aether.\n\nThe Aether wouldn't be possible without our supporters on Patreon! Consider supporting development at: https://patreon.com/GildedGames\n\nView the source code and contribute to the Aether project on our official GitLab here: https://git.gildedgames.com/GildedGames/Aether-II\n\nWe also have an official Discord server! https://aether.gildedgames.com/discord\n\nRunning into issues or have a question? Check out our support page here: https://aether.gildedgames.com/support",
+        "version": "0.3.0",
+        "credits": "Designed and developed by Gilded Games with <3. Made possible thanks to our supporters on Patreon, and with special thanks to our project reporters, contributors, and moderation team.\nContributors: JellySquid, Emile van Krieken, Bluexin, Jonathan Lachney, ETStarLight",
+        "logoFile": "/assets/aether/full-logo.png",
+        "mcversion": "1.12.2",
+        "url": "https://aether.gildedgames.com",
+        "authorList": [ "Oscar Payn", "Brandon James Pearce", "Hugo Payn", "Jaryt Bustard", "Christian Peterson", "Angeline", "bconlon" ]
+    }
+]
