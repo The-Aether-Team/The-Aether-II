@@ -1,0 +1,1300 @@
+# Эфирные блоки
+tile.aether.aether_dirt.dirt.name=Эфирная земля
+tile.aether.aether_dirt.coarse_dirt.name=Грубая эфирная земля
+tile.aether.aether_grass.normal.name=Высокогорная трава
+tile.aether.aether_grass.enchanted.name=Зачарованная трава
+tile.aether.aether_grass.arctic.name=Арктическая трава
+tile.aether.aether_grass.magnetic.name=Магнетическая трава
+tile.aether.aether_grass.irradiated.name=Облучённая трава
+tile.aether.holystone.normal.name=Святой камень
+tile.aether.holystone.mossy.name=Болотный святой камень
+tile.aether.holystone.blood_moss.name=Кроваво-мшистый святой камень
+tile.aether.aercloud.cold.name=Холодное эфирное облако
+tile.aether.aercloud.blue.name=Синее эфирное облако
+tile.aether.aercloud.green.name=Зелёное эфирное облако
+tile.aether.aercloud.golden.name=Золотое эфирное облако
+tile.aether.aercloud.storm.name=Грозовое эфирное облако
+tile.aether.aercloud.purple.name=Фиолетовое эфирное облако
+tile.aether.skyroot_log.name=Древесина из небесного корня
+tile.aether.dark_skyroot_log.name=Древесина из великого корня
+tile.aether.light_skyroot_log.name=Древесина из мерцающего корня
+tile.aether.golden_oak_log.name=Древесина из янтарного корня
+tile.aether.ambrosium_ore.name=Амброзиумная руда
+tile.aether.zanite_ore.name=Занитная руда
+tile.aether.gravitite_ore.name=Гравититная руда
+tile.aether.arkenium_ore.name=Аркениумная руда
+tile.aether.continuum_ore.name=Континумная руда
+tile.aether.blue_skyroot_leaves.name=Синие листья из небесного корня
+tile.aether.green_skyroot_leaves.name=Зелёные листья из небесного корня
+tile.aether.dark_blue_skyroot_leaves.name=Тёмно-синие листья из небесного корня
+tile.aether.blue_dark_skyroot_leaves.name=Синие листья из великого корня
+tile.aether.green_dark_skyroot_leaves.name=Зелёные листья из великого корня
+tile.aether.dark_blue_dark_skyroot_leaves.name=Тёмно-синие листья из великого корня
+tile.aether.blue_light_skyroot_leaves.name=Синие листья из мерцающего корня
+tile.aether.green_light_skyroot_leaves.name=Зелёные листья из мерцающего корня
+tile.aether.dark_blue_light_skyroot_leaves.name=Тёмно-синие листья из мерцающего корня
+tile.aether.amberoot_leaves.name=Листья из янтарного корня
+tile.aether.mutant_leaves.name=Мутировавшие листья 
+tile.aether.mutant_leaves_decorated.name=Украшенные мутировавшие листья
+tile.aether.tall_aether_grass.short.name=Короткая трава от высокогорья
+tile.aether.tall_aether_grass.normal.name=Трава от высокогорья
+tile.aether.tall_aether_grass.long.name=Длинная трава от высокогорья
+tile.aether.quicksoil.name=Быстрая почва
+tile.aether.ferrosite_sand.name=Ферросайтовый песок
+tile.aether.aether_crafting_table.name=Верстак из небесного корня
+tile.aether.skyroot_trapdoor.name=Люк из небесного корня
+tile.aether.secret_skyroot_trapdoor.name=Тайный люк из небесного корня
+tile.aether.skyroot_ladder.name=Лестница из небесного корня
+tile.aether.skyroot_pressure_plate.name=Нажимная пластина из небесного корня
+tile.aether.wisproot_pressure_plate.name=Нажимная пластина из мерцающего корня
+tile.aether.greatroot_pressure_plate.name=Нажимная пластина из великого корня
+tile.aether.skyroot_button.name=Кнопка из небесного корня
+tile.aether.wisproot_button.name=Кнопка из мерцающего корня
+tile.aether.greatroot_button.name=Кнопка из великого корня
+tile.aether.holystone_pressure_plate.name=Нажимная пластина из святого камня
+tile.aether.holystone_button.name=Кнопка из святого камня
+tile.aether.blueberry_bush.ripe.name=Черничный куст
+tile.aether.blueberry_bush.stem.name=Стебель из черничного куста
+tile.aether.enchanted_blueberry_bush.ripe.name=Зачарованный черничный куст
+tile.aether.enchanted_blueberry_bush.stem.name=Зачарованный стебель из черничного куста
+tile.aether.orange_tree.name=Апельсиновое дерево
+tile.aether.aether_flower.purple_flower.name=Фиолетовый цветок
+tile.aether.aether_flower.white_rose.name=Белая роза
+tile.aether.aether_flower.burstblossom.name=Лопнувший цветок
+tile.aether.aether_flower.aechor_sprout.name=Эчор росток
+tile.aether.altar.name=Алтарь
+tile.aether.icestone_ore.name=Руда из ледяного камня
+tile.aether.icestone_bricks.name=Кирпичи из ледяного камня
+tile.aether.icestone_bricks_decorative.name=Украшенные кирпичи из ледяного камня
+tile.aether.icestone_bricks_decorative.base_bricks.name=Основа кирпича
+tile.aether.icestone_bricks_decorative.base_pillar.name=Основа колонны
+tile.aether.icestone_bricks_decorative.keystone.name=Краеугольный камень
+tile.aether.icestone_bricks_decorative.capstone_bricks.name=Облицовочный камень
+tile.aether.icestone_bricks_decorative.capstone_pillar.name=Колонна из облицовочного камня
+tile.aether.icestone_bricks_decorative.flagstones.name=Каменные плиты
+tile.aether.icestone_bricks_decorative.headstone.name=Надгробный камень
+tile.aether.icestone_pillar.name=Кирпичная колонна из ледяного камня
+tile.aether.crude_scatterglass.name=Сырое развеянного стекло
+tile.aether.crude_scatterglass_decorative.name=Украшенное сырое развеянного стекло
+tile.aether.crude_scatterglass_decorative.skyroot_frame.name=Каркас из небесного корня
+tile.aether.crude_scatterglass_decorative.arkenium_frame.name=Каркас из аркения
+tile.aether.scatterglass.name=Развеянное стекло
+tile.aether.scatterglass_decorative.name=Украшенное развеянного стекло
+tile.aether.scatterglass_decorative.arkenium_frame.name=Украшенный каркас из аркения
+tile.aether.scatterglass_decorative.skyroot_frame.name=Украшенный каркас из небесного корня
+tile.aether.quicksoil_glass.name=Травяная быстрая почва
+tile.aether.quicksoil_glass_decorative.name=Украшенная травяная быстрая почва
+tile.aether.quicksoil_glass_decorative.arkenium_frame.name=Каркас из аркения
+tile.aether.quicksoil_glass_decorative.skyroot_frame.name=Каркас из небесного корня
+tile.aether.zanite_block.name=Блок занита
+tile.aether.skyroot_sapling.blue_skyroot.name=Синий саженец из небесного корня
+tile.aether.skyroot_sapling.green_skyroot.name=Зелёный саженец из небесного корня
+tile.aether.skyroot_sapling.dark_blue_skyroot.name=Тёмно-синий саженец из небесного корня
+tile.aether.unique_sapling.amberoot.name=Саженец из янтарного корня
+tile.aether.unique_sapling.mutant_tree.name=Саженец дерева сумасшедшего мутанта Эдисона
+tile.aether.wisproot_sapling.wisproot_green.name=Зелёный саженец из мерцающего корня
+tile.aether.wisproot_sapling.wisproot_blue.name=Синий саженец из мерцающего корня
+tile.aether.wisproot_sapling.wisproot_dark_blue.name=Тёмно-синий саженец из мерцающего корня
+tile.aether.greatroot_sapling.green_greatroot.name=Зелёный саженец из великого корня
+tile.aether.greatroot_sapling.blue_greatroot.name=Синий саженец из великого корня
+tile.aether.greatroot_sapling.dark_blue_greatroot.name=Тёмно-синий саженец из великого корня
+tile.aether.carved_stone.normal.name=Резной камень
+tile.aether.carved_stone.divine.name=Божественный резной камень
+tile.aether.sentry_stone.normal.name=Патрульный камень
+tile.aether.sentry_stone.divine.name=Божественный патрульный камень
+tile.aether.gravitite_block.name=Блок гравитита
+tile.aether.holystone_furnace.name=Печь из святого камня
+tile.aether.skyroot_chest.name=Сундук из небесного корня
+tile.aether.ambrosium_torch.name=Факел из амброзия
+tile.aether.skyroot_fence.name=Забор из небесного корня
+tile.aether.skyroot_fence_gate.name=Ворота из небесного корня
+tile.aether.wisproot_fence.name=Забор из мерцающего корня
+tile.aether.wisproot_fence_gate.name=Ворота из мерцающего корня
+tile.aether.greatroot_fence.name=Забор из великого корня
+tile.aether.greatroot_fence_gate.name=Ворота из великого корня
+tile.aether.therawood_fence.name=Забор из тера дерева
+tile.aether.therawood_fence_gate.name=Ворота из тера дерева
+tile.aether.holystone_wall.name=Стена из святого камня
+tile.aether.mossy_holystone_wall.name=Стена из болотного святого камня
+tile.aether.carved_stone_wall.name=Стена из резного камня
+tile.aether.icestone_wall.name=Кирпичная стена из ледяного камня
+tile.aether.skyroot_log_wall.name=Стена из древесины небесного корня
+tile.aether.scatterglass_wall.name=Стена из развеянного стекла
+tile.aether.holystone_brick_wall.name=Кирпичная стена из святого камня
+tile.aether.sentry_stone_wall.name=Стена из патрульного камня
+tile.aether.divine_sentry_wall.name=Стена из божественного патрульного камня
+tile.aether.divine_stone_wall.name=Стена из божественного камня
+tile.aether.wisproot_log_wall.name=Стена из древесины мерцающего корня
+tile.aether.greatroot_log_wall.name=Стена из древесины великого корня
+tile.aether.therawood_log_wall.name=Стена из древесины тера дерева
+tile.aether.agiosite_wall.name=Стена из агиосайта
+tile.aether.agiosite_brick_wall.name=Кирпичная стена из агиосайта
+tile.aether.faded_holystone_brick_wall.name=Кирпичная стена из увядшего святого камня
+tile.aether.sentrystone_brick_wall.name=Кирпичная стена из патрульного камня
+tile.aether.hellfirestone_brick_wall.name=Кирпичная стена из камня адского пламени
+tile.aether.therastone_brick_wall.name=Кирпичная стена из тера камня
+tile.aether.labyrinth_totem.name=Лабиринтный тотем
+tile.aether.labyrinth_capstone.name=Лабиринтный облицовочный камень
+tile.aether.labyrinth_glowing_pillar.name=Светящаяся лабиринтная колонна
+tile.aether.labyrinth_pillar.name=Лабиринтная колонна
+tile.aether.labyrinth_wall.name=Лабиринтная стена
+tile.aether.labyrinth_lightstone.name=Лабиринтный светлый камень
+tile.aether.labyrinth_base.name=Лабиринтная основа
+tile.aether.labyrinth_headstone.name=Лабиринтный надгробный камень
+tile.aether.labyrinth_eye.name=Лабиринтный глаз
+tile.aether.labyrinth_chest.name=Лабиринтный сундук
+tile.aether.skyroot_slab.name=Плита из небесного корня
+tile.aether.wisproot_slab.name=Плита из мерцающего корня
+tile.aether.greatroot_slab.name=Плита из великого корня
+tile.aether.therawood_slab.name=Плита из тера дерева
+tile.aether.holystone_slab.name=Плита из святого камня
+tile.aether.holystone_brick_slab.name=Кирпичная плита из святого камня
+tile.aether.therastone_brick_slab.name=Кирпичная плита из тера камня
+tile.aether.carved_stone_slab.name=Плита из резного камня
+tile.aether.divine_carved_stone_slab.name=Плита из божественного резного камня
+tile.aether.sentry_stone_slab.name=Плита из патрульного камня
+tile.aether.divine_sentry_stone_slab.name=Плита из божественного патрульного камня
+tile.aether.icestone_slab.name=Кирпичная плита из ледяного камня
+tile.aether.mossy_holystone_slab.name=Плита из болотного святого камня
+tile.aether.faded_holystone_brick_slab.name=Кирпичная плита из увядшего святого камня
+tile.aether.agiosite_slab.name=Агиосайтовая плита
+tile.aether.agiosite_brick_slab.name=Агиосайтовая кирпичная плита
+tile.aether.scatterglass_slab.name=Плита из развеянного стекла
+tile.aether.sentrystone_brick_slab.name=Кирпичная плита из патрульного камня
+tile.aether.hellfirestone_brick_slab.name=Кирпичная плита из камня адского пламени
+tile.aether.labyrinth_capstone_slab.name=Лабиринтная плита из облицовочного камня
+tile.aether.labyrinth_wall_slab.name=Лабиринтная плита перекрытия
+tile.aether.labyrinth_strongblock.name=Лабиринтный прочный камень
+tile.aether.skyroot_stairs.name=Ступени из небесного корня
+tile.aether.wisproot_stairs.name=Ступени из мерцающего корня
+tile.aether.greatroot_stairs.name=Ступени из великого корня
+tile.aether.therawood_stairs.name=Ступени из тера дерева
+tile.aether.holystone_stairs.name=Ступени из святого камня
+tile.aether.mossy_holystone_stairs.name=Ступени из болотного святого камня
+tile.aether.holystone_brick_stairs.name=Кирпичные ступени из святого камня
+tile.aether.therastone_brick_stairs.name=Кирпичные ступени из тера камня
+tile.aether.sentry_stone_stairs.name=Ступени из патрульного камня
+tile.aether.divine_sentry_stone_stairs.name=Ступени из божественного патрульного камня
+tile.aether.carved_stone_stairs.name=Ступени из резного камня
+tile.aether.divine_carved_stone_stairs.name=Ступени из божественного резного камня
+tile.aether.cloudwool_block.name=Облачная шерсть
+tile.aether.woven_sticks.skyroot.name=Тканные палки из небесного корня
+tile.aether.moa_egg.name=Яйцо моа
+tile.aether.icestone_brick_stairs.name=Кирпичные ступени из ледяного камня
+tile.aether.scatterglass_stairs.name=Ступени из развеянного стекла
+tile.aether.faded_holystone_brick_stairs.name=Кирпичные ступени из увядшего святого камня
+tile.aether.agiosite_stairs.name=Агиосайтовые ступени
+tile.aether.agiosite_brick_stairs.name=Агиосайтовые кирпичные ступени
+tile.aether.sentrystone_brick_stairs.name=Кирпичные ступени из патрульного камня
+tile.aether.hellfirestone_brick_stairs.name=Кирпичные ступени из камня адского пламени
+tile.aether.burstblossom.name=Лопнувший цветок
+tile.aether.moonlit_bloom.name=Лунный цветок
+tile.aether.icestone_cooler.name=Холодильник из ледяного камня
+tile.aether.incubator.name=Инкубатор
+tile.aether.present.name=Подарок
+tile.aether.labyrinth_container.small.name=Маленький лабиринтный контейнер
+tile.aether.labyrinth_container.large.name=Большой лабиринтный контейнер
+tile.aether.unstable_labyrinth_capstone.name=Нестабильный лабиринтный облицовочный камень
+tile.aether.wildcard.name=Шаблон
+tile.aether.masonry_bench.name=Верстак каменщика
+tile.aether.holystone_brick.name=Кирпичи из святого камня
+tile.aether.holystone_brick_decorative.name=Украшенные кирпичи из святого камня
+tile.aether.holystone_brick_decorative.base_bricks.name=Основа кирпичей
+tile.aether.holystone_brick_decorative.base_pillar.name=Основа колонны
+tile.aether.holystone_brick_decorative.keystone.name=Краеугольный камень
+tile.aether.holystone_brick_decorative.capstone_bricks.name=Кирпичи из облицовочного камня
+tile.aether.holystone_brick_decorative.capstone_pillar.name=Колонна из облицовочного камня
+tile.aether.holystone_brick_decorative.flagstones.name=Каменные плиты
+tile.aether.holystone_brick_decorative.headstone.name=Надгробный камень
+tile.aether.holystone_pillar.name=Кирпичная колонна из святого камня
+tile.aether.sentrystone_brick.name=Кирпичи из патрульного камня
+tile.aether.sentrystone_brick_decorative.name=Украшенные кирпичи из патрульного камня
+tile.aether.sentrystone_brick_decorative.base_bricks.name=Основа кирпичей
+tile.aether.sentrystone_brick_decorative.base_pillar.name=Основа колонны
+tile.aether.sentrystone_brick_decorative.keystone.name=Краеугольный камень
+tile.aether.sentrystone_brick_decorative.capstone_bricks.name=Кирпичи из облицовочного камня
+tile.aether.sentrystone_brick_decorative.capstone_pillar.name=Колонна из облицовочного камня
+tile.aether.sentrystone_brick_decorative.flagstones.name=Каменные плиты
+tile.aether.sentrystone_brick_decorative.lightstone.name=Лёгкий камень
+tile.aether.sentrystone_pillar.name=Кирпичная колонна из патрульного камня
+tile.aether.sentrystone_brick_decorative_lit.name=Украшенные зажжённые кирпичи из патрульного камня
+tile.aether.sentrystone_brick_decorative_lit.base_bricks.name=Зажжённая основа кирпича
+tile.aether.sentrystone_brick_decorative_lit.base_pillar.name=Зажжённая основа колонны
+tile.aether.sentrystone_brick_decorative_lit.keystone.name=Зажжённый краеугольный камень
+tile.aether.sentrystone_brick_decorative_lit.capstone_bricks.name=Зажжённые облицовочные кирпичи
+tile.aether.sentrystone_brick_decorative_lit.capstone_pillar.name=Зажжённая облицовочная колонна
+tile.aether.sentrystone_brick_decorative_lit.lightstone.name=Зажжённый лёгкий камень
+tile.aether.sentrystone_pillar_lit.name=Зажжённая кирпичная колонна из патрульного камня
+tile.aether.hellfirestone_brick.name=Кирпичи из камня адского пламени
+tile.aether.hellfirestone_brick_decorative.name=Украшенные кирпичи из камня адского пламени
+tile.aether.hellfirestone_brick_decorative.base_bricks.name=Основа кирпича
+tile.aether.hellfirestone_brick_decorative.base_pillar.name=Основа колонны
+tile.aether.hellfirestone_brick_decorative.keystone.name=Краеугольный камень
+tile.aether.hellfirestone_brick_decorative.capstone_bricks.name=Кирпичи из облицовочного камня
+tile.aether.hellfirestone_brick_decorative.capstone_pillar.name=Колонна из облицовочного камня
+tile.aether.hellfirestone_brick_decorative.flagstones.name=Каменные плиты
+tile.aether.hellfirestone_lantern.name=Фонарь из камня адского пламени
+tile.aether.hellfirestone_pillar.name=Кирпичная колонна из камня адского пламени
+tile.aether.faded_holystone_brick.name=Кирпичи из увядшего святого камня
+tile.aether.faded_holystone_brick_decorative.name=Украшенные кирпичи из увядшего святого камня
+tile.aether.faded_holystone_brick_decorative.base_bricks.name=Основа кирпича
+tile.aether.faded_holystone_brick_decorative.base_pillar.name=Основа колонны
+tile.aether.faded_holystone_brick_decorative.keystone.name=Краеугольный камень
+tile.aether.faded_holystone_brick_decorative.capstone_bricks.name=Кирпичи из облицовочного камня
+tile.aether.faded_holystone_brick_decorative.capstone_pillar.name=Колонна из облицовочного камня
+tile.aether.faded_holystone_brick_decorative.flagstones.name=Каменные плиты
+tile.aether.faded_holystone_brick_decorative.headstone.name=Надгробный камень
+tile.aether.faded_holystone_pillar.name=Кирпичная колонна из увядшего святого камня
+tile.aether.therastone_brick.name=Кирпичи из тера камня
+tile.aether.therastone_brick_decorative.name=Украшенные кирпичи из тера камня
+tile.aether.therastone_brick_decorative.base_bricks.name=Основа кирпича
+tile.aether.therastone_brick_decorative.base_pillar.name=Основа колонны
+tile.aether.therastone_brick_decorative.keystone.name=Краеугольный камень
+tile.aether.therastone_brick_decorative.capstone_bricks.name=Кирпичи из облицовочного камня
+tile.aether.therastone_brick_decorative.capstone_pillar.name=Колонна из облицовочного камня
+tile.aether.therastone_brick_decorative.flagstones.name=Каменные плиты
+tile.aether.therastone_brick_decorative.headstone.name=Надгробный камень
+tile.aether.therastone_pillar.name=Колонна из тера камня
+tile.aether.agiosite.name=Агиосайт
+tile.aether.agiosite_brick.name=Агиосайтовые кирпичи
+tile.aether.agiosite_brick_decorative.name=Украшенные агиосайтовые кирпичи
+tile.aether.agiosite_brick_decorative.base_bricks.name=Основа кирпичей
+tile.aether.agiosite_brick_decorative.base_pillar.name=Основа колонны
+tile.aether.agiosite_brick_decorative.keystone.name=Краеугольный камень
+tile.aether.agiosite_brick_decorative.capstone_bricks.name=Кирпичи из облицовочного камня
+tile.aether.agiosite_brick_decorative.capstone_pillar.name=Колонна из облицовочного камня
+tile.aether.agiosite_brick_decorative.flagstones.name=Каменные плиты
+tile.aether.agiosite_pillar.name=Агиосайтовая кирпичная колонна
+tile.aether.therawood_planks.name=Доски из тера древесины
+tile.aether.therawood_decorative.name=Украшенная тера древесина
+tile.aether.therawood_decorative.base_planks.name=Основа досок
+tile.aether.therawood_decorative.base_beam.name=Основа балки
+tile.aether.therawood_decorative.highlight.name=Подчёркнутый
+tile.aether.therawood_decorative.top_planks.name=Вершина досок
+tile.aether.therawood_decorative.top_beam.name=Вершина балки
+tile.aether.therawood_decorative.floorboards.name=Паркет
+tile.aether.therawood_beam.name=Балка из тера древесины
+tile.aether.therawood_log.name=Бревно из тера древесины
+tile.aether.therawood_leaves.name=Листья из тера древесины
+tile.aether.skyroot_planks.name=Доски из небесного корня
+tile.aether.skyroot_decorative.name=Украшенные доски из небесного корня
+tile.aether.skyroot_decorative.base_planks.name=Основа досок
+tile.aether.skyroot_decorative.base_beam.name=Основа балки
+tile.aether.skyroot_decorative.highlight.name=Подчёркнутый
+tile.aether.skyroot_decorative.top_planks.name=Вершина досок
+tile.aether.skyroot_decorative.top_beam.name=Вершина балки
+tile.aether.skyroot_decorative.floorboards.name=Паркет
+tile.aether.skyroot_decorative.tiles.name=Черепица
+tile.aether.skyroot_decorative.tiles_small.name=Малая черепица
+tile.aether.skyroot_beam.name=Балка из небесного корня
+tile.aether.dark_skyroot_planks.name=Доски из великого корня
+tile.aether.dark_skyroot_decorative.name=Украшенные доски из великого корня
+tile.aether.dark_skyroot_decorative.base_planks.name=Основа досок
+tile.aether.dark_skyroot_decorative.base_beam.name=Основа балки
+tile.aether.dark_skyroot_decorative.highlight.name=Подчёркнутый
+tile.aether.dark_skyroot_decorative.top_planks.name=Верхушка досок
+tile.aether.dark_skyroot_decorative.top_beam.name=Верхушка балки
+tile.aether.dark_skyroot_decorative.floorboards.name=Паркет
+tile.aether.dark_skyroot_decorative.tiles.name=Черепица
+tile.aether.dark_skyroot_decorative.tiles_small.name=Малая черепица
+tile.aether.dark_skyroot_beam.name=Балка из великого корня
+tile.aether.light_skyroot_planks.name=Доски из мерцающего корня
+tile.aether.light_skyroot_decorative.name=Украшенные доски из мерцающего корня
+tile.aether.light_skyroot_decorative.base_planks.name=Основа досок
+tile.aether.light_skyroot_decorative.base_beam.name=Основа балки
+tile.aether.light_skyroot_decorative.highlight.name=Подчёркнутый
+tile.aether.light_skyroot_decorative.top_planks.name=Верхушка досок
+tile.aether.light_skyroot_decorative.top_beam.name=Верхушка балки
+tile.aether.light_skyroot_decorative.floorboards.name=Паркет
+tile.aether.light_skyroot_decorative.tiles.name=Черепица
+tile.aether.light_skyroot_decorative.tiles_small.name=Малая черепица
+tile.aether.light_skyroot_beam.name=Балка из мерцающего корня
+tile.aether.quicksoil_glass_pane.name=Стеклянная панель из быстрой почвой
+tile.aether.quicksoil_glass_pane_decorative.name=Украшенная стеклянная панель из быстрой почвой
+tile.aether.quicksoil_glass_pane_decorative.arkenium_frame.name=Каркас из аркения
+tile.aether.quicksoil_glass_pane_decorative.skyroot_frame.name=Каркас из небесного корня
+tile.aether.arkenium_frame.name=Каркас из аркения
+tile.aether.skyroot_frame.name=Каркас из небесного корня
+tile.aether.scatterglass_pane.name=Панель из развеянного стекла
+tile.aether.scatterglass_pane_decorative.name=Украшенная панель из развеянного стекла
+tile.aether.scatterglass_pane_decorative.arkenium_frame.name=Каркас из аркения
+tile.aether.scatterglass_pane_decorative.skyroot_frame.name=Каркас из небесного корня
+tile.aether.skyroot_twigs.name=Ветка небесного корня
+tile.aether.holystone_rock.name=Камешек святого камня
+tile.aether.crude_scatterglass_pane.name=Сырая панель из развеянного стекла
+tile.aether.crude_scatterglass_pane_decorative.name=Украшенная сырая панель из развеянного стекла
+tile.aether.crude_scatterglass_pane_decorative.arkenium_frame.name=Каркас из аркения
+tile.aether.crude_scatterglass_pane_decorative.skyroot_frame.name=Каркас из небесного корня
+tile.aether.cloudwool_carpet.name=Ковёр из облачной шерсти
+tile.aether.skyroot_bookshelf.name=Книжная полка из небесного корня
+tile.aether.holystone_bookshelf.name=Книжная полка из святого камня
+tile.aether.outpost_campfire.name=Костёр аванпоста
+tile.aether.valkyrie_grass.sprout.name=Травяной росток валькирии
+tile.aether.valkyrie_grass.full.name=Трава валькирии
+tile.aether.aether_teleporter.name=Портал в Эфир
+tile.aether.thera_dirt.dirt.name=Тера земля
+tile.aether.thera_grass.normal.name=Тера трава
+tile.aether.ferrosite.name=Ферросайт
+tile.aether.rusted_ferrosite.name=Ржавый ферросайт
+tile.aether.highlands_snow.name=Снег высокогорья
+tile.aether.highlands_snow_layer.name=Снег высокогорья
+tile.aether.highlands_ice.name=Лёд высокогорья
+tile.aether.highlands_packed_ice.name=Упакованный лёд высокогорья
+tile.aether.plumproot.name=Толстый корень
+tile.aether.highlands_ice_crystal.stalagmite.name=Ледяной кристалл
+tile.aether.candy_cane_block.name=Карамель
+tile.aether.candy_cane_wall.name=Карамельная стена
+tile.aether.arctic_spikespring.name=Арктический весенний шип
+tile.aether.barkshroom.name=Гриб коры
+tile.aether.blue_swingtip.name=Синий поворотный кончик
+tile.aether.forgotten_rose.name=Забытая роза
+tile.aether.green_swingtip.name=Зелёный поворотный кончик
+tile.aether.highlands_bush.name=Куст высокогорья
+tile.aether.highlands_tulips.name=Тюльпаны высокогорья
+tile.aether.irradiated_flower.name=Облучённый цветок
+tile.aether.magnetic_shroom.name=Магнетический гриб
+tile.aether.neverbloom.name=Всегдацветок
+tile.aether.pink_swingtip.name=Розовый поворотный кончик
+tile.aether.quickshoot.name=Быстрый выстрел
+tile.aether.stoneshroom.name=Каменный гриб
+
+# Aether предметы
+item.aether.skyroot_stick.name=Палка из небесного корня
+item.aether.cloudtwine.name=Облачная верёвка
+item.aether.moa_feather.name=Перо моа
+item.aether.cockatrice_feather.name=Перо василиска
+item.aether.ambrosium_shard.name=Осколок амброзия
+item.aether.ambrosium_chunk.name=Кусочек амброзия
+item.aether.zanite_gemstone.name=Занитовый самоцвет
+item.aether.continuum_orb.name=Непрерывная сфера
+item.aether.arkenium.name=Пластина из аркения
+item.aether.arkenium_strip.name=Полоска из аркения
+item.aether.skyroot_pickaxe.name=Кирка из небесного корня
+item.aether.skyroot_axe.name=Топор из небесного корня
+item.aether.skyroot_shovel.name=Лопата из небесного корня
+item.aether.skyroot_sword.name=Меч из небесного корня
+item.aether.holystone_pickaxe.name=Кирка из святого камня
+item.aether.holystone_axe.name=Топор из святого камня
+item.aether.holystone_shovel.name=Лопата из святого камня
+item.aether.holystone_sword.name=Меч из святого камня
+item.aether.zanite_pickaxe.name=Занитовая кирка
+item.aether.zanite_axe.name=Занитовый топор
+item.aether.zanite_shovel.name=Занитовая лопата
+item.aether.zanite_sword.name=Занитовый меч
+item.aether.gravitite_pickaxe.name=Гравититовая кирка
+item.aether.gravitite_axe.name=Гравититовый топор
+item.aether.gravitite_sword.name=Гравититовый меч
+item.aether.gravitite_shovel.name=Гравититовая лопата
+item.aether.arkenium_pickaxe.name=Кирка из аркения
+item.aether.arkenium_axe.name=Топор из аркения
+item.aether.arkenium_shovel.name=Лопата из аркения
+item.aether.arkenium_sword.name=Меч из аркения
+item.aether.arkenium_shears.name=Ножницы из аркения
+item.aether.taegore_hide_helmet.name=Капюшон из шкуры Таегора
+item.aether.taegore_hide_chestplate.name=Куртка из шкуры Таегора
+item.aether.taegore_hide_leggings.name=Поножи из шкуры Таегора
+item.aether.taegore_hide_boots.name=Ботинки из шкуры Таегора
+item.aether.burrukai_pelt_helmet.name=Меховой капюшон Буррукайя
+item.aether.burrukai_pelt_chestplate.name=Меховая куртка Буррукайя
+item.aether.burrukai_pelt_leggings.name=Меховые поножи Буррукайя
+item.aether.burrukai_pelt_boots.name=Меховые ботинки Буррукайя
+item.aether.zanite_helmet.name=Занитовый шлем
+item.aether.zanite_chestplate.name=Занитовый нагрудник
+item.aether.zanite_leggings.name=Занитовые поножи
+item.aether.zanite_boots.name=Занитовые ботинки
+item.aether.arkenium_helmet.name=Шлем из аркения
+item.aether.arkenium_chestplate.name=Нагрудник из аркения
+item.aether.arkenium_leggings.name=Поножи из аркения
+item.aether.arkenium_boots.name=Ботинки из аркения
+item.aether.gravitite_helmet.name=Гравититовый шлем
+item.aether.gravitite_chestplate.name=Гравититовый нагрудник
+item.aether.gravitite_leggings.name=Гравититовые поножи
+item.aether.gravitite_boots.name=Гравититовые ботинки
+item.aether.golden_amber.name=Золотой янтарь
+item.aether.aechor_petal.name=Эчор лепесток
+item.aether.blueberries.name=Черника
+item.aether.enchanted_blueberry.name=Зачарованная черника
+item.aether.orange.name=Апельсин
+item.aether.wyndberry.name=Переулочная ягода
+item.aether.candy_corn.name=Попкорн
+item.aether.cocoatrice.name=Мгновенная шоколадная
+item.aether.jelly_plumproot.name=Желейный толстый корень
+item.aether.stomper_pop.name=Хлопковый топтун
+item.aether.blueberry_lollipop.name=Черничный леденец на палочке
+item.aether.orange_lollipop.name=Апельсиновый леденец на палочке
+item.aether.icestone_poprocks.name=Шипучка из ледяного камня
+item.aether.ginger_bread_man.name=Пряничный человечек
+item.aether.candy_cane.name=Леденец
+item.aether.yule_log.name=Рождественское полено
+item.aether.wrapped_chocolates.name=Завёрнутый шоколад
+item.aether.enchanted_wyndberry.name=Зачарованная переулочная ягода
+item.aether.swet_jelly.blue.name=Синий сладкий мармелад
+item.aether.swet_jelly.green.name=Зелёный сладкий мармелад
+item.aether.swet_jelly.purple.name=Розовый сладкий мармелад
+item.aether.swet_gel.blue.name=Синий сладкий гель
+item.aether.swet_gel.green.name=Зелёный сладкий гель
+item.aether.swet_gel.purple.name=Розовый сладкий гель
+item.aether.swet_sugar.name=Сладкий сахар
+item.aether.skyroot_bucket.name=Ведро из небесного корня
+item.aether.skyroot_water_bucket.name=Ведро воды из небесного корня
+item.aether.skyroot_milk_bucket.name=Ведро молока из небесного корня
+item.aether.skyroot_poison_bucket.name=Ведро с ядом из небесного корня
+item.aether.valkyrie_music_disc.name=Музыкальный диск Валькирии
+item.aether.labyrinth_music_disc.name=Лабиринтный музыкальный диск
+item.aether.moa_music_disc.name=Музыкальный диск Моа
+item.aether.aerwhale_music_disc.name=Музыкальный диск Эфирного кита
+item.aether.recording_892.name=Запись #892
+item.aether.healing_stone.name=Исцеляющий камень
+item.aether.healing_stone_depleted.name=Истощённый исцеляющий камень
+item.aether.dart_shooter.golden.name=Золотой дротикомёт
+item.aether.dart_shooter.enchanted.name=Зачарованный дротикомёт
+item.aether.dart_shooter.poison.name=Отравленный дротикомёт
+item.aether.dart.golden.name=Золотой дротик
+item.aether.dart.enchanted.name=Зачарованный дротик
+item.aether.dart.poison.name=Отравленный дротик
+item.aether.cloud_parachute.cold.name=Парашют из холодного облака
+item.aether.cloud_parachute.blue.name=Парашют из синего облака
+item.aether.cloud_parachute.purple.name=Парашют из фиолетового облака
+item.aether.aether_saddle.name=Седло моа
+item.aether.skyroot_door_item.name=Дверь из небесного корня
+item.aether.secret_skyroot_door_item.name=Тайная дверь из небесного корня
+item.aether.arkenium_door_item.name=Дверь из аркения
+item.aether.taegore_hide_gloves.name=Укрывающие перчатки Таегора
+item.aether.burrukai_pelt_gloves.name=Меховой перчатки Буррикайя
+item.aether.icestone.name=Ледяной камень
+item.aether.skyroot_sign.name=Табличка из небесного корня
+item.aether.zanite_gloves.name=Занитные рукава стражей
+item.aether.arkenium_gloves.name=Нарукавники из аркения
+item.aether.gravitite_gloves.name=Гравитные нарукавники
+item.aether.shard_of_life.name=Осколок жизни
+item.aether.skyroot_shield.name=Щит из небесного корня
+item.aether.holystone_shield.name=Щит из святого камня
+item.aether.zanite_shield.name=Занитовый щит
+item.aether.arkenium_shield.name=Щит из аркения
+item.aether.gravitite_shield.name=Гравитный щит
+item.aether.plumproot_mash.name=Пюре из толстого корня
+item.aether.plumproot_pie.name=Пирог из толстого корня
+item.aether.winter_hat.name=Зимняя шапка
+item.aether.eggnog.name=Эгг-ног
+item.aether.scatterglass_vial.name=Флакон из развеянного стекло
+item.aether.water_vial.name=Флакон с водой
+item.aether.antivenom_vial.name=Флакон с противоядием
+item.aether.antitoxin_vial.name=Флакон с антидотом
+item.aether.bandage.name=Бинт
+item.aether.splint.name=Шина
+item.aether.crude_scatterglass_shard.name=Осколок развеянного стекла
+item.aether.valkyrie_tea.name=Чай валькирии
+item.aether.skyroot_pinecone.name=Шишка из небесного корня
+item.aether.moa_feed.name=Корм моа
+item.aether.moa_feed_blueberries.name=Черничный корм для Моа
+item.aether.moa_feed_enchanted_blueberries.name=Зачарованный корм моа
+item.aether.brettl_rope.name=Brettl верёвка
+
+item.aether.skyroot_bed_item.name=Кровать из небесного корня
+item.aether.moa_egg_item.name=Яйцо Моа
+item.aether.rainbow_moa_egg.name=Радужное яйцо Моа
+
+item.aether.cold_cloud_parachute.name=Парашют из холодного облака
+item.aether.purple_cloud_parachute.name=Парашют из холодного фиолетового облака
+item.aether.blue_cloud_parachute.name=Парашют из холодного синего облака
+
+item.aether.irradiated_chunk.name=Облучённый кусок
+item.aether.irradiated_sword.name=Облучённый меч
+item.aether.irradiated_armor.name=Облучённая броня
+item.aether.irradiated_tool.name=Облучённый инструмент
+item.aether.irradiated_ring.name=Облучённый кольцо
+item.aether.irradiated_neckwear.name=Облучённый галстук
+item.aether.irradiated_charm.name=Облучённый амулет
+item.aether.irradiated_dust.name=Облучённая пыль
+
+item.aether.skyroot_crossbow.name=Арбалет из небесного корня
+item.aether.holystone_crossbow.name=Арбалет из святого камня
+item.aether.zanite_crossbow.name=Занитовый арбалет
+item.aether.arkenium_crossbow.name=Арбалет из аркения
+item.aether.gravitite_crossbow.name=Гравититовый арбалет
+item.aether.bolt.name=Болт из развеянного стекла
+item.aether.wrapping_paper.name=Упаковочная бумага
+item.aether.fried_moa_egg.name=Жаренное яйцо Моа
+item.aether.aether_spawn_egg.name=Потомство
+item.aether.arkenium_ore_item.name=Аркениумная руда
+item.aether.gravitite_ore_item.name=Гравититовая руда
+item.aether.gravitite_plate.name=Гравититовая пластина
+item.aether.raw_taegore_meat.name=Сырая ножка таегора
+item.aether.taegore_steak.name=Жаренный таегор
+item.aether.skyroot_lizard_stick.name=Ящерица на палочке из небесного корня
+item.aether.skyroot_lizard_stick_roasted.name=Жаренная ящерица на палочке из небесного корня
+item.aether.taegore_hide.name=Шкура таегора
+item.aether.burrukai_rib_cut.name=Соединение ребра буррукайя
+item.aether.burrukai_ribs.name=Рёбра буррукайя
+item.aether.burrukai_pelt.name=Мех буррукайи
+item.aether.kirrid_loin.name=Филей из Киррида
+item.aether.kirrid_cutlet.name=Котлета из Киррида
+item.aether.valkyrie_wings.name=Крылья валькирии
+item.aether.brettl_cane.name=Brettl тростник
+item.aether.brettl_grass.name=Brettl трава
+item.aether.wrapping_paper.bow.black.name=Чёрный лук
+item.aether.wrapping_paper.bow.red.name=Красный лук
+item.aether.wrapping_paper.bow.green.name=Зелёный лук
+item.aether.wrapping_paper.bow.brown.name=Коричневый лук
+item.aether.wrapping_paper.bow.blue.name=Синий лук
+item.aether.wrapping_paper.bow.purple.name=Фиолетовый лук
+item.aether.wrapping_paper.bow.cyan.name=Голубой лук
+item.aether.wrapping_paper.bow.pink.name=Розовый лук
+item.aether.wrapping_paper.bow.lime.name=Лаймовый лук
+item.aether.wrapping_paper.bow.yellow.name=Жёлтый лук
+item.aether.wrapping_paper.bow.light_blue.name=Светло-синий лук
+item.aether.wrapping_paper.bow.magenta.name=Пурпурный лук
+item.aether.wrapping_paper.bow.orange.name=Оранжевый лук
+item.aether.wrapping_paper.bow.white.name=Белый лук
+item.aether.wrapping_paper.box.black.name=Чёрная коробка
+item.aether.wrapping_paper.box.red.name=Красная коробка
+item.aether.wrapping_paper.box.green.name=Зелёная коробка
+item.aether.wrapping_paper.box.brown.name=Коричневая коробка
+item.aether.wrapping_paper.box.blue.name=Синяя коробка
+item.aether.wrapping_paper.box.purple.name=Фиолетовая коробка
+item.aether.wrapping_paper.box.cyan.name=Голубая коробка
+item.aether.wrapping_paper.box.pink.name=Розовая коробка
+item.aether.wrapping_paper.box.lime.name=Лаймовая коробка
+item.aether.wrapping_paper.box.yellow.name=Жёлтая коробка
+item.aether.wrapping_paper.box.light_blue.name=Светло-синяя коробка
+item.aether.wrapping_paper.box.magenta.name=Пурпурная коробка
+item.aether.wrapping_paper.box.orange.name=Оранжевая коробка
+item.aether.wrapping_paper.box.white.name=Белая коробка
+item.aether.wrapping_paper.tooltip.craft=Создаёт в предметы!
+item.aether.present.tooltip.empty=Пустая
+item.aether.present.tooltip.hasitem=Внутри содержится предмет
+
+
+tile.aether.aether_portal.name=Портал в Эфир
+tile.aether.campfire.mobNotification=Вы не можете пронести с собой мобов за пределы Эфира.
+
+cloudParachute.ability.rightClick=§3Используйте:§r Пкм
+cloudParachute.ability=§9Способность:
+cloudParachute.ability.cold=Медленное снижение
+cloudParachute.ability.purple=Направленное снижение
+cloudParachute.ability.blue=Быстрое возвышение
+
+moa.feathers=Перья: %s
+moa.keratin=Кератин: %s
+moa.eyes=Глаза: %s
+moa.feather_type=Форма пера: %s
+moa.wing_strength=Сила крыла: %s
+
+moa.keratin.sky_blue=Синее небо
+moa.keratin.deep_sky=Глубокое небо
+moa.keratin.sand=Песок
+moa.keratin.midnight_sky=Полуночное небо
+moa.keratin.swamp=Болотный
+moa.keratin.royal=Королевский
+moa.keratin.tempest=Ураганный
+
+moa.eyes.alto=Альто
+moa.eyes.straw=Солома
+moa.eyes.winter_hazel=Зимняя газель
+moa.eyes.gossip=Сплетня
+moa.eyes.mint=Мята
+moa.eyes.ice=Лёд
+moa.eyes.perano=Перано
+moa.eyes.portage=Портеж
+moa.eyes.perfume=Парфюм
+moa.eyes.illusion=Иллюзия
+moa.eyes.wewak=Вевак
+
+moa.feathers.black=Чёрный
+moa.feathers.grey=Серый
+moa.feathers.white=Белый
+moa.feathers.iroko=Айроко
+moa.feathers.orange=Оранжевый
+moa.feathers.lisbon_brown=Лисбон коричневый
+moa.feathers.yellow=Жёлтый
+moa.feathers.mallard=Селезень
+moa.feathers.lime_green=Лаймово-зелёный
+moa.feathers.everglade=Эверглэйд
+moa.feathers.green=Зелёный
+moa.feathers.plantation=Плантация
+moa.feathers.sky_blue=Небо синее
+moa.feathers.cloud_burst=Сильный ливень
+moa.feathers.blue=Синий
+moa.feathers.port_gore=Портовый клин
+moa.feathers.purple=Фиолетовый
+moa.feathers.bossanova=Босанова
+moa.feathers.pink=Розовый
+moa.feathers.livid_brown=Злой коричневый
+moa.feathers.puse=Пюс
+moa.feathers.deep_red=Глубокий красный
+moa.feathers.red=Красный
+
+moa.marks.pointed=Направленное
+moa.marks.flat=Плоское
+moa.marks.curved=Изогнутый
+
+moa.wing_strength.weak=Слабая
+moa.wing_strength.normal=Нормальная
+moa.wing_strength.strong=Мощная
+moa.wing_strength.excellent=Превосходная
+
+# Редкость предметов
+item.rarity.none.name=§7§Базовый
+item.rarity.common.name=§7§oОбщий
+item.rarity.rare.name=§b§oРедкий
+item.rarity.epic.name=§5§oЭпичный
+item.rarity.mythic.name=§6§oМистический
+item.rarity.godly.name=§o§aБ§bо§6жест§веl§eный
+
+# Подсказки для оружия
+item.aether.skyroot_sword.ability.desc=Двойное выпадение
+item.aether.holystone_sword.ability.desc=Сбрасывает амброзий
+item.aether.zanite_sword.ability.desc=Сильнее с множественным использованием
+item.aether.arkenium_sword.ability.desc=Прочный, но тяжёлый
+item.aether.gravitite_sword.ability.desc=С приседанием притягивает
+item.aether.gravitite_sword.use.desc=Присядьте и нападайте
+item.aether.holy_sword.ability.desc=Стирает нежить
+item.aether.lightning_sword.ability.desc=Поражает молнией
+item.aether.flaming_sword.ability.desc=Поджигает монстров
+item.aether.vampire_blade.ability.desc=Крадёт жизнь
+item.aether.candy_cane_sword.ability.desc=Сбрасывает леденцы
+item.aether.valkyrie_lance.ability.desc=Расширенный охват
+item.aether.sentry_vaultbox.ability.desc1=§dРезультат: §rСлучайные предметы
+item.aether.sentry_vaultbox.ability.desc2=§3Бросить: §rПкм
+item.aether.crossbow.desc1=Скорость перезарядки
+item.aether.crossbow.desc2=Секунды
+item.aether.crossbow.desc3=Второй
+item.aether.crossbow.desc4=Способность
+item.aether.crossbow.use.desc=Присядьте и перезаряжайтесь
+item.aether.skyroot_crossbow.ability=Двойной выстрел
+item.aether.holystone_crossbow.ability=Разброс выстрела
+item.aether.zanite_crossbow.ability=Сильнее с множественным использованием
+item.aether.arkenium_crossbow.ability=Долгий выстрел
+item.aether.gravitite_crossbow.ability=Прямое попадание
+item.aether.bolt.desc=Боеприпасы арбалета
+item.aether.dart.desc=Боеприпасы дротикомёта
+
+# Подсказки для инструментов
+item.aether.tool.skyroot.ability.desc=Двойное выпадения блока
+item.aether.tool.holystone.ability.desc=Сбрасывает амброзий
+item.aether.tool.zanite.ability.desc=Быстрее при большем использовании
+item.aether.tool.arkenium.ability.desc=Прочный, но тяжёлый
+item.aether.tool.gravitite.ability.desc=С приседанием блок притягивается
+item.aether.tool.gravitite.use.desc=Присядьте и Используйте
+item.aether.tool.valkyrie.ability.desc=Расширенный охват
+
+# Подсказки
+item.aether.tooltip.modifiers.gloves=Когда в руках:
+item.aether.tooltip.ability=Способность
+item.aether.tooltip.use=Использовать
+item.aether.tooltip.cures=Лечит
+item.aether.tooltip.heals=Исцеляет
+
+# Подсказки для брони
+item.aether.armor.zanite.ability.desc=Становится сильнее с износом
+
+# Лечебные подсказки
+item.aether.curative.desc1=Лечебный эффект
+item.aether.curative.fracture.desc1=Сокращает время лечения
+item.aether.curative.desc2=Уменьшает нарастание
+
+# Чайные подсказки
+item.aether.tea.applied.desc=Когда использован:
+item.aether.valkyrie_tea.desc=Двойное насыщение
+
+# Записи
+item.aether.moa_music_disc.desc=Эмиль ван Крикен - Методы
+item.aether.aerwhale_music_disc.desc=Аудиоэфир - Эфирный кит
+item.aether.labyrinth_music_disc.desc=Moorziey - Кончина
+item.aether.valkyrie_music_disc.desc=Эмиль ван Крикен - Восходящий рассвет
+item.aether.recording_892.desc=Эмиль ван Крикен - ???
+
+# Существа
+entity.aether.aechor_plant.name=Эчор растение
+entity.aether.aerbunny.name=Эфирный кролик
+entity.aether.carrion_sprout.name=Росток падали
+entity.aether.cockatrice.name=Василиск
+entity.aether.kirrid.name=Киррид
+entity.aether.moa.name=Моа
+entity.aether.aerwhale.name=Эфирный кит
+entity.aether.zephyr.name=Зефир
+entity.aether.tempest.name=Ураган
+entity.aether.taegore.name=Таегор
+entity.aether.detonation_sentry.name=Часовая детонация
+entity.aether.battle_sentry.name=Боевой патрульный блок
+entity.aether.tracking_sentry.name=Контрольный патрульный блок
+entity.aether.chest_mimic.name=Сундук мимик
+entity.aether.battle_golem.name=Боевой голем
+entity.aether.swet.name=Свит
+entity.aether.generator.name=Генератор существа
+entity.aether.sentry_guardian.name=Патрульный страж
+entity.aether.production_line.name=Конвейер
+entity.aether.repair_sentry.name=Ремонтный часовой
+entity.aether.slider.name=Слайдер
+entity.aether.frostpine_totem.name=Тотем морозной сосны
+entity.aether.kraisith.name=Крайсит
+entity.aether.shade_of_arkenzus.name=Оттенок аркензуса
+entity.aether.ethereal_wisp.name=Эфирный огонёк
+entity.aether.fleeting_wisp.name=Мимолётный огонёк
+entity.aether.soaring_wisp=Парящий огонёк
+entity.aether.fangrin.name=Фанат ухмылки
+entity.aether.nex_spirit.name=Нэкс дух
+entity.aether.pink_baby_swet.name=Розовый малыш свит
+entity.aether.glitterwing.name=Блестящее крыло
+entity.aether.edison.name=Эдисон
+entity.aether.burrukai.name=Буррукайа
+entity.aether.necromancer.name=Некромант
+entity.aether.josediya.name=Джоседия
+entity.aether.tivalier.name=Тивалиер
+entity.aether.icehog.name=Ледяной кабан
+entity.aether.mysterious_figure.name=Загадочная фигура
+entity.aether.varanys.name=Варанус
+entity.aether.skyroot_lizard.name=Ящерица из небесного корня
+entity.aether.glactrix.name=Глактрикс
+entity.aether.sheepuff.name=Овцауфф
+
+# Творческие вкладки
+itemGroup.aether.blocks=Aether II блоки
+itemGroup.aether.materials=Aether II материалы
+itemGroup.aether.tools=Aether II инструменты
+itemGroup.aether.weapons=Aether II оружия
+itemGroup.aether.armor=Aether II броня
+itemGroup.aether.food=Aether II еда
+itemGroup.aether.consumables=Aether II расходные материалы
+itemGroup.aether.companions=Aether II товарищи
+itemGroup.aether.miscellaneous=Aether II различные
+itemGroup.aether.rings=Aether II кольца
+itemGroup.aether.neckwear=Aether II платочно-шарфовые изделия
+itemGroup.aether.relics=Aether II реликвии
+itemGroup.aether.charms=Aether II амулеты
+itemGroup.aether.artifacts=Aether II артефакты
+itemGroup.aether.visual_variants=Aether II блоки для украшения
+itemGroup.aether.natural_blocks=Aether II естественные блоки
+itemGroup.aether.construction=Aether II строительные блоки
+itemGroup.aether.utility_blocks=Aether II полезные блоки
+itemGroup.aether.dungeon_blocks=Aether II подземельные блоки
+itemGroup.aether.thera=Aether II теран блоки
+
+# Контейнеры
+# СДЕЛАТЬ: Префикс с эфиром
+container.holystone_furnace=Печь из святого камня
+container.skyroot_chest=Сундук из небесного корня
+container.skyroot_double_chest=Большой сундук из небесного корня
+container.labyrinth_chest=Лабиринтный сундук
+container.icestone_cooler=Холодильник из ледяного камня
+container.incubator=Инкубатор
+container.masonry_bench=Верстак каменщика
+container.aether_workbench.recipes=Рецепты (%s / %s)
+
+# Звуки
+subtitles.aether.portal.glowstone.hum=Портал напевает
+subtitles.aether.portal.glowstone.trigger=Портал активируется
+subtitles.aether.portal.glowstone.travel=Портал телепортирует
+subtitles.aether.portal.labyrinth_totem.drone=Тотем наносит удар
+subtitles.aether.portal.labyrinth_totem.woosh=Тотем оживает
+subtitles.aether.block.aercloud.bounce=Эфирное облако попятно движется
+subtitles.aether.mob.aerbunny.ambient=Эфирный кролик пищит
+subtitles.aether.mob.aerbunny.hurt=Эфирный кролик ранен
+subtitles.aether.mob.aerbunny.death=Эфирный кролик умирает
+subtitles.aether.mob.aerbunny.lift=Эфирный кролик снят
+subtitles.aether.mob.aerwhale.ambient=Эфирный кит свистит
+subtitles.aether.mob.aerwhale.death=Эфирный кит умирает
+subtitles.aether.mob.cockatrice.ambient=Василиск шипит
+subtitles.aether.mob.cockatrice.hurt=Василиск ранен
+subtitles.aether.mob.cockatrice.death=Василиск умирает
+subtitles.aether.mob.tempest.ambient=Ураган наносит удар
+subtitles.aether.mob.tempest.hurt=Ураган ранен
+subtitles.aether.mob.tempest.death=Ураган умирает
+subtitles.aether.mob.tempest.angry=Ураган заряжается
+subtitles.aether.mob.tempest.electric_shock=Ураган стреляет шоком
+subtitles.aether.mob.zephyr.ambient=Зефир оживает
+subtitles.aether.mob.zephyr.puff=Зефир пыхтит
+subtitles.aether.mob.tracking_sentry.alarm=Контрольный патрульный блок встревожился
+subtitles.aether.mob.sentry.ambient=Патрульный блок рычит
+subtitles.aether.mob.sentry.hurt=Патрульный блок ранен
+subtitles.aether.mob.sentry.death=Патрульный блок умирает
+subtitles.aether.mob.battle_sentry.pounce=Боевой патрульный блок набрасывается
+subtitles.aether.random.stone.thud=Камень грохочет
+subtitles.aether.random.detonating=Взрывчатка детонируется
+subtitles.aether.random.detonate=Взрывчатка взорвался
+subtitles.aether.random.dart_shooter.fire=Дротикомёт стрельнул
+subtitles.aether.mob.moa.ambient=Моа зовёт
+subtitles.aether.mob.moa.hurt=Моа ранена
+subtitles.aether.mob.kirrid.ambient=Киррид бахает
+subtitles.aether.mob.kirrid.hurt=Киррид ранен
+subtitles.aether.mob.kirrid.death=Киррид умирает
+subtitles.aether.mob.taegore.ambient=Таегор фыркает
+subtitles.aether.mob.taegore.hurt=Таегор ранен
+subtitles.aether.mob.taegore.death=Таегор умирает
+subtitles.aether.mob.taegore.attack=Таегор атакует
+subtitles.aether.mob.chest_mimic.awake=Сундук-мимик пробуждается
+subtitles.aether.random.present_unwrap=Подарок разрывается
+subtitles.aether.random.dungeon.container.smash=Контейнер разбился
+subtitles.aether.mob.slider.awake=Слайдер пробуждается
+subtitles.aether.mob.slider.collide=Слайдер врезается
+subtitles.aether.mob.slider.die=Слайдер раскалывается
+subtitles.aether.mob.slider.move=Слайдер движется
+subtitles.aether.mob.slider.signal=Слайдер сигналит
+subtitles.aether.mob.generic.wings.flap=Крылья махают
+subtitles.aether.mob.burrukai.ambient=Буррукайя раздражается
+subtitles.aether.mob.burrukai.hurt=Буррукайя ранен
+subtitles.aether.mob.burrukai.death=Буррукайя умирает
+subtitles.aether.mob.burrukai.attack=Буррукайя атакует
+subtitles.aether.environment.rain.light=Дождь моросит
+subtitles.aether.environment.rain.heavy=Дождь льётся
+subtitles.aether.environment.snow.wind=Ветер сдувает
+
+# Названия доп. слотов
+gui.aether.slot.none=Не экипировано
+gui.aether.slot.neckwear=Платочно-шарфовые изделия
+gui.aether.slot.companion=Товарищ
+gui.aether.slot.shield=Щит
+gui.aether.slot.relic=Реликвия
+gui.aether.slot.ring=Кольцо
+gui.aether.slot.handwear=Одежда для рук
+gui.aether.slot.charm=Амулет
+gui.aether.slot.artifact=Артефакт
+gui.aether.slot.helmet=Шлем
+gui.aether.slot.chestplate=Нагрудник
+gui.aether.slot.leggings=Поножи
+gui.aether.slot.boots=Ботинки
+gui.aether.slot.offhand=Левая рука
+gui.aether.coolant=Охладитель
+gui.aether.cools_into=Остывает в:
+gui.aether.random_item=Случайный предмет
+gui.aether.random_armor=Случайная броня
+gui.aether.random_sword=Случайный меч
+gui.aether.random_tool=Случайный инструмент
+gui.aether.random_ring=Случайное кольцо
+gui.aether.random_neckwear=Случайное платочно-шарфовое изделие
+gui.aether.random_charm=Случайный амулет
+gui.aether.incubator_fuel=Топливо инкубатора
+gui.aether.baby_moa=Малышка Moa
+gui.aether.respawn.bed=Переродиться в кровати
+gui.aether.campfire.bed=Переродиться на Аванпосте
+gui.aether.loading.indeterminate=Загрузка...
+gui.aether.loading.progress=Загрузка... %s%%
+gui.aether.patreon.rewards.button.use=Использовать
+gui.aether.patreon.rewards.button.locked=Заблокировать
+gui.aether.incubator.label.incubation=Инкубация
+gui.aether.incubator.label.heating=Нагревание
+gui.aether.incubator.label.more_heat=Больше тепла!
+gui.aether.incubator.label.ready=Готово!
+gui.aether.incubator.label.max=МАКС.
+gui.aether.incubator.label.fail=ПРОВАЛЕНО!
+gui.aether.masonry.label.recipes=Рецепты
+
+gui.aether.hover.npc=Говорит в %s
+gui.aether.hover.campfire=Вернуться в Верхний мир
+gui.aether.hover.teleporter=Войти в ЭФир
+
+gui.guidebook.discovery.stats=Статистика:
+gui.guidebook.discovery.moves=Передвижения:
+
+# Сообщение при смерти
+
+death.attack.aether.effect.bleed=%1$s истёк кровью
+death.attack.aether.effect.fungalRot=%1$s скончался от грибковой гнили
+death.attack.aether.effect.fracture=Ууф овие кости %1$s
+
+# Статус эффектов
+
+effect.aether.ambrosium_poisoning=Отравление амброзием
+effect.aether.bleed=Кровотечение
+effect.aether.cockatrice_venom=Яд василиска
+effect.aether.fracture=Перелом
+effect.aether.freeze=Заморозка
+effect.aether.fungal_rot=Грибковая гниль
+effect.aether.stun=Оглушение
+effect.aether.toxin=Токсичность
+effect.aether.webbing=Спутанность
+
+effect.aether.saturation_boost=Ускоренное насыщение
+effect.aether.guard_break=Ломание стража
+
+# Атрибуты к урону
+
+attribute.name.aether.slash=Сократить
+attribute.name.aether.pierce=Пронзить
+attribute.name.aether.impact=Воздействие
+attribute.name.aether.damageLevel=Урон
+
+# Introsat
+
+intro.prologue=200 лет спустя после того, как одинокий путешественник победил тиранического Солнечного духа, Картхуула, новый путешественник собирается войти в Эфир...
+intro.tip1=ДИСКЛЕЙМЕР:\n\nЭта сборка indev является незавершённой, ПУПСИК,\n\nПЛОХАЯ РАБОТА итерации официального выпуска Нагорья (Дата пока не решена).\n\nЕСЛИ ВЫ НЕ ХОТИТЕ ИСПОРТИТЬ СВОЙ ОПЫТ, мы НАСТОЯТЕЛЬНО РЕКОМЕНДУЕМ Вам, НЕ ИГРАТЬ В ЭТО, ДО ОФИЦИАЛЬНОГО ВЫПУСКА.\n\nМногие возможности отсутствуют, некоторые экспериментальные и т.д. Мы выпустили эти сборки indev для тех, кто хочет помочь протестировать и кто не может ждать, чтобы получить исправление Эфира.
+intro.tip2=ПОДЗЕМЕЛИЙ, ПОКА ЧТО В МОДЕ НЕТ. Мы все ещё проектируем и разрабатываем технологию для них с помощью нашего другого технического/инструментального мода под названием Orbis. Понадобится некое время, чтобы эти материалы попали в мод. Самое интересное, с чем Вы можете сейчас иметь дело, это исследовать новые биомы и ландшафтные генерации, а также новые художественные активы и модели, которые мы разработали.
+intro.tip3=Мир, в который вы собираетесь войти, полностью отделён от Minecraft, как в знаниях, так и во времени и пространстве...
+intro.tip4=Начнёте своё путешествие?
+intro.holdToSkip=Удерживайте, чтобы пропустить
+intro.proudlyPresents=С гордостью представляет...
+intro.yes=Да
+intro.no=Нет
+
+# Примечание к телепортации
+
+notice.body=Вы, должно быть, возвращаетесь.\n\nВ Aether II, Путешествие в Эфир больше не связано с Порталом из Светокамня\n\nВзамен этого, создайте блок Портала в Эфир
+notice.gotcha=Попался!
+notice.holdUp=Ух!Постойте
+
+#Подсказки к возможностям
+ability.breatheUnderwater.name=Подводное дыхание
+ability.daggerfrost.name=Морозный кинжал
+ability.doubleDrops.name=Двойное выпадение
+ability.extraDamage.name=Увеличенный урон
+ability.punchingDamage.name=Увеличенный удар
+ability.freezeBlocks.name=Замораживающая аура
+ability.pauseHunger.name=Еда рая
+ability.reduceHunger.name=Сыты
+ability.regenerateHealth.name=Регенерация здоровья
+ability.maxHealthMod.name=Модификатор: Максимум здоровья
+ability.movementSpeedMod.name=Модификатор: Скорость передвижения
+ability.modifyXPCollection.name=Модификатор: Сборщик опыта
+ability.modifyDefense.name=Модификатор: Оборона 
+ability.weightTolerance.name=Допуск к весу
+ability.invisibility.name=Незаметность
+ability.changeAttackElement.name=Фактор шанса нападения
+ability.setEnemiesOnFire.name=Зажжённое прикосновение
+ability.fireImmunity.name=Иммунитет к огню
+ability.companionMaxHealthMod.name=Модификатор: Максимальное здоровье товарища
+ability.slowfall.name=Медленное падение
+ability.attackSpeedMod.name=Модификатор: Скорость атаки
+
+elementalState.biological=Родной
+elementalState.frost=Мороз
+elementalState.fire=Огонь
+elementalState.water=Вода
+elementalState.earth=Земля
+elementalState.air=Воздух
+elementalState.blight=Вред
+elementalState.lightning=Молния
+
+ability.extraDamage.attack=Атака
+ability.extraDamage.desc=%s %s урон
+ability.active=§5Только активна:
+ability.cosmetic=§eКосметический
+ability.breatheUnderwater.desc=§9Водное дыхание
+ability.daggerfrost.desc=§9Снежки причиняют урон
+ability.doubleDrops.desc1=§9Двойное выпадение из мобов
+ability.doubleDrops.desc2=%s%% шанс
+ability.punchingDamage.desc1=%s Урон от удара
+ability.punchingDamage.desc2=%s %s Удар
+ability.freezeBlocks.desc=§9Замораживает блоки по близости
+ability.pauseHunger.desc=§9Останавливает голод
+ability.reduceHunger.desc=§9Уменьшает голод
+ability.regenerateHealth.desc=§9Регенерирует здоровье
+ability.maxHealthMod.desc=%s Максимального здоровья
+ability.movementSpeedMod.desc=%s Скорость движения
+ability.modifyXPCollection.desc=%s Опыта собрано
+ability.defenseMod.desc=%s %s
+ability.defenseMod.desc1=Оборона
+ability.defenseMod.desc2=Сопротивление
+ability.invisibility.desc=§9Незаметность
+ability.changeAttackElement.desc=§9Все атаки станут:
+ability.setEnemiesOnFire.desc=§9Поджигает врагов
+ability.fireImmunity.desc=§9Иммунитет к огню
+ability.doubleJump.desc=§9Двойной прыжок
+ability.companion.desc=Для товарища
+ability.leechLife.desc1=§9Красть жизнь
+ability.leechLife.desc2=%s%% шанс
+ability.slowfall.desc=§9Медленное падение
+ability.weight.desc1=%sкг Веса
+ability.weight.desc2=%sкг Допустимо к весу
+ability.levitateAttackers.desc1=§9Поднимает в воздух нападающих
+ability.levitateAttackers.desc2=%s%% шанс
+ability.setAttackersOnFire.desc1=§9Поджигает нападающих
+ability.setAttackersOnFire.desc2=%s%% шанс
+ability.attackSpeedMod.desc=%s Скорость атаки
+
+# Вкладки
+tab.guidebook=Aether II
+tab.guidebook.equipment=Снаряжение
+tab.guidebook.status=Статус
+tab.guidebook.loretome=Том: Легенда
+tab.guidebook.discovery=Находка
+tab.guidebook.discovery.bestiary=Бестиарий
+tab.guidebook.discovery.landmarks=Достопримечательности
+tab.guidebook.discovery.characters=Персонажи
+tab.guidebook.discovery.effects=Эффекты
+tab.bug_report=Сообщить об ошибках
+tab.backpack.name=Рюкзак
+tab.patron_rewards=Покровители
+
+# Сообщения чата
+chat.aether.resurrected=%s был воскрешён Некс духом
+
+# Меню в разработке
+indev.button=Принести его!
+indev.line1=Здравствуй, стремительный игрок!
+indev.line2=Спасибо Вам за интерес к моду! Прежде чем мы продолжим, мы хотели бы прояснить несколько моментов. Версия Эфира, в которую Вы играете, это предварительный просмотр. Это означает, что Вы можете столкнуться с серьёзными проблемами, такими как:
+indev.line3=Повреждения мира и вылеты
+indev.line4=Мобы без моделей или текстур
+indev.line5=Сломаны игровые механики
+indev.line6=И самое главное, много ошибок!
+indev.line7=Мы очень рады, что Вы смогли увидеть Эфир на ранней стадии, но мы просим Вас проявить терпение и оказать нам поддержку в процессе развития.
+indev.line8=Нажав на кнопку ниже, Вы признаёте, что понимаете условия, изложенные выше, и что Вы не будете считать нас ответственными, если Ваша игра вырастит ноги и сбежит с вашим кофе.
+
+# Меню: Сообщить об ошибке
+bug_report.button=Открыть систему отслеживания проблем
+bug_report.line1=Здравствуйте, снова!
+bug_report.line2=Вы столкнулись с проблемой? Если хотите, вы можете помочь Эфиру, посетив нашу Систему отслеживания проблем
+bug_report.line3=Проблемы - это простой способ сообщать об ошибках и других проблемах с модом, предоставляя прямой доступ к помощи разработчика и нашему удивительному сообществу добровольцев.
+bug_report.line4=Нажав на кнопку ниже, Вы попадёте на внешний веб-сайт в Вашем браузере, где находится наша Система отслеживания проблем. Зарегистрируйте аккаунт и помогите нам раздавить ошибки быстрее, чем когда-либо!
+
+aether.warning.deprecated_item=§cУстаревший! Будет удалён!
+aether.warning.operator_item=Требуются привилегии Оператора
+
+# Rewards
+aether.reward.sun_spirit.name=Солнечный дух
+aether.reward.slider.name=Слайдер
+aether.reward.valkyrie_queen.name=Короле валькирий
+aether.reward.none.name=Отсутствует
+
+# Обмен
+aether.trade.gui.thirdtrade=Обмен с %s
+aether.trade.gui.firsttrade=Ваш обмен
+aether.trade.gui.lock=Закрепить обмен
+aether.trade.gui.unlock=Разблокировать обмен
+aether.trade.gui.confirm=Утвердить обмен
+aether.trade.chat.success=Ваш обмен с %s был завершён!
+aether.trade.chat.cancel=Ваш обмен с %s был отменён!
+aether.trade.chat.request=%s хочет торговать с Вами! Взаимодействуйте с ним, чтобы начать торговаться!
+aether.trade.chat.failexpired=Ваш запрос на обмен %s истёк!
+aether.trade.chat.failtrade=%s текущее обменивание
+aether.trade.chat.failsent=У Вас уже отправлен приглашение на обмен к %s.
+aether.trade.status.waitingboth=Ждём, пока обе стороны приостановятся
+aether.trade.status.waitingyou=Жду, когда Вы приостановитесь.
+aether.trade.status.waitingthem=Ждём, когда другая сторона заявится
+aether.trade.status.confirmboth=Ждём подтверждения от обеих сторон
+aether.trade.status.confirmyou=Жду от Вас подтверждения
+aether.trade.status.confirmthem=Ждём подтверждения от другой стороны
+aether.trade.status.sizeerror=Безопасная торговля невозможна
+aether.trade.message.targetlock=%s заблокирован в своём обмене!
+aether.trade.message.targetconfirm=%s утвердил свой обмен
+aether.trade.message.unlockwarn=%s разблокировал свой обмен! Проверьте их обмен, прежде чем блокировать снова!
+aether.trade.message.unlocksafe=%s разблокировал свой обмен!
+aether.trade.message.inventorywarn=У вас недостаточно места в Вашем инвентаре, чтобы принять этот обмен!
+aether.trade.message.tradewarn=Они не имеют достаточно места в инвентаре, чтобы принять Ваш обмен!
+
+
+# Магазин
+aether.shop.sell=Выкинуть
+aether.shop.buy=Купить: %s
+aether.shop.back=Назад
+aether.shop.lockTooltip=При разблокировании каждый раз, когда Вы нажимаете на новый товар, сумма, которую Вы пытаетесь купить, сбрасывается на 1.
+
+# ИМЕНА ПЕРСОНАЖЕЙ
+
+edison.name=Эдисон
+necromancer.name=Некромант
+josediya.name=Джоседия
+
+# ОБЩИЙ ДИАЛОГ
+
+generic.back=Назад
+generic.okay=Ладно
+generic.goodbye=Пока
+
+# ДИАЛОГ НЕКРОМАНТА
+
+necromancer.them.start1=Я рад видеть Вас здесь в безопасности, Путешественник. Уверен, у тебя много вопросов, но время имеет значение.
+necromancer.them.start2=Через этот разлом в космосе, Вы найдёте человека со шрамом на глазу, его зовут Эдисон. Он своего рода друг.
+necromancer.them.start3=Он ответит на любые Ваши вопросы, он был нанят, чтобы помочь Вам в Вашем поиске. Он может показаться странным, но... ну...
+necromancer.them.start4=Мы здесь в компании незнакомцев, не так ли?
+necromancer.them.start5=Безопасные путешествия, новый мир ждёт Вас.
+
+necromancer.us.leadtheway=Спасибо. Пока.
+
+# ПРИВЕТСТВЕННЫЙ ДИАЛОГ ЭДИСОНА
+
+edison.greet.start_not_introduced=Вы опоздали. Уже несколько часов жду.
+
+edison.greet.option.expecting=Вы ждали меня?
+edison.greet.option.who=Кто вы?
+edison.greet.option.map=У меня не было точной карты.
+
+edison.greet.respawn_not_introduced=Вам следует лучше о себе заботиться, друг. Вам повезло, что Вас нашли целым.
+edison.greet.respawn=Вы в порядке? Вас там сильно избили.
+
+edison.greet.option.what=Что это за место?
+edison.greet.option.died=Я думаю, я закончил...
+
+edison.greet.option.fine=Я в норме.
+edison.greet.option.thanks=Спасибо, Эдисон.
+edison.greet.option.okay_sale=Со мной всё будет в порядке, у Вас есть что-нибудь на продажу?
+edison.greet.option.okay_holiday_sale=Я в порядке. У вас есть специальный запас на этот праздничный сезон?
+
+edison.greet.start=Привет, друг, как дела? Вам что-нибудь нужно?
+
+edison.greet.option.sale=У Вас есть что-нибудь на продажу?
+edison.greet.option.holiday_sale=У вас есть специальный запас на этот праздничный сезон?
+
+edison.greet.option.okay_goodbye=Я думаю, что я в порядке. Пока
+edison.greet.option.ready_goodbye=Я думаю, что я готов. Пока, Эдисон.
+edison.greet.option.mind_goodbye=Буду иметь в виду. Пока.
+
+edison.greet.expecting1=Конечно! Мой "общий друг" заплатил мне хорошие деньги, чтобы прикрыть Вас.
+edison.greet.expecting2=Погоди, он не объяснил нашу маленькую договорённость? Типично...
+edison.greet.expecting3=Тогда... что мне нужно Вам объяснить?
+
+edison.greet.option.no_we_talked=Нет, мы разговаривали. Вы... Эдисон, верно?
+
+edison.greet.who1=Я Эдисон! Международный предприниматель, продавец и мастер убеждения!
+edison.greet.who2=Но для вас, благодаря нашему маленькому соглашению с "Вы знаете, с кем", я также ваша связь в этих странных землях.
+edison.greet.who3=В общем, это значит, что я должен заботиться о Вас.
+edison.greet.who4=Я твёрдо верю в то, что знание - лучший инструмент в этом мире. так что в моих интересах удержать Вас от смерти...
+edison.greet.who5=У Вас есть какие-либо вопросы?
+
+edison.greet.option.you_know_who="Вы знаете кто?"
+
+edison.greet.map1=Ха-ха! Не правда ли? Может, стоило немного подождать.
+edison.greet.map2=Не так уж и сложно найти эти места. В любом случае, я бы подумал, что Вас высадят неподалёку.
+
+edison.greet.what1="Это место?" Король расплывчатых вопросов, не так ли?
+edison.greet.what2=Я бы предположил, что Вы хотя бы немного знали о том, во что ввязываетесь, придя сюда, но мне нужно, чтобы Вы были более конкретны, чем это.
+edison.greet.what3=Вы имеете в виду это здание, в котором мы стоим? Или реальный мир вокруг нас?
+
+edison.greet.option.building=Это здание.
+edison.greet.option.world=Этот мир.
+
+edison.greet.died1=Как и я! Когда мой сотрудник притащил Вас сюда, я не был уверен, что Вы очнётесь.
+
+edison.greet.fine1=Это было пассивно-агрессивно, учитывая, что я и мои люди только что спасли Вашу шкуру.
+edison.greet.fine2=Вам что-нибудь нужно, прежде чем Вы уйдёте?
+
+edison.greet.thanks1=Не говоря уже об этом. У нас у всех есть своя роль, Моя - чтобы защитить Вас.
+edison.greet.thanks2=Тебе что-нибудь нужно или Вы готовы отправиться?
+
+edison.greet.sale=Конечно, давай взглянем на мои запасы.
+edison.greet.holiday_sale=Надеюсь, Вы чувствуете себя празднично, друг! Загляните в наши эксклюзивные запасы на этот праздничный сезон.
+
+edison.greet.no_we_talked1=Верно! Международный предприниматель, продавец и мастер убеждения!
+edison.greet.no_we_talked2=Но для вас, благодаря нашему небольшому соглашению с Некромантом, я также Ваша связь в этих странных землях.
+edison.greet.no_we_talked3=Это значит, что я должен заботиться о Вас.
+edison.greet.no_we_talked4=Я твёрдо верю в то, что знание - лучший инструмент в этом мире. Поэтому, в интересах сохранения Вас от смерти...
+edison.greet.no_we_talked5=У Вас есть какие-либо вопросы?
+
+edison.greet.you_know_who1=Некромант. Вы знаете - Мистер. Высокий, Тёмный и Жуткий?
+edison.greet.you_know_who2=Мы с ним общались довольно регулярно, и он платит мне довольно много денег, чтобы убедиться, что если Вы когда-нибудь окажетесь в затруднительном положении, то Вас отвезут в безопасное место.
+edison.greet.you_know_who3=Хотя, думая об этом, он обычно оставляет записку со своими маленькими "Подарками", которые он раздаёт. Может, посмотрите ваш Справочник.
+
+edison.greet.building1=Вот это - старый путник! Построенный много лет назад Валькириями, в качестве захоронения.
+edison.greet.building2=С тех пор, многие люди взяли на себя ответственность за поддержание этих местностей, сделав их действительно безопасным местом для всех, кто бродит по Эфиру, чтобы отдохнуть.
+
+edison.greet.option.valkyries=Валькирии?
+edison.greet.option.what_world=Что об этом мире?
+edison.greet.option.what_building=Что об этой постройке?
+
+edison.greet.world1=Хорошо, мало что было сказано? Это Эфир! Это мир, который существует высоко над нашим, настолько высоко, что имеет свою собственную Флору и Фауну.
+edison.greet.world2=Сейчас Вы стоите на одном из многих древних аванпостов Валькирии, они были первоначально созданы как Священные захоронения, если я правильно помню, но поскольку они служили местом отдыха для многих Путешественников.
+
+edison.greet.valkyries1=Они похожи на городских охранников этого мира, но эээээ... ээээ... намного сильнее. Один легионер может разорвать Вас на куски, если Вы дадите ему повод.
+edison.greet.valkyries2=К счастью, они довольно дружелюбные, не большие болтуны. Их можно найти бродящими по большинству городов и деревень. У них есть какой-то священный соглашение для защиты людей или что-то в этом роде.
+edison.greet.valkyries3=Честно говоря, я не совсем уверен, что это такое, Вам лучше спросить одного из местных. Или лично Валькирию! Их трудно не заметить.
+edison.greet.valkyries4=Есть что-нибудь ещё, что Вы хотите знать?
+
+# МАГАЗИН ЭДИСОНА ДИАЛОГ
+
+edison.shop.greetings1=Вот мы и на месте, сегодня отличные запасы. Смешали уникальные сокровища, взгляните.
+edison.shop.greetings2=Справедливые цены, уверяю Вас, но... никаких возвратов. Политика компании.
+
+edison.shop.enchanted_wyndberry=У меня есть парень, который подбирает это из растений Падали, они опасные маленькие штуки. Он также обогащает их амброзием для дополнительного удара!
+edison.shop.enchanted_blueberry=Чернику довольно легко найти, но эти зачарованные Амброзием, хороший материал, если Вы немного не в настроении.
+edison.shop.ambrosium_shard=Это действительно особенный, по-настоящему многофункциональный материал. Он может ремонтировать оборудование, улучшать питание, разжигать огонь. Он даже лечит болезни с правильным применением.
+edison.shop.skyroot_stick=Я буду честен с Вами, это не совсем часть моих запасов. Но Вы можете купить их, если хотите.
+edison.shop.skyroot_pickaxe=Местные жители ценят Небесный корень как материал для его предполагаемой "Беспрецедентной точности". Лишь болтовня! Если Вы спросите меня, но это хорошее начало, если Вы планируете добычу.
+edison.shop.skyroot_axe=Как-то неправильно рубить деревья деревьями. Ну. Хороший топор, чтобы сбить тебя с ног деревом.
+edison.shop.skyroot_sword=Хотите защитить себя? Дикая природа в этих местах может быть немного агрессивной. Ношение меча было бы умной инвестицией.
+edison.shop.skyroot_shovel=Если атакующий маршрут провалится, почему бы не выкопать себе небольшое укрытие! Лопата точно пригодится.
+edison.shop.therawood_leaves=У меня был парень, который делал их из тростника Бреттла, красил их красиво, чтобы напоминать листья из лесов Гринстоля.
+edison.shop.therawood_log=Наш друг позволил мне взять с собой несколько саженцев для выращивания деревьев, его маленький эксперимент. Листья были отбелены из газов в воздухе, но брёвна в полном порядке.
+edison.shop.thera_dirt=Мой любимый маленький проект, я хотел посмотреть, как геология этого мира сравнима с домом, поэтому я обработал несколько земли похожую на Теру. Пустая трата времени, но выглядит ностальгически!
+edison.shop.thera_grass=Удалось вырастить что-то похожее на траву Теры. Всегда думал, что трава там зеленее.
+edison.shop.therastone_brick=Эти я сделал, чтобы воссоздать старую высокую тёмную и страшную башню. Они простые Агретиты, но с приличным износом они выглядят примерно так.
+
+edison.shop.holiday_notice=50%% скидка!\nРождественский выпуск
+
+edison.shop.greetings_holiday=Добро пожаловать в мои праздничные изделия! Эти акции здесь только на определённое время, так что берите их, пока можете. Не будьте дураком, который не воспользовался шансом!
+
+edison.shop.candy_cane=Эти - праздничные угощения. Не путать с настоящими тростниками, люди с дальних и широких склонов, как правило, украшают их на моих Мутантских деревьях - и к счастью для Вас, эти саженцы продаются!
+edison.shop.candy_cane_block=Вы когда-нибудь думали: "Вау, мне действительно нужно разломать кучу конфет и сделать из них чудовищную плиту"? Мне тоже. В любом случае, она продаётся - почему бы не попробовать, пока запасы не закончатся?
+edison.shop.candy_cane_wall=Я думаю, Вы могли бы... отгородиться от несвязанных зубов мира? Я озадачен, но эти вещи в наши дни все ещё в моде. Я не понимаю, и честно говоря, я не хочу, потому что они продаются как сумасшедшие.
+edison.shop.mutant_sapling=Это навевает воспоминания. Жаль, что я не могу рассказать вам, как были сделаны эти чудесные деревья. Скажем так, это праздничное угощение, которое имеет тенденцию выращивать "Лампочки".
+edison.shop.winter_hat=Горожане снизу любят это. Если подумать, не было ни одной праздничной ночи, где я не видел ни одного человека, носящего это. Я слышал, что это стильное дополнение к твоему гардеробу.
+edison.shop.eggnog=Вот в чём дело: мне нравится Эггногг, он вкусный - но как только я попробую несколько, этих Эфирных кроликов просто отказываются оставить меня в покое! Это безумие. Я что, один такой?
+edison.shop.yule_log=Когда-нибудь хотели съесть бревно? Ну, Вам повезло. Это Ваш единственный шанс съесть бревно и не чувствовать себя виноватым!
+
+#  Джоседия диалог
+
+josediya.greet.start_not_introduced=Итак, Вы наконец-то здесь. Давайте покончим с этим.
+josediya.greet.start=Вам больше ничего не нужно?
+
+josediya.greet.option.what=Кто Вы такой?
+josediya.greet.option.where=Откуда Вы родом?
+josediya.greet.option.take_me=Вы можете меня туда отвести?
+
+josediya.greet.option.winged_beast=Что это за крылатый зверь?
+josediya.greet.option.fly=Вы летаете на нём
+josediya.greet.option.moa=Могу ли я получить Моа?
+
+josediya.greet.option.who=Кто Вы?
+josediya.greet.option.friends=Вы не друзья с "Лысым"?
+josediya.greet.option.paying=Он заплатил Вам, чтобы помочь мне?
+josediya.greet.option.white_gold=У меня нет никаких подарков. Что теперь?
+
+josediya.greet.option.services=Какие услуги Вы оказываете?
+josediya.greet.option.home=Откуда Вы знаете, где мой дом?
+josediya.greet.option.walk_home=Почему я не могу просто пойти домой пешком?
+
+josediya.greet.what=Вау, не очень умный Вы? Я человек, как Вы или тот лысый идиот вон там. Никогда не видела раньше Ангела? Валькирии спасают нас всех.
+josediya.greet.where=Я родом из страны, расположенной далеко к югу отсюда под названием Верадекс. Там я получаю большую часть своей работы.
+josediya.greet.take_me=Я не думаю, что у Вас есть монета, человек. Верадекс это примерно З недели быстрого путешествия, опасный маршрут тоже. Я не могу Вас туда отвезти.
+josediya.greet.winged_beast=Это мой друг Тивальер, вообще-то. Он Моа, тоже сильный; Он может летать на нас обоих на спине и не вспотеть.
+josediya.greet.fly=Конечно! Это то, для чего его тренировали. я воспитываю Моаса как часть моей работы. Они очень дружелюбные существа, если обращаться с ними правильно.
+josediya.greet.moa=Вы должны вырастить его сами, чтобы он доверял вам достаточно, чтобы ездить на нём, получить яйцо это не простая задача, хотя Моа очень защищает свои гнёзда.
+josediya.greet.who=Девушка, которая будет водить Вас по местам. Я Джоседия, я управляю бизнесом по перевозке пассажиров и Лысый привёз меня, чтобы помочь Вам.
+josediya.greet.friends=Мы с Эдисоном хорошо ладим, он доказал свою полезность за все годы, что я его знаю, но я все ещё не доверяю ему. Для нас просто взаимовыгодно работать вместе.
+josediya.greet.paying=Нет, это я должна отплатить за услугу. Вы единственный, кто заплатит мне. И я не беру монеты из Вашего мира, только позолота.
+josediya.greet.white_gold=Это Ваша проблема. Мне всё равно, как Вы её получите, но мне нужно платить за мою работу. Идите помогите фермерам или что-то в этом роде.
+josediya.greet.services=Если Вы когда-нибудь обнаружите, что где-то открываете магазин, я могу отвезти Вас домой из любого Аванпоста. Я буду ожидать оплаты.
+josediya.greet.home=Я не отвезу тебя обратно в Теру, если Вы это имеете в виду. Сначала Вам нужно найти новое место, чтобы здесь отдохнуть, в Эфире.
+josediya.greet.walk_home=Я не буду Вас останавливать, но острова Эфира могут быть довольно далеко друг от друга. Путешествие в моей карете будет намного быстрее и намного спокойнее для Вас. Облако достаточно прочное, чтобы ходить между островами пешком, но оно может быть довольно опасным без надлежащей защиты.
+
+josediya.greet.travel=Ладно. Куда теперь?
+josediya.greet.option.travel_to=Переместить к кровати
+josediya.greet.option.travel_from=Переместить обратно в последний аванпост
+josediya.greet.option.travel=Переместить
+
+# ДИАЛОГ МИСТИЧЕСКОЙ ФИГУРЫ
+
+mysterious_figure.greet.start=Новый путешественник, которого я вижу! Добро пожаловать, добро пожаловать... узрите мои удивительные изделия из загробного царства - будет соответствовать ассортимент сладостей!
+mysterious_figure.greet.option.who_are_you=Кто Вы?
+mysterious_figure.greet.option.why_plumproots=Почему Вы держите толстый корень над плечом?
+mysterious_figure.greet.option.sale=Могу я взглянуть на Ваши товары?
+mysterious_figure.greet.who_are_you=Вы хотите моё имя, это просто тайна! Всё забыто, даже в истории!
+mysterious_figure.greet.why_plumproots=Разве Вы не знаете, какие удивительные вещи Вы можешь творить с такими красивыми толстыми корнями? Вы можете их зажарить, Вы можете их приготовить, для моих изделий Вы должны их использовать! Ваш рот задел вкус пирога с пухлым корнем? Это то, что Вы должны иметь перед смертью!
+mysterious_figure.greet.sale=Хорошо, хорошо! Толстые корни, которые Вы дадите, конфеты, которые я сотру.
+mysterious_figure.shop.greetings=Толстые корни, толстые корни, толстые корни! Мои конфеты я обменяю на толстые корни - всё, что угодно, кроме резиновых сапогов!
+mysterious_figure.shop.candy_corn=Знаете, что хорошо сочетается с кукурузой? Толстые корни! ... И конфеты тоже, видимо.
+mysterious_figure.shop.cocoatrice=Василиски не пострадали при изготовлении этого продукта.
+mysterious_figure.shop.wrapped_chocolates=Я сам заворачиваю эти конфеты! Не удивляйтесь, если найдёте следы костей.
+mysterious_figure.shop.jelly_plumproot=Не уверен, что Вы могли бы сказать, но это мои любимые продукты.
+mysterious_figure.shop.blueberry_lollipop=Дети издалека любят этих маленьких сосунков. Может, а может и не превратить Вас в гигантскую чернику.
+mysterious_figure.shop.orange_lollipop=На вкус, как апельсины! P.S: Эти конфеты не содержат никаких следов апельсинов.
+mysterious_figure.shop.icestone_poprocks=На самом деле не из ледяного камня.
+mysterious_figure.shop.ginger_bread_man=Однажды я слышал историю о человеке, который сделал пряник. Легенда гласит, что накануне этого священного месяца они ели пряник в форме человека и превратились в то, что они потребляли. Чувствуя себя счастливыми?
+mysterious_figure.shop.candy_cane=Попробуй использовать это, как трость. Давай, я осмелюсь.
+
+# Описание открытий:
+
+aether.placeholder.discovery.description=???
+aether.taegore.discovery.description=Таегор высокогорья очень общительные существа, они бродят небольшими стаями, обычно возглавляемыми старшими родителями.\n\nПока Таегор может быть дружелюбным, они оснащены прочной бронёй и острыми бивнями, которые могут затруднить им борьбу.\n\nИх мех - прочный материал, используемый в одежде.
+
+# Config
+
+config.aether.skip_intro.name=Пропустить вступление
+config.aether.enable_skybox.name=Отобразить Skybox Эфира
+config.aether.display_inventory_pattern.name=Отобразить шаблон инвентаря
+config.aether.cutout_helmets.name=Прозрачные шлема
+config.aether.helmet_shadow.name=Прозрачные тени шлема
+config.aether.aether_dimension_id.name=ID Измерения эфира
+config.aether.necromancer_dimension_id.name=ID измерение башни некроманта
+config.aether.display_performance_indicator.name=Отобразить показатель производительности
+config.aether.analytics_enabled.name=Вкл аналитику (только на стороне клиента)
+config.aether.fingerprint_violation.name=Отметить нарушение отпечатка пальца
+config.aether.aerwhale_riding.name=Можно ездить на Эфирном ките
