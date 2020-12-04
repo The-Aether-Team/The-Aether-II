@@ -62,7 +62,7 @@ The Aether II project makes use of crowd sourced translations. The Aether is ava
 - :es: **Spanish**: Contributed by Khaoss
 - :ru: **Russian**: Contributed by Dr_Hesperus
 - :cn: **Simplified Chinese**: Contributed by ETStareak
-- 🇹🇼 **Traditional Chinese**: Contributed by aianlinb
+- **Traditional Chinese**: Contributed by aianlinb
 
 The above list is incomplete, and as such, if your name is missing from it, please contact us. **You can help translate The Aether II Mod to additional languages by joining our team of avid translators [here](https://aether.oneskyapp.com/collaboration/project?id=158537).**
 
