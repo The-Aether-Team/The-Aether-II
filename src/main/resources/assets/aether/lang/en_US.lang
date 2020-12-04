@@ -574,9 +574,9 @@ item.aether.charm_arm_03.name=Greater Armor Charm
 item.aether.charm_arm_tgh_01.name=Lesser Armor Toughness Charm
 item.aether.charm_arm_tgh_02.name=Armor Toughness Charm
 item.aether.charm_arm_tgh_03.name=Greater Armor Toughness Charm
-item.aether.charm_atk_dmg_01.name=Lesser Damage Charm
-item.aether.charm_atk_dmg_02.name=Damage Charm
-item.aether.charm_atk_dmg_03.name=Greater Damage Charm
+item.aether.charm_imp_dmg_01.name=Lesser Impact Damage Charm
+item.aether.charm_imp_dmg_02.name=Impact Damage Charm
+item.aether.charm_imp_dmg_03.name=Greater Impact Damage Charm
 item.aether.charm_atk_spd_01.name=Lesser Attack Speed Charm
 item.aether.charm_atk_spd_02.name=Attack Speed Charm
 item.aether.charm_atk_spd_03.name=Greater Attack Speed Charm
@@ -592,6 +592,12 @@ item.aether.charm_max_hlt_03.name=Greater Health Charm
 item.aether.charm_mve_spd_01.name=Lesser Speed Charm
 item.aether.charm_mve_spd_02.name=Speed Charm
 item.aether.charm_mve_spd_03.name=Greater Speed Charm
+item.aether.charm_prc_dmg_01.name=Lesser Pierce Damage Charm
+item.aether.charm_prc_dmg_02.name=Pierce Damage Charm
+item.aether.charm_prc_dmg_03.name=Greater Pierce Damage Charm
+item.aether.charm_slsh_dmg_01.name=Lesser Slash Damage Charm
+item.aether.charm_slsh_dmg_02.name=Slash Damage Charm
+item.aether.charm_slsh_dmg_03.name=Greater Slash Damage Charm
 
 
 tile.aether.aether_portal.name=Aether Portal

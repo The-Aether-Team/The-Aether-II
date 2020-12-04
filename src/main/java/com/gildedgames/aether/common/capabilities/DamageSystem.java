@@ -3,11 +3,13 @@ package com.gildedgames.aether.common.capabilities;
 import com.gildedgames.aether.api.entity.damage.DamageTypeAttributes;
 import com.gildedgames.aether.api.entity.damage.IDamageLevelsHolder;
 import com.gildedgames.aether.api.entity.damage.IDefenseLevelsHolder;
+import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerEquipmentModule;
 import com.gildedgames.aether.common.init.ParticlesAether;
+import com.gildedgames.aether.common.items.accessories.ItemDamageCharm;
 import com.gildedgames.aether.common.items.armor.ItemAetherGloves;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketParticles;
@@ -308,6 +310,49 @@ public class DamageSystem
 
                     event.setAmount(vanillaDamage * modifier);
                 }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void handleAccessoryBonus(LivingHurtEvent event)
+    {
+        EntityLivingBase target = event.getEntityLiving();
+
+        if (target instanceof IDefenseLevelsHolder)
+        {
+            if (event.getSource().getImmediateSource() instanceof EntityPlayer)
+            {
+                EntityPlayer source = (EntityPlayer) event.getSource().getImmediateSource();
+
+                IInventoryEquipment inventory = PlayerAether.getPlayer(source).getModule(PlayerEquipmentModule.class).getInventory();
+
+                float damage = 0;
+
+                for (int i = 0; i < 7; i++)
+                {
+                    ItemStack charmStack = inventory.getStackInSlot(7 + i);
+
+                    if (charmStack.getItem() instanceof ItemDamageCharm && !charmStack.isEmpty())
+                    {
+                        ItemDamageCharm charm = (ItemDamageCharm) charmStack.getItem();
+
+                        if (charm.getSlashDamageLevel() > 0)
+                        {
+                            damage += charm.getSlashDamageLevel();
+                        }
+                        if (charm.getPierceDamageLevel() > 0)
+                        {
+                            damage += charm.getPierceDamageLevel();
+                        }
+                        if (charm.getImpactDamageLevel() > 0)
+                        {
+                            damage += charm.getImpactDamageLevel();
+                        }
+                    }
+                }
+
+                event.setAmount(event.getAmount() + damage);
             }
         }
     }

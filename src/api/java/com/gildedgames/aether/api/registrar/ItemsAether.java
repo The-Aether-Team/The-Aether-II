@@ -96,11 +96,11 @@ public class ItemsAether extends AbstractRegistrar
 
 	public static final Item charm_arm_tgh_03 = getDefault();
 
-	public static final Item charm_atk_dmg_01 = getDefault();
+	public static final Item charm_imp_dmg_01 = getDefault();
 
-	public static final Item charm_atk_dmg_02 = getDefault();
+	public static final Item charm_imp_dmg_02 = getDefault();
 
-	public static final Item charm_atk_dmg_03 = getDefault();
+	public static final Item charm_imp_dmg_03 = getDefault();
 
 	public static final Item charm_atk_spd_01 = getDefault();
 
@@ -131,6 +131,18 @@ public class ItemsAether extends AbstractRegistrar
 	public static final Item charm_mve_spd_02 = getDefault();
 
 	public static final Item charm_mve_spd_03 = getDefault();
+
+	public static final Item charm_prc_dmg_01 = getDefault();
+
+	public static final Item charm_prc_dmg_02 = getDefault();
+
+	public static final Item charm_prc_dmg_03 = getDefault();
+
+	public static final Item charm_slsh_dmg_01 = getDefault();
+
+	public static final Item charm_slsh_dmg_02 = getDefault();
+
+	public static final Item charm_slsh_dmg_03 = getDefault();
 
 	public static final Item cloud_parachute = getDefault();
 

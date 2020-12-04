@@ -717,9 +717,9 @@ public class ItemModelsAetherInit
 		registerItemModels(ItemsAether.charm_arm_tgh_01, "accessories/charms/charm_arm_tgh_01");
 		registerItemModels(ItemsAether.charm_arm_tgh_02, "accessories/charms/charm_arm_tgh_02");
 		registerItemModels(ItemsAether.charm_arm_tgh_03, "accessories/charms/charm_arm_tgh_03");
-		registerItemModels(ItemsAether.charm_atk_dmg_01, "accessories/charms/charm_atk_dmg_01");
-		registerItemModels(ItemsAether.charm_atk_dmg_02, "accessories/charms/charm_atk_dmg_02");
-		registerItemModels(ItemsAether.charm_atk_dmg_03, "accessories/charms/charm_atk_dmg_03");
+		registerItemModels(ItemsAether.charm_imp_dmg_01, "accessories/charms/charm_imp_dmg_01");
+		registerItemModels(ItemsAether.charm_imp_dmg_02, "accessories/charms/charm_imp_dmg_02");
+		registerItemModels(ItemsAether.charm_imp_dmg_03, "accessories/charms/charm_imp_dmg_03");
 		registerItemModels(ItemsAether.charm_atk_spd_01, "accessories/charms/charm_atk_spd_01");
 		registerItemModels(ItemsAether.charm_atk_spd_02, "accessories/charms/charm_atk_spd_02");
 		registerItemModels(ItemsAether.charm_atk_spd_03, "accessories/charms/charm_atk_spd_03");
@@ -735,6 +735,12 @@ public class ItemModelsAetherInit
 		registerItemModels(ItemsAether.charm_mve_spd_01, "accessories/charms/charm_mve_spd_01");
 		registerItemModels(ItemsAether.charm_mve_spd_02, "accessories/charms/charm_mve_spd_02");
 		registerItemModels(ItemsAether.charm_mve_spd_03, "accessories/charms/charm_mve_spd_03");
+		registerItemModels(ItemsAether.charm_prc_dmg_01, "accessories/charms/charm_prc_dmg_01");
+		registerItemModels(ItemsAether.charm_prc_dmg_02, "accessories/charms/charm_prc_dmg_02");
+		registerItemModels(ItemsAether.charm_prc_dmg_03, "accessories/charms/charm_prc_dmg_03");
+		registerItemModels(ItemsAether.charm_slsh_dmg_01, "accessories/charms/charm_slsh_dmg_01");
+		registerItemModels(ItemsAether.charm_slsh_dmg_02, "accessories/charms/charm_slsh_dmg_02");
+		registerItemModels(ItemsAether.charm_slsh_dmg_03, "accessories/charms/charm_slsh_dmg_03");
 	}
 
 	private static void registerSnowyFlower(Block block, String name)

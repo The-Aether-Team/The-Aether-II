@@ -74,12 +74,9 @@ public class EquipmentAether
 		createEquipmentItem(ItemsAether.charm_arm_tgh_03, ItemEquipmentSlot.CHARM, ItemRarity.EPIC, WHEN_EQUIPPED,
 				new StatEffectFactory.StatProvider(SharedMonsterAttributes.ARMOR_TOUGHNESS, 3.0, StatEffectFactory.StatProvider.OP_ADD));
 
-		createEquipmentItem(ItemsAether.charm_atk_dmg_01, ItemEquipmentSlot.CHARM, ItemRarity.COMMON, WHEN_EQUIPPED,
-				new StatEffectFactory.StatProvider(SharedMonsterAttributes.ATTACK_DAMAGE, 1.0, StatEffectFactory.StatProvider.OP_ADD));
-		createEquipmentItem(ItemsAether.charm_atk_dmg_02, ItemEquipmentSlot.CHARM, ItemRarity.RARE, WHEN_EQUIPPED,
-				new StatEffectFactory.StatProvider(SharedMonsterAttributes.ATTACK_DAMAGE, 2.0, StatEffectFactory.StatProvider.OP_ADD));
-		createEquipmentItem(ItemsAether.charm_atk_dmg_03, ItemEquipmentSlot.CHARM, ItemRarity.EPIC, WHEN_EQUIPPED,
-				new StatEffectFactory.StatProvider(SharedMonsterAttributes.ATTACK_DAMAGE, 3.0, StatEffectFactory.StatProvider.OP_ADD));
+		createEquipmentItem(ItemsAether.charm_imp_dmg_01, ItemEquipmentSlot.CHARM, ItemRarity.COMMON, WHEN_EQUIPPED);
+		createEquipmentItem(ItemsAether.charm_imp_dmg_02, ItemEquipmentSlot.CHARM, ItemRarity.RARE, WHEN_EQUIPPED);
+		createEquipmentItem(ItemsAether.charm_imp_dmg_03, ItemEquipmentSlot.CHARM, ItemRarity.EPIC, WHEN_EQUIPPED);
 
 		createEquipmentItem(ItemsAether.charm_atk_spd_01, ItemEquipmentSlot.CHARM, ItemRarity.COMMON, WHEN_EQUIPPED,
 				new StatEffectFactory.StatProvider(SharedMonsterAttributes.ATTACK_SPEED, 1.0, StatEffectFactory.StatProvider.OP_ADD));
@@ -115,6 +112,14 @@ public class EquipmentAether
 				new StatEffectFactory.StatProvider(SharedMonsterAttributes.MOVEMENT_SPEED, 2.0, StatEffectFactory.StatProvider.OP_ADD));
 		createEquipmentItem(ItemsAether.charm_mve_spd_03, ItemEquipmentSlot.CHARM, ItemRarity.EPIC, WHEN_EQUIPPED,
 				new StatEffectFactory.StatProvider(SharedMonsterAttributes.MOVEMENT_SPEED, 3.0, StatEffectFactory.StatProvider.OP_ADD));
+
+		createEquipmentItem(ItemsAether.charm_prc_dmg_01, ItemEquipmentSlot.CHARM, ItemRarity.COMMON, WHEN_EQUIPPED);
+		createEquipmentItem(ItemsAether.charm_prc_dmg_02, ItemEquipmentSlot.CHARM, ItemRarity.RARE, WHEN_EQUIPPED);
+		createEquipmentItem(ItemsAether.charm_prc_dmg_03, ItemEquipmentSlot.CHARM, ItemRarity.EPIC, WHEN_EQUIPPED);
+
+		createEquipmentItem(ItemsAether.charm_slsh_dmg_01, ItemEquipmentSlot.CHARM, ItemRarity.COMMON, WHEN_EQUIPPED);
+		createEquipmentItem(ItemsAether.charm_slsh_dmg_02, ItemEquipmentSlot.CHARM, ItemRarity.RARE, WHEN_EQUIPPED);
+		createEquipmentItem(ItemsAether.charm_slsh_dmg_03, ItemEquipmentSlot.CHARM, ItemRarity.EPIC, WHEN_EQUIPPED);
 	}
 
 	private static void createEquipmentItem(final Item item, final ItemEquipmentSlot slot, final ItemRarity rarity)

@@ -1,6 +1,6 @@
     {
     	"parent": "item/generated",
     	"textures": {
-    		"layer0": "aether:items/accessories/charms/charm_atk_dmg_03"
+    		"layer0": "aether:items/accessories/charms/charm_prc_dmg_01"
     	}
     }
