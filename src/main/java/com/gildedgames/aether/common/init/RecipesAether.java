@@ -15,6 +15,7 @@ import com.gildedgames.aether.common.recipes.RecipeWrappingPaper;
 import com.gildedgames.aether.common.recipes.altar.AltarEnchantRecipe;
 import com.gildedgames.aether.common.recipes.altar.AltarRepairRecipe;
 import com.gildedgames.aether.common.recipes.simple.SimpleRecipe;
+import com.gildedgames.aether.common.util.helpers.MapGen;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -358,66 +359,35 @@ public class RecipesAether
 		);
 	}
 
+	@SuppressWarnings("unchecked")
 	private static void registerCoolerRecipes()
 	{
 		CoolerRecipes.instance().addCoolingFromItem(ItemsAether.irradiated_armor, Item.getItemFromBlock(Blocks.AIR), new ItemStack(ItemsAether.irradiated_dust),
-				new ItemStack(ItemsAether.arkenium_helmet),
-				new ItemStack(ItemsAether.arkenium_chestplate),
-				new ItemStack(ItemsAether.arkenium_leggings),
-				new ItemStack(ItemsAether.arkenium_boots),
-				new ItemStack(ItemsAether.arkenium_gloves),
-				new ItemStack(ItemsAether.gravitite_helmet),
-				new ItemStack(ItemsAether.gravitite_chestplate),
-				new ItemStack(ItemsAether.gravitite_leggings),
-				new ItemStack(ItemsAether.gravitite_boots),
-				new ItemStack(ItemsAether.gravitite_gloves),
-				new ItemStack(ItemsAether.zanite_helmet),
-				new ItemStack(ItemsAether.zanite_chestplate),
-				new ItemStack(ItemsAether.zanite_leggings),
-				new ItemStack(ItemsAether.zanite_boots),
-				new ItemStack(ItemsAether.zanite_gloves));
+				MapGen.genMap(new ItemStack(ItemsAether.irradiated_dust), 100));
 
 		CoolerRecipes.instance().addCoolingFromItem(ItemsAether.irradiated_charm, Item.getItemFromBlock(Blocks.AIR), new ItemStack(ItemsAether.irradiated_dust),
-				new ItemStack(ItemsAether.irradiated_dust));
+				MapGen.genMap(new ItemStack(ItemsAether.irradiated_dust), 100));
 
 		CoolerRecipes.instance().addCoolingFromItem(ItemsAether.irradiated_neckwear, Item.getItemFromBlock(Blocks.AIR), new ItemStack(ItemsAether.irradiated_dust),
-				new ItemStack(ItemsAether.irradiated_dust));
+				MapGen.genMap(new ItemStack(ItemsAether.irradiated_dust), 100));
 
 		CoolerRecipes.instance().addCoolingFromItem(ItemsAether.irradiated_ring, Item.getItemFromBlock(Blocks.AIR), new ItemStack(ItemsAether.irradiated_dust),
-				new ItemStack(ItemsAether.irradiated_dust));
+				MapGen.genMap(new ItemStack(ItemsAether.irradiated_dust), 100));
 
 		CoolerRecipes.instance().addCoolingFromItem(ItemsAether.irradiated_sword, Item.getItemFromBlock(Blocks.AIR), new ItemStack(ItemsAether.irradiated_dust),
-				new ItemStack(ItemsAether.arkenium_sword),
-				new ItemStack(ItemsAether.gravitite_sword),
-				new ItemStack(ItemsAether.holystone_sword),
-				new ItemStack(ItemsAether.zanite_sword),
-				new ItemStack(ItemsAether.skyroot_sword));
+				MapGen.genMap(new ItemStack(ItemsAether.irradiated_dust), 100));
 
 		CoolerRecipes.instance().addCoolingFromItem(ItemsAether.irradiated_tool, Item.getItemFromBlock(Blocks.AIR), new ItemStack(ItemsAether.irradiated_dust),
-				new ItemStack(ItemsAether.arkenium_axe),
-				new ItemStack(ItemsAether.arkenium_pickaxe),
-				new ItemStack(ItemsAether.arkenium_shovel),
-				new ItemStack(ItemsAether.zanite_axe),
-				new ItemStack(ItemsAether.zanite_pickaxe),
-				new ItemStack(ItemsAether.zanite_shovel),
-				new ItemStack(ItemsAether.gravitite_axe),
-				new ItemStack(ItemsAether.gravitite_pickaxe),
-				new ItemStack(ItemsAether.gravitite_shovel),
-				new ItemStack(ItemsAether.holystone_axe),
-				new ItemStack(ItemsAether.holystone_pickaxe),
-				new ItemStack(ItemsAether.holystone_shovel),
-				new ItemStack(ItemsAether.skyroot_axe),
-				new ItemStack(ItemsAether.skyroot_pickaxe),
-				new ItemStack(ItemsAether.skyroot_shovel));
+				MapGen.genMap(new ItemStack(ItemsAether.irradiated_dust), 100));
 
 		CoolerRecipes.instance().addCoolingFromItem(ItemsAether.skyroot_bucket, Item.getItemFromBlock(BlocksAether.aercloud), null,
-				new ItemStack(ItemsAether.skyroot_water_bucket));
+				MapGen.genMap(new ItemStack(ItemsAether.skyroot_water_bucket), 100));
 
 		CoolerRecipes.instance().addCoolingFromItem(ItemsAether.water_vial, ItemsAether.valkyrie_wings, null,
-				new ItemStack(ItemsAether.valkyrie_tea));
+				MapGen.genMap(new ItemStack(ItemsAether.valkyrie_tea), 100));
 
 		CoolerRecipes.instance().addCoolingFromItem(ItemsAether.skyroot_water_bucket, Item.getItemFromBlock(Blocks.AIR), new ItemStack(ItemsAether.skyroot_bucket),
-				new ItemStack(BlocksAether.highlands_ice));
+				MapGen.genMap(new ItemStack(BlocksAether.highlands_ice), 100));
 	}
 
 	private static void addMasonry(ItemStack result, Object... required)
