@@ -380,9 +380,6 @@ public class RecipesAether
 		CoolerRecipes.instance().addCoolingFromItem(ItemsAether.irradiated_charm, Item.getItemFromBlock(Blocks.AIR), new ItemStack(ItemsAether.irradiated_dust),
 				new ItemStack(ItemsAether.irradiated_dust));
 
-		CoolerRecipes.instance().addCoolingFromItem(ItemsAether.irradiated_chunk, Item.getItemFromBlock(Blocks.AIR), new ItemStack(ItemsAether.irradiated_dust),
-				new ItemStack(ItemsAether.irradiated_dust));
-
 		CoolerRecipes.instance().addCoolingFromItem(ItemsAether.irradiated_neckwear, Item.getItemFromBlock(Blocks.AIR), new ItemStack(ItemsAether.irradiated_dust),
 				new ItemStack(ItemsAether.irradiated_dust));
 

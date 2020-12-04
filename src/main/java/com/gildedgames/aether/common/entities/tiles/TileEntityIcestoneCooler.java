@@ -73,7 +73,7 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 	public static boolean isItemIrradiated(ItemStack stack)
 	{
 		Item item = stack.getItem();
-		return item == ItemsAether.irradiated_chunk || item == ItemsAether.irradiated_armor || item == ItemsAether.irradiated_charm
+		return item == ItemsAether.irradiated_armor || item == ItemsAether.irradiated_charm
 				|| item == ItemsAether.irradiated_neckwear
 				|| item == ItemsAether.irradiated_ring || item == ItemsAether.irradiated_sword || item == ItemsAether.irradiated_tool;
 	}

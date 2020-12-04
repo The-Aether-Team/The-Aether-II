@@ -206,8 +206,6 @@ public class ItemsAether extends AbstractRegistrar
 
 	public static final Item irradiated_charm = getDefault();
 
-	public static final Item irradiated_chunk = getDefault();
-
 	public static final Item irradiated_dust = getDefault();
 
 	public static final Item irradiated_neckwear = getDefault();
