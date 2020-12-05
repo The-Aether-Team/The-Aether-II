@@ -782,6 +782,7 @@ entity.aether.varanys.name=Varanys
 entity.aether.skyroot_lizard.name=Skyroot Lizard
 entity.aether.glactrix.name=Glactrix
 entity.aether.sheepuff.name=Sheepuff
+entity.aether.arkenium_golem.name=Arkenium Golem
 
 # Creative Tabs
 itemGroup.aether.blocks=Aether II Blocks

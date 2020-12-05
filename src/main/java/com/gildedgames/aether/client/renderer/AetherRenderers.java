@@ -90,6 +90,7 @@ public class AetherRenderers
 		RenderingRegistry.registerEntityRenderingHandler(EntityVaranys.class, RenderVaranys::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntitySkyrootLizard.class, RenderSkyrootLizard::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntitySheepuff.class, RenderSheepuff::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityArkeniumGolem.class, RenderArkeniumGolem::new);
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityGlactrix.class, RenderGlactrix::new);
 

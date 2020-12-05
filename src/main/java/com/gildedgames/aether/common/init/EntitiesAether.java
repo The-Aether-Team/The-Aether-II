@@ -51,6 +51,7 @@ public class EntitiesAether
 		registerLivingEntityWithEgg(EntityVaranys.class, "varanys", 0x86b1c9, 0x548193);
 		registerLivingEntityWithEgg(EntitySkyrootLizard.class, "skyroot_lizard", 0x463B30, 0x86A470);
 		registerLivingEntityWithEgg(EntitySheepuff.class, "sheepuff", 0xA3EBEA, 0xB99972);
+		registerLivingEntityWithEgg(EntityArkeniumGolem.class, "arkenium_golem", 0xA5A5A5, 0x2e2e2e);
 
 		registerLivingEntity(EntityFrostpineTotem.class, "frostpine_totem");
 		registerLivingEntity(EntityKraisith.class, "kraisith");
