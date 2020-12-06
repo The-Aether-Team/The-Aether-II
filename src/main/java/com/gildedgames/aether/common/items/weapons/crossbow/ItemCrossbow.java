@@ -1,5 +1,10 @@
 package com.gildedgames.aether.common.items.weapons.crossbow;
 
+import com.gildedgames.aether.api.entity.damage.DamageTypeAttributes;
+import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
+import com.gildedgames.aether.common.capabilities.DamageSystem;
+import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerEquipmentModule;
 import com.gildedgames.aether.common.entities.projectiles.EntityBolt;
 import com.gildedgames.aether.common.init.CreativeTabsAether;
 import net.minecraft.client.Minecraft;
@@ -270,6 +275,28 @@ public class ItemCrossbow extends Item
 			float pierceDamageLevel = this.cBType.pierceDamageLevel;
 			float impactDamageLevel = this.cBType.impactDamageLevel;
 			float vanillaDamage = this.cBType.damage;
+
+			IInventoryEquipment inventory = null;
+
+			if (entityLiving instanceof EntityPlayer)
+			{
+				EntityPlayer player = (EntityPlayer) entityLiving;
+
+				inventory = PlayerAether.getPlayer(player).getModule(PlayerEquipmentModule.class).getInventory();
+			}
+
+			if (slashDamageLevel > 0)
+			{
+				slashDamageLevel += DamageSystem.getBonusDamageFromAccessories("slash", inventory);
+			}
+			if (pierceDamageLevel > 0)
+			{
+				pierceDamageLevel += DamageSystem.getBonusDamageFromAccessories("pierce", inventory);
+			}
+			if (impactDamageLevel > 0)
+			{
+				impactDamageLevel += DamageSystem.getBonusDamageFromAccessories("impact", inventory);
+			}
 
 			// calculate bolts that are special is being loaded.
 			if (this.isSpecialLoaded && this.cBType != crossBowTypes.ZANITE && this.cBType != crossBowTypes.GRAVETITE)

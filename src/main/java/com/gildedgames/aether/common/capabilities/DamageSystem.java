@@ -63,7 +63,9 @@ public class DamageSystem
             {
                 EntityPlayer source = (EntityPlayer) event.getSource().getImmediateSource();
 
-                ItemStack gloveStack = PlayerAether.getPlayer(source).getModule(PlayerEquipmentModule.class).getInventory().getStackInSlot(2);
+                IInventoryEquipment inventory = PlayerAether.getPlayer(source).getModule(PlayerEquipmentModule.class).getInventory();
+
+                ItemStack gloveStack = inventory.getStackInSlot(2);
 
                 if (source.getHeldItemMainhand().getItem() instanceof IDamageLevelsHolder)
                 {
@@ -78,17 +80,20 @@ public class DamageSystem
 
                     if (itemMainhand.getSlashDamageLevel() > 0)
                     {
-                        float damageAmount = (float) (itemMainhand.getSlashDamageLevel() + target.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).getAttributeValue() + bonusSlash);
+                        float damageAmount = (itemMainhand.getSlashDamageLevel() + getBonusDamageFromAccessories("slash", inventory) + bonusSlash);
+                        damageAmount += target.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).getAttributeValue();
                         slashDamage = Math.max(damageAmount, 1.0F);
                     }
                     if (itemMainhand.getPierceDamageLevel() > 0)
                     {
-                        float damageAmount = (float) (itemMainhand.getPierceDamageLevel() + target.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).getAttributeValue() + bonusPierce);
+                        float damageAmount = (itemMainhand.getPierceDamageLevel() + getBonusDamageFromAccessories("pierce", inventory) + bonusPierce);
+                        damageAmount += target.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).getAttributeValue();
                         pierceDamage = Math.max(damageAmount, 1.0F);
                     }
                     if (itemMainhand.getImpactDamageLevel() > 0)
                     {
-                        float damageAmount = (float) (itemMainhand.getImpactDamageLevel() + target.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).getAttributeValue() + bonusImpact);
+                        float damageAmount = (itemMainhand.getImpactDamageLevel() + getBonusDamageFromAccessories("impact", inventory) + bonusImpact);
+                        damageAmount += target.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).getAttributeValue();
                         impactDamage = Math.max(damageAmount, 1.0F);
                     }
 
@@ -127,17 +132,20 @@ public class DamageSystem
 
                     if (itemOffhand.getSlashDamageLevel() > 0)
                     {
-                        float damageAmount = (float) (itemOffhand.getSlashDamageLevel() + target.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).getAttributeValue() + bonusSlash);
+                        float damageAmount = (itemOffhand.getSlashDamageLevel() + getBonusDamageFromAccessories("slash", inventory) + bonusSlash);
+                        damageAmount += target.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).getAttributeValue();
                         slashDamage = Math.max(damageAmount, 1.0F);
                     }
                     if (itemOffhand.getPierceDamageLevel() > 0)
                     {
-                        float damageAmount = (float) (itemOffhand.getPierceDamageLevel() + target.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).getAttributeValue() + bonusPierce);
+                        float damageAmount = (itemOffhand.getPierceDamageLevel() + getBonusDamageFromAccessories("pierce", inventory) + bonusPierce);
+                        damageAmount += target.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).getAttributeValue();
                         pierceDamage = Math.max(damageAmount, 1.0F);
                     }
                     if (itemOffhand.getImpactDamageLevel() > 0)
                     {
-                        float damageAmount = (float) (itemOffhand.getImpactDamageLevel() + target.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).getAttributeValue() + bonusImpact);
+                        float damageAmount = (itemOffhand.getImpactDamageLevel() + getBonusDamageFromAccessories("impact", inventory) + bonusImpact);
+                        damageAmount += target.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).getAttributeValue();
                         impactDamage = Math.max(damageAmount, 1.0F);
                     }
 
@@ -176,17 +184,20 @@ public class DamageSystem
 
                     if (gloves.getSlashDamageLevel() > 0)
                     {
-                        float damageAmount = (float) (gloves.getSlashDamageLevel() + target.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).getAttributeValue() + bonusSlash);
+                        float damageAmount = (gloves.getSlashDamageLevel() + getBonusDamageFromAccessories("slash", inventory) + bonusSlash);
+                        damageAmount += target.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).getAttributeValue();
                         slashDamage = Math.max(damageAmount, 1.0F);
                     }
                     if (gloves.getPierceDamageLevel() > 0)
                     {
-                        float damageAmount = (float) (gloves.getPierceDamageLevel() + target.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).getAttributeValue() + bonusPierce);
+                        float damageAmount = (gloves.getPierceDamageLevel() + getBonusDamageFromAccessories("pierce", inventory) + bonusPierce);
+                        damageAmount += target.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).getAttributeValue();
                         pierceDamage = Math.max(damageAmount, 1.0F);
                     }
                     if (gloves.getImpactDamageLevel() > 0)
                     {
-                        float damageAmount = (float) (gloves.getImpactDamageLevel() + target.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).getAttributeValue() + bonusImpact);
+                        float damageAmount = (gloves.getImpactDamageLevel() + getBonusDamageFromAccessories("impact", inventory) + bonusImpact);
+                        damageAmount += target.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).getAttributeValue();
                         impactDamage = Math.max(damageAmount, 1.0F);
                     }
 
@@ -240,7 +251,7 @@ public class DamageSystem
                     impactDamage = Math.max(damageAmount, 1.0F);
                 }
 
-                float totalDamage = (slashDamage + pierceDamage + impactDamage) * modifier;
+                float totalDamage = (slashDamage + pierceDamage + impactDamage);
 
                 event.setAmount(totalDamage);
 
@@ -290,7 +301,7 @@ public class DamageSystem
                     if (gloveStack.getItem() == ItemsAether.zanite_gloves)
                     {
                         vanillaDamage = 6f + ((float) (gloveStack.getItemDamage() * 4)
-                            / gloveStack.getItem().getMaxDamage());
+                                / gloveStack.getItem().getMaxDamage());
                     }
                     else
                     {
@@ -314,47 +325,52 @@ public class DamageSystem
         }
     }
 
-    @SubscribeEvent
-    public static void handleAccessoryBonus(LivingHurtEvent event)
+    public static float getBonusDamageFromAccessories(String damageType, IInventoryEquipment inventory)
     {
-        EntityLivingBase target = event.getEntityLiving();
+        float damage = 0;
 
-        if (target instanceof IDefenseLevelsHolder)
+        for (int i = 0; i < 7; i++)
         {
-            if (event.getSource().getImmediateSource() instanceof EntityPlayer)
+            ItemStack charmStack = inventory.getStackInSlot(7 + i);
+
+            if (charmStack.getItem() instanceof ItemDamageCharm && !charmStack.isEmpty())
             {
-                EntityPlayer source = (EntityPlayer) event.getSource().getImmediateSource();
+                ItemDamageCharm charm = (ItemDamageCharm) charmStack.getItem();
 
-                IInventoryEquipment inventory = PlayerAether.getPlayer(source).getModule(PlayerEquipmentModule.class).getInventory();
-
-                float damage = 0;
-
-                for (int i = 0; i < 7; i++)
+                switch (damageType)
                 {
-                    ItemStack charmStack = inventory.getStackInSlot(7 + i);
-
-                    if (charmStack.getItem() instanceof ItemDamageCharm && !charmStack.isEmpty())
+                    case "slash":
                     {
-                        ItemDamageCharm charm = (ItemDamageCharm) charmStack.getItem();
-
                         if (charm.getSlashDamageLevel() > 0)
                         {
                             damage += charm.getSlashDamageLevel();
                         }
+
+                        break;
+                    }
+                    case "pierce":
+                    {
                         if (charm.getPierceDamageLevel() > 0)
                         {
                             damage += charm.getPierceDamageLevel();
                         }
+
+                        break;
+                    }
+                    case "impact":
+                    {
                         if (charm.getImpactDamageLevel() > 0)
                         {
                             damage += charm.getImpactDamageLevel();
                         }
+
+                        break;
                     }
                 }
-
-                event.setAmount(event.getAmount() + damage);
             }
         }
+
+        return damage;
     }
 
     @SubscribeEvent
