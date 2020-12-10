@@ -155,6 +155,10 @@ public class RecipesAether
 		}
 
 		OreDictionary.registerOre("therastone_brick_decorative", new ItemStack(BlocksAether.therastone_pillar, 1));
+
+		OreDictionary.registerOre("canHarvestAetherAmber", ItemsAether.zanite_axe);
+		OreDictionary.registerOre("canHarvestAetherAmber", ItemsAether.arkenium_axe);
+		OreDictionary.registerOre("canHarvestAetherAmber", ItemsAether.gravitite_axe);
 	}
 
 	@SubscribeEvent
