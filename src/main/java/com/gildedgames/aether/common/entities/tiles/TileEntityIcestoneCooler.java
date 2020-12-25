@@ -27,6 +27,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
+import java.util.Random;
+
 public class TileEntityIcestoneCooler extends TileEntityLockable implements ITickable, ISidedInventory
 {
 	private static final int[] SLOTS_TOP = new int[] { 0 };
@@ -507,7 +509,13 @@ public class TileEntityIcestoneCooler extends TileEntityLockable implements ITic
 			{
 				if (stackSlot4.isEmpty())
 				{
-					this.coolerItemStacks.set(4, secondaryOutput.copy());
+					Random random = new Random();
+
+					ItemStack copiedStack = secondaryOutput.copy();
+
+					if (copiedStack.getItem() == ItemsAether.irradiated_dust) copiedStack.setCount(1 + random.nextInt(2));
+
+					this.coolerItemStacks.set(4, copiedStack);
 				}
 				else
 				{

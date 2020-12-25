@@ -44,11 +44,12 @@ public class BlockIrradiatedDust extends Block
         ItemEntry itemEntry = WeightedRandom.getRandomItem(rand, this.drops);
         if (itemEntry.getItem() != null)
         {
-            int dropCount = 1;
+            int dropCount = 2;
 
             if (itemEntry.getItem() == ItemsAether.irradiated_dust)
             {
-                dropCount = dropCount + rand.nextInt(4);
+                //2-4 Irradiated Dust
+                dropCount = dropCount + rand.nextInt(3);
             }
 
             drops.add(new ItemStack(itemEntry.getItem(), dropCount));

@@ -30,35 +30,38 @@ public class WorldWeatherListener
             IPrecipitationManager precipitation = world.getCapability(CapabilitiesAether.PRECIPITATION_MANAGER, null);
             IAetherStatusEffectPool statusEffectPool = player.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
 
-            if (world.isRaining() && world.canSeeSky(pos))
+            if (!player.isCreative())
             {
-                if (precipitation != null && statusEffectPool != null)
+                if (world.isRaining() && world.canSeeSky(pos))
                 {
-                    boolean tick = world.getTotalWorldTime() % 500 == 0;
-
-                    int effectStrength = 5;
-
-                    if (precipitation.getStrength() == PrecipitationStrength.HEAVY)
+                    if (precipitation != null && statusEffectPool != null)
                     {
-                        effectStrength = 10;
-                    }
-                    else if (precipitation.getStrength() == PrecipitationStrength.STORM)
-                    {
-                        effectStrength = 15;
-                    }
+                        boolean tick = world.getTotalWorldTime() % 500 == 0;
 
-                    if (tick)
-                    {
-                        if (world.getBiome(pos) == BiomesAether.ARCTIC_PEAKS)
+                        int effectStrength = 5;
+
+                        if (precipitation.getStrength() == PrecipitationStrength.HEAVY)
                         {
-                            if (!statusEffectPool.isEffectApplied(IAetherStatusEffects.effectTypes.FREEZE))
+                            effectStrength = 10;
+                        }
+                        else if (precipitation.getStrength() == PrecipitationStrength.STORM)
+                        {
+                            effectStrength = 15;
+                        }
+
+                        if (tick)
+                        {
+                            if (world.getBiome(pos) == BiomesAether.ARCTIC_PEAKS)
                             {
-                                statusEffectPool.applyStatusEffect(IAetherStatusEffects.effectTypes.FREEZE, effectStrength);
-                            }
-                            else
-                            {
-                                statusEffectPool.modifyActiveEffectBuildup(IAetherStatusEffects.effectTypes.FREEZE,
-                                        statusEffectPool.getBuildupFromEffect(IAetherStatusEffects.effectTypes.FREEZE) + effectStrength);
+                                if (!statusEffectPool.isEffectApplied(IAetherStatusEffects.effectTypes.FREEZE))
+                                {
+                                    statusEffectPool.applyStatusEffect(IAetherStatusEffects.effectTypes.FREEZE, effectStrength);
+                                }
+                                else
+                                {
+                                    statusEffectPool.modifyActiveEffectBuildup(IAetherStatusEffects.effectTypes.FREEZE,
+                                            statusEffectPool.getBuildupFromEffect(IAetherStatusEffects.effectTypes.FREEZE) + effectStrength);
+                                }
                             }
                         }
                     }
