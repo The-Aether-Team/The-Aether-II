@@ -8,52 +8,57 @@ import com.gildedgames.aether.api.world.islands.precipitation.IPrecipitationMana
 import com.gildedgames.aether.api.world.islands.precipitation.PrecipitationStrength;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 @Mod.EventBusSubscriber
 public class WorldWeatherListener
 {
     @SubscribeEvent
-    public static void onWeatherEvent(final LivingEvent.LivingUpdateEvent event)
+    public static void onWeatherEvent(final TickEvent.PlayerTickEvent event)
     {
-        EntityLivingBase entity = event.getEntityLiving();
-        World world = entity.world;
-
-        IPrecipitationManager precipitation = world.getCapability(CapabilitiesAether.PRECIPITATION_MANAGER, null);
-
-        if (world.getBiome(entity.getPosition()) == BiomesAether.ARCTIC_PEAKS)
+        if (event.phase == TickEvent.Phase.END)
         {
-            if (world.canSeeSky(entity.getPosition()))
+            EntityPlayer player = event.player;
+            World world = player.world;
+            BlockPos pos = player.getPosition();
+
+            IPrecipitationManager precipitation = world.getCapability(CapabilitiesAether.PRECIPITATION_MANAGER, null);
+            IAetherStatusEffectPool statusEffectPool = player.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
+
+            if (world.isRaining() && world.canSeeSky(pos))
             {
-                if (precipitation != null)
+                if (precipitation != null && statusEffectPool != null)
                 {
-                    if (precipitation.getStrength() == PrecipitationStrength.HEAVY
-                            || precipitation.getStrength() == PrecipitationStrength.STORM)
+                    boolean tick = world.getTotalWorldTime() % 500 == 0;
+
+                    int effectStrength = 5;
+
+                    if (precipitation.getStrength() == PrecipitationStrength.HEAVY)
                     {
-                        if (entity instanceof EntityPlayer)
+                        effectStrength = 10;
+                    }
+                    else if (precipitation.getStrength() == PrecipitationStrength.STORM)
+                    {
+                        effectStrength = 15;
+                    }
+
+                    if (tick)
+                    {
+                        if (world.getBiome(pos) == BiomesAether.ARCTIC_PEAKS)
                         {
-                            EntityPlayer entityPlayer = (EntityPlayer) entity;
-                            IAetherStatusEffectPool statusEffectPool = entityPlayer.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
-
-                            if (statusEffectPool != null)
+                            if (!statusEffectPool.isEffectApplied(IAetherStatusEffects.effectTypes.FREEZE))
                             {
-                                boolean tick = world.getTotalWorldTime() % 100 == 0;
-
-                                if (tick)
-                                {
-                                    if (!statusEffectPool.isEffectApplied(IAetherStatusEffects.effectTypes.FREEZE))
-                                    {
-                                        statusEffectPool.applyStatusEffect(IAetherStatusEffects.effectTypes.FREEZE, 10);
-                                    }
-                                    else
-                                    {
-                                        statusEffectPool.modifyActiveEffectBuildup(IAetherStatusEffects.effectTypes.FREEZE,
-                                                statusEffectPool.getBuildupFromEffect(IAetherStatusEffects.effectTypes.FREEZE) + 10);
-                                    }
-                                }
+                                statusEffectPool.applyStatusEffect(IAetherStatusEffects.effectTypes.FREEZE, effectStrength);
+                            }
+                            else
+                            {
+                                statusEffectPool.modifyActiveEffectBuildup(IAetherStatusEffects.effectTypes.FREEZE,
+                                        statusEffectPool.getBuildupFromEffect(IAetherStatusEffects.effectTypes.FREEZE) + effectStrength);
                             }
                         }
                     }
