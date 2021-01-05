@@ -2,10 +2,12 @@ package com.gildedgames.aether.common.blocks.natural;
 
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.blocks.IBlockMultiName;
+import com.gildedgames.aether.common.blocks.IBlockRadiation;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockTallAetherGrass;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
+import com.gildedgames.aether.common.blocks.util.BlockRadiationHandler;
 import com.gildedgames.aether.common.world.biomes.forgotten_highlands.BiomeForgottenHighlands;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
@@ -30,8 +32,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 import java.util.Random;
 
-public class BlockAetherGrass extends Block implements IBlockMultiName, IGrowable
+public class BlockAetherGrass extends Block implements IBlockMultiName, IGrowable, IBlockRadiation
 {
+	private int radiationDistance, radiationAmount;
+
 	public static final BlockVariant AETHER = new BlockVariant(0, "normal"),
 			ENCHANTED = new BlockVariant(1, "enchanted"),
 			ARCTIC = new BlockVariant(2, "arctic"),
@@ -85,6 +89,11 @@ public class BlockAetherGrass extends Block implements IBlockMultiName, IGrowabl
 	{
 		if (!world.isRemote && state.getValue(PROPERTY_VARIANT) != ENCHANTED)
 		{
+			if (state.getValue(PROPERTY_VARIANT) == IRRADIATED)
+			{
+				BlockRadiationHandler.tickRadiation(world, pos, this.getRadiationDistance(), this.getRadiationAmount());
+			}
+
 			BlockPos.PooledMutableBlockPos up = BlockPos.PooledMutableBlockPos.retain();
 			up.setPos(pos.getX(), pos.getY() + 1, pos.getZ());
 
@@ -123,6 +132,32 @@ public class BlockAetherGrass extends Block implements IBlockMultiName, IGrowabl
 
 			up.release();
 		}
+	}
+
+	@Override
+	public BlockAetherGrass setRadiationDistance(int distance)
+	{
+		this.radiationDistance = distance;
+		return this;
+	}
+
+	@Override
+	public int getRadiationDistance()
+	{
+		return this.radiationDistance;
+	}
+
+	@Override
+	public BlockAetherGrass setRadiationAmount(int amount)
+	{
+		this.radiationAmount = amount;
+		return this;
+	}
+
+	@Override
+	public int getRadiationAmount()
+	{
+		return this.radiationAmount;
 	}
 
 	@Override

@@ -1,6 +1,8 @@
 package com.gildedgames.aether.common.blocks.natural;
 
 import com.gildedgames.aether.api.registrar.ItemsAether;
+import com.gildedgames.aether.common.blocks.IBlockRadiation;
+import com.gildedgames.aether.common.blocks.util.BlockRadiationHandler;
 import com.gildedgames.aether.common.util.selectors.ItemEntry;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -12,13 +14,16 @@ import net.minecraft.util.WeightedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ChunkCache;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.*;
 
-public class BlockIrradiatedDust extends Block
+public class BlockIrradiatedDust extends Block implements IBlockRadiation
 {
+    private int radiationDistance, radiationAmount;
+
     private final List<ItemEntry> drops = new ArrayList<>();
 
     public BlockIrradiatedDust()
@@ -29,10 +34,46 @@ public class BlockIrradiatedDust extends Block
         this.setResistance(5.0f);
         this.setHarvestLevel("pickaxe", 2);
         this.setLightLevel(0.4f);
+        this.setTickRandomly(true);
 
         this.useNeighborBrightness = true;
 
         this.setSoundType(SoundType.SAND);
+    }
+
+    @Override
+    public void updateTick(final World world, final BlockPos pos, final IBlockState state, final Random rand)
+    {
+        if (!world.isRemote)
+        {
+            BlockRadiationHandler.tickRadiation(world, pos, this.getRadiationDistance(), this.getRadiationAmount());
+        }
+    }
+
+    @Override
+    public BlockIrradiatedDust setRadiationDistance(int distance)
+    {
+        this.radiationDistance = distance;
+        return this;
+    }
+
+    @Override
+    public int getRadiationDistance()
+    {
+        return this.radiationDistance;
+    }
+
+    @Override
+    public BlockIrradiatedDust setRadiationAmount(int amount)
+    {
+        this.radiationAmount = amount;
+        return this;
+    }
+
+    @Override
+    public int getRadiationAmount()
+    {
+        return this.radiationAmount;
     }
 
     @Override

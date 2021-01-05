@@ -1,23 +1,33 @@
 package com.gildedgames.aether.common.blocks.natural;
 
 import com.gildedgames.aether.common.blocks.IBlockMultiName;
+import com.gildedgames.aether.common.blocks.IBlockRadiation;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
+import com.gildedgames.aether.common.blocks.util.BlockRadiationHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockHolystone extends Block implements IBlockMultiName
+import java.util.List;
+import java.util.Random;
+
+public class BlockHolystone extends Block implements IBlockMultiName, IBlockRadiation
 {
+	private int radiationDistance, radiationAmount;
+
 	public static final BlockVariant
 			NORMAL_HOLYSTONE = new BlockVariant(0, "normal"),
 			MOSSY_HOLYSTONE = new BlockVariant(1, "mossy"),
@@ -34,8 +44,44 @@ public class BlockHolystone extends Block implements IBlockMultiName
 		this.setResistance(10.0F);
 
 		this.setSoundType(SoundType.STONE);
+		this.setTickRandomly(true);
 
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(PROPERTY_VARIANT, NORMAL_HOLYSTONE));
+	}
+
+	@Override
+	public void updateTick(final World world, final BlockPos pos, final IBlockState state, final Random rand)
+	{
+		if (!world.isRemote && state.getValue(PROPERTY_VARIANT) == IRRADIATED_HOLYSTONE)
+		{
+			BlockRadiationHandler.tickRadiation(world, pos, this.getRadiationDistance(), this.getRadiationAmount());
+		}
+	}
+
+	@Override
+	public BlockHolystone setRadiationDistance(int distance)
+	{
+		this.radiationDistance = distance;
+		return this;
+	}
+
+	@Override
+	public int getRadiationDistance()
+	{
+		return this.radiationDistance;
+	}
+
+	@Override
+	public BlockHolystone setRadiationAmount(int amount)
+	{
+		this.radiationAmount = amount;
+		return this;
+	}
+
+	@Override
+	public int getRadiationAmount()
+	{
+		return this.radiationAmount;
 	}
 
 	@Override
