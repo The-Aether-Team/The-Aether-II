@@ -15,7 +15,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityPresent extends TileEntity
+public class TileEntityPresent extends TileEntitySynced
 {
 
 	private ItemBlockPresent.PresentData presentData = new ItemBlockPresent.PresentData();
