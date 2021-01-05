@@ -1,5 +1,6 @@
 package com.gildedgames.aether.common.world.biomes;
 
+import com.gildedgames.aether.api.registrar.BiomesAether;
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.world.decoration.WorldDecorationUtil;
 import com.gildedgames.aether.api.world.islands.IIslandData;
@@ -14,6 +15,7 @@ import com.gildedgames.aether.common.init.GenerationAether;
 import com.gildedgames.aether.common.util.helpers.IslandHelper;
 import com.gildedgames.aether.common.world.WorldProviderAether;
 import com.gildedgames.aether.common.world.decorations.WorldGenAetherMinable;
+import com.gildedgames.aether.common.world.decorations.WorldGenIrradiatedPool;
 import com.gildedgames.aether.common.world.decorations.aerclouds.WorldGenAercloud;
 import com.gildedgames.aether.common.world.decorations.aerclouds.WorldGenPurpleAercloud;
 import com.gildedgames.aether.common.world.decorations.plants.WorldGenBrettlPlant;
@@ -62,6 +64,8 @@ public class BiomeAetherDecorator
 	private final WorldGenPurpleAercloud genPurpleAercloud;
 
 	private final WorldGenBrettlPlant genBrettlPlant;
+
+	private final WorldGenIrradiatedPool genIrradiatedPool;
 
 	public final boolean generateBushes = true;
 
@@ -116,6 +120,8 @@ public class BiomeAetherDecorator
 		this.genStormAercloud = new WorldGenAercloud(BlockAercloud.getAercloudState(BlockAercloud.STORM_AERCLOUD), 8, false);
 
 		this.genPurpleAercloud = new WorldGenPurpleAercloud(BlockAercloud.getAercloudState(BlockAercloud.PURPLE_AERCLOUD), 4, false);
+
+		this.genIrradiatedPool = new WorldGenIrradiatedPool();
 	}
 
 	public void prepareDecorationsWholeIsland(final World world, BlockAccessIsland access, final IIslandData island, final Random random)
@@ -396,6 +402,14 @@ public class BiomeAetherDecorator
 			final BiomeAetherBase aetherBiome = (BiomeAetherBase) genBase;
 
 			aetherBiome.postDecorate(world, random, pos);
+		}
+
+		if (world.getBiome(pos) == BiomesAether.IRRADIATED_FORESTS)
+		{
+			if (random.nextInt(10) == 0)
+			{
+				this.genIrradiatedPool.generate(slice, random, pos.add(random.nextInt(16) + 8, 0, random.nextInt(16) + 8));
+			}
 		}
 
 		MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Post(world, random, chunkPos));
