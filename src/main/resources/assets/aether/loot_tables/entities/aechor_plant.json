@@ -23,6 +23,26 @@
 					]
 				}
 			]
+		},
+		{
+			"rolls": 1,
+			"name": "petal",
+			"entries": [
+				{
+					"type": "item",
+					"name": "aether:aechor_petal",
+					"weight": 1,
+					"functions": [
+						{
+							"function": "set_count",
+							"count": {
+								"min": 3,
+								"max": 5
+							}
+						}
+					]
+				}
+			]
 		}
 	]
 }

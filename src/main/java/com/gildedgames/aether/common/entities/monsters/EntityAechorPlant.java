@@ -13,7 +13,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -200,14 +202,6 @@ public class EntityAechorPlant extends EntityAetherMob
 		}
 	}
 	 */
-
-	@Override
-	public void onDeath(DamageSource cause)
-	{
-		super.onDeath(cause);
-
-		Block.spawnAsEntity(this.world, this.getPosition(), new ItemStack(ItemsAether.aechor_petal, 5));
-	}
 
 	private int getRandomPetal(boolean state)
 	{
