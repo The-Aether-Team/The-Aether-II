@@ -1,12 +1,17 @@
 package com.gildedgames.aether.common.items.weapons.swords;
 
 import com.gildedgames.aether.api.entity.damage.IDamageLevelsHolder;
+import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectPool;
+import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
+import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
+import com.gildedgames.aether.common.entities.effects.StatusEffect;
 import com.gildedgames.aether.common.init.CreativeTabsAether;
 import com.gildedgames.aether.common.items.ItemAbilityType;
 import com.gildedgames.aether.common.items.tools.ItemAetherShovel;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.text.TextFormatting;
@@ -14,10 +19,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.List;
+import java.util.*;
 
 public class ItemAetherSword extends ItemSword implements IDamageLevelsHolder
 {
+	private Map<StatusEffect, Integer> statusEffects = new HashMap<>();
+
 	private float slashDamageLevel = 0, pierceDamageLevel = 0, impactDamageLevel = 0;
 
 	private final ItemAbilityType abilityType;
@@ -29,6 +36,33 @@ public class ItemAetherSword extends ItemSword implements IDamageLevelsHolder
 		this.abilityType = abilityType;
 
 		this.setCreativeTab(CreativeTabsAether.TAB_WEAPONS);
+	}
+
+	@Override
+	public boolean hitEntity(final ItemStack stack, final EntityLivingBase target, final EntityLivingBase attacker)
+	{
+		IAetherStatusEffectPool statusEffectPool = target.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
+
+		if (statusEffectPool != null)
+		{
+			if (!this.statusEffects.isEmpty())
+			{
+				for (Map.Entry<StatusEffect, Integer> effect : this.statusEffects.entrySet())
+				{
+					if (!statusEffectPool.isEffectApplied(effect.getKey().getEffectType()))
+					{
+						statusEffectPool.applyStatusEffect(effect.getKey().getEffectType(), effect.getValue());
+					}
+					else
+					{
+						statusEffectPool.modifyActiveEffectBuildup(effect.getKey().getEffectType(),
+								statusEffectPool.getBuildupFromEffect(effect.getKey().getEffectType()) + effect.getValue());
+					}
+				}
+			}
+		}
+
+		return true;
 	}
 
 	@Override
@@ -46,6 +80,14 @@ public class ItemAetherSword extends ItemSword implements IDamageLevelsHolder
 				tooltip.add(String.format("%s: %s",
 						TextFormatting.DARK_AQUA + I18n.format("item.aether.tooltip.use"),
 						TextFormatting.WHITE + I18n.format(this.getTranslationKey() + ".use.desc")));
+			}
+		}
+
+		if (!this.statusEffects.isEmpty())
+		{
+			for (StatusEffect effect : this.statusEffects.keySet())
+			{
+				effect.addInformation(tooltip);
 			}
 		}
 	}
@@ -95,5 +137,17 @@ public class ItemAetherSword extends ItemSword implements IDamageLevelsHolder
 	public float getImpactDamageLevel()
 	{
 		return impactDamageLevel;
+	}
+
+	public <T extends ItemAetherSword> T addStatusEffect(StatusEffect effect, int amount)
+	{
+		this.statusEffects.put(effect, amount);
+
+		return (T) this;
+	}
+
+	public Map<StatusEffect, Integer> getStatusEffects()
+	{
+		return this.statusEffects;
 	}
 }
