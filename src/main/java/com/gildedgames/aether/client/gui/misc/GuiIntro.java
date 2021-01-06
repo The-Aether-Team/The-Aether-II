@@ -21,6 +21,7 @@ import com.gildedgames.orbis.lib.client.rect.Dim2D;
 import com.gildedgames.orbis.lib.client.rect.Pos2D;
 import com.gildedgames.orbis.lib.util.InputHelper;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
@@ -55,6 +56,8 @@ public class GuiIntro extends GuiViewerNoContainer
 
 	private boolean playedMusic, startIntro, holding;
 
+	private PositionedSoundRecord music;
+
 	private int keyHeld = Keyboard.KEY_NONE;
 
 	public GuiIntro()
@@ -82,7 +85,7 @@ public class GuiIntro extends GuiViewerNoContainer
 	{
 		super.onGuiClosed();
 
-		AetherMusicManager.INSTANCE.stopMusic();
+		this.mc.getSoundHandler().stopSound(this.music);
 	}
 
 	@Override
@@ -326,7 +329,8 @@ public class GuiIntro extends GuiViewerNoContainer
 		if (!this.playedMusic)
 		{
 			Minecraft.getMinecraft().getSoundHandler().stopSounds();
-			AetherMusicManager.INSTANCE.playMusic(new SoundEvent(AetherCore.getResource("music.intro")));
+			this.music = PositionedSoundRecord.getMusicRecord(new SoundEvent(AetherCore.getResource("music.intro")));
+			this.mc.getSoundHandler().playSound(this.music);
 			this.playedMusic = true;
 		}
 

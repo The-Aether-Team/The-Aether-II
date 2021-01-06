@@ -1,168 +1,145 @@
 package com.gildedgames.aether.client.sound;
 
 import com.gildedgames.aether.api.player.IPlayerAether;
-import com.gildedgames.aether.client.events.listeners.gui.GuiLoadingListener;
-import com.gildedgames.aether.client.sound.generators.AetherMusicGenerator;
-import com.gildedgames.aether.client.sound.generators.IMusicGenerator;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.init.DimensionsAether;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.client.audio.SoundHandler;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
-import net.minecraftforge.client.event.sound.PlaySoundEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.ArrayList;
+import java.util.Random;
 
-@Mod.EventBusSubscriber(Side.CLIENT)
+@SideOnly(Side.CLIENT)
 public class AetherMusicManager
 {
-	public static final AetherMusicManager INSTANCE = new AetherMusicManager();
+	private final Random rand = new Random();
+	private final Minecraft mc;
+	private ISound currentMusic, currentRecord;
+	private static int timeUntilNextMusic = 100;
 
-	private final ArrayList<IMusicGenerator> generators = new ArrayList<>();
-
-	private ISound currentSong, currentRecord;
-
-	private int quietPeriod;
-
-	public AetherMusicManager()
+	public AetherMusicManager(Minecraft mcIn)
 	{
-		this.addGenerator(new AetherMusicGenerator());
+		this.mc = mcIn;
 	}
 
-	public void addGenerator(final IMusicGenerator generator)
+	public void update()
 	{
-		this.generators.add(generator);
-	}
-
-	public void update(final IPlayerAether aePlayer)
-	{
-		if (this.canPlayMusic() && !this.isPlayingMusic())
+		if (this.mc.player != null)
 		{
-			if (this.quietPeriod <= 0)
-			{
-				final IMusicGenerator generator = this.getNextPlayableSong(aePlayer);
+			SoundEvent tracktype = this.getRandomTrack(PlayerAether.getPlayer(this.mc.player));
 
-				if (generator == null)
+			if (tracktype == null)
+			{
+				timeUntilNextMusic--;
+
+				if (timeUntilNextMusic <= 0)
 				{
-					// If nothing can be played, wait 10 seconds
-					this.quietPeriod += 200;
+					timeUntilNextMusic += 100;
+				}
+			}
+			else
+			{
+				if (mc.player.world.provider.getDimensionType() != DimensionsAether.AETHER)
+				{
+					this.stopMusic();
 				}
 				else
 				{
-					final SoundEvent event = generator.getMusicResource(aePlayer);
-
-					if (event == null)
+					if (this.currentMusic != null)
 					{
-						this.quietPeriod += 200;
-
-						return;
+						if (!this.mc.getSoundHandler().isSoundPlaying(this.currentMusic))
+						{
+							timeUntilNextMusic = Math.min(MathHelper.getInt(this.rand, 1200, 1500), timeUntilNextMusic);
+							this.currentMusic = null;
+						}
+						else
+						{
+							timeUntilNextMusic = Math.min(timeUntilNextMusic, 1500);
+						}
 					}
 
-					this.playMusic(event);
-
-					this.quietPeriod = generator.getQuietPeriod(aePlayer);
+					if (this.currentMusic == null && timeUntilNextMusic-- <= 0)
+					{
+						this.playMusic(tracktype);
+					}
 				}
 			}
-
-			this.quietPeriod--;
 		}
 	}
 
-	private IMusicGenerator getNextPlayableSong(final IPlayerAether aePlayer)
+	public boolean playingMusic()
 	{
-		for (final IMusicGenerator generator : this.generators)
+		return this.currentMusic != null;
+	}
+
+	public boolean playingRecord()
+	{
+		return this.currentRecord != null;
+	}
+
+	public ISound getRecord()
+	{
+		return this.currentRecord;
+	}
+
+	public SoundEvent getRandomTrack(IPlayerAether player)
+	{
+		World world = player.getEntity().getEntityWorld();
+
+		long time = world.getWorldTime();
+
+		if (this.isPlayable(player))
 		{
-			if (generator.isPlayable(aePlayer))
+			if (time > 1000L && time < 9000L)
 			{
-				return generator;
+				return new SoundEvent(AetherCore.getResource("music.day"));
+			}
+			else if (time > 13000L && time < 20000L)
+			{
+				return new SoundEvent(AetherCore.getResource("music.night"));
 			}
 		}
 
 		return null;
 	}
 
-	public void playMusic(final SoundEvent event)
+	public boolean isPlayable(IPlayerAether aePlayer)
 	{
-		if (this.isPlayingMusic())
+		long time = aePlayer.getEntity().world.getWorldTime();
+
+		if ((time > 1000L && time < 8000L) || (time > 13000L && time < 20000L))
 		{
-			this.stopMusic();
+			return aePlayer.getEntity().world.provider.getDimensionType() == DimensionsAether.AETHER;
 		}
 
-		this.currentSong = PositionedSoundRecord.getMusicRecord(event);
+		return false;
+	}
 
-		this.getSoundHandler().playSound(this.currentSong);
+	public void playMusic(SoundEvent requestedMusicType)
+	{
+		this.currentMusic = PositionedSoundRecord.getMusicRecord(requestedMusicType);
+		this.mc.getSoundHandler().playSound(this.currentMusic);
+		timeUntilNextMusic = Integer.MAX_VALUE;
+	}
+
+	public void trackRecord(ISound record)
+	{
+		this.currentRecord = record;
 	}
 
 	public void stopMusic()
 	{
-		if (this.currentSong != null)
+		if (this.currentMusic != null)
 		{
-			this.getSoundHandler().stopSound(this.currentSong);
-
-			this.currentSong = null;
-		}
-	}
-
-	public void onRecordPlayed(final ISound sound)
-	{
-		this.currentRecord = sound;
-
-		if (this.isPlayingMusic())
-		{
-			this.stopMusic();
-		}
-	}
-
-	private boolean isPlayingMusic()
-	{
-		return this.currentSong != null && this.getSoundHandler().isSoundPlaying(this.currentSong);
-	}
-
-	private boolean canPlayMusic()
-	{
-		return !Minecraft.getMinecraft().isGamePaused() && (this.currentRecord == null
-				|| !this.getSoundHandler().isSoundPlaying(this.currentRecord));
-	}
-
-	private SoundHandler getSoundHandler()
-	{
-		return Minecraft.getMinecraft().getSoundHandler();
-	}
-
-	@SubscribeEvent(priority = EventPriority.LOWEST)
-	// Lowest priority is important, so we can ensure the sound will actually be played
-	public static void onPlaySound(final PlaySoundEvent event)
-	{
-		if (GuiLoadingListener.isLoadingScreen())
-		{
-			event.setResultSound(null);
-			return;
-		}
-
-		if (event.getSound().getCategory() == SoundCategory.MUSIC)
-		{
-			if (!event.getSound().getSoundLocation().getNamespace().equals(AetherCore.MOD_ID))
-			{
-				final EntityPlayer player = Minecraft.getMinecraft().player;
-
-				if (player != null && (player.world.provider.getDimensionType() == DimensionsAether.AETHER
-						|| player.world.provider.getDimensionType() == DimensionsAether.NECROMANCER_TOWER))
-				{
-					event.setResultSound(null);
-				}
-			}
-		}
-		else if (event.getSound().getCategory() == SoundCategory.RECORDS)
-		{
-			AetherMusicManager.INSTANCE.onRecordPlayed(event.getSound());
+			this.mc.getSoundHandler().stopSound(this.currentMusic);
+			this.currentMusic = null;
+			timeUntilNextMusic = 0;
 		}
 	}
 }
