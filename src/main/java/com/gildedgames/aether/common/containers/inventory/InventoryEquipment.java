@@ -36,7 +36,7 @@ public class InventoryEquipment implements IInventoryEquipment
 
 	private final IPlayerAether aePlayer;
 
-	private final NonNullList<ItemStack> inventory = NonNullList.withSize(14, ItemStack.EMPTY);
+	private final NonNullList<ItemStack> inventory = NonNullList.withSize(13, ItemStack.EMPTY);
 
 	public InventoryEquipment(final IPlayerAether aePlayer)
 	{

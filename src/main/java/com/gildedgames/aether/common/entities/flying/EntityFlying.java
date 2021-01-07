@@ -32,7 +32,7 @@ public class EntityFlying extends EntityCreature implements IDefenseLevelsHolder
 {
 	private Map<IAetherStatusEffects.effectTypes, Boolean> applicationTracker = new HashMap<>();
 	private Map<IAetherStatusEffects.effectTypes, Double> resistances = new HashMap<>();
-	
+
 	private static final DataParameter<Boolean> IS_MOVING = EntityDataManager.createKey(EntityFlying.class, DataSerializers.BOOLEAN);
 
 	private final float clientSideTailAnimationO;
