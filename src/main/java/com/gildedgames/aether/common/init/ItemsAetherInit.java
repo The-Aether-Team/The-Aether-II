@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.effects.StatusEffectBleed;
+import com.gildedgames.aether.common.entities.effects.StatusEffectCockatriceVenom;
 import com.gildedgames.aether.common.entities.effects.StatusEffectFreeze;
 import com.gildedgames.aether.common.entities.effects.StatusEffectToxin;
 import com.gildedgames.aether.common.items.ItemDropOnDeath;
@@ -158,13 +159,13 @@ public class ItemsAetherInit
 		r.register("arkenium_crossbow", new ItemCrossbow().setDurationInTicks(24).setKnockBackValue(0.5F).setType(ItemCrossbow.crossBowTypes.ARKENIUM));
 		r.register("gravitite_crossbow", new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(1.2F).setType(ItemCrossbow.crossBowTypes.GRAVETITE));
 
-		r.register("taegore_hide_helmet", new ItemTaegoreHideArmor(EntityEquipmentSlot.HEAD));
-		r.register("taegore_hide_chestplate", new ItemTaegoreHideArmor(EntityEquipmentSlot.CHEST));
-		r.register("taegore_hide_leggings", new ItemTaegoreHideArmor(EntityEquipmentSlot.LEGS));
-		r.register("taegore_hide_boots", new ItemTaegoreHideArmor(EntityEquipmentSlot.FEET));
+		r.register("taegore_hide_helmet", new ItemTaegoreHideArmor(EntityEquipmentSlot.HEAD).addStatusEffectResistance(new StatusEffectBleed(null), 0.8D));
+		r.register("taegore_hide_chestplate", new ItemTaegoreHideArmor(EntityEquipmentSlot.CHEST).addStatusEffectResistance(new StatusEffectBleed(null), 0.0D));
+		r.register("taegore_hide_leggings", new ItemTaegoreHideArmor(EntityEquipmentSlot.LEGS).addStatusEffectResistance(new StatusEffectBleed(null), -0.5D));
+		r.register("taegore_hide_boots", new ItemTaegoreHideArmor(EntityEquipmentSlot.FEET).addStatusEffectResistance(new StatusEffectBleed(null), 1.0D));
 		r.register("taegore_hide_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.TAEGOREHIDE).setMaxDamage(60));
 		r.register("skyroot_shield", new ItemAetherShield(ItemAetherShield.ShieldType.SKYROOT).setMaxDamage(114));
-		r.register("burrukai_pelt_helmet", new ItemBurrukaiPeltArmor(EntityEquipmentSlot.HEAD));
+		r.register("burrukai_pelt_helmet", new ItemBurrukaiPeltArmor(EntityEquipmentSlot.HEAD).addStatusEffectResistance(new StatusEffectBleed(null), -1.0D));
 		r.register("burrukai_pelt_chestplate", new ItemBurrukaiPeltArmor(EntityEquipmentSlot.CHEST));
 		r.register("burrukai_pelt_leggings", new ItemBurrukaiPeltArmor(EntityEquipmentSlot.LEGS));
 		r.register("burrukai_pelt_boots", new ItemBurrukaiPeltArmor(EntityEquipmentSlot.FEET));

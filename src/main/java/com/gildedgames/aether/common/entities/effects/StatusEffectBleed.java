@@ -49,7 +49,7 @@ public class StatusEffectBleed extends StatusEffect
 	@Override
 	public void addInformation(Collection<String> label)
 	{
-		label.add(TextFormatting.RED.toString() + I18n.format("effect.aether.bleed"));
+		label.add(TextFormatting.RED.toString() + TextFormatting.ITALIC.toString() + I18n.format("effect.aether.bleed"));
 	}
 
 }

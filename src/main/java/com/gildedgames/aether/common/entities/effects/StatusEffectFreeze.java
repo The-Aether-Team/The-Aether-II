@@ -100,6 +100,6 @@ public class StatusEffectFreeze extends StatusEffect
     @Override
     public void addInformation(Collection<String> label)
     {
-        label.add(TextFormatting.AQUA.toString() + I18n.format("effect.aether.freeze"));
+        label.add(TextFormatting.AQUA.toString() + TextFormatting.ITALIC.toString() + I18n.format("effect.aether.freeze"));
     }
 }

@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.items.armor;
 
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.entities.effects.IEffectResistanceHolder;
 import com.gildedgames.aether.common.entities.effects.StatusEffect;
 import com.gildedgames.aether.common.init.CreativeTabsAether;
 import net.minecraft.entity.Entity;
@@ -13,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class ItemAetherArmor extends ItemArmor
+public class ItemAetherArmor extends ItemArmor implements IEffectResistanceHolder
 {
 	private Map<StatusEffect, Double> statusEffects = new HashMap<>();
 

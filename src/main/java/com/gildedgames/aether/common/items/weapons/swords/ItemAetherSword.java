@@ -5,6 +5,7 @@ import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectPool;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
+import com.gildedgames.aether.common.entities.effects.IEffectDamageHolder;
 import com.gildedgames.aether.common.entities.effects.StatusEffect;
 import com.gildedgames.aether.common.init.CreativeTabsAether;
 import com.gildedgames.aether.common.items.ItemAbilityType;
@@ -21,7 +22,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.*;
 
-public class ItemAetherSword extends ItemSword implements IDamageLevelsHolder
+public class ItemAetherSword extends ItemSword implements IDamageLevelsHolder, IEffectDamageHolder
 {
 	private Map<StatusEffect, Integer> statusEffects = new HashMap<>();
 
@@ -82,14 +83,6 @@ public class ItemAetherSword extends ItemSword implements IDamageLevelsHolder
 				tooltip.add(String.format("%s: %s",
 						TextFormatting.DARK_AQUA + I18n.format("item.aether.tooltip.use"),
 						TextFormatting.WHITE + I18n.format(this.getTranslationKey() + ".use.desc")));
-			}
-		}
-
-		if (!this.statusEffects.isEmpty())
-		{
-			for (StatusEffect effect : this.statusEffects.keySet())
-			{
-				effect.addInformation(tooltip);
 			}
 		}
 	}

@@ -88,6 +88,6 @@ public class StatusEffectStun extends StatusEffect
 	@Override
 	public void addInformation(Collection<String> label)
 	{
-		label.add(TextFormatting.GOLD.toString() + I18n.format("effect.aether.stun"));
+		label.add(TextFormatting.GOLD.toString() + TextFormatting.ITALIC.toString() + I18n.format("effect.aether.stun"));
 	}
 }

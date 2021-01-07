@@ -10,8 +10,13 @@ import com.gildedgames.aether.api.items.equipment.effects.IEffectProvider;
 import com.gildedgames.aether.api.items.properties.IItemProperties;
 import com.gildedgames.aether.api.items.properties.ItemRarity;
 import com.gildedgames.aether.client.gui.util.ToolTipCurrencyHelper;
+import com.gildedgames.aether.common.entities.effects.IEffectDamageHolder;
+import com.gildedgames.aether.common.entities.effects.IEffectResistanceHolder;
+import com.gildedgames.aether.common.entities.effects.StatusEffect;
 import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
+import com.gildedgames.aether.common.items.weapons.swords.ItemAetherSword;
 import com.gildedgames.aether.common.shop.ShopCurrencyGilt;
+import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -134,6 +139,78 @@ public class TooltipItemPropertiesListener
 						String.format("%s %s",
 								TextFormatting.YELLOW + I18n.format("attribute.name.aether.impact"),
 								TextFormatting.GRAY + I18n.format("attribute.name.aether.damageLevel"))));
+			}
+		}
+
+		if (event.getItemStack().getItem() instanceof IEffectDamageHolder)
+		{
+			IEffectDamageHolder item = (IEffectDamageHolder) event.getItemStack().getItem();
+
+			if (!item.getStatusEffects().isEmpty())
+			{
+				for (Map.Entry<StatusEffect, Integer> effect : item.getStatusEffects().entrySet())
+				{
+					Collection<String> stringCollection = Lists.newArrayList();
+					effect.getKey().addInformation(stringCollection);
+
+					event.getToolTip().add(String.format(" %s %s",
+							effect.getValue(),
+							String.format("%s %s",
+									stringCollection.toArray()[0],
+									TextFormatting.GRAY + I18n.format("attribute.name.aether.damageLevel"))));
+				}
+			}
+		}
+
+		if (event.getItemStack().getItem() instanceof IEffectResistanceHolder)
+		{
+			IEffectResistanceHolder item = (IEffectResistanceHolder) event.getItemStack().getItem();
+
+			if (!item.getStatusEffects().isEmpty())
+			{
+				for (Map.Entry<StatusEffect, Double> effect : item.getStatusEffects().entrySet())
+				{
+					Collection<String> stringCollection = Lists.newArrayList();
+					effect.getKey().addInformation(stringCollection);
+
+					String trueValue;
+
+					if (effect.getValue() > -1.0D && effect.getValue() < 1.0D && effect.getValue() != 0.0D)
+					{
+						if (effect.getValue() > 0.0)
+						{
+							trueValue = ((int) (effect.getValue() * 100)) + "%";
+
+							event.getToolTip().add(String.format(" +%s %s",
+									trueValue,
+									String.format("%s %s",
+											stringCollection.toArray()[0],
+											TextFormatting.GRAY + I18n.format("attribute.name.aether.resistance"))));
+						}
+						else if (effect.getValue() < 0.0)
+						{
+							trueValue = ((int) (effect.getValue() * -100)) + "%";
+
+							event.getToolTip().add(String.format(" -%s %s",
+									trueValue,
+									String.format("%s %s",
+											stringCollection.toArray()[0],
+											TextFormatting.GRAY + I18n.format("attribute.name.aether.weakness"))));
+						}
+					}
+					else if (effect.getValue() <= -1.0D)
+					{
+						event.getToolTip().add(String.format(" %s %s",
+								TextFormatting.GRAY + I18n.format("attribute.name.aether.complete_weakness"),
+								stringCollection.toArray()[0]));
+					}
+					else if (effect.getValue() >= 1.0D)
+					{
+						event.getToolTip().add(String.format(" %s %s",
+								TextFormatting.GRAY + I18n.format("attribute.name.aether.complete_resistance"),
+								stringCollection.toArray()[0]));
+					}
+				}
 			}
 		}
 

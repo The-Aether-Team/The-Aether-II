@@ -952,6 +952,11 @@ attribute.name.aether.impact=Impact
 
 attribute.name.aether.damageLevel=Damage
 
+attribute.name.aether.weakness=Weakness
+attribute.name.aether.resistance=Resistance
+attribute.name.aether.complete_weakness=Severely Weak To
+attribute.name.aether.complete_resistance=Immune To
+
 # Introsat
 
 intro.prologue=200 years after a lone adventurer defeated the tyrannical Sun Spirit, Karthuul, a new traveller is about to enter the Aether...

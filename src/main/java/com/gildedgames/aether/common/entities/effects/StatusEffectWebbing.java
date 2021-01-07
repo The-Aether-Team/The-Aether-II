@@ -77,6 +77,6 @@ public class StatusEffectWebbing extends StatusEffect
     @Override
     public void addInformation(Collection<String> label)
     {
-        label.add(TextFormatting.GRAY.toString() + I18n.format("effect.aether.webbing"));
+        label.add(TextFormatting.GRAY.toString() + TextFormatting.ITALIC.toString() + I18n.format("effect.aether.webbing"));
     }
 }

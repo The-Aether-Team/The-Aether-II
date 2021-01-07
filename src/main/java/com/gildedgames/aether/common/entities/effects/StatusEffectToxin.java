@@ -53,6 +53,6 @@ public class StatusEffectToxin extends StatusEffect
 	@Override
 	public void addInformation(Collection<String> label)
 	{
-		label.add(TextFormatting.GRAY.toString() + I18n.format("effect.aether.toxin"));
+		label.add(TextFormatting.GREEN.toString() + TextFormatting.ITALIC.toString() + I18n.format("effect.aether.toxin"));
 	}
 }
