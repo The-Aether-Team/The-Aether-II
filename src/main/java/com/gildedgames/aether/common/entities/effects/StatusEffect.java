@@ -62,6 +62,15 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	@Override
 	public void tick(EntityLivingBase livingBase)
 	{
+		if (this.effectResistance > 1.0D)
+		{
+			this.potentialBuildup = (int) (this.potentialBuildup - (this.potentialBuildup * (this.effectResistance - 1.0)));
+		}
+		else if (this.effectResistance < 1.0D)
+		{
+			this.potentialBuildup = (int) (this.potentialBuildup + (this.potentialBuildup * (1.0 - this.effectResistance)));
+		}
+
 		if (this.effectBuildup < this.potentialBuildup)
 		{
 			this.effectBuildup += this.BUILDUP_SPEED;
@@ -148,7 +157,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 		{
 			this.tempEffectResistance = additionalResistance;
 
-			this.potentialBuildup = this.effectBuildup + MathHelper.ceil(buildup * this.calculateResistances());
+			this.potentialBuildup = buildup;
 
 			if (additionalResistance > 0)
 			{
@@ -325,6 +334,11 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	@Override
 	public abstract int getBuildupFromIntensity(EEffectIntensity intensity);
 
+	public int getPotentialBuildup()
+	{
+		return this.potentialBuildup;
+	}
+
 	@Override
 	public boolean isDirty()
 	{
@@ -381,6 +395,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 		compound.setInteger(this.NAME + ".effectTimer", this.effectTimer);
 		compound.setInteger(this.NAME + ".decreaseTimer", this.decreaseTimer);
 		compound.setDouble(this.NAME + ".effectActiveTimeModifier", this.activeEffectTimeModifier);
+		compound.setDouble(this.NAME + ".effectResistance", this.effectResistance);
 	}
 
 	@Override
@@ -391,5 +406,6 @@ public abstract class StatusEffect implements IAetherStatusEffects
 		this.effectTimer = compound.getInteger(this.NAME + ".effectTimer");
 		this.decreaseTimer = compound.getInteger(this.NAME + ".decreaseTimer");
 		this.activeEffectTimeModifier =  compound.getInteger(this.NAME + ".effectActiveTimeModifier");
+		this.effectResistance = compound.getDouble(this.NAME + ".effectResistance");
 	}
 }

@@ -49,14 +49,16 @@ public class ItemAetherSword extends ItemSword implements IDamageLevelsHolder
 			{
 				for (Map.Entry<StatusEffect, Integer> effect : this.statusEffects.entrySet())
 				{
-					if (!statusEffectPool.isEffectApplied(effect.getKey().getEffectType()))
+					IAetherStatusEffects actualEffect = statusEffectPool.createEffect(effect.getKey().getEffectType().name, target);
+
+					if (!statusEffectPool.isEffectApplied(actualEffect.getEffectType()))
 					{
-						statusEffectPool.applyStatusEffect(effect.getKey().getEffectType(), effect.getValue());
+						statusEffectPool.applyStatusEffect(actualEffect.getEffectType(), effect.getValue());
 					}
 					else
 					{
-						statusEffectPool.modifyActiveEffectBuildup(effect.getKey().getEffectType(),
-								statusEffectPool.getBuildupFromEffect(effect.getKey().getEffectType()) + effect.getValue());
+						statusEffectPool.modifyActiveEffectBuildup(actualEffect.getEffectType(),
+								statusEffectPool.getBuildupFromEffect(actualEffect.getEffectType()) + effect.getValue());
 					}
 				}
 			}

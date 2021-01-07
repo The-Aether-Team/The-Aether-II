@@ -88,6 +88,7 @@ public class PlayerAether implements IPlayerAether
 		//this.registerModule(new PlayerCaveSpawnModule(this));
 		this.registerModule(new PlayerConditionModule(this));
 		this.registerModule(new PlayerSpecialEquipmentModule(this));
+		this.registerModule(new PlayerEffectsEquipmentModule(this));
 	}
 
 	@Nonnull
