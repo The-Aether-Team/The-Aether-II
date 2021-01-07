@@ -1,6 +1,8 @@
 package com.gildedgames.aether.common.capabilities.entity.player.modules;
 
 import com.gildedgames.aether.api.AetherAPI;
+import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectPool;
+import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.api.items.EffectActivator;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectFactory;
 import com.gildedgames.aether.api.items.equipment.effects.IEffectPool;
@@ -9,12 +11,17 @@ import com.gildedgames.aether.api.items.properties.IItemProperties;
 import com.gildedgames.aether.api.player.IEquipmentModule;
 import com.gildedgames.aether.api.player.IPlayerAetherModule;
 import com.gildedgames.aether.api.player.inventory.IInventoryEquipment;
+import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.containers.inventory.InventoryEquipment;
 import com.gildedgames.aether.common.entities.effects.EquipmentEffectPool;
+import com.gildedgames.aether.common.entities.effects.IEffectResistanceHolder;
 import com.gildedgames.aether.common.entities.effects.InventoryProvider;
+import com.gildedgames.aether.common.entities.effects.StatusEffect;
+import com.gildedgames.aether.common.items.accessories.ItemAccessory;
+import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketEquipment;
 import net.minecraft.item.ItemStack;
@@ -43,6 +50,8 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 	private ItemStack lastHeldStack = ItemStack.EMPTY;
 
 	private int lastHeldStackIndex = -1;
+
+	private Map<ItemStack, Boolean> applicationTracker = new HashMap<>();
 
 	public PlayerEquipmentModule(PlayerAether player)
 	{
@@ -88,6 +97,13 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 		this.lastHeldStackIndex = this.getSlotFor(this.lastHeldStack);
 
 
+		IAetherStatusEffectPool statusEffectPool = event.player.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
+
+		if (statusEffectPool == null)
+		{
+			return;
+		}
+
 		final List<Pair<Integer, ItemStack>> updates = this.getEntity().world.isRemote ? null : new ArrayList<>();
 
 		// Checks what items have been changed in the staging inventory, records them, and then
@@ -102,6 +118,8 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 				if (!oldStack.isEmpty())
 				{
 					this.deactivateEquipmentEffects(oldStack, Pair.of(i, EQUIPMENT_INV_PROVIDER), EffectActivator.WHEN_EQUIPPED);
+
+					statusEffectPool.resetAllResistances();
 				}
 
 				if (!newStack.isEmpty())
@@ -115,6 +133,41 @@ public class PlayerEquipmentModule extends PlayerAetherModule implements IEquipm
 				}
 
 				this.recordedInv.setInventorySlotContents(i, newStack.isEmpty() ? ItemStack.EMPTY : newStack.copy());
+			}
+
+			if (!newStack.isEmpty())
+			{
+				if (newStack.getItem() instanceof ItemAccessory)
+				{
+					ItemAccessory accessory = (ItemAccessory) newStack.getItem();
+
+					if (!accessory.getStatusEffects().isEmpty())
+					{
+						for (Map.Entry<StatusEffect, Double> effect : accessory.getStatusEffects().entrySet())
+						{
+							applicationTracker.putIfAbsent(newStack, false);
+
+							IAetherStatusEffects actualEffect = statusEffectPool.createEffect(effect.getKey().getEffectType().name, event.player);
+
+							if (!applicationTracker.get(newStack))
+							{
+								statusEffectPool.addResistanceToEffect(actualEffect.getEffectType(), effect.getValue());
+
+								if (statusEffectPool.getResistanceToEffect(actualEffect.getEffectType()) != 1.0D)
+								{
+									applicationTracker.put(newStack, true);
+								}
+							}
+							else
+							{
+								if (statusEffectPool.getResistanceToEffect(actualEffect.getEffectType()) == 1.0D)
+								{
+									applicationTracker.put(newStack, false);
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 

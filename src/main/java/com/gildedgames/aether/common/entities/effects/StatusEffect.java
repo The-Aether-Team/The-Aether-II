@@ -62,6 +62,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	@Override
 	public void tick(EntityLivingBase livingBase)
 	{
+		System.out.println("r " + this.effectResistance);
 		if (this.effectResistance > 1.0D)
 		{
 			this.potentialBuildup = (int) (this.potentialBuildup - (this.potentialBuildup * (this.effectResistance - 1.0)));
@@ -70,13 +71,31 @@ public abstract class StatusEffect implements IAetherStatusEffects
 		{
 			this.potentialBuildup = (int) (this.potentialBuildup + (this.potentialBuildup * (1.0 - this.effectResistance)));
 		}
+		else if (this.effectResistance >= 2.0D)
+		{
+			this.effectBuildup = 0;
+			this.potentialBuildup = 1;
+		}
+		System.out.println("b " + this.potentialBuildup);
 
 		if (this.effectBuildup < this.potentialBuildup)
 		{
-			this.effectBuildup += this.BUILDUP_SPEED;
+			if (this.effectResistance < 2.0D)
+			{
+				this.effectBuildup += this.BUILDUP_SPEED;
 
-			EntityUtil.spawnEffectParticles(livingBase, this.effectType);
+				EntityUtil.spawnEffectParticles(livingBase, this.effectType);
+			}
+			else
+			{
+				System.out.println(true);
+				this.effectBuildup = 0;
+				this.potentialBuildup = 0;
+				this.effectTimer = 0;
+				this.isEffectApplied = false;
+			}
 		}
+		System.out.println("e " + this.getBuildup());
 
 		if (this.effectBuildup >= this.potentialBuildup)
 		{
@@ -206,24 +225,31 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	@Override
 	public void reduceBuildup()
 	{
-		if (this.effectBuildup > 0)
+		if (this.effectResistance < 2.0D)
 		{
-			++ this.effectTimer;
-
-			if (!this.isEffectApplied)
+			if (this.effectBuildup > 0)
 			{
-				if (this.effectTimer % (this.TIME_TILL_REDUCTION * TICKS_PER_SECOND) == 0)
+				++ this.effectTimer;
+
+				if (!this.isEffectApplied)
 				{
-					if (this.effectBuildup < this.potentialBuildup)
+					if (this.effectTimer % (this.TIME_TILL_REDUCTION * TICKS_PER_SECOND) == 0)
 					{
-						this.potentialBuildup = this.potentialBuildup - this.REDUCTION_RATE;
-					}
-					else
-					{
-						this.effectBuildup = this.effectBuildup - this.REDUCTION_RATE;
+						if (this.effectBuildup < this.potentialBuildup)
+						{
+							this.potentialBuildup = this.potentialBuildup - this.REDUCTION_RATE;
+						}
+						else
+						{
+							this.effectBuildup = this.effectBuildup - this.REDUCTION_RATE;
+						}
 					}
 				}
 			}
+		}
+		else
+		{
+			this.effectBuildup = 0;
 		}
 	}
 
@@ -286,7 +312,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	@Override
 	public int getBuildup()
 	{
-		return this.effectBuildup;
+		return this.effectResistance < 2.0D ? this.effectBuildup : 0;
 	}
 
 	@Override

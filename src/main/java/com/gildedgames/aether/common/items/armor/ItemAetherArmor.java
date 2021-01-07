@@ -58,11 +58,11 @@ public class ItemAetherArmor extends ItemArmor implements IEffectResistanceHolde
 				1 + (AetherCore.CONFIG.cutoutHelmets ? "b" : "")) + ".png");
 	}
 
-	public <T extends ItemAetherArmor> T addStatusEffectResistance(StatusEffect effect, double resistance)
+	public ItemAetherArmor addStatusEffectResistance(StatusEffect effect, double resistance)
 	{
 		this.statusEffects.put(effect, resistance);
 
-		return (T) this;
+		return this;
 	}
 
 	public Map<StatusEffect, Double> getStatusEffects()
