@@ -62,7 +62,6 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	@Override
 	public void tick(EntityLivingBase livingBase)
 	{
-		System.out.println("r " + this.effectResistance);
 		if (this.effectResistance > 1.0D)
 		{
 			this.potentialBuildup = (int) (this.potentialBuildup - (this.potentialBuildup * (this.effectResistance - 1.0)));
@@ -76,7 +75,6 @@ public abstract class StatusEffect implements IAetherStatusEffects
 			this.effectBuildup = 0;
 			this.potentialBuildup = 1;
 		}
-		System.out.println("b " + this.potentialBuildup);
 
 		if (this.effectBuildup < this.potentialBuildup)
 		{
@@ -88,14 +86,12 @@ public abstract class StatusEffect implements IAetherStatusEffects
 			}
 			else
 			{
-				System.out.println(true);
 				this.effectBuildup = 0;
 				this.potentialBuildup = 0;
 				this.effectTimer = 0;
 				this.isEffectApplied = false;
 			}
 		}
-		System.out.println("e " + this.getBuildup());
 
 		if (this.effectBuildup >= this.potentialBuildup)
 		{

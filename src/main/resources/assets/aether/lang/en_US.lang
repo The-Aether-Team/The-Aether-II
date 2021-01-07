@@ -954,7 +954,6 @@ attribute.name.aether.damageLevel=Damage
 
 attribute.name.aether.weakness=Weakness
 attribute.name.aether.resistance=Resistance
-attribute.name.aether.complete_weakness=Severely Weak To
 attribute.name.aether.complete_resistance=Immune To
 
 # Introsat

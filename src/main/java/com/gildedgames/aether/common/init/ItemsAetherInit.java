@@ -147,7 +147,7 @@ public class ItemsAetherInit
 
 		r.register("dart_shooter", new ItemDartShooter().setCreativeTab(CreativeTabsAether.TAB_WEAPONS));
 		r.register("dart", new ItemDart().setCreativeTab(CreativeTabsAether.TAB_WEAPONS));
-		r.register("skyroot_sword", new ItemSkyrootSword().setSlashDamageLevel(4.0F));
+		r.register("skyroot_sword", new ItemSkyrootSword().setSlashDamageLevel(4.0F).addStatusEffect(new StatusEffectCockatriceVenom(null), 100));
 		r.register("holystone_sword", new ItemHolystoneSword().setSlashDamageLevel(5.0F));
 		r.register("zanite_sword", new ItemZaniteSword().setSlashDamageLevel(6.0F));
 		r.register("arkenium_sword", new ItemArkeniumSword().setSlashDamageLevel(8.0F));
@@ -159,10 +159,10 @@ public class ItemsAetherInit
 		r.register("arkenium_crossbow", new ItemCrossbow().setDurationInTicks(24).setKnockBackValue(0.5F).setType(ItemCrossbow.crossBowTypes.ARKENIUM));
 		r.register("gravitite_crossbow", new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(1.2F).setType(ItemCrossbow.crossBowTypes.GRAVETITE));
 
-		r.register("taegore_hide_helmet", new ItemTaegoreHideArmor(EntityEquipmentSlot.HEAD));
-		r.register("taegore_hide_chestplate", new ItemTaegoreHideArmor(EntityEquipmentSlot.CHEST));
-		r.register("taegore_hide_leggings", new ItemTaegoreHideArmor(EntityEquipmentSlot.LEGS));
-		r.register("taegore_hide_boots", new ItemTaegoreHideArmor(EntityEquipmentSlot.FEET));
+		r.register("taegore_hide_helmet", new ItemTaegoreHideArmor(EntityEquipmentSlot.HEAD).addStatusEffectResistance(new StatusEffectCockatriceVenom(null), 1.0D));
+		r.register("taegore_hide_chestplate", new ItemTaegoreHideArmor(EntityEquipmentSlot.CHEST).addStatusEffectResistance(new StatusEffectCockatriceVenom(null), -1.0D));
+		r.register("taegore_hide_leggings", new ItemTaegoreHideArmor(EntityEquipmentSlot.LEGS).addStatusEffectResistance(new StatusEffectCockatriceVenom(null), 0.8D));
+		r.register("taegore_hide_boots", new ItemTaegoreHideArmor(EntityEquipmentSlot.FEET).addStatusEffectResistance(new StatusEffectCockatriceVenom(null), -0.4D));
 		r.register("taegore_hide_gloves", new ItemAetherGloves(ItemAetherGloves.GloveType.TAEGOREHIDE).setMaxDamage(60));
 		r.register("skyroot_shield", new ItemAetherShield(ItemAetherShield.ShieldType.SKYROOT).setMaxDamage(114));
 		r.register("burrukai_pelt_helmet", new ItemBurrukaiPeltArmor(EntityEquipmentSlot.HEAD));

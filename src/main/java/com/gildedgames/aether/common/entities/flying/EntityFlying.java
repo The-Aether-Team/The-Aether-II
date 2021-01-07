@@ -1,6 +1,9 @@
 package com.gildedgames.aether.common.entities.flying;
 
 import com.gildedgames.aether.api.entity.damage.IDefenseLevelsHolder;
+import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectPool;
+import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
+import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.common.entities.ai.EntityAIForcedWander;
 import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
@@ -22,10 +25,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class EntityFlying extends EntityCreature implements IDefenseLevelsHolder
 {
+	private Map<IAetherStatusEffects.effectTypes, Boolean> applicationTracker = new HashMap<>();
+	private Map<IAetherStatusEffects.effectTypes, Double> resistances = new HashMap<>();
+	
 	private static final DataParameter<Boolean> IS_MOVING = EntityDataManager.createKey(EntityFlying.class, DataSerializers.BOOLEAN);
 
 	private final float clientSideTailAnimationO;
@@ -181,6 +188,46 @@ public class EntityFlying extends EntityCreature implements IDefenseLevelsHolder
 
 			this.clientSideTailAnimation += this.clientSideTailAnimationSpeed;
 		}
+	}
+
+	@Override
+	public void onEntityUpdate()
+	{
+		IAetherStatusEffectPool statusEffectPool = this.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
+
+		if (statusEffectPool == null)
+		{
+			return;
+		}
+
+		for (Map.Entry<IAetherStatusEffects.effectTypes, Double> effect : resistances.entrySet())
+		{
+			applicationTracker.putIfAbsent(effect.getKey(), false);
+
+			if (!applicationTracker.get(effect.getKey()))
+			{
+				statusEffectPool.addResistanceToEffect(effect.getKey(), effect.getValue());
+
+				if (statusEffectPool.getResistanceToEffect(effect.getKey()) != 1.0D)
+				{
+					applicationTracker.put(effect.getKey(), true);
+				}
+			}
+			else
+			{
+				if (statusEffectPool.getResistanceToEffect(effect.getKey()) == 1.0D)
+				{
+					applicationTracker.put(effect.getKey(), false);
+				}
+			}
+		}
+
+		super.onEntityUpdate();
+	}
+
+	protected Map<IAetherStatusEffects.effectTypes, Double> getResistances()
+	{
+		return resistances;
 	}
 
 	@Override

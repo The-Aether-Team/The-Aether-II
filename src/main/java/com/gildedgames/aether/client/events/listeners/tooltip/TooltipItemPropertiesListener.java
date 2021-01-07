@@ -175,7 +175,7 @@ public class TooltipItemPropertiesListener
 
 					String trueValue;
 
-					if (effect.getValue() > -1.0D && effect.getValue() < 1.0D && effect.getValue() != 0.0D)
+					if (effect.getValue() >= -1.0D && effect.getValue() < 1.0D && effect.getValue() != 0.0D)
 					{
 						if (effect.getValue() > 0.0)
 						{
@@ -191,18 +191,12 @@ public class TooltipItemPropertiesListener
 						{
 							trueValue = ((int) (effect.getValue() * -100)) + "%";
 
-							event.getToolTip().add(String.format(" -%s %s",
+							event.getToolTip().add(String.format(" +%s %s",
 									trueValue,
 									String.format("%s %s",
 											stringCollection.toArray()[0],
 											TextFormatting.GRAY + I18n.format("attribute.name.aether.weakness"))));
 						}
-					}
-					else if (effect.getValue() <= -1.0D)
-					{
-						event.getToolTip().add(String.format(" %s %s",
-								TextFormatting.GRAY + I18n.format("attribute.name.aether.complete_weakness"),
-								stringCollection.toArray()[0]));
 					}
 					else if (effect.getValue() >= 1.0D)
 					{

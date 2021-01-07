@@ -67,6 +67,8 @@ public class EntityCockatrice extends EntityAetherMob
 		this.stepHeight = 1.0F;
 
 		this.experienceValue = 7;
+
+		this.getResistances().put(IAetherStatusEffects.effectTypes.COCKATRICE_VENOM, 1.0D);
 	}
 
 	@Override
