@@ -13,6 +13,8 @@ import java.util.Random;
 
 public class WorldGenIrradiatedPool implements WorldDecorationGenerator
 {
+    private int dustAmount = 0;
+
     public WorldGenIrradiatedPool() {}
 
     @Override
@@ -88,16 +90,18 @@ public class WorldGenIrradiatedPool implements WorldDecorationGenerator
         {
             for (int z = pos.getZ() - 1; z < pos.getZ() + 1; z++)
             {
-                if (rand.nextInt(2) == 0)
+                world.setBlockState(new BlockPos(pos.getX(), pos.down(radius).getY(), pos.getZ()), BlocksAether.irradiated_dust_block.getDefaultState());
+                this.dustAmount++;
+
+                if (this.dustAmount <= 3)
                 {
-                    BlockPos down = new BlockPos(x, pos.down(radius - 1).getY(), z);
-
-                    if (x == pos.getX() && z == pos.getZ())
+                    if (rand.nextInt(2) == 0)
                     {
-                        down = new BlockPos(x, pos.down(radius).getY(), z);
-                    }
+                        BlockPos down = new BlockPos(x, pos.down(radius - 1).getY(), z);
 
-                    world.setBlockState(down, BlocksAether.irradiated_dust_block.getDefaultState());
+                        world.setBlockState(down, BlocksAether.irradiated_dust_block.getDefaultState());
+                        this.dustAmount++;
+                    }
                 }
             }
         }
