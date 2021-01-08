@@ -4,11 +4,15 @@ import net.minecraft.block.Block;
 
 public interface IBlockRadiation
 {
-    Block setRadiationDistance(int amount);
+    Block setRadiationDistance(int distance);
 
     int getRadiationDistance();
 
     Block setRadiationAmount(int amount);
 
     int getRadiationAmount();
+
+    Block setRadiationRate(int rate);
+
+    int getRadiationRate();
 }

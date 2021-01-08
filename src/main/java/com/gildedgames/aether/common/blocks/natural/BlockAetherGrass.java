@@ -1,13 +1,15 @@
 package com.gildedgames.aether.common.blocks.natural;
 
+import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectPool;
+import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.api.registrar.BlocksAether;
+import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.common.blocks.IBlockMultiName;
 import com.gildedgames.aether.common.blocks.IBlockRadiation;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherFlower;
 import com.gildedgames.aether.common.blocks.natural.plants.BlockTallAetherGrass;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
-import com.gildedgames.aether.common.blocks.util.BlockRadiationHandler;
 import com.gildedgames.aether.common.world.biomes.forgotten_highlands.BiomeForgottenHighlands;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
@@ -22,6 +24,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.WeightedRandom;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
@@ -34,7 +37,7 @@ import java.util.Random;
 
 public class BlockAetherGrass extends Block implements IBlockMultiName, IGrowable, IBlockRadiation
 {
-	private int radiationDistance, radiationAmount;
+	private int radiationDistance, radiationAmount, radiationRate;
 
 	public static final BlockVariant AETHER = new BlockVariant(0, "normal"),
 			ENCHANTED = new BlockVariant(1, "enchanted"),
@@ -85,15 +88,31 @@ public class BlockAetherGrass extends Block implements IBlockMultiName, IGrowabl
 	}
 
 	@Override
+	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
+	{
+		if (state.getValue(PROPERTY_VARIANT) == IRRADIATED)
+		{
+			worldIn.scheduleUpdate(pos, worldIn.getBlockState(pos).getBlock(), 1);
+		}
+	}
+
+	@Override
+	public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random)
+	{
+	}
+
+	@Override
 	public void updateTick(final World world, final BlockPos pos, final IBlockState state, final Random rand)
 	{
+		if (state.getValue(PROPERTY_VARIANT) == IRRADIATED)
+		{
+			this.tickRadiation(world, pos, this.getRadiationDistance(), this.getRadiationAmount(), this.getRadiationRate());
+
+			world.scheduleUpdate(pos, world.getBlockState(pos).getBlock(), 1);
+		}
+
 		if (!world.isRemote && state.getValue(PROPERTY_VARIANT) != ENCHANTED)
 		{
-			if (state.getValue(PROPERTY_VARIANT) == IRRADIATED)
-			{
-				BlockRadiationHandler.tickRadiation(world, pos, this.getRadiationDistance(), this.getRadiationAmount());
-			}
-
 			BlockPos.PooledMutableBlockPos up = BlockPos.PooledMutableBlockPos.retain();
 			up.setPos(pos.getX(), pos.getY() + 1, pos.getZ());
 
@@ -158,6 +177,54 @@ public class BlockAetherGrass extends Block implements IBlockMultiName, IGrowabl
 	public int getRadiationAmount()
 	{
 		return this.radiationAmount;
+	}
+
+	@Override
+	public Block setRadiationRate(int rate)
+	{
+		this.radiationRate = rate;
+		return this;
+	}
+
+	@Override
+	public int getRadiationRate()
+	{
+		return this.radiationRate;
+	}
+
+	private void tickRadiation(final World world, final BlockPos pos, int radiationAmount, int radiationDistance, int radiationRate)
+	{
+		double x = pos.getX();
+		double y = pos.getY();
+		double z = pos.getZ();
+		AxisAlignedBB axisalignedbb = (new AxisAlignedBB(x, y, z, x + 1, y + 1, z + 1)).grow(radiationDistance);
+		List<EntityPlayer> list = world.getEntitiesWithinAABB(EntityPlayer.class, axisalignedbb);
+
+		for (EntityPlayer player : list)
+		{
+			IAetherStatusEffectPool statusEffectPool = player.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
+
+			if (!player.isCreative())
+			{
+				boolean tick = world.getTotalWorldTime() % radiationRate == 0;
+
+				if (tick)
+				{
+					if (statusEffectPool != null)
+					{
+						if (statusEffectPool.getBuildupFromEffect(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING) <= 0)
+						{
+							statusEffectPool.applyStatusEffect(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING, radiationAmount);
+						}
+						else
+						{
+							statusEffectPool.modifyActiveEffectBuildup(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING,
+									statusEffectPool.getBuildupFromEffect(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING) + radiationAmount);
+						}
+					}
+				}
+			}
+		}
 	}
 
 	@Override

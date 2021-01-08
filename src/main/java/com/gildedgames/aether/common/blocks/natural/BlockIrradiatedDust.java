@@ -1,16 +1,20 @@
 package com.gildedgames.aether.common.blocks.natural;
 
+import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectPool;
+import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
+import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.blocks.IBlockRadiation;
-import com.gildedgames.aether.common.blocks.util.BlockRadiationHandler;
 import com.gildedgames.aether.common.util.selectors.ItemEntry;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.WeightedRandom;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ChunkCache;
 import net.minecraft.world.IBlockAccess;
@@ -22,7 +26,7 @@ import java.util.*;
 
 public class BlockIrradiatedDust extends Block implements IBlockRadiation
 {
-    private int radiationDistance, radiationAmount;
+    private int radiationDistance, radiationAmount, radiationRate;
 
     private final List<ItemEntry> drops = new ArrayList<>();
 
@@ -42,12 +46,22 @@ public class BlockIrradiatedDust extends Block implements IBlockRadiation
     }
 
     @Override
+    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
+    {
+        worldIn.scheduleUpdate(pos, worldIn.getBlockState(pos).getBlock(), 1);
+    }
+
+    @Override
+    public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random)
+    {
+    }
+
+    @Override
     public void updateTick(final World world, final BlockPos pos, final IBlockState state, final Random rand)
     {
-        if (!world.isRemote)
-        {
-            BlockRadiationHandler.tickRadiation(world, pos, this.getRadiationDistance(), this.getRadiationAmount());
-        }
+        this.tickRadiation(world, pos, this.getRadiationDistance(), this.getRadiationAmount(), this.getRadiationRate());
+
+        world.scheduleUpdate(pos, world.getBlockState(pos).getBlock(), 1);
     }
 
     @Override
@@ -74,6 +88,54 @@ public class BlockIrradiatedDust extends Block implements IBlockRadiation
     public int getRadiationAmount()
     {
         return this.radiationAmount;
+    }
+
+    @Override
+    public Block setRadiationRate(int rate)
+    {
+        this.radiationRate = rate;
+        return this;
+    }
+
+    @Override
+    public int getRadiationRate()
+    {
+        return this.radiationRate;
+    }
+
+    private void tickRadiation(final World world, final BlockPos pos, int radiationAmount, int radiationDistance, int radiationRate)
+    {
+        double x = pos.getX();
+        double y = pos.getY();
+        double z = pos.getZ();
+        AxisAlignedBB axisalignedbb = (new AxisAlignedBB(x, y, z, x + 1, y + 1, z + 1)).grow(radiationDistance);
+        List<EntityPlayer> list = world.getEntitiesWithinAABB(EntityPlayer.class, axisalignedbb);
+
+        for (EntityPlayer player : list)
+        {
+            IAetherStatusEffectPool statusEffectPool = player.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
+
+            if (!player.isCreative())
+            {
+                boolean tick = world.getTotalWorldTime() % radiationRate == 0;
+
+                if (tick)
+                {
+                    if (statusEffectPool != null)
+                    {
+                        if (statusEffectPool.getBuildupFromEffect(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING) <= 0)
+                        {
+                            statusEffectPool.applyStatusEffect(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING, radiationAmount);
+                        }
+                        else
+                        {
+                            statusEffectPool.modifyActiveEffectBuildup(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING,
+                                    statusEffectPool.getBuildupFromEffect(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING) + radiationAmount);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     @Override
