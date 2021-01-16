@@ -77,6 +77,7 @@ public class ItemsAetherInit
 		r.register("gravitite_plate", new ItemDropOnDeath().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("scatterglass_vial", new ItemScatterglassVial().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("irradiated_dust", new ItemIrradiatedDust().setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
+		r.register("irradiated_chunk", new ItemIrradiatedVisuals().setMaxStackSize(1).setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("irradiated_tool", new ItemIrradiatedVisuals().setMaxStackSize(1).setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("irradiated_sword", new ItemIrradiatedVisuals().setMaxStackSize(1).setCreativeTab(CreativeTabsAether.TAB_MATERIALS));
 		r.register("irradiated_armor", new ItemIrradiatedVisuals().setMaxStackSize(1).setCreativeTab(CreativeTabsAether.TAB_MATERIALS));

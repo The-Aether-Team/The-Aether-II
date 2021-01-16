@@ -658,6 +658,7 @@ public class ItemModelsAetherInit
 				.add(EntityParachute.Type.PURPLE.ordinal(), "purple_cloud_parachute")
 				.add(EntityParachute.Type.BLUE.ordinal(), "blue_cloud_parachute"));
 
+		registerItemModels(ItemsAether.irradiated_chunk, "irradiated_chunk");
 		registerItemModels(ItemsAether.irradiated_sword, "irradiated_sword");
 		registerItemModels(ItemsAether.irradiated_armor, "irradiated_armor");
 		registerItemModels(ItemsAether.irradiated_tool, "irradiated_tool");

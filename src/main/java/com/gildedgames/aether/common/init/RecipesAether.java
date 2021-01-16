@@ -366,6 +366,13 @@ public class RecipesAether
 	@SuppressWarnings("unchecked")
 	private static void registerCoolerRecipes()
 	{
+		CoolerRecipes.instance().addCoolingFromItem(ItemsAether.irradiated_chunk, Item.getItemFromBlock(Blocks.AIR), new ItemStack(ItemsAether.irradiated_dust),
+				MapGen.genMap(new ItemStack(ItemsAether.aerwhale_music_disc), 20),
+				MapGen.genMap(new ItemStack(ItemsAether.moa_music_disc), 20),
+				MapGen.genMap(new ItemStack(ItemsAether.labyrinth_music_disc), 20),
+				MapGen.genMap(new ItemStack(ItemsAether.valkyrie_music_disc), 20),
+				MapGen.genMap(new ItemStack(ItemsAether.recording_892), 20));
+
 		CoolerRecipes.instance().addCoolingFromItem(ItemsAether.irradiated_armor, Item.getItemFromBlock(Blocks.AIR), new ItemStack(ItemsAether.irradiated_dust),
 				MapGen.genMap(new ItemStack(ItemsAether.irradiated_dust), 100));
 
