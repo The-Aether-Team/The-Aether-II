@@ -1,6 +1,9 @@
 package com.gildedgames.aether.common.cache;
 
 import com.gildedgames.aether.api.cache.IEntityStats;
+import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
+
+import java.util.Map;
 
 public class EntityStats implements IEntityStats
 {
@@ -8,12 +11,15 @@ public class EntityStats implements IEntityStats
 
 	private final double slashDefenseLevel, pierceDefenseLevel, impactDefenseLevel;
 
-	private EntityStats(final float maxHealth, final double slashDefenseLevel, final double pierceDefenseLevel, final double impactDefenseLevel)
+	private final Map<IAetherStatusEffects.effectTypes, Double> resistances;
+
+	private EntityStats(final float maxHealth, final double slashDefenseLevel, final double pierceDefenseLevel, final double impactDefenseLevel, final Map<IAetherStatusEffects.effectTypes, Double> resistances)
 	{
 		this.maxHealth = maxHealth;
 		this.slashDefenseLevel = slashDefenseLevel;
 		this.pierceDefenseLevel = pierceDefenseLevel;
 		this.impactDefenseLevel = impactDefenseLevel;
+		this.resistances = resistances;
 	}
 
 	public static EntityStatsFactory build()
@@ -45,11 +51,18 @@ public class EntityStats implements IEntityStats
 		return this.impactDefenseLevel;
 	}
 
+	public Map<IAetherStatusEffects.effectTypes, Double> getResistances()
+	{
+		return this.resistances;
+	}
+
 	public static class EntityStatsFactory
 	{
 		private float maxHealth;
 
 		private double slashDefenseLevel, pierceDefenseLevel, impactDefenseLevel;
+
+		private Map<IAetherStatusEffects.effectTypes, Double> resistances;
 
 		private EntityStatsFactory()
 		{
@@ -84,9 +97,16 @@ public class EntityStats implements IEntityStats
 			return this;
 		}
 
+		public EntityStatsFactory resistances(final Map<IAetherStatusEffects.effectTypes, Double> value)
+		{
+			this.resistances = value;
+
+			return this;
+		}
+
 		public EntityStats flush()
 		{
-			return new EntityStats(this.maxHealth, this.slashDefenseLevel, this.pierceDefenseLevel, this.impactDefenseLevel);
+			return new EntityStats(this.maxHealth, this.slashDefenseLevel, this.pierceDefenseLevel, this.impactDefenseLevel, this.resistances);
 		}
 	}
 }

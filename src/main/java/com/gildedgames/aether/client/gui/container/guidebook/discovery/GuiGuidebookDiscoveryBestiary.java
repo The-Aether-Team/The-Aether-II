@@ -1,6 +1,7 @@
 package com.gildedgames.aether.client.gui.container.guidebook.discovery;
 
 import com.gildedgames.aether.api.cache.IEntityStats;
+import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.api.travellers_guidebook.ITGManager;
 import com.gildedgames.aether.client.gui.container.guidebook.discovery.stats.GuiStat;
 import com.gildedgames.aether.client.gui.misc.GuiScrollableGuidebook;
@@ -29,7 +30,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class GuiGuidebookDiscoveryBestiary extends GuiGuidebookDiscovery
 {
@@ -42,6 +45,16 @@ public class GuiGuidebookDiscoveryBestiary extends GuiGuidebookDiscovery
 	private static final ResourceLocation PIERCE_DEFENSE_ICON = AetherCore.getResource("textures/gui/overlay/pierce_damage.png");
 
 	private static final ResourceLocation IMPACT_DEFENSE_ICON = AetherCore.getResource("textures/gui/overlay/impact_damage.png");
+
+	private static final ResourceLocation AMBROSIUM_ICON = AetherCore.getResource("textures/gui/overlay/effects/ambrosium_poisoning.png");
+	private static final ResourceLocation BLEED_ICON = AetherCore.getResource("textures/gui/overlay/effects/bleed.png");
+	private static final ResourceLocation COCKATRICE_VENOM_ICON = AetherCore.getResource("textures/gui/overlay/effects/cockatrice_venom.png");
+	private static final ResourceLocation FRACTURE_ICON = AetherCore.getResource("textures/gui/overlay/effects/fracture.png");
+	private static final ResourceLocation FUNGAL_ROT_ICON = AetherCore.getResource("textures/gui/overlay/effects/fungal_rot.png");
+	private static final ResourceLocation STUN_ICON = AetherCore.getResource("textures/gui/overlay/effects/stun.png");
+	private static final ResourceLocation TOXIN_ICON = AetherCore.getResource("textures/gui/overlay/effects/toxin.png");
+	private static final ResourceLocation FREEZE_ICON = AetherCore.getResource("textures/gui/overlay/effects/freeze.png");
+	private static final ResourceLocation WEBBING_ICON = AetherCore.getResource("textures/gui/overlay/effects/webbing.png");
 
 	private List<TGEntryBestiaryPage> bestiaryEntries;
 
@@ -84,11 +97,28 @@ public class GuiGuidebookDiscoveryBestiary extends GuiGuidebookDiscovery
 				new GuiTexture(Dim2D.build().width(14).height(14).flush(), IMPACT_DEFENSE_ICON),
 				new Text(new TextComponentString(String.valueOf(MathHelper.floor(stats.getImpactDefenseLevel()))), 1.0F));
 
+		List<GuiElement> statsArray = new ArrayList<>();
+
+		statsArray.add(healthStat);
+		statsArray.add(slashStat);
+		statsArray.add(pierceStat);
+		statsArray.add(impactStat);
+
+		for (Map.Entry<IAetherStatusEffects.effectTypes, Double> stat : stats.getResistances().entrySet())
+		{
+			final GuiStat effectTestStat = new GuiStat(
+					new GuiTexture(Dim2D.build().width(16).height(16).flush(), getEffectIconFromType(stat.getKey())),
+					new Text(new TextComponentString(String.valueOf(stat.getValue())), 1.0F));
+
+			statsArray.add(effectTestStat);
+		}
+
+		GuiElement[] elements = statsArray.toArray(new GuiElement[0]);
+
 		statsElement.build(this);
 
-		GuiLibHelper.alignVertically(this, Pos2D.flush(5, 5), 5, healthStat, slashStat, pierceStat, impactStat);
-
-		statsElement.context().addChildren(healthStat, slashStat, pierceStat, impactStat);
+		GuiLibHelper.alignVertically(this, Pos2D.flush(5, 5), 5, elements);
+		statsElement.context().addChildren(elements);
 
 		GuiLibHelper.assembleMinMaxArea(statsElement);
 
@@ -257,5 +287,32 @@ public class GuiGuidebookDiscoveryBestiary extends GuiGuidebookDiscovery
 		this.zLevel = 0.0F;
 
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
+	}
+
+	private ResourceLocation getEffectIconFromType(IAetherStatusEffects.effectTypes effectType)
+	{
+		switch(effectType)
+		{
+			case AMBROSIUM_POISONING:
+				return AMBROSIUM_ICON;
+			case BLEED:
+				return BLEED_ICON;
+			case FRACTURE:
+				return FRACTURE_ICON;
+			case COCKATRICE_VENOM:
+				return COCKATRICE_VENOM_ICON;
+			case FUNGAL_ROT:
+				return FUNGAL_ROT_ICON;
+			case STUN:
+				return STUN_ICON;
+			case TOXIN:
+				return TOXIN_ICON;
+			case FREEZE:
+				return FREEZE_ICON;
+			case WEBBING:
+				return WEBBING_ICON;
+		}
+
+		return STUN_ICON;
 	}
 }

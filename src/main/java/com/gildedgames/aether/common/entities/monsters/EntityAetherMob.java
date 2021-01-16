@@ -5,6 +5,7 @@ import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectPool;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.common.entities.ai.AetherNavigateGround;
+import com.gildedgames.aether.common.entities.effects.IEntityResistanceHolder;
 import com.google.common.collect.Maps;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityMob;
@@ -14,7 +15,7 @@ import net.minecraft.world.World;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EntityAetherMob extends EntityMob implements IDefenseLevelsHolder
+public class EntityAetherMob extends EntityMob implements IDefenseLevelsHolder, IEntityResistanceHolder
 {
 	private Map<IAetherStatusEffects.effectTypes, Boolean> applicationTracker = new HashMap<>();
 	private Map<IAetherStatusEffects.effectTypes, Double> resistances = new HashMap<>();
@@ -74,7 +75,7 @@ public class EntityAetherMob extends EntityMob implements IDefenseLevelsHolder
 		super.onEntityUpdate();
 	}
 
-	protected Map<IAetherStatusEffects.effectTypes, Double> getResistances()
+	public Map<IAetherStatusEffects.effectTypes, Double> getResistances()
 	{
 		return resistances;
 	}

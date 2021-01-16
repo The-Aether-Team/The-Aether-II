@@ -1,6 +1,7 @@
 package com.gildedgames.aether.common.entities.monsters;
 
 import com.gildedgames.aether.api.entity.damage.DamageTypeAttributes;
+import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.entities.ai.EntityAIAechorPlantAttack;
@@ -82,6 +83,8 @@ public class EntityAechorPlant extends EntityAetherMob
 		this.experienceValue = 3;
 
 		Arrays.fill(this.petals, true);
+
+		//this.getResistances().put(IAetherStatusEffects.effectTypes.TOXIN, 1.5D);
 	}
 
 	public boolean[] getPetalsPresent()

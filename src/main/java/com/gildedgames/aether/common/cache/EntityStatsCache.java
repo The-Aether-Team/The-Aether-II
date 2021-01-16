@@ -3,6 +3,8 @@ package com.gildedgames.aether.common.cache;
 import com.gildedgames.aether.api.cache.IEntityStats;
 import com.gildedgames.aether.api.cache.IEntityStatsCache;
 import com.gildedgames.aether.api.entity.damage.DamageTypeAttributes;
+import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
+import com.gildedgames.aether.common.entities.effects.IEntityResistanceHolder;
 import com.google.common.collect.Maps;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -10,6 +12,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class EntityStatsCache implements IEntityStatsCache
@@ -43,12 +46,21 @@ public class EntityStatsCache implements IEntityStatsCache
 				final double slashDefenseLevel = living.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).getAttributeValue();
 				final double pierceDefenseLevel = living.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).getAttributeValue();
 				final double impactDefenseLevel = living.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).getAttributeValue();
+				Map<IAetherStatusEffects.effectTypes, Double> resistances = new HashMap<>();
+
+				if (entity instanceof IEntityResistanceHolder)
+				{
+					IEntityResistanceHolder resistanceHolder = (IEntityResistanceHolder) entity;
+
+					resistances = resistanceHolder.getResistances();
+				}
 
 				final EntityStats stats = EntityStats.build()
 						.maxHealth(living.getMaxHealth())
 						.slashDefenseLevel(slashDefenseLevel)
 						.pierceDefenseLevel(pierceDefenseLevel)
 						.impactDefenseLevel(impactDefenseLevel)
+						.resistances(resistances)
 						.flush();
 
 				this.entityIdToStats.put(entityId, stats);
