@@ -162,10 +162,10 @@ public class BlockIrradiatedDust extends Block implements IBlockRadiation
     private void initializeDrops()
     {
         this.drops.add(new ItemEntry(ItemsAether.irradiated_dust, 50));
-        this.drops.add(new ItemEntry(ItemsAether.irradiated_chunk, 30));
         this.drops.add(new ItemEntry(ItemsAether.irradiated_tool, 20));
         this.drops.add(new ItemEntry(ItemsAether.irradiated_sword, 20));
         this.drops.add(new ItemEntry(ItemsAether.irradiated_armor, 20));
+        this.drops.add(new ItemEntry(ItemsAether.irradiated_chunk, 15));
         this.drops.add(new ItemEntry(ItemsAether.irradiated_charm, 10));
         this.drops.add(new ItemEntry(ItemsAether.irradiated_ring, 7));
         this.drops.add(new ItemEntry(ItemsAether.irradiated_neckwear, 5));
