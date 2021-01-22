@@ -3,10 +3,7 @@ package com.gildedgames.aether.common.init;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.AetherCore;
-import com.gildedgames.aether.common.entities.effects.StatusEffectBleed;
-import com.gildedgames.aether.common.entities.effects.StatusEffectCockatriceVenom;
-import com.gildedgames.aether.common.entities.effects.StatusEffectFreeze;
-import com.gildedgames.aether.common.entities.effects.StatusEffectToxin;
+import com.gildedgames.aether.common.entities.effects.*;
 import com.gildedgames.aether.common.items.ItemDropOnDeath;
 import com.gildedgames.aether.common.items.accessories.ItemAccessory;
 import com.gildedgames.aether.common.items.accessories.ItemDamageCharm;
@@ -160,7 +157,7 @@ public class ItemsAetherInit
 		r.register("arkenium_crossbow", new ItemCrossbow().setDurationInTicks(24).setKnockBackValue(0.5F).setType(ItemCrossbow.crossBowTypes.ARKENIUM));
 		r.register("gravitite_crossbow", new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(1.2F).setType(ItemCrossbow.crossBowTypes.GRAVETITE));
 
-		r.register("taegore_hide_helmet", new ItemTaegoreHideArmor(EntityEquipmentSlot.HEAD));
+		r.register("taegore_hide_helmet", new ItemTaegoreHideArmor(EntityEquipmentSlot.HEAD).addStatusEffectResistance(new StatusEffectStun(null), 0.5D));
 		r.register("taegore_hide_chestplate", new ItemTaegoreHideArmor(EntityEquipmentSlot.CHEST));
 		r.register("taegore_hide_leggings", new ItemTaegoreHideArmor(EntityEquipmentSlot.LEGS));
 		r.register("taegore_hide_boots", new ItemTaegoreHideArmor(EntityEquipmentSlot.FEET));

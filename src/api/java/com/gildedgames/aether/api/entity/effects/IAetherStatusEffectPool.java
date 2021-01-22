@@ -37,6 +37,8 @@ public interface IAetherStatusEffectPool
 	 */
 	boolean isEffectApplied(IAetherStatusEffects.effectTypes effectType);
 
+	boolean effectExists(IAetherStatusEffects.effectTypes effectType);
+
 	/**
 	 * @param effectType The effect to retrive resistance information.
 	 * @return double representing effect resistance.

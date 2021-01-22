@@ -77,7 +77,7 @@ public class ItemSkyrootConsumableBucket extends Item implements IDropOnDeath
 				{
 					if (stack.getItem() == ItemsAether.skyroot_poison_bucket)
 					{
-						if (!statusEffectPool.isEffectApplied(IAetherStatusEffects.effectTypes.TOXIN))
+						if (!statusEffectPool.effectExists(IAetherStatusEffects.effectTypes.TOXIN))
 						{
 							statusEffectPool.applyStatusEffect(IAetherStatusEffects.effectTypes.TOXIN, 50);
 						}

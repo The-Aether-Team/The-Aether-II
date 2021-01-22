@@ -79,7 +79,7 @@ public class ItemAetherShieldListener
 						{
 							if (statusEffectPool != null)
 							{
-								if (!statusEffectPool.isEffectApplied(IAetherStatusEffects.effectTypes.GUARD_BREAK))
+								if (!statusEffectPool.effectExists(IAetherStatusEffects.effectTypes.GUARD_BREAK))
 								{
 									statusEffectPool.applyStatusEffect(IAetherStatusEffects.effectTypes.GUARD_BREAK, buildup);
 								}

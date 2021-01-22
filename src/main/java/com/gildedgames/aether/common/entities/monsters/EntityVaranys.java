@@ -3,7 +3,9 @@ package com.gildedgames.aether.common.entities.monsters;
 import com.gildedgames.aether.api.entity.damage.DamageTypeAttributes;
 import com.gildedgames.aether.api.entity.effects.EEffectIntensity;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectIntensity;
+import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectPool;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
+import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.common.entities.ai.EntityAIHideFromLight;
 import com.gildedgames.aether.common.entities.ai.EntityAIUnstuckBlueAercloud;
 import com.gildedgames.aether.common.entities.ai.EntityAIWanderAvoidLight;
@@ -154,8 +156,20 @@ public class EntityVaranys extends EntityAetherMob implements IEntityMultiPart
 
 			if (!living.isActiveItemStackBlocking())
 			{
-				int buildup = IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectFreeze(living), EEffectIntensity.MAJOR);
-				IAetherStatusEffects.applyStatusEffect(living, IAetherStatusEffects.effectTypes.FREEZE, buildup);
+				IAetherStatusEffectPool statusEffectPool = living.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
+
+				if (statusEffectPool != null)
+				{
+					if (!statusEffectPool.effectExists(IAetherStatusEffects.effectTypes.FREEZE))
+					{
+						statusEffectPool.applyStatusEffect(IAetherStatusEffects.effectTypes.FREEZE, 30);
+					}
+					else
+					{
+						statusEffectPool.modifyActiveEffectBuildup(IAetherStatusEffects.effectTypes.FREEZE,
+								statusEffectPool.getBuildupFromEffect(IAetherStatusEffects.effectTypes.FREEZE) + 30);
+					}
+				}
 			}
 		}
 	}

@@ -2,7 +2,9 @@ package com.gildedgames.aether.common.entities.ai.tempest;
 
 import com.gildedgames.aether.api.entity.effects.EEffectIntensity;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectIntensity;
+import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectPool;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
+import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.api.registrar.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.EntityAI;
 import com.gildedgames.aether.common.entities.effects.StatusEffectStun;
@@ -111,8 +113,20 @@ public class AIElectricShock extends EntityAI<EntityTempest>
 
 			if (!living.isActiveItemStackBlocking())
 			{
-				int buildup = IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectStun(living), EEffectIntensity.MAJOR);
-				IAetherStatusEffects.applyStatusEffect(living, IAetherStatusEffects.effectTypes.STUN, buildup);
+				IAetherStatusEffectPool statusEffectPool = living.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
+
+				if (statusEffectPool != null)
+				{
+					if (!statusEffectPool.effectExists(IAetherStatusEffects.effectTypes.STUN))
+					{
+						statusEffectPool.applyStatusEffect(IAetherStatusEffects.effectTypes.STUN, 90);
+					}
+					else
+					{
+						statusEffectPool.modifyActiveEffectBuildup(IAetherStatusEffects.effectTypes.STUN,
+								statusEffectPool.getBuildupFromEffect(IAetherStatusEffects.effectTypes.STUN) + 90);
+					}
+				}
 			}
 		}
 	}

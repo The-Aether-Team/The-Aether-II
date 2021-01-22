@@ -53,7 +53,7 @@ public class WorldWeatherListener
                         {
                             if (world.getBiome(pos) == BiomesAether.ARCTIC_PEAKS)
                             {
-                                if (!statusEffectPool.isEffectApplied(IAetherStatusEffects.effectTypes.FREEZE))
+                                if (!statusEffectPool.effectExists(IAetherStatusEffects.effectTypes.FREEZE))
                                 {
                                     statusEffectPool.applyStatusEffect(IAetherStatusEffects.effectTypes.FREEZE, effectStrength);
                                 }

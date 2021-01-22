@@ -212,7 +212,7 @@ public class BlockAetherGrass extends Block implements IBlockMultiName, IGrowabl
 				{
 					if (statusEffectPool != null)
 					{
-						if (statusEffectPool.getBuildupFromEffect(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING) <= 0)
+						if (!statusEffectPool.effectExists(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING))
 						{
 							statusEffectPool.applyStatusEffect(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING, radiationAmount);
 						}

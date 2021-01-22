@@ -4,8 +4,10 @@ import com.gildedgames.aether.api.entity.IEntityEyesComponent;
 import com.gildedgames.aether.api.entity.damage.DamageTypeAttributes;
 import com.gildedgames.aether.api.entity.effects.EEffectIntensity;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectIntensity;
+import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectPool;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.api.registrar.BlocksAether;
+import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.api.registrar.SoundsAether;
 import com.gildedgames.aether.common.entities.ai.*;
@@ -289,8 +291,20 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 
 			if (!living.isActiveItemStackBlocking())
 			{
-				int buildup = IAetherStatusEffectIntensity.getBuildupFromEffect(new StatusEffectFracture(living), EEffectIntensity.ORDINARY);
-				IAetherStatusEffects.applyStatusEffect(living, IAetherStatusEffects.effectTypes.FRACTURE, buildup);
+				IAetherStatusEffectPool statusEffectPool = living.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
+
+				if (statusEffectPool != null)
+				{
+					if (!statusEffectPool.effectExists(IAetherStatusEffects.effectTypes.FRACTURE))
+					{
+						statusEffectPool.applyStatusEffect(IAetherStatusEffects.effectTypes.FRACTURE, 35);
+					}
+					else
+					{
+						statusEffectPool.modifyActiveEffectBuildup(IAetherStatusEffects.effectTypes.FRACTURE,
+								statusEffectPool.getBuildupFromEffect(IAetherStatusEffects.effectTypes.FRACTURE) + 35);
+					}
+				}
 			}
 		}
 	}

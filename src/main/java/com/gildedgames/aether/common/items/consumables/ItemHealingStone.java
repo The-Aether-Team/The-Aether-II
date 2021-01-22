@@ -105,7 +105,7 @@ public class ItemHealingStone extends Item implements IDropOnDeath, IUsesCustomS
 
 			if (statusEffectPool != null)
 			{
-				if (!statusEffectPool.isEffectApplied(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING))
+				if (!statusEffectPool.effectExists(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING))
 				{
 					statusEffectPool.applyStatusEffect(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING, 25);
 				}

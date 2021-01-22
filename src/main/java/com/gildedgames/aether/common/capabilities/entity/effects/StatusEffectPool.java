@@ -125,6 +125,14 @@ public class StatusEffectPool implements IAetherStatusEffectPool
 	}
 
 	@Override
+	public boolean effectExists(IAetherStatusEffects.effectTypes effectType)
+	{
+		IAetherStatusEffects effect = this.getActiveEffect(effectType.name);
+
+		return effect != null;
+	}
+
+	@Override
 	public double getResistanceToEffect(IAetherStatusEffects.effectTypes effectType)
 	{
 		IAetherStatusEffects effect = this.getActiveEffect(effectType.name);
