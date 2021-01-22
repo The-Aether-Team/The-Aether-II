@@ -91,20 +91,21 @@ public class StatusEffectPool implements IAetherStatusEffectPool
 	@Override
 	public void applyStatusEffect(IAetherStatusEffects.effectTypes effectType, int buildup)
 	{
-		IAetherStatusEffects ambroiumPoisoningEffect = this.getActiveEffect(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING.name);
 
-		double additionalResistance = 0.0D;
-
-		if (ambroiumPoisoningEffect != null)
-		{
-			if (ambroiumPoisoningEffect.getIsEffectApplied())
-			{
-				additionalResistance = 0.5D;    // apply 50% reduction to resistance.
-			}
-		}
+//		IAetherStatusEffects ambroiumPoisoningEffect = this.getActiveEffect(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING.name);
+//
+//		double additionalResistance = 0.0D;
+//
+//		if (ambroiumPoisoningEffect != null)
+//		{
+//			if (ambroiumPoisoningEffect.getIsEffectApplied())
+//			{
+//				additionalResistance = 0.5D;    // apply 50% reduction to resistance.
+//			}
+//		}
 
 		IAetherStatusEffects effect = this.createEffect(effectType.name, this.livingBase);
-		effect.addBuildup(buildup, additionalResistance);
+		effect.addBuildup(buildup, 0.0D);
 	}
 
 	@Override
@@ -139,6 +140,7 @@ public class StatusEffectPool implements IAetherStatusEffectPool
 	@Override
 	public void addResistanceToEffect(IAetherStatusEffects.effectTypes effectType, double addResistance)
 	{
+
 		IAetherStatusEffects effect = this.getActiveEffect(effectType.name);
 
 		if (effect != null)
