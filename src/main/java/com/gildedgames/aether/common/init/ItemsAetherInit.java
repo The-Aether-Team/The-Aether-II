@@ -157,7 +157,7 @@ public class ItemsAetherInit
 		r.register("arkenium_crossbow", new ItemCrossbow().setDurationInTicks(24).setKnockBackValue(0.5F).setType(ItemCrossbow.crossBowTypes.ARKENIUM));
 		r.register("gravitite_crossbow", new ItemCrossbow().setDurationInTicks(20).setKnockBackValue(1.2F).setType(ItemCrossbow.crossBowTypes.GRAVETITE));
 
-		r.register("taegore_hide_helmet", new ItemTaegoreHideArmor(EntityEquipmentSlot.HEAD).addStatusEffectResistance(new StatusEffectStun(null), 0.5D));
+		r.register("taegore_hide_helmet", new ItemTaegoreHideArmor(EntityEquipmentSlot.HEAD));
 		r.register("taegore_hide_chestplate", new ItemTaegoreHideArmor(EntityEquipmentSlot.CHEST));
 		r.register("taegore_hide_leggings", new ItemTaegoreHideArmor(EntityEquipmentSlot.LEGS));
 		r.register("taegore_hide_boots", new ItemTaegoreHideArmor(EntityEquipmentSlot.FEET));
