@@ -2,6 +2,7 @@ package com.gildedgames.aether.common.travellers_guidebook;
 
 import com.gildedgames.aether.api.travellers_guidebook.ITGEntry;
 import com.gildedgames.aether.common.travellers_guidebook.entries.TGEntryBestiaryPage;
+import com.gildedgames.aether.common.travellers_guidebook.entries.TGEntryEffectsPage;
 import com.google.gson.*;
 
 import java.lang.reflect.Type;
@@ -14,6 +15,7 @@ public class TGEntryDeserializer implements JsonDeserializer<ITGEntry>
 	public TGEntryDeserializer()
 	{
 		this.entryDefinitions.put("bestiary_page", TGEntryBestiaryPage.class);
+		this.entryDefinitions.put("effects_page", TGEntryEffectsPage.class);
 	}
 
 	@Override

@@ -10,8 +10,10 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.player_conditions.PlayerConditionDeserializer;
 import com.gildedgames.aether.common.player_conditions.types.PlayerConditionFeedEntity;
 import com.gildedgames.aether.common.player_conditions.types.PlayerConditionKillEntity;
+import com.gildedgames.aether.common.player_conditions.types.PlayerConditionNone;
 import com.gildedgames.aether.common.player_conditions.types.PlayerConditionSeeEntity;
 import com.gildedgames.aether.common.travellers_guidebook.entries.TGEntryBestiaryPage;
+import com.gildedgames.aether.common.travellers_guidebook.entries.TGEntryEffectsPage;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
@@ -63,11 +65,13 @@ public class TGManager implements ITGManager
 		builder.registerTypeAdapter(PlayerConditionSeeEntity.class, new PlayerConditionSeeEntity.Deserializer());
 		builder.registerTypeAdapter(PlayerConditionFeedEntity.class, new PlayerConditionFeedEntity.Deserializer());
 		builder.registerTypeAdapter(PlayerConditionKillEntity.class, new PlayerConditionKillEntity.Deserializer());
+		builder.registerTypeAdapter(PlayerConditionNone.class, new PlayerConditionNone.Deserializer());
 
 		builder.registerTypeAdapter(ConditionResolutionRequireAll.class, new ConditionResolutionRequireAll.Deserializer());
 		builder.registerTypeAdapter(ConditionResolutionRequireAny.class, new ConditionResolutionRequireAny.Deserializer());
 
 		builder.registerTypeAdapter(TGEntryBestiaryPage.class, new TGEntryBestiaryPage.Deserializer());
+		builder.registerTypeAdapter(TGEntryEffectsPage.class, new TGEntryEffectsPage.Deserializer());
 
 		return builder;
 	}

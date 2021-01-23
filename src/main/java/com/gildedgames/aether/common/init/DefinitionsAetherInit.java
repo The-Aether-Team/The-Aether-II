@@ -25,6 +25,17 @@ public class DefinitionsAetherInit
         AetherAPI.content().tgManager().registerEntry(new ResourceLocation("aether:varanys"));
         AetherAPI.content().tgManager().registerEntry(new ResourceLocation("aether:zephyr"));
 
+        AetherAPI.content().tgManager().registerEntry(new ResourceLocation("aether:ambrosium_poisoning"));
+        AetherAPI.content().tgManager().registerEntry(new ResourceLocation("aether:bleed"));
+        AetherAPI.content().tgManager().registerEntry(new ResourceLocation("aether:cockatrice_venom"));
+        AetherAPI.content().tgManager().registerEntry(new ResourceLocation("aether:fracture"));
+        AetherAPI.content().tgManager().registerEntry(new ResourceLocation("aether:freeze"));
+        AetherAPI.content().tgManager().registerEntry(new ResourceLocation("aether:guard_break"));
+        AetherAPI.content().tgManager().registerEntry(new ResourceLocation("aether:saturation_boost"));
+        AetherAPI.content().tgManager().registerEntry(new ResourceLocation("aether:stun"));
+        AetherAPI.content().tgManager().registerEntry(new ResourceLocation("aether:toxin"));
+        AetherAPI.content().tgManager().registerEntry(new ResourceLocation("aether:webbing"));
+
         if (AetherCore.isServer())
         {
             AetherAPI.content().tgManager().load();
