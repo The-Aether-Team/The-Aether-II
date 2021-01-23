@@ -8,6 +8,8 @@ import com.gildedgames.orbis.lib.client.gui.util.gui_library.IGuiElement;
 import com.gildedgames.orbis.lib.client.gui.util.gui_library.IGuiViewer;
 import com.gildedgames.orbis.lib.client.rect.Dim2D;
 import com.google.common.collect.Lists;
+import net.minecraft.client.gui.inventory.GuiInventory;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.List;
@@ -21,6 +23,14 @@ public class GuiGuidebookStatus extends AbstractGuidebookPage
 	public GuiGuidebookStatus(final IGuiViewer prevViewer, final PlayerAether aePlayer)
 	{
 		super(prevViewer, aePlayer, new EmptyContainer());
+	}
+
+	@Override
+	public void drawScreen(final int mouseX, final int mouseY, final float partialTick)
+	{
+		super.drawScreen(mouseX, mouseY, partialTick);
+
+		this.drawPlayer(mouseX, mouseY);
 	}
 
 	@Override
@@ -39,5 +49,14 @@ public class GuiGuidebookStatus extends AbstractGuidebookPage
 				RIGHT_PAGE);
 
 		return Lists.newArrayList(rightPage);
+	}
+
+	private void drawPlayer(final int mouseX, final int mouseY)
+	{
+		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+
+		GuiInventory.drawEntityOnScreen(
+				this.width / 2 - 54,
+				this.height / 2, 32, (this.guiLeft + 88) - mouseX, (this.guiTop + 35) - mouseY, this.mc.player);
 	}
 }
