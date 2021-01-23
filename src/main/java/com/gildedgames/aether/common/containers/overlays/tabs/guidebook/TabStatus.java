@@ -5,6 +5,7 @@ import com.gildedgames.aether.api.registry.tab.ITabClient;
 import com.gildedgames.aether.client.gui.container.guidebook.AbstractGuidebookPage;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.AetherGuiHandler;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.player.EntityPlayer;
@@ -33,8 +34,7 @@ public class TabStatus implements ITab
 	@Override
 	public boolean isEnabled()
 	{
-		//return Minecraft.getMinecraft().currentScreen instanceof AbstractGuidebookPage;
-		return false;
+		return Minecraft.getMinecraft().currentScreen instanceof AbstractGuidebookPage;
 	}
 
 	@Override
