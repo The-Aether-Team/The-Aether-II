@@ -34,7 +34,7 @@ import java.util.List;
 
 public class GuiGuidebookDiscoveryEffects extends GuiGuidebookDiscovery
 {
-	private static final ResourceLocation RIGHT_PAGE_EFFECTS = AetherCore.getResource("textures/gui/guidebook/discovery/guidebook_discovery_right_general.png");
+	private static final ResourceLocation RIGHT_PAGE_EFFECTS = AetherCore.getResource("textures/gui/guidebook/discovery/guidebook_discovery_right_effect.png");
 
 	private List<TGEntryEffectsPage> effectsEntries;
 
@@ -102,13 +102,13 @@ public class GuiGuidebookDiscoveryEffects extends GuiGuidebookDiscovery
 	@Override
 	protected List<IGuiElement> createRightPage(final int screenX, final int screenY, final float u, final float v)
 	{
-		this.effectFrame = new GuiTexture(Dim2D.build().x(screenX + 25 + 32).y(screenY + 27 + 3).width(64).height(64).flush(), null);
+		this.effectFrame = new GuiTexture(Dim2D.build().x(screenX + 72).y(screenY + 30).width(32).height(32).flush(), null);
 		this.effectFrame.state().setVisible(false);
 
 		this.effectTitle = new GuiText(Dim2D.build().x(screenX + 88).y(screenY + 10).flush(), new Text(new TextComponentString(""), 1.0F));
 		this.effectTitle.dim().mod().centerX(true).flush();
 
-		this.effectDescription = new GuiTextBox(Dim2D.build().x(screenX + 24).y(screenY + 105).width(120).flush(), false,
+		this.effectDescription = new GuiTextBox(Dim2D.build().x(screenX + 24).y(screenY + 74).width(120).flush(), false,
 				new Text(new TextComponentString(""),
 						0.65F));
 
