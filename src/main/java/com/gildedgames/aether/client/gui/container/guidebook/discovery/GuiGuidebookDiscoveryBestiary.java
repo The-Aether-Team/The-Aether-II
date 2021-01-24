@@ -55,6 +55,7 @@ public class GuiGuidebookDiscoveryBestiary extends GuiGuidebookDiscovery
 	private static final ResourceLocation TOXIN_ICON = AetherCore.getResource("textures/gui/overlay/effects/toxin.png");
 	private static final ResourceLocation FREEZE_ICON = AetherCore.getResource("textures/gui/overlay/effects/freeze.png");
 	private static final ResourceLocation WEBBING_ICON = AetherCore.getResource("textures/gui/overlay/effects/webbing.png");
+	private static final ResourceLocation IRRADIATION_ICON = AetherCore.getResource("textures/gui/overlay/effects/irradiation.png");
 
 	private List<TGEntryBestiaryPage> bestiaryEntries;
 
@@ -311,6 +312,8 @@ public class GuiGuidebookDiscoveryBestiary extends GuiGuidebookDiscovery
 				return FREEZE_ICON;
 			case WEBBING:
 				return WEBBING_ICON;
+			case IRRADIATION:
+				return IRRADIATION_ICON;
 		}
 
 		return STUN_ICON;

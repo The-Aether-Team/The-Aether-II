@@ -39,6 +39,7 @@ public class StatusEffectPool implements IAetherStatusEffectPool
 		types.put(IAetherStatusEffects.effectTypes.WEBBING.name, new StatusEffectFactory(StatusEffectWebbing.class));
 		types.put(IAetherStatusEffects.effectTypes.SATURATION_BOOST.name, new StatusEffectFactory(StatusEffectSaturationBoost.class));
 		types.put(IAetherStatusEffects.effectTypes.GUARD_BREAK.name, new StatusEffectFactory(StatusEffectGuardBreak.class));
+		types.put(IAetherStatusEffects.effectTypes.IRRADIATION.name, new StatusEffectFactory(StatusEffectIrradiation.class));
 	}
 
 	private EntityLivingBase livingBase;
@@ -137,7 +138,7 @@ public class StatusEffectPool implements IAetherStatusEffectPool
 	{
 		double additionalResistance = 0.0D;
 
-		if (this.isEffectApplied(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING))
+		if (this.isEffectApplied(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING) || this.isEffectApplied(IAetherStatusEffects.effectTypes.IRRADIATION))
 		{
 			additionalResistance = 0.5D;
 		}

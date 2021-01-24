@@ -927,6 +927,7 @@ gui.guidebook.discovery.moves=Moves:
 death.attack.aether.effect.bleed=%1$s bled to death
 death.attack.aether.effect.fungalRot=%1$s succumbed to fungal rot
 death.attack.aether.effect.fracture=Oof owie %1$s's bones
+death.attack.aether.effect.irradiation=%1$s became irradiated
 
 # Status Effects
 
@@ -939,6 +940,7 @@ effect.aether.fungal_rot=Fungal Rot
 effect.aether.stun=Stun
 effect.aether.toxin=Toxin
 effect.aether.webbing=Webbing
+effect.aether.irradiation=Irradiation
 
 effect.aether.saturation_boost=Saturation Boost
 

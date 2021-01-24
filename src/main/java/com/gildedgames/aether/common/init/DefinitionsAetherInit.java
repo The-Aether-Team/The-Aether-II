@@ -31,6 +31,7 @@ public class DefinitionsAetherInit
         AetherAPI.content().tgManager().registerEntry(new ResourceLocation("aether:fracture"));
         AetherAPI.content().tgManager().registerEntry(new ResourceLocation("aether:freeze"));
         AetherAPI.content().tgManager().registerEntry(new ResourceLocation("aether:guard_break"));
+        AetherAPI.content().tgManager().registerEntry(new ResourceLocation("aether:irradiation"));
         AetherAPI.content().tgManager().registerEntry(new ResourceLocation("aether:saturation_boost"));
         AetherAPI.content().tgManager().registerEntry(new ResourceLocation("aether:stun"));
         AetherAPI.content().tgManager().registerEntry(new ResourceLocation("aether:toxin"));

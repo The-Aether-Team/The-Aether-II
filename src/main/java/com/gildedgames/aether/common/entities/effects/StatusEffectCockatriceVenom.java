@@ -22,7 +22,7 @@ public class StatusEffectCockatriceVenom extends StatusEffect
 		{
 			if (this.effectTimer % (TICKS_PER_SECOND * 2) == 0 && livingBase.getHealth() >= 2)
 			{
-				livingBase.attackEntityFrom(EffectsDamageSource.COCKATRICE_VENOM.setDamageBypassesArmor(), 1f);
+				livingBase.attackEntityFrom(EffectsDamageSource.COCKATRICE_VENOM, 1f);
 			}
 		}
 	}

@@ -41,14 +41,14 @@ public class PlayerWaterListener
                             {
                                 if (statusEffectPool != null)
                                 {
-                                    if (!statusEffectPool.effectExists(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING))
+                                    if (!statusEffectPool.effectExists(IAetherStatusEffects.effectTypes.IRRADIATION))
                                     {
-                                        statusEffectPool.applyStatusEffect(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING, amount);
+                                        statusEffectPool.applyStatusEffect(IAetherStatusEffects.effectTypes.IRRADIATION, amount);
                                     }
                                     else
                                     {
-                                        statusEffectPool.modifyActiveEffectBuildup(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING,
-                                                statusEffectPool.getBuildupFromEffect(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING) + amount);
+                                        statusEffectPool.modifyActiveEffectBuildup(IAetherStatusEffects.effectTypes.IRRADIATION,
+                                                statusEffectPool.getBuildupFromEffect(IAetherStatusEffects.effectTypes.IRRADIATION) + amount);
                                     }
                                 }
                             }

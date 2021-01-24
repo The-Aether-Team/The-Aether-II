@@ -123,14 +123,14 @@ public class BlockIrradiatedDust extends Block implements IBlockRadiation
                 {
                     if (statusEffectPool != null)
                     {
-                        if (!statusEffectPool.effectExists(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING))
+                        if (!statusEffectPool.effectExists(IAetherStatusEffects.effectTypes.IRRADIATION))
                         {
-                            statusEffectPool.applyStatusEffect(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING, radiationAmount);
+                            statusEffectPool.applyStatusEffect(IAetherStatusEffects.effectTypes.IRRADIATION, radiationAmount);
                         }
                         else
                         {
-                            statusEffectPool.modifyActiveEffectBuildup(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING,
-                                    statusEffectPool.getBuildupFromEffect(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING) + radiationAmount);
+                            statusEffectPool.modifyActiveEffectBuildup(IAetherStatusEffects.effectTypes.IRRADIATION,
+                                    statusEffectPool.getBuildupFromEffect(IAetherStatusEffects.effectTypes.IRRADIATION) + radiationAmount);
                         }
                     }
                 }

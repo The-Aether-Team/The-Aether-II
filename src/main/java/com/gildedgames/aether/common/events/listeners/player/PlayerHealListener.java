@@ -21,7 +21,7 @@ public class PlayerHealListener
 
 				if (statusEffectPool != null)
 				{
-					if (statusEffectPool.isEffectApplied(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING))
+					if (statusEffectPool.isEffectApplied(IAetherStatusEffects.effectTypes.AMBROSIUM_POISONING) || statusEffectPool.isEffectApplied(IAetherStatusEffects.effectTypes.IRRADIATION))
 					{
 						event.setCanceled(true);
 					}
