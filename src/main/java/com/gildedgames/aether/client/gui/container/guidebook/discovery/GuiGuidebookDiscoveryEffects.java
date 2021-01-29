@@ -1,6 +1,7 @@
 package com.gildedgames.aether.client.gui.container.guidebook.discovery;
 
 import com.gildedgames.aether.api.travellers_guidebook.ITGManager;
+import com.gildedgames.aether.client.gui.container.IExtendedContainer;
 import com.gildedgames.aether.client.gui.misc.GuiScrollableGuidebook;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
@@ -19,7 +20,9 @@ import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -198,11 +201,11 @@ public class GuiGuidebookDiscoveryEffects extends GuiGuidebookDiscovery
 		{
 			if (InputHelper.isHovered(slot) && !slot.getItemStack().isEmpty())
 			{
-				this.drawHoveringText(slot.getItemStack().getDisplayName(),
-						Mouse.getX() * scaledresolution.getScaledWidth() / mc.displayWidth,
-						scaledresolution.getScaledHeight() - (Mouse.getY() - 42) * scaledresolution.getScaledHeight() / mc.displayHeight
-								- 1, mc.fontRenderer);
+				this.setHoveredDescription(slot.getItemStack().getTooltip(Minecraft.getMinecraft().player, Minecraft.getMinecraft().gameSettings.advancedItemTooltips ?
+						ITooltipFlag.TooltipFlags.ADVANCED :
+						ITooltipFlag.TooltipFlags.NORMAL));
 			}
+
 		}
 	}
 
