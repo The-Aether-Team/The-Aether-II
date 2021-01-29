@@ -7,10 +7,13 @@ import com.gildedgames.aether.common.travellers_guidebook.TGEntryBase;
 import com.google.common.collect.Lists;
 import com.google.gson.*;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class TGEntryEffectsPage extends TGEntryBase implements ITGEntryEffectsPage
 {
@@ -22,8 +25,11 @@ public class TGEntryEffectsPage extends TGEntryBase implements ITGEntryEffectsPa
 
     private final String unlocalizedDescription;
 
+    private final List<String> curativeItems;
+
     protected TGEntryEffectsPage(final String tag, final String effectName, final String unlocalizedDescription,
-                                  final ResourceLocation displayTexture, final ResourceLocation slotTexture)
+                                 final ResourceLocation displayTexture, final ResourceLocation slotTexture,
+                                 final List<String> curativeItems)
     {
         this.tag = tag;
 
@@ -33,6 +39,8 @@ public class TGEntryEffectsPage extends TGEntryBase implements ITGEntryEffectsPa
 
         this.displayTexture = displayTexture;
         this.slotTexture = slotTexture;
+
+        this.curativeItems = curativeItems;
     }
 
     @Override
@@ -63,6 +71,12 @@ public class TGEntryEffectsPage extends TGEntryBase implements ITGEntryEffectsPa
     public String getUnlocalizedDescription()
     {
         return this.unlocalizedDescription;
+    }
+
+    @Override
+    public List<String> getCurativeItems()
+    {
+        return this.curativeItems;
     }
 
     @Override
@@ -97,11 +111,19 @@ public class TGEntryEffectsPage extends TGEntryBase implements ITGEntryEffectsPa
         {
             final JsonObject obj = json.getAsJsonObject();
 
+            List<String> curativeItemsArray = new ArrayList<>();
+
+            for (JsonElement element : obj.get("curativeItems").getAsJsonArray())
+            {
+                curativeItemsArray.add(element.toString());
+            }
+
             return new TGEntryEffectsPage(obj.get("tag").getAsString(),
                     obj.get("effectName").getAsString(),
                     obj.get("description").getAsString(),
                     new ResourceLocation(obj.get("displayTexture").getAsString()),
-                    new ResourceLocation(obj.get("slotTexture").getAsString()));
+                    new ResourceLocation(obj.get("slotTexture").getAsString()),
+                    curativeItemsArray);
         }
     }
 }

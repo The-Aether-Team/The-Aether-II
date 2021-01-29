@@ -13,7 +13,8 @@
         "effectName": "webbing",
         "displayTexture": "aether:textures/gui/overlay/effects/webbing.png",
         "slotTexture": "aether:textures/gui/overlay/effects/webbing.png",
-        "description": "aether.placeholder.discovery.description"
+        "description": "aether.placeholder.discovery.description",
+        "curativeItems" : [ ]
       }
     }
   }

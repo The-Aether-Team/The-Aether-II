@@ -13,7 +13,8 @@
         "effectName": "saturation_boost",
         "displayTexture": "aether:textures/gui/overlay/effects/teas/saturation_boost.png",
         "slotTexture": "aether:textures/gui/overlay/effects/teas/saturation_boost.png",
-        "description": "aether.placeholder.discovery.description"
+        "description": "aether.placeholder.discovery.description",
+        "curativeItems" : [ ]
       }
     }
   }
