@@ -111,7 +111,15 @@ public class GuiTabListener
 					if (hoveredTab != activeGroup.getSelectedTab())
 					{
 						activeGroup.getSelectedTab().onClose(Minecraft.getMinecraft().player);
-						activeGroup.setSelectedTab(hoveredTab);
+
+						if (hoveredTab.getUnlocalizedName().equals("tab.guidebook"))
+						{
+							activeGroup.setSelectedTab(activeGroup.getTabs().get(2));
+						}
+						else
+						{
+							activeGroup.setSelectedTab(hoveredTab);
+						}
 
 						if (hoveredTab != activeGroup.getRememberedTab() && hoveredTab.isRemembered())
 						{
@@ -120,7 +128,14 @@ public class GuiTabListener
 								activeGroup.getRememberedTab().onClose(Minecraft.getMinecraft().player);
 							}
 
-							activeGroup.setRememberedTab(hoveredTab);
+							if (hoveredTab.getUnlocalizedName().equals("tab.guidebook"))
+							{
+								activeGroup.setRememberedTab(activeGroup.getTabs().get(2));
+							}
+							else
+							{
+								activeGroup.setRememberedTab(hoveredTab);
+							}
 						}
 
 						hoveredTab.onOpen(Minecraft.getMinecraft().player);
