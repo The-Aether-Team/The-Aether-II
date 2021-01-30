@@ -84,6 +84,9 @@ public class RenderTabGroup extends Gui
 
 		//this.drawCenteredString(mc.fontRendererObj, I18n.translateToLocal(tabGroup.getSelectedTab().getVariantName()), centerX, topY + 8, 0xFFFFFFFF);
 
+		boolean flag1 = true;
+		boolean flag2 = true;
+
 		for (ITabClient tab : tabGroup.getEnabledTabs())
 		{
 			if (tab != null && tab.isEnabled())
@@ -92,6 +95,13 @@ public class RenderTabGroup extends Gui
 
 				if (tab.getCustomTabVec2() != null)
 				{
+					if (flag1)
+					{
+						xPosition += 2;
+					}
+
+					flag1 = false;
+
 					mc.getTextureManager().bindTexture(AbstractGuidebookPage.TEXTURE_GUI);
 
 					Vec2f vec = tab.getCustomTabVec2();
@@ -163,6 +173,11 @@ public class RenderTabGroup extends Gui
 		{
 			int xPosition = (scaledresolution.getScaledWidth() - 28 * tabGroup.getEnabledTabs().size()) / 2;
 			x -= xPosition;
+
+			if ((x / 28) > 1)
+			{
+				x += 2;
+			}
 
 			if (x > 0 && x < 28 * tabGroup.getEnabledTabs().size())
 			{
