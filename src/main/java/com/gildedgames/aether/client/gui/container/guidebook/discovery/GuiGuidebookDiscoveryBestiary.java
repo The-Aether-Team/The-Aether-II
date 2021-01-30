@@ -198,36 +198,33 @@ public class GuiGuidebookDiscoveryBestiary extends GuiGuidebookDiscovery
 	@Override
 	protected List<IGuiElement> createRightPage(final int screenX, final int screenY, final float u, final float v)
 	{
-		this.beastFrame = new GuiTexture(Dim2D.build().x(screenX + 25).y(screenY + 25).width(58).height(71).flush(), null);
+		this.beastFrame = new GuiTexture(Dim2D.build().x(screenX + 25).y(screenY + 27).width(58).height(71).flush(), null);
 		this.beastFrame.state().setVisible(false);
 
-		this.beastTitle = new GuiText(Dim2D.build().x(screenX + 88).y(screenY + 10).flush(), new Text(new TextComponentString(""), 1.0F));
+		this.beastTitle = new GuiText(Dim2D.build().x(screenX + 88).y(screenY + 11).flush(), new Text(new TextComponentString(""), 1.0F));
 		this.beastTitle.dim().mod().centerX(true).flush();
 
-		this.beastDescription = new GuiTextBox(Dim2D.build().x(screenX + 92).y(screenY + 24).width(52).flush(), false,
+		this.beastDescription = new GuiTextBox(Dim2D.build().x(screenX + 24).y(screenY + 105).width(120).flush(), false,
 				new Text(new TextComponentString(""),
 						0.65F));
 
 		// Empty stats scroll until click on entry
-		this.statsArea = new GuiScrollableGuidebook(new GuiElement(Dim2D.build().x(screenX + 25).y(screenY + 114).flush(), false),
-				Dim2D.build().width(52 + 8).height(56).flush(), true);
+		this.statsArea = new GuiScrollableGuidebook(new GuiElement(Dim2D.build().x(screenX + 92).y(screenY + 35).flush(), false),
+				Dim2D.build().width(52 + 9).height(64).flush(), true);
 
-		final Rect beastDescriptionScrollArea = Dim2D.build().width(52 + 9).height(73).flush();
+		final Rect beastDescriptionScrollArea = Dim2D.build().width(120 + 9).height(61).flush();
 
 		final GuiTexture rightPage = new GuiTexture(Dim2D.build().width(this.PAGE_WIDTH).height(this.PAGE_HEIGHT).x(screenX).y(screenY).flush(),
 				RIGHT_PAGE_MOB);
 
-		final GuiText stats = new GuiText(Dim2D.build().x(screenX + 40).y(screenY + 102).flush(),
+		final GuiText stats = new GuiText(Dim2D.build().x(screenX + 105).y(screenY + 25).flush(),
 				new Text(new TextComponentTranslation("gui.guidebook.discovery.stats"), 1.0F));
-		final GuiText moves = new GuiText(Dim2D.build().x(screenX + 105).y(screenY + 102).flush(),
-				new Text(new TextComponentTranslation("gui.guidebook.discovery.moves"), 1.0F));
 
 		return Lists.newArrayList(rightPage,
 				this.beastFrame,
 				this.beastTitle,
 				new GuiScrollableGuidebook(this.beastDescription, beastDescriptionScrollArea, true),
 				stats,
-				moves,
 				this.statsArea);
 	}
 
