@@ -217,7 +217,7 @@ public class GuiGuidebookDiscoveryBestiary extends GuiGuidebookDiscovery
 		final GuiTexture rightPage = new GuiTexture(Dim2D.build().width(this.PAGE_WIDTH).height(this.PAGE_HEIGHT).x(screenX).y(screenY).flush(),
 				RIGHT_PAGE_MOB);
 
-		final GuiText stats = new GuiText(Dim2D.build().x(screenX + 105).y(screenY + 25).flush(),
+		final GuiText stats = new GuiText(Dim2D.build().x(screenX + 106).y(screenY + 25).flush(),
 				new Text(new TextComponentTranslation("gui.guidebook.discovery.stats"), 1.0F));
 
 		return Lists.newArrayList(rightPage,

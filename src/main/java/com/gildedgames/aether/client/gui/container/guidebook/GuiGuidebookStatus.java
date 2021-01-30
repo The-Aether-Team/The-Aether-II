@@ -33,6 +33,7 @@ public class GuiGuidebookStatus extends AbstractGuidebookPage
 		this.drawPlayer(mouseX, mouseY);
 	}
 
+	//PLAYER
 	@Override
 	protected List<IGuiElement> createLeftPage(final int screenX, final int screenY, final float u, final float v)
 	{
@@ -42,6 +43,7 @@ public class GuiGuidebookStatus extends AbstractGuidebookPage
 		return Lists.newArrayList(leftPage);
 	}
 
+	//MOA
 	@Override
 	protected List<IGuiElement> createRightPage(final int screenX, final int screenY, final float u, final float v)
 	{

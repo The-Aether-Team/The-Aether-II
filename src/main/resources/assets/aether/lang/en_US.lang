@@ -919,9 +919,8 @@ gui.aether.hover.npc=Talk to %s
 gui.aether.hover.campfire=Return to Overworld
 gui.aether.hover.teleporter=Enter the Aether
 
-gui.guidebook.discovery.stats=Stats:
-gui.guidebook.discovery.moves=Moves:
-gui.guidebook.discovery.curatives=Curatives:
+gui.guidebook.discovery.stats=Stats
+gui.guidebook.discovery.curatives=Curatives
 
 # Death messages
 
