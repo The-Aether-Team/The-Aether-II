@@ -106,9 +106,16 @@ public class TGEntryBestiaryPage extends TGEntryBase implements ITGEntryBestiary
 	@Override
 	public boolean isUnderstood(final IPlayerAether playerAether)
 	{
-		return playerAether.getModule(PlayerConditionModule.class).areConditionsFlagged(IConditionResolution.REQUIRE_ANY,
-				AetherCore.getResource("feedEntity:" + this.entityId),
-				AetherCore.getResource("killEntity:" + this.entityId));
+		return true;
+//		return playerAether.getModule(PlayerConditionModule.class).areConditionsFlagged(IConditionResolution.REQUIRE_ANY,
+//				AetherCore.getResource("feedEntity:" + this.entityId),
+//				AetherCore.getResource("killEntity:" + this.entityId));
+	}
+
+	@Override
+	public boolean isUnlocked(IPlayerAether playerAether)
+	{
+		return true;
 	}
 
 	@Override
