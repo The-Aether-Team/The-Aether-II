@@ -1,11 +1,7 @@
 package com.gildedgames.aether.client.gui.util;
 
-import com.gildedgames.aether.api.AetherAPI;
 import com.gildedgames.aether.client.gui.dialog.GuiCoins;
-import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerCurrencyModule;
-import com.gildedgames.aether.common.shop.ShopCurrencyGilt;
 import com.google.common.collect.Lists;
-import com.mojang.authlib.yggdrasil.response.MinecraftTexturesPayload;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
@@ -13,7 +9,6 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.ResourceLocation;
 
-import java.awt.*;
 import java.util.List;
 
 public class ToolTipCurrencyHelper

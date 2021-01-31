@@ -1,26 +1,27 @@
 package com.gildedgames.aether.client.gui.container.guidebook;
 
+import com.gildedgames.aether.api.player.IPlayerAether;
+import com.gildedgames.aether.api.shop.IGuiCurrencyValue;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
-import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerEquipmentModule;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerCurrencyModule;
 import com.gildedgames.aether.common.containers.guidebook.EmptyContainer;
+import com.gildedgames.aether.common.shop.ShopCurrencyGilt;
 import com.gildedgames.orbis.lib.client.gui.data.Text;
 import com.gildedgames.orbis.lib.client.gui.util.GuiText;
 import com.gildedgames.orbis.lib.client.gui.util.GuiTexture;
 import com.gildedgames.orbis.lib.client.gui.util.gui_library.IGuiElement;
 import com.gildedgames.orbis.lib.client.gui.util.gui_library.IGuiViewer;
 import com.gildedgames.orbis.lib.client.rect.Dim2D;
+import com.gildedgames.orbis.lib.client.rect.Pos2D;
+import com.gildedgames.orbis.lib.util.InputHelper;
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.TextFormatting;
-import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GuiGuidebookStatus extends AbstractGuidebookPage
@@ -31,6 +32,8 @@ public class GuiGuidebookStatus extends AbstractGuidebookPage
 	private static final ResourceLocation LEFT_PAGE = AetherCore.getResource("textures/gui/guidebook/status/guidebook_status_left.png");
 
 	private static final ResourceLocation RIGHT_PAGE = AetherCore.getResource("textures/gui/guidebook/status/guidebook_status_right.png");
+
+	private IGuiCurrencyValue coins;
 
 	public GuiGuidebookStatus(final IGuiViewer prevViewer, final PlayerAether aePlayer)
 	{
@@ -53,6 +56,10 @@ public class GuiGuidebookStatus extends AbstractGuidebookPage
 		int maxArmor = 20;
 		this.drawString(Minecraft.getMinecraft().fontRenderer, armor + "/" + maxArmor,
 				(this.width / 2) - 131, (this.height / 2) - 47, 0xFFFFFF);
+
+		IPlayerAether playerAether = PlayerAether.getPlayer(Minecraft.getMinecraft().player);
+		int value = (int) playerAether.getModule(PlayerCurrencyModule.class).getCurrencyValue();
+		this.coins.setCurrencyValue(value);
 	}
 
 	//PLAYER
@@ -68,10 +75,15 @@ public class GuiGuidebookStatus extends AbstractGuidebookPage
 		GuiTexture heartTexture = new GuiTexture(Dim2D.build().x(screenX + 32).y(screenY + 30).width(9).height(9).flush(), HEALTH_ICON);
 		GuiTexture armorTexture = new GuiTexture(Dim2D.build().x(screenX + 32).y(screenY + 44).width(9).height(9).flush(), ARMOR_ICON);
 
+		Pos2D center = InputHelper.getCenter().clone().addX(-81).flush();
+		this.coins = new ShopCurrencyGilt()
+				.createCurrencyValueGui(Dim2D.build().centerY(true).pos(center).y(this.height).addY(-103).flush());
+
 		return Lists.newArrayList(leftPage,
 				header,
 				heartTexture,
-				armorTexture);
+				armorTexture,
+				this.coins);
 	}
 
 	//MOA
