@@ -16,6 +16,7 @@ import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import org.apache.commons.lang3.StringUtils;
 
@@ -46,12 +47,12 @@ public class GuiGuidebookStatus extends AbstractGuidebookPage
 		int health = (int) Minecraft.getMinecraft().player.getHealth();
 		int maxHealth = (int) Minecraft.getMinecraft().player.getMaxHealth();
 		this.drawString(Minecraft.getMinecraft().fontRenderer, health + "/" + maxHealth,
-				82, 59, 0xFFFFFF);
+				(this.width / 2) - 131, (this.height / 2) - 61, 0xFFFFFF);
 
 		int armor = Minecraft.getMinecraft().player.getTotalArmorValue();
 		int maxArmor = 20;
 		this.drawString(Minecraft.getMinecraft().fontRenderer, armor + "/" + maxArmor,
-				82, 73, 0xFFFFFF);
+				(this.width / 2) - 131, (this.height / 2) - 47, 0xFFFFFF);
 	}
 
 	//PLAYER
@@ -61,10 +62,14 @@ public class GuiGuidebookStatus extends AbstractGuidebookPage
 		final GuiTexture leftPage = new GuiTexture(Dim2D.build().width(this.PAGE_WIDTH).height(this.PAGE_HEIGHT).x(screenX).y(screenY).flush(),
 				LEFT_PAGE);
 
+		final GuiText header = new GuiText(Dim2D.build().x(screenX + 72).y(screenY + 13).flush(),
+				new Text(new TextComponentTranslation("tab.guidebook.status"), 1.0F));
+
 		GuiTexture heartTexture = new GuiTexture(Dim2D.build().x(screenX + 32).y(screenY + 30).width(9).height(9).flush(), HEALTH_ICON);
 		GuiTexture armorTexture = new GuiTexture(Dim2D.build().x(screenX + 32).y(screenY + 44).width(9).height(9).flush(), ARMOR_ICON);
 
 		return Lists.newArrayList(leftPage,
+				header,
 				heartTexture,
 				armorTexture);
 	}
@@ -76,7 +81,11 @@ public class GuiGuidebookStatus extends AbstractGuidebookPage
 		final GuiTexture rightPage = new GuiTexture(Dim2D.build().width(this.PAGE_WIDTH).height(this.PAGE_HEIGHT).x(screenX).y(screenY).flush(),
 				RIGHT_PAGE);
 
-		return Lists.newArrayList(rightPage);
+		final GuiText header = new GuiText(Dim2D.build().x(screenX + 73).y(screenY + 13).flush(),
+				new Text(new TextComponentTranslation("tab.guidebook.mount"), 1.0F));
+
+		return Lists.newArrayList(rightPage,
+				header);
 	}
 
 	private void drawPlayer(final int mouseX, final int mouseY)

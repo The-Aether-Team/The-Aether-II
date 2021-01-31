@@ -1049,6 +1049,7 @@ ability.attackSpeedMod.desc=%s Attack Speed
 tab.guidebook=Aether II
 tab.guidebook.equipment=Equipment
 tab.guidebook.status=Status
+tab.guidebook.mount=Mount
 tab.guidebook.loretome=Lore Tome
 tab.guidebook.discovery=Discovery
 tab.guidebook.discovery.bestiary=Bestiary
