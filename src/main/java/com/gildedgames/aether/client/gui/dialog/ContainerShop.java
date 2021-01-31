@@ -190,7 +190,7 @@ public class ContainerShop extends GuiViewer implements ICurrencyListener, IExte
 		this.buyCoins.state().setVisible(false);
 
 		this.playerCoins = this.shopInstance.getCurrencyType()
-				.createCurrencyValueGui(Dim2D.build().centerY(true).pos(center).y(this.height).addX(168).addY(-113).flush());
+				.createCurrencyValueGui(Dim2D.build().centerY(true).pos(center).y(this.height).addX(168).addY(-118).flush());
 		this.playerCoins.state().setVisible(true);
 
 		GuiTexture inventory = new GuiTexture(Dim2D.build().center(true).width(176).height(120).pos(center).y(this.height).addX(75).addY(-157F).flush(),

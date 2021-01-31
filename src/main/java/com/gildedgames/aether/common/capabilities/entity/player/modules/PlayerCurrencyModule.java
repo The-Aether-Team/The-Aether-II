@@ -18,33 +18,13 @@ import java.util.List;
 
 public class PlayerCurrencyModule extends PlayerAetherModule implements ICurrencyModule, IPlayerAetherModule.Serializable
 {
-	private static final int[] DENOMINATIONS = { CurrencyAetherInit.GILTAENI, CurrencyAetherInit.GILTAEN, CurrencyAetherInit.GILTAE, CurrencyAetherInit.GILT };
-
 	private long currencyValue = 0;
-
-	private int gilt, giltae, giltaen, giltaeni;
 
 	private final List<ICurrencyListener> listeners = Lists.newArrayList();
 
 	public PlayerCurrencyModule(PlayerAether playerAether)
 	{
 		super(playerAether);
-	}
-
-	public static int[] breakUpCurrency(long currencyValue)
-	{
-		int[] count = new int[DENOMINATIONS.length];
-
-		for (int i = 0; i < DENOMINATIONS.length; i++)
-		{
-			while (currencyValue >= DENOMINATIONS[i])
-			{
-				count[i]++;
-				currencyValue -= DENOMINATIONS[i];
-			}
-		}
-
-		return count;
 	}
 
 	@Override
@@ -68,16 +48,6 @@ public class PlayerCurrencyModule extends PlayerAetherModule implements ICurrenc
 		return this.listeners.remove(listener);
 	}
 
-	private void refreshDenominators()
-	{
-		int[] brokenUp = breakUpCurrency(this.currencyValue);
-
-		this.giltaeni = brokenUp[0];
-		this.giltaen = brokenUp[1];
-		this.giltae = brokenUp[2];
-		this.gilt = brokenUp[3];
-	}
-
 	@Override
 	public void add(long gilt)
 	{
@@ -86,8 +56,6 @@ public class PlayerCurrencyModule extends PlayerAetherModule implements ICurrenc
 		this.currencyValue += gilt;
 
 		this.currencyValue = Math.min(Math.max(0L, this.currencyValue), Long.MAX_VALUE);
-
-		this.refreshDenominators();
 
 		if (!this.getWorld().isRemote)
 		{
@@ -103,26 +71,6 @@ public class PlayerCurrencyModule extends PlayerAetherModule implements ICurrenc
 		this.add(-gilt);
 	}
 
-	public int getGilt()
-	{
-		return this.gilt;
-	}
-
-	public int getGiltae()
-	{
-		return this.giltae;
-	}
-
-	public int getGiltaen()
-	{
-		return this.giltaen;
-	}
-
-	public int getGiltaeni()
-	{
-		return this.giltaeni;
-	}
-
 	@Override
 	public void write(NBTTagCompound tag)
 	{
@@ -135,8 +83,6 @@ public class PlayerCurrencyModule extends PlayerAetherModule implements ICurrenc
 		long prevCurrency = this.currencyValue;
 
 		this.currencyValue = tag.getLong("currencyValue");
-
-		this.refreshDenominators();
 
 		this.listeners.forEach((l) -> l.onCurrencyChange(prevCurrency, this.currencyValue));
 	}
