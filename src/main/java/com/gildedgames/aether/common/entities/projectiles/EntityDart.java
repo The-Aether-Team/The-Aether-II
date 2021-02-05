@@ -2,7 +2,9 @@ package com.gildedgames.aether.common.entities.projectiles;
 
 import com.gildedgames.aether.api.entity.effects.EEffectIntensity;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectIntensity;
+import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectPool;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
+import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.common.entities.effects.StatusEffectCockatriceVenom;
 import com.gildedgames.aether.common.items.weapons.ItemDartType;
@@ -53,7 +55,20 @@ public class EntityDart extends EntityArrow
 	{
 		if (this.getDartType() == ItemDartType.POISON)
 		{
-			IAetherStatusEffects.applyStatusEffect(entity, IAetherStatusEffects.effectTypes.TOXIN, 60);
+			IAetherStatusEffectPool statusEffectPool = entity.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
+
+			if (statusEffectPool != null)
+			{
+				if (!statusEffectPool.effectExists(IAetherStatusEffects.effectTypes.TOXIN))
+				{
+					statusEffectPool.applyStatusEffect(IAetherStatusEffects.effectTypes.TOXIN, 60);
+				}
+				else
+				{
+					statusEffectPool.modifyActiveEffectBuildup(IAetherStatusEffects.effectTypes.TOXIN,
+							statusEffectPool.getBuildupFromEffect(IAetherStatusEffects.effectTypes.TOXIN) + 60);
+				}
+			}
 		}
 	}
 
