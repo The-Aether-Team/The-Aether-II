@@ -212,7 +212,7 @@ public class GuiGuidebookStatus extends AbstractGuidebookPage
 
 		statsElement.build(this);
 
-		GuiLibHelper.alignVertically(this, Pos2D.flush(5, 5), 0, elements);
+		GuiLibHelper.alignVertically(this, Pos2D.flush(0, 0), 0, elements);
 		statsElement.context().addChildren(elements);
 
 		GuiLibHelper.assembleMinMaxArea(statsElement);

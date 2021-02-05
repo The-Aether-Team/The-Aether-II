@@ -42,6 +42,8 @@ public class GuiEffectBar extends GuiElement
 
     private final GuiTexture effectIcon;
 
+    private final GuiBuildupBar buildupBar;
+
     private GuiText textElement;
 
     public GuiEffectBar(IAetherStatusEffects effect)
@@ -51,8 +53,10 @@ public class GuiEffectBar extends GuiElement
         this.dim().mod().width(52).height(18).flush();
 
         this.effect = effect;
-        this.effectIcon = new GuiTexture(Dim2D.build().width(16).height(16).x(-4).y(-6).flush(),
+        this.effectIcon = new GuiTexture(Dim2D.build().width(16).height(16).x(1).y(1).flush(),
                 this.getEffectIconFromType(this.effect.getEffectType()));
+        this.buildupBar = new GuiBuildupBar(Dim2D.build().width(28).height(3).x(20).y(4).flush(), BAR_BUILDUP,
+                EffectSystemOverlay.Color.DEFAULT_COLOR);
     }
 
     @Override
@@ -61,11 +65,11 @@ public class GuiEffectBar extends GuiElement
         this.textElement = new GuiText(Dim2D.build().addY(10).flush(),
                 new Text(new TextComponentString(""), 0.75F));
 
-        //GuiTexture backing = new GuiTexture(Dim2D.build().width(52).height(18).x(-5).y(-5).flush(), BACKING);
+        GuiTexture backing = new GuiTexture(Dim2D.build().width(52).height(18).x(0).y(0).flush(), BACKING);
 
-        GuiTexture effectBar = new GuiTexture(Dim2D.build().width(30).height(5).x(14).y(0).flush(), BAR_OUTLINE);
+        GuiTexture effectBar = new GuiTexture(Dim2D.build().width(30).height(5).x(19).y(3).flush(), BAR_OUTLINE);
 
-        this.context().addChildren(this.effectIcon, this.textElement, effectBar);
+        this.context().addChildren(backing, this.effectIcon, this.textElement, effectBar, this.buildupBar);
 
         GuiLibHelper.assembleMinMaxArea(this);
     }
@@ -79,24 +83,12 @@ public class GuiEffectBar extends GuiElement
         {
             int buildup = this.effect.getBuildup();
 
-            GlStateManager.pushMatrix();
-
-            float r = 0, g = 0, b = 0, a = 0 ;
-            r = EffectSystemOverlay.Color.getColorFromEffect(effect.getEffectType()).r / 255.F;
-            g = EffectSystemOverlay.Color.getColorFromEffect(effect.getEffectType()).g / 255.F;
-            b = EffectSystemOverlay.Color.getColorFromEffect(effect.getEffectType()).b / 255.F;
-            a = 1.0f;
-
-            GlStateManager.color(r,g,b,a);
-            float width = 28F * (buildup / 100F);
-            Minecraft.getMinecraft().getTextureManager().bindTexture(BAR_BUILDUP);
-            GuiTexture.drawModalRectWithCustomSizedTexture(this.dim().x() + 15, this.dim().y() + 1,
-                    0, 0, width, 3, 28, 3);
-            GlStateManager.color(1,1,1, 1);
-            GlStateManager.popMatrix();
+            this.buildupBar.setColor(EffectSystemOverlay.Color.getColorFromEffect(this.effect.getEffectType()));
+            int width = (int) (28F * (buildup / 100F));
+            this.buildupBar.dim().mod().width(width).flush();
 
             this.textElement.setText(new Text(new TextComponentString(buildup + "/" + 100), 0.75F));
-            this.textElement.dim().mod().x(19 - ((float) this.viewer().fontRenderer().getStringWidth(String.valueOf(buildup)) / 4)).flush();
+            this.textElement.dim().mod().x(24 - ((float) this.viewer().fontRenderer().getStringWidth(String.valueOf(buildup)) / 4)).flush();
         }
     }
 
