@@ -9,7 +9,7 @@ import com.gildedgames.aether.client.gui.container.GuiIncubator;
 import com.gildedgames.aether.client.gui.container.masonry_bench.GuiMasonryBench;
 import com.gildedgames.aether.client.gui.container.guidebook.GuiGuidebookInventory;
 import com.gildedgames.aether.client.gui.container.guidebook.GuiGuidebookLoreTome;
-import com.gildedgames.aether.client.gui.container.guidebook.GuiGuidebookStatus;
+import com.gildedgames.aether.client.gui.container.guidebook.status.GuiGuidebookStatus;
 import com.gildedgames.aether.client.gui.container.guidebook.discovery.DiscoveryTab;
 import com.gildedgames.aether.client.gui.dialog.ContainerShop;
 import com.gildedgames.aether.client.gui.dialog.GuiDialogViewer;
