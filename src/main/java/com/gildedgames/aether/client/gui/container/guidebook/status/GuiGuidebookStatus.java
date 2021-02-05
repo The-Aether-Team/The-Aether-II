@@ -123,26 +123,19 @@ public class GuiGuidebookStatus extends AbstractGuidebookPage
 		final GuiText header = new GuiText(Dim2D.build().x(screenX + 72).y(screenY + 13).flush(),
 				new Text(new TextComponentTranslation("tab.guidebook.status"), 1.0F));
 
-		GuiTexture heartTexture = new GuiTexture(Dim2D.build().x(screenX + 32).y(screenY + 30).width(9).height(9).flush(), HEALTH_ICON);
-		this.healthText = new GuiText(Dim2D.build().x(screenX + 44).y(screenY + 31).flush(),
+		GuiTexture heartTexture = new GuiTexture(Dim2D.build().x(screenX + 32).y(screenY + 29).width(9).height(9).flush(), HEALTH_ICON);
+		this.healthText = new GuiText(Dim2D.build().x(screenX + 44).y(screenY + 30).flush(),
 				new Text(new TextComponentString(""), 1.0F));
 
-		GuiTexture armorTexture = new GuiTexture(Dim2D.build().x(screenX + 32).y(screenY + 44).width(9).height(9).flush(), ARMOR_ICON);
-		this.armorText = new GuiText(Dim2D.build().x(screenX + 44).y(screenY + 45).flush(),
+		GuiTexture armorTexture = new GuiTexture(Dim2D.build().x(screenX + 32).y(screenY + 42).width(9).height(9).flush(), ARMOR_ICON);
+		this.armorText = new GuiText(Dim2D.build().x(screenX + 44).y(screenY + 43).flush(),
 				new Text(new TextComponentString(""), 1.0F));
 
-		//Pos2D center = InputHelper.getCenter().clone().addX(-81).flush();
 		this.coins = new ShopCurrencyGilt()
-				.createCurrencyValueGui(Dim2D.build().x(screenX + 92).y(screenY + 100).flush());
+				.createCurrencyValueGui(Dim2D.build().x(screenX + 92).y(screenY + 98).flush());
 
-		//final GuiText stats = new GuiText(Dim2D.build().x(screenX + 39).y(screenY + 60).flush(),
-		//		new Text(new TextComponentTranslation("gui.guidebook.discovery.stats"), 1.0F));
-
-		//final GuiText effects = new GuiText(Dim2D.build().x(screenX + 86).y(screenY + 119).flush(),
-		//		new Text(new TextComponentTranslation("gui.guidebook.status.effects"), 1.0F));
-
-		this.effectsArea = new GuiScrollableGuidebook(new GuiElement(Dim2D.build().x(screenX + 92).y(screenY + 128).flush(), false),
-				Dim2D.build().width(52 + 9).height(38).flush(), true);
+		this.effectsArea = new GuiScrollableGuidebook(new GuiElement(Dim2D.build().x(screenX + 92).y(screenY + 118).flush(), false),
+				Dim2D.build().width(52 + 9).height(48).flush(), true);
 
 		return Lists.newArrayList(leftPage,
 				header,
