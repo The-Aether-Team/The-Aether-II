@@ -922,6 +922,9 @@ gui.aether.hover.teleporter=Enter the Aether
 gui.guidebook.discovery.stats=Stats
 gui.guidebook.discovery.curatives=Curatives
 gui.guidebook.status.effects=Active Effects
+gui.guidebook.status.res=RES
+gui.guidebook.status.weak=WEAK
+gui.guidebook.status.full=FULL
 
 # Death messages
 

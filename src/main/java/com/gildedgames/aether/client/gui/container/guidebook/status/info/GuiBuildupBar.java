@@ -1,4 +1,4 @@
-package com.gildedgames.aether.client.gui.container.guidebook.status;
+package com.gildedgames.aether.client.gui.container.guidebook.status.info;
 
 import com.gildedgames.aether.client.gui.EffectSystemOverlay;
 import com.gildedgames.orbis.lib.client.gui.util.GuiFrameUtils;

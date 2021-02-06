@@ -7,6 +7,8 @@ import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.api.shop.IGuiCurrencyValue;
 import com.gildedgames.aether.client.gui.container.guidebook.AbstractGuidebookPage;
 import com.gildedgames.aether.client.gui.container.guidebook.discovery.stats.GuiStat;
+import com.gildedgames.aether.client.gui.container.guidebook.status.info.GuiEffectBar;
+import com.gildedgames.aether.client.gui.container.guidebook.status.info.GuiResistance;
 import com.gildedgames.aether.client.gui.misc.GuiScrollableGuidebook;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
@@ -31,8 +33,6 @@ import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -58,7 +58,7 @@ public class GuiGuidebookStatus extends AbstractGuidebookPage
 
 	private IGuiCurrencyValue coins;
 
-	private GuiScrollableGuidebook effectsArea;
+	private GuiScrollableGuidebook statsArea, effectsArea;
 
 	private List<GuiElement> effectBars;
 
@@ -67,6 +67,57 @@ public class GuiGuidebookStatus extends AbstractGuidebookPage
 	public GuiGuidebookStatus(final IGuiViewer prevViewer, final PlayerAether aePlayer)
 	{
 		super(prevViewer, aePlayer, new EmptyContainer());
+	}
+
+	//PLAYER
+	@Override
+	protected List<IGuiElement> createLeftPage(final int screenX, final int screenY, final float u, final float v)
+	{
+		final GuiTexture leftPage = new GuiTexture(Dim2D.build().width(this.PAGE_WIDTH).height(this.PAGE_HEIGHT).x(screenX).y(screenY).flush(),
+				LEFT_PAGE);
+
+		final GuiText header = new GuiText(Dim2D.build().x(screenX + 72).y(screenY + 13).flush(),
+				new Text(new TextComponentTranslation("tab.guidebook.status"), 1.0F));
+
+		GuiTexture heartTexture = new GuiTexture(Dim2D.build().x(screenX + 32).y(screenY + 29).width(9).height(9).flush(), HEALTH_ICON);
+		this.healthText = new GuiText(Dim2D.build().x(screenX + 44).y(screenY + 30).flush(),
+				new Text(new TextComponentString(""), 1.0F));
+
+		GuiTexture armorTexture = new GuiTexture(Dim2D.build().x(screenX + 32).y(screenY + 42).width(9).height(9).flush(), ARMOR_ICON);
+		this.armorText = new GuiText(Dim2D.build().x(screenX + 44).y(screenY + 43).flush(),
+				new Text(new TextComponentString(""), 1.0F));
+
+		this.coins = new ShopCurrencyGilt().createCurrencyValueGui(Dim2D.build().x(screenX + 92).y(screenY + 98).flush());
+
+		this.statsArea = new GuiScrollableGuidebook(new GuiElement(Dim2D.build().x(screenX + 24).y(screenY + 59).flush(), false),
+				Dim2D.build().width(52 + 9).height(107).flush(), true);
+
+		this.effectsArea = new GuiScrollableGuidebook(new GuiElement(Dim2D.build().x(screenX + 92).y(screenY + 118).flush(), false),
+				Dim2D.build().width(52 + 9).height(48).flush(), true);
+
+		return Lists.newArrayList(leftPage,
+				header,
+				heartTexture,
+				this.healthText,
+				armorTexture,
+				this.armorText,
+				this.coins,
+				this.statsArea,
+				this.effectsArea);
+	}
+
+	//MOA
+	@Override
+	protected List<IGuiElement> createRightPage(final int screenX, final int screenY, final float u, final float v)
+	{
+		final GuiTexture rightPage = new GuiTexture(Dim2D.build().width(this.PAGE_WIDTH).height(this.PAGE_HEIGHT).x(screenX).y(screenY).flush(),
+				RIGHT_PAGE);
+
+		final GuiText header = new GuiText(Dim2D.build().x(screenX + 73).y(screenY + 13).flush(),
+				new Text(new TextComponentTranslation("tab.guidebook.mount"), 1.0F));
+
+		return Lists.newArrayList(rightPage,
+				header);
 	}
 
 	@Override
@@ -91,6 +142,8 @@ public class GuiGuidebookStatus extends AbstractGuidebookPage
 		int value = (int) playerAether.getModule(PlayerCurrencyModule.class).getCurrencyValue();
 		this.coins.setCurrencyValue(value);
 
+		this.resetStats();
+
 		this.resetEffects();
 
 		if (this.effectBars != null && !this.effectBars.isEmpty())
@@ -113,54 +166,6 @@ public class GuiGuidebookStatus extends AbstractGuidebookPage
 		}
 	}
 
-	//PLAYER
-	@Override
-	protected List<IGuiElement> createLeftPage(final int screenX, final int screenY, final float u, final float v)
-	{
-		final GuiTexture leftPage = new GuiTexture(Dim2D.build().width(this.PAGE_WIDTH).height(this.PAGE_HEIGHT).x(screenX).y(screenY).flush(),
-				LEFT_PAGE);
-
-		final GuiText header = new GuiText(Dim2D.build().x(screenX + 72).y(screenY + 13).flush(),
-				new Text(new TextComponentTranslation("tab.guidebook.status"), 1.0F));
-
-		GuiTexture heartTexture = new GuiTexture(Dim2D.build().x(screenX + 32).y(screenY + 29).width(9).height(9).flush(), HEALTH_ICON);
-		this.healthText = new GuiText(Dim2D.build().x(screenX + 44).y(screenY + 30).flush(),
-				new Text(new TextComponentString(""), 1.0F));
-
-		GuiTexture armorTexture = new GuiTexture(Dim2D.build().x(screenX + 32).y(screenY + 42).width(9).height(9).flush(), ARMOR_ICON);
-		this.armorText = new GuiText(Dim2D.build().x(screenX + 44).y(screenY + 43).flush(),
-				new Text(new TextComponentString(""), 1.0F));
-
-		this.coins = new ShopCurrencyGilt()
-				.createCurrencyValueGui(Dim2D.build().x(screenX + 92).y(screenY + 98).flush());
-
-		this.effectsArea = new GuiScrollableGuidebook(new GuiElement(Dim2D.build().x(screenX + 92).y(screenY + 118).flush(), false),
-				Dim2D.build().width(52 + 9).height(48).flush(), true);
-
-		return Lists.newArrayList(leftPage,
-				header,
-				heartTexture,
-				this.healthText,
-				armorTexture,
-				this.armorText,
-				this.coins,
-				this.effectsArea);
-	}
-
-	//MOA
-	@Override
-	protected List<IGuiElement> createRightPage(final int screenX, final int screenY, final float u, final float v)
-	{
-		final GuiTexture rightPage = new GuiTexture(Dim2D.build().width(this.PAGE_WIDTH).height(this.PAGE_HEIGHT).x(screenX).y(screenY).flush(),
-				RIGHT_PAGE);
-
-		final GuiText header = new GuiText(Dim2D.build().x(screenX + 73).y(screenY + 13).flush(),
-				new Text(new TextComponentTranslation("tab.guidebook.mount"), 1.0F));
-
-		return Lists.newArrayList(rightPage,
-				header);
-	}
-
 	private void drawPlayer(final int mouseX, final int mouseY)
 	{
 		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
@@ -168,6 +173,46 @@ public class GuiGuidebookStatus extends AbstractGuidebookPage
 		GuiInventory.drawEntityOnScreen(
 				this.width / 2 - 54,
 				this.height / 2, 32, (this.guiLeft + 88) - mouseX, (this.guiTop + 35) - mouseY, this.mc.player);
+	}
+
+	private void resetStats()
+	{
+		updateResistances();
+	}
+
+	private void updateResistances()
+	{
+		IAetherStatusEffectPool statusEffectPool = Minecraft.getMinecraft().player.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
+
+		final IGuiElement statsElement = new GuiElement(Dim2D.build().width(52).flush(), false);
+
+		List<GuiElement> statsArray = new ArrayList<>();
+
+		if (statusEffectPool != null)
+		{
+			for (Map.Entry<String, IAetherStatusEffects> effect : statusEffectPool.getPool().entrySet())
+			{
+				if (effect.getValue().getResistance() != 1.0)
+				{
+					final GuiResistance effectTestStat = new GuiResistance(effect.getValue());
+
+					statsArray.add(effectTestStat);
+				}
+			}
+		}
+
+		GuiElement[] elements = statsArray.toArray(new GuiElement[0]);
+
+		statsElement.build(this);
+
+		GuiLibHelper.alignVertically(this, Pos2D.flush(0, 0), 0, elements);
+		statsElement.context().addChildren(elements);
+
+		GuiLibHelper.assembleMinMaxArea(statsElement);
+
+		statsElement.dim().mod().pos(this.statsArea.dim().min()).flush();
+
+		this.statsArea.setDecorated(statsElement);
 	}
 
 	private void resetEffects()
@@ -197,8 +242,11 @@ public class GuiGuidebookStatus extends AbstractGuidebookPage
 
 		for (IAetherStatusEffects effect : statusEffectPool.getPool().values())
 		{
-			final GuiEffectBar effectBar = new GuiEffectBar(effect);
-			statsArray.add(effectBar);
+			if (effect.getResistance() == 1.0D)
+			{
+				final GuiEffectBar effectBar = new GuiEffectBar(effect);
+				statsArray.add(effectBar);
+			}
 		}
 
 		GuiElement[] elements = statsArray.toArray(new GuiElement[0]);
@@ -248,6 +296,8 @@ public class GuiGuidebookStatus extends AbstractGuidebookPage
 
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 	}
+
+
 
 //	private void drawEquipmentEffects()
 //	{

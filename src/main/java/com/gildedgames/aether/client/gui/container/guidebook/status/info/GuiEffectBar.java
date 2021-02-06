@@ -1,4 +1,4 @@
-package com.gildedgames.aether.client.gui.container.guidebook.status;
+package com.gildedgames.aether.client.gui.container.guidebook.status.info;
 
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffectPool;
 import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
@@ -12,7 +12,6 @@ import com.gildedgames.orbis.lib.client.gui.util.gui_library.GuiElement;
 import com.gildedgames.orbis.lib.client.gui.util.gui_library.GuiLibHelper;
 import com.gildedgames.orbis.lib.client.rect.Dim2D;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;
 
