@@ -59,7 +59,7 @@ public class PacketStatusEffect implements IMessage
 			int effectId = buf.readByte();
 			int effectBuildup = buf.readByte();
 			boolean isEffectApplied = buf.readBoolean();
-			double resistance = SmallDoubleByteConverter.convertByteToDouble(buf.readByte());
+			double resistance = buf.readDouble();
 
 			this.statusEffectData.add(new StatusEffectData(effectId,effectBuildup,isEffectApplied, resistance));
 		}
@@ -76,7 +76,7 @@ public class PacketStatusEffect implements IMessage
 			buf.writeByte(data.effectId);
 			buf.writeByte(data.buildup);
 			buf.writeBoolean(data.isApplied);
-			buf.writeByte(SmallDoubleByteConverter.convertDoubleToByte(data.resistance));
+			buf.writeDouble(data.resistance);
 		}
 	}
 
@@ -169,7 +169,6 @@ public class PacketStatusEffect implements IMessage
 						IAetherStatusEffects effect = map.createEffect(IAetherStatusEffects.effectTypes.getEffectFromNumericValue(data.effectId).name, entityLiving);
 						effect.setBuildup(data.buildup);
 						effect.setApplied(data.isApplied);
-						effect.addResistance(data.resistance - 1.0);
 					}
 				}
 			}

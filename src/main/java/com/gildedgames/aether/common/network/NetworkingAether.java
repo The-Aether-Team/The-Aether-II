@@ -3,6 +3,8 @@ package com.gildedgames.aether.common.network;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.network.packets.*;
 import com.gildedgames.aether.common.network.packets.dialog.*;
+import com.gildedgames.aether.common.network.packets.effects.PacketResetResistance;
+import com.gildedgames.aether.common.network.packets.effects.PacketResistance;
 import com.gildedgames.aether.common.network.packets.effects.PacketStatusEffect;
 import com.gildedgames.aether.common.network.packets.trade.*;
 import net.minecraft.entity.EntityLivingBase;
@@ -85,6 +87,8 @@ public class NetworkingAether
 		instance.registerMessage(PacketFlagPlayerCondition.HandlerClient.class, PacketFlagPlayerCondition.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketPlayerConditionModule.HandlerClient.class, PacketPlayerConditionModule.class, discriminant++, Side.CLIENT);
 		instance.registerMessage(PacketStatusParticles.HandlerClient.class, PacketStatusParticles.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketResistance.HandlerClient.class, PacketResistance.class, discriminant++, Side.CLIENT);
+		instance.registerMessage(PacketResetResistance.HandlerClient.class, PacketResetResistance.class, discriminant++, Side.CLIENT);
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(AetherCore.INSTANCE, new AetherGuiHandler());
 	}

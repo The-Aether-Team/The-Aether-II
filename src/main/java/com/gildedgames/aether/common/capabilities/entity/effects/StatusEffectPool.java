@@ -208,6 +208,19 @@ public class StatusEffectPool implements IAetherStatusEffectPool
 
 		if (effect != null)
 		{
+			if (effect.getResistance() > 1.0D)
+			{
+				activeEffectBuildup = (int) (activeEffectBuildup - (activeEffectBuildup * (effect.getResistance() - 1.0)));
+			}
+			else if (effect.getResistance() < 1.0D)
+			{
+				activeEffectBuildup = (int) (activeEffectBuildup + (activeEffectBuildup * (1.0 - effect.getResistance())));
+			}
+			else if (effect.getResistance() >= 2.0D)
+			{
+				activeEffectBuildup = 0;
+			}
+
 			effect.setBuildup(activeEffectBuildup);
 		}
 	}

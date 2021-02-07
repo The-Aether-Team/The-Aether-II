@@ -64,7 +64,6 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	{
 //		System.out.println(this.getEffectName() + " " + this.isDirty());
 //		System.out.println(this.getEffectName() + " " + this.getIsEffectApplied());
-//		System.out.println(this.getEffectName() + " " + this.getBuildup());
 //		System.out.println(this.getEffectName() + " " + this.getResistance());
 
 		if (this.effectResistance > 1.0D)
@@ -302,6 +301,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 		this.effectTimer = 0;
 		this.activeEffectTimeModifier = 1.0D;
 		this.potentialBuildup = 0;
+		this.effectResistance = 0;
 		this.tempEffectResistance = 0;
 		this.decreaseTimer = 0;
 		this.markDirty();

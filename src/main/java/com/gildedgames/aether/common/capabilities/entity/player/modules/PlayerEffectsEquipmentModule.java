@@ -6,8 +6,10 @@ import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAetherModule;
 import com.gildedgames.aether.common.entities.effects.StatusEffect;
-import com.gildedgames.aether.common.entities.effects.StatusEffectFreeze;
 import com.gildedgames.aether.common.items.armor.ItemAetherArmor;
+import com.gildedgames.aether.common.network.NetworkingAether;
+import com.gildedgames.aether.common.network.packets.effects.PacketResetResistance;
+import com.gildedgames.aether.common.network.packets.effects.PacketResistance;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -34,72 +36,78 @@ public class PlayerEffectsEquipmentModule extends PlayerAetherModule
     {
         EntityPlayer player = event.player;
 
-        IAetherStatusEffectPool statusEffectPool = player.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
-
-        if (statusEffectPool == null)
+        if (!player.world.isRemote)
         {
-            return;
-        }
+            IAetherStatusEffectPool statusEffectPool = player.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
 
-        if (this.stagingInv == null)
-        {
-            this.stagingInv = player.inventory.armorInventory;
-        }
-
-        if (this.recordedInv == null)
-        {
-            this.recordedInv = NonNullList.from(ItemStack.EMPTY, player.inventory.armorInventory.get(0).copy(),
-                    player.inventory.armorInventory.get(1).copy(),
-                    player.inventory.armorInventory.get(2).copy(),
-                    player.inventory.armorInventory.get(3).copy());
-        }
-
-        for (int i = 0; i < this.stagingInv.size(); i++)
-        {
-            ItemStack oldStack = this.recordedInv.get(i);
-            ItemStack newStack = this.stagingInv.get(i);
-
-            if (!ItemStack.areItemStacksEqual(oldStack, newStack))
+            if (statusEffectPool == null)
             {
-                if (!oldStack.isEmpty())
-                {
-                    statusEffectPool.resetAllResistances();
-                }
+                return;
+            }
 
+            if (this.stagingInv == null)
+            {
+                this.stagingInv = player.inventory.armorInventory;
+            }
+
+            if (this.recordedInv == null)
+            {
                 this.recordedInv = NonNullList.from(ItemStack.EMPTY, player.inventory.armorInventory.get(0).copy(),
                         player.inventory.armorInventory.get(1).copy(),
                         player.inventory.armorInventory.get(2).copy(),
                         player.inventory.armorInventory.get(3).copy());
             }
 
-            if (!newStack.isEmpty())
+            for (int i = 0; i < this.stagingInv.size(); i++)
             {
-                if (newStack.getItem() instanceof ItemAetherArmor)
+                ItemStack oldStack = this.recordedInv.get(i);
+                ItemStack newStack = this.stagingInv.get(i);
+
+                if (!ItemStack.areItemStacksEqual(oldStack, newStack))
                 {
-                    ItemAetherArmor armor = (ItemAetherArmor) newStack.getItem();
-
-                    if (!armor.getStatusEffects().isEmpty())
+                    if (!oldStack.isEmpty())
                     {
-                        for (Map.Entry<StatusEffect, Double> effect : armor.getStatusEffects().entrySet())
+                        statusEffectPool.resetAllResistances();
+                        NetworkingAether.sendPacketToWatching(new PacketResetResistance(player), player, true);
+                    }
+
+                    this.recordedInv = NonNullList.from(ItemStack.EMPTY, player.inventory.armorInventory.get(0).copy(),
+                            player.inventory.armorInventory.get(1).copy(),
+                            player.inventory.armorInventory.get(2).copy(),
+                            player.inventory.armorInventory.get(3).copy());
+                }
+
+                if (!newStack.isEmpty())
+                {
+                    if (newStack.getItem() instanceof ItemAetherArmor)
+                    {
+                        ItemAetherArmor armor = (ItemAetherArmor) newStack.getItem();
+
+                        if (!armor.getStatusEffects().isEmpty())
                         {
-                            applicationTracker.putIfAbsent(newStack, false);
-
-                            IAetherStatusEffects actualEffect = statusEffectPool.createEffect(effect.getKey().getEffectType().name, event.player);
-
-                            if (!applicationTracker.get(newStack))
+                            for (Map.Entry<StatusEffect, Double> effect : armor.getStatusEffects().entrySet())
                             {
-                                statusEffectPool.addResistanceToEffect(actualEffect.getEffectType(), effect.getValue());
+                                applicationTracker.putIfAbsent(newStack, false);
 
-                                if (statusEffectPool.getResistanceToEffect(actualEffect.getEffectType()) != 1.0D)
+                                IAetherStatusEffects actualEffect = statusEffectPool.createEffect(effect.getKey().getEffectType().name, event.player);
+
+                                if (!applicationTracker.get(newStack))
                                 {
-                                    applicationTracker.put(newStack, true);
+                                    statusEffectPool.addResistanceToEffect(actualEffect.getEffectType(), effect.getValue());
+                                    NetworkingAether.sendPacketToWatching(new PacketResistance
+                                            (player, actualEffect.getEffectName(), effect.getValue()), player, true);
+
+                                    if (statusEffectPool.getResistanceToEffect(actualEffect.getEffectType()) != 1.0D)
+                                    {
+                                        applicationTracker.put(newStack, true);
+                                    }
                                 }
-                            }
-                            else
-                            {
-                                if (statusEffectPool.getResistanceToEffect(actualEffect.getEffectType()) == 1.0D)
+                                else
                                 {
-                                    applicationTracker.put(newStack, false);
+                                    if (statusEffectPool.getResistanceToEffect(actualEffect.getEffectType()) == 1.0D)
+                                    {
+                                        applicationTracker.put(newStack, false);
+                                    }
                                 }
                             }
                         }
@@ -107,5 +115,10 @@ public class PlayerEffectsEquipmentModule extends PlayerAetherModule
                 }
             }
         }
+    }
+
+    public Map<ItemStack, Boolean> getApplicationTracker()
+    {
+        return applicationTracker;
     }
 }
