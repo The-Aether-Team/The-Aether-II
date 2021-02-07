@@ -24,7 +24,7 @@ public class LayerKirridWool implements LayerRenderer<EntityKirrid>
 	@Override
 	public void doRenderLayer(EntityKirrid ram, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
-		if (!ram.getSheared() && !ram.isInvisible())
+		if (!ram.getSheared() && !ram.isInvisible() && !ram.isChild())
 		{
 			GlStateManager.scale(1.01F, 1.01F, 1.01F);
 
