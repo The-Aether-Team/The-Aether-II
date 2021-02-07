@@ -49,24 +49,24 @@ public class GuiEffectBar extends GuiElement
     {
         super(Dim2D.flush(), true);
 
-        this.dim().mod().width(52).height(18).flush();
+        this.dim().mod().width(52).height(20).flush();
 
         this.effect = effect;
-        this.effectIcon = new GuiTexture(Dim2D.build().width(16).height(16).x(1).y(1).flush(),
+        this.effectIcon = new GuiTexture(Dim2D.build().width(16).height(16).x(2).y(2).flush(),
                 this.getEffectIconFromType(this.effect.getEffectType()));
-        this.buildupBar = new GuiBuildupBar(Dim2D.build().width(28).height(3).x(20).y(4).flush(), BAR_BUILDUP,
+        this.buildupBar = new GuiBuildupBar(Dim2D.build().width(27).height(3).x(21).y(5).flush(), BAR_BUILDUP,
                 EffectSystemOverlay.Color.DEFAULT_COLOR);
     }
 
     @Override
     public void build()
     {
-        this.textElement = new GuiText(Dim2D.build().addY(10).flush(),
+        this.textElement = new GuiText(Dim2D.build().addY(11).flush(),
                 new Text(new TextComponentString(""), 0.75F));
 
-        GuiTexture backing = new GuiTexture(Dim2D.build().width(52).height(18).x(0).y(0).flush(), BACKING);
+        GuiTexture backing = new GuiTexture(Dim2D.build().width(52).height(20).x(0).y(0).flush(), BACKING);
 
-        GuiTexture effectBar = new GuiTexture(Dim2D.build().width(30).height(5).x(19).y(3).flush(), BAR_OUTLINE);
+        GuiTexture effectBar = new GuiTexture(Dim2D.build().width(29).height(5).x(20).y(4).flush(), BAR_OUTLINE);
 
         this.context().addChildren(backing, this.effectIcon, this.textElement, effectBar, this.buildupBar);
 
@@ -83,7 +83,7 @@ public class GuiEffectBar extends GuiElement
             int buildup = this.effect.getBuildup();
 
             this.buildupBar.setColor(EffectSystemOverlay.Color.getColorFromEffect(this.effect.getEffectType()));
-            int width = (int) (28F * (buildup / 100F));
+            int width = (int) (27F * (buildup / 100F));
             this.buildupBar.dim().mod().width(width).flush();
 
             this.textElement.setText(new Text(new TextComponentString(buildup + "/" + 100), 0.75F));

@@ -41,19 +41,19 @@ public class GuiResistance extends GuiElement
     {
         super(Dim2D.flush(), true);
 
-        this.dim().mod().width(52).height(18).flush();
+        this.dim().mod().width(52).height(20).flush();
 
         this.effect = effect;
-        this.effectIcon = new GuiTexture(Dim2D.build().width(16).height(16).x(1).y(1).flush(),
+        this.effectIcon = new GuiTexture(Dim2D.build().width(16).height(16).x(2).y(2).flush(),
                 this.getEffectIconFromType(this.effect.getEffectType()));
     }
 
     @Override
     public void build()
     {
-        this.textElement = new GuiText(Dim2D.build().addX(18).addY(6).flush(), getResistanceAmount());
+        this.textElement = new GuiText(Dim2D.build().addX(19).addY(7).flush(), getResistanceAmount());
 
-        GuiTexture backing = new GuiTexture(Dim2D.build().width(52).height(18).x(0).y(0).flush(), BACKING);
+        GuiTexture backing = new GuiTexture(Dim2D.build().width(52).height(20).x(0).y(0).flush(), BACKING);
 
         this.context().addChildren(backing, this.effectIcon, this.textElement);
 
