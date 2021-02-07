@@ -6,7 +6,6 @@ import com.gildedgames.aether.api.player.IPlayerAether;
 import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.api.shop.IGuiCurrencyValue;
 import com.gildedgames.aether.client.gui.container.guidebook.AbstractGuidebookPage;
-import com.gildedgames.aether.client.gui.container.guidebook.discovery.stats.GuiStat;
 import com.gildedgames.aether.client.gui.container.guidebook.status.info.GuiEffectBar;
 import com.gildedgames.aether.client.gui.container.guidebook.status.info.GuiResistance;
 import com.gildedgames.aether.client.gui.misc.GuiScrollableGuidebook;
@@ -35,15 +34,13 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class GuiGuidebookStatus extends AbstractGuidebookPage
 {
@@ -60,7 +57,7 @@ public class GuiGuidebookStatus extends AbstractGuidebookPage
 
 	private GuiScrollableGuidebook statsArea, effectsArea;
 
-	private List<GuiElement> effectBars;
+	private List<GuiElement> effectBars, resistanceElements;
 
 	private HashMap<String, IAetherStatusEffects> pool = new HashMap<>();
 
@@ -164,6 +161,59 @@ public class GuiGuidebookStatus extends AbstractGuidebookPage
 				}
 			}
 		}
+
+		if (this.resistanceElements != null && !this.resistanceElements.isEmpty())
+		{
+			for (GuiElement element : this.resistanceElements)
+			{
+				if (element instanceof GuiResistance)
+				{
+					GuiResistance resistance = (GuiResistance) element;
+
+					if (InputHelper.isHovered(resistance))
+					{
+						float effectResistance = (float) resistance.getEffect().getResistance();
+						int trueValue;
+						String amountText = "";
+
+						if (effectResistance >= 0.0D && effectResistance < 2.0D && effectResistance != 1.0D)
+						{
+							if (effectResistance > 1.0)
+							{
+								trueValue = (int) ((effectResistance - 1) * 100);
+
+								amountText = String.format("+%s %s",
+										trueValue,
+										String.format("%s %s",
+												I18n.format(resistance.getEffect().getEffectType().name),
+												I18n.format("attribute.name.aether.resistance")));
+							}
+							else if (effectResistance < 1.0)
+							{
+								trueValue = (int) ((effectResistance - 1) * -100);
+
+								amountText = String.format("+%s %s",
+										trueValue,
+										String.format("%s %s",
+												I18n.format(resistance.getEffect().getEffectType().name),
+												I18n.format("attribute.name.aether.weakness")));
+							}
+						}
+						else if (effectResistance >= 2.0D)
+						{
+							amountText = String.format("%s %s",
+									I18n.format("attribute.name.aether.complete_resistance"),
+									I18n.format(resistance.getEffect().getEffectType().name));
+						}
+
+						this.drawHoveringText(amountText,
+								Mouse.getX() * scaledresolution.getScaledWidth() / mc.displayWidth,
+								scaledresolution.getScaledHeight() - (Mouse.getY() - 42) * scaledresolution.getScaledHeight() / mc.displayHeight
+										- 1, mc.fontRenderer);
+					}
+				}
+			}
+		}
 	}
 
 	private void drawPlayer(final int mouseX, final int mouseY)
@@ -213,6 +263,8 @@ public class GuiGuidebookStatus extends AbstractGuidebookPage
 		statsElement.dim().mod().pos(this.statsArea.dim().min()).flush();
 
 		this.statsArea.setDecorated(statsElement);
+
+		this.resistanceElements = statsArray;
 	}
 
 	private void resetEffects()

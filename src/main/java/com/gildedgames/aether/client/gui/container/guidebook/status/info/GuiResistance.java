@@ -62,21 +62,21 @@ public class GuiResistance extends GuiElement
 
     private Text getResistanceAmount()
     {
-        double effectResistance = this.effect.getResistance();
-        String trueValue;
+        float effectResistance = (float) this.effect.getResistance();
+        int trueValue;
 
         if (effectResistance >= 0.0D && effectResistance < 2.0D && effectResistance != 1.0D)
         {
             if (effectResistance > 1.0)
             {
-                trueValue = ((int) (effectResistance * 100)) + "%";
+                trueValue = (int) ((effectResistance - 1) * 100);
 
                 return new Text(new TextComponentString(I18n.format("gui.guidebook.status.res")
                         + String.format(" +%s%s", trueValue, "%")), 0.675F);
             }
             else if (effectResistance < 1.0)
             {
-                trueValue = ((int) (effectResistance * -100)) + "%";
+                trueValue = (int) ((effectResistance - 1) * -100);
 
                 return new Text(new TextComponentString(I18n.format("gui.guidebook.status.weak")
                         + String.format(" +%s%s", trueValue, "%")), 0.675F);
@@ -89,6 +89,11 @@ public class GuiResistance extends GuiElement
         }
 
         return new Text(new TextComponentString(""), 0.675F);
+    }
+
+    public IAetherStatusEffects getEffect()
+    {
+        return this.effect;
     }
 
     private ResourceLocation getEffectIconFromType(IAetherStatusEffects.effectTypes effectType)
