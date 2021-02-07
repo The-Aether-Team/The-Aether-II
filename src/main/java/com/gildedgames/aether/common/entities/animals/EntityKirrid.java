@@ -11,6 +11,7 @@ import com.gildedgames.aether.common.entities.ai.EntityAIHideFromRain;
 import com.gildedgames.aether.common.entities.ai.EntityAIRestrictRain;
 import com.gildedgames.aether.common.entities.ai.EntityAIUnstuckBlueAercloud;
 import com.gildedgames.aether.common.entities.ai.kirrid.EntityAIEatAetherGrass;
+import com.gildedgames.aether.common.entities.multipart.AetherMultiPartEntity;
 import com.gildedgames.aether.common.entities.multipart.AetherMultiPartShearable;
 import com.gildedgames.aether.common.entities.util.eyes.EntityEyesComponent;
 import com.gildedgames.aether.common.entities.util.eyes.IEntityEyesComponentProvider;
@@ -59,11 +60,11 @@ public class EntityKirrid extends EntitySheep implements IEntityMultiPart, IEnti
 
 	private final Point3d[] old;
 
-	private final MultiPartEntityPart[] parts;
+	private final AetherMultiPartEntity[] parts;
 
-	private final MultiPartEntityPart head = new AetherMultiPartShearable(this, "head", 0.7F, 0.8F);
+	private final AetherMultiPartEntity head = new AetherMultiPartShearable(this, "head", 0.7F, 0.8F);
 
-	private final MultiPartEntityPart back = new AetherMultiPartShearable(this, "back", 0.8F, 1.5F);
+	private final AetherMultiPartEntity back = new AetherMultiPartShearable(this, "back", 0.8F, 1.5F);
 
 	private final IEntityEyesComponent eyes = new EntityEyesComponent(this);
 
@@ -78,7 +79,7 @@ public class EntityKirrid extends EntitySheep implements IEntityMultiPart, IEnti
 		this.setSize(1.0F, 1.5F);
 
 		this.spawnableBlock = BlocksAether.aether_grass;
-		this.parts = new MultiPartEntityPart[] { this.head, this.back };
+		this.parts = new AetherMultiPartEntity[] { this.head, this.back };
 		this.old = new Point3d[this.parts.length];
 
 		for (int i = 0; i < this.old.length; i++)
@@ -121,6 +122,12 @@ public class EntityKirrid extends EntitySheep implements IEntityMultiPart, IEnti
 			this.kirridTimer = Math.max(0, this.kirridTimer - 1);
 		}
 
+		if (this.isChild())
+		{
+			this.head.updateSize(0.35F, 0.4F);
+			this.back.updateSize(0.4F, 0.75F);
+		}
+
 		super.onLivingUpdate();
 
 		this.eyes.update();
@@ -134,9 +141,13 @@ public class EntityKirrid extends EntitySheep implements IEntityMultiPart, IEnti
 		float f1 = MathHelper.cos(-f * 0.017453292F - (float) Math.PI);
 		float f2 = MathHelper.sin(-f * 0.017453292F - (float) Math.PI);
 
-		this.head.setLocationAndAngles(this.posX - f2 * .9f, this.posY + .75f, this.posZ - f1 * .9f, 0F, 0F);
+		float headOffset = !this.isChild() ? .9f : .15f;
+		float headHeight = !this.isChild() ? .75f : .5f;
+		float backOffset = !this.isChild() ? .8f : .4f;
+
+		this.head.setLocationAndAngles(this.posX - f2 * headOffset, this.posY + headHeight, this.posZ - f1 * headOffset, 0F, 0F);
 		this.head.onUpdate();
-		this.back.setLocationAndAngles(this.posX + f2 * .8f, this.posY, this.posZ + f1 * .8f, 0F, 0F);
+		this.back.setLocationAndAngles(this.posX + f2 * backOffset, this.posY, this.posZ + f1 * backOffset, 0F, 0F);
 		this.back.onUpdate();
 
 		for (int i = 0; i < this.parts.length; i++)
