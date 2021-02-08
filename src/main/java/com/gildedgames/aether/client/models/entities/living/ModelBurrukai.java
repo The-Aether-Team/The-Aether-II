@@ -287,56 +287,24 @@ public class ModelBurrukai extends ModelBaseAether
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
-		if (this.isChild)
-		{
-			GlStateManager.pushMatrix();
-			GlStateManager.scale(0.5F, 0.5F, 0.5F);
-			GlStateManager.translate(0.0F, 24.0F * f5, this.childZOffset * f5);
-			this.HeadMain.render(f5);
-			GlStateManager.popMatrix();
-			GlStateManager.pushMatrix();
-			GlStateManager.scale(0.5F, 0.5F, 0.5F);
-			GlStateManager.translate(0.0F, 24.0F * f5, 0.0F);
-			this.TorsoPlate2.render(f5);
-			this.FrontLegLeftTop.render(f5);
-			this.TorsoFrontFurRight.render(f5);
-			this.TorsoShoulderPlateRightMid.render(f5);
-			this.TorsoPlate3.render(f5);
-			this.TorsoShoulderPlateLeftFront.render(f5);
-			this.FrontLegRightTop.render(f5);
-			this.TorsoChest.render(f5);
-			this.HindLegLeftCalfMiddle.render(f5);
-			this.HindLegRightCalf.render(f5);
-			this.TorsoBackFur.render(f5);
-			this.TorsoRear.render(f5);
-			this.Tail.render(f5);
-			this.TorsoPlate1.render(f5);
-			this.TorsoNeckJoint.render(f5);
-			this.TorsoShoulderPlateRightFront.render(f5);
-			this.TorsoShoulderPlateLeftMid.render(f5);
-			GlStateManager.popMatrix();
-		}
-		else
-		{
-			this.TorsoPlate2.render(f5);
-			this.HeadMain.render(f5);
-			this.FrontLegLeftTop.render(f5);
-			this.TorsoFrontFurRight.render(f5);
-			this.TorsoShoulderPlateRightMid.render(f5);
-			this.TorsoPlate3.render(f5);
-			this.TorsoShoulderPlateLeftFront.render(f5);
-			this.FrontLegRightTop.render(f5);
-			this.TorsoChest.render(f5);
-			this.HindLegLeftCalfMiddle.render(f5);
-			this.HindLegRightCalf.render(f5);
-			this.TorsoBackFur.render(f5);
-			this.TorsoRear.render(f5);
-			this.Tail.render(f5);
-			this.TorsoPlate1.render(f5);
-			this.TorsoNeckJoint.render(f5);
-			this.TorsoShoulderPlateRightFront.render(f5);
-			this.TorsoShoulderPlateLeftMid.render(f5);
-		}
+		this.TorsoPlate2.render(f5);
+		this.HeadMain.render(f5);
+		this.FrontLegLeftTop.render(f5);
+		this.TorsoFrontFurRight.render(f5);
+		this.TorsoShoulderPlateRightMid.render(f5);
+		this.TorsoPlate3.render(f5);
+		this.TorsoShoulderPlateLeftFront.render(f5);
+		this.FrontLegRightTop.render(f5);
+		this.TorsoChest.render(f5);
+		this.HindLegLeftCalfMiddle.render(f5);
+		this.HindLegRightCalf.render(f5);
+		this.TorsoBackFur.render(f5);
+		this.TorsoRear.render(f5);
+		this.Tail.render(f5);
+		this.TorsoPlate1.render(f5);
+		this.TorsoNeckJoint.render(f5);
+		this.TorsoShoulderPlateRightFront.render(f5);
+		this.TorsoShoulderPlateLeftMid.render(f5);
 	}
 
 	/**

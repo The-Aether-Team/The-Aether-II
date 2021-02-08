@@ -12,6 +12,7 @@ import com.gildedgames.aether.client.gui.misc.GuiScrollableGuidebook;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerCurrencyModule;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerEquipmentModule;
 import com.gildedgames.aether.common.containers.guidebook.EmptyContainer;
 import com.gildedgames.aether.common.shop.ShopCurrencyGilt;
 import com.gildedgames.orbis.lib.client.gui.data.Text;
@@ -31,12 +32,18 @@ import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.init.Items;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.apache.commons.lang3.StringUtils;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
@@ -228,6 +235,7 @@ public class GuiGuidebookStatus extends AbstractGuidebookPage
 	private void resetStats()
 	{
 		updateResistances();
+		updateAttributes();
 	}
 
 	private void updateResistances()
@@ -265,6 +273,30 @@ public class GuiGuidebookStatus extends AbstractGuidebookPage
 		this.statsArea.setDecorated(statsElement);
 
 		this.resistanceElements = statsArray;
+	}
+
+	private void updateAttributes()
+	{
+		final ArrayList<String> label = new ArrayList<>();
+
+		final PlayerEquipmentModule equipment = this.aePlayer.getModule(PlayerEquipmentModule.class);
+		equipment.getActivePools().forEach((pool) -> pool.getInstance().ifPresent(instance -> instance.addInformation(label, TextFormatting.BLUE, TextFormatting.RED)));
+
+		final String compiled = StringUtils.join(label, TextFormatting.RESET + ", ");
+
+		this.mc.fontRenderer.drawString(compiled, this.guiLeft, this.guiTop + 160, 0xFFFFFF, true);
+
+		for (ItemStack stack : Minecraft.getMinecraft().player.inventory.armorInventory)
+		{
+			Item item = stack.getItem();
+
+			if (item instanceof ItemArmor)
+			{
+				ItemArmor itemArmor = (ItemArmor) item;
+
+				//System.out.println(item.getAttributeModifiers(itemArmor.armorType, stack));
+			}
+		}
 	}
 
 	private void resetEffects()

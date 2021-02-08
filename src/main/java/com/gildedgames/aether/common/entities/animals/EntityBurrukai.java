@@ -51,9 +51,9 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 
 	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(ItemsAether.brettl_grass);
 
-	private final MultiPartEntityPart[] parts;
+	private final AetherMultiPartEntity[] parts;
 
-	private final MultiPartEntityPart head = new AetherMultiPartEntity(this, "head", .8F, 1.1F);
+	private final AetherMultiPartEntity head = new AetherMultiPartEntity(this, "head", .8F, 1.1F);
 
 	private EntityAIRamAttack ramAttack;
 
@@ -63,7 +63,7 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 	{
 		super(world);
 
-		this.parts = new MultiPartEntityPart[] { this.head };
+		this.parts = new AetherMultiPartEntity[] { this.head };
 		this.setSize(1.25F, 1.9F);
 
 		this.spawnableBlock = BlocksAether.aether_grass;
@@ -122,18 +122,26 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 	{
 		super.onLivingUpdate();
 
+		if (this.isChild())
+		{
+			this.head.updateSize(0.35F, 0.4F);
+		}
+
 		this.eyes.update();
 
 		double prevHeadX = this.head.posX;
 		double prevHeadY = this.head.posY;
 		double prevHeadZ = this.head.posZ;
 
+		float headOffset = !this.isChild() ? 1f : .3f;
+		float headHeight = !this.isChild() ? .7f : .5f;
+
 		final float headDist = 1.2f;
 		float f = MathUtil.interpolateRotation(this.prevRenderYawOffset, this.renderYawOffset, 1);
 		float f1 = MathHelper.cos(-f * 0.017453292F - (float) Math.PI) * headDist;
 		float f2 = MathHelper.sin(-f * 0.017453292F - (float) Math.PI) * headDist;
 
-		this.head.setLocationAndAngles(this.posX - f2, this.posY + .7f, this.posZ - f1, 0F, 0F);
+		this.head.setLocationAndAngles(this.posX - f2 * headOffset, this.posY + headHeight, this.posZ - f1 * headOffset, 0F, 0F);
 		this.head.onUpdate();
 
 		this.head.prevPosX = prevHeadX;
