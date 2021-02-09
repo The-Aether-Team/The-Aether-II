@@ -1,17 +1,14 @@
 {
 	"type": "forge:ore_shaped",
 	"pattern": [
-		"YZY",
-		" X ",
+		"XXX",
+		"XZX",
 		"XXX"
 	],
 	"key": {
 		"X": {
 			"type": "forge:ore_dict",
 			"ore": "holystone"
-		},
-		"Y": {
-			"item": "aether:arkenium"
 		},
 		"Z": {
 			"item": "aether:zanite_gemstone"
