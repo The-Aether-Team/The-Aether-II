@@ -57,9 +57,9 @@ public class EntityTaegore extends EntityAetherAnimal implements IEntityMultiPar
 
 	private final EntityAIPanic AIPanic = new EntityAIPanic(this, 2.0D);
 
-	private final MultiPartEntityPart[] parts;
+	private final AetherMultiPartEntity[] parts;
 
-	private final MultiPartEntityPart head = new AetherMultiPartEntity(this, "head", .8F, .8F);
+	private final AetherMultiPartEntity head = new AetherMultiPartEntity(this, "head", .8F, .8F);
 
 	private final IEntityEyesComponent eyes = new EntityEyesComponent(this);
 
@@ -71,7 +71,7 @@ public class EntityTaegore extends EntityAetherAnimal implements IEntityMultiPar
 
 		this.setSize(1.15F, 1.6F);
 
-		this.parts = new MultiPartEntityPart[] { this.head };
+		this.parts = new AetherMultiPartEntity[] { this.head };
 		this.spawnableBlock = BlocksAether.aether_grass;
 	}
 
@@ -199,18 +199,26 @@ public class EntityTaegore extends EntityAetherAnimal implements IEntityMultiPar
 	{
 		super.onLivingUpdate();
 
+		if (this.isChild())
+		{
+			this.head.updateSize(0.4F, 0.4F);
+		}
+
 		this.eyes.update();
 
 		this.prevHeadX = this.head.posX;
 		this.prevHeadY = this.head.posY;
 		this.prevHeadZ = this.head.posZ;
 
+		float headOffset = !this.isChild() ? 1.0f : .25f;
+		float headHeight = !this.isChild() ? .4f : .3f;
+
 		final float headDist = 1.05f;
 		float f = MathUtil.interpolateRotation(this.prevRenderYawOffset, this.renderYawOffset, 1);
 		float f1 = MathHelper.cos(-f * 0.017453292F - (float) Math.PI) * headDist;
 		float f2 = MathHelper.sin(-f * 0.017453292F - (float) Math.PI) * headDist;
 
-		this.head.setLocationAndAngles(this.posX - f2, this.posY + .4f, this.posZ - f1, 0F, 0F);
+		this.head.setLocationAndAngles(this.posX - f2 * headOffset, this.posY + headHeight, this.posZ - f1 * headOffset, 0F, 0F);
 		this.head.onUpdate();
 
 		this.head.prevPosX = this.prevHeadX;

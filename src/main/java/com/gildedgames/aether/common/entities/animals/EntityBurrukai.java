@@ -124,7 +124,7 @@ public class EntityBurrukai extends EntityAetherAnimal implements IEntityMultiPa
 
 		if (this.isChild())
 		{
-			this.head.updateSize(0.35F, 0.4F);
+			this.head.updateSize(0.4F, 0.55F);
 		}
 
 		this.eyes.update();
