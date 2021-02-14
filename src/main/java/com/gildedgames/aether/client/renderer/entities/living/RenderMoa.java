@@ -1,5 +1,6 @@
 package com.gildedgames.aether.client.renderer.entities.living;
 
+import com.gildedgames.aether.client.models.entities.living.ModelMoaBaby;
 import com.gildedgames.aether.client.models.entities.living.ModelMoaBase;
 import com.gildedgames.aether.client.models.entities.living.ModelMoaLodHigh;
 import com.gildedgames.aether.client.models.entities.living.ModelMoaLodLow;
@@ -23,7 +24,7 @@ import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 
-public class RenderMoa extends RenderLivingLOD<EntityMoa>
+public class RenderMoa extends RenderLivingLODChild<EntityMoa>
 {
 
 	private static final ResourceLocation AECHOR_PETAL_TEXTURE = AetherCore.getResource("textures/items/consumables/aechor_petal.png");
@@ -31,34 +32,43 @@ public class RenderMoa extends RenderLivingLOD<EntityMoa>
 	private static final SpriteGeneric SPRITE = new SpriteGeneric("aechor_petal.png", 16, 16);
 
 	private static final ResourceLocation CURVED_BODY = AetherCore.getResource("textures/entities/moa/curved_main.png");
+	private static final ResourceLocation CURVED_BODY_baby = AetherCore.getResource("textures/entities/moa/baby/baby_curved_main.png");
 
 	private static final ResourceLocation CURVED_BODY_HIGHLIGHT = AetherCore.getResource("textures/entities/moa/curved_highlight.png");
+	private static final ResourceLocation CURVED_BODY_HIGHLIGHT_baby = AetherCore.getResource("textures/entities/moa/baby/baby_curved_highlight.png");
 
 	private static final ResourceLocation FLAT_BODY = AetherCore.getResource("textures/entities/moa/flat_main.png");
+	private static final ResourceLocation FLAT_BODY_baby = AetherCore.getResource("textures/entities/moa/baby/baby_flat_main.png");
 
 	private static final ResourceLocation FLAT_BODY_HIGHLIGHT = AetherCore.getResource("textures/entities/moa/flat_highlight.png");
+	private static final ResourceLocation FLAT_BODY_HIGHLIGHT_baby = AetherCore.getResource("textures/entities/moa/baby/baby_flat_highlight.png");
 
 	private static final ResourceLocation POINTED_BODY = AetherCore.getResource("textures/entities/moa/pointed_main.png");
+	private static final ResourceLocation POINTED_BODY_baby = AetherCore.getResource("textures/entities/moa/baby/baby_pointed_main.png");
 
 	private static final ResourceLocation POINTED_BODY_HIGHLIGHT = AetherCore.getResource("textures/entities/moa/pointed_highlight.png");
+	private static final ResourceLocation POINTED_BODY_HIGHLIGHT_baby = AetherCore.getResource("textures/entities/moa/baby/baby_pointed_highlight.png");
 
 	private static final ResourceLocation BEAK = AetherCore.getResource("textures/entities/moa/keratin.png");
+	private static final ResourceLocation BEAK_baby = AetherCore.getResource("textures/entities/moa/baby/baby_keratin.png");
 
 	private static final ResourceLocation EYES = AetherCore.getResource("textures/entities/moa/eyes.png");
-
-	private static final ResourceLocation TONGUE = AetherCore.getResource("textures/entities/moa/tongue.png");
+	private static final ResourceLocation EYES_baby = AetherCore.getResource("textures/entities/moa/baby/baby_eyes.png");
 
 	private static final ResourceLocation SADDLE = AetherCore.getResource("textures/entities/moa/saddle.png");
 
 	private static final ResourceLocation EYES_CLOSED = AetherCore.getResource("textures/entities/moa/eyes_closed.png");
+	private static final ResourceLocation EYES_CLOSED_baby = AetherCore.getResource("textures/entities/moa/baby/baby_eyes_closed.png");
 
 	private static final ResourceLocation PUPIL_LEFT = AetherCore.getResource("textures/entities/moa/pupil_left.png");
+	private static final ResourceLocation PUPIL_LEFT_baby = AetherCore.getResource("textures/entities/moa/baby/baby_pupil_left.png");
 
 	private static final ResourceLocation PUPIL_RIGHT = AetherCore.getResource("textures/entities/moa/pupil_right.png");
+	private static final ResourceLocation PUPIL_RIGHT_baby = AetherCore.getResource("textures/entities/moa/baby/baby_pupil_right.png");
 
 	public RenderMoa(RenderManager manager)
 	{
-		super(manager, new ModelMoaLodHigh(), new ModelMoaLodLow(), 0.5F);
+		super(manager, new ModelMoaLodHigh(), new ModelMoaLodLow(), new ModelMoaBaby(), 0.5F);
 
 		SPRITE.initSprite(16, 16, 0, 0, false);
 	}
@@ -66,13 +76,25 @@ public class RenderMoa extends RenderLivingLOD<EntityMoa>
 	@Override
 	protected void preRenderCallback(EntityMoa entityliving, float partialTicks)
 	{
-		float moaScale = entityliving.isChild() ? 0.5f : 0.85f;
+		float moaScale = 0.85f;
 		moaScale += entityliving.isGroupLeader() ? 0.15F : 0.0F;
 
 		GL11.glScalef(moaScale, moaScale, moaScale);
 	}
 
 	private void renderMoa(EntityLivingBase entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
+	{
+		if (!entity.isChild())
+		{
+			this.renderAdult(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+		}
+		else
+		{
+			this.renderChild(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+		}
+	}
+
+	private void renderAdult(EntityLivingBase entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
 		EntityMoa moa = ((EntityMoa) entity);
 
@@ -278,6 +300,146 @@ public class RenderMoa extends RenderLivingLOD<EntityMoa>
 			this.renderManager.renderEngine.bindTexture(SADDLE);
 			model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 		}
+	}
+
+	private void renderChild(EntityLivingBase entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
+	{
+		EntityMoa moa = ((EntityMoa) entity);
+
+		MoaGenePool genePool = moa.getGenePool();
+
+		if (genePool == null || genePool.getFeathers() == null)
+		{
+			return;
+		}
+
+		Color base = genePool.getFeathers().gene().data();
+
+		float[] hsb = new float[3];
+
+		Color.RGBtoHSB(base.getRed(), base.getGreen(), base.getBlue(), hsb);
+		Color highlight = genePool.getFeathers().gene().data().brighter().brighter();
+
+		GlStateManager.color(base.getRed() / 255f, base.getGreen() / 255f, base.getBlue() / 255f);
+
+		ModelMoaBaby model = (ModelMoaBaby) this.mainModel;
+		model.leg_l_2.isHidden = true;
+		model.leg_r_2.isHidden = true;
+
+		Color eyesC = genePool.getEyes().gene().data();
+
+		// Re-render the head with our eyes texture and then draw the pupils
+		model.body_main.callback = () -> {
+			GlStateManager.color(eyesC.getRed() / 255f, eyesC.getGreen() / 255f, eyesC.getBlue() / 255f);
+
+			this.renderManager.renderEngine.bindTexture(EYES_baby);
+
+			model.head.render(scale, true, false);
+
+			GlStateManager.color(base.getRed() / 255f, base.getGreen() / 255f, base.getBlue() / 255f);
+
+			EyeUtil.renderEyesFast(model, model.head, model.head, entity,
+					scale, PUPIL_LEFT_baby, PUPIL_RIGHT_baby, EYES_CLOSED_baby, EYES_baby, false);
+
+			if (genePool.getMarks() != null)
+			{
+				final String mark = genePool.getMarks().gene().getResourceName();
+
+				if (mark.equals("curved"))
+				{
+					this.renderManager.renderEngine.bindTexture(CURVED_BODY_baby);
+				}
+				else if (mark.equals("flat"))
+				{
+					this.renderManager.renderEngine.bindTexture(FLAT_BODY_baby);
+				}
+				else
+				{
+					this.renderManager.renderEngine.bindTexture(POINTED_BODY_baby);
+				}
+			}
+		};
+
+		if (genePool.getMarks() != null)
+		{
+			final String mark = genePool.getMarks().gene().getResourceName();
+
+			if (mark.equals("curved"))
+			{
+				this.renderManager.renderEngine.bindTexture(CURVED_BODY_baby);
+			}
+			else if (mark.equals("flat"))
+			{
+				this.renderManager.renderEngine.bindTexture(FLAT_BODY_baby);
+			}
+			else
+			{
+				this.renderManager.renderEngine.bindTexture(POINTED_BODY_baby);
+			}
+		}
+		model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+
+		model.leg_l_2.isHidden = false;
+		model.leg_r_2.isHidden = false;
+
+		if (genePool.getMarks() != null)
+		{
+			final String mark = genePool.getMarks().gene().getResourceName();
+
+			if (mark.equals("curved"))
+			{
+				this.renderManager.renderEngine.bindTexture(CURVED_BODY_HIGHLIGHT_baby);
+			}
+			else if (mark.equals("flat"))
+			{
+				this.renderManager.renderEngine.bindTexture(FLAT_BODY_HIGHLIGHT_baby);
+			}
+			else
+			{
+				this.renderManager.renderEngine.bindTexture(POINTED_BODY_HIGHLIGHT_baby);
+			}
+		}
+		GL11.glColor3f(highlight.getRed() / 255f, highlight.getGreen() / 255f, highlight.getBlue() / 255f);
+
+		model.setDefaultDisplayState(false);
+
+		model.feather_1.forceDisplayFlag = true;
+		model.feather_2.forceDisplayFlag = true;
+		model.feather_3.forceDisplayFlag = true;
+		model.feather_4.forceDisplayFlag = true;
+
+		model.wing_l.forceDisplayFlag = true;
+
+		model.wing_r.forceDisplayFlag = true;
+
+		model.leg_l_1.forceDisplayFlag = true;
+		model.leg_r_1.forceDisplayFlag = true;
+
+		model.tail.forceDisplayFlag = true;
+
+		model.body_main.forceDisplayFlag = true;
+		model.neck.forceDisplayFlag = true;
+
+		model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+
+		model.setDefaultDisplayState(true);
+
+		Color beakColor = genePool.getKeratin().gene().data();
+
+		GlStateManager.color(beakColor.getRed() / 255f, beakColor.getGreen() / 255f, beakColor.getBlue() / 255f);
+
+		this.renderManager.renderEngine.bindTexture(BEAK_baby);
+
+		model.setDefaultDisplayState(false);
+
+		model.head.forceDisplayFlag = true;
+
+		model.leg_l_2.forceDisplayFlag = true;
+		model.leg_r_2.forceDisplayFlag = true;
+
+		model.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+
+		model.setDefaultDisplayState(true);
 	}
 
 	@Override
