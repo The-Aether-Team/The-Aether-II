@@ -124,9 +124,6 @@ public class ModelMoaBaby extends ModelBaseAether {
         float leftSwingX = (MathHelper.cos(limbSwing * 0.6662F) * 0.55F * limbSwingAmount);
         float rightSwingX = (MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.55F * limbSwingAmount);
 
-        float leftSwingXLower = (Math.max(-0.5009094953223726F, -rightSwingX * 2f)) - 0.1009094953223726F;
-        float rightSwingXLower = (Math.max(-0.5009094953223726F, -leftSwingX * 2f)) - 0.1009094953223726F;
-
         if (!flying)
         {
             this.leg_l_1.offsetY = leftSwingX / 4f + .01f;

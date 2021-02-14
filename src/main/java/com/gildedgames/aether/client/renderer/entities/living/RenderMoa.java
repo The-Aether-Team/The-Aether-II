@@ -78,6 +78,7 @@ public class RenderMoa extends RenderLivingLODChild<EntityMoa>
 	{
 		float moaScale = 0.85f;
 		moaScale += entityliving.isGroupLeader() ? 0.15F : 0.0F;
+		moaScale += entityliving.isChild() && entityliving.getFoodEaten() >= 2 ? 0.25F : 0.0F;
 
 		GL11.glScalef(moaScale, moaScale, moaScale);
 	}

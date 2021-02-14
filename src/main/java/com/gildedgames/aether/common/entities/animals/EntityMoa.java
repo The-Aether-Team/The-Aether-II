@@ -704,11 +704,22 @@ public class EntityMoa extends EntityGeneticAnimal<MoaGenePool>
 	{
 		float scale = this.getSize();
 
-		this.neck.updateSize(0.4F * scale, 0.8F * scale);
-		this.head.updateSize(0.8F * scale, 0.6F * scale);
-		this.beak.updateSize(0.4F * scale, 0.5F * scale);
-		this.body.updateSize(1.1F * scale, 1.325F * scale);
-		this.tail.updateSize(1.1F * scale, 0.6F * scale);
+		if (this.isChild())
+		{
+			this.neck.updateSize(0.0F, 0.0F);
+			this.head.updateSize(0.0F, 0.0F);
+			this.beak.updateSize(0.0F, 0.0F);
+			this.body.updateSize(1.1F, 1.1F);
+			this.tail.updateSize(0.0F, 0.0F);
+		}
+		else
+		{
+			this.neck.updateSize(0.4F * scale, 0.8F * scale);
+			this.head.updateSize(0.8F * scale, 0.6F * scale);
+			this.beak.updateSize(0.4F * scale, 0.5F * scale);
+			this.body.updateSize(1.1F * scale, 1.325F * scale);
+			this.tail.updateSize(1.1F * scale, 0.6F * scale);
+		}
 	}
 
 	private void setMultiPartLocations()
