@@ -134,39 +134,22 @@ public class ModelMoaBaby extends ModelBaseAether {
 
             this.leg_l_1.rotateAngleX = (rightSwingX * 1.2f) - 0.6981317007977318F;
             this.leg_r_1.rotateAngleX = (leftSwingX * 1.2f) - 0.6981317007977318F;
-
-            this.leg_l_2.rotateAngleX = (rightSwingXLower * 1.55F) + 0.6981317007977318F;
-            this.leg_r_2.rotateAngleX = (leftSwingXLower * 1.55F) + 0.6981317007977318F;
         }
         else
         {
             this.setRotateAngle(this.leg_l_1, -0.6981317007977318F, 0.0F, 0.0F);
             this.setRotateAngle(this.leg_r_1, -0.6981317007977318F, 0.0F, 0.0F);
-
-            this.setRotateAngle(this.leg_l_2, 0.6981317007977318F, 0.0F, 0.0F);
-            this.setRotateAngle(this.leg_r_2, 0.6981317007977318F, 0.0F, 0.0F);
         }
 
         float tailSwayRange = 0.05F;
 
         this.tail.rotateAngleZ = (MathHelper.cos((0.0F + ageInTicks) * 0.15662F) * tailSwayRange);
-
         this.tail.rotateAngleX = -1.0471975511965976F + (MathHelper.cos((0.0F + ageInTicks) * 0.15662F) * tailSwayRange);
-
-        this.feather_2.rotateAngleZ = (MathHelper.cos((24F + ageInTicks) * 0.15662F) * 0.1F);
-        this.feather_1.rotateAngleZ = (MathHelper.cos((0.0F + ageInTicks) * 0.15662F) * 0.1F);
-        this.feather_4.rotateAngleZ = (MathHelper.cos((48F + ageInTicks) * 0.15662F) * 0.1F);
-        this.feather_3.rotateAngleZ = (MathHelper.cos((48F + ageInTicks) * 0.15662F) * 0.1F);
-
-        this.feather_2.rotateAngleX = 0.08726646259971647F + (MathHelper.cos((0.0F + ageInTicks) * 0.075662F) * 0.05F);
-        this.feather_1.rotateAngleX = -0.08726646259971647F + (MathHelper.cos((10.0F + ageInTicks) * 0.0755662F) * 0.05F);
-        this.feather_3.rotateAngleX = 0.08726646259971647F + (MathHelper.cos((20.0F + ageInTicks) * 0.0755662F) * 0.05F);
-        this.feather_4.rotateAngleX = -0.08726646259971647F + (MathHelper.cos((30.0F + ageInTicks) * 0.0755662F) * 0.05F);
 
         float ageDif = ageInTicks - moa.getAgeSinceOffGround();
 
         float unfoldTimeInSeconds = 0.3F;
-        float foldTimeInSeconds = 0.6F;
+        float foldTimeInSeconds = 0.4F;
 
         if (flying)
         {
@@ -175,8 +158,8 @@ public class ModelMoaBaby extends ModelBaseAether {
             float wingTime = ageDif / foldTime;
             float wingAlpha = Math.min(1.0F, wingTime);
 
-            this.setRotateAngle(this.wing_r, 0.0F, NoiseUtil.lerp(0.0F, 0.0F, wingAlpha), 0.0F);
-            this.setRotateAngle(this.wing_l, 0.0F, NoiseUtil.lerp(0.0F, 0.0F, wingAlpha), 0.0F);
+            this.setRotateAngle(this.wing_r, 0.0F, NoiseUtil.lerp(0.0F, -0.4363323129985824F, wingAlpha), 0.0F);
+            this.setRotateAngle(this.wing_l, 0.0F, NoiseUtil.lerp(0.0F, 0.4363323129985824F, wingAlpha), 0.0F);
 
             if (ageDif >= foldTime)
             {
@@ -206,8 +189,8 @@ public class ModelMoaBaby extends ModelBaseAether {
 
             float wingAlpha = Math.min(1.0F, ageDif / foldTime);
 
-            this.setRotateAngle(this.wing_r, 0.0F, NoiseUtil.lerp(0.0F, 0.0F, wingAlpha), 0.0F);
-            this.setRotateAngle(this.wing_l, 0.0F, NoiseUtil.lerp(0.0F, 0.0F, wingAlpha), 0.0F);
+            this.setRotateAngle(this.wing_r, 0.0F, NoiseUtil.lerp(0.0F, -0.4363323129985824F, wingAlpha), 0.0F);
+            this.setRotateAngle(this.wing_l, 0.0F, NoiseUtil.lerp(0.0F, 0.4363323129985824F, wingAlpha), 0.0F);
         }
     }
 
