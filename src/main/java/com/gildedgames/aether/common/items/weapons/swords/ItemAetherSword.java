@@ -65,7 +65,7 @@ public class ItemAetherSword extends ItemSword implements IDamageLevelsHolder, I
 			}
 		}
 
-		return true;
+		return super.hitEntity(stack, target, attacker);
 	}
 
 	@Override
