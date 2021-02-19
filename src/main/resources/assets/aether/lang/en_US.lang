@@ -92,7 +92,7 @@ tile.aether.skyroot_sapling.blue_skyroot.name=Blue Skyroot Sapling
 tile.aether.skyroot_sapling.green_skyroot.name=Green Skyroot Sapling
 tile.aether.skyroot_sapling.dark_blue_skyroot.name=Dark Blue Skyroot Sapling
 tile.aether.unique_sapling.amberoot.name=Amberoot Sapling
-tile.aether.unique_sapling.mutant_tree.name=Edison's Crazy Mutant Tree Sapling
+tile.aether.unique_sapling.mutant_tree.name=Eddy's Crazy Mutant Tree Sapling
 tile.aether.wisproot_sapling.wisproot_green.name=Green Wisproot Sapling
 tile.aether.wisproot_sapling.wisproot_blue.name=Blue Wisproot Sapling
 tile.aether.wisproot_sapling.wisproot_dark_blue.name=Dark Blue Wisproot Sapling
@@ -771,7 +771,7 @@ entity.aether.fangrin.name=Fangrin
 entity.aether.nex_spirit.name=Nex Spirit
 entity.aether.pink_baby_swet.name=Pink Baby Swet
 entity.aether.glitterwing.name=Glitterwing
-entity.aether.edison.name=Edison
+entity.aether.edison.name=Eddy
 entity.aether.burrukai.name=Burrukai
 entity.aether.necromancer.name=Necromancer
 entity.aether.josediya.name=Josediya
@@ -1135,7 +1135,7 @@ aether.shop.lockTooltip=If unlocked, each time you click on a new stock item, th
 ###########################
 ##=======================##
 
-edison.name=Edison
+edison.name=Eddy
 necromancer.name=Necromancer
 josediya.name=Josediya
 
@@ -1160,7 +1160,7 @@ generic.goodbye=Goodbye
 ##=======================##
 
 necromancer.them.start1=I'm glad to see you here safe, traveller. I'm sure you have many questions but time is of the essence.
-necromancer.them.start2=Through this Rift in space you will find a man with a scar over his eye, his name is Edison. He is a friend of sorts.
+necromancer.them.start2=Through this Rift in space you will find a man with a scar over his eye, his name is Eddy. He is a friend of sorts.
 necromancer.them.start3=He will answer any questions you have, he has been contracted to assist you in your quest. He may seem strange but... well...
 necromancer.them.start4=We're in the company of strangers here, aren't we?
 necromancer.them.start5=Safe travels, a new world awaits you.
@@ -1188,7 +1188,7 @@ edison.greet.option.what=What is this place?
 edison.greet.option.died=I thought I was done for...
 
 edison.greet.option.fine=I'm fine.
-edison.greet.option.thanks=Thanks, Edison.
+edison.greet.option.thanks=Thanks, Eddy.
 edison.greet.option.okay_sale=I'll be okay, you got anything for sale?
 edison.greet.option.okay_holiday_sale=I'm good. Do you have a special stock for this holiday season?
 
@@ -1198,16 +1198,16 @@ edison.greet.option.sale=You got anything for sale?
 edison.greet.option.holiday_sale=Do you have special stock for this holiday season?
 
 edison.greet.option.okay_goodbye=I think I'm okay. Goodbye.
-edison.greet.option.ready_goodbye=I think I'm ready. Bye, Edison.
+edison.greet.option.ready_goodbye=I think I'm ready. Bye, Eddy.
 edison.greet.option.mind_goodbye=I'll keep that in mind. Goodbye.
 
 edison.greet.expecting1=Of course! I’m being paid good money by our "mutual friend” to watch your back.
 edison.greet.expecting2=Wait, did he not explain our little arrangement? Typical...
 edison.greet.expecting3=Well then... What do I need to explain to you?
 
-edison.greet.option.no_we_talked=No we talked. You’re... Edison, right?
+edison.greet.option.no_we_talked=No we talked. You’re... Eddy, right?
 
-edison.greet.who1=I’m Edison! International entrepreneur, salesman and master of persuasion!
+edison.greet.who1=I’m Eddy! International entrepreneur, salesman and master of persuasion!
 edison.greet.who2=But to you, due to our little agreement with "you know who”, I am also your contact in these strange lands.
 edison.greet.who3=Basically, that means I’ve got to look after you.
 edison.greet.who4=Now I’m a strong believer in knowledge being the best tool in this world. So in the interest of keeping you from, well, dying...
@@ -1333,7 +1333,7 @@ josediya.greet.winged_beast=That is my friend Tivalier, actually. He’s a Moa, 
 josediya.greet.fly=Of course! That’s what he’s been trained for. I raise Moas as part of my work. They’re very friendly creatures if you treat them right.
 josediya.greet.moa=You’d need to raise one yourself for it to trust you enough to ride it, getting an egg isn’t an easy task though; Moas are very defensive of their nests.
 josediya.greet.who=The girl who’s going to be taking you places. My name is Josediya, I run a carriage business and baldy over there has brought me in to help you.
-josediya.greet.friends=Edison and I get along fine, he’s proved helpful over the years I’ve known him, but I still don’t trust him much. It’s just mutually beneficial for us to work together.
+josediya.greet.friends=Eddy and I get along fine, he’s proved helpful over the years I’ve known him, but I still don’t trust him much. It’s just mutually beneficial for us to work together.
 josediya.greet.paying=No this is me repaying a favour. You’re the one who’s gonna pay me. And I don’t take coin from your world, Gilt only.
 josediya.greet.white_gold=That’s your problem. I don’t care how you get it, but I need to be paid for my work. Go help some farmers or something.
 josediya.greet.services=If you ever find yourself setting up shop somewhere, I can take you back to your home from any outpost. I will expect payment though.

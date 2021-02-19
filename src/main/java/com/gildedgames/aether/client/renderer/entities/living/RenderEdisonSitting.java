@@ -12,7 +12,7 @@ import net.minecraft.util.ResourceLocation;
 public class RenderEdisonSitting extends RenderLiving<EntityCharacter>
 {
 
-	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/entities/npcs/edison/edison.png");
+	private static final ResourceLocation TEXTURE = AetherCore.getResource("textures/entities/npcs/edison/eddy.png");
 
 	private static final ResourceLocation EYES_CLOSED = AetherCore.getResource("textures/entities/npcs/edison/edison_eyes_closed.png");
 
@@ -31,21 +31,5 @@ public class RenderEdisonSitting extends RenderLiving<EntityCharacter>
 		return TEXTURE;
 	}
 
-	@Override
-	protected void renderModel(EntityCharacter entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
-	{
-		super.renderModel(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-
-		ModelEdisonSitting model = (ModelEdisonSitting) this.mainModel;
-
-		boolean globalInvisible = !entity.isInvisible() || this.renderOutlines;
-		boolean playerInvisible = !globalInvisible && !entity.isInvisibleToPlayer(Minecraft.getMinecraft().player);
-
-		if (globalInvisible || playerInvisible)
-		{
-			EyeUtil.renderEyes(this.renderManager, model, model.head, entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, PUPIL_LEFT,
-					PUPIL_RIGHT, EYES_CLOSED, true);
-		}
-	}
 
 }
