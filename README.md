@@ -1,4 +1,4 @@
-![Banner image](https://github.com/Gilded-Games/The-Aether-II/tree/1.12.2/doc/banner.webp)
+![Banner image](doc/banner.webp)
 
 # The Aether II
 [![Code license (GNU GPL 3.0)](https://img.shields.io/badge/license-GNU%20GPLv3-green.svg?style=flat-square)](https://www.gnu.org/licenses/gpl-3.0.en.html)
