@@ -7,7 +7,7 @@ Before getting started, you'll need to install the latest 64-bit version of the 
 
 We strongly recommend you use [IntelliJ IDEA Community Edition](https://www.jetbrains.com/idea/) when making code contributions. While other IDEs may work (in theory, anyways), support is spotty and you will often run into issues and other roadblocks. If you're not familiar with setting up IntelliJ IDEA for use with ForgeGradle projects, cpw has created a setup video which runs over a few of the basics of ForgeGradle [here](https://www.youtube.com/watch?v=PfmlNiHonV0).
 
-If you have any questions or issues, or would just like to discuss Aether development, feel free to [join us on Discord](https://discord.gg/HYG3VPj).
+If you have any questions or issues, or would just like to discuss Aether development, feel free to [join us on Discord](https://discord.gg/yrFDeVZEwt).
 
 ### Creating merge requests
 When contributing source code changes to the Aether II, it is **mandatory** to keep consistent use of the formatting and style guidelines used throughout the codebase. Merge requests which do not adhere to them will be held back until they're updated to meet our requirements.
@@ -29,4 +29,4 @@ By submitting code, assets, or documentation to the repository you are hereby ag
     - [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html) for code or other changes.
 - Your contributions are of your own work and are free of legal restrictions (such as patents or copyrights).
 
-If you have any questions about these terms, please [get in contact with us](https://aether.gildedgames.com/support). **If you do not agree to these terms, please do not submit contributions to this repository.**
+If you have any questions about these terms, please [get in contact with us](mailto:support@gildedgames.com). **If you do not agree to these terms, please do not submit contributions to this repository.**
