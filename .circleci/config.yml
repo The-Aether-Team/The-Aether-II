@@ -31,14 +31,16 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v2-dependencies-
 
-      - run: gradle dependencies
+      - run: chmod +x gradlew
+
+      - run: ./gradlew dependencies
 
       - save_cache:
           paths:
             - ~/repo/.gradle
           key: v2-dependencies-{{ checksum "build.gradle" }}
 
-      - run: gradle test
-      - run: gradle build
+      - run: ./gradlew test
+      - run: ./gradlew build
       - store_artifacts:
               path: ~/repo/build/libs/aether_ii-1.12.2-0.3.0-SNAPSHOT-universal.jar
