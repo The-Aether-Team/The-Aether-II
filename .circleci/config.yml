@@ -32,8 +32,10 @@ jobs:
             - v2-dependencies-
 
       - run: cd ~/repo/lib 
+      - run: pwd
       - run: git clone -b master https://github.com/Gilded-Games/OrbisLib orbis-lib
       - run: cd ~/repo
+      - run: pwd
 
       - run: chmod +x gradlew
 
