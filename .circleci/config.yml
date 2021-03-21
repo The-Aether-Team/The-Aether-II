@@ -31,9 +31,9 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v2-dependencies-
 
-      - run: cd *lib 
+      - run: cd ~/repo/lib 
       - run: git clone -b master https://github.com/Gilded-Games/OrbisLib orbis-lib
-      - run: cd ~
+      - run: cd ~/repo
 
       - run: chmod +x gradlew
 
