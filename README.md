@@ -23,7 +23,7 @@ This availability is intended for programmers and early adopters only. **Content
 
 ## :package: Download the latest releases
 ### "Stable" builds
-[![CurseForge downloads](https://cf.way2muchnoise.eu/the-aether-ii.svg)](https://www.curseforge.com/minecraft/mc-mods/the-aether-ii)
+[![CurseForge downloads](https://cf.way2muchnoise.eu/223796.svg)](https://www.curseforge.com/minecraft/mc-mods/the-aether-ii)
 
 We use Curseforge to publish **stable builds** of the Aether for Minecraft. You can download the latest stable builds from our [official page found here](https://www.curseforge.com/minecraft/mc-mods/the-aether-ii) without signing up for an account, and even install the Aether for Minecraft using the [Overwolf Launcher](https://curseforge.overwolf.com/) with built-in integration for Curseforge mods. We recommend using our stable Curseforge releases for most people.
 
