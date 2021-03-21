@@ -4,6 +4,7 @@
 [![Code license (GNU GPL 3.0)](https://img.shields.io/badge/license-GNU%20GPLv3-green.svg?style=flat-square)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 [![Asset license (CC BY-SA 4.0)](https://img.shields.io/badge/license-CC%20BY--SA%204.0-blue.svg?style=flat-square)](https://creativecommons.org/licenses/by-sa/4.0/)
 [![CurseForge downloads](http://cf.way2muchnoise.eu/223796.svg)](https://www.curseforge.com/minecraft/mc-mods/the-aether-ii)
+[![Gilded-Games](https://circleci.com/gh/Gilded-Games/The-Aether/tree/1.16.svg?style=shield)](https://app.circleci.com/pipelines/github/Gilded-Games/The-Aether?branch=1.16)
 
 The Aether II is the sequel to the highly popular dimension mod "The Aether", set in a hostile paradise miles up in the clouds, the Aether is an entirely different world from what regular players are used to, filled with fantastic creatures and mysterious structures, the Aether is a world brimming with life and history. You'll have to relearn key ideas as the Aether challenges you with twisted materials, terrifying monsters and deep lore if you want to survive and prosper in this strange new land.
 
@@ -25,6 +26,9 @@ This availability is intended for programmers and early adopters only. **Content
 ## :package: Download the latest releases
 ### "Stable" builds
 We use Curseforge to publish **stable builds** of the Aether for Minecraft. You can download the latest stable builds from our [official page found here](https://www.curseforge.com/minecraft/mc-mods/the-aether-ii) without signing up for an account, and even install the Aether for Minecraft using the [Overwolf Launcher](https://curseforge.overwolf.com/) with built-in integration for Curseforge mods. We recommend using our stable Curseforge releases for most people.
+
+### Bleeding edge builds
+If you're feeling a bit more adventurous (or a developer has suggested you to do so), we provide **bleeding edge builds** which are produced on [CircleCI](https://app.circleci.com/pipelines/github/Gilded-Games/The-Aether-II). These builds are very frequently created through the continuous integration service and contain the latest available code without undergoing any form of quality control. We do not generally recommend users use these builds as they may contain serious issues and will not generally receive support. Select the "build" job on a recently ran workflow, and find the binary under the artifacts tab.
 
 ## :bug: Report bugs or other issues
 If you're running into bugs or other problems, feel free to open an issue on our [issue tracker](https://github.com/Gilded-Games/The-Aether-II/issues). When doing so, we ask that you provide the following information:
