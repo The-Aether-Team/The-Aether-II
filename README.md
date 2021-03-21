@@ -3,12 +3,13 @@
 # The Aether II
 [![Code license (GNU GPL 3.0)](https://img.shields.io/badge/license-GNU%20GPLv3-green.svg?style=flat-square)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 [![Asset license (CC BY-SA 4.0)](https://img.shields.io/badge/license-CC%20BY--SA%204.0-blue.svg?style=flat-square)](https://creativecommons.org/licenses/by-sa/4.0/)
+[![CurseForge downloads](http://cf.way2muchnoise.eu/223796.svg)](https://www.curseforge.com/minecraft/mc-mods/the-aether-ii)
 
 The Aether II is the sequel to the highly popular dimension mod "The Aether", set in a hostile paradise miles up in the clouds, the Aether is an entirely different world from what regular players are used to, filled with fantastic creatures and mysterious structures, the Aether is a world brimming with life and history. You'll have to relearn key ideas as the Aether challenges you with twisted materials, terrifying monsters and deep lore if you want to survive and prosper in this strange new land.
 
 ## :heart: Support Gilded Games
 
-[![Patreon pledgers](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.herokuapp.com%2FGildedGames&style=flat-square)](https://patreon.com/GildedGames)
+[![Patreon pledgers](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3DGildedGames%26type%3Dpatrons&style=flat-square)](https://patreon.com/GildedGames)
 [![Discord user count](https://img.shields.io/discord/118816101936267265.svg?logoColor=FFFFFF&logo=discord&color=7289DA&style=flat-square)](https://discord.gg/yrFDeVZEwt)
 [![Twitter followers](https://img.shields.io/twitter/follow/DevAether.svg?logo=twitter&label=twitter&style=flat-square)](https://twitter.com/DevAether)
 
@@ -23,8 +24,6 @@ This availability is intended for programmers and early adopters only. **Content
 
 ## :package: Download the latest releases
 ### "Stable" builds
-[![](http://cf.way2muchnoise.eu/223796.svg)](https://www.curseforge.com/minecraft/mc-mods/the-aether-ii)
-
 We use Curseforge to publish **stable builds** of the Aether for Minecraft. You can download the latest stable builds from our [official page found here](https://www.curseforge.com/minecraft/mc-mods/the-aether-ii) without signing up for an account, and even install the Aether for Minecraft using the [Overwolf Launcher](https://curseforge.overwolf.com/) with built-in integration for Curseforge mods. We recommend using our stable Curseforge releases for most people.
 
 ## :bug: Report bugs or other issues
