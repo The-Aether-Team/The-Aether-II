@@ -31,7 +31,7 @@ jobs:
             - v2-dependencies-
 
       - run: git clone -b master https://github.com/Gilded-Games/OrbisLib lib/orbis-lib
-      - run: ./gradlew -b lib/orbis-lib/build.gradle
+      - run: ./gradlew -c lib/orbis-lib/build.gradle build
       - store_artifacts:
               path: ~/repo/lib/orbis-lib/build/libs/orbis-lib-1.12.2-0.2.0-SNAPSHOT-universal.jar
 
