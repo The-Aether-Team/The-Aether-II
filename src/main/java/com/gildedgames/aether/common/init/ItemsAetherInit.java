@@ -4,6 +4,7 @@ import com.gildedgames.aether.api.entity.effects.IAetherStatusEffects;
 import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.entities.effects.*;
+import com.gildedgames.aether.common.entities.effects.unique.StatusEffectGuardBreak;
 import com.gildedgames.aether.common.items.ItemDropOnDeath;
 import com.gildedgames.aether.common.items.accessories.ItemAccessory;
 import com.gildedgames.aether.common.items.accessories.ItemDamageCharm;
@@ -208,36 +209,48 @@ public class ItemsAetherInit
 
 		r.register("moa_egg_item", new ItemMoaEgg(false));
 
-		r.register("charm_arm_01", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
-		r.register("charm_arm_02", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
-		r.register("charm_arm_03", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
-		r.register("charm_arm_tgh_01", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
-		r.register("charm_arm_tgh_02", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
-		r.register("charm_arm_tgh_03", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
-		r.register("charm_imp_dmg_01", new ItemDamageCharm().setImpactDamageLevel(0.5F).setCreativeTab(CreativeTabsAether.TAB_CHARMS));
-		r.register("charm_imp_dmg_02", new ItemDamageCharm().setImpactDamageLevel(1.0F).setCreativeTab(CreativeTabsAether.TAB_CHARMS));
-		r.register("charm_imp_dmg_03", new ItemDamageCharm().setImpactDamageLevel(1.5F).setCreativeTab(CreativeTabsAether.TAB_CHARMS));
-		r.register("charm_atk_spd_01", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
-		r.register("charm_atk_spd_02", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
-		r.register("charm_atk_spd_03", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
-		r.register("charm_kbk_res_01", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
-		r.register("charm_kbk_res_02", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
-		r.register("charm_kbk_res_03", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
-		r.register("charm_lck_01", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
-		r.register("charm_lck_02", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
-		r.register("charm_lck_03", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
 		r.register("charm_max_hlt_01", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
 		r.register("charm_max_hlt_02", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
-		r.register("charm_max_hlt_03", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_arm_01", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_arm_02", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_arm_tgh_01", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_arm_tgh_02", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_kbk_res_01", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_kbk_res_02", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_atk_spd_01", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_atk_spd_02", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
 		r.register("charm_mve_spd_01", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
 		r.register("charm_mve_spd_02", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
-		r.register("charm_mve_spd_03", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
-		r.register("charm_prc_dmg_01", new ItemDamageCharm().setPierceDamageLevel(0.5F).setCreativeTab(CreativeTabsAether.TAB_CHARMS));
-		r.register("charm_prc_dmg_02", new ItemDamageCharm().setPierceDamageLevel(1.0F).setCreativeTab(CreativeTabsAether.TAB_CHARMS));
-		r.register("charm_prc_dmg_03", new ItemDamageCharm().setPierceDamageLevel(1.5F).setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_lck_01", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_lck_02", new ItemAccessory().setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+
 		r.register("charm_slsh_dmg_01", new ItemDamageCharm().setSlashDamageLevel(0.5F).setCreativeTab(CreativeTabsAether.TAB_CHARMS));
 		r.register("charm_slsh_dmg_02", new ItemDamageCharm().setSlashDamageLevel(1.0F).setCreativeTab(CreativeTabsAether.TAB_CHARMS));
-		r.register("charm_slsh_dmg_03", new ItemDamageCharm().setSlashDamageLevel(1.5F).setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_imp_dmg_01", new ItemDamageCharm().setImpactDamageLevel(0.5F).setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_imp_dmg_02", new ItemDamageCharm().setImpactDamageLevel(1.0F).setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_prc_dmg_01", new ItemDamageCharm().setPierceDamageLevel(0.5F).setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_prc_dmg_02", new ItemDamageCharm().setPierceDamageLevel(1.0F).setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+
+		r.register("charm_res_amb_01", new ItemAccessory().addStatusEffectResistance(new StatusEffectAmbrosiumPoisoning(null),0.02 ).setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_res_amb_02", new ItemAccessory().addStatusEffectResistance(new StatusEffectAmbrosiumPoisoning(null),0.05 ).setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_res_bld_01", new ItemAccessory().addStatusEffectResistance(new StatusEffectBleed(null),0.02 ).setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_res_bld_02", new ItemAccessory().addStatusEffectResistance(new StatusEffectBleed(null),0.05 ).setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_res_fra_01", new ItemAccessory().addStatusEffectResistance(new StatusEffectFracture(null),0.02 ).setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_res_fra_02", new ItemAccessory().addStatusEffectResistance(new StatusEffectFracture(null),0.05 ).setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_res_frz_01", new ItemAccessory().addStatusEffectResistance(new StatusEffectFreeze(null),0.02 ).setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_res_frz_02", new ItemAccessory().addStatusEffectResistance(new StatusEffectFreeze(null),0.05 ).setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_res_grd_brk_01", new ItemAccessory().addStatusEffectResistance(new StatusEffectGuardBreak(null),0.02 ).setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_res_grd_brk_02", new ItemAccessory().addStatusEffectResistance(new StatusEffectGuardBreak(null),0.05 ).setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_res_irr_01", new ItemAccessory().addStatusEffectResistance(new StatusEffectIrradiation(null),0.02 ).setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_res_irr_02", new ItemAccessory().addStatusEffectResistance(new StatusEffectIrradiation(null),0.05 ).setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_res_stn_01", new ItemAccessory().addStatusEffectResistance(new StatusEffectStun(null),0.02 ).setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_res_stn_02", new ItemAccessory().addStatusEffectResistance(new StatusEffectStun(null),0.05 ).setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_res_tox_01", new ItemAccessory().addStatusEffectResistance(new StatusEffectToxin(null),0.02 ).setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_res_tox_02", new ItemAccessory().addStatusEffectResistance(new StatusEffectToxin(null),0.05 ).setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_res_ven_01", new ItemAccessory().addStatusEffectResistance(new StatusEffectCockatriceVenom(null),0.02 ).setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_res_ven_02", new ItemAccessory().addStatusEffectResistance(new StatusEffectCockatriceVenom(null),0.05 ).setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_res_web_01", new ItemAccessory().addStatusEffectResistance(new StatusEffectWebbing(null),0.02 ).setCreativeTab(CreativeTabsAether.TAB_CHARMS));
+		r.register("charm_res_web_02", new ItemAccessory().addStatusEffectResistance(new StatusEffectWebbing(null),0.05 ).setCreativeTab(CreativeTabsAether.TAB_CHARMS));
 	}
 
 	public static Collection<Item> getRegisteredItems()
