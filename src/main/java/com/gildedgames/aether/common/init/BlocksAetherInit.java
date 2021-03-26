@@ -60,7 +60,7 @@ public class BlocksAetherInit
 	{
 		final BlockRegistryHelper r = new BlockRegistryHelper(event.getRegistry());
 
-		Block holystone = new BlockHolystone().setRadiationAmount(10).setRadiationDistance(8).setRadiationRate(400);
+		Block holystone = new BlockHolystone().setRadiationAmount(5).setRadiationDistance(8).setRadiationRate(40);
 		Block skyroot_planks = new BlockSkyrootPlanks();
 		Block therawood_planks = new BlockTherawoodPlanks();
 		Block icestone_bricks = new BlockIcestoneBricks();
@@ -69,7 +69,7 @@ public class BlocksAetherInit
 		Block crude_scatterglass = new BlockRockGlass();
 		Block candy_cane = new BlockCandyCane();
 
-		r.register("aether_grass", new BlockAetherGrass().setRadiationAmount(10).setRadiationDistance(4).setRadiationRate(400).setCreativeTab(TAB_NATURAL_BLOCKS));
+		r.register("aether_grass", new BlockAetherGrass().setRadiationAmount(2).setRadiationDistance(4).setRadiationRate(60).setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("aether_dirt", new BlockAetherDirt().setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("quicksoil", new BlockQuicksoil().setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("highlands_snow", new BlockCustomSnowBlock().setCreativeTab(TAB_NATURAL_BLOCKS));
@@ -85,7 +85,7 @@ public class BlocksAetherInit
 		r.register("gravitite_ore", new BlockGravititeOre().setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("ferrosite", new BlockFerrosite().setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("rusted_ferrosite", new BlockRustedFerrosite().setCreativeTab(TAB_NATURAL_BLOCKS));
-		r.register("irradiated_dust_block", new BlockIrradiatedDust().setRadiationAmount(20).setRadiationDistance(10).setRadiationRate(200).setCreativeTab(TAB_NATURAL_BLOCKS));
+		r.register("irradiated_dust_block", new BlockIrradiatedDust().setRadiationAmount(8).setRadiationDistance(5).setRadiationRate(20).setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("crude_scatterglass", crude_scatterglass.setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("aercloud", new BlockAercloud().setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("skyroot_log", new BlockAetherLog(AetherWoodType.SKYROOT).setCreativeTab(TAB_NATURAL_BLOCKS));
