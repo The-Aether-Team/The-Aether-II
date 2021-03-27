@@ -87,10 +87,10 @@ public class BiomeAetherDecorator
 		this.genGravitite.setFloating(true);
 
 		this.genIrradiatedHolystone = new WorldGenAetherMinable(
-				BlocksAether.holystone.getDefaultState().withProperty(BlockHolystone.PROPERTY_VARIANT, BlockHolystone.MOSSY_HOLYSTONE), 32, holystoneStates);
+				BlocksAether.holystone.getDefaultState().withProperty(BlockHolystone.PROPERTY_VARIANT, BlockHolystone.IRRADIATED_HOLYSTONE), 22, holystoneStates);
 
 		this.genMossyHolystone = new WorldGenAetherMinable(
-				BlocksAether.holystone.getDefaultState().withProperty(BlockHolystone.PROPERTY_VARIANT, BlockHolystone.IRRADIATED_HOLYSTONE), 22, holystoneStates);
+				BlocksAether.holystone.getDefaultState().withProperty(BlockHolystone.PROPERTY_VARIANT, BlockHolystone.MOSSY_HOLYSTONE), 32, holystoneStates);
 
 		this.genIrradiatedDust = new WorldGenAetherMinable(
 				BlocksAether.irradiated_dust_block.getDefaultState(), 4, holystoneStates);
@@ -525,8 +525,8 @@ public class BiomeAetherDecorator
 		this.generateMinable(this.genArkenium, slice, random, pos, 70, 8);
 		this.generateMinable(this.genCrudeScatterglass, slice, random, pos, 110, 14);
 		this.generateMinable(this.genMossyHolystone, slice, random, pos, 132, 16);
-		this.generateMinable(this.genIrradiatedHolystone, slice, random, pos, 60, 14);
-		this.generateMinable(this.genIrradiatedDust, slice, random, pos, 50, 5);
+		this.generateMinable(this.genIrradiatedHolystone, slice, random, pos, 70, 12);
+		this.generateMinable(this.genIrradiatedDust, slice, random, pos, 60, 5);
 
 
 
