@@ -52,7 +52,7 @@ public class BiomeAetherDecorator
 
 	private final WorldGenAetherMinable genAmbrosium, genZanite, genGravitite, genIcestone, genArkenium, genCoarseAetherDirtOnDirt, genCoarseAetherDirtOnHolystone;
 
-    private final WorldGenAetherMinable genCrudeScatterglass, genIrradiatedHolystone, genIrradiatedDust, genMossyHolystone;
+    private final WorldGenAetherMinable genCrudeScatterglass, genIrradiatedHolystone, genIrradiatedDust, genMossyHolystone, genHolystoneQuartzOre;
 
 	private final WorldGenFoliage genPurpleFlowers, genWhiteRoses, genBurstblossom, genAechorSprout;
 
@@ -78,6 +78,7 @@ public class BiomeAetherDecorator
 		this.genAmbrosium = new WorldGenAetherMinable(BlocksAether.ambrosium_ore.getDefaultState(), 16, holystoneStates);
 
 		this.genZanite = new WorldGenAetherMinable(BlocksAether.zanite_ore.getDefaultState(), 8, holystoneStates);
+		this.genHolystoneQuartzOre = new WorldGenAetherMinable(BlocksAether.holystone_quartz_ore.getDefaultState(), 8, holystoneStates);
 		this.genGravitite = new WorldGenAetherMinable(BlocksAether.gravitite_ore.getDefaultState(), 5, holystoneStates);
 		this.genIcestone = new WorldGenAetherMinable(BlocksAether.icestone_ore.getDefaultState(), 12, holystoneStates);
 		this.genArkenium = new WorldGenAetherMinable(BlocksAether.arkenium_ore.getDefaultState(), 6, holystoneStates);
@@ -520,11 +521,12 @@ public class BiomeAetherDecorator
 		this.generateMinable(this.genZanite, slice, random, pos, 256, 9);
 		this.generateMinable(this.genGravitite, slice, random, pos, 50, 5);
 		this.generateMinable(this.genIcestone, slice, random, pos, 256, 10);
+		this.generateMinable(this.genHolystoneQuartzOre, slice, random, pos, 256, 10);
 		this.generateMinable(this.genArkenium, slice, random, pos, 70, 8);
 		this.generateMinable(this.genCrudeScatterglass, slice, random, pos, 110, 14);
 		this.generateMinable(this.genMossyHolystone, slice, random, pos, 132, 16);
-		this.generateMinable(this.genIrradiatedHolystone, slice, random, pos, 70, 14);
-		this.generateMinable(this.genIrradiatedDust, slice, random, pos, 60, 5);
+		this.generateMinable(this.genIrradiatedHolystone, slice, random, pos, 60, 14);
+		this.generateMinable(this.genIrradiatedDust, slice, random, pos, 50, 5);
 
 
 

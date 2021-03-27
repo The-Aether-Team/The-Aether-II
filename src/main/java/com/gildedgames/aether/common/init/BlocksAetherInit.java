@@ -80,6 +80,7 @@ public class BlocksAetherInit
 		r.register("holystone", holystone.setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("ambrosium_ore", new BlockAmbrosiumOre().setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("icestone_ore", new BlockIcestoneOre().setCreativeTab(TAB_NATURAL_BLOCKS));
+		r.register("holystone_quartz_ore", new BlockHolystoneQuartzOre().setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("zanite_ore", new BlockZaniteOre().setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("arkenium_ore", new BlockArkeniumOre().setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("gravitite_ore", new BlockGravititeOre().setCreativeTab(TAB_NATURAL_BLOCKS));
@@ -420,6 +421,7 @@ public class BlocksAetherInit
 		BlocksAether.gravitite_ore.setHarvestLevel("pickaxe", 2);
 		BlocksAether.arkenium_ore.setHarvestLevel("pickaxe", 2);
 		BlocksAether.icestone_ore.setHarvestLevel("pickaxe", 1);
+		BlocksAether.holystone_quartz_ore.setHarvestLevel("pickaxe", 0);
 		BlocksAether.icestone_bricks.setHarvestLevel("pickaxe", 1);
 		BlocksAether.crude_scatterglass.setHarvestLevel("pickaxe", 0);
 		BlocksAether.scatterglass.setHarvestLevel("pickaxe", 0);

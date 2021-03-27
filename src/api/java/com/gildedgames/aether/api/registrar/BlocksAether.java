@@ -215,6 +215,8 @@ public class BlocksAether extends AbstractRegistrar
 
 	public static final Block icestone_ore = getDefault();
 
+	public static final Block holystone_quartz_ore = getDefault();
+
 	public static final Block icestone_pillar = getDefault();
 
 	public static final Block icestone_slab = getDefault();

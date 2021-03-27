@@ -65,6 +65,7 @@ tile.aether.aether_flower.burstblossom.name=Burstblossom
 tile.aether.aether_flower.aechor_sprout.name=Aechor Sprout
 tile.aether.altar.name=Altar
 tile.aether.icestone_ore.name=Icestone Ore
+tile.aether.holystone_quartz_ore.name=Holystone Quartz Ore
 tile.aether.icestone_bricks.name=Icestone Bricks
 tile.aether.icestone_bricks_decorative.name=Decorative Icestone Bricks
 tile.aether.icestone_bricks_decorative.base_bricks.name=Base
