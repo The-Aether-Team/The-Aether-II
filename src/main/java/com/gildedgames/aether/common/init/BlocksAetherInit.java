@@ -80,10 +80,10 @@ public class BlocksAetherInit
 		r.register("holystone", holystone.setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("ambrosium_ore", new BlockAmbrosiumOre().setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("icestone_ore", new BlockIcestoneOre().setCreativeTab(TAB_NATURAL_BLOCKS));
-		r.register("holystone_quartz_ore", new BlockHolystoneQuartzOre().setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("zanite_ore", new BlockZaniteOre().setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("arkenium_ore", new BlockArkeniumOre().setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("gravitite_ore", new BlockGravititeOre().setCreativeTab(TAB_NATURAL_BLOCKS));
+		r.register("holystone_quartz_ore", new BlockHolystoneQuartzOre().setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("ferrosite", new BlockFerrosite().setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("rusted_ferrosite", new BlockRustedFerrosite().setCreativeTab(TAB_NATURAL_BLOCKS));
 		r.register("irradiated_dust_block", new BlockIrradiatedDust().setRadiationAmount(8).setRadiationDistance(5).setRadiationRate(20).setCreativeTab(TAB_NATURAL_BLOCKS));

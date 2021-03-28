@@ -213,6 +213,8 @@ public class ItemModelsAetherInit
 		registerItemModels(BlocksAether.icestone_ore, "icestone_ore");
 		registerItemModels(BlocksAether.icestone_bricks, "icestone_bricks");
 
+		registerItemModels(BlocksAether.holystone_quartz_ore, "holystone_quartz_ore");
+
 		registerItemModels(BlocksAether.icestone_bricks_decorative, new ItemModelBuilder("icestone_bricks/")
 				.add(BlockIcestoneBricksDecorative.BASE_BRICKS.getMeta(), "base_bricks")
 				.add(BlockIcestoneBricksDecorative.BASE_PILLAR.getMeta(), "base_pillar")
