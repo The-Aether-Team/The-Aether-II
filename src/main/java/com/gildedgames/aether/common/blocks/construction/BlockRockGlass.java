@@ -1,16 +1,21 @@
 package com.gildedgames.aether.common.blocks.construction;
 
+import com.gildedgames.aether.api.registrar.ItemsAether;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.Random;
 
 public class BlockRockGlass extends Block
 {
@@ -24,6 +29,18 @@ public class BlockRockGlass extends Block
 		this.setLightOpacity(3);
 
 		this.setSoundType(SoundType.GLASS);
+	}
+
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune)
+	{
+		return ItemsAether.crude_scatterglass_shard;
+	}
+
+	@Override
+	public int quantityDropped(Random random)
+	{
+		return 2;
 	}
 
 	@Override

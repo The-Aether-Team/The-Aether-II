@@ -100,7 +100,7 @@ public class BiomeAetherDecorator
         this.genCoarseAetherDirtOnHolystone = new WorldGenAetherMinable(
                 BlocksAether.aether_dirt.getDefaultState().withProperty(BlockAetherDirt.PROPERTY_VARIANT, BlockAetherDirt.COARSE_DIRT), 22, holystoneStates);
 
-        this.genCrudeScatterglass = new WorldGenAetherMinable(BlocksAether.crude_scatterglass.getDefaultState(), 16, holystoneStates);
+        this.genCrudeScatterglass = new WorldGenAetherMinable(BlocksAether.crude_scatterglass.getDefaultState(), 10, holystoneStates);
 
 		this.genPurpleFlowers = new WorldGenFoliage(64,
 				BlocksAether.aether_flower.getDefaultState().withProperty(BlockAetherFlower.PROPERTY_VARIANT, BlockAetherFlower.PURPLE_FLOWER));
@@ -518,12 +518,12 @@ public class BiomeAetherDecorator
 	protected void generateOres(final WorldSlice slice, final Random random, final BlockPos pos)
 	{
 		this.generateMinable(this.genAmbrosium, slice, random, pos, 256, 10);
-		this.generateMinable(this.genZanite, slice, random, pos, 256, 9);
+		this.generateMinable(this.genZanite, slice, random, pos, 256, 10);
 		this.generateMinable(this.genGravitite, slice, random, pos, 50, 5);
 		this.generateMinable(this.genIcestone, slice, random, pos, 256, 10);
 		this.generateMinable(this.genHolystoneQuartzOre, slice, random, pos, 256, 10);
-		this.generateMinable(this.genArkenium, slice, random, pos, 70, 8);
-		this.generateMinable(this.genCrudeScatterglass, slice, random, pos, 110, 14);
+		this.generateMinable(this.genArkenium, slice, random, pos, 70, 7);
+		this.generateMinable(this.genCrudeScatterglass, slice, random, pos, 110, 10);
 		this.generateMinable(this.genMossyHolystone, slice, random, pos, 132, 16);
 		this.generateMinable(this.genIrradiatedHolystone, slice, random, pos, 70, 12);
 		this.generateMinable(this.genIrradiatedDust, slice, random, pos, 60, 5);
