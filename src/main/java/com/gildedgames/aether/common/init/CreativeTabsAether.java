@@ -111,7 +111,7 @@ public class CreativeTabsAether
 		@Override
 		public ItemStack createIcon()
 		{
-			return new ItemStack(ItemsAether.charm_slsh_dmg_01);
+			return new ItemStack(ItemsAether.charm_mve_spd_01);
 		}
 	};
 

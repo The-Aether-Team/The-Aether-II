@@ -60,49 +60,49 @@ public class EquipmentAether
 		createEquipmentItem(ItemsAether.gravitite_gloves, ItemEquipmentSlot.HANDWEAR, ItemRarity.NONE, WHEN_EQUIPPED);
 
 		//CHARMS
-		createEquipmentItem(ItemsAether.charm_arm_01, ItemEquipmentSlot.CHARM, ItemRarity.COMMON, WHEN_EQUIPPED,
-				new StatEffectFactory.StatProvider(SharedMonsterAttributes.ARMOR, 1.0, StatEffectFactory.StatProvider.OP_ADD));
-		createEquipmentItem(ItemsAether.charm_arm_02, ItemEquipmentSlot.CHARM, ItemRarity.RARE, WHEN_EQUIPPED,
-				new StatEffectFactory.StatProvider(SharedMonsterAttributes.ARMOR, 2.0, StatEffectFactory.StatProvider.OP_ADD));
+		//createEquipmentItem(ItemsAether.charm_arm_01, ItemEquipmentSlot.CHARM, ItemRarity.COMMON, WHEN_EQUIPPED,
+		//		new StatEffectFactory.StatProvider(SharedMonsterAttributes.ARMOR, 1.0, StatEffectFactory.StatProvider.OP_ADD));
+		//createEquipmentItem(ItemsAether.charm_arm_02, ItemEquipmentSlot.CHARM, ItemRarity.RARE, WHEN_EQUIPPED,
+		//		new StatEffectFactory.StatProvider(SharedMonsterAttributes.ARMOR, 2.0, StatEffectFactory.StatProvider.OP_ADD));
 
-		createEquipmentItem(ItemsAether.charm_arm_tgh_01, ItemEquipmentSlot.CHARM, ItemRarity.COMMON, WHEN_EQUIPPED,
-				new StatEffectFactory.StatProvider(SharedMonsterAttributes.ARMOR_TOUGHNESS, 1.0, StatEffectFactory.StatProvider.OP_ADD));
-		createEquipmentItem(ItemsAether.charm_arm_tgh_02, ItemEquipmentSlot.CHARM, ItemRarity.RARE, WHEN_EQUIPPED,
-				new StatEffectFactory.StatProvider(SharedMonsterAttributes.ARMOR_TOUGHNESS, 2.0, StatEffectFactory.StatProvider.OP_ADD));
+		//createEquipmentItem(ItemsAether.charm_arm_tgh_01, ItemEquipmentSlot.CHARM, ItemRarity.COMMON, WHEN_EQUIPPED,
+		//		new StatEffectFactory.StatProvider(SharedMonsterAttributes.ARMOR_TOUGHNESS, 1.0, StatEffectFactory.StatProvider.OP_ADD));
+		//createEquipmentItem(ItemsAether.charm_arm_tgh_02, ItemEquipmentSlot.CHARM, ItemRarity.RARE, WHEN_EQUIPPED,
+		//		new StatEffectFactory.StatProvider(SharedMonsterAttributes.ARMOR_TOUGHNESS, 2.0, StatEffectFactory.StatProvider.OP_ADD));
 
-		createEquipmentItem(ItemsAether.charm_imp_dmg_01, ItemEquipmentSlot.CHARM, ItemRarity.COMMON, WHEN_EQUIPPED);
-		createEquipmentItem(ItemsAether.charm_imp_dmg_02, ItemEquipmentSlot.CHARM, ItemRarity.RARE, WHEN_EQUIPPED);
+		//createEquipmentItem(ItemsAether.charm_imp_dmg_01, ItemEquipmentSlot.CHARM, ItemRarity.COMMON, WHEN_EQUIPPED);
+		//createEquipmentItem(ItemsAether.charm_imp_dmg_02, ItemEquipmentSlot.CHARM, ItemRarity.RARE, WHEN_EQUIPPED);
 
-		createEquipmentItem(ItemsAether.charm_atk_spd_01, ItemEquipmentSlot.CHARM, ItemRarity.COMMON, WHEN_EQUIPPED,
-				new StatEffectFactory.StatProvider(SharedMonsterAttributes.ATTACK_SPEED, 0.1, StatEffectFactory.StatProvider.OP_ADD));
-		createEquipmentItem(ItemsAether.charm_atk_spd_02, ItemEquipmentSlot.CHARM, ItemRarity.RARE, WHEN_EQUIPPED,
-				new StatEffectFactory.StatProvider(SharedMonsterAttributes.ATTACK_SPEED, 0.2, StatEffectFactory.StatProvider.OP_ADD));
+		//createEquipmentItem(ItemsAether.charm_atk_spd_01, ItemEquipmentSlot.CHARM, ItemRarity.COMMON, WHEN_EQUIPPED,
+		//		new StatEffectFactory.StatProvider(SharedMonsterAttributes.ATTACK_SPEED, 0.1, StatEffectFactory.StatProvider.OP_ADD));
+		//createEquipmentItem(ItemsAether.charm_atk_spd_02, ItemEquipmentSlot.CHARM, ItemRarity.RARE, WHEN_EQUIPPED,
+		//		new StatEffectFactory.StatProvider(SharedMonsterAttributes.ATTACK_SPEED, 0.2, StatEffectFactory.StatProvider.OP_ADD));
 
-		createEquipmentItem(ItemsAether.charm_kbk_res_01, ItemEquipmentSlot.CHARM, ItemRarity.COMMON, WHEN_EQUIPPED,
-				new StatEffectFactory.StatProvider(SharedMonsterAttributes.KNOCKBACK_RESISTANCE, 1.0, StatEffectFactory.StatProvider.OP_ADD));
-		createEquipmentItem(ItemsAether.charm_kbk_res_02, ItemEquipmentSlot.CHARM, ItemRarity.RARE, WHEN_EQUIPPED,
-				new StatEffectFactory.StatProvider(SharedMonsterAttributes.KNOCKBACK_RESISTANCE, 2.0, StatEffectFactory.StatProvider.OP_ADD));
+		//createEquipmentItem(ItemsAether.charm_kbk_res_01, ItemEquipmentSlot.CHARM, ItemRarity.COMMON, WHEN_EQUIPPED,
+		//		new StatEffectFactory.StatProvider(SharedMonsterAttributes.KNOCKBACK_RESISTANCE, 1.0, StatEffectFactory.StatProvider.OP_ADD));
+		//createEquipmentItem(ItemsAether.charm_kbk_res_02, ItemEquipmentSlot.CHARM, ItemRarity.RARE, WHEN_EQUIPPED,
+		//		new StatEffectFactory.StatProvider(SharedMonsterAttributes.KNOCKBACK_RESISTANCE, 2.0, StatEffectFactory.StatProvider.OP_ADD));
 
-		createEquipmentItem(ItemsAether.charm_lck_01, ItemEquipmentSlot.CHARM, ItemRarity.COMMON, WHEN_EQUIPPED,
-				new StatEffectFactory.StatProvider(SharedMonsterAttributes.LUCK, 1.0, StatEffectFactory.StatProvider.OP_ADD));
-		createEquipmentItem(ItemsAether.charm_lck_02, ItemEquipmentSlot.CHARM, ItemRarity.RARE, WHEN_EQUIPPED,
-				new StatEffectFactory.StatProvider(SharedMonsterAttributes.LUCK, 2.0, StatEffectFactory.StatProvider.OP_ADD));
+		//createEquipmentItem(ItemsAether.charm_lck_01, ItemEquipmentSlot.CHARM, ItemRarity.COMMON, WHEN_EQUIPPED,
+		//		new StatEffectFactory.StatProvider(SharedMonsterAttributes.LUCK, 1.0, StatEffectFactory.StatProvider.OP_ADD));
+		//createEquipmentItem(ItemsAether.charm_lck_02, ItemEquipmentSlot.CHARM, ItemRarity.RARE, WHEN_EQUIPPED,
+		//		new StatEffectFactory.StatProvider(SharedMonsterAttributes.LUCK, 2.0, StatEffectFactory.StatProvider.OP_ADD));
 
 		createEquipmentItem(ItemsAether.charm_max_hlt_01, ItemEquipmentSlot.CHARM, ItemRarity.COMMON, WHEN_EQUIPPED,
 				new StatEffectFactory.StatProvider(SharedMonsterAttributes.MAX_HEALTH, 0.5, StatEffectFactory.StatProvider.OP_ADD));
-		createEquipmentItem(ItemsAether.charm_max_hlt_02, ItemEquipmentSlot.CHARM, ItemRarity.RARE, WHEN_EQUIPPED,
-				new StatEffectFactory.StatProvider(SharedMonsterAttributes.MAX_HEALTH, 1.0, StatEffectFactory.StatProvider.OP_ADD));
+		//createEquipmentItem(ItemsAether.charm_max_hlt_02, ItemEquipmentSlot.CHARM, ItemRarity.RARE, WHEN_EQUIPPED,
+		//		new StatEffectFactory.StatProvider(SharedMonsterAttributes.MAX_HEALTH, 1.0, StatEffectFactory.StatProvider.OP_ADD));
 
 		createEquipmentItem(ItemsAether.charm_mve_spd_01, ItemEquipmentSlot.CHARM, ItemRarity.COMMON, WHEN_EQUIPPED,
 				new StatEffectFactory.StatProvider(SharedMonsterAttributes.MOVEMENT_SPEED, 0.001, StatEffectFactory.StatProvider.OP_ADD));
 		createEquipmentItem(ItemsAether.charm_mve_spd_02, ItemEquipmentSlot.CHARM, ItemRarity.RARE, WHEN_EQUIPPED,
 				new StatEffectFactory.StatProvider(SharedMonsterAttributes.MOVEMENT_SPEED, 0.002, StatEffectFactory.StatProvider.OP_ADD));
 
-		createEquipmentItem(ItemsAether.charm_prc_dmg_01, ItemEquipmentSlot.CHARM, ItemRarity.COMMON, WHEN_EQUIPPED);
-		createEquipmentItem(ItemsAether.charm_prc_dmg_02, ItemEquipmentSlot.CHARM, ItemRarity.RARE, WHEN_EQUIPPED);
+		//createEquipmentItem(ItemsAether.charm_prc_dmg_01, ItemEquipmentSlot.CHARM, ItemRarity.COMMON, WHEN_EQUIPPED);
+		//createEquipmentItem(ItemsAether.charm_prc_dmg_02, ItemEquipmentSlot.CHARM, ItemRarity.RARE, WHEN_EQUIPPED);
 
-		createEquipmentItem(ItemsAether.charm_slsh_dmg_01, ItemEquipmentSlot.CHARM, ItemRarity.COMMON, WHEN_EQUIPPED);
-		createEquipmentItem(ItemsAether.charm_slsh_dmg_02, ItemEquipmentSlot.CHARM, ItemRarity.RARE, WHEN_EQUIPPED);
+		//createEquipmentItem(ItemsAether.charm_slsh_dmg_01, ItemEquipmentSlot.CHARM, ItemRarity.COMMON, WHEN_EQUIPPED);
+		//createEquipmentItem(ItemsAether.charm_slsh_dmg_02, ItemEquipmentSlot.CHARM, ItemRarity.RARE, WHEN_EQUIPPED);
 
 		createEquipmentItem(ItemsAether.charm_res_amb_01, ItemEquipmentSlot.CHARM, ItemRarity.COMMON, WHEN_EQUIPPED);
 		createEquipmentItem(ItemsAether.charm_res_amb_02, ItemEquipmentSlot.CHARM, ItemRarity.RARE, WHEN_EQUIPPED);
