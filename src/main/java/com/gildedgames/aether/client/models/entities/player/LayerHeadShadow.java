@@ -114,11 +114,11 @@ public class LayerHeadShadow extends LayerBipedArmor
 		t.setLivingAnimations(entity, limbSwing, limbSwingAmount, partialTicks);
 
 		this.renderer.bindTexture(texture);
-
 		GlStateManager.color(0.25F, 0.25F, 0.25F, 1.0F);
 
 		t.render(player.getEntity(), limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 
+		GlStateManager.color(1F, 1F, 1F, 1F);
 		GlStateManager.popMatrix();
 	}
 }

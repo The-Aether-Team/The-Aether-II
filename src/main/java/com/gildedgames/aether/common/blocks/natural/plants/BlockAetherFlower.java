@@ -8,7 +8,6 @@ import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
 import com.gildedgames.aether.common.entities.monsters.EntityAechorPlant;
 import net.minecraft.block.BlockSnow;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -41,8 +40,6 @@ public class BlockAetherFlower extends BlockAetherPlant implements IBlockMultiNa
 
 	public BlockAetherFlower()
 	{
-		super(Material.PLANTS);
-
 		this.setSoundType(SoundType.PLANT);
 
 		this.setTickRandomly(true);

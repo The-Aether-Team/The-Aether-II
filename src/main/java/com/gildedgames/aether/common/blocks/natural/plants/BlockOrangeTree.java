@@ -7,7 +7,6 @@ import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
@@ -34,8 +33,6 @@ public class BlockOrangeTree extends BlockAetherPlant implements IGrowable
 
 	public BlockOrangeTree()
 	{
-		super(Material.LEAVES);
-
 		this.setHardness(1f);
 
 		this.setTickRandomly(true);

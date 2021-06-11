@@ -6,14 +6,12 @@ import com.gildedgames.aether.common.blocks.natural.plants.BlockAetherPlant;
 import com.gildedgames.aether.common.blocks.properties.BlockVariant;
 import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
 import com.gildedgames.aether.common.items.blocks.ItemBlockCustomSapling;
-import com.gildedgames.aether.common.items.blocks.ItemBlockSkyrootButton;
 import com.gildedgames.orbis.lib.core.BlueprintDefinition;
 import com.gildedgames.orbis.lib.core.CreationData;
 import com.gildedgames.orbis.lib.core.baking.BakedBlueprint;
 import com.gildedgames.orbis.lib.core.util.BlueprintPlacer;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -40,8 +38,6 @@ public abstract class BlockAetherSapling extends BlockAetherPlant implements IGr
 
 	public BlockAetherSapling()
 	{
-		super(Material.PLANTS);
-
 		this.setSoundType(SoundType.PLANT);
 		this.setTickRandomly(true);
 	}
