@@ -20,6 +20,7 @@ public class AltarRepairRecipe implements IAltarRecipe
 				|| stack.getItem() instanceof ItemCrossbow
 				|| stack.getItem() instanceof ItemBow
 				|| stack.getItem() instanceof ItemAetherShield
+				|| stack.getItem() instanceof ItemShield
 		) && stack.isItemDamaged();
 	}
 
@@ -32,7 +33,7 @@ public class AltarRepairRecipe implements IAltarRecipe
 	@Override
 	public int getAmbrosiumCost(final ItemStack stack)
 	{
-		if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemCrossbow || stack.getItem() instanceof ItemBow || stack.getItem() instanceof ItemAetherShield)
+		if (stack.getItem() instanceof ItemSword || stack.getItem() instanceof ItemCrossbow || stack.getItem() instanceof ItemBow || stack.getItem() instanceof ItemAetherShield || stack.getItem() instanceof ItemShield)
 		{
 			return 6;
 		}

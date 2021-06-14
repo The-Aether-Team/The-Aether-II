@@ -4,7 +4,6 @@ import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.common.blocks.IBlockSnowy;
 import net.minecraft.block.BlockSnow;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,8 +26,6 @@ public class BlockAetherFlowerBase extends BlockAetherPlant implements IBlockSno
 
 	public BlockAetherFlowerBase()
 	{
-		super(Material.PLANTS);
-
 		this.setSoundType(SoundType.PLANT);
 
 		this.setTickRandomly(true);

@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
@@ -83,6 +84,10 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer<TileEntit
 
 			this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 
+			//Render ambrosium before item, because vanilla shield makes them disappear if rendered after
+			this.renderOrbitingItems(altar.getAmbrosiumCount(),
+					altar.prevAnimationTicks + (altar.animationTicks - altar.prevAnimationTicks) * partialTicks);
+
 			if (stack != null)
 			{
 				GlStateManager.pushMatrix();
@@ -100,6 +105,13 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer<TileEntit
 					GlStateManager.rotate(-90.0f, 90.0f, 0.0f, 0.0f);
 					GlStateManager.rotate(0.0f, 0.0f, 0.0f, 90.0f);
 				}
+				else if(stack.getItem() instanceof ItemShield)
+				{
+					GlStateManager.scale(0.5F, 0.5F, 0.5F);
+					GlStateManager.translate(0.5f, 0.20f, -0.5f);
+					GlStateManager.rotate(-90.0f, 90.0f, 0.0f, 0.0f);
+					GlStateManager.rotate(0.0f, 0.0f, 0.0f, 90.0f);
+				}
 				else
 				{
 					GlStateManager.scale(0.5F, 0.5F, 0.5F);
@@ -113,9 +125,6 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer<TileEntit
 				GlStateManager.popAttrib();
 				GlStateManager.popMatrix();
 			}
-
-			this.renderOrbitingItems(altar.getAmbrosiumCount(),
-					altar.prevAnimationTicks + (altar.animationTicks - altar.prevAnimationTicks) * partialTicks);
 		}
 
 		GlStateManager.disableRescaleNormal();

@@ -8,7 +8,6 @@ import com.gildedgames.aether.common.blocks.properties.PropertyVariant;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
@@ -56,7 +55,6 @@ public class BlockBrettlPlant extends BlockAetherPlant implements IBlockMultiNam
 
 	public BlockBrettlPlant()
 	{
-		super(Material.LEAVES);
 		this.setHardness(0.0f);
 		this.setSoundType(SoundType.PLANT);
 		this.setTickRandomly(true);

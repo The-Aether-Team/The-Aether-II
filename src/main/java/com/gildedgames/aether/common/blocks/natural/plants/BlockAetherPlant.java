@@ -22,6 +22,11 @@ public class BlockAetherPlant extends Block implements IGrowable
 {
 	protected static final AxisAlignedBB PLANT_AABB = new AxisAlignedBB(0.3D, 0.0D, 0.3D, 0.7D, 0.6D, 0.7D);
 
+	public BlockAetherPlant()
+	{
+		super(Material.PLANTS);
+	}
+
 	public BlockAetherPlant(final Material material)
 	{
 		super(material);

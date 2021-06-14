@@ -10,7 +10,6 @@ import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -54,7 +53,6 @@ public class BlockValkyrieGrass extends BlockAetherPlant implements IBlockMultiN
 
 	public BlockValkyrieGrass()
 	{
-		super(Material.PLANTS);
 		this.setHardness(0.0f);
 		this.setSoundType(SoundType.PLANT);
 		this.setTickRandomly(true);
