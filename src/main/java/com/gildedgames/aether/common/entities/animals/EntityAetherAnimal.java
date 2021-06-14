@@ -7,11 +7,8 @@ import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.registrar.CapabilitiesAether;
 import com.gildedgames.aether.common.entities.ai.AetherNavigateGround;
 import com.gildedgames.aether.common.entities.effects.IEntityResistanceHolder;
-import com.gildedgames.aether.common.entities.effects.StatusEffect;
-import com.google.common.collect.Maps;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -82,6 +79,7 @@ public abstract class EntityAetherAnimal extends EntityAnimal implements IDefens
 		super.onEntityUpdate();
 	}
 
+	@Override
 	public Map<IAetherStatusEffects.effectTypes, Double> getResistances()
 	{
 		return resistances;

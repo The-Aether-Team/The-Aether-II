@@ -2,6 +2,8 @@ package com.gildedgames.aether.common.network.packets;
 
 import com.gildedgames.aether.api.registrar.SoundsAether;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerAerbunnyTrackerModule;
 import com.gildedgames.aether.common.entities.animals.EntityAerbunny;
 import com.gildedgames.aether.common.network.MessageHandlerClient;
 import io.netty.buffer.ByteBuf;
@@ -61,6 +63,12 @@ public class PacketAerbunnySetRiding implements IMessage
 				return null;
 			}
 
+			if(aerbunny.isRiding() && message.playerId < 0)
+			{
+				Entity otherPlayer = aerbunny.getRidingEntity();
+				PlayerAether.getPlayer((EntityPlayer) otherPlayer).getModule(PlayerAerbunnyTrackerModule.class).detachAerbunny();
+			}
+
 			aerbunny.dismountRidingEntity();
 
 			if (message.playerId >= 0)
@@ -75,6 +83,8 @@ public class PacketAerbunnySetRiding implements IMessage
 							0.8F + (player.getRNG().nextFloat() * 0.5F));
 
 					AetherCore.PROXY.displayDismountMessage(player);
+
+					PlayerAether.getPlayer((EntityPlayer) otherPlayer).getModule(PlayerAerbunnyTrackerModule.class).attachAerbunny((EntityAerbunny) aerbunny);
 				}
 			}
 

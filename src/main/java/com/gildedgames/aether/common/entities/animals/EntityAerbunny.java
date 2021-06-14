@@ -6,16 +6,20 @@ import com.gildedgames.aether.api.registrar.BlocksAether;
 import com.gildedgames.aether.api.registrar.ItemsAether;
 import com.gildedgames.aether.api.registrar.SoundsAether;
 import com.gildedgames.aether.common.AetherCore;
+import com.gildedgames.aether.common.capabilities.entity.player.PlayerAether;
+import com.gildedgames.aether.common.capabilities.entity.player.modules.PlayerAerbunnyTrackerModule;
 import com.gildedgames.aether.common.entities.ai.*;
 import com.gildedgames.aether.common.init.LootTablesAether;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.PacketAerbunnySetRiding;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityTameable;
-import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
@@ -43,191 +47,210 @@ import java.util.UUID;
 
 public class EntityAerbunny extends EntityTameable implements IDefenseLevelsHolder
 {
-    protected Map<String, Float> defenseMap = Maps.newHashMap();
-    {{
-        this.defenseMap.put("Very Weak", 4.0F);
-        this.defenseMap.put("Weak", 2.0F);
-        this.defenseMap.put("Average", 0.0F);
-        this.defenseMap.put("Strong", -2.0F);
-        this.defenseMap.put("Very Strong", -4.0F);
-    }}
+	protected Map<String, Float> defenseMap = Maps.newHashMap();
 
-    private static final Set<Item> TEMPTATION_ITEMS = Sets
-            .newHashSet(ItemsAether.blueberries);
+	{
+		{
+			this.defenseMap.put("Very Weak", 4.0F);
+			this.defenseMap.put("Weak", 2.0F);
+			this.defenseMap.put("Average", 0.0F);
+			this.defenseMap.put("Strong", -2.0F);
+			this.defenseMap.put("Very Strong", -4.0F);
+		}
+	}
 
-    private static final Set<Item> TAMING_ITEMS = Sets
-            .newHashSet(ItemsAether.orange);
+	private static final Set<Item> TEMPTATION_ITEMS = Sets
+			.newHashSet(ItemsAether.blueberries);
 
-    private static final Set<Item> HEALING_ITEMS = Sets
-            .newHashSet(ItemsAether.orange);
+	private static final Set<Item> TAMING_ITEMS = Sets
+			.newHashSet(ItemsAether.orange);
 
-    private static final DataParameter<Integer> COLLAR_COLOR = EntityDataManager.createKey(EntityAerbunny.class, DataSerializers.VARINT);
+	private static final Set<Item> HEALING_ITEMS = Sets
+			.newHashSet(ItemsAether.orange);
 
-    @SideOnly(Side.CLIENT)
-    private double prevMotionY;
+	private static final DataParameter<Integer> COLLAR_COLOR = EntityDataManager.createKey(EntityAerbunny.class, DataSerializers.VARINT);
 
-    @SideOnly(Side.CLIENT)
-    private int puffiness;
+	@SideOnly(Side.CLIENT)
+	private double prevMotionY;
 
-    @SideOnly(Side.CLIENT)
-    private float curRotation;
+	@SideOnly(Side.CLIENT)
+	private int puffiness;
 
-    private boolean quickFall;
+	@SideOnly(Side.CLIENT)
+	private float curRotation;
 
-    public EntityAerbunny(final World world)
-    {
-        super(world);
+	private boolean quickFall;
 
-        this.aiSit = new EntityAISit(this);
-        this.tasks.addTask(2, this.aiSit);
-        this.tasks.addTask(2, new EntityAIRestrictRain(this));
-        this.tasks.addTask(3, new EntityAIUnstuckBlueAercloud(this));
-        this.tasks.addTask(3, new EntityAIHideFromRain(this, 1.3D));
-        this.tasks.addTask(1, new EntityAISwimming(this));
-        this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
-        this.tasks.addTask(3, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
-        this.tasks.addTask(3, new EntityAIEggnogTempt(this, 2.2D));
-        this.tasks.addTask(5, new EntityAIFollowOwner(this, 1.5D, 5.0F, 2.0F));
-        this.tasks.addTask(6, new EntityAIWander(this, 1.0D, 10));
-        this.tasks.addTask(8, new EntityAIAvoidEntity<>(this, EntityPlayer.class, 12.0F, 1.2F, 1.8F));
-        this.tasks.addTask(11, new EntityAIWatchClosest(this, EntityPlayer.class, 10.0F));
+	public EntityAerbunny(final World world)
+	{
+		super(world);
 
-        this.jumpHelper = new AerbunnyJumpHelper(this);
+		this.aiSit = new EntityAISit(this);
+		this.tasks.addTask(2, this.aiSit);
+		this.tasks.addTask(2, new EntityAIRestrictRain(this));
+		this.tasks.addTask(3, new EntityAIUnstuckBlueAercloud(this));
+		this.tasks.addTask(3, new EntityAIHideFromRain(this, 1.3D));
+		this.tasks.addTask(1, new EntityAISwimming(this));
+		this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
+		this.tasks.addTask(3, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
+		this.tasks.addTask(3, new EntityAIEggnogTempt(this, 2.2D));
+		this.tasks.addTask(5, new EntityAIFollowOwner(this, 1.5D, 5.0F, 2.0F));
+		this.tasks.addTask(6, new EntityAIWander(this, 1.0D, 10));
+		this.tasks.addTask(8, new EntityAIAvoidEntity<>(this, EntityPlayer.class, 12.0F, 1.2F, 1.8F));
+		this.tasks.addTask(11, new EntityAIWatchClosest(this, EntityPlayer.class, 10.0F));
 
-        this.spawnableBlock = BlocksAether.aether_grass;
+		this.jumpHelper = new AerbunnyJumpHelper(this);
 
-        this.setSize(0.65F, 0.65F);
+		this.spawnableBlock = BlocksAether.aether_grass;
 
-        this.setTamed(false);
-    }
+		this.setSize(0.65F, 0.65F);
 
-    protected void entityInit()
-    {
-        super.entityInit();
-        this.dataManager.register(COLLAR_COLOR, EnumDyeColor.BLUE.getDyeDamage());
-    }
+		this.setTamed(false);
+	}
 
-    @Override
-    public float getBlockPathWeight(BlockPos pos)
-    {
-        return this.world.getBlockState(pos.down()).getBlock() == BlocksAether.aether_grass ? 10.0F :
-                this.world.getLightBrightness(pos) - 0.5F;
-    }
+	@Override
+	protected void entityInit()
+	{
+		super.entityInit();
+		this.dataManager.register(COLLAR_COLOR, EnumDyeColor.BLUE.getDyeDamage());
+	}
 
-    @Override
-    protected void applyEntityAttributes()
-    {
-        super.applyEntityAttributes();
+	@Override
+	public float getBlockPathWeight(BlockPos pos)
+	{
+		return this.world.getBlockState(pos.down()).getBlock() == BlocksAether.aether_grass ? 10.0F :
+				this.world.getLightBrightness(pos) - 0.5F;
+	}
 
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
+	@Override
+	protected void applyEntityAttributes()
+	{
+		super.applyEntityAttributes();
 
-        this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(2.0F);
-        this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(-2.0F);
-        this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(0.0F);
-    }
+		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
 
-    @Override
-    public void onUpdate()
-    {
-        if (this.motionX != 0 || this.motionZ != 0) {
-            this.setJumping(true);
-        }
+		this.getEntityAttribute(DamageTypeAttributes.SLASH_DEFENSE_LEVEL).setBaseValue(2.0F);
+		this.getEntityAttribute(DamageTypeAttributes.IMPACT_DEFENSE_LEVEL).setBaseValue(-2.0F);
+		this.getEntityAttribute(DamageTypeAttributes.PIERCE_DEFENSE_LEVEL).setBaseValue(0.0F);
+	}
 
-        super.onUpdate();
+	@Override
+	public void onUpdate()
+	{
+		if (this.motionX != 0 || this.motionZ != 0)
+		{
+			this.setJumping(true);
+		}
 
-        if (this.world.isRemote) {
-            if (this.puffiness > 0) {
-                this.puffiness--;
-            }
+		super.onUpdate();
 
-            if (this.prevMotionY <= 0 && this.motionY > 0) {
-                final BlockPos pos = this.getPosition();
+		if (this.world.isRemote)
+		{
+			if (this.puffiness > 0)
+			{
+				this.puffiness--;
+			}
 
-                // Make sure we only spawn particles when it's jumping off a block
-                if (this.world.isBlockFullCube(pos.down())) {
-                    AetherCore.PROXY.spawnJumpParticles(this.world, this.posX, pos.getY(), this.posZ, 0.6D, 6);
-                }
+			if (this.prevMotionY <= 0 && this.motionY > 0)
+			{
+				final BlockPos pos = this.getPosition();
 
-                this.puffiness = 10;
-            }
+				// Make sure we only spawn particles when it's jumping off a block
+				if (this.world.isBlockFullCube(pos.down()))
+				{
+					AetherCore.PROXY.spawnJumpParticles(this.world, this.posX, pos.getY(), this.posZ, 0.6D, 6);
+				}
 
-            this.prevMotionY = this.motionY;
-        }
+				this.puffiness = 10;
+			}
 
-        if (this.isRiding())
-        {
-            final Entity entity = this.getRidingEntity();
+			this.prevMotionY = this.motionY;
+		}
 
-            if (!this.world.isRemote)
-            {
-                boolean isPlayer = entity instanceof EntityPlayer;
+		if (this.isRiding())
+		{
+			final Entity entity = this.getRidingEntity();
 
-                if (isPlayer && ((EntityPlayer) entity).isSpectator())
-                {
-                    NetworkingAether.sendPacketToWatching(new PacketAerbunnySetRiding(null, this), this, false);
+			if (!this.world.isRemote)
+			{
+				boolean isPlayer = entity instanceof EntityPlayer;
 
-                    this.dismountRidingEntity();
-                    this.setPosition(entity.posX, entity.posY + entity.getEyeHeight() + 0.5D, entity.posZ);
-                }
-                else if (!isPlayer || !(((EntityPlayer) entity).isSpectator()))
-                {
-                    if (entity.isSneaking()) {
-                        if (entity.onGround && !this.quickFall) {
-                            NetworkingAether.sendPacketToWatching(new PacketAerbunnySetRiding(null, this), this, false);
+				if (isPlayer && ((EntityPlayer) entity).isSpectator())
+				{
+					NetworkingAether.sendPacketToWatching(new PacketAerbunnySetRiding(null, this), this, false);
+					PlayerAether.getPlayer((EntityPlayer) entity).getModule(PlayerAerbunnyTrackerModule.class).detachAerbunny();
 
-                            this.dismountRidingEntity();
-                            this.setPosition(entity.posX, entity.posY + entity.getEyeHeight() + 0.5D, entity.posZ);
-                        } else {
-                            this.quickFall = true;
-                        }
-                    } else {
-                        this.quickFall = false;
-                    }
-                }
-            }
+					this.dismountRidingEntity();
+					this.setPosition(entity.posX, entity.posY + entity.getEyeHeight() + 0.5D, entity.posZ);
+				}
+				else if (!isPlayer || !(((EntityPlayer) entity).isSpectator()))
+				{
+					if (entity.isSneaking())
+					{
+						if (entity.onGround && !this.quickFall)
+						{
+							NetworkingAether.sendPacketToWatching(new PacketAerbunnySetRiding(null, this), this, false);
+							PlayerAether.getPlayer((EntityPlayer) entity).getModule(PlayerAerbunnyTrackerModule.class).detachAerbunny();
 
-            if (entity.motionY < 0) {
-                entity.motionY *= entity.isSneaking() ? 0.9D : 0.7D;
+							this.dismountRidingEntity();
+							this.setPosition(entity.posX, entity.posY + entity.getEyeHeight() + 0.5D, entity.posZ);
+						}
+						else
+						{
+							this.quickFall = true;
+						}
+					}
+					else
+					{
+						this.quickFall = false;
+					}
+				}
+			}
 
-                entity.fallDistance = 0;
-            }
+			if (entity.motionY < 0)
+			{
+				entity.motionY *= entity.isSneaking() ? 0.9D : 0.7D;
 
-            this.setRotation(entity.rotationYaw, entity.rotationPitch);
-        }
+				entity.fallDistance = 0;
+			}
 
-        if (this.motionY < -0.1D) {
-            this.motionY = -0.1D;
-        }
+			this.setRotation(entity.rotationYaw, entity.rotationPitch);
+		}
 
-        this.fallDistance = 0.0F;
-    }
+		if (this.motionY < -0.1D)
+		{
+			this.motionY = -0.1D;
+		}
 
-    @Override
-    public boolean processInteract(final EntityPlayer player, final EnumHand hand)
-    {
-        final ItemStack itemstack = player.getHeldItem(hand);
+		this.fallDistance = 0.0F;
+	}
 
-        if (this.isTamed())
-        {
-            if (!itemstack.isEmpty())
-            {
-                if (itemstack.getItem() instanceof ItemFood)
-                {
-                    ItemFood itemfood = (ItemFood)itemstack.getItem();
+	@Override
+	public boolean processInteract(final EntityPlayer player, final EnumHand hand)
+	{
+		final ItemStack itemstack = player.getHeldItem(hand);
 
-                    if (isHealingItem(itemstack) && this.getHealth() < this.getMaxHealth())
-                    {
-                        if (!player.capabilities.isCreativeMode)
-                        {
-                            itemstack.shrink(1);
-                        }
+		if (this.isTamed())
+		{
+			if (!itemstack.isEmpty())
+			{
+				if (itemstack.getItem() instanceof ItemFood)
+				{
+					ItemFood itemfood = (ItemFood) itemstack.getItem();
 
-                        this.heal((float) itemfood.getHealAmount(itemstack));
+					if (isHealingItem(itemstack) && this.getHealth() < this.getMaxHealth())
+					{
+						if (!player.capabilities.isCreativeMode)
+						{
+							itemstack.shrink(1);
+						}
 
-                        return true;
-                    }
-                }
+						this.heal((float) itemfood.getHealAmount(itemstack));
+
+						return true;
+					}
+				}
                 /*
                 else if (itemstack.getItem() == Items.DYE)
                 {
@@ -246,235 +269,256 @@ public class EntityAerbunny extends EntityTameable implements IDefenseLevelsHold
                     }
                 }
                  */
-            }
+			}
 
-            if (this.isOwner(player) && !this.world.isRemote && !this.isBreedingItem(itemstack) && !this.isTamingItem(itemstack) && !this.isHealingItem(itemstack) && player.isSneaking())
-            {
-                this.aiSit.setSitting(!this.isSitting());
-                this.isJumping = false;
-                this.navigator.clearPath();
-            }
-        }
-        else if (this.isTamingItem(itemstack))
-        {
-            if (!player.capabilities.isCreativeMode)
-            {
-                itemstack.shrink(1);
-            }
+			if (this.isOwner(player) && !this.world.isRemote && !this.isBreedingItem(itemstack) && !this.isTamingItem(itemstack) && !this
+					.isHealingItem(itemstack) && player.isSneaking())
+			{
+				this.aiSit.setSitting(!this.isSitting());
+				this.isJumping = false;
+				this.navigator.clearPath();
+			}
+		}
+		else if (this.isTamingItem(itemstack))
+		{
+			if (!player.capabilities.isCreativeMode)
+			{
+				itemstack.shrink(1);
+			}
 
-            if (!this.world.isRemote)
-            {
-                if (this.rand.nextInt(3) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player))
-                {
-                    this.setTamedBy(player);
-                    this.navigator.clearPath();
-                    this.aiSit.setSitting(true);
-                    this.setHealth(this.getMaxHealth());
-                    this.playTameEffect(true);
-                    this.world.setEntityState(this, (byte)7);
-                }
-                else
-                {
-                    this.playTameEffect(false);
-                    this.world.setEntityState(this, (byte)6);
-                }
-            }
+			if (!this.world.isRemote)
+			{
+				if (this.rand.nextInt(3) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player))
+				{
+					this.setTamedBy(player);
+					this.navigator.clearPath();
+					this.aiSit.setSitting(true);
+					this.setHealth(this.getMaxHealth());
+					this.playTameEffect(true);
+					this.world.setEntityState(this, (byte) 7);
+				}
+				else
+				{
+					this.playTameEffect(false);
+					this.world.setEntityState(this, (byte) 6);
+				}
+			}
 
-            return true;
-        }
+			return true;
+		}
 
-        if (!super.processInteract(player, hand) && !this.isBreedingItem(itemstack) && !this.isTamingItem(itemstack) && !this.isHealingItem(itemstack) && !player.isSneaking() && !this.isSitting())
-        {
-            if (!this.isRiding() && player.getPassengers().size() <= 0)
-            {
-                if (!this.world.isRemote)
-                {
-                    this.startRiding(player, true);
+		if (!super.processInteract(player, hand) && !this.isBreedingItem(itemstack) && !this.isTamingItem(itemstack) && !this.isHealingItem(itemstack)
+				&& !player.isSneaking() && !this.isSitting())
+		{
+			if (!this.isRiding() && player.getPassengers().size() <= 0)
+			{
+				if (!this.world.isRemote)
+				{
+					this.startRiding(player, true);
 
-                    NetworkingAether.sendPacketToWatching(new PacketAerbunnySetRiding(player, this), this, false);
-                }
+					NetworkingAether.sendPacketToWatching(new PacketAerbunnySetRiding(player, this), this, false);
+					PlayerAether.getPlayer(player).getModule(PlayerAerbunnyTrackerModule.class).attachAerbunny(this);
+				}
 
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 
-        return true;
-    }
+		return true;
+	}
 
-    @Override
-    public double getYOffset()
-    {
-        return this.getRidingEntity() != null ? 0.45D : 0.0D;
-    }
+	@Override
+	public void onDeath(DamageSource cause)
+	{
+		super.onDeath(cause);
 
-    @Override
-    protected ResourceLocation getLootTable()
-    {
-        return LootTablesAether.ENTITY_AERBUNNY;
-    }
+		if(this.isRiding())
+		{
+			PlayerAether.getPlayer((EntityPlayer) this.getRidingEntity()).getModule(PlayerAerbunnyTrackerModule.class).detachAerbunny();
+		}
+	}
 
-    @Override
-    protected SoundEvent getAmbientSound()
-    {
-        return SoundsAether.aerbunny_ambient;
-    }
+	@Override
+	public double getYOffset()
+	{
+		return this.getRidingEntity() != null ? 0.45D : 0.0D;
+	}
 
-    @Override
-    protected SoundEvent getHurtSound(final DamageSource src)
-    {
-        return SoundsAether.aerbunny_hurt;
-    }
+	@Override
+	protected ResourceLocation getLootTable()
+	{
+		return LootTablesAether.ENTITY_AERBUNNY;
+	}
 
-    @Override
-    protected SoundEvent getDeathSound()
-    {
-        return SoundsAether.aerbunny_death;
-    }
+	@Override
+	protected SoundEvent getAmbientSound()
+	{
+		return SoundsAether.aerbunny_ambient;
+	}
 
-    @Override
-    protected PathNavigate createNavigator(final World worldIn)
-    {
-        return new AetherNavigateGround(this, worldIn);
-    }
+	@Override
+	protected SoundEvent getHurtSound(final DamageSource src)
+	{
+		return SoundsAether.aerbunny_hurt;
+	}
 
-    @Override
-    public EntityAgeable createChild(final EntityAgeable ageable)
-    {
-        EntityAerbunny entityAerbunny = new EntityAerbunny(this.world);
-        UUID uuid = this.getOwnerId();
+	@Override
+	protected SoundEvent getDeathSound()
+	{
+		return SoundsAether.aerbunny_death;
+	}
 
-        if (uuid != null)
-        {
-            entityAerbunny.setOwnerId(uuid);
-            entityAerbunny.setTamed(true);
-        }
+	@Override
+	protected PathNavigate createNavigator(final World worldIn)
+	{
+		return new AetherNavigateGround(this, worldIn);
+	}
 
-        return entityAerbunny;
-    }
+	@Override
+	public EntityAgeable createChild(final EntityAgeable ageable)
+	{
+		EntityAerbunny entityAerbunny = new EntityAerbunny(this.world);
+		UUID uuid = this.getOwnerId();
 
-    @SideOnly(Side.CLIENT)
-    public int getPuffiness()
-    {
-        return this.puffiness;
-    }
+		if (uuid != null)
+		{
+			entityAerbunny.setOwnerId(uuid);
+			entityAerbunny.setTamed(true);
+		}
 
-    @SideOnly(Side.CLIENT)
-    public float getRotation()
-    {
-        if (this.motionY > 0) {
-            this.curRotation += MathHelper.clamp(this.curRotation / 10f, -4f, -2f);
-        } else if (this.motionY < 0) {
-            this.curRotation += MathHelper.clamp(this.curRotation / 10f, 2f, 4f);
-        }
+		return entityAerbunny;
+	}
 
-        if (this.onGround) {
-            this.curRotation = 0f;
-        }
+	@SideOnly(Side.CLIENT)
+	public int getPuffiness()
+	{
+		return this.puffiness;
+	}
 
-        this.curRotation = MathHelper.clamp(this.curRotation, -30f, 30f);
+	@SideOnly(Side.CLIENT)
+	public float getRotation()
+	{
+		if (this.motionY > 0)
+		{
+			this.curRotation += MathHelper.clamp(this.curRotation / 10f, -4f, -2f);
+		}
+		else if (this.motionY < 0)
+		{
+			this.curRotation += MathHelper.clamp(this.curRotation / 10f, 2f, 4f);
+		}
 
-        return this.curRotation;
-    }
+		if (this.onGround)
+		{
+			this.curRotation = 0f;
+		}
 
-    @Override
-    public int getVerticalFaceSpeed()
-    {
-        return this.isSitting() ? 20 : super.getVerticalFaceSpeed();
-    }
+		this.curRotation = MathHelper.clamp(this.curRotation, -30f, 30f);
 
-    @Override
-    public boolean canRiderInteract()
-    {
-        return true;
-    }
+		return this.curRotation;
+	}
 
-    @Override
-    public boolean isBreedingItem(@Nullable final ItemStack stack)
-    {
-        return stack != null && TEMPTATION_ITEMS.contains(stack.getItem());
-    }
+	@Override
+	public int getVerticalFaceSpeed()
+	{
+		return this.isSitting() ? 20 : super.getVerticalFaceSpeed();
+	}
 
-    public boolean isTamingItem(@Nullable final ItemStack stack)
-    {
-        return stack != null && TAMING_ITEMS.contains(stack.getItem());
-    }
+	@Override
+	public boolean canRiderInteract()
+	{
+		return true;
+	}
 
-    public boolean isHealingItem(@Nullable final ItemStack stack)
-    {
-        return stack != null && HEALING_ITEMS.contains(stack.getItem());
-    }
+	@Override
+	public boolean isBreedingItem(@Nullable final ItemStack stack)
+	{
+		return stack != null && TEMPTATION_ITEMS.contains(stack.getItem());
+	}
 
-    public EnumDyeColor getCollarColor()
-    {
-        return EnumDyeColor.byDyeDamage(this.dataManager.get(COLLAR_COLOR) & 15);
-    }
+	public boolean isTamingItem(@Nullable final ItemStack stack)
+	{
+		return stack != null && TAMING_ITEMS.contains(stack.getItem());
+	}
 
-    public void setCollarColor(EnumDyeColor collarColor)
-    {
-        this.dataManager.set(COLLAR_COLOR, collarColor.getDyeDamage());
-    }
+	public boolean isHealingItem(@Nullable final ItemStack stack)
+	{
+		return stack != null && HEALING_ITEMS.contains(stack.getItem());
+	}
 
-    @Override
-    public boolean isEntityInsideOpaqueBlock()
-    {
-        return !this.isRiding() && super.isEntityInsideOpaqueBlock();
-    }
+	public EnumDyeColor getCollarColor()
+	{
+		return EnumDyeColor.byDyeDamage(this.dataManager.get(COLLAR_COLOR) & 15);
+	}
 
-    public void writeEntityToNBT(NBTTagCompound compound)
-    {
-        super.writeEntityToNBT(compound);
-        compound.setByte("CollarColor", (byte)this.getCollarColor().getDyeDamage());
-    }
+	public void setCollarColor(EnumDyeColor collarColor)
+	{
+		this.dataManager.set(COLLAR_COLOR, collarColor.getDyeDamage());
+	}
 
-    public void readEntityFromNBT(NBTTagCompound compound)
-    {
-        super.readEntityFromNBT(compound);
+	@Override
+	public boolean isEntityInsideOpaqueBlock()
+	{
+		return !this.isRiding() && super.isEntityInsideOpaqueBlock();
+	}
 
-        if (compound.hasKey("CollarColor", 99))
-        {
-            this.setCollarColor(EnumDyeColor.byDyeDamage(compound.getByte("CollarColor")));
-        }
-    }
+	@Override
+	public void writeEntityToNBT(NBTTagCompound compound)
+	{
+		super.writeEntityToNBT(compound);
+		compound.setByte("CollarColor", (byte) this.getCollarColor().getDyeDamage());
+	}
 
-    private class AerbunnyJumpHelper extends EntityJumpHelper
-    {
-        private final EntityLiving entity;
+	@Override
+	public void readEntityFromNBT(NBTTagCompound compound)
+	{
+		super.readEntityFromNBT(compound);
 
-        public AerbunnyJumpHelper(final EntityAerbunny entity)
-        {
-            super(entity);
+		if (compound.hasKey("CollarColor", 99))
+		{
+			this.setCollarColor(EnumDyeColor.byDyeDamage(compound.getByte("CollarColor")));
+		}
+	}
 
-            this.entity = entity;
-        }
+	private class AerbunnyJumpHelper extends EntityJumpHelper
+	{
+		private final EntityLiving entity;
 
-        @Override
-        public void doJump()
-        {
-            this.entity.setJumping(true);
+		public AerbunnyJumpHelper(final EntityAerbunny entity)
+		{
+			super(entity);
 
-            if (this.entity.motionX == 0 && this.entity.motionZ == 0) {
-                this.isJumping = false;
-                this.entity.setJumping(false);
-            }
-        }
-    }
+			this.entity = entity;
+		}
 
-    private class AerbunnyNavigator extends AetherNavigateGround
-    {
-        public AerbunnyNavigator(final EntityLiving entity, final World world)
-        {
-            super(entity, world);
-        }
+		@Override
+		public void doJump()
+		{
+			this.entity.setJumping(true);
 
-        @Override
-        protected boolean canNavigate()
-        {
-            return !this.entity.isRiding();
-        }
-    }
+			if (this.entity.motionX == 0 && this.entity.motionZ == 0)
+			{
+				this.isJumping = false;
+				this.entity.setJumping(false);
+			}
+		}
+	}
+
+	private class AerbunnyNavigator extends AetherNavigateGround
+	{
+		public AerbunnyNavigator(final EntityLiving entity, final World world)
+		{
+			super(entity, world);
+		}
+
+		@Override
+		protected boolean canNavigate()
+		{
+			return !this.entity.isRiding();
+		}
+	}
 
 }

@@ -59,7 +59,16 @@ public class PlayerSwetTrackerModule extends PlayerAetherModule implements IPlay
 		{
 			swet.setPosition(this.getEntity().posX, this.getEntity().posY, this.getEntity().posZ);
 
-			this.getEntity().world.spawnEntity(swet);
+			//When the server loads the swet from nbt with read() it is created in dimension 0, because the player has not loaded yet
+			int dimension = this.getEntity().dimension;
+			if (swet.dimension != dimension)
+			{
+				swet.changeDimension(dimension);
+			}
+			else
+			{
+				this.getEntity().world.spawnEntity(swet);
+			}
 		}
 	}
 
@@ -77,7 +86,7 @@ public class PlayerSwetTrackerModule extends PlayerAetherModule implements IPlay
 
 		this.swets.add(EntityUtil.clone(swet));
 
-		swet.setDead();
+		this.getEntity().world.removeEntity(swet);
 	}
 
 	@Override
@@ -119,7 +128,7 @@ public class PlayerSwetTrackerModule extends PlayerAetherModule implements IPlay
 		{
 			final NBTTagCompound tag = new NBTTagCompound();
 
-			swet.writeEntityToNBT(tag);
+			swet.writeToNBT(tag);
 
 			list.appendTag(tag);
 		}
@@ -135,9 +144,10 @@ public class PlayerSwetTrackerModule extends PlayerAetherModule implements IPlay
 		for (int i = 0; i < list.tagCount(); i++)
 		{
 			final NBTTagCompound compound = list.getCompoundTagAt(i);
+			compound.removeTag("Dimension");
 
 			final EntitySwet swet = new EntitySwet(this.getEntity().getEntityWorld());
-			swet.readEntityFromNBT(compound);
+			swet.readFromNBT(compound);
 
 			this.swets.add(swet);
 		}

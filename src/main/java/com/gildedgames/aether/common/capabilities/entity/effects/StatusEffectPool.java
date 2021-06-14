@@ -10,6 +10,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 
@@ -259,6 +260,36 @@ public class StatusEffectPool implements IAetherStatusEffectPool
 		return this.activeEffects;
 	}
 
+	@Override
+	public void write(NBTTagCompound tag)
+	{
+		NBTTagList effects = new NBTTagList();
+
+		for (IAetherStatusEffects effect : getPool().values())
+		{
+			NBTTagCompound effectData = new NBTTagCompound();
+			effect.write(effectData);
+
+			effects.appendTag(effectData);
+		}
+
+		tag.setTag("statusEffects", effects);
+	}
+
+	@Override
+	public void read(NBTTagCompound tag)
+	{
+		NBTTagList effects = tag.getTagList("statusEffects", 10);
+
+		for (int i = 0; i < effects.tagCount(); i++)
+		{
+			NBTTagCompound compound = effects.getCompoundTagAt(i);
+
+			IAetherStatusEffects effect = createEffect(compound.getString("type"), livingBase);
+			effect.read(compound);
+		}
+	}
+
 	public static IAetherStatusEffectPool get(EntityLivingBase livingBase)
 	{
 		return livingBase.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
@@ -266,17 +297,13 @@ public class StatusEffectPool implements IAetherStatusEffectPool
 
 	public static class Storage implements Capability.IStorage<IAetherStatusEffectPool>
 	{
-
 		@Nullable
 		@Override
 		public NBTBase writeNBT(Capability<IAetherStatusEffectPool> capability, IAetherStatusEffectPool instance, EnumFacing side)
 		{
 			NBTTagCompound compound = new NBTTagCompound();
 
-			for (IAetherStatusEffects effect : instance.getPool().values())
-			{
-				effect.write(compound);
-			}
+			instance.write(compound);
 
 			return compound;
 		}
@@ -284,12 +311,7 @@ public class StatusEffectPool implements IAetherStatusEffectPool
 		@Override
 		public void readNBT(Capability<IAetherStatusEffectPool> capability, IAetherStatusEffectPool instance, EnumFacing side, NBTBase nbt)
 		{
-			NBTTagCompound tag = (NBTTagCompound) nbt;
-
-			for (IAetherStatusEffects effect : instance.getPool().values())
-			{
-				effect.read(tag);
-			}
+			instance.read((NBTTagCompound) nbt);
 		}
 	}
 

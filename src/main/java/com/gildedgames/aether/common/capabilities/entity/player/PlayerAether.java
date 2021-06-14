@@ -7,7 +7,6 @@ import com.gildedgames.aether.common.AetherCore;
 import com.gildedgames.aether.common.capabilities.entity.player.modules.*;
 import com.gildedgames.aether.common.network.NetworkingAether;
 import com.gildedgames.aether.common.network.packets.*;
-import com.gildedgames.aether.common.network.packets.effects.PacketStatusEffect;
 import com.gildedgames.aether.common.world.instances.necromancer_tower.NecromancerTowerInstance;
 import com.gildedgames.orbis.lib.util.io.NBTFunnel;
 import com.gildedgames.orbis.lib.util.mc.NBTHelper;
@@ -89,6 +88,7 @@ public class PlayerAether implements IPlayerAether
 		this.registerModule(new PlayerConditionModule(this));
 		this.registerModule(new PlayerSpecialEquipmentModule(this));
 		this.registerModule(new PlayerEffectsEquipmentModule(this));
+		this.registerModule(new PlayerAerbunnyTrackerModule(this));
 	}
 
 	@Nonnull
@@ -184,7 +184,13 @@ public class PlayerAether implements IPlayerAether
 
 	public void onLoggedOut()
 	{
+		this.getModule(PlayerAerbunnyTrackerModule.class).onLoggedOut();
 		this.getModule(PlayerSectorModule.class).releaseAll();
+	}
+
+	public void onLoggedIn()
+	{
+		this.getModule(PlayerAerbunnyTrackerModule.class).onLoggedIn();
 	}
 
 	/**
@@ -200,6 +206,7 @@ public class PlayerAether implements IPlayerAether
 		NetworkingAether.sendPacketToPlayer(new PacketCampfires(this.getModule(PlayerCampfiresModule.class).getCampfiresActivated()), player);
 		NetworkingAether.sendPacketToPlayer(new PacketPreventDropsInventories(this.getModule(PlayerPreventDropsModule.class)), player);
 		NetworkingAether.sendPacketToPlayer(new PacketPlayerConditionModule(this.getModule(PlayerConditionModule.class)), player);
+		NetworkingAether.sendPacketToPlayer(new PacketPlayerSwetTrackerModule(this.getModule(PlayerSwetTrackerModule.class)), player);
 		NetworkingAether.sendPacketToPlayer(new PacketEquipment(PlayerAether.getPlayer(player)), player);
 	}
 

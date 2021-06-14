@@ -18,9 +18,13 @@ import java.util.Collection;
 public abstract class StatusEffect implements IAetherStatusEffects
 {
 	protected final String NAME;
+
 	protected int REDUCTION_RATE;
+
 	protected int TIME_TILL_REDUCTION;
+
 	protected int ACTIVE_EFFECT_TIME;
+
 	protected int BUILDUP_SPEED;
 
 	private final AttributeModifier ATTRIBUTE_MODIFIER;
@@ -28,13 +32,21 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	protected boolean stopTimer;
 
 	protected int effectBuildup;
+
 	protected int effectTimer;
+
 	protected int decreaseTimer;
+
 	protected double effectResistance = 1.0D;
+
 	protected double tempEffectResistance = 0.0D;
+
 	protected IAetherStatusEffects.effectTypes effectType;
+
 	protected boolean isEffectApplied;
+
 	protected double activeEffectTimeModifier = 1.0D;
+
 	protected boolean isDirty;
 
 	protected int potentialBuildup;
@@ -62,9 +74,9 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	@Override
 	public void tick(EntityLivingBase livingBase)
 	{
-//		System.out.println(this.getEffectName() + " " + this.isDirty());
-//		System.out.println(this.getEffectName() + " " + this.getIsEffectApplied());
-//		System.out.println(this.getEffectName() + " " + this.getResistance());
+		//		System.out.println(this.getEffectName() + " " + this.isDirty());
+		//		System.out.println(this.getEffectName() + " " + this.getIsEffectApplied());
+		//		System.out.println(this.getEffectName() + " " + this.getResistance());
 
 		if (this.effectResistance > 1.0D)
 		{
@@ -111,7 +123,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 		if (this.effectBuildup >= 101)
 		{
 			this.isEffectApplied = true;
-//			AetherCore.LOGGER.info("Effect Applied : " + this.NAME + " to : " + this.livingEffected.getName());
+			//			AetherCore.LOGGER.info("Effect Applied : " + this.NAME + " to : " + this.livingEffected.getName());
 			this.effectBuildup = 100;
 			this.potentialBuildup = 0;
 		}
@@ -185,7 +197,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 
 			if (this.potentialBuildup >= 100)
 			{
-				this.potentialBuildup = 101;	// buildup is set to 101 for activation.
+				this.potentialBuildup = 101;    // buildup is set to 101 for activation.
 			}
 
 			this.effectTimer = 0;
@@ -229,7 +241,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 		{
 			if (this.effectBuildup > 0)
 			{
-				++ this.effectTimer;
+				++this.effectTimer;
 
 				if (!this.isEffectApplied)
 				{
@@ -306,7 +318,7 @@ public abstract class StatusEffect implements IAetherStatusEffects
 		this.decreaseTimer = 0;
 		this.markDirty();
 
-//		AetherCore.LOGGER.info("Effect Reset : " + this.NAME + " to : " + this.livingEffected.getName());
+		//		AetherCore.LOGGER.info("Effect Reset : " + this.NAME + " to : " + this.livingEffected.getName());
 	}
 
 	@Override
@@ -416,22 +428,23 @@ public abstract class StatusEffect implements IAetherStatusEffects
 	@Override
 	public void write(NBTTagCompound compound)
 	{
-		compound.setInteger(this.NAME + ".effectBuildup", this.effectBuildup);
-		compound.setBoolean(this.NAME + ".effectIsApplied", this.isEffectApplied);
-		compound.setInteger(this.NAME + ".effectTimer", this.effectTimer);
-		compound.setInteger(this.NAME + ".decreaseTimer", this.decreaseTimer);
-		compound.setDouble(this.NAME + ".effectActiveTimeModifier", this.activeEffectTimeModifier);
-		compound.setDouble(this.NAME + ".effectResistance", this.effectResistance);
+		compound.setString("type", this.NAME);
+		compound.setInteger("effectBuildup", this.effectBuildup);
+		compound.setBoolean("effectIsApplied", this.isEffectApplied);
+		compound.setInteger("effectTimer", this.effectTimer);
+		compound.setInteger("decreaseTimer", this.decreaseTimer);
+		compound.setDouble("effectActiveTimeModifier", this.activeEffectTimeModifier);
+		compound.setDouble("effectResistance", this.effectResistance);
 	}
 
 	@Override
 	public void read(NBTTagCompound compound)
 	{
-		this.effectBuildup = compound.getInteger(this.NAME + ".effectBuildup");
-		this.isEffectApplied = compound.getBoolean(this.NAME + ".effectIsApplied");
-		this.effectTimer = compound.getInteger(this.NAME + ".effectTimer");
-		this.decreaseTimer = compound.getInteger(this.NAME + ".decreaseTimer");
-		this.activeEffectTimeModifier =  compound.getInteger(this.NAME + ".effectActiveTimeModifier");
-		this.effectResistance = compound.getDouble(this.NAME + ".effectResistance");
+		this.effectBuildup = compound.getInteger("effectBuildup");
+		this.isEffectApplied = compound.getBoolean("effectIsApplied");
+		this.effectTimer = compound.getInteger("effectTimer");
+		this.decreaseTimer = compound.getInteger("decreaseTimer");
+		this.activeEffectTimeModifier = compound.getInteger("effectActiveTimeModifier");
+		this.effectResistance = compound.getDouble("effectResistance");
 	}
 }
