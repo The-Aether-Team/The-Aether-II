@@ -16,7 +16,6 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
@@ -42,13 +41,6 @@ public class PlayerAetherListener
 	{
 		final PlayerAether aePlayer = PlayerAether.getPlayer(event.player);
 		aePlayer.onLoggedOut();
-	}
-
-	@SubscribeEvent
-	public static void onPlayerLoggedIn(final PlayerLoggedInEvent event)
-	{
-		final PlayerAether aePlayer = PlayerAether.getPlayer(event.player);
-		aePlayer.onLoggedIn();
 	}
 
 	@SubscribeEvent

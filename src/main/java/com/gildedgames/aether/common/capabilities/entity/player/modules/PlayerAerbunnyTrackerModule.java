@@ -9,13 +9,14 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
+/**
+ * This Module is only used to recover Data on the Server side to respawn/reattach Aerbunnys after saving/logout. It is not synced to the Client.
+ */
 public class PlayerAerbunnyTrackerModule extends PlayerAetherModule implements IPlayerAetherModule.Serializable
 {
 	private EntityAerbunny aerbunny;
 
 	private NBTTagCompound bunnyData;
-
-	private boolean isOnline;
 
 	public PlayerAerbunnyTrackerModule(PlayerAether playerAether)
 	{
@@ -32,30 +33,16 @@ public class PlayerAerbunnyTrackerModule extends PlayerAetherModule implements I
 		this.aerbunny = null;
 	}
 
-	public EntityAerbunny getAttachedAerbunny()
-	{
-		return this.aerbunny;
-	}
-
-	public boolean isOnline()
-	{
-		return this.isOnline;
-	}
-
 	public void onLoggedOut()
 	{
 		if (this.aerbunny != null)
 		{
 			this.aerbunny.setDead();
 		}
-
-		this.isOnline = false;
 	}
 
 	public void onLoggedIn()
 	{
-		this.isOnline = true;
-
 		if (this.bunnyData != null)
 		{
 			this.aerbunny = new EntityAerbunny(this.getWorld());
