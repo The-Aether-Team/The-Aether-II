@@ -67,6 +67,7 @@ public class PacketDetachSwet implements IMessage
 				if (swet.getType() == message.type)
 				{
 					remove = swet;
+					break;
 				}
 			}
 

@@ -48,13 +48,16 @@ import java.util.Set;
 public class EntityKirrid extends EntitySheep implements IEntityMultiPart, IEntityEyesComponentProvider, IDefenseLevelsHolder
 {
 	protected Map<String, Float> defenseMap = Maps.newHashMap();
-	{{
-		this.defenseMap.put("Very Weak", 4.0F);
-		this.defenseMap.put("Weak", 2.0F);
-		this.defenseMap.put("Average", 0.0F);
-		this.defenseMap.put("Strong", -2.0F);
-		this.defenseMap.put("Very Strong", -4.0F);
-	}}
+
+	{
+		{
+			this.defenseMap.put("Very Weak", 4.0F);
+			this.defenseMap.put("Weak", 2.0F);
+			this.defenseMap.put("Average", 0.0F);
+			this.defenseMap.put("Strong", -2.0F);
+			this.defenseMap.put("Very Strong", -4.0F);
+		}
+	}
 
 	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(ItemsAether.valkyrie_wings);
 
@@ -69,12 +72,12 @@ public class EntityKirrid extends EntitySheep implements IEntityMultiPart, IEnti
 	private final IEntityEyesComponent eyes = new EntityEyesComponent(this);
 
 	protected EntityAIEatAetherGrass entityAIEatGrass;
+
 	private int kirridTimer;
 
 	public EntityKirrid(World world)
 	{
 		super(world);
-
 
 		this.setSize(1.0F, 1.5F);
 
@@ -102,6 +105,7 @@ public class EntityKirrid extends EntitySheep implements IEntityMultiPart, IEnti
 		this.tasks.addTask(9, this.entityAIEatGrass);
 	}
 
+	@Override
 	protected void updateAITasks()
 	{
 		this.kirridTimer = this.entityAIEatGrass.getTimer();
@@ -272,6 +276,7 @@ public class EntityKirrid extends EntitySheep implements IEntityMultiPart, IEnti
 		return LootTablesAether.ENTITY_KIRRID;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void handleStatusUpdate(byte id)
 	{
@@ -304,6 +309,7 @@ public class EntityKirrid extends EntitySheep implements IEntityMultiPart, IEnti
 		return ret;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public float getHeadRotationPointY(float p_70894_1_)
 	{
@@ -317,21 +323,22 @@ public class EntityKirrid extends EntitySheep implements IEntityMultiPart, IEnti
 		}
 		else
 		{
-			return this.kirridTimer < 4 ? ((float)this.kirridTimer - p_70894_1_) / 4.0F : -((float)(this.kirridTimer - 40) - p_70894_1_) / 4.0F;
+			return this.kirridTimer < 4 ? ((float) this.kirridTimer - p_70894_1_) / 4.0F : -((float) (this.kirridTimer - 40) - p_70894_1_) / 4.0F;
 		}
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public float getHeadRotationAngleX(float p_70890_1_)
 	{
 		if (this.kirridTimer > 4 && this.kirridTimer <= 36)
 		{
-			float f = ((float)(this.kirridTimer - 4) - p_70890_1_) / 32.0F;
-			return ((float)Math.PI / 5F) + ((float)Math.PI * 7F / 100F) * MathHelper.sin(f * 28.7F);
+			float f = ((float) (this.kirridTimer - 4) - p_70890_1_) / 32.0F;
+			return ((float) Math.PI / 5F) + ((float) Math.PI * 7F / 100F) * MathHelper.sin(f * 28.7F);
 		}
 		else
 		{
-			return this.kirridTimer > 0 ? ((float)Math.PI / 5F) : this.rotationPitch * 0.017453292F;
+			return this.kirridTimer > 0 ? ((float) Math.PI / 5F) : this.rotationPitch * 0.017453292F;
 		}
 	}
 

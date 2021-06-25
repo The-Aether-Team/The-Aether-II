@@ -9,18 +9,16 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class PacketStatusEffect implements IMessage
 {
-
-	private ArrayList<StatusEffectData> statusEffectData;
+	IAetherStatusEffectPool capability;
 	private int entityID;
-	private int numberOfDirtyEffects;
+	private NBTTagCompound tag;
 
 	public PacketStatusEffect()
 	{
@@ -31,109 +29,36 @@ public class PacketStatusEffect implements IMessage
 	{
 		this.entityID = entity.getEntityId();
 
-		HashMap<String, IAetherStatusEffects> map =  entity.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null).getPool();
-		this.statusEffectData = new ArrayList<>();
-
-		for (IAetherStatusEffects effect : map.values())
-		{
-			if (effect.isDirty())
-			{
-				this.statusEffectData.add(new StatusEffectData(effect.getEffectType().numericValue, effect.getBuildup(), effect.getIsEffectApplied(), effect.calculateResistances()));
-				this.numberOfDirtyEffects++;
-			}
-		}
+		capability =  entity.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
 	}
 
 	@Override
 	public void fromBytes(ByteBuf buf)
 	{
-		this.numberOfDirtyEffects = buf.readByte();
-		this.entityID = buf.readInt();
-
-		if (this.statusEffectData == null)
-		{
-			this.statusEffectData = new ArrayList<>();
-		}
-		for (int i = 0; i < this.numberOfDirtyEffects; i++)
-		{
-			int effectId = buf.readByte();
-			int effectBuildup = buf.readByte();
-			boolean isEffectApplied = buf.readBoolean();
-			double resistance = buf.readDouble();
-
-			this.statusEffectData.add(new StatusEffectData(effectId,effectBuildup,isEffectApplied, resistance));
-		}
+		this.tag = ByteBufUtils.readTag(buf);
 	}
 
 	@Override
 	public void toBytes(ByteBuf buf)
 	{
-		buf.writeByte(this.numberOfDirtyEffects);
-		buf.writeInt(this.entityID);
+		NBTTagCompound tag = new NBTTagCompound();
+		tag.setInteger("entityID", entityID);
 
-		for (StatusEffectData data : this.statusEffectData)
+		NBTTagList effects = new NBTTagList();
+
+		for (IAetherStatusEffects effect : capability.getPool().values())
 		{
-			buf.writeByte(data.effectId);
-			buf.writeByte(data.buildup);
-			buf.writeBoolean(data.isApplied);
-			buf.writeDouble(data.resistance);
+			if(!effect.isDirty())
+				continue;
+
+			NBTTagCompound effectData = new NBTTagCompound();
+			effect.write(effectData);
+
+			effects.appendTag(effectData);
 		}
-	}
+		tag.setTag("statusEffects", effects);
 
-	private class StatusEffectData
-	{
-		private final int effectId;
-		private final int buildup;
-		private final boolean isApplied;
-		private final double resistance;
-
-		StatusEffectData(int effectTypeId, int buildup, boolean isApplied, double resistance)
-		{
-			this.effectId = effectTypeId;
-			this.buildup = buildup;
-			this.isApplied = isApplied;
-			this.resistance = resistance;
-		}
-	}
-
-	/**
-	 * Only should be used for small doubles with only 1 decimal place.
-	 * Has not been tested for values outside of the bounds 0.0 - 2.0
-	 */
-	public static class SmallDoubleByteConverter
-	{
-		public static byte convertDoubleToByte(double d)
-		{
-			int returnByte;
-			int base, decimal;
-
-			base = MathHelper.floor(d);
-			decimal = (int)((d - base) * 10);
-
-			returnByte = decimal;
-			returnByte = (returnByte << 4);
-			returnByte = returnByte | base;
-
-			return (byte)returnByte;
-		}
-
-		public static double convertByteToDouble(byte b)
-		{
-			int base, decimal;
-			double retVal;
-
-			base = b;
-			base = base & 0xf;
-
-			decimal = b;
-			decimal = decimal >> 4;
-			decimal = decimal & 0xf;
-
-			retVal = (decimal * 0.1);
-			retVal += base;
-
-			return retVal;
-		}
+		ByteBufUtils.writeTag(buf, tag);
 	}
 
 	public static class HandlerClient extends MessageHandlerClient<PacketStatusEffect, IMessage>
@@ -142,11 +67,12 @@ public class PacketStatusEffect implements IMessage
 		@Override
 		public IMessage onMessage(PacketStatusEffect message, EntityPlayer player)
 		{
-			if (player == null || player.world == null)
+			if (player == null || player.world == null || message.tag == null)
 			{
 				return null;
 			}
 
+			message.entityID = message.tag.getInteger("entityID");
 			final Entity entity = player.world.getEntityByID(message.entityID);
 
 			if (!(entity instanceof EntityLivingBase))
@@ -157,19 +83,18 @@ public class PacketStatusEffect implements IMessage
 			}
 
 			final EntityLivingBase entityLiving = (EntityLivingBase) entity;
-
 			IAetherStatusEffectPool map = entityLiving.getCapability(CapabilitiesAether.STATUS_EFFECT_POOL, null);
 
 			if (map != null)
 			{
-				if (message.statusEffectData != null)
+				NBTTagList effects = message.tag.getTagList("statusEffects", 10);
+
+				for(int i = 0; i < effects.tagCount(); i++)
 				{
-					for (StatusEffectData data : message.statusEffectData)
-					{
-						IAetherStatusEffects effect = map.createEffect(IAetherStatusEffects.effectTypes.getEffectFromNumericValue(data.effectId).name, entityLiving);
-						effect.setBuildup(data.buildup);
-						effect.setApplied(data.isApplied);
-					}
+					NBTTagCompound compound = effects.getCompoundTagAt(i);
+
+					IAetherStatusEffects effect = map.createEffect(compound.getString("type"), entityLiving);
+					effect.read(compound);
 				}
 			}
 

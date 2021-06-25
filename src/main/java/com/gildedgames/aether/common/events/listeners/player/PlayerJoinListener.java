@@ -24,6 +24,7 @@ public class PlayerJoinListener
 		NetworkingAether.sendPacketToPlayer(new PacketRequestClientInfo(), (EntityPlayerMP) event.player);
 
 		final PlayerAether aePlayer = PlayerAether.getPlayer(event.player);
+		aePlayer.onLoggedIn();
 		aePlayer.sendFullUpdate();
 
 		IRecipe recipe = ForgeRegistries.RECIPES.getValue(TELEPORTER_RECIPE);

@@ -1,6 +1,7 @@
 package com.gildedgames.aether.api.entity.effects;
 
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.nbt.NBTTagCompound;
 
 import javax.annotation.Nonnegative;
 import java.util.HashMap;
@@ -51,7 +52,7 @@ public interface IAetherStatusEffectPool
 	 * 																												buildup*2 additional buildup.
 	 * Decreasing resistance to an effect will raise that Entity's resistance. (buildup * 0.0resistance) = 0 additional buildup.
 	 * @param effectType The effect to apply resistance to.
-	 * @param addResistance	The amount of resistance to add to effect (can be negative, to lower resistance number).
+	 * @param addResistance    The amount of resistance to add to effect (can be negative, to lower resistance number).
 	 */
 	void addResistanceToEffect(IAetherStatusEffects.effectTypes effectType, double addResistance);
 
@@ -107,4 +108,16 @@ public interface IAetherStatusEffectPool
 	IAetherStatusEffects createEffect(String name, EntityLivingBase entity);
 
 	HashMap<String, IAetherStatusEffects> getPool();
+
+	/**
+	 * Writes this capability to {@param tag}.
+	 * @param tag The {@link NBTTagCompound} to write to
+	 */
+	void write(NBTTagCompound tag);
+
+	/**
+	 * Updates this capability from {@param tag}.
+	 * @param tag The {@link NBTTagCompound} to read from
+	 */
+	void read(NBTTagCompound tag);
 }
