@@ -1,7 +1,7 @@
 ![Banner image](doc/banner.webp)
 
 # The Aether II
-[![Code license (LGPL v3.0)](https://img.shields.io/badge/code%20license-GNU%20GPLv3-green.svg?style=flat-square)](https://www.gnu.org/licenses/lgpl-3.0.en.html)
+[![Code license (LGPL v3.0)](https://img.shields.io/badge/code%20license-LGPL%20v3.0-green.svg?style=flat-square)](https://www.gnu.org/licenses/lgpl-3.0.en.html)
 [![Asset license (CC BY-SA 4.0)](https://img.shields.io/badge/asset%20license-CC%20BY--SA%204.0-blue.svg?style=flat-square)](https://creativecommons.org/licenses/by-sa/4.0/)
 [![CurseForge downloads](http://cf.way2muchnoise.eu/223796.svg)](https://www.curseforge.com/minecraft/mc-mods/the-aether-ii)
 [![Gilded-Games](https://circleci.com/gh/Gilded-Games/The-Aether-II/tree/1.12.2.svg?style=shield)](https://app.circleci.com/pipelines/github/Gilded-Games/The-Aether-II?branch=1.12.2)
@@ -50,7 +50,7 @@ Not sure what to help with? Take a look at our issue tracker for some ideas! [He
 ## :scroll: License information
 If you're wanting to create a gameplay video/review, extension or addon, parody, or any other fan work of your own for the Aether, go for it! We love seeing the content our community creates, and we hope to make it as welcoming as possible for everyone. We ask however that if you are using code or assets from the Aether II project that you adhere to the licenses below, and that you please don't advertise using our brand. If you're interested in sponsoring the Aether project or Gilded Games or wish to otherwise use our brand, please [contact us](mailto:support@gildedgames.com).
 
-The source code of the Aether II for Minecraft 1.8+ is under the [GNU GPL v3](https://www.gnu.org/licenses/gpl-3.0.en.html) license. All assets of the Aether II for Minecraft 1.8+ (found in the [resources folder](https://github.com/Gilded-Games/The-Aether-II/tree/1.12.2/src/main/resources/assets)) and [Wiki contributions](https://github.com/Gilded-Games/The-Aether-II/wiki) are under the [CC BY-SA 4.0 license](https://creativecommons.org/licenses/by-sa/4.0/) unless otherwise stated. Previous versions of the Aether are not licensed freely and all rights are reserved to them by Gilded Games.
+The source code of the Aether II for Minecraft 1.8+ is under the [LGPL v3.0](https://www.gnu.org/licenses/lgpl-3.0.en.html) license. All assets of the Aether II for Minecraft 1.8+ (found in the [resources folder](https://github.com/Gilded-Games/The-Aether-II/tree/1.12.2/src/main/resources/assets)) and [Wiki contributions](https://github.com/Gilded-Games/The-Aether-II/wiki) are under the [CC BY-SA 4.0 license](https://creativecommons.org/licenses/by-sa/4.0/) unless otherwise stated. Previous versions of the Aether are not licensed freely and all rights are reserved to them by Gilded Games.
 
 ## :star2: Special mentions
 ### :speech_balloon: Translations
