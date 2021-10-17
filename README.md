@@ -1,7 +1,7 @@
 ![Banner image](doc/banner.webp)
 
 # The Aether II
-[![Code license (GNU GPL 3.0)](https://img.shields.io/badge/code%20license-GNU%20GPLv3-green.svg?style=flat-square)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+[![Code license (LGPL v3.0)](https://img.shields.io/badge/code%20license-GNU%20GPLv3-green.svg?style=flat-square)](https://www.gnu.org/licenses/lgpl-3.0.en.html)
 [![Asset license (CC BY-SA 4.0)](https://img.shields.io/badge/asset%20license-CC%20BY--SA%204.0-blue.svg?style=flat-square)](https://creativecommons.org/licenses/by-sa/4.0/)
 [![CurseForge downloads](http://cf.way2muchnoise.eu/223796.svg)](https://www.curseforge.com/minecraft/mc-mods/the-aether-ii)
 [![Gilded-Games](https://circleci.com/gh/Gilded-Games/The-Aether-II/tree/1.12.2.svg?style=shield)](https://app.circleci.com/pipelines/github/Gilded-Games/The-Aether-II?branch=1.12.2)
