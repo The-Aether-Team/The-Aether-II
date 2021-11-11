@@ -14,13 +14,10 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'maven-publish'
 
-def isPhosphorSubmodule = findProject(":Phosphor") != null
-
 repositories {
     mavenCentral()
 
     maven { url = 'https://repo.spongepowered.org/maven' }
-    maven { url = 'https://repo.gildedgames.com/maven' }
 }
 
 configurations {
@@ -29,13 +26,6 @@ configurations {
 }
 
 dependencies {
-    if (isPhosphorSubmodule) {
-        runtime project(':phosphor')
-    } else {
-        runtime "me.jellysquid.mods:phosphor:${phosphor_version}:dev"
-        shaded  "me.jellysquid.mods:phosphor:${phosphor_version}:universal"
-    }
-
     compile project(":orbis-lib")
     shaded project(":orbis-lib")
 }
@@ -97,9 +87,7 @@ minecraft {
 
     runDir = "run"
 
-    def plugin = "me.jellysquid.mods.phosphor.core.PhosphorFMLLoadingPlugin"
-
-    clientJvmArgs = serverJvmArgs += "-Dfml.coreMods.load=$plugin"
+    clientJvmArgs = serverJvmArgs
 }
 
 processResources {
