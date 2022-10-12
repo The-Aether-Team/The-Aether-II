@@ -1,7 +1,0 @@
-{
-	"parent": "block/cube_column",
-	"textures": {
-		"end": "aether:blocks/candy_cane_top",
-		"side": "aether:blocks/candy_cane_side"
-	}
-}

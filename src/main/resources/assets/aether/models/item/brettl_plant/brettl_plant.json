@@ -1,6 +1,0 @@
-{
-	"parent": "item/generated",
-	"textures": {
-		"layer0": "aether:blocks/brettl_plant/brettl_plant_top_g"
-	}
-}

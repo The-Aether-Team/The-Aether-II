@@ -1,6 +1,0 @@
-{
-	"parent": "block/cube_all",
-	"textures": {
-		"all": "aether:blocks/light_skyroot_planks/wisproot_tiles_small"
-	}
-}

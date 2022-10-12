@@ -1,7 +1,0 @@
-{
-	"parent": "block/cube_column",
-	"textures": {
-		"end": "aether:blocks/sentrystone_bricks/sentrystone_base_top_lit",
-		"side": "aether:blocks/sentrystone_bricks/sentrystone_capstone_pillar_lit"
-	}
-}

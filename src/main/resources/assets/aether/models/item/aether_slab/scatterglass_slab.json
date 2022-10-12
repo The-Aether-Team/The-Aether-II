@@ -1,8 +1,0 @@
-{
-	"parent": "block/half_slab",
-	"textures": {
-		"bottom": "aether:blocks/scatterglass",
-		"top": "aether:blocks/scatterglass",
-		"side": "aether:blocks/scatterglass"
-	}
-}

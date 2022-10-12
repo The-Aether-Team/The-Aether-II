@@ -1,6 +1,0 @@
-{
-	"parent": "block/tinted_cross",
-	"textures": {
-		"cross": "aether:blocks/brettl_plant/brettl_plant_mid"
-	}
-}

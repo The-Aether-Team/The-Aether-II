@@ -1,6 +1,0 @@
-{
-	"parent": "aether:block/greatroot_fence_gate/greatroot_fence_gate_closed",
-	"textures": {
-		"texture": "aether:blocks/dark_skyroot_planks/greatroot_planks"
-	}
-}

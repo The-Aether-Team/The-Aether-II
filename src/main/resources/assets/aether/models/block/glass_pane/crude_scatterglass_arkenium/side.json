@@ -1,7 +1,0 @@
-{
-	"parent": "block/glass_pane_side",
-	"textures": {
-		"edge": "aether:blocks/arkenium_frame_crude_scatterglass_pane_top",
-		"pane": "aether:blocks/arkenium_frame_crude_scatterglass"
-	}
-}

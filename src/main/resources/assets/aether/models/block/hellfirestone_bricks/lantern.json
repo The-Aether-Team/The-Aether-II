@@ -1,7 +1,0 @@
-{
-	"parent": "block/cube_column",
-	"textures": {
-		"end": "aether:blocks/hellfirestone_bricks/hellfirestone_lantern",
-		"side": "aether:blocks/hellfirestone_bricks/hellfirestone_lantern"
-	}
-}

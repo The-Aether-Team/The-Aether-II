@@ -1,7 +1,0 @@
-{
-	"parent": "block/cube_column",
-	"textures": {
-		"end": "aether:blocks/agiosite_bricks/agiosite_flagstones",
-		"side": "aether:blocks/agiosite_bricks/agiosite_flagstones"
-	}
-}

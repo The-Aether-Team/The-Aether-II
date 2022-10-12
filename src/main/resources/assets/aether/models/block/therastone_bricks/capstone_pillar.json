@@ -1,7 +1,0 @@
-{
-	"parent": "block/cube_column",
-	"textures": {
-		"end": "aether:blocks/therastone_bricks/therastone_keystone",
-		"side": "aether:blocks/therastone_bricks/therastone_capstone_pillar"
-	}
-}

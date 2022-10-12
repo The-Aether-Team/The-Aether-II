@@ -1,38 +1,30 @@
-# Compiled Java
-#zephyroos
-*.class
-
-# Eclipse
+# eclipse
+bin
+*.launch
+.settings
+.metadata
 .classpath
 .project
-.settings
 
-# IntelliJ IDEA
-*.iml
+# idea
+out
 *.ipr
 *.iws
+*.iml
 .idea
-/out
-/classes
-/libs
-/logs
 
-# Gradle
+# gradle
+build
 .gradle
-/build
-/bin
-/run
 
-# Gradle Wrapper
-/gradle/wrapper/dists
+# other
+eclipse
+run
+__pycache__
+logs
 
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
-
-# Folder config file
-Desktop.ini
-
-# JVM crash logs
-hs_err_pid*.log
-replay_pid*.log
+# Files from Forge MDK
+forge*changelog.txt
+.vscode/
+/Users/
+src/generated/resources/.cache/cache

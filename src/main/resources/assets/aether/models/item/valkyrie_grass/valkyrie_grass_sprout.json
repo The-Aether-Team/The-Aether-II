@@ -1,6 +1,0 @@
-{
-	"parent": "item/generated",
-	"textures": {
-		"layer0": "aether:blocks/valkyrie_grass/valkyrie_grass_0"
-	}
-}

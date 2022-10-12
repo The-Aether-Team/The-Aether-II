@@ -1,7 +1,0 @@
-{
-	"parent": "aether:block/aether_wall/special_models/wall_inventory_special_top",
-	"textures": {
-		"wall": "aether:blocks/candy_cane_side",
-		"top": "aether:blocks/candy_cane_top"
-	}
-}

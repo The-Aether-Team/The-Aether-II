@@ -1,50 +1,98 @@
-# Java Gradle CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-java/ for more details
-#
-version: 2
+version: 2.1
+
+orbs:
+  gradle: circleci/gradle@3.0.0
+
+parameters:
+  artifact-name:
+    type: string
+    default: aether_ii
+
 jobs:
   build:
-    docker:
-      # specify the version you desire here
-      - image: cimg/openjdk:8.0.282
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
-
-    working_directory: ~/repo
-
+    machine:
+      image: ubuntu-2204:2022.07.1
+    resource_class: large
     environment:
-      # Customize the JVM maximum heap limit
-      JVM_OPTS: -Xmx3200m
-      TERM: dumb
+      _JAVA_OPTIONS: -Xmx9600m
+      GRADLE_OPTS: -Dorg.gradle.daemon=false
+    steps:
+      - setup
+      - run:
+          name: Remove sources before persist
+          command: |
+            cd ~/project/build/libs
+            rm *-sources.jar
+      - persist_to_workspace:
+          root: ~/project/build/libs
+          paths:
+            - << pipeline.parameters.artifact-name >>-*.jar
+      - run:
+          name: Publish artifact link to Discord
+          command: |
+            artifact_path=$(curl --request GET --url https://circleci.com/api/v2/project/gh/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/$CIRCLE_BUILD_NUM/artifacts --header 'authorization: Basic REPLACE_BASIC_AUTH' | jq -r '.items[1].path')
+            if [ -z "${WEBHOOK_URL}" ]; then
+              echo "NO DISCORD WEBHOOK SET"
+              echo "Please input your DISCORD_WEBHOOK value either in the settings for this project, or as a parameter for this orb."
+              exit 1
+            else
+              curl -X POST -H 'Content-type: application/json' \
+                --data \
+                  "{ \
+                    \"embeds\": [{ \
+                      \"title\": \"$CIRCLE_BRANCH\", \
+                      \"description\": \"The latest CircleCI job has completed, a direct download link for the build can be found here: https://output.circle-artifacts.com/output/job/${CIRCLE_WORKFLOW_JOB_ID}/artifacts/${CIRCLE_NODE_INDEX}/${artifact_path}\", \
+                      \"color\": \"301898\", \
+                      \"fields\": [ \
+                        { \
+                          \"name\": \"Project\", \
+                          \"value\": \"$CIRCLE_PROJECT_REPONAME\", \
+                          \"inline\": true \
+                        }, \
+                        { \
+                          \"name\": \"Job Number\", \
+                          \"value\": \"$CIRCLE_BUILD_NUM\", \
+                          \"inline\": true \
+                        } \
+                      ] \
+                    }] \
+                  }" ${WEBHOOK_URL}
+            fi
 
+  publish:
+    machine:
+      image: ubuntu-2204:2022.07.1
+    resource_class: large
+    environment:
+      _JAVA_OPTIONS: -Xmx3200m
+      GRADLE_OPTS: -Dorg.gradle.daemon=false
+    steps:
+      - setup
+      - run: gradle publish
+
+commands:
+  setup:
     steps:
       - checkout
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - v2-dependencies-{{ checksum "build.gradle" }}
-            # fallback to using the latest cache if no exact match is found
-            - v2-dependencies-
-
-      - run: git clone -b master https://github.com/Gilded-Games/OrbisLib lib/orbis-lib
-      - run: ./gradlew -p lib/orbis-lib build
+      - gradle/with_cache:
+          steps:
+            - run: gradle build --build-cache
       - store_artifacts:
-              path: ~/repo/lib/orbis-lib/build/libs/orbis-lib-1.12.2-0.2.0-SNAPSHOT-universal.jar
+          path: ~/project/build/libs
 
-      - run: chmod +x gradlew
-
-      - run: ./gradlew dependencies
-
-      - save_cache:
-          paths:
-            - ~/repo/.gradle
-          key: v2-dependencies-{{ checksum "build.gradle" }}
-
-      - run: ./gradlew test
-      - run: ./gradlew build
-      - store_artifacts:
-              path: ~/repo/build/libs
+workflows:
+  build:
+    jobs:
+      - build
+  publish:
+    jobs:
+      - publish:
+          context:
+            - maven
+          filters:
+            tags:
+              only:
+                - /.*/
+            branches:
+              ignore:
+                - /.*/

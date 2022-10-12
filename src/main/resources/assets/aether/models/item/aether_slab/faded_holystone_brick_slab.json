@@ -1,8 +1,0 @@
-{
-	"parent": "block/half_slab",
-	"textures": {
-		"bottom": "aether:blocks/faded_holystone_brick",
-		"top": "aether:blocks/faded_holystone_brick",
-		"side": "aether:blocks/faded_holystone_brick"
-	}
-}

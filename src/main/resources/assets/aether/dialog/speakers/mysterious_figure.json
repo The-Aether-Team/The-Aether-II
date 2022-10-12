@@ -1,9 +1,0 @@
-{
-	"name": "entity.aether.mysterious_figure.name",
-	"slides": {
-		"default": {
-			"render": "static",
-			"data": { "resource": "aether:textures/dialog/mysterious_figure/mysterious_figure_neutral.png", "scale": "1.6", "width": "110", "height": "98" }
-		}
-	}
-}

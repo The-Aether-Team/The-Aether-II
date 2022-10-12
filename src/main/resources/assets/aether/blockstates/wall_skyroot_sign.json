@@ -1,9 +1,0 @@
-{
-	"forge_marker": 1,
-	"variants": {
-		"normal": {
-			"model": "aether:tesr",
-			"textures": { "particle": "aether:blocks/skyroot_planks/skyroot_planks" }
-		}
-	}
-}

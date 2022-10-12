@@ -1,7 +1,0 @@
-{
-	"parent": "aether:block/tinted_crossbase",
-	"textures": {
-		"cross": "aether:blocks/tall_grass/short_snowy",
-		"texture": "aether:blocks/highlands_snow"
-	}
-}

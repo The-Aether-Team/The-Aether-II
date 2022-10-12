@@ -1,6 +1,0 @@
-{
-  "parent": "aether:item/crossbow/holystone_crossbow",
-  "textures": {
-    "layer0": "aether:items/weapons/crossbow/holystone/loading3"
-  }
-}

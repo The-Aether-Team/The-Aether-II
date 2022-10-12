@@ -1,6 +1,0 @@
-{
-	"variants": {
-		"powered=false": { "model": "aether:greatroot_pressure_plate/greatroot_pressure_plate_up" },
-		"powered=true": { "model": "aether:greatroot_pressure_plate/greatroot_pressure_plate_down" }
-	}
-}

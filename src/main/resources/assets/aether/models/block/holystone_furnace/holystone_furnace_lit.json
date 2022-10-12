@@ -1,9 +1,0 @@
-{
-	"parent": "block/furnace",
-	"textures": {
-		"top": "aether:blocks/holystone_furnace/holystone_furnace_top",
-		"front": "aether:blocks/holystone_furnace/holystone_furnace_front_on",
-		"side": "aether:blocks/holystone_furnace/holystone_furnace_side",
-		"particle": "aether:blocks/holystone/holystone"
-	}
-}

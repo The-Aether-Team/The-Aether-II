@@ -1,6 +1,0 @@
-{
-  "parent": "block/wall_side",
-  "textures": {
-    "wall": "aether:blocks/logs/therawood_log_side"
-  }
-}

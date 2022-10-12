@@ -1,8 +1,0 @@
-{
-  "parent": "block/half_slab",
-  "textures": {
-    "bottom": "aether:blocks/hellfirestone_bricks/hellfirestone_brick",
-    "top": "aether:blocks/hellfirestone_bricks/hellfirestone_brick",
-    "side": "aether:blocks/hellfirestone_bricks/hellfirestone_brick"
-  }
-}

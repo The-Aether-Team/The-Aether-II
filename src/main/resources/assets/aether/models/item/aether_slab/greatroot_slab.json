@@ -1,8 +1,0 @@
-{
-	"parent": "block/half_slab",
-	"textures": {
-		"bottom": "aether:blocks/dark_skyroot_planks/greatroot_planks",
-		"top": "aether:blocks/dark_skyroot_planks/greatroot_planks",
-		"side": "aether:blocks/dark_skyroot_planks/greatroot_planks"
-	}
-}

@@ -1,7 +1,0 @@
-{
-	"parent": "block/door_bottom",
-	"textures": {
-		"bottom": "aether:blocks/doors/skyroot_door_lower",
-		"top": "aether:blocks/doors/skyroot_door_upper"
-	}
-}

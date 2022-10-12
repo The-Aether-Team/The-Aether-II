@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "aether:items/consumables/moa_feed/moa_feed_blueberries"
-  }
-}

@@ -1,7 +1,0 @@
-{
-	"parent": "aether:block/crossbase",
-	"textures": {
-		"cross": "aether:blocks/flowers/barkshroom",
-		"texture": "aether:blocks/highlands_snow"
-	}
-}

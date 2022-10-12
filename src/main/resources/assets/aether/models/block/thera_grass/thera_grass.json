@@ -1,8 +1,0 @@
-{
-	"parent": "block/cube_bottom_top",
-	"textures": {
-		"bottom": "aether:blocks/thera_grass/thera_dirt",
-		"top": "aether:blocks/thera_grass/thera_grass_top",
-		"side": "aether:blocks/thera_grass/thera_grass_side"
-	}
-}

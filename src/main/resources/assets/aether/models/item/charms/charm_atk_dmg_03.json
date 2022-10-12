@@ -1,6 +1,0 @@
-{
-	"parent": "item/generated",
-	"textures": {
-		"layer0": "aether:items/charms/charm_atk_dmg_03"
-	}
-}

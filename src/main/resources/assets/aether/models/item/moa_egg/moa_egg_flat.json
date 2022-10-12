@@ -1,9 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "aether:items/moa_egg/flat_base",
-    "layer1": "aether:items/moa_egg/keratin",
-    "layer2": "aether:items/moa_egg/eyes",
-    "layer3": "aether:items/moa_egg/flat_highlight"
-  }
-}

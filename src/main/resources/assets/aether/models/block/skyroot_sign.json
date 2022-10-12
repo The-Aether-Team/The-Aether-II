@@ -1,6 +1,0 @@
-{
-	"parent": "aether:block/tesr",
-	"textures": {
-		"particle": "aether:blocks/skyroot_planks/skyroot_planks"
-	}
-}

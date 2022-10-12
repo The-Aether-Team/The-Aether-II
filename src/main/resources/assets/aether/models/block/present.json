@@ -1,6 +1,0 @@
-{
-	"parent": "aether:block/tesr",
-	"textures": {
-		"particle": "minecraft:items/paper"
-	}
-}

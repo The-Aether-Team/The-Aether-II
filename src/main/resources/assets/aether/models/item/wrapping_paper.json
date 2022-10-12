@@ -1,8 +1,0 @@
-{
-	"parent": "item/generated",
-	"textures": {
-		"layer0": "aether:items/wrapping_paper/base",
-		"layer1": "aether:items/wrapping_paper/overlay",
-		"layer2": "aether:items/wrapping_paper/ribbon"
-	}
-}

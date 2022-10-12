@@ -1,6 +1,0 @@
-{
-	"parent": "block/glass_pane_noside",
-	"textures": {
-		"pane": "aether:blocks/arkenium_frame_quicksoil_glass"
-	}
-}

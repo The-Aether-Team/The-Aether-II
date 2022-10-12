@@ -1,4 +1,6 @@
-rootProject.name = 'aether-ii'
-
-include 'orbis-lib'
-project(':orbis-lib').projectDir = file("lib/orbis-lib")
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        maven { url = 'https://maven.minecraftforge.net/' }
+    }
+}

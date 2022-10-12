@@ -1,8 +1,0 @@
-{
-	"parent": "block/cube_bottom_top",
-	"textures": {
-		"top": "aether:blocks/plumproot_top",
-		"bottom": "aether:blocks/plumproot_bottom",
-		"side": "aether:blocks/plumproot_side"
-	}
-}

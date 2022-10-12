@@ -1,6 +1,0 @@
-{
-  "parent": "block/cross",
-  "textures": {
-    "cross": "aether:blocks/saplings/holiday_sapling"
-  }
-}

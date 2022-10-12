@@ -1,7 +1,0 @@
-{
-	"parent": "block/cube_column",
-	"textures": {
-		"end": "aether:blocks/holystone_bricks/holystone_headstone",
-		"side": "aether:blocks/holystone_bricks/holystone_headstone"
-	}
-}

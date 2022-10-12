@@ -1,6 +1,0 @@
-{
-	"parent": "item/generated",
-	"textures": {
-		"layer0": "aether:items/materials/blue_swet_gel"
-	}
-}
