@@ -1,33 +1,47 @@
 package com.gildedgames.aetherii;
 
+import com.gildedgames.aetherii.client.AetherClient;
+import com.gildedgames.aetherii.message.OpenDialogMessage;
+import com.gildedgames.aetherii.register.ContentRegistry;
+import com.gildedgames.aetherii.register.ModEntities;
 import com.mojang.logging.LogUtils;
-import net.minecraft.client.Minecraft;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
+import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.simple.SimpleChannel;
 import org.slf4j.Logger;
 
 @Mod(AetherII.MODID)
 public class AetherII {
     public static final String MODID = "aether_ii";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
+    public static final String NETWORK_PROTOCOL = "2";
+
+    public static final SimpleChannel CHANNEL = NetworkRegistry.ChannelBuilder.named(new ResourceLocation(MODID, "net"))
+            .networkProtocolVersion(() -> NETWORK_PROTOCOL)
+            .clientAcceptedVersions(NETWORK_PROTOCOL::equals)
+            .serverAcceptedVersions(NETWORK_PROTOCOL::equals)
+            .simpleChannel();
 
     public AetherII() {
+        this.setupMessages();
+        ModEntities.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
 
+        DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> FMLJavaModLoadingContext.get().getModEventBus().addListener(AetherClient::setup));
+    }
+
+    private void setupMessages() {
+        CHANNEL.messageBuilder(OpenDialogMessage.class, 0)
+                .encoder(OpenDialogMessage::serialize).decoder(OpenDialogMessage::deserialize)
+                .consumerMainThread(OpenDialogMessage::handle);
+    }
+
+    private void processIMC(final InterModProcessEvent event) {
+        ContentRegistry.preInit();
     }
 }

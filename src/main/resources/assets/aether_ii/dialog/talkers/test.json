@@ -1,0 +1,14 @@
+{
+  "name": "entity.aether_ii.test",
+  "dialogs": {
+    "default": {
+      "render": "static",
+      "data": {
+        "resource": "aether_ii:textures/dialog/test.png",
+        "scale": "1.6",
+        "width": "110",
+        "height": "98"
+      }
+    }
+  }
+}

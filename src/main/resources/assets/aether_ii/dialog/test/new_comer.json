@@ -1,0 +1,23 @@
+{
+  "nodes": [
+    {
+      "name": "start",
+      "lines": [
+        {
+          "talker": "aether_ii:test",
+          "text": "test.greet.start_not_introduced"
+        }
+      ],
+      "buttons": [
+        {
+          "label": "generic.goodbye",
+          "actions": [
+            {
+              "type": "exit"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
