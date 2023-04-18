@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "com.gildedgames.aetherii.mixin.mixins",
+  "package": "com.aetherteam.aetherii.mixin.mixins",
   "minVersion": "0.8",
   "compatibilityLevel": "JAVA_17",
   "refmap": "aether_ii.refmap.json",

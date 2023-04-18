@@ -1,40 +1,16 @@
-buildscript {
-    repositories {
-        maven {
-            name 'Forge'
-            url 'https://maven.minecraftforge.net'
-        }
-        maven {
-            name 'Sponge'
-            url 'https://repo.spongepowered.org/maven'
-        }
-        maven {
-            name 'Parchment'
-            url 'https://maven.parchmentmc.org'
-        }
-        maven {
-            name 'Gradle'
-            url "https://plugins.gradle.org/m2/"
-        }
-        mavenCentral()
-    }
-    dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7.+', changing: true
-        classpath group: 'org.parchmentmc', name: 'librarian', version: '1.+', changing: true
-        classpath group: 'io.github.0ffz', name: 'gpr-for-gradle', version: '1.+', changing: true
-    }
+plugins {
+    id 'maven-publish'
+    id 'net.minecraftforge.gradle' version '5.1.+'
+    id 'org.spongepowered.mixin' version '0.7.+'
+    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+    id 'io.github.0ffz.github-packages' version '1.+'
+    id 'com.matthewprenger.cursegradle' version '1.4.+'
+    id 'com.modrinth.minotaur' version '2.+'
 }
-apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'org.spongepowered.mixin'
-apply plugin: 'org.parchmentmc.librarian.forgegradle'
-apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
-apply plugin: 'io.github.0ffz.github-packages'
 
-version = project.mc_version + '-' + project.aether_ii_version
-group = 'com.gildedgames.aether_ii' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'aether_ii'
+version = "${project.mc_version}-${project.mod_version}-forge"
+group = 'com.aetherteam.aetherii' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = project.mod_id
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17) // Mojang ships Java 8 to end users, so your mod should target Java 8.
 
@@ -52,7 +28,7 @@ minecraft {
             //property 'forge.logging.console.level', 'debug'
 
             mods {
-                aether_ii {
+                "${project.mod_id}" {
                     source sourceSets.main
                 }
             }
@@ -65,7 +41,7 @@ minecraft {
             //property 'forge.logging.console.level', 'debug'
 
             mods {
-                aether_ii {
+                "${project.mod_id}" {
                     source sourceSets.main
                 }
             }
@@ -77,12 +53,12 @@ minecraft {
             //property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             //property 'forge.logging.console.level', 'debug'
 
-            args '--mod', 'aether_ii', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/'), '--existing', file('src/generated/resources/')
+            args '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/'), '--existing', file('src/generated/resources/')
 
             environment 'target', 'fmluserdevdata'
 
             mods {
-                aether_ii {
+                "${project.mod_id}" {
                     source sourceSets.main
                 }
             }
@@ -102,9 +78,13 @@ dependencies {
 //    compileOnly "com.gildedgames.nitrogen:nitrogen:${project.nitrogen_version}"
 //    runtimeOnly fg.deobf("com.gildedgames.nitrogen:nitrogen:${project.nitrogen_version}")
 
-    compileOnly "top.theillusivec4.curios:curios-forge:${project.curios_version}:api"
-    compileOnly "top.theillusivec4.curios:curios-forge:${project.curios_version}"
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${project.curios_version}")
+    implementation fg.deobf("top.theillusivec4.curios:curios-forge:${project.curios_version}")
+    implementation fg.deobf("software.bernie.geckolib:geckolib-forge-${project.mc_version}:${project.geckolib_version}")
+    implementation fg.deobf("net.tslat.smartbrainlib:SmartBrainLib-forge-${project.mc_version}:${project.sbl_version}")
+
+    compileOnly "mezz.jei:jei-${project.mc_version}-common-api:${project.jei_version}"
+    compileOnly "mezz.jei:jei-${project.mc_version}-forge-api:${project.jei_version}"
+//    runtimeOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}"))
 
 //    jarJar fg.deobf("com.gildedgames.nitrogen:nitrogen:${project.nitrogen_version}") {
 //        jarJar.ranged(it, "[${project.nitrogen_version},)")
@@ -115,27 +95,41 @@ dependencies {
         jarJar.ranged(it, "[${project.curios_version},)")
         jarJar.pin(it, "${project.curios_version}")
     }
+
+    jarJar fg.deobf("software.bernie.geckolib:geckolib-forge-${project.mc_version}:${project.geckolib_version}") {
+        jarJar.ranged(it, "[${project.geckolib_version},)")
+        jarJar.pin(it, "${project.geckolib_version}")
+    }
+
+    jarJar fg.deobf("net.tslat.smartbrainlib:SmartBrainLib-forge-${project.mc_version}:${project.sbl_version}") {
+        jarJar.ranged(it, "[${project.sbl_version},)")
+        jarJar.pin(it, "${project.sbl_version}")
+    }
+
+    //compileOnly fileTree(dir: 'libs', include: '*.jar')
 }
 
 repositories {
     maven { url = "https://maven.blamejared.com" }
     maven { url = "https://maven.theillusivec4.top/" }
     maven { url = "https://www.cursemaven.com" }
-    maven { url = "https://dvs1.progwml6.com/files/maven/"}
+    maven { url = "https://dvs1.progwml6.com/files/maven/" }
+    maven { url = "https://gitlab.com/api/v4/projects/21830712/packages/maven" }
+    maven { url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
+    maven { url = 'https://dl.cloudsmith.io/public/tslat/sbl/maven/' }
 //    maven githubPackage.invoke("Gilded-Games/Nitrogen")
 }
 
 jar {
     manifest {
         attributes([
-                "Specification-Title"     : "The Aether II",
-                "Specification-Vendor"    : "Gilded Games",
+                "Specification-Title"     : project.mod_name,
+                "Specification-Vendor"    : "The Aether Team",
                 "Specification-Version"   : "1", // We are version 1 of ourselves
-                "Implementation-Title"    : "The Aether II",
-                "Implementation-Version"  : "${version}",
-                "Implementation-Vendor"   : "Gilded Games",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "MixinConfigs"            : "aether_ii.mixins.json"
+                "Implementation-Title"    : project.mod_name,
+                "Implementation-Version"  : project.jar.archiveVersion,
+                "Implementation-Vendor"   : "The Aether Team",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
 }
@@ -149,18 +143,16 @@ artifacts {
     archives sourcesJar
 }
 
-jar.finalizedBy('reobfJar')
-
-reobf.create('jarJar')
-
-def reobfFile = file("$buildDir/reobfJar/output.jar")
-def jar = artifacts.add('default', reobfFile) {
-    type 'jar'
-    builtBy 'reobfJar'
-}
-
 tasks.jarJar.configure {
     archiveClassifier = ""
+}
+
+tasks.named(sourceSets.main.compileJavaTaskName) {
+    outputs.file("${it.temporaryDir}/${it.name}-refmap.json").withPropertyName("mixin refmap")
+}
+
+compileJava {
+    options.incremental = false
 }
 
 publishing {
@@ -183,7 +175,53 @@ publishing {
     }
 }
 
+curseforge {
+    project {
+        apiKey = System.getenv("CURSEFORGE_TOKEN")
+        id = "${project.curseforge_id}"
+        releaseType = "${project.version_type}"
+        changelog = file("$rootDir/docs/CHANGELOG.md")
+        changelogType = "markdown"
+        addGameVersion("${project.mc_version}")
+        mainArtifact(tasks.jar) {
+            displayName = "${project.mod_name} - Forge - ${version}"
+            relations {
+                embeddedLibrary "curios"
+                embeddedLibrary "geckolib"
+                embeddedLibrary "smartbrainlib"
+                optionalDependency "starlight-forge"
+            }
+        }
+    }
+    options {
+        debug = true
+    }
+}
+
+modrinth {
+    token = System.getenv("MODRINTH_TOKEN")
+    projectId = "${project.modrinth_id}"
+    versionNumber = "${version}"
+    versionType = "${project.version_type}"
+    versionName = "${project.mod_name} - Forge - ${version}"
+    changelog = new File("$rootDir/docs/CHANGELOG.md").text
+    uploadFile = tasks.jar
+    gameVersions = ["${project.mc_version}"]
+    loaders = ["forge"]
+    dependencies {
+        embedded.version "curios", "${project.curios_version}"
+        embedded.version "geckolib", "${project.geckolib_version}"
+        embedded.version "smartbrainlib", "${project.sbl_version}"
+        optional.project "starlight-forge"
+    }
+    debugMode = true
+}
+
 mixin {
-    config "aether_ii.mixins.json"
-    add sourceSets.main, "aether_ii.refmap.json"
+    config "${project.mod_id}.mixins.json"
+    add sourceSets.main, "${project.mod_id}.refmap.json"
+}
+
+build {
+    dependsOn 'jarJar'
 }
