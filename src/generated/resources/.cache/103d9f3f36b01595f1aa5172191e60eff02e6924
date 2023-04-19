@@ -1,0 +1,8 @@
+// 1.19.4	2023-04-18T17:43:28.5897122	Registries
+912fbed49902343405410fa7d352b742cbefdb15 data/aether_ii/dimension/aether_highlands.json
+ae01d467453be6d401ce68c8ccc006362b5a29b7 data/aether_ii/dimension_type/aether_highlands.json
+fb3a335da20895260a9da5a93a82b77669b498b4 data/aether_ii/worldgen/biome/default.json
+40ed6613c0c4402694c2364ee88d3b9ff203550e data/aether_ii/worldgen/density_function/base_3d_noise_highlands.json
+b994dbe2cb5a71e4a96d87e31aa723d37cd426cf data/aether_ii/worldgen/noise/temperature.json
+0547b8f546b081ef94acc9834c288c90a2ae5ee3 data/aether_ii/worldgen/noise/vegetation.json
+b7da4d4e504e90d25493395ce420aa80d081b0bc data/aether_ii/worldgen/noise_settings/highlands.json
