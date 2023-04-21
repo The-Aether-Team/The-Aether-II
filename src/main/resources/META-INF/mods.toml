@@ -8,7 +8,7 @@ version = "${file.jarVersion}"
 displayName = "The Aether II"
 displayURL = "https://www.curseforge.com/minecraft/mc-mods/aether-ii"
 logoFile = "aether_ii.png"
-credits = "The Aether Team AKA 'Gilded Games', former Aether Team Collaborators for their prior work on The Aether II Mod, GitHub contributors for their additional help, and C4 for Curios API, the source code of which can be found at https://github.com/TheIllusiveC4/Curios"
+credits = "The Aether Team, former Aether Team Collaborators for their prior work on The Aether II Mod, GitHub contributors for their additional help, and C4 for Curios API, the source code of which can be found at https://github.com/TheIllusiveC4/Curios"
 authors = "bconlon, Hugo Payn, Jaryt, Oscar Payn"
 description = '''
     Work in progress...
