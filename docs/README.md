@@ -20,12 +20,12 @@ You can also support the Aether project and The Aether Team by telling your frie
 If you're interested in sponsoring the Aether project or The Aether Team, please [contact Oz#1986 on the Aether Community Discord](https://discord.gg/aethermod).
 
 ## :package: Download the latest releases
-[![](https://img.shields.io/badge/mod%20loader-forge-CC974D?style=flat-square)](https://files.minecraftforge.net/net/minecraftforge/forge/)
-[![](https://img.shields.io/modrinth/dt/YhmgMVyu?color=JD2NSu5O&logo=modrinth)]()
-[![](https://img.shields.io/modrinth/game-versions/YhmgMVyu?color=JD2NSu5O&label=latest&logo=modrinth&last=true)]()
-[![](http://cf.way2muchnoise.eu/aetherii.svg)]()
-[![](http://cf.way2muchnoise.eu/versions/aetherii_latest.svg)]()
-[![](https://circleci.com/ghThe-Aether-Team/The-Aether-II/tree/1.19.svg?style=shield)](https://app.circleci.com/pipelines/github/The-Aether-Team/The-Aether-II?branch=1.19)
+[![Modloader: Forge](https://img.shields.io/badge/mod%20loader-forge-CC974D?style=flat-square)](https://files.minecraftforge.net/net/minecraftforge/forge/)
+[![Modrinth Downloads](https://img.shields.io/modrinth/dt/YhmgMVyu?color=JD2NSu5O&logo=modrinth)]()
+[![Modrinth Version](https://img.shields.io/modrinth/game-versions/YhmgMVyu?color=JD2NSu5O&label=latest&logo=modrinth&last=true)]()
+[![CurseForge Downloads](http://cf.way2muchnoise.eu/aetherii.svg)]()
+[![CurseForge Version](http://cf.way2muchnoise.eu/versions/aetherii_latest.svg)]()
+[![CircleCI](https://circleci.com/ghThe-Aether-Team/The-Aether-II/tree/1.19.svg?style=shield)](https://app.circleci.com/pipelines/github/The-Aether-Team/The-Aether-II?branch=1.19)
 ### Release builds
 The Aether II has no stable release builds for the latest version of Minecraft just yet, but this port is in active development so keep an eye out for its eventual release.
 
