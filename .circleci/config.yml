@@ -68,15 +68,21 @@ jobs:
       GRADLE_OPTS: -Dorg.gradle.daemon=false
     steps:
       - setup
-      - run: gradle publish
+      - run: |
+          chmod +x ./gradlew
+          ./gradlew publish
 
 commands:
   setup:
     steps:
       - checkout
       - gradle/with_cache:
+          cache_key: 'v2'
           steps:
-            - run: gradle build --build-cache
+            - run:
+                name: chmod permissions
+                command: chmod +x ./gradlew
+            - run: ./gradlew build --parallel --console=plain
       - store_artifacts:
           path: ~/project/build/libs
 
