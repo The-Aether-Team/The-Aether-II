@@ -105,8 +105,8 @@ dependencies {
     }
 
     jarJar fg.deobf("top.theillusivec4.curios:curios-forge:${project.curios_version}+${project.mc_version}") {
-        jarJar.ranged(it, "[${project.curios_version},)")
-        jarJar.pin(it, "${project.curios_version}")
+        jarJar.ranged(it, "[${project.curios_version}+${project.mc_version},)")
+        jarJar.pin(it, "${project.curios_version}+${project.mc_version}")
     }
 
     jarJar fg.deobf("software.bernie.geckolib:geckolib-forge-${project.mc_version}:${project.geckolib_version}") {
