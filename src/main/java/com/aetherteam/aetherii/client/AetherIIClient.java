@@ -1,15 +1,20 @@
 package com.aetherteam.aetherii.client;
 
-import com.aetherteam.aetherii.AetherII;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 
-@Mod.EventBusSubscriber(modid = AetherII.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class AetherIIClient {
-    @SubscribeEvent
+    public static void clientInit(IEventBus bus) {
+        bus.addListener(AetherIIClient::clientSetup);
+
+        AetherIIClient.eventSetup(bus);
+    }
+
     public static void clientSetup(FMLClientSetupEvent event) {
+
+    }
+
+    public static void eventSetup(IEventBus neoBus) {
 
     }
 }

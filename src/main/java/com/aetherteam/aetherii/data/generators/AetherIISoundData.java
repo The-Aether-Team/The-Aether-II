@@ -2,8 +2,8 @@ package com.aetherteam.aetherii.data.generators;
 
 import com.aetherteam.aetherii.AetherII;
 import net.minecraft.data.PackOutput;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.common.data.SoundDefinitionsProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.data.SoundDefinitionsProvider;
 
 public class AetherIISoundData extends SoundDefinitionsProvider {
     public AetherIISoundData(PackOutput output, ExistingFileHelper helper) {

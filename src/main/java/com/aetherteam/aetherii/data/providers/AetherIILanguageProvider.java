@@ -1,11 +1,11 @@
 package com.aetherteam.aetherii.data.providers;
 
+import com.aetherteam.nitrogen.data.providers.NitrogenLanguageProvider;
 import net.minecraft.data.PackOutput;
-import net.minecraftforge.common.data.LanguageProvider;
 
-public abstract class AetherIILanguageProvider extends LanguageProvider {
+public abstract class AetherIILanguageProvider extends NitrogenLanguageProvider {
     public AetherIILanguageProvider(PackOutput output, String id) {
-        super(output, id, "en_us");
+        super(output, id);
     }
 
 }

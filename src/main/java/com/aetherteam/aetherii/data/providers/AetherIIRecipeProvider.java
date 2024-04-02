@@ -1,13 +1,10 @@
 package com.aetherteam.aetherii.data.providers;
 
+import com.aetherteam.nitrogen.data.providers.NitrogenRecipeProvider;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.RecipeProvider;
 
-public abstract class AetherIIRecipeProvider extends RecipeProvider {
-    private static String ID;
-
+public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
     public AetherIIRecipeProvider(PackOutput output, String id) {
-        super(output);
-        ID = id;
+        super(output, id);
     }
 }
