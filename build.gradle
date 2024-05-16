@@ -3,7 +3,7 @@ import net.neoforged.gradle.common.tasks.JarJar
 plugins {
     id 'eclipse'
     id 'maven-publish'
-    id 'net.neoforged.gradle.userdev' version '7.0.+'
+    id 'net.neoforged.gradle.userdev' version '7.0.108'
     id 'io.github.0ffz.github-packages' version '[1,2)'
     id 'com.matthewprenger.cursegradle' version '[1.4,1.5)'
     id 'com.modrinth.minotaur' version '[2,3)'
@@ -58,7 +58,7 @@ dependencies {
     implementation "com.aetherteam.cumulus:cumulus_menus:${project.cumulus_version}"
 
     implementation "top.theillusivec4.curios:curios-neoforge:${project.curios_version}+${project.mc_version}"
-    implementation "software.bernie.geckolib:geckolib-neoforge-${project.mc_version}:${project.geckolib_version}"
+//    implementation "software.bernie.geckolib:geckolib-neoforge-${project.mc_version}:${project.geckolib_version}"
     implementation "net.tslat.smartbrainlib:SmartBrainLib-neoforge-${project.mc_version}:${project.sbl_version}"
 
     compileOnly "mezz.jei:jei-${project.mc_version}-common-api:${project.jei_version}"
@@ -80,10 +80,10 @@ dependencies {
         jarJar.pin(it, "${project.curios_version}+${project.mc_version}")
     }
 
-    jarJar("software.bernie.geckolib:geckolib-neoforge-${project.mc_version}:${project.geckolib_version}") {
-        jarJar.ranged(it, "[${project.geckolib_version},)")
-        jarJar.pin(it, "${project.geckolib_version}")
-    }
+//    jarJar("software.bernie.geckolib:geckolib-neoforge-${project.mc_version}:${project.geckolib_version}") {
+//        jarJar.ranged(it, "[${project.geckolib_version},)")
+//        jarJar.pin(it, "${project.geckolib_version}")
+//    }
 
     jarJar("net.tslat.smartbrainlib:SmartBrainLib-neoforge-${project.mc_version}:${project.sbl_version}") {
         jarJar.ranged(it, "[${project.sbl_version},)")
@@ -100,7 +100,7 @@ repositories {
     maven { url = "https://www.cursemaven.com" }
     maven { url = "https://dvs1.progwml6.com/files/maven/" }
     maven { url = "https://gitlab.com/api/v4/projects/21830712/packages/maven" }
-    maven { url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
+//    maven { url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
     maven { url = 'https://dl.cloudsmith.io/public/tslat/sbl/maven/' }
     maven githubPackage.invoke("The-Aether-Team/Nitrogen")
     maven githubPackage.invoke("The-Aether-Team/Cumulus")
@@ -169,7 +169,7 @@ curseforge {
             relations {
                 embeddedLibrary "curios"
                 embeddedLibrary "cumulus"
-                embeddedLibrary "geckolib"
+//                embeddedLibrary "geckolib"
                 embeddedLibrary "smartbrainlib"
             }
         }
@@ -192,7 +192,7 @@ modrinth {
     dependencies {
         embedded.version "curios", "${project.curios_version}"
         embedded.version "cumulus", "${project.cumulus_version}"
-        embedded.version "geckolib", "${project.geckolib_version}"
+//        embedded.version "geckolib", "${project.geckolib_version}"
         embedded.version "smartbrainlib", "${project.sbl_version}"
     }
     debugMode = true
