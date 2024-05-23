@@ -1,5 +1,5 @@
-// 1.20.4	2024-05-23T21:55:13.8183081	Registries
-5b8820667f5e62c7fc70ad58a890c2042ca24a6a data/aether_ii/dimension/aether_highlands.json
+// 1.20.4	2024-05-23T22:04:55.8736562	Registries
+f9dbdadd419a0cff7041a86d9432bf706ba56152 data/aether_ii/dimension/aether_highlands.json
 ae01d467453be6d401ce68c8ccc006362b5a29b7 data/aether_ii/dimension_type/aether_highlands.json
 55cfc9b4a7d364ded8ff81327d137ed3ba62536b data/aether_ii/worldgen/biome/battleground_wastes.json
 55cfc9b4a7d364ded8ff81327d137ed3ba62536b data/aether_ii/worldgen/biome/contaminated_jungle.json
@@ -20,4 +20,4 @@ ae01d467453be6d401ce68c8ccc006362b5a29b7 data/aether_ii/dimension_type/aether_hi
 20ddbabfded8546f8d71cb1689cd15c42bc77244 data/aether_ii/worldgen/noise/erosion.json
 e9951c1e43a8e47e424565851e1786e9dbe41a7a data/aether_ii/worldgen/noise/temperature.json
 144e6875c7c48ab4b4a0717436536cc121dc62da data/aether_ii/worldgen/noise/vegetation.json
-6952f0c65bb685ab1232133e00094a97399ceee4 data/aether_ii/worldgen/noise_settings/highlands.json
+dee252319e9810ecbba1a15b9eefb8be7d5b7ed1 data/aether_ii/worldgen/noise_settings/highlands.json
