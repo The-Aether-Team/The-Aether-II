@@ -1,0 +1,39 @@
+version: 2.1
+
+orbs:
+  gradle: circleci/gradle@3.0.0
+
+parameters:
+  artifact-name:
+    type: string
+    default: aether_ii-1.20.4-0.0.1-neoforge.jar
+
+jobs:
+  build:
+    machine:
+      image: ubuntu-2204:2023.02.1
+    resource_class: medium
+    environment:
+      _JAVA_OPTIONS: -Xmx3200m
+      GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.logging.level=info
+    steps:
+      - setup
+
+commands:
+  setup:
+    steps:
+      - checkout
+      - gradle/with_cache:
+          cache_key: 'v1'
+          steps:
+            - run:
+                name: chmod permissions
+                command: chmod +x ./gradlew
+            - run: ./gradlew build --parallel --console=plain
+      - store_artifacts:
+          path: ~/project/build/libs
+
+workflows:
+  build:
+    jobs:
+      - build
