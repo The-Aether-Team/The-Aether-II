@@ -6,9 +6,503 @@
       "type": "minecraft:multi_noise",
       "biomes": [
         {
+          "biome": "aether_ii:sheer_tundra",
+          "parameters": {
+            "continentalness": [
+              -1.5,
+              1.5
+            ],
+            "depth": [
+              -1.5,
+              1.5
+            ],
+            "erosion": [
+              0.0,
+              0.5
+            ],
+            "humidity": [
+              -1.0,
+              -0.2
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -1.5,
+              -0.4
+            ],
+            "weirdness": [
+              -1.5,
+              1.5
+            ]
+          }
+        },
+        {
+          "biome": "aether_ii:enduring_woodland",
+          "parameters": {
+            "continentalness": [
+              -1.5,
+              1.5
+            ],
+            "depth": [
+              -1.5,
+              1.5
+            ],
+            "erosion": [
+              0.0,
+              0.5
+            ],
+            "humidity": [
+              -0.2,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -1.5,
+              -0.4
+            ],
+            "weirdness": [
+              -1.5,
+              1.5
+            ]
+          }
+        },
+        {
+          "biome": "aether_ii:shrouded_forest",
+          "parameters": {
+            "continentalness": [
+              -1.5,
+              1.5
+            ],
+            "depth": [
+              -1.5,
+              1.5
+            ],
+            "erosion": [
+              0.0,
+              0.5
+            ],
+            "humidity": [
+              -1.0,
+              -0.25
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.4,
+              -0.1
+            ],
+            "weirdness": [
+              -1.5,
+              1.5
+            ]
+          }
+        },
+        {
+          "biome": "aether_ii:verdant_woods",
+          "parameters": {
+            "continentalness": [
+              -1.5,
+              1.5
+            ],
+            "depth": [
+              -1.5,
+              1.5
+            ],
+            "erosion": [
+              0.0,
+              0.5
+            ],
+            "humidity": [
+              -0.25,
+              0.15
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.4,
+              -0.1
+            ],
+            "weirdness": [
+              -1.5,
+              1.5
+            ]
+          }
+        },
+        {
           "biome": "aether_ii:flourishing_field",
           "parameters": {
             "continentalness": [
+              -1.5,
+              1.5
+            ],
+            "depth": [
+              -1.5,
+              1.5
+            ],
+            "erosion": [
+              0.0,
+              0.5
+            ],
+            "humidity": [
+              0.15,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.4,
+              -0.1
+            ],
+            "weirdness": [
+              -1.5,
+              1.5
+            ]
+          }
+        },
+        {
+          "biome": "aether_ii:verdant_woods",
+          "parameters": {
+            "continentalness": [
+              -1.5,
+              1.5
+            ],
+            "depth": [
+              -1.5,
+              1.5
+            ],
+            "erosion": [
+              0.0,
+              0.5
+            ],
+            "humidity": [
+              -1.0,
+              -0.1
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.1,
+              0.3
+            ],
+            "weirdness": [
+              -1.5,
+              1.5
+            ]
+          }
+        },
+        {
+          "biome": "aether_ii:flourishing_field",
+          "parameters": {
+            "continentalness": [
+              -1.5,
+              1.5
+            ],
+            "depth": [
+              -1.5,
+              1.5
+            ],
+            "erosion": [
+              0.0,
+              0.5
+            ],
+            "humidity": [
+              -0.1,
+              0.3
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.1,
+              0.3
+            ],
+            "weirdness": [
+              -1.5,
+              1.5
+            ]
+          }
+        },
+        {
+          "biome": "aether_ii:shrouded_forest",
+          "parameters": {
+            "continentalness": [
+              -1.5,
+              1.5
+            ],
+            "depth": [
+              -1.5,
+              1.5
+            ],
+            "erosion": [
+              0.0,
+              0.5
+            ],
+            "humidity": [
+              0.3,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.1,
+              0.3
+            ],
+            "weirdness": [
+              -1.5,
+              1.5
+            ]
+          }
+        },
+        {
+          "biome": "aether_ii:flourishing_field",
+          "parameters": {
+            "continentalness": [
+              -1.5,
+              1.5
+            ],
+            "depth": [
+              -1.5,
+              1.5
+            ],
+            "erosion": [
+              0.0,
+              0.5
+            ],
+            "humidity": [
+              -1.0,
+              -0.25
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.3,
+              0.65
+            ],
+            "weirdness": [
+              -1.5,
+              1.5
+            ]
+          }
+        },
+        {
+          "biome": "aether_ii:verdant_woods",
+          "parameters": {
+            "continentalness": [
+              -1.5,
+              1.5
+            ],
+            "depth": [
+              -1.5,
+              1.5
+            ],
+            "erosion": [
+              0.0,
+              0.5
+            ],
+            "humidity": [
+              -0.25,
+              0.2
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.3,
+              0.65
+            ],
+            "weirdness": [
+              -1.5,
+              1.5
+            ]
+          }
+        },
+        {
+          "biome": "aether_ii:shrouded_forest",
+          "parameters": {
+            "continentalness": [
+              -1.5,
+              1.5
+            ],
+            "depth": [
+              -1.5,
+              1.5
+            ],
+            "erosion": [
+              0.0,
+              0.5
+            ],
+            "humidity": [
+              0.2,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.3,
+              0.65
+            ],
+            "weirdness": [
+              -1.5,
+              1.5
+            ]
+          }
+        },
+        {
+          "biome": "aether_ii:violet_highwoods",
+          "parameters": {
+            "continentalness": [
+              -1.5,
+              1.5
+            ],
+            "depth": [
+              -1.5,
+              1.5
+            ],
+            "erosion": [
+              0.5,
+              1.5
+            ],
+            "humidity": [
+              -1.0,
+              -0.2
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -1.5,
+              -0.25
+            ],
+            "weirdness": [
+              -1.5,
+              1.5
+            ]
+          }
+        },
+        {
+          "biome": "aether_ii:magnetic_scar",
+          "parameters": {
+            "continentalness": [
+              -1.5,
+              1.5
+            ],
+            "depth": [
+              -1.5,
+              1.5
+            ],
+            "erosion": [
+              0.5,
+              1.5
+            ],
+            "humidity": [
+              -0.2,
+              0.15
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -1.5,
+              -0.25
+            ],
+            "weirdness": [
+              -1.5,
+              1.5
+            ]
+          }
+        },
+        {
+          "biome": "aether_ii:glistening_swamp",
+          "parameters": {
+            "continentalness": [
+              -1.5,
+              1.5
+            ],
+            "depth": [
+              -1.5,
+              1.5
+            ],
+            "erosion": [
+              0.5,
+              1.5
+            ],
+            "humidity": [
+              0.15,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -1.5,
+              -0.25
+            ],
+            "weirdness": [
+              -1.5,
+              1.5
+            ]
+          }
+        },
+        {
+          "biome": "aether_ii:magnetic_scar",
+          "parameters": {
+            "continentalness": [
+              -1.5,
+              1.5
+            ],
+            "depth": [
+              -1.5,
+              1.5
+            ],
+            "erosion": [
+              0.5,
+              1.5
+            ],
+            "humidity": [
+              -1.0,
+              -0.15
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.25,
+              0.25
+            ],
+            "weirdness": [
+              -1.5,
+              1.5
+            ]
+          }
+        },
+        {
+          "biome": "aether_ii:turquoise_forest",
+          "parameters": {
+            "continentalness": [
+              -1.5,
+              1.5
+            ],
+            "depth": [
+              -1.5,
+              1.5
+            ],
+            "erosion": [
+              0.5,
+              1.5
+            ],
+            "humidity": [
+              -0.15,
+              0.2
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.25,
+              0.25
+            ],
+            "weirdness": [
+              -1.5,
+              1.5
+            ]
+          }
+        },
+        {
+          "biome": "aether_ii:violet_highwoods",
+          "parameters": {
+            "continentalness": [
+              -1.5,
+              1.5
+            ],
+            "depth": [
+              -1.5,
+              1.5
+            ],
+            "erosion": [
+              0.5,
+              1.5
+            ],
+            "humidity": [
+              0.2,
+=======
               -1.0,
               1.0
             ],
@@ -26,6 +520,252 @@
             ],
             "offset": 0.0,
             "temperature": [
+              -0.25,
+              0.25
+            ],
+            "weirdness": [
+              -1.5,
+              1.5
+            ]
+          }
+        },
+        {
+          "biome": "aether_ii:glistening_swamp",
+          "parameters": {
+            "continentalness": [
+              -1.5,
+              1.5
+            ],
+            "depth": [
+              -1.5,
+              1.5
+            ],
+            "erosion": [
+              0.5,
+              1.5
+            ],
+            "humidity": [
+              -1.0,
+              -0.2
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.25,
+              0.65
+            ],
+            "weirdness": [
+              -1.5,
+              1.5
+            ]
+          }
+        },
+        {
+          "biome": "aether_ii:magnetic_scar",
+          "parameters": {
+            "continentalness": [
+              -1.5,
+              1.5
+            ],
+            "depth": [
+              -1.5,
+              1.5
+            ],
+            "erosion": [
+              0.5,
+              1.5
+            ],
+            "humidity": [
+              -0.2,
+              0.1
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.25,
+              0.65
+            ],
+            "weirdness": [
+              -1.5,
+              1.5
+            ]
+          }
+        },
+        {
+          "biome": "aether_ii:turquoise_forest",
+          "parameters": {
+            "continentalness": [
+              -1.5,
+              1.5
+            ],
+            "depth": [
+              -1.5,
+              1.5
+            ],
+            "erosion": [
+              0.5,
+              1.5
+            ],
+            "humidity": [
+              0.1,
+              0.3
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.25,
+              0.65
+            ],
+            "weirdness": [
+              -1.5,
+              1.5
+            ]
+          }
+        },
+        {
+          "biome": "aether_ii:glistening_swamp",
+          "parameters": {
+            "continentalness": [
+              -1.5,
+              1.5
+            ],
+            "depth": [
+              -1.5,
+              1.5
+            ],
+            "erosion": [
+              0.5,
+              1.5
+            ],
+            "humidity": [
+              0.3,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.25,
+              0.65
+            ],
+            "weirdness": [
+              -1.5,
+              1.5
+            ]
+          }
+        },
+        {
+          "biome": "aether_ii:magnetic_scar",
+          "parameters": {
+            "continentalness": [
+              -1.5,
+              1.5
+            ],
+            "depth": [
+              -1.5,
+              1.5
+            ],
+            "erosion": [
+              0.5,
+              1.5
+            ],
+            "humidity": [
+              -1.5,
+              1.5
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.65,
+              1.5
+            ],
+            "weirdness": [
+              -1.5,
+              1.5
+            ]
+          }
+        },
+        {
+          "biome": "aether_ii:battleground_wastes",
+          "parameters": {
+            "continentalness": [
+              0.0,
+              0.5
+            ],
+            "depth": [
+              -1.5,
+              1.5
+            ],
+            "erosion": [
+              -1.5,
+              1.5
+            ],
+            "humidity": [
+              -1.0,
+              -0.25
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.65,
+              1.5
+            ],
+            "weirdness": [
+              -1.5,
+              1.5
+            ]
+          }
+        },
+        {
+          "biome": "aether_ii:contaminated_jungle",
+          "parameters": {
+            "continentalness": [
+              0.0,
+              0.5
+            ],
+            "depth": [
+              -1.5,
+              1.5
+            ],
+            "erosion": [
+              -1.5,
+              1.5
+            ],
+            "humidity": [
+              -0.25,
+              0.25
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.65,
+              1.5
+            ],
+            "weirdness": [
+              -1.5,
+              1.5
+            ]
+          }
+        },
+        {
+          "biome": "aether_ii:battleground_wastes",
+          "parameters": {
+            "continentalness": [
+              0.0,
+              0.5
+            ],
+            "depth": [
+              -1.5,
+              1.5
+            ],
+            "erosion": [
+              -1.5,
+              1.5
+            ],
+            "humidity": [
+              0.25,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.65,
+              1.5
+            ],
+            "weirdness": [
+              -1.5,
+              1.5
               -1.0,
               1.0
             ],

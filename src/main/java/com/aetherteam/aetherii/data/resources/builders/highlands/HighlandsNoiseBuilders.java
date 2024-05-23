@@ -72,8 +72,9 @@ public class HighlandsNoiseBuilders {
     private static NoiseRouter createNoiseRouter(HolderGetter<DensityFunction> densityFunctions, HolderGetter<NormalNoise.NoiseParameters> noise, DensityFunction finalDensity) {
         DensityFunction shiftX = getFunction(densityFunctions, ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation("shift_x")));
         DensityFunction shiftZ = getFunction(densityFunctions, ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation("shift_z")));
-        DensityFunction temperature = DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.25D, noise.getOrThrow(AetherIINoises.TEMPERATURE));
-        DensityFunction vegetation = DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.25D, noise.getOrThrow(AetherIINoises.VEGETATION));
+        DensityFunction temperature = DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5D, noise.getOrThrow(AetherIINoises.TEMPERATURE));
+        DensityFunction vegetation = DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5D, noise.getOrThrow(AetherIINoises.VEGETATION));
+        DensityFunction erosion = DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5D, noise.getOrThrow(AetherIINoises.EROSION)).abs();
         return new NoiseRouter(
                 DensityFunctions.zero(), // barrier noise
                 DensityFunctions.zero(), // fluid level floodedness noise
@@ -82,11 +83,11 @@ public class HighlandsNoiseBuilders {
                 temperature, // temperature
                 vegetation, // vegetation
                 DensityFunctions.zero(), // continentalness noise
-                DensityFunctions.zero(), // erosion noise
+                erosion, // erosion
                 DensityFunctions.zero(), // depth
                 DensityFunctions.zero(), // ridges
-                DensityFunctions.zero(), // initial density without jaggedness, not sure if this is needed. Some vanilla dimensions use this while others don't.
-                finalDensity, // finaldensity
+                DensityFunctions.zero(), // initial density without jaggedness, used for aquifers in the Overworld.
+                finalDensity, // final density
                 DensityFunctions.zero(), // veinToggle
                 DensityFunctions.zero(), // veinRidged
                 DensityFunctions.zero()); // veinGap

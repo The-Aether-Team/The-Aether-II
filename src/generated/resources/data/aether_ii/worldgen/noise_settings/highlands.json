@@ -21,7 +21,18 @@
     "barrier": 0.0,
     "continents": 0.0,
     "depth": 0.0,
-    "erosion": 0.0,
+    "erosion": {
+      "type": "minecraft:abs",
+      "argument": {
+        "type": "minecraft:shifted_noise",
+        "noise": "aether_ii:erosion",
+        "shift_x": "minecraft:shift_x",
+        "shift_y": 0.0,
+        "shift_z": "minecraft:shift_z",
+        "xz_scale": 0.5,
+        "y_scale": 0.0
+      }
+    },
     "final_density": {
       "type": "minecraft:squeeze",
       "argument": {
@@ -87,7 +98,7 @@
       "shift_x": "minecraft:shift_x",
       "shift_y": 0.0,
       "shift_z": "minecraft:shift_z",
-      "xz_scale": 0.25,
+      "xz_scale": 0.5,
       "y_scale": 0.0
     },
     "vegetation": {
@@ -96,7 +107,7 @@
       "shift_x": "minecraft:shift_x",
       "shift_y": 0.0,
       "shift_z": "minecraft:shift_z",
-      "xz_scale": 0.25,
+      "xz_scale": 0.5,
       "y_scale": 0.0
     },
     "vein_gap": 0.0,
