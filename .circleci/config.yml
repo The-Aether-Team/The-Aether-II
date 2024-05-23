@@ -6,7 +6,7 @@ orbs:
 parameters:
   artifact-name:
     type: string
-    default: aether_ii
+    default: aether_ii-1.20.4-0.0.1-neoforge.jar
 
 jobs:
   build:
