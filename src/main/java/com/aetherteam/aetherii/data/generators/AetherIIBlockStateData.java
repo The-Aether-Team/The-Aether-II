@@ -17,6 +17,11 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.block(AetherIIBlocks.QUICKSOIL.get(), "natural/");
         this.block(AetherIIBlocks.HOLYSTONE.get(), "natural/");
         this.block(AetherIIBlocks.UNDERSHALE.get(), "natural/");
+        this.block(AetherIIBlocks.AMBROSIUM_ORE.get(), "natural/");
+        this.block(AetherIIBlocks.ZANITE_ORE.get(), "natural/");
+        this.block(AetherIIBlocks.ARKENIUM_ORE.get(), "natural/");
+        this.block(AetherIIBlocks.GRAVITITE_ORE.get(), "natural/");
+        this.block(AetherIIBlocks.COLD_AERCLOUD.get(), "natural/");
         this.log(AetherIIBlocks.SKYROOT_LOG.get());
         this.log(AetherIIBlocks.GREATROOT_LOG.get());
         this.log(AetherIIBlocks.WISPROOT_LOG.get());

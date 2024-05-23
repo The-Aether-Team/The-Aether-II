@@ -1,7 +1,11 @@
-// 1.20.4	2024-05-23T13:40:19.5565219	Item Models: aether_ii
+// 1.20.4	2024-05-23T15:25:33.7441072	Item Models: aether_ii
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
 b485bb7a980decbc46719aeaac129689fa3f6a19 assets/aether_ii/models/item/aether_grass_block.json
 183e501764258654cc51853d14080c0c90ad97bb assets/aether_ii/models/item/amberoot_leaves.json
+77308024eea02e4ceae6af25c5f9817950c5cb19 assets/aether_ii/models/item/ambrosium_ore.json
+ea1731a6ef141f6d52a0a97ec20696b5aa53c54e assets/aether_ii/models/item/arkenium_ore.json
+5a386cdf2cd4b293002c2ecbfa9ad92a6a9b55c7 assets/aether_ii/models/item/cold_aercloud.json
+04fa6eb965ac5239cd7bbe301852db13db9e47fe assets/aether_ii/models/item/gravitite_ore.json
 1cc5e95ef10df402465b93aee2d044989bcd576b assets/aether_ii/models/item/greatboa_leaves.json
 62f7a90989bbafca743aefbe9d3a35d0595ecd0c assets/aether_ii/models/item/greatoak_leaves.json
 b7d95fde2897b2afc05b56ca6d12da7dde0f9ed2 assets/aether_ii/models/item/greatroot_leaves.json
@@ -17,3 +21,4 @@ b54510ea4cf32c696c314fc9005802fdab3c208a assets/aether_ii/models/item/undershale
 e36af53ba18d2661d75b557c1cb111f1400b9284 assets/aether_ii/models/item/wisproot_leaves.json
 2f80adde58d2b47e3e48b60ceec291a49b41a461 assets/aether_ii/models/item/wisproot_log.json
 962869521316611ce7ea217861b3f90966cce67d assets/aether_ii/models/item/wisptop_leaves.json
+42f39521325442a933b5013ed24a40ff3177e842 assets/aether_ii/models/item/zanite_ore.json

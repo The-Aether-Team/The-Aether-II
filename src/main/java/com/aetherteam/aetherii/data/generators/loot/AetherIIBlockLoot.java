@@ -24,6 +24,11 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.QUICKSOIL.get());
         this.dropSelf(AetherIIBlocks.HOLYSTONE.get());
         this.dropSelf(AetherIIBlocks.UNDERSHALE.get());
+        this.dropSelf(AetherIIBlocks.AMBROSIUM_ORE.get());
+        this.dropSelf(AetherIIBlocks.ZANITE_ORE.get());
+        this.dropSelf(AetherIIBlocks.ARKENIUM_ORE.get());
+        this.dropSelf(AetherIIBlocks.GRAVITITE_ORE.get());
+        this.dropSelf(AetherIIBlocks.COLD_AERCLOUD.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_LOG.get());
         this.dropSelf(AetherIIBlocks.GREATROOT_LOG.get());
         this.dropSelf(AetherIIBlocks.WISPROOT_LOG.get());

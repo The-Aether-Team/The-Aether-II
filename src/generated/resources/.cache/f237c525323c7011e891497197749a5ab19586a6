@@ -1,6 +1,10 @@
-// 1.20.4	2024-05-23T13:40:19.5415228	Block States: aether_ii
+// 1.20.4	2024-05-23T15:25:33.4371075	Block States: aether_ii
 09820e9981cbdbe29cb2563890673c61c5abe056 assets/aether_ii/blockstates/aether_dirt.json
 b5f21b065a5c8b88fdd19fe5dd78877e58ecd43a assets/aether_ii/blockstates/amberoot_leaves.json
+7ede872563c8383ca485b759e69f713162bdbcc7 assets/aether_ii/blockstates/ambrosium_ore.json
+f70d2c7f292ee79ecae67dd6bfc775691beb9a80 assets/aether_ii/blockstates/arkenium_ore.json
+bc3c6413e013f5bc65a92f8fe5589eb316c9a32a assets/aether_ii/blockstates/cold_aercloud.json
+d9fa5ec671f5522924baae298d8c53ffc7bd1d22 assets/aether_ii/blockstates/gravitite_ore.json
 d33cfd01a83b6c3d5d08ec78acbfcbbf978587c9 assets/aether_ii/blockstates/greatboa_leaves.json
 9ac0cb03f83e1de7238be02a40b84f03413fa0e0 assets/aether_ii/blockstates/greatoak_leaves.json
 d6351e2d703ba47b51e6e702d8d6afa66f4698f1 assets/aether_ii/blockstates/greatroot_leaves.json
@@ -16,8 +20,13 @@ be9bdefe83a78a3957f750c4f14eba9e867640a7 assets/aether_ii/blockstates/skyroot_lo
 b2604123f84f869624902c534499bc2bcea20998 assets/aether_ii/blockstates/wisproot_leaves.json
 120bcfda7f91689b78e0e8c454fcdcc306a71cfe assets/aether_ii/blockstates/wisproot_log.json
 fbea06b1eb6c1730fe17c699fd1944abb0925297 assets/aether_ii/blockstates/wisptop_leaves.json
+c1db6b218613927fa6d6269dafb1f376bd8323a7 assets/aether_ii/blockstates/zanite_ore.json
 f444c2d02a1445ab4b6fd3fe26bbb16f757e4856 assets/aether_ii/models/block/aether_dirt.json
 979551a95de8342970b3665985b0bbff0ad3778f assets/aether_ii/models/block/amberoot_leaves.json
+5d5be47f23485414118570094b00e3d9cf1853d3 assets/aether_ii/models/block/ambrosium_ore.json
+016b0c1533090f1198dfeb2db71beb72c730a787 assets/aether_ii/models/block/arkenium_ore.json
+0411f8eaf221fe92a31685b1c2a7c9b5bc1e77d5 assets/aether_ii/models/block/cold_aercloud.json
+51118f9c9fc84cb66a185c3603b185d776127ccc assets/aether_ii/models/block/gravitite_ore.json
 22766598c573ed6cccd5db45422fd2f86fc0f025 assets/aether_ii/models/block/greatboa_leaves.json
 34a2a61ea70f6e7b49596e7c549a9d34bff33407 assets/aether_ii/models/block/greatoak_leaves.json
 826e97a35d5d22c62a0dfda0f703504b6d6862b2 assets/aether_ii/models/block/greatroot_leaves.json
@@ -36,3 +45,4 @@ bb66e1e012089e37d8f6ba6d36286a96cadae1bc assets/aether_ii/models/block/skypine_l
 92ffe95095092f02e1570292fedd28c437b2665f assets/aether_ii/models/block/wisproot_log.json
 d3cafee5292d65983b2b1a59751e4279ac53f7e4 assets/aether_ii/models/block/wisproot_log_horizontal.json
 00ae7c84a967c77eaa58f268178529cb7cc898d8 assets/aether_ii/models/block/wisptop_leaves.json
+958e53fe7ac7cdd0e91cbee3daffc8f5b61fdd40 assets/aether_ii/models/block/zanite_ore.json
