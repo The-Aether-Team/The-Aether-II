@@ -2,7 +2,7 @@
   "carvers": {},
   "downfall": 0.0,
   "effects": {
-    "fog_color": 9671612,
+    "fog_color": 15986943,
     "foliage_color": 11665355,
     "grass_color": 12450303,
     "music": {
@@ -11,9 +11,9 @@
       "replace_current_music": true,
       "sound": "aether_ii:music.highlands.arctic"
     },
-    "sky_color": 12632319,
-    "water_color": 4159204,
-    "water_fog_color": 329011
+    "sky_color": 15197180,
+    "water_color": 6519464,
+    "water_fog_color": 4083842
   },
   "features": [],
   "has_precipitation": false,
