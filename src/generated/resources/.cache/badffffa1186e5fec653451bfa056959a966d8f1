@@ -1,1 +1,11 @@
-// 1.20.4	2024-05-22T16:43:33.1303295	Tags for minecraft:block mod id aether_ii
+// 1.20.4	2024-05-23T16:32:55.2242048	Tags for minecraft:block mod id aether_ii
+a6cb4c19d89a718bf42595fdcdffd0e03b5bc4b8 data/aether_ii/tags/blocks/amberoot_logs.json
+d16832b00a987fbbf18259365f95111bc00a1576 data/aether_ii/tags/blocks/greatroot_logs.json
+a7a38000f936642b7fb1aab74c26dbefd5483490 data/aether_ii/tags/blocks/skyroot_logs.json
+7e6974b61ae56625dc2ea30ee021d854764eb5d4 data/aether_ii/tags/blocks/wisproot_logs.json
+a6685e1093c7d12931d10e87e81506e1c193060b data/minecraft/tags/blocks/mineable/axe.json
+5ce5d86b29e41be7a71270c36ddf3324cd626b39 data/minecraft/tags/blocks/mineable/hoe.json
+c43de7a17142adfa2d11320201c4698875704722 data/minecraft/tags/blocks/mineable/pickaxe.json
+d457a5865e0e2507bd85af6b47b743994258eae9 data/minecraft/tags/blocks/mineable/shovel.json
+bc114239597449d3c856f73b0268baa008ca357d data/minecraft/tags/blocks/needs_iron_tool.json
+b027ef8057c900299f434c8f7b7f870fe062c871 data/minecraft/tags/blocks/needs_stone_tool.json

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_arkenium": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:raw_arkenium"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:arkenium_plate_from_smelting_raw"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_arkenium"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:arkenium_plate_from_smelting_raw"
+    ]
+  }
+}

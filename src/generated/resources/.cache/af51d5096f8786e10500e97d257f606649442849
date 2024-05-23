@@ -1,1 +1,9 @@
-// 1.20.4	2024-05-22T16:43:33.1343288	Tags for minecraft:item mod id aether_ii
+// 1.20.4	2024-05-23T16:32:55.2292071	Tags for minecraft:item mod id aether_ii
+a6cb4c19d89a718bf42595fdcdffd0e03b5bc4b8 data/aether_ii/tags/items/amberoot_logs.json
+723e82204484e4ab7f84cb1d829b94e9354ba424 data/aether_ii/tags/items/crafts_greatroot_planks.json
+fce3e48dcf2a2f543eb33cde348393547a8abb35 data/aether_ii/tags/items/crafts_skyroot_planks.json
+83ee50adcdca9d4ab6edf6f27b80ebbfeac2d130 data/aether_ii/tags/items/crafts_skyroot_sticks.json
+95632e0a46336508c58a914081fb650aa9766416 data/aether_ii/tags/items/crafts_wisproot_planks.json
+d16832b00a987fbbf18259365f95111bc00a1576 data/aether_ii/tags/items/greatroot_logs.json
+a7a38000f936642b7fb1aab74c26dbefd5483490 data/aether_ii/tags/items/skyroot_logs.json
+7e6974b61ae56625dc2ea30ee021d854764eb5d4 data/aether_ii/tags/items/wisproot_logs.json

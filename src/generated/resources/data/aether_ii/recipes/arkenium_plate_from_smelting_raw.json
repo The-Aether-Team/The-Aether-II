@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.7,
+  "ingredient": {
+    "item": "aether_ii:raw_arkenium"
+  },
+  "result": "aether_ii:arkenium_plate"
+}

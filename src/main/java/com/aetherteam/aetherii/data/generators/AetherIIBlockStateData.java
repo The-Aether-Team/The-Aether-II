@@ -14,6 +14,38 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
     @Override
     public void registerStatesAndModels() {
         this.block(AetherIIBlocks.AETHER_DIRT.get(), "natural/");
+        this.block(AetherIIBlocks.QUICKSOIL.get(), "natural/");
         this.block(AetherIIBlocks.HOLYSTONE.get(), "natural/");
+        this.block(AetherIIBlocks.UNDERSHALE.get(), "natural/");
+        this.block(AetherIIBlocks.AMBROSIUM_ORE.get(), "natural/");
+        this.block(AetherIIBlocks.ZANITE_ORE.get(), "natural/");
+        this.block(AetherIIBlocks.ARKENIUM_ORE.get(), "natural/");
+        this.block(AetherIIBlocks.GRAVITITE_ORE.get(), "natural/");
+
+        this.aercloudAll(AetherIIBlocks.COLD_AERCLOUD.get(), "natural/");
+
+        this.log(AetherIIBlocks.SKYROOT_LOG.get());
+        this.log(AetherIIBlocks.GREATROOT_LOG.get());
+        this.log(AetherIIBlocks.WISPROOT_LOG.get());
+        this.logDifferentTop(AetherIIBlocks.AMBEROOT_LOG.get(), AetherIIBlocks.SKYROOT_LOG.get());
+        this.wood(AetherIIBlocks.SKYROOT_WOOD.get(), AetherIIBlocks.SKYROOT_LOG.get());
+        this.wood(AetherIIBlocks.GREATROOT_WOOD.get(), AetherIIBlocks.GREATROOT_LOG.get());
+        this.wood(AetherIIBlocks.WISPROOT_WOOD.get(), AetherIIBlocks.WISPROOT_LOG.get());
+        this.wood(AetherIIBlocks.AMBEROOT_WOOD.get(), AetherIIBlocks.AMBEROOT_LOG.get());
+
+        this.block(AetherIIBlocks.SKYROOT_LEAVES.get(), "natural/");
+        this.block(AetherIIBlocks.SKYPLANE_LEAVES.get(), "natural/");
+        this.block(AetherIIBlocks.SKYBIRCH_LEAVES.get(), "natural/");
+        this.block(AetherIIBlocks.SKYPINE_LEAVES.get(), "natural/");
+        this.block(AetherIIBlocks.WISPROOT_LEAVES.get(), "natural/");
+        this.block(AetherIIBlocks.WISPTOP_LEAVES.get(), "natural/");
+        this.block(AetherIIBlocks.GREATROOT_LEAVES.get(), "natural/");
+        this.block(AetherIIBlocks.GREATOAK_LEAVES.get(), "natural/");
+        this.block(AetherIIBlocks.GREATBOA_LEAVES.get(), "natural/");
+        this.block(AetherIIBlocks.AMBEROOT_LEAVES.get(), "natural/");
+
+        this.block(AetherIIBlocks.SKYROOT_PLANKS.get(), "construction/");
+        this.block(AetherIIBlocks.GREATROOT_PLANKS.get(), "construction/");
+        this.block(AetherIIBlocks.WISPROOT_PLANKS.get(), "construction/");
     }
 }
