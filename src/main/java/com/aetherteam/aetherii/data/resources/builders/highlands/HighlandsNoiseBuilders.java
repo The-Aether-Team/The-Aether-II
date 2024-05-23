@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.data.resources.builders.highlands;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.resources.registries.AetherIINoises;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -14,19 +15,19 @@ import net.minecraft.world.level.levelgen.synth.NormalNoise;
 import java.util.List;
 
 public class HighlandsNoiseBuilders {
-    private static final SurfaceRules.RuleSource GRASS_BLOCK = SurfaceRules.state(Blocks.GRASS_BLOCK.defaultBlockState());
-    private static final SurfaceRules.RuleSource DIRT = SurfaceRules.state(Blocks.DIRT.defaultBlockState());
+    private static final SurfaceRules.RuleSource GRASS_BLOCK = SurfaceRules.state(AetherIIBlocks.AETHER_GRASS_BLOCK.get().defaultBlockState());
+    private static final SurfaceRules.RuleSource DIRT = SurfaceRules.state(AetherIIBlocks.AETHER_DIRT.get().defaultBlockState());
 
     public static NoiseGeneratorSettings highlandsNoiseSettings(HolderGetter<DensityFunction> densityFunctions, HolderGetter<NormalNoise.NoiseParameters> noise) {
-        BlockState holystone = Blocks.STONE.defaultBlockState();
+        BlockState holystone = AetherIIBlocks.HOLYSTONE.get().defaultBlockState();
         return new NoiseGeneratorSettings(
-                new NoiseSettings(0, 128, 2, 1), // noiseSettings
+                new NoiseSettings(-128, 256, 2, 1), // noiseSettings
                 holystone, // defaultBlock
                 Blocks.WATER.defaultBlockState(), // defaultFluid
                 makeNoiseRouter(densityFunctions, noise), // noiseRouter
                 highlandsSurfaceRules(), // surfaceRule
                 List.of(), // spawnTarget
-                -64, // seaLevel
+                0, // seaLevel
                 false, // disableMobGeneration
                 false, // aquifersEnabled
                 false, // oreVeinsEnabled

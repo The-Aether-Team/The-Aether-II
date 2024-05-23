@@ -6,7 +6,7 @@
       "type": "minecraft:multi_noise",
       "biomes": [
         {
-          "biome": "aether_ii:default",
+          "biome": "aether_ii:flourishing_field",
           "parameters": {
             "continentalness": [
               -1.0,
