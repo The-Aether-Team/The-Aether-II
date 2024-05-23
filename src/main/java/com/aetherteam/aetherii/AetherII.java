@@ -2,6 +2,7 @@ package com.aetherteam.aetherii;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.AetherIIClient;
+import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.data.AetherData;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -26,7 +27,8 @@ public class AetherII {
         DeferredRegister<?>[] registers = {
                 AetherIIBlocks.BLOCKS,
                 AetherIIItems.ITEMS,
-                AetherIIEntityTypes.ENTITY_TYPES
+                AetherIIEntityTypes.ENTITY_TYPES,
+                AetherIISoundEvents.SOUNDS
         };
 
         for (DeferredRegister<?> register : registers) {

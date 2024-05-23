@@ -1,19 +1,18 @@
 package com.aetherteam.aetherii.data.resources.builders.highlands;
 
+import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIBiomes;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.sounds.Music;
-import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.*;
-import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 import java.util.List;
 
 public class HighlandsBiomeBuilders {
-    private static final BiomeSpecialEffects HIGHFIELDS_COLORS = new BiomeSpecialEffects.Builder()
+    private static final BiomeSpecialEffects HIGHFIELDS_EFFECTS = new BiomeSpecialEffects.Builder()
             .fogColor(0x9393bc)
             .skyColor(0xc0c0ff)
             .waterColor(0x3f76e4)
@@ -21,8 +20,9 @@ public class HighlandsBiomeBuilders {
             .grassColorOverride(0xb5ffd0)
             .foliageColorOverride(0xb1ffcb)
             .grassColorModifier(BiomeSpecialEffects.GrassColorModifier.NONE)
+            .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_HIGHFIELDS, 12000, 24000, true))
             .build();
-    private static final BiomeSpecialEffects MAGNETIC_COLORS = new BiomeSpecialEffects.Builder()
+    private static final BiomeSpecialEffects MAGNETIC_EFFECTS = new BiomeSpecialEffects.Builder()
             .fogColor(0x9393bc)
             .skyColor(0xc0c0ff)
             .waterColor(0x3f76e4)
@@ -30,8 +30,9 @@ public class HighlandsBiomeBuilders {
             .grassColorOverride(0xc9ffd1)
             .foliageColorOverride(0xb1ffcb)
             .grassColorModifier(BiomeSpecialEffects.GrassColorModifier.NONE)
+            .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_MAGNETIC, 12000, 24000, true))
             .build();
-    private static final BiomeSpecialEffects ARCTIC_COLORS = new BiomeSpecialEffects.Builder()
+    private static final BiomeSpecialEffects ARCTIC_EFFECTS = new BiomeSpecialEffects.Builder()
             .fogColor(0x9393bc)
             .skyColor(0xc0c0ff)
             .waterColor(0x3f76e4)
@@ -39,8 +40,9 @@ public class HighlandsBiomeBuilders {
             .grassColorOverride(0xbdf9ff)
             .foliageColorOverride(0xb1ffcb)
             .grassColorModifier(BiomeSpecialEffects.GrassColorModifier.NONE)
+            .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_ARCTIC, 12000, 24000, true))
             .build();
-    private static final BiomeSpecialEffects IRRADIATED_COLORS = new BiomeSpecialEffects.Builder()
+    private static final BiomeSpecialEffects IRRADIATED_EFFECTS = new BiomeSpecialEffects.Builder()
             .fogColor(0x9393bc)
             .skyColor(0xc0c0ff)
             .waterColor(0x3f76e4)
@@ -48,6 +50,17 @@ public class HighlandsBiomeBuilders {
             .grassColorOverride(0xfff7a8)
             .foliageColorOverride(0xb1ffcb)
             .grassColorModifier(BiomeSpecialEffects.GrassColorModifier.NONE)
+            .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_IRRADIATED, 12000, 24000, true))
+            .build();
+    private static final BiomeSpecialEffects AERCLOUD_SEA_EFFECTS = new BiomeSpecialEffects.Builder()
+            .fogColor(0x9393bc)
+            .skyColor(0xc0c0ff)
+            .waterColor(0x3f76e4)
+            .waterFogColor(0x050533)
+            .grassColorOverride(0xfff7a8)
+            .foliageColorOverride(0xb1ffcb)
+            .grassColorModifier(BiomeSpecialEffects.GrassColorModifier.NONE)
+            .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_AERCLOUD_SEA, 12000, 24000, true))
             .build();
 
     public static Biome makeHighfieldsBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
@@ -57,7 +70,7 @@ public class HighlandsBiomeBuilders {
                 false,
                 0.8F,
                 0.0F,
-                HIGHFIELDS_COLORS,
+                HIGHFIELDS_EFFECTS,
                 spawnSettingsBuilder.build(),
                 generationSettingsBuilder.build(),
                 Biome.TemperatureModifier.NONE
@@ -71,7 +84,7 @@ public class HighlandsBiomeBuilders {
                 false,
                 0.8F,
                 0.0F,
-                MAGNETIC_COLORS,
+                MAGNETIC_EFFECTS,
                 spawnSettingsBuilder.build(),
                 generationSettingsBuilder.build(),
                 Biome.TemperatureModifier.NONE
@@ -85,7 +98,7 @@ public class HighlandsBiomeBuilders {
                 false,
                 0.8F,
                 0.0F,
-                ARCTIC_COLORS,
+                ARCTIC_EFFECTS,
                 spawnSettingsBuilder.build(),
                 generationSettingsBuilder.build(),
                 Biome.TemperatureModifier.NONE
@@ -99,7 +112,7 @@ public class HighlandsBiomeBuilders {
                 false,
                 0.8F,
                 0.0F,
-                IRRADIATED_COLORS,
+                IRRADIATED_EFFECTS,
                 spawnSettingsBuilder.build(),
                 generationSettingsBuilder.build(),
                 Biome.TemperatureModifier.NONE
@@ -113,7 +126,7 @@ public class HighlandsBiomeBuilders {
                 false,
                 0.8F,
                 0.0F,
-                HIGHFIELDS_COLORS,
+                AERCLOUD_SEA_EFFECTS,
                 spawnSettingsBuilder.build(),
                 generationSettingsBuilder.build(),
                 Biome.TemperatureModifier.NONE
