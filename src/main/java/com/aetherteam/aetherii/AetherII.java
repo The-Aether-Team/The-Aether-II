@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.client.AetherIIClient;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.data.AetherData;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.item.AetherIICreativeTabs;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.mojang.logging.LogUtils;
 import net.neoforged.api.distmarker.Dist;
@@ -28,6 +29,7 @@ public class AetherII {
                 AetherIIBlocks.BLOCKS,
                 AetherIIItems.ITEMS,
                 AetherIIEntityTypes.ENTITY_TYPES,
+                AetherIICreativeTabs.CREATIVE_MODE_TABS,
                 AetherIISoundEvents.SOUNDS
         };
 

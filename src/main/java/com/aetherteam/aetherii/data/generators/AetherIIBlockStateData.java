@@ -14,6 +14,21 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
     @Override
     public void registerStatesAndModels() {
         this.block(AetherIIBlocks.AETHER_DIRT.get(), "natural/");
+        this.block(AetherIIBlocks.QUICKSOIL.get(), "natural/");
         this.block(AetherIIBlocks.HOLYSTONE.get(), "natural/");
+        this.block(AetherIIBlocks.UNDERSHALE.get(), "natural/");
+        this.log(AetherIIBlocks.SKYROOT_LOG.get());
+        this.log(AetherIIBlocks.GREATROOT_LOG.get());
+        this.log(AetherIIBlocks.WISPROOT_LOG.get());
+        this.block(AetherIIBlocks.SKYROOT_LEAVES.get(), "natural/");
+        this.block(AetherIIBlocks.SKYPLANE_LEAVES.get(), "natural/");
+        this.block(AetherIIBlocks.SKYBIRCH_LEAVES.get(), "natural/");
+        this.block(AetherIIBlocks.SKYPINE_LEAVES.get(), "natural/");
+        this.block(AetherIIBlocks.WISPROOT_LEAVES.get(), "natural/");
+        this.block(AetherIIBlocks.WISPTOP_LEAVES.get(), "natural/");
+        this.block(AetherIIBlocks.GREATROOT_LEAVES.get(), "natural/");
+        this.block(AetherIIBlocks.GREATOAK_LEAVES.get(), "natural/");
+        this.block(AetherIIBlocks.GREATBOA_LEAVES.get(), "natural/");
+        this.block(AetherIIBlocks.AMBEROOT_LEAVES.get(), "natural/");
     }
 }

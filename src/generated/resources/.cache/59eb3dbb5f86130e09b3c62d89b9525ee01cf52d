@@ -1,4 +1,19 @@
-// 1.20.4	2024-05-22T16:54:49.603776	Loot Tables
+// 1.20.4	2024-05-23T13:40:19.5545236	Loot Tables
 b3ac0f837a89ef6292323e16712ccb72b957e765 data/aether_ii/loot_tables/blocks/aether_dirt.json
 2a86a9bdc0455369b0dffc142c983d9cc2431881 data/aether_ii/loot_tables/blocks/aether_grass_block.json
+cd78acddc96546721e8ddea1858c70e70430d9d6 data/aether_ii/loot_tables/blocks/amberoot_leaves.json
+9be68174a3e3a6907eea34712a74a2ed05d89912 data/aether_ii/loot_tables/blocks/greatboa_leaves.json
+4beb1078ff6e029191c8f4ddc82414e13f96a64c data/aether_ii/loot_tables/blocks/greatoak_leaves.json
+abd50f37811393b5f7eafa42ea9f6960674ed813 data/aether_ii/loot_tables/blocks/greatroot_leaves.json
+11c8018d4b3dedfc0ba57f44e5c01a294679bf98 data/aether_ii/loot_tables/blocks/greatroot_log.json
 ad537436c978b07f8ff457e16f0cdb4c00e72d31 data/aether_ii/loot_tables/blocks/holystone.json
+7b60d94ee66fd74c65e40066a9ea4995a75a63b3 data/aether_ii/loot_tables/blocks/quicksoil.json
+e824efdf0b729b58caac1af199ac08087f452b94 data/aether_ii/loot_tables/blocks/skybirch_leaves.json
+738c97f5f6e3c604cf6e10b4ac1b2d0c348d66cf data/aether_ii/loot_tables/blocks/skypine_leaves.json
+7f0d63dd932336f59c8efb352a086f272250d2b1 data/aether_ii/loot_tables/blocks/skyplane_leaves.json
+a7cd901b826942775eeb46cdbaae0284becc2571 data/aether_ii/loot_tables/blocks/skyroot_leaves.json
+f1509b7b632c3aa6be1d48b87fb077612daf3252 data/aether_ii/loot_tables/blocks/skyroot_log.json
+affaaaa736e64e95322f25d01dc9885fbb07a51c data/aether_ii/loot_tables/blocks/undershale.json
+591ce0ecc4b375703a5b27203b3787edad40dbc3 data/aether_ii/loot_tables/blocks/wisproot_leaves.json
+4936f06572bdfc61f98cd2074a63ce9531ff7dac data/aether_ii/loot_tables/blocks/wisproot_log.json
+9e33933f16f371dd44e2aeb86228299e9d460895 data/aether_ii/loot_tables/blocks/wisptop_leaves.json
