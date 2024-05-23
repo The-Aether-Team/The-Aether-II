@@ -18,10 +18,20 @@ public class AetherIICreativeTabs {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_BUILDING_BLOCKS = CREATIVE_MODE_TABS.register("building_blocks", () -> CreativeModeTab.builder()
             .withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
             .withTabsAfter(new ResourceLocation(AetherII.MODID, "dungeon_blocks"))
-            .icon(() -> new ItemStack(Blocks.STONE))
+            .icon(() -> new ItemStack(AetherIIBlocks.SKYROOT_PLANKS.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".building_blocks"))
             .displayItems((features, output) -> {
-
+                output.accept(AetherIIBlocks.SKYROOT_LOG.get());
+                output.accept(AetherIIBlocks.SKYROOT_WOOD.get());
+                output.accept(AetherIIBlocks.SKYROOT_PLANKS.get());
+                output.accept(AetherIIBlocks.GREATROOT_LOG.get());
+                output.accept(AetherIIBlocks.GREATROOT_WOOD.get());
+                output.accept(AetherIIBlocks.GREATROOT_PLANKS.get());
+                output.accept(AetherIIBlocks.WISPROOT_LOG.get());
+                output.accept(AetherIIBlocks.WISPROOT_WOOD.get());
+                output.accept(AetherIIBlocks.WISPROOT_PLANKS.get());
+                output.accept(AetherIIBlocks.AMBEROOT_LOG.get());
+                output.accept(AetherIIBlocks.AMBEROOT_WOOD.get());
             }).build());
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_DUNGEON_BLOCKS = CREATIVE_MODE_TABS.register("dungeon_blocks", () -> CreativeModeTab.builder()
             .withTabsBefore(new ResourceLocation(AetherII.MODID, "building_blocks"))
@@ -50,6 +60,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.SKYROOT_LOG.get());
                 output.accept(AetherIIBlocks.GREATROOT_LOG.get());
                 output.accept(AetherIIBlocks.WISPROOT_LOG.get());
+                output.accept(AetherIIBlocks.AMBEROOT_LOG.get());
                 output.accept(AetherIIBlocks.SKYROOT_LEAVES.get());
                 output.accept(AetherIIBlocks.SKYPLANE_LEAVES.get());
                 output.accept(AetherIIBlocks.SKYBIRCH_LEAVES.get());

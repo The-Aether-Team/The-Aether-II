@@ -35,6 +35,11 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.SKYROOT_LOG.get());
         this.itemBlock(AetherIIBlocks.GREATROOT_LOG.get());
         this.itemBlock(AetherIIBlocks.WISPROOT_LOG.get());
+        this.itemBlock(AetherIIBlocks.AMBEROOT_LOG.get());
+        this.itemBlock(AetherIIBlocks.SKYROOT_WOOD.get());
+        this.itemBlock(AetherIIBlocks.GREATROOT_WOOD.get());
+        this.itemBlock(AetherIIBlocks.WISPROOT_WOOD.get());
+        this.itemBlock(AetherIIBlocks.AMBEROOT_WOOD.get());
         this.itemBlock(AetherIIBlocks.SKYROOT_LEAVES.get());
         this.itemBlock(AetherIIBlocks.SKYPLANE_LEAVES.get());
         this.itemBlock(AetherIIBlocks.SKYBIRCH_LEAVES.get());
@@ -45,5 +50,8 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.GREATOAK_LEAVES.get());
         this.itemBlock(AetherIIBlocks.GREATBOA_LEAVES.get());
         this.itemBlock(AetherIIBlocks.AMBEROOT_LEAVES.get());
+        this.itemBlock(AetherIIBlocks.SKYROOT_PLANKS.get());
+        this.itemBlock(AetherIIBlocks.GREATROOT_PLANKS.get());
+        this.itemBlock(AetherIIBlocks.WISPROOT_PLANKS.get());
     }
 }

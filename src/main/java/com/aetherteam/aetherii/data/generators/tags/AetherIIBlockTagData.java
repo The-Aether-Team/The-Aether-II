@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.data.generators.tags;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -18,6 +19,19 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
 
     @Override
     public void addTags(HolderLookup.Provider provider) {
+        this.tag(AetherIITags.Blocks.SKYROOT_LOGS).add(
+                AetherIIBlocks.SKYROOT_LOG.get(),
+                AetherIIBlocks.SKYROOT_WOOD.get());
+        this.tag(AetherIITags.Blocks.GREATROOT_LOGS).add(
+                AetherIIBlocks.GREATROOT_LOG.get(),
+                AetherIIBlocks.GREATROOT_WOOD.get());
+        this.tag(AetherIITags.Blocks.WISPROOT_LOGS).add(
+                AetherIIBlocks.WISPROOT_LOG.get(),
+                AetherIIBlocks.WISPROOT_WOOD.get());
+        this.tag(AetherIITags.Blocks.AMBEROOT_LOGS).add(
+                AetherIIBlocks.AMBEROOT_LOG.get(),
+                AetherIIBlocks.AMBEROOT_WOOD.get());
+
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
                 AetherIIBlocks.HOLYSTONE.get(),
                 AetherIIBlocks.UNDERSHALE.get(),
@@ -29,7 +43,15 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(BlockTags.MINEABLE_WITH_AXE).add(
                 AetherIIBlocks.SKYROOT_LOG.get(),
                 AetherIIBlocks.GREATROOT_LOG.get(),
-                AetherIIBlocks.WISPROOT_LOG.get()
+                AetherIIBlocks.WISPROOT_LOG.get(),
+                AetherIIBlocks.AMBEROOT_LOG.get(),
+                AetherIIBlocks.SKYROOT_WOOD.get(),
+                AetherIIBlocks.GREATROOT_WOOD.get(),
+                AetherIIBlocks.WISPROOT_WOOD.get(),
+                AetherIIBlocks.AMBEROOT_WOOD.get(),
+                AetherIIBlocks.SKYROOT_PLANKS.get(),
+                AetherIIBlocks.GREATROOT_PLANKS.get(),
+                AetherIIBlocks.WISPROOT_PLANKS.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),

@@ -44,6 +44,11 @@ public class AetherIIBlocks { //todo abstract methods for stuff like logs and le
     public static final DeferredBlock<RotatedPillarBlock> SKYROOT_LOG = register("skyroot_log", () -> new RotatedPillarBlock(Block.Properties.ofFullCopy(Blocks.OAK_LOG)));
     public static final DeferredBlock<RotatedPillarBlock> GREATROOT_LOG = register("greatroot_log", () -> new RotatedPillarBlock(Block.Properties.ofFullCopy(Blocks.OAK_LOG)));
     public static final DeferredBlock<RotatedPillarBlock> WISPROOT_LOG = register("wisproot_log", () -> new RotatedPillarBlock(Block.Properties.ofFullCopy(Blocks.OAK_LOG)));
+    public static final DeferredBlock<RotatedPillarBlock> AMBEROOT_LOG = register("amberoot_log", () -> new RotatedPillarBlock(Block.Properties.ofFullCopy(Blocks.OAK_LOG)));
+    public static final DeferredBlock<RotatedPillarBlock> SKYROOT_WOOD = register("skyroot_wood", () -> new RotatedPillarBlock(Block.Properties.ofFullCopy(Blocks.OAK_LOG)));
+    public static final DeferredBlock<RotatedPillarBlock> GREATROOT_WOOD = register("greatroot_wood", () -> new RotatedPillarBlock(Block.Properties.ofFullCopy(Blocks.OAK_LOG)));
+    public static final DeferredBlock<RotatedPillarBlock> WISPROOT_WOOD = register("wisproot_wood", () -> new RotatedPillarBlock(Block.Properties.ofFullCopy(Blocks.OAK_LOG)));
+    public static final DeferredBlock<RotatedPillarBlock> AMBEROOT_WOOD = register("amberoot_wood", () -> new RotatedPillarBlock(Block.Properties.ofFullCopy(Blocks.OAK_LOG)));
 
     // Leaves //todo map colors
     public static final DeferredBlock<Block> SKYROOT_LEAVES = register("skyroot_leaves", () -> new LeavesBlock(Block.Properties.of().mapColor(MapColor.GRASS).ignitedByLava().pushReaction(PushReaction.DESTROY).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().isValidSpawn(AetherIIBlocks::ocelotOrParrot).isRedstoneConductor(AetherIIBlocks::never).isSuffocating(AetherIIBlocks::never).isViewBlocking(AetherIIBlocks::never)));
@@ -56,6 +61,11 @@ public class AetherIIBlocks { //todo abstract methods for stuff like logs and le
     public static final DeferredBlock<Block> GREATOAK_LEAVES = register("greatoak_leaves", () -> new LeavesBlock(Block.Properties.of().mapColor(MapColor.GRASS).ignitedByLava().pushReaction(PushReaction.DESTROY).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().isValidSpawn(AetherIIBlocks::ocelotOrParrot).isRedstoneConductor(AetherIIBlocks::never).isSuffocating(AetherIIBlocks::never).isViewBlocking(AetherIIBlocks::never)));
     public static final DeferredBlock<Block> GREATBOA_LEAVES = register("greatboa_leaves", () -> new LeavesBlock(Block.Properties.of().mapColor(MapColor.GRASS).ignitedByLava().pushReaction(PushReaction.DESTROY).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().isValidSpawn(AetherIIBlocks::ocelotOrParrot).isRedstoneConductor(AetherIIBlocks::never).isSuffocating(AetherIIBlocks::never).isViewBlocking(AetherIIBlocks::never)));
     public static final DeferredBlock<Block> AMBEROOT_LEAVES = register("amberoot_leaves", () -> new LeavesBlock(Block.Properties.of().mapColor(MapColor.GRASS).ignitedByLava().pushReaction(PushReaction.DESTROY).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().isValidSpawn(AetherIIBlocks::ocelotOrParrot).isRedstoneConductor(AetherIIBlocks::never).isSuffocating(AetherIIBlocks::never).isViewBlocking(AetherIIBlocks::never)));
+
+    // Planks
+    public static final DeferredBlock<Block> SKYROOT_PLANKS = register("skyroot_planks", () -> new Block(Block.Properties.ofFullCopy(Blocks.OAK_PLANKS)));
+    public static final DeferredBlock<Block> GREATROOT_PLANKS = register("greatroot_planks", () -> new Block(Block.Properties.ofFullCopy(Blocks.OAK_PLANKS)));
+    public static final DeferredBlock<Block> WISPROOT_PLANKS = register("wisproot_planks", () -> new Block(Block.Properties.ofFullCopy(Blocks.OAK_PLANKS)));
 
     private static <T extends Block> DeferredBlock<T> baseRegister(String name, Supplier<? extends T> block, Function<DeferredBlock<T>, Supplier<? extends Item>> item) {
         DeferredBlock<T> register = BLOCKS.register(name, block);

@@ -5,7 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SnowyDirtBlock;
+import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -68,6 +68,10 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                 .face(Direction.EAST).texture("#east_outside").uvs(0, 0, 16, 16).cullface(Direction.EAST).end()
                 .end();
         this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(model));
+    }
+
+    public void logDifferentTop(RotatedPillarBlock block, RotatedPillarBlock baseBlock) {
+        this.axisBlock(block, this.texture(this.name(block), "natural/"), this.extend(this.texture(this.name(baseBlock), "natural/"), "_top"));
     }
 
 //    public void grass(Block block, Block dirtBlock) {

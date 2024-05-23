@@ -27,6 +27,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.SKYROOT_LOG, "Skyroot Log");
         this.addBlock(AetherIIBlocks.GREATROOT_LOG, "Greatroot Log");
         this.addBlock(AetherIIBlocks.WISPROOT_LOG, "Wisproot Log");
+        this.addBlock(AetherIIBlocks.AMBEROOT_LOG, "Amberoot Log");
+        this.addBlock(AetherIIBlocks.SKYROOT_WOOD, "Skyroot Wood");
+        this.addBlock(AetherIIBlocks.GREATROOT_WOOD, "Greatroot Wood");
+        this.addBlock(AetherIIBlocks.WISPROOT_WOOD, "Wisproot Wood");
+        this.addBlock(AetherIIBlocks.AMBEROOT_WOOD, "Amberoot Wood");
         this.addBlock(AetherIIBlocks.SKYROOT_LEAVES, "Skyroot Leaves");
         this.addBlock(AetherIIBlocks.SKYPLANE_LEAVES, "Skyplane Leaves");
         this.addBlock(AetherIIBlocks.SKYBIRCH_LEAVES, "Skybirch Leaves");
@@ -37,6 +42,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.GREATOAK_LEAVES, "Greatoak Leaves");
         this.addBlock(AetherIIBlocks.GREATBOA_LEAVES, "Greatboa Leaves");
         this.addBlock(AetherIIBlocks.AMBEROOT_LEAVES, "Amberoot Leaves");
+        this.addBlock(AetherIIBlocks.SKYROOT_PLANKS, "Skyroot Planks");
+        this.addBlock(AetherIIBlocks.GREATROOT_PLANKS, "Greatroot Planks");
+        this.addBlock(AetherIIBlocks.WISPROOT_PLANKS, "Wisproot Planks");
 
         this.addItem(AetherIIItems.SKYROOT_STICK, "Skyroot Stick");
         this.addItem(AetherIIItems.AMBROSIUM_SHARD, "Ambrosium Shard");

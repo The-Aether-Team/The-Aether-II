@@ -36,6 +36,11 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.SKYROOT_LOG.get());
         this.dropSelf(AetherIIBlocks.GREATROOT_LOG.get());
         this.dropSelf(AetherIIBlocks.WISPROOT_LOG.get());
+        this.dropSelf(AetherIIBlocks.AMBEROOT_LOG.get());
+        this.dropSelf(AetherIIBlocks.SKYROOT_WOOD.get());
+        this.dropSelf(AetherIIBlocks.GREATROOT_WOOD.get());
+        this.dropSelf(AetherIIBlocks.WISPROOT_WOOD.get());
+        this.dropSelf(AetherIIBlocks.AMBEROOT_WOOD.get());
 
         //todo
         this.dropNone(AetherIIBlocks.SKYROOT_LEAVES.get());
@@ -48,6 +53,10 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropNone(AetherIIBlocks.GREATOAK_LEAVES.get());
         this.dropNone(AetherIIBlocks.GREATBOA_LEAVES.get());
         this.dropNone(AetherIIBlocks.AMBEROOT_LEAVES.get());
+
+        this.dropSelf(AetherIIBlocks.SKYROOT_PLANKS.get());
+        this.dropSelf(AetherIIBlocks.GREATROOT_PLANKS.get());
+        this.dropSelf(AetherIIBlocks.WISPROOT_PLANKS.get());
     }
 
     @Override
