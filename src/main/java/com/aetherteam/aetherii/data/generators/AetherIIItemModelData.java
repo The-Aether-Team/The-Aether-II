@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.data.generators;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.providers.AetherIIItemModelProvider;
+import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
@@ -13,6 +14,14 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
 
     @Override
     protected void registerModels() {
+        this.handheldItem(AetherIIItems.SKYROOT_STICK.get(), "materials/");
+        this.item(AetherIIItems.AMBROSIUM_SHARD.get(), "materials/");
+        this.item(AetherIIItems.ZANITE_GEMSTONE.get(), "materials/");
+        this.item(AetherIIItems.RAW_ARKENIUM.get(), "materials/");
+        this.item(AetherIIItems.ARKENIUM_PLATE.get(), "materials/");
+        this.item(AetherIIItems.RAW_GRAVITITE.get(), "materials/");
+        this.item(AetherIIItems.GRAVITITE_PLATE.get(), "materials/");
+
         this.itemBlock(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
         this.itemBlock(AetherIIBlocks.AETHER_DIRT.get());
         this.itemBlock(AetherIIBlocks.QUICKSOIL.get());

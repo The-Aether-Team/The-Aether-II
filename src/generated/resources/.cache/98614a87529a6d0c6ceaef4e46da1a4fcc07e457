@@ -1,24 +1,31 @@
-// 1.20.4	2024-05-23T15:25:33.7441072	Item Models: aether_ii
+// 1.20.4	2024-05-23T15:52:29.2013176	Item Models: aether_ii
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
 b485bb7a980decbc46719aeaac129689fa3f6a19 assets/aether_ii/models/item/aether_grass_block.json
 183e501764258654cc51853d14080c0c90ad97bb assets/aether_ii/models/item/amberoot_leaves.json
 77308024eea02e4ceae6af25c5f9817950c5cb19 assets/aether_ii/models/item/ambrosium_ore.json
+c491603cffa0239e489fddeddf49195bf9eba0dc assets/aether_ii/models/item/ambrosium_shard.json
 ea1731a6ef141f6d52a0a97ec20696b5aa53c54e assets/aether_ii/models/item/arkenium_ore.json
+b5679100bbb9478dedbaf17aad1aecc1518ff30e assets/aether_ii/models/item/arkenium_plate.json
 5a386cdf2cd4b293002c2ecbfa9ad92a6a9b55c7 assets/aether_ii/models/item/cold_aercloud.json
 04fa6eb965ac5239cd7bbe301852db13db9e47fe assets/aether_ii/models/item/gravitite_ore.json
+b5aa47f315a0d4e76a68e2df27bdb86fb9bfa8b3 assets/aether_ii/models/item/gravitite_plate.json
 1cc5e95ef10df402465b93aee2d044989bcd576b assets/aether_ii/models/item/greatboa_leaves.json
 62f7a90989bbafca743aefbe9d3a35d0595ecd0c assets/aether_ii/models/item/greatoak_leaves.json
 b7d95fde2897b2afc05b56ca6d12da7dde0f9ed2 assets/aether_ii/models/item/greatroot_leaves.json
 803fbd582dc61fa4105e49b29236f0ff24c1fb5c assets/aether_ii/models/item/greatroot_log.json
 8e2ea2de4b9c40ce8d12bb8929db104621345611 assets/aether_ii/models/item/holystone.json
 8e37ebdc1c0a7d3958be57b8d394648cdaf9a581 assets/aether_ii/models/item/quicksoil.json
+a6f09963a1bf3d9ecad7a84042d37734d43e4137 assets/aether_ii/models/item/raw_arkenium.json
+fad53ce2a6eed791c566a36883f6cce0d0a71b6c assets/aether_ii/models/item/raw_gravitite.json
 8a0980302cbbd9afaab3f79672dfe45915644984 assets/aether_ii/models/item/skybirch_leaves.json
 d634fe0d27710caaafbf9d63c2877d6a38c3cc71 assets/aether_ii/models/item/skypine_leaves.json
 1264f25092e1b8ae0cfed08db5bf04a82a366fe8 assets/aether_ii/models/item/skyplane_leaves.json
 c99d5a4bf9d1c534ad0c1fbab6e66885f3c029cd assets/aether_ii/models/item/skyroot_leaves.json
 f055e8b468c9d6c90068e06871dc723d96276eb9 assets/aether_ii/models/item/skyroot_log.json
+2cca1f194cbbc8465a4400391cdc3a65c9598dad assets/aether_ii/models/item/skyroot_stick.json
 b54510ea4cf32c696c314fc9005802fdab3c208a assets/aether_ii/models/item/undershale.json
 e36af53ba18d2661d75b557c1cb111f1400b9284 assets/aether_ii/models/item/wisproot_leaves.json
 2f80adde58d2b47e3e48b60ceec291a49b41a461 assets/aether_ii/models/item/wisproot_log.json
 962869521316611ce7ea217861b3f90966cce67d assets/aether_ii/models/item/wisptop_leaves.json
+10ec1392907d5b55a0e41ac870e8f2e4758ff81d assets/aether_ii/models/item/zanite_gemstone.json
 42f39521325442a933b5013ed24a40ff3177e842 assets/aether_ii/models/item/zanite_ore.json

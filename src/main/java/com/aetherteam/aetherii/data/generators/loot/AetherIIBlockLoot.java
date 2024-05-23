@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.data.generators.loot;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.providers.AetherIIBlockLootSubProvider;
+import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -24,14 +25,18 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.QUICKSOIL.get());
         this.dropSelf(AetherIIBlocks.HOLYSTONE.get());
         this.dropSelf(AetherIIBlocks.UNDERSHALE.get());
-        this.dropSelf(AetherIIBlocks.AMBROSIUM_ORE.get());
-        this.dropSelf(AetherIIBlocks.ZANITE_ORE.get());
-        this.dropSelf(AetherIIBlocks.ARKENIUM_ORE.get());
-        this.dropSelf(AetherIIBlocks.GRAVITITE_ORE.get());
+
+        this.dropWithFortune(AetherIIBlocks.AMBROSIUM_ORE.get(), AetherIIItems.AMBROSIUM_SHARD.get());
+        this.dropWithFortune(AetherIIBlocks.ZANITE_ORE.get(), AetherIIItems.ZANITE_GEMSTONE.get());
+        this.dropWithFortune(AetherIIBlocks.ARKENIUM_ORE.get(), AetherIIItems.RAW_ARKENIUM.get());
+        this.dropWithFortune(AetherIIBlocks.GRAVITITE_ORE.get(), AetherIIItems.RAW_GRAVITITE.get());
+
         this.dropSelf(AetherIIBlocks.COLD_AERCLOUD.get());
+
         this.dropSelf(AetherIIBlocks.SKYROOT_LOG.get());
         this.dropSelf(AetherIIBlocks.GREATROOT_LOG.get());
         this.dropSelf(AetherIIBlocks.WISPROOT_LOG.get());
+
         //todo
         this.dropNone(AetherIIBlocks.SKYROOT_LEAVES.get());
         this.dropNone(AetherIIBlocks.SKYPLANE_LEAVES.get());
