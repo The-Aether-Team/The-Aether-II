@@ -1,5 +1,7 @@
-// 1.20.4	2024-05-23T13:40:19.5475208	Tags for minecraft:block mod id aether_ii
+// 1.20.4	2024-05-23T15:25:33.6071072	Tags for minecraft:block mod id aether_ii
 c178c06ee50628b38a5ec94147cbb81b82f5891b data/minecraft/tags/blocks/mineable/axe.json
-5bf1a9be6ebc7d682e6514d2c7aa1ed69f98f2db data/minecraft/tags/blocks/mineable/hoe.json
-a5df7a36d1179fd70f1778840b38bad71c171e4b data/minecraft/tags/blocks/mineable/pickaxe.json
+5ce5d86b29e41be7a71270c36ddf3324cd626b39 data/minecraft/tags/blocks/mineable/hoe.json
+c43de7a17142adfa2d11320201c4698875704722 data/minecraft/tags/blocks/mineable/pickaxe.json
 d457a5865e0e2507bd85af6b47b743994258eae9 data/minecraft/tags/blocks/mineable/shovel.json
+bc114239597449d3c856f73b0268baa008ca357d data/minecraft/tags/blocks/needs_iron_tool.json
+b027ef8057c900299f434c8f7b7f870fe062c871 data/minecraft/tags/blocks/needs_stone_tool.json

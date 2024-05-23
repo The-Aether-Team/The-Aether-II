@@ -18,6 +18,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.QUICKSOIL, "Quicksoil");
         this.addBlock(AetherIIBlocks.HOLYSTONE, "Holystone");
         this.addBlock(AetherIIBlocks.UNDERSHALE, "Undershale");
+        this.addBlock(AetherIIBlocks.AMBROSIUM_ORE, "Ambrosium Ore");
+        this.addBlock(AetherIIBlocks.ZANITE_ORE, "Zanite Ore");
+        this.addBlock(AetherIIBlocks.ARKENIUM_ORE, "Arkenium Ore");
+        this.addBlock(AetherIIBlocks.GRAVITITE_ORE, "Gravitite Ore");
+        this.addBlock(AetherIIBlocks.COLD_AERCLOUD, "Cold Aercloud");
         this.addBlock(AetherIIBlocks.SKYROOT_LOG, "Skyroot Log");
         this.addBlock(AetherIIBlocks.GREATROOT_LOG, "Greatroot Log");
         this.addBlock(AetherIIBlocks.WISPROOT_LOG, "Wisproot Log");

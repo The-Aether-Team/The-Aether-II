@@ -42,6 +42,11 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.QUICKSOIL.get());
                 output.accept(AetherIIBlocks.HOLYSTONE.get());
                 output.accept(AetherIIBlocks.UNDERSHALE.get());
+                output.accept(AetherIIBlocks.AMBROSIUM_ORE.get());
+                output.accept(AetherIIBlocks.ZANITE_ORE.get());
+                output.accept(AetherIIBlocks.ARKENIUM_ORE.get());
+                output.accept(AetherIIBlocks.GRAVITITE_ORE.get());
+                output.accept(AetherIIBlocks.COLD_AERCLOUD.get());
                 output.accept(AetherIIBlocks.SKYROOT_LOG.get());
                 output.accept(AetherIIBlocks.GREATROOT_LOG.get());
                 output.accept(AetherIIBlocks.WISPROOT_LOG.get());

@@ -19,7 +19,12 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
     @Override
     public void addTags(HolderLookup.Provider provider) {
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
-                AetherIIBlocks.HOLYSTONE.get()
+                AetherIIBlocks.HOLYSTONE.get(),
+                AetherIIBlocks.UNDERSHALE.get(),
+                AetherIIBlocks.AMBROSIUM_ORE.get(),
+                AetherIIBlocks.ZANITE_ORE.get(),
+                AetherIIBlocks.ARKENIUM_ORE.get(),
+                AetherIIBlocks.GRAVITITE_ORE.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_AXE).add(
                 AetherIIBlocks.SKYROOT_LOG.get(),
@@ -32,6 +37,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.QUICKSOIL.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_HOE).add(
+                AetherIIBlocks.COLD_AERCLOUD.get(),
                 AetherIIBlocks.SKYROOT_LEAVES.get(),
                 AetherIIBlocks.SKYPLANE_LEAVES.get(),
                 AetherIIBlocks.SKYBIRCH_LEAVES.get(),
@@ -42,6 +48,13 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.GREATOAK_LEAVES.get(),
                 AetherIIBlocks.GREATBOA_LEAVES.get(),
                 AetherIIBlocks.AMBEROOT_LEAVES.get()
+        );
+        this.tag(BlockTags.NEEDS_STONE_TOOL).add(
+                AetherIIBlocks.ZANITE_ORE.get()
+        );
+        this.tag(BlockTags.NEEDS_IRON_TOOL).add(
+                AetherIIBlocks.ARKENIUM_ORE.get(),
+                AetherIIBlocks.GRAVITITE_ORE.get()
         );
     }
 }
