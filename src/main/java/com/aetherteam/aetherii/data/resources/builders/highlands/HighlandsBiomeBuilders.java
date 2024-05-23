@@ -13,28 +13,109 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import java.util.List;
 
 public class HighlandsBiomeBuilders {
-    public static Biome defaultBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
-        return makeDefaultBiome(new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers));
-    }
+    private static final BiomeSpecialEffects HIGHFIELDS_COLORS = new BiomeSpecialEffects.Builder()
+            .fogColor(0x9393bc)
+            .skyColor(0xc0c0ff)
+            .waterColor(0x3f76e4)
+            .waterFogColor(0x050533)
+            .grassColorOverride(0xb5ffd0)
+            .foliageColorOverride(0xb1ffcb)
+            .grassColorModifier(BiomeSpecialEffects.GrassColorModifier.NONE)
+            .build();
+    private static final BiomeSpecialEffects MAGNETIC_COLORS = new BiomeSpecialEffects.Builder()
+            .fogColor(0x9393bc)
+            .skyColor(0xc0c0ff)
+            .waterColor(0x3f76e4)
+            .waterFogColor(0x050533)
+            .grassColorOverride(0xc9ffd1)
+            .foliageColorOverride(0xb1ffcb)
+            .grassColorModifier(BiomeSpecialEffects.GrassColorModifier.NONE)
+            .build();
+    private static final BiomeSpecialEffects ARCTIC_COLORS = new BiomeSpecialEffects.Builder()
+            .fogColor(0x9393bc)
+            .skyColor(0xc0c0ff)
+            .waterColor(0x3f76e4)
+            .waterFogColor(0x050533)
+            .grassColorOverride(0xbdf9ff)
+            .foliageColorOverride(0xb1ffcb)
+            .grassColorModifier(BiomeSpecialEffects.GrassColorModifier.NONE)
+            .build();
+    private static final BiomeSpecialEffects IRRADIATED_COLORS = new BiomeSpecialEffects.Builder()
+            .fogColor(0x9393bc)
+            .skyColor(0xc0c0ff)
+            .waterColor(0x3f76e4)
+            .waterFogColor(0x050533)
+            .grassColorOverride(0xfff7a8)
+            .foliageColorOverride(0xb1ffcb)
+            .grassColorModifier(BiomeSpecialEffects.GrassColorModifier.NONE)
+            .build();
 
-    public static Biome makeDefaultBiome(BiomeGenerationSettings.Builder builder) {
+    public static Biome makeHighfieldsBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
+        BiomeGenerationSettings.Builder generationSettingsBuilder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
+        MobSpawnSettings.Builder spawnSettingsBuilder = new MobSpawnSettings.Builder();
         return fullDefinition(
                 false,
                 0.8F,
                 0.0F,
-                new BiomeSpecialEffects.Builder()
-                        .fogColor(0x93_93_bc)
-                        .skyColor(0xc0_c0_ff)
-                        .waterColor(0x3f_76_e4)
-                        .waterFogColor(0x05_05_33)
-                        .grassColorOverride(0xb1_ff_cb)
-                        .foliageColorOverride(0xb1_ff_cb)
-                        .grassColorModifier(BiomeSpecialEffects.GrassColorModifier.NONE)
-                        .build(),
-                new MobSpawnSettings.Builder()
-                        .build(),
-                builder
-                        .build(),
+                HIGHFIELDS_COLORS,
+                spawnSettingsBuilder.build(),
+                generationSettingsBuilder.build(),
+                Biome.TemperatureModifier.NONE
+        );
+    }
+
+    public static Biome makeMagneticBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
+        BiomeGenerationSettings.Builder generationSettingsBuilder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
+        MobSpawnSettings.Builder spawnSettingsBuilder = new MobSpawnSettings.Builder();
+        return fullDefinition(
+                false,
+                0.8F,
+                0.0F,
+                MAGNETIC_COLORS,
+                spawnSettingsBuilder.build(),
+                generationSettingsBuilder.build(),
+                Biome.TemperatureModifier.NONE
+        );
+    }
+
+    public static Biome makeArcticBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
+        BiomeGenerationSettings.Builder generationSettingsBuilder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
+        MobSpawnSettings.Builder spawnSettingsBuilder = new MobSpawnSettings.Builder();
+        return fullDefinition(
+                false,
+                0.8F,
+                0.0F,
+                ARCTIC_COLORS,
+                spawnSettingsBuilder.build(),
+                generationSettingsBuilder.build(),
+                Biome.TemperatureModifier.NONE
+        );
+    }
+
+    public static Biome makeIrradiatedBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
+        BiomeGenerationSettings.Builder generationSettingsBuilder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
+        MobSpawnSettings.Builder spawnSettingsBuilder = new MobSpawnSettings.Builder();
+        return fullDefinition(
+                false,
+                0.8F,
+                0.0F,
+                IRRADIATED_COLORS,
+                spawnSettingsBuilder.build(),
+                generationSettingsBuilder.build(),
+                Biome.TemperatureModifier.NONE
+        );
+    }
+
+    public static Biome makeAercloudSeaBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
+        BiomeGenerationSettings.Builder generationSettingsBuilder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
+        MobSpawnSettings.Builder spawnSettingsBuilder = new MobSpawnSettings.Builder();
+        return fullDefinition(
+                false,
+                0.8F,
+                0.0F,
+                HIGHFIELDS_COLORS,
+                spawnSettingsBuilder.build(),
+                generationSettingsBuilder.build(),
                 Biome.TemperatureModifier.NONE
         );
     }
@@ -51,12 +132,46 @@ public class HighlandsBiomeBuilders {
                 .build();
     }
 
-    public static BiomeSource buildHighlandsBiomeSource(HolderGetter<Biome> biomes) {
+    public static BiomeSource buildHighlandsBiomeSource(HolderGetter<Biome> biomes) { //todo wip
         Climate.Parameter fullRange = Climate.Parameter.span(-1.0F, 1.0F);
+        Climate.Parameter lowRange = Climate.Parameter.span(-1.0F, 0.0F);
+        Climate.Parameter highRange = Climate.Parameter.span(0.0F, 1.0F);
         return MultiNoiseBiomeSource.createFromList(new Climate.ParameterList<>(List.of(
-                // Row 1
-                Pair.of(new Climate.ParameterPoint(fullRange, fullRange, fullRange, fullRange, fullRange, fullRange, 0),
-                        biomes.getOrThrow(AetherIIBiomes.DEFAULT))
+                // Highfields
+                Pair.of(new Climate.ParameterPoint(highRange, lowRange, highRange, lowRange, highRange, lowRange, 0),
+                        biomes.getOrThrow(AetherIIBiomes.FLOURISHING_FIELD)),
+                Pair.of(new Climate.ParameterPoint(highRange, highRange, highRange, lowRange, lowRange, lowRange, 0),
+                        biomes.getOrThrow(AetherIIBiomes.VERDANT_WOODS)),
+                Pair.of(new Climate.ParameterPoint(highRange, lowRange, highRange, lowRange, highRange, lowRange, 0),
+                        biomes.getOrThrow(AetherIIBiomes.SHROUDED_FOREST)),
+                Pair.of(new Climate.ParameterPoint(highRange, highRange, highRange, lowRange, lowRange, lowRange, 0),
+                        biomes.getOrThrow(AetherIIBiomes.SHIMMERING_BASIN)),
+                // Magnetic
+                Pair.of(new Climate.ParameterPoint(highRange, lowRange, highRange, highRange, highRange, lowRange, 0),
+                        biomes.getOrThrow(AetherIIBiomes.MAGNETIC_SCAR)),
+                Pair.of(new Climate.ParameterPoint(highRange, highRange, highRange, highRange, lowRange, lowRange, 0),
+                        biomes.getOrThrow(AetherIIBiomes.TURQUOISE_FOREST)),
+                Pair.of(new Climate.ParameterPoint(highRange, highRange, highRange, highRange, lowRange, lowRange, 0),
+                        biomes.getOrThrow(AetherIIBiomes.GLISTENING_SWAMP)),
+                Pair.of(new Climate.ParameterPoint(highRange, lowRange, highRange, highRange, highRange, lowRange, 0),
+                        biomes.getOrThrow(AetherIIBiomes.VIOLET_HIGHWOODS)),
+                // Arctic
+                Pair.of(new Climate.ParameterPoint(lowRange, highRange, highRange, lowRange, lowRange, lowRange, 0),
+                        biomes.getOrThrow(AetherIIBiomes.FRIGID_SIERRA)),
+                Pair.of(new Climate.ParameterPoint(lowRange, lowRange, highRange, lowRange, highRange, lowRange, 0),
+                        biomes.getOrThrow(AetherIIBiomes.ENDURING_WOODLAND)),
+                Pair.of(new Climate.ParameterPoint(lowRange, highRange, highRange, lowRange, lowRange, lowRange, 0),
+                        biomes.getOrThrow(AetherIIBiomes.FROZEN_LAKES)),
+                Pair.of(new Climate.ParameterPoint(lowRange, lowRange, highRange, lowRange, highRange, lowRange, 0),
+                        biomes.getOrThrow(AetherIIBiomes.SHEER_TUNDRA)),
+                // Irradiated
+                Pair.of(new Climate.ParameterPoint(highRange, highRange, highRange, lowRange, lowRange, highRange, 0),
+                        biomes.getOrThrow(AetherIIBiomes.CONTAMINATED_JUNGLE)),
+                Pair.of(new Climate.ParameterPoint(highRange, lowRange, highRange, lowRange, highRange, highRange, 0),
+                        biomes.getOrThrow(AetherIIBiomes.BATTLEGROUND_WASTES)),
+                // Aercloud Sea
+                Pair.of(new Climate.ParameterPoint(highRange, fullRange, lowRange, fullRange, fullRange, fullRange, 0),
+                        biomes.getOrThrow(AetherIIBiomes.EXPANSE))
         )));
     }
 }

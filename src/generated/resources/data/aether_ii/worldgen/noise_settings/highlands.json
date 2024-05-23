@@ -1,7 +1,7 @@
 {
   "aquifers_enabled": false,
   "default_block": {
-    "Name": "minecraft:stone"
+    "Name": "aether_ii:holystone"
   },
   "default_fluid": {
     "Name": "minecraft:water",
@@ -12,8 +12,8 @@
   "disable_mob_generation": false,
   "legacy_random_source": false,
   "noise": {
-    "height": 128,
-    "min_y": 0,
+    "height": 256,
+    "min_y": -128,
     "size_horizontal": 2,
     "size_vertical": 1
   },
@@ -104,7 +104,7 @@
     "vein_toggle": 0.0
   },
   "ore_veins_enabled": false,
-  "sea_level": -64,
+  "sea_level": 0,
   "spawn_target": [],
   "surface_rule": {
     "type": "minecraft:sequence",
@@ -132,7 +132,7 @@
               "then_run": {
                 "type": "minecraft:block",
                 "result_state": {
-                  "Name": "minecraft:grass_block",
+                  "Name": "aether_ii:aether_grass_block",
                   "Properties": {
                     "snowy": "false"
                   }
@@ -142,7 +142,7 @@
             {
               "type": "minecraft:block",
               "result_state": {
-                "Name": "minecraft:dirt"
+                "Name": "aether_ii:aether_dirt"
               }
             }
           ]
@@ -160,7 +160,7 @@
         "then_run": {
           "type": "minecraft:block",
           "result_state": {
-            "Name": "minecraft:dirt"
+            "Name": "aether_ii:aether_dirt"
           }
         }
       }

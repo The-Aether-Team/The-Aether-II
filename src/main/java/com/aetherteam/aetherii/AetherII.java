@@ -17,7 +17,7 @@ import org.slf4j.Logger;
 @Mod(AetherII.MODID)
 public class AetherII {
     public static final String MODID = "aether_ii";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public AetherII(IEventBus bus, Dist dist) {
         bus.addListener(AetherII::commonSetup);

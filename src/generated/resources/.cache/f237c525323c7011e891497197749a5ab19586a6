@@ -1,1 +1,5 @@
-// 1.19.4	2023-04-18T17:43:28.5437109	Block States: aether_ii
+// 1.20.4	2024-05-22T16:54:49.5927757	Block States: aether_ii
+09820e9981cbdbe29cb2563890673c61c5abe056 assets/aether_ii/blockstates/aether_dirt.json
+e6a9bf0c4014bb4052365c4b9fba3adfbba19afc assets/aether_ii/blockstates/holystone.json
+f444c2d02a1445ab4b6fd3fe26bbb16f757e4856 assets/aether_ii/models/block/aether_dirt.json
+408aa3bbd69ef83a44045132fa6beb88167b0421 assets/aether_ii/models/block/holystone.json

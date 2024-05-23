@@ -1,1 +1,4 @@
-// 1.19.4	2023-04-18T17:43:28.5887122	Loot Tables
+// 1.20.4	2024-05-22T16:54:49.603776	Loot Tables
+b3ac0f837a89ef6292323e16712ccb72b957e765 data/aether_ii/loot_tables/blocks/aether_dirt.json
+2a86a9bdc0455369b0dffc142c983d9cc2431881 data/aether_ii/loot_tables/blocks/aether_grass_block.json
+ad537436c978b07f8ff457e16f0cdb4c00e72d31 data/aether_ii/loot_tables/blocks/holystone.json
