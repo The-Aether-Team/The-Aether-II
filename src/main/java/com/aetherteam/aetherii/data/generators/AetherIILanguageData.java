@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.providers.AetherIILanguageProvider;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
+import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.data.PackOutput;
 
 public class AetherIILanguageData extends AetherIILanguageProvider {
@@ -36,6 +37,14 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.GREATOAK_LEAVES, "Greatoak Leaves");
         this.addBlock(AetherIIBlocks.GREATBOA_LEAVES, "Greatboa Leaves");
         this.addBlock(AetherIIBlocks.AMBEROOT_LEAVES, "Amberoot Leaves");
+
+        this.addItem(AetherIIItems.SKYROOT_STICK, "Skyroot Stick");
+        this.addItem(AetherIIItems.AMBROSIUM_SHARD, "Ambrosium Shard");
+        this.addItem(AetherIIItems.ZANITE_GEMSTONE, "Zanite Gemstone");
+        this.addItem(AetherIIItems.RAW_ARKENIUM, "Raw Arkenium");
+        this.addItem(AetherIIItems.ARKENIUM_PLATE, "Arkenium Plate");
+        this.addItem(AetherIIItems.RAW_GRAVITITE, "Raw Gravitite");
+        this.addItem(AetherIIItems.GRAVITITE_PLATE, "Gravitite Plate");
 
         this.addCreativeTab(AetherIICreativeTabs.AETHER_BUILDING_BLOCKS.get(), "Aether II Building Blocks");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_DUNGEON_BLOCKS.get(), "Aether II Dungeon Blocks");
