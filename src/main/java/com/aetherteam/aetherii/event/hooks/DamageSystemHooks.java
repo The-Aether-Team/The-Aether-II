@@ -23,7 +23,7 @@ public class DamageSystemHooks {
             sourceStack = itemSupplier.getItem();
         }
 
-        if (!sourceStack.isEmpty()) {
+        if (!sourceStack.isEmpty()) { //todo factor in cooldown and crits
             float slashDamage = AetherIIDamageInflictions.getSlashDamage(registryAccess, sourceStack) - AetherIIDamageResistances.getSlashDefense(registryAccess, target);
             float impactDamage = AetherIIDamageInflictions.getImpactDamage(registryAccess, sourceStack) - AetherIIDamageResistances.getImpactDefense(registryAccess, target);
             float pierceDamage = AetherIIDamageInflictions.getPierceDamage(registryAccess, sourceStack) - AetherIIDamageResistances.getPierceDefense(registryAccess, target);
