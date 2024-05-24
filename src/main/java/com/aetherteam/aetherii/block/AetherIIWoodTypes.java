@@ -12,6 +12,6 @@ public class AetherIIWoodTypes {
     public static final BlockSetType GREATROOT_BLOCK_SET = new BlockSetType(new ResourceLocation(AetherII.MODID, "greatroot").toString());
     public static final WoodType GREATROOT = new WoodType(new ResourceLocation(AetherII.MODID, "greatroot").toString(), GREATROOT_BLOCK_SET);
 
-    public static final BlockSetType WISPROOT_BLOCK_SET = new BlockSetType(new ResourceLocation(AetherII.MODID, "greatroot").toString());
+    public static final BlockSetType WISPROOT_BLOCK_SET = new BlockSetType(new ResourceLocation(AetherII.MODID, "wisproot").toString());
     public static final WoodType WISPROOT = new WoodType(new ResourceLocation(AetherII.MODID, "wisproot").toString(), WISPROOT_BLOCK_SET);
 }
