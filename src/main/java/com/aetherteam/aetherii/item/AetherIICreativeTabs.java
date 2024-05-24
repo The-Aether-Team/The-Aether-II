@@ -38,6 +38,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.GREATROOT_FENCE.get());
                 output.accept(AetherIIBlocks.GREATROOT_FENCE_GATE.get());
                 output.accept(AetherIIBlocks.GREATROOT_PRESSURE_PLATE.get());
+                output.accept(AetherIIBlocks.GREATROOT_BUTTON.get());
                 output.accept(AetherIIBlocks.WISPROOT_LOG.get());
                 output.accept(AetherIIBlocks.WISPROOT_WOOD.get());
                 output.accept(AetherIIBlocks.WISPROOT_PLANKS.get());
@@ -46,9 +47,19 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.WISPROOT_FENCE.get());
                 output.accept(AetherIIBlocks.WISPROOT_FENCE_GATE.get());
                 output.accept(AetherIIBlocks.WISPROOT_PRESSURE_PLATE.get());
+                output.accept(AetherIIBlocks.WISPROOT_BUTTON.get());
                 output.accept(AetherIIBlocks.AMBEROOT_LOG.get());
                 output.accept(AetherIIBlocks.AMBEROOT_WOOD.get());
+                output.accept(AetherIIBlocks.HOLYSTONE.get());
+                output.accept(AetherIIBlocks.HOLYSTONE_WALL.get());
+                output.accept(AetherIIBlocks.HOLYSTONE_STAIRS.get());
+                output.accept(AetherIIBlocks.HOLYSTONE_SLAB.get());
+                output.accept(AetherIIBlocks.HOLYSTONE_PRESSURE_PLATE.get());
+                output.accept(AetherIIBlocks.HOLYSTONE_BUTTON.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_BRICKS.get());
+                output.accept(AetherIIBlocks.HOLYSTONE_BRICK_WALL.get());
+                output.accept(AetherIIBlocks.HOLYSTONE_BRICK_STAIRS.get());
+                output.accept(AetherIIBlocks.HOLYSTONE_BRICK_SLAB.get());
             }).build());
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_DUNGEON_BLOCKS = CREATIVE_MODE_TABS.register("dungeon_blocks", () -> CreativeModeTab.builder()
             .withTabsBefore(new ResourceLocation(AetherII.MODID, "building_blocks"))

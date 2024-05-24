@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-23T18:34:41.4889248	Item Models: aether_ii
+// 1.20.4	2024-05-23T19:06:43.0830121	Item Models: aether_ii
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
 b485bb7a980decbc46719aeaac129689fa3f6a19 assets/aether_ii/models/item/aether_grass_block.json
 183e501764258654cc51853d14080c0c90ad97bb assets/aether_ii/models/item/amberoot_leaves.json
@@ -34,9 +34,17 @@ e3b849f6603be0ebb13307529d64e4de7d081c6c assets/aether_ii/models/item/greatroot_
 8e2ea2de4b9c40ce8d12bb8929db104621345611 assets/aether_ii/models/item/holystone.json
 0835f677ffa59ed15b6385fda54653f2ac513621 assets/aether_ii/models/item/holystone_axe.json
 a6ecedda3f29b3ee2813e021e444eda7e3160514 assets/aether_ii/models/item/holystone_bricks.json
+e22aac8b000522264fb03925fce0374d3eb71b08 assets/aether_ii/models/item/holystone_brick_slab.json
+c3bea203b8917571dc4d022cf96b068ceac88ff4 assets/aether_ii/models/item/holystone_brick_stairs.json
+3aee6d9e2498ea96ce9c59b95fff00c35476f827 assets/aether_ii/models/item/holystone_brick_wall.json
+f26a40bb0998dfef2dc0993b0875caa03a4c5f51 assets/aether_ii/models/item/holystone_button.json
 5ea6ea50657574464a43ae19815616413125ae8a assets/aether_ii/models/item/holystone_pickaxe.json
+b1d7855ec43a99b480d29b4f816f83f143104448 assets/aether_ii/models/item/holystone_pressure_plate.json
 0962fb67f453f2184d17164244710d93086a93cd assets/aether_ii/models/item/holystone_shovel.json
+6c802e87e26468f5e3cbba17076d1cd80b1930cc assets/aether_ii/models/item/holystone_slab.json
+2232e5bfd4444c96b01c1e1cb505889b50dc5b61 assets/aether_ii/models/item/holystone_stairs.json
 dd7dbfd68a795bf1d0035260b7b53d835143d28b assets/aether_ii/models/item/holystone_trowel.json
+9690c4cefe4dac918bc5a491a72735917042ea37 assets/aether_ii/models/item/holystone_wall.json
 8e37ebdc1c0a7d3958be57b8d394648cdaf9a581 assets/aether_ii/models/item/quicksoil.json
 a6f09963a1bf3d9ecad7a84042d37734d43e4137 assets/aether_ii/models/item/raw_arkenium.json
 fad53ce2a6eed791c566a36883f6cce0d0a71b6c assets/aether_ii/models/item/raw_gravitite.json

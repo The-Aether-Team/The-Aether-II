@@ -63,7 +63,15 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.WISPROOT_PRESSURE_PLATE, "Wisproot Pressure Plate");
         this.addBlock(AetherIIBlocks.WISPROOT_STAIRS, "Wisproot Stairs");
         this.addBlock(AetherIIBlocks.WISPROOT_SLAB, "Wisproot Slab");
+        this.addBlock(AetherIIBlocks.HOLYSTONE_BUTTON, "Holystone Button");
+        this.addBlock(AetherIIBlocks.HOLYSTONE_PRESSURE_PLATE, "Holystone Pressure Plate");
+        this.addBlock(AetherIIBlocks.HOLYSTONE_WALL, "Holystone Wall");
+        this.addBlock(AetherIIBlocks.HOLYSTONE_STAIRS, "Holystone Stairs");
+        this.addBlock(AetherIIBlocks.HOLYSTONE_SLAB, "Holystone Slab");
         this.addBlock(AetherIIBlocks.HOLYSTONE_BRICKS, "Holystone Bricks");
+        this.addBlock(AetherIIBlocks.HOLYSTONE_BRICK_WALL, "Holystone Brick Wall");
+        this.addBlock(AetherIIBlocks.HOLYSTONE_BRICK_STAIRS, "Holystone Brick Stairs");
+        this.addBlock(AetherIIBlocks.HOLYSTONE_BRICK_SLAB, "Holystone Brick Slab");
 
         
         this.addItem(AetherIIItems.SKYROOT_PICKAXE, "Skyroot Pickaxe");

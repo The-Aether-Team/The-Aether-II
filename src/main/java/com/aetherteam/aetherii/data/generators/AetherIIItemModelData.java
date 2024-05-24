@@ -96,6 +96,14 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.WISPROOT_PRESSURE_PLATE.get());
         this.itemBlock(AetherIIBlocks.WISPROOT_STAIRS.get());
         this.itemBlock(AetherIIBlocks.WISPROOT_SLAB.get());
+        this.itemButton(AetherIIBlocks.HOLYSTONE_BUTTON.get(), AetherIIBlocks.HOLYSTONE.get(), "natural/");
+        this.itemBlock(AetherIIBlocks.HOLYSTONE_PRESSURE_PLATE.get());
+        this.itemWallBlock(AetherIIBlocks.HOLYSTONE_WALL.get(), AetherIIBlocks.HOLYSTONE.get(), "natural/");
+        this.itemBlock(AetherIIBlocks.HOLYSTONE_STAIRS.get());
+        this.itemBlock(AetherIIBlocks.HOLYSTONE_SLAB.get());
         this.itemBlock(AetherIIBlocks.HOLYSTONE_BRICKS.get());
+        this.itemWallBlock(AetherIIBlocks.HOLYSTONE_BRICK_WALL.get(), AetherIIBlocks.HOLYSTONE_BRICKS.get(), "construction/");
+        this.itemBlock(AetherIIBlocks.HOLYSTONE_BRICK_STAIRS.get());
+        this.itemBlock(AetherIIBlocks.HOLYSTONE_BRICK_SLAB.get());
     }
 }

@@ -78,7 +78,16 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.WISPROOT_STAIRS.get());
         this.add(AetherIIBlocks.WISPROOT_SLAB.get(), this::createSlabItemTable);
 
+        this.dropSelf(AetherIIBlocks.HOLYSTONE_BUTTON.get());
+        this.dropSelf(AetherIIBlocks.HOLYSTONE_PRESSURE_PLATE.get());
+        this.dropSelf(AetherIIBlocks.HOLYSTONE_WALL.get());
+        this.dropSelf(AetherIIBlocks.HOLYSTONE_STAIRS.get());
+        this.add(AetherIIBlocks.HOLYSTONE_SLAB.get(), this::createSlabItemTable);
+
         this.dropSelf(AetherIIBlocks.HOLYSTONE_BRICKS.get());
+        this.dropSelf(AetherIIBlocks.HOLYSTONE_BRICK_WALL.get());
+        this.dropSelf(AetherIIBlocks.HOLYSTONE_BRICK_STAIRS.get());
+        this.add(AetherIIBlocks.HOLYSTONE_BRICK_SLAB.get(), this::createSlabItemTable);
     }
 
     @Override

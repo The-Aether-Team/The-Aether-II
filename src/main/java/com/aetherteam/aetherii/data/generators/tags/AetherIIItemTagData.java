@@ -74,6 +74,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.SKYROOT_BUTTON.asItem(),
                 AetherIIBlocks.GREATROOT_BUTTON.asItem(),
                 AetherIIBlocks.WISPROOT_BUTTON.asItem());
+        this.tag(ItemTags.STONE_BUTTONS).add(AetherIIBlocks.HOLYSTONE_BUTTON.get().asItem());
         this.tag(ItemTags.WOODEN_PRESSURE_PLATES).add(
                 AetherIIBlocks.SKYROOT_PRESSURE_PLATE.asItem(),
                 AetherIIBlocks.GREATROOT_PRESSURE_PLATE.asItem(),
