@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.data.resources.registries.features;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.data.resources.builders.highlands.AetherIIFeatureBuilders;
+import com.aetherteam.aetherii.data.resources.builders.AetherIIFeatureBuilders;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
