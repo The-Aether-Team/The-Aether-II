@@ -2,10 +2,12 @@ package com.aetherteam.aetherii.data.resources.builders.highlands;
 
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIBiomes;
+import com.aetherteam.aetherii.data.resources.registries.placement.AetherIIMiscPlacements;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.sounds.Music;
 import net.minecraft.world.level.biome.*;
+import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
@@ -72,7 +74,9 @@ public class HighlandsBiomeBuilders {
                 0.0F,
                 HIGHFIELDS_EFFECTS,
                 spawnSettingsBuilder.build(),
-                generationSettingsBuilder.build(),
+                generationSettingsBuilder
+                        .addFeature(GenerationStep.Decoration.RAW_GENERATION, AetherIIMiscPlacements.COAST_QUICKSOIL)
+                        .build(),
                 Biome.TemperatureModifier.NONE
         );
     }
@@ -147,6 +151,7 @@ public class HighlandsBiomeBuilders {
 
     public static BiomeSource buildHighlandsBiomeSource(HolderGetter<Biome> biomes) {
         Climate.Parameter fullRange = Climate.Parameter.span(-1.5F, 1.5F);
+
         Climate.Parameter tempArctic = Climate.Parameter.span(-1.5F, -0.4F);
         Climate.Parameter tempHighfields1 = Climate.Parameter.span(-0.4F, -0.1F);
         Climate.Parameter tempHighfields2 = Climate.Parameter.span(-0.1F, 0.3F);
@@ -161,13 +166,13 @@ public class HighlandsBiomeBuilders {
 
         return MultiNoiseBiomeSource.createFromList(new Climate.ParameterList<>(List.of(
 
-                //Arctic Peaks
+                // Arctic
                 Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-1.0F, -0.2F), fullRange, erosionDefault, fullRange, fullRange, 0),
                         biomes.getOrThrow(AetherIIBiomes.SHEER_TUNDRA)),
                 Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-0.2F, 1.0F), fullRange, erosionDefault, fullRange, fullRange, 0),
                         biomes.getOrThrow(AetherIIBiomes.ENDURING_WOODLAND)),
 
-                //Highfields
+                // Highfields
                 Pair.of(new Climate.ParameterPoint(tempHighfields1, Climate.Parameter.span(-1.0F, -0.25F), fullRange, erosionDefault, fullRange, fullRange, 0),
                         biomes.getOrThrow(AetherIIBiomes.SHROUDED_FOREST)),
                 Pair.of(new Climate.ParameterPoint(tempHighfields1, Climate.Parameter.span(-0.25F, 0.15F), fullRange, erosionDefault, fullRange, fullRange, 0),
@@ -189,7 +194,7 @@ public class HighlandsBiomeBuilders {
                 Pair.of(new Climate.ParameterPoint(tempHighfields3, Climate.Parameter.span(0.2F, 1.0F), fullRange, erosionDefault, fullRange, fullRange, 0),
                         biomes.getOrThrow(AetherIIBiomes.SHROUDED_FOREST)),
 
-                //Magnetic Hills
+                // Magnetic
                 Pair.of(new Climate.ParameterPoint(tempMagnetic1, Climate.Parameter.span(-1.0F, -0.2F), fullRange, erosionMagnetic, fullRange, fullRange, 0),
                         biomes.getOrThrow(AetherIIBiomes.VIOLET_HIGHWOODS)),
                 Pair.of(new Climate.ParameterPoint(tempMagnetic1, Climate.Parameter.span(-0.2F, 0.15F), fullRange, erosionMagnetic, fullRange, fullRange, 0),
@@ -216,7 +221,7 @@ public class HighlandsBiomeBuilders {
                 Pair.of(new Climate.ParameterPoint(tempIrradiated, fullRange, fullRange, erosionMagnetic, fullRange, fullRange, 0),
                         biomes.getOrThrow(AetherIIBiomes.MAGNETIC_SCAR)),
 
-                //Irradiated Forests
+                // Irradiated
                 Pair.of(new Climate.ParameterPoint(tempIrradiated, Climate.Parameter.span(-1.0F, -0.25F), erosionDefault, fullRange, fullRange, fullRange, 0),
                         biomes.getOrThrow(AetherIIBiomes.BATTLEGROUND_WASTES)),
                 Pair.of(new Climate.ParameterPoint(tempIrradiated, Climate.Parameter.span(-0.25F, 0.25F), erosionDefault, fullRange, fullRange, fullRange, 0),

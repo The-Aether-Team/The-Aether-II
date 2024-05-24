@@ -18,6 +18,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.AETHER_DIRT, "Aether Dirt");
         this.addBlock(AetherIIBlocks.QUICKSOIL, "Quicksoil");
         this.addBlock(AetherIIBlocks.HOLYSTONE, "Holystone");
+        this.addBlock(AetherIIBlocks.MOSSY_HOLYSTONE, "Mossy Holystone");
         this.addBlock(AetherIIBlocks.UNDERSHALE, "Undershale");
         this.addBlock(AetherIIBlocks.AMBROSIUM_ORE, "Ambrosium Ore");
         this.addBlock(AetherIIBlocks.ZANITE_ORE, "Zanite Ore");
@@ -43,8 +44,81 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.GREATBOA_LEAVES, "Greatboa Leaves");
         this.addBlock(AetherIIBlocks.AMBEROOT_LEAVES, "Amberoot Leaves");
         this.addBlock(AetherIIBlocks.SKYROOT_PLANKS, "Skyroot Planks");
+        this.addBlock(AetherIIBlocks.SKYROOT_FENCE, "Skyroot Fence");
+        this.addBlock(AetherIIBlocks.SKYROOT_FENCE_GATE, "Skyroot Fence Gate");
+        this.addBlock(AetherIIBlocks.SKYROOT_BUTTON, "Skyroot Button");
+        this.addBlock(AetherIIBlocks.SKYROOT_PRESSURE_PLATE, "Skyroot Pressure Plate");
+        this.addBlock(AetherIIBlocks.SKYROOT_STAIRS, "Skyroot Stairs");
+        this.addBlock(AetherIIBlocks.SKYROOT_SLAB, "Skyroot Slab");
         this.addBlock(AetherIIBlocks.GREATROOT_PLANKS, "Greatroot Planks");
+        this.addBlock(AetherIIBlocks.GREATROOT_FENCE, "Greatroot Fence");
+        this.addBlock(AetherIIBlocks.GREATROOT_FENCE_GATE, "Greatroot Fence Gate");
+        this.addBlock(AetherIIBlocks.GREATROOT_BUTTON, "Greatroot Button");
+        this.addBlock(AetherIIBlocks.GREATROOT_PRESSURE_PLATE, "Greatroot Pressure Plate");
+        this.addBlock(AetherIIBlocks.GREATROOT_STAIRS, "Greatroot Stairs");
+        this.addBlock(AetherIIBlocks.GREATROOT_SLAB, "Greatroot Slab");
         this.addBlock(AetherIIBlocks.WISPROOT_PLANKS, "Wisproot Planks");
+        this.addBlock(AetherIIBlocks.WISPROOT_FENCE, "Wisproot Fence");
+        this.addBlock(AetherIIBlocks.WISPROOT_FENCE_GATE, "Wisproot Fence Gate");
+        this.addBlock(AetherIIBlocks.WISPROOT_BUTTON, "Wisproot Button");
+        this.addBlock(AetherIIBlocks.WISPROOT_PRESSURE_PLATE, "Wisproot Pressure Plate");
+        this.addBlock(AetherIIBlocks.WISPROOT_STAIRS, "Wisproot Stairs");
+        this.addBlock(AetherIIBlocks.WISPROOT_SLAB, "Wisproot Slab");
+        this.addBlock(AetherIIBlocks.HOLYSTONE_BUTTON, "Holystone Button");
+        this.addBlock(AetherIIBlocks.HOLYSTONE_PRESSURE_PLATE, "Holystone Pressure Plate");
+        this.addBlock(AetherIIBlocks.HOLYSTONE_WALL, "Holystone Wall");
+        this.addBlock(AetherIIBlocks.HOLYSTONE_STAIRS, "Holystone Stairs");
+        this.addBlock(AetherIIBlocks.HOLYSTONE_SLAB, "Holystone Slab");
+        this.addBlock(AetherIIBlocks.MOSSY_HOLYSTONE_WALL, "Mossy Holystone Wall");
+        this.addBlock(AetherIIBlocks.MOSSY_HOLYSTONE_STAIRS, "Mossy Holystone Stairs");
+        this.addBlock(AetherIIBlocks.MOSSY_HOLYSTONE_SLAB, "Mossy Holystone Slab");
+        this.addBlock(AetherIIBlocks.HOLYSTONE_BRICKS, "Holystone Bricks");
+        this.addBlock(AetherIIBlocks.HOLYSTONE_BRICK_WALL, "Holystone Brick Wall");
+        this.addBlock(AetherIIBlocks.HOLYSTONE_BRICK_STAIRS, "Holystone Brick Stairs");
+        this.addBlock(AetherIIBlocks.HOLYSTONE_BRICK_SLAB, "Holystone Brick Slab");
+        this.addBlock(AetherIIBlocks.QUICKSOIL_GLASS, "Quicksoil Glass");
+        this.addBlock(AetherIIBlocks.QUICKSOIL_GLASS_PANE, "Quicksoil Glass Pane");
+
+
+        this.addItem(AetherIIItems.SKYROOT_SWORD, "Skyroot Sword");
+        this.addItem(AetherIIItems.SKYROOT_HAMMER, "Skyroot Hammer");
+        this.addItem(AetherIIItems.SKYROOT_SPEAR, "Skyroot Spear");
+        this.addItem(AetherIIItems.SKYROOT_PICKAXE, "Skyroot Pickaxe");
+        this.addItem(AetherIIItems.SKYROOT_AXE, "Skyroot Axe");
+        this.addItem(AetherIIItems.SKYROOT_SHOVEL, "Skyroot Shovel");
+        this.addItem(AetherIIItems.SKYROOT_TROWEL, "Skyroot Trowel");
+
+        this.addItem(AetherIIItems.HOLYSTONE_SWORD, "Holystone Sword");
+        this.addItem(AetherIIItems.HOLYSTONE_HAMMER, "Holystone Hammer");
+        this.addItem(AetherIIItems.HOLYSTONE_SPEAR, "Holystone Spear");
+        this.addItem(AetherIIItems.HOLYSTONE_PICKAXE, "Holystone Pickaxe");
+        this.addItem(AetherIIItems.HOLYSTONE_AXE, "Holystone Axe");
+        this.addItem(AetherIIItems.HOLYSTONE_SHOVEL, "Holystone Shovel");
+        this.addItem(AetherIIItems.HOLYSTONE_TROWEL, "Holystone Trowel");
+
+        this.addItem(AetherIIItems.ZANITE_SWORD, "Zanite Sword");
+        this.addItem(AetherIIItems.ZANITE_HAMMER, "Zanite Hammer");
+        this.addItem(AetherIIItems.ZANITE_SPEAR, "Zanite Spear");
+        this.addItem(AetherIIItems.ZANITE_PICKAXE, "Zanite Pickaxe");
+        this.addItem(AetherIIItems.ZANITE_AXE, "Zanite Axe");
+        this.addItem(AetherIIItems.ZANITE_SHOVEL, "Zanite Shovel");
+        this.addItem(AetherIIItems.ZANITE_TROWEL, "Zanite Trowel");
+
+        this.addItem(AetherIIItems.ARKENIUM_SWORD, "Arkenium Sword");
+        this.addItem(AetherIIItems.ARKENIUM_HAMMER, "Arkenium Hammer");
+        this.addItem(AetherIIItems.ARKENIUM_SPEAR, "Arkenium Spear");
+        this.addItem(AetherIIItems.ARKENIUM_PICKAXE, "Arkenium Pickaxe");
+        this.addItem(AetherIIItems.ARKENIUM_AXE, "Arkenium Axe");
+        this.addItem(AetherIIItems.ARKENIUM_SHOVEL, "Arkenium Shovel");
+        this.addItem(AetherIIItems.ARKENIUM_TROWEL, "Arkenium Trowel");
+
+        this.addItem(AetherIIItems.GRAVITITE_SWORD, "Gravitite Sword");
+        this.addItem(AetherIIItems.GRAVITITE_HAMMER, "Gravitite Hammer");
+        this.addItem(AetherIIItems.GRAVITITE_SPEAR, "Gravitite Spear");
+        this.addItem(AetherIIItems.GRAVITITE_PICKAXE, "Gravitite Pickaxe");
+        this.addItem(AetherIIItems.GRAVITITE_AXE, "Gravitite Axe");
+        this.addItem(AetherIIItems.GRAVITITE_SHOVEL, "Gravitite Shovel");
+        this.addItem(AetherIIItems.GRAVITITE_TROWEL, "Gravitite Trowel");
 
         this.addItem(AetherIIItems.SKYROOT_STICK, "Skyroot Stick");
         this.addItem(AetherIIItems.AMBROSIUM_SHARD, "Ambrosium Shard");

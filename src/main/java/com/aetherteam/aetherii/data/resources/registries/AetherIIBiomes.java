@@ -12,6 +12,7 @@ import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 public class AetherIIBiomes {
+
     // Highfields
     public static final ResourceKey<Biome> FLOURISHING_FIELD = createKey("flourishing_field");
     public static final ResourceKey<Biome> VERDANT_WOODS = createKey("verdant_woods");

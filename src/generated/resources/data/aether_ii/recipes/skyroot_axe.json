@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "tag": "aether_ii:crafts_skyroot_tools"
+    },
+    "/": {
+      "tag": "aether_ii:rods/skyroot"
+    }
+  },
+  "pattern": [
+    "##",
+    "#/",
+    " /"
+  ],
+  "result": {
+    "item": "aether_ii:skyroot_axe"
+  }
+}
