@@ -24,14 +24,31 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.SKYROOT_LOG.get());
                 output.accept(AetherIIBlocks.SKYROOT_WOOD.get());
                 output.accept(AetherIIBlocks.SKYROOT_PLANKS.get());
+                output.accept(AetherIIBlocks.SKYROOT_STAIRS.get());
+                output.accept(AetherIIBlocks.SKYROOT_SLAB.get());
+                output.accept(AetherIIBlocks.SKYROOT_FENCE.get());
+                output.accept(AetherIIBlocks.SKYROOT_FENCE_GATE.get());
+                output.accept(AetherIIBlocks.SKYROOT_PRESSURE_PLATE.get());
+                output.accept(AetherIIBlocks.SKYROOT_BUTTON.get());
                 output.accept(AetherIIBlocks.GREATROOT_LOG.get());
                 output.accept(AetherIIBlocks.GREATROOT_WOOD.get());
                 output.accept(AetherIIBlocks.GREATROOT_PLANKS.get());
+                output.accept(AetherIIBlocks.GREATROOT_STAIRS.get());
+                output.accept(AetherIIBlocks.GREATROOT_SLAB.get());
+                output.accept(AetherIIBlocks.GREATROOT_FENCE.get());
+                output.accept(AetherIIBlocks.GREATROOT_FENCE_GATE.get());
+                output.accept(AetherIIBlocks.GREATROOT_PRESSURE_PLATE.get());
                 output.accept(AetherIIBlocks.WISPROOT_LOG.get());
                 output.accept(AetherIIBlocks.WISPROOT_WOOD.get());
                 output.accept(AetherIIBlocks.WISPROOT_PLANKS.get());
+                output.accept(AetherIIBlocks.WISPROOT_STAIRS.get());
+                output.accept(AetherIIBlocks.WISPROOT_SLAB.get());
+                output.accept(AetherIIBlocks.WISPROOT_FENCE.get());
+                output.accept(AetherIIBlocks.WISPROOT_FENCE_GATE.get());
+                output.accept(AetherIIBlocks.WISPROOT_PRESSURE_PLATE.get());
                 output.accept(AetherIIBlocks.AMBEROOT_LOG.get());
                 output.accept(AetherIIBlocks.AMBEROOT_WOOD.get());
+                output.accept(AetherIIBlocks.HOLYSTONE_BRICKS.get());
             }).build());
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_DUNGEON_BLOCKS = CREATIVE_MODE_TABS.register("dungeon_blocks", () -> CreativeModeTab.builder()
             .withTabsBefore(new ResourceLocation(AetherII.MODID, "building_blocks"))
@@ -91,10 +108,29 @@ public class AetherIICreativeTabs {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_EQUIPMENT_AND_UTILITIES = CREATIVE_MODE_TABS.register("equipment_and_utilities", () -> CreativeModeTab.builder()
             .withTabsBefore(new ResourceLocation(AetherII.MODID, "redstone_blocks"))
             .withTabsAfter(new ResourceLocation(AetherII.MODID, "armor_and_accessories"))
-            .icon(() -> new ItemStack(Blocks.STONE))
+            .icon(() -> new ItemStack(AetherIIItems.GRAVITITE_PICKAXE.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".equipment_and_utilities"))
             .displayItems((features, output) -> {
-
+                output.accept(AetherIIItems.SKYROOT_SHOVEL.get());
+                output.accept(AetherIIItems.SKYROOT_PICKAXE.get());
+                output.accept(AetherIIItems.SKYROOT_AXE.get());
+                output.accept(AetherIIItems.SKYROOT_TROWEL.get());
+                output.accept(AetherIIItems.HOLYSTONE_SHOVEL.get());
+                output.accept(AetherIIItems.HOLYSTONE_PICKAXE.get());
+                output.accept(AetherIIItems.HOLYSTONE_AXE.get());
+                output.accept(AetherIIItems.HOLYSTONE_TROWEL.get());
+                output.accept(AetherIIItems.ZANITE_SHOVEL.get());
+                output.accept(AetherIIItems.ZANITE_PICKAXE.get());
+                output.accept(AetherIIItems.ZANITE_AXE.get());
+                output.accept(AetherIIItems.ZANITE_TROWEL.get());
+                output.accept(AetherIIItems.ARKENIUM_SHOVEL.get());
+                output.accept(AetherIIItems.ARKENIUM_PICKAXE.get());
+                output.accept(AetherIIItems.ARKENIUM_AXE.get());
+                output.accept(AetherIIItems.ARKENIUM_TROWEL.get());
+                output.accept(AetherIIItems.GRAVITITE_SHOVEL.get());
+                output.accept(AetherIIItems.GRAVITITE_PICKAXE.get());
+                output.accept(AetherIIItems.GRAVITITE_AXE.get());
+                output.accept(AetherIIItems.GRAVITITE_TROWEL.get());
             }).build());
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_ARMOR_AND_ACCESSORIES = CREATIVE_MODE_TABS.register("armor_and_accessories", () -> CreativeModeTab.builder()
             .withTabsBefore(new ResourceLocation(AetherII.MODID, "equipment_and_utilities"))

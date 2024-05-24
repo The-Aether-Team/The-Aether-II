@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
@@ -17,6 +18,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         super(output, registries, AetherII.MODID, helper);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void addTags(HolderLookup.Provider provider) {
         this.tag(AetherIITags.Blocks.SKYROOT_LOGS).add(
@@ -31,6 +33,53 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.AMBEROOT_LOGS).add(
                 AetherIIBlocks.AMBEROOT_LOG.get(),
                 AetherIIBlocks.AMBEROOT_WOOD.get());
+
+        // Vanilla
+        this.tag(BlockTags.WOODEN_STAIRS).add(
+                AetherIIBlocks.SKYROOT_STAIRS.get(),
+                AetherIIBlocks.GREATROOT_STAIRS.get(),
+                AetherIIBlocks.WISPROOT_STAIRS.get());
+        this.tag(BlockTags.WOODEN_SLABS).add(
+                AetherIIBlocks.SKYROOT_SLAB.get(),
+                AetherIIBlocks.GREATROOT_SLAB.get(),
+                AetherIIBlocks.WISPROOT_SLAB.get());
+        this.tag(BlockTags.WOODEN_FENCES).add(
+                AetherIIBlocks.SKYROOT_FENCE.get(),
+                AetherIIBlocks.GREATROOT_FENCE.get(),
+                AetherIIBlocks.WISPROOT_FENCE.get());
+        this.tag(BlockTags.WOODEN_BUTTONS).add(
+                AetherIIBlocks.SKYROOT_BUTTON.get(),
+                AetherIIBlocks.GREATROOT_BUTTON.get(),
+                AetherIIBlocks.WISPROOT_BUTTON.get());
+        this.tag(BlockTags.WOODEN_PRESSURE_PLATES).add(
+                AetherIIBlocks.SKYROOT_PRESSURE_PLATE.get(),
+                AetherIIBlocks.GREATROOT_PRESSURE_PLATE.get(),
+                AetherIIBlocks.WISPROOT_PRESSURE_PLATE.get());
+        this.tag(BlockTags.BUTTONS).add(
+                AetherIIBlocks.SKYROOT_BUTTON.get(),
+                AetherIIBlocks.GREATROOT_BUTTON.get(),
+                AetherIIBlocks.WISPROOT_BUTTON.get());
+        this.tag(BlockTags.PRESSURE_PLATES).add(
+                AetherIIBlocks.SKYROOT_PRESSURE_PLATE.get(),
+                AetherIIBlocks.GREATROOT_PRESSURE_PLATE.get(),
+                AetherIIBlocks.WISPROOT_PRESSURE_PLATE.get());
+        this.tag(BlockTags.FENCE_GATES).add(
+                AetherIIBlocks.SKYROOT_FENCE_GATE.get(),
+                AetherIIBlocks.GREATROOT_FENCE_GATE.get(),
+                AetherIIBlocks.WISPROOT_FENCE_GATE.get());
+        this.tag(BlockTags.LOGS_THAT_BURN).addTags(
+                AetherIITags.Blocks.SKYROOT_LOGS,
+                AetherIITags.Blocks.GREATROOT_LOGS,
+                AetherIITags.Blocks.WISPROOT_LOGS,
+                AetherIITags.Blocks.AMBEROOT_LOGS);
+        this.tag(BlockTags.STAIRS).add(
+                AetherIIBlocks.SKYROOT_STAIRS.get(),
+                AetherIIBlocks.GREATROOT_STAIRS.get(),
+                AetherIIBlocks.WISPROOT_STAIRS.get());
+        this.tag(BlockTags.SLABS).add(
+                AetherIIBlocks.SKYROOT_SLAB.get(),
+                AetherIIBlocks.GREATROOT_STAIRS.get(),
+                AetherIIBlocks.WISPROOT_STAIRS.get());
 
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
                 AetherIIBlocks.HOLYSTONE.get(),
@@ -78,5 +127,15 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ARKENIUM_ORE.get(),
                 AetherIIBlocks.GRAVITITE_ORE.get()
         );
+
+        // Forge
+        this.tag(Tags.Blocks.FENCE_GATES_WOODEN).add(
+                AetherIIBlocks.SKYROOT_FENCE_GATE.get(),
+                AetherIIBlocks.GREATROOT_FENCE_GATE.get(),
+                AetherIIBlocks.WISPROOT_FENCE_GATE.get());
+        this.tag(Tags.Blocks.FENCES_WOODEN).add(
+                AetherIIBlocks.SKYROOT_FENCE.get(),
+                AetherIIBlocks.GREATROOT_FENCE.get(),
+                AetherIIBlocks.WISPROOT_FENCE.get());
     }
 }
