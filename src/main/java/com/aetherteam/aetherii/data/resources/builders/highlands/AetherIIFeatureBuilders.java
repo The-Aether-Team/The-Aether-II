@@ -16,8 +16,8 @@ public class AetherIIFeatureBuilders {
     public static CoastConfiguration createCoast(BlockState coastState, int minHeight, int maxHeight) {
         return new CoastConfiguration(
                 BlockStateProvider.simple(coastState),
-                ConstantFloat.of(6.6282032F),
-                ConstantFloat.of(4.4641016F),
+                ConstantFloat.of(6.63F),
+                ConstantFloat.of(4.46F),
                 UniformInt.of(minHeight, maxHeight),
                 HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
         );

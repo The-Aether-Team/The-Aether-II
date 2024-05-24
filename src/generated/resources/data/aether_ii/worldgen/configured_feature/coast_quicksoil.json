@@ -7,8 +7,8 @@
         "Name": "aether_ii:quicksoil"
       }
     },
-    "radius_bottom": 4.464102,
-    "radius_top": 6.6282034,
+    "radius_bottom": 4.46,
+    "radius_top": 6.63,
     "valid_blocks": "aether_ii:aether_grass_block",
     "y_range": {
       "max_inclusive": 96,
