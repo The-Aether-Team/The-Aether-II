@@ -1,6 +1,23 @@
 package com.aetherteam.aetherii.item;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.item.combat.HammerItem;
+import com.aetherteam.aetherii.item.combat.SpearItem;
+import com.aetherteam.aetherii.item.combat.arkenium.ArkeniumHammerItem;
+import com.aetherteam.aetherii.item.combat.arkenium.ArkeniumSpearItem;
+import com.aetherteam.aetherii.item.combat.arkenium.ArkeniumSwordItem;
+import com.aetherteam.aetherii.item.combat.gravitite.GravititeHammerItem;
+import com.aetherteam.aetherii.item.combat.gravitite.GravititeSpearItem;
+import com.aetherteam.aetherii.item.combat.gravitite.GravititeSwordItem;
+import com.aetherteam.aetherii.item.combat.holystone.HolystoneHammerItem;
+import com.aetherteam.aetherii.item.combat.holystone.HolystoneSpearItem;
+import com.aetherteam.aetherii.item.combat.holystone.HolystoneSwordItem;
+import com.aetherteam.aetherii.item.combat.skyroot.SkyrootHammerItem;
+import com.aetherteam.aetherii.item.combat.skyroot.SkyrootSpearItem;
+import com.aetherteam.aetherii.item.combat.skyroot.SkyrootSwordItem;
+import com.aetherteam.aetherii.item.combat.zanite.ZaniteHammerItem;
+import com.aetherteam.aetherii.item.combat.zanite.ZaniteSpearItem;
+import com.aetherteam.aetherii.item.combat.zanite.ZaniteSwordItem;
 import com.aetherteam.aetherii.item.tools.skyroot.*;
 import com.aetherteam.aetherii.item.tools.holystone.*;
 import com.aetherteam.aetherii.item.tools.zanite.*;
@@ -38,6 +55,27 @@ public class AetherIIItems {
     public static final DeferredItem<AxeItem> GRAVITITE_AXE = ITEMS.register("gravitite_axe", GravititeAxeItem::new);
     public static final DeferredItem<ShovelItem> GRAVITITE_SHOVEL = ITEMS.register("gravitite_shovel", GravititeShovelItem::new);
     public static final DeferredItem<HoeItem> GRAVITITE_TROWEL = ITEMS.register("gravitite_trowel", GravititeTrowelItem::new);
+
+    // Weapons
+    public static final DeferredItem<SwordItem> SKYROOT_SWORD = ITEMS.register("skyroot_sword", SkyrootSwordItem::new);
+    public static final DeferredItem<HammerItem> SKYROOT_HAMMER = ITEMS.register("skyroot_hammer", SkyrootHammerItem::new);
+    public static final DeferredItem<SpearItem> SKYROOT_SPEAR = ITEMS.register("skyroot_spear", SkyrootSpearItem::new);
+
+    public static final DeferredItem<SwordItem> HOLYSTONE_SWORD = ITEMS.register("holystone_sword", HolystoneSwordItem::new);
+    public static final DeferredItem<HammerItem> HOLYSTONE_HAMMER = ITEMS.register("holystone_hammer", HolystoneHammerItem::new);
+    public static final DeferredItem<SpearItem> HOLYSTONE_SPEAR = ITEMS.register("holystone_spear", HolystoneSpearItem::new);
+
+    public static final DeferredItem<SwordItem> ZANITE_SWORD = ITEMS.register("zanite_sword", ZaniteSwordItem::new);
+    public static final DeferredItem<HammerItem> ZANITE_HAMMER = ITEMS.register("zanite_hammer", ZaniteHammerItem::new);
+    public static final DeferredItem<SpearItem> ZANITE_SPEAR = ITEMS.register("zanite_spear", ZaniteSpearItem::new);
+
+    public static final DeferredItem<SwordItem> ARKENIUM_SWORD = ITEMS.register("arkenium_sword", ArkeniumSwordItem::new);
+    public static final DeferredItem<HammerItem> ARKENIUM_HAMMER = ITEMS.register("arkenium_hammer", ArkeniumHammerItem::new);
+    public static final DeferredItem<SpearItem> ARKENIUM_SPEAR = ITEMS.register("arkenium_spear", ArkeniumSpearItem::new);
+
+    public static final DeferredItem<SwordItem> GRAVITITE_SWORD = ITEMS.register("gravitite_sword", GravititeSwordItem::new);
+    public static final DeferredItem<HammerItem> GRAVITITE_HAMMER = ITEMS.register("gravitite_hammer", GravititeHammerItem::new);
+    public static final DeferredItem<SpearItem> GRAVITITE_SPEAR = ITEMS.register("gravitite_spear", GravititeSpearItem::new);
 
     // Materials
     public static final DeferredItem<Item> SKYROOT_STICK = ITEMS.register("skyroot_stick", () -> new Item(new Item.Properties()));

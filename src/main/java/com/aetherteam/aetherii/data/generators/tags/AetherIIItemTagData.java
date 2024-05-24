@@ -50,6 +50,9 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.SKYROOT_PLANKS.asItem(),
                 AetherIIBlocks.GREATROOT_PLANKS.asItem(),
                 AetherIIBlocks.WISPROOT_PLANKS.asItem());
+        this.tag(AetherIITags.Items.CRAFTS_HOLYSTONE_TOOLS).add(
+                AetherIIBlocks.HOLYSTONE.asItem(),
+                AetherIIBlocks.UNDERSHALE.asItem());
 
         this.tag(AetherIITags.Items.SKYROOT_REPAIRING).addTag(AetherIITags.Items.CRAFTS_SKYROOT_TOOLS);
         this.tag(AetherIITags.Items.HOLYSTONE_REPAIRING).add(AetherIIBlocks.HOLYSTONE.asItem());

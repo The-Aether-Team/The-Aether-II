@@ -73,27 +73,42 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.HOLYSTONE_BRICK_STAIRS, "Holystone Brick Stairs");
         this.addBlock(AetherIIBlocks.HOLYSTONE_BRICK_SLAB, "Holystone Brick Slab");
 
-        
+
+        this.addItem(AetherIIItems.SKYROOT_SWORD, "Skyroot Sword");
+        this.addItem(AetherIIItems.SKYROOT_HAMMER, "Skyroot Hammer");
+        this.addItem(AetherIIItems.SKYROOT_SPEAR, "Skyroot Spear");
         this.addItem(AetherIIItems.SKYROOT_PICKAXE, "Skyroot Pickaxe");
         this.addItem(AetherIIItems.SKYROOT_AXE, "Skyroot Axe");
         this.addItem(AetherIIItems.SKYROOT_SHOVEL, "Skyroot Shovel");
         this.addItem(AetherIIItems.SKYROOT_TROWEL, "Skyroot Trowel");
 
+        this.addItem(AetherIIItems.HOLYSTONE_SWORD, "Holystone Sword");
+        this.addItem(AetherIIItems.HOLYSTONE_HAMMER, "Holystone Hammer");
+        this.addItem(AetherIIItems.HOLYSTONE_SPEAR, "Holystone Spear");
         this.addItem(AetherIIItems.HOLYSTONE_PICKAXE, "Holystone Pickaxe");
         this.addItem(AetherIIItems.HOLYSTONE_AXE, "Holystone Axe");
         this.addItem(AetherIIItems.HOLYSTONE_SHOVEL, "Holystone Shovel");
         this.addItem(AetherIIItems.HOLYSTONE_TROWEL, "Holystone Trowel");
 
+        this.addItem(AetherIIItems.ZANITE_SWORD, "Zanite Sword");
+        this.addItem(AetherIIItems.ZANITE_HAMMER, "Zanite Hammer");
+        this.addItem(AetherIIItems.ZANITE_SPEAR, "Zanite Spear");
         this.addItem(AetherIIItems.ZANITE_PICKAXE, "Zanite Pickaxe");
         this.addItem(AetherIIItems.ZANITE_AXE, "Zanite Axe");
         this.addItem(AetherIIItems.ZANITE_SHOVEL, "Zanite Shovel");
         this.addItem(AetherIIItems.ZANITE_TROWEL, "Zanite Trowel");
 
+        this.addItem(AetherIIItems.ARKENIUM_SWORD, "Arkenium Sword");
+        this.addItem(AetherIIItems.ARKENIUM_HAMMER, "Arkenium Hammer");
+        this.addItem(AetherIIItems.ARKENIUM_SPEAR, "Arkenium Spear");
         this.addItem(AetherIIItems.ARKENIUM_PICKAXE, "Arkenium Pickaxe");
         this.addItem(AetherIIItems.ARKENIUM_AXE, "Arkenium Axe");
         this.addItem(AetherIIItems.ARKENIUM_SHOVEL, "Arkenium Shovel");
         this.addItem(AetherIIItems.ARKENIUM_TROWEL, "Arkenium Trowel");
 
+        this.addItem(AetherIIItems.GRAVITITE_SWORD, "Gravitite Sword");
+        this.addItem(AetherIIItems.GRAVITITE_HAMMER, "Gravitite Hammer");
+        this.addItem(AetherIIItems.GRAVITITE_SPEAR, "Gravitite Spear");
         this.addItem(AetherIIItems.GRAVITITE_PICKAXE, "Gravitite Pickaxe");
         this.addItem(AetherIIItems.GRAVITITE_AXE, "Gravitite Axe");
         this.addItem(AetherIIItems.GRAVITITE_SHOVEL, "Gravitite Shovel");

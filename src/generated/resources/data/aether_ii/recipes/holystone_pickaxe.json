@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "#": {
-      "item": "aether_ii:holystone"
+      "tag": "aether_ii:crafts_holystone_tools"
     },
     "/": {
       "tag": "aether_ii:rods/skyroot"

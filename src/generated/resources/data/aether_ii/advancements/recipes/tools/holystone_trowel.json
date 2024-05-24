@@ -1,13 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_holystone": {
+    "has_stone": {
       "conditions": {
         "items": [
           {
-            "items": [
-              "aether_ii:holystone"
-            ]
+            "tag": "aether_ii:crafts_holystone_tools"
           }
         ]
       },
@@ -23,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_holystone"
+      "has_stone"
     ]
   ],
   "rewards": {

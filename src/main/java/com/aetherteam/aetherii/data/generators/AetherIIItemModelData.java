@@ -14,26 +14,41 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
 
     @Override
     protected void registerModels() {
+        this.handheldItem(AetherIIItems.SKYROOT_SWORD.get(), "weapons/");
+        this.handheldItem(AetherIIItems.SKYROOT_HAMMER.get(), "weapons/");
+        this.handheldItem(AetherIIItems.SKYROOT_SPEAR.get(), "weapons/");
         this.handheldItem(AetherIIItems.SKYROOT_PICKAXE.get(), "tools/");
         this.handheldItem(AetherIIItems.SKYROOT_AXE.get(), "tools/");
         this.handheldItem(AetherIIItems.SKYROOT_SHOVEL.get(), "tools/");
         this.handheldItem(AetherIIItems.SKYROOT_TROWEL.get(), "tools/");
 
+        this.handheldItem(AetherIIItems.HOLYSTONE_SWORD.get(), "weapons/");
+        this.handheldItem(AetherIIItems.HOLYSTONE_HAMMER.get(), "weapons/");
+        this.handheldItem(AetherIIItems.HOLYSTONE_SPEAR.get(), "weapons/");
         this.handheldItem(AetherIIItems.HOLYSTONE_PICKAXE.get(), "tools/");
         this.handheldItem(AetherIIItems.HOLYSTONE_AXE.get(), "tools/");
         this.handheldItem(AetherIIItems.HOLYSTONE_SHOVEL.get(), "tools/");
         this.handheldItem(AetherIIItems.HOLYSTONE_TROWEL.get(), "tools/");
 
+        this.handheldItem(AetherIIItems.ZANITE_SWORD.get(), "weapons/");
+        this.handheldItem(AetherIIItems.ZANITE_HAMMER.get(), "weapons/");
+        this.handheldItem(AetherIIItems.ZANITE_SPEAR.get(), "weapons/");
         this.handheldItem(AetherIIItems.ZANITE_PICKAXE.get(), "tools/");
         this.handheldItem(AetherIIItems.ZANITE_AXE.get(), "tools/");
         this.handheldItem(AetherIIItems.ZANITE_SHOVEL.get(), "tools/");
         this.handheldItem(AetherIIItems.ZANITE_TROWEL.get(), "tools/");
 
+        this.handheldItem(AetherIIItems.ARKENIUM_SWORD.get(), "weapons/");
+        this.handheldItem(AetherIIItems.ARKENIUM_HAMMER.get(), "weapons/");
+        this.handheldItem(AetherIIItems.ARKENIUM_SPEAR.get(), "weapons/");
         this.handheldItem(AetherIIItems.ARKENIUM_PICKAXE.get(), "tools/");
         this.handheldItem(AetherIIItems.ARKENIUM_AXE.get(), "tools/");
         this.handheldItem(AetherIIItems.ARKENIUM_SHOVEL.get(), "tools/");
         this.handheldItem(AetherIIItems.ARKENIUM_TROWEL.get(), "tools/");
 
+        this.handheldItem(AetherIIItems.GRAVITITE_SWORD.get(), "weapons/");
+        this.handheldItem(AetherIIItems.GRAVITITE_HAMMER.get(), "weapons/");
+        this.handheldItem(AetherIIItems.GRAVITITE_SPEAR.get(), "weapons/");
         this.handheldItem(AetherIIItems.GRAVITITE_PICKAXE.get(), "tools/");
         this.handheldItem(AetherIIItems.GRAVITITE_AXE.get(), "tools/");
         this.handheldItem(AetherIIItems.GRAVITITE_SHOVEL.get(), "tools/");
