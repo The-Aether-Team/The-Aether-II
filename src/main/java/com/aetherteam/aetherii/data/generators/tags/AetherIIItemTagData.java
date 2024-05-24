@@ -95,6 +95,10 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.SKYROOT_SLAB.asItem(),
                 AetherIIBlocks.GREATROOT_STAIRS.asItem(),
                 AetherIIBlocks.WISPROOT_STAIRS.asItem());
+        this.tag(ItemTags.WALLS).add(
+                AetherIIBlocks.HOLYSTONE_WALL.asItem(),
+                AetherIIBlocks.MOSSY_HOLYSTONE_WALL.asItem(),
+                AetherIIBlocks.HOLYSTONE_BRICK_WALL.asItem());
 
         this.tag(ItemTags.AXES).add(
                 AetherIIItems.SKYROOT_AXE.get(),

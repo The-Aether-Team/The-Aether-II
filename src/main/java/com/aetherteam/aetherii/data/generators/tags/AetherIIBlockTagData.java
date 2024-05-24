@@ -83,6 +83,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SKYROOT_SLAB.get(),
                 AetherIIBlocks.GREATROOT_STAIRS.get(),
                 AetherIIBlocks.WISPROOT_STAIRS.get());
+        this.tag(BlockTags.WALLS).add(
+                AetherIIBlocks.HOLYSTONE_WALL.get(),
+                AetherIIBlocks.MOSSY_HOLYSTONE_WALL.get(),
+                AetherIIBlocks.HOLYSTONE_BRICK_WALL.get());
 
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
                 AetherIIBlocks.HOLYSTONE.get(),

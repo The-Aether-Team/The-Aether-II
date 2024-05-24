@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-23T19:06:43.0620112	Tags for minecraft:block mod id aether_ii
+// 1.20.4	2024-05-24T13:02:08.8854543	Tags for minecraft:block mod id aether_ii
 a6cb4c19d89a718bf42595fdcdffd0e03b5bc4b8 data/aether_ii/tags/blocks/amberoot_logs.json
 d16832b00a987fbbf18259365f95111bc00a1576 data/aether_ii/tags/blocks/greatroot_logs.json
 a7a38000f936642b7fb1aab74c26dbefd5483490 data/aether_ii/tags/blocks/skyroot_logs.json
@@ -18,6 +18,7 @@ ccd81a813a04e500ba302a2905182a2a24abd3f1 data/minecraft/tags/blocks/pressure_pla
 40fd42ddb845bcf37303aac078a0163f2ecf3aa5 data/minecraft/tags/blocks/slabs.json
 f3fabcca9d36c6a86d4627a0c314482ce0fc4952 data/minecraft/tags/blocks/stairs.json
 220cb43fca5767fe3d04a7d01c9a1cf30c725296 data/minecraft/tags/blocks/stone_buttons.json
+3f5cfa6741f23affbb3c4ae4ad530b2c90878bbe data/minecraft/tags/blocks/walls.json
 5d3e7cc95e15b524d10caae12416861056412e53 data/minecraft/tags/blocks/wooden_buttons.json
 78ed277ff645a9d01385e71d111abe5236aeecd1 data/minecraft/tags/blocks/wooden_fences.json
 aa0590601c43ae254bba7e082694592a0c959547 data/minecraft/tags/blocks/wooden_pressure_plates.json
