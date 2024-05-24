@@ -44,7 +44,7 @@ public class AetherIIColorResolvers {
 
     public static void registerItemColor(RegisterColorHandlersEvent.Item event) {
         event.register((color, itemProvider) -> {
-            BlockState blockstate = ((BlockItem)color.getItem()).getBlock().defaultBlockState();
+            BlockState blockstate = ((BlockItem) color.getItem()).getBlock().defaultBlockState();
             return event.getBlockColors().getColor(blockstate, null, null, itemProvider);
         }, AetherIIBlocks.AETHER_GRASS_BLOCK.get());
     }
