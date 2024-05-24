@@ -128,6 +128,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.RAW_GRAVITITE, "Raw Gravitite");
         this.addItem(AetherIIItems.GRAVITITE_PLATE, "Gravitite Plate");
 
+        this.addDamageTypeTooltip("slash", "Slash Damage");
+        this.addDamageTypeTooltip("impact", "Impact Damage");
+        this.addDamageTypeTooltip("pierce", "Pierce Damage");
+
         this.addCreativeTab(AetherIICreativeTabs.AETHER_BUILDING_BLOCKS.get(), "Aether II Building Blocks");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_DUNGEON_BLOCKS.get(), "Aether II Dungeon Blocks");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_NATURAL_BLOCKS.get(), "Aether II Natural Blocks");

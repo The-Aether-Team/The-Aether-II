@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.item.combat;
 
+import com.aetherteam.aetherii.item.AetherIIToolActions;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.core.BlockPos;
@@ -12,6 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.common.ToolAction;
 
 public class HammerItem extends TieredItem implements Vanishable {
     private final float attackDamage;
@@ -54,7 +56,8 @@ public class HammerItem extends TieredItem implements Vanishable {
         return equipmentSlot == EquipmentSlot.MAINHAND ? this.defaultModifiers : super.getDefaultAttributeModifiers(equipmentSlot);
     }
 
-//    public boolean canPerformAction(ItemStack stack, ToolAction toolAction) {
-//        return ToolActions.DEFAULT_SWORD_ACTIONS.contains(toolAction);
-//    }
+    @Override
+    public boolean canPerformAction(ItemStack stack, ToolAction toolAction) {
+        return AetherIIToolActions.DEFAULT_HAMMER_ACTIONS.contains(toolAction);
+    }
 }

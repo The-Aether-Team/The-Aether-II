@@ -25,30 +25,30 @@ public class AetherIIDamageResistances {
         context.register(EXAMPLE, new DamageResistance(EntityType.PIG, 100, 100, 100));
     }
 
-    public static int getSlashDefense(RegistryAccess registryAccess, Entity entity) {
+    public static float getSlashDefense(RegistryAccess registryAccess, Entity entity) {
         for (Map.Entry<ResourceKey<DamageResistance>, DamageResistance> entry : registryAccess.registryOrThrow(DAMAGE_RESISTANCE_REGISTRY_KEY).entrySet()) {
             if (entity.getType() == entry.getValue().entityType()) {
                 return entry.getValue().slashValue();
             }
         }
-        return 0;
+        return 0.0F;
     }
 
-    public static int getImpactDefense(RegistryAccess registryAccess, Entity entity) {
+    public static float getImpactDefense(RegistryAccess registryAccess, Entity entity) {
         for (Map.Entry<ResourceKey<DamageResistance>, DamageResistance> entry : registryAccess.registryOrThrow(DAMAGE_RESISTANCE_REGISTRY_KEY).entrySet()) {
             if (entity.getType() == entry.getValue().entityType()) {
                 return entry.getValue().impactValue();
             }
         }
-        return 0;
+        return 0.0F;
     }
 
-    public static int getPierceDefense(RegistryAccess registryAccess, Entity entity) {
+    public static float getPierceDefense(RegistryAccess registryAccess, Entity entity) {
         for (Map.Entry<ResourceKey<DamageResistance>, DamageResistance> entry : registryAccess.registryOrThrow(DAMAGE_RESISTANCE_REGISTRY_KEY).entrySet()) {
             if (entity.getType() == entry.getValue().entityType()) {
                 return entry.getValue().pierceValue();
             }
         }
-        return 0;
+        return 0.0F;
     }
 }

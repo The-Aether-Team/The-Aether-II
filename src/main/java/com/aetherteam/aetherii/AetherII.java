@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.api.damage.DamageResistance;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.AetherIIClient;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
+import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.data.AetherData;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageInflictions;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageResistances;
@@ -39,6 +40,7 @@ public class AetherII {
                 AetherIIBlocks.BLOCKS,
                 AetherIIItems.ITEMS,
                 AetherIIEntityTypes.ENTITY_TYPES,
+                AetherIIParticleTypes.PARTICLES,
                 AetherIICreativeTabs.CREATIVE_MODE_TABS,
                 AetherIIFeatures.FEATURES,
                 AetherIISoundEvents.SOUNDS

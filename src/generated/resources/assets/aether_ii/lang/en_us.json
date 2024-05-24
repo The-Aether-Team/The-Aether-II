@@ -1,4 +1,7 @@
 {
+  "aether_ii.tooltip.item.damage.impact": "Impact Damage",
+  "aether_ii.tooltip.item.damage.pierce": "Pierce Damage",
+  "aether_ii.tooltip.item.damage.slash": "Slash Damage",
   "block.aether_ii.aether_dirt": "Aether Dirt",
   "block.aether_ii.aether_grass_block": "Aether Grass Block",
   "block.aether_ii.amberoot_leaves": "Amberoot Leaves",

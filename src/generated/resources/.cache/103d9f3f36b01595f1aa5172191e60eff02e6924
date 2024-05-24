@@ -1,6 +1,8 @@
-// 1.20.4	2024-05-24T13:24:35.3092107	Registries
-5f4516d2885abde9751d9ca056964abcea456068 data/aether_ii/aether_ii/damage_infliction/example.json
-6ad527084dd6144b6ea98924246b76811bd9df36 data/aether_ii/aether_ii/damage_resistance/example.json
+// 1.20.4	2024-05-24T16:01:46.7708322	Registries
+1799cd7facb9c4c29ebb9ee49ddcb305e7813a3f data/aether_ii/aether_ii/damage_infliction/skyroot_hammer.json
+9390b0d5d3d5b8c6f616419f64207f910dabf942 data/aether_ii/aether_ii/damage_infliction/skyroot_spear.json
+15134e7ad0101e868ae1c0a6e6d7fa585ad0e7db data/aether_ii/aether_ii/damage_infliction/skyroot_sword.json
+78652603ad095590e898d72795f6a312729fa286 data/aether_ii/aether_ii/damage_resistance/example.json
 f9dbdadd419a0cff7041a86d9432bf706ba56152 data/aether_ii/dimension/aether_highlands.json
 ae01d467453be6d401ce68c8ccc006362b5a29b7 data/aether_ii/dimension_type/aether_highlands.json
 b12c63c3b81ba8cbc4dceff2e7487b0426f16636 data/aether_ii/worldgen/biome/battleground_wastes.json
