@@ -2,6 +2,8 @@ package com.aetherteam.aetherii.data.generators;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.data.resources.registries.*;
+import com.aetherteam.aetherii.data.resources.registries.features.AetherIIFeatureUtils;
+import com.aetherteam.aetherii.data.resources.registries.placement.AetherIIPlacementUtils;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
@@ -18,15 +20,9 @@ public class AetherIIRegistrySets extends DatapackBuiltinEntriesProvider {
             .add(Registries.NOISE, AetherIINoises::bootstrap)
             .add(Registries.NOISE_SETTINGS, AetherIINoiseSettings::bootstrap)
             .add(Registries.DIMENSION_TYPE, AetherIIDimensions::bootstrapDimensionType)
-            .add(Registries.LEVEL_STEM, AetherIIDimensions::bootstrapLevelStem);
-//            .add(Registries.CONFIGURED_FEATURE, AetherConfiguredFeatures::bootstrap)
-//            .add(Registries.PLACED_FEATURE, AetherPlacedFeatures::bootstrap)
-//            .add(Registries.BIOME, AetherBiomes::bootstrap)
-//            .add(Registries.DENSITY_FUNCTION, AetherDensityFunctions::bootstrap)
-//            .add(Registries.NOISE, AetherNoises::bootstrap)
-//            .add(Registries.NOISE_SETTINGS, AetherNoiseSettings::bootstrap)
-//            .add(Registries.DIMENSION_TYPE, AetherDimensions::bootstrapDimensionType)
-//            .add(Registries.LEVEL_STEM, AetherDimensions::bootstrapLevelStem)
+            .add(Registries.LEVEL_STEM, AetherIIDimensions::bootstrapLevelStem)
+            .add(Registries.CONFIGURED_FEATURE, AetherIIFeatureUtils::bootstrap)
+            .add(Registries.PLACED_FEATURE, AetherIIPlacementUtils::bootstrap);
 //            .add(Registries.STRUCTURE, AetherStructures::bootstrap)
 //            .add(Registries.STRUCTURE_SET, AetherStructureSets::bootstrap)
 //            .add(Registries.DAMAGE_TYPE, AetherDamageTypes::bootstrap);
