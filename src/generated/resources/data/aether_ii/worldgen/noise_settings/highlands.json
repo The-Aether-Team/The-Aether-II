@@ -163,6 +163,25 @@
             "Name": "aether_ii:aether_dirt"
           }
         }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:vertical_gradient",
+          "false_at_and_above": {
+            "absolute": 48
+          },
+          "random_name": "minecraft:undershale",
+          "true_at_and_below": {
+            "absolute": 40
+          }
+        },
+        "then_run": {
+          "type": "minecraft:block",
+          "result_state": {
+            "Name": "aether_ii:undershale"
+          }
+        }
       }
     ]
   }

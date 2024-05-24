@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-24T22:21:37.9718278	Registries
+// 1.20.4	2024-05-24T23:03:50.3491025	Registries
 f9dbdadd419a0cff7041a86d9432bf706ba56152 data/aether_ii/dimension/aether_highlands.json
 ae01d467453be6d401ce68c8ccc006362b5a29b7 data/aether_ii/dimension_type/aether_highlands.json
 b12c63c3b81ba8cbc4dceff2e7487b0426f16636 data/aether_ii/worldgen/biome/battleground_wastes.json
@@ -23,5 +23,5 @@ cea370fec50431827725f501b79caa347ebe08d0 data/aether_ii/worldgen/density_functio
 20ddbabfded8546f8d71cb1689cd15c42bc77244 data/aether_ii/worldgen/noise/erosion.json
 e9951c1e43a8e47e424565851e1786e9dbe41a7a data/aether_ii/worldgen/noise/temperature.json
 144e6875c7c48ab4b4a0717436536cc121dc62da data/aether_ii/worldgen/noise/vegetation.json
-09c5bdec8c41f5e7432e92fdfa525b68e937c086 data/aether_ii/worldgen/noise_settings/highlands.json
+933f10655e7082e60a3184bc695d2d2fdac4bfb7 data/aether_ii/worldgen/noise_settings/highlands.json
 c8dc8eca78763d816cf2c63341a900487290d867 data/aether_ii/worldgen/placed_feature/coast_quicksoil.json
