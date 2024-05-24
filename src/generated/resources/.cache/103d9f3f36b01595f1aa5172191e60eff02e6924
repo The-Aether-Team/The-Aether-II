@@ -1,4 +1,6 @@
-// 1.20.4	2024-05-23T23:05:51.2925628	Registries
+// 1.20.4	2024-05-23T19:45:59.4205804	Registries
+5f4516d2885abde9751d9ca056964abcea456068 data/aether_ii/aether_ii/damage_infliction/example.json
+6ad527084dd6144b6ea98924246b76811bd9df36 data/aether_ii/aether_ii/damage_resistance/example.json
 f9dbdadd419a0cff7041a86d9432bf706ba56152 data/aether_ii/dimension/aether_highlands.json
 ae01d467453be6d401ce68c8ccc006362b5a29b7 data/aether_ii/dimension_type/aether_highlands.json
 b12c63c3b81ba8cbc4dceff2e7487b0426f16636 data/aether_ii/worldgen/biome/battleground_wastes.json

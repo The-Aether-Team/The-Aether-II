@@ -18,7 +18,9 @@ public class AetherIIRegistrySets extends DatapackBuiltinEntriesProvider {
             .add(Registries.NOISE, AetherIINoises::bootstrap)
             .add(Registries.NOISE_SETTINGS, AetherIINoiseSettings::bootstrap)
             .add(Registries.DIMENSION_TYPE, AetherIIDimensions::bootstrapDimensionType)
-            .add(Registries.LEVEL_STEM, AetherIIDimensions::bootstrapLevelStem);
+            .add(Registries.LEVEL_STEM, AetherIIDimensions::bootstrapLevelStem)
+            .add(AetherIIDamageInflictions.DAMAGE_INFLICTION_REGISTRY_KEY, AetherIIDamageInflictions::bootstrap)
+            .add(AetherIIDamageResistances.DAMAGE_RESISTANCE_REGISTRY_KEY, AetherIIDamageResistances::bootstrap);
 //            .add(Registries.CONFIGURED_FEATURE, AetherConfiguredFeatures::bootstrap)
 //            .add(Registries.PLACED_FEATURE, AetherPlacedFeatures::bootstrap)
 //            .add(Registries.BIOME, AetherBiomes::bootstrap)

@@ -1,0 +1,6 @@
+{
+  "entity_type": "minecraft:pig",
+  "impact_value": 100,
+  "pierce_value": 100,
+  "slash_value": 100
+}
