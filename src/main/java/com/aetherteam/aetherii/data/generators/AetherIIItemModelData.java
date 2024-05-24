@@ -120,5 +120,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemWallBlock(AetherIIBlocks.HOLYSTONE_BRICK_WALL.get(), AetherIIBlocks.HOLYSTONE_BRICKS.get(), "construction/");
         this.itemBlock(AetherIIBlocks.HOLYSTONE_BRICK_STAIRS.get());
         this.itemBlock(AetherIIBlocks.HOLYSTONE_BRICK_SLAB.get());
+        this.itemBlock(AetherIIBlocks.QUICKSOIL_GLASS.get());
+        this.pane(AetherIIBlocks.QUICKSOIL_GLASS_PANE.get(), AetherIIBlocks.QUICKSOIL_GLASS.get(), "construction/");
     }
 }

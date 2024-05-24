@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-23T19:06:43.0540123	Block States: aether_ii
+// 1.20.4	2024-05-24T06:34:09.5680234	Block States: aether_ii
 09820e9981cbdbe29cb2563890673c61c5abe056 assets/aether_ii/blockstates/aether_dirt.json
 b5f21b065a5c8b88fdd19fe5dd78877e58ecd43a assets/aether_ii/blockstates/amberoot_leaves.json
 00d87fc7ac992265a1ba3abcec60d025374c7793 assets/aether_ii/blockstates/amberoot_log.json
@@ -30,6 +30,8 @@ a96cf404c9bc739a7318412806329b5ca96d11ff assets/aether_ii/blockstates/holystone_
 3f63db9b8be75f30effafccdcc21f5c50a8805ed assets/aether_ii/blockstates/holystone_stairs.json
 bf6cc5e5d87b483951c41b6f58d413eda9b2783a assets/aether_ii/blockstates/holystone_wall.json
 514a080d6169ff6a7bab29dc2b6cf6be6466b63e assets/aether_ii/blockstates/quicksoil.json
+6c030e221504030dc3de4683e710499432936f5d assets/aether_ii/blockstates/quicksoil_glass.json
+decb00a2bef776d2384ff17b8ad05904e7911133 assets/aether_ii/blockstates/quicksoil_glass_pane.json
 83d4d39f2c9ef5677ee8b28ad34f24bdaee4fc5a assets/aether_ii/blockstates/skybirch_leaves.json
 1203dae0c36eabdbf1a6083cb38c4a42c12b9756 assets/aether_ii/blockstates/skypine_leaves.json
 2dfa12af0e547d5f27d571ee4c11fd3d36919c81 assets/aether_ii/blockstates/skyplane_leaves.json
@@ -112,6 +114,12 @@ a5d5f305b460a07fc407912046749edc03f2cb80 assets/aether_ii/models/block/holystone
 60a6b56d56333846be32b70773561db0bbcd0ec8 assets/aether_ii/models/block/holystone_wall_side.json
 a94650c7d1e026decdcbd6d78763115729559c77 assets/aether_ii/models/block/holystone_wall_side_tall.json
 5a9b8e3f7c765eb5a7a394157432012639914c8b assets/aether_ii/models/block/quicksoil.json
+7b550b103503fae20f3444490e3f18a45394fde8 assets/aether_ii/models/block/quicksoil_glass.json
+3029809225e7b787955837d38e6db93dc12645db assets/aether_ii/models/block/quicksoil_glass_pane_noside.json
+c5a57d58ddcc9c5c54de586af143f210e674cdbd assets/aether_ii/models/block/quicksoil_glass_pane_noside_alt.json
+6785bb87cb183b56b26bf93cfcf86c1758b09221 assets/aether_ii/models/block/quicksoil_glass_pane_post.json
+3bdee96ae741233f99bb1fd20eaee2d49f9eac9a assets/aether_ii/models/block/quicksoil_glass_pane_side.json
+2ce89dd69df66f8bf4f7f28195dedc5522fa648c assets/aether_ii/models/block/quicksoil_glass_pane_side_alt.json
 3824713108d5b4a23d47ee79c8d631194737e1a6 assets/aether_ii/models/block/skybirch_leaves.json
 bb66e1e012089e37d8f6ba6d36286a96cadae1bc assets/aether_ii/models/block/skypine_leaves.json
 700be60841ad9774dcfc2fe7694fdef3e8645e24 assets/aether_ii/models/block/skyplane_leaves.json
