@@ -15,7 +15,11 @@
     "water_color": 10671602,
     "water_fog_color": 5599370
   },
-  "features": [],
+  "features": [
+    [
+      "aether_ii:coast_quicksoil"
+    ]
+  ],
   "has_precipitation": false,
   "spawn_costs": {},
   "spawners": {
