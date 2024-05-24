@@ -23,5 +23,4 @@ public class AetherIINoiseSettings {
         HolderGetter<NormalNoise.NoiseParameters> noise = context.lookup(Registries.NOISE);
         context.register(HIGHLANDS, HighlandsNoiseBuilders.highlandsNoiseSettings(densityFunctions, noise));
     }
-
 }

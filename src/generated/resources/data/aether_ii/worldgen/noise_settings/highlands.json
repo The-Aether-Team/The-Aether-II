@@ -21,18 +21,7 @@
     "barrier": 0.0,
     "continents": 0.0,
     "depth": 0.0,
-    "erosion": {
-      "type": "minecraft:abs",
-      "argument": {
-        "type": "minecraft:shifted_noise",
-        "noise": "aether_ii:erosion",
-        "shift_x": "minecraft:shift_x",
-        "shift_y": 0.0,
-        "shift_z": "minecraft:shift_z",
-        "xz_scale": 0.5,
-        "y_scale": 0.0
-      }
-    },
+    "erosion": "aether_ii:erosion",
     "final_density": {
       "type": "minecraft:squeeze",
       "argument": {
@@ -44,32 +33,16 @@
             "argument1": -0.05,
             "argument2": {
               "type": "minecraft:add",
-              "argument1": -0.1,
-              "argument2": {
+              "argument1": {
                 "type": "minecraft:mul",
                 "argument1": {
-                  "type": "minecraft:y_clamped_gradient",
-                  "from_value": 0.0,
-                  "from_y": 8,
-                  "to_value": 1.0,
-                  "to_y": 40
-                },
-                "argument2": {
                   "type": "minecraft:add",
                   "argument1": 0.1,
                   "argument2": {
                     "type": "minecraft:add",
-                    "argument1": -0.2,
-                    "argument2": {
+                    "argument1": {
                       "type": "minecraft:mul",
                       "argument1": {
-                        "type": "minecraft:y_clamped_gradient",
-                        "from_value": 1.0,
-                        "from_y": 56,
-                        "to_value": 0.0,
-                        "to_y": 128
-                      },
-                      "argument2": {
                         "type": "minecraft:add",
                         "argument1": 0.2,
                         "argument2": {
@@ -77,10 +50,34 @@
                           "argument1": -0.13,
                           "argument2": "aether_ii:base_3d_noise_highlands"
                         }
+                      },
+                      "argument2": {
+                        "type": "minecraft:y_clamped_gradient",
+                        "from_value": 1.0,
+                        "from_y": 56,
+                        "to_value": 0.0,
+                        "to_y": 128
                       }
+                    },
+                    "argument2": {
+                      "type": "minecraft:mul",
+                      "argument1": -0.2,
+                      "argument2": "aether_ii:factor"
                     }
                   }
+                },
+                "argument2": {
+                  "type": "minecraft:y_clamped_gradient",
+                  "from_value": 0.0,
+                  "from_y": 8,
+                  "to_value": 1.0,
+                  "to_y": 40
                 }
+              },
+              "argument2": {
+                "type": "minecraft:mul",
+                "argument1": -0.1,
+                "argument2": "aether_ii:factor"
               }
             }
           }
@@ -92,15 +89,7 @@
     "initial_density_without_jaggedness": 0.0,
     "lava": 0.0,
     "ridges": 0.0,
-    "temperature": {
-      "type": "minecraft:shifted_noise",
-      "noise": "aether_ii:temperature",
-      "shift_x": "minecraft:shift_x",
-      "shift_y": 0.0,
-      "shift_z": "minecraft:shift_z",
-      "xz_scale": 0.5,
-      "y_scale": 0.0
-    },
+    "temperature": "aether_ii:temperature",
     "vegetation": {
       "type": "minecraft:shifted_noise",
       "noise": "aether_ii:vegetation",

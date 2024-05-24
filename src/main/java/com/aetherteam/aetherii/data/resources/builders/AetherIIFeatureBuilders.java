@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.data.resources.builders.highlands;
+package com.aetherteam.aetherii.data.resources.builders;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.world.feature.configuration.CoastConfiguration;
