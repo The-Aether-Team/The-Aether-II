@@ -4,6 +4,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 
 public class AetherIITags {
@@ -44,6 +45,14 @@ public class AetherIITags {
 
         private static TagKey<Item> tag(String name) {
             return TagKey.create(Registries.ITEM, new ResourceLocation(AetherII.MODID, name));
+        }
+    }
+
+    public static class Biomes {
+        public static final TagKey<Biome> HAS_STRUCTURE_OUTPOST = tag("has_structure/outpost");
+
+        private static TagKey<Biome> tag(String name) {
+            return TagKey.create(Registries.BIOME, new ResourceLocation(AetherII.MODID, name));
         }
     }
 }
