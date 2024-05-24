@@ -24,6 +24,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.AETHER_DIRT.get());
         this.dropSelf(AetherIIBlocks.QUICKSOIL.get());
         this.dropSelf(AetherIIBlocks.HOLYSTONE.get());
+        this.dropSelf(AetherIIBlocks.MOSSY_HOLYSTONE.get());
         this.dropSelf(AetherIIBlocks.UNDERSHALE.get());
 
         this.dropWithFortune(AetherIIBlocks.AMBROSIUM_ORE.get(), AetherIIItems.AMBROSIUM_SHARD.get());
@@ -83,6 +84,10 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.HOLYSTONE_WALL.get());
         this.dropSelf(AetherIIBlocks.HOLYSTONE_STAIRS.get());
         this.add(AetherIIBlocks.HOLYSTONE_SLAB.get(), this::createSlabItemTable);
+
+        this.dropSelf(AetherIIBlocks.MOSSY_HOLYSTONE_WALL.get());
+        this.dropSelf(AetherIIBlocks.MOSSY_HOLYSTONE_STAIRS.get());
+        this.add(AetherIIBlocks.MOSSY_HOLYSTONE_SLAB.get(), this::createSlabItemTable);
 
         this.dropSelf(AetherIIBlocks.HOLYSTONE_BRICKS.get());
         this.dropSelf(AetherIIBlocks.HOLYSTONE_BRICK_WALL.get());

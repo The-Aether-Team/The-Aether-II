@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-24T06:34:09.5820224	Item Models: aether_ii
+// 1.20.4	2024-05-24T06:54:45.6313136	Item Models: aether_ii
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
 b485bb7a980decbc46719aeaac129689fa3f6a19 assets/aether_ii/models/item/aether_grass_block.json
 183e501764258654cc51853d14080c0c90ad97bb assets/aether_ii/models/item/amberoot_leaves.json
@@ -54,6 +54,10 @@ b1d7855ec43a99b480d29b4f816f83f143104448 assets/aether_ii/models/item/holystone_
 0afa4271fa12d463497f7f1ac0fd900f87854b20 assets/aether_ii/models/item/holystone_sword.json
 dd7dbfd68a795bf1d0035260b7b53d835143d28b assets/aether_ii/models/item/holystone_trowel.json
 9690c4cefe4dac918bc5a491a72735917042ea37 assets/aether_ii/models/item/holystone_wall.json
+a146cf9b7567eb6bd1e5a4c2523f6d1f4ec153ad assets/aether_ii/models/item/mossy_holystone.json
+1b577aee3036b910200c7e21424651f9575623f4 assets/aether_ii/models/item/mossy_holystone_slab.json
+3d8c627cbebadfc0db76f81fe4747fef77b8f5c1 assets/aether_ii/models/item/mossy_holystone_stairs.json
+a929cf248f4d81112bcca10919db5b4f544e3a11 assets/aether_ii/models/item/mossy_holystone_wall.json
 8e37ebdc1c0a7d3958be57b8d394648cdaf9a581 assets/aether_ii/models/item/quicksoil.json
 aa659e5bd10ca0db200402d370084234693fc942 assets/aether_ii/models/item/quicksoil_glass.json
 280fa1a6185b874ce28a0bec8deff7035cae5904 assets/aether_ii/models/item/quicksoil_glass_pane.json

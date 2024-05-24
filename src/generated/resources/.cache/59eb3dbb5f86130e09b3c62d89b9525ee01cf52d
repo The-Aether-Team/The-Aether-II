@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-24T06:34:09.5750225	Loot Tables
+// 1.20.4	2024-05-24T06:54:45.5643148	Loot Tables
 b3ac0f837a89ef6292323e16712ccb72b957e765 data/aether_ii/loot_tables/blocks/aether_dirt.json
 2a86a9bdc0455369b0dffc142c983d9cc2431881 data/aether_ii/loot_tables/blocks/aether_grass_block.json
 cd78acddc96546721e8ddea1858c70e70430d9d6 data/aether_ii/loot_tables/blocks/amberoot_leaves.json
@@ -30,6 +30,10 @@ f42129c5f9ab9a1f2a79ffaebdb198a6337c0dd9 data/aether_ii/loot_tables/blocks/holys
 3c53971203ea357d1eaf6005692e3f9197d4c345 data/aether_ii/loot_tables/blocks/holystone_slab.json
 d0bc73c482f0ed62de0521c8aaf08864532df5cb data/aether_ii/loot_tables/blocks/holystone_stairs.json
 3d885a44d1a0ec53d33089cf4cfafd877204b86a data/aether_ii/loot_tables/blocks/holystone_wall.json
+3ee78c0e551896c5cbd815397cdd9a1d9ae8db1e data/aether_ii/loot_tables/blocks/mossy_holystone.json
+8d3381ef356509456e812518a8e781bb41a7c942 data/aether_ii/loot_tables/blocks/mossy_holystone_slab.json
+1423b2e8e6a0120326dbb10ce4e9a84c0d8b0e17 data/aether_ii/loot_tables/blocks/mossy_holystone_stairs.json
+14ec60320f19886621ab918ffed7b9598faca3ca data/aether_ii/loot_tables/blocks/mossy_holystone_wall.json
 7b60d94ee66fd74c65e40066a9ea4995a75a63b3 data/aether_ii/loot_tables/blocks/quicksoil.json
 be8f7ce6087bad7d632985222e14cc04e4ee7b99 data/aether_ii/loot_tables/blocks/quicksoil_glass.json
 5803ab5521d20f45d9d9220ee05c9432751922a2 data/aether_ii/loot_tables/blocks/quicksoil_glass_pane.json

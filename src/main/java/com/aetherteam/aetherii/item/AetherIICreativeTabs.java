@@ -56,6 +56,10 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.HOLYSTONE_SLAB.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_PRESSURE_PLATE.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_BUTTON.get());
+                output.accept(AetherIIBlocks.MOSSY_HOLYSTONE.get());
+                output.accept(AetherIIBlocks.MOSSY_HOLYSTONE_WALL.get());
+                output.accept(AetherIIBlocks.MOSSY_HOLYSTONE_STAIRS.get());
+                output.accept(AetherIIBlocks.MOSSY_HOLYSTONE_SLAB.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_BRICKS.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_BRICK_WALL.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_BRICK_STAIRS.get());
@@ -81,6 +85,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.AETHER_DIRT.get());
                 output.accept(AetherIIBlocks.QUICKSOIL.get());
                 output.accept(AetherIIBlocks.HOLYSTONE.get());
+                output.accept(AetherIIBlocks.MOSSY_HOLYSTONE.get());
                 output.accept(AetherIIBlocks.UNDERSHALE.get());
                 output.accept(AetherIIBlocks.AMBROSIUM_ORE.get());
                 output.accept(AetherIIBlocks.ZANITE_ORE.get());
