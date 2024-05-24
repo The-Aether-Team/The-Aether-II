@@ -56,7 +56,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.ZANITE_ORE.get());
         this.itemBlock(AetherIIBlocks.ARKENIUM_ORE.get());
         this.itemBlock(AetherIIBlocks.GRAVITITE_ORE.get());
-        this.itemBlock(AetherIIBlocks.COLD_AERCLOUD.get());
+        this.aercloudItem(AetherIIBlocks.COLD_AERCLOUD.get());
         this.itemBlock(AetherIIBlocks.SKYROOT_LOG.get());
         this.itemBlock(AetherIIBlocks.GREATROOT_LOG.get());
         this.itemBlock(AetherIIBlocks.WISPROOT_LOG.get());
