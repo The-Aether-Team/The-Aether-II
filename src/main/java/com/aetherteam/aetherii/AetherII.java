@@ -9,6 +9,7 @@ import com.aetherteam.aetherii.data.AetherData;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageInflictions;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageResistances;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.event.listeners.DamageSystemListener;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.mojang.logging.LogUtils;
@@ -58,6 +59,8 @@ public class AetherII {
 
     public static void eventSetup(IEventBus neoBus) {
         IEventBus bus = NeoForge.EVENT_BUS;
+
+        DamageSystemListener.listen(bus);
 
         neoBus.addListener(AetherIIEntityTypes::registerSpawnPlacements);
         neoBus.addListener(AetherIIEntityTypes::registerEntityAttributes);
