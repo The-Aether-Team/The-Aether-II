@@ -5,6 +5,15 @@
     "aether_ii:ambrosium_ore",
     "aether_ii:zanite_ore",
     "aether_ii:arkenium_ore",
-    "aether_ii:gravitite_ore"
+    "aether_ii:gravitite_ore",
+    "aether_ii:holystone_button",
+    "aether_ii:holystone_pressure_plate",
+    "aether_ii:holystone_wall",
+    "aether_ii:holystone_stairs",
+    "aether_ii:holystone_slab",
+    "aether_ii:holystone_bricks",
+    "aether_ii:holystone_brick_wall",
+    "aether_ii:holystone_brick_stairs",
+    "aether_ii:holystone_brick_slab"
   ]
 }

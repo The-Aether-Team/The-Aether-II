@@ -24,6 +24,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.AETHER_DIRT.get());
         this.dropSelf(AetherIIBlocks.QUICKSOIL.get());
         this.dropSelf(AetherIIBlocks.HOLYSTONE.get());
+        this.dropSelf(AetherIIBlocks.MOSSY_HOLYSTONE.get());
         this.dropSelf(AetherIIBlocks.UNDERSHALE.get());
 
         this.dropWithFortune(AetherIIBlocks.AMBROSIUM_ORE.get(), AetherIIItems.AMBROSIUM_SHARD.get());
@@ -55,8 +56,46 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropNone(AetherIIBlocks.AMBEROOT_LEAVES.get());
 
         this.dropSelf(AetherIIBlocks.SKYROOT_PLANKS.get());
+        this.dropSelf(AetherIIBlocks.SKYROOT_FENCE.get());
+        this.dropSelf(AetherIIBlocks.SKYROOT_FENCE_GATE.get());
+        this.dropSelf(AetherIIBlocks.SKYROOT_BUTTON.get());
+        this.dropSelf(AetherIIBlocks.SKYROOT_PRESSURE_PLATE.get());
+        this.dropSelf(AetherIIBlocks.SKYROOT_STAIRS.get());
+        this.add(AetherIIBlocks.SKYROOT_SLAB.get(), this::createSlabItemTable);
+
         this.dropSelf(AetherIIBlocks.GREATROOT_PLANKS.get());
+        this.dropSelf(AetherIIBlocks.GREATROOT_FENCE.get());
+        this.dropSelf(AetherIIBlocks.GREATROOT_FENCE_GATE.get());
+        this.dropSelf(AetherIIBlocks.GREATROOT_BUTTON.get());
+        this.dropSelf(AetherIIBlocks.GREATROOT_PRESSURE_PLATE.get());
+        this.dropSelf(AetherIIBlocks.GREATROOT_STAIRS.get());
+        this.add(AetherIIBlocks.GREATROOT_SLAB.get(), this::createSlabItemTable);
+
         this.dropSelf(AetherIIBlocks.WISPROOT_PLANKS.get());
+        this.dropSelf(AetherIIBlocks.WISPROOT_FENCE.get());
+        this.dropSelf(AetherIIBlocks.WISPROOT_FENCE_GATE.get());
+        this.dropSelf(AetherIIBlocks.WISPROOT_BUTTON.get());
+        this.dropSelf(AetherIIBlocks.WISPROOT_PRESSURE_PLATE.get());
+        this.dropSelf(AetherIIBlocks.WISPROOT_STAIRS.get());
+        this.add(AetherIIBlocks.WISPROOT_SLAB.get(), this::createSlabItemTable);
+
+        this.dropSelf(AetherIIBlocks.HOLYSTONE_BUTTON.get());
+        this.dropSelf(AetherIIBlocks.HOLYSTONE_PRESSURE_PLATE.get());
+        this.dropSelf(AetherIIBlocks.HOLYSTONE_WALL.get());
+        this.dropSelf(AetherIIBlocks.HOLYSTONE_STAIRS.get());
+        this.add(AetherIIBlocks.HOLYSTONE_SLAB.get(), this::createSlabItemTable);
+
+        this.dropSelf(AetherIIBlocks.MOSSY_HOLYSTONE_WALL.get());
+        this.dropSelf(AetherIIBlocks.MOSSY_HOLYSTONE_STAIRS.get());
+        this.add(AetherIIBlocks.MOSSY_HOLYSTONE_SLAB.get(), this::createSlabItemTable);
+
+        this.dropSelf(AetherIIBlocks.HOLYSTONE_BRICKS.get());
+        this.dropSelf(AetherIIBlocks.HOLYSTONE_BRICK_WALL.get());
+        this.dropSelf(AetherIIBlocks.HOLYSTONE_BRICK_STAIRS.get());
+        this.add(AetherIIBlocks.HOLYSTONE_BRICK_SLAB.get(), this::createSlabItemTable);
+
+        this.dropWhenSilkTouch(AetherIIBlocks.QUICKSOIL_GLASS.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.QUICKSOIL_GLASS_PANE.get());
     }
 
     @Override

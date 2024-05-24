@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "aether_ii:block/greatroot_slab"
+    },
+    "type=double": {
+      "model": "aether_ii:block/greatroot_planks"
+    },
+    "type=top": {
+      "model": "aether_ii:block/greatroot_slab_top"
+    }
+  }
+}

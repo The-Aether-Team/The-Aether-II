@@ -16,5 +16,6 @@ public class AetherIIClient {
 
     public static void eventSetup(IEventBus neoBus) {
         neoBus.addListener(AetherIIColorResolvers::registerBlockColor);
+        neoBus.addListener(AetherIIColorResolvers::registerItemColor);
     }
 }
