@@ -84,6 +84,14 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
 
         carpet(consumer, AetherIIBlocks.CLOUDWOOL_CARPET, AetherIIBlocks.CLOUDWOOL.get());
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.AMBROSIUM_TORCH.get(), 4)
+                .define('A', AetherIIItems.AMBROSIUM_SHARD.get())
+                .define('/', AetherIITags.Items.RODS_SKYROOT)
+                .pattern("A")
+                .pattern("/")
+                .unlockedBy(getHasName(AetherIIItems.HOLYSTONE_PICKAXE.get()), has(AetherIIItems.HOLYSTONE_PICKAXE.get()))
+                .save(consumer);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get())
                 .define('#', AetherIITags.Items.PLANKS_CRAFTING)
                 .pattern("##")

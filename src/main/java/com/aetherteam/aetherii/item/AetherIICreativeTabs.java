@@ -118,6 +118,7 @@ public class AetherIICreativeTabs {
             .icon(() -> new ItemStack(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".functional_blocks"))
             .displayItems((features, output) -> {
+                output.accept(AetherIIBlocks.AMBROSIUM_TORCH.get());
                 output.accept(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get());
                 output.accept(AetherIIBlocks.SKYROOT_LADDER.get());
             }).build());

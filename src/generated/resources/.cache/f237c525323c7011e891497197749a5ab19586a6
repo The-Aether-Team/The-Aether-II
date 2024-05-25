@@ -1,9 +1,11 @@
-// 1.20.4	2024-05-25T11:45:08.7924843	Block States: aether_ii
+// 1.20.4	2024-05-25T17:59:35.6317217	Block States: aether_ii
 09820e9981cbdbe29cb2563890673c61c5abe056 assets/aether_ii/blockstates/aether_dirt.json
 b5f21b065a5c8b88fdd19fe5dd78877e58ecd43a assets/aether_ii/blockstates/amberoot_leaves.json
 00d87fc7ac992265a1ba3abcec60d025374c7793 assets/aether_ii/blockstates/amberoot_log.json
 b4655c0e1e481a224fbf4a82823d83af5351d3f4 assets/aether_ii/blockstates/amberoot_wood.json
 7ede872563c8383ca485b759e69f713162bdbcc7 assets/aether_ii/blockstates/ambrosium_ore.json
+3790108941c335e2b7b9f41dfae7a72c00b59b92 assets/aether_ii/blockstates/ambrosium_torch.json
+d33a4e439414b63dc1d0cc01b27897557dc1f718 assets/aether_ii/blockstates/ambrosium_wall_torch.json
 f70d2c7f292ee79ecae67dd6bfc775691beb9a80 assets/aether_ii/blockstates/arkenium_ore.json
 70a532fbcf0f82aa02919202b2f92afa51da56f8 assets/aether_ii/blockstates/cloudwool.json
 6519f9060094b8c8ec3e7f69d6c27a8efc771770 assets/aether_ii/blockstates/cloudwool_carpet.json
@@ -75,6 +77,8 @@ f444c2d02a1445ab4b6fd3fe26bbb16f757e4856 assets/aether_ii/models/block/aether_di
 85eb296c6919f31f53fecd3f087dc1103190eeaa assets/aether_ii/models/block/amberoot_wood.json
 3319fe55f4555441b10d0bc3c7f51a15446485df assets/aether_ii/models/block/amberoot_wood_horizontal.json
 5d5be47f23485414118570094b00e3d9cf1853d3 assets/aether_ii/models/block/ambrosium_ore.json
+6e1dc428632ad392f5aadcd180401d86c259884e assets/aether_ii/models/block/ambrosium_torch.json
+1b158cecbadf080c31e7b6a13bb3cd2c1bb55455 assets/aether_ii/models/block/ambrosium_wall_torch.json
 016b0c1533090f1198dfeb2db71beb72c730a787 assets/aether_ii/models/block/arkenium_ore.json
 c0f964bf0e8d5046ec61f6ad516e118fc043148a assets/aether_ii/models/block/cloudwool.json
 6a3c73dbf735f0e1567003d3c1ae9a7d3e9b23ce assets/aether_ii/models/block/cloudwool_carpet.json
