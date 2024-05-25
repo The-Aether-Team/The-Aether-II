@@ -18,6 +18,7 @@ import com.aetherteam.aetherii.item.combat.skyroot.SkyrootSwordItem;
 import com.aetherteam.aetherii.item.combat.zanite.ZaniteHammerItem;
 import com.aetherteam.aetherii.item.combat.zanite.ZaniteSpearItem;
 import com.aetherteam.aetherii.item.combat.zanite.ZaniteSwordItem;
+import com.aetherteam.aetherii.item.miscellaneous.AetherPortalItem;
 import com.aetherteam.aetherii.item.tools.skyroot.*;
 import com.aetherteam.aetherii.item.tools.holystone.*;
 import com.aetherteam.aetherii.item.tools.zanite.*;
@@ -85,4 +86,7 @@ public class AetherIIItems {
     public static final DeferredItem<Item> ARKENIUM_PLATE = ITEMS.register("arkenium_plate", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> RAW_GRAVITITE = ITEMS.register("raw_gravitite", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> GRAVITITE_PLATE = ITEMS.register("gravitite_plate", () -> new Item(new Item.Properties()));
+
+    // Misc
+    public static final DeferredItem<Item> AETHER_PORTAL_FRAME = ITEMS.register("aether_portal_frame", () -> new AetherPortalItem(new Item.Properties().stacksTo(1)));
 }

@@ -1,6 +1,7 @@
 {
   "block.aether_ii.aether_dirt": "Aether Dirt",
   "block.aether_ii.aether_grass_block": "Aether Grass Block",
+  "block.aether_ii.aether_portal": "Aether Portal",
   "block.aether_ii.amberoot_leaves": "Amberoot Leaves",
   "block.aether_ii.amberoot_log": "Amberoot Log",
   "block.aether_ii.amberoot_wood": "Amberoot Wood",
@@ -70,6 +71,7 @@
   "block.aether_ii.wisproot_wood": "Wisproot Wood",
   "block.aether_ii.wisptop_leaves": "Wisptop Leaves",
   "block.aether_ii.zanite_ore": "Zanite Ore",
+  "item.aether_ii.aether_portal_frame": "Aether Portal Frame",
   "item.aether_ii.ambrosium_shard": "Ambrosium Shard",
   "item.aether_ii.arkenium_axe": "Arkenium Axe",
   "item.aether_ii.arkenium_hammer": "Arkenium Hammer",
@@ -122,5 +124,7 @@
   "itemGroup.aether_ii.natural_blocks": "Aether II Natural Blocks",
   "itemGroup.aether_ii.redstone_blocks": "Aether II Redstone Blocks",
   "itemGroup.aether_ii.spawn_eggs": "Aether II Spawn Eggs",
-  "pack.aether_ii.mod.description": "Aether II Resources"
+  "pack.aether_ii.mod.description": "Aether II Resources",
+  "subtitles.aether_ii.block.aether_portal.ambient": "Aether Portal whooshes",
+  "subtitles.aether_ii.block.aether_portal.trigger": "Aether Portal noise intensifies"
 }

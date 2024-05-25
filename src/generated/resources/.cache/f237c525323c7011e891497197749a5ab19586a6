@@ -1,5 +1,6 @@
-// 1.20.4	2024-05-25T17:59:35.6317217	Block States: aether_ii
+// 1.20.4	2024-05-25T20:18:17.103203	Block States: aether_ii
 09820e9981cbdbe29cb2563890673c61c5abe056 assets/aether_ii/blockstates/aether_dirt.json
+1fde2b528656645600affed9516f2d975e76bd60 assets/aether_ii/blockstates/aether_portal.json
 b5f21b065a5c8b88fdd19fe5dd78877e58ecd43a assets/aether_ii/blockstates/amberoot_leaves.json
 00d87fc7ac992265a1ba3abcec60d025374c7793 assets/aether_ii/blockstates/amberoot_log.json
 b4655c0e1e481a224fbf4a82823d83af5351d3f4 assets/aether_ii/blockstates/amberoot_wood.json
@@ -71,6 +72,8 @@ f50fe11dd94dd075f91db51c1dda68bfd5d7d1cb assets/aether_ii/blockstates/wisproot_s
 fbea06b1eb6c1730fe17c699fd1944abb0925297 assets/aether_ii/blockstates/wisptop_leaves.json
 c1db6b218613927fa6d6269dafb1f376bd8323a7 assets/aether_ii/blockstates/zanite_ore.json
 f444c2d02a1445ab4b6fd3fe26bbb16f757e4856 assets/aether_ii/models/block/aether_dirt.json
+6e6c069c57a7a0af23b0cad71f8d3fd7900fb76a assets/aether_ii/models/block/aether_portal_ew.json
+914a05c27b2886d125cc9b97999c1a9aa7821df9 assets/aether_ii/models/block/aether_portal_ns.json
 979551a95de8342970b3665985b0bbff0ad3778f assets/aether_ii/models/block/amberoot_leaves.json
 5749a083bc9436b008baca60605e426c16410ca8 assets/aether_ii/models/block/amberoot_log.json
 72dbba0bd39542dfbf378c0875646e0354299232 assets/aether_ii/models/block/amberoot_log_horizontal.json

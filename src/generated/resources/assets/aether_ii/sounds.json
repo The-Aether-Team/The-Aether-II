@@ -1,0 +1,22 @@
+{
+  "block.aether_portal.ambient": {
+    "sounds": [
+      {
+        "attenuation_distance": 10,
+        "name": "aether_ii:block/portal/hum"
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.block.aether_portal.ambient"
+  },
+  "block.aether_portal.travel": {
+    "sounds": [
+      "aether_ii:block/portal/travel"
+    ]
+  },
+  "block.aether_portal.trigger": {
+    "sounds": [
+      "aether_ii:block/portal/trigger"
+    ],
+    "subtitle": "subtitles.aether_ii.block.aether_portal.trigger"
+  }
+}

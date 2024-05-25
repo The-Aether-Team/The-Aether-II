@@ -13,6 +13,20 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
 
     @Override
     public void registerSounds() {
+
+        //Portal
+        this.add(AetherIISoundEvents.BLOCK_AETHER_PORTAL_AMBIENT,
+                definition().with(sound("aether_ii:block/portal/hum").attenuationDistance(10))
+                        .subtitle("subtitles.aether_ii.block.aether_portal.ambient")
+        );
+        this.add(AetherIISoundEvents.BLOCK_AETHER_PORTAL_TRAVEL,
+                definition().with(sound("aether_ii:block/portal/travel"))
+        );
+        this.add(AetherIISoundEvents.BLOCK_AETHER_PORTAL_TRIGGER,
+                definition().with(sound("aether_ii:block/portal/trigger"))
+                        .subtitle("subtitles.aether_ii.block.aether_portal.trigger")
+        );
+
         // Music
 //        this.add(AetherIISoundEvents.MUSIC_HIGHFIELDS,
 //                definition().with(

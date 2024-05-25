@@ -62,6 +62,8 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.RAW_GRAVITITE.get(), "materials/");
         this.item(AetherIIItems.GRAVITITE_PLATE.get(), "materials/");
 
+        this.portalItem(AetherIIItems.AETHER_PORTAL_FRAME.get(), "miscellaneous/");
+
         this.itemBlock(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
         this.itemBlock(AetherIIBlocks.AETHER_DIRT.get());
         this.itemBlock(AetherIIBlocks.QUICKSOIL.get());

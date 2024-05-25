@@ -1,6 +1,7 @@
-// 1.20.4	2024-05-25T18:02:36.9101674	Item Models: aether_ii
+// 1.20.4	2024-05-25T20:18:17.1117208	Item Models: aether_ii
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
 b485bb7a980decbc46719aeaac129689fa3f6a19 assets/aether_ii/models/item/aether_grass_block.json
+b9bfec314176b17ae9514e75469dbec42e1b345a assets/aether_ii/models/item/aether_portal_frame.json
 183e501764258654cc51853d14080c0c90ad97bb assets/aether_ii/models/item/amberoot_leaves.json
 7103a735096dfa36af38b7cd4c3e3a2b75d94935 assets/aether_ii/models/item/amberoot_log.json
 3c94afddfaa353216327cd315e5c62eb1b4d00d4 assets/aether_ii/models/item/amberoot_wood.json

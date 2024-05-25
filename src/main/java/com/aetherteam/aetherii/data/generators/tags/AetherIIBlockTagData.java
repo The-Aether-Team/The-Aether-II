@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -21,6 +22,18 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
     @SuppressWarnings("unchecked")
     @Override
     public void addTags(HolderLookup.Provider provider) {
+        this.tag(AetherIITags.Blocks.AETHER_PORTAL_BLOCKS).add(
+                Blocks.QUARTZ_BLOCK,
+                Blocks.SMOOTH_QUARTZ,
+                Blocks.QUARTZ_BRICKS,
+                Blocks.QUARTZ_PILLAR,
+                Blocks.CHISELED_QUARTZ_BLOCK);
+        this.tag(AetherIITags.Blocks.AETHER_PORTAL_BLACKLIST);
+        this.tag(AetherIITags.Blocks.AETHER_DIRT).add(
+                AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
+                AetherIIBlocks.AETHER_DIRT.get());
+        this.tag(AetherIITags.Blocks.AERCLOUDS).add(
+                AetherIIBlocks.COLD_AERCLOUD.get());
         this.tag(AetherIITags.Blocks.SKYROOT_LOGS).add(
                 AetherIIBlocks.SKYROOT_LOG.get(),
                 AetherIIBlocks.SKYROOT_WOOD.get());

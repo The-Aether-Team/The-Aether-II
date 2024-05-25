@@ -14,6 +14,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
     @Override
     protected void addTranslations() {
+        this.addBlock(AetherIIBlocks.AETHER_PORTAL, "Aether Portal");
+
         this.addBlock(AetherIIBlocks.AETHER_GRASS_BLOCK, "Aether Grass Block");
         this.addBlock(AetherIIBlocks.AETHER_DIRT, "Aether Dirt");
         this.addBlock(AetherIIBlocks.QUICKSOIL, "Quicksoil");
@@ -148,6 +150,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.RAW_GRAVITITE, "Raw Gravitite");
         this.addItem(AetherIIItems.GRAVITITE_PLATE, "Gravitite Plate");
 
+        this.addItem(AetherIIItems.AETHER_PORTAL_FRAME, "Aether Portal Frame");
+
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_BUILDING_BLOCKS.get(), "Aether II Building Blocks");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_DUNGEON_BLOCKS.get(), "Aether II Dungeon Blocks");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_NATURAL_BLOCKS.get(), "Aether II Natural Blocks");
@@ -158,6 +162,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_FOOD_AND_DRINKS.get(), "Aether II Food & Drinks");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_INGREDIENTS.get(), "Aether II Ingredients");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_SPAWN_EGGS.get(), "Aether II Spawn Eggs");
+
+        this.addSubtitle("block", "aether_portal.ambient", "Aether Portal whooshes");
+        this.addSubtitle("block", "aether_portal.trigger", "Aether Portal noise intensifies");
 
         this.addPackDescription("mod", "Aether II Resources");
     }

@@ -13,6 +13,8 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
 
     @Override
     public void registerStatesAndModels() {
+        this.portal(AetherIIBlocks.AETHER_PORTAL.get());
+
         this.block(AetherIIBlocks.AETHER_DIRT.get(), "natural/");
         this.block(AetherIIBlocks.QUICKSOIL.get(), "natural/");
         this.block(AetherIIBlocks.HOLYSTONE.get(), "natural/");
