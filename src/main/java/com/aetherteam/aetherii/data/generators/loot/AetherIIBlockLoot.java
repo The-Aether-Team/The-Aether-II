@@ -99,6 +99,9 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
 
         this.dropSelf(AetherIIBlocks.CLOUDWOOL.get());
         this.dropSelf(AetherIIBlocks.CLOUDWOOL_CARPET.get());
+
+        this.dropSelf(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get());
+        this.dropSelf(AetherIIBlocks.SKYROOT_LADDER.get());
     }
 
     @Override

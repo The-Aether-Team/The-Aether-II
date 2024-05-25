@@ -83,6 +83,21 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
 
         carpet(consumer, AetherIIBlocks.CLOUDWOOL_CARPET, AetherIIBlocks.CLOUDWOOL.get());
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get())
+                .define('#', AetherIIBlocks.SKYROOT_PLANKS.get())
+                .pattern("##")
+                .pattern("##")
+                .unlockedBy(getHasName(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get()), has(AetherIITags.Items.PLANKS_CRAFTING))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_LADDER.get(), 3)
+                .define('#', AetherIITags.Items.RODS_SKYROOT)
+                .pattern("# #")
+                .pattern("###")
+                .pattern("# #")
+                .unlockedBy(getHasName(AetherIIBlocks.SKYROOT_LADDER.get()), has(AetherIITags.Items.RODS_SKYROOT))
+                .save(consumer);
+
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(AetherIIBlocks.QUICKSOIL.get()), RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.QUICKSOIL_GLASS.get(), 0.1F, 200).unlockedBy("has_quicksoil", has(AetherIIBlocks.QUICKSOIL.get())).save(consumer);
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.QUICKSOIL_GLASS_PANE.get(), 16).define('#', AetherIIBlocks.QUICKSOIL_GLASS.get()).pattern("###").pattern("###").unlockedBy("has_quicksoil_glass", has(AetherIIBlocks.QUICKSOIL_GLASS.get())).save(consumer);
 

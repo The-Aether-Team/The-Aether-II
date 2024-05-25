@@ -89,5 +89,8 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
 
         this.block(AetherIIBlocks.CLOUDWOOL.get(), "construction/");
         this.carpet(AetherIIBlocks.CLOUDWOOL_CARPET.get(), AetherIIBlocks.CLOUDWOOL.get(), "construction/");
+
+        this.skyrootCraftingTable(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), "construction/");
+        this.skyrootLadder(AetherIIBlocks.SKYROOT_LADDER.get());
     }
 }

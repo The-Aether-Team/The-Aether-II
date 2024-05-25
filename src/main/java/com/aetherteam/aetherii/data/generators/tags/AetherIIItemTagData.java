@@ -42,6 +42,10 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIITags.Items.GREATROOT_LOGS);
         this.tag(AetherIITags.Items.CRAFTS_WISPROOT_PLANKS).addTag(
                 AetherIITags.Items.WISPROOT_LOGS);
+        this.tag(AetherIITags.Items.PLANKS_CRAFTING).add(
+                AetherIIBlocks.SKYROOT_PLANKS.asItem(),
+                AetherIIBlocks.GREATROOT_PLANKS.asItem(),
+                AetherIIBlocks.WISPROOT_PLANKS.asItem());
         this.tag(AetherIITags.Items.CRAFTS_SKYROOT_STICKS).add(
                 AetherIIBlocks.SKYROOT_PLANKS.asItem(),
                 AetherIIBlocks.GREATROOT_PLANKS.asItem(),

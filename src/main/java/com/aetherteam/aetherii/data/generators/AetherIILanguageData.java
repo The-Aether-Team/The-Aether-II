@@ -93,6 +93,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.CLOUDWOOL, "Cloudwool");
         this.addBlock(AetherIIBlocks.CLOUDWOOL_CARPET, "Cloudwool Carpet");
 
+        this.addBlock(AetherIIBlocks.SKYROOT_CRAFTING_TABLE, "Skyroot Crafting Table");
+        this.addBlock(AetherIIBlocks.SKYROOT_LADDER, "Skyroot Ladder");
+
 
         this.addItem(AetherIIItems.SKYROOT_SWORD, "Skyroot Sword");
         this.addItem(AetherIIItems.SKYROOT_HAMMER, "Skyroot Hammer");
@@ -142,16 +145,16 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.RAW_GRAVITITE, "Raw Gravitite");
         this.addItem(AetherIIItems.GRAVITITE_PLATE, "Gravitite Plate");
 
-        this.addCreativeTab(AetherIICreativeTabs.AETHER_BUILDING_BLOCKS.get(), "Aether II Building Blocks");
-        this.addCreativeTab(AetherIICreativeTabs.AETHER_DUNGEON_BLOCKS.get(), "Aether II Dungeon Blocks");
-        this.addCreativeTab(AetherIICreativeTabs.AETHER_NATURAL_BLOCKS.get(), "Aether II Natural Blocks");
-        this.addCreativeTab(AetherIICreativeTabs.AETHER_FUNCTIONAL_BLOCKS.get(), "Aether II Functional Blocks");
-        this.addCreativeTab(AetherIICreativeTabs.AETHER_REDSTONE_BLOCKS.get(), "Aether II Redstone Blocks");
-        this.addCreativeTab(AetherIICreativeTabs.AETHER_EQUIPMENT_AND_UTILITIES.get(), "Aether II Equipment & Utilities");
-        this.addCreativeTab(AetherIICreativeTabs.AETHER_ARMOR_AND_ACCESSORIES.get(), "Aether II Armor & Accessories");
-        this.addCreativeTab(AetherIICreativeTabs.AETHER_FOOD_AND_DRINKS.get(), "Aether II Food & Drinks");
-        this.addCreativeTab(AetherIICreativeTabs.AETHER_INGREDIENTS.get(), "Aether II Ingredients");
-        this.addCreativeTab(AetherIICreativeTabs.AETHER_SPAWN_EGGS.get(), "Aether II Spawn Eggs");
+        this.addCreativeTab(AetherIICreativeTabs.AETHER_II_BUILDING_BLOCKS.get(), "Aether II Building Blocks");
+        this.addCreativeTab(AetherIICreativeTabs.AETHER_II_DUNGEON_BLOCKS.get(), "Aether II Dungeon Blocks");
+        this.addCreativeTab(AetherIICreativeTabs.AETHER_II_NATURAL_BLOCKS.get(), "Aether II Natural Blocks");
+        this.addCreativeTab(AetherIICreativeTabs.AETHER_II_FUNCTIONAL_BLOCKS.get(), "Aether II Functional Blocks");
+        this.addCreativeTab(AetherIICreativeTabs.AETHER_II_REDSTONE_BLOCKS.get(), "Aether II Redstone Blocks");
+        this.addCreativeTab(AetherIICreativeTabs.AETHER_II_EQUIPMENT_AND_UTILITIES.get(), "Aether II Equipment & Utilities");
+        this.addCreativeTab(AetherIICreativeTabs.AETHER_II_ARMOR_AND_ACCESSORIES.get(), "Aether II Armor & Accessories");
+        this.addCreativeTab(AetherIICreativeTabs.AETHER_II_FOOD_AND_DRINKS.get(), "Aether II Food & Drinks");
+        this.addCreativeTab(AetherIICreativeTabs.AETHER_II_INGREDIENTS.get(), "Aether II Ingredients");
+        this.addCreativeTab(AetherIICreativeTabs.AETHER_II_SPAWN_EGGS.get(), "Aether II Spawn Eggs");
 
         this.addPackDescription("mod", "Aether II Resources");
     }
