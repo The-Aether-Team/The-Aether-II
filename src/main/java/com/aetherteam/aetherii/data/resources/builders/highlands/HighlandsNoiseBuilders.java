@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.data.resources.builders.highlands;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIDensityFunctions;
 import com.aetherteam.aetherii.data.resources.registries.AetherIINoises;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -37,17 +37,26 @@ public class HighlandsNoiseBuilders {
 
     private static SurfaceRules.RuleSource highlandsSurfaceRules() {
         SurfaceRules.RuleSource surface = SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.waterBlockCheck(-1, 0), GRASS_BLOCK), DIRT);
-        return SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, surface), SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, DIRT));
+        return SurfaceRules.sequence(
+                SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, surface),
+                SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, DIRT),
+                SurfaceRules.ifTrue(SurfaceRules.verticalGradient("undershale", VerticalAnchor.absolute(40), VerticalAnchor.absolute(48)), SurfaceRules.state(AetherIIBlocks.UNDERSHALE.get().defaultBlockState()))
+        );
     }
 
     private static NoiseRouter makeNoiseRouter(HolderGetter<DensityFunction> densityFunctions, HolderGetter<NormalNoise.NoiseParameters> noise) {
-        return createNoiseRouter(densityFunctions, noise, buildFinalDensity(densityFunctions, noise));
+        return createNoiseRouter(densityFunctions, noise, buildFinalDensity(densityFunctions));
     }
 
-    private static DensityFunction buildFinalDensity(HolderGetter<DensityFunction> densityFunctions, HolderGetter<NormalNoise.NoiseParameters> noise) {
-        DensityFunction density = getFunction(densityFunctions, ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(AetherII.MODID,"base_3d_noise_highlands")));
+    private static DensityFunction buildFinalDensity(HolderGetter<DensityFunction> densityFunctions) {
+        DensityFunction density = getFunction(densityFunctions, AetherIIDensityFunctions.BASE_3D_NOISE_HIGHLANDS);
         density = DensityFunctions.add(density, DensityFunctions.constant(-0.13));
-        density = slide(density, 0, 128, 72, 0, -0.2, 8, 40, -0.1);
+        density = DensityFunctions.add(density, DensityFunctions.constant(0.2));
+        density = DensityFunctions.mul(density, DensityFunctions.yClampedGradient(56, 128, 1.0, 0.0));
+        density = DensityFunctions.add(density, factorize(densityFunctions, -0.2));
+        density = DensityFunctions.add(density, DensityFunctions.constant(0.1));
+        density = DensityFunctions.mul(density, DensityFunctions.yClampedGradient(8, 40, 0.0, 1.0));
+        density = DensityFunctions.add(density, factorize(densityFunctions, -0.1));
         density = DensityFunctions.add(density, DensityFunctions.constant(-0.05));
         density = DensityFunctions.blendDensity(density);
         density = DensityFunctions.interpolated(density);
@@ -55,26 +64,16 @@ public class HighlandsNoiseBuilders {
         return density;
     }
 
-    /**
-     * Copy of {@link NoiseRouterData#slide(DensityFunction, int, int, int, int, double, int, int, double)}.
-     */
-    private static DensityFunction slide(DensityFunction density, int minY, int maxY, int fromYTop, int toYTop, double offset1, int fromYBottom, int toYBottom, double offset2) {
-        DensityFunction topSlide = DensityFunctions.yClampedGradient(minY + maxY - fromYTop, minY + maxY - toYTop, 1, 0);
-        density = DensityFunctions.lerp(topSlide, offset1, density);
-        DensityFunction bottomSlide = DensityFunctions.yClampedGradient(minY + fromYBottom, minY + toYBottom, 0, 1);
-        return DensityFunctions.lerp(bottomSlide, offset2, density);
+    public static DensityFunction factorize(HolderGetter<DensityFunction> densityFunctions, double value) {
+        return DensityFunctions.mul(DensityFunctions.constant(value), getFunction(densityFunctions, AetherIIDensityFunctions.FACTOR));
     }
 
-    /**
-     * Based on {@link NoiseRouterData#noNewCaves(HolderGetter, HolderGetter, DensityFunction)}.<br><br>
-     * Logic that called {@link NoiseRouterData#postProcess(DensityFunction)} has been moved to {@link HighlandsNoiseBuilders#buildFinalDensity(HolderGetter, HolderGetter)}.
-     */
     private static NoiseRouter createNoiseRouter(HolderGetter<DensityFunction> densityFunctions, HolderGetter<NormalNoise.NoiseParameters> noise, DensityFunction finalDensity) {
         DensityFunction shiftX = getFunction(densityFunctions, ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation("shift_x")));
         DensityFunction shiftZ = getFunction(densityFunctions, ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation("shift_z")));
-        DensityFunction temperature = DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5D, noise.getOrThrow(AetherIINoises.TEMPERATURE));
+        DensityFunction temperature = getFunction(densityFunctions, AetherIIDensityFunctions.TEMPERATURE);
         DensityFunction vegetation = DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5D, noise.getOrThrow(AetherIINoises.VEGETATION));
-        DensityFunction erosion = DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5D, noise.getOrThrow(AetherIINoises.EROSION)).abs();
+        DensityFunction erosion = getFunction(densityFunctions, AetherIIDensityFunctions.EROSION);
         return new NoiseRouter(
                 DensityFunctions.zero(), // barrier noise
                 DensityFunctions.zero(), // fluid level floodedness noise

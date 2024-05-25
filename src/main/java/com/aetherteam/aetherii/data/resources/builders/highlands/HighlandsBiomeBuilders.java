@@ -66,8 +66,8 @@ public class HighlandsBiomeBuilders {
             .build();
 
     public static Biome makeHighfieldsBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
-        BiomeGenerationSettings.Builder generationSettingsBuilder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         MobSpawnSettings.Builder spawnSettingsBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder generationSettingsBuilder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         return fullDefinition(
                 false,
                 0.8F,
@@ -76,63 +76,72 @@ public class HighlandsBiomeBuilders {
                 spawnSettingsBuilder.build(),
                 generationSettingsBuilder
                         .addFeature(GenerationStep.Decoration.RAW_GENERATION, AetherIIMiscPlacements.COAST_QUICKSOIL)
+                        .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, AetherIIMiscPlacements.COLD_AERCLOUD)
                         .build(),
                 Biome.TemperatureModifier.NONE
         );
     }
 
     public static Biome makeMagneticBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
-        BiomeGenerationSettings.Builder generationSettingsBuilder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         MobSpawnSettings.Builder spawnSettingsBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder generationSettingsBuilder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         return fullDefinition(
                 false,
                 0.8F,
                 0.0F,
                 MAGNETIC_EFFECTS,
                 spawnSettingsBuilder.build(),
-                generationSettingsBuilder.build(),
+                generationSettingsBuilder
+                        .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, AetherIIMiscPlacements.COLD_AERCLOUD)
+                        .build(),
                 Biome.TemperatureModifier.NONE
         );
     }
 
     public static Biome makeArcticBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
-        BiomeGenerationSettings.Builder generationSettingsBuilder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         MobSpawnSettings.Builder spawnSettingsBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder generationSettingsBuilder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         return fullDefinition(
                 false,
                 0.8F,
                 0.0F,
                 ARCTIC_EFFECTS,
                 spawnSettingsBuilder.build(),
-                generationSettingsBuilder.build(),
+                generationSettingsBuilder
+                        .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, AetherIIMiscPlacements.COLD_AERCLOUD)
+                        .build(),
                 Biome.TemperatureModifier.NONE
         );
     }
 
     public static Biome makeIrradiatedBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
-        BiomeGenerationSettings.Builder generationSettingsBuilder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         MobSpawnSettings.Builder spawnSettingsBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder generationSettingsBuilder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         return fullDefinition(
                 false,
                 0.8F,
                 0.0F,
                 IRRADIATED_EFFECTS,
                 spawnSettingsBuilder.build(),
-                generationSettingsBuilder.build(),
+                generationSettingsBuilder
+                        .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, AetherIIMiscPlacements.COLD_AERCLOUD)
+                        .build(),
                 Biome.TemperatureModifier.NONE
         );
     }
 
     public static Biome makeAercloudSeaBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
-        BiomeGenerationSettings.Builder generationSettingsBuilder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         MobSpawnSettings.Builder spawnSettingsBuilder = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder generationSettingsBuilder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         return fullDefinition(
                 false,
                 0.8F,
                 0.0F,
                 AERCLOUD_SEA_EFFECTS,
                 spawnSettingsBuilder.build(),
-                generationSettingsBuilder.build(),
+                generationSettingsBuilder
+                        .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, AetherIIMiscPlacements.COLD_AERCLOUD)
+                        .build(),
                 Biome.TemperatureModifier.NONE
         );
     }

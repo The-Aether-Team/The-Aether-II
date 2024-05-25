@@ -18,6 +18,18 @@
   "features": [
     [
       "aether_ii:coast_quicksoil"
+    ],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "aether_ii:cold_aercloud"
     ]
   ],
   "has_precipitation": false,

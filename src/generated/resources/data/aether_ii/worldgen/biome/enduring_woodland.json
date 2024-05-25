@@ -15,7 +15,21 @@
     "water_color": 6519464,
     "water_fog_color": 4083842
   },
-  "features": [],
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "aether_ii:cold_aercloud"
+    ]
+  ],
   "has_precipitation": false,
   "spawn_costs": {},
   "spawners": {

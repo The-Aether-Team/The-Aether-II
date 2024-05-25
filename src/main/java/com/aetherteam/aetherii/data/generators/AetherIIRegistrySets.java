@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.data.resources.registries.*;
 import com.aetherteam.aetherii.data.resources.registries.features.AetherIIFeatureUtils;
 import com.aetherteam.aetherii.data.resources.registries.placement.AetherIIPlacementUtils;
+import com.aetherteam.aetherii.data.resources.registries.pools.AetherIIPools;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
@@ -23,6 +24,8 @@ public class AetherIIRegistrySets extends DatapackBuiltinEntriesProvider {
             .add(Registries.LEVEL_STEM, AetherIIDimensions::bootstrapLevelStem)
             .add(Registries.CONFIGURED_FEATURE, AetherIIFeatureUtils::bootstrap)
             .add(Registries.PLACED_FEATURE, AetherIIPlacementUtils::bootstrap)
+            .add(Registries.STRUCTURE, AetherIIStructures::bootstrap)
+            .add(Registries.TEMPLATE_POOL, AetherIIPools::bootstrap)
             .add(AetherIIDamageInflictions.DAMAGE_INFLICTION_REGISTRY_KEY, AetherIIDamageInflictions::bootstrap)
             .add(AetherIIDamageResistances.DAMAGE_RESISTANCE_REGISTRY_KEY, AetherIIDamageResistances::bootstrap);
 //            .add(Registries.BIOME, AetherBiomes::bootstrap)

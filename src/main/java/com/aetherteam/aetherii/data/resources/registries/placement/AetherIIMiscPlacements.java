@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.data.resources.registries.placement;
 
+import com.aetherteam.aetherii.data.resources.builders.AetherIIPlacementBuilders;
 import com.aetherteam.aetherii.data.resources.registries.features.AetherIIMiscFeatures;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderGetter;
@@ -13,6 +14,7 @@ import net.minecraft.world.level.levelgen.placement.*;
 
 public class AetherIIMiscPlacements {
     public static final ResourceKey<PlacedFeature> COAST_QUICKSOIL = AetherIIPlacementUtils.createKey("coast_quicksoil");
+    public static final ResourceKey<PlacedFeature> COLD_AERCLOUD = AetherIIPlacementUtils.createKey("cold_aercloud");
 
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
@@ -23,5 +25,7 @@ public class AetherIIMiscPlacements {
                 EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.hasSturdyFace(Direction.DOWN), BlockPredicate.ONLY_IN_AIR_PREDICATE, 16),
                 BiomeFilter.biome()
         );
+
+        AetherIIPlacementUtils.register(context, COLD_AERCLOUD, configuredFeatures.getOrThrow(AetherIIMiscFeatures.COLD_AERCLOUD), AetherIIPlacementBuilders.aercloudPlacement(48, 112, 12));
     }
 }
