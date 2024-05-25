@@ -2,8 +2,9 @@ package com.aetherteam.aetherii.attachment;
 
 import com.aetherteam.aetherii.AetherIIConfig;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
+import com.aetherteam.aetherii.event.hooks.PortalTeleportationHooks;
 import com.aetherteam.aetherii.item.AetherIIItems;
-import com.aetherteam.aetherii.network.packet.AetherIIPlayerSyncPacket;
+import com.aetherteam.aetherii.network.packet.PortalTeleportationSyncPacket;
 import com.aetherteam.nitrogen.attachment.INBTSynchable;
 import com.aetherteam.nitrogen.network.BasePacket;
 import com.mojang.serialization.Codec;
@@ -22,12 +23,11 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 /**
- * Capability class for handling {@link Player} behavior for the Aether.
+ * Capability class for handling portal and teleportation behavior for the Aether.
  *
- * @see com.aetherteam.aetherii.event.hooks.AttachmentHooks.AetherIIPlayerHooks
+ * @see PortalTeleportationHooks.PortalTeleportationHooks
  */
-public class AetherIIPlayerAttachment implements INBTSynchable {
-
+public class PortalTeleportationAttachment implements INBTSynchable {
     private boolean canGetPortal = true;
     private boolean canSpawnInAether = true;
 
@@ -43,14 +43,14 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
     private boolean shouldSyncAfterJoin;
     private boolean shouldSyncBetweenClients;
 
-    public static final Codec<AetherIIPlayerAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-        Codec.BOOL.fieldOf("can_get_portal").forGetter(AetherIIPlayerAttachment::canGetPortal),
-        Codec.BOOL.fieldOf("can_spawn_in_aether").forGetter(AetherIIPlayerAttachment::canSpawnInAether)
-    ).apply(instance, AetherIIPlayerAttachment::new));
+    public static final Codec<PortalTeleportationAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+        Codec.BOOL.fieldOf("can_get_portal").forGetter(PortalTeleportationAttachment::canGetPortal),
+        Codec.BOOL.fieldOf("can_spawn_in_aether").forGetter(PortalTeleportationAttachment::canSpawnInAether)
+    ).apply(instance, PortalTeleportationAttachment::new));
 
-    public AetherIIPlayerAttachment() { }
+    public PortalTeleportationAttachment() { }
 
-    public AetherIIPlayerAttachment(boolean portal, boolean spawnInAether) {
+    public PortalTeleportationAttachment(boolean portal, boolean spawnInAether) {
         this.setCanGetPortal(portal);
         this.setCanSpawnInAether(spawnInAether);
     }
@@ -202,6 +202,6 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
 
     @Override
     public BasePacket getSyncPacket(int entityID, String key, Type type, Object value) {
-        return new AetherIIPlayerSyncPacket(entityID, key, type, value);
+        return new PortalTeleportationSyncPacket(entityID, key, type, value);
     }
 }

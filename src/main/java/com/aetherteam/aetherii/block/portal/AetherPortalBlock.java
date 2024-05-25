@@ -55,13 +55,13 @@ public class AetherPortalBlock extends Block {
             if (entity.isOnPortalCooldown()) {
                 entity.setPortalCooldown();
             } else {
-                if (!entity.level().isClientSide() && !pos.equals(entityAccessor.aether$getPortalEntrancePos())) {
-                    entityAccessor.aether$setPortalEntrancePos(pos.immutable());
+                if (!entity.level().isClientSide() && !pos.equals(entityAccessor.aether_ii$getPortalEntrancePos())) {
+                    entityAccessor.aether_ii$setPortalEntrancePos(pos.immutable());
                 }
-                if (!entity.hasData(AetherIIDataAttachments.AETHER_II_PLAYER)) {
+                if (!entity.hasData(AetherIIDataAttachments.PORTAL_TELEPORTATION)) {
                     this.handleTeleportation(entity);
                 } else {
-                    var data = entity.getData(AetherIIDataAttachments.AETHER_II_PLAYER);
+                    var data = entity.getData(AetherIIDataAttachments.PORTAL_TELEPORTATION);
                     data.setInPortal(true);
                     int waitTime = data.getPortalTimer();
                     if (waitTime >= entity.getPortalWaitTime()) {
