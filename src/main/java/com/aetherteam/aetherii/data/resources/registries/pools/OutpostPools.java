@@ -15,7 +15,7 @@ import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 
 
 public class OutpostPools extends PillagerOutpostPools {
-    public static final ResourceKey<StructureTemplatePool> START = Pools.createKey("outpost/outposts");
+    public static final ResourceKey<StructureTemplatePool> START = AetherIIPools.createKey("outpost/outposts");
 
     public static void bootstrap(BootstapContext<StructureTemplatePool> context) {
         HolderGetter<StructureTemplatePool> templatePools = context.lookup(Registries.TEMPLATE_POOL);
@@ -25,8 +25,8 @@ public class OutpostPools extends PillagerOutpostPools {
                         holder, ImmutableList.of(Pair.of(
                                         StructurePoolElement.list(
                                                 ImmutableList.of(
-                                                        StructurePoolElement.legacy("outpost/outpost"),
-                                                        StructurePoolElement.legacy("outpost/tall_outpost")
+                                                        StructurePoolElement.legacy("aether_ii:outpost/outpost"),
+                                                        StructurePoolElement.legacy("aether_ii:outpost/tall_outpost")
                                                 )
                                         ),
                                         1

@@ -12,7 +12,7 @@ import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 
 public class AetherIIPools {
 
-    private static ResourceKey<StructureTemplatePool> createKey(String name) {
+    public static ResourceKey<StructureTemplatePool> createKey(String name) {
         return ResourceKey.create(Registries.TEMPLATE_POOL, new ResourceLocation(AetherII.MODID, name));
     }
 

@@ -9,7 +9,7 @@
   "start_height": {
     "absolute": 0
   },
-  "start_pool": "minecraft:outpost/outposts",
+  "start_pool": "aether_ii:outpost/outposts",
   "step": "surface_structures",
   "terrain_adaptation": "beard_thin"
 }
