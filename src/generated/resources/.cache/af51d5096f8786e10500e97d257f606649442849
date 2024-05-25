@@ -1,4 +1,7 @@
-// 1.20.4	2024-05-24T13:02:08.9354569	Tags for minecraft:item mod id aether_ii
+// 1.20.4	2024-05-25T20:18:17.1097206	Tags for minecraft:item mod id aether_ii
+885969d21619cd3834542e4f4b4894877566a141 data/aether_ii/tags/items/aerclouds.json
+0c52879ea7524c9c5a2025462b6351d7e81bf251 data/aether_ii/tags/items/aether_dirt.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/aether_ii/tags/items/aether_portal_activation_items.json
 a6cb4c19d89a718bf42595fdcdffd0e03b5bc4b8 data/aether_ii/tags/items/amberoot_logs.json
 0aaea3a99a8657e17400dff0883470f47764c8ce data/aether_ii/tags/items/arkenium_repairing.json
 723e82204484e4ab7f84cb1d829b94e9354ba424 data/aether_ii/tags/items/crafts_greatroot_planks.json
@@ -11,6 +14,7 @@ fce3e48dcf2a2f543eb33cde348393547a8abb35 data/aether_ii/tags/items/crafts_skyroo
 388a51dca9547d63c61921397cb0eac41f68806a data/aether_ii/tags/items/gravitite_repairing.json
 d16832b00a987fbbf18259365f95111bc00a1576 data/aether_ii/tags/items/greatroot_logs.json
 a5df7a36d1179fd70f1778840b38bad71c171e4b data/aether_ii/tags/items/holystone_repairing.json
+83ee50adcdca9d4ab6edf6f27b80ebbfeac2d130 data/aether_ii/tags/items/planks_crafting.json
 0aaea3a99a8657e17400dff0883470f47764c8ce data/aether_ii/tags/items/plates/arkenium.json
 388a51dca9547d63c61921397cb0eac41f68806a data/aether_ii/tags/items/plates/gravitite.json
 dc76002bbf3fed2fede1a66c265d7053b478b240 data/aether_ii/tags/items/rods/skyroot.json
@@ -32,7 +36,11 @@ f3fabcca9d36c6a86d4627a0c314482ce0fc4952 data/minecraft/tags/items/stairs.json
 220cb43fca5767fe3d04a7d01c9a1cf30c725296 data/minecraft/tags/items/stone_buttons.json
 3f5cfa6741f23affbb3c4ae4ad530b2c90878bbe data/minecraft/tags/items/walls.json
 5d3e7cc95e15b524d10caae12416861056412e53 data/minecraft/tags/items/wooden_buttons.json
+67fc3d5b8a0890d5fe3b2e86f83a9e17ec806e7b data/minecraft/tags/items/wooden_doors.json
 78ed277ff645a9d01385e71d111abe5236aeecd1 data/minecraft/tags/items/wooden_fences.json
 aa0590601c43ae254bba7e082694592a0c959547 data/minecraft/tags/items/wooden_pressure_plates.json
 08eca1b22cebb6aa61b58b2ee386bde80c921141 data/minecraft/tags/items/wooden_slabs.json
 f3fabcca9d36c6a86d4627a0c314482ce0fc4952 data/minecraft/tags/items/wooden_stairs.json
+a40c696038b411d5dae9120fc7f28c3dee9af25f data/minecraft/tags/items/wooden_trapdoors.json
+4f224652e7119beff58f41d0c947c23ad109fbdc data/minecraft/tags/items/wool.json
+9e74cd0e328bda52886011dcd37ce964651164a2 data/minecraft/tags/items/wool_carpets.json

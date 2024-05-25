@@ -1,10 +1,12 @@
 package com.aetherteam.aetherii.data.providers;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.nitrogen.data.providers.NitrogenBlockStateProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.LadderBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
@@ -72,6 +74,37 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
 
     public void logDifferentTop(RotatedPillarBlock block, RotatedPillarBlock baseBlock) {
         this.axisBlock(block, this.texture(this.name(block), "natural/"), this.extend(this.texture(this.name(baseBlock), "natural/"), "_top"));
+    }
+
+    public void carpet(Block block, Block baseBlock, String location) {
+        simpleBlock(block, models().singleTexture(name(block), mcLoc("block/carpet"), "wool", texture(location + name(baseBlock))));
+    }
+
+    public void skyrootCraftingTable(Block block, Block baseBlock, String location) {
+        ResourceLocation baseTexture = new ResourceLocation(AetherII.MODID, "block/" + location + this.name(baseBlock));
+        ModelFile workbench = this.models().cube(this.name(block),
+                        baseTexture,
+                        this.extend(this.texture(this.name(block), "utility/"), "_top"),
+                        this.extend(this.texture(this.name(block), "utility/"), "_front"),
+                        this.extend(this.texture(this.name(block), "utility/"), "_side"),
+                        this.extend(this.texture(this.name(block), "utility/"), "_front"),
+                        this.extend(this.texture(this.name(block), "utility/"), "_side"))
+                .texture("particle", this.extend(this.texture(this.name(block), "utility/"), "_front"));
+        this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(workbench));
+    }
+
+    public void skyrootLadder(LadderBlock block) {
+        ResourceLocation location = this.texture(this.name(block), "construction/");
+        ModelFile ladder = models().withExistingParent(this.name(block), this.mcLoc("block/block")).renderType(new ResourceLocation("cutout")).ao(false)
+                .texture("particle", location).texture("texture", location)
+                .element().from(0.0F, 0.0F, 15.2F).to(16.0F, 16.0F, 15.2F).shade(false)
+                .face(Direction.NORTH).uvs(0.0F, 0.0F, 16.0F, 16.0F).texture("#texture").end()
+                .face(Direction.SOUTH).uvs(16.0F, 0.0F, 0.0F, 16.0F).texture("#texture").end()
+                .end();
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
+            Direction direction = state.getValue(LadderBlock.FACING);
+            return ConfiguredModel.builder().modelFile(ladder).rotationY((int) (direction.toYRot() + 180) % 360).build();
+        }, LadderBlock.WATERLOGGED);
     }
 
 //    public void grass(Block block, Block dirtBlock) {

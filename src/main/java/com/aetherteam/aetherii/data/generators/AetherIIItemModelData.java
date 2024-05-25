@@ -61,6 +61,12 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.ARKENIUM_PLATE.get(), "materials/");
         this.item(AetherIIItems.RAW_GRAVITITE.get(), "materials/");
         this.item(AetherIIItems.GRAVITITE_PLATE.get(), "materials/");
+        this.item(AetherIIItems.GOLDEN_AMBER.get(), "materials/");
+        this.item(AetherIIItems.TAEGORE_HIDE.get(), "materials/");
+        this.item(AetherIIItems.BURRUKAI_PELT.get(), "materials/");
+        this.item(AetherIIItems.AECHOR_PETAL.get(), "materials/");
+
+        this.portalItem(AetherIIItems.AETHER_PORTAL_FRAME.get(), "miscellaneous/");
 
         this.itemBlock(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
         this.itemBlock(AetherIIBlocks.AETHER_DIRT.get());
@@ -92,12 +98,13 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.GREATBOA_LEAVES.get());
         this.itemBlock(AetherIIBlocks.AMBEROOT_LEAVES.get());
         this.itemBlock(AetherIIBlocks.SKYROOT_PLANKS.get());
-        this.itemFence(AetherIIBlocks.SKYROOT_FENCE.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), "construction/");
-        this.itemBlock(AetherIIBlocks.SKYROOT_FENCE_GATE.get());
-        this.itemButton(AetherIIBlocks.SKYROOT_BUTTON.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), "construction/");
-        this.itemBlock(AetherIIBlocks.SKYROOT_PRESSURE_PLATE.get());
         this.itemBlock(AetherIIBlocks.SKYROOT_STAIRS.get());
         this.itemBlock(AetherIIBlocks.SKYROOT_SLAB.get());
+        this.itemFence(AetherIIBlocks.SKYROOT_FENCE.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), "construction/");
+        this.itemBlock(AetherIIBlocks.SKYROOT_FENCE_GATE.get());
+        this.itemBlock(AetherIIBlocks.SKYROOT_TRAPDOOR.get(), "_bottom");
+        this.itemButton(AetherIIBlocks.SKYROOT_BUTTON.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), "construction/");
+        this.itemBlock(AetherIIBlocks.SKYROOT_PRESSURE_PLATE.get());
         this.itemBlock(AetherIIBlocks.GREATROOT_PLANKS.get());
         this.itemFence(AetherIIBlocks.GREATROOT_FENCE.get(), AetherIIBlocks.GREATROOT_PLANKS.get(), "construction/");
         this.itemBlock(AetherIIBlocks.GREATROOT_FENCE_GATE.get());
@@ -126,5 +133,11 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.HOLYSTONE_BRICK_SLAB.get());
         this.itemBlock(AetherIIBlocks.QUICKSOIL_GLASS.get());
         this.pane(AetherIIBlocks.QUICKSOIL_GLASS_PANE.get(), AetherIIBlocks.QUICKSOIL_GLASS.get(), "construction/");
+        this.itemBlock(AetherIIBlocks.CLOUDWOOL.get());
+        this.itemBlock(AetherIIBlocks.CLOUDWOOL_CARPET.get());
+        this.item(AetherIIBlocks.SKYROOT_DOOR.get().asItem(), "miscellaneous/");
+        this.itemBlockFlat(AetherIIBlocks.AMBROSIUM_TORCH.get(), "utility/");
+        this.itemBlock(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get());
+        this.itemBlockFlat(AetherIIBlocks.SKYROOT_LADDER.get(), "construction/");
     }
 }

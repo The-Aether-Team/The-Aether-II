@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "aether_ii:block/skyroot_ladder",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "aether_ii:block/skyroot_ladder"
+    },
+    "facing=south": {
+      "model": "aether_ii:block/skyroot_ladder",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "aether_ii:block/skyroot_ladder",
+      "y": 270
+    }
+  }
+}

@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -21,6 +22,18 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
     @SuppressWarnings("unchecked")
     @Override
     public void addTags(HolderLookup.Provider provider) {
+        this.tag(AetherIITags.Blocks.AETHER_PORTAL_BLOCKS).add(
+                Blocks.QUARTZ_BLOCK,
+                Blocks.SMOOTH_QUARTZ,
+                Blocks.QUARTZ_BRICKS,
+                Blocks.QUARTZ_PILLAR,
+                Blocks.CHISELED_QUARTZ_BLOCK);
+        this.tag(AetherIITags.Blocks.AETHER_PORTAL_BLACKLIST);
+        this.tag(AetherIITags.Blocks.AETHER_DIRT).add(
+                AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
+                AetherIIBlocks.AETHER_DIRT.get());
+        this.tag(AetherIITags.Blocks.AERCLOUDS).add(
+                AetherIIBlocks.COLD_AERCLOUD.get());
         this.tag(AetherIITags.Blocks.SKYROOT_LOGS).add(
                 AetherIIBlocks.SKYROOT_LOG.get(),
                 AetherIIBlocks.SKYROOT_WOOD.get());
@@ -87,6 +100,19 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.HOLYSTONE_WALL.get(),
                 AetherIIBlocks.MOSSY_HOLYSTONE_WALL.get(),
                 AetherIIBlocks.HOLYSTONE_BRICK_WALL.get());
+        this.tag(BlockTags.WOODEN_DOORS).add(
+                AetherIIBlocks.SKYROOT_DOOR.get());
+        this.tag(BlockTags.WOODEN_TRAPDOORS).add(
+                AetherIIBlocks.SKYROOT_TRAPDOOR.get());
+        this.tag(BlockTags.WOOL).add(
+                AetherIIBlocks.CLOUDWOOL.get()
+        );
+        this.tag(BlockTags.WOOL_CARPETS).add(
+                AetherIIBlocks.CLOUDWOOL_CARPET.get()
+        );
+        this.tag(BlockTags.CLIMBABLE).add(
+                AetherIIBlocks.SKYROOT_LADDER.get()
+        );
 
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
                 AetherIIBlocks.HOLYSTONE.get(),
@@ -134,7 +160,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.WISPROOT_BUTTON.get(),
                 AetherIIBlocks.WISPROOT_PRESSURE_PLATE.get(),
                 AetherIIBlocks.WISPROOT_STAIRS.get(),
-                AetherIIBlocks.WISPROOT_SLAB.get()
+                AetherIIBlocks.WISPROOT_SLAB.get(),
+                AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
