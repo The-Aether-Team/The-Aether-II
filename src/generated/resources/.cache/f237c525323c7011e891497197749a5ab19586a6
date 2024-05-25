@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-25T20:18:17.103203	Block States: aether_ii
+// 1.20.4	2024-05-25T21:45:51.3688134	Block States: aether_ii
 09820e9981cbdbe29cb2563890673c61c5abe056 assets/aether_ii/blockstates/aether_dirt.json
 1fde2b528656645600affed9516f2d975e76bd60 assets/aether_ii/blockstates/aether_portal.json
 b5f21b065a5c8b88fdd19fe5dd78877e58ecd43a assets/aether_ii/blockstates/amberoot_leaves.json
@@ -56,7 +56,7 @@ c57b3730d4ea51d1799463c6ca5b75228649cd38 assets/aether_ii/blockstates/skyroot_pl
 59d64cdae5e63448152c9723e4e629acf9c1cbd7 assets/aether_ii/blockstates/skyroot_pressure_plate.json
 53bfca59d3e1976552403c131db939ed6bf8b6c1 assets/aether_ii/blockstates/skyroot_slab.json
 42cbdeaf903e6474fc3ee427103113bb77083326 assets/aether_ii/blockstates/skyroot_stairs.json
-dd5bf15f9248748c6bea3923864e154d09a71b27 assets/aether_ii/blockstates/skyroot_trapdoor.json
+fcfdfc8b82ba4479590699790b96f588eb280bfd assets/aether_ii/blockstates/skyroot_trapdoor.json
 bdbb7422a0337b39889fd37bfc5a8a7d97759cf3 assets/aether_ii/blockstates/skyroot_wood.json
 26efaf9d262610d697b28030aec27b8e4854385b assets/aether_ii/blockstates/undershale.json
 ad7911fb814fb770a73de43206d050a95537305c assets/aether_ii/blockstates/wisproot_button.json
@@ -180,9 +180,9 @@ d00cb670957d01d8469374eed41b84c3ac666031 assets/aether_ii/models/block/skyroot_s
 2135b21c5c13f521f7feb9cc7774039e7bfa7e0f assets/aether_ii/models/block/skyroot_stairs.json
 606f3eb7a323779f5de0854849b5f1eb91142738 assets/aether_ii/models/block/skyroot_stairs_inner.json
 bc38be760fa2cb767577fb073ca28b322afb434a assets/aether_ii/models/block/skyroot_stairs_outer.json
-9ff0cc85ea20be041ad55cf10f0277edd5bb8278 assets/aether_ii/models/block/skyroot_trapdoor_bottom.json
-95a5be0be88462a0a6f3f6baa8620f7bb97a7140 assets/aether_ii/models/block/skyroot_trapdoor_open.json
-99ebcef2ebcbae758d59b8a19b6d954fe4cba14e assets/aether_ii/models/block/skyroot_trapdoor_top.json
+d0b54b40aae4294ff1c1805cb2ee7742d230d268 assets/aether_ii/models/block/skyroot_trapdoor_bottom.json
+8fa94750a3d8863a0306c43058152441b1341600 assets/aether_ii/models/block/skyroot_trapdoor_open.json
+912a646aa4ae6cd994a512a96bf6166c8148ca01 assets/aether_ii/models/block/skyroot_trapdoor_top.json
 1d35c09feeb41c31a103d703c5f61fa96f6416df assets/aether_ii/models/block/skyroot_wood.json
 118f17c61a5fc56f94c515c4a4a5ce0fc1bb1511 assets/aether_ii/models/block/skyroot_wood_horizontal.json
 9cfa86a4eda88f84b2e623e6e18535007a3c7edc assets/aether_ii/models/block/undershale.json
