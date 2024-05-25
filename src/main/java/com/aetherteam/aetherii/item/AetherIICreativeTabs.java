@@ -28,6 +28,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.SKYROOT_SLAB.get());
                 output.accept(AetherIIBlocks.SKYROOT_FENCE.get());
                 output.accept(AetherIIBlocks.SKYROOT_FENCE_GATE.get());
+                output.accept(AetherIIBlocks.SKYROOT_DOOR.get());
+                output.accept(AetherIIBlocks.SKYROOT_TRAPDOOR.get());
                 output.accept(AetherIIBlocks.SKYROOT_PRESSURE_PLATE.get());
                 output.accept(AetherIIBlocks.SKYROOT_BUTTON.get());
                 output.accept(AetherIIBlocks.GREATROOT_LOG.get());

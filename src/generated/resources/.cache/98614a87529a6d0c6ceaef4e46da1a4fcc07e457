@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-25T10:48:45.1451814	Item Models: aether_ii
+// 1.20.4	2024-05-25T11:45:08.8054881	Item Models: aether_ii
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
 b485bb7a980decbc46719aeaac129689fa3f6a19 assets/aether_ii/models/item/aether_grass_block.json
 183e501764258654cc51853d14080c0c90ad97bb assets/aether_ii/models/item/amberoot_leaves.json
@@ -71,6 +71,7 @@ d634fe0d27710caaafbf9d63c2877d6a38c3cc71 assets/aether_ii/models/item/skypine_le
 fcb760fba7e49a163740ac955449c06321ea704c assets/aether_ii/models/item/skyroot_axe.json
 ace2d20b02282d17c842521066a6f9d530ab5fdf assets/aether_ii/models/item/skyroot_button.json
 571aa86a075a6ace9b2a63613bc96a33ddc766e3 assets/aether_ii/models/item/skyroot_crafting_table.json
+4edb2f72fb18a63b18318ad1652f49e3f67ba7a2 assets/aether_ii/models/item/skyroot_door.json
 089a8912e8d6f868b478fcf3cd36e2c44fec02a5 assets/aether_ii/models/item/skyroot_fence.json
 69015fbae2fe7192aa6e951a64b19f27dbf4c4db assets/aether_ii/models/item/skyroot_fence_gate.json
 4d4f128127cd67c94ba7badf79388b8ee9677b4b assets/aether_ii/models/item/skyroot_hammer.json
@@ -86,6 +87,7 @@ f055e8b468c9d6c90068e06871dc723d96276eb9 assets/aether_ii/models/item/skyroot_lo
 400d26b47d119a4663cbfa08beffef8199cecada assets/aether_ii/models/item/skyroot_stairs.json
 2cca1f194cbbc8465a4400391cdc3a65c9598dad assets/aether_ii/models/item/skyroot_stick.json
 1db0b14a9f08c7b1c5ca8c71fb0e1b1da96a3fd2 assets/aether_ii/models/item/skyroot_sword.json
+864d20031c24920c72c0f8e8f8298927ea4eae4d assets/aether_ii/models/item/skyroot_trapdoor.json
 0440543351702f8f9e40da54f501c28cb33b5a3a assets/aether_ii/models/item/skyroot_trowel.json
 85f1eae477c0a0f9951306b14b43e1e57222c3ae assets/aether_ii/models/item/skyroot_wood.json
 b54510ea4cf32c696c314fc9005802fdab3c208a assets/aether_ii/models/item/undershale.json

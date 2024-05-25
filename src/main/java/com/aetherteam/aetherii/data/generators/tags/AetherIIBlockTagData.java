@@ -87,6 +87,16 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.HOLYSTONE_WALL.get(),
                 AetherIIBlocks.MOSSY_HOLYSTONE_WALL.get(),
                 AetherIIBlocks.HOLYSTONE_BRICK_WALL.get());
+        this.tag(BlockTags.WOODEN_DOORS).add(
+                AetherIIBlocks.SKYROOT_DOOR.get());
+        this.tag(BlockTags.WOODEN_TRAPDOORS).add(
+                AetherIIBlocks.SKYROOT_TRAPDOOR.get());
+        this.tag(BlockTags.WOOL).add(
+                AetherIIBlocks.CLOUDWOOL.get()
+        );
+        this.tag(BlockTags.WOOL_CARPETS).add(
+                AetherIIBlocks.CLOUDWOOL_CARPET.get()
+        );
 
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
                 AetherIIBlocks.HOLYSTONE.get(),
@@ -171,13 +181,5 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SKYROOT_FENCE.get(),
                 AetherIIBlocks.GREATROOT_FENCE.get(),
                 AetherIIBlocks.WISPROOT_FENCE.get());
-
-        // Vanilla
-        this.tag(BlockTags.WOOL).add(
-                AetherIIBlocks.CLOUDWOOL.get()
-        );
-        this.tag(BlockTags.WOOL_CARPETS).add(
-                AetherIIBlocks.CLOUDWOOL_CARPET.get()
-        );
     }
 }

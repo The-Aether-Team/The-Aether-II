@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-25T10:59:59.6981277	Recipes
+// 1.20.4	2024-05-25T11:45:08.8034886	Recipes
 f7b735c6b3410f9576695e3b8a487bd5aa6e9328 data/aether_ii/advancements/recipes/building_blocks/amberoot_wood.json
 f609a4ab9e9360b73d9580e51fb0a02fe076c8ab data/aether_ii/advancements/recipes/building_blocks/greatroot_planks.json
 8d9bf65504a8a2313004ef0527d22bb7e7e455e4 data/aether_ii/advancements/recipes/building_blocks/greatroot_slab.json
@@ -64,8 +64,10 @@ b6c37e1cd7b457d2d31f950704779a98d6fca037 data/aether_ii/advancements/recipes/red
 f9c68a2c930a50b32aa1d7660a552d47cc2bf27c data/aether_ii/advancements/recipes/redstone/holystone_button.json
 07526c46455dfcb3d8a779795d03bef7cf575b5f data/aether_ii/advancements/recipes/redstone/holystone_pressure_plate.json
 975db79cc66002a85be1765e0c3a405476e8e5b9 data/aether_ii/advancements/recipes/redstone/skyroot_button.json
+982c8cab91e0153fdf00d8b435b5426003570c86 data/aether_ii/advancements/recipes/redstone/skyroot_door.json
 0899407407e5503594f7360a7f377cb8175ab2fb data/aether_ii/advancements/recipes/redstone/skyroot_fence_gate.json
 94b560c1110315437dd349b8df467a26d10690b2 data/aether_ii/advancements/recipes/redstone/skyroot_pressure_plate.json
+5d0e285f9af6268d42a8452bbb14bbf91cffcbe7 data/aether_ii/advancements/recipes/redstone/skyroot_trapdoor.json
 62b793f72bf1e79d17362d600f0385b168463010 data/aether_ii/advancements/recipes/redstone/wisproot_button.json
 fd6d030443de0b43588ec2c53fc86e6e672db96f data/aether_ii/advancements/recipes/redstone/wisproot_fence_gate.json
 ddfa892760b4884b7972bda91437ea549d93f6f9 data/aether_ii/advancements/recipes/redstone/wisproot_pressure_plate.json
@@ -147,6 +149,7 @@ d2b11e9910ed35f89ac97e53f6b63833e386d5db data/aether_ii/recipes/quicksoil_glass_
 86518b237f3e48c30f89b1a121038a37391885fb data/aether_ii/recipes/skyroot_axe.json
 f9fca8603d4cbe975aa31d0be48ce46e708e16ba data/aether_ii/recipes/skyroot_button.json
 473e0739a493edc0dd3489b7b4ae6ea94fbf9de9 data/aether_ii/recipes/skyroot_crafting_table.json
+854d5c4ad30a86b5310b160263a1c4290b320b3e data/aether_ii/recipes/skyroot_door.json
 2ff97d40995f2a09bcbcc72f2e7af5484ed9024d data/aether_ii/recipes/skyroot_fence.json
 5fb9b82ebc8e8c21ee26123386f5aaac395a6ce6 data/aether_ii/recipes/skyroot_fence_gate.json
 030752764217b27cb8fdcbd8ca3731deb43a045d data/aether_ii/recipes/skyroot_hammer.json
@@ -160,6 +163,7 @@ d986f02cfa57ae9505fd42fa49c29f026f08a552 data/aether_ii/recipes/skyroot_spear.js
 b66ade9ae16fb885cd074271e49460597080fad6 data/aether_ii/recipes/skyroot_stairs.json
 ccc5326a4e9b196adeee2b900a29997e2681f178 data/aether_ii/recipes/skyroot_stick.json
 d3cf6d5fb41d489e9c0ff6ceac8e8f8cbc4d49b8 data/aether_ii/recipes/skyroot_sword.json
+987c43326fa82339883eb00f2f9922076a8a4298 data/aether_ii/recipes/skyroot_trapdoor.json
 8d7b118abc10d79ddcd038ef939bad4b38a0f0fb data/aether_ii/recipes/skyroot_trowel.json
 91e09148c43a1ba451b7910b641f59417ca4f5a0 data/aether_ii/recipes/skyroot_wood.json
 7f71e150df409530443649539f8973a32027ea55 data/aether_ii/recipes/wisproot_button.json

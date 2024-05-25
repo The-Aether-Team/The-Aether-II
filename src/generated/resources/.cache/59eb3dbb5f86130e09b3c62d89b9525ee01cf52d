@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-25T10:48:45.1391791	Loot Tables
+// 1.20.4	2024-05-25T11:45:08.7994861	Loot Tables
 b3ac0f837a89ef6292323e16712ccb72b957e765 data/aether_ii/loot_tables/blocks/aether_dirt.json
 2a86a9bdc0455369b0dffc142c983d9cc2431881 data/aether_ii/loot_tables/blocks/aether_grass_block.json
 cd78acddc96546721e8ddea1858c70e70430d9d6 data/aether_ii/loot_tables/blocks/amberoot_leaves.json
@@ -44,6 +44,7 @@ e824efdf0b729b58caac1af199ac08087f452b94 data/aether_ii/loot_tables/blocks/skybi
 7f0d63dd932336f59c8efb352a086f272250d2b1 data/aether_ii/loot_tables/blocks/skyplane_leaves.json
 46837ef42f03f8e95d0ca7eb4f2f4b9c72feca06 data/aether_ii/loot_tables/blocks/skyroot_button.json
 c9eaa62b067fbc58568fbcb40835a7c349caeda3 data/aether_ii/loot_tables/blocks/skyroot_crafting_table.json
+c8adf16f87d69cc43d71780b417e115e5a586522 data/aether_ii/loot_tables/blocks/skyroot_door.json
 774d0227b4a4fb4de6cbb6f6aaf1882a61a2c56b data/aether_ii/loot_tables/blocks/skyroot_fence.json
 2fd7ded8b3a37635ff4d446f65710a21e7ce721b data/aether_ii/loot_tables/blocks/skyroot_fence_gate.json
 59aed1a243c03f57146f5e9b32b35f0f173d4eb9 data/aether_ii/loot_tables/blocks/skyroot_ladder.json
@@ -53,6 +54,7 @@ f1509b7b632c3aa6be1d48b87fb077612daf3252 data/aether_ii/loot_tables/blocks/skyro
 cf7fdf2ce6f83de8ce62aa99786ff892f9a18b31 data/aether_ii/loot_tables/blocks/skyroot_pressure_plate.json
 a63cc17b75d1542712f8283ba82a2ee68bde948f data/aether_ii/loot_tables/blocks/skyroot_slab.json
 91e5d00a325e2712187733d2d9720c5e16b3fc74 data/aether_ii/loot_tables/blocks/skyroot_stairs.json
+c3b2c642906cb7cf018e74ecc453aa2a8431e26d data/aether_ii/loot_tables/blocks/skyroot_trapdoor.json
 e3b0acc3ce29dcaf1878ee301a7fed5c2ec19f4f data/aether_ii/loot_tables/blocks/skyroot_wood.json
 affaaaa736e64e95322f25d01dc9885fbb07a51c data/aether_ii/loot_tables/blocks/undershale.json
 a11e4688069c4964af1bb72cea64a3dc5b020b7c data/aether_ii/loot_tables/blocks/wisproot_button.json

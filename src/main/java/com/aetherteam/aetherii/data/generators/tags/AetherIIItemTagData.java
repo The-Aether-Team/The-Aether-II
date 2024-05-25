@@ -3,12 +3,10 @@ package com.aetherteam.aetherii.data.generators.tags;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.item.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
@@ -103,6 +101,16 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.HOLYSTONE_WALL.asItem(),
                 AetherIIBlocks.MOSSY_HOLYSTONE_WALL.asItem(),
                 AetherIIBlocks.HOLYSTONE_BRICK_WALL.asItem());
+        this.tag(ItemTags.WOODEN_DOORS).add(
+                AetherIIBlocks.SKYROOT_DOOR.get().asItem());
+        this.tag(ItemTags.WOODEN_TRAPDOORS).add(
+                AetherIIBlocks.SKYROOT_TRAPDOOR.get().asItem());
+        this.tag(ItemTags.WOOL).add(
+                AetherIIBlocks.CLOUDWOOL.get().asItem()
+        );
+        this.tag(ItemTags.WOOL_CARPETS).add(
+                AetherIIBlocks.CLOUDWOOL_CARPET.get().asItem()
+        );
 
         this.tag(ItemTags.AXES).add(
                 AetherIIItems.SKYROOT_AXE.get(),
@@ -146,13 +154,5 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.SKYROOT_FENCE.asItem(),
                 AetherIIBlocks.GREATROOT_FENCE.asItem(),
                 AetherIIBlocks.WISPROOT_FENCE.asItem());
-
-        // Vanilla
-        this.tag(ItemTags.WOOL).add(
-                AetherIIBlocks.CLOUDWOOL.get().asItem()
-        );
-        this.tag(ItemTags.WOOL_CARPETS).add(
-                AetherIIBlocks.CLOUDWOOL_CARPET.get().asItem()
-        );
     }
 }

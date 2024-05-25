@@ -49,43 +49,45 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.AMBEROOT_LEAVES, "Amberoot Leaves");
 
         this.addBlock(AetherIIBlocks.SKYROOT_PLANKS, "Skyroot Planks");
-        this.addBlock(AetherIIBlocks.SKYROOT_FENCE, "Skyroot Fence");
-        this.addBlock(AetherIIBlocks.SKYROOT_FENCE_GATE, "Skyroot Fence Gate");
-        this.addBlock(AetherIIBlocks.SKYROOT_BUTTON, "Skyroot Button");
-        this.addBlock(AetherIIBlocks.SKYROOT_PRESSURE_PLATE, "Skyroot Pressure Plate");
         this.addBlock(AetherIIBlocks.SKYROOT_STAIRS, "Skyroot Stairs");
         this.addBlock(AetherIIBlocks.SKYROOT_SLAB, "Skyroot Slab");
+        this.addBlock(AetherIIBlocks.SKYROOT_FENCE, "Skyroot Fence");
+        this.addBlock(AetherIIBlocks.SKYROOT_FENCE_GATE, "Skyroot Fence Gate");
+        this.addBlock(AetherIIBlocks.SKYROOT_DOOR, "Skyroot Door");
+        this.addBlock(AetherIIBlocks.SKYROOT_TRAPDOOR, "Skyroot Trapdoor");
+        this.addBlock(AetherIIBlocks.SKYROOT_BUTTON, "Skyroot Button");
+        this.addBlock(AetherIIBlocks.SKYROOT_PRESSURE_PLATE, "Skyroot Pressure Plate");
 
         this.addBlock(AetherIIBlocks.GREATROOT_PLANKS, "Greatroot Planks");
+        this.addBlock(AetherIIBlocks.GREATROOT_STAIRS, "Greatroot Stairs");
+        this.addBlock(AetherIIBlocks.GREATROOT_SLAB, "Greatroot Slab");
         this.addBlock(AetherIIBlocks.GREATROOT_FENCE, "Greatroot Fence");
         this.addBlock(AetherIIBlocks.GREATROOT_FENCE_GATE, "Greatroot Fence Gate");
         this.addBlock(AetherIIBlocks.GREATROOT_BUTTON, "Greatroot Button");
         this.addBlock(AetherIIBlocks.GREATROOT_PRESSURE_PLATE, "Greatroot Pressure Plate");
-        this.addBlock(AetherIIBlocks.GREATROOT_STAIRS, "Greatroot Stairs");
-        this.addBlock(AetherIIBlocks.GREATROOT_SLAB, "Greatroot Slab");
 
         this.addBlock(AetherIIBlocks.WISPROOT_PLANKS, "Wisproot Planks");
+        this.addBlock(AetherIIBlocks.WISPROOT_STAIRS, "Wisproot Stairs");
+        this.addBlock(AetherIIBlocks.WISPROOT_SLAB, "Wisproot Slab");
         this.addBlock(AetherIIBlocks.WISPROOT_FENCE, "Wisproot Fence");
         this.addBlock(AetherIIBlocks.WISPROOT_FENCE_GATE, "Wisproot Fence Gate");
         this.addBlock(AetherIIBlocks.WISPROOT_BUTTON, "Wisproot Button");
         this.addBlock(AetherIIBlocks.WISPROOT_PRESSURE_PLATE, "Wisproot Pressure Plate");
-        this.addBlock(AetherIIBlocks.WISPROOT_STAIRS, "Wisproot Stairs");
-        this.addBlock(AetherIIBlocks.WISPROOT_SLAB, "Wisproot Slab");
 
         this.addBlock(AetherIIBlocks.HOLYSTONE_BUTTON, "Holystone Button");
-        this.addBlock(AetherIIBlocks.HOLYSTONE_PRESSURE_PLATE, "Holystone Pressure Plate");
-        this.addBlock(AetherIIBlocks.HOLYSTONE_WALL, "Holystone Wall");
         this.addBlock(AetherIIBlocks.HOLYSTONE_STAIRS, "Holystone Stairs");
         this.addBlock(AetherIIBlocks.HOLYSTONE_SLAB, "Holystone Slab");
+        this.addBlock(AetherIIBlocks.HOLYSTONE_WALL, "Holystone Wall");
+        this.addBlock(AetherIIBlocks.HOLYSTONE_PRESSURE_PLATE, "Holystone Pressure Plate");
 
-        this.addBlock(AetherIIBlocks.MOSSY_HOLYSTONE_WALL, "Mossy Holystone Wall");
         this.addBlock(AetherIIBlocks.MOSSY_HOLYSTONE_STAIRS, "Mossy Holystone Stairs");
         this.addBlock(AetherIIBlocks.MOSSY_HOLYSTONE_SLAB, "Mossy Holystone Slab");
+        this.addBlock(AetherIIBlocks.MOSSY_HOLYSTONE_WALL, "Mossy Holystone Wall");
 
         this.addBlock(AetherIIBlocks.HOLYSTONE_BRICKS, "Holystone Bricks");
-        this.addBlock(AetherIIBlocks.HOLYSTONE_BRICK_WALL, "Holystone Brick Wall");
         this.addBlock(AetherIIBlocks.HOLYSTONE_BRICK_STAIRS, "Holystone Brick Stairs");
         this.addBlock(AetherIIBlocks.HOLYSTONE_BRICK_SLAB, "Holystone Brick Slab");
+        this.addBlock(AetherIIBlocks.HOLYSTONE_BRICK_WALL, "Holystone Brick Wall");
 
         this.addBlock(AetherIIBlocks.QUICKSOIL_GLASS, "Quicksoil Glass");
         this.addBlock(AetherIIBlocks.QUICKSOIL_GLASS_PANE, "Quicksoil Glass Pane");
