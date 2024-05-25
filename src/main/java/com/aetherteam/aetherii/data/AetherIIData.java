@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.data;
 
 import com.aetherteam.aetherii.data.generators.*;
+import com.aetherteam.aetherii.data.generators.tags.AetherIIBiomeTagData;
 import com.aetherteam.aetherii.data.generators.tags.AetherIIBlockTagData;
 import com.aetherteam.aetherii.data.generators.tags.AetherIIEntityTagData;
 import com.aetherteam.aetherii.data.generators.tags.AetherIIItemTagData;
@@ -20,7 +21,7 @@ import net.neoforged.neoforge.data.event.GatherDataEvent;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
-public class AetherData {
+public class AetherIIData {
     public static void dataSetup(GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();
         ExistingFileHelper fileHelper = event.getExistingFileHelper();
@@ -46,7 +47,7 @@ public class AetherData {
         generator.addProvider(event.includeServer(), new AetherIIItemTagData(packOutput, lookupProvider, blockTags.contentsGetter(), fileHelper));
         generator.addProvider(event.includeServer(), new AetherIIEntityTagData(packOutput, lookupProvider, fileHelper));
 //        generator.addProvider(event.includeServer(), new AetherIIFluidTagData(packOutput, lookupProvider, fileHelper));
-//        generator.addProvider(event.includeServer(), new AetherIIBiomeTagData(packOutput, lookupProvider, fileHelper));
+        generator.addProvider(event.includeServer(), new AetherIIBiomeTagData(packOutput, lookupProvider, fileHelper));
 //        generator.addProvider(event.includeServer(), new AetherIIStructureTagData(packOutput, registryProvider, fileHelper));
 //        generator.addProvider(event.includeServer(), new AetherIIDamageTypeTagData(packOutput, registryProvider, fileHelper));
 

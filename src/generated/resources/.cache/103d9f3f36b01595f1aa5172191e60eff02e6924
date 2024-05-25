@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-25T00:33:00.2596377	Registries
+// 1.20.4	2024-05-25T09:33:28.702856	Registries
 f9dbdadd419a0cff7041a86d9432bf706ba56152 data/aether_ii/dimension/aether_highlands.json
 ae01d467453be6d401ce68c8ccc006362b5a29b7 data/aether_ii/dimension_type/aether_highlands.json
 6e9456cec6d2d735957b4e5ca2c4ea89a94a9bdd data/aether_ii/worldgen/biome/battleground_wastes.json
@@ -27,4 +27,5 @@ e9951c1e43a8e47e424565851e1786e9dbe41a7a data/aether_ii/worldgen/noise/temperatu
 933f10655e7082e60a3184bc695d2d2fdac4bfb7 data/aether_ii/worldgen/noise_settings/highlands.json
 c8dc8eca78763d816cf2c63341a900487290d867 data/aether_ii/worldgen/placed_feature/coast_quicksoil.json
 f5a577545d5b4fb10555f6b99a9de528c90ced31 data/aether_ii/worldgen/placed_feature/cold_aercloud.json
-02c302d7f3283b25756ad637e2fee38843e2e7c9 data/aether_ii/worldgen/structure/outpost.json
+e469dce3f1d8bbdf4e4325f83c996afdad554aa8 data/aether_ii/worldgen/structure/outpost.json
+5ffe1df0f75e9aca71536724e82c077c3395fe5b data/aether_ii/worldgen/structure_set/outposts.json

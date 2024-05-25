@@ -3,7 +3,7 @@ package com.aetherteam.aetherii;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.AetherIIClient;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
-import com.aetherteam.aetherii.data.AetherData;
+import com.aetherteam.aetherii.data.AetherIIData;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -25,7 +25,7 @@ public class AetherII {
 
     public AetherII(IEventBus bus, Dist dist) {
         bus.addListener(AetherII::commonSetup);
-        bus.addListener(AetherData::dataSetup);
+        bus.addListener(AetherIIData::dataSetup);
 
         DeferredRegister<?>[] registers = {
                 AetherIIBlocks.BLOCKS,

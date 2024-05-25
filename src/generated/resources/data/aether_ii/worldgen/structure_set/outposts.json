@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 4325806,
+    "separation": 26,
+    "spacing": 38
+  },
+  "structures": [
+    {
+      "structure": "aether_ii:outpost",
+      "weight": 1
+    }
+  ]
+}

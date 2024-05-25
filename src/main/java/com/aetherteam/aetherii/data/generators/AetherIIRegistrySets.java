@@ -25,7 +25,7 @@ public class AetherIIRegistrySets extends DatapackBuiltinEntriesProvider {
             .add(Registries.CONFIGURED_FEATURE, AetherIIFeatureUtils::bootstrap)
             .add(Registries.PLACED_FEATURE, AetherIIPlacementUtils::bootstrap)
             .add(Registries.STRUCTURE, AetherIIStructures::bootstrap)
-//            .add(Registries.STRUCTURE_SET, AetherStructureSets::bootstrap)
+            .add(Registries.STRUCTURE_SET, AetherIIStructureSets::bootstrap)
             .add(Registries.TEMPLATE_POOL, AetherIIPools::bootstrap);
 //            .add(Registries.DAMAGE_TYPE, AetherDamageTypes::bootstrap);
 
