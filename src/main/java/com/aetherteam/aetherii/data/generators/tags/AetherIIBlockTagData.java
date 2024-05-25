@@ -110,6 +110,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(BlockTags.WOOL_CARPETS).add(
                 AetherIIBlocks.CLOUDWOOL_CARPET.get()
         );
+        this.tag(BlockTags.CLIMBABLE).add(
+                AetherIIBlocks.SKYROOT_LADDER.get()
+        );
 
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
                 AetherIIBlocks.HOLYSTONE.get(),
