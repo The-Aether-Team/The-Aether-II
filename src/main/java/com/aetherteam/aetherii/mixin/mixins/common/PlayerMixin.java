@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.Iterator;
 
 @Mixin(Player.class)
-public class PlayerMixin {
+public class PlayerMixin { //todo sounds, particles, and stats
     @ModifyExpressionValue(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;getItemInHand(Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/item/ItemStack;"), method = "attack(Lnet/minecraft/world/entity/Entity;)V")
     private ItemStack getItemInHand(ItemStack original, @Share("canSpearStab") LocalBooleanRef canSpearStab, @Share("canHammerShock") LocalBooleanRef canHammerShock) {
         canSpearStab.set(original.canPerformAction(AetherIIToolActions.SPEAR_STAB));
@@ -60,7 +60,7 @@ public class PlayerMixin {
                             } while(livingentity == player);
                         } while(livingentity == target);
                     } while(player.isAlliedTo(livingentity));
-                } while(livingentity instanceof ArmorStand && ((ArmorStand)livingentity).isMarker());
+                } while(livingentity instanceof ArmorStand && ((ArmorStand) livingentity).isMarker());
 
                 if (player.distanceToSqr(livingentity) < entityReachSq) {
                     livingentity.knockback(0.1, Mth.sin(player.getYRot() * 0.0175F), -Mth.cos(player.getYRot() * 0.0175F));
@@ -93,10 +93,10 @@ public class PlayerMixin {
                             } while(livingentity == player);
                         } while(livingentity == target);
                     } while(player.isAlliedTo(livingentity));
-                } while(livingentity instanceof ArmorStand && ((ArmorStand)livingentity).isMarker());
+                } while(livingentity instanceof ArmorStand && ((ArmorStand) livingentity).isMarker());
 
                 if (player.distanceToSqr(livingentity) < entityReachSq) {
-                    livingentity.knockback(1.2, Mth.sin(player.getYRot() * 0.0175F), -Mth.cos(player.getYRot() * 0.0175F));
+                    livingentity.knockback(1.2, Mth.sin(player.getYRot() * 0.0175F), -Mth.cos(player.getYRot() * 0.0175F)); //todo knockback direction
                     livingentity.hurt(player.damageSources().playerAttack(player), 0.5F);
                 }
             }
