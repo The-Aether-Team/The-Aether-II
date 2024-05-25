@@ -1,4 +1,5 @@
-// 1.20.4	2024-05-25T20:18:17.1117208	Item Models: aether_ii
+// 1.20.4	2024-05-25T21:13:50.2165442	Item Models: aether_ii
+a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
 b485bb7a980decbc46719aeaac129689fa3f6a19 assets/aether_ii/models/item/aether_grass_block.json
 b9bfec314176b17ae9514e75469dbec42e1b345a assets/aether_ii/models/item/aether_portal_frame.json
@@ -17,9 +18,11 @@ b7fda65a71d363a3c17216873453076ccd72ee12 assets/aether_ii/models/item/arkenium_s
 5cdc77ed51a4e270e9d66ab00d1e0e2302609b7e assets/aether_ii/models/item/arkenium_spear.json
 0a49ecb69e9c9148f5f56045b347f368ba647a05 assets/aether_ii/models/item/arkenium_sword.json
 5606c546a7d6835f0c9a25ac6435233d368ca049 assets/aether_ii/models/item/arkenium_trowel.json
+b1968f6ccd069ed92d37c8a240ad316f8c5b50a1 assets/aether_ii/models/item/burrukai_pelt.json
 e4d13f0d25e81411724a9be96ea4882fe50f6e61 assets/aether_ii/models/item/cloudwool.json
 ed67eff7e6d30b7f6be0b507e140405622a49ed9 assets/aether_ii/models/item/cloudwool_carpet.json
 c313c38e5ff5ca6e3111c583c259bd093cb84542 assets/aether_ii/models/item/cold_aercloud.json
+39571cd6ffeb63576ad03d66e639d854f7ace919 assets/aether_ii/models/item/golden_amber.json
 f8aaafa2ddf04f53ef8bf4a76ce59b7584cd6d92 assets/aether_ii/models/item/gravitite_axe.json
 ddd60151b3f9dcc03a0addc6523064eb38234a94 assets/aether_ii/models/item/gravitite_hammer.json
 04fa6eb965ac5239cd7bbe301852db13db9e47fe assets/aether_ii/models/item/gravitite_ore.json
@@ -92,6 +95,7 @@ f055e8b468c9d6c90068e06871dc723d96276eb9 assets/aether_ii/models/item/skyroot_lo
 864d20031c24920c72c0f8e8f8298927ea4eae4d assets/aether_ii/models/item/skyroot_trapdoor.json
 0440543351702f8f9e40da54f501c28cb33b5a3a assets/aether_ii/models/item/skyroot_trowel.json
 85f1eae477c0a0f9951306b14b43e1e57222c3ae assets/aether_ii/models/item/skyroot_wood.json
+3ec615217a98b5524df0e03a2d4baa5822ba2f3b assets/aether_ii/models/item/taegore_hide.json
 b54510ea4cf32c696c314fc9005802fdab3c208a assets/aether_ii/models/item/undershale.json
 5636fecd5a7c213e61c99598709e9e2dbcf11ac4 assets/aether_ii/models/item/wisproot_button.json
 07e54d9c3f77e3aca8082359e2a5465e0319405d assets/aether_ii/models/item/wisproot_fence.json

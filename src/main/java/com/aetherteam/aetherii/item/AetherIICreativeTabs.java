@@ -202,6 +202,10 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.ARKENIUM_PLATE.get());
                 output.accept(AetherIIItems.RAW_GRAVITITE.get());
                 output.accept(AetherIIItems.GRAVITITE_PLATE.get());
+                output.accept(AetherIIItems.GOLDEN_AMBER.get());
+                output.accept(AetherIIItems.TAEGORE_HIDE.get());
+                output.accept(AetherIIItems.BURRUKAI_PELT.get());
+                output.accept(AetherIIItems.AECHOR_PETAL.get());
             }).build());
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_SPAWN_EGGS = CREATIVE_MODE_TABS.register("spawn_eggs", () -> CreativeModeTab.builder()
             .withTabsBefore(new ResourceLocation(AetherII.MODID, "ingredients"))
