@@ -25,18 +25,10 @@ public class AetherIIRegistrySets extends DatapackBuiltinEntriesProvider {
             .add(Registries.CONFIGURED_FEATURE, AetherIIFeatureUtils::bootstrap)
             .add(Registries.PLACED_FEATURE, AetherIIPlacementUtils::bootstrap)
             .add(Registries.STRUCTURE, AetherIIStructures::bootstrap)
+            .add(Registries.STRUCTURE_SET, AetherIIStructureSets::bootstrap)
             .add(Registries.TEMPLATE_POOL, AetherIIPools::bootstrap)
             .add(AetherIIDamageInflictions.DAMAGE_INFLICTION_REGISTRY_KEY, AetherIIDamageInflictions::bootstrap)
             .add(AetherIIDamageResistances.DAMAGE_RESISTANCE_REGISTRY_KEY, AetherIIDamageResistances::bootstrap);
-//            .add(Registries.BIOME, AetherBiomes::bootstrap)
-//            .add(Registries.DENSITY_FUNCTION, AetherDensityFunctions::bootstrap)
-//            .add(Registries.NOISE, AetherNoises::bootstrap)
-//            .add(Registries.NOISE_SETTINGS, AetherNoiseSettings::bootstrap)
-//            .add(Registries.DIMENSION_TYPE, AetherDimensions::bootstrapDimensionType)
-//            .add(Registries.LEVEL_STEM, AetherDimensions::bootstrapLevelStem)
-//            .add(Registries.STRUCTURE, AetherStructures::bootstrap)
-//            .add(Registries.STRUCTURE_SET, AetherStructureSets::bootstrap)
-//            .add(Registries.DAMAGE_TYPE, AetherDamageTypes::bootstrap);
 
     public AetherIIRegistrySets(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, BUILDER, Collections.singleton(AetherII.MODID));

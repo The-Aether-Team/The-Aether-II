@@ -9,6 +9,10 @@ import net.minecraft.world.level.block.Block;
 
 public class AetherIITags {
     public static class Blocks {
+        public static final TagKey<Block> AETHER_PORTAL_BLOCKS = tag("aether_portal_blocks");
+        public static final TagKey<Block> AETHER_PORTAL_BLACKLIST = tag("aether_portal_blacklist");
+        public static final TagKey<Block> AETHER_DIRT = tag("aether_dirt");
+        public static final TagKey<Block> AERCLOUDS = tag("aerclouds");
         public static final TagKey<Block> SKYROOT_LOGS = tag("skyroot_logs");
         public static final TagKey<Block> GREATROOT_LOGS = tag("greatroot_logs");
         public static final TagKey<Block> WISPROOT_LOGS = tag("wisproot_logs");
@@ -20,6 +24,8 @@ public class AetherIITags {
     }
 
     public static class Items {
+        public static final TagKey<Item> AETHER_DIRT = tag("aether_dirt");
+        public static final TagKey<Item> AERCLOUDS = tag("aerclouds");
         public static final TagKey<Item> SKYROOT_LOGS = tag("skyroot_logs");
         public static final TagKey<Item> GREATROOT_LOGS = tag("greatroot_logs");
         public static final TagKey<Item> WISPROOT_LOGS = tag("wisproot_logs");
@@ -33,6 +39,7 @@ public class AetherIITags {
         public static final TagKey<Item> CRAFTS_SKYROOT_PLANKS = tag("crafts_skyroot_planks");
         public static final TagKey<Item> CRAFTS_GREATROOT_PLANKS = tag("crafts_greatroot_planks");
         public static final TagKey<Item> CRAFTS_WISPROOT_PLANKS = tag("crafts_wisproot_planks");
+        public static final TagKey<Item> PLANKS_CRAFTING = tag("planks_crafting");
         public static final TagKey<Item> CRAFTS_SKYROOT_STICKS = tag("crafts_skyroot_sticks");
         public static final TagKey<Item> CRAFTS_SKYROOT_TOOLS = tag("crafts_skyroot_tools");
         public static final TagKey<Item> CRAFTS_HOLYSTONE_TOOLS = tag("crafts_holystone_tools");
@@ -42,6 +49,8 @@ public class AetherIITags {
         public static final TagKey<Item> ZANITE_REPAIRING = tag("zanite_repairing");
         public static final TagKey<Item> ARKENIUM_REPAIRING = tag("arkenium_repairing");
         public static final TagKey<Item> GRAVITITE_REPAIRING = tag("gravitite_repairing");
+
+        public static final TagKey<Item> AETHER_PORTAL_ACTIVATION_ITEMS = tag("aether_portal_activation_items");
 
         private static TagKey<Item> tag(String name) {
             return TagKey.create(Registries.ITEM, new ResourceLocation(AetherII.MODID, name));

@@ -1,11 +1,14 @@
-// 1.20.4	2024-05-24T06:54:45.6313136	Item Models: aether_ii
+// 1.20.4	2024-05-25T21:13:50.2165442	Item Models: aether_ii
+a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
 b485bb7a980decbc46719aeaac129689fa3f6a19 assets/aether_ii/models/item/aether_grass_block.json
+b9bfec314176b17ae9514e75469dbec42e1b345a assets/aether_ii/models/item/aether_portal_frame.json
 183e501764258654cc51853d14080c0c90ad97bb assets/aether_ii/models/item/amberoot_leaves.json
 7103a735096dfa36af38b7cd4c3e3a2b75d94935 assets/aether_ii/models/item/amberoot_log.json
 3c94afddfaa353216327cd315e5c62eb1b4d00d4 assets/aether_ii/models/item/amberoot_wood.json
 77308024eea02e4ceae6af25c5f9817950c5cb19 assets/aether_ii/models/item/ambrosium_ore.json
 c491603cffa0239e489fddeddf49195bf9eba0dc assets/aether_ii/models/item/ambrosium_shard.json
+e7a649e80296c73474cae1aced097fde5ca5cdee assets/aether_ii/models/item/ambrosium_torch.json
 19aa149f0419e640d12cb92cc1821a9f7a4cafc6 assets/aether_ii/models/item/arkenium_axe.json
 dc70b899ac53f0aa29fccea1bfadb391bfbe5f8b assets/aether_ii/models/item/arkenium_hammer.json
 ea1731a6ef141f6d52a0a97ec20696b5aa53c54e assets/aether_ii/models/item/arkenium_ore.json
@@ -15,7 +18,11 @@ b7fda65a71d363a3c17216873453076ccd72ee12 assets/aether_ii/models/item/arkenium_s
 5cdc77ed51a4e270e9d66ab00d1e0e2302609b7e assets/aether_ii/models/item/arkenium_spear.json
 0a49ecb69e9c9148f5f56045b347f368ba647a05 assets/aether_ii/models/item/arkenium_sword.json
 5606c546a7d6835f0c9a25ac6435233d368ca049 assets/aether_ii/models/item/arkenium_trowel.json
+b1968f6ccd069ed92d37c8a240ad316f8c5b50a1 assets/aether_ii/models/item/burrukai_pelt.json
+e4d13f0d25e81411724a9be96ea4882fe50f6e61 assets/aether_ii/models/item/cloudwool.json
+ed67eff7e6d30b7f6be0b507e140405622a49ed9 assets/aether_ii/models/item/cloudwool_carpet.json
 c313c38e5ff5ca6e3111c583c259bd093cb84542 assets/aether_ii/models/item/cold_aercloud.json
+39571cd6ffeb63576ad03d66e639d854f7ace919 assets/aether_ii/models/item/golden_amber.json
 f8aaafa2ddf04f53ef8bf4a76ce59b7584cd6d92 assets/aether_ii/models/item/gravitite_axe.json
 ddd60151b3f9dcc03a0addc6523064eb38234a94 assets/aether_ii/models/item/gravitite_hammer.json
 04fa6eb965ac5239cd7bbe301852db13db9e47fe assets/aether_ii/models/item/gravitite_ore.json
@@ -68,9 +75,12 @@ d634fe0d27710caaafbf9d63c2877d6a38c3cc71 assets/aether_ii/models/item/skypine_le
 1264f25092e1b8ae0cfed08db5bf04a82a366fe8 assets/aether_ii/models/item/skyplane_leaves.json
 fcb760fba7e49a163740ac955449c06321ea704c assets/aether_ii/models/item/skyroot_axe.json
 ace2d20b02282d17c842521066a6f9d530ab5fdf assets/aether_ii/models/item/skyroot_button.json
+571aa86a075a6ace9b2a63613bc96a33ddc766e3 assets/aether_ii/models/item/skyroot_crafting_table.json
+4edb2f72fb18a63b18318ad1652f49e3f67ba7a2 assets/aether_ii/models/item/skyroot_door.json
 089a8912e8d6f868b478fcf3cd36e2c44fec02a5 assets/aether_ii/models/item/skyroot_fence.json
 69015fbae2fe7192aa6e951a64b19f27dbf4c4db assets/aether_ii/models/item/skyroot_fence_gate.json
 4d4f128127cd67c94ba7badf79388b8ee9677b4b assets/aether_ii/models/item/skyroot_hammer.json
+1b84ff9a905f56fd1d31ff17e2f31aa1de67f27a assets/aether_ii/models/item/skyroot_ladder.json
 c99d5a4bf9d1c534ad0c1fbab6e66885f3c029cd assets/aether_ii/models/item/skyroot_leaves.json
 f055e8b468c9d6c90068e06871dc723d96276eb9 assets/aether_ii/models/item/skyroot_log.json
 34c25d04a74f7210d68f782333e8ba7266d8d4f1 assets/aether_ii/models/item/skyroot_pickaxe.json
@@ -82,8 +92,10 @@ f055e8b468c9d6c90068e06871dc723d96276eb9 assets/aether_ii/models/item/skyroot_lo
 400d26b47d119a4663cbfa08beffef8199cecada assets/aether_ii/models/item/skyroot_stairs.json
 2cca1f194cbbc8465a4400391cdc3a65c9598dad assets/aether_ii/models/item/skyroot_stick.json
 1db0b14a9f08c7b1c5ca8c71fb0e1b1da96a3fd2 assets/aether_ii/models/item/skyroot_sword.json
+864d20031c24920c72c0f8e8f8298927ea4eae4d assets/aether_ii/models/item/skyroot_trapdoor.json
 0440543351702f8f9e40da54f501c28cb33b5a3a assets/aether_ii/models/item/skyroot_trowel.json
 85f1eae477c0a0f9951306b14b43e1e57222c3ae assets/aether_ii/models/item/skyroot_wood.json
+3ec615217a98b5524df0e03a2d4baa5822ba2f3b assets/aether_ii/models/item/taegore_hide.json
 b54510ea4cf32c696c314fc9005802fdab3c208a assets/aether_ii/models/item/undershale.json
 5636fecd5a7c213e61c99598709e9e2dbcf11ac4 assets/aether_ii/models/item/wisproot_button.json
 07e54d9c3f77e3aca8082359e2a5465e0319405d assets/aether_ii/models/item/wisproot_fence.json

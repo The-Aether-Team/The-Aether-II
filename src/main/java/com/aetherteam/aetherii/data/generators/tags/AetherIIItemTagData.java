@@ -3,12 +3,10 @@ package com.aetherteam.aetherii.data.generators.tags;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.item.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
@@ -25,6 +23,8 @@ public class AetherIIItemTagData extends ItemTagsProvider {
     @SuppressWarnings("unchecked")
     @Override
     public void addTags(HolderLookup.Provider provider) {
+        this.copy(AetherIITags.Blocks.AETHER_DIRT, AetherIITags.Items.AETHER_DIRT);
+        this.copy(AetherIITags.Blocks.AERCLOUDS, AetherIITags.Items.AERCLOUDS);
         this.copy(AetherIITags.Blocks.SKYROOT_LOGS, AetherIITags.Items.SKYROOT_LOGS);
         this.copy(AetherIITags.Blocks.WISPROOT_LOGS, AetherIITags.Items.WISPROOT_LOGS);
         this.copy(AetherIITags.Blocks.GREATROOT_LOGS, AetherIITags.Items.GREATROOT_LOGS);
@@ -42,6 +42,10 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIITags.Items.GREATROOT_LOGS);
         this.tag(AetherIITags.Items.CRAFTS_WISPROOT_PLANKS).addTag(
                 AetherIITags.Items.WISPROOT_LOGS);
+        this.tag(AetherIITags.Items.PLANKS_CRAFTING).add(
+                AetherIIBlocks.SKYROOT_PLANKS.asItem(),
+                AetherIIBlocks.GREATROOT_PLANKS.asItem(),
+                AetherIIBlocks.WISPROOT_PLANKS.asItem());
         this.tag(AetherIITags.Items.CRAFTS_SKYROOT_STICKS).add(
                 AetherIIBlocks.SKYROOT_PLANKS.asItem(),
                 AetherIIBlocks.GREATROOT_PLANKS.asItem(),
@@ -59,6 +63,8 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(AetherIITags.Items.ZANITE_REPAIRING).add(AetherIIItems.ZANITE_GEMSTONE.get());
         this.tag(AetherIITags.Items.ARKENIUM_REPAIRING).add(AetherIIItems.ARKENIUM_PLATE.get());
         this.tag(AetherIITags.Items.GRAVITITE_REPAIRING).add(AetherIIItems.GRAVITITE_PLATE.get());
+
+        this.tag(AetherIITags.Items.AETHER_PORTAL_ACTIVATION_ITEMS);
 
         // Vanilla
         this.tag(ItemTags.WOODEN_STAIRS).add(
@@ -99,6 +105,16 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.HOLYSTONE_WALL.asItem(),
                 AetherIIBlocks.MOSSY_HOLYSTONE_WALL.asItem(),
                 AetherIIBlocks.HOLYSTONE_BRICK_WALL.asItem());
+        this.tag(ItemTags.WOODEN_DOORS).add(
+                AetherIIBlocks.SKYROOT_DOOR.get().asItem());
+        this.tag(ItemTags.WOODEN_TRAPDOORS).add(
+                AetherIIBlocks.SKYROOT_TRAPDOOR.get().asItem());
+        this.tag(ItemTags.WOOL).add(
+                AetherIIBlocks.CLOUDWOOL.get().asItem()
+        );
+        this.tag(ItemTags.WOOL_CARPETS).add(
+                AetherIIBlocks.CLOUDWOOL_CARPET.get().asItem()
+        );
 
         this.tag(ItemTags.AXES).add(
                 AetherIIItems.SKYROOT_AXE.get(),

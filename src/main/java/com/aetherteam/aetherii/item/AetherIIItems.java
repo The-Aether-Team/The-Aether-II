@@ -18,11 +18,27 @@ import com.aetherteam.aetherii.item.combat.skyroot.SkyrootSwordItem;
 import com.aetherteam.aetherii.item.combat.zanite.ZaniteHammerItem;
 import com.aetherteam.aetherii.item.combat.zanite.ZaniteSpearItem;
 import com.aetherteam.aetherii.item.combat.zanite.ZaniteSwordItem;
-import com.aetherteam.aetherii.item.tools.skyroot.*;
-import com.aetherteam.aetherii.item.tools.holystone.*;
-import com.aetherteam.aetherii.item.tools.zanite.*;
-import com.aetherteam.aetherii.item.tools.gravitite.*;
-import com.aetherteam.aetherii.item.tools.arkenium.*;
+import com.aetherteam.aetherii.item.miscellaneous.AetherPortalItem;
+import com.aetherteam.aetherii.item.tools.arkenium.ArkeniumAxeItem;
+import com.aetherteam.aetherii.item.tools.arkenium.ArkeniumPickaxeItem;
+import com.aetherteam.aetherii.item.tools.arkenium.ArkeniumShovelItem;
+import com.aetherteam.aetherii.item.tools.arkenium.ArkeniumTrowelItem;
+import com.aetherteam.aetherii.item.tools.gravitite.GravititeAxeItem;
+import com.aetherteam.aetherii.item.tools.gravitite.GravititePickaxeItem;
+import com.aetherteam.aetherii.item.tools.gravitite.GravititeShovelItem;
+import com.aetherteam.aetherii.item.tools.gravitite.GravititeTrowelItem;
+import com.aetherteam.aetherii.item.tools.holystone.HolystoneAxeItem;
+import com.aetherteam.aetherii.item.tools.holystone.HolystonePickaxeItem;
+import com.aetherteam.aetherii.item.tools.holystone.HolystoneShovelItem;
+import com.aetherteam.aetherii.item.tools.holystone.HolystoneTrowelItem;
+import com.aetherteam.aetherii.item.tools.skyroot.SkyrootAxeItem;
+import com.aetherteam.aetherii.item.tools.skyroot.SkyrootPickaxeItem;
+import com.aetherteam.aetherii.item.tools.skyroot.SkyrootShovelItem;
+import com.aetherteam.aetherii.item.tools.skyroot.SkyrootTrowelItem;
+import com.aetherteam.aetherii.item.tools.zanite.ZaniteAxeItem;
+import com.aetherteam.aetherii.item.tools.zanite.ZanitePickaxeItem;
+import com.aetherteam.aetherii.item.tools.zanite.ZaniteShovelItem;
+import com.aetherteam.aetherii.item.tools.zanite.ZaniteTrowelItem;
 import net.minecraft.world.item.*;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -85,4 +101,11 @@ public class AetherIIItems {
     public static final DeferredItem<Item> ARKENIUM_PLATE = ITEMS.register("arkenium_plate", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> RAW_GRAVITITE = ITEMS.register("raw_gravitite", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> GRAVITITE_PLATE = ITEMS.register("gravitite_plate", () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> GOLDEN_AMBER = ITEMS.register("golden_amber", () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> TAEGORE_HIDE = ITEMS.register("taegore_hide", () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> BURRUKAI_PELT = ITEMS.register("burrukai_pelt", () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> AECHOR_PETAL = ITEMS.register("aechor_petal", () -> new Item(new Item.Properties()));
+
+    // Misc
+    public static final DeferredItem<Item> AETHER_PORTAL_FRAME = ITEMS.register("aether_portal_frame", () -> new AetherPortalItem(new Item.Properties().stacksTo(1)));
 }

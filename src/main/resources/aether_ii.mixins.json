@@ -6,6 +6,7 @@
   "refmap": "aether_ii.refmap.json",
   "mixins": [
     "common.PlayerMixin",
+    "common.accessor.EntityAccessor",
     "common.accessor.SpreadingSnowyDirtBlockAccessor"
   ],
   "client": [
