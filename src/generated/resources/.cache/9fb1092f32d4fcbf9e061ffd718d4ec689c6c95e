@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-24T06:54:45.594314	Recipes
+// 1.20.4	2024-05-25T10:16:21.2312214	Recipes
 f7b735c6b3410f9576695e3b8a487bd5aa6e9328 data/aether_ii/advancements/recipes/building_blocks/amberoot_wood.json
 f609a4ab9e9360b73d9580e51fb0a02fe076c8ab data/aether_ii/advancements/recipes/building_blocks/greatroot_planks.json
 8d9bf65504a8a2313004ef0527d22bb7e7e455e4 data/aether_ii/advancements/recipes/building_blocks/greatroot_slab.json
@@ -35,6 +35,7 @@ fb750d531ec0e1f19951b90ee54f2a08c6805a54 data/aether_ii/advancements/recipes/com
 621926af61b82ac9e401780728813dafdfb7fd45 data/aether_ii/advancements/recipes/combat/zanite_hammer.json
 812bebe335bc536673589796e5cfbd3ee8874cf7 data/aether_ii/advancements/recipes/combat/zanite_spear.json
 e4d2bb604d4d8ce7b21b5df4269fff78146750e6 data/aether_ii/advancements/recipes/combat/zanite_sword.json
+ca45044da37957837d6649ec90f795c46617bb8f data/aether_ii/advancements/recipes/decorations/cloudwool_carpet.json
 1e235ca6a2ac7e50cb0102f45859626089110576 data/aether_ii/advancements/recipes/decorations/greatroot_fence.json
 ddc975fb1f9f7b1d3ae9e8adfe7a2cdfc9b16728 data/aether_ii/advancements/recipes/decorations/holystone_brick_wall.json
 1c3ed48e8f757467a94f552138c84a8c097f3556 data/aether_ii/advancements/recipes/decorations/holystone_wall.json
@@ -100,6 +101,7 @@ e350d27a9161e852fca2cf888d455ccd0bed246e data/aether_ii/recipes/arkenium_plate_f
 7d344cc691a5656c82ba0b1c0a3c01aad33957b0 data/aether_ii/recipes/arkenium_spear.json
 c5b37fb84545ea7187a0706eb0de8ae3de1376bd data/aether_ii/recipes/arkenium_sword.json
 e4aa2d6a62813563d84e32928ebea88ad9ae173a data/aether_ii/recipes/arkenium_trowel.json
+90f5c69e3024f356adc5034853c880d86ebc9876 data/aether_ii/recipes/cloudwool_carpet.json
 6d8337c3e6eb9b1763be170e333b03edce21aa9a data/aether_ii/recipes/gravitite_axe.json
 340f7f410bd7368d6022f9a46b0bb7db19284f7a data/aether_ii/recipes/gravitite_hammer.json
 6d092188a81cea848087a65ab269e0a64cebad3a data/aether_ii/recipes/gravitite_pickaxe.json

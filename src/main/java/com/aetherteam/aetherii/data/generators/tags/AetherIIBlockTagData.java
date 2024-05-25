@@ -171,5 +171,13 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SKYROOT_FENCE.get(),
                 AetherIIBlocks.GREATROOT_FENCE.get(),
                 AetherIIBlocks.WISPROOT_FENCE.get());
+
+        // Vanilla
+        this.tag(BlockTags.WOOL).add(
+                AetherIIBlocks.CLOUDWOOL.get()
+        );
+        this.tag(BlockTags.WOOL_CARPETS).add(
+                AetherIIBlocks.CLOUDWOOL_CARPET.get()
+        );
     }
 }

@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-24T06:54:45.6313136	Item Models: aether_ii
+// 1.20.4	2024-05-25T10:16:21.233432	Item Models: aether_ii
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
 b485bb7a980decbc46719aeaac129689fa3f6a19 assets/aether_ii/models/item/aether_grass_block.json
 183e501764258654cc51853d14080c0c90ad97bb assets/aether_ii/models/item/amberoot_leaves.json
@@ -15,6 +15,8 @@ b7fda65a71d363a3c17216873453076ccd72ee12 assets/aether_ii/models/item/arkenium_s
 5cdc77ed51a4e270e9d66ab00d1e0e2302609b7e assets/aether_ii/models/item/arkenium_spear.json
 0a49ecb69e9c9148f5f56045b347f368ba647a05 assets/aether_ii/models/item/arkenium_sword.json
 5606c546a7d6835f0c9a25ac6435233d368ca049 assets/aether_ii/models/item/arkenium_trowel.json
+e4d13f0d25e81411724a9be96ea4882fe50f6e61 assets/aether_ii/models/item/cloudwool.json
+ed67eff7e6d30b7f6be0b507e140405622a49ed9 assets/aether_ii/models/item/cloudwool_carpet.json
 c313c38e5ff5ca6e3111c583c259bd093cb84542 assets/aether_ii/models/item/cold_aercloud.json
 f8aaafa2ddf04f53ef8bf4a76ce59b7584cd6d92 assets/aether_ii/models/item/gravitite_axe.json
 ddd60151b3f9dcc03a0addc6523064eb38234a94 assets/aether_ii/models/item/gravitite_hammer.json

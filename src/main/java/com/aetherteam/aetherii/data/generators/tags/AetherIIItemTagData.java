@@ -142,5 +142,13 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.SKYROOT_FENCE.asItem(),
                 AetherIIBlocks.GREATROOT_FENCE.asItem(),
                 AetherIIBlocks.WISPROOT_FENCE.asItem());
+
+        // Vanilla
+        this.tag(ItemTags.WOOL).add(
+                AetherIIBlocks.CLOUDWOOL.get().asItem()
+        );
+        this.tag(ItemTags.WOOL_CARPETS).add(
+                AetherIIBlocks.CLOUDWOOL_CARPET.get().asItem()
+        );
     }
 }

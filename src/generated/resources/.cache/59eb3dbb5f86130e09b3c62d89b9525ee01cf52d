@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-24T06:54:45.5643148	Loot Tables
+// 1.20.4	2024-05-25T10:16:21.2277021	Loot Tables
 b3ac0f837a89ef6292323e16712ccb72b957e765 data/aether_ii/loot_tables/blocks/aether_dirt.json
 2a86a9bdc0455369b0dffc142c983d9cc2431881 data/aether_ii/loot_tables/blocks/aether_grass_block.json
 cd78acddc96546721e8ddea1858c70e70430d9d6 data/aether_ii/loot_tables/blocks/amberoot_leaves.json
@@ -6,6 +6,8 @@ c5d83d6439dd5a40f8a50903bdcc73dca211303b data/aether_ii/loot_tables/blocks/amber
 d2407dbe16ea68ee13f2f2a6afaff944ea27d52d data/aether_ii/loot_tables/blocks/amberoot_wood.json
 5e2d1ad8a5c52e3c28f63d21e38b2215d4f1db01 data/aether_ii/loot_tables/blocks/ambrosium_ore.json
 2d59567ee2fac257895ce065f7c639bdb9447c3d data/aether_ii/loot_tables/blocks/arkenium_ore.json
+ae25ba8ab6d368e881f2908a144d154f268b369c data/aether_ii/loot_tables/blocks/cloudwool.json
+217708d60585b4468f01c5eeea8dae4b3b892469 data/aether_ii/loot_tables/blocks/cloudwool_carpet.json
 f6fe71dbb22cb5135868d44d7dce4c3989d36bfb data/aether_ii/loot_tables/blocks/cold_aercloud.json
 6a741dac163e2fe3e1f7383e800585919e388d75 data/aether_ii/loot_tables/blocks/gravitite_ore.json
 9be68174a3e3a6907eea34712a74a2ed05d89912 data/aether_ii/loot_tables/blocks/greatboa_leaves.json

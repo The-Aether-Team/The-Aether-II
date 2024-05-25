@@ -86,5 +86,8 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
 
         this.translucentBlock(AetherIIBlocks.QUICKSOIL_GLASS.get(), "construction/");
         this.pane(AetherIIBlocks.QUICKSOIL_GLASS_PANE.get(), AetherIIBlocks.QUICKSOIL_GLASS.get(), "construction/");
+
+        this.block(AetherIIBlocks.CLOUDWOOL.get(), "construction/");
+        this.carpet(AetherIIBlocks.CLOUDWOOL_CARPET.get(), AetherIIBlocks.CLOUDWOOL.get(), "construction/");
     }
 }

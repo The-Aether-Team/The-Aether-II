@@ -126,5 +126,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.HOLYSTONE_BRICK_SLAB.get());
         this.itemBlock(AetherIIBlocks.QUICKSOIL_GLASS.get());
         this.pane(AetherIIBlocks.QUICKSOIL_GLASS_PANE.get(), AetherIIBlocks.QUICKSOIL_GLASS.get(), "construction/");
+        this.itemBlock(AetherIIBlocks.CLOUDWOOL.get());
+        this.itemBlock(AetherIIBlocks.CLOUDWOOL_CARPET.get());
     }
 }
