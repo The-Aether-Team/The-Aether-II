@@ -8,6 +8,7 @@ import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
+import com.aetherteam.aetherii.world.structure.AetherIIStructureTypes;
 import com.mojang.logging.LogUtils;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -32,6 +33,7 @@ public class AetherII {
                 AetherIIEntityTypes.ENTITY_TYPES,
                 AetherIICreativeTabs.CREATIVE_MODE_TABS,
                 AetherIIFeatures.FEATURES,
+                AetherIIStructureTypes.STRUCTURE_TYPES,
                 AetherIISoundEvents.SOUNDS
         };
 

@@ -37,7 +37,11 @@ public class HighlandsNoiseBuilders {
 
     private static SurfaceRules.RuleSource highlandsSurfaceRules() {
         SurfaceRules.RuleSource surface = SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.waterBlockCheck(-1, 0), GRASS_BLOCK), DIRT);
-        return SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, surface), SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, DIRT));
+        return SurfaceRules.sequence(
+                SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, surface),
+                SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, DIRT),
+                SurfaceRules.ifTrue(SurfaceRules.verticalGradient("undershale", VerticalAnchor.absolute(40), VerticalAnchor.absolute(48)), SurfaceRules.state(AetherIIBlocks.UNDERSHALE.get().defaultBlockState()))
+        );
     }
 
     private static NoiseRouter makeNoiseRouter(HolderGetter<DensityFunction> densityFunctions, HolderGetter<NormalNoise.NoiseParameters> noise) {
