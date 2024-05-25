@@ -144,7 +144,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.WISPROOT_BUTTON.get(),
                 AetherIIBlocks.WISPROOT_PRESSURE_PLATE.get(),
                 AetherIIBlocks.WISPROOT_STAIRS.get(),
-                AetherIIBlocks.WISPROOT_SLAB.get()
+                AetherIIBlocks.WISPROOT_SLAB.get(),
+                AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
