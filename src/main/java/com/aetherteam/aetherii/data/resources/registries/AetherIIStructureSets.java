@@ -26,6 +26,6 @@ public class AetherIIStructureSets {
     public static void bootstrap(BootstapContext<StructureSet> context) {
         HolderGetter<Structure> structures = context.lookup(Registries.STRUCTURE);
         context.register(OUTPOSTS, new StructureSet(structures.getOrThrow(AetherIIStructures.OUTPOST),
-                new RandomSpreadStructurePlacement(38, 26, RandomSpreadType.LINEAR, 4325806)));
+                new RandomSpreadStructurePlacement(32, 20, RandomSpreadType.LINEAR, 2738116)));
     }
 }
