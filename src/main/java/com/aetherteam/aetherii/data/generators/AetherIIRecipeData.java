@@ -84,7 +84,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         carpet(consumer, AetherIIBlocks.CLOUDWOOL_CARPET, AetherIIBlocks.CLOUDWOOL.get());
 
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get())
-                .define('#', AetherIIBlocks.SKYROOT_PLANKS.get())
+                .define('#', AetherIITags.Items.PLANKS_CRAFTING)
                 .pattern("##")
                 .pattern("##")
                 .unlockedBy(getHasName(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get()), has(AetherIITags.Items.PLANKS_CRAFTING))

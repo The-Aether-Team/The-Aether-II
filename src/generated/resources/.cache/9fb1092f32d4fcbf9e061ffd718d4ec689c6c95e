@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-25T10:48:45.142181	Recipes
+// 1.20.4	2024-05-25T10:59:59.6981277	Recipes
 f7b735c6b3410f9576695e3b8a487bd5aa6e9328 data/aether_ii/advancements/recipes/building_blocks/amberoot_wood.json
 f609a4ab9e9360b73d9580e51fb0a02fe076c8ab data/aether_ii/advancements/recipes/building_blocks/greatroot_planks.json
 8d9bf65504a8a2313004ef0527d22bb7e7e455e4 data/aether_ii/advancements/recipes/building_blocks/greatroot_slab.json
@@ -146,7 +146,7 @@ c1f01e7a0e37e44338ff017a4f0a5643eb011f4c data/aether_ii/recipes/quicksoil_glass.
 d2b11e9910ed35f89ac97e53f6b63833e386d5db data/aether_ii/recipes/quicksoil_glass_pane.json
 86518b237f3e48c30f89b1a121038a37391885fb data/aether_ii/recipes/skyroot_axe.json
 f9fca8603d4cbe975aa31d0be48ce46e708e16ba data/aether_ii/recipes/skyroot_button.json
-9e063a4888b57ab5ae52378e3b7bf632abf6528d data/aether_ii/recipes/skyroot_crafting_table.json
+473e0739a493edc0dd3489b7b4ae6ea94fbf9de9 data/aether_ii/recipes/skyroot_crafting_table.json
 2ff97d40995f2a09bcbcc72f2e7af5484ed9024d data/aether_ii/recipes/skyroot_fence.json
 5fb9b82ebc8e8c21ee26123386f5aaac395a6ce6 data/aether_ii/recipes/skyroot_fence_gate.json
 030752764217b27cb8fdcbd8ca3731deb43a045d data/aether_ii/recipes/skyroot_hammer.json
