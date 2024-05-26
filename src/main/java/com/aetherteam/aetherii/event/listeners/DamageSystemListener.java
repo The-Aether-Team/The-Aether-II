@@ -8,14 +8,22 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.event.entity.living.LivingHurtEvent;
+import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
 import java.util.List;
 
 public class DamageSystemListener {
     public static void listen(IEventBus bus) {
+        bus.addListener(DamageSystemListener::criticalHitTracking);
         bus.addListener(DamageSystemListener::hurtWithDamageTypes);
         bus.addListener(DamageSystemListener::applyDamageTypeTooltips);
+    }
+
+    public static void criticalHitTracking(CriticalHitEvent event) {
+        Player player = event.getEntity();
+        float modifier = event.getDamageModifier();
+        DamageSystemHooks.trackCriticalHitValue(player, modifier);
     }
 
     public static void hurtWithDamageTypes(LivingHurtEvent event) {

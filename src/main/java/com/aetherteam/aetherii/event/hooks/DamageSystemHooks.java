@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.event.hooks;
 
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageInflictions;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageResistances;
@@ -20,6 +21,10 @@ import net.minecraft.world.item.ItemStack;
 import java.util.List;
 
 public class DamageSystemHooks {
+    public static void trackCriticalHitValue(Player player, float value) {
+        player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM.get()).setCriticalDamageModifier(value);
+    }
+
     public static float getDamageTypeModifiedValue(Entity target, DamageSource source, float damage) {
         RegistryAccess registryAccess = target.level().registryAccess();
         Entity sourceEntity = source.getDirectEntity();
@@ -31,7 +36,7 @@ public class DamageSystemHooks {
             sourceStack = itemSupplier.getItem();
         }
 
-        if (!sourceStack.isEmpty()) { //todo factor in cooldown and crits
+        if (!sourceStack.isEmpty()) {
             float slashDamage = AetherIIDamageInflictions.getSlashDamage(registryAccess, sourceStack);
             float impactDamage = AetherIIDamageInflictions.getImpactDamage(registryAccess, sourceStack);
             float pierceDamage = AetherIIDamageInflictions.getPierceDamage(registryAccess, sourceStack);
@@ -48,20 +53,36 @@ public class DamageSystemHooks {
                 float impactCalculation = impactDamage - impactDefense;
                 float pierceCalculation = pierceDamage - pierceDefense;
 
-                spawnDamageTypeParticles(slashCalculation, target, AetherIIParticleTypes.SLASH_ATTACK.get());
-                spawnDamageTypeParticles(impactCalculation, target, AetherIIParticleTypes.IMPACT_ATTACK.get());
-                spawnDamageTypeParticles(pierceCalculation, target, AetherIIParticleTypes.PIERCE_ATTACK.get());
+                if (slashCalculation >= 1.0F) {
+                    spawnDamageTypeParticles(target, AetherIIParticleTypes.SLASH_ATTACK.get());
+                } else {
+                    slashCalculation = 1.0F;
+                }
+                if (impactCalculation >= 1.0F) {
+                    spawnDamageTypeParticles(target, AetherIIParticleTypes.IMPACT_ATTACK.get());
+                } else {
+                    impactCalculation = 1.0F;
+                }
+                if (pierceCalculation >= 1.0F) {
+                    spawnDamageTypeParticles(target, AetherIIParticleTypes.PIERCE_ATTACK.get());
+                } else {
+                    pierceCalculation = 1.0F;
+                }
 
                 damage = slashCalculation + impactCalculation + pierceCalculation;
+                if (sourceEntity instanceof Player player) {
+                    damage *= player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).getCriticalDamageModifier();
+                    damage *= player.getAttackStrengthScale(0.5F);
+
+                    player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).setCriticalDamageModifier(1.0F);
+                }
             }
         }
         return damage;
     }
 
-    private static void spawnDamageTypeParticles(float damage, Entity target, SimpleParticleType particleType) {
-        if (damage > 0.0F) {
-            Minecraft.getInstance().particleEngine.createTrackingEmitter(target, particleType);
-        }
+    private static void spawnDamageTypeParticles(Entity target, SimpleParticleType particleType) {
+        Minecraft.getInstance().particleEngine.createTrackingEmitter(target, particleType);
     }
 
     public static void addDamageTypeTooltips(Player player, List<Component> components, ItemStack stack) {

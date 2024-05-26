@@ -22,7 +22,7 @@ public class AetherIIDamageResistances {
     }
 
     public static void bootstrap(BootstapContext<DamageResistance> context) {
-        context.register(EXAMPLE, new DamageResistance(EntityType.PIG, 100, 100, 100));
+        context.register(EXAMPLE, new DamageResistance(EntityType.PIG, 2, 2, 2));
     }
 
     public static float getSlashDefense(RegistryAccess registryAccess, Entity entity) {
