@@ -56,6 +56,8 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.block(AetherIIBlocks.GREATBOA_LEAVES.get(), "natural/");
         this.block(AetherIIBlocks.AMBEROOT_LEAVES.get(), "natural/");
 
+        this.block(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get(), "natural/");
+
         this.block(AetherIIBlocks.SKYROOT_PLANKS.get(), "construction/");
         this.stairs(AetherIIBlocks.SKYROOT_STAIRS.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), "construction/");
         this.slab(AetherIIBlocks.SKYROOT_SLAB.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), "construction/");

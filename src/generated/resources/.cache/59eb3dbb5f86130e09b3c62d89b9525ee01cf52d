@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-26T16:17:49.8067107	Loot Tables
+// 1.20.4	2024-05-26T18:12:39.1949848	Loot Tables
 b3ac0f837a89ef6292323e16712ccb72b957e765 data/aether_ii/loot_tables/blocks/aether_dirt.json
 d7f44de594f8ec5f788d2f1cab7db1dc937994cb data/aether_ii/loot_tables/blocks/aether_dirt_path.json
 39cf806080593ddf7098072051f768f30246f42f data/aether_ii/loot_tables/blocks/aether_farmland.json
@@ -90,5 +90,6 @@ f994b845ee2d6095bfcfa1508bcf8b2d506b4a51 data/aether_ii/loot_tables/blocks/wispr
 21cbbb9bbbd81fe9728a50f7cbd2f7cad0d0c3ab data/aether_ii/loot_tables/blocks/wisproot_stairs.json
 a01f35426be7b209e1628bb7dc8e3802f176b924 data/aether_ii/loot_tables/blocks/wisproot_wood.json
 9e33933f16f371dd44e2aeb86228299e9d460895 data/aether_ii/loot_tables/blocks/wisptop_leaves.json
+48f14de8140920dc17d5d0763a4ee6773f87b50b data/aether_ii/loot_tables/blocks/woven_skyroot_sticks.json
 e5756cffe597096161bf2a7f3af7adba68222a90 data/aether_ii/loot_tables/blocks/zanite_block.json
 14295de5d712c2eb60971e1b93c5c7e75cefa3e7 data/aether_ii/loot_tables/blocks/zanite_ore.json

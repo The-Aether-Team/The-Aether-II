@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-26T16:55:03.647451	Recipes
+// 1.20.4	2024-05-26T18:12:39.1969863	Recipes
 ceeef4aed870f06514a5f5cc998418931c547a22 data/aether_ii/advancements/recipes/building_blocks/agiosite_bricks.json
 0af97e5b955f582510638aeecee94fc57bcf2d1c data/aether_ii/advancements/recipes/building_blocks/agiosite_brick_slab.json
 d211fa2d4f1b2edaad272b7356325c4ddc5de28c data/aether_ii/advancements/recipes/building_blocks/agiosite_brick_stairs.json
@@ -29,6 +29,7 @@ e40bcb62126e3cb00e6af03797c9423fc4001f25 data/aether_ii/advancements/recipes/bui
 c1b0bf953520fe2051817216d46f60803067b282 data/aether_ii/advancements/recipes/building_blocks/wisproot_slab.json
 8e8a7e20b88ebb173c9a473ae1e23707f2891cf4 data/aether_ii/advancements/recipes/building_blocks/wisproot_stairs.json
 eb6a672a384f1d9cce8c13726bd53043fb751838 data/aether_ii/advancements/recipes/building_blocks/wisproot_wood.json
+e0c2ea75334167c798613c132b3bf984572647af data/aether_ii/advancements/recipes/building_blocks/woven_skyroot_sticks.json
 8aef992563c08c35394eabc4058088aaeaa8851b data/aether_ii/advancements/recipes/building_blocks/zanite_block.json
 a4bd7d415084dc1d0c7461abd61fc4ea2466b000 data/aether_ii/advancements/recipes/combat/arkenium_hammer.json
 50e5aa0d128fa921abc1ed679d9de00545783e71 data/aether_ii/advancements/recipes/combat/arkenium_spear.json
@@ -155,7 +156,7 @@ e40634d17848e4feda6e9ddf74da93f7abd20bcd data/aether_ii/recipes/greatroot_pressu
 093724d36ba1704f45b0bb8d874a9fe30b5180ea data/aether_ii/recipes/greatroot_stairs.json
 6b1d1e974eb1e0910afcb66bbed5c8a499f5514c data/aether_ii/recipes/greatroot_wood.json
 d0ac4406c1193854886d00bde880c20674c82d74 data/aether_ii/recipes/holystone_axe.json
-7f7589bdf0113183b5d2b06522fc66b24015d00a data/aether_ii/recipes/holystone_bricks.json
+c47294b39c5e0215a977a5065e8155ab94ce4287 data/aether_ii/recipes/holystone_bricks.json
 cc7067b7fedbcd8b40e4d108c4af2d267983b6d9 data/aether_ii/recipes/holystone_brick_slab.json
 c96b78581a5f6606e2ab50348ff1971482902076 data/aether_ii/recipes/holystone_brick_stairs.json
 a28be291c33be9cb1dd4b5ccbb8d1f74ec3152b1 data/aether_ii/recipes/holystone_brick_wall.json
@@ -206,6 +207,7 @@ f47de4ecff5ff2a1b359e374bc12f5b5c85b5131 data/aether_ii/recipes/wisproot_planks.
 a3cc8dd004eba2cadf7d828a4f3687bbba748490 data/aether_ii/recipes/wisproot_slab.json
 ed949fd9b41ddf1cdd4b15272d9f912687dba877 data/aether_ii/recipes/wisproot_stairs.json
 a13fe616c5e4019b82f43ca854d657e852b238f6 data/aether_ii/recipes/wisproot_wood.json
+4c31d3c4e49b82ccfad86eacf6d7d250f027c4b6 data/aether_ii/recipes/woven_skyroot_sticks.json
 a657d51782dfd7a9bb72a8238121f5886227a99d data/aether_ii/recipes/zanite_axe.json
 0922931c897405240ac49a220af25b78d7c57d6d data/aether_ii/recipes/zanite_block.json
 000a66789ce07eaf2f74edfee592fa69f723205c data/aether_ii/recipes/zanite_gemstone_from_blasting.json

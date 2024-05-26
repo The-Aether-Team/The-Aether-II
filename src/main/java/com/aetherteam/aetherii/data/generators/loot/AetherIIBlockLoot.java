@@ -64,6 +64,8 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropNone(AetherIIBlocks.GREATBOA_LEAVES.get());
         this.dropNone(AetherIIBlocks.AMBEROOT_LEAVES.get());
 
+        this.dropSelf(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get());
+
         this.dropSelf(AetherIIBlocks.SKYROOT_PLANKS.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_STAIRS.get());
         this.add(AetherIIBlocks.SKYROOT_SLAB.get(), this::createSlabItemTable);

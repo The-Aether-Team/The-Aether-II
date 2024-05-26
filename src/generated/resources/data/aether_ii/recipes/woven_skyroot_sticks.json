@@ -2,16 +2,15 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "S": {
-      "item": "aether_ii:holystone"
+    "#": {
+      "item": "aether_ii:skyroot_stick"
     }
   },
   "pattern": [
-    "SS",
-    "SS"
+    "##",
+    "##"
   ],
   "result": {
-    "count": 4,
-    "item": "aether_ii:holystone_bricks"
+    "item": "aether_ii:woven_skyroot_sticks"
   }
 }

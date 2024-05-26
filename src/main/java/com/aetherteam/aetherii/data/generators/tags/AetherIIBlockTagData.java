@@ -241,7 +241,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.GREATROOT_LEAVES.get(),
                 AetherIIBlocks.GREATOAK_LEAVES.get(),
                 AetherIIBlocks.GREATBOA_LEAVES.get(),
-                AetherIIBlocks.AMBEROOT_LEAVES.get()
+                AetherIIBlocks.AMBEROOT_LEAVES.get(),
+                AetherIIBlocks.WOVEN_SKYROOT_STICKS.get()
         );
         this.tag(BlockTags.NEEDS_STONE_TOOL).add(
                 AetherIIBlocks.ZANITE_ORE.get(),

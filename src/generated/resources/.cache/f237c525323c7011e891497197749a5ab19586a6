@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-26T16:17:49.797192	Block States: aether_ii
+// 1.20.4	2024-05-26T18:12:39.1874817	Block States: aether_ii
 09820e9981cbdbe29cb2563890673c61c5abe056 assets/aether_ii/blockstates/aether_dirt.json
 7d216c5fd9f534a8fa3506c2a1aa984edb33c9d7 assets/aether_ii/blockstates/aether_dirt_path.json
 c1a07acd4f67535c61a7eb9a5aee01787c414f7f assets/aether_ii/blockstates/aether_farmland.json
@@ -90,6 +90,7 @@ f50fe11dd94dd075f91db51c1dda68bfd5d7d1cb assets/aether_ii/blockstates/wisproot_s
 2551d6762ac2d31047c58178ed4045c7736dec76 assets/aether_ii/blockstates/wisproot_stairs.json
 8511b53fb6f4bf77eb0926d4546b834abbc40c8c assets/aether_ii/blockstates/wisproot_wood.json
 fbea06b1eb6c1730fe17c699fd1944abb0925297 assets/aether_ii/blockstates/wisptop_leaves.json
+479a1177c3c86cfc68d4cf3f7a31e4ad5273c829 assets/aether_ii/blockstates/woven_skyroot_sticks.json
 ba24df1510914eb08a95070b52410eb3709bc062 assets/aether_ii/blockstates/zanite_block.json
 c1db6b218613927fa6d6269dafb1f376bd8323a7 assets/aether_ii/blockstates/zanite_ore.json
 f444c2d02a1445ab4b6fd3fe26bbb16f757e4856 assets/aether_ii/models/block/aether_dirt.json
@@ -265,5 +266,6 @@ f662bcbcd9a2869dba4f82d28b449c9c229e0d90 assets/aether_ii/models/block/wisproot_
 8a2f7459f303107f1b26df019ae6af679b8d8037 assets/aether_ii/models/block/wisproot_wood.json
 145b6c91e25a082a1479365574dca4b844813368 assets/aether_ii/models/block/wisproot_wood_horizontal.json
 00ae7c84a967c77eaa58f268178529cb7cc898d8 assets/aether_ii/models/block/wisptop_leaves.json
+c721d6eab11594855121064750ad9e64af18ec39 assets/aether_ii/models/block/woven_skyroot_sticks.json
 852e6ce16a29c3e646331dc3996c35d3fdea4c7b assets/aether_ii/models/block/zanite_block.json
 958e53fe7ac7cdd0e91cbee3daffc8f5b61fdd40 assets/aether_ii/models/block/zanite_ore.json

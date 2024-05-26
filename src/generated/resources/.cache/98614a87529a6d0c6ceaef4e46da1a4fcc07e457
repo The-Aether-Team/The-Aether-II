@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-26T16:17:49.8087111	Item Models: aether_ii
+// 1.20.4	2024-05-26T18:12:39.1989868	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
 014669ae81a98eba467cc6fe0047c04b73a80768 assets/aether_ii/models/item/aether_dirt_path.json
@@ -133,6 +133,7 @@ e83344497594b85c2e077c26de6679ced6e3acc9 assets/aether_ii/models/item/wisproot_p
 e167cd2a4903ede813313aadebb011a5f64d51f9 assets/aether_ii/models/item/wisproot_stairs.json
 4daf67c80f9bae792c17752840d4459839b20d5e assets/aether_ii/models/item/wisproot_wood.json
 962869521316611ce7ea217861b3f90966cce67d assets/aether_ii/models/item/wisptop_leaves.json
+c04067ac464f073ff3892f9fb8efddc4263c33b7 assets/aether_ii/models/item/woven_skyroot_sticks.json
 d9caf48d88075318f92f7cdf5167c3790ee94286 assets/aether_ii/models/item/wyndberry.json
 641e5ab39a98fa0a52bd5c5db666b79042ba9888 assets/aether_ii/models/item/zanite_axe.json
 a2bc2f6f301763a350cdb8e56399ee939abf52c4 assets/aether_ii/models/item/zanite_block.json
