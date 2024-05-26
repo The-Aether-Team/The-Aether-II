@@ -9,5 +9,5 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 public class AetherIIDataAttachments {
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENTS = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, AetherII.MODID);
 
-    public static final DeferredHolder<AttachmentType<?>, AttachmentType<AetherIIPlayerAttachment>> AETHER_II_PLAYER = ATTACHMENTS.register("aether_ii_player", () -> AttachmentType.builder(AetherIIPlayerAttachment::new).serialize(AetherIIPlayerAttachment.CODEC).copyOnDeath().build());
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<PortalTeleportationAttachment>> PORTAL_TELEPORTATION = ATTACHMENTS.register("portal_teleportation", () -> AttachmentType.builder(PortalTeleportationAttachment::new).serialize(PortalTeleportationAttachment.CODEC).copyOnDeath().build());
 }

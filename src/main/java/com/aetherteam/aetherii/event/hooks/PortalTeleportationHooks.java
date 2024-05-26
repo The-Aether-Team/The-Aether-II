@@ -3,9 +3,12 @@ package com.aetherteam.aetherii.event.hooks;
 import com.aetherteam.aetherii.AetherIIConfig;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.attachment.PortalTeleportationAttachment;
 import com.aetherteam.aetherii.block.portal.AetherPortalForcer;
 import com.aetherteam.aetherii.block.portal.AetherPortalShape;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
+import com.aetherteam.aetherii.event.listeners.PortalTeleportationListener;
+import com.aetherteam.aetherii.event.listeners.WorldInteractionListener;
 import com.aetherteam.aetherii.world.LevelUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -14,6 +17,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -21,6 +25,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
@@ -28,7 +33,7 @@ import net.neoforged.neoforge.event.level.BlockEvent;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public class DimensionHooks {
+public class PortalTeleportationHooks {
     public static boolean playerLeavingAether;
     public static boolean displayAetherTravel;
     public static int teleportationTimer;
@@ -37,10 +42,10 @@ public class DimensionHooks {
      * Spawns the player in the Aether dimension if the {@link AetherIIConfig.Server#spawn_in_aether} config is enabled.
      *
      * @param player The {@link Player}.
-     * @see com.aetherteam.aetherii.event.listeners.DimensionListener#onPlayerLogin(PlayerEvent.PlayerLoggedInEvent)
+     * @see WorldInteractionListener#onPlayerLogin(PlayerEvent.PlayerLoggedInEvent)
      */
     public static void startInAether(Player player) {
-        var aetherIIPlayer = player.getData(AetherIIDataAttachments.AETHER_II_PLAYER);
+        var aetherIIPlayer = player.getData(AetherIIDataAttachments.PORTAL_TELEPORTATION);
         if (AetherIIConfig.SERVER.spawn_in_aether.get()) {
             if (aetherIIPlayer.canSpawnInAether()) { // Checks if the player has been set to spawn in the Aether.
                 if (player instanceof ServerPlayer serverPlayer) {
@@ -71,7 +76,7 @@ public class DimensionHooks {
      * @param stack     The {@link ItemStack} used to attempt to activate the portal.
      * @param hand      The {@link InteractionHand} that the item is in.
      * @return Whether the portal should be created, as a {@link Boolean}.
-     * @see com.aetherteam.aetherii.event.listeners.DimensionListener#onInteractWithPortalFrame(PlayerInteractEvent.RightClickBlock)
+     * @see WorldInteractionListener#onInteractWithPortalFrame(PlayerInteractEvent.RightClickBlock)
      */
     public static boolean createPortal(Player player, Level level, BlockPos pos, @Nullable Direction direction, ItemStack stack, InteractionHand hand) {
         if (direction != null) {
@@ -110,7 +115,7 @@ public class DimensionHooks {
      * @param blockState    The water {@link BlockState}.
      * @param fluidState    The water {@link FluidState}.
      * @return Whether the portal should be created, as a {@link Boolean}.
-     * @see com.aetherteam.aetherii.event.listeners.DimensionListener#onWaterExistsInsidePortalFrame(BlockEvent.NeighborNotifyEvent)
+     * @see WorldInteractionListener#onWaterExistsInsidePortalFrame(BlockEvent.NeighborNotifyEvent)
      */
     public static boolean detectWaterInFrame(LevelAccessor levelAccessor, BlockPos pos, BlockState blockState, FluidState fluidState) {
         if (levelAccessor instanceof Level level) {
@@ -125,5 +130,17 @@ public class DimensionHooks {
             }
         }
         return false;
+    }
+
+    // GENERIC ATTACHMENT METHODS
+
+    /**
+     * @see PortalTeleportationAttachment#onUpdate(Player)
+     * @see PortalTeleportationListener#onPlayerUpdate(LivingEvent.LivingTickEvent)
+     */
+    public static void update(LivingEntity entity) {
+        if (entity instanceof Player player) {
+            player.getData(AetherIIDataAttachments.PORTAL_TELEPORTATION).onUpdate(player);
+        }
     }
 }
