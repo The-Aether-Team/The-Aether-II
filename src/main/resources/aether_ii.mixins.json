@@ -7,6 +7,7 @@
   "mixins": [
     "common.ItemStackMixin",
     "common.PlayerMixin",
+    "common.accessor.BushBlockAccessor",
     "common.accessor.EntityAccessor",
     "common.accessor.SpreadingSnowyDirtBlockAccessor"
   ],

@@ -23,6 +23,8 @@ public class AetherIICreativeTabs {
             .displayItems((features, output) -> {
                 output.accept(AetherIIBlocks.SKYROOT_LOG.get());
                 output.accept(AetherIIBlocks.SKYROOT_WOOD.get());
+                output.accept(AetherIIBlocks.STRIPPED_SKYROOT_LOG.get());
+                output.accept(AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get());
                 output.accept(AetherIIBlocks.SKYROOT_PLANKS.get());
                 output.accept(AetherIIBlocks.SKYROOT_STAIRS.get());
                 output.accept(AetherIIBlocks.SKYROOT_SLAB.get());
@@ -67,10 +69,24 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.HOLYSTONE_BRICK_SLAB.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_BRICK_WALL.get());
                 output.accept(AetherIIBlocks.UNDERSHALE.get());
+                output.accept(AetherIIBlocks.UNDERSHALE_STAIRS.get());
+                output.accept(AetherIIBlocks.UNDERSHALE_SLAB.get());
+                output.accept(AetherIIBlocks.UNDERSHALE_WALL.get());
+                output.accept(AetherIIBlocks.AGIOSITE.get());
+                output.accept(AetherIIBlocks.AGIOSITE_STAIRS.get());
+                output.accept(AetherIIBlocks.AGIOSITE_SLAB.get());
+                output.accept(AetherIIBlocks.AGIOSITE_WALL.get());
+                output.accept(AetherIIBlocks.AGIOSITE_BRICKS.get());
+                output.accept(AetherIIBlocks.AGIOSITE_BRICK_STAIRS.get());
+                output.accept(AetherIIBlocks.AGIOSITE_BRICK_SLAB.get());
+                output.accept(AetherIIBlocks.AGIOSITE_BRICK_WALL.get());
                 output.accept(AetherIIBlocks.QUICKSOIL_GLASS.get());
                 output.accept(AetherIIBlocks.QUICKSOIL_GLASS_PANE.get());
                 output.accept(AetherIIBlocks.CLOUDWOOL.get());
                 output.accept(AetherIIBlocks.CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.AMBROSIUM_BLOCK.get());
+                output.accept(AetherIIBlocks.ZANITE_BLOCK.get());
+                output.accept(AetherIIBlocks.GRAVITITE_BLOCK.get());
             }).build());
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_DUNGEON_BLOCKS = CREATIVE_MODE_TABS.register("dungeon_blocks", () -> CreativeModeTab.builder()
             .withTabsBefore(new ResourceLocation(AetherII.MODID, "building_blocks"))
@@ -87,20 +103,29 @@ public class AetherIICreativeTabs {
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".natural_blocks"))
             .displayItems((features, output) -> {
                 output.accept(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
+                output.accept(AetherIIBlocks.AETHER_DIRT_PATH.get());
                 output.accept(AetherIIBlocks.AETHER_DIRT.get());
+                output.accept(AetherIIBlocks.AETHER_FARMLAND.get());
                 output.accept(AetherIIBlocks.QUICKSOIL.get());
                 output.accept(AetherIIBlocks.HOLYSTONE.get());
                 output.accept(AetherIIBlocks.MOSSY_HOLYSTONE.get());
                 output.accept(AetherIIBlocks.UNDERSHALE.get());
+                output.accept(AetherIIBlocks.AGIOSITE.get());
                 output.accept(AetherIIBlocks.AMBROSIUM_ORE.get());
                 output.accept(AetherIIBlocks.ZANITE_ORE.get());
                 output.accept(AetherIIBlocks.ARKENIUM_ORE.get());
                 output.accept(AetherIIBlocks.GRAVITITE_ORE.get());
                 output.accept(AetherIIBlocks.COLD_AERCLOUD.get());
+                output.accept(AetherIIBlocks.BLUE_AERCLOUD.get());
+                output.accept(AetherIIBlocks.GOLDEN_AERCLOUD.get());
+                output.accept(AetherIIBlocks.GREEN_AERCLOUD.get());
+                output.accept(AetherIIBlocks.PURPLE_AERCLOUD.get());
+                output.accept(AetherIIBlocks.STORM_AERCLOUD.get());
                 output.accept(AetherIIBlocks.SKYROOT_LOG.get());
                 output.accept(AetherIIBlocks.GREATROOT_LOG.get());
                 output.accept(AetherIIBlocks.WISPROOT_LOG.get());
                 output.accept(AetherIIBlocks.AMBEROOT_LOG.get());
+                output.accept(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get());
                 output.accept(AetherIIBlocks.SKYROOT_LEAVES.get());
                 output.accept(AetherIIBlocks.SKYPLANE_LEAVES.get());
                 output.accept(AetherIIBlocks.SKYBIRCH_LEAVES.get());
@@ -120,6 +145,7 @@ public class AetherIICreativeTabs {
             .displayItems((features, output) -> {
                 output.accept(AetherIIBlocks.AMBROSIUM_TORCH.get());
                 output.accept(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get());
+                output.accept(AetherIIBlocks.HOLYSTONE_FURNACE.get());
                 output.accept(AetherIIBlocks.SKYROOT_LADDER.get());
             }).build());
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_REDSTONE_BLOCKS = CREATIVE_MODE_TABS.register("redstone_blocks", () -> CreativeModeTab.builder()
@@ -184,10 +210,15 @@ public class AetherIICreativeTabs {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_FOOD_AND_DRINKS = CREATIVE_MODE_TABS.register("food_and_drinks", () -> CreativeModeTab.builder()
             .withTabsBefore(new ResourceLocation(AetherII.MODID, "combat"))
             .withTabsAfter(new ResourceLocation(AetherII.MODID, "ingredients"))
-            .icon(() -> new ItemStack(Blocks.STONE))
+            .icon(() -> new ItemStack(AetherIIItems.ORANGE.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".food_and_drinks"))
             .displayItems((features, output) -> {
-
+                output.accept(AetherIIItems.BLUEBERRY.get());
+                output.accept(AetherIIItems.ENCHANTED_BERRY.get());
+                output.accept(AetherIIItems.ORANGE.get());
+                output.accept(AetherIIItems.WYNDBERRY.get());
+                output.accept(AetherIIItems.BLUE_SWET_JELLY.get());
+                output.accept(AetherIIItems.GOLDEN_SWET_JELLY.get());
             }).build());
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_INGREDIENTS = CREATIVE_MODE_TABS.register("ingredients", () -> CreativeModeTab.builder()
             .withTabsBefore(new ResourceLocation(AetherII.MODID, "food_and_drinks"))

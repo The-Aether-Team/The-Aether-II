@@ -2,6 +2,9 @@
   "values": [
     "aether_ii:holystone_wall",
     "aether_ii:mossy_holystone_wall",
-    "aether_ii:holystone_brick_wall"
+    "aether_ii:holystone_brick_wall",
+    "aether_ii:undershale_wall",
+    "aether_ii:agiosite_wall",
+    "aether_ii:agiosite_brick_wall"
   ]
 }

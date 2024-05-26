@@ -21,13 +21,13 @@ public class HighlandsNoiseBuilders {
     public static NoiseGeneratorSettings highlandsNoiseSettings(HolderGetter<DensityFunction> densityFunctions, HolderGetter<NormalNoise.NoiseParameters> noise) {
         BlockState holystone = AetherIIBlocks.HOLYSTONE.get().defaultBlockState();
         return new NoiseGeneratorSettings(
-                new NoiseSettings(-128, 256, 2, 1), // noiseSettings
+                new NoiseSettings(0, 256, 2, 1), // noiseSettings
                 holystone, // defaultBlock
                 Blocks.WATER.defaultBlockState(), // defaultFluid
                 makeNoiseRouter(densityFunctions, noise), // noiseRouter
                 highlandsSurfaceRules(), // surfaceRule
                 List.of(), // spawnTarget
-                0, // seaLevel
+                -64, // seaLevel
                 false, // disableMobGeneration
                 false, // aquifersEnabled
                 false, // oreVeinsEnabled

@@ -66,27 +66,50 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.BURRUKAI_PELT.get(), "materials/");
         this.item(AetherIIItems.AECHOR_PETAL.get(), "materials/");
 
+        this.item(AetherIIItems.BLUEBERRY.get(), "food/");
+        this.item(AetherIIItems.ENCHANTED_BERRY.get(), "food/");
+        this.item(AetherIIItems.ORANGE.get(), "food/");
+        this.item(AetherIIItems.WYNDBERRY.get(), "food/");
+        this.item(AetherIIItems.BLUE_SWET_JELLY.get(), "food/");
+        this.item(AetherIIItems.GOLDEN_SWET_JELLY.get(), "food/");
+
         this.portalItem(AetherIIItems.AETHER_PORTAL_FRAME.get(), "miscellaneous/");
 
+        //TODO: Simplify with Block Item Model with a blockWithItem Method
         this.itemBlock(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
         this.itemBlock(AetherIIBlocks.AETHER_DIRT.get());
+        this.itemBlock(AetherIIBlocks.AETHER_FARMLAND.get());
+        this.itemBlock(AetherIIBlocks.AETHER_DIRT_PATH.get());
+
         this.itemBlock(AetherIIBlocks.QUICKSOIL.get());
         this.itemBlock(AetherIIBlocks.HOLYSTONE.get());
         this.itemBlock(AetherIIBlocks.MOSSY_HOLYSTONE.get());
         this.itemBlock(AetherIIBlocks.UNDERSHALE.get());
+        this.itemBlock(AetherIIBlocks.AGIOSITE.get());
+
         this.itemBlock(AetherIIBlocks.AMBROSIUM_ORE.get());
         this.itemBlock(AetherIIBlocks.ZANITE_ORE.get());
         this.itemBlock(AetherIIBlocks.ARKENIUM_ORE.get());
         this.itemBlock(AetherIIBlocks.GRAVITITE_ORE.get());
+
         this.aercloudItem(AetherIIBlocks.COLD_AERCLOUD.get());
+        this.aercloudItem(AetherIIBlocks.BLUE_AERCLOUD.get());
+        this.aercloudItem(AetherIIBlocks.GOLDEN_AERCLOUD.get());
+        this.aercloudItem(AetherIIBlocks.GREEN_AERCLOUD.get());
+        this.itemBlock(AetherIIBlocks.PURPLE_AERCLOUD.get());
+        this.aercloudItem(AetherIIBlocks.STORM_AERCLOUD.get());
+
         this.itemBlock(AetherIIBlocks.SKYROOT_LOG.get());
+        this.itemBlock(AetherIIBlocks.STRIPPED_SKYROOT_LOG.get());
         this.itemBlock(AetherIIBlocks.GREATROOT_LOG.get());
         this.itemBlock(AetherIIBlocks.WISPROOT_LOG.get());
         this.itemBlock(AetherIIBlocks.AMBEROOT_LOG.get());
         this.itemBlock(AetherIIBlocks.SKYROOT_WOOD.get());
+        this.itemBlock(AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get());
         this.itemBlock(AetherIIBlocks.GREATROOT_WOOD.get());
         this.itemBlock(AetherIIBlocks.WISPROOT_WOOD.get());
         this.itemBlock(AetherIIBlocks.AMBEROOT_WOOD.get());
+
         this.itemBlock(AetherIIBlocks.SKYROOT_LEAVES.get());
         this.itemBlock(AetherIIBlocks.SKYPLANE_LEAVES.get());
         this.itemBlock(AetherIIBlocks.SKYBIRCH_LEAVES.get());
@@ -97,47 +120,76 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.GREATOAK_LEAVES.get());
         this.itemBlock(AetherIIBlocks.GREATBOA_LEAVES.get());
         this.itemBlock(AetherIIBlocks.AMBEROOT_LEAVES.get());
+
+        this.itemBlock(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get());
+
         this.itemBlock(AetherIIBlocks.SKYROOT_PLANKS.get());
         this.itemBlock(AetherIIBlocks.SKYROOT_STAIRS.get());
         this.itemBlock(AetherIIBlocks.SKYROOT_SLAB.get());
         this.itemFence(AetherIIBlocks.SKYROOT_FENCE.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), "construction/");
         this.itemBlock(AetherIIBlocks.SKYROOT_FENCE_GATE.get());
+        this.item(AetherIIBlocks.SKYROOT_DOOR.get().asItem(), "miscellaneous/");
         this.itemBlock(AetherIIBlocks.SKYROOT_TRAPDOOR.get(), "_bottom");
         this.itemButton(AetherIIBlocks.SKYROOT_BUTTON.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), "construction/");
         this.itemBlock(AetherIIBlocks.SKYROOT_PRESSURE_PLATE.get());
+
         this.itemBlock(AetherIIBlocks.GREATROOT_PLANKS.get());
+        this.itemBlock(AetherIIBlocks.GREATROOT_STAIRS.get());
+        this.itemBlock(AetherIIBlocks.GREATROOT_SLAB.get());
         this.itemFence(AetherIIBlocks.GREATROOT_FENCE.get(), AetherIIBlocks.GREATROOT_PLANKS.get(), "construction/");
         this.itemBlock(AetherIIBlocks.GREATROOT_FENCE_GATE.get());
         this.itemButton(AetherIIBlocks.GREATROOT_BUTTON.get(), AetherIIBlocks.GREATROOT_PLANKS.get(), "construction/");
         this.itemBlock(AetherIIBlocks.GREATROOT_PRESSURE_PLATE.get());
-        this.itemBlock(AetherIIBlocks.GREATROOT_STAIRS.get());
-        this.itemBlock(AetherIIBlocks.GREATROOT_SLAB.get());
+
         this.itemBlock(AetherIIBlocks.WISPROOT_PLANKS.get());
+        this.itemBlock(AetherIIBlocks.WISPROOT_STAIRS.get());
+        this.itemBlock(AetherIIBlocks.WISPROOT_SLAB.get());
         this.itemFence(AetherIIBlocks.WISPROOT_FENCE.get(), AetherIIBlocks.WISPROOT_PLANKS.get(), "construction/");
         this.itemBlock(AetherIIBlocks.WISPROOT_FENCE_GATE.get());
         this.itemButton(AetherIIBlocks.WISPROOT_BUTTON.get(), AetherIIBlocks.WISPROOT_PLANKS.get(), "construction/");
         this.itemBlock(AetherIIBlocks.WISPROOT_PRESSURE_PLATE.get());
-        this.itemBlock(AetherIIBlocks.WISPROOT_STAIRS.get());
-        this.itemBlock(AetherIIBlocks.WISPROOT_SLAB.get());
-        this.itemButton(AetherIIBlocks.HOLYSTONE_BUTTON.get(), AetherIIBlocks.HOLYSTONE.get(), "natural/");
-        this.itemBlock(AetherIIBlocks.HOLYSTONE_PRESSURE_PLATE.get());
-        this.itemWallBlock(AetherIIBlocks.HOLYSTONE_WALL.get(), AetherIIBlocks.HOLYSTONE.get(), "natural/");
+
         this.itemBlock(AetherIIBlocks.HOLYSTONE_STAIRS.get());
         this.itemBlock(AetherIIBlocks.HOLYSTONE_SLAB.get());
-        this.itemWallBlock(AetherIIBlocks.MOSSY_HOLYSTONE_WALL.get(), AetherIIBlocks.MOSSY_HOLYSTONE.get(), "natural/");
+        this.itemWallBlock(AetherIIBlocks.HOLYSTONE_WALL.get(), AetherIIBlocks.HOLYSTONE.get(), "natural/");
+        this.itemButton(AetherIIBlocks.HOLYSTONE_BUTTON.get(), AetherIIBlocks.HOLYSTONE.get(), "natural/");
+        this.itemBlock(AetherIIBlocks.HOLYSTONE_PRESSURE_PLATE.get());
+
         this.itemBlock(AetherIIBlocks.MOSSY_HOLYSTONE_STAIRS.get());
         this.itemBlock(AetherIIBlocks.MOSSY_HOLYSTONE_SLAB.get());
+        this.itemWallBlock(AetherIIBlocks.MOSSY_HOLYSTONE_WALL.get(), AetherIIBlocks.MOSSY_HOLYSTONE.get(), "natural/");
+
         this.itemBlock(AetherIIBlocks.HOLYSTONE_BRICKS.get());
-        this.itemWallBlock(AetherIIBlocks.HOLYSTONE_BRICK_WALL.get(), AetherIIBlocks.HOLYSTONE_BRICKS.get(), "construction/");
         this.itemBlock(AetherIIBlocks.HOLYSTONE_BRICK_STAIRS.get());
         this.itemBlock(AetherIIBlocks.HOLYSTONE_BRICK_SLAB.get());
+        this.itemWallBlock(AetherIIBlocks.HOLYSTONE_BRICK_WALL.get(), AetherIIBlocks.HOLYSTONE_BRICKS.get(), "construction/");
+
+        this.itemBlock(AetherIIBlocks.UNDERSHALE_STAIRS.get());
+        this.itemBlock(AetherIIBlocks.UNDERSHALE_SLAB.get());
+        this.itemWallBlock(AetherIIBlocks.UNDERSHALE_WALL.get(), AetherIIBlocks.UNDERSHALE.get(), "natural/");
+
+        this.itemBlock(AetherIIBlocks.AGIOSITE_STAIRS.get());
+        this.itemBlock(AetherIIBlocks.AGIOSITE_SLAB.get());
+        this.itemWallBlock(AetherIIBlocks.AGIOSITE_WALL.get(), AetherIIBlocks.AGIOSITE.get(), "natural/");
+
+        this.itemBlock(AetherIIBlocks.AGIOSITE_BRICKS.get());
+        this.itemBlock(AetherIIBlocks.AGIOSITE_BRICK_STAIRS.get());
+        this.itemBlock(AetherIIBlocks.AGIOSITE_BRICK_SLAB.get());
+        this.itemWallBlock(AetherIIBlocks.AGIOSITE_BRICK_WALL.get(), AetherIIBlocks.AGIOSITE_BRICKS.get(), "construction/");
+
         this.itemBlock(AetherIIBlocks.QUICKSOIL_GLASS.get());
         this.pane(AetherIIBlocks.QUICKSOIL_GLASS_PANE.get(), AetherIIBlocks.QUICKSOIL_GLASS.get(), "construction/");
+
         this.itemBlock(AetherIIBlocks.CLOUDWOOL.get());
         this.itemBlock(AetherIIBlocks.CLOUDWOOL_CARPET.get());
-        this.item(AetherIIBlocks.SKYROOT_DOOR.get().asItem(), "miscellaneous/");
+
+        this.itemBlock(AetherIIBlocks.AMBROSIUM_BLOCK.get() );
+        this.itemBlock(AetherIIBlocks.ZANITE_BLOCK.get());
+        this.itemBlock(AetherIIBlocks.GRAVITITE_BLOCK.get());
+
         this.itemBlockFlat(AetherIIBlocks.AMBROSIUM_TORCH.get(), "utility/");
         this.itemBlock(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get());
+        this.itemBlock(AetherIIBlocks.HOLYSTONE_FURNACE.get());
         this.itemBlockFlat(AetherIIBlocks.SKYROOT_LADDER.get(), "construction/");
     }
 }

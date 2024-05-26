@@ -2,6 +2,8 @@
   "values": [
     "aether_ii:aether_grass_block",
     "aether_ii:aether_dirt",
+    "aether_ii:aether_farmland",
+    "aether_ii:aether_dirt_path",
     "aether_ii:quicksoil"
   ]
 }

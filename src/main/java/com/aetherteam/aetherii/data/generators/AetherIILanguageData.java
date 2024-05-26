@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.providers.AetherIILanguageProvider;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
+import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.data.PackOutput;
@@ -19,10 +20,14 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         this.addBlock(AetherIIBlocks.AETHER_GRASS_BLOCK, "Aether Grass Block");
         this.addBlock(AetherIIBlocks.AETHER_DIRT, "Aether Dirt");
+        this.addBlock(AetherIIBlocks.AETHER_FARMLAND, "Aether Farmland");
+        this.addBlock(AetherIIBlocks.AETHER_DIRT_PATH, "Aether Dirt Path");
+
         this.addBlock(AetherIIBlocks.QUICKSOIL, "Quicksoil");
         this.addBlock(AetherIIBlocks.HOLYSTONE, "Holystone");
         this.addBlock(AetherIIBlocks.MOSSY_HOLYSTONE, "Mossy Holystone");
         this.addBlock(AetherIIBlocks.UNDERSHALE, "Undershale");
+        this.addBlock(AetherIIBlocks.AGIOSITE, "Agiosite");
 
         this.addBlock(AetherIIBlocks.AMBROSIUM_ORE, "Ambrosium Ore");
         this.addBlock(AetherIIBlocks.ZANITE_ORE, "Zanite Ore");
@@ -30,12 +35,19 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.GRAVITITE_ORE, "Gravitite Ore");
 
         this.addBlock(AetherIIBlocks.COLD_AERCLOUD, "Cold Aercloud");
+        this.addBlock(AetherIIBlocks.BLUE_AERCLOUD, "Blue Aercloud");
+        this.addBlock(AetherIIBlocks.GOLDEN_AERCLOUD, "Golden Aercloud");
+        this.addBlock(AetherIIBlocks.GREEN_AERCLOUD, "Green Aercloud");
+        this.addBlock(AetherIIBlocks.PURPLE_AERCLOUD, "Purple Aercloud");
+        this.addBlock(AetherIIBlocks.STORM_AERCLOUD, "Storm Aercloud");
 
         this.addBlock(AetherIIBlocks.SKYROOT_LOG, "Skyroot Log");
+        this.addBlock(AetherIIBlocks.STRIPPED_SKYROOT_LOG, "Stripped Skyroot Log");
         this.addBlock(AetherIIBlocks.GREATROOT_LOG, "Greatroot Log");
         this.addBlock(AetherIIBlocks.WISPROOT_LOG, "Wisproot Log");
         this.addBlock(AetherIIBlocks.AMBEROOT_LOG, "Amberoot Log");
         this.addBlock(AetherIIBlocks.SKYROOT_WOOD, "Skyroot Wood");
+        this.addBlock(AetherIIBlocks.STRIPPED_SKYROOT_WOOD, "Stripped Skyroot Wood");
         this.addBlock(AetherIIBlocks.GREATROOT_WOOD, "Greatroot Wood");
         this.addBlock(AetherIIBlocks.WISPROOT_WOOD, "Wisproot Wood");
         this.addBlock(AetherIIBlocks.AMBEROOT_WOOD, "Amberoot Wood");
@@ -50,6 +62,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.GREATOAK_LEAVES, "Greatoak Leaves");
         this.addBlock(AetherIIBlocks.GREATBOA_LEAVES, "Greatboa Leaves");
         this.addBlock(AetherIIBlocks.AMBEROOT_LEAVES, "Amberoot Leaves");
+
+        this.addBlock(AetherIIBlocks.WOVEN_SKYROOT_STICKS, "Woven Skyroot Sticks");
 
         this.addBlock(AetherIIBlocks.SKYROOT_PLANKS, "Skyroot Planks");
         this.addBlock(AetherIIBlocks.SKYROOT_STAIRS, "Skyroot Stairs");
@@ -77,10 +91,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.WISPROOT_BUTTON, "Wisproot Button");
         this.addBlock(AetherIIBlocks.WISPROOT_PRESSURE_PLATE, "Wisproot Pressure Plate");
 
-        this.addBlock(AetherIIBlocks.HOLYSTONE_BUTTON, "Holystone Button");
         this.addBlock(AetherIIBlocks.HOLYSTONE_STAIRS, "Holystone Stairs");
         this.addBlock(AetherIIBlocks.HOLYSTONE_SLAB, "Holystone Slab");
         this.addBlock(AetherIIBlocks.HOLYSTONE_WALL, "Holystone Wall");
+        this.addBlock(AetherIIBlocks.HOLYSTONE_BUTTON, "Holystone Button");
         this.addBlock(AetherIIBlocks.HOLYSTONE_PRESSURE_PLATE, "Holystone Pressure Plate");
 
         this.addBlock(AetherIIBlocks.MOSSY_HOLYSTONE_STAIRS, "Mossy Holystone Stairs");
@@ -92,14 +106,32 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.HOLYSTONE_BRICK_SLAB, "Holystone Brick Slab");
         this.addBlock(AetherIIBlocks.HOLYSTONE_BRICK_WALL, "Holystone Brick Wall");
 
+        this.addBlock(AetherIIBlocks.UNDERSHALE_STAIRS, "Undershale Stairs");
+        this.addBlock(AetherIIBlocks.UNDERSHALE_SLAB, "Undershale Slab");
+        this.addBlock(AetherIIBlocks.UNDERSHALE_WALL, "Undershale Wall");
+
+        this.addBlock(AetherIIBlocks.AGIOSITE_STAIRS, "Agiosite Stairs");
+        this.addBlock(AetherIIBlocks.AGIOSITE_SLAB, "Agiosite Slab");
+        this.addBlock(AetherIIBlocks.AGIOSITE_WALL, "Agiosite Wall");
+
+        this.addBlock(AetherIIBlocks.AGIOSITE_BRICKS, "Agiosite Bricks");
+        this.addBlock(AetherIIBlocks.AGIOSITE_BRICK_STAIRS, "Agiosite Brick Stairs");
+        this.addBlock(AetherIIBlocks.AGIOSITE_BRICK_SLAB, "Agiosite Brick Slab");
+        this.addBlock(AetherIIBlocks.AGIOSITE_BRICK_WALL, "Agiosite Brick Wall");
+
         this.addBlock(AetherIIBlocks.QUICKSOIL_GLASS, "Quicksoil Glass");
         this.addBlock(AetherIIBlocks.QUICKSOIL_GLASS_PANE, "Quicksoil Glass Pane");
 
         this.addBlock(AetherIIBlocks.CLOUDWOOL, "Cloudwool");
         this.addBlock(AetherIIBlocks.CLOUDWOOL_CARPET, "Cloudwool Carpet");
 
+        this.addBlock(AetherIIBlocks.AMBROSIUM_BLOCK, "Block of Ambrosium");
+        this.addBlock(AetherIIBlocks.ZANITE_BLOCK, "Block of Zanite");
+        this.addBlock(AetherIIBlocks.GRAVITITE_BLOCK, "Block of Gravitite");
+
         this.addBlock(AetherIIBlocks.AMBROSIUM_TORCH, "Ambrosium Torch");
         this.addBlock(AetherIIBlocks.SKYROOT_CRAFTING_TABLE, "Skyroot Crafting Table");
+        this.addBlock(AetherIIBlocks.HOLYSTONE_FURNACE, "Holystone Furnace");
         this.addBlock(AetherIIBlocks.SKYROOT_LADDER, "Skyroot Ladder");
 
 
@@ -155,6 +187,13 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.BURRUKAI_PELT, "Burrukai Pelt");
         this.addItem(AetherIIItems.AECHOR_PETAL, "Aechor Petal");
 
+        this.addItem(AetherIIItems.BLUEBERRY, "Blueberry");
+        this.addItem(AetherIIItems.ENCHANTED_BERRY, "Enchanted Berry");
+        this.addItem(AetherIIItems.ORANGE, "Orange");
+        this.addItem(AetherIIItems.WYNDBERRY, "Wyndberry");
+        this.addItem(AetherIIItems.BLUE_SWET_JELLY, "Blue Swet Jelly");
+        this.addItem(AetherIIItems.GOLDEN_SWET_JELLY, "Golden Swet Jelly");
+
         this.addItem(AetherIIItems.AETHER_PORTAL_FRAME, "Aether Portal Frame");
 
         this.addDamageTypeTooltip("slash", "Slash Damage");
@@ -179,6 +218,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         this.addSubtitle("block", "aether_portal.ambient", "Aether Portal whooshes");
         this.addSubtitle("block", "aether_portal.trigger", "Aether Portal noise intensifies");
+        this.addSubtitle("block", "aercloud.blue_aercloud_bounce", "Blue Aercloud bounces");
+
+        this.addContainerType(AetherIIMenuTypes.HOLYSTONE_FURNACE, "Holystone Furnace");
 
         this.addPackDescription("mod", "Aether II Resources");
     }

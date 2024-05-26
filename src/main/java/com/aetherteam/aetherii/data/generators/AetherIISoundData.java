@@ -26,6 +26,10 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                 definition().with(sound("aether_ii:block/portal/trigger"))
                         .subtitle("subtitles.aether_ii.block.aether_portal.trigger")
         );
+        this.add(AetherIISoundEvents.BLOCK_BLUE_AERCLOUD_BOUNCE,
+                definition().with(sound("aether_ii:block/aercloud/blue_aercloud_bounce"))
+                        .subtitle("subtitles.aether_ii.block.aercloud.blue_aercloud_bounce")
+        );
 
         // Music
 //        this.add(AetherIISoundEvents.MUSIC_HIGHFIELDS,

@@ -25,7 +25,7 @@ import java.util.function.Supplier;
 /**
  * Capability class for handling portal and teleportation behavior for the Aether.
  *
- * @see PortalTeleportationHooks.PortalTeleportationHooks
+ * @see PortalTeleportationHooks
  */
 public class PortalTeleportationAttachment implements INBTSynchable {
     private boolean canGetPortal = true;
@@ -44,8 +44,8 @@ public class PortalTeleportationAttachment implements INBTSynchable {
     private boolean shouldSyncBetweenClients;
 
     public static final Codec<PortalTeleportationAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-        Codec.BOOL.fieldOf("can_get_portal").forGetter(PortalTeleportationAttachment::canGetPortal),
-        Codec.BOOL.fieldOf("can_spawn_in_aether").forGetter(PortalTeleportationAttachment::canSpawnInAether)
+            Codec.BOOL.fieldOf("can_get_portal").forGetter(PortalTeleportationAttachment::canGetPortal),
+            Codec.BOOL.fieldOf("can_spawn_in_aether").forGetter(PortalTeleportationAttachment::canSpawnInAether)
     ).apply(instance, PortalTeleportationAttachment::new));
 
     public PortalTeleportationAttachment() { }
