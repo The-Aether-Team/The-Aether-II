@@ -31,18 +31,34 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.AETHER_PORTAL_BLACKLIST);
         this.tag(AetherIITags.Blocks.AETHER_DIRT).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
-                AetherIIBlocks.AETHER_DIRT.get());
+                AetherIIBlocks.AETHER_DIRT.get()
+        );
+        this.tag(AetherIITags.Blocks.HOLYSTONE).add(
+                AetherIIBlocks.HOLYSTONE.get(),
+                AetherIIBlocks.MOSSY_HOLYSTONE.get()
+        );
         this.tag(AetherIITags.Blocks.AERCLOUDS).add(
-                AetherIIBlocks.COLD_AERCLOUD.get());
+                AetherIIBlocks.COLD_AERCLOUD.get(),
+                AetherIIBlocks.BLUE_AERCLOUD.get(),
+                AetherIIBlocks.GOLDEN_AERCLOUD.get(),
+                AetherIIBlocks.GREEN_AERCLOUD.get(),
+                AetherIIBlocks.PURPLE_AERCLOUD.get(),
+                AetherIIBlocks.STORM_AERCLOUD.get()
+        );
         this.tag(AetherIITags.Blocks.SKYROOT_LOGS).add(
                 AetherIIBlocks.SKYROOT_LOG.get(),
-                AetherIIBlocks.SKYROOT_WOOD.get());
+                AetherIIBlocks.SKYROOT_WOOD.get(),
+                AetherIIBlocks.STRIPPED_SKYROOT_LOG.get(),
+                AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get()
+        );
         this.tag(AetherIITags.Blocks.GREATROOT_LOGS).add(
                 AetherIIBlocks.GREATROOT_LOG.get(),
-                AetherIIBlocks.GREATROOT_WOOD.get());
+                AetherIIBlocks.GREATROOT_WOOD.get()
+        );
         this.tag(AetherIITags.Blocks.WISPROOT_LOGS).add(
                 AetherIIBlocks.WISPROOT_LOG.get(),
-                AetherIIBlocks.WISPROOT_WOOD.get());
+                AetherIIBlocks.WISPROOT_WOOD.get()
+        );
         this.tag(AetherIITags.Blocks.AMBEROOT_LOGS).add(
                 AetherIIBlocks.AMBEROOT_LOG.get(),
                 AetherIIBlocks.AMBEROOT_WOOD.get());
@@ -51,85 +67,120 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(BlockTags.WOODEN_STAIRS).add(
                 AetherIIBlocks.SKYROOT_STAIRS.get(),
                 AetherIIBlocks.GREATROOT_STAIRS.get(),
-                AetherIIBlocks.WISPROOT_STAIRS.get());
+                AetherIIBlocks.WISPROOT_STAIRS.get()
+        );
+        this.tag(BlockTags.STAIRS).add(
+                AetherIIBlocks.UNDERSHALE_STAIRS.get(),
+                AetherIIBlocks.AGIOSITE_STAIRS.get(),
+                AetherIIBlocks.AGIOSITE_BRICK_STAIRS.get()
+        );
         this.tag(BlockTags.WOODEN_SLABS).add(
                 AetherIIBlocks.SKYROOT_SLAB.get(),
-                AetherIIBlocks.GREATROOT_SLAB.get(),
-                AetherIIBlocks.WISPROOT_SLAB.get());
+                AetherIIBlocks.GREATROOT_STAIRS.get(),
+                AetherIIBlocks.WISPROOT_STAIRS.get()
+        );
+        this.tag(BlockTags.SLABS).add(
+                AetherIIBlocks.UNDERSHALE_SLAB.get(),
+                AetherIIBlocks.AGIOSITE_SLAB.get(),
+                AetherIIBlocks.AGIOSITE_BRICK_SLAB.get()
+        );
+        this.tag(BlockTags.WALLS).add(
+                AetherIIBlocks.HOLYSTONE_WALL.get(),
+                AetherIIBlocks.MOSSY_HOLYSTONE_WALL.get(),
+                AetherIIBlocks.HOLYSTONE_BRICK_WALL.get(),
+                AetherIIBlocks.UNDERSHALE_WALL.get(),
+                AetherIIBlocks.AGIOSITE_WALL.get(),
+                AetherIIBlocks.AGIOSITE_BRICK_WALL.get()
+        );
         this.tag(BlockTags.WOODEN_FENCES).add(
                 AetherIIBlocks.SKYROOT_FENCE.get(),
                 AetherIIBlocks.GREATROOT_FENCE.get(),
-                AetherIIBlocks.WISPROOT_FENCE.get());
+                AetherIIBlocks.WISPROOT_FENCE.get()
+        );
         this.tag(BlockTags.WOODEN_BUTTONS).add(
                 AetherIIBlocks.SKYROOT_BUTTON.get(),
                 AetherIIBlocks.GREATROOT_BUTTON.get(),
-                AetherIIBlocks.WISPROOT_BUTTON.get());
+                AetherIIBlocks.WISPROOT_BUTTON.get()
+        );
         this.tag(BlockTags.WOODEN_PRESSURE_PLATES).add(
                 AetherIIBlocks.SKYROOT_PRESSURE_PLATE.get(),
                 AetherIIBlocks.GREATROOT_PRESSURE_PLATE.get(),
-                AetherIIBlocks.WISPROOT_PRESSURE_PLATE.get());
+                AetherIIBlocks.WISPROOT_PRESSURE_PLATE.get()
+        );
         this.tag(BlockTags.BUTTONS).add(
                 AetherIIBlocks.SKYROOT_BUTTON.get(),
                 AetherIIBlocks.GREATROOT_BUTTON.get(),
                 AetherIIBlocks.WISPROOT_BUTTON.get(),
-                AetherIIBlocks.HOLYSTONE_BUTTON.get());
-        this.tag(BlockTags.STONE_BUTTONS).add(AetherIIBlocks.HOLYSTONE_BUTTON.get());
+                AetherIIBlocks.HOLYSTONE_BUTTON.get()
+        );
+        this.tag(BlockTags.STONE_BUTTONS).add(AetherIIBlocks.HOLYSTONE_BUTTON.get()
+        );
         this.tag(BlockTags.PRESSURE_PLATES).add(
                 AetherIIBlocks.SKYROOT_PRESSURE_PLATE.get(),
                 AetherIIBlocks.GREATROOT_PRESSURE_PLATE.get(),
                 AetherIIBlocks.WISPROOT_PRESSURE_PLATE.get(),
-                AetherIIBlocks.HOLYSTONE_PRESSURE_PLATE.get());
+                AetherIIBlocks.HOLYSTONE_PRESSURE_PLATE.get()
+        );
         this.tag(BlockTags.FENCE_GATES).add(
                 AetherIIBlocks.SKYROOT_FENCE_GATE.get(),
                 AetherIIBlocks.GREATROOT_FENCE_GATE.get(),
-                AetherIIBlocks.WISPROOT_FENCE_GATE.get());
+                AetherIIBlocks.WISPROOT_FENCE_GATE.get()
+        );
         this.tag(BlockTags.LOGS_THAT_BURN).addTags(
                 AetherIITags.Blocks.SKYROOT_LOGS,
                 AetherIITags.Blocks.GREATROOT_LOGS,
                 AetherIITags.Blocks.WISPROOT_LOGS,
-                AetherIITags.Blocks.AMBEROOT_LOGS);
-        this.tag(BlockTags.STAIRS).add(
-                AetherIIBlocks.SKYROOT_STAIRS.get(),
-                AetherIIBlocks.GREATROOT_STAIRS.get(),
-                AetherIIBlocks.WISPROOT_STAIRS.get());
-        this.tag(BlockTags.SLABS).add(
-                AetherIIBlocks.SKYROOT_SLAB.get(),
-                AetherIIBlocks.GREATROOT_STAIRS.get(),
-                AetherIIBlocks.WISPROOT_STAIRS.get());
-        this.tag(BlockTags.WALLS).add(
-                AetherIIBlocks.HOLYSTONE_WALL.get(),
-                AetherIIBlocks.MOSSY_HOLYSTONE_WALL.get(),
-                AetherIIBlocks.HOLYSTONE_BRICK_WALL.get());
+                AetherIITags.Blocks.AMBEROOT_LOGS
+        );
         this.tag(BlockTags.WOODEN_DOORS).add(
-                AetherIIBlocks.SKYROOT_DOOR.get());
+                AetherIIBlocks.SKYROOT_DOOR.get()
+        );
         this.tag(BlockTags.WOODEN_TRAPDOORS).add(
-                AetherIIBlocks.SKYROOT_TRAPDOOR.get());
-        this.tag(BlockTags.WOOL).add(
-                AetherIIBlocks.CLOUDWOOL.get()
+                AetherIIBlocks.SKYROOT_TRAPDOOR.get()
         );
-        this.tag(BlockTags.WOOL_CARPETS).add(
-                AetherIIBlocks.CLOUDWOOL_CARPET.get()
-        );
-        this.tag(BlockTags.CLIMBABLE).add(
-                AetherIIBlocks.SKYROOT_LADDER.get()
+        this.tag(BlockTags.WOOL).add(AetherIIBlocks.CLOUDWOOL.get());
+        this.tag(BlockTags.WOOL_CARPETS).add(AetherIIBlocks.CLOUDWOOL_CARPET.get());
+        this.tag(BlockTags.CLIMBABLE).add(AetherIIBlocks.SKYROOT_LADDER.get());
+        this.tag(BlockTags.BEACON_BASE_BLOCKS).add(
+                AetherIIBlocks.AMBROSIUM_BLOCK.get(),
+                AetherIIBlocks.ZANITE_BLOCK.get(),
+                AetherIIBlocks.GRAVITITE_BLOCK.get()
         );
 
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
                 AetherIIBlocks.HOLYSTONE.get(),
+                AetherIIBlocks.MOSSY_HOLYSTONE.get(),
                 AetherIIBlocks.UNDERSHALE.get(),
+                AetherIIBlocks.AGIOSITE.get(),
                 AetherIIBlocks.AMBROSIUM_ORE.get(),
                 AetherIIBlocks.ZANITE_ORE.get(),
                 AetherIIBlocks.ARKENIUM_ORE.get(),
                 AetherIIBlocks.GRAVITITE_ORE.get(),
-                AetherIIBlocks.HOLYSTONE_BUTTON.get(),
-                AetherIIBlocks.HOLYSTONE_PRESSURE_PLATE.get(),
-                AetherIIBlocks.HOLYSTONE_WALL.get(),
                 AetherIIBlocks.HOLYSTONE_STAIRS.get(),
                 AetherIIBlocks.HOLYSTONE_SLAB.get(),
+                AetherIIBlocks.HOLYSTONE_WALL.get(),
+                AetherIIBlocks.HOLYSTONE_BUTTON.get(),
+                AetherIIBlocks.HOLYSTONE_PRESSURE_PLATE.get(),
+                AetherIIBlocks.MOSSY_HOLYSTONE_STAIRS.get(),
+                AetherIIBlocks.MOSSY_HOLYSTONE_SLAB.get(),
+                AetherIIBlocks.MOSSY_HOLYSTONE_WALL.get(),
                 AetherIIBlocks.HOLYSTONE_BRICKS.get(),
-                AetherIIBlocks.HOLYSTONE_BRICK_WALL.get(),
                 AetherIIBlocks.HOLYSTONE_BRICK_STAIRS.get(),
-                AetherIIBlocks.HOLYSTONE_BRICK_SLAB.get()
+                AetherIIBlocks.HOLYSTONE_BRICK_SLAB.get(),
+                AetherIIBlocks.HOLYSTONE_BRICK_WALL.get(),
+                AetherIIBlocks.UNDERSHALE_STAIRS.get(),
+                AetherIIBlocks.UNDERSHALE_SLAB.get(),
+                AetherIIBlocks.UNDERSHALE_WALL.get(),
+                AetherIIBlocks.AGIOSITE_STAIRS.get(),
+                AetherIIBlocks.AGIOSITE_SLAB.get(),
+                AetherIIBlocks.AGIOSITE_WALL.get(),
+                AetherIIBlocks.AGIOSITE_BRICKS.get(),
+                AetherIIBlocks.AGIOSITE_BRICK_STAIRS.get(),
+                AetherIIBlocks.AGIOSITE_BRICK_SLAB.get(),
+                AetherIIBlocks.AGIOSITE_BRICK_WALL.get(),
+                AetherIIBlocks.AMBROSIUM_BLOCK.get(),
+                AetherIIBlocks.ZANITE_BLOCK.get(),
+                AetherIIBlocks.GRAVITITE_BLOCK.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_AXE).add(
                 AetherIIBlocks.SKYROOT_LOG.get(),
@@ -166,10 +217,17 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
                 AetherIIBlocks.AETHER_DIRT.get(),
+                AetherIIBlocks.AETHER_FARMLAND.get(),
+                AetherIIBlocks.AETHER_DIRT_PATH.get(),
                 AetherIIBlocks.QUICKSOIL.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_HOE).add(
                 AetherIIBlocks.COLD_AERCLOUD.get(),
+                AetherIIBlocks.BLUE_AERCLOUD.get(),
+                AetherIIBlocks.GOLDEN_AERCLOUD.get(),
+                AetherIIBlocks.GREEN_AERCLOUD.get(),
+                AetherIIBlocks.PURPLE_AERCLOUD.get(),
+                AetherIIBlocks.STORM_AERCLOUD.get(),
                 AetherIIBlocks.SKYROOT_LEAVES.get(),
                 AetherIIBlocks.SKYPLANE_LEAVES.get(),
                 AetherIIBlocks.SKYBIRCH_LEAVES.get(),
@@ -179,24 +237,34 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.GREATROOT_LEAVES.get(),
                 AetherIIBlocks.GREATOAK_LEAVES.get(),
                 AetherIIBlocks.GREATBOA_LEAVES.get(),
-                AetherIIBlocks.AMBEROOT_LEAVES.get()
+                AetherIIBlocks.AMBEROOT_LEAVES.get(),
+                AetherIIBlocks.WOVEN_SKYROOT_STICKS.get()
         );
         this.tag(BlockTags.NEEDS_STONE_TOOL).add(
-                AetherIIBlocks.ZANITE_ORE.get()
+                AetherIIBlocks.ZANITE_ORE.get(),
+                AetherIIBlocks.ZANITE_BLOCK.get()
         );
         this.tag(BlockTags.NEEDS_IRON_TOOL).add(
                 AetherIIBlocks.ARKENIUM_ORE.get(),
-                AetherIIBlocks.GRAVITITE_ORE.get()
+                AetherIIBlocks.GRAVITITE_ORE.get(),
+                AetherIIBlocks.GRAVITITE_BLOCK.get()
         );
 
         // Forge
         this.tag(Tags.Blocks.FENCE_GATES_WOODEN).add(
                 AetherIIBlocks.SKYROOT_FENCE_GATE.get(),
                 AetherIIBlocks.GREATROOT_FENCE_GATE.get(),
-                AetherIIBlocks.WISPROOT_FENCE_GATE.get());
+                AetherIIBlocks.WISPROOT_FENCE_GATE.get()
+        );
         this.tag(Tags.Blocks.FENCES_WOODEN).add(
                 AetherIIBlocks.SKYROOT_FENCE.get(),
                 AetherIIBlocks.GREATROOT_FENCE.get(),
-                AetherIIBlocks.WISPROOT_FENCE.get());
+                AetherIIBlocks.WISPROOT_FENCE.get()
+        );
+        this.tag(Tags.Blocks.STORAGE_BLOCKS).add(
+                AetherIIBlocks.AMBROSIUM_BLOCK.get(),
+                AetherIIBlocks.ZANITE_BLOCK.get(),
+                AetherIIBlocks.GRAVITITE_BLOCK.get()
+        );
     }
 }

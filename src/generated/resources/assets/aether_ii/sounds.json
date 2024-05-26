@@ -18,5 +18,11 @@
       "aether_ii:block/portal/trigger"
     ],
     "subtitle": "subtitles.aether_ii.block.aether_portal.trigger"
+  },
+  "block.blue_aercloud.bounce": {
+    "sounds": [
+      "aether_ii:block/aercloud/blue_aercloud_bounce"
+    ],
+    "subtitle": "subtitles.aether_ii.block.aercloud.blue_aercloud_bounce"
   }
 }

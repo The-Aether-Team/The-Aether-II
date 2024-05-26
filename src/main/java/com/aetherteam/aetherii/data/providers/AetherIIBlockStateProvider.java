@@ -1,20 +1,49 @@
 package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.block.construction.AetherFarmBlock;
+import com.aetherteam.aetherii.block.natural.PurpleAercloudBlock;
 import com.aetherteam.nitrogen.data.providers.NitrogenBlockStateProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LadderBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.registries.DeferredBlock;
 
 public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvider {
     public AetherIIBlockStateProvider(PackOutput output, String id, ExistingFileHelper helper) {
         super(output, id, helper);
+    }
+
+
+    public void farmland(Block block, Block dirtBlock) {
+        ModelFile farmland = this.models().withExistingParent(this.name(block), this.mcLoc("block/template_farmland"))
+                .texture("dirt", this.modLoc("block/natural/" + this.name(dirtBlock)))
+                .texture("top", this.modLoc("block/construction/" + this.name(block)));
+        ModelFile moist = this.models().withExistingParent(this.name(block) + "_moist", mcLoc("block/template_farmland"))
+                .texture("dirt", this.modLoc("block/natural/" + this.name(dirtBlock)))
+                .texture("top", this.modLoc("block/construction/" + this.name(block) + "_moist"));
+        this.getVariantBuilder(block).forAllStatesExcept(state -> {
+            int moisture = state.getValue(AetherFarmBlock.MOISTURE);
+            return ConfiguredModel.builder()
+                    .modelFile(moisture < AetherFarmBlock.MAX_MOISTURE ? farmland : moist)
+                    .build();
+        });
+    }
+
+    public void dirtPath(Block block, Block dirtBlock) {
+        ModelFile path = this.models().withExistingParent(this.name(block), this.mcLoc("block/dirt_path"))
+                .texture("particle", this.modLoc("block/natural/" + this.name(dirtBlock)))
+                .texture("top", this.modLoc("block/construction/" + this.name(block) + "_top"))
+                .texture("side", this.modLoc("block/construction/" + this.name(block) + "_side"))
+                .texture("bottom", this.modLoc("block/natural/" + this.name(dirtBlock)));
+        this.getVariantBuilder(block).forAllStatesExcept(state -> ConfiguredModel.allYRotations(path, 0, false));
     }
 
     public void aercloudAll(Block block, String location) {
@@ -72,6 +101,34 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(model));
     }
 
+    public void purpleAercloud(Block block) {
+        String blockName = this.name(block);
+        ResourceLocation front = this.extend(this.texture(this.name(block), "natural/"), "_front");
+        ResourceLocation back = this.extend(this.texture(this.name(block), "natural/"), "_back");
+        ResourceLocation right = this.extend(this.texture(this.name(block), "natural/"), "_right");
+        ResourceLocation left = this.extend(this.texture(this.name(block), "natural/"), "_left");
+        ModelFile rightModel = this.models().cubeBottomTop(blockName, right, back, front).renderType(new ResourceLocation("translucent"));
+        ModelFile leftModel = this.models().cubeBottomTop(blockName, left, back, front).renderType(new ResourceLocation("translucent"));
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
+            Direction direction = state.getValue(PurpleAercloudBlock.FACING);
+            switch(direction) {
+                case NORTH -> {
+                    return ConfiguredModel.builder().modelFile(leftModel).rotationX(90).build();
+                }
+                case SOUTH -> {
+                    return ConfiguredModel.builder().modelFile(rightModel).rotationX(-90).build();
+                }
+                case WEST -> {
+                    return ConfiguredModel.builder().modelFile(leftModel).rotationX(-90).rotationY(90).build();
+                }
+                case EAST -> {
+                    return ConfiguredModel.builder().modelFile(rightModel).rotationX(90).rotationY(90).build();
+                }
+            }
+            return ConfiguredModel.builder().build();
+        });
+    }
+
     public void logDifferentTop(RotatedPillarBlock block, RotatedPillarBlock baseBlock) {
         this.axisBlock(block, this.texture(this.name(block), "natural/"), this.extend(this.texture(this.name(baseBlock), "natural/"), "_top"));
     }
@@ -91,6 +148,51 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                         this.extend(this.texture(this.name(block), "utility/"), "_side"))
                 .texture("particle", this.extend(this.texture(this.name(block), "utility/"), "_front"));
         this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(workbench));
+    }
+
+
+    public void holystoneFurnace(Block block) {
+        String blockName = this.name(block);
+        ResourceLocation side = this.extend(this.texture(this.name(block), "utility/"), "_side");
+        ResourceLocation front_on =  this.extend(this.texture(this.name(block), "utility/"), "_front_on");
+        ResourceLocation front =  this.extend(this.texture(this.name(block), "utility/"), "_front");
+        ResourceLocation top = this.extend(this.texture(this.name(block), "utility/"), "_top");
+        ModelFile normal = this.models().orientable(blockName, side, front, top);
+        ModelFile lit = this.models().orientable(blockName + "_on", side, front_on, top);
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
+            Direction direction = state.getValue(AbstractFurnaceBlock.FACING);
+            if (state.getValue(AbstractFurnaceBlock.LIT))
+                switch (direction) {
+                    case NORTH -> {
+                        return ConfiguredModel.builder().modelFile(lit).build();
+                    }
+                    case SOUTH -> {
+                        return ConfiguredModel.builder().modelFile(lit).rotationY(180).build();
+                    }
+                    case WEST -> {
+                        return ConfiguredModel.builder().modelFile(lit).rotationY(270).build();
+                    }
+                    case EAST -> {
+                        return ConfiguredModel.builder().modelFile(lit).rotationY(90).build();
+                    }
+                }
+            else
+                switch (direction) {
+                    case NORTH -> {
+                        return ConfiguredModel.builder().modelFile(normal).build();
+                    }
+                    case SOUTH -> {
+                        return ConfiguredModel.builder().modelFile(normal).rotationY(180).build();
+                    }
+                    case WEST -> {
+                        return ConfiguredModel.builder().modelFile(normal).rotationY(270).build();
+                    }
+                    case EAST -> {
+                        return ConfiguredModel.builder().modelFile(normal).rotationY(90).build();
+                    }
+                }
+            return ConfiguredModel.builder().build();
+        });
     }
 
     public void skyrootLadder(LadderBlock block) {

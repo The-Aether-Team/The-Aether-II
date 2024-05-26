@@ -22,12 +22,24 @@
     [],
     [],
     [],
-    [],
+    [
+      "aether_ii:ore_agiosite",
+      "aether_ii:ore_ambrosium",
+      "aether_ii:ore_zanite",
+      "aether_ii:ore_arkenium",
+      "aether_ii:ore_gravitite_buried",
+      "aether_ii:ore_gravitite"
+    ],
     [],
     [],
     [],
     [
-      "aether_ii:cold_aercloud"
+      "aether_ii:cold_aercloud",
+      "aether_ii:blue_aercloud",
+      "aether_ii:golden_aercloud",
+      "aether_ii:green_aercloud",
+      "aether_ii:purple_aercloud",
+      "aether_ii:storm_aercloud"
     ]
   ],
   "has_precipitation": false,

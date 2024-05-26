@@ -1,0 +1,12 @@
+{
+  "type": "aether_ii:aercloud",
+  "config": {
+    "blocks": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aether_ii:golden_aercloud"
+      }
+    },
+    "bounds": 4
+  }
+}
