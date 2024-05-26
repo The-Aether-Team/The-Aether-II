@@ -221,6 +221,11 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(BlockTags.MINEABLE_WITH_HOE).add(
                 AetherIIBlocks.COLD_AERCLOUD.get(),
+                AetherIIBlocks.BLUE_AERCLOUD.get(),
+                AetherIIBlocks.GOLDEN_AERCLOUD.get(),
+                AetherIIBlocks.GREEN_AERCLOUD.get(),
+                AetherIIBlocks.PURPLE_AERCLOUD.get(),
+                AetherIIBlocks.STORM_AERCLOUD.get(),
                 AetherIIBlocks.SKYROOT_LEAVES.get(),
                 AetherIIBlocks.SKYPLANE_LEAVES.get(),
                 AetherIIBlocks.SKYBIRCH_LEAVES.get(),
