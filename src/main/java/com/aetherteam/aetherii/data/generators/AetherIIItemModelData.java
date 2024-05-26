@@ -66,6 +66,13 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.BURRUKAI_PELT.get(), "materials/");
         this.item(AetherIIItems.AECHOR_PETAL.get(), "materials/");
 
+        this.item(AetherIIItems.BLUEBERRY.get(), "food/");
+        this.item(AetherIIItems.ENCHANTED_BERRY.get(), "food/");
+        this.item(AetherIIItems.ORANGE.get(), "food/");
+        this.item(AetherIIItems.WYNDBERRY.get(), "food/");
+        this.item(AetherIIItems.BLUE_SWET_JELLY.get(), "food/");
+        this.item(AetherIIItems.GOLDEN_SWET_JELLY.get(), "food/");
+
         this.portalItem(AetherIIItems.AETHER_PORTAL_FRAME.get(), "miscellaneous/");
 
         this.itemBlock(AetherIIBlocks.AETHER_GRASS_BLOCK.get());

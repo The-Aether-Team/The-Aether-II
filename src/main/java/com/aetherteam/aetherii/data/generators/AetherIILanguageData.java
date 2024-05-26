@@ -158,6 +158,13 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.BURRUKAI_PELT, "Burrukai Pelt");
         this.addItem(AetherIIItems.AECHOR_PETAL, "Aechor Petal");
 
+        this.addItem(AetherIIItems.BLUEBERRY, "Blueberry");
+        this.addItem(AetherIIItems.ENCHANTED_BERRY, "Enchanted Berry");
+        this.addItem(AetherIIItems.ORANGE, "Orange");
+        this.addItem(AetherIIItems.WYNDBERRY, "Wyndberry");
+        this.addItem(AetherIIItems.BLUE_SWET_JELLY, "Blue Swet Jelly");
+        this.addItem(AetherIIItems.GOLDEN_SWET_JELLY, "Golden Swet Jelly");
+
         this.addItem(AetherIIItems.AETHER_PORTAL_FRAME, "Aether Portal Frame");
 
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_BUILDING_BLOCKS.get(), "Aether II Building Blocks");

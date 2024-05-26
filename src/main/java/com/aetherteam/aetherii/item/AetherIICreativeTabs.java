@@ -187,10 +187,15 @@ public class AetherIICreativeTabs {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_FOOD_AND_DRINKS = CREATIVE_MODE_TABS.register("food_and_drinks", () -> CreativeModeTab.builder()
             .withTabsBefore(new ResourceLocation(AetherII.MODID, "combat"))
             .withTabsAfter(new ResourceLocation(AetherII.MODID, "ingredients"))
-            .icon(() -> new ItemStack(Blocks.STONE))
+            .icon(() -> new ItemStack(AetherIIItems.ORANGE.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".food_and_drinks"))
             .displayItems((features, output) -> {
-
+                output.accept(AetherIIItems.BLUEBERRY.get());
+                output.accept(AetherIIItems.ENCHANTED_BERRY.get());
+                output.accept(AetherIIItems.ORANGE.get());
+                output.accept(AetherIIItems.WYNDBERRY.get());
+                output.accept(AetherIIItems.BLUE_SWET_JELLY.get());
+                output.accept(AetherIIItems.GOLDEN_SWET_JELLY.get());
             }).build());
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_INGREDIENTS = CREATIVE_MODE_TABS.register("ingredients", () -> CreativeModeTab.builder()
             .withTabsBefore(new ResourceLocation(AetherII.MODID, "food_and_drinks"))

@@ -18,6 +18,7 @@ import com.aetherteam.aetherii.item.combat.skyroot.SkyrootSwordItem;
 import com.aetherteam.aetherii.item.combat.zanite.ZaniteHammerItem;
 import com.aetherteam.aetherii.item.combat.zanite.ZaniteSpearItem;
 import com.aetherteam.aetherii.item.combat.zanite.ZaniteSwordItem;
+import com.aetherteam.aetherii.item.food.AetherIIFoods;
 import com.aetherteam.aetherii.item.miscellaneous.AetherPortalItem;
 import com.aetherteam.aetherii.item.tools.skyroot.*;
 import com.aetherteam.aetherii.item.tools.holystone.*;
@@ -90,6 +91,14 @@ public class AetherIIItems {
     public static final DeferredItem<Item> TAEGORE_HIDE = ITEMS.register("taegore_hide", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> BURRUKAI_PELT = ITEMS.register("burrukai_pelt", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> AECHOR_PETAL = ITEMS.register("aechor_petal", () -> new Item(new Item.Properties()));
+
+    // Food
+    public static final DeferredItem<Item> BLUEBERRY = ITEMS.register("blueberry", () -> new Item(new Item.Properties().food(AetherIIFoods.BLUEBERRY)));
+    public static final DeferredItem<Item> ENCHANTED_BERRY = ITEMS.register("enchanted_berry", () -> new Item(new Item.Properties().food(AetherIIFoods.ENCHANTED_BERRY)));
+    public static final DeferredItem<Item> ORANGE = ITEMS.register("orange", () -> new Item(new Item.Properties().food(AetherIIFoods.ORANGE)));
+    public static final DeferredItem<Item> WYNDBERRY = ITEMS.register("wyndberry", () -> new Item(new Item.Properties().food(AetherIIFoods.WYNDBERRY)));
+    public static final DeferredItem<Item> BLUE_SWET_JELLY = ITEMS.register("blue_swet_jelly", () -> new Item(new Item.Properties().food(AetherIIFoods.SWET_JELLY)));
+    public static final DeferredItem<Item> GOLDEN_SWET_JELLY = ITEMS.register("golden_swet_jelly", () -> new Item(new Item.Properties().food(AetherIIFoods.SWET_JELLY)));
 
     // Misc
     public static final DeferredItem<Item> AETHER_PORTAL_FRAME = ITEMS.register("aether_portal_frame", () -> new AetherPortalItem(new Item.Properties().stacksTo(1)));

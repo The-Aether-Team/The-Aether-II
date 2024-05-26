@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-26T09:16:52.8013298	Item Models: aether_ii
+// 1.20.4	2024-05-26T10:03:44.395281	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
 b485bb7a980decbc46719aeaac129689fa3f6a19 assets/aether_ii/models/item/aether_grass_block.json
@@ -19,11 +19,15 @@ b7fda65a71d363a3c17216873453076ccd72ee12 assets/aether_ii/models/item/arkenium_s
 5cdc77ed51a4e270e9d66ab00d1e0e2302609b7e assets/aether_ii/models/item/arkenium_spear.json
 0a49ecb69e9c9148f5f56045b347f368ba647a05 assets/aether_ii/models/item/arkenium_sword.json
 5606c546a7d6835f0c9a25ac6435233d368ca049 assets/aether_ii/models/item/arkenium_trowel.json
+c7551e4548b0c81d85c2d6072e683ba9789cc589 assets/aether_ii/models/item/blueberry.json
+843ecf00bc074daf792dca837106224d7d1be69a assets/aether_ii/models/item/blue_swet_jelly.json
 b1968f6ccd069ed92d37c8a240ad316f8c5b50a1 assets/aether_ii/models/item/burrukai_pelt.json
 e4d13f0d25e81411724a9be96ea4882fe50f6e61 assets/aether_ii/models/item/cloudwool.json
 ed67eff7e6d30b7f6be0b507e140405622a49ed9 assets/aether_ii/models/item/cloudwool_carpet.json
 c313c38e5ff5ca6e3111c583c259bd093cb84542 assets/aether_ii/models/item/cold_aercloud.json
+0a1091ef207642173d2d97fc02de7e8e115c76b4 assets/aether_ii/models/item/enchanted_berry.json
 39571cd6ffeb63576ad03d66e639d854f7ace919 assets/aether_ii/models/item/golden_amber.json
+9f1639adf2587a8e5546a6fdf773dcd9bb42243d assets/aether_ii/models/item/golden_swet_jelly.json
 f8aaafa2ddf04f53ef8bf4a76ce59b7584cd6d92 assets/aether_ii/models/item/gravitite_axe.json
 fd077d028242c5666bf569c1c14519c88d489a83 assets/aether_ii/models/item/gravitite_block.json
 ddd60151b3f9dcc03a0addc6523064eb38234a94 assets/aether_ii/models/item/gravitite_hammer.json
@@ -67,6 +71,7 @@ a146cf9b7567eb6bd1e5a4c2523f6d1f4ec153ad assets/aether_ii/models/item/mossy_holy
 1b577aee3036b910200c7e21424651f9575623f4 assets/aether_ii/models/item/mossy_holystone_slab.json
 3d8c627cbebadfc0db76f81fe4747fef77b8f5c1 assets/aether_ii/models/item/mossy_holystone_stairs.json
 a929cf248f4d81112bcca10919db5b4f544e3a11 assets/aether_ii/models/item/mossy_holystone_wall.json
+bcb2a30fe852ec2766cca8ed8131096018e66b51 assets/aether_ii/models/item/orange.json
 8e37ebdc1c0a7d3958be57b8d394648cdaf9a581 assets/aether_ii/models/item/quicksoil.json
 aa659e5bd10ca0db200402d370084234693fc942 assets/aether_ii/models/item/quicksoil_glass.json
 280fa1a6185b874ce28a0bec8deff7035cae5904 assets/aether_ii/models/item/quicksoil_glass_pane.json
@@ -110,6 +115,7 @@ e83344497594b85c2e077c26de6679ced6e3acc9 assets/aether_ii/models/item/wisproot_p
 e167cd2a4903ede813313aadebb011a5f64d51f9 assets/aether_ii/models/item/wisproot_stairs.json
 4daf67c80f9bae792c17752840d4459839b20d5e assets/aether_ii/models/item/wisproot_wood.json
 962869521316611ce7ea217861b3f90966cce67d assets/aether_ii/models/item/wisptop_leaves.json
+d9caf48d88075318f92f7cdf5167c3790ee94286 assets/aether_ii/models/item/wyndberry.json
 641e5ab39a98fa0a52bd5c5db666b79042ba9888 assets/aether_ii/models/item/zanite_axe.json
 a2bc2f6f301763a350cdb8e56399ee939abf52c4 assets/aether_ii/models/item/zanite_block.json
 10ec1392907d5b55a0e41ac870e8f2e4758ff81d assets/aether_ii/models/item/zanite_gemstone.json
