@@ -4,9 +4,9 @@
     "blocks": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "aether_ii:cold_aercloud"
+        "Name": "aether_ii:golden_aercloud"
       }
     },
-    "bounds": 16
+    "bounds": 4
   }
 }
