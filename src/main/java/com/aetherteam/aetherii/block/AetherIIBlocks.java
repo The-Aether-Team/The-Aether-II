@@ -27,7 +27,7 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class AetherIIBlocks extends AetherIIBlockBuilders { //todo abstract methods for stuff like logs and leaves
+public class AetherIIBlocks extends AetherIIBlockBuilders { //TODO: abstract methods for stuff like logs and leaves
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(AetherII.MODID);
 
     // Portal
@@ -51,7 +51,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders { //todo abstract meth
     // Aerclouds
     public static final DeferredBlock<Block> COLD_AERCLOUD = register("cold_aercloud", () -> new AercloudBlock(Block.Properties.of().mapColor(MapColor.SNOW).instrument(NoteBlockInstrument.FLUTE).strength(0.3F).sound(SoundType.WOOL).noOcclusion().dynamicShape().isRedstoneConductor(AetherIIBlocks::never).isSuffocating(AetherIIBlocks::never).isViewBlocking(AetherIIBlocks::never)));
 
-    // Logs //todo map colors
+    // Logs //TODO: map colors
     public static final DeferredBlock<RotatedPillarBlock> SKYROOT_LOG = register("skyroot_log", () -> new RotatedPillarBlock(Block.Properties.ofFullCopy(Blocks.OAK_LOG)));
     public static final DeferredBlock<RotatedPillarBlock> GREATROOT_LOG = register("greatroot_log", () -> new RotatedPillarBlock(Block.Properties.ofFullCopy(Blocks.OAK_LOG)));
     public static final DeferredBlock<RotatedPillarBlock> WISPROOT_LOG = register("wisproot_log", () -> new RotatedPillarBlock(Block.Properties.ofFullCopy(Blocks.OAK_LOG)));
@@ -67,10 +67,10 @@ public class AetherIIBlocks extends AetherIIBlockBuilders { //todo abstract meth
     public static final DeferredBlock<Block> SKYBIRCH_LEAVES = register("skybirch_leaves", () -> leaves(MapColor.COLOR_LIGHT_BLUE));
     public static final DeferredBlock<Block> SKYPINE_LEAVES = register("skypine_leaves", () -> leaves(MapColor.COLOR_MAGENTA));
     public static final DeferredBlock<Block> WISPROOT_LEAVES = register("wisproot_leaves", () -> leaves(MapColor.DIAMOND));
-    public static final DeferredBlock<Block> WISPTOP_LEAVES = register("wisptop_leaves", () -> leaves(MapColor.TERRACOTTA_MAGENTA));
+    public static final DeferredBlock<Block> WISPTOP_LEAVES = register("wisptop_leaves", () -> leaves(MapColor.COLOR_MAGENTA));
     public static final DeferredBlock<Block> GREATROOT_LEAVES = register("greatroot_leaves", () -> leaves(MapColor.TERRACOTTA_LIGHT_GREEN));
-    public static final DeferredBlock<Block> GREATOAK_LEAVES = register("greatoak_leaves", () -> leaves(MapColor.TERRACOTTA_MAGENTA));
-    public static final DeferredBlock<Block> GREATBOA_LEAVES = register("greatboa_leaves", () -> leaves(MapColor.LAPIS));
+    public static final DeferredBlock<Block> GREATOAK_LEAVES = register("greatoak_leaves", () -> leaves(MapColor.COLOR_MAGENTA));
+    public static final DeferredBlock<Block> GREATBOA_LEAVES = register("greatboa_leaves", () -> leaves(MapColor.COLOR_BLUE));
     public static final DeferredBlock<Block> AMBEROOT_LEAVES = register("amberoot_leaves", () -> leaves(MapColor.GOLD));
 
     // Skyroot Planks
