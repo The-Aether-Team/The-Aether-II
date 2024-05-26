@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-26T17:14:42.1060728	Tags for minecraft:item mod id aether_ii
+// 1.20.4	2024-05-26T19:51:39.3451754	Tags for minecraft:item mod id aether_ii
 95ec6d53b7050fb601add92f08fb248a156b9228 data/aether_ii/tags/items/aerclouds.json
 0c52879ea7524c9c5a2025462b6351d7e81bf251 data/aether_ii/tags/items/aether_dirt.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/aether_ii/tags/items/aether_portal_activation_items.json
@@ -21,6 +21,7 @@ a5df7a36d1179fd70f1778840b38bad71c171e4b data/aether_ii/tags/items/holystone_rep
 dc76002bbf3fed2fede1a66c265d7053b478b240 data/aether_ii/tags/items/rods/skyroot.json
 a7a38000f936642b7fb1aab74c26dbefd5483490 data/aether_ii/tags/items/skyroot_logs.json
 9c63466a4df59334a626bc38a990db8af39f7eb8 data/aether_ii/tags/items/skyroot_repairing.json
+0b72f8aa978e4516ff428e2de46ec5659f601643 data/aether_ii/tags/items/stone_crafting.json
 7e6974b61ae56625dc2ea30ee021d854764eb5d4 data/aether_ii/tags/items/wisproot_logs.json
 50aa3b1be78deaf9aef13985ed1fa0f21fd32bce data/aether_ii/tags/items/zanite_repairing.json
 78ed277ff645a9d01385e71d111abe5236aeecd1 data/forge/tags/items/fences.json

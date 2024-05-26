@@ -7,6 +7,7 @@ import com.aetherteam.nitrogen.data.providers.NitrogenBlockStateProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LadderBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
@@ -147,6 +148,51 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                         this.extend(this.texture(this.name(block), "utility/"), "_side"))
                 .texture("particle", this.extend(this.texture(this.name(block), "utility/"), "_front"));
         this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(workbench));
+    }
+
+
+    public void holystoneFurnace(Block block) {
+        String blockName = this.name(block);
+        ResourceLocation side = this.extend(this.texture(this.name(block), "utility/"), "_side");
+        ResourceLocation front_on =  this.extend(this.texture(this.name(block), "utility/"), "_front_on");
+        ResourceLocation front =  this.extend(this.texture(this.name(block), "utility/"), "_front");
+        ResourceLocation top = this.extend(this.texture(this.name(block), "utility/"), "_top");
+        ModelFile normal = this.models().orientable(blockName, side, front, top);
+        ModelFile lit = this.models().orientable(blockName + "_on", side, front_on, top);
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
+            Direction direction = state.getValue(AbstractFurnaceBlock.FACING);
+            if (state.getValue(AbstractFurnaceBlock.LIT))
+                switch (direction) {
+                    case NORTH -> {
+                        return ConfiguredModel.builder().modelFile(lit).build();
+                    }
+                    case SOUTH -> {
+                        return ConfiguredModel.builder().modelFile(lit).rotationY(180).build();
+                    }
+                    case WEST -> {
+                        return ConfiguredModel.builder().modelFile(lit).rotationY(270).build();
+                    }
+                    case EAST -> {
+                        return ConfiguredModel.builder().modelFile(lit).rotationY(90).build();
+                    }
+                }
+            else
+                switch (direction) {
+                    case NORTH -> {
+                        return ConfiguredModel.builder().modelFile(normal).build();
+                    }
+                    case SOUTH -> {
+                        return ConfiguredModel.builder().modelFile(normal).rotationY(180).build();
+                    }
+                    case WEST -> {
+                        return ConfiguredModel.builder().modelFile(normal).rotationY(270).build();
+                    }
+                    case EAST -> {
+                        return ConfiguredModel.builder().modelFile(normal).rotationY(90).build();
+                    }
+                }
+            return ConfiguredModel.builder().build();
+        });
     }
 
     public void skyrootLadder(LadderBlock block) {

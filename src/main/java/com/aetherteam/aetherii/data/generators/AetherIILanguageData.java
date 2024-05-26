@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.data.generators;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.providers.AetherIILanguageProvider;
+import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.data.PackOutput;
@@ -127,6 +128,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         this.addBlock(AetherIIBlocks.AMBROSIUM_TORCH, "Ambrosium Torch");
         this.addBlock(AetherIIBlocks.SKYROOT_CRAFTING_TABLE, "Skyroot Crafting Table");
+        this.addBlock(AetherIIBlocks.HOLYSTONE_FURNACE, "Holystone Furnace");
         this.addBlock(AetherIIBlocks.SKYROOT_LADDER, "Skyroot Ladder");
 
 
@@ -205,6 +207,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("block", "aether_portal.ambient", "Aether Portal whooshes");
         this.addSubtitle("block", "aether_portal.trigger", "Aether Portal noise intensifies");
         this.addSubtitle("block", "aercloud.blue_aercloud_bounce", "Blue Aercloud bounces");
+
+        this.addContainerType(AetherIIMenuTypes.HOLYSTONE_FURNACE, "Holystone Furnace");
 
         this.addPackDescription("mod", "Aether II Resources");
     }

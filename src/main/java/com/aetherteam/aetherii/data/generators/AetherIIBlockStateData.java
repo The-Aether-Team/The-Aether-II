@@ -124,6 +124,7 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
 
         this.torchBlock(AetherIIBlocks.AMBROSIUM_TORCH.get(), AetherIIBlocks.AMBROSIUM_WALL_TORCH.get());
         this.skyrootCraftingTable(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), "construction/");
+        this.holystoneFurnace(AetherIIBlocks.HOLYSTONE_FURNACE.get());
         this.skyrootLadder(AetherIIBlocks.SKYROOT_LADDER.get());
     }
 }

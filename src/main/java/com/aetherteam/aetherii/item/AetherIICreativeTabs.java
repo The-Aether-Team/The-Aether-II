@@ -143,6 +143,7 @@ public class AetherIICreativeTabs {
             .displayItems((features, output) -> {
                 output.accept(AetherIIBlocks.AMBROSIUM_TORCH.get());
                 output.accept(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get());
+                output.accept(AetherIIBlocks.HOLYSTONE_FURNACE.get());
                 output.accept(AetherIIBlocks.SKYROOT_LADDER.get());
             }).build());
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_REDSTONE_BLOCKS = CREATIVE_MODE_TABS.register("redstone_blocks", () -> CreativeModeTab.builder()

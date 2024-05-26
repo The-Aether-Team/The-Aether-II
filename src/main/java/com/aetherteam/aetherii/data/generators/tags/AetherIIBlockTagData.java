@@ -136,15 +136,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(BlockTags.WOODEN_TRAPDOORS).add(
                 AetherIIBlocks.SKYROOT_TRAPDOOR.get()
         );
-        this.tag(BlockTags.WOOL).add(
-                AetherIIBlocks.CLOUDWOOL.get()
-        );
-        this.tag(BlockTags.WOOL_CARPETS).add(
-                AetherIIBlocks.CLOUDWOOL_CARPET.get()
-        );
-        this.tag(BlockTags.CLIMBABLE).add(
-                AetherIIBlocks.SKYROOT_LADDER.get()
-        );
+        this.tag(BlockTags.WOOL).add(AetherIIBlocks.CLOUDWOOL.get());
+        this.tag(BlockTags.WOOL_CARPETS).add(AetherIIBlocks.CLOUDWOOL_CARPET.get());
+        this.tag(BlockTags.CLIMBABLE).add(AetherIIBlocks.SKYROOT_LADDER.get());
         this.tag(BlockTags.BEACON_BASE_BLOCKS).add(
                 AetherIIBlocks.AMBROSIUM_BLOCK.get(),
                 AetherIIBlocks.ZANITE_BLOCK.get(),

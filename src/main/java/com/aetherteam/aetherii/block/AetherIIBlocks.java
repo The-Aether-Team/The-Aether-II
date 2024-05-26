@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.block.construction.AetherFarmBlock;
 import com.aetherteam.aetherii.block.construction.QuicksoilGlassBlock;
 import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.block.portal.AetherPortalBlock;
+import com.aetherteam.aetherii.block.utility.HolystoneFurnaceBlock;
 import com.aetherteam.aetherii.block.utility.SkyrootCraftingTableBlock;
 import com.aetherteam.aetherii.data.resources.builders.AetherIIBlockBuilders;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -184,6 +185,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders { //TODO: abstract met
     public static final DeferredBlock<Block> AMBROSIUM_TORCH = register("ambrosium_torch", () -> new TorchBlock(ParticleTypes.SMOKE, Block.Properties.ofFullCopy(Blocks.TORCH)));
     public static final DeferredBlock<Block> AMBROSIUM_WALL_TORCH = BLOCKS.register("ambrosium_wall_torch", () -> new WallTorchBlock(ParticleTypes.SMOKE, Block.Properties.ofFullCopy(Blocks.WALL_TORCH)));
     public static final DeferredBlock<Block> SKYROOT_CRAFTING_TABLE = register("skyroot_crafting_table", () -> new SkyrootCraftingTableBlock(Block.Properties.ofFullCopy(Blocks.CRAFTING_TABLE)));
+    public static final DeferredBlock<Block> HOLYSTONE_FURNACE = register("holystone_furnace", () -> new HolystoneFurnaceBlock(Block.Properties.ofFullCopy(Blocks.FURNACE)));
     public static final DeferredBlock<LadderBlock> SKYROOT_LADDER = register("skyroot_ladder", () -> new LadderBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.LADDER).strength(0.4F).sound(SoundType.LADDER).noOcclusion()));
 
     //TODO: Make Wood and Cloudwool flammable

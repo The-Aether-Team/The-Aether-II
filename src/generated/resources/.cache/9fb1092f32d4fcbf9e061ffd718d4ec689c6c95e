@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-26T18:12:39.1969863	Recipes
+// 1.20.4	2024-05-26T19:51:39.3471769	Recipes
 ceeef4aed870f06514a5f5cc998418931c547a22 data/aether_ii/advancements/recipes/building_blocks/agiosite_bricks.json
 0af97e5b955f582510638aeecee94fc57bcf2d1c data/aether_ii/advancements/recipes/building_blocks/agiosite_brick_slab.json
 d211fa2d4f1b2edaad272b7356325c4ddc5de28c data/aether_ii/advancements/recipes/building_blocks/agiosite_brick_stairs.json
@@ -52,6 +52,7 @@ fa42d0866ab65107db0d62898d3ee4deb56e6658 data/aether_ii/advancements/recipes/dec
 ca45044da37957837d6649ec90f795c46617bb8f data/aether_ii/advancements/recipes/decorations/cloudwool_carpet.json
 1e235ca6a2ac7e50cb0102f45859626089110576 data/aether_ii/advancements/recipes/decorations/greatroot_fence.json
 ddc975fb1f9f7b1d3ae9e8adfe7a2cdfc9b16728 data/aether_ii/advancements/recipes/decorations/holystone_brick_wall.json
+58f90b4fc27324ae61956b8a7a79e6f22727fedd data/aether_ii/advancements/recipes/decorations/holystone_furnace.json
 1c3ed48e8f757467a94f552138c84a8c097f3556 data/aether_ii/advancements/recipes/decorations/holystone_wall.json
 4b95915e249a5130db5a82d1afa8ebd1965cff1a data/aether_ii/advancements/recipes/decorations/mossy_holystone_wall.json
 f49142cb40d0a96bfe1ef76cc17266872006bd87 data/aether_ii/advancements/recipes/decorations/quicksoil_glass_pane.json
@@ -161,6 +162,7 @@ cc7067b7fedbcd8b40e4d108c4af2d267983b6d9 data/aether_ii/recipes/holystone_brick_
 c96b78581a5f6606e2ab50348ff1971482902076 data/aether_ii/recipes/holystone_brick_stairs.json
 a28be291c33be9cb1dd4b5ccbb8d1f74ec3152b1 data/aether_ii/recipes/holystone_brick_wall.json
 8de03ecd28f146077b6c4177d86fa5309e774b0d data/aether_ii/recipes/holystone_button.json
+4c0e317bc1746b2d5bad46b229c0de0c88b79555 data/aether_ii/recipes/holystone_furnace.json
 5632db5834e3fbb88eca8a87acedc0ba2366e7fb data/aether_ii/recipes/holystone_hammer.json
 f57a1cf260f384f66c8f2e0928599154190b3a23 data/aether_ii/recipes/holystone_pickaxe.json
 685170f79954d311211c9d1ff34749493c7e7dcc data/aether_ii/recipes/holystone_pressure_plate.json

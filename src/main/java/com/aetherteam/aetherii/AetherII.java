@@ -1,8 +1,8 @@
 package com.aetherteam.aetherii;
 
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
-import com.aetherteam.aetherii.attachment.AetherIIPlayerAttachment;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.client.AetherIIClient;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
@@ -11,6 +11,7 @@ import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.event.listeners.DimensionListener;
 import com.aetherteam.aetherii.event.listeners.abilities.ToolAbilityListener;
 import com.aetherteam.aetherii.event.listeners.attachment.AetherIIPlayerListener;
+import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.network.packet.AetherIIPlayerSyncPacket;
@@ -45,11 +46,13 @@ public class AetherII {
                 AetherIIBlocks.BLOCKS,
                 AetherIIItems.ITEMS,
                 AetherIIEntityTypes.ENTITY_TYPES,
+                AetherIIBlockEntityTypes.BLOCK_ENTITY_TYPES,
                 AetherIICreativeTabs.CREATIVE_MODE_TABS,
                 AetherIIFeatures.FEATURES,
                 AetherIIStructureTypes.STRUCTURE_TYPES,
                 AetherIIParticleTypes.PARTICLES,
                 AetherIISoundEvents.SOUNDS,
+                AetherIIMenuTypes.MENU_TYPES,
                 AetherIIPoi.POI,
                 AetherIIDataAttachments.ATTACHMENTS
         };
