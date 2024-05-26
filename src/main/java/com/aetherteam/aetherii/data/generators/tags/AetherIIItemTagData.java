@@ -7,6 +7,7 @@ import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
@@ -72,10 +73,28 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.GREATROOT_STAIRS.asItem(),
                 AetherIIBlocks.WISPROOT_STAIRS.asItem()
         );
+        this.tag(ItemTags.STAIRS).add(
+                AetherIIBlocks.UNDERSHALE_STAIRS.get().asItem(),
+                AetherIIBlocks.AGIOSITE_STAIRS.get().asItem(),
+                AetherIIBlocks.AGIOSITE_BRICK_STAIRS.get().asItem()
+        );
+        this.tag(ItemTags.WOODEN_SLABS).add(
+                AetherIIBlocks.SKYROOT_SLAB.get().asItem(),
+                AetherIIBlocks.GREATROOT_STAIRS.get().asItem(),
+                AetherIIBlocks.WISPROOT_STAIRS.get().asItem()
+        );
         this.tag(ItemTags.WOODEN_SLABS).add(
                 AetherIIBlocks.SKYROOT_SLAB.asItem(),
                 AetherIIBlocks.GREATROOT_SLAB.asItem(),
                 AetherIIBlocks.WISPROOT_SLAB.asItem()
+        );
+        this.tag(ItemTags.WALLS).add(
+                AetherIIBlocks.HOLYSTONE_WALL.get().asItem(),
+                AetherIIBlocks.MOSSY_HOLYSTONE_WALL.get().asItem(),
+                AetherIIBlocks.HOLYSTONE_BRICK_WALL.get().asItem(),
+                AetherIIBlocks.UNDERSHALE_WALL.get().asItem(),
+                AetherIIBlocks.AGIOSITE_WALL.get().asItem(),
+                AetherIIBlocks.AGIOSITE_BRICK_WALL.get().asItem()
         );
         this.tag(ItemTags.WOODEN_FENCES).add(
                 AetherIIBlocks.SKYROOT_FENCE.asItem(),
@@ -97,21 +116,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIITags.Items.SKYROOT_LOGS,
                 AetherIITags.Items.GREATROOT_LOGS,
                 AetherIITags.Items.WISPROOT_LOGS,
-                AetherIITags.Items.AMBEROOT_LOGS);
-        this.tag(ItemTags.STAIRS).add(
-                AetherIIBlocks.SKYROOT_STAIRS.asItem(),
-                AetherIIBlocks.GREATROOT_STAIRS.asItem(),
-                AetherIIBlocks.WISPROOT_STAIRS.asItem()
-        );
-        this.tag(ItemTags.SLABS).add(
-                AetherIIBlocks.SKYROOT_SLAB.asItem(),
-                AetherIIBlocks.GREATROOT_STAIRS.asItem(),
-                AetherIIBlocks.WISPROOT_STAIRS.asItem()
-        );
-        this.tag(ItemTags.WALLS).add(
-                AetherIIBlocks.HOLYSTONE_WALL.asItem(),
-                AetherIIBlocks.MOSSY_HOLYSTONE_WALL.asItem(),
-                AetherIIBlocks.HOLYSTONE_BRICK_WALL.asItem()
+                AetherIITags.Items.AMBEROOT_LOGS
         );
         this.tag(ItemTags.WOODEN_DOORS).add(
                 AetherIIBlocks.SKYROOT_DOOR.get().asItem()

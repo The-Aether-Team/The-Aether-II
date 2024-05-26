@@ -1,6 +1,14 @@
-// 1.20.4	2024-05-26T09:16:52.7958071	Loot Tables
+// 1.20.4	2024-05-26T11:47:04.9346169	Loot Tables
 b3ac0f837a89ef6292323e16712ccb72b957e765 data/aether_ii/loot_tables/blocks/aether_dirt.json
 2a86a9bdc0455369b0dffc142c983d9cc2431881 data/aether_ii/loot_tables/blocks/aether_grass_block.json
+731fd5544a8d9f803fb12a76096c0207ebf0b3b4 data/aether_ii/loot_tables/blocks/agiosite.json
+6fb8846d2441c61e0e540f5cdc18713a691a44d8 data/aether_ii/loot_tables/blocks/agiosite_bricks.json
+9aba04945176eacf66d0e73344a8d4384a326c00 data/aether_ii/loot_tables/blocks/agiosite_brick_slab.json
+c5f6889f01d43b7e3ed9816fe4135039df75096b data/aether_ii/loot_tables/blocks/agiosite_brick_stairs.json
+622c48ee7db505e15844655e777da88ef79d2b1f data/aether_ii/loot_tables/blocks/agiosite_brick_wall.json
+63d7040cb32789544214b8d1d45929be686d20a9 data/aether_ii/loot_tables/blocks/agiosite_slab.json
+76b79914a659c9506211edf0a14f0be94f92838d data/aether_ii/loot_tables/blocks/agiosite_stairs.json
+ea7e1a6d871a82492d95884322e710b078831bab data/aether_ii/loot_tables/blocks/agiosite_wall.json
 cd78acddc96546721e8ddea1858c70e70430d9d6 data/aether_ii/loot_tables/blocks/amberoot_leaves.json
 c5d83d6439dd5a40f8a50903bdcc73dca211303b data/aether_ii/loot_tables/blocks/amberoot_log.json
 d2407dbe16ea68ee13f2f2a6afaff944ea27d52d data/aether_ii/loot_tables/blocks/amberoot_wood.json
@@ -61,6 +69,9 @@ a63cc17b75d1542712f8283ba82a2ee68bde948f data/aether_ii/loot_tables/blocks/skyro
 c3b2c642906cb7cf018e74ecc453aa2a8431e26d data/aether_ii/loot_tables/blocks/skyroot_trapdoor.json
 e3b0acc3ce29dcaf1878ee301a7fed5c2ec19f4f data/aether_ii/loot_tables/blocks/skyroot_wood.json
 affaaaa736e64e95322f25d01dc9885fbb07a51c data/aether_ii/loot_tables/blocks/undershale.json
+3fd23bf37b42323acff84e67449caf354d79dddb data/aether_ii/loot_tables/blocks/undershale_slab.json
+b876f0a4d6dd4f317878e733ac18a0436a79aade data/aether_ii/loot_tables/blocks/undershale_stairs.json
+b1f8642b6674613c2bf351f904f86cafb05c66fb data/aether_ii/loot_tables/blocks/undershale_wall.json
 a11e4688069c4964af1bb72cea64a3dc5b020b7c data/aether_ii/loot_tables/blocks/wisproot_button.json
 60054716b4372ed6ebef4b0d3d2c8fd7a7c023f6 data/aether_ii/loot_tables/blocks/wisproot_fence.json
 e0c3ac369e4d3a7397e9bc7897a645c17114ff59 data/aether_ii/loot_tables/blocks/wisproot_fence_gate.json

@@ -1,8 +1,16 @@
-// 1.20.4	2024-05-26T10:03:44.395281	Item Models: aether_ii
+// 1.20.4	2024-05-26T11:47:04.9426961	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
 b485bb7a980decbc46719aeaac129689fa3f6a19 assets/aether_ii/models/item/aether_grass_block.json
 b9bfec314176b17ae9514e75469dbec42e1b345a assets/aether_ii/models/item/aether_portal_frame.json
+d78faa3df15e1d2f4385aba4993e8b91a1d72ad3 assets/aether_ii/models/item/agiosite.json
+36cf50edeb4fa2360cdd3442cd6fcf664cca7a0a assets/aether_ii/models/item/agiosite_bricks.json
+1a0ad634b21a9525a99d05f444289bb89f8bcf2d assets/aether_ii/models/item/agiosite_brick_slab.json
+08ab70f7da6f2be90c34bccf53f4b997e806b31a assets/aether_ii/models/item/agiosite_brick_stairs.json
+06ec65abc81cc115c18b4c40b5eda415f5a58ce1 assets/aether_ii/models/item/agiosite_brick_wall.json
+7d5a5ee528f06e8c62e81db4cd3105b19bac758a assets/aether_ii/models/item/agiosite_slab.json
+6d0b6541d2039949b41b31190393c9602c8e9aa9 assets/aether_ii/models/item/agiosite_stairs.json
+1c4dff40d6e81582f021204bf60d9aa4ebec0ae6 assets/aether_ii/models/item/agiosite_wall.json
 183e501764258654cc51853d14080c0c90ad97bb assets/aether_ii/models/item/amberoot_leaves.json
 7103a735096dfa36af38b7cd4c3e3a2b75d94935 assets/aether_ii/models/item/amberoot_log.json
 3c94afddfaa353216327cd315e5c62eb1b4d00d4 assets/aether_ii/models/item/amberoot_wood.json
@@ -104,6 +112,9 @@ f055e8b468c9d6c90068e06871dc723d96276eb9 assets/aether_ii/models/item/skyroot_lo
 85f1eae477c0a0f9951306b14b43e1e57222c3ae assets/aether_ii/models/item/skyroot_wood.json
 3ec615217a98b5524df0e03a2d4baa5822ba2f3b assets/aether_ii/models/item/taegore_hide.json
 b54510ea4cf32c696c314fc9005802fdab3c208a assets/aether_ii/models/item/undershale.json
+206a0736c3aa29e75d9a38a3c9c5d6604ad55a31 assets/aether_ii/models/item/undershale_slab.json
+dc2b26466c1c6237e46e9adf27acbb89f4a4445c assets/aether_ii/models/item/undershale_stairs.json
+e08cba605dc43682cfdb888553a1f4826bf29045 assets/aether_ii/models/item/undershale_wall.json
 5636fecd5a7c213e61c99598709e9e2dbcf11ac4 assets/aether_ii/models/item/wisproot_button.json
 07e54d9c3f77e3aca8082359e2a5465e0319405d assets/aether_ii/models/item/wisproot_fence.json
 0f0bfbc0646799f6d092621bb525d5866d387bce assets/aether_ii/models/item/wisproot_fence_gate.json

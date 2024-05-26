@@ -22,6 +22,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.HOLYSTONE, "Holystone");
         this.addBlock(AetherIIBlocks.MOSSY_HOLYSTONE, "Mossy Holystone");
         this.addBlock(AetherIIBlocks.UNDERSHALE, "Undershale");
+        this.addBlock(AetherIIBlocks.AGIOSITE, "Agiosite");
 
         this.addBlock(AetherIIBlocks.AMBROSIUM_ORE, "Ambrosium Ore");
         this.addBlock(AetherIIBlocks.ZANITE_ORE, "Zanite Ore");
@@ -76,10 +77,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.WISPROOT_BUTTON, "Wisproot Button");
         this.addBlock(AetherIIBlocks.WISPROOT_PRESSURE_PLATE, "Wisproot Pressure Plate");
 
-        this.addBlock(AetherIIBlocks.HOLYSTONE_BUTTON, "Holystone Button");
         this.addBlock(AetherIIBlocks.HOLYSTONE_STAIRS, "Holystone Stairs");
         this.addBlock(AetherIIBlocks.HOLYSTONE_SLAB, "Holystone Slab");
         this.addBlock(AetherIIBlocks.HOLYSTONE_WALL, "Holystone Wall");
+        this.addBlock(AetherIIBlocks.HOLYSTONE_BUTTON, "Holystone Button");
         this.addBlock(AetherIIBlocks.HOLYSTONE_PRESSURE_PLATE, "Holystone Pressure Plate");
 
         this.addBlock(AetherIIBlocks.MOSSY_HOLYSTONE_STAIRS, "Mossy Holystone Stairs");
@@ -90,6 +91,19 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.HOLYSTONE_BRICK_STAIRS, "Holystone Brick Stairs");
         this.addBlock(AetherIIBlocks.HOLYSTONE_BRICK_SLAB, "Holystone Brick Slab");
         this.addBlock(AetherIIBlocks.HOLYSTONE_BRICK_WALL, "Holystone Brick Wall");
+
+        this.addBlock(AetherIIBlocks.UNDERSHALE_STAIRS, "Undershale Stairs");
+        this.addBlock(AetherIIBlocks.UNDERSHALE_SLAB, "Undershale Slab");
+        this.addBlock(AetherIIBlocks.UNDERSHALE_WALL, "Undershale Wall");
+
+        this.addBlock(AetherIIBlocks.AGIOSITE_STAIRS, "Agiosite Stairs");
+        this.addBlock(AetherIIBlocks.AGIOSITE_SLAB, "Agiosite Slab");
+        this.addBlock(AetherIIBlocks.AGIOSITE_WALL, "Agiosite Wall");
+
+        this.addBlock(AetherIIBlocks.AGIOSITE_BRICKS, "Agiosite Bricks");
+        this.addBlock(AetherIIBlocks.AGIOSITE_BRICK_STAIRS, "Agiosite Brick Stairs");
+        this.addBlock(AetherIIBlocks.AGIOSITE_BRICK_SLAB, "Agiosite Brick Slab");
+        this.addBlock(AetherIIBlocks.AGIOSITE_BRICK_WALL, "Agiosite Brick Wall");
 
         this.addBlock(AetherIIBlocks.QUICKSOIL_GLASS, "Quicksoil Glass");
         this.addBlock(AetherIIBlocks.QUICKSOIL_GLASS_PANE, "Quicksoil Glass Pane");

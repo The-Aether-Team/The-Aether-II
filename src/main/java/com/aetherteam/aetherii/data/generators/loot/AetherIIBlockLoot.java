@@ -26,6 +26,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.HOLYSTONE.get());
         this.dropSelf(AetherIIBlocks.MOSSY_HOLYSTONE.get());
         this.dropSelf(AetherIIBlocks.UNDERSHALE.get());
+        this.dropSelf(AetherIIBlocks.AGIOSITE.get());
 
         this.dropWithFortune(AetherIIBlocks.AMBROSIUM_ORE.get(), AetherIIItems.AMBROSIUM_SHARD.get());
         this.dropWithFortune(AetherIIBlocks.ZANITE_ORE.get(), AetherIIItems.ZANITE_GEMSTONE.get());
@@ -81,10 +82,10 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.WISPROOT_BUTTON.get());
         this.dropSelf(AetherIIBlocks.WISPROOT_PRESSURE_PLATE.get());
 
-        this.dropSelf(AetherIIBlocks.HOLYSTONE_BUTTON.get());
         this.dropSelf(AetherIIBlocks.HOLYSTONE_STAIRS.get());
         this.add(AetherIIBlocks.HOLYSTONE_SLAB.get(), this::createSlabItemTable);
         this.dropSelf(AetherIIBlocks.HOLYSTONE_WALL.get());
+        this.dropSelf(AetherIIBlocks.HOLYSTONE_BUTTON.get());
         this.dropSelf(AetherIIBlocks.HOLYSTONE_PRESSURE_PLATE.get());
 
         this.dropSelf(AetherIIBlocks.MOSSY_HOLYSTONE_STAIRS.get());
@@ -95,6 +96,19 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.HOLYSTONE_BRICK_STAIRS.get());
         this.add(AetherIIBlocks.HOLYSTONE_BRICK_SLAB.get(), this::createSlabItemTable);
         this.dropSelf(AetherIIBlocks.HOLYSTONE_BRICK_WALL.get());
+
+        this.dropSelf(AetherIIBlocks.UNDERSHALE_STAIRS.get());
+        this.add(AetherIIBlocks.UNDERSHALE_SLAB.get(), this::createSlabItemTable);
+        this.dropSelf(AetherIIBlocks.UNDERSHALE_WALL.get());
+
+        this.dropSelf(AetherIIBlocks.AGIOSITE_STAIRS.get());
+        this.add(AetherIIBlocks.AGIOSITE_SLAB.get(), this::createSlabItemTable);
+        this.dropSelf(AetherIIBlocks.AGIOSITE_WALL.get());
+
+        this.dropSelf(AetherIIBlocks.AGIOSITE_BRICKS.get());
+        this.dropSelf(AetherIIBlocks.AGIOSITE_BRICK_STAIRS.get());
+        this.add(AetherIIBlocks.AGIOSITE_BRICK_SLAB.get(), this::createSlabItemTable);
+        this.dropSelf(AetherIIBlocks.AGIOSITE_BRICK_WALL.get());
 
         this.dropWhenSilkTouch(AetherIIBlocks.QUICKSOIL_GLASS.get());
         this.dropWhenSilkTouch(AetherIIBlocks.QUICKSOIL_GLASS_PANE.get());
