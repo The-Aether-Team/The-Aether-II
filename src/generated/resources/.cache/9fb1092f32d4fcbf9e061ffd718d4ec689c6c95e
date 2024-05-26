@@ -1,4 +1,5 @@
-// 1.20.4	2024-05-26T11:47:04.9386177	Recipes
+// 1.20.4	2024-05-26T16:55:03.647451	Recipes
+ceeef4aed870f06514a5f5cc998418931c547a22 data/aether_ii/advancements/recipes/building_blocks/agiosite_bricks.json
 0af97e5b955f582510638aeecee94fc57bcf2d1c data/aether_ii/advancements/recipes/building_blocks/agiosite_brick_slab.json
 d211fa2d4f1b2edaad272b7356325c4ddc5de28c data/aether_ii/advancements/recipes/building_blocks/agiosite_brick_stairs.json
 4667db4539340abb8c168ca8e71344a54952e124 data/aether_ii/advancements/recipes/building_blocks/agiosite_slab.json
@@ -107,6 +108,7 @@ c9c3ea3f04b65a1a159cd3613c5bdfe2472cffd3 data/aether_ii/advancements/recipes/too
 5658347f489d74d0e8fb928e2bb281976e5faf75 data/aether_ii/advancements/recipes/tools/zanite_pickaxe.json
 a7cd572d81dbc7e6f9bd163a4e89d7760158ef99 data/aether_ii/advancements/recipes/tools/zanite_shovel.json
 0a94d00802da7b4b46e309c061f5e81e39d188aa data/aether_ii/advancements/recipes/tools/zanite_trowel.json
+505f3fb5917952ad33471cb496b4f867e6beae2f data/aether_ii/recipes/agiosite_bricks.json
 b2e8781fca13e99d538169e381e4b717db5005fb data/aether_ii/recipes/agiosite_brick_slab.json
 d7f549569a856232b04060e1397018186e12ea59 data/aether_ii/recipes/agiosite_brick_stairs.json
 b402cdcfd1e6be032714f475b187caaf32f1f382 data/aether_ii/recipes/agiosite_brick_wall.json
