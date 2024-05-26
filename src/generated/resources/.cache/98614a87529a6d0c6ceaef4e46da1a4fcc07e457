@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-25T21:13:50.2165442	Item Models: aether_ii
+// 1.20.4	2024-05-26T09:16:52.8013298	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
 b485bb7a980decbc46719aeaac129689fa3f6a19 assets/aether_ii/models/item/aether_grass_block.json
@@ -6,6 +6,7 @@ b9bfec314176b17ae9514e75469dbec42e1b345a assets/aether_ii/models/item/aether_por
 183e501764258654cc51853d14080c0c90ad97bb assets/aether_ii/models/item/amberoot_leaves.json
 7103a735096dfa36af38b7cd4c3e3a2b75d94935 assets/aether_ii/models/item/amberoot_log.json
 3c94afddfaa353216327cd315e5c62eb1b4d00d4 assets/aether_ii/models/item/amberoot_wood.json
+a135c7167305bf922827b50fdf807e0518bfdcd8 assets/aether_ii/models/item/ambrosium_block.json
 77308024eea02e4ceae6af25c5f9817950c5cb19 assets/aether_ii/models/item/ambrosium_ore.json
 c491603cffa0239e489fddeddf49195bf9eba0dc assets/aether_ii/models/item/ambrosium_shard.json
 e7a649e80296c73474cae1aced097fde5ca5cdee assets/aether_ii/models/item/ambrosium_torch.json
@@ -24,6 +25,7 @@ ed67eff7e6d30b7f6be0b507e140405622a49ed9 assets/aether_ii/models/item/cloudwool_
 c313c38e5ff5ca6e3111c583c259bd093cb84542 assets/aether_ii/models/item/cold_aercloud.json
 39571cd6ffeb63576ad03d66e639d854f7ace919 assets/aether_ii/models/item/golden_amber.json
 f8aaafa2ddf04f53ef8bf4a76ce59b7584cd6d92 assets/aether_ii/models/item/gravitite_axe.json
+fd077d028242c5666bf569c1c14519c88d489a83 assets/aether_ii/models/item/gravitite_block.json
 ddd60151b3f9dcc03a0addc6523064eb38234a94 assets/aether_ii/models/item/gravitite_hammer.json
 04fa6eb965ac5239cd7bbe301852db13db9e47fe assets/aether_ii/models/item/gravitite_ore.json
 84f8dce9cc29394678adaf727e78b0a3c6b79c28 assets/aether_ii/models/item/gravitite_pickaxe.json
@@ -109,6 +111,7 @@ e167cd2a4903ede813313aadebb011a5f64d51f9 assets/aether_ii/models/item/wisproot_s
 4daf67c80f9bae792c17752840d4459839b20d5e assets/aether_ii/models/item/wisproot_wood.json
 962869521316611ce7ea217861b3f90966cce67d assets/aether_ii/models/item/wisptop_leaves.json
 641e5ab39a98fa0a52bd5c5db666b79042ba9888 assets/aether_ii/models/item/zanite_axe.json
+a2bc2f6f301763a350cdb8e56399ee939abf52c4 assets/aether_ii/models/item/zanite_block.json
 10ec1392907d5b55a0e41ac870e8f2e4758ff81d assets/aether_ii/models/item/zanite_gemstone.json
 8cb45802fec88752abf092e8f1d159243c02a4a4 assets/aether_ii/models/item/zanite_hammer.json
 42f39521325442a933b5013ed24a40ff3177e842 assets/aether_ii/models/item/zanite_ore.json

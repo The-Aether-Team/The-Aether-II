@@ -129,7 +129,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.HOLYSTONE_BRICKS.get(),
                 AetherIIBlocks.HOLYSTONE_BRICK_WALL.get(),
                 AetherIIBlocks.HOLYSTONE_BRICK_STAIRS.get(),
-                AetherIIBlocks.HOLYSTONE_BRICK_SLAB.get()
+                AetherIIBlocks.HOLYSTONE_BRICK_SLAB.get(),
+                AetherIIBlocks.AMBROSIUM_BLOCK.get(),
+                AetherIIBlocks.ZANITE_BLOCK.get(),
+                AetherIIBlocks.GRAVITITE_BLOCK.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_AXE).add(
                 AetherIIBlocks.SKYROOT_LOG.get(),
@@ -182,11 +185,13 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AMBEROOT_LEAVES.get()
         );
         this.tag(BlockTags.NEEDS_STONE_TOOL).add(
-                AetherIIBlocks.ZANITE_ORE.get()
+                AetherIIBlocks.ZANITE_ORE.get(),
+                AetherIIBlocks.ZANITE_BLOCK.get()
         );
         this.tag(BlockTags.NEEDS_IRON_TOOL).add(
                 AetherIIBlocks.ARKENIUM_ORE.get(),
-                AetherIIBlocks.GRAVITITE_ORE.get()
+                AetherIIBlocks.GRAVITITE_ORE.get(),
+                AetherIIBlocks.GRAVITITE_BLOCK.get()
         );
 
         // Forge
@@ -198,5 +203,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SKYROOT_FENCE.get(),
                 AetherIIBlocks.GREATROOT_FENCE.get(),
                 AetherIIBlocks.WISPROOT_FENCE.get());
+        this.tag(Tags.Blocks.STORAGE_BLOCKS).add(
+                AetherIIBlocks.AMBROSIUM_BLOCK.get(),
+                AetherIIBlocks.ZANITE_BLOCK.get(),
+                AetherIIBlocks.GRAVITITE_BLOCK.get());
     }
 }

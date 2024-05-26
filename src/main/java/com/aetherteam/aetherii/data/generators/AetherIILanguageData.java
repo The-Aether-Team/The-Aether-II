@@ -97,6 +97,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.CLOUDWOOL, "Cloudwool");
         this.addBlock(AetherIIBlocks.CLOUDWOOL_CARPET, "Cloudwool Carpet");
 
+        this.addBlock(AetherIIBlocks.AMBROSIUM_BLOCK, "Block of Ambrosium");
+        this.addBlock(AetherIIBlocks.ZANITE_BLOCK, "Block of Zanite");
+        this.addBlock(AetherIIBlocks.GRAVITITE_BLOCK, "Block of Gravitite");
+
         this.addBlock(AetherIIBlocks.AMBROSIUM_TORCH, "Ambrosium Torch");
         this.addBlock(AetherIIBlocks.SKYROOT_CRAFTING_TABLE, "Skyroot Crafting Table");
         this.addBlock(AetherIIBlocks.SKYROOT_LADDER, "Skyroot Ladder");

@@ -71,6 +71,9 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.QUICKSOIL_GLASS_PANE.get());
                 output.accept(AetherIIBlocks.CLOUDWOOL.get());
                 output.accept(AetherIIBlocks.CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.AMBROSIUM_BLOCK.get());
+                output.accept(AetherIIBlocks.ZANITE_BLOCK.get());
+                output.accept(AetherIIBlocks.GRAVITITE_BLOCK.get());
             }).build());
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_DUNGEON_BLOCKS = CREATIVE_MODE_TABS.register("dungeon_blocks", () -> CreativeModeTab.builder()
             .withTabsBefore(new ResourceLocation(AetherII.MODID, "building_blocks"))

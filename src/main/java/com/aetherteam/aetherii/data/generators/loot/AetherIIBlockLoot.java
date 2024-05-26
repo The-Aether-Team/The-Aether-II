@@ -102,6 +102,10 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.CLOUDWOOL.get());
         this.dropSelf(AetherIIBlocks.CLOUDWOOL_CARPET.get());
 
+        this.dropSelf(AetherIIBlocks.AMBROSIUM_BLOCK.get());
+        this.dropSelf(AetherIIBlocks.ZANITE_BLOCK.get());
+        this.dropSelf(AetherIIBlocks.GRAVITITE_BLOCK.get());
+
         this.dropSelf(AetherIIBlocks.AMBROSIUM_TORCH.get());
         this.dropSelf(AetherIIBlocks.AMBROSIUM_WALL_TORCH.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get());

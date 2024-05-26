@@ -1,9 +1,10 @@
-// 1.20.4	2024-05-25T17:59:35.6392366	Loot Tables
+// 1.20.4	2024-05-26T09:16:52.7958071	Loot Tables
 b3ac0f837a89ef6292323e16712ccb72b957e765 data/aether_ii/loot_tables/blocks/aether_dirt.json
 2a86a9bdc0455369b0dffc142c983d9cc2431881 data/aether_ii/loot_tables/blocks/aether_grass_block.json
 cd78acddc96546721e8ddea1858c70e70430d9d6 data/aether_ii/loot_tables/blocks/amberoot_leaves.json
 c5d83d6439dd5a40f8a50903bdcc73dca211303b data/aether_ii/loot_tables/blocks/amberoot_log.json
 d2407dbe16ea68ee13f2f2a6afaff944ea27d52d data/aether_ii/loot_tables/blocks/amberoot_wood.json
+a16bcaab0cf39b3023d08214573ae0f2436c3408 data/aether_ii/loot_tables/blocks/ambrosium_block.json
 5e2d1ad8a5c52e3c28f63d21e38b2215d4f1db01 data/aether_ii/loot_tables/blocks/ambrosium_ore.json
 0813f6f52fdb70140445fd6b6034fb703490d96c data/aether_ii/loot_tables/blocks/ambrosium_torch.json
 6eda57339b984a3a0ecba560d7f4829850d937c3 data/aether_ii/loot_tables/blocks/ambrosium_wall_torch.json
@@ -11,6 +12,7 @@ d2407dbe16ea68ee13f2f2a6afaff944ea27d52d data/aether_ii/loot_tables/blocks/amber
 ae25ba8ab6d368e881f2908a144d154f268b369c data/aether_ii/loot_tables/blocks/cloudwool.json
 217708d60585b4468f01c5eeea8dae4b3b892469 data/aether_ii/loot_tables/blocks/cloudwool_carpet.json
 f6fe71dbb22cb5135868d44d7dce4c3989d36bfb data/aether_ii/loot_tables/blocks/cold_aercloud.json
+0a8333db6bbafc06187539a24dd3c8591183ade7 data/aether_ii/loot_tables/blocks/gravitite_block.json
 6a741dac163e2fe3e1f7383e800585919e388d75 data/aether_ii/loot_tables/blocks/gravitite_ore.json
 9be68174a3e3a6907eea34712a74a2ed05d89912 data/aether_ii/loot_tables/blocks/greatboa_leaves.json
 4beb1078ff6e029191c8f4ddc82414e13f96a64c data/aether_ii/loot_tables/blocks/greatoak_leaves.json
@@ -70,4 +72,5 @@ f994b845ee2d6095bfcfa1508bcf8b2d506b4a51 data/aether_ii/loot_tables/blocks/wispr
 21cbbb9bbbd81fe9728a50f7cbd2f7cad0d0c3ab data/aether_ii/loot_tables/blocks/wisproot_stairs.json
 a01f35426be7b209e1628bb7dc8e3802f176b924 data/aether_ii/loot_tables/blocks/wisproot_wood.json
 9e33933f16f371dd44e2aeb86228299e9d460895 data/aether_ii/loot_tables/blocks/wisptop_leaves.json
+e5756cffe597096161bf2a7f3af7adba68222a90 data/aether_ii/loot_tables/blocks/zanite_block.json
 14295de5d712c2eb60971e1b93c5c7e75cefa3e7 data/aether_ii/loot_tables/blocks/zanite_ore.json

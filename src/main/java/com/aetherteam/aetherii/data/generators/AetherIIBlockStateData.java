@@ -92,7 +92,11 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.pane(AetherIIBlocks.QUICKSOIL_GLASS_PANE.get(), AetherIIBlocks.QUICKSOIL_GLASS.get(), "construction/");
 
         this.block(AetherIIBlocks.CLOUDWOOL.get(), "construction/");
-        this.carpet(AetherIIBlocks.CLOUDWOOL_CARPET.get(), AetherIIBlocks.CLOUDWOOL.get(), "construction/");
+        this.carpet(AetherIIBlocks.CLOUDWOOL_CARPET.get(), AetherIIBlocks.CLOUDWOOL.get(),"construction/");
+
+        this.block(AetherIIBlocks.AMBROSIUM_BLOCK.get(), "construction/");
+        this.block(AetherIIBlocks.ZANITE_BLOCK.get(), "construction/");
+        this.block(AetherIIBlocks.GRAVITITE_BLOCK.get(), "construction/");
 
         this.torchBlock(AetherIIBlocks.AMBROSIUM_TORCH.get(), AetherIIBlocks.AMBROSIUM_WALL_TORCH.get());
         this.skyrootCraftingTable(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), "construction/");
