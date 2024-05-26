@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-26T19:51:39.3426714	Loot Tables
+// 1.20.4	2024-05-26T20:20:10.7047002	Loot Tables
 b3ac0f837a89ef6292323e16712ccb72b957e765 data/aether_ii/loot_tables/blocks/aether_dirt.json
 d7f44de594f8ec5f788d2f1cab7db1dc937994cb data/aether_ii/loot_tables/blocks/aether_dirt_path.json
 39cf806080593ddf7098072051f768f30246f42f data/aether_ii/loot_tables/blocks/aether_farmland.json
@@ -76,6 +76,8 @@ a63cc17b75d1542712f8283ba82a2ee68bde948f data/aether_ii/loot_tables/blocks/skyro
 c3b2c642906cb7cf018e74ecc453aa2a8431e26d data/aether_ii/loot_tables/blocks/skyroot_trapdoor.json
 e3b0acc3ce29dcaf1878ee301a7fed5c2ec19f4f data/aether_ii/loot_tables/blocks/skyroot_wood.json
 e021674a654ec1b3ff3b67e31572fe22aabd956e data/aether_ii/loot_tables/blocks/storm_aercloud.json
+4a5632bdd977fd8246d80167d2682845e8dedd19 data/aether_ii/loot_tables/blocks/stripped_skyroot_log.json
+e5e0ba733b93d85683663de54ff58f60cadf55f0 data/aether_ii/loot_tables/blocks/stripped_skyroot_wood.json
 affaaaa736e64e95322f25d01dc9885fbb07a51c data/aether_ii/loot_tables/blocks/undershale.json
 3fd23bf37b42323acff84e67449caf354d79dddb data/aether_ii/loot_tables/blocks/undershale_slab.json
 b876f0a4d6dd4f317878e733ac18a0436a79aade data/aether_ii/loot_tables/blocks/undershale_stairs.json

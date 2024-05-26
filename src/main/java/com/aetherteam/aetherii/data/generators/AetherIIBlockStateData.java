@@ -37,10 +37,12 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.aercloudAll(AetherIIBlocks.STORM_AERCLOUD.get(), "natural/");
 
         this.log(AetherIIBlocks.SKYROOT_LOG.get());
+        this.log(AetherIIBlocks.STRIPPED_SKYROOT_LOG.get());
         this.log(AetherIIBlocks.GREATROOT_LOG.get());
         this.log(AetherIIBlocks.WISPROOT_LOG.get());
         this.logDifferentTop(AetherIIBlocks.AMBEROOT_LOG.get(), AetherIIBlocks.SKYROOT_LOG.get());
         this.wood(AetherIIBlocks.SKYROOT_WOOD.get(), AetherIIBlocks.SKYROOT_LOG.get());
+        this.wood(AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get(), AetherIIBlocks.STRIPPED_SKYROOT_LOG.get());
         this.wood(AetherIIBlocks.GREATROOT_WOOD.get(), AetherIIBlocks.GREATROOT_LOG.get());
         this.wood(AetherIIBlocks.WISPROOT_WOOD.get(), AetherIIBlocks.WISPROOT_LOG.get());
         this.wood(AetherIIBlocks.AMBEROOT_WOOD.get(), AetherIIBlocks.AMBEROOT_LOG.get());

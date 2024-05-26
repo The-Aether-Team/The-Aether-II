@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-26T19:51:39.3356677	Block States: aether_ii
+// 1.20.4	2024-05-26T20:20:10.6931719	Block States: aether_ii
 09820e9981cbdbe29cb2563890673c61c5abe056 assets/aether_ii/blockstates/aether_dirt.json
 7d216c5fd9f534a8fa3506c2a1aa984edb33c9d7 assets/aether_ii/blockstates/aether_dirt_path.json
 c1a07acd4f67535c61a7eb9a5aee01787c414f7f assets/aether_ii/blockstates/aether_farmland.json
@@ -76,6 +76,8 @@ c57b3730d4ea51d1799463c6ca5b75228649cd38 assets/aether_ii/blockstates/skyroot_pl
 fcfdfc8b82ba4479590699790b96f588eb280bfd assets/aether_ii/blockstates/skyroot_trapdoor.json
 bdbb7422a0337b39889fd37bfc5a8a7d97759cf3 assets/aether_ii/blockstates/skyroot_wood.json
 814621b942bb02bd716b853f08066417736c9dfc assets/aether_ii/blockstates/storm_aercloud.json
+8e656d4b6a1f86f096593136b275922e3de23add assets/aether_ii/blockstates/stripped_skyroot_log.json
+95b9d33ad5e8a15484dc630868ee973708efe249 assets/aether_ii/blockstates/stripped_skyroot_wood.json
 26efaf9d262610d697b28030aec27b8e4854385b assets/aether_ii/blockstates/undershale.json
 e9253a51323cb879c828d8fcb4dd1a1624578797 assets/aether_ii/blockstates/undershale_slab.json
 aa3f38e980c69850ce907cf98f677f81f02f37b7 assets/aether_ii/blockstates/undershale_stairs.json
@@ -238,6 +240,10 @@ d0b54b40aae4294ff1c1805cb2ee7742d230d268 assets/aether_ii/models/block/skyroot_t
 1d35c09feeb41c31a103d703c5f61fa96f6416df assets/aether_ii/models/block/skyroot_wood.json
 118f17c61a5fc56f94c515c4a4a5ce0fc1bb1511 assets/aether_ii/models/block/skyroot_wood_horizontal.json
 3cad8c6e325597ab54f126f1c3338a0a973b8788 assets/aether_ii/models/block/storm_aercloud.json
+ae8d9d065880b81db474b16c3b04c4630524b6f3 assets/aether_ii/models/block/stripped_skyroot_log.json
+c99de4f310a2278be21af96f78177e41cf9aa948 assets/aether_ii/models/block/stripped_skyroot_log_horizontal.json
+b48a44dc5e1852ebcd47e605fe1f89226d83aa87 assets/aether_ii/models/block/stripped_skyroot_wood.json
+00f96a425e48cc6ba8fc21064c9665524a1c823b assets/aether_ii/models/block/stripped_skyroot_wood_horizontal.json
 9cfa86a4eda88f84b2e623e6e18535007a3c7edc assets/aether_ii/models/block/undershale.json
 aa280207d03c8eb7729fb42b03c65492331ab200 assets/aether_ii/models/block/undershale_slab.json
 89e3e484bf16180585b4ad01f121119f3f4d5cd8 assets/aether_ii/models/block/undershale_slab_top.json

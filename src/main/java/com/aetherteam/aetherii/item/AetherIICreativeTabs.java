@@ -23,6 +23,8 @@ public class AetherIICreativeTabs {
             .displayItems((features, output) -> {
                 output.accept(AetherIIBlocks.SKYROOT_LOG.get());
                 output.accept(AetherIIBlocks.SKYROOT_WOOD.get());
+                output.accept(AetherIIBlocks.STRIPPED_SKYROOT_LOG.get());
+                output.accept(AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get());
                 output.accept(AetherIIBlocks.SKYROOT_PLANKS.get());
                 output.accept(AetherIIBlocks.SKYROOT_STAIRS.get());
                 output.accept(AetherIIBlocks.SKYROOT_SLAB.get());

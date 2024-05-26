@@ -15,6 +15,17 @@ import java.util.Map;
 public class AbilityHooks {
 
     public static class ToolHooks {
+
+        /**
+         * Blocks able to be flattened with {@link ToolActions#AXE_STRIP}, and the equivalent result block.
+         */
+        public static final Map<Block, Block> STRIPPABLES = (new ImmutableMap.Builder<Block, Block>())
+                .put(AetherIIBlocks.SKYROOT_LOG.get(), AetherIIBlocks.STRIPPED_SKYROOT_LOG.get())
+                .put(AetherIIBlocks.SKYROOT_WOOD.get(), AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get())
+                .put(AetherIIBlocks.AMBEROOT_LOG.get(), AetherIIBlocks.STRIPPED_SKYROOT_LOG.get())
+                .put(AetherIIBlocks.AMBEROOT_WOOD.get(), AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get())
+                .build();
+
         /**
          * Blocks able to be flattened with {@link ToolActions#SHOVEL_FLATTEN}, and the equivalent result block.
          */
@@ -44,11 +55,17 @@ public class AbilityHooks {
          */
         public static BlockState setupToolActions(LevelAccessor accessor, BlockPos pos, BlockState old, ToolAction action) {
             Block oldBlock = old.getBlock();
-            if (action == ToolActions.SHOVEL_FLATTEN) {
+            if (action == ToolActions.AXE_STRIP) {
+                if (STRIPPABLES.containsKey(oldBlock)) {
+                    return STRIPPABLES.get(oldBlock).withPropertiesOf(old);
+                }
+            }
+            else if (action == ToolActions.SHOVEL_FLATTEN) {
                 if (FLATTENABLES.containsKey(oldBlock)) {
                     return FLATTENABLES.get(oldBlock).withPropertiesOf(old);
                 }
-            } else if (action == ToolActions.HOE_TILL) {
+            }
+            else if (action == ToolActions.HOE_TILL) {
                 if (accessor.getBlockState(pos.above()).isAir()) {
                     if (TILLABLES.containsKey(oldBlock)) {
                         return TILLABLES.get(oldBlock).withPropertiesOf(old);

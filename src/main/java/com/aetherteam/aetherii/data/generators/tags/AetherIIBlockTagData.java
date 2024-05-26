@@ -47,7 +47,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(AetherIITags.Blocks.SKYROOT_LOGS).add(
                 AetherIIBlocks.SKYROOT_LOG.get(),
-                AetherIIBlocks.SKYROOT_WOOD.get()
+                AetherIIBlocks.SKYROOT_WOOD.get(),
+                AetherIIBlocks.STRIPPED_SKYROOT_LOG.get(),
+                AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get()
         );
         this.tag(AetherIITags.Blocks.GREATROOT_LOGS).add(
                 AetherIIBlocks.GREATROOT_LOG.get(),

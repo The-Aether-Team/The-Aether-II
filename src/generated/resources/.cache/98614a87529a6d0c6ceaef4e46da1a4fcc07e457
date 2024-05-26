@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-26T19:51:39.3501769	Item Models: aether_ii
+// 1.20.4	2024-05-26T20:20:10.710702	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
 014669ae81a98eba467cc6fe0047c04b73a80768 assets/aether_ii/models/item/aether_dirt_path.json
@@ -118,6 +118,8 @@ f055e8b468c9d6c90068e06871dc723d96276eb9 assets/aether_ii/models/item/skyroot_lo
 0440543351702f8f9e40da54f501c28cb33b5a3a assets/aether_ii/models/item/skyroot_trowel.json
 85f1eae477c0a0f9951306b14b43e1e57222c3ae assets/aether_ii/models/item/skyroot_wood.json
 1cc8dfd49b23ca26e50bf530c06afb8814d63047 assets/aether_ii/models/item/storm_aercloud.json
+353df02d890df9f39f5891ed5858e4f0a3d83ec5 assets/aether_ii/models/item/stripped_skyroot_log.json
+1cbe721453b41b19129fe58f97f7ecf3a358fb22 assets/aether_ii/models/item/stripped_skyroot_wood.json
 3ec615217a98b5524df0e03a2d4baa5822ba2f3b assets/aether_ii/models/item/taegore_hide.json
 b54510ea4cf32c696c314fc9005802fdab3c208a assets/aether_ii/models/item/undershale.json
 206a0736c3aa29e75d9a38a3c9c5d6604ad55a31 assets/aether_ii/models/item/undershale_slab.json

@@ -100,10 +100,12 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.aercloudItem(AetherIIBlocks.STORM_AERCLOUD.get());
 
         this.itemBlock(AetherIIBlocks.SKYROOT_LOG.get());
+        this.itemBlock(AetherIIBlocks.STRIPPED_SKYROOT_LOG.get());
         this.itemBlock(AetherIIBlocks.GREATROOT_LOG.get());
         this.itemBlock(AetherIIBlocks.WISPROOT_LOG.get());
         this.itemBlock(AetherIIBlocks.AMBEROOT_LOG.get());
         this.itemBlock(AetherIIBlocks.SKYROOT_WOOD.get());
+        this.itemBlock(AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get());
         this.itemBlock(AetherIIBlocks.GREATROOT_WOOD.get());
         this.itemBlock(AetherIIBlocks.WISPROOT_WOOD.get());
         this.itemBlock(AetherIIBlocks.AMBEROOT_WOOD.get());
