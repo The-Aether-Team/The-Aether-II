@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.block.natural.PurpleAercloudBlock;
 import com.aetherteam.nitrogen.data.providers.NitrogenBlockStateProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
@@ -71,6 +72,34 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                 .face(Direction.EAST).texture("#east_outside").uvs(0, 0, 16, 16).cullface(Direction.EAST).end()
                 .end();
         this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(model));
+    }
+
+    public void purpleAercloud(Block block) {
+        String blockName = this.name(block);
+        ResourceLocation front = this.extend(this.texture(this.name(block), "natural/"), "_front");
+        ResourceLocation back = this.extend(this.texture(this.name(block), "natural/"), "_back");
+        ResourceLocation right = this.extend(this.texture(this.name(block), "natural/"), "_right");
+        ResourceLocation left = this.extend(this.texture(this.name(block), "natural/"), "_left");
+        ModelFile rightModel = this.models().cubeBottomTop(blockName, right, back, front).renderType(new ResourceLocation("translucent"));
+        ModelFile leftModel = this.models().cubeBottomTop(blockName, left, back, front).renderType(new ResourceLocation("translucent"));
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
+            Direction direction = state.getValue(PurpleAercloudBlock.FACING);
+            switch(direction) {
+                case NORTH -> {
+                    return ConfiguredModel.builder().modelFile(leftModel).rotationX(90).build();
+                }
+                case SOUTH -> {
+                    return ConfiguredModel.builder().modelFile(rightModel).rotationX(-90).build();
+                }
+                case WEST -> {
+                    return ConfiguredModel.builder().modelFile(leftModel).rotationX(-90).rotationY(90).build();
+                }
+                case EAST -> {
+                    return ConfiguredModel.builder().modelFile(rightModel).rotationX(90).rotationY(90).build();
+                }
+            }
+            return ConfiguredModel.builder().build();
+        });
     }
 
     public void logDifferentTop(RotatedPillarBlock block, RotatedPillarBlock baseBlock) {

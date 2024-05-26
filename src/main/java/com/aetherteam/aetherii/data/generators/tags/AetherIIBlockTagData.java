@@ -34,7 +34,12 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AETHER_DIRT.get()
         );
         this.tag(AetherIITags.Blocks.AERCLOUDS).add(
-                AetherIIBlocks.COLD_AERCLOUD.get()
+                AetherIIBlocks.COLD_AERCLOUD.get(),
+                AetherIIBlocks.BLUE_AERCLOUD.get(),
+                AetherIIBlocks.GOLDEN_AERCLOUD.get(),
+                AetherIIBlocks.GREEN_AERCLOUD.get(),
+                AetherIIBlocks.PURPLE_AERCLOUD.get(),
+                AetherIIBlocks.STORM_AERCLOUD.get()
         );
         this.tag(AetherIITags.Blocks.SKYROOT_LOGS).add(
                 AetherIIBlocks.SKYROOT_LOG.get(),

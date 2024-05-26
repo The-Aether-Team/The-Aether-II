@@ -112,6 +112,11 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.ARKENIUM_ORE.get());
                 output.accept(AetherIIBlocks.GRAVITITE_ORE.get());
                 output.accept(AetherIIBlocks.COLD_AERCLOUD.get());
+                output.accept(AetherIIBlocks.BLUE_AERCLOUD.get());
+                output.accept(AetherIIBlocks.GOLDEN_AERCLOUD.get());
+                output.accept(AetherIIBlocks.GREEN_AERCLOUD.get());
+                output.accept(AetherIIBlocks.PURPLE_AERCLOUD.get());
+                output.accept(AetherIIBlocks.STORM_AERCLOUD.get());
                 output.accept(AetherIIBlocks.SKYROOT_LOG.get());
                 output.accept(AetherIIBlocks.GREATROOT_LOG.get());
                 output.accept(AetherIIBlocks.WISPROOT_LOG.get());

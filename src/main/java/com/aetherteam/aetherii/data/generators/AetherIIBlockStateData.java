@@ -27,6 +27,11 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.block(AetherIIBlocks.GRAVITITE_ORE.get(), "natural/");
 
         this.aercloudAll(AetherIIBlocks.COLD_AERCLOUD.get(), "natural/");
+        this.aercloudAll(AetherIIBlocks.BLUE_AERCLOUD.get(), "natural/");
+        this.aercloudAll(AetherIIBlocks.GOLDEN_AERCLOUD.get(), "natural/");
+        this.aercloudAll(AetherIIBlocks.GREEN_AERCLOUD.get(), "natural/");
+        this.purpleAercloud(AetherIIBlocks.PURPLE_AERCLOUD.get());
+        this.aercloudAll(AetherIIBlocks.STORM_AERCLOUD.get(), "natural/");
 
         this.log(AetherIIBlocks.SKYROOT_LOG.get());
         this.log(AetherIIBlocks.GREATROOT_LOG.get());

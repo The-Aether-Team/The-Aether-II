@@ -75,7 +75,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
 
         this.portalItem(AetherIIItems.AETHER_PORTAL_FRAME.get(), "miscellaneous/");
 
-        //TODO: Simply with Block Item Model with a blockWithItem Method
+        //TODO: Simplify with Block Item Model with a blockWithItem Method
         this.itemBlock(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
         this.itemBlock(AetherIIBlocks.AETHER_DIRT.get());
         this.itemBlock(AetherIIBlocks.QUICKSOIL.get());
@@ -90,6 +90,11 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.GRAVITITE_ORE.get());
 
         this.aercloudItem(AetherIIBlocks.COLD_AERCLOUD.get());
+        this.aercloudItem(AetherIIBlocks.BLUE_AERCLOUD.get());
+        this.aercloudItem(AetherIIBlocks.GOLDEN_AERCLOUD.get());
+        this.aercloudItem(AetherIIBlocks.GREEN_AERCLOUD.get());
+        this.itemBlock(AetherIIBlocks.PURPLE_AERCLOUD.get());
+        this.aercloudItem(AetherIIBlocks.STORM_AERCLOUD.get());
 
         this.itemBlock(AetherIIBlocks.SKYROOT_LOG.get());
         this.itemBlock(AetherIIBlocks.GREATROOT_LOG.get());

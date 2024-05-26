@@ -34,6 +34,11 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropWithFortune(AetherIIBlocks.GRAVITITE_ORE.get(), AetherIIItems.RAW_GRAVITITE.get());
 
         this.dropSelf(AetherIIBlocks.COLD_AERCLOUD.get());
+        this.dropSelf(AetherIIBlocks.BLUE_AERCLOUD.get());
+        this.dropSelf(AetherIIBlocks.GOLDEN_AERCLOUD.get());
+        this.dropSelf(AetherIIBlocks.GREEN_AERCLOUD.get());
+        this.dropSelf(AetherIIBlocks.PURPLE_AERCLOUD.get());
+        this.dropSelf(AetherIIBlocks.STORM_AERCLOUD.get());
 
         this.dropSelf(AetherIIBlocks.SKYROOT_LOG.get());
         this.dropSelf(AetherIIBlocks.GREATROOT_LOG.get());
@@ -44,7 +49,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.WISPROOT_WOOD.get());
         this.dropSelf(AetherIIBlocks.AMBEROOT_WOOD.get());
 
-        //todo
+        //TODO: Leaves Loot Tables
         this.dropNone(AetherIIBlocks.SKYROOT_LEAVES.get());
         this.dropNone(AetherIIBlocks.SKYPLANE_LEAVES.get());
         this.dropNone(AetherIIBlocks.SKYBIRCH_LEAVES.get());

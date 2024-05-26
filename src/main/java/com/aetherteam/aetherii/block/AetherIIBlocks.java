@@ -2,8 +2,7 @@ package com.aetherteam.aetherii.block;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.construction.QuicksoilGlassBlock;
-import com.aetherteam.aetherii.block.natural.AercloudBlock;
-import com.aetherteam.aetherii.block.natural.AetherGrassBlock;
+import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.block.portal.AetherPortalBlock;
 import com.aetherteam.aetherii.block.utility.SkyrootCraftingTableBlock;
 import com.aetherteam.aetherii.data.resources.builders.AetherIIBlockBuilders;
@@ -49,7 +48,12 @@ public class AetherIIBlocks extends AetherIIBlockBuilders { //TODO: abstract met
     public static final DeferredBlock<Block> GRAVITITE_ORE = register("gravitite_ore", () -> new DropExperienceBlock(UniformInt.of(3, 5), Block.Properties.of().mapColor(MapColor.WOOL).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F).randomTicks().requiresCorrectToolForDrops()));
 
     // Aerclouds
-    public static final DeferredBlock<Block> COLD_AERCLOUD = register("cold_aercloud", () -> new AercloudBlock(Block.Properties.of().mapColor(MapColor.SNOW).instrument(NoteBlockInstrument.FLUTE).strength(0.3F).sound(SoundType.WOOL).noOcclusion().dynamicShape().isRedstoneConductor(AetherIIBlocks::never).isSuffocating(AetherIIBlocks::never).isViewBlocking(AetherIIBlocks::never)));
+    public static final DeferredBlock<Block> COLD_AERCLOUD = register("cold_aercloud", () -> new AercloudBlock(aercloud(MapColor.SNOW)));
+    public static final DeferredBlock<Block> BLUE_AERCLOUD = register("blue_aercloud", () -> new BlueAercloudBlock(aercloud(MapColor.COLOR_LIGHT_BLUE)));
+    public static final DeferredBlock<Block> GOLDEN_AERCLOUD = register("golden_aercloud", () -> new GoldenAercloudBlock(aercloud(MapColor.COLOR_YELLOW)));
+    public static final DeferredBlock<Block> GREEN_AERCLOUD = register("green_aercloud", () -> new GreenAercloudBlock(aercloud(MapColor.COLOR_LIGHT_GREEN)));
+    public static final DeferredBlock<Block> PURPLE_AERCLOUD = register("purple_aercloud", () -> new PurpleAercloudBlock(aercloud(MapColor.COLOR_MAGENTA)));
+    public static final DeferredBlock<Block> STORM_AERCLOUD = register("storm_aercloud", () -> new AercloudBlock(aercloud(MapColor.DEEPSLATE)));
 
     // Logs //TODO: map colors
     public static final DeferredBlock<RotatedPillarBlock> SKYROOT_LOG = register("skyroot_log", () -> new RotatedPillarBlock(Block.Properties.ofFullCopy(Blocks.OAK_LOG)));

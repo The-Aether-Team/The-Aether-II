@@ -30,6 +30,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.GRAVITITE_ORE, "Gravitite Ore");
 
         this.addBlock(AetherIIBlocks.COLD_AERCLOUD, "Cold Aercloud");
+        this.addBlock(AetherIIBlocks.BLUE_AERCLOUD, "Blue Aercloud");
+        this.addBlock(AetherIIBlocks.GOLDEN_AERCLOUD, "Golden Aercloud");
+        this.addBlock(AetherIIBlocks.GREEN_AERCLOUD, "Green Aercloud");
+        this.addBlock(AetherIIBlocks.PURPLE_AERCLOUD, "Purple Aercloud");
+        this.addBlock(AetherIIBlocks.STORM_AERCLOUD, "Storm Aercloud");
 
         this.addBlock(AetherIIBlocks.SKYROOT_LOG, "Skyroot Log");
         this.addBlock(AetherIIBlocks.GREATROOT_LOG, "Greatroot Log");
@@ -194,6 +199,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         this.addSubtitle("block", "aether_portal.ambient", "Aether Portal whooshes");
         this.addSubtitle("block", "aether_portal.trigger", "Aether Portal noise intensifies");
+        this.addSubtitle("block", "aercloud.blue_aercloud_bounce", "Blue Aercloud bounces");
 
         this.addPackDescription("mod", "Aether II Resources");
     }
