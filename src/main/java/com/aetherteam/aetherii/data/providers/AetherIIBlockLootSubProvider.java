@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.nitrogen.data.providers.NitrogenBlockLootSubProvider;
-import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.item.Item;
 

@@ -23,15 +23,9 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 /**
- * Capability class for handling {@link Player} behavior for the Aether.
- *
- * @see com.aetherteam.aetherii.event.hooks.AttachmentHooks.AetherIIPlayerHooks
- */
-
-/**
  * Capability class for handling portal and teleportation behavior for the Aether.
  *
- * @see PortalTeleportationHooks.PortalTeleportationHooks
+ * @see PortalTeleportationHooks
  */
 public class PortalTeleportationAttachment implements INBTSynchable {
     private boolean canGetPortal = true;

@@ -13,13 +13,13 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(Entity.class)
 public interface EntityAccessor {
     @Accessor("random")
-    RandomSource aether$getRandom();
+    RandomSource aether_ii$getRandom();
 
     @Accessor("portalEntrancePos")
-    BlockPos aether$getPortalEntrancePos();
+    BlockPos aether_ii$getPortalEntrancePos();
 
     @Accessor("portalEntrancePos")
-    void aether$setPortalEntrancePos(BlockPos portalEntrancePos);
+    void aether_ii$setPortalEntrancePos(BlockPos portalEntrancePos);
 
     @Invoker
     Vec3 callGetRelativePortalPosition(Direction.Axis axis, BlockUtil.FoundRectangle portal);
