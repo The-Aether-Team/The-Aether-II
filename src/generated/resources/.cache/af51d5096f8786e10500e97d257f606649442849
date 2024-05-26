@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-25T20:18:17.1097206	Tags for minecraft:item mod id aether_ii
+// 1.20.4	2024-05-26T09:27:57.5661029	Tags for minecraft:item mod id aether_ii
 885969d21619cd3834542e4f4b4894877566a141 data/aether_ii/tags/items/aerclouds.json
 0c52879ea7524c9c5a2025462b6351d7e81bf251 data/aether_ii/tags/items/aether_dirt.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/aether_ii/tags/items/aether_portal_activation_items.json
@@ -27,6 +27,7 @@ a7a38000f936642b7fb1aab74c26dbefd5483490 data/aether_ii/tags/items/skyroot_logs.
 a59a8582f5c13f489240e0403b5366d250d9776a data/forge/tags/items/fence_gates.json
 a59a8582f5c13f489240e0403b5366d250d9776a data/forge/tags/items/fence_gates/wooden.json
 c5ac6795116ea009da3eade76c2d8a9d29e7b636 data/minecraft/tags/items/axes.json
+27063cd86404944dcec9f3d5b3ad5db3e9311936 data/minecraft/tags/items/beacon_payment_items.json
 cbe8875041d0d6c8cb738cf1e27cbc4d074f21b9 data/minecraft/tags/items/hoes.json
 c8faef7fa50c3ca0e6834d010620789165e12351 data/minecraft/tags/items/logs_that_burn.json
 342b2797a54040bb536f3c7915cc43c2bbf73580 data/minecraft/tags/items/pickaxes.json
