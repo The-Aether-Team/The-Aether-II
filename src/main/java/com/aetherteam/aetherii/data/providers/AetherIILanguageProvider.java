@@ -2,8 +2,6 @@ package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.nitrogen.data.providers.NitrogenLanguageProvider;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.level.levelgen.structure.Structure;
 
 public abstract class AetherIILanguageProvider extends NitrogenLanguageProvider {
     public AetherIILanguageProvider(PackOutput output, String id) {
