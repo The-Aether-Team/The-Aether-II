@@ -6,16 +6,16 @@
       "height": {
         "type": "minecraft:uniform",
         "max_inclusive": {
-          "absolute": 160
+          "absolute": 144
         },
         "min_inclusive": {
-          "absolute": 48
+          "absolute": 32
         }
       }
     },
     {
       "type": "minecraft:rarity_filter",
-      "chance": 24
+      "chance": 28
     },
     {
       "type": "minecraft:in_square"
