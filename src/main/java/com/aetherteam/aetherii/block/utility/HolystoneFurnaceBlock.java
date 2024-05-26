@@ -70,7 +70,7 @@ public class HolystoneFurnaceBlock extends AbstractFurnaceBlock {
             double d6 = random.nextDouble() * 6.0 / 16.0;
             double d7 = axis == Direction.Axis.Z ? (double) direction.getStepZ() * d3 : d4;
             level.addParticle(ParticleTypes.SMOKE, d0 + d5, d1 + d6, d2 + d7, 0.0, 0.0, 0.0);
-            level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, d0 + d5, d1 + d6, d2 + d7, 0.0, 0.0, 0.0);
+            level.addParticle(ParticleTypes.FLAME, d0 + d5, d1 + d6, d2 + d7, 0.0, 0.0, 0.0);
         }
     }
 }
