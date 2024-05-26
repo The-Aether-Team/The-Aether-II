@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_planks": {
+    "has_gravitite": {
       "conditions": {
         "items": [
           {
-            "tag": "aether_ii:crafts_skyroot_tools"
+            "tag": "aether_ii:plates/gravitite"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "aether_ii:skyroot_sword"
+        "recipe": "aether_ii:gravitite_shortsword"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_planks"
+      "has_gravitite"
     ]
   ],
   "rewards": {
     "recipes": [
-      "aether_ii:skyroot_sword"
+      "aether_ii:gravitite_shortsword"
     ]
   }
 }

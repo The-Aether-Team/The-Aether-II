@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "aether_ii:item/weapons/arkenium_sword"
+    "layer0": "aether_ii:item/weapons/skyroot_shortsword"
   }
 }

@@ -15,7 +15,7 @@ import java.util.Map;
 public class AetherIIDamageInflictions {
     public static final ResourceKey<Registry<DamageInfliction>> DAMAGE_INFLICTION_REGISTRY_KEY = ResourceKey.createRegistryKey(new ResourceLocation(AetherII.MODID, "damage_infliction"));
 
-    public static final ResourceKey<DamageInfliction> SKYROOT_SWORD = createKey("skyroot_sword");
+    public static final ResourceKey<DamageInfliction> SKYROOT_SHORTSWORD = createKey("skyroot_shortsword");
     public static final ResourceKey<DamageInfliction> SKYROOT_HAMMER = createKey("skyroot_hammer");
     public static final ResourceKey<DamageInfliction> SKYROOT_SPEAR = createKey("skyroot_spear");
 
@@ -24,7 +24,7 @@ public class AetherIIDamageInflictions {
     }
 
     public static void bootstrap(BootstapContext<DamageInfliction> context) {
-        context.register(SKYROOT_SWORD, new DamageInfliction(AetherIIItems.SKYROOT_SWORD.get(), 4.0F, 0, 0));
+        context.register(SKYROOT_SHORTSWORD, new DamageInfliction(AetherIIItems.SKYROOT_SHORTSWORD.get(), 4.0F, 0, 0));
         context.register(SKYROOT_HAMMER, new DamageInfliction(AetherIIItems.SKYROOT_HAMMER.get(), 0, 4.0F, 0));
         context.register(SKYROOT_SPEAR, new DamageInfliction(AetherIIItems.SKYROOT_SPEAR.get(), 0, 0, 4.0F));
     }

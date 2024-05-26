@@ -10,6 +10,7 @@ import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.data.AetherIIData;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageInflictions;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageResistances;
+import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.event.listeners.DamageSystemListener;
 import com.aetherteam.aetherii.event.listeners.PortalTeleportationListener;
@@ -55,6 +56,7 @@ public class AetherII {
                 AetherIICreativeTabs.CREATIVE_MODE_TABS,
                 AetherIIParticleTypes.PARTICLES,
                 AetherIISoundEvents.SOUNDS,
+                AetherIIAttributes.ATTRIBUTES,
                 AetherIIPoi.POI,
                 AetherIIDataAttachments.ATTACHMENTS,
                 AetherIIFeatures.FEATURES,
@@ -86,6 +88,7 @@ public class AetherII {
         PortalTeleportationListener.listen(bus);
         WorldInteractionListener.listen(bus);
 
+        neoBus.addListener(AetherIIAttributes::registerEntityAttributes);
         neoBus.addListener(AetherIIEntityTypes::registerSpawnPlacements);
         neoBus.addListener(AetherIIEntityTypes::registerEntityAttributes);
     }

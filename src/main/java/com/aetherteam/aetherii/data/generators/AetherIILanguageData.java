@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.data.generators;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.providers.AetherIILanguageProvider;
+import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.data.PackOutput;
@@ -102,7 +103,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.SKYROOT_LADDER, "Skyroot Ladder");
 
 
-        this.addItem(AetherIIItems.SKYROOT_SWORD, "Skyroot Sword");
+        this.addItem(AetherIIItems.SKYROOT_SHORTSWORD, "Skyroot Shortsword");
         this.addItem(AetherIIItems.SKYROOT_HAMMER, "Skyroot Hammer");
         this.addItem(AetherIIItems.SKYROOT_SPEAR, "Skyroot Spear");
         this.addItem(AetherIIItems.SKYROOT_PICKAXE, "Skyroot Pickaxe");
@@ -110,7 +111,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.SKYROOT_SHOVEL, "Skyroot Shovel");
         this.addItem(AetherIIItems.SKYROOT_TROWEL, "Skyroot Trowel");
 
-        this.addItem(AetherIIItems.HOLYSTONE_SWORD, "Holystone Sword");
+        this.addItem(AetherIIItems.HOLYSTONE_SHORTSWORD, "Holystone Shortsword");
         this.addItem(AetherIIItems.HOLYSTONE_HAMMER, "Holystone Hammer");
         this.addItem(AetherIIItems.HOLYSTONE_SPEAR, "Holystone Spear");
         this.addItem(AetherIIItems.HOLYSTONE_PICKAXE, "Holystone Pickaxe");
@@ -118,7 +119,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.HOLYSTONE_SHOVEL, "Holystone Shovel");
         this.addItem(AetherIIItems.HOLYSTONE_TROWEL, "Holystone Trowel");
 
-        this.addItem(AetherIIItems.ZANITE_SWORD, "Zanite Sword");
+        this.addItem(AetherIIItems.ZANITE_SHORTSWORD, "Zanite Shortsword");
         this.addItem(AetherIIItems.ZANITE_HAMMER, "Zanite Hammer");
         this.addItem(AetherIIItems.ZANITE_SPEAR, "Zanite Spear");
         this.addItem(AetherIIItems.ZANITE_PICKAXE, "Zanite Pickaxe");
@@ -126,7 +127,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ZANITE_SHOVEL, "Zanite Shovel");
         this.addItem(AetherIIItems.ZANITE_TROWEL, "Zanite Trowel");
 
-        this.addItem(AetherIIItems.ARKENIUM_SWORD, "Arkenium Sword");
+        this.addItem(AetherIIItems.ARKENIUM_SHORTSWORD, "Arkenium Shortsword");
         this.addItem(AetherIIItems.ARKENIUM_HAMMER, "Arkenium Hammer");
         this.addItem(AetherIIItems.ARKENIUM_SPEAR, "Arkenium Spear");
         this.addItem(AetherIIItems.ARKENIUM_PICKAXE, "Arkenium Pickaxe");
@@ -134,7 +135,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ARKENIUM_SHOVEL, "Arkenium Shovel");
         this.addItem(AetherIIItems.ARKENIUM_TROWEL, "Arkenium Trowel");
 
-        this.addItem(AetherIIItems.GRAVITITE_SWORD, "Gravitite Sword");
+        this.addItem(AetherIIItems.GRAVITITE_SHORTSWORD, "Gravitite Shortsword");
         this.addItem(AetherIIItems.GRAVITITE_HAMMER, "Gravitite Hammer");
         this.addItem(AetherIIItems.GRAVITITE_SPEAR, "Gravitite Spear");
         this.addItem(AetherIIItems.GRAVITITE_PICKAXE, "Gravitite Pickaxe");
@@ -159,6 +160,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addDamageTypeTooltip("slash", "Slash Damage");
         this.addDamageTypeTooltip("impact", "Impact Damage");
         this.addDamageTypeTooltip("pierce", "Pierce Damage");
+
+        this.addAttribute(AetherIIAttributes.SLASH_RANGE.get(), "Slash Range");
+        this.addAttribute(AetherIIAttributes.SHOCK_RANGE.get(), "Shock Range");
+        this.addAttribute(AetherIIAttributes.STAB_RADIUS.get(), "Stab Radius");
+        this.addAttribute(AetherIIAttributes.STAB_DISTANCE.get(), "Stab Distance");
 
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_BUILDING_BLOCKS.get(), "Aether II Building Blocks");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_DUNGEON_BLOCKS.get(), "Aether II Dungeon Blocks");

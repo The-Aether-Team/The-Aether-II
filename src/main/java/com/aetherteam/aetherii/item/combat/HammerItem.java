@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.item.combat;
 
+import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.item.AetherIIToolActions;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
@@ -15,7 +16,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.ToolAction;
 
+import java.util.UUID;
+
 public class HammerItem extends TieredItem implements Vanishable {
+    public static final UUID BASE_SHOCK_RANGE_UUID = UUID.fromString("35FB6CDA-25E2-4350-8931-2E35BA352FD8");
+
     private final float attackDamage;
     private final Multimap<Attribute, AttributeModifier> defaultModifiers;
 
@@ -25,6 +30,7 @@ public class HammerItem extends TieredItem implements Vanishable {
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
         builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", this.attackDamage, AttributeModifier.Operation.ADDITION));
         builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", attackSpeedModifier, AttributeModifier.Operation.ADDITION));
+        builder.put(AetherIIAttributes.SHOCK_RANGE.get(), new AttributeModifier(BASE_SHOCK_RANGE_UUID, "Weapon modifier", 2.0, AttributeModifier.Operation.ADDITION));
         this.defaultModifiers = builder.build();
     }
 
