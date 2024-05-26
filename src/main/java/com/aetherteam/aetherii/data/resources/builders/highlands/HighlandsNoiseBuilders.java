@@ -27,7 +27,7 @@ public class HighlandsNoiseBuilders {
                 makeNoiseRouter(densityFunctions, noise), // noiseRouter
                 highlandsSurfaceRules(), // surfaceRule
                 List.of(), // spawnTarget
-                0, // seaLevel
+                -64, // seaLevel
                 false, // disableMobGeneration
                 false, // aquifersEnabled
                 false, // oreVeinsEnabled

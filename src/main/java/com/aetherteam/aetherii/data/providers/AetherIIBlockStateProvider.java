@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.block.construction.AetherFarmBlock;
 import com.aetherteam.aetherii.block.natural.PurpleAercloudBlock;
 import com.aetherteam.nitrogen.data.providers.NitrogenBlockStateProvider;
 import net.minecraft.core.Direction;
@@ -17,6 +18,31 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvider {
     public AetherIIBlockStateProvider(PackOutput output, String id, ExistingFileHelper helper) {
         super(output, id, helper);
+    }
+
+
+    public void farmland(Block block, Block dirtBlock) {
+        ModelFile farmland = this.models().withExistingParent(this.name(block), this.mcLoc("block/template_farmland"))
+                .texture("dirt", this.modLoc("block/natural/" + this.name(dirtBlock)))
+                .texture("top", this.modLoc("block/construction/" + this.name(block)));
+        ModelFile moist = this.models().withExistingParent(this.name(block) + "_moist", mcLoc("block/template_farmland"))
+                .texture("dirt", this.modLoc("block/natural/" + this.name(dirtBlock)))
+                .texture("top", this.modLoc("block/construction/" + this.name(block) + "_moist"));
+        this.getVariantBuilder(block).forAllStatesExcept(state -> {
+            int moisture = state.getValue(AetherFarmBlock.MOISTURE);
+            return ConfiguredModel.builder()
+                    .modelFile(moisture < AetherFarmBlock.MAX_MOISTURE ? farmland : moist)
+                    .build();
+        });
+    }
+
+    public void dirtPath(Block block, Block dirtBlock) {
+        ModelFile path = this.models().withExistingParent(this.name(block), this.mcLoc("block/dirt_path"))
+                .texture("particle", this.modLoc("block/natural/" + this.name(dirtBlock)))
+                .texture("top", this.modLoc("block/construction/" + this.name(block) + "_top"))
+                .texture("side", this.modLoc("block/construction/" + this.name(block) + "_side"))
+                .texture("bottom", this.modLoc("block/natural/" + this.name(dirtBlock)));
+        this.getVariantBuilder(block).forAllStatesExcept(state -> ConfiguredModel.allYRotations(path, 0, false));
     }
 
     public void aercloudAll(Block block, String location) {

@@ -9,6 +9,7 @@ import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.data.AetherIIData;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.event.listeners.DimensionListener;
+import com.aetherteam.aetherii.event.listeners.abilities.ToolAbilityListener;
 import com.aetherteam.aetherii.event.listeners.attachment.AetherIIPlayerListener;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -74,6 +75,7 @@ public class AetherII {
     public static void eventSetup(IEventBus neoBus) {
         IEventBus bus = NeoForge.EVENT_BUS;
 
+        ToolAbilityListener.listen(bus);
         AetherIIPlayerListener.listen(bus);
         DimensionListener.listen(bus);
 

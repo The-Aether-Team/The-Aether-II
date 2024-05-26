@@ -78,6 +78,9 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         //TODO: Simplify with Block Item Model with a blockWithItem Method
         this.itemBlock(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
         this.itemBlock(AetherIIBlocks.AETHER_DIRT.get());
+        this.itemBlock(AetherIIBlocks.AETHER_FARMLAND.get());
+        this.itemBlock(AetherIIBlocks.AETHER_DIRT_PATH.get());
+
         this.itemBlock(AetherIIBlocks.QUICKSOIL.get());
         this.itemBlock(AetherIIBlocks.HOLYSTONE.get());
         this.itemBlock(AetherIIBlocks.MOSSY_HOLYSTONE.get());

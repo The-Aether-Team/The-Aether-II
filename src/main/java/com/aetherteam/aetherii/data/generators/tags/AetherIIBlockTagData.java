@@ -217,6 +217,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
                 AetherIIBlocks.AETHER_DIRT.get(),
+                AetherIIBlocks.AETHER_FARMLAND.get(),
+                AetherIIBlocks.AETHER_DIRT_PATH.get(),
                 AetherIIBlocks.QUICKSOIL.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_HOE).add(

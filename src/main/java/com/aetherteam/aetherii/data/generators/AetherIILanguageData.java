@@ -18,6 +18,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         this.addBlock(AetherIIBlocks.AETHER_GRASS_BLOCK, "Aether Grass Block");
         this.addBlock(AetherIIBlocks.AETHER_DIRT, "Aether Dirt");
+        this.addBlock(AetherIIBlocks.AETHER_FARMLAND, "Aether Farmland");
+        this.addBlock(AetherIIBlocks.AETHER_DIRT_PATH, "Aether Dirt Path");
+
         this.addBlock(AetherIIBlocks.QUICKSOIL, "Quicksoil");
         this.addBlock(AetherIIBlocks.HOLYSTONE, "Holystone");
         this.addBlock(AetherIIBlocks.MOSSY_HOLYSTONE, "Mossy Holystone");
